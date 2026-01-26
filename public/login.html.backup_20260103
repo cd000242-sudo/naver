@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>라이선스 인증</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --gold-primary: #D4AF37;
+      --gold-bright: #FFD700;
+      --gold-light: #F4D03F;
+      --gold-dark: #B8941F;
+      --bg-dark: #0F0F0F;
+      --bg-secondary: #1A1A1A;
+      --bg-card: #1E1E1E;
+      --bg-input: #2A2A2A;
+      --border-gold: rgba(212, 175, 55, 0.5);
+      --text-gold: #FFD700;
+      --text-gold-light: #F4D03F;
+      --text-muted: #C9A961;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #0F0F0F 0%, #1A1A1A 50%, #0F0F0F 100%);
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .login-container {
+      background: linear-gradient(135deg, #1E1E1E 0%, #252525 100%);
+      border: 2px solid var(--border-gold);
+      border-radius: 16px;
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.8),
+        0 0 30px rgba(212, 175, 55, 0.2),
+        inset 0 1px 0 rgba(255, 215, 0, 0.1);
+      padding: 30px 40px;
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .login-container::-webkit-scrollbar-track {
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 4px;
+    }
+
+    .login-container::-webkit-scrollbar-thumb {
+      background: var(--gold-primary);
+      border-radius: 4px;
+    }
+
+    .login-container::-webkit-scrollbar-thumb:hover {
+      background: var(--gold-bright);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .login-header h1 {
+      background: linear-gradient(135deg, #FFD700 0%, #F4D03F 50%, #D4AF37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+      letter-spacing: -0.5px;
+    }
+
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 15px;
+      font-weight: 400;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--text-gold-light);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg-input);
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      border-radius: 10px;
+      font-size: 15px;
+      color: var(--text-gold-light);
+      transition: all 0.3s ease;
+    }
+
+    .form-group input::placeholder {
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--gold-bright);
+      box-shadow:
+        0 0 0 3px rgba(212, 175, 55, 0.2),
+        0 0 15px rgba(255, 215, 0, 0.3);
+      background: #2F2F2F;
+    }
+
+    .remember-checkbox {
+      display: flex;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .remember-checkbox input {
+      width: auto;
+      margin-right: 10px;
+      accent-color: var(--gold-bright);
+      cursor: pointer;
+    }
+
+    .remember-checkbox label {
+      color: var(--text-muted);
+      font-weight: normal;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+      margin: 18px 0;
+      position: relative;
+    }
+
+    .divider::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 1px;
+      background: var(--gold-bright);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .divider-text {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+      margin: 12px 0;
+      font-weight: 500;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #F4D03F 100%);
+      color: #0F0F0F;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow:
+        0 4px 15px rgba(212, 175, 55, 0.4),
+        0 0 20px rgba(255, 215, 0, 0.2);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .login-button:hover::before {
+      left: 100%;
+    }
+
+    .login-button:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 8px 25px rgba(212, 175, 55, 0.5),
+        0 0 30px rgba(255, 215, 0, 0.4);
+      background: linear-gradient(135deg, #F4D03F 0%, #FFD700 50%, #FFED4E 100%);
+    }
+
+    .login-button:active {
+      transform: translateY(0);
+    }
+
+    .login-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      background: linear-gradient(135deg, #B8941F 0%, #D4AF37 50%, #B8941F 100%);
+    }
+
+    .free-use-button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+      color: #0F0F0F;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .free-use-button:hover {
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .free-use-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .price-button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      background: transparent;
+      color: var(--text-gold);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .price-button:hover {
+      background: rgba(212, 175, 55, 0.08);
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .price-section {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(0, 0, 0, 0.7));
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .purchase-modal-backdrop {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.78);
+      z-index: 99999;
+      padding: 22px;
+    }
+
+    /* ✅ 페이월 모달 스타일 추가 */
+    .paywall-modal-backdrop {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 100000;
+      padding: 24px;
+    }
+
+    .paywall-modal {
+      width: min(460px, 95vw);
+      background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+      border-radius: 20px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+      padding: 32px;
+      text-align: center;
+    }
+
+    .paywall-message-box {
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+      line-height: 1.8;
+    }
+
+    .paywall-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .paywall-actions .btn-upgrade {
+      display: block;
+      border-radius: 14px;
+      color: #fff;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(34, 197, 94, 0.4);
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .paywall-actions .btn-upgrade:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(34, 197, 94, 0.5);
+    }
+
+    .purchase-modal {
+      width: min(720px, 95vw);
+      max-height: 90vh;
+      overflow: auto;
+      background: #111;
+      border: 1px solid rgba(212, 175, 55, 0.60);
+      border-radius: 14px;
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.65);
+      padding: 18px;
+    }
+
+    .purchase-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .purchase-modal-title {
+      color: #D4AF37;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: 0.2px;
+    }
+
+    .purchase-modal-close {
+      background: transparent;
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      color: #D4AF37;
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .purchase-modal-image {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: block;
+    }
+
+    .purchase-modal-actions {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .price-section-title {
+      color: var(--text-gold-light);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .price-image {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: block;
+    }
+
+    .open-chat-button {
+      margin-top: 12px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+      color: #0F0F0F;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .open-chat-button:hover {
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .error-message {
+      background: rgba(184, 20, 20, 0.2);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+      color: #FF6B6B;
+      padding: 14px 16px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      display: none;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.1);
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* 성공 모달 스타일 */
+    .success-modal-backdrop {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 100000;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .success-modal {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+      border: 2px solid var(--gold-primary);
+      border-radius: 20px;
+      padding: 40px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow:
+        0 0 50px rgba(212, 175, 55, 0.3),
+        inset 0 0 20px rgba(212, 175, 55, 0.1);
+      transform: scale(0.9);
+      animation: scaleUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .success-icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+    }
+
+    .success-title {
+      font-size: 26px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+    }
+
+    .success-message {
+      color: #E0E0E0;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .license-info-box {
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+
+    .license-period-label {
+      display: block;
+      color: var(--text-gold-light);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .license-period-value {
+      display: block;
+      color: #FFFFFF;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .redirect-notice {
+      color: #888;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes scaleUp {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* 페이월(한도 초과) 모달 스타일 */
+    .paywall-modal-backdrop {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 100000;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .paywall-modal {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+      border: 2px solid var(--gold-primary);
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+      transform: scale(0.9);
+      animation: scaleUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .paywall-message-box {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px 0;
+      color: #FFBABA;
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .paywall-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn-upgrade {
+      background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+      color: #0F0F0F;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+
+    .btn-upgrade:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-later {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-later:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .device-id {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      font-weight: 500;
+    }
+
+    /* 관리자 제어 스타일 */
+    .admin-trigger {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      opacity: 0.1;
+      cursor: pointer;
+      z-index: 1000;
+      transition: opacity 0.3s;
+    }
+
+    .admin-trigger:hover {
+      opacity: 0.5;
+    }
+
+    .admin-modal-backdrop {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(5px);
+      z-index: 110000;
+    }
+
+    .admin-modal {
+      background: #1A1A1A;
+      border: 1px solid var(--gold-primary);
+      border-radius: 12px;
+      padding: 24px;
+      width: 300px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .admin-modal h3 {
+      color: var(--text-gold);
+      margin-bottom: profile-detail-label;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .admin-modal input {
+      width: 100%;
+      padding: 10px;
+      background: #2A2A2A;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 6px;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .admin-modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .admin-modal-actions button {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .admin-btn-confirm {
+      background: var(--gold-primary);
+      color: black;
+      border: none;
+    }
+
+    .admin-btn-cancel {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .admin-control-panel {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <h1>🔐 라이선스 인증</h1>
+      <p>앱을 사용하려면 인증이 필요합니다</p>
+    </div>
+
+    <!-- 성공 모달 구성 -->
+    <div id="success-modal-backdrop" class="success-modal-backdrop">
+      <div class="success-modal">
+        <span class="success-icon">✨</span>
+        <h2 class="success-title">축하합니다 !!</h2>
+        <p class="success-message">라이선스 인증이 완료되었습니다. 🎉</p>
+
+        <div class="license-info-box">
+          <span class="license-period-label">라이선스 기간</span>
+          <span id="license-period-display" class="license-period-value">확인 중...</span>
+        </div>
+
+        <p class="redirect-notice">잠시 후 메인 화면으로 이동합니다...</p>
+      </div>
+    </div>
+
+    <div id="error-message" class="error-message"></div>
+
+    <form id="login-form">
+      <!-- 초기 인증: 라이선스 코드 + 아이디/비밀번호 + 이메일 -->
+      <div id="initial-auth-section">
+        <div class="form-group">
+          <label for="license-code-init">라이선스 코드 <span style="color: #ff6b6b;">*</span></label>
+          <input type="text" id="license-code-init" placeholder="XXXX-XXXX-XXXX-XXXX (하이픈 없어도 됩니다)">
+        </div>
+
+        <div class="form-group">
+          <label for="user-id-init">아이디 (원하는 아이디) <span style="color: #ff6b6b;">*</span></label>
+          <input type="text" id="user-id-init" placeholder="사용할 아이디를 입력하세요">
+        </div>
+
+        <div class="form-group">
+          <label for="password-init">비밀번호 (원하는 비밀번호) <span style="color: #ff6b6b;">*</span></label>
+          <input type="password" id="password-init" placeholder="사용할 비밀번호를 입력하세요">
+        </div>
+
+        <div class="form-group">
+          <label for="email-init">이메일 <span style="color: #ff6b6b;">*</span></label>
+          <input type="email" id="email-init" placeholder="이메일을 입력하세요">
+        </div>
+      </div>
+
+      <!-- 재인증: 아이디/비밀번호만 -->
+      <div id="reauth-section" style="display: none;">
+        <div class="form-group">
+          <label for="user-id">아이디 <span style="color: #ff6b6b;">*</span></label>
+          <input type="text" id="user-id" placeholder="등록한 아이디를 입력하세요">
+        </div>
+
+        <div class="form-group">
+          <label for="password">비밀번호 <span style="color: #ff6b6b;">*</span></label>
+          <input type="password" id="password" placeholder="등록한 비밀번호를 입력하세요">
+        </div>
+
+        <div class="remember-checkbox">
+          <input type="checkbox" id="remember-credentials">
+          <label for="remember-credentials" style="margin: 0; font-weight: normal;">아이디/비밀번호 기억하기</label>
+        </div>
+      </div>
+
+      <button type="submit" id="login-button" class="login-button">인증하기</button>
+    </form>
+
+    <!-- 페이월 모달 - 삭감 문구 적용 -->
+    <div id="paywall-modal-backdrop" class="paywall-modal-backdrop">
+      <div class="paywall-modal"
+        style="border: 2px solid rgba(239, 68, 68, 0.5); box-shadow: 0 0 50px rgba(239, 68, 68, 0.2);">
+        <div style="font-size: 32px; margin-bottom: 12px;">⚠️</div>
+        <h2
+          style="color: #fbbf24; font-size: 20px; font-weight: 900; margin-bottom: 16px; text-shadow: 0 0 15px rgba(251, 191, 36, 0.3);">
+          작업이 일시 중단되었습니다!</h2>
+        <div class="paywall-message-box"
+          style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.2); color: rgba(255,255,255,0.95);">
+          <div style="font-size: 16px; margin-bottom: 14px;">오늘 무료 사용량을 모두 쓰셨습니다.</div>
+          <div style="color: #ef4444; font-weight: 700;">지금 멈추면 블로그 지수 상승도 멈춥니다.</div>
+          <div
+            style="margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.1); color: #22c55e; font-weight: 700;">
+            흐름 끊기지 않고 계속 수익을 내시겠습니까?
+          </div>
+        </div>
+
+        <div class="paywall-actions">
+          <button id="paywall-upgrade-btn" class="btn-upgrade"
+            style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); padding: 18px; font-size: 17px;">🚀
+            무제한으로 봉인 해제하기</button>
+          <button id="paywall-later-btn"
+            style="background: transparent; border: none; color: rgba(255,255,255,0.35); font-size: 13px; padding: 12px; cursor: pointer;">네,
+            성장을 멈출게요</button>
+        </div>
+      </div>
+    </div>
+    <button type="button" id="free-use-button" class="free-use-button">👑 무료로 체험해보기</button>
+
+    <button type="button" id="price-button" class="price-button">💬 구매 문의하기</button>
+
+
+    <div class="divider-text" style="margin-top: 15px;">
+      <a href="#" id="toggle-auth-mode" style="color: var(--text-gold); text-decoration: none; font-size: 13px;">이미
+        등록했나요? 로그인하기</a>
+    </div>
+    </form>
+
+    <div class="device-id" id="device-id"></div>
+  </div>
+
+  <div id="purchase-modal-backdrop" class="purchase-modal-backdrop">
+    <div id="purchase-modal" class="purchase-modal">
+      <div class="purchase-modal-header">
+        <div class="purchase-modal-title">구매 문의하기</div>
+        <button id="purchase-modal-close" type="button" class="purchase-modal-close">닫기</button>
+      </div>
+      <img src="가격표.jpg" alt="가격표" class="purchase-modal-image">
+      <div class="purchase-modal-actions">
+        <button type="button" id="purchase-open-chat-button" class="open-chat-button">💬 오픈채팅으로 문의하기</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="info-modal-backdrop"
+    style="position:fixed;left:0;top:0;right:0;bottom:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.72);z-index:99999;padding:24px;">
+    <div id="info-modal"
+      style="width:min(520px,95vw);background:#111;border:1px solid rgba(212,175,55,0.60);border-radius:14px;box-shadow:0 20px 70px rgba(0,0,0,0.65);padding:18px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+        <div id="info-modal-title" style="color:#D4AF37;font-weight:900;font-size:16px;letter-spacing:0.2px;"></div>
+        <button id="info-modal-close" type="button"
+          style="background:transparent;border:1px solid rgba(212,175,55,0.55);color:#D4AF37;border-radius:10px;padding:8px 12px;cursor:pointer;">닫기</button>
+      </div>
+      <div id="info-modal-body"
+        style="margin-top:12px;color:rgba(212,175,55,0.95);font-size:14px;font-weight:800;line-height:1.45;white-space:pre-line;">
+      </div>
+      <div style="margin-top:14px;display:flex;justify-content:center;">
+        <button id="info-modal-ok" type="button"
+          style="min-width:160px;padding:12px 16px;border-radius:12px;border:1px solid rgba(16,185,129,0.55);background:linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);color:#fff;font-weight:900;cursor:pointer;">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시나리오 3: ACCESS DENIED (라이선스 만료 시 표시) -->
+  <div id="access-denied-modal-backdrop"
+    style="position:fixed;left:0;top:0;right:0;bottom:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.92);z-index:100000;padding:24px;">
+    <div
+      style="width:min(480px,95vw);background:linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);border:2px solid rgba(239,68,68,0.6);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,0.8), 0 0 60px rgba(239,68,68,0.15);padding:32px;text-align:center;">
+      <div style="font-size:40px;margin-bottom:16px;">⛔</div>
+      <h2
+        style="color:#ef4444;font-size:22px;font-weight:900;margin-bottom:8px;text-shadow:0 0 20px rgba(239,68,68,0.3);">
+        ACCESS DENIED</h2>
+      <div style="color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:24px;">(라이선스 만료)</div>
+
+      <div
+        style="padding:20px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:14px;margin-bottom:24px;color:rgba(255,255,255,0.92);font-size:15px;line-height:1.8;">
+        <div style="margin-bottom:12px;font-weight:600;">로그인에 실패했습니다. 이용 기간이 종료되었습니다.</div>
+        <div style="color:rgba(255,255,255,0.7);">
+          지금 돌아가시면 다시 키워드 찾느라 1시간,<br>
+          글 쓰느라 2시간 쓰던 <span style="color:#fbbf24;font-weight:700;">'노동의 시간'</span>으로 복귀하게 됩니다.
+        </div>
+        <div
+          style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);">
+          진짜... 다시 손으로 글 쓰실 건가요?<br>
+          <span style="color:#22c55e;font-weight:600;">커피 2잔 값으로 한 달의 자유를 다시 사세요.</span>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <a id="access-denied-upgrade-btn" href="https://open.kakao.com/o/sPcaslwh" target="_blank"
+          style="display:block;padding:18px;text-align:center;border-radius:14px;background:linear-gradient(135deg, #22c55e 0%, #16a34a 100%);color:#fff;font-weight:900;font-size:17px;text-decoration:none;box-shadow:0 8px 30px rgba(34,197,94,0.4);transition:all 0.2s;">💎
+          라이선스 갱신하고 바로 로그인</a>
+        <button id="access-denied-close-btn"
+          style="padding:12px;background:transparent;border:none;color:rgba(255,255,255,0.3);font-size:13px;cursor:pointer;">네,
+          그냥 손으로 쓸게요</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+    const KAKAO_OPEN_CHAT_URL = 'https://open.kakao.com/o/sPcaslwh';
+
+    let deviceId = '';
+
+    // 기기 ID 가져오기
+    async function loadDeviceId() {
+      try {
+        deviceId = await ipcRenderer.invoke('license:getDeviceId');
+        const deviceIdElement = document.getElementById('device-id');
+        if (deviceIdElement) {
+          deviceIdElement.textContent = `기기 ID: ${deviceId.substring(0, 8)}...`;
+        }
+      } catch (error) {
+        console.error('기기 ID 로드 실패:', error);
+      }
+    }
+
+    // 저장된 자격증명 로드 (자동 로그인은 하지 않음, 초기 인증창만 표시)
+    async function loadSavedCredentials() {
+      try {
+        const config = await ipcRenderer.invoke('config:get');
+
+        // 저장된 자격증명이 있는지 확인 (자동 로그인은 하지 않고, 재인증 모드로 전환할 때만 사용)
+        const hasCredentials = config &&
+          config.rememberLicenseCredentials === true &&
+          config.savedLicenseUserId &&
+          config.savedLicensePassword &&
+          config.savedLicenseUserId.trim() !== '' &&
+          config.savedLicensePassword.trim() !== '';
+
+        if (hasCredentials) {
+          console.log('저장된 자격증명이 있습니다. 재인증 모드로 전환 시 사용 가능합니다.');
+        } else {
+          console.log('저장된 자격증명이 없습니다. 초기 인증창을 표시합니다.');
+        }
+
+        // 초기 인증창을 기본으로 표시 (자동 로그인 하지 않음)
+        // 사용자가 "이미 등록했나요?"를 클릭하면 재인증 모드로 전환
+      } catch (error) {
+        console.error('저장된 자격증명 로드 실패:', error);
+      }
+    }
+
+    // 재인증 모드로 전환 및 자동 로그인 시도 (사용자가 "이미 등록했나요?" 클릭 시)
+    async function switchToReauthModeAndAutoLogin() {
+      try {
+        const config = await ipcRenderer.invoke('config:get');
+
+        // 저장된 자격증명이 있는지 확인
+        const hasCredentials = config &&
+          config.rememberLicenseCredentials === true &&
+          config.savedLicenseUserId &&
+          config.savedLicensePassword &&
+          config.savedLicenseUserId.trim() !== '' &&
+          config.savedLicensePassword.trim() !== '';
+
+        if (!hasCredentials) {
+          console.log('저장된 자격증명이 없습니다. 수동 로그인만 가능합니다.');
+          // 재인증 모드로 전환하되 자동 로그인은 하지 않음
+          isReauthMode = true;
+          const initialSection = document.getElementById('initial-auth-section');
+          const reauthSection = document.getElementById('reauth-section');
+          const toggleLink = document.getElementById('toggle-auth-mode');
+
+          initialSection.style.display = 'none';
+          reauthSection.style.display = 'block';
+          toggleLink.textContent = '처음 사용하시나요? 등록하기';
+          return;
+        }
+
+        // 재인증 모드로 전환
+        isReauthMode = true;
+        const initialSection = document.getElementById('initial-auth-section');
+        const reauthSection = document.getElementById('reauth-section');
+        const toggleLink = document.getElementById('toggle-auth-mode');
+
+        initialSection.style.display = 'none';
+        reauthSection.style.display = 'block';
+        toggleLink.textContent = '처음 사용하시나요? 등록하기';
+
+        const rememberCheckbox = document.getElementById('remember-credentials');
+        const userIdInput = document.getElementById('user-id');
+        const passwordInput = document.getElementById('password');
+        const loginButton = document.getElementById('login-button');
+
+        // 저장된 자격증명으로 필드 채우기
+        if (userIdInput) {
+          userIdInput.value = config.savedLicenseUserId;
+        }
+        if (passwordInput) {
+          passwordInput.value = config.savedLicensePassword;
+        }
+
+        // 사용자가 이전에 체크박스를 체크했다면 자동으로 체크하고 자동 로그인 시도
+        if (rememberCheckbox && config.rememberLicenseCredentials === true) {
+          rememberCheckbox.checked = true;
+          console.log('저장된 자격증명이 있고 자동 로그인이 활성화되어 있습니다. 자동 로그인을 시도합니다...');
+
+          // 자동 로그인 시도 (15초 타임아웃)
+          if (loginButton) {
+            loginButton.disabled = true;
+            loginButton.textContent = '자동 로그인 중...';
+          }
+
+          try {
+            // 15초 타임아웃 설정
+            const timeoutPromise = new Promise((_, reject) => {
+              setTimeout(() => reject(new Error('자동 로그인 타임아웃 (15초)')), 15000);
+            });
+
+            const verifyPromise = ipcRenderer.invoke('license:verifyWithCredentials', config.savedLicenseUserId, config.savedLicensePassword, deviceId);
+
+            const result = await Promise.race([verifyPromise, timeoutPromise]);
+
+            console.log('[Login] 자동 로그인 응답:', result);
+            console.log('[Login] 자동 로그인 응답 전체 (JSON):', JSON.stringify(result, null, 2));
+
+            // 디버그 정보 출력
+            if (result && result.debugInfo) {
+              console.log('🔍 [Login] 자동 로그인 디버그 정보:');
+              if (result.debugInfo.verify) {
+                console.log('🔍 [Login] - action:', result.debugInfo.verify.action);
+                console.log('🔍 [Login] - userId:', result.debugInfo.verify.userId);
+                console.log('🔍 [Login] - fullResponse:', JSON.stringify(result.debugInfo.verify.fullResponse, null, 2));
+                console.log('🔍 [Login] - ok:', result.debugInfo.verify.ok);
+                console.log('🔍 [Login] - valid:', result.debugInfo.verify.valid);
+              }
+            }
+
+            // ✅ 실제 서버 응답 확인: debugInfo.verify.fullResponse에서 체크
+            const verifyResponse = result?.debugInfo?.verify?.fullResponse;
+
+            // 서버 응답의 ok와 valid를 반드시 확인
+            if (verifyResponse && verifyResponse.ok !== false && verifyResponse.valid !== false) {
+              // 자동 로그인 성공
+              console.log('[Login] ✅ 자동 로그인 성공 - verifyResponse.ok:', verifyResponse.ok, 'verifyResponse.valid:', verifyResponse.valid);
+              await ipcRenderer.invoke('login:success');
+              window.close();
+            } else {
+              // 자동 로그인 실패
+              let errorMessage = '자동 로그인에 실패했습니다. 다시 로그인해주세요.';
+
+              if (verifyResponse) {
+                if (verifyResponse.ok === false) {
+                  errorMessage = verifyResponse.error || verifyResponse.message || '서버에서 인증을 거부했습니다.';
+                  console.error('[Login] ❌ 자동 로그인 서버 거부:', errorMessage);
+                } else if (verifyResponse.valid === false) {
+                  errorMessage = verifyResponse.message || verifyResponse.error || '인증에 실패했습니다.';
+                  console.error('[Login] ❌ 자동 로그인 인증 실패:', errorMessage);
+                }
+              } else if (!result.valid) {
+                errorMessage = result.message || '자동 로그인에 실패했습니다. 다시 로그인해주세요.';
+                console.error('[Login] ❌ 자동 로그인 실패 - result.valid:', result.valid, 'result.message:', result.message);
+              }
+
+              console.log('[Login] ❌ 자동 로그인 실패:', errorMessage);
+              showError(errorMessage);
+              if (loginButton) {
+                loginButton.disabled = false;
+                loginButton.textContent = '인증하기';
+              }
+            }
+          } catch (error) {
+            console.error('[Login] 자동 로그인 오류:', error);
+            console.error('[Login] 자동 로그인 오류 상세:', {
+              message: error.message,
+              stack: error.stack,
+              name: error.name
+            });
+            showError(`자동 로그인 중 오류가 발생했습니다: ${error.message}`);
+            if (loginButton) {
+              loginButton.disabled = false;
+              loginButton.textContent = '인증하기';
+            }
+          }
+        } else {
+          // 자동 로그인이 활성화되지 않았거나 저장된 자격증명이 없음
+          console.log('저장된 자격증명으로 필드를 채웠습니다. 사용자가 직접 "인증하기" 버튼을 눌러야 합니다.');
+        }
+      } catch (error) {
+        console.error('재인증 모드 전환 실패:', error);
+      }
+    }
+
+    // 에러 메시지 표시 (+ 라이선스 만료 시 ACCESS DENIED 모달 표시)
+    function showError(message) {
+      // 먼저 ACCESS DENIED 모달 표시 여부 확인
+      const expiredKeywords = ['만료', '종료', 'expired', 'invalid', '유효하지', '라이선스가 없', '접근 거부', '기간', 'denied'];
+      const isExpired = expiredKeywords.some(kw => String(message).toLowerCase().includes(kw.toLowerCase()));
+      if (isExpired) {
+        showAccessDeniedModal();
+        return; // ACCESS DENIED 모달만 표시하고 기본 오류 메시지는 숨김
+      }
+
+      const errorElement = document.getElementById('error-message');
+      if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.classList.add('show');
+      }
+    }
+
+    // 에러 메시지 숨기기
+    function hideError() {
+      const errorElement = document.getElementById('error-message');
+      if (errorElement) {
+        errorElement.classList.remove('show');
+      }
+    }
+
+    function showInfoModal(title, message) {
+      try {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      } catch (e) {
+        window.scrollTo(0, 0);
+      }
+      const backdrop = document.getElementById('info-modal-backdrop');
+      const titleEl = document.getElementById('info-modal-title');
+      const bodyEl = document.getElementById('info-modal-body');
+      if (titleEl) titleEl.textContent = String(title || '').trim();
+      if (bodyEl) bodyEl.textContent = String(message || '').trim();
+      if (backdrop) backdrop.style.display = 'flex';
+    }
+
+    function hideInfoModal() {
+      const backdrop = document.getElementById('info-modal-backdrop');
+      if (backdrop) backdrop.style.display = 'none';
+    }
+
+    document.getElementById('info-modal-close')?.addEventListener('click', hideInfoModal);
+    document.getElementById('info-modal-ok')?.addEventListener('click', hideInfoModal);
+    document.getElementById('info-modal-backdrop')?.addEventListener('click', (e) => {
+      if (e && e.target && e.target.id === 'info-modal-backdrop') {
+        hideInfoModal();
+      }
+    });
+
+    // ACCESS DENIED 모달 (라이선스 만료 시)
+    function showAccessDeniedModal() {
+      const backdrop = document.getElementById('access-denied-modal-backdrop');
+      if (backdrop) backdrop.style.display = 'flex';
+    }
+
+    function hideAccessDeniedModal() {
+      const backdrop = document.getElementById('access-denied-modal-backdrop');
+      if (backdrop) backdrop.style.display = 'none';
+    }
+
+    document.getElementById('access-denied-close-btn')?.addEventListener('click', hideAccessDeniedModal);
+    document.getElementById('access-denied-modal-backdrop')?.addEventListener('click', (e) => {
+      if (e && e.target && e.target.id === 'access-denied-modal-backdrop') {
+        hideAccessDeniedModal();
+      }
+    });
+
+    // 라이선스 만료 감지 시 ACCESS DENIED 모달 표시
+    function checkAndShowAccessDenied(errorMessage) {
+      const expiredKeywords = ['만료', '종료', 'expired', 'invalid', '유효하지', '라이선스가 없', '접근 거부'];
+      const isExpired = expiredKeywords.some(kw => String(errorMessage).toLowerCase().includes(kw.toLowerCase()));
+      if (isExpired) {
+        showAccessDeniedModal();
+        return true;
+      }
+      return false;
+    }
+
+    // 인증 모드 토글
+    let isReauthMode = false;
+
+    document.getElementById('toggle-auth-mode')?.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      if (!isReauthMode) {
+        // 초기 인증 모드 → 재인증 모드로 전환 (자동 로그인 시도)
+        await switchToReauthModeAndAutoLogin();
+      } else {
+        // 재인증 모드 → 초기 인증 모드로 전환
+        isReauthMode = false;
+        const initialSection = document.getElementById('initial-auth-section');
+        const reauthSection = document.getElementById('reauth-section');
+        const toggleLink = document.getElementById('toggle-auth-mode');
+
+        initialSection.style.display = 'block';
+        reauthSection.style.display = 'none';
+        toggleLink.textContent = '이미 등록했나요? 로그인하기';
+      }
+
+      hideError();
+    });
+
+    // 페이월 모달 이벤트 리스너
+    document.getElementById('paywall-later-btn')?.addEventListener('click', () => {
+      const modal = document.getElementById('paywall-modal-backdrop');
+      if (modal) modal.style.display = 'none';
+    });
+
+    document.getElementById('paywall-upgrade-btn')?.addEventListener('click', () => {
+      const url = 'https://open.kakao.com/o/sPcaslwh';
+      try {
+        if (window.api?.openExternalUrl) {
+          window.api.openExternalUrl(url);
+        } else {
+          window.open(url, '_blank');
+        }
+      } catch (e) {
+        window.open(url, '_blank');
+      }
+    });
+
+    document.getElementById('free-use-button')?.addEventListener('click', async () => {
+      hideError();
+      const btn = document.getElementById('free-use-button');
+      const loginButton = document.getElementById('login-button');
+      try {
+        try {
+          const status = await ipcRenderer.invoke('quota:getStatus');
+          const used = Number(status?.quota?.usage?.publish) || 0;
+          const limit = 2;
+          if (status?.success && status?.isFree && (status?.quota?.isPaywalled || used >= limit)) {
+            // ✅ 새로운 페이월 모달 표시
+            const paywallModal = document.getElementById('paywall-modal-backdrop');
+            if (paywallModal) {
+              paywallModal.style.display = 'flex';
+            }
+            return;
+          }
+        } catch (e) {
+        }
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = '무료 체험 설정 중...';
+        }
+        if (loginButton) {
+          loginButton.disabled = true;
+        }
+        const result = await ipcRenderer.invoke('free:activate');
+        if (!result || result.success !== true) {
+          const msg = (result && result.message) ? String(result.message) : '무료 사용자 설정에 실패했습니다.';
+          const isQuota = /할당량|quota|PAYWALL|소진/i.test(msg);
+          if (isQuota) {
+            // [개선] 고급스러운 페이월 모달 표시
+            const paywallModal = document.getElementById('paywall-modal-backdrop');
+            if (paywallModal) {
+              paywallModal.style.display = 'flex';
+            }
+          } else {
+            showError(msg);
+          }
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = '👑 무료로 체험해보기';
+          }
+          if (loginButton) {
+            loginButton.disabled = false;
+          }
+          return;
+        }
+        showInfoModal(
+          '✅ 환영합니다!',
+          '무료 2회 발행 가능합니다.\nPro 버전은 오픈채팅으로 문의해주세요.'
+        );
+        window.setTimeout(async () => {
+          try {
+            await ipcRenderer.invoke('login:success');
+          } catch (e) {
+          }
+          window.close();
+        }, 1100);
+      } catch (error) {
+        showError(`무료 사용자 설정 중 오류가 발생했습니다: ${error.message}`);
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = '👑 무료로 체험해보기';
+        }
+        if (loginButton) {
+          loginButton.disabled = false;
+        }
+      }
+    });
+
+    // 구매 문의하기 모달
+    const purchaseBackdrop = document.getElementById('purchase-modal-backdrop');
+    const purchaseClose = document.getElementById('purchase-modal-close');
+
+    const openPurchaseModal = () => {
+      hideError();
+      if (purchaseBackdrop) {
+        purchaseBackdrop.style.display = 'flex';
+      }
+    };
+
+    const closePurchaseModal = () => {
+      if (purchaseBackdrop) {
+        purchaseBackdrop.style.display = 'none';
+      }
+    };
+
+    document.getElementById('price-button')?.addEventListener('click', openPurchaseModal);
+    purchaseClose?.addEventListener('click', closePurchaseModal);
+    purchaseBackdrop?.addEventListener('click', (e) => {
+      if (e.target === purchaseBackdrop) closePurchaseModal();
+    });
+
+    document.getElementById('purchase-open-chat-button')?.addEventListener('click', async () => {
+      try {
+        await ipcRenderer.invoke('openExternalUrl', KAKAO_OPEN_CHAT_URL);
+      } catch (error) {
+        console.error('오픈채팅 열기 실패:', error);
+      }
+    });
+
+    // 폼 제출
+    document.getElementById('login-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError();
+
+      const loginButton = document.getElementById('login-button');
+      const rememberCheckbox = document.getElementById('remember-credentials');
+
+      if (loginButton) {
+        loginButton.disabled = true;
+        loginButton.textContent = '인증 중...';
+      }
+
+      try {
+        let result = null;
+
+        if (isReauthMode) {
+          // 재인증 모드: 등록된 아이디/비밀번호로 로그인
+          const userIdInput = document.getElementById('user-id');
+          const passwordInput = document.getElementById('password');
+
+          const userId = userIdInput?.value.trim() || '';
+          const password = passwordInput?.value.trim() || '';
+
+          if (!userId || !password) {
+            showError('아이디와 비밀번호를 모두 입력해주세요.');
+            if (loginButton) {
+              loginButton.disabled = false;
+              loginButton.textContent = '인증하기';
+            }
+            return;
+          }
+
+          console.log('[Login] 재인증 요청 시작:', { userId, deviceId: deviceId.substring(0, 8) + '...' });
+          result = await ipcRenderer.invoke('license:verifyWithCredentials', userId, password, deviceId);
+          console.log('[Login] 재인증 응답:', result);
+          console.log('[Login] 재인증 응답 전체 (JSON):', JSON.stringify(result, null, 2));
+
+          // 디버그 정보 출력
+          if (result && result.debugInfo) {
+            console.log('🔍 [Login] 재인증 디버그 정보:');
+            if (result.debugInfo.verify) {
+              console.log('🔍 [Login] - action:', result.debugInfo.verify.action);
+              console.log('🔍 [Login] - userId:', result.debugInfo.verify.userId);
+              console.log('🔍 [Login] - fullResponse:', JSON.stringify(result.debugInfo.verify.fullResponse, null, 2));
+              console.log('🔍 [Login] - ok:', result.debugInfo.verify.ok);
+              console.log('🔍 [Login] - valid:', result.debugInfo.verify.valid);
+            }
+          }
+
+          // ✅ 실제 서버 응답 확인: debugInfo.verify.fullResponse에서 체크
+          const verifyResponse = result?.debugInfo?.verify?.fullResponse;
+
+          // 재인증 모드에서는 verifyResponse의 ok와 valid를 확인
+          if (verifyResponse && verifyResponse.ok !== false && verifyResponse.valid !== false) {
+            // 재인증 성공
+            console.log('[Login] ✅ 재인증 성공 - verifyResponse.ok:', verifyResponse.ok, 'verifyResponse.valid:', verifyResponse.valid);
+
+            // 기억하기 체크박스가 체크되어 있으면 저장
+            if (rememberCheckbox?.checked) {
+              try {
+                const config = await ipcRenderer.invoke('config:get');
+                const updatedConfig = {
+                  ...config,
+                  rememberLicenseCredentials: true,
+                  savedLicenseUserId: userId,
+                  savedLicensePassword: password,
+                };
+                await ipcRenderer.invoke('config:save', updatedConfig);
+              } catch (error) {
+                console.error('자격증명 저장 실패:', error);
+              }
+            }
+
+            // 성공 메시지 표시 및 창 닫기 (재인증 모드에서도 동일하게 처리)
+            const successMessage = document.createElement('div');
+            successMessage.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #4CAF50; color: white; padding: 30px 50px; border-radius: 10px; font-size: 18px; font-weight: bold; z-index: 10000; box-shadow: 0 4px 20px rgba(0,0,0,0.3); text-align: center;';
+            successMessage.textContent = '축하합니다 인증되셨습니다!^^\n(10초 후 창이 닫힙니다)';
+            document.body.appendChild(successMessage);
+
+            console.log('✅ 재인증 성공! 10초 후 창이 닫힙니다.');
+            setTimeout(async () => {
+              await ipcRenderer.invoke('login:success');
+              window.close();
+            }, 10000);
+
+            // 재인증 모드에서는 여기서 종료 (초기 인증 모드의 로직과 분리)
+            return;
+          } else {
+            // ❌ 재인증 실패
+            let errorMessage = '아이디 또는 비밀번호가 올바르지 않습니다.';
+
+            if (verifyResponse) {
+              if (verifyResponse.ok === false) {
+                errorMessage = verifyResponse.error || verifyResponse.message || '서버에서 인증을 거부했습니다.';
+                console.error('[Login] ❌ 서버 거부:', errorMessage);
+              } else if (verifyResponse.valid === false) {
+                errorMessage = verifyResponse.message || verifyResponse.error || '인증에 실패했습니다.';
+                console.error('[Login] ❌ 인증 실패:', errorMessage);
+              }
+            } else if (!result.valid) {
+              errorMessage = result.message || '아이디 또는 비밀번호가 올바르지 않습니다.';
+              console.error('[Login] ❌ 재인증 실패 - result.valid:', result.valid, 'result.message:', result.message);
+            }
+
+            showError(errorMessage);
+            if (loginButton) {
+              loginButton.disabled = false;
+              loginButton.textContent = '인증하기';
+            }
+
+            // 재인증 실패 시 처리 중단
+            return;
+          }
+        } else {
+          // 초기 인증 모드: 라이선스 코드 + 아이디/비밀번호 + 이메일
+          const codeInput = document.getElementById('license-code-init');
+          const userIdInput = document.getElementById('user-id-init');
+          const passwordInput = document.getElementById('password-init');
+          const emailInput = document.getElementById('email-init');
+
+          const code = codeInput?.value.trim() || '';
+          const userId = userIdInput?.value.trim() || '';
+          const password = passwordInput?.value.trim() || '';
+          const email = emailInput?.value.trim() || '';
+
+          if (!code || !userId || !password || !email) {
+            showError('모든 필드를 입력해주세요.');
+            if (loginButton) {
+              loginButton.disabled = false;
+              loginButton.textContent = '인증하기';
+            }
+            return;
+          }
+
+          // 라이선스 코드로 등록 (아이디/비밀번호 포함)
+          console.log('[Login] 등록 요청 시작:', { code: code.substring(0, 4) + '***', userId, email, deviceId: deviceId.substring(0, 8) + '...' });
+          result = await ipcRenderer.invoke('license:register', code, userId, password, email, deviceId);
+          console.log('[Login] 등록 응답:', result);
+          console.log('[Login] 등록 응답 전체 (JSON):', JSON.stringify(result, null, 2));
+          console.log('[Login] debugInfo 존재 여부:', result && result.debugInfo ? '있음' : '없음');
+
+          // 디버그 정보 출력 (브라우저 콘솔에서 확인 가능)
+          console.log('🔍 [licenseManager] ========================================');
+          console.log('🔍 [licenseManager] 디버그 정보 출력 시작');
+
+          if (result && result.debugInfo) {
+            console.log('🔍 [licenseManager] 서버 디버그 정보 (register):');
+            if (result.debugInfo.register) {
+              console.log('🔍 [licenseManager] - usedValue:', result.debugInfo.register.usedValue);
+              console.log('🔍 [licenseManager] - usedCheck:', result.debugInfo.register.usedCheck);
+              console.log('🔍 [licenseManager] - used:', result.debugInfo.register.used);
+              console.log('🔍 [licenseManager] - isUsed:', result.debugInfo.register.isUsed);
+              console.log('🔍 [licenseManager] - action:', result.debugInfo.register.action);
+              console.log('🔍 [licenseManager] - licenseCode:', result.debugInfo.register.licenseCode);
+              console.log('🔍 [licenseManager] - 전체 응답:', JSON.stringify(result.debugInfo.register.fullResponse, null, 2));
+            } else {
+              console.warn('🔍 [licenseManager] - register 디버그 정보가 없습니다');
+            }
+
+            if (result.debugInfo.verify) {
+              console.log('🔍 [licenseManager] ========================================');
+              console.log('🔍 [licenseManager] verify 액션 응답 디버그 정보:');
+              console.log('🔍 [licenseManager] - usedValue:', result.debugInfo.verify.usedValue);
+              console.log('🔍 [licenseManager] - usedCheck:', result.debugInfo.verify.usedCheck);
+              console.log('🔍 [licenseManager] - used:', result.debugInfo.verify.used);
+              console.log('🔍 [licenseManager] - isUsed:', result.debugInfo.verify.isUsed);
+              console.log('🔍 [licenseManager] - action:', result.debugInfo.verify.action);
+              console.log('🔍 [licenseManager] - code:', result.debugInfo.verify.code);
+              if (result.debugInfo.verify.fullResponse) {
+                console.log('🔍 [licenseManager] - 전체 응답:', JSON.stringify(result.debugInfo.verify.fullResponse, null, 2));
+              }
+              if (result.debugInfo.verify.error) {
+                console.warn('🔍 [licenseManager] - verify 오류:', result.debugInfo.verify.error);
+              }
+            } else {
+              console.warn('🔍 [licenseManager] - verify 디버그 정보가 없습니다');
+            }
+          } else {
+            console.warn('🔍 [licenseManager] - debugInfo가 응답에 없습니다. result:', result);
+            console.warn('🔍 [licenseManager] - result 타입:', typeof result);
+            console.warn('🔍 [licenseManager] - result 키:', result ? Object.keys(result) : 'null');
+          }
+          console.log('🔍 [licenseManager] ========================================');
+        }
+
+        // ✅ 초기 인증 모드: 실제 서버 응답 확인
+        // [수정] 지나치게 엄격한 체크(registerResponse.ok === true) 대신 
+        // 메인 프로세스에서 최종 판정한 result.valid 또는 
+        // 서버의 명시적 거부(ok === false)가 아닌 경우를 성공으로 간주
+        const registerResponse = result?.debugInfo?.register?.fullResponse;
+        const isActuallyValid = result?.valid === true || (registerResponse && registerResponse.ok !== false && registerResponse.valid !== false);
+
+        if (isActuallyValid) {
+          // 인증 성공 - 축하 메시지 표시
+          console.log('[Login] ✅ 등록 성공 - result.valid:', result?.valid, 'registerResponse.ok:', registerResponse?.ok);
+
+          // 초기 인증 모드인 경우 아이디/비밀번호 자동 저장 (2차 로그인을 위해)
+          if (!isReauthMode) {
+            try {
+              const userIdInput = document.getElementById('user-id-init');
+              const passwordInput = document.getElementById('password-init');
+
+              const userId = (userIdInput && userIdInput.value) ? userIdInput.value.trim() : '';
+              const password = (passwordInput && passwordInput.value) ? passwordInput.value.trim() : '';
+
+              if (userId && password) {
+                console.log('[Login] 초기 인증 성공 - 아이디/비밀번호 자동 저장 (2차 로그인용)');
+                const config = await ipcRenderer.invoke('config:get');
+                const updatedConfig = {
+                  ...config,
+                  rememberLicenseCredentials: true,
+                  savedLicenseUserId: userId,
+                  savedLicensePassword: password,
+                };
+                await ipcRenderer.invoke('config:save', updatedConfig);
+                console.log('[Login] 아이디/비밀번호 저장 완료');
+              }
+            } catch (error) {
+              console.error('[Login] 아이디/비밀번호 저장 실패:', error);
+            }
+          }
+
+          // [개선] 고급스러운 성공 모달 표시
+          const successBackdrop = document.getElementById('success-modal-backdrop');
+          const periodDisplay = document.getElementById('license-period-display');
+
+          if (successBackdrop && periodDisplay) {
+            // 기간 정보 추출 및 포맷팅
+            let displayDate = '평생권';
+
+            // registerResponse 또는 result.license에서 만료일 확인
+            const rawExpiresAt = registerResponse?.expiresAt || registerResponse?.expires || result?.license?.expiresAt;
+            const licenseType = registerResponse?.type || registerResponse?.licenseType || result?.license?.licenseType;
+
+            if (licenseType === 'LIFE' || licenseType === 'premium' && !rawExpiresAt) {
+              displayDate = '무제한 (평생권)';
+            } else if (rawExpiresAt) {
+              try {
+                const now = new Date();
+                const expireDate = new Date(rawExpiresAt);
+
+                // 날짜 포맷 (YYYY년 MM월 DD일)
+                const formattedDate = `${expireDate.getFullYear()}년 ${expireDate.getMonth() + 1}월 ${expireDate.getDate()}일`;
+
+                // 남은 기간 계산 (일 단위)
+                const diffTime = expireDate.getTime() - now.getTime();
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                let durationText = '';
+                if (diffDays > 300) durationText = ' (1년권)';
+                else if (diffDays > 270) durationText = ' (9개월권)';
+                else if (diffDays > 150) durationText = ' (6개월권)';
+                else if (diffDays > 80) durationText = ' (3개월권)';
+                else if (diffDays > 25) durationText = ' (1개월권)';
+                else if (diffDays > 0) durationText = ` (${diffDays}일 남음)`;
+
+                displayDate = `${formattedDate}${durationText} 까지`;
+              } catch (e) {
+                displayDate = String(rawExpiresAt);
+              }
+            } else if (licenseType === 'trial') {
+              displayDate = '체험판 (기간 한정)';
+            } else if (licenseType === 'free') {
+              displayDate = '무료 버전';
+            }
+
+            periodDisplay.textContent = displayDate;
+            successBackdrop.style.display = 'flex';
+          }
+
+          console.log('✅ 인증 성공! 메인 창으로 이동합니다.');
+          setTimeout(async () => {
+            await ipcRenderer.invoke('login:success');
+            window.close();
+          }, 3500); // 3.5초 후 이동
+        } else {
+          // ❌ 에러 처리: 등록 실패
+          let errorMessage = '라이선스 등록에 실패했습니다.';
+
+          if (registerResponse) {
+            if (registerResponse.ok === false) {
+              // 서버가 명시적으로 거부한 경우 (used 상태가 저장되지 않음)
+              errorMessage = registerResponse.error || registerResponse.message || '서버에서 등록을 거부했습니다.';
+              console.error('[Login] ❌ 서버 거부 (등록되지 않음, used 상태 저장 안 됨):', errorMessage);
+              console.error('[Login] ❌ debugInfo.register.fullResponse:', JSON.stringify(registerResponse, null, 2));
+
+              // used 상태가 저장되지 않았음을 명확히 표시
+              if (result.debugInfo && result.debugInfo.register) {
+                console.error('[Login] ❌ register 디버그 정보:', {
+                  usedValue: result.debugInfo.register.usedValue,
+                  usedCheck: result.debugInfo.register.usedCheck,
+                  used: result.debugInfo.register.used,
+                  isUsed: result.debugInfo.register.isUsed,
+                });
+              }
+            } else if (registerResponse.valid === false) {
+              // 인증 실패
+              errorMessage = registerResponse.message || registerResponse.error || '인증에 실패했습니다.';
+              console.error('[Login] ❌ 인증 실패:', errorMessage);
+              console.error('[Login] ❌ debugInfo.register.fullResponse:', JSON.stringify(registerResponse, null, 2));
+            } else {
+              // 응답 형식 오류 (registerResponse.ok나 registerResponse.valid가 없는 경우)
+              errorMessage = '서버 응답 형식이 올바르지 않습니다. 관리자에게 문의하세요.';
+              console.error('[Login] ❌ 응답 형식 오류:', registerResponse);
+              console.error('[Login] ❌ registerResponse.ok:', registerResponse.ok, 'registerResponse.valid:', registerResponse.valid);
+            }
+          } else {
+            // registerResponse가 없는 경우 (debugInfo가 없거나 register 정보가 없는 경우)
+            errorMessage = '서버 응답 형식이 올바르지 않습니다. 관리자에게 문의하세요.';
+            console.error('[Login] ❌ 인증 실패 - registerResponse가 없음');
+            console.error('[Login] ❌ result:', result);
+            console.error('[Login] ❌ result.debugInfo:', result?.debugInfo);
+            console.error('[Login] ❌ result.debugInfo?.register:', result?.debugInfo?.register);
+          }
+
+          // 에러 메시지 표시 및 처리 중단
+          const displayMsg = typeof errorMessage === 'string' ? errorMessage : JSON.stringify(errorMessage);
+          showError(displayMsg);
+          if (loginButton) {
+            loginButton.disabled = false;
+            loginButton.textContent = '인증하기';
+          }
+
+          // 등록 중단 (성공 처리로 넘어가지 않음)
+          return;
+        }
+      } catch (error) {
+        console.error('[Login] 인증 중 예외 발생:', error);
+        console.error('[Login] 오류 상세:', {
+          message: error.message,
+          stack: error.stack,
+          name: error.name
+        });
+        showError(`오류: ${error.message}`);
+        if (loginButton) {
+          loginButton.disabled = false;
+          loginButton.textContent = '인증하기';
+        }
+      }
+    });
+
+
+    // 초기화 (초기 인증창을 먼저 표시, 자동 로그인 하지 않음)
+    async function initialize() {
+      await loadDeviceId();
+      await loadSavedCredentials();
+
+      // ✅ 무료로 체험하기 버튼 활성화 여부 체크
+      try {
+        const config = await ipcRenderer.invoke('config:get');
+        if (config && config.enableFreeTrialButton === false) {
+          const freeBtn = document.getElementById('free-use-button');
+          if (freeBtn) freeBtn.style.display = 'none';
+          console.log('[Login] 무료 체험 버튼이 비활성화되었습니다. (설정 기반)');
+        }
+      } catch (e) {
+        console.error('[Login] 설정 로드 중 오류:', e);
+      }
+
+      // 초기 인증창이 기본으로 표시되도록 함 (자동 로그인 하지 않음)
+      console.log('초기 인증창을 표시합니다. "이미 등록했나요?"를 클릭하면 재인증 모드로 전환됩니다.');
+
+      // 관리자 제어 초기화
+      initAdminPanel();
+    }
+
+    function initAdminPanel() {
+      const trigger = document.getElementById('admin-trigger');
+      const backdrop = document.getElementById('admin-modal-backdrop');
+      const authSection = document.getElementById('admin-auth-section');
+      const controlPanel = document.getElementById('admin-control-panel');
+      const passwordInput = document.getElementById('admin-password');
+      const confirmBtn = document.getElementById('admin-confirm-btn');
+      const cancelBtn = document.getElementById('admin-cancel-btn');
+      const closeBtn = document.getElementById('admin-close-btn');
+      const enableTrialCheckbox = document.getElementById('admin-enable-free-trial');
+
+      trigger?.addEventListener('click', () => {
+        backdrop.style.display = 'flex';
+        authSection.style.display = 'block';
+        controlPanel.style.display = 'none';
+        passwordInput.value = '';
+        passwordInput.focus();
+      });
+
+      confirmBtn?.addEventListener('click', async () => {
+        if (passwordInput.value === '@qkrtjdgus12') { // 변경된 관리자 비밀번호
+          authSection.style.display = 'none';
+          controlPanel.style.display = 'block';
+
+          const config = await ipcRenderer.invoke('config:get');
+          enableTrialCheckbox.checked = config?.enableFreeTrialButton ?? true;
+        } else {
+          alert('비밀번호가 올바르지 않습니다.');
+        }
+      });
+
+      enableTrialCheckbox?.addEventListener('change', async () => {
+        const config = await ipcRenderer.invoke('config:get');
+        const newConfig = { ...config, enableFreeTrialButton: enableTrialCheckbox.checked };
+        await ipcRenderer.invoke('config:save', newConfig);
+
+        const freeBtn = document.getElementById('free-use-button');
+        if (freeBtn) {
+          freeBtn.style.display = enableTrialCheckbox.checked ? 'block' : 'none';
+        }
+      });
+
+      [cancelBtn, closeBtn].forEach(btn => btn?.addEventListener('click', () => {
+        backdrop.style.display = 'none';
+      }));
+    }
+
+    initialize();
+  </script>
+  <!-- 관리자 모달 -->
+  <div id="admin-modal-backdrop" class="admin-modal-backdrop">
+    <div class="admin-modal">
+      <h3 style="color: var(--text-gold); margin-bottom: 16px; font-size: 16px;">🔐 관리자 인증</h3>
+      <div id="admin-auth-section">
+        <input type="password" id="admin-password" placeholder="비밀번호 입력">
+        <div class="admin-modal-actions">
+          <button id="admin-cancel-btn" class="admin-btn-cancel">취소</button>
+          <button id="admin-confirm-btn" class="admin-btn-confirm">확인</button>
+        </div>
+      </div>
+      <div id="admin-control-panel" class="admin-control-panel">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+          <span style="color: var(--text-gold); font-size: 14px;">무료 체험 버튼 표시</span>
+          <input type="checkbox" id="admin-enable-free-trial" style="width: 20px; height: 20px; margin: 0;">
+        </div>
+        <button id="admin-close-btn" class="admin-btn-cancel" style="width: 100%;">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="admin-trigger" class="admin-trigger">⚙️</div>
+</body>
+
+</html>

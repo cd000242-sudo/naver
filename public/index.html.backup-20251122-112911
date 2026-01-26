@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.openai.com https://generativelanguage.googleapis.com https://api.pexels.com https://openapi.naver.com; frame-src 'self' https://blog.naver.com;">
+    <title>Better Life naver - 네이버 블로그 자동화</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 헤더 -->
+        <header class="app-header">
+            <h1 class="app-title">Better Life naver - AI 콘텐츠 생성부터 자동 포스팅까지, 한 번에 처리하세요.</h1>
+            
+            <!-- 고정 summary-bar -->
+            <div class="summary-bar" id="risk-summary-fixed">
+                <div class="summary-card">
+                    <span class="label">AI 탐지</span>
+                    <span class="value" data-risk-ai>—</span>
+                </div>
+                <div class="summary-card">
+                    <span class="label">법적 위험</span>
+                    <span class="value" data-risk-legal>—</span>
+                </div>
+                <div class="summary-card">
+                    <span class="label">SEO 점수</span>
+                    <span class="value" data-risk-seo>—</span>
+                </div>
+                <div class="summary-card">
+                    <span class="label">일일 권장</span>
+                    <span class="value" data-risk-daily>3회</span>
+                </div>
+            </div>
+            <p class="summary-note" data-risk-warning>구조화 콘텐츠를 생성하면 최신 품질 · 위험 지표가 표시됩니다.</p>
+            
+                <!-- 우측 상단 고정 버튼들 -->
+            <div class="header-actions-fixed">
+                <button type="button" id="settings-button-fixed" class="settings-button-fixed">환경 설정</button>
+                <button type="button" id="external-links-button-fixed" class="external-links-button-fixed">외부유입 하러가기</button>
+                <button type="button" onclick="toggleContinuousModeModal()" class="continuous-mode-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;">🔄 연속 발행</button>
+            </div>
+
+            <!-- 진행 상황 표시 -->
+            <div id="progress-indicator" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--bg-primary); border: 2px solid var(--primary); border-radius: 12px; padding: 1rem 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 10001; display: none; max-width: 500px; text-align: center;">
+                <div id="progress-text" style="font-weight: 600; font-size: 1.1rem; color: var(--text-gold);"></div>
+            </div>
+
+            <!-- 연속 발행 카운트다운 표시 -->
+            <div id="continuous-countdown" style="position: fixed; bottom: 20px; right: 20px; background: var(--bg-primary); border: 2px solid var(--accent); border-radius: 12px; padding: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 10001; display: none; font-weight: 600; color: var(--text-gold);"></div>
+        </header>
+
+        <!-- 탭 버튼 -->
+        <div class="tabs-header" role="tablist">
+            <button type="button" class="tab-button active" role="tab" aria-selected="true" data-tab="main">🏠 메인 대시보드</button>
+            <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="unified">🚀 스마트 자동 발행</button>
+            <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="images">🖼️ 이미지 관리</button>
+            <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="schedule">📅 스케줄 관리</button>
+        </div>
+
+        <!-- 메인 대시보드 탭 -->
+        <div id="tab-main" class="tab-panel active" role="tabpanel">
+            <section class="dashboard-section">
+                <div class="dashboard-header">
+                    <h2 style="display: flex; align-items: center; gap: 1rem; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 2rem;">
+                        <span style="font-size: 2rem;">🏠</span>
+                        <span>메인 대시보드</span>
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem;">블로그 자동화 현황을 한눈에 확인하세요</p>
+                    </div>
+                    
+                <!-- 대시보드 그리드 -->
+                <div class="dashboard-grid">
+                    <!-- 시계 위젯 -->
+                    <div class="dashboard-card clock-card">
+                        <div class="card-header">
+                            <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="font-size: 1.5rem;">🕐</span>
+                                <span>현재 시간</span>
+                            </h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="clock-display">
+                                <div id="current-time" class="current-time">--:--:--</div>
+                                <div id="current-date" class="current-date">----년 --월 --일 --요일</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 통계 카드들 -->
+                    <div class="dashboard-card stats-card">
+                        <div class="card-header">
+                            <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="font-size: 1.5rem;">📊</span>
+                                <span>오늘의 통계</span>
+                            </h3>
+                    </div>
+                        <div class="card-content">
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-number" id="today-posts">0</div>
+                                    <div class="stat-label">발행 글</div>
+                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" id="today-images">0</div>
+                                    <div class="stat-label">생성 이미지</div>
+            </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" id="today-views">0</div>
+                                    <div class="stat-label">예상 조회수</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 최근 활동 -->
+                    <div class="dashboard-card activity-card">
+                        <div class="card-header">
+                            <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="font-size: 1.5rem;">⚡</span>
+                                <span>최근 활동</span>
+                            </h3>
+                        </div>
+                        <div class="card-content">
+                            <div id="recent-activity" class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon">🚀</div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">앱이 시작되었습니다</div>
+                                        <div class="activity-time">방금 전</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 빠른 액션 -->
+                    <div class="dashboard-card actions-card">
+                        <div class="card-header">
+                            <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="font-size: 1.5rem;">⚡</span>
+                                <span>빠른 액션</span>
+                            </h3>
+                    </div>
+                        <div class="card-content">
+                            <div class="quick-actions">
+                                <button type="button" class="quick-action-btn primary" onclick="switchToUnifiedTab()">
+                                    <span style="font-size: 1.5rem;">🚀</span>
+                                    <span>바로 발행하기</span>
+                                </button>
+                                <button type="button" class="quick-action-btn secondary" onclick="switchToImageTab()">
+                                    <span style="font-size: 1.5rem;">🖼️</span>
+                                    <span>이미지 생성하기</span>
+                                </button>
+                                <button type="button" class="quick-action-btn secondary" onclick="switchToScheduleTab()">
+                                    <span style="font-size: 1.5rem;">📅</span>
+                                    <span>스케줄 확인하기</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 달력 위젯 -->
+                <div class="dashboard-calendar-section">
+                    <div class="calendar-card">
+                        <div class="card-header">
+                            <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="font-size: 1.5rem;">📅</span>
+                                <span>블로그 일정</span>
+                            </h3>
+                        </div>
+                        <div class="card-content">
+                        <div id="calendar-widget" class="calendar-widget"></div>
+                        </div>
+                    </div>
+                    </div>
+            </section>
+        </div>
+
+        <!-- AI 자동 블로그 발행 탭 -->
+        <div id="tab-unified" class="tab-panel" role="tabpanel">
+            <section class="form-section">
+                <h2 style="display: flex; align-items: center; gap: 1rem; background: linear-gradient(135deg, #3b82f6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 2rem;">
+                    <span style="font-size: 2rem;">🤖</span>
+                    <span>AI 자동 블로그 발행</span>
+                </h2>
+
+
+                <!-- 콘텐츠 생성 영역 -->
+                <div class="field" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(22, 163, 74, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(34, 197, 94, 0.3); margin-bottom: 2rem;">
+                    <!-- URL 입력 + 버튼 -->
+                    <div class="field">
+                        <label>🌐 URL 입력 (선택사항)</label>
+                        <div id="unified-url-fields-container" style="margin-bottom: 1rem;">
+                            <div class="url-field-item" style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem;">
+                                <input type="url" class="url-field-input unified-url-input" placeholder="https://example.com/article1" style="flex: 1;" data-url-index="0">
+                                <button type="button" class="url-field-remove" style="display: none; padding: 0.25rem 0.5rem; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;" title="삭제">×</button>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+                            <button type="button" id="unified-add-url-field-btn" class="secondary" style="padding: 0.5rem 1rem;">
+                                ➕ URL 추가
+                            </button>
+                            <button type="button" id="generate-from-url-btn" class="primary" style="padding: 0.75rem 1.5rem; white-space: nowrap;">
+                                🔄 URL로 AI 글 생성하기
+                            </button>
+                        </div>
+                        <p class="field-hint">URL에서 콘텐츠를 크롤링하여 AI가 자동으로 글을 생성합니다. 여러 URL을 추가하여 순차적으로 처리할 수 있습니다.</p>
+                    </div>
+
+                    <!-- 제목 및 키워드 입력 + 버튼 -->
+                    <div class="field">
+                        <label>📝 제목 및 키워드</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <input type="text" id="unified-title" placeholder="블로그 글 제목">
+                            <input type="text" id="unified-keywords" placeholder="예: 건강, 다이어트, 운동">
+                        </div>
+                        <button type="button" id="generate-manual-btn" class="primary" style="padding: 0.75rem 1.5rem; width: 100%;">
+                            ✏️ 키워드,제목으로 AI 글 생성하기
+                        </button>
+                        <p class="field-hint">입력된 키워드와 제목을 기반으로 AI가 자동으로 글을 생성합니다.</p>
+                    </div>
+
+                    <!-- 콘텐츠 카테고리 -->
+                    <div class="field">
+                        <label for="unified-article-type">📂 콘텐츠 카테고리</label>
+                        <select id="unified-article-type" class="thumbnail-select">
+                            <option value="general">일반</option>
+                            <option value="news">연예/이슈(뉴스형)</option>
+                            <option value="sports">스포츠</option>
+                            <option value="health">건강/의학</option>
+                            <option value="finance">경제/재테크</option>
+                            <option value="it_review">IT/가전 리뷰</option>
+                            <option value="shopping_review">쇼핑/제품 리뷰</option>
+                            <option value="parenting">육아/교육</option>
+                            <option value="food">음식/요리</option>
+                            <option value="travel">여행</option>
+                            <option value="interior">인테리어/집 꾸미기</option>
+                            <option value="pet">반려동물</option>
+                            <option value="fashion">패션/뷰티</option>
+                            <option value="hobby">취미/여가</option>
+                            <option value="realestate">부동산</option>
+                            <option value="car">자동차</option>
+                            <option value="book_movie">도서/영화/문화</option>
+                            <option value="self_dev">자기계발/동기부여</option>
+                            <option value="study">학업/보고서</option>
+                            <option value="game">게임</option>
+                            <option value="photo_video">사진/영상</option>
+                            <option value="art">예술/디자인</option>
+                            <option value="music">음악</option>
+                        </select>
+                        <p class="field-hint">카테고리에 따라 본문 흐름과 문체를 자동 최적화합니다.</p>
+                    </div>
+
+                    <!-- 최소 글자수 -->
+                    <div class="field">
+                        <label for="unified-min-chars">📏 최소 글자수 (선택)</label>
+                        <input type="number" id="unified-min-chars" placeholder="예: 3500" min="1000" step="100" style="width: 100%;">
+                        <p class="field-hint">지정하지 않으면 3,500~4,500자로 자동 생성됩니다.</p>
+                    </div>
+                </div>
+
+                <!-- 이미지 설정 -->
+                <div class="field" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(59, 130, 246, 0.3); margin-bottom: 2rem;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                        <button type="button" class="unified-img-source-btn selected" data-source="dalle" style="padding: 1.25rem; background: var(--primary); color: white; border: 3px solid var(--primary); border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 2rem;">🎨</span>
+                            <span>DALL-E 3</span>
+                            <span style="font-size: 0.75rem; opacity: 0.9;">AI 이미지 생성</span>
+                        </button>
+
+                        <button type="button" class="unified-img-source-btn" data-source="pexels" style="padding: 1.25rem; background: var(--bg-tertiary); color: var(--text-strong); border: 3px solid transparent; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 2rem;">📸</span>
+                            <span>Pexels</span>
+                            <span style="font-size: 0.75rem; opacity: 0.7;">무료 고품질 사진</span>
+                        </button>
+                    </div>
+
+                    <div class="field">
+                        <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none;">
+                            <input type="checkbox" id="unified-skip-images" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary);">
+                            <div>
+                                <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.25rem;">📝 이미지 없이 글만 발행</div>
+                                <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
+                                    이미지를 생성하거나 삽입하지 않고 텍스트만 발행합니다.
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 발행 설정 -->
+                <div class="field" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(16, 185, 129, 0.3); margin-bottom: 2rem;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                        <!-- 발행 모드 선택은 아래의 풀오토/반자동 버튼으로 대체 -->
+                    </div>
+                </div>
+
+                <!-- 발행 설정 -->
+                <div class="field" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(16, 185, 129, 0.3); margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-strong); font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.5rem;">📤</span>
+                        <span>발행 설정</span>
+                    </h3>
+
+                    <!-- 발행 모드 선택 -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <button type="button" class="unified-mode-btn selected" data-mode="full-auto" style="padding: 1.25rem; background: var(--primary); color: white; border: 3px solid var(--primary); border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 2rem;">⚡</span>
+                            <span>풀오토 발행</span>
+                            <span style="font-size: 0.75rem; opacity: 0.9;">콘텐츠 생성 → 이미지 생성 → 발행 (한 번에)</span>
+                        </button>
+
+                        <button type="button" class="unified-mode-btn" data-mode="semi-auto" style="padding: 1.25rem; background: var(--bg-tertiary); color: var(--text-strong); border: 3px solid transparent; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 2rem;">🔧</span>
+                            <span>반자동 발행</span>
+                            <span style="font-size: 0.75rem; opacity: 0.7;">수동 수정 후 발행</span>
+                        </button>
+                    </div>
+
+                    <!-- 발행 방식 설정 -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                        <div class="field">
+                            <label for="unified-publish-mode">📌 발행 방식</label>
+                            <select id="unified-publish-mode" class="thumbnail-select">
+                                <option value="draft">임시저장</option>
+                                <option value="publish">즉시발행</option>
+                                <option value="schedule">예약발행</option>
+                            </select>
+                        </div>
+
+                        <div class="field" id="unified-schedule-container" style="display: none;">
+                            <label for="unified-schedule-date">⏰ 예약 시간</label>
+                            <input type="datetime-local" id="unified-schedule-date">
+                        </div>
+                    </div>
+
+                    <!-- 발행 시작 버튼들 -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+                        <button type="button" id="full-auto-publish-btn" class="unified-start-btn" style="padding: 1.5rem; background: linear-gradient(135deg, #3b82f6, #06b6d4); color: white; border: none; border-radius: var(--radius-lg); font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);">
+                            <span style="font-size: 2rem;">⚡</span>
+                            <span>풀오토 발행</span>
+                            <span style="font-size: 0.75rem; opacity: 0.9;">콘텐츠 생성 → 이미지 생성 → 발행 (한 번에)</span>
+                        </button>
+
+                        <button type="button" id="semi-auto-publish-btn" class="unified-start-btn" style="padding: 1.5rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: var(--radius-lg); font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);">
+                            <span style="font-size: 2rem;">🔧</span>
+                            <span>반자동 발행</span>
+                            <span style="font-size: 0.75rem; opacity: 0.9;">수동 수정 후 발행</span>
+                        </button>
+                    </div>
+
+                    <!-- 3회 이상 발행 경고 비활성화 옵션 -->
+                    <div class="field" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.08), rgba(245, 158, 11, 0.05)); padding: 1rem; border-radius: var(--radius-md); border: 2px solid rgba(251, 191, 36, 0.25); margin-bottom: 1rem;">
+                        <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none;">
+                            <input type="checkbox" id="unified-skip-daily-limit-warning" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary);">
+                            <div>
+                                <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.25rem;">⚠️ 3회 이상 발행 경고 표시 안 함</div>
+                                <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
+                                    3회 이상 발행 시 경고 메시지를 표시하지 않습니다.<br>
+                                    <span style="color: var(--text-gold);">※ 네이버 탐지 위험이 증가할 수 있습니다.</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+
+
+                <!-- 공통 설정 -->
+                <div class="field" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(139, 92, 246, 0.3); margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-strong); font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.5rem;">⚙️</span>
+                        <span>공통 설정</span>
+                    </h3>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                        <!-- AI 엔진 선택 -->
+                        <div class="field">
+                            <label for="unified-generator">🤖 AI 엔진</label>
+                            <select id="unified-generator" class="thumbnail-select">
+                                <option value="gemini">Gemini</option>
+                                <option value="openai">OpenAI</option>
+                                <option value="claude">Claude</option>
+                            </select>
+                        </div>
+
+                        <!-- AI 글 퀄리티 (고정) -->
+                        <div class="field">
+                            <label>📊 AI 글 퀄리티</label>
+                            <div style="padding: 0.75rem; background: var(--bg-secondary); border-radius: var(--radius-sm); color: var(--text-strong); font-weight: 600;">
+                                3,500~4,500자 고퀄리티 (고정)
+                            </div>
+                        </div>
+
+                        <!-- 글 톤 설정 -->
+                        <div class="field">
+                            <label for="unified-tone-style">🎨 글 톤</label>
+                            <select id="unified-tone-style" class="thumbnail-select">
+                                <option value="professional">전문적</option>
+                                <option value="friendly">친근함</option>
+                                <option value="casual">일상적</option>
+                                <option value="formal">격식적</option>
+                                <option value="humorous">유머러스</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 반자동 모드: AI 생성 콘텐츠 수정 -->
+                <div id="unified-semi-auto-section" class="mode-section" style="display: none; background: linear-gradient(135deg, rgba(245, 101, 101, 0.1), rgba(239, 68, 68, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(245, 101, 101, 0.3); margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-strong); font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.5rem;">🔧</span>
+                        <span>반자동 모드: AI 생성 콘텐츠 수정</span>
+                    </h3>
+
+                    <div style="background: var(--bg-primary); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-light); margin-bottom: 1.5rem;">
+                        <p style="color: var(--text-strong); margin: 0; font-size: 0.9rem;">
+                            💡 먼저 상단의 콘텐츠 생성 영역에서 AI 글을 생성하세요. 생성된 콘텐츠를 아래에서 수정할 수 있습니다.
+                        </p>
+                    </div>
+
+                    <div class="field">
+                        <label for="unified-generated-title">📝 제목 (수정 가능)</label>
+                        <input type="text" id="unified-generated-title" placeholder="AI가 생성한 제목이 여기에 표시됩니다">
+                        <p class="field-hint">AI 생성 제목을 직접 수정할 수 있습니다.</p>
+                    </div>
+
+                    <div class="field">
+                        <label for="unified-generated-content">📄 본문 (수정 가능)</label>
+                        <textarea id="unified-generated-content" rows="12" placeholder="AI가 생성한 본문이 여기에 표시됩니다"></textarea>
+                        <p class="field-hint">AI 생성 본문을 직접 수정할 수 있습니다.</p>
+                    </div>
+
+                    <div class="field">
+                        <label for="unified-generated-hashtags">🏷️ 해시태그 (수정 가능)</label>
+                        <input type="text" id="unified-generated-hashtags" placeholder="AI가 생성한 해시태그가 여기에 표시됩니다">
+                        <p class="field-hint">해시태그를 직접 수정할 수 있습니다.</p>
+                    </div>
+                </div>
+
+
+                <!-- 진행률 표시 -->
+                <div id="unified-progress-container" style="display: none; margin: 2rem 0; padding: 1.5rem; background: var(--bg-secondary); border-radius: var(--radius-lg); border-left: 4px solid var(--primary);">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                        <span id="unified-progress-text" style="font-size: 1rem; color: var(--text-strong); font-weight: 600;">준비 중...</span>
+                        <span id="unified-progress-percent" style="font-size: 1rem; color: var(--primary); font-weight: 600;">0%</span>
+                    </div>
+                    <div style="width: 100%; height: 28px; background: var(--bg-tertiary); border-radius: var(--radius-md); overflow: hidden; position: relative;">
+                        <div id="unified-progress-bar" style="height: 100%; width: 0%; background: linear-gradient(90deg, #3b82f6, #06b6d4); transition: width 0.3s ease; position: relative;">
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); animation: shimmer 1.5s infinite;"></div>
+                        </div>
+                    </div>
+                    <div id="unified-progress-detail" style="margin-top: 0.75rem; font-size: 0.875rem; color: var(--text-muted);"></div>
+                </div>
+
+                <!-- 콘텐츠 미리보기 영역 -->
+                <div id="unified-preview-section" class="field" style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(16, 185, 129, 0.1) 100%); border: 3px solid var(--primary); border-radius: var(--radius-lg); display: none; opacity: 0; transform: translateY(-10px); transition: all 0.5s ease; position: relative; overflow: hidden;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-strong); font-size: 1.1rem;">📋 생성된 콘텐츠 미리보기</h3>
+
+                    <!-- 생성된 본문 미리보기 -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="margin-bottom: 0.75rem; color: var(--text-strong); font-size: 1rem;">📄 생성된 본문</h4>
+                        <div id="unified-content-preview" style="background: var(--bg-primary); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-light); min-height: 80px; max-height: 150px; overflow-y: auto; font-size: 0.9rem; line-height: 1.5;">
+                            <div style="color: var(--text-muted); font-style: italic;">콘텐츠를 생성하면 여기에 제목과 본문이 표시됩니다...</div>
+                        </div>
+                    </div>
+
+                    <!-- 이미지 + 소제목 통합 미리보기 -->
+                    <div>
+                        <h4 style="margin-bottom: 0.75rem; color: var(--text-strong); font-size: 1rem;">🖼️ 이미지 + 소제목 구조</h4>
+                        <div id="unified-integrated-preview" style="background: var(--bg-primary); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-light); min-height: 200px; max-height: 400px; overflow-y: auto;">
+                            <div style="color: var(--text-muted); font-style: italic;">이미지와 소제목이 번갈아 표시됩니다...</div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- 생성된 콘텐츠 표시 -->
+                <div id="unified-generated-content-section" class="field" style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 167, 38, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(255, 193, 7, 0.3); margin-bottom: 2rem; display: none;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-strong); font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.5rem;">📄</span>
+                        <span>생성된 콘텐츠</span>
+                    </h3>
+
+                    <div class="field">
+                        <label for="unified-generated-title">📝 생성된 제목</label>
+                        <input type="text" id="unified-generated-title" readonly style="background: var(--bg-secondary); cursor: default;">
+                    </div>
+                    
+                    <div class="field">
+                        <label for="unified-generated-content">📄 생성된 본문</label>
+                        <textarea id="unified-generated-content" rows="8" readonly style="background: var(--bg-secondary); cursor: default;"></textarea>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="unified-generated-hashtags">🏷️ 생성된 해시태그</label>
+                        <input type="text" id="unified-generated-hashtags" readonly style="background: var(--bg-secondary); cursor: default;">
+                    </div>
+                    </div>
+                    
+                <!-- 로그 & 진행상황 -->
+            <section class="log-section">
+                    <h3>로그 & 진행상황</h3>
+                    <div id="unified-log-output" class="log-output"></div>
+                </section>
+            </section>
+        </div>
+
+        <!-- 이미지 관리 탭 -->
+        <div id="tab-images" class="tab-panel" role="tabpanel">
+            <section class="form-section">
+                <h2 style="display: flex; align-items: center; gap: 1rem; background: linear-gradient(135deg, #8b5cf6, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 2rem;">
+                    <span style="font-size: 2rem;">🖼️</span>
+                    <span>이미지 관리</span>
+                </h2>
+
+                <!-- 콘텐츠 입력 -->
+                <div class="field" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(139, 92, 246, 0.3); margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-strong); font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.5rem;">📝</span>
+                        <span>콘텐츠 입력</span>
+                    </h3>
+
+                    <div class="field">
+                        <label for="image-title">📝 제목</label>
+                        <input type="text" id="image-title" placeholder="블로그 글 제목을 입력하세요">
+                        <p class="field-hint">이미지를 생성할 콘텐츠의 제목을 입력하세요.</p>
+                    </div>
+                </div>
+
+                <!-- 이미지 소스 선택 -->
+                <div class="field" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(59, 130, 246, 0.3); margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-strong); font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.5rem;">🎨</span>
+                        <span>이미지 소스 선택</span>
+                    </h3>
+
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                        <button type="button" class="image-source-btn selected" data-source="dalle" style="padding: 1.25rem; background: var(--primary); color: white; border: 3px solid var(--primary); border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 2rem;">🎨</span>
+                            <span>DALL-E</span>
+                            <span style="font-size: 0.75rem; opacity: 0.9;">AI 이미지 생성</span>
+                        </button>
+
+                        <button type="button" class="image-source-btn" data-source="pexels" style="padding: 1.25rem; background: var(--bg-tertiary); color: var(--text-strong); border: 3px solid transparent; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 2rem;">📸</span>
+                            <span>Pexels</span>
+                            <span style="font-size: 0.75rem; opacity: 0.7;">무료 고품질 사진</span>
+                        </button>
+
+                        <button type="button" class="image-source-btn" data-source="unsplash" style="padding: 1.25rem; background: var(--bg-tertiary); color: var(--text-strong); border: 3px solid transparent; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 2rem;">🌅</span>
+                            <span>Unsplash</span>
+                            <span style="font-size: 0.75rem; opacity: 0.7;">무료 스톡 사진</span>
+                        </button>
+                    </div>
+                </div>
+                                    
+                <!-- 영어 프롬프트 생성 결과 -->
+                <div class="field" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(22, 163, 74, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(34, 197, 94, 0.3); margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-strong); font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.5rem;">🔍</span>
+                        <span>영어 프롬프트 생성 결과</span>
+                    </h3>
+
+                    <div style="background: var(--bg-primary); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-light); margin-bottom: 1rem;">
+                        <p style="color: var(--text-strong); margin: 0 0 1rem 0; font-size: 0.9rem;">
+                            💡 제목을 입력하고 "소제목 분석하기" 버튼을 클릭하면 각 소제목에 대한 최적화된 영어 프롬프트가 생성됩니다.
+                        </p>
+                        <p style="color: var(--text-muted); margin: 0; font-size: 0.85rem;">
+                            생성된 프롬프트대로 이미지를 생성하여 블로그에 자동 삽입할 수 있습니다.
+                        </p>
+                    </div>
+
+                    <div id="image-prompts-preview" style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-light);">
+                        <div id="prompts-container" style="display: none;">
+                            <div class="prompt-item" data-index="1" style="margin-bottom: 1.5rem; padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 1px solid var(--border-light);">
+                                <div class="generated-image" style="width: 100%; height: 200px; border-radius: 8px; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; border: 2px dashed var(--border-color);">
+                                    <span style="color: var(--text-muted); font-size: 1.5rem;">🖼️</span>
+                                </div>
+                                <div class="english-prompt" style="padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; border-left: 3px solid var(--primary);">
+                                    <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">소제목 1 영어 프롬프트</div>
+                                    <div class="prompt-text" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.4;"></div>
+                                </div>
+                            </div>
+
+                            <div class="prompt-item" data-index="2" style="margin-bottom: 1.5rem; padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 1px solid var(--border-light);">
+                                <div class="generated-image" style="width: 100%; height: 200px; border-radius: 8px; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; border: 2px dashed var(--border-color);">
+                                    <span style="color: var(--text-muted); font-size: 1.5rem;">🖼️</span>
+                                </div>
+                                <div class="english-prompt" style="padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; border-left: 3px solid var(--primary);">
+                                    <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">소제목 2 영어 프롬프트</div>
+                                    <div class="prompt-text" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.4;"></div>
+                                </div>
+                            </div>
+
+                            <div class="prompt-item" data-index="3" style="margin-bottom: 1.5rem; padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 1px solid var(--border-light);">
+                                <div class="generated-image" style="width: 100%; height: 200px; border-radius: 8px; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; border: 2px dashed var(--border-color);">
+                                    <span style="color: var(--text-muted); font-size: 1.5rem;">🖼️</span>
+                                </div>
+                                <div class="english-prompt" style="padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; border-left: 3px solid var(--primary);">
+                                    <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">소제목 3 영어 프롬프트</div>
+                                    <div class="prompt-text" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.4;"></div>
+                                </div>
+                            </div>
+
+                            <div class="prompt-item" data-index="4" style="margin-bottom: 1.5rem; padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 1px solid var(--border-light);">
+                                <div class="generated-image" style="width: 100%; height: 200px; border-radius: 8px; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; border: 2px dashed var(--border-color);">
+                                    <span style="color: var(--text-muted); font-size: 1.5rem;">🖼️</span>
+                                </div>
+                                <div class="english-prompt" style="padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; border-left: 3px solid var(--primary);">
+                                    <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">소제목 4 영어 프롬프트</div>
+                                    <div class="prompt-text" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.4;"></div>
+                                </div>
+                            </div>
+
+                            <div class="prompt-item" data-index="5" style="margin-bottom: 1.5rem; padding: 1rem; background: var(--bg-primary); border-radius: 8px; border: 1px solid var(--border-light);">
+                                <div class="generated-image" style="width: 100%; height: 200px; border-radius: 8px; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; border: 2px dashed var(--border-color);">
+                                    <span style="color: var(--text-muted); font-size: 1.5rem;">🖼️</span>
+                                </div>
+                                <div class="english-prompt" style="padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; border-left: 3px solid var(--primary);">
+                                    <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">소제목 5 영어 프롬프트</div>
+                                    <div class="prompt-text" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.4;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="prompts-placeholder" style="color: var(--text-muted); font-style: italic;">제목을 입력하고 소제목 분석하기 버튼을 클릭하세요...</div>
+                    </div>
+                </div>
+                        
+                <!-- 액션 버튼들 -->
+                <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                    <button type="button" id="analyze-headings-btn" class="secondary" style="flex: 1; padding: 1rem; font-size: 1rem; font-weight: 600; border: 2px solid var(--primary); background: var(--bg-primary); color: var(--primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <span style="font-size: 1.25rem;">🔍</span>
+                        <span>소제목 분석하기</span>
+                    </button>
+
+                    <button type="button" id="generate-images-btn" class="primary" style="flex: 1; padding: 1rem; font-size: 1rem; font-weight: 600; background: linear-gradient(135deg, #3b82f6, #06b6d4); border: none; border-radius: var(--radius-md); box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <span style="font-size: 1.25rem;">🎨</span>
+                        <span>생성된 프롬프트대로 이미지 생성하기</span>
+                    </button>
+                </div>
+
+                <!-- 생성된 이미지 미리보기 -->
+                <div id="generated-images-section" class="field" style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 167, 38, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(255, 193, 7, 0.3); margin-bottom: 2rem; display: none;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-strong); font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.5rem;">🖼️</span>
+                        <span>생성된 이미지</span>
+                            </h3>
+
+                    <div id="generated-images-preview" style="background: var(--bg-primary); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-light);">
+                        <div style="color: var(--text-muted); font-style: italic;">생성된 이미지가 여기에 표시됩니다...</div>
+                                </div>
+                            </div>
+
+                <!-- 로그 섹션 -->
+                <section class="log-section">
+                    <h3>로그 & 진행상황</h3>
+                    <div id="images-log-output" class="log-output"></div>
+            </section>
+            </section>
+        </div>
+
+        <!-- 스케줄 관리 탭 -->
+        <div id="tab-schedule" class="tab-panel" role="tabpanel">
+            <section class="schedule-section">
+                <div class="schedule-header">
+                    <h2 style="display: flex; align-items: center; gap: 1rem; background: linear-gradient(135deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 2rem;">
+                        <span style="font-size: 2rem;">📅</span>
+                        <span>스케줄 관리</span>
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem;">예약 발행된 블로그 글들을 관리하세요</p>
+    </div>
+
+                <!-- 스케줄 통계 -->
+                <div class="schedule-stats">
+                    <div class="stats-card">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="scheduled-count">0</div>
+                            <div class="stat-label">예약된 글</div>
+                    </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="completed-count">0</div>
+                            <div class="stat-label">완료된 글</div>
+                </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stat-icon">🚫</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="failed-count">0</div>
+                            <div class="stat-label">실패한 글</div>
+                    </div>
+                </div>
+                </div>
+                
+                <!-- 스케줄 목록 -->
+                <div class="schedule-content">
+                    <div class="content-header">
+                        <h3>예약 발행 목록</h3>
+                        <button type="button" id="refresh-schedule-btn" class="secondary" style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🔄</span>
+                            <span>새로고침</span>
+                        </button>
+                        </div>
+                        
+                    <div id="scheduled-posts-list" class="scheduled-posts-list">
+                        <div class="empty-state">
+                            <div class="empty-icon">📅</div>
+                            <h4>예약된 발행이 없습니다</h4>
+                            <p>스마트 자동 발행에서 예약 발행을 설정하면 여기에 표시됩니다.</p>
+                            </div>
+                    </div>
+                </div>
+                
+                <!-- 스케줄 히스토리 -->
+                <div class="schedule-history">
+                    <div class="content-header">
+                        <h3>발행 히스토리</h3>
+                        <select id="history-filter" class="thumbnail-select">
+                            <option value="all">전체</option>
+                            <option value="completed">완료됨</option>
+                            <option value="failed">실패함</option>
+                            <option value="cancelled">취소됨</option>
+                        </select>
+    </div>
+
+                    <div id="schedule-history-list" class="schedule-history-list">
+                        <div class="empty-state">
+                            <div class="empty-icon">📋</div>
+                            <h4>발행 히스토리가 없습니다</h4>
+                            <p>발행된 글들의 기록이 여기에 표시됩니다.</p>
+            </div>
+        </div>
+    </div>
+            </section>
+    </div>
+
+    <!-- 환경설정 모달 -->
+    <div id="settings-modal" class="modal-backdrop" aria-hidden="true" style="display: none;">
+        <div class="modal-panel" style="background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(212, 175, 55, 0.05) 100%); border: 3px solid var(--border-gold); box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3), 0 0 20px rgba(255, 215, 0, 0.2); border-radius: 20px; backdrop-filter: blur(10px);">
+            <button type="button" class="modal-close" data-close-settings style="color: var(--text-gold); background: var(--bg-tertiary);">×</button>
+            <h2 style="color: var(--text-gold); text-shadow: var(--shadow-gold);">환경 설정</h2>
+            <div class="modal-content">
+                <div class="settings-content">
+                    <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                        <button type="button" id="gemini-api-guide-btn" class="secondary" style="flex: 1; background: linear-gradient(135deg, #D4AF37, #FFD700); color: white;">Gemini API 키 발급하러 가기</button>
+                        <button type="button" id="openai-api-guide-btn" class="secondary" style="flex: 1; background: linear-gradient(135deg, #10B981, #34D399); color: white;">OpenAI API 키 발급하러 가기</button>
+                        <button type="button" id="claude-api-guide-btn" class="secondary" style="flex: 1; background: linear-gradient(135deg, #F59E0B, #FBBF24); color: white;">Claude API 키 발급하러 가기</button>
+                    </div>
+
+                    <h3 style="color: var(--text-gold); border-bottom: 2px solid var(--border-gold); padding-bottom: 0.5rem;">🤖 AI API 키 설정</h3>
+                    <div class="field">
+                        <label for="gemini-api-key" style="color: var(--text-gold);">Gemini API Key</label>
+                        <input type="password" id="gemini-api-key" placeholder="Gemini API 키를 입력하세요" style="background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong);">
+                    </div>
+                    <div class="field">
+                        <label for="openai-api-key" style="color: var(--text-gold);">OpenAI API Key</label>
+                        <input type="password" id="openai-api-key" placeholder="OpenAI API 키를 입력하세요" style="background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong);">
+                    </div>
+                    <div class="field">
+                        <label for="claude-api-key" style="color: var(--text-gold);">Claude API Key</label>
+                        <input type="password" id="claude-api-key" placeholder="Claude API 키를 입력하세요" style="background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong);">
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <button type="button" id="pexels-api-guide-btn" class="secondary" style="flex: 1; background: linear-gradient(135deg, #10B981, #34D399); color: white;">Pexels API 키 발급하러 가기</button>
+                    </div>
+
+                    <h3 style="color: var(--text-gold); border-bottom: 2px solid var(--border-gold); padding-bottom: 0.5rem; margin-top: 2rem;">🖼️ 이미지 API 설정</h3>
+                    <div class="field">
+                        <label for="pexels-api-key" style="color: var(--text-gold);">Pexels API Key</label>
+                        <input type="password" id="pexels-api-key" placeholder="Pexels API 키를 입력하세요" style="background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong);">
+                    </div>
+
+                    <h3 style="color: var(--text-gold); border-bottom: 2px solid var(--border-gold); padding-bottom: 0.5rem; margin-top: 2rem;">⚙️ 기타 설정</h3>
+                    <div class="field">
+                        <label for="daily-post-limit" style="color: var(--text-gold);">일일 발행 제한</label>
+                        <input type="number" id="daily-post-limit" min="1" max="10" value="3" style="background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong);">
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1rem; background: var(--bg-tertiary); border-radius: 8px; border: 1px solid var(--border-medium);">
+                        <h4 style="color: var(--text-gold); margin-bottom: 1rem;">🚀 초보자 가이드</h4>
+                        <div style="color: var(--text-muted); line-height: 1.6;">
+                            <p><strong>1단계:</strong> 먼저 AI API 키를 발급받으세요. 위의 버튼들을 클릭하면 각 서비스 사이트로 이동합니다.</p>
+                            <p><strong>2단계:</strong> 발급받은 API 키를 위의 입력창에 붙여넣으세요.</p>
+                            <p><strong>3단계:</strong> '저장' 버튼을 클릭해서 설정을 저장하세요.</p>
+                            <p><strong>4단계:</strong> 메인 화면에서 URL을 입력하거나 제목/키워드를 입력하세요.</p>
+                            <p><strong>5단계:</strong> 풀오토 발행 또는 반자동 발행 버튼을 클릭하세요.</p>
+                            <p><strong>팁:</strong> 처음에는 반자동 발행을 사용해서 생성된 콘텐츠를 확인하고 수정해보세요!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" id="save-settings-btn" class="primary" style="background: linear-gradient(135deg, #D4AF37, #FFD700); color: var(--bg-primary);">저장</button>
+                <button type="button" data-close-settings class="secondary" style="background: var(--bg-tertiary); color: var(--text-gold); border: 1px solid var(--border-gold);">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 외부유입 모달 -->
+    <div id="external-links-modal" class="modal-backdrop" aria-hidden="true" style="display: none;">
+        <div class="modal-panel external-links-modal-panel" style="background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(16, 185, 129, 0.05) 100%); border: 3px solid var(--border-gold); box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3), 0 0 20px rgba(16, 185, 129, 0.2); border-radius: 20px; backdrop-filter: blur(10px); max-width: 900px;">
+            <button type="button" class="modal-close" data-close-external-links style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #10b981; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.2s;" onmouseover="this.style.background='rgba(16, 185, 129, 0.4)'; this.style.transform='rotate(90deg)'" onmouseout="this.style.background='rgba(16, 185, 129, 0.2)'; this.style.transform='rotate(0deg)'">×</button>
+            <h2>외부유입 하러가기</h2>
+            <div class="modal-content">
+                <div class="external-links-content">
+                    <p style="color: var(--text-gold); margin-bottom: 1.5rem;">외부 유입을 위한 유용한 커뮤니티 링크들입니다. 카테고리별로 분류되어 있습니다.</p>
+
+                    <!-- 탭 버튼들 -->
+                    <div class="external-links-tabs" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-gold);">
+                        <button onclick="switchExternalLinksTab('a-grade')" class="tab-btn active" data-tab="a-grade" style="padding: 0.75rem 1rem; background: var(--primary); color: white; border: none; border-radius: 8px 8px 0 0; cursor: pointer; font-weight: 600; transition: all 0.3s; box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);">⭐ A등급</button>
+                        <button onclick="switchExternalLinksTab('b-grade')" class="tab-btn" data-tab="b-grade" style="padding: 0.75rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 2px solid var(--border-medium); border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='white'; this.style.borderColor='var(--primary)'; this.style.boxShadow='0 2px 8px rgba(249, 115, 22, 0.3)';" onmouseout="this.style.background='var(--bg-tertiary)'; this.style.color='var(--text-strong)'; this.style.borderColor='var(--border-medium)'; this.style.boxShadow='none';">🟡 B등급</button>
+                        <button onclick="switchExternalLinksTab('c-grade')" class="tab-btn" data-tab="c-grade" style="padding: 0.75rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 2px solid var(--border-medium); border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='white'; this.style.borderColor='var(--primary)'; this.style.boxShadow='0 2px 8px rgba(59, 130, 246, 0.3)';" onmouseout="this.style.background='var(--bg-tertiary)'; this.style.color='var(--text-strong)'; this.style.borderColor='var(--border-medium)'; this.style.boxShadow='none';">🔵 C등급</button>
+                        <button onclick="switchExternalLinksTab('naver-cafes')" class="tab-btn" data-tab="naver-cafes" style="padding: 0.75rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 2px solid var(--border-medium); border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='white'; this.style.borderColor='var(--primary)'; this.style.boxShadow='0 2px 8px rgba(16, 185, 129, 0.3)';" onmouseout="this.style.background='var(--bg-tertiary)'; this.style.color='var(--text-strong)'; this.style.borderColor='var(--border-medium)'; this.style.boxShadow='none';">🏠 카페</button>
+                    </div>
+
+                    <div class="links-container" style="max-width: 1200px; margin: 0 auto;">
+                        <!-- A등급 -->
+                        <div id="a-grade-content" class="tab-content active" style="display: block;">
+                            <div style="text-align: center; margin-bottom: 2rem;">
+                                <h4 style="color: var(--text-gold); font-size: 1.5rem; margin-bottom: 0.5rem; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">⭐ 최고 인기 커뮤니티</h4>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">외부 유입 효과가 가장 좋은 커뮤니티들입니다</p>
+                            </div>
+                            <div class="links-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; justify-items: center; max-width: 1000px; margin: 0 auto;">
+                                <div data-url="https://bbs.ruliweb.com" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(212, 175, 55, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(212, 175, 55, 0.4)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.3)'; this.style.borderColor='var(--border-medium)';">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌐</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">루리웹</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">종합 커뮤니티의 대명사</div>
+                                </div>
+                                <div data-url="https://eomisae.co.kr" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(212, 175, 55, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(212, 175, 55, 0.4)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.3)'; this.style.borderColor='var(--border-medium)';">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📰</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">어미새</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">뉴스와 커뮤니티의 조화</div>
+                                </div>
+                                <div data-url="https://ygosu.com" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(212, 175, 55, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(212, 175, 55, 0.4)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.3)'; this.style.borderColor='var(--border-medium)';">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎮</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">와이고수</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">게임 커뮤니티의 리더</div>
+                                </div>
+                                <div data-url="https://gezip.net" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(212, 175, 55, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(212, 175, 55, 0.4)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.3)'; this.style.borderColor='var(--border-medium)';">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">😂</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">개그집합소</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">유머와 웃음의 공간</div>
+                                </div>
+                                <a href="https://soccerline.kr" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(212, 175, 55, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚽</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">사커라인</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">축구 팬들의 성지</div>
+                                </a>
+                                <a href="https://www.bodnara.co.kr" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(212, 175, 55, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">💻</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">보드나라</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">컴퓨터 하드웨어 전문</div>
+                                </a>
+                                <a href="https://www.82cook.com" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(212, 175, 55, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">👨‍🍳</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">82COOK</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">요리와 레시피의 천국</div>
+                                </a>
+                                <a href="https://www.wolchuck.co.kr" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(212, 175, 55, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎣</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">월척커뮤니티</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">낚시 동호인의 모임</div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- B등급 -->
+                        <div id="b-grade-content" class="tab-content" style="display: none;">
+                            <div style="text-align: center; margin-bottom: 2rem;">
+                                <h4 style="color: var(--text-gold); font-size: 1.5rem; margin-bottom: 0.5rem; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">🟡 인기 커뮤니티</h4>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">외부 유입 효과가 좋은 커뮤니티들입니다</p>
+                            </div>
+                            <div class="links-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; justify-items: center; max-width: 1000px; margin: 0 auto;">
+                                <div data-url="https://www.fishnet.co.kr" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(249, 115, 22, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(249, 115, 22, 0.4)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.3)'; this.style.borderColor='var(--border-medium)';">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎣</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">낚시사랑</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">낚시 전문 커뮤니티</div>
+                                </div>
+                                <div data-url="https://mania.kr" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(249, 115, 22, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(249, 115, 22, 0.4)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.3)'; this.style.borderColor='var(--border-medium)';">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏀</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">NBA 매니아</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">농구 팬들의 성지</div>
+                                </div>
+                                <a href="https://www.bobaedream.co.kr" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(249, 115, 22, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚗</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">보배드림</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">자동차 커뮤니티의 리더</div>
+                                </a>
+                                <a href="https://www.koreapas.com" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(249, 115, 22, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">💼</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">고파스</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">취업과 경력 정보</div>
+                                </a>
+                                <a href="https://orbi.kr" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(249, 115, 22, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📰</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">오르비</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">종합 뉴스 커뮤니티</div>
+                                </a>
+                                <a href="https://gigglehd.com" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(249, 115, 22, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">💻</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">기글하드웨어</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">하드웨어 리뷰 전문</div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- C등급 -->
+                        <div id="c-grade-content" class="tab-content" style="display: none;">
+                            <div style="text-align: center; margin-bottom: 2rem;">
+                                <h4 style="color: var(--text-gold); font-size: 1.5rem; margin-bottom: 0.5rem; text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);">🔵 일반 커뮤니티</h4>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">다양한 분야의 커뮤니티들입니다</p>
+                            </div>
+                            <div class="links-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; justify-items: center; max-width: 1000px; margin: 0 auto;">
+                                <a href="https://gall.dcinside.com" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(59, 130, 246, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🖼️</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">디시인사이드</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">갤러리 문화의 중심</div>
+                                </a>
+                                <a href="https://www.clien.net" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(59, 130, 246, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">💻</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">클리앙</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">IT 전문 커뮤니티</div>
+                                </a>
+                                <a href="https://www.ppomppu.co.kr" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(59, 130, 246, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🛒</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">뽐뿌</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">알뜰 쇼핑의 명소</div>
+                                </a>
+                                <a href="http://www.todayhumor.co.kr" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(59, 130, 246, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">😄</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">오늘의유머</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">유머와 재미의 공간</div>
+                                </a>
+                                <a href="https://fastcampus.co.kr" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(59, 130, 246, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎓</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">패스트캠퍼스</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">온라인 교육 플랫폼</div>
+                                </a>
+                                <a href="https://www.inflearn.com" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(59, 130, 246, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📚</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">인프런</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">프로그래밍 학습</div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 네이버 카페 -->
+                        <div id="naver-cafes-content" class="tab-content" style="display: none;">
+                            <div style="text-align: center; margin-bottom: 2rem;">
+                                <h4 style="color: var(--text-gold); font-size: 1.5rem; margin-bottom: 0.5rem; text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);">🏠 네이버 카페 모음</h4>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">전문 분야별 네이버 카페 커뮤니티</p>
+                            </div>
+                            <div class="links-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; justify-items: center; max-width: 1000px; margin: 0 auto;">
+                                <a href="https://cafe.naver.com/dieselmania" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(16, 185, 129, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚛</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">디젤매니아</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">상용차 전문 카페</div>
+                                </a>
+                                <a href="https://cafe.naver.com/true8" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(16, 185, 129, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚗</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">BMW 매니아</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">BMW 오너 카페</div>
+                                </a>
+                                <a href="https://cafe.naver.com/appleiphone" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(16, 185, 129, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📱</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">아사모</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">Apple 제품 유저</div>
+                                </a>
+                                <a href="https://cafe.naver.com/ketogenic" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(16, 185, 129, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🥗</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">키토제닉</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">저탄고지 식단</div>
+                                </a>
+                                <a href="https://cafe.naver.com/hotdealcommunity" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(16, 185, 129, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🛒</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">쇼핑매니아</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">핫딜 공유 카페</div>
+                                </a>
+                                <a href="https://cafe.naver.com/perfectshine" target="_blank" rel="noopener noreferrer" class="external-link-item" style="display: flex; flex-direction: column; align-items: center; padding: 1.5rem; background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(16, 185, 129, 0.1) 100%); border: 2px solid var(--border-medium); border-radius: 12px; text-decoration: none; color: var(--text-strong); transition: all 0.3s; width: 100%; max-width: 260px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">💄</div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem; color: var(--text-gold);">퍼펙트샤인</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center;">뷰티 & 패션</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" data-close-external-links class="secondary">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 라이선스 모달 -->
+    <div id="license-modal" class="modal-backdrop" aria-hidden="true" style="display: none;">
+        <div class="modal-panel">
+            <button type="button" class="modal-close" data-close-license>×</button>
+            <h2>라이선스 관리</h2>
+            <div class="modal-content">
+                <div class="license-content">
+                    <p>라이선스 정보를 확인하고 관리하세요.</p>
+                    <!-- 라이선스 정보는 JavaScript로 동적으로 추가됨 -->
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" data-close-license class="secondary">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 연속 발행 모달 -->
+    <div id="continuous-mode-modal" class="modal-backdrop" aria-hidden="true" style="display: none;">
+        <div class="modal-panel" style="background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(245, 158, 11, 0.1) 100%); border: 3px solid var(--accent); box-shadow: 0 20px 40px rgba(245, 158, 11, 0.3), 0 0 20px rgba(245, 158, 11, 0.2); max-width: 600px; border-radius: 20px; backdrop-filter: blur(10px);">
+            <button type="button" class="modal-close" data-close-continuous>×</button>
+            <h2 style="color: var(--text-gold); text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);">🔄 연속 발행 모드</h2>
+            <div class="modal-content">
+                <div style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
+                    <p>여러 개의 URL을 입력하면 각 포스팅 발행이 끝난 후 <strong>15초 대기</strong> 후 자동으로 다음 포스팅을 발행합니다.</p>
+                    <p style="color: var(--accent); font-weight: 600;">한 줄에 하나의 URL을 입력하세요.</p>
+                </div>
+
+                <div class="field">
+                    <label style="color: var(--text-gold); font-weight: 600;">발행할 URL 목록</label>
+                    <div id="continuous-url-fields-container" style="margin-bottom: 1rem;">
+                        <div class="continuous-url-field-item" style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem;">
+                            <input type="url" class="continuous-url-field-input" placeholder="https://example.com/article1" style="flex: 1; background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: 8px; color: var(--text-strong); padding: 0.75rem;" data-url-index="0">
+                            <button type="button" class="continuous-url-field-remove" style="display: none; padding: 0.25rem 0.5rem; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;" title="삭제">×</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+                        <button type="button" id="continuous-add-url-field-btn" class="secondary" style="padding: 0.5rem 1rem; background: var(--bg-tertiary); color: var(--text-gold); border: 1px solid var(--border-gold); border-radius: 6px;">
+                            ➕ URL 추가
+                        </button>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                    <h4 style="color: var(--text-gold); margin-bottom: 0.5rem;">💡 사용 방법</h4>
+                    <ol style="color: var(--text-muted); margin: 0; padding-left: 1.5rem;">
+                        <li>발행할 URL들을 한 줄에 하나씩 입력</li>
+                        <li>"연속 발행 시작" 버튼 클릭</li>
+                        <li>각 포스팅이 끝나면 15초 카운트다운 후 자동 진행</li>
+                        <li>중간에 멈추려면 브라우저 새로고침</li>
+                    </ol>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-medium);">
+                        <a href="test-api-keys.html" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 600;">
+                            🧪 API 키 및 풀오토 발행 테스트 페이지 열기 →
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions" style="display: flex; gap: 1rem; justify-content: center;">
+                <button type="button" onclick="startContinuousPublishing()" class="primary" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; flex: 1;">🚀 연속 발행 시작</button>
+                <button type="button" onclick="stopContinuousMode()" class="secondary" style="background: var(--bg-tertiary); color: var(--text-gold); border: 1px solid var(--border-gold);">⏹️ 중지</button>
+                <button type="button" onclick="toggleContinuousModeModal()" class="secondary" style="background: var(--bg-tertiary); color: var(--text-gold); border: 1px solid var(--border-gold);">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+      /* 고급 모달 애니메이션 */
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .modal-backdrop {
+        animation: fadeIn 0.4s ease-out;
+      }
+
+      .modal-panel {
+        animation: slideUp 0.5s ease-out;
+      }
+
+      /* 고급 버튼 호버 효과 */
+      .modal-actions button {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .modal-actions button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      }
+
+      /* 진행 상황 표시 개선 */
+      #progress-indicator {
+        animation: slideDown 0.3s ease-out;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* 반응형 디자인 개선 */
+      @media (max-width: 768px) {
+        .modal-panel {
+          margin: 1rem;
+          max-width: calc(100vw - 2rem);
+        }
+
+        .links-grid {
+          grid-template-columns: 1fr !important;
+        }
+      }
+    </style>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

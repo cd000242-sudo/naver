@@ -1,0 +1,400 @@
+/* src/ui/styles/components.css */
+/* 재사용 가능한 UI 컴포넌트 스타일 */
+
+/* ============================================
+   버튼 스타일
+   ============================================ */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: none;
+    border-radius: var(--radius-md, 8px);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 버튼 크기 */
+.btn--sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8rem;
+}
+
+.btn--md {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+}
+
+.btn--lg {
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+}
+
+/* 버튼 변형 */
+.btn--primary {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn--primary:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.btn--secondary {
+    background: var(--bg-tertiary, #374151);
+    color: var(--text-strong, #fff);
+    border: 1px solid var(--border-light, #4b5563);
+}
+
+.btn--secondary:hover:not(:disabled) {
+    background: var(--bg-secondary, #4b5563);
+}
+
+.btn--success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn--danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn--ghost {
+    background: transparent;
+    color: var(--text-strong, #fff);
+}
+
+.btn--ghost:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn--icon {
+    padding: 0.5rem;
+    min-width: auto;
+}
+
+.btn--loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn__icon {
+    font-size: 1.1em;
+}
+
+/* ============================================
+   입력 필드 스타일
+   ============================================ */
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--bg-primary, #1f2937);
+    border: 1px solid var(--border-light, #374151);
+    border-radius: var(--radius-md, 8px);
+    color: var(--text-strong, #fff);
+    font-size: 0.9rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--primary, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.input::placeholder {
+    color: var(--text-muted, #9ca3af);
+}
+
+.textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ============================================
+   리스트 아이템 스타일
+   ============================================ */
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary, #374151);
+    border: 1px solid var(--border-light, #4b5563);
+    border-radius: var(--radius-md, 8px);
+    transition: all 0.2s ease;
+}
+
+.list-item:hover {
+    background: var(--bg-tertiary, #4b5563);
+}
+
+.list-item--selected {
+    border-color: var(--primary, #3b82f6);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.list-item__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.list-item__title {
+    font-weight: 600;
+    color: var(--text-strong, #fff);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list-item__subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted, #9ca3af);
+    margin-top: 0.25rem;
+}
+
+.list-item__badge {
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.list-item__badge--default {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted, #9ca3af);
+}
+
+.list-item__badge--primary {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+
+.list-item__badge--success {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+}
+
+.list-item__badge--warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+}
+
+.list-item__badge--danger {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+.list-item__actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ============================================
+   토스트 스타일
+   ============================================ */
+
+.toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    background: var(--bg-secondary, #374151);
+    border-radius: var(--radius-md, 8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    transform: translateX(120%);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.toast--visible {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.toast--success {
+    border-left: 4px solid #10b981;
+}
+
+.toast--error {
+    border-left: 4px solid #ef4444;
+}
+
+.toast--warning {
+    border-left: 4px solid #f59e0b;
+}
+
+.toast--info {
+    border-left: 4px solid #3b82f6;
+}
+
+.toast__icon {
+    font-size: 1.25rem;
+}
+
+.toast__message {
+    color: var(--text-strong, #fff);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   스피너 스타일
+   ============================================ */
+
+.spinner {
+    display: inline-block;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.spinner--sm {
+    width: 14px;
+    height: 14px;
+}
+
+.spinner--md {
+    width: 20px;
+    height: 20px;
+}
+
+.spinner--lg {
+    width: 32px;
+    height: 32px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   빈 상태 스타일
+   ============================================ */
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.empty-state__icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+}
+
+.empty-state__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-strong, #fff);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state__description {
+    font-size: 0.9rem;
+    color: var(--text-muted, #9ca3af);
+    margin-bottom: 1.5rem;
+    max-width: 300px;
+}
+
+/* ============================================
+   유틸리티 클래스
+   ============================================ */
+
+.hidden {
+    display: none !important;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-1 {
+    gap: 0.25rem;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.gap-3 {
+    gap: 0.75rem;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

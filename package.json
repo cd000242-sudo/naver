@@ -1,0 +1,182 @@
+{
+  "name": "better-life-naver",
+  "version": "1.0.16",
+  "description": "Better Life Naver - 네이버 블로그 자동화 앱으로 더 나은 삶을 만들어가세요. Electron, Node.js, TypeScript, and Puppeteer.",
+  "author": "Better Life Team",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc && node scripts/copy-static.mjs",
+    "build:safe": "node scripts/build.js",
+    "start": "npm run build && electron .",
+    "dev": "electron .",
+    "cli": "ts-node src/index.ts",
+    "lint": "eslint \"src/**/*.ts\"",
+    "prepack": "npm run build && node scripts/reset-config-for-pack.js",
+    "pack": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --dir && node scripts/restore-after-pack.js",
+    "dist": "npm run build && node scripts/reset-config-for-pack.js && electron-builder && node scripts/restore-after-pack.js && node scripts/create-archives.js",
+    "restore": "node scripts/restore-after-pack.js",
+    "dist:win": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --win && node scripts/restore-after-pack.js && node scripts/create-archives.js",
+    "dist:portable": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --win portable && node scripts/restore-after-pack.js",
+    "dist:all": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --win --x64 && node scripts/restore-after-pack.js && node scripts/create-archives.js",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:universal": "npm run build && electron-builder --mac --universal",
+    "self-test": "npm run build && node dist/tests/automationSmoke.js",
+    "start:daily": "npm run build && node dist/scheduler/daily.js",
+    "start:monitor": "npm run build && node dist/monitor/realtime.js",
+    "start:learning": "npm run build && node dist/learning/analyzer.js",
+    "test:generate": "ts-node src/tests/automationSmoke.ts",
+    "test:integration": "ts-node src/tests/integrationTest.ts",
+    "test:draft": "ts-node src/tests/testDraftPublish.ts",
+    "test:publish": "echo \"Publish test not implemented\"",
+    "test:images": "ts-node src/tests/imageSmoke.ts",
+    "test:image:insert": "ts-node src/tests/testImageInsert.ts",
+    "test:typing:pexels": "npm run build && node dist/tests/typingWithPexels.js",
+    "test:typing": "tsx test-typing-automation.ts",
+    "test:gemini": "ts-node test-gemini-json.ts",
+    "test:full": "ts-node test-full-generation.ts",
+    "test:login": "node scripts/test-login.mjs",
+    "test:full-flow": "node scripts/test-full-flow.mjs",
+    "test:image-model-settings": "ts-node src/tests/testImageModelSettings.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.21.1",
+    "@google/generative-ai": "^0.21.0",
+    "@imgly/background-removal": "^1.7.0",
+    "@types/xlsx": "^0.0.35",
+    "app-builder-bin": "^5.0.0-alpha.12",
+    "axios": "^1.6.0",
+    "boxen": "^8.0.1",
+    "chalk": "^5.6.2",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.4.5",
+    "ffmpeg-static": "^5.2.0",
+    "figlet": "^1.9.4",
+    "ghost-cursor": "^1.4.2",
+    "gradient-string": "^3.0.0",
+    "json5": "^2.2.3",
+    "mongoose": "^8.0.0",
+    "node-cron": "^3.0.3",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.104.0",
+    "ora": "^9.0.0",
+    "puppeteer": "^23.2.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "redis": "^4.6.0",
+    "rss-parser": "^3.13.0",
+    "selenium-webdriver": "^4.15.0",
+    "sharp": "^0.34.5",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "@types/node-cron": "^3.0.11",
+    "electron": "^31.4.0",
+    "electron-builder": "^26.0.12",
+    "eslint": "^9.12.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsdoc": "^48.10.2",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "rcedit": "^5.0.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.5.4"
+  },
+  "build": {
+    "appId": "com.betterlife.naver",
+    "productName": "Better Life Naver",
+    "directories": {
+      "output": "release_final"
+    },
+    "files": [
+      "dist/**/*",
+      "!dist/settings.json",
+      "package.json",
+      "node_modules/**/*"
+    ],
+    "asarUnpack": [
+      "node_modules/puppeteer/**/*",
+      "node_modules/puppeteer-extra/**/*",
+      "node_modules/puppeteer-extra-plugin-stealth/**/*",
+      "node_modules/ffmpeg-static/**/*",
+      "node_modules/.bin/**/*",
+      "dist/prompts/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "dir",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "assets/LEADERNA_.ico",
+      "category": "public.app-category.productivity",
+      "darkModeSupport": true,
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Better Life Naver",
+      "perMachine": false,
+      "allowElevation": true
+    },
+    "extraResources": [
+      {
+        "from": "assets",
+        "to": "assets",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": ".env",
+        "to": ".env",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "dist/prompts",
+        "to": "prompts",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "npmRebuild": false,
+    "nodeGypRebuild": false
+  }
+}

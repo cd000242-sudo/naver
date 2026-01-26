@@ -1,0 +1,144 @@
+/* 플로팅 버튼 스타일 및 스크롤 애니메이션 */
+.floating-btn {
+  animation: fadeInSlide 0.5s ease-out;
+}
+
+.floating-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.floating-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 스크롤 시 부드러운 이동 */
+#left-floating-buttons,
+#right-floating-buttons {
+  will-change: transform;
+}
+
+#right-floating-buttons {
+  top: 16px !important;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+#right-floating-buttons::-webkit-scrollbar {
+  width: 6px;
+}
+
+#right-floating-buttons::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+}
+
+/* 반응형 - 작은 화면에서 크기 조정 */
+@media (max-width: 1400px) {
+  #left-floating-buttons,
+  #right-floating-buttons {
+    transform: scale(0.85);
+  }
+  
+  .floating-btn {
+    min-width: 120px !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  .floating-btn span:first-child {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  #left-floating-buttons,
+  #right-floating-buttons {
+    transform: scale(0.75);
+  }
+  
+  #left-floating-buttons {
+    left: 10px;
+  }
+  
+  #right-floating-buttons {
+    right: 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  #left-floating-buttons,
+  #right-floating-buttons {
+    transform: scale(0.65);
+    opacity: 0.9;
+  }
+}
+
+/* 예약 설정 박스 애니메이션 */
+#unified-schedule-container {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 예약 확인 버튼 활성화 애니메이션 */
+#unified-schedule-confirm-btn:not(:disabled) {
+  opacity: 1 !important;
+  pointer-events: all !important;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.7);
+  }
+}
+
+#unified-schedule-confirm-btn:not(:disabled):hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.8) !important;
+}
+
+/* 성공 메시지 애니메이션 */
+#schedule-success-message {
+  animation: bounceIn 0.5s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+

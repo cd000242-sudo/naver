@@ -1,0 +1,651 @@
+<!-- 새로운 통합 탭 디자인 (초보자 친화적) -->
+<div id="tab-unified-new" class="tab-panel" role="tabpanel">
+    <section class="form-section">
+        <!-- 헤더 -->
+        <div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; color: white;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚀 네이버 블로그 자동 발행</h1>
+            <p style="font-size: 1.1rem; opacity: 0.9;">3단계로 간편하게 블로그 포스팅을 완성하세요!</p>
+        </div>
+
+        <!-- STEP 1: 콘텐츠 생성 방법 선택 -->
+        <div style="background: white; border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">1</div>
+                <h2 style="font-size: 1.8rem; color: #333; margin: 0;">콘텐츠 생성 방법 선택</h2>
+            </div>
+
+            <!-- URL 입력 방식 -->
+            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1)); padding: 2rem; border-radius: 15px; margin-bottom: 1.5rem; border: 2px solid rgba(59, 130, 246, 0.3);">
+                <h3 style="font-size: 1.3rem; color: #333; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">🌐</span>
+                    <span>방법 1: URL로 글 생성하기</span>
+                </h3>
+                <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                    다른 블로그나 뉴스 기사의 URL을 입력하면 AI가 자동으로 분석해서 새로운 글을 작성합니다.
+                </p>
+
+                <div id="unified-url-fields-container" style="margin-bottom: 1rem;">
+                    <div class="url-field-item" style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="url" class="url-field-input unified-url-input" placeholder="https://blog.naver.com/..." style="flex: 1; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;" data-url-index="0">
+                        <button type="button" class="url-field-remove" style="display: none; padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">×</button>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <button type="button" id="unified-add-url-field-btn" style="padding: 0.75rem 1.5rem; background: white; color: #667eea; border: 2px solid #667eea; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.2s;">
+                        ➕ URL 추가
+                    </button>
+                </div>
+            </div>
+
+            <!-- 키워드/제목 입력 방식 -->
+            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(16, 185, 129, 0.3);">
+                <h3 style="font-size: 1.3rem; color: #333; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">✏️</span>
+                    <span>방법 2: 키워드/제목으로 글 생성하기</span>
+                </h3>
+                <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                    원하는 주제의 키워드나 제목을 입력하면 AI가 처음부터 새로운 글을 작성합니다.
+                </p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">📝 제목</label>
+                        <input type="text" id="unified-title" placeholder="예: 다이어트 성공 비법" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🏷️ 키워드</label>
+                        <input type="text" id="unified-keywords" placeholder="예: 건강, 다이어트, 운동" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI 글 생성 버튼 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+                <button type="button" id="generate-from-url-btn" style="padding: 1.5rem; background: linear-gradient(135deg, #3b82f6, #06b6d4); color: white; border: none; border-radius: 15px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌐</div>
+                    <div>URL로 AI 글 생성하기</div>
+                </button>
+
+                <button type="button" id="generate-manual-btn" style="padding: 1.5rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 15px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">✏️</div>
+                    <div>키워드/제목으로 AI 글 생성하기</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 2: 생성된 콘텐츠 확인 및 수정 -->
+        <div id="step2-container" style="background: white; border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; opacity: 0; transition: all 0.5s;">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">2</div>
+                <h2 style="font-size: 1.8rem; color: #333; margin: 0;">생성된 콘텐츠 확인</h2>
+            </div>
+
+            <!-- 풀오토 모드: 읽기 전용 미리보기 -->
+            <div id="fullauto-preview" style="display: none;">
+                <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(59, 130, 246, 0.3); margin-bottom: 2rem;">
+                    <h3 style="color: #333; margin-bottom: 1rem;">📝 제목</h3>
+                    <div id="fullauto-title-preview" style="background: white; padding: 1rem; border-radius: 10px; font-size: 1.1rem; font-weight: 600; color: #333;"></div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(16, 185, 129, 0.3); margin-bottom: 2rem;">
+                    <h3 style="color: #333; margin-bottom: 1rem;">📄 본문 미리보기</h3>
+                    <div id="fullauto-content-preview" style="background: white; padding: 1.5rem; border-radius: 10px; max-height: 200px; overflow-y: auto; line-height: 1.8; color: #333;"></div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(245, 158, 11, 0.3); margin-bottom: 2rem;">
+                    <h3 style="color: #333; margin-bottom: 1rem;">🏷️ 해시태그</h3>
+                    <div id="fullauto-hashtags-preview" style="background: white; padding: 1rem; border-radius: 10px; color: #667eea; font-weight: 600;"></div>
+                </div>
+
+                <!-- 이미지 + 프롬프트 미리보기 -->
+                <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(139, 92, 246, 0.3);">
+                    <h3 style="color: #333; margin-bottom: 1.5rem;">🖼️ 생성될 이미지 미리보기</h3>
+                    <div id="fullauto-images-preview" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <!-- 이미지와 프롬프트가 교차로 표시됩니다 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 반자동 모드: 수정 가능한 필드 -->
+            <div id="semiauto-fields" style="display: none;">
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.75rem; color: #333; font-weight: 600; font-size: 1.1rem;">📝 제목 (수정 가능)</label>
+                    <input type="text" id="semiauto-title" placeholder="AI가 생성한 제목을 수정할 수 있습니다" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1.1rem;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.75rem; color: #333; font-weight: 600; font-size: 1.1rem;">📄 본문 (수정 가능)</label>
+                    <textarea id="semiauto-content" rows="15" placeholder="AI가 생성한 본문을 수정할 수 있습니다" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem; line-height: 1.8;"></textarea>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.75rem; color: #333; font-weight: 600; font-size: 1.1rem;">🏷️ 해시태그 (수정 가능)</label>
+                    <input type="text" id="semiauto-hashtags" placeholder="AI가 생성한 해시태그를 수정할 수 있습니다" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                </div>
+
+                <!-- 이미지 선택 영역 -->
+                <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(139, 92, 246, 0.3);">
+                    <h3 style="color: #333; margin-bottom: 1.5rem; font-size: 1.2rem;">🖼️ 이미지 선택 및 수정</h3>
+                    
+                    <div id="semiauto-images-container">
+                        <!-- 이미지 선택 UI가 여기에 표시됩니다 -->
+                    </div>
+
+                    <button type="button" id="semiauto-regenerate-images-btn" style="padding: 1rem 2rem; background: linear-gradient(135deg, #8b5cf6, #a855f7); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; margin-top: 1rem;">
+                        🔄 이미지 다시 생성하기
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: 발행 설정 및 실행 -->
+        <div style="background: white; border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">3</div>
+                <h2 style="font-size: 1.8rem; color: #333; margin: 0;">발행 모드 선택</h2>
+            </div>
+
+            <!-- 설정 옵션 -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                <!-- AI 엔진 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🤖 AI 엔진</label>
+                    <select id="unified-generator" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                        <option value="gemini">Gemini (Google)</option>
+                        <option value="openai">OpenAI (GPT)</option>
+                        <option value="claude">Claude</option>
+                    </select>
+                </div>
+
+                <!-- 이미지 소스 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🎨 이미지 소스</label>
+                    <select id="unified-image-source" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                        <option value="dalle">DALL-E (AI 생성)</option>
+                        <option value="pexels">Pexels (무료 사진)</option>
+                        <option value="naver">네이버 이미지 검색</option>
+                    </select>
+                </div>
+
+                <!-- 글 톤 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🎭 글 톤</label>
+                    <select id="unified-tone-style" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                        <option value="professional">전문적</option>
+                        <option value="friendly">친근함</option>
+                        <option value="casual">일상적</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 발행 버튼 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                <button type="button" id="full-auto-publish-btn" style="padding: 2rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 20px; font-size: 1.3rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚡</div>
+                    <div>풀오토 발행</div>
+                    <div style="font-size: 0.8rem; opacity: 0.9; margin-top: 0.5rem;">한 번에 자동으로 모든 작업 완료</div>
+                </button>
+
+                <button type="button" id="semi-auto-publish-btn" style="padding: 2rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 20px; font-size: 1.3rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔧</div>
+                    <div>반자동 발행</div>
+                    <div style="font-size: 0.8rem; opacity: 0.9; margin-top: 0.5rem;">수정 후 발행</div>
+                </button>
+            </div>
+
+            <!-- 도움말 -->
+            <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 15px; margin-top: 2rem; border-left: 4px solid #3b82f6;">
+                <h4 style="color: #333; margin-bottom: 1rem; font-size: 1.1rem;">💡 어떤 모드를 선택해야 하나요?</h4>
+                <ul style="color: #666; line-height: 2; margin: 0; padding-left: 1.5rem;">
+                    <li><strong>풀오토 발행:</strong> 귀찮은 것 없이 한 번에 자동으로 완성 (추천!)</li>
+                    <li><strong>반자동 발행:</strong> 제목, 본문, 이미지를 직접 수정하고 싶을 때</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 로그 & 진행상황 -->
+        <section style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <h3 style="color: #333; margin-bottom: 1.5rem; font-size: 1.3rem;">📊 진행 상황</h3>
+            <div id="unified-log-output" class="log-output" style="background: #f8f9fa; border-radius: 10px; padding: 1.5rem; min-height: 200px; max-height: 400px; overflow-y: auto;"></div>
+        </section>
+    </section>
+</div>
+
+<div id="tab-unified-new" class="tab-panel" role="tabpanel">
+    <section class="form-section">
+        <!-- 헤더 -->
+        <div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; color: white;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚀 네이버 블로그 자동 발행</h1>
+            <p style="font-size: 1.1rem; opacity: 0.9;">3단계로 간편하게 블로그 포스팅을 완성하세요!</p>
+        </div>
+
+        <!-- STEP 1: 콘텐츠 생성 방법 선택 -->
+        <div style="background: white; border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">1</div>
+                <h2 style="font-size: 1.8rem; color: #333; margin: 0;">콘텐츠 생성 방법 선택</h2>
+            </div>
+
+            <!-- URL 입력 방식 -->
+            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1)); padding: 2rem; border-radius: 15px; margin-bottom: 1.5rem; border: 2px solid rgba(59, 130, 246, 0.3);">
+                <h3 style="font-size: 1.3rem; color: #333; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">🌐</span>
+                    <span>방법 1: URL로 글 생성하기</span>
+                </h3>
+                <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                    다른 블로그나 뉴스 기사의 URL을 입력하면 AI가 자동으로 분석해서 새로운 글을 작성합니다.
+                </p>
+
+                <div id="unified-url-fields-container" style="margin-bottom: 1rem;">
+                    <div class="url-field-item" style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="url" class="url-field-input unified-url-input" placeholder="https://blog.naver.com/..." style="flex: 1; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;" data-url-index="0">
+                        <button type="button" class="url-field-remove" style="display: none; padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">×</button>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <button type="button" id="unified-add-url-field-btn" style="padding: 0.75rem 1.5rem; background: white; color: #667eea; border: 2px solid #667eea; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.2s;">
+                        ➕ URL 추가
+                    </button>
+                </div>
+            </div>
+
+            <!-- 키워드/제목 입력 방식 -->
+            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(16, 185, 129, 0.3);">
+                <h3 style="font-size: 1.3rem; color: #333; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">✏️</span>
+                    <span>방법 2: 키워드/제목으로 글 생성하기</span>
+                </h3>
+                <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                    원하는 주제의 키워드나 제목을 입력하면 AI가 처음부터 새로운 글을 작성합니다.
+                </p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">📝 제목</label>
+                        <input type="text" id="unified-title" placeholder="예: 다이어트 성공 비법" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🏷️ 키워드</label>
+                        <input type="text" id="unified-keywords" placeholder="예: 건강, 다이어트, 운동" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI 글 생성 버튼 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+                <button type="button" id="generate-from-url-btn" style="padding: 1.5rem; background: linear-gradient(135deg, #3b82f6, #06b6d4); color: white; border: none; border-radius: 15px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌐</div>
+                    <div>URL로 AI 글 생성하기</div>
+                </button>
+
+                <button type="button" id="generate-manual-btn" style="padding: 1.5rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 15px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">✏️</div>
+                    <div>키워드/제목으로 AI 글 생성하기</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 2: 생성된 콘텐츠 확인 및 수정 -->
+        <div id="step2-container" style="background: white; border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; opacity: 0; transition: all 0.5s;">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">2</div>
+                <h2 style="font-size: 1.8rem; color: #333; margin: 0;">생성된 콘텐츠 확인</h2>
+            </div>
+
+            <!-- 풀오토 모드: 읽기 전용 미리보기 -->
+            <div id="fullauto-preview" style="display: none;">
+                <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(59, 130, 246, 0.3); margin-bottom: 2rem;">
+                    <h3 style="color: #333; margin-bottom: 1rem;">📝 제목</h3>
+                    <div id="fullauto-title-preview" style="background: white; padding: 1rem; border-radius: 10px; font-size: 1.1rem; font-weight: 600; color: #333;"></div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(16, 185, 129, 0.3); margin-bottom: 2rem;">
+                    <h3 style="color: #333; margin-bottom: 1rem;">📄 본문 미리보기</h3>
+                    <div id="fullauto-content-preview" style="background: white; padding: 1.5rem; border-radius: 10px; max-height: 200px; overflow-y: auto; line-height: 1.8; color: #333;"></div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(245, 158, 11, 0.3); margin-bottom: 2rem;">
+                    <h3 style="color: #333; margin-bottom: 1rem;">🏷️ 해시태그</h3>
+                    <div id="fullauto-hashtags-preview" style="background: white; padding: 1rem; border-radius: 10px; color: #667eea; font-weight: 600;"></div>
+                </div>
+
+                <!-- 이미지 + 프롬프트 미리보기 -->
+                <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(139, 92, 246, 0.3);">
+                    <h3 style="color: #333; margin-bottom: 1.5rem;">🖼️ 생성될 이미지 미리보기</h3>
+                    <div id="fullauto-images-preview" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <!-- 이미지와 프롬프트가 교차로 표시됩니다 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 반자동 모드: 수정 가능한 필드 -->
+            <div id="semiauto-fields" style="display: none;">
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.75rem; color: #333; font-weight: 600; font-size: 1.1rem;">📝 제목 (수정 가능)</label>
+                    <input type="text" id="semiauto-title" placeholder="AI가 생성한 제목을 수정할 수 있습니다" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1.1rem;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.75rem; color: #333; font-weight: 600; font-size: 1.1rem;">📄 본문 (수정 가능)</label>
+                    <textarea id="semiauto-content" rows="15" placeholder="AI가 생성한 본문을 수정할 수 있습니다" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem; line-height: 1.8;"></textarea>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.75rem; color: #333; font-weight: 600; font-size: 1.1rem;">🏷️ 해시태그 (수정 가능)</label>
+                    <input type="text" id="semiauto-hashtags" placeholder="AI가 생성한 해시태그를 수정할 수 있습니다" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                </div>
+
+                <!-- 이미지 선택 영역 -->
+                <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(139, 92, 246, 0.3);">
+                    <h3 style="color: #333; margin-bottom: 1.5rem; font-size: 1.2rem;">🖼️ 이미지 선택 및 수정</h3>
+                    
+                    <div id="semiauto-images-container">
+                        <!-- 이미지 선택 UI가 여기에 표시됩니다 -->
+                    </div>
+
+                    <button type="button" id="semiauto-regenerate-images-btn" style="padding: 1rem 2rem; background: linear-gradient(135deg, #8b5cf6, #a855f7); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; margin-top: 1rem;">
+                        🔄 이미지 다시 생성하기
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: 발행 설정 및 실행 -->
+        <div style="background: white; border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">3</div>
+                <h2 style="font-size: 1.8rem; color: #333; margin: 0;">발행 모드 선택</h2>
+            </div>
+
+            <!-- 설정 옵션 -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                <!-- AI 엔진 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🤖 AI 엔진</label>
+                    <select id="unified-generator" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                        <option value="gemini">Gemini (Google)</option>
+                        <option value="openai">OpenAI (GPT)</option>
+                        <option value="claude">Claude</option>
+                    </select>
+                </div>
+
+                <!-- 이미지 소스 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🎨 이미지 소스</label>
+                    <select id="unified-image-source" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                        <option value="dalle">DALL-E (AI 생성)</option>
+                        <option value="pexels">Pexels (무료 사진)</option>
+                        <option value="naver">네이버 이미지 검색</option>
+                    </select>
+                </div>
+
+                <!-- 글 톤 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🎭 글 톤</label>
+                    <select id="unified-tone-style" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                        <option value="professional">전문적</option>
+                        <option value="friendly">친근함</option>
+                        <option value="casual">일상적</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 발행 버튼 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                <button type="button" id="full-auto-publish-btn" style="padding: 2rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 20px; font-size: 1.3rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚡</div>
+                    <div>풀오토 발행</div>
+                    <div style="font-size: 0.8rem; opacity: 0.9; margin-top: 0.5rem;">한 번에 자동으로 모든 작업 완료</div>
+                </button>
+
+                <button type="button" id="semi-auto-publish-btn" style="padding: 2rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 20px; font-size: 1.3rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔧</div>
+                    <div>반자동 발행</div>
+                    <div style="font-size: 0.8rem; opacity: 0.9; margin-top: 0.5rem;">수정 후 발행</div>
+                </button>
+            </div>
+
+            <!-- 도움말 -->
+            <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 15px; margin-top: 2rem; border-left: 4px solid #3b82f6;">
+                <h4 style="color: #333; margin-bottom: 1rem; font-size: 1.1rem;">💡 어떤 모드를 선택해야 하나요?</h4>
+                <ul style="color: #666; line-height: 2; margin: 0; padding-left: 1.5rem;">
+                    <li><strong>풀오토 발행:</strong> 귀찮은 것 없이 한 번에 자동으로 완성 (추천!)</li>
+                    <li><strong>반자동 발행:</strong> 제목, 본문, 이미지를 직접 수정하고 싶을 때</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 로그 & 진행상황 -->
+        <section style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <h3 style="color: #333; margin-bottom: 1.5rem; font-size: 1.3rem;">📊 진행 상황</h3>
+            <div id="unified-log-output" class="log-output" style="background: #f8f9fa; border-radius: 10px; padding: 1.5rem; min-height: 200px; max-height: 400px; overflow-y: auto;"></div>
+        </section>
+    </section>
+</div>
+
+<div id="tab-unified-new" class="tab-panel" role="tabpanel">
+    <section class="form-section">
+        <!-- 헤더 -->
+        <div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; color: white;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚀 네이버 블로그 자동 발행</h1>
+            <p style="font-size: 1.1rem; opacity: 0.9;">3단계로 간편하게 블로그 포스팅을 완성하세요!</p>
+        </div>
+
+        <!-- STEP 1: 콘텐츠 생성 방법 선택 -->
+        <div style="background: white; border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">1</div>
+                <h2 style="font-size: 1.8rem; color: #333; margin: 0;">콘텐츠 생성 방법 선택</h2>
+            </div>
+
+            <!-- URL 입력 방식 -->
+            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1)); padding: 2rem; border-radius: 15px; margin-bottom: 1.5rem; border: 2px solid rgba(59, 130, 246, 0.3);">
+                <h3 style="font-size: 1.3rem; color: #333; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">🌐</span>
+                    <span>방법 1: URL로 글 생성하기</span>
+                </h3>
+                <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                    다른 블로그나 뉴스 기사의 URL을 입력하면 AI가 자동으로 분석해서 새로운 글을 작성합니다.
+                </p>
+
+                <div id="unified-url-fields-container" style="margin-bottom: 1rem;">
+                    <div class="url-field-item" style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="url" class="url-field-input unified-url-input" placeholder="https://blog.naver.com/..." style="flex: 1; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;" data-url-index="0">
+                        <button type="button" class="url-field-remove" style="display: none; padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">×</button>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <button type="button" id="unified-add-url-field-btn" style="padding: 0.75rem 1.5rem; background: white; color: #667eea; border: 2px solid #667eea; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.2s;">
+                        ➕ URL 추가
+                    </button>
+                </div>
+            </div>
+
+            <!-- 키워드/제목 입력 방식 -->
+            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(16, 185, 129, 0.3);">
+                <h3 style="font-size: 1.3rem; color: #333; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">✏️</span>
+                    <span>방법 2: 키워드/제목으로 글 생성하기</span>
+                </h3>
+                <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                    원하는 주제의 키워드나 제목을 입력하면 AI가 처음부터 새로운 글을 작성합니다.
+                </p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">📝 제목</label>
+                        <input type="text" id="unified-title" placeholder="예: 다이어트 성공 비법" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🏷️ 키워드</label>
+                        <input type="text" id="unified-keywords" placeholder="예: 건강, 다이어트, 운동" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI 글 생성 버튼 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+                <button type="button" id="generate-from-url-btn" style="padding: 1.5rem; background: linear-gradient(135deg, #3b82f6, #06b6d4); color: white; border: none; border-radius: 15px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌐</div>
+                    <div>URL로 AI 글 생성하기</div>
+                </button>
+
+                <button type="button" id="generate-manual-btn" style="padding: 1.5rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 15px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">✏️</div>
+                    <div>키워드/제목으로 AI 글 생성하기</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 2: 생성된 콘텐츠 확인 및 수정 -->
+        <div id="step2-container" style="background: white; border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; opacity: 0; transition: all 0.5s;">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">2</div>
+                <h2 style="font-size: 1.8rem; color: #333; margin: 0;">생성된 콘텐츠 확인</h2>
+            </div>
+
+            <!-- 풀오토 모드: 읽기 전용 미리보기 -->
+            <div id="fullauto-preview" style="display: none;">
+                <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(59, 130, 246, 0.3); margin-bottom: 2rem;">
+                    <h3 style="color: #333; margin-bottom: 1rem;">📝 제목</h3>
+                    <div id="fullauto-title-preview" style="background: white; padding: 1rem; border-radius: 10px; font-size: 1.1rem; font-weight: 600; color: #333;"></div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(16, 185, 129, 0.3); margin-bottom: 2rem;">
+                    <h3 style="color: #333; margin-bottom: 1rem;">📄 본문 미리보기</h3>
+                    <div id="fullauto-content-preview" style="background: white; padding: 1.5rem; border-radius: 10px; max-height: 200px; overflow-y: auto; line-height: 1.8; color: #333;"></div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(245, 158, 11, 0.3); margin-bottom: 2rem;">
+                    <h3 style="color: #333; margin-bottom: 1rem;">🏷️ 해시태그</h3>
+                    <div id="fullauto-hashtags-preview" style="background: white; padding: 1rem; border-radius: 10px; color: #667eea; font-weight: 600;"></div>
+                </div>
+
+                <!-- 이미지 + 프롬프트 미리보기 -->
+                <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(139, 92, 246, 0.3);">
+                    <h3 style="color: #333; margin-bottom: 1.5rem;">🖼️ 생성될 이미지 미리보기</h3>
+                    <div id="fullauto-images-preview" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <!-- 이미지와 프롬프트가 교차로 표시됩니다 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 반자동 모드: 수정 가능한 필드 -->
+            <div id="semiauto-fields" style="display: none;">
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.75rem; color: #333; font-weight: 600; font-size: 1.1rem;">📝 제목 (수정 가능)</label>
+                    <input type="text" id="semiauto-title" placeholder="AI가 생성한 제목을 수정할 수 있습니다" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1.1rem;">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.75rem; color: #333; font-weight: 600; font-size: 1.1rem;">📄 본문 (수정 가능)</label>
+                    <textarea id="semiauto-content" rows="15" placeholder="AI가 생성한 본문을 수정할 수 있습니다" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem; line-height: 1.8;"></textarea>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.75rem; color: #333; font-weight: 600; font-size: 1.1rem;">🏷️ 해시태그 (수정 가능)</label>
+                    <input type="text" id="semiauto-hashtags" placeholder="AI가 생성한 해시태그를 수정할 수 있습니다" style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                </div>
+
+                <!-- 이미지 선택 영역 -->
+                <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.1)); padding: 2rem; border-radius: 15px; border: 2px solid rgba(139, 92, 246, 0.3);">
+                    <h3 style="color: #333; margin-bottom: 1.5rem; font-size: 1.2rem;">🖼️ 이미지 선택 및 수정</h3>
+                    
+                    <div id="semiauto-images-container">
+                        <!-- 이미지 선택 UI가 여기에 표시됩니다 -->
+                    </div>
+
+                    <button type="button" id="semiauto-regenerate-images-btn" style="padding: 1rem 2rem; background: linear-gradient(135deg, #8b5cf6, #a855f7); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; margin-top: 1rem;">
+                        🔄 이미지 다시 생성하기
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: 발행 설정 및 실행 -->
+        <div style="background: white; border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">3</div>
+                <h2 style="font-size: 1.8rem; color: #333; margin: 0;">발행 모드 선택</h2>
+            </div>
+
+            <!-- 설정 옵션 -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                <!-- AI 엔진 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🤖 AI 엔진</label>
+                    <select id="unified-generator" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                        <option value="gemini">Gemini (Google)</option>
+                        <option value="openai">OpenAI (GPT)</option>
+                        <option value="claude">Claude</option>
+                    </select>
+                </div>
+
+                <!-- 이미지 소스 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🎨 이미지 소스</label>
+                    <select id="unified-image-source" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                        <option value="dalle">DALL-E (AI 생성)</option>
+                        <option value="pexels">Pexels (무료 사진)</option>
+                        <option value="naver">네이버 이미지 검색</option>
+                    </select>
+                </div>
+
+                <!-- 글 톤 -->
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: 600;">🎭 글 톤</label>
+                    <select id="unified-tone-style" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem;">
+                        <option value="professional">전문적</option>
+                        <option value="friendly">친근함</option>
+                        <option value="casual">일상적</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 발행 버튼 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                <button type="button" id="full-auto-publish-btn" style="padding: 2rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 20px; font-size: 1.3rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚡</div>
+                    <div>풀오토 발행</div>
+                    <div style="font-size: 0.8rem; opacity: 0.9; margin-top: 0.5rem;">한 번에 자동으로 모든 작업 완료</div>
+                </button>
+
+                <button type="button" id="semi-auto-publish-btn" style="padding: 2rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 20px; font-size: 1.3rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔧</div>
+                    <div>반자동 발행</div>
+                    <div style="font-size: 0.8rem; opacity: 0.9; margin-top: 0.5rem;">수정 후 발행</div>
+                </button>
+            </div>
+
+            <!-- 도움말 -->
+            <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 15px; margin-top: 2rem; border-left: 4px solid #3b82f6;">
+                <h4 style="color: #333; margin-bottom: 1rem; font-size: 1.1rem;">💡 어떤 모드를 선택해야 하나요?</h4>
+                <ul style="color: #666; line-height: 2; margin: 0; padding-left: 1.5rem;">
+                    <li><strong>풀오토 발행:</strong> 귀찮은 것 없이 한 번에 자동으로 완성 (추천!)</li>
+                    <li><strong>반자동 발행:</strong> 제목, 본문, 이미지를 직접 수정하고 싶을 때</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 로그 & 진행상황 -->
+        <section style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <h3 style="color: #333; margin-bottom: 1.5rem; font-size: 1.3rem;">📊 진행 상황</h3>
+            <div id="unified-log-output" class="log-output" style="background: #f8f9fa; border-radius: 10px; padding: 1.5rem; min-height: 200px; max-height: 400px; overflow-y: auto;"></div>
+        </section>
+    </section>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+﻿환경변수 확인:
+NAVER_CLIENT_ID: 없음
+
+============================================================
+실제 API 테스트: 브랜드스토어 제품명 추출
+URL: https://brand.naver.com/catchwell/products/11705732817
+============================================================
+[AffiliateCrawler] 🔗 원본 URL: https://brand.naver.com/catchwell/products/11705732817
+[AffiliateCrawler] 🎯 상품 ID 추출: 11705732817 → 직접 API 호출
+[AffiliateCrawler] 🎯 브랜드스토어 API: catchwell
+[AffiliateCrawler] ⏳ 초기 지연: 869ms
+[AffiliateCrawler] ⚠️ API 호출 실패 (1/3): 429 - Request failed with status code 429
+[AffiliateCrawler] ⏳ 2번째 재시도 (6.4초 후)...
+[AffiliateCrawler] ⚠️ API 호출 실패 (2/3): 429 - Request failed with status code 429
+[AffiliateCrawler] ⏳ 3번째 재시도 (17.8초 후)...
+[AffiliateCrawler] ⚠️ API 호출 실패 (3/3): 429 - Request failed with status code 429
+[AffiliateCrawler] ❌ API 호출 실패 → Puppeteer 폴백 시도...
+[AffiliateCrawler] 🌐 Puppeteer 크롤링: https://m.brand.naver.com/catchwell/products/11705732817
+[AffiliateCrawler] ⚠️ 직접 API 실패 → 검색 API 폴백
+[AffiliateCrawler] ⚠️ 모든 방법 실패, 기본값으로 반환
+
+결과:
+----------------------------------------
+제품명: 상품명을 불러올 수 없습니다
+가격: 0
+설명 길이: 0 자
+메인 이미지: 없음
+
+검증:
+- 제품명 패턴 있음: ❌
+- 슬로건 패턴 (문제): ✅ 없음
+
+⚠️ API 호출 실패 (Rate Limit?)

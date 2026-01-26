@@ -1,0 +1,99 @@
+
+> better-life-naver@1.0.1 dist:win
+> npm run build && node scripts/reset-config-for-pack.js && electron-builder --win && node scripts/restore-after-pack.js && node scripts/create-archives.js
+
+
+> better-life-naver@1.0.1 build
+> tsc && node scripts/copy-static.mjs && node scripts/optimize-console.js
+
+📦 Copied prompts folder to dist/prompts
+✅ Updated Content-Security-Policy meta tag from public/index.html
+📦 Copied renderer bundle to dist/public/renderer.js (sanitized for browser)
+📦 Copied static assets to dist/public
+✅ console.log 최적화 완료 (중요한 로그는 유지)
+   원본 크기: 1609.42 KB
+   최적화 후: 1600.80 KB
+   절약: 8.62 KB
+   ✅ 배포 버전에서도 디버깅 로그 확인 가능
+🔧 배포용 설정 초기화 시작...
+📂 초기화 대상 경로:
+  - dist: C:\Users\박성현\Desktop\리더 네이버 자동화\dist\settings.json
+  - ⚠️ dev userData (초기화 안함): C:\Users\박성현\AppData\Roaming\better-life-naver\settings.json
+  - packaged userData: C:\Users\박성현\AppData\Roaming\Better Life Naver\settings.json
+  - packaged userData dir (wipe): C:\Users\박성현\AppData\Roaming\Better Life Naver
+  - packaged .env (sanitize): C:\Users\박성현\Desktop\리더 네이버 자동화\.env
+
+⏭️ 패키지 앱 userData 폴더 없음: C:\Users\박성현\AppData\Roaming\Better Life Naver
+
+✅ .env 백업 후 초기화 완료: C:\Users\박성현\Desktop\리더 네이버 자동화\.env.pre-pack-backup
+
+🔍 처리 중: C:\Users\박성현\Desktop\리더 네이버 자동화\dist\settings.json
+  - 기존 API 키 존재: { gemini: false, openai: false, claude: false, pexels: false }
+  ✅ 모든 민감 정보 초기화 완료
+
+⏭️ 파일 없음: C:\Users\박성현\AppData\Roaming\Better Life Naver\settings.json
+✅ 배포용 설정 파일 생성됨 - 모든 민감 정보 초기화
+✅ 배포용 설정 파일 생성 완료
+
+📝 renderer.ts의 하드코딩된 API 키 초기화 중...
+💾 renderer.ts 백업 생성됨: C:\Users\박성현\Desktop\리더 네이버 자동화\src\renderer\renderer.ts.pre-pack-backup
+✅ renderer.ts의 API 키가 초기화되었습니다.
+
+📝 test-apis.js 초기화 중...
+✅ test-apis.js의 API 키가 초기화되었습니다.
+
+============================================================
+🎉 배포 준비 완료! 민감한 정보가 모두 초기화되었습니다.
+============================================================
+
+⚠️ 배포 후 복원 방법:
+   1. git checkout src/renderer/renderer.ts
+   2. 또는 백업 파일 사용: renderer.ts.pre-pack-backup
+
+  • electron-builder  version=26.0.12 os=10.0.26100
+  • loaded configuration  file=package.json ("build" field)
+  • author is missed in the package.json  appPackageFile=C:\Users\박성현\Desktop\리더 네이버 자동화\package.json
+  • skipped dependencies rebuild  reason=npmRebuild is set to false
+  • packaging       platform=win32 arch=x64 electron=31.7.7 appOutDir=release\win-unpacked
+  • updating asar integrity executable resource  executablePath=release\win-unpacked\Better Life Naver.exe
+  • signing with signtool.exe  path=release\win-unpacked\Better Life Naver.exe
+  • signing with signtool.exe  path=release\win-unpacked\resources\app.asar.unpacked\node_modules\selenium-webdriver\bin\windows\selenium-manager.exe
+  • signing with signtool.exe  path=release\win-unpacked\resources\app.asar.unpacked\node_modules\rcedit\bin\rcedit-x64.exe
+  • signing with signtool.exe  path=release\win-unpacked\resources\app.asar.unpacked\node_modules\rcedit\bin\rcedit.exe
+  • signing with signtool.exe  path=release\win-unpacked\resources\app.asar.unpacked\node_modules\ffmpeg-static\ffmpeg.exe
+  • signing with signtool.exe  path=release\win-unpacked\resources\app.asar.unpacked\node_modules\app-builder-bin\win\x64\app-builder.exe
+  • signing with signtool.exe  path=release\win-unpacked\resources\app.asar.unpacked\node_modules\app-builder-bin\win\ia32\app-builder.exe
+  • signing with signtool.exe  path=release\win-unpacked\resources\app.asar.unpacked\node_modules\app-builder-bin\win\arm64\app-builder.exe
+  • building        target=nsis file=release\Better Life Naver Setup 1.0.1.exe archs=x64 oneClick=false perMachine=false
+  • signing with signtool.exe  path=release\win-unpacked\resources\elevate.exe
+  • signing with signtool.exe  path=release\__uninstaller-nsis-better-life-naver.exe
+  • signing with signtool.exe  path=release\Better Life Naver Setup 1.0.1.exe
+  • building block map  blockMapFile=release\Better Life Naver Setup 1.0.1.exe.blockmap
+  • building        target=portable file=release\Better Life Naver 1.0.1.exe archs=x64
+  • signing with signtool.exe  path=release\Better Life Naver 1.0.1.exe
+🔄 개발 환경 복원 시작...
+
+📝 renderer.ts 복원 중...
+✅ renderer.ts가 백업에서 복원되었습니다.
+🗑️ 백업 파일 삭제됨
+
+📝 .env 복원 중...
+✅ .env가 백업에서 복원되었습니다.
+
+============================================================
+✅ 개발 환경 복원 완료!
+============================================================
+
+💡 이제 다시 개발을 시작할 수 있습니다:
+   npm start
+
+📦 압축 파일 생성 중...
+📦 Setup 파일 압축 중: Better Life Naver Setup 1.0.1.exe → Better-Life-Naver-Setup-1.0.1_20260105.zip
+✅ Setup 압축 완료: Better-Life-Naver-Setup-1.0.1_20260105.zip
+📦 Portable 파일 압축 중: Better Life Naver 1.0.1.exe → Better-Life-Naver-Portable-1.0.1_20260105.zip
+✅ Portable 압축 완료: Better-Life-Naver-Portable-1.0.1_20260105.zip
+📦 Portable 폴더 압축 중: win-unpacked → Better-Life-Naver-Portable-Folder-1.0.1_20260105.zip
+✅ Portable 폴더 압축 완료: Better-Life-Naver-Portable-Folder-1.0.1_20260105.zip
+
+✅ 모든 압축 파일 생성 완료!
+📁 위치: C:\Users\박성현\Desktop\리더 네이버 자동화\release
