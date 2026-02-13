@@ -674,6 +674,16 @@
       font-weight: 500;
     }
 
+    /* ✅ [2026-02-05] 버전 표시 스타일 */
+    .version-display {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 11px;
+      margin-top: 12px;
+      font-weight: 500;
+      opacity: 0.7;
+    }
+
     /* 관리자 제어 스타일 */
     .admin-trigger {
       position: fixed;
@@ -770,6 +780,8 @@
     <div class="login-header">
       <h1>🔐 라이선스 인증</h1>
       <p>앱을 사용하려면 인증이 필요합니다</p>
+      <!-- ✅ [2026-02-05] 버전 표시 추가 -->
+      <div id="app-version-display" class="version-display">버전 확인 중...</div>
     </div>
 
     <!-- 성공 모달 구성 -->
@@ -787,6 +799,9 @@
         <p class="redirect-notice">잠시 후 메인 화면으로 이동합니다...</p>
       </div>
     </div>
+
+    <button type="button" id="free-use-button" class="free-use-button" style="margin-top: 0; margin-bottom: 18px;">👑 매일
+      발행 2회 무료 사용하기</button>
 
     <div id="error-message" class="error-message"></div>
 
@@ -866,7 +881,7 @@
         </div>
       </div>
     </div>
-    <button type="button" id="free-use-button" class="free-use-button">👑 무료로 체험해보기</button>
+
 
     <button type="button" id="price-button" class="price-button">💬 구매 문의하기</button>
 
@@ -964,6 +979,19 @@
         }
       } catch (error) {
         console.error('기기 ID 로드 실패:', error);
+      }
+    }
+
+    // ✅ [2026-02-05] 앱 버전 표시
+    async function loadAppVersion() {
+      try {
+        const version = await ipcRenderer.invoke('app:getVersion');
+        const versionEl = document.getElementById('app-version-display');
+        if (versionEl && version) {
+          versionEl.textContent = `v${version}`;
+        }
+      } catch (error) {
+        console.error('버전 로드 실패:', error);
       }
     }
 
@@ -1758,6 +1786,7 @@
     // 초기화 (초기 인증창을 먼저 표시, 자동 로그인 하지 않음)
     async function initialize() {
       await loadDeviceId();
+      await loadAppVersion(); // ✅ [2026-02-05] 버전 표시
       await loadSavedCredentials();
 
       // ✅ 무료로 체험하기 버튼 활성화 여부 체크

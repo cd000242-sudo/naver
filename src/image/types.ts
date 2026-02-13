@@ -1,4 +1,5 @@
-export type ImageProvider = 'dalle' | 'pexels' | 'pollinations' | 'stability' | 'naver' | 'loremflickr' | 'picsum' | 'placeholder' | 'nano-banana-pro' | 'nano-banana-pro-fallback' | 'imagen4' | 'imagen4-fallback' | 'prodia' | 'falai' | 'collected-image' | 'collected-image-with-text';
+// ✅ [2026-02-11] DALL-E 3, Pexels, Imagen4 제거 (미사용 엔진 정리)
+export type ImageProvider = 'pollinations' | 'stability' | 'naver' | 'loremflickr' | 'picsum' | 'placeholder' | 'nano-banana-pro' | 'nano-banana-pro-fallback' | 'prodia' | 'falai' | 'deepinfra' | 'collected-image' | 'collected-image-with-text';
 
 export interface ImageRequestItem {
   heading: string;
@@ -25,7 +26,10 @@ export interface GenerateImagesOptions {
   referenceImagePath?: string; // ✅ 전역 참조 이미지 경로 (모든 이미지에 공통 적용)
   isShoppingConnect?: boolean; // ✅ 쇼핑커넥트 모드 여부
   collectedImages?: string[]; // ✅ 수집된 이미지 URL 목록
+  crawledImages?: string[]; // ✅ [2026-01-28] 크롤링에서 수집된 이미지 URL (img2img 참조용)
   stopCheck?: () => boolean; // ✅ [100점 수정] 중지 여부 확인 콜백
+  thumbnailTextInclude?: boolean; // ✅ [2026-01-28] 1번 이미지에 텍스트 포함 여부
+  category?: string; // ✅ [2026-02-12] 전체 배치의 카테고리 (items에 개별 category 없을 때 폴백)
 }
 
 export interface GeneratedImage {
@@ -39,7 +43,7 @@ export interface GeneratedImage {
   originalIndex?: number; // ✅ [2026-01-24] 원래 items 배열의 인덱스 (필터링 후에도 위치 추적)
 }
 
-export const ALLOWED_PROVIDER: ImageProvider[] = ['dalle', 'pexels', 'pollinations', 'stability', 'naver', 'loremflickr', 'picsum', 'placeholder', 'nano-banana-pro', 'nano-banana-pro-fallback', 'imagen4', 'imagen4-fallback', 'prodia', 'falai', 'collected-image', 'collected-image-with-text'];
+export const ALLOWED_PROVIDER: ImageProvider[] = ['pollinations', 'stability', 'naver', 'loremflickr', 'picsum', 'placeholder', 'nano-banana-pro', 'nano-banana-pro-fallback', 'prodia', 'falai', 'deepinfra', 'collected-image', 'collected-image-with-text'];
 
 export function assertProvider(provider: string): asserts provider is ImageProvider {
   if (!ALLOWED_PROVIDER.includes(provider as ImageProvider)) {

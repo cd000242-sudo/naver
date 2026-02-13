@@ -59,6 +59,16 @@ export interface WebDocItem {
     description: string; // 문서 요약
 }
 
+// ✅ [2026-02-12] 이미지 검색 결과
+export interface ImageItem {
+    title: string;       // 이미지 타이틀
+    link: string;        // 원본 이미지 URL
+    thumbnail: string;   // 썸네일 이미지 URL
+    sizeheight: string;  // 이미지 높이 (px)
+    sizewidth: string;   // 이미지 너비 (px)
+}
+
+
 // 지식iN 검색 결과
 export interface KinItem {
     title: string;       // 질문 제목
@@ -207,6 +217,25 @@ export async function searchKin(
 ): Promise<NaverSearchResponse<KinItem>> {
     return callNaverSearchApi<KinItem>('kin', options, config);
 }
+
+/**
+ * ✅ [2026-02-12] 이미지 검색 - 소제목별 관련 이미지 수집용
+ * endpoint: /v1/search/image
+ */
+export async function searchImage(
+    options: SearchOptions & { filter?: 'all' | 'large' | 'medium' | 'small' },
+    config?: NaverSearchConfig
+): Promise<NaverSearchResponse<ImageItem>> {
+    // filter 옵션 처리 (이미지 크기 필터)
+    const baseOptions: SearchOptions = {
+        query: options.query,
+        display: options.display || 10,
+        start: options.start,
+        sort: options.sort,
+    };
+    return callNaverSearchApi<ImageItem>('image', baseOptions, config);
+}
+
 
 // ==================== 유틸리티 함수 ====================
 
@@ -519,13 +548,20 @@ export async function getNaverAutocomplete(keyword: string): Promise<string[]> {
 }
 
 /**
- * ✅ [2026-01-24] 쇼핑커넥트 SEO 제목 생성
- * - 제품명 + 네이버 자동완성 세부키워드 조합
- * - 예: "캐치웰 CX PRO 매직타워 N 자동먼지비움 가성비 추천"
+ * ✅ [2026-02-02] 100점 SEO 제목 생성 로직
+ * 
+ * 핵심 전략:
+ * 1. 제품명에서 핵심 키워드만 추출 (브랜드 + 제품라인)
+ * 2. 네이버 자동완성 세부키워드 활용 (실제 검색어)
+ * 3. 차별화 후킹 멘트 조합 (클릭 유도)
+ * 4. 자연스러운 문장 구성
+ * 
+ * 예: "삼성 비스포크 AI콤보 세탁기건조기 일체형 1등급 화이트 WD80F25CHW"
+ * → "삼성 비스포크 AI콤보 내돈내산 1년 사용 솔직후기 전기료 공개"
  */
 export async function generateShoppingConnectTitle(
     productName: string,
-    maxKeywords: number = 2
+    maxKeywords: number = 3
 ): Promise<string> {
     if (!productName || productName.trim().length < 3) {
         return productName || '';
@@ -533,115 +569,211 @@ export async function generateShoppingConnectTitle(
 
     const cleanName = productName.trim();
 
-    // 제품 카테고리별 최적화된 SEO 키워드
-    const categoryKeywords: Record<string, string[]> = {
-        '가습기': ['추천', '사용후기'],
-        '청소기': ['추천', '성능비교'],
-        '에어프라이어': ['추천', '요리레시피'],
-        '공기청정기': ['추천', '필터성능'],
-        '정수기': ['추천', '렌탈비교'],
-        '냉장고': ['추천', '에너지효율'],
-        '세탁기': ['추천', '소음비교'],
-        '건조기': ['추천', '건조성능'],
-        '식기세척기': ['추천', '설치후기'],
-        '전기밥솥': ['추천', '밥맛비교'],
-        '커피머신': ['추천', '캡슐호환'],
-        '노트북': ['추천', '스펙비교'],
-        '태블릿': ['추천', '가성비'],
-        '이어폰': ['추천', '음질비교'],
-        '스피커': ['추천', '음질'],
-        '카메라': ['추천', '화질비교'],
-        '화장품': ['추천', '피부타입별'],
-        '스킨케어': ['추천', '성분분석'],
-        '의자': ['추천', '허리편한'],
-        '책상': ['추천', '높이조절'],
-        '매트리스': ['추천', '숙면'],
-        '베개': ['추천', '경추'],
-        '조명': ['추천', '밝기조절'],
-    };
+    // ✅ 1. 핵심 제품명 추출 (모델번호, 색상, 등급 등 제거)
+    const coreProductName = extractCoreProductName(cleanName);
+    console.log(`[SEO] 핵심 제품명 추출: "${cleanName}" → "${coreProductName}"`);
 
-    // ✅ [2026-01-24] 제품명 간소화 함수
-    // 긴 제품명에서 핵심 부분만 추출 (브랜드 + 카테고리 + 모델명)
-    const simplifyProductName = (name: string): string => {
-        const nameLower = name.toLowerCase();
-        const words = name.split(/\s+/);
-
-        // 1. 카테고리 단어 찾기 (가습기, 청소기 등)
-        let categoryWord = '';
-        let categoryIndex = -1;
-        for (const [category] of Object.entries(categoryKeywords)) {
-            const idx = words.findIndex(w => w.includes(category));
-            if (idx !== -1) {
-                categoryWord = category;
-                categoryIndex = idx;
-                break;
-            }
-        }
-
-        // 2. 모델명 찾기 (영문+숫자 조합, 예: X50V, CX PRO)
-        const modelPattern = /^[A-Za-z0-9]+[-]?[A-Za-z0-9]*$/;
-        const modelWords = words.filter(w => modelPattern.test(w) && w.length >= 2);
-        const modelName = modelWords.slice(-2).join(' '); // 마지막 2개 모델명 사용
-
-        // 3. 브랜드명 추출 (첫 단어, 보통 브랜드)
-        const brandName = words[0] || '';
-
-        // 4. 간소화된 제품명 조합
-        if (categoryWord) {
-            // 브랜드 + 카테고리 + 모델명
-            const simplified = [brandName, categoryWord, modelName].filter(Boolean).join(' ');
-            // 너무 짧으면 원본에서 앞부분 사용
-            if (simplified.length < 10 && words.length > 3) {
-                return words.slice(0, 4).join(' ');
-            }
-            return simplified;
-        }
-
-        // 카테고리 감지 실패 시 앞 4단어만 사용
-        return words.slice(0, Math.min(4, words.length)).join(' ');
-    };
-
-    // 제품명 간소화 적용
-    const simplifiedName = simplifyProductName(cleanName);
-    console.log(`[SEO] 제품명 간소화: "${cleanName}" → "${simplifiedName}"`);
-
+    // ✅ 2. 네이버 자동완성으로 세부키워드 가져오기 (1차)
+    let autocompleteKeywords: string[] = [];
     try {
-        // ✅ 1. 먼저 네이버 자동완성 크롤링 시도
-        let seoKeywords = await crawlNaverAutocomplete(simplifiedName);
+        const autocompleteResults = await getNaverAutocomplete(coreProductName);
+        const coreWords = coreProductName.toLowerCase().split(/\s+/);
 
-        // ✅ 2. 크롤링 실패 시 Gemini AI 폴백
-        if (seoKeywords.length === 0) {
-            console.log('[SEO] 자동완성 크롤링 결과 없음, Gemini AI 사용');
-            seoKeywords = await getSeoKeywordsWithGemini(simplifiedName);
+        for (const suggestion of autocompleteResults) {
+            let remaining = suggestion;
+            for (const word of coreWords) {
+                if (word.length >= 2) {
+                    remaining = remaining.replace(new RegExp(word, 'gi'), '').trim();
+                }
+            }
+            const keywords = remaining.split(/\s+/).filter(k =>
+                k.length >= 2 &&
+                !coreWords.includes(k.toLowerCase()) &&
+                !autocompleteKeywords.includes(k)
+            );
+            autocompleteKeywords.push(...keywords);
         }
-
-        // ✅ 최종 제목 조합: 간소화된 제품명 + SEO 키워드 + "가성비 추천"
-        const fixedSuffix = '가성비 추천';
-
-        let finalTitle = simplifiedName;
-        if (seoKeywords.length > 0) {
-            const kwPart = seoKeywords.slice(0, 2).join(' ');
-            finalTitle = `${simplifiedName} ${kwPart} ${fixedSuffix}`.trim();
-        } else {
-            finalTitle = `${simplifiedName} ${fixedSuffix}`.trim();
-        }
-
-        console.log(`[SEO Title] "${cleanName}" → "${finalTitle}"`);
-        return finalTitle;
+        autocompleteKeywords = [...new Set(autocompleteKeywords)].slice(0, 8);
+        console.log(`[SEO] 자동완성 키워드 (1차): [${autocompleteKeywords.join(', ')}] (${autocompleteKeywords.length}개)`);
     } catch (error) {
-        console.warn(`[SEO Title] 생성 실패: ${(error as Error).message}`);
+        console.warn(`[SEO] 자동완성 실패: ${(error as Error).message}`);
+    }
 
-        // 오류 시 기본 카테고리 키워드 사용
-        const nameLower = cleanName.toLowerCase();
-        let fallbackKeywords = ['추천', '가성비'];
+    // ✅ 3. 자동완성 키워드 부족 시 Gemini AI 폴백 (2차)
+    if (autocompleteKeywords.length < 3) {
+        console.log(`[SEO] 자동완성 키워드 부족 (${autocompleteKeywords.length}개) → Gemini AI 폴백 호출`);
+        try {
+            const geminiKeywords = await getSeoKeywordsWithGemini(coreProductName);
+            // 중복 제거 후 추가
+            for (const gk of geminiKeywords) {
+                if (!autocompleteKeywords.includes(gk) && !coreProductName.toLowerCase().includes(gk.toLowerCase())) {
+                    autocompleteKeywords.push(gk);
+                }
+            }
+            console.log(`[SEO] Gemini 보강 후 키워드: [${autocompleteKeywords.join(', ')}] (${autocompleteKeywords.length}개)`);
+        } catch (error) {
+            console.warn(`[SEO] Gemini 폴백 실패: ${(error as Error).message}`);
+        }
+    }
 
-        for (const [category, keywords] of Object.entries(categoryKeywords)) {
-            if (nameLower.includes(category)) {
-                fallbackKeywords = keywords;
-                break;
+    // ✅ 4. 그래도 부족하면 범용 SEO 키워드 풀에서 보충 (3차)
+    if (autocompleteKeywords.length < 3) {
+        console.log(`[SEO] 키워드 여전히 부족 (${autocompleteKeywords.length}개) → 범용 SEO 키워드 보충`);
+        const universalSeoKeywords = [
+            '후기', '추천', '비교', '장단점', '솔직후기', '실사용',
+            '가성비', '내돈내산', '총정리', '꿀팁', '사용법', '리뷰'
+        ];
+        // 랜덤 셔플 후 부족분 보충
+        const shuffled = universalSeoKeywords.sort(() => Math.random() - 0.5);
+        for (const uk of shuffled) {
+            if (autocompleteKeywords.length >= 5) break;
+            if (!autocompleteKeywords.includes(uk) && !coreProductName.toLowerCase().includes(uk.toLowerCase())) {
+                autocompleteKeywords.push(uk);
             }
         }
-
-        return `${cleanName} ${fallbackKeywords.slice(0, maxKeywords).join(' ')}`.trim();
+        console.log(`[SEO] 범용 보충 후 키워드: [${autocompleteKeywords.join(', ')}] (${autocompleteKeywords.length}개)`);
     }
+
+    // ✅ 5. 100점 SEO 제목 조합
+    // 핵심: 제품명 + 자동완성 키워드 최소 3개 (실제 검색어 기반 = SEO 최적)
+    const minRequired = Math.max(maxKeywords, 3);
+    const selectedKeywords = autocompleteKeywords.slice(0, Math.min(minRequired + 1, 5));
+
+    let titleParts: string[] = [coreProductName, ...selectedKeywords];
+
+    // 제목 길이 체크: 40자 초과 시 키워드 줄이기
+    let finalTitle = titleParts.join(' ').trim();
+    while (finalTitle.length > 40 && titleParts.length > 4) {
+        titleParts.pop();
+        finalTitle = titleParts.join(' ').trim();
+    }
+
+    // ✅ 6. 품질 검증: 자동완성 키워드 최소 3개 포함 확인
+    const keywordsInTitle = selectedKeywords.filter(k => finalTitle.includes(k));
+    if (keywordsInTitle.length < 3 && autocompleteKeywords.length >= 3) {
+        // 재조합: 부족한 키워드 추가
+        const missing = autocompleteKeywords.filter(k => !finalTitle.includes(k));
+        for (const mk of missing) {
+            if (keywordsInTitle.length >= 3) break;
+            titleParts.push(mk);
+            keywordsInTitle.push(mk);
+        }
+        finalTitle = titleParts.join(' ').trim();
+        // 다시 길이 체크
+        while (finalTitle.length > 40 && titleParts.length > 4) {
+            titleParts.pop();
+            finalTitle = titleParts.join(' ').trim();
+        }
+    }
+
+    console.log(`[SEO Title 100점] "${cleanName}" → "${finalTitle}" (키워드 ${keywordsInTitle.length}개 포함)`);
+    return finalTitle;
+}
+
+/**
+ * ✅ 핵심 제품명 추출 (모델번호, 색상, 등급 등 제거)
+ * 
+ * 예: "LIVE 삼성 갤럭시북5 프로360 NT960QHA-K71AR AI 노트북 대학생 사무용 2IN1 삼성"
+ * → "삼성 갤럭시북5 프로360"
+ */
+function extractCoreProductName(fullName: string): string {
+    let core = fullName;
+
+    // 0. 스트리밍/라이브 접두사 제거
+    core = core.replace(/^(LIVE|라이브|생방송)\s*/gi, '').trim();
+
+    // ✅ [2026-02-02 FIX] 대괄호 브랜드 접두사 제거 [BRAUN], [삼성] 등
+    core = core.replace(/^\[[^\]]+\]\s*/g, '').trim();
+
+    // 1. 모델번호 패턴 제거 (더 광범위하게)
+    // NT960QHA-K71AR, WD80F25CHW, SM-G998N, 9665cc 등
+    core = core.replace(/[A-Z]{1,4}[\d]{2,}[A-Z\d\-]*/gi, '').trim();
+    core = core.replace(/[\d]{3,}[A-Z]{1,4}[\d\-]*/gi, '').trim();
+    core = core.replace(/[A-Z]{2,}-[A-Z\d]+/gi, '').trim(); // SM-G998N 형식
+    // ✅ [2026-02-02 FIX] 숫자+영문소문자 모델번호 (9665cc)
+    core = core.replace(/\d{3,}[a-zA-Z]{1,3}\b/g, '').trim();
+
+    // 2. 색상 키워드 제거
+    // ✅ [2026-02-02 FIX] \b가 한글에서 작동하지 않으므로 색상도 genericWords에 통합
+    const colorKeywords = [
+        '화이트', '블랙', '그레이', '실버', '골드', '네이비', '베이지', '브라운',
+        '핑크', '블루', '레드', '그린', '퍼플', '오렌지', '민트', '아이보리',
+        'white', 'black', 'gray', 'silver', 'gold', 'navy', 'beige', 'brown',
+        '코랄', '라벤더', '차콜', '크림', '버건디', '그라파이트', '미스틱'
+    ];
+    // 영문 색상은 \b가 작동하므로 먼저 처리
+    for (const color of colorKeywords.filter(c => /^[a-zA-Z]+$/.test(c))) {
+        core = core.replace(new RegExp(`\\b${color}\\b`, 'gi'), '').trim();
+    }
+
+    // 3. 등급/용량/사이즈 키워드 제거
+    const removePatterns = [
+        /\d+등급/g,           // 1등급, 2등급
+        /\d+[LlKk][Gg]?/g,    // 10L, 20kg
+        /\d+[Ww]/g,           // 100W
+        /\d+인치/g,           // 65인치
+        /\d+[Mm][Mm]/g,       // 100mm
+        /\(\d+[^\)]*\)/g,     // (123ABC)
+        /\[\d+[^\]]*\]/g,     // [123ABC]
+        /\d+[Gg][Bb]/gi,      // 256GB, 512gb
+        /\d+[Tt][Bb]/gi,      // 1TB, 2tb
+    ];
+    for (const pattern of removePatterns) {
+        core = core.replace(pattern, '').trim();
+    }
+
+    // 4. 일반적 수식어/용도 제거 (공백 기반 단어 필터링 - 한글에서 \b 미작동)
+    // ✅ [2026-02-02 FIX] 한글 색상도 여기서 함께 필터링
+    const genericWords = new Set([
+        '일체형', '분리형', '올인원', '프리미엄', '에디션', '스페셜', '리미티드',
+        '신형', '신제품', '최신형', '2024', '2025', '2026',
+        '대학생', '사무용', '게이밍', '업무용', '학생용', '가정용', '기업용',
+        '2IN1', '2in1', 'AI', 'PRO', 'PLUS', 'ULTRA', 'MAX', 'LITE',
+        '울트라', '플러스', '프로', '씬', 'Plus',
+        '노트북', '데스크탑', '태블릿', '세탁기', '건조기', '세탁기건조기',
+        // ✅ [2026-02-02 FIX] 한글 색상 추가 (공백 기반 필터링)
+        '화이트', '블랙', '그레이', '실버', '골드', '네이비', '베이지',
+        '핑크', '블루', '레드', '그린', '퍼플', '오렌지', '민트', '아이보리',
+        '코랄', '라벤더', '차콜', '크림', '버건디', '그라파이트', '미스틱'
+        // ⚠️ '브라운' 제외: BRAUN(면도기 브랜드)과 혼동 방지
+    ]);
+    // ✅ [2026-02-02 FIX] 첫 번째 단어는 브랜드명일 가능성이 높으므로 필터링에서 제외
+    const wordsToFilter = core.split(/\s+/);
+    const firstWord = wordsToFilter[0] || '';
+    const remainingWords = wordsToFilter.slice(1);
+    const filteredRemaining = remainingWords.filter(word =>
+        !genericWords.has(word) && !genericWords.has(word.toUpperCase()) && !genericWords.has(word.toLowerCase())
+    );
+    core = [firstWord, ...filteredRemaining].join(' ').trim();
+
+    // 5. 중복 브랜드명 제거 (맨 앞과 맨 뒤에 같은 브랜드가 있으면 뒤쪽 제거)
+    const words = core.split(/\s+/);
+    if (words.length >= 2) {
+        const firstWord = words[0].toLowerCase();
+        const lastWord = words[words.length - 1].toLowerCase();
+        if (firstWord === lastWord) {
+            words.pop(); // 마지막 중복 제거
+            core = words.join(' ');
+        }
+    }
+
+    // 6. 연속 공백 정리
+    core = core.replace(/\s+/g, ' ').trim();
+
+    // 7. 핵심이 너무 짧으면 원본에서 첫 3-4단어 사용
+    if (core.length < 5 || core.split(/\s+/).length < 2) {
+        const originalWords = fullName
+            .replace(/^(LIVE|라이브|생방송)\s*/gi, '')
+            .replace(/^\[[^\]]+\]\s*/g, '') // 대괄호 브랜드 제거
+            .split(/\s+/)
+            .filter(w => !w.match(/[A-Z]{2,}[\d]{2,}/i)) // 모델번호 제외
+            .slice(0, 4);
+        core = originalWords.join(' ');
+    }
+
+    // 8. 최대 5단어로 제한 (너무 길지 않게)
+    const finalWords = core.split(/\s+/).slice(0, 5);
+    core = finalWords.join(' ');
+
+    return core;
 }

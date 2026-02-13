@@ -14,10 +14,10 @@ import {
   generateProductSpecTableImage,
   generateProsConsTableImage,
   extractSpecsFromContent,
-  extractProsConsFromContent,
   generateCtaBannerImage,
   generateTableFromUrl // ✅ [추가] 제휴 링크에서 직접 스펙 크롤링
 } from './image/tableImageGenerator.js';
+import { extractProsConsWithGemini } from './image/geminiTableExtractor.js';
 import { browserSessionManager, type SessionInfo } from './browserSessionManager.js';
 import { withRetry, findWithFallback, clickWithRetry, navigateWithRetry, isRetryableError } from './errorRecovery.js';
 import { createGhostCursor, safeClick, safeType, safeClickInFrame, waitRandom, randomMouseMovement, type GhostCursor } from './ghostCursorHelper.js';
@@ -633,6 +633,340 @@ export class NaverBlogAutomation {
     return Boolean(commandState);
   }
 
+  // ✅ [2026-02-09] 카테고리 자동 선택 공통 메서드 (frame + page 양쪽 탐색)
+  private async selectCategoryInPublishModal(frame: Frame, page: Page): Promise<void> {
+    if (!this.options.categoryName) {
+      this.log('📂 [카테고리] categoryName이 전달되지 않음 — 기본 카테고리로 발행');
+      return;
+    }
+
+    try {
+      this.log(`📂 [카테고리] 자동 선택 시도: "${this.options.categoryName}" (type: ${typeof this.options.categoryName})`);
+
+      // 1. 카테고리 선택 드롭다운 버튼 찾기 (frame → page 순서)
+      const categorySelectorPatterns = [
+        '[data-testid="seOneCategoryBtn"]',
+        '[data-testid*="categorySelector"]',
+        '[data-testid*="category"]',
+        '[class*="category_selector"]',
+        '[class*="categoryArea"]',
+        'button[class*="select_btn"]',
+        '.publish_category button',
+        '[class*="PublishCategory"]',
+        'select[class*="category"]',
+        '[class*="category"][class*="wrap"] button',
+        '[class*="category"] [class*="text"]',
+        // ✅ [2026-02-12 추가] 네이버 최신 에디터 패턴
+        '[class*="post_category"] button',
+        '[class*="se-postCategory"] button',
+        '[class*="publish_area"] [class*="category"]',
+      ];
+
+      let categorySelector: any = null;
+      let searchContext: 'frame' | 'page' = 'frame';
+
+      // frame에서 먼저 찾기
+      for (const pattern of categorySelectorPatterns) {
+        categorySelector = await frame.waitForSelector(pattern, { visible: true, timeout: 1500 }).catch(() => null);
+        if (categorySelector) {
+          this.log(`   ✅ 카테고리 드롭다운 발견 (frame): ${pattern}`);
+          searchContext = 'frame';
+          break;
+        }
+      }
+
+      // frame에서 못 찾으면 page에서 찾기
+      if (!categorySelector) {
+        this.log('   ⚠️ frame에서 카테고리 미발견, page에서 재시도...');
+        for (const pattern of categorySelectorPatterns) {
+          categorySelector = await page.waitForSelector(pattern, { visible: true, timeout: 1500 }).catch(() => null);
+          if (categorySelector) {
+            this.log(`   ✅ 카테고리 드롭다운 발견 (page): ${pattern}`);
+            searchContext = 'page';
+            break;
+          }
+        }
+      }
+
+      if (!categorySelector) {
+        this.log('   ⚠️ 카테고리 선택 요소를 찾을 수 없습니다. 네이버 UI가 변경되었을 수 있습니다.');
+        this.log('   💡 기본 카테고리로 진행합니다.');
+        // 디버그: 현재 페이지의 카테고리 관련 요소 탐색
+        await this.debugCategoryElements(frame, page);
+        return;
+      }
+
+      // 드롭다운 클릭
+      await categorySelector.click();
+      await this.delay(1500); // 드롭다운 애니메이션 대기
+
+      // 2. 카테고리 목록에서 정확한 이름 찾기
+      const ctx = searchContext === 'frame' ? frame : page;
+      const categoryItemPatterns = [
+        '[data-testid^="categoryItemText_"]',
+        '[class*="category_item"]',
+        '[class*="categoryItem"]',
+        '.list_item span',
+        'li[class*="item"] span',
+        'ul[class*="category"] li',
+        '.category_list li',
+        'option',
+        // ✅ [2026-02-12] 더 넓은 범위 — 위 패턴들이 모두 실패할 때
+        'span[class*="text"]',
+      ];
+
+      let categoryItems: any[] = [];
+      let usedPattern = '';
+      for (const pattern of categoryItemPatterns) {
+        categoryItems = await ctx.$$(pattern).catch(() => []);
+        if (categoryItems.length > 0) {
+          usedPattern = pattern;
+          this.log(`   ✅ 카테고리 항목 ${categoryItems.length}개 발견: ${pattern}`);
+          break;
+        }
+      }
+
+      if (categoryItems.length === 0) {
+        this.log('   ⚠️ 카테고리 항목을 찾을 수 없습니다.');
+        await page.keyboard.press('Escape').catch(() => { });
+        return;
+      }
+
+      const targetName = this.options.categoryName!;
+      const normalizedTarget = targetName.replace(/[\s·_\-\/\\]+/g, '').toLowerCase();
+      let found = false;
+      const allCandidates: string[] = [];
+
+      this.log(`   🔍 매칭 대상: "${targetName}" (정규화: "${normalizedTarget}")`);
+
+      for (const item of categoryItems) {
+        const text = await ctx.evaluate(
+          (el: Element) => (el as HTMLElement).innerText?.trim() || (el as HTMLElement).textContent?.trim() || '', item
+        ).catch(() => '');
+
+        // 빈 텍스트 및 이미 선택된 마커 같은 항목 건너뛰기
+        if (!text || text.length < 1) continue;
+        allCandidates.push(text);
+
+        const normalizedText = text.replace(/[\s·_\-\/\\]+/g, '').toLowerCase();
+
+        // 다양한 매칭 방식 시도 (정확도 높은 순서)
+        if (
+          text === targetName ||                        // 1. 정확히 일치
+          normalizedText === normalizedTarget ||        // 2. 정규화된 문자열 일치
+          text.includes(targetName) ||                  // 3. 타겟이 텍스트에 포함
+          normalizedText.includes(normalizedTarget)     // 4. 정규화 포함
+        ) {
+          await item.click();
+          this.log(`   ✅ 카테고리 "${targetName}" → "${text}" 선택 완료!`);
+          found = true;
+          await this.delay(500);
+          break;
+        }
+      }
+
+      if (!found) {
+        this.log(`   ❌ 카테고리 "${targetName}"을 목록에서 찾을 수 없습니다.`);
+        this.log(`   📝 발견된 카테고리 목록: [${allCandidates.join(', ')}]`);
+        this.log(`   💡 블로그에 해당 카테고리가 있는지 확인해주세요. 기본 카테고리로 발행됩니다.`);
+        await page.keyboard.press('Escape').catch(() => { });
+      }
+    } catch (catError) {
+      this.log(`   ⚠️ 카테고리 선택 중 오류 발생 (무시하고 진행): ${(catError as Error).message}`);
+    }
+    await this.delay(500);
+  }
+
+  // ✅ [2026-02-09] 카테고리 디버그 - 발행 모달의 DOM 구조 로그
+  private async debugCategoryElements(frame: Frame, page: Page): Promise<void> {
+    try {
+      // frame에서 카테고리 관련 요소 탐색
+      const frameInfo = await frame.evaluate(() => {
+        const all = document.querySelectorAll('[class*="category"], [data-testid*="category"], [class*="Category"]');
+        return Array.from(all).slice(0, 10).map(el => ({
+          tag: el.tagName,
+          id: el.id,
+          className: el.className?.toString()?.substring(0, 80) || '',
+          testId: el.getAttribute('data-testid') || '',
+          text: (el as HTMLElement).innerText?.substring(0, 50) || '',
+        }));
+      }).catch(() => []);
+
+      if (frameInfo.length > 0) {
+        this.log('   🔍 [frame] 카테고리 관련 요소:');
+        frameInfo.forEach((el: any) => {
+          this.log(`      <${el.tag}> id="${el.id}" class="${el.className}" testId="${el.testId}" text="${el.text}"`);
+        });
+      }
+
+      // page에서 카테고리 관련 요소 탐색
+      const pageInfo = await page.evaluate(() => {
+        const all = document.querySelectorAll('[class*="category"], [data-testid*="category"], [class*="Category"]');
+        return Array.from(all).slice(0, 10).map(el => ({
+          tag: el.tagName,
+          id: el.id,
+          className: el.className?.toString()?.substring(0, 80) || '',
+          testId: el.getAttribute('data-testid') || '',
+          text: (el as HTMLElement).innerText?.substring(0, 50) || '',
+        }));
+      }).catch(() => []);
+
+      if (pageInfo.length > 0) {
+        this.log('   🔍 [page] 카테고리 관련 요소:');
+        pageInfo.forEach((el: any) => {
+          this.log(`      <${el.tag}> id="${el.id}" class="${el.className}" testId="${el.testId}" text="${el.text}"`);
+        });
+      }
+
+      if (frameInfo.length === 0 && pageInfo.length === 0) {
+        this.log('   🔍 카테고리 관련 DOM 요소를 전혀 찾을 수 없습니다.');
+      }
+    } catch (err) {
+      this.log(`   ⚠️ 카테고리 디버그 실패: ${(err as Error).message}`);
+    }
+  }
+
+  // ✅ [2026-02-08] 기기 등록 화면 자동 바이패스 (공유 메서드)
+  private async handleDeviceConfirmPage(page: Page): Promise<boolean> {
+    this.log('📱 기기 등록 페이지 감지 - 자동으로 "등록안함" 클릭 중...');
+    try {
+      // 페이지 로드 대기
+      await this.delay(1500);
+
+      // 1단계: page.evaluate로 텍스트 기반 직접 클릭 (가장 신뢰성 높음)
+      const clicked = await page.evaluate(() => {
+        const allElements = document.querySelectorAll('a, button, input[type="submit"], span, div[role="button"]');
+        for (const el of allElements) {
+          const text = (el.textContent || '').trim();
+          // 정확한 '등록안함' 매칭 (단순 '등록' 오클릭 방지)
+          if (text === '등록안함' || text === '등록 안함') {
+            (el as HTMLElement).click();
+            return 'exact';
+          }
+        }
+        // 2차: 부분 매칭 ('나중에', '건너뛰기' 등)
+        for (const el of allElements) {
+          const text = (el.textContent || '').trim();
+          if (text.includes('등록안함') || text.includes('나중에') || text.includes('건너뛰기')) {
+            (el as HTMLElement).click();
+            return 'partial';
+          }
+        }
+        return null;
+      });
+
+      if (clicked) {
+        this.log(`✅ "등록안함" 버튼 클릭 성공! (매칭: ${clicked})`);
+        await this.delay(2000);
+        return true;
+      }
+
+      // 2단계: CSS 셀렉터 폴백
+      const fallbackSelectors = [
+        'button.btn_refuse', 'a.btn_refuse',
+        'button.btn_cancel', 'a.btn_cancel',
+        '.btn_area a:last-child', '.btn_area button:last-child',
+      ];
+      for (const selector of fallbackSelectors) {
+        const btn = await page.$(selector).catch(() => null);
+        if (btn) {
+          await btn.click();
+          this.log(`✅ "등록안함" 버튼 CSS 셀렉터 클릭 성공! (${selector})`);
+          await this.delay(2000);
+          return true;
+        }
+      }
+
+      this.log('⚠️ "등록안함" 버튼을 찾지 못했습니다. 수동으로 클릭해주세요.');
+      return false;
+    } catch (err) {
+      this.log(`⚠️ 기기 등록 화면 처리 실패: ${(err as Error).message}`);
+      return false;
+    }
+  }
+
+  // ✅ [2026-02-09] 2단계 인증 페이지 감지 및 자동 처리
+  // - "이 브라우저는 2단계 인증 없이 로그인합니다" 체크박스 자동 체크
+  // - 사용자가 네이버 앱에서 승인할 때까지 대기
+  private async handleTwoFactorAuthPage(page: Page, alreadyNotified: boolean = false): Promise<boolean> {
+    try {
+      // 2단계 인증 페이지 여부 확인 (페이지 텍스트 기반)
+      const is2FA = await page.evaluate(() => {
+        const bodyText = document.body.innerText || '';
+        return (bodyText.includes('2단계 인증') &&
+          (bodyText.includes('알림 발송') || bodyText.includes('인증요청') ||
+            bodyText.includes('인증 알림') || bodyText.includes('승인하시겠습니까')));
+      }).catch(() => false);
+
+      if (!is2FA) return false;
+
+      if (!alreadyNotified) {
+        this.log('');
+        this.log('🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐');
+        this.log('📱  2단계 인증 페이지 감지!');
+        this.log('📲  네이버 앱에서 인증을 승인해주세요!');
+        this.log('⏳  승인 후 자동으로 진행됩니다.');
+        this.log('🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐');
+        this.log('');
+
+        // ✅ "이 브라우저는 2단계 인증 없이 로그인합니다" 체크박스 자동 체크
+        const checkedSkip = await page.evaluate(() => {
+          // 방법 1: 표준 checkbox
+          const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+          for (const cb of checkboxes) {
+            const parent = cb.closest('label') || cb.parentElement;
+            const nearbyText = parent?.textContent || '';
+            if (nearbyText.includes('2단계') && nearbyText.includes('없이')) {
+              if (!(cb as HTMLInputElement).checked) {
+                (cb as HTMLInputElement).click();
+              }
+              return 'checkbox';
+            }
+          }
+          // 방법 2: 텍스트 기반 클릭 (커스텀 체크박스)
+          const allEls = document.querySelectorAll('label, span, div, a, button, p');
+          for (const el of allEls) {
+            const text = (el.textContent || '').trim();
+            if (text.includes('2단계') && text.includes('없이') && text.includes('로그인')) {
+              const innerCb = el.querySelector('input[type="checkbox"]');
+              if (innerCb) {
+                if (!(innerCb as HTMLInputElement).checked) {
+                  (innerCb as HTMLInputElement).click();
+                }
+                return 'inner-checkbox';
+              }
+              (el as HTMLElement).click();
+              return 'element-click';
+            }
+          }
+          return null;
+        }).catch(() => null);
+
+        if (checkedSkip) {
+          this.log(`✅ "이 브라우저는 2단계 인증 없이 로그인" 자동 체크! (${checkedSkip})`);
+        } else {
+          this.log('ℹ️ 체크박스를 찾지 못했습니다 (이미 체크됐거나 없는 페이지)');
+        }
+
+        // Windows 소리 알림 (3번)
+        try {
+          const { exec } = await import('child_process');
+          exec('powershell -c "1..3 | ForEach-Object { (New-Object Media.SoundPlayer \\\"C:\\Windows\\Media\\notify.wav\\\").PlaySync(); Start-Sleep -Milliseconds 500 }"');
+        } catch { /* ignore */ }
+
+        // progressCallback으로 UI 알림
+        if (this.progressCallback) {
+          this.progressCallback(0, 100, '📱 2단계 인증! 네이버 앱에서 승인해주세요!');
+        }
+      }
+
+      return true;
+    } catch (err) {
+      this.log(`⚠️ 2단계 인증 처리 중 오류: ${(err as Error).message}`);
+      return false;
+    }
+  }
+
   // ✅ 수동 로그인 대기 함수 (페이지 이동 없이 현재 URL만 확인)
   private async waitForManualLogin(page: Page, maxWaitMs: number = 600000): Promise<void> {
     const startTime = Date.now();
@@ -649,75 +983,16 @@ export class NaverBlogAutomation {
       // 현재 페이지 URL만 확인 (페이지 이동 없이!)
       const currentUrl = page.url();
 
-      // ✅ [2026-01-23 FIX] 기기 등록 화면 자동 처리 (다중계정 발행 중단 방지)
+      // ✅ [2026-02-08] 기기 등록 화면 자동 처리 (공유 메서드 사용)
       if (currentUrl.includes('deviceConfirm') || currentUrl.includes('device_confirm')) {
-        this.log('🔐 기기 등록 화면 감지! "등록안함" 버튼 자동 클릭 시도...');
-        try {
-          // "등록안함" 버튼 클릭 시도 (네이버 기기 등록 화면 전용)
-          const skipButtonSelectors = [
-            // ✅ 네이버 기기 등록 화면 전용 셀렉터
-            'button.btn_refuse',                    // 등록안함 버튼 (기본)
-            'a.btn_refuse',
-            'button.btn_secondary',                 // 보조 버튼
-            'a.btn_secondary',
-            '.btn_area button:last-child',          // 버튼 영역의 마지막 버튼
-            '.btn_area a:last-child',
-            'button[class*="refuse"]',
-            'a[class*="refuse"]',
-            // 기존 셀렉터
-            'button.btn_cancel',
-            'a.btn_cancel',
-            '[class*="cancel"]',
-            'button[type="button"]:not([class*="primary"]):not([class*="confirm"])',
-            '.btn_type2:not(.btn_type1)',
-            // 네이버 보안 화면 스타일
-            '.security_btn button:not(.btn_primary)',
-            '.security_btn a:not(.btn_primary)',
-            'form button + button',                  // 폼 내 두 번째 버튼
-            'form a + a',
-          ];
+        await this.handleDeviceConfirmPage(page);
+        continue;
+      }
 
-          let clicked = false;
-          for (const selector of skipButtonSelectors) {
-            try {
-              const btn = await page.$(selector);
-              if (btn) {
-                await btn.click();
-                this.log('✅ "등록안함" 버튼 클릭 성공!');
-                clicked = true;
-                await this.delay(2000);
-                break;
-              }
-            } catch {
-              // 다음 셀렉터 시도
-            }
-          }
-
-          // 버튼을 찾지 못한 경우 텍스트 기반 검색
-          if (!clicked) {
-            const skipClicked = await page.evaluate(() => {
-              const buttons = Array.from(document.querySelectorAll('button, a'));
-              for (const btn of buttons) {
-                const text = (btn as HTMLElement).innerText || '';
-                if (text.includes('등록안함') || text.includes('취소') || text.includes('나중에')) {
-                  (btn as HTMLElement).click();
-                  return true;
-                }
-              }
-              return false;
-            });
-
-            if (skipClicked) {
-              this.log('✅ 텍스트 기반 "등록안함" 버튼 클릭 성공!');
-              await this.delay(2000);
-            } else {
-              this.log('⚠️ "등록안함" 버튼을 찾지 못했습니다. 사용자가 직접 처리해주세요.');
-            }
-          }
-        } catch (err) {
-          this.log(`⚠️ 기기 등록 화면 처리 실패: ${(err as Error).message}`);
-        }
-        continue; // 다음 반복에서 URL 다시 체크
+      // ✅ [2026-02-09] 2단계 인증 페이지 자동 처리
+      const is2FAManual = await this.handleTwoFactorAuthPage(page);
+      if (is2FAManual) {
+        continue;
       }
 
       // 로그인 페이지가 아니고, 블로그 페이지에 도착했으면 성공
@@ -781,11 +1056,83 @@ export class NaverBlogAutomation {
     });
   }
 
+  /**
+   * ✅ [2026-02-03] 링크 카드(OG Preview)가 로딩될 때까지 polling 대기
+   * URL 입력 후 네이버 에디터가 자동으로 생성하는 링크 카드를 감지합니다.
+   * @param timeoutMs - 최대 대기 시간 (기본 15초)
+   * @param pollIntervalMs - polling 간격 (기본 500ms)
+   * @returns 링크 카드가 발견되면 true, 타임아웃되면 false
+   */
+  private async waitForLinkCard(timeoutMs: number = 15000, pollIntervalMs: number = 500): Promise<boolean> {
+    const startTime = Date.now();
+    const frame = await this.getAttachedFrame();
+
+    // 링크 카드가 생성되기 전의 링크 카드 개수를 먼저 확인
+    const initialCount = await frame.evaluate(() => {
+      const selectors = [
+        '.se-oglink',
+        '.se-module-oglink',
+        '.se-oembed',
+        '.se-module-oembed',
+        '.se-link-preview',
+        '[data-module="oglink"]',
+        '[class*="oglink"]',
+        '[class*="oembed"]',
+        '.se-section-oglink',
+      ];
+      let count = 0;
+      for (const sel of selectors) {
+        count += document.querySelectorAll(sel).length;
+      }
+      return count;
+    }).catch(() => 0);
+
+    this.log(`   🔍 링크 카드 polling 시작 (현재 ${initialCount}개, 최대 ${timeoutMs / 1000}초 대기)`);
+
+    while (Date.now() - startTime < timeoutMs) {
+      this.ensureNotCancelled();
+
+      const currentCount = await frame.evaluate(() => {
+        const selectors = [
+          '.se-oglink',
+          '.se-module-oglink',
+          '.se-oembed',
+          '.se-module-oembed',
+          '.se-link-preview',
+          '[data-module="oglink"]',
+          '[class*="oglink"]',
+          '[class*="oembed"]',
+          '.se-section-oglink',
+        ];
+        let count = 0;
+        for (const sel of selectors) {
+          count += document.querySelectorAll(sel).length;
+        }
+        return count;
+      }).catch(() => 0);
+
+      if (currentCount > initialCount) {
+        const elapsed = Math.round((Date.now() - startTime) / 100) / 10;
+        this.log(`   ✅ 링크 카드 감지 완료! (${elapsed}초 소요, ${initialCount} → ${currentCount}개)`);
+        // 렌더링 완료를 위한 추가 대기
+        await this.delay(500);
+        return true;
+      }
+
+      await this.delay(pollIntervalMs);
+    }
+
+    // 타임아웃 - 링크 카드가 생성되지 않음 (네트워크 느림 또는 유효하지 않은 URL)
+    this.log(`   ⚠️ 링크 카드 로딩 타임아웃 (${timeoutMs / 1000}초) - 계속 진행합니다`);
+    return false;
+  }
+
   private ensureNotCancelled(): void {
     if (this.cancelRequested) {
       throw new Error('사용자가 자동화를 취소했습니다.');
     }
   }
+
 
   private async normalizeSpacingAfterLastImage(frame: Frame, allowedEmptyBlocks: number = 1): Promise<void> {
     try {
@@ -1085,7 +1432,7 @@ export class NaverBlogAutomation {
       images: runOptions.images ?? [],
       publishMode: runOptions.publishMode ?? 'draft',
       scheduleDate: runOptions.scheduleDate,
-      scheduleType: runOptions.scheduleType || 'app-schedule', // 기본값: 앱 스케줄 관리
+      scheduleType: runOptions.scheduleType || 'naver-server', // ✅ [2026-02-07 FIX] 기본값: 네이버 서버 예약 (app-schedule은 미구현)
       scheduleMethod: runOptions.scheduleMethod || 'datetime-local', // 기본값: datetime-local
       skipImages: runOptions.skipImages ?? false,
       imageMode: runOptions.imageMode,
@@ -1964,6 +2311,7 @@ export class NaverBlogAutomation {
     // URL 확인 및 캡차 처리
     let captchaDetected = false;
     let loginSuccess = false;
+    let twoFactorDetected = false;
     const maxChecks = 120; // ✅ 120회로 증가 (캡차 해결 시간 확보: 최대 10분)
     let captchaWaitStartTime: number | null = null;
     const CAPTCHA_MAX_WAIT_TIME = 600000; // ✅ 10분 최대 대기
@@ -2117,53 +2465,25 @@ export class NaverBlogAutomation {
         continue;
       }
 
-      // ✅ [2026-01-24] 기기 등록 페이지 자동 처리 (등록안함 클릭)
+      // ✅ [2026-02-08] 기기 등록 페이지 자동 처리 (공유 메서드 사용)
       if (currentUrl.includes('deviceConfirm') || currentUrl.includes('device_confirm')) {
-        this.log('📱 기기 등록 페이지 감지 - 자동으로 "등록안함" 클릭 중...');
-
-        try {
-          // 등록안함 버튼 찾기 (여러 셀렉터 시도)
-          const skipButtonSelectors = [
-            'button.btn_cancel',          // 등록안함 버튼
-            'a.btn_cancel',               // 링크 형태
-            'button:has-text("등록안함")',
-            '[class*="cancel"]',
-            'button[type="button"]:not(.btn_confirm):not(.btn_primary)',
-          ];
-
-          let skipButton = null;
-          for (const selector of skipButtonSelectors) {
-            skipButton = await page.$(selector).catch(() => null);
-            if (skipButton) break;
-          }
-
-          // 셀렉터로 못 찾으면 텍스트로 찾기
-          if (!skipButton) {
-            skipButton = await page.evaluateHandle(() => {
-              const buttons = Array.from(document.querySelectorAll('button, a'));
-              return buttons.find(btn => {
-                const text = btn.textContent || '';
-                return text.includes('등록안함') || text.includes('취소') || text.includes('나중에');
-              }) || null;
-            }) as any;
-
-            // evaluateHandle 결과가 null인지 확인
-            const isNull = await skipButton.evaluate((el: any) => el === null).catch(() => true);
-            if (isNull) skipButton = null;
-          }
-
-          if (skipButton) {
-            await skipButton.click();
-            this.log('✅ "등록안함" 버튼 클릭 완료');
-            await this.delay(2000);
-          } else {
-            this.log('⚠️ "등록안함" 버튼을 찾지 못했습니다. 수동으로 클릭해주세요.');
-          }
-        } catch (deviceError) {
-          this.log(`⚠️ 기기 등록 페이지 처리 중 오류: ${(deviceError as Error).message}`);
-        }
-
+        await this.handleDeviceConfirmPage(page);
         continue;
+      }
+
+      // ✅ [2026-02-09] 2단계 인증 페이지 자동 처리
+      const is2FALogin = await this.handleTwoFactorAuthPage(page, twoFactorDetected);
+      if (is2FALogin) {
+        if (!twoFactorDetected) {
+          twoFactorDetected = true;
+        } else if (checkAttempt % 15 === 0) {
+          this.log('⏳ 2단계 인증 승인 대기 중... 네이버 앱에서 승인해주세요!');
+        }
+        continue;
+      } else if (twoFactorDetected) {
+        twoFactorDetected = false;
+        this.log('✅ 2단계 인증이 완료되었습니다! 로그인을 계속 진행합니다.');
+        await this.delay(1500);
       }
 
       // 로그인 성공 여부 확인
@@ -2270,6 +2590,13 @@ export class NaverBlogAutomation {
             `URL: ${finalUrl}\n` +
             (pageTitle ? `TITLE: ${pageTitle}` : '')
           );
+        }
+
+        // ✅ [2026-02-08] 기기 등록 페이지 자동 처리 (블로그 이동 시 리다이렉트)
+        if (finalUrl.includes('deviceConfirm') || finalUrl.includes('device_confirm')) {
+          this.log('   📱 기기 등록 페이지 감지 - 자동 바이패스 중...');
+          await this.handleDeviceConfirmPage(page);
+          continue; // 바이패스 후 다시 블로그 이동 시도
         }
 
         // 로그인 페이지로 리다이렉트된 경우
@@ -2815,90 +3142,433 @@ export class NaverBlogAutomation {
     const [datePart, timePart] = scheduleDate.split(' ');
     const [year, month, day] = datePart.split('-');
     const [hour, minute] = timePart.split(':');
+    const page = this.ensurePage();
 
     this.log(`   📅 입력할 날짜: ${year}년 ${month}월 ${day}일 ${hour}:${minute}`);
 
     // ✅ 예약 라디오 클릭 후 날짜/시간 입력 필드가 나타날 때까지 대기
-    await this.delay(1000);
+    await this.delay(1500);
 
-    // 방법 1: datetime-local input
-    let dateTimeInput = await frame.waitForSelector('input[type="datetime-local"]', {
-      visible: true,
-      timeout: 3000
-    }).catch(() => null);
+    let inputSuccess = false;
 
-    if (dateTimeInput) {
-      const dateTimeValue = `${year}-${month}-${day}T${hour}:${minute}`;
-      await dateTimeInput.click({ clickCount: 3 });
-      await this.delay(200);
-      await dateTimeInput.type(dateTimeValue, { delay: 50 });
-      this.log(`✅ 날짜/시간 입력 완료: ${dateTimeValue}`);
-      return;
+    // ✅ 디버깅: 예약 UI에서 모든 input 요소 스캔 (frame + page 양쪽)
+    const scanInputsFn = () => {
+      const inputs = Array.from(document.querySelectorAll('input, select'));
+      return inputs.map(el => ({
+        tag: el.tagName,
+        type: (el as HTMLInputElement).type || '',
+        name: (el as HTMLInputElement).name || '',
+        id: el.id || '',
+        className: el.className?.substring(0, 80) || '',
+        placeholder: (el as HTMLInputElement).placeholder || '',
+        value: (el as HTMLInputElement).value || '',
+        visible: (el as HTMLElement).offsetParent !== null,
+      })).filter(i => i.visible);
+    };
+    let inputScan = await frame.evaluate(scanInputsFn).catch(() => []);
+    if (inputScan.length === 0) {
+      this.log(`   ⚠️ frame에서 input 미발견, page에서 재스캔...`);
+      inputScan = await page.evaluate(scanInputsFn).catch(() => []);
+    }
+    this.log(`   🔍 예약 UI input 스캔 결과: ${inputScan.length}개 발견`);
+    for (const inp of inputScan) {
+      this.log(`      - [${inp.tag}] type=${inp.type} name=${inp.name} id=${inp.id} class=${inp.className.substring(0, 40)} placeholder=${inp.placeholder} value=${inp.value}`);
+    }
+
+    // ==========================================
+    // ✅ [2026-02-07 FIX] 방법 0 (최우선): 네이버 Smart Editor 전용
+    // 네이버 발행 팝업 예약 UI 구조:
+    //   날짜: input.input_date__QmA0s (readonly, 달력 선택으로 값 설정)
+    //   시: select.hour_option__J_heO (00~23)
+    //   분: select.minute_option__Vb3xB (00, 10, 20, 30, 40, 50 - 10분 단위)
+    //   발행: button.confirm_btn__WEaBq
+    // ==========================================
+
+    // ✅ 분을 10분 단위로 반올림 (네이버 select가 10분 단위만 지원)
+    const minuteNum = parseInt(minute, 10);
+    const roundedMinute = Math.round(minuteNum / 10) * 10;
+    let adjustedHour = hour;
+    let adjustedMinute = String(roundedMinute).padStart(2, '0');
+    if (roundedMinute >= 60) {
+      adjustedMinute = '00';
+      adjustedHour = String((parseInt(hour, 10) + 1) % 24).padStart(2, '0');
+    }
+    if (minute !== adjustedMinute) {
+      this.log(`   ⏰ 분 반올림: ${minute}분 → ${adjustedMinute}분 (네이버 10분 단위 제한)`);
+    }
+
+    this.log(`   📝 방법 0 (최우선): 네이버 Smart Editor 전용 시간 입력 시도 (${adjustedHour}:${adjustedMinute})`);
+
+    // ✅ [2026-02-08 FIX] Puppeteer 네이티브 select() 사용 (React 호환)
+    // frame.evaluate()로 select.value를 직접 설정하면 React 내부 상태에 반영 안됨
+    // 또한 발행 모달이 iframe 밖(page 레벨)에 렌더링될 수 있으므로 frame → page 순서로 시도
+    const hourSelectorStr = 'select[class*="hour_option"]';
+    const minuteSelectorStr = 'select[class*="minute_option"]';
+
+    // ✅ frame과 page 양쪽에서 select 찾기 시도
+    const contexts: Array<{ name: string; ctx: any }> = [
+      { name: 'frame', ctx: frame },
+      { name: 'page', ctx: page },
+    ];
+
+    for (const { name, ctx } of contexts) {
+      if (inputSuccess) break;
+
+      try {
+        const hourSelect = await ctx.$(hourSelectorStr);
+        const minuteSelect = await ctx.$(minuteSelectorStr);
+
+        if (hourSelect && minuteSelect) {
+          this.log(`   ✅ [${name}] select 드롭다운 발견!`);
+          // ✅ option value 포맷 자동 감지 ("0" vs "00", "9" vs "09")
+          const hourOptions = await ctx.evaluate((sel: string) => {
+            const select = document.querySelector(sel) as HTMLSelectElement;
+            if (!select) return [];
+            return Array.from(select.options).map(o => o.value);
+          }, hourSelectorStr);
+
+          const minuteOptions = await ctx.evaluate((sel: string) => {
+            const select = document.querySelector(sel) as HTMLSelectElement;
+            if (!select) return [];
+            return Array.from(select.options).map(o => o.value);
+          }, minuteSelectorStr);
+
+          this.log(`   🔍 시 옵션: [${hourOptions.slice(0, 5).join(', ')}...], 분 옵션: [${minuteOptions.join(', ')}]`);
+
+          // 시(hour) value 매칭: "09" or "9" 형태 모두 대응
+          let hourValue = adjustedHour;
+          if (!hourOptions.includes(hourValue)) {
+            // 패딩 제거 시도 ("09" → "9")
+            const unpadded = String(parseInt(hourValue, 10));
+            if (hourOptions.includes(unpadded)) {
+              hourValue = unpadded;
+            }
+          }
+
+          // 분(minute) value 매칭: "00" or "0" 형태 모두 대응
+          let minuteValue = adjustedMinute;
+          if (!minuteOptions.includes(minuteValue)) {
+            const unpadded = String(parseInt(minuteValue, 10));
+            if (minuteOptions.includes(unpadded)) {
+              minuteValue = unpadded;
+            }
+          }
+
+          this.log(`   📝 시 설정: ${hourValue}, 분 설정: ${minuteValue}`);
+
+          // ✅ Puppeteer select() 사용 - React와 호환되는 유일한 방법
+          await ctx.select(hourSelectorStr, hourValue);
+          await this.delay(300);
+          await ctx.select(minuteSelectorStr, minuteValue);
+          await this.delay(300);
+
+          // 설정 결과 확인
+          const actualHour = await ctx.evaluate((sel: string) => {
+            const select = document.querySelector(sel) as HTMLSelectElement;
+            return select?.value || 'N/A';
+          }, hourSelectorStr);
+
+          const actualMinute = await ctx.evaluate((sel: string) => {
+            const select = document.querySelector(sel) as HTMLSelectElement;
+            return select?.value || 'N/A';
+          }, minuteSelectorStr);
+
+          this.log(`   ✅ [${name}] 시간 설정 성공: 시=${actualHour}, 분=${actualMinute}`);
+          inputSuccess = true;
+        } else {
+          this.log(`   ⚠️ [${name}] select 드롭다운 미발견 (hour: ${!!hourSelect}, minute: ${!!minuteSelect})`);
+        }
+      } catch (selectErr) {
+        this.log(`   ⚠️ [${name}] select 시도 실패: ${(selectErr as Error).message}`);
+      }
+    }
+
+    // ✅ [2026-02-09 FIX] 날짜 설정 — 달력 클릭 방식 (React 캘린더 호환)
+    // readonly input이므로 nativeInputValueSetter만으로는 React 내부 상태에 반영 안됨
+    // inputSuccess 여부와 무관하게 날짜는 항상 설정 시도
+    {
+      try {
+        const targetYearNum = parseInt(year, 10);
+        const targetMonthNum = parseInt(month, 10);
+        const targetDayNum = parseInt(day, 10);
+
+        // 먼저 오늘 날짜와 비교 — 같은 날이면 날짜 변경 불필요
+        const today = new Date();
+        const isToday = today.getFullYear() === targetYearNum &&
+          (today.getMonth() + 1) === targetMonthNum &&
+          today.getDate() === targetDayNum;
+
+        if (isToday) {
+          this.log(`   📅 예약 날짜가 오늘이므로 날짜 변경 불필요`);
+        } else {
+          this.log(`   📅 날짜 변경 필요: 오늘 → ${year}-${month}-${day}`);
+
+          // 1단계: 날짜 input 클릭하여 달력 열기
+          const dateInputSelectors = [
+            'input[class*="input_date"]',
+            'button[class*="calendar"]',
+            'button[class*="date"]',
+            '[class*="date_area"] input',
+            '[class*="date_area"] button',
+          ];
+
+          let calendarOpened = false;
+          for (const sel of dateInputSelectors) {
+            const dateEl = await frame.$(sel) || await page.$(sel);
+            if (dateEl) {
+              await dateEl.click();
+              await this.delay(800);
+              calendarOpened = true;
+              this.log(`   📅 달력 열기 성공: ${sel}`);
+              break;
+            }
+          }
+
+          if (calendarOpened) {
+            // 2단계: 달력에서 월 이동 (현재 월에서 목표 월까지) - frame + page 양쪽
+            const calendarNavFn = (tYear: number, tMonth: number, tDay: number) => {
+              const results: string[] = [];
+
+              const calendarHeader = document.querySelector('[class*="calendar"] [class*="header"], [class*="datepicker"] [class*="header"], [class*="month_area"]');
+              results.push(`calendar header: ${calendarHeader?.textContent?.trim() || 'not found'}`);
+
+              const nextBtn = document.querySelector('[class*="next"], button[aria-label*="next"], [class*="btn_next"]') as HTMLElement;
+              const prevBtn = document.querySelector('[class*="prev"], button[aria-label*="prev"], [class*="btn_prev"]') as HTMLElement;
+
+              const headerText = calendarHeader?.textContent || '';
+              const yearMatch = headerText.match(/(\d{4})/);
+              const monthMatch = headerText.match(/(\d{1,2})\s*월/) || headerText.match(/\.?\s*(\d{1,2})\s*\.?/);
+
+              let currentYear = yearMatch ? parseInt(yearMatch[1], 10) : new Date().getFullYear();
+              let currentMonth = monthMatch ? parseInt(monthMatch[1], 10) : (new Date().getMonth() + 1);
+
+              results.push(`current calendar: ${currentYear}년 ${currentMonth}월, target: ${tYear}년 ${tMonth}월`);
+
+              const monthDiff = (tYear - currentYear) * 12 + (tMonth - currentMonth);
+              results.push(`month diff: ${monthDiff}`);
+
+              if (monthDiff > 0 && nextBtn) {
+                for (let i = 0; i < monthDiff && i < 12; i++) nextBtn.click();
+                results.push(`clicked next ${monthDiff} times`);
+              } else if (monthDiff < 0 && prevBtn) {
+                for (let i = 0; i < Math.abs(monthDiff) && i < 12; i++) prevBtn.click();
+                results.push(`clicked prev ${Math.abs(monthDiff)} times`);
+              }
+
+              return { results, monthDiff };
+            };
+            // ✅ frame에서 시도, 실패 시 page에서 시도
+            let calendarDateSet = await frame.evaluate(calendarNavFn, targetYearNum, targetMonthNum, targetDayNum)
+              .catch(() => null);
+            if (!calendarDateSet || calendarDateSet.results.includes('calendar header: not found')) {
+              calendarDateSet = await page.evaluate(calendarNavFn, targetYearNum, targetMonthNum, targetDayNum)
+                .catch(e => ({ results: [e.message], monthDiff: 0 }));
+            }
+
+            this.log(`   📅 달력 월 이동: ${calendarDateSet.results.join(' | ')}`);
+
+            // 월 이동 후 잠시 대기
+            if (calendarDateSet.monthDiff !== 0) {
+              await this.delay(500);
+            }
+
+            // 3단계: 날짜 셀 클릭 (해당 일자) - frame + page 양쪽
+            const dayClickFn = (tDay: number) => {
+              const dayCells = Array.from(document.querySelectorAll(
+                '[class*="calendar"] td, [class*="calendar"] button, [class*="datepicker"] td, [class*="day"]'
+              )).filter(el => {
+                const text = el.textContent?.trim();
+                if (text !== String(tDay)) return false;
+                const htmlEl = el as HTMLElement;
+                if (htmlEl.classList.contains('disabled') || htmlEl.classList.contains('prev') ||
+                  htmlEl.classList.contains('next') || htmlEl.getAttribute('aria-disabled') === 'true') return false;
+                if (!htmlEl.offsetParent) return false;
+                return true;
+              });
+
+              if (dayCells.length > 0) {
+                (dayCells[0] as HTMLElement).click();
+                return `clicked day ${tDay} (${dayCells.length} candidates)`;
+              }
+              return `day ${tDay} not found in calendar`;
+            };
+            let dayClicked = await frame.evaluate(dayClickFn, targetDayNum).catch(e => `frame error: ${e.message}`);
+            if (dayClicked.includes('not found') || dayClicked.includes('error')) {
+              dayClicked = await page.evaluate(dayClickFn, targetDayNum).catch(e => `page error: ${e.message}`);
+            }
+
+            this.log(`   📅 달력 날짜 클릭: ${dayClicked}`);
+            await this.delay(500);
+          }
+
+          // 폴백: 달력이 안 열렸거나 클릭 실패 시 nativeInputValueSetter 시도 (frame + page)
+          const dateFallbackFn = (targetYear: string, targetMonth: string, targetDay: string) => {
+            const dateTextInput = document.querySelector('input[class*="input_date"]') as HTMLInputElement;
+            if (dateTextInput) {
+              const currentValue = dateTextInput.value;
+              const expectedDate = `${targetYear}. ${targetMonth}. ${targetDay}`;
+              if (currentValue.includes(targetYear) && currentValue.includes(targetDay)) {
+                return `date already correct: ${currentValue}`;
+              }
+              const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+                window.HTMLInputElement.prototype, 'value'
+              )?.set;
+              if (nativeInputValueSetter) {
+                nativeInputValueSetter.call(dateTextInput, expectedDate);
+              } else {
+                dateTextInput.value = expectedDate;
+              }
+              dateTextInput.dispatchEvent(new Event('input', { bubbles: true }));
+              dateTextInput.dispatchEvent(new Event('change', { bubbles: true }));
+              dateTextInput.dispatchEvent(new Event('blur', { bubbles: true }));
+              return `date fallback set: ${expectedDate} (actual: ${dateTextInput.value})`;
+            }
+            return 'date input not found';
+          };
+          let dateResult = await frame.evaluate(dateFallbackFn, year, month, day);
+          if (dateResult === 'date input not found') {
+            dateResult = await page.evaluate(dateFallbackFn, year, month, day);
+          }
+          this.log(`   📅 날짜 결과: ${dateResult}`);
+        }
+      } catch (dateErr) {
+        this.log(`   ⚠️ 날짜 설정 실패 (오늘 날짜로 진행): ${(dateErr as Error).message}`);
+      }
+    }
+
+    // ✅ 방법 0 실패 시 기존 evaluate 폴백
+    if (!inputSuccess) {
+      this.log(`   ⚠️ 방법 0 실패, 기존 evaluate 폴백 시도...`);
+      const naverResult = await frame.evaluate((targetYear: string, targetMonth: string, targetDay: string, targetHour: string, targetMinute: string) => {
+        const results: string[] = [];
+        let timeSet = false;
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+          window.HTMLInputElement.prototype, 'value'
+        )?.set;
+
+        function setInputValue(input: HTMLInputElement, value: string): boolean {
+          if (nativeInputValueSetter) {
+            nativeInputValueSetter.call(input, value);
+          } else {
+            input.value = value;
+          }
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+          input.dispatchEvent(new Event('blur', { bubbles: true }));
+          return true;
+        }
+
+        // 날짜/시간 입력 시도
+        const dateInputs = Array.from(document.querySelectorAll('input')).filter(el => {
+          const input = el as HTMLInputElement;
+          const htmlEl = el as HTMLElement;
+          return (input.type === 'date' || input.type === 'datetime-local') && htmlEl.offsetParent !== null;
+        });
+
+        if (dateInputs.length > 0) {
+          const dateInput = dateInputs[0] as HTMLInputElement;
+          if (dateInput.type === 'datetime-local') {
+            setInputValue(dateInput, `${targetYear}-${targetMonth}-${targetDay}T${targetHour}:${targetMinute}`);
+            results.push(`datetime-local: ${dateInput.value}`);
+            timeSet = true;
+          } else {
+            setInputValue(dateInput, `${targetYear}-${targetMonth}-${targetDay}`);
+            results.push(`date: ${dateInput.value}`);
+          }
+        }
+
+        return { count: results.length, details: results, timeSet };
+      }, year, month, day, adjustedHour, adjustedMinute).catch((err) => ({ count: 0, details: [`Error: ${err.message}`], timeSet: false }));
+
+      if (naverResult.timeSet) {
+        inputSuccess = true;
+        this.log(`   ✅ evaluate 폴백 성공: ${naverResult.details.join(', ')}`);
+      } else {
+        this.log(`   ⚠️ evaluate 폴백 결과: ${naverResult.details.join(', ')}`);
+      }
+    }
+
+    // 방법 1: datetime-local input (일반적인 HTML5 방식)
+    if (!inputSuccess) {
+      const dateTimeInput = await frame.waitForSelector('input[type="datetime-local"]', {
+        visible: true,
+        timeout: 2000
+      }).catch(() => null);
+
+      if (dateTimeInput) {
+        const dateTimeValue = `${year}-${month}-${day}T${hour}:${minute}`;
+        this.log(`   📝 방법 1: datetime-local 입력 시도 (${dateTimeValue})`);
+
+        await frame.evaluate((el: Element, value: string) => {
+          const input = el as HTMLInputElement;
+          const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+            window.HTMLInputElement.prototype, 'value'
+          )?.set;
+          if (nativeInputValueSetter) {
+            nativeInputValueSetter.call(input, value);
+          } else {
+            input.value = value;
+          }
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        }, dateTimeInput, dateTimeValue);
+
+        await this.delay(300);
+        this.log(`   ✅ 방법 1 성공: 날짜/시간 입력 완료 (datetime-local: ${dateTimeValue})`);
+        inputSuccess = true;
+      }
     }
 
     // 방법 2: date + time 분리
-    const dateInput = await frame.$('input[type="date"]').catch(() => null);
-    const timeInput = await frame.$('input[type="time"]').catch(() => null);
+    if (!inputSuccess) {
+      const dateInput = await frame.$('input[type="date"]').catch(() => null);
+      const timeInput = await frame.$('input[type="time"]').catch(() => null);
 
-    if (dateInput && timeInput) {
-      const dateValue = `${year}-${month}-${day}`;
-      const timeValue = `${hour}:${minute}`;
+      if (dateInput && timeInput) {
+        const dateValue = `${year}-${month}-${day}`;
+        const timeValue = `${hour}:${minute}`;
+        this.log(`   📝 방법 2: date + time 분리 입력 시도 (${dateValue} ${timeValue})`);
 
-      await dateInput.click({ clickCount: 3 });
-      await dateInput.type(dateValue, { delay: 50 });
-      await this.delay(200);
+        await frame.evaluate((dateEl: Element, timeEl: Element, dv: string, tv: string) => {
+          const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+            window.HTMLInputElement.prototype, 'value'
+          )?.set;
+          const di = dateEl as HTMLInputElement;
+          const ti = timeEl as HTMLInputElement;
 
-      await timeInput.click({ clickCount: 3 });
-      await timeInput.type(timeValue, { delay: 50 });
+          if (nativeInputValueSetter) {
+            nativeInputValueSetter.call(di, dv);
+            nativeInputValueSetter.call(ti, tv);
+          } else {
+            di.value = dv;
+            ti.value = tv;
+          }
+          di.dispatchEvent(new Event('input', { bubbles: true }));
+          di.dispatchEvent(new Event('change', { bubbles: true }));
+          ti.dispatchEvent(new Event('input', { bubbles: true }));
+          ti.dispatchEvent(new Event('change', { bubbles: true }));
+        }, dateInput, timeInput, dateValue, timeValue);
 
-      this.log(`✅ 날짜/시간 입력 완료: ${dateValue} ${timeValue}`);
-      return;
-    }
-
-    // 방법 3: 개별 input (년/월/일/시/분)
-    const yearInput = await frame.$('input[name*="year"], input[placeholder*="년"]').catch(() => null);
-    if (yearInput) {
-      await yearInput.click({ clickCount: 3 });
-      await yearInput.type(year, { delay: 50 });
-      this.log(`✅ 년도 입력: ${year}`);
-    }
-
-    const monthInput = await frame.$('input[name*="month"], input[placeholder*="월"]').catch(() => null);
-    if (monthInput) {
-      await monthInput.click({ clickCount: 3 });
-      await monthInput.type(month, { delay: 50 });
-      this.log(`✅ 월 입력: ${month}`);
-    }
-
-    const dayInput = await frame.$('input[name*="day"], input[placeholder*="일"]').catch(() => null);
-    if (dayInput) {
-      await dayInput.click({ clickCount: 3 });
-      await dayInput.type(day, { delay: 50 });
-      this.log(`✅ 일 입력: ${day}`);
-    }
-
-    const hourInput = await frame.$('input[name*="hour"], input[placeholder*="시"], select[name*="hour"]').catch(() => null);
-    if (hourInput) {
-      const tagName = await hourInput.evaluate(el => el.tagName);
-      if (tagName === 'SELECT') {
-        await hourInput.select(hour);
-      } else {
-        await hourInput.click({ clickCount: 3 });
-        await hourInput.type(hour, { delay: 50 });
+        await this.delay(300);
+        this.log(`   ✅ 방법 2 성공: 날짜/시간 입력 완료 (date: ${dateValue}, time: ${timeValue})`);
+        inputSuccess = true;
       }
-      this.log(`✅ 시 입력: ${hour}`);
     }
 
-    const minuteInput = await frame.$('input[name*="minute"], input[placeholder*="분"], select[name*="minute"]').catch(() => null);
-    if (minuteInput) {
-      const tagName = await minuteInput.evaluate(el => el.tagName);
-      if (tagName === 'SELECT') {
-        await minuteInput.select(minute);
-      } else {
-        await minuteInput.click({ clickCount: 3 });
-        await minuteInput.type(minute, { delay: 50 });
-      }
-      this.log(`✅ 분 입력: ${minute}`);
+    // ✅ 모든 방법 실패 시 에러 + 스크린샷
+    if (!inputSuccess) {
+      this.log(`   ❌ 모든 날짜/시간 입력 방법 실패!`);
+      this.log(`   📋 input 스캔 결과: ${JSON.stringify(inputScan.slice(0, 5))}`);
+
+      // 디버깅 스크린샷 저장
+      try {
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const screenshotPath = `./error-schedule-datetime-${timestamp}.png`;
+        await page.screenshot({ path: screenshotPath, fullPage: true });
+        this.log(`   📸 디버깅 스크린샷 저장: ${screenshotPath}`);
+      } catch { }
+
+      throw new Error(`예약 날짜/시간 입력 실패: 날짜/시간 입력 필드를 찾을 수 없습니다. 네이버 에디터 UI가 변경되었을 수 있습니다. 로그의 input 스캔 결과를 확인하세요.`);
     }
   }
 
@@ -2998,14 +3668,19 @@ export class NaverBlogAutomation {
 
       // 1단계: 발행 버튼 클릭
       this.log('📌 1단계: 발행 모달 열기');
-      const publishButton = await this.waitForAnySelector(frame, [
+      const publishBtnSelectors = [
         'button.publish_btn__m9KHH[data-click-area="tpb.publish"]',
         'button[data-click-area="tpb.publish"]',
         'button:has-text("발행")',
-      ], 10000);
+      ];
+      // ✅ [2026-02-09 FIX] frame + page 양쪽에서 발행 버튼 찾기
+      let publishButton = await this.waitForAnySelector(frame, publishBtnSelectors, 10000);
+      if (!publishButton) {
+        this.log('⚠️ frame에서 발행 버튼 미발견, page에서 재시도...');
+        publishButton = await this.waitForAnySelectorPage(page, publishBtnSelectors, 5000);
+      }
 
       if (!publishButton) {
-        // ✅ 에러 시 스크린샷
         await page.screenshot({ path: 'error-no-publish-btn.png', fullPage: true });
         throw new Error('발행 버튼을 찾을 수 없습니다. 스크린샷을 확인하세요.');
       }
@@ -3014,110 +3689,24 @@ export class NaverBlogAutomation {
       await this.delay(2000);
       this.log('✅ 발행 모달 열림');
 
-      // ✅ 카테고리(폴더) 자동 선택 로직 (네이버 UI 2024+ 호환)
-      if (this.options.categoryName) {
-        try {
-          this.log(`📂 카테고리 자동 선택 시도: "${this.options.categoryName}"`);
-
-          // 1. 카테고리 선택 드롭다운 버튼 클릭 (다양한 선택자 시도)
-          const categorySelectorPatterns = [
-            '[data-testid*="categorySelector"]',
-            '[class*="category_selector"]',
-            '[class*="categoryArea"]',
-            'button[class*="select_btn"]',
-            '.publish_category button',
-            '[data-testid="seOneCategoryBtn"]',
-            '[class*="PublishCategory"]',
-            // 드롭다운 버튼인 경우
-            'select[class*="category"]',
-            // 현재 선택된 카테고리 표시 영역 클릭
-            '[class*="category"][class*="wrap"] button',
-          ];
-
-          let categorySelector = null;
-          for (const pattern of categorySelectorPatterns) {
-            categorySelector = await frame.waitForSelector(pattern, { visible: true, timeout: 2000 }).catch(() => null);
-            if (categorySelector) {
-              this.log(`   ✅ 카테고리 드롭다운 발견: ${pattern}`);
-              break;
-            }
-          }
-
-          if (categorySelector) {
-            await categorySelector.click();
-            await this.delay(1000);
-
-            // 2. 카테고리 목록에서 정확한 이름 찾기 (다양한 선택자 시도)
-            const categoryItemPatterns = [
-              '[data-testid^="categoryItemText_"]',  // ✅ 네이버 최신 UI 형식 (categoryItemText_0, categoryItemText_1, ...)
-              '[class*="category_item"]',
-              '[class*="categoryItem"]',
-              '.list_item span',
-              'li[class*="item"] span',
-              'ul[class*="category"] li',
-              '.category_list li',
-              'option', // select 태그인 경우
-            ];
-
-            let categoryItems: any[] = [];
-            for (const pattern of categoryItemPatterns) {
-              categoryItems = await frame.$$(pattern).catch(() => []);
-              if (categoryItems.length > 0) {
-                this.log(`   ✅ 카테고리 항목 ${categoryItems.length}개 발견: ${pattern}`);
-                break;
-              }
-            }
-
-            let found = false;
-            const normalizedTarget = this.options.categoryName!.replace(/[\s·_\-\/\\]+/g, '').toLowerCase();
-
-            for (const item of categoryItems) {
-              const text = await frame.evaluate((el: Element) => (el as HTMLElement).innerText?.trim() || (el as HTMLElement).textContent?.trim() || '', item);
-              this.log(`   🔍 카테고리 후보: "${text}"`);
-
-              const normalizedText = text.replace(/[\s·_\-\/\\]+/g, '').toLowerCase();
-
-              // 다양한 매칭 방식 시도
-              if (
-                text === this.options.categoryName ||
-                normalizedText === normalizedTarget ||
-                text.includes(this.options.categoryName!) ||
-                this.options.categoryName!.includes(text) ||
-                normalizedText.includes(normalizedTarget) ||
-                normalizedTarget.includes(normalizedText)
-              ) {
-                await item.click();
-                this.log(`   ✅ 카테고리 "${this.options.categoryName}" → "${text}" 선택 완료`);
-                found = true;
-                break;
-              }
-            }
-
-            if (!found) {
-              this.log(`   ⚠️ 카테고리 "${this.options.categoryName}"을 목록에서 찾을 수 없습니다.`);
-              this.log(`   💡 블로그에 해당 카테고리가 있는지 확인해주세요. 기본 카테고리로 발행됩니다.`);
-              const page = this.ensurePage();
-              await page.keyboard.press('Escape').catch(() => { });
-            }
-          } else {
-            this.log('   ⚠️ 카테고리 선택 요소를 찾을 수 없습니다. 네이버 UI가 변경되었을 수 있습니다.');
-            this.log('   💡 기본 카테고리로 진행합니다.');
-          }
-        } catch (catError) {
-          this.log(`   ⚠️ 카테고리 선택 중 오류 발생 (무시하고 진행): ${(catError as Error).message}`);
-        }
-        await this.delay(500);
-      }
+      // ✅ [2026-02-09] 카테고리 자동 선택 (공통 메서드 사용)
+      await this.selectCategoryInPublishModal(frame, page);
 
       // 2단계: 예약발행 라디오 버튼 선택 (정확한 셀렉터!)
       this.log('📌 2단계: 예약발행 옵션 선택');
 
-      const scheduleRadio = await this.waitForAnySelector(frame, [
+      const scheduleRadioSelectors = [
         'input#radio_time2',  // ✅ 가장 확실함!
         'input[name="radio_time"][value="pre"]',
         'input[type="radio"][value="pre"]',
         'label[for="radio_time2"]',  // 레이블 클릭도 가능
-      ], 5000);
+      ];
+      // ✅ [2026-02-09 FIX] frame에서 먼저 찾고, 없으면 page에서도 시도
+      let scheduleRadio = await this.waitForAnySelector(frame, scheduleRadioSelectors, 5000);
+      if (!scheduleRadio) {
+        this.log('⚠️ frame에서 예약 라디오 버튼 미발견, page에서 재시도...');
+        scheduleRadio = await this.waitForAnySelectorPage(page, scheduleRadioSelectors, 5000);
+      }
 
       if (!scheduleRadio) {
         await page.screenshot({ path: 'error-no-schedule-radio.png', fullPage: true });
@@ -3129,8 +3718,8 @@ export class NaverBlogAutomation {
         await scheduleRadio.click();
         this.log('✅ 라디오 버튼 클릭 성공');
       } catch {
-        // 레이블 클릭 시도
-        const label = await frame.$('label[for="radio_time2"]');
+        // ✅ [2026-02-09 FIX] 레이블 클릭도 frame + page 양쪽 시도
+        const label = await frame.$('label[for="radio_time2"]') || await page.$('label[for="radio_time2"]');
         if (label) {
           await label.click();
           this.log('✅ 레이블 클릭 성공');
@@ -3139,6 +3728,62 @@ export class NaverBlogAutomation {
 
       // ✅ 중요: 예약 UI가 나타날 때까지 충분히 대기!
       await this.delay(2000);
+
+      // ✅ [2026-02-09 FIX] 예약 라디오 버튼이 실제로 선택되었는지 검증 (frame + page 양쪽)
+      const radioCheckFn = () => {
+        const radioTime2 = document.querySelector('input#radio_time2') as HTMLInputElement;
+        if (radioTime2) return radioTime2.checked;
+        const radioButtons = document.querySelectorAll('input[name="radio_time"]');
+        for (const rb of Array.from(radioButtons)) {
+          const radio = rb as HTMLInputElement;
+          if (radio.value === 'pre' && radio.checked) return true;
+        }
+        return false;
+      };
+      let isScheduleRadioSelected = await frame.evaluate(radioCheckFn).catch(() => false);
+      if (!isScheduleRadioSelected) {
+        isScheduleRadioSelected = await page.evaluate(radioCheckFn).catch(() => false);
+      }
+
+      if (!isScheduleRadioSelected) {
+        this.log('⚠️ 예약 라디오 버튼이 선택되지 않았습니다. JavaScript로 직접 선택 시도...');
+
+        const radioSetFn = () => {
+          const radioTime2 = document.querySelector('input#radio_time2') as HTMLInputElement;
+          if (radioTime2) {
+            radioTime2.checked = true;
+            radioTime2.dispatchEvent(new Event('change', { bubbles: true }));
+            radioTime2.dispatchEvent(new Event('click', { bubbles: true }));
+            return true;
+          }
+          const preRadio = document.querySelector('input[name="radio_time"][value="pre"]') as HTMLInputElement;
+          if (preRadio) {
+            preRadio.checked = true;
+            preRadio.dispatchEvent(new Event('change', { bubbles: true }));
+            preRadio.dispatchEvent(new Event('click', { bubbles: true }));
+            return true;
+          }
+          return false;
+        };
+        // frame + page 양쪽에서 시도
+        let setResult = await frame.evaluate(radioSetFn).catch(() => false);
+        if (!setResult) {
+          setResult = await page.evaluate(radioSetFn).catch(() => false);
+        }
+        await this.delay(1500);
+
+        // 재확인
+        let isNowSelected = await frame.evaluate(radioCheckFn).catch(() => false);
+        if (!isNowSelected) isNowSelected = await page.evaluate(radioCheckFn).catch(() => false);
+
+        if (isNowSelected) {
+          this.log('✅ JavaScript로 예약 라디오 버튼 선택 성공');
+        } else {
+          await page.screenshot({ path: 'error-schedule-radio-not-selected.png', fullPage: true });
+          throw new Error('예약 라디오 버튼을 선택할 수 없습니다. 네이버 UI가 변경되었을 수 있습니다.');
+        }
+      }
+
       this.log('✅ 예약발행 옵션 선택됨, 날짜/시간 UI 대기 중...');
 
       // 3단계: 날짜/시간 입력 (자동으로 3가지 방식 시도)
@@ -3151,18 +3796,23 @@ export class NaverBlogAutomation {
       // 4단계: 확인 버튼 클릭
       this.log('📌 4단계: 예약발행 확인');
 
-      // ✅ 확인 버튼은 항상 같은 위치!
-      const confirmButton = await this.waitForAnySelector(frame, [
+      // ✅ [2026-02-09 FIX] 확인 버튼 — frame + page 양쪽에서 찾기
+      const confirmSelectors = [
         'button[data-testid="seOnePublishBtn"]',
         'button.confirm_btn__WEaBq',
         'button[data-click-area="tpb*i.publish"]',
-      ], 5000);
+      ];
+      let confirmButton = await this.waitForAnySelector(frame, confirmSelectors, 5000);
+      if (!confirmButton) {
+        this.log('⚠️ frame에서 확인 버튼 미발견, page에서 재시도...');
+        confirmButton = await this.waitForAnySelectorPage(page, confirmSelectors, 5000);
+      }
 
       if (!confirmButton) {
         await page.screenshot({ path: 'error-no-confirm-btn.png', fullPage: true });
 
-        // 디버깅: 모든 버튼 찾기
-        const allButtons = await frame.evaluate(() => {
+        // 디버깅: frame + page 모든 버튼 찾기
+        const scanButtons = () => {
           const buttons = Array.from(document.querySelectorAll('button'));
           return buttons
             .filter(b => b.textContent?.includes('발행') || b.textContent?.includes('확인'))
@@ -3171,8 +3821,11 @@ export class NaverBlogAutomation {
               className: b.className,
               testId: b.getAttribute('data-testid'),
             }));
-        });
-        console.log('발행/확인 버튼 목록:', allButtons);
+        };
+        const frameButtons = await frame.evaluate(scanButtons).catch(() => []);
+        const pageButtons = await page.evaluate(scanButtons).catch(() => []);
+        console.log('발행/확인 버튼 목록 (frame):', frameButtons);
+        console.log('발행/확인 버튼 목록 (page):', pageButtons);
 
         throw new Error('확인 버튼을 찾을 수 없습니다. 스크린샷을 확인하세요.');
       }
@@ -3216,6 +3869,9 @@ export class NaverBlogAutomation {
   }
 
   async publishBlogPost(mode: PublishMode, scheduleDate?: string, scheduleMethod: 'datetime-local' | 'individual-inputs' = 'datetime-local'): Promise<void> {
+    // ✅ [2026-02-07 FIX] 발행 모드 명시적 로깅 (디버깅용)
+    this.log(`📋 publishBlogPost 호출됨 → mode: "${mode}", scheduleDate: "${scheduleDate || 'undefined'}", scheduleMethod: "${scheduleMethod}"`);
+
     await this.retry(async () => {
       const frame = (await this.getAttachedFrame());
       this.ensureNotCancelled();
@@ -3353,105 +4009,8 @@ export class NaverBlogAutomation {
           // ✅ 발행 모달이 열릴 때까지 충분히 대기
           await this.delay(1000); // ✅ 대기 시간 증가: 250ms → 1000ms
 
-          // ✅ 카테고리(폴더) 자동 선택 로직 (네이버 UI 2024+ 호환)
-          if (this.options.categoryName) {
-            try {
-              this.log(`📂 카테고리 자동 선택 시도: "${this.options.categoryName}"`);
-
-              // 1. 카테고리 선택 드롭다운 버튼 클릭 (다양한 선택자 시도)
-              const categorySelectorPatterns = [
-                '[data-testid*="categorySelector"]',
-                '[data-testid*="category"]',
-                '[class*="category_selector"]',
-                '[class*="categoryArea"]',
-                'button[class*="select_btn"]',
-                '.publish_category button',
-                '[data-testid="seOneCategoryBtn"]',
-                '[class*="PublishCategory"]',
-                'select[class*="category"]',
-                '[class*="category"][class*="wrap"] button',
-                // 카테고리 텍스트가 있는 영역 클릭
-                '[class*="category"] [class*="text"]',
-              ];
-
-              let categorySelector = null;
-              for (const pattern of categorySelectorPatterns) {
-                categorySelector = await frame.waitForSelector(pattern, { visible: true, timeout: 2000 }).catch(() => null);
-                if (categorySelector) {
-                  this.log(`   ✅ 카테고리 드롭다운 발견: ${pattern}`);
-                  break;
-                }
-              }
-
-              if (categorySelector) {
-                await categorySelector.click();
-                await this.delay(1000);
-
-                // 2. 카테고리 목록에서 정확한 이름 찾기 (다양한 선택자 시도)
-                const categoryItemPatterns = [
-                  '[data-testid^="categoryItemText_"]',  // ✅ 네이버 최신 UI 형식
-                  'span[class*="text"]',  // 카테고리 텍스트 span
-                  '[class*="category_item"]',
-                  '[class*="categoryItem"]',
-                  '.list_item span',
-                  'li[class*="item"] span',
-                  'ul[class*="category"] li',
-                  '.category_list li',
-                  'option',
-                ];
-
-                let categoryItems: any[] = [];
-                for (const pattern of categoryItemPatterns) {
-                  categoryItems = await frame.$$(pattern).catch(() => []);
-                  if (categoryItems.length > 0) {
-                    this.log(`   ✅ 카테고리 항목 ${categoryItems.length}개 발견: ${pattern}`);
-                    break;
-                  }
-                }
-
-                let found = false;
-                const normalizedTarget = this.options.categoryName!.replace(/[\s·_\-\/\\]+/g, '').toLowerCase();
-
-                for (const item of categoryItems) {
-                  const text = await frame.evaluate((el: Element) => (el as HTMLElement).innerText?.trim() || (el as HTMLElement).textContent?.trim() || '', item);
-                  this.log(`   🔍 카테고리 후보: "${text}"`);
-
-                  const normalizedText = text.replace(/[\s·_\-\/\\]+/g, '').toLowerCase();
-
-                  // 다양한 매칭 방식 시도
-                  // 1. 정확히 일치
-                  // 2. 정규화된 문자열이 일치
-                  // 3. 타겟이 텍스트에 포함
-                  // 4. 텍스트가 타겟에 포함 (역방향)
-                  if (
-                    text === this.options.categoryName ||
-                    normalizedText === normalizedTarget ||
-                    text.includes(this.options.categoryName!) ||
-                    this.options.categoryName!.includes(text) ||
-                    normalizedText.includes(normalizedTarget) ||
-                    normalizedTarget.includes(normalizedText)
-                  ) {
-                    await item.click();
-                    this.log(`   ✅ 카테고리 "${this.options.categoryName}" → "${text}" 선택 완료`);
-                    found = true;
-                    break;
-                  }
-                }
-
-                if (!found) {
-                  this.log(`   ⚠️ 카테고리 "${this.options.categoryName}"을 목록에서 찾을 수 없습니다.`);
-                  this.log(`   💡 블로그에 해당 카테고리가 있는지 확인해주세요. 기본 카테고리로 발행됩니다.`);
-                  const page = this.ensurePage();
-                  await page.keyboard.press('Escape').catch(() => { });
-                }
-              } else {
-                this.log('   ⚠️ 카테고리 선택 요소를 찾을 수 없습니다. 네이버 UI가 변경되었을 수 있습니다.');
-              }
-            } catch (catError) {
-              this.log(`   ⚠️ 카테고리 선택 중 오류 발생 (무시하고 진행): ${(catError as Error).message}`);
-            }
-            await this.delay(500);
-          }
+          // ✅ [2026-02-09] 카테고리 자동 선택 (공통 메서드 사용)
+          await this.selectCategoryInPublishModal(frame, this.ensurePage());
 
           // ✅ 최종 발행 확인 버튼 찾기 (사용자가 제공한 정확한 셀렉터 최우선)
           const confirmPublishSelectors = [
@@ -5518,7 +6077,7 @@ export class NaverBlogAutomation {
 
             // ✅ [2026-01-24 개선] 수집된 이미지 검색 - AI 생성 이미지 완전 제외!
             const allImages = resolved.images || [];
-            const aiProviders = ['nano-banana-pro', 'stability', 'fal', 'pollinations', 'dalle', 'gemini', 'ideogram', 'ai'];
+            const aiProviders = ['nano-banana-pro', 'stability', 'fal', 'pollinations', 'gemini', 'ideogram', 'ai'];
 
             this.log(`   🔍 [썸네일] 원본 제품 이미지 검색 시작 (AI 생성 이미지 완전 제외)`);
 
@@ -5898,6 +6457,17 @@ export class NaverBlogAutomation {
                 return false;
               });
 
+              // ✅ [2026-02-12 FIX] GIF 이미지를 우선 정렬 (gif-from-video가 앞에 오도록)
+              if (headingImages.length > 1) {
+                headingImages.sort((a: any, b: any) => {
+                  const aIsGif = String(a?.provider || '').includes('gif') || String(a?.filePath || '').toLowerCase().endsWith('.gif');
+                  const bIsGif = String(b?.provider || '').includes('gif') || String(b?.filePath || '').toLowerCase().endsWith('.gif');
+                  if (aIsGif && !bIsGif) return -1;
+                  if (!aIsGif && bIsGif) return 1;
+                  return 0;
+                });
+              }
+
               // ✅ 디버그: 매칭 실패 시 상세 로그
               if (headingImages.length === 0) {
                 this.log(`   ⚠️[매칭 실패] 소제목 "${heading.title}" 에 대응하는 이미지를 찾지 못했습니다.`);
@@ -5910,19 +6480,43 @@ export class NaverBlogAutomation {
               if (headingImages.length > 0) {
                 this.log(`   ✅[heading 매칭] resolved.images에서 ${headingImages.length}개 이미지 발견`);
               } else {
-                // ✅ Full-Auto 모드에서는 인덱스 기반 폴백 허용 (2026-01-13 수정)
-                // Main Process(ImageManager 없음) + 풀오토 모드에서는 인덱스로 할당
+                // ✅ Full-Auto 모드에서는 originalIndex 기반 매칭 우선 (2026-02-05 수정)
+                // Main Process(ImageManager 없음) + 풀오토 모드에서는 originalIndex로 매칭
                 const isMainProcess = typeof (global as any).ImageManager === 'undefined';
                 const isFullAutoMode = resolved.isFullAuto === true;
 
-                if (isMainProcess && isFullAutoMode && resolved.images && i < resolved.images.length) {
-                  // ✅ Full-Auto 폴백: 인덱스 기반 할당 (이미 할당된 이미지 제외)
-                  const candidateImage = resolved.images[i];
-                  if (candidateImage && candidateImage.filePath) {
-                    headingImages = [candidateImage];
-                    this.log(`   ✅[Full - Auto 폴백] 인덱스 ${i}번 이미지 할당: "${candidateImage.heading?.substring(0, 30)}..."`);
+                if (isMainProcess && isFullAutoMode && resolved.images && resolved.images.length > 0) {
+                  // ✅ [2026-02-05 FIX] headingImageMode 필터링 대응: originalIndex 기반 매칭
+                  // 홀수/짝수 모드에서 이미지 배열이 필터링되면 배열 인덱스와 소제목 인덱스가 불일치
+                  // → originalIndex를 사용하여 정확한 매칭 수행
+
+                  // 현재 소제목의 예상 이미지 인덱스 계산
+                  const usesAutoThumbnail = resolved.createProductThumbnail === true || resolved.includeThumbnailText === true;
+                  const expectedOriginalIndex = usesAutoThumbnail ? i + 1 : i;
+
+                  this.log(`   🔄[이미지 인덱스] 자동썸네일=${usesAutoThumbnail}, 현재소제목=${i}, 예상originalIndex=${expectedOriginalIndex}`);
+
+                  // 1순위: originalIndex가 정확히 일치하는 이미지 찾기
+                  let matchedImage = resolved.images.find((img: any) =>
+                    (img.originalIndex !== undefined && img.originalIndex === expectedOriginalIndex)
+                  );
+
+                  // 2순위: originalIndex가 없으면 순차 인덱스 폴백 (기존 로직)
+                  if (!matchedImage) {
+                    const imageIndex = i + (usesAutoThumbnail ? 1 : 0);
+                    if (imageIndex < resolved.images.length) {
+                      matchedImage = resolved.images[imageIndex];
+                      this.log(`   🔄[폴백] originalIndex 매칭 실패 → 순차 인덱스[${imageIndex}] 사용`);
+                    }
+                  }
+
+                  if (matchedImage && matchedImage.filePath) {
+                    headingImages = [matchedImage];
+                    const origIdx = (matchedImage as any).originalIndex ?? '없음';
+                    this.log(`   ✅[Full-Auto 매칭] originalIndex=${origIdx} 이미지 할당: "${matchedImage.heading?.substring(0, 30)}..."`);
                   } else {
-                    this.log(`   ⚠️[Full - Auto 폴백] 인덱스 ${i}번 이미지가 없거나 경로 없음`);
+                    // 필터링으로 인해 이 소제목에 해당하는 이미지가 없는 경우 (정상 케이스)
+                    this.log(`   ℹ️[Full-Auto] 소제목 ${i}번에 해당하는 이미지 없음 (headingImageMode 필터링으로 스킵됨)`);
                     headingImages = [];
                   }
                 } else {
@@ -6171,8 +6765,10 @@ export class NaverBlogAutomation {
                     const cleanProductName = productName
                       .replace(/[,.\s]+$/g, '')
                       .trim();
-                    // ✅ 본문에서 장단점 추출
-                    const { pros, cons } = extractProsConsFromContent(fullBodyText);
+                    // ✅ [2026-02-01 FIX] AI 기반 장단점 추출로 변경 (정규식 → Gemini)
+                    const prosConsData = await extractProsConsWithGemini(cleanProductName, fullBodyText);
+                    const pros = prosConsData.pros;
+                    const cons = prosConsData.cons;
                     if (pros.length >= 1 || cons.length >= 1) {
                       // ✅ [2026-01-18] useAiTableImage 옵션에 따라 AI 표 또는 HTML 표 선택
                       if (resolved.useAiTableImage) {
@@ -6212,7 +6808,10 @@ export class NaverBlogAutomation {
               if (i === headings.length - 1) {
                 try {
                   this.log(`   📊[쇼핑커넥트] 장단점 비교 표 이미지 생성 중...`);
-                  const { pros, cons } = extractProsConsFromContent(fullBodyText);
+                  // ✅ [2026-02-01 FIX] AI 기반 장단점 추출로 변경 (정규식 → Gemini)
+                  const prosConsData = await extractProsConsWithGemini(productName, fullBodyText);
+                  const pros = prosConsData.pros;
+                  const cons = prosConsData.cons;
                   if (pros.length >= 1 && cons.length >= 1) {
                     // ✅ [2026-01-18] useAiTableImage 옵션에 따라 AI 표 또는 HTML 표 선택
                     let prosConsTablePath: string;
@@ -6492,8 +7091,8 @@ export class NaverBlogAutomation {
               await page.keyboard.type(`👉 ${c.link || '#'}`, { delay: 10 });
               await page.keyboard.press('Enter');
 
-              // 링크 카드 로딩 대기
-              await this.delay(3000);
+              // 링크 카드 로딩 대기 (polling 방식)
+              await this.waitForLinkCard(15000, 500);
             }
 
             // ✅ 마지막 CTA 후: 이전글 삽입
@@ -6523,18 +7122,19 @@ export class NaverBlogAutomation {
               await page.keyboard.type(`👉 ${resolved.previousPostUrl}`, { delay: 10 });
               await page.keyboard.press('Enter');
 
-              // 링크 카드 로딩 대기
-              await this.delay(3000);
+              // 링크 카드 로딩 대기 (polling 방식)
+              await this.waitForLinkCard(15000, 500);
               this.log(`   ✅ 이전글 삽입 완료 (후킹: ${randomPrevHook})`);
             }
           } else {
-            // ✅ [2026-01-22] 일반 모드 (affiliateLink 없음): CTA + 이전글 삽입
+            // ✅ [2026-01-26 FIX] 일반 모드 (SEO): 이전글 엮기만 삽입 (CTA는 수동 추가 시에만)
             const isLastCta = i === effectiveCtas.length - 1;
             const page = this.ensurePage();
 
-            // ✅ CTA가 있으면 CTA 삽입 (구분선 + 후킹 + 링크)
-            if (c.text && c.link) {
-              this.log(`   📎 [일반 CTA ${i + 1}] \"${c.text}\" → ${c.link}`);
+            // ✅ CTA가 링크를 포함한 경우 CTA 삽입 (텍스트 없으면 기본 문구 사용)
+            if (c.link) {
+              const ctaDisplayText = c.text || '자세히 보러가기';
+              this.log(`   📎 [일반 CTA ${i + 1}] \"${ctaDisplayText}\" → ${c.link}`);
 
               // 구분선 삽입
               const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
@@ -6543,44 +7143,113 @@ export class NaverBlogAutomation {
               await page.keyboard.press('Enter');
 
               // 후킹 문구 + 링크 삽입
-              await page.keyboard.type(`📎 ${c.text}`, { delay: 10 });
+              await page.keyboard.type(`📎 ${ctaDisplayText}`, { delay: 10 });
               await page.keyboard.press('Enter');
               await page.keyboard.type(`👉 ${c.link}`, { delay: 10 });
               await page.keyboard.press('Enter');
 
-              // 링크 카드 로딩 대기
-              await this.delay(3000);
+              // 링크 카드 로딩 대기 (polling 방식)
+              await this.waitForLinkCard(15000, 500);
             }
 
-            // ✅ 마지막 CTA 후: 이전글 삽입 (중복 방지)
-            if (isLastCta && resolved.previousPostUrl) {
-              this.log(`   📖 [이전글] 같은 카테고리 이전글 연결`);
 
-              // 구분선
-              const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(divider, { delay: 5 });
-              await page.keyboard.press('Enter');
+            // ✅ [2026-01-26 FIX] 마지막 CTA 후에만 이전글 삽입 (중복 방지)
+            // isLastCta 체크로 한 번만 삽입되도록 보장
+            if (isLastCta) {
+              // ✅ [2026-02-08] 공식 사이트 링크 자동 삽입 (이전글 앞에 배치)
+              // 행동 유발 카테고리에서만 동작 (비즈니스, 티켓, 여행, 건강, 교육 등)
+              try {
+                const actionCategories = [
+                  '비즈니스', '경제', '금융', '부동산', '지원금', '보조금', '대출',
+                  '티켓', '예매', '공연', '콘서트', '전시',
+                  '여행', '항공', 'KTX', '숙소', '호텔',
+                  '건강', '병원', '검진', '보험', '의료',
+                  '교육', '자격증', '시험', '수강', '학원',
+                  '취업', '채용', '이직', '공채',
+                  '정부', '민원', '신청', '발급', '등록',
+                  '맛집', '카페', '레스토랑',
+                ];
 
-              // ✅ [2026-01-23 FIX] 후킹 문구 + 이전글 제목
-              const prevPostHooks = [
-                '✨ 이런 글도 많이 봤어요!',
-                '📚 다음 글도 궁금하다면?',
-                '🔥 이 글도 인기 있어요!',
-                '💡 맛있게 읽었다면 이것도!',
-                '👀 놓치면 아까운 추천 글!',
-              ];
-              const randomPrevHook = prevPostHooks[Math.floor(Math.random() * prevPostHooks.length)];
-              await page.keyboard.type(randomPrevHook, { delay: 10 });
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(`📖 ${resolved.previousPostTitle || '이전 글 보기'}`, { delay: 10 });
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(`👉 ${resolved.previousPostUrl}`, { delay: 10 });
-              await page.keyboard.press('Enter');
+                const titleLower = (resolved.title || '').toLowerCase();
+                const hashtagStr = (resolved.hashtags || []).join(' ').toLowerCase();
+                const combinedText = `${titleLower} ${hashtagStr}`;
 
-              // 링크 카드 로딩 대기
-              await this.delay(3000);
-              this.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook})`);
+                const isActionCategory = actionCategories.some(cat => combinedText.includes(cat));
+
+                if (isActionCategory) {
+                  this.log(`   🔗 [공식사이트] 행동 유발 키워드 감지 → 관련 공식 사이트 검색 중...`);
+
+                  const { findRelevantOfficialSite } = await import('./contentGenerator.js');
+                  const siteResult = await findRelevantOfficialSite(
+                    resolved.title || resolved.hashtags?.[0] || '',
+                    undefined,
+                    bodyText?.substring(0, 500),
+                  );
+
+                  if (siteResult.success && siteResult.url) {
+                    this.log(`   ✅ [공식사이트] 검증 완료: ${siteResult.siteName} (${siteResult.url})`);
+
+                    // 구분선
+                    const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+                    await page.keyboard.press('Enter');
+                    await page.keyboard.type(divider, { delay: 5 });
+                    await page.keyboard.press('Enter');
+
+                    // 관련 사이트 바로가기 문구
+                    const siteHooks = [
+                      '🔗 관련 사이트 바로가기!!',
+                      '🌐 공식 사이트 바로가기!!',
+                      '📌 관련 공식 사이트 바로가기!!',
+                    ];
+                    const randomSiteHook = siteHooks[Math.floor(Math.random() * siteHooks.length)];
+                    await page.keyboard.type(randomSiteHook, { delay: 10 });
+                    await page.keyboard.press('Enter');
+
+                    // 공식 사이트 URL 삽입 → 링크 카드 자동 생성
+                    await page.keyboard.type(`👉 ${siteResult.url}`, { delay: 10 });
+                    await page.keyboard.press('Enter');
+
+                    // 링크 카드 로딩 대기
+                    await this.waitForLinkCard(15000, 500);
+                    this.log(`   ✅ [공식사이트] 관련 사이트 바로가기 삽입 완료: ${siteResult.siteName}`);
+                  } else {
+                    this.log(`   ⚠️ [공식사이트] 적합한 사이트 없음 → 건너뜀`);
+                  }
+                }
+              } catch (siteError) {
+                this.log(`   ⚠️ [공식사이트] 검색 실패 (무시): ${(siteError as Error).message}`);
+              }
+
+              // ✅ 이전글 삽입
+              if (resolved.previousPostUrl) {
+                this.log(`   📖 [이전글] 같은 카테고리 이전글 연결`);
+
+                // 구분선
+                const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+                await page.keyboard.press('Enter');
+                await page.keyboard.type(divider, { delay: 5 });
+                await page.keyboard.press('Enter');
+
+                // 후킹 문구 + 이전글 제목
+                const prevPostHooks = [
+                  '✨ 이런 글도 많이 봤어요!',
+                  '📚 다음 글도 궁금하다면?',
+                  '🔥 이 글도 인기 있어요!',
+                  '💡 맛있게 읽었다면 이것도!',
+                  '👀 놓치면 아까운 추천 글!',
+                ];
+                const randomPrevHook = prevPostHooks[Math.floor(Math.random() * prevPostHooks.length)];
+                await page.keyboard.type(randomPrevHook, { delay: 10 });
+                await page.keyboard.press('Enter');
+                await page.keyboard.type(`📖 ${resolved.previousPostTitle || '이전 글 보기'}`, { delay: 10 });
+                await page.keyboard.press('Enter');
+                await page.keyboard.type(`👉 ${resolved.previousPostUrl}`, { delay: 10 });
+                await page.keyboard.press('Enter');
+
+                // 링크 카드 로딩 대기 (polling 방식)
+                await this.waitForLinkCard(15000, 500);
+                this.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook})`);
+              }
             }
           }
           await this.delay(500); // CTA 삽입 후 충분한 대기 시간
@@ -6592,6 +7261,97 @@ export class NaverBlogAutomation {
         //    수정: 재시도 로직 제거, CTA는 한 번만 삽입
         await this.delay(500); // 삽입 후 대기
         this.log(`   ✅ CTA 버튼 삽입 및 확인 완료 (재시도 건너뜀)`);
+      } else {
+        // ✅ [2026-02-08] CTA가 없는 경우 (홈판 모드, skipCta 등)에서도
+        // 공식 사이트 바로가기 + 이전글 독립 삽입
+        const page = this.ensurePage();
+
+        // 공식 사이트 바로가기 삽입
+        try {
+          const actionCategories = [
+            '비즈니스', '경제', '금융', '부동산', '지원금', '보조금', '대출',
+            '티켓', '예매', '공연', '콘서트', '전시',
+            '여행', '항공', 'KTX', '숙소', '호텔',
+            '건강', '병원', '검진', '보험', '의료',
+            '교육', '자격증', '시험', '수강', '학원',
+            '취업', '채용', '이직', '공채',
+            '정부', '민원', '신청', '발급', '등록',
+            '맛집', '카페', '레스토랑',
+          ];
+
+          const titleLower = (resolved.title || '').toLowerCase();
+          const hashtagStr = (resolved.hashtags || []).join(' ').toLowerCase();
+          const combinedText = `${titleLower} ${hashtagStr}`;
+
+          const isActionCategory = actionCategories.some(cat => combinedText.includes(cat));
+
+          if (isActionCategory) {
+            this.log(`   🔗 [공식사이트] 행동 유발 키워드 감지 (CTA 없는 모드) → 관련 공식 사이트 검색 중...`);
+
+            const { findRelevantOfficialSite } = await import('./contentGenerator.js');
+            const siteResult = await findRelevantOfficialSite(
+              resolved.title || resolved.hashtags?.[0] || '',
+              undefined,
+              bodyText?.substring(0, 500),
+            );
+
+            if (siteResult.success && siteResult.url) {
+              this.log(`   ✅ [공식사이트] 검증 완료: ${siteResult.siteName} (${siteResult.url})`);
+
+              const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+              await page.keyboard.press('Enter');
+              await page.keyboard.type(divider, { delay: 5 });
+              await page.keyboard.press('Enter');
+
+              const siteHooks = [
+                '🔗 관련 사이트 바로가기!!',
+                '🌐 공식 사이트 바로가기!!',
+                '📌 관련 공식 사이트 바로가기!!',
+              ];
+              const randomSiteHook = siteHooks[Math.floor(Math.random() * siteHooks.length)];
+              await page.keyboard.type(randomSiteHook, { delay: 10 });
+              await page.keyboard.press('Enter');
+
+              await page.keyboard.type(`👉 ${siteResult.url}`, { delay: 10 });
+              await page.keyboard.press('Enter');
+
+              await this.waitForLinkCard(15000, 500);
+              this.log(`   ✅ [공식사이트] 관련 사이트 바로가기 삽입 완료: ${siteResult.siteName}`);
+            } else {
+              this.log(`   ⚠️ [공식사이트] 적합한 사이트 없음 → 건너뜀`);
+            }
+          }
+        } catch (siteError) {
+          this.log(`   ⚠️ [공식사이트] 검색 실패 (무시): ${(siteError as Error).message}`);
+        }
+
+        // 이전글 삽입
+        if (resolved.previousPostUrl) {
+          this.log(`   📖 [이전글] 같은 카테고리 이전글 연결 (CTA 없는 모드)`);
+
+          const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+          await page.keyboard.press('Enter');
+          await page.keyboard.type(divider, { delay: 5 });
+          await page.keyboard.press('Enter');
+
+          const prevPostHooks = [
+            '✨ 이런 글도 많이 봤어요!',
+            '📚 다음 글도 궁금하다면?',
+            '🔥 이 글도 인기 있어요!',
+            '💡 맛있게 읽었다면 이것도!',
+            '👀 놓치면 아까운 추천 글!',
+          ];
+          const randomPrevHook = prevPostHooks[Math.floor(Math.random() * prevPostHooks.length)];
+          await page.keyboard.type(randomPrevHook, { delay: 10 });
+          await page.keyboard.press('Enter');
+          await page.keyboard.type(`📖 ${resolved.previousPostTitle || '이전 글 보기'}`, { delay: 10 });
+          await page.keyboard.press('Enter');
+          await page.keyboard.type(`👉 ${resolved.previousPostUrl}`, { delay: 10 });
+          await page.keyboard.press('Enter');
+
+          await this.waitForLinkCard(15000, 500);
+          this.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook})`);
+        }
       }
 
       // ✅ 중복 문구 제거됨: '쇼핑커넥트 수익이 발생할 수 있습니다' 문구는 
@@ -9129,9 +9889,9 @@ export class NaverBlogAutomation {
       await page.keyboard.press('Enter');
       this.log(`   ✅ CTA 텍스트 + 제휴링크 삽입 완료`);
 
-      // ✅ 4. [신규] 5초 대기 (링크 카드 로딩)
-      this.log(`   ⏳ 5초 대기 중 (링크 카드 로딩)...`);
-      await this.delay(5000);
+      // ✅ 4. [신규] 링크 카드 로딩 대기 (polling 방식)
+      this.log(`   ⏳ 링크 카드 로딩 대기 중...`);
+      await this.waitForLinkCard(15000, 500);
 
       // ✅ [2026-01-19] 마지막 구분선 제거 - 추가 CTA/이전글에서 각자 구분선 삽입
       // 중복 구분선 방지
@@ -9164,9 +9924,9 @@ export class NaverBlogAutomation {
         this.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook})`);
 
 
-        // ✅ 7. [신규] 5초 대기 (이전글 링크 카드 로딩)
-        this.log(`   ⏳ 5초 대기 중 (이전글 카드 로딩)...`);
-        await this.delay(5000);
+        // ✅ 7. [신규] 이전글 링크 카드 로딩 대기 (polling 방식)
+        this.log(`   ⏳ 이전글 카드 로딩 대기 중...`);
+        await this.waitForLinkCard(15000, 500);
       } else {
         this.log(`   ℹ️ 이전글 정보 없음 - 건너뜀`);
       }
@@ -11698,10 +12458,8 @@ export class NaverBlogAutomation {
     if (image.provider) {
       const providerNames: { [key: string]: string } = {
         'naver': '네이버',
-        'pexels': 'Pexels',
         'pollinations': '나노 바나나 프로 (Gemini API 키, 과금 가능)',
         'nano-banana-pro': '나노 바나나 프로 (Gemini API 키, 과금 가능)',
-        'dalle': 'DALL-E',
         'gemini': 'Gemini',
         'local': '로컬 파일',
         'shopping': '쇼핑몰',

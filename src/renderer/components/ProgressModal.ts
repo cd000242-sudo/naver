@@ -18,6 +18,7 @@ export class ProgressModal {
     private progressTitle: HTMLElement | null = null;
     private progressSubtitle: HTMLElement | null = null;
     private progressHeader: HTMLElement | null = null;
+    private imageGridContainer: HTMLElement | null = null;  // ✅ 이미지 그리드 컨테이너
     private isCancelled: boolean = false;
     private onStopRequest: (() => Promise<void>) | null = null;
 
@@ -49,6 +50,9 @@ export class ProgressModal {
         this.progressSubtitle = document.getElementById('progress-subtitle');
         this.progressHeader = document.getElementById('progress-header');
 
+        // ✅ [2026-02-01] 이미지 그리드 컨테이너 생성 (progress-log 아래에 삽입)
+        this.createImageGridContainer();
+
         const requestStop = async () => {
             this.isCancelled = true;
             if (this.onStopRequest) {
@@ -67,6 +71,64 @@ export class ProgressModal {
             this.hide();
         });
     }
+
+    // ✅ [2026-02-02] 이미지 미리보기 영역 초기화 (HTML에 이미 존재하는 요소 참조)
+    private createImageGridContainer() {
+        // ✅ [2026-02-02 NEW] HTML에 이미 추가된 progress-image-preview-section 사용
+        const previewSection = document.getElementById('progress-image-preview-section');
+        if (previewSection) {
+            this.imageGridContainer = previewSection;
+            console.log('[ProgressModal] ✅ HTML의 progress-image-preview-section 참조 완료');
+            return;
+        }
+
+        // 폴백: 기존 로직 (동적 생성)
+        if (document.getElementById('progress-image-grid-container')) {
+            this.imageGridContainer = document.getElementById('progress-image-grid-container');
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.id = 'progress-image-grid-container';
+        container.style.cssText = `
+            display: none;
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        `;
+
+        container.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                <span style="font-size: 14px;">🖼️</span>
+                <span id="progress-image-title" style="font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9);">수집된 이미지</span>
+                <span id="progress-image-count" style="font-size: 11px; color: #3b82f6; background: rgba(59, 130, 246, 0.2); padding: 2px 8px; border-radius: 10px;">0개</span>
+            </div>
+            <div id="progress-image-grid" style="
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 8px;
+                max-height: 200px;
+                overflow-y: auto;
+            "></div>
+        `;
+
+        // progress-log 다음에 삽입
+        if (this.progressLog && this.progressLog.parentElement) {
+            this.progressLog.parentElement.insertBefore(container, this.progressLog.nextSibling);
+        } else {
+            const modalBody = document.getElementById('progress-modal-body') ||
+                document.querySelector('#progress-modal .modal-body') ||
+                this.modal;
+            if (modalBody) {
+                modalBody.appendChild(container);
+            }
+        }
+
+        this.imageGridContainer = container;
+    }
+
 
     setStopRequestHandler(handler: () => Promise<void>) {
         this.onStopRequest = handler;
@@ -233,6 +295,126 @@ export class ProgressModal {
         if (failedStep) {
             this.setStep(failedStep, 'error', '실패');
         }
+    }
+
+    // ✅ [2026-02-02] 이미지 그리드 표시 + 메인 미리보기 업데이트
+    showImages(images: Array<{ url?: string; filePath?: string; heading?: string }>, title: string = '수집된 이미지') {
+        if (!this.imageGridContainer) return;
+
+        const grid = document.getElementById('progress-image-grid');
+        const countEl = document.getElementById('progress-image-count');
+        const titleEl = document.getElementById('progress-image-title');
+        const mainPreview = document.getElementById('progress-main-preview');
+
+        if (!grid) return;
+
+        // 제목 업데이트
+        if (titleEl) titleEl.textContent = title;
+        if (countEl) countEl.textContent = `${images.length}개`;
+
+        // ✅ [2026-02-02] 메인 미리보기 헬퍼 함수
+        const updateMainPreview = (src: string, heading: string, isPlaceholder: boolean) => {
+            if (!mainPreview) return;
+            if (isPlaceholder) {
+                mainPreview.innerHTML = `
+                    <div style="color: #60a5fa; text-align: center;">
+                        <div style="font-size: 2.5rem; animation: pulse 1.5s infinite;">⏳</div>
+                        <div style="font-size: 11px; margin-top: 4px;">${heading.substring(0, 15) || '생성 중...'}</div>
+                    </div>
+                `;
+            } else {
+                mainPreview.innerHTML = `<img src="${src}" alt="${heading}" style="width: 100%; height: 100%; object-fit: cover;">`;
+            }
+        };
+
+        // 그리드 초기화 후 이미지 추가
+        grid.innerHTML = '';
+
+        // 첫 번째 이미지/플레이스홀더로 메인 미리보기 설정
+        if (images.length > 0) {
+            const firstImg = images[0];
+            const firstSrc = firstImg.url || firstImg.filePath || '';
+            const isFirstPlaceholder = !firstSrc || (firstImg as any).isPlaceholder;
+            updateMainPreview(firstSrc, firstImg.heading || '썸네일', isFirstPlaceholder);
+        }
+
+        images.forEach((img, idx) => {
+            const src = img.url || img.filePath || '';
+            const isPlaceholder = !src || (img as any).isPlaceholder;
+
+            const wrapper = document.createElement('div');
+            wrapper.style.cssText = `
+                position: relative;
+                aspect-ratio: 1;
+                border-radius: 6px;
+                overflow: hidden;
+                border: 2px solid ${isPlaceholder ? '#3b82f6' : 'rgba(255, 255, 255, 0.1)'};
+                background: ${isPlaceholder ? 'linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%)' : 'rgba(0, 0, 0, 0.3)'};
+                cursor: pointer;
+                transition: all 0.2s;
+            `;
+            wrapper.title = img.heading || `이미지 ${idx + 1}`;
+
+            // ✅ 클릭 시 메인 미리보기 업데이트
+            wrapper.onclick = () => {
+                if (!isPlaceholder) {
+                    updateMainPreview(src, img.heading || `이미지 ${idx + 1}`, false);
+                }
+            };
+
+            // 호버 효과
+            wrapper.onmouseenter = () => {
+                wrapper.style.borderColor = '#3b82f6';
+                wrapper.style.transform = 'scale(1.05)';
+            };
+            wrapper.onmouseleave = () => {
+                wrapper.style.borderColor = isPlaceholder ? '#3b82f6' : 'rgba(255, 255, 255, 0.1)';
+                wrapper.style.transform = 'scale(1)';
+            };
+
+            if (isPlaceholder) {
+                // ✅ 플레이스홀더: 로딩 스피너 표시
+                wrapper.innerHTML = `
+                    <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #60a5fa;">
+                        <div style="font-size: 1rem; animation: pulse 1.5s infinite;">⏳</div>
+                    </div>
+                `;
+            } else {
+                const imgEl = document.createElement('img');
+                imgEl.src = src;
+                imgEl.alt = img.heading || `이미지 ${idx + 1}`;
+                imgEl.style.cssText = `width: 100%; height: 100%; object-fit: cover;`;
+                imgEl.onerror = () => {
+                    imgEl.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23333" width="100" height="100"/><text x="50" y="50" text-anchor="middle" fill="%23666" font-size="20">❌</text></svg>';
+                };
+
+                // 인덱스 표시 (0 = 썸네일 표시)
+                const badge = document.createElement('div');
+                badge.style.cssText = `
+                    position: absolute; top: 2px; left: 2px;
+                    background: ${idx === 0 ? '#3b82f6' : 'rgba(0, 0, 0, 0.7)'};
+                    color: white; font-size: 8px; font-weight: 600;
+                    padding: 1px 4px; border-radius: 3px;
+                `;
+                badge.textContent = idx === 0 ? '대표' : `${idx}`;
+
+                wrapper.appendChild(imgEl);
+                wrapper.appendChild(badge);
+            }
+
+            grid.appendChild(wrapper);
+        });
+
+        // 컨테이너 표시
+        this.imageGridContainer.style.display = images.length > 0 ? 'block' : 'none';
+    }
+
+    // ✅ [2026-02-01] 이미지 그리드 숨기기
+    clearImages() {
+        if (!this.imageGridContainer) return;
+        this.imageGridContainer.style.display = 'none';
+        const grid = document.getElementById('progress-image-grid');
+        if (grid) grid.innerHTML = '';
     }
 
     get cancelled(): boolean {

@@ -73,6 +73,9 @@ export interface AppConfig {
   // ✅ Fal.ai API (FLUX 이미지 생성)
   falaiApiKey?: string;
 
+  // ✅ DeepInfra API (FLUX-2-dev 고품질 저가)
+  deepinfraApiKey?: string;
+
   // ✅ Gemini 텍스트 생성 주 모델 선택
   primaryGeminiTextModel?: 'gemini-3-pro-preview' | 'gemini-3-flash-preview' | 'gemini-2.5-flash' | string;
 
@@ -91,6 +94,8 @@ export interface AppConfig {
   nanoBananaMainModel?: 'gemini-2.5-flash' | 'gemini-3-pro' | 'gemini-3-pro-4k';
   nanoBananaSubModel?: 'gemini-2.5-flash' | 'gemini-3-pro' | 'gemini-3-pro-4k';
   nanoBananaThumbnailModel?: 'gemini-2.5-flash' | 'gemini-3-pro' | 'gemini-3-pro-4k';
+  // ✅ [2026-02-08] Prodia v2 API (다양한 모델 지원)
+  prodiaModel?: 'sd35' | 'sdxl' | 'flux-schnell' | 'flux-2-dev';
   // Pollinations (무료)
   pollinationsModel?: 'default';
   // 이미지 설정 프리셋
@@ -142,9 +147,15 @@ export async function loadConfig(): Promise<AppConfig> {
     // 주의: 패키지 생성 시에만 초기화되어야 하며, 사용자가 저장한 값은 그대로 유지되어야 함
     // 초기화는 scripts/reset-config-for-pack.js에서만 수행됨
 
-    // ✅ 2026-01-04: 더 이상 모델 강제 변환 안 함 (gemini-1.5, 2.0이 정상 작동 확인됨)
-    // 사용자가 선택한 모델을 그대로 사용하고, 실패 시 폴백 로직이 처리
+    // ✅ [2026-01-28 FIX] 구 모델명을 새 Gemini 3 모델로 마이그레이션
+    // gemini-1.5-pro, gemini-1.5-flash는 Google API v1beta에서 더 이상 지원되지 않음
     let geminiModel = parsed.geminiModel;
+    const DEPRECATED_MODELS = ['gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-pro', 'gemini-pro-vision'];
+    if (geminiModel && DEPRECATED_MODELS.some(m => geminiModel.includes(m))) {
+      const oldModel = geminiModel;
+      geminiModel = 'gemini-3-flash-preview';  // 새 기본 모델로 자동 전환
+      console.log(`[Config] ⚠️ 구 모델(${oldModel}) → 새 모델(${geminiModel})로 자동 마이그레이션`);
+    }
 
     // 하이픈 형식 키를 카멜케이스로 변환 (하위 호환성)
     const normalizedConfig: AppConfig = {
@@ -172,6 +183,13 @@ export async function loadConfig(): Promise<AppConfig> {
       falaiApiKey: parsed.falaiApiKey || parsed['falai-api-key'] || undefined,
       // ✅ [2026-01-25] Perplexity API 키 추가
       perplexityApiKey: parsed.perplexityApiKey || parsed['perplexity-api-key'] || undefined,
+      // ✅ [2026-01-26] DeepInfra API 키 추가
+      deepinfraApiKey: parsed.deepinfraApiKey || parsed['deepinfra-api-key'] || undefined,
+      // ✅ [2026-02-08] 이미지 엔진 모델 설정 명시적 파싱
+      deepinfraModel: parsed.deepinfraModel || undefined,
+      falaiModel: parsed.falaiModel || undefined,
+      stabilityModel: parsed.stabilityModel || undefined,
+      prodiaModel: parsed.prodiaModel || undefined,
     };
 
     // 빈 문자열 제거 및 undefined 제거
@@ -233,6 +251,8 @@ export async function loadConfig(): Promise<AppConfig> {
       'naver-ad-api-key': normalizedConfig.naverAdApiKey,
       'naver-ad-secret-key': normalizedConfig.naverAdSecretKey,
       'naver-ad-customer-id': normalizedConfig.naverAdCustomerId,
+      // ✅ [2026-01-26] DeepInfra API 키 호환성
+      'deepinfra-api-key': (normalizedConfig as any).deepinfraApiKey,
     };
 
     cachedConfig = compatibleConfig;
@@ -487,6 +507,14 @@ export function applyConfigToEnv(config: AppConfig): void {
   if ((config as any).falaiApiKey && (config as any).falaiApiKey.trim()) {
     process.env.FALAI_API_KEY = (config as any).falaiApiKey.trim();
     console.log('[Config] FALAI_API_KEY 설정됨 (길이:', (config as any).falaiApiKey.trim().length, ')');
+  }
+
+  // ✅ [2026-01-30] DeepInfra API 키 설정
+  if (config.deepinfraApiKey && config.deepinfraApiKey.trim()) {
+    process.env.DEEPINFRA_API_KEY = config.deepinfraApiKey.trim();
+    console.log('[Config] DEEPINFRA_API_KEY 설정됨 (길이:', config.deepinfraApiKey.trim().length, ')');
+  } else {
+    delete process.env.DEEPINFRA_API_KEY;
   }
 }
 

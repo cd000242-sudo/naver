@@ -471,12 +471,12 @@ try {
 
   // ✅ [2026-01-25] 브라우저에서 실행 불가능한 utils 함수 호출 주석 처리
   // 이 함수들은 별도 모듈에 정의되어 있어서 인라인 없이는 사용 불가
+  // ✅ [2026-01-27] initSettingsModal, initSettingsModalFunc는 인라인되어 정상 동작하므로 제외
   const utilsFunctionsToComment = [
     'initAllAppEventHandlers',
     'initCategorySelectionListener',
-    'initSettingsModal',
-    'initSettingsModalFunc',
-    // 'initHeadingImageButton', // ✅ 이 함수는 UI에 필요하므로 유지
+    // 'initSettingsModal',       // ✅ [2026-01-27] 인라인됨 - 주석 처리 불필요
+    // 'initSettingsModalFunc',   // ✅ [2026-01-27] 인라인됨 - 주석 처리 불필요
     'cleanupAllMemoryManagers',
   ];
   utilsFunctionsToComment.forEach(funcName => {

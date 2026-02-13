@@ -57,15 +57,21 @@ export function getStableImageKey(img: any): string {
 
 /**
  * 이미지 저장 기본 경로 가져오기
+ * ✅ [2026-01-30 FIX] customImageSavePath 미설정 시 빈 문자열 반환 (오류 없음)
  */
 export async function getRequiredImageBasePath(): Promise<string> {
     if (!window.api?.getConfig) {
-        throw new Error('설정 API를 사용할 수 없습니다.');
+        console.warn('[ImageHelpers] ⚠️ 설정 API 없음, 빈 경로 반환');
+        return '';
     }
     const config = await window.api.getConfig();
     const raw = String((config as any)?.customImageSavePath || '').trim();
+
+    // ✅ [2026-01-30 FIX] 경로가 없어도 오류 없이 빈 문자열 반환
+    // 메인 프로세스에서 기본 경로 처리
     if (!raw) {
-        throw new Error('환경설정에서 이미지 저장 폴더를 먼저 선택해주세요.');
+        console.log('[ImageHelpers] ⚠️ customImageSavePath 미설정, 빈 경로 반환');
+        return '';
     }
     return raw.replace(/\\/g, '/').replace(/\/+$/g, '');
 }

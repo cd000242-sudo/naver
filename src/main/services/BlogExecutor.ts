@@ -170,25 +170,70 @@ export async function getOrCreateBrowserSession(
 /**
  * 4단계: 이미지 처리 (폴더 생성 및 복사)
  * ✅ [100점 수정] generatedImages와 images 모두 처리
+ * ✅ [2026-01-28] scSubImageSource 설정에 따라 수집 이미지 우선 사용
  */
 export async function processImages(
     payload: PostCyclePayload
 ): Promise<{ folder: string | null; images: any[] }> {
-    // ✅ generatedImages와 images 모두 확인 (반자동 모드 호환)
-    const sourceImages = (payload.generatedImages && payload.generatedImages.length > 0)
-        ? payload.generatedImages
-        : (payload.images && payload.images.length > 0)
-            ? payload.images
-            : [];
+    // ✅ [2026-01-28] scSubImageSource === 'collected'이면 수집 이미지 우선 사용
+    const useCollectedDirectly = payload.scSubImageSource === 'collected';
+
+    let sourceImages: any[] = [];
+
+    if (useCollectedDirectly && payload.collectedImages && payload.collectedImages.length > 0) {
+        // ✅ 수집 이미지 직접 사용 모드: 중복 필터링 적용
+        sendLog(`🖼️ 수집 이미지 직접 사용 모드: ${payload.collectedImages.length}개 이미지`);
+
+        const seenBaseUrls = new Set<string>();
+        const uniqueImages: any[] = [];
+
+        for (const img of payload.collectedImages) {
+            const url = img.url || img.thumbnailUrl || img.filePath || '';
+            if (!url) continue;
+
+            // URL에서 기본 이미지 식별자 추출 (중복 감지)
+            const baseUrl = url
+                .replace(/\?.*$/, '')
+                .replace(/(_v\d+|_\d{2,}x\d{2,}|_s\d+|_m\d+|_l\d+)(\.[a-z]+)?$/i, '$2')
+                .replace(/[-_](small|medium|large|thumb|full|origin|detail|main|sub)(\.[a-z]+)?$/i, '$2');
+
+            const fileName = baseUrl.split('/').pop()?.replace(/\.[a-z]+$/i, '') || baseUrl;
+            const basePattern = fileName.replace(/[_-]?\d+$/, '');
+
+            if (seenBaseUrls.has(basePattern) && basePattern.length > 5) continue;
+            if (seenBaseUrls.has(url)) continue;
+
+            seenBaseUrls.add(url);
+            seenBaseUrls.add(basePattern);
+            uniqueImages.push({
+                heading: img.heading || img.title || '',
+                filePath: img.url || img.thumbnailUrl || img.filePath,
+                provider: 'collected',
+                alt: img.alt || '',
+                caption: img.caption || '',
+            });
+        }
+
+        sourceImages = uniqueImages;
+        sendLog(`🧹 중복 제거 후: ${sourceImages.length}개 고유 이미지`);
+    } else {
+        // 기존 로직: generatedImages 또는 images 사용
+        sourceImages = (payload.generatedImages && payload.generatedImages.length > 0)
+            ? payload.generatedImages
+            : (payload.images && payload.images.length > 0)
+                ? payload.images
+                : [];
+    }
 
     if (sourceImages.length === 0 || payload.skipImages) {
-        sendLog(`ℹ️ 이미지 없음 또는 건너뛰기 (generatedImages: ${payload.generatedImages?.length || 0}, images: ${payload.images?.length || 0})`);
+        sendLog(`ℹ️ 이미지 없음 또는 건너뛰기 (scSubImageSource: ${payload.scSubImageSource}, collectedImages: ${payload.collectedImages?.length || 0})`);
         return { folder: null, images: [] };
     }
 
     sendLog(`📷 이미지 처리 시작: ${sourceImages.length}개`);
 
-    const postTitle = payload.title || payload.structuredContent?.selectedTitle || `post-${Date.now()}`;
+    // ✅ [2026-02-01 FIX] selectedTitle (패치된 제목)을 우선 사용
+    const postTitle = payload.structuredContent?.selectedTitle || payload.title || `post-${Date.now()}`;
     const safeTitle = postTitle.replace(/[<>:"/\\|?*]/g, '_').substring(0, 100).trim() || 'untitled';
 
     const postsImageDir = path.join(app.getPath('userData'), 'images', 'posts', safeTitle);
@@ -199,6 +244,14 @@ export async function processImages(
     const processedImages: any[] = [];
 
     for (const image of sourceImages) {
+        // ✅ [2026-02-12 FIX] file:/// URL → 절대 경로 변환 (GIF 등 로컬 파일 지원)
+        if (image.filePath && image.filePath.startsWith('file://')) {
+            let cleaned = image.filePath.replace(/^file:\/\/\//, '');
+            try { cleaned = decodeURIComponent(cleaned); } catch { /* ignore */ }
+            image.filePath = cleaned;
+            sendLog(`🔧 file:// URL 변환: ${image.heading || '알 수 없음'}`);
+        }
+
         if (!image.filePath) {
             sendLog(`⚠️ 이미지 경로가 없습니다: ${image.heading || '알 수 없음'}`);
             continue;
@@ -228,6 +281,7 @@ export async function processImages(
                         provider: image.provider,
                         alt: image.alt,
                         caption: image.caption,
+                        originalIndex: (image as any).originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
                     });
 
                     sendLog(`✅ base64 이미지 저장: ${filename}`);
@@ -249,12 +303,17 @@ export async function processImages(
                 provider: image.provider,
                 alt: image.alt,
                 caption: image.caption,
+                originalIndex: (image as any).originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
             });
             continue;
         }
 
         // 로컬 파일 복사 로직
         try {
+            const isGif = image.filePath.toLowerCase().endsWith('.gif');
+            if (isGif) {
+                sendLog(`🎬 GIF 이미지 처리 중: ${image.heading || '알 수 없음'}, 경로: ${image.filePath.substring(0, 80)}`);
+            }
             await fs.access(image.filePath);
             const stats = await fs.stat(image.filePath);
 
@@ -273,6 +332,7 @@ export async function processImages(
                 provider: image.provider,
                 alt: image.alt,
                 caption: image.caption,
+                originalIndex: (image as any).originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
             });
 
             sendLog(`✅ 이미지 복사: ${filename}`);
@@ -300,17 +360,46 @@ export async function executePublishing(
     sendLog(`📝 발행 모드: ${payload.publishMode || 'publish'}`);
 
     try {
-        // NaverBlogAutomation.run() 호출
+        // NaverBlogAutomation.run() 호출 - selectedTitle 우선 사용
+        const finalTitle = payload.structuredContent?.selectedTitle || payload.title;
+
+        // ✅ [2026-02-01 FIX] structuredContent.selectedTitle을 finalTitle로 강제 업데이트
+        // naverBlogAutomation.resolveRunOptions()에서 structured?.selectedTitle을 다시 읽기 때문에
+        // 여기서 명시적으로 설정해야 패치된 제목이 적용됨
+        const updatedStructuredContent = payload.structuredContent ? {
+            ...payload.structuredContent,
+            selectedTitle: finalTitle  // 패치된 제목으로 강제 업데이트
+        } : undefined;
+
+        sendLog(`📝 최종 제목: ${finalTitle?.substring(0, 40)}...`);
+
         const result = await (automation as any).run({
-            title: payload.title,
+            title: finalTitle,
             content: payload.content,
             lines: payload.lines,
-            structuredContent: payload.structuredContent,
+            structuredContent: updatedStructuredContent,
             hashtags: payload.hashtags,
             images: processedImages,
             collectedImages: payload.collectedImages, // ✅ [2026-01-19] 수집된 제품 이미지 전달 (썸네일용)
             publishMode: payload.publishMode,
-            scheduleDate: payload.scheduleDate,
+            // ✅ [2026-02-08 FIX] scheduleDate + scheduleTime 합성 (네이버 예약발행 'YYYY-MM-DD HH:mm' 형식 필수)
+            scheduleDate: (() => {
+                if (payload.publishMode === 'schedule' && payload.scheduleDate) {
+                    // scheduleTime이 별도 필드로 있으면 합성
+                    if ((payload as any).scheduleTime) {
+                        return `${payload.scheduleDate} ${(payload as any).scheduleTime}`;
+                    }
+                    // 이미 'YYYY-MM-DD HH:mm' 형식이면 그대로
+                    if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(payload.scheduleDate)) {
+                        return payload.scheduleDate;
+                    }
+                    // 'T' 구분자 형식이면 공백으로 변환
+                    if (payload.scheduleDate.includes('T')) {
+                        return payload.scheduleDate.replace('T', ' ');
+                    }
+                }
+                return payload.scheduleDate;
+            })(),
             scheduleType: payload.scheduleType,
             ctaLink: payload.ctaLink,
             ctaText: payload.ctaText,

@@ -181,7 +181,7 @@ class BrowserSessionManager {
                 '--disable-setuid-sandbox',
                 '--disable-infobars',
                 `--window-size=${profile.screen.width},${profile.screen.height}`,
-                '--disable-features=IsolateOrigins,site-per-process',
+                '--disable-features=IsolateOrigins,site-per-process,PasswordManager',
                 '--disable-web-security',
                 '--disable-features=ThirdPartyCookieBlocking,SameSiteByDefaultCookies',
                 '--disable-site-isolation-trials',
@@ -190,6 +190,9 @@ class BrowserSessionManager {
                 '--disable-extensions',
                 '--no-first-run',
                 '--no-default-browser-check',
+                // ✅ [2026-02-08] 비밀번호 저장 팝업 비활성화 (기기등록 자동 바이패스 방해 방지)
+                '--disable-save-password-bubble',
+                '--disable-component-update',
             ],
             ignoreDefaultArgs: ['--enable-automation'],
         };

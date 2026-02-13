@@ -8,7 +8,7 @@ export interface RssSearchResult {
   title: string;
   url: string;
   description?: string;
-  source: 'naver_blog' | 'naver_cafe' | 'naver_news' | 'google_news' | 'other';
+  source: 'naver_blog' | 'naver_cafe' | 'naver_news' | 'naver_kin' | 'google_news' | 'google_web' | 'daum_blog' | 'daum_cafe' | 'daum_news' | 'other';
   publishedAt?: string;
 }
 
@@ -625,65 +625,280 @@ export async function searchGoogleNewsRss(keyword: string, maxResults: number = 
     console.error(`[RSS 검색] 구글 뉴스 RSS 검색 오류:`, (error as Error).message);
     return [];
   }
+}/**
+ * ✅ [2026-02-08] 구글 일반 웹 검색 (RSS)
+ * 워드프레스, 블로그스팟, 티스토리 등 모든 웹 콘텐츠 수집 가능
+ */
+export async function searchGoogleWebRss(keyword: string, maxResults: number = 10): Promise<string[]> {
+  try {
+    // 구글 웹 검색 RSS (한국어 콘텐츠 우선)
+    const searchUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(keyword + ' 블로그 OR 후기 OR 정보')}&hl=ko&gl=KR&ceid=KR:ko&num=${maxResults}`;
+
+    const fetch = await ensureFetch();
+    const response = await fetch(searchUrl, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
+    });
+
+    if (!response.ok) {
+      console.warn(`[구글 웹 검색] RSS 검색 실패: ${response.status}`);
+      return [];
+    }
+
+    const xml = await response.text();
+
+    // RSS 피드에서 링크 추출
+    const linkMatches = xml.match(/<link>([^<]+)<\/link>/g) || [];
+    const links = linkMatches
+      .map(match => match.replace(/<\/?link>/g, '').trim())
+      .filter(link => link.startsWith('http') && !link.includes('news.google.com'))
+      .slice(0, maxResults);
+
+    console.log(`[구글 웹 검색] ${links.length}개 URL 발견`);
+    return links;
+  } catch (error) {
+    console.error(`[구글 웹 검색] RSS 검색 오류:`, (error as Error).message);
+    return [];
+  }
 }
 
 /**
- * 키워드로 모든 소스에서 검색 (네이버 검색 API 우선 사용)
+ * ✅ [2026-02-08] 다음(카카오) 블로그 검색
+ * 티스토리, 다음 블로그 등에서 콘텐츠 수집
+ */
+export async function searchDaumBlog(keyword: string, maxResults: number = 10): Promise<string[]> {
+  try {
+    // 다음 검색 RSS (블로그)
+    const searchUrl = `https://search.daum.net/search?w=blog&q=${encodeURIComponent(keyword)}&DA=STC&enc=utf8`;
+
+    const fetch = await ensureFetch();
+    const response = await fetch(searchUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml',
+        'Accept-Language': 'ko-KR,ko;q=0.9',
+      },
+    });
+
+    if (!response.ok) {
+      console.warn(`[다음 블로그] 검색 실패: ${response.status}`);
+      return [];
+    }
+
+    const html = await response.text();
+
+    // 다음 검색 결과에서 블로그 URL 추출
+    const urlMatches = html.match(/href="(https?:\/\/[^"]*(?:tistory\.com|blog\.daum\.net|brunch\.co\.kr)[^"]*)"/g) || [];
+    const links = urlMatches
+      .map(match => {
+        const urlMatch = match.match(/href="([^"]+)"/);
+        return urlMatch ? urlMatch[1] : '';
+      })
+      .filter(link => link.startsWith('http'))
+      .filter((link, idx, arr) => arr.indexOf(link) === idx) // 중복 제거
+      .slice(0, maxResults);
+
+    console.log(`[다음 블로그] ${links.length}개 URL 발견 (티스토리/다음블로그/브런치)`);
+    return links;
+  } catch (error) {
+    console.error(`[다음 블로그] 검색 오류:`, (error as Error).message);
+    return [];
+  }
+}
+
+/**
+ * ✅ [2026-02-08] 다음(카카오) 카페 검색
+ * 다음 카페에서 콘텐츠 수집
+ */
+export async function searchDaumCafe(keyword: string, maxResults: number = 10): Promise<string[]> {
+  try {
+    const searchUrl = `https://search.daum.net/search?w=cafe&q=${encodeURIComponent(keyword)}&DA=STC&enc=utf8`;
+
+    const fetch = await ensureFetch();
+    const response = await fetch(searchUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml',
+        'Accept-Language': 'ko-KR,ko;q=0.9',
+      },
+    });
+
+    if (!response.ok) {
+      console.warn(`[다음 카페] 검색 실패: ${response.status}`);
+      return [];
+    }
+
+    const html = await response.text();
+
+    // 다음 카페 검색 결과에서 URL 추출
+    const urlMatches = html.match(/href="(https?:\/\/[^"]*(?:cafe\.daum\.net|m\.cafe\.daum\.net)[^"]*)"/g) || [];
+    const links = urlMatches
+      .map(match => {
+        const urlMatch = match.match(/href="([^"]+)"/);
+        return urlMatch ? urlMatch[1] : '';
+      })
+      .filter(link => link.startsWith('http'))
+      .filter((link, idx, arr) => arr.indexOf(link) === idx)
+      .slice(0, maxResults);
+
+    console.log(`[다음 카페] ${links.length}개 URL 발견`);
+    return links;
+  } catch (error) {
+    console.error(`[다음 카페] 검색 오류:`, (error as Error).message);
+    return [];
+  }
+}
+
+/**
+ * ✅ [2026-02-08] 다음(카카오) 뉴스 검색
+ * 다음 뉴스에서 콘텐츠 수집
+ */
+export async function searchDaumNews(keyword: string, maxResults: number = 10): Promise<string[]> {
+  try {
+    const searchUrl = `https://search.daum.net/search?w=news&q=${encodeURIComponent(keyword)}&DA=STC&enc=utf8`;
+
+    const fetch = await ensureFetch();
+    const response = await fetch(searchUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml',
+        'Accept-Language': 'ko-KR,ko;q=0.9',
+      },
+    });
+
+    if (!response.ok) {
+      console.warn(`[다음 뉴스] 검색 실패: ${response.status}`);
+      return [];
+    }
+
+    const html = await response.text();
+
+    // 다음 뉴스 검색 결과에서 실제 뉴스 URL 추출
+    const urlMatches = html.match(/href="(https?:\/\/[^"]*(?:news\.v\.daum\.net|v\.daum\.net|news\.|\/news\/)[^"]*)"/g) || [];
+    const links = urlMatches
+      .map(match => {
+        const urlMatch = match.match(/href="([^"]+)"/);
+        return urlMatch ? urlMatch[1] : '';
+      })
+      .filter(link => link.startsWith('http'))
+      .filter((link, idx, arr) => arr.indexOf(link) === idx)
+      .slice(0, maxResults);
+
+    console.log(`[다음 뉴스] ${links.length}개 URL 발견`);
+    return links;
+  } catch (error) {
+    console.error(`[다음 뉴스] 검색 오류:`, (error as Error).message);
+    return [];
+  }
+}
+
+/**
+ * ✅ [2026-02-08] 네이버 지식iN 검색
+ * 네이버 지식iN에서 관련 Q&A 수집
+ */
+export async function searchNaverKin(
+  keyword: string,
+  maxResults: number = 10,
+  clientId?: string,
+  clientSecret?: string
+): Promise<string[]> {
+  try {
+    if (clientId && clientSecret) {
+      const searchUrl = `https://openapi.naver.com/v1/search/kin.json?query=${encodeURIComponent(keyword)}&display=${Math.min(maxResults, 100)}&sort=date`;
+
+      const fetch = await ensureFetch();
+      const response = await fetch(searchUrl, {
+        headers: {
+          'X-Naver-Client-Id': clientId,
+          'X-Naver-Client-Secret': clientSecret,
+        },
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          log401Error('지식iN', clientId);
+        }
+        console.warn(`[네이버 검색 API] 지식iN 검색 실패: ${response.status}`);
+        return [];
+      }
+
+      const data = await response.json() as { items?: Array<{ link?: string; title?: string; description?: string }> };
+
+      if (data.items && Array.isArray(data.items)) {
+        const links = extractRelevantUrls(data.items, keyword, maxResults);
+        console.log(`[네이버 검색 API] 지식iN ${data.items.length}개 중 ${links.length}개 관련 URL 발견`);
+        return links;
+      }
+    }
+
+    return [];
+  } catch (error) {
+    console.error(`[네이버 검색 API] 지식iN 검색 오류:`, (error as Error).message);
+    return [];
+  }
+}
+
+
+/**
+ * ✅ [2026-02-08] 키워드로 모든 소스에서 검색 (9개 소스 통합)
+ * 네이버, 구글, 다음(카카오) 전 플랫폼 지원
  */
 export async function searchAllRssSources(
   keyword: string,
   options: {
     maxPerSource?: number;
-    sources?: ('naver_blog' | 'naver_cafe' | 'naver_news' | 'google_news')[];
+    sources?: ('naver_blog' | 'naver_cafe' | 'naver_news' | 'naver_kin' | 'google_news' | 'google_web' | 'daum_blog' | 'daum_cafe' | 'daum_news')[];
     clientId?: string;
     clientSecret?: string;
     targetDate?: string; // ✅ 발행 날짜 기준 크롤링 (YYYY-MM-DD 또는 YYYY-MM-DDTHH:mm 형식)
   } = {}
 ): Promise<string[]> {
-  const { maxPerSource = 10, sources = ['naver_blog', 'naver_cafe', 'naver_news', 'google_news'], clientId, clientSecret, targetDate } = options;
+  const defaultSources: typeof options.sources = [
+    'naver_blog', 'naver_cafe', 'naver_news', 'naver_kin',
+    'google_news', 'google_web',
+    'daum_blog', 'daum_cafe', 'daum_news'
+  ];
+  const { maxPerSource = 10, sources = defaultSources, clientId, clientSecret, targetDate } = options;
 
   const dateInfo = targetDate ? ` (발행 날짜 기준: ${targetDate})` : '';
-  console.log(`[검색] 키워드 "${keyword}"로 검색 시작...${dateInfo} (네이버 검색 API ${clientId ? '사용' : '미사용'})`);
+  console.log(`[검색] 키워드 "${keyword}"로 ${sources.length}개 소스에서 검색 시작...${dateInfo}`);
 
-  const allUrls: string[] = [];
+  // ✅ 소스 → 검색 함수/이름 매핑
+  const sourceConfig: Record<string, { fn: () => Promise<string[]>; name: string }> = {
+    naver_blog: { fn: () => searchNaverBlogRss(keyword, maxPerSource, clientId, clientSecret, targetDate), name: '네이버 블로그' },
+    naver_cafe: { fn: () => searchNaverCafeRss(keyword, maxPerSource, clientId, clientSecret), name: '네이버 카페' },
+    naver_news: { fn: () => searchNaverNewsRss(keyword, maxPerSource, clientId, clientSecret, targetDate), name: '네이버 뉴스' },
+    naver_kin: { fn: () => searchNaverKin(keyword, maxPerSource, clientId, clientSecret), name: '네이버 지식iN' },
+    google_news: { fn: () => searchGoogleNewsRss(keyword, maxPerSource), name: '구글 뉴스' },
+    google_web: { fn: () => searchGoogleWebRss(keyword, maxPerSource), name: '구글 웹(워드프레스/블로그스팟)' },
+    daum_blog: { fn: () => searchDaumBlog(keyword, maxPerSource), name: '다음 블로그(티스토리/브런치)' },
+    daum_cafe: { fn: () => searchDaumCafe(keyword, maxPerSource), name: '다음 카페' },
+    daum_news: { fn: () => searchDaumNews(keyword, maxPerSource), name: '다음 뉴스' },
+  };
 
   // 병렬로 모든 소스 검색
-  const searchPromises: Promise<string[]>[] = [];
-
-  if (sources.includes('naver_blog')) {
-    searchPromises.push(searchNaverBlogRss(keyword, maxPerSource, clientId, clientSecret, targetDate));
-  }
-
-  if (sources.includes('naver_cafe')) {
-    searchPromises.push(searchNaverCafeRss(keyword, maxPerSource, clientId, clientSecret));
-  }
-
-  if (sources.includes('naver_news')) {
-    searchPromises.push(searchNaverNewsRss(keyword, maxPerSource, clientId, clientSecret, targetDate));
-  }
-
-  if (sources.includes('google_news')) {
-    searchPromises.push(searchGoogleNewsRss(keyword, maxPerSource));
-  }
+  const activeSources = sources.filter(s => sourceConfig[s]);
+  const searchPromises = activeSources.map(s => sourceConfig[s].fn());
 
   const results = await Promise.allSettled(searchPromises);
 
+  const allUrls: string[] = [];
   results.forEach((result, index) => {
+    const sourceName = sourceConfig[activeSources[index]]?.name || activeSources[index];
     if (result.status === 'fulfilled') {
       const urls = result.value;
       allUrls.push(...urls);
-      const sourceNames = ['네이버 블로그', '네이버 카페', '네이버 뉴스', '구글 뉴스'];
-      const sourceIndex = index % sourceNames.length;
-      console.log(`[검색] ${sourceNames[sourceIndex]}: ${urls.length}개 URL 발견`);
+      if (urls.length > 0) {
+        console.log(`[검색] ✅ ${sourceName}: ${urls.length}개 URL 발견`);
+      }
     } else {
-      console.warn(`[검색] 검색 실패:`, (result.reason as Error).message);
+      console.warn(`[검색] ❌ ${sourceName} 검색 실패:`, (result.reason as Error).message);
     }
   });
 
   // 중복 제거
   const uniqueUrls = Array.from(new Set(allUrls));
 
-  console.log(`[검색] 총 ${uniqueUrls.length}개의 고유 URL 발견`);
+  console.log(`[검색] 총 ${uniqueUrls.length}개의 고유 URL 발견 (${activeSources.length}개 소스 검색)`);
 
   return uniqueUrls;
 }

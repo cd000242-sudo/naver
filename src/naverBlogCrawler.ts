@@ -1,13 +1,117 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 
 /**
+ * ✅ [2026-01-30] 네이버 블로그 모바일 API 폴백
+ * PostView.naver API는 iframe 없이 직접 본문을 반환
+ */
+async function fetchNaverBlogMobileApi(
+  blogId: string,
+  logNo: string,
+  logger?: (message: string) => void
+): Promise<{ title?: string; content?: string; images?: string[] }> {
+  const log = logger || console.log;
+
+  try {
+    const mobileUrl = `https://m.blog.naver.com/PostView.naver?blogId=${blogId}&logNo=${logNo}&proxyReferer=`;
+    log(`[모바일 API] 시도: ${mobileUrl}`);
+
+    const response = await fetch(mobileUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'ko-KR,ko;q=0.9',
+        'Referer': 'https://m.blog.naver.com/',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const html = await response.text();
+
+    // 제목 추출
+    const titleMatch = html.match(/<meta property="og:title" content="([^"]+)"/);
+    const title = titleMatch ? titleMatch[1].replace(/ : 네이버 블로그$/, '').trim() : undefined;
+
+    // 본문 추출 (se-main-container, postViewArea 등)
+    let content = '';
+
+    // 방법 1: se-main-container 찾기
+    const seMainMatch = html.match(/<div class="se-main-container[^"]*"[^>]*>([\s\S]*?)<\/div>\s*<div class="se-(?:viewer|footer)/);
+    if (seMainMatch) {
+      content = seMainMatch[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+
+    // 방법 2: postViewArea 찾기
+    if (!content || content.length < 100) {
+      const postViewMatch = html.match(/id="postViewArea"[^>]*>([\s\S]*?)<\/div>/);
+      if (postViewMatch) {
+        content = postViewMatch[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      }
+    }
+
+    // 방법 3: se-component-text 클래스들 찾기
+    if (!content || content.length < 100) {
+      const textMatches = html.matchAll(/<span class="se-fs-[^"]*"[^>]*>([^<]+)<\/span>/g);
+      const texts: string[] = [];
+      for (const match of textMatches) {
+        texts.push(match[1]);
+      }
+      content = texts.join(' ').replace(/\s+/g, ' ').trim();
+    }
+
+    // 이미지 추출
+    const images: string[] = [];
+    const imgMatches = html.matchAll(/src="(https?:\/\/[^"]*(?:postfiles|blogfiles|phinf)[^"]*\.(?:jpg|jpeg|png|gif|webp)[^"]*)"/gi);
+    for (const match of imgMatches) {
+      if (!images.includes(match[1])) {
+        images.push(match[1]);
+      }
+    }
+
+    if (content && content.length >= 100) {
+      log(`[모바일 API] ✅ 성공: ${content.length}자, 이미지 ${images.length}개`);
+      return { title, content, images };
+    }
+
+    throw new Error(`본문 부족 (${content?.length || 0}자)`);
+  } catch (error) {
+    log(`[모바일 API] ❌ 실패: ${(error as Error).message}`);
+    throw error;
+  }
+}
+
+/**
+ * ✅ [2026-01-30] URL에서 blogId와 logNo 추출
+ */
+function extractBlogParams(url: string): { blogId?: string; logNo?: string } {
+  // 패턴 1: blog.naver.com/blogId/logNo
+  const pattern1 = url.match(/blog\.naver\.com\/([^\/\?]+)\/(\d+)/);
+  if (pattern1) {
+    return { blogId: pattern1[1], logNo: pattern1[2] };
+  }
+
+  // 패턴 2: blog.naver.com/PostView.naver?blogId=xxx&logNo=yyy
+  const blogIdMatch = url.match(/blogId=([^&]+)/);
+  const logNoMatch = url.match(/logNo=(\d+)/);
+  if (blogIdMatch && logNoMatch) {
+    return { blogId: blogIdMatch[1], logNo: logNoMatch[1] };
+  }
+
+  return {};
+}
+
+/**
  * Puppeteer를 사용한 네이버 블로그 크롤링
  * iframe 구조를 포함한 전체 본문 추출 가능
+ * ✅ [2026-01-30] 3단계 폴백: Puppeteer → 모바일 API → 에러
  */
 export async function crawlNaverBlogWithPuppeteer(
   url: string,
   logger?: (message: string) => void,
 ): Promise<{ title?: string; content?: string; images?: string[] }> {
+
   const log = logger || console.log;
   let browser: Browser | null = null;
 
@@ -43,7 +147,7 @@ export async function crawlNaverBlogWithPuppeteer(
     });
 
     const page = await browser.newPage();
-    
+
     // User-Agent 설정
     await page.setUserAgent(
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
@@ -76,12 +180,12 @@ export async function crawlNaverBlogWithPuppeteer(
         const iframe = document.querySelector('iframe#mainFrame, iframe.se-main-container');
         return !!iframe;
       });
-      
+
       if (hasIframe) {
         log('[iframe 감지] iframe 콘텐츠 로드 대기 중...');
         // ✅ iframe 내부 이미지 완전 로드를 위해 대기 시간 증가
         await new Promise(resolve => setTimeout(resolve, 4000));
-        
+
         // ✅ 추가: 스크롤하여 lazy-load 이미지 로드
         try {
           await page.evaluate(async () => {
@@ -109,7 +213,7 @@ export async function crawlNaverBlogWithPuppeteer(
     const errorCheck = await page.evaluate(() => {
       const bodyText = document.body.textContent || '';
       const htmlContent = document.documentElement.innerHTML;
-      
+
       // 네이버 블로그 오류 페이지 패턴들
       const errorPatterns = [
         '삭제되었거나 없는 게시글입니다',
@@ -136,10 +240,10 @@ export async function crawlNaverBlogWithPuppeteer(
       // ✅ 네이버 블로그는 iframe 구조라 초기 페이지가 짧을 수 있으므로
       // 본문 길이 체크를 제거하거나 매우 짧은 경우만 (10자 미만) 체크
       // iframe 또는 이미지가 있으면 정상 페이지로 간주
-      const hasContent = htmlContent.includes('iframe') || 
-                        htmlContent.includes('img') || 
-                        bodyText.trim().length >= 10;
-      
+      const hasContent = htmlContent.includes('iframe') ||
+        htmlContent.includes('img') ||
+        bodyText.trim().length >= 10;
+
       if (!hasContent) {
         return { isError: true, message: '페이지에 콘텐츠가 없습니다' };
       }
@@ -154,29 +258,38 @@ export async function crawlNaverBlogWithPuppeteer(
     log('[페이지 검증] 정상 페이지 확인됨');
 
     // 제목 추출 (브랜드 커넥트 지원)
+    // ✅ [2026-01-30] 우선순위 수정: iframe 내부 제목 먼저 확인
     const title = await page.evaluate(() => {
       // 🛒 네이버 브랜드 커넥트 제목
       if (window.location.href.includes('brandconnect.naver.com')) {
         const productTitle = document.querySelector('.product_title, .product-title, .productTitle, h1, h2')?.textContent?.trim();
         if (productTitle) return productTitle;
       }
-      
-      // 📝 블로그 제목 (기존 로직)
-      // 메타 태그에서 제목 추출
-      const ogTitle = document.querySelector('meta[property="og:title"]')?.getAttribute('content');
-      if (ogTitle) return ogTitle.trim();
 
-      // iframe 내부 제목 찾기
+      // 📝 블로그 제목 - ✅ iframe 내부 먼저 확인 (가장 정확)
       const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
       if (iframe?.contentDocument) {
-        const iframeTitle = iframe.contentDocument.querySelector('.se-title-text, h1')?.textContent;
-        if (iframeTitle) return iframeTitle.trim();
+        // 1순위: se-title-text (스마트에디터 제목)
+        const seTitle = iframe.contentDocument.querySelector('.se-title-text')?.textContent?.trim();
+        if (seTitle && seTitle.length > 5) return seTitle;
+
+        // 2순위: pcol1 클래스 (구버전 에디터)
+        const pcolTitle = iframe.contentDocument.querySelector('.pcol1, .htitle, ._title')?.textContent?.trim();
+        if (pcolTitle && pcolTitle.length > 5) return pcolTitle;
+
+        // 3순위: h3.se_textarea (또 다른 버전)
+        const h3Title = iframe.contentDocument.querySelector('h3.se_textarea, h3')?.textContent?.trim();
+        if (h3Title && h3Title.length > 5) return h3Title;
       }
 
-      // 일반 제목 선택자
-      const h1Title = document.querySelector('h1')?.textContent;
-      if (h1Title) return h1Title.trim();
+      // 4순위: og:title (iframe 접근 실패 시 폴백)
+      const ogTitle = document.querySelector('meta[property="og:title"]')?.getAttribute('content');
+      if (ogTitle) {
+        // " : 네이버 블로그" 접미사 제거
+        return ogTitle.replace(/ : 네이버 블로그$/, '').trim();
+      }
 
+      // 5순위: document.title
       return document.title.split('|')[0].trim() || document.title.split('-')[0].trim();
     });
 
@@ -186,30 +299,30 @@ export async function crawlNaverBlogWithPuppeteer(
     const contentData = await page.evaluate(() => {
       // 🛒 네이버 브랜드 커넥트 (쇼핑몰 제품 페이지) 크롤링
       const isBrandConnect = window.location.href.includes('brandconnect.naver.com');
-      
+
       if (isBrandConnect) {
         // 브랜드 커넥트 제품 정보 추출
         const productInfo: string[] = [];
-        
+
         // 제품명
         const productName = document.querySelector('.product_title, .product-title, h1, h2')?.textContent?.trim();
         if (productName) productInfo.push(`제품명: ${productName}`);
-        
+
         // 제품 설명
         const productDesc = document.querySelector('.product_description, .product-description, .description, .detail-description')?.textContent?.trim();
         if (productDesc) productInfo.push(`제품 설명: ${productDesc}`);
-        
+
         // 제품 상세 정보
         const productDetails = document.querySelector('.product_detail, .product-detail, .detail-info, .product-info')?.textContent?.trim();
         if (productDetails) productInfo.push(`상세 정보: ${productDetails}`);
-        
+
         // 제품 특징
         const features = Array.from(document.querySelectorAll('.feature, .benefit, .point, li'))
           .map(el => el.textContent?.trim())
           .filter(text => text && text.length > 10 && text.length < 300)
           .slice(0, 10); // 최대 10개
         if (features.length > 0) productInfo.push(`주요 특징:\n${features.join('\n')}`);
-        
+
         // 전체 텍스트 추출 (fallback)
         if (productInfo.length === 0) {
           const bodyText = document.body.textContent || '';
@@ -217,25 +330,25 @@ export async function crawlNaverBlogWithPuppeteer(
             .replace(/\s+/g, ' ')
             .replace(/로그인|회원가입|장바구니|주문하기|구매하기|찜하기|공유하기|더보기/g, '')
             .trim();
-          
+
           if (cleaned.length > 200) {
             return cleaned;
           }
         }
-        
+
         const result = productInfo.join('\n\n');
         if (result.length > 100) {
           return result;
         }
       }
-      
+
       // 📝 네이버 블로그 크롤링 (기존 로직)
       // iframe 내부 본문 찾기 (우선)
       const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
-      
+
       if (iframe?.contentDocument) {
         const iframeDoc = iframe.contentDocument;
-        
+
         // 네이버 블로그 Smart Editor 본문 선택자
         const contentSelectors = [
           '#postViewArea',
@@ -252,7 +365,7 @@ export async function crawlNaverBlogWithPuppeteer(
             // 불필요한 요소 제거
             const clone = element.cloneNode(true) as HTMLElement;
             clone.querySelectorAll('script, style, noscript, iframe, nav, header, footer, .ad, .advertisement').forEach(el => el.remove());
-            
+
             let text = clone.textContent || '';
             text = text.trim().replace(/\s+/g, ' ');
 
@@ -284,7 +397,7 @@ export async function crawlNaverBlogWithPuppeteer(
         if (element) {
           const clone = element.cloneNode(true) as HTMLElement;
           clone.querySelectorAll('script, style, noscript, iframe, nav, header, footer, .ad, .advertisement').forEach(el => el.remove());
-          
+
           let text = clone.textContent || '';
           text = text.trim().replace(/\s+/g, ' ');
 
@@ -300,7 +413,7 @@ export async function crawlNaverBlogWithPuppeteer(
     // 브랜드 커넥트는 최소 길이 요구사항 완화 (100자), 블로그는 200자
     const isBrandConnect = url.includes('brandconnect.naver.com');
     const minContentLength = isBrandConnect ? 100 : 200;
-    
+
     if (!contentData || contentData.length < minContentLength) {
       log(`⚠️ 본문 추출 실패 또는 내용이 너무 짧습니다 (${contentData?.length || 0}자, 최소 ${minContentLength}자 필요)`);
       throw new Error('❌ 본문 내용이 부족합니다. 이 페이지는 정상적인 블로그 글이 아닌 것으로 보입니다.\n가능한 원인:\n- 삭제된 글\n- 비공개 글\n- 오류 페이지\n- 본문이 매우 짧은 글');
@@ -325,7 +438,7 @@ export async function crawlNaverBlogWithPuppeteer(
     // 이미지 URL 추출 (콘텐츠 이미지만 + 브랜드 커넥트 지원)
     const images = await page.evaluate(() => {
       const imageUrls: string[] = [];
-      
+
       // 🛒 네이버 브랜드 커넥트 이미지 추출
       if (window.location.href.includes('brandconnect.naver.com')) {
         // 제품 이미지 선택자
@@ -339,7 +452,7 @@ export async function crawlNaverBlogWithPuppeteer(
           'img[src*="shop-phinf.pstatic.net"]',
           'img[src*="shopping-phinf.pstatic.net"]',
         ];
-        
+
         for (const selector of productImageSelectors) {
           const imgs = document.querySelectorAll(selector);
           imgs.forEach((img: Element) => {
@@ -349,47 +462,47 @@ export async function crawlNaverBlogWithPuppeteer(
             }
           });
         }
-        
+
         // fallback: 모든 큰 이미지 추출
         if (imageUrls.length === 0) {
           const allImages = document.querySelectorAll('img');
           allImages.forEach((img: Element) => {
             const htmlImg = img as HTMLImageElement;
             const src = htmlImg.src || htmlImg.getAttribute('data-src');
-            if (src && 
-                src.startsWith('http') && 
-                (src.includes('phinf.pstatic.net') || src.includes('shopping')) &&
-                !src.includes('logo') &&
-                !src.includes('icon') &&
-                !imageUrls.includes(src)) {
+            if (src &&
+              src.startsWith('http') &&
+              (src.includes('phinf.pstatic.net') || src.includes('shopping')) &&
+              !src.includes('logo') &&
+              !src.includes('icon') &&
+              !imageUrls.includes(src)) {
               imageUrls.push(src);
             }
           });
         }
-        
+
         return imageUrls;
       }
-      
+
       // 📝 블로그 이미지 추출 (강화된 로직)
       const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
-      
+
       // UI 요소 제외 패턴
       const isUIElement = (url: string): boolean => {
         return url.includes('/nblog/') || // 네이버 블로그 UI
-               url.includes('/static/') || // 정적 UI
-               url.includes('/imgs/') || // 아이콘
-               url.includes('btn_') || // 버튼
-               url.includes('ico_') || // 아이콘
-               url.includes('spc.gif') || // 공백
-               url.includes('banner') || // 배너
-               url.includes('widget') || // 위젯
-               url.includes('personacon') || // 페르소나
-               url.includes('blogpfthumb') || // 프로필 썸네일
-               url.includes('_icon') || // 아이콘
-               url.includes('profile') || // 프로필
-               (url.endsWith('.gif') && !url.includes('postfiles')); // GIF는 postfiles만
+          url.includes('/static/') || // 정적 UI
+          url.includes('/imgs/') || // 아이콘
+          url.includes('btn_') || // 버튼
+          url.includes('ico_') || // 아이콘
+          url.includes('spc.gif') || // 공백
+          url.includes('banner') || // 배너
+          url.includes('widget') || // 위젯
+          url.includes('personacon') || // 페르소나
+          url.includes('blogpfthumb') || // 프로필 썸네일
+          url.includes('_icon') || // 아이콘
+          url.includes('profile') || // 프로필
+          (url.endsWith('.gif') && !url.includes('postfiles')); // GIF는 postfiles만
       };
-      
+
       // ✅ 이미지 URL 추출 헬퍼 함수
       const extractImageUrl = (img: Element): string | null => {
         const attrs = ['src', 'data-src', 'data-lazy-src', 'data-original', 'data-image-src', 'data-url'];
@@ -405,10 +518,10 @@ export async function crawlNaverBlogWithPuppeteer(
         if (bgMatch) return bgMatch[1];
         return null;
       };
-      
+
       if (iframe?.contentDocument) {
         const iframeDoc = iframe.contentDocument;
-        
+
         // ✅ 본문 영역에서만 이미지 추출 (셀렉터 확장)
         const contentSelectors = [
           '#postViewArea',
@@ -423,7 +536,7 @@ export async function crawlNaverBlogWithPuppeteer(
           '.post-content',
           '.blog-post', // ✅ 추가
         ];
-        
+
         let contentContainer: Element | null = null;
         for (const selector of contentSelectors) {
           const element = iframeDoc.querySelector(selector);
@@ -432,21 +545,21 @@ export async function crawlNaverBlogWithPuppeteer(
             break;
           }
         }
-        
+
         // 본문 영역이 있으면 그 안에서만 이미지 추출
         const searchContainer = contentContainer || iframeDoc.body;
-        
+
         // ✅ img 태그 뿐만 아니라 se-image-resource, a[data-linktype="img"] 등도 검색
         const imgElements = searchContainer.querySelectorAll('img, .se-image-resource, [data-linktype="img"]');
-        
+
         imgElements.forEach(img => {
           const src = extractImageUrl(img);
           if (src) {
             // 네이버 이미지 서버의 실제 콘텐츠 이미지만
-            if (src.includes('postfiles.pstatic.net') || 
-                src.includes('blogfiles.pstatic.net') || // ✅ 추가
-                src.includes('phinf.pstatic.net') || // ✅ 추가
-                (src.includes('naver.net') && !isUIElement(src))) {
+            if (src.includes('postfiles.pstatic.net') ||
+              src.includes('blogfiles.pstatic.net') || // ✅ 추가
+              src.includes('phinf.pstatic.net') || // ✅ 추가
+              (src.includes('naver.net') && !isUIElement(src))) {
               if (!imageUrls.includes(src)) {
                 imageUrls.push(src);
               }
@@ -465,16 +578,16 @@ export async function crawlNaverBlogWithPuppeteer(
           break;
         }
       }
-      
+
       const searchContainer = mainContentContainer || document.body;
       const mainImgs = searchContainer.querySelectorAll('img, .se-image-resource, [data-linktype="img"]');
       mainImgs.forEach(img => {
         const src = extractImageUrl(img);
         if (src) {
-          if (src.includes('postfiles.pstatic.net') || 
-              src.includes('blogfiles.pstatic.net') ||
-              src.includes('phinf.pstatic.net') ||
-              (src.includes('naver.net') && !isUIElement(src))) {
+          if (src.includes('postfiles.pstatic.net') ||
+            src.includes('blogfiles.pstatic.net') ||
+            src.includes('phinf.pstatic.net') ||
+            (src.includes('naver.net') && !isUIElement(src))) {
             if (!imageUrls.includes(src)) {
               imageUrls.push(src);
             }
@@ -496,6 +609,22 @@ export async function crawlNaverBlogWithPuppeteer(
     };
   } catch (error) {
     log(`❌ Puppeteer 크롤링 실패: ${(error as Error).message}`);
+
+    // ✅ [2026-01-30] 모바일 API 폴백 시도
+    const { blogId, logNo } = extractBlogParams(url);
+    if (blogId && logNo) {
+      log(`[폴백] 모바일 API로 재시도...`);
+      try {
+        const mobileResult = await fetchNaverBlogMobileApi(blogId, logNo, log);
+        if (mobileResult.content && mobileResult.content.length >= 100) {
+          log(`[폴백] ✅ 모바일 API 성공!`);
+          return mobileResult;
+        }
+      } catch (mobileError) {
+        log(`[폴백] ❌ 모바일 API도 실패: ${(mobileError as Error).message}`);
+      }
+    }
+
     throw new Error(`네이버 블로그 크롤링 실패: ${(error as Error).message}`);
   } finally {
     if (browser) {
@@ -504,4 +633,6 @@ export async function crawlNaverBlogWithPuppeteer(
     }
   }
 }
+
+
 

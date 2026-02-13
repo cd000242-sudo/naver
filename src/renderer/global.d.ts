@@ -224,6 +224,19 @@ interface AutomationAPI {
   getQuotaStatus: () => Promise<{ success: boolean; isFree: boolean; quota: any }>;
   generateContent: (prompt: string) => Promise<{ success: boolean; content?: string; message?: string }>;
   generateStructuredContent: (request: StructuredGenerationRequest) => Promise<{ success: boolean; content?: StructuredContent; message?: string; imageCount?: number }>;
+  // ✅ [2026-02-08] 테스트 이미지 생성 API - engine, textOverlay 파라미터 포함
+  generateTestImage: (options: {
+    style: string;
+    ratio: string;
+    prompt: string;
+    engine?: string;
+    textOverlay?: { enabled: boolean; text: string };
+  }) => Promise<{
+    success: boolean;
+    path?: string;
+    previewDataUrl?: string;
+    error?: string;
+  }>;
   generateImages: (
     options: {
       provider: string;
@@ -305,7 +318,7 @@ interface AutomationAPI {
     keywords: string[];
     category: string;
     imageMode: 'full-auto' | 'semi-auto' | 'manual' | 'skip';
-    selectedImageSource?: 'dalle' | 'pexels' | 'library';
+    selectedImageSource?: 'nano-banana-pro' | 'library';
   }) => Promise<{
     success: boolean;
     images?: ExtendedImage[];
@@ -330,6 +343,7 @@ interface AutomationAPI {
   canUseExternalInflow: () => Promise<boolean>;
   checkPatchFile: () => Promise<boolean>;
   getDeviceId: () => Promise<string>;
+  getAppVersion: () => Promise<string>; // ✅ [2026-02-05] 앱 버전 반환
   isPackaged: () => Promise<boolean>;
   testLicenseServer: (serverUrl?: string) => Promise<{ success: boolean; message: string; response?: any }>;
   networkOptimize: () => Promise<{ success: boolean; message: string; results: string[] }>; // ✅ 원클릭 네트워크 최적화
@@ -392,15 +406,18 @@ interface AutomationAPI {
   openExternalUrl: (url: string) => Promise<{ success: boolean; message?: string }>;
   // 창 포커스
   focusWindow: () => Promise<{ success: boolean; message?: string }>;
-  // ✅ 이미지 URL 다운로드 및 저장
+  // ✅ 이미지 URL 다운로드 및 저장 (카테고리별 폴더에 저장)
   downloadAndSaveImage: (
     imageUrl: string,
     heading: string,
     postTitle?: string,
-    postId?: string
+    postId?: string,
+    category?: string
   ) => Promise<{ success: boolean; filePath?: string; previewDataUrl?: string; savedToLocal?: string; message?: string }>;
   collectImagesFromUrl: (url: string) => Promise<{ success: boolean; images?: string[]; message?: string }>;
   collectImagesFromShopping: (url: string) => Promise<{ success: boolean; images?: string[]; title?: string; message?: string }>;
+  // ✅ [2026-02-01] Gemini 3 기반 소제목-이미지 의미적 매칭
+  matchImagesToHeadings: (images: string[], headings: string[]) => Promise<{ success: boolean; matches?: number[]; message?: string }>;
   searchNaverImages: (keyword: string) => Promise<{ success: boolean; images?: any[]; message?: string }>; // ✅ 네이버 이미지 검색 API
   // ✅ [100점 개선] AI 이미지 검색어 최적화 API
   optimizeImageSearchQuery: (title: string, heading: string) => Promise<{
@@ -470,6 +487,13 @@ interface AutomationAPI {
   generateThumbnailSvg: (title: string, options?: ThumbnailOptions, category?: string) => Promise<{ success: boolean; svg?: string; message?: string }>;
   getThumbnailStyles: () => Promise<{ success: boolean; styles?: ThumbnailStyle[]; message?: string }>;
   getThumbnailCategories: () => Promise<{ success: boolean; categories?: string[]; message?: string }>;
+  // ✅ [2026-02-04] 수집 이미지에 텍스트 오버레이 적용 API
+  createProductThumbnail: (
+    imageUrl: string,
+    text: string,
+    options?: { position?: string; fontSize?: number; textColor?: string; opacity?: number }
+  ) => Promise<{ success: boolean; outputPath?: string; previewDataUrl?: string; message?: string }>;
+
 
   // ✅ 다중 블로그 관리 API
   addBlogAccount: (name: string, blogId: string, naverId?: string, naverPassword?: string, settings?: BlogAccountSettings) => Promise<{ success: boolean; account?: BlogAccount; message?: string }>;
@@ -681,7 +705,7 @@ type BlogAccountSettings = {
   category?: string;
   isJabBlog?: boolean;
   // ✅ 계정별 개별 설정 (다중계정 동시발행용)
-  imageSource?: 'gemini' | 'imagen' | 'pexels' | 'unsplash' | 'skip';
+  imageSource?: 'gemini' | 'imagen' | 'unsplash' | 'skip';
   toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous';
   publishMode?: 'publish' | 'draft';
   keywords?: string[];

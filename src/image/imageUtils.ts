@@ -361,7 +361,24 @@ export async function filterSimilarImages(
   const uniqueImages: { url: string; hash: bigint }[] = [];
   const skippedUrls: string[] = [];
 
-  for (const url of imageUrls) {
+  for (const item of imageUrls) {
+    // ✅ [2026-02-01] 객체 배열도 처리 (item이 객체일 수 있음)
+    let url: string;
+    if (typeof item === 'string') {
+      url = item;
+    } else if (item && typeof item === 'object') {
+      // 객체인 경우 url, thumbnailUrl, src 등에서 URL 추출
+      url = (item as any).url || (item as any).thumbnailUrl || (item as any).src || '';
+    } else {
+      continue;
+    }
+
+    // URL 유효성 검사
+    if (!url || typeof url !== 'string' || !url.startsWith('http')) {
+      console.warn(`[ImageFilter] ⚠️ 유효하지 않은 URL 형식, 스킵: ${JSON.stringify(item).substring(0, 80)}...`);
+      continue;
+    }
+
     try {
       // 이미지 다운로드 (타임아웃 5초)
       const response = await axios.get(url, {

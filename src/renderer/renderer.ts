@@ -5,7 +5,7 @@ import { safeExecute, safeExecuteAsync, safeGetElement, safeAddEventListener } f
 // ✅ [2026-01-25 모듈화] 진행상황 모달
 import { ProgressModal } from './components/ProgressModal.js';
 // ✅ [2026-01-25 모듈화] 소제목 이미지 설정
-import { HeadingImageMode, getHeadingImageMode, setHeadingImageMode, openHeadingImageModal, initHeadingImageButton } from './components/HeadingImageSettings.js';
+import { HeadingImageMode, getHeadingImageMode, setHeadingImageMode, openHeadingImageModal, initHeadingImageButton, getFullAutoImageSource } from './components/HeadingImageSettings.js';
 // ✅ [2026-01-25 모듈화] 프롬프트 편집 모달
 import './components/PromptEditModal.js';
 // ✅ [2026-01-25 모듈화] 초기화 가드 및 UI 락 시스템
@@ -22,6 +22,8 @@ import { safeLocalStorageSetItem } from './utils/storageUtils.js';
 import { initGeminiModelSync } from './utils/geminiModelSync.js';
 // ✅ [2026-01-25 모듈화] 에러 유틸리티
 import { translateGeminiError } from './utils/errorUtils.js';
+// ✅ [2026-02-12] 반자동 전용 이미지 자동 수집 모듈
+import { shouldRunAutoImageSearch, runAutoImageSearch, injectAutoCollectCheckboxUI } from './utils/semiAutoImageSearch.js';
 // ✅ [2026-01-25 모듈화] 카테고리 모달 유틸리티
 import { initCategorySelectionListener } from './utils/categoryModalUtils.js';
 // ✅ [2026-01-25 모듈화] 앱 이벤트 핸들러
@@ -175,6 +177,57 @@ import {
 
   console.log('[Stability] 전역 에러 핸들러 등록 완료');
 })();
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ✅ [2026-02-05] 업데이터 로그 리스너 - DevTools 콘솔에 업데이트 진행 상황 표시
+// ═══════════════════════════════════════════════════════════════════════════════
+(function setupUpdaterLogListener() {
+  if (window.api && typeof window.api.on === 'function') {
+    window.api.on('updater-log', (message: string) => {
+      console.log(`%c${message}`, 'color: #FFC107; font-weight: bold;');
+    });
+    console.log('[Updater] 업데이터 로그 리스너 등록 완료');
+  }
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ✅ [2026-02-05] 앱 버전 표시 - 메인 창 헤더에 버전 표시
+// ═══════════════════════════════════════════════════════════════════════════════
+(async function loadAppVersion() {
+  try {
+    const version = await window.api.getAppVersion();
+    const badge = document.getElementById('app-version-badge');
+    if (badge && version) {
+      badge.textContent = `v${version}`;
+      console.log(`[App] 버전: v${version}`);
+    }
+  } catch (error) {
+    console.error('[App] 버전 로드 실패:', error);
+  }
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ✅ [2026-01-27] 완전자동 이미지 설정 읽기 헬퍼
+// localStorage에 저장된 사용자 이미지 설정을 반환합니다.
+// ✅ [2026-01-29] getter 함수 사용으로 일관성 개선
+// ═══════════════════════════════════════════════════════════════════════════════
+function getGlobalImageSettings() {
+  // HeadingImageSettings.ts의 getter 함수 사용 (window에 노출됨)
+  const w = window as any;
+  // ✅ [2026-02-04 FIX] fullAutoImageSource를 우선 사용 (풀오토 모달에서 설정한 값)
+  // globalImageSource는 이미지 관리 탭용, fullAutoImageSource는 풀오토 발행용
+  return {
+    imageSource: w.getFullAutoImageSource?.() || localStorage.getItem('fullAutoImageSource') || w.getGlobalImageSource?.() || localStorage.getItem('globalImageSource') || 'nano-banana-pro',
+    imageStyle: w.getImageStyle?.() || localStorage.getItem('imageStyle') || 'realistic',
+    imageRatio: w.getImageRatio?.() || localStorage.getItem('imageRatio') || '1:1',
+    thumbnailRatio: w.getThumbnailRatio?.() || localStorage.getItem('thumbnailImageRatio') || '1:1',
+    subheadingRatio: w.getSubheadingRatio?.() || localStorage.getItem('subheadingImageRatio') || '1:1',
+    headingImageMode: w.getHeadingImageMode?.() || localStorage.getItem('headingImageMode') || 'all',
+    thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true',
+    textOnlyPublish: localStorage.getItem('textOnlyPublish') === 'true',
+    lifestyleImageGenerate: localStorage.getItem('lifestyleImageGenerate') === 'true'
+  };
+}
 
 // ✅ [2026-01-25 모듈화] safeExecute, safeExecuteAsync, safeGetElement, safeAddEventListener
 // → ./utils/safeExecute.js로 이동됨 (상단 import 참조)
@@ -337,8 +390,10 @@ function hydrateImageManagerFromImages(structuredContent: any, images: any[]): v
 
   byHeading.forEach((list, heading) => {
     try {
-      ImageManager.imageMap.set(heading, list);
-      ImageManager.unsetHeadings.delete(heading);
+      // ✅ [2026-02-12 P2 FIX #14] resolveHeadingKey 적용
+      const normalizedKey = ImageManager.resolveHeadingKey(heading);
+      ImageManager.imageMap.set(normalizedKey, list);
+      ImageManager.unsetHeadings.delete(normalizedKey);
     } catch {
       // ignore
     }
@@ -348,6 +403,31 @@ function hydrateImageManagerFromImages(structuredContent: any, images: any[]): v
     syncGlobalImagesFromImageManager();
   } catch {
     // ignore
+  }
+}
+
+// ✅ [2026-02-12] 글 생성 후 소제목별 이미지 자동 수집 (모듈 위임)
+// → 실제 로직은 ./utils/semiAutoImageSearch.ts에 모듈화됨
+// → 체크박스 "글 생성 시 이미지 수집도 같이하기" ON일 때만 실행
+async function autoSearchAndPopulateImages(
+  structuredContent: any,
+  mainKeyword: string,
+  suppressModal?: boolean
+): Promise<void> {
+  // 가드: 체크박스 미체크, 풀오토, 쇼핑커넥트 등이면 실행 안 함
+  if (!shouldRunAutoImageSearch(suppressModal)) return;
+
+  try {
+    await runAutoImageSearch(
+      structuredContent,
+      mainKeyword,
+      appendLog,
+      ImageManager,
+      syncGlobalImagesFromImageManager
+    );
+  } catch (error) {
+    console.error('[AutoImageSearch] ❌ 오류:', error);
+    appendLog(`⚠️ 이미지 자동 수집 중 오류: ${(error as Error).message}`);
   }
 }
 
@@ -379,6 +459,8 @@ function saveGeneratedPostFromData(
     const now = new Date().toISOString();
 
     const categoryFromContent = String((structuredContent as any)?.articleType || (structuredContent as any)?.category || '').trim();
+    // ✅ [2026-02-02 FIX] 사용자가 선택한 콘텐츠 카테고리를 그대로 저장 (정규화 제거)
+    // 폴더 목록 UI에서만 정규화 적용하여 그룹화
     const resolvedCategory = String(overrides?.category || categoryFromContent || '').trim();
 
     const normalizedImages = (images || []).map((img: any) => ({
@@ -474,7 +556,17 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
     return true;
   }
 
-  const config: any = (await window.api.getConfig()) || {};
+  // ✅ [2026-02-02 FIX] IPC 호출에 타임아웃 추가 (무한 대기 방지)
+  let config: any = {};
+  try {
+    config = await Promise.race([
+      window.api.getConfig(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('getConfig timeout')), 10000))
+    ]) || {};
+  } catch (e) {
+    console.warn('[CostConsent] ⚠️ getConfig 호출 실패/타임아웃, 기본값 사용:', e);
+    config = {};
+  }
 
   // ✅ 나노 바나나 프로 / Fal.ai (FLUX) 전용 플랜 선택 로직
   if (provider === 'nano-banana-pro' || provider === 'falai') {
@@ -625,6 +717,8 @@ async function reserveExternalApiImageQuota(provider: string, requestCount: numb
 // → ./utils/shoppingConnectUtils.js로 이동됨 (상단 import 참조)
 
 async function generateImagesWithCostSafety(options: any): Promise<any> {
+  // ✅ [2026-02-11 FIX] provider 결정 우선순위: 전달값 → fullAutoImageSource → globalImageSource → 'nano-banana-pro'
+  console.log(`[generateImagesWithCostSafety] 📥 전달받은 provider: "${String(options?.provider || '').trim()}"`);
   const provider = String(options?.provider || '').trim();
 
   // ✅ [2026-01-24 FIX] headingImageMode 자동 주입 - 다중계정 발행에서도 홀수/짝수 필터링 적용
@@ -634,6 +728,52 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
       options.headingImageMode = savedMode;
       console.log(`[Renderer] 🖼️ headingImageMode 자동 주입: "${savedMode}"`);
     }
+  }
+
+  // ✅ [2026-02-11 FIX] 이미지 소스 자동 주입 - fullAutoImageSource를 globalImageSource보다 우선 참조
+  if (!options.provider) {
+    const fullAutoSource = localStorage.getItem('fullAutoImageSource');
+    const globalSource = localStorage.getItem('globalImageSource');
+    const resolvedSource = fullAutoSource || globalSource;
+    if (resolvedSource) {
+      options.provider = resolvedSource;
+      console.log(`[Renderer] 🎨 이미지 소스 자동 주입: "${resolvedSource}" (fullAuto: ${fullAutoSource || 'null'}, global: ${globalSource || 'null'})`);
+    }
+  }
+  if (!options.imageStyle) {
+    const savedStyle = localStorage.getItem('imageStyle');
+    if (savedStyle) {
+      options.imageStyle = savedStyle;
+      console.log(`[Renderer] ✨ 이미지 스타일 자동 주입: "${savedStyle}"`);
+    }
+  }
+  if (!options.imageRatio) {
+    const savedRatio = localStorage.getItem('imageRatio');
+    if (savedRatio) {
+      options.imageRatio = savedRatio;
+      console.log(`[Renderer] 📐 이미지 비율 자동 주입: "${savedRatio}"`);
+    }
+  }
+
+  // ✅ [2026-02-12] 카테고리 자동 주입 → DeepInfra 카테고리별 스타일 적용 (NO PEOPLE 등)
+  if (!options.category) {
+    const cachedCategory = UnifiedDOMCache?.getRealCategory?.() || '';
+    if (cachedCategory) {
+      options.category = cachedCategory;
+      console.log(`[Renderer] 📂 카테고리 자동 주입: "${cachedCategory}" → DeepInfra 스타일 매칭에 사용`);
+    }
+  }
+
+  // ✅ [2026-01-27] 썸네일/소제목 분리 비율 주입
+  if (!(options as any).thumbnailImageRatio) {
+    const savedThumbnailRatio = localStorage.getItem('thumbnailImageRatio') || localStorage.getItem('imageRatio') || '1:1';
+    (options as any).thumbnailImageRatio = savedThumbnailRatio;
+    console.log(`[Renderer] 📐 썸네일 비율 자동 주입: "${savedThumbnailRatio}"`);
+  }
+  if (!(options as any).subheadingImageRatio) {
+    const savedSubheadingRatio = localStorage.getItem('subheadingImageRatio') || localStorage.getItem('imageRatio') || '1:1';
+    (options as any).subheadingImageRatio = savedSubheadingRatio;
+    console.log(`[Renderer] 📐 소제목 비율 자동 주입: "${savedSubheadingRatio}"`);
   }
 
   // ✅ [핵심 수정] 호출자가 isShoppingConnect를 명시적으로 전달했으면 그 값 사용
@@ -654,8 +794,11 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
     } else if (hasCollectedImages) {
       console.log(`[Renderer] 🛒 쇼핑커넥트: ${options.collectedImages.length}개 수집 이미지 전달됨`);
     } else {
-      console.log(`[Renderer] ⚠️ 쇼핑커넥트: 수집된 이미지 없음`);
+      // ✅ [2026-02-02 FIX] 수집된 이미지 없어도 AI 이미지 생성으로 정상 진행
+      // 이 로그 이후 AI 이미지 생성이 정상적으로 호출되어야 함
+      console.log(`[Renderer] ⚠️ 쇼핑커넥트: 수집된 이미지 없음 → AI 이미지 생성으로 진행`);
     }
+
   } else {
     // ✅ [수정] 일반 모드에서도 collectedImages가 있으면 참조 이미지로 사용 (제품 이미지 기반 생성 지원)
     // 더 이상 delete하지 않음 - 수집된 이미지가 있으면 참조로 활용
@@ -684,9 +827,23 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
       }
 
       try {
-        return await window.api.generateImages(options);
+        // ✅ [2026-02-03 FIX] 이미지 생성 API에 5분 타임아웃 추가 - hang 방지
+        const IMAGE_API_TIMEOUT = 5 * 60 * 1000; // 5분
+        const timeoutPromise = new Promise((_, reject) => {
+          setTimeout(() => {
+            reject(new Error(`이미지 생성 타임아웃 (${IMAGE_API_TIMEOUT / 1000}초)`));
+          }, IMAGE_API_TIMEOUT);
+        });
+
+        const result = await Promise.race([
+          window.api.generateImages(options),
+          timeoutPromise
+        ]);
+
+        return result;
       } catch (e) {
         await reserve.rollback();
+        console.error('[Renderer] ❌ 이미지 생성 실패/타임아웃:', (e as Error).message);
         throw e;
       }
     }
@@ -713,6 +870,7 @@ function syncGlobalImagesFromImageManager(): void {
     return toFileUrlMaybe(String(raw || '').trim());
   };
 
+  // ✅ [2026-02-11 FIX] ImageManager(최신) 데이터가 항상 우선 (이미지 관리 탭 변경/GIF 교체 반영)
   let allImages = managerAllImages;
   try {
     if (Array.isArray(existingAllImages) && existingAllImages.length > 0) {
@@ -720,14 +878,16 @@ function syncGlobalImagesFromImageManager(): void {
       const merged: any[] = [];
       const seen = new Set<string>();
 
-      existingList.forEach((img: any) => {
+      // ImageManager(최신) 데이터를 먼저 추가
+      managerAllImages.forEach((img: any) => {
         const k = getKey(img);
         if (!k) return;
         merged.push(img);
         seen.add(k);
       });
 
-      managerAllImages.forEach((img: any) => {
+      // existingList에서 ImageManager에 없는 항목만 보충
+      existingList.forEach((img: any) => {
         const k = getKey(img);
         if (!k) return;
         if (seen.has(k)) return;
@@ -1275,9 +1435,8 @@ async function ensureGifImageForHeading(headingTitle: string, videoFilePath: str
       timestamp: Date.now(),
     };
 
-    // GIF는 대표 미디어로 앞에 배치
-    const withoutPrimary = (withoutGifs || []).filter((_img: any, idx: number) => idx !== 0);
-    ImageManager.imageMap.set(titleKey, [imageObj, ...withoutPrimary]);
+    // ✅ [2026-02-12 FIX] GIF는 대표 미디어로 앞에 배치 (기존 이미지 전체 보존)
+    ImageManager.imageMap.set(titleKey, [imageObj, ...withoutGifs]);
     ImageManager.unsetHeadings.delete(titleKey);
     try {
       const keyNorm = normalizeHeadingKeyForVideoCache(titleKey);
@@ -2887,12 +3046,8 @@ const UnifiedDOMCache = {
 
   // 안전한 getter
   getGenerator(): string {
-    // ✅ [2026-01-26 FIX] 환경설정에서 perplexity-sonar 선택 시 'perplexity' 반환
-    const appConfig = (window as any).appConfig || {};
-    const selectedModel = appConfig.primaryGeminiTextModel || appConfig.geminiModel || '';
-    if (selectedModel === 'perplexity-sonar' || String(selectedModel).toLowerCase().startsWith('perplexity')) {
-      return 'perplexity';
-    }
+    // ✅ [2026-01-26 FIX] UI 드롭다운 값만 사용 (자동 감지 제거됨)
+    // Perplexity는 사용자가 UI에서 명시적으로 'perplexity' 선택 시에만 사용
     return this.unifiedGenerator?.value || 'gemini';
   },
 
@@ -2915,24 +3070,41 @@ const UnifiedDOMCache = {
   },
 
   getImageSource(): string {
+    // ✅ [2026-02-02] 풀오토/연속/다중계정 발행 전용 이미지 소스
+    // 이미지 관리 탭의 globalImageSource와 완전히 분리됨
+    const fullAutoSource = localStorage.getItem('fullAutoImageSource');
+    if (fullAutoSource && fullAutoSource !== 'undefined' && fullAutoSource !== 'null') {
+      console.log(`[UnifiedDOMCache] 🎨 fullAutoImageSource 사용 (풀오토 전용): ${fullAutoSource}`);
+      return fullAutoSource;
+    }
+
     // 1. 선택된 버튼 우선 확인
     const selectedBtn = document.querySelector('.unified-img-source-btn.selected');
     if (selectedBtn) {
-      return selectedBtn.getAttribute('data-source') || 'dalle';
+      return selectedBtn.getAttribute('data-source') || 'nano-banana-pro';
     }
 
     // 2. 드롭다운(select) 확인
     if (this.unifiedImageSource) {
-      return this.unifiedImageSource.value || 'dalle';
+      return this.unifiedImageSource.value || 'nano-banana-pro';
     }
 
     // 3. 최후의 보루 (DOM 직접 확인)
     const fallbackSelect = document.getElementById('unified-image-source') as HTMLSelectElement;
-    return fallbackSelect?.value || 'dalle';
+    return fallbackSelect?.value || 'nano-banana-pro';
   },
 
   getRealCategory(): string | undefined {
     return (document.getElementById('real-blog-category-select') as HTMLSelectElement)?.value || undefined;
+  },
+
+  // ✅ [2026-02-11 FIX] 카테고리 이름 반환 (발행 모달에서 이름으로 매칭하므로 value가 아닌 text 필요)
+  getRealCategoryName(): string | undefined {
+    const select = document.getElementById('real-blog-category-select') as HTMLSelectElement;
+    if (select && select.selectedIndex >= 0) {
+      return select.options[select.selectedIndex]?.text?.trim() || undefined;
+    }
+    return undefined;
   }
 };
 
@@ -3226,120 +3398,29 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     setupHeaderButtons();
     console.log('[DOMContentLoaded] 헤더 버튼 초기화 완료');
+
+    // ✅ [2026-01-27] 연속 발행 시작 버튼 - 이벤트 리스너로 처리 (이중 호출 방지)
+    const continuousBtn = document.getElementById('continuous-mode-start-btn');
+    if (continuousBtn) {
+      continuousBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        console.log('[Continuous] 버튼 클릭 - 이벤트 리스너');
+        toggleContinuousModeModal();
+      }, { capture: true }); // 캡처 단계에서 처리
+      console.log('[DOMContentLoaded] 연속 발행 시작 버튼 이벤트 리스너 등록 완료');
+    }
+    // ✅ [2026-02-13] 연속발행/풀오토 키워드 제목 옵션 상호 배타 등록
+    setupMutualExclusiveCheckboxes('continuous-keyword-as-title', 'continuous-keyword-title-prefix');
+    setupMutualExclusiveCheckboxes('fullauto-keyword-as-title', 'fullauto-keyword-title-prefix');
+    console.log('[DOMContentLoaded] 키워드 제목 옵션 상호배타 등록 완료');
   }, 50); // 두 번째 리스너보다 먼저 실행 (50ms vs 100ms)
 });
 
-// window.load와 즉시 실행은 제거 - initializeApplication에서 한 번만 실행
-
-// 이벤트 위임 방식도 추가 (입력 필드는 제외)
-document.addEventListener('click', (e) => {
-  const target = e.target as HTMLElement;
-
-  // ✅ 입력 필드나 텍스트 영역은 이벤트 위임에서 제외
-  if (target.tagName === 'INPUT' ||
-    target.tagName === 'TEXTAREA' ||
-    target.tagName === 'SELECT' ||
-    target.closest('input, textarea, select')) {
-    return; // 입력 필드는 기본 동작 유지
-  }
-
-  console.log('[Delegate] 문서 클릭 감지, 타겟:', target.id || target.tagName);
-
-  if (target.id === 'settings-button-fixed') {
-    console.log('[Delegate] ===== 환경설정 버튼 클릭 감지 (위임) =====');
-    console.log('[Delegate] 이벤트 객체:', e);
-    console.log('[Delegate] 이벤트 타겟:', e.target);
-    console.log('[Delegate] 이벤트 currentTarget:', e.currentTarget);
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    const modal = document.getElementById('settings-modal') as HTMLDivElement;
-    console.log('[Delegate] settings-modal 찾음:', !!modal);
-
-    if (modal) {
-      console.log('[Delegate] 모달 표시 시도');
-      console.log('[Delegate] 설정 전 aria-hidden:', modal.getAttribute('aria-hidden'));
-      console.log('[Delegate] 설정 전 display:', modal.style.display);
-
-      modal.setAttribute('aria-hidden', 'false');
-      modal.style.display = 'flex';
-
-      // 강제 스타일 적용 (위임 방식)
-      modal.style.position = 'fixed !important';
-      modal.style.top = '0 !important';
-      modal.style.left = '0 !important';
-      modal.style.width = '100% !important';
-      modal.style.height = '100% !important';
-      modal.style.backgroundColor = 'rgba(0,0,0,0.8) !important';
-      modal.style.zIndex = '10000 !important';
-
-      console.log('[Delegate] 설정 후 aria-hidden:', modal.getAttribute('aria-hidden'));
-      console.log('[Delegate] 설정 후 display:', modal.style.display);
-      console.log('[Delegate] 환경설정 모달 표시됨 (위임)');
-    } else {
-      console.error('[Delegate] settings-modal이 존재하지 않음');
-    }
-  }
-
-  if (target.id === 'external-links-button-fixed') {
-    console.log('[Delegate] ===== 외부유입 버튼 클릭 감지 (위임) =====');
-    console.log('[Delegate] 이벤트 객체:', e);
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    const modal = document.getElementById('external-links-modal') as HTMLDivElement;
-    console.log('[Delegate] external-links-modal 찾음:', !!modal);
-
-    if (modal) {
-      modal.setAttribute('aria-hidden', 'false');
-      modal.style.display = 'flex';
-
-      // 강제 스타일 적용 (위임 방식)
-      modal.style.position = 'fixed !important';
-      modal.style.top = '0 !important';
-      modal.style.left = '0 !important';
-      modal.style.width = '100% !important';
-      modal.style.height = '100% !important';
-      modal.style.backgroundColor = 'rgba(0,0,0,0.8) !important';
-      modal.style.zIndex = '10000 !important';
-
-      console.log('[Delegate] 외부유입 모달 표시됨 (위임)');
-    } else {
-      console.error('[Delegate] external-links-modal이 존재하지 않음');
-    }
-  }
-
-  // API 키 발급 가이드 버튼 처리 - 위임 로직 제거 (initApiGuideModal에서 통합 관리)
-
-
-  // 외부유입 링크 처리 - 브라우저에서 열기
-  if (target.classList.contains('external-link-item') || target.classList.contains('external-link-btn')) {
-    console.log('[Delegate] 외부 링크 버튼 클릭 감지');
-    e.preventDefault();
-    e.stopPropagation();
-
-    const url = (target as HTMLElement).getAttribute('data-url');
-    if (url) {
-      console.log('[Delegate] 외부 브라우저에서 링크 열기:', url);
-      window.api.openExternalUrl(url);
-    } else {
-      console.error('[Delegate] data-url 속성이 없음');
-    }
-  }
-
-  // 닫기 버튼 처리
-  if (target.classList.contains('modal-close') || target.hasAttribute('data-close-settings') || target.hasAttribute('data-close-external-links') || target.hasAttribute('data-close-license') || target.hasAttribute('data-close-continuous')) {
-    console.log('[Delegate] 모달 닫기 버튼 클릭 감지');
-    const modal = target.closest('.modal-backdrop') as HTMLDivElement;
-    if (modal) {
-      modal.setAttribute('aria-hidden', 'true');
-      modal.style.display = 'none';
-      console.log('[Delegate] 모달 닫힘');
-    }
-  }
-});
+// ✅ [2026-01-27] 문제가 되던 document.addEventListener('click') 핸들러 삭제
+// - 이 핸들러가 모든 모달 클릭을 가로채서 연속발행, 달력, 풀오토 세팅 등이 열리지 않았음
+// - 원래 백업(pre-pack-backup)에도 없던 코드였음
 
 // 외부유입 탭 전환 함수
 function switchExternalLinksTab(tabName: string) {
@@ -3413,11 +3494,13 @@ function processNextInQueue(): void {
   if (!item && continuousQueue.length > 0) {
     // ✅ 현재 UI에서 선택된 발행 모드 가져오기 (버그 수정: 'publish' 하드코딩 → 실제 선택값)
     const currentPublishMode = (document.getElementById('unified-publish-mode') as HTMLInputElement)?.value || 'publish';
-    const currentScheduleDate = (document.getElementById('unified-schedule-date') as HTMLInputElement)?.value;
+    // ✅ [2026-02-07 FIX] getScheduleDateFromInput 사용 (T→space 변환)
+    const currentScheduleDate = getScheduleDateFromInput('unified-schedule-date');
     item = {
       type: 'url',
       value: continuousQueue[0],
       status: 'pending',
+      imageSource: getFullAutoImageSource(), // ✅ [2026-02-11 FIX] V1 레거시 큐에도 imageSource 추가
       publishMode: currentPublishMode,
       scheduleDate: currentPublishMode === 'schedule' ? currentScheduleDate : undefined
     };
@@ -3472,11 +3555,27 @@ function processNextInQueue(): void {
     }
 
     // 4. 이미지 소스 동기화 (있는 경우)
+    // ✅ [2026-02-11 FIX] localStorage('fullAutoImageSource')도 반드시 동기화
+    // UnifiedDOMCache.getImageSource()가 localStorage를 우선 읽으므로 select만 바꾸면 무시됨
     if (item.imageSource) {
-      const imgSourceSelect = document.getElementById('unified-image-source') as HTMLSelectElement;
-      if (imgSourceSelect) {
-        imgSourceSelect.value = item.imageSource;
-        imgSourceSelect.dispatchEvent(new Event('change', { bubbles: true }));
+      // ✅ [2026-02-13 FIX] 'saved'는 AI 엔진이 아니므로 fullAutoImageSource에 저장하지 않음
+      const INVALID_AI_SOURCES = ['saved', 'skip'];
+      if (!INVALID_AI_SOURCES.includes(item.imageSource)) {
+        localStorage.setItem('fullAutoImageSource', item.imageSource);
+        console.log(`[Continuous] ✅ fullAutoImageSource localStorage 동기화: "${item.imageSource}"`);
+        // ✅ [2026-02-11 FIX] dispatchEvent('change') 제거!
+        // select의 change 이벤트 → 버튼 click 핸들러 → localStorage.setItem('fullAutoImageSource', 'nano-banana-pro')
+        // 이 연쇄 반응으로 위에서 올바르게 설정한 localStorage 값이 덮어써지는 버그 발생
+        // select는 UI 표시용으로만 업데이트하고, 이벤트는 발생시키지 않음
+        const imgSourceSelect = document.getElementById('unified-image-source') as HTMLSelectElement;
+        if (imgSourceSelect) {
+          const hasOption = Array.from(imgSourceSelect.options).some(opt => opt.value === item.imageSource);
+          if (hasOption) {
+            imgSourceSelect.value = item.imageSource;
+          }
+        }
+      } else {
+        console.log(`[Continuous] ⚠️ imageSource="${item.imageSource}"는 AI 엔진이 아님 → fullAutoImageSource 변경 안 함`);
       }
     }
   } catch (e) {
@@ -3488,6 +3587,8 @@ function processNextInQueue(): void {
   setTimeout(() => {
     const fullAutoPublishBtn = document.getElementById('full-auto-publish-btn') as HTMLButtonElement | null;
     if (fullAutoPublishBtn) {
+      const finalEngine = localStorage.getItem('fullAutoImageSource');
+      console.log(`[Continuous] 🎨 발행 직전 이미지 엔진 확인: "${finalEngine}" (localStorage.fullAutoImageSource)`);
       console.log('[Continuous] 풀오토 발행 실행 버튼 클릭!');
       fullAutoPublishBtn.click();
     } else {
@@ -3572,6 +3673,12 @@ function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): void {
     toastManager.info('🛑 연속 발행이 중지되었습니다.');
   }
 
+  // ✅ [2026-01-29 추가] 발행 완료 후 전체 상태 초기화
+  if (typeof (window as any).resetAfterPublish === 'function') {
+    (window as any).resetAfterPublish();
+    console.log('[Continuous] ✅ 발행 완료 → 상태 초기화 완료');
+  }
+
   renderQueueListV2(); // 큐 리스트 갱신
 }
 
@@ -3630,24 +3737,103 @@ function scheduleNextPosting(): void {
 // 연속 발행 URL 입력 모달 토글
 function toggleContinuousModeModal(): void {
   console.log('[Continuous] toggleContinuousModeModal 호출됨');
-  const modal = document.getElementById('continuous-mode-modal');
+  let modal = document.getElementById('continuous-mode-modal') as HTMLDivElement;
   console.log('[Continuous] 모달 엘리먼트 찾음:', modal ? '있음' : '없음');
 
-  if (modal) {
-    const currentDisplay = modal.style.display;
-    const newDisplay = currentDisplay === 'none' ? 'flex' : 'none';
-    console.log('[Continuous] 모달 표시 상태 변경:', currentDisplay, '->', newDisplay);
-    modal.style.display = newDisplay;
-
-    // 모달 열 때 초기화
-    if (newDisplay === 'flex') {
-      console.log('[Continuous] 모달 열림, V2 초기화');
-      initContinuousPublishingV2();
-    }
-  } else {
+  if (!modal) {
     console.log('[Continuous] 모달 엘리먼트를 찾을 수 없음');
+    return;
+  }
+
+  // ✅ 모달을 body 직속으로 이동 (position:fixed 정상 작동을 위해)
+  if (modal.parentElement !== document.body) {
+    console.log('[Continuous] 모달을 body로 이동 (현재 부모:', modal.parentElement?.id || modal.parentElement?.tagName, ')');
+    document.body.appendChild(modal);
+  }
+
+  const currentDisplay = modal.style.display;
+  const isOpening = currentDisplay === 'none' || currentDisplay === '';
+  console.log('[Continuous] 모달 표시 상태 변경:', currentDisplay, '->', isOpening ? 'flex' : 'none');
+
+  if (isOpening) {
+    // ✅ 모달 열기 - 모든 필수 스타일 명시적 설정
+    modal.style.cssText = `
+      display: flex !important;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: rgba(0, 0, 0, 0.85) !important;
+      z-index: 10006 !important;
+      justify-content: center !important;
+      align-items: center !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    `;
+    modal.setAttribute('aria-hidden', 'false');
+    console.log('[Continuous] 모달 열림, V2 초기화');
+    console.log('[Continuous] 모달 cssText:', modal.style.cssText);
+
+    // ✅ 닫기 버튼 이벤트 직접 연결 (body로 이동되면서 기존 위임 끊어짐)
+    const closeBtn = modal.querySelector('.modal-close, [data-close-continuous]') as HTMLButtonElement;
+    if (closeBtn) {
+      closeBtn.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('[Continuous] 닫기 버튼 클릭');
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      };
+    }
+
+    // ✅ 배경 클릭 시 닫기
+    modal.onclick = (e) => {
+      if (e.target === modal) {
+        console.log('[Continuous] 배경 클릭 - 모달 닫기');
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    };
+
+    // ✅ 상세 설정 버튼 클릭 이벤트 직접 연결
+    const openSettingsBtn = modal.querySelector('#continuous-open-settings-modal-btn, [id*="settings-modal-btn"]') as HTMLButtonElement;
+    if (openSettingsBtn) {
+      openSettingsBtn.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('[Continuous] 상세 설정 버튼 클릭');
+        const settingsModal = document.getElementById('continuous-settings-modal');
+        if (settingsModal) {
+          // settings 모달도 body로 이동
+          if (settingsModal.parentElement !== document.body) {
+            document.body.appendChild(settingsModal);
+          }
+          settingsModal.style.cssText = `
+            display: flex !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: rgba(0, 0, 0, 0.9) !important;
+            z-index: 10007 !important;
+            justify-content: center !important;
+            align-items: center !important;
+          `;
+          settingsModal.setAttribute('aria-hidden', 'false');
+        }
+      };
+    }
+
+    initContinuousPublishingV2();
+  } else {
+    // ✅ 모달 닫기
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
   }
 }
+
 
 // 연속 발행 URL 필드 관리
 function initContinuousUrlFields(): void {
@@ -3786,7 +3972,7 @@ function initContinuousScheduleEvents(): void {
             const month = String(minDate.getMonth() + 1).padStart(2, '0');
             const day = String(minDate.getDate()).padStart(2, '0');
             const hours = String(minDate.getHours()).padStart(2, '0');
-            const minutes = String(minDate.getMinutes()).padStart(2, '0');
+            const minutes = String(Math.ceil(minDate.getMinutes() / 10) * 10 % 60).padStart(2, '0'); // 10분 단위 올림
             const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
             scheduleInput.min = formattedDateTime;
             scheduleInput.value = formattedDateTime;
@@ -3835,6 +4021,14 @@ function initContinuousScheduleEvents(): void {
             </span>
           `;
         }
+
+        // ✅ [2026-02-07] 분 선택 시 자동 확인 (달력 닫기)
+        scheduleInput.blur();
+        setTimeout(() => {
+          if (confirmBtn && !confirmBtn.disabled) {
+            confirmBtn.click();
+          }
+        }, 500);
       } else {
         // 값이 없으면 비활성화
         if (schedulePreview) {
@@ -3961,6 +4155,10 @@ interface ContinuousQueueItem {
   createProductThumbnail?: boolean; // ✅ 제품 이미지 기반 썸네일 합성 여부
   affiliateLink?: string; // ✅ 쇼핑 커넥트 제휴 링크
   videoOption?: boolean; // ✅ VEO 영상 변환 옵션
+  previousPostUrl?: string; // ✅ [2026-02-09] 같은 카테고리 이전글 URL
+  previousPostTitle?: string; // ✅ [2026-02-09] 같은 카테고리 이전글 제목
+  keywordAsTitle?: boolean; // ✅ [2026-02-13] 키워드 그대로 제목 사용
+  keywordTitlePrefix?: boolean; // ✅ [2026-02-13] 키워드 맨 앞 배치
 }
 
 let continuousQueueV2: ContinuousQueueItem[] = [];
@@ -3970,6 +4168,34 @@ let continuousPublishQueue: Array<{ type: 'url' | 'keyword'; value: string; publ
 // 기존 호출 호환성을 위한 래퍼 함수
 function applyKeywordPrefixToTitleContinuous(title: string, keyword: string): string {
   return applyKeywordPrefixToTitle(title, keyword);
+}
+
+// ✅ [2026-02-13] 키워드 제목 옵션 체크박스 상호 배타 헬퍼
+function setupMutualExclusiveCheckboxes(id1: string, id2: string): void {
+  const cb1 = document.getElementById(id1) as HTMLInputElement;
+  const cb2 = document.getElementById(id2) as HTMLInputElement;
+  if (cb1 && !cb1.hasAttribute('data-mutual-exclusive')) {
+    cb1.setAttribute('data-mutual-exclusive', 'true');
+    cb1.addEventListener('change', () => { if (cb1.checked && cb2) cb2.checked = false; });
+  }
+  if (cb2 && !cb2.hasAttribute('data-mutual-exclusive')) {
+    cb2.setAttribute('data-mutual-exclusive', 'true');
+    cb2.addEventListener('change', () => { if (cb2.checked && cb1) cb1.checked = false; });
+  }
+}
+
+// ✅ [2026-02-13] 키워드 제목 옵션을 window._keywordTitleOptions에 세팅하는 헬퍼
+function setKeywordTitleOptionsFromItem(keyword: string, keywordAsTitle?: boolean, keywordTitlePrefix?: boolean): void {
+  if (keywordAsTitle || keywordTitlePrefix) {
+    (window as any)._keywordTitleOptions = {
+      useKeywordAsTitle: keywordAsTitle || false,
+      useKeywordTitlePrefix: keywordTitlePrefix || false,
+      keyword
+    };
+    console.log('[KeywordTitleOpts] 세팅:', { keyword: keyword.substring(0, 30), keywordAsTitle, keywordTitlePrefix });
+  } else {
+    (window as any)._keywordTitleOptions = null;
+  }
 }
 
 function applyContinuousTitleOverrides(item: ContinuousQueueItem, structuredContent: any): void {
@@ -3986,7 +4212,17 @@ function applyContinuousTitleOverrides(item: ContinuousQueueItem, structuredCont
   }
 
   if (keyword) {
-    finalTitle = applyKeywordPrefixToTitleContinuous(finalTitle, keyword);
+    // ✅ [2026-02-08 FIX] 강화된 중복 방지: 키워드의 모든 토큰(2자 이상)이 이미 제목에 포함되어 있으면 건너뜀
+    // startsWith만으로는 키워드가 제목 중간에 있을 때 중복이 발생하므로 includes로 강화
+    const keywordTokens = keyword.split(/\s+/).filter((t: string) => t.length >= 2);
+    const titleLower = finalTitle.toLowerCase();
+    const allTokensPresent = keywordTokens.length > 0 && keywordTokens.every((t: string) => titleLower.includes(t.toLowerCase()));
+    if (!allTokensPresent) {
+      finalTitle = applyKeywordPrefixToTitleContinuous(finalTitle, keyword);
+      console.log('[ContinuousTitle] 키워드 접두사 적용:', { keyword, finalTitle });
+    } else {
+      console.log('[ContinuousTitle] 키워드 토큰 모두 포함됨, 건너뜀:', { keyword, finalTitle });
+    }
   }
 
   if (!finalTitle) return;
@@ -4153,7 +4389,8 @@ function initContinuousPublishingV2(): void {
       console.log('[BannerNav] 배너 버튼 클릭됨:', btnId);
 
       // ✅ [2026-01-21] 모든 관련 모달 강제 닫기 (display + aria-hidden)
-      const modalsToClose = ['continuous-mode-modal', 'ma-publish-modal', 'continuous-settings-modal', 'ma-account-edit-modal'];
+      // ✅ [2026-01-27] ma-fullauto-setting-modal, multi-account-modal 추가
+      const modalsToClose = ['continuous-mode-modal', 'ma-publish-modal', 'continuous-settings-modal', 'ma-account-edit-modal', 'ma-fullauto-setting-modal', 'multi-account-modal'];
       modalsToClose.forEach(modalId => {
         const modal = document.getElementById(modalId);
         if (modal) {
@@ -4183,7 +4420,7 @@ function initContinuousPublishingV2(): void {
     // ✅ [2026-01-20] 수동 썸네일 커스터마이징 버튼들 - 이벤트 위임 방식
     document.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
-      const btn = target.closest('#continuous-goto-thumbnail-btn, #ma-shopping-goto-thumbnail-btn, #fullauto-open-thumbnail-settings-btn, #ma-setting-goto-thumbnail-btn') as HTMLElement;
+      const btn = target.closest('#continuous-goto-thumbnail-btn, #continuous-modal-goto-thumbnail-btn, #ma-shopping-goto-thumbnail-btn, #fullauto-open-thumbnail-settings-btn, #ma-setting-goto-thumbnail-btn') as HTMLElement;
 
       if (!btn) return;
 
@@ -4191,12 +4428,16 @@ function initContinuousPublishingV2(): void {
       console.log('[ThumbnailNav] 썸네일 버튼 클릭됨:', btnId);
 
       // ✅ [2026-01-21] 모든 관련 모달 강제 닫기 (display + aria-hidden)
-      const modalsToClose = ['continuous-mode-modal', 'ma-publish-modal', 'continuous-settings-modal', 'ma-account-edit-modal'];
+      // ✅ [2026-01-27] ma-fullauto-setting-modal, multi-account-modal 추가
+      const modalsToClose = ['continuous-mode-modal', 'ma-publish-modal', 'continuous-settings-modal', 'ma-account-edit-modal', 'ma-fullauto-setting-modal', 'multi-account-modal'];
+      console.log('[ThumbnailNav] 모달들 닫기 시작:', modalsToClose);
       modalsToClose.forEach(modalId => {
         const modal = document.getElementById(modalId);
+        console.log(`[ThumbnailNav] 모달 "${modalId}" 찾기:`, !!modal, modal?.style?.display);
         if (modal) {
           modal.style.display = 'none';
           modal.setAttribute('aria-hidden', 'true');
+          console.log(`[ThumbnailNav] 모달 "${modalId}" 닫힘 완료`);
         }
       });
 
@@ -4310,10 +4551,55 @@ function initContinuousPublishingV2(): void {
       }
     });
 
-    // ✅ [2026-01-20] 배너 커스터마이징 버튼 → 배너 생성기 탭으로 이동
-    document.getElementById('continuous-modal-goto-banner-btn')?.addEventListener('click', () => {
-      const modal = document.getElementById('continuous-settings-modal');
-      if (modal) modal.style.display = 'none';
+    // ✅ [2026-01-27] 연속발행/다중계정 이미지 설정 버튼 → 자동완성 이미지 설정 모달 열기 (이벤트 위임)
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const btn = target.closest('#continuous-open-image-settings-btn, #continuous-modal-open-image-settings-btn, #ma-open-image-settings-btn') as HTMLElement;
+
+      if (!btn) return;
+
+      console.log('[ImageSettings] 이미지 설정 버튼 클릭됨:', btn.id);
+
+      // ✅ [2026-02-02] 기존 모달들을 숨김 처리하여 z-index 충돌 방지
+      const modalsToHide = ['continuous-settings-modal', 'continuous-mode-modal', 'ma-fullauto-setting-modal', 'ma-publish-modal', 'multi-account-modal'];
+      modalsToHide.forEach(modalId => {
+        const modal = document.getElementById(modalId);
+        if (modal && modal.style.display !== 'none') {
+          modal.setAttribute('data-was-visible', 'true');
+          modal.style.visibility = 'hidden';
+          console.log(`[ImageSettings] 임시 숨김: ${modalId}`);
+        }
+      });
+
+      // openHeadingImageModal 함수 호출 (./components/HeadingImageSettings.js에서 import됨)
+      if (typeof openHeadingImageModal === 'function') {
+        openHeadingImageModal();
+        console.log('[ImageSettings] ✅ 자동완성 이미지 설정 모달 열기 완료');
+      } else {
+        console.warn('[ImageSettings] ⚠️ openHeadingImageModal 함수를 찾을 수 없습니다');
+        toastManager.warning('이미지 설정 모달을 열 수 없습니다. 앱을 새로고침해주세요.');
+      }
+    });
+
+
+    // ✅ [2026-01-27] 배너 커스터마이징 버튼들 → 배너 생성기 탭으로 이동 (이벤트 위임)
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const btn = target.closest('#continuous-modal-goto-banner-btn, #ma-shopping-goto-banner-btn') as HTMLElement;
+
+      if (!btn) return;
+
+      console.log('[BannerNav] 배너 버튼 클릭됨:', btn.id);
+
+      // ✅ [2026-01-27] 모든 관련 모달 강제 닫기 (multi-account-modal 추가)
+      const modalsToClose = ['continuous-settings-modal', 'continuous-mode-modal', 'ma-fullauto-setting-modal', 'ma-publish-modal', 'multi-account-modal'];
+      modalsToClose.forEach(modalId => {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.style.display = 'none';
+          modal.setAttribute('aria-hidden', 'true');
+        }
+      });
 
       const imageToolsTab = document.querySelector('[data-tab="image-tools"]') as HTMLElement;
       if (imageToolsTab) {
@@ -4328,67 +4614,18 @@ function initContinuousPublishingV2(): void {
       }
     });
 
-    // ✅ [2026-01-20] 예약 설정 서브탭 - 간격 프리셋 버튼
-    document.querySelectorAll('.schedule-interval-preset').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const value = (btn as HTMLElement).dataset.value || '2';
-        const unit = (btn as HTMLElement).dataset.unit || '60';
-        const intervalInput = document.getElementById('continuous-modal-schedule-interval-subtab') as HTMLInputElement;
-        const unitSelect = document.getElementById('continuous-modal-schedule-interval-unit-subtab') as HTMLSelectElement;
-        if (intervalInput) intervalInput.value = value;
-        if (unitSelect) unitSelect.value = unit;
-      });
+    // ✅ [2026-02-07] 예약 설정 서브탭 - 랜덤 예약 배분 모달 열기
+    document.getElementById('open-random-schedule-modal-btn')?.addEventListener('click', () => {
+      showRandomScheduleModal();
     });
 
-    // ✅ [2026-01-20] 예약 설정 - 대기열 전체 순차 예약 적용 버튼
-    document.getElementById('continuous-modal-apply-schedule-btn')?.addEventListener('click', () => {
-      const dateInput = document.getElementById('continuous-modal-schedule-date-subtab') as HTMLInputElement;
-      const timeInput = document.getElementById('continuous-modal-schedule-time-subtab') as HTMLInputElement;
-      const intervalInput = document.getElementById('continuous-modal-schedule-interval-subtab') as HTMLInputElement;
-      const unitSelect = document.getElementById('continuous-modal-schedule-interval-unit-subtab') as HTMLSelectElement;
-      const randomOffsetCheck = document.getElementById('continuous-modal-schedule-random-offset-subtab') as HTMLInputElement;
-
-      const intervalValue = parseInt(intervalInput?.value || '2', 10);
-      const intervalUnit = parseInt(unitSelect?.value || '60', 10);
-      const useRandomOffset = randomOffsetCheck?.checked ?? true;
-      const intervalMinutes = intervalValue * intervalUnit;
-
-      // ✅ [2026-01-20] 날짜 미선택 시 현재 시간부터 시작 (지금부터 자동 시작)
-      let baseTime: Date;
-      if (dateInput?.value) {
-        const startTime = timeInput?.value || '09:00';
-        baseTime = new Date(`${dateInput.value}T${startTime}`);
-      } else {
-        // 현재 시간부터 시작
-        baseTime = new Date();
-        console.log('[순차예약] 날짜 미선택 → 현재 시간부터 시작:', baseTime.toLocaleString());
-      }
-
-      // continuousQueueV2에 순차 예약 적용
-      if (typeof continuousQueueV2 !== 'undefined' && continuousQueueV2.length > 0) {
-
-
-        continuousQueueV2.forEach((item: any, i: number) => {
-          const offsetMinutes = i * intervalMinutes;
-          const randomOffset = useRandomOffset ? Math.floor(Math.random() * 31) - 15 : 0;
-          const scheduledTime = new Date(baseTime.getTime() + (offsetMinutes + randomOffset) * 60000);
-
-          const yyyy = scheduledTime.getFullYear();
-          const mm = String(scheduledTime.getMonth() + 1).padStart(2, '0');
-          const dd = String(scheduledTime.getDate()).padStart(2, '0');
-          const hh = String(scheduledTime.getHours()).padStart(2, '0');
-          const mi = String(scheduledTime.getMinutes()).padStart(2, '0');
-
-          item.scheduleDate = `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
-          item.publishMode = 'schedule';
-        });
-
-        toastManager.success(`✅ ${continuousQueueV2.length}개 항목에 순차 예약이 적용되었습니다!`);
-        renderQueueListV2?.();
-      } else {
-        toastManager.warning('📋 대기열에 항목이 없습니다. 먼저 항목을 추가해주세요.');
-      }
+    // ✅ [2026-02-07] 예약 설정 서브탭 - 개별 예약 설정 모달 열기
+    document.getElementById('open-individual-schedule-modal-btn')?.addEventListener('click', () => {
+      showIndividualScheduleModal();
     });
+
+    // 예약 상태 요약 업데이트
+    updateScheduleStatusSummary();
 
     // 모달 닫기 버튼
     document.getElementById('continuous-settings-modal-close')?.addEventListener('click', () => {
@@ -4442,7 +4679,7 @@ function initContinuousPublishingV2(): void {
             category: categorySelect?.value || 'entertainment',
             contentMode: (contentModeSelect?.value || 'seo') as any,
             toneStyle: toneStyleSelect?.value || 'professional',
-            imageSource: imageSourceSelect?.value || 'nano-banana-pro',
+            imageSource: imageSourceSelect?.value || getFullAutoImageSource(),
             ctaType: ctaTypeSelect?.value || 'none',
             ctaUrl: ctaUrlInput?.value || '',
             ctaText: ctaTextInput?.value || '',
@@ -4451,7 +4688,8 @@ function initContinuousPublishingV2(): void {
             realCategory,
             realCategoryName,
             scheduleDate,
-            includeThumbnailText: includeThumbnailTextCheck?.checked || false,
+            // ✅ [2026-01-28 FIX] localStorage 설정 우선 적용
+            includeThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || includeThumbnailTextCheck?.checked || false,
             useAiImage: useAiImageCheck?.checked ?? true,
             createProductThumbnail: createThumbnailCheck?.checked ?? false
           };
@@ -4512,26 +4750,40 @@ function initContinuousPublishingV2(): void {
         const times: Date[] = [];
         let currentTime = new Date(start);
 
+        // ✅ [2026-02-08 FIX] 네이버 서버 예약은 10분 단위만 지원 (00, 10, 20, 30, 40, 50)
+        // 시작 시간도 10분 단위로 올림 처리
+        const startMinutes = currentTime.getMinutes();
+        const roundedStartMinutes = Math.ceil(startMinutes / 10) * 10;
+        currentTime.setMinutes(roundedStartMinutes, 0, 0); // 초/밀리초 초기화
+        if (roundedStartMinutes >= 60) {
+          currentTime.setMinutes(0);
+          currentTime.setHours(currentTime.getHours() + 1);
+        }
+
         for (let i = 0; i < count; i++) {
           if (i === 0) {
-            // 첫 번째는 시작 시간 기준 ± 랜덤 분(0~10분)
-            const randomMinuteOffset = Math.floor(Math.random() * 11); // 0~10분
-            currentTime = new Date(currentTime.getTime() + randomMinuteOffset * 60000);
+            // 첫 번째는 시작 시간 기준 + 10분 단위 랜덤 오프셋
+            const maxOffset10 = Math.max(1, Math.floor(avgInterval * 0.2 / 10)); // 10분 단위 오프셋
+            const randomOffset10 = Math.floor(Math.random() * (maxOffset10 + 1));
+            currentTime = new Date(currentTime.getTime() + randomOffset10 * 10 * 60000);
           } else {
-            // 평균 간격 ± 랜덤 편차 (5~25분)
-            const variance = Math.floor(Math.random() * 21) + 5; // 5~25분
-            const direction = Math.random() > 0.5 ? 1 : -1;
-            const actualInterval = avgInterval + (variance * direction);
-            currentTime = new Date(currentTime.getTime() + Math.max(10, actualInterval) * 60000); // 최소 10분 간격
+            // ✅ 사용자 설정 간격 존중 — 간격 비례 편차(±30%)
+            const variancePercent = 0.3; // ±30% 편차
+            const maxVariance = Math.max(5, avgInterval * variancePercent); // 최소 5분 편차
+            const variance = Math.random() * maxVariance * 2 - maxVariance;
+            const actualInterval = avgInterval + variance;
+            // ✅ 최소 10분 간격 보장 (네이버 서버 예약 10분 단위 제한)
+            const intervalMs = Math.max(10, actualInterval) * 60000;
+            currentTime = new Date(currentTime.getTime() + intervalMs);
           }
 
-          // 분을 홀수/짝수 랜덤으로 조정 (더 자연스럽게)
-          const currentMinutes = currentTime.getMinutes();
-          const shouldBeOdd = Math.random() > 0.5;
-          if (shouldBeOdd && currentMinutes % 2 === 0) {
-            currentTime.setMinutes(currentMinutes + 1);
-          } else if (!shouldBeOdd && currentMinutes % 2 === 1) {
-            currentTime.setMinutes(currentMinutes + 1);
+          // ✅ [2026-02-08 FIX] 항상 10분 단위로 반올림 (네이버 서버 예약 호환)
+          const mins = currentTime.getMinutes();
+          const rounded = Math.round(mins / 10) * 10;
+          currentTime.setMinutes(rounded, 0, 0);
+          if (rounded >= 60) {
+            currentTime.setMinutes(0);
+            currentTime.setHours(currentTime.getHours() + 1);
           }
 
           times.push(new Date(currentTime));
@@ -5032,7 +5284,8 @@ function addItemToQueueV2(): void {
     return;
   }
 
-  const imageSource = (document.getElementById('continuous-image-source-select') as HTMLSelectElement)?.value || 'nano-banana-pro';
+  // ✅ [2026-02-03 FIX] 메인 풀오토 이미지 설정에서 imageSource 가져오기 (기존 HTML 요소는 존재하지 않음)
+  const imageSource = getFullAutoImageSource();
   const intervalValue = parseInt((document.getElementById('continuous-interval-value') as HTMLInputElement)?.value || '30');
   const intervalUnit = parseInt((document.getElementById('continuous-interval-unit') as HTMLSelectElement)?.value || '1');
   const interval = intervalValue * intervalUnit;
@@ -5126,7 +5379,10 @@ function addItemToQueueV2(): void {
       realCategoryName, // ✅ 실제 블로그 카테고리 이름 추가
       includeThumbnailText: (document.getElementById('continuous-modal-include-thumbnail-text') as HTMLInputElement)?.checked || false,
       affiliateLink: contentMode === 'affiliate' ? ((document.getElementById('continuous-affiliate-link') as HTMLInputElement)?.value?.trim() || '') : undefined,
-      videoOption: contentMode === 'affiliate' ? ((document.getElementById('continuous-video-option') as HTMLInputElement)?.checked || false) : undefined
+      videoOption: contentMode === 'affiliate' ? ((document.getElementById('continuous-video-option') as HTMLInputElement)?.checked || false) : undefined,
+      // ✅ [2026-02-13] 키워드 제목 옵션
+      keywordAsTitle: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-as-title') as HTMLInputElement)?.checked || false) : undefined,
+      keywordTitlePrefix: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-title-prefix') as HTMLInputElement)?.checked || false) : undefined
     };
     continuousQueueV2.push(newItem);
     addedCount++;
@@ -5149,13 +5405,102 @@ let currentQueuePageV2 = 0;
 const QUEUE_PAGE_SIZE = 5;
 
 const imageSourceNames: Record<string, string> = {
-  'nano-banana-pro': '🍌 나노바나나',
-  'imagen4': '🖼️ Imagen4',
-  'naver': '🔍 네이버',
+  'nano-banana-pro': '🍌 나노바나나 프로 (Gemini)',
+  'naver': '🔍 네이버 검색',
   'prodia': '⚡ Prodia',
-  'stability': '🚀 Stability',
+  'stability': '🚀 Stability AI',
+  'deepinfra': '🚀 DeepInfra FLUX-2',
+  'falai': '🎨 Fal.ai FLUX',
+  'pollinations': '🌸 Pollinations (무료)',
   'skip': '🚫 없음'
 };
+
+/**
+ * ✅ [2026-02-02] 생성된 이미지를 그리드 형식으로 표시하는 모달
+ */
+function showImageGridModal(images: any[], sourceLabel: string): void {
+  // 기존 모달 제거
+  const existingModal = document.getElementById('image-grid-result-modal');
+  if (existingModal) existingModal.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'image-grid-result-modal';
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease;
+  `;
+
+  const validImages = images.filter((img: any) => img && (img.previewDataUrl || img.filePath || img.url));
+
+  modal.innerHTML = `
+    <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 16px; max-width: 900px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 24px; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div>
+          <h2 style="margin: 0; font-size: 1.5rem; color: #fff;">🎨 이미지 생성 완료</h2>
+          <p style="margin: 8px 0 0 0; font-size: 0.9rem; color: rgba(255,255,255,0.6);">
+            ${sourceLabel}으로 ${validImages.length}개 이미지 생성됨
+          </p>
+        </div>
+        <button id="close-image-grid-modal" style="background: rgba(255,255,255,0.1); border: none; width: 40px; height: 40px; border-radius: 10px; cursor: pointer; font-size: 1.5rem; color: #fff; transition: all 0.2s;">×</button>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
+        ${validImages.map((img: any, idx: number) => {
+    const imgUrl = img.previewDataUrl || img.filePath || img.url || '';
+    const heading = img.heading || `이미지 ${idx + 1}`;
+    return `
+            <div style="background: rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s;">
+              <div style="position: relative; padding-top: 100%; background: #0a0a0a;">
+                <img src="${imgUrl}" alt="${heading}" 
+                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;"
+                     onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%23333%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%23666%22 font-size=%2212%22>로드 실패</text></svg>'">
+                <div style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.7); color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">
+                  #${idx + 1}
+                </div>
+              </div>
+              <div style="padding: 12px;">
+                <p style="margin: 0; font-size: 0.85rem; color: #fff; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${heading}">
+                  ${heading.length > 25 ? heading.substring(0, 25) + '...' : heading}
+                </p>
+              </div>
+            </div>
+          `;
+  }).join('')}
+      </div>
+      
+      <div style="margin-top: 20px; text-align: center;">
+        <button id="confirm-image-grid-modal" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); border: none; padding: 12px 32px; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.2s;">
+          ✅ 확인
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // 닫기 이벤트
+  const closeBtn = document.getElementById('close-image-grid-modal');
+  const confirmBtn = document.getElementById('confirm-image-grid-modal');
+
+  const closeModal = () => modal.remove();
+
+  closeBtn?.addEventListener('click', closeModal);
+  confirmBtn?.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+}
 
 const typeIcons: Record<string, string> = {
   'url': '🔗',
@@ -5305,6 +5650,7 @@ function renderQueueListV2(): void {
         ${item.status === 'pending' ? `
           <div style="margin-left: auto; display: flex; gap: 0.25rem;">
             ${item.type === 'url' ? `<button type="button" class="queue-addurl-btn" data-id="${item.id}" style="padding: 0.25rem 0.5rem; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 4px; color: #22c55e; cursor: pointer; font-size: 0.7rem;" title="추가 URL 입력">+URL${item.additionalUrls && item.additionalUrls.length > 0 ? ` (${item.additionalUrls.length})` : ''}</button>` : ''}
+            <button type="button" class="queue-schedule-btn" data-id="${item.id}" style="padding: 0.25rem 0.5rem; background: ${item.publishMode === 'schedule' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(245, 158, 11, 0.1)'}; border: 1px solid ${item.publishMode === 'schedule' ? 'rgba(59, 130, 246, 0.4)' : 'rgba(245, 158, 11, 0.3)'}; border-radius: 4px; color: ${item.publishMode === 'schedule' ? '#60a5fa' : '#f59e0b'}; cursor: pointer; font-size: 0.7rem;" title="예약 시간 설정">⏰</button>
             <button type="button" class="queue-edit-btn" data-id="${item.id}" style="padding: 0.25rem 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.7rem;">✏️</button>
             <button type="button" class="queue-delete-btn" data-id="${item.id}" style="padding: 0.25rem 0.5rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 4px; color: #ef4444; cursor: pointer; font-size: 0.7rem;">🗑️</button>
           </div>
@@ -5333,6 +5679,15 @@ function renderQueueListV2(): void {
       const id = (btn as HTMLElement).dataset.id;
       const item = continuousQueueV2.find(i => i.id === id);
       if (item) showEditQueueItemModal(item);
+    });
+  });
+
+  // ✅ [2026-02-07] 개별 예약 시간 설정 버튼 이벤트
+  container.querySelectorAll('.queue-schedule-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = (btn as HTMLElement).dataset.id;
+      const item = continuousQueueV2.find(i => i.id === id);
+      if (item) showItemScheduleModal(item);
     });
   });
 
@@ -5369,6 +5724,517 @@ function renderQueueListV2(): void {
       }
     });
   });
+}
+
+// ✅ [2026-02-07] 개별 큐 아이템 예약 시간 설정 모달
+function showItemScheduleModal(item: any): void {
+  // 기존 모달 제거
+  document.getElementById('item-schedule-modal-overlay')?.remove();
+
+  // 현재 설정된 값 파싱
+  let currentDate = '';
+  let currentTime = '';
+  if (item.scheduleDate) {
+    if (item.scheduleDate.includes('T')) {
+      const parts = item.scheduleDate.split('T');
+      currentDate = parts[0];
+      currentTime = parts[1]?.substring(0, 5) || '';
+    } else if (item.scheduleDate.includes(' ')) {
+      const parts = item.scheduleDate.split(' ');
+      currentDate = parts[0];
+      currentTime = parts[1]?.substring(0, 5) || '';
+    }
+  }
+  if (item.scheduleTime && !currentTime) {
+    currentTime = item.scheduleTime;
+  }
+
+  const overlay = document.createElement('div');
+  overlay.id = 'item-schedule-modal-overlay';
+  overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
+
+  overlay.innerHTML = `
+    <div style="background: var(--bg-primary, #1a1a2e); border: 2px solid rgba(59, 130, 246, 0.4); border-radius: 16px; padding: 1.5rem; max-width: 420px; width: 90%; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+        <h3 style="margin: 0; color: #60a5fa; font-size: 1.1rem; font-weight: 700;">⏰ 예약 시간 설정</h3>
+        <button type="button" id="item-schedule-close" style="background: none; border: none; color: var(--text-muted, #999); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+      
+      <div style="margin-bottom: 1rem; padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        <div style="font-size: 0.75rem; color: var(--text-muted, #999); margin-bottom: 0.25rem;">📄 대상 항목</div>
+        <div style="font-size: 0.85rem; color: var(--text-strong, #fff); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.value}</div>
+      </div>
+
+      <div style="margin-bottom: 0.5rem; padding: 0.5rem; background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 6px;">
+        <span style="font-size: 0.7rem; color: #f59e0b;">⚠️ 현재 시간 기준 15분 이후부터 예약 가능합니다</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem;">
+        <div>
+          <label style="font-size: 0.75rem; color: var(--text-muted, #999); display: block; margin-bottom: 0.25rem;">📅 날짜</label>
+          <input type="date" id="item-schedule-date" value="${currentDate}" min="${new Date().toISOString().split('T')[0]}"
+            style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+        </div>
+        <div>
+          <label style="font-size: 0.75rem; color: var(--text-muted, #999); display: block; margin-bottom: 0.25rem;">🕐 시간</label>
+          <input type="time" id="item-schedule-time" value="${currentTime || '09:00'}" step="600"
+            style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+        </div>
+      </div>
+
+      ${currentDate ? `<div style="margin-bottom: 1rem; text-align: center;">
+        <button type="button" id="item-schedule-clear" style="padding: 0.5rem 1rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; color: #ef4444; cursor: pointer; font-size: 0.8rem; font-weight: 600;">🗑️ 예약 해제 (즉시 발행으로 변경)</button>
+      </div>` : ''}
+
+      <div style="display: flex; gap: 0.5rem;">
+        <button type="button" id="item-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--bg-tertiary, #333); color: var(--text-muted, #999); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
+        <button type="button" id="item-schedule-save" style="flex: 2; padding: 0.7rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">📅 예약 설정</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  // 닫기
+  const closeModal = () => overlay.remove();
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.getElementById('item-schedule-close')?.addEventListener('click', closeModal);
+  document.getElementById('item-schedule-cancel')?.addEventListener('click', closeModal);
+
+  // 예약 해제 버튼
+  document.getElementById('item-schedule-clear')?.addEventListener('click', () => {
+    item.publishMode = 'publish';
+    item.scheduleDate = undefined;
+    item.scheduleTime = undefined;
+    toastManager.info('🚀 즉시 발행으로 변경되었습니다.');
+    renderQueueListV2();
+    closeModal();
+  });
+
+  // 저장
+  document.getElementById('item-schedule-save')?.addEventListener('click', () => {
+    const dateVal = (document.getElementById('item-schedule-date') as HTMLInputElement)?.value;
+    const timeVal = (document.getElementById('item-schedule-time') as HTMLInputElement)?.value || '09:00';
+
+    if (!dateVal) {
+      toastManager.warning('📅 예약 날짜를 선택해주세요.');
+      return;
+    }
+
+    // ✅ 15분 미래 검증
+    const scheduledTime = new Date(`${dateVal}T${timeVal}`);
+    const minAllowed = new Date(Date.now() + 15 * 60 * 1000);
+    if (scheduledTime.getTime() < minAllowed.getTime()) {
+      toastManager.error('❌ 현재 시간 기준 15분 이후부터 예약 가능합니다!');
+      return;
+    }
+
+    item.publishMode = 'schedule';
+    item.scheduleDate = `${dateVal}T${timeVal}`;
+    item.scheduleTime = timeVal;
+    // ✅ [2026-02-08 FIX] item.interval = 600 제거 — 사용자 설정 간격 유지
+    // 기존: 예약 전환 시 강제 10분(600초) 덮어쓰기 → 사용자 설정 무시됨
+    toastManager.success(`✅ 예약 설정 완료: ${dateVal} ${timeVal}`);
+    renderQueueListV2();
+    closeModal();
+  });
+
+  // ESC 키
+  const handleEsc = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      closeModal();
+      document.removeEventListener('keydown', handleEsc);
+    }
+  };
+  document.addEventListener('keydown', handleEsc);
+}
+
+// ✅ [2026-02-07] 예약 상태 요약 업데이트
+function updateScheduleStatusSummary(): void {
+  const statusText = document.getElementById('schedule-status-text');
+  if (!statusText) return;
+
+  if (!continuousQueueV2 || continuousQueueV2.length === 0) {
+    statusText.textContent = '📭 대기열이 비어있습니다.';
+    return;
+  }
+
+  const scheduledCount = continuousQueueV2.filter((item: any) => item.publishMode === 'schedule' && item.scheduleDate).length;
+  const total = continuousQueueV2.length;
+
+  if (scheduledCount === 0) {
+    statusText.innerHTML = `총 <strong style="color: #60a5fa;">${total}</strong>개 항목 | 예약 설정된 항목 없음`;
+  } else {
+    statusText.innerHTML = `총 <strong style="color: #60a5fa;">${total}</strong>개 항목 | <strong style="color: #10b981;">${scheduledCount}</strong>개 예약 설정됨`;
+  }
+}
+
+// ✅ [2026-02-07] 랜덤 예약 배분 모달
+function showRandomScheduleModal(): void {
+  document.getElementById('random-schedule-modal-overlay')?.remove();
+
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+  // ✅ [2026-02-08 FIX] 현재 시간 기준 기본값 설정 — 10분 단위 올림 (네이버 서버 예약 10분 단위 제한)
+  const startDefault = new Date(Date.now() + 20 * 60 * 1000); // 현재 + 20분
+  const roundedStartMin = Math.ceil(startDefault.getMinutes() / 10) * 10;
+  startDefault.setMinutes(roundedStartMin, 0, 0);
+  if (roundedStartMin >= 60) { startDefault.setMinutes(0); startDefault.setHours(startDefault.getHours() + 1); }
+  const startHH = String(startDefault.getHours()).padStart(2, '0');
+  const startMM = String(startDefault.getMinutes()).padStart(2, '0');
+  const defaultStartTime = `${startHH}:${startMM}`;
+
+  // 마감 시간: 시작시간 + 9시간 (자정 넘으면 다음날)
+  const endDefault = new Date(startDefault.getTime() + 9 * 60 * 60 * 1000);
+  const endDateStr2 = `${endDefault.getFullYear()}-${String(endDefault.getMonth() + 1).padStart(2, '0')}-${String(endDefault.getDate()).padStart(2, '0')}`;
+  const endHH = String(endDefault.getHours()).padStart(2, '0');
+  const endMM = String(endDefault.getMinutes()).padStart(2, '0');
+  const defaultEndTime = `${endHH}:${endMM}`;
+
+  const overlay = document.createElement('div');
+  overlay.id = 'random-schedule-modal-overlay';
+  overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
+
+  overlay.innerHTML = `
+    <div style="background: var(--bg-primary, #1a1a2e); border: 2px solid rgba(59, 130, 246, 0.4); border-radius: 16px; padding: 1.5rem; max-width: 480px; width: 92%; box-shadow: 0 25px 50px rgba(0,0,0,0.5); max-height: 85vh; overflow-y: auto;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+        <h3 style="margin: 0; color: #60a5fa; font-size: 1.1rem; font-weight: 700;">🎲 랜덤 예약 배분</h3>
+        <button type="button" id="random-schedule-close" style="background: none; border: none; color: var(--text-muted, #999); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+
+      <p style="margin: 0 0 1rem 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+        시작~마감 시간 범위 내에서 대기열 항목들에 <strong style="color: #10b981;">랜덤 예약 시간</strong>을 자동 배분합니다.
+      </p>
+
+      <!-- 시작 시간 -->
+      <div style="margin-bottom: 1rem;">
+        <label style="color: #10b981; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🟢 시작 시간</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+          <div>
+            <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">날짜 (비워두면 오늘)</label>
+            <input type="date" id="rnd-schedule-start-date" value="${todayStr}"
+              style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+          </div>
+          <div>
+            <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
+            <input type="time" id="rnd-schedule-start-time" value="${defaultStartTime}" step="600"
+              style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+          </div>
+        </div>
+      </div>
+
+      <!-- 마감 시간 -->
+      <div style="margin-bottom: 1rem;">
+        <label style="color: #ef4444; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🔴 마감 시간</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+          <div>
+            <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">날짜 (비워두면 시작일과 동일)</label>
+            <input type="date" id="rnd-schedule-end-date" value="${endDateStr2}"
+              style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+          </div>
+          <div>
+            <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
+            <input type="time" id="rnd-schedule-end-time" value="${defaultEndTime}" step="600"
+              style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+          </div>
+        </div>
+      </div>
+
+      <!-- 빠른 프리셋 -->
+      <div style="margin-bottom: 1rem;">
+        <label style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">⚡ 빠른 시간대 설정</label>
+        <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+          <button type="button" class="rnd-preset" data-start="09:00" data-end="18:00" style="padding: 0.4rem 0.6rem; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 6px; color: #60a5fa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌅 9-18시</button>
+          <button type="button" class="rnd-preset" data-start="08:00" data-end="22:00" style="padding: 0.4rem 0.6rem; background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 6px; color: #a78bfa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">📅 8-22시</button>
+          <button type="button" class="rnd-preset" data-start="10:00" data-end="14:00" style="padding: 0.4rem 0.6rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 6px; color: #f59e0b; cursor: pointer; font-size: 0.75rem; font-weight: 600;">☀️ 10-14시</button>
+          <button type="button" class="rnd-preset" data-start="18:00" data-end="23:00" style="padding: 0.4rem 0.6rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; color: #10b981; cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌙 18-23시</button>
+        </div>
+      </div>
+
+      <!-- 미리보기 영역 -->
+      <div id="rnd-schedule-preview" style="display: none; margin-bottom: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; max-height: 150px; overflow-y: auto;">
+        <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">📊 배분 미리보기</div>
+        <div id="rnd-schedule-preview-content" style="font-size: 0.75rem; color: var(--text-strong); line-height: 1.6; font-family: monospace;"></div>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem;">
+        <button type="button" id="rnd-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--bg-tertiary, #333); color: var(--text-muted, #999); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
+        <button type="button" id="rnd-schedule-apply" style="flex: 2; padding: 0.7rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">🎲 랜덤 예약 적용</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  // 프리셋 버튼
+  overlay.querySelectorAll('.rnd-preset').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const s = (btn as HTMLElement).dataset.start || '09:00';
+      const e = (btn as HTMLElement).dataset.end || '18:00';
+      (document.getElementById('rnd-schedule-start-time') as HTMLInputElement).value = s;
+      (document.getElementById('rnd-schedule-end-time') as HTMLInputElement).value = e;
+      toastManager.info(`⏰ ${s} ~ ${e} 시간대가 설정되었습니다.`);
+    });
+  });
+
+  // 닫기
+  const closeModal = () => overlay.remove();
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.getElementById('random-schedule-close')?.addEventListener('click', closeModal);
+  document.getElementById('rnd-schedule-cancel')?.addEventListener('click', closeModal);
+
+  // 적용
+  document.getElementById('rnd-schedule-apply')?.addEventListener('click', () => {
+    const today = new Date();
+    const todayStr2 = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    const startDateStr = (document.getElementById('rnd-schedule-start-date') as HTMLInputElement)?.value || todayStr2;
+    const startTimeStr = (document.getElementById('rnd-schedule-start-time') as HTMLInputElement)?.value || '09:00';
+    const endDateStr = (document.getElementById('rnd-schedule-end-date') as HTMLInputElement)?.value || startDateStr;
+    const endTimeStr = (document.getElementById('rnd-schedule-end-time') as HTMLInputElement)?.value || '18:00';
+
+    const startTime = new Date(`${startDateStr}T${startTimeStr}`);
+    const endTime = new Date(`${endDateStr}T${endTimeStr}`);
+
+    // ✅ 15분 미래 검증
+    const minAllowed = new Date(Date.now() + 15 * 60 * 1000);
+    if (startTime.getTime() < minAllowed.getTime()) {
+      toastManager.error('❌ 시작 시간은 현재 시간 기준 15분 이후여야 합니다!');
+      return;
+    }
+
+    if (endTime.getTime() <= startTime.getTime()) {
+      toastManager.error('❌ 마감 시간이 시작 시간보다 이후여야 합니다!');
+      return;
+    }
+
+    const rangeMs = endTime.getTime() - startTime.getTime();
+    if (rangeMs < 600000) {
+      toastManager.error('❌ 시작~마감 시간 범위가 최소 10분 이상이어야 합니다.');
+      return;
+    }
+
+    if (!continuousQueueV2 || continuousQueueV2.length === 0) {
+      toastManager.warning('📋 대기열에 항목이 없습니다.');
+      return;
+    }
+
+    const itemCount = continuousQueueV2.length;
+    const randomTimes: Date[] = [];
+    for (let i = 0; i < itemCount; i++) {
+      const raw = new Date(startTime.getTime() + Math.floor(Math.random() * rangeMs));
+      // ✅ [2026-02-08 FIX] 10분 단위 반올림 (네이버 서버 예약 10분 단위 제한)
+      const mins = raw.getMinutes();
+      const rounded = Math.round(mins / 10) * 10;
+      raw.setMinutes(rounded, 0, 0);
+      if (rounded >= 60) { raw.setMinutes(0); raw.setHours(raw.getHours() + 1); }
+      randomTimes.push(raw);
+    }
+    randomTimes.sort((a, b) => a.getTime() - b.getTime());
+
+    continuousQueueV2.forEach((item: any, i: number) => {
+      const t = randomTimes[i];
+      const yyyy = t.getFullYear();
+      const mo = String(t.getMonth() + 1).padStart(2, '0');
+      const dd = String(t.getDate()).padStart(2, '0');
+      const hh = String(t.getHours()).padStart(2, '0');
+      const mi = String(t.getMinutes()).padStart(2, '0');
+      item.scheduleDate = `${yyyy}-${mo}-${dd}T${hh}:${mi}`;
+      item.publishMode = 'schedule';
+      // ✅ [2026-02-08 FIX] item.interval = 600 제거 — 사용자 설정 간격 유지
+    });
+
+    // 미리보기
+    const previewEl = document.getElementById('rnd-schedule-preview');
+    const previewContent = document.getElementById('rnd-schedule-preview-content');
+    if (previewEl && previewContent) {
+      previewEl.style.display = 'block';
+      previewContent.innerHTML = continuousQueueV2.map((item: any, i: number) => {
+        const timeStr = item.scheduleDate?.split('T')[1] || '';
+        const dateStr = item.scheduleDate?.split('T')[0] || '';
+        return `<div style="display: flex; gap: 0.5rem; padding: 2px 0;">
+          <span style="color: #60a5fa; min-width: 25px;">#${i + 1}</span>
+          <span style="color: #10b981; font-weight: 600;">${dateStr} ${timeStr}</span>
+          <span style="color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.value?.substring(0, 20) || ''}...</span>
+        </div>`;
+      }).join('');
+    }
+
+    toastManager.success(`✅ ${itemCount}개 항목에 랜덤 예약 적용! (${startTimeStr}~${endTimeStr})`);
+    renderQueueListV2?.();
+    updateScheduleStatusSummary();
+  });
+
+  // ESC
+  const handleEsc = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', handleEsc); }
+  };
+  document.addEventListener('keydown', handleEsc);
+}
+
+// ✅ [2026-02-07] 개별 예약 설정 모달 (대기열 전체 + 체크박스 + 날짜/시간)
+function showIndividualScheduleModal(): void {
+  document.getElementById('individual-schedule-modal-overlay')?.remove();
+
+  if (!continuousQueueV2 || continuousQueueV2.length === 0) {
+    toastManager.warning('📋 대기열에 항목이 없습니다. 먼저 항목을 추가해주세요.');
+    return;
+  }
+
+  const overlay = document.createElement('div');
+  overlay.id = 'individual-schedule-modal-overlay';
+  overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
+
+  const itemRows = continuousQueueV2.map((item: any, i: number) => {
+    let curDate = '';
+    let curTime = '';
+    if (item.scheduleDate) {
+      if (item.scheduleDate.includes('T')) {
+        curDate = item.scheduleDate.split('T')[0];
+        curTime = item.scheduleDate.split('T')[1]?.substring(0, 5) || '';
+      }
+    }
+    const isScheduled = item.publishMode === 'schedule' && curDate;
+    const label = item.value || `항목 ${i + 1}`;
+    const shortLabel = label.length > 22 ? label.substring(0, 22) + '...' : label;
+
+    return `
+      <div style="display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; padding: 0.5rem 0.6rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;" data-idx="${i}">
+        <input type="checkbox" class="indv-check" data-idx="${i}" ${isScheduled ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8rem; color: var(--text-strong, #fff);" title="${label}">${shortLabel}</div>
+        <input type="date" class="indv-date" data-idx="${i}" value="${curDate}" style="padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.8rem; color-scheme: dark; width: 130px;">
+        <input type="time" class="indv-time" data-idx="${i}" value="${curTime || '09:00'}" step="600" style="padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.8rem; color-scheme: dark; width: 100px;">
+      </div>`;
+  }).join('');
+
+  overlay.innerHTML = `
+    <div style="background: var(--bg-primary, #1a1a2e); border: 2px solid rgba(16, 185, 129, 0.4); border-radius: 16px; max-width: 620px; width: 95%; box-shadow: 0 25px 50px rgba(0,0,0,0.5); max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;">
+      <!-- 헤더 -->
+      <div style="padding: 1rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between;">
+        <h3 style="margin: 0; color: #34d399; font-size: 1.1rem; font-weight: 700;">📋 개별 예약 설정</h3>
+        <button type="button" id="indv-schedule-close" style="background: none; border: none; color: var(--text-muted, #999); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+
+      <!-- 전체 선택/해제 + 일괄 설정 -->
+      <div style="padding: 0.75rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.8rem; color: var(--text-muted);">
+          <input type="checkbox" id="indv-select-all" style="width: 16px; height: 16px; accent-color: #10b981;">
+          <span>전체 선택</span>
+        </label>
+        <div style="margin-left: auto; display: flex; align-items: center; gap: 0.4rem;">
+          <span style="font-size: 0.75rem; color: var(--text-muted);">선택 항목 일괄:</span>
+          <input type="date" id="indv-bulk-date" style="padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark;">
+          <input type="time" id="indv-bulk-time" value="09:00" step="600" style="padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark;">
+          <button type="button" id="indv-bulk-apply" style="padding: 0.3rem 0.6rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 6px; color: #60a5fa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">적용</button>
+        </div>
+      </div>
+
+      <!-- 헤더 라벨 -->
+      <div style="padding: 0.4rem 1.5rem; display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <span></span>
+        <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600;">대기열 항목</span>
+        <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600; width: 130px; text-align: center;">날짜</span>
+        <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600; width: 100px; text-align: center;">시간</span>
+      </div>
+
+      <!-- 아이템 리스트 (스크롤) -->
+      <div style="flex: 1; overflow-y: auto; padding: 0.75rem 1.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+        ${itemRows}
+      </div>
+
+      <!-- 푸터 -->
+      <div style="padding: 0.75rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 0.5rem;">
+        <button type="button" id="indv-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--bg-tertiary, #333); color: var(--text-muted, #999); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
+        <button type="button" id="indv-schedule-save" style="flex: 2; padding: 0.7rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">💾 예약 저장</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  // 전체 선택
+  document.getElementById('indv-select-all')?.addEventListener('change', (e) => {
+    const checked = (e.target as HTMLInputElement).checked;
+    overlay.querySelectorAll('.indv-check').forEach(cb => {
+      (cb as HTMLInputElement).checked = checked;
+    });
+  });
+
+  // 일괄 적용
+  document.getElementById('indv-bulk-apply')?.addEventListener('click', () => {
+    const bulkDate = (document.getElementById('indv-bulk-date') as HTMLInputElement)?.value;
+    const bulkTime = (document.getElementById('indv-bulk-time') as HTMLInputElement)?.value || '09:00';
+    if (!bulkDate) {
+      toastManager.warning('📅 일괄 적용할 날짜를 선택해주세요.');
+      return;
+    }
+    let appliedCount = 0;
+    overlay.querySelectorAll('.indv-check').forEach(cb => {
+      if ((cb as HTMLInputElement).checked) {
+        const idx = (cb as HTMLElement).dataset.idx;
+        const dateInput = overlay.querySelector(`.indv-date[data-idx="${idx}"]`) as HTMLInputElement;
+        const timeInput = overlay.querySelector(`.indv-time[data-idx="${idx}"]`) as HTMLInputElement;
+        if (dateInput) dateInput.value = bulkDate;
+        if (timeInput) timeInput.value = bulkTime;
+        appliedCount++;
+      }
+    });
+    if (appliedCount > 0) {
+      toastManager.info(`✅ ${appliedCount}개 항목에 ${bulkDate} ${bulkTime} 일괄 적용됨`);
+    } else {
+      toastManager.warning('⚠️ 체크된 항목이 없습니다.');
+    }
+  });
+
+  // 닫기
+  const closeModal = () => overlay.remove();
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.getElementById('indv-schedule-close')?.addEventListener('click', closeModal);
+  document.getElementById('indv-schedule-cancel')?.addEventListener('click', closeModal);
+
+  // 저장
+  document.getElementById('indv-schedule-save')?.addEventListener('click', () => {
+    let savedCount = 0;
+    overlay.querySelectorAll('.indv-check').forEach(cb => {
+      const idx = parseInt((cb as HTMLElement).dataset.idx || '0');
+      const checked = (cb as HTMLInputElement).checked;
+      const dateInput = overlay.querySelector(`.indv-date[data-idx="${idx}"]`) as HTMLInputElement;
+      const timeInput = overlay.querySelector(`.indv-time[data-idx="${idx}"]`) as HTMLInputElement;
+      const item = continuousQueueV2[idx];
+      if (!item) return;
+
+      if (checked && dateInput?.value) {
+        const timeVal = timeInput?.value || '09:00';
+        // ✅ 15분 미래 검증
+        const scheduledTime = new Date(`${dateInput.value}T${timeVal}`);
+        const minAllowed = new Date(Date.now() + 15 * 60 * 1000);
+        if (scheduledTime.getTime() < minAllowed.getTime()) {
+          const label = item.value?.substring(0, 15) || `#${idx + 1}`;
+          toastManager.error(`❌ "${label}..." 예약 시간이 현재 기준 15분 이후여야 합니다!`);
+          return;
+        }
+        item.publishMode = 'schedule';
+        item.scheduleDate = `${dateInput.value}T${timeVal}`;
+        item.scheduleTime = timeVal;
+        // ✅ [2026-02-08 FIX] item.interval = 600 제거 — 사용자 설정 간격 유지
+        savedCount++;
+      } else if (!checked) {
+        item.publishMode = 'publish';
+        item.scheduleDate = undefined;
+        item.scheduleTime = undefined;
+      }
+    });
+
+    toastManager.success(`✅ ${savedCount}개 항목 예약 저장 완료!`);
+    renderQueueListV2?.();
+    updateScheduleStatusSummary();
+    closeModal();
+  });
+
+  // ESC
+  const handleEsc = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', handleEsc); }
+  };
+  document.addEventListener('keydown', handleEsc);
 }
 
 // ✅ 전체 보기 모달
@@ -5487,7 +6353,7 @@ function showEditQueueItemModal(item: ContinuousQueueItem, options?: { fromFullV
   if (toneStyleEl) toneStyleEl.value = item.toneStyle || 'professional';
 
   const imageSourceEl = document.getElementById('continuous-modal-image-source') as HTMLSelectElement | null;
-  if (imageSourceEl) imageSourceEl.value = item.imageSource || 'nano-banana-pro';
+  if (imageSourceEl) imageSourceEl.value = item.imageSource || getFullAutoImageSource();
 
   const radio = modal.querySelector(`input[name="continuous-modal-publish-mode"][value="${item.publishMode}"]`) as HTMLInputElement;
   if (radio) {
@@ -5687,8 +6553,11 @@ async function startContinuousPublishingV2(): Promise<void> {
     'schedule': '네이버 예약발행'
   };
 
+  // ✅ [2026-01-28 FIX] localStorage 설정 최우선 적용
   const includeThumbnailTextEl = document.getElementById('continuous-include-thumbnail-text') as HTMLInputElement | null;
-  const includeThumbnailText = includeThumbnailTextEl?.checked || false;
+  const includeThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true' ||
+    includeThumbnailTextEl?.checked || false;
+  console.log(`[Continuous] 🖼️ 1번 이미지 텍스트 포함: ${includeThumbnailText} (localStorage 또는 체크박스)`);
 
   // ✅ [2026-01-21] 배너 자동 생성 체크박스 읽기
   const autoBannerGenerateEl = document.getElementById('continuous-auto-banner-generate') as HTMLInputElement | null;
@@ -5697,6 +6566,10 @@ async function startContinuousPublishingV2(): Promise<void> {
 
   // ✅ 카테고리 정보 수집
   const selectedCategory = (document.getElementById('real-blog-category-select') as HTMLSelectElement)?.value || undefined;
+
+  // ✅ [2026-02-09 v2] 연속발행 제목 히스토리 (중복 방지)
+  const previousTitles: string[] = [];
+  (window as any)._previousTitles = previousTitles;
 
   for (let i = 0; i < continuousQueueV2.length; i++) {
     const item = continuousQueueV2[i];
@@ -5716,16 +6589,18 @@ async function startContinuousPublishingV2(): Promise<void> {
       percentage: progress
     });
 
-    // ✅ 이미지 상태 초기화 (이전 발행 이미지 잔상 제거)
+    // ✅ [2026-02-03 FIX] 이미지 상태 초기화 (이전 발행 이미지 잔상 제거)
     try {
       if (typeof ImageManager !== 'undefined' && ImageManager.clearAll) {
         ImageManager.clearAll();
       }
       (window as any).generatedImages = [];
+      (window as any).imageManagementGeneratedImages = [];  // ✅ [2026-02-03] 누락된 초기화 추가
       (window as any).currentStructuredContent = null;
     } catch (e) {
       console.warn('[Continuous] 상태 초기화 중 오류 (무시 가능):', e);
     }
+
 
     try {
       const modeLabel = publishModeLabels[item.publishMode] || '즉시발행';
@@ -5745,6 +6620,8 @@ async function startContinuousPublishingV2(): Promise<void> {
         }
         await generateContentFromUrl(combinedUrls, customKeyword, item.toneStyle, true, item.contentMode, item.category);
       } else {
+        // ✅ [2026-02-13] V2 큐: 키워드 제목 옵션 적용
+        setKeywordTitleOptionsFromItem(item.value, item.keywordAsTitle, item.keywordTitlePrefix);
         await generateContentFromKeywords(item.customTitle || '', item.value, item.toneStyle, true, item.contentMode, item.category);
       }
 
@@ -5762,6 +6639,13 @@ async function startContinuousPublishingV2(): Promise<void> {
         // ✅ 연속발행: 사용자 지정 제목/키워드가 있으면 최종 제목을 강제 세팅
         applyContinuousTitleOverrides(item, structuredContent);
 
+        // ✅ [2026-02-09 v2] 생성된 제목을 히스토리에 추가 (다음 발행 시 중복 방지)
+        if (structuredContent.selectedTitle) {
+          previousTitles.push(structuredContent.selectedTitle);
+          (window as any)._previousTitles = previousTitles;
+          console.log(`[Continuous] 📝 제목 히스토리 누적: ${previousTitles.length}개`);
+        }
+
         const skipImages = item.imageSource === 'skip';
         if (!skipImages) {
           updateContinuousProgressModal({
@@ -5777,6 +6661,10 @@ async function startContinuousPublishingV2(): Promise<void> {
             clearImageGenerationLocks();
 
             // generateImagesForAutomation 호출
+            // ✅ [2026-01-28] 이미지 설정 전역 적용 (localStorage에서 읽음)
+            const scSubImageSource = localStorage.getItem('scSubImageSource') || 'ai';
+            const collectedImgs = (window as any).imageManagementGeneratedImages || (window as any).generatedImages || [];
+
             const generatedImgs = await generateImagesForAutomation(
               item.imageSource,
               headings,
@@ -5789,7 +6677,8 @@ async function startContinuousPublishingV2(): Promise<void> {
                   const modalLog = document.getElementById('continuous-progress-log');
                   if (modalLog) modalLog.textContent = msg;
                 },
-                allowThumbnailText: includeThumbnailText // ✅ 1번 이미지 텍스트 포함 옵션 전달
+                allowThumbnailText: includeThumbnailText, // ✅ 1번 이미지 텍스트 포함 옵션 전달
+                collectedImages: scSubImageSource === 'collected' ? collectedImgs : undefined  // ✅ 수집 이미지 직접 사용 시 전달
               }
             );
 
@@ -5808,7 +6697,8 @@ async function startContinuousPublishingV2(): Promise<void> {
                   const h = img.heading || structuredContent.selectedTitle;
                   if (h) ImageManager.addImage(h, img);
                 });
-                (window as any).imageManagementGeneratedImages = ImageManager.getAllImages();
+                // ✅ [2026-02-12 P1 FIX #7] syncGlobalImagesFromImageManager 호출
+                syncGlobalImagesFromImageManager();
               }
             } catch (e) {
               console.warn('[Continuous] ImageManager 동기화 실패:', e);
@@ -5838,7 +6728,7 @@ async function startContinuousPublishingV2(): Promise<void> {
         const formData = {
           mode: 'full-auto',
           structuredContent,
-          imageSource: skipImages ? 'nano-banana-pro' : item.imageSource,
+          imageSource: skipImages ? getFullAutoImageSource() : item.imageSource,
           skipImages,
           publishMode: item.publishMode,
           // ✅ scheduleDate와 scheduleTime을 합쳐서 'YYYY-MM-DD HH:mm' 형식으로 전달
@@ -5853,14 +6743,29 @@ async function startContinuousPublishingV2(): Promise<void> {
           scheduleType: item.scheduleType || 'naver-server',
           includeThumbnailText,
           keywords: item.customKeyword,
-          ctaType: item.ctaType,
-          ctaUrl: item.ctaUrl,
+          // ✅ [2026-02-03 FIX] CTA 필드명 불일치 수정 - PostCyclePayload 스키마에 맞게 변환
+          ctaLink: item.ctaUrl, // ctaUrl → ctaLink로 매핑
           ctaText: item.ctaText,
+          // ✅ ctaType에 따른 skipCta 및 ctas 설정
+          skipCta: item.ctaType === 'none',
+          ctas: item.ctaType === 'custom' && item.ctaUrl ? [{
+            link: item.ctaUrl,
+            text: item.ctaText || '자세히 보러가기',
+            position: 'bottom'
+          }] : undefined,
           category: item.category || selectedCategory, // ✅ [2026-01-22 FIX] 연속발행 항목의 콘텐츠 카테고리 우선 사용 (CTA 이전글 찾기용)
+          categoryName: item.realCategoryName, // ✅ [2026-02-03 FIX] 네이버 블로그 카테고리 이름 전달
           contentMode: item.contentMode, // ✅ 콘텐츠 모드 추가
           affiliateLink: item.affiliateLink, // ✅ 제휴 링크 추가
           keepBrowserOpen: true, // ✅ 연속발행 시 항상 브라우저 세션 유지
           autoBannerGenerate, // ✅ [2026-01-21] 배너 자동 생성 옵션
+          // ✅ [2026-02-09 FIX] ctaType 전달 — 이전글 자동 검색 조건에 필수
+          // executeFullAutoFlow L23996: isPreviousPostMode = formData.ctaType === 'previous-post'
+          ctaType: item.ctaType || 'none',
+          // ✅ [2026-02-09 FIX] 이전글 정보 (executeFullAutoFlow에서 동적으로 찾지만 초기값도 전달)
+          previousPostUrl: item.previousPostUrl || undefined,
+          previousPostTitle: item.previousPostTitle || undefined,
+
         };
         await executeUnifiedAutomation(formData);
       }
@@ -5916,12 +6821,16 @@ async function startContinuousPublishingV2(): Promise<void> {
     appendLog('✅ 모든 연속 발행 완료!');
     toastManager.success(`모든 발행이 완료되었습니다! (성공: ${successCount}, 실패: ${failCount})`);
 
-    // ✅ [2026-01-20 추가] 메모리 정리 - 연속발행 완료 후 이미지 데이터 초기화
+    // ✅ [2026-01-29 개선] 발행 완료 후 전체 상태 초기화
     try {
-      console.log('[Continuous] 🧹 메모리 정리 시작...');
+      console.log('[Continuous] 🧹 발행 완료 → 전체 상태 초기화...');
 
-      // 전역 이미지 배열 초기화
-      (window as any).generatedImages = [];
+      // ✅ 통합 초기화 함수 호출
+      if (typeof (window as any).resetAfterPublish === 'function') {
+        (window as any).resetAfterPublish();
+      }
+
+      // 추가 정리: 연속발행 특화 상태
       (window as any).imageManagementGeneratedImages = [];
       (window as any).continuousPresetThumbnail = null;
       (window as any).continuousPresetThumbnailPath = null;
@@ -5931,12 +6840,9 @@ async function startContinuousPublishingV2(): Promise<void> {
         ImageManager.clear();
       }
 
-      // 연속발행 큐 완료 항목 정리 (pending 상태만 유지)
-      // continuousQueueV2는 UI 표시용이므로 유지
-
-      console.log('[Continuous] ✅ 메모리 정리 완료');
+      console.log('[Continuous] ✅ 전체 상태 초기화 완료 → 새 발행 준비 완료');
     } catch (memErr) {
-      console.warn('[Continuous] 메모리 정리 중 오류:', memErr);
+      console.warn('[Continuous] 상태 초기화 중 오류:', memErr);
     }
 
     // 3초 후 모달 자동 닫기 (사용자가 결과를 볼 수 있게)
@@ -6002,6 +6908,10 @@ async function processNextInQueueEnhanced(): Promise<void> {
       await generateContentFromUrl(item.value, undefined, item.toneStyle, true);
     } else if (item.type === 'keyword') {
       // 키워드 기반 발행 (suppressModal: true)
+      // ✅ [2026-02-13] Enhanced 큐: 연속발행 체크박스에서 직접 읽기 (하위 호환)
+      const enhancedKeywordAsTitle = (document.getElementById('continuous-keyword-as-title') as HTMLInputElement)?.checked || false;
+      const enhancedKeywordTitlePrefix = (document.getElementById('continuous-keyword-title-prefix') as HTMLInputElement)?.checked || false;
+      setKeywordTitleOptionsFromItem(item.value, enhancedKeywordAsTitle, enhancedKeywordTitlePrefix);
       await generateContentFromKeywords('', item.value, item.toneStyle, true);
     }
 
@@ -6034,7 +6944,7 @@ async function executeContinuousPublish(structuredContent: any, publishMode: str
   // ✅ 사용자 설정 이미지 소스 가져오기 (리뉴얼 모달: select 우선, 구형 UI: radio fallback)
   const imageSourceSelect = document.getElementById('continuous-image-source-select') as HTMLSelectElement | null;
   const imageSourceRadio = document.querySelector('input[name="continuous-image-source"]:checked') as HTMLInputElement | null;
-  const imageSource = imageSourceSelect?.value || imageSourceRadio?.value || 'nano-banana-pro';
+  const imageSource = imageSourceSelect?.value || imageSourceRadio?.value || getFullAutoImageSource();
   const skipImages = imageSource === 'skip';
 
   // ✅ 연속발행: 1번 이미지 텍스트 포함 옵션
@@ -6048,11 +6958,12 @@ async function executeContinuousPublish(structuredContent: any, publishMode: str
     generator: (document.getElementById('unified-generator') as HTMLSelectElement)?.value || 'gemini',
     toneStyle: (document.getElementById('unified-tone-style') as HTMLInputElement)?.value || 'friendly',
     structuredContent,
-    imageSource: skipImages ? 'nano-banana-pro' : imageSource,
+    imageSource: skipImages ? getFullAutoImageSource() : imageSource,
     skipImages,
     publishMode, // publish, draft, schedule
     scheduleDate,
     includeThumbnailText,
+    categoryName: UnifiedDOMCache.getRealCategoryName(), // ✅ [2026-02-11 FIX] 카테고리 이름(text) 전달 — value(번호) 아닌 name으로 발행 모달에서 매칭
   };
 
   await executeUnifiedAutomation(formData);
@@ -6269,7 +7180,7 @@ interface GeneratedPost {
 
 
 /**
-
+ 
  * ✅ [100점 수정] 기존 저장된 글의 카테고리 마이그레이션
  * 영어 카테고리를 한글로 자동 통일
  */
@@ -6562,6 +7473,7 @@ function migrateAccountPostsToGlobal(): void {
     }
 
     // 3. 전역 저장소에 통합 저장
+    // ✅ [2026-02-02 FIX] 사용자가 선택한 카테고리 그대로 유지 (정규화 제거)
     localStorage.setItem(GENERATED_POSTS_KEY, JSON.stringify(allPosts));
     console.log(`[Migration] ✅ 전역 저장소에 총 ${allPosts.length}개 글 통합 완료`);
 
@@ -6577,6 +7489,8 @@ function migrateAccountPostsToGlobal(): void {
 function migratePostsToPerAccount(): void {
   migrateAccountPostsToGlobal();
 }
+
+
 
 // ✅ [2026-01-24 FIX] 계정별 분리 제거 - 전역 저장소에서 모든 글 로드
 // 카테고리별로만 필터링하면 되므로 계정 구분 불필요
@@ -6619,14 +7533,13 @@ function loadGeneratedPost(postId: string): GeneratedPost | null {
   return null;
 }
 
-// ✅ [2026-01-22] 계정별 글 삭제
+// ✅ [2026-01-26 FIX] 전역 저장소에서 글 삭제 (loadGeneratedPosts와 동일한 저장소 사용)
 function deleteGeneratedPost(postId: string): void {
   try {
-    const naverId = getCurrentNaverId();
-    const key = getPostsStorageKey(naverId);
-    const posts = loadGeneratedPosts(naverId);
+    // ✅ [2026-01-26 FIX] 전역 저장소 사용 (loadGeneratedPosts와 일치)
+    const posts = loadGeneratedPosts();
     const filtered = posts.filter(p => p.id !== postId);
-    safeLocalStorageSetItem(key, JSON.stringify(filtered));
+    safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(filtered));
 
     // ✅ 이미지 폴더도 삭제
     if (postId) {
@@ -6634,6 +7547,7 @@ function deleteGeneratedPost(postId: string): void {
     }
 
     appendLog(`🗑️ 생성된 글이 삭제되었습니다. (ID: ${postId})`);
+    console.log(`[DeletePost] ✅ 삭제 완료: ${postId}, 남은 글: ${filtered.length}개`);
   } catch (error) {
     console.error('생성된 글 삭제 실패:', error);
   }
@@ -7429,7 +8343,7 @@ let lastImageHistorySnapshotAt = 0;
 function pushImageHistorySnapshot(reason: string): void {
   try {
     const now = Date.now();
-    if (now - lastImageHistorySnapshotAt < 150) return;
+    if (now - lastImageHistorySnapshotAt < 50) return; // ✅ [2026-02-12 P3 FIX #16] 150ms → 50ms
     lastImageHistorySnapshotAt = now;
     const snapshot: ImageHistorySnapshot = [];
     ImageManager.imageMap.forEach((images, heading) => {
@@ -7511,6 +8425,9 @@ const ImageManager = {
     } catch {
       // ignore
     }
+    // ✅ [2026-02-12 P0 FIX] 누락된 동기화 추가
+    this.syncGeneratedImagesArray();
+    this.syncAllPreviews();
   },
 
   resolveHeadingKey(headingTitle: string): string {
@@ -7560,18 +8477,34 @@ const ImageManager = {
       // ignore
     }
 
-    // ✅ 현재 소제목 목록에 없는 예전(테스트) 이미지 매핑 정리
+    // ✅ [2026-02-12 P2 FIX #12] 이미지 소실 방지: 삭제 대신 가장 가까운 소제목에 리매핑
     try {
       const normalizedHeadings = new Set<string>();
+      const headingTitleList: string[] = [];
       (Array.isArray(this.headings) ? this.headings : []).forEach((h: any) => {
         const title = typeof h === 'string' ? String(h).trim() : String(h?.title || h || '').trim();
         const n = normalizeHeadingKeyForVideoCache(title);
-        if (n) normalizedHeadings.add(n);
+        if (n) {
+          normalizedHeadings.add(n);
+          headingTitleList.push(title);
+        }
       });
       const keys = Array.from(this.imageMap.keys()) as string[];
       for (const key of keys) {
         const n = normalizeHeadingKeyForVideoCache(String(key || '').trim());
         if (n && !normalizedHeadings.has(n)) {
+          // 인덱스 기반 리매핑: 같은 위치의 새 소제목이 있으면 이전
+          const images = this.imageMap.get(key);
+          if (images && images.length > 0 && headingTitleList.length > 0) {
+            const idx = images[0]?.headingIndex;
+            if (typeof idx === 'number' && idx >= 0 && idx < headingTitleList.length) {
+              const newKey = this.resolveHeadingKey(headingTitleList[idx]);
+              if (!this.imageMap.has(newKey)) {
+                this.imageMap.set(newKey, images);
+                console.log(`[ImageManager] 이미지 리매핑: "${key}" → "${newKey}"`);
+              }
+            }
+          }
           this.imageMap.delete(key);
         }
       }
@@ -7580,6 +8513,8 @@ const ImageManager = {
     }
 
     this.syncAllPreviews();
+    // ✅ [2026-02-12 P2 FIX #13] setHeadings 후 syncGlobal 호출
+    try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
   },
 
   /**
@@ -7626,11 +8561,6 @@ const ImageManager = {
     this.unsetHeadings.delete(titleKey);
     this.syncGeneratedImagesArray();
     this.syncAllPreviews();
-    try {
-      (window as any).imageManagementGeneratedImages = this.getAllImages();
-    } catch {
-      // ignore
-    }
     try {
       syncGlobalImagesFromImageManager();
     } catch {
@@ -7774,9 +8704,24 @@ const ImageManager = {
    * 모든 이미지 가져오기 (배열 - 모든 소제목의 모든 이미지)
    */
   getAllImages(): any[] {
+    // ✅ [2026-02-12 P2 FIX #11] headings 순서 보장
     const allImages: any[] = [];
-    this.imageMap.forEach((images) => {
-      allImages.push(...images);
+    const visited = new Set<string>();
+    if (Array.isArray(this.headings) && this.headings.length > 0) {
+      this.headings.forEach((h: any) => {
+        const title = typeof h === 'string' ? String(h).trim() : String(h?.title || h || '').trim();
+        const key = this.resolveHeadingKey(title);
+        if (!key || visited.has(key)) return;
+        visited.add(key);
+        const images = this.imageMap.get(key);
+        if (images) allImages.push(...images);
+      });
+    }
+    // 남은 orphan 엔트리도 추가
+    this.imageMap.forEach((images, key) => {
+      if (!visited.has(key)) {
+        allImages.push(...images);
+      }
     });
     return allImages;
   },
@@ -7798,6 +8743,13 @@ const ImageManager = {
     this.imageMap.clear();
     this.unsetHeadings.clear();
     this.headings = [];
+    // ✅ [2026-02-12 P0 FIX] 전역변수도 함께 초기화
+    try {
+      (window as any).generatedImages = [];
+      (window as any).imageManagementGeneratedImages = [];
+    } catch {
+      // ignore
+    }
     this.syncGeneratedImagesArray();
     this.syncAllPreviews();
   },
@@ -7815,11 +8767,12 @@ const ImageManager = {
         if (!title) return;
         const img = this.getImage(title);
         if (img) {
-          // headingIndex가 없으면 추가
-          if (img.headingIndex === undefined || img.headingIndex === null) {
-            img.headingIndex = idx;
+          // ✅ [2026-02-12 P3 FIX #17] 원본 mutation 방지: 복사본 사용
+          const imgCopy = { ...img };
+          if (imgCopy.headingIndex === undefined || imgCopy.headingIndex === null) {
+            imgCopy.headingIndex = idx;
           }
-          generatedImages.push(img);
+          generatedImages.push(imgCopy);
         }
       });
     } else {
@@ -7890,12 +8843,22 @@ const ImageManager = {
       const cachedVideo = getFromCache(headingTitle);
       if (cachedVideo && cachedVideo.url) {
         const safeUrl = escapeHtml(String(cachedVideo.url));
+        // ✅ [2026-02-12 FIX] 비디오+이미지 동시 표시: 이미지가 있으면 좌하단 뱃지로 보조 표시
+        let imageBadgeHtml = '';
+        if (image) {
+          const imgRaw = image.url || image.filePath || image.previewDataUrl || '';
+          const imgUrl = toFileUrlMaybe(String(imgRaw || '').trim());
+          if (imgUrl) {
+            imageBadgeHtml = `<div style="position: absolute; bottom: 4px; left: 4px; width: 36px; height: 36px; border-radius: 6px; overflow: hidden; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 2px 6px rgba(0,0,0,0.3); z-index: 10;" title="배치된 이미지: ${safeTitle}"><img src="${imgUrl}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.style.display='none'"></div>`;
+          }
+        }
         generatedImageDiv.innerHTML = `
           <div style="position: relative; width: 100%; height: 100%;">
             <video class="heading-video-preview" src="${safeUrl}" muted autoplay loop playsinline preload="metadata" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; cursor: pointer; background: #000;"></video>
             <div style="position: absolute; top: 4px; right: 4px; display: flex; gap: 4px; z-index: 10;">
               <button class="remove-heading-video-btn" data-heading-index="${index}" data-heading-title="${safeTitle}" style="background: rgba(239, 68, 68, 0.95); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 0.85rem; font-weight: 900;" title="삭제">✕</button>
             </div>
+            ${imageBadgeHtml}
           </div>
         `;
         generatedImageDiv.style.border = '2px solid var(--success)';
@@ -7930,12 +8893,22 @@ const ImageManager = {
           const stillHeading = String(headingTitleEl2?.textContent || '').trim();
           if (stillHeading !== currentHeadingSnapshot) return;
           const safeUrl2 = escapeHtml(String(entry.url));
+          // ✅ [2026-02-12 FIX] in-flight 비디오에서도 이미지 뱃지 표시 (일관성)
+          let imageBadgeHtml2 = '';
+          if (image) {
+            const imgRaw2 = image.url || image.filePath || image.previewDataUrl || '';
+            const imgUrl2 = toFileUrlMaybe(String(imgRaw2 || '').trim());
+            if (imgUrl2) {
+              imageBadgeHtml2 = `<div style="position: absolute; bottom: 4px; left: 4px; width: 36px; height: 36px; border-radius: 6px; overflow: hidden; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 2px 6px rgba(0,0,0,0.3); z-index: 10;" title="배치된 이미지: ${safeTitle}"><img src="${imgUrl2}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.style.display='none'"></div>`;
+            }
+          }
           currentDiv.innerHTML = `
             <div style="position: relative; width: 100%; height: 100%;">
               <video class="heading-video-preview" src="${safeUrl2}" muted autoplay loop playsinline preload="metadata" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; cursor: pointer; background: #000;"></video>
               <div style="position: absolute; top: 4px; right: 4px; display: flex; gap: 4px; z-index: 10;">
                 <button class="remove-heading-video-btn" data-heading-index="${index}" data-heading-title="${safeTitle}" style="background: rgba(239, 68, 68, 0.95); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 0.85rem; font-weight: 900;" title="삭제">✕</button>
               </div>
+              ${imageBadgeHtml2}
             </div>
           `;
           currentDiv.style.border = '2px solid var(--success)';
@@ -8772,6 +9745,64 @@ let continuousInterval: NodeJS.Timeout | null = null;
 let continuousQueue: string[] = []; // 연속 발행할 URL/콘텐츠 큐
 let __continuousV2Initialized = false; // V2 초기화 플래그
 
+// ✅ [2026-02-08 FIX] 로그 DOM 배치 업데이트 — UI 깜빡거림/지직거림 방지
+let _logUpdatePending = false;
+let _logPendingEntries: { message: string; timestamp: string }[] = [];
+
+function _flushLogEntries(logOutputs: HTMLElement[]): void {
+  const entries = _logPendingEntries.splice(0);
+  _logUpdatePending = false;
+
+  if (entries.length === 0) return;
+
+  // DocumentFragment로 DOM 조작 최소화
+  logOutputs.forEach(currentLogOutput => {
+    // 기존 로그 지우기 (너무 많이 쌓이지 않도록, 200개까지 유지)
+    while (currentLogOutput.children.length > 200) {
+      currentLogOutput.removeChild(currentLogOutput.firstChild!);
+    }
+
+    const fragment = document.createDocumentFragment();
+    entries.forEach(({ message, timestamp }) => {
+      const logEntry = document.createElement('div');
+      logEntry.className = 'log-entry';
+      logEntry.style.cssText = `
+        padding: 4px 0;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        color: #F4D03F;
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        line-height: 1.4;
+        word-wrap: break-word;
+      `;
+      logEntry.textContent = `[${timestamp}] ${message}`;
+      fragment.appendChild(logEntry);
+    });
+    currentLogOutput.appendChild(fragment);
+    currentLogOutput.scrollTop = currentLogOutput.scrollHeight;
+  });
+
+  // ✅ 연속 발행 진행 모달 상세 로그창에도 추가 (열려있을 때만)
+  const cpDetailLog = document.getElementById('cp-detail-log');
+  const cpModal = document.getElementById('continuous-progress-modal');
+  if (cpModal && cpModal.style.display !== 'none' && cpDetailLog) {
+    const fragment = document.createDocumentFragment();
+    entries.forEach(({ message, timestamp }) => {
+      const newLog = document.createElement('p');
+      newLog.style.cssText = 'margin: 0 0 0.5rem 0; color: #cbd5e1; font-size: 0.85rem; border-left: 2px solid rgba(59, 130, 246, 0.4); padding-left: 0.5rem;';
+      newLog.innerHTML = `<span style="color: #60a5fa; font-weight: 600; margin-right: 0.5rem;">[${timestamp}]</span> ${message}`;
+      fragment.appendChild(newLog);
+    });
+    cpDetailLog.appendChild(fragment);
+    cpDetailLog.scrollTop = cpDetailLog.scrollHeight;
+  }
+
+  // 마지막 항목만 콘솔에 기록 (과다 로그 방지)
+  if (entries.length > 0) {
+    console.log(`[LOG] 로그 ${entries.length}건 표시 완료: ${entries[entries.length - 1].message}`);
+  }
+}
+
 // 로그 표시 및 진행상황 표시 함수 개선 (중복 방지)
 function appendLog(message: string, logOutputId?: string): void {
   // 중복 로그 방지 강화 - 같은 메시지는 2초 이내에 다시 표시하지 않음
@@ -8837,42 +9868,17 @@ function appendLog(message: string, logOutputId?: string): void {
   });
   const logText = `[${timestamp}] ${message}`;
 
-  // 각 로그 영역에 추가
-  logOutputs.forEach(currentLogOutput => {
-    // 기존 로그 지우기 (너무 많이 쌓이지 않도록, 200개까지 유지)
-    while (currentLogOutput.children.length > 200) {
-      currentLogOutput.removeChild(currentLogOutput.firstChild!);
-    }
-
-    const logEntry = document.createElement('div');
-    logEntry.className = 'log-entry';
-    logEntry.style.cssText = `
-      padding: 4px 0;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-      color: #F4D03F;
-      font-family: 'Courier New', monospace;
-      font-size: 12px;
-      line-height: 1.4;
-      word-wrap: break-word;
-    `;
-
-    logEntry.textContent = logText;
-    currentLogOutput.appendChild(logEntry);
-    currentLogOutput.scrollTop = currentLogOutput.scrollHeight;
-  });
-
-  // ✅ 연속 발행 진행 모달 상세 로그창에도 추가 (열려있을 때만)
-  const cpDetailLog = document.getElementById('cp-detail-log');
-  const cpModal = document.getElementById('continuous-progress-modal');
-  if (cpModal && cpModal.style.display !== 'none' && cpDetailLog) {
-    const newLog = document.createElement('p');
-    newLog.style.cssText = 'margin: 0 0 0.5rem 0; color: #cbd5e1; font-size: 0.85rem; border-left: 2px solid rgba(59, 130, 246, 0.4); padding-left: 0.5rem;';
-    newLog.innerHTML = `<span style="color: #60a5fa; font-weight: 600; margin-right: 0.5rem;">[${timestamp}]</span> ${message}`;
-    cpDetailLog.appendChild(newLog);
-    cpDetailLog.scrollTop = cpDetailLog.scrollHeight;
+  // ✅ [2026-02-08 FIX] requestAnimationFrame으로 DOM 업데이트 배치 — UI 깜빡거림 방지
+  // 빠르게 연속 호출되는 로그가 매 프레임마다 한 번만 DOM에 반영됨
+  if (!_logUpdatePending) {
+    _logUpdatePending = true;
+    _logPendingEntries.push({ message, timestamp });
+    requestAnimationFrame(() => {
+      _flushLogEntries(logOutputs);
+    });
+  } else {
+    _logPendingEntries.push({ message, timestamp });
   }
-
-  console.log(`[LOG] 로그 표시 완료: ${message}`);
 }
 
 // 위험 지표 업데이트
@@ -8947,7 +9953,8 @@ function collectFormData(skipImages: boolean = false): RendererAutomationPayload
     videoProvider: (document.getElementById('video-provider-select') as HTMLSelectElement)?.value || 'veo',
     keepBrowserOpen: true, // ✅ 항상 브라우저 세션 유지
     useIntelligentImagePlacement: false, // ✅ 기본값 false (공통 발행 모드에서는 비활성화)
-    includeThumbnailText: (document.getElementById('thumbnail-text-option') as HTMLInputElement)?.checked || false,
+    // ✅ [2026-01-28 FIX] localStorage 설정 우선 적용
+    includeThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || (document.getElementById('thumbnail-text-option') as HTMLInputElement)?.checked || false,
     useAiImage: (document.getElementById('unified-use-ai-image') as HTMLInputElement)?.checked ?? true,
     createProductThumbnail: (document.getElementById('unified-create-product-thumbnail') as HTMLInputElement)?.checked ?? false,
     // ✅ [2026-01-18] 쇼핑커넥트 배너 관련 필드 추가
@@ -9078,10 +10085,20 @@ function collectFormData(skipImages: boolean = false): RendererAutomationPayload
   // 구조화된 콘텐츠
   if (currentStructuredContent) {
     payload.structuredContent = currentStructuredContent;
-    payload.title = payload.title || currentStructuredContent.selectedTitle;
+    // ✅ [2026-02-01 FIX] selectedTitle (패치된 제목)이 우선, 없으면 titleInput 사용
+    payload.title = currentStructuredContent.selectedTitle || payload.title;
     // 해시태그가 입력 필드에 있으면 우선 사용, 없으면 구조화 콘텐츠에서 가져오기
     if (!payload.hashtags || payload.hashtags.length === 0) {
       payload.hashtags = currentStructuredContent.hashtags;
+    }
+    // ✅ [2026-02-01 FIX] collectedImages가 있으면 payload에 추가 (발행 시 이미지 전달)
+    if (currentStructuredContent.collectedImages && currentStructuredContent.collectedImages.length > 0) {
+      (payload as any).collectedImages = currentStructuredContent.collectedImages;
+      console.log(`[collectFormData] ✅ collectedImages ${currentStructuredContent.collectedImages.length}개 payload에 추가`);
+    } else if (currentStructuredContent.images && currentStructuredContent.images.length > 0) {
+      // images 배열도 체크
+      (payload as any).collectedImages = currentStructuredContent.images;
+      console.log(`[collectFormData] ✅ structuredContent.images ${currentStructuredContent.images.length}개 payload에 추가`);
     }
   }
 
@@ -9162,6 +10179,27 @@ function collectFormData(skipImages: boolean = false): RendererAutomationPayload
     if (categoryName) {
       payload.categoryName = categoryName;
     }
+  }
+
+  // ✅ [2026-02-09 FIX] ctaType 수집 — 이전글 자동 검색 조건에 필수
+  // executeFullAutoFlow L23918: canAutoLink = formData.ctaType === 'previous-post'
+  const linkPreviousPostCheckbox = document.getElementById('unified-link-previous-post') as HTMLInputElement;
+  if (linkPreviousPostCheckbox?.checked) {
+    (payload as any).ctaType = 'previous-post';
+  } else if ((payload as any).ctas?.length > 0) {
+    (payload as any).ctaType = 'custom';
+  } else {
+    (payload as any).ctaType = 'none';
+    // ✅ [2026-02-09 FIX] ctaType이 none이고 CTA가 없으면 skipCta도 설정 (연속발행 L6628과 일관성)
+    payload.skipCta = true;
+  }
+
+  // ✅ [2026-02-09 FIX] category 수집 — 이전글 매칭에서 카테고리 비교에 필수
+  // 콘텐츠 카테고리 또는 블로그 폴더 카테고리 사용
+  const contentCategory = (currentStructuredContent as any)?.category || '';
+  const uiCategory = UnifiedDOMCache.getRealCategory() || '';
+  if (contentCategory || uiCategory) {
+    (payload as any).category = contentCategory || uiCategory;
   }
 
   // ✅ 사용자 정의 프롬프트 수집
@@ -9720,7 +10758,7 @@ if (publishModeSelect && scheduleDateContainer) {
         const month = String(minDate.getMonth() + 1).padStart(2, '0');
         const day = String(minDate.getDate()).padStart(2, '0');
         const hours = String(minDate.getHours()).padStart(2, '0');
-        const minutes = String(minDate.getMinutes()).padStart(2, '0');
+        const minutes = String(Math.ceil(minDate.getMinutes() / 10) * 10 % 60).padStart(2, '0'); // 10분 단위 올림
         scheduleDateInput.min = `${year}-${month}-${day}T${hours}:${minutes}`;
         if (!scheduleDateInput.value) {
           scheduleDateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
@@ -10907,7 +11945,7 @@ async function initializeApplication(): Promise<void> {
   initImageLibrary();
   initThumbnailGenerator();
   initLicenseModal();
-  initSettingsModal();
+  initPriceInfoModal();  // ✅ [2026-01-27] initSettingsModal과 충돌 방지로 이름 변경
   try {
     initGeminiModelSync();
   } catch {
@@ -10984,7 +12022,7 @@ function initContentHeadingImageGeneration(): void {
           selectedHeadingTitles.includes(h.title)
         );
 
-        const provider = contentImageProvider.value as 'dalle' | 'pexels';
+        const provider = contentImageProvider.value as string;
 
         const result = await window.api.generateImages({
           provider,
@@ -11787,22 +12825,12 @@ function initThumbnailGenerator(): void {
                 headingIndex: 0
               });
 
-              // ✅ 전체 이미지 목록(예비 포함)은 imageManagementGeneratedImages로 유지
-              const allImagesAfter = ImageManager.getAllImages();
-              (window as any).imageManagementGeneratedImages = allImagesAfter;
-
-              // ✅ generatedImages는 소제목 1장씩(순서 유지)로 유지
-              ImageManager.syncGeneratedImagesArray();
-              const perHeadingImages = generatedImages;
-              (window as any).generatedImages = perHeadingImages;
-
-              displayGeneratedImages(perHeadingImages);
-              updatePromptItemsWithImages(perHeadingImages);
+              // ✅ [2026-02-12 P1 FIX #4] 수동 partial sync → syncGlobalImagesFromImageManager 통합
+              syncGlobalImagesFromImageManager();
               const sc2: any = (window as any).currentStructuredContent;
               if (sc2?.headings) {
-                updateUnifiedImagePreview(sc2.headings, perHeadingImages);
+                updateUnifiedImagePreview(sc2.headings, generatedImages);
               }
-              ImageManager.syncAllPreviews();
 
               alert('✅ 썸네일이 1번 이미지로 적용되었습니다!\n\n발행 시 이 이미지가 대표 이미지(썸네일)로 사용됩니다.');
             } else {
@@ -13086,6 +14114,14 @@ async function initUnifiedTab(): Promise<void> {
     console.error('[Unified] 1번 이미지 텍스트 옵션 UI 추가 실패:', error);
   }
 
+  // ✅ [2026-02-12] "글 생성 시 이미지 수집도 같이하기" 체크박스 UI
+  try {
+    injectAutoCollectCheckboxUI();
+    console.log('[Unified] 이미지 자동 수집 체크박스 UI 추가 완료');
+  } catch (error) {
+    console.error('[Unified] 이미지 자동 수집 체크박스 UI 추가 실패:', error);
+  }
+
   // 발행 모드 관련 코드 제거 (발행설정의 풀오토/반자동으로 대체)
 
   // ✅ URL에서 키워드 추출 버튼
@@ -13348,6 +14384,27 @@ URL: ${firstUrl}
     console.warn('[Unified] generate-from-url-btn 요소를 찾을 수 없음!');
   }
 
+  // ✅ [2026-02-13] 키워드 제목 옵션 체크박스 상호 배타 로직
+  const keywordAsTitleCheckbox = document.getElementById('keyword-as-title') as HTMLInputElement;
+  const keywordTitlePrefixCheckbox = document.getElementById('keyword-title-prefix') as HTMLInputElement;
+
+  if (keywordAsTitleCheckbox && !keywordAsTitleCheckbox.hasAttribute('data-listener-added')) {
+    keywordAsTitleCheckbox.setAttribute('data-listener-added', 'true');
+    keywordAsTitleCheckbox.addEventListener('change', () => {
+      if (keywordAsTitleCheckbox.checked && keywordTitlePrefixCheckbox) {
+        keywordTitlePrefixCheckbox.checked = false;
+      }
+    });
+  }
+  if (keywordTitlePrefixCheckbox && !keywordTitlePrefixCheckbox.hasAttribute('data-listener-added')) {
+    keywordTitlePrefixCheckbox.setAttribute('data-listener-added', 'true');
+    keywordTitlePrefixCheckbox.addEventListener('change', () => {
+      if (keywordTitlePrefixCheckbox.checked && keywordAsTitleCheckbox) {
+        keywordAsTitleCheckbox.checked = false;
+      }
+    });
+  }
+
   // 키워드,제목으로 AI 글 생성하기 버튼
   const generateManualBtn = document.getElementById('generate-manual-btn') as HTMLButtonElement;
   if (generateManualBtn && !generateManualBtn.hasAttribute('data-listener-added')) {
@@ -13368,12 +14425,21 @@ URL: ${firstUrl}
         // 중복 검증 제거하여 버그 방지
 
         // 제목 필드가 제거되어 키워드만 사용 (제목은 AI가 자동 생성)
-        const title = ''; // UI에서 제목 필드 제거됨
+        let title = ''; // UI에서 제목 필드 제거됨
         const keywords = (document.getElementById('unified-keywords') as HTMLInputElement)?.value?.trim();
 
         if (!keywords) {
           alert('⚠️ 키워드를 입력해주세요. AI가 키워드를 기반으로 제목과 글을 자동 생성합니다.');
           return;
+        }
+
+        // ✅ [2026-02-13] 키워드 제목 옵션 확인
+        const useKeywordAsTitle = (document.getElementById('keyword-as-title') as HTMLInputElement)?.checked || false;
+        const useKeywordTitlePrefix = (document.getElementById('keyword-title-prefix') as HTMLInputElement)?.checked || false;
+
+        if (useKeywordAsTitle) {
+          title = keywords; // 키워드를 그대로 제목으로 사용
+          appendLog(`📌 키워드를 제목으로 사용: "${title}"`);
         }
 
         // 버튼 비활성화 및 상태 표시
@@ -13382,6 +14448,16 @@ URL: ${firstUrl}
 
         appendLog(`🔄 키워드 기반 콘텐츠 생성 시작...`);
         appendLog(`   키워드: ${keywords}`);
+        if (useKeywordTitlePrefix) {
+          appendLog(`🔝 키워드를 제목 맨 앞에 배치합니다.`);
+        }
+
+        // ✅ [2026-02-13] 키워드 제목 옵션을 window 전역으로 전달 (contentGenerator에서 참조)
+        (window as any)._keywordTitleOptions = {
+          useKeywordAsTitle,
+          useKeywordTitlePrefix,
+          keyword: keywords
+        };
 
         await generateContentFromKeywords(title, keywords);
 
@@ -13894,16 +14970,23 @@ URL: ${firstUrl}
       structuredContent.bodyPlain = domContent;
     }
 
-    const imageSource = document.querySelector('.unified-img-source-btn.selected')?.getAttribute('data-source') || 'gemini';
+    // ✅ [2026-02-08 FIX] 폴백을 localStorage 기반으로 변경 — 사용자가 선택한 엔진 보존
+    const imageSource = document.querySelector('.unified-img-source-btn.selected')?.getAttribute('data-source')
+      || localStorage.getItem('fullAutoImageSource')
+      || localStorage.getItem('globalImageSource')
+      || 'nano-banana-pro';
     const skipImages = (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked || false;
     const skipCta = (document.getElementById('unified-skip-cta') as HTMLInputElement)?.checked || false;
     const ctasUi = readUnifiedCtasFromUi();
     const ctaText = ctasUi[0]?.text || (document.getElementById('unified-cta-text') as HTMLInputElement)?.value || '';
     const ctaLink = ctasUi[0]?.link || (document.getElementById('unified-cta-link') as HTMLInputElement)?.value || '';
     const ctaPosition = ((document.getElementById('unified-cta-position') as HTMLSelectElement)?.value as 'top' | 'middle' | 'bottom') || 'bottom';
+    // ✅ [2026-01-28 FIX] HeadingImageSettings 모달의 localStorage 설정 최우선
     const includeThumbnailText =
+      localStorage.getItem('thumbnailTextInclude') === 'true' ||
       (document.getElementById('full-auto-thumbnail-text') as HTMLInputElement | null)?.checked ||
       (document.getElementById('semi-auto-thumbnail-text') as HTMLInputElement | null)?.checked ||
+      (document.getElementById('thumbnail-text-include') as HTMLInputElement | null)?.checked ||
       false;
 
     const formData = {
@@ -14171,6 +15254,8 @@ URL: ${firstUrl}
     } catch {
       // ignore
     }
+    // ✅ [2026-02-12 P1 FIX #18] hydrate 후 sync 추가
+    try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
 
     // UI 업데이트 - 입력 필드
     const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement;
@@ -14297,6 +15382,8 @@ URL: ${firstUrl}
           } catch {
             // ignore
           }
+          // ✅ [2026-02-12 P1 FIX #19] hydrate 후 sync 추가
+          try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
 
           // 네이버 ID/PW 설정
           const naverIdInput = document.getElementById('naver-id') as HTMLInputElement;
@@ -15144,7 +16231,8 @@ function initUnifiedModeSelection(): void {
           if (scheduleInput) {
             const now = new Date();
             const minDate = new Date(now.getTime() + 60000);
-            const formattedDateTime = `${minDate.getFullYear()}-${String(minDate.getMonth() + 1).padStart(2, '0')}-${String(minDate.getDate()).padStart(2, '0')}T${String(minDate.getHours()).padStart(2, '0')}:${String(minDate.getMinutes()).padStart(2, '0')}`;
+            const roundedMin = String(Math.ceil(minDate.getMinutes() / 10) * 10 % 60).padStart(2, '0'); // 10분 단위 올림
+            const formattedDateTime = `${minDate.getFullYear()}-${String(minDate.getMonth() + 1).padStart(2, '0')}-${String(minDate.getDate()).padStart(2, '0')}T${String(minDate.getHours()).padStart(2, '0')}:${roundedMin}`;
             scheduleInput.min = formattedDateTime;
             scheduleInput.value = formattedDateTime;
             setTimeout(() => {
@@ -15191,6 +16279,8 @@ function initUnifiedModeSelection(): void {
       if (hiddenInput) {
         hiddenInput.value = mode;
         hiddenInput.setAttribute('data-user-selected', 'true');
+        // ✅ [2026-02-10] change 이벤트 dispatch — 쇼핑몰 이미지 수집 등 조건부 UI 연동
+        hiddenInput.dispatchEvent(new Event('change'));
       }
 
       const descriptionEl = document.getElementById('content-mode-description');
@@ -15257,7 +16347,7 @@ function initUnifiedModeSelection(): void {
             const month = String(minDate.getMonth() + 1).padStart(2, '0');
             const day = String(minDate.getDate()).padStart(2, '0');
             const hours = String(minDate.getHours()).padStart(2, '0');
-            const minutes = String(minDate.getMinutes()).padStart(2, '0');
+            const minutes = String(Math.ceil(minDate.getMinutes() / 10) * 10 % 60).padStart(2, '0'); // 10분 단위 올림
             const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
             scheduleInput.min = formattedDateTime;
             scheduleInput.value = formattedDateTime;
@@ -15299,6 +16389,22 @@ function initUnifiedModeSelection(): void {
   const schedulePreview = document.getElementById('schedule-preview');
 
   if (scheduleInput) {
+    // ✅ [2026-02-07] input 이벤트: 날짜/시간 선택 시 자동으로 달력 닫기 (디바운스)
+    let pickerCloseTimer: ReturnType<typeof setTimeout> | null = null;
+    scheduleInput.addEventListener('input', () => {
+      if (pickerCloseTimer) clearTimeout(pickerCloseTimer);
+      if (scheduleInput.value) {
+        // 값이 완전히 설정되면 짧은 딜레이 후 달력 닫기
+        pickerCloseTimer = setTimeout(() => {
+          scheduleInput.blur();
+          // 포커스를 확인 버튼으로 이동하여 자연스러운 UX 제공
+          const confirmBtn = document.getElementById('unified-schedule-confirm-btn') as HTMLButtonElement;
+          if (confirmBtn && !confirmBtn.disabled) {
+            confirmBtn.focus();
+          }
+        }, 600);
+      }
+    });
     // ✅ change 이벤트: 날짜/시간 선택 완료 시 (달력이 자동으로 닫힘)
     scheduleInput.addEventListener('change', () => {
       const scheduleConfirmBtn = document.getElementById('unified-schedule-confirm-btn') as HTMLButtonElement;
@@ -15344,7 +16450,14 @@ function initUnifiedModeSelection(): void {
         scheduleInput.blur();
 
         appendLog(`📅 예약 시간 선택됨: ${formattedDate}`);
-        toastManager.success('✅ 예약 시간이 선택되었습니다! 확인 버튼을 눌러주세요.');
+        toastManager.success('✅ 예약 시간이 자동 설정되었습니다!');
+
+        // ✅ [2026-02-07] 분 선택 완료 시 자동으로 확인 버튼 클릭 (모달 닫기)
+        setTimeout(() => {
+          if (scheduleConfirmBtn && !scheduleConfirmBtn.disabled) {
+            scheduleConfirmBtn.click();
+          }
+        }, 500);
       } else {
         // 값이 없으면 비활성화
         if (schedulePreview) {
@@ -15440,6 +16553,27 @@ function initUnifiedModeSelection(): void {
 
         toastManager.success(`✅ 예약 설정 완료: ${formattedDate}`);
         appendLog(`✅ 예약 발행 시간 설정: ${formattedDate}`);
+
+        // ✅ [2026-02-07] 예약 설정 확인 후 발행 버튼으로 자연스럽게 스크롤 및 하이라이트
+        const publishBtn = document.getElementById('unified-publish-btn');
+        if (publishBtn) {
+          setTimeout(() => {
+            publishBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // 도착 후 발행 버튼 하이라이트 펄스 애니메이션
+            setTimeout(() => {
+              publishBtn.style.transition = 'all 0.3s ease';
+              publishBtn.style.boxShadow = '0 0 0 4px rgba(59, 130, 246, 0.6), 0 8px 25px rgba(59, 130, 246, 0.5)';
+              publishBtn.style.transform = 'scale(1.03)';
+
+              // 1.5초 후 원래 스타일로 복원
+              setTimeout(() => {
+                publishBtn.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.4)';
+                publishBtn.style.transform = 'scale(1)';
+              }, 1500);
+            }, 500);
+          }, 300);
+        }
       } else {
         toastManager.error('⚠️ 예약 시간을 선택해주세요.');
       }
@@ -16275,7 +17409,11 @@ function restoreFromBackup(timestamp: number): void {
       }));
       (window as any).imageManagementGeneratedImages = imagesWithPrompt;
       generatedImages = imagesWithPrompt;
-      displayGeneratedImages(imagesWithPrompt);
+      // ✅ [2026-02-12 P1 FIX #20] ImageManager 연동 + sync 추가
+      try {
+        hydrateImageManagerFromImages(backup.structuredContent, imagesWithPrompt);
+      } catch { /* ignore */ }
+      try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
     }
 
     const backupDate = new Date(backup.timestamp);
@@ -16388,7 +17526,6 @@ function restoreAutosavedContent(): void {
       }));
       (window as any).imageManagementGeneratedImages = imagesWithPrompt;
       generatedImages = imagesWithPrompt;
-      displayGeneratedImages(imagesWithPrompt);
       appendLog(`✅ 이미지 ${imagesWithPrompt.length}개 복구 완료`);
 
       try {
@@ -16396,6 +17533,8 @@ function restoreAutosavedContent(): void {
       } catch {
         // ignore
       }
+      // ✅ [2026-02-12 P1 FIX #21] hydrate 후 sync 추가 (displayGeneratedImages를 포함)
+      try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
     }
 
     // ✅ 복구 완료 후 자동 소제목 분석
@@ -16809,6 +17948,10 @@ async function handleFullAutoPublish(): Promise<void> {
     } else {
       appendLog('✏️ 키워드/제목 기반 콘텐츠 생성');
       modal.addLog(`📝 키워드: ${keywords || title}`);
+      // ✅ [2026-02-13] 풀오토: 키워드 제목 옵션 적용
+      const faKeywordAsTitle = (document.getElementById('fullauto-keyword-as-title') as HTMLInputElement)?.checked || false;
+      const faKeywordTitlePrefix = (document.getElementById('fullauto-keyword-title-prefix') as HTMLInputElement)?.checked || false;
+      setKeywordTitleOptionsFromItem(keywords || title, faKeywordAsTitle, faKeywordTitlePrefix);
       await generateContentFromKeywords(title, keywords, toneStyle, true); // suppressModal: true
     }
 
@@ -16847,6 +17990,47 @@ async function handleFullAutoPublish(): Promise<void> {
     modal.setProgress(30, '이미지 생성 준비 중...');
     modal.addLog(`✅ 콘텐츠 생성 완료 (${headingCount}개 소제목)`);
 
+    // ✅ [2026-02-08] 쇼핑커넥트 모드: 항상 100점 SEO 제목 생성
+    // 핵심: 제품명 + 네이버 자동완성 키워드 최소 3개 조합 = 상위노출 보장
+    if (isShoppingConnectModeActive() && structuredContent) {
+      const productName = String(structuredContent.title || structuredContent.selectedTitle || '').trim();
+      if (productName && productName.length >= 3) {
+        try {
+          modal.addLog(`📝 SEO 100점 제목 생성 중... (자동완성 키워드 3개 이상 조합)`);
+          appendLog(`📝 SEO 제목 생성: 제품명="${productName}"`);
+          const seoResult = await (window as any).api.generateSeoTitle(productName);
+          if (seoResult?.success && seoResult.title && seoResult.title !== productName) {
+            const originalTitle = structuredContent.selectedTitle || '';
+            structuredContent.selectedTitle = seoResult.title;
+            // ✅ [핵심] UI 필드도 동시 업데이트 — 발행 시 UI 필드를 최우선으로 읽으므로 여기서도 갱신 필수!
+            try {
+              const titleInput1 = document.getElementById('unified-generated-title') as HTMLInputElement;
+              if (titleInput1) titleInput1.value = seoResult.title;
+              const titleInput2 = document.getElementById('unified-title') as HTMLInputElement;
+              if (titleInput2) titleInput2.value = seoResult.title;
+            } catch { }
+            modal.addLog(`✅ SEO 제목 완료: "${seoResult.title.substring(0, 35)}"`);
+            appendLog(`✅ SEO 제목: "${originalTitle}" → "${seoResult.title}"`);
+          } else {
+            modal.addLog(`⚠️ SEO 제목 생성 실패, 원본 제목 사용`);
+          }
+        } catch (seoErr) {
+          console.warn('[FullAuto] SEO 제목 생성 실패, 원본 사용:', seoErr);
+          modal.addLog(`⚠️ SEO 제목 생성 실패, 원본 제목 사용`);
+        }
+      }
+    }
+
+    // ✅ [2026-02-02 FIX] 콘텐츠 생성 완료 직후 이미지 미리보기 영역에 플레이스홀더 표시
+    if (headingCount > 0 && structuredContent.headings) {
+      const placeholderImages = structuredContent.headings.map((h: any, idx: number) => ({
+        heading: String(h.title || h.text || `이미지 ${idx + 1}`).trim().substring(0, 15),
+        url: '', // 플레이스홀더 (빈 URL)
+        isPlaceholder: true
+      }));
+      modal?.showImages(placeholderImages, `🎨 이미지 준비 중... (${headingCount}개)`);
+    }
+
     // 취소 확인
     if (modal.cancelled) {
       appendLog('❌ 사용자가 발행을 취소했습니다.');
@@ -16855,7 +18039,16 @@ async function handleFullAutoPublish(): Promise<void> {
 
     // 발행 데이터 구성
     const imageSource = UnifiedDOMCache.getImageSource();
-    const skipImages = (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked || false;
+    // ✅ [2026-01-28 FIX] 이미지 모달의 'textOnlyPublish' 설정 우선 적용
+    const skipImagesFromStorage = localStorage.getItem('textOnlyPublish') === 'true';
+    const skipImagesFromDom = (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked || false;
+    const skipImages = skipImagesFromStorage || skipImagesFromDom;
+    console.log(`[FullAutoPublish] 이미지 건너뛰기 설정 - Storage: ${skipImagesFromStorage}, DOM: ${skipImagesFromDom}, 최종: ${skipImages}`);
+    // ✅ [2026-01-28] 사용자에게도 알림 - 이미지 건너뛰기 상태 명시
+    if (skipImages) {
+      appendLog(`⚠️ 이미지 없이 발행합니다 (텍스트만 발행 설정 활성화됨)`);
+      modal.addLog(`⚠️ 이미지 생성 건너뛰기 (textOnlyPublish=true)`);
+    }
 
     const ctasUi = readUnifiedCtasFromUi();
     const skipCtaCheckbox = document.getElementById('unified-skip-cta') as HTMLInputElement;
@@ -16865,8 +18058,10 @@ async function handleFullAutoPublish(): Promise<void> {
     const publishMode = publishModeInput?.value || 'publish';
     console.log(`[FullAutoPublish] 발행 방식: ${publishMode === 'draft' ? '임시저장' : publishMode === 'schedule' ? '예약발행' : '즉시발행'}`);
 
-    const scheduleDate = publishMode === 'schedule' ? (document.getElementById('unified-schedule-date') as HTMLInputElement)?.value : undefined;
-    const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'app-schedule') : undefined;
+    // ✅ [2026-02-07 FIX] getScheduleDateFromInput 사용하여 datetime-local 값을 YYYY-MM-DD HH:mm 형식으로 변환
+    // 기존: .value 직접 읽기 → 2026-02-07T22:50 형식(T 포함) → 검증 실패
+    const scheduleDate = publishMode === 'schedule' ? getScheduleDateFromInput('unified-schedule-date') : undefined;
+    const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'naver-server') : undefined;
 
     // ✅ CTA 자동 생성 (skipCta가 false인 경우만)
     let finalCtaText = '';
@@ -16895,8 +18090,11 @@ async function handleFullAutoPublish(): Promise<void> {
     // ✅ CTA 위치 고정
     const ctaPosition = ((document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value as 'top' | 'middle' | 'bottom') || 'bottom';
 
-    // ✅ [핵심 수정] 올바른 체크박스 ID에서 읽기 (이전: hidden input을 .checked로 읽어서 항상 false)
-    const includeThumbnailText = (document.getElementById('full-auto-thumbnail-text') as HTMLInputElement)?.checked ?? false;
+    // ✅ [2026-01-28 FIX] HeadingImageSettings 모달의 localStorage 설정 우선 적용
+    const includeThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true' ||
+      (document.getElementById('full-auto-thumbnail-text') as HTMLInputElement)?.checked ||
+      (document.getElementById('thumbnail-text-include') as HTMLInputElement)?.checked || false;
+    console.log(`[FullAutoPublish] 1번 이미지 제목 텍스트 포함: ${includeThumbnailText}`);
 
     const formData = {
       mode: 'full-auto',
@@ -16918,14 +18116,18 @@ async function handleFullAutoPublish(): Promise<void> {
       ctas: skipCta ? [] : (ctasUi.length > 0 ? ctasUi : (finalCtaText ? [{ text: finalCtaText, link: finalCtaLink || undefined }] : [])),
       ctaPosition: ctaPosition, // ✅ CTA 위치 추가
       skipCta: skipCta, // ✅ 체크박스 값 반영
-      categoryName: UnifiedDOMCache.getRealCategory(),
+      categoryName: UnifiedDOMCache.getRealCategoryName(), // ✅ [2026-02-11 FIX] 카테고리 이름(text) 전달
       useAiImage: (document.getElementById('unified-use-ai-image') as HTMLInputElement)?.checked ?? true,
       includeThumbnailText, // ✅ 옵션 추가
       createProductThumbnail: (document.getElementById('unified-create-product-thumbnail') as HTMLInputElement)?.checked ?? false,
       affiliateLink: (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || (document.getElementById('batch-link-input') as HTMLInputElement)?.value?.trim(),
       customBannerPath: (window as any).customBannerPath || undefined, // ✅ [2026-01-18] 커스텀 배너 경로 전달
-      // ✅ 쇼핑커넥트 모드 자동 감지: affiliateLink가 있으면 affiliate 모드
-      contentMode: ((document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || (document.getElementById('batch-link-input') as HTMLInputElement)?.value?.trim()) ? 'affiliate' : 'seo',
+      // ✅ [2026-02-02 FIX] 쇼핑커넥트 모드 자동 감지: affiliateLink가 있거나 UI 상태가 affiliate면 affiliate 모드
+      contentMode: (
+        (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() ||
+        (document.getElementById('batch-link-input') as HTMLInputElement)?.value?.trim() ||
+        isShoppingConnectModeActive()
+      ) ? 'affiliate' : 'seo',
     };
 
     // ✅ 진행상황 모달 업데이트 - 이미지 생성 시작
@@ -16933,8 +18135,50 @@ async function handleFullAutoPublish(): Promise<void> {
     modal.setProgress(40, skipImages ? '이미지 생성 건너뛰기...' : '이미지 생성 중...');
 
     // ✅ [2026-01-21] 쇼핑커넥트 모드일 때 제휴 링크에서 제품 이미지 자동 수집
-    if (formData.contentMode === 'affiliate' && formData.affiliateLink && !skipImages) {
-      modal.addLog('🛒 쇼핑커넥트 모드: 제품 이미지 수집 시작...');
+    // ✅ [2026-02-01 FIX] sourceAssembler에서 이미 수집했으면 다시 크롤링하지 않음
+    const alreadyCollected = (structuredContent?.collectedImages && structuredContent.collectedImages.length > 0) ||
+      (structuredContent?.images && structuredContent.images.length > 0);
+
+    // ✅ [DEBUG] 이미지 수집 조건 로깅
+    console.log(`[FullAutoPublish] 🔍 이미지 수집 조건 체크:`, {
+      contentMode: formData.contentMode,
+      affiliateLink: formData.affiliateLink?.substring(0, 50),
+      skipImages,
+      alreadyCollected,
+      collectedImagesLen: structuredContent?.collectedImages?.length || 0,
+      imagesLen: structuredContent?.images?.length || 0
+    });
+
+    // ✅ [2026-02-02 NEW] 쇼핑커넥트 모드일 때 상품명과 이미지 정보 로그 표시
+    if (formData.contentMode === 'affiliate') {
+      const productTitle = structuredContent?.productInfo?.name ||
+        structuredContent?.productInfo?.productName ||
+        structuredContent?.productName ||
+        structuredContent?.selectedTitle?.substring(0, 30) || '상품명 없음';
+      const collectedImgCount = (structuredContent?.collectedImages?.length || 0) + (structuredContent?.images?.length || 0);
+
+      modal.addLog(`🛒 쇼핑커넥트 모드`);
+      modal.addLog(`📦 상품: ${productTitle}`);
+      appendLog(`🛒 쇼핑커넥트 모드 - 상품: ${productTitle}`);
+
+      if (alreadyCollected) {
+        modal.addLog(`🖼️ 수집된 이미지: ${collectedImgCount}장`);
+        appendLog(`✅ 수집된 이미지: ${collectedImgCount}장 (기존 수집 사용)`);
+
+        // ✅ 모달에 이미지 그리드 표시
+        const collectedImages = structuredContent?.collectedImages || structuredContent?.images || [];
+        if (collectedImages.length > 0) {
+          const imageData = collectedImages.slice(0, 10).map((url: string, idx: number) => ({
+            url,
+            heading: idx === 0 ? '대표 이미지' : `이미지 ${idx}`
+          }));
+          modal?.showImages(imageData, `🛒 수집된 상품 이미지 (${collectedImages.length}장)`);
+        }
+      }
+    }
+
+    if (formData.contentMode === 'affiliate' && formData.affiliateLink && !skipImages && !alreadyCollected) {
+      modal.addLog('🔄 제품 이미지 수집 시작...');
       appendLog(`🖼️ 제휴 링크에서 제품 이미지 수집 중: ${formData.affiliateLink.substring(0, 50)}...`);
 
       try {
@@ -16960,9 +18204,11 @@ async function handleFullAutoPublish(): Promise<void> {
           // ✅ [2026-01-21 FIX] currentStructuredContent.images에도 저장 (generateImagesWithCostSafety에서 참조)
           if (structuredContent) {
             structuredContent.images = [...collectedImages, ...(structuredContent.images || [])];
+            // ✅ [2026-02-01 FIX] collectedImages에도 저장하여 generateAIImagesForHeadings에서 중복 크롤링 방지
+            structuredContent.collectedImages = [...collectedImages, ...(structuredContent.collectedImages || [])];
             currentStructuredContent = structuredContent;
             (window as any).currentStructuredContent = structuredContent;
-            console.log('[FullAutoPublish] structuredContent.images에 수집 이미지 동기화:', structuredContent.images.length);
+            console.log('[FullAutoPublish] structuredContent.images/collectedImages에 수집 이미지 동기화:', structuredContent.images.length);
           }
 
           // 제품 정보가 있으면 콘텐츠 보완에 활용
@@ -16980,30 +18226,107 @@ async function handleFullAutoPublish(): Promise<void> {
       }
     }
 
+    // ✅ [2026-01-31 FIX] 쇼핑커넥트 모드: 소스 URL(콘텐츠 URL)에서도 이미지 추가 수집
+    // ✅ [2026-02-01 FIX] 이미 수집된 이미지가 있으면 건너뛰기 (중복 크롤링 방지)
+    const hasExistingImages = alreadyCollected ||
+      ((window as any).imageManagementGeneratedImages?.length > 0) ||
+      (structuredContent?.images?.length > 0);
+
+    if (formData.contentMode === 'affiliate' && formData.urls && formData.urls.length > 0 && !skipImages && !hasExistingImages) {
+      const sourceUrl = formData.urls[0];
+      if (sourceUrl && sourceUrl !== formData.affiliateLink) {
+        modal.addLog(`📰 콘텐츠 URL에서 추가 이미지 수집 중: ${sourceUrl.substring(0, 40)}...`);
+        try {
+          // URL 유형에 따라 다른 수집기 사용
+          const isShoppingUrl = /smartstore\.naver\.com|brand\.naver\.com|coupa\.ng|coupang\.com|11st\.co\.kr|gmarket\.co\.kr/i.test(sourceUrl);
+
+          let sourceImages: string[] = [];
+          if (isShoppingUrl) {
+            const result = await (window as any).api.collectImagesFromShopping(sourceUrl);
+            sourceImages = result?.images || [];
+          } else {
+            // 일반 URL (블로그, 뉴스 등)에서 이미지 크롤링
+            const result = await (window as any).api.crawlImagesFromUrl(sourceUrl);
+            sourceImages = result?.images || [];
+          }
+
+          if (sourceImages.length > 0) {
+            modal.addLog(`✅ 소스 URL에서 추가 ${sourceImages.length}개 이미지 수집!`);
+
+            // 기존 수집 이미지와 병합 (중복 제거)
+            const existing = (window as any).imageManagementGeneratedImages || [];
+            const existingUrls = new Set(existing.map((img: any) => img.url || img.filePath));
+
+            const newImages = sourceImages
+              .filter((imgUrl: string) => !existingUrls.has(imgUrl))
+              .map((imgUrl: string, idx: number) => ({
+                url: imgUrl,
+                filePath: imgUrl,
+                heading: `소스 이미지 ${idx + 1}`,
+                provider: 'collected'
+              }));
+
+            (window as any).imageManagementGeneratedImages = [...existing, ...newImages];
+            console.log(`[FullAutoPublish] 소스 URL 이미지 ${newImages.length}개 추가 (총 ${(window as any).imageManagementGeneratedImages.length}개)`);
+
+            // structuredContent에도 동기화
+            if (structuredContent) {
+              structuredContent.images = [...(structuredContent.images || []), ...newImages];
+              // ✅ [2026-02-01 FIX] collectedImages에도 동기화
+              structuredContent.collectedImages = [...(structuredContent.collectedImages || []), ...newImages];
+              (window as any).currentStructuredContent = structuredContent;
+            }
+          } else {
+            modal.addLog('ℹ️ 소스 URL에서 추가 이미지 없음');
+          }
+        } catch (sourceErr) {
+          console.warn('[FullAutoPublish] 소스 URL 이미지 수집 실패:', sourceErr);
+          modal.addLog(`⚠️ 소스 URL 이미지 수집 실패: ${(sourceErr as Error).message?.substring(0, 30)}`);
+        }
+      }
+    }
     // ✅ 이미지 생성 및 소분류 매칭
     if (!skipImages) {
       modal.addLog('🎨 이미지 처리 시작...');
       try {
-        const collectedImgs = (window as any).imageManagementGeneratedImages || (window as any).generatedImages || [];
+        // ✅ [2026-02-02 FIX] collectedImgs 소스 우선순위 수정
+        // 1순위: structuredContent.collectedImages (쇼핑 크롤링 이미지)
+        // 2순위: window.imageManagementGeneratedImages
+        // 3순위: window.generatedImages
+        const structCollected = structuredContent?.collectedImages || [];
+        const windowImgs = (window as any).imageManagementGeneratedImages || (window as any).generatedImages || [];
+        const collectedImgs = structCollected.length > 0 ? structCollected : windowImgs;
+        console.log(`[FullAutoPublish] 🖼️ 이미지 소스: structCollected=${structCollected.length}, windowImgs=${windowImgs.length}, 최종=${collectedImgs.length}`);
         let referenceImagePath = '';
 
         // 1. 수집된 이미지와 소제목 매칭 (지능형 매칭)
-        if (collectedImgs.length > 0 && (structuredContent.headings || []).length > 0) {
+        // ✅ [2026-02-07 FIX] AI 이미지 생성 모드에서는 수집 이미지 매칭 스킵!
+        // → AI 이미지 생성을 선택한 경우 수집 이미지 매칭은 불필요하고 혼란만 줌
+        const scSubImageSourcePre = localStorage.getItem('scSubImageSource') || 'ai';
+        const shouldMatchCollected = !formData.useAiImage ||
+          (formData.contentMode === 'affiliate' && scSubImageSourcePre === 'collected');
+
+        if (shouldMatchCollected && collectedImgs.length > 0 && (structuredContent.headings || []).length > 0) {
           modal.addLog('🤖 수집 이미지를 소제목에 매칭 중...');
           try {
             const matchResult = await (window as any).api.matchImages({
               headings: structuredContent.headings || [],
-              collectedImages: collectedImgs
+              collectedImages: collectedImgs,
+              // ✅ [2026-01-28] 수집 이미지 직접 사용 설정 전달 (localStorage에서 읽음)
+              scSubImageSource: localStorage.getItem('scSubImageSource') || 'ai'
             });
             if (matchResult.success && matchResult.assignments) {
               matchResult.assignments.forEach((assignment: any) => {
                 const headIdx = assignment.headingIndex;
                 const targetHeading = (structuredContent.headings || [])[headIdx];
                 if (targetHeading) {
-                  targetHeading.referenceImagePath = assignment.assignedImage.url;
-                  modal.addLog(`   🔗 "${targetHeading.title.substring(0, 15)}..." 매칭 완료`);
+                  // ✅ [2026-01-28] 메인 프로세스 반환 구조에 맞게 수정
+                  // main.ts에서 imageUrl, imagePath 직접 반환함
+                  targetHeading.referenceImagePath = assignment.imageUrl || assignment.imagePath;
+                  modal.addLog(`   🔗 "${targetHeading.title.substring(0, 15)}..." → 이미지 배치 완료 (${assignment.source || 'collected'})`);
                 }
               });
+              modal.addLog(`✅ 총 ${matchResult.assignments.length}개 소제목에 이미지 배치 완료`);
             }
           } catch (e) {
             console.error('이미지 매칭 실패:', e);
@@ -17012,67 +18335,212 @@ async function handleFullAutoPublish(): Promise<void> {
           // 전역 폴백용 첫 번째 이미지
           const first = collectedImgs[0];
           referenceImagePath = first.filePath || first.url;
+        } else if (formData.useAiImage && collectedImgs.length > 0) {
+          console.log(`[FullAutoPublish] 🎨 AI 이미지 생성 모드 → 수집 이미지 매칭 스킵 (${collectedImgs.length}개 수집 이미지 무시)`);
         }
 
         let generatedImgs: any[] = [];
 
-        if (formData.useAiImage) {
-          // ✅ A. AI 이미지 생성 모드 (기존 로직)
-          generatedImgs = await generateImagesForAutomation(
-            imageSource,
-            structuredContent.headings || [],
-            structuredContent.selectedTitle || title,
-            {
-              stopCheck: () => isFullAutoStopRequested(modal),
-              onProgress: (msg) => modal.addLog(msg),
-              allowThumbnailText: formData.includeThumbnailText,
-              referenceImagePath,
-              collectedImages: collectedImgs  // ✅ [2026-01-21 FIX] 수집된 이미지 명시적 전달
+        // ✅ [2026-01-31 FIX] 쇼핑커넥트 모드에서 "수집 이미지 사용" 설정 확인
+        const scSubImageSource = localStorage.getItem('scSubImageSource') || 'ai';
+        const isShoppingConnectCollected = formData.contentMode === 'affiliate' && scSubImageSource === 'collected';
+
+        if (isShoppingConnectCollected) {
+          console.log('[FullAutoPublish] 🛒 쇼핑커넥트 수집 이미지 모드 → AI 생성 스킵');
+        }
+
+        if (formData.useAiImage && !isShoppingConnectCollected) {
+          // ✅ A. AI 이미지 생성 모드
+          // ✅ [2026-02-02 FIX] 쇼핑커넥트 모드에서도 썸네일/1번 소제목 중복 방지!
+          // 썸네일은 collectedImgs[0] 사용, AI 생성은 나머지 소제목에만 적용
+          if (formData.contentMode === 'affiliate' && collectedImgs.length > 0) {
+            // ✅ 쇼핑커넥트 AI 모드: 썸네일은 수집 이미지, 나머지는 AI 생성
+            modal.addLog('🛒 쇼핑커넥트 AI 모드: 썸네일=수집이미지, 소제목=AI');
+
+            // 1. 썸네일 처리 (collectedImgs[0])
+            const thumbnailImg = collectedImgs[0];
+            // ✅ [2026-02-02 FIX] 문자열 URL이든 객체든 모두 처리
+            const thumbnailPath = typeof thumbnailImg === 'string'
+              ? thumbnailImg
+              : (thumbnailImg?.filePath || thumbnailImg?.url || '');
+            console.log('[쇼핑커넥트 AI 모드] 썸네일 경로:', thumbnailPath?.substring(0, 50));
+
+            if (thumbnailPath) {
+              if (formData.includeThumbnailText) {
+                modal.addLog('🎨 수집 이미지에 텍스트 오버레이 중...');
+                try {
+                  // ✅ [2026-02-04 FIX] 수집 이미지 URL에 직접 텍스트 오버레이
+                  // generateImagesForAutomation은 AI 이미지 생성 함수이므로 부적합
+                  // 대신 thumbnailService.createProductThumbnail을 직접 호출
+                  const overlayResult = await window.api.createProductThumbnail(
+                    thumbnailPath,  // 수집 이미지 URL
+                    structuredContent.selectedTitle || title,  // 오버레이할 텍스트
+                    {
+                      position: 'bottom',
+                      fontSize: 28,
+                      textColor: '#ffffff',
+                      opacity: 0.8
+                    }
+                  );
+
+                  if (overlayResult && overlayResult.success && overlayResult.outputPath) {
+                    generatedImgs.push({
+                      heading: structuredContent.selectedTitle || title,
+                      filePath: overlayResult.outputPath,
+                      provider: 'collected-overlay',
+                      savedToLocal: overlayResult.outputPath,
+                      previewDataUrl: overlayResult.previewDataUrl,
+                      isThumbnail: true
+                    });
+                    modal.addLog(`✅ 썸네일 텍스트 오버레이 완료`);
+                  } else {
+                    // 오버레이 실패 시 원본 이미지 사용
+                    modal.addLog(`⚠️ 텍스트 오버레이 실패 → 원본 이미지 사용`);
+                    generatedImgs.push({
+                      heading: structuredContent.selectedTitle || title,
+                      filePath: thumbnailPath,
+                      provider: 'collected',
+                      savedToLocal: thumbnailPath,
+                      isThumbnail: true
+                    });
+                  }
+                } catch (err) {
+                  console.error('[FullAutoPublish] 썸네일 오버레이 오류:', err);
+                  modal.addLog(`⚠️ 오버레이 오류 → 원본 이미지 사용`);
+                  generatedImgs.push({
+                    heading: structuredContent.selectedTitle || title,
+                    filePath: thumbnailPath,
+                    provider: 'collected',
+                    savedToLocal: thumbnailPath,
+                    isThumbnail: true
+                  });
+                }
+              } else {
+                generatedImgs.push({
+                  heading: structuredContent.selectedTitle || title,
+                  filePath: thumbnailPath,
+                  provider: 'collected',
+                  savedToLocal: thumbnailPath,
+                  isThumbnail: true
+                });
+                modal.addLog(`📷 썸네일 이미지 배치 완료 (수집 이미지)`);
+              }
             }
-          );
-        } else if (collectedImgs.length > 0) {
+
+            // 2. 나머지 소제목은 AI 이미지 생성 (1번 소제목부터)
+            const headingsForAI = structuredContent.headings || [];
+            if (headingsForAI.length > 0) {
+              modal.addLog(`🎨 ${headingsForAI.length}개 소제목 AI 이미지 생성 시작...`);
+              const aiImgs = await generateImagesForAutomation(
+                imageSource,
+                headingsForAI,
+                structuredContent.selectedTitle || title,
+                {
+                  stopCheck: () => isFullAutoStopRequested(modal),
+                  onProgress: (msg) => modal.addLog(msg),
+                  allowThumbnailText: false, // 소제목에는 텍스트 합성 안 함
+                  // ✅ [2026-02-02 FIX] 문자열 URL도 처리
+                  referenceImagePath: typeof collectedImgs[1] === 'string'
+                    ? collectedImgs[1]
+                    : (collectedImgs[1]?.filePath || collectedImgs[1]?.url || referenceImagePath),
+                  collectedImages: collectedImgs.slice(1) // 썸네일 제외한 이미지
+                }
+              );
+              generatedImgs.push(...aiImgs);
+            }
+          } else {
+            // ✅ 일반 SEO 모드: 기존 로직 그대로
+            generatedImgs = await generateImagesForAutomation(
+              imageSource,
+              structuredContent.headings || [],
+              structuredContent.selectedTitle || title,
+              {
+                stopCheck: () => isFullAutoStopRequested(modal),
+                onProgress: (msg) => modal.addLog(msg),
+                allowThumbnailText: formData.includeThumbnailText,
+                referenceImagePath,
+                collectedImages: collectedImgs
+              }
+            );
+          }
+        } else if (isShoppingConnectCollected || collectedImgs.length > 0) {
           // ✅ B. 수집 이미지 그대로 사용 모드 (통일된 로직)
           modal.addLog('📷 AI 생성 대신 수집된 이미지를 그대로 사용합니다.');
 
-          // ✅ [수정] 별도 썸네일 없음! 첫 번째 소제목 이미지 = 썸네일
-          // includeThumbnailText가 켜져 있으면 첫 번째 이미지에만 텍스트 합성
-          (structuredContent.headings || []).forEach((h: any, idx: number) => {
-            const path = h.referenceImagePath || (collectedImgs[idx % collectedImgs.length]?.filePath || collectedImgs[idx % collectedImgs.length]?.url);
-            if (path) {
-              // 첫 번째 이미지이고 텍스트 포함 옵션이 켜져 있으면 AI 생성으로 처리
-              if (idx === 0 && formData.includeThumbnailText) {
-                // 첫 번째 이미지만 텍스트 합성 필요 - generateImagesForAutomation 호출
-                modal.addLog('🎨 첫 번째 이미지에 텍스트 합성 중...');
-                (async () => {
-                  const thumbResult = await generateImagesForAutomation(
-                    imageSource,
-                    [h], // 첫 번째 소제목만 전달
-                    structuredContent.selectedTitle || title,
-                    {
-                      stopCheck: () => isFullAutoStopRequested(modal),
-                      onProgress: (msg) => modal.addLog(msg),
-                      allowThumbnailText: true,
-                      referenceImagePath: path
-                    }
-                  );
-                  if (thumbResult && thumbResult.length > 0) {
-                    generatedImgs.unshift(thumbResult[0]); // 맨 앞에 추가
-                  }
-                })();
-              } else {
-                generatedImgs.push({
-                  heading: h.title || h.heading || '',
-                  filePath: path,
-                  provider: 'manual',
-                  savedToLocal: path,
-                  isThumbnail: idx === 0 // 첫 번째 이미지는 썸네일로 마킹
-                });
+          // ✅ [2026-02-02 FIX] 썸네일 전용 이미지 별도 예약! 1번 소제목은 다른 이미지 사용
+          // collectedImgs[0] = 썸네일 전용
+          // collectedImgs[1+] = 소제목용 이미지
+          // includeThumbnailText가 켜져 있으면 썸네일 이미지에만 텍스트 합성
+          const usedImagePaths = new Set<string>();
+          const headingsArray = structuredContent.headings || [];
+
+          // ✅ 썸네일 이미지 처리 (collectedImgs[0])
+          const thumbnailImg = collectedImgs[0];
+          // ✅ [2026-02-02 FIX] 문자열 URL이든 객체든 모두 처리
+          const thumbnailPath = typeof thumbnailImg === 'string'
+            ? thumbnailImg
+            : (thumbnailImg?.filePath || thumbnailImg?.url || '');
+          if (thumbnailPath) {
+            usedImagePaths.add(thumbnailPath);
+
+            // ✅ [2026-02-02 FIX] 수집 이미지 모드에서는 AI 생성 호출 X
+            // includeThumbnailText: 텍스트 합성은 향후 별도 텍스트 오버레이 로직으로 처리 가능
+            // 현재는 수집 이미지를 그대로 썸네일로 사용
+            generatedImgs.push({
+              heading: structuredContent.selectedTitle || title,
+              filePath: thumbnailPath,
+              provider: 'collected',
+              savedToLocal: thumbnailPath,
+              isThumbnail: true
+            });
+            modal.addLog(`✅ [쇼핑제휴] 썸네일 이미지 설정: ${thumbnailPath.substring(0, 60)}...`);
+          }
+
+          // ✅ 소제목용 이미지는 collectedImgs[1]부터 시작 (썸네일과 중복 방지!)
+          const headingImages = collectedImgs.slice(1);
+          let headingImgIdx = 0;
+
+          for (let idx = 0; idx < headingsArray.length; idx++) {
+            const h = headingsArray[idx];
+            // 1. 소제목에 미리 매핑된 이미지 경로가 있으면 사용
+            let path = h.referenceImagePath || '';
+
+            // 2. 매핑된 경로가 없으면 headingImages (collectedImgs[1+])에서 순차 할당
+            if (!path && headingImgIdx < headingImages.length) {
+              const candidate = headingImages[headingImgIdx];
+              // ✅ [2026-02-02 FIX] 문자열 URL도 처리
+              const candidatePath = typeof candidate === 'string'
+                ? candidate
+                : (candidate?.filePath || candidate?.url || '');
+              if (candidatePath && !usedImagePaths.has(candidatePath)) {
+                path = candidatePath;
+                headingImgIdx++;
               }
             }
-          });
 
-          // 비동기 처리 대기
-          await new Promise(resolve => setTimeout(resolve, 500));
+            // 3. 이미 사용된 이미지는 스킵
+            if (path && usedImagePaths.has(path)) {
+              modal.addLog(`⏭️ "${h.title?.substring(0, 15)}..." 중복 이미지 스킵`);
+              continue;
+            }
+
+            if (path) {
+              usedImagePaths.add(path);
+
+              // ✅ [2026-02-02 FIX] 소제목 이미지는 모두 동일하게 처리 (썸네일은 위에서 별도 처리됨)
+              generatedImgs.push({
+                heading: h.title || h.heading || '',
+                filePath: path,
+                provider: 'manual',
+                savedToLocal: path,
+                isThumbnail: false // 소제목 이미지는 썸네일이 아님
+              });
+              modal.addLog(`📷 ${idx + 1}번 소제목 이미지 배치: "${h.title?.substring(0, 15)}..."`);
+            } else {
+              // 이미지가 부족하면 해당 소제목은 이미지 없이 처리
+              modal.addLog(`⚠️ "${h.title?.substring(0, 15)}..." 이미지 부족 - 건너뛰기`);
+            }
+          }
         }
 
         if (isFullAutoStopRequested(modal)) {
@@ -17083,7 +18551,7 @@ async function handleFullAutoPublish(): Promise<void> {
         // 전역 변수 설정 (executeUnifiedAutomation에서 사용)
         (window as any).generatedImages = generatedImgs;
 
-        // ImageManager 동기화
+        // ✅ [2026-02-12 P1 FIX #23] ImageManager 동기화 → syncGlobal 호출
         if (typeof ImageManager !== 'undefined') {
           ImageManager.clear();
           if (generatedImgs && generatedImgs.length > 0) {
@@ -17091,8 +18559,8 @@ async function handleFullAutoPublish(): Promise<void> {
               const h = img.heading || structuredContent.selectedTitle;
               if (h) ImageManager.addImage(h, img);
             });
-            (window as any).imageManagementGeneratedImages = ImageManager.getAllImages();
           }
+          try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
         }
 
         if (generatedImgs.length > 0) {
@@ -17197,10 +18665,18 @@ async function handleMultiAccountPublish(): Promise<void> {
     generatedContent: (document.getElementById('unified-generated-content') as HTMLTextAreaElement)?.value || '',
     generatedHashtags: (document.getElementById('unified-generated-hashtags') as HTMLInputElement)?.value || '',
     category: UnifiedDOMCache.getRealCategory() || undefined, // ✅ 카테고리 추가
+    // ✅ [2026-01-28] 이미지 설정 전역 적용 (연속발행/다중계정에도 적용)
+    scSubImageSource: localStorage.getItem('scSubImageSource') || 'ai',  // 수집 이미지 직접 사용 여부
+    thumbnailImageRatio: localStorage.getItem('thumbnailImageRatio') || '1:1',  // 썸네일 비율
+    subheadingImageRatio: localStorage.getItem('subheadingImageRatio') || '1:1',  // 소제목 비율
+    thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true',  // 썸네일 텍스트
+    scAutoThumbnailSetting: localStorage.getItem('scAutoThumbnailSetting') === 'true',  // 자동 썸네일
   };
 
-  const scheduleDate = mainSettings.publishMode === 'schedule' ? (document.getElementById('unified-schedule-date') as HTMLInputElement)?.value : undefined;
-  const scheduleType = mainSettings.publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'app-schedule') : undefined;
+  // ✅ [2026-02-08 FIX] datetime-local 값에서 날짜만 추출 (main.ts에서 scheduleDate + 'T' + scheduleTime 합성)
+  const rawScheduleDate = mainSettings.publishMode === 'schedule' ? (document.getElementById('unified-schedule-date') as HTMLInputElement)?.value : undefined;
+  const scheduleDate = rawScheduleDate ? rawScheduleDate.split('T')[0] : undefined;  // 'YYYY-MM-DDTHH:mm' → 'YYYY-MM-DD'
+  const scheduleType = mainSettings.publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'naver-server') : undefined;
 
   const ctasUi = readUnifiedCtasFromUi();
   const skipCta = (document.getElementById('unified-skip-cta') as HTMLInputElement)?.checked || false;
@@ -17487,11 +18963,7 @@ async function handleSemiAutoPublish(): Promise<void> {
       appendLog(`   [${idx + 1}] ${heading} (${provider}) - ${filePath.substring(0, 60)}...`);
     });
 
-    // ✅ [버그 수정] 이미지를 window.imageManagementGeneratedImages와 ImageManager에 동기화
-    // executeBlogPublishing에서 이미지를 찾을 수 있도록 전역 상태에 저장
-    (window as any).imageManagementGeneratedImages = [...imageManagementImages];
-    generatedImages = [...imageManagementImages];
-
+    // ✅ [2026-02-12 P1 FIX #22] 발행 직전 sync → syncGlobalImagesFromImageManager 통합
     // ImageManager에도 동기화 (ImageManager가 비어있는 경우에만)
     const currentManagerImages = ImageManager.getAllImages();
     if (!currentManagerImages || currentManagerImages.length === 0) {
@@ -17503,6 +18975,7 @@ async function handleSemiAutoPublish(): Promise<void> {
       });
       appendLog(`🔗 ImageManager에 ${imageManagementImages.length}개 이미지 동기화 완료`);
     }
+    try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
   } else {
     appendLog(`⚠️ 이미지가 없습니다. 새로 생성합니다.`);
   }
@@ -17516,7 +18989,7 @@ async function handleSemiAutoPublish(): Promise<void> {
   const skipCta = skipCtaCheckbox?.checked || false; // ✅ CTA 없이 발행 체크박스
   const publishMode = (document.getElementById('unified-publish-mode') as HTMLSelectElement)?.value || 'publish';
   const scheduleDate = publishMode === 'schedule' ? getScheduleDateFromInput('unified-schedule-date') : undefined;
-  const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'app-schedule') : undefined;
+  const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'naver-server') : undefined;
 
   // ✅ 디버깅: 이미지 관리 이미지 확인
   console.log('[handleSemiAutoPublish] generatedImages:', generatedImages);
@@ -17580,7 +19053,7 @@ async function handleSemiAutoPublish(): Promise<void> {
     ctas: skipCta ? [] : (ctasUi.length > 0 ? ctasUi : (finalCtaText ? [{ text: finalCtaText, link: finalCtaLink || undefined }] : [])),
     ctaPosition: ctaPosition, // ✅ CTA 위치 추가
     skipCta: skipCta, // ✅ 체크박스 값 반영
-    categoryName: UnifiedDOMCache.getRealCategory(),
+    categoryName: UnifiedDOMCache.getRealCategoryName(), // ✅ [2026-02-11 FIX] 카테고리 이름(text) 전달
     // ✅ [2026-01-21 FIX] 쇼핑커넥트 모드 지원 추가
     affiliateLink: (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || '',
     contentMode: (document.getElementById('unified-content-mode') as HTMLInputElement)?.value || 'seo'
@@ -17640,6 +19113,12 @@ function initUnifiedImageSourceSelection(): void {
       const check = btn.querySelector('div[style*="top: 0.4rem"]');
       if (check) (check as HTMLElement).style.display = 'flex';
 
+      // ✅ [2026-02-02] 풀오토 전용 이미지 소스 저장 (이미지 관리 탭과 분리)
+      if (source) {
+        localStorage.setItem('fullAutoImageSource', source);
+        console.log(`[FullAuto] 풀오토 전용 이미지 소스 저장: ${source}`);
+      }
+
       // ✅ [Sync] 드롭다운(select) element 동기화
       if (imgSourceSelect && source) {
         imgSourceSelect.value = source;
@@ -17647,6 +19126,7 @@ function initUnifiedImageSourceSelection(): void {
       }
     });
   });
+
 
   // ✅ [Sync] 드롭다운 변경 시 버튼 UI 업데이트
   if (imgSourceSelect) {
@@ -17665,36 +19145,107 @@ function initUnifiedImageSourceSelection(): void {
   }
 }
 
+// ✅ [2026-01-26] DeepInfra FLUX-2 이미지 소스 버튼 동적 삽입
+function injectDeepInfraImageSourceOption(): void {
+  // 기존 이미지 소스 버튼 컨테이너 찾기
+  const existingBtns = document.querySelectorAll('.unified-img-source-btn');
+  if (existingBtns.length === 0) {
+    console.log('[DeepInfra] 이미지 소스 버튼 영역을 찾지 못함 - 나중에 다시 시도');
+    return;
+  }
+
+  // 이미 DeepInfra 버튼이 있는지 확인
+  const existingDeepinfra = document.querySelector('.unified-img-source-btn[data-source="deepinfra"]');
+  if (existingDeepinfra) {
+    console.log('[DeepInfra] 이미 버튼이 존재함');
+    return;
+  }
+
+  // 참조할 버튼 (마지막 버튼 뒤에 추가)
+  const lastBtn = existingBtns[existingBtns.length - 1] as HTMLElement;
+  const parentContainer = lastBtn.parentElement;
+
+  if (!parentContainer) {
+    console.log('[DeepInfra] 부모 컨테이너를 찾지 못함');
+    return;
+  }
+
+  // DeepInfra 버튼 생성 (기존 스타일 복사)
+  const deepinfraBtn = document.createElement('button');
+  deepinfraBtn.type = 'button';
+  deepinfraBtn.className = 'unified-img-source-btn';
+  deepinfraBtn.dataset.source = 'deepinfra';
+  deepinfraBtn.style.cssText = lastBtn.style.cssText || `
+    position: relative;
+    padding: 0.75rem;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 100px;
+    text-align: center;
+    opacity: 0.7;
+  `;
+  deepinfraBtn.innerHTML = `
+    <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">🚀</div>
+    <div style="font-size: 0.7rem; font-weight: 600; color: var(--text-strong);">FLUX-2</div>
+    <div style="font-size: 0.6rem; color: var(--text-muted);">DeepInfra</div>
+    <div style="font-size: 0.55rem; color: #10b981; font-weight: 500;">$0.01/장</div>
+    <div style="position: absolute; top: 0.4rem; right: 0.4rem; width: 18px; height: 18px; border-radius: 50%; background: var(--primary); display: none; align-items: center; justify-content: center;">
+      <span style="color: white; font-size: 0.7rem;">✓</span>
+    </div>
+  `;
+
+  // 버튼 클릭 이벤트 (기존 로직 재사용)
+  deepinfraBtn.addEventListener('click', () => {
+    // 모든 버튼 선택 해제
+    document.querySelectorAll('.unified-img-source-btn').forEach(b => {
+      b.classList.remove('selected');
+      (b as HTMLElement).style.boxShadow = 'none';
+      (b as HTMLElement).style.borderColor = 'transparent';
+      (b as HTMLElement).style.opacity = '0.7';
+      const check = b.querySelector('div[style*="top: 0.4rem"]');
+      if (check) (check as HTMLElement).style.display = 'none';
+    });
+
+    // DeepInfra 버튼 선택
+    deepinfraBtn.classList.add('selected');
+    deepinfraBtn.style.opacity = '1';
+    deepinfraBtn.style.boxShadow = '0 0 0 3px var(--primary-light), 0 4px 12px rgba(0,0,0,0.2)';
+    deepinfraBtn.style.borderColor = 'var(--primary)';
+    const check = deepinfraBtn.querySelector('div[style*="top: 0.4rem"]');
+    if (check) (check as HTMLElement).style.display = 'flex';
+
+    // ✅ [2026-02-02] 풀오토 전용 이미지 소스 저장
+    localStorage.setItem('fullAutoImageSource', 'deepinfra');
+    console.log('[FullAuto] 풀오토 전용 이미지 소스 저장: deepinfra');
+
+    // 드롭다운 동기화
+    const imgSourceSelect = document.getElementById('unified-image-source') as HTMLSelectElement;
+    if (imgSourceSelect) {
+      imgSourceSelect.value = 'deepinfra';
+      console.log('[Sync] DeepInfra 버튼 -> 셀렉트 동기화: deepinfra');
+    }
+  });
+
+  // 버튼 삽입
+  parentContainer.appendChild(deepinfraBtn);
+  console.log('[DeepInfra] ✅ 이미지 소스 버튼 추가됨');
+}
+
 // ✅ 1번 이미지 텍스트 옵션 UI 동적 추가 (풀오토/반자동 발행)
+// ✅ [2026-02-02] 이미지 관리 탭에 이미 동일 체크박스가 있으므로 중복 UI 제거
 function addThumbnailTextOptionUI(): void {
-  // 풀오토 발행 영역에 체크박스 추가 (2026-01-18: 이제 쇼핑커넥트 썸네일은 HTML 렌더링으로 생성되므로 숨김)
+  // 풀오토 발행 영역에 체크박스 추가
   const fullAutoImageSection =
     document
       .querySelector('#full-auto-image-source-section, .full-auto-img-source-btn, .unified-img-source-btn')
       ?.closest('.form-group, .option-group, .field, div[style*="margin"]');
-  if (fullAutoImageSection && !document.getElementById('full-auto-thumbnail-text')) {
-    const fullAutoCheckboxContainer = document.createElement('div');
-    fullAutoCheckboxContainer.id = 'full-auto-thumbnail-text-container';
-    fullAutoCheckboxContainer.style.cssText = `
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      border-radius: 8px;
-      padding: 0.75rem;
-      margin-top: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    `;
-    fullAutoCheckboxContainer.innerHTML = `
-      <input type="checkbox" id="full-auto-thumbnail-text" style="width: 18px; height: 18px; cursor: pointer; accent-color: #f59e0b;">
-      <label for="full-auto-thumbnail-text" style="cursor: pointer; font-size: 0.85rem; color: var(--text-strong); display: flex; flex-direction: column; gap: 0.15rem;">
-        <span style="font-weight: 600;">🖼️ 1번 이미지에 제목 텍스트 포함</span>
-        <span style="font-size: 0.75rem; color: var(--text-muted);">⚠️ AI가 한글을 정확히 렌더링하지 못할 수 있습니다</span>
-      </label>
-    `;
-    fullAutoImageSection.appendChild(fullAutoCheckboxContainer);
-    console.log('[Unified] 풀오토 1번 이미지 텍스트 옵션 UI 추가됨 (숨김 상태)');
 
+  // ✅ [2026-02-02] '1번 이미지에 텍스트 포함' 체크박스는 이미지 관리 탭의 #thumbnail-text-include 사용
+  // 여기서는 '썸네일만 생성' 체크박스만 추가
+  if (fullAutoImageSection && !document.getElementById('full-auto-thumbnail-only')) {
     // ✅ [신규] 썸네일만 생성 체크박스 (일반 모드 전용 - 1번 소제목만 이미지 생성, 나머지는 텍스트만)
     const thumbnailOnlyContainer = document.createElement('div');
     thumbnailOnlyContainer.id = 'full-auto-thumbnail-only-container';
@@ -17721,8 +19272,7 @@ function addThumbnailTextOptionUI(): void {
     // ✅ [핵심] 쇼핑커넥트 모드 변경 시 체크박스 표시/숨김 업데이트 함수
     const updateCheckboxVisibility = () => {
       const isShoppingConnect = isShoppingConnectModeActive();
-      // 쇼핑커넥트 모드: 두 체크박스 숨김 (자동으로 텍스트 포함됨)
-      fullAutoCheckboxContainer.style.display = isShoppingConnect ? 'none' : 'flex';
+      // 쇼핑커넥트 모드: 체크박스 숨김
       thumbnailOnlyContainer.style.display = isShoppingConnect ? 'none' : 'flex';
     };
 
@@ -17743,42 +19293,36 @@ function addThumbnailTextOptionUI(): void {
     }
   }
 
-  // 반자동 발행 영역에 체크박스 추가
-  const semiAutoImageSection = document
-    .querySelector('#unified-image-source-section, .unified-img-source-btn')
-    ?.closest('.form-group, .option-group, div[style*="margin"]');
-
-  // unified UI에서는 full-auto/반자동이 동일 영역(.unified-img-source-btn) 아래에 있으므로
-  // 동일 컨테이너일 경우에는 체크박스를 한 번만 추가한다.
-  const isSameHost =
-    fullAutoImageSection && semiAutoImageSection && fullAutoImageSection === semiAutoImageSection;
-
-  if (semiAutoImageSection && !isSameHost && !document.getElementById('semi-auto-thumbnail-text')) {
-    const semiAutoCheckboxContainer = document.createElement('div');
-    semiAutoCheckboxContainer.id = 'semi-auto-thumbnail-text-container';
-    semiAutoCheckboxContainer.style.cssText = `
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      border-radius: 8px;
-      padding: 0.75rem;
-      margin-top: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    `;
-    semiAutoCheckboxContainer.innerHTML = `
-      <input type="checkbox" id="semi-auto-thumbnail-text" style="width: 18px; height: 18px; cursor: pointer; accent-color: #f59e0b;">
-      <label for="semi-auto-thumbnail-text" style="cursor: pointer; font-size: 0.85rem; color: var(--text-strong); display: flex; flex-direction: column; gap: 0.15rem;">
-        <span style="font-weight: 600;">🖼️ 1번 이미지에 제목 텍스트 포함</span>
-        <span style="font-size: 0.75rem; color: var(--text-muted);">⚠️ AI가 한글을 정확히 렌더링하지 못할 수 있습니다</span>
-      </label>
-    `;
-    semiAutoImageSection.appendChild(semiAutoCheckboxContainer);
-    console.log('[Unified] 반자동 1번 이미지 텍스트 옵션 UI 추가됨');
-  }
+  // ✅ [2026-02-02] 반자동 발행 영역의 중복 체크박스 제거
+  // 이미지 관리 탭의 #thumbnail-text-include 체크박스 하나로 통일
 
   // ✅ [2026-01-19] 쇼핑커넥트 전용 AI 이미지 생성 체크박스 추가
   addShoppingConnectAiImageOptions();
+
+  // ✅ [2026-02-10] 쇼핑몰 이미지 수집 섹션 조건부 표시 (쇼핑커넥트 모드일 때만)
+  const shoppingUrlContainer = document.getElementById('image-shopping-url-container');
+  if (shoppingUrlContainer) {
+    const updateShoppingUrlVisibility = () => {
+      const isShoppingConnect = isShoppingConnectModeActive();
+      shoppingUrlContainer.style.display = isShoppingConnect ? 'block' : 'none';
+    };
+
+    // 초기 상태 설정
+    updateShoppingUrlVisibility();
+
+    // 콘텐츠 모드 변경 감지
+    const contentModeForUrl = document.getElementById('unified-content-mode');
+    if (contentModeForUrl) {
+      contentModeForUrl.addEventListener('change', updateShoppingUrlVisibility);
+    }
+
+    // 쇼핑커넥트 설정 영역 표시 변경 감지 (MutationObserver)
+    const shoppingSettingsForUrl = document.getElementById('shopping-connect-settings');
+    if (shoppingSettingsForUrl) {
+      const observer = new MutationObserver(updateShoppingUrlVisibility);
+      observer.observe(shoppingSettingsForUrl, { attributes: true, attributeFilter: ['style'] });
+    }
+  }
 }
 
 // ✅ [2026-01-19] 쇼핑커넥트 AI 표/배너 이미지 생성 옵션 체크박스 추가
@@ -17863,17 +19407,23 @@ function collectUnifiedFormData(): any {
   const targetAge = (document.getElementById('unified-target-age') as HTMLSelectElement)?.value || 'all';
   // ✅ 글 톤 설정 - UI에서 선택한 값 사용
   const toneStyle = (document.getElementById('unified-tone-style') as HTMLInputElement)?.value || 'friendly';
-  const imageSource = document.querySelector('.unified-img-source-btn.selected')?.getAttribute('data-source') || 'dalle';
+  // ✅ [2026-02-08 FIX] 폴백을 localStorage 기반으로 변경 — 사용자가 선택한 엔진 보존
+  const imageSource = document.querySelector('.unified-img-source-btn.selected')?.getAttribute('data-source')
+    || localStorage.getItem('fullAutoImageSource')
+    || localStorage.getItem('globalImageSource')
+    || 'nano-banana-pro';
   const skipImages = (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked || false;
   const publishMode = (document.getElementById('unified-publish-mode') as HTMLSelectElement)?.value || 'publish';
   const scheduleDate = publishMode === 'schedule' ? (document.getElementById('unified-schedule-date') as HTMLInputElement)?.value : undefined;
-  const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'app-schedule') : undefined;
+  const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'naver-server') : undefined;
 
-  // ✅ 썸네일 텍스트 포함 여부 (나노 바나나 프로 전용)
+  // ✅ [2026-01-28 FIX] 썸네일 텍스트 포함 여부 - localStorage 최우선
   const includeThumbnailText =
+    localStorage.getItem('thumbnailTextInclude') === 'true' ||
     (document.getElementById('full-auto-thumbnail-text') as HTMLInputElement)?.checked ||
     (document.getElementById('semi-auto-thumbnail-text') as HTMLInputElement)?.checked ||
     (document.getElementById('thumbnail-text-option') as HTMLInputElement)?.checked ||
+    (document.getElementById('thumbnail-text-include') as HTMLInputElement)?.checked ||
     (document.getElementById('ma-setting-include-thumbnail-text') as HTMLInputElement)?.checked ||
     false;
 
@@ -17973,18 +19523,9 @@ async function generateContentFromUrl(
   showUnifiedProgress(0, '🔄 URL 크롤링 시작...', `URL: ${url.substring(0, 50)}...`);
   appendLog('🔄 URL에서 콘텐츠 크롤링 및 AI 글 생성 시작...');
 
-  // ✅ [2026-01-26 FIX] Perplexity 모델 직접 감지 (UI 동기화 문제 우회)
-  let generator = UnifiedDOMCache.getGenerator();
-  try {
-    const config = await window.api.getConfig();
-    const selectedModel = config?.primaryGeminiTextModel || config?.geminiModel || '';
-    if (selectedModel === 'perplexity-sonar' || String(selectedModel).toLowerCase().startsWith('perplexity')) {
-      generator = 'perplexity';
-      console.log(`[Unified] ✅ Perplexity 모델 감지됨: ${selectedModel}`);
-    }
-  } catch (e) {
-    console.log('[Unified] Config 로드 실패, 기본 generator 사용:', generator);
-  }
+  // ✅ UI에서 선택된 생성기 사용 (UnifiedDOMCache에서 가져옴)
+  const generator = UnifiedDOMCache.getGenerator();
+  console.log(`[Unified] 사용할 AI 엔진: ${generator}`);
   const targetAge = 'all'; // 고정
 
   // ✅ Override 우선 사용
@@ -18038,7 +19579,9 @@ async function generateContentFromUrl(
       toneStyle,
       contentMode: contentMode as 'seo' | 'homefeed' | 'affiliate', // ✅ [FIX] 쇼핑커넥트(affiliate) 모드 타입 추가
       categoryHint, // ✅ 카테고리 힌트 전달 (2축 분리 프롬프트)
-      isReviewType // ✅ 리뷰형 여부 전달
+      isReviewType, // ✅ 리뷰형 여부 전달
+      // ✅ [2026-02-09 v2] 연속발행 시 이전 제목 히스토리 전달 (중복 방지)
+      previousTitles: ((window as any)._previousTitles as string[]) || undefined
     }
   };
 
@@ -18074,7 +19617,15 @@ async function generateContentFromUrl(
     showUnifiedProgress(70, '📝 응답 처리 중...', '생성된 콘텐츠를 분석하고 있습니다');
 
     if (!apiResponse.success || !apiResponse.data?.success) {
-      throw new Error(apiResponse.data?.message || apiResponse.error || '콘텐츠 생성 실패');
+      const errorMsg = apiResponse.data?.message || apiResponse.error || '콘텐츠 생성 실패';
+      console.error('[GenerateContent] ❌ API 응답 실패:', {
+        success: apiResponse.success,
+        dataSuccess: apiResponse.data?.success,
+        message: apiResponse.data?.message,
+        error: apiResponse.error,
+        data: apiResponse.data
+      });
+      throw new Error(errorMsg);
     }
 
     const result = apiResponse.data;
@@ -18088,17 +19639,45 @@ async function generateContentFromUrl(
 
     const coreKeyword = (keywords || '').split(',').map((k) => k.trim()).filter(Boolean)[0] || '';
     if (coreKeyword) {
-      structuredContent.selectedTitle = applyKeywordPrefixToTitleContinuous(String(structuredContent.selectedTitle || structuredContent.title || ''), coreKeyword);
-      if (Array.isArray(structuredContent.titleAlternatives) && structuredContent.titleAlternatives.length > 0) {
-        structuredContent.titleAlternatives = structuredContent.titleAlternatives
-          .map((t: string) => applyKeywordPrefixToTitleContinuous(String(t || ''), coreKeyword))
-          .filter(Boolean);
+      // ✅ [2026-02-08 FIX] 강화된 중복 방지: 키워드의 모든 토큰이 이미 제목에 포함되어 있으면 건너뜀
+      const currentTitle = String(structuredContent.selectedTitle || structuredContent.title || '');
+      const keywordTokens = coreKeyword.split(/\s+/).filter((t: string) => t.length >= 2);
+      const titleLower = currentTitle.toLowerCase();
+      const allTokensPresent = keywordTokens.length > 0 && keywordTokens.every((t: string) => titleLower.includes(t.toLowerCase()));
+
+      if (!allTokensPresent) {
+        structuredContent.selectedTitle = applyKeywordPrefixToTitleContinuous(currentTitle, coreKeyword);
+        console.log('[GenerateContent] 키워드 접두사 적용:', { coreKeyword, result: structuredContent.selectedTitle });
+      } else {
+        structuredContent.selectedTitle = currentTitle;
+        console.log('[GenerateContent] 키워드 토큰 모두 포함됨, 건너뜀:', { coreKeyword, title: currentTitle });
       }
-      if (Array.isArray(structuredContent.titleCandidates) && structuredContent.titleCandidates.length > 0) {
-        structuredContent.titleCandidates = structuredContent.titleCandidates.map((c: any) => ({
-          ...c,
-          text: applyKeywordPrefixToTitleContinuous(String(c?.text || ''), coreKeyword),
-        }));
+      // titleAlternatives와 titleCandidates는 중복 체크 없이 그대로 유지 (contentGenerator.ts에서 이미 처리됨)
+    }
+
+    // ✅ [2026-02-08] 쇼핑커넥트 모드: 글 생성 시에도 SEO 100점 제목 적용
+    // (풀오토뿐 아니라 일반 글 생성 버튼에서도 자동완성 키워드 3개 이상 조합)
+    if (isShoppingConnectModeActive() && structuredContent) {
+      const productName = String(structuredContent.title || structuredContent.selectedTitle || '').trim();
+      if (productName && productName.length >= 3) {
+        try {
+          appendLog(`📝 SEO 100점 제목 생성 중... (자동완성 키워드 3개 이상)`);
+          const seoResult = await (window as any).api.generateSeoTitle(productName);
+          if (seoResult?.success && seoResult.title && seoResult.title !== productName) {
+            const originalTitle = structuredContent.selectedTitle || '';
+            structuredContent.selectedTitle = seoResult.title;
+            // ✅ UI 필드도 동시 업데이트
+            try {
+              const titleInput1 = document.getElementById('unified-generated-title') as HTMLInputElement;
+              if (titleInput1) titleInput1.value = seoResult.title;
+              const titleInput2 = document.getElementById('unified-title') as HTMLInputElement;
+              if (titleInput2) titleInput2.value = seoResult.title;
+            } catch { }
+            appendLog(`✅ SEO 제목: "${originalTitle}" → "${seoResult.title}"`);
+          }
+        } catch (seoErr) {
+          console.warn('[GenerateContent] SEO 제목 생성 실패:', seoErr);
+        }
       }
     }
 
@@ -18134,6 +19713,14 @@ async function generateContentFromUrl(
       } catch (error) {
         appendLog(`⚠️ 소제목 자동 분석 실패: ${(error as Error).message}`);
       }
+
+      // ✅ [2026-02-12] 소제목별 이미지 자동 수집 (체크박스 ON일 때만, 네이버 → 구글 폴백)
+      try {
+        const mainKw = keywords || structuredContent?.selectedTitle || '';
+        await autoSearchAndPopulateImages(structuredContent, mainKw, suppressModal);
+      } catch (imgErr) {
+        console.warn('[GenerateContentUrl] 이미지 자동 수집 실패 (무시):', imgErr);
+      }
     } else {
       appendLog('⚠️ 소제목이 없어 자동 분석을 건너뜁니다.');
     }
@@ -18158,8 +19745,10 @@ async function generateContentFromUrl(
 
     toastManager.success('✅ AI 글 생성이 완료되었습니다!');
 
-    // ✅ URL 글생성 후 풀오토 발행 버튼 비활성화
-    disableFullAutoPublishButton('URL 글생성 후에는 반자동 발행만 사용 가능합니다');
+    // ✅ URL 글생성 후 풀오토 발행 버튼 비활성화 (수동 글생성 시에만 - 풀오토 발행 내부에서는 건너뜀)
+    if (!suppressModal) {
+      disableFullAutoPublishButton('URL 글생성 후에는 반자동 발행만 사용 가능합니다');
+    }
   } catch (error) {
     appendLog(`❌ URL 기반 콘텐츠 생성 실패: ${(error as Error).message}`);
     // 에러 로그는 항상 기록
@@ -18419,13 +20008,16 @@ async function generateContentFromKeywords(
   }
 
   // ✅ 환각 방지 경고 (중단하지 않고 경고만)
-  if (useRealtimeCrawl && crawledText.length < 300) {
-    appendLog(`⚠️ [경고] 수집된 정보가 적음 (${crawledText.length}자) - 정확도가 낮을 수 있습니다.`);
-    toastManager.warning(`⚠️ 수집된 정보가 적습니다 (${crawledText.length}자). 정확도가 낮을 수 있습니다.`, 5000);
+  // ✅ [2026-02-04] 방어 코드 추가: crawledText가 undefined인 경우 처리
+  const crawledTextLength = crawledText?.length || 0;
+  if (useRealtimeCrawl && crawledTextLength < 300) {
+    appendLog(`⚠️ [경고] 수집된 정보가 적음 (${crawledTextLength}자) - 정확도가 낮을 수 있습니다.`);
+    toastManager.warning(`⚠️ 수집된 정보가 적습니다 (${crawledTextLength}자). 정확도가 낮을 수 있습니다.`, 5000);
   }
 
   // ✅ URL 기반과 동등한 품질을 위한 payload 구성
-  const keywordList = normalizedKeywords.keywordList;
+  // ✅ [2026-02-04] 방어 코드 추가: keywordList가 undefined인 경우 빈 배열로 처리
+  const keywordList = normalizedKeywords?.keywordList || [];
 
   const referenceDate = (() => {
     const raw = scheduleDate || '';
@@ -18488,7 +20080,9 @@ async function generateContentFromKeywords(
       // ✅ 실시간 정보가 있으면 더 정확한 글 생성 지시
       useRealTimeInfo: !!crawledText,
       sourceInfo: crawledText ? `"${searchQuery}"에 대한 실시간 수집 정보 기반` : undefined,
-      customPrompt: (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim() || undefined
+      customPrompt: (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim() || undefined,
+      // ✅ [2026-02-09 v2] 연속발행 시 이전 제목 히스토리 전달 (제목 다양성 확보)
+      previousTitles: ((window as any)._previousTitles as string[]) || undefined
     }
   };
 
@@ -18529,6 +20123,36 @@ async function generateContentFromKeywords(
     const result = apiResponse.data;
     const structuredContent = result.content;
 
+    // ✅ [2026-02-13] 키워드 제목 옵션 후처리 (AI 생성된 제목을 사용자 설정에 맞게 조정)
+    const keywordTitleOpts = (window as any)._keywordTitleOptions;
+    if (keywordTitleOpts && structuredContent) {
+      if (keywordTitleOpts.useKeywordAsTitle) {
+        // 📌 키워드를 그대로 제목으로 사용
+        const originalTitle = structuredContent.selectedTitle;
+        structuredContent.selectedTitle = keywordTitleOpts.keyword;
+        appendLog(`📌 제목 교체: "${originalTitle}" → "${structuredContent.selectedTitle}"`);
+      } else if (keywordTitleOpts.useKeywordTitlePrefix) {
+        // 🔝 키워드를 제목 맨 앞에 배치
+        const keyword = keywordTitleOpts.keyword;
+        const currentTitle = structuredContent.selectedTitle || '';
+
+        // 이미 키워드로 시작하면 건너뜀
+        if (!currentTitle.startsWith(keyword)) {
+          // 키워드가 제목 내에 포함되어 있으면 제거 후 앞에 배치
+          const cleanedTitle = currentTitle.replace(new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), '').trim();
+          // 연결어/구두점 정리
+          const separator = cleanedTitle.startsWith(',') || cleanedTitle.startsWith('!') || cleanedTitle.startsWith('?') || cleanedTitle.startsWith(':')
+            ? cleanedTitle
+            : (cleanedTitle ? `, ${cleanedTitle}` : '');
+          const newTitle = `${keyword}${separator}`;
+          structuredContent.selectedTitle = newTitle.replace(/,\s*$/, '').replace(/\s{2,}/g, ' ').trim();
+          appendLog(`🔝 키워드 앞배치: "${currentTitle}" → "${structuredContent.selectedTitle}"`);
+        }
+      }
+      // 옵션 사용 후 정리
+      (window as any)._keywordTitleOptions = null;
+    }
+
     try {
       const seed = getReviewHeadingSeed(title, keywords, structuredContent);
       applyReviewHeadingPrefix(structuredContent, seed);
@@ -18559,13 +20183,23 @@ async function generateContentFromKeywords(
     appendLog('🎨 글 생성 완료! 소제목 분석을 자동으로 시작합니다...');
 
     // 소제목이 있으면 자동으로 분석 실행
-    if (structuredContent && structuredContent.headings && structuredContent.headings.length > 0) {
+    // ✅ [2026-02-04] 방어 코드 추가: headings가 undefined인 경우 처리
+    const hasHeadings = structuredContent && Array.isArray(structuredContent.headings) && structuredContent.headings.length > 0;
+    if (hasHeadings) {
       try {
         appendLog('🔍 소제목 분석 자동 실행 중...');
         await autoAnalyzeHeadings(structuredContent);
         appendLog('✅ 소제목 분석 완료! 이미지 생성이 준비되었습니다.');
       } catch (error) {
         appendLog(`⚠️ 소제목 자동 분석 실패: ${(error as Error).message}`);
+      }
+
+      // ✅ [2026-02-12] 소제목별 이미지 자동 수집 (체크박스 ON일 때만, 네이버 → 구글 폴백)
+      try {
+        const mainKw = keywords || structuredContent?.selectedTitle || '';
+        await autoSearchAndPopulateImages(structuredContent, mainKw, suppressModal);
+      } catch (imgErr) {
+        console.warn('[GenerateContentKeywords] 이미지 자동 수집 실패 (무시):', imgErr);
       }
     } else {
       appendLog('⚠️ 소제목이 없어 자동 분석을 건너뜁니다.');
@@ -18591,8 +20225,10 @@ async function generateContentFromKeywords(
 
     toastManager.success('✅ AI 글 생성이 완료되었습니다!');
 
-    // ✅ 키워드 글생성 후 풀오토 발행 버튼 비활성화
-    disableFullAutoPublishButton('키워드 글생성 후에는 반자동 발행만 사용 가능합니다');
+    // ✅ 키워드 글생성 후 풀오토 발행 버튼 비활성화 (수동 글생성 시에만 - 풀오토 발행 내부에서는 건너뜀)
+    if (!suppressModal) {
+      disableFullAutoPublishButton('키워드 글생성 후에는 반자동 발행만 사용 가능합니다');
+    }
   } catch (error) {
     showUnifiedProgress(0, '❌ 오류 발생', (error as Error).message);
     appendLog(`❌ 키워드 기반 콘텐츠 생성 실패: ${(error as Error).message}`);
@@ -19035,9 +20671,9 @@ const GENERATED_POSTS_CATEGORY_COLLAPSE_PREFIX = 'generated_posts_category_colla
 function normalizeGeneratedPostCategoryKey(raw: unknown): string {
   const trimmed = String(raw || '').trim();
   if (!trimmed) return 'uncategorized';
-  // ✅ [2026-01-23 FIX] normalizeCategory 함수를 사용하여 카테고리명 통일
-  const normalized = normalizeCategory(trimmed);
-  return normalized || trimmed;
+  // ✅ [2026-02-02 FIX] 사용자가 선택한 콘텐츠 카테고리 그대로 폴더명으로 사용
+  // 정규화 제거 - "드라마", "스타·연예인" 등 선택한 그대로 표시
+  return trimmed;
 }
 
 const CATEGORY_LABEL_MAP: Record<string, string> = {
@@ -19105,8 +20741,9 @@ function refreshGeneratedPostsList(): void {
   const totalCount = posts.length;
 
   // ✅ 통계 정보 계산
+  // ✅ [2026-02-04] 방어 코드 추가: content/images가 undefined인 경우 처리
   const totalImages = posts.reduce((sum, p) => sum + (p.images?.length || 0), 0);
-  const totalChars = posts.reduce((sum, p) => sum + p.content.length, 0);
+  const totalChars = posts.reduce((sum, p) => sum + (p.content?.length || 0), 0);
   const avgChars = totalCount > 0 ? Math.round(totalChars / totalCount) : 0;
   const publishedCount = posts.filter(p => p.publishedUrl).length;
 
@@ -19143,9 +20780,9 @@ function refreshGeneratedPostsList(): void {
   if (searchInput && searchInput.value.trim()) {
     searchTerm = searchInput.value.trim().toLowerCase();
     posts = posts.filter(post =>
-      post.title.toLowerCase().includes(searchTerm) ||
-      post.content.toLowerCase().includes(searchTerm) ||
-      post.hashtags.some(tag => tag.toLowerCase().includes(searchTerm))
+      (post.title || '').toLowerCase().includes(searchTerm) ||
+      (post.content || '').toLowerCase().includes(searchTerm) ||
+      (post.hashtags || []).some(tag => (tag || '').toLowerCase().includes(searchTerm))
     );
   }
 
@@ -19216,7 +20853,7 @@ function refreshGeneratedPostsList(): void {
           <div style="padding: 1rem;">
             <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem; font-size: 1rem; word-break: break-word; line-height: 1.4;">${highlightedTitle}</div>
             <div style="display: flex; gap: 0.75rem; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; flex-wrap: wrap;">
-              <span>📄 ${post.content.length.toLocaleString()}자</span>
+              <span>📄 ${(post.content?.length || 0).toLocaleString()}자</span>
               <span>🖼️ ${post.images?.length || 0}개</span>
               <span>📑 ${post.headings?.length || 0}개</span>
             </div>
@@ -19250,9 +20887,11 @@ function refreshGeneratedPostsList(): void {
       })
       : null;
 
-    const contentPreview = post.content.length > 100
-      ? post.content.substring(0, 100) + '...'
-      : post.content;
+    // ✅ [2026-02-04] post.content가 undefined일 경우 방어
+    const safeContent = post.content || '';
+    const contentPreview = safeContent.length > 100
+      ? safeContent.substring(0, 100) + '...'
+      : safeContent;
 
     const firstImage = post.images && post.images.length > 0 ? post.images[0] : null;
     const thumbnailImage = firstImage
@@ -19280,10 +20919,10 @@ function refreshGeneratedPostsList(): void {
             </div>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem; line-height: 1.4; opacity: 0.8;">${highlightedPreview}</div>
             <div style="display: flex; gap: 1rem; font-size: 0.875rem; color: var(--text-muted); flex-wrap: wrap;">
-              <span>📄 ${post.content.length.toLocaleString()}자</span>
+              <span>📄 ${(post.content?.length || 0).toLocaleString()}자</span>
               <span>📑 ${post.headings?.length || 0}개 소제목</span>
               <span>🖼️ ${post.images?.length || 0}개 이미지</span>
-              ${post.hashtags.length > 0 ? `<span>🏷️ ${post.hashtags.slice(0, 3).join(', ')}${post.hashtags.length > 3 ? '...' : ''}</span>` : ''}
+              ${(post.hashtags?.length || 0) > 0 ? `<span>🏷️ ${(post.hashtags || []).slice(0, 3).join(', ')}${(post.hashtags?.length || 0) > 3 ? '...' : ''}</span>` : ''}
               ${post.publishedUrl ? `<span style="color: #10b981; cursor: pointer; text-decoration: underline;" onclick="event.stopPropagation(); window.open('${post.publishedUrl}', '_blank');" title="클릭하여 발행된 글 열기">✅ 발행됨</span>` : '<span style="color: var(--text-muted);">⏳ 미발행</span>'}
             </div>
           </div>
@@ -19680,12 +21319,11 @@ function showHeadingImagesModal(encodedHeadingTitle: string, initialImageUrl?: s
       }
 
       try {
-        const allImages = ImageManager.getAllImages();
-        (window as any).imageManagementGeneratedImages = allImages;
+        // ✅ [2026-02-12 P3 FIX #15] 중복 할당 제거 — syncGlobal이 처리
         syncGlobalImagesFromImageManager();
+        const allImages = ImageManager.getAllImages();
         const sc: any = (window as any).currentStructuredContent;
         if (sc?.headings) updateUnifiedImagePreview(sc.headings, allImages);
-        displayGeneratedImages(allImages);
         updatePromptItemsWithImages(allImages);
         ImageManager.syncAllPreviews();
       } catch {
@@ -20368,9 +22006,8 @@ async function reusePostImages(postId: string): Promise<void> {
     });
 
     // 5) 전역 배열/상태 동기화
-    generatedImages = [...validImages];
-    (window as any).generatedImages = generatedImages;
-    (window as any).imageManagementGeneratedImages = [...validImages];
+    // ✅ [2026-02-12 P1 FIX #6] 직접 할당 → syncGlobalImagesFromImageManager
+    try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
 
     appendLog(`🖼️ ${validImages.length}개의 이미지를 재사용했습니다. (${post.title})`);
     alert(`✅ ${validImages.length}개의 이미지를 재사용했습니다!\n\n제목: ${post.title}`);
@@ -21293,7 +22930,7 @@ async function showLocalImageSelectionModal(folderName?: string): Promise<void> 
             heading: headingTitle,
             filePath: imagePath,
             previewDataUrl: `file:///${imagePath}`,
-            provider: 'local' as 'dalle' | 'pexels',
+            provider: 'local' as any,
             savedToLocal: true,
             url: `file:///${imagePath}`
           };
@@ -21386,7 +23023,7 @@ async function showLocalImageSelectionModal(folderName?: string): Promise<void> 
                 heading: headingTitle,
                 filePath: imagePath,
                 previewDataUrl: `file:///${imagePath}`,
-                provider: 'local' as 'dalle' | 'pexels',
+                provider: 'local' as any,
                 savedToLocal: true,
                 url: `file:///${imagePath}`
               };
@@ -21419,7 +23056,7 @@ async function showLocalImageSelectionModal(folderName?: string): Promise<void> 
           heading: headingTitle,
           filePath: selectedImagePath,
           previewDataUrl: `file:///${selectedImagePath}`,
-          provider: 'local' as 'dalle' | 'pexels',
+          provider: 'local' as any,
           savedToLocal: true,
           url: `file:///${selectedImagePath}`
         };
@@ -21994,14 +23631,17 @@ function collectUnifiedFormDataForPublish(mode: 'full-auto' | 'semi-auto'): any 
   const publishMode = (document.getElementById('unified-publish-mode') as HTMLSelectElement)?.value || 'publish';
   const categoryName = UnifiedDOMCache.getRealCategory();
 
-  const scheduleDate = publishMode === 'schedule' ? (document.getElementById('unified-schedule-date') as HTMLInputElement)?.value : undefined;
-  const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'app-schedule') : undefined;
+  // ✅ [2026-02-07 FIX] getScheduleDateFromInput 사용 (T→space 변환)
+  const scheduleDate = publishMode === 'schedule' ? getScheduleDateFromInput('unified-schedule-date') : undefined;
+  const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'naver-server') : undefined;
 
-  // ✅ 썸네일 텍스트 포함 여부 (나노 바나나 프로 전용)
+  // ✅ [2026-01-28 FIX] 썸네일 텍스트 포함 여부 - localStorage 최우선
   const includeThumbnailText =
+    localStorage.getItem('thumbnailTextInclude') === 'true' ||
     (document.getElementById('full-auto-thumbnail-text') as HTMLInputElement)?.checked ||
     (document.getElementById('semi-auto-thumbnail-text') as HTMLInputElement)?.checked ||
     (document.getElementById('thumbnail-text-option') as HTMLInputElement)?.checked ||
+    (document.getElementById('thumbnail-text-include') as HTMLInputElement)?.checked ||
     (document.getElementById('ma-setting-include-thumbnail-text') as HTMLInputElement)?.checked ||
     false;
 
@@ -22185,6 +23825,46 @@ async function executeFullAutoFlow(formData: any): Promise<any> {
     if (structuredContent && structuredContent.headings && structuredContent.headings.length > 0) {
       appendLog('📝 기존 생성된 콘텐츠를 사용합니다.');
       console.log('[FullAuto] 기존 콘텐츠 재사용 - 소제목 개수:', structuredContent.headings.length);
+
+      // ✅ [2026-02-01 FIX] 기존 콘텐츠 사용 시에도 selectedTitle 확인 및 패치
+      // selectedTitle이 비어있거나 원본 제목과 동일하면 UI에서 현재 제목을 가져와 패치
+      const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement;
+      const currentUITitle = titleInput?.value?.trim() || '';
+      const existingSelectedTitle = structuredContent.selectedTitle?.trim() || '';
+
+      // ✅ [2026-02-01 FIX] 쇼핑커넥트 모드에서 상품명 그대로 제목인 경우 AI로 새 제목 생성
+      const contentMode = formData.contentMode || formData.styleOptions?.contentMode || 'seo';
+      const productName = String(structuredContent.productInfo?.name || structuredContent.title || '').trim();
+
+      if (contentMode === 'affiliate' && productName && existingSelectedTitle) {
+        // ✅ [2026-02-02 통일] 제목이 상품명과 거의 동일한지 체크 → 경고 로그만 출력
+        // contentGenerator.ts에서 Gemini가 affiliate.prompt로 이미 제목을 생성하므로
+        // 여기서 titleABTester로 덮어쓰지 않음 (브랜드스토어/스마트스토어 동일 방식)
+        const normalizedTitle = existingSelectedTitle.replace(/[^\w가-힣]/g, '').toLowerCase();
+        const normalizedProduct = productName.replace(/[^\w가-힣]/g, '').toLowerCase();
+
+        const isTitleSameAsProduct = normalizedTitle === normalizedProduct ||
+          normalizedTitle.includes(normalizedProduct) ||
+          normalizedProduct.includes(normalizedTitle);
+
+        if (isTitleSameAsProduct) {
+          // ⚠️ 상품명 그대로인 경우 경고만 출력 (contentGenerator에서 패치했어야 함)
+          console.warn(`[FullAuto] ⚠️ 쇼핑커넥트: 제목이 상품명과 유사함 - contentGenerator 패치 확인 필요`);
+          console.warn(`[FullAuto]    - 현재 제목: "${existingSelectedTitle.substring(0, 50)}..."`);
+          console.warn(`[FullAuto]    - 상품명: "${productName.substring(0, 50)}..."`);
+        }
+      }
+
+      // UI 제목이 있고, 기존 selectedTitle과 다르면 UI 제목 사용
+      if (currentUITitle && currentUITitle !== existingSelectedTitle) {
+        structuredContent.selectedTitle = currentUITitle;
+        console.log(`[FullAuto] ✅ 제목 패치: UI 제목 사용 → "${currentUITitle.substring(0, 40)}..."`);
+        appendLog(`📝 제목 패치 적용: ${currentUITitle.substring(0, 30)}...`);
+      } else if (!existingSelectedTitle && structuredContent.title) {
+        // selectedTitle이 없고 title만 있으면 title 사용
+        structuredContent.selectedTitle = structuredContent.title;
+        console.log(`[FullAuto] ⚠️ selectedTitle 없음 → title 사용: "${structuredContent.title?.substring(0, 40)}..."`);
+      }
     } else {
       // 새로 생성
       appendLog('📝 콘텐츠 생성 중...');
@@ -22231,10 +23911,149 @@ async function executeFullAutoFlow(formData: any): Promise<any> {
     await yieldToUI();
 
     // 3. 이미지가 없고 skipImages가 false면 선택된 이미지 소스로 이미지 생성
-    if (finalImages.length === 0 && !formData.skipImages && formData.imageSource && formData.imageSource !== 'skip') {
-      appendLog(`🖼️ 이미지 생성 시작 (소스: ${formData.imageSource})...`);
-      modal?.addLog(`🖼️ ${formData.imageSource}로 이미지 생성 중...`);
+    // ✅ [2026-02-01 FIX] 쇼핑커넥트 "수집 이미지" 모드면 AI 생성하지 않음
+    const scSubImageSource = localStorage.getItem('scSubImageSource') || 'ai';
+    const isCollectedMode = formData.contentMode === 'affiliate' && scSubImageSource === 'collected';
+
+    // ✅ [2026-02-01 FIX] 수집 이미지 모드일 때 structuredContent에서 이미지 가져오기
+    if (isCollectedMode && finalImages.length === 0) {
+      const collectedFromContent = structuredContent.collectedImages || structuredContent.images || formData.collectedImages || [];
+      if (collectedFromContent.length > 0) {
+        // ✅ [2026-02-01 FIX] 중복 이미지 필터링
+        const seenUrls = new Set<string>();
+        const uniqueImages: any[] = [];
+
+        for (const img of collectedFromContent) {
+          const imgUrl = img.url || img.filePath || (typeof img === 'string' ? img : '');
+          if (!imgUrl) continue;
+
+          // URL에서 쿼리 파라미터 제거하여 기본 URL로 비교
+          const baseUrl = imgUrl.split('?')[0].split('#')[0];
+
+          // 이미 본 URL이면 스킵
+          if (seenUrls.has(baseUrl)) {
+            console.log(`[FullAuto] 🔄 중복 이미지 스킵: ${baseUrl.substring(0, 50)}...`);
+            continue;
+          }
+
+          seenUrls.add(baseUrl);
+          uniqueImages.push(img);
+        }
+
+        console.log(`[FullAuto] 🧹 중복 필터링: ${collectedFromContent.length}개 → ${uniqueImages.length}개`);
+
+        // ✅ [2026-02-01 FIX] 썸네일(0번)과 소제목 이미지를 분리하여 중복 방지
+        // 첫 번째 이미지는 썸네일(도입부)용, 나머지는 소제목용
+        // ⚠️ [2026-02-01 핵심 수정] 이미지가 부족하면 소제목에는 이미지를 할당하지 않음
+        const headingsCount = structuredContent.headings?.length || 0;
+        const requiredImageCount = headingsCount + 1; // 썸네일 + 소제목들
+
+        console.log(`[FullAuto] 📊 필요 이미지: ${requiredImageCount}개 (썸네일 1 + 소제목 ${headingsCount}개), 수집: ${uniqueImages.length}개`);
+
+        if (uniqueImages.length < 2) {
+          // ⚠️ 이미지가 1개 이하면 썸네일만 사용, 소제목은 이미지 없이 진행
+          console.log(`[FullAuto] ⚠️ 이미지 부족! 썸네일만 사용, 소제목 이미지 생략`);
+          finalImages = uniqueImages.length > 0 ? [{
+            heading: '썸네일',
+            filePath: uniqueImages[0].url || uniqueImages[0].filePath || uniqueImages[0],
+            url: uniqueImages[0].url || uniqueImages[0].filePath || uniqueImages[0],
+            provider: 'collected',
+            source: 'smartstore',
+            isThumbnail: true
+          }] : [];
+        } else {
+          // ✅ [2026-02-01 핵심 수정] 썸네일과 소제목 이미지 명확히 분리
+          // 썸네일: uniqueImages[0]
+          // 1번 소제목: uniqueImages[1] (썸네일과 절대 중복 불가)
+          // 2번 소제목: uniqueImages[2] ...
+
+          const thumbnailImage = uniqueImages[0];
+          const thumbnailUrl = thumbnailImage.url || thumbnailImage.filePath || thumbnailImage;
+
+          // 썸네일 먼저 추가
+          finalImages = [{
+            heading: '썸네일',
+            filePath: thumbnailUrl,
+            url: thumbnailUrl,
+            provider: 'collected',
+            source: 'smartstore',
+            isThumbnail: true
+          }];
+
+          // 소제목들에 이미지 할당 (썸네일 제외하고 idx=1부터)
+          const headingsCount = structuredContent.headings?.length || 0;
+          for (let i = 0; i < headingsCount && (i + 1) < uniqueImages.length; i++) {
+            const headingImg = uniqueImages[i + 1]; // 1번 소제목은 uniqueImages[1], 2번은 [2]...
+            const headingTitle = structuredContent.headings[i]?.title || `소제목 ${i + 1}`;
+            const imgUrl = headingImg.url || headingImg.filePath || headingImg;
+
+            // ⚠️ 썸네일과 동일한 이미지면 스킵
+            if (imgUrl.split('?')[0] === thumbnailUrl.split('?')[0]) {
+              console.log(`[FullAuto] ⚠️ ${headingTitle}: 썸네일과 동일한 이미지 스킵!`);
+              continue;
+            }
+
+            finalImages.push({
+              heading: headingTitle,
+              filePath: imgUrl,
+              url: imgUrl,
+              provider: 'collected',
+              source: 'smartstore',
+              isThumbnail: false
+            });
+          }
+
+          console.log(`[FullAuto] ✅ 이미지 할당 완료: 썸네일 1개 + 소제목 ${finalImages.length - 1}개`);
+        }
+
+        appendLog(`✅ 수집된 제품 이미지 ${finalImages.length}개를 사용합니다. (중복 ${collectedFromContent.length - uniqueImages.length}개 제거)`);
+        console.log(`[FullAuto] ✅ 수집 이미지 모드: finalImages ${finalImages.length}개 사용`);
+
+        // ✅ [2026-02-01 FIX] 수집 이미지를 ImageManager에 등록하여 UI 그리드와 동기화
+        finalImages.forEach((img: any) => {
+          if (img.heading && img.heading !== '썸네일') {
+            ImageManager.addImage(img.heading, {
+              filePath: img.filePath || img.url,
+              provider: 'collected',
+              url: img.url || img.filePath
+            });
+          }
+        });
+        ImageManager.syncGeneratedImagesArray();
+        console.log(`[FullAuto] ImageManager에 수집 이미지 ${finalImages.length}개 등록 완료`);
+      }
+    }
+
+    if (isCollectedMode && finalImages.length === 0) {
+      modal?.addLog('⚠️ 수집 이미지 모드가 선택되었으나 이미지가 없습니다. 텍스트로 진행합니다.');
+      appendLog('⚠️ 수집 이미지 없음 - AI 생성 폴백 없이 텍스트로 발행');
+    } else if (finalImages.length === 0 && !formData.skipImages && formData.imageSource && formData.imageSource !== 'skip') {
+      const _sourceNames: Record<string, string> = {
+        'pollinations': 'Pollinations (FLUX, 무료)',
+        'nano-banana-pro': '나노 바나나 프로 (Gemini Native)',
+        'prodia': 'Prodia',
+        'stability': 'Stability AI',
+        'deepinfra': 'DeepInfra FLUX-2',
+        'deepinfra-flux': 'DeepInfra FLUX-2',
+        'falai': 'Fal.ai FLUX',
+        'naver-search': '네이버 이미지 검색',
+        'naver': '네이버 이미지 검색',
+      };
+      const _friendlySource = _sourceNames[formData.imageSource] || formData.imageSource;
+      appendLog(`🖼️ 이미지 생성 시작 (엔진: ${_friendlySource})...`);
+      modal?.addLog(`🖼️ ${_friendlySource}로 이미지 생성 중...`);
       modal?.setProgress(35, '이미지 생성 중...');
+
+      // ✅ [2026-02-02 FIX] 이미지 생성 시작 시 플레이스홀더 그리드 표시
+      const headingsForPreview = structuredContent.headings || [];
+      if (headingsForPreview.length > 0) {
+        const placeholderImages = headingsForPreview.map((h: any, idx: number) => ({
+          heading: String(h.title || h.text || `이미지 ${idx + 1}`).trim(),
+          url: '', // 플레이스홀더 (빈 URL)
+          isPlaceholder: true
+        }));
+        modal?.showImages(placeholderImages, `🎨 이미지 생성 중... (${_friendlySource})`);
+      }
 
       try {
         const headings = structuredContent.headings || [];
@@ -22313,6 +24132,11 @@ async function executeFullAutoFlow(formData: any): Promise<any> {
         const heading = img.heading || '제목 없음';
         appendLog(`   [${idx + 1}] ${heading} (${provider})`);
       });
+
+      // ✅ [2026-02-01] 모달에 이미지 그리드 표시
+      const imageSource = UnifiedDOMCache.getImageSource();
+      const imageTitle = imageSource === 'collected' ? '📷 수집된 이미지' : '🎨 생성된 이미지';
+      modal?.showImages(finalImages, imageTitle);
     }
 
     await yieldToUI();
@@ -22492,6 +24316,9 @@ async function executeFullAutoFlow(formData: any): Promise<any> {
 
       if (prevPost) {
         formData.ctaUrl = prevPost.publishedUrl;
+        // ✅ [2026-02-08 FIX] previousPostUrl도 함께 설정 (naverBlogAutomation에서 이전글 삽입 시 필요)
+        formData.previousPostUrl = prevPost.publishedUrl;
+        formData.previousPostTitle = prevPost.title || '이전 글 보기';
         // 텍스트가 비어있거나 '📖'로 시작하는 이전 자동 생성 텍스트인 경우 새로 생성
         if (!formData.ctaText || formData.ctaText.startsWith('📖')) {
           formData.ctaText = `📖 추천 글: ${prevPost.title}`;
@@ -22510,14 +24337,15 @@ async function executeFullAutoFlow(formData: any): Promise<any> {
       }
     }
 
-    // ✅ [2026-01-24 FIX] 모든 발행 모드에서 이전글 자동 연결 (쇼핑커넥트뿐만 아니라 모든 모드)
-    // previousPostUrl이 없을 때만 자동 매칭 수행
+    // ✅ [2026-02-08 FIX] 쇼핑커넥트 모드 또는 이전글 엮기 모드에서 이전글 자동 연결
     const needsPreviousPostLookup = !formData.previousPostUrl || formData.previousPostUrl.trim() === '';
     const isShoppingConnectMode = formData.affiliateLink && formData.affiliateLink.trim();
+    const isPreviousPostMode = formData.ctaType === 'previous-post';
 
-    if (needsPreviousPostLookup) {
-      const modeLabel = isShoppingConnectMode ? '🛒 쇼핑커넥트' : '📝 일반';
-      appendLog(`${modeLabel} 모드: 같은 카테고리 이전글 찾기 시작...`);
+    // ✅ [2026-02-10 FIX] ctaType이 none이 아닌 모든 모드에서 이전글 자동 연결
+    // 기존: 쇼핑커넥트 OR ctaType=previous-post 에서만 → 예약/임시발행 시 이전글 누락
+    if (needsPreviousPostLookup && formData.ctaType !== 'none') {
+      appendLog(`🔗 이전글 자동 연결: 같은 카테고리 이전글 찾기 시작... (쇼핑커넥트: ${isShoppingConnectMode ? 'ON' : 'OFF'})`);
 
       // ✅ [100점 수정] 기존 글 카테고리 마이그레이션 (영어 → 한글 통일)
       ensureCategoryMigration();
@@ -22731,6 +24559,13 @@ async function executeSemiAutoFlow(formData: any): Promise<any> {
     showUnifiedProgress(40, '이미지 생성 시작...', '제목에 맞는 이미지를 생성하고 있습니다.');
     appendLog('🎨 이미지가 없습니다. 새로 생성 중...');
     appendLog(`   [디버그] imageManagementImages가 없어서 새로 생성: ${JSON.stringify(formData.imageManagementImages)}`);
+
+    // ✅ [2026-02-01 FIX] 콘텐츠 생성 시 수집된 이미지를 formData에 전달하여 중복 크롤링 방지
+    if (structuredContent.collectedImages && structuredContent.collectedImages.length > 0) {
+      formData.collectedImages = structuredContent.collectedImages;
+      console.log(`[FullAuto] ✅ structuredContent.collectedImages → formData.collectedImages 전달: ${structuredContent.collectedImages.length}개`);
+    }
+
     generatedImagesForPublish = await generateImagesForContent(structuredContent, formData);
 
     // ✅ 생성된 이미지를 ImageManager에 등록 (발행 시 매칭을 위해 필수!)
@@ -23220,6 +25055,13 @@ function initFullAutoImageSourceSelection(): void {
       }
 
       console.log(`[FullAuto] 이미지 소스 선택됨: ${source}`);
+
+      // ✅ [2026-02-11 FIX] 풀오토 전용 이미지 소스 localStorage에 저장
+      // 이전에는 CSS만 변경하고 localStorage에 저장하지 않아 연속발행 시 nano-banana-pro로 fallback됨
+      if (source) {
+        localStorage.setItem('fullAutoImageSource', source);
+        console.log(`[FullAuto] 풀오토 전용 이미지 소스 localStorage 저장: ${source}`);
+      }
     });
   });
 }
@@ -23265,8 +25107,10 @@ function collectFullAutoFormData(): any {
   const scheduleDate = publishMode === 'schedule' ? (document.getElementById('full-auto-schedule-date') as HTMLInputElement)?.value : undefined;
   const autoPublish = (document.getElementById('auto-publish-after-generate') as HTMLInputElement)?.checked || false;
 
-  // ✅ 1번 이미지 텍스트 옵션 (풀오토)
-  const includeThumbnailText = (document.getElementById('full-auto-thumbnail-text') as HTMLInputElement)?.checked || false;
+  // ✅ [2026-01-28 FIX] 1번 이미지 텍스트 옵션 - localStorage 최우선
+  const includeThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true' ||
+    (document.getElementById('full-auto-thumbnail-text') as HTMLInputElement)?.checked ||
+    (document.getElementById('thumbnail-text-include') as HTMLInputElement)?.checked || false;
 
   // 고급 옵션들
   const enablePreview = (document.getElementById('full-auto-enable-preview') as HTMLInputElement)?.checked ?? true;
@@ -23274,6 +25118,10 @@ function collectFullAutoFormData(): any {
   const enableBackup = (document.getElementById('full-auto-enable-backup') as HTMLInputElement)?.checked ?? true;
   const contentTemplate = (document.getElementById('full-auto-content-template') as HTMLSelectElement)?.value || 'auto';
   const toneStyle = (document.getElementById('full-auto-tone-style') as HTMLSelectElement)?.value || 'professional';
+
+  // ✅ [2026-02-13] 키워드 제목 옵션 (풀오토)
+  const keywordAsTitle = (document.getElementById('fullauto-keyword-as-title') as HTMLInputElement)?.checked || false;
+  const keywordTitlePrefix = (document.getElementById('fullauto-keyword-title-prefix') as HTMLInputElement)?.checked || false;
 
   return {
     urls,
@@ -23291,7 +25139,10 @@ function collectFullAutoFormData(): any {
     autoOptimize,
     enableBackup,
     contentTemplate,
-    toneStyle
+    toneStyle,
+    // ✅ [2026-02-13] 키워드 제목 옵션
+    keywordAsTitle,
+    keywordTitlePrefix
   };
 }
 
@@ -23442,6 +25293,13 @@ async function executeFullAutoAutomation(formData: any): Promise<void> {
 
     // 3단계: 이미지 생성 (소제목 기반)
     updateProgress(45, '이미지 생성 시작...');
+
+    // ✅ [2026-02-01 FIX] 글생성 시 수집한 이미지를 formData에 전달하여 중복 크롤링 방지
+    if (structuredContent.collectedImages && structuredContent.collectedImages.length > 0) {
+      formData.collectedImages = structuredContent.collectedImages;
+      console.log(`[FullAuto] ✅ 크롤링 시 수집한 이미지 ${structuredContent.collectedImages.length}장을 이미지 생성에 전달`);
+    }
+
     const generatedImages = await generateImagesForContent(structuredContent, formData);
     updateProgress(70, '이미지 생성 완료');
     showUnifiedProgress(70, '이미지 생성 완료', '소제목에 맞는 이미지가 모두 생성되었습니다.');
@@ -23622,6 +25480,13 @@ async function displayContentInAllTabs(structuredContent: any) {
 
 // 3단계: 소제목 기반 이미지 생성
 async function generateImagesForContent(structuredContent: any, formData: any) {
+  // ✅ [2026-02-04 FIX] structuredContent가 undefined인 경우 안전 처리
+  if (!structuredContent) {
+    appendLog('⚠️ 구조화된 콘텐츠가 없어 이미지 생성을 건너뜁니다.');
+    console.warn('[FullAuto] structuredContent is undefined, skipping image generation');
+    return [];
+  }
+
   if (formData.skipImages) {
     appendLog('🚫 이미지 생성을 건너뜁니다.');
     console.log('[FullAuto] 이미지 생성 건너뜀');
@@ -23639,11 +25504,10 @@ async function generateImagesForContent(structuredContent: any, formData: any) {
   const sourceDisplayNames: Record<string, string> = {
     'pollinations': 'Pollinations (FLUX, 무료)',
     'nano-banana-pro': '나노 바나나 프로 (Gemini API 키, 과금 가능)',
-    'dalle': 'DALL-E 3 (OpenAI)',
-    'pexels': 'Pexels',
     'stability': 'Stability AI',
     'prodia': 'Prodia AI',
-    'library': '이미지 라이브러리'
+    'deepinfra': 'FLUX-2 (DeepInfra)',
+    'falai': 'Fal.ai FLUX',
   };
   appendLog(`📸 이미지 소스: ${sourceDisplayNames[formData.imageSource] || formData.imageSource}`);
 
@@ -23654,12 +25518,6 @@ async function generateImagesForContent(structuredContent: any, formData: any) {
   }
 
   let generatedImages: any[] = [];
-
-  // 이미지 라이브러리는 사용하지 않음 - DALL-E 또는 Pexels만 사용
-  if (formData.imageSource === 'library') {
-    appendLog('⚠️ 이미지 라이브러리는 지원하지 않습니다. DALL-E로 전환합니다.');
-    formData.imageSource = 'dalle';
-  }
 
   // DALL-E 또는 Pexels로만 이미지 생성
   generatedImages = await generateAIImagesForHeadings(headings, formData);
@@ -23709,17 +25567,34 @@ async function generateLibraryImagesForHeadings(headings: any[], formData: any) 
 
 // AI 이미지 생성 (소제목 기반 영어 프롬프트) - ✅ 병렬 처리로 속도 2-3배 향상
 async function generateAIImagesForHeadings(headings: any[], formData: any) {
-  // 이미지 소스 확인 및 로깅
-  const imageSource = formData.imageSource || 'nano-banana-pro'; // ✅ 기본값을 nano-banana-pro로 변경 (Gemini API 키 사용)
-  console.log(`[AI Images] 이미지 생성 시작 - 소스: ${imageSource}, 소제목 개수: ${headings.length}`);
+  // ✅ [2026-02-04 FIX] headings가 undefined이거나 배열이 아닌 경우 안전 처리
+  if (!headings || !Array.isArray(headings)) {
+    console.warn('[AI Images] headings is undefined or not an array, returning empty');
+    appendLog('⚠️ 소제목 정보가 없어 이미지 생성을 건너뜁니다.');
+    return [];
+  }
+
+  // ✅ [2026-01-27] 완전자동 이미지 설정에서 기본값 가져오기
+  const globalSettings = getGlobalImageSettings();
+
+  // 이미지 소스 확인 및 로깅 - formData 우선, 없으면 글로벌 설정 사용
+  const imageSource = formData.imageSource || globalSettings.imageSource;
+  const imageStyle = formData.imageStyle || globalSettings.imageStyle;
+  const imageRatio = formData.imageRatio || globalSettings.imageRatio;
+
+  console.log(`[AI Images] 이미지 생성 시작 - 소스: ${imageSource}, 스타일: ${imageStyle}, 비율: ${imageRatio}, 소제목 개수: ${headings.length}`);
+
 
   const sourceNames: Record<string, string> = {
     'pollinations': 'Pollinations (FLUX, 무료)',
-    'nano-banana-pro': '나노 바나나 프로 (Gemini API 키, 과금 가능)',
+    'nano-banana-pro': '나노 바나나 프로 (Gemini Native)',
     'prodia': 'Prodia (과금 가능)',
-    'dalle': 'DALL-E 3',
-    'pexels': 'Pexels',
-    'stability': 'Stability AI'
+    'stability': 'Stability AI',
+    'deepinfra': 'DeepInfra FLUX-2 (과금 가능)',
+    'deepinfra-flux': 'DeepInfra FLUX-2 (과금 가능)',
+    'falai': 'Fal.ai FLUX (과금 가능)',
+    'naver-search': '네이버 이미지 검색',
+    'naver': '네이버 이미지 검색',
   };
   appendLog(`🎨 ${sourceNames[imageSource] || imageSource}로 ${headings.length}개 이미지 생성 시작...`);
   // ✅ 비용/과금 위험 provider는 동시 요청을 막기 위해 순차 처리
@@ -23776,41 +25651,51 @@ async function generateAIImagesForHeadings(headings: any[], formData: any) {
     ? (formData.collectedImages || currentStructuredContent?.collectedImages || currentStructuredContent?.images || [])
     : [];
 
-  // ✅ [신규] 쇼핑커넥트인데 수집된 이미지가 없으면, affiliateLink에서 자동 수집
-  if (isShoppingConnect && collectedImages.length === 0 && formData.affiliateLink) {
-    appendLog(`🛒 쇼핑커넥트 모드: 제휴 링크에서 이미지 자동 수집 중...`);
-    console.log(`[AI Images] 🛒 affiliateLink에서 이미지 자동 수집 시작: ${formData.affiliateLink}`);
-
-    try {
-      const collectResult = await window.api.collectImagesFromShopping(formData.affiliateLink);
-      if (collectResult.success && collectResult.images && collectResult.images.length > 0) {
-        collectedImages = collectResult.images.map((img: any, idx: number) => ({
-          url: typeof img === 'string' ? img : (img.url || img.link || img.thumbnail || ''),
-          filePath: typeof img === 'string' ? img : (img.url || img.link || img.thumbnail || ''),
-          heading: headings[idx]?.title || `소제목 ${idx + 1}`,
-          headingIndex: idx
-        }));
-
-        // ✅ currentStructuredContent에도 저장 (다른 함수에서 참조용)
-        if (currentStructuredContent) {
-          (currentStructuredContent as any).images = collectedImages;
-          (currentStructuredContent as any).collectedImages = collectedImages;
-        }
-
-        appendLog(`✅ 제휴 링크에서 ${collectedImages.length}개 이미지 자동 수집 완료!`);
-        console.log(`[AI Images] ✅ affiliateLink 이미지 수집 완료: ${collectedImages.length}개`);
-      } else {
-        appendLog(`⚠️ 제휴 링크에서 이미지를 찾을 수 없습니다. AI 생성으로 진행합니다.`);
-        console.warn(`[AI Images] ⚠️ affiliateLink 이미지 수집 실패:`, collectResult.message);
-      }
-    } catch (err) {
-      appendLog(`⚠️ 이미지 자동 수집 실패: ${(err as Error).message}`);
-      console.warn(`[AI Images] ⚠️ affiliateLink 이미지 수집 오류:`, err);
-    }
+  // ✅ [2026-02-01 FIX] 글 생성 시 수집한 이미지가 있으면 재크롤링 건너뛰기
+  // 재크롤링은 시간 낭비이므로 완전히 제거
+  if (isShoppingConnect && collectedImages.length === 0) {
+    console.log(`[AI Images] ⚠️ 수집된 이미지 없음 - AI 생성으로 진행`);
+    appendLog(`⚠️ 수집된 이미지가 없습니다. AI 이미지 생성으로 진행합니다.`);
+    // 재크롤링 하지 않음! 이미지가 없으면 AI 생성으로 진행
+  } else if (isShoppingConnect && collectedImages.length > 0) {
+    console.log(`[AI Images] ✅ 글 생성 시 수집된 이미지 ${collectedImages.length}개 재사용 (재크롤링 안함)`);
   }
 
   if (isShoppingConnect && collectedImages.length > 0) {
     appendLog(`🛒 쇼핑 커넥트 모드: ${collectedImages.length}개 수집 이미지를 참조로 사용합니다.`);
+
+    // ✅ [2026-02-01] Gemini 3 기반 AI 이미지-소제목 의미적 매칭
+    if (collectedImages.length >= headings.length) {
+      try {
+        appendLog(`🎯 AI 이미지 매칭 중... (소제목에 맞는 이미지 자동 배치)`);
+        const headingTitles = headings.map((h: any) => h.title || h);
+        const imageUrls = collectedImages.map((img: any) =>
+          typeof img === 'string' ? img : (img.url || img.filePath || '')
+        );
+
+        const matchResult = await window.api.matchImagesToHeadings(imageUrls, headingTitles);
+
+        if (matchResult.success && matchResult.matches) {
+          // 매칭 결과에 따라 이미지 재정렬
+          const reorderedImages = matchResult.matches.map((imgIndex: number, headingIndex: number) => {
+            const originalImg = collectedImages[imgIndex] || collectedImages[headingIndex % collectedImages.length];
+            return {
+              ...(typeof originalImg === 'object' ? originalImg : { url: originalImg }),
+              heading: headingTitles[headingIndex],
+              headingIndex: headingIndex,
+              matchedByAI: true
+            };
+          });
+
+          collectedImages = reorderedImages;
+          appendLog(`✅ AI 매칭 완료: 소제목에 맞게 이미지가 재배치되었습니다!`);
+          console.log(`[AI Images] ✅ AI 매칭 결과:`, matchResult.matches);
+        }
+      } catch (matchError) {
+        console.warn(`[AI Images] ⚠️ AI 매칭 실패, 순차 배치 유지:`, matchError);
+        // 폴백: 기존 순차 배치 유지
+      }
+    }
   }
 
   const providerForLock = String(imageSource || '').trim() === 'pollinations' ? 'nano-banana-pro' : String(imageSource || '').trim();
@@ -23871,6 +25756,7 @@ async function generateAIImagesForHeadings(headings: any[], formData: any) {
         ref = await resolveReferenceImageForHeadingAsync(String(heading.title || heading || '').trim());
       }
 
+
       // ✅ [2026-01-23 NEW] 쇼핑커넥트: 썸네일 또는 AI생성 미사용 시 수집 이미지 직접 사용
       if (isShoppingConnect && collectedImages.length > 0) {
         const shouldUseCollectedImageDirectly = (i === 0) || !useAiImageChecked;
@@ -23909,12 +25795,14 @@ async function generateAIImagesForHeadings(headings: any[], formData: any) {
 
       // ✅ 일반 모드 또는 쇼핑커넥트+AI생성 활성화 시: AI 이미지 생성
       const imageResult = await generateImagesWithCostSafety({
-        provider: imageSource, // dalle 또는 pexels
+        provider: imageSource, // 이미지 생성 소스
         items: [{
           heading: heading.title,
           prompt: englishPrompt,
           isThumbnail: isThumbnail, // ✅ 첫 번째 소제목은 썸네일
           allowText: shouldIncludeText, // ✅ 쇼핑커넥트: 썸네일만 텍스트, 나머지는 텍스트 없음
+          imageStyle: imageStyle, // ✅ [2026-02-08 FIX] 스타일 명시적 전달 (테스트=실제 발행 동일 보장)
+          imageRatio: imageRatio, // ✅ [2026-02-08 FIX] 비율 명시적 전달
           ...ref, // ✅ 참조 이미지 적용
         }],
         postTitle: currentStructuredContent?.selectedTitle,
@@ -24208,7 +26096,7 @@ async function executeBlogPublishing(structuredContent: any, generatedImages: an
     autoGenerate: true,
     publishMode: formData.publishMode as 'draft' | 'publish' | 'schedule',
     scheduleDate: formData.publishMode === 'schedule' ? formData.scheduleDate : undefined,
-    scheduleType: formData.publishMode === 'schedule' ? (formData.scheduleType as 'app-schedule' | 'naver-server' || 'app-schedule') : undefined,
+    scheduleType: formData.publishMode === 'schedule' ? (formData.scheduleType as 'app-schedule' | 'naver-server' || 'naver-server') : undefined,
     toneStyle: formData.toneStyle as 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | undefined,
     postId: currentPostId || undefined, // ✅ 현재 글 ID 전달
     thumbnailPath: thumbnailPath, // ✅ 대표사진 경로 추가
@@ -25646,6 +27534,10 @@ async function initScheduleManagement(): Promise<void> {
                 const result = await window.api.retryScheduledPost(postId);
                 if (result.success) {
                   toastManager.success('✅ 발행이 완료되었습니다!');
+                  // ✅ [2026-01-29] 발행 완료 후 상태 초기화
+                  if (typeof (window as any).resetAfterPublish === 'function') {
+                    (window as any).resetAfterPublish();
+                  }
                   await loadScheduledPosts();
                 } else {
                   showErrorAlertModal('발행 재시도 실패', result.message || '알 수 없는 오류가 발생했습니다. 캡차 인증이 필요할 수 있습니다.');
@@ -25889,9 +27781,9 @@ async function checkAdminPermissions(): Promise<any> {
 }
 
 // ============================================
-// 환경 설정 모달 초기화
+// 가격 정보 모달 초기화 (✅ [2026-01-27] initSettingsModal과 충돌 방지로 이름 변경)
 // ============================================
-async function initSettingsModal(): Promise<void> {
+async function initPriceInfoModal(): Promise<void> {
   // ✅ 가격 정보 모달 열기/닫기 로직 추가
   const openPriceInfoBtn = document.getElementById('open-price-info-btn');
   const priceInfoModal = document.getElementById('price-info-modal');
@@ -26030,6 +27922,15 @@ async function initSettingsModal(): Promise<void> {
       stabilityApiKeyInput.value = config.stabilityApiKey || '';
       if (config.stabilityApiKey) {
         console.log('[Settings] Stability AI API 키 로드됨:', config.stabilityApiKey.substring(0, 10) + '...');
+      }
+    }
+
+    // ✅ [2026-01-26] DeepInfra API 키 로드
+    const deepinfraApiKeyInput = document.getElementById('deepinfra-api-key') as HTMLInputElement;
+    if (deepinfraApiKeyInput) {
+      deepinfraApiKeyInput.value = config.deepinfraApiKey || '';
+      if (config.deepinfraApiKey) {
+        console.log('[Settings] DeepInfra API 키 로드됨:', config.deepinfraApiKey.substring(0, 10) + '...');
       }
     }
 
@@ -26287,6 +28188,7 @@ async function initSettingsModal(): Promise<void> {
           naverAdCustomerId: naverAdCustomerIdInput?.value.trim() || undefined, // ✅ 네이버 광고 API
           stabilityApiKey: stabilityApiKeyInput?.value.trim() || undefined, // ✅ Stability AI API
           falaiApiKey: (document.getElementById('falai-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ Fal.ai API
+          deepinfraApiKey: (document.getElementById('deepinfra-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-01-26] DeepInfra API
           customImageSavePath: customImageSavePathInput?.value.trim() || undefined,
           primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-3-pro-preview', // ✅ Gemini 텍스트 주력 모델
           geminiPlanType: (document.querySelector('input[name="geminiPlanType"]:checked') as HTMLInputElement)?.value as 'free' | 'paid' || 'paid', // ✅ Gemini 이미지 플랜
@@ -26377,6 +28279,42 @@ async function initSettingsModal(): Promise<void> {
       } catch (error) {
         alert(`❌ 설정 저장 실패: ${(error as Error).message}`);
       }
+    });
+  }
+
+  // ✅ [2026-01-27] API 키 섹션 저장 버튼 - 기존 저장 로직 트리거
+  const apiKeysSaveBtn = document.getElementById('api-keys-save-btn');
+  if (apiKeysSaveBtn && saveSettingsBtn) {
+    apiKeysSaveBtn.addEventListener('click', () => {
+      console.log('[Settings] API 키 저장 버튼 클릭 - 기존 저장 로직 트리거');
+      saveSettingsBtn.click();
+    });
+  }
+
+  // ✅ [2026-01-27] AI 텍스트 엔진 저장 버튼
+  const textEngineSaveBtn = document.getElementById('text-engine-save-btn');
+  if (textEngineSaveBtn && saveSettingsBtn) {
+    textEngineSaveBtn.addEventListener('click', () => {
+      console.log('[Settings] AI 텍스트 엔진 저장 버튼 클릭');
+      saveSettingsBtn.click();
+    });
+  }
+
+  // ✅ [2026-01-27] 이미지 모델 저장 버튼
+  const imageModelSaveBtn = document.getElementById('image-model-save-btn');
+  if (imageModelSaveBtn && saveSettingsBtn) {
+    imageModelSaveBtn.addEventListener('click', () => {
+      console.log('[Settings] 이미지 모델 저장 버튼 클릭');
+      saveSettingsBtn.click();
+    });
+  }
+
+  // ✅ [2026-01-27] 이미지 경로 저장 버튼
+  const imagePathSaveBtn = document.getElementById('image-path-save-btn');
+  if (imagePathSaveBtn && saveSettingsBtn) {
+    imagePathSaveBtn.addEventListener('click', () => {
+      console.log('[Settings] 이미지 경로 저장 버튼 클릭');
+      saveSettingsBtn.click();
     });
   }
 
@@ -27342,9 +29280,11 @@ async function autoGenerateImagesAndPublish(structuredContent: any): Promise<voi
   try {
     appendLog('🎨 이미지 자동 생성을 시작합니다...');
 
+    // ✅ [2026-02-01 FIX] collectedImages 전달하여 중복 크롤링 방지
     const generatedImages = await generateImagesForContent(structuredContent, {
-      imageSource: 'dalle',
-      skipImages: false
+      imageSource: 'nano-banana-pro',
+      skipImages: false,
+      collectedImages: structuredContent?.collectedImages || structuredContent?.images || []
     });
 
     appendLog('📤 자동 발행을 시작합니다...');
@@ -27355,6 +29295,11 @@ async function autoGenerateImagesAndPublish(structuredContent: any): Promise<voi
 
     appendLog('🎉 자동 발행이 완료되었습니다!');
     alert('🎉 이미지 생성 및 발행이 자동으로 완료되었습니다!');
+
+    // ✅ [2026-01-29] 발행 완료 후 상태 초기화
+    if (typeof (window as any).resetAfterPublish === 'function') {
+      (window as any).resetAfterPublish();
+    }
 
   } catch (error) {
     appendLog(`❌ 자동 발행 실패: ${(error as Error).message}`);
@@ -27588,7 +29533,107 @@ function initImageManagementTab(): void {
     });
   });
 
+  // ✅ [2026-01-27] 드롭다운 이미지 소스 선택 핸들러
+  const imageSourceSelect = document.getElementById('image-source-select') as HTMLSelectElement;
+  const imageSourceInfoBadge = document.getElementById('image-source-info-badge');
+
+  if (imageSourceSelect) {
+    imageSourceSelect.addEventListener('change', async () => {
+      const selectedSource = imageSourceSelect.value;
+      const selectedOption = imageSourceSelect.options[imageSourceSelect.selectedIndex];
+
+      console.log(`[ImageSource] 드롭다운 선택: ${selectedSource}`);
+
+      // 나노 바나나 프로 선택 시 (Gemini API 과금 안내 필요)
+      // 드롭다운에서는 간단한 confirm으로 대체
+      if (selectedSource === 'nano-banana-pro') {
+        appendLog('✅ 나노 바나나 프로(Gemini 3)가 선택되었습니다. (Gemini API 사용)');
+      } else if (selectedSource === 'saved') {
+        const confirmed = window.confirm(
+          '⚠️ 저작권 경고\n\n' +
+          '저장된 이미지를 사용할 경우, 해당 이미지의 저작권 및 초상권 문제는 전적으로 사용자 본인이 책임져야 합니다.\n\n' +
+          '이미지 사용으로 인해 발생하는 모든 법적 책임은 사용자에게 있습니다.\n\n' +
+          '위 내용을 충분히 숙지하셨습니까?'
+        );
+
+        if (!confirmed) {
+          // 이전 선택으로 되돌리기 (나노 바나나 프로로)
+          imageSourceSelect.value = 'nano-banana-pro';
+          appendLog('⚠️ 저장된 이미지 사용이 취소되었습니다.');
+          return;
+        }
+        await showLocalImageManagementModal();
+        appendLog('✅ 저장된 이미지 모드가 선택되었습니다.');
+      } else if (selectedSource === 'deepinfra') {
+        appendLog('✅ DeepInfra(FLUX-2, $0.01/장)가 선택되었습니다.');
+      } else if (selectedSource === 'pollinations') {
+        appendLog('✅ Pollinations(FLUX, 무료)가 선택되었습니다.');
+      } else if (selectedSource === 'falai') {
+        appendLog('✅ Fal.ai(FLUX Schnell)가 선택되었습니다.');
+      } else if (selectedSource === 'prodia') {
+        appendLog('✅ Prodia($0.0025/장)가 선택되었습니다.');
+      } else if (selectedSource === 'stability') {
+        appendLog('✅ Stability AI(고품질)가 선택되었습니다.');
+      }
+
+      // ✅ [2026-02-13 ROOT CAUSE FIX] globalImageSource/fullAutoImageSource에는 AI 엔진만 저장
+      // 'saved'는 AI 엔진이 아님 → 별도 키에 저장하고, AI 엔진 설정은 오염시키지 않음
+      (window as any).globalImageSource = selectedSource;
+      if (selectedSource !== 'saved') {
+        localStorage.setItem('globalImageSource', selectedSource);
+        // ✅ [2026-02-13 FIX] fullAutoImageSource도 항상 동기화
+        // 이전: 미설정일 때만 동기화 → 이전에 deepinfra로 설정된 후 nano-banana-pro로 변경해도 반영 안 됨
+        // 변경: AI 엔진 변경 시 항상 fullAutoImageSource도 함께 업데이트
+        localStorage.setItem('fullAutoImageSource', selectedSource);
+        console.log(`[Renderer] 🔄 fullAutoImageSource 동기화: "${selectedSource}"`);
+      } else {
+        // 'saved' 모드는 별도 키에 저장 (AI 엔진 설정을 오염시키지 않음)
+        localStorage.setItem('imageSourceMode', 'saved');
+        console.log(`[Renderer] 📁 저장된 이미지 모드 활성화 (AI 엔진 설정 유지: "${localStorage.getItem('globalImageSource') || 'nano-banana-pro'}")`);
+      }
+
+      // Stability AI 모델 선택 UI 표시/숨김
+      const stabilityModelContainer = document.getElementById('stability-model-selection-container');
+      if (stabilityModelContainer) {
+        if (selectedSource === 'stability') {
+          stabilityModelContainer.style.display = 'block';
+          stabilityModelContainer.style.animation = 'fadeIn 0.3s ease-out';
+        } else {
+          stabilityModelContainer.style.display = 'none';
+        }
+      }
+
+      // 배지 업데이트 - 소스별 색상
+      if (imageSourceInfoBadge) {
+        const colorMap: Record<string, string> = {
+          'nano-banana-pro': 'linear-gradient(135deg, #03c75a, #02a94f)',
+          'deepinfra': 'linear-gradient(135deg, #fb923c, #f97316)',
+          'falai': 'linear-gradient(135deg, #ec4899, #db2777)',
+          'pollinations': 'linear-gradient(135deg, #f472b6, #ec4899)',
+          'prodia': 'linear-gradient(135deg, #a855f7, #8b5cf6)',
+          'stability': 'linear-gradient(135deg, #3b82f6, #2563eb)',
+          'saved': 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+        };
+        imageSourceInfoBadge.style.background = colorMap[selectedSource] || colorMap['nano-banana-pro'];
+      }
+    });
+
+    // 초기화: 저장된 설정 복원
+    const savedSource = localStorage.getItem('globalImageSource');
+    if (savedSource && imageSourceSelect.querySelector(`option[value="${savedSource}"]`)) {
+      imageSourceSelect.value = savedSource;
+      (window as any).globalImageSource = savedSource;
+
+      // Stability 모델 선택 UI 초기 표시 여부
+      const stabilityModelContainer = document.getElementById('stability-model-selection-container');
+      if (stabilityModelContainer) {
+        stabilityModelContainer.style.display = savedSource === 'stability' ? 'block' : 'none';
+      }
+    }
+  }
+
   // ✅ [Fix] 이미지 관리 탭 초기 진입 시 기존 이미지 그리드 즉시 렌더링
+
   // 페이지 로드 시점이나 탭 전환 시점에 실행됨
   setTimeout(() => {
     const existingImages = (window as any).imageManagementGeneratedImages || generatedImages || [];
@@ -27801,13 +29846,15 @@ function initHeadingImageGeneration(): void {
         appendLog(`🎨 ${headingsToGenerate.length}개 소제목의 이미지 생성 시작... (전체 ${selectedHeadings.length}개 중)`);
 
         const selectedBtn = (document.querySelector('.image-source-btn.selected') || document.querySelector('.unified-img-source-btn.selected')) as HTMLButtonElement;
-        const provider = (selectedBtn?.dataset.source || 'nano-banana-pro') as 'dalle' | 'pexels' | 'nano-banana-pro' | 'prodia' | 'stability';
+        const provider = (selectedBtn?.dataset.source || 'nano-banana-pro') as 'nano-banana-pro' | 'prodia' | 'stability' | 'deepinfra' | 'falai' | 'pollinations';
 
         const result = await generateImagesWithCostSafety({
           provider,
           items: headingsToGenerate.map(h => ({
             heading: h.title,
-            prompt: h.imagePrompt,
+            // ✅ [2026-01-29 FIX] 영어 프롬프트 사용 (반자동과 동일하게)
+            prompt: generateEnglishPromptForHeadingSync(h.title || ''),
+            englishPrompt: generateEnglishPromptForHeadingSync(h.title || ''), // ✅ DeepInfra용
             referenceImagePath: h.referenceImagePath, // ✅ 참조 이미지 경로 전달
             referenceImageUrl: h.referenceImageUrl,   // ✅ 참조 이미지 URL 전달
           })),
@@ -28071,6 +30118,242 @@ function initHeadingImageGeneration(): void {
     }
   }
 
+  // ✅ [2026-02-02] 이미지 소스 한글 이름 매핑
+  const imageSourceNames: Record<string, string> = {
+    'nano-banana-pro': '나노 바나나 프로 (Gemini)',
+    'deepinfra': 'DeepInfra (FLUX-2-dev)',
+    'deepinfra-flux': 'DeepInfra (FLUX-2-dev)',
+    'stability': 'Stability AI',
+    'prodia': 'Prodia',
+    'falai': 'Fal.ai',
+    'fal-ai': 'Fal.ai',
+    'pollinations': 'Pollinations',
+    'naver': '네이버 이미지 검색',
+    'naver-search': '네이버 이미지 검색',
+  };
+
+  // ✅ [2026-02-02] 실시간 이미지 미리보기 패널 (Live Preview)
+  const liveImagePreview = {
+    panel: null as HTMLElement | null,
+    mainPreview: null as HTMLImageElement | null,
+    grid: null as HTMLElement | null,
+    logArea: null as HTMLElement | null,
+    progressText: null as HTMLElement | null,
+    items: [] as Array<{ status: 'pending' | 'generating' | 'completed' | 'failed'; url?: string; heading: string }>,
+    sourceLabel: '',
+
+    // 패널 생성 및 표시
+    show(headings: any[], sourceLabel: string) {
+      this.sourceLabel = sourceLabel;
+      this.items = headings.map((h: any) => ({
+        status: 'pending' as const,
+        heading: String(h.title || '').trim(),
+        url: undefined,
+      }));
+
+      // 기존 패널 제거
+      this.hide();
+
+      const panel = document.createElement('div');
+      panel.id = 'live-image-preview-panel';
+      panel.style.cssText = `
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.85); z-index: 99999;
+        display: flex; flex-direction: column; padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      `;
+
+      panel.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h2 id="live-preview-title" style="color: white; margin: 0; font-size: 1.3rem;">
+            🎨 이미지 생성 중... (0/${this.items.length})
+          </h2>
+          <button id="live-preview-close" style="background: #ef4444; color: white; border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer; font-weight: bold;">
+            ✕ 닫기
+          </button>
+        </div>
+        <div style="color: #a1a1aa; margin-bottom: 16px; font-size: 0.9rem;">
+          ${sourceLabel}로 생성 중
+        </div>
+        
+        <!-- ✅ [2026-02-02] 좌우 배치: 왼쪽 큰 이미지, 오른쪽 그리드+로그 -->
+        <div style="flex: 1; display: flex; gap: 20px; overflow: hidden; min-height: 0;">
+          
+          <!-- 왼쪽: 메인 미리보기 영역 -->
+          <div style="flex: 0 0 350px; display: flex; flex-direction: column;">
+            <div id="live-main-preview-container" style="width: 350px; height: 350px; background: #27272a; border-radius: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px solid #3f3f46;">
+              <div style="color: #71717a; text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 8px;">🖼️</div>
+                <div>이미지 생성 대기 중...</div>
+              </div>
+            </div>
+            <div style="margin-top: 12px; padding: 10px; background: #27272a; border-radius: 8px; text-align: center;">
+              <button id="btn-main-image-settings" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer; font-weight: bold; width: 100%;">
+                ⚙️ 메인 풀오토 이미지 설정
+              </button>
+            </div>
+          </div>
+          
+          <!-- 오른쪽: 그리드 + 로그 영역 -->
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 12px; min-height: 0;">
+            
+            <!-- 그리드 미리보기 영역 -->
+            <div style="flex: 0 0 auto;">
+              <div style="color: #a1a1aa; font-size: 0.85rem; margin-bottom: 8px;">📸 이미지 미리보기 (클릭하여 크게 보기)</div>
+              <div id="live-image-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; max-height: 120px; overflow-y: auto; padding: 8px; background: #18181b; border-radius: 8px;">
+                ${this.items.map((item, i) => `
+                  <div class="live-grid-item" data-index="${i}" style="aspect-ratio: 1; background: #27272a; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #3f3f46; position: relative; overflow: hidden;">
+                    <span style="color: #71717a; font-size: 1.2rem;">⏳</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            
+            <!-- ✅ 텍스트 포함 체크박스 -->
+            <div style="flex: 0 0 auto; padding: 10px; background: #27272a; border-radius: 8px;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: white;">
+                <input type="checkbox" id="live-text-overlay-checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                <span>🔤 <strong>1번 이미지에 제목 텍스트 포함</strong> (썸네일용)</span>
+              </label>
+            </div>
+            
+            <!-- 로그 영역 (더 넓게) -->
+            <div style="flex: 1; min-height: 150px; overflow: hidden; display: flex; flex-direction: column;">
+              <div style="color: #a1a1aa; font-size: 0.85rem; margin-bottom: 8px;">📋 진행 로그</div>
+              <div id="live-preview-log" style="flex: 1; background: #18181b; border-radius: 8px; padding: 12px; overflow-y: auto; font-family: monospace; font-size: 0.85rem; color: #d4d4d8; line-height: 1.5;">
+                <div>⏳ 이미지 생성을 시작합니다...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(panel);
+      this.panel = panel;
+      this.grid = panel.querySelector('#live-image-grid');
+      this.logArea = panel.querySelector('#live-preview-log');
+      this.progressText = panel.querySelector('#live-preview-title');
+
+      // 닫기 버튼 이벤트
+      panel.querySelector('#live-preview-close')?.addEventListener('click', () => this.hide());
+
+      // 그리드 아이템 클릭 이벤트
+      this.grid?.addEventListener('click', (e) => {
+        const item = (e.target as HTMLElement).closest('.live-grid-item') as HTMLElement;
+        if (item) {
+          const index = parseInt(item.dataset.index || '0', 10);
+          const data = this.items[index];
+          if (data?.url) {
+            this.setMainPreview(data.url, data.heading);
+          }
+        }
+      });
+
+      // ESC 키로 닫기
+      const escHandler = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          this.hide();
+          document.removeEventListener('keydown', escHandler);
+        }
+      };
+      document.addEventListener('keydown', escHandler);
+    },
+
+    // 패널 숨기기
+    hide() {
+      const existing = document.getElementById('live-image-preview-panel');
+      if (existing) {
+        existing.remove();
+      }
+      this.panel = null;
+      this.grid = null;
+      this.logArea = null;
+      this.mainPreview = null;
+      this.progressText = null;
+    },
+
+    // 메인 미리보기 이미지 설정
+    setMainPreview(url: string, heading: string) {
+      const container = document.getElementById('live-main-preview-container');
+      if (container) {
+        container.innerHTML = `
+          <img src="${url}" alt="${heading}" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
+        `;
+      }
+    },
+
+    // 그리드 아이템 업데이트
+    updateItem(index: number, status: 'pending' | 'generating' | 'completed' | 'failed', url?: string) {
+      if (index >= this.items.length) return;
+
+      this.items[index].status = status;
+      if (url) this.items[index].url = url;
+
+      const gridItem = this.grid?.querySelector(`[data-index="${index}"]`) as HTMLElement;
+      if (!gridItem) return;
+
+      if (status === 'generating') {
+        gridItem.style.border = '2px solid #3b82f6';
+        gridItem.innerHTML = `<span style="color: #3b82f6; font-size: 1.2rem;" class="spin-animation">⚡</span>`;
+      } else if (status === 'completed' && url) {
+        gridItem.style.border = '2px solid #22c55e';
+        gridItem.innerHTML = `
+          <img src="${url}" style="width: 100%; height: 100%; object-fit: cover;">
+          <span style="position: absolute; bottom: 2px; right: 2px; background: #22c55e; color: white; border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 0.6rem;">✓</span>
+        `;
+        // 첫 번째 완료된 이미지를 자동으로 메인 미리보기에 표시
+        const completedCount = this.items.filter(i => i.status === 'completed').length;
+        if (completedCount === 1) {
+          this.setMainPreview(url, this.items[index].heading);
+        }
+      } else if (status === 'failed') {
+        gridItem.style.border = '2px solid #ef4444';
+        gridItem.innerHTML = `<span style="color: #ef4444; font-size: 1.2rem;">✕</span>`;
+      }
+
+      // 진행률 업데이트
+      const completed = this.items.filter(i => i.status === 'completed' || i.status === 'failed').length;
+      if (this.progressText) {
+        this.progressText.textContent = `🎨 이미지 생성 중... (${completed}/${this.items.length})`;
+      }
+    },
+
+    // 로그 추가
+    addLog(message: string) {
+      if (this.logArea) {
+        const logEntry = document.createElement('div');
+        logEntry.textContent = message;
+        logEntry.style.marginBottom = '4px';
+        this.logArea.appendChild(logEntry);
+        this.logArea.scrollTop = this.logArea.scrollHeight;
+      }
+    },
+
+    // 완료 상태로 전환
+    complete(successCount: number, failCount: number) {
+      if (this.progressText) {
+        this.progressText.innerHTML = `✅ 이미지 생성 완료! (성공: ${successCount}개${failCount > 0 ? `, 실패: ${failCount}개` : ''})`;
+      }
+      this.addLog(`🎉 총 ${successCount}개 이미지 생성 완료!`);
+    }
+  };
+
+  // CSS 애니메이션 추가 (스피너)
+  if (!document.getElementById('live-preview-styles')) {
+    const style = document.createElement('style');
+    style.id = 'live-preview-styles';
+    style.textContent = `
+      @keyframes spin-pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.8); }
+      }
+      .spin-animation {
+        animation: spin-pulse 0.8s ease-in-out infinite;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   // 이미지 생성 버튼 이벤트
   const generateImagesBtnMain = document.getElementById('generate-images-btn') as HTMLButtonElement;
 
@@ -28081,27 +30364,19 @@ function initHeadingImageGeneration(): void {
       return;
     }
 
+
     const selectedSource = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
-    const imageSource = selectedSource?.dataset.source || 'dalle';
+    // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
+    const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
+    const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-pro';
+    console.log(`[ImageGeneration] 이미지 소스: ${imageSource} (드롭다운: ${dropdownSource || '없음'}, 버튼: ${selectedSource?.dataset.source || '없음'})`);
 
     try {
       generateImagesBtnMain.disabled = true;
       generateImagesBtnMain.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>생성 중...</span>';
 
-      // ✅ 고급 진행률 모달 표시(로그 동기화)
-      aiProgressModal.show('이미지 생성 중...', {
-        autoAnimate: false,
-        icon: '🎨',
-        initialLog: '⏳ 이미지 생성을 시작합니다...',
-      });
-
       // 진행률 표시 시작
-      showImagesProgress(0, '이미지 생성 준비 중...', '소제목 분석 완료, 이미지 병렬 생성 시작');
-      appendLog('🎨 이미지를 병렬로 생성하는 중입니다... ⚡', 'images-log-output');
-      appendLog('⚡ 병렬 처리로 속도 2-3배 향상!', 'images-log-output');
-      aiProgressModal.update(0, '이미지 생성 준비 중...');
-      aiProgressModal.addLog('🎨 이미지를 병렬로 생성하는 중입니다... ⚡');
-      aiProgressModal.addLog('⚡ 병렬 처리로 속도 2-3배 향상!');
+      const sourceLabel = imageSourceNames[imageSource] || imageSource;
 
       // ✅ [2026-01-21] 썸네일/마무리 제외 - 일반 소제목만 AI 이미지 생성
       // 썸네일: 수집된 이미지 사용, 마무리: 이미지 불필요
@@ -28117,14 +30392,23 @@ function initHeadingImageGeneration(): void {
 
       if (filteredHeadings.length === 0) {
         appendLog('⚠️ AI 이미지를 생성할 소제목이 없습니다. (썸네일/마무리 제외됨)', 'images-log-output');
-        aiProgressModal.hide();
         generateImagesBtnMain.disabled = false;
         generateImagesBtnMain.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>AI 이미지 생성</span>';
         return;
       }
 
+      // ✅ [2026-02-02] 실시간 이미지 미리보기 패널 표시
+      liveImagePreview.show(filteredHeadings, sourceLabel);
+      liveImagePreview.addLog(`🎨 ${sourceLabel}로 이미지 생성 시작...`);
+      liveImagePreview.addLog('⚡ 병렬 처리로 속도 2-3배 향상!');
+
+      showImagesProgress(0, '이미지 생성 준비 중...', '소제목 분석 완료, 이미지 병렬 생성 시작');
+      appendLog(`🎨 선택된 이미지 소스: ${sourceLabel}`, 'images-log-output');
+      appendLog('🎨 이미지를 병렬로 생성하는 중입니다... ⚡', 'images-log-output');
+      appendLog('⚡ 병렬 처리로 속도 2-3배 향상!', 'images-log-output');
+
       appendLog(`📋 ${headings.length}개 섹션 중 ${filteredHeadings.length}개 소제목 이미지 생성 (썸네일/마무리 제외)`, 'images-log-output');
-      aiProgressModal.addLog(`📋 ${filteredHeadings.length}개 소제목 대상 (썸네일/마무리 제외)`);
+      liveImagePreview.addLog(`📋 ${filteredHeadings.length}개 소제목 대상 (썸네일/마무리 제외)`);
 
       // ✅ 병렬 처리: 각 소제목별로 이미지 동시 생성
       const totalHeadings = filteredHeadings.length;
@@ -28179,14 +30463,18 @@ function initHeadingImageGeneration(): void {
                   successCount++;
                   const progress = Math.floor(((i + 1) / totalHeadings) * 100);
                   showImagesProgress(progress, `이미지 생성 중... (${i + 1}/${totalHeadings})`, `"${heading.title}" 완료`);
-                  aiProgressModal.update(progress, `이미지 생성 중... (${i + 1}/${totalHeadings})`);
-                  aiProgressModal.addLog(`✅ [${i + 1}/${totalHeadings}] ${String(heading.title || '').substring(0, 25)}... 완료`);
+
+                  // ✅ [2026-02-02] 실시간 미리보기 업데이트
+                  liveImagePreview.updateItem(i, 'completed', imageUrl);
+                  liveImagePreview.addLog(`✅ [${i + 1}/${totalHeadings}] ${String(heading.title || '').substring(0, 25)}... 완료`);
                 } else {
                   failCount++;
-                  aiProgressModal.addLog(`⚠️ [${i + 1}/${totalHeadings}] ${String(heading.title || '').substring(0, 25)}... 이미지 없음`);
+                  liveImagePreview.updateItem(i, 'failed');
+                  liveImagePreview.addLog(`⚠️ [${i + 1}/${totalHeadings}] ${String(heading.title || '').substring(0, 25)}... 이미지 없음`);
                 }
               } else {
                 failCount++;
+                liveImagePreview.updateItem(i, 'failed');
               }
             }
 
@@ -28194,9 +30482,9 @@ function initHeadingImageGeneration(): void {
             if (successCount > 0) {
               showImagesProgress(100, '이미지 생성 완료', `성공 ${successCount}개${failCount > 0 ? `, 실패 ${failCount}개` : ''}`);
               appendLog(`🎉 총 ${successCount}개 이미지 생성 완료!${failCount > 0 ? ` (${failCount}개 실패)` : ''}`, 'images-log-output');
-              aiProgressModal.update(100, '이미지 생성 완료');
-              aiProgressModal.addLog(`🎉 성공: ${successCount}개${failCount > 0 ? `, 실패: ${failCount}개` : ''}`);
-              updatePromptItemsWithImages(imageResult.images.filter((img: any) => img && (img.previewDataUrl || img.filePath)));
+              liveImagePreview.complete(successCount, failCount);
+              const generatedImages = imageResult.images.filter((img: any) => img && (img.previewDataUrl || img.filePath));
+              updatePromptItemsWithImages(generatedImages);
             } else {
               throw new Error('모든 이미지 생성 실패');
             }
@@ -28205,7 +30493,7 @@ function initHeadingImageGeneration(): void {
           }
         } catch (batchError) {
           appendLog(`❌ 배치 이미지 생성 실패: ${(batchError as Error).message}`, 'images-log-output');
-          aiProgressModal.addLog(`❌ 실패: ${(batchError as Error).message}`);
+          liveImagePreview.addLog(`❌ 실패: ${(batchError as Error).message}`);
         }
 
         generateImagesBtnMain.disabled = false;
@@ -28217,33 +30505,37 @@ function initHeadingImageGeneration(): void {
       // ✅ 비용/과금 위험 provider는 동시 요청을 막기 위해 순차 처리 (nano-banana-pro 제외)
       try {
         const providerForLock =
-          imageSource === 'dalle' || imageSource === 'imagen4'
-            ? 'imagen4'
-            : imageSource === 'prodia'
-              ? 'prodia'
-              : imageSource === 'stability'
-                ? 'stability'
-                : '';
+          imageSource === 'prodia'
+            ? 'prodia'
+            : imageSource === 'stability'
+              ? 'stability'
+              : imageSource === 'deepinfra' || imageSource === 'deepinfra-flux'
+                ? 'deepinfra'
+                : imageSource === 'falai'
+                  ? 'falai'
+                  : '';
         const sequential = providerForLock ? isCostRiskImageProvider(providerForLock) : false;
         if (sequential) {
           showImagesProgress(0, '이미지 생성 준비 중...', '소제목 분석 완료, 순차 생성 시작');
           appendLog(`⏳ ${getCostRiskProviderLabel(providerForLock)} 보호를 위해 순차 처리로 생성합니다.`, 'images-log-output');
-          aiProgressModal.addLog(`⏳ ${getCostRiskProviderLabel(providerForLock)} 보호를 위해 순차 처리로 생성합니다.`);
+          liveImagePreview.addLog(`⏳ ${getCostRiskProviderLabel(providerForLock)} 보호를 위해 순차 처리로 생성합니다.`);
         }
       } catch {
         // ignore
       }
 
       const providerForLock =
-        imageSource === 'dalle' || imageSource === 'imagen4'
-          ? 'imagen4'
-          : imageSource === 'pollinations' || imageSource === 'nano-banana-pro'
-            ? 'nano-banana-pro'
-            : imageSource === 'prodia'
-              ? 'prodia'
-              : imageSource === 'stability'
-                ? 'stability'
-                : '';
+        imageSource === 'pollinations' || imageSource === 'nano-banana-pro'
+          ? 'nano-banana-pro'
+          : imageSource === 'prodia'
+            ? 'prodia'
+            : imageSource === 'stability'
+              ? 'stability'
+              : imageSource === 'deepinfra' || imageSource === 'deepinfra-flux'
+                ? 'deepinfra'
+                : imageSource === 'falai'
+                  ? 'falai'
+                  : '';
       const shouldRunSequentially = providerForLock ? isCostRiskImageProvider(providerForLock) : false;
 
       const generateOne = async (heading: any, i: number): Promise<any | null> => {
@@ -28255,27 +30547,7 @@ function initHeadingImageGeneration(): void {
 
           let imageUrl: string;
 
-          if (imageSource === 'dalle' || imageSource === 'imagen4') {
-            // ✅ Imagen4/DALL-E: IPC 통해 메인 프로세스에서 생성 (풀오토와 동일)
-            const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
-            const imageResult = await generateImagesWithCostSafety({
-              provider: imageSource === 'dalle' ? 'imagen4' : 'imagen4',
-              items: [{
-                heading: heading.title,
-                prompt: heading.prompt,
-                isThumbnail: isThumbnail,
-                allowText: isThumbnail,
-                ...ref,
-              }],
-              postTitle: blogTitle,
-              isFullAuto: true // ✅ 풀오토 모드로 처리
-            });
-            if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-              imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-            } else {
-              throw new Error(imageResult.message || 'Imagen4 이미지 생성 실패');
-            }
-          } else if (imageSource === 'pollinations' || imageSource === 'nano-banana-pro') {
+          if (imageSource === 'pollinations' || imageSource === 'nano-banana-pro') {
             // ✅ 선택된 소스(Pollinations 또는 Nano Banana Pro) 사용
             const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
             const imageResult = await generateImagesWithCostSafety({
@@ -28356,6 +30628,26 @@ function initHeadingImageGeneration(): void {
             } else {
               throw new Error(imageResult.message || 'Fal.ai 이미지 생성 실패');
             }
+          } else if (imageSource === 'deepinfra' || imageSource === 'deepinfra-flux') {
+            // ✅ [2026-02-02] DeepInfra FLUX-2: 가성비 좋은 이미지 생성
+            const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
+            const imageResult = await generateImagesWithCostSafety({
+              provider: 'deepinfra',
+              items: [{
+                heading: heading.title,
+                prompt: heading.prompt,
+                isThumbnail: isThumbnail,
+                allowText: isThumbnail,
+                ...ref,
+              }],
+              postTitle: blogTitle,
+              isFullAuto: true,
+            });
+            if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
+              imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
+            } else {
+              throw new Error(imageResult.message || 'DeepInfra 이미지 생성 실패');
+            }
           } else if (imageSource === 'naver-search' || imageSource === 'naver') {
             // ✅ 네이버 이미지 검색: 사용자가 명시적으로 선택한 경우에만 사용
             imageUrl = await searchNaverImage(heading.prompt);
@@ -28388,8 +30680,9 @@ function initHeadingImageGeneration(): void {
           const currentProgress = Math.floor((completedCount / totalHeadings) * headingProgressMax);
           showImagesProgress(currentProgress, `이미지 생성 중... (${completedCount}/${totalHeadings})`, `"${heading.title}" 이미지 생성 완료`);
           appendLog(`✅ [${completedCount}/${totalHeadings}] 이미지 생성 완료`, 'images-log-output');
-          aiProgressModal.update(currentProgress, `이미지 생성 중... (${completedCount}/${totalHeadings})`);
-          aiProgressModal.addLog(`✅ [${completedCount}/${totalHeadings}] ${String(heading.title || '').trim()} 완료`);
+          // ✅ [2026-02-02] 실시간 미리보기 업데이트
+          liveImagePreview.updateItem(i, 'completed', imageUrl);
+          liveImagePreview.addLog(`✅ [${completedCount}/${totalHeadings}] ${String(heading.title || '').trim()} 완료`);
 
           return {
             url: imageUrl,
@@ -28402,8 +30695,9 @@ function initHeadingImageGeneration(): void {
           const currentProgress = Math.floor((completedCount / totalHeadings) * 100);
           appendLog(`❌ [${completedCount}/${totalHeadings}] 이미지 생성 실패: ${(error as Error).message}`, 'images-log-output');
           showImagesProgress(currentProgress, `이미지 생성 중... (${completedCount}/${totalHeadings})`, `"${heading.title}" 이미지 생성 실패`);
-          aiProgressModal.update(currentProgress, `이미지 생성 중... (${completedCount}/${totalHeadings})`);
-          aiProgressModal.addLog(`❌ [${completedCount}/${totalHeadings}] ${String(heading.title || '').trim()} 실패: ${(error as Error).message}`);
+          // ✅ [2026-02-02] 실시간 미리보기 업데이트
+          liveImagePreview.updateItem(i, 'failed');
+          liveImagePreview.addLog(`❌ [${completedCount}/${totalHeadings}] ${String(heading.title || '').trim()} 실패: ${(error as Error).message}`);
           return null;
         }
       };
@@ -28441,9 +30735,6 @@ function initHeadingImageGeneration(): void {
 
       const generatedImages = normalizedImages;
 
-      const allImagesForManagement = normalizedImages;
-      (window as any).imageManagementGeneratedImages = allImagesForManagement;
-
       // ✅ 소제목 정보도 동기화 (썸네일/발행에서 인덱스 매칭 안정화)
       ImageManager.setHeadings(filteredHeadings);
 
@@ -28456,34 +30747,27 @@ function initHeadingImageGeneration(): void {
           });
         }
       });
+      // ✅ [2026-02-12 P1 FIX #5] 직접 할당 → syncGlobalImagesFromImageManager
+      try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
 
       // ✅ 영어 프롬프트 이미지 미리보기 업데이트
       updatePromptItemsWithImages(normalizedImages);
 
-      const totalCount = (allImagesForManagement || []).length;
+      const successCount = generatedImages.length;
+      const failCount = totalHeadings - successCount;
+      const totalCount = (normalizedImages || []).length;
       showImagesProgress(100, '이미지 생성 완료', totalCount > 0 ? `소제목 이미지 ${totalCount}개 준비 완료` : '이미지 생성 완료');
-      aiProgressModal.update(100, '✅ 이미지 생성 완료!');
-      aiProgressModal.addLog('🎉 이미지 생성이 완료되었습니다.');
+
+      // ✅ [2026-02-02] 실시간 미리보기 완료
+      liveImagePreview.complete(successCount, failCount);
 
       appendLog(`🎉 총 ${generatedImages.length}개의 소제목 이미지가 생성되었습니다!`, 'images-log-output');
       appendLog(`💾 이미지가 저장되었습니다. 반자동 발행 시 자동으로 삽입됩니다.`, 'images-log-output');
-      aiProgressModal.addLog(`🎉 총 ${generatedImages.length}개의 소제목 이미지가 생성되었습니다!`);
-      aiProgressModal.addLog('💾 이미지가 저장되었습니다.');
-
-      aiProgressModal.complete(true, {
-        successTitle: '이미지 생성 완료!',
-        successIcon: '✅',
-        successLog: '🎉 이미지 생성 완료!'
-      });
 
     } catch (error) {
       appendLog(`❌ 이미지 생성 실패: ${(error as Error).message}`, 'images-log-output');
       alert(`❌ 이미지 생성 실패: ${(error as Error).message}`);
-      aiProgressModal.complete(false, {
-        failureTitle: '이미지 생성 실패',
-        failureIcon: '❌',
-        failureLog: `❌ 이미지 생성 실패: ${(error as Error).message}`,
-      });
+      liveImagePreview.addLog(`❌ 이미지 생성 실패: ${(error as Error).message}`);
     } finally {
       if (generateImagesBtnMain) {
         generateImagesBtnMain.disabled = false;
@@ -28528,7 +30812,10 @@ function initHeadingImageGeneration(): void {
       }
 
       const selectedSource = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
-      const imageSource = selectedSource?.dataset.source || 'nano-banana-pro';
+      // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
+      const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
+      const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-pro';
+      console.log(`[ImageGeneration] 남은 이미지 소스: ${imageSource}`);
 
       try {
         generateRemainingImagesBtn.disabled = true;
@@ -28702,6 +30989,10 @@ function initHeadingImageGeneration(): void {
               url: image.url
             });
           }
+
+          // ✅ [2026-02-12 FIX] 수집 후 ImageManager→전역변수 동기화 (누락 수정)
+          syncGlobalImagesFromImageManager();
+          try { ImageManager.syncAllPreviews(); } catch { /* ignore */ }
 
           // ✅ 영어 프롬프트 이미지 미리보기 업데이트
           const allImages = (window as any).imageManagementGeneratedImages || [];
@@ -29013,16 +31304,23 @@ function initHeadingImageGeneration(): void {
         const searchPromises = optimizedQueries.slice(0, targetCount).map(async (q, i) => {
           const heading = q.heading;
 
-          // 1번 소제목(썸네일)이고 URL 이미지가 있으면 URL 이미지 우선 사용
-          if (i === 0 && urlImages.length > 0) {
+          // ✅ [2026-01-29 FIX] 모든 소제목에 크롤링 이미지 순환 배분 (img2img 참조용)
+          // 크롤링 이미지가 소제목보다 적으면 순환하여 재사용
+          const referenceImageUrl = urlImages.length > 0
+            ? urlImages[i % urlImages.length]
+            : undefined;
+
+          if (referenceImageUrl) {
+            appendLog(`🖼️ [${i + 1}] "${heading}" → 참조 이미지 배분 (img2img)`, 'images-log-output');
             return {
               heading,
-              filePath: urlImages[0],
-              url: urlImages[0],
-              previewDataUrl: urlImages[0],
-              prompt: '썸네일 (URL)',
-              provider: 'url',
+              filePath: referenceImageUrl,
+              url: referenceImageUrl,
+              previewDataUrl: referenceImageUrl,
+              prompt: `img2img (URL ${i % urlImages.length + 1}/${urlImages.length})`,
+              provider: 'url-img2img',
               headingIndex: i,
+              referenceImageUrl, // ✅ img2img 참조 이미지 URL
               success: true
             };
           }
@@ -29285,12 +31583,12 @@ function generateEnglishPromptForHeadingSync(heading: string): string {
     { pattern: /보안|보호|방지/, prompt: () => 'digital security shield, protection concept, lock and data, professional tech, 4k' },
 
     // 정부/정책 관련
-    { pattern: /정부.*대책|정부.*노력|정부.*대응/, prompt: () => 'government officials meeting, policy discussion, official building, professional setting, 4k' },
+    { pattern: /정부.*대책|정부.*노력|정부.*대응/, prompt: () => 'government policy documents, official building exterior, national emblem, professional setting, 4k' },
     { pattern: /정책|법안|규제/, prompt: () => 'legal documents, policy papers, government seal, professional office, 4k' },
 
     // 피해/영향 관련
     { pattern: /피해.*예방|2차.*피해|추가.*피해/, prompt: () => 'protection shield concept, safety measure, warning prevention, professional infographic style, 4k' },
-    { pattern: /피해|손실|손해/, prompt: () => 'worried person checking phone, concerned expression, modern setting, realistic, 4k' },
+    { pattern: /피해|손실|손해/, prompt: () => 'damage alert concept, caution warning sign, broken objects, dramatic lighting, 4k' },
 
     // 뉴스/속보 관련
     { pattern: /속보|긴급|충격|발표/, prompt: () => 'breaking news concept, news studio, urgent announcement, professional media, 4k' },
@@ -29303,7 +31601,7 @@ function generateEnglishPromptForHeadingSync(heading: string): string {
     // 건강/의료 관련
     { pattern: /건강.*팁|건강.*관리|건강.*비결/, prompt: () => 'healthy lifestyle concept, fitness and nutrition, fresh vegetables, bright positive mood, 4k' },
     { pattern: /병원|진료|치료/, prompt: () => 'modern hospital interior, healthcare concept, medical equipment, clean professional, 4k' },
-    { pattern: /운동|피트니스|헬스/, prompt: () => 'fitness workout concept, gym equipment, healthy person exercising, energetic, 4k' },
+    { pattern: /운동|피트니스|헬스/, prompt: () => 'fitness workout concept, gym equipment, dumbbells and yoga mat, energetic atmosphere, 4k' },
 
     // 음식/요리 관련
     { pattern: /레시피|요리.*방법|만들기/, prompt: () => 'cooking preparation, kitchen scene, fresh ingredients, appetizing food photography, 4k' },
@@ -29328,7 +31626,7 @@ function generateEnglishPromptForHeadingSync(heading: string): string {
     { pattern: /경제|금융|은행/, prompt: () => 'business finance concept, money and charts, professional economy, 4k' },
 
     // 교육/학습 관련
-    { pattern: /공부.*방법|학습.*팁|교육/, prompt: () => 'education learning concept, books and study materials, student studying, bright atmosphere, 4k' },
+    { pattern: /공부.*방법|학습.*팁|교육/, prompt: () => 'education learning concept, books and study materials, desk with notes, bright atmosphere, 4k' },
 
     // 뷰티/패션 관련
     { pattern: /뷰티|화장|메이크업/, prompt: () => 'beauty cosmetics concept, makeup products, elegant skincare, professional photography, 4k' },
@@ -29343,7 +31641,7 @@ function generateEnglishPromptForHeadingSync(heading: string): string {
 
     // 일반 질문 패턴
     { pattern: /어떻게|방법|팁/, prompt: () => 'helpful tips concept, how-to guide, step by step instruction, informative, 4k' },
-    { pattern: /왜|이유|원인/, prompt: () => 'thinking person concept, question and answer, curious expression, analytical, 4k' },
+    { pattern: /왜|이유|원인/, prompt: () => 'question and answer concept, research analysis, magnifying glass with documents, analytical, 4k' },
     { pattern: /무엇|뭐|어떤/, prompt: () => 'information discovery concept, learning and research, knowledge exploration, 4k' },
   ];
 
@@ -29606,7 +31904,7 @@ function generateEnglishPromptForHeadingSync(heading: string): string {
     if (translatedHeading) {
       englishQuery = translatedHeading;
     } else {
-      englishQuery = 'people event celebration';
+      englishQuery = 'concept scene, topic visual, professional photography'; // ✅ [2026-02-12] 인물 편향 제거
     }
   } else {
     englishQuery = englishOnlyWords;
@@ -29640,12 +31938,12 @@ function generateEnglishPromptForHeadingSync(heading: string): string {
   }
 
   // 품질 키워드 추가 - 실사 이미지 스타일 강조
-  const qualityKeywords = 'ultra realistic photograph, photorealistic, professional photography, natural lighting, high detail, 4k resolution';
+  const qualityKeywords = 'professional photography, natural lighting, high detail, cinematic composition, 4k resolution'; // ✅ [2026-02-12] photorealistic 제거 (인물 편향 방지)
 
   // ✅ 8단계: 구체적인 프롬프트 생성 (충분한 설명 포함)
   const reviewAnchor = getReviewProductAnchor();
   const reviewCue = reviewAnchor
-    ? `, product review, hands-on real-world usage of ${reviewAnchor}, realistic everyday environment, Korean hands/person (if a person appears), Korean lifestyle context, close-up detail`
+    ? `, product review, hands-on usage of ${reviewAnchor}, realistic tabletop scene, close-up detail, product focused` // ✅ [2026-02-12] Korean hands/person 제거
     : '';
   const finalPrompt = `${combinedQuery}, ${qualityKeywords}${reviewCue}`;
 
@@ -29703,8 +32001,10 @@ async function autoAnalyzeHeadings(structuredContent: any): Promise<void> {
     // ✅ 서론, 소제목들, 마무리를 모두 포함한 통합 배열 생성
     const allSections: any[] = [];
 
-    // 썸네일 추가 (introduction이 있는 경우)
-    if (structuredContent.introduction) {
+    // ✅ [2026-02-12 FIX] 썸네일 섹션은 쇼핑커넥트 모드에서만 추가
+    // 쇼핑커넥트 외 모드에서는 1번 이미지가 자동으로 대표이미지 역할 → 별도 썸네일 섹션 불필요
+    const currentContentMode = (document.getElementById('unified-content-mode') as HTMLSelectElement)?.value || '';
+    if (currentContentMode === 'shopping-connect' && structuredContent.introduction) {
       allSections.push({
         title: '🖼️ 썸네일',
         content: structuredContent.introduction,
@@ -29780,27 +32080,34 @@ function displayImageHeadingsWithPrompts(headings: any[]): void {
   const promptsPlaceholder = document.getElementById('prompts-placeholder') as HTMLDivElement;
 
   // ✅ 1번 이미지 제목 텍스트 포함 옵션: 4개 버튼 아래 전용 영역에 렌더
+  // ✅ [2026-02-11 FIX] 쇼핑커넥트 모드에서만 썸네일 텍스트 옵션 표시
   const thumbnailOptionHost = document.getElementById('thumbnail-text-option-host') as HTMLDivElement | null;
   if (thumbnailOptionHost) {
-    const existingChecked = (document.getElementById('thumbnail-text-option') as HTMLInputElement | null)?.checked ?? false;
-    thumbnailOptionHost.style.display = 'block';
-    thumbnailOptionHost.innerHTML = `
-      <div id="thumbnail-text-option-container" style="
-        background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
-        border: 1px solid rgba(245, 158, 11, 0.3);
-        border-radius: 12px;
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      ">
-        <input type="checkbox" id="thumbnail-text-option" ${existingChecked ? 'checked' : ''} style="width: 20px; height: 20px; cursor: pointer; accent-color: #f59e0b;">
-        <label for="thumbnail-text-option" style="cursor: pointer; font-weight: 600; color: var(--text-strong); display: flex; flex-direction: column; gap: 0.25rem;">
-          <span>🖼️ 1번 이미지에 제목 텍스트 포함 (썸네일)</span>
-          <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">⚠️ AI가 한글을 정확히 렌더링하지 못할 수 있습니다. 체크 해제 시 모든 이미지가 텍스트 없이 생성됩니다.</span>
-        </label>
-      </div>
-    `;
+    const currentContentMode = (document.getElementById('unified-content-mode') as HTMLSelectElement)?.value || '';
+    if (currentContentMode !== 'shopping-connect') {
+      // 쇼핑커넥트가 아닌 모드에서는 1번 이미지가 자동으로 대표사진이므로 옵션 비표시
+      thumbnailOptionHost.style.display = 'none';
+    } else {
+      const existingChecked = (document.getElementById('thumbnail-text-option') as HTMLInputElement | null)?.checked ?? false;
+      thumbnailOptionHost.style.display = 'block';
+      thumbnailOptionHost.innerHTML = `
+        <div id="thumbnail-text-option-container" style="
+          background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
+          border: 1px solid rgba(245, 158, 11, 0.3);
+          border-radius: 12px;
+          padding: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+        ">
+          <input type="checkbox" id="thumbnail-text-option" ${existingChecked ? 'checked' : ''} style="width: 20px; height: 20px; cursor: pointer; accent-color: #f59e0b;">
+          <label for="thumbnail-text-option" style="cursor: pointer; font-weight: 600; color: var(--text-strong); display: flex; flex-direction: column; gap: 0.25rem;">
+            <span>🖼️ 1번 이미지에 제목 텍스트 포함 (썸네일)</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">⚠️ AI가 한글을 정확히 렌더링하지 못할 수 있습니다. 체크 해제 시 모든 이미지가 텍스트 없이 생성됩니다.</span>
+          </label>
+        </div>
+      `;
+    }
   }
 
   if (!promptsContainer || !promptsPlaceholder) return;
@@ -29918,9 +32225,11 @@ function displayImageHeadingsWithPrompts(headings: any[]): void {
     refreshPromptsBtn.style.display = 'flex';
   }
 
+  // ✅ [2026-02-11 FIX] 쇼핑커넥트 모드에서만 "1번 → 썸네일 생성기" 버튼 표시
   const setFirstHeadingThumbnailBtn = document.getElementById('set-first-heading-thumbnail-btn');
   if (setFirstHeadingThumbnailBtn) {
-    setFirstHeadingThumbnailBtn.style.display = 'flex';
+    const thumbBtnContentMode = (document.getElementById('unified-content-mode') as HTMLSelectElement)?.value || '';
+    setFirstHeadingThumbnailBtn.style.display = thumbBtnContentMode === 'shopping-connect' ? 'flex' : 'none';
   }
 
   // ✅ 예비 이미지 빠른 교체 썸네일 업데이트
@@ -30606,13 +32915,7 @@ async function regenerateSingleImage(headingTitle: string, prompt: string): Prom
         }
       }
 
-      try {
-        const allImagesAfter = ImageManager.getAllImages();
-        (window as any).imageManagementGeneratedImages = allImagesAfter;
-      } catch {
-        // ignore
-      }
-
+      // ✅ [2026-02-12 P3 FIX #15] 중복 할당 제거 — syncGlobal이 처리
       try {
         syncGlobalImagesFromImageManager();
       } catch {
@@ -31046,16 +33349,8 @@ function applyImageToHeadingFromFolder(headingIndex: number, headingTitle: strin
     headingIndex: headingIndex
   });
 
-  const allImagesAfter = (() => {
-    try {
-      const all = ImageManager.getAllImages();
-      return Array.isArray(all) ? all : [];
-    } catch {
-      return [];
-    }
-  })();
-  (window as any).imageManagementGeneratedImages = allImagesAfter.length > 0 ? allImagesAfter : generatedImages;
-  displayGeneratedImages(allImagesAfter.length > 0 ? allImagesAfter : generatedImages);
+  // ✅ [2026-02-12 P1 FIX #3] 직접 할당 → syncGlobalImagesFromImageManager
+  try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
 
   appendLog(`✅ "${headingTitle}" 소제목에 이미지 추가됨`, 'images-log-output');
   toastManager.success(`✅ 이미지 추가 완료!`);
@@ -31067,9 +33362,11 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
     const resolvedHeadingTitle = String(headingTitle || '').trim() || getHeadingTitleByIndex(headingIndex) || `소제목 ${headingIndex + 1}`;
     toastManager.info(`🔄 "${resolvedHeadingTitle}" 이미지 생성 중...`);
 
-    // 선택된 이미지 소스 확인
+    // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
     const selectedSource = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
-    const imageSource = selectedSource?.dataset.source || 'nano-banana-pro';
+    const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
+    const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-pro';
+    console.log(`[ImageGeneration] 개별 이미지 소스: ${imageSource}`);
 
     // ✅ 블로그 제목 가져오기 (썸네일용)
     const blogTitle = (document.getElementById('unified-generated-title') as HTMLInputElement)?.value?.trim() ||
@@ -31083,9 +33380,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
 
     let imageUrl: string;
 
-    if (imageSource === 'dalle' || imageSource === 'imagen4') {
-      imageUrl = await generateImagen4ImageLocal(finalPrompt);
-    } else if (imageSource === 'pollinations' || imageSource === 'nano-banana-pro') {
+    if (imageSource === 'pollinations' || imageSource === 'nano-banana-pro') {
       imageUrl = await generateNanoBananaProImage(finalPrompt);
     } else if (imageSource === 'prodia') {
       const imageResult = await generateImagesWithCostSafety({
@@ -31168,41 +33463,9 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       prompt
     });
 
-    // 전역 변수에도 추가
-    const existingImagesRaw = (window as any).imageManagementGeneratedImages;
-    const existingImages = Array.isArray(existingImagesRaw) ? existingImagesRaw : [];
-    const normalizedHeadingKey = (() => {
-      try {
-        return normalizeHeadingKeyForVideoCache(resolvedHeadingTitle);
-      } catch {
-        return '';
-      }
-    })();
-    const filteredImages = existingImages.filter((img: any) => {
-      const idx = Number(img?.headingIndex ?? -999);
-      if (Number.isFinite(idx) && idx === headingIndex) return false;
-      const h = String(img?.heading || '').trim();
-      if (!h) return true;
-      if (h === resolvedHeadingTitle) return false;
-      if (normalizedHeadingKey) {
-        try {
-          return normalizeHeadingKeyForVideoCache(h) !== normalizedHeadingKey;
-        } catch {
-          return true;
-        }
-      }
-      return true;
-    });
-    filteredImages.push({
-      heading: resolvedHeadingTitle,
-      filePath: imageUrl,
-      url: imageUrl,
-      previewDataUrl: imageUrl,
-      provider: imageSource,
-      prompt,
-      headingIndex
-    });
-    (window as any).imageManagementGeneratedImages = filteredImages;
+    // ✅ [2026-02-12 FIX] ImageManager→전역변수 통합 동기화 (기존 직접 조작 제거 → 일관성 보장)
+    syncGlobalImagesFromImageManager();
+    try { ImageManager.syncAllPreviews(); } catch { /* ignore */ }
 
     appendLog(`✅ "${resolvedHeadingTitle}" 이미지 생성 완료!`, 'images-log-output');
     toastManager.success(`✅ 이미지 생성 완료!`);
@@ -32334,9 +34597,7 @@ async function regenerateImageFromGrid(imageIndex: number, prompt: string, headi
     // 재생성 시 다른 이미지를 선택하기 위해 재생성 플래그 전달
     let newImageUrl: string;
 
-    if (imageSource === 'dalle' || imageSource === 'imagen4') {
-      newImageUrl = await generateImagen4ImageLocal(prompt);
-    } else if (imageSource === 'pollinations' || imageSource === 'nano-banana-pro') {
+    if (imageSource === 'pollinations' || imageSource === 'nano-banana-pro') {
       newImageUrl = await generateNanoBananaProImage(prompt, true);
     } else if (imageSource === 'stability') {
       // ✅ Stability AI 직접 연동 (Imagen4 폴백 제거)
@@ -32416,22 +34677,16 @@ async function regenerateImageFromGrid(imageIndex: number, prompt: string, headi
       }
     }
 
-    // 전역 이미지 배열 업데이트
-    if ((window as any).imageManagementGeneratedImages) {
-      (window as any).imageManagementGeneratedImages = (window as any).imageManagementGeneratedImages.map((img: any, idx: number) => {
-        if (idx === imageIndex) {
-          return {
-            heading: heading,
-            filePath: newImageUrl,
-            url: newImageUrl,
-            previewDataUrl: newImageUrl,
-            prompt: prompt,
-            headingIndex: imageIndex
-          };
-        }
-        return img;
-      });
-    }
+    // ✅ [2026-02-12 P1 FIX #2] ImageManager 경유 + sync 추가
+    ImageManager.setImage(heading, {
+      heading: heading,
+      filePath: newImageUrl,
+      url: newImageUrl,
+      previewDataUrl: newImageUrl,
+      prompt: prompt,
+      headingIndex: imageIndex
+    });
+    try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
 
     appendLog(`✅ "${heading}" 이미지 재생성 완료! (새로운 이미지)`, 'images-log-output');
     toastManager.success(`"${heading}" 이미지가 재생성되었습니다.`);
@@ -32468,13 +34723,13 @@ async function regenerateSingleImageWithPromptItem(imageIndex: number, prompt: s
 
   try {
     const selectedBtn = (document.querySelector('.image-source-btn.selected') || document.querySelector('.unified-img-source-btn.selected')) as HTMLButtonElement;
-    const imageSource = selectedBtn?.dataset.source as 'dalle' | 'pexels' | 'pollinations' | 'stability' | 'prodia';
+    const imageSource = selectedBtn?.dataset.source as 'nano-banana-pro' | 'pollinations' | 'stability' | 'prodia' | 'deepinfra' | 'falai';
     appendLog(`🔄 "${heading}" 이미지 재생성 중 (${imageSource || '기본'})...`, 'images-log-output');
 
     let newImageUrl: string;
 
-    if (imageSource === 'dalle') {
-      newImageUrl = await generateImagen4ImageLocal(prompt);
+    if (imageSource === 'nano-banana-pro') {
+      newImageUrl = await generateNanoBananaProImage(prompt);
     } else if (imageSource === 'pollinations') {
       newImageUrl = await generateNanoBananaProImage(prompt);
     } else if (imageSource === 'prodia') {
@@ -32738,18 +34993,8 @@ async function resolveReferenceImageForHeadingAsync(headingTitle: string): Promi
   }
 }
 
-// ✅ Imagen 4 (Google) 이미지 생성
-async function generateImagen4ImageLocal(prompt: string, isRegenerate: boolean = false): Promise<string> {
-  const response = await generateImagesWithCostSafety({
-    provider: 'imagen4',
-    items: [{ heading: 'image', prompt: prompt }],
-    regenerate: isRegenerate
-  });
-  if (!response.success || !response.images || response.images.length === 0) {
-    throw new Error(response.message || 'Imagen 4 이미지 생성 실패');
-  }
-  return response.images[0].filePath;
-}
+// ✅ [2026-02-11] Imagen4 함수 제거됨 → nano-banana-pro로 통합
+// generateImagen4ImageLocal은 더 이상 사용하지 않음 (generateNanoBananaProImage 사용)
 
 // ✅ 나노 바나나 프로 이미지 생성 (Gemini 3 기반, NEVER TEXT 적용)
 async function generateNanoBananaProImage(prompt: string, headingOrRegenerate?: string | boolean, isRegenerate: boolean = false): Promise<string> {
@@ -32774,18 +35019,7 @@ async function generateNanoBananaProImage(prompt: string, headingOrRegenerate?: 
   return response.images[0].previewDataUrl || response.images[0].filePath;
 }
 
-// ✅ Imagen 4 이미지 생성 (Google Imagen 4, NEVER TEXT 적용)
-async function generateImagen4Image(prompt: string, heading: string, isRegenerate: boolean = false): Promise<string> {
-  const response = await generateImagesWithCostSafety({
-    provider: 'imagen4',
-    items: [{ heading: heading || 'image', prompt: prompt }],
-    regenerate: isRegenerate
-  });
-  if (!response.success || !response.images || response.images.length === 0) {
-    throw new Error(response.message || 'Imagen 4 이미지 생성 실패');
-  }
-  return response.images[0].previewDataUrl || response.images[0].filePath;
-}
+// ✅ [2026-02-11] generateImagen4Image 함수 제거됨 → nano-banana-pro로 통합
 
 // 빠른 액션 함수들
 function switchToUnifiedTab() {
@@ -33325,6 +35559,121 @@ function initApiGuideModal(): void {
           </div>
         </div>
       `
+    },
+    falai: {
+      title: '📖 Fal.ai API 키 발급 가이드 (FLUX 이미지)',
+      url: 'https://fal.ai/dashboard/keys',
+      content: `
+        <div style="line-height: 1.8; color: var(--text-strong);">
+          <h3 style="color: #ec4899; margin-bottom: 1rem;">🎯 Fal.ai API 키란?</h3>
+          <p style="margin-bottom: 1rem;">Fal.ai는 FLUX 모델 기반의 빠른 이미지 생성 API입니다.</p>
+          
+          <h3 style="color: #ec4899; margin-bottom: 1rem;">📝 발급 방법</h3>
+          <ol style="padding-left: 1.5rem; margin-bottom: 1rem;">
+            <li style="margin-bottom: 0.75rem;"><strong>1단계:</strong> Fal.ai 사이트 접속 및 가입</li>
+            <li style="margin-bottom: 0.75rem;"><strong>2단계:</strong> Dashboard → Keys 메뉴 이동</li>
+            <li style="margin-bottom: 0.75rem;"><strong>3단계:</strong> Create API Key 클릭</li>
+            <li style="margin-bottom: 0.75rem;"><strong>4단계:</strong> 발급된 키 복사하여 입력</li>
+          </ol>
+          
+          <div style="background: rgba(236, 72, 153, 0.1); border: 2px solid rgba(236, 72, 153, 0.3); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+            <h4 style="color: #ec4899; margin-bottom: 0.5rem;">💰 비용 안내</h4>
+            <p style="margin: 0;">FLUX 이미지 생성: 장당 약 $0.01~0.02</p>
+          </div>
+        </div>
+      `
+    },
+    perplexity: {
+      title: '📖 Perplexity API 키 발급 가이드 (실시간 검색)',
+      url: 'https://www.perplexity.ai/settings/api',
+      content: `
+        <div style="line-height: 1.8; color: var(--text-strong);">
+          <h3 style="color: #a855f7; margin-bottom: 1rem;">🎯 Perplexity API 키란?</h3>
+          <p style="margin-bottom: 1rem;">Perplexity는 실시간 검색+AI 분석 기반 콘텐츠를 생성합니다.</p>
+          
+          <h3 style="color: #a855f7; margin-bottom: 1rem;">📝 발급 방법</h3>
+          <ol style="padding-left: 1.5rem; margin-bottom: 1rem;">
+            <li style="margin-bottom: 0.75rem;"><strong>1단계:</strong> Perplexity 사이트 로그인</li>
+            <li style="margin-bottom: 0.75rem;"><strong>2단계:</strong> Settings → API 메뉴 이동</li>
+            <li style="margin-bottom: 0.75rem;"><strong>3단계:</strong> Generate API Key 클릭</li>
+            <li style="margin-bottom: 0.75rem;"><strong>4단계:</strong> pplx-로 시작하는 키 복사</li>
+          </ol>
+          
+          <div style="background: rgba(168, 85, 247, 0.1); border: 2px solid rgba(168, 85, 247, 0.3); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+            <h4 style="color: #a855f7; margin-bottom: 0.5rem;">💰 비용 안내</h4>
+            <p style="margin: 0;">요청당 약 $0.005~0.02 (모델에 따라 다름)</p>
+          </div>
+        </div>
+      `
+    },
+    deepinfra: {
+      title: '📖 DeepInfra API 키 발급 가이드 (FLUX-2 이미지)',
+      url: 'https://deepinfra.com/dash/api_keys',
+      content: `
+        <div style="line-height: 1.8; color: var(--text-strong);">
+          <h3 style="color: #fb923c; margin-bottom: 1rem;">🎯 DeepInfra API 키란?</h3>
+          <p style="margin-bottom: 1rem;">DeepInfra는 FLUX-2 모델을 사용한 가성비 좋은 이미지 생성 API입니다.</p>
+          
+          <h3 style="color: #fb923c; margin-bottom: 1rem;">📝 발급 방법</h3>
+          <ol style="padding-left: 1.5rem; margin-bottom: 1rem;">
+            <li style="margin-bottom: 0.75rem;"><strong>1단계:</strong> DeepInfra 사이트 가입</li>
+            <li style="margin-bottom: 0.75rem;"><strong>2단계:</strong> Dashboard → API Keys 이동</li>
+            <li style="margin-bottom: 0.75rem;"><strong>3단계:</strong> Create Key 클릭</li>
+            <li style="margin-bottom: 0.75rem;"><strong>4단계:</strong> 발급된 키 복사하여 입력</li>
+          </ol>
+          
+          <div style="background: rgba(251, 146, 60, 0.1); border: 2px solid rgba(251, 146, 60, 0.3); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+            <h4 style="color: #fb923c; margin-bottom: 0.5rem;">💰 비용 안내</h4>
+            <p style="margin: 0;">FLUX-2 이미지: 장당 약 $0.01 (매우 저렴!)</p>
+          </div>
+        </div>
+      `
+    },
+    naver: {
+      title: '📖 네이버 검색 API 키 발급 가이드 (크롤링 강화)',
+      url: 'https://developers.naver.com/apps/#/register',
+      content: `
+        <div style="line-height: 1.8; color: var(--text-strong);">
+          <h3 style="color: #03c75a; margin-bottom: 1rem;">🎯 네이버 검색 API란?</h3>
+          <p style="margin-bottom: 1rem;">URL 크롤링 실패 시 네이버 블로그/뉴스에서 콘텐츠를 수집합니다.</p>
+          
+          <h3 style="color: #03c75a; margin-bottom: 1rem;">📝 발급 방법</h3>
+          <ol style="padding-left: 1.5rem; margin-bottom: 1rem;">
+            <li style="margin-bottom: 0.75rem;"><strong>1단계:</strong> 네이버 개발자 센터 접속</li>
+            <li style="margin-bottom: 0.75rem;"><strong>2단계:</strong> 애플리케이션 등록 클릭</li>
+            <li style="margin-bottom: 0.75rem;"><strong>3단계:</strong> 검색 API 선택 후 앱 생성</li>
+            <li style="margin-bottom: 0.75rem;"><strong>4단계:</strong> Client ID와 Secret 복사</li>
+          </ol>
+          
+          <div style="background: rgba(3, 199, 90, 0.1); border: 2px solid rgba(3, 199, 90, 0.3); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+            <h4 style="color: #03c75a; margin-bottom: 0.5rem;">💰 비용 안내</h4>
+            <p style="margin: 0;">네이버 검색 API는 <strong>하루 25,000회까지 무료</strong>입니다.</p>
+          </div>
+        </div>
+      `
+    },
+    'naver-ad': {
+      title: '📖 네이버 광고 API 키 발급 가이드 (키워드 분석)',
+      url: 'https://manage.searchad.naver.com/customers/4025252/tool/api-document',
+      content: `
+        <div style="line-height: 1.8; color: var(--text-strong);">
+          <h3 style="color: #06b6d4; margin-bottom: 1rem;">🎯 네이버 광고 API란?</h3>
+          <p style="margin-bottom: 1rem;">검색량 조회, 키워드 헌팅 등 SEO 분석 기능을 제공합니다.</p>
+          
+          <h3 style="color: #06b6d4; margin-bottom: 1rem;">📝 발급 방법</h3>
+          <ol style="padding-left: 1.5rem; margin-bottom: 1rem;">
+            <li style="margin-bottom: 0.75rem;"><strong>1단계:</strong> 네이버 검색광고 가입</li>
+            <li style="margin-bottom: 0.75rem;"><strong>2단계:</strong> 도구 → API 사용 관리 이동</li>
+            <li style="margin-bottom: 0.75rem;"><strong>3단계:</strong> API 라이선스 발급</li>
+            <li style="margin-bottom: 0.75rem;"><strong>4단계:</strong> Access License, Secret Key, Customer ID 복사</li>
+          </ol>
+          
+          <div style="background: rgba(6, 182, 212, 0.1); border: 2px solid rgba(6, 182, 212, 0.3); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+            <h4 style="color: #06b6d4; margin-bottom: 0.5rem;">💰 비용 안내</h4>
+            <p style="margin: 0;">네이버 광고 API는 <strong>무료</strong>이며 일일 호출 제한이 있습니다.</p>
+          </div>
+        </div>
+      `
     }
   };
 
@@ -33381,6 +35730,76 @@ function initApiGuideModal(): void {
       window.open('https://platform.stability.ai/account/keys', '_blank');
     });
   }
+
+  // ✅ [2026-01-26] 통합 API 키 발급 모달 초기화
+  initAllApiKeysModal();
+}
+
+// ============================================
+// 통합 API 키 발급 모달
+// ============================================
+function initAllApiKeysModal(): void {
+  const openBtn = document.getElementById('open-all-api-keys-modal-btn');
+  const modal = document.getElementById('all-api-keys-modal');
+  const closeBtn = document.getElementById('all-api-keys-modal-close');
+  const confirmBtn = document.getElementById('all-api-keys-modal-confirm');
+  const linkBtns = document.querySelectorAll('.api-key-link-btn');
+
+  if (!modal) return;
+
+  // 모달 열기
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden', 'false');
+    });
+  }
+
+  // 모달 닫기 - X 버튼
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  // 모달 닫기 - 확인 버튼
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  // 모달 외부 클릭 시 닫기
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  // 각 API 키 링크 버튼 클릭 시 외부 URL 열기
+  linkBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const url = btn.getAttribute('data-url');
+      if (url) {
+        window.api?.openExternalUrl?.(url) || window.open(url, '_blank');
+      }
+    });
+
+    // 호버 효과
+    btn.addEventListener('mouseenter', () => {
+      (btn as HTMLElement).style.transform = 'translateX(4px)';
+      (btn as HTMLElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+    });
+    btn.addEventListener('mouseleave', () => {
+      (btn as HTMLElement).style.transform = '';
+      (btn as HTMLElement).style.boxShadow = '';
+    });
+  });
+
+  console.log('[AllApiKeysModal] ✅ 통합 API 키 발급 모달 초기화 완료');
 }
 
 // ============================================
@@ -34417,9 +36836,9 @@ async function regenerateWithNewAI(index: number, heading: string): Promise<void
             newImageUrl = res.images[0].previewDataUrl || res.images[0].filePath;
             successProvider = 'prodia';
           }
-        } else if (selectedSource === 'imagen4') {
-          newImageUrl = await generateImagen4ImageLocal(englishPrompt, true);
-          successProvider = 'imagen4';
+        } else if (selectedSource === 'nano-banana-pro' || selectedSource === 'pollinations') {
+          newImageUrl = await generateNanoBananaProImage(englishPrompt, true);
+          successProvider = 'nano-banana-pro';
         } else if (selectedSource === 'falai') {
           const res = await generateImagesWithCostSafety({
             provider: 'falai',
@@ -34430,9 +36849,6 @@ async function regenerateWithNewAI(index: number, heading: string): Promise<void
             newImageUrl = res.images[0].previewDataUrl || res.images[0].filePath;
             successProvider = 'falai';
           }
-        } else if (selectedSource === 'nano-banana-pro' || selectedSource === 'pollinations') {
-          newImageUrl = await generateNanoBananaProImage(englishPrompt, true);
-          successProvider = 'nano-banana-pro';
         }
 
         if (newImageUrl) {
@@ -34455,17 +36871,22 @@ async function regenerateWithNewAI(index: number, heading: string): Promise<void
       console.log('[Image] Nano Banana Pro 실패, 다음 시도...');
     }
 
-    // 2. Imagen 4 (Google, 고품질)
+    // 2. Pollinations (무료 FLUX 폴백)
     if (!newImageUrl) {
       try {
-        appendLog(`[${index + 1}] Imagen 4 시도 중...`);
-        newImageUrl = await generateImagen4ImageLocal(englishPrompt, true);
-        if (newImageUrl) {
-          successProvider = 'imagen4';
-          appendLog(`✅ [${index + 1}] Imagen 4 성공!`);
+        appendLog(`[${index + 1}] Pollinations 시도 중...`);
+        const polRes = await generateImagesWithCostSafety({
+          provider: 'pollinations',
+          items: [{ heading, prompt: englishPrompt }],
+          regenerate: true
+        });
+        if (polRes.success && polRes.images?.[0]) {
+          newImageUrl = polRes.images[0].previewDataUrl || polRes.images[0].filePath;
+          successProvider = 'pollinations';
+          appendLog(`✅ [${index + 1}] Pollinations 성공!`);
         }
       } catch (e) {
-        console.log('[Image] Imagen 4 실패, 다음 시도...');
+        console.log('[Image] Pollinations 실패, 다음 시도...');
       }
     }
 
@@ -35990,18 +38411,12 @@ class ThumbnailGenerator {
         }
       }
 
-      // 전역 변수 업데이트
-      generatedImages = existingImages;
-      (window as any).imageManagementGeneratedImages = existingImages;
+      // ✅ [2026-02-12 P1 FIX #8] 직접 할당 → syncGlobalImagesFromImageManager
+      try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
 
       // 대표사진(썸네일) 경로 설정
       (window as any).thumbnailPath = base64;
       (window as any).selectedThumbnailImage = thumbnailImage;
-
-      // 모든 미리보기 동기화
-      displayGeneratedImages(existingImages);
-      ImageManager.syncAllPreviews();
-      updatePromptItemsWithImages(existingImages);
 
       appendLog(`✅ 썸네일이 1번 소제목 "${firstHeadingTitle}"에 적용되었습니다!`);
       appendLog(`📷 대표사진으로 자동 등록됩니다.`);
@@ -37277,8 +39692,8 @@ class ImageConverter {
         existingImages.push(newImage);
       }
 
-      generatedImages = existingImages;
-      (window as any).imageManagementGeneratedImages = existingImages;
+      // ✅ [2026-02-12 P1 FIX #9] 직접 할당 → syncGlobalImagesFromImageManager
+      try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
 
       // ✅ 1번 소제목이면 대표사진으로 등록
       if (selectedIndex === 0) {
@@ -37286,10 +39701,6 @@ class ImageConverter {
         (window as any).selectedThumbnailImage = newImage;
         appendLog(`📷 대표사진으로 자동 등록됩니다.`);
       }
-
-      // ✅ 모든 미리보기 동기화
-      displayGeneratedImages(existingImages);
-      ImageManager.syncAllPreviews();
 
       appendLog(`✅ 이미지가 ${selectedIndex + 1}번 소제목 "${title}"에 적용되었습니다!`);
       toastManager.success(`✅ 이미지가 "${title}" 위치에 삽입되었습니다!`);
@@ -38448,10 +40859,20 @@ async function generateImagesForAutomation(
     collectedImages?: any[]; // ✅ [2026-01-21 FIX] 수집된 이미지 배열 추가
   } = {}
 ): Promise<any[]> {
-  const { stopCheck, onProgress } = options;
+
+  // ✅ [2026-02-11 FIX] provider가 비었거나 유효하지 않으면 fullAutoImageSource 우선 참조 및 최종 안전망 로그 추가
+  // ✅ [2026-02-13 FIX] 'saved'는 "저장된 이미지" UI 버튼 값으로 AI 이미지 생성 엔진이 아님 → 폴백 필요
+  const INVALID_PROVIDERS = ['saved', 'skip', ''];
+  if (!provider || INVALID_PROVIDERS.includes(provider.trim())) {
+    const fallbackProvider = localStorage.getItem('fullAutoImageSource') || localStorage.getItem('globalImageSource') || 'nano-banana-pro';
+    console.warn(`[generateImagesForAutomation] ⚠️ provider가 유효하지 않음("${provider}")! fallback 적용: "${fallbackProvider}"`);
+    provider = fallbackProvider;
+  }
 
   // ✅ [Debug] 썸네일 텍스트 옵션 로깅
   console.log(`[generateImagesForAutomation] 🖼️ allowThumbnailText = ${options.allowThumbnailText}, provider = ${provider}`);
+
+  const { stopCheck, onProgress } = options;
 
   if (stopCheck && stopCheck()) return [];
 
@@ -38481,16 +40902,45 @@ async function generateImagesForAutomation(
     });
   }
 
-  onProgress?.(`🚀 이미지 생성 요청: ${items.length}개 (Provider: ${provider})`);
+  onProgress?.(`🚀 이미지 생성 시작: ${items.length}개 (Provider: ${provider})`);
 
-  // ✅ [2026-01-24 FIX] 재시도 로직 강화 - 연속 발행 안정성 개선
-  const MAX_RETRIES = 3;  // 2 → 3회로 증가
+  // ✅ [2026-02-03 FIX] 전체 배치 타임아웃: 5분 (300초) - 30분+ hang 완전 방지
+  const BATCH_TIMEOUT_MS = 5 * 60 * 1000;
+  const batchStartTime = Date.now();
+  const checkBatchTimeout = (): boolean => {
+    const elapsed = Date.now() - batchStartTime;
+    if (elapsed >= BATCH_TIMEOUT_MS) {
+      console.error(`[generateImagesForAutomation] ⏰ 배치 타임아웃 (${Math.round(elapsed / 1000)}초 경과)`);
+      onProgress?.(`⏰ 이미지 생성 타임아웃 (${Math.round(elapsed / 1000)}초) - 부분 결과로 진행`);
+      return true;
+    }
+    return false;
+  };
+
+  // ✅ [2026-02-03] 재시도 횟수 감소 (3→2회) - 빠른 실패 및 다음 글로 진행
+  const MAX_RETRIES = 2;
   let lastError: Error | null = null;
   let bestResult: any = null;  // 부분 성공 시 최선의 결과 저장
+
+
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
       if (stopCheck && stopCheck()) return bestResult?.images || [];
+
+      // ✅ [2026-02-03] 배치 타임아웃 체크 - 5분 초과 시 부분 결과로 즉시 반환
+      if (checkBatchTimeout()) {
+        if (bestResult?.images?.length > 0) {
+          onProgress?.(`⏰ 타임아웃! 부분 결과 ${bestResult.images.length}개 사용`);
+          return bestResult.images;
+        }
+        throw new Error('이미지 생성 타임아웃 (5분 초과) - 이미지 없이 발행 진행');
+      }
+
+      // ✅ [2026-01-26] 생성 중 진행상황 표시
+      const elapsedSec = Math.round((Date.now() - batchStartTime) / 1000);
+      onProgress?.(`🎨 ${provider} 엔진으로 이미지 생성 중... (${items.length}개 대기, ${elapsedSec}초 경과)`);
+
 
       // 1. 메인 프로세스에 이미지 생성 요청
       const result = await generateImagesWithCostSafety({
@@ -38499,7 +40949,8 @@ async function generateImagesForAutomation(
         postTitle: postTitle,
         regenerate: false,
         referenceImagePath: options.referenceImagePath,
-        collectedImages: options.collectedImages  // ✅ [2026-01-21 FIX] 수집된 이미지 전달
+        collectedImages: options.collectedImages,  // ✅ [2026-01-21 FIX] 수집된 이미지 전달
+        thumbnailTextInclude: options.allowThumbnailText  // ✅ [2026-01-28 FIX] 썸네일 텍스트 포함 옵션 전달
       });
 
       if (stopCheck && stopCheck()) return result?.images || bestResult?.images || [];
@@ -38509,6 +40960,13 @@ async function generateImagesForAutomation(
         const totalRequested = items.length;
         const successRate = Math.round((successCount / totalRequested) * 100);
 
+        // ✅ [2026-01-26] 개별 이미지 생성 완료 로그
+        for (let i = 0; i < successCount; i++) {
+          const img = result.images[i];
+          const headingName = img?.heading || img?.title || `${i + 1}번`;
+          onProgress?.(`✅ ${i + 1}/${successCount} 이미지 생성 완료: ${headingName.substring(0, 20)}...`);
+        }
+
         // ✅ [2026-01-24 FIX] 부분 성공 저장 (나중에 더 나은 결과가 없으면 이것 사용)
         if (!bestResult || result.images.length > (bestResult.images?.length || 0)) {
           bestResult = result;
@@ -38516,7 +40974,7 @@ async function generateImagesForAutomation(
 
         // ✅ 50% 이상 성공 시 즉시 반환 (부분 성공 허용)
         if (successRate >= 50) {
-          onProgress?.(`✅ ${successCount}/${totalRequested}개 이미지 생성 완료 (성공률: ${successRate}%)`);
+          onProgress?.(`🎉 총 ${successCount}/${totalRequested}개 이미지 생성 완료! (성공률: ${successRate}%)`);
           console.log(`[Image Stats] 생성 성공률: ${successRate}% (${successCount}/${totalRequested}), 시도: ${attempt}/${MAX_RETRIES}`);
           return result.images;
         } else {
@@ -38819,14 +41277,383 @@ async function initMultiAccountPublishModal() {
     createProductThumbnail?: boolean; // ✅ 제품 이미지 기반 썸네일 합성 여부
     publishMode?: string;
     scheduleDate?: string;
+    scheduleTime?: string;             // ✅ [2026-02-08 FIX] 시간 분리 전달
     scheduleType?: 'app-schedule' | 'naver-server';
+    scheduleInterval?: number;         // ✅ [2026-02-08 FIX] 계정 간 발행 간격 (분)
     affiliateLink?: string; // ✅ [2026-01-20] 쇼핑커넥트 제휴 링크
     videoOption?: boolean;  // ✅ [2026-01-20] VEO 영상 변환 옵션
     manualThumbnail?: string | null; // ✅ [2026-01-22] 수동 썸네일 경로
+    realCategoryName?: string; // ✅ [2026-02-09 FIX] 실제 블로그 카테고리(폴더) 이름
   }
 
   // ✅ 발행 대기열
   let publishQueue: QueueItem[] = [];
+
+  // ✅ [2026-02-08] 다중계정 예약 상태 요약 업데이트
+  function updateMAScheduleStatusSummary(): void {
+    const statusText = document.getElementById('ma-schedule-status-text');
+    if (!statusText) return;
+
+    if (!publishQueue || publishQueue.length === 0) {
+      statusText.textContent = '📭 대기열이 비어있습니다.';
+      return;
+    }
+
+    const scheduledCount = publishQueue.filter((item: QueueItem) => item.publishMode === 'schedule' && item.scheduleDate).length;
+    const total = publishQueue.length;
+
+    if (scheduledCount === 0) {
+      statusText.innerHTML = `총 <strong style="color: #60a5fa;">${total}</strong>개 항목 | 예약 설정된 항목 없음`;
+    } else {
+      statusText.innerHTML = `총 <strong style="color: #60a5fa;">${total}</strong>개 항목 | <strong style="color: #10b981;">${scheduledCount}</strong>개 예약 설정됨`;
+    }
+  }
+
+  // ✅ [2026-02-08] 다중계정 랜덤 예약 배분 모달
+  function showMARandomScheduleModal(): void {
+    document.getElementById('ma-random-schedule-modal-overlay')?.remove();
+
+    if (!publishQueue || publishQueue.length === 0) {
+      toastManager.warning('📋 대기열에 항목이 없습니다. 먼저 항목을 추가해주세요.');
+      return;
+    }
+
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'ma-random-schedule-modal-overlay';
+    overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
+
+    overlay.innerHTML = `
+      <div style="background: var(--bg-primary, #1a1a2e); border: 2px solid rgba(59, 130, 246, 0.4); border-radius: 16px; padding: 1.5rem; max-width: 480px; width: 92%; box-shadow: 0 25px 50px rgba(0,0,0,0.5); max-height: 85vh; overflow-y: auto;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+          <h3 style="margin: 0; color: #60a5fa; font-size: 1.1rem; font-weight: 700;">🎲 랜덤 예약 배분</h3>
+          <button type="button" id="ma-rnd-schedule-close" style="background: none; border: none; color: var(--text-muted, #999); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+        </div>
+
+        <p style="margin: 0 0 1rem 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+          시작~마감 시간 범위 내에서 대기열 항목들에 <strong style="color: #10b981;">랜덤 예약 시간</strong>을 자동 배분합니다.
+        </p>
+
+        <!-- 시작 시간 -->
+        <div style="margin-bottom: 1rem;">
+          <label style="color: #10b981; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🟢 시작 시간</label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+            <div>
+              <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">날짜 (비워두면 오늘)</label>
+              <input type="date" id="ma-rnd-start-date" value=""
+                style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+            </div>
+            <div>
+              <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
+              <input type="time" id="ma-rnd-start-time" value="09:00" step="600"
+                style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+            </div>
+          </div>
+        </div>
+
+        <!-- 마감 시간 -->
+        <div style="margin-bottom: 1rem;">
+          <label style="color: #ef4444; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🔴 마감 시간</label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+            <div>
+              <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">날짜 (비워두면 시작일과 동일)</label>
+              <input type="date" id="ma-rnd-end-date" value=""
+                style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+            </div>
+            <div>
+              <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
+              <input type="time" id="ma-rnd-end-time" value="18:00" step="600"
+                style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+            </div>
+          </div>
+        </div>
+
+        <!-- 빠른 프리셋 -->
+        <div style="margin-bottom: 1rem;">
+          <label style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">⚡ 빠른 시간대 설정</label>
+          <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+            <button type="button" class="ma-rnd-preset" data-start="09:00" data-end="18:00" style="padding: 0.4rem 0.6rem; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 6px; color: #60a5fa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌅 9-18시</button>
+            <button type="button" class="ma-rnd-preset" data-start="08:00" data-end="22:00" style="padding: 0.4rem 0.6rem; background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 6px; color: #a78bfa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">📅 8-22시</button>
+            <button type="button" class="ma-rnd-preset" data-start="10:00" data-end="14:00" style="padding: 0.4rem 0.6rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 6px; color: #f59e0b; cursor: pointer; font-size: 0.75rem; font-weight: 600;">☀️ 10-14시</button>
+            <button type="button" class="ma-rnd-preset" data-start="18:00" data-end="23:00" style="padding: 0.4rem 0.6rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; color: #10b981; cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌙 18-23시</button>
+          </div>
+        </div>
+
+        <!-- 미리보기 영역 -->
+        <div id="ma-rnd-schedule-preview" style="display: none; margin-bottom: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; max-height: 150px; overflow-y: auto;">
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">📊 배분 미리보기</div>
+          <div id="ma-rnd-schedule-preview-content" style="font-size: 0.75rem; color: var(--text-strong); line-height: 1.6; font-family: monospace;"></div>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" id="ma-rnd-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--bg-tertiary, #333); color: var(--text-muted, #999); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
+          <button type="button" id="ma-rnd-schedule-apply" style="flex: 2; padding: 0.7rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">🎲 랜덤 예약 적용</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    // 프리셋 버튼
+    overlay.querySelectorAll('.ma-rnd-preset').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const s = (btn as HTMLElement).dataset.start || '09:00';
+        const e = (btn as HTMLElement).dataset.end || '18:00';
+        (document.getElementById('ma-rnd-start-time') as HTMLInputElement).value = s;
+        (document.getElementById('ma-rnd-end-time') as HTMLInputElement).value = e;
+        toastManager.info(`⏰ ${s} ~ ${e} 시간대가 설정되었습니다.`);
+      });
+    });
+
+    // 닫기
+    const closeModal = () => overlay.remove();
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+    document.getElementById('ma-rnd-schedule-close')?.addEventListener('click', closeModal);
+    document.getElementById('ma-rnd-schedule-cancel')?.addEventListener('click', closeModal);
+
+    // 적용
+    document.getElementById('ma-rnd-schedule-apply')?.addEventListener('click', () => {
+      const today2 = new Date();
+      const todayStr2 = `${today2.getFullYear()}-${String(today2.getMonth() + 1).padStart(2, '0')}-${String(today2.getDate()).padStart(2, '0')}`;
+      const startDateStr = (document.getElementById('ma-rnd-start-date') as HTMLInputElement)?.value || todayStr2;
+      const startTimeStr = (document.getElementById('ma-rnd-start-time') as HTMLInputElement)?.value || '09:00';
+      const endDateStr = (document.getElementById('ma-rnd-end-date') as HTMLInputElement)?.value || startDateStr;
+      const endTimeStr = (document.getElementById('ma-rnd-end-time') as HTMLInputElement)?.value || '18:00';
+
+      const startTime = new Date(`${startDateStr}T${startTimeStr}`);
+      const endTime = new Date(`${endDateStr}T${endTimeStr}`);
+
+      // ✅ 15분 미래 검증
+      const minAllowed = new Date(Date.now() + 15 * 60 * 1000);
+      if (startTime.getTime() < minAllowed.getTime()) {
+        toastManager.error('❌ 시작 시간은 현재 시간 기준 15분 이후여야 합니다!');
+        return;
+      }
+
+      if (endTime.getTime() <= startTime.getTime()) {
+        toastManager.error('❌ 마감 시간이 시작 시간보다 이후여야 합니다!');
+        return;
+      }
+
+      const rangeMs = endTime.getTime() - startTime.getTime();
+      if (rangeMs < 600000) {
+        toastManager.error('❌ 시작~마감 시간 범위가 최소 10분 이상이어야 합니다.');
+        return;
+      }
+
+      const itemCount = publishQueue.length;
+      const randomTimes: Date[] = [];
+      for (let i = 0; i < itemCount; i++) {
+        const raw = new Date(startTime.getTime() + Math.floor(Math.random() * rangeMs));
+        // ✅ [2026-02-08 FIX] 10분 단위 반올림 (네이버 서버 예약 10분 단위 제한)
+        const mins = raw.getMinutes();
+        const rounded = Math.round(mins / 10) * 10;
+        raw.setMinutes(rounded, 0, 0);
+        if (rounded >= 60) { raw.setMinutes(0); raw.setHours(raw.getHours() + 1); }
+        randomTimes.push(raw);
+      }
+      randomTimes.sort((a, b) => a.getTime() - b.getTime());
+
+      publishQueue.forEach((item: QueueItem, i: number) => {
+        const t = randomTimes[i];
+        const yyyy = t.getFullYear();
+        const mo = String(t.getMonth() + 1).padStart(2, '0');
+        const dd = String(t.getDate()).padStart(2, '0');
+        const hh = String(t.getHours()).padStart(2, '0');
+        const mi = String(t.getMinutes()).padStart(2, '0');
+        item.scheduleDate = `${yyyy}-${mo}-${dd}`;
+        item.scheduleTime = `${hh}:${mi}`;
+        item.publishMode = 'schedule';
+        item.scheduleType = 'naver-server';
+      });
+
+      // 미리보기
+      const previewEl = document.getElementById('ma-rnd-schedule-preview');
+      const previewContent = document.getElementById('ma-rnd-schedule-preview-content');
+      if (previewEl && previewContent) {
+        previewEl.style.display = 'block';
+        previewContent.innerHTML = publishQueue.map((item: QueueItem, i: number) => {
+          return `<div style="display: flex; gap: 0.5rem; padding: 2px 0;">
+            <span style="color: #60a5fa; min-width: 25px;">#${i + 1}</span>
+            <span style="color: #10b981; font-weight: 600;">${item.scheduleDate} ${item.scheduleTime}</span>
+            <span style="color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${(item.accountName || item.sourceUrl || item.sourceKeyword || '').substring(0, 20)}...</span>
+          </div>`;
+        }).join('');
+      }
+
+      toastManager.success(`✅ ${itemCount}개 항목에 랜덤 예약 적용! (${startTimeStr}~${endTimeStr})`);
+      renderQueue();
+      updateMAScheduleStatusSummary();
+    });
+
+    // ESC
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', handleEsc); }
+    };
+    document.addEventListener('keydown', handleEsc);
+  }
+
+  // ✅ [2026-02-08] 다중계정 개별 예약 설정 모달
+  function showMAIndividualScheduleModal(): void {
+    document.getElementById('ma-individual-schedule-modal-overlay')?.remove();
+
+    if (!publishQueue || publishQueue.length === 0) {
+      toastManager.warning('📋 대기열에 항목이 없습니다. 먼저 항목을 추가해주세요.');
+      return;
+    }
+
+    const overlay = document.createElement('div');
+    overlay.id = 'ma-individual-schedule-modal-overlay';
+    overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
+
+    const itemRows = publishQueue.map((item: QueueItem, i: number) => {
+      const curDate = item.scheduleDate || '';
+      const curTime = item.scheduleTime || '09:00';
+      const isScheduled = item.publishMode === 'schedule' && curDate;
+      const label = item.accountName + (item.sourceUrl ? ` — ${item.sourceUrl}` : item.sourceKeyword ? ` — ${item.sourceKeyword}` : '');
+      const shortLabel = label.length > 22 ? label.substring(0, 22) + '...' : label;
+
+      return `
+        <div style="display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; padding: 0.5rem 0.6rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;" data-idx="${i}">
+          <input type="checkbox" class="ma-indv-check" data-idx="${i}" ${isScheduled ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8rem; color: var(--text-strong, #fff);" title="${label}">${shortLabel}</div>
+          <input type="date" class="ma-indv-date" data-idx="${i}" value="${curDate}" style="padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.8rem; color-scheme: dark; width: 130px;">
+          <input type="time" class="ma-indv-time" data-idx="${i}" value="${curTime}" step="600" style="padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.8rem; color-scheme: dark; width: 100px;">
+        </div>`;
+    }).join('');
+
+    overlay.innerHTML = `
+      <div style="background: var(--bg-primary, #1a1a2e); border: 2px solid rgba(16, 185, 129, 0.4); border-radius: 16px; max-width: 620px; width: 95%; box-shadow: 0 25px 50px rgba(0,0,0,0.5); max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;">
+        <!-- 헤더 -->
+        <div style="padding: 1rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between;">
+          <h3 style="margin: 0; color: #34d399; font-size: 1.1rem; font-weight: 700;">📋 개별 예약 설정</h3>
+          <button type="button" id="ma-indv-schedule-close" style="background: none; border: none; color: var(--text-muted, #999); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+        </div>
+
+        <!-- 전체 선택/해제 + 일괄 설정 -->
+        <div style="padding: 0.75rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.8rem; color: var(--text-muted);">
+            <input type="checkbox" id="ma-indv-select-all" style="width: 16px; height: 16px; accent-color: #10b981;">
+            <span>전체 선택</span>
+          </label>
+          <div style="margin-left: auto; display: flex; align-items: center; gap: 0.4rem;">
+            <span style="font-size: 0.75rem; color: var(--text-muted);">선택 항목 일괄:</span>
+            <input type="date" id="ma-indv-bulk-date" style="padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark;">
+            <input type="time" id="ma-indv-bulk-time" value="09:00" step="600" style="padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark;">
+            <button type="button" id="ma-indv-bulk-apply" style="padding: 0.3rem 0.6rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 6px; color: #60a5fa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">적용</button>
+          </div>
+        </div>
+
+        <!-- 헤더 라벨 -->
+        <div style="padding: 0.4rem 1.5rem; display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+          <span></span>
+          <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600;">대기열 항목</span>
+          <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600; width: 130px; text-align: center;">날짜</span>
+          <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600; width: 100px; text-align: center;">시간</span>
+        </div>
+
+        <!-- 아이템 리스트 (스크롤) -->
+        <div style="flex: 1; overflow-y: auto; padding: 0.75rem 1.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          ${itemRows}
+        </div>
+
+        <!-- 푸터 -->
+        <div style="padding: 0.75rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 0.5rem;">
+          <button type="button" id="ma-indv-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--bg-tertiary, #333); color: var(--text-muted, #999); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
+          <button type="button" id="ma-indv-schedule-save" style="flex: 2; padding: 0.7rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">💾 예약 저장</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    // 전체 선택
+    document.getElementById('ma-indv-select-all')?.addEventListener('change', (e) => {
+      const checked = (e.target as HTMLInputElement).checked;
+      overlay.querySelectorAll('.ma-indv-check').forEach(cb => {
+        (cb as HTMLInputElement).checked = checked;
+      });
+    });
+
+    // 일괄 적용
+    document.getElementById('ma-indv-bulk-apply')?.addEventListener('click', () => {
+      const bulkDate = (document.getElementById('ma-indv-bulk-date') as HTMLInputElement)?.value;
+      const bulkTime = (document.getElementById('ma-indv-bulk-time') as HTMLInputElement)?.value || '09:00';
+      if (!bulkDate) {
+        toastManager.warning('📅 일괄 적용할 날짜를 선택해주세요.');
+        return;
+      }
+      let appliedCount = 0;
+      overlay.querySelectorAll('.ma-indv-check').forEach(cb => {
+        if ((cb as HTMLInputElement).checked) {
+          const idx = (cb as HTMLElement).dataset.idx;
+          const dateInput = overlay.querySelector(`.ma-indv-date[data-idx="${idx}"]`) as HTMLInputElement;
+          const timeInput = overlay.querySelector(`.ma-indv-time[data-idx="${idx}"]`) as HTMLInputElement;
+          if (dateInput) dateInput.value = bulkDate;
+          if (timeInput) timeInput.value = bulkTime;
+          appliedCount++;
+        }
+      });
+      if (appliedCount > 0) {
+        toastManager.info(`✅ ${appliedCount}개 항목에 ${bulkDate} ${bulkTime} 일괄 적용됨`);
+      } else {
+        toastManager.warning('⚠️ 체크된 항목이 없습니다.');
+      }
+    });
+
+    // 닫기
+    const closeModal = () => overlay.remove();
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+    document.getElementById('ma-indv-schedule-close')?.addEventListener('click', closeModal);
+    document.getElementById('ma-indv-schedule-cancel')?.addEventListener('click', closeModal);
+
+    // 저장
+    document.getElementById('ma-indv-schedule-save')?.addEventListener('click', () => {
+      let savedCount = 0;
+      overlay.querySelectorAll('.ma-indv-check').forEach(cb => {
+        const idx = parseInt((cb as HTMLElement).dataset.idx || '0');
+        const checked = (cb as HTMLInputElement).checked;
+        const dateInput = overlay.querySelector(`.ma-indv-date[data-idx="${idx}"]`) as HTMLInputElement;
+        const timeInput = overlay.querySelector(`.ma-indv-time[data-idx="${idx}"]`) as HTMLInputElement;
+        const item = publishQueue[idx];
+        if (!item) return;
+
+        if (checked && dateInput?.value) {
+          const timeVal = timeInput?.value || '09:00';
+          // ✅ 15분 미래 검증
+          const scheduledTime = new Date(`${dateInput.value}T${timeVal}`);
+          const minAllowed = new Date(Date.now() + 15 * 60 * 1000);
+          if (scheduledTime.getTime() < minAllowed.getTime()) {
+            const label = (item.accountName || item.sourceUrl || '').substring(0, 15);
+            toastManager.error(`❌ "${label}..." 예약 시간이 현재 기준 15분 이후여야 합니다!`);
+            return;
+          }
+          item.publishMode = 'schedule';
+          item.scheduleDate = dateInput.value;   // YYYY-MM-DD
+          item.scheduleTime = timeVal;           // HH:mm
+          item.scheduleType = 'naver-server';
+          savedCount++;
+        } else if (!checked) {
+          item.publishMode = 'publish';
+          item.scheduleDate = undefined;
+          item.scheduleTime = undefined;
+        }
+      });
+
+      toastManager.success(`✅ ${savedCount}개 항목 예약 저장 완료!`);
+      renderQueue();
+      updateMAScheduleStatusSummary();
+      closeModal();
+    });
+
+    // ESC
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', handleEsc); }
+    };
+    document.addEventListener('keydown', handleEsc);
+  }
 
   // ✅ 대기열 UI 업데이트
   function renderQueue() {
@@ -38854,6 +41681,12 @@ async function initMultiAccountPublishModal() {
       const toneEmoji = { friendly: '😊', professional: '💼', casual: '🎒', formal: '🎩', humorous: '😄', community_fan: '🔥', mom_cafe: '👩‍👧' }[item.toneStyle] || '😊';
       const ctaBadge = item.ctaType === 'previous-post' ? '<span style="background: #3b82f6; color: white; padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.65rem; margin-left: 0.25rem;">🔗이전글</span>' :
         item.ctaType === 'custom' ? '<span style="background: #8b5cf6; color: white; padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.65rem; margin-left: 0.25rem;">✏️CTA</span>' : '';
+      // ✅ [2026-02-08] 예약/임시 배지 표시
+      const scheduleBadge = item.publishMode === 'schedule' && item.scheduleDate
+        ? `<span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 0.1rem 0.35rem; border-radius: 3px; font-size: 0.65rem; margin-left: 0.25rem; font-weight: 600;">📅 ${item.scheduleDate} ${item.scheduleTime || ''}</span>`
+        : item.publishMode === 'draft'
+          ? '<span style="background: rgba(156, 163, 175, 0.2); color: #9ca3af; padding: 0.1rem 0.35rem; border-radius: 3px; font-size: 0.65rem; margin-left: 0.25rem; font-weight: 600;">📝 임시</span>'
+          : '';
 
       return `
         <div class="ma-queue-item" data-queue-id="${item.id}" style="
@@ -38866,9 +41699,9 @@ async function initMultiAccountPublishModal() {
           align-items: center;
         ">
           <div style="flex: 1; min-width: 0;">
-            <div style="font-weight: 600; color: var(--text-strong); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+            <div style="font-weight: 600; color: var(--text-strong); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
               <span style="background: #10b981; color: white; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem;">${index + 1}</span>
-              👤 ${escapeHtml(item.accountName)}${ctaBadge}
+              👤 ${escapeHtml(item.accountName)}${ctaBadge}${scheduleBadge}
             </div>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
               ${sourceDisplay} | ${toneEmoji}
@@ -38940,6 +41773,36 @@ async function initMultiAccountPublishModal() {
     if (ctaTypeSelectInit) ctaTypeSelectInit.value = 'none';
     if (ctaUrlInputInit) ctaUrlInputInit.value = '';
     if (ctaTextInputInit) ctaTextInputInit.value = '';
+
+    // ✅ [2026-02-02 FIX] 이미지 설정 버튼 직접 이벤트 리스너 추가 (이벤트 위임 실패 대비)
+    const imageSettingsBtn = document.getElementById('ma-open-image-settings-btn');
+    if (imageSettingsBtn) {
+      const newImgBtn = imageSettingsBtn.cloneNode(true) as HTMLButtonElement;
+      imageSettingsBtn.parentNode?.replaceChild(newImgBtn, imageSettingsBtn);
+      newImgBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('[MA-ImageSettings] 🖼️ 이미지 설정 버튼 클릭됨 (직접 이벤트 리스너)');
+
+        // 풀오토 설정 모달 임시 숨김 (z-index 충돌 방지)
+        const maModal = document.getElementById('ma-fullauto-setting-modal');
+        if (maModal && maModal.style.display !== 'none') {
+          maModal.setAttribute('data-was-visible', 'true');
+          maModal.style.visibility = 'hidden';
+          console.log('[MA-ImageSettings] 임시 숨김: ma-fullauto-setting-modal');
+        }
+
+        // 이미지 설정 모달 열기
+        if (typeof openHeadingImageModal === 'function') {
+          openHeadingImageModal();
+          console.log('[MA-ImageSettings] ✅ openHeadingImageModal 호출 완료');
+        } else {
+          console.error('[MA-ImageSettings] ❌ openHeadingImageModal 함수를 찾을 수 없습니다');
+          toastManager.warning('이미지 설정 모달을 열 수 없습니다. 앱을 새로고침해주세요.');
+        }
+      });
+      console.log('[MA-ImageSettings] ✅ 이미지 설정 버튼 이벤트 리스너 추가 완료');
+    }
 
     // ✅ 콘텐츠 카테고리 버튼 이벤트 (카테고리 모달 열기)
     const categoryBtn = document.getElementById('ma-setting-open-category-btn');
@@ -39015,37 +41878,9 @@ async function initMultiAccountPublishModal() {
     const createThumbnailCheck = document.getElementById('ma-setting-create-product-thumbnail') as HTMLInputElement | null;
     if (createThumbnailCheck) createThumbnailCheck.checked = false;
 
-    // ✅ 발행 모드 초기화 및 예약 컨테이너 토글 로직
-    const publishModeRadios = document.querySelectorAll('input[name="ma-setting-publish-mode"]');
-    const scheduleContainer = document.getElementById('ma-setting-schedule-container');
-    const scheduleDateInput = document.getElementById('ma-setting-schedule-date') as HTMLInputElement | null;
-
-    // 발행 모드 기본값 설정 (즉시)
+    // ✅ 발행 모드 초기화 (즉시/임시 라디오 — 예약은 예약 설정 탭에서 모달로 설정)
     const publishModePublish = document.querySelector('input[name="ma-setting-publish-mode"][value="publish"]') as HTMLInputElement | null;
     if (publishModePublish) publishModePublish.checked = true;
-
-    // 예약 컨테이너 초기 숨김
-    if (scheduleContainer) scheduleContainer.style.display = 'none';
-
-    // 예약 날짜 기본값 설정 (오늘)
-    if (scheduleDateInput && !scheduleDateInput.value) {
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      const mm = String(today.getMonth() + 1).padStart(2, '0');
-      const dd = String(today.getDate()).padStart(2, '0');
-      scheduleDateInput.value = `${yyyy}-${mm}-${dd}`;
-    }
-
-    // 발행 모드 변경 시 예약 컨테이너 토글 (이벤트 위임 사용)
-    const publishModeContainer = publishModeRadios[0]?.closest('div[style*="grid-template-columns"]');
-    if (publishModeContainer) {
-      publishModeContainer.addEventListener('change', (e) => {
-        const target = e.target as HTMLInputElement;
-        if (target.name === 'ma-setting-publish-mode' && scheduleContainer) {
-          scheduleContainer.style.display = target.value === 'schedule' ? 'block' : 'none';
-        }
-      });
-    }
 
     // ✅ CTA 유형이 이전글이면 바로 모달로 선택하게 함 (URL 자동 입력)
     const ctaTypeSelect = document.getElementById('ma-setting-cta-type') as HTMLSelectElement | null;
@@ -39163,9 +41998,15 @@ async function initMultiAccountPublishModal() {
     const urls = urlText.split('\n').map(s => s.trim()).filter(s => s.length > 0);
     const keywords = keywordText.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-    const imageSource = (document.getElementById('ma-setting-image-source') as HTMLSelectElement)?.value || 'nano-banana-pro';
+    // ✅ [2026-02-03 FIX] 메인 풀오토 이미지 설정에서 imageSource 가져오기 (기존 HTML 요소는 존재하지 않음)
+    const imageSource = getFullAutoImageSource();
     const toneStyle = (document.getElementById('ma-setting-tone') as HTMLSelectElement)?.value || 'friendly';
     const category = String((document.getElementById('ma-setting-category') as HTMLSelectElement | null)?.value || '').trim() || 'general';
+    // ✅ [2026-02-09 FIX] 실제 블로그 카테고리(폴더) 이름 가져오기
+    const realCatSelect = document.getElementById('ma-setting-real-category') as HTMLSelectElement | null;
+    const realCategoryName = (realCatSelect?.options && realCatSelect.selectedIndex >= 0)
+      ? realCatSelect.options[realCatSelect.selectedIndex]?.text || ''
+      : '';
     const contentMode = ((document.getElementById('ma-setting-content-mode') as HTMLSelectElement | null)?.value || 'seo') as 'seo' | 'homefeed' | 'affiliate';
     const ctaType = (document.getElementById('ma-setting-cta-type') as HTMLSelectElement)?.value as 'none' | 'previous-post' | 'custom' || 'none';
     const ctaUrl = (document.getElementById('ma-setting-cta-url') as HTMLInputElement)?.value?.trim() || '';
@@ -39184,19 +42025,13 @@ async function initMultiAccountPublishModal() {
         (document.getElementById('ma-setting-video-option') as HTMLInputElement)?.checked || false)
       : undefined;
 
-    // ✅ 발행 모드 및 예약일시 읽기
-    const publishMode = (document.querySelector('input[name="ma-setting-publish-mode"]:checked') as HTMLInputElement)?.value || 'publish';
-    let scheduleDate: string | undefined;
-    let scheduleType: 'app-schedule' | 'naver-server' | undefined;
-
-    if (publishMode === 'schedule') {
-      const dateVal = (document.getElementById('ma-setting-schedule-date') as HTMLInputElement)?.value;
-      const timeVal = (document.getElementById('ma-setting-schedule-time') as HTMLInputElement)?.value;
-      if (dateVal && timeVal) {
-        scheduleDate = `${dateVal}T${timeVal}`;
-        scheduleType = 'naver-server';
-      }
-    }
+    // ✅ [2026-02-08] 발행 모드 — 기본설정 탭의 라디오(즉시/임시)에서 읽기, 예약은 모달에서 개별 설정
+    const publishModeRadioVal = (document.querySelector('input[name="ma-setting-publish-mode"]:checked') as HTMLInputElement)?.value;
+    const publishMode = publishModeRadioVal === 'draft' ? 'draft' : 'publish';
+    const scheduleDate: string | undefined = undefined;
+    const scheduleTime: string | undefined = undefined;
+    const scheduleType: 'app-schedule' | 'naver-server' | undefined = undefined;
+    const scheduleInterval: number | undefined = undefined;
 
     // ✅ URL 우선, 없으면 키워드 사용
     const items: { url: string; keyword: string }[] = [];
@@ -39238,10 +42073,13 @@ async function initMultiAccountPublishModal() {
         createProductThumbnail,
         publishMode,
         scheduleDate,
+        scheduleTime,          // ✅ [2026-02-08 FIX] 시간 분리 전달
         scheduleType,
+        scheduleInterval,      // ✅ [2026-02-08 FIX] 계정 간 발행 간격
         affiliateLink,  // ✅ [2026-01-20] 쇼핑커넥트 제휴 링크
         videoOption,    // ✅ [2026-01-20] VEO 영상 변환 옵션
-        manualThumbnail: manualThumbnailForQueue  // ✅ [2026-01-22] 수동 썸네일 저장
+        manualThumbnail: manualThumbnailForQueue,  // ✅ [2026-01-22] 수동 썸네일 저장
+        realCategoryName, // ✅ [2026-02-09 FIX] 실제 블로그 카테고리(폴더) 이름 저장
       };
 
       publishQueue.push(queueItem);
@@ -39375,26 +42213,31 @@ async function initMultiAccountPublishModal() {
     });
   });
 
-  // ✅ [2026-01-20] 예약 발행 활성화 체크박스
-  document.getElementById('ma-setting-schedule-enabled')?.addEventListener('change', (e) => {
-    const isEnabled = (e.target as HTMLInputElement).checked;
-    const section = document.getElementById('ma-schedule-datetime-section');
-    if (section) {
-      section.style.opacity = isEnabled ? '1' : '0.5';
-      section.style.pointerEvents = isEnabled ? 'auto' : 'none';
-    }
-
-    // 발행 모드도 자동 변경
-    if (isEnabled) {
-      const scheduleRadio = document.querySelector('input[name="ma-setting-publish-mode"][value="schedule"]') as HTMLInputElement;
-      if (scheduleRadio) scheduleRadio.checked = true;
-    }
+  // ✅ [2026-02-08] 예약 설정 서브탭 - 랜덤 예약 배분 모달 열기
+  document.getElementById('ma-open-random-schedule-btn')?.addEventListener('click', () => {
+    showMARandomScheduleModal();
   });
 
+  // ✅ [2026-02-08] 예약 설정 서브탭 - 개별 예약 설정 모달 열기
+  document.getElementById('ma-open-individual-schedule-btn')?.addEventListener('click', () => {
+    showMAIndividualScheduleModal();
+  });
+
+  // 예약 상태 요약 업데이트
+  updateMAScheduleStatusSummary();
+
   // ✅ [2026-01-20] 쇼핑커넥트 탭의 썸네일/배너 버튼 (모달 닫기 포함)
+  // ✅ [2026-01-27] multi-account-modal도 함께 닫기 추가
   document.getElementById('ma-shopping-goto-thumbnail-btn')?.addEventListener('click', () => {
-    const modal = document.getElementById('ma-fullauto-setting-modal');
-    if (modal) modal.style.display = 'none';
+    // 모든 관련 모달 닫기
+    const modalsToClose = ['ma-fullauto-setting-modal', 'multi-account-modal'];
+    modalsToClose.forEach(modalId => {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    });
 
     const imageToolsTab = document.querySelector('[data-tab="image-tools"]') as HTMLElement;
     if (imageToolsTab) {
@@ -39410,8 +42253,15 @@ async function initMultiAccountPublishModal() {
   });
 
   document.getElementById('ma-shopping-goto-banner-btn')?.addEventListener('click', () => {
-    const modal = document.getElementById('ma-fullauto-setting-modal');
-    if (modal) modal.style.display = 'none';
+    // 모든 관련 모달 닫기
+    const modalsToClose = ['ma-fullauto-setting-modal', 'multi-account-modal'];
+    modalsToClose.forEach(modalId => {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    });
 
     const imageToolsTab = document.querySelector('[data-tab="image-tools"]') as HTMLElement;
     if (imageToolsTab) {
@@ -39682,7 +42532,7 @@ async function initMultiAccountPublishModal() {
 
     const settings: any = {
       dailyLimit: parseInt(dailyLimitInput?.value || '5'),
-      imageSource: imageSourceSelect?.value || 'gemini',
+      imageSource: imageSourceSelect?.value || getFullAutoImageSource(),
       toneStyle: toneSelect?.value || 'friendly',
       publishMode: publishModeSelect?.value || 'publish',
       autoRotate: autoRotateCheckbox?.checked !== false,
@@ -40127,20 +42977,27 @@ async function initMultiAccountPublishModal() {
           structuredContent = contentResult.content;
           console.log('[FullAuto] 구조화된 콘텐츠:', structuredContent);
 
-          // ✅ [2026-01-24] 쇼핑커넥트 모드: SEO 제목 자동 생성
-          // 네이버 자동완성 키워드를 활용하여 제품명에 세부 키워드 추가
+          // ✅ [2026-02-08] 쇼핑커넥트 모드: 항상 100점 SEO 제목 생성
+          // 핵심: 제품명 + 네이버 자동완성 키워드 최소 3개 조합 = 상위노출 보장
           if (queueItem.contentMode === 'affiliate' && structuredContent.selectedTitle) {
-            try {
-              addMALog('🔍 SEO 최적화 제목 생성 중...', 'info');
-              const seoResult = await (window as any).api.generateSeoTitle(structuredContent.selectedTitle);
-              if (seoResult.success && seoResult.title && seoResult.title !== structuredContent.selectedTitle) {
-                const originalTitle = structuredContent.selectedTitle;
-                structuredContent.selectedTitle = seoResult.title;
-                console.log(`[SEO] 제목 교체: "${originalTitle}" → "${seoResult.title}"`);
-                addMALog(`✨ SEO 제목 적용: "${seoResult.title.substring(0, 30)}..."`, 'success');
+            const productName = String(structuredContent.title || structuredContent.selectedTitle || '').trim();
+            if (productName && productName.length >= 3) {
+              try {
+                addMALog('🔍 SEO 100점 제목 생성 중... (자동완성 키워드 3개 이상 조합)', 'info');
+                const seoResult = await (window as any).api.generateSeoTitle(productName);
+                if (seoResult.success && seoResult.title && seoResult.title !== productName) {
+                  const originalTitle = structuredContent.selectedTitle;
+                  structuredContent.selectedTitle = seoResult.title;
+                  console.log(`[SEO] 제목 교체: "${originalTitle}" → "${seoResult.title}"`);
+                  addMALog(`✨ SEO 제목 적용: "${seoResult.title.substring(0, 35)}"`, 'success');
+                  // ✅ 다른 필드에도 반영하여 덮어쓰기 방지
+                  if (structuredContent.title && structuredContent.title === originalTitle) {
+                    structuredContent.title = seoResult.title;
+                  }
+                }
+              } catch (seoErr) {
+                console.warn('[SEO] 제목 생성 실패 (원본 사용):', seoErr);
               }
-            } catch (seoErr) {
-              console.warn('[SEO] 제목 생성 실패 (원본 사용):', seoErr);
             }
           }
 
@@ -40168,7 +43025,7 @@ async function initMultiAccountPublishModal() {
           // ✅ 2. 이미지 수집/생성 실행
           try {
             // 이미지 소스 결정
-            const imageSource = queueItem.imageSource || 'gemini'; // 기본값 gemini
+            const imageSource = queueItem.imageSource || getFullAutoImageSource(); // ✅ [2026-02-09 FIX] 풀오토 이미지 설정 반영
             const skipImages = imageSource === 'skip';
             console.log('[FullAuto] 이미지 소스:', imageSource, ', 건너뛰기:', skipImages);
 
@@ -40188,7 +43045,8 @@ async function initMultiAccountPublishModal() {
                 headings,
                 structuredContent.selectedTitle,
                 {
-                  allowThumbnailText: queueItem.includeThumbnailText,
+                  // ✅ [2026-01-28 FIX] localStorage 설정 우선 적용 (큐 생성 시점이 아닌 이미지 생성 직전 최신 설정)
+                  allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
                   stopCheck: () => stopRequested || (window as any).stopFullAutoPublish,
                   onProgress: (msg) => {
                     addMALog(msg, 'info');
@@ -40199,13 +43057,20 @@ async function initMultiAccountPublishModal() {
 
             } else {
               // ✅ AI 이미지 생성
-              addMALog(`🎨 AI 이미지 생성 시작 (소스로: ${imageSource})`, 'info');
+              const _maSourceNames: Record<string, string> = {
+                'pollinations': 'Pollinations', 'nano-banana-pro': '나노 바나나 프로',
+                'prodia': 'Prodia', 'stability': 'Stability AI',
+                'deepinfra': 'DeepInfra FLUX-2', 'deepinfra-flux': 'DeepInfra FLUX-2',
+                'falai': 'Fal.ai FLUX', 'naver-search': '네이버 검색', 'naver': '네이버 검색',
+              };
+              addMALog(`🎨 AI 이미지 생성 시작 (엔진: ${_maSourceNames[imageSource] || imageSource})`, 'info');
               generatedImages = await generateImagesForAutomation(
                 imageSource,
                 headings,
                 structuredContent.selectedTitle,
                 {
-                  allowThumbnailText: queueItem.includeThumbnailText,
+                  // ✅ [2026-01-28 FIX] localStorage 설정 우선 적용 (큐 생성 시점이 아닌 이미지 생성 직전 최신 설정)
+                  allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
                   stopCheck: () => stopRequested || (window as any).stopFullAutoPublish,
                   onProgress: (msg) => {
                     addMALog(msg, 'info');
@@ -40346,6 +43211,69 @@ async function initMultiAccountPublishModal() {
             }
           }
 
+          // ✅ [2026-02-02 FIX] 이전글 엮기 자동 매칭 (CTA와 별개)
+          // 쇼핑커넥트 모드이거나 이전글 엮기가 필요한 경우 자동으로 이전글 찾기
+          const isShoppingConnectMode = !!(queueItem.affiliateLink && String(queueItem.affiliateLink).trim());
+          const needsPreviousPostLookup = !((queueItem as any)?.previousPostUrl && String((queueItem as any).previousPostUrl).trim());
+
+          if (needsPreviousPostLookup && (isShoppingConnectMode || queueItem.ctaType === 'previous-post')) {
+            try {
+              const catKey = String(queueItem.category || '').trim();
+              const postsAll = loadGeneratedPosts();
+              const published = (postsAll || []).filter((p: any) => String(p?.publishedUrl || '').trim().length > 0);
+
+              console.log(`[FullAuto] 이전글 엮기 매칭 시작 - 카테고리: ${catKey}, 발행된 글 수: ${published.length}, 쇼핑커넥트: ${isShoppingConnectMode}`);
+
+              if (catKey && published.length > 0) {
+                const normCat = catKey.replace(/\s+/g, '').toLowerCase();
+
+                // 쇼핑커넥트 모드: 쇼핑커넥트 글 우선 매칭
+                let candidates = published.filter((p: any) => {
+                  const pCat = String(p?.category || '').trim();
+                  if (!pCat) return false;
+                  const normPCat = pCat.replace(/\s+/g, '').toLowerCase();
+                  const categoryMatch = normPCat === normCat || normPCat.includes(normCat) || normCat.includes(normPCat);
+
+                  if (isShoppingConnectMode) {
+                    // 쇼핑커넥트 글 우선
+                    const isPostShoppingConnect = !!(p.affiliateLink || p.contentMode === 'shopping-connect');
+                    return categoryMatch && isPostShoppingConnect;
+                  }
+                  return categoryMatch;
+                });
+
+                // 쇼핑커넥트 글이 없으면 같은 카테고리 전체 글 검색
+                if (candidates.length === 0 && isShoppingConnectMode) {
+                  candidates = published.filter((p: any) => {
+                    const pCat = String(p?.category || '').trim();
+                    if (!pCat) return false;
+                    const normPCat = pCat.replace(/\s+/g, '').toLowerCase();
+                    return normPCat === normCat || normPCat.includes(normCat) || normCat.includes(normPCat);
+                  });
+                }
+
+                console.log(`[FullAuto] 이전글 매칭 후보 수: ${candidates.length}`);
+
+                if (candidates.length > 0) {
+                  candidates.sort((a: any, b: any) => {
+                    const aT = new Date(a.publishedAt || a.updatedAt || a.createdAt || 0).getTime();
+                    const bT = new Date(b.publishedAt || b.updatedAt || b.createdAt || 0).getTime();
+                    return bT - aT;
+                  });
+                  const chosen = candidates[0];
+                  (queueItem as any).previousPostUrl = String(chosen?.publishedUrl || '').trim();
+                  (queueItem as any).previousPostTitle = String(chosen?.title || '이전 글 보기').trim();
+                  addMALog(`📖 이전글 자동 매칭: "${chosen.title}"`, 'info');
+                  console.log(`[FullAuto] 이전글 엮기 연동 완료: ${(queueItem as any).previousPostUrl}`);
+                } else {
+                  console.log('[FullAuto] 일치하는 카테고리의 이전 글을 찾지 못했습니다.');
+                }
+              }
+            } catch (prevPostErr) {
+              console.warn('[FullAuto] 이전글 엮기 자동 연동 실패:', prevPostErr);
+            }
+          }
+
           addMALog('📤 블로그 발행 중...', 'info');
           addProgressItem(`   🚀 ${queueItem.accountName} 발행 중...`, 'info');
 
@@ -40359,10 +43287,13 @@ async function initMultiAccountPublishModal() {
             toneStyle: queueItem.toneStyle,
             publishMode: queueItem.publishMode || 'publish',
             scheduleDate: queueItem.scheduleDate,
+            scheduleTime: queueItem.scheduleTime,         // ✅ [2026-02-08 FIX] 시간 분리 전달
             scheduleType: queueItem.scheduleType || 'naver-server',
-            categoryName: String(queueItem.category || '').trim() || undefined, // ✅ 블로그 폴더 카테고리 자동 선택용
-            // ✅ [2026-01-24 FIX] CTA 설정 - skipCta가 명시적으로 true일 때만 건너뛰기 (ctaText 없음 != CTA 건너뛰기)
-            skipCta: (queueItem as any)?.formData?.skipCta === true || (queueItem as any)?.skipCta === true,
+            scheduleInterval: queueItem.scheduleInterval, // ✅ [2026-02-08 FIX] 계정 간 발행 간격
+            categoryName: String(queueItem.realCategoryName || '').trim() || undefined, // ✅ [2026-02-09 FIX] 실제 블로그 카테고리(폴더) 이름 사용 (콘텐츠 카테고리 아님)
+            category: queueItem.category || undefined, // ✅ 콘텐츠 카테고리 (CTA 이전글 찾기용)
+            // ✅ [2026-02-03 FIX] CTA 설정 - ctaType === 'none'일 때도 skipCta 적용
+            skipCta: queueItem.ctaType === 'none' || (queueItem as any)?.formData?.skipCta === true || (queueItem as any)?.skipCta === true,
             ctaPosition: ((queueItem as any)?.formData?.ctaPosition as 'top' | 'middle' | 'bottom') || 'bottom',
             ctas: (() => {
               const fromForm = Array.isArray((queueItem as any)?.formData?.ctas) ? (queueItem as any).formData.ctas : [];
@@ -40390,6 +43321,9 @@ async function initMultiAccountPublishModal() {
             videoOption: queueItem.videoOption,      // ✅ [2026-01-20] VEO 영상 변환 옵션
             useAiImage: queueItem.useAiImage ?? true, // ✅ [2026-01-20] AI 이미지 생성 사용 여부
             createProductThumbnail: queueItem.createProductThumbnail ?? false, // ✅ [2026-01-20] 제품 썸네일 합성
+            // ✅ [2026-02-02 FIX] 이전글 엮기 필드 추가 (기존 누락으로 인한 버그 수정)
+            previousPostUrl: (queueItem as any)?.previousPostUrl || undefined,
+            previousPostTitle: (queueItem as any)?.previousPostTitle || undefined,
           };
 
           console.log('[FullAuto] 발행 옵션:', publishOptions);
@@ -40469,12 +43403,16 @@ async function initMultiAccountPublishModal() {
       updateMAProgress(totalItems, totalItems, '완료', wasStopped ? '⏹️ 발행이 중지되었습니다.' : '🎉 모든 발행 완료!');
       addMALog(wasStopped ? '⏹️ 발행이 중지되었습니다.' : `🎉 모든 발행 완료! (성공: ${totalSuccess}, 실패: ${totalFail})`, wasStopped ? 'warning' : 'success');
 
-      // ✅ [2026-01-20 추가] 메모리 정리 - 풀오토 다중계정 발행 완료 후
+      // ✅ [2026-01-29 개선] 발행 완료 후 전체 상태 초기화
       try {
-        console.log('[FullAuto] 🧹 메모리 정리 시작...');
+        console.log('[FullAuto] 🧹 발행 완료 → 전체 상태 초기화 시작...');
 
-        // 전역 이미지 배열 초기화
-        (window as any).generatedImages = [];
+        // ✅ 통합 초기화 함수 호출
+        if (typeof (window as any).resetAfterPublish === 'function') {
+          (window as any).resetAfterPublish();
+        }
+
+        // 추가 정리: 다중계정 특화 상태
         (window as any).imageManagementGeneratedImages = [];
         (window as any).maPresetThumbnail = null;
         (window as any).maPresetThumbnailPath = null;
@@ -40484,9 +43422,9 @@ async function initMultiAccountPublishModal() {
           ImageManager.clear();
         }
 
-        console.log('[FullAuto] ✅ 메모리 정리 완료');
+        console.log('[FullAuto] ✅ 전체 상태 초기화 완료 → 새 발행 준비 완료');
       } catch (memErr) {
-        console.warn('[FullAuto] 메모리 정리 중 오류:', memErr);
+        console.warn('[FullAuto] 상태 초기화 중 오류:', memErr);
       }
 
       setTimeout(() => {
@@ -40590,6 +43528,74 @@ async function initMultiAccountPublishModal() {
   function addProgressItem(message: string, type: 'info' | 'success' | 'error' | 'warning') {
     // 모달 내부 로그로 통합 (외부 진행 목록은 더 이상 사용하지 않음)
     addMALog(message, type);
+  }
+
+  // ✅ [2026-01-27] 이벤트 위임: 동적 버튼들을 위한 폴백 핸들러
+  // - ma-fullauto-btn (풀오토 세팅)
+  // - ma-add-account-btn (계정 추가)
+  // - ma-edit-btn, ma-delete-btn (편집/삭제)
+  const multiAccountModalDelegation = document.getElementById('multi-account-modal');
+  if (multiAccountModalDelegation) {
+    multiAccountModalDelegation.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+
+      // 풀오토 세팅 버튼
+      if (target.classList.contains('ma-fullauto-btn') || target.closest('.ma-fullauto-btn')) {
+        const btn = target.classList.contains('ma-fullauto-btn') ? target : target.closest('.ma-fullauto-btn') as HTMLElement;
+        if (btn) {
+          e.stopPropagation();
+          const accountId = btn.dataset.accountId;
+          const accountName = btn.dataset.accountName;
+          if (accountId && accountName) {
+            console.log('[MultiAccountPublish] 이벤트 위임: 풀오토 세팅 클릭 -', accountName);
+            openFullautoSettingModal(accountId, accountName);
+          }
+        }
+        return;
+      }
+
+      // 계정 추가 버튼
+      if (target.id === 'ma-add-account-btn' || target.closest('#ma-add-account-btn')) {
+        e.stopPropagation();
+        console.log('[MultiAccountPublish] 이벤트 위임: 계정 추가 클릭');
+        openAccountEditModal();
+        return;
+      }
+
+      // 편집 버튼
+      if (target.classList.contains('ma-edit-btn') || target.closest('.ma-edit-btn')) {
+        const btn = target.classList.contains('ma-edit-btn') ? target : target.closest('.ma-edit-btn') as HTMLElement;
+        if (btn) {
+          e.stopPropagation();
+          const accountId = btn.dataset.accountId;
+          if (accountId) {
+            console.log('[MultiAccountPublish] 이벤트 위임: 편집 클릭 -', accountId);
+            openAccountEditModal(accountId);
+          }
+        }
+        return;
+      }
+
+      // 삭제 버튼
+      if (target.classList.contains('ma-delete-btn') || target.closest('.ma-delete-btn')) {
+        const btn = target.classList.contains('ma-delete-btn') ? target : target.closest('.ma-delete-btn') as HTMLElement;
+        if (btn) {
+          e.stopPropagation();
+          const accountId = btn.dataset.accountId;
+          if (accountId && confirm('정말로 이 계정을 삭제하시겠습니까?')) {
+            console.log('[MultiAccountPublish] 이벤트 위임: 삭제 클릭 -', accountId);
+            window.api.removeBlogAccount(accountId).then(() => {
+              selectedAccountIds = selectedAccountIds.filter(id => id !== accountId);
+              renderMultiAccountList();
+              updateSelectedCount();
+              toastManager.success('계정이 삭제되었습니다.');
+            });
+          }
+        }
+        return;
+      }
+    });
+    console.log('[MultiAccountPublish] ✅ 이벤트 위임 핸들러 등록 완료');
   }
 
   console.log('[MultiAccountPublish] 다중계정 동시발행 모달 초기화 완료');
@@ -40943,6 +43949,17 @@ function initAIAssistant() {
     console.log('[AIAssistant] 요소를 찾을 수 없음');
     return;
   }
+
+  // ✅ [2026-01-26] 버튼과 패널을 body로 이동시켜 항상 표시되도록 함
+  if (assistantBtn.parentElement !== document.body) {
+    document.body.appendChild(assistantBtn);
+    console.log('[AIAssistant] ✅ 버튼을 body로 이동 - 항상 표시됨');
+  }
+  if (assistantPanel.parentElement !== document.body) {
+    document.body.appendChild(assistantPanel);
+    console.log('[AIAssistant] ✅ 패널을 body로 이동');
+  }
+
 
   // 패널 열기/닫기
   assistantBtn.addEventListener('click', () => {
@@ -41669,6 +44686,8 @@ function initGeminiSelectionUI(): void {
       const shoppingConnectSettings = document.getElementById('shopping-connect-settings');
       const shoppingConnectImageOptions = document.getElementById('shopping-connect-image-options');
       const thumbnailTextOptionContainer = document.getElementById('thumbnail-text-option-container');
+      // ✅ [2026-02-10] 쇼핑몰 이미지 수집 섹션
+      const shoppingUrlContainer = document.getElementById('image-shopping-url-container');
       // ✅ [2026-01-19] 고급 화질 및 모델 설정 (쇼핑커넥트에서 불필요)
       const imageQualityToggle = document.getElementById('toggle-image-quality-settings')?.parentElement;
       const imageQualityPanel = document.getElementById('image-quality-settings-panel');
@@ -41676,6 +44695,8 @@ function initGeminiSelectionUI(): void {
       if (mode === 'affiliate') {
         if (shoppingConnectSettings) shoppingConnectSettings.style.display = 'block';
         if (shoppingConnectImageOptions) shoppingConnectImageOptions.style.display = 'block';
+        // ✅ [2026-02-10] 쇼핑몰 이미지 수집 섹션 표시
+        if (shoppingUrlContainer) shoppingUrlContainer.style.display = 'block';
         // ✅ 쇼핑커넥트에서는 1번 이미지 텍스트 포함 옵션 숨김 (자동 적용)
         if (thumbnailTextOptionContainer) thumbnailTextOptionContainer.style.display = 'none';
         // ✅ [2026-01-19] 고급 화질 및 모델 설정 숨김
@@ -41685,6 +44706,8 @@ function initGeminiSelectionUI(): void {
       } else {
         if (shoppingConnectSettings) shoppingConnectSettings.style.display = 'none';
         if (shoppingConnectImageOptions) shoppingConnectImageOptions.style.display = 'none';
+        // ✅ [2026-02-10] 쇼핑몰 이미지 수집 섹션 숨김
+        if (shoppingUrlContainer) shoppingUrlContainer.style.display = 'none';
         // ✅ 일반 모드에서는 1번 이미지 텍스트 포함 옵션 표시
         if (thumbnailTextOptionContainer) thumbnailTextOptionContainer.style.display = 'block';
         // ✅ [2026-01-19] 일반 모드에서는 고급 화질 설정 표시
@@ -42409,6 +45432,7 @@ console.log('[Renderer] ✅ 수동 썸네일 설정 함수 등록 완료');
     const naverAdCustomerId = (document.getElementById('naver-ad-customer-id') as HTMLInputElement)?.value?.trim() || undefined;
     const stabilityApiKey = (document.getElementById('stability-api-key') as HTMLInputElement)?.value?.trim() || undefined;
     const falaiApiKey = (document.getElementById('falai-api-key') as HTMLInputElement)?.value?.trim() || undefined;
+    const deepinfraApiKey = (document.getElementById('deepinfra-api-key') as HTMLInputElement)?.value?.trim() || undefined; // ✅ [2026-01-26] DeepInfra API
     const customImageSavePath = (document.getElementById('custom-image-save-path') as HTMLInputElement)?.value?.trim() || undefined;
 
     const dailyPostLimit = parseInt((document.getElementById('daily-post-limit') as HTMLInputElement)?.value || '3');
@@ -42434,6 +45458,7 @@ console.log('[Renderer] ✅ 수동 썸네일 설정 함수 등록 완료');
       naverAdCustomerId,
       stabilityApiKey,
       falaiApiKey,
+      deepinfraApiKey, // ✅ [2026-01-26] DeepInfra API
       customImageSavePath,
       dailyPostLimit,
       freeQuotaPublish,
@@ -42485,3 +45510,48 @@ console.log('[Renderer] ✅ 수동 썸네일 설정 함수 등록 완료');
 };
 
 console.log('[Renderer] ✅ 환경설정 저장/닫기 함수 등록 완료');
+
+setTimeout(() => {
+  try {
+    injectDeepInfraImageSourceOption();
+  } catch (e) {
+    console.warn('[DeepInfra] 버튼 삽입 실패:', e);
+  }
+}, 1000);
+
+// ✅ [2026-01-27] 모든 모달을 body 직속으로 자동 이동 (position:fixed 정상 작동을 위해)
+// - 부모 요소에 transform/filter 속성이 있으면 position:fixed가 깨지는 문제 해결
+// - 동적으로 생성되는 모달(풀오토 다중계정, 연속발행 등)도 자동 처리
+const modalMoveObserver = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+      const target = mutation.target as HTMLElement;
+      // modal-backdrop 클래스를 가진 요소가 display:flex로 변경될 때
+      if (target.classList.contains('modal-backdrop') &&
+        target.style.display === 'flex' &&
+        target.parentElement !== document.body) {
+        console.log('[ModalFix] 모달을 body로 이동:', target.id || target.className);
+        document.body.appendChild(target);
+      }
+    }
+    // 새로 추가된 노드 중 modal-backdrop 확인
+    mutation.addedNodes.forEach((node) => {
+      if (node instanceof HTMLElement && node.classList.contains('modal-backdrop')) {
+        if (node.parentElement !== document.body) {
+          console.log('[ModalFix] 새 모달을 body로 이동:', node.id || node.className);
+          document.body.appendChild(node);
+        }
+      }
+    });
+  });
+});
+
+// 전체 document 관찰
+modalMoveObserver.observe(document.body, {
+  childList: true,
+  subtree: true,
+  attributes: true,
+  attributeFilter: ['style']
+});
+
+console.log('[Renderer] ✅ 모달 자동 body 이동 Observer 등록 완료');

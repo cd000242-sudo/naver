@@ -400,11 +400,20 @@ function getToneInstruction(toneStyle?: string): string {
   return instruction ? `\n\n${instruction}\n` : '';
 }
 
+// ✅ [2026-01-30] 제품 정보 파라미터 타입
+interface ProductInfoForPrompt {
+  name?: string;
+  spec?: string;
+  price?: string;
+  reviews?: string[];
+}
+
 export function buildFullPrompt(
   mode: PromptMode,
   categoryHint?: string,
   isFullAuto: boolean = false,
-  toneStyle?: string
+  toneStyle?: string,
+  productInfo?: ProductInfoForPrompt  // ✅ [2026-01-30] 제품 정보 파라미터 추가
 ): string {
   // 1. 기본 2축 분리 프롬프트
   const basePrompt = buildSystemPromptFromHint(mode, categoryHint);
@@ -432,6 +441,64 @@ export function buildFullPrompt(
 - 입력 데이터에 'SOURCE TITLE'이 있다면 이를 제목의 뼈대(70%)로 삼으세요.
 - 원본 제목의 핵심 키워드와 주어를 유지하되, 나머지 30%를 AI의 후킹/심리 트리거로 채워 클릭률을 높이세요.
 - **[필수]** 주제를 왜곡하거나 정보를 누락하지 말고, 원본의 의도를 살리면서 더 매력적인 문장으로 변환하세요.`;
+
+  // ✅ [2026-01-30] 쇼핑커넥트 제품 정보 블록 추가
+  if (productInfo && (productInfo.name || productInfo.spec || productInfo.price || productInfo.reviews?.length)) {
+    console.log(`[PromptLoader] 🛒 쇼핑커넥트 제품 정보 프롬프트에 추가`);
+
+    let productBlock = `\n\n[쇼핑커넥트 제품 정보 - 반드시 활용하세요!]\n`;
+
+    if (productInfo.name) {
+      productBlock += `📦 제품명: ${productInfo.name}\n`;
+    }
+    if (productInfo.price) {
+      productBlock += `💰 가격: ${productInfo.price}\n`;
+    }
+    if (productInfo.spec) {
+      productBlock += `📋 스펙: ${productInfo.spec}\n`;
+    }
+    if (productInfo.reviews && productInfo.reviews.length > 0) {
+      productBlock += `⭐ 실제 구매자 리뷰:\n`;
+      productInfo.reviews.forEach((review, idx) => {
+        productBlock += `  ${idx + 1}. "${review.substring(0, 200)}${review.length > 200 ? '...' : ''}"\n`;
+      });
+    }
+
+    productBlock += `
+[제품 정보 활용 지침]
+- 위 제품 정보를 본문에 자연스럽게 녹여서 작성하세요.
+- 가격 정보는 "현재 XX원에 판매 중" 형식으로 언급하세요.
+- 스펙 정보는 장점으로 풀어서 설명하세요 (예: "크기가 445mm로 슬림해서 어디든 배치 가능").
+- 리뷰는 "실제 구매하신 분들 반응을 보면~" 형식으로 인용하세요.
+- 정보를 지어내지 말고, 위에 제공된 정보만 활용하세요.
+
+[🛒 쇼핑커넥트 필수 제목 규칙]
+⛔ 크롤링된 상품 1개만 사용. 다른 상품과 비교 금지!
+
+📌 상품명 축약 규칙:
+원본 상품명이 너무 길면 "브랜드명 + 핵심 모델명"으로 축약 (수식어구 제거)
+예: "LG전자 오브제컬렉션 코드제로 A9S 무선청소기" → "LG 코드제로 A9S"
+
+📌 제목 공식 (25~40자):
+{축약된 상품명} + {상품 특성 키워드} + {정합성 맞는 자유 조합}
+
+📌 키워드 정합성 규칙:
+- 고가 제품(100만원+) → "프리미엄", "대가족", "신혼" 가능
+- 저가 제품(30만원-) → "가성비", "입문용", "원룸", "1인가구" 가능
+- 가격대와 맞지 않는 키워드 금지!
+
+📌 자유 조합 예시:
+- 대상: 원룸, 1인가구, 신혼, 직장인, 반려동물집
+- 시점: 2026, 최신, 요즘인기, 신제품
+- 평가: 가성비, 만족도, 추천이유, 구매꿀팁
+
+⛔ 금지 패턴:
+- 상품명만 (중복됨)
+- "총정리", "리뷰"로만 끝남 (흔함)
+- OO vs OO 비교 (상품 1개뿐)`;
+
+    finalPrompt += productBlock;
+  }
 
   return finalPrompt;
 }

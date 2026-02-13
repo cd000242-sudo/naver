@@ -13,7 +13,6 @@ function loadSettings(): {
 	password?: string;
 	geminiApiKey?: string;
 	openaiApiKey?: string;
-	pexelsApiKey?: string;
 	generator?: Provider;
 } {
 	const base =
@@ -41,23 +40,19 @@ function loadSettings(): {
 		out.openaiApiKey = json.openaiApiKey;
 		out.generator = 'openai';
 	}
-	if (json.pexelsApiKey) {
-		process.env.PEXELS_API_KEY = json.pexelsApiKey;
-		out.pexelsApiKey = json.pexelsApiKey;
-	}
+
 	return out as {
 		id?: string;
 		password?: string;
 		geminiApiKey?: string;
 		openaiApiKey?: string;
-		pexelsApiKey?: string;
 		generator?: Provider;
 	};
 }
 
-async function preparePexelsImages(content: StructuredContent) {
-	if (!process.env.PEXELS_API_KEY) {
-		throw new Error('PEXELS_API_KEY가 settings.json에 없습니다.');
+async function prepareAIImages(content: StructuredContent) {
+	if (!process.env.GEMINI_API_KEY) {
+		throw new Error('GEMINI_API_KEY가 settings.json에 없습니다.');
 	}
 	// 테스트 비용/시간 절약: 앞 2~3개만
 	const targets = (content.headings || []).slice(0, 3);
@@ -81,7 +76,7 @@ async function preparePexelsImages(content: StructuredContent) {
 	process.env.GENERATED_IMAGES_DIR = outDir;
 
 	const generated = await generateImages({
-		provider: 'pexels',
+		provider: 'nano-banana-pro',
 		items,
 		styleHint: 'editorial clean',
 	});
@@ -93,14 +88,14 @@ async function preparePexelsImages(content: StructuredContent) {
 	return generated.map((g) => ({
 		heading: g.heading,
 		filePath: g.filePath,
-		provider: 'pexels',
+		provider: 'nano-banana-pro',
 		alt: g.heading,
 		caption: g.heading,
 	}));
 }
 
 async function main() {
-	console.log('🧪 Pexels 포함 실제 타이핑 배치 테스트 시작');
+	console.log('🧪 AI 이미지 포함 실제 타이핑 배치 테스트 시작');
 	const cfg = loadSettings();
 	if (!cfg.id || !cfg.password) {
 		throw new Error('네이버 자격증명이 settings.json에 없습니다. (rememberCredentials 켜고 저장 필요)');
@@ -108,9 +103,7 @@ async function main() {
 	if (!cfg.generator) {
 		throw new Error('콘텐츠 생성용 API 키가 settings.json에 없습니다. (geminiApiKey 또는 openaiApiKey)');
 	}
-	if (!cfg.pexelsApiKey) {
-		throw new Error('Pexels API 키가 settings.json에 없습니다.');
-	}
+
 
 	// 1) 콘텐츠 생성 (간단 테스트 소스)
 	const source: ContentSource = {
@@ -126,9 +119,9 @@ async function main() {
 	console.log('→ AI 콘텐츠 생성…');
 	const structured = await generateStructuredContent(source, { minChars: 800 });
 
-	// 2) Pexels 이미지 준비
-	console.log('→ Pexels 이미지 준비…');
-	const images = await preparePexelsImages(structured);
+	// 2) AI 이미지 준비
+	console.log('→ AI 이미지 준비…');
+	const images = await prepareAIImages(structured);
 	console.log('   이미지 준비 완료:', images.map((i) => i.filePath));
 
 	// 3) 브라우저 자동화로 실제 타이핑+이미지 삽입 확인

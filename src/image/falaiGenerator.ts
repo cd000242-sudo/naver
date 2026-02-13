@@ -5,6 +5,18 @@ import { app } from 'electron';
 import { loadConfig } from '../configManager.js';
 import { ImageRequestItem, GeneratedImage } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
+import { addThumbnailTextOverlay } from './textOverlay.js';
+// ✅ [2026-02-12 100점] 공유 유틸리티 임포트
+import {
+    getStyleGuideByCategory,
+    SHOPPING_CONNECT_LIFESTYLE,
+    VARIATION_STYLES,
+    REALISTIC_CATEGORY_STYLES,
+    ANIME_CATEGORY_STYLES,
+    STYLE_PROMPT_MAP,
+    filterPersonKeywordsIfNeeded,
+    getImageSize,
+} from './imageStyles.js';
 
 // ✅ Fal.ai 지원 모델 (FLUX 계열)
 export const FALAI_MODELS = {
@@ -40,25 +52,31 @@ export async function isFalAIConfigured(): Promise<boolean> {
 }
 
 /**
- * Fal.ai로 일괄 이미지 생성 (공통 인터페이스)
+ * ✅ [2026-02-12 100점] Fal.ai로 일괄 이미지 생성 (공통 인터페이스)
+ * - 퍼지 카테고리 매칭
+ * - 쇼핑커넥트 라이프스타일 스타일
+ * - NO PEOPLE 충돌 방지
+ * - 재시도 + 프롬프트 변형
+ * - 하단 크롭 (FLUX 텍스트 제거)
+ * - 28개 카테고리 × 실사/애니메 스타일
  */
 export async function generateWithFalAI(
     items: ImageRequestItem[],
     postTitle?: string,
     postId?: string,
     isFullAuto: boolean = false,
-    providedApiKey?: string
+    providedApiKey?: string,
+    isShoppingConnect: boolean = false // ✅ [2026-02-12] 쇼핑커넥트 모드
 ): Promise<GeneratedImage[]> {
     const config = await loadConfig();
     const apiKey = providedApiKey || (config as any).falaiApiKey?.trim();
-    // ✅ [2026-01-16] configManager에서 설정된 모델 우선, 없으면 flux-realism (실사 특화, 기본값)
     const selectedModel = (config as any).falaiModel || 'flux-realism';
 
     if (!apiKey) {
         throw new Error('Fal.ai API 키가 설정되지 않았습니다.');
     }
 
-    console.log(`[Fal.ai] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${selectedModel})`);
+    console.log(`[Fal.ai] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${selectedModel}, 쇼핑커넥트: ${isShoppingConnect})`);
 
     const results: GeneratedImage[] = [];
 
@@ -66,58 +84,151 @@ export async function generateWithFalAI(
         const item = items[i];
         const isThumbnail = (item as any).isThumbnail !== undefined ? (item as any).isThumbnail : (i === 0);
 
-        console.log(`[Fal.ai] 🖼️ "${item.heading}" 생성 중...`);
+        console.log(`[Fal.ai] 🖼️ [${i + 1}/${items.length}] "${item.heading}" 생성 중...`);
 
         try {
-            // 카테고리별 스타일 (기존 로직 유지)
-            const categoryStyles: Record<string, string> = {
-                '연예': 'elegant bokeh lighting, soft dreamy atmosphere, abstract artistic photography, glowing stage lights',
-                '스포츠': 'dynamic action sports photography, high speed capture, cinematic motion blur, vibrant energy',
-                '음식': 'professional food photography, appetizing presentation, soft warm lighting, macro details',
-                '여행': 'stunning cinematic travel photography, breathtaking landscape, professional lighting',
-                '건강': 'wellness and healthy lifestyle photography, clean bright environment, professional medical stock quality',
-                '테크': 'futuristic technology product photography, sleek minimalist design, professional studio lighting',
-                '뉴스': 'abstract conceptual photography, symbolic visual metaphor, dramatic lighting, editorial style',
-                '경제': 'corporate business photography, modern office environment, professional financial concept imagery',
-                '쇼핑': 'product photography, e-commerce style, clean white background, professional studio lighting',
-                '육아': 'warm family photography, soft natural lighting, cozy home atmosphere, heartwarming moments',
-                '라이프': 'lifestyle photography, modern living, bright airy atmosphere, everyday moments',
-                'default': 'professional commercial photography, cinematic lighting, 8k resolution, ultra realistic'
-            };
+            // ═══════════════════════════════════════════════════════
+            // 1️⃣ 이미지 스타일 결정 (realistic / anime / 기타 11가지)
+            // ═══════════════════════════════════════════════════════
+            const imageStyle = (item as any).imageStyle || (config as any).imageStyle || 'realistic';
+            const isAnime = imageStyle === 'anime';
+            console.log(`[Fal.ai] 🎨 이미지 스타일: ${imageStyle}`);
 
-            const styleGuide = categoryStyles[item.category || 'default'] || categoryStyles['default'];
+            // ═══════════════════════════════════════════════════════
+            // 2️⃣ 카테고리 스타일 가져오기 (퍼지 매칭)
+            // ═══════════════════════════════════════════════════════
+            const categoryStyleMap = isAnime ? ANIME_CATEGORY_STYLES : REALISTIC_CATEGORY_STYLES;
+            const { styleGuide: categoryStyle, matchedKey } = getStyleGuideByCategory(item.category, categoryStyleMap);
+            console.log(`[Fal.ai] 📂 카테고리: "${item.category}" → 매칭: "${matchedKey}"`);
 
-            // ✅ [2026-01-21 FIX] 영문 프롬프트 우선 + 한글 감지 시 기본 영어 스타일 강화
-            // FLUX 모델은 한글을 잘 이해 못하므로, 한글 프롬프트는 영어 스타일로 감싸기
+            // ═══════════════════════════════════════════════════════
+            // 3️⃣ 쇼핑커넥트 모드 → 라이프스타일 스타일 오버라이드
+            // ═══════════════════════════════════════════════════════
+            const styleGuide = isShoppingConnect ? SHOPPING_CONNECT_LIFESTYLE : categoryStyle;
+            if (isShoppingConnect) {
+                console.log(`[Fal.ai] 🛒 쇼핑커넥트 모드 → 라이프스타일 스타일 적용`);
+            }
+
+            // ═══════════════════════════════════════════════════════
+            // 4️⃣ 스타일 프롬프트 매핑
+            // ═══════════════════════════════════════════════════════
+            const stylePrompt = STYLE_PROMPT_MAP[imageStyle] || STYLE_PROMPT_MAP['realistic'];
+
+            // ═══════════════════════════════════════════════════════
+            // 5️⃣ 베이스 프롬프트 결정
+            // ═══════════════════════════════════════════════════════
             let basePrompt = item.englishPrompt || sanitizeImagePrompt(item.prompt || item.heading);
 
-            // ✅ 한글 감지: 한글이 포함되면 영어 스타일 키워드로 보강
+            // 한글 감지: 한글이 포함되면 영어 스타일 키워드로 보강
             const hasKorean = /[가-힣]/.test(basePrompt);
             if (hasKorean && !item.englishPrompt) {
-                console.log(`[Fal.ai] ⚠️ 한글 프롬프트 감지 → 영어 스타일 보강: "${basePrompt.substring(0, 30)}..."`);
-                // 한글 프롬프트를 영어 스타일 키워드로 감싸기
+                console.log(`[Fal.ai] ⚠️ 한글 프롬프트 감지 → 영어 스타일 보강`);
                 basePrompt = `high quality stock photography, ${styleGuide}, professional commercial image, modern aesthetic`;
             }
 
-            // FLUX 모델용 프롬프트 조합
+            // ═══════════════════════════════════════════════════════
+            // 6️⃣ NO PEOPLE 충돌 방지
+            // ═══════════════════════════════════════════════════════
+            basePrompt = filterPersonKeywordsIfNeeded(styleGuide, basePrompt, item.heading, sanitizeImagePrompt);
+
+            // ═══════════════════════════════════════════════════════
+            // 7️⃣ 최종 프롬프트 조합
+            // ═══════════════════════════════════════════════════════
             let prompt = '';
             if (isThumbnail && postTitle) {
-                // 썸네일은 텍스트보다는 시각적 강렬함에 집중 (텍스트 생성은 FLUX가 잘하지만, 한글 텍스트는 아직 완벽하지 않음)
-                prompt = `masterpiece, best quality, ${styleGuide}, ${basePrompt}, cinematic lighting, high contrast, 8k wallpaper`;
+                prompt = `masterpiece, best quality, ${stylePrompt}, ${styleGuide}, ${basePrompt}, cinematic lighting, high contrast, 8k wallpaper`;
             } else {
-                prompt = `masterpiece, best quality, ${styleGuide}, ${basePrompt}, ultra detailed, photorealistic, 8k`;
+                prompt = `masterpiece, best quality, ${stylePrompt}, ${styleGuide}, ${basePrompt}, ultra detailed, 8k`;
             }
 
-            // 이미지 생성 요청
-            const res = await generateSingleFalAIImage({
-                prompt,
-                model: selectedModel as keyof typeof FALAI_MODELS, // 설정된 모델 사용
-                size: '1024x1024', // ✅ [100점 수정] 모든 이미지 1:1 비율 - 모바일 피드에서 꽉찬 표시
-                enable_safety_checker: false
-            }, apiKey);
+            // 실사 외 스타일인 경우 스타일 강화 프롬프트 추가
+            if (imageStyle !== 'realistic' && imageStyle !== 'bokeh' && !isAnime) {
+                prompt = `[ART STYLE: ${imageStyle.toUpperCase()}]\n${stylePrompt}\n\n${prompt}\n\nIMPORTANT: Generate the image in ${imageStyle} style. DO NOT generate photorealistic images.`;
+                console.log(`[Fal.ai] 🎨 스타일 프롬프트 적용: ${imageStyle}`);
+            }
 
-            if (res.success && res.localPath) {
-                const buffer = fs.readFileSync(res.localPath);
+            // ═══════════════════════════════════════════════════════
+            // 8️⃣ 이미지 비율 설정
+            // ═══════════════════════════════════════════════════════
+            const imageRatio = (item as any).imageRatio || (config as any).imageRatio || '1:1';
+            const imageSize = getImageSize(imageRatio);
+            console.log(`[Fal.ai] 📐 이미지 비율: ${imageRatio} → ${imageSize}`);
+
+            // ═══════════════════════════════════════════════════════
+            // 9️⃣ 재시도 루프 (최대 2회, 프롬프트 변형)
+            // ═══════════════════════════════════════════════════════
+            const maxRetries = 2;
+            let res: FalAIResult | null = null;
+
+            for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                let attemptPrompt = prompt;
+
+                // ✅ 재시도 시 프롬프트 변형 (이미지 다양성 확보)
+                if (attempt > 1) {
+                    const randomVariation = VARIATION_STYLES[Math.floor(Math.random() * VARIATION_STYLES.length)];
+                    attemptPrompt += ` [VARIATION: ${randomVariation}]`;
+                    console.log(`[Fal.ai] 🔄 재시도 ${attempt}/${maxRetries}: ${randomVariation}`);
+                }
+
+                res = await generateSingleFalAIImage({
+                    prompt: attemptPrompt,
+                    model: selectedModel as keyof typeof FALAI_MODELS,
+                    size: imageSize,
+                    enable_safety_checker: false
+                }, apiKey);
+
+                if (res.success && res.localPath) break; // 성공하면 루프 탈출
+
+                if (attempt < maxRetries) {
+                    console.log(`[Fal.ai] ⚠️ 시도 ${attempt} 실패, ${attempt + 1}번째 재시도...`);
+                    await new Promise(resolve => setTimeout(resolve, 1000)); // 1초 대기
+                }
+            }
+
+            if (res && res.success && res.localPath) {
+                let buffer: Buffer = fs.readFileSync(res.localPath);
+
+                // ═══════════════════════════════════════════════════
+                // 🔟 하단 크롭 (FLUX 모델 텍스트 제거)
+                // ═══════════════════════════════════════════════════
+                try {
+                    const sharpModule = await import('sharp');
+                    const sharp = sharpModule.default || sharpModule;
+                    const metadata = await sharp(buffer).metadata();
+                    if (metadata.width && metadata.height && metadata.height > 100) {
+                        const cropHeight = Math.floor(metadata.height * 0.05); // 하단 5% 크롭
+                        const croppedBuffer = await sharp(buffer)
+                            .extract({ left: 0, top: 0, width: metadata.width, height: metadata.height - cropHeight })
+                            .toBuffer();
+                        buffer = croppedBuffer;
+                        console.log(`[Fal.ai] ✂️ 하단 ${cropHeight}px 크롭 (FLUX 텍스트 제거)`);
+                    }
+                } catch (cropError) {
+                    console.warn(`[Fal.ai] ⚠️ 하단 크롭 실패, 원본 사용`);
+                }
+
+                // ═══════════════════════════════════════════════════
+                // 1️⃣1️⃣ 텍스트 오버레이 (1번 이미지 + allowText)
+                // ═══════════════════════════════════════════════════
+                const isFirstImage = i === 0;
+                const explicitlyAllowText = (item as any).allowText === true;
+                const shouldApplyTextOverlay = isFirstImage && explicitlyAllowText && postTitle;
+
+                if (shouldApplyTextOverlay) {
+                    console.log(`[Fal.ai] 📝 1번 이미지 텍스트 오버레이 적용 중...`);
+                    try {
+                        const overlayResult = await addThumbnailTextOverlay(buffer, postTitle);
+                        if (overlayResult.success && overlayResult.outputBuffer) {
+                            buffer = overlayResult.outputBuffer;
+                            console.log(`[Fal.ai] ✅ 텍스트 오버레이 적용 완료`);
+                        } else {
+                            console.warn(`[Fal.ai] ⚠️ 텍스트 오버레이 실패, 원본 이미지 사용`);
+                        }
+                    } catch (overlayError) {
+                        console.warn(`[Fal.ai] ⚠️ 텍스트 오버레이 예외:`, overlayError);
+                    }
+                }
+
                 const savedResult = await writeImageFile(buffer, 'png', item.heading, postTitle, postId);
 
                 results.push({
@@ -166,16 +277,16 @@ export async function generateSingleFalAIImage(
                 image_size: imageSize,
                 num_images: 1,
                 enable_safety_checker: options.enable_safety_checker ?? false,
-                num_inference_steps: modelKey === 'flux-schnell' ? 4 : 28, // 모델별 최적 스텝 수
+                num_inference_steps: modelKey === 'flux-schnell' ? 4 : 28,
                 guidance_scale: 3.5,
-                sync_mode: true // 동기 모드 (기다렸다가 응답 받음)
+                sync_mode: true
             },
             {
                 headers: {
                     'Authorization': `Key ${apiKey}`,
                     'Content-Type': 'application/json',
                 },
-                timeout: 120000, // 2분 (여유 있게)
+                timeout: 120000,
             }
         );
 

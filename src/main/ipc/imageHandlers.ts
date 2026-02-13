@@ -20,17 +20,28 @@ try {
     console.warn('[imageHandlers] ffmpeg-static을 찾을 수 없습니다.');
 }
 
+// ✅ [2026-02-08] 안전한 핸들러 등록 유틸리티
+// main.ts에서 이미 등록된 핸들러가 있으면 에러 없이 건너뛰기
+function safeHandle(channel: string, handler: (...args: any[]) => any): void {
+    try {
+        ipcMain.handle(channel, handler);
+    } catch (e) {
+        // 이미 등록됨 — main.ts 핸들러가 우선
+        console.log(`[imageHandlers] ⏭️ ${channel} — 이미 등록됨, 건너뛰기`);
+    }
+}
+
 /**
  * 이미지 핸들러 등록
  */
 export function registerImageHandlers(ctx: IpcContext): void {
     // 저장된 이미지 경로 가져오기
-    ipcMain.handle('images:getSavedPath', async () => {
+    safeHandle('images:getSavedPath', async () => {
         return path.join(os.homedir(), 'naver-blog-automation', 'images');
     });
 
     // 저장된 이미지 목록 가져오기
-    ipcMain.handle('images:getSaved', async (_event, dirPath: string) => {
+    safeHandle('images:getSaved', async (_event, dirPath: string) => {
         try {
             if (!fs.existsSync(dirPath)) return [];
             const files = fs.readdirSync(dirPath);
@@ -41,7 +52,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
     });
 
     // 이미지 다운로드 및 저장
-    ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string) => {
+    safeHandle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string) => {
         try {
             const response = await axios.get(imageUrl, { responseType: 'arraybuffer', timeout: 30000 });
             const buffer = Buffer.from(response.data);
@@ -64,13 +75,13 @@ export function registerImageHandlers(ctx: IpcContext): void {
     });
 
     // URL에서 이미지 수집
-    ipcMain.handle('image:collectFromUrl', async (_event, url: string) => {
+    safeHandle('image:collectFromUrl', async (_event, url: string) => {
         console.log('[imageHandlers] image:collectFromUrl - placeholder');
         return { success: false, images: [] };
     });
 
     // ✅ [2026-01-23 FIX] 쇼핑몰에서 이미지 수집 - 실제 구현
-    ipcMain.handle('image:collectFromShopping', async (_event, url: string) => {
+    safeHandle('image:collectFromShopping', async (_event, url: string) => {
         console.log('[imageHandlers] image:collectFromShopping 시작:', url);
         try {
             if (!url || typeof url !== 'string') {
@@ -145,19 +156,19 @@ export function registerImageHandlers(ctx: IpcContext): void {
     });
 
     // 여러 이미지 다운로드 및 저장
-    ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ url: string; heading: string }>, title: string) => {
+    safeHandle('image:downloadAndSaveMultiple', async (_event, images: Array<{ url: string; heading: string }>, title: string) => {
         console.log('[imageHandlers] image:downloadAndSaveMultiple - placeholder');
         return { success: false, savedPaths: [] };
     });
 
     // 비교표 이미지 생성
-    ipcMain.handle('image:generateComparisonTable', async (_event, options: any) => {
+    safeHandle('image:generateComparisonTable', async (_event, options: any) => {
         console.log('[imageHandlers] image:generateComparisonTable - placeholder');
         return { success: false };
     });
 
     // ✅ [2026-01-19] 장단점 표 이미지 생성
-    ipcMain.handle('image:generateProsConsTable', async (_event, options: {
+    safeHandle('image:generateProsConsTable', async (_event, options: {
         productName: string;
         pros: string[];
         cons: string[];
@@ -180,14 +191,354 @@ export function registerImageHandlers(ctx: IpcContext): void {
             return { success: false, message: (error as Error).message };
         }
     });
+
+    // ✅ [2026-01-28] 테스트 이미지 생성 (스타일 모달용) - 모든 엔진 지원
+    safeHandle('generate-test-image', async (_event, options: {
+        style: string;
+        ratio: string;
+        prompt: string;
+        engine?: string; // ✅ 엔진 파라미터
+        textOverlay?: { enabled: boolean; text: string }; // ✅ 텍스트 오버레이
+    }) => {
+        try {
+            const { style, ratio, prompt, engine } = options;
+
+            // API 키 가져오기
+            const configModule = await import('../../configManager.js');
+            const config = await configModule.loadConfig();
+
+            // ✅ 전달받은 엔진 사용, 없으면 config에서 가져옴
+            const imageSource = engine || (config as any).globalImageSource || 'nano-banana-pro';
+            console.log(`[imageHandlers] 🎨 테스트 이미지 생성: engine=${imageSource}, style=${style}, ratio=${ratio}`);
+
+            // ✅ [2026-02-08] 11가지 스타일별 프롬프트 매핑 (3카테고리 동기화)
+            const stylePromptMap: Record<string, string> = {
+                // 📷 실사
+                'realistic': 'Hyper-realistic professional photography, 8K UHD quality, KOREAN person ONLY, natural lighting, authentic Korean facial features',
+                'bokeh': 'Beautiful bokeh photography, shallow depth of field, dreamy out-of-focus background lights, soft circular bokeh orbs, DSLR wide aperture f/1.4 quality, romantic atmosphere',
+                // 🖌️ 아트
+                'vintage': 'Vintage retro illustration, 1950s poster art style, muted color palette, nostalgic aesthetic, old-fashioned charm, classic design elements',
+                'minimalist': 'Minimalist flat design, simple clean lines, solid colors, modern aesthetic, geometric shapes, professional infographic style',
+                '3d-render': '3D render, Octane render quality, Cinema 4D style, Blender 3D art, realistic materials and textures, studio lighting setup',
+                'korean-folk': 'Korean traditional Minhwa folk painting style, vibrant primary colors on hanji paper, stylized tiger and magpie motifs, peony flowers, pine trees, traditional Korean decorative patterns, bold flat color areas with fine ink outlines, cheerful folk art aesthetic',
+                // ✨ 이색
+                'stickman': 'Simple stick figure drawing style, black line art on white background, crude hand-drawn stick people, childlike doodle, humorous comic strip, thick marker lines, pure minimal stick figure',
+                'claymation': 'Claymation stop-motion style, cute clay figurines, handmade plasticine texture, soft rounded shapes, miniature diorama set, warm studio lighting',
+                'neon-glow': 'Neon glow effect, luminous light trails, dark background with vibrant neon lights, synthwave aesthetic, glowing outlines, electric blue and hot pink',
+                'papercut': 'Paper cut art style, layered paper craft, 3D paper sculpture effect, shadow between layers, handmade tactile texture, colorful construction paper, kirigami aesthetic',
+                'isometric': 'Isometric 3D illustration, cute isometric pixel world, 30-degree angle view, clean geometric shapes, pastel color palette, miniature city/scene, game-like perspective'
+            };
+
+            const stylePrompt = stylePromptMap[style] || stylePromptMap['realistic'];
+            const fullPrompt = `${stylePrompt}, ${prompt}`;
+
+            // 비율 매핑
+            const ratioToSize: Record<string, { width: number; height: number }> = {
+                '1:1': { width: 1024, height: 1024 },
+                '16:9': { width: 1344, height: 768 },
+                '9:16': { width: 768, height: 1344 },
+                '4:3': { width: 1152, height: 896 },
+                '3:4': { width: 896, height: 1152 }
+            };
+            const size = ratioToSize[ratio] || ratioToSize['1:1'];
+
+            let result: any = null;
+            const saveDir = path.join(app.getPath('userData'), 'test-images');
+            await fsp.mkdir(saveDir, { recursive: true });
+
+            // ✅ [2026-02-08] DeepInfra 모델 동적 매핑
+            const DEEPINFRA_MODEL_MAP: Record<string, string> = {
+                'flux-2-dev': 'black-forest-labs/FLUX-2-dev',
+                'flux-dev': 'black-forest-labs/FLUX-1-dev',
+                'flux-schnell': 'black-forest-labs/FLUX-1-schnell'
+            };
+
+            // ✅ 엔진별 분기 처리
+            switch (imageSource) {
+                case 'deepinfra':
+                case 'deepinfra-flux': {
+                    // ✅ [2026-02-08] 사용자 설정 모델 동적 선택
+                    const deepinfraApiKey = (config as any).deepinfraApiKey;
+                    if (!deepinfraApiKey) {
+                        return { success: false, error: 'DeepInfra API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
+                    }
+
+                    const selectedModelKey = (config as any).deepinfraModel || 'flux-2-dev';
+                    const actualModel = DEEPINFRA_MODEL_MAP[selectedModelKey] || 'black-forest-labs/FLUX-2-dev';
+                    console.log(`[imageHandlers] 🔧 DeepInfra 모델: ${selectedModelKey} → ${actualModel}`);
+
+                    const response = await axios.post(
+                        'https://api.deepinfra.com/v1/openai/images/generations',
+                        {
+                            model: actualModel, // ✅ 동적 모델 선택!
+                            prompt: fullPrompt,
+                            n: 1,
+                            size: `${size.width}x${size.height}`
+                        },
+                        {
+                            headers: {
+                                'Authorization': `Bearer ${deepinfraApiKey}`,
+                                'Content-Type': 'application/json'
+                            },
+                            timeout: 60000
+                        }
+                    );
+
+                    if (response.data?.data?.[0]?.url) {
+                        const imageUrl = response.data.data[0].url;
+                        const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+                        const buffer = Buffer.from(imageResponse.data);
+
+                        const fileName = `test-${style}-deepinfra-${Date.now()}.png`;
+                        const filePath = path.join(saveDir, fileName);
+                        await fsp.writeFile(filePath, buffer);
+                        result = { success: true, path: filePath };
+                    }
+                    break;
+                }
+
+                case 'nano-banana-pro': {
+                    // 나노바나나프로 (Gemini)
+                    const geminiApiKey = (config as any).geminiApiKey;
+                    if (!geminiApiKey) {
+                        return { success: false, error: 'Gemini API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
+                    }
+
+                    const response = await axios.post(
+                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${geminiApiKey}`,
+                        {
+                            contents: [{ parts: [{ text: fullPrompt }] }],
+                            generationConfig: {
+                                responseModalities: ['Text', 'Image']
+                            }
+                        },
+                        {
+                            headers: { 'Content-Type': 'application/json' },
+                            timeout: 120000
+                        }
+                    );
+
+                    const candidates = response.data?.candidates;
+                    if (candidates?.[0]?.content?.parts) {
+                        for (const part of candidates[0].content.parts) {
+                            if (part.inlineData?.data) {
+                                const buffer = Buffer.from(part.inlineData.data, 'base64');
+                                const fileName = `test-${style}-gemini-${Date.now()}.png`;
+                                const filePath = path.join(saveDir, fileName);
+                                await fsp.writeFile(filePath, buffer);
+                                result = { success: true, path: filePath };
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+
+                case 'falai':
+                case 'fal-ai': {
+                    // Fal.ai (FLUX)
+                    const falApiKey = (config as any).falApiKey;
+                    if (!falApiKey) {
+                        return { success: false, error: 'Fal.ai API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
+                    }
+
+                    const response = await axios.post(
+                        'https://fal.run/fal-ai/fast-sdxl',
+                        {
+                            prompt: fullPrompt,
+                            image_size: { width: size.width, height: size.height },
+                            num_images: 1
+                        },
+                        {
+                            headers: {
+                                'Authorization': `Key ${falApiKey}`,
+                                'Content-Type': 'application/json'
+                            },
+                            timeout: 60000
+                        }
+                    );
+
+                    if (response.data?.images?.[0]?.url) {
+                        const imageUrl = response.data.images[0].url;
+                        const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+                        const buffer = Buffer.from(imageResponse.data);
+
+                        const fileName = `test-${style}-fal-${Date.now()}.png`;
+                        const filePath = path.join(saveDir, fileName);
+                        await fsp.writeFile(filePath, buffer);
+                        result = { success: true, path: filePath };
+                    }
+                    break;
+                }
+
+                case 'prodia': {
+                    // Prodia AI
+                    const prodiaApiKey = (config as any).prodiaApiKey;
+                    if (!prodiaApiKey) {
+                        return { success: false, error: 'Prodia API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
+                    }
+
+                    const response = await axios.post(
+                        'https://api.prodia.com/v1/sd/generate',
+                        {
+                            prompt: fullPrompt,
+                            model: 'v1-5-pruned-emaonly.safetensors [d7049739]',
+                            width: Math.min(size.width, 768),
+                            height: Math.min(size.height, 768)
+                        },
+                        {
+                            headers: {
+                                'X-Prodia-Key': prodiaApiKey,
+                                'Content-Type': 'application/json'
+                            },
+                            timeout: 60000
+                        }
+                    );
+
+                    if (response.data?.job) {
+                        // 작업 완료 대기
+                        let jobResult = null;
+                        for (let i = 0; i < 30; i++) {
+                            await new Promise(r => setTimeout(r, 2000));
+                            const statusRes = await axios.get(`https://api.prodia.com/v1/job/${response.data.job}`, {
+                                headers: { 'X-Prodia-Key': prodiaApiKey }
+                            });
+                            if (statusRes.data?.status === 'succeeded' && statusRes.data?.imageUrl) {
+                                jobResult = statusRes.data.imageUrl;
+                                break;
+                            } else if (statusRes.data?.status === 'failed') {
+                                break;
+                            }
+                        }
+
+                        if (jobResult) {
+                            const imageResponse = await axios.get(jobResult, { responseType: 'arraybuffer' });
+                            const buffer = Buffer.from(imageResponse.data);
+
+                            const fileName = `test-${style}-prodia-${Date.now()}.png`;
+                            const filePath = path.join(saveDir, fileName);
+                            await fsp.writeFile(filePath, buffer);
+                            result = { success: true, path: filePath };
+                        }
+                    }
+                    break;
+                }
+
+                case 'stability': {
+                    // Stability AI
+                    const stabilityApiKey = (config as any).stabilityApiKey;
+                    if (!stabilityApiKey) {
+                        return { success: false, error: 'Stability AI API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
+                    }
+
+                    const formData = new FormData();
+                    formData.append('prompt', fullPrompt);
+                    formData.append('output_format', 'png');
+
+                    const response = await axios.post(
+                        'https://api.stability.ai/v2beta/stable-image/generate/core',
+                        formData,
+                        {
+                            headers: {
+                                'Authorization': `Bearer ${stabilityApiKey}`,
+                                'Accept': 'image/*'
+                            },
+                            responseType: 'arraybuffer',
+                            timeout: 60000
+                        }
+                    );
+
+                    if (response.data) {
+                        const buffer = Buffer.from(response.data);
+                        const fileName = `test-${style}-stability-${Date.now()}.png`;
+                        const filePath = path.join(saveDir, fileName);
+                        await fsp.writeFile(filePath, buffer);
+                        result = { success: true, path: filePath };
+                    }
+                    break;
+                }
+
+                case 'pollinations': {
+                    // Pollinations (무료)
+                    const encodedPrompt = encodeURIComponent(fullPrompt);
+                    const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${size.width}&height=${size.height}&nologo=true&seed=${Date.now()}`;
+
+                    const imageResponse = await axios.get(imageUrl, {
+                        responseType: 'arraybuffer',
+                        timeout: 60000
+                    });
+
+                    if (imageResponse.data) {
+                        const buffer = Buffer.from(imageResponse.data);
+                        const fileName = `test-${style}-pollinations-${Date.now()}.png`;
+                        const filePath = path.join(saveDir, fileName);
+                        await fsp.writeFile(filePath, buffer);
+                        result = { success: true, path: filePath };
+                    }
+                    break;
+                }
+
+                default: {
+                    // 기본: 나노바나나프로 폴백
+                    console.log(`[imageHandlers] 알 수 없는 엔진 "${imageSource}", 나노바나나프로로 폴백`);
+                    const geminiApiKey = (config as any).geminiApiKey;
+                    if (!geminiApiKey) {
+                        return { success: false, error: 'Gemini API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
+                    }
+
+                    const response = await axios.post(
+                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${geminiApiKey}`,
+                        {
+                            contents: [{ parts: [{ text: fullPrompt }] }],
+                            generationConfig: {
+                                responseModalities: ['Text', 'Image']
+                            }
+                        },
+                        {
+                            headers: { 'Content-Type': 'application/json' },
+                            timeout: 120000
+                        }
+                    );
+
+                    const candidates = response.data?.candidates;
+                    if (candidates?.[0]?.content?.parts) {
+                        for (const part of candidates[0].content.parts) {
+                            if (part.inlineData?.data) {
+                                const buffer = Buffer.from(part.inlineData.data, 'base64');
+                                const fileName = `test-${style}-fallback-${Date.now()}.png`;
+                                const filePath = path.join(saveDir, fileName);
+                                await fsp.writeFile(filePath, buffer);
+                                result = { success: true, path: filePath };
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+
+            if (result?.success) {
+                console.log(`[imageHandlers] ✅ 테스트 이미지 생성 완료 (${imageSource}): ${result.path}`);
+                return result;
+            } else {
+                return { success: false, error: `이미지 생성에 실패했습니다. (엔진: ${imageSource})` };
+            }
+
+        } catch (error: any) {
+            console.error('[imageHandlers] 테스트 이미지 생성 오류:', error);
+            const errorMessage = error.response?.data?.error?.message || error.message || '알 수 없는 오류';
+            return { success: false, error: errorMessage };
+        }
+    });
 }
+
 
 /**
  * ✅ [100점 수정] 미디어(비디오) 핸들러 등록 - 실제 구현
  */
 export function registerMediaHandlers(ctx: IpcContext): void {
     // MP4 파일 목록
-    ipcMain.handle('media:listMp4Files', async (_event, payload: { dirPath: string }) => {
+    safeHandle('media:listMp4Files', async (_event, payload: { dirPath: string }) => {
         try {
             const { dirPath } = payload;
             if (!fs.existsSync(dirPath)) {
@@ -219,7 +570,7 @@ export function registerMediaHandlers(ctx: IpcContext): void {
     });
 
     // ✅ [100점 수정] MP4 → GIF 변환 (실제 구현)
-    ipcMain.handle('media:convertMp4ToGif', async (_event, payload: { sourcePath: string; aspectRatio?: string }) => {
+    safeHandle('media:convertMp4ToGif', async (_event, payload: { sourcePath: string; aspectRatio?: string }) => {
         try {
             const { sourcePath, aspectRatio } = payload;
 
@@ -269,7 +620,7 @@ export function registerMediaHandlers(ctx: IpcContext): void {
     });
 
     // ✅ [100점 수정] Ken Burns 비디오 생성 (실제 구현)
-    ipcMain.handle('media:createKenBurnsVideo', async (_event, payload: { imagePath: string; heading?: string; durationSeconds?: number; aspectRatio?: string }) => {
+    safeHandle('media:createKenBurnsVideo', async (_event, payload: { imagePath: string; heading?: string; durationSeconds?: number; aspectRatio?: string }) => {
         try {
             const { imagePath, heading, durationSeconds = 6, aspectRatio = '16:9' } = payload;
 
@@ -330,7 +681,7 @@ export function registerMediaHandlers(ctx: IpcContext): void {
     });
 
     // MP4 파일 가져오기 (import)
-    ipcMain.handle('media:importMp4', async (_event, payload: { sourcePath: string; dirPath: string }) => {
+    safeHandle('media:importMp4', async (_event, payload: { sourcePath: string; dirPath: string }) => {
         try {
             const { sourcePath, dirPath } = payload;
             const fileName = path.basename(sourcePath);
@@ -346,7 +697,7 @@ export function registerMediaHandlers(ctx: IpcContext): void {
     });
 
     // ✅ [100점 수정] Veo 영상 생성 (Gemini API)
-    ipcMain.handle('gemini:generateVeoVideo', async (_event, payload: {
+    safeHandle('gemini:generateVeoVideo', async (_event, payload: {
         prompt: string;
         model?: string;
         durationSeconds?: number;
@@ -458,7 +809,7 @@ const headingVideoMap = new Map<string, Array<{ provider: string; filePath: stri
 
 export function registerHeadingVideoHandlers(ctx: IpcContext): void {
     // 비디오 적용
-    ipcMain.handle('heading:applyVideo', async (_event, heading: string, video: any) => {
+    safeHandle('heading:applyVideo', async (_event, heading: string, video: any) => {
         try {
             const existing = headingVideoMap.get(heading) || [];
             existing.push({
@@ -475,7 +826,7 @@ export function registerHeadingVideoHandlers(ctx: IpcContext): void {
     });
 
     // 적용된 비디오 가져오기
-    ipcMain.handle('heading:getAppliedVideo', async (_event, heading: string) => {
+    safeHandle('heading:getAppliedVideo', async (_event, heading: string) => {
         const videos = headingVideoMap.get(heading);
         if (videos && videos.length > 0) {
             return { success: true, video: videos[videos.length - 1] };
@@ -484,19 +835,19 @@ export function registerHeadingVideoHandlers(ctx: IpcContext): void {
     });
 
     // 적용된 비디오 목록 가져오기
-    ipcMain.handle('heading:getAppliedVideos', async (_event, heading: string) => {
+    safeHandle('heading:getAppliedVideos', async (_event, heading: string) => {
         const videos = headingVideoMap.get(heading) || [];
         return { success: true, videos };
     });
 
     // 비디오 제거
-    ipcMain.handle('heading:removeVideo', async (_event, heading: string) => {
+    safeHandle('heading:removeVideo', async (_event, heading: string) => {
         headingVideoMap.delete(heading);
         return { success: true };
     });
 
     // 모든 적용된 비디오 가져오기
-    ipcMain.handle('heading:getAllAppliedVideos', async () => {
+    safeHandle('heading:getAllAppliedVideos', async () => {
         const result: Record<string, any[]> = {};
         for (const [key, value] of headingVideoMap.entries()) {
             result[key] = value;

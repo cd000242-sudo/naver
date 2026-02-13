@@ -27,8 +27,14 @@ export class TableImageGenerator {
     }
 
     if (!this.browser) {
+      // ✅ [2026-02-04 FIX] 배포 환경 지원 - Chromium 경로 명시
+      const { getChromiumExecutablePath } = await import('../browserUtils');
+      const chromePath = await getChromiumExecutablePath();
+      console.log(`[TableGenerator] 🌐 Chromium 경로: ${chromePath || '자동 감지'}`);
+
       this.browser = await puppeteer.launch({
         headless: true,
+        executablePath: chromePath || undefined, // ✅ [2026-02-04 FIX] 배포 환경 지원
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
@@ -219,8 +225,9 @@ export class TableImageGenerator {
     const consIcon = consIcons[Math.floor(Math.random() * consIcons.length)];
 
     // ✅ [신규] 랜덤 헤더 텍스트 (중복 방지)
-    const prosHeaders = ['BEST (장점)', '👍 장점', '✨ 좋은 점', '💚 장점', 'PROS'];
-    const consHeaders = ['WORST (단점)', '👎 단점', '💔 아쉬운 점', '❤️‍🩹 단점', 'CONS'];
+    // ✅ [2026-02-01 FIX] WORST 제거 - 더 친근한 한글 헤더 사용
+    const prosHeaders = ['👍 장점', '✨ 좋은 점', '💚 장점', '✅ BEST'];
+    const consHeaders = ['👎 단점', '💔 아쉬운 점', '⚠️ 단점', '❌ 아쉬운점'];
     const prosHeader = prosHeaders[Math.floor(Math.random() * prosHeaders.length)];
     const consHeader = consHeaders[Math.floor(Math.random() * consHeaders.length)];
 
@@ -373,27 +380,87 @@ export function extractSpecsFromContent(content: string, productName: string): T
   return specs;
 }
 
+/**
+ * ✅ [2026-02-01 FIX] 장단점 추출 로직 강화
+ * - 명확한 불릿 포인트(-, ✓, ✔, •, ▸) 뒤의 텍스트만 추출
+ * - 숫자 리스트(1., 2., 3.) 지원
+ * - 리뷰 문장(~요, ~다) 형식 필터링
+ * - 최소 5자 이상, 최대 50자 이하로 제한 (표에 맞게)
+ */
 export function extractProsConsFromContent(content: string): { pros: string[], cons: string[] } {
   const pros: string[] = [];
   const cons: string[] = [];
 
-  const prosMatch = content.matchAll(/(?:장점|좋은점|특징)[:\s]*([^\n]+)/g);
-  for (const m of prosMatch) {
-    const val = m[1].trim();
-    // ✅ 길이 제한 완화 (50자 -> 80자)
-    if (val.length > 3 && val.length < 80) pros.push(val);
+  // ✅ 장점 패턴: "장점", "좋은 점" 섹션 뒤에 나오는 불릿/숫자 리스트
+  // 예: "▸ 편안한 착석감" / "1. 뛰어난 가성비" / "- 디자인이 좋음"
+  const prosPatterns = [
+    /장점[^\n]*\n(?:[\s]*[-✓✔•▸●]\s*([^\n]{5,50}))/gi,
+    /좋은\s*점[^\n]*\n(?:[\s]*[-✓✔•▸●]\s*([^\n]{5,50}))/gi,
+    /(?:^|\n)[✓✔✅]\s*([^\n]{5,50})/gi,
+  ];
+
+  // ✅ 단점 패턴
+  const consPatterns = [
+    /단점[^\n]*\n(?:[\s]*[-✗✖•▸○]\s*([^\n]{5,50}))/gi,
+    /아쉬운\s*점[^\n]*\n(?:[\s]*[-✗✖•▸○]\s*([^\n]{5,50}))/gi,
+    /(?:^|\n)[✗✖❌]\s*([^\n]{5,50})/gi,
+  ];
+
+  // 장점 추출
+  for (const pattern of prosPatterns) {
+    for (const m of content.matchAll(pattern)) {
+      const val = m[1]?.trim();
+      if (val && val.length >= 5 && val.length <= 50 && !isReviewSentence(val) && !pros.includes(val)) {
+        pros.push(val);
+      }
+    }
   }
 
-  const consMatch = content.matchAll(/(?:단점|아쉬운점)[:\s]*([^\n]+)/g);
-  for (const m of consMatch) {
-    const val = m[1].trim();
-    if (val.length > 3 && val.length < 80) cons.push(val);
+  // 단점 추출
+  for (const pattern of consPatterns) {
+    for (const m of content.matchAll(pattern)) {
+      const val = m[1]?.trim();
+      if (val && val.length >= 5 && val.length <= 50 && !isReviewSentence(val) && !cons.includes(val)) {
+        cons.push(val);
+      }
+    }
+  }
+
+  // ✅ 폴백: 위에서 추출된 게 없으면 기존 로직 사용 (더 관대하게)
+  if (pros.length === 0) {
+    const fallbackPros = content.matchAll(/장점[:\s]+([^\n]{5,40})/gi);
+    for (const m of fallbackPros) {
+      const val = m[1]?.trim();
+      if (val && !isReviewSentence(val) && !pros.includes(val)) {
+        pros.push(val);
+      }
+    }
+  }
+  if (cons.length === 0) {
+    const fallbackCons = content.matchAll(/단점[:\s]+([^\n]{5,40})/gi);
+    for (const m of fallbackCons) {
+      const val = m[1]?.trim();
+      if (val && !isReviewSentence(val) && !cons.includes(val)) {
+        cons.push(val);
+      }
+    }
   }
 
   return {
     pros: pros.slice(0, 4),
     cons: cons.slice(0, 3)
   };
+}
+
+/** 리뷰 문장인지 확인 (장단점이 아닌 설명 문장) */
+function isReviewSentence(text: string): boolean {
+  // 문장형 어미로 끝나는 경우 제외
+  if (/[요다니까네]$/i.test(text)) return true;
+  // 질문형 문장 제외
+  if (/[?？]/.test(text)) return true;
+  // "~지만", "~하면" 등 접속사로 끝나는 경우 제외
+  if (/[지만하면라면]$/.test(text)) return true;
+  return false;
 }
 
 // ==========================================

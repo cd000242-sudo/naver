@@ -391,6 +391,11 @@ export interface PostCyclePayload {
     useAiImage?: boolean;
     createProductThumbnail?: boolean;
     includeThumbnailText?: boolean;
+    // ✅ [2026-01-28] 이미지 설정 전역 적용
+    scSubImageSource?: 'ai' | 'collected';  // 수집 이미지 직접 사용 여부
+    thumbnailImageRatio?: string;  // 썸네일 비율
+    subheadingImageRatio?: string;  // 소제목 비율
+    scAutoThumbnailSetting?: boolean;  // 쇼핑커넥트 자동 썸네일
 
     // 발행 설정
     publishMode?: 'draft' | 'publish' | 'schedule';

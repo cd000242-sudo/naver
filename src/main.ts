@@ -65,6 +65,9 @@ import { createHash } from 'crypto';
 import { getBlogRecentPosts } from './rssSearcher.js';
 import { browserSessionManager } from './browserSessionManager.js';
 
+// ✅ [2026-02-04] 자동 업데이트 모듈
+import { initAutoUpdater, initAutoUpdaterEarly } from './updater.js';
+
 // ✅ [리팩토링] 새로운 모듈화된 유틸리티 및 서비스
 // ✅ [리팩토링] 새로운 모듈화된 유틸리티 및 서비스
 import { Logger, debugLog as newDebugLog, sanitizeFileName as utilSanitizeFileName, ensureMp4Dir as utilEnsureMp4Dir, ensureHeadingMp4Dir as utilEnsureHeadingMp4Dir, getUniqueMp4Path as utilGetUniqueMp4Path, validateLicenseAndQuota, validateLicenseOnly } from './main/utils/index.js';
@@ -221,6 +224,53 @@ try {
   console.error('[DebugLog] 로그 파일 초기화 실패:', error);
 }
 
+// ✅ [2026-02-02] 카테고리별 폴더 구조 - 모든 카테고리 목록
+const ALL_CONTENT_CATEGORIES = [
+  // 엔터테인먼트·예술
+  '문학·책', '영화', '미술·디자인', '공연·전시', '음악', '드라마', '스타·연예인', '만화·애니', '방송',
+  // 생활·노하우·쇼핑
+  '일상·생각', '생활 꿀팁', '육아·결혼', '반려동물', '좋은글·이미지', '패션·미용', '인테리어·DIY', '요리·레시피', '상품리뷰', '원예·재배',
+  // 취미·여가·여행
+  '게임', '스포츠', '사진', '자동차', '취미', '국내여행', '세계여행', '맛집',
+  // 지식·동향
+  'IT·컴퓨터', '사회·정치', '건강·의학', '비즈니스·경제', '어학·외국어', '교육·학문', '부동산', '자기계발',
+];
+
+/**
+ * ✅ [2026-02-02] 앱 시작 시 모든 카테고리 폴더를 미리 생성
+ * images/{카테고리}/ 구조로 폴더 생성
+ */
+async function initializeCategoryFolders(): Promise<void> {
+  try {
+    const imagesBasePath = path.join(app.getPath('userData'), 'images');
+    await fs.mkdir(imagesBasePath, { recursive: true });
+
+    console.log('[Main] 📂 카테고리 폴더 초기화 시작...');
+
+    for (const category of ALL_CONTENT_CATEGORIES) {
+      // 폴더명에 사용할 수 없는 문자 치환
+      const safeCategory = category.replace(/[<>:"/\\|?*]/g, '_').trim();
+      const categoryPath = path.join(imagesBasePath, safeCategory);
+
+      try {
+        await fs.mkdir(categoryPath, { recursive: true });
+      } catch (e) {
+        // 이미 존재하면 무시
+      }
+    }
+
+    console.log(`[Main] ✅ 카테고리 폴더 초기화 완료: ${ALL_CONTENT_CATEGORIES.length}개 폴더`);
+  } catch (error) {
+    console.error('[Main] ❌ 카테고리 폴더 초기화 실패:', error);
+  }
+}
+
+// 앱 시작 시 카테고리 폴더 생성 (앱 로딩 완료 후 비동기로 실행)
+setTimeout(() => {
+  initializeCategoryFolders().catch(err => console.error('[Main] 카테고리 폴더 초기화 오류:', err));
+}, 3000);
+
+
 // 라이선스 체크 헬퍼 함수
 async function ensureLicenseValid(): Promise<boolean> {
   // 개발 모드에서도 테스트하려면 FORCE_LICENSE_CHECK=true 환경 변수 설정
@@ -357,13 +407,22 @@ async function performServerSync(isBackground: boolean = false): Promise<{ allow
         debugLog(`[Main] performServerSync: 버전 낮음 (현재: ${currentVersion}, 최소: ${syncResult.minVersion})`);
 
         if (!isBackground) {
-          await dialog.showMessageBox({
+          // ✅ [2026-02-04] 개선된 업데이트 다이얼로그 - 다운로드 링크 포함
+          const result = await dialog.showMessageBox({
             type: 'warning',
-            title: '업데이트 필요',
+            title: '⬆️ 업데이트 필요',
             message: '최신 버전으로 업데이트해 주세요.',
-            detail: `현재 버전: ${currentVersion}\n최소 요구 버전: ${syncResult.minVersion}`,
-            buttons: ['앱 종료'],
+            detail: `현재 버전: v${currentVersion}\n최소 요구 버전: v${syncResult.minVersion}\n\n아래 버튼을 눌러 최신 버전을 다운로드하세요.`,
+            buttons: ['다운로드 페이지 열기', '나중에'],
+            defaultId: 0,
+            cancelId: 1,
+            noLink: true,
           });
+
+          // '다운로드 페이지 열기' 버튼 클릭 시 GitHub 릴리스 페이지 열기
+          if (result.response === 0) {
+            await shell.openExternal('https://github.com/cd000242-sudo/naver/releases/latest');
+          }
         }
         return { allowed: false, error: 'VERSION_TOO_OLD' };
       }
@@ -1045,6 +1104,11 @@ async function createWindow(): Promise<void> {
 
     // ✅ [리팩토링] ipcHelpers에 mainWindow 참조 설정
     setMainWindowRef(mainWindow);
+
+    // ✅ [2026-02-04] 자동 업데이터 초기화 (설치형 앱에서만 동작)
+    if (app.isPackaged) {
+      initAutoUpdater(mainWindow);
+    }
 
     // ✅ [100점 수정] 닫기(X) 버튼 = 앱 완전 종료
     // event.preventDefault()로 기본 동작을 막고, 비동기 정리 완료 후 명시적으로 종료
@@ -1829,6 +1893,10 @@ ipcMain.handle('openImagesFolder', async () => {
   try {
     const imagesPath = path.join(app.getPath('userData'), 'images');
     await fs.mkdir(imagesPath, { recursive: true });
+
+    // ✅ [2026-02-02] 카테고리 폴더도 함께 생성
+    await initializeCategoryFolders();
+
     await shell.openPath(imagesPath);
     return { success: true, path: imagesPath };
   } catch (error) {
@@ -1837,7 +1905,8 @@ ipcMain.handle('openImagesFolder', async () => {
 });
 
 // 이미지 다운로드 및 저장
-ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string) => {
+// ✅ [2026-02-02] category 파라미터 추가 - 카테고리별 폴더에 저장
+ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string, category?: string) => {
   try {
     const https = await import('https');
     const http = await import('http');
@@ -1893,7 +1962,17 @@ ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading
     const safeTitle = (postTitle || 'image').replace(/[<>:"/\\|?*]/g, '_');
     const safeHeading = (heading || 'image').replace(/[<>:"/\\|?*]/g, '_');
     const fileName = `${safeTitle}_${safeHeading}_${Date.now()}${ext}`;
-    const imagesPath = path.join(app.getPath('userData'), 'images');
+
+    // ✅ [2026-02-02] 카테고리별 폴더에 저장
+    const imagesBasePath = path.join(app.getPath('userData'), 'images');
+    let imagesPath = imagesBasePath;
+
+    if (category && category.trim()) {
+      const safeCategory = category.replace(/[<>:"/\\|?*]/g, '_').trim();
+      imagesPath = path.join(imagesBasePath, safeCategory);
+      console.log(`[Main] 📂 카테고리 폴더에 이미지 저장: ${safeCategory}`);
+    }
+
     await fs.mkdir(imagesPath, { recursive: true });
     const filePath = path.join(imagesPath, fileName);
 
@@ -1953,7 +2032,7 @@ ipcMain.handle('image:collectFromUrl', async (_event, url: string) => {
   }
 });
 
-// ✅ [신규] 중복 및 저품질 이미지 필터링 함수
+// ✅ [신규 + 2026-02-01 강화] 중복 및 저품질/비제품 이미지 필터링 함수
 function filterDuplicateAndLowQualityImages(images: string[]): string[] {
   const seenBaseUrls = new Set<string>();
   const seenFileNames = new Set<string>();
@@ -1962,9 +2041,10 @@ function filterDuplicateAndLowQualityImages(images: string[]): string[] {
   for (const img of images) {
     if (!img || typeof img !== 'string') continue;
 
-    // 1. 저품질 이미지 키워드 필터링
+    // 1. 저품질/비제품 이미지 키워드 필터링 (강화됨)
     const lowerImg = img.toLowerCase();
-    const isLowQuality =
+    const isLowQualityOrNonProduct =
+      // 크기 관련
       lowerImg.includes('_thumb') ||
       lowerImg.includes('_small') ||
       lowerImg.includes('_s.') ||
@@ -1977,18 +2057,88 @@ function filterDuplicateAndLowQualityImages(images: string[]): string[] {
       lowerImg.includes('type=f60') ||
       lowerImg.includes('type=f80') ||
       lowerImg.includes('type=f100') ||
+      // 품질 관련
       lowerImg.includes('blur') ||
       lowerImg.includes('placeholder') ||
       lowerImg.includes('loading') ||
+      // 비제품 이미지 (아이콘, 로고, 배너)
       lowerImg.includes('/icon/') ||
       lowerImg.includes('/logo/') ||
       lowerImg.includes('/banner/') ||
+      lowerImg.includes('/badge/') ||
+      lowerImg.includes('_icon') ||
+      lowerImg.includes('_logo') ||
+      lowerImg.includes('_banner') ||
+      lowerImg.includes('_badge') ||
+      // ✅ [2026-02-01 추가] 배찌/마크/제휴 관련
+      lowerImg.includes('reviewmania') ||
+      lowerImg.includes('review_mania') ||
+      lowerImg.includes('powerlink') ||
+      lowerImg.includes('power_link') ||
+      lowerImg.includes('brandzone') ||
+      lowerImg.includes('brand_zone') ||
+      lowerImg.includes('navershopping') ||
+      lowerImg.includes('naver_shopping') ||
+      lowerImg.includes('affiliate') ||
+      lowerImg.includes('ad_') ||
+      lowerImg.includes('_ad.') ||
+      lowerImg.includes('promo') ||
+      lowerImg.includes('coupon') ||
+      lowerImg.includes('delivery') ||
+      lowerImg.includes('shipping') ||
+      // 결제 관련
       lowerImg.includes('npay') ||
-      lowerImg.includes('naverpay');
+      lowerImg.includes('naverpay') ||
+      lowerImg.includes('kakaopay') ||
+      lowerImg.includes('toss') ||
+      lowerImg.includes('payment') ||
+      lowerImg.includes('pay_') ||
+      // 기타 UI 요소
+      lowerImg.includes('arrow') ||
+      lowerImg.includes('button') ||
+      lowerImg.includes('btn_') ||
+      lowerImg.includes('_btn') ||
+      lowerImg.includes('sprite') ||
+      lowerImg.includes('.gif') ||
+      lowerImg.includes('data:image') ||
+      lowerImg.includes('1x1') ||
+      lowerImg.includes('spacer') ||
+      lowerImg.includes('.svg') ||
+      lowerImg.includes('emoji') ||
+      lowerImg.includes('emoticon') ||
+      lowerImg.includes('storefront') ||
+      lowerImg.includes('store_info') ||
+      lowerImg.includes('storelogo') ||
+      lowerImg.includes('brandlogo') ||
+      lowerImg.includes('store_logo') ||
+      lowerImg.includes('brand_logo');
 
-    if (isLowQuality) {
-      console.log(`[ImageFilter] ⏭️ 저품질 제외: ${img.substring(0, 60)}...`);
+    if (isLowQualityOrNonProduct) {
+      console.log(`[ImageFilter] ⏭️ 비제품/저품질 제외: ${img.substring(0, 80)}...`);
       continue;
+    }
+
+    // ✅ [2026-02-08] 네이버 쇼핑 이미지는 제품 CDN 도메인 확인
+    if (lowerImg.includes('pstatic.net') || lowerImg.includes('naver.')) {
+      const isProductCdn =
+        lowerImg.includes('shop-phinf.pstatic.net') ||
+        lowerImg.includes('shopping-phinf.pstatic.net') ||
+        lowerImg.includes('checkout.phinf') ||  // ✅ [2026-02-08] 리뷰 이미지 CDN
+        lowerImg.includes('image.nmv');          // ✅ [2026-02-08] 비디오 썸네일 CDN
+      // ✅ [2026-02-08] 광고 이미지는 제품 CDN이어도 제외
+      if (lowerImg.includes('searchad-phinf')) {
+        console.log(`[ImageFilter] ⏭️ 광고 이미지 제외: ${img.substring(0, 80)}...`);
+        continue;
+      }
+      // shopping-phinf/main_ 은 다른 상품의 카탈로그 썸네일
+      if (lowerImg.includes('shopping-phinf') && lowerImg.includes('/main_')) {
+        console.log(`[ImageFilter] ⏭️ 카탈로그 썸네일 제외: ${img.substring(0, 80)}...`);
+        continue;
+      }
+      if (!isProductCdn) {
+        console.log(`[ImageFilter] ⏭️ 비제품 네이버 CDN 제외: ${img.substring(0, 80)}...`);
+        continue;
+      }
     }
 
     // 2. 기본 URL 중복 체크
@@ -2017,214 +2167,203 @@ function filterDuplicateAndLowQualityImages(images: string[]): string[] {
   return filtered;
 }
 
-// 쇼핑몰에서 이미지 수집 (최적화된 모바일 API + Puppeteer 폴백)
+// 쇼핑몰에서 이미지 수집 (플랫폼별 분기)
+// ✅ 브랜드스토어: 기존 방식 (검증됨)
+// ✅ 스마트스토어/쿠팡: 새 모듈화된 크롤러
 ipcMain.handle('image:collectFromShopping', async (_event, url: string) => {
   // ✅ [리팩토링] 통합 검증
   const check = await validateLicenseAndQuota('media', 1);
   if (!check.valid) return check.response;
 
   try {
-    console.log('[Main] 쇼핑몰 이미지 수집 시작:', url);
+    console.log('[Main] ════════════════════════════════════════');
+    console.log('[Main] 🛒 쇼핑몰 이미지 수집 시작:', url);
 
-    // ✅ 브랜드스토어 감지 → 네이버 이미지 API로 빠른 수집 (가장 정확!)
-    const isBrandStore = /brand\.naver\.com/i.test(url);
+    // ✅ 플랫폼 감지
+    const isBrandStore = url.includes('brand.naver.com');
+    const isSmartStore = url.includes('smartstore.naver.com');
+    const isCoupang = url.includes('coupang.com') || url.includes('coupa.ng');
+
+    let images: string[] = [];
+    let title = '';
+    let productInfo: any = {};
 
     if (isBrandStore) {
-      console.log('[Main] 🎯 브랜드스토어 감지 → 네이버 이미지 API로 빠른 수집 시작');
+      // ✅ [2026-02-08] 브랜드스토어: fetchShoppingImages + crawlBrandStoreProduct 이중 수집
+      console.log('[Main] 🏪 브랜드스토어 감지 → 강화된 이미지 수집');
+      const { fetchShoppingImages } = await import('./sourceAssembler.js');
+      const result = await fetchShoppingImages(url, { imagesOnly: true });
 
-      try {
-        const config = await loadConfig();
-        const naverClientId = config.naverClientId || config.naverDatalabClientId || process.env.NAVER_CLIENT_ID || '';
-        const naverClientSecret = config.naverClientSecret || config.naverDatalabClientSecret || process.env.NAVER_CLIENT_SECRET || '';
+      images = result.images || [];
+      title = result.title || '';
+      productInfo = {
+        name: title,
+        price: result.price,
+        description: result.description,
+      };
 
-        if (naverClientId && naverClientSecret) {
-          // ✅ 먼저 제품명만 빠르게 추출 (Puppeteer로 OG 태그만 가져옴)
-          const { crawlFromAffiliateLink } = await import('./crawler/productSpecCrawler.js');
-          const result = await crawlFromAffiliateLink(url);
+      // ✅ [2026-02-08] 이미지 7장 미만이면 crawlBrandStoreProduct 폴백으로 추가 수집
+      const MIN_BRAND_IMAGES = 7;
+      if (images.length < MIN_BRAND_IMAGES) {
+        console.log(`[Main] ⚠️ 브랜드스토어 이미지 ${images.length}개 < 목표 ${MIN_BRAND_IMAGES}개 → 폴백 크롤러 호출`);
+        try {
+          // URL에서 productId와 brandName 추출
+          const productIdMatch = url.match(/\/products\/(\d+)/) || url.match(/channelProductNo=(\d+)/);
+          const brandMatch = url.match(/(?:m\.)?brand\.naver\.com\/([^\/\?]+)/);
+          const productId = productIdMatch?.[1] || '';
+          const brandName = brandMatch?.[1] || '';
 
-          // ✅ 실제 제품명으로 네이버 이미지 API 검색 (가장 빠르고 정확!)
-          let searchKeyword = result?.name || '';
+          if (productId && brandName) {
+            const { crawlBrandStoreProduct } = await import('./crawler/productSpecCrawler.js');
+            const fallbackResult = await crawlBrandStoreProduct(productId, brandName, url);
 
-          // 스토어명이 포함된 경우 제거 (예: "Home Sweet My Home, HOMURO : 호무로" → 실제 제품명 추출)
-          if (searchKeyword.includes(':')) {
-            // 제품명이 스토어명 형식인 경우 (브랜드스토어 특성), URL에서 힌트 얻기
-            const urlKeywordMatch = url.match(/products\/\d+/);
-            if (urlKeywordMatch) {
-              // OG description에서 제품명 추출 시도
-              // 또는 단순히 스토어명 제거
-              const parts = searchKeyword.split(',');
-              searchKeyword = parts[0].trim() || searchKeyword;
-            }
-          }
+            if (fallbackResult) {
+              // ✅ AffiliateProductInfo에서 이미지 추출 (mainImage + galleryImages + detailImages)
+              const fallbackAllImages: string[] = [];
+              if (fallbackResult.mainImage) fallbackAllImages.push(fallbackResult.mainImage);
+              if (fallbackResult.galleryImages?.length) fallbackAllImages.push(...fallbackResult.galleryImages);
+              if (fallbackResult.detailImages?.length) fallbackAllImages.push(...fallbackResult.detailImages);
 
-          console.log(`[Main] 🔍 네이버 이미지 API 검색 키워드: "${searchKeyword}"`);
-
-          if (searchKeyword && searchKeyword.length > 2) {
-            // ✅ 직접 네이버 이미지 API 호출 (axios 사용)
-            const axios = await import('axios');
-            const encodedQuery = encodeURIComponent(searchKeyword);
-            const apiUrl = `https://openapi.naver.com/v1/search/image?query=${encodedQuery}&display=30&sort=sim&filter=large`;
-
-            const response = await axios.default.get(apiUrl, {
-              headers: {
-                'X-Naver-Client-Id': naverClientId,
-                'X-Naver-Client-Secret': naverClientSecret,
-              },
-              timeout: 10000
-            });
-
-            const naverImages = response.data?.items || [];
-
-            if (naverImages && naverImages.length > 0) {
-              console.log(`[Main] ✅ 네이버 이미지 API 수집 완료: ${naverImages.length}개`);
-
-              // 메인 이미지도 추가 (OG 이미지)
-              const allImages: string[] = [];
-              if (result?.mainImage) allImages.push(result.mainImage);
-
-              // 네이버 API 이미지 추가
-              naverImages.forEach((img: any) => {
-                const imgUrl = typeof img === 'string' ? img : (img.link || img.url || img.thumbnail || '');
-                if (imgUrl && !allImages.includes(imgUrl)) {
-                  allImages.push(imgUrl);
-                }
-              });
-
-              const filteredImages = filterDuplicateAndLowQualityImages(allImages);
-              console.log(`[Main] 🔍 필터링 완료: ${allImages.length}개 → ${filteredImages.length}개`);
-
-              return {
-                success: true,
-                images: filteredImages,
-                title: result?.name || searchKeyword,
-                productInfo: {
-                  name: result?.name || searchKeyword,
-                  price: result?.price || 0,
-                  detailUrl: url
-                }
-              };
-            }
-          }
-
-          console.log('[Main] ⚠️ 네이버 API 검색 실패 → Puppeteer 폴백');
-        }
-      } catch (naverErr) {
-        console.warn('[Main] 네이버 API 실패:', (naverErr as Error).message);
-      }
-    }
-
-    // ✅ 스마트스토어/쿠팡 → 기존 모바일 API 사용
-    const isSmartStore = /smartstore\.naver\.com|coupa\.ng|link\.coupang\.com/i.test(url);
-
-    if (isSmartStore) {
-      console.log('[Main] 🚀 스마트스토어/쿠팡 감지 → 모바일 API로 빠른 수집 시작');
-
-      // ✅ [핵심 수정] crawlFromAffiliateLink 호출 전에 환경변수 설정
-      // Knowledge Item 참조: "The API Key Propagation Gap (2026-01-17)"
-      const config = await loadConfig();
-      applyConfigToEnv(config);
-      console.log('[Main] ✅ 환경변수에 API 키 적용 완료');
-
-      const { crawlFromAffiliateLink } = await import('./crawler/productSpecCrawler.js');
-      const result = await crawlFromAffiliateLink(url);
-
-      if (result) {
-        // 이미지 통합 (대표 + 갤러리 + 상세)
-        const allImages: string[] = [];
-        if (result.mainImage) allImages.push(result.mainImage);
-        allImages.push(...(result.galleryImages || []));
-        allImages.push(...(result.detailImages || []).slice(0, 10)); // 상세는 최대 10개
-
-        console.log(`[Main] 📦 모바일 API 수집 결과: ${allImages.length}개 이미지`);
-
-        // ✅ [핵심] 이미지가 3개 미만이면 네이버 검색 API로 보충
-        if (allImages.length < 3 && result.name) {
-          console.log('[Main] ⚠️ 수집된 이미지 부족 → 네이버 검색 API로 보충 시도');
-          try {
-            const config = await loadConfig();
-            const naverClientId = config.naverClientId || config.naverDatalabClientId || process.env.NAVER_CLIENT_ID || '';
-            const naverClientSecret = config.naverClientSecret || config.naverDatalabClientSecret || process.env.NAVER_CLIENT_SECRET || '';
-
-            if (naverClientId && naverClientSecret) {
-              const { fetchShoppingImages } = await import('./sourceAssembler.js');
-              const naverResult = await fetchShoppingImages(url, {
-                imagesOnly: true,
-                naverClientId,
-                naverClientSecret,
-              });
-
-              if (naverResult.images && naverResult.images.length > 0) {
-                // 중복 제거하며 추가
-                naverResult.images.forEach((img: string) => {
-                  if (!allImages.includes(img)) {
-                    allImages.push(img);
-                  }
+              // 폴백에서 얻은 이미지 병합 (중복 제거)
+              const existingNorm = new Set(images.map(u => u.split('?')[0]));
+              const fallbackImages = fallbackAllImages
+                .filter((img: string) => {
+                  const norm = img.split('?')[0];
+                  return !existingNorm.has(norm) && img.startsWith('http');
                 });
-                console.log(`[Main] ✅ 네이버 API 보충 완료: 총 ${allImages.length}개 이미지`);
+
+              if (fallbackImages.length > 0) {
+                images = [...images, ...fallbackImages];
+                console.log(`[Main] ✅ 폴백 크롤러에서 ${fallbackImages.length}개 추가 이미지 수집 → 총 ${images.length}개`);
+              }
+
+              // 상품명이 없으면 폴백에서 가져오기
+              if (!title && fallbackResult.name && fallbackResult.name !== '상품명을 불러올 수 없습니다') {
+                title = fallbackResult.name;
+                productInfo.name = title;
+                console.log(`[Main] ✅ 폴백 크롤러에서 상품명 추출: "${title}"`);
+              }
+              if (!productInfo.price && fallbackResult.price) {
+                productInfo.price = fallbackResult.price;
               }
             }
-          } catch (naverErr) {
-            console.warn('[Main] 네이버 API 보충 실패:', (naverErr as Error).message);
+          } else {
+            console.log(`[Main] ⚠️ URL에서 productId/brandName 추출 실패 → 폴백 건너뜀`);
           }
+        } catch (fallbackErr) {
+          console.warn(`[Main] ⚠️ 브랜드스토어 폴백 크롤링 오류:`, (fallbackErr as Error).message);
         }
+      }
+    } else if (isSmartStore || isCoupang) {
+      // ✅ 스마트스토어/쿠팡: 새 모듈화된 크롤러 사용
+      console.log(`[Main] 🏪 ${isSmartStore ? '스마트스토어' : '쿠팡'} 감지 → 새 크롤러 사용`);
+      const { collectShoppingImages } = await import('./crawler/shopping/index.js');
 
-        console.log(`[Main] ✅ 최종 수집 완료: ${allImages.length}개 이미지`);
+      const result = await collectShoppingImages(url, {
+        timeout: 30000,
+        maxImages: 30,
+        includeDetails: true,
+        useCache: true,
+      });
 
-        // ✅ [신규] 중복 및 저품질 이미지 필터링
-        const filteredImages = filterDuplicateAndLowQualityImages(allImages);
-        console.log(`[Main] 🔍 중복/저품질 필터링 완료: ${allImages.length}개 → ${filteredImages.length}개`);
-
-        const response = {
-          success: true,
-          images: filteredImages,
-          title: result.name,
-          // ✅ 추가 정보도 함께 반환
-          productInfo: {
-            name: result.name,
-            price: result.price,
-            stock: result.stock,
-            options: result.options,
-            detailUrl: result.detailUrl,
-            // ✅ [2026-01-21] 제품 상세 설명 추가 (AI 리뷰 작성용)
-            description: result.description || ''
-          }
-        };
-
-        if (allImages.length > 0 && (await isFreeTierUser())) {
-          await consumeQuota('media', 1);
-        }
-        return response;
+      if (result.isErrorPage) {
+        console.error('[Main] ❌ 에러 페이지 감지:', result.error);
+        return { success: false, message: result.error || '에러 페이지입니다', isErrorPage: true };
       }
 
-      console.log('[Main] ⚠️ 모바일 API 실패 → Puppeteer 폴백');
+      if (!result.success) {
+        console.warn('[Main] ⚠️ 이미지 수집 실패:', result.error);
+        return { success: false, message: result.error || '이미지를 수집할 수 없습니다' };
+      }
+
+      images = result.images.map(img => img.url);
+      title = result.productInfo?.name || '';
+      productInfo = result.productInfo || {};
+
+      console.log(`[Main] 📊 사용된 전략: ${result.usedStrategy}`);
+      console.log(`[Main] ⏱️ 소요 시간: ${result.timing}ms`);
+    } else {
+      // ✅ 기타 쇼핑몰: 기존 방식 폴백
+      console.log('[Main] 🏪 기타 쇼핑몰 → 기존 방식 사용');
+      const { fetchShoppingImages } = await import('./sourceAssembler.js');
+      const result = await fetchShoppingImages(url, { imagesOnly: true });
+
+      images = result.images || [];
+      title = result.title || '';
+      productInfo = {
+        name: title,
+        price: result.price,
+        description: result.description,
+      };
     }
 
-    // ✅ 기존 방식 폴백 (쿠팡, 11번가, G마켓 등)
-    const config = await loadConfig();
-    const naverClientId = config.naverClientId || config.naverDatalabClientId || process.env.NAVER_CLIENT_ID || '';
-    const naverClientSecret = config.naverClientSecret || config.naverDatalabClientSecret || process.env.NAVER_CLIENT_SECRET || '';
-    console.log('[Main] 쇼핑몰 수집 (Puppeteer 방식)');
+    console.log(`[Main] ✅ 쇼핑몰 이미지 수집 완료: ${images.length}개`);
 
-    const { fetchShoppingImages } = await import('./sourceAssembler.js');
-    const result = await fetchShoppingImages(url, {
-      imagesOnly: true,
-      naverClientId,
-      naverClientSecret,
-    });
+    // ✅ [2026-02-01 FIX] 배너/배찌/마크 등 비제품 이미지 필터링 적용
+    const filteredImages = filterDuplicateAndLowQualityImages(images);
+    console.log(`[Main] 🎯 필터링 후 이미지: ${filteredImages.length}개 (제외: ${images.length - filteredImages.length}개)`);
+    console.log('[Main] ════════════════════════════════════════');
 
-    const images = result.images || [];
-    const title = result.title || '';
+    const response = {
+      success: filteredImages.length > 0,
+      images: filteredImages,
+      title,
+      productInfo,
+    };
 
-    console.log(`[Main] 쇼핑몰 이미지 수집 완료: ${images.length}개`);
-
-    const response = { success: true, images, title };
     if ((response.images?.length ?? 0) > 0 && (await isFreeTierUser())) {
       await consumeQuota('media', 1);
     }
     return response;
+
   } catch (error) {
-    console.error('[Main] 쇼핑몰 이미지 수집 실패:', error);
+    console.error('[Main] ❌ 쇼핑몰 이미지 수집 실패:', error);
     return { success: false, message: (error as Error).message };
+  }
+});
+
+// ✅ [2026-02-01] AI 기반 소제목-이미지 의미적 매칭 (Gemini / Perplexity 지원)
+ipcMain.handle('image:matchToHeadings', async (_event, images: string[], headings: string[]) => {
+  try {
+    console.log(`[Main] 🎯 이미지-소제목 매칭 시작: ${images.length}개 이미지, ${headings.length}개 소제목`);
+
+    const config = await loadConfig();
+
+    // ✅ 사용자 설정에 따른 AI 공급자 결정
+    const provider = config.defaultAiProvider || 'gemini';
+    const geminiApiKey = config.geminiApiKey || process.env.GEMINI_API_KEY;
+    const perplexityApiKey = config.perplexityApiKey || process.env.PERPLEXITY_API_KEY;
+
+    // API 키 확인
+    const hasGemini = !!geminiApiKey;
+    const hasPerplexity = !!perplexityApiKey;
+
+    if (!hasGemini && !hasPerplexity) {
+      console.warn('[Main] ⚠️ AI API 키 없음 → 순차 배치');
+      return { success: true, matches: headings.map((_: string, i: number) => i % images.length) };
+    }
+
+    const { matchImagesToHeadings } = await import('./imageHeadingMatcher.js');
+
+    // ✅ 설정 기반 AI 매칭 실행
+    const matcherConfig = {
+      provider: (provider === 'perplexity' && hasPerplexity) ? 'perplexity' as const : 'gemini' as const,
+      geminiApiKey,
+      perplexityApiKey,
+      geminiModel: config.geminiModel || process.env.GEMINI_MODEL,
+      perplexityModel: config.perplexityModel,
+    };
+
+    console.log(`[Main] 🤖 AI 공급자: ${matcherConfig.provider}`);
+    const matches = await matchImagesToHeadings(images, headings, matcherConfig);
+
+    console.log(`[Main] ✅ 이미지-소제목 매칭 완료: ${JSON.stringify(matches)}`);
+    return { success: true, matches };
+
+  } catch (error) {
+    console.error('[Main] ❌ 이미지-소제목 매칭 실패:', error);
+    // 폴백: 순차 배치
+    return { success: true, matches: headings.map((_: string, i: number) => i % images.length) };
   }
 });
 
@@ -2463,6 +2602,263 @@ ipcMain.handle('image:generateProsConsTable', async (_event, options: {
   }
 });
 
+// ✅ [2026-01-27] 테스트 이미지 생성 핸들러 (스타일 미리보기용)
+// ✅ [2026-02-08] engine, textOverlay 파라미터 추가
+ipcMain.handle('generate-test-image', async (_event, options: {
+  style: string;
+  ratio: string;
+  prompt: string;
+  engine?: string;
+  textOverlay?: { enabled: boolean; text: string };
+}) => {
+  try {
+    const { style, ratio, prompt, engine, textOverlay } = options;
+    console.log(`[Main] 🎨 테스트 이미지 생성: style=${style}, ratio=${ratio}, engine=${engine || '(config)'}, textOverlay=${textOverlay?.enabled || false}`);
+
+    const config = await loadConfig();
+    // ✅ [2026-02-08] engine 파라미터가 있으면 임시 엔진 사용, 없으면 저장된 설정
+    const imageSource = engine || (config as any).globalImageSource || 'deepinfra';
+
+    // API 키 결정
+    let apiKey = '';
+    if (imageSource === 'nano-banana-pro' || imageSource.includes('gemini')) {
+      apiKey = config.geminiApiKey || '';
+    } else {
+      apiKey = (config as any).deepinfraApiKey || '';
+    }
+
+    if (!apiKey) {
+      return { success: false, error: '이미지 생성을 위한 API 키가 설정되지 않았습니다.' };
+    }
+
+    // ✅ [2026-02-08] 11가지 스타일별 프롬프트 (3카테고리 동기화)
+    const stylePromptMap: Record<string, string> = {
+      // 📷 실사
+      'realistic': 'Hyper-realistic professional photography, 8K UHD quality, DSLR camera, natural lighting, cinematic composition, Fujifilm XT3 quality', // ✅ [2026-02-12] authentic Korean person 제거 (카테고리별 스타일에서 처리)
+      'bokeh': 'Beautiful bokeh photography, shallow depth of field, dreamy out-of-focus background lights, soft circular bokeh orbs, DSLR wide aperture f/1.4 quality, romantic atmosphere',
+      // 🖌️ 아트
+      'vintage': 'Vintage retro illustration, 1950s poster art style, muted color palette, nostalgic aesthetic, old-fashioned charm, classic design elements, aged paper texture',
+      'minimalist': 'Minimalist flat design, simple clean lines, solid colors, modern aesthetic, geometric shapes, professional infographic style, san-serif typography',
+      '3d-render': '3D render, Octane render quality, Cinema 4D style, Blender 3D art, realistic materials and textures, studio lighting setup, high-end 3D visualization',
+      'korean-folk': 'Korean traditional Minhwa folk painting style, vibrant primary colors on hanji paper, stylized tiger and magpie motifs, peony flowers, pine trees, traditional Korean decorative patterns, bold flat color areas with fine ink outlines, cheerful folk art aesthetic',
+      // ✨ 이색
+      'stickman': 'Simple stick figure drawing style, black line art on white background, crude hand-drawn stick people, childlike doodle, humorous comic strip, thick marker lines, pure minimal stick figure',
+      'claymation': 'Claymation stop-motion style, cute clay figurines, handmade plasticine texture, soft rounded shapes, miniature diorama set, warm studio lighting',
+      'neon-glow': 'Neon glow effect, luminous light trails, dark background with vibrant neon lights, synthwave aesthetic, glowing outlines, electric blue and hot pink',
+      'papercut': 'Paper cut art style, layered paper craft, 3D paper sculpture effect, shadow between layers, handmade tactile texture, colorful construction paper, kirigami aesthetic',
+      'isometric': 'Isometric 3D illustration, cute isometric pixel world, 30-degree angle view, clean geometric shapes, pastel color palette, miniature city/scene, game-like perspective'
+    };
+
+    const stylePrompt = stylePromptMap[style] || stylePromptMap['realistic'];
+
+    // ✅ 실사 외 스타일인 경우 강화 (실제 생성과 동일 - nanoBananaProGenerator.ts 553-556)
+    let finalPrompt: string;
+    if (style !== 'realistic') {
+      finalPrompt = `[ART STYLE: ${style.toUpperCase()}]\n${stylePrompt}\n\n${prompt}\n\nIMPORTANT: Generate the image in ${style} style. DO NOT generate photorealistic images.`;
+      console.log(`[Main] 🎨 스타일 프롬프트 강화 적용: ${style}`);
+    } else {
+      finalPrompt = `${stylePrompt}\n\n${prompt}`;
+    }
+
+    // 비율 → 해상도 매핑
+    const ratioMap: Record<string, { width: number; height: number }> = {
+      '1:1': { width: 1024, height: 1024 },
+      '16:9': { width: 1344, height: 768 },
+      '9:16': { width: 768, height: 1344 },
+      '4:3': { width: 1152, height: 896 },
+      '3:4': { width: 896, height: 1152 },
+    };
+    const resolution = ratioMap[ratio] || ratioMap['1:1'];
+
+    // 이미지 생성 (사용자 설정에 따라 엔진 선택)
+    let imagePath: string;
+
+    console.log(`[Main] 🎨 테스트 이미지 생성 - 엔진: ${imageSource}, 스타일: ${style}`);
+
+    if (imageSource === 'nano-banana-pro' || imageSource.includes('gemini')) {
+      // ✅ 나노바나나프로 (Gemini) 사용 - 실제 생성과 동일 옵션
+      const { generateWithNanoBananaPro } = await import('./image/nanoBananaProGenerator.js');
+      const testItem = {
+        heading: prompt || '테스트 이미지',
+        prompt: finalPrompt,
+        imageStyle: style,  // ✅ 스타일 전달
+        imageRatio: ratio,
+        aspectRatio: ratio,
+      };
+
+      const results = await generateWithNanoBananaPro(
+        [testItem],
+        'test-image',
+        'Test',
+        false,
+        apiKey,
+        false,
+        undefined,
+        undefined
+      );
+
+      if (results && results.length > 0 && results[0].filePath) {
+        imagePath = results[0].filePath;
+      } else {
+        throw new Error('나노바나나프로 이미지 생성 실패');
+      }
+    } else if (imageSource === 'deepinfra' || imageSource === 'deepinfra-flux') {
+      // ✅ [2026-02-08] DeepInfra 사용 - 설정 모델 동적 선택
+      const DEEPINFRA_MODEL_MAP: Record<string, string> = {
+        'flux-2-dev': 'black-forest-labs/FLUX-2-dev',
+        'flux-dev': 'black-forest-labs/FLUX-1-dev',
+        'flux-schnell': 'black-forest-labs/FLUX-1-schnell'
+      };
+      const selectedModelKey = (config as any).deepinfraModel || 'flux-2-dev';
+      const actualModel = DEEPINFRA_MODEL_MAP[selectedModelKey] || 'black-forest-labs/FLUX-2-dev';
+      console.log(`[Main] 🔧 DeepInfra 모델: ${selectedModelKey} → ${actualModel}`);
+
+      const { generateSingleDeepInfraImage } = await import('./image/deepinfraGenerator.js');
+      const sizeStr = `${resolution.width}x${resolution.height}`;
+      const result = await generateSingleDeepInfraImage(
+        { prompt: finalPrompt, size: sizeStr, model: actualModel },
+        apiKey
+      );
+
+      if (result.success && result.localPath) {
+        imagePath = result.localPath;
+      } else {
+        throw new Error(result.error || 'DeepInfra 이미지 생성 실패');
+      }
+    } else if (imageSource === 'falai' || imageSource === 'fal-ai') {
+      // ✅ [2026-02-08] Fal.ai - 실제 Generator 호출
+      console.log(`[Main] 🎨 Fal.ai 엔진으로 테스트 이미지 생성`);
+      const { generateSingleFalAIImage } = await import('./image/falaiGenerator.js');
+      const falApiKey = (config as any).falaiApiKey;
+      if (!falApiKey) throw new Error('Fal.ai API 키가 설정되지 않았습니다.');
+
+      const falModel = (config as any).falaiModel || 'flux-schnell';
+      const result = await generateSingleFalAIImage(
+        { prompt: finalPrompt, size: `${resolution.width}x${resolution.height}`, model: falModel },
+        falApiKey
+      );
+
+      if (result.success && result.localPath) {
+        imagePath = result.localPath;
+      } else {
+        throw new Error(result.error || 'Fal.ai 이미지 생성 실패');
+      }
+    } else if (imageSource === 'prodia') {
+      // ✅ [2026-02-08] Prodia - 실제 Generator 호출 (v2 API + 동적 모델)
+      console.log(`[Main] 🔮 Prodia 엔진으로 테스트 이미지 생성`);
+      const { generateWithProdia } = await import('./image/prodiaGenerator.js');
+      const prodiaToken = (config as any).prodiaToken;
+      if (!prodiaToken) throw new Error('Prodia API 토큰이 설정되지 않았습니다.');
+
+      const testItem = { heading: prompt || '테스트 이미지', prompt: finalPrompt };
+      const results = await generateWithProdia([testItem], 'Test', undefined, false, prodiaToken);
+
+      if (results && results.length > 0 && results[0].filePath) {
+        imagePath = results[0].filePath;
+      } else {
+        throw new Error('Prodia 이미지 생성 실패');
+      }
+    } else if (imageSource === 'stability') {
+      // ✅ [2026-02-08] Stability AI - 실제 Generator 호출 (동적 모델)
+      console.log(`[Main] 🏔️ Stability AI 엔진으로 테스트 이미지 생성`);
+      const { generateWithStability } = await import('./image/stabilityGenerator.js');
+      const stabilityApiKey = (config as any).stabilityApiKey;
+      if (!stabilityApiKey) throw new Error('Stability AI API 키가 설정되지 않았습니다.');
+
+      const testItem = { heading: prompt || '테스트 이미지', prompt: finalPrompt };
+      const results = await generateWithStability([testItem], 'Test', undefined, false, stabilityApiKey);
+
+      if (results && results.length > 0 && results[0].filePath) {
+        imagePath = results[0].filePath;
+      } else {
+        throw new Error('Stability AI 이미지 생성 실패');
+      }
+    } else if (imageSource === 'pollinations') {
+      // ✅ [2026-02-08] Pollinations - 무료 API
+      console.log(`[Main] 🌸 Pollinations 엔진으로 테스트 이미지 생성`);
+      const { default: axios } = await import('axios');
+      const encodedPrompt = encodeURIComponent(finalPrompt);
+      const pollinationUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${resolution.width}&height=${resolution.height}&seed=${Date.now()}&nologo=true`;
+
+      const response = await axios.get(pollinationUrl, { responseType: 'arraybuffer', timeout: 60000 });
+      const buffer = Buffer.from(response.data);
+
+      const testImagesDir = path.join(app.getPath('userData'), 'test-images');
+      await fs.mkdir(testImagesDir, { recursive: true });
+      const tempFileName = `test_pollinations_${Date.now()}.png`;
+      const tempFilePath = path.join(testImagesDir, tempFileName);
+      await fs.writeFile(tempFilePath, buffer);
+      imagePath = tempFilePath;
+    } else {
+      // ✅ 알 수 없는 엔진 → DeepInfra 폴백
+      console.warn(`[Main] ⚠️ 알 수 없는 엔진 "${imageSource}", DeepInfra로 폴백`);
+      const { generateSingleDeepInfraImage } = await import('./image/deepinfraGenerator.js');
+      const sizeStr = `${resolution.width}x${resolution.height}`;
+      const result = await generateSingleDeepInfraImage(
+        { prompt: finalPrompt, size: sizeStr },
+        apiKey
+      );
+
+      if (result.success && result.localPath) {
+        imagePath = result.localPath;
+      } else {
+        throw new Error(result.error || '이미지 생성 실패');
+      }
+    }
+
+    // 파일 저장 (이미 생성된 이미지 경로를 test-images 폴더로 복사)
+    const testImagesDir = path.join(app.getPath('userData'), 'test-images');
+    await fs.mkdir(testImagesDir, { recursive: true });
+
+    const fileName = `test_${style}_${ratio.replace(':', 'x')}_${Date.now()}.png`;
+    const filePath = path.join(testImagesDir, fileName);
+
+    // 생성된 이미지를 test-images 폴더로 복사
+    await fs.copyFile(imagePath, filePath);
+
+    // ✅ [2026-02-08] 텍스트 오버레이 적용 (활성화된 경우)
+    let previewDataUrl: string | undefined;
+    if (textOverlay?.enabled && textOverlay.text) {
+      try {
+        console.log(`[Main] 📝 텍스트 오버레이 적용 중: "${textOverlay.text}"`);
+        const { ThumbnailService } = await import('./thumbnailService.js');
+        const thumbnailService = new ThumbnailService();
+
+        // ✅ 오버레이 적용된 이미지를 별도 파일로 저장
+        const overlayFileName = `test_overlay_${style}_${ratio.replace(':', 'x')}_${Date.now()}.png`;
+        const overlayFilePath = path.join(testImagesDir, overlayFileName);
+
+        const resultPath = await thumbnailService.createProductThumbnail(
+          filePath,
+          textOverlay.text,
+          overlayFilePath,
+          { fontSize: 48, textColor: '#FFFFFF', position: 'bottom' }
+        );
+
+        if (resultPath && typeof resultPath === 'string') {
+          // base64로 변환하여 previewDataUrl 생성
+          const imageBuffer = await fs.readFile(resultPath);
+          previewDataUrl = `data:image/png;base64,${imageBuffer.toString('base64')}`;
+
+          console.log(`[Main] ✅ 텍스트 오버레이 완료: ${resultPath}`);
+          return { success: true, path: resultPath, previewDataUrl };
+        } else {
+          console.warn(`[Main] ⚠️ 텍스트 오버레이 실패, 원본 이미지 반환`);
+        }
+      } catch (overlayError) {
+        console.warn(`[Main] ⚠️ 텍스트 오버레이 오류 (원본 이미지 반환):`, (overlayError as Error).message);
+      }
+    }
+
+    console.log(`[Main] ✅ 테스트 이미지 생성 완료: ${filePath}`);
+    return { success: true, path: filePath, previewDataUrl };
+
+  } catch (error) {
+    console.error('[Main] ❌ 테스트 이미지 생성 오류:', error);
+    return { success: false, error: (error as Error).message };
+  }
+});
+
 // 플랫폼에서 콘텐츠 수집 (실시간 정보)
 ipcMain.handle('content:collectFromPlatforms', async (_event, keyword: string, options?: { maxPerSource?: number; targetDate?: string }) => {
   try {
@@ -2593,6 +2989,35 @@ ipcMain.handle('automation:closeBrowser', async () => {
 });
 
 
+// ✅ [2026-02-12] 소제목별 이미지 자동 검색 - 네이버 → 구글 폴백
+ipcMain.handle('search-images-for-headings', async (_event, payload: {
+  headings: string[];
+  mainKeyword: string;
+}) => {
+  try {
+    console.log(`[Main] 🖼️ search-images-for-headings 시작: ${payload.headings.length}개 소제목`);
+
+    const { searchImagesForHeadings } = await import('./crawler/googleImageSearch.js');
+    const resultMap = await searchImagesForHeadings(
+      payload.headings,
+      payload.mainKeyword
+    );
+
+    // Map → 일반 객체로 변환 (IPC 전송용)
+    const result: Record<string, string[]> = {};
+    for (const [heading, urls] of resultMap.entries()) {
+      result[heading] = urls;
+    }
+
+    console.log(`[Main] ✅ search-images-for-headings 완료: ${Object.keys(result).length}개 매칭`);
+    return { success: true, images: result };
+  } catch (error: any) {
+    console.error(`[Main] ❌ search-images-for-headings 실패:`, error);
+    return { success: false, message: error.message, images: {} };
+  }
+});
+
+
 ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
   // ============================================
   //  [리팩토링] 새 엔진으로 완전 위임
@@ -2688,6 +3113,7 @@ ipcMain.handle(
         geminiApiKey: config.geminiApiKey, // ✅ Gemini 키 추가
         prodiaToken: (config as any).prodiaToken,
         falaiApiKey: (config as any).falaiApiKey, // ✅ Fal.ai 키 추가
+        deepinfraApiKey: (config as any).deepinfraApiKey, // ✅ DeepInfra 키 추가
       };
 
       // ✅ 쇼핑커넥트 모드: 수집된 이미지를 각 item의 referenceImagePath로 배분
@@ -2714,6 +3140,44 @@ ipcMain.handle(
         (options as any).isShoppingConnect = true;
         (options as any).collectedImages = collectedImages;
         console.log(`[Main] 🛒 쇼핑커넥트 옵션 설정 완료: isShoppingConnect=true, collectedImages=${collectedImages.length}개`);
+      }
+
+      // ✅ [2026-01-29 FIX] sourceUrl이 있으면 자동으로 이미지 크롤링 → crawledImages로 전달 (img2img 활성화)
+      const sourceUrl = (options as any).sourceUrl || '';
+      if (sourceUrl && sourceUrl.startsWith('http') && collectedImages.length === 0) {
+        try {
+          console.log(`[Main] 🔗 sourceUrl에서 이미지 크롤링 시작: ${sourceUrl.substring(0, 60)}...`);
+          const SmartCrawler = (await import('./crawler/smartCrawler.js')).SmartCrawler;
+          const crawler = new SmartCrawler();
+          const crawlResult = await crawler.crawl(sourceUrl, {
+            maxLength: 5000,
+            timeout: 15000,
+            extractImages: true,
+          });
+
+          if (crawlResult && crawlResult.images && crawlResult.images.length > 0) {
+            const urlImages = crawlResult.images
+              .filter((img: any) => typeof img === 'string' && img.startsWith('http'))
+              .slice(0, 10); // 최대 10개만 사용
+
+            if (urlImages.length > 0) {
+              (options as any).crawledImages = urlImages;
+              console.log(`[Main] ✅ URL에서 ${urlImages.length}개 이미지 크롤링 완료 → img2img 활성화`);
+
+              // 각 item에 referenceImageUrl 배분
+              if (options.items) {
+                options.items.forEach((item: any, idx: number) => {
+                  if (!item.referenceImageUrl && !item.referenceImagePath) {
+                    item.referenceImageUrl = urlImages[idx % urlImages.length];
+                    console.log(`[Main]   📎 [${idx + 1}] "${(item.heading || '').substring(0, 20)}" → img2img 참조`);
+                  }
+                });
+              }
+            }
+          }
+        } catch (crawlErr) {
+          console.warn(`[Main] ⚠️ URL 이미지 크롤링 실패: ${(crawlErr as Error).message}`);
+        }
       }
 
       // ✅ [2026-01-24] headingImageMode에 따른 items 필터링
@@ -2802,6 +3266,44 @@ ipcMain.handle(
         console.log(`[Main] 🖼️ 생성할 이미지 원래 인덱스: [${remainingIndices.join(', ')}]`);
       }
 
+      // ✅ [2026-01-27] 각 아이템에 isThumbnail 기반 개별 비율 적용
+      // thumbnailImageRatio: 썸네일(1번 소제목) 전용 비율
+      // subheadingImageRatio: 나머지 소제목 전용 비율
+      const thumbnailRatio = (options as any).thumbnailImageRatio || (options as any).imageRatio || '1:1';
+      const subheadingRatio = (options as any).subheadingImageRatio || (options as any).imageRatio || '1:1';
+
+      if (options.items && options.items.length > 0) {
+        options.items = options.items.map((item: any, idx: number) => {
+          const origIdx = item.originalIndex ?? idx;
+
+          // isThumbnail 결정: 쇼핑커넥트 모드에서는 item.isThumbnail, 일반 모드에서는 origIdx === 0
+          const isThumbnailItem = isShoppingConnectMode
+            ? (item.isThumbnail === true)
+            : (origIdx === 0 || item.isThumbnail === true);
+
+          // 비율 적용
+          const itemRatio = isThumbnailItem ? thumbnailRatio : subheadingRatio;
+
+          console.log(`[Main] 📐 비율 적용 - [origIdx=${origIdx}] "${(item.heading || '').substring(0, 20)}" isThumbnail=${isThumbnailItem} → ratio=${itemRatio}`);
+
+          return {
+            ...item,
+            imageRatio: itemRatio,
+            aspectRatio: itemRatio, // API에서 aspectRatio로 사용하는 경우 대비
+          };
+        });
+
+        console.log(`[Main] 📐 썸네일 비율: ${thumbnailRatio}, 소제목 비율: ${subheadingRatio}`);
+      }
+
+      // ✅ [2026-01-29 FIX] collectedImages를 crawledImages로 전달 (img2img 활성화)
+      if (collectedImages && collectedImages.length > 0) {
+        (options as any).crawledImages = collectedImages.map((img: any) =>
+          typeof img === 'string' ? img : (img.url || img.filePath || img.thumbnailUrl)
+        ).filter(Boolean);
+        console.log(`[Main] 🖼️ img2img 활성화: ${(options as any).crawledImages.length}개 크롤링 이미지 전달`);
+      }
+
       const images = await generateImages(options, apiKeys);
 
       if (await isFreeTierUser()) {
@@ -2821,8 +3323,85 @@ ipcMain.handle(
   async (_event, payload: {
     headings: any[];
     collectedImages: any[];
+    scSubImageSource?: 'ai' | 'collected'; // ✅ [2026-01-28] 수집 이미지 직접 사용 옵션
   }): Promise<{ success: boolean; assignments?: any[]; message?: string }> => {
     try {
+      // ✅ [2026-01-28] 수집 이미지 직접 사용 모드: AI 없이 순서대로 할당
+      const useCollectedDirectly = payload.scSubImageSource === 'collected';
+
+      if (useCollectedDirectly) {
+        console.log('[Main] 🖼️ 수집 이미지 직접 사용 모드: AI 없이 순서대로 할당');
+        console.log(`[Main]   📦 소제목 ${payload.headings.length}개, 수집 이미지 ${payload.collectedImages.length}개`);
+
+        // ✅ [2026-01-28] 중복/유사 이미지 필터링
+        // 1. URL 완전 일치 중복 제거
+        // 2. 같은 기본 이미지에서 파생된 유사 이미지 제거 (스티커, 라벨, 크기 차이 등)
+        const seenBaseUrls = new Set<string>();
+        const uniqueImages: typeof payload.collectedImages = [];
+
+        for (const img of payload.collectedImages) {
+          const url = img.url || img.thumbnailUrl || '';
+          if (!url) continue;
+
+          // URL에서 기본 이미지 식별자 추출 (쿼리 파라미터, 사이즈 변형 제거)
+          // 예: image_123.jpg?size=small → image_123
+          // 예: product_456_v1.jpg → product_456
+          let baseUrl = url
+            .replace(/\?.*$/, '')  // 쿼리 파라미터 제거
+            .replace(/(_v\d+|_\d{2,}x\d{2,}|_s\d+|_m\d+|_l\d+)(\.[a-z]+)?$/i, '$2')  // 사이즈 변형 제거
+            .replace(/[-_](small|medium|large|thumb|full|origin|detail|main|sub)(\.[a-z]+)?$/i, '$2');  // 타입 변형 제거
+
+          // 파일명만 추출해서 비교 (더 정확한 중복 감지)
+          const fileName = baseUrl.split('/').pop()?.replace(/\.[a-z]+$/i, '') || baseUrl;
+
+          // 숫자 부분 제거하여 기본 패턴 추출 (image_001, image_002 같은 연속 이미지 탐지)
+          const basePattern = fileName.replace(/[_-]?\d+$/, '');
+
+          // 이미 같은 기본 패턴의 이미지가 있으면 스킵
+          if (seenBaseUrls.has(basePattern) && basePattern.length > 5) {
+            console.log(`[Main]   🔄 유사 이미지 스킵: ${fileName.substring(0, 30)}...`);
+            continue;
+          }
+
+          // 완전 동일 URL 체크
+          if (seenBaseUrls.has(url)) {
+            console.log(`[Main]   🔄 중복 URL 스킵: ${url.substring(0, 50)}...`);
+            continue;
+          }
+
+          seenBaseUrls.add(url);
+          seenBaseUrls.add(basePattern);
+          uniqueImages.push(img);
+        }
+
+        console.log(`[Main]   🧹 중복/유사 제거: ${payload.collectedImages.length}개 → ${uniqueImages.length}개`);
+
+        const assignments = payload.headings.map((h, idx) => {
+          // ✅ 필터링된 고유 이미지만 사용
+          const img = idx < uniqueImages.length ? uniqueImages[idx] : null;
+
+          if (!img) {
+            console.log(`[Main]   ⚠️ 소제목 ${idx + 1} "${(h.title || h).substring(0, 15)}..." → 이미지 부족 (건너뜀)`);
+            return null;
+          }
+
+          console.log(`[Main]   ✅ 소제목 ${idx + 1} → 이미지 ${idx + 1}번 할당`);
+          return {
+            headingIndex: idx,
+            headingTitle: h.title || h,
+            imageUrl: img.url || img.thumbnailUrl,
+            imagePath: img.filePath,
+            source: img.source || 'collected',
+            confidence: 100,
+            reason: '수집 이미지 직접 사용 (중복 필터링 완료)',
+          };
+        }).filter(a => a !== null);
+
+        console.log(`[Main]   🎉 ${assignments.length}개 소제목에 고유 이미지 할당 완료`);
+        return { success: true, assignments };
+      }
+
+      // ✅ 기존 AI 매칭 로직
       const config = await loadConfig();
       if (!config.geminiApiKey) {
         return { success: false, message: 'Gemini API 키가 필요합니다.' };
@@ -3501,7 +4080,6 @@ ipcMain.handle('aiAssistant:runAutoFix', async () => {
     const validModels = [
       'gemini-3-pro-preview',
       'gemini-3-flash-preview',
-      'gemini-2.0-flash-exp',
     ];
 
     // ✅ 이전 모델명 → 새 모델명 자동 마이그레이션
@@ -3512,8 +4090,8 @@ ipcMain.handle('aiAssistant:runAutoFix', async () => {
       'gemini-3-flash-preview': 'gemini-3-flash-preview',
       'gemini-2.5-pro-preview': 'gemini-3-pro-preview',
       'gemini-2.5-flash': 'gemini-3-flash-preview',
-      'gemini-2.0-flash-exp': 'gemini-2.0-flash-exp',
-      'gemini-2.0-flash': 'gemini-2.0-flash-exp',
+      'gemini-2.0-flash-exp': 'gemini-3-flash-preview',
+      'gemini-2.0-flash': 'gemini-3-flash-preview',
       'gemini-1.5-flash': 'gemini-3-flash-preview',
       'gemini-1.5-flash-latest': 'gemini-3-flash-preview',
       'gemini-1.5-pro': 'gemini-3-pro-preview',
@@ -4092,6 +4670,54 @@ ipcMain.handle('thumbnail:getCategories', async () => {
   }
 });
 
+// ✅ [2026-02-04] 수집 이미지에 텍스트 오버레이 적용 IPC 핸들러
+ipcMain.handle('thumbnail:createProductThumbnail', async (
+  _event,
+  imageUrl: string,
+  text: string,
+  options?: { position?: string; fontSize?: number; textColor?: string; opacity?: number }
+) => {
+  try {
+    console.log(`[Main] 🎨 썸네일 텍스트 오버레이 시작: ${text.substring(0, 30)}...`);
+    console.log(`[Main]   이미지 URL: ${imageUrl.substring(0, 60)}...`);
+
+    // 1. URL에서 이미지 다운로드
+    const tempDir = path.join(app.getPath('temp'), 'better-life-thumbnails');
+    if (!fsSync.existsSync(tempDir)) {
+      fsSync.mkdirSync(tempDir, { recursive: true });
+    }
+
+    const timestamp = Date.now();
+    const inputPath = path.join(tempDir, `input_${timestamp}.jpg`);
+    const outputPath = path.join(tempDir, `overlaid_${timestamp}.png`);
+
+    // 이미지 다운로드
+    const response = await axios.get(imageUrl, { responseType: 'arraybuffer', timeout: 30000 });
+    fsSync.writeFileSync(inputPath, Buffer.from(response.data));
+
+    // 2. thumbnailService를 사용하여 텍스트 오버레이
+    await thumbnailService.createProductThumbnail(inputPath, text, outputPath, {
+      position: (options?.position as 'top' | 'center' | 'bottom') || 'bottom',
+      fontSize: options?.fontSize || 28,
+      textColor: options?.textColor || '#ffffff',
+      opacity: options?.opacity || 0.8
+    });
+
+    // 3. 결과 이미지를 base64로 변환
+    const outputBuffer = fsSync.readFileSync(outputPath);
+    const previewDataUrl = `data:image/png;base64,${outputBuffer.toString('base64')}`;
+
+    // 임시 파일 정리
+    try { fsSync.unlinkSync(inputPath); } catch { }
+
+    console.log(`[Main] ✅ 썸네일 텍스트 오버레이 완료: ${outputPath}`);
+    return { success: true, outputPath, previewDataUrl };
+  } catch (error) {
+    console.error(`[Main] ❌ 썸네일 오버레이 실패:`, error);
+    return { success: false, message: `오버레이 실패: ${(error as Error).message}` };
+  }
+});
+
 // ✅ 다중 블로그 관리 IPC 핸들러
 ipcMain.handle('account:add', async (_event, name: string, blogId: string, naverId?: string, naverPassword?: string, settings?: any) => {
   try {
@@ -4542,9 +5168,19 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         if (isScheduleMode) {
           const baseTime = new Date(`${baseScheduleDate}T${baseScheduleTime}`);
           const offsetMinutes = i * scheduleIntervalMinutes;
-          // ✅ [2026-01-20] 랜덤 편차 On/Off 옵션 지원
-          const randomOffsetMinutes = useRandomOffset ? (Math.floor(Math.random() * 31) - 15) : 0;  // ±15분 또는 0
+          // ✅ [2026-02-08 FIX] 랜덤 편차도 10분 단위 (네이버 서버 예약 10분 단위 제한)
+          // 기존: ±15분(1분 단위) → ±10분(10분 단위): -10, 0, +10 중 랜덤
+          const randomOffsetMinutes = useRandomOffset ? (Math.floor(Math.random() * 3) - 1) * 10 : 0;  // -10, 0, +10분
           const newTime = new Date(baseTime.getTime() + (offsetMinutes + randomOffsetMinutes) * 60000);
+
+          // ✅ [2026-02-08 FIX] 최종 시간도 10분 단위로 반올림
+          const rawMinutes = newTime.getMinutes();
+          const roundedMinutes = Math.round(rawMinutes / 10) * 10;
+          newTime.setMinutes(roundedMinutes, 0, 0);
+          if (roundedMinutes >= 60) {
+            newTime.setMinutes(0);
+            newTime.setHours(newTime.getHours() + 1);
+          }
 
           const yyyy = newTime.getFullYear();
           const mm = String(newTime.getMonth() + 1).padStart(2, '0');
@@ -4568,7 +5204,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           scheduleDate: accountScheduleDate,  // ✅ 순차 예약 날짜
           scheduleTime: accountScheduleTime,  // ✅ 순차 예약 시간
           toneStyle: account.settings?.toneStyle || 'friendly',
-          categoryName: account.settings?.category,
+          categoryName: options?.categoryName || account.settings?.category, // ✅ [2026-02-09 FIX] renderer 전달값 우선 (실제 블로그 폴더명), 없으면 계정 설정 fallback
           isFullAuto: true,
           title,        // ✅ 생성된 제목
           content,      // ✅ 생성된 콘텐츠
@@ -4578,6 +5214,12 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           skipCta: options?.skipCta === true ? true : false,  // 명시적으로 true일 때만 CTA 건너뛰기
           contentMode: options?.contentMode || (account.settings as any)?.contentMode || 'homefeed',  // ✅ contentMode 전달
           affiliateLink: options?.affiliateLink || (account.settings as any)?.affiliateLink,  // ✅ 제휴링크 전달
+          // ✅ [2026-01-28] 이미지 설정 전역 적용 (renderer에서 전달받은 설정)
+          scSubImageSource: options?.scSubImageSource || 'ai',  // 수집 이미지 직접 사용 여부
+          collectedImages: options?.collectedImages || structuredContent?.collectedImages || [],  // 수집 이미지
+          thumbnailImageRatio: options?.thumbnailImageRatio || '1:1',  // 썸네일 비율
+          subheadingImageRatio: options?.subheadingImageRatio || '1:1',  // 소제목 비율
+          scAutoThumbnailSetting: options?.scAutoThumbnailSetting || false,  // 자동 썸네일
         };
 
         //  새 엔진 호출
@@ -4966,6 +5608,20 @@ ipcMain.handle(
         content.quality.warnings = Array.from(new Set([...(content.quality.warnings ?? []), ...warnings]));
       }
 
+      // ✅ [2026-02-01 FIX] 크롤링 시 수집한 이미지를 content.collectedImages에 저장
+      // 이렇게 하면 renderer에서 다시 크롤링하지 않고 바로 이미지를 사용할 수 있음
+      if (source.images && source.images.length > 0) {
+        (content as any).collectedImages = source.images.map((img: string, idx: number) => ({
+          url: img,
+          filePath: img,
+          thumbnailUrl: img,
+          heading: `소제목 ${idx + 1}`,
+          headingIndex: idx,
+          source: 'crawled'
+        }));
+        console.log(`[Main] ✅ 크롤링 이미지 ${source.images.length}개를 collectedImages에 저장`);
+      }
+
       console.log('[Main] 구조화 콘텐츠 생성 완료');
 
       // ✅ 글생성은 쿼터 소비 안함 (발행 시에만 1세트로 카운트)
@@ -5291,7 +5947,7 @@ ipcMain.handle('auto-collect-images', async (_event, data: {
   keywords: string[];
   category: string;
   imageMode: 'full-auto' | 'semi-auto' | 'manual' | 'skip';
-  selectedImageSource?: 'dalle' | 'pexels' | 'library'; // 이미지 소스 선택
+  selectedImageSource?: 'nano-banana-pro' | 'library'; // 이미지 소스 선택
 }): Promise<{
   success: boolean;
   images?: any[];
@@ -5324,8 +5980,8 @@ ipcMain.handle('auto-collect-images', async (_event, data: {
 
     const { title, keywords, category, imageMode, selectedImageSource } = data;
 
-    // DALL-E 또는 Pexels가 선택된 경우 이미지 수집을 건너뜁니다.
-    if (selectedImageSource === 'dalle' || selectedImageSource === 'pexels') {
+    // AI 이미지 생성이 선택된 경우 이미지 수집을 건너뜁니다.
+    if (selectedImageSource === 'nano-banana-pro') {
       console.log(`[Main] ${selectedImageSource} 선택됨. 이미지 라이브러리 수집을 건너뜁니다.`);
       return {
         success: true,
@@ -6702,6 +7358,11 @@ ipcMain.handle('license:getDeviceId', async (): Promise<string> => {
   }
 });
 
+// ✅ [2026-02-05] 앱 버전 반환 (라이선스 창 및 메인 창에서 버전 표시용)
+ipcMain.handle('app:getVersion', async (): Promise<string> => {
+  return app.getVersion();
+});
+
 ipcMain.handle('license:testServer', async (_event, serverUrl?: string): Promise<{ success: boolean; message: string; response?: any }> => {
   try {
     return await testLicenseServer(serverUrl);
@@ -7616,6 +8277,9 @@ app.whenReady().then(async () => {
 
     // ✅ isPackaged 값을 실제 값으로 업데이트 (배포 환경 감지)
 
+    // ✅ [2026-02-04] 자동 업데이터 초기화 (앱 시작 시 즉시, 윈도우 없이도)
+    initAutoUpdaterEarly();
+
     debugLog('[Main] ========== APP READY ==========');
     debugLog(`[Main] isPackaged: ${app.isPackaged}`);
     debugLog(`[Main] Process arguments: ${process.argv.join(' ')}`);
@@ -7942,7 +8606,7 @@ app.whenReady().then(async () => {
                 return {
                   heading: img.heading || '',
                   filePath: finalFilePath,
-                  provider: img.provider || 'pexels',
+                  provider: img.provider || 'nano-banana-pro',
                   alt: img.alt || '',
                   caption: img.caption || '',
                   savedToLocal: img.savedToLocal
@@ -8156,9 +8820,21 @@ app.whenReady().then(async () => {
       debugLog('[Main] Creating main window...');
       await createWindow();
       createTray(); // ✅ [2026-01-21] 트레이 아이콘 생성 (최소화 시 표시되어야 함)
+
+      // ✅ [2026-02-04] 자동 업데이터 초기화 (앱 시작 5초 후 업데이트 체크)
+      if (mainWindow && !mainWindow.isDestroyed()) {
+        initAutoUpdater(mainWindow);
+        debugLog('[Main] Auto-updater initialized');
+      }
     } else {
       debugLog('[Main] Main window already exists');
       createTray(); // ✅ 기존 윈도우가 있어도 트레이가 없으면 생성
+
+      // ✅ [2026-02-04] 기존 윈도우가 있어도 업데이터 초기화
+      if (!mainWindow.isDestroyed()) {
+        initAutoUpdater(mainWindow);
+        debugLog('[Main] Auto-updater initialized (existing window)');
+      }
     }
     debugLog('[Main] ========== INITIALIZATION COMPLETE ==========');
   } catch (error) {
@@ -8338,7 +9014,7 @@ ipcMain.handle('seo:generateTitle', async (_event, productName: string): Promise
     }
 
     const { generateShoppingConnectTitle } = await import('./naverSearchApi.js');
-    const seoTitle = await generateShoppingConnectTitle(productName.trim(), 2);
+    const seoTitle = await generateShoppingConnectTitle(productName.trim(), 3);
 
     console.log(`[SEO] 제목 생성 완료: "${seoTitle}"`);
     return { success: true, title: seoTitle };

@@ -7,21 +7,21 @@ import os from 'os';
 
 // Electron 없이 imageLibrary 함수 사용을 위한 래퍼
 async function getLibraryImagesForTest(category?: string, titleKeywords?: string[]): Promise<any[]> {
-  const userDataPath = process.env.APPDATA || 
-    (process.platform === 'darwin' ? path.join(os.homedir(), 'Library', 'Application Support') : 
-     path.join(os.homedir(), '.config'));
+  const userDataPath = process.env.APPDATA ||
+    (process.platform === 'darwin' ? path.join(os.homedir(), 'Library', 'Application Support') :
+      path.join(os.homedir(), '.config'));
   const libraryDir = path.join(userDataPath, 'naver-blog-automation', 'image-library');
   const metadataPath = path.join(libraryDir, 'library-metadata.json');
-  
+
   try {
     const raw = await fs.readFile(metadataPath, 'utf-8');
     let images = JSON.parse(raw);
-    
+
     // 카테고리 필터
     if (category) {
       images = images.filter((img: any) => img.category === category);
     }
-    
+
     return images;
   } catch {
     return [];
@@ -32,7 +32,7 @@ function filterImagesByKeywordsForTest(images: any[], keywords: string[]): any[]
   if (keywords.length === 0) {
     return images;
   }
-  
+
   // 간단한 키워드 매칭 (실제 로직과 유사)
   const scoredImages = images.map((image) => {
     let score = 0;
@@ -41,7 +41,7 @@ function filterImagesByKeywordsForTest(images: any[], keywords: string[]): any[]
       image.sourceTitle || '',
       ...(image.tags || []),
     ].join(' ').toLowerCase();
-    
+
     let matchedKeywords = 0;
     for (const keyword of keywords) {
       const lowerKeyword = keyword.toLowerCase();
@@ -50,31 +50,31 @@ function filterImagesByKeywordsForTest(images: any[], keywords: string[]): any[]
         matchedKeywords++;
       }
     }
-    
+
     return { image, score, matchedKeywords };
   });
-  
+
   // 점수가 10 이상이고, 최소 1개 이상의 키워드가 매칭된 이미지만 필터링
   const relevantImages = scoredImages
     .filter((item) => item.score >= 10 && item.matchedKeywords > 0)
     .sort((a, b) => b.score - a.score)
     .map((item) => item.image);
-  
+
   // 필터링 결과가 없으면 전체 이미지 반환
   if (relevantImages.length === 0) {
     return images;
   }
-  
+
   return relevantImages;
 }
 
 // Electron 없이 설정 로드
 async function loadConfigForTest(): Promise<any> {
-  const userDataPath = process.env.APPDATA || 
-    (process.platform === 'darwin' ? path.join(os.homedir(), 'Library', 'Application Support') : 
-     path.join(os.homedir(), '.config'));
+  const userDataPath = process.env.APPDATA ||
+    (process.platform === 'darwin' ? path.join(os.homedir(), 'Library', 'Application Support') :
+      path.join(os.homedir(), '.config'));
   const configPath = path.join(userDataPath, 'naver-blog-automation', 'settings.json');
-  
+
   try {
     const raw = await fs.readFile(configPath, 'utf-8');
     return JSON.parse(raw);
@@ -123,17 +123,17 @@ async function testConfigLoad(): Promise<boolean> {
   try {
     const config = await loadConfigForTest();
     applyConfigToEnvForTest(config);
-    
-    const hasApiKey = 
-      !!process.env.GEMINI_API_KEY || 
-      !!process.env.OPENAI_API_KEY || 
+
+    const hasApiKey =
+      !!process.env.GEMINI_API_KEY ||
+      !!process.env.OPENAI_API_KEY ||
       !!process.env.CLAUDE_API_KEY;
-    
+
     if (!hasApiKey) {
       logTest('Config', false, 'API 키가 설정되어 있지 않습니다. settings.json 파일을 확인하세요.');
       return false;
     }
-    
+
     logTest('Config', true, 'API 키 로드 완료', {
       gemini: !!process.env.GEMINI_API_KEY,
       openai: !!process.env.OPENAI_API_KEY,
@@ -164,13 +164,13 @@ async function testContentGeneration(): Promise<{ success: boolean; content?: an
 어느 날, 박근형 선배에게 '형님'이라고 불렀더니 엄청 놀랐다는 거다! 
 오지명 선배도 마찬가지였다고 한다. 배우들은 나이 차이가 많이 나도 '선배님'이라고 부른다고 한다.`,
       categoryHint: '연예',
-      generator: process.env.GEMINI_API_KEY ? 'gemini' : 
-                 process.env.OPENAI_API_KEY ? 'openai' : 
-                 process.env.CLAUDE_API_KEY ? 'claude' : 'gemini',
+      generator: process.env.GEMINI_API_KEY ? 'gemini' :
+        process.env.OPENAI_API_KEY ? 'openai' :
+          process.env.CLAUDE_API_KEY ? 'claude' : 'gemini',
     };
 
     logTest('Content Generation', true, '콘텐츠 생성 시작...');
-    
+
     const content = await generateStructuredContent(testSource, {
       minChars: 1000,
     });
@@ -190,7 +190,7 @@ async function testContentGeneration(): Promise<{ success: boolean; content?: an
       logTest('Content Generation', false, `소제목이 부족합니다. (${content.headings?.length || 0}개, 최소 5개 필요)`);
       return { success: false };
     }
-    
+
     // 이스케이프 문자 노출 확인
     if (content.bodyPlain && (content.bodyPlain.includes('\\n') || content.bodyPlain.includes('\\t') || content.bodyPlain.includes('\\r'))) {
       logTest('Content Generation', false, '본문에 이스케이프 문자가 노출되었습니다. (\\n, \\t, \\r 등)');
@@ -202,25 +202,25 @@ async function testContentGeneration(): Promise<{ success: boolean; content?: an
     // 본문이 headings와 연결되어 있는지 확인
     const bodyText = content.bodyPlain.toLowerCase();
     const bodyLength = content.bodyPlain.length;
-    
+
     // 각 heading에 대한 본문 내용이 있는지 확인
     let headingMatches = 0;
     const headingDetails: any[] = [];
-    
+
     for (const heading of content.headings) {
       const headingTitle = heading.title.toLowerCase();
       const headingKeywords = heading.keywords?.map(k => k.toLowerCase()) || [];
       const headingSummary = heading.summary?.toLowerCase() || '';
-      
+
       // heading title이나 keywords가 본문에 포함되어 있는지 확인
-      const hasTitleMatch = bodyText.includes(headingTitle) || 
-                           headingTitle.split(/\s+/).some(word => word.length > 2 && bodyText.includes(word));
+      const hasTitleMatch = bodyText.includes(headingTitle) ||
+        headingTitle.split(/\s+/).some(word => word.length > 2 && bodyText.includes(word));
       const hasKeywordMatch = headingKeywords.some(keyword => bodyText.includes(keyword));
       const hasSummaryMatch = headingSummary.split(/\s+/).some(word => word.length > 3 && bodyText.includes(word));
-      
+
       const isMatched = hasTitleMatch || hasKeywordMatch || hasSummaryMatch;
       if (isMatched) headingMatches++;
-      
+
       headingDetails.push({
         title: heading.title,
         matched: isMatched,
@@ -232,11 +232,11 @@ async function testContentGeneration(): Promise<{ success: boolean; content?: an
 
     const matchRatio = headingMatches / content.headings.length;
     if (matchRatio < 0.5) {
-      logTest('Content Generation', false, 
+      logTest('Content Generation', false,
         `본문이 소제목과 충분히 연결되지 않았습니다. (${headingMatches}/${content.headings.length} 매칭, ${(matchRatio * 100).toFixed(1)}%)`,
         headingDetails);
     } else {
-      logTest('Content Generation', true, 
+      logTest('Content Generation', true,
         `본문과 소제목 연결 확인: ${headingMatches}/${content.headings.length} 매칭 (${(matchRatio * 100).toFixed(1)}%)`);
     }
 
@@ -264,48 +264,48 @@ async function testContentGeneration(): Promise<{ success: boolean; content?: an
 async function testImageGeneration(content: any): Promise<{ success: boolean; generatedImages?: any[] }> {
   try {
     logTest('Image Generation', true, 'AI 이미지 생성 테스트 시작...');
-    
+
     if (!content.headings || content.headings.length === 0) {
       logTest('Image Generation', false, '소제목이 없어 이미지 생성을 할 수 없습니다.');
       return { success: false };
     }
-    
-    // OpenAI API 키 확인
-    if (!process.env.OPENAI_API_KEY) {
-      logTest('Image Generation', false, 'OpenAI API 키가 설정되지 않았습니다. (DALL-E 이미지 생성 스킵)');
+
+    // Gemini API 키 확인
+    if (!process.env.GEMINI_API_KEY) {
+      logTest('Image Generation', false, 'Gemini API 키가 설정되지 않았습니다. (이미지 생성 스킵)');
       return { success: false };
     }
-    
+
     // 테스트 환경 설정
-    const userDataPath = process.env.APPDATA || 
-      (process.platform === 'darwin' ? path.join(os.homedir(), 'Library', 'Application Support') : 
-       path.join(os.homedir(), '.config'));
+    const userDataPath = process.env.APPDATA ||
+      (process.platform === 'darwin' ? path.join(os.homedir(), 'Library', 'Application Support') :
+        path.join(os.homedir(), '.config'));
     const generatedImagesDir = path.join(userDataPath, 'naver-blog-automation', 'generated-images');
     await fs.mkdir(generatedImagesDir, { recursive: true });
     process.env.TEST_MODE = 'true';
     process.env.GENERATED_IMAGES_DIR = generatedImagesDir;
-    
+
     // 첫 2개 소제목에 대해서만 테스트 (비용 절감)
     const testHeadings = content.headings.slice(0, 2);
     const imageRequests = testHeadings.map((heading: any) => ({
       heading: heading.title,
       prompt: heading.imagePrompt || `DSLR photo of ${heading.title}, natural lighting, premium aesthetic`,
     }));
-    
+
     logTest('Image Generation', true, `${testHeadings.length}개 소제목에 대한 이미지 생성 시작...`);
-    logTest('Image Generation', true, `⚠️ DALL-E API 호출 시 비용이 발생할 수 있습니다.`);
-    
+    logTest('Image Generation', true, `⚠️ Gemini API 호출 시 비용이 발생할 수 있습니다.`);
+
     try {
       const generatedImages = await generateImages({
-        provider: 'dalle',
+        provider: 'nano-banana-pro',
         items: imageRequests,
       });
-      
+
       if (!generatedImages || generatedImages.length === 0) {
         logTest('Image Generation', false, '이미지 생성에 실패했습니다.');
         return { success: false };
       }
-      
+
       // 생성된 이미지 파일이 실제로 존재하는지 확인
       let validImages = 0;
       for (const image of generatedImages) {
@@ -317,14 +317,14 @@ async function testImageGeneration(content: any): Promise<{ success: boolean; ge
           logTest('Image Generation', false, `이미지 파일을 찾을 수 없습니다: ${image.filePath}`);
         }
       }
-      
+
       if (validImages === 0) {
         logTest('Image Generation', false, '생성된 이미지 파일이 없습니다.');
         return { success: false };
       }
-      
+
       logTest('Image Generation', true, `이미지 생성 완료: ${validImages}/${generatedImages.length}개 성공`);
-      
+
       return { success: true, generatedImages };
     } catch (error: any) {
       // Electron app 관련 오류인 경우 상세 정보 출력
@@ -348,36 +348,36 @@ async function testImageGeneration(content: any): Promise<{ success: boolean; ge
 async function testImageLibrarySelection(content: any): Promise<{ success: boolean; libraryImages?: any[] }> {
   try {
     logTest('Image Library', true, '이미지 라이브러리 선택 테스트 시작...');
-    
+
     // Pexels API 키 확인
     if (!process.env.PEXELS_API_KEY) {
       logTest('Image Library', false, 'Pexels API 키가 설정되지 않았습니다. (이미지 라이브러리 테스트 스킵)');
       return { success: false };
     }
-    
+
     // 라이브러리에서 이미지 가져오기
     const libraryImages = await getLibraryImagesForTest();
-    
+
     if (!libraryImages || libraryImages.length === 0) {
       logTest('Image Library', false, '라이브러리에 이미지가 없습니다.');
       return { success: false };
     }
-    
+
     logTest('Image Library', true, `라이브러리에서 ${libraryImages.length}개 이미지 발견`);
-    
+
     // 첫 번째 소제목에 대한 키워드로 이미지 필터링
     if (content.headings && content.headings.length > 0) {
       const firstHeading = content.headings[0];
       const keywords = firstHeading.keywords || [firstHeading.title];
-      
+
       const filteredImages = filterImagesByKeywordsForTest(libraryImages, keywords);
-      logTest('Image Library', true, 
+      logTest('Image Library', true,
         `"${firstHeading.title}" 키워드로 ${filteredImages.length}개 이미지 필터링`);
-      
+
       if (filteredImages.length > 0) {
         const selectedImage = filteredImages[0];
         logTest('Image Library', true, `✅ 선택된 이미지: ${selectedImage.filePath}`);
-        
+
         // 선택된 이미지 파일이 존재하는지 확인
         try {
           await fs.access(selectedImage.filePath);
@@ -386,15 +386,15 @@ async function testImageLibrarySelection(content: any): Promise<{ success: boole
           logTest('Image Library', false, `선택된 이미지 파일을 찾을 수 없습니다: ${selectedImage.filePath}`);
           return { success: false };
         }
-        
+
         return { success: true, libraryImages: [selectedImage] };
       }
     }
-    
+
     // 필터링 결과가 없으면 첫 번째 이미지 사용
     const firstImage = libraryImages[0];
     logTest('Image Library', true, `✅ 첫 번째 이미지 선택: ${firstImage.filePath}`);
-    
+
     return { success: true, libraryImages: [firstImage] };
   } catch (error) {
     logTest('Image Library', false, '이미지 라이브러리 테스트 실패', error);
@@ -405,27 +405,27 @@ async function testImageLibrarySelection(content: any): Promise<{ success: boole
 async function testImagePlacement(content: any): Promise<boolean> {
   try {
     logTest('Image Placement', true, '이미지 배치 테스트 시작...');
-    
+
     // 이미지가 headings와 올바르게 매칭되는지 확인
     if (!content.images || content.images.length === 0) {
       logTest('Image Placement', false, '이미지가 생성되지 않았습니다.');
       return false;
     }
-    
+
     if (!content.headings || content.headings.length === 0) {
       logTest('Image Placement', false, '소제목이 없어 이미지 배치를 확인할 수 없습니다.');
       return false;
     }
-    
+
     // 각 이미지가 올바른 heading에 연결되어 있는지 확인
     const headingTitles = content.headings.map((h: any) => h.title);
     let matchedImages = 0;
     const imagePlacementDetails: any[] = [];
-    
+
     for (const image of content.images) {
       const isMatched = headingTitles.includes(image.heading);
       if (isMatched) matchedImages++;
-      
+
       imagePlacementDetails.push({
         heading: image.heading,
         matched: isMatched,
@@ -434,32 +434,32 @@ async function testImagePlacement(content: any): Promise<boolean> {
         caption: image.caption || '',
       });
     }
-    
+
     const matchRatio = matchedImages / content.images.length;
     if (matchRatio < 0.8) {
-      logTest('Image Placement', false, 
+      logTest('Image Placement', false,
         `이미지가 소제목과 충분히 매칭되지 않았습니다. (${matchedImages}/${content.images.length} 매칭, ${(matchRatio * 100).toFixed(1)}%)`,
         imagePlacementDetails);
       return false;
     }
-    
-    logTest('Image Placement', true, 
+
+    logTest('Image Placement', true,
       `이미지 배치 확인: ${matchedImages}/${content.images.length} 매칭 (${(matchRatio * 100).toFixed(1)}%)`,
       imagePlacementDetails);
-    
+
     // 이미지 placement 확인 (top, middle, bottom)
     const validPlacements = ['top', 'middle', 'bottom'];
-    const invalidPlacements = content.images.filter((img: any) => 
+    const invalidPlacements = content.images.filter((img: any) =>
       img.placement && !validPlacements.includes(img.placement)
     );
-    
+
     if (invalidPlacements.length > 0) {
-      logTest('Image Placement', false, 
+      logTest('Image Placement', false,
         `일부 이미지의 placement가 유효하지 않습니다: ${invalidPlacements.map((img: any) => img.placement).join(', ')}`);
     } else {
       logTest('Image Placement', true, '모든 이미지의 placement가 유효합니다.');
     }
-    
+
     return true;
   } catch (error) {
     logTest('Image Placement', false, '이미지 배치 테스트 실패', error);
@@ -468,13 +468,13 @@ async function testImagePlacement(content: any): Promise<boolean> {
 }
 
 async function testNaverPostingWithImageVerification(
-  content: any, 
-  generatedImages?: any[], 
+  content: any,
+  generatedImages?: any[],
   libraryImages?: any[]
 ): Promise<boolean> {
   try {
     const config = await loadConfigForTest();
-    
+
     if (!config.savedNaverId || !config.savedNaverPassword) {
       logTest('Naver Posting', false, '네이버 계정 정보가 설정되어 있지 않습니다. (테스트 스킵)');
       return false;
@@ -485,14 +485,14 @@ async function testNaverPostingWithImageVerification(
     // 이미지 준비: 생성된 이미지 또는 라이브러리 이미지 사용
     const headings = content.headings || [];
     let imagesToUse: any[] = [];
-    
+
     // 1. 생성된 이미지가 있으면 우선 사용
     if (generatedImages && generatedImages.length > 0) {
       logTest('Naver Posting', true, `✅ 생성된 이미지 ${generatedImages.length}개 사용`);
       imagesToUse = generatedImages.map((img: any) => ({
         heading: img.heading,
         filePath: img.filePath,
-        provider: img.provider || 'dalle',
+        provider: img.provider || 'nano-banana-pro',
         alt: img.alt || '',
         caption: img.caption || '',
       }));
@@ -518,9 +518,9 @@ async function testNaverPostingWithImageVerification(
       // 이미지 정보만 있고 파일이 없는 경우 스킵
       imagesToUse = [];
     }
-    
+
     logTest('Image Placement', true, `이미지 배치 사전 확인: ${imagesToUse.length}개 이미지, ${headings.length}개 소제목`);
-    
+
     // 각 heading에 대한 이미지 매칭 확인 및 파일 존재 확인
     const validImages: any[] = [];
     for (const heading of headings) {
@@ -561,7 +561,7 @@ async function testNaverPostingWithImageVerification(
 
     logTest('Naver Posting', true, '네이버 블로그 포스팅 완료 (임시저장)');
     logTest('Image Placement', true, `이미지 ${validImages.length}개가 배치되었습니다. 브라우저에서 확인해주세요.`);
-    
+
     return true;
   } catch (error) {
     logTest('Naver Posting', false, '네이버 블로그 포스팅 실패', error);
@@ -616,7 +616,7 @@ async function runIntegrationTest(): Promise<void> {
   if (imageGenerationResult.success && imageGenerationResult.generatedImages) {
     generatedImages = imageGenerationResult.generatedImages;
     logTest('Image Generation', true, `✅ ${generatedImages.length}개 이미지 생성 완료`);
-    
+
     // 생성된 이미지가 영어 프롬프트로 생성되었는지 확인
     for (const img of generatedImages) {
       const heading = contentResult.content.headings.find((h: any) => h.title === img.heading);
@@ -647,7 +647,7 @@ async function runIntegrationTest(): Promise<void> {
   // 6. 네이버 포스팅 테스트 (선택적) - 생성된 이미지 또는 라이브러리 이미지 사용
   const naverId = process.env.NAVER_ID;
   const naverPassword = process.env.NAVER_PASSWORD;
-  
+
   if (naverId && naverPassword) {
     await testNaverPostingWithImageVerification(
       contentResult.content,
@@ -661,7 +661,7 @@ async function runIntegrationTest(): Promise<void> {
   // 결과 요약
   const passed = testResults.filter(r => r.success).length;
   const failed = testResults.filter(r => !r.success).length;
-  
+
   console.log('\n' + '='.repeat(50));
   console.log('📊 테스트 결과 요약');
   console.log('='.repeat(50));

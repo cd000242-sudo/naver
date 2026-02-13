@@ -130,7 +130,11 @@ contextBridge.exposeInMainWorld('api', {
   }): Promise<GenerateImagesResult> => ipcRenderer.invoke('automation:generateImagesNaverImproved', payload),
   matchImages: (payload: { headings: any[]; collectedImages: any[] }): Promise<{ success: boolean; assignments?: any[]; message?: string }> =>
     ipcRenderer.invoke('automation:matchImages', payload),
+  // ✅ [2026-02-12] 소제목별 이미지 자동 검색 (네이버 → 구글 폴백)
+  searchImagesForHeadings: (payload: { headings: string[]; mainKeyword: string }): Promise<{ success: boolean; images: Record<string, string[]>; message?: string }> =>
+    ipcRenderer.invoke('search-images-for-headings', payload),
   checkFileExists: (filePath: string): Promise<boolean> => ipcRenderer.invoke('file:checkExists', filePath),
+
   readDir: (dirPath: string): Promise<string[]> => ipcRenderer.invoke('file:readDir', dirPath),
   readDirWithStats: (dirPath: string): Promise<Array<{ name: string; isFile: boolean; isDirectory: boolean; size: number; mtime: number; birthtime: number; ctime: number }>> => ipcRenderer.invoke('file:readDirWithStats', dirPath),
   getFileStats: (filePath: string): Promise<{ isFile: boolean; isDirectory: boolean; size: number; mtime: number; birthtime: number; ctime: number } | null> => ipcRenderer.invoke('file:getStats', filePath),
@@ -178,7 +182,7 @@ contextBridge.exposeInMainWorld('api', {
     keywords: string[];
     category: string;
     imageMode: 'full-auto' | 'semi-auto' | 'manual' | 'skip';
-    selectedImageSource?: 'dalle' | 'pexels' | 'library';
+    selectedImageSource?: 'nano-banana-pro' | 'library';
   }): Promise<{
     success: boolean;
     images?: any[];
@@ -308,6 +312,15 @@ contextBridge.exposeInMainWorld('api', {
     } catch (error) {
       console.error('[Preload] Device ID get error:', error);
       throw new Error(`기기 ID를 가져오는 중 오류가 발생했습니다: ${(error as Error).message}`);
+    }
+  },
+  // ✅ [2026-02-05] 앱 버전 반환
+  getAppVersion: async (): Promise<string> => {
+    try {
+      return await ipcRenderer.invoke('app:getVersion');
+    } catch (error) {
+      console.error('[Preload] App version get error:', error);
+      return '';
     }
   },
   isPackaged: async (): Promise<boolean> => {
@@ -491,19 +504,24 @@ contextBridge.exposeInMainWorld('api', {
     }
   },
   // ✅ 이미지 URL 다운로드 및 저장
+  // ✅ [2026-02-02] category 파라미터 추가 - 카테고리별 폴더에 저장
   downloadAndSaveImage: (
     imageUrl: string,
     heading: string,
     postTitle?: string,
-    postId?: string
+    postId?: string,
+    category?: string
   ): Promise<{ success: boolean; filePath?: string; previewDataUrl?: string; savedToLocal?: string; message?: string }> =>
-    ipcRenderer.invoke('image:downloadAndSave', imageUrl, heading, postTitle, postId),
+    ipcRenderer.invoke('image:downloadAndSave', imageUrl, heading, postTitle, postId, category),
   // ✅ URL에서 이미지 수집
   collectImagesFromUrl: (url: string): Promise<{ success: boolean; images?: string[]; message?: string }> =>
     ipcRenderer.invoke('image:collectFromUrl', url),
   // ✅ 쇼핑몰에서 이미지 수집 (전용)
   collectImagesFromShopping: (url: string): Promise<{ success: boolean; images?: string[]; title?: string; message?: string }> =>
     ipcRenderer.invoke('image:collectFromShopping', url),
+  // ✅ [2026-02-01] Gemini 3 기반 소제목-이미지 의미적 매칭
+  matchImagesToHeadings: (images: string[], headings: string[]): Promise<{ success: boolean; matches?: number[]; message?: string }> =>
+    ipcRenderer.invoke('image:matchToHeadings', images, headings),
   // ✅ 네이버 이미지 검색 API
   searchNaverImages: (keyword: string): Promise<{ success: boolean; images?: any[]; message?: string }> =>
     ipcRenderer.invoke('image:searchNaver', keyword),
@@ -646,6 +664,13 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('thumbnail:getStyles'),
   getThumbnailCategories: (): Promise<{ success: boolean; categories?: string[]; message?: string }> =>
     ipcRenderer.invoke('thumbnail:getCategories'),
+  // ✅ [2026-02-04] 수집 이미지에 텍스트 오버레이 적용 API
+  createProductThumbnail: (
+    imageUrl: string,
+    text: string,
+    options?: { position?: string; fontSize?: number; textColor?: string; opacity?: number }
+  ): Promise<{ success: boolean; outputPath?: string; previewDataUrl?: string; message?: string }> =>
+    ipcRenderer.invoke('thumbnail:createProductThumbnail', imageUrl, text, options),
 
   // ✅ 다중 블로그 관리 API
   addBlogAccount: (name: string, blogId: string, naverId?: string, naverPassword?: string, settings?: any): Promise<{ success: boolean; account?: any; message?: string }> =>
@@ -782,6 +807,10 @@ contextBridge.exposeInMainWorld('api', {
   // 네이버 자동완성 키워드를 활용하여 제품명에 세부 키워드 추가
   generateSeoTitle: (productName: string): Promise<{ success: boolean; title?: string; message?: string }> =>
     ipcRenderer.invoke('seo:generateTitle', productName),
+
+  // ✅ [2026-02-08] 테스트 이미지 생성 API - engine, textOverlay 파라미터 추가
+  generateTestImage: (options: { style: string; ratio: string; prompt: string; engine?: string; textOverlay?: { enabled: boolean; text: string } }): Promise<{ success: boolean; path?: string; previewDataUrl?: string; error?: string }> =>
+    ipcRenderer.invoke('generate-test-image', options),
 });
 
 // ✅ electronAPI로도 동일한 API 노출 (renderer.ts 호환성)
@@ -829,6 +858,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // 이미지 생성 API
   generateImages: (options: any): Promise<{ success: boolean; images?: any[]; message?: string }> =>
     ipcRenderer.invoke('automation:generateImages', options),
+
+  // ✅ [2026-02-08] 테스트 이미지 생성 API - engine, textOverlay 파라미터 추가
+  generateTestImage: (options: { style: string; ratio: string; prompt: string; engine?: string; textOverlay?: { enabled: boolean; text: string } }): Promise<{ success: boolean; path?: string; previewDataUrl?: string; error?: string }> =>
+    ipcRenderer.invoke('generate-test-image', options),
 });
 
 type LicenseInfo = {

@@ -30,11 +30,84 @@ export class EnhancedApiClient {
     private cache: Map<string, { data: any; timestamp: number }> = new Map();
     private pendingRequests: Map<string, Promise<any>> = new Map();
 
+    // ✅ [2026-01-29] Circuit Breaker 통합 (연속 실패 시 일시 중단)
+    private circuitBreaker = {
+        state: 'CLOSED' as 'CLOSED' | 'OPEN' | 'HALF_OPEN',
+        failureCount: 0,
+        successCount: 0,
+        lastFailureTime: 0,
+        failureThreshold: 5,
+        successThreshold: 2,
+        timeout: 30000
+    };
+
     static getInstance(): EnhancedApiClient {
         if (!EnhancedApiClient.instance) {
             EnhancedApiClient.instance = new EnhancedApiClient();
         }
         return EnhancedApiClient.instance;
+    }
+
+    // ✅ [2026-01-29] Circuit Breaker 상태 확인
+    private checkCircuitBreaker(): boolean {
+        if (this.circuitBreaker.state === 'OPEN') {
+            const elapsed = Date.now() - this.circuitBreaker.lastFailureTime;
+            if (elapsed >= this.circuitBreaker.timeout) {
+                this.circuitBreaker.state = 'HALF_OPEN';
+                console.log('[API] 🔄 Circuit Breaker: HALF_OPEN 전환 (테스트 재시도)');
+            } else {
+                const remaining = Math.ceil((this.circuitBreaker.timeout - elapsed) / 1000);
+                console.warn(`[API] 🚫 Circuit Breaker OPEN - ${remaining}초 후 재시도 가능`);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // ✅ [2026-01-29] 성공 기록
+    private recordSuccess(): void {
+        if (this.circuitBreaker.state === 'HALF_OPEN') {
+            this.circuitBreaker.successCount++;
+            if (this.circuitBreaker.successCount >= this.circuitBreaker.successThreshold) {
+                this.circuitBreaker.state = 'CLOSED';
+                this.circuitBreaker.failureCount = 0;
+                this.circuitBreaker.successCount = 0;
+                console.log('[API] 🟢 Circuit Breaker: CLOSED 복구 (정상 운영)');
+            }
+        } else {
+            this.circuitBreaker.failureCount = 0;
+        }
+    }
+
+    // ✅ [2026-01-29] 실패 기록
+    private recordFailure(): void {
+        this.circuitBreaker.failureCount++;
+        this.circuitBreaker.lastFailureTime = Date.now();
+
+        if (this.circuitBreaker.state === 'HALF_OPEN') {
+            this.circuitBreaker.state = 'OPEN';
+            this.circuitBreaker.successCount = 0;
+            console.warn('[API] 🔴 Circuit Breaker: OPEN 전환 (HALF_OPEN 중 실패)');
+        } else if (this.circuitBreaker.failureCount >= this.circuitBreaker.failureThreshold) {
+            this.circuitBreaker.state = 'OPEN';
+            console.warn(`[API] 🔴 Circuit Breaker: OPEN 전환 (연속 ${this.circuitBreaker.failureCount}회 실패)`);
+        }
+    }
+
+    // ✅ [2026-01-29] Circuit Breaker 리셋
+    resetCircuitBreaker(): void {
+        this.circuitBreaker.state = 'CLOSED';
+        this.circuitBreaker.failureCount = 0;
+        this.circuitBreaker.successCount = 0;
+        console.log('[API] 🔄 Circuit Breaker 수동 리셋');
+    }
+
+    // ✅ [2026-01-29] 상태 조회
+    getCircuitBreakerStatus(): { state: string; failureCount: number } {
+        return {
+            state: this.circuitBreaker.state,
+            failureCount: this.circuitBreaker.failureCount
+        };
     }
 
     // 향상된 API 호출
@@ -43,6 +116,15 @@ export class EnhancedApiClient {
         args: any[] = [],
         options: ApiRequestOptions = {}
     ): Promise<ApiResponse<T>> {
+        // ✅ [2026-01-29] Circuit Breaker 체크 (연속 실패 시 일시 중단)
+        if (!this.checkCircuitBreaker()) {
+            toastManager.error('🚫 API 일시 중단 중 - 30초 후 자동 복구됩니다', 3000);
+            return {
+                success: false,
+                error: 'Circuit Breaker OPEN: API가 일시적으로 차단되었습니다. 잠시 후 다시 시도해주세요.'
+            };
+        }
+
         const {
             retryCount = 3, // ✅ 3회 재시도 (타임아웃이 길어져서 줄임)
             retryDelay = 3000, // ✅ 3초 간격
@@ -119,6 +201,9 @@ export class EnhancedApiClient {
                 }
 
                 console.log(`[API] ${apiMethod} 성공 (시도 ${attempt + 1}회)`);
+
+                // ✅ [2026-01-29] Circuit Breaker 성공 기록
+                this.recordSuccess();
 
                 // 성공 후 잠시 대기 (연속 요청 방지)
                 if (attempt > 0) {
@@ -226,6 +311,9 @@ export class EnhancedApiClient {
         const errorMessage = lastError?.message || '알 수 없는 API 오류';
         console.error(`[API] ${apiMethod} 모든 재시도 실패 (${retryCount + 1}회):`, errorMessage);
         toastManager.error(`❌ 연결 실패: ${apiMethod} - ${errorMessage}`, 5000);
+
+        // ✅ [2026-01-29] Circuit Breaker 실패 기록
+        this.recordFailure();
 
         return {
             success: false,

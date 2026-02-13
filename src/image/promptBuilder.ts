@@ -12,6 +12,7 @@ export interface PromptOptions {
     categoryStyle: string;
     isShoppingConnect?: boolean;
     hasCollectedImages?: boolean; // ✅ 추가: collectedImages가 있을 때 참조 이미지 모드 활성화
+    provider?: string; // ✅ [2026-01-30] 이미지 생성 provider: 'nano-banana-pro' | 'deepinfra' | 'fal' | 'stability'
 }
 
 export class PromptBuilder {
@@ -59,9 +60,20 @@ REFERENCE IMAGE RULES (CRITICAL):
             return this.buildShoppingConnectThumbnailPrompt(basePrompt, postTitle, categoryStyle, referenceLock);
         }
 
-        // [Case A-2] 일반 썸네일 (텍스트 포함) - 네이버 홈판 최적화
+        // [Case A-2] 일반 썸네일 - provider별 분기 처리
+        // ✅ [2026-01-30 100점] provider별 다른 전략:
+        //    - 나노바나나프로(Gemini): 한글 지원 → AI가 직접 텍스트 생성
+        //    - DeepInfra/Fal/Stability: 한글 불가 → NO TEXT + 후처리 오버레이
         if (isThumbnail && postTitle && allowText) {
-            return this.buildThumbnailWithTextPrompt(basePrompt, postTitle, categoryStyle, referenceStrictness, referenceLock);
+            // ✅ 나노바나나프로(Gemini)는 한글 지원됨 → AI가 직접 텍스트 생성
+            if (options.provider === 'nano-banana-pro') {
+                console.log('[PromptBuilder] 🍌 나노바나나프로: AI가 직접 한글 텍스트 생성');
+                return this.buildThumbnailWithTextPrompt(basePrompt, postTitle, categoryStyle, referenceStrictness, referenceLock);
+            }
+            // ✅ 그 외 (DeepInfra, Fal, Stability)는 한글 불가 → 깨끗한 이미지만 생성
+            //    텍스트는 textOverlay.ts에서 후처리로 추가함
+            console.log(`[PromptBuilder] 🖼️ ${options.provider || 'unknown'}: NO TEXT 프롬프트 (후처리 오버레이)`);
+            return this.buildThumbnailNoTextPrompt(basePrompt, categoryStyle, referenceLock);
         }
 
         // [Case B] 썸네일 (텍스트 없음) - 시각적 임팩트 강조
@@ -97,7 +109,33 @@ REFERENCE IMAGE RULES (CRITICAL):
         return `Generate a 100-point MASTERPIECE blog thumbnail that PERFECTLY MATCHES the title: "${fullTitle}".
 Topic: ${basePrompt}.
 Aesthetic: Naver Homefeed Premium Style - high contrast, dynamic and energetic composition, vibrant colors, professional magazine quality.
-Category Style: ${categoryStyle}
+Category Style Hint: ${categoryStyle}
+
+🎯 CRITICAL: CHOOSE THE BEST VISUAL CONCEPT FOR THIS SPECIFIC TOPIC
+Analyze the title and topic carefully. Then select the MOST EFFECTIVE visual approach:
+
+📊 Option A - INFOGRAPHIC STYLE (Best for: comparisons, guides, step-by-step, tips, lists)
+- Clean split composition with icons, charts, comparison tables
+- Bold Korean text with visual elements (checkmarks ✓, X marks, arrows)
+- Professional infographic layout like the example of bank comparison images
+- Great for: "A vs B 비교", "혜택 총정리", "가이드", "방법", "비교 분석"
+
+📱 Option B - HANDS + DEVICE STYLE (Best for: insurance, finance, apps, documents, policies)
+- Korean person's hands holding smartphone, document, credit card, pen signing paper
+- Real-life photography with text overlay on one side
+- Great for: "보험", "지원금", "신청 방법", "계약", "서류", "거절", "승인"
+
+👤 Option C - PERSON/LIFESTYLE STYLE (Best for: beauty, fashion, health, success stories)
+- Beautiful Korean person as the main subject
+- Magazine editorial quality photography
+- Great for: "뷰티", "패션", "다이어트", "성공", "자기계발"
+
+🍽️ Option D - PRODUCT/SUBJECT ONLY (Best for: food, products, places, objects)
+- High-quality product/subject photography without people
+- Clean, professional composition
+- Great for: "맛집", "제품", "여행지", "인테리어"
+
+👉 CHOOSE THE OPTION THAT BEST FITS "${fullTitle}" AND EXECUTE IT PERFECTLY.
 
 DESIGN REQUIREMENTS (NAVER HOMEFEED QUALITY):
 - Use BOLD, LARGE, and impactful typography for the title text overlay: "${fullTitle}".
@@ -274,12 +312,35 @@ ABSOLUTE REQUIREMENTS:
         referenceLock: string
     ): string {
         return `Generate a photorealistic image for a Korean blog section.
-The image MUST look like a real photo taken in South Korea with Korean people.
+The image MUST look like a real photo taken in South Korea.
 
 SPECIFIC SUBJECT: "${heading}"
 CONTEXT: This is about "${basePrompt}" - create a visually compelling scene that directly represents this specific topic.
 
 ${referenceLock}
+
+🎯 CRITICAL: CHOOSE THE BEST VISUAL APPROACH FOR "${heading}"
+Analyze the heading and context. Select the MOST EFFECTIVE visual concept:
+
+📊 Option A - INFOGRAPHIC/DIAGRAM (Best for: comparisons, how-to, steps, data)
+- Clean infographic with icons, charts, arrows, visual hierarchy
+- Great for: "비교", "방법", "단계", "차이점", "혜택", "조건"
+
+📱 Option B - HANDS + OBJECT (Best for: actions, processes, using something)
+- Korean person's hands interacting with object (phone, document, product, pen)
+- Real-life action moment
+- Great for: "신청", "작성", "확인", "입력", "사용"
+
+👤 Option C - PERSON/SCENE (Best for: emotions, lifestyle, experiences)
+- Korean person in a relevant scene or situation
+- Magazine editorial quality
+- Great for: "장점", "후기", "경험", "효과"
+
+🖼️ Option D - OBJECT/PRODUCT ONLY (Best for: products, places, things)
+- Clean product/subject-focused photography without people
+- Great for: "제품", "장소", "음식", "건물"
+
+👉 CHOOSE THE OPTION THAT BEST VISUALIZES "${heading}" AND EXECUTE PERFECTLY.
 
 STYLE REQUIREMENTS:
 - ${categoryStyle}
@@ -290,14 +351,14 @@ STYLE REQUIREMENTS:
 - Emotional and impactful composition.
 
 ABSOLUTE REQUIREMENTS:
-- NEVER TEXT. This MUST be a pure photograph with NO TEXT whatsoever.
+- NEVER TEXT. This MUST be a pure visual with NO TEXT whatsoever.
 - NO letters, NO words, NO numbers, NO symbols, NO signs, NO labels, NO banners, NO watermarks.
 - Pure visual storytelling only.
 - If the subject is a product, focus on a "Desirable Lifestyle" composition that evokes positive emotions and a "Premium First-Class" feel (Conversion-Optimized).
 
 - The resulting image must be unique and not similar to any other image in this batch.
 
-Create a stunning, text-free, hyper-realistic Korean-style image that captures the essence of "${heading}".`;
+Create a stunning, text-free image that perfectly captures the essence of "${heading}".`;
     }
 
     /**
