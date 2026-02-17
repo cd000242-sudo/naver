@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 확인 중... — Better Life</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="bg-pattern"></div>
+
+    <div class="container">
+        <header class="page-header">
+            <div class="brand-badge">
+                <span class="dot"></span>
+                Better Life
+            </div>
+        </header>
+
+        <div class="code-container">
+            <!-- Phase 1: 로딩 -->
+            <div id="loading-section" class="loading-section">
+                <div class="loading-spinner-lg"></div>
+                <div class="loading-text">결제를 확인하고 있습니다</div>
+                <div class="loading-subtext">잠시만 기다려주세요... 코드가 곷 발급됩니다.</div>
+            </div>
+
+            <!-- Phase 2a: 코드 표시 (성공) -->
+            <div id="code-section" class="hidden">
+                <div class="code-card">
+                    <div class="success-icon">✓</div>
+                    <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 4px;">결제가 완료되었습니다!</h2>
+                    <p id="product-name" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 28px;">
+                    </p>
+
+                    <div class="code-label">라이선스 코드</div>
+                    <div class="code-display" id="license-code"></div>
+
+                    <button class="btn-copy" id="btn-copy" onclick="copyCode()">
+                        📋 코드 복사하기
+                    </button>
+
+                    <div
+                        style="background: rgba(68, 215, 182, 0.06); border: 1px solid rgba(68, 215, 182, 0.15); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
+                        <p style="font-size: 0.85rem; color: var(--success); font-weight: 600; margin-bottom: 6px;">💡
+                            사용 방법</p>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+                            Better Life 앱을 실행하고 라이선스 등록 화면에서<br>
+                            위 코드를 입력하면 바로 사용할 수 있습니다.
+                        </p>
+                    </div>
+
+                    <!-- 이메일 백업 -->
+                    <div class="email-backup">
+                        <div class="email-backup-label">📧 이메일로 코드 백업 받기 (선택)</div>
+                        <div class="email-input-group">
+                            <input type="email" class="email-input" id="backup-email" placeholder="이메일 주소 입력">
+                            <button class="btn-send-email" id="btn-send-email" onclick="sendBackupEmail()">발송</button>
+                        </div>
+                        <div class="email-status" id="email-status"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2b: 에러/타임아웃 -->
+            <div id="error-section" class="hidden">
+                <div class="error-card">
+                    <div class="error-icon">⚠️</div>
+                    <div class="error-title" id="error-title">결제 확인에 실패했습니다</div>
+                    <div class="error-message" id="error-message"></div>
+                    <button class="btn-retry" id="btn-check-order" onclick="checkOrder()" style="margin-bottom: 12px;">
+                        🔍 주문 확인하기
+                    </button>
+                    <br>
+                    <a href="index.html" class="btn-retry"
+                        style="background: var(--bg-glass); border: 1px solid var(--border-glass); font-size: 0.9rem; padding: 12px 24px;">
+                        ← 처음으로 돌아가기
+                    </a>
+                    <p style="margin-top: 16px; font-size: 0.8rem; color: var(--text-muted);">
+                        문의: <a href="mailto:cd000242@gmail.com"
+                            style="color: var(--accent-secondary);">cd000242@gmail.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <p>© 2026 Better Life. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // ===== 설정 =====
+        const CONFIG = {
+            // ★ GAS 웹앱 URL (배포 후 교체 필요)
+            GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
+            TIMEOUT_MS: 20000, // 20초 타임아웃
+        };
+
+        let currentCode = null;
+        let currentProduct = null;
+        let currentOrderId = null;
+
+        // ===== URL 파라미터 파싱 =====
+        function getParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                paymentKey: params.get('paymentKey'),
+                orderId: params.get('orderId'),
+                amount: params.get('amount'),
+            };
+        }
+
+        // ===== JSONP 호출 =====
+        function callGASviaJSONP(params) {
+            return new Promise((resolve, reject) => {
+                // 타임아웃 설정
+                const timeoutId = setTimeout(() => {
+                    cleanup();
+                    reject(new Error('TIMEOUT'));
+                }, CONFIG.TIMEOUT_MS);
+
+                // 고유 콜백명
+                const callbackName = '__tossCallback_' + Date.now();
+
+                // 전역 콜백 등록
+                window[callbackName] = function (data) {
+                    clearTimeout(timeoutId);
+                    cleanup();
+                    resolve(data);
+                };
+
+                // 정리 함수
+                function cleanup() {
+                    delete window[callbackName];
+                    const script = document.getElementById('jsonp-script');
+                    if (script) script.remove();
+                }
+
+                // JSONP script 태그 생성
+                const script = document.createElement('script');
+                script.id = 'jsonp-script';
+                script.src = `${CONFIG.GAS_URL}?action=confirm-payment` +
+                    `&paymentKey=${encodeURIComponent(params.paymentKey)}` +
+                    `&orderId=${encodeURIComponent(params.orderId)}` +
+                    `&amount=${encodeURIComponent(params.amount)}` +
+                    `&callback=${callbackName}`;
+
+                script.onerror = function () {
+                    clearTimeout(timeoutId);
+                    cleanup();
+                    reject(new Error('NETWORK_ERROR'));
+                };
+
+                document.head.appendChild(script);
+            });
+        }
+
+        // ===== 코드 표시 =====
+        function showCode(code, product) {
+            currentCode = code;
+            currentProduct = product;
+
+            document.getElementById('license-code').textContent = code;
+            document.getElementById('product-name').textContent = product;
+
+            document.getElementById('loading-section').classList.add('hidden');
+            document.getElementById('error-section').classList.add('hidden');
+            document.getElementById('code-section').classList.remove('hidden');
+
+            // 페이지 타이틀 변경
+            document.title = '라이선스 발급 완료 — Better Life';
+        }
+
+        // ===== 에러 표시 =====
+        function showError(message, title) {
+            document.getElementById('error-title').textContent = title || '결제 확인에 실패했습니다';
+            document.getElementById('error-message').textContent = message;
+
+            document.getElementById('loading-section').classList.add('hidden');
+            document.getElementById('code-section').classList.add('hidden');
+            document.getElementById('error-section').classList.remove('hidden');
+        }
+
+        // ===== 코드 복사 =====
+        async function copyCode() {
+            if (!currentCode) return;
+            try {
+                await navigator.clipboard.writeText(currentCode);
+                const btn = document.getElementById('btn-copy');
+                btn.classList.add('copied');
+                btn.innerHTML = '✅ 복사 완료!';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '📋 코드 복사하기';
+                }, 2000);
+            } catch (err) {
+                // fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = currentCode;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+
+                const btn = document.getElementById('btn-copy');
+                btn.classList.add('copied');
+                btn.innerHTML = '✅ 복사 완료!';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '📋 코드 복사하기';
+                }, 2000);
+            }
+        }
+
+        // ===== 이메일 백업 발송 =====
+        async function sendBackupEmail() {
+            const emailInput = document.getElementById('backup-email');
+            const btn = document.getElementById('btn-send-email');
+            const status = document.getElementById('email-status');
+            const email = emailInput.value.trim();
+
+            if (!email || !email.includes('@')) {
+                status.textContent = '올바른 이메일 주소를 입력해주세요.';
+                status.style.color = 'var(--error)';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = '발송 중...';
+            status.textContent = '';
+
+            try {
+                // GAS에 이메일 발송 요청 (JSONP)
+                const callbackName = '__emailCallback_' + Date.now();
+
+                await new Promise((resolve, reject) => {
+                    const timeoutId = setTimeout(() => {
+                        delete window[callbackName];
+                        reject(new Error('TIMEOUT'));
+                    }, 15000);
+
+                    window[callbackName] = function (data) {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        resolve(data);
+                    };
+
+                    const script = document.createElement('script');
+                    script.src = `${CONFIG.GAS_URL}?action=send-code-email` +
+                        `&email=${encodeURIComponent(email)}` +
+                        `&code=${encodeURIComponent(currentCode)}` +
+                        `&product=${encodeURIComponent(currentProduct)}` +
+                        `&callback=${callbackName}`;
+                    script.onerror = () => {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        reject(new Error('NETWORK'));
+                    };
+                    document.head.appendChild(script);
+                });
+
+                btn.classList.add('sent');
+                btn.textContent = '발송 완료 ✓';
+                status.textContent = `${email}로 코드가 발송되었습니다.`;
+                status.style.color = 'var(--success)';
+            } catch (err) {
+                btn.disabled = false;
+                btn.textContent = '발송';
+                status.textContent = '발송에 실패했습니다. 다시 시도해주세요.';
+                status.style.color = 'var(--error)';
+            }
+        }
+
+        // ===== 주문 확인 (타임아웃 복구) =====
+        async function checkOrder() {
+            if (!currentOrderId) {
+                showError('주문 정보를 찾을 수 없습니다.', '주문 확인 실패');
+                return;
+            }
+
+            // 로딩 상태로 전환
+            document.getElementById('error-section').classList.add('hidden');
+            document.getElementById('loading-section').classList.remove('hidden');
+            document.querySelector('.loading-text').textContent = '주문을 확인하고 있습니다...';
+
+            try {
+                const callbackName = '__checkCallback_' + Date.now();
+
+                const result = await new Promise((resolve, reject) => {
+                    const timeoutId = setTimeout(() => {
+                        delete window[callbackName];
+                        reject(new Error('TIMEOUT'));
+                    }, 15000);
+
+                    window[callbackName] = function (data) {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        resolve(data);
+                    };
+
+                    const script = document.createElement('script');
+                    script.src = `${CONFIG.GAS_URL}?action=check-order` +
+                        `&orderId=${encodeURIComponent(currentOrderId)}` +
+                        `&callback=${callbackName}`;
+                    script.onerror = () => {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        reject(new Error('NETWORK'));
+                    };
+                    document.head.appendChild(script);
+                });
+
+                if (result.ok && result.code) {
+                    showCode(result.code, result.product);
+                } else {
+                    showError(result.error || '주문을 찾을 수 없습니다. 고객 지원에 문의해주세요.', '주문 확인 실패');
+                }
+            } catch (err) {
+                showError('서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.', '연결 실패');
+            }
+        }
+
+        // ===== 메인 실행 =====
+        async function main() {
+            const params = getParams();
+
+            // 파라미터 검증
+            if (!params.paymentKey || !params.orderId || !params.amount) {
+                showError('결제 정보가 올바르지 않습니다. 처음부터 다시 시도해주세요.', '잘못된 접근');
+                document.getElementById('btn-check-order').style.display = 'none';
+                return;
+            }
+
+            currentOrderId = params.orderId;
+
+            try {
+                // JSONP로 GAS 결제 승인 요청
+                const result = await callGASviaJSONP(params);
+
+                if (result.ok && result.code) {
+                    showCode(result.code, result.product);
+                } else {
+                    showError(result.error || '결제 처리 중 오류가 발생했습니다.', '결제 확인 실패');
+                }
+            } catch (err) {
+                if (err.message === 'TIMEOUT') {
+                    showError(
+                        '서버 응답이 지연되고 있습니다. 결제는 정상 처리되었을 수 있습니다. 아래 버튼을 눌러 주문을 확인해보세요.',
+                        '응답 지연'
+                    );
+                } else {
+                    showError('서버 연결에 실패했습니다. 아래 버튼을 눌러 주문을 확인해보세요.', '연결 실패');
+                }
+            }
+        }
+
+        // 페이지 로드 시 자동 실행
+        document.addEventListener('DOMContentLoaded', main);
+    </script>
+</body>
+
+</html>
