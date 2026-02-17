@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 실패 — Better Life</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="bg-pattern"></div>
+    <div class="container">
+        <header class="page-header">
+            <div class="brand-badge"><span class="dot"></span> Better Life</div>
+        </header>
+
+        <div class="error-card">
+            <div class="error-icon">😔</div>
+            <div class="error-title">결제가 완료되지 않았습니다</div>
+            <div class="error-message" id="error-message">결제 과정에서 문제가 발생했습니다.</div>
+            <a href="index.html" class="btn-retry">🔄 다시 시도하기</a>
+            <p style="margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);">
+                결제 금액이 차감되었다면 자동으로 환불됩니다.<br>
+                문의: <a href="mailto:cd000242@gmail.com" style="color: var(--accent-secondary);">cd000242@gmail.com</a>
+            </p>
+        </div>
+
+        <footer class="page-footer">
+            <p>© 2026 Better Life. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+            const code = params.get('code');
+            const message = params.get('message');
+
+            const ERROR_MESSAGES = {
+                'PAY_PROCESS_CANCELED': '결제가 취소되었습니다.',
+                'PAY_PROCESS_ABORTED': '결제가 중단되었습니다.',
+                'REJECT_CARD_COMPANY': '카드사에서 결제를 거절했습니다. 다른 카드를 이용해주세요.',
+                'BELOW_MINIMUM_AMOUNT': '최소 결제 금액 이상이어야 합니다.',
+                'EXCEED_MAX_DAILY_PAYMENT_COUNT': '일일 결제 한도를 초과했습니다.',
+                'NOT_SUPPORTED_INSTALLMENT_PLAN_CARD_OR_MERCHANT': '할부 결제가 지원되지 않습니다.',
+            };
+
+            const displayMessage = ERROR_MESSAGES[code] || message || '결제 과정에서 문제가 발생했습니다.';
+            document.getElementById('error-message').textContent = displayMessage;
+        });
+    </script>
+</body>
+
+</html>
