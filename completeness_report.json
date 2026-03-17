@@ -1,0 +1,161 @@
+{
+  "date": "2026-02-25T15:19:30.235Z",
+  "originalLines": 13674,
+  "totalChecked": 22,
+  "matches": 2,
+  "nearMatches": 13,
+  "divergent": 7,
+  "missing": 0,
+  "details": [
+    {
+      "name": "insertImageViaUploadButton",
+      "status": "NEAR_MATCH",
+      "matchPct": "95.2",
+      "origLines": 227,
+      "helperLines": 227
+    },
+    {
+      "name": "insertBase64ImageAtCursor",
+      "status": "NEAR_MATCH",
+      "matchPct": "99.2",
+      "origLines": 252,
+      "helperLines": 252
+    },
+    {
+      "name": "insertImageViaBase64",
+      "status": "NEAR_MATCH",
+      "matchPct": "98.0",
+      "origLines": 99,
+      "helperLines": 99
+    },
+    {
+      "name": "setImageSizeToDocumentWidth",
+      "status": "NEAR_MATCH",
+      "matchPct": "98.6",
+      "origLines": 72,
+      "helperLines": 72
+    },
+    {
+      "name": "insertSingleImage",
+      "status": "NEAR_MATCH",
+      "matchPct": "99.0",
+      "origLines": 103,
+      "helperLines": 103
+    },
+    {
+      "name": "verifyImagePlacement",
+      "status": "DIVERGENT",
+      "matchPct": "77.8",
+      "origLines": 99,
+      "helperLines": 91
+    },
+    {
+      "name": "insertImagesAtCurrentCursor",
+      "status": "DIVERGENT",
+      "matchPct": "1.0",
+      "origLines": 103,
+      "helperLines": 105
+    },
+    {
+      "name": "setImageSizeAndAttachLink",
+      "status": "DIVERGENT",
+      "matchPct": "3.3",
+      "origLines": 179,
+      "helperLines": 180
+    },
+    {
+      "name": "attachLinkToLastImage",
+      "status": "DIVERGENT",
+      "matchPct": "3.9",
+      "origLines": 333,
+      "helperLines": 334
+    },
+    {
+      "name": "insertImages",
+      "status": "NEAR_MATCH",
+      "matchPct": "99.0",
+      "origLines": 1103,
+      "helperLines": 1103
+    },
+    {
+      "name": "generateAltWithSource",
+      "status": "DIVERGENT",
+      "matchPct": "2.7",
+      "origLines": 37,
+      "helperLines": 19
+    },
+    {
+      "name": "applyCaption",
+      "status": "DIVERGENT",
+      "matchPct": "31.3",
+      "origLines": 16,
+      "helperLines": 9
+    },
+    {
+      "name": "selectCategoryInPublishModal",
+      "status": "DIVERGENT",
+      "matchPct": "5.6",
+      "origLines": 285,
+      "helperLines": 324
+    },
+    {
+      "name": "debugCategoryElements",
+      "status": "MATCH",
+      "lines": 47
+    },
+    {
+      "name": "setScheduleDateTime",
+      "status": "NEAR_MATCH",
+      "matchPct": "98.8",
+      "origLines": 408,
+      "helperLines": 408
+    },
+    {
+      "name": "debugPublishModal",
+      "status": "NEAR_MATCH",
+      "matchPct": "98.4",
+      "origLines": 64,
+      "helperLines": 64
+    },
+    {
+      "name": "publishScheduled",
+      "status": "NEAR_MATCH",
+      "matchPct": "99.5",
+      "origLines": 193,
+      "helperLines": 193
+    },
+    {
+      "name": "insertQuotation",
+      "status": "MATCH",
+      "lines": 151
+    },
+    {
+      "name": "typeBodyWithRetry",
+      "status": "NEAR_MATCH",
+      "matchPct": "99.0",
+      "origLines": 294,
+      "helperLines": 294
+    },
+    {
+      "name": "applyStructuredContent",
+      "status": "NEAR_MATCH",
+      "matchPct": "98.9",
+      "origLines": 1421,
+      "helperLines": 1421
+    },
+    {
+      "name": "setFontSize",
+      "status": "NEAR_MATCH",
+      "matchPct": "99.2",
+      "origLines": 121,
+      "helperLines": 121
+    },
+    {
+      "name": "extractBodyForHeading",
+      "status": "NEAR_MATCH",
+      "matchPct": "99.8",
+      "origLines": 557,
+      "helperLines": 557
+    }
+  ]
+}

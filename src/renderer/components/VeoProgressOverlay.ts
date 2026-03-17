@@ -156,8 +156,8 @@ export function hideVeoProgressOverlay(delayMs: number = 0): void {
     const doHide = () => {
         try {
             current.overlay.remove();
-        } catch {
-            // ignore
+        } catch (e) {
+            console.warn('[VeoProgressOverlay] catch ignored:', e);
         }
         if (veoProgressOverlay === current) {
             veoProgressOverlay = null;

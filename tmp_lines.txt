@@ -1,0 +1,20 @@
+﻿3556:     activeContent.style.display = 'block';
+3557:     console.log('[Tab] 탭 내용 표시됨:', tabName);
+3558:   }
+3559: }
+3560: 
+3561: // 연속 발행 기능 함수들
+3562: function startContinuousMode(urls: string[]): void {
+3563:   console.log('[Continuous] startContinuousMode 호출됨');
+3564:   console.log('[Continuous] 입력받은 URL들:', urls);
+3565: 
+3566:   if (urls.length === 0) {
+3567:     console.log('[Continuous] URL이 없어서 중단');
+3568:     appendLog('❌ 연속 발행할 URL이 없습니다.');
+3569:     return;
+3570:   }
+3571: 
+3572:   console.log('[Continuous] 연속 발행 모드 시작 준비');
+3573:   isContinuousMode = true;
+3574:   continuousQueue = [...urls];
+3575:   console.log('[Continuous] 큐에 저장된 URL들:', continuousQueue);

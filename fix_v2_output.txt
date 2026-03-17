@@ -1,0 +1,32 @@
+﻿Original: 13674 lines
+✅ insertImages: L11782 - L13045 (1264 lines, sig ends L11782)
+✅ attachLinkToLastImage: L11386 - L11780 (395 lines, sig ends L11386)
+✅ setImageSizeAndAttachLink: L11172 - L11383 (212 lines, sig ends L11172)
+✅ insertImagesAtCurrentCursor: L11047 - L11167 (121 lines, sig ends L11047)
+✅ insertSingleImage: L9820 - L9946 (127 lines, sig ends L9820)
+✅ verifyImagePlacement: L10062 - L10178 (117 lines, sig ends L10062)
+⚠️ insertImagesAtHeadings: NOT FOUND as class method
+✅ setImageSizeToDocumentWidth: L9732 - L9818 (87 lines, sig ends L9732)
+✅ insertImageViaBase64: L9608 - L9727 (120 lines, sig ends L9608)
+✅ insertBase64ImageAtCursor: L9306 - L9603 (298 lines, sig ends L9306)
+✅ insertImageViaUploadButton: L9039 - L9301 (263 lines, sig ends L9039)
+✅ applyCaption: L13097 - L13115 (19 lines, sig ends L13097)
+✅ generateAltWithSource: L13051 - L13095 (45 lines, sig ends L13051)
+
+=== Replacing 12 methods ===
+✅ applyCaption: 19 lines → 3 lines (saved 16)
+✅ generateAltWithSource: 45 lines → 3 lines (saved 42)
+✅ insertImages: 1264 lines → 3 lines (saved 1261)
+✅ attachLinkToLastImage: 395 lines → 3 lines (saved 392)
+✅ setImageSizeAndAttachLink: 212 lines → 3 lines (saved 209)
+✅ insertImagesAtCurrentCursor: 121 lines → 3 lines (saved 118)
+✅ verifyImagePlacement: 117 lines → 3 lines (saved 114)
+✅ insertSingleImage: 127 lines → 3 lines (saved 124)
+✅ setImageSizeToDocumentWidth: 87 lines → 3 lines (saved 84)
+✅ insertImageViaBase64: 120 lines → 3 lines (saved 117)
+✅ insertBase64ImageAtCursor: 298 lines → 3 lines (saved 295)
+✅ insertImageViaUploadButton: 263 lines → 3 lines (saved 260)
+
+=== Checking import ===
+
+✅ Done! 8961 lines → 10642 lines (removed -1681)

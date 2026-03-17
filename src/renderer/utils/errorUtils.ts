@@ -12,7 +12,7 @@ export function translateGeminiError(error: Error): string {
     const msg = error.message.toLowerCase();
 
     if (msg.includes('api key')) return '🚫 [인증 오류] Gemini API 키가 올바르지 않습니다. 키를 확인해주세요.';
-    if (msg.includes('quota exceeded') || msg.includes('429') || msg.includes('limit')) return '⏳ [사용량 초과] Gemini 무료 사용량이 초과되었습니다. 잠시 후 다시 시도하거나 API 키를 교체하세요.';
+    if (msg.includes('quota exceeded') || msg.includes('429') || msg.includes('rate limit') || msg.includes('too many requests')) return '⏳ [사용량 초과] Gemini 무료 사용량이 초과되었습니다. 잠시 후 다시 시도하거나 API 키를 교체하세요.';
     if (msg.includes('safety') || msg.includes('blocked')) return '🛡️ [안전 필터] 생성된 콘텐츠가 Gemini 안전 기준(선정성/폭력성 등)에 의해 차단되었습니다. 주제를 변경해보세요.';
     if (msg.includes('location') || msg.includes('unsupported country')) return '🌍 [접속 위치] 현재 국가에서 Gemini API를 사용할 수 없습니다. VPN을 확인해주세요.';
     if (msg.includes('valid json')) return '📝 [형식 오류] AI 응답 형식이 깨졌습니다. 일시적인 현상이니 다시 시도해주세요.';

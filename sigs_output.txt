@@ -1,0 +1,55 @@
+﻿=== imageHelpers EXPORTS ===
+generateAltWithSource(self, image)  [L12]
+applyCaption(self, caption)  [L35]
+setImageSizeToDocumentWidth(self)  [L48]
+verifyImagePlacement(self, expectedCount)  [L69]
+insertImageViaUploadButton(self, filePath)  [L95]
+insertBase64ImageAtCursor(self, filePath)  [L363]
+insertImageViaBase64(self, filePath, frame, page)  [L666]
+insertSingleImage(self, image)  [L788]
+insertImagesAtHeadings(self, placements)  [L920]
+insertImagesAtCurrentCursor(self, images, linkUrl)  [L1029]
+setImageSizeAndAttachLink(self, linkUrl)  [L1157]
+attachLinkToLastImage(self, linkUrl)  [L1373]
+insertImages(self, images, plans)  [L1771]
+
+=== MAIN FILE METHODS ===
+applyCaption(plan.caption)) → L8324-L8393 (70lines)
+  HELPER: applyCaption(self, caption)
+  DELEGATE: return await imageHelpers.applyCaption(this, plan.caption));
+setImageSizeToDocumentWidth()) → L4565-L4568 (4lines)
+  HELPER: setImageSizeToDocumentWidth(self, )
+  DELEGATE: return await imageHelpers.setImageSizeToDocumentWidth(this, ));
+verifyImagePlacement(images) → L5349-L5465 (117lines)
+  HELPER: verifyImagePlacement(self, expectedCount)
+  DELEGATE: return await imageHelpers.verifyImagePlacement(this, images);
+insertImageViaUploadButton(filePath) → L4326-L4588 (263lines)
+  HELPER: insertImageViaUploadButton(self, filePath)
+  DELEGATE: return await imageHelpers.insertImageViaUploadButton(this, filePath);
+insertBase64ImageAtCursor(filePath) → L4593-L4890 (298lines)
+  HELPER: insertBase64ImageAtCursor(self, filePath)
+  DELEGATE: return await imageHelpers.insertBase64ImageAtCursor(this, filePath);
+insertImageViaBase64(absolutePath, frame, page)) → L4573-L4612 (40lines)
+  HELPER: insertImageViaBase64(self, filePath, frame, page)
+  DELEGATE: return await imageHelpers.insertImageViaBase64(this, absolutePath, frame, page));
+insertSingleImage(image) → L5107-L5233 (127lines)
+  HELPER: insertSingleImage(self, image)
+  DELEGATE: return await imageHelpers.insertSingleImage(this, image);
+insertImagesAtCurrentCursor(images, page, frame, affiliateLink) → L6334-L6454 (121lines)
+  HELPER: insertImagesAtCurrentCursor(self, images, linkUrl)
+  DELEGATE: return await imageHelpers.insertImagesAtCurrentCursor(this, images, page, frame, affiliateLink);
+setImageSizeAndAttachLink(affiliateLink)) → L6423-L6482 (60lines)
+  HELPER: setImageSizeAndAttachLink(self, linkUrl)
+  DELEGATE: return await imageHelpers.setImageSizeAndAttachLink(this, affiliateLink));
+attachLinkToLastImage(url)) → L5759-L5771 (13lines)
+  HELPER: attachLinkToLastImage(self, linkUrl)
+  DELEGATE: return await imageHelpers.attachLinkToLastImage(this, url));
+insertImages(images, plans) → L7069-L8332 (1264lines)
+  HELPER: insertImages(self, images, plans)
+  DELEGATE: return await imageHelpers.insertImages(this, images, plans);
+insertImagesAtHeadings(placements) → L5238-L5242 (5lines)
+  HELPER: insertImagesAtHeadings(self, placements)
+  DELEGATE: return await imageHelpers.insertImagesAtHeadings(this, placements);
+generateAltWithSource(image)) → L8308-L8321 (14lines)
+  HELPER: generateAltWithSource(self, image)
+  DELEGATE: return await imageHelpers.generateAltWithSource(this, image));

@@ -1,0 +1,89 @@
+﻿=== DOMContentLoaded listeners ===
+
+--- continuousPublishing.ts ---
+  L1779: // ✅ LEWORD 황금키워드 실행 버튼 이벤트 리스너는 DOMContentLoaded에서 전역 등록 (아래 참조)
+
+--- thumbnailGenerator.ts ---
+  L2124: document.addEventListener('DOMContentLoaded', () => {
+  L2125: // ✅ LEWORD 황금키워드 실행 버튼 이벤트 리스너 (전역 등록 - DOMContentLoaded)
+
+--- multiAccountManager.ts ---
+  L3242: document.addEventListener('DOMContentLoaded', () => {
+
+=== (window as any) global registrations ===
+
+--- continuousPublishing.ts ---
+  L62: (window as any).continuousPresetThumbnail = continuousPreset.forHeading;
+  L63: (window as any).continuousPresetThumbnailPath = continuousPreset.forThumbnail;
+  L196: (window as any).stopFullAutoPublish = true;
+  L197: (window as any).stopBatchPublish = true;
+  L262: if (typeof (window as any).resetAfterPublish === 'function') {
+  L738: (window as any)._keywordTitleOptions = {
+  L745: (window as any)._keywordTitleOptions = null;
+  L795: (window as any).currentStructuredContent = structuredContent;
+  L1084: (window as any)._syncingShoppingTab = true;
+  L1112: (window as any)._syncingShoppingTab = false;
+  L1524: (window as any).updateAffiliateOptionVisibility = updateAffiliateOptionVisibility;
+  L1525: (window as any).AFFILIATE_ENABLED_CATEGORIES = AFFILIATE_ENABLED_CATEGORIES;
+  L1546: (window as any)._syncingShoppingTab = true;
+  L1552: (window as any)._syncingShoppingTab = false;
+  L2217: (window as any).categoryNames = categoryNames;
+  L2971: (window as any).editingIndex = idx;
+  L3117: (window as any).hideContinuousProgressModal = hideContinuousProgressModal;
+  L3209: (window as any)._previousTitles = previousTitles;
+  L3235: (window as any).generatedImages = [];
+  L3236: (window as any).imageManagementGeneratedImages = [];  // ✅ [2026-02-03] 누락된 초기화 추가
+  L3237: (window as any).currentStructuredContent = null;
+  L3283: (window as any)._previousTitles = previousTitles;
+  L3335: (window as any).generatedImages = generatedImgs;
+  L3479: if (typeof (window as any).resetAfterPublish === 'function') {
+  L3484: (window as any).imageManagementGeneratedImages = [];
+  L3485: (window as any).continuousPresetThumbnail = null;
+  L3486: (window as any).continuousPresetThumbnailPath = null;
+  L3505: (window as any).startContinuousPublishingV2 = startContinuousPublishingV2;
+  L3531: (window as any).skipNextFiveItemsV2 = skipNextFiveItemsV2;
+  L3532: (window as any).stopContinuousMode = stopContinuousMode;
+  L3777: (window as any).switchExternalLinksTab = switchExternalLinksTab;
+  L3778: (window as any).toggleContinuousModeModal = toggleContinuousModeModal;
+  L3779: (window as any).startContinuousPublishing = startContinuousPublishing;
+  L3780: (window as any).stopContinuousMode = stopContinuousMode;
+  L3781: (window as any).testApiKeysAndFullAuto = testApiKeysAndFullAuto;
+  L3782: (window as any).runRealFullAutoTest = runRealFullAutoTest;
+  L3783: (window as any).showImageModal = showImageModal; // ✅ 이미지 크게 보기
+  L3784: (window as any).showHeadingImagesModal = showHeadingImagesModal;
+
+--- thumbnailGenerator.ts ---
+  L734: (window as any).presetThumbnails = {
+  L794: (window as any).thumbnailPath = base64;
+  L795: (window as any).selectedThumbnailImage = thumbnailImage;
+  L817: if (typeof (window as any).setManualThumbnailForFullAuto === 'function') {
+  L828: (window as any).imageManagementGeneratedImages = existingImages;
+  L2076: (window as any).thumbnailPath = imageBase64;
+  L2077: (window as any).selectedThumbnailImage = newImage;
+
+--- multiAccountManager.ts ---
+  L1553: if (typeof (window as any).clearManualThumbnail === 'function') {
+  L1560: (window as any).presetThumbnails = {
+  L1930: (window as any).openAccountEditModal = openAccountEditModal;
+  L1933: (window as any).renderMultiAccountList = renderMultiAccountList;
+  L1936: (window as any).refreshAllAccountLists = async () => {
+  L1944: if (typeof (window as any).renderInlineAccountList === 'function') {
+  L1952: if (typeof (window as any).loadMainAccountList === 'function') {
+  L2024: if (typeof (window as any).refreshAllAccountLists === 'function') {
+  L2061: if (typeof (window as any).refreshAllAccountLists === 'function') {
+  L2273: (window as any).stopFullAutoPublish = false; // 전역 중지 플래그 초기화
+  L2358: (window as any).currentStructuredContent = null;
+  L2359: (window as any).generatedImages = [];
+  L2496: (window as any)._keywordTitleOptions = null;
+  L2525: (window as any).currentStructuredContent = structuredContent;
+  L2573: (window as any).currentStructuredContent = structuredContent;
+  L3048: if (typeof (window as any).resetAfterPublish === 'function') {
+  L3053: (window as any).imageManagementGeneratedImages = [];
+  L3054: (window as any).maPresetThumbnail = null;
+  L3055: (window as any).maPresetThumbnailPath = null;
+  L3097: (window as any).stopFullAutoPublish = true;
+  L3125: (window as any).stopFullAutoPublish = true;
+  L3312: (window as any).loadMainAccountList = loadAccountList;
+  L3457: (window as any).currentMainAccountSettings = account.settings || {};
+  L3481: (window as any).currentMainAccountSettings = null;
+  L3492: if (typeof (window as any).openAccountEditModal === 'function') {

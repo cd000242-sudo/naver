@@ -1,0 +1,11 @@
+﻿L68: const thumbnailGenerator_js_1 = require("./modules/thumbnailGenerator.js");
+L69: let thumbnailGenerator = null;
+L5486:         const preset = (0, thumbnailGenerator_js_1.applyPresetThumbnailIfExists)('full-auto');
+L11788:     const maPreset = (0, thumbnailGenerator_js_1.applyPresetThumbnailIfExists)('ma-semi-auto') || (0, thumbnailGenerator_js_1.applyPresetThumbnailIfEx
+L16570:     const imageTabPreset = (0, thumbnailGenerator_js_1.applyPresetThumbnailIfExists)('image-tab');
+L21510:                         if (!thumbnailGenerator) {
+L21511:                             thumbnailGenerator = new thumbnailGenerator_js_1.ThumbnailGenerator();
+L21517:                         thumbnailGenerator.setMainText(blogTitle);
+L21518:                         await thumbnailGenerator.setBackgroundFromUrl(imageUrl);
+L28241:         if (thumbnailGenerator) {
+L28243:                 thumbnailGenerator = new thumbnailGenerator_js_1.ThumbnailGenerator();

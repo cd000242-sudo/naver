@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>종료 확인</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', '맑은 고딕', sans-serif;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      -webkit-app-region: no-drag;
+      user-select: none;
+    }
+
+    /* 배경 오버레이 (살짝 어두운 블러) */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 20, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* 다이얼로그 카드 */
+    .dialog-card {
+      position: relative;
+      z-index: 10;
+      width: 380px;
+      background: linear-gradient(145deg, rgba(30, 32, 48, 0.95), rgba(22, 24, 38, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 36px 32px 28px;
+      box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.45),
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      text-align: center;
+    }
+
+    /* 상단 아이콘 */
+    .icon-wrap {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(255, 107, 107, 0.05));
+      border: 1px solid rgba(255, 107, 107, 0.2);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: iconPulse 2.5s ease-in-out infinite;
+    }
+
+    .icon-wrap svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    /* 제목 */
+    .dialog-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f0f0f5;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    /* 설명 */
+    .dialog-desc {
+      font-size: 13.5px;
+      font-weight: 400;
+      color: rgba(200, 200, 220, 0.7);
+      line-height: 1.55;
+      margin-bottom: 28px;
+    }
+
+    /* 버튼 영역 */
+    .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 13px 0;
+      border: none;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: -0.2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:focus {
+      outline: none;
+    }
+
+    /* 취소 버튼 (프라이머리 - 안전한 선택) */
+    .btn-cancel {
+      background: linear-gradient(135deg, #6c5ce7, #7c6cf7);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(108, 92, 231, 0.3);
+    }
+
+    .btn-cancel:hover {
+      background: linear-gradient(135deg, #7c6cf7, #8c7cff);
+      box-shadow: 0 6px 24px rgba(108, 92, 231, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .btn-cancel:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(108, 92, 231, 0.3);
+    }
+
+    /* 종료 버튼 (세컨더리 - 위험한 선택) */
+    .btn-quit {
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(220, 220, 230, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-quit:hover {
+      background: rgba(255, 80, 80, 0.12);
+      color: #ff6b6b;
+      border-color: rgba(255, 107, 107, 0.25);
+    }
+
+    .btn-quit:active {
+      background: rgba(255, 80, 80, 0.18);
+    }
+
+    /* 키보드 힌트 */
+    .key-hint {
+      margin-top: 16px;
+      font-size: 11.5px;
+      color: rgba(160, 160, 180, 0.4);
+    }
+
+    .key-hint kbd {
+      display: inline-block;
+      padding: 2px 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 10.5px;
+      color: rgba(160, 160, 180, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <div class="dialog-card">
+    <!-- 경고 아이콘 -->
+    <div class="icon-wrap">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 9V13M12 17H12.01M4.982 19H19.018C20.331 19 21.149 17.577 20.492 16.437L13.474 4.225C12.818 3.087 11.182 3.087 10.526 4.225L3.508 16.437C2.851 17.577 3.669 19 4.982 19Z"
+          stroke="#ff6b6b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div class="dialog-title">앱을 종료하시겠습니까?</div>
+    <div class="dialog-desc">
+      진행 중인 자동화 작업과 설정된 예약이<br>
+      모두 중단됩니다.
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-quit" id="btnQuit">종료</button>
+      <button class="btn btn-cancel" id="btnCancel" autofocus>계속 사용</button>
+    </div>
+
+    <div class="key-hint"><kbd>Esc</kbd> 계속 사용</div>
+  </div>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    document.getElementById('btnQuit').addEventListener('click', () => {
+      ipcRenderer.send('quit-confirm-response', true);
+    });
+
+    document.getElementById('btnCancel').addEventListener('click', () => {
+      ipcRenderer.send('quit-confirm-response', false);
+    });
+
+    // Esc키 → 취소
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        ipcRenderer.send('quit-confirm-response', false);
+      }
+      if (e.key === 'Enter') {
+        // Enter키는 포커스된 버튼 실행 (기본: 계속 사용)
+        document.activeElement?.click();
+      }
+    });
+  </script>
+</body>
+</html>

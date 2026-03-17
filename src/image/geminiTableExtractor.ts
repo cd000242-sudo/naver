@@ -39,8 +39,11 @@ export async function extractSpecsWithGemini(
         const genAI = new GoogleGenerativeAI(key);
         const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
-        // 크롤링 데이터가 있으면 우선 사용
-        const crawledInfo = crawledData ? JSON.stringify(crawledData, null, 2) : '(없음)';
+        // ✅ [2026-03-04 FIX] crawledData가 문자열이면 그대로, 객체면 JSON.stringify
+        // 기존: 문자열도 JSON.stringify → 이스케이프된 "\\n" 형태로 Gemini에 전달되어 가격 인식 실패
+        const crawledInfo = crawledData
+            ? (typeof crawledData === 'string' ? crawledData : JSON.stringify(crawledData, null, 2))
+            : '(없음)';
 
         const prompt = `
 당신은 제품 스펙 분석 전문가입니다.
@@ -61,6 +64,7 @@ ${bodyContent.substring(0, 3000)}
 2. value: 간결한 값 (20자 이내, 문장 금지)
 3. 명확한 수치나 사실만 포함 (애매한 정보 제외)
 4. 중요한 순서대로 정렬
+5. ⚠️ 가격 항목은 [크롤링된 제품 정보]의 가격을 반드시 사용! 본문에서 "약 XX만원", "XX원대" 등 다른 가격이 언급되더라도 크롤링 가격이 정확한 실제 판매가이므로 이것만 사용하세요.
 
 JSON 배열만 출력하세요:
 [

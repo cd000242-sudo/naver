@@ -277,9 +277,8 @@ export class QualityEnhancer {
   }
 
   private optimizeTitle(title: string): string {
-    if (title.length > 35) {
-      return title.slice(0, 32) + '...';
-    }
+    // ✅ [2026-02-27 FIX] 제목 잘림 방지 — 네이버 블로그 제한은 ~100자
+    // 기존: 35자 초과 시 slice(0,32)+'...'로 강제 절단 → 제거
     return title;
   }
 
@@ -525,10 +524,8 @@ export class QualityEnhancer {
       }
     }
 
-    // 제목 길이 최적화 (25-35자)
-    if (title.length > 35) {
-      title = title.slice(0, 32) + '...';
-    }
+    // ✅ [2026-02-27 FIX] 제목 잘림 방지 — 기존 35자 제한 삭제
+    // 네이버 블로그 실제 제한은 ~100자, 강제 절단 불필요
 
     return title;
   }

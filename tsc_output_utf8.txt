@@ -1,0 +1,8 @@
+﻿src/renderer/renderer.ts(10703,51): error TS2345: Argument of type 'RendererAutomationPayload' is not assignable to parameter of type 'RendererAutomationPayload'.
+  Types of property 'generator' are incompatible.
+    Type '"gemini" | "perplexity" | "openai" | "claude" | undefined' is not assignable to type '"gemini" | "openai" | "claude" | undefined'.
+      Type '"perplexity"' is not assignable to type '"gemini" | "openai" | "claude" | undefined'.
+src/renderer/renderer.ts(26681,53): error TS2345: Argument of type 'RendererAutomationPayload' is not assignable to parameter of type 'RendererAutomationPayload'.
+  Types of property 'generator' are incompatible.
+    Type '"gemini" | "perplexity" | "openai" | "claude" | undefined' is not assignable to type '"gemini" | "openai" | "claude" | undefined'.
+      Type '"perplexity"' is not assignable to type '"gemini" | "openai" | "claude" | undefined'.

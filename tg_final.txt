@@ -1,0 +1,14 @@
+﻿L13257: // ===== modules/thumbnailGenerator.js inlined =====
+L14993: let thumbnailGenerator = null;
+L15038:             if (tab === 'image-tools' && !thumbnailGenerator) {
+L15040:                     thumbnailGenerator = new ThumbnailGenerator();
+L15081:                 if (!thumbnailGenerator) {
+L15083:                         thumbnailGenerator = new ThumbnailGenerator();
+L21604: let thumbnailGenerator = null;
+L43043:                         if (!thumbnailGenerator) {
+L43044:                             thumbnailGenerator = new ThumbnailGenerator();
+L43050:                         thumbnailGenerator.setMainText(blogTitle);
+L43051:                         await thumbnailGenerator.setBackgroundFromUrl(imageUrl);
+L49774:         if (thumbnailGenerator) {
+L49776:                 thumbnailGenerator = new ThumbnailGenerator();
+Total lines with thumbnailGenerator: 13

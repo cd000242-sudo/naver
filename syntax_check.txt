@@ -1,0 +1,11 @@
+﻿Full error: Identifier 'thumbnailGenerator' has already been declared
+Stack excerpt: SyntaxError: Identifier 'thumbnailGenerator' has already been declared
+    at new Function (<anonymous>)
+    at [eval]:5:3
+    at runScriptInThisContext (node:internal/vm:209:10)
+    at node:internal/process/execution:446:12
+    at [eval]-wrapper:6:24
+    at runScriptInContext (node:internal/process/execution:444:60)
+    at evalFunction (node:internal/process/execution:279:30)
+    at evalTypeScript (node:internal/process/execution:291:3)
+    at node:internal/main/eval_string:74:3

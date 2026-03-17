@@ -1,0 +1,4 @@
+{
+  "message": "Standard 모드도 Access Denied 차단됨\n--- 상세 실패 이력 ---\n❌ perfect 모드 실패: Playwright(Stealth) Access Denied\n❌ fast 모드 실패: Fast 모드도 Access Denied 차단됨\n❌ standard 모드 실패: Standard 모드도 Access Denied 차단됨",
+  "stack": "Error: Standard 모드도 Access Denied 차단됨\n--- 상세 실패 이력 ---\n❌ perfect 모드 실패: Playwright(Stealth) Access Denied\n❌ fast 모드 실패: Fast 모드도 Access Denied 차단됨\n❌ standard 모드 실패: Standard 모드도 Access Denied 차단됨\n    at SmartCrawler.crawlStandard (C:\\Users\\박성현\\Desktop\\리더 네이버 자동화\\src\\crawler\\smartCrawler.ts:684:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async SmartCrawler.crawl (C:\\Users\\박성현\\Desktop\\리더 네이버 자동화\\src\\crawler\\smartCrawler.ts:522:20)\n    at async testCrawlers (C:\\Users\\박성현\\Desktop\\리더 네이버 자동화\\scripts\\test-automator.ts:7:27)"
+}

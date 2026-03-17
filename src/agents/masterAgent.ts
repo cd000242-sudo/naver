@@ -19,7 +19,7 @@ export class MasterAgent {
   private context: ChatContext;
   private formatter: ResponseFormatter;
   private geminiModel: any = null;
-  private geminiModelName: string = 'gemini-3-pro-preview';
+  private geminiModelName: string = 'gemini-2.5-flash';
   private genAI: GoogleGenerativeAI | null = null;
 
   constructor(context?: ChatContext) {
@@ -39,9 +39,9 @@ export class MasterAgent {
         this.genAI = genAI;
 
         const preferredModels = [
-          'gemini-3-pro-preview',
+          'gemini-2.5-flash',
           'gemini-3-flash-preview',
-          'gemini-2.0-flash-exp',
+          'gemini-3.1-pro-preview',
         ];
 
         let lastError: unknown = null;
@@ -516,12 +516,12 @@ export class MasterAgent {
         }
 
         // 6. Gemini 모델 검증
-        const validModels = ['gemini-3-pro-preview', 'gemini-3-flash-preview', 'gemini-2.0-flash-exp', 'gemini-1.5-pro', 'gemini-1.5-flash'];
+        const validModels = ['gemini-2.5-flash', 'gemini-3.1-pro-preview', 'gemini-3-flash-preview', 'gemini-2.0-flash-exp', 'gemini-1.5-pro', 'gemini-1.5-flash'];
         if (config.geminiModel && !validModels.includes(config.geminiModel)) {
           issues.push({
             category: '🤖 AI 모델',
             problem: `알 수 없는 Gemini 모델: ${config.geminiModel}`,
-            solution: '권장 모델(gemini-3-pro-preview)로 자동 변경할 수 있습니다',
+            solution: '권장 모델(gemini-2.5-flash)로 자동 변경할 수 있습니다',
             autoFixable: true,
             fixAction: 'fixGeminiModel'
           });
@@ -733,10 +733,10 @@ export class MasterAgent {
         : '';
 
       const modelsToTry = [
-        'gemini-3-pro-preview',
+        'gemini-2.5-flash',
         'gemini-3-flash-preview',
+        'gemini-3.1-pro-preview',
         'gemini-2.0-flash-exp',
-        'gemini-1.5-pro',
         'gemini-1.5-flash'
       ];
 
@@ -754,10 +754,14 @@ export class MasterAgent {
       // 액션 버튼 자동 감지
       const actions = this.detectActions(message, response);
 
+      // 후속 질문 생성 (Gemini 응답에도 적용)
+      const followUps = this.generateFollowUps(message);
+
       return {
         success: true,
         response: response || '죄송해요, 다시 한번 말씀해주세요!',
         actions: actions.length > 0 ? actions : undefined,
+        suggestFollowUp: followUps.length > 0 ? followUps : undefined,
         metadata: { processingTime: 0, agentChain: ['master', 'gemini'], model: this.geminiModelName }
       };
 
@@ -1030,12 +1034,42 @@ ${roleScope}
     }
   }
 
-  // 인사 처리
+  // 인사 처리 (온보딩 포함)
   private handleGreeting(): AgentResult {
+    // 첫 사용자 감지: 대화 히스토리가 0이면 온보딩
+    const history = this.context.getLastMessages(5);
+    const isFirstUse = history.length === 0;
+
+    if (isFirstUse) {
+      return {
+        success: true,
+        response: `${getWelcomeMessage()}
+
+## 🎓 3단계로 시작하기
+
+**1단계** ⚙️ API 키 설정
+환경설정에서 Gemini API 키를 입력하세요 (필수!)
+
+**2단계** 📝 첫 글 생성
+키워드를 입력하고 "생성" 버튼을 누르세요
+
+**3단계** 🖼️ 이미지 설정
+AI 이미지 생성 엔진을 선택하세요
+
+👆 위 단계를 따라하면 바로 시작할 수 있어요!`,
+        actions: [
+          { id: 'settings', label: '⚙️ 환경설정 열기', action: 'openSettings', primary: true },
+          { id: 'tutorial', label: '📖 사용법 보기', action: 'playTutorialVideo' }
+        ],
+        suggestFollowUp: ['API 키 설정 방법', '첫 글 생성하기', '이미지 설정하기'],
+        metadata: { processingTime: 0, agentChain: ['master', 'onboarding'] }
+      };
+    }
+
     return {
       success: true,
       response: getWelcomeMessage(),
-      suggestFollowUp: ['글 생성 방법', 'API 키 설정', '기능 소개'],
+      suggestFollowUp: ['글 생성 방법', '트렌드 키워드 보기', '시스템 진단'],
       metadata: { processingTime: 0, agentChain: ['master'] }
     };
   }

@@ -1,10 +1,10 @@
-﻿import { app, BrowserWindow, dialog, ipcMain, nativeImage, NativeImage, shell, Notification, Tray, Menu } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain, nativeImage, NativeImage, shell, Notification, Tray, Menu } from 'electron';
 import path from 'path';
 import dotenv from 'dotenv';
 import cron from 'node-cron';
 import { NaverBlogAutomation, RunOptions, type PublishMode, type AutomationImage } from './naverBlogAutomation.js';
-import { generateImages } from './imageGenerator.js';
-import { generateStabilityVideo } from './image/stabilityGenerator.js'; // ✅ 추가
+import { generateImages, resetAllImageState } from './imageGenerator.js';
+// (stabilityGenerator removed - deprecated provider)
 import { convertMp4ToGif } from './image/gifConverter.js'; // ✅ 추가
 import type { GenerateImagesOptions, GeneratedImage } from './imageGenerator.js';
 import { getDailyLimit, getTodayCount, incrementTodayCount, setDailyLimit } from './postLimitManager.js';
@@ -21,9 +21,10 @@ import { PatternAnalyzer } from './learning/patternAnalyzer.js';
 import { PostAnalytics, type PostPerformance } from './analytics/postAnalytics.js';
 import { SmartScheduler, type ScheduledPost as SmartScheduledPost } from './scheduler/smartScheduler.js';
 import { KeywordAnalyzer, type KeywordCompetition, type BlueOceanKeyword } from './analytics/keywordAnalyzer.js';
+import { BestProductCollector } from './services/bestProductCollector.js';
 import { InternalLinkManager, type InternalLink } from './content/internalLinkManager.js';
 import { ThumbnailGenerator } from './content/thumbnailGenerator.js';
-import { canConsume as canConsumeQuota, consume as consumeQuota, getStatus as getQuotaStatus, resetAll as resetAllQuota, type QuotaLimits, type QuotaType } from './quotaManager.js';
+import { canConsume as canConsumeQuota, consume as consumeQuota, refund as refundQuota, getStatus as getQuotaStatus, resetAll as resetAllQuota, type QuotaLimits, type QuotaType } from './quotaManager.js';
 import { BlogAccountManager } from './account/blogAccountManager.js';
 import { TitleABTester } from './content/titleABTester.js';
 import { CommentResponder } from './engagement/commentResponder.js';
@@ -57,13 +58,16 @@ import {
 } from './licenseManager.js';
 import * as XLSX from 'xlsx';
 import fs from 'fs/promises';
-import { loadScheduledPosts, saveScheduledPost, removeScheduledPost, getAllScheduledPosts, handleRecurringPost, type ScheduledPost } from './scheduledPostsManager.js';
+import { loadScheduledPosts, saveScheduledPost, removeScheduledPost, getAllScheduledPosts, handleRecurringPost, rescheduleScheduledPost, retryScheduledPost as retryScheduledPostFn, type ScheduledPost } from './scheduledPostsManager.js';
 import fsSync from 'fs';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
 import { createHash } from 'crypto';
 import { getBlogRecentPosts } from './rssSearcher.js';
 import { browserSessionManager } from './browserSessionManager.js';
+
+// ✅ [2026-02-04] 자동 업데이트 모듈
+import { initAutoUpdater, initAutoUpdaterEarly, setUpdaterLoginWindow, isUpdating, waitForUpdateCheck } from './updater.js';
 
 // ✅ [리팩토링] 새로운 모듈화된 유틸리티 및 서비스
 // ✅ [리팩토링] 새로운 모듈화된 유틸리티 및 서비스
@@ -109,16 +113,25 @@ import {
   handleAutomationCancel,
   handleCloseBrowser,
   setMainWindowRef,
+  setExecutionLock,  // ✅ [FIX-6] 실행 잠금 설정
   type AutomationRequest as BlogAutomationRequest,
 } from './main/ipc/blogHandlers.js';
 
 function sanitizeFileName(name: string): string {
-  const cleaned = String(name || '')
-    .replace(/[\\/<>:"|?*]+/g, '_')
+  let cleaned = String(name || '')
+    .replace(/[\\\/<>:"|?*,;#&=+%!'(){}\[\]~]+/g, '_')
     .replace(/[\u0000-\u001F]/g, '')
     .replace(/\s+/g, ' ')
+    .replace(/_+/g, '_')
     .trim();
-  return cleaned.length > 80 ? cleaned.slice(0, 80).trim() : cleaned;
+  // ✅ [2026-03-14] trailing dot/space 제거 (Windows 탐색기 폴더 접근 불가 방지)
+  cleaned = cleaned.replace(/[.\s]+$/g, '');
+  // ✅ Windows 예약어 처리 (CON, PRN, AUX, NUL, COM1~9, LPT1~9)
+  if (/^(CON|PRN|AUX|NUL|COM\d|LPT\d)$/i.test(cleaned)) {
+    cleaned = `_${cleaned}`;
+  }
+  if (cleaned.length > 80) cleaned = cleaned.slice(0, 80).replace(/[.\s]+$/g, '');
+  return cleaned;
 }
 
 async function ensureMp4Dir(): Promise<string> {
@@ -188,6 +201,22 @@ function isMultiAccountAborted(): boolean {
   return multiAccountAbortFlag || AutomationService.isMultiAccountAborted();
 }
 
+// ✅ [2026-03-11] 즉시 취소 헬퍼: Promise.race로 API 호출 vs AbortSignal 경쟁
+// abort() 호출 시 진행 중인 API 대기를 즉시 reject 처리
+function withAbortCheck<T>(promise: Promise<T>, signal: AbortSignal): Promise<T> {
+  if (signal.aborted) {
+    return Promise.reject(Object.assign(new Error('PUBLISH_CANCELLED'), { name: 'AbortError' }));
+  }
+  return Promise.race([
+    promise,
+    new Promise<never>((_resolve, reject) => {
+      signal.addEventListener('abort', () => {
+        reject(Object.assign(new Error('PUBLISH_CANCELLED'), { name: 'AbortError' }));
+      }, { once: true });
+    }),
+  ]);
+}
+
 // 디버그 로그 파일 경로
 let debugLogPath: string | null = null;
 
@@ -221,6 +250,53 @@ try {
   console.error('[DebugLog] 로그 파일 초기화 실패:', error);
 }
 
+// ✅ [2026-02-02] 카테고리별 폴더 구조 - 모든 카테고리 목록
+const ALL_CONTENT_CATEGORIES = [
+  // 엔터테인먼트·예술
+  '문학·책', '영화', '미술·디자인', '공연·전시', '음악', '드라마', '스타·연예인', '만화·애니', '방송',
+  // 생활·노하우·쇼핑
+  '일상·생각', '생활 꿀팁', '육아·결혼', '반려동물', '좋은글·이미지', '패션·미용', '인테리어·DIY', '요리·레시피', '상품리뷰', '원예·재배',
+  // 취미·여가·여행
+  '게임', '스포츠', '사진', '자동차', '취미', '국내여행', '세계여행', '맛집',
+  // 지식·동향
+  'IT·컴퓨터', '사회·정치', '건강·의학', '비즈니스·경제', '어학·외국어', '교육·학문', '부동산', '자기계발',
+];
+
+/**
+ * ✅ [2026-02-02] 앱 시작 시 모든 카테고리 폴더를 미리 생성
+ * images/{카테고리}/ 구조로 폴더 생성
+ */
+async function initializeCategoryFolders(): Promise<void> {
+  try {
+    const imagesBasePath = path.join(app.getPath('userData'), 'images');
+    await fs.mkdir(imagesBasePath, { recursive: true });
+
+    console.log('[Main] 📂 카테고리 폴더 초기화 시작...');
+
+    for (const category of ALL_CONTENT_CATEGORIES) {
+      // 폴더명에 사용할 수 없는 문자 치환
+      const safeCategory = category.replace(/[<>:"/\\|?*]/g, '_').trim();
+      const categoryPath = path.join(imagesBasePath, safeCategory);
+
+      try {
+        await fs.mkdir(categoryPath, { recursive: true });
+      } catch (e) {
+        // 이미 존재하면 무시
+      }
+    }
+
+    console.log(`[Main] ✅ 카테고리 폴더 초기화 완료: ${ALL_CONTENT_CATEGORIES.length}개 폴더`);
+  } catch (error) {
+    console.error('[Main] ❌ 카테고리 폴더 초기화 실패:', error);
+  }
+}
+
+// 앱 시작 시 카테고리 폴더 생성 (앱 로딩 완료 후 비동기로 실행)
+setTimeout(() => {
+  initializeCategoryFolders().catch(err => console.error('[Main] 카테고리 폴더 초기화 오류:', err));
+}, 3000);
+
+
 // 라이선스 체크 헬퍼 함수
 async function ensureLicenseValid(): Promise<boolean> {
   // 개발 모드에서도 테스트하려면 FORCE_LICENSE_CHECK=true 환경 변수 설정
@@ -232,20 +308,53 @@ async function ensureLicenseValid(): Promise<boolean> {
     return true;
   }
 
-  const license = await loadLicense();
+  // ✅ [2026-03-01] 1차 시도
+  let license = await loadLicense();
+
+  // ✅ 1차 실패 → 500ms 대기 후 재시도 (일시적 I/O 오류 방어)
   if (!license) {
-    debugLog('[Main] ensureLicenseValid: 라이선스 파일을 찾을 수 없습니다.');
+    debugLog('[Main] ensureLicenseValid: 1차 loadLicense() 실패 — 500ms 후 재시도');
+    await new Promise(r => setTimeout(r, 500));
+    license = await loadLicense();
+  }
+
+  if (!license) {
+    const userDataPath = app.getPath('userData');
+    debugLog(`[Main] ensureLicenseValid: ❌ 라이선스 파일을 찾을 수 없습니다. (loadLicense() returned null)`);
+    debugLog(`[Main] ensureLicenseValid: isPackaged=${currentIsPackaged}, forceLicenseCheck=${forceLicenseCheck}, userData=${userDataPath}`);
+    console.error(`[Main] ensureLicenseValid: 라이선스 로드 실패 — userData=${userDataPath}`);
+    // ✅ 렌더러에도 진단 정보 전달
+    try {
+      sendLog(`⚠️ 라이선스 파일 로드 실패 (경로: ${userDataPath}/license/license.json)`);
+    } catch { /* ignore */ }
     return false;
   }
 
-  const licenseType = String((license as any).licenseType || '').trim();
+  debugLog(`[Main] ensureLicenseValid: 라이선스 로드 성공 — isValid: ${license.isValid}, licenseType: ${license.licenseType}, expiresAt: ${license.expiresAt}, authMethod: ${license.authMethod}`);
+
+  // ✅ [2026-03-01] 대소문자 무시 비교 (서버가 'free', 'FREE', 'Free' 등 반환 가능)
+  const licenseType = String((license as any).licenseType || '').trim().toLowerCase();
   if (licenseType === 'free') {
     debugLog('[Main] ensureLicenseValid: 무료 라이선스 (항상 유효)');
     return true;
   }
 
+  // ✅ [2026-03-01] LIFE(영구) 라이선스는 만료 체크 없이 바로 유효 처리
+  if (licenseType === 'life' || licenseType === 'premium' || licenseType === 'standard') {
+    if (license.isValid === false) {
+      debugLog(`[Main] ensureLicenseValid: ❌ ${licenseType} 라이선스이지만 isValid=false`);
+      return false;
+    }
+
+    // LIFE 라이선스는 만료일이 없어도 유효
+    if (licenseType === 'life' && !license.expiresAt) {
+      debugLog('[Main] ensureLicenseValid: ✅ LIFE 영구 라이선스 (만료일 없음, 항상 유효)');
+      return true;
+    }
+  }
+
   if (license.isValid === false) {
-    debugLog('[Main] ensureLicenseValid: 라이선스 isValid 플래그가 false입니다.');
+    debugLog('[Main] ensureLicenseValid: ❌ 라이선스 isValid 플래그가 false입니다.');
     return false;
   }
 
@@ -274,7 +383,7 @@ async function ensureLicenseValid(): Promise<boolean> {
 
       // 현재 시간이 만료 시간을 지났는지 확인
       if (now.getTime() > expiresAtEndOfDay.getTime()) {
-        debugLog(`[Main] ensureLicenseValid: 라이선스 만료됨 (만료: ${expiresAtEndOfDay.toISOString()}, 현재: ${now.toISOString()})`);
+        debugLog(`[Main] ensureLicenseValid: ❌ 라이선스 만료됨 (만료: ${expiresAtEndOfDay.toISOString()}, 현재: ${now.toISOString()})`);
         return false;
       }
 
@@ -357,13 +466,22 @@ async function performServerSync(isBackground: boolean = false): Promise<{ allow
         debugLog(`[Main] performServerSync: 버전 낮음 (현재: ${currentVersion}, 최소: ${syncResult.minVersion})`);
 
         if (!isBackground) {
-          await dialog.showMessageBox({
+          // ✅ [2026-02-04] 개선된 업데이트 다이얼로그 - 다운로드 링크 포함
+          const result = await dialog.showMessageBox({
             type: 'warning',
-            title: '업데이트 필요',
+            title: '⬆️ 업데이트 필요',
             message: '최신 버전으로 업데이트해 주세요.',
-            detail: `현재 버전: ${currentVersion}\n최소 요구 버전: ${syncResult.minVersion}`,
-            buttons: ['앱 종료'],
+            detail: `현재 버전: v${currentVersion}\n최소 요구 버전: v${syncResult.minVersion}\n\n아래 버튼을 눌러 최신 버전을 다운로드하세요.`,
+            buttons: ['다운로드 페이지 열기', '나중에'],
+            defaultId: 0,
+            cancelId: 1,
+            noLink: true,
           });
+
+          // '다운로드 페이지 열기' 버튼 클릭 시 GitHub 릴리스 페이지 열기
+          if (result.response === 0) {
+            await shell.openExternal('https://github.com/cd000242-sudo/naver/releases/latest');
+          }
         }
         return { allowed: false, error: 'VERSION_TOO_OLD' };
       }
@@ -501,6 +619,7 @@ async function getFreeQuotaLimits(): Promise<QuotaLimits> {
     publish: limit,
     content: limit,
     media: Number.MAX_SAFE_INTEGER,
+    imageApi: 500,  // ✅ [2026-03-02] 일일 이미지 API 기본 한도
   };
 }
 
@@ -510,16 +629,21 @@ async function isFreeTierUser(): Promise<boolean> {
     return false;
   }
 
-  // ✅ 사용자가 설정에서 'paid'를 선택했으면 라이선스 상태와 무관하게 유료로 간주 (크레딧 사용자 대응)
+  // ✅ [2026-03-05] 라이선스 우선 체크 → free이면 무조건 무료 (config 우회 차단)
+  const license = await loadLicense();
+  if (license?.licenseType === 'free') {
+    return true; // 라이선스가 free이면 geminiPlanType 설정과 무관하게 무료
+  }
+
+  // ✅ 라이선스가 free가 아닌 경우에만 config 체크 (유료 크레딧 사용자 대응)
   try {
     const config = await (await import('./configManager.js')).loadConfig();
     if ((config as any).geminiPlanType === 'paid') return false;
-  } catch {
-    // ignore
+  } catch (e) {
+    console.warn('[main] catch ignored:', e);
   }
 
-  const license = await loadLicense();
-  return license?.licenseType === 'free';
+  return false;
 }
 
 async function getFreeQuotaStatus(): Promise<ReturnType<typeof getQuotaStatus>> {
@@ -842,7 +966,48 @@ const trendMonitor = new TrendMonitor();
 const patternAnalyzer = new PatternAnalyzer();
 const postAnalytics = new PostAnalytics(); // ✅ 발행 후 성과 추적
 const smartScheduler = new SmartScheduler(); // ✅ 최적 시간 자동 예약 발행
+
+// ✅ [2026-03-14 FIX] SmartScheduler 발행 콜백 설정 — 예약 시간 도달 시 실제 발행 실행
+smartScheduler.setPublishCallback(async (post) => {
+  console.log(`[SmartScheduler] 발행 콜백 실행: ${post.title}`);
+  try {
+    const config = await loadConfig();
+    const naverId = config.savedNaverId || '';
+    const naverPassword = config.savedNaverPassword || '';
+    
+    if (!naverId || !naverPassword) {
+      throw new Error('네이버 계정 정보가 설정되지 않았습니다.');
+    }
+    
+    sendLog(`🚀 SmartScheduler 예약 발행 시작: ${post.title}`);
+    
+    // 새 자동화 인스턴스 생성
+    const schedulerBot = new NaverBlogAutomation({
+      naverId,
+      naverPassword,
+      headless: false,
+      slowMo: 50,
+    }, (msg: string) => { console.log(msg); sendLog(msg); });
+    
+    await schedulerBot.run({
+      title: post.title,
+      content: post.keyword || post.title, // SmartScheduler는 키워드 기반이므로 keyword를 content로 전달
+      publishMode: 'publish',
+    });
+    
+    await schedulerBot.closeBrowser().catch(() => undefined);
+    
+    const publishedUrl = `https://blog.naver.com/${naverId}`;
+    sendLog(`✅ SmartScheduler 예약 발행 완료: ${post.title}`);
+    return publishedUrl;
+  } catch (error) {
+    console.error(`[SmartScheduler] 발행 콜백 실패:`, error);
+    sendLog(`❌ SmartScheduler 예약 발행 실패: ${(error as Error).message}`);
+    throw error;
+  }
+});
 const keywordAnalyzer = new KeywordAnalyzer(); // ✅ 키워드 경쟁도 분석
+const bestProductCollector = new BestProductCollector(); // ✅ 베스트 상품 자동 수집
 const internalLinkManager = new InternalLinkManager(); // ✅ 자동 내부링크 삽입
 const thumbnailGenerator = new ThumbnailGenerator(); // ✅ 썸네일 자동 생성
 const blogAccountManager = new BlogAccountManager(); // ✅ 다중 블로그 관리
@@ -904,6 +1069,80 @@ function sendLog(message: string): void {
 
 function sendStatus(status: { success: boolean; cancelled?: boolean; message?: string; url?: string }): void {
   mainWindow?.webContents.send('automation:status', status);
+}
+
+// ✅ [2026-03-02] 메인 프로세스 console 인터셉트 → 렌더러 로그 전달
+// ✅ [2026-03-02 UPGRADE] 터미널급 실시간 로그: 모든 자동화 관련 접두어 전달
+const LOG_FORWARD_PREFIXES = [
+  // 콘텐츠 생성
+  '[ContentGenerator]', '[Perplexity]', '[Gemini',
+  '[detectDuplicateContent]', '[Content',
+  '[SEO', '[Prompt', '[Title',
+  // 이미지 생성 엔진
+  '[이미지', '[Image', '[NanoBananaPro', '[Nano',
+  '[ImageGen', '[Imagen', '[RPM', '[DeepInfra',
+  '[Leonardo', '[OpenAI', '[DALL',
+  // 발행 & 자동화
+  '[Main]', '[Blog', '[Automation', '[AutomationService',
+  '[BlogExecutor', '[Publish', '[Execute',
+  // 브라우저 자동화
+  '[NaverBlog', '[Naver', '[Nav', '[Page', '[Writer',
+  '[Type', '[Login', '[Browser', '[CAPTCHA',
+  // 다중계정 & 연속발행 & 풀오토
+  '[다중계정]', '[MultiAccount]', '[Multi',
+  '[Continuous]', '[FullAuto]', '[Scheduler]',
+  '[연속', '[풀오토', '[예약',
+  // 쇼핑 & 수집
+  '[Shopping', '[Crawl', '[Collect', '[Brand',
+  // 비디오 & 썸네일
+  '[Veo', '[Video', '[Thumbnail',
+  // 설정 & 유틸
+  '[Config', '[License', '[Quota',
+];
+
+let _isForwarding = false; // 재진입 방지 가드
+
+function installConsoleForwarder(): void {
+  const origLog = console.log;
+  const origWarn = console.warn;
+  const origError = console.error;
+
+  const forward = (args: any[]) => {
+    if (_isForwarding) return;            // 재진입 차단
+    if (!mainWindow?.webContents) return;
+
+    const first = args[0];
+    if (typeof first !== 'string') return;       // 첫 인자가 문자열이 아니면 스킵
+
+    // '[' 접두어 매칭 또는 이모지/특수문자 시작 (NaverBlogAutomation 로그 포함)
+    const firstChar = first.charAt(0);
+    if (firstChar === '[') {
+      // 브라켓 접두어 매칭
+      const matched = LOG_FORWARD_PREFIXES.some(p => first.startsWith(p));
+      if (!matched) return;
+    } else if (firstChar.codePointAt(0)! > 0xFF) {
+      // 이모지/한글로 시작하는 로그 (NaverBlogAutomation this.log() 등)
+      // 🚀, ✅, ❌, ⚠️, 📷, 🖼️, 👥, 🌐, 📝, 🎉, ⏱️, 📂, 🔐, 👀, ⏳ 등
+      // pass through
+    } else {
+      // 일반 ASCII 텍스트는 스킵 (노이즈 방지)
+      return;
+    }
+
+    _isForwarding = true;
+    try {
+      const msg = args.map(a => typeof a === 'string' ? a : String(a)).join(' ');
+      mainWindow.webContents.send('automation:log', msg);
+    } finally {
+      _isForwarding = false;
+    }
+  };
+
+  console.log = (...args: any[]) => { origLog(...args); forward(args); };
+  console.warn = (...args: any[]) => { origWarn(...args); forward(args); };
+  console.error = (...args: any[]) => { origError(...args); forward(args); };
+
+  origLog('[Main] ✅ Console 로그 포워더 설치 완료');
 }
 
 function resolveIconImage(): NativeImage {
@@ -1046,8 +1285,19 @@ async function createWindow(): Promise<void> {
     // ✅ [리팩토링] ipcHelpers에 mainWindow 참조 설정
     setMainWindowRef(mainWindow);
 
+    // ✅ [2026-02-22] console 로그 포워더 설치 (콘텐츠 생성 로그 → 렌더러 전달)
+    installConsoleForwarder();
+
+    // ✅ [2026-02-04] 자동 업데이터 초기화 (설치형 앱에서만 동작)
+    if (app.isPackaged) {
+      initAutoUpdater(mainWindow);
+    }
+
     // ✅ [100점 수정] 닫기(X) 버튼 = 앱 완전 종료
     // event.preventDefault()로 기본 동작을 막고, 비동기 정리 완료 후 명시적으로 종료
+    // ✅ [2026-03-13] 종료 확인 다이얼로그 중복 생성 방지 플래그
+    let isConfirmDialogOpen = false;
+
     mainWindow.on('close', (event) => {
       console.log('[Main] 창 닫기 이벤트 발생');
 
@@ -1060,37 +1310,96 @@ async function createWindow(): Promise<void> {
       // ✅ [핵심] 기본 동작(창 닫기)을 막음
       event.preventDefault();
 
-      // 종료 절차 시작 (비동기)
-      (async () => {
-        (globalThis as any).isQuitting = true;
-        console.log('[Main] 종료 절차 시작...');
+      // ✅ 다이얼로그가 이미 열려있으면 중복 생성 방지 (X 버튼 연타 대응)
+      if (isConfirmDialogOpen) {
+        console.log('[Main] 종료 확인 다이얼로그가 이미 열려있습니다');
+        return;
+      }
+      isConfirmDialogOpen = true;
 
-        // 실행 중인 자동화가 있으면 정리
-        if (automationRunning || AutomationService.isRunning()) {
-          console.log('[Main] 실행 중인 자동화 정리 중...');
-          AutomationService.requestCancel();
-          await AutomationService.closeAllSessions().catch(() => { });
-          automationRunning = false;
-          automation = null;
+      // ✅ [2026-03-13] 프리미엄 커스텀 종료 확인 다이얼로그
+      // 세팅 후 실수로 X 버튼을 눌러 앱이 종료되는 것을 방지
+      const confirmWindow = new BrowserWindow({
+        width: 440,
+        height: 330,
+        parent: mainWindow!,
+        modal: true,
+        frame: false,
+        transparent: true,
+        resizable: false,
+        movable: false,
+        minimizable: false,
+        maximizable: false,
+        skipTaskbar: true,
+        alwaysOnTop: true,
+        show: false,
+        webPreferences: {
+          nodeIntegration: true,
+          contextIsolation: false,
+        },
+      });
+
+      const confirmHtmlPath = path.join(publicPath, 'quit-confirm.html');
+      confirmWindow.loadFile(confirmHtmlPath);
+
+      confirmWindow.once('ready-to-show', () => {
+        confirmWindow.show();
+      });
+
+      // IPC로 사용자 응답 수신
+      const handleResponse = (_event: any, shouldQuit: boolean) => {
+        ipcMain.removeListener('quit-confirm-response', handleResponse);
+
+        if (!confirmWindow.isDestroyed()) {
+          confirmWindow.destroy();
         }
 
-        // 트레이 정리
-        if (tray) {
-          tray.destroy();
-          tray = null;
+        if (!shouldQuit) {
+          console.log('[Main] 사용자가 종료를 취소했습니다');
+          isConfirmDialogOpen = false;
+          return;
         }
 
-        console.log('[Main] 정리 완료, 앱 종료');
+        // 종료 절차 시작
+        (async () => {
+          (globalThis as any).isQuitting = true;
+          console.log('[Main] 종료 절차 시작...');
 
-        // ✅ 비동기 정리 완료 후 종료
-        app.quit();
+          // 실행 중인 자동화가 있으면 정리
+          if (automationRunning || AutomationService.isRunning()) {
+            console.log('[Main] 실행 중인 자동화 정리 중...');
+            AutomationService.requestCancel();
+            await AutomationService.closeAllSessions().catch(() => { });
+            automationRunning = false;
+            automation = null;
+          }
 
-        // 앱이 종료되지 않으면 3초 후 강제 종료
-        setTimeout(() => {
-          console.log('[Main] 강제 종료 (process.exit)');
-          process.exit(0);
-        }, 3000);
-      })();
+          // 트레이 정리
+          if (tray) {
+            tray.destroy();
+            tray = null;
+          }
+
+          console.log('[Main] 정리 완료, 앱 종료');
+
+          // ✅ 비동기 정리 완료 후 종료
+          app.quit();
+
+          // 앱이 종료되지 않으면 3초 후 강제 종료
+          setTimeout(() => {
+            console.log('[Main] 강제 종료 (process.exit)');
+            process.exit(0);
+          }, 3000);
+        })();
+      };
+
+      ipcMain.on('quit-confirm-response', handleResponse);
+
+      // 다이얼로그가 외부에서 닫히면 (Alt+F4 등) → 취소 처리
+      confirmWindow.on('closed', () => {
+        ipcMain.removeListener('quit-confirm-response', handleResponse);
+        isConfirmDialogOpen = false;
+      });
     });
 
     // ✅ [수정] 최소화(-) 버튼 = 트레이로 숨기기
@@ -1117,6 +1426,13 @@ async function createWindow(): Promise<void> {
         });
         (globalThis as any).trayNotified = true;
       }
+    });
+
+    // ✅ [2026-02-27] 윈도우 포커스 시 webContents에도 포커스 전달
+    // 다이얼로그, 트레이, 알림 등으로 포커스를 잃은 후
+    // 다시 클릭할 때 입력 필드가 즉시 반응하도록 보장
+    mainWindow.on('focus', () => {
+      mainWindow?.webContents.focus();
     });
 
     mainWindow.on('closed', () => {
@@ -1250,24 +1566,276 @@ function createTray(): void {
 // ============================================
 // 파일 시스템 IPC 핸들러
 // ============================================
-// ✅ [2026-01-19] os:homedir 핸들러는 systemHandlers.ts로 이동됨 (registerAllHandlers에서 등록)
+// ✅ LEWORD 황금키워드 앱 실행 IPC 핸들러 (자동 다운로드 지원)
+ipcMain.handle('leword:launch', async () => {
+  console.log('[Main] leword:launch 호출됨');
+  const { spawn } = require('child_process');
+  const fs = require('fs');
+  const path = require('path');
+  const { dialog, shell } = require('electron');
+  const https = require('https');
+  const http = require('http');
 
-// ✅ 창 최소화 IPC 핸들러 (트레이로 숨기기)
-ipcMain.handle('window:minimize', async () => {
-  console.log('[Main] window:minimize 호출됨, mainWindow:', !!mainWindow, ', tray:', !!tray);
-  if (mainWindow) {
-    // ✅ 트레이가 있으면 숨기기, 없으면 일반 최소화
-    if (tray) {
-      mainWindow.hide();
-      console.log('[Main] ✅ 창이 트레이로 숨겨졌습니다');
-    } else {
-      mainWindow.minimize();
-      console.log('[Main] ✅ 트레이 없음, 일반 최소화');
-    }
-    return { success: true };
+  const LEWORD_GITHUB_REPO = 'cd000242-sudo/leword-app';
+  const LEWORD_DOWNLOAD_DIR = path.join(process.env.LOCALAPPDATA || '', 'LEWORD');
+  const LEWORD_EXE_NAME = 'LEWORD-Setup.exe';  // ✅ [2026-02-21] Portable → Setup exe로 변경
+  const LEWORD_EXE_PATH = path.join(LEWORD_DOWNLOAD_DIR, LEWORD_EXE_NAME);
+  const LEWORD_VERSION_FILE = path.join(LEWORD_DOWNLOAD_DIR, '.leword-version');
+
+  // ✅ [2026-02-21] 기존 Portable.exe → Setup.exe 마이그레이션
+  const oldPortablePath = path.join(LEWORD_DOWNLOAD_DIR, 'LEWORD-Portable.exe');
+  if (!fs.existsSync(LEWORD_EXE_PATH) && fs.existsSync(oldPortablePath)) {
+    try {
+      fs.renameSync(oldPortablePath, LEWORD_EXE_PATH);
+      console.log('[Main] 🔄 LEWORD Portable → Setup 파일명 마이그레이션 완료');
+    } catch { /* ignore */ }
   }
-  console.log('[Main] ❌ mainWindow가 null입니다');
-  return { success: false, message: '메인 윈도우를 찾을 수 없습니다.' };
+
+  // ===== 설치된 LEWORD 경로 목록 (인스톨러가 설치하는 위치) =====
+  const installedPaths = [
+    path.join(process.env.LOCALAPPDATA || '', 'Programs', 'leword', 'LEWORD.exe'),
+    'C:\\Program Files\\LEWORD\\LEWORD.exe',
+    'C:\\Program Files (x86)\\LEWORD\\LEWORD.exe'
+  ];
+
+  // ===== 개발 환경 경로 (win-unpacked 등) =====
+  const releaseDir = path.resolve(__dirname, '../../leword-app/release');
+  const devPaths: string[] = [];
+  try {
+    const winUnpackedExe = path.join(releaseDir, 'win-unpacked', 'LEWORD.exe');
+    if (fs.existsSync(winUnpackedExe)) devPaths.push(winUnpackedExe);
+  } catch { }
+  try {
+    if (fs.existsSync(releaseDir)) {
+      const files = fs.readdirSync(releaseDir) as string[];
+      const setupExe = files.find((f: string) => (f.startsWith('LEWORD-Setup-') || f.startsWith('LEWORD-Portable-')) && f.endsWith('.exe'));
+      if (setupExe) devPaths.push(path.join(releaseDir, setupExe));
+    }
+  } catch { }
+
+  // 0) 개발 환경이면 바로 실행
+  const devExe = devPaths.find((p: string) => { try { return fs.existsSync(p); } catch { return false; } });
+  if (devExe) {
+    console.log(`[Main] ✅ LEWORD 실행 (개발): ${devExe}`);
+    const child = spawn(devExe, [], { detached: true, stdio: 'ignore' });
+    child.unref();
+    return { success: true, message: 'LEWORD 앱이 실행되었습니다.' };
+  }
+
+  // 1) 저장된 버전 읽기 + GitHub 최신 버전 확인
+  let localVersion = '';
+  try { localVersion = fs.readFileSync(LEWORD_VERSION_FILE, 'utf-8').trim(); } catch { }
+
+  let latestTag = '';
+  try {
+    mainWindow?.webContents.send('log-message', '🔄 LEWORD 최신 버전 확인 중...');
+    latestTag = await new Promise<string>((resolve) => {
+      const timer = setTimeout(() => resolve(''), 5000);
+      https.get(`https://api.github.com/repos/${LEWORD_GITHUB_REPO}/releases/latest`, {
+        headers: { 'User-Agent': 'LEWORD-Launcher', 'Accept': 'application/vnd.github.v3+json' }
+      }, (res: any) => {
+        let data = '';
+        res.on('data', (chunk: string) => data += chunk);
+        res.on('end', () => {
+          clearTimeout(timer);
+          try { resolve(JSON.parse(data).tag_name || ''); } catch { resolve(''); }
+        });
+      }).on('error', () => { clearTimeout(timer); resolve(''); });
+    });
+  } catch { }
+
+  // 2) 이미 최신 버전이 설치되어 있으면 → 설치된 경로에서 바로 실행
+  const isUpToDate = localVersion && (!latestTag || latestTag === localVersion);
+  if (isUpToDate) {
+    const installedExe = installedPaths.find((p: string) => { try { return fs.existsSync(p); } catch { return false; } });
+    if (installedExe) {
+      console.log(`[Main] ✅ LEWORD 최신 (${localVersion}), 설치 경로에서 실행: ${installedExe}`);
+      mainWindow?.webContents.send('log-message', `✅ LEWORD ${localVersion} 실행 중...`);
+      const child = spawn(installedExe, [], { detached: true, stdio: 'ignore' });
+      child.unref();
+      return { success: true, message: 'LEWORD 앱이 실행되었습니다.' };
+    }
+    // 버전 파일은 있지만 설치된 exe가 없으면 → 다운로드로 진행
+    console.log('[Main] ⚠️ 버전 파일 있으나 설치된 LEWORD 없음 → 재설치 필요');
+  }
+
+  // 3) 업데이트 필요하거나 최초 설치 → 아래 다운로드 로직으로 진행
+  if (latestTag && localVersion && latestTag !== localVersion) {
+    console.log(`[Main] 🔄 LEWORD 업데이트 필요: ${localVersion} → ${latestTag}`);
+    mainWindow?.webContents.send('log-message', `🔄 LEWORD 업데이트 발견: ${localVersion} → ${latestTag}`);
+  } else if (!localVersion) {
+    // ✅ [2026-02-21] 버전 파일 없는데 시스템에 LEWORD가 설치되어 있으면 → 기존 설치 인식
+    const existingExe = installedPaths.find((p: string) => { try { return fs.existsSync(p); } catch { return false; } });
+    if (existingExe && latestTag) {
+      // 기존 설치가 있으면 → 최신 버전 태그로 버전 파일 생성 후 바로 실행
+      // (이미 최신 인스톨러로 설치했을 확률이 높음)
+      console.log(`[Main] ✅ 기존 LEWORD 발견 (${existingExe}), 버전 파일 생성 후 실행`);
+      try {
+        if (!fs.existsSync(LEWORD_DOWNLOAD_DIR)) fs.mkdirSync(LEWORD_DOWNLOAD_DIR, { recursive: true });
+        fs.writeFileSync(LEWORD_VERSION_FILE, latestTag, 'utf-8');
+        console.log(`[Main] ✅ 버전 저장: ${latestTag}`);
+      } catch { }
+      mainWindow?.webContents.send('log-message', `✅ LEWORD 실행 중...`);
+      const child = spawn(existingExe, [], { detached: true, stdio: 'ignore' });
+      child.unref();
+      return { success: true, message: 'LEWORD 앱이 실행되었습니다.' };
+    }
+    console.log('[Main] 📦 LEWORD 최초 설치');
+  }
+
+  // ===== 로컬에 없으면 → GitHub Releases에서 자동 다운로드 =====
+  const isAutoUpdate = fs.existsSync(LEWORD_DOWNLOAD_DIR) && !fs.existsSync(LEWORD_EXE_PATH);
+  console.log(`[Main] LEWORD ${isAutoUpdate ? '업데이트' : '미설치'} → GitHub Releases에서 자동 다운로드 시도`);
+
+  // 신규 설치만 확인 다이얼로그 표시 (업데이트는 자동 진행)
+  if (!isAutoUpdate) {
+    const confirmResult = await dialog.showMessageBox(mainWindow!, {
+      type: 'info',
+      title: 'LEWORD 황금키워드',
+      message: 'LEWORD 앱을 다운로드합니다.',
+      detail: 'LEWORD 황금키워드 앱이 설치되어 있지 않습니다.\nGitHub에서 자동으로 다운로드 후 실행합니다. (약 80MB)',
+      buttons: ['다운로드 및 실행', '취소'],
+      defaultId: 0,
+      cancelId: 1
+    });
+
+    if (confirmResult.response !== 0) {
+      return { success: false, message: '다운로드가 취소되었습니다.' };
+    }
+  }
+
+  // GitHub Releases API에서 최신 릴리즈 다운로드 URL 가져오기
+  try {
+    const releaseInfo = await new Promise<any>((resolve, reject) => {
+      https.get(`https://api.github.com/repos/${LEWORD_GITHUB_REPO}/releases/latest`, {
+        headers: { 'User-Agent': 'LEWORD-Launcher', 'Accept': 'application/vnd.github.v3+json' }
+      }, (res: any) => {
+        let data = '';
+        res.on('data', (chunk: string) => data += chunk);
+        res.on('end', () => {
+          try { resolve(JSON.parse(data)); } catch (e) { reject(e); }
+        });
+      }).on('error', reject);
+    });
+
+    // Portable exe 에셋 찾기
+    // ✅ [2026-02-21] Setup exe 우선, Portable exe 폴백
+    const asset = releaseInfo.assets?.find((a: any) =>
+      a.name.startsWith('LEWORD-Setup') && a.name.endsWith('.exe')
+    ) || releaseInfo.assets?.find((a: any) =>
+      a.name.startsWith('LEWORD-Portable') && a.name.endsWith('.exe')
+    );
+
+    if (!asset) {
+      console.error('[Main] ❌ GitHub Release에서 LEWORD exe를 찾을 수 없음');
+      dialog.showMessageBox(mainWindow!, {
+        type: 'error',
+        title: 'LEWORD 다운로드 실패',
+        message: '다운로드 파일을 찾을 수 없습니다.',
+        detail: '오픈채팅으로 문의해주세요.',
+        buttons: ['오픈채팅 문의하기', '확인']
+      }).then((r: any) => {
+        if (r.response === 0) shell.openExternal('https://open.kakao.com/o/sPcaslwh');
+      });
+      return { success: false, message: 'GitHub Release에서 다운로드 파일을 찾을 수 없습니다.' };
+    }
+
+    // 다운로드 디렉토리 생성
+    if (!fs.existsSync(LEWORD_DOWNLOAD_DIR)) {
+      fs.mkdirSync(LEWORD_DOWNLOAD_DIR, { recursive: true });
+    }
+
+    // 진행률 표시하며 다운로드
+    const totalSize = asset.size || 0;
+    console.log(`[Main] 📥 LEWORD 다운로드 시작: ${asset.name} (${(totalSize / 1024 / 1024).toFixed(1)}MB)`);
+
+    // 렌더러에 진행률 전송
+    mainWindow?.webContents.send('log-message', `📥 LEWORD 다운로드 중... (${(totalSize / 1024 / 1024).toFixed(0)}MB)`);
+
+    await new Promise<void>((resolve, reject) => {
+      const downloadUrl = asset.browser_download_url;
+
+      const downloadWithRedirect = (url: string) => {
+        const protocol = url.startsWith('https') ? https : http;
+        protocol.get(url, { headers: { 'User-Agent': 'LEWORD-Launcher' } }, (res: any) => {
+          // GitHub은 302 리다이렉트를 사용
+          if (res.statusCode === 301 || res.statusCode === 302) {
+            downloadWithRedirect(res.headers.location);
+            return;
+          }
+
+          if (res.statusCode !== 200) {
+            reject(new Error(`다운로드 실패: HTTP ${res.statusCode}`));
+            return;
+          }
+
+          const tempPath = LEWORD_EXE_PATH + '.tmp';
+          const fileStream = fs.createWriteStream(tempPath);
+          let downloaded = 0;
+          let lastProgress = 0;
+
+          res.on('data', (chunk: Buffer) => {
+            downloaded += chunk.length;
+            fileStream.write(chunk);
+
+            // 10% 단위로 진행률 로그
+            const progress = totalSize > 0 ? Math.floor((downloaded / totalSize) * 100) : 0;
+            if (progress >= lastProgress + 10) {
+              lastProgress = progress;
+              mainWindow?.webContents.send('log-message', `📥 LEWORD 다운로드: ${progress}% (${(downloaded / 1024 / 1024).toFixed(0)}MB / ${(totalSize / 1024 / 1024).toFixed(0)}MB)`);
+            }
+          });
+
+          res.on('end', () => {
+            fileStream.end(() => {
+              // 다운로드 완료 → 임시 파일을 실제 파일로 이동
+              try {
+                if (fs.existsSync(LEWORD_EXE_PATH)) fs.unlinkSync(LEWORD_EXE_PATH);
+                fs.renameSync(tempPath, LEWORD_EXE_PATH);
+                console.log(`[Main] ✅ LEWORD 다운로드 완료: ${LEWORD_EXE_PATH}`);
+                resolve();
+              } catch (e) {
+                reject(e);
+              }
+            });
+          });
+
+          res.on('error', reject);
+        }).on('error', reject);
+      };
+
+      downloadWithRedirect(downloadUrl);
+    });
+
+    // 다운로드한 버전 태그 저장 (다음 실행 시 버전 체크용)
+    try {
+      const downloadedTag = releaseInfo.tag_name || '';
+      if (downloadedTag) {
+        fs.writeFileSync(LEWORD_VERSION_FILE, downloadedTag, 'utf-8');
+        console.log(`[Main] ✅ LEWORD 버전 저장: ${downloadedTag}`);
+      }
+    } catch { /* 버전 저장 실패는 무시 */ }
+
+    mainWindow?.webContents.send('log-message', '✅ LEWORD 다운로드 완료! 실행 중...');
+
+    // 다운로드 완료 → 자동 실행
+    const child = spawn(LEWORD_EXE_PATH, [], { detached: true, stdio: 'ignore' });
+    child.unref();
+    return { success: true, message: 'LEWORD 다운로드 및 실행 완료!' };
+
+  } catch (error: any) {
+    console.error('[Main] ❌ LEWORD 다운로드 오류:', error);
+    dialog.showMessageBox(mainWindow!, {
+      type: 'error',
+      title: 'LEWORD 다운로드 실패',
+      message: '다운로드 중 오류가 발생했습니다.',
+      detail: `${error.message}\n\n오픈채팅으로 문의해주세요.`,
+      buttons: ['오픈채팅 문의하기', '확인']
+    }).then((r: any) => {
+      if (r.response === 0) shell.openExternal('https://open.kakao.com/o/sPcaslwh');
+    });
+    return { success: false, message: `LEWORD 다운로드 실패: ${error.message}` };
+  }
 });
 
 ipcMain.handle('shell:openPath', async (_event, targetPath: string) => {
@@ -1706,9 +2274,23 @@ ipcMain.handle('file:readDir', async (_event, dirPath: string) => {
 ipcMain.handle('file:deleteFolder', async (_event, folderPath: string) => {
   try {
     const fs = await import('fs/promises');
-    await fs.rm(folderPath, { recursive: true, force: true });
+    // ✅ [2026-03-14] Windows long path prefix 적용 (260자 초과 경로 삭제 지원)
+    let targetPath = folderPath;
+    if (process.platform === 'win32' && !folderPath.startsWith('\\\\?\\')) {
+      targetPath = '\\\\?\\' + folderPath.replace(/\//g, '\\');
+    }
+    await fs.rm(targetPath, { recursive: true, force: true, maxRetries: 3, retryDelay: 500 });
     return true;
-  } catch {
+  } catch (err1) {
+    // ✅ 폴백: Windows rmdir 명령어 사용
+    try {
+      if (process.platform === 'win32') {
+        const { execSync } = await import('child_process');
+        execSync(`rmdir /s /q "${folderPath}"`, { timeout: 15000, windowsHide: true });
+        return true;
+      }
+    } catch { /* ignore */ }
+    console.error('[File] deleteFolder 실패:', folderPath, err1);
     return false;
   }
 });
@@ -1829,6 +2411,10 @@ ipcMain.handle('openImagesFolder', async () => {
   try {
     const imagesPath = path.join(app.getPath('userData'), 'images');
     await fs.mkdir(imagesPath, { recursive: true });
+
+    // ✅ [2026-02-02] 카테고리 폴더도 함께 생성
+    await initializeCategoryFolders();
+
     await shell.openPath(imagesPath);
     return { success: true, path: imagesPath };
   } catch (error) {
@@ -1837,7 +2423,8 @@ ipcMain.handle('openImagesFolder', async () => {
 });
 
 // 이미지 다운로드 및 저장
-ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string) => {
+// ✅ [2026-02-02] category 파라미터 추가 - 카테고리별 폴더에 저장
+ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string, category?: string) => {
   try {
     const https = await import('https');
     const http = await import('http');
@@ -1890,10 +2477,20 @@ ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading
       }
     }
 
-    const safeTitle = (postTitle || 'image').replace(/[<>:"/\\|?*]/g, '_');
-    const safeHeading = (heading || 'image').replace(/[<>:"/\\|?*]/g, '_');
+    const safeTitle = (postTitle || 'image').replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/g, '');
+    const safeHeading = (heading || 'image').replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/g, '');
     const fileName = `${safeTitle}_${safeHeading}_${Date.now()}${ext}`;
-    const imagesPath = path.join(app.getPath('userData'), 'images');
+
+    // ✅ [2026-02-02] 카테고리별 폴더에 저장
+    const imagesBasePath = path.join(app.getPath('userData'), 'images');
+    let imagesPath = imagesBasePath;
+
+    if (category && category.trim()) {
+      const safeCategory = category.replace(/[<>:"/\\|?*]/g, '_').trim();
+      imagesPath = path.join(imagesBasePath, safeCategory);
+      console.log(`[Main] 📂 카테고리 폴더에 이미지 저장: ${safeCategory}`);
+    }
+
     await fs.mkdir(imagesPath, { recursive: true });
     const filePath = path.join(imagesPath, fileName);
 
@@ -1953,18 +2550,20 @@ ipcMain.handle('image:collectFromUrl', async (_event, url: string) => {
   }
 });
 
-// ✅ [신규] 중복 및 저품질 이미지 필터링 함수
+// ✅ [신규 + 2026-02-01 강화] 중복 및 저품질/비제품 이미지 필터링 함수
 function filterDuplicateAndLowQualityImages(images: string[]): string[] {
   const seenBaseUrls = new Set<string>();
   const seenFileNames = new Set<string>();
+  const seenNormalizedUrls = new Set<string>(); // ✅ [2026-02-27] 정규화된 URL 중복 체크
   const filtered: string[] = [];
 
   for (const img of images) {
     if (!img || typeof img !== 'string') continue;
 
-    // 1. 저품질 이미지 키워드 필터링
+    // 1. 저품질/비제품 이미지 키워드 필터링 (강화됨)
     const lowerImg = img.toLowerCase();
-    const isLowQuality =
+    const isLowQualityOrNonProduct =
+      // 크기 관련
       lowerImg.includes('_thumb') ||
       lowerImg.includes('_small') ||
       lowerImg.includes('_s.') ||
@@ -1973,22 +2572,163 @@ function filterDuplicateAndLowQualityImages(images: string[]): string[] {
       lowerImg.includes('80x80') ||
       lowerImg.includes('100x100') ||
       lowerImg.includes('120x120') ||
+      lowerImg.includes('150x150') ||
       lowerImg.includes('type=f40') ||
       lowerImg.includes('type=f60') ||
       lowerImg.includes('type=f80') ||
       lowerImg.includes('type=f100') ||
+      // 품질 관련
       lowerImg.includes('blur') ||
       lowerImg.includes('placeholder') ||
       lowerImg.includes('loading') ||
+      lowerImg.includes('lazy') ||
+      // 비제품 이미지 (아이콘, 로고, 배너)
       lowerImg.includes('/icon/') ||
       lowerImg.includes('/logo/') ||
       lowerImg.includes('/banner/') ||
+      lowerImg.includes('/badge/') ||
+      lowerImg.includes('_icon') ||
+      lowerImg.includes('_logo') ||
+      lowerImg.includes('_banner') ||
+      lowerImg.includes('_badge') ||
+      // ✅ [2026-02-01 추가] 배찌/마크/제휴 관련
+      lowerImg.includes('reviewmania') ||
+      lowerImg.includes('review_mania') ||
+      lowerImg.includes('powerlink') ||
+      lowerImg.includes('power_link') ||
+      lowerImg.includes('brandzone') ||
+      lowerImg.includes('brand_zone') ||
+      lowerImg.includes('navershopping') ||
+      lowerImg.includes('naver_shopping') ||
+      lowerImg.includes('affiliate') ||
+      lowerImg.includes('ad_') ||
+      lowerImg.includes('_ad.') ||
+      lowerImg.includes('promo') ||
+      lowerImg.includes('coupon') ||
+      lowerImg.includes('delivery') ||
+      lowerImg.includes('shipping') ||
+      // 결제 관련
       lowerImg.includes('npay') ||
-      lowerImg.includes('naverpay');
+      lowerImg.includes('naverpay') ||
+      lowerImg.includes('kakaopay') ||
+      lowerImg.includes('toss') ||
+      lowerImg.includes('payment') ||
+      lowerImg.includes('pay_') ||
+      // 기타 UI 요소
+      lowerImg.includes('arrow') ||
+      lowerImg.includes('button') ||
+      lowerImg.includes('btn_') ||
+      lowerImg.includes('_btn') ||
+      lowerImg.includes('sprite') ||
+      lowerImg.includes('.gif') ||
+      lowerImg.includes('data:image') ||
+      lowerImg.includes('1x1') ||
+      lowerImg.includes('spacer') ||
+      lowerImg.includes('.svg') ||
+      lowerImg.includes('emoji') ||
+      lowerImg.includes('emoticon') ||
+      lowerImg.includes('storefront') ||
+      lowerImg.includes('store_info') ||
+      lowerImg.includes('storelogo') ||
+      lowerImg.includes('brandlogo') ||
+      lowerImg.includes('store_logo') ||
+      lowerImg.includes('brand_logo') ||
+      // ✅ [2026-02-27] 워터마크/저작권 이미지 필터링 강화
+      lowerImg.includes('watermark') ||
+      lowerImg.includes('copyright') ||
+      lowerImg.includes('gettyimages') ||
+      lowerImg.includes('shutterstock') ||
+      lowerImg.includes('istockphoto') ||
+      lowerImg.includes('alamy.com') ||
+      lowerImg.includes('dreamstime') ||
+      lowerImg.includes('press_photo') ||
+      lowerImg.includes('editorial') ||
+      // ✅ [2026-02-27] 뉴스/언론사 이미지 필터링
+      lowerImg.includes('imgnews.pstatic') ||
+      lowerImg.includes('mimgnews.pstatic') ||
+      lowerImg.includes('dispatch.cdnser') ||
+      // ✅ [2026-02-27] 쇼핑몰 비제품 이미지 (인증/안내/정보 텍스트)
+      lowerImg.includes('cert_') ||
+      lowerImg.includes('_cert') ||
+      lowerImg.includes('certificate') ||
+      lowerImg.includes('kc_mark') ||
+      lowerImg.includes('kcmark') ||
+      lowerImg.includes('kc인증') ||
+      lowerImg.includes('warranty') ||
+      lowerImg.includes('guarantee') ||
+      lowerImg.includes('notice_') ||
+      lowerImg.includes('_notice') ||
+      lowerImg.includes('안내') ||
+      lowerImg.includes('info_table') ||
+      lowerImg.includes('info_img') ||
+      lowerImg.includes('seller_info') ||
+      lowerImg.includes('판매자') ||
+      lowerImg.includes('교환') ||
+      lowerImg.includes('환불') ||
+      lowerImg.includes('refund') ||
+      lowerImg.includes('exchange') ||
+      lowerImg.includes('return_') ||
+      lowerImg.includes('_return') ||
+      lowerImg.includes('guide_') ||
+      lowerImg.includes('_guide') ||
+      lowerImg.includes('faq_') ||
+      lowerImg.includes('qna_') ||
+      lowerImg.includes('review_event') ||
+      lowerImg.includes('event_banner') ||
+      lowerImg.includes('popup_') ||
+      lowerImg.includes('_popup') ||
+      lowerImg.includes('stamp') ||
+      lowerImg.includes('seal') ||
+      lowerImg.includes('ribbon') ||
+      lowerImg.includes('label_') ||
+      lowerImg.includes('_label') ||
+      lowerImg.includes('tag_') ||
+      lowerImg.includes('_tag') ||
+      lowerImg.includes('sticker') ||
+      // ✅ [2026-02-27] 쿠팡 특화 비제품 패턴
+      lowerImg.includes('rocket-') ||
+      lowerImg.includes('rocketwow') ||
+      lowerImg.includes('coupang-logo') ||
+      lowerImg.includes('seller-logo') ||
+      lowerImg.includes('/np/') ||
+      lowerImg.includes('/marketing/') ||
+      lowerImg.includes('/event/') ||
+      lowerImg.includes('/static/') ||
+      lowerImg.includes('/assets/') ||
+      // ✅ [2026-02-27] 텍스트/문서 이미지 패턴
+      lowerImg.includes('text_') ||
+      lowerImg.includes('_text') ||
+      lowerImg.includes('table_') ||
+      lowerImg.includes('_table') ||
+      lowerImg.includes('spec_') ||
+      lowerImg.includes('_spec');
 
-    if (isLowQuality) {
-      console.log(`[ImageFilter] ⏭️ 저품질 제외: ${img.substring(0, 60)}...`);
+    if (isLowQualityOrNonProduct) {
+      console.log(`[ImageFilter] ⏭️ 비제품/저품질 제외: ${img.substring(0, 80)}...`);
       continue;
+    }
+
+    // ✅ [2026-02-08] 네이버 쇼핑 이미지는 제품 CDN 도메인 확인
+    if (lowerImg.includes('pstatic.net') || lowerImg.includes('naver.')) {
+      const isProductCdn =
+        lowerImg.includes('shop-phinf.pstatic.net') ||
+        lowerImg.includes('shopping-phinf.pstatic.net') ||
+        lowerImg.includes('checkout.phinf') ||  // ✅ [2026-02-08] 리뷰 이미지 CDN
+        lowerImg.includes('image.nmv');          // ✅ [2026-02-08] 비디오 썸네일 CDN
+      // ✅ [2026-02-08] 광고 이미지는 제품 CDN이어도 제외
+      if (lowerImg.includes('searchad-phinf')) {
+        console.log(`[ImageFilter] ⏭️ 광고 이미지 제외: ${img.substring(0, 80)}...`);
+        continue;
+      }
+      // shopping-phinf/main_ 은 다른 상품의 카탈로그 썸네일
+      if (lowerImg.includes('shopping-phinf') && lowerImg.includes('/main_')) {
+        console.log(`[ImageFilter] ⏭️ 카탈로그 썸네일 제외: ${img.substring(0, 80)}...`);
+        continue;
+      }
+      if (!isProductCdn) {
+        console.log(`[ImageFilter] ⏭️ 비제품 네이버 CDN 제외: ${img.substring(0, 80)}...`);
+        continue;
+      }
     }
 
     // 2. 기본 URL 중복 체크
@@ -2008,8 +2748,22 @@ function filterDuplicateAndLowQualityImages(images: string[]): string[] {
       continue;
     }
 
+    // ✅ [2026-02-27] 4. 정규화된 URL 중복 제거 (type=f640/f130 등 네이버 CDN 변형)
+    const normalizedUrl = baseUrl
+      .replace(/[?&]type=[a-z]\d+/gi, '')  // 네이버 type 파라미터 제거
+      .replace(/_thumb/gi, '')              // 썸네일 접미사 제거
+      .replace(/_small/gi, '')
+      .replace(/\/thumbnail\//gi, '/')      // 쿠팡 썸네일 경로 정규화
+      .replace(/\/\d+x\d+\//gi, '/')        // 크기 경로 정규화
+      .replace(/\?$/, '');
+    if (seenNormalizedUrls.has(normalizedUrl)) {
+      console.log(`[ImageFilter] ⏭️ 정규화 URL 중복 제외: ${normalizedUrl.substring(0, 60)}...`);
+      continue;
+    }
+
     seenBaseUrls.add(baseUrl);
     if (normalizedFileName) seenFileNames.add(normalizedFileName);
+    seenNormalizedUrls.add(normalizedUrl);
     filtered.push(img);
   }
 
@@ -2017,214 +2771,223 @@ function filterDuplicateAndLowQualityImages(images: string[]): string[] {
   return filtered;
 }
 
-// 쇼핑몰에서 이미지 수집 (최적화된 모바일 API + Puppeteer 폴백)
+// 쇼핑몰에서 이미지 수집 (플랫폼별 분기)
+// ✅ 브랜드스토어: 기존 방식 (검증됨)
+// ✅ 스마트스토어/쿠팡: 새 모듈화된 크롤러
 ipcMain.handle('image:collectFromShopping', async (_event, url: string) => {
   // ✅ [리팩토링] 통합 검증
   const check = await validateLicenseAndQuota('media', 1);
   if (!check.valid) return check.response;
 
   try {
-    console.log('[Main] 쇼핑몰 이미지 수집 시작:', url);
+    console.log('[Main] ════════════════════════════════════════');
+    console.log('[Main] 🛒 쇼핑몰 이미지 수집 시작:', url);
 
-    // ✅ 브랜드스토어 감지 → 네이버 이미지 API로 빠른 수집 (가장 정확!)
-    const isBrandStore = /brand\.naver\.com/i.test(url);
+    // ✅ 플랫폼 감지
+    const isBrandStore = url.includes('brand.naver.com');
+    const isSmartStore = url.includes('smartstore.naver.com');
+    const isCoupang = url.includes('coupang.com') || url.includes('coupa.ng');
+
+    let images: string[] = [];
+    let title = '';
+    let productInfo: any = {};
 
     if (isBrandStore) {
-      console.log('[Main] 🎯 브랜드스토어 감지 → 네이버 이미지 API로 빠른 수집 시작');
+      // ✅ [2026-02-08] 브랜드스토어: fetchShoppingImages + crawlBrandStoreProduct 이중 수집
+      console.log('[Main] 🏪 브랜드스토어 감지 → 강화된 이미지 수집');
+      const { fetchShoppingImages } = await import('./sourceAssembler.js');
+      const result = await fetchShoppingImages(url, { imagesOnly: true });
 
-      try {
-        const config = await loadConfig();
-        const naverClientId = config.naverClientId || config.naverDatalabClientId || process.env.NAVER_CLIENT_ID || '';
-        const naverClientSecret = config.naverClientSecret || config.naverDatalabClientSecret || process.env.NAVER_CLIENT_SECRET || '';
+      images = result.images || [];
+      title = result.title || '';
+      productInfo = {
+        name: title,
+        price: result.price,
+        description: result.description,
+      };
 
-        if (naverClientId && naverClientSecret) {
-          // ✅ 먼저 제품명만 빠르게 추출 (Puppeteer로 OG 태그만 가져옴)
-          const { crawlFromAffiliateLink } = await import('./crawler/productSpecCrawler.js');
-          const result = await crawlFromAffiliateLink(url);
+      // ✅ [2026-02-08] 이미지 7장 미만이면 crawlBrandStoreProduct 폴백으로 추가 수집
+      const MIN_BRAND_IMAGES = 7;
+      if (images.length < MIN_BRAND_IMAGES) {
+        console.log(`[Main] ⚠️ 브랜드스토어 이미지 ${images.length}개 < 목표 ${MIN_BRAND_IMAGES}개 → 폴백 크롤러 호출`);
+        try {
+          // URL에서 productId와 brandName 추출
+          const productIdMatch = url.match(/\/products\/(\d+)/) || url.match(/channelProductNo=(\d+)/);
+          const brandMatch = url.match(/(?:m\.)?brand\.naver\.com\/([^\/\?]+)/);
+          const productId = productIdMatch?.[1] || '';
+          const brandName = brandMatch?.[1] || '';
 
-          // ✅ 실제 제품명으로 네이버 이미지 API 검색 (가장 빠르고 정확!)
-          let searchKeyword = result?.name || '';
+          if (productId && brandName) {
+            const { crawlBrandStoreProduct } = await import('./crawler/productSpecCrawler.js');
+            const fallbackResult = await crawlBrandStoreProduct(productId, brandName, url);
 
-          // 스토어명이 포함된 경우 제거 (예: "Home Sweet My Home, HOMURO : 호무로" → 실제 제품명 추출)
-          if (searchKeyword.includes(':')) {
-            // 제품명이 스토어명 형식인 경우 (브랜드스토어 특성), URL에서 힌트 얻기
-            const urlKeywordMatch = url.match(/products\/\d+/);
-            if (urlKeywordMatch) {
-              // OG description에서 제품명 추출 시도
-              // 또는 단순히 스토어명 제거
-              const parts = searchKeyword.split(',');
-              searchKeyword = parts[0].trim() || searchKeyword;
-            }
-          }
+            if (fallbackResult) {
+              // ✅ AffiliateProductInfo에서 이미지 추출 (mainImage + galleryImages + detailImages)
+              const fallbackAllImages: string[] = [];
+              if (fallbackResult.mainImage) fallbackAllImages.push(fallbackResult.mainImage);
+              if (fallbackResult.galleryImages?.length) fallbackAllImages.push(...fallbackResult.galleryImages);
+              if (fallbackResult.detailImages?.length) fallbackAllImages.push(...fallbackResult.detailImages);
 
-          console.log(`[Main] 🔍 네이버 이미지 API 검색 키워드: "${searchKeyword}"`);
-
-          if (searchKeyword && searchKeyword.length > 2) {
-            // ✅ 직접 네이버 이미지 API 호출 (axios 사용)
-            const axios = await import('axios');
-            const encodedQuery = encodeURIComponent(searchKeyword);
-            const apiUrl = `https://openapi.naver.com/v1/search/image?query=${encodedQuery}&display=30&sort=sim&filter=large`;
-
-            const response = await axios.default.get(apiUrl, {
-              headers: {
-                'X-Naver-Client-Id': naverClientId,
-                'X-Naver-Client-Secret': naverClientSecret,
-              },
-              timeout: 10000
-            });
-
-            const naverImages = response.data?.items || [];
-
-            if (naverImages && naverImages.length > 0) {
-              console.log(`[Main] ✅ 네이버 이미지 API 수집 완료: ${naverImages.length}개`);
-
-              // 메인 이미지도 추가 (OG 이미지)
-              const allImages: string[] = [];
-              if (result?.mainImage) allImages.push(result.mainImage);
-
-              // 네이버 API 이미지 추가
-              naverImages.forEach((img: any) => {
-                const imgUrl = typeof img === 'string' ? img : (img.link || img.url || img.thumbnail || '');
-                if (imgUrl && !allImages.includes(imgUrl)) {
-                  allImages.push(imgUrl);
-                }
-              });
-
-              const filteredImages = filterDuplicateAndLowQualityImages(allImages);
-              console.log(`[Main] 🔍 필터링 완료: ${allImages.length}개 → ${filteredImages.length}개`);
-
-              return {
-                success: true,
-                images: filteredImages,
-                title: result?.name || searchKeyword,
-                productInfo: {
-                  name: result?.name || searchKeyword,
-                  price: result?.price || 0,
-                  detailUrl: url
-                }
-              };
-            }
-          }
-
-          console.log('[Main] ⚠️ 네이버 API 검색 실패 → Puppeteer 폴백');
-        }
-      } catch (naverErr) {
-        console.warn('[Main] 네이버 API 실패:', (naverErr as Error).message);
-      }
-    }
-
-    // ✅ 스마트스토어/쿠팡 → 기존 모바일 API 사용
-    const isSmartStore = /smartstore\.naver\.com|coupa\.ng|link\.coupang\.com/i.test(url);
-
-    if (isSmartStore) {
-      console.log('[Main] 🚀 스마트스토어/쿠팡 감지 → 모바일 API로 빠른 수집 시작');
-
-      // ✅ [핵심 수정] crawlFromAffiliateLink 호출 전에 환경변수 설정
-      // Knowledge Item 참조: "The API Key Propagation Gap (2026-01-17)"
-      const config = await loadConfig();
-      applyConfigToEnv(config);
-      console.log('[Main] ✅ 환경변수에 API 키 적용 완료');
-
-      const { crawlFromAffiliateLink } = await import('./crawler/productSpecCrawler.js');
-      const result = await crawlFromAffiliateLink(url);
-
-      if (result) {
-        // 이미지 통합 (대표 + 갤러리 + 상세)
-        const allImages: string[] = [];
-        if (result.mainImage) allImages.push(result.mainImage);
-        allImages.push(...(result.galleryImages || []));
-        allImages.push(...(result.detailImages || []).slice(0, 10)); // 상세는 최대 10개
-
-        console.log(`[Main] 📦 모바일 API 수집 결과: ${allImages.length}개 이미지`);
-
-        // ✅ [핵심] 이미지가 3개 미만이면 네이버 검색 API로 보충
-        if (allImages.length < 3 && result.name) {
-          console.log('[Main] ⚠️ 수집된 이미지 부족 → 네이버 검색 API로 보충 시도');
-          try {
-            const config = await loadConfig();
-            const naverClientId = config.naverClientId || config.naverDatalabClientId || process.env.NAVER_CLIENT_ID || '';
-            const naverClientSecret = config.naverClientSecret || config.naverDatalabClientSecret || process.env.NAVER_CLIENT_SECRET || '';
-
-            if (naverClientId && naverClientSecret) {
-              const { fetchShoppingImages } = await import('./sourceAssembler.js');
-              const naverResult = await fetchShoppingImages(url, {
-                imagesOnly: true,
-                naverClientId,
-                naverClientSecret,
-              });
-
-              if (naverResult.images && naverResult.images.length > 0) {
-                // 중복 제거하며 추가
-                naverResult.images.forEach((img: string) => {
-                  if (!allImages.includes(img)) {
-                    allImages.push(img);
-                  }
+              // 폴백에서 얻은 이미지 병합 (중복 제거)
+              const existingNorm = new Set(images.map(u => u.split('?')[0]));
+              const fallbackImages = fallbackAllImages
+                .filter((img: string) => {
+                  const norm = img.split('?')[0];
+                  return !existingNorm.has(norm) && img.startsWith('http');
                 });
-                console.log(`[Main] ✅ 네이버 API 보충 완료: 총 ${allImages.length}개 이미지`);
+
+              if (fallbackImages.length > 0) {
+                images = [...images, ...fallbackImages];
+                console.log(`[Main] ✅ 폴백 크롤러에서 ${fallbackImages.length}개 추가 이미지 수집 → 총 ${images.length}개`);
+              }
+
+              // 상품명이 없으면 폴백에서 가져오기
+              if (!title && fallbackResult.name && fallbackResult.name !== '상품명을 불러올 수 없습니다') {
+                title = fallbackResult.name;
+                productInfo.name = title;
+                console.log(`[Main] ✅ 폴백 크롤러에서 상품명 추출: "${title}"`);
+              }
+              if (!productInfo.price && fallbackResult.price) {
+                productInfo.price = fallbackResult.price;
               }
             }
-          } catch (naverErr) {
-            console.warn('[Main] 네이버 API 보충 실패:', (naverErr as Error).message);
+          } else {
+            console.log(`[Main] ⚠️ URL에서 productId/brandName 추출 실패 → 폴백 건너뜀`);
           }
+        } catch (fallbackErr) {
+          console.warn(`[Main] ⚠️ 브랜드스토어 폴백 크롤링 오류:`, (fallbackErr as Error).message);
         }
+      }
+    } else if (isSmartStore || isCoupang) {
+      // ✅ 스마트스토어/쿠팡: 새 모듈화된 크롤러 사용
+      console.log(`[Main] 🏪 ${isSmartStore ? '스마트스토어' : '쿠팡'} 감지 → 새 크롤러 사용`);
+      const { collectShoppingImages } = await import('./crawler/shopping/index.js');
 
-        console.log(`[Main] ✅ 최종 수집 완료: ${allImages.length}개 이미지`);
+      // ✅ [2026-02-27] maxImages 30→100 확대 (대량 수집)
+      const result = await collectShoppingImages(url, {
+        timeout: 30000,
+        maxImages: 100,
+        includeDetails: true,
+        useCache: true,
+      });
 
-        // ✅ [신규] 중복 및 저품질 이미지 필터링
-        const filteredImages = filterDuplicateAndLowQualityImages(allImages);
-        console.log(`[Main] 🔍 중복/저품질 필터링 완료: ${allImages.length}개 → ${filteredImages.length}개`);
-
-        const response = {
-          success: true,
-          images: filteredImages,
-          title: result.name,
-          // ✅ 추가 정보도 함께 반환
-          productInfo: {
-            name: result.name,
-            price: result.price,
-            stock: result.stock,
-            options: result.options,
-            detailUrl: result.detailUrl,
-            // ✅ [2026-01-21] 제품 상세 설명 추가 (AI 리뷰 작성용)
-            description: result.description || ''
-          }
-        };
-
-        if (allImages.length > 0 && (await isFreeTierUser())) {
-          await consumeQuota('media', 1);
-        }
-        return response;
+      if (result.isErrorPage) {
+        console.error('[Main] ❌ 에러 페이지 감지:', result.error);
+        return { success: false, message: result.error || '에러 페이지입니다', isErrorPage: true };
       }
 
-      console.log('[Main] ⚠️ 모바일 API 실패 → Puppeteer 폴백');
+      if (!result.success) {
+        console.warn('[Main] ⚠️ 이미지 수집 실패:', result.error);
+        return { success: false, message: result.error || '이미지를 수집할 수 없습니다' };
+      }
+
+      images = result.images.map(img => img.url);
+      title = result.productInfo?.name || '';
+      productInfo = result.productInfo || {};
+
+      console.log(`[Main] 📊 사용된 전략: ${result.usedStrategy}`);
+      console.log(`[Main] ⏱️ 소요 시간: ${result.timing}ms`);
+    } else {
+      // ✅ 기타 쇼핑몰: 기존 방식 폴백
+      console.log('[Main] 🏪 기타 쇼핑몰 → 기존 방식 사용');
+      const { fetchShoppingImages } = await import('./sourceAssembler.js');
+      const result = await fetchShoppingImages(url, { imagesOnly: true });
+
+      images = result.images || [];
+      title = result.title || '';
+      productInfo = {
+        name: title,
+        price: result.price,
+        description: result.description,
+      };
     }
 
-    // ✅ 기존 방식 폴백 (쿠팡, 11번가, G마켓 등)
-    const config = await loadConfig();
-    const naverClientId = config.naverClientId || config.naverDatalabClientId || process.env.NAVER_CLIENT_ID || '';
-    const naverClientSecret = config.naverClientSecret || config.naverDatalabClientSecret || process.env.NAVER_CLIENT_SECRET || '';
-    console.log('[Main] 쇼핑몰 수집 (Puppeteer 방식)');
+    console.log(`[Main] ✅ 쇼핑몰 이미지 수집 완료: ${images.length}개`);
 
-    const { fetchShoppingImages } = await import('./sourceAssembler.js');
-    const result = await fetchShoppingImages(url, {
-      imagesOnly: true,
-      naverClientId,
-      naverClientSecret,
-    });
+    // ✅ [2026-02-01 FIX] 1단계: 배너/배찌/마크 등 비제품 이미지 URL 필터링
+    const filteredImages = filterDuplicateAndLowQualityImages(images);
+    console.log(`[Main] 🎯 1단계 URL 필터 후: ${filteredImages.length}개 (제외: ${images.length - filteredImages.length}개)`);
 
-    const images = result.images || [];
-    const title = result.title || '';
+    // ✅ [2026-02-27] 2~4단계: 이미지 콘텐츠 분석 + 유사도 필터 + AI Vision 분류
+    let analyzedImages = filteredImages;
+    if (filteredImages.length > 1) {
+      try {
+        const config = await loadConfig();
+        const { analyzeAndFilterShoppingImages } = await import('./image/shoppingImageAnalyzer.js');
+        analyzedImages = await analyzeAndFilterShoppingImages(filteredImages, {
+          referenceImageUrl: filteredImages[0], // 갤러리 대표 이미지
+          geminiApiKey: config.geminiApiKey || '',
+          openaiApiKey: (config as any).openaiApiKey || '',
+        });
+        console.log(`[Main] 🔬 2~4단계 분석 후: ${analyzedImages.length}개 (추가 제외: ${filteredImages.length - analyzedImages.length}개)`);
+      } catch (analyzeErr) {
+        console.warn(`[Main] ⚠️ 2단계 분석 실패, 1단계 결과 사용:`, (analyzeErr as Error).message);
+        analyzedImages = filteredImages;
+      }
+    }
 
-    console.log(`[Main] 쇼핑몰 이미지 수집 완료: ${images.length}개`);
+    console.log('[Main] ════════════════════════════════════════');
 
-    const response = { success: true, images, title };
+    const response = {
+      success: analyzedImages.length > 0,
+      images: analyzedImages,
+      title,
+      productInfo,
+    };
+
     if ((response.images?.length ?? 0) > 0 && (await isFreeTierUser())) {
       await consumeQuota('media', 1);
     }
     return response;
+
   } catch (error) {
-    console.error('[Main] 쇼핑몰 이미지 수집 실패:', error);
+    console.error('[Main] ❌ 쇼핑몰 이미지 수집 실패:', error);
     return { success: false, message: (error as Error).message };
+  }
+});
+
+// ✅ [2026-02-01] AI 기반 소제목-이미지 의미적 매칭 (Gemini / Perplexity 지원)
+ipcMain.handle('image:matchToHeadings', async (_event, images: string[], headings: string[]) => {
+  try {
+    console.log(`[Main] 🎯 이미지-소제목 매칭 시작: ${images.length}개 이미지, ${headings.length}개 소제목`);
+
+    const config = await loadConfig();
+
+    // ✅ 사용자 설정에 따른 AI 공급자 결정
+    const provider = config.defaultAiProvider || 'gemini';
+    const geminiApiKey = config.geminiApiKey || process.env.GEMINI_API_KEY;
+    const perplexityApiKey = config.perplexityApiKey || process.env.PERPLEXITY_API_KEY;
+
+    // API 키 확인
+    const hasGemini = !!geminiApiKey;
+    const hasPerplexity = !!perplexityApiKey;
+
+    if (!hasGemini && !hasPerplexity) {
+      console.warn('[Main] ⚠️ AI API 키 없음 → 순차 배치');
+      return { success: true, matches: headings.map((_: string, i: number) => i % images.length) };
+    }
+
+    const { matchImagesToHeadings } = await import('./imageHeadingMatcher.js');
+
+    // ✅ 설정 기반 AI 매칭 실행
+    const matcherConfig = {
+      provider: (provider === 'perplexity' && hasPerplexity) ? 'perplexity' as const : 'gemini' as const,
+      geminiApiKey,
+      perplexityApiKey,
+      geminiModel: config.geminiModel || process.env.GEMINI_MODEL,
+      perplexityModel: config.perplexityModel,
+    };
+
+    console.log(`[Main] 🤖 AI 공급자: ${matcherConfig.provider}`);
+    const matches = await matchImagesToHeadings(images, headings, matcherConfig);
+
+    console.log(`[Main] ✅ 이미지-소제목 매칭 완료: ${JSON.stringify(matches)}`);
+    return { success: true, matches };
+
+  } catch (error) {
+    console.error('[Main] ❌ 이미지-소제목 매칭 실패:', error);
+    // 폴백: 순차 배치
+    return { success: true, matches: headings.map((_: string, i: number) => i % images.length) };
   }
 });
 
@@ -2337,7 +3100,7 @@ ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ u
 
       try {
         const ext = getExtensionFromContentType(result.contentType, img.url);
-        const safeHeading = img.heading.replace(/[<>:"/\\|?*]/g, '_').substring(0, 50);
+        const safeHeading = img.heading.replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/g, '').substring(0, 50);
         const fileName = `${i + 1}_${safeHeading}${ext}`;
         const filePath = path.join(imagesPath, fileName);
 
@@ -2463,6 +3226,237 @@ ipcMain.handle('image:generateProsConsTable', async (_event, options: {
   }
 });
 
+// ✅ [2026-01-27] 테스트 이미지 생성 핸들러 (스타일 미리보기용)
+// ✅ [2026-02-08] engine, textOverlay 파라미터 추가
+ipcMain.handle('generate-test-image', async (_event, options: {
+  style: string;
+  ratio: string;
+  prompt: string;
+  engine?: string;
+  textOverlay?: { enabled: boolean; text: string };
+}) => {
+  try {
+    const { style, ratio, prompt, engine, textOverlay } = options;
+    console.log(`[Main] 🎨 테스트 이미지 생성: style=${style}, ratio=${ratio}, engine=${engine || '(config)'}, textOverlay=${textOverlay?.enabled || false}`);
+
+    const config = await loadConfig();
+    // ✅ [2026-02-08] engine 파라미터가 있으면 임시 엔진 사용, 없으면 저장된 설정
+    const imageSource = engine || (config as any).globalImageSource || 'deepinfra';
+
+    // API 키 결정
+    let apiKey = '';
+    if (imageSource === 'nano-banana-pro' || imageSource.includes('gemini')) {
+      apiKey = config.geminiApiKey || '';
+    } else {
+      apiKey = (config as any).deepinfraApiKey || '';
+    }
+
+    if (!apiKey) {
+      return { success: false, error: '이미지 생성을 위한 API 키가 설정되지 않았습니다.' };
+    }
+
+    // ✅ [2026-02-08] 11가지 스타일별 프롬프트 (3카테고리 동기화)
+    const stylePromptMap: Record<string, string> = {
+      // 📷 실사
+      'realistic': 'Hyper-realistic professional photography, 8K UHD quality, DSLR camera, natural lighting, cinematic composition, Fujifilm XT3 quality', // ✅ [2026-02-12] authentic Korean person 제거 (카테고리별 스타일에서 처리)
+      'bokeh': 'Beautiful bokeh photography, shallow depth of field, dreamy out-of-focus background lights, soft circular bokeh orbs, DSLR wide aperture f/1.4 quality, romantic atmosphere',
+      // 🖌️ 아트
+      'vintage': 'Vintage retro illustration, 1950s poster art style, muted color palette, nostalgic aesthetic, old-fashioned charm, classic design elements, aged paper texture',
+      'minimalist': 'Minimalist flat design, simple clean lines, solid colors, modern aesthetic, geometric shapes, professional infographic style, san-serif typography',
+      '3d-render': '3D render, Octane render quality, Cinema 4D style, Blender 3D art, realistic materials and textures, studio lighting setup, high-end 3D visualization',
+      'korean-folk': 'Korean traditional Minhwa folk painting style, vibrant primary colors on hanji paper, stylized tiger and magpie motifs, peony flowers, pine trees, traditional Korean decorative patterns, bold flat color areas with fine ink outlines, cheerful folk art aesthetic',
+      // ✨ 이색
+      'stickman': 'Cute chibi cartoon character with oversized round white head much larger than body, simple black dot eyes, small expressive mouth showing emotion, tiny simple body wearing colorful casual clothes, thick bold black outlines, flat cel-shaded colors with NO gradients, detailed colorful background scene that matches the topic, Korean internet meme comic art style, humorous and lighthearted mood, web comic panel composition, clean high quality digital vector art, NO TEXT NO LETTERS NO WATERMARK',
+      'roundy': 'Adorable chubby round blob character with extremely round soft body and very short stubby limbs, small dot eyes and tiny happy smile, pure white or soft pastel colored body, soft rounded outlines with NO sharp edges, dreamy pastel colored background with gentle gradient, Molang and Sumikko Gurashi inspired kawaii aesthetic, healing and cozy atmosphere, minimalist cute Korean character design, soft lighting with gentle shadows, warm comforting mood, high quality digital illustration, NO TEXT NO LETTERS NO WATERMARK',
+      'claymation': 'Claymation stop-motion style, cute clay figurines, handmade plasticine texture, soft rounded shapes, miniature diorama set, warm studio lighting',
+      'neon-glow': 'Neon glow effect, luminous light trails, dark background with vibrant neon lights, synthwave aesthetic, glowing outlines, electric blue and hot pink',
+      'papercut': 'Paper cut art style, layered paper craft, 3D paper sculpture effect, shadow between layers, handmade tactile texture, colorful construction paper, kirigami aesthetic',
+      'isometric': 'Isometric 3D illustration, cute isometric pixel world, 30-degree angle view, clean geometric shapes, pastel color palette, miniature city/scene, game-like perspective',
+      // 🎨 2D 일러스트 (✅ [2026-02-17] 신규)
+      '2d': 'Korean webtoon style 2D illustration, vibrant flat colors, clean line art, manhwa aesthetic, modern Korean digital illustration, soft pastel palette, cute and expressive character design, NO TEXT NO WRITING'
+    };
+
+    const stylePrompt = stylePromptMap[style] || stylePromptMap['realistic'];
+
+    // ✅ 실사 외 스타일인 경우 강화 (실제 생성과 동일 - nanoBananaProGenerator.ts 553-556)
+    let finalPrompt: string;
+    if (style !== 'realistic') {
+      finalPrompt = `[ART STYLE: ${style.toUpperCase()}]\n${stylePrompt}\n\n${prompt}\n\nIMPORTANT: Generate the image in ${style} style. DO NOT generate photorealistic images.`;
+      console.log(`[Main] 🎨 스타일 프롬프트 강화 적용: ${style}`);
+    } else {
+      finalPrompt = `${stylePrompt}\n\n${prompt}`;
+    }
+
+    // 비율 → 해상도 매핑
+    const ratioMap: Record<string, { width: number; height: number }> = {
+      '1:1': { width: 1024, height: 1024 },
+      '16:9': { width: 1344, height: 768 },
+      '9:16': { width: 768, height: 1344 },
+      '4:3': { width: 1152, height: 896 },
+      '3:4': { width: 896, height: 1152 },
+    };
+    const resolution = ratioMap[ratio] || ratioMap['1:1'];
+
+    // 이미지 생성 (사용자 설정에 따라 엔진 선택)
+    let imagePath: string;
+
+    console.log(`[Main] 🎨 테스트 이미지 생성 - 엔진: ${imageSource}, 스타일: ${style}`);
+
+    if (imageSource === 'nano-banana-pro' || imageSource.includes('gemini')) {
+      // ✅ 나노바나나프로 (Gemini) 사용 - 실제 생성과 동일 옵션
+      const { generateWithNanoBananaPro } = await import('./image/nanoBananaProGenerator.js');
+      const testItem = {
+        heading: prompt || '테스트 이미지',
+        prompt: finalPrompt,
+        imageStyle: style,  // ✅ 스타일 전달
+        imageRatio: ratio,
+        aspectRatio: ratio,
+      };
+
+      const results = await generateWithNanoBananaPro(
+        [testItem],
+        'test-image',
+        'Test',
+        false,
+        apiKey,
+        false,
+        undefined,
+        undefined
+      );
+
+      if (results && results.length > 0 && results[0].filePath) {
+        imagePath = results[0].filePath;
+      } else {
+        throw new Error('나노바나나프로 이미지 생성 실패');
+      }
+    } else if (imageSource === 'deepinfra' || imageSource === 'deepinfra-flux') {
+      // ✅ [2026-02-08] DeepInfra 사용 - 설정 모델 동적 선택
+      const DEEPINFRA_MODEL_MAP: Record<string, string> = {
+        'flux-2-dev': 'black-forest-labs/FLUX-2-dev',
+        'flux-dev': 'black-forest-labs/FLUX-1-dev',
+        'flux-schnell': 'black-forest-labs/FLUX-1-schnell'
+      };
+      const selectedModelKey = (config as any).deepinfraModel || 'flux-2-dev';
+      const actualModel = DEEPINFRA_MODEL_MAP[selectedModelKey] || 'black-forest-labs/FLUX-2-dev';
+      console.log(`[Main] 🔧 DeepInfra 모델: ${selectedModelKey} → ${actualModel}`);
+
+      const { generateSingleDeepInfraImage } = await import('./image/deepinfraGenerator.js');
+      const sizeStr = `${resolution.width}x${resolution.height}`;
+      const result = await generateSingleDeepInfraImage(
+        { prompt: finalPrompt, size: sizeStr, model: actualModel },
+        apiKey
+      );
+
+      if (result.success && result.localPath) {
+        imagePath = result.localPath;
+      } else {
+        throw new Error(result.error || 'DeepInfra 이미지 생성 실패');
+      }
+    } else if (imageSource === 'openai-image') {
+      // ✅ [2026-02-22] OpenAI Image (DALL-E / gpt-image-1)
+      console.log(`[Main] 🎨 OpenAI Image 엔진으로 테스트 이미지 생성`);
+      const { generateSingleOpenAIImage } = await import('./image/openaiImageGenerator.js');
+      const apiKeyOpenAI = (config as any).openaiImageApiKey;
+      if (!apiKeyOpenAI) throw new Error('OpenAI Image API 키가 설정되지 않았습니다.');
+
+      const result = await generateSingleOpenAIImage(
+        { prompt: finalPrompt, size: `${resolution.width}x${resolution.height}` },
+        apiKeyOpenAI
+      );
+
+      if (result.success && result.localPath) {
+        imagePath = result.localPath;
+      } else {
+        throw new Error(result.error || 'OpenAI Image 이미지 생성 실패');
+      }
+    } else if (imageSource === 'leonardoai') {
+      // ✅ [2026-02-22] Leonardo AI
+      console.log(`[Main] 🎨 Leonardo AI 엔진으로 테스트 이미지 생성`);
+      const { generateSingleLeonardoAIImage } = await import('./image/leonardoAIGenerator.js');
+      const leonardoKey = (config as any).leonardoaiApiKey;
+      if (!leonardoKey) throw new Error('Leonardo AI API 키가 설정되지 않았습니다.');
+      const leonardoModel = (config as any).leonardoaiModel || 'seedream-4.5';
+
+      const result = await generateSingleLeonardoAIImage(
+        { prompt: finalPrompt, size: `${resolution.width}x${resolution.height}`, model: leonardoModel },
+        leonardoKey
+      );
+
+      if (result.success && result.localPath) {
+        imagePath = result.localPath;
+      } else {
+        throw new Error(result.error || 'Leonardo AI 이미지 생성 실패');
+      }
+    } else {
+      // ✅ 알 수 없는 엔진 → DeepInfra 폴백
+      console.warn(`[Main] ⚠️ 알 수 없는 엔진 "${imageSource}", DeepInfra로 폴백`);
+      const { generateSingleDeepInfraImage } = await import('./image/deepinfraGenerator.js');
+      const sizeStr = `${resolution.width}x${resolution.height}`;
+      const result = await generateSingleDeepInfraImage(
+        { prompt: finalPrompt, size: sizeStr },
+        apiKey
+      );
+
+      if (result.success && result.localPath) {
+        imagePath = result.localPath;
+      } else {
+        throw new Error(result.error || '이미지 생성 실패');
+      }
+    }
+
+    // 파일 저장 (이미 생성된 이미지 경로를 test-images 폴더로 복사)
+    const testImagesDir = path.join(app.getPath('userData'), 'test-images');
+    await fs.mkdir(testImagesDir, { recursive: true });
+
+    const fileName = `test_${style}_${ratio.replace(':', 'x')}_${Date.now()}.png`;
+    const filePath = path.join(testImagesDir, fileName);
+
+    // 생성된 이미지를 test-images 폴더로 복사
+    await fs.copyFile(imagePath, filePath);
+
+    // ✅ [2026-02-08] 텍스트 오버레이 적용 (활성화된 경우)
+    let previewDataUrl: string | undefined;
+    if (textOverlay?.enabled && textOverlay.text) {
+      try {
+        console.log(`[Main] 📝 텍스트 오버레이 적용 중: "${textOverlay.text}"`);
+        const { ThumbnailService } = await import('./thumbnailService.js');
+        const thumbnailService = new ThumbnailService();
+
+        // ✅ 오버레이 적용된 이미지를 별도 파일로 저장
+        const overlayFileName = `test_overlay_${style}_${ratio.replace(':', 'x')}_${Date.now()}.png`;
+        const overlayFilePath = path.join(testImagesDir, overlayFileName);
+
+        const resultPath = await thumbnailService.createProductThumbnail(
+          filePath,
+          textOverlay.text,
+          overlayFilePath,
+          { fontSize: 48, textColor: '#FFFFFF', position: 'bottom' }
+        );
+
+        if (resultPath && typeof resultPath === 'string') {
+          // base64로 변환하여 previewDataUrl 생성
+          const imageBuffer = await fs.readFile(resultPath);
+          previewDataUrl = `data:image/png;base64,${imageBuffer.toString('base64')}`;
+
+          console.log(`[Main] ✅ 텍스트 오버레이 완료: ${resultPath}`);
+          return { success: true, path: resultPath, previewDataUrl };
+        } else {
+          console.warn(`[Main] ⚠️ 텍스트 오버레이 실패, 원본 이미지 반환`);
+        }
+      } catch (overlayError) {
+        console.warn(`[Main] ⚠️ 텍스트 오버레이 오류 (원본 이미지 반환):`, (overlayError as Error).message);
+      }
+    }
+
+    console.log(`[Main] ✅ 테스트 이미지 생성 완료: ${filePath}`);
+    return { success: true, path: filePath, previewDataUrl };
+
+  } catch (error) {
+    console.error('[Main] ❌ 테스트 이미지 생성 오류:', error);
+    return { success: false, error: (error as Error).message };
+  }
+});
+
 // 플랫폼에서 콘텐츠 수집 (실시간 정보)
 ipcMain.handle('content:collectFromPlatforms', async (_event, keyword: string, options?: { maxPerSource?: number; targetDate?: string }) => {
   try {
@@ -2521,6 +3515,42 @@ ipcMain.handle('quota:getStatus', async () => {
   } catch (error) {
     console.error('[Main] quota:getStatus 오류:', error);
     return { success: false, message: (error as Error).message };
+  }
+});
+
+// ✅ [2026-03-02] 이미지 API 일일 사용량 조회 (대시보드용)
+ipcMain.handle('quota:getImageUsage', async () => {
+  try {
+    const { getImageApiStatus } = await import('./quotaManager.js');
+    const status = await getImageApiStatus();
+    return { success: true, ...status };
+  } catch (error) {
+    return { success: false, message: (error as Error).message };
+  }
+});
+
+// ✅ [2026-03-02] Leonardo AI 크레딧 잔액 조회
+ipcMain.handle('quota:getLeonardoCredits', async () => {
+  try {
+    const config = await loadConfig();
+    const apiKey = (config as any).leonardoaiApiKey as string;
+    if (!apiKey) {
+      return { success: false, message: 'API 키 미설정' };
+    }
+    const axios = (await import('axios')).default;
+    const response = await axios.get('https://cloud.leonardo.ai/api/rest/v1/me', {
+      headers: { 'Authorization': `Bearer ${apiKey}` },
+      timeout: 10000,
+    });
+    const userData = response.data?.user_details?.[0] || response.data;
+    return {
+      success: true,
+      credits: userData.apiConcurrencySlots || userData.apiCredit || userData.tokenRenewalDate || 0,
+      apiPlanTokenRenewalDate: userData.apiPlanTokenRenewalDate || null,
+      raw: userData,
+    };
+  } catch (error: any) {
+    return { success: false, message: error?.response?.status === 401 ? 'API 키 인증 실패' : (error as Error).message };
   }
 });
 
@@ -2593,10 +3623,38 @@ ipcMain.handle('automation:closeBrowser', async () => {
 });
 
 
+// ✅ [2026-02-12] 소제목별 이미지 자동 검색 - 네이버 → 구글 폴백
+ipcMain.handle('search-images-for-headings', async (_event, payload: {
+  headings: string[];
+  mainKeyword: string;
+}) => {
+  try {
+    console.log(`[Main] 🖼️ search-images-for-headings 시작: ${payload.headings.length}개 소제목`);
+
+    const { searchImagesForHeadings } = await import('./crawler/googleImageSearch.js');
+    const resultMap = await searchImagesForHeadings(
+      payload.headings,
+      payload.mainKeyword
+    );
+
+    // Map → 일반 객체로 변환 (IPC 전송용)
+    const result: Record<string, string[]> = {};
+    for (const [heading, urls] of resultMap.entries()) {
+      result[heading] = urls;
+    }
+
+    console.log(`[Main] ✅ search-images-for-headings 완료: ${Object.keys(result).length}개 매칭`);
+    return { success: true, images: result };
+  } catch (error: any) {
+    console.error(`[Main] ❌ search-images-for-headings 실패:`, error);
+    return { success: false, message: error.message, images: {} };
+  }
+});
+
+
 ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
   // ============================================
   //  [리팩토링] 새 엔진으로 완전 위임
-  // 기존 632줄  37줄 단일 위임
   // ============================================
 
   console.log('[Main] automation:run  AutomationService.executePostCycle() 위임');
@@ -2607,41 +3665,70 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
     return validationResult.response;
   }
 
-  try {
-    //  새 엔진 호출 (BlogExecutor.runFullPostCycle 실행)
-    const result = await AutomationService.executePostCycle(payload as any);
+  // ✅ [2026-03-01 FIX] 선차감 패턴: 발행 전에 쿼터를 먼저 차감
+  let preConsumed = false;
+  const isFreeUser = await AuthUtils.isFreeTierUser();
+  if (isFreeUser) {
+    try {
+      const newState = await consumeQuota('publish', 1);
+      preConsumed = true;
+      console.log(`[Main] 무료 사용자: publish 쿼터 선차감 완료 (현재: ${newState.publish})`);
+    } catch (quotaError) {
+      console.error('[Main] 쿼터 선차감 중 오류 (무시됨):', quotaError);
+    }
+  }
 
-    //  결과 반환
-    if (result.success) {
-      // ✅ [2026-01-16] 무료 사용자 횟수 차감 (자동화 성공 시)
-      try {
-        const { isFreeTierUser } = await import('./main/utils/authUtils.js');
-        const { consume: consumeQuota } = await import('./quotaManager.js');
+  // ✅ [FIX-6] 실행 잠금 래핑 — 동시 인스턴스 방지
+  const runPromise = (async () => {
+    try {
+      //  새 엔진 호출 (BlogExecutor.runFullPostCycle 실행)
+      const result = await AutomationService.executePostCycle(payload as any);
 
-        if (await isFreeTierUser()) {
-          console.log('[Main] 무료 사용자: 자동화 성공으로 publish 쿼터 1회 차감 시도...');
-          const newState = await consumeQuota('publish', 1);
-          console.log(`[Main] 무료 사용자 쿼터 차감 완료. 남은 횟수 확인 필요 (현재 publish: ${newState.publish})`);
+      //  결과 반환
+      if (result.success) {
+        console.log('[Main] 발행 성공: 선차감된 쿼터 확정');
+        sendStatus({ success: true, url: result.url, message: result.message });
+      } else if (result.cancelled) {
+        if (preConsumed) {
+          try {
+            const refunded = await refundQuota('publish', 1);
+            console.log(`[Main] 발행 취소: 쿼터 환불 완료 (현재: ${refunded.publish})`);
+          } catch (e) { console.error('[Main] 쿼터 환불 오류:', e); }
         }
-      } catch (quotaError) {
-        console.error('[Main] 쿼터 차감 중 오류 (무시됨):', quotaError);
+        sendStatus({ success: false, cancelled: true, message: result.message });
+      } else {
+        if (preConsumed) {
+          try {
+            const refunded = await refundQuota('publish', 1);
+            console.log(`[Main] 발행 실패: 쿼터 환불 완료 (현재: ${refunded.publish})`);
+          } catch (e) { console.error('[Main] 쿼터 환불 오류:', e); }
+        }
+        sendStatus({ success: false, message: result.message });
       }
 
-      sendStatus({ success: true, url: result.url, message: result.message });
-    } else if (result.cancelled) {
-      sendStatus({ success: false, cancelled: true, message: result.message });
-    } else {
-      sendStatus({ success: false, message: result.message });
+      return result;
+
+    } catch (error) {
+      if (preConsumed) {
+        try {
+          const refunded = await refundQuota('publish', 1);
+          console.log(`[Main] 자동화 오류: 쿼터 환불 완료 (현재: ${refunded.publish})`);
+        } catch (e) { console.error('[Main] 쿼터 환불 오류:', e); }
+      }
+      const message = (error as Error).message || '자동화 실행 중 오류가 발생했습니다.';
+      console.error('[Main] automation:run 오류:', message);
+      sendStatus({ success: false, message });
+      AutomationService.stopRunning();
+      return { success: false, message };
     }
+  })();
 
-    return result;
-
-  } catch (error) {
-    const message = (error as Error).message || '자동화 실행 중 오류가 발생했습니다.';
-    console.error('[Main] automation:run 오류:', message);
-    sendStatus({ success: false, message });
-    AutomationService.stopRunning();
-    return { success: false, message };
+  // ✅ [FIX-6] 잠금 설정 → 완료 후 해제
+  setExecutionLock(runPromise);
+  try {
+    return await runPromise;
+  } finally {
+    setExecutionLock(null);
   }
 });
 
@@ -2667,6 +3754,17 @@ ipcMain.handle('automation:cancel', async () => {
 });
 
 
+// ✅ [2026-02-23 FIX] 이미지 생성 전체 상태 초기화 IPC 핸들러
+ipcMain.handle('automation:resetImageState', async () => {
+  try {
+    resetAllImageState();
+    return { success: true };
+  } catch (error) {
+    console.error('[Main] 이미지 상태 초기화 실패:', error);
+    return { success: false, message: (error as Error).message };
+  }
+});
+
 ipcMain.handle(
   'automation:generateImages',
   async (_event, options: GenerateImagesOptions): Promise<{ success: boolean; images?: GeneratedImage[]; message?: string }> => {
@@ -2682,12 +3780,14 @@ ipcMain.handle(
       const apiKeys = {
         openaiApiKey: config.openaiApiKey,
         pexelsApiKey: config.pexelsApiKey,
-        stabilityApiKey: config.stabilityApiKey, // ✅ Stability AI 키 추가
         unsplashApiKey: config.unsplashApiKey,
         pixabayApiKey: config.pixabayApiKey,
-        geminiApiKey: config.geminiApiKey, // ✅ Gemini 키 추가
-        prodiaToken: (config as any).prodiaToken,
-        falaiApiKey: (config as any).falaiApiKey, // ✅ Fal.ai 키 추가
+        geminiApiKey: config.geminiApiKey,
+        deepinfraApiKey: (config as any).deepinfraApiKey,
+        // ✅ [2026-02-22] 새 이미지 프로바이더 API 키
+        openaiImageApiKey: (config as any).openaiImageApiKey,
+        leonardoaiApiKey: (config as any).leonardoaiApiKey,
+
       };
 
       // ✅ 쇼핑커넥트 모드: 수집된 이미지를 각 item의 referenceImagePath로 배분
@@ -2716,6 +3816,44 @@ ipcMain.handle(
         console.log(`[Main] 🛒 쇼핑커넥트 옵션 설정 완료: isShoppingConnect=true, collectedImages=${collectedImages.length}개`);
       }
 
+      // ✅ [2026-01-29 FIX] sourceUrl이 있으면 자동으로 이미지 크롤링 → crawledImages로 전달 (img2img 활성화)
+      const sourceUrl = (options as any).sourceUrl || '';
+      if (sourceUrl && sourceUrl.startsWith('http') && collectedImages.length === 0) {
+        try {
+          console.log(`[Main] 🔗 sourceUrl에서 이미지 크롤링 시작: ${sourceUrl.substring(0, 60)}...`);
+          const SmartCrawler = (await import('./crawler/smartCrawler.js')).SmartCrawler;
+          const crawler = new SmartCrawler();
+          const crawlResult = await crawler.crawl(sourceUrl, {
+            maxLength: 5000,
+            timeout: 15000,
+            extractImages: true,
+          });
+
+          if (crawlResult && crawlResult.images && crawlResult.images.length > 0) {
+            const urlImages = crawlResult.images
+              .filter((img: any) => typeof img === 'string' && img.startsWith('http'))
+              .slice(0, 10); // 최대 10개만 사용
+
+            if (urlImages.length > 0) {
+              (options as any).crawledImages = urlImages;
+              console.log(`[Main] ✅ URL에서 ${urlImages.length}개 이미지 크롤링 완료 → img2img 활성화`);
+
+              // 각 item에 referenceImageUrl 배분
+              if (options.items) {
+                options.items.forEach((item: any, idx: number) => {
+                  if (!item.referenceImageUrl && !item.referenceImagePath) {
+                    item.referenceImageUrl = urlImages[idx % urlImages.length];
+                    console.log(`[Main]   📎 [${idx + 1}] "${(item.heading || '').substring(0, 20)}" → img2img 참조`);
+                  }
+                });
+              }
+            }
+          }
+        } catch (crawlErr) {
+          console.warn(`[Main] ⚠️ URL 이미지 크롤링 실패: ${(crawlErr as Error).message}`);
+        }
+      }
+
       // ✅ [2026-01-24] headingImageMode에 따른 items 필터링
       const headingImageMode = (options as any).headingImageMode || 'all';
       const isShoppingConnectMode = (options as any).isShoppingConnect === true;
@@ -2737,51 +3875,41 @@ ipcMain.handle(
           const heading = (item.heading || '').toLowerCase();
           const origIdx = (item as any).originalIndex ?? idx;
 
-          let isThumbnail: boolean;
-          if (isShoppingConnectMode) {
-            // 쇼핑커넥트: item.isThumbnail === true인 경우만 썸네일
-            // (실제로는 수집 이미지가 썸네일이므로 AI 생성 items에는 없을 것)
-            isThumbnail = item.isThumbnail === true ||
-              heading.includes('썸네일') ||
-              heading.includes('thumbnail');
-          } else {
-            // 일반 모드: 첫 번째 항목(origIdx === 0)이 대표 이미지
-            isThumbnail = origIdx === 0 ||
-              item.isThumbnail === true ||
-              heading.includes('썸네일') ||
-              heading.includes('thumbnail') ||
-              heading.includes('서론') ||
-              heading.includes('대표');
-          }
+          // ✅ [2026-02-23 FIX] 모든 모드 통합 - 썸네일은 isThumbnail 플래그 또는 heading 기반
+          const isThumbnail = item.isThumbnail === true ||
+            heading.includes('썸네일') ||
+            heading.includes('thumbnail') ||
+            heading.includes('서론') ||
+            heading.includes('대표');
 
           let shouldInclude = false;
           switch (headingImageMode) {
             case 'thumbnail-only':
-              // 쇼핑커넥트: 썸네일은 수집 이미지 → AI 생성 불필요 → 모두 false
-              // 일반 모드: origIdx === 0만 true
+              // 썸네일만 포함
               shouldInclude = isThumbnail;
               break;
             case 'odd-only':
-              // 홀수: 1번(origIdx=0), 3번(origIdx=2), 5번(origIdx=4)... → origIdx가 짝수
-              if (isShoppingConnectMode) {
-                // 썸네일 없으므로 순수 소제목 인덱스로 계산 (1-indexed 기준 홀수 = 0, 2, 4...)
-                shouldInclude = origIdx % 2 === 0;
+              // ✅ [2026-02-23 FIX] 썸네일 항상 포함 + 홀수 인덱스 (썸네일 포함 카운트)
+              // 썸네일(origIdx=0) = 항상 포함
+              // 소제목1(origIdx=1) = 홀수 → 포함
+              // 소제목2(origIdx=2) = 짝수 → 제외
+              // 소제목3(origIdx=3) = 홀수 → 포함
+              if (isThumbnail) {
+                shouldInclude = true;
               } else {
-                // 일반 모드: 대표(origIdx=0)는 항상 포함 + 홀수 소제목
-                // 1번 소제목(origIdx=0) = 대표, 포함
-                // 2번 소제목(origIdx=1) = 짝수, 제외
-                // 3번 소제목(origIdx=2) = 홀수, 포함
-                // ...
-                shouldInclude = origIdx === 0 || origIdx % 2 === 0;
+                shouldInclude = origIdx % 2 === 1; // 홀수 인덱스
               }
               break;
             case 'even-only':
-              // 짝수: 2번(origIdx=1), 4번(origIdx=3), 6번(origIdx=5)... → origIdx가 홀수
-              if (isShoppingConnectMode) {
-                shouldInclude = origIdx % 2 === 1;
+              // ✅ [2026-02-23 FIX] 썸네일 항상 포함 + 짝수 인덱스 (썸네일 포함 카운트)
+              // 썸네일(origIdx=0) = 항상 포함
+              // 소제목1(origIdx=1) = 홀수 → 제외
+              // 소제목2(origIdx=2) = 짝수 → 포함
+              // 소제목3(origIdx=3) = 홀수 → 제외
+              if (isThumbnail) {
+                shouldInclude = true;
               } else {
-                // 일반 모드: 대표(origIdx=0)는 항상 포함 + 짝수 소제목
-                shouldInclude = origIdx === 0 || origIdx % 2 === 1;
+                shouldInclude = origIdx % 2 === 0;
               }
               break;
             case 'none':
@@ -2802,7 +3930,66 @@ ipcMain.handle(
         console.log(`[Main] 🖼️ 생성할 이미지 원래 인덱스: [${remainingIndices.join(', ')}]`);
       }
 
-      const images = await generateImages(options, apiKeys);
+      // ✅ [2026-01-27] 각 아이템에 isThumbnail 기반 개별 비율 적용
+      // thumbnailImageRatio: 썸네일(1번 소제목) 전용 비율
+      // subheadingImageRatio: 나머지 소제목 전용 비율
+      const thumbnailRatio = (options as any).thumbnailImageRatio || (options as any).imageRatio || '1:1';
+      const subheadingRatio = (options as any).subheadingImageRatio || (options as any).imageRatio || '1:1';
+
+      if (options.items && options.items.length > 0) {
+        options.items = options.items.map((item: any, idx: number) => {
+          const origIdx = item.originalIndex ?? idx;
+
+          // ✅ [2026-02-23 FIX] 모든 모드 통합 - isThumbnail 플래그 기반 비율 결정
+          const isThumbnailItem = item.isThumbnail === true ||
+            (item.heading || '').toLowerCase().includes('썸네일') ||
+            (item.heading || '').toLowerCase().includes('thumbnail');
+
+          // 비율 적용
+          const itemRatio = isThumbnailItem ? thumbnailRatio : subheadingRatio;
+
+          console.log(`[Main] 📐 비율 적용 - [origIdx=${origIdx}] "${(item.heading || '').substring(0, 20)}" isThumbnail=${isThumbnailItem} → ratio=${itemRatio}`);
+
+          return {
+            ...item,
+            imageRatio: itemRatio,
+            aspectRatio: itemRatio, // API에서 aspectRatio로 사용하는 경우 대비
+          };
+        });
+
+        console.log(`[Main] 📐 썸네일 비율: ${thumbnailRatio}, 소제목 비율: ${subheadingRatio}`);
+      }
+
+      // ✅ [2026-01-29 FIX] collectedImages를 crawledImages로 전달 (img2img 활성화)
+      if (collectedImages && collectedImages.length > 0) {
+        (options as any).crawledImages = collectedImages.map((img: any) =>
+          typeof img === 'string' ? img : (img.url || img.filePath || img.thumbnailUrl)
+        ).filter(Boolean);
+        console.log(`[Main] 🖼️ img2img 활성화: ${(options as any).crawledImages.length}개 크롤링 이미지 전달`);
+      }
+
+      // ✅ [2026-02-13 SPEED] 개별 이미지 완성 시 renderer에 실시간 전달 콜백
+      const onImageGenerated = (image: GeneratedImage, index: number, total: number) => {
+        try {
+          if (mainWindow && !mainWindow.isDestroyed()) {
+            mainWindow.webContents.send('automation:imageGenerated', { image, index, total });
+            console.log(`[Main] 🖼️ 이미지 실시간 전달 → renderer (${index + 1}/${total})`);
+          }
+        } catch (sendErr) {
+          console.warn(`[Main] ⚠️ 이미지 실시간 전달 실패:`, (sendErr as Error).message);
+        }
+      };
+
+      // ✅ [2026-02-18 DEBUG] IPC 수신 시점 provider 진단 로그
+      console.log(`[Main] 🔍🔍🔍 IPC 수신 options.provider = "${options.provider}" (type: ${typeof options.provider})`);
+      if (!options.provider || options.provider === 'nano-banana-pro') {
+        console.warn(`[Main] ⚠️⚠️⚠️ options.provider가 기본값! 스택: IPC automation:generateImages`);
+      }
+
+      // ✅ [2026-02-23 FIX] 이미지 생성 전 이전 캐시 완전 초기화
+      resetAllImageState();
+
+      const images = await generateImages(options, apiKeys, onImageGenerated);
 
       if (await isFreeTierUser()) {
         await consumeQuota('media', 1);
@@ -2821,8 +4008,85 @@ ipcMain.handle(
   async (_event, payload: {
     headings: any[];
     collectedImages: any[];
+    scSubImageSource?: 'ai' | 'collected'; // ✅ [2026-01-28] 수집 이미지 직접 사용 옵션
   }): Promise<{ success: boolean; assignments?: any[]; message?: string }> => {
     try {
+      // ✅ [2026-01-28] 수집 이미지 직접 사용 모드: AI 없이 순서대로 할당
+      const useCollectedDirectly = payload.scSubImageSource === 'collected';
+
+      if (useCollectedDirectly) {
+        console.log('[Main] 🖼️ 수집 이미지 직접 사용 모드: AI 없이 순서대로 할당');
+        console.log(`[Main]   📦 소제목 ${payload.headings.length}개, 수집 이미지 ${payload.collectedImages.length}개`);
+
+        // ✅ [2026-01-28] 중복/유사 이미지 필터링
+        // 1. URL 완전 일치 중복 제거
+        // 2. 같은 기본 이미지에서 파생된 유사 이미지 제거 (스티커, 라벨, 크기 차이 등)
+        const seenBaseUrls = new Set<string>();
+        const uniqueImages: typeof payload.collectedImages = [];
+
+        for (const img of payload.collectedImages) {
+          const url = img.url || img.thumbnailUrl || '';
+          if (!url) continue;
+
+          // URL에서 기본 이미지 식별자 추출 (쿼리 파라미터, 사이즈 변형 제거)
+          // 예: image_123.jpg?size=small → image_123
+          // 예: product_456_v1.jpg → product_456
+          let baseUrl = url
+            .replace(/\?.*$/, '')  // 쿼리 파라미터 제거
+            .replace(/(_v\d+|_\d{2,}x\d{2,}|_s\d+|_m\d+|_l\d+)(\.[a-z]+)?$/i, '$2')  // 사이즈 변형 제거
+            .replace(/[-_](small|medium|large|thumb|full|origin|detail|main|sub)(\.[a-z]+)?$/i, '$2');  // 타입 변형 제거
+
+          // 파일명만 추출해서 비교 (더 정확한 중복 감지)
+          const fileName = baseUrl.split('/').pop()?.replace(/\.[a-z]+$/i, '') || baseUrl;
+
+          // 숫자 부분 제거하여 기본 패턴 추출 (image_001, image_002 같은 연속 이미지 탐지)
+          const basePattern = fileName.replace(/[_-]?\d+$/, '');
+
+          // 이미 같은 기본 패턴의 이미지가 있으면 스킵
+          if (seenBaseUrls.has(basePattern) && basePattern.length > 5) {
+            console.log(`[Main]   🔄 유사 이미지 스킵: ${fileName.substring(0, 30)}...`);
+            continue;
+          }
+
+          // 완전 동일 URL 체크
+          if (seenBaseUrls.has(url)) {
+            console.log(`[Main]   🔄 중복 URL 스킵: ${url.substring(0, 50)}...`);
+            continue;
+          }
+
+          seenBaseUrls.add(url);
+          seenBaseUrls.add(basePattern);
+          uniqueImages.push(img);
+        }
+
+        console.log(`[Main]   🧹 중복/유사 제거: ${payload.collectedImages.length}개 → ${uniqueImages.length}개`);
+
+        const assignments = payload.headings.map((h, idx) => {
+          // ✅ 필터링된 고유 이미지만 사용
+          const img = idx < uniqueImages.length ? uniqueImages[idx] : null;
+
+          if (!img) {
+            console.log(`[Main]   ⚠️ 소제목 ${idx + 1} "${(h.title || h).substring(0, 15)}..." → 이미지 부족 (건너뜀)`);
+            return null;
+          }
+
+          console.log(`[Main]   ✅ 소제목 ${idx + 1} → 이미지 ${idx + 1}번 할당`);
+          return {
+            headingIndex: idx,
+            headingTitle: h.title || h,
+            imageUrl: img.url || img.thumbnailUrl,
+            imagePath: img.filePath,
+            source: img.source || 'collected',
+            confidence: 100,
+            reason: '수집 이미지 직접 사용 (중복 필터링 완료)',
+          };
+        }).filter(a => a !== null);
+
+        console.log(`[Main]   🎉 ${assignments.length}개 소제목에 고유 이미지 할당 완료`);
+        return { success: true, assignments };
+      }
+
+      // ✅ 기존 AI 매칭 로직
       const config = await loadConfig();
       if (!config.geminiApiKey) {
         return { success: false, message: 'Gemini API 키가 필요합니다.' };
@@ -3055,8 +4319,8 @@ ipcMain.handle('gemini:generateVeoVideo', async (_event, payload: {
     const config = await loadConfig();
     try {
       applyConfigToEnv(config);
-    } catch {
-      // ignore
+    } catch (e) {
+      console.warn('[main] catch ignored:', e);
     }
 
     const {
@@ -3076,64 +4340,11 @@ ipcMain.handle('gemini:generateVeoVideo', async (_event, payload: {
     let finalOutPath = '';
     let finalFileName = '';
 
-    // ✅ 1. Stability AI (SVD) 비디오 생성
+    // ✅ 1. Stability AI (SVD) 비디오 생성 — 제거됨 (deprecated provider)
     if (videoProvider === 'stability') {
-      const stabilityApiKey = (config.stabilityApiKey || '').trim();
-      if (!stabilityApiKey) throw new Error('Stability AI API 키가 설정되지 않았습니다.');
-
-      sendLog(`🎬 Stability AI 비디오 생성 시작... (Heading: ${headingForSave})`);
-
-      let videoImageBuffer: Buffer;
-      const imagePath = String(payload?.imagePath || '').trim();
-      const imageBytes = String(payload?.image?.imageBytes || '').trim();
-
-      if (imageBytes) {
-        videoImageBuffer = Buffer.from(imageBytes, 'base64');
-      } else if (imagePath) {
-        videoImageBuffer = await fs.readFile(imagePath);
-      } else {
-        throw new Error('Stability AI 영상 생성을 위한 이미지(imagePath 또는 imageBytes)가 필요합니다.');
-      }
-
-      const videoBuffer = await generateStabilityVideo(videoImageBuffer, stabilityApiKey);
-      const { fullPath: outPath, fileName } = await getUniqueMp4Path(mp4Dir, headingForSave);
-      await fs.writeFile(outPath, videoBuffer);
-
-      finalOutPath = outPath;
-      finalFileName = fileName;
-      sendLog(`✅ Stability AI 비디오 생성 완료: ${fileName}`);
+      throw new Error('Stability AI 비디오 생성은 더 이상 지원되지 않습니다. Veo를 사용하세요.');
     }
-    // ✅ 2. Prodia (SVD) 비디오 생성
-    else if (videoProvider === 'prodia') {
-      const prodiaToken = (config as any).prodiaToken || '';
-      if (!prodiaToken) throw new Error('Prodia API 토큰이 설정되지 않았습니다.');
-
-      sendLog(`🎬 Prodia 비디오 생성 시작... (Heading: ${headingForSave})`);
-
-      const axios = (await import('axios')).default;
-      const imagePath = String(payload?.imagePath || '').trim();
-      const imageBytes = String(payload?.image?.imageBytes || '').trim();
-      let b64 = imageBytes;
-      if (!b64 && imagePath) b64 = (await fs.readFile(imagePath)).toString('base64');
-
-      const job = {
-        type: 'inference.svd.v1',
-        config: { image: b64 }
-      };
-
-      const startRes = await axios.post('https://inference.prodia.com/v2/job', job, {
-        headers: { Authorization: `Bearer ${prodiaToken}`, Accept: 'application/octet-stream' },
-        responseType: 'arraybuffer'
-      });
-
-      const { fullPath: outPath, fileName } = await getUniqueMp4Path(mp4Dir, headingForSave);
-      await fs.writeFile(outPath, Buffer.from(startRes.data));
-
-      finalOutPath = outPath;
-      finalFileName = fileName;
-      sendLog(`✅ Prodia 비디오 생성 완료: ${fileName}`);
-    }
-    // ✅ 3. Veo (Gemini) 비디오 생성 (기존 로직 보전)
+    // ✅ 2. Veo (Gemini) 비디오 생성 (기존 로직 보전)
     else if (videoProvider === 'veo') {
       const apiKey = (process.env.GEMINI_API_KEY || '').trim();
       if (!apiKey) throw new Error('Gemini API 키가 설정되지 않았습니다.');
@@ -3456,11 +4667,11 @@ ipcMain.handle('aiAssistant:chat', async (_event, message: string) => {
       applyConfigToEnv(config);
       try {
         masterAgent.reinitGemini();
-      } catch {
-        // ignore
+      } catch (e) {
+        console.warn('[main] catch ignored:', e);
       }
-    } catch {
-      // ignore
+    } catch (e) {
+      console.warn('[main] catch ignored:', e);
     }
     const result = await masterAgent.processMessage(message);
     console.log('[AI Assistant] 응답 생성 완료:', result.success);
@@ -3497,28 +4708,32 @@ ipcMain.handle('aiAssistant:runAutoFix', async () => {
     const config = await loadConfig() as any;
     let configChanged = false;
 
-    // 1. Gemini 모델 수정 - ✅ 2026년 1월 기준 사용 가능한 모델만 유효
+    // 1. Gemini 모델 수정 - ✅ [2026-02-27] Gemini 2.5 기본, GA 모델 유지
     const validModels = [
-      'gemini-3-pro-preview',
+      'gemini-2.5-flash',
+      'gemini-2.5-pro',
+      'gemini-2.0-flash',
+      'gemini-3.1-pro-preview',
       'gemini-3-flash-preview',
-      'gemini-2.0-flash-exp',
     ];
 
-    // ✅ 이전 모델명 → 새 모델명 자동 마이그레이션
+    // ✅ 이전 모델명 → 새 모델명 자동 마이그레이션 (2026-03-05: 모든 텍스트 모델 → gemini-2.5-flash 통합)
     const modelMigrationMap: Record<string, string> = {
-      'gemini-3-pro': 'gemini-3-pro-preview',
-      'gemini-3-flash': 'gemini-3-flash-preview',
-      'gemini-3-pro-preview': 'gemini-3-pro-preview',
-      'gemini-3-flash-preview': 'gemini-3-flash-preview',
-      'gemini-2.5-pro-preview': 'gemini-3-pro-preview',
-      'gemini-2.5-flash': 'gemini-3-flash-preview',
-      'gemini-2.0-flash-exp': 'gemini-2.0-flash-exp',
-      'gemini-2.0-flash': 'gemini-2.0-flash-exp',
-      'gemini-1.5-flash': 'gemini-3-flash-preview',
-      'gemini-1.5-flash-latest': 'gemini-3-flash-preview',
-      'gemini-1.5-pro': 'gemini-3-pro-preview',
-      'gemini-1.5-pro-latest': 'gemini-3-pro-preview',
-      'gemini-1.5-flash-8b': 'gemini-3-flash-preview',
+      'gemini-3.1-pro-preview': 'gemini-2.5-flash', // ✅ 3.1 Pro → 2.5 Flash (속도 우선)
+      'gemini-3-pro': 'gemini-2.5-flash',           // 3 Pro → 2.5 Flash
+      'gemini-3-flash': 'gemini-2.5-flash',
+      'gemini-3-pro-preview': 'gemini-2.5-flash',   // ✅ 3 Pro Preview → 2.5 Flash
+      'gemini-3-flash-preview': 'gemini-2.5-flash',
+      'gemini-2.5-pro-preview': 'gemini-2.5-flash', // GA 모델로
+      'gemini-2.5-pro': 'gemini-2.5-flash',         // Pro → Flash (속도 우선)
+      'gemini-2.5-flash': 'gemini-2.5-flash',       // 자기 자신 유지
+      'gemini-2.0-flash-exp': 'gemini-2.5-flash',   // 2.5로 업그레이드
+      'gemini-2.0-flash': 'gemini-2.5-flash',       // 2.5로 업그레이드
+      'gemini-1.5-flash': 'gemini-2.5-flash',       // 2.5로 업그레이드
+      'gemini-1.5-flash-latest': 'gemini-2.5-flash',
+      'gemini-1.5-pro': 'gemini-2.5-flash',
+      'gemini-1.5-pro-latest': 'gemini-2.5-flash',
+      'gemini-1.5-flash-8b': 'gemini-2.5-flash',
     };
 
     // 저장된 모델이 마이그레이션 대상인 경우 자동 변환
@@ -3530,13 +4745,13 @@ ipcMain.handle('aiAssistant:runAutoFix', async () => {
     }
 
     if (config.geminiModel && !validModels.includes(config.geminiModel)) {
-      config.geminiModel = 'gemini-3-pro-preview';
+      config.geminiModel = 'gemini-2.5-flash';
       configChanged = true;
-      fixResults.push({ action: 'Gemini 모델', success: true, message: '권장 모델(gemini-3-pro-preview)로 변경됨' });
+      fixResults.push({ action: 'Gemini 모델', success: true, message: '권장 모델(gemini-2.5-flash)로 변경됨' });
     }
 
     if (!config.geminiModel) {
-      config.geminiModel = 'gemini-3-pro-preview';
+      config.geminiModel = 'gemini-2.5-flash';
       configChanged = true;
       fixResults.push({ action: 'Gemini 모델 설정', success: true, message: '기본 모델 설정됨' });
     }
@@ -3958,6 +5173,67 @@ ipcMain.handle('keyword:discoverGoldenBySingleCategory', async (_event, category
   }
 });
 
+// ✅ 베스트 상품 자동 수집 IPC 핸들러
+ipcMain.handle('bestProduct:getCategories', async (_event, platform: string = 'all') => {
+  try {
+    const categories = bestProductCollector.getCategories(platform as any);
+    return { success: true, categories };
+  } catch (error) {
+    return { success: false, message: `카테고리 조회 실패: ${(error as Error).message}` };
+  }
+});
+
+ipcMain.handle('bestProduct:fetchCoupang', async (_event, categoryId: string = 'all', maxCount: number = 20, useAdsPower: boolean = false) => {
+  try {
+    sendLog(`🛒 쿠팡 ${categoryId} 베스트 상품 수집 중... (AdsPower: ${useAdsPower ? 'ON' : 'OFF'})`);
+    const result = await bestProductCollector.fetchCoupangBest(categoryId, maxCount, useAdsPower);
+    if (result.success) {
+      sendLog(`✅ 쿠팡 ${result.categoryName}: ${result.products.length}개 수집 완료`);
+    } else {
+      sendLog(`⚠️ 쿠팡 수집 실패: ${result.error || '상품을 찾을 수 없습니다'}`);
+    }
+    return result;
+  } catch (error) {
+    return { success: false, products: [], platform: 'coupang', category: categoryId, categoryName: '', fetchedAt: new Date().toISOString(), error: (error as Error).message };
+  }
+});
+
+ipcMain.handle('bestProduct:fetchNaver', async (_event, categoryId: string = 'all', maxCount: number = 20, useAdsPower: boolean = false) => {
+  try {
+    sendLog(`🔍 네이버 쇼핑 ${categoryId} 인기상품 수집 중... (AdsPower: ${useAdsPower ? 'ON' : 'OFF'})`);
+    const result = await bestProductCollector.fetchNaverBest(categoryId, maxCount, useAdsPower);
+    if (result.success) {
+      sendLog(`✅ 네이버 ${result.categoryName}: ${result.products.length}개 수집 완료`);
+    } else {
+      sendLog(`⚠️ 네이버 수집 실패: ${result.error || '상품을 찾을 수 없습니다'}`);
+    }
+    return result;
+  } catch (error) {
+    return { success: false, products: [], platform: 'naver', category: categoryId, categoryName: '', fetchedAt: new Date().toISOString(), error: (error as Error).message };
+  }
+});
+
+ipcMain.handle('bestProduct:fetchAll', async (_event, categoryId: string = 'all', maxCount: number = 10) => {
+  try {
+    sendLog(`🔥 쿠팡+네이버 베스트 통합 수집 중...`);
+    const result = await bestProductCollector.fetchAllBest(categoryId, maxCount);
+    const total = (result.coupang.products?.length || 0) + (result.naver.products?.length || 0);
+    sendLog(`✅ 통합 수집 완료: 총 ${total}개 (쿠팡 ${result.coupang.products?.length || 0} + 네이버 ${result.naver.products?.length || 0})`);
+    return { success: true, ...result };
+  } catch (error) {
+    return { success: false, message: `통합 수집 실패: ${(error as Error).message}` };
+  }
+});
+
+ipcMain.handle('bestProduct:clearCache', async () => {
+  try {
+    bestProductCollector.clearCache();
+    return { success: true, message: '캐시가 초기화되었습니다.' };
+  } catch (error) {
+    return { success: false, message: `초기화 실패: ${(error as Error).message}` };
+  }
+});
+
 // ✅ 자동 내부링크 삽입 IPC 핸들러
 ipcMain.handle('internalLink:addPost', async (_event, url: string, title: string, content?: string, category?: string) => {
   try {
@@ -4089,6 +5365,54 @@ ipcMain.handle('thumbnail:getCategories', async () => {
     return { success: true, categories };
   } catch (error) {
     return { success: false, message: `조회 실패: ${(error as Error).message}` };
+  }
+});
+
+// ✅ [2026-02-04] 수집 이미지에 텍스트 오버레이 적용 IPC 핸들러
+ipcMain.handle('thumbnail:createProductThumbnail', async (
+  _event,
+  imageUrl: string,
+  text: string,
+  options?: { position?: string; fontSize?: number; textColor?: string; opacity?: number }
+) => {
+  try {
+    console.log(`[Main] 🎨 썸네일 텍스트 오버레이 시작: ${text.substring(0, 30)}...`);
+    console.log(`[Main]   이미지 URL: ${imageUrl.substring(0, 60)}...`);
+
+    // 1. URL에서 이미지 다운로드
+    const tempDir = path.join(app.getPath('temp'), 'better-life-thumbnails');
+    if (!fsSync.existsSync(tempDir)) {
+      fsSync.mkdirSync(tempDir, { recursive: true });
+    }
+
+    const timestamp = Date.now();
+    const inputPath = path.join(tempDir, `input_${timestamp}.jpg`);
+    const outputPath = path.join(tempDir, `overlaid_${timestamp}.png`);
+
+    // 이미지 다운로드
+    const response = await axios.get(imageUrl, { responseType: 'arraybuffer', timeout: 30000 });
+    fsSync.writeFileSync(inputPath, Buffer.from(response.data));
+
+    // 2. thumbnailService를 사용하여 텍스트 오버레이
+    await thumbnailService.createProductThumbnail(inputPath, text, outputPath, {
+      position: (options?.position as 'top' | 'center' | 'bottom') || 'bottom',
+      fontSize: options?.fontSize || 28,
+      textColor: options?.textColor || '#ffffff',
+      opacity: options?.opacity || 0.8
+    });
+
+    // 3. 결과 이미지를 base64로 변환
+    const outputBuffer = fsSync.readFileSync(outputPath);
+    const previewDataUrl = `data:image/png;base64,${outputBuffer.toString('base64')}`;
+
+    // 임시 파일 정리
+    try { fsSync.unlinkSync(inputPath); } catch { }
+
+    console.log(`[Main] ✅ 썸네일 텍스트 오버레이 완료: ${outputPath}`);
+    return { success: true, outputPath, previewDataUrl };
+  } catch (error) {
+    console.error(`[Main] ❌ 썸네일 오버레이 실패:`, error);
+    return { success: false, message: `오버레이 실패: ${(error as Error).message}` };
   }
 });
 
@@ -4279,30 +5603,81 @@ ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: 
         }
       });
 
-      if (apiRes.data && apiRes.data.isSuccess && apiRes.data.result && apiRes.data.result.mylogCategoryList) {
-        const rawList = apiRes.data.result.mylogCategoryList;
+      if (apiRes.data && apiRes.data.isSuccess && apiRes.data.result) {
+        const result = apiRes.data.result;
         const categories: Array<{ id: string; name: string; postCount?: number }> = [];
 
-        rawList.forEach((c: any) => {
-          // 구분선(divisionLine) 제외, 공개된 카테고리만 포함
-          if (c.divisionLine || c.categoryNo === '0' || c.categoryNo === 0) return;
+        // ✅ 디버깅: API 응답 구조 로깅
+        console.log('[Main] API result 전체 키:', Object.keys(result));
+        if (result.mylogCategoryList) {
+          console.log('[Main] mylogCategoryList 첫 항목 구조:', JSON.stringify(result.mylogCategoryList[0], null, 2).substring(0, 500));
+        }
+        if (result.boardCategoryList) {
+          console.log('[Main] boardCategoryList 첫 항목 구조:', JSON.stringify(result.boardCategoryList[0], null, 2).substring(0, 500));
+        }
 
-          let cleanName = String(c.categoryName).trim();
-          // 하위 카테고리인 경우 시각적 계층 표현 추가
-          if (c.childCategory && c.parentCategoryNo) {
-            cleanName = ` └ ${cleanName}`;
-          }
+        // ✅ 재귀적 카테고리 추출 함수 (게시판형 하위 카테고리 지원)
+        const extractCategories = (list: any[], depth: number = 0) => {
+          if (!Array.isArray(list)) return;
+          list.forEach((c: any) => {
+            // 구분선(divisionLine) 제외, 전체보기(0) 제외
+            if (c.divisionLine || c.categoryNo === '0' || c.categoryNo === 0) return;
 
-          categories.push({
-            id: String(c.categoryNo),
-            name: cleanName,
-            postCount: c.postCnt
+            let cleanName = String(c.categoryName || '').trim();
+            if (!cleanName) return;
+
+            // 하위 카테고리인 경우 시각적 계층 표현 추가
+            if (depth > 0) {
+              cleanName = ` └ ${cleanName}`;
+            }
+
+            categories.push({
+              id: String(c.categoryNo),
+              name: cleanName,
+              postCount: c.postCnt ?? c.postCount
+            });
+
+            // ✅ 하위 카테고리가 있으면 재귀 탐색 (게시판형 블로그 지원)
+            if (c.childCategoryList && Array.isArray(c.childCategoryList) && c.childCategoryList.length > 0) {
+              extractCategories(c.childCategoryList, depth + 1);
+            }
           });
-        });
+        };
+
+        // ✅ 1차: mylogCategoryList (일반 카테고리형)
+        if (result.mylogCategoryList) {
+          console.log('[Main] mylogCategoryList 발견, 항목 수:', result.mylogCategoryList.length);
+          extractCategories(result.mylogCategoryList);
+        }
+
+        // ✅ 2차: boardCategoryList (게시판형) — mylogCategoryList에서 못 찾은 경우
+        if (categories.length === 0 && result.boardCategoryList) {
+          console.log('[Main] boardCategoryList 발견, 항목 수:', result.boardCategoryList.length);
+          extractCategories(result.boardCategoryList);
+        }
+
+        // ✅ 3차: API 응답의 다른 가능한 카테고리 필드도 확인
+        if (categories.length === 0) {
+          // API 응답 전체 키를 로깅하여 디버깅 지원
+          console.log('[Main] API result 키 목록:', Object.keys(result));
+          // categoryCategoryList, categoryList 등 다른 가능한 키 시도
+          for (const key of Object.keys(result)) {
+            if (key.toLowerCase().includes('category') && Array.isArray(result[key]) && result[key].length > 0) {
+              console.log(`[Main] 대체 카테고리 필드 발견: ${key}, 항목 수: ${result[key].length}`);
+              extractCategories(result[key]);
+              if (categories.length > 0) break;
+            }
+          }
+        }
 
         if (categories.length > 0) {
-          console.log('[Main] Stage 1 성공:', categories.length, '개 추출 완료');
-          return { success: true, categories };
+          // ✅ "게시판" 외에 다른 카테고리가 있으면 "게시판" 제거
+          const nonBoardCategories = categories.filter(c => c.name !== '게시판');
+          const finalCategories = nonBoardCategories.length > 0 ? nonBoardCategories : categories;
+          console.log('[Main] Stage 1 성공:', finalCategories.length, '개 추출 완료');
+          return { success: true, categories: finalCategories };
+        } else {
+          console.log('[Main] Stage 1: API 응답은 성공했으나 카테고리 0개 → Stage 2로 전환');
         }
       }
     } catch (e) {
@@ -4346,7 +5721,7 @@ ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: 
         console.warn('[Main] 페이지 로딩 타임아웃, 현재 DOM에서 추출 시도');
       }
 
-      const categories = await page.evaluate(() => {
+      let categories = await page.evaluate(() => {
         const results: Array<{ id: string; name: string; postCount?: number }> = [];
         // 모든 링크 중 categoryNo를 포함하는 항목 스캔 (범용적 대응)
         const links = Array.from(document.querySelectorAll('a[href*="categoryNo="]'));
@@ -4375,6 +5750,67 @@ ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: 
         });
         return results;
       });
+
+      // ✅ "게시판" 외에 다른 카테고리가 있으면 "게시판" 제거 (모바일)
+      if (categories.length > 0) {
+        const nonBoard = categories.filter((c: any) => c.name !== '게시판');
+        categories = nonBoard.length > 0 ? nonBoard : categories;
+      }
+
+      // ✅ 2-2: 모바일에서 못 찾으면 PC 블로그 페이지에서 카테고리 사이드바 크롤링
+      if (categories.length === 0) {
+        console.log('[Main] Stage 2-2: PC 블로그 페이지 분석 시도...');
+        try {
+          // PC용 User Agent로 변경
+          await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+          await page.setViewport({ width: 1280, height: 900, isMobile: false });
+
+          const pcUrl = `https://blog.naver.com/PostList.naver?blogId=${blogId.trim()}&categoryNo=0&from=postList`;
+          await page.goto(pcUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
+          await new Promise(resolve => setTimeout(resolve, 3000));
+
+          // PC 블로그 사이드바에서 카테고리 추출
+          categories = await page.evaluate(() => {
+            const results: Array<{ id: string; name: string; postCount?: number }> = [];
+
+            // ✅ PC 블로그의 카테고리 위젯 내부 링크 검색
+            const allLinks = Array.from(document.querySelectorAll('a'));
+
+            allLinks.forEach(link => {
+              const href = link.href || link.getAttribute('href') || '';
+              const text = (link.textContent || '').trim();
+
+              // categoryNo 패턴 매칭 (PC 버전)
+              const catMatch = href.match(/categoryNo=(\d+)/);
+              if (catMatch && text && catMatch[1] !== '0') {
+                const id = catMatch[1];
+                // 중복, 전체보기, 너무 긴 이름, "게시판" 제외
+                if (!results.some(r => r.id === id) && text !== '전체보기' && text.length < 100) {
+                  const countMatch = text.match(/\((\d+)\)/);
+                  const cleanName = text.replace(/\(\d+\)/, '').trim();
+                  if (cleanName) {
+                    results.push({
+                      id,
+                      name: cleanName,
+                      postCount: countMatch ? parseInt(countMatch[1], 10) : undefined
+                    });
+                  }
+                }
+              }
+            });
+            return results;
+          });
+
+          // ✅ "게시판" 외에 다른 카테고리가 있으면 "게시판" 제거 (PC)
+          if (categories.length > 0) {
+            const nonBoard = categories.filter((c: any) => c.name !== '게시판');
+            categories = nonBoard.length > 0 ? nonBoard : categories;
+            console.log('[Main] Stage 2-2 PC 성공:', categories.length, '개 추출 완료');
+          }
+        } catch (e) {
+          console.warn('[Main] Stage 2-2 PC 실패:', (e as Error).message);
+        }
+      }
 
       await browser.close();
 
@@ -4434,25 +5870,61 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
   try {
     //  중지 플래그 초기화
     AutomationService.setMultiAccountAbort(false);
+    // ✅ [2026-03-11] 즉시 취소용 AbortController 생성
+    const abortController = AutomationService.createAbortController();
 
     sendLog(`🚀 다중계정 동시발행 시작: ${accountIds.length}개 계정`);
 
     const results: Array<{ accountId: string; success: boolean; message?: string; url?: string }> = [];
 
     // ✅ [2026-01-20] 순차 예약 시간 계산을 위한 기준값
-    const baseScheduleDate = options?.scheduleDate;
-    const baseScheduleTime = options?.scheduleTime;
+    let baseScheduleDate = options?.scheduleDate;
+    let baseScheduleTime = options?.scheduleTime;
     const scheduleIntervalMinutes = options?.scheduleInterval || 360;  // 기본 6시간 (360분)
     const useRandomOffset = options?.scheduleRandomOffset !== false;  // ✅ 기본값: 랜덤 편차 사용 (false면 정확한 간격)
+
+    // ✅ [2026-03-11 FIX] renderer가 scheduleDate를 combined 형식으로 보낼 때 자동 분리
+    // renderer는 "YYYY-MM-DDTHH:mm" 또는 "YYYY-MM-DD HH:mm" 형식으로 보냄 (scheduleTime 별도 전송 안함)
+    // 이를 자동 감지하여 날짜/시간으로 분리 → isScheduleMode가 정상 작동하도록 보장
+    if (baseScheduleDate && !baseScheduleTime) {
+      const normalized = baseScheduleDate.replace('T', ' ');
+      const parts = normalized.split(' ');
+      if (parts.length === 2 && /^\d{2}:\d{2}$/.test(parts[1])) {
+        baseScheduleDate = parts[0]; // YYYY-MM-DD
+        baseScheduleTime = parts[1]; // HH:mm
+        console.log(`[Main] 📅 scheduleDate combined 형식 자동 분리: ${baseScheduleDate} + ${baseScheduleTime}`);
+      }
+    }
+
+    // ✅ [2026-02-20 FIX] publishMode가 'schedule'인데 날짜/시간이 없으면 자동 생성 (1시간 후 시작, 10분 단위 반올림)
+    if (options?.publishMode === 'schedule' && (!baseScheduleDate || !baseScheduleTime)) {
+      const autoStart = new Date(Date.now() + 60 * 60 * 1000); // 1시간 후
+      const autoMinutes = Math.ceil(autoStart.getMinutes() / 10) * 10;
+      autoStart.setMinutes(autoMinutes, 0, 0);
+      if (autoMinutes >= 60) {
+        autoStart.setMinutes(0);
+        autoStart.setHours(autoStart.getHours() + 1);
+      }
+      const ay = autoStart.getFullYear();
+      const am = String(autoStart.getMonth() + 1).padStart(2, '0');
+      const ad = String(autoStart.getDate()).padStart(2, '0');
+      const ah = String(autoStart.getHours()).padStart(2, '0');
+      const ami = String(autoStart.getMinutes()).padStart(2, '0');
+      baseScheduleDate = `${ay}-${am}-${ad}`;
+      baseScheduleTime = `${ah}:${ami}`;
+      sendLog(`📅 예약 날짜/시간 자동 생성: ${baseScheduleDate} ${baseScheduleTime} (1시간 후 시작)`);
+    }
+
     const isScheduleMode = options?.publishMode === 'schedule' && baseScheduleDate && baseScheduleTime;
+    console.log(`[🔍 DIAG-3 Main수신] publishMode=${options?.publishMode}, baseScheduleDate=${baseScheduleDate}, baseScheduleTime=${baseScheduleTime}, isScheduleMode=${isScheduleMode}`);
 
     if (isScheduleMode) {
-      const randomInfo = useRandomOffset ? '+ ±15분 랜덤 편차' : '(정확한 간격)';
+      const randomInfo = useRandomOffset ? '+ ±10분 랜덤 편차' : '(정확한 간격)';
       sendLog(`📅 순차 예약 모드: 기준 ${baseScheduleDate} ${baseScheduleTime}, 간격 ${scheduleIntervalMinutes}분 ${randomInfo}`);
     }
 
     //  순차 발행 (각 계정에 대해 executePostCycle 호출)
-    const limitedAccountIds = accountIds.slice(0, 10);  // 최대 10개 제한
+    const limitedAccountIds = accountIds.slice(0, 100);  // 최대 100개 제한 (대행사/마케팅 회사 대응)
     for (let i = 0; i < limitedAccountIds.length; i++) {
       const accountId = limitedAccountIds[i];
       // 중지 체크
@@ -4484,6 +5956,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         let title = options?.title || undefined;
         let content = options?.content || undefined;
         let generatedImages = options?.generatedImages || options?.images || [];
+        console.log(`[다중계정] 📌 options.title: "${(title || '').substring(0, 40)}"`);
 
         // ✅ [2026-01-19 BUG FIX v2] preGeneratedContent도 확인 (renderer에서 이 이름으로 전달함)
         const preGenerated = options?.preGeneratedContent || options?.structuredContent;
@@ -4491,9 +5964,21 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         // options에 이미 콘텐츠가 있으면 그대로 사용 (renderer에서 미리 생성된 경우)
         if (preGenerated) {
           structuredContent = preGenerated.structuredContent || preGenerated;
-          title = preGenerated.title || structuredContent?.selectedTitle || title;
+          // ✅ [2026-02-21 FIX] options.title이 명시적으로 있으면 최우선 사용 (preGenerated.title보다 우선)
+          // preGenerated.title이 stale(이전 발행) 상태일 수 있기 때문에, options.title이 있으면 그것을 신뢰
+          const preGenTitle = preGenerated.title || structuredContent?.selectedTitle;
+          title = options?.title || preGenTitle || title;
           content = preGenerated.content || structuredContent?.bodyPlain || content;
           generatedImages = preGenerated.generatedImages || generatedImages;
+          // ✅ [2026-03-10 FIX] title이 URL 패턴이면 selectedTitle로 대체 (쇼핑커넥트 URL 혼입 방지)
+          if (title && /^https?:\/\//i.test(title.trim())) {
+            const safeFallback = structuredContent?.selectedTitle || '';
+            if (safeFallback && !/^https?:\/\//i.test(safeFallback.trim())) {
+              console.warn(`[다중계정] ⚠️ title이 URL임 → selectedTitle로 교체: "${safeFallback.substring(0, 40)}"`);
+              title = safeFallback;
+            }
+          }
+          console.log(`[다중계정] 📌 preGenerated.title: "${(preGenTitle || '').substring(0, 40)}", final title: "${(title || '').substring(0, 40)}"`);
           sendLog(`   📄 기존 콘텐츠 사용: "${(title || '').substring(0, 30)}..."`);
         }
         // contentSource가 있고 콘텐츠가 없으면 새로 생성
@@ -4502,30 +5987,114 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           try {
             const sourceValue = contentSource.value || contentSource;
             const accountSettings = account.settings as any;
+            // ✅ [2026-02-22 FIX] generator를 options → config → 기본값 순서로 결정
+            // 기존: provider: 'gemini' 하드코딩으로 perplexity 무시됨
+            const currentConfig = await loadConfig();
+            const multiAccountProvider = options?.generator || currentConfig?.defaultAiProvider || 'gemini';
+            console.log(`[다중계정] 🔄 AI Provider: ${multiAccountProvider} (options.generator: ${options?.generator}, config.defaultAiProvider: ${currentConfig?.defaultAiProvider})`);
             const source = {
               type: contentSource.type === 'keyword' ? 'keyword' : 'url',
               value: String(sourceValue),
               targetAge: accountSettings?.targetAge || 'all',
               toneStyle: accountSettings?.toneStyle || 'friendly',
-              contentMode: accountSettings?.contentMode || 'seo',
+              contentMode: options?.contentMode || accountSettings?.contentMode || 'seo',  // ✅ [2026-02-16 FIX] renderer 전달값 우선
               // 쇼핑커넥트 모드 설정
-              affiliateUrl: accountSettings?.affiliateLink,
+              affiliateUrl: options?.affiliateLink || accountSettings?.affiliateLink,  // ✅ [2026-02-16 FIX] renderer 전달값 우선
             };
 
-            const generated = await generateStructuredContent(source as any, {
-              provider: 'gemini',
-              minChars: accountSettings?.minCharCount || 4000,
-            });
+            const generated = await withAbortCheck(
+              generateStructuredContent(source as any, {
+                provider: multiAccountProvider,
+                minChars: accountSettings?.minCharCount || 4000,
+              }),
+              abortController.signal
+            );
 
             structuredContent = generated;
             title = (generated as any).selectedTitle || `${sourceValue} 관련 글`;
             content = (generated as any).bodyPlain || (generated as any).body || '';
             sendLog(`   ✅ 콘텐츠 생성 완료: "${(title || '').substring(0, 30)}..." (${(content || '').length}자)`);
           } catch (genError) {
+            // ✅ [2026-03-11] AbortError는 중지 요청으로 처리
+            if ((genError as Error).name === 'AbortError' || (genError as Error).message === 'PUBLISH_CANCELLED') {
+              sendLog(`   ⏹️ [${account.name}] 콘텐츠 생성 중 즉시 중지됨`);
+              results.push({ accountId, success: false, message: '사용자에 의해 즉시 중지됨' });
+              break; // for 루프 탈출
+            }
             sendLog(`   ⚠️ 콘텐츠 생성 실패: ${(genError as Error).message}`);
             results.push({ accountId, success: false, message: `콘텐츠 생성 실패: ${(genError as Error).message}` });
             continue;
           }
+        }
+
+        // ✅ [2026-03-11 FIX] 콘텐츠 생성 후 중지 체크 (abort 체크포인트 #2)
+        if (AutomationService.isMultiAccountAborted()) {
+          sendLog(`   ⏹️ [${account.name}] 콘텐츠 생성 후 중지됨`);
+          results.push({ accountId, success: false, message: '사용자에 의해 중지됨' });
+          continue;
+        }
+
+        // ✅ [2026-02-20 FIX] 다중계정 발행: AI 이미지 생성 (기존 누락 — 연속발행에만 있고 다중계정에는 없었음)
+        if (options?.useAiImage !== false && structuredContent?.headings?.length > 0 && generatedImages.length === 0) {
+          try {
+            const imageProvider = options?.imageSource || 'nano-banana-pro';
+            sendLog(`   🎨 AI 이미지 생성 시작... (엔진: ${imageProvider}, ${structuredContent.headings.length}개 소제목)`);
+
+            const imageItems = structuredContent.headings.map((h: any, idx: number) => ({
+              heading: h.title || h,
+              prompt: h.imagePrompt || h.title || h,
+              isThumbnail: idx === 0,
+              imageStyle: options?.imageStyle,
+              imageRatio: options?.thumbnailImageRatio || '1:1',
+            }));
+
+            const imgConfig = await loadConfig();
+            const imgApiKeys = {
+              geminiApiKey: imgConfig.geminiApiKey,
+              deepinfraApiKey: (imgConfig as any).deepinfraApiKey,
+              // ✅ [2026-02-22] 새 이미지 프로바이더 API 키
+              openaiImageApiKey: (imgConfig as any).openaiImageApiKey,
+              leonardoaiApiKey: (imgConfig as any).leonardoaiApiKey,
+
+            };
+
+            const imgResult = await withAbortCheck(
+              generateImages({
+                provider: imageProvider,
+                items: imageItems,
+                postTitle: title,
+                isFullAuto: true,
+                isShoppingConnect: options?.contentMode === 'affiliate',
+                imageStyle: options?.imageStyle,
+                imageRatio: options?.thumbnailImageRatio || '1:1',
+                collectedImages: options?.collectedImages || structuredContent?.collectedImages || [],
+              } as any, imgApiKeys),
+              abortController.signal
+            );
+
+            if (imgResult && imgResult.length > 0) {
+              generatedImages = imgResult;
+              sendLog(`   ✅ AI 이미지 ${imgResult.length}개 생성 완료!`);
+            } else {
+              sendLog(`   ⚠️ AI 이미지 생성 결과 없음 (이미지 없이 발행)`);
+            }
+          } catch (imgError) {
+            // ✅ [2026-03-11] AbortError는 중지 요청으로 처리
+            if ((imgError as Error).name === 'AbortError' || (imgError as Error).message === 'PUBLISH_CANCELLED') {
+              sendLog(`   ⏹️ [${account.name}] 이미지 생성 중 즉시 중지됨`);
+              results.push({ accountId, success: false, message: '사용자에 의해 즉시 중지됨' });
+              break; // for 루프 탈출
+            }
+            sendLog(`   ⚠️ AI 이미지 생성 실패 (글만 발행): ${(imgError as Error).message}`);
+            console.error(`[다중계정] 이미지 생성 오류:`, imgError);
+          }
+        }
+
+        // ✅ [2026-03-11 FIX] 이미지 생성 후 중지 체크 (abort 체크포인트 #3)
+        if (AutomationService.isMultiAccountAborted()) {
+          sendLog(`   ⏹️ [${account.name}] 이미지 생성 후 중지됨`);
+          results.push({ accountId, success: false, message: '사용자에 의해 중지됨' });
+          continue;
         }
 
         // 여전히 콘텐츠가 없으면 건너뛰기
@@ -4536,26 +6105,45 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         }
 
         // ✅ [2026-01-20] 순차 예약 시간 계산 (각 계정마다 간격 증가 + 랜덤 편차)
-        let accountScheduleDate = options?.scheduleDate;
-        let accountScheduleTime = options?.scheduleTime;
+        // ✅ [2026-03-11 FIX] 초기값을 분리된 baseScheduleDate/Time 사용 (combined 형식 잔존 방지)
+        let accountScheduleDate = baseScheduleDate;
+        let accountScheduleTime = baseScheduleTime;
 
         if (isScheduleMode) {
-          const baseTime = new Date(`${baseScheduleDate}T${baseScheduleTime}`);
-          const offsetMinutes = i * scheduleIntervalMinutes;
-          // ✅ [2026-01-20] 랜덤 편차 On/Off 옵션 지원
-          const randomOffsetMinutes = useRandomOffset ? (Math.floor(Math.random() * 31) - 15) : 0;  // ±15분 또는 0
-          const newTime = new Date(baseTime.getTime() + (offsetMinutes + randomOffsetMinutes) * 60000);
+          // ✅ [2026-03-15 FIX] renderer가 이미 분산 계산된 시간을 보낸 경우 (계정 1개씩 IPC 호출 시)
+          // limitedAccountIds.length === 1이면 renderer에서 미리 계산된 시간이 scheduleDate/Time에 들어있으므로
+          // main.ts에서 순차 계산(i * interval)을 하면 안 됨 (항상 i=0이라 분산 안 됨)
+          if (limitedAccountIds.length === 1) {
+            // renderer에서 이미 계산된 시간을 그대로 사용
+            sendLog(`   📅 [${account.name}] 예약 시간: ${accountScheduleDate} ${accountScheduleTime} (사전 계산됨)`);
+          } else {
+            // 다수 계정 일괄 전송 시 (기존 로직 유지)
+            const baseTime = new Date(`${baseScheduleDate}T${baseScheduleTime}`);
+            const offsetMinutes = i * scheduleIntervalMinutes;
+            // ✅ [2026-03-15 FIX] 랜덤 편차 범위 확대: ±20분(10분 단위) — 기존 ±10분(3값)에서 5값으로 확대
+            const randomOffsetMinutes = useRandomOffset ? (Math.floor(Math.random() * 5) - 2) * 10 : 0;  // -20, -10, 0, +10, +20분
+            const newTime = new Date(baseTime.getTime() + (offsetMinutes + randomOffsetMinutes) * 60000);
 
-          const yyyy = newTime.getFullYear();
-          const mm = String(newTime.getMonth() + 1).padStart(2, '0');
-          const dd = String(newTime.getDate()).padStart(2, '0');
-          const hh = String(newTime.getHours()).padStart(2, '0');
-          const mi = String(newTime.getMinutes()).padStart(2, '0');
+            // ✅ [2026-02-08 FIX] 최종 시간도 10분 단위로 반올림
+            const rawMinutes = newTime.getMinutes();
+            const roundedMinutes = Math.round(rawMinutes / 10) * 10;
+            newTime.setMinutes(roundedMinutes, 0, 0);
+            if (roundedMinutes >= 60) {
+              newTime.setMinutes(0);
+              newTime.setHours(newTime.getHours() + 1);
+            }
 
-          accountScheduleDate = `${yyyy}-${mm}-${dd}`;
-          accountScheduleTime = `${hh}:${mi}`;
+            const yyyy = newTime.getFullYear();
+            const mm = String(newTime.getMonth() + 1).padStart(2, '0');
+            const dd = String(newTime.getDate()).padStart(2, '0');
+            const hh = String(newTime.getHours()).padStart(2, '0');
+            const mi = String(newTime.getMinutes()).padStart(2, '0');
 
-          sendLog(`   📅 [${account.name}] 예약 시간: ${accountScheduleDate} ${accountScheduleTime} (${i + 1}/${limitedAccountIds.length})`);
+            accountScheduleDate = `${yyyy}-${mm}-${dd}`;
+            accountScheduleTime = `${hh}:${mi}`;
+
+            sendLog(`   📅 [${account.name}] 예약 시간: ${accountScheduleDate} ${accountScheduleTime} (${i + 1}/${limitedAccountIds.length})`);
+          }
         }
 
         //  executePostCycle 호출을 위한 payload 구성
@@ -4564,21 +6152,49 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           ...options,  // ✅ 먼저 스프레드 (나중에 명시적 값으로 덮어씀)
           naverId: credentials.naverId,
           naverPassword: credentials.naverPassword,
-          publishMode: isScheduleMode ? 'schedule' : (account.settings?.publishMode || 'publish'),
-          scheduleDate: accountScheduleDate,  // ✅ 순차 예약 날짜
-          scheduleTime: accountScheduleTime,  // ✅ 순차 예약 시간
+          publishMode: isScheduleMode ? 'schedule' : (options?.publishMode || account.settings?.publishMode || 'publish'),  // ✅ [2026-02-20 FIX] 사용자 선택 우선
+          // ✅ [2026-03-11 FIX] isScheduleMode=false일 때 명시적 undefined (스프레드된 잔존값 제거)
+          scheduleDate: isScheduleMode ? accountScheduleDate : undefined,
+          scheduleTime: isScheduleMode ? accountScheduleTime : undefined,
           toneStyle: account.settings?.toneStyle || 'friendly',
-          categoryName: account.settings?.category,
+          categoryName: options?.categoryName || account.settings?.category, // ✅ [2026-02-09 FIX] renderer 전달값 우선 (실제 블로그 폴더명), 없으면 계정 설정 fallback
           isFullAuto: true,
           title,        // ✅ 생성된 제목
           content,      // ✅ 생성된 콘텐츠
-          structuredContent, // ✅ 구조화된 콘텐츠
+          // ✅ [2026-02-21 FIX] structuredContent.selectedTitle도 최종 제목으로 동기화
+          structuredContent: structuredContent ? { ...structuredContent, selectedTitle: title } : undefined,
           generatedImages: generatedImages.length > 0 ? generatedImages : undefined, // ✅ 이미지
           // ✅ [2026-01-24 FIX] CTA 관련 설정 명시적 전달
           skipCta: options?.skipCta === true ? true : false,  // 명시적으로 true일 때만 CTA 건너뛰기
           contentMode: options?.contentMode || (account.settings as any)?.contentMode || 'homefeed',  // ✅ contentMode 전달
           affiliateLink: options?.affiliateLink || (account.settings as any)?.affiliateLink,  // ✅ 제휴링크 전달
+          // ✅ [2026-01-28] 이미지 설정 전역 적용 (renderer에서 전달받은 설정)
+          scSubImageSource: options?.scSubImageSource || 'ai',  // 수집 이미지 직접 사용 여부
+          collectedImages: options?.collectedImages || structuredContent?.collectedImages || [],  // 수집 이미지
+          thumbnailImageRatio: options?.thumbnailImageRatio || '1:1',  // 썸네일 비율
+          subheadingImageRatio: options?.subheadingImageRatio || '1:1',  // 소제목 비율
+          scAutoThumbnailSetting: options?.scAutoThumbnailSetting || false,  // 자동 썸네일
         };
+
+        // ✅ [2026-03-01 FIX] 선차감 패턴: 계정별 발행 전 쿼터 차감
+        let accountPreConsumed = false;
+        const isFreeUser = await isFreeTierUser();
+        if (isFreeUser) {
+          try {
+            await consumeQuota('publish', 1);
+            accountPreConsumed = true;
+            console.log(`[다중계정] 무료 사용자: publish 쿼터 선차감 (${account.name})`);
+          } catch (qe) {
+            console.error(`[다중계정] 쿼터 선차감 오류 (${account.name}):`, qe);
+          }
+        }
+
+        // ✅ [2026-03-11 FIX] 발행 직전 중지 체크 (abort 체크포인트 #4)
+        if (AutomationService.isMultiAccountAborted()) {
+          sendLog(`   ⏹️ [${account.name}] 발행 직전 중지됨`);
+          results.push({ accountId, success: false, message: '사용자에 의해 중지됨' });
+          continue;
+        }
 
         //  새 엔진 호출
         const result = await AutomationService.executePostCycle(payload as any);
@@ -4591,8 +6207,16 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         });
 
         if (result.success) {
+          // ✅ 선차감 유지 (환불 없음)
           sendLog(`✅ [${account.name}] 발행 성공: ${result.url || '완료'}`);
         } else {
+          // ✅ 발행 실패 → 선차감 환불
+          if (accountPreConsumed) {
+            try {
+              await refundQuota('publish', 1);
+              console.log(`[다중계정] 발행 실패: 쿼터 환불 (${account.name})`);
+            } catch (re) { console.error(`[다중계정] 쿼터 환불 오류:`, re); }
+          }
           sendLog(`❌ [${account.name}] 발행 실패: ${result.message}`);
         }
 
@@ -4606,12 +6230,9 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
     const successCount = results.filter((r) => r.success).length;
     const failCount = results.length - successCount;
 
-    //  무료 티어 quota 소비
-    try {
-      if (successCount > 0 && (await isFreeTierUser())) {
-        await consumeQuota('publish', successCount);
-      }
-    } catch { }
+    // ✅ [2026-03-01] 선차감 패턴으로 변경 → 후차감 제거
+    // (각 계정별로 이미 선차감/환불 처리됨)
+
 
     sendLog(`📊 다중계정 발행 완료: 성공 ${successCount}개, 실패 ${failCount}개`);
 
@@ -4629,8 +6250,25 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 ipcMain.handle('multiAccount:cancel', async () => {
   sendLog('🛑 다중계정 발행 즉시 중지 요청');
 
-  // 취소 플래그 설정
+  // ✅ [2026-03-11 FIX] 모든 취소 플래그를 동시에 설정하여 즉시 중지
   multiAccountAbortFlag = true;
+  AutomationService.setMultiAccountAbort(true);
+  AutomationService.requestCancel(); // BlogExecutor의 isCancelRequested() 체크도 트리거
+  AutomationService.abortCurrentOperation(); // ✅ 진행 중인 API 호출 즉시 abort!
+
+  // ✅ 현재 실행 중인 자동화 인스턴스의 브라우저도 닫기
+  const currentInstance = AutomationService.getCurrentInstance();
+  if (currentInstance) {
+    try {
+      if (typeof currentInstance.closeBrowser === 'function') {
+        await currentInstance.closeBrowser();
+      } else if (typeof currentInstance.close === 'function') {
+        await currentInstance.close();
+      }
+    } catch (e) {
+      // 이미 닫힌 브라우저일 수 있음 - 무시
+    }
+  }
 
   // 활성화된 모든 자동화 인스턴스의 브라우저 강제 종료
   const closePromises = activeMultiAccountAutomations.map(async (automation) => {
@@ -4849,7 +6487,8 @@ ipcMain.handle(
 
     // 라이선스 체크
     if (!(await ensureLicenseValid())) {
-      return { success: false, message: '라이선스 인증이 필요합니다.' };
+      console.error('[Main] generateStructuredContent: 라이선스 체크 실패 — ensureLicenseValid() returned false');
+      return { success: false, message: '라이선스 인증이 필요합니다.', licenseError: true } as any;
     }
 
     // ✅ 페이월 상태 체크 (소진되면 글생성도 막음 - 쿼터 소비는 발행 시에만)
@@ -4930,6 +6569,15 @@ ipcMain.handle(
         console.log(`[Main] ⚠️ 글톤 스타일 미지정 → 카테고리 기반 자동 매칭`);
       }
 
+      // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 옵션 전달
+      const useKeywordAsTitle = (payload.assembly as any).useKeywordAsTitle as boolean | undefined;
+      const keywordForTitle = (payload.assembly as any).keywordForTitle as string | undefined;
+      if (useKeywordAsTitle) {
+        source.useKeywordAsTitle = true;
+        source.keywordForTitle = keywordForTitle || '';
+        console.log(`[Main] 📌 키워드를 제목으로 사용: "${(keywordForTitle || '').substring(0, 30)}"`)
+      }
+
       console.log('[Main] 구조화 콘텐츠 생성 시작');
       console.log('[Main] Provider:', provider);
       console.log('[Main] TargetAge:', targetAge);
@@ -4964,6 +6612,20 @@ ipcMain.handle(
 
       if (warnings.length) {
         content.quality.warnings = Array.from(new Set([...(content.quality.warnings ?? []), ...warnings]));
+      }
+
+      // ✅ [2026-02-01 FIX] 크롤링 시 수집한 이미지를 content.collectedImages에 저장
+      // 이렇게 하면 renderer에서 다시 크롤링하지 않고 바로 이미지를 사용할 수 있음
+      if (source.images && source.images.length > 0) {
+        (content as any).collectedImages = source.images.map((img: string, idx: number) => ({
+          url: img,
+          filePath: img,
+          thumbnailUrl: img,
+          heading: `소제목 ${idx + 1}`,
+          headingIndex: idx,
+          source: 'crawled'
+        }));
+        console.log(`[Main] ✅ 크롤링 이미지 ${source.images.length}개를 collectedImages에 저장`);
       }
 
       console.log('[Main] 구조화 콘텐츠 생성 완료');
@@ -5276,7 +6938,7 @@ ipcMain.handle('library:getImages', async (_event, category?: string, titleKeywo
     return images.map(img => ({
       id: img.id,
       filePath: img.localPath || img.url,
-      previewDataUrl: img.localPath ? `file://${img.localPath}` : img.url,
+      previewDataUrl: img.localPath ? `file:///${String(img.localPath).replace(/\\/g, '/').replace(/^\/+/, '')}` : img.url,
       sourceTitle: img.query,
     }));
   } catch (error) {
@@ -5291,7 +6953,7 @@ ipcMain.handle('auto-collect-images', async (_event, data: {
   keywords: string[];
   category: string;
   imageMode: 'full-auto' | 'semi-auto' | 'manual' | 'skip';
-  selectedImageSource?: 'dalle' | 'pexels' | 'library'; // 이미지 소스 선택
+  selectedImageSource?: 'nano-banana-pro' | 'library'; // 이미지 소스 선택
 }): Promise<{
   success: boolean;
   images?: any[];
@@ -5324,8 +6986,8 @@ ipcMain.handle('auto-collect-images', async (_event, data: {
 
     const { title, keywords, category, imageMode, selectedImageSource } = data;
 
-    // DALL-E 또는 Pexels가 선택된 경우 이미지 수집을 건너뜁니다.
-    if (selectedImageSource === 'dalle' || selectedImageSource === 'pexels') {
+    // AI 이미지 생성이 선택된 경우 이미지 수집을 건너뜁니다.
+    if (selectedImageSource === 'nano-banana-pro') {
       console.log(`[Main] ${selectedImageSource} 선택됨. 이미지 라이브러리 수집을 건너뜁니다.`);
       return {
         success: true,
@@ -6702,6 +8364,11 @@ ipcMain.handle('license:getDeviceId', async (): Promise<string> => {
   }
 });
 
+// ✅ [2026-02-05] 앱 버전 반환 (라이선스 창 및 메인 창에서 버전 표시용)
+ipcMain.handle('app:getVersion', async (): Promise<string> => {
+  return app.getVersion();
+});
+
 ipcMain.handle('license:testServer', async (_event, serverUrl?: string): Promise<{ success: boolean; message: string; response?: any }> => {
   try {
     return await testLicenseServer(serverUrl);
@@ -7164,6 +8831,42 @@ ipcMain.handle('schedule:remove', async (_event, postId: string): Promise<{ succ
   }
 });
 
+// ✅ [2026-03-14 FIX] 예약 시간 변경 IPC 핸들러
+ipcMain.handle('schedule:reschedule', async (_event, postId: string, newTime: string): Promise<{ success: boolean; message?: string }> => {
+  if (!(await ensureLicenseValid())) {
+    return { success: false, message: '라이선스 인증이 필요합니다.' };
+  }
+  try {
+    if (!postId || !newTime) {
+      return { success: false, message: '포스트 ID와 새 시간이 필요합니다.' };
+    }
+    await rescheduleScheduledPost(postId, newTime);
+    sendLog(`📅 예약 시간 변경 완료: ${newTime}`);
+    return { success: true, message: '예약 시간이 변경되었습니다.' };
+  } catch (error) {
+    console.error('[Main] 예약 시간 변경 실패:', (error as Error).message);
+    return { success: false, message: (error as Error).message };
+  }
+});
+
+// ✅ [2026-03-14 FIX] 실패한 예약 재시도 IPC 핸들러
+ipcMain.handle('schedule:retry', async (_event, postId: string): Promise<{ success: boolean; message?: string }> => {
+  if (!(await ensureLicenseValid())) {
+    return { success: false, message: '라이선스 인증이 필요합니다.' };
+  }
+  try {
+    if (!postId) {
+      return { success: false, message: '포스트 ID가 필요합니다.' };
+    }
+    await retryScheduledPostFn(postId);
+    sendLog(`🔄 예약 재시도 등록 완료`);
+    return { success: true, message: '1분 후 재시도됩니다.' };
+  } catch (error) {
+    console.error('[Main] 예약 재시도 실패:', (error as Error).message);
+    return { success: false, message: (error as Error).message };
+  }
+});
+
 // 외부 URL을 브라우저에서 열기
 ipcMain.handle('openExternalUrl', async (_event, url: string): Promise<{ success: boolean; message?: string }> => {
   try {
@@ -7193,10 +8896,9 @@ async function createLoginWindow(): Promise<BrowserWindow> {
     width: 500,
     height: 650,
     resizable: false,
-    show: true, // 즉시 표시
+    show: true, // ✅ [2026-03-11] 업데이트 체크 완료 후에만 생성되므로 즉시 표시
     frame: true,
     center: true, // 화면 중앙에 표시
-    alwaysOnTop: true, // 최상위에 표시
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -7207,7 +8909,7 @@ async function createLoginWindow(): Promise<BrowserWindow> {
     icon: resolveIconImage(),
   });
 
-  debugLog('[createLoginWindow] BrowserWindow created (showing immediately)');
+  debugLog('[createLoginWindow] BrowserWindow created (visible)');
 
   const loginHtmlPath = path.join(publicPath, 'login.html');
   debugLog(`[createLoginWindow] Loading HTML from: ${loginHtmlPath}`);
@@ -7215,19 +8917,6 @@ async function createLoginWindow(): Promise<BrowserWindow> {
   try {
     await loginWindow.loadFile(loginHtmlPath);
     debugLog('[createLoginWindow] HTML loaded successfully');
-
-    // HTML 로드 후 포커스
-    loginWindow.focus();
-    loginWindow.show();
-
-    // 1초 후 항상 위 모드 해제
-    setTimeout(() => {
-      if (loginWindow && !loginWindow.isDestroyed()) {
-        loginWindow.setAlwaysOnTop(false);
-        loginWindow.focus();
-        debugLog('[createLoginWindow] Always on top disabled');
-      }
-    }, 1000);
   } catch (error) {
     debugLog(`[createLoginWindow] !!! ERROR loading HTML: ${(error as Error).message}`);
     throw error;
@@ -7236,7 +8925,11 @@ async function createLoginWindow(): Promise<BrowserWindow> {
   loginWindow.on('closed', () => {
     debugLog('[createLoginWindow] Login window closed event');
     loginWindow = null;
+    setUpdaterLoginWindow(null); // ✅ [2026-03-07] 업데이터 인증창 참조 해제
   });
+
+  // ✅ [2026-03-07] 업데이터에 인증창 참조 전달 (업데이트 재시작 시 닫기 위해)
+  setUpdaterLoginWindow(loginWindow);
 
   debugLog('[createLoginWindow] Login window setup complete');
   return loginWindow;
@@ -7578,6 +9271,8 @@ async function showLicenseInputDialog(): Promise<string | null> {
 }
 
 // Single Instance Lock - 중복 실행 방지
+// ✅ [2026-02-18] setName을 lock 앞에 호출하여 admin-panel과 lock 충돌 방지
+app.setName('better-life-naver');
 const gotTheLock = app.requestSingleInstanceLock();
 
 if (!gotTheLock) {
@@ -7597,8 +9292,8 @@ if (!gotTheLock) {
       mainWindow.show();
     }
 
-    // 로그인 창이 있으면 포커스
-    if (loginWindow && !loginWindow.isDestroyed()) {
+    // 로그인 창이 있으면 포커스 (✅ [2026-03-11 FIX] 업데이트 중에는 표시 차단)
+    if (loginWindow && !loginWindow.isDestroyed() && !isUpdating()) {
       if (loginWindow.isMinimized()) loginWindow.restore();
       loginWindow.focus();
       loginWindow.show();
@@ -7606,15 +9301,126 @@ if (!gotTheLock) {
   });
 }
 
+// ★ 앱 종료 시 서버 로그아웃 호출 (중복 로그인 차단 해제)
+let isQuittingForLogout = false;
+
+app.on('before-quit', (event) => {
+  if (isQuittingForLogout) return; // 재귀 방지 (logoutFromServer 완료 후 app.quit() 재호출 시)
+  event.preventDefault();
+  isQuittingForLogout = true;
+
+  console.log('[Main] before-quit: 서버 로그아웃 시도...');
+
+  import('./licenseManager.js')
+    .then((lm) => lm.logoutFromServer())
+    .catch((err) => console.warn('[Main] before-quit 로그아웃 실패 (무시):', err))
+    .finally(() => {
+      console.log('[Main] before-quit: 로그아웃 완료, 앱 종료');
+      app.quit(); // 로그아웃 완료 후 실제 종료
+    });
+});
+
 // ffmpeg 경고 무시 (미디어 재생 기능 미사용)
 app.commandLine.appendSwitch('disable-features', 'MediaFoundationVideoCapture');
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// ✅ [2026-02-21] 업데이트 후 캐시 자동 정리 (이전 버전 캐시로 인한 오류 방지)
+// ═══════════════════════════════════════════════════════════════════════════════
+async function clearCacheOnVersionChange(): Promise<void> {
+  try {
+    const currentVersion = app.getVersion();
+    const userDataPath = app.getPath('userData');
+    const versionFilePath = path.join(userDataPath, '.last-version');
+
+    // 이전 버전 확인
+    let lastVersion = '';
+    try {
+      lastVersion = (await fs.readFile(versionFilePath, 'utf-8')).trim();
+    } catch {
+      // 파일 없음 = 첫 실행 또는 업그레이드
+    }
+
+    if (lastVersion === currentVersion) {
+      console.log(`[CacheClear] 버전 동일 (${currentVersion}), 캐시 정리 스킵`);
+      return;
+    }
+
+    console.log(`[CacheClear] 🔄 버전 변경 감지: ${lastVersion || '(최초)'} → ${currentVersion}`);
+    console.log(`[CacheClear] 🧹 이전 캐시 정리 시작...`);
+
+    // 1) Electron 내부 캐시 디렉토리 삭제 (오래된 V8 코드 캐시, GPU 캐시 등)
+    const cacheDirsToDelete = [
+      'GPUCache',        // GPU 렌더링 캐시
+      'Code Cache',      // V8 컴파일된 코드 캐시 (이전 버전 JS가 남아서 오류 유발)
+      'Cache',           // HTTP/네트워크 캐시
+      'Service Worker',  // 서비스 워커 캐시
+      'DawnCache',       // Dawn WebGPU 캐시
+      'blob_storage',    // Blob 스토리지
+      'ScriptCache',     // 렌더러 스크립트 캐시 (이전 버전 JS 잔존 방지)
+    ];
+
+    let clearedCount = 0;
+    for (const dirName of cacheDirsToDelete) {
+      const dirPath = path.join(userDataPath, dirName);
+      try {
+        await fs.rm(dirPath, { recursive: true, force: true });
+        clearedCount++;
+        console.log(`[CacheClear] ✅ ${dirName} 삭제 완료`);
+      } catch (err: any) {
+        // ENOENT (파일 없음)은 정상 — 해당 캐시가 존재하지 않음
+        if (err.code !== 'ENOENT') {
+          console.warn(`[CacheClear] ⚠️ ${dirName} 삭제 실패 (무시):`, err.message);
+        }
+      }
+    }
+
+    // 2) Electron 세션 캐시 프로그래밍 방식으로 삭제
+    try {
+      const { session } = await import('electron');
+      const defaultSession = session.defaultSession;
+      await defaultSession.clearCache();
+      await defaultSession.clearStorageData({
+        storages: ['cachestorage', 'serviceworkers', 'shadercache'],
+      });
+      console.log(`[CacheClear] ✅ Electron 세션 캐시 정리 완료`);
+    } catch (err) {
+      console.warn('[CacheClear] ⚠️ 세션 캐시 정리 실패 (무시):', err);
+    }
+
+    // 3) 버전 파일 업데이트
+    await fs.writeFile(versionFilePath, currentVersion, 'utf-8');
+    console.log(`[CacheClear] ✅ 버전 파일 업데이트: ${currentVersion}`);
+    console.log(`[CacheClear] 🎉 캐시 정리 완료 (${clearedCount}개 디렉토리 삭제)`);
+
+  } catch (error) {
+    // 캐시 정리 실패가 앱 시작을 막으면 안 됨
+    console.error('[CacheClear] ❌ 캐시 정리 중 오류 (앱 시작은 계속):', error);
+  }
+}
+
 app.whenReady().then(async () => {
   try {
-    // 앱 이름을 명시적으로 설정하여 올바른 userData 경로 사용
-    app.setName('naver-blog-automation');
+    // ✅ [2026-02-18] setName은 lock 앞에서 이미 호출됨 (single instance lock 충돌 방지)
 
     // ✅ isPackaged 값을 실제 값으로 업데이트 (배포 환경 감지)
+
+    // ✅ [2026-03-11] 업데이트를 먼저 확인하고, 결과에 따라 인증창 표시 여부 결정
+    // 사용자 요청: "앱을 키면 업데이트 확인 먼저 → 업데이트 없으면 인증창, 있으면 업데이트"
+    if (app.isPackaged) {
+      initAutoUpdaterEarly();
+      debugLog('[Main] 업데이트 확인 중...');
+      const hasUpdate = await waitForUpdateCheck();
+      if (hasUpdate) {
+        debugLog('[Main] 업데이트 발견 → 다운로드 진행 중, 인증창 생성 안 함');
+        // 업데이트 다운로드 → 자동 재시작 (updater.ts에서 처리)
+        // 앱이 재시작되면 새 버전으로 인증창이 표시됨
+        return;
+      }
+      debugLog('[Main] 업데이트 없음 → 인증창 표시 진행');
+    }
+
+    // ✅ [2026-02-21] 업데이트 후 캐시 자동 정리 (이전 버전 캐시로 인한 오류 방지)
+    await clearCacheOnVersionChange();
 
     debugLog('[Main] ========== APP READY ==========');
     debugLog(`[Main] isPackaged: ${app.isPackaged}`);
@@ -7671,6 +9477,9 @@ app.whenReady().then(async () => {
 
     debugLog('[Main] License check passed, starting app...');
 
+    // ✅ [2026-02-23] 자동 업데이터는 이미 인증창 전에 초기화됨 (위 참조)
+    // 여기서는 별도 호출 불필요
+
     debugLog('[Main] Checking build expiry...');
     if (await enforceBuildExpiry()) {
       debugLog('[Main] Build expired, exiting...');
@@ -7689,7 +9498,11 @@ app.whenReady().then(async () => {
       loadConfig,
       applyConfigToEnv,
       createAutomation: (naverId: string, naverPassword: string) => {
-        return new NaverBlogAutomation({ naverId, naverPassword });
+        // ✅ [2026-03-02] sendLog 주입 → 브라우저 자동화 로그가 UI에 실시간 표시
+        return new NaverBlogAutomation({ naverId, naverPassword }, (msg: string) => {
+          console.log(msg);  // 터미널에도 출력
+          sendLog(msg);      // 렌더러 UI에도 전달
+        });
       },
       blogAccountManager,
       getDailyLimit,
@@ -7704,6 +9517,7 @@ app.whenReady().then(async () => {
     // registerAllHandlers() 전체 호출 시 중복 충돌 발생
     try {
       const { registerImageHandlers, registerMediaHandlers, registerHeadingVideoHandlers } = await import('./main/ipc/imageHandlers.js');
+      const { registerSystemHandlers } = await import('./main/ipc/systemHandlers.js');
       const ctx = {
         getMainWindow: () => mainWindow,
         getAutomationMap: () => automationMap,
@@ -7713,9 +9527,10 @@ app.whenReady().then(async () => {
       registerImageHandlers(ctx);
       registerMediaHandlers(ctx);
       registerHeadingVideoHandlers(ctx);
-      debugLog('[Main] Image/Media/HeadingVideo handlers registered from imageHandlers.ts');
+      registerSystemHandlers(ctx);
+      debugLog('[Main] Image/Media/HeadingVideo/System handlers registered');
     } catch (e) {
-      debugLog(`[Main] ⚠️ imageHandlers 등록 실패: ${(e as Error).message}`);
+      debugLog(`[Main] ⚠️ 핸들러 등록 실패: ${(e as Error).message}`);
     }
 
     // AI 어시스턴트 Gemini 재초기화
@@ -7942,7 +9757,7 @@ app.whenReady().then(async () => {
                 return {
                   heading: img.heading || '',
                   filePath: finalFilePath,
-                  provider: img.provider || 'pexels',
+                  provider: img.provider || 'nano-banana-pro',
                   alt: img.alt || '',
                   caption: img.caption || '',
                   savedToLocal: img.savedToLocal
@@ -7961,12 +9776,13 @@ app.whenReady().then(async () => {
                 automation = schedulerAutomation;
               } else {
                 console.log(`[Scheduler] 새 브라우저 세션 시작 (${accountNaverId})`);
+                // ✅ [2026-03-02] sendLog 주입 → 예약발행 자동화 로그도 UI에 표시
                 schedulerAutomation = new NaverBlogAutomation({
                   naverId: accountNaverId,
                   naverPassword: accountNaverPassword,
                   headless: false,
                   slowMo: 50,
-                });
+                }, (msg: string) => { console.log(msg); sendLog(msg); });
                 automationMap.set(normalizedId, schedulerAutomation);
                 automation = schedulerAutomation; // 하위 호환성 유지
               }
@@ -8156,9 +9972,21 @@ app.whenReady().then(async () => {
       debugLog('[Main] Creating main window...');
       await createWindow();
       createTray(); // ✅ [2026-01-21] 트레이 아이콘 생성 (최소화 시 표시되어야 함)
+
+      // ✅ [2026-02-04] 자동 업데이터 초기화 (앱 시작 5초 후 업데이트 체크)
+      if (mainWindow && !mainWindow.isDestroyed()) {
+        initAutoUpdater(mainWindow);
+        debugLog('[Main] Auto-updater initialized');
+      }
     } else {
       debugLog('[Main] Main window already exists');
       createTray(); // ✅ 기존 윈도우가 있어도 트레이가 없으면 생성
+
+      // ✅ [2026-02-04] 기존 윈도우가 있어도 업데이터 초기화
+      if (!mainWindow.isDestroyed()) {
+        initAutoUpdater(mainWindow);
+        debugLog('[Main] Auto-updater initialized (existing window)');
+      }
     }
     debugLog('[Main] ========== INITIALIZATION COMPLETE ==========');
   } catch (error) {
@@ -8338,7 +10166,7 @@ ipcMain.handle('seo:generateTitle', async (_event, productName: string): Promise
     }
 
     const { generateShoppingConnectTitle } = await import('./naverSearchApi.js');
-    const seoTitle = await generateShoppingConnectTitle(productName.trim(), 2);
+    const seoTitle = await generateShoppingConnectTitle(productName.trim(), 3);
 
     console.log(`[SEO] 제목 생성 완료: "${seoTitle}"`);
     return { success: true, title: seoTitle };

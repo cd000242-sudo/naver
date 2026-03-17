@@ -1,0 +1,16 @@
+=== NanoBananaPro Test v3 ===
+API Key: AIzaSyAtjF...
+Time: 2026-02-19T03:29:42.109Z
+
+[TEST 1] Gemini 3 Pro Image Preview (:generateContent)
+[OK] Gemini 3 Pro success! 18.6s, 1166KB
+[SAVED] C:\Users\박성현\Desktop\리더 네이버 자동화\test-nbp-gemini3.png
+
+[TEST 2] Imagen 4 Fallback (:predict with x-goog-api-key)
+[OK] Imagen 4 success! 10.6s, 2369KB
+[SAVED] C:\Users\박성현\Desktop\리더 네이버 자동화\test-nbp-imagen4.png
+
+=== Results ===
+Gemini 3 Pro: PASS
+Imagen 4:     PASS
+Overall:      AT LEAST ONE PASS

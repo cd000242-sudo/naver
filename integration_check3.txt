@@ -1,0 +1,16 @@
+﻿=== Inlined Module Markers ===
+  OK modules/thumbnailGenerator.js inlined
+  OK modules/multiAccountManager.js inlined
+  OK modules/continuousPublishing.js inlined
+  OK modules/aiAssistant.js inlined
+
+=== Dangling require() ===
+  Count: 1
+    L14680: const { removeBackground } = await Promise.resolve().then(() => __importStar(require('@imgly/backgro
+
+=== Key Functions ===
+  OK function initMultiAccountManager (L15751)
+  OK function generateImagesForAutomation (L15998)
+  OK class ThumbnailGenerator (L13309)
+  OK function applyPresetThumbnailIfExists (L13294)
+  OK function initContinuousPublishingV2 (L10774)

@@ -160,9 +160,49 @@ export async function handleRecurringPost(post: ScheduledPost): Promise<void> {
   }
 }
 
+// ✅ 예약 시간 변경 함수
+export async function rescheduleScheduledPost(postId: string, newScheduleDate: string): Promise<void> {
+  try {
+    const filePath = getScheduledPostsPath();
+    let posts: ScheduledPost[] = [];
+    
+    try {
+      const data = await fs.readFile(filePath, 'utf-8');
+      posts = JSON.parse(data) as ScheduledPost[];
+    } catch {
+      throw new Error('예약 목록을 불러올 수 없습니다.');
+    }
+    
+    const postIndex = posts.findIndex(p => p.id === postId);
+    if (postIndex < 0) {
+      throw new Error('해당 예약을 찾을 수 없습니다.');
+    }
+    
+    posts[postIndex].scheduleDate = newScheduleDate;
+    posts[postIndex].status = 'scheduled'; // 실패 상태에서 복구 가능
+    
+    await fs.writeFile(filePath, JSON.stringify(posts, null, 2), 'utf-8');
+    console.log(`[Scheduler] 예약 시간 변경: ${posts[postIndex].title} → ${newScheduleDate}`);
+  } catch (error) {
+    throw new Error(`예약 시간 변경 실패: ${(error as Error).message}`);
+  }
+}
 
-
-
+// ✅ 실패한 예약 재시도 (현재 시간 + 1분으로 재스케줄)
+export async function retryScheduledPost(postId: string): Promise<void> {
+  const now = new Date();
+  now.setMinutes(now.getMinutes() + 1); // 1분 후 재시도
+  
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const retryDate = `${year}-${month}-${day} ${hours}:${minutes}`;
+  
+  await rescheduleScheduledPost(postId, retryDate);
+  console.log(`[Scheduler] 재시도 예약: ${retryDate}`);
+}
 
 
 

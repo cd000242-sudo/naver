@@ -1,0 +1,39 @@
+﻿Original: 10643 lines
+typeBodyWithRetry original sig: private async typeBodyWithRetry(
+✅ selectCategoryInPublishModal: L652 - L978 (327 lines)
+   sig: private async selectCategoryInPublishModal(frame: Frame, page: Page): Promise<void> {
+✅ debugCategoryElements: L981 - L1027 (47 lines)
+   sig: private async debugCategoryElements(frame: Frame, page: Page): Promise<void> {
+✅ setScheduleDateTime: L3443 - L3916 (474 lines)
+   sig: private async setScheduleDateTime(frame: Frame, scheduleDate: string): Promise<void> {
+✅ debugPublishModal: L3921 - L3997 (77 lines)
+   sig: private async debugPublishModal(): Promise<void> {
+✅ publishScheduled: L4002 - L4228 (227 lines)
+   sig: private async publishScheduled(scheduleDate: string): Promise<void> {
+✅ insertQuotation: L5751 - L5901 (151 lines)
+   sig: private async insertQuotation(frame: Frame, page: Page, style: string = 'line'): Promise<void> {
+✅ applyStructuredContent: L6394 - L8024 (1631 lines)
+   sig: private async applyStructuredContent(resolved: ResolvedRunOptions): Promise<void> {
+✅ setFontSize: L8027 - L8167 (141 lines)
+   sig: private async setFontSize(size: number, force: boolean = false): Promise<void> {
+
+typeBodyWithRetry full sig: private async typeBodyWithRetry(     frame: Frame,     page: Page,     text: string,     fontSize: number = 19   ): Promise<void> {
+✅ typeBodyWithRetry: L5941 - L6291 (351 lines)
+  Extracted params: frame, page, text, fontSize
+
+=== Replacing 9 methods ===
+✅ setFontSize: 141 lines → 3 lines (saved 138)
+✅ applyStructuredContent: 1631 lines → 3 lines (saved 1628)
+✅ typeBodyWithRetry: 351 lines → 8 lines (saved 343)
+✅ insertQuotation: 151 lines → 3 lines (saved 148)
+✅ publishScheduled: 227 lines → 3 lines (saved 224)
+✅ debugPublishModal: 77 lines → 3 lines (saved 74)
+✅ setScheduleDateTime: 474 lines → 3 lines (saved 471)
+✅ debugCategoryElements: 47 lines → 3 lines (saved 44)
+✅ selectCategoryInPublishModal: 327 lines → 3 lines (saved 324)
+
+=== Checking imports ===
+✅ Added publishHelpers import
+✅ Added editorHelpers import
+
+✅ Done! 7251 → 7251 lines

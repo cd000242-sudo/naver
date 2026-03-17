@@ -85,7 +85,8 @@ export class ThumbnailService {
     }
 
     /**
-     * 텍스트 오버레이용 SVG 생성
+     * ✅ [2026-02-08 FIX] 텍스트 오버레이용 SVG 생성
+     * textOverlay.ts와 동일한 스타일로 통일: 배경 없음, 두꺼운 외곽선, 하단 배치
      */
     private generateTextSvg(
         text: string,
@@ -93,62 +94,79 @@ export class ThumbnailService {
         height: number,
         options: any
     ): string {
-        const { textColor, fontSize, fontFamily, opacity, position } = options;
+        const { textColor = '#ffffff', fontFamily = 'Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif', position = 'bottom' } = options;
 
-        // ✅ [개선] 텍스트 줄바꿈 처리 - 쉼표(,) 우선 줄바꿈
-        const maxCharsPerLine = Math.floor(width / (fontSize * 0.6));
+        // ✅ [2026-02-08] 폰트 크기 자동 계산 (textOverlay.ts와 동일 로직)
+        const cleanText = text.trim();
+        const maxLines = 3;
+        const charsPerLine = Math.floor((width * 0.8) / 30);
+
+        // 텍스트 줄바꿈 처리
         const lines: string[] = [];
-
-        // 먼저 쉼표로 분리
-        const commaParts = text.split(',').map(s => s.trim()).filter(s => s.length > 0);
-
-        for (const part of commaParts) {
-            // 각 쉼표 단위가 maxCharsPerLine을 넘으면 추가 분할
-            let remaining = part;
-            while (remaining.length > 0) {
-                if (remaining.length <= maxCharsPerLine) {
-                    lines.push(remaining);
-                    break;
+        if (cleanText.length <= 15) {
+            lines.push(cleanText);
+        } else {
+            const segments = cleanText.split(/([,，.。!?·…\s]+)/);
+            let currentLine = '';
+            for (const segment of segments) {
+                if (currentLine.length + segment.length <= charsPerLine) {
+                    currentLine += segment;
+                } else {
+                    if (currentLine.trim()) lines.push(currentLine.trim());
+                    currentLine = segment.trim();
+                    if (lines.length >= maxLines - 1 && currentLine) {
+                        const remaining = segments.slice(segments.indexOf(segment)).join('').trim();
+                        lines.push(remaining.length > charsPerLine ? remaining.substring(0, charsPerLine - 3) + '...' : remaining);
+                        break;
+                    }
                 }
-                let splitIdx = remaining.lastIndexOf(' ', maxCharsPerLine);
-                if (splitIdx === -1) splitIdx = maxCharsPerLine;
-                lines.push(remaining.slice(0, splitIdx).trim());
-                remaining = remaining.slice(splitIdx).trim();
             }
+            if (currentLine.trim() && lines.length < maxLines) lines.push(currentLine.trim());
         }
 
-        const lineHeight = fontSize * 1.2;
-        const totalTextHeight = lines.length * lineHeight;
+        // ✅ [2026-02-08] 폰트 크기 자동 계산 (textOverlay.ts 동일)
+        const baseSize = Math.floor(width * 0.08);
+        const longestLine = Math.max(...lines.map(l => l.length));
+        let adjustedSize = baseSize;
+        if (longestLine > 15) adjustedSize = Math.floor(baseSize * 0.8);
+        if (longestLine > 25) adjustedSize = Math.floor(baseSize * 0.65);
+        if (longestLine > 35) adjustedSize = Math.floor(baseSize * 0.5);
+        if (lines.length >= 3) adjustedSize = Math.floor(adjustedSize * 0.85);
+        const calculatedFontSize = Math.max(36, Math.min(100, adjustedSize));
 
-        let startY = (height - totalTextHeight) / 2 + fontSize;
-        if (position === 'bottom') {
-            startY = height - totalTextHeight - 40 + fontSize;
-        } else if (position === 'top') {
-            startY = 40 + fontSize;
+        const lineHeight = calculatedFontSize * 1.4;
+        const padding = 30;
+        const textBlockHeight = lines.length * lineHeight + padding * 2;
+
+        // ✅ [2026-02-08] 하단 근접 배치 (textOverlay.ts와 동일)
+        let yPosition: number;
+        if (position === 'center') {
+            yPosition = Math.floor((height - textBlockHeight) / 2);
+        } else {
+            yPosition = height - textBlockHeight - Math.floor(padding * 0.3);
         }
 
-        const textElements = lines.map((line, i) =>
-            `<text x="${width / 2}" y="${startY + i * lineHeight}" 
-             text-anchor="middle" 
-             font-family="${fontFamily}" 
-             font-size="${fontSize}" 
-             font-weight="bold" 
-             fill="${textColor}"
-             filter="url(#shadow)">${this.escapeXml(line)}</text>`
-        ).join('\n');
+        // ✅ [2026-02-08] textOverlay.ts와 동일한 스타일: 두꺼운 외곽선 + 흰색 텍스트
+        const textElements = lines.map((line, index) => {
+            const y = yPosition + padding + (index + 0.8) * lineHeight;
+            const escaped = this.escapeXml(line);
+            return `
+            <!-- 두꺼운 외곽선 -->
+            <text x="50%" y="${y}" text-anchor="middle" 
+                fill="none" stroke="black" stroke-width="16" stroke-linejoin="round"
+                font-size="${calculatedFontSize}px" font-family="${fontFamily}" font-weight="900"
+            >${escaped}</text>
+            <!-- 메인 텍스트 -->
+            <text x="50%" y="${y}" text-anchor="middle" 
+                fill="${textColor}"
+                font-size="${calculatedFontSize}px" font-family="${fontFamily}" font-weight="900"
+            >${escaped}</text>`;
+        }).join('\n');
 
-        // 가독성을 위한 반투명 검은색 배경 박스 또는 그림자
-        const rectHeight = totalTextHeight + 40;
-        const rectY = startY - fontSize - 10;
-
+        // ✅ [2026-02-08] 배경 오버레이 없음 — 텍스트만 외곽선으로 표시
         return `
       <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="2" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.8"/>
-          </filter>
-        </defs>
-        <rect x="0" y="${rectY}" width="${width}" height="${rectHeight}" fill="black" fill-opacity="0.4" />
+        <!-- 텍스트만 (배경 오버레이 없음) -->
         ${textElements}
       </svg>
     `;

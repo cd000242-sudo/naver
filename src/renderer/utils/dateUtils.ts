@@ -37,7 +37,7 @@ export function getScheduleDateFromInput(inputId: string): string | undefined {
 export function getRecommendedScheduleTime(): string {
     const now = new Date();
     const hoursToAdd = 2 + Math.random() * 2; // 2-4시간 사이
-    const minutesToAdd = Math.floor(Math.random() * 60); // 0-59분
+    const minutesToAdd = Math.floor(Math.random() * 6) * 10; // 0, 10, 20, 30, 40, 50 (10분 단위)
 
     const recommendedTime = new Date(now.getTime() + (hoursToAdd * 60 * 60 * 1000) + (minutesToAdd * 60 * 1000));
 
@@ -46,7 +46,9 @@ export function getRecommendedScheduleTime(): string {
     const month = String(recommendedTime.getMonth() + 1).padStart(2, '0');
     const day = String(recommendedTime.getDate()).padStart(2, '0');
     const hours = String(recommendedTime.getHours()).padStart(2, '0');
-    const minutes = String(recommendedTime.getMinutes()).padStart(2, '0');
+    // 10분 단위로 올림 (네이버 서버 예약 제한)
+    const rawMinutes = recommendedTime.getMinutes();
+    const minutes = String(Math.ceil(rawMinutes / 10) * 10 % 60).padStart(2, '0');
 
     return `${year}-${month}-${day}T${hours}:${minutes}`;
 }

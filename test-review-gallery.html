@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Cross-Store Gallery</title>
+<style>
+body{background:#111;color:#fff;font-family:sans-serif;padding:20px}
+h1{text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.card{background:#222;border-radius:8px;overflow:hidden;padding:5px}
+.card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px}
+.card p{text-align:center;font-size:10px;margin:4px 0;color:#aaa;word-break:break-all}
+.ok{border:2px solid #0f0}
+.fail{border:2px solid #f00}
+</style></head>
+<body>
+<h1>Cross-Store Image Gallery</h1>
+<p style="text-align:center;color:#888">Green = OK, Red = FAILED (404)</p>
+<div class="grid"><div class="card" id="card-airmade-0">
+                <img src="https://shop-phinf.pstatic.net/20250228_209/1740736086598GVnpY_JPEG/74868892332122061_1653476524.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [1] PRODUCT<br>74868892332122061_1653476524.j</p>
+            </div>
+<div class="card" id="card-airmade-1">
+                <img src="https://shop-phinf.pstatic.net/20241004_22/172801401479039Qwh_JPEG/335094938287111_1917170374.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [2] PRODUCT<br>335094938287111_1917170374.jpg</p>
+            </div>
+<div class="card" id="card-airmade-2">
+                <img src="https://shop-phinf.pstatic.net/20241004_101/1728014006586Sv0ya_JPEG/16495930535734979_1090532206.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [3] PRODUCT<br>16495930535734979_1090532206.j</p>
+            </div>
+<div class="card" id="card-airmade-3">
+                <img src="https://shop-phinf.pstatic.net/20241004_122/1728014080053NJC6C_JPEG/4501388180939042_17843476.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [4] PRODUCT<br>4501388180939042_17843476.jpg?</p>
+            </div>
+<div class="card" id="card-airmade-4">
+                <img src="https://shop-phinf.pstatic.net/20241101_60/1730465399849BBrDk_JPEG/16718625700561171_1599184135.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [5] PRODUCT<br>16718625700561171_1599184135.j</p>
+            </div>
+<div class="card" id="card-airmade-5">
+                <img src="https://shop-phinf.pstatic.net/20241120_179/17320908494136hV6T_JPEG/47682507215470030_223106745.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [6] PRODUCT<br>47682507215470030_223106745.jp</p>
+            </div>
+<div class="card" id="card-airmade-6">
+                <img src="https://phinf.pstatic.net/image.nmv/shopnbuyer_2026_01_06_2199/KabSxz9gQu_03.jpg" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [7] VIDEO<br>KabSxz9gQu_03.jpg</p>
+            </div>
+<div class="card" id="card-airmade-7">
+                <img src="https://phinf.pstatic.net/checkout.phinf/20260207_42/1770471194347VVxWk_JPEG/IMG_4358.jpeg" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [8] REVIEW<br>IMG_4358.jpeg</p>
+            </div>
+<div class="card" id="card-airmade-8">
+                <img src="https://phinf.pstatic.net/image.nmv/shopnbuyer_2026_01_15_1884/rJFygNmuA1_03.jpg" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [9] VIDEO<br>rJFygNmuA1_03.jpg</p>
+            </div>
+<div class="card" id="card-airmade-9">
+                <img src="https://phinf.pstatic.net/checkout.phinf/20260203_37/17701204441893Q696_JPEG/20260203_210130.jpg" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [10] REVIEW<br>20260203_210130.jpg</p>
+            </div>
+<div class="card" id="card-airmade-10">
+                <img src="https://mblogthumb-phinf.pstatic.net/MjAyNTEwMjdfMjk4/MDAxNzYxNTY1NDg0MzU0.6YtxyF368Y7_rqLSVcl14KDcK9_dsmOHJZepDN0qhcog.2oEtkUPkNwAObCywgLtQujQvi0Z2S7Pt4QvLSbW0FOkg.JPEG/IMG%A3%DF9863.jpg?type=w480" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [11] PRODUCT<br>IMG%A3%DF9863.jpg?type=w480</p>
+            </div>
+<div class="card" id="card-airmade-11">
+                <img src="https://mblogthumb-phinf.pstatic.net/MjAyNTEwMTJfMTg4/MDAxNzYwMjY5MjE0NzY3.LRLEzpQSkOj_mqGvqCwcUqDPkGVYUIUrTz3o5cdIBAog.EF9YZpyItC-lIW_kZobn37xg4wMDijhZpzlFSzCOblog.JPEG/IMG%A3%DF7908.jpg?type=w480" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [12] PRODUCT<br>IMG%A3%DF7908.jpg?type=w480</p>
+            </div>
+<div class="card" id="card-airmade-12">
+                <img src="https://mblogthumb-phinf.pstatic.net/MjAyNTEwMjJfMTg2/MDAxNzYxMTM2MDQ0ODIy.sLrrDJA2RAgJaTiLfjVoa-ghYE-dHkZ9mS388i1Xv5Eg.7v3o0eAwA-TYfsIyn4YmnRgU3gQ03BDGH3BY_pcyk-4g.JPEG/IMG＿1010.jpg?type=w480" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [13] PRODUCT<br>IMG＿1010.jpg?type=w480</p>
+            </div>
+<div class="card" id="card-airmade-13">
+                <img src="https://mblogthumb-phinf.pstatic.net/MjAyNTEwMjJfMjM0/MDAxNzYxMTQ0NTQ3ODgz.wWQqYjCLQe8UNRQiUnhOiH9ejPqD_FdMm_wZFjxA3skg.zYDfBvtSxcIqaRKhCYmz2KYvZkfzu4j1frpQf5lbXpQg.JPEG/IMG%A3%DF6959.jpg?type=w480" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [14] PRODUCT<br>IMG%A3%DF6959.jpg?type=w480</p>
+            </div>
+<div class="card" id="card-airmade-14">
+                <img src="https://mblogthumb-phinf.pstatic.net/MjAyNTEwMjlfMTAz/MDAxNzYxNjY0NDg2MDQy.DKoyqzfI3nvx7M7nm8xm5aY3tL7tw8YL-ghn-w4FfSsg.QDRj1eY7gAC_Ec49pNZYjlA66TfZ4EnMxnAifQIqZ9Yg.JPEG/썸네일.jpg?type=w480" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [15] PRODUCT<br>썸네일.jpg?type=w480</p>
+            </div>
+<div class="card" id="card-airmade-15">
+                <img src="https://mblogthumb-phinf.pstatic.net/MjAyNTEwMjFfMTU2/MDAxNzYxMDM1MzIxMDUx.-6Pvtgzc2s5DOYlq5ESF77Bv9F4HixwSjnZkhPQiuB0g.cSUHopJLlBnPg4zdUcsGWyRpK4JasEwMoo1_dYay0CUg.PNG/섬네일.png?type=w480" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>airmade</b> [16] PRODUCT<br>섬네일.png?type=w480</p>
+            </div>
+<div class="card" id="card-thehaam-0">
+                <img src="https://shop-phinf.pstatic.net/20260109_1/1767924740087dDK6L_JPEG/48082359179125592_1447658581.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [1] PRODUCT<br>48082359179125592_1447658581.j</p>
+            </div>
+<div class="card" id="card-thehaam-1">
+                <img src="https://shop-phinf.pstatic.net/20240927_141/1727414752122DfKjT_JPEG/11525797952960172_289488398.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [2] PRODUCT<br>11525797952960172_289488398.jp</p>
+            </div>
+<div class="card" id="card-thehaam-2">
+                <img src="https://shop-phinf.pstatic.net/20241104_66/1730699946138gxFKp_JPEG/16953172007886454_421150780.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [3] PRODUCT<br>16953172007886454_421150780.jp</p>
+            </div>
+<div class="card" id="card-thehaam-3">
+                <img src="https://shop-phinf.pstatic.net/20240730_186/1722318429189OYr0F_JPEG/3112646450682298_2126618428.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [4] PRODUCT<br>3112646450682298_2126618428.jp</p>
+            </div>
+<div class="card" id="card-thehaam-4">
+                <img src="https://shop-phinf.pstatic.net/20250423_20/1745389098696zgjTY_JPEG/10197736513034010_944355380.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [5] PRODUCT<br>10197736513034010_944355380.jp</p>
+            </div>
+<div class="card" id="card-thehaam-5">
+                <img src="https://shop-phinf.pstatic.net/20250218_228/1739845563690raQpm_JPEG/72479600252720563_2054453785.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [6] PRODUCT<br>72479600252720563_2054453785.j</p>
+            </div>
+<div class="card" id="card-thehaam-6">
+                <img src="https://shop-phinf.pstatic.net/20250423_275/174538909900043WVO_JPEG/10197736814781525_1413383523.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [7] PRODUCT<br>10197736814781525_1413383523.j</p>
+            </div>
+<div class="card" id="card-thehaam-7">
+                <img src="https://shop-phinf.pstatic.net/20250423_45/17453890993923W2tH_JPEG/10197737209155380_2124016262.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [8] PRODUCT<br>10197737209155380_2124016262.j</p>
+            </div>
+<div class="card" id="card-thehaam-8">
+                <img src="https://shop-phinf.pstatic.net/20250423_25/1745389099719kQsxu_JPEG/10197737533257574_1136474434.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [9] PRODUCT<br>10197737533257574_1136474434.j</p>
+            </div>
+<div class="card" id="card-thehaam-9">
+                <img src="https://shop-phinf.pstatic.net/20250423_40/1745391716410RJPfa_JPEG/79524549839120432_1633326543.jpg?type=f640_640" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [10] PRODUCT<br>79524549839120432_1633326543.j</p>
+            </div>
+<div class="card" id="card-thehaam-10">
+                <img src="https://phinf.pstatic.net/checkout.phinf/20260116_280/1768542806922bo5eh_JPEG/IMG_6330.jpeg" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [11] REVIEW<br>IMG_6330.jpeg</p>
+            </div>
+<div class="card" id="card-thehaam-11">
+                <img src="https://phinf.pstatic.net/checkout.phinf/20251223_109/17664184389621CkEN_JPEG/KakaoTalk_20251223_004600969_01.jpg" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [12] REVIEW<br>KakaoTalk_20251223_004600969_0</p>
+            </div>
+<div class="card" id="card-thehaam-12">
+                <img src="https://phinf.pstatic.net/checkout.phinf/20260102_249/1767363178297JmwkS_JPEG/IMG_0537.jpeg" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [13] REVIEW<br>IMG_0537.jpeg</p>
+            </div>
+<div class="card" id="card-thehaam-13">
+                <img src="https://phinf.pstatic.net/checkout.phinf/20260127_11/1769513394705jwjHC_JPEG/IMG_8732.jpeg" onload="this.parentElement.classList.add('ok')" onerror="this.parentElement.classList.add('fail')">
+                <p><b>thehaam</b> [14] REVIEW<br>IMG_8732.jpeg</p>
+            </div>
+</div>
+</body></html>

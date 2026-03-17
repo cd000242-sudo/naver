@@ -1,0 +1,6 @@
+L14: export async function selectCategoryInPublishModal(self: any, frame: Frame, page: Page): Promise<void> {
+L385: export async function debugCategoryElements(self: any, frame: Frame, page: Page): Promise<void> {
+L441: export async function setScheduleDateTime(self: any, frame: Frame, scheduleDate: string): Promise<void> {
+L921: export async function debugPublishModal(self: any): Promise<void> {
+L1004: export async function publishScheduled(self: any, scheduleDate: string): Promise<void> {
+L1234: export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate?: string, scheduleMethod: 'datetime-local' | 'individual-inputs' = 'datetime-local'): Promise<void> {

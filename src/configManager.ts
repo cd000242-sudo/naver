@@ -4,6 +4,7 @@ import path from 'path';
 
 export interface AppConfig {
   geminiApiKey?: string;
+  geminiApiKeys?: string[]; // ✅ [2026-02-13] 다중 Gemini API 키 (429 할당량 자동 로테이션)
   geminiModel?: 'gemini-2.0-flash-exp' | 'gemini-2.0-flash' | 'gemini-1.5-flash' | 'gemini-1.5-pro' | string; // ✅ 최신 모델 및 문자열 허용
   openaiApiKey?: string;
   pexelsApiKey?: string;
@@ -11,8 +12,11 @@ export interface AppConfig {
   pixabayApiKey?: string;
   claudeApiKey?: string;
   perplexityApiKey?: string; // ✅ [2026-01-25] Perplexity API 키 추가
-  stabilityApiKey?: string; // ✅ Stability AI API Key
-  prodiaToken?: string; // ✅ Prodia API Token
+  // ✅ [2026-02-22] OpenAI Image (DALL-E gpt-image-1) API Key
+  openaiImageApiKey?: string;
+  // ✅ [2026-02-22] Leonardo AI API Key
+  leonardoaiApiKey?: string;
+
   naverDatalabApiKey?: string;
   naverDatalabClientId?: string;
   naverDatalabClientSecret?: string;
@@ -70,34 +74,28 @@ export interface AppConfig {
   geminiImageDailyCount?: number;
   geminiImageLastReset?: string;
 
-  // ✅ Fal.ai API (FLUX 이미지 생성)
-  falaiApiKey?: string;
+  // ✅ [2026-02-23] Leonardo AI 모델 선택
+  leonardoaiModel?: 'seedream-4.5' | 'phoenix-1.0' | 'ideogram-3.0' | 'nano-banana-pro';
+
+  // ✅ DeepInfra API (FLUX-2-dev 고품질 저가)
+  deepinfraApiKey?: string;
 
   // ✅ Gemini 텍스트 생성 주 모델 선택
-  primaryGeminiTextModel?: 'gemini-3-pro-preview' | 'gemini-3-flash-preview' | 'gemini-2.5-flash' | string;
+  primaryGeminiTextModel?: 'gemini-3.1-pro-preview' | 'gemini-3-flash-preview' | 'gemini-2.5-flash' | string;
 
   // ✅ 이미지 품질 티어 시스템 (비용 최적화)
   imageQualityMode?: 'balanced' | 'all-budget' | 'all-premium' | 'all-4k';
-  thumbnailImageModel?: 'gemini-3-pro-4k' | 'gemini-3-pro' | 'gemini-2.5-flash';
-  otherImagesModel?: 'gemini-2.5-flash' | 'gemini-3-pro' | 'gemini-3-pro-4k';
+  thumbnailImageModel?: 'gemini-3-pro-4k' | 'gemini-3-pro' | 'gemini-2.5-flash' | 'gemini-2.0-flash-exp';
+  otherImagesModel?: 'gemini-2.5-flash' | 'gemini-2.0-flash-exp' | 'gemini-3-pro' | 'gemini-3-pro-4k';
   lockThumbnailTo4K?: boolean; // 기본값 true: 썸네일은 항상 4K 품질
 
-  // ✅ [2026-01-16] 이미지 생성 모델 상세 설정 (환경설정에서 선택)
-  // Fal.ai (FLUX 계열)
-  falaiModel?: 'flux-schnell' | 'flux-dev' | 'flux-pro' | 'flux-1.1-pro' | 'flux-realism';
-  // Stability.AI
-  stabilityModel?: 'sdxl-1.0' | 'sd35-flash' | 'sd35-medium' | 'sd35-large-turbo' | 'sd35-large' | 'stable-image-ultra';
-  // Nano Banana Pro (Gemini 기반) - 대표/서브/썸네일 별도 설정
-  nanoBananaMainModel?: 'gemini-2.5-flash' | 'gemini-3-pro' | 'gemini-3-pro-4k';
-  nanoBananaSubModel?: 'gemini-2.5-flash' | 'gemini-3-pro' | 'gemini-3-pro-4k';
-  nanoBananaThumbnailModel?: 'gemini-2.5-flash' | 'gemini-3-pro' | 'gemini-3-pro-4k';
-  // Pollinations (무료)
-  pollinationsModel?: 'default';
+  // ✅ [2026-02-08] 이미지 엔진 모델 설정 (DeepInfra만 유지)
+  deepinfraModel?: string;
   // 이미지 설정 프리셋
   imagePreset?: 'budget' | 'premium' | 'custom';
 
   // ✅ [2026-01-25] 전역 AI 제공자 설정
-  defaultAiProvider?: 'gemini' | 'perplexity';
+  defaultAiProvider?: 'gemini' | 'perplexity' | 'openai' | 'claude';
   perplexityModel?: 'sonar' | 'sonar-pro';
 }
 
@@ -106,21 +104,48 @@ const CONFIG_FILE = 'settings.json';
 let cachedConfig: AppConfig | null = null;
 let configPath: string | null = null;
 
-async function ensureConfigPath(): Promise<string> {
-  if (configPath) {
-    return configPath;
-  }
+/** ✅ [2026-02-26] 계정별 설정 파일 지원 */
+let _activeUserId: string = '';
+let _userConfigPaths: Map<string, string> = new Map();
 
+async function ensureConfigPath(userId?: string): Promise<string> {
   if (!app.isReady()) {
     await app.whenReady();
   }
 
+  const targetUserId = userId || _activeUserId;
+
+  // ✅ [2026-02-26] 계정별 설정 파일 경로
+  if (targetUserId) {
+    const cached = _userConfigPaths.get(targetUserId);
+    if (cached) return cached;
+
+    const userConfigFile = `settings_${targetUserId.replace(/[^a-zA-Z0-9_-]/g, '_')}.json`;
+    const userPath = path.join(app.getPath('userData'), userConfigFile);
+    _userConfigPaths.set(targetUserId, userPath);
+
+    // 계정별 파일이 없으면 기본 설정 파일에서 복사 (마이그레이션)
+    try {
+      await fs.access(userPath);
+    } catch {
+      const defaultPath = path.join(app.getPath('userData'), CONFIG_FILE);
+      try {
+        await fs.access(defaultPath);
+        await fs.copyFile(defaultPath, userPath);
+        console.log(`[Config] 🔄 기본 설정 → 계정별 설정 마이그레이션 완료: ${userConfigFile}`);
+      } catch {
+        console.log(`[Config] 📄 새 계정 설정 파일 생성 예정: ${userConfigFile}`);
+      }
+    }
+
+    console.log(`[Config] 설정 파일 경로 (계정: ${targetUserId}):`, userPath);
+    return userPath;
+  }
+
+  // 기본 경로
+  if (configPath) return configPath;
   configPath = path.join(app.getPath('userData'), CONFIG_FILE);
-
-  // ✅ 사용자가 입력한 설정은 항상 유지됨
-  // 초기화는 배포팩 생성 시 scripts/reset-config-for-pack.js에서만 수행
   console.log('[Config] 설정 파일 경로:', configPath);
-
   return configPath;
 }
 
@@ -142,9 +167,15 @@ export async function loadConfig(): Promise<AppConfig> {
     // 주의: 패키지 생성 시에만 초기화되어야 하며, 사용자가 저장한 값은 그대로 유지되어야 함
     // 초기화는 scripts/reset-config-for-pack.js에서만 수행됨
 
-    // ✅ 2026-01-04: 더 이상 모델 강제 변환 안 함 (gemini-1.5, 2.0이 정상 작동 확인됨)
-    // 사용자가 선택한 모델을 그대로 사용하고, 실패 시 폴백 로직이 처리
+    // ✅ [2026-01-28 FIX] 구 모델명을 새 Gemini 3 모델로 마이그레이션
+    // gemini-1.5-pro, gemini-1.5-flash는 Google API v1beta에서 더 이상 지원되지 않음
     let geminiModel = parsed.geminiModel;
+    const DEPRECATED_MODELS = ['gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-pro', 'gemini-pro-vision'];
+    if (geminiModel && DEPRECATED_MODELS.some(m => geminiModel.includes(m))) {
+      const oldModel = geminiModel;
+      geminiModel = 'gemini-3-flash-preview';  // 새 기본 모델로 자동 전환
+      console.log(`[Config] ⚠️ 구 모델(${oldModel}) → 새 모델(${geminiModel})로 자동 마이그레이션`);
+    }
 
     // 하이픈 형식 키를 카멜케이스로 변환 (하위 호환성)
     const normalizedConfig: AppConfig = {
@@ -155,10 +186,10 @@ export async function loadConfig(): Promise<AppConfig> {
       openaiApiKey: parsed.openaiApiKey || parsed['openai-api-key'] || undefined,
       claudeApiKey: parsed.claudeApiKey || parsed['claude-api-key'] || undefined,
       pexelsApiKey: parsed.pexelsApiKey || parsed['pexels-api-key'] || undefined,
-      prodiaToken: parsed.prodiaToken || parsed['prodia-token'] || undefined,
+      prodiaToken: undefined, // deprecated - removed
       unsplashApiKey: parsed.unsplashApiKey || parsed['unsplash-api-key'] || undefined,
       pixabayApiKey: parsed.pixabayApiKey || parsed['pixabay-api-key'] || undefined,
-      stabilityApiKey: parsed.stabilityApiKey || parsed['stability-api-key'] || undefined, // ✅ Stability AI 추가
+      stabilityApiKey: undefined, // deprecated - removed
       naverDatalabClientId: parsed.naverDatalabClientId || parsed['naver-datalab-client-id'] || undefined,
       naverDatalabClientSecret: parsed.naverDatalabClientSecret || parsed['naver-datalab-client-secret'] || undefined,
       // ✅ [2026-01-25] 네이버 검색 API 키 추가
@@ -168,10 +199,17 @@ export async function loadConfig(): Promise<AppConfig> {
       naverAdApiKey: parsed.naverAdApiKey || undefined,
       naverAdSecretKey: parsed.naverAdSecretKey || undefined,
       naverAdCustomerId: parsed.naverAdCustomerId || undefined,
-      // ✅ Fal.ai API 키 추가
-      falaiApiKey: parsed.falaiApiKey || parsed['falai-api-key'] || undefined,
+      // ✅ [2026-02-22] 새 이미지 프로바이더 API 키
+      openaiImageApiKey: parsed.openaiImageApiKey || undefined,
+      leonardoaiApiKey: parsed.leonardoaiApiKey || undefined,
+
+      leonardoaiModel: parsed.leonardoaiModel || undefined,
       // ✅ [2026-01-25] Perplexity API 키 추가
       perplexityApiKey: parsed.perplexityApiKey || parsed['perplexity-api-key'] || undefined,
+      // ✅ [2026-01-26] DeepInfra API 키 추가
+      deepinfraApiKey: parsed.deepinfraApiKey || parsed['deepinfra-api-key'] || undefined,
+      // ✅ [2026-02-08] 이미지 엔진 모델 설정 명시적 파싱
+      deepinfraModel: parsed.deepinfraModel || undefined,
     };
 
     // 빈 문자열 제거 및 undefined 제거
@@ -216,14 +254,8 @@ export async function loadConfig(): Promise<AppConfig> {
       'openai-api-key': normalizedConfig.openaiApiKey,
       'claude-api-key': normalizedConfig.claudeApiKey,
       'pexels-api-key': normalizedConfig.pexelsApiKey,
-      'stability-api-key': normalizedConfig.stabilityApiKey,
-      'prodia-token': normalizedConfig.prodiaToken,
+      // (deprecated keys removed: stability, prodia, falai)
       'unsplash-api-key': normalizedConfig.unsplashApiKey,
-      'pixabay-api-key': normalizedConfig.pixabayApiKey,
-      'naver-datalab-client-id': normalizedConfig.naverDatalabClientId,
-      'naver-datalab-client-secret': normalizedConfig.naverDatalabClientSecret,
-      // ✅ Fal.ai 키 호환성
-      'falai-api-key': (normalizedConfig as any).falaiApiKey,
       // ✅ [2026-01-25] 네이버 검색 API 키 호환성
       'naver-client-id': normalizedConfig.naverClientId || normalizedConfig.naverDatalabClientId,
       'naver-client-secret': normalizedConfig.naverClientSecret || normalizedConfig.naverDatalabClientSecret,
@@ -233,6 +265,8 @@ export async function loadConfig(): Promise<AppConfig> {
       'naver-ad-api-key': normalizedConfig.naverAdApiKey,
       'naver-ad-secret-key': normalizedConfig.naverAdSecretKey,
       'naver-ad-customer-id': normalizedConfig.naverAdCustomerId,
+      // ✅ [2026-01-26] DeepInfra API 키 호환성
+      'deepinfra-api-key': (normalizedConfig as any).deepinfraApiKey,
     };
 
     cachedConfig = compatibleConfig;
@@ -250,9 +284,7 @@ export async function loadConfig(): Promise<AppConfig> {
     if (compatibleConfig.pexelsApiKey) {
       console.log('[Config] Pexels API 키 존재:', compatibleConfig.pexelsApiKey.substring(0, 10) + '...');
     }
-    if (compatibleConfig.stabilityApiKey) {
-      console.log('[Config] Stability AI API 키 존재:', compatibleConfig.stabilityApiKey.substring(0, 10) + '...');
-    }
+
     // 네이버 아이디/비밀번호 저장 상태 확인
     if (compatibleConfig.savedNaverId) {
       console.log('[Config] 저장된 네이버 아이디 존재:', compatibleConfig.savedNaverId.substring(0, 3) + '***');
@@ -276,7 +308,7 @@ export async function loadConfig(): Promise<AppConfig> {
           pexelsApiKey: '',
           unsplashApiKey: '',
           pixabayApiKey: '',
-          stabilityApiKey: '', // ✅ Stability AI 추가
+
           naverDatalabClientId: '',
           naverDatalabClientSecret: '',
           // 네이버 계정 정보 없음
@@ -318,13 +350,28 @@ export function getConfigSync(): AppConfig {
 }
 
 export async function saveConfig(update: AppConfig): Promise<AppConfig> {
+  // ✅ [2026-02-26] __userId가 전달되면 계정별 설정 모드 활성화
+  const updateAny = update as any;
+  if (updateAny.__userId && typeof updateAny.__userId === 'string') {
+    _activeUserId = updateAny.__userId;
+    delete updateAny.__userId;
+    // 캐시 초기화하여 계정별 파일에서 새로 로드하도록
+    cachedConfig = null;
+    console.log(`[Config] ✅ 계정별 설정 모드 활성화: ${_activeUserId}`);
+    // 계정별 설정 로드
+    const loaded = await loadConfig();
+    cachedConfig = { ...loaded, ...updateAny };
+  } else {
+    cachedConfig = {
+      ...cachedConfig,
+      ...update,
+    };
+  }
+
   const filePath = await ensureConfigPath();
-  cachedConfig = {
-    ...cachedConfig,
-    ...update,
-  };
 
   // Remove empty strings to avoid clutter
+  if (!cachedConfig) cachedConfig = {};
   Object.keys(cachedConfig).forEach((key) => {
     const typedKey = key as keyof AppConfig;
     const value = cachedConfig?.[typedKey];
@@ -370,11 +417,7 @@ export function applyConfigToEnv(config: AppConfig): void {
     console.log('[Config] GEMINI_API_KEY 설정됨 (길이:', config.geminiApiKey.trim().length, ')');
   }
 
-  if (config.prodiaToken && config.prodiaToken.trim()) {
-    process.env.PRODIA_TOKEN = config.prodiaToken.trim();
-  } else {
-    delete process.env.PRODIA_TOKEN;
-  }
+  // (removed prodiaToken env injection - deprecated)
 
   // ✅ Gemini 모델 설정 (2026-01-04: 강제 변환 제거, 화읷성 최우선)
   // 사용자가 직접 선택한 모델을 존중하고, 실패 시 폴백 로직이 처리
@@ -402,10 +445,7 @@ export function applyConfigToEnv(config: AppConfig): void {
     delete process.env.CLAUDE_API_KEY;
   }
 
-  if (config.stabilityApiKey && config.stabilityApiKey.trim()) {
-    process.env.STABILITY_API_KEY = config.stabilityApiKey.trim();
-    console.log('[Config] STABILITY_API_KEY 설정됨 (길이:', config.stabilityApiKey.trim().length, ')');
-  }
+  // (removed stabilityApiKey env injection - deprecated)
 
   // ✅ [2026-01-25] Perplexity API 키 설정
   if (config.perplexityApiKey && config.perplexityApiKey.trim()) {
@@ -483,10 +523,26 @@ export function applyConfigToEnv(config: AppConfig): void {
     console.log('[Config] rememberCredentials가 false이므로 환경변수 제거됨');
   }
 
-  // ✅ Fal.ai API 키 설정
-  if ((config as any).falaiApiKey && (config as any).falaiApiKey.trim()) {
-    process.env.FALAI_API_KEY = (config as any).falaiApiKey.trim();
-    console.log('[Config] FALAI_API_KEY 설정됨 (길이:', (config as any).falaiApiKey.trim().length, ')');
+  // ✅ [2026-02-22] OpenAI Image API 키 설정
+  if ((config as any).openaiImageApiKey && (config as any).openaiImageApiKey.trim()) {
+    process.env.OPENAI_IMAGE_API_KEY = (config as any).openaiImageApiKey.trim();
+    console.log('[Config] OPENAI_IMAGE_API_KEY 설정됨 (길이:', (config as any).openaiImageApiKey.trim().length, ')');
+  }
+
+  // ✅ [2026-02-22] Leonardo AI API 키 설정
+  if ((config as any).leonardoaiApiKey && (config as any).leonardoaiApiKey.trim()) {
+    process.env.LEONARDOAI_API_KEY = (config as any).leonardoaiApiKey.trim();
+    console.log('[Config] LEONARDOAI_API_KEY 설정됨 (길이:', (config as any).leonardoaiApiKey.trim().length, ')');
+  }
+
+
+
+  // ✅ [2026-01-30] DeepInfra API 키 설정
+  if (config.deepinfraApiKey && config.deepinfraApiKey.trim()) {
+    process.env.DEEPINFRA_API_KEY = config.deepinfraApiKey.trim();
+    console.log('[Config] DEEPINFRA_API_KEY 설정됨 (길이:', config.deepinfraApiKey.trim().length, ')');
+  } else {
+    delete process.env.DEEPINFRA_API_KEY;
   }
 }
 

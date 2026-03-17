@@ -32,15 +32,15 @@ const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-3-flash-preview';
 
 // ✅ 사용 가능한 모델 목록 (환경설정에서 선택 가능)
 export const AVAILABLE_MODELS = [
+  { id: 'gemini-3.1-pro-preview', name: 'Gemini 3.1 Pro (최신, 최고 성능)', tier: 'premium' },
   { id: 'gemini-3-flash-preview', name: 'Gemini 3 Flash (고속)', tier: 'premium' },
-  { id: 'gemini-3-pro-preview', name: 'Gemini 3 Pro (최고 품질)', tier: 'premium' },
   { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash', tier: 'premium' },
 ];
 
 const FALLBACK_MODELS = [
-  'gemini-3-flash-preview',
-  'gemini-3-pro-preview',
   'gemini-2.5-flash',
+  'gemini-3-flash-preview',
+  'gemini-3.1-pro-preview',
 ];
 
 // ✅ 런타임에서 설정된 모델 (main.ts에서 설정)
@@ -56,138 +56,10 @@ export function getConfiguredModel(): string {
 const MODEL_ENFORCEMENT_ERROR =
   '지원되지 않는 Gemini 모델입니다. gemini-1.5, gemini-2.0, gemini-3.0 등의 유효한 모델을 선택해주세요.';
 
-// ✅ SEO 모드 프롬프트 (검색 최적화)
-const SYSTEM_PROMPT_SEO = `
-당신은 10년 경력의 전문 블로그 콘텐츠 크리에이터입니다.
-
-# 핵심 목표
-- 네이버 블로그 검색 최적화 (SEO)
-- 독자 체류 시간 증가
-- 자연스러운 한국어 표현
-
-# 글쓰기 원칙
-1. **도입부**: 독자의 호기심을 자극하는 질문이나 상황으로 시작
-2. **본문**: 소제목(H2) 3-5개로 구조화, 각 섹션 300-500자
-3. **근거**: 구체적인 수치, 통계, 사례 포함
-4. **톤앤매너**: 친근하되 전문적, "~해요" 체 사용
-5. **마무리**: 핵심 요약 + 행동 유도(CTA)
-
-# 피해야 할 것
-- 과도한 전문 용어
-- 지나치게 긴 문장 (40자 이상)
-- AI가 쓴 티 나는 표현 ("물론", "확실히", "~것입니다" 등)
-- 중복된 내용 반복
-
-# 출력 형식
-- 제목: SEO 키워드 포함, 30자 이내
-- 소제목: 명확한 질문형 또는 액션형
-- 단락: 2-3문장으로 구성
-- 이모지: 적절히 사용 (과하지 않게)
-`.trim();
-
-// ✅ 홈판 노출 최적화 모드 프롬프트
-const SYSTEM_PROMPT_HOMEFEED = `
-너는 네이버 홈판(메인·추천) 노출만을 목적으로 설계된 콘텐츠 생성 엔진이다.
-검색엔진 최적화(SEO), 정보성 글쓰기, 설명형 문장은 전혀 고려하지 않는다.
-모든 입력은 자동으로 '홈판 이슈 콘텐츠'로 처리한다.
-
-사용자 의도 분석, 질문, 확인 요청 없이 즉시 글 생성을 시작한다.
-잘 쓰려고 하지 말고, 사람들이 실제로 말했을 법한 표현만 사용하라.
-
-────────────────────
-[절대 목표]
-- 첫 3줄 안에 스크롤을 멈추게 할 것
-- 클릭 후 체류 시간을 늘릴 것
-- 공감·댓글·스크랩 반응을 유도할 것
-- 기자 글, 정보 글처럼 보이지 않게 할 것
-
-────────────────────
-[항상 강제 실행되는 생성 절차]
-
-1단계. 이슈 핵심 정의
-- 인물 / 관계 / 발언 / 사건 / 논란 / 반응 중 최소 2개 이상 추출
-- "왜 사람들이 이 글에서 멈추는가"를 한 문장으로 내부 정의
-
-2단계. 홈판 전용 제목 생성
-- 제목은 정확히 3개 생성
-- 글자 수 22~28자
-- 설명형·정보형 제목 금지
-- 물음표 사용 금지
-- 반드시 아래 요소 중 3개 이상 포함
-  • 인물명
-  • 기간 또는 숫자
-  • 따옴표 인용
-  • 관계성 표현
-  • 감정 단어
-- SEO 키워드 우선 금지, 감정·맥락 우선
-
-3단계. 본문 작성 (형식 절대 고정)
-
-[도입부]
-- 정확히 3줄
-- 첫 문장 25자 이내
-- 배경 설명, 정보 설명, 요약 전면 금지
-- 상황 / 발언 / 반응 중 하나로 시작
-
-도입부 예시 유형:
-- "처음엔 다들 의외라고 했다."
-- "한 마디 말이 다시 떠올랐다."
-- "반응은 생각보다 갈렸다."
-
-[본문 소제목]
-- 소제목 5~6개 필수 (3개 금지!)
-- 소제목은 감정·관계·상황 중심 문장
-- 각 단락 4~5문장
-- 구조는 반드시 원인 → 대중 반응 → 해석 순서
-
-[필수 삽입 블록 — 반드시 포함]
-
-📌 당시 대중 반응 요약
-- ⚠️ 반드시 이 블록 앞에 빈 줄(줄바꿈)을 삽입할 것! (본문과 분리되어 보여야 함)
-- 실제 댓글처럼 보이는 문장 3~4줄
-- 공감 / 의외 / 논쟁 중 최소 2가지 포함
-- 과장·선동 금지, 일상적인 말투 사용
-
-[마무리]
-- 결론·정리·판단 전면 금지
-- 여운형 문장 2줄
-- 독자가 스스로 생각하게 만들 것
-
-4단계. 반응 유도 장치
-- 공감 버튼을 누르게 만드는 문장 1개
-- 댓글을 부르는 열린 문장 1개
-- 스크랩 욕구를 자극하는 문장 1개
-
-────────────────────
-[자연스러움 강제 규칙]
-
-- 무조건 구어체 "~해요"
-- 한 문장 20~30자 이내
-- 연결어 남용 금지
-- 독자를 가르치려 들지 말 것
-- 과도한 감정 표현, 자극적 표현 금지
-
-────────────────────
-[금지 표현]
-
-- 기자체, 보고서체, 설명체 전면 금지
-- 다음 표현 절대 사용 금지:
-  "물론", "사실", "확실히", "~것입니다",
-  "전문가에 따르면", "정리하자면", "요약하면"
-- AI 티 나는 정리 문장 금지
-
-────────────────────
-[출력 형식 — 반드시 이 순서]
-
-1️⃣ 제목 3개 (줄바꿈)
-2️⃣ 본문 전체
-3️⃣ 해시태그 5~7개 (핵심 단어 중심)
-
-이 규칙을 단 한 줄도 어기지 말고 즉시 작성하라.
-`.trim();
-
-// ✅ 기본 프롬프트 (SEO 모드가 기본값)
-const SYSTEM_PROMPT = SYSTEM_PROMPT_SEO;
+// ✅ 시스템 프롬프트는 .prompt 파일에서 로드됩니다.
+// - SEO 모드: src/prompts/seo/base.prompt + 카테고리별 .prompt
+// - 홈피드 모드: src/prompts/homefeed/base.prompt + 카테고리별 .prompt
+// - 로드: buildSystemPromptFromHint() (promptLoader.ts)
 
 // ==================== 캐싱 ====================
 
@@ -270,7 +142,12 @@ export function translateGeminiError(error: Error): string {
   return `⚠️ [알 수 없는 오류] ${error.message}`;
 }
 
-function buildEnhancedPrompt(topic: string, options: GenerateOptions = {}): string {
+/**
+ * ✅ [2026-03-16] systemInstruction 분리 구조
+ * system: .prompt 파일 규칙 (AI가 명령으로 인식)
+ * user: 주제 + 키워드만 (짧고 명확)
+ */
+function buildSplitPrompt(topic: string, options: GenerateOptions = {}): { system: string; user: string } {
   const {
     targetAudience = '일반 블로그 독자',
     tone = 'friendly',
@@ -284,30 +161,26 @@ function buildEnhancedPrompt(topic: string, options: GenerateOptions = {}): stri
   // ✅ 2축 분리 구조: [노출 목적 base] + [카테고리 보정 prompt]
   const selectedPrompt = buildSystemPromptFromHint(contentMode as PromptMode, categoryHint);
 
-  console.log(`[Gemini] 2축 분리 프롬프트 생성: mode=${contentMode}, category=${categoryHint || 'general'}`);
+  console.log(`[Gemini] systemInstruction 분리 적용: mode=${contentMode}, category=${categoryHint || 'general'}`);
 
-  // ✅ 홈판 모드일 경우 간단한 프롬프트 사용
+  // ✅ 홈판 모드: system에 규칙, user에 주제만
   if (contentMode === 'homefeed') {
-    return `
-${selectedPrompt}
-
-# 작성 주제
-${topic}
-${keywords.length > 0 ? `\n# 관련 키워드: ${keywords.join(', ')}` : ''}
-`.trim();
+    return {
+      system: selectedPrompt,
+      user: `# 작성 주제\n${topic}${keywords.length > 0 ? `\n\n# 관련 키워드: ${keywords.join(', ')}` : ''}\n\n지금 바로 작성을 시작하세요.`,
+    };
   }
 
-  // ✅ SEO 모드일 경우 기존 상세 프롬프트 사용
+  // ✅ SEO 모드: system에 규칙, user에 요구사항만
   const toneGuide = {
     friendly: '친구와 대화하듯 편안하고 친근하게',
     professional: '전문적이지만 이해하기 쉽게',
     casual: '매우 가볍고 재미있게',
   };
 
-  return `
-${selectedPrompt}
-
-# 글 작성 요구사항
+  return {
+    system: selectedPrompt,
+    user: `# 글 작성 요구사항
 - **주제**: ${topic}
 - **타겟 독자**: ${targetAudience}
 - **톤**: ${toneGuide[tone]}
@@ -315,15 +188,8 @@ ${selectedPrompt}
 ${keywords.length > 0 ? `- **필수 키워드**: ${keywords.join(', ')} (자연스럽게 3회 이상 포함)` : ''}
 ${includeImages ? '- **이미지 삽입 위치**: [이미지: 설명] 형태로 표시' : ''}
 
-# 글 구조
-1. **제목** (30자 이내, SEO 최적화)
-2. **도입부** (100-150자, 독자 관심 유도)
-3. **본문** (3-5개 소제목, 각 300-500자)
-4. **마무리** (100-150자, 핵심 요약 + CTA)
-5. **추천 태그** (5-10개)
-
-지금 바로 작성을 시작하세요.
-`.trim();
+지금 바로 작성을 시작하세요.`.trim(),
+  };
 }
 
 // ==================== 메인 함수 ====================
@@ -349,7 +215,7 @@ export async function generateBlogContent(
     throw new Error('생성할 내용을 입력해주세요.');
   }
 
-  const enhancedPrompt = buildEnhancedPrompt(trimmedPrompt, options);
+  const splitPrompt = buildSplitPrompt(trimmedPrompt, options);
 
   // Gemini 모드 (auto 또는 gemini)
   const apiKey = process.env.GEMINI_API_KEY;
@@ -375,18 +241,22 @@ export async function generateBlogContent(
       while (perModelRetryCount < PER_MODEL_MAX) {
         try {
           const client = getClient(apiKey);
+          // ✅ [2026-03-16] systemInstruction으로 규칙 분리 → AI 규칙 인식률 향상
           const model = client.getGenerativeModel({
             model: modelName,
+            systemInstruction: { role: 'system', parts: [{ text: splitPrompt.system }] },
             generationConfig: {
               temperature: 0.95,
-              maxOutputTokens: 4096,  // ✅ 2048 → 4096 증가: 쇼핑커넥트 등 풍부한 콘텐츠 생성
+              maxOutputTokens: 4096,
               topP: 0.95,
               topK: 50,
             },
+            // @ts-ignore - Google Search Grounding 상시 활성화
+            tools: [{ googleSearch: {} }],
           });
 
-          console.log(`[Gemini Request] Model: ${modelName}, Topic: ${enhancedPrompt.substring(0, 50)}...`);
-          const apiResult = await model.generateContent(enhancedPrompt);
+          console.log(`[Gemini Request] Model: ${modelName} [systemInstruction: ON, Search Grounding: ON], Topic: ${splitPrompt.user.substring(0, 50)}...`);
+          const apiResult = await model.generateContent(splitPrompt.user);
           const text = apiResult.response.text();
 
           if (!text?.trim()) {
@@ -489,25 +359,29 @@ export async function* generateBlogContentStream(
     throw new Error('GEMINI_API_KEY가 설정되어 있지 않습니다.');
   }
 
-  const enhancedPrompt = buildEnhancedPrompt(prompt, options);
+  const splitPrompt = buildSplitPrompt(prompt, options);
   let lastError: Error | null = null;
 
   // 스트리밍에서의 모델 폴백 체인 (generateBlogContent와 동일한 순서 보장)
   for (const modelName of FALLBACK_MODELS) {
     try {
-      console.log(`[Gemini Stream] Attempting with model: ${modelName}`);
+      console.log(`[Gemini Stream] Attempting with model: ${modelName} [systemInstruction: ON, Search Grounding: ON]`);
       const client = getClient(apiKey);
+      // ✅ [2026-03-16] 스트리밍도 systemInstruction 분리 적용
       const model = client.getGenerativeModel({
         model: modelName,
+        systemInstruction: { role: 'system', parts: [{ text: splitPrompt.system }] },
         generationConfig: {
           temperature: 0.95,
           maxOutputTokens: 4096,
           topP: 0.95,
           topK: 50,
         },
+        // @ts-ignore - Google Search Grounding 상시 활성화
+        tools: [{ googleSearch: {} }],
       });
 
-      const result = await model.generateContentStream(enhancedPrompt);
+      const result = await model.generateContentStream(splitPrompt.user);
 
       let fullText = '';
       // 첫 번째 청크를 기다려보며 성공 여부 확인 (404 등은 여기서 catch됨)

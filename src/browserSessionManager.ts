@@ -168,6 +168,11 @@ class BrowserSessionManager {
         const profileDir = this.getProfileDir(accountId);
         await fs.mkdir(profileDir, { recursive: true });
 
+        // ✅ [2026-02-17 FIX] Chrome Preferences 파일에서 비밀번호 매니저 비활성화
+        // --disable-save-password-bubble 플래그가 최신 Chrome에서 작동하지 않으므로
+        // 프로필 Preferences 파일을 직접 수정하여 비밀번호 저장을 완전히 차단
+        await this.ensurePasswordManagerDisabled(profileDir);
+
         const profile = this.getAccountConsistentProfile(accountId);
         const chromeExecutablePath = this.findChromeExecutable();
 
@@ -181,7 +186,7 @@ class BrowserSessionManager {
                 '--disable-setuid-sandbox',
                 '--disable-infobars',
                 `--window-size=${profile.screen.width},${profile.screen.height}`,
-                '--disable-features=IsolateOrigins,site-per-process',
+                '--disable-features=IsolateOrigins,site-per-process,PasswordManager',
                 '--disable-web-security',
                 '--disable-features=ThirdPartyCookieBlocking,SameSiteByDefaultCookies',
                 '--disable-site-isolation-trials',
@@ -190,6 +195,11 @@ class BrowserSessionManager {
                 '--disable-extensions',
                 '--no-first-run',
                 '--no-default-browser-check',
+                // ✅ [2026-02-08] 비밀번호 저장 팝업 비활성화 (기기등록 자동 바이패스 방해 방지)
+                '--disable-save-password-bubble',
+                '--disable-component-update',
+                // ✅ [2026-02-17 FIX] OS 키체인 대신 기본 저장소 사용 (비밀번호 저장 프롬프트 방지)
+                '--password-store=basic',
             ],
             ignoreDefaultArgs: ['--enable-automation'],
         };
@@ -341,6 +351,51 @@ class BrowserSessionManager {
             totalSessions: this.sessions.size,
             activeAccount: this.activeAccountId,
         };
+    }
+
+    /**
+     * ✅ [2026-02-17 FIX] Chrome Preferences 파일을 수정하여 비밀번호 매니저 완전 비활성화
+     * --disable-save-password-bubble 플래그가 최신 Chrome에서 작동하지 않으므로
+     * 프로필 디렉토리의 Preferences 파일을 직접 수정하여 비밀번호 저장 프롬프트를 차단
+     */
+    private async ensurePasswordManagerDisabled(profileDir: string): Promise<void> {
+        try {
+            const defaultDir = path.join(profileDir, 'Default');
+            await fs.mkdir(defaultDir, { recursive: true });
+
+            const prefsPath = path.join(defaultDir, 'Preferences');
+            let prefs: any = {};
+
+            // 기존 Preferences 파일이 있으면 읽기
+            try {
+                const existingPrefs = await fs.readFile(prefsPath, 'utf-8');
+                prefs = JSON.parse(existingPrefs);
+            } catch {
+                // 파일이 없거나 파싱 실패 시 빈 객체로 시작
+            }
+
+            // 비밀번호 매니저 관련 설정 비활성화
+            const needsUpdate =
+                prefs.credentials_enable_service !== false ||
+                prefs.profile?.password_manager_enabled !== false;
+
+            if (needsUpdate) {
+
+                prefs.credentials_enable_service = false;
+                prefs.credentials_enable_autosignin = false;
+
+                if (!prefs.profile) prefs.profile = {};
+                prefs.profile.password_manager_enabled = false;
+
+                if (!prefs.password_manager) prefs.password_manager = {};
+                prefs.password_manager.leak_detection = false;
+
+                await fs.writeFile(prefsPath, JSON.stringify(prefs, null, 2), 'utf-8');
+                console.log('[BrowserSessionManager] 🔒 비밀번호 매니저 비활성화 완료 (Preferences 파일 수정)');
+            }
+        } catch (err) {
+            console.warn('[BrowserSessionManager] ⚠️ Preferences 파일 수정 실패 (무시):', (err as Error).message);
+        }
     }
 }
 

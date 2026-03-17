@@ -1,0 +1,11 @@
+﻿=== Module 1: continuousPublishing.ts ===
+Exports (16): switchExternalLinksTab, startContinuousMode, stopContinuousMode, scheduleNextPosting, toggleContinuousModeModal, startContinuousPublishing, applyKeywordPrefixToTitleContinuous, setupMutualExclusiveCheckboxes, setKeywordTitleOptionsFromItem, initContinuousPublishingV2, updateContinuousProgressModal, startContinuousModeEnhanced, executeContinuousPublish, testApiKeysAndFullAuto, runRealFullAutoTest, continuousQueueV2
+Imports (16): switchExternalLinksTab, startContinuousMode, stopContinuousMode, toggleContinuousModeModal, startContinuousPublishing, initContinuousPublishingV2, startContinuousModeEnhanced, executeContinuousPublish, testApiKeysAndFullAuto, runRealFullAutoTest, setupMutualExclusiveCheckboxes, updateContinuousProgressModal, setKeywordTitleOptionsFromItem, applyKeywordPrefixToTitleContinuous, continuousQueueV2, scheduleNextPosting
+
+=== Module 2: thumbnailGenerator.ts ===
+Exports (2): applyPresetThumbnailIfExists, ThumbnailGenerator
+Imports (2): ThumbnailGenerator, applyPresetThumbnailIfExists
+
+=== Module 3: multiAccountManager.ts ===
+Exports (4): initMultiAccountManager, generateImagesForAutomation, initMultiAccountPublishModal, initMainAccountSelector
+Imports (4): initMultiAccountManager, initMultiAccountPublishModal, initMainAccountSelector, generateImagesForAutomation

@@ -1,0 +1,71 @@
+﻿✅ config.json 로드: C:\Users\박성현\AppData\Roaming\config.json
+🔑 API 키: AIzaSyD5Bt9n-6A...
+📋 이미지 모델: Main="(미설정→gemini-2.5-flash)", Sub="(미설정→gemini-2.5-flash)"
+📋 플랜: (미설정)
+
+======================================================================
+🔬 Gemini 이미지 API 심층 진단
+📅 시간: 2026. 2. 22. 오후 2:17:07
+🔑 API 키: AIzaSyD5Bt9n-6A...CXLRo
+======================================================================
+
+📋 Step 1: 사용 가능한 이미지 모델 확인...
+   총 43개 모델 중 이미지 관련 6개:
+   - models/gemini-2.0-flash-exp-image-generation (generateContent, countTokens, bidiGenerateContent)
+   - models/gemini-2.5-flash-image (generateContent, countTokens, batchGenerateContent)
+   - models/gemini-3-pro-image-preview (generateContent, countTokens, batchGenerateContent)
+   - models/imagen-4.0-generate-001 (predict)
+   - models/imagen-4.0-ultra-generate-001 (predict)
+   - models/imagen-4.0-fast-generate-001 (predict)
+
+🧪 Step 2: 각 이미지 모델 직접 호출 테스트
+   프롬프트: "A beautiful sunset over a calm ocean, digital art style, vibrant colors"
+
+   ⏳ ⚡ Gemini 2.5 Flash (가성비 기본) (gemini-2.5-flash-image) 테스트 중...
+   ❌ 실패! (109ms)
+      HTTP 429 — You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.5-flash-preview-image
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.5-flash-preview-image
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.5-flash-preview-image
+Please retry in 52.267322907s.
+      에러 코드: 429 (RESOURCE_EXHAUSTED)
+      상세: type.googleapis.com/google.rpc.Help, type.googleapis.com/google.rpc.QuotaFailure, type.googleapis.com/google.rpc.RetryInfo
+
+   ⏳ 🆓 Gemini 2.0 Flash Exp (무료) (gemini-2.0-flash-exp-image-generation) 테스트 중...
+   ❌ 실패! (112ms)
+      HTTP 429 — You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp
+Please retry in 52.152385804s.
+      에러 코드: 429 (RESOURCE_EXHAUSTED)
+      상세: type.googleapis.com/google.rpc.Help, type.googleapis.com/google.rpc.QuotaFailure, type.googleapis.com/google.rpc.RetryInfo
+
+   ⏳ 🏆 Gemini 3 Pro (고품질) (gemini-3-pro-image-preview) 테스트 중...
+   ❌ 실패! (110ms)
+      HTTP 429 — You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3-pro-image
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3-pro-image
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3-pro-image
+Please retry in 52.038583847s.
+      에러 코드: 429 (RESOURCE_EXHAUSTED)
+      상세: type.googleapis.com/google.rpc.Help, type.googleapis.com/google.rpc.QuotaFailure, type.googleapis.com/google.rpc.RetryInfo
+
+   ⏳ 🖼️ Imagen 4 (폴백) (imagen-4.0-generate-001) 테스트 중...
+   ❌ 실패! (93ms)
+      HTTP 400 — Imagen API is only accessible to billed users at this time.
+      에러 코드: 400 (INVALID_ARGUMENT)
+
+======================================================================
+📊 진단 결과 요약
+======================================================================
+   성공: 0개 / 실패: 4개
+
+   ❌ ⚡ Gemini 2.5 Flash (가성비 기본): HTTP 429: You exceeded your current quota, please check your plan and billing details. For
+   ❌ 🆓 Gemini 2.0 Flash Exp (무료): HTTP 429: You exceeded your current quota, please check your plan and billing details. For
+   ❌ 🏆 Gemini 3 Pro (고품질): HTTP 429: You exceeded your current quota, please check your plan and billing details. For
+   ❌ 🖼️ Imagen 4 (폴백): HTTP 400: Imagen API is only accessible to billed users at this time.
+
+   🔴 결론: 복합적 오류 — 각 모델별 에러 확인 필요
+
+======================================================================

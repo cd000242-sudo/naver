@@ -1,0 +1,30 @@
+﻿=== 쿠팡 이미지 수집 테스트 (AdsPower) ===
+URL: https://link.coupang.com/a/d4ALJW
+[CrawlerBrowser] 🌐 AdsPower ✅ 활성 (사용자 설정)
+✅ AdsPower 활성화됨
+[ProductSpecCrawler] 🔍 크롤링 시작: https://link.coupang.com/a/d4ALJW
+[CrawlerBrowser] 🌐 AdsPower 실행 감지 → CDP 연결 시도...
+[CrawlerBrowser] 🎯 AdsPower 프로필 선택: 6
+node : [CrawlerBrowser] ⚠️ AdsPower 브라우저 열기 실패: You ar
+e running out of disk space. Delete cache by calling [
+delete-cache].
+위치 줄:1 문자:1
++ node test_coupang.cjs 2>&1 | Out-File -Encoding utf8
+ test_coupang_res ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([Crawler 
+   Browser...[delete-cache].:String) [], RemoteExcep  
+  tion
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[CrawlerBrowser] 🚀 기존 Stealth 브라우저 시작...
+[BrowserUtils] ✅ 시스템 브라우저 발견: C:\Program Files\Google\Chrome\Application\chrome.exe
+[CrawlerBrowser] 🍪 프로필: C:\Users\박성현\AppData\Local\LewordCrawler\ChromeProfile
+[CrawlerBrowser] ✅ Stealth 브라우저 컨텍스트 준비 완료
+[CrawlerBrowser] 📄 새 페이지 생성 (활성: 1개)
+[쿠팡] 🔗 어필리에이트 링크 → 리다이렉트 추적...
+[쿠팡] 📍 리다이렉트 완료: https://www.coupang.com/vp/products/9114209055?itemId=26802709878&src=1139000&sp
+[쿠팡] ❌ Access Denied
+[CrawlerBrowser] 🗑️ 페이지 해제 (활성: 0개)
+❌ FAIL: null result
+[CrawlerBrowser] 🧹 모든 리소스 정리 완료

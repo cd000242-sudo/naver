@@ -1,0 +1,5 @@
+L135: export async function insertQuotation(self: any, frame: Frame, page: Page, style: string = 'line'): Promise<void> {
+L291: export async function typeBodyWithRetry(self: any,
+L645: export async function applyStructuredContent(self: any, resolved: ResolvedRunOptions): Promise<void> {
+L2280: export async function setFontSize(self: any, size: number, force: boolean = false): Promise<void> {
+L2425: export function extractBodyForHeading(self: any, fullBody: string, headingTitle: string, headingIndex: number, totalHeadings: number, allHeadings?: any[]): string {

@@ -1,0 +1,23 @@
+# Refactoring Integration Verification Report
+Date: 2026-02-25T15:09:40.233Z
+
+## Summary
+- Delegate calls found: 21
+- Helper exports: imageHelpers(13), publishHelpers(6), editorHelpers(5)
+- Issues: 0
+- Warnings: 3
+
+## Issues
+
+## Warnings
+- ⚠️ ORPHAN EXPORT: imageHelpers.insertImagesAtHeadings() is exported but NOT called from naverBlogAutomation.ts
+- ⚠️ ORPHAN EXPORT: publishHelpers.publishBlogPost() is exported but NOT called from naverBlogAutomation.ts
+- ⚠️ ORPHAN EXPORT: editorHelpers.extractBodyForHeading() is exported but NOT called from naverBlogAutomation.ts
+
+## Info
+- ✅ Import found: publishHelpers at L25: import * as publishHelpers from './automation/publishHelpers';
+- ✅ Import found: editorHelpers at L26: import * as editorHelpers from './automation/editorHelpers';
+- ✅ Import found: imageHelpers at L24: import * as imageHelpers from './automation/imageHelpers';
+- ✅ safeKeyboardType exists in both main and editorHelpers (local copy)
+- ✅ smartTypeWithAutoHighlight exists in editorHelpers (local copy)
+- ✅ extractCoreKeywords exists in editorHelpers (local copy)

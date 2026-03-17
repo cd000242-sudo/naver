@@ -1,0 +1,13 @@
+﻿src/renderer/renderer.ts(136,10): error TS2440: Import declaration conflicts with local declaration of 'switchExternalLinksTab'.
+src/renderer/renderer.ts(136,257): error TS2305: Module '"./modules/continuousPublishing.js"' has no exported member 'showImageModal'.
+src/renderer/renderer.ts(136,273): error TS2305: Module '"./modules/continuousPublishing.js"' has no exported member 'showHeadingImagesModal'.
+src/renderer/renderer.ts(3527,5): error TS2304: Cannot find name 'setupMutualExclusiveCheckboxes'.
+src/renderer/renderer.ts(3528,5): error TS2304: Cannot find name 'setupMutualExclusiveCheckboxes'.
+src/renderer/renderer.ts(7039,9): error TS2304: Cannot find name 'updateContinuousProgressModal'.
+src/renderer/renderer.ts(13958,7): error TS2304: Cannot find name 'setKeywordTitleOptionsFromItem'.
+src/renderer/renderer.ts(15710,43): error TS2552: Cannot find name 'applyKeywordPrefixToTitleContinuous'. Did you mean 'applyKeywordPrefixToTitle'?
+src/renderer/renderer.ts(19880,24): error TS2552: Cannot find name 'continuousQueueV2'. Did you mean 'continuousQueue'?
+src/renderer/renderer.ts(19880,47): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/renderer/renderer.ts(19885,7): error TS2304: Cannot find name 'scheduleNextPosting'.
+src/renderer/renderer.ts(36319,3): error TS2304: Cannot find name 'setupMutualExclusiveCheckboxes'.
+src/renderer/renderer.ts(37271,11): error TS2304: Cannot find name 'setKeywordTitleOptionsFromItem'.

@@ -1,0 +1,19 @@
+16734: function normalizeGeneratedPostCategoryKey(raw: unknown): string {
+16774: function getGeneratedPostCategoryLabel(categoryKey: string): string {
+16782: function isGeneratedPostCategoryCollapsed(categoryKey: string): boolean {
+16787: function setGeneratedPostCategoryCollapsed(categoryKey: string, collapsed: boolean): void 
+16793: function refreshGeneratedPostsList(): void {
+17083: function attachPostItemEventListeners(listContainer: HTMLElement): void {
+17187: function updateBatchDeleteButton(): void {
+17202: function toggleSelectAllPosts(): void {
+17219: function batchDeletePosts(): void {
+17238: function showImageModal(imageUrl: string): void {
+17277: function showHeadingImagesModal(encodedHeadingTitle: string, initialImageUrl?: string): vo
+17441: function showPostsStatsDashboard(): void {
+17540: function togglePostsView(): void {
+17550: async function loadGeneratedPostToFields(postId: string): Promise<void> {
+17857: async function validateAndRecoverImages(images: any[], postId: string): Promise<any[]> {
+17972: function toggleFavoritePost(postId: string): void {
+17996: async function reusePostImages(postId: string): Promise<void> {
+18113: async function loadImagesFromFolder(postId: string): Promise<any[]> {
+18162: async function getAllGeneratedImagesFromFolders(): Promise<Array<{ postId: string; postTit

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better Life 네이버 자동화 — 라이선스 구매</title>
+    <meta name="description" content="Better Life 네이버 자동화 프로그램 라이선스를 안전하게 구매하세요. 1년권, 영구제 제공.">
+    <meta property="og:title" content="Better Life 네이버 자동화 — 라이선스 구매">
+    <meta property="og:description" content="네이버 블로그 자동화의 시작. 1년권 300,000원 / 영구제 1,500,000원">
+    <meta property="og:type" content="website">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://js.tosspayments.com/v2/standard"></script>
+</head>
+
+<body>
+    <div class="bg-pattern"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <div class="brand-badge">
+                <span class="dot"></span>
+                Better Life
+            </div>
+            <h1 class="page-title">네이버 자동화 라이선스</h1>
+            <p class="page-subtitle">블로그 자동 발행, AI 콘텐츠 생성, 다계정 관리까지. 지금 시작하세요.</p>
+        </header>
+
+        <!-- Product Cards -->
+        <div class="products-grid">
+            <!-- 1년권 -->
+            <div class="product-card" data-product="yearly" data-amount="300000" onclick="selectProduct(this)">
+                <div class="product-name">1년권</div>
+                <div class="product-desc">12개월간 모든 기능을 자유롭게 사용하세요.</div>
+                <div class="product-price">300,000<span class="currency">원</span></div>
+                <div class="product-vat">VAT 포함</div>
+                <ul class="product-features">
+                    <li><span class="icon">✓</span> 전체 기능 이용</li>
+                    <li><span class="icon">✓</span> AI 콘텐츠 자동 생성</li>
+                    <li><span class="icon">✓</span> 다계정 자동 발행</li>
+                    <li><span class="icon">✓</span> 1년간 무료 업데이트</li>
+                </ul>
+            </div>
+
+            <!-- 영구제 -->
+            <div class="product-card featured" data-product="lifetime" data-amount="1500000"
+                onclick="selectProduct(this)">
+                <span class="product-badge">Best Value</span>
+                <div class="product-name">영구제</div>
+                <div class="product-desc">한 번 구매로 평생 사용. 모든 업데이트 포함.</div>
+                <div class="product-price">1,500,000<span class="currency">원</span></div>
+                <div class="product-vat">VAT 포함</div>
+                <ul class="product-features">
+                    <li><span class="icon">✓</span> 전체 기능 이용</li>
+                    <li><span class="icon">✓</span> AI 콘텐츠 자동 생성</li>
+                    <li><span class="icon">✓</span> 다계정 자동 발행</li>
+                    <li><span class="icon">✓</span> 평생 무료 업데이트</li>
+                    <li><span class="icon">✓</span> 우선 고객 지원</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Payment Button -->
+        <div class="payment-section">
+            <button class="btn-pay" id="btn-pay" disabled onclick="requestPayment()">
+                <span class="spinner"></span>
+                <span class="btn-text">상품을 선택해주세요</span>
+            </button>
+            <div class="payment-notice">
+                결제 진행 시 <a href="terms.html" target="_blank">이용약관</a> 및
+                <a href="privacy.html" target="_blank">개인정보처리방침</a>에 동의하는 것으로 간주됩니다.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <div class="footer-links">
+                <a href="terms.html">이용약관</a>
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="mailto:cd000242@gmail.com">고객 문의</a>
+            </div>
+            <p>© 2026 Better Life. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // ===== 설정 =====
+        const CONFIG = {
+            // ★ 토스페이먼츠 클라이언트 키 (테스트)
+            TOSS_CLIENT_KEY: 'test_ck_Poxy1XQL8R27R2BKJkm987nO5Wml',
+            // ★ GAS 웹앱 URL (배포 후 교체 필요)
+            GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
+            // 성공/실패 페이지 경로 (GitHub Pages 기준)
+            SUCCESS_URL: window.location.origin + window.location.pathname.replace('index.html', '') + 'success.html',
+            FAIL_URL: window.location.origin + window.location.pathname.replace('index.html', '') + 'fail.html',
+        };
+
+        // 상품 정보
+        const PRODUCTS = {
+            yearly: { name: 'Better Life 1년권', amount: 300000 },
+            lifetime: { name: 'Better Life 영구제', amount: 1500000 },
+        };
+
+        let selectedProduct = null;
+        let tossPayments = null;
+        let paymentWidget = null;
+
+        // ===== 토스페이먼츠 SDK 초기화 =====
+        async function initToss() {
+            try {
+                tossPayments = TossPayments(CONFIG.TOSS_CLIENT_KEY);
+            } catch (err) {
+                console.error('토스 SDK 초기화 실패:', err);
+            }
+        }
+
+        // ===== 상품 선택 =====
+        function selectProduct(card) {
+            // 이전 선택 해제
+            document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+            // 현재 선택
+            card.classList.add('selected');
+            selectedProduct = card.dataset.product;
+
+            // 버튼 활성화
+            const btn = document.getElementById('btn-pay');
+            btn.disabled = false;
+            const product = PRODUCTS[selectedProduct];
+            btn.querySelector('.btn-text').textContent =
+                `${product.amount.toLocaleString()}원 결제하기`;
+        }
+
+        // ===== 주문번호 생성 =====
+        function generateOrderId() {
+            const ts = Date.now();
+            const rand = Math.random().toString(36).substring(2, 8).toUpperCase();
+            return `BL-${ts}-${rand}`;
+        }
+
+        // ===== 결제 요청 =====
+        async function requestPayment() {
+            if (!selectedProduct || !tossPayments) return;
+
+            const btn = document.getElementById('btn-pay');
+            btn.classList.add('loading');
+            btn.disabled = true;
+
+            const product = PRODUCTS[selectedProduct];
+            const orderId = generateOrderId();
+
+            try {
+                // ★ successUrl을 success.html로 설정 (JSONP로 GAS 호출)
+                const payment = tossPayments.payment({ customerKey: TossPayments.ANONYMOUS });
+
+                await payment.requestPayment({
+                    method: 'CARD',
+                    amount: {
+                        value: product.amount,
+                        currency: 'KRW',
+                    },
+                    orderId: orderId,
+                    orderName: product.name,
+                    successUrl: CONFIG.SUCCESS_URL,
+                    failUrl: CONFIG.FAIL_URL,
+                });
+            } catch (err) {
+                // 사용자가 결제창 닫은 경우
+                console.log('결제 취소 또는 에러:', err);
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
+        }
+
+        // ===== 초기화 =====
+        document.addEventListener('DOMContentLoaded', initToss);
+    </script>
+</body>
+
+</html>

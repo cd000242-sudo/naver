@@ -1,12 +1,19 @@
-import type { GenerateImagesOptions, GeneratedImage } from './image/types.js';
+import type { GenerateImagesOptions, GeneratedImage, ImageProvider } from './image/types.js';
 import { assertProvider as assertProviderFn } from './image/types.js';
-import { generateWithNanoBananaPro, abortImageGeneration } from './image/nanoBananaProGenerator.js';
-import { generateWithFalAI } from './image/falaiGenerator.js';
+import { generateWithNanoBananaPro, abortImageGeneration, resetAllImageState } from './image/nanoBananaProGenerator.js';
+import { generateWithDeepInfra } from './image/deepinfraGenerator.js';
 import { generateWithNaver } from './image/naverImageGenerator.js';
-import { generateWithProdia } from './image/prodiaGenerator.js';
-import { generateWithStability } from './image/stabilityGenerator.js';
-import { generateWithPollinations } from './image/pollinationsGenerator.js';
+import { generateWithOpenAIImage } from './image/openaiImageGenerator.js';
+import { generateWithLeonardoAI } from './image/leonardoAIGenerator.js';
+import { generateWithImageFx } from './image/imageFxGenerator.js';
+
 import { downloadAndSaveImage } from './image/imageUtils.js';
+import { getImageErrorMessage } from './image/imageErrorMessages.js';
+import { thumbnailService } from './thumbnailService.js';
+import { AutomationService } from './main/services/AutomationService.js'; // ✅ [2026-01-29 FIX] 중지 체크용
+import * as fs from 'fs/promises';
+import * as path from 'path';
+
 
 // Re-export types for backward compatibility
 export type { GenerateImagesOptions, GeneratedImage } from './image/types.js';
@@ -17,81 +24,335 @@ export { downloadAndSaveImage };
 // ✅ [100점 수정] 이미지 생성 중지 함수 export
 export { abortImageGeneration };
 
+// ✅ [2026-02-23 FIX] 이미지 생성 전체 상태 초기화 함수 export
+export { resetAllImageState };
+
+/**
+ * 엔진이 한글 텍스트를 네이티브로 지원하는지 확인
+ */
+function isKoreanTextSupportedEngine(engine: string): boolean {
+  // 나노바나나프로(Gemini)만 한글 텍스트 직접 생성 지원
+  return engine === 'nano-banana-pro';
+}
+
+/**
+ * ✅ [2026-01-30] 한글 텍스트 오버레이 후처리
+ * - 기존 thumbnailService.createProductThumbnail 재활용
+ * - 나노바나나프로 외 엔진에서 썸네일(0번)에만 한글 텍스트 오버레이
+ * - 일반 모드: 1번 소제목 = 썸네일 (인덱스 0)
+ * - 쇼핑커넥트 모드: 별도 썸네일 (인덱스 0)
+ * - thumbnailTextInclude 설정이 true일 때만 적용
+ */
+async function applyKoreanTextOverlayIfNeeded(
+  images: GeneratedImage[],
+  provider: string,
+  postTitle?: string,
+  thumbnailTextInclude?: boolean,
+  items?: { heading: string }[]  // 미사용 (호환성 유지)
+): Promise<GeneratedImage[]> {
+  // 나노바나나프로는 한글 텍스트 지원 → 오버레이 불필요
+  if (isKoreanTextSupportedEngine(provider)) {
+    console.log(`[ImageGenerator] 📝 ${provider}는 한글 텍스트 네이티브 지원 → 오버레이 스킵`);
+    return images;
+  }
+
+  // thumbnailTextInclude가 false면 오버레이 불필요
+  if (!thumbnailTextInclude) {
+    console.log(`[ImageGenerator] 📝 텍스트 포함 옵션 OFF → 오버레이 스킵`);
+    return images;
+  }
+
+  // postTitle이 없으면 오버레이 불필요
+  if (!postTitle || postTitle.trim().length === 0) {
+    console.log(`[ImageGenerator] 📝 제목 없음 → 오버레이 스킵`);
+    return images;
+  }
+
+  console.log(`[ImageGenerator] 📝 ${provider} 엔진: 썸네일(0번)에 한글 텍스트 오버레이 시작...`);
+
+  const result: GeneratedImage[] = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const img = images[i];
+
+    // ✅ [2026-01-30] 썸네일(0번)만 텍스트 오버레이 적용
+    // - 일반 모드: 1번 소제목 = 썸네일 역할 (인덱스 0)
+    // - 쇼핑커넥트: 별도 썸네일 (인덱스 0)
+    if (i === 0 && img.filePath) {
+      try {
+        console.log(`[ImageGenerator] 🖼️ 썸네일에 텍스트 오버레이: "${postTitle.substring(0, 30)}..."`);
+
+        // ✅ 기존 thumbnailService.createProductThumbnail 활용
+        const outputPath = img.filePath;
+
+        await thumbnailService.createProductThumbnail(
+          img.filePath,
+          postTitle,
+          outputPath,
+          {
+            position: 'bottom',
+            fontSize: 28,
+            textColor: '#ffffff',
+            opacity: 0.8
+          }
+        );
+
+        // previewDataUrl 업데이트
+        const overlaidBuffer = await fs.readFile(outputPath);
+        const updatedImg = { ...img };
+        updatedImg.previewDataUrl = `data:image/png;base64,${overlaidBuffer.toString('base64')}`;
+
+        result.push(updatedImg);
+        console.log(`[ImageGenerator] ✅ 썸네일 텍스트 오버레이 완료!`);
+      } catch (overlayError) {
+        console.warn(`[ImageGenerator] ⚠️ 텍스트 오버레이 실패:`, (overlayError as Error).message);
+        result.push(img); // 실패 시 원본 사용
+      }
+    } else {
+      result.push(img);
+    }
+  }
+
+  return result;
+}
+
+/**
+ * ✅ [2026-03-03] 수집 이미지를 GeneratedImage[] 형태로 변환
+ * 쇼핑커넥트에서 비-Gemini 엔진 또는 Gemini 실패 시 수집 이미지를 그대로 사용
+ */
+async function convertCollectedImagesToResults(
+  collectedImages: string[] | undefined,
+  items: { heading: string }[],
+  postTitle?: string,
+  postId?: string
+): Promise<GeneratedImage[]> {
+  const images = collectedImages || [];
+  if (images.length === 0) {
+    console.warn('[ImageGenerator] ⚠️ 수집 이미지 없음 → 빈 배열 반환');
+    return [];
+  }
+
+  console.log(`[ImageGenerator] 🛒 수집 이미지 ${images.length}개를 블로그 이미지로 변환 중...`);
+
+  const results: GeneratedImage[] = [];
+
+  for (let i = 0; i < Math.min(items.length, images.length); i++) {
+    const imageUrl = images[i];
+    if (!imageUrl || typeof imageUrl !== 'string') continue;
+
+    try {
+      // 이미지 다운로드
+      const response = await (await import('axios')).default.get(imageUrl, {
+        responseType: 'arraybuffer',
+        timeout: 15000,
+        headers: { 'Referer': 'https://brand.naver.com/' }
+      });
+      const buffer = Buffer.from(response.data);
+
+      if (buffer.length < 1000) {
+        console.warn(`[ImageGenerator] ⚠️ [${i + 1}] 이미지 크기 너무 작음 (${buffer.length}B) → 스킵`);
+        continue;
+      }
+
+      // 파일 저장
+      const savedResult = await (await import('./image/imageUtils.js')).writeImageFile(
+        buffer, 'png', items[i]?.heading || `product-${i + 1}`, postTitle, postId
+      );
+
+      results.push({
+        heading: items[i]?.heading || `제품 이미지 ${i + 1}`,
+        filePath: savedResult.savedToLocal || savedResult.filePath,
+        provider: 'collected' as any,
+        previewDataUrl: savedResult.previewDataUrl,
+        savedToLocal: savedResult.savedToLocal
+      });
+
+      console.log(`[ImageGenerator] ✅ [${i + 1}/${items.length}] 수집 이미지 저장 완료`);
+    } catch (err: any) {
+      console.warn(`[ImageGenerator] ⚠️ [${i + 1}] 수집 이미지 다운로드 실패: ${err.message}`);
+    }
+  }
+
+  console.log(`[ImageGenerator] 📊 수집 이미지 변환 완료: ${results.length}/${items.length}개`);
+  return results;
+}
+
 export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   geminiApiKey?: string; // ✅ Gemini 키
-  prodiaToken?: string; // ✅ Prodia 토큰
-  stabilityApiKey?: string; // ✅ Stability AI 키
-  falaiApiKey?: string; // ✅ Fal.ai 키 추가
-}): Promise<GeneratedImage[]> {
-  const normalizedProvider = options.provider;
-  assertProviderFn(normalizedProvider === 'pollinations' ? 'nano-banana-pro' : normalizedProvider);
+  deepinfraApiKey?: string; // ✅ DeepInfra 키
+  openaiImageApiKey?: string; // ✅ OpenAI Image (DALL-E) 키
+  leonardoaiApiKey?: string; // ✅ Leonardo AI 키
+}, onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void  // ✅ [2026-02-13 SPEED] 실시간 콜백
+): Promise<GeneratedImage[]> {
+  // ✅ [2026-02-18 DEBUG] 프로바이더 수신 진단 로그
+  console.log(`[ImageGenerator] 🔍🔍🔍 수신된 options.provider = "${options.provider}" (type: ${typeof options.provider})`);
+
+  // ✅ [2026-01-28 FIX] 프로바이더 이름 정규화
+  let normalizedProvider: string = options.provider || 'imagefx';
+  if (!options.provider) {
+    console.warn(`[ImageGenerator] ⚠️⚠️⚠️ options.provider가 비어있어 'imagefx' 기본값 적용! 호출자 확인 필요!`);
+  }
+
+  // deepinfra-flux, deepinfra-flux-2 등 → deepinfra
+  if (normalizedProvider.startsWith('deepinfra')) {
+    console.log(`[ImageGenerator] 📋 프로바이더 정규화: ${options.provider} → deepinfra`);
+    normalizedProvider = 'deepinfra';
+  }
+  // ✅ [엔진명 한글 매핑]
+  const providerDisplayNames: Record<string, string> = {
+    'nano-banana-pro': '나노 바나나 프로 (Gemini)',
+    'deepinfra': '딥인프라 FLUX-2',
+    'openai-image': 'OpenAI DALL-E (gpt-image-1)',
+    'leonardoai': 'Leonardo AI',
+    'imagefx': 'ImageFX (Google 무료)',
+    'naver': '네이버 이미지 검색'
+  };
+  const displayName = providerDisplayNames[normalizedProvider] || normalizedProvider;
+
+  // ✅ [2026-02-04] 선택된 엔진 명확히 표시 (한글 로그)
+  console.log(`[이미지생성] 🎨 선택된 AI 이미지 생성 엔진: ${displayName}`);
+
+  assertProviderFn(normalizedProvider as ImageProvider);
+
+  // ✅ [2026-01-28] 크롤링 이미지가 있으면 각 item에 분배 (img2img 활성화)
+  const crawledImages = options.crawledImages || [];
+  if (crawledImages.length > 0) {
+    console.log(`[이미지생성] 🖼️ 크롤링 이미지 ${crawledImages.length}개 감지 → img2img 모드 활성화`);
+  }
 
   const items = options.items
-    .map((item) => ({
+    .map((item, idx) => ({
       heading: item.heading,
       prompt: String(item.prompt || '').trim(),
       isThumbnail: item.isThumbnail || false, // ✅ isThumbnail 플래그 전달
       allowText: (item as any).allowText || false, // ✅ 상세페이지/인포그래픽 텍스트 허용
       englishPrompt: item.englishPrompt,
-      category: item.category,
+      category: item.category || options.category || '', // ✅ [2026-02-12] options.category 폴백 → DeepInfra 카테고리별 스타일 적용
       referenceImagePath: item.referenceImagePath || options.referenceImagePath, // ✅ 전역 참조 이미지 적용
-      referenceImageUrl: item.referenceImageUrl,
+      // ✅ [2026-01-28] 크롤링 이미지를 referenceImageUrl에 할당 (img2img 활성화)
+      referenceImageUrl: item.referenceImageUrl || crawledImages[idx] || crawledImages[0],
       originalIndex: (item as any).originalIndex, // ✅ [2026-01-24] 원래 인덱스 보존
+      // ✅ [2026-02-08] 이미지 스타일/비율 전달 (모든 엔진에서 사용)
+      imageStyle: (item as any).imageStyle || (options as any).imageStyle, // ✅ [2026-02-18 FIX] options.imageStyle 폴백 추가 (full-auto에서 per-item에 없음)
+      imageRatio: (item as any).imageRatio || (options as any).imageRatio, // ✅ [2026-02-18 FIX] options.imageRatio 폴백 추가
     }))
     .filter((item) => item.prompt.length > 0);
+
+  // ✅ [2026-02-04] 생성할 이미지 수 로그 (items 선언 후)
+  console.log(`[이미지생성] 🖼️ 생성할 이미지 수: ${items.length}개`);
 
   if (items.length === 0) {
     throw new Error('이미지를 생성할 소제목과 프롬프트를 확인해주세요.');
   }
 
-  // ✅ Pollinations 선택 시 (무료 FLUX 기반)
-  if (normalizedProvider === 'pollinations') {
-    try {
-      console.log(`[ImageGenerator] 🌸 Pollinations로 ${items.length}개 이미지 생성 시도... (무료)`);
-      const pollinationsImages = await generateWithPollinations(
-        items,
-        options.postTitle,
-        options.postId,
-        options.isFullAuto
-      );
-      console.log(`[ImageGenerator] ✅ Pollinations로 ${pollinationsImages.length}개 이미지 생성 성공!`);
-      return pollinationsImages;
-    } catch (pollError) {
-      console.warn(`[ImageGenerator] ⚠️ Pollinations 실패:`, (pollError as Error).message);
-      throw new Error(`이미지 생성 실패: Pollinations 실패 (${(pollError as Error).message})`);
-    }
+  // ✅ [2026-01-29 FIX] 중지 요청 체크 - 이미지 생성 시작 전
+  if (AutomationService.isCancelRequested()) {
+    console.log('[ImageGenerator] ⛔ 중지 요청 감지 → 이미지 생성 취소');
+    return [];
   }
 
-  // ✅ Fal.ai 선택 시 (FLUX 모델 기반)
-  if (normalizedProvider === 'falai') {
+  // ✅ [2026-03-03] 쇼핑커넥트 Gemini 전용 가드
+  // 쇼핑커넥트에서는 나노바나나프로/2(Gemini)만 제품 이미지를 정확히 재현 가능
+  // 다른 엔진(DALL-E/Leonardo/DeepInfra)은 제품이 변형되므로 수집 이미지 그대로 사용
+  if (options.isShoppingConnect && normalizedProvider !== 'nano-banana-pro') {
+    console.log(`[이미지생성] 🛒 쇼핑커넥트 모드: ${displayName}는 제품 재현 불가 → 수집 이미지 직접 사용`);
+    const collectedResults = await convertCollectedImagesToResults(options.collectedImages || crawledImages, items, options.postTitle, options.postId);
+    // ✅ [2026-03-16 FIX] 수집 이미지에도 텍스트 오버레이 적용 (쇼핑커넥트 모드)
+    return await applyKoreanTextOverlayIfNeeded(collectedResults, 'collected', options.postTitle, options.thumbnailTextInclude, items);
+  }
+
+
+  // ✅ [2026-02-22] OpenAI Image (DALL-E / gpt-image-1) 선택 시
+  if (normalizedProvider === 'openai-image') {
     try {
-      console.log(`[ImageGenerator] 🎨 Fal.ai로 ${items.length}개 이미지 생성 시도...`);
-      const falaiImages = await generateWithFalAI(
+      console.log(`[이미지생성] 🎨 OpenAI DALL-E로 ${items.length}개 이미지 생성 시작...`);
+      const openaiImages = await generateWithOpenAIImage(
         items,
         options.postTitle,
         options.postId,
         options.isFullAuto,
-        apiKeys?.falaiApiKey
+        apiKeys?.openaiImageApiKey,
+        options.isShoppingConnect || false,
+        onImageGenerated,  // ✅ [2026-02-27] 실시간 콜백 전달
+        options.collectedImages  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
       );
-      console.log(`[ImageGenerator] ✅ Fal.ai로 ${falaiImages.length}개 이미지 생성 성공!`);
-      return falaiImages;
-    } catch (falError) {
-      console.warn(`[ImageGenerator] ⚠️ Fal.ai 실패:`, (falError as Error).message);
-      throw new Error(`이미지 생성 실패: Fal.ai 실패 (${(falError as Error).message})`);
+      console.log(`[이미지생성] ✅ OpenAI DALL-E로 ${openaiImages.length}개 이미지 생성 완료!`);
+      return await applyKoreanTextOverlayIfNeeded(openaiImages, 'openai-image', options.postTitle, options.thumbnailTextInclude, items);
+    } catch (openaiError) {
+      console.warn(`[ImageGenerator] ⚠️ OpenAI Image 실패:`, (openaiError as Error).message);
+      const userMsg = getImageErrorMessage(openaiError);
+      throw new Error(`[OpenAI DALL-E] ${userMsg}`);
     }
   }
 
-  // ✅ Prodia 선택 시 (Prodia v2 Inference API)
-  if (normalizedProvider === 'prodia') {
+  // ✅ [2026-02-22] Leonardo AI 선택 시
+  if (normalizedProvider === 'leonardoai') {
     try {
-      console.log(`[ImageGenerator] ⚡ Prodia로 ${items.length}개 이미지 생성 시도...`);
-      console.log(`[ImageGenerator] Prodia Token: ${apiKeys?.prodiaToken ? apiKeys.prodiaToken.substring(0, 10) + '...' : '미설정'}`);
-      const prodiaImages = await generateWithProdia(items, options.postTitle, options.postId, options.isFullAuto, apiKeys?.prodiaToken);
-      console.log(`[ImageGenerator] ✅ Prodia로 ${prodiaImages.length}개 이미지 생성 성공!`);
-      return prodiaImages;
-    } catch (prodiaError) {
-      console.warn(`[ImageGenerator] ⚠️ Prodia 실패:`, (prodiaError as Error).message);
-      throw new Error(`이미지 생성 실패: Prodia 실패 (${(prodiaError as Error).message})`);
+      console.log(`[이미지생성] 🦁 Leonardo AI로 ${items.length}개 이미지 생성 시작...`);
+      const leonardoImages = await generateWithLeonardoAI(
+        items,
+        options.postTitle,
+        options.postId,
+        options.isFullAuto,
+        apiKeys?.leonardoaiApiKey,
+        options.isShoppingConnect || false,
+        onImageGenerated,  // ✅ [2026-02-27] 실시간 콜백 전달
+        options.collectedImages  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
+      );
+      console.log(`[이미지생성] ✅ Leonardo AI로 ${leonardoImages.length}개 이미지 생성 완료!`);
+      return await applyKoreanTextOverlayIfNeeded(leonardoImages, 'leonardoai', options.postTitle, options.thumbnailTextInclude, items);
+    } catch (leonardoError) {
+      console.warn(`[ImageGenerator] ⚠️ Leonardo AI 실패:`, (leonardoError as Error).message);
+      const userMsg = getImageErrorMessage(leonardoError);
+      throw new Error(`[Leonardo AI] ${userMsg}`);
+    }
+  }
+
+  // ✅ [2026-03-15] ImageFX 선택 시 (Google 무료 — Gemini API 키 불필요!)
+  if (normalizedProvider === 'imagefx') {
+    try {
+      console.log(`[이미지생성] ✨ ImageFX로 ${items.length}개 이미지 생성 시작... (Gemini 불필요, 완전 무료)`);
+      const imageFxImages = await generateWithImageFx(
+        items,
+        options.postTitle,
+        options.postId,
+        options.isFullAuto,
+        options.isShoppingConnect || false,
+        options.stopCheck,
+        onImageGenerated
+      );
+      console.log(`[이미지생성] ✅ ImageFX로 ${imageFxImages.length}개 이미지 생성 완료!`);
+      return await applyKoreanTextOverlayIfNeeded(imageFxImages, 'imagefx', options.postTitle, options.thumbnailTextInclude, items);
+    } catch (imageFxError) {
+      console.warn(`[ImageGenerator] ⚠️ ImageFX 실패:`, (imageFxError as Error).message);
+      throw new Error(`[ImageFX] Google 로그인을 확인해주세요. 오류: ${(imageFxError as Error).message}`);
+    }
+  }
+
+
+
+  // ✅ DeepInfra 선택 시 (FLUX-2-dev, 고품질 저가)
+  // ✅ [2026-01-30 FIX] DeepInfra도 텍스트 오버레이 적용 (한글 텍스트 지원 안함)
+  if (normalizedProvider === 'deepinfra') {
+    try {
+      console.log(`[이미지생성] 🚀 딥인프라 FLUX-2로 ${items.length}개 이미지 생성 시작...`);
+      const deepinfraImages = await generateWithDeepInfra(
+        items,
+        options.postTitle,
+        options.postId,
+        options.isFullAuto,
+        apiKeys?.deepinfraApiKey,
+        options.isShoppingConnect || false, // ✅ [2026-02-12] 쇼핑커넥트 모드 전달
+        onImageGenerated,  // ✅ [2026-02-27] 실시간 콜백 전달
+        options.collectedImages  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
+      );
+      console.log(`[이미지생성] ✅ 딥인프라 FLUX-2로 ${deepinfraImages.length}개 이미지 생성 완료!`);
+      // ✅ [2026-01-30 FIX] DeepInfra도 텍스트 오버레이 적용 (한글 텍스트 지원 안함)
+      return await applyKoreanTextOverlayIfNeeded(deepinfraImages, 'deepinfra', options.postTitle, options.thumbnailTextInclude, items);
+    } catch (deepinfraError) {
+      console.warn(`[ImageGenerator] ⚠️ DeepInfra 실패:`, (deepinfraError as Error).message);
+      const userMsg = getImageErrorMessage(deepinfraError);
+      throw new Error(`[DeepInfra FLUX] ${userMsg}`);
     }
   }
 
@@ -101,73 +362,58 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   }
 
   // ✅ 나노 바나나 프로 선택 시 (Gemini 기반, 썸네일 제외 NEVER TEXT 적용)
+  // ✅ [2026-02-13 FIX] 상위 재시도 루프 제거 - 내부에서 이미 충분히 재시도 (2회/이미지 + 1라운드 실패 재시도)
   if (normalizedProvider === 'nano-banana-pro') {
-    let lastError: any;
-    // 최대 3회 재시도 (500 오류 등 일시적 장애 대응)
-    for (let attempt = 1; attempt <= 3; attempt++) {
-      try {
-        console.log(`[ImageGenerator] 🍌 나노 바나나 프로(Gemini)로 ${items.length}개 이미지 생성 시도... (시도 ${attempt}/3)`);
-        if (attempt === 1) {
-          console.log(`[ImageGenerator] ℹ️ 썸네일(1번) 제외 모든 이미지에 NEVER TEXT 적용`);
-          console.log(`[ImageGenerator] Gemini API 키: ${apiKeys?.geminiApiKey ? apiKeys.geminiApiKey.substring(0, 10) + '...' : '미설정'}`);
-        }
+    console.log(`[이미지생성] 🍌 나노 바나나 프로(Gemini)로 ${items.length}개 이미지 생성 시작...`);
+    console.log(`[ImageGenerator] ℹ️ 썸네일(1번) 제외 모든 이미지에 NEVER TEXT 적용`);
+    console.log(`[ImageGenerator] Gemini API 키: ${apiKeys?.geminiApiKey ? apiKeys.geminiApiKey.substring(0, 10) + '...' : '미설정'}`);
 
-        const nanoBananaImages = await generateWithNanoBananaPro(
-          items,
-          options.postTitle,
-          options.postId,
-          options.isFullAuto,
-          apiKeys?.geminiApiKey, // ✅ Gemini API 키 전달
-          options.isShoppingConnect, // ✅ 쇼핑커넥트 모드 전달
-          options.collectedImages, // ✅ 수집된 이미지 목록 전달
-          options.stopCheck  // ✅ [100점 수정] 중지 여부 확인 콜백 전달
-        );
-        console.log(`[ImageGenerator] ✅ 나노 바나나 프로(Gemini)로 ${nanoBananaImages.length}개 이미지 생성 성공!`);
-        return nanoBananaImages;
-      } catch (nanoBananaError) {
-        lastError = nanoBananaError;
-        console.warn(`[ImageGenerator] ⚠️ 나노 바나나 프로 실패 (시도 ${attempt}/3):`, (nanoBananaError as Error).message);
-
-        // 500 오류이거나 치명적이지 않은 오류인 경우 잠시 대기 후 재시도
-        if (attempt < 3) {
-          const delay = 2000 * attempt;
-          console.log(`[ImageGenerator] ⏳ ${delay}ms 후 재시도합니다...`);
-          await new Promise(resolve => setTimeout(resolve, delay));
-        }
+    try {
+      const nanoBananaImages = await generateWithNanoBananaPro(
+        items,
+        options.postTitle,
+        options.postId,
+        options.isFullAuto,
+        apiKeys?.geminiApiKey, // ✅ Gemini API 키 전달
+        options.isShoppingConnect, // ✅ 쇼핑커넥트 모드 전달
+        options.collectedImages, // ✅ 수집된 이미지 목록 전달
+        options.stopCheck,  // ✅ [100점 수정] 중지 여부 확인 콜백 전달
+        onImageGenerated,   // ✅ [2026-02-13 SPEED] 이미지 완성 즉시 콜백 전달
+        (options as any).productData  // ✅ [2026-02-23 FIX] 제품 가격 데이터 전달 → 스펙 표 가격 정확도 향상
+      );
+      console.log(`[이미지생성] ✅ 나노 바나나 프로(Gemini)로 ${nanoBananaImages.length}개 이미지 생성 완료!`);
+      return nanoBananaImages;
+    } catch (geminiError: any) {
+      // ✅ [2026-03-03] 쇼핑커넥트에서 Gemini 실패 시 수집 이미지로 폴백
+      if (options.isShoppingConnect) {
+        console.warn(`[ImageGenerator] ⚠️ Gemini 실패 → 쇼핑커넥트 수집 이미지로 폴백: ${geminiError.message}`);
+        const collectedResults = await convertCollectedImagesToResults(options.collectedImages || crawledImages, items, options.postTitle, options.postId);
+        // ✅ [2026-03-16 FIX] 수집 이미지 폴백에도 텍스트 오버레이 적용
+        return await applyKoreanTextOverlayIfNeeded(collectedResults, 'collected', options.postTitle, options.thumbnailTextInclude, items);
       }
+      throw geminiError; // 일반 모드는 기존 에러 전파
     }
-    throw new Error(`이미지 생성 실패: 나노 바나나 프로(Gemini) 실패 (3회 시도 초과) - ${(lastError as Error).message}`);
   }
 
-  // ✅ Stability AI 선택 시
-  if (normalizedProvider === 'stability') {
-    let lastError: any;
-    for (let attempt = 1; attempt <= 3; attempt++) {
-      try {
-        console.log(`[ImageGenerator] 🚀 Stability AI로 ${items.length}개 이미지 생성 시도... (시도 ${attempt}/3)`);
-        const stabilityImages = await generateWithStability(
-          items,
-          options.postTitle,
-          options.postId,
-          options.isFullAuto,
-          apiKeys?.stabilityApiKey,
-          (options as any).model
-        );
-        console.log(`[ImageGenerator] ✅ Stability AI로 ${stabilityImages.length}개 이미지 생성 성공!`);
-        return stabilityImages;
-      } catch (stabilityError) {
-        lastError = stabilityError;
-        console.warn(`[ImageGenerator] ⚠️ Stability AI 실패 (시도 ${attempt}/3):`, (stabilityError as Error).message);
+  // ✅ [2026-03-16 FIX] 'saved', 'skip' 등 유효하지 않은 provider는 imagefx로 폴백 (Gemini 불필요)
+  console.warn(`[ImageGenerator] ⚠️ 지원하지 않는 제공자 "${normalizedProvider}" → imagefx로 폴백`);
+  normalizedProvider = 'imagefx';
 
-        if (attempt < 3) {
-          const delay = 2000 * attempt;
-          console.log(`[ImageGenerator] ⏳ ${delay}ms 후 재시도합니다...`);
-          await new Promise(resolve => setTimeout(resolve, delay));
-        }
-      }
-    }
-    throw new Error(`이미지 생성 실패: Stability AI 실패 (3회 시도 초과) - ${(lastError as Error).message}`);
+  // imagefx 폴백 실행 (Gemini API 키 불필요)
+  try {
+    console.log(`[이미지생성] ✨ 폴백: ImageFX(무료)로 ${items.length}개 이미지 생성 시작...`);
+    const fallbackImages = await generateWithImageFx(
+      items,
+      options.postTitle,
+      options.postId,
+      options.isFullAuto,
+      options.isShoppingConnect || false,
+      options.stopCheck,
+      onImageGenerated
+    );
+    console.log(`[이미지생성] ✅ 폴백 ImageFX(무료)로 ${fallbackImages.length}개 이미지 생성 완료!`);
+    return await applyKoreanTextOverlayIfNeeded(fallbackImages, 'imagefx', options.postTitle, options.thumbnailTextInclude, items);
+  } catch (fallbackError) {
+    throw new Error(`이미지 생성 실패: 지원하지 않는 이미지 제공자(${options.provider}) 및 ImageFX 폴백 실패 - ${(fallbackError as Error).message}`);
   }
-
-  throw new Error(`지원하지 않는 이미지 제공자입니다: ${normalizedProvider}`);
 }

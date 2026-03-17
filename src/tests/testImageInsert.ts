@@ -8,7 +8,7 @@ import type { StructuredContent } from '../contentGenerator';
 interface SettingsJson {
 	geminiApiKey?: string;
 	openaiApiKey?: string;
-	pexelsApiKey?: string;
+
 	savedNaverId?: string;
 	savedNaverPassword?: string;
 	authorName?: string;
@@ -35,7 +35,7 @@ async function readSettingsJson(): Promise<SettingsJson> {
 function applyEnvFromSettings(cfg: SettingsJson): void {
 	if (cfg.geminiApiKey && cfg.geminiApiKey.trim()) process.env.GEMINI_API_KEY = cfg.geminiApiKey.trim();
 	if (cfg.openaiApiKey && cfg.openaiApiKey.trim()) process.env.OPENAI_API_KEY = cfg.openaiApiKey.trim();
-	if (cfg.pexelsApiKey && cfg.pexelsApiKey.trim()) process.env.PEXELS_API_KEY = cfg.pexelsApiKey.trim();
+
 }
 
 async function run(): Promise<void> {
@@ -45,11 +45,10 @@ async function run(): Promise<void> {
 	applyEnvFromSettings(cfg);
 
 	// API 키 확인
-	const hasDalle = !!process.env.OPENAI_API_KEY;
-	const hasPexels = !!process.env.PEXELS_API_KEY;
+	const hasGemini = !!process.env.GEMINI_API_KEY;
 
-	if (!hasDalle && !hasPexels) {
-		console.error('❌ 이미지 제공자 API 키가 없습니다. settings.json에 openaiApiKey 또는 pexelsApiKey를 설정해주세요.');
+	if (!hasGemini) {
+		console.error('❌ Gemini API 키가 없습니다. settings.json에 geminiApiKey를 설정해주세요.');
 		process.exit(1);
 	}
 
@@ -73,13 +72,8 @@ async function run(): Promise<void> {
 	});
 	console.log('');
 
-	// 이미지 생성 (Pexels로 강제 테스트)
-	if (!hasPexels) {
-		console.error('❌ PEXELS_API_KEY가 없습니다. settings.json에 pexelsApiKey를 설정해주세요.');
-		process.exit(1);
-	}
-	const provider: 'dalle' | 'pexels' = 'pexels'; // Pexels로 강제 테스트
-	console.log(`🖼️ Pexels 이미지 생성 중...`);
+	const provider = 'nano-banana-pro'; // AI 이미지 생성
+	console.log(`🖼️ AI 이미지 생성 중...`);
 
 	const items = testHeadings.map((h) => ({
 		heading: h.title,
@@ -96,12 +90,12 @@ async function run(): Promise<void> {
 		console.log(`   요청: ${items.length}개`);
 		console.log(`   성공: ${images.length}개`);
 		console.log(`   실패: ${items.length - images.length}개\n`);
-		
+
 		if (images.length === 0) {
 			console.error(`❌ 생성된 이미지가 없습니다.`);
 			process.exit(1);
 		}
-		
+
 		if (images.length < items.length) {
 			console.warn(`⚠️ 일부 이미지 생성이 실패했습니다. (${images.length}/${items.length})`);
 		}

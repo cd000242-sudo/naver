@@ -7,21 +7,134 @@ import * as path from 'path';
 import * as os from 'os';
 import { IpcContext } from '../types';
 import { WindowManager } from '../core/WindowManager';
+import { checkAdbDevice, changeIpViaAirplaneMode, getCurrentIp, downloadAdb } from '../utils/adbIpChanger';
+import { checkAdsPowerStatus, openAdsPowerBrowser, closeAdsPowerBrowser, listAdsPowerProfiles, createAdsPowerProfile, deleteAdsPowerProfile, setAdsPowerApiKey } from '../utils/adsPowerManager';
+import { setAdsPowerEnabled } from '../../crawler/crawlerBrowser.js';
+import { setImageFxAdsPowerEnabled } from '../../image/imageFxGenerator.js';
 
 /**
  * 시스템 관련 핸들러 등록
  */
 export function registerSystemHandlers(ctx: IpcContext): void {
+
+    // ✅ [2026-03-16] AdsPower 토글 설정 → crawlerBrowser + ImageFX 전역 flag 동시 동기화
+    ipcMain.handle('crawler:setAdsPowerEnabled', async (_event, enabled: boolean) => {
+        setAdsPowerEnabled(enabled);
+        setImageFxAdsPowerEnabled(enabled); // ✅ ImageFX도 동기화
+        return { success: true, enabled };
+    });
+
+    // ✅ [2026-03-13] AdsPower Local API 핸들러
+    ipcMain.handle('adspower:checkStatus', async () => {
+        try {
+            return await checkAdsPowerStatus();
+        } catch (error) {
+            return { running: false, message: `AdsPower 상태 확인 오류: ${(error as Error).message}` };
+        }
+    });
+
+    ipcMain.handle('adspower:setApiKey', async (_event, apiKey: string) => {
+        try {
+            setAdsPowerApiKey(apiKey);
+            return { success: true };
+        } catch (error) {
+            return { success: false, message: `API Key 설정 오류: ${(error as Error).message}` };
+        }
+    });
+
+    ipcMain.handle('adspower:openBrowser', async (_event, profileId: string) => {
+        try {
+            return await openAdsPowerBrowser(profileId);
+        } catch (error) {
+            return { success: false, message: `브라우저 열기 오류: ${(error as Error).message}` };
+        }
+    });
+
+    ipcMain.handle('adspower:closeBrowser', async (_event, profileId: string) => {
+        try {
+            return await closeAdsPowerBrowser(profileId);
+        } catch (error) {
+            return { success: false, message: `브라우저 닫기 오류: ${(error as Error).message}` };
+        }
+    });
+
+    ipcMain.handle('adspower:listProfiles', async () => {
+        try {
+            return await listAdsPowerProfiles();
+        } catch (error) {
+            return { success: false, profiles: [], message: `프로필 조회 오류: ${(error as Error).message}` };
+        }
+    });
+
+    ipcMain.handle('adspower:createProfile', async (_event, profileName: string) => {
+        try {
+            return await createAdsPowerProfile(profileName);
+        } catch (error) {
+            return { success: false, message: `프로필 생성 오류: ${(error as Error).message}` };
+        }
+    });
+
+    ipcMain.handle('adspower:deleteProfile', async (_event, profileIds: string[]) => {
+        try {
+            return await deleteAdsPowerProfile(profileIds);
+        } catch (error) {
+            return { success: false, message: `프로필 삭제 오류: ${(error as Error).message}` };
+        }
+    });
+
+    // ✅ [2026-03-13] 외부 URL 열기 (AdsPower 다운로드 등)
+    ipcMain.handle('open-external-url', async (_event, url: string) => {
+        try {
+            await shell.openExternal(url);
+            return { success: true };
+        } catch (error) {
+            return { success: false, message: (error as Error).message };
+        }
+    });
+
+    // ✅ ADB 디바이스 연결 확인
+    ipcMain.handle('adb:checkDevice', async () => {
+        try {
+            return await checkAdbDevice();
+        } catch (error) {
+            return { connected: false, message: `ADB 확인 오류: ${(error as Error).message}` };
+        }
+    });
+
+    // ✅ ADB 비행기모드로 IP 변경
+    ipcMain.handle('adb:changeIp', async (_event, waitSeconds?: number) => {
+        try {
+            return await changeIpViaAirplaneMode(waitSeconds || 5);
+        } catch (error) {
+            return { success: false, message: `IP 변경 오류: ${(error as Error).message}` };
+        }
+    });
+
+    // ✅ 현재 공인 IP 조회
+    ipcMain.handle('adb:getCurrentIp', async () => {
+        try {
+            const ip = await getCurrentIp();
+            return { success: true, ip };
+        } catch (error) {
+            return { success: false, ip: 'unknown', message: (error as Error).message };
+        }
+    });
+
+    // ✅ [2026-03-11] ADB 자동 다운로드
+    ipcMain.handle('adb:downloadAdb', async () => {
+        try {
+            return await downloadAdb();
+        } catch (error) {
+            return { success: false, message: `ADB 다운로드 오류: ${(error as Error).message}` };
+        }
+    });
     // OS 홈 디렉토리
     ipcMain.handle('os:homedir', async () => {
         return os.homedir();
     });
 
-    // 윈도우 최소화
-    ipcMain.handle('window:minimize', async () => {
-        WindowManager.minimize();
-        return { success: true };
-    });
+    // ✅ LEWORD 실행 핸들러는 main.ts에서 등록 (leword:launch)
+    // window:minimize 핸들러 제거됨 → 황금키워드 실행 버튼으로 교체
 
     // 셸에서 경로 열기
     ipcMain.handle('shell:openPath', async (_event, targetPath: string) => {

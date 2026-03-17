@@ -4,6 +4,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 import * as iconv from 'iconv-lite';
 import { searchShopping, searchBlog, searchNews, searchWebDoc, stripHtmlTags } from '../naverSearchApi.js';
 import { getChromiumExecutablePath } from '../browserUtils.js';
+import { AdvancedAutomator } from './advancedAutomator.js';
 
 // Puppeteer Stealth 플러그인 적용 (봇 탐지 회피)
 puppeteer.use(StealthPlugin());
@@ -94,6 +95,8 @@ export interface CrawlOptions {
   maxLength?: number;
   timeout?: number;
   extractImages?: boolean;
+  _triedModes?: string[]; // 내부용: 재귀 호출 시 무한 루프 방지
+  _errorLogs?: string[];  // 내부용: 실패 이력 기록
 }
 
 export class SmartCrawler {
@@ -106,81 +109,28 @@ export class SmartCrawler {
    * - brandconnect → smartstore 리다이렉트까지 완전히 기다림
    */
   private async resolveRedirectUrl(url: string): Promise<string> {
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-gpu',
-        '--disable-dev-shm-usage',
-      ],
-      // @ts-ignore
-      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || await getChromiumExecutablePath(),
-    });
-
     try {
-      const page = await browser.newPage();
-
-      // 모바일 User-Agent (더 빠른 리다이렉트)
-      await page.setUserAgent(
-        'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1'
-      );
-
-      // 리소스 차단 (속도 최적화) - 스크립트는 허용해야 리다이렉트 됨
-      await page.setRequestInterception(true);
-      page.on('request', (req) => {
-        const type = req.resourceType();
-        if (['image', 'font', 'media', 'stylesheet'].includes(type)) {
-          req.abort();
-        } else {
-          req.continue();
+      console.log(`   ⏳ 최종 목적지 URL 추적 중 (Fetch Native)...`);
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+      
+      const response = await fetch(url, {
+        method: 'GET',
+        redirect: 'follow', // Fetch가 내부적으로 Location 헤더를 자동으로 따라갑니다
+        signal: controller.signal,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         }
       });
-
-      // 리다이렉트 따라가기 (최대 15초)
-      await page.goto(url, {
-        waitUntil: 'domcontentloaded',
-        timeout: 15000,
-      });
-
-      // ✅ [핵심 수정] smartstore.naver.com이 나타날 때까지 최대 8초 대기
-      let finalUrl = page.url();
-      const maxWaitTime = 8000;
-      const checkInterval = 500;
-      let elapsed = 0;
-
-      console.log(`   🔄 초기 URL: ${finalUrl.substring(0, 60)}...`);
-
-      while (elapsed < maxWaitTime) {
-        await new Promise(resolve => setTimeout(resolve, checkInterval));
-        elapsed += checkInterval;
-
-        const currentUrl = page.url();
-
-        // URL이 변경되었고, 쇼핑몰 URL인 경우 완료
-        if (currentUrl !== finalUrl) {
-          console.log(`   🔄 URL 변경됨: ${currentUrl.substring(0, 60)}...`);
-          finalUrl = currentUrl;
-        }
-
-        // smartstore 또는 brand.naver.com/[스토어명]/products 패턴이면 성공
-        if (finalUrl.includes('smartstore.naver.com') ||
-          (finalUrl.includes('brand.naver.com') && finalUrl.includes('/products/'))) {
-          console.log(`   ✅ 최종 상품 URL 확인!`);
-          break;
-        }
-
-        // brandconnect에서 더 이상 변경 없으면 추가 대기
-        if (finalUrl.includes('brandconnect.naver.com') && elapsed >= 4000) {
-          console.log(`   ⏳ brandconnect에서 추가 리다이렉트 대기 중...`);
-        }
-      }
-
-      await browser.close();
+      clearTimeout(timeout);
+      
+      const finalUrl = response.url;
+      console.log(`   ✅ 리다이렉트 감지 완료. 최종 반환 URL: ${finalUrl.substring(0, 60)}...`);
       return finalUrl;
     } catch (error) {
-      await browser.close();
-      throw error;
+      console.log(`   ❌ 리다이렉트 추적 중 예외 발생: ${(error as Error).message}`);
+      // 실패할 경우 원본 URL 반환 (강제 진행)
+      return url;
     }
   }
 
@@ -226,9 +176,18 @@ export class SmartCrawler {
       if (!productName || productName.length < 2) {
         try {
           console.log('🔄 URL에서 상품명 추출 실패, 페이지 타이틀에서 추출 시도...');
-          const response = await fetch(url, {
-            headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' }
-          });
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 5000);
+          
+          let response;
+          try {
+            response = await fetch(url, {
+              headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' },
+              signal: controller.signal
+            });
+          } finally {
+            clearTimeout(timeout);
+          }
           const html = await response.text();
           const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
           if (titleMatch && titleMatch[1]) {
@@ -481,9 +440,9 @@ export class SmartCrawler {
       return { ...cached, mode: 'fast' as CrawlMode };
     }
 
-    // ✅ [핵심 추가] naver.me, brandconnect 단축 URL → 최종 URL 추적
+    // ✅ [핵심 추가] naver.me, brandconnect, 쿠팡 단축 URL → 최종 URL 추적
     let targetUrl = url;
-    if (url.includes('naver.me') || url.includes('brandconnect.naver.com')) {
+    if (url.includes('naver.me') || url.includes('brandconnect.naver.com') || url.includes('link.coupang.com') || url.includes('coupa.ng')) {
       try {
         console.log(`🔗 단축/리다이렉트 URL 감지: ${url.substring(0, 50)}...`);
         console.log('   ⏳ 최종 목적지 URL 추적 중 (Puppeteer)...');
@@ -577,28 +536,45 @@ export class SmartCrawler {
       return { ...result, mode: selectedMode };
 
     } catch (error) {
-      console.error(`❌ ${selectedMode} 모드 실패, 폴백 시도...`);
+      const errorMessage = `❌ ${selectedMode} 모드 실패: ${(error as Error).message}`;
+      console.error(errorMessage);
+
+      options._triedModes = options._triedModes || [];
+      options._triedModes.push(selectedMode);
+      options._errorLogs = options._errorLogs || [];
+      options._errorLogs.push(errorMessage);
 
       // 실패 시 폴백 전략: 크롤링 모드 간 폴백 + 최종 검색 API 폴백
-      if (selectedMode === 'standard') {
+      if (selectedMode === 'standard' && !options._triedModes.includes('perfect')) {
         console.log('⚠️ Standard 실패 → Perfect 모드로 재시도 (Puppeteer)');
         return this.crawl(url, { ...options, mode: 'perfect' });
-      } else if (selectedMode === 'perfect') {
+      } else if (selectedMode === 'perfect' && !options._triedModes.includes('fast')) {
         console.log('⚠️ Perfect 실패 → Fast 모드로 재시도 (가벼운 요청)');
         return this.crawl(url, { ...options, mode: 'fast' });
       } else {
         // Fast도 실패한 경우 → 검색 API 폴백 시도 (최후의 수단)
-        console.log('⚠️ 모든 크롤링 실패 → 검색 API로 관련 정보 수집 시도');
-        const searchFallback = await this.trySearchApiFallback(url);
-        if (searchFallback) {
-          console.log('✅ 검색 API 폴백 성공! 관련 정보로 글 생성 가능');
-          this.saveToCache(url, searchFallback);
-          return { ...searchFallback, mode: 'fast' as CrawlMode };
+        if (!options._triedModes.includes('searchApi')) {
+          console.log('⚠️ 모든 크롤링 실패 → 검색 API로 관련 정보 수집 시도');
+          options._triedModes.push('searchApi');
+          const searchFallback = await this.trySearchApiFallback(url);
+          if (searchFallback) {
+            console.log('✅ 검색 API 폴백 성공! 관련 정보로 글 생성 가능');
+            this.saveToCache(url, searchFallback);
+            return { ...searchFallback, mode: 'fast' as CrawlMode };
+          }
         }
 
         // 검색 API도 실패하면 Standard로 마지막 시도
-        console.log('⚠️ 검색 API도 실패 → Standard 모드로 마지막 시도');
-        return this.crawl(url, { ...options, mode: 'standard' });
+        if (!options._triedModes.includes('standard')) {
+          console.log('⚠️ 검색 API도 실패 → Standard 모드로 마지막 시도');
+          return this.crawl(url, { ...options, mode: 'standard' });
+        }
+        
+        console.log('🚨 모든 폴백 전략 실패 🚨');
+        if (error instanceof Error) {
+          error.message = `${error.message}\n--- 상세 실패 이력 ---\n${options._errorLogs?.join('\n')}`;
+        }
+        throw error;
       }
     }
   }
@@ -628,6 +604,8 @@ export class SmartCrawler {
       urlLower.includes('shopify.com') ||   // ✅ Shopify
       urlLower.includes('smartstore.naver') || // ✅ 네이버 스마트스토어
       urlLower.includes('brand.naver') ||   // ✅ 네이버 브랜드스토어
+      urlLower.includes('blog.naver') ||    // ✅ [2026-02-08] 네이버 블로그 (iframe CSR)
+      urlLower.includes('cafe.naver') ||    // ✅ [2026-02-08] 네이버 카페 (iframe CSR)
       urlLower.includes('brandconnect.naver') || // ✅ [추가] 브랜드커넥트 (리다이렉트)
       urlLower.includes('naver.me') ||      // ✅ [추가] 네이버 단축 URL (리다이렉트)
       urlLower.includes('coupang.com') ||   // ✅ 쿠팡
@@ -656,6 +634,12 @@ export class SmartCrawler {
       clearTimeout(timeout);
       // ✅ [FIX] URL 전달하여 네이버 도메인 강제 UTF-8 적용
       const html = await decodeResponseWithCharset(response, url);
+      
+      // ✅ [FIX] 봇 차단(Access Denied) 감지 시 오류 발생 (정상 크롤링으로 위장 방지)
+      if (html.includes('Access Denied') || html.includes('You don\'t have permission')) {
+        throw new Error('Fast 모드도 Access Denied 차단됨');
+      }
+
       return this.parseHTML(html, maxLength);
 
     } finally {
@@ -694,6 +678,12 @@ export class SmartCrawler {
       clearTimeout(timeout);
       // ✅ [FIX] URL 전달하여 네이버 도메인 강제 UTF-8 적용
       const html = await decodeResponseWithCharset(response, url);
+
+      // ✅ [FIX] 봇 차단(Access Denied) 감지 시 오류 발생
+      if (html.includes('Access Denied') || html.includes('You don\'t have permission')) {
+        throw new Error('Standard 모드도 Access Denied 차단됨');
+      }
+
       return this.parseHTMLAdvanced(html, maxLength, extractImages);
 
     } finally {
@@ -714,6 +704,7 @@ export class SmartCrawler {
     let crawlUrl = url;
     const isSmartStore = url.includes('smartstore.naver.com') && !url.includes('m.smartstore.naver.com');
     const isBrandStore = url.includes('brand.naver.com') && !url.includes('m.brand.naver.com');
+    const isCoupang = url.includes('coupang.com') || url.includes('coupa.ng');
 
     if (isSmartStore) {
       crawlUrl = url.replace('smartstore.naver.com', 'm.smartstore.naver.com');
@@ -724,7 +715,17 @@ export class SmartCrawler {
       console.log(`[브랜드스토어] 📱 모바일 URL로 변환: ${crawlUrl.substring(0, 60)}...`);
     }
 
-    // Stealth Plugin으로 브라우저 실행
+    // ✅ [100점 솔루션] 쿠팡은 Playwright + Stealth 사용 (headless: false 필수!)
+    if (isCoupang) {
+      return await this.crawlCoupangWithPlaywright(crawlUrl, maxLength, extractImages, timeout);
+    }
+
+    // ✅ [NEW] 스마트스토어/브랜드스토어도 Playwright + Stealth 사용
+    if (isSmartStore || isBrandStore) {
+      return await this.crawlNaverWithPlaywright(crawlUrl, maxLength, extractImages, timeout);
+    }
+
+    // Stealth Plugin으로 브라우저 실행 (쿠팡 외)
     const browser = await puppeteer.launch({
       headless: true,
       args: [
@@ -1033,6 +1034,495 @@ export class SmartCrawler {
       meta: { description: description.slice(0, 200) },
       images: extractImages ? images : undefined,
     };
+  }
+
+  /**
+   * ✅ [개발자 전용 우회] 쿠팡 3단계 폴백 전략
+   * 1단계: 모바일 API (m.coupang.com) - 봇 차단 약함
+   * 2단계: OG 메타태그 추출 (최소한의 정보)
+   * 3단계: Playwright + Stealth (headless: false)
+   */
+  private async crawlCoupangWithPlaywright(
+    url: string,
+    maxLength: number,
+    extractImages: boolean,
+    timeout: number
+  ): Promise<any> {
+    console.log('🔥 [쿠팡] 3단계 폴백 전략 시작...');
+
+    // ✅ 1단계: 모바일 페이지 직접 파싱 (봇 차단이 약함)
+    try {
+      console.log('[쿠팡] 📱 1단계: 모바일 페이지 시도 (m.coupang.com)');
+      const mobileResult = await this.crawlCoupangMobile(url, extractImages);
+      if (mobileResult && mobileResult.title && mobileResult.title.length > 5) {
+        console.log(`[쿠팡] ✅ 모바일 페이지 성공: ${mobileResult.title.substring(0, 30)}...`);
+        mobileResult.content = this.cleanText(mobileResult.content || '').slice(0, maxLength);
+        return mobileResult;
+      }
+    } catch (e) {
+      console.log('[쿠팡] ⚠️ 모바일 페이지 실패:', (e as Error).message);
+    }
+
+    // ✅ 2단계: OG 메타태그 추출 (간단한 fetch)
+    try {
+      console.log('[쿠팡] 🏷️ 2단계: OG 메타태그 추출 시도');
+      const ogResult = await this.crawlCoupangOG(url, extractImages);
+      if (ogResult && ogResult.title && ogResult.title.length > 5) {
+        console.log(`[쿠팡] ✅ OG 메타태그 성공: ${ogResult.title.substring(0, 30)}...`);
+        return ogResult;
+      }
+    } catch (e) {
+      console.log('[쿠팡] ⚠️ OG 메타태그 실패:', (e as Error).message);
+    }
+
+    // ✅ 3단계: Playwright + Stealth (최후의 수단)
+    console.log('[쿠팡] 🕵️ 3단계: Playwright + Stealth 시도 (headless: false)');
+    return await this.crawlCoupangPlaywrightFinal(url, maxLength, extractImages, timeout);
+  }
+
+  /**
+   * 쿠팡 모바일 페이지 크롤링 (m.coupang.com)
+   * - 모바일 User-Agent 사용
+   * - 봇 차단이 데스크톱보다 약함
+   */
+  private async crawlCoupangMobile(url: string, extractImages: boolean): Promise<any> {
+    // URL을 모바일로 변환
+    let mobileUrl = url;
+    if (url.includes('www.coupang.com')) {
+      mobileUrl = url.replace('www.coupang.com', 'm.coupang.com');
+    } else if (!url.includes('m.coupang.com')) {
+      mobileUrl = url.replace('coupang.com', 'm.coupang.com');
+    }
+
+    const mobileUA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1';
+
+    const response = await fetch(mobileUrl, {
+      headers: {
+        'User-Agent': mobileUA,
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'ko-KR,ko;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'none',
+      },
+      redirect: 'follow',
+    });
+
+    if (!response.ok) {
+      throw new Error(`모바일 페이지 응답 오류: ${response.status}`);
+    }
+
+    const html = await response.text();
+
+    // Access Denied 체크
+    if (html.includes('Access Denied') || html.includes('차단') || html.includes('robot')) {
+      throw new Error('모바일 페이지도 Access Denied');
+    }
+
+    // HTML 파싱
+    const $ = cheerio.load(html);
+
+    const title = $('meta[property="og:title"]').attr('content') ||
+      $('.prod-buy-header__title').text() ||
+      $('title').text() || '';
+
+    const description = $('meta[property="og:description"]').attr('content') ||
+      $('meta[name="description"]').attr('content') || '';
+
+    // 가격 추출
+    const price = $('.total-price strong').text() ||
+      $('.prod-sale-price').text() ||
+      $('[class*="price"]').first().text() || '';
+
+    // 이미지 추출
+    let images: string[] = [];
+    if (extractImages) {
+      const ogImage = $('meta[property="og:image"]').attr('content');
+      if (ogImage) images.push(ogImage);
+
+      $('img[src*="thumbnail"], img[src*="product"], .prod-image img').each((i, elem) => {
+        const src = $(elem).attr('src') || $(elem).attr('data-src');
+        if (src && src.startsWith('http') && !src.includes('logo') && !src.includes('icon')) {
+          images.push(src);
+        }
+      });
+
+      images = [...new Set(images)].slice(0, 15);
+    }
+
+    // 본문 구성
+    const content = [
+      `상품명: ${title}`,
+      price ? `가격: ${price}` : '',
+      description ? `설명: ${description}` : '',
+    ].filter(Boolean).join('\n');
+
+    return {
+      title: title.trim(),
+      content: content,
+      meta: { description, source: 'coupang_mobile' },
+      images,
+    };
+  }
+
+  /**
+   * 쿠팡 OG 메타태그만 추출 (가장 가벼운 방법)
+   */
+  private async crawlCoupangOG(url: string, extractImages: boolean): Promise<any> {
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Googlebot/2.1 (+http://www.google.com/bot.html)', // 검색엔진 봇으로 위장
+        'Accept': 'text/html',
+      },
+      redirect: 'follow',
+    });
+
+    if (!response.ok) {
+      throw new Error(`OG 추출 응답 오류: ${response.status}`);
+    }
+
+    const html = await response.text();
+
+    if (html.includes('Access Denied') || html.includes('차단')) {
+      throw new Error('OG 추출도 Access Denied');
+    }
+
+    const $ = cheerio.load(html);
+
+    const title = $('meta[property="og:title"]').attr('content') || $('title').text() || '';
+    const description = $('meta[property="og:description"]').attr('content') || '';
+    const ogImage = $('meta[property="og:image"]').attr('content') || '';
+
+    const images = extractImages && ogImage ? [ogImage] : [];
+
+    return {
+      title: title.trim(),
+      content: `상품명: ${title}\n${description}`,
+      meta: { description, source: 'coupang_og' },
+      images,
+    };
+  }
+
+  /**
+   * Playwright + Stealth 최종 시도
+   */
+  private async crawlCoupangPlaywrightFinal(
+    url: string,
+    maxLength: number,
+    extractImages: boolean,
+    timeout: number
+  ): Promise<any> {
+    let browser: any = null;
+
+    try {
+      // ✅ [100점 솔루션 이식] Playwright + Stealth 조합 (productSpecCrawler 방식)
+      const { chromium } = await import('playwright-extra');
+      const stealth = (await import('puppeteer-extra-plugin-stealth')).default;
+      chromium.use(stealth());
+
+      const { getChromiumExecutablePath } = await import('../browserUtils.js');
+      const execPath = await getChromiumExecutablePath();
+      
+      console.log(`[쿠팡] 🕵️ Playwright Stealth 모드로 쿠팡 크롤링 시작... (execPath: ${execPath || 'default'})`);
+
+      browser = await chromium.launch({
+          headless: false, // ⭐ CRITICAL: true면 100% 탐지됨
+          ...(execPath ? { executablePath: execPath } : {}),
+          args: [
+              '--disable-blink-features=AutomationControlled',
+              '--disable-dev-shm-usage',
+              '--no-sandbox',
+              '--disable-setuid-sandbox',
+              '--disable-web-security',
+              '--disable-features=IsolateOrigins,site-per-process',
+              '--window-size=1920,1080',
+          ],
+      });
+
+      const userAgents = [
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      ];
+      const randomUA = userAgents[Math.floor(Math.random() * userAgents.length)];
+
+      const context = await browser.newContext({
+          viewport: { width: 1920, height: 1080 },
+          userAgent: randomUA,
+          locale: 'ko-KR',
+          timezoneId: 'Asia/Seoul',
+          permissions: ['geolocation'],
+          geolocation: { latitude: 37.5665, longitude: 126.9780 },
+          colorScheme: 'light',
+          extraHTTPHeaders: {
+              'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+              'Sec-Fetch-Dest': 'document',
+              'Sec-Fetch-Mode': 'navigate',
+              'Sec-Fetch-Site': 'none',
+              'Sec-Fetch-User': '?1',
+          },
+      });
+
+      const page = await context.newPage();
+
+      // ⭐ CDP 레벨 속성 조작 (핵심!)
+      await page.addInitScript(() => {
+          Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+          (window as any).chrome = { runtime: {}, loadTimes: function () { }, csi: function () { }, app: {} };
+          Object.defineProperty(navigator, 'plugins', {
+              get: () => [{ name: 'Chrome PDF Plugin' }, { name: 'Chrome PDF Viewer' }, { name: 'Native Client' }],
+          });
+      });
+
+      // 🔄 1단계: 쿠팡 메인 페이지 먼저 방문 (쿠키 생성)
+      console.log('[쿠팡] 🏠 쿠팡 메인 페이지 방문 중...');
+      await page.goto('https://www.coupang.com', { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+      // 인간처럼 행동
+      await page.mouse.move(500, 300);
+      await page.waitForTimeout(1500 + Math.random() * 1500);
+      await page.mouse.wheel(0, 300);
+      await page.waitForTimeout(800 + Math.random() * 700);
+
+      // 🎯 2단계: 상품 페이지 접근
+      console.log(`[쿠팡] 🎯 상품 페이지 이동... (${url})`);
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: timeout });
+      await page.waitForTimeout(2000 + Math.random() * 1500);
+
+      const htmlContent = await page.content();
+      if (htmlContent.includes('Access Denied') || htmlContent.includes('차단')) {
+        console.log('[쿠팡] ❌ Access Denied 발생');
+        await page.screenshot({ path: 'coupang_blocked_stealth.png', fullPage: true });
+        throw new Error('Playwright(Stealth) Access Denied');
+      }
+
+      console.log('[쿠팡] ✅ 페이지 접근 성공! 데이터 추출 중...');
+
+      // 제품 정보 추출 (기존 smartCrawler.ts 포맷 유지)
+      const result = await page.evaluate((shouldExtractImages: boolean) => {
+        const title =
+          document.querySelector('meta[property="og:title"]')?.getAttribute('content') ||
+          document.querySelector('.prod-buy-header__title')?.textContent ||
+          document.querySelector('title')?.textContent || '';
+
+        const description =
+          document.querySelector('meta[property="og:description"]')?.getAttribute('content') || '';
+
+        let content = document.querySelector('.prod-buy-header, .prod-atf, article, main')?.textContent || document.body.textContent || '';
+
+        let images: string[] = [];
+        if (shouldExtractImages) {
+          const ogImage = document.querySelector('meta[property="og:image"]')?.getAttribute('content');
+          if (ogImage) images.push(ogImage);
+
+          document.querySelectorAll('.prod-image__item img, img[src*="thumbnail"]').forEach((img) => {
+            const src = (img as HTMLImageElement).src;
+            if (src && src.startsWith('http') && !src.includes('logo')) {
+              images.push(src);
+            }
+          });
+          images = [...new Set(images)].slice(0, 15);
+        }
+
+        return { title: title.trim(), content: content.trim(), meta: { description }, images };
+      }, extractImages);
+
+      await browser.close();
+      
+      result.content = this.cleanText(result.content || '').slice(0, maxLength);
+
+      console.log(`[쿠팡] ✅ Playwright 성공: ${result.title?.substring(0, 30)}...`);
+      return result;
+
+    } catch (error) {
+      console.error('[쿠팡] ❌ Playwright 실패:', (error as Error).message);
+      if (browser) await browser.close();
+      throw error;
+    }
+  }
+
+  /**
+   * ✅ [NEW] 네이버 스마트스토어/브랜드스토어 전용 Playwright + Stealth 크롤러
+   * - headless: false (실제 브라우저)
+   * - 네이버도 봇 차단 강화 중이므로 Stealth 사용
+   */
+  private async crawlNaverWithPlaywright(
+    url: string,
+    maxLength: number,
+    extractImages: boolean,
+    timeout: number
+  ): Promise<any> {
+    console.log('🕵️ [네이버] Playwright + Stealth 모드 실행 (headless: false)');
+
+    let browser = null;
+    let context = null;
+
+    try {
+      const { chromium } = await import('playwright-extra');
+      const stealth = (await import('puppeteer-extra-plugin-stealth')).default;
+      chromium.use(stealth());
+
+      // ⭐ 사용자 Chrome 프로필 경로 (쿠키/세션 재사용으로 CAPTCHA 우회)
+      const userDataDir = process.env.LOCALAPPDATA
+        ? `${process.env.LOCALAPPDATA}\\Google\\Chrome\\User Data`
+        : process.env.HOME
+          ? `${process.env.HOME}/Library/Application Support/Google/Chrome`
+          : null;
+
+      if (userDataDir) {
+        console.log('[네이버] 🍪 사용자 Chrome 프로필 사용 (CAPTCHA 우회)');
+
+        // launchPersistentContext로 기존 Chrome 프로필 사용
+        const execPath = await getChromiumExecutablePath();
+        context = await chromium.launchPersistentContext(userDataDir, {
+          headless: false,
+          executablePath: execPath || undefined,
+          args: [
+            '--disable-blink-features=AutomationControlled',
+            '--disable-dev-shm-usage',
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--window-size=1920,1080',
+            '--profile-directory=Default',
+          ],
+          viewport: { width: 1920, height: 1080 },
+          locale: 'ko-KR',
+          timezoneId: 'Asia/Seoul',
+        });
+      } else {
+        console.log('[네이버] 🔄 새 브라우저 세션 사용');
+
+        const execPath2 = await getChromiumExecutablePath();
+        browser = await chromium.launch({
+          headless: false,
+          executablePath: execPath2 || undefined,
+          args: [
+            '--disable-blink-features=AutomationControlled',
+            '--disable-dev-shm-usage',
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--window-size=1920,1080',
+          ],
+        });
+
+        context = await browser.newContext({
+          viewport: { width: 1920, height: 1080 },
+          userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          locale: 'ko-KR',
+          timezoneId: 'Asia/Seoul',
+          extraHTTPHeaders: {
+            'Accept-Language': 'ko-KR,ko;q=0.9',
+          },
+        });
+      }
+
+      const page = await context.newPage();
+
+      await page.addInitScript(() => {
+        Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+        (window as any).chrome = { runtime: {}, loadTimes: function () { }, csi: function () { }, app: {} };
+      });
+
+      console.log('[네이버] 🎯 상품 페이지 로딩...');
+      await page.goto(url, { waitUntil: 'networkidle', timeout: timeout });
+
+      // ⭐ SPA 동적 렌더링 대기: 상품명이 나타날 때까지 기다림
+      console.log('[네이버] ⏳ 상품 정보 렌더링 대기...');
+      try {
+        await page.waitForSelector('._1eddO7u4UC, ._3zzFY_wgQ6, .product-title, [class*="ProductName"], h1._2F0p2I6kQb', {
+          timeout: 10000,
+        });
+      } catch (e) {
+        console.log('[네이버] ⚠️ 상품명 셀렉터 타임아웃, 추가 대기...');
+      }
+
+      // AdvancedAutomator 어태치 및 유기적 동작 수행
+      const automator = new AdvancedAutomator();
+      await automator.attach(context, page);
+
+      // 인간처럼 행동 - 제목 부위로 스와이프/스크롤 후 잠시 응시
+      await automator.organicScrollTo('._1eddO7u4UC, ._3zzFY_wgQ6, .product-title, [class*="ProductName"]');
+      await automator.randomWait(2000, 800);
+
+      const htmlContent = await page.content();
+      if (htmlContent.includes('에러페이지') || htmlContent.includes('시스템오류')) {
+        console.log('[네이버] ⚠️ 에러 페이지 감지, 대기 후 재시도...');
+        await page.waitForTimeout(3000);
+        await page.reload({ waitUntil: 'networkidle' });
+        await page.waitForTimeout(3000);
+      }
+
+      const result = await page.evaluate((shouldExtractImages: boolean) => {
+        // ⭐ 네이버 스마트스토어 상품명 셀렉터 (다양한 패턴)
+        const title =
+          document.querySelector('._1eddO7u4UC')?.textContent ||
+          document.querySelector('._3zzFY_wgQ6')?.textContent ||
+          document.querySelector('h1._2F0p2I6kQb')?.textContent ||
+          document.querySelector('[class*="ProductName"]')?.textContent ||
+          document.querySelector('.product-title')?.textContent ||
+          document.querySelector('meta[property="og:title"]')?.getAttribute('content') ||
+          document.querySelector('title')?.textContent || '';
+
+        const description =
+          document.querySelector('meta[property="og:description"]')?.getAttribute('content') ||
+          document.querySelector('._3DPGSjcWQn')?.textContent || '';
+
+        // ⭐ 가격 셀렉터 (스마트스토어)
+        const price =
+          document.querySelector('._1LY7DqCnwR')?.textContent ||
+          document.querySelector('span._3BuEmd0aIP')?.textContent ||
+          document.querySelector('._3_2HPBGP5E')?.textContent ||
+          document.querySelector('[class*="finalPrice"]')?.textContent ||
+          document.querySelector('[class*="sale_price"]')?.textContent || '';
+
+        // 본문 구성
+        let content = `상품명: ${title}\n`;
+        if (price) content += `가격: ${price}\n`;
+        if (description) content += `설명: ${description}`;
+
+        // ⭐ 이미지 추출 (스마트스토어)
+        let images: string[] = [];
+        if (shouldExtractImages) {
+          const ogImage = document.querySelector('meta[property="og:image"]')?.getAttribute('content');
+          if (ogImage) images.push(ogImage);
+
+          document.querySelectorAll('._1QhSlmXi2u img, .product-image img, img[src*="pstatic"]').forEach((img) => {
+            const src = (img as HTMLImageElement).src || (img as HTMLImageElement).getAttribute('data-src');
+            if (src && src.startsWith('http') && !src.includes('logo') && !src.includes('icon')) {
+              images.push(src);
+            }
+          });
+
+          images = [...new Set(images)].slice(0, 15);
+        }
+
+        return {
+          title: title.trim(),
+          content: content.trim(),
+          meta: { description, source: 'naver_playwright' },
+          images,
+        };
+      }, extractImages);
+
+      // 브라우저/컨텍스트 종료
+      if (context) await context.close();
+      if (browser) await browser.close();
+
+      result.content = this.cleanText(result.content).slice(0, maxLength);
+
+      console.log(`[네이버] ✅ Playwright 성공: ${result.title?.substring(0, 30)}... (이미지 ${result.images?.length || 0}개)`);
+      return result;
+
+    } catch (error) {
+      console.error('[네이버] ❌ Playwright 실패:', (error as Error).message);
+      if (context) await context.close();
+      if (browser) await browser.close();
+      throw error;
+    }
   }
 
   private cleanText(text: string): string {

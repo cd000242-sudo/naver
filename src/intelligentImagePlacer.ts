@@ -54,7 +54,7 @@ export class IntelligentImagePlacer {
   constructor(geminiApiKey: string) {
     this.genAI = new GoogleGenerativeAI(geminiApiKey);
     this.model = this.genAI.getGenerativeModel({
-      model: 'gemini-2.0-flash-exp',
+      model: 'gemini-2.5-flash',  // ✅ [2026-03-05] 기본 모델을 2.5-flash로 변경 (속도 우선)
     });
   }
 

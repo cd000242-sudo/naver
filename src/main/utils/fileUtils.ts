@@ -11,12 +11,20 @@ import { createHash } from 'crypto';
  * 파일명 정화 - 특수문자 제거
  */
 export function sanitizeFileName(name: string): string {
-    const cleaned = String(name || '')
+    let cleaned = String(name || '')
         .replace(/[\\/><:"|?*]+/g, '_')
         .replace(/[\u0000-\u001F]/g, '')
         .replace(/\s+/g, ' ')
+        .replace(/_+/g, '_')
         .trim();
-    return cleaned.length > 80 ? cleaned.slice(0, 80).trim() : cleaned;
+    // ✅ [2026-03-14] trailing dot/space 제거 (Windows 탐색기 폴더 접근 불가 방지)
+    cleaned = cleaned.replace(/[.\s]+$/g, '');
+    // ✅ Windows 예약어 처리
+    if (/^(CON|PRN|AUX|NUL|COM\d|LPT\d)$/i.test(cleaned)) {
+        cleaned = `_${cleaned}`;
+    }
+    if (cleaned.length > 80) cleaned = cleaned.slice(0, 80).replace(/[.\s]+$/g, '');
+    return cleaned;
 }
 
 /**

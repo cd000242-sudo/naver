@@ -9,7 +9,7 @@
  */
 export function isCostRiskImageProvider(provider: string): boolean {
     const p = String(provider || '').trim();
-    return p === 'nano-banana-pro' || p === 'prodia' || p === 'stability' || p === 'falai';
+    return p === 'nano-banana-pro' || p === 'prodia' || p === 'stability' || p === 'falai' || p === 'leonardoai' || p === 'openai-image';
 }
 
 /**
@@ -22,6 +22,8 @@ export function getCostRiskProviderLabel(provider: string): string {
     if (p === 'falai') return 'Fal.ai';
     if (p === 'prodia') return 'Prodia AI';
     if (p === 'stability') return 'Stability AI';
+    if (p === 'leonardoai') return 'Leonardo AI';
+    if (p === 'openai-image') return 'OpenAI DALL-E';
     return p || 'AI 이미지';
 }
 

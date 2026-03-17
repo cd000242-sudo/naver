@@ -149,6 +149,7 @@ interface GeneratedPost {
   publishedAt?: string;
   toneStyle?: string; // ✅ 글 톤 저장
   sourceUrl?: string; // ✅ URL로 생성한 경우 원본 URL 저장
+  naverId?: string; // ✅ [2026-03-11 FIX] 다중계정 발행 시 계정별 저장 구분
 }
 
 type RendererAutomationImage = {
@@ -165,7 +166,7 @@ type StructuredGenerationRequest = {
     draftText?: string;
     baseText?: string;
     rssUrl?: string;
-    generator?: 'gemini' | 'openai' | 'claude';
+    generator?: 'gemini' | 'openai' | 'claude' | 'perplexity';
     targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
     category?: string;
     minChars?: number;
@@ -182,7 +183,7 @@ type RendererAutomationPayload = {
   structuredContent?: StructuredContent;
   generatedImages?: RendererAutomationImage[];
   hashtags?: string[];
-  generator?: 'gemini' | 'openai' | 'claude';
+  generator?: 'gemini' | 'openai' | 'claude' | 'perplexity';
   keywords?: string[];
   draft?: string;
   rssUrl?: string;
@@ -224,6 +225,32 @@ interface AutomationAPI {
   getQuotaStatus: () => Promise<{ success: boolean; isFree: boolean; quota: any }>;
   generateContent: (prompt: string) => Promise<{ success: boolean; content?: string; message?: string }>;
   generateStructuredContent: (request: StructuredGenerationRequest) => Promise<{ success: boolean; content?: StructuredContent; message?: string; imageCount?: number }>;
+  // ✅ [2026-02-08] 테스트 이미지 생성 API - engine, textOverlay 파라미터 포함
+  generateTestImage: (options: {
+    style: string;
+    ratio: string;
+    prompt: string;
+    engine?: string;
+    textOverlay?: { enabled: boolean; text: string };
+  }) => Promise<{
+    success: boolean;
+    path?: string;
+    previewDataUrl?: string;
+    error?: string;
+  }>;
+  // ✅ [2026-02-18] 스타일 미리보기 생성/캐시 API
+  generateStylePreview: (options: {
+    style: string;
+    engine?: string;
+  }) => Promise<{
+    success: boolean;
+    path?: string;
+    error?: string;
+  }>;
+  getStylePreviewCache: () => Promise<{
+    success: boolean;
+    cache: Record<string, string>;
+  }>;
   generateImages: (
     options: {
       provider: string;
@@ -305,7 +332,7 @@ interface AutomationAPI {
     keywords: string[];
     category: string;
     imageMode: 'full-auto' | 'semi-auto' | 'manual' | 'skip';
-    selectedImageSource?: 'dalle' | 'pexels' | 'library';
+    selectedImageSource?: 'nano-banana-pro' | 'library';
   }) => Promise<{
     success: boolean;
     images?: ExtendedImage[];
@@ -326,10 +353,12 @@ interface AutomationAPI {
   getLicense: () => Promise<{ license: LicenseInfo | null }>;
   verifyLicense: (code: string, deviceId: string, email?: string) => Promise<{ valid: boolean; license?: LicenseInfo; message?: string }>;
   verifyLicenseWithCredentials: (userId: string, password: string, deviceId: string) => Promise<{ valid: boolean; license?: LicenseInfo; message?: string; debugInfo?: any }>;
+  onSessionForceLogout: (callback: (data: { message: string }) => void) => () => void; // 중복 로그인 강제 로그아웃 이벤트
   registerExternalInflowLicense: () => Promise<{ success: boolean; message: string; expiresAt?: string }>;
   canUseExternalInflow: () => Promise<boolean>;
   checkPatchFile: () => Promise<boolean>;
   getDeviceId: () => Promise<string>;
+  getAppVersion: () => Promise<string>; // ✅ [2026-02-05] 앱 버전 반환
   isPackaged: () => Promise<boolean>;
   testLicenseServer: (serverUrl?: string) => Promise<{ success: boolean; message: string; response?: any }>;
   networkOptimize: () => Promise<{ success: boolean; message: string; results: string[] }>; // ✅ 원클릭 네트워크 최적화
@@ -392,15 +421,18 @@ interface AutomationAPI {
   openExternalUrl: (url: string) => Promise<{ success: boolean; message?: string }>;
   // 창 포커스
   focusWindow: () => Promise<{ success: boolean; message?: string }>;
-  // ✅ 이미지 URL 다운로드 및 저장
+  // ✅ 이미지 URL 다운로드 및 저장 (카테고리별 폴더에 저장)
   downloadAndSaveImage: (
     imageUrl: string,
     heading: string,
     postTitle?: string,
-    postId?: string
+    postId?: string,
+    category?: string
   ) => Promise<{ success: boolean; filePath?: string; previewDataUrl?: string; savedToLocal?: string; message?: string }>;
   collectImagesFromUrl: (url: string) => Promise<{ success: boolean; images?: string[]; message?: string }>;
   collectImagesFromShopping: (url: string) => Promise<{ success: boolean; images?: string[]; title?: string; message?: string }>;
+  // ✅ [2026-02-01] Gemini 3 기반 소제목-이미지 의미적 매칭
+  matchImagesToHeadings: (images: string[], headings: string[]) => Promise<{ success: boolean; matches?: number[]; message?: string }>;
   searchNaverImages: (keyword: string) => Promise<{ success: boolean; images?: any[]; message?: string }>; // ✅ 네이버 이미지 검색 API
   // ✅ [100점 개선] AI 이미지 검색어 최적화 API
   optimizeImageSearchQuery: (title: string, heading: string) => Promise<{
@@ -470,6 +502,13 @@ interface AutomationAPI {
   generateThumbnailSvg: (title: string, options?: ThumbnailOptions, category?: string) => Promise<{ success: boolean; svg?: string; message?: string }>;
   getThumbnailStyles: () => Promise<{ success: boolean; styles?: ThumbnailStyle[]; message?: string }>;
   getThumbnailCategories: () => Promise<{ success: boolean; categories?: string[]; message?: string }>;
+  // ✅ [2026-02-04] 수집 이미지에 텍스트 오버레이 적용 API
+  createProductThumbnail: (
+    imageUrl: string,
+    text: string,
+    options?: { position?: string; fontSize?: number; textColor?: string; opacity?: number }
+  ) => Promise<{ success: boolean; outputPath?: string; previewDataUrl?: string; message?: string }>;
+
 
   // ✅ 다중 블로그 관리 API
   addBlogAccount: (name: string, blogId: string, naverId?: string, naverPassword?: string, settings?: BlogAccountSettings) => Promise<{ success: boolean; account?: BlogAccount; message?: string }>;
@@ -681,7 +720,7 @@ type BlogAccountSettings = {
   category?: string;
   isJabBlog?: boolean;
   // ✅ 계정별 개별 설정 (다중계정 동시발행용)
-  imageSource?: 'gemini' | 'imagen' | 'pexels' | 'unsplash' | 'skip';
+  imageSource?: 'gemini' | 'imagen' | 'unsplash' | 'skip';
   toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous';
   publishMode?: 'publish' | 'draft';
   keywords?: string[];
@@ -812,7 +851,24 @@ type LicenseInfo = {
   maxDevices?: number;
   authMethod?: 'code' | 'credentials'; // 인증 방식
   userId?: string; // 아이디/비밀번호 방식일 때 사용
+  sessionToken?: string; // 서버 발급 세션 토큰 (중복 로그인 방지)
 };
+
+// ✅ [2026-03-10] ToastManager 타입 (toastManager 글로벌 노출용)
+interface ToastManager {
+  show: (message: string, type?: 'success' | 'error' | 'warning' | 'info', duration?: number) => void;
+  success: (message: string, duration?: number) => void;
+  error: (message: string, duration?: number) => void;
+  warning: (message: string, duration?: number) => void;
+  info: (message: string, duration?: number) => void;
+}
+
+// ✅ [2026-03-10] LoadingManager 타입
+interface LoadingManager {
+  show: (text?: string, progress?: number) => void;
+  update: (text: string, progress: number) => void;
+  hide: () => void;
+}
 
 declare global {
   interface Window {
@@ -820,6 +876,67 @@ declare global {
     getSelectedHeadings: () => string[];
     getGeneratedImages: () => RendererAutomationImage[];
     getStructuredContent: () => StructuredContent | null;
+
+    // ✅ [2026-03-10 CLEANUP] 상위 빈도 (window as any) 패턴 타입 선언
+    // — 글로벌 상태 —
+    currentStructuredContent: StructuredContent | null;
+    generatedImages: RendererAutomationImage[] | null;
+    imageManagementGeneratedImages: RendererAutomationImage[] | null;
+    stopFullAutoPublish: boolean;
+    selectedContentType: string | undefined;
+    customBannerPath: string | undefined | null;
+
+    // — 소제목/키워드 임시 저장 —
+    _headingTitles: Array<{ heading: string; title: string }> | undefined;
+    _headingPrompts: Array<{ heading: string; prompt: string }> | undefined;
+    _keywordTitleOptions: { keyword: string; titles: string[]; selectedTitle: string } | undefined;
+
+    // — UI 매니저/헬퍼 —
+    toastManager: ToastManager;
+    showToast: (message: string, type?: string, duration?: number) => void;
+    showLoading: (text?: string, progress?: number) => void;
+    updateLoading: (text: string, progress: number) => void;
+    hideLoading: () => void;
+    showSuccessToast: (message: string, duration?: number) => void;
+    showErrorToast: (message: string, duration?: number) => void;
+
+    // — 풀오토/다중계정 함수 —
+    resetAfterPublish: () => void;
+    updateFreeQuota: (() => void) | undefined;
+    updateAffiliateOptionVisibility: (() => void) | undefined;
+    refreshAllAccountLists: (() => void) | undefined;
+    openAccountEditModal: ((accountId: string) => void) | undefined;
+    presetThumbnails: Record<string, string> | undefined;
+    _syncingShoppingTab: boolean | undefined;
+
+    // — API 클라이언트 —
+    enhancedApiCall: (method: string, args?: any[], options?: any) => Promise<any>;
+    clearApiCache: () => void;
+    getApiStats: () => any;
+    safeLocalStorageSetItem: (key: string, value: string, retryCount?: number) => boolean;
+
+    // — Electron API (레거시 호환) —
+    electronAPI?: Partial<AutomationAPI>;
+    ImageManager?: { imageMap: Map<string, any[]> };
+
+    // — 예약 시간 분산 유틸리티 (scheduleDistributor.ts) —
+    distributeByInterval: (count: number, options: {
+      baseDate: string; baseTime: string; intervalMinutes: number;
+      variancePercent?: number; minIntervalMinutes?: number;
+      roundingMinutes?: number; firstItemRandomOffset?: boolean;
+    }, existingUsedKeys?: Set<string>) => Array<{ date: string; time: string }>;
+    distributeByRandomRange: (count: number, options: {
+      startDate: string; startTime: string;
+      endDate: string; endTime: string;
+      roundingMinutes?: number;
+    }) => Array<{ date: string; time: string }>;
+    distributeWithProtection: <T extends { scheduleDate?: string; scheduleTime?: string; scheduleUserModified?: boolean }>(
+      items: T[], options: {
+        baseDate: string; baseTime: string; intervalMinutes: number;
+        variancePercent?: number; minIntervalMinutes?: number;
+        roundingMinutes?: number; firstItemRandomOffset?: boolean;
+      }, logger?: (msg: string, level: string) => void
+    ) => T[];
   }
 }
 

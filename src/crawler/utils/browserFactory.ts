@@ -1,22 +1,31 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { getChromiumExecutablePath } from '../../browserUtils.js';
+import { getProxyUrl } from './proxyManager.js';
 
 export async function launchBrowser(): Promise<Browser> {
     const executablePath = await getChromiumExecutablePath();
 
+    // ✅ [2026-03-16] 프록시 자동 적용
+    const proxyUrl = await getProxyUrl();
+    const args = [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-gpu',
+        '--disable-dev-shm-usage',
+        '--disable-blink-features=AutomationControlled',
+        '--js-flags=--max-old-space-size=256',
+        '--disable-extensions',
+        '--mute-audio'
+    ];
+    if (proxyUrl) {
+        args.push(`--proxy-server=${proxyUrl}`);
+        console.log(`[BrowserFactory] 🌐 프록시 적용: ${proxyUrl}`);
+    }
+
     return puppeteer.launch({
         headless: true,
         executablePath,
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-gpu',
-            '--disable-dev-shm-usage',
-            '--disable-blink-features=AutomationControlled', // 봇 탐지 회피
-            '--js-flags=--max-old-space-size=256', // 저사양 환경 메모리 최적화
-            '--disable-extensions',
-            '--mute-audio'
-        ],
+        args,
     });
 }
 

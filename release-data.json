@@ -1,0 +1,8 @@
+{
+    "tag_name": "v1.2.71",
+    "target_commitish": "main",
+    "name": "v1.2.71",
+    "body": "## v1.2.71 Release Notes\n\n### Schedule System Overhaul\n- **[NEW]** `scheduleDistributor.ts` — 예약 시간 분산 전용 모듈 (3개 파일에서 중복된 알고리즘 통합)\n- **[FIX]** 랜덤 예약 시 같은 시간에 글이 몰리는 문제 해결 (Stratified Sampling + 충돌 회피)\n- **[FIX]** `roundToInterval`/`ceilToInterval` 더블 인크리먼트 버그 수정 (55분→60분 시 2시간 점프)\n- **[NEW]** `firstItemRandomOffset` 옵션 추가 (연속발행 첫 항목 랜덤 오프셋)\n- **[NEW]** `global.d.ts`에 scheduleDistributor 함수 타입 선언 추가\n- **[NEW]** 37개 단위 테스트 (`scheduleDistributor.test.cjs`)",
+    "draft": false,
+    "prerelease": false
+}

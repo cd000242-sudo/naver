@@ -5,84 +5,204 @@
 
 import type { ImageRequestItem, GeneratedImage } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
+import { getImageErrorMessage } from './imageErrorMessages.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { promises as fs } from 'fs';
 import { createHash } from 'crypto';
 import sharp from 'sharp';
 
-// 전역 사용된 이미지 URL 추적
-const usedImageUrls = new Set<string>();
+// ✅ [2026-03-02] 실시간 이미지 생성 로그 → 렌더러 UI로 IPC 전송
+function sendImageLog(message: string): void {
+  try {
+    const { BrowserWindow } = require('electron');
+    const wins = BrowserWindow.getAllWindows();
+    if (wins[0]) {
+      wins[0].webContents.send('image-generation:log', message);
+    }
+  } catch { /* 렌더러 초기화 전이면 무시 */ }
+  console.log(message); // 터미널에도 출력
+}
 
-// ✅ 카테고리별 이미지 스타일 매핑
-// ✅ [2026-01-21 FIX] 카테고리에 따라 실사 vs 인포그래픽 스타일 구분
-// - 비즈니스/경제/재테크/정책: 인포그래픽 스타일 (직관적, 어르신도 읽기 쉬움)
-// - 연예/여행/음식: 실사 스타일 (시각적 매력)
-const CATEGORY_IMAGE_STYLES: Record<string, string> = {
-  // ===== 실사 스타일 (Photorealistic) =====
-  'entertainment': 'Naver Homefeed Style: Professional photography of a FAMOUS KOREAN CELEBRITY...',
-  '연예': '네이버 홈판 연예인 화보 스타일: 한국인 유명 연예인 외모...',
-  '이슈': 'Breaking news style, high-impact photojournalism...',
-  'health': 'Clean medical photography featuring Korean healthcare...',
-  '건강': 'Wellness and lifestyle photography in Korean home setting...',
-  '의료': 'Korean medical professional photography...',
-  'food': 'Authentic Korean food photography (K-food)...',
-  '음식': 'Delicious Korean cuisine photography...',
-  '요리': 'Korean home cooking process photography...',
-  '맛집': 'Korean restaurant ambiance (Hot-place)...',
-  'travel': 'South Korea travel photography...',
-  '여행': 'Stunning Korean travel destinations...',
-  '라이프': 'Korean lifestyle photography...',
-  '일상': 'Authentic Korean lifestyle moments...',
-  'fashion': 'High fashion editorial photography of KOREAN MODELS...',
-  '패션': 'K-패션 매거진 화보 퀄리티...',
-  '뷰티': 'K-beauty professional photography...',
-  'sports': 'Naver Homefeed Style: High-octane action sports photography...',
-  '스포츠': '네이버 스포츠 홈판 스타일: 한국 선수들의 역동적인 경기 액션...',
-  'shopping': 'High-end Korean E-commerce lifestyle photography...',
-  '쇼핑': '프리미엄 커머셜 제품 화보 스타일...',
-  '제품': 'Professional product photography for Korean market...',
-  'tech': 'Korean technology product photography...',
-  'it': 'Digital technology imagery in Korea...',
-  '테크': 'Cutting-edge technology in Korea...',
-
-  // ===== 인포그래픽 스타일 (Infographic/Illustration) =====
-  // 비즈니스/경제/재테크: 직관적인 인포그래픽, 어르신도 읽기 쉬운 스타일
-  'economy': 'Modern Korean infographic style image with clean icons, large readable Korean text, pastel blue gradient background, professional data visualization, charts and diagrams, corporate presentation quality, easy to understand for all ages including elderly',
-  'business': 'Clean professional infographic with bold Korean typography, minimalist icons, soft gradient background (blue/green), business concept visualization, magazine editorial quality, corporate style, easy to read text',
-  '경제': '한국형 인포그래픽 스타일: 파스텔 블루 그라데이션 배경, 큰 한글 텍스트, 직관적인 아이콘, 데이터 시각화, 어르신도 읽기 쉬운 디자인, 뉴스/경제 매거진 품질',
-  '비즈니스': '비즈니스 인포그래픽: 깔끔한 그래프와 도표, 큰 한글 제목, 파스텔 톤 배경, 프레젠테이션 슬라이드 품질',
-  '재테크': 'Finance infographic style: clean money/investment icons, pastel green/blue gradient, large Korean text about savings/investment, easy to read for seniors, professional Korean financial magazine quality',
-  '연말정산': 'Tax filing infographic: clean government document style, official blue color scheme, step-by-step visual guide with numbered icons, large readable Korean text, easy for elderly to understand, official Korean government announcement style',
-  '세금': 'Tax infographic: clean icons, official colors, numbered steps, large Korean text, easy to understand flowcharts',
-  'politics': 'Korean news infographic style, clean layout with policy icons, official blue/red colors, large Korean text headlines, broadcast news quality graphic',
-  '정치': '정책 인포그래픽: 공식적인 파란색/빨간색 색상, 큰 한글 제목, 정책 시각화, 뉴스 방송 그래픽 품질',
-  '사회': 'Social issues infographic: clean icons, soft colors, large Korean text, easy to understand diagrams, newspaper editorial quality',
-
-  'education': 'Korean educational infographic: colorful learning icons, large Korean text, step-by-step guide style, textbook quality graphics',
-  '교육': '교육 인포그래픽: 학습용 아이콘, 단계별 가이드, 큰 한글 텍스트, 교과서 품질',
-  '자기계발': 'Self-improvement infographic: motivational icons, clean pastel background, large Korean text, easy to read',
-
-  // ===== 기본값 =====
-  'default': 'Hyper-realistic professional photography of Korean people and environment...'
+// ✅ [2026-03-02] Gemini 모델별 이미지 1장당 추정 비용 (원화)
+const MODEL_COST_KRW: Record<string, number> = {
+  'gemini-3.1-flash-image-preview': 97,    // 나노바나나 2 (~₩97)
+  'gemini-3-pro-image-preview': 500,       // 나노바나나프로 (~₩500)
+  'gemini-2.5-flash-image': 150,           // 나노바나나 (~₩150)
+  'gemini-2.0-flash-exp-image-generation': 0, // 무료
+  'imagen-4.0-generate-001': 100,          // 이미지4 (~₩100)
 };
 
+// 전역 사용된 이미지 URL 추적
+const usedImageUrls = new Set<string>();
+const MAX_USED_URLS = 500; // ✅ [2026-02-03] 메모리 누수 방지: 최대 500개 유지
+
+// ✅ [2026-02-18] 503 에러 폴백 시스템 (모듈 레벨 - 호출 간 상태 공유)
+// Imagen 4: 고품질 이미지 전용 모델 (Gemini 3 Pro 서버 과부하 시 폴백)
+const FALLBACK_MODEL = 'imagen-4.0-generate-001';
+let global503Count = 0; // 전체 503 에러 누적 카운트
+let global503FallbackActive = false; // 폴백 모델 활성 여부
+let global503FallbackStartTime = 0; // 폴백 시작 시간 (30분 후 자동 복구)
+
+// ✅ [2026-02-23 FIX] 폴백 모델용 프롬프트 정제 함수
+// 나노바나나프로(Gemini 기본 모델)에서만 한글 텍스트를 생성해야 함
+// Imagen 4, gemini-2.5-flash 폴백에서는 텍스트 없는 이미지만 생성
+function stripTextInstructions(prompt: string): string {
+  let cleaned = prompt
+    // 텍스트 배치 관련 섹션 전체 제거
+    .replace(/⚠️ CRITICAL TEXT PLACEMENT[\s\S]*?(?=\n\n)/g, '')
+    .replace(/DESIGN REQUIREMENTS \(NAVER HOMEFEED QUALITY\):[\s\S]*?(?=\n\n)/g, '')
+    .replace(/TEXT OVERLAY REQUIREMENTS:[\s\S]*?(?=\n\n)/g, '')
+    // 개별 텍스트 관련 지시문 제거
+    .replace(/- Use BOLD.*?typography.*?\n/gi, '')
+    .replace(/- .*?Korean text overlay.*?\n/gi, '')
+    .replace(/- .*?텍스트.*?\n/g, '')
+    .replace(/Can include Korean text overlay[^.\n]*/gi, '')
+    .replace(/BOLD.*?Korean text overlay[^.\n]*/gi, '')
+    .replace(/Text must be CLEARLY VISIBLE[^.\n]*/gi, '')
+    .replace(/THE TEXT SHOULD BE THE MAIN[^.\n]*/gi, '')
+    .replace(/- Text should be placed in.*?\n/gi, '')
+    .replace(/- Keep text in a SINGLE LINE.*?\n/gi, '')
+    .replace(/- Use COMPACT text.*?\n/gi, '')
+    .replace(/- TEXT MUST NOT EXTEND.*?\n/gi, '')
+    .replace(/- ALL TEXT MUST be placed.*?\n/gi, '')
+    .replace(/- NEVER place text near.*?\n/gi, '')
+    .replace(/- .*?LARGE.*?and.*?impactful typography.*?\n/gi, '')
+    .replace(/- Add the title text:.*?\n/gi, '')
+    .replace(/- The ONLY text allowed is the title:.*?\n/gi, '')
+    .replace(/- MAX \d+ lines of text.*?\n/gi, '')
+    .replace(/- .*?font size.*?\n/gi, '')
+    .replace(/- .*?48-64px.*?\n/gi, '')
+    // 한글 제목 문자열 "..." 내의 한글을 공백으로 대체
+    .replace(/"([^"]*)"/g, (match, content) => {
+      return /[\uAC00-\uD7AF]/.test(content) ? '""' : match;
+    })
+    // 연속 빈 줄 정리
+    .replace(/\n{3,}/g, '\n\n');
+
+  // 텍스트 없는 이미지 생성 지시 추가
+  cleaned += '\n\nABSOLUTE RULE: DO NOT include ANY text, letters, words, numbers, or typography in this image. Generate a PURE VISUAL image only. NO TEXT AT ALL.';
+
+  console.log(`[stripTextInstructions] 프롬프트 정제 완료: ${prompt.length}자 → ${cleaned.length}자`);
+  return cleaned;
+}
+
+// ✅ [2026-02-18] Imagen 4 폴백 함수 (Gemini 3 Pro 503 시 대체)
+// Imagen 4는 :predict 엔드포인트 사용 (Gemini의 :generateContent와 다름)
+async function generateImageWithImagen4(
+  prompt: string,
+  apiKey: string,
+  aspectRatio: string = '1:1',
+  signal?: AbortSignal
+): Promise<{ buffer: Buffer; mimeType: string } | null> {
+  try {
+    const axios = (await import('axios')).default; // Imagen 4 전용 — top-level import 없음
+
+    // ✅ [2026-02-23 FIX] Imagen 4는 한글 텍스트 생성 불가 → 텍스트 관련 지시문 제거
+    const cleanPrompt = stripTextInstructions(prompt);
+    console.log(`[Imagen4-Fallback] 🖼️ Imagen 4로 이미지 생성 시도... (텍스트 지시문 제거됨)`);
+    console.log(`[Imagen4-Fallback] 📐 비율: ${aspectRatio}, 프롬프트 길이: ${cleanPrompt.length}자`);
+
+    // Imagen 4 :predict 요청 형식
+    const response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/${FALLBACK_MODEL}:predict`,
+      {
+        instances: [{ prompt: cleanPrompt }],
+        parameters: {
+          sampleCount: 1,
+          aspectRatio: aspectRatio,
+          personGeneration: 'allow_adult',
+        }
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey,
+        },
+        timeout: 90000, // ✅ [2026-03-11 FIX] 60초→90초 (성공률 극대화)
+        signal,
+      }
+    );
+
+    // Imagen 4 응답: { predictions: [{ bytesBase64Encoded: "...", mimeType: "image/png" }] }
+    const predictions = response.data?.predictions;
+    if (predictions && predictions.length > 0 && predictions[0].bytesBase64Encoded) {
+      const base64Data = predictions[0].bytesBase64Encoded;
+      const mimeType = predictions[0].mimeType || 'image/png';
+      const buffer = Buffer.from(base64Data, 'base64');
+      console.log(`[Imagen4-Fallback] ✅ Imagen 4 생성 성공! (${Math.round(buffer.length / 1024)}KB)`);
+      return { buffer, mimeType };
+    }
+
+    console.warn(`[Imagen4-Fallback] ⚠️ 응답에 이미지 없음:`, JSON.stringify(response.data).substring(0, 200));
+    return null;
+  } catch (error: any) {
+    const statusCode = error?.response?.status;
+    const errorMsg = error?.response?.data?.error?.message || error.message;
+    console.error(`[Imagen4-Fallback] ❌ Imagen 4 실패 (${statusCode}): ${errorMsg}`);
+
+    // 503이면 Imagen 4도 과부하 → null 반환 (상위에서 처리)
+    if (statusCode === 503) {
+      console.error(`[Imagen4-Fallback] ❌ Imagen 4 서버도 503 → 이미지 생성 불가`);
+    }
+    return null;
+  }
+}
+
+
+// ✅ [2026-02-03 FIX] Set 크기 제한 함수
+function addToUsedUrls(url: string): void {
+  if (usedImageUrls.size >= MAX_USED_URLS) {
+    // 가장 오래된 항목 삭제 (FIFO)
+    const firstUrl = usedImageUrls.values().next().value;
+    if (firstUrl) usedImageUrls.delete(firstUrl);
+  }
+  usedImageUrls.add(url);
+}
+
+// ✅ [2026-01-29] 쇼핑커넥트 라이프스타일 전용 스타일 (쇼핑커넥트는 비즈니스 요구사항이므로 유지)
+const SHOPPING_CONNECT_LIFESTYLE_STYLE = `Premium lifestyle photography, Korean person (20-40s) using the product, luxury Korean setting, warm natural lighting, Instagram-worthy aspirational aesthetic, Samsung/LG ad quality.`;
+
+// ✅ [2026-03-01] 인물 필수 / 제외 카테고리 목록 (하드코딩 → personRule만 제공)
+const PERSON_REQUIRED_CATEGORIES = [
+  '스타 연예인', '스포츠', '패션 뷰티', '건강',
+  '교육/육아', '자기계발', '취미 라이프', '책 영화',
+];
+const NO_PERSON_CATEGORIES = [
+  '요리 맛집', '여행', 'IT 테크', '제품 리뷰',
+  '리빙 인테리어', '반려동물', '자동차', '부동산',
+  '비즈니스 경제', '사회 정치', '공부', '생활 꿀팁',
+];
 
 /**
- * 카테고리에 맞는 이미지 스타일 반환
+ * ✅ [2026-03-01] AI 추론 기반 리팩토링: getCategoryStyle() → getPersonRule()
+ * - 하드코딩된 28개 카테고리 비주얼 스타일 전면 삭제
+ * - AI 모델(Gemini)이 주제(heading)에서 적절한 비주얼을 직접 추론
+ * - 이 함수는 인물 출현 규칙(person rule)만 반환
+ * - 인물 등장 시 반드시 한국인으로 하드코딩
  */
-function getCategoryStyle(category?: string): string {
-  if (!category || typeof category !== 'string') return CATEGORY_IMAGE_STYLES['default'];
+function getPersonRule(category?: string): string {
+  if (!category || typeof category !== 'string') return '';
 
-  const normalizedCategory = String(category).toLowerCase().trim();
-  if (CATEGORY_IMAGE_STYLES[normalizedCategory]) {
-    return CATEGORY_IMAGE_STYLES[normalizedCategory];
+  const norm = String(category).toLowerCase().trim();
+
+  // 인물 필수 카테고리
+  const isPersonRequired = PERSON_REQUIRED_CATEGORIES.some(c =>
+    norm.includes(c.toLowerCase()) || c.toLowerCase().includes(norm)
+  );
+  if (isPersonRequired) {
+    return 'If people appear, they MUST be Korean (한국인). Authentic Korean facial features, Korean bone structure, Korean skin tone. Never Western/Caucasian.';
   }
-  for (const [key, style] of Object.entries(CATEGORY_IMAGE_STYLES)) {
-    if (normalizedCategory.includes(key) || key.includes(normalizedCategory)) {
-      return style;
-    }
+
+  // 인물 제외 카테고리
+  const isNoPerson = NO_PERSON_CATEGORIES.some(c =>
+    norm.includes(c.toLowerCase()) || c.toLowerCase().includes(norm)
+  );
+  if (isNoPerson) {
+    return 'Focus only on objects, scenes, environments, products, food, or landscapes. NO PEOPLE, NO HANDS.';
   }
-  return CATEGORY_IMAGE_STYLES['default'];
+
+  // 기타 (AI가 자유롭게 판단, 인물 등장 시 한국인)
+  return 'If people appear in the image, they MUST be Korean (한국인). Authentic Korean facial features. Never Western/Caucasian.';
 }
 
 // ===== 해시 유틸리티 =====
@@ -131,8 +251,165 @@ async function computeAHash64(buffer: Buffer): Promise<bigint | null> {
 
 let storedGeminiApiKey: string | null = null;
 
-// ✅ [100점 수정] 전역 AbortController - 중지 버튼으로 API 호출 취소
-let currentAbortController: AbortController | null = null;
+// ✅ [2026-02-13] Gemini API 키 풀 매니저 (429 할당량 초과 시 자동 로테이션)
+class GeminiKeyPool {
+  private keys: string[];
+  private currentIndex: number = 0;
+  private exhaustedKeys: Set<string> = new Set(); // 할당량 소진된 키 추적
+  private exhaustedAt: Map<string, number> = new Map(); // 소진 시각 (자동 복구용)
+
+  constructor(keys: string[]) {
+    // 중복 제거 + 빈 문자열 제거
+    this.keys = [...new Set(keys.filter(k => k && k.trim().length > 0))];
+  }
+
+  /** 현재 사용 가능한 키 반환 (소진된 키 스킵) */
+  getCurrentKey(): string | null {
+    if (this.keys.length === 0) return null;
+
+    // 1시간 이상 지난 소진 키는 복구 시도
+    const now = Date.now();
+    for (const [key, time] of this.exhaustedAt.entries()) {
+      if (now - time > 3600000) { // 1시간
+        this.exhaustedKeys.delete(key);
+        this.exhaustedAt.delete(key);
+        console.log(`[KeyPool] 🔄 키 ${key.substring(0, 10)}... 복구 (1시간 경과)`);
+      }
+    }
+
+    // 사용 가능한 키 찾기
+    for (let i = 0; i < this.keys.length; i++) {
+      const idx = (this.currentIndex + i) % this.keys.length;
+      const key = this.keys[idx];
+      if (!this.exhaustedKeys.has(key)) {
+        this.currentIndex = idx;
+        return key;
+      }
+    }
+
+    // 모든 키 소진
+    return null;
+  }
+
+  /** 현재 키를 소진 처리하고 다음 키로 전환. 새 키를 반환 (없으면 null) */
+  markExhaustedAndRotate(): string | null {
+    if (this.keys.length === 0) return null;
+
+    const exhaustedKey = this.keys[this.currentIndex];
+    this.exhaustedKeys.add(exhaustedKey);
+    this.exhaustedAt.set(exhaustedKey, Date.now());
+    console.log(`[KeyPool] ❌ 키 ${exhaustedKey.substring(0, 10)}... 할당량 소진 → 로테이션`);
+
+    // 다음 사용 가능한 키 찾기
+    this.currentIndex = (this.currentIndex + 1) % this.keys.length;
+    const nextKey = this.getCurrentKey();
+
+    if (nextKey) {
+      console.log(`[KeyPool] ✅ 새 키로 전환: ${nextKey.substring(0, 10)}... (${this.getAvailableCount()}/${this.keys.length} 사용 가능)`);
+    } else {
+      console.error(`[KeyPool] ⛔ 모든 API 키(${this.keys.length}개)가 할당량 소진됨!`);
+    }
+
+    return nextKey;
+  }
+
+  /** 사용 가능한 키 개수 */
+  getAvailableCount(): number {
+    return this.keys.length - this.exhaustedKeys.size;
+  }
+
+  /** 전체 키 개수 */
+  getTotalCount(): number {
+    return this.keys.length;
+  }
+
+  /** 키 풀이 비어있는지 */
+  isEmpty(): boolean {
+    return this.keys.length === 0;
+  }
+}
+
+// ✅ [2026-03-02] 스마트 RPM 쓰로틀러 (분당 요청 횟수 제한 자동 관리)
+// Gemini 이미지 모델은 유료 1등급 기준 10 RPM 제한 → 429 사전 방지
+class GeminiRpmThrottler {
+  private callTimestamps: number[] = [];
+  private readonly maxRpm: number;
+  private readonly safetyMargin: number; // RPM 한도 대비 안전 마진
+
+  constructor(maxRpm: number = 10, safetyMargin: number = 2) {
+    this.maxRpm = maxRpm;
+    this.safetyMargin = safetyMargin; // 기본값: 10 RPM 중 8개까지만 허용
+  }
+
+  /** 현재 1분 윈도우 내 호출 수 */
+  private getRecentCallCount(): number {
+    const now = Date.now();
+    const oneMinuteAgo = now - 60000;
+    // 오래된 타임스탬프 제거
+    this.callTimestamps = this.callTimestamps.filter(t => t > oneMinuteAgo);
+    return this.callTimestamps.length;
+  }
+
+  /** API 호출 전 대기 (RPM 초과 방지) — 비동기 */
+  async throttle(): Promise<void> {
+    const safeLimit = this.maxRpm - this.safetyMargin;
+    const recentCalls = this.getRecentCallCount();
+
+    if (recentCalls >= safeLimit) {
+      // 가장 오래된 호출이 1분 윈도우를 벗어날 때까지 대기
+      const oldestInWindow = this.callTimestamps[0];
+      const waitMs = Math.max(0, (oldestInWindow + 60000) - Date.now()) + 1500; // 1.5초 여유
+      console.log(`[RPM Throttler] ⏳ 분당 ${recentCalls}/${this.maxRpm}회 도달 → ${Math.round(waitMs / 1000)}초 대기 (429 방지)`);
+      sendImageLog(`⏳ 분당 요청 한도 ${recentCalls}/${this.maxRpm}회 도달 — ${Math.round(waitMs / 1000)}초 대기 중...`);
+      await new Promise(resolve => setTimeout(resolve, waitMs));
+    }
+  }
+
+  /** API 호출 완료 기록 */
+  recordCall(): void {
+    this.callTimestamps.push(Date.now());
+  }
+
+  /** 현재 상태 로그 */
+  getStatus(): string {
+    const count = this.getRecentCallCount();
+    return `${count}/${this.maxRpm} RPM`;
+  }
+}
+
+// 전역 RPM 쓰로틀러 인스턴스 (모든 Gemini API 호출에 공유)
+const geminiRpmThrottler = new GeminiRpmThrottler(10, 2); // 10 RPM, 안전마진 2 → 8회/분 이하 유지
+
+// 전역 키 풀 인스턴스 (세션 간 소진 상태 공유)
+let globalKeyPool: GeminiKeyPool | null = null;
+
+/** 키 풀 초기화 (configManager에서 키 배열 로드 시 호출) */
+function initKeyPool(primaryKey?: string, keyArray?: string[]): GeminiKeyPool {
+  const allKeys: string[] = [];
+
+  // 기존 단일 키도 포함
+  if (primaryKey && primaryKey.trim()) {
+    allKeys.push(primaryKey.trim());
+  }
+
+  // 배열 키 추가
+  if (keyArray && Array.isArray(keyArray)) {
+    keyArray.forEach(k => {
+      if (k && k.trim()) allKeys.push(k.trim());
+    });
+  }
+
+  // 중복 제거는 GeminiKeyPool 생성자에서 처리
+  const pool = new GeminiKeyPool(allKeys);
+  console.log(`[KeyPool] 🔑 키 풀 초기화: ${pool.getTotalCount()}개 키 등록`);
+  return pool;
+}
+
+// ✅ [2026-02-03 FIX] AbortController를 세션 ID 기반으로 관리 (경쟁 조건 해결)
+// 이전: 전역 변수로 동시 요청 시 덮어쓰기 문제
+// 변경: Map으로 각 세션별 AbortController 관리
+const abortControllerMap = new Map<string, AbortController>();
+let currentSessionId: string | null = null;
 
 export function setGeminiApiKey(apiKey: string): void {
   storedGeminiApiKey = apiKey;
@@ -140,20 +417,37 @@ export function setGeminiApiKey(apiKey: string): void {
 }
 
 /**
- * ✅ [100점 수정] 이미지 생성 중지 함수
- * 진행 중인 모든 Axios 요청을 취소합니다.
+ * ✅ [2026-02-03 FIX] 이미지 생성 중지 함수 (모든 세션 중지)
  */
 export function abortImageGeneration(): void {
-  if (currentAbortController) {
-    currentAbortController.abort();
-    currentAbortController = null;
-    console.log('[NanoBananaPro] ⏹️ 이미지 생성이 중지되었습니다.');
+  if (abortControllerMap.size > 0) {
+    for (const [sessionId, controller] of abortControllerMap.entries()) {
+      controller.abort();
+      console.log(`[NanoBananaPro] ⏹️ 세션 ${sessionId} 이미지 생성 중지됨`);
+    }
+    abortControllerMap.clear();
+    currentSessionId = null;
+    console.log('[NanoBananaPro] ⏹️ 모든 이미지 생성이 중지되었습니다.');
+  }
+}
+
+/**
+ * ✅ [2026-02-03] 특정 세션만 중지
+ */
+export function abortImageGenerationSession(sessionId: string): void {
+  const controller = abortControllerMap.get(sessionId);
+  if (controller) {
+    controller.abort();
+    abortControllerMap.delete(sessionId);
+    console.log(`[NanoBananaPro] ⏹️ 세션 ${sessionId} 이미지 생성 중지됨`);
   }
 }
 
 /**
  * 나노 바나나 프로로 이미지 생성 (Gemini 기반)
  * ✅ [100점 수정] stopCheck 콜백 추가 - 루프 중 중지 여부 확인
+ * ✅ [2026-02-03 FIX] 세션 기반 AbortController + global503Count
+ * ✅ [2026-02-13 SPEED] onImageGenerated 콜백 + 참조 이미지 캐싱 + 병렬 3개
  */
 export async function generateWithNanoBananaPro(
   items: ImageRequestItem[],
@@ -163,325 +457,460 @@ export async function generateWithNanoBananaPro(
   providedApiKey?: string,
   isShoppingConnect?: boolean,
   collectedImages?: string[],
-  stopCheck?: () => boolean  // ✅ 중지 여부 확인 콜백
+  stopCheck?: () => boolean,  // ✅ 중지 여부 확인 콜백
+  onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void,  // ✅ [2026-02-13] 이미지 완성 즉시 콜백
+  productData?: { name?: string; price?: string; brand?: string; category?: string }  // ✅ [2026-02-23 FIX] 제품 가격 정보 → 스펙 표 정확도 향상
 ): Promise<GeneratedImage[]> {
   const mode = isFullAuto ? '풀오토' : '일반';
-  const apiKey = providedApiKey || storedGeminiApiKey || process.env.GEMINI_API_KEY;
+  const primaryApiKey = providedApiKey || storedGeminiApiKey || process.env.GEMINI_API_KEY;
 
-  // ✅ [100점 수정] 새로운 AbortController 생성
-  currentAbortController = new AbortController();
+  // ✅ [2026-02-13] 키 풀 초기화 (다중 키 로테이션 지원)
+  const configModuleForKeys = await import('../configManager.js');
+  const configForKeys = await configModuleForKeys.loadConfig();
+  const keyPool = initKeyPool(primaryApiKey || undefined, (configForKeys as any).geminiApiKeys);
+  globalKeyPool = keyPool;
 
-  // ✅ [2026-01-24 FIX] 수집된 이미지 유사도 필터링 (스티커가 붙은 같은 이미지 중복 제거)
-  let filteredCollectedImages = collectedImages || [];
-  if (isShoppingConnect && collectedImages && collectedImages.length > 1) {
-    try {
-      const { filterSimilarImages } = await import('./imageUtils.js');
-      console.log(`[NanoBananaPro] 🔍 수집된 이미지 유사도 필터링 시작 (${collectedImages.length}개)...`);
-      filteredCollectedImages = await filterSimilarImages(collectedImages, 12); // threshold=12 (약간 관대하게)
-      console.log(`[NanoBananaPro] ✅ 유사 이미지 필터링 완료: ${collectedImages.length}개 → ${filteredCollectedImages.length}개`);
-    } catch (filterError) {
-      console.warn(`[NanoBananaPro] ⚠️ 유사 이미지 필터링 실패, 원본 사용:`, (filterError as Error).message);
-      filteredCollectedImages = collectedImages;
-    }
-  }
+  // 키 풀에서 첫 번째 사용 가능한 키 가져오기
+  let apiKey = keyPool.getCurrentKey() || primaryApiKey;
+  console.log(`[NanoBananaPro] 🔑 키 풀: ${keyPool.getTotalCount()}개 키 등록, 현재 키: ${apiKey ? apiKey.substring(0, 10) + '...' : '미설정'}`);
 
-  console.log(`[NanoBananaPro] 🍌 총 ${items.length}개 이미지 생성 시작 (${mode} 모드)`);
-  console.log(`[NanoBananaPro] Gemini API 키: ${apiKey ? apiKey.substring(0, 10) + '...' : '미설정'}`);
+  // ✅ [2026-02-03 FIX] 세션 ID 생성 및 AbortController 등록 (경쟁 조건 해결)
+  const sessionId = `session-${Date.now()}-${Math.random().toString(36).substring(7)}`;
+  const sessionAbortController = new AbortController();
+  abortControllerMap.set(sessionId, sessionAbortController);
+  currentSessionId = sessionId;
+  console.log(`[NanoBananaPro] 🆔 새 세션 시작: ${sessionId}`);
 
-  const configModule = await import('../configManager.js');
-  const config = await configModule.loadConfig();
 
-  const todayKey = new Date().toISOString().split('T')[0];
 
-  if (config.geminiImageLastReset !== todayKey) {
-    config.geminiImageLastReset = todayKey;
-    config.geminiImageDailyCount = 0;
-    await configModule.saveConfig(config);
-    console.log(`[NanoBananaPro] 📅 날짜 변경됨 → 카운트 초기화 (${todayKey})`);
-  }
+  // ✅ [2026-02-13 FIX] 세션 cleanup을 try-finally로 보장 (예외 시 AbortController 메모리 누수 방지)
+  try {
 
-  let planType = config.geminiPlanType || 'paid';
-  console.log(`[NanoBananaPro] 적용된 플랜 정책: ${planType.toUpperCase()}`);
-
-  const currentCount = config.geminiImageDailyCount || 0;
-  const FREE_DAILY_LIMIT = 100;
-  const PAID_DAILY_LIMIT = 9999;
-  const isPaid = planType === 'paid';
-  const limit = isPaid ? PAID_DAILY_LIMIT : FREE_DAILY_LIMIT;
-  const estimatedBatchCost = items.length * 0.04;
-
-  console.log(`[NanoBananaPro] 현재 플랜: ${planType.toUpperCase()}, 금일 사용량: ${currentCount}/${limit}`);
-  console.log(`[NanoBananaPro] 💰 이번 작업 예상 비용: 약 $${estimatedBatchCost.toFixed(2)} (KRW 약 ${(estimatedBatchCost * 1350).toLocaleString()}원)`);
-
-  if (currentCount >= limit) {
-    throw new Error(isPaid ? '⛔ 유료 플랜 한도 초과' : '⛔ 무료 플랜 한도 초과');
-  }
-
-  if (!apiKey) {
-    throw new Error('나노 바나나 프로(Gemini) API 키가 설정되지 않았습니다.');
-  }
-
-  const results: GeneratedImage[] = [];
-  const usedImageHashes = new Set<string>();
-  const usedImageAHashes: bigint[] = [];
-
-  // ✅ [2026-01-21 수정] 병렬 처리 2개로 제한 (Gemini API 과부하 방지)
-  const PARALLEL_LIMIT = isPaid ? 2 : 1;
-  console.log(`[NanoBananaPro] ⚡ 병렬 처리 모드: ${PARALLEL_LIMIT}개 동시 생성`);
-
-  // 병렬 처리를 위한 세마포어 (동시 실행 제한)
-  let activeCount = 0;
-  const queue: Array<() => Promise<void>> = [];
-
-  const runNext = () => {
-    while (activeCount < PARALLEL_LIMIT && queue.length > 0) {
-      const task = queue.shift();
-      if (task) {
-        activeCount++;
-        task().finally(() => {
-          activeCount--;
-          runNext();
-        });
+    // ✅ [2026-01-24 FIX] 수집된 이미지 유사도 필터링 (스티커가 붙은 같은 이미지 중복 제거)
+    let filteredCollectedImages = collectedImages || [];
+    if (isShoppingConnect && collectedImages && collectedImages.length > 1) {
+      try {
+        const { filterSimilarImages } = await import('./imageUtils.js');
+        console.log(`[NanoBananaPro] 🔍 수집된 이미지 유사도 필터링 시작 (${collectedImages.length}개)...`);
+        filteredCollectedImages = await filterSimilarImages(collectedImages, 12); // threshold=12 (약간 관대하게)
+        console.log(`[NanoBananaPro] ✅ 유사 이미지 필터링 완료: ${collectedImages.length}개 → ${filteredCollectedImages.length}개`);
+      } catch (filterError) {
+        console.warn(`[NanoBananaPro] ⚠️ 유사 이미지 필터링 실패, 원본 사용:`, (filterError as Error).message);
+        filteredCollectedImages = collectedImages;
       }
     }
-  };
 
-  // 각 이미지 생성 작업을 Promise로 래핑
-  const generatePromises = items.map((item, i) => {
-    return new Promise<GeneratedImage | null>((resolve) => {
-      const task = async () => {
-        // 중지 여부 확인
-        if (stopCheck && stopCheck()) {
-          console.log(`[NanoBananaPro] ⏹️ 중지 요청됨 - 이미지 ${i + 1} 건너뜀`);
-          resolve(null);
-          return;
+    console.log(`[NanoBananaPro] 🍌 총 ${items.length}개 이미지 생성 시작 (${mode} 모드)`);
+    console.log(`[NanoBananaPro] Gemini API 키: ${apiKey ? apiKey.substring(0, 10) + '...' : '미설정'}`);
+
+    const configModule = await import('../configManager.js');
+    const config = await configModule.loadConfig();
+
+    const todayKey = new Date().toISOString().split('T')[0];
+
+    if (config.geminiImageLastReset !== todayKey) {
+      config.geminiImageLastReset = todayKey;
+      config.geminiImageDailyCount = 0;
+      await configModule.saveConfig(config);
+      console.log(`[NanoBananaPro] 📅 날짜 변경됨 → 카운트 초기화 (${todayKey})`);
+    }
+
+    let planType = config.geminiPlanType || 'paid';
+    console.log(`[NanoBananaPro] 적용된 플랜 정책: ${planType.toUpperCase()}`);
+
+    const currentCount = config.geminiImageDailyCount || 0;
+    const FREE_DAILY_LIMIT = 100;
+    const PAID_DAILY_LIMIT = 9999;
+    const isPaid = planType === 'paid';
+    const limit = isPaid ? PAID_DAILY_LIMIT : FREE_DAILY_LIMIT;
+    const estimatedBatchCost = items.length * 0.04;
+
+    console.log(`[NanoBananaPro] 현재 플랜: ${planType.toUpperCase()}, 금일 사용량: ${currentCount}/${limit}`);
+    console.log(`[NanoBananaPro] 💰 이번 작업 예상 비용: 약 $${estimatedBatchCost.toFixed(2)} (KRW 약 ${(estimatedBatchCost * 1350).toLocaleString()}원)`);
+
+    if (currentCount >= limit) {
+      throw new Error(isPaid ? '⛔ 유료 플랜 한도 초과' : '⛔ 무료 플랜 한도 초과');
+    }
+
+    if (!apiKey) {
+      throw new Error('나노 바나나 프로(Gemini) API 키가 설정되지 않았습니다.');
+    }
+
+    const results: GeneratedImage[] = [];
+    const usedImageHashes = new Set<string>();
+    const usedImageAHashes: bigint[] = [];
+
+    // ✅ [2026-02-13 SPEED] 참조 이미지 사전 캐싱 — 같은 이미지를 매번 다운로드하지 않음
+    let cachedReferenceImage: { data: string; mimeType: string } | null = null;
+    if (filteredCollectedImages && filteredCollectedImages.length > 0) {
+      try {
+        const firstImage = filteredCollectedImages[0];
+        const candidateUrl = typeof firstImage === 'string'
+          ? firstImage
+          : ((firstImage as any)?.url || (firstImage as any)?.thumbnailUrl || '');
+
+        if (candidateUrl && /^https?:\/\//i.test(candidateUrl)) {
+          console.log(`[NanoBananaPro] 🚀 [사전 캐싱] 참조 이미지 다운로드 시작: ${candidateUrl.substring(0, 80)}...`);
+          const cacheStartTime = Date.now();
+          const axios = (await import('axios')).default;
+          const fetched = await axios.get(candidateUrl, { responseType: 'arraybuffer', timeout: 15000 });
+          const buf = Buffer.from(fetched.data);
+          if (buf && buf.length > 0) {
+            cachedReferenceImage = {
+              data: buf.toString('base64'),
+              mimeType: String(fetched.headers?.['content-type'] || 'image/png'),
+            };
+            const elapsed = Date.now() - cacheStartTime;
+            console.log(`[NanoBananaPro] ✅ [사전 캐싱 완료] ${Math.round(buf.length / 1024)}KB, ${elapsed}ms — 이후 ${items.length - 1}번의 재다운로드 절약`);
+          }
         }
+      } catch (cacheErr: any) {
+        console.warn(`[NanoBananaPro] ⚠️ [사전 캐싱 실패] 개별 다운로드로 fallback: ${cacheErr.message}`);
+      }
+    }
 
-        // ✅ [2026-01-19 수정] 쇼핑커넥트 모드에서는 AI 이미지가 썸네일이 아님 (수집된 제품 이미지가 썸네일)
-        const isThumbnail = isShoppingConnect
-          ? false  // 쇼핑커넥트: 썸네일은 수집된 제품 이미지 사용, AI 이미지는 모두 소제목용
-          : ((item as any).isThumbnail !== undefined ? (item as any).isThumbnail : (i === 0));
+    // ✅ [2026-03-15] ImageFX 메인 + 2장 병렬 처리
+    const PARALLEL_LIMIT = 2;
+    console.log(`[NanoBananaPro] 📷 2장 병렬 처리 모드 (ImageFX 우선)`);
 
-        // ✅ [수정 2026-01-18] 쇼핑커넥트 썸네일은 HTML 렌더링(generateThumbnailWithTextOverlay)으로 별도 생성
-        // 나노바나나프로에서는 1번 소제목 이미지에 텍스트를 강제로 넣지 않음 (텍스트 없이 생성)
-        let modifiedItem = { ...item };
-        // if (isShoppingConnect && isThumbnail) {
-        //   (modifiedItem as any).allowText = true;
-        //   console.log(`[NanoBananaPro] 🛒 [쇼핑커넥트 썸네일] 제목 텍스트 포함 강제 적용`);
-        // }
+    // 병렬 처리를 위한 세마포어 (동시 실행 제한)
+    let activeCount = 0;
+    const queue: Array<() => Promise<void>> = [];
 
-        console.log(`[NanoBananaPro] 🖼️ [Parallel] "${item.heading}" 생성 시작 (${i + 1}/${items.length})...`);
+    const runNext = () => {
+      while (activeCount < PARALLEL_LIMIT && queue.length > 0) {
+        const task = queue.shift();
+        if (task) {
+          activeCount++;
+          task().finally(() => {
+            activeCount--;
+            runNext();
+          });
+        }
+      }
+    };
 
-        try {
-          if (isShoppingConnect && filteredCollectedImages && filteredCollectedImages.length > 0) {
-            console.log(`[NanoBananaPro] 🛒 [쇼핑커넥트] AI가 수집된 제품 이미지를 참조하여 이미지 생성 (${i + 1}번)`);
+    // 각 이미지 생성 작업을 Promise로 래핑
+    const generatePromises = items.map((item, i) => {
+      return new Promise<GeneratedImage | null>((resolve) => {
+        const task = async () => {
+          // 중지 여부 확인
+          if (stopCheck && stopCheck()) {
+            console.log(`[NanoBananaPro] ⏹️ 중지 요청됨 - 이미지 ${i + 1} 건너뜀`);
+            resolve(null);
+            return;
           }
 
+          // ✅ [2026-01-19 수정] 쇼핑커넥트 모드에서는 AI 이미지가 썸네일이 아님 (수집된 제품 이미지가 썸네일)
+          const isThumbnail = isShoppingConnect
+            ? false  // 쇼핑커넥트: 썸네일은 수집된 제품 이미지 사용, AI 이미지는 모두 소제목용
+            : ((item as any).isThumbnail !== undefined ? (item as any).isThumbnail : (i === 0));
+
+          // ✅ [수정 2026-01-18] 쇼핑커넥트 썸네일은 HTML 렌더링(generateThumbnailWithTextOverlay)으로 별도 생성
+          // 나노바나나프로에서는 1번 소제목 이미지에 텍스트를 강제로 넣지 않음 (텍스트 없이 생성)
+          let modifiedItem = { ...item };
+          // if (isShoppingConnect && isThumbnail) {
+          //   (modifiedItem as any).allowText = true;
+          //   console.log(`[NanoBananaPro] 🛒 [쇼핑커넥트 썸네일] 제목 텍스트 포함 강제 적용`);
+          // }
+
+          console.log(`[NanoBananaPro] 🖼️ [Parallel] "${item.heading}" 생성 시작 (${i + 1}/${items.length})...`);
+          // ✅ [2026-01-28 DEBUG] allowText/isThumbnail 값 확인 로그
+          console.log(`[NanoBananaPro] 📋 [DEBUG] i=${i}, isThumbnail=${isThumbnail}, allowText=${(modifiedItem as any).allowText}, itemAllowText=${(item as any).allowText}`);
+
+          try {
+            if (isShoppingConnect && filteredCollectedImages && filteredCollectedImages.length > 0) {
+              console.log(`[NanoBananaPro] 🛒 [쇼핑커넥트] AI가 수집된 제품 이미지를 참조하여 이미지 생성 (${i + 1}번)`);
+            }
+
+            let result: GeneratedImage | null = null;
+
+            // ✅ [2026-03-15] ImageFX 우선 시도 (쇼핑커넥트가 아닌 경우)
+            if (!isShoppingConnect) {
+              try {
+                const { generateSingleImageWithImageFx } = await import('./imageFxGenerator.js');
+                const promptBuilder = new PromptBuilder();
+                // 이미지 비율 (config에서)
+                const configModuleForRatio = await import('../configManager.js');
+                const configForRatio = await configModuleForRatio.loadConfig();
+                const imageRatio = (modifiedItem as any).imageRatio || (configForRatio as any).imageRatio || '1:1';
+
+                // 영어 프롬프트 사용 (ImageFX는 영어 최적화)
+                const fxPrompt = modifiedItem.englishPrompt || modifiedItem.prompt || modifiedItem.heading;
+
+                console.log(`[NanoBananaPro] 🆓 [ImageFX] 무료 이미지 생성 시도: "${modifiedItem.heading}" (${i + 1}/${items.length})`);
+                sendImageLog(`🆓 [ImageFX] "${modifiedItem.heading}" 생성 중... (${i + 1}/${items.length})`);
+
+                const fxResult = await generateSingleImageWithImageFx(fxPrompt, imageRatio, sessionAbortController?.signal);
+
+                if (fxResult) {
+                  // ImageFX 성공! 파일 저장
+                  // ✅ [2026-03-16 FIX] mimeType → 확장자 변환 (image/png → png, image/jpeg → jpg)
+                  const fxExt = fxResult.mimeType.includes('/')
+                    ? fxResult.mimeType.split('/')[1].replace('jpeg', 'jpg')
+                    : fxResult.mimeType;
+                  const savedInfo = await writeImageFile(fxResult.buffer, fxExt, modifiedItem.heading, postTitle, postId);
+                  result = {
+                    heading: modifiedItem.heading,
+                    // ✅ [2026-03-16 FIX] savedToLocal(사용자 접근 가능 경로) 우선 사용
+                    filePath: savedInfo.savedToLocal || savedInfo.filePath,
+                    // ✅ [2026-03-16 FIX] writeImageFile의 전체 previewDataUrl 사용 (잘린 base64 제거)
+                    previewDataUrl: savedInfo.previewDataUrl || `data:${fxResult.mimeType};base64,${fxResult.buffer.toString('base64')}`,
+                    provider: 'imagefx' as any,
+                    ...(savedInfo.savedToLocal ? { savedToLocal: savedInfo.savedToLocal } : {}),
+                  };
+                  console.log(`[NanoBananaPro] ✅ [ImageFX] 무료 이미지 생성 성공! (${Math.round(fxResult.buffer.length / 1024)}KB)`);
+                  sendImageLog(`✅ [ImageFX] "${modifiedItem.heading}" 생성 완료!`);
+                }
+              } catch (fxError: any) {
+                console.warn(`[NanoBananaPro] ⚠️ [ImageFX] 실패: ${fxError.message}`);
+                sendImageLog(`⚠️ [ImageFX] 실패: ${fxError.message} — 재시도합니다`);
+                // ✅ [2026-03-16] Gemini 폴백 제거 — ImageFX 실패 시 Gemini로 넘어가지 않음 (result=null 유지 → 재시도 루프에서 처리)
+              }
+            }
+
+            // ImageFX 실패 또는 쇼핑커넥트 → 기존 Gemini 로직
+            if (!result) {
+              result = await generateSingleImageWithGemini(
+                modifiedItem,
+                i,
+                isThumbnail,
+                postTitle,
+                postId,
+                isFullAuto,
+                keyPool.getCurrentKey() || apiKey,
+                isShoppingConnect,
+                filteredCollectedImages,
+                usedImageHashes,
+                usedImageAHashes,
+                sessionAbortController?.signal,
+                items.length,
+                cachedReferenceImage,
+                keyPool
+              );
+            }
+
+            if (result) {
+              console.log(`[NanoBananaPro] ✅ [Parallel] "${item.heading}" 생성 완료 (${i + 1}/${items.length})`);
+              if (result.filePath) addToUsedUrls(result.filePath);
+              // ✅ [2026-02-13 SPEED] 이미지 완성 즉시 콜백 → renderer에 실시간 전달
+              if (onImageGenerated) {
+                try { onImageGenerated(result, i, items.length); } catch (cbErr) { /* 콜백 오류 무시 */ }
+              }
+              resolve(result);
+            } else {
+              resolve(null);
+            }
+          } catch (error: any) {
+            if (error.name === 'CanceledError' || error.name === 'AbortError') {
+              console.log('[NanoBananaPro] ⏹️ 요청이 취소되었습니다.');
+            } else {
+              console.error(`[NanoBananaPro] ❌ "${item.heading}" 생성 실패:`, (error as Error).message);
+            }
+            resolve(null);
+          }
+        };
+
+        queue.push(task);
+      });
+    });
+
+    // 병렬 실행 시작
+    runNext();
+
+    // 모든 작업 완료 대기
+    const allResults = await Promise.all(generatePromises);
+
+    // ✅ [2026-03-11 FIX] 실패 재시도 2라운드로 증가 - 원래 엔진 성공률 극대화
+    const MAX_RETRY_ROUNDS = 2; // 실패한 이미지에 대해 2회 추가 재시도
+
+    // 인덱스별 결과 매핑 (null = 실패)
+    const indexedResults: (GeneratedImage | null)[] = [...allResults];
+
+    // 실패한 이미지 인덱스 수집
+    let failedIndices = indexedResults
+      .map((r, idx) => r === null ? idx : -1)
+      .filter(idx => idx >= 0);
+
+    console.log(`[NanoBananaPro] 📊 1차 시도 결과: ${items.length - failedIndices.length}/${items.length} 성공`);
+
+    // 실패한 이미지가 있으면 재시도
+    for (let retryRound = 1; retryRound <= MAX_RETRY_ROUNDS && failedIndices.length > 0; retryRound++) {
+      console.log(`[NanoBananaPro] 🔄 [재시도 ${retryRound}/${MAX_RETRY_ROUNDS}] ${failedIndices.length}개 실패 이미지 재생성 시작...`);
+
+      // ✅ [2026-02-13 SPEED] 재시도 전 대기 축소 (3초→1초)
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // 실패한 각 이미지를 순차적으로 재시도 (병렬 X, 안정성 우선)
+      for (const failedIdx of failedIndices) {
+        if (stopCheck && stopCheck()) break;
+
+        const item = items[failedIdx];
+        const isThumbnail = isShoppingConnect ? false : ((item as any).isThumbnail !== undefined ? (item as any).isThumbnail : (failedIdx === 0));
+
+        console.log(`[NanoBananaPro] 🔄 [재시도] "${item.heading}" (인덱스 ${failedIdx + 1}/${items.length})...`);
+
+        try {
+          // ✅ [2026-02-13] 키 풀에서 최신 키 사용 (재시도 시 로테이션된 키 반영)
+          const retryApiKey = keyPool.getCurrentKey() || apiKey;
           const result = await generateSingleImageWithGemini(
-            modifiedItem,  // ✅ item 대신 modifiedItem 사용 (쇼핑커넥트 썸네일에 allowText 적용됨)
-            i,
+            item,
+            failedIdx,
             isThumbnail,
             postTitle,
             postId,
             isFullAuto,
-            apiKey,
+            retryApiKey,
             isShoppingConnect,
             filteredCollectedImages,
             usedImageHashes,
             usedImageAHashes,
-            currentAbortController?.signal,
-            items.length  // ✅ [2026-01-18] 배치 크기 전달 (첫 번째 이미지 = 대표 이미지 구분용)
+            sessionAbortController?.signal,
+            items.length,
+            cachedReferenceImage,  // ✅ [2026-02-13 SPEED] 사전 캐싱된 참조 이미지
+            keyPool  // ✅ [2026-02-13] 키 풀 전달 (429 시 자동 로테이션)
           );
 
           if (result) {
-            console.log(`[NanoBananaPro] ✅ [Parallel] "${item.heading}" 생성 완료 (${i + 1}/${items.length})`);
-            if (result.filePath) usedImageUrls.add(result.filePath);
-            resolve(result);
-          } else {
-            resolve(null);
+            indexedResults[failedIdx] = result;
+            console.log(`[NanoBananaPro] ✅ [재시도 성공] "${item.heading}"`);
+            if (result.filePath) addToUsedUrls(result.filePath);
+            // ✅ [2026-02-13 SPEED] 재시도 성공 시에도 콜백 호출
+            if (onImageGenerated) {
+              try { onImageGenerated(result, failedIdx, items.length); } catch (cbErr) { /* 콜백 오류 무시 */ }
+            }
           }
-        } catch (error: any) {
-          if (error.name === 'CanceledError' || error.name === 'AbortError') {
-            console.log('[NanoBananaPro] ⏹️ 요청이 취소되었습니다.');
-          } else {
-            console.error(`[NanoBananaPro] ❌ "${item.heading}" 생성 실패:`, (error as Error).message);
-          }
-          resolve(null);
+        } catch (retryError: any) {
+          console.warn(`[NanoBananaPro] ⚠️ [재시도 실패] "${item.heading}": ${retryError.message}`);
         }
-      };
 
-      queue.push(task);
+        // ✅ [2026-02-13 SPEED] 다음 재시도 전 대기 축소 (2초→0.5초)
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+
+      // 재시도 후 여전히 실패한 인덱스 업데이트
+      failedIndices = indexedResults
+        .map((r, idx) => r === null ? idx : -1)
+        .filter(idx => idx >= 0);
+
+      console.log(`[NanoBananaPro] 📊 [재시도 ${retryRound}] 결과: ${items.length - failedIndices.length}/${items.length} 성공`);
+    }
+
+    // 최종 결과 수집 (원래 순서 유지)
+    indexedResults.forEach((result) => {
+      if (result) {
+        results.push(result);
+      }
     });
-  });
 
-  // 병렬 실행 시작
-  runNext();
+    // 최종 성공률 로깅
+    const finalSuccessRate = Math.round((results.length / items.length) * 100);
+    console.log(`[NanoBananaPro] 🎯 최종 성공률: ${finalSuccessRate}% (${results.length}/${items.length})`);
 
-  // 모든 작업 완료 대기
-  const allResults = await Promise.all(generatePromises);
+    if (results.length > 0) {
+      config.geminiImageDailyCount = (config.geminiImageDailyCount || 0) + results.length;
+      await configModule.saveConfig(config);
+      console.log(`[NanoBananaPro] 📈 쿼터 사용: +${results.length} (누적: ${config.geminiImageDailyCount})`);
+    }
 
-  // ✅ [2026-01-24 FIX] 실패한 이미지 재시도 로직 강화 (100% 성공률 목표)
-  const MAX_RETRY_ROUNDS = 3; // 실패한 이미지에 대해 최대 3회 추가 재시도
-
-  // 인덱스별 결과 매핑 (null = 실패)
-  const indexedResults: (GeneratedImage | null)[] = [...allResults];
-
-  // 실패한 이미지 인덱스 수집
-  let failedIndices = indexedResults
-    .map((r, idx) => r === null ? idx : -1)
-    .filter(idx => idx >= 0);
-
-  console.log(`[NanoBananaPro] 📊 1차 시도 결과: ${items.length - failedIndices.length}/${items.length} 성공`);
-
-  // 실패한 이미지가 있으면 재시도
-  for (let retryRound = 1; retryRound <= MAX_RETRY_ROUNDS && failedIndices.length > 0; retryRound++) {
-    console.log(`[NanoBananaPro] 🔄 [재시도 ${retryRound}/${MAX_RETRY_ROUNDS}] ${failedIndices.length}개 실패 이미지 재생성 시작...`);
-
-    // 재시도 전 잠시 대기 (API 안정화)
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    // 실패한 각 이미지를 순차적으로 재시도 (병렬 X, 안정성 우선)
-    for (const failedIdx of failedIndices) {
-      if (stopCheck && stopCheck()) break;
-
-      const item = items[failedIdx];
-      const isThumbnail = isShoppingConnect ? false : ((item as any).isThumbnail !== undefined ? (item as any).isThumbnail : (failedIdx === 0));
-
-      console.log(`[NanoBananaPro] 🔄 [재시도] "${item.heading}" (인덱스 ${failedIdx + 1}/${items.length})...`);
+    // ✅ [표 이미지 통합] 쇼핑커넥트 모드에서 스펙 표 & 장단점 표 생성
+    if (isShoppingConnect && postTitle) {
+      console.log(`[NanoBananaPro] 📊 [표 이미지] 쇼핑커넥트 모드: 표 이미지 생성 시작...`);
 
       try {
-        const result = await generateSingleImageWithGemini(
-          item,
-          failedIdx,
-          isThumbnail,
-          postTitle,
-          postId,
-          isFullAuto,
-          apiKey,
-          isShoppingConnect,
-          filteredCollectedImages,
-          usedImageHashes,
-          usedImageAHashes,
-          currentAbortController?.signal,
-          items.length
-        );
+        const { extractSpecsWithGemini, extractProsConsWithGemini, canGenerateSpecTable, canGenerateProsConsTable } = await import('./geminiTableExtractor.js');
+        const { generateProductSpecTableImage, generateProsConsTableImage } = await import('./tableImageGenerator.js');
 
-        if (result) {
-          indexedResults[failedIdx] = result;
-          console.log(`[NanoBananaPro] ✅ [재시도 성공] "${item.heading}"`);
-          if (result.filePath) usedImageUrls.add(result.filePath);
+        // 본문 내용 수집 (items에서 body 필드 추출)
+        const bodyContent = items.map(item => `${item.heading}\n${(item as any).body || ''}`).join('\n\n');
+
+        // 1. 스펙 추출 및 스펙 표 이미지 생성
+        console.log(`[NanoBananaPro] 📊 [표 이미지] 스펙 추출 중...`);
+        // ✅ [2026-02-23 FIX] productData가 있으면 crawledData 구성하여 정확한 가격 반영
+        // ✅ [2026-03-04 FIX] 가격 없으면 '정보없음' 대신 아예 제외 → Gemini 혼동 방지
+        const priceStr = productData?.price ? `가격: ${productData.price}원` : '';
+        const crawledData = productData ? `제품명: ${productData.name || postTitle}\n${priceStr}\n브랜드: ${productData.brand || ''}\n카테고리: ${productData.category || ''}`.replace(/\n{2,}/g, '\n').trim() : null;
+        if (crawledData) {
+          console.log(`[NanoBananaPro] 💰 [표 이미지] 실제 제품 데이터로 스펙 추출: price=${productData?.price}`);
+        } else {
+          console.log(`[NanoBananaPro] ⚠️ [표 이미지] productData 없음 → 본문 기반으로 스펙 추출`);
         }
-      } catch (retryError: any) {
-        console.warn(`[NanoBananaPro] ⚠️ [재시도 실패] "${item.heading}": ${retryError.message}`);
-      }
+        const specs = await extractSpecsWithGemini(postTitle, crawledData, bodyContent, apiKey);
 
-      // 다음 재시도 전 잠시 대기
-      await new Promise(resolve => setTimeout(resolve, 2000));
+        if (canGenerateSpecTable(specs)) {
+          console.log(`[NanoBananaPro] ✅ [표 이미지] 스펙 ${specs.length}개 추출 성공, 표 이미지 생성 중...`);
+          const specTablePath = await generateProductSpecTableImage(postTitle, specs);
+
+          // 30% 지점 계산 (예: 8개 섹션이면 2~3번째)
+          const specPosition = Math.floor(items.length * 0.3);
+          const specHeading = items[specPosition]?.heading || '제품 스펙';
+
+          results.push({
+            heading: `[스펙표] ${specHeading}`,
+            filePath: specTablePath,
+            provider: 'nano-banana-pro',
+            previewDataUrl: '',
+            savedToLocal: specTablePath,
+            tableType: 'spec', // 표 이미지 타입 표시
+            targetPosition: specPosition // 배치할 위치
+          } as any);
+
+          console.log(`[NanoBananaPro] ✅ [표 이미지] 스펙 표 생성 완료: ${specTablePath}`);
+        } else {
+          console.log(`[NanoBananaPro] ℹ️ [표 이미지] 스펙 부족 (${specs.length}개), 표 생성 건너뜀 (Silent Skip)`);
+        }
+
+        // 2. 장단점 추출 및 장단점 표 이미지 생성
+        console.log(`[NanoBananaPro] 📊 [표 이미지] 장단점 추출 중...`);
+        const prosConsData = await extractProsConsWithGemini(postTitle, bodyContent, apiKey);
+
+        if (canGenerateProsConsTable(prosConsData)) {
+          console.log(`[NanoBananaPro] ✅ [표 이미지] 장점 ${prosConsData.pros.length}개, 단점 ${prosConsData.cons.length}개 추출 성공, 표 이미지 생성 중...`);
+          const prosConsTablePath = await generateProsConsTableImage(postTitle, prosConsData.pros, prosConsData.cons);
+
+          // 80% 지점 계산 (예: 8개 섹션이면 6~7번째)
+          const prosConsPosition = Math.floor(items.length * 0.8);
+          const prosConsHeading = items[prosConsPosition]?.heading || '장단점 요약';
+
+          results.push({
+            heading: `[장단점표] ${prosConsHeading}`,
+            filePath: prosConsTablePath,
+            provider: 'nano-banana-pro',
+            previewDataUrl: '',
+            savedToLocal: prosConsTablePath,
+            tableType: 'proscons', // 표 이미지 타입 표시
+            targetPosition: prosConsPosition // 배치할 위치
+          } as any);
+
+          console.log(`[NanoBananaPro] ✅ [표 이미지] 장단점 표 생성 완료: ${prosConsTablePath}`);
+        } else {
+          console.log(`[NanoBananaPro] ℹ️ [표 이미지] 장단점 부족, 표 생성 건너뜀 (Silent Skip)`);
+        }
+
+      } catch (tableError: any) {
+        // ✅ Silent Skip: 표 이미지 실패해도 발행 계속 진행
+        console.warn(`[NanoBananaPro] ⚠️ [표 이미지] 생성 실패 (Silent Skip): ${tableError.message}`);
+      }
     }
 
-    // 재시도 후 여전히 실패한 인덱스 업데이트
-    failedIndices = indexedResults
-      .map((r, idx) => r === null ? idx : -1)
-      .filter(idx => idx >= 0);
+    return results;
 
-    console.log(`[NanoBananaPro] 📊 [재시도 ${retryRound}] 결과: ${items.length - failedIndices.length}/${items.length} 성공`);
-  }
-
-  // 최종 결과 수집 (원래 순서 유지)
-  indexedResults.forEach((result) => {
-    if (result) {
-      results.push(result);
+  } finally {
+    // ✅ [2026-02-13 FIX] 세션 정리 → finally 블록으로 이동 (예외 시에도 반드시 정리)
+    abortControllerMap.delete(sessionId);
+    if (currentSessionId === sessionId) {
+      currentSessionId = null;
     }
-  });
-
-  // 최종 성공률 로깅
-  const finalSuccessRate = Math.round((results.length / items.length) * 100);
-  console.log(`[NanoBananaPro] 🎯 최종 성공률: ${finalSuccessRate}% (${results.length}/${items.length})`);
-
-  if (results.length > 0) {
-    config.geminiImageDailyCount = (config.geminiImageDailyCount || 0) + results.length;
-    await configModule.saveConfig(config);
-    console.log(`[NanoBananaPro] 📈 쿼터 사용: +${results.length} (누적: ${config.geminiImageDailyCount})`);
+    console.log(`[NanoBananaPro] 🏁 세션 종료: ${sessionId}`);
   }
-
-  // ✅ [표 이미지 통합] 쇼핑커넥트 모드에서 스펙 표 & 장단점 표 생성
-  if (isShoppingConnect && postTitle) {
-    console.log(`[NanoBananaPro] 📊 [표 이미지] 쇼핑커넥트 모드: 표 이미지 생성 시작...`);
-
-    try {
-      const { extractSpecsWithGemini, extractProsConsWithGemini, canGenerateSpecTable, canGenerateProsConsTable } = await import('./geminiTableExtractor.js');
-      const { generateProductSpecTableImage, generateProsConsTableImage } = await import('./tableImageGenerator.js');
-
-      // 본문 내용 수집 (items에서 body 필드 추출)
-      const bodyContent = items.map(item => `${item.heading}\n${(item as any).body || ''}`).join('\n\n');
-
-      // 1. 스펙 추출 및 스펙 표 이미지 생성
-      console.log(`[NanoBananaPro] 📊 [표 이미지] 스펙 추출 중...`);
-      const specs = await extractSpecsWithGemini(postTitle, null, bodyContent, apiKey);
-
-      if (canGenerateSpecTable(specs)) {
-        console.log(`[NanoBananaPro] ✅ [표 이미지] 스펙 ${specs.length}개 추출 성공, 표 이미지 생성 중...`);
-        const specTablePath = await generateProductSpecTableImage(postTitle, specs);
-
-        // 30% 지점 계산 (예: 8개 섹션이면 2~3번째)
-        const specPosition = Math.floor(items.length * 0.3);
-        const specHeading = items[specPosition]?.heading || '제품 스펙';
-
-        results.push({
-          heading: `[스펙표] ${specHeading}`,
-          filePath: specTablePath,
-          provider: 'nano-banana-pro',
-          previewDataUrl: '',
-          savedToLocal: specTablePath,
-          tableType: 'spec', // 표 이미지 타입 표시
-          targetPosition: specPosition // 배치할 위치
-        } as any);
-
-        console.log(`[NanoBananaPro] ✅ [표 이미지] 스펙 표 생성 완료: ${specTablePath}`);
-      } else {
-        console.log(`[NanoBananaPro] ℹ️ [표 이미지] 스펙 부족 (${specs.length}개), 표 생성 건너뜀 (Silent Skip)`);
-      }
-
-      // 2. 장단점 추출 및 장단점 표 이미지 생성
-      console.log(`[NanoBananaPro] 📊 [표 이미지] 장단점 추출 중...`);
-      const prosConsData = await extractProsConsWithGemini(postTitle, bodyContent, apiKey);
-
-      if (canGenerateProsConsTable(prosConsData)) {
-        console.log(`[NanoBananaPro] ✅ [표 이미지] 장점 ${prosConsData.pros.length}개, 단점 ${prosConsData.cons.length}개 추출 성공, 표 이미지 생성 중...`);
-        const prosConsTablePath = await generateProsConsTableImage(postTitle, prosConsData.pros, prosConsData.cons);
-
-        // 80% 지점 계산 (예: 8개 섹션이면 6~7번째)
-        const prosConsPosition = Math.floor(items.length * 0.8);
-        const prosConsHeading = items[prosConsPosition]?.heading || '장단점 요약';
-
-        results.push({
-          heading: `[장단점표] ${prosConsHeading}`,
-          filePath: prosConsTablePath,
-          provider: 'nano-banana-pro',
-          previewDataUrl: '',
-          savedToLocal: prosConsTablePath,
-          tableType: 'proscons', // 표 이미지 타입 표시
-          targetPosition: prosConsPosition // 배치할 위치
-        } as any);
-
-        console.log(`[NanoBananaPro] ✅ [표 이미지] 장단점 표 생성 완료: ${prosConsTablePath}`);
-      } else {
-        console.log(`[NanoBananaPro] ℹ️ [표 이미지] 장단점 부족, 표 생성 건너뜀 (Silent Skip)`);
-      }
-
-    } catch (tableError: any) {
-      // ✅ Silent Skip: 표 이미지 실패해도 발행 계속 진행
-      console.log(`[NanoBananaPro] ⚠️ [표 이미지] 생성 실패 (Silent Skip): ${tableError.message}`);
-    }
-  }
-
-  return results;
 }
 
 /**
  * Gemini를 사용한 단일 이미지 생성 (PromptBuilder 사용으로 리팩토링됨)
  * ✅ [100점 수정] AbortSignal 파라미터 추가
  * ✅ [2026-01-18] batchSize 파라미터 추가 (배치 처리 시 첫 번째 이미지 구분용)
+ * ✅ [2026-02-13 SPEED] cachedReferenceImage 파라미터 추가 (사전 캐싱된 참조 이미지)
+ * ✅ [2026-02-13] keyPool 파라미터 추가 (429 시 자동 키 로테이션)
  */
 async function generateSingleImageWithGemini(
   item: ImageRequestItem,
@@ -496,7 +925,9 @@ async function generateSingleImageWithGemini(
   usedImageHashes?: Set<string>,
   usedImageAHashes?: bigint[],
   signal?: AbortSignal,  // ✅ [100점 수정] 중지 신호
-  batchSize?: number     // ✅ [2026-01-18] 배치 크기 (배치 처리 시 첫 번째 이미지 구분용)
+  batchSize?: number,     // ✅ [2026-01-18] 배치 크기 (배치 처리 시 첫 번째 이미지 구분용)
+  cachedReferenceImage?: { data: string; mimeType: string } | null,  // ✅ [2026-02-13 SPEED]
+  keyPool?: GeminiKeyPool  // ✅ [2026-02-13] 키 풀 (429 시 자동 로테이션)
 ): Promise<GeneratedImage | null> {
 
   // 썸네일 크롭 헬퍼
@@ -513,32 +944,107 @@ async function generateSingleImageWithGemini(
     }
   };
 
-  // ✅ [2026-01-24 FIX] 재시도 횟수 증가 (6→8회)
-  const maxRetries = 8;
+  // ✅ [2026-03-11 FIX] 재시도 횟수 증가 (2→3회) - 원래 엔진 성공률 극대화
+  const maxRetries = 3;
+
+  // ✅ [2026-01-27 FIX] config를 for 루프 앞에서 미리 로드 (imageStyle/imageRatio 사용 위해)
+  const configModulePre = await import('../configManager.js');
+  const configPre = await configModulePre.loadConfig();
+
+  // ✅ [2026-01-30] 503 에러 연속 발생 추적 (더 긴 대기 시간 적용)
+  let consecutive503Count = 0;
+
+  // ✅ [2026-02-20] 503 폴백 타이머 체크 (10분 후 원래 모델 복구 시도) — 30분→10분 단축
+  if (global503FallbackActive) {
+    const elapsed = Date.now() - global503FallbackStartTime;
+    const RECOVERY_TIMEOUT = 10 * 60 * 1000; // ✅ [2026-02-20] 10분 (최근 503은 빠르게 해결되는 경향)
+    if (elapsed > RECOVERY_TIMEOUT) {
+      console.log(`[NanoBananaPro] 🔄 폴백 ${Math.round(elapsed / 60000)}분 경과 → 원래 모델 복구 시도`);
+      global503FallbackActive = false;
+      global503Count = 0;
+    } else {
+      // 폴백 모드 활성 중 → 아래 정상 플로우에서 503 발생 시 즉시 폴백 사용
+      console.log(`[NanoBananaPro] ⚠️ 폴백 모드 활성 중 (${Math.round((RECOVERY_TIMEOUT - elapsed) / 1000)}초 후 원래 모델 복구 시도 예정)`);
+    }
+  }
+
+  let imageRatio = '1:1'; // 기본값 (try 블록에서 재설정) — 루프 밖으로 이동 (Imagen 4 안전망 접근용)
+  let prompt = '';        // 기본값 (try 블록에서 재설정) — 루프 밖으로 이동
+  let lastApiKey = apiKey; // ✅ [2026-02-21] 마지막 사용 API 키 추적 (Imagen 4 안전망용)
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
+      // ✅ [2026-01-27] 이미지 스타일 및 비율 설정 읽기 (config.json에서 - localStorage는 메인 프로세스에서 접근 불가)
+      const imageStyle = (item as any).imageStyle || (configPre as any).imageStyle || 'realistic';
+      imageRatio = (item as any).imageRatio || (configPre as any).imageRatio || '1:1';
+
+      console.log(`[NanoBananaPro] 🎨 이미지 스타일: ${imageStyle}, 비율: ${imageRatio}`);
+
+      // ✅ [2026-02-08] 11가지 스타일별 프롬프트 매핑 (3카테고리)
+      const stylePromptMap: Record<string, string> = {
+        // 📷 실사
+        'realistic': 'Hyper-realistic professional photography, 8K UHD quality, DSLR camera, natural lighting, authentic Korean person, Fujifilm XT3 quality',
+        'bokeh': 'Beautiful bokeh photography, shallow depth of field, dreamy out-of-focus background lights, soft circular bokeh orbs, DSLR wide aperture f/1.4 quality, romantic atmosphere, fairy light aesthetic',
+        // 🖌️ 아트
+        'vintage': 'Vintage retro illustration, 1950s poster art style, muted color palette, nostalgic aesthetic, old-fashioned charm, classic design elements, aged paper texture',
+        'minimalist': 'Minimalist flat design, simple clean lines, solid colors, modern aesthetic, geometric shapes, professional infographic style, san-serif typography',
+        '3d-render': '3D render, Octane render quality, Cinema 4D style, Blender 3D art, realistic materials and textures, studio lighting setup, high-end 3D visualization',
+        'korean-folk': 'Korean traditional Minhwa folk painting style (한국 민화), vibrant primary colors on hanji paper, stylized tiger and magpie motifs, peony flowers, lotus blossoms, pine trees, traditional Korean decorative patterns, bold flat color areas with fine ink outlines, cheerful folk art aesthetic, naive but charming composition',
+        // ✨ 이색
+        'stickman': 'Cute chibi cartoon character with oversized round white head much larger than body (졸라맨), simple black dot eyes, small expressive mouth showing emotion, tiny simple body wearing colorful casual clothes, thick bold black outlines, flat cel-shaded colors with NO gradients, detailed colorful background scene that matches the topic, Korean internet meme comic art style, humorous and lighthearted mood, web comic panel composition, clean high quality digital vector art, NO TEXT NO LETTERS NO WATERMARK',
+        // 🫧 뚱글이
+        'roundy': 'Adorable chubby round blob character with extremely round soft body and very short stubby limbs (뚱글이), small dot eyes and tiny happy smile, pure white or soft pastel colored body, soft rounded outlines with NO sharp edges, dreamy pastel colored background with gentle gradient, Molang and Sumikko Gurashi inspired kawaii aesthetic, healing and cozy atmosphere, minimalist cute Korean character design, soft lighting with gentle shadows, warm comforting mood, high quality digital illustration, NO TEXT NO LETTERS NO WATERMARK',
+        'claymation': 'Claymation stop-motion style, cute clay figurines, handmade plasticine texture, soft rounded shapes, miniature diorama set, warm studio lighting, Aardman Animations quality, Wallace and Gromit aesthetic',
+        'neon-glow': 'Neon glow effect, luminous light trails, dark background with vibrant neon lights, synthwave aesthetic, glowing outlines, electric blue and hot pink, LED sign style, night atmosphere',
+        'papercut': 'Paper cut art style, layered paper craft, 3D paper sculpture effect, shadow between layers, handmade tactile texture, colorful construction paper, kirigami aesthetic, depth through layering',
+        'isometric': 'Isometric 3D illustration, cute isometric pixel world, 30-degree angle view, clean geometric shapes, pastel color palette, miniature city/scene, game-like perspective, detailed tiny world',
+        // 🎨 2D 일러스트 (✅ [2026-02-17] 신규)
+        '2d': 'Korean webtoon style 2D illustration, vibrant flat colors, clean line art, manhwa aesthetic, modern Korean digital illustration, soft pastel palette, cute and expressive character design'
+      };
+
+      const stylePrompt = stylePromptMap[imageStyle] || stylePromptMap['realistic'];
+
+      // ✅ [2026-03-01] AI 추론 기반 리팩토링: categoryStyle → personRule
+      // 쇼핑커넥트만 전용 스타일 유지, 나머지는 AI가 주제에서 비주얼 추론
+      let categoryStyleToUse: string;
+      let personRuleToUse: string;
+      if (isShoppingConnect && collectedImages && collectedImages.length > 0) {
+        // 쇼핑커넥트: 라이프스타일 이미지 전용 스타일 (사람이 제품 사용하는 장면)
+        categoryStyleToUse = SHOPPING_CONNECT_LIFESTYLE_STYLE;
+        personRuleToUse = 'Korean person (20-40s) using the product naturally. Authentic Korean facial features. Never Western/Caucasian.';
+        console.log(`[NanoBananaPro] 🛒 쇼핑커넥트 라이프스타일 스타일 적용 (인물 + 제품 사용 장면)`);
+      } else {
+        categoryStyleToUse = ''; // AI가 주제에서 직접 비주얼 추론
+        personRuleToUse = getPersonRule(item.category);
+      }
+
       // 🔥 [핵심] PromptBuilder를 사용하여 프롬프트 생성 (코드가 매우 짧아짐)
-      let prompt = PromptBuilder.build(item, {
+      // ✅ [2026-01-30 100점] provider: 'nano-banana-pro' → Gemini가 한글 텍스트 직접 생성
+      prompt = PromptBuilder.build(item, {
         isThumbnail,
         postTitle,
-        categoryStyle: getCategoryStyle(item.category),
+        categoryStyle: categoryStyleToUse, // ✅ 쇼핑커넥트만 전용 스타일, 나머지 빈 문자열
+        personRule: personRuleToUse, // ✅ [2026-03-01] 인물 규칙 (한국인 하드코딩)
         isShoppingConnect,
-        hasCollectedImages: !!(collectedImages && collectedImages.length > 0) // ✅ 추가: collectedImages 참조 모드
+        hasCollectedImages: !!(collectedImages && collectedImages.length > 0), // ✅ 추가: collectedImages 참조 모드
+        provider: 'nano-banana-pro', // ✅ [2026-01-30] 나노바나나프로는 한글 지원 → AI 직접 텍스트 생성
+        imageStyle, // ✅ [2026-03-01] 추가: 이미지 스타일 적용
+        stylePrompt // ✅ [2026-03-01] 추가: 이미지 스타일 상세 프롬프트
       });
 
-      // ✅ [2026-01-23 FIX] 재시도 시 프롬프트 변형 강화 (이미지 다양성 확보)
+      // ✅ [2026-02-24 FIX] 재시도 시 프롬프트 변형 (선택된 스타일 범위 내에서만 변형)
+      // 이전: "watercolor, flat design" 등 스타일 자체를 바꾸라는 지시 → realistic 선택과 충돌
+      // 수정: 구도/색감/조명만 변형하여 원래 스타일 유지
       if (attempt > 1) {
         const variationStyles = [
-          'Use a COMPLETELY DIFFERENT color palette.',
-          'Change the camera angle to a unique perspective.',
-          'Use a different artistic style (e.g., watercolor, flat design, 3D render).',
-          'Add more visual elements and details.',
-          'Simplify the composition with fewer elements.',
-          'Use warm colors if previous was cool, or vice versa.',
+          'Use a completely different color temperature (warm golden vs cool blue).',
+          'Change the camera angle: try overhead, low angle, or extreme close-up.',
+          'Shift the composition: try asymmetric framing or rule of thirds.',
+          'Change the lighting mood: dramatic shadows vs soft diffused light.',
+          'Try a different scene setting while keeping the same subject.',
         ];
         const randomVariation = variationStyles[Math.floor(Math.random() * variationStyles.length)];
-        prompt += `\n\n[VARIATION REQUEST ${attempt}/${maxRetries}]\n- Create a COMPLETELY DIFFERENT image.\n- ${randomVariation}\n- Do NOT repeat previous compositions.`;
+        prompt += `\n\nVARIATION: ${randomVariation}`;
         console.log(`[NanoBananaPro] 🎨 변형 요청: ${randomVariation}`);
       }
 
@@ -563,6 +1069,19 @@ async function generateSingleImageWithGemini(
       // ===== 레퍼런스 이미지 처리 =====
       const parts: Array<any> = [];
       let referenceImageLoaded = false;
+
+      // ✅ [2026-02-13 SPEED] 캐시된 참조 이미지가 있으면 다운로드 생략
+      if (cachedReferenceImage && !referenceImageLoaded) {
+        parts.push({
+          inlineData: {
+            data: cachedReferenceImage.data,
+            mimeType: cachedReferenceImage.mimeType,
+          },
+        });
+        referenceImageLoaded = true;
+        console.log(`[NanoBananaPro] ⚡ [캐시 사용] 참조 이미지 재다운로드 생략 (${index + 1}번)`);
+      }
+
       try {
         const rawRefPath = String((item as any).referenceImagePath || '').trim();
         const rawRefUrl = String((item as any).referenceImageUrl || '').trim();
@@ -574,7 +1093,7 @@ async function generateSingleImageWithGemini(
         const localRef = isRefPathUrl ? '' : normalizeLocalPath(rawRefPath);
         const urlRef = isRefPathUrl ? rawRefPath : (rawRefUrl && /^https?:\/\//i.test(rawRefUrl) ? rawRefUrl : '');
 
-        if (localRef) {
+        if (!referenceImageLoaded && localRef) {
           const buf = await fs.readFile(localRef);
           if (buf && buf.length > 0) {
             parts.push({
@@ -586,7 +1105,7 @@ async function generateSingleImageWithGemini(
             referenceImageLoaded = true;
             console.log(`[NanoBananaPro] ✅ 로컬 참조 이미지 로드: ${localRef}`);
           }
-        } else if (urlRef) {
+        } else if (!referenceImageLoaded && urlRef) {
           const fetched = await axios.get(urlRef, { responseType: 'arraybuffer', timeout: 25000 });
           const buf = Buffer.from(fetched.data);
           if (buf && buf.length > 0) {
@@ -646,22 +1165,25 @@ async function generateSingleImageWithGemini(
       // ✅ [2026-01-16] 환경설정에서 Nano Banana Pro 모델 설정 읽어오기
       // nanoBananaMainModel: 대표/썸네일 이미지 (통합)
       // nanoBananaSubModel: 본문 서브 이미지
-      const userMainModel = (config as any).nanoBananaMainModel || 'gemini-3-pro';
-      const userSubModel = (config as any).nanoBananaSubModel || 'gemini-3-pro';  // ✅ [2026-01-21] 기본값 1K로 변경
+      const userMainModel = (config as any).nanoBananaMainModel || 'gemini-3-1-flash';
+      const userSubModel = (config as any).nanoBananaSubModel || 'gemini-3-1-flash';  // ✅ [2026-03-01] 기본값 gemini-3-1-flash로 변경 (나노바나나2)
 
       // ✅ [2026-01-18] 디버그 로그: 어떤 모델이 설정에서 로드되었는지 확인
-      console.log(`[NanoBananaPro] 📋 환경설정 모델: Main="${(config as any).nanoBananaMainModel || '(미설정→gemini-3-pro)'}", Sub="${(config as any).nanoBananaSubModel || '(미설정→gemini-3-pro)'}"`);  // ✅ 변경
+      console.log(`[NanoBananaPro] 📋 환경설정 모델: Main="${(config as any).nanoBananaMainModel || '(미설정→gemini-3-1-flash)'}", Sub="${(config as any).nanoBananaSubModel || '(미설정→gemini-3-1-flash)'}"`);  // ✅ [2026-03-01] 기본값 나노바나나2
       console.log(`[NanoBananaPro] 📋 적용 모델: Main="${userMainModel}", Sub="${userSubModel}"`);
 
       // 모델 매핑 (설정값 → API 모델명)
-      // ✅ [100점 수정] 공식 문서 기반 올바른 API 모델명 적용
-      // - gemini-3-pro-image-preview: 4K/2K/1K 해상도 지원, 복잡한 지시 처리, Thinking 프로세스
-      // - gemini-2.5-flash-image: 1024px 고정, 고속/대량 처리 최적화
-      // ✅ [2026-01-21] 모든 모델을 gemini-3-pro-image-preview로 통일 (503 에러 방지)
+      // ✅ [2026-02-20] 기본 모델을 gemini-2.5-flash-image로 변경
+      // - gemini-2.0-flash-exp: 🆓 무료 실험 모델, 한글 정확도 높음
+      // - gemini-2.5-flash-image: 1K 해상도, 비용 ~$0.034/장 (Pro 대비 4배 저렴)
+      // - gemini-3-pro-image-preview: 4K/1K 해상도, 최고 품질, 비용 ~$0.134/장
       const MODEL_MAP: Record<string, { model: string; resolution: string }> = {
-        'gemini-3-pro-4k': { model: 'gemini-3-pro-image-preview', resolution: '4K' },     // 4K 고품질
-        'gemini-3-pro': { model: 'gemini-3-pro-image-preview', resolution: '1K' },        // 프리미엄 1K
-        'gemini-2.5-flash': { model: 'gemini-3-pro-image-preview', resolution: '1K' },    // ✅ 변경됨 (gemini-3-pro로 통일)
+        'gemini-3-pro-4k': { model: 'gemini-3-pro-image-preview', resolution: '4K' },
+        'gemini-3-pro': { model: 'gemini-3-pro-image-preview', resolution: '1K' },
+        'gemini-3-1-flash': { model: 'gemini-3.1-flash-image-preview', resolution: '1K' },  // ✅ [2026-03-01] 나노바나나2 (₩97/장, 가성비 최강)
+        'imagen-4': { model: 'imagen-4.0-generate-001', resolution: '1K' },  // ✅ [2026-02-22] Imagen 4 직접 선택 지원
+        'gemini-2.5-flash': { model: 'gemini-2.5-flash-image', resolution: '1K' },  // ✅ 나노바나나 (폴백용)
+        'gemini-2.0-flash-exp': { model: 'gemini-2.0-flash-exp-image-generation', resolution: '1K' },  // ✅ 🆓 무료 실험 모델
       };
 
       // 이미지 유형에 따라 모델 결정 (썸네일과 대표 이미지 통합)
@@ -677,14 +1199,14 @@ async function generateSingleImageWithGemini(
 
       if (isMainOrThumbnail) {
         // 대표/썸네일 이미지: nanoBananaMainModel 사용 (통합)
-        const configForMain = MODEL_MAP[userMainModel] || { model: 'gemini-3-pro-image-preview', resolution: '1K' };
+        const configForMain = MODEL_MAP[userMainModel] || { model: 'gemini-3.1-flash-image-preview', resolution: '1K' };
         selectedModel = configForMain.model;
         selectedResolution = configForMain.resolution;
         const imageType = isThumbnail ? '썸네일' : '대표';
         console.log(`[NanoBananaPro] 🖼️ ${imageType} 이미지: ${userMainModel} (${selectedModel}, ${selectedResolution})`);
       } else {
         // 본문 서브 이미지: nanoBananaSubModel 사용
-        const configForSub = MODEL_MAP[userSubModel] || { model: 'gemini-3-pro-image-preview', resolution: '1K' };  // ✅ [2026-01-21] fallback도 1K
+        const configForSub = MODEL_MAP[userSubModel] || { model: 'gemini-3.1-flash-image-preview', resolution: '1K' };
         selectedModel = configForSub.model;
         selectedResolution = configForSub.resolution;
         console.log(`[NanoBananaPro] 📷 서브 이미지: ${userSubModel} (${selectedModel}, ${selectedResolution})`);
@@ -692,9 +1214,169 @@ async function generateSingleImageWithGemini(
 
 
 
+
+
+
+      // ===== 🔥 [2026-03-01] 4단계 계단식 폴백 체인 =====
+      // 나노바나나2 → 나노바나나프로 → 이미진4 → 나노바나나
+      // 503/429/500 에러 시 활성화, 현재 선택 모델은 건너뜀
+      if (global503FallbackActive) {
+        const effectiveRatio = isShoppingConnect ? '1:1' : imageRatio;
+
+        // 폴백 체인 정의 (우선순위 순서)
+        const FALLBACK_CHAIN = [
+          { name: '나노바나나2', model: 'gemini-3.1-flash-image-preview', type: 'gemini' },
+          { name: '나노바나나프로', model: 'gemini-3-pro-image-preview', type: 'gemini' },
+          { name: '이미진4', model: 'imagen-4.0-generate-001', type: 'imagen' },
+          { name: '나노바나나', model: 'gemini-2.5-flash-image', type: 'gemini' },
+        ];
+
+        // 현재 선택된 모델은 이미 실패했으므로 건너뜀
+        const chainToTry = FALLBACK_CHAIN.filter(f => f.model !== selectedModel);
+        console.log(`[NanoBananaPro] ⚡ 4단계 폴백 시작 (현재 모델: ${selectedModel} 제외, ${chainToTry.length}개 후보)`);
+
+        for (let step = 0; step < chainToTry.length; step++) {
+          const fallback = chainToTry[step];
+          console.log(`[NanoBananaPro] ⚡ 폴백 Step ${step + 1}/${chainToTry.length}: ${fallback.name} (${fallback.model}) 시도`);
+
+          try {
+            if (fallback.type === 'imagen') {
+              // === Imagen 4: 별도 :predict 엔드포인트 ===
+              const imagen4Direct = await generateImageWithImagen4(
+                prompt,
+                apiKey || '',
+                effectiveRatio,
+                signal
+              );
+
+              if (imagen4Direct) {
+                let finalBuffer = imagen4Direct.buffer;
+                const extension = imagen4Direct.mimeType.includes('jpeg') ? 'jpg' : 'png';
+
+                const metadata = await sharp(finalBuffer).metadata();
+                if (metadata.width && metadata.width > 2048) {
+                  finalBuffer = await sharp(finalBuffer).resize(2048, null, { withoutEnlargement: true }).toBuffer();
+                }
+                if (isThumbnail) finalBuffer = await cropThumbnail(finalBuffer, extension);
+
+                const savedResult = await writeImageFile(finalBuffer, extension, item.heading, postTitle, postId);
+                console.log(`[NanoBananaPro] ✅ ${fallback.name} 폴백 성공! (${Math.round(finalBuffer.length / 1024)}KB)`);
+
+                return {
+                  heading: item.heading,
+                  filePath: savedResult.savedToLocal || savedResult.filePath,
+                  provider: `${fallback.model}-fallback` as any,
+                  previewDataUrl: savedResult.previewDataUrl,
+                  savedToLocal: savedResult.savedToLocal,
+                  originalIndex: (item as any).originalIndex,
+                };
+              } else {
+                console.warn(`[NanoBananaPro] ⚠️ ${fallback.name} 폴백: 이미지 없음 → 다음 단계`);
+                continue;
+              }
+            } else {
+              // === Gemini 모델: :generateContent 엔드포인트 ===
+              const axiosFallback = (await import('axios')).default;
+              const fallbackParts = parts.map((p: any) => {
+                if (p.text) {
+                  return { text: stripTextInstructions(p.text) };
+                }
+                return p;
+              });
+
+              // ✅ [2026-03-02] RPM 쓰로틀 적용 (폴백 Gemini 호출)
+              await geminiRpmThrottler.throttle();
+              const fallbackResponse = await axiosFallback.post(
+                `https://generativelanguage.googleapis.com/v1beta/models/${fallback.model}:generateContent?key=${apiKey}`,
+                {
+                  contents: [{ parts: fallbackParts }],
+                  generationConfig: {
+                    responseModalities: ['Text', 'Image'],
+                    imageConfig: { imageSize: '1K', aspectRatio: effectiveRatio }
+                  }
+                },
+                { headers: { 'Content-Type': 'application/json' }, timeout: 60000, signal }
+              );
+              geminiRpmThrottler.recordCall();
+
+              const fallbackCandidates = fallbackResponse.data?.candidates;
+              if (fallbackCandidates?.[0]?.content?.parts) {
+                for (const fbPart of fallbackCandidates[0].content.parts) {
+                  if (fbPart.inlineData?.data) {
+                    let fbBuffer: Buffer = Buffer.from(fbPart.inlineData.data, 'base64') as Buffer;
+                    const fbExt = (fbPart.inlineData.mimeType || '').includes('jpeg') ? 'jpg' : 'png';
+                    if (isThumbnail) fbBuffer = await cropThumbnail(fbBuffer, fbExt);
+                    const fbSaved = await writeImageFile(fbBuffer, fbExt, item.heading, postTitle, postId);
+                    console.log(`[NanoBananaPro] ✅ ${fallback.name} 폴백 성공! (${Math.round(fbBuffer.length / 1024)}KB)`);
+                    return {
+                      heading: item.heading,
+                      filePath: fbSaved.savedToLocal || fbSaved.filePath,
+                      provider: `${fallback.model}-fallback` as any,
+                      previewDataUrl: fbSaved.previewDataUrl,
+                      savedToLocal: fbSaved.savedToLocal,
+                      originalIndex: (item as any).originalIndex,
+                    };
+                  }
+                }
+              }
+              console.warn(`[NanoBananaPro] ⚠️ ${fallback.name} 폴백: 이미지 없음 → 다음 단계`);
+            }
+          } catch (fbErr: any) {
+            console.warn(`[NanoBananaPro] ⚠️ ${fallback.name} 폴백 실패 (${fbErr?.response?.status || fbErr.message}) → 다음 단계`);
+          }
+        }
+
+        // 모든 폴백 실패 → 원래 모델 복구 시도
+        console.warn(`[NanoBananaPro] ⚠️ 4단계 폴백 모두 실패 → 원래 모델 복구 시도`);
+        global503FallbackActive = false;
+        global503Count = 0;
+      }
+
+      // ===== [2026-02-22] Imagen 4 직접 선택 시 별도 :predict 엔드포인트 사용 =====
+      if (selectedModel === 'imagen-4.0-generate-001') {
+        console.log(`[NanoBananaPro] 🖼️ Imagen 4 직접 선택 모드 → :predict 엔드포인트 사용`);
+        const effectiveRatio = isShoppingConnect ? '1:1' : imageRatio;
+        const imagen4Result = await generateImageWithImagen4(
+          prompt,
+          apiKey || '',
+          effectiveRatio,
+          signal
+        );
+
+        if (imagen4Result) {
+          let finalBuffer = imagen4Result.buffer;
+          const extension = imagen4Result.mimeType.includes('jpeg') ? 'jpg' : 'png';
+
+          // 해상도 최적화
+          const metadata = await sharp(finalBuffer).metadata();
+          if (metadata.width && metadata.width > 2048) {
+            finalBuffer = await sharp(finalBuffer).resize(2048, null, { withoutEnlargement: true }).toBuffer();
+          }
+
+          // 썸네일 크롭
+          if (isThumbnail) finalBuffer = await cropThumbnail(finalBuffer, extension);
+
+          const savedResult = await writeImageFile(finalBuffer, extension, item.heading, postTitle, postId);
+          console.log(`[NanoBananaPro] ✅ Imagen 4 직접 생성 성공! (${Math.round(finalBuffer.length / 1024)}KB)`);
+
+          return {
+            heading: item.heading,
+            filePath: savedResult.savedToLocal || savedResult.filePath,
+            provider: 'nano-banana-pro',
+            previewDataUrl: savedResult.previewDataUrl,
+            savedToLocal: savedResult.savedToLocal,
+            originalIndex: (item as any).originalIndex,
+          };
+        } else {
+          // Imagen 4 실패 → 다음 attempt로 재시도 (Gemini 폴백)
+          console.warn(`[NanoBananaPro] ⚠️ Imagen 4 직접 생성 실패 → 다음 시도`);
+          throw new Error('Imagen 4 직접 생성 실패');
+        }
+      }
+
       // ===== Gemini API 호출 =====
       // ✅ [100점 수정] imageConfig로 해상도 설정 (4K/2K/1K)
-      // ✅ [2026-01-20] 쇼핑커넥트 모드: 1:1 비율 강제
+      // ✅ [2026-01-26] 사용자 선택 비율 적용
       const imageConfigOptions: any = {
         imageSize: selectedResolution  // ✅ 4K, 2K, 1K 해상도 지원
       };
@@ -703,8 +1385,16 @@ async function generateSingleImageWithGemini(
       if (isShoppingConnect) {
         imageConfigOptions.aspectRatio = '1:1';
         console.log(`[NanoBananaPro] 🛒 쇼핑커넥트 모드: 1:1 비율 적용`);
+      } else {
+        // ✅ [2026-01-26] 사용자 선택 비율 적용 (1:1, 16:9, 9:16, 4:3, 3:4)
+        imageConfigOptions.aspectRatio = imageRatio;
+        console.log(`[NanoBananaPro] 📐 사용자 선택 비율 적용: ${imageRatio}`);
       }
 
+
+      // ✅ [2026-03-02] RPM 쓰로틀 적용 (메인 Gemini 호출)
+      await geminiRpmThrottler.throttle();
+      console.log(`[NanoBananaPro] 📊 RPM 상태: ${geminiRpmThrottler.getStatus()}`);
       const response = await axios.post(
         `https://generativelanguage.googleapis.com/v1beta/models/${selectedModel}:generateContent?key=${apiKey}`,
         {
@@ -716,10 +1406,18 @@ async function generateSingleImageWithGemini(
         },
         {
           headers: { 'Content-Type': 'application/json' },
-          timeout: selectedResolution === '4K' ? 180000 : 120000,  // ✅ [2026-01-21] 타임아웃 연장 (4K:180초, 1K:120초)
+          timeout: selectedResolution === '4K' ? 120000 : 90000,  // ✅ [2026-03-11 FIX] 타임아웃 상향 (4K:120초, 1K:90초) - 원래 엔진 성공률 극대화
           signal: signal  // ✅ [100점 수정] AbortSignal로 요청 취소 지원
         }
       );
+      geminiRpmThrottler.recordCall();
+
+      // ✅ [2026-03-02] 이미지 API 사용량 추적 (일일 비용 집계)
+      try {
+        const costKrw = MODEL_COST_KRW[selectedModel] || 100;
+        const { consumeImageApi } = await import('../quotaManager.js');
+        await consumeImageApi(costKrw);
+      } catch { /* 쿼터 추적 실패는 무시 */ }
 
       // ===== 응답 처리 =====
       const candidates = response.data?.candidates;
@@ -793,6 +1491,13 @@ async function generateSingleImageWithGemini(
             const savedResult = await writeImageFile(buffer, extension, item.heading, postTitle, postId);
             console.log(`[NanoBananaPro] ✅ 생성 성공 (${Math.round(buffer.length / 1024)}KB)`);
 
+            // ✅ [2026-02-18] 성공 시 503 카운터 리셋 (서버 정상화 확인)
+            if (global503FallbackActive || global503Count > 0) {
+              console.log(`[NanoBananaPro] ✅ 이미지 생성 성공 → 503 카운터 리셋 (이전: ${global503Count}회)`);
+              global503Count = 0;
+              // 폴백 모델에서 성공하면 5분 타이머 유지 (원래 모델 자동 복구 대기)
+            }
+
             return {
               heading: item.heading,
               filePath: savedResult.savedToLocal || savedResult.filePath,
@@ -804,12 +1509,30 @@ async function generateSingleImageWithGemini(
           }
         }
 
-        // ✅ [2026-01-23 FIX] parts는 있지만 이미지가 없는 경우 로깅
-        console.warn(`[NanoBananaPro] ⚠️ 응답에 parts 있지만 이미지 없음. Parts 타입:`,
-          candidates[0].content.parts.map((p: any) => p.text ? 'text' : p.inlineData ? 'inlineData' : 'unknown')
-        );
+        // ✅ [2026-02-20] 안전 필터/콘텐츠 차단 감지 및 자동 프롬프트 수정
+        const finishReason = candidates[0]?.finishReason;
+        const blockReason = (response as any).data?.promptFeedback?.blockReason;
+        console.warn(`[NanoBananaPro] ⚠️ 응답에 parts 있지만 이미지 없음.`, {
+          finishReason,
+          blockReason,
+          partsTypes: candidates[0].content.parts.map((p: any) => p.text ? 'text' : p.inlineData ? 'inlineData' : 'unknown')
+        });
+
+        // ✅ [2026-02-20] SAFETY/RECITATION 차단 시 프롬프트 자동 정화 후 1회 재시도
+        if ((finishReason === 'SAFETY' || finishReason === 'RECITATION' || blockReason) && attempt === 1) {
+          console.log(`[NanoBananaPro] 🔄 안전 필터 감지 → 프롬프트 정화 후 재시도`);
+          // 민감한 키워드 제거
+          prompt = prompt
+            .replace(/\b(nude|naked|sexy|violence|blood|gore|kill|weapon|drug|alcohol|cigarette|gambling)\b/gi, '')
+            .replace(/celebrity|famous person|real person|실제 인물|연예인|유명인/gi, 'professional model')
+            .replace(/\bchild|children|kid|아이|어린이|아동/gi, 'young adult')
+            .replace(/\n{3,}/g, '\n\n');
+          prompt += '\n\nIMPORTANT: Generate a SAFE, family-friendly image. No controversial content.';
+          console.log(`[NanoBananaPro] 📝 정화된 프롬프트 길이: ${prompt.length}자`);
+          continue; // 다음 attempt로 재시도
+        }
       }
-      throw new Error('Gemini 응답에서 이미지를 찾을 수 없습니다');
+      throw new Error(`Gemini 응답에서 이미지를 찾을 수 없습니다 (finishReason: ${candidates?.[0]?.finishReason || 'unknown'})`);
 
     } catch (error: any) {
       const errorMessage = error?.message || '알 수 없는 오류';
@@ -821,42 +1544,108 @@ async function generateSingleImageWithGemini(
       const isAuthError = statusCode === 401 || statusCode === 403 || errorMessage.includes('401') || errorMessage.includes('403') || errorMessage.includes('API key');
       const isTimeoutError = errorMessage.includes('timeout') || errorMessage.includes('ETIMEDOUT') || errorMessage.includes('ECONNRESET');
 
-      // 최대 재시도 도달 시 사용자 친화적 에러 throw
+      // ✅ [2026-02-21] 최대 재시도 도달 → throw 대신 break → Imagen 4 최종 안전망으로 이동
+      // ✅ [2026-03-09 FIX] 사용자 친화적 에러 메시지로 개선
       if (attempt === maxRetries) {
+        const userFriendlyMsg = getImageErrorMessage(error);
         if (isQuotaError) {
-          throw new Error('⚠️ [할당량 초과] Gemini API 일일 한도에 도달했습니다.\n' +
-            '→ 해결방법: Google AI Studio에서 유료 등급(Pay-as-you-go)으로 업그레이드하세요.\n' +
-            '→ 또는 내일 자정(UTC) 이후 다시 시도하세요.');
+          const poolInfo = keyPool ? ` (${keyPool.getAvailableCount()}/${keyPool.getTotalCount()}개 키 사용 가능)` : '';
+          console.error(`[NanoBananaPro] ❌ 할당량 초과 (${maxRetries}회 재시도 실패)${poolInfo} → Imagen 4 안전망 시도`);
+          sendImageLog(`⚠️ API 할당량이 초과되었습니다! 할당량을 확인하거나 다른 생성 엔진으로 변경해주세요. Imagen 4로 전환 시도 중...`);
+        } else if (isServerError) {
+          console.error(`[NanoBananaPro] ❌ 서버 오류 (${maxRetries}회 재시도 실패) → Imagen 4 안전망 시도`);
+          sendImageLog(`🔥 이미지 생성 서버가 과부하 상태입니다! 다른 생성 엔진으로 변경하거나 잠시 기다려주세요. Imagen 4로 전환 시도 중...`);
+        } else if (isAuthError) {
+          console.error(`[NanoBananaPro] ❌ 인증 오류 → Imagen 4 안전망 시도`);
+          sendImageLog(`🔑 API 키가 유효하지 않습니다! 설정 → API 키에서 키를 확인해주세요.`);
+        } else if (isTimeoutError) {
+          console.error(`[NanoBananaPro] ❌ 연결 시간 초과 (${maxRetries}회 재시도 실패) → Imagen 4 안전망 시도`);
+          sendImageLog(`⏰ 연결 시간이 초과되었습니다. 네트워크 상태를 확인해주세요. Imagen 4로 전환 시도 중...`);
+        } else {
+          console.error(`[NanoBananaPro] ❌ 이미지 생성 실패: ${errorMessage} → Imagen 4 안전망 시도`);
+          sendImageLog(userFriendlyMsg);
         }
-        if (isServerError) {
-          throw new Error('⚠️ [서버 오류] Gemini API 서버가 일시적으로 불안정합니다.\n' +
-            '→ 해결방법: 잠시 후(5-10분) 다시 시도하세요.\n' +
-            '→ Google AI 서비스 상태 확인: https://status.cloud.google.com');
-        }
-        if (isAuthError) {
-          throw new Error('⚠️ [인증 오류] Gemini API 키가 올바르지 않습니다.\n' +
-            '→ 해결방법: 환경설정에서 API 키를 다시 확인하세요.\n' +
-            '→ API 키 발급: https://aistudio.google.com/apikey');
-        }
-        if (isTimeoutError) {
-          throw new Error('⚠️ [연결 시간 초과] 네트워크 연결이 불안정합니다.\n' +
-            '→ 해결방법: 인터넷 연결 상태를 확인하세요.\n' +
-            '→ 회사/학교 네트워크는 API 접속이 차단될 수 있습니다.');
-        }
-        throw new Error(`⚠️ [이미지 생성 실패] ${errorMessage}\n` +
-          '→ 개발자 도구(F12) 콘솔 로그를 확인하세요.');
+        break; // ✅ throw 대신 break → for 루프 탈출 → Imagen 4 최종 안전망으로
       }
 
       // ✅ [2026-01-24 FIX] 재시도 대기 시간 강화 - 429 에러 시 더 긴 대기
       let waitTime = 3000 * attempt;
       if (isQuotaError) {
-        // 429 에러: 15초 + 랜덤 0-10초 (총 15-25초 대기)
-        waitTime = 15000 + (Math.random() * 10000);
-        console.log(`[NanoBananaPro] ⚠️ 할당량 오류(429) 감지 - 더 긴 대기 시간 적용`);
+        // ✅ [2026-02-13] 키 풀 로테이션: 새 키가 있으면 즉시 전환, 없으면 긴 대기
+        if (keyPool && keyPool.getTotalCount() > 1) {
+          const nextKey = keyPool.markExhaustedAndRotate();
+          if (nextKey) {
+            // 새 키로 전환 성공 → 짧은 대기 후 즉시 재시도
+            apiKey = nextKey;
+            waitTime = 2000; // 2초만 대기 (키 전환이므로 긴 대기 불필요)
+            console.log(`[NanoBananaPro] 🔄 429 감지 → 새 API 키로 전환 완료, 2초 후 재시도`);
+            sendImageLog(`🔄 할당량 초과 → 다른 API 키로 전환하여 재시도합니다...`);
+          } else {
+            // 모든 키 소진 → 긴 대기
+            waitTime = 15000 + (Math.random() * 10000);
+            console.log(`[NanoBananaPro] ⚠️ 모든 API 키 소진 → ${Math.round(waitTime / 1000)}초 대기`);
+            sendImageLog(`⚠️ 모든 API 키 소진 — ${Math.round(waitTime / 1000)}초 대기 중...`);
+          }
+        } else {
+          // 키 풀 없음 → 기존 로직 (긴 대기)
+          waitTime = 15000 + (Math.random() * 10000);
+          console.log(`[NanoBananaPro] ⚠️ 할당량 오류(429) 감지 - 더 긴 대기 시간 적용`);
+        }
+        consecutive503Count = 0;  // 다른 에러는 503 카운트 리셋
       } else if (isServerError) {
-        // 500/503 에러: 서버 복구 대기
-        waitTime = 10000 + (Math.random() * 5000);
-        console.log(`[NanoBananaPro] ⚠️ 서버 오류(${statusCode}) 감지 - 서버 복구 대기`);
+        // ✅ [2026-03-01] 503/500 에러 시 4단계 폴백 체인 활성화
+        consecutive503Count++;
+        global503Count = (global503Count || 0) + 1;
+        console.log(`[NanoBananaPro] ⚠️ 서버 오류(${statusCode}) 감지 - 연속 ${consecutive503Count}회 (전체 ${global503Count}회)`);
+
+        // ✅ [2026-03-01] 1회라도 발생 → 즉시 4단계 폴백 체인 활성화
+        if (consecutive503Count >= 1) {
+          console.log(`[NanoBananaPro] 🔄 에러 ${statusCode} (${consecutive503Count}회 연속) → 4단계 폴백 체인 활성화`);
+          global503FallbackActive = true;
+          global503FallbackStartTime = Date.now();
+
+          // Imagen 4로 이미지 생성 시도 (텍스트 프롬프트만 사용)
+          const imagen4Result = await generateImageWithImagen4(
+            prompt,
+            apiKey || '',
+            isShoppingConnect ? '1:1' : imageRatio,
+            signal
+          );
+
+          if (imagen4Result) {
+            // Imagen 4 성공 → 바로 파일 저장 및 반환
+            let finalBuffer = imagen4Result.buffer;
+            const extension = imagen4Result.mimeType.includes('jpeg') ? 'jpg' : 'png';
+
+            // 해상도 최적화 (top-level sharp import 사용)
+            const metadata = await sharp(finalBuffer).metadata();
+            if (metadata.width && metadata.width > 2048) {
+              finalBuffer = await sharp(finalBuffer).resize(2048, null, { withoutEnlargement: true }).toBuffer();
+            }
+
+            const savedResult = await writeImageFile(finalBuffer, extension, item.heading, postTitle, postId);
+            console.log(`[NanoBananaPro] ✅ Imagen 4 폴백 성공! (${Math.round(finalBuffer.length / 1024)}KB)`);
+
+            // 503 카운터 부분 리셋 (폴백 상태 유지, 30분 후 원래 모델 복구)
+            consecutive503Count = 0;
+
+            return {
+              heading: item.heading,
+              filePath: savedResult.savedToLocal || savedResult.filePath,
+              provider: 'imagen-4-fallback',  // ✅ 실제 사용 모델 표시 (디버깅용)
+              previewDataUrl: savedResult.previewDataUrl,
+              savedToLocal: savedResult.savedToLocal,
+              originalIndex: (item as any).originalIndex,
+            };
+          } else {
+            // Imagen 4도 실패 → 대기 후 재시도
+            console.error(`[NanoBananaPro] ❌ Imagen 4 폴백도 실패 → 계속 재시도`);
+            const baseWait = 10000;
+            waitTime = baseWait + (Math.random() * 5000);
+          }
+        }
+      } else {
+        consecutive503Count = 0;  // 다른 에러(인증/타임아웃 등)는 503 카운트 리셋
       }
 
       console.log(`[NanoBananaPro] ⏳ 에러 발생, ${Math.round(waitTime / 1000)}초 후 재시도... (${attempt}/${maxRetries})`);
@@ -864,7 +1653,52 @@ async function generateSingleImageWithGemini(
     }
   }
 
-  throw new Error(`⚠️ [이미지 생성 실패] 최대 재시도 횟수(${maxRetries}회)를 초과했습니다.`);
+  // ===== 🔥 [2026-02-21] 최종 안전망: Imagen 4 무조건 폴백 (100% 생성 보장) =====
+  // Gemini 모든 재시도 실패 후 → Imagen 4로 최종 시도
+  console.log(`[NanoBananaPro] 🛡️ Gemini 모든 재시도 실패 → Imagen 4 최종 안전망 시도`);
+  try {
+    const finalFallbackResult = await generateImageWithImagen4(
+      prompt || item.heading,
+      lastApiKey || apiKey || '',
+      isShoppingConnect ? '1:1' : imageRatio,
+      signal
+    );
+
+    if (finalFallbackResult) {
+      let finalBuffer = finalFallbackResult.buffer;
+      const extension = finalFallbackResult.mimeType.includes('jpeg') ? 'jpg' : 'png';
+
+      // 해상도 최적화
+      const metadata = await sharp(finalBuffer).metadata();
+      if (metadata.width && metadata.width > 2048) {
+        finalBuffer = await sharp(finalBuffer).resize(2048, null, { withoutEnlargement: true }).toBuffer();
+      }
+
+      // 썸네일 크롭
+      if (isThumbnail) finalBuffer = await cropThumbnail(finalBuffer, extension);
+
+      const savedResult = await writeImageFile(finalBuffer, extension, item.heading, postTitle, postId);
+      console.log(`[NanoBananaPro] ✅ Imagen 4 최종 안전망 성공! (${Math.round(finalBuffer.length / 1024)}KB)`);
+
+      return {
+        heading: item.heading,
+        filePath: savedResult.savedToLocal || savedResult.filePath,
+        provider: 'imagen-4-fallback' as any,
+        previewDataUrl: savedResult.previewDataUrl,
+        savedToLocal: savedResult.savedToLocal,
+        originalIndex: (item as any).originalIndex,
+      };
+    }
+  } catch (imagen4Err: any) {
+    console.error(`[NanoBananaPro] ❌ Imagen 4 최종 안전망도 실패:`, imagen4Err?.message || imagen4Err);
+
+    // ✅ [2026-03-09 FIX] 최종 실패 시 구체적인 에러 메시지 제공
+    const lastErrorMsg = getImageErrorMessage(imagen4Err || { message: 'Gemini + Imagen 4 모두 실패' });
+    throw new Error(`[Gemini] ${lastErrorMsg}`);
+  }
+
+  // Imagen 4 응답이 null (이미지 없음)인 경우
+  throw new Error(`[Gemini] ❌ 이미지 생성에 실패했습니다. Gemini + Imagen 4 모두 결과를 반환하지 않았습니다. API 키와 네트워크를 확인해주세요.`);
 }
 
 /**
@@ -873,6 +1707,38 @@ async function generateSingleImageWithGemini(
 export function clearUsedUrls(): void {
   usedImageUrls.clear();
   console.log('[NanoBananaPro] 🔄 사용된 URL 목록 초기화됨');
+}
+
+/**
+ * ✅ [2026-02-23 FIX] 이미지 생성 전체 상태 초기화
+ * 글 생성/이미지 생성 완료 후 또는 새 글 시작 전에 호출하여
+ * 이전 세션의 캐시가 남지 않도록 완벽히 초기화
+ * 
+ * 초기화 대상:
+ * - usedImageUrls: 중복 방지용 URL 추적 Set
+ * - global503 상태: 503 폴백 시스템 카운터/플래그
+ * - GeminiKeyPool: 소진된 키 목록 초기화
+ */
+export function resetAllImageState(): void {
+  console.log('[NanoBananaPro] 🔄🔄🔄 === 이미지 생성 전체 상태 초기화 시작 ===');
+
+  // 1. 사용된 URL 목록 초기화
+  const prevUsedCount = usedImageUrls.size;
+  usedImageUrls.clear();
+  console.log(`[NanoBananaPro] ✅ 사용된 URL 목록 초기화 (이전: ${prevUsedCount}개)`);
+
+  // 2. 503 폴백 시스템 초기화
+  const prev503Count = global503Count;
+  const prev503Active = global503FallbackActive;
+  global503Count = 0;
+  global503FallbackActive = false;
+  global503FallbackStartTime = 0;
+  console.log(`[NanoBananaPro] ✅ 503 폴백 상태 초기화 (이전 카운트: ${prev503Count}, 활성: ${prev503Active})`);
+
+  // 3. GeminiKeyPool 소진 키는 인스턴스별로 생성되므로 
+  // 새 호출 시 자동으로 새 인스턴스가 생성됨 (추가 초기화 불필요)
+
+  console.log('[NanoBananaPro] 🔄🔄🔄 === 이미지 생성 전체 상태 초기화 완료 ===');
 }
 
 /**

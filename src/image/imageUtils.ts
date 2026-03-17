@@ -49,6 +49,29 @@ export async function getImageSaveBasePath(): Promise<string> {
 }
 
 export async function writeImageFile(buffer: Buffer, extension: string, heading?: string, postTitle?: string, postId?: string): Promise<{ filePath: string; previewDataUrl: string; savedToLocal?: string }> {
+  // ✅ [2026-03-09 FIX] 깨진/빈 이미지 파일 저장 방지 — 버퍼 유효성 검증
+  if (!buffer || buffer.length === 0) {
+    throw new Error('❌ 이미지 데이터가 비어있습니다. 이미지 생성에 실패했을 수 있습니다.');
+  }
+
+  // 최소 크기 검증 (정상 이미지는 최소 1KB 이상)
+  const MIN_IMAGE_SIZE = 1024; // 1KB
+  if (buffer.length < MIN_IMAGE_SIZE) {
+    throw new Error(`❌ 이미지 데이터가 너무 작습니다 (${buffer.length}바이트). 깨진 이미지일 수 있습니다.`);
+  }
+
+  // 매직 바이트 검증 (PNG: 89 50 4E 47, JPEG: FF D8 FF, WebP: 52 49 46 46)
+  const isPNG = buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4E && buffer[3] === 0x47;
+  const isJPEG = buffer[0] === 0xFF && buffer[1] === 0xD8 && buffer[2] === 0xFF;
+  const isWebP = buffer[0] === 0x52 && buffer[1] === 0x49 && buffer[2] === 0x46 && buffer[3] === 0x46;
+
+  if (!isPNG && !isJPEG && !isWebP) {
+    console.warn(`[ImageGenerator] ⚠️ 알 수 없는 이미지 포맷 (첫 4바이트: ${buffer.slice(0, 4).toString('hex')}), 크기: ${buffer.length}B — 저장은 시도합니다`);
+    // 알 수 없는 포맷이지만 크기가 충분하면 저장 시도 (sharp에서 처리 가능할 수 있음)
+  } else {
+    console.log(`[ImageGenerator] ✅ 이미지 포맷 검증 통과: ${isPNG ? 'PNG' : isJPEG ? 'JPEG' : 'WebP'} (${Math.round(buffer.length / 1024)}KB)`);
+  }
+
   // ✅ 이미지 리사이징 (일관된 크기로 조정)
   let processedBuffer = buffer;
   try {
@@ -104,8 +127,10 @@ export async function writeImageFile(buffer: Buffer, extension: string, heading?
     if (postTitle && postTitle.trim()) {
       // 제목 폴더만 사용 (날짜 폴더 없음)
       const safeTitleFolder = postTitle
-        .replace(/[<>:"/\\|?*]/g, '_')  // 파일명에 사용할 수 없는 문자 제거
+        .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')  // 파일명에 사용할 수 없는 문자 + 네이버 업로드 문제 문자 제거
         .replace(/\s+/g, '_')            // 공백을 언더스코어로 변경
+        .replace(/\.+$/, '')             // ✅ [2026-03-09 FIX] 끝의 마침표 제거 (Windows 폴더명 제한)
+        .replace(/_+$/, '')              // 끝의 불필요한 언더스코어 제거
         .substring(0, 100)                // 최대 100자로 제한
         .trim() || 'untitled';
       blogImagesPath = path.join(basePath, safeTitleFolder);
@@ -128,7 +153,7 @@ export async function writeImageFile(buffer: Buffer, extension: string, heading?
 
     // 파일명을 소제목 기반으로 생성 (안전한 파일명으로 변환)
     const safeHeading = heading
-      ? heading.replace(/[<>:"/\\|?*]/g, '_').substring(0, 50).trim() || 'image'
+      ? heading.replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/, '').replace(/_+$/, '').substring(0, 50).trim() || 'image'
       : 'image';
     // ✅ 중복 방지: 타임스탬프 추가
     const timestamp = Date.now();
@@ -361,7 +386,24 @@ export async function filterSimilarImages(
   const uniqueImages: { url: string; hash: bigint }[] = [];
   const skippedUrls: string[] = [];
 
-  for (const url of imageUrls) {
+  for (const item of imageUrls) {
+    // ✅ [2026-02-01] 객체 배열도 처리 (item이 객체일 수 있음)
+    let url: string;
+    if (typeof item === 'string') {
+      url = item;
+    } else if (item && typeof item === 'object') {
+      // 객체인 경우 url, thumbnailUrl, src 등에서 URL 추출
+      url = (item as any).url || (item as any).thumbnailUrl || (item as any).src || '';
+    } else {
+      continue;
+    }
+
+    // URL 유효성 검사
+    if (!url || typeof url !== 'string' || !url.startsWith('http')) {
+      console.warn(`[ImageFilter] ⚠️ 유효하지 않은 URL 형식, 스킵: ${JSON.stringify(item).substring(0, 80)}...`);
+      continue;
+    }
+
     try {
       // 이미지 다운로드 (타임아웃 5초)
       const response = await axios.get(url, {

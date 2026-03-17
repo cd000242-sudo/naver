@@ -1,0 +1,92 @@
+═══════════════════════════════════════════════════
+🧪 전체 파이프라인 테스트 v3
+🕐 시작 시간: 2026. 2. 27. 오후 1:37:42
+═══════════════════════════════════════════════════
+
+📦 [1단계] Playwright 크롤링...
+📊 성공: true
+📊 사용 전략: playwright-stealth
+📊 소요 시간: 36163ms
+📊 에러: 없음
+📊 에러페이지: false
+✅ [1단계] 크롤러 수집: 65개
+
+📸 원본 이미지 (첫 10개):
+  [1] https://shop-phinf.pstatic.net/20250722_246/17531842097043GVt8_GIF/11642883650889194_1509577152.gif?type=o1000
+  [2] https://shop-phinf.pstatic.net/20260202_70/1770019653504l8iER_PNG/%ED%94%84%EB%A6%AC%EB%AF%B8%EC%97%84%EC%8A%A4%ED%86%A0
+  [3] https://shop-phinf.pstatic.net/20251222_208/1766371575212e7LdB_PNG/Group_19.png?type=w860
+  [4] https://shop-phinf.pstatic.net/20251222_170/1766371586526sAPk8_PNG/Group_16.png?type=w860
+  [5] https://shop-phinf.pstatic.net/20251215_296/1765789972233JLRzs_JPEG/99922803177487354_1053041241.jpg?type=f212_212
+  [6] https://shop-phinf.pstatic.net/20250131_163/1738297368113TrBB5_JPEG/72430340175690010_456309112.jpg?type=f212_212
+  [7] https://shop-phinf.pstatic.net/20250623_114/1750663707849PjqC0_JPEG/5116480604823900_1201899683.jpg?type=f212_212
+  [8] https://shop-phinf.pstatic.net/20250801_87/1754013936731WfovP_JPEG/88146752862709483_1195956591.jpg?type=f212_212
+  [9] https://shop-phinf.pstatic.net/20250723_292/1753268493955cicPe_JPEG/91349351044829961_1415932716.jpg?type=f212_212
+  [10] https://shop-phinf.pstatic.net/20260224_141/1771913809736M5Bl4_PNG/22474583576869013_163182053.png?type=f212_212
+
+🔍 [2단계] URL 필터링...
+✅ [2단계] 통과: 47개 / 제거: 18개
+
+❌ 제거된 이미지:
+  [1] [GIF] https://shop-phinf.pstatic.net/20250722_246/17531842097043GVt8_GIF/11642883650889194_1509577152.gif?type=o1000
+  [2] [축소] https://shop-phinf.pstatic.net/20260130_232/1769747246115ygOON_JPEG/VXvr1tUx6q_01.jpg?type=f40
+  [3] [축소] https://shop-phinf.pstatic.net/20250520_16/1747724589827FO9sz_JPEG/16384024694740437_209208865.jpg?type=f40
+  [4] [축소] https://shop-phinf.pstatic.net/20250520_60/1747724752018o0r5m_JPEG/11391881135584519_818889536.jpg?type=f40
+  [5] [축소] https://shop-phinf.pstatic.net/20250520_123/1747724756235eAh78_JPEG/81857529345677129_1173632481.jpg?type=f40
+  [6] [축소] https://shop-phinf.pstatic.net/20250520_75/1747724762302NJVrl_JPEG/59017873339528670_349475240.jpg?type=f40
+  [7] [축소] https://shop-phinf.pstatic.net/20250520_25/1747724762863S1zCr_JPEG/59017873893512034_1378791407.jpg?type=f40
+  [8] [축소] https://shop-phinf.pstatic.net/20250520_12/1747724763350BbHKV_JPEG/59017874371767711_1330414115.jpg?type=f40
+  [9] [축소] https://shop-phinf.pstatic.net/20250520_217/1747724764040y8Us5_JPEG/59017875083998866_532020035.jpg?type=f40
+  [10] [축소] https://shop-phinf.pstatic.net/20250520_145/1747724775291bIlnn_JPEG/27710134323996023_650772060.jpg?type=f40
+  [11] [축소] https://shop-phinf.pstatic.net/20250520_116/1747724775815VQPIw_JPEG/27710134847754543_1684830235.jpg?type=f40
+  [12] [축소] https://profile-phinf.pstatic.net/404/default.png?type=f80_80
+  [13] [비제품 CDN] https://phinf.pstatic.net/contact/20171103_189/1509662488756IpmlO_PNG/image.png?type=f76_76
+  [14] [비제품 CDN] https://phinf.pstatic.net/contact/88/2014/7/24/jjl2222_1406177633899.jpg?type=f76_76
+  [15] [비제품 CDN] https://phinf.pstatic.net/contact/profile/blog/78/49/n3a3n3a.jpg?type=f76_76
+  [16] [비제품 CDN] https://phinf.pstatic.net/contact/20240421_292/1713688345072AAMJl_JPEG/profileImage.jpg?type=f76_76
+  [17] [비제품 CDN] https://phinf.pstatic.net/contact/20210222_186/1613995432356yMG0Y_PNG/avatar_profile.png?type=f76_76
+  [18] [비제품 CDN] https://phinf.pstatic.net/contact/20211126_88/1637901309649oMFB4_PNG/avatar_profile.png?type=f76_76
+
+🔬 [3단계] 픽셀 분석...
+✅ [3단계] 통과: 36개 / 추가 제거: 11개
+
+═══════════════════════════════════════════════════
+📊 최종: 65개 → 36개
+═══════════════════════════════════════════════════
+
+✅ 최종 깨끗한 이미지:
+  [1] https://shop-phinf.pstatic.net/20260202_70/1770019653504l8iER_PNG/%ED%94%84%EB%A6%AC%EB%AF%B8%EC%97%84%EC%8A%A4%ED%86%A0%EC%96%B4%EC%8A%B9%EA%B2%A93.png?type=w860
+  [2] https://shop-phinf.pstatic.net/20251222_208/1766371575212e7LdB_PNG/Group_19.png?type=w860
+  [3] https://shop-phinf.pstatic.net/20251222_170/1766371586526sAPk8_PNG/Group_16.png?type=w860
+  [4] https://shop-phinf.pstatic.net/20251215_296/1765789972233JLRzs_JPEG/99922803177487354_1053041241.jpg?type=f212_212
+  [5] https://shop-phinf.pstatic.net/20250131_163/1738297368113TrBB5_JPEG/72430340175690010_456309112.jpg?type=f212_212
+  [6] https://shop-phinf.pstatic.net/20250623_114/1750663707849PjqC0_JPEG/5116480604823900_1201899683.jpg?type=f212_212
+  [7] https://shop-phinf.pstatic.net/20250801_87/1754013936731WfovP_JPEG/88146752862709483_1195956591.jpg?type=f212_212
+  [8] https://shop-phinf.pstatic.net/20250723_292/1753268493955cicPe_JPEG/91349351044829961_1415932716.jpg?type=f212_212
+  [9] https://shop-phinf.pstatic.net/20260224_141/1771913809736M5Bl4_PNG/22474583576869013_163182053.png?type=f212_212
+  [10] https://shop-phinf.pstatic.net/20250728_297/1753678801317oR140_JPEG/80713143381849588_1843219806.jpg?type=f212_212
+  [11] https://shop-phinf.pstatic.net/20250701_2/1751354450010esFqg_JPEG/85487291239341227_1893281173.jpg?type=f212_212
+  [12] https://phinf.pstatic.net/checkout.phinf/20260225_120/1771984693170st5Fp_JPEG/1000031246.jpg?type=f300_300
+  [13] https://phinf.pstatic.net/checkout.phinf/20260222_58/1771735352956MTtvx_JPEG/1000042543.jpg?type=f300_300
+  [14] https://phinf.pstatic.net/checkout.phinf/20260202_134/17699978764109xnp1_JPEG/EC8BA0.jpg?type=f300_300
+  [15] https://phinf.pstatic.net/checkout.phinf/20260222_115/17717382128064Qj75_JPEG/IMG_1624.jpeg?type=f300_300
+  [16] https://shop-phinf.pstatic.net/20260107_221/1767747853056krmwE_PNG/22432876883740524_1424446885.png?type=f200
+  [17] https://shop-phinf.pstatic.net/20250930_21/1759201842947ezmtU_JPEG/74210336976015527_1279942917.jpg?type=f200
+  [18] https://shop-phinf.pstatic.net/20250718_191/1752805817966lK5Lb_JPEG/25751629101187673_325812329.jpg?type=f200
+  [19] https://shop-phinf.pstatic.net/20251210_16/1765339761100TUrhN_JPEG/91979852610444791_1945477809.jpg?type=f200
+  [20] https://shop-phinf.pstatic.net/20260122_260/1769063067425EuJcG_PNG/84078882284856751_1301668018.png?type=f200
+  [21] https://phinf.pstatic.net/checkout.phinf/20251223_90/1766417414167i0zTl_JPEG/1000066020.jpg?type=f300_300
+  [22] https://phinf.pstatic.net/checkout.phinf/20251225_244/1766621105028ILYB8_JPEG/9346.jpg?type=f300_300
+  [23] https://phinf.pstatic.net/checkout.phinf/20260219_128/1771470314137PKIlW_JPEG/1000000668.jpg?type=f300_300
+  [24] https://phinf.pstatic.net/checkout.phinf/20260222_9/1771747576163b1zcR_JPEG/1771747568436.jpg?type=f300_300
+  [25] https://phinf.pstatic.net/checkout.phinf/20260223_248/1771774459999fINmx_JPEG/1000009016.jpg?type=f300_300
+  [26] https://phinf.pstatic.net/checkout.phinf/20260225_221/1771983096848D4qzB_JPEG/1771983057441.jpg?type=f300_300
+  [27] https://phinf.pstatic.net/checkout.phinf/20260214_280/17710774971817XM0d_JPEG/1771077454036.jpg?type=f300_300
+  [28] https://phinf.pstatic.net/checkout.phinf/20260226_26/1772062937801B8dAl_JPEG/1772062918710.jpg?type=f300_300
+  [29] https://phinf.pstatic.net/checkout.phinf/20260225_80/1771996871533ig3TA_JPEG/1771996856857.jpg?type=f300_300
+  [30] https://phinf.pstatic.net/checkout.phinf/20260206_254/1770332996533D8mCQ_JPEG/tmp_3686754833156675891.jpg?type=f300_300
+  [31] https://phinf.pstatic.net/checkout.phinf/20260225_220/1771997773641llq6U_JPEG/ECA780EC9B90EC9DB4EC8BA0EBB09C.jpg?type=f300_300
+  [32] https://phinf.pstatic.net/checkout.phinf/20260210_170/1770730604227iUSyI_JPEG/1000023544.jpg?type=f300_300
+  [33] https://phinf.pstatic.net/checkout.phinf/20260219_222/1771437270880SSGsB_JPEG/IMG_7949.jpeg?type=f300_300
+  [34] https://phinf.pstatic.net/checkout.phinf/20260224_106/1771928917684dVmER_JPEG/1000019425.jpg?type=f300_300
+  [35] https://phinf.pstatic.net/checkout.phinf/20260225_260/1772013149505Uw3TS_JPEG/image.jpg?type=f300_300
+  [36] https://phinf.pstatic.net/checkout.phinf/20260225_268/1772013096938isgYM_JPEG/image.jpg?type=f300_300

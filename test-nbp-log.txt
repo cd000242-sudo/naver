@@ -1,0 +1,52 @@
+🍌 NanoBananaPro 이미지 생성 테스트 시작
+
+📁 설정 파일: C:\Users\박성현\AppData\Roaming\leword\settings.json
+✅ Gemini API 키: AIzaSyCZRo...
+
+📋 환경 정보:
+   모델 (Main): gemini-3-pro (기본)
+   모델 (Sub):  gemini-3-pro (기본)
+   스타일:      realistic (기본)
+   비율:        1:1 (기본)
+   플랜:        paid (기본)
+   금일 사용량:  0
+   저장 경로:   C:\Users\7BD1~1\AppData\Local\Temp\nanobananapro_test_1771471413326
+
+
+════════════════════════════════════════════════════════════
+🎨 테스트: realistic_test (스타일: realistic)
+════════════════════════════════════════════════════════════
+📝 프롬프트 (303자): Hyper-realistic professional photography, 8K UHD quality, DSLR camera, natural lighting, Fujifilm XT3 quality
+
+A beautiful spring scene in Korean cher...
+🚀 Gemini 3 Pro 호출 중... (모델: gemini-3-pro-image-preview)
+⚠️ 429 할당량 초과 (0.3초) → 키 로테이션 필요
+
+════════════════════════════════════════════════════════════
+🎨 테스트: stickman_test (스타일: stickman)
+════════════════════════════════════════════════════════════
+📝 프롬프트 (506자): Cute chibi cartoon character with oversized round white head much larger than body, simple black dot eyes, small expressive mouth, tiny simple body we...
+🚀 Gemini 3 Pro 호출 중... (모델: gemini-3-pro-image-preview)
+⚠️ 429 할당량 초과 (0.1초) → 키 로테이션 필요
+
+════════════════════════════════════════════════════════════
+📊 NanoBananaPro 테스트 결과
+════════════════════════════════════════════════════════════
+   성공: 0/2
+   실패: 2/2
+
+   ❌ realistic_test → 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3-pro-image
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3-pro-image
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3-pro-image
+Please retry in 25.394294586s.
+   ❌ stickman_test → 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3-pro-image
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3-pro-image
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3-pro-image
+Please retry in 24.273042631s.
+
+════════════════════════════════════════════════════════════
+⚠️ 2개 테스트 실패
+════════════════════════════════════════════════════════════
+

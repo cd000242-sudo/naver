@@ -71,6 +71,11 @@ export class ToastManager {
 
         if (!this.container) return;
 
+        // ✅ [2026-03-13] 에러 발생 시 오디오 알림(Beep) 추가
+        if (type === 'error') {
+            this.playErrorSound();
+        }
+
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
 
@@ -117,6 +122,34 @@ export class ToastManager {
             toast.style.transform = 'translateX(100%)';
             setTimeout(() => toast.remove(), 300);
         }, duration);
+    }
+
+    // ✅ [2026-03-13] 웹 오디오 API를 사용한 자체 에러 사운드(Beep) 발생기
+    private playErrorSound(): void {
+        try {
+            const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+            if (!AudioContextClass) return;
+            
+            const ctx = new AudioContextClass();
+            const osc = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            
+            // 삐- 소리 (Sine 파형, 800Hz)
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, ctx.currentTime);
+            
+            // 볼륨 조절 (시작: 0.1 -> 짧게 유지 후 페이드아웃)
+            gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+            
+            // 연결 및 0.3초 재생
+            osc.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.3);
+        } catch (error) {
+            console.warn('[ToastManager] 오디오 재생 실패:', error);
+        }
     }
 
     success(message: string, duration?: number): void {

@@ -1,16 +1,15 @@
 /**
  * 이미지 모델 설정 통합 테스트
- * - 기존 integrationTest.ts 패턴 준수
- * - 설정 저장/불러오기, 기본값, 프리셋, Edge Case 검증
+ * - 새 이미지 제공자(OpenAI Image, Leonardo AI)의 설정 저장/불러오기 검증
+ * - configManager와 생성기 간 설정 일관성 확인
  */
 
-import { loadConfig, saveConfig, type AppConfig } from '../configManager.js';
-import fs from 'fs/promises';
-import path from 'path';
-import { app } from 'electron';
+import { loadConfig, saveConfig, AppConfig } from '../configManager.js';
+import * as path from 'path';
+import * as fs from 'fs/promises';
 
 // ==========================================
-// 테스트 유틸리티 (기존 패턴)
+// 테스트 유틸리티
 // ==========================================
 
 interface TestResult {
@@ -23,8 +22,7 @@ interface TestResult {
 const testResults: TestResult[] = [];
 
 function logTest(step: string, success: boolean, message: string, details?: any) {
-    const result: TestResult = { step, success, message, details };
-    testResults.push(result);
+    testResults.push({ step, success, message, details });
     const icon = success ? '✅' : '❌';
     console.log(`${icon} [${step}] ${message}`);
     if (details && !success) {
@@ -37,38 +35,20 @@ function logTest(step: string, success: boolean, message: string, details?: any)
 // ==========================================
 
 const TEST_CONFIG: Partial<AppConfig> = {
-    falaiModel: 'flux-1.1-pro',
-    stabilityModel: 'stable-image-ultra',
-    nanoBananaMainModel: 'gemini-3-pro-4k',
-    nanoBananaSubModel: 'gemini-3-pro',
-    nanoBananaThumbnailModel: 'gemini-3-pro',
-    pollinationsModel: 'default',
+    openaiImageApiKey: 'test-openai-key',
+    leonardoaiApiKey: 'test-leonardo-key',
+    leonardoaiModel: 'phoenix-1.0',
     imagePreset: 'premium',
 };
 
-const DEFAULT_VALUES = {
-    falaiModel: 'flux-realism',
-    stabilityModel: 'sd35-large-turbo',
-    nanoBananaMainModel: 'gemini-3-pro',
-    nanoBananaSubModel: 'gemini-2.5-flash',
-    nanoBananaThumbnailModel: 'gemini-3-pro',
-    pollinationsModel: 'default',
+const BUDGET_PRESET: Partial<AppConfig> = {
+    leonardoaiModel: 'phoenix-1.0',
+    imagePreset: 'budget',
 };
 
-const BUDGET_PRESET = {
-    falaiModel: 'flux-schnell',
-    stabilityModel: 'sdxl-1.0',
-    nanoBananaMainModel: 'gemini-2.5-flash',
-    nanoBananaSubModel: 'gemini-2.5-flash',
-    nanoBananaThumbnailModel: 'gemini-2.5-flash',
-};
-
-const PREMIUM_PRESET = {
-    falaiModel: 'flux-1.1-pro',
-    stabilityModel: 'stable-image-ultra',
-    nanoBananaMainModel: 'gemini-3-pro-4k',
-    nanoBananaSubModel: 'gemini-3-pro',
-    nanoBananaThumbnailModel: 'gemini-3-pro-4k',
+const PREMIUM_PRESET: Partial<AppConfig> = {
+    leonardoaiModel: 'phoenix-1.0',
+    imagePreset: 'premium',
 };
 
 // ==========================================
@@ -90,11 +70,9 @@ async function testConfigSaveAndLoad(): Promise<boolean> {
 
         // 각 필드 검증
         const checks = [
-            { field: 'falaiModel', expected: TEST_CONFIG.falaiModel, actual: loadedConfig.falaiModel },
-            { field: 'stabilityModel', expected: TEST_CONFIG.stabilityModel, actual: loadedConfig.stabilityModel },
-            { field: 'nanoBananaMainModel', expected: TEST_CONFIG.nanoBananaMainModel, actual: loadedConfig.nanoBananaMainModel },
-            { field: 'nanoBananaSubModel', expected: TEST_CONFIG.nanoBananaSubModel, actual: loadedConfig.nanoBananaSubModel },
-            { field: 'nanoBananaThumbnailModel', expected: TEST_CONFIG.nanoBananaThumbnailModel, actual: loadedConfig.nanoBananaThumbnailModel },
+            { field: 'openaiImageApiKey', expected: TEST_CONFIG.openaiImageApiKey, actual: loadedConfig.openaiImageApiKey },
+            { field: 'leonardoaiApiKey', expected: TEST_CONFIG.leonardoaiApiKey, actual: loadedConfig.leonardoaiApiKey },
+            { field: 'leonardoaiModel', expected: TEST_CONFIG.leonardoaiModel, actual: loadedConfig.leonardoaiModel },
             { field: 'imagePreset', expected: TEST_CONFIG.imagePreset, actual: loadedConfig.imagePreset },
         ];
 
@@ -120,29 +98,25 @@ async function testDefaultValues(): Promise<boolean> {
     const step = '기본값 검증';
 
     try {
-        // 이미지 모델 관련 필드만 삭제 (다른 설정은 유지)
+        // 이미지 관련 필드만 삭제 (다른 설정은 유지)
         const currentConfig = await loadConfig();
         const cleanConfig: any = { ...currentConfig };
-        delete cleanConfig.falaiModel;
-        delete cleanConfig.stabilityModel;
-        delete cleanConfig.nanoBananaMainModel;
-        delete cleanConfig.nanoBananaSubModel;
-        delete cleanConfig.nanoBananaThumbnailModel;
-        delete cleanConfig.pollinationsModel;
+        delete cleanConfig.openaiImageApiKey;
+        delete cleanConfig.leonardoaiApiKey;
+        delete cleanConfig.leonardoaiModel;
 
         await saveConfig(cleanConfig);
 
-        // 다시 불러와서 기본값 확인 (생성기 코드에서 적용되는 기본값)
+        // 다시 불러와서 기본값 확인
         const loaded = await loadConfig();
 
-        // 기본값은 각 생성기에서 적용되므로, 여기서는 undefined 또는 빈 값 확인
-        const hasNoImageModelFields =
-            !loaded.falaiModel &&
-            !loaded.stabilityModel &&
-            !loaded.nanoBananaMainModel;
+        const hasNoImageFields =
+            !loaded.openaiImageApiKey &&
+            !loaded.leonardoaiApiKey &&
+            !loaded.leonardoaiModel;
 
-        if (hasNoImageModelFields) {
-            logTest(step, true, '이미지 모델 필드가 삭제됨 (생성기에서 기본값 적용됨)');
+        if (hasNoImageFields) {
+            logTest(step, true, '이미지 API 키 필드가 삭제됨 (생성기에서 기본값 적용됨)');
             return true;
         } else {
             logTest(step, false, '예상치 못한 값이 남아있음', { loaded });
@@ -161,18 +135,14 @@ async function testPresetBudget(): Promise<boolean> {
     const step = '가성비 프리셋';
 
     try {
-        // 가성비 프리셋 적용
         await saveConfig({
             ...BUDGET_PRESET,
-            imagePreset: 'budget',
         } as AppConfig);
 
         const loaded = await loadConfig();
 
         const checks = [
-            { field: 'falaiModel', expected: BUDGET_PRESET.falaiModel, actual: loaded.falaiModel },
-            { field: 'stabilityModel', expected: BUDGET_PRESET.stabilityModel, actual: loaded.stabilityModel },
-            { field: 'nanoBananaMainModel', expected: BUDGET_PRESET.nanoBananaMainModel, actual: loaded.nanoBananaMainModel },
+            { field: 'leonardoaiModel', expected: BUDGET_PRESET.leonardoaiModel, actual: loaded.leonardoaiModel },
             { field: 'imagePreset', expected: 'budget', actual: loaded.imagePreset },
         ];
 
@@ -198,19 +168,14 @@ async function testPresetPremium(): Promise<boolean> {
     const step = '고퀄리티 프리셋';
 
     try {
-        // 고퀄리티 프리셋 적용
         await saveConfig({
             ...PREMIUM_PRESET,
-            imagePreset: 'premium',
         } as AppConfig);
 
         const loaded = await loadConfig();
 
         const checks = [
-            { field: 'falaiModel', expected: PREMIUM_PRESET.falaiModel, actual: loaded.falaiModel },
-            { field: 'stabilityModel', expected: PREMIUM_PRESET.stabilityModel, actual: loaded.stabilityModel },
-            { field: 'nanoBananaMainModel', expected: PREMIUM_PRESET.nanoBananaMainModel, actual: loaded.nanoBananaMainModel },
-            { field: 'nanoBananaThumbnailModel', expected: PREMIUM_PRESET.nanoBananaThumbnailModel, actual: loaded.nanoBananaThumbnailModel },
+            { field: 'leonardoaiModel', expected: PREMIUM_PRESET.leonardoaiModel, actual: loaded.leonardoaiModel },
             { field: 'imagePreset', expected: 'premium', actual: loaded.imagePreset },
         ];
 
@@ -236,16 +201,13 @@ async function testInvalidModelName(): Promise<boolean> {
     const step = 'Edge Case: 잘못된 모델명';
 
     try {
-        // 잘못된 모델명 저장 시도
         await saveConfig({
-            falaiModel: 'invalid-model-name' as any,
-            stabilityModel: 'non-existent' as any,
+            leonardoaiModel: 'invalid-model-name' as any,
         } as AppConfig);
 
         const loaded = await loadConfig();
 
         // configManager는 값을 그대로 저장함 (생성기에서 fallback 처리)
-        // 여기서는 저장이 실패하지 않는지만 확인
         logTest(step, true, '잘못된 값도 저장됨 (생성기에서 fallback 처리)');
         return true;
     } catch (error: any) {
@@ -255,34 +217,37 @@ async function testInvalidModelName(): Promise<boolean> {
 }
 
 /**
- * 테스트 6: 생성기에서 설정 사용 확인 (로그 기반)
+ * 테스트 6: 생성기에서 설정 사용 확인 (모듈 임포트 기반)
  */
 async function testGeneratorUsesConfig(): Promise<boolean> {
     const step = '생성기 설정 사용';
 
     try {
-        // falaiGenerator, stabilityGenerator, nanoBananaProGenerator 가져오기
-        const { generateWithFalAI, isFalAIConfigured } = await import('../image/falaiGenerator.js');
-        const { generateWithStability } = await import('../image/stabilityGenerator.js');
+        // 새 생성기 모듈 가져오기 (존재 확인 용도)
+        const openaiModule = await import('../image/openaiImageGenerator.js');
+        const leonardoModule = await import('../image/leonardoAIGenerator.js');
+
+        // 함수 export 확인
+        const hasOpenAI = typeof openaiModule.generateWithOpenAIImage === 'function' &&
+            typeof openaiModule.generateSingleOpenAIImage === 'function';
+        const hasLeonardo = typeof leonardoModule.generateWithLeonardoAI === 'function' &&
+            typeof leonardoModule.generateSingleLeonardoAIImage === 'function';
 
         // 설정 저장
         await saveConfig({
-            falaiModel: 'flux-schnell',
-            stabilityModel: 'sd35-large-turbo',
+            leonardoaiModel: 'phoenix-1.0',
         } as AppConfig);
 
-        // 실제 API 호출 없이, 설정이 로드되는지만 확인
-        // (API 키가 없으면 에러 발생하므로 config만 로드)
         const loaded = await loadConfig();
+        const hasLeonardoSetting = loaded.leonardoaiModel === 'phoenix-1.0';
 
-        const hasFalaiSetting = loaded.falaiModel === 'flux-schnell';
-        const hasStabilitySetting = loaded.stabilityModel === 'sd35-large-turbo';
-
-        if (hasFalaiSetting && hasStabilitySetting) {
-            logTest(step, true, '생성기 테스트용 설정 저장 확인됨');
+        if (hasOpenAI && hasLeonardo && hasLeonardoSetting) {
+            logTest(step, true, '모든 생성기 모듈 임포트 및 설정 확인됨');
             return true;
         } else {
-            logTest(step, false, '설정이 예상과 다름', { loaded });
+            logTest(step, false, '생성기 모듈 또는 설정이 예상과 다름', {
+                hasOpenAI, hasLeonardo, hasLeonardoSetting
+            });
             return false;
         }
     } catch (error: any) {

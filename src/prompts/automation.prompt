@@ -23,7 +23,7 @@
       "title": "소제목 1 (주제와 '앵글'이 결합된 매력적인 문장)",
       "content": "본문 내용 (4~5문장, 구체적 문단, ~해요체 사용)",
       "keywords": ["핵심키워드"],
-      "imagePrompt": "해당 소제목 내용을 표현하는 이미지 프롬프트 (영문 서술형)"
+      "imagePrompt": "ENGLISH ONLY image prompt (40 words max). Describe the SPECIFIC scene from the content: mention exact objects, products, body parts, symptoms, locations, or actions discussed. Example: 'Korean woman applying omega-3 cream on her dog flaky back, indoor winter scene, close-up' NOT '강아지 피부 관리 이미지'. MUST be in English. NO Korean characters allowed."
     },
     {
       "title": "소제목 2",
@@ -81,8 +81,13 @@
      • "사건 개요", "제품 특징", "결론", "사용포인트 1", "사용포인트 2" 같은 빠하고 딱딱한 레이블형/번호형 소제목 절대 금지.
      • "포인트 N", "특징 N", "장점 N" 같은 단순 번호 패턴도 금지. 구체적인 내용을 담아야 한다.
      • 소제목 자체가 하나의 '미니 제목'처럼 궁금증을 유발해야 한다. (예: "제품 특징" → "실사용자가 말하는 '의외의 발열' 포인트")
-     • [Critical] 소제목 길이 제한: 최대 30자 이내. 문장형(~입니다/~했어요/~놔말어요) 종결은 금지.
-     • [形식] 명사구 또는 짧은 절: "신민아, 결혼 20일 만에 차기작 소식", "책상 정리 5단계 방법" 처럼 긄냄.
+     • [Critical] 소제목 길이 제한: 최대 30자 이내.
+     • ⛔ [Critical] 소제목 어미 종결 절대 금지 — 소제목은 반드시 명사/명사구로 끝내라:
+       ❌ ~요 계열: ~해요, ~았어요, ~네요, ~거든요, ~더라고요, ~잖아요
+       ❌ ~다/~까 계열: ~했다, ~이다, ~할까, ~일까
+       ❌ ~입니다, ~합니다
+       ✅ 명사형으로 끊기: "3주 만에 달라진 수면 패턴" / "직접 비교한 소음 차이" / "예상 밖 가성비의 정체"
+     • [形식] 명사구 또는 짧은 절: "신민아, 결혼 20일 만에 차기작 소식", "책상 정리 5단계 방법" 처럼 끊기.
      • 1번 소제목은 반드시 메인 주제(인물/상품명)로 시작할 것.
    - ⚠️ [중요] 소제목과 본문 첫 문장의 중복 방지: 소제목에서 던진 말을 본문 첫 줄에서 그대로 반복하지 마라.
    - 문체는 반드시 "~해요", "~했답니다" 등 구어체를 사용하라.

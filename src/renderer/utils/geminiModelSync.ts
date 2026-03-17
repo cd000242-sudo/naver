@@ -21,8 +21,8 @@ export function initGeminiModelSync(): void {
         if (applying) return;
         applying = true;
         try {
-            // ✅ Gemini 3 Flash를 기본값으로 원복
-            const v = String(value || '').trim() || 'gemini-3-flash-preview';
+            // ✅ [2026-02-27] Gemini 2.5 Flash를 기본값으로 설정
+            const v = String(value || '').trim() || 'gemini-2.5-flash';
             if (unifiedSel && unifiedSel.value !== v) unifiedSel.value = v;
             if (settingsSel && settingsSel.value !== v) settingsSel.value = v;
         } finally {
@@ -33,9 +33,9 @@ export function initGeminiModelSync(): void {
     (async () => {
         try {
             const cfg = await window.api.getConfig();
-            applyValue((cfg as any)?.geminiModel || 'gemini-3-flash-preview');
+            applyValue((cfg as any)?.geminiModel || 'gemini-2.5-flash');
         } catch {
-            applyValue('gemini-3-flash-preview');
+            applyValue('gemini-2.5-flash');
         }
     })();
 
@@ -44,7 +44,7 @@ export function initGeminiModelSync(): void {
             const cfg = await window.api.getConfig();
             await window.api.saveConfig({
                 ...(cfg || {}),
-                geminiModel: String(value || '').trim() || 'gemini-3-flash-preview',
+                geminiModel: String(value || '').trim() || 'gemini-2.5-flash',
             });
         } catch (err) {
             console.error('[GeminiModelSync] saveConfig failed:', err);
@@ -52,13 +52,13 @@ export function initGeminiModelSync(): void {
     };
 
     unifiedSel?.addEventListener('change', async () => {
-        const v = String(unifiedSel.value || '').trim() || 'gemini-3-flash-preview';
+        const v = String(unifiedSel.value || '').trim() || 'gemini-2.5-flash';
         applyValue(v);
         await persist(v);
     });
 
     settingsSel?.addEventListener('change', async () => {
-        const v = String(settingsSel.value || '').trim() || 'gemini-3-flash-preview';
+        const v = String(settingsSel.value || '').trim() || 'gemini-2.5-flash';
         applyValue(v);
         await persist(v);
     });

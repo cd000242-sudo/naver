@@ -14,13 +14,16 @@ import {
   generateProductSpecTableImage,
   generateProsConsTableImage,
   extractSpecsFromContent,
-  extractProsConsFromContent,
   generateCtaBannerImage,
   generateTableFromUrl // ✅ [추가] 제휴 링크에서 직접 스펙 크롤링
 } from './image/tableImageGenerator.js';
+import { extractProsConsWithGemini } from './image/geminiTableExtractor.js';
 import { browserSessionManager, type SessionInfo } from './browserSessionManager.js';
 import { withRetry, findWithFallback, clickWithRetry, navigateWithRetry, isRetryableError } from './errorRecovery.js';
 import { createGhostCursor, safeClick, safeType, safeClickInFrame, waitRandom, randomMouseMovement, type GhostCursor } from './ghostCursorHelper.js';
+import * as imageHelpers from './automation/imageHelpers';
+import * as publishHelpers from './automation/publishHelpers';
+import * as editorHelpers from './automation/editorHelpers';
 
 // ✅ 쇼핑커넥트 모드 전용 강력한 후킹 메시지 (구매 전환 극대화)
 const SHOPPING_HOOKS = [
@@ -54,6 +57,18 @@ function extractCoreKeywords(text: string): string[] {
   return sortedWords.slice(0, 1);
 }
 
+// ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
+// page.keyboard.type()으로 한 글자씩 타이핑하면 네이버 스마트 에디터가
+// 특정 단어 패턴을 감지하여 자동완성 팝업을 표시 → Escape으로 즉시 닫기
+async function safeKeyboardType(
+  page: Page,
+  text: string,
+  options?: { delay?: number }
+): Promise<void> {
+  await page.keyboard.type(text, options);
+  await page.keyboard.press('Escape').catch(() => { });
+}
+
 // ✅ [Smart Typing] 스마트 타이핑 함수 (핵심 키워드 자동 굵게+밑줄)
 async function smartTypeWithAutoHighlight(
   page: Page,
@@ -73,7 +88,7 @@ async function smartTypeWithAutoHighlight(
 
     if (!enableHighlight) {
       // 하이라이트 비활성화 시 일반 타이핑
-      await page.keyboard.type(text, { delay: baseDelay });
+      await safeKeyboardType(page, text, { delay: baseDelay });
       return;
     }
 
@@ -83,7 +98,7 @@ async function smartTypeWithAutoHighlight(
     // ✅ 키워드가 없으면 일반 타이핑으로 폴백
     if (!keywords || keywords.length === 0) {
       console.log("⚠️ [SmartType] 키워드 없음, 일반 타이핑으로 진행");
-      await page.keyboard.type(text, { delay: baseDelay });
+      await safeKeyboardType(page, text, { delay: baseDelay });
       return;
     }
 
@@ -98,7 +113,7 @@ async function smartTypeWithAutoHighlight(
 
       // 랜덤 딜레이 (baseDelay ~ baseDelay+50ms)
       const delay = Math.floor(Math.random() * 50) + baseDelay;
-      await page.keyboard.type(part, { delay });
+      await safeKeyboardType(page, part, { delay });
 
       // ✅ [2026-01-16] IME 입력 완료 대기 (한글 씹힘/잘림 방지)
       // 한글은 조합형 문자라 타이핑 직후 바로 커서를 움직이면 마지막 글자가 사라지거나 꼬일 수 있음
@@ -139,7 +154,7 @@ async function smartTypeWithAutoHighlight(
     console.error("[SmartType] 타이핑 중 오류:", e);
     // 폴백: 일반 타이핑
     try {
-      await page.keyboard.type(text, { delay: baseDelay });
+      await safeKeyboardType(page, text, { delay: baseDelay });
     } catch (fallbackErr) {
       console.error("[SmartType] 폴백 타이핑도 실패:", fallbackErr);
     }
@@ -249,6 +264,7 @@ interface ResolvedRunOptions {
   isFullAuto?: boolean; // ✅ 추가: 풀오토 모드 여부
   previousPostTitle?: string; // ✅ 추가: 같은 카테고리 이전글 제목
   previousPostUrl?: string; // ✅ 추가: 같은 카테고리 이전글 URL
+  thumbnailPath?: string; // ✅ [2026-03-03 FIX] 추가: 대표사진 경로
   customBannerPath?: string; // ✅ [2026-01-18] 추가: 커스텀 CTA 배너 이미지 경로
   useAiTableImage?: boolean; // ✅ [2026-01-18] 추가: 장단점 표 AI 이미지 생성 여부
   useAiBanner?: boolean; // ✅ [2026-01-18] 추가: CTA 배너 AI 이미지 생성 여부
@@ -264,6 +280,7 @@ export class NaverBlogAutomation {
   private browser: Browser | null = null;
   private mainFrame: Frame | null = null;
   private cancelRequested = false;
+  private _prosConsAlreadyInserted = false; // ✅ [2026-02-19] 장단점 표 중복 삽입 방지 플래그
 
   // ✅ Ghost Cursor 인스턴스 (사람 같은 마우스 이동)
   private cursor: GhostCursor | null = null;
@@ -293,7 +310,11 @@ export class NaverBlogAutomation {
   private readonly CONFIRM_PUBLISH_SELECTORS = [
     'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"]',
     'button[data-testid="seOnePublishBtn"]',
+    'button[data-click-area="tpb*i.publish"]',
     'button.confirm_btn__WEaBq',
+    // ✅ [2026-03-05] 네이버 CSS 모듈 해시 변경 대응 — 와일드카드 패턴
+    'button[class*="confirm_btn"][data-testid="seOnePublishBtn"]',
+    'button[class*="confirm_btn"]',
   ];
 
   private readonly LOGIN_BUTTON_SELECTORS = [
@@ -506,8 +527,8 @@ export class NaverBlogAutomation {
             if (el && typeof el.focus === 'function') {
               el.focus();
             }
-          } catch {
-            // ignore
+          } catch (e) {
+            console.warn('[naverBlogAutomation] catch ignored:', e);
           }
         })
         .catch(() => undefined);
@@ -556,8 +577,8 @@ export class NaverBlogAutomation {
         await page.keyboard.down('Control');
         await page.keyboard.press('KeyB');
         await page.keyboard.up('Control');
-      } catch {
-        // ignore
+      } catch (e) {
+        console.warn('[naverBlogAutomation] catch ignored:', e);
       }
     } catch (error) {
       this.log(`⚠️ 굵게(Bold) 설정 실패 (무시하고 계속): ${(error as Error).message}`);
@@ -633,6 +654,230 @@ export class NaverBlogAutomation {
     return Boolean(commandState);
   }
 
+  // ✅ [2026-02-19] 카테고리 자동 선택 — 스톨 방지 최적화 버전
+  // 통합 CSS 쿼리, 전체 15초 타임아웃, ESC 정리 일관성
+  private async selectCategoryInPublishModal(frame: Frame, page: Page): Promise<void> {
+    return await publishHelpers.selectCategoryInPublishModal(this, frame, page);
+  }
+
+  // ✅ [2026-02-09] 카테고리 디버그 - 발행 모달의 DOM 구조 로그
+  private async debugCategoryElements(frame: Frame, page: Page): Promise<void> {
+    return await publishHelpers.debugCategoryElements(this, frame, page);
+  }
+
+  // ✅ [2026-02-14] 기기 등록 URL 패턴 감지 헬퍼
+  private isDeviceConfirmUrl(url: string): boolean {
+    const lower = url.toLowerCase();
+    return ['deviceconfirm', 'device_confirm', 'new_device', 'register_device', 'devicereg']
+      .some(p => lower.includes(p));
+  }
+
+  // ✅ [2026-02-14] 기기 등록 페이지 감지 (URL + 페이지 텍스트 이중 검사)
+  private async isDeviceConfirmPage(page: Page): Promise<boolean> {
+    // 1차: URL 패턴
+    if (this.isDeviceConfirmUrl(page.url())) return true;
+    // 2차: 페이지 텍스트 기반 (URL 변경 시에도 동작)
+    const text = await page.evaluate(() => document.body?.innerText || '').catch(() => '');
+    return (text.includes('새로운 기기') && text.includes('등록')) ||
+      (text.includes('기기를 등록하면') && text.includes('알림'));
+  }
+
+  // ✅ [2026-03-07] 기기 등록 화면 자동 처리 — "등록" 클릭
+  // 검증된 실제 DOM 구조 (Playwright 스냅샷 2026-03-07):
+  //   URL: nid.naver.com/login/ext/deviceConfirm
+  //   <fieldset> (group "새로운 기기 등록")
+  //     <a href="#">등록</a>      ← 첫 번째 링크
+  //     <a href="#">등록안함</a>   ← 두 번째 링크
+  //   </fieldset>
+  //   ※ ID 셀렉터 없음 (#new.save, #new.dontsave 존재하지 않음)
+  // 계정별 독립 프로필(userDataDir) 사용 → 기기 등록이 안전
+  // "등록안함" 시 미등록 기기로 남아 보호조치 발동 위험 ↑
+  private async handleDeviceConfirmPage(page: Page): Promise<boolean> {
+    this.log('📱 기기 등록 페이지 감지 → 자동으로 "등록" 클릭 (신뢰 기기 등록)...');
+    try {
+      // 페이지 로드 대기 (링크가 렌더링될 때까지)
+      await page.waitForSelector('fieldset a, a', { timeout: 5000 }).catch(() => null);
+      await this.delay(500);
+
+      // ═══════════════════════════════════════════════════
+      // 1단계: 텍스트 정확 매칭 (가장 신뢰도 높음)
+      // 실제 DOM: <a href="#">등록</a> (텍스트가 정확히 "등록")
+      // ═══════════════════════════════════════════════════
+      const clicked = await page.evaluate(() => {
+        const allLinks = document.querySelectorAll('a, button');
+        // 1차: 정확한 '등록' 매칭 (텍스트가 오직 "등록"인 경우)
+        for (const el of allLinks) {
+          const text = (el.textContent || '').trim();
+          if (text === '등록') {
+            (el as HTMLElement).click();
+            return 'exact';
+          }
+        }
+        // 2차: '등록하기', '기기 등록' 등 변형 (안함/안 함 제외)
+        for (const el of allLinks) {
+          const text = (el.textContent || '').trim();
+          if ((text === '기기 등록' || text === '기기등록' || text === '등록하기') &&
+            !text.includes('안함') && !text.includes('안 함')) {
+            (el as HTMLElement).click();
+            return 'variant';
+          }
+        }
+        return null;
+      }).catch(() => null);
+
+      if (clicked) {
+        this.log(`✅ "등록" 클릭 성공! (텍스트 매칭: ${clicked})`);
+        await this.delay(2000);
+        return true;
+      }
+
+      // ═══════════════════════════════════════════════════
+      // 2단계: fieldset 내 첫 번째 <a> 클릭
+      // 검증된 구조: 등록=첫 번째, 등록안함=두 번째
+      // ═══════════════════════════════════════════════════
+      const fieldsetClick = await page.evaluate(() => {
+        const fieldset = document.querySelector('fieldset');
+        if (fieldset) {
+          const links = fieldset.querySelectorAll('a');
+          if (links.length >= 2) {
+            const firstText = (links[0].textContent || '').trim();
+            if (!firstText.includes('안함') && !firstText.includes('안 함')) {
+              (links[0] as HTMLElement).click();
+              return `fieldset-first: "${firstText}"`;
+            }
+          }
+          // 단일 링크인 경우
+          if (links.length === 1) {
+            (links[0] as HTMLElement).click();
+            return `fieldset-only: "${(links[0].textContent || '').trim()}"`;
+          }
+        }
+        return null;
+      }).catch(() => null);
+
+      if (fieldsetClick) {
+        this.log(`✅ "등록" 클릭 성공! (${fieldsetClick})`);
+        await this.delay(2000);
+        return true;
+      }
+
+      // ═══════════════════════════════════════════════════
+      // 3단계: 최후 폴백 — "등록" 포함 + "안함" 미포함 링크
+      // ═══════════════════════════════════════════════════
+      const lastResort = await page.evaluate(() => {
+        const allLinks = document.querySelectorAll('a');
+        for (const el of allLinks) {
+          const text = (el.textContent || '').trim();
+          if (text.includes('등록') && !text.includes('안함') && !text.includes('안 함') &&
+            !text.includes('하지') && text.length < 15) {
+            (el as HTMLElement).click();
+            return `partial: "${text}"`;
+          }
+        }
+        return null;
+      }).catch(() => null);
+
+      if (lastResort) {
+        this.log(`✅ "등록" 클릭 성공! (폴백: ${lastResort})`);
+        await this.delay(2000);
+        return true;
+      }
+
+      this.log('⚠️ "등록" 버튼을 찾지 못했습니다. 수동으로 클릭해주세요.');
+      const debugInfo = await page.evaluate(() => {
+        const els = document.querySelectorAll('a, button');
+        return Array.from(els).map(el => `[${el.tagName}] "${(el.textContent || '').trim()}" id=${el.id}`).join(' | ');
+      }).catch(() => '');
+      this.log(`   🔍 페이지 요소: ${debugInfo}`);
+      return false;
+    } catch (err) {
+      this.log(`⚠️ 기기 등록 화면 처리 실패: ${(err as Error).message}`);
+      return false;
+    }
+  }
+
+  // ✅ [2026-02-09] 2단계 인증 페이지 감지 및 자동 처리
+  // - "이 브라우저는 2단계 인증 없이 로그인합니다" 체크박스 자동 체크
+  // - 사용자가 네이버 앱에서 승인할 때까지 대기
+  private async handleTwoFactorAuthPage(page: Page, alreadyNotified: boolean = false): Promise<boolean> {
+    try {
+      // 2단계 인증 페이지 여부 확인 (페이지 텍스트 기반)
+      const is2FA = await page.evaluate(() => {
+        const bodyText = document.body.innerText || '';
+        return (bodyText.includes('2단계 인증') &&
+          (bodyText.includes('알림 발송') || bodyText.includes('인증요청') ||
+            bodyText.includes('인증 알림') || bodyText.includes('승인하시겠습니까')));
+      }).catch(() => false);
+
+      if (!is2FA) return false;
+
+      if (!alreadyNotified) {
+        this.log('');
+        this.log('🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐');
+        this.log('📱  2단계 인증 페이지 감지!');
+        this.log('📲  네이버 앱에서 인증을 승인해주세요!');
+        this.log('⏳  승인 후 자동으로 진행됩니다.');
+        this.log('🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐');
+        this.log('');
+
+        // ✅ "이 브라우저는 2단계 인증 없이 로그인합니다" 체크박스 자동 체크
+        const checkedSkip = await page.evaluate(() => {
+          // 방법 1: 표준 checkbox
+          const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+          for (const cb of checkboxes) {
+            const parent = cb.closest('label') || cb.parentElement;
+            const nearbyText = parent?.textContent || '';
+            if (nearbyText.includes('2단계') && nearbyText.includes('없이')) {
+              if (!(cb as HTMLInputElement).checked) {
+                (cb as HTMLInputElement).click();
+              }
+              return 'checkbox';
+            }
+          }
+          // 방법 2: 텍스트 기반 클릭 (커스텀 체크박스)
+          const allEls = document.querySelectorAll('label, span, div, a, button, p');
+          for (const el of allEls) {
+            const text = (el.textContent || '').trim();
+            if (text.includes('2단계') && text.includes('없이') && text.includes('로그인')) {
+              const innerCb = el.querySelector('input[type="checkbox"]');
+              if (innerCb) {
+                if (!(innerCb as HTMLInputElement).checked) {
+                  (innerCb as HTMLInputElement).click();
+                }
+                return 'inner-checkbox';
+              }
+              (el as HTMLElement).click();
+              return 'element-click';
+            }
+          }
+          return null;
+        }).catch(() => null);
+
+        if (checkedSkip) {
+          this.log(`✅ "이 브라우저는 2단계 인증 없이 로그인" 자동 체크! (${checkedSkip})`);
+        } else {
+          this.log('ℹ️ 체크박스를 찾지 못했습니다 (이미 체크됐거나 없는 페이지)');
+        }
+
+        // Windows 소리 알림 (3번)
+        try {
+          const { exec } = await import('child_process');
+          exec('powershell -c "1..3 | ForEach-Object { (New-Object Media.SoundPlayer \\\"C:\\Windows\\Media\\notify.wav\\\").PlaySync(); Start-Sleep -Milliseconds 500 }"');
+        } catch { /* ignore */ }
+
+        // progressCallback으로 UI 알림
+        if (this.progressCallback) {
+          this.progressCallback(0, 100, '📱 2단계 인증! 네이버 앱에서 승인해주세요!');
+        }
+      }
+
+      return true;
+    } catch (err) {
+      this.log(`⚠️ 2단계 인증 처리 중 오류: ${(err as Error).message}`);
+      return false;
+    }
+  }
+
   // ✅ 수동 로그인 대기 함수 (페이지 이동 없이 현재 URL만 확인)
   private async waitForManualLogin(page: Page, maxWaitMs: number = 600000): Promise<void> {
     const startTime = Date.now();
@@ -649,75 +894,16 @@ export class NaverBlogAutomation {
       // 현재 페이지 URL만 확인 (페이지 이동 없이!)
       const currentUrl = page.url();
 
-      // ✅ [2026-01-23 FIX] 기기 등록 화면 자동 처리 (다중계정 발행 중단 방지)
-      if (currentUrl.includes('deviceConfirm') || currentUrl.includes('device_confirm')) {
-        this.log('🔐 기기 등록 화면 감지! "등록안함" 버튼 자동 클릭 시도...');
-        try {
-          // "등록안함" 버튼 클릭 시도 (네이버 기기 등록 화면 전용)
-          const skipButtonSelectors = [
-            // ✅ 네이버 기기 등록 화면 전용 셀렉터
-            'button.btn_refuse',                    // 등록안함 버튼 (기본)
-            'a.btn_refuse',
-            'button.btn_secondary',                 // 보조 버튼
-            'a.btn_secondary',
-            '.btn_area button:last-child',          // 버튼 영역의 마지막 버튼
-            '.btn_area a:last-child',
-            'button[class*="refuse"]',
-            'a[class*="refuse"]',
-            // 기존 셀렉터
-            'button.btn_cancel',
-            'a.btn_cancel',
-            '[class*="cancel"]',
-            'button[type="button"]:not([class*="primary"]):not([class*="confirm"])',
-            '.btn_type2:not(.btn_type1)',
-            // 네이버 보안 화면 스타일
-            '.security_btn button:not(.btn_primary)',
-            '.security_btn a:not(.btn_primary)',
-            'form button + button',                  // 폼 내 두 번째 버튼
-            'form a + a',
-          ];
+      // ✅ [2026-02-14] 기기 등록 화면 자동 처리 (URL + 페이지 텍스트 이중 감지)
+      if (await this.isDeviceConfirmPage(page)) {
+        await this.handleDeviceConfirmPage(page);
+        continue;
+      }
 
-          let clicked = false;
-          for (const selector of skipButtonSelectors) {
-            try {
-              const btn = await page.$(selector);
-              if (btn) {
-                await btn.click();
-                this.log('✅ "등록안함" 버튼 클릭 성공!');
-                clicked = true;
-                await this.delay(2000);
-                break;
-              }
-            } catch {
-              // 다음 셀렉터 시도
-            }
-          }
-
-          // 버튼을 찾지 못한 경우 텍스트 기반 검색
-          if (!clicked) {
-            const skipClicked = await page.evaluate(() => {
-              const buttons = Array.from(document.querySelectorAll('button, a'));
-              for (const btn of buttons) {
-                const text = (btn as HTMLElement).innerText || '';
-                if (text.includes('등록안함') || text.includes('취소') || text.includes('나중에')) {
-                  (btn as HTMLElement).click();
-                  return true;
-                }
-              }
-              return false;
-            });
-
-            if (skipClicked) {
-              this.log('✅ 텍스트 기반 "등록안함" 버튼 클릭 성공!');
-              await this.delay(2000);
-            } else {
-              this.log('⚠️ "등록안함" 버튼을 찾지 못했습니다. 사용자가 직접 처리해주세요.');
-            }
-          }
-        } catch (err) {
-          this.log(`⚠️ 기기 등록 화면 처리 실패: ${(err as Error).message}`);
-        }
-        continue; // 다음 반복에서 URL 다시 체크
+      // ✅ [2026-02-09] 2단계 인증 페이지 자동 처리
+      const is2FAManual = await this.handleTwoFactorAuthPage(page);
+      if (is2FAManual) {
+        continue;
       }
 
       // 로그인 페이지가 아니고, 블로그 페이지에 도착했으면 성공
@@ -781,11 +967,83 @@ export class NaverBlogAutomation {
     });
   }
 
+  /**
+   * ✅ [2026-02-03] 링크 카드(OG Preview)가 로딩될 때까지 polling 대기
+   * URL 입력 후 네이버 에디터가 자동으로 생성하는 링크 카드를 감지합니다.
+   * @param timeoutMs - 최대 대기 시간 (기본 15초)
+   * @param pollIntervalMs - polling 간격 (기본 500ms)
+   * @returns 링크 카드가 발견되면 true, 타임아웃되면 false
+   */
+  private async waitForLinkCard(timeoutMs: number = 15000, pollIntervalMs: number = 500): Promise<boolean> {
+    const startTime = Date.now();
+    const frame = await this.getAttachedFrame();
+
+    // 링크 카드가 생성되기 전의 링크 카드 개수를 먼저 확인
+    const initialCount = await frame.evaluate(() => {
+      const selectors = [
+        '.se-oglink',
+        '.se-module-oglink',
+        '.se-oembed',
+        '.se-module-oembed',
+        '.se-link-preview',
+        '[data-module="oglink"]',
+        '[class*="oglink"]',
+        '[class*="oembed"]',
+        '.se-section-oglink',
+      ];
+      let count = 0;
+      for (const sel of selectors) {
+        count += document.querySelectorAll(sel).length;
+      }
+      return count;
+    }).catch(() => 0);
+
+    this.log(`   🔍 링크 카드 polling 시작 (현재 ${initialCount}개, 최대 ${timeoutMs / 1000}초 대기)`);
+
+    while (Date.now() - startTime < timeoutMs) {
+      this.ensureNotCancelled();
+
+      const currentCount = await frame.evaluate(() => {
+        const selectors = [
+          '.se-oglink',
+          '.se-module-oglink',
+          '.se-oembed',
+          '.se-module-oembed',
+          '.se-link-preview',
+          '[data-module="oglink"]',
+          '[class*="oglink"]',
+          '[class*="oembed"]',
+          '.se-section-oglink',
+        ];
+        let count = 0;
+        for (const sel of selectors) {
+          count += document.querySelectorAll(sel).length;
+        }
+        return count;
+      }).catch(() => 0);
+
+      if (currentCount > initialCount) {
+        const elapsed = Math.round((Date.now() - startTime) / 100) / 10;
+        this.log(`   ✅ 링크 카드 감지 완료! (${elapsed}초 소요, ${initialCount} → ${currentCount}개)`);
+        // 렌더링 완료를 위한 추가 대기
+        await this.delay(500);
+        return true;
+      }
+
+      await this.delay(pollIntervalMs);
+    }
+
+    // 타임아웃 - 링크 카드가 생성되지 않음 (네트워크 느림 또는 유효하지 않은 URL)
+    this.log(`   ⚠️ 링크 카드 로딩 타임아웃 (${timeoutMs / 1000}초) - 계속 진행합니다`);
+    return false;
+  }
+
   private ensureNotCancelled(): void {
     if (this.cancelRequested) {
       throw new Error('사용자가 자동화를 취소했습니다.');
     }
   }
+
 
   private async normalizeSpacingAfterLastImage(frame: Frame, allowedEmptyBlocks: number = 1): Promise<void> {
     try {
@@ -982,9 +1240,22 @@ export class NaverBlogAutomation {
   private resolveRunOptions(runOptions: RunOptions): ResolvedRunOptions {
     const structured = runOptions.structuredContent;
 
-    // 입력 검증
-    if (runOptions.scheduleDate && !/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(runOptions.scheduleDate)) {
-      throw new Error('예약발행 날짜 형식이 올바르지 않습니다. (YYYY-MM-DD HH:mm 형식)');
+    // ✅ [2026-03-11 FIX] 입력 검증 - publishMode 연동 + 날짜/시간 분리 전달 자동 결합
+    if (runOptions.scheduleDate) {
+      // publishMode가 schedule이 아닌데 scheduleDate가 있으면 무시 (즉시발행 시 잔존값 방지)
+      if (runOptions.publishMode !== 'schedule' && runOptions.publishMode !== 'draft') {
+        runOptions.scheduleDate = undefined;
+      } else {
+        // T구분자를 공백으로 정규화 (예: "2026-02-19T10:30" → "2026-02-19 10:30")
+        runOptions.scheduleDate = runOptions.scheduleDate.replace('T', ' ');
+        // 날짜만 있고 시간이 없으면 scheduleTime에서 결합 (분리 전달 호환)
+        if (/^\d{4}-\d{2}-\d{2}$/.test(runOptions.scheduleDate) && (runOptions as any).scheduleTime) {
+          runOptions.scheduleDate = `${runOptions.scheduleDate} ${(runOptions as any).scheduleTime}`;
+        }
+        if (!/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(runOptions.scheduleDate)) {
+          throw new Error('예약발행 날짜 형식이 올바르지 않습니다. (YYYY-MM-DD HH:mm 형식)');
+        }
+      }
     }
 
     const ctasFromInput = Array.isArray(runOptions.ctas) ? runOptions.ctas : [];
@@ -1083,9 +1354,9 @@ export class NaverBlogAutomation {
       ctaPosition: runOptions.ctaPosition || 'bottom', // 기본값: 하단
       skipCta: runOptions.skipCta || false, // ✅ CTA 없이 발행하기
       images: runOptions.images ?? [],
-      publishMode: runOptions.publishMode ?? 'draft',
+      publishMode: runOptions.publishMode ?? 'publish', // ✅ [2026-03-10 FIX] 기본값을 즉시발행으로 변경
       scheduleDate: runOptions.scheduleDate,
-      scheduleType: runOptions.scheduleType || 'app-schedule', // 기본값: 앱 스케줄 관리
+      scheduleType: runOptions.scheduleType || 'naver-server', // ✅ [2026-02-07 FIX] 기본값: 네이버 서버 예약 (app-schedule은 미구현)
       scheduleMethod: runOptions.scheduleMethod || 'datetime-local', // 기본값: datetime-local
       skipImages: runOptions.skipImages ?? false,
       imageMode: runOptions.imageMode,
@@ -1106,6 +1377,7 @@ export class NaverBlogAutomation {
       isFullAuto: runOptions.isFullAuto ?? false, // ✅ 풀오토 모드 전달
       previousPostTitle: runOptions.previousPostTitle, // ✅ 같은 카테고리 이전글 제목
       previousPostUrl: runOptions.previousPostUrl, // ✅ 같은 카테고리 이전글 URL
+      thumbnailPath: runOptions.thumbnailPath, // ✅ [2026-03-03 FIX] 대표사진 경로 전달
     };
   }
 
@@ -1562,6 +1834,19 @@ export class NaverBlogAutomation {
       this.page.setDefaultNavigationTimeout(this.options.navigationTimeoutMs ?? 60000);
       this.page.setDefaultTimeout(60000);
 
+      // ✅ [2026-03-12 FIX] beforeunload 다이얼로그 자동 수락
+      // 네이버 에디터에서 페이지 떠날 때 "사이트에서 나가시겠습니까?" 팝업 방지
+      this.page.on('dialog', async (dialog) => {
+        const type = dialog.type();
+        const message = dialog.message();
+        this.log(`🔔 다이얼로그 자동 수락: [${type}] ${message.substring(0, 50)}`);
+        try {
+          await dialog.accept();
+        } catch (e) {
+          // 이미 닫힌 다이얼로그 무시
+        }
+      });
+
       this.page.on('console', (msg) => {
         if (msg.type() === 'error') {
           const text = msg.text();
@@ -1616,6 +1901,28 @@ export class NaverBlogAutomation {
       if (currentUrl.includes('nidlogin') || currentUrl.includes('login.naver')) {
         this.log('   ❌ 세션 만료됨 (로그인 페이지 리다이렉트)');
         return false;
+      }
+
+      // ✅ [2026-03-07] 기기 등록 페이지 감지 → 자동 바이패스 후 재확인
+      if (await this.isDeviceConfirmPage(page)) {
+        this.log('   📱 세션 확인 중 기기 등록 페이지 감지 → 자동 바이패스...');
+        await this.handleDeviceConfirmPage(page);
+        await this.delay(2000);
+        // 바이패스 후 블로그 페이지로 재이동하여 로그인 상태 재확인
+        try {
+          await page.goto('https://blog.naver.com/GoBlogWrite.naver', {
+            waitUntil: 'domcontentloaded',
+            timeout: 15000
+          });
+          await this.delay(1500);
+          const afterUrl = page.url();
+          if (afterUrl.includes('blog.naver.com') && !afterUrl.includes('login')) {
+            this.log('   ✅ 기기 등록 바이패스 후 세션 유효 확인!');
+            return true;
+          }
+        } catch (e) {
+          this.log(`   ⚠️ 기기 등록 바이패스 후 재확인 실패: ${(e as Error).message}`);
+        }
       }
 
       // ✅ 2단계: DOM 요소로 로그인 상태 정밀 확인
@@ -1684,6 +1991,13 @@ export class NaverBlogAutomation {
     if (!currentUrl.includes('nidlogin')) {
       await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
+      // ✅ [FIX-5] 로그인 페이지 로드 검증
+      const loadedUrl = page.url();
+      if (!loadedUrl.includes('nid.naver.com') && !loadedUrl.includes('nidlogin')) {
+        this.log(`⚠️ 로그인 페이지 로드 실패 (URL: ${loadedUrl}), 재시도...`);
+        await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      }
+
       // ✅ [중요] 인간적인 관찰 타임 (화면 로드 후 잠깐 멈추거나 마우스 흔들기)
       this.log('   👀 페이지 훑어보는 중 (봇 감지 우회)...');
       await this.humanDelay(1500, 3000);
@@ -1708,7 +2022,7 @@ export class NaverBlogAutomation {
     // ✅ 캡차 사전 체크 제거 - 먼저 자동 로그인 시도하고, 캡차 나오면 그때 대기
 
     // 로그인 필드 확인
-    const idInput = await page.waitForSelector('#id', { visible: true, timeout: 10000 }).catch(() => null);
+    let idInput = await page.waitForSelector('#id', { visible: true, timeout: 10000 }).catch(() => null);
     if (!idInput) {
       // 이미 로그인되어 있을 수 있음
       const finalCheck = await this.checkLoginStatus();
@@ -1716,7 +2030,30 @@ export class NaverBlogAutomation {
         this.log('✅ 이미 로그인되어 있습니다.');
         return;
       }
-      throw new Error('아이디 입력 필드를 찾을 수 없습니다.');
+
+      // ✅ [FIX-5 + FIX-7] 로그인 필드 탐색 실패 → 쿠키 클리어 + 페이지 리로드 후 재시도
+      this.log('⚠️ 아이디 입력 필드 미발견, 쿠키 클리어 + 리로드 후 재시도...');
+
+      // ✅ [FIX-7] CDP로 손상된 쿠키 제거 (Windows userDataDir 잠금 경합 대응)
+      try {
+        const client = await page.target().createCDPSession();
+        await client.send('Network.clearBrowserCookies');
+        await client.detach();
+        this.log('🧹 브라우저 쿠키 클리어 완료');
+      } catch (cookieError) {
+        this.log(`⚠️ 쿠키 클리어 실패 (무시): ${(cookieError as Error).message}`);
+      }
+
+      // 페이지 리로드 후 재시도
+      await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      await this.humanDelay(2000, 3000);
+
+      const retryIdInput = await page.waitForSelector('#id', { visible: true, timeout: 15000 }).catch(() => null);
+      if (!retryIdInput) {
+        throw new Error('아이디 입력 필드를 찾을 수 없습니다. (쿠키 클리어 + 리로드 후에도 실패)');
+      }
+      // ✅ retryIdInput을 idInput에 재할당하여 이후 로직에서 사용
+      idInput = retryIdInput;
     }
 
     // ✅ Ghost Cursor 사용 (사람 같은 마우스 이동)
@@ -1743,7 +2080,7 @@ export class NaverBlogAutomation {
 
       // 아이디 타이핑 (인간적인 속도)
       for (const char of this.options.naverId) {
-        await page.keyboard.type(char, { delay: this.getTypingDelay() });
+        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
         if (Math.random() < 0.05) {
           await this.humanDelay(200, 400);
         }
@@ -1763,7 +2100,7 @@ export class NaverBlogAutomation {
       await idInput.click({ clickCount: 3 });
       await this.humanDelay(300, 600);
       for (const char of this.options.naverId) {
-        await page.keyboard.type(char, { delay: this.getTypingDelay() });
+        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
         if (Math.random() < 0.05) {
           await this.humanDelay(200, 400);
         }
@@ -1781,7 +2118,7 @@ export class NaverBlogAutomation {
       await idInput.click({ clickCount: 3 });
       await this.humanDelay(300, 500);
       for (const char of this.options.naverId) {
-        await page.keyboard.type(char, { delay: this.getTypingDelay() });
+        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
       }
       await this.humanDelay(400, 700);
     }
@@ -1817,7 +2154,7 @@ export class NaverBlogAutomation {
 
       // 비밀번호 타이핑 (인간적인 속도)
       for (const char of this.options.naverPassword) {
-        await page.keyboard.type(char, { delay: this.getTypingDelay() });
+        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
         if (Math.random() < 0.05) {
           await this.humanDelay(200, 400);
         }
@@ -1836,7 +2173,7 @@ export class NaverBlogAutomation {
       await pwInput.click({ clickCount: 3 });
       await this.humanDelay(300, 600);
       for (const char of this.options.naverPassword) {
-        await page.keyboard.type(char, { delay: this.getTypingDelay() });
+        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
         if (Math.random() < 0.05) {
           await this.humanDelay(200, 400);
         }
@@ -1854,7 +2191,7 @@ export class NaverBlogAutomation {
       await pwInput.click({ clickCount: 3 });
       await this.humanDelay(300, 500);
       for (const char of this.options.naverPassword) {
-        await page.keyboard.type(char, { delay: this.getTypingDelay() });
+        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
       }
       await this.humanDelay(400, 700);
     }
@@ -1964,6 +2301,7 @@ export class NaverBlogAutomation {
     // URL 확인 및 캡차 처리
     let captchaDetected = false;
     let loginSuccess = false;
+    let twoFactorDetected = false;
     const maxChecks = 120; // ✅ 120회로 증가 (캡차 해결 시간 확보: 최대 10분)
     let captchaWaitStartTime: number | null = null;
     const CAPTCHA_MAX_WAIT_TIME = 600000; // ✅ 10분 최대 대기
@@ -2117,53 +2455,25 @@ export class NaverBlogAutomation {
         continue;
       }
 
-      // ✅ [2026-01-24] 기기 등록 페이지 자동 처리 (등록안함 클릭)
-      if (currentUrl.includes('deviceConfirm') || currentUrl.includes('device_confirm')) {
-        this.log('📱 기기 등록 페이지 감지 - 자동으로 "등록안함" 클릭 중...');
-
-        try {
-          // 등록안함 버튼 찾기 (여러 셀렉터 시도)
-          const skipButtonSelectors = [
-            'button.btn_cancel',          // 등록안함 버튼
-            'a.btn_cancel',               // 링크 형태
-            'button:has-text("등록안함")',
-            '[class*="cancel"]',
-            'button[type="button"]:not(.btn_confirm):not(.btn_primary)',
-          ];
-
-          let skipButton = null;
-          for (const selector of skipButtonSelectors) {
-            skipButton = await page.$(selector).catch(() => null);
-            if (skipButton) break;
-          }
-
-          // 셀렉터로 못 찾으면 텍스트로 찾기
-          if (!skipButton) {
-            skipButton = await page.evaluateHandle(() => {
-              const buttons = Array.from(document.querySelectorAll('button, a'));
-              return buttons.find(btn => {
-                const text = btn.textContent || '';
-                return text.includes('등록안함') || text.includes('취소') || text.includes('나중에');
-              }) || null;
-            }) as any;
-
-            // evaluateHandle 결과가 null인지 확인
-            const isNull = await skipButton.evaluate((el: any) => el === null).catch(() => true);
-            if (isNull) skipButton = null;
-          }
-
-          if (skipButton) {
-            await skipButton.click();
-            this.log('✅ "등록안함" 버튼 클릭 완료');
-            await this.delay(2000);
-          } else {
-            this.log('⚠️ "등록안함" 버튼을 찾지 못했습니다. 수동으로 클릭해주세요.');
-          }
-        } catch (deviceError) {
-          this.log(`⚠️ 기기 등록 페이지 처리 중 오류: ${(deviceError as Error).message}`);
-        }
-
+      // ✅ [2026-02-14] 기기 등록 페이지 자동 처리 (URL + 페이지 텍스트 이중 감지)
+      if (await this.isDeviceConfirmPage(page)) {
+        await this.handleDeviceConfirmPage(page);
         continue;
+      }
+
+      // ✅ [2026-02-09] 2단계 인증 페이지 자동 처리
+      const is2FALogin = await this.handleTwoFactorAuthPage(page, twoFactorDetected);
+      if (is2FALogin) {
+        if (!twoFactorDetected) {
+          twoFactorDetected = true;
+        } else if (checkAttempt % 15 === 0) {
+          this.log('⏳ 2단계 인증 승인 대기 중... 네이버 앱에서 승인해주세요!');
+        }
+        continue;
+      } else if (twoFactorDetected) {
+        twoFactorDetected = false;
+        this.log('✅ 2단계 인증이 완료되었습니다! 로그인을 계속 진행합니다.');
+        await this.delay(1500);
       }
 
       // 로그인 성공 여부 확인
@@ -2270,6 +2580,13 @@ export class NaverBlogAutomation {
             `URL: ${finalUrl}\n` +
             (pageTitle ? `TITLE: ${pageTitle}` : '')
           );
+        }
+
+        // ✅ [2026-02-14] 기기 등록 페이지 자동 처리 (URL + 페이지 텍스트 이중 감지)
+        if (await this.isDeviceConfirmPage(page)) {
+          this.log('   📱 기기 등록 페이지 감지 - 자동 바이패스 중...');
+          await this.handleDeviceConfirmPage(page);
+          continue; // 바이패스 후 다시 블로그 이동 시도
         }
 
         // 로그인 페이지로 리다이렉트된 경우
@@ -2431,7 +2748,7 @@ export class NaverBlogAutomation {
 
     // 여러 방법으로 mainFrame 찾기 시도 (병렬 처리)
     let frameHandle: ElementHandle<Element> | null = null;
-    const maxRetries = 2; // 3 → 2
+    const maxRetries = 4; // 2 → 4 (네이버 에디터 iframe 리로드 시 충분한 재시도)
 
     for (let attempt = 0; attempt < maxRetries; attempt++) {
       if (attempt > 0) {
@@ -2687,7 +3004,7 @@ export class NaverBlogAutomation {
         await this.delay(50);
 
         // 제목 타이핑
-        await page.keyboard.type(titleText, { delay: 20 });
+        await safeKeyboardType(page, titleText, { delay: 20 });
         await this.delay(100);
 
         // 입력 확인
@@ -2728,7 +3045,7 @@ export class NaverBlogAutomation {
     // 클릭 완전 제거 - 현재 커서 위치에서 바로 시작
     for (let line = 0; line < lines; line += 1) {
       this.ensureNotCancelled();
-      await page.keyboard.type(content, { delay: 20 });
+      await safeKeyboardType(page, content, { delay: 20 });
       if (line < lines - 1) {
         await page.keyboard.press('Enter');
         await this.delay(this.DELAYS.SHORT);
@@ -2812,410 +3129,29 @@ export class NaverBlogAutomation {
    * 날짜/시간 설정 (수정됨 - 자동으로 3가지 방식 시도)
    */
   private async setScheduleDateTime(frame: Frame, scheduleDate: string): Promise<void> {
-    const [datePart, timePart] = scheduleDate.split(' ');
-    const [year, month, day] = datePart.split('-');
-    const [hour, minute] = timePart.split(':');
-
-    this.log(`   📅 입력할 날짜: ${year}년 ${month}월 ${day}일 ${hour}:${minute}`);
-
-    // ✅ 예약 라디오 클릭 후 날짜/시간 입력 필드가 나타날 때까지 대기
-    await this.delay(1000);
-
-    // 방법 1: datetime-local input
-    let dateTimeInput = await frame.waitForSelector('input[type="datetime-local"]', {
-      visible: true,
-      timeout: 3000
-    }).catch(() => null);
-
-    if (dateTimeInput) {
-      const dateTimeValue = `${year}-${month}-${day}T${hour}:${minute}`;
-      await dateTimeInput.click({ clickCount: 3 });
-      await this.delay(200);
-      await dateTimeInput.type(dateTimeValue, { delay: 50 });
-      this.log(`✅ 날짜/시간 입력 완료: ${dateTimeValue}`);
-      return;
-    }
-
-    // 방법 2: date + time 분리
-    const dateInput = await frame.$('input[type="date"]').catch(() => null);
-    const timeInput = await frame.$('input[type="time"]').catch(() => null);
-
-    if (dateInput && timeInput) {
-      const dateValue = `${year}-${month}-${day}`;
-      const timeValue = `${hour}:${minute}`;
-
-      await dateInput.click({ clickCount: 3 });
-      await dateInput.type(dateValue, { delay: 50 });
-      await this.delay(200);
-
-      await timeInput.click({ clickCount: 3 });
-      await timeInput.type(timeValue, { delay: 50 });
-
-      this.log(`✅ 날짜/시간 입력 완료: ${dateValue} ${timeValue}`);
-      return;
-    }
-
-    // 방법 3: 개별 input (년/월/일/시/분)
-    const yearInput = await frame.$('input[name*="year"], input[placeholder*="년"]').catch(() => null);
-    if (yearInput) {
-      await yearInput.click({ clickCount: 3 });
-      await yearInput.type(year, { delay: 50 });
-      this.log(`✅ 년도 입력: ${year}`);
-    }
-
-    const monthInput = await frame.$('input[name*="month"], input[placeholder*="월"]').catch(() => null);
-    if (monthInput) {
-      await monthInput.click({ clickCount: 3 });
-      await monthInput.type(month, { delay: 50 });
-      this.log(`✅ 월 입력: ${month}`);
-    }
-
-    const dayInput = await frame.$('input[name*="day"], input[placeholder*="일"]').catch(() => null);
-    if (dayInput) {
-      await dayInput.click({ clickCount: 3 });
-      await dayInput.type(day, { delay: 50 });
-      this.log(`✅ 일 입력: ${day}`);
-    }
-
-    const hourInput = await frame.$('input[name*="hour"], input[placeholder*="시"], select[name*="hour"]').catch(() => null);
-    if (hourInput) {
-      const tagName = await hourInput.evaluate(el => el.tagName);
-      if (tagName === 'SELECT') {
-        await hourInput.select(hour);
-      } else {
-        await hourInput.click({ clickCount: 3 });
-        await hourInput.type(hour, { delay: 50 });
-      }
-      this.log(`✅ 시 입력: ${hour}`);
-    }
-
-    const minuteInput = await frame.$('input[name*="minute"], input[placeholder*="분"], select[name*="minute"]').catch(() => null);
-    if (minuteInput) {
-      const tagName = await minuteInput.evaluate(el => el.tagName);
-      if (tagName === 'SELECT') {
-        await minuteInput.select(minute);
-      } else {
-        await minuteInput.click({ clickCount: 3 });
-        await minuteInput.type(minute, { delay: 50 });
-      }
-      this.log(`✅ 분 입력: ${minute}`);
-    }
+    return await publishHelpers.setScheduleDateTime(this, frame, scheduleDate);
   }
 
   /**
    * 발행 모달 디버깅 (네이버 UI 구조 파악)
    */
   private async debugPublishModal(): Promise<void> {
-    const frame = (await this.getAttachedFrame());
-    const page = this.ensurePage();
-
-    this.log('🔍 발행 모달 디버깅 시작...');
-
-    try {
-      // 1. 모달 HTML 전체 덤프
-      const modalHtml = await frame.evaluate(() => {
-        const modals = document.querySelectorAll('[role="dialog"], .modal, [class*="modal"], [class*="publish"], [class*="layer"]');
-        return Array.from(modals).map((m, idx) => {
-          return `=== 모달 ${idx + 1} ===\n${m.outerHTML}\n`;
-        }).join('\n\n');
-      });
-
-      console.log('=== 발행 모달 HTML 구조 ===');
-      console.log(modalHtml);
-
-      // 2. 모든 라디오 버튼 찾기
-      const radioButtons = await frame.evaluate(() => {
-        const radios = document.querySelectorAll('input[type="radio"]');
-        return Array.from(radios).map(r => ({
-          value: r.getAttribute('value'),
-          name: r.getAttribute('name'),
-          id: r.getAttribute('id'),
-          checked: (r as HTMLInputElement).checked,
-          labelText: r.parentElement?.textContent?.trim() || '',
-        }));
-      });
-
-      console.log('=== 라디오 버튼 목록 ===');
-      console.table(radioButtons);
-
-      // 3. 모든 버튼 찾기
-      const buttons = await frame.evaluate(() => {
-        const btns = document.querySelectorAll('button');
-        return Array.from(btns).map(b => ({
-          text: b.textContent?.trim() || '',
-          className: b.className,
-          dataAttrs: Object.fromEntries(
-            Array.from(b.attributes)
-              .filter(a => a.name.startsWith('data-'))
-              .map(a => [a.name, a.value])
-          ),
-        }));
-      });
-
-      console.log('=== 버튼 목록 ===');
-      console.table(buttons);
-
-      // 4. 모든 레이블 찾기
-      const labels = await frame.evaluate(() => {
-        const lbls = document.querySelectorAll('label, span');
-        return Array.from(lbls)
-          .filter(l => l.textContent?.includes('예약') || l.textContent?.includes('발행'))
-          .map(l => ({
-            tag: l.tagName,
-            text: l.textContent?.trim() || '',
-            className: l.className,
-            htmlFor: l.getAttribute('for') || '',
-          }));
-      });
-
-      console.log('=== 예약/발행 관련 레이블 ===');
-      console.table(labels);
-
-      // 5. 스크린샷 저장
-      await page.screenshot({
-        path: 'publish-modal-debug.png',
-        fullPage: true
-      });
-      this.log('✅ 스크린샷 저장: publish-modal-debug.png');
-
-    } catch (error) {
-      this.log(`❌ 디버깅 실패: ${(error as Error).message}`);
-    }
+    return await publishHelpers.debugPublishModal(this);
   }
 
   /**
    * 네이버 블로그 예약발행 (완벽 수정 버전 - 자동으로 최적 방식 선택)
    */
   private async publishScheduled(scheduleDate: string): Promise<void> {
-    const frame = (await this.getAttachedFrame());
-    const page = this.ensurePage();
-
-    this.log(`📅 예약발행 시작: ${scheduleDate}`);
-
-    try {
-      // ✅ 날짜 유효성 검증
-      this.validateScheduleDate(scheduleDate);
-
-      // 1단계: 발행 버튼 클릭
-      this.log('📌 1단계: 발행 모달 열기');
-      const publishButton = await this.waitForAnySelector(frame, [
-        'button.publish_btn__m9KHH[data-click-area="tpb.publish"]',
-        'button[data-click-area="tpb.publish"]',
-        'button:has-text("발행")',
-      ], 10000);
-
-      if (!publishButton) {
-        // ✅ 에러 시 스크린샷
-        await page.screenshot({ path: 'error-no-publish-btn.png', fullPage: true });
-        throw new Error('발행 버튼을 찾을 수 없습니다. 스크린샷을 확인하세요.');
-      }
-
-      await publishButton.click();
-      await this.delay(2000);
-      this.log('✅ 발행 모달 열림');
-
-      // ✅ 카테고리(폴더) 자동 선택 로직 (네이버 UI 2024+ 호환)
-      if (this.options.categoryName) {
-        try {
-          this.log(`📂 카테고리 자동 선택 시도: "${this.options.categoryName}"`);
-
-          // 1. 카테고리 선택 드롭다운 버튼 클릭 (다양한 선택자 시도)
-          const categorySelectorPatterns = [
-            '[data-testid*="categorySelector"]',
-            '[class*="category_selector"]',
-            '[class*="categoryArea"]',
-            'button[class*="select_btn"]',
-            '.publish_category button',
-            '[data-testid="seOneCategoryBtn"]',
-            '[class*="PublishCategory"]',
-            // 드롭다운 버튼인 경우
-            'select[class*="category"]',
-            // 현재 선택된 카테고리 표시 영역 클릭
-            '[class*="category"][class*="wrap"] button',
-          ];
-
-          let categorySelector = null;
-          for (const pattern of categorySelectorPatterns) {
-            categorySelector = await frame.waitForSelector(pattern, { visible: true, timeout: 2000 }).catch(() => null);
-            if (categorySelector) {
-              this.log(`   ✅ 카테고리 드롭다운 발견: ${pattern}`);
-              break;
-            }
-          }
-
-          if (categorySelector) {
-            await categorySelector.click();
-            await this.delay(1000);
-
-            // 2. 카테고리 목록에서 정확한 이름 찾기 (다양한 선택자 시도)
-            const categoryItemPatterns = [
-              '[data-testid^="categoryItemText_"]',  // ✅ 네이버 최신 UI 형식 (categoryItemText_0, categoryItemText_1, ...)
-              '[class*="category_item"]',
-              '[class*="categoryItem"]',
-              '.list_item span',
-              'li[class*="item"] span',
-              'ul[class*="category"] li',
-              '.category_list li',
-              'option', // select 태그인 경우
-            ];
-
-            let categoryItems: any[] = [];
-            for (const pattern of categoryItemPatterns) {
-              categoryItems = await frame.$$(pattern).catch(() => []);
-              if (categoryItems.length > 0) {
-                this.log(`   ✅ 카테고리 항목 ${categoryItems.length}개 발견: ${pattern}`);
-                break;
-              }
-            }
-
-            let found = false;
-            const normalizedTarget = this.options.categoryName!.replace(/[\s·_\-\/\\]+/g, '').toLowerCase();
-
-            for (const item of categoryItems) {
-              const text = await frame.evaluate((el: Element) => (el as HTMLElement).innerText?.trim() || (el as HTMLElement).textContent?.trim() || '', item);
-              this.log(`   🔍 카테고리 후보: "${text}"`);
-
-              const normalizedText = text.replace(/[\s·_\-\/\\]+/g, '').toLowerCase();
-
-              // 다양한 매칭 방식 시도
-              if (
-                text === this.options.categoryName ||
-                normalizedText === normalizedTarget ||
-                text.includes(this.options.categoryName!) ||
-                this.options.categoryName!.includes(text) ||
-                normalizedText.includes(normalizedTarget) ||
-                normalizedTarget.includes(normalizedText)
-              ) {
-                await item.click();
-                this.log(`   ✅ 카테고리 "${this.options.categoryName}" → "${text}" 선택 완료`);
-                found = true;
-                break;
-              }
-            }
-
-            if (!found) {
-              this.log(`   ⚠️ 카테고리 "${this.options.categoryName}"을 목록에서 찾을 수 없습니다.`);
-              this.log(`   💡 블로그에 해당 카테고리가 있는지 확인해주세요. 기본 카테고리로 발행됩니다.`);
-              const page = this.ensurePage();
-              await page.keyboard.press('Escape').catch(() => { });
-            }
-          } else {
-            this.log('   ⚠️ 카테고리 선택 요소를 찾을 수 없습니다. 네이버 UI가 변경되었을 수 있습니다.');
-            this.log('   💡 기본 카테고리로 진행합니다.');
-          }
-        } catch (catError) {
-          this.log(`   ⚠️ 카테고리 선택 중 오류 발생 (무시하고 진행): ${(catError as Error).message}`);
-        }
-        await this.delay(500);
-      }
-
-      // 2단계: 예약발행 라디오 버튼 선택 (정확한 셀렉터!)
-      this.log('📌 2단계: 예약발행 옵션 선택');
-
-      const scheduleRadio = await this.waitForAnySelector(frame, [
-        'input#radio_time2',  // ✅ 가장 확실함!
-        'input[name="radio_time"][value="pre"]',
-        'input[type="radio"][value="pre"]',
-        'label[for="radio_time2"]',  // 레이블 클릭도 가능
-      ], 5000);
-
-      if (!scheduleRadio) {
-        await page.screenshot({ path: 'error-no-schedule-radio.png', fullPage: true });
-        throw new Error('예약 라디오 버튼을 찾을 수 없습니다.');
-      }
-
-      // 라디오 버튼 클릭
-      try {
-        await scheduleRadio.click();
-        this.log('✅ 라디오 버튼 클릭 성공');
-      } catch {
-        // 레이블 클릭 시도
-        const label = await frame.$('label[for="radio_time2"]');
-        if (label) {
-          await label.click();
-          this.log('✅ 레이블 클릭 성공');
-        }
-      }
-
-      // ✅ 중요: 예약 UI가 나타날 때까지 충분히 대기!
-      await this.delay(2000);
-      this.log('✅ 예약발행 옵션 선택됨, 날짜/시간 UI 대기 중...');
-
-      // 3단계: 날짜/시간 입력 (자동으로 3가지 방식 시도)
-      this.log('📌 3단계: 날짜/시간 설정 (자동으로 최적 방식 선택)');
-      await this.setScheduleDateTime(frame, scheduleDate);
-
-      // ✅ 날짜 입력 후 추가 대기 (UI 업데이트)
-      await this.delay(1000);
-
-      // 4단계: 확인 버튼 클릭
-      this.log('📌 4단계: 예약발행 확인');
-
-      // ✅ 확인 버튼은 항상 같은 위치!
-      const confirmButton = await this.waitForAnySelector(frame, [
-        'button[data-testid="seOnePublishBtn"]',
-        'button.confirm_btn__WEaBq',
-        'button[data-click-area="tpb*i.publish"]',
-      ], 5000);
-
-      if (!confirmButton) {
-        await page.screenshot({ path: 'error-no-confirm-btn.png', fullPage: true });
-
-        // 디버깅: 모든 버튼 찾기
-        const allButtons = await frame.evaluate(() => {
-          const buttons = Array.from(document.querySelectorAll('button'));
-          return buttons
-            .filter(b => b.textContent?.includes('발행') || b.textContent?.includes('확인'))
-            .map(b => ({
-              text: b.textContent?.trim(),
-              className: b.className,
-              testId: b.getAttribute('data-testid'),
-            }));
-        });
-        console.log('발행/확인 버튼 목록:', allButtons);
-
-        throw new Error('확인 버튼을 찾을 수 없습니다. 스크린샷을 확인하세요.');
-      }
-
-      await confirmButton.click();
-      await this.delay(2000);
-
-      this.log(`✅ 블로그 글이 예약발행되었습니다: ${scheduleDate}`);
-
-      // 예약 완료 후 URL 로깅
-      try {
-        const pageUrl = page.url();
-        if (pageUrl && /blog\.naver\.com/i.test(pageUrl)) {
-          this.log(`POST_URL_SCHEDULED: ${pageUrl} @ ${scheduleDate}`);
-        } else {
-          this.log(`POST_URL_SCHEDULED: (예약 완료, URL 미확정) @ ${scheduleDate}`);
-        }
-      } catch { }
-
-    } catch (error) {
-      this.log(`❌ 예약발행 실패: ${(error as Error).message}`);
-
-      // ✅ 에러 발생 시 자동으로 스크린샷 저장
-      try {
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const screenshotPath = `./error-schedule-${timestamp}.png`;
-
-        await page.screenshot({
-          path: screenshotPath,
-          fullPage: true
-        });
-
-        this.log(`📸 에러 스크린샷 저장됨: ${screenshotPath}`);
-      } catch (screenshotError) {
-        this.log('⚠️ 스크린샷 저장 실패 (무시됨)');
-      }
-
-      await page.keyboard.press('Escape').catch(() => { });
-      throw error;
-    }
+    return await publishHelpers.publishScheduled(this, scheduleDate);
   }
 
   async publishBlogPost(mode: PublishMode, scheduleDate?: string, scheduleMethod: 'datetime-local' | 'individual-inputs' = 'datetime-local'): Promise<void> {
+    // ✅ [2026-02-07 FIX] 발행 모드 명시적 로깅 (디버깅용)
+    this.log(`📋 publishBlogPost 호출됨 → mode: "${mode}", scheduleDate: "${scheduleDate || 'undefined'}", scheduleMethod: "${scheduleMethod}"`);
+    // ✅ [2026-02-16 DEBUG] 카테고리 이름 확인
+    console.log(`[publishBlogPost] 📂 this.options.categoryName: "${this.options.categoryName || '(없음)'}"`);
+    this.log(`📂 현재 카테고리: "${this.options.categoryName || '(미설정)'}"`);
     await this.retry(async () => {
       const frame = (await this.getAttachedFrame());
       this.ensureNotCancelled();
@@ -3231,7 +3167,14 @@ export class NaverBlogAutomation {
           this.log(`   📷 ${imageElements.length}개 이미지 발견, 문서 너비 적용 시작...`);
 
           let appliedCount = 0;
+          const imageWidthStartTime = Date.now();
+          const IMAGE_WIDTH_TIMEOUT = 10000; // 10초 제한
           for (let i = 0; i < imageElements.length; i++) {
+            // ✅ [2026-02-17] 타임아웃 가드: 이미지 너비 적용이 너무 오래 걸리면 중단
+            if (Date.now() - imageWidthStartTime > IMAGE_WIDTH_TIMEOUT) {
+              this.log(`   ⏱️ 이미지 너비 적용 시간 초과 (${i}/${imageElements.length}개 완료, 10초 제한). 나머지 건너뜁니다.`);
+              break;
+            }
             try {
               // 1. 이미지 클릭하여 선택
               await imageElements[i].click();
@@ -3330,143 +3273,539 @@ export class NaverBlogAutomation {
       } else if (mode === 'publish') {
         this.log('🔄 블로그 글 즉시발행 중...');
 
-        // ✅ 발행 버튼 찾기 (사용자가 제공한 정확한 셀렉터 우선)
+        // ✅ 발행 버튼 찾기 (안정적인 data-* 속성 우선, CSS 클래스명은 네이버 업데이트 시 변경 가능)
+        this.log('📌 발행 버튼 탐색 시작...');
         const publishButtonSelectors = [
-          'button.publish_btn__m9KHH[data-click-area="tpb.publish"]', // ✅ 최우선: 사용자가 제공한 정확한 셀렉터
+          // 1순위: data-* 속성 (네이버 업데이트에도 안정적)
+          'button[data-click-area="tpb.publish"]',
+          '[data-click-area="tpb.publish"]',
+          // 2순위: 기존 CSS 클래스 셀렉터
+          'button.publish_btn__m9KHH[data-click-area="tpb.publish"]',
           ...this.PUBLISH_BUTTON_SELECTORS,
+          'button.publish_btn__m9KHH',
           '.publish_btn__bzc5B',
           '[data-testid="publish-button"]',
-          'button:has-text("발행")',
         ];
 
         let publishButton: ElementHandle<Element> | null = null;
         for (const selector of publishButtonSelectors) {
-          publishButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
-          if (publishButton) break;
+          publishButton = await frame.waitForSelector(selector, { visible: true, timeout: 3000 }).catch(() => null);
+          if (publishButton) {
+            this.log(`   ✅ 발행 버튼 발견: ${selector.substring(0, 60)}`);
+            break;
+          }
+        }
+
+        // ✅ [2026-02-17] 모든 셀렉터 실패 시 텍스트 기반 폴백
+        if (!publishButton) {
+          this.log('   ⚠️ 셀렉터 기반 탐색 실패 → 텍스트 기반 폴백 시도...');
+          try {
+            publishButton = await frame.evaluateHandle(() => {
+              const buttons = document.querySelectorAll('button');
+              for (const btn of buttons) {
+                const text = (btn.textContent || '').trim();
+                if (text === '발행' || text.includes('발행')) {
+                  const rect = btn.getBoundingClientRect();
+                  if (rect.width > 0 && rect.height > 0) {
+                    return btn;
+                  }
+                }
+              }
+              return null;
+            }) as ElementHandle<Element> | null;
+
+            // evaluateHandle가 null JSHandle을 반환할 수 있으므로 실제 Element인지 확인
+            if (publishButton) {
+              const isElement = await publishButton.evaluate(el => el instanceof HTMLElement).catch(() => false);
+              if (!isElement) publishButton = null;
+            }
+
+            if (publishButton) {
+              this.log('   ✅ 텍스트 기반 폴백으로 발행 버튼 발견!');
+            }
+          } catch (fallbackErr) {
+            this.log(`   ❌ 텍스트 기반 폴백 오류: ${(fallbackErr as Error).message}`);
+          }
+        }
+
+        if (!publishButton) {
+          // ✅ [2026-02-17] 디버깅: 툴바 영역 HTML 덤프
+          this.log('   ❌ 모든 발행 버튼 탐색 실패 — 폴백 경로로 진행');
+          try {
+            const toolbarHTML = await frame.evaluate(() => {
+              // 상단 툴바 영역의 버튼들 확인
+              const allButtons = document.querySelectorAll('button');
+              const buttonInfo: string[] = [];
+              allButtons.forEach(btn => {
+                const text = (btn.textContent || '').trim().substring(0, 20);
+                const cls = btn.className.substring(0, 40);
+                const area = btn.getAttribute('data-click-area') || '';
+                const testId = btn.getAttribute('data-testid') || '';
+                if (text || area || testId) {
+                  buttonInfo.push(`[${text}] cls=${cls} area=${area} testid=${testId}`);
+                }
+              });
+              return buttonInfo.slice(0, 15).join('\n');
+            });
+            this.log(`   🔍 현재 페이지 버튼 목록:\n${toolbarHTML}`);
+          } catch { }
         }
 
         if (publishButton) {
-          // ✅ 발행 모달 열기 버튼 클릭
-          await publishButton.click();
-          await this.delay(500); // ✅ 대기 시간 증가: 250ms → 500ms
+          // ✅ [2026-03-04 FIX v4] 발행 모달 열기 전 에디터의 첫 번째 이미지를 물리적 마우스 클릭으로 활성화
+          // 네이버 SmartEditor는 React 기반 → JS click()으로는 이벤트 핸들러가 트리거되지 않음
+          // iframe 좌표 보정 후 page.mouse.click() 사용
+          try {
+            this.log('🖼️ 에디터 내 첫 번째 이미지 물리적 클릭 중 (대표이미지 사전 선택)...');
 
-          // ✅ 발행 모달이 열릴 때까지 충분히 대기
-          await this.delay(1000); // ✅ 대기 시간 증가: 250ms → 1000ms
-
-          // ✅ 카테고리(폴더) 자동 선택 로직 (네이버 UI 2024+ 호환)
-          if (this.options.categoryName) {
-            try {
-              this.log(`📂 카테고리 자동 선택 시도: "${this.options.categoryName}"`);
-
-              // 1. 카테고리 선택 드롭다운 버튼 클릭 (다양한 선택자 시도)
-              const categorySelectorPatterns = [
-                '[data-testid*="categorySelector"]',
-                '[data-testid*="category"]',
-                '[class*="category_selector"]',
-                '[class*="categoryArea"]',
-                'button[class*="select_btn"]',
-                '.publish_category button',
-                '[data-testid="seOneCategoryBtn"]',
-                '[class*="PublishCategory"]',
-                'select[class*="category"]',
-                '[class*="category"][class*="wrap"] button',
-                // 카테고리 텍스트가 있는 영역 클릭
-                '[class*="category"] [class*="text"]',
+            // Step 1: iframe 내 첫 번째 의미있는 이미지의 좌표를 가져옴
+            const firstImgCoords = await frame.evaluate(() => {
+              const editorSelectors = [
+                'img.se-image-resource',
+                '.se-component.se-image img[src]',
+                '.se-main-container img[src]',
+                '.se-component-content img[src]',
+                'img[src*="pstatic.net"]',
+                'img[src*="blogfiles"]',
               ];
 
-              let categorySelector = null;
-              for (const pattern of categorySelectorPatterns) {
-                categorySelector = await frame.waitForSelector(pattern, { visible: true, timeout: 2000 }).catch(() => null);
-                if (categorySelector) {
-                  this.log(`   ✅ 카테고리 드롭다운 발견: ${pattern}`);
-                  break;
+              for (const sel of editorSelectors) {
+                const imgs = document.querySelectorAll(sel);
+                for (const img of imgs) {
+                  const htmlImg = img as HTMLImageElement;
+                  if (!htmlImg.src || htmlImg.src.length < 20) continue;
+                  const rect = htmlImg.getBoundingClientRect();
+                  if (rect.width < 50 || rect.height < 50) continue;
+
+                  // 스크롤하여 보이게 함
+                  htmlImg.scrollIntoView({ block: 'center', behavior: 'instant' as any });
+                  // 스크롤 후 좌표 재계산
+                  const newRect = htmlImg.getBoundingClientRect();
+                  return {
+                    x: newRect.left + newRect.width / 2,
+                    y: newRect.top + newRect.height / 2,
+                    width: newRect.width,
+                    height: newRect.height,
+                    found: true
+                  };
                 }
               }
+              return { x: 0, y: 0, width: 0, height: 0, found: false };
+            }).catch(() => ({ x: 0, y: 0, width: 0, height: 0, found: false }));
 
-              if (categorySelector) {
-                await categorySelector.click();
-                await this.delay(1000);
+            if (firstImgCoords.found) {
+              await this.delay(500); // 스크롤 안정화
 
-                // 2. 카테고리 목록에서 정확한 이름 찾기 (다양한 선택자 시도)
-                const categoryItemPatterns = [
-                  '[data-testid^="categoryItemText_"]',  // ✅ 네이버 최신 UI 형식
-                  'span[class*="text"]',  // 카테고리 텍스트 span
-                  '[class*="category_item"]',
-                  '[class*="categoryItem"]',
-                  '.list_item span',
-                  'li[class*="item"] span',
-                  'ul[class*="category"] li',
-                  '.category_list li',
-                  'option',
-                ];
-
-                let categoryItems: any[] = [];
-                for (const pattern of categoryItemPatterns) {
-                  categoryItems = await frame.$$(pattern).catch(() => []);
-                  if (categoryItems.length > 0) {
-                    this.log(`   ✅ 카테고리 항목 ${categoryItems.length}개 발견: ${pattern}`);
-                    break;
-                  }
+              // Step 2: iframe 오프셋을 가져옴
+              const page = this.ensurePage();
+              const iframeOffset = await page.evaluate(() => {
+                const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
+                if (iframe) {
+                  const rect = iframe.getBoundingClientRect();
+                  return { x: rect.x, y: rect.y };
                 }
+                return { x: 0, y: 0 };
+              }).catch(() => ({ x: 0, y: 0 }));
 
-                let found = false;
-                const normalizedTarget = this.options.categoryName!.replace(/[\s·_\-\/\\]+/g, '').toLowerCase();
+              // Step 3: 물리적 마우스 클릭 (iframe 오프셋 + 이미지 중심)
+              const clickX = iframeOffset.x + firstImgCoords.x;
+              const clickY = iframeOffset.y + firstImgCoords.y;
+              this.log(`   🎯 물리적 마우스 클릭: (${Math.round(clickX)}, ${Math.round(clickY)}) — 이미지 크기: ${Math.round(firstImgCoords.width)}x${Math.round(firstImgCoords.height)}`);
 
-                for (const item of categoryItems) {
-                  const text = await frame.evaluate((el: Element) => (el as HTMLElement).innerText?.trim() || (el as HTMLElement).textContent?.trim() || '', item);
-                  this.log(`   🔍 카테고리 후보: "${text}"`);
+              await page.mouse.move(clickX, clickY);
+              await this.delay(100);
+              await page.mouse.click(clickX, clickY);
+              await this.delay(500);
+              // 한 번 더 클릭 (SmartEditor 컴포넌트 활성화 확실히)
+              await page.mouse.click(clickX, clickY);
 
-                  const normalizedText = text.replace(/[\s·_\-\/\\]+/g, '').toLowerCase();
+              this.log('   ✅ 에디터 첫 번째 이미지 물리적 클릭 완료 → 대표이미지 사전 지정');
+              await this.delay(800); // 에디터가 이미지 활성화 처리할 시간
 
-                  // 다양한 매칭 방식 시도
-                  // 1. 정확히 일치
-                  // 2. 정규화된 문자열이 일치
-                  // 3. 타겟이 텍스트에 포함
-                  // 4. 텍스트가 타겟에 포함 (역방향)
-                  if (
-                    text === this.options.categoryName ||
-                    normalizedText === normalizedTarget ||
-                    text.includes(this.options.categoryName!) ||
-                    this.options.categoryName!.includes(text) ||
-                    normalizedText.includes(normalizedTarget) ||
-                    normalizedTarget.includes(normalizedText)
-                  ) {
-                    await item.click();
-                    this.log(`   ✅ 카테고리 "${this.options.categoryName}" → "${text}" 선택 완료`);
-                    found = true;
-                    break;
-                  }
-                }
-
-                if (!found) {
-                  this.log(`   ⚠️ 카테고리 "${this.options.categoryName}"을 목록에서 찾을 수 없습니다.`);
-                  this.log(`   💡 블로그에 해당 카테고리가 있는지 확인해주세요. 기본 카테고리로 발행됩니다.`);
-                  const page = this.ensurePage();
-                  await page.keyboard.press('Escape').catch(() => { });
-                }
-              } else {
-                this.log('   ⚠️ 카테고리 선택 요소를 찾을 수 없습니다. 네이버 UI가 변경되었을 수 있습니다.');
-              }
-            } catch (catError) {
-              this.log(`   ⚠️ 카테고리 선택 중 오류 발생 (무시하고 진행): ${(catError as Error).message}`);
+              // ✅ [2026-03-14 FIX v7] Escape+body 클릭 제거!
+              // 이전 v6에서 Escape+body 클릭으로 이미지 선택을 해제하면
+              // 네이버가 대표이미지 사전 선택을 인식하지 못하여 마지막 삽입 이미지가 대표가 되는 버그 발생.
+              // 발행 버튼은 에디터 상단 고정 영역에 있으므로 이미지 툴바(본문 내부)와 겹치지 않음.
+              // → 이미지 선택 상태 유지 + 스크롤 복귀만으로 발행 버튼 접근 가능.
+              this.log('   ℹ️ 이미지 선택 상태 유지 (Escape 생략 → 대표이미지 사전 지정 보존)');
+            } else {
+              this.log('   ℹ️ 에디터 내 이미지를 찾지 못함 → 기본 대표이미지 사용');
             }
-            await this.delay(500);
+          } catch (preSelectError) {
+            this.log(`   ⚠️ 이미지 사전 선택 중 오류 (무시): ${(preSelectError as Error).message}`);
           }
 
-          // ✅ 최종 발행 확인 버튼 찾기 (사용자가 제공한 정확한 셀렉터 최우선)
+          // ✅ [2026-03-04 FIX v6] 이미지 사전 클릭으로 에디터 스크롤이 변경되었으므로
+          // 상단 툴바가 보이도록 스크롤을 복귀시키고 발행 버튼 핸들을 재탐색
+          try {
+            await frame.evaluate(() => window.scrollTo(0, 0));
+            await this.delay(300);
+            // 발행 버튼 핸들 재탐색 (stale 방지)
+            const refreshSelectors = [
+              'button[data-click-area="tpb.publish"]',
+              'button.publish_btn__m9KHH',
+              ...this.PUBLISH_BUTTON_SELECTORS,
+            ];
+            for (const sel of refreshSelectors) {
+              const freshBtn = await frame.waitForSelector(sel, { visible: true, timeout: 2000 }).catch(() => null);
+              if (freshBtn) {
+                publishButton = freshBtn;
+                this.log('   🔄 발행 버튼 핸들 재탐색 완료');
+                break;
+              }
+            }
+          } catch { }
+
+          // ✅ [2026-02-27 FIX v2] 발행 모달 열기 — Playwright waitForSelector 기반
+          // delay 폴링 대신 Playwright 네이티브 대기로 모달 트랜지션 완료까지 정확히 대기
+          const modalIndicatorSelectors = [
+            '[data-testid="seOnePublishBtn"]',           // 모달 내 최종 발행 버튼
+            'button[data-click-area="tpb*i.publish"]',   // 모달 내 발행 확인
+            'button.confirm_btn__WEaBq',                 // 모달 확인 버튼 클래스
+            '[data-click-area="tpb*i.category"]',        // 카테고리 선택 영역
+            'input#radio_time1',                          // 즉시발행 라디오
+          ];
+          const MAX_MODAL_CLICKS = 3;
+          let modalOpened = false;
+
+          for (let attempt = 1; attempt <= MAX_MODAL_CLICKS; attempt++) {
+            this.log(`📌 발행 모달 열기 시도 ${attempt}/${MAX_MODAL_CLICKS}...`);
+            await publishButton.click();
+
+            // ✅ Playwright waitForSelector로 모달 요소가 DOM에 나타날 때까지 대기
+            // 각 시도마다 타임아웃을 점진 증가 (3초 → 5초 → 7초)
+            const waitTimeout = 3000 + (attempt - 1) * 2000;
+
+            for (const sel of modalIndicatorSelectors) {
+              try {
+                const el = await frame.waitForSelector(sel, { visible: true, timeout: waitTimeout });
+                if (el) {
+                  modalOpened = true;
+                  this.log(`   ✅ 발행 모달 열림 확인 — waitForSelector 성공 (${sel}, ${waitTimeout}ms)`);
+                  break;
+                }
+              } catch {
+                // 이 셀렉터로는 못 찾음 → 다음 셀렉터 시도
+              }
+
+              // frame에서 못 찾으면 page에서도 시도
+              if (!modalOpened) {
+                try {
+                  const el = await this.ensurePage().waitForSelector(sel, { visible: true, timeout: 1000 });
+                  if (el) {
+                    modalOpened = true;
+                    this.log(`   ✅ 발행 모달 열림 확인 — page waitForSelector 성공 (${sel})`);
+                    break;
+                  }
+                } catch {
+                  // page에서도 못 찾음
+                }
+              }
+            }
+
+            if (modalOpened) break;
+
+            // 안 열렸으면 로그 + 재클릭 전 안정화 대기
+            if (attempt < MAX_MODAL_CLICKS) {
+              this.log(`   ⚠️ 발행 모달 미열림 (${waitTimeout}ms 대기 후) → ${attempt + 1}번째 클릭 시도`);
+              await this.delay(1500);
+            }
+          }
+
+          if (!modalOpened) {
+            this.log('   ❌ 발행 모달 열기 3회 시도 모두 실패 — 카테고리 선택 건너뜀 가능');
+          }
+
+          // ✅ [2026-02-17] 발행 모달 DOM 덤프 (디버깅용)
+          try {
+            const modalDump = await frame.evaluate(() => {
+              const info: string[] = [];
+              // 모든 버튼 탐색
+              const buttons = document.querySelectorAll('button');
+              buttons.forEach(btn => {
+                const text = (btn.textContent || '').trim().substring(0, 30);
+                const cls = btn.className.substring(0, 50);
+                const area = btn.getAttribute('data-click-area') || '';
+                const testId = btn.getAttribute('data-testid') || '';
+                const ariaLabel = btn.getAttribute('aria-label') || '';
+                const rect = btn.getBoundingClientRect();
+                const visible = rect.width > 0 && rect.height > 0;
+                if ((text || area || testId) && visible) {
+                  info.push(`BTN [${text}] cls=${cls} area=${area} testid=${testId} aria=${ariaLabel}`);
+                }
+              });
+              // 카테고리 관련 요소 탐색  
+              const catElements = document.querySelectorAll('[class*="category"], [class*="Category"], [class*="selectbox"], [role="listbox"], [aria-label*="카테고리"]');
+              catElements.forEach(el => {
+                const tag = el.tagName;
+                const cls = el.className?.toString()?.substring(0, 50) || '';
+                const text = (el as HTMLElement).innerText?.substring(0, 30) || '';
+                const area = el.getAttribute('data-click-area') || '';
+                info.push(`CAT <${tag}> cls=${cls} area=${area} text=${text}`);
+              });
+              return info.slice(0, 25).join('\n');
+            });
+            this.log(`📋 [발행 모달 DOM 덤프]\n${modalDump}`);
+          } catch (dumpErr) {
+            this.log(`   ⚠️ DOM 덤프 실패: ${(dumpErr as Error).message}`);
+          }
+
+          // ✅ [2026-02-09] 카테고리 자동 선택 (공통 메서드 사용)
+          await this.selectCategoryInPublishModal(frame, this.ensurePage());
+
+          // ✅ [2026-03-03 FIX] 대표사진 로딩 대기 + 첫 번째 이미지 명시적 선택
+          // 네이버 SmartEditor는 마지막 삽입 이미지를 대표사진으로 자동 선택하는 경향이 있어
+          // 사용자가 설정한 대표이미지(=첫 번째 이미지)가 무시되고 마지막 이미지가 대표사진이 되는 버그 발생
+          try {
+            this.log('🖼️ 발행 모달 대표사진 설정 중...');
+            const thumbLoadStart = Date.now();
+            const THUMB_TIMEOUT = 8000;
+            const THUMB_POLL_INTERVAL = 500;
+            let thumbFound = false;
+
+            while (Date.now() - thumbLoadStart < THUMB_TIMEOUT) {
+              this.ensureNotCancelled();
+
+              // 발행 모달 내 대표사진 영역에서 이미지가 로드되었는지 확인
+              thumbFound = await frame.evaluate(() => {
+                // 네이버 발행 모달 대표사진 미리보기 이미지 탐색
+                const thumbSelectors = [
+                  '[class*="thumbnail"] img[src]',
+                  '[class*="Thumbnail"] img[src]',
+                  '[class*="cover_thumb"] img[src]',
+                  '[class*="coverThumb"] img[src]',
+                  '[class*="thumb_area"] img[src]',
+                  '[class*="thumbArea"] img[src]',
+                  '[class*="represent"] img[src]',
+                  '[class*="cover_image"] img[src]',
+                  '[class*="publish"] img[src]',
+                ];
+
+                for (const sel of thumbSelectors) {
+                  const img = document.querySelector(sel) as HTMLImageElement | null;
+                  if (img && img.src && img.src.length > 10 && img.naturalWidth > 0) {
+                    return true;
+                  }
+                }
+
+                // 폴백: 발행 모달 영역 내 이미지 확인
+                const allImgs = document.querySelectorAll('img[src]');
+                for (const img of allImgs) {
+                  const htmlImg = img as HTMLImageElement;
+                  if (!htmlImg.src || htmlImg.src.length < 10 || htmlImg.naturalWidth < 10) continue;
+                  let parent = htmlImg.parentElement;
+                  let depth = 0;
+                  while (parent && depth < 10) {
+                    const cls = parent.className?.toString() || '';
+                    if (cls.includes('publish') || cls.includes('Publish') ||
+                      cls.includes('popup_option') || cls.includes('setting') ||
+                      cls.includes('Setting') || cls.includes('modal')) {
+                      return true;
+                    }
+                    parent = parent.parentElement;
+                    depth++;
+                  }
+                }
+                return false;
+              }).catch(() => false);
+
+              if (thumbFound) {
+                const elapsed = Math.round((Date.now() - thumbLoadStart) / 100) / 10;
+                this.log(`   ✅ 대표사진 영역 로딩 완료! (${elapsed}초 소요)`);
+                break;
+              }
+
+              await this.delay(THUMB_POLL_INTERVAL);
+            }
+
+            if (!thumbFound) {
+              this.log('   ⚠️ 대표사진 로딩 타임아웃 (8초) — 이미지 없이 계속 진행합니다');
+              await this.delay(1000);
+            }
+
+            // ✅ [2026-03-04 FIX v6] 대표사진 설정 — 발행 모달 내에서만 작업
+            // ⚠️ 주의: 에디터 본문의 "대표" 버튼을 클릭하면 발행 모달이 닫히는 부작용이 있으므로
+            // 발행 모달이 열린 상태에서는 모달 내부 요소만 조작해야 함
+            if (thumbFound) {
+              this.log('   ✅ 대표사진 영역 로딩 확인 — 네이버 기본 선택(첫 번째 이미지) 유지');
+              // 네이버는 기본적으로 첫 번째 이미지를 대표사진으로 선택하므로
+              // filterImagesForPublish에서 이미 thumbail을 맨 앞에 배치했으므로 추가 조작 불필요
+            }
+          } catch (thumbError) {
+            this.log(`   ⚠️ 대표사진 설정 중 오류 (무시하고 계속): ${(thumbError as Error).message}`);
+          }
+
+
+          // ✅ [2026-03-05 FIX] 모달 재확인 — 카테고리 선택 시 ESC 키가 발행 모달을 닫을 수 있음
+          // selectCategoryInPublishModal 내부에서 카테고리 드롭다운 닫기용 ESC가 발행 모달까지 닫는 버그 대응
+          {
+            const modalStillOpen = await frame.$('button[data-testid="seOnePublishBtn"]').catch(() => null)
+              || await frame.$('button[data-click-area="tpb*i.publish"]').catch(() => null)
+              || await frame.$('button[class*="confirm_btn"]').catch(() => null);
+
+            if (!modalStillOpen) {
+              this.log('⚠️ [모달 재열기] 카테고리/대표사진 처리 후 발행 모달이 닫힘 → 재열기 시도...');
+
+              // 발행 버튼 재탐색 + 클릭
+              const reopenSelectors = [
+                'button[data-click-area="tpb.publish"]',
+                'button.publish_btn__m9KHH',
+                'button[class*="publish_btn"]',
+              ];
+
+              let reopenBtn: ElementHandle<Element> | null = null;
+              for (const sel of reopenSelectors) {
+                reopenBtn = await frame.waitForSelector(sel, { visible: true, timeout: 3000 }).catch(() => null);
+                if (reopenBtn) break;
+              }
+
+              if (reopenBtn) {
+                await reopenBtn.click();
+                // 모달 열릴 때까지 대기 (최대 5초)
+                let reopened = false;
+                for (let i = 0; i < 10; i++) {
+                  await this.delay(500);
+                  const check = await frame.$('button[data-testid="seOnePublishBtn"]').catch(() => null)
+                    || await frame.$('button[class*="confirm_btn"]').catch(() => null);
+                  if (check) {
+                    reopened = true;
+                    break;
+                  }
+                }
+                if (reopened) {
+                  this.log('✅ [모달 재열기] 발행 모달 재열기 성공!');
+                } else {
+                  this.log('❌ [모달 재열기] 발행 모달 재열기 실패 — 확인 버튼 탐색 계속 시도');
+                }
+              } else {
+                this.log('❌ [모달 재열기] 발행 버튼을 찾을 수 없음');
+              }
+            } else {
+              this.log('✅ 발행 모달 열림 상태 확인 — 확인 버튼 탐색 진행');
+            }
+          }
+
+          this.log('📌 발행 확인 버튼 탐색 시작...');
           const confirmPublishSelectors = [
-            'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"][data-click-area="tpb*i.publish"]', // ✅ 최우선: 사용자가 제공한 정확한 셀렉터
-            'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"]',
+            // 1순위: data-* 속성 (안정적)
             'button[data-testid="seOnePublishBtn"]',
-            'button.confirm_btn__WEaBq[data-click-area*="publish"]',
+            // ✅ [2026-02-23 FIX] *= (contains) → = (exact) 변경
+            'button[data-click-area="tpb*i.publish"]',
+            '[data-testid="seOnePublishBtn"]',
+            // 2순위: CSS 클래스 (정확)
+            'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"]',
+            'button.confirm_btn__WEaBq[data-click-area="tpb*i.publish"]',
             'button.confirm_btn__WEaBq',
-            'button:has-text("발행")',
+            // ✅ [2026-03-05] 3순위: 와일드카드 패턴 (네이버 CSS 모듈 해시 변경 대응)
+            'button[class*="confirm_btn"][data-testid="seOnePublishBtn"]',
+            'button[class*="confirm_btn"][data-click-area="tpb*i.publish"]',
+            'button[class*="confirm_btn"]',
           ];
 
           let confirmPublishButton: ElementHandle<Element> | null = null;
           for (const selector of confirmPublishSelectors) {
-            confirmPublishButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
-            if (confirmPublishButton) break;
+            // ✅ [2026-02-26 FIX] 확인 버튼 탐색 타임아웃 5000ms→10000ms (연속발행 시 에디터 느려지는 문제 대응)
+            confirmPublishButton = await frame.waitForSelector(selector, { visible: true, timeout: 10000 }).catch(() => null);
+            if (confirmPublishButton) {
+              this.log(`   ✅ 확인 버튼 발견: ${selector.substring(0, 60)}`);
+              break;
+            }
+          }
+
+          // ✅ [2026-02-17] 모든 셀렉터 실패 시 텍스트 기반 폴백 (모달 내 '발행' 버튼)
+          if (!confirmPublishButton) {
+            this.log('   ⚠️ 확인 버튼 셀렉터 실패 → 텍스트 기반 폴백 시도...');
+            try {
+              confirmPublishButton = await frame.evaluateHandle(() => {
+                // 발행 모달 내 '발행' 확인 버튼 찾기 (모달이 열린 상태)
+                const buttons = document.querySelectorAll('button');
+                for (const btn of buttons) {
+                  const text = (btn.textContent || '').trim();
+                  // '발행' 텍스트를 가진 활성화된 버튼 찾기 (모달 내)
+                  if ((text === '발행' || text === '확인') && !btn.hasAttribute('disabled')) {
+                    const rect = btn.getBoundingClientRect();
+                    if (rect.width > 0 && rect.height > 0) {
+                      // ✅ [2026-03-05 FIX] toolbar 발행 버튼(publish_btn) 제외 — 모달 확인 버튼만 매칭
+                      // DOM 순서상 toolbar 버튼이 먼저 나와서 잘못 매칭되면 모달이 닫히는 부작용
+                      const cls = btn.className || '';
+                      const clickArea = btn.getAttribute('data-click-area') || '';
+                      // toolbar 버튼: class*="publish_btn", data-click-area="tpb.publish"
+                      // 모달 확인 버튼: class*="confirm_btn", data-click-area="tpb*i.publish"
+                      if (cls.includes('publish_btn') && !cls.includes('confirm_btn')) {
+                        continue; // toolbar 버튼 스킵
+                      }
+                      if (clickArea === 'tpb.publish') {
+                        continue; // toolbar 발행 토글 버튼 스킵
+                      }
+                      return btn;
+                    }
+                  }
+                }
+                return null;
+              }) as ElementHandle<Element> | null;
+
+              if (confirmPublishButton) {
+                const isElement = await confirmPublishButton.evaluate(el => el instanceof HTMLElement).catch(() => false);
+                if (!isElement) confirmPublishButton = null;
+              }
+
+              if (confirmPublishButton) {
+                this.log('   ✅ 텍스트 기반 폴백으로 확인 버튼 발견!');
+              }
+            } catch (fallbackErr) {
+              this.log(`   ❌ 텍스트 기반 폴백 오류: ${(fallbackErr as Error).message}`);
+            }
+          }
+
+          // ✅ [2026-03-05] page 레벨에서도 텍스트 기반 폴백 시도
+          if (!confirmPublishButton) {
+            this.log('   ⚠️ frame에서 확인 버튼 못 찾음 → page 레벨 재탐색...');
+            const page = this.ensurePage();
+
+            // page 레벨 셀렉터 기반
+            for (const selector of confirmPublishSelectors) {
+              confirmPublishButton = await page.waitForSelector(selector, { visible: true, timeout: 3000 }).catch(() => null);
+              if (confirmPublishButton) {
+                this.log(`   ✅ page 레벨에서 확인 버튼 발견: ${selector.substring(0, 60)}`);
+                break;
+              }
+            }
+
+            // ✅ [2026-03-05] page 레벨 텍스트 기반 폴백
+            if (!confirmPublishButton) {
+              this.log('   ⚠️ page 셀렉터도 실패 → page 텍스트 기반 폴백...');
+              try {
+                confirmPublishButton = await page.evaluateHandle(() => {
+                  const buttons = document.querySelectorAll('button');
+                  for (const btn of buttons) {
+                    const text = (btn.textContent || '').trim();
+                    if ((text === '발행' || text === '확인') && !btn.hasAttribute('disabled')) {
+                      const rect = btn.getBoundingClientRect();
+                      // 모달 내 확인 버튼은 보통 화면 중앙 하단에 위치
+                      if (rect.width > 0 && rect.height > 0 && rect.top > 100) {
+                        return btn;
+                      }
+                    }
+                  }
+                  return null;
+                }) as ElementHandle<Element> | null;
+
+                if (confirmPublishButton) {
+                  const isElement = await confirmPublishButton.evaluate(el => el instanceof HTMLElement).catch(() => false);
+                  if (!isElement) confirmPublishButton = null;
+                }
+
+                if (confirmPublishButton) {
+                  this.log('   ✅ page 텍스트 기반 폴백으로 확인 버튼 발견!');
+                }
+              } catch (pgFallbackErr) {
+                this.log(`   ❌ page 텍스트 기반 폴백 오류: ${(pgFallbackErr as Error).message}`);
+              }
+            }
+          }
+
+          if (!confirmPublishButton) {
+            this.log('   ❌ 모든 확인 버튼 셀렉터 실패 — 임시저장 폴백 시도');
           }
 
           if (confirmPublishButton) {
@@ -3667,9 +4006,10 @@ export class NaverBlogAutomation {
 
           // ✅ 발행 옵션 선택 (모달이 열릴 때까지 충분히 대기)
           await this.delay(500); // 모달이 열릴 때까지 추가 대기
+          // ✅ [2026-03-05 FIX] button:has-text()는 Playwright 전용 → Puppeteer 호환 셀렉터로 교체
           const publishOption = await frame.waitForSelector(
-            '[data-value="publish"], button:has-text("발행")',
-            { visible: true, timeout: 5000 } // ✅ 타임아웃 3초 → 5초 증가
+            '[data-value="publish"], button[data-testid="seOnePublishBtn"], button[class*="confirm_btn"]',
+            { visible: true, timeout: 5000 }
           ).catch(() => null);
 
           if (publishOption) {
@@ -3681,15 +4021,54 @@ export class NaverBlogAutomation {
               'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"][data-click-area="tpb*i.publish"]',
               'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"]',
               'button[data-testid="seOnePublishBtn"]',
-              'button.confirm_btn__WEaBq[data-click-area*="publish"]',
+              // ✅ [2026-02-23 FIX] *= → = 정확 매칭 (토글 버튼 혼동 방지)
+              'button.confirm_btn__WEaBq[data-click-area="tpb*i.publish"]',
               'button.confirm_btn__WEaBq',
-              'button:has-text("발행")',
+              // ✅ [2026-03-05] 와일드카드 패턴 (네이버 CSS 모듈 해시 변경 대응)
+              'button[class*="confirm_btn"][data-testid="seOnePublishBtn"]',
+              'button[class*="confirm_btn"][data-click-area="tpb*i.publish"]',
+              'button[class*="confirm_btn"]',
             ];
 
             let confirmPublishButton: ElementHandle<Element> | null = null;
             for (const selector of confirmPublishSelectors) {
               confirmPublishButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
               if (confirmPublishButton) break;
+            }
+
+            // ✅ [2026-03-05] 텍스트 기반 폴백 (모든 셀렉터 실패 시)
+            if (!confirmPublishButton) {
+              this.log('   ⚠️ 확인 버튼 셀렉터 실패 → 텍스트 기반 폴백...');
+              try {
+                confirmPublishButton = await frame.evaluateHandle(() => {
+                  const buttons = document.querySelectorAll('button');
+                  for (const btn of buttons) {
+                    const text = (btn.textContent || '').trim();
+                    if ((text === '발행' || text === '확인') && !btn.hasAttribute('disabled')) {
+                      const rect = btn.getBoundingClientRect();
+                      if (rect.width > 0 && rect.height > 0 && rect.top > 100) {
+                        // ✅ [2026-03-05 FIX] toolbar 발행 버튼 제외
+                        const cls = btn.className || '';
+                        const clickArea = btn.getAttribute('data-click-area') || '';
+                        if (cls.includes('publish_btn') && !cls.includes('confirm_btn')) continue;
+                        if (clickArea === 'tpb.publish') continue;
+                        return btn;
+                      }
+                    }
+                  }
+                  return null;
+                }) as ElementHandle<Element> | null;
+
+                if (confirmPublishButton) {
+                  const isElement = await confirmPublishButton.evaluate(el => el instanceof HTMLElement).catch(() => false);
+                  if (!isElement) confirmPublishButton = null;
+                }
+                if (confirmPublishButton) {
+                  this.log('   ✅ 텍스트 기반 폴백으로 확인 버튼 발견!');
+                }
+              } catch (fallbackErr) {
+                this.log(`   ❌ 텍스트 기반 폴백 오류: ${(fallbackErr as Error).message}`);
+              }
             }
 
             if (confirmPublishButton) {
@@ -3810,7 +4189,7 @@ export class NaverBlogAutomation {
         try {
           await this.publishScheduled(scheduleDate);
         } catch (scheduleError) {
-          this.log(`⚠️ 예약발행 실패: ${(scheduleError as Error).message}`);
+          this.log(`❌ 예약발행 실패 (목표 날짜: ${scheduleDate}): ${(scheduleError as Error).message}`);
           this.log(`💾 예약발행 실패로 인해 임시저장으로 폴백합니다...`);
 
           // 모달이 열려있으면 닫기
@@ -4328,9 +4707,17 @@ export class NaverBlogAutomation {
           this.log(`   ⚠️ 프레임 분리 오류 발생: ${errorMsg.substring(0, 60)}...`);
           this.log(`   🔄 프레임 재연결 시도 중...`);
           try {
+            // ✅ [2026-03-05 FIX] mainFrame을 null로 리셋하여 강제 재연결
+            this.mainFrame = null;
             await this.switchToMainFrame();
-            this.log(`   ✅ 프레임 재연결 성공, 재시도합니다...`);
-            await this.delay(1000);
+            this.log(`   ✅ 프레임 재연결 성공`);
+            await this.delay(3000); // 2000ms → 3000ms (프레임 완전 로드 대기)
+            // ✅ 프레임이 실제로 유효한지 간단 검증
+            if (this.mainFrame) {
+              this.log(`   ✅ 프레임 동작 검증 완료, 재시도합니다...`);
+            } else {
+              this.log(`   ⚠️ 프레임 검증 실패 — 다음 retry에서 다시 시도`);
+            }
             continue; // 재시도
           } catch (frameError) {
             this.log(`   ❌ 프레임 재연결 실패: ${(frameError as Error).message}`);
@@ -4650,7 +5037,7 @@ export class NaverBlogAutomation {
       await this.delay(this.DELAYS.SHORT);
 
       // ✅ 5. 텍스트 입력 (스타일이 적용된 상태에서 입력)
-      await page.keyboard.type(normalizedText, { delay: 30 });
+      await safeKeyboardType(page, normalizedText, { delay: 30 });
       await this.delay(this.DELAYS.MEDIUM);
 
       // 선택 해제 (오른쪽 화살표)
@@ -4680,155 +5067,7 @@ export class NaverBlogAutomation {
   // 인용구 삽입 헬퍼
   // style: 'line' = 인용구 1 (기본), 'underline' = 인용구 4 (쇼핑커넥트용)
   private async insertQuotation(frame: Frame, page: Page, style: string = 'line'): Promise<void> {
-    const selectors = [
-      'button[data-name="quotation"]',
-      'button.se-toolbar-button-quotation',
-      'button[aria-label="인용구"]',
-      'button[title="인용구"]'
-    ];
-
-    // 1) 인용구 버튼 클릭 (팝업 열기)
-    const clicked = await this.clickToolbarButton(frame, page, selectors);
-    if (!clicked) {
-      this.log('   ⚠️ 인용구 버튼을 찾을 수 없습니다.');
-      // 버튼을 못 찾았더라도 텍스트 입력은 시도해야 함
-      return;
-    }
-
-    // 팝업이 렌더링될 시간을 충분히 줍니다. 네트워크/DOM 속도에 따라 다를 수 있음
-    await this.delay(this.DELAYS.MEDIUM);
-
-    // 2) 스타일에 따라 적절한 인용구 선택
-    // ✅ [복구] 쇼핑커넥트 모드: 'underline' (4번, 밑줄) / 일반 모드: 'line' (2번, 버티컬 바)
-    let targetStyleClass = 'quotation_line';
-    let targetButtonIndex = 1; // 기본: 2번 인용구 (버티컬 바)
-
-    if (style === 'bracket' || style === 'quotation_bracket' || style === '1') {
-      // 1번 인용구 (따옴표)
-      targetStyleClass = 'quotation_quote';
-      targetButtonIndex = 0;
-    } else if (style === 'underline' || style === 'quotation_underline' || style === '4') {
-      // 4번 인용구 (밑줄) - 쇼핑커넥트 모드 전용
-      targetStyleClass = 'quotation_underline';
-      targetButtonIndex = 3;
-    } else {
-      // 기본: 2번 인용구 (버티컬 라인) - 일반 모드
-      targetStyleClass = 'quotation_line';
-      targetButtonIndex = 1;
-    }
-
-    this.log(`   🔸 인용구 스타일 적용: ${targetStyleClass} (Index: ${targetButtonIndex})`);
-
-    // 3) 스타일 버튼 클릭 시도 (Retry 로직 추가)
-    // 팝업이 iframe 안에 있을 수도 있고, top document에 있을 수도 있음 (SmartEditor 버전에 따라 다름)
-    let styleClicked = false;
-
-    // 시도 1: Frame 내부에서 찾기
-    try {
-      styleClicked = await frame.evaluate((targetClass, btnIndex) => {
-        // A. 클래스명/속성으로 정확히 찾기 (사용자 제공 셀렉터 우선)
-        const exactSelectors = [
-          `.se-toolbar-option-insert-quotation-${targetClass}-button`,
-          `button[data-value="${targetClass}"]`,
-          `li[data-value="${targetClass}"]`,
-          `.se-toolbar-option-${targetClass}-button`,
-          // 하위 호환성
-          `.se-toolbar-option-insert-quotation-${targetClass.replace('quotation_', '')}-button`,
-          `.se-popup-content button:nth-child(${btnIndex + 1})`,
-          `.se-popup-quotation button:nth-child(${btnIndex + 1})`
-        ];
-
-        for (const sel of exactSelectors) {
-          const btn = document.querySelector(sel);
-          if (btn && (btn as HTMLElement).offsetParent !== null) {
-            (btn as HTMLElement).click();
-            console.log(`[insertQuotation] 클릭 성공: ${sel}`);
-            return true;
-          }
-        }
-
-        // B. 팝업 레이어 찾아서 인덱스로 클릭 (버튼 또는 li)
-        const layers = document.querySelectorAll('.se-popup-quotation, .se-toolbar-layer-quotation, .se-layer-quotation, .se-popup-layer, .se-popup-content, .se-toolbar-popup');
-        for (const layer of layers) {
-          if ((layer as HTMLElement).offsetParent === null) continue; // 안 보이는 레이어 제외
-
-          // 버튼 먼저 시도
-          const btns = Array.from(layer.querySelectorAll('button, li[data-value], .se-toolbar-button'));
-          if (btns.length > 0) {
-            const availableBtns = btns.map((b, idx) => `${idx}:${b.textContent?.trim() || (b as any).dataset?.value || b.className}`);
-            console.log(`[insertQuotation] 발견된 버튼들: ${availableBtns.join(', ')}`);
-
-            if (btns.length > btnIndex) {
-              (btns[btnIndex] as HTMLElement).click();
-              console.log(`[insertQuotation] 인덱스 클릭 성공: ${btnIndex} (총 ${btns.length}개)`);
-              return true;
-            }
-          }
-        }
-
-        console.log('[insertQuotation] 팝업 내 버튼/li 찾지 못함');
-        return false;
-      }, targetStyleClass, targetButtonIndex);
-    } catch (e) { /* ignore */ }
-
-    // 시도 2: Page(Main Document)에서 찾기 (Frame에서 실패한 경우)
-    if (!styleClicked) {
-      try {
-        styleClicked = await page.evaluate((targetClass, btnIndex) => {
-          // A. 클래스명으로 찾기
-          const exactSelectors = [
-            `.se-toolbar-option-insert-quotation-${targetClass}-button`,
-            `.se-toolbar-option-${targetClass}-button`,
-            `button[data-value="quotation_${targetClass}"]`,
-            `button[data-value="${targetClass}"]`,
-            // ✅ 추가: li 기반 선택자
-            `li[data-value="quotation_${targetClass}"]`,
-            `li.se-toolbar-option-insert-quotation-${targetClass}`,
-            `.se-popup-content button:nth-child(${btnIndex + 1})`,
-            `.se-popup-quotation button:nth-child(${btnIndex + 1})`
-          ];
-          for (const sel of exactSelectors) {
-            const btn = document.querySelector(sel);
-            if (btn && (btn as HTMLElement).offsetParent !== null) {
-              (btn as HTMLElement).click();
-              console.log(`[insertQuotation] Page 레벨 클릭 성공: ${sel}`);
-              return true;
-            }
-          }
-
-          // B. 팝업 레이어에서 찾기
-          const layers = document.querySelectorAll('.se-popup-quotation, .se-toolbar-layer-quotation, .se-layer-quotation, .se-popup-layer, .se-popup-content, .se-toolbar-popup');
-          for (const layer of layers) {
-            if ((layer as HTMLElement).offsetParent === null) continue;
-
-            // 버튼 먼저
-            const btns = Array.from(layer.querySelectorAll('button'));
-            if (btns.length > btnIndex) {
-              (btns[btnIndex] as HTMLElement).click();
-              console.log(`[insertQuotation] Page 버튼 인덱스 클릭: ${btnIndex}`);
-              return true;
-            }
-
-            // li 요소
-            const lis = Array.from(layer.querySelectorAll('li[data-value]'));
-            if (lis.length > btnIndex) {
-              (lis[btnIndex] as HTMLElement).click();
-              console.log(`[insertQuotation] Page li 인덱스 클릭: ${btnIndex}`);
-              return true;
-            }
-          }
-          return false;
-        }, targetStyleClass, targetButtonIndex);
-      } catch (e) { /* ignore */ }
-    }
-
-    if (!styleClicked) {
-      this.log('   ⚠️ 인용구 스타일 버튼을 찾지 못했습니다. (기본 스타일로 진행 가능성 있음)');
-    } else {
-      this.log(`   ✅ 인용구 스타일 선택 성공: ${style}`);
-    }
-
-    await this.delay(this.DELAYS.SHORT);
+    return await editorHelpers.insertQuotation(this, frame, page, style);
   }
 
   private async clickToolbarButton(frame: Frame, page: Page, selectors: string[]): Promise<boolean> {
@@ -4875,350 +5114,7 @@ export class NaverBlogAutomation {
     text: string,
     fontSize: number = 19
   ): Promise<void> {
-    // 🔍 디버그: 원본 텍스트 확인
-    this.log(`   🔍 [디버그] typeBodyWithRetry 호출됨`);
-    this.log(`   🔍 [디버그] 원본 텍스트 길이: ${text.length}자`);
-    this.log(`   🔍 [디버그] 원본 텍스트 시작 50자: ${text.substring(0, 50)}...`);
-
-    await this.retry(async () => {
-      this.log(`   → 본문 입력 시작 (${text.length}자)`);
-
-      // ✅ 안전 검사: 열린 패널/모달 닫기 (ABOUT, 지도, 함수 등 방지)
-      for (let i = 0; i < 2; i++) {
-        await page.keyboard.press('Escape');
-        await this.delay(50);
-      }
-
-      // 열린 패널 강제 닫기
-      await frame.evaluate(() => {
-        const panels = document.querySelectorAll('.se-popup, .se-panel, .se-layer, .se-modal, [class*="popup"], [class*="layer"]');
-        panels.forEach(panel => {
-          if (panel instanceof HTMLElement && panel.style.display !== 'none') {
-            const closeBtn = panel.querySelector('button[class*="close"], .close, [aria-label*="닫기"]');
-            if (closeBtn instanceof HTMLElement) {
-              closeBtn.click();
-            }
-          }
-        });
-      }).catch(() => { });
-
-      // ⚠️ Frame이 detached되었는지 확인 후 재연결 시도
-      try {
-        await frame.evaluate(() => true);
-      } catch (error) {
-        if ((error as Error).message.includes('detached')) {
-          this.log('   ⚠️ Frame이 detached 됨. 메인 프레임을 재연결합니다...');
-          await this.switchToMainFrame();
-          frame = (await this.getAttachedFrame());
-        } else {
-          throw error;
-        }
-      }
-
-      // 1. 폰트 크기 설정
-      await this.setFontSize(fontSize, true);
-      await this.delay(this.DELAYS.SHORT);
-
-      // ✅ 본문은 굵게가 남지 않도록 해제
-      await this.setBold(false);
-      await this.delay(this.DELAYS.SHORT);
-
-      // 4. 텍스트를 문장 단위로 분리 (3~4문장마다 줄바꿈)
-      // ✅ [강화] 마침표(.), 느낌표(!), 물음표(?)뒤에서 문장 분리
-      // ✅ 한글 문장 부호(。！？)도 지원
-      // ✅ 줄바꿈(\n)도 문장 분리로 처리
-      // ✅ [NEW] 한국어 캐주얼 종결 패턴 (~, ㅎㅎ, ㅋㅋ, ㅠㅠ, ^^, 요, 다 등)
-
-      // 1단계: 줄바꿈을 문장 구분자로 먼저 정규화
-      let normalizedText = text
-        .replace(/\r\n/g, '\n')
-        .replace(/\n{2,}/g, '[PARAGRAPH_BREAK]')  // 연속 줄바꿈은 문단 구분으로 표시
-        .replace(/\n/g, ' ')  // 단일 줄바꿈은 공백으로
-        .replace(/\[PARAGRAPH_BREAK\]/g, '.\n\n');  // 문단 구분 복원
-
-      // 2단계: 숫자+점 패턴을 임시 마커로 치환 (1., 2., 10. 등)
-      normalizedText = normalizedText.replace(/(\d+)\.\s*/g, '$1__NUM_DOT__');
-
-      // ✅ [NEW] 2.5단계: 한국어 캐주얼 문장 종결 패턴에 마침표 추가
-      // 패턴: ~, ㅎㅎ, ㅋㅋ, ㅠㅠ, ^^, 요, 해요, 드려요, 합니다, 답니다 등
-      normalizedText = normalizedText
-        // 물결표(~) 뒤에 공백이 오면 문장 끝으로 처리
-        .replace(/~\s+/g, '~ [SENTENCE_END] ')
-        // ㅎㅎ, ㅋㅋ, ㅠㅠ 등 반복 자음 뒤에 공백
-        .replace(/([ㅎㅋㅠㅜ]{2,})\s+/g, '$1 [SENTENCE_END] ')
-        // ^^ 이모티콘 뒤에 공백
-        .replace(/\^\^\s+/g, '^^ [SENTENCE_END] ')
-        // 한국어 구어체 종결어미 뒤에 공백 (요, 해요, 드려요, 해봐요 등)
-        .replace(/(요|용|욥|예요|에요|해요|드려요|봐요|해봐요|던데요|했거든요|하더라구요|라구요|어요|거든요|드랍니다|습니다|합니다|답니다|입니다|이당|당ㅎ|닝)\s+/g, '$1 [SENTENCE_END] ');
-
-      // 3단계: 실제 문장 분리 (마침표, 느낌표, 물음표 뒤 + 공백 또는 줄바꿈 또는 SENTENCE_END 마커)
-      const rawSentences = normalizedText
-        .split(/(?<=[.!?。！？])\s+|\[SENTENCE_END\]\s*/)
-        // 임시 마커를 다시 원래대로 복원
-        .map(s => s.replace(/__NUM_DOT__/g, '. '))
-        .map(s => s.trim())
-        .filter(s => s.length > 0);
-
-      this.log(`   🔍 [문장분리] 1차 분리: ${rawSentences.length}개 문장`);
-
-      // ✅ 너무 짧은 문장(이모지만 있는 경우 등)은 이전 문장과 합치기
-      const sentences: string[] = [];
-      for (let i = 0; i < rawSentences.length; i++) {
-        const sentence = rawSentences[i].trim();
-
-        // 문장이 너무 짧으면 (10자 미만, 주로 이모지만 있는 경우) 이전 문장과 합치기
-        // 단, 숫자로 시작하는 리스트 항목은 합치지 않음 (1. xxx, 2. xxx 등)
-        const isNumberedList = /^\d+\.\s/.test(sentence);
-        if (sentence.length < 10 && sentences.length > 0 && !isNumberedList) {
-          sentences[sentences.length - 1] += ' ' + sentence;
-        } else {
-          sentences.push(sentence);
-        }
-      }
-
-      const sentencesPerParagraph = 3; // ✅ [2026-01-19] 3문장마다 줄바꿈 (사용자 요청)
-      const maxCharsPerParagraph = 300; // ✅ [수정] 300자 이상이면 강제 문단 분리
-
-      // 🔍 디버그: 원본 텍스트와 분리된 문장 수 확인
-      this.log(`   🔍 [문장분리] 원본 텍스트 길이: ${text.length}자`);
-      this.log(`   🔍 [문장분리] 원본 분리: ${rawSentences.length}개 → 병합 후: ${sentences.length}개`);
-      if (sentences.length > 0) {
-        this.log(`   🔍 [문장분리] 첫 번째 문장: ${sentences[0].substring(0, 80)}...`);
-        this.log(`   🔍 [문장분리] 마지막 문장: ${sentences[sentences.length - 1].substring(0, 80)}...`);
-      }
-
-      let currentParagraph = '';
-      let sentenceCount = 0;
-      let totalTypedChars = 0; // 실제로 타이핑된 문자 수 추적
-
-      for (let i = 0; i < sentences.length; i++) {
-        // ✅ [중지 체크] 각 문장 처리 전 중지 여부 확인 (백그라운드 타이핑 즉시 중지)
-        this.ensureNotCancelled();
-
-        const sentence = sentences[i].trim();
-        if (!sentence) continue;
-
-        // ✅ 이미 마침표가 포함되어 있으므로 그대로 사용
-        if (currentParagraph) {
-          currentParagraph += ' ' + sentence;
-        } else {
-          currentParagraph = sentence;
-        }
-
-        sentenceCount++;
-
-        const isLast = i === sentences.length - 1;
-        const tooLong = currentParagraph.length >= maxCharsPerParagraph && sentenceCount >= 1;
-
-        // 2문장마다(또는 너무 길면) 또는 마지막 문장일 때 문단 완성
-        if (sentenceCount >= sentencesPerParagraph || tooLong || isLast) {
-          // 현재 문단 입력
-          const paragraphNum = Math.floor(i / sentencesPerParagraph) + 1;
-          this.log(`   📝 [문단 ${paragraphNum}] ${sentenceCount}개 문장, ${currentParagraph.length}자: ${currentParagraph.substring(0, 60)}...`);
-          totalTypedChars += currentParagraph.length;
-
-          // ❌ [Smart Typing] 핵심 키워드 자동 강조 비활성화
-          await smartTypeWithAutoHighlight(page, currentParagraph, { baseDelay: 20, enableHighlight: false });
-          await this.delay(this.DELAYS.MEDIUM);
-
-          // ✅ 입력 확인 (첫 문단만 확인하여 성능 최적화)
-          if (i < sentencesPerParagraph) {
-            // 입력 후 DOM 업데이트 대기 (더 긴 대기)
-            await this.delay(600);
-
-            // 텍스트 확인을 위해 더 짧은 부분 문자열 사용 (처음 10자)
-            const firstPart = currentParagraph.substring(0, Math.min(10, currentParagraph.length)).trim();
-            if (!firstPart) {
-              this.log(`   ⚠️ 첫 문단이 비어있음 - 확인 건너뜀`);
-            } else {
-              const inputVerified = await frame.evaluate((textPart) => {
-                // 여러 방법으로 텍스트 확인 (더 관대한 검사)
-                const sectionText = document.querySelector('.se-section-text');
-                if (sectionText) {
-                  const content = (sectionText.textContent || '').trim();
-                  // 부분 문자열이 포함되어 있거나, 처음 10자가 일치하는지 확인
-                  if (content.includes(textPart)) return true;
-                  if (content.length >= textPart.length && content.substring(0, textPart.length) === textPart) return true;
-                }
-
-                // 대체 방법: 모든 편집 가능한 영역 확인
-                const editableAreas = document.querySelectorAll('[contenteditable="true"], .se-component, .se-section');
-                for (let i = 0; i < editableAreas.length; i++) {
-                  const content = (editableAreas[i].textContent || '').trim();
-                  if (content.includes(textPart)) return true;
-                  if (content.length >= textPart.length && content.substring(0, textPart.length) === textPart) return true;
-                }
-
-                // 마지막 시도: body 전체 텍스트 확인
-                const bodyContent = (document.body.textContent || '').trim();
-                if (bodyContent.includes(textPart)) return true;
-
-                return false;
-              }, firstPart);
-
-              if (!inputVerified) {
-                this.log(`   ⚠️ 첫 문단 입력 확인 실패 - 더 긴 대기 후 재확인...`);
-                // 더 긴 대기 후 재확인
-                await this.delay(800);
-
-                const retryVerified = await frame.evaluate((textPart) => {
-                  const sectionText = document.querySelector('.se-section-text');
-                  if (sectionText) {
-                    const content = (sectionText.textContent || '').trim();
-                    if (content.includes(textPart)) return true;
-                    if (content.length >= textPart.length && content.substring(0, textPart.length) === textPart) return true;
-                  }
-
-                  const editableAreas = document.querySelectorAll('[contenteditable="true"], .se-component, .se-section');
-                  for (let i = 0; i < editableAreas.length; i++) {
-                    const content = (editableAreas[i].textContent || '').trim();
-                    if (content.includes(textPart)) return true;
-                  }
-
-                  const bodyContent = (document.body.textContent || '').trim();
-                  if (bodyContent.includes(textPart)) return true;
-
-                  return false;
-                }, firstPart);
-
-                if (retryVerified) {
-                  this.log(`   ✅ 재시도 후 첫 문단 입력 확인 완료`);
-                } else {
-                  this.log(`   ⚠️ 재시도 후에도 입력 확인 실패 (계속 진행 - 실제로는 입력되었을 수 있음)`);
-                }
-              } else {
-                this.log(`   ✅ 첫 문단 입력 확인 완료`);
-              }
-            }
-          }
-
-          // 마지막 문장이 아니면 Enter 2번 추가 (문단 구분)
-          if (i < sentences.length - 1) {
-            this.log(`   ⏎⏎ [문단구분] Enter 2번 입력 시작...`);
-
-            // ✅ [2026-01-19] 문단정리는 엔터 2번 (사용자 확인)
-            try {
-              await page.keyboard.press('Enter');
-              await this.delay(300);
-              await page.keyboard.press('Enter');
-              await this.delay(300);
-              this.log(`   ✅ [문단구분] Enter 2번 입력 완료`);
-            } catch (enterError) {
-              this.log(`   ⚠️ [문단구분] Enter 입력 실패: ${(enterError as Error).message} - 계속 진행`);
-              // 실패해도 계속 진행
-            }
-
-            // Enter 후 폰트 크기 유지를 위해 다시 설정
-            await this.setFontSize(fontSize, true);
-            await this.delay(this.DELAYS.SHORT);
-          }
-
-          // 문단 초기화
-          currentParagraph = '';
-          sentenceCount = 0;
-        }
-      }
-
-      // 남은 문장이 있으면 입력
-      if (currentParagraph.trim()) {
-        this.log(`   🔍 [타이핑] 마지막 문단 (${currentParagraph.length}자): ${currentParagraph.substring(0, 60)}...`);
-        totalTypedChars += currentParagraph.length;
-        // ❌ [Smart Typing] 핵심 키워드 자동 강조 비활성화
-        await smartTypeWithAutoHighlight(page, currentParagraph, { baseDelay: 20, enableHighlight: false });
-        await this.delay(this.DELAYS.MEDIUM);
-      }
-
-      this.log(`   🔍 [최종] 원본 ${text.length}자 → 실제 타이핑 ${totalTypedChars}자 (차이: ${text.length - totalTypedChars}자)`);
-
-      // 3. DOM 업데이트 대기 (이미지 삽입 후 충분한 대기)
-      await this.delay(this.DELAYS.LONG); // 500ms 추가 대기
-
-      // 4. DOM 검증 (강화된 검증 로직)
-      // 본문의 경우 첫 30자만 검증
-      const textToVerify = text.substring(0, Math.min(30, text.length)).trim();
-      if (textToVerify.length > 0) {
-        // 여러 번 시도 (DOM 업데이트 지연 대비)
-        let verified = false;
-        for (let verifyAttempt = 0; verifyAttempt < 5; verifyAttempt++) {
-          if (verifyAttempt > 0) {
-            await this.delay(500); // 재시도 전 대기 시간 증가
-          }
-
-          // ✅ 개선: 더 폭넓은 선택자로 에디터 내용 확인
-          const editorContent = await frame.evaluate(() => {
-            const possibleSelectors = [
-              '.se-section-text',
-              '.se-main-container',
-              '.se-component-content',
-              '[contenteditable="true"]',
-              '.se-text-paragraph',
-              '.se-component'
-            ];
-
-            let combinedText = '';
-            for (const selector of possibleSelectors) {
-              const elements = document.querySelectorAll(selector);
-              elements.forEach(el => {
-                combinedText += ' ' + ((el as HTMLElement).innerText || el.textContent || '');
-              });
-            }
-            return combinedText.trim();
-          });
-
-          if (editorContent.length > 0) {
-            // 에디터에 내용이 있으면 검증 시도
-            verified = await this.verifyContentInDOM(frame, textToVerify, 'body');
-            if (verified) {
-              this.log(`   ✅ 본문 DOM 검증 완료 (에디터 내용: ${editorContent.length}자)`);
-              break;
-            } else {
-              // ✅ [긴급 수정] 스마트 타이핑(HTML)으로 인해 텍스트 매칭이 실패하더라도 내용은 입력된 경우 통과
-              if (editorContent.length > 30) { // 30자 이상이면 입력된 것으로 간주
-                this.log(`   ⚠️ 정확한 매칭 실패했으나 내용 있음 (${editorContent.length}자) - 성공으로 간주`);
-                verified = true;
-                break;
-              }
-              this.log(`   ⚠️ 검증 시도 ${verifyAttempt + 1}/5: 에디터 내용은 있음 (${editorContent.length}자)이지만 검증 실패`);
-            }
-          } else {
-            this.log(`   ⚠️ 검증 시도 ${verifyAttempt + 1}/5: 에디터 내용이 비어있음`);
-          }
-        }
-
-        if (!verified) {
-          // ✅ 검증 실패 시 에러 던지기 (빈 글 발행 방지)
-          // ✅ 개선:broader selectors로 최종 확인 (querySelectorAll 사용)
-          const finalContent = await frame.evaluate(() => {
-            const possibleSelectors = ['.se-section-text', '.se-main-container', '[contenteditable="true"]', '.se-text-paragraph', '.se-component-content'];
-            let combined = '';
-            possibleSelectors.forEach(sel => {
-              document.querySelectorAll(sel).forEach(el => {
-                combined += ' ' + (el.textContent || '');
-              });
-            });
-            return combined.trim();
-          });
-
-          if (finalContent.length === 0) {
-            throw new Error(`본문 입력 실패: 에디터에 내용이 없습니다. (검증 시도 5회 모두 실패)`);
-          } else {
-            this.log(`   ⚠️ 본문 DOM 검증 실패했지만 에디터에 내용이 있음 (${finalContent.length}자) - 계속 진행`);
-          }
-        }
-      } else {
-        // 텍스트가 비어있으면 에러
-        throw new Error('본문 입력 실패: 입력할 텍스트가 비어있습니다.');
-      }
-
-      // 5. 마지막 Enter 2회 (본문 입력 완료 후)
-      await page.keyboard.press('Enter');
-      await this.delay(this.DELAYS.MEDIUM);
-      await page.keyboard.press('Enter');
-      await this.delay(this.DELAYS.MEDIUM);
-
-      // Enter 후 DOM 안정화 대기
-      await this.delay(this.DELAYS.SHORT);
-    }, 3, '본문 입력');
+    return await editorHelpers.typeBodyWithRetry(this, frame, page, text, fontSize);
   }
 
   private async typeTextWithMarkdownBold(frame: Frame, page: Page, text: string, delay: number): Promise<void> {
@@ -5232,14 +5128,14 @@ export class NaverBlogAutomation {
     while ((match = re.exec(raw)) !== null) {
       const before = raw.slice(lastIndex, match.index);
       if (before) {
-        await page.keyboard.type(before, { delay });
+        await safeKeyboardType(page, before, { delay });
       }
 
       const boldText = String(match[1] || '');
       if (boldText) {
         await this.setBold(true);
         await this.delay(30);
-        await page.keyboard.type(boldText, { delay });
+        await safeKeyboardType(page, boldText, { delay });
         await this.delay(30);
         await this.setBold(false);
         await this.delay(30);
@@ -5250,7 +5146,7 @@ export class NaverBlogAutomation {
 
     const tail = raw.slice(lastIndex);
     if (tail) {
-      await page.keyboard.type(tail, { delay });
+      await safeKeyboardType(page, tail, { delay });
     }
   }
 
@@ -5323,1480 +5219,12 @@ export class NaverBlogAutomation {
   }
 
   private async applyStructuredContent(resolved: ResolvedRunOptions): Promise<void> {
-    await this.retry(async () => {
-      const structured = resolved.structuredContent;
-      if (!structured) {
-        await this.applyPlainContent(resolved);
-        return;
-      }
-
-      // ✅ 본문에서 중복된 CTA 텍스트 제거 (🔗 더 알아보기 등)
-      if (structured.bodyPlain) {
-        const cleanedBody = structured.bodyPlain
-          .replace(/🔗\s*더\s*알아보기[^\n]*\n?/g, '') // "🔗 더 알아보기" 제거
-          .replace(/더\s*알아보기[^\n]*\n?/g, '') // "더 알아보기" 제거
-          .replace(/━━━━━━━━━━━━━━━━━━━━━━[^\n]*\n?/g, '') // 구분선 제거
-          .replace(/👉\s*https?:\/\/[^\n]*\n?/g, '') // CTA 링크 제거
-          .trim();
-
-        if (cleanedBody !== structured.bodyPlain) {
-          this.log('🧹 본문에서 중복된 CTA 텍스트 제거 완료');
-          structured.bodyPlain = cleanedBody;
-          resolved.content = cleanedBody;
-        }
-      }
-
-      if (structured.bodyPlain) {
-        structured.bodyPlain = this.stripRepeatedHookBlocks(structured.bodyPlain);
-        structured.bodyPlain = this.enforceOrdinalLineBreaks(structured.bodyPlain);
-        resolved.content = structured.bodyPlain;
-      }
-
-      // ✅ 반자동 모드: 사용자가 수정한 내용이 있으면 그것을 사용하여 타이핑
-      if (resolved.imageMode === 'semi-auto') {
-        this.log('🔍 반자동 모드: 에디터의 현재 내용을 확인합니다...');
-        const currentContent = await this.getCurrentEditorContent();
-
-        if (currentContent && (currentContent.title.length > 0 || currentContent.content.length > 0)) {
-          this.log('✅ 에디터에 사용자가 수정한 내용이 있습니다. 수정된 내용을 그대로 타이핑합니다.');
-          this.log(`📝 제목: ${currentContent.title.substring(0, 50)}${currentContent.title.length > 50 ? '...' : ''}`);
-          this.log(`📄 본문 길이: ${currentContent.content.length}자`);
-          if (currentContent.hashtags.length > 0) {
-            this.log(`🏷️ 해시태그: ${currentContent.hashtags.join(', ')}`);
-          }
-
-          // ✅ 수정된 본문에서도 중복된 CTA 텍스트 제거
-          let cleanedContent = currentContent.content
-            .replace(/🔗\s*더\s*알아보기[^\n]*\n?/g, '')
-            .replace(/더\s*알아보기[^\n]*\n?/g, '')
-            .replace(/━━━━━━━━━━━━━━━━━━━━━━[^\n]*\n?/g, '')
-            .replace(/👉\s*https?:\/\/[^\n]*\n?/g, '')
-            .trim();
-
-          cleanedContent = this.stripRepeatedHookBlocks(cleanedContent);
-          cleanedContent = this.enforceOrdinalLineBreaks(cleanedContent);
-
-          // 수정된 내용으로 structuredContent 업데이트
-          structured.selectedTitle = currentContent.title || structured.selectedTitle;
-          structured.bodyPlain = cleanedContent || structured.bodyPlain;
-          if (currentContent.hashtags.length > 0) {
-            structured.hashtags = currentContent.hashtags;
-          }
-
-          // ✅ 수정된 제목을 그대로 타이핑
-          if (currentContent.title && currentContent.title.length > 0) {
-            structured.selectedTitle = currentContent.title;
-            resolved.title = currentContent.title;
-            this.log('✅ 수정된 제목을 타이핑합니다.');
-          }
-
-          // 해시태그가 있으면 설정 (나중에 입력)
-          if (currentContent.hashtags.length > 0) {
-            structured.hashtags = currentContent.hashtags;
-            resolved.hashtags = currentContent.hashtags;
-          }
-
-          // ✅ 수정된 본문 내용을 그대로 타이핑 (덮어쓰기)
-          structured.bodyPlain = cleanedContent;
-          resolved.content = cleanedContent;
-          this.log('✅ 수정된 본문 내용을 타이핑합니다.');
-          // 본문 타이핑은 아래 로직에서 계속 진행됨
-        } else {
-          this.log('ℹ️ 에디터에 내용이 없습니다. 생성된 콘텐츠를 적용합니다.');
-        }
-      }
-
-      this.log('🧱 구조화된 콘텐츠를 체계적으로 적용합니다 (완전 순차 실행)...');
-      this.log('📋 타이핑 순서: 제목 → Enter 2회 → 소제목(28px) → Enter 2회 → 이미지 → Enter 1회 → 본문(19px) → Enter 2회 → 반복');
-      this.ensureNotCancelled();
-
-      const frame = (await this.getAttachedFrame());
-      const page = this.ensurePage();
-
-      // 0. 글 톤 설정 (있는 경우)
-      if (resolved.toneStyle) {
-        await this.setToneStyle(resolved.toneStyle);
-      }
-
-      // 1. 도움말 닫기 버튼 클릭 (있는 경우)
-      try {
-        const helpCloseSelectors = [
-          '.se-help-panel-close-button',
-          '.se-hlpr-panel-close-button',
-          '.se-hlpe-panel-close-button',
-          'button[aria-label*="도움말"][aria-label*="닫기"]',
-          'button[title*="도움말"][title*="닫기"]',
-          'button[class*="help"][class*="close"]',
-          'button[aria-label*="닫기"]',
-          '.se-help-close',
-        ];
-
-        for (const selector of helpCloseSelectors) {
-          const helpCloseButton = await frame.$(selector).catch(() => null);
-          if (helpCloseButton) {
-            const isVisible = await helpCloseButton.evaluate((el: Element) => {
-              const htmlEl = el as HTMLElement;
-              return htmlEl.offsetParent !== null && htmlEl.style.display !== 'none';
-            }).catch(() => false);
-
-            if (isVisible) {
-              await helpCloseButton.click();
-              await this.delay(this.DELAYS.MEDIUM);
-              this.log('✅ 도움말 패널을 닫았습니다.');
-              break;
-            }
-          }
-        }
-      } catch {
-        // 도움말이 없으면 무시
-      }
-
-      // 1. 제목 입력 (본문 영역으로 자동 이동)
-      this.log('📝 [1단계] 제목 입력 중...');
-      await this.inputTitle(resolved.title);
-      await this.delay(200); // 500ms → 200ms
-
-      // 1-1. 서식 초기화 (제목 입력 후, 본문에서)
-      this.log('🔄 에디터 서식 초기화 중...');
-      await this.clearAllFormatting();
-      await this.delay(300);
-
-      // 1-2. CTA 상단 삽입 (위치가 top인 경우, skipCta가 false인 경우만)
-      if (resolved.skipCta) {
-        this.log(`   🚫 CTA 없이 발행하기가 선택되어 CTA를 추가하지 않습니다.`);
-      } else if (resolved.ctaPosition === 'top' && resolved.ctas.length > 0) {
-        for (let i = 0; i < resolved.ctas.length; i++) {
-          const c = resolved.ctas[i];
-          this.log(`   → CTA 버튼 상단 삽입 중... (${i + 1}/${resolved.ctas.length}, 텍스트: "${c.text}", 링크: "${resolved.affiliateLink || c.link || '#'}")`);
-          // ✅ [핸심 수정] affiliateLink 우선 사용
-          await this.insertCtaLink(resolved.affiliateLink || c.link || '#', c.text, 'top');
-          await this.delay(this.DELAYS.MEDIUM);
-        }
-        this.log(`   ✅ CTA 버튼 상단 삽입 완료`);
-      } else if (resolved.ctaPosition === 'top') {
-        this.log(`   ⚠️ CTA 위치는 'top'이지만 CTA가 없어서 삽입하지 않습니다.`);
-      }
-
-      // 2. 서론(Introduction) 작성
-      const headings = structured.headings || [];
-      const bodyText = structured.bodyPlain || '';
-
-      // ✅ 쇼핑커넥트 모드 감지 (for 루프 밖에서 미리 체크)
-      const isShoppingConnectModeGlobal = resolved.contentMode === 'affiliate' || !!resolved.affiliateLink;
-
-      // ✅ [쇼핑커넥트 모드] 고지문 최상단 → 서론 작성 + 썸네일 이미지 삽입
-      if (isShoppingConnectModeGlobal && structured.introduction && structured.introduction.trim().length > 10) {
-        this.log('📖 [쇼핑커넥트] 서론 작성 중...');
-
-        // ✅ [수정] 제휴 마케팅 고지 문구를 최상단에 먼저 삽입 (썸네일보다 위!)
-        if (resolved.affiliateLink) {
-          const affiliateDisclosure = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
-          this.log(`   📋[쇼핑커넥트] 제휴 마케팅 고지 문구 최상단 삽입 중...`);
-          await page.keyboard.type(affiliateDisclosure, { delay: 15 });
-          await this.delay(300);
-          await page.keyboard.press('Enter');
-          await page.keyboard.press('Enter');
-          await this.delay(200);
-          this.log(`   ✅ 제휴 마케팅 고지 문구 최상단 삽입 완료`);
-        }
-
-        // 썸네일 이미지 검색 ('🖼️ 썸네일' 키로 저장됨)
-        let introImages = (resolved.images || []).filter((img: any) =>
-          img.heading === '🖼️ 썸네일' || img.heading === '썸네일' || img.isThumbnail === true || img.isIntro === true
-        );
-
-        // ✅ [신규] 서론 이미지가 없으면 수집된 제품 이미지 + 제목 텍스트 오버레이로 썸네일 생성
-        if (introImages.length === 0 && !resolved.skipImages) {
-          this.log(`   🎨 서론 이미지 없음 → 수집된 제품이미지 + 제목 텍스트 오버레이 썸네일 생성 중...`);
-          try {
-            // ✅ [개선] 수집된 제품 이미지가 있으면 그 위에 텍스트 오버레이
-            const { generateThumbnailWithTextOverlay, generateThumbnailWithTitle } = await import('./image/tableImageGenerator.js');
-            const blogTitle = resolved.title || structured.selectedTitle || '상품 리뷰';
-
-            // ✅ [수정] 수집된 원본 제품 이미지(collectedImages)를 우선 사용 (AI 생성 이미지 아님!)
-            let productImagePath = '';
-
-            // ✅ [2026-01-24 개선] 수집된 이미지 검색 - AI 생성 이미지 완전 제외!
-            const allImages = resolved.images || [];
-            const aiProviders = ['nano-banana-pro', 'stability', 'fal', 'pollinations', 'dalle', 'gemini', 'ideogram', 'ai'];
-
-            this.log(`   🔍 [썸네일] 원본 제품 이미지 검색 시작 (AI 생성 이미지 완전 제외)`);
-
-            // 1순위: collectedImages (수집된 원본 제품 이미지) - URL 직접 사용
-            const collectedImages = resolved.collectedImages || [];
-            if (collectedImages.length > 0) {
-              const firstCollectedImg = collectedImages[0] as any;
-              // ✅ URL 우선 사용 (로컬 파일보다 URL이 더 신뢰성 있음)
-              productImagePath = firstCollectedImg?.url || firstCollectedImg?.thumbnailUrl || firstCollectedImg?.filePath || '';
-              if (productImagePath) {
-                this.log(`   📦 [1순위: collectedImages] 수집된 원본 이미지 URL 발견: ${productImagePath.substring(0, 60)}...`);
-              }
-            }
-
-            // 2순위: resolved.images 중 수집된 이미지 (source=collected, AI 제외!)
-            if (!productImagePath) {
-              const collectedFromImages = allImages.find((img: any) =>
-                (img.source === 'collected' || img.isCollected === true || img.provider === 'collected') &&
-                !aiProviders.includes(img.provider) &&
-                !img.isAiGenerated &&
-                (img.url || img.filePath)
-              );
-              if (collectedFromImages) {
-                productImagePath = (collectedFromImages as any)?.url || (collectedFromImages as any)?.filePath || '';
-                this.log(`   📦 [2순위: source=collected] 수집된 이미지 발견`);
-              }
-            }
-
-            // 3순위: 로컬 저장된 이미지 (AI 생성 이미지 완전 제외!)
-            // ✅ [2026-01-24 개선] provider가 없는 이미지도 원본으로 간주 (수집된 이미지 포함)
-            if (!productImagePath) {
-              const localImage = allImages.find((img: any) => {
-                const hasPath = img.filePath || img.url;
-                const isAi = aiProviders.includes(img.provider) || img.isAiGenerated === true || img.provider === 'nano-banana-pro';
-                // provider가 없거나 undefined인 경우는 원본 이미지로 간주
-                return hasPath && !isAi;
-              });
-              if (localImage) {
-                productImagePath = (localImage as any)?.url || (localImage as any)?.filePath || '';
-                this.log(`   📦 [3순위: 로컬 저장] 비-AI 이미지 발견: provider=${(localImage as any)?.provider || 'none'}`);
-              }
-            }
-
-            // 4순위: 첫 번째 소제목 이미지 (AI 제외, URL만 있는 경우)
-            // ✅ [2026-01-24 신규] 소제목 이미지 중 첫 번째 비-AI 이미지 사용
-            if (!productImagePath) {
-              const headingImages = allImages.filter((img: any) =>
-                img.heading && !img.heading.includes('썸네일') && !img.heading.includes('Thumbnail')
-              );
-              const firstHeadingImage = headingImages.find((img: any) => {
-                const hasUrl = img.url || img.filePath;
-                const isAi = aiProviders.includes(img.provider) || img.isAiGenerated === true;
-                return hasUrl && !isAi;
-              });
-              if (firstHeadingImage) {
-                productImagePath = (firstHeadingImage as any)?.url || (firstHeadingImage as any)?.filePath || '';
-                this.log(`   📦 [4순위: 소제목 이미지] heading="${(firstHeadingImage as any)?.heading}" 이미지 발견`);
-              }
-            }
-
-            // 5순위: 네이버 쇼핑 이미지 URL 직접 검색 (shop-phinf.pstatic.net, pstatic.net -> 원본 제품 이미지)
-            // ✅ [2026-01-24 신규] AI 생성 여부와 관계없이 네이버 쇼핑 도메인 URL은 원본 제품 이미지
-            if (!productImagePath) {
-              const naverShoppingImage = allImages.find((img: any) => {
-                const imageUrl = (img.url || img.filePath || '').toLowerCase();
-                return imageUrl.includes('shop-phinf.pstatic.net') ||
-                  imageUrl.includes('pstatic.net') ||
-                  imageUrl.includes('shop.naver.com');
-              });
-              if (naverShoppingImage) {
-                productImagePath = (naverShoppingImage as any)?.url || (naverShoppingImage as any)?.filePath || '';
-                this.log(`   📦 [5순위: 네이버 쇼핑 URL] 원본 제품 이미지 URL 발견`);
-              }
-            }
-
-            // 6순위: structuredContent에 저장된 수집 이미지 (collectedImages가 structuredContent에 있을 수 있음)
-            if (!productImagePath && resolved.structuredContent) {
-              const scImages = (resolved.structuredContent as any).collectedImages ||
-                (resolved.structuredContent as any).images || [];
-              const firstScImage = scImages.find((img: any) => {
-                if (typeof img === 'string') {
-                  return img.includes('pstatic.net') || img.includes('shop.naver.com');
-                }
-                const imageUrl = (img?.url || img?.filePath || img?.thumbnailUrl || '').toLowerCase();
-                return imageUrl.includes('pstatic.net') || imageUrl.includes('shop.naver.com');
-              });
-              if (firstScImage) {
-                productImagePath = typeof firstScImage === 'string'
-                  ? firstScImage
-                  : (firstScImage?.url || firstScImage?.filePath || firstScImage?.thumbnailUrl || '');
-                this.log(`   📦 [6순위: structuredContent] 수집 이미지 발견`);
-              }
-            }
-
-            // 수집된 원본 이미지가 없으면 그라데이션 배경 사용
-            if (!productImagePath) {
-              this.log(`   ⚠️ [썸네일] 수집된 원본 이미지 없음 → 그라데이션 배경 폴백`);
-              this.log(`   📊 [디버깅] allImages.length=${allImages.length}, 각 이미지 정보:`);
-              allImages.slice(0, 5).forEach((img: any, idx: number) => {
-                this.log(`      [${idx}] heading=${img.heading || 'N/A'}, provider=${img.provider || 'N/A'}, isAi=${img.isAiGenerated ?? 'N/A'}, url=${(img.url || img.filePath || 'N/A').substring(0, 80)}`);
-              });
-            }
-
-            let thumbnailPath: string;
-            if (productImagePath) {
-              // ✅ 수집된 제품 이미지 위에 텍스트 오버레이
-              this.log(`   📷 수집된 제품 이미지 사용: ${productImagePath.substring(productImagePath.lastIndexOf('/') + 1)}`);
-              thumbnailPath = await generateThumbnailWithTextOverlay(productImagePath, blogTitle);
-            } else {
-              // 폴백: 그라데이션 배경
-              this.log(`   🎨 수집된 이미지 없음 → 그라데이션 배경 사용`);
-              thumbnailPath = await generateThumbnailWithTitle(blogTitle);
-            }
-
-            if (thumbnailPath) {
-              this.log(`   ✅ 서론 썸네일 생성 완료(제목 텍스트 포함: "${blogTitle.substring(0, 30)}...")`);
-              await this.insertBase64ImageAtCursor(thumbnailPath);
-              await this.delay(500);
-              // 썸네일에 제휴 링크 삽입
-              if (resolved.affiliateLink) {
-                await this.attachLinkToLastImage(resolved.affiliateLink);
-              }
-            }
-          } catch (thumbError) {
-            this.log(`   ⚠️ 서론 썸네일 생성 실패: ${(thumbError as Error).message} `);
-          }
-        } else if (introImages.length > 0 && !resolved.skipImages) {
-          this.log(`   📸 서론 이미지 ${introImages.length}개 삽입 중...`);
-          await this.insertImagesAtCurrentCursor(introImages, page, frame, resolved.affiliateLink);
-        }
-
-        // 서론 본문 타이핑
-        await this.typeBodyWithRetry(frame, page, structured.introduction.trim(), 19);
-        await this.delay(this.DELAYS.MEDIUM);
-
-        // 서론 후 구분선
-        await this.insertHorizontalLine();
-        await page.keyboard.press('Enter'); // ✅ [2026-01-19] 엔터 1회로 축소 (2회 → 1회)
-        await this.delay(this.DELAYS.MEDIUM);
-
-        this.log('   ✅ 서론 작성 완료');
-      } else {
-        this.log('   ⏭️ [설정] 서론 건너뛰기 (일반 모드 또는 서론 없음)');
-      }
-
-      // 3. 소제목과 본문을 순차적으로 작성 (완전 순차 실행)
-      this.log(`📋 총 ${headings.length}개의 섹션을 순차적으로 작성합니다.`);
-
-      // for문으로 완전 순차 실행 (클릭 절대 금지, 키보드만 사용)
-      for (let i = 0; i < headings.length; i++) {
-        this.ensureNotCancelled();
-        const heading = headings[i];
-
-        this.log(`\n📝[${i + 1}/${headings.length}] 섹션 "${heading.title}" 처리 시작...`);
-
-        // ✅ 소제목은 heading.title을 그대로 사용 (bodyPlain에서 추출 로직 제거됨)
-        // 이전의 "복구" 로직이 본문 내용을 소제목으로 잘못 추출하는 버그가 있었음
-        const fullHeadingTitle = heading.title;
-
-        try {
-          // 클릭 완전 제거 - 현재 커서 위치에서 바로 시작
-
-          // ✅ 쇼핑커넥트 모드 감지
-          const isShoppingConnectMode = resolved.contentMode === 'affiliate' || !!resolved.affiliateLink;
-
-          // ✅ 디버그 로그: 쇼핑커넥트 모드 판단 근거 출력
-          this.log(`   🔍[쇼핑커넥트 체크] contentMode: "${resolved.contentMode}", affiliateLink: "${resolved.affiliateLink ? '있음' : '없음'}" → isShoppingConnectMode: ${isShoppingConnectMode} `);
-
-          // a) 소제목 입력 (전체 소제목 사용)
-          // ✅ [복구] 쇼핑커넥트 모드: 'underline' (4번, 밑줄) / 일반 모드: 'line' (2번, 버티컬 바)
-          const quotationStyle = isShoppingConnectMode ? 'underline' : 'line';
-
-          // ✅ [수정] 고지문은 이제 서론 삽입 전에 최상단에 삽입되므로 여기서는 생략
-
-          // ✅ [수정] 모든 섹션에서 소제목 먼저 입력 (첫 번째 섹션 예외 제거)
-          await this.typeSubtitleWithRetry(frame, page, fullHeadingTitle, 28, quotationStyle);
-          const styleLabel = isShoppingConnectMode ? '4번-밑줄' : '2번-버티컬라인';
-          this.log(`   ✅ 소제목 "${fullHeadingTitle}" 완료(인용구: ${styleLabel})`);
-
-          // 소제목 입력 후 충분한 대기 (DOM 업데이트)
-          await this.delay(2000); // 1500ms → 2000ms
-
-          // b) 이미지 업로드 (skipImages가 false인 경우)
-          if (!resolved.skipImages) {
-            // ⚠️ 중요: 이미지 삽입 전 본문 영역으로 커서 이동 (제목 영역에 있으면 안 됨)
-            this.log(`   🔄 본문 영역으로 커서 이동 확인 중...`);
-
-            const cursorInfo = await frame.evaluate(() => {
-              const titleElement = document.querySelector('.se-section-documentTitle');
-              const bodyElement = document.querySelector('.se-section-text, .se-main-container');
-
-              if (!bodyElement) return { inTitle: false, inBody: false };
-
-              const selection = window.getSelection();
-              if (!selection || selection.rangeCount === 0) {
-                return { inTitle: false, inBody: false, needsMove: true };
-              }
-
-              const range = selection.getRangeAt(0);
-              const container = range.commonAncestorContainer;
-              const node = container.nodeType === Node.TEXT_NODE ? container.parentElement : container;
-
-              const inTitle = titleElement && titleElement.contains(node);
-              const inBody = bodyElement.contains(node);
-
-              return { inTitle, inBody, needsMove: inTitle || !inBody };
-            });
-
-            if (cursorInfo.needsMove) {
-              if (cursorInfo.inTitle) {
-                this.log(`   ⚠️ 제목 영역에 커서가 있어 본문 영역으로 이동합니다.`);
-              }
-
-              await frame.evaluate(() => {
-                const titleElement = document.querySelector('.se-section-documentTitle');
-                const bodyElement = document.querySelector('.se-section-text, .se-main-container');
-
-                if (!bodyElement) return;
-
-                const selection = window.getSelection();
-                if (!selection) return;
-
-                const newRange = document.createRange();
-
-                // 소제목 다음 위치 찾기 (최근 입력된 텍스트 다음)
-                const textNodes: Node[] = [];
-                const walker = document.createTreeWalker(bodyElement, NodeFilter.SHOW_TEXT);
-                let textNode;
-                while (textNode = walker.nextNode()) {
-                  if (textNode.textContent && textNode.textContent.trim().length > 0) {
-                    textNodes.push(textNode);
-                  }
-                }
-
-                if (textNodes.length > 0) {
-                  const lastTextNode = textNodes[textNodes.length - 1];
-                  const parent = lastTextNode.parentElement;
-                  if (parent) {
-                    newRange.setStartAfter(parent);
-                    newRange.collapse(true);
-                  } else {
-                    newRange.setStartAfter(lastTextNode);
-                    newRange.collapse(true);
-                  }
-                } else {
-                  // 텍스트 노드가 없으면 본문 영역 끝으로
-                  newRange.selectNodeContents(bodyElement);
-                  newRange.collapse(false);
-                }
-
-                selection.removeAllRanges();
-                selection.addRange(newRange);
-              });
-
-              await this.delay(300); // 커서 이동 대기
-              this.log(`   ✅ 본문 영역으로 커서 이동 완료`);
-            } else {
-              this.log(`   ✅ 커서가 이미 본문 영역에 있습니다.`);
-            }
-            // ✅ ImageManager에서 최신 이미지 가져오기 (사용자가 변경한 이미지 반영)
-            // renderer.ts의 normalizeHeadingTitle과 동일한 정규화 함수 사용 (강화됨)
-            const normalizeHeading = (text: string) => {
-              if (!text) return '';
-              return text
-                .replace(/^#+\s*/, '')           // Markdown 해시 (#) 제거
-                .replace(/\n/g, ' ')             // 줄바꿈을 공백으로
-                .replace(/\r/g, ' ')             // 캐리지 리턴도 공백으로
-                .replace(/\t/g, ' ')             // 탭도 공백으로
-                .replace(/\s+/g, ' ')            // 여러 공백을 하나로
-                .trim();                          // 앞뒤 공백 제거
-            };
-
-            // ✅ 더 공격적인 정규화 (소문자, 특수문자 제거)
-            const aggressiveNormalize = (text: string) => {
-              return normalizeHeading(text)
-                .toLowerCase()                   // 소문자 변환
-                .replace(/[^a-z0-9가-힣\s]/g, '') // 특수문자 제거 (한글/영문/숫자/공백만 유지)
-                .replace(/\s+/g, ' ')            // 여러 공백을 하나로
-                .trim();
-            };
-
-            // 원본 heading.title과 정규화된 값 모두 준비
-            const originalHeadingTitle = heading.title;
-            const normalizedHeadingTitle = normalizeHeading(originalHeadingTitle);
-
-            this.log(`   🔍[ImageManager] 이미지 검색 시작`);
-            this.log(`   🔍[ImageManager] 원본 소제목: "${originalHeadingTitle}"`);
-            this.log(`   🔍[ImageManager] 정규화된 소제목: "${normalizedHeadingTitle}"`);
-
-            // ImageManager에서 해당 소제목의 이미지 가져오기
-            let headingImages: any[] = [];
-
-            // 1. ImageManager에서 먼저 확인 (최우선)
-            if (typeof (global as any).ImageManager !== 'undefined' && (global as any).ImageManager.imageMap) {
-              const imageMap = (global as any).ImageManager.imageMap;
-
-              this.log(`   🔍[ImageManager] ImageMap 크기: ${imageMap.size} 개`);
-
-              // ImageMap의 모든 키 로그 출력
-              const allKeys: string[] = Array.from(imageMap.keys()) as string[];
-              this.log(`   🔍[ImageManager] ImageMap 키 목록(${allKeys.length}개): `);
-              allKeys.forEach((key, idx) => {
-                const normalizedKey = normalizeHeading(key);
-                const exactMatch = key === normalizedHeadingTitle || key === originalHeadingTitle;
-                const normalizedMatch = normalizedKey === normalizedHeadingTitle;
-                const match = exactMatch || normalizedMatch ? '✅ 매칭!' : '';
-                this.log(`      [${idx + 1}]"${key}"(정규화: "${normalizedKey}") ${match} `);
-              });
-
-              // 1-1. 정확한 키 매칭 시도 (정규화된 값)
-              if (imageMap.has(normalizedHeadingTitle)) {
-                const images = imageMap.get(normalizedHeadingTitle);
-                if (images && images.length > 0) {
-                  headingImages = images;
-                  this.log(`   ✅[ImageManager] 정확한 키 매칭 성공(정규화): "${normalizedHeadingTitle}"에서 ${images.length}개 이미지 발견`);
-                }
-              }
-
-              // 1-2. 원본 키 매칭 시도
-              if (headingImages.length === 0 && imageMap.has(originalHeadingTitle)) {
-                const images = imageMap.get(originalHeadingTitle);
-                if (images && images.length > 0) {
-                  headingImages = images;
-                  this.log(`   ✅[ImageManager] 정확한 키 매칭 성공(원본): "${originalHeadingTitle}"에서 ${images.length}개 이미지 발견`);
-                }
-              }
-
-              // 1-3. 정확한 매칭 실패 시 모든 키를 순회하며 정규화된 값으로 비교
-              if (headingImages.length === 0) {
-                for (const [key, images] of imageMap.entries()) {
-                  const normalizedKey = normalizeHeading(key);
-                  // 정규화된 값 비교 또는 원본 값 비교
-                  if ((normalizedKey === normalizedHeadingTitle || key === originalHeadingTitle || key === normalizedHeadingTitle) && images && images.length > 0) {
-                    headingImages = images;
-                    this.log(`   ✅[ImageManager] 정규화 매칭 성공: "${key}"(정규화: "${normalizedKey}") → "${normalizedHeadingTitle}"에서 ${images.length}개 이미지 발견`);
-                    break;
-                  }
-                }
-              }
-
-              if (headingImages.length === 0) {
-                this.log(`   ℹ️[ImageManager] 이 소제목에 대한 사용자 지정 이미지가 없습니다. (Renderer 전용 기능)`);
-              } else {
-                this.log(`   ✅[ImageManager] 최종 매칭 성공: ${headingImages.length}개 이미지 발견`);
-                headingImages.forEach((img, idx) => {
-                  const filePath = img.filePath || img.savedToLocal || img.url || '경로 없음';
-                  this.log(`      [${idx + 1}] ${filePath.substring(0, 80)}...`);
-                });
-              }
-            } else {
-              this.log(`   ℹ️[ImageManager] Main Process 컨텍스트: 전달된 이미지(resolved.images)를 사용합니다.`);
-            }
-
-            // ✅✅✅ 끝판왕 이미지 매칭 로직 ✅✅✅
-            // 2. ImageManager에 없을 때 resolved.images에서 찾기
-            if (headingImages.length === 0 && resolved.images && resolved.images.length > 0) {
-              this.log(`   🔍[이미지 매칭] ImageManager에 이미지 없음, resolved.images에서 찾기 시도...`);
-              this.log(`   🔍[이미지 매칭] 현재 소제목: "${heading.title}"(인덱스: ${i})`);
-              this.log(`   🔍[이미지 매칭] 전체 이미지 수: ${resolved.images.length} 개`);
-
-              // ✅ 방법 1: heading 이름으로 매칭 시도 (다양한 매칭 방법 적용)
-              headingImages = resolved.images.filter(img => {
-                const normalizedImgHeading = normalizeHeading(img.heading);
-                const aggressiveImgHeading = aggressiveNormalize(img.heading);
-                const aggressiveTargetHeading = aggressiveNormalize(heading.title);
-
-                // 1. 정확한 매칭 (original === original)
-                if (img.heading === heading.title) return true;
-                // 2. 정규화된 매칭
-                if (normalizedImgHeading === normalizedHeadingTitle) return true;
-                // 3. 공격적 정규화 매칭 (소문자, 특수문자 무시)
-                if (aggressiveImgHeading === aggressiveTargetHeading) return true;
-                // 4. 포함 관계 매칭 (더 긴 쪽이 짧은 쪽을 포함)
-                if (aggressiveImgHeading.includes(aggressiveTargetHeading) && aggressiveTargetHeading.length > 5) return true;
-                if (aggressiveTargetHeading.includes(aggressiveImgHeading) && aggressiveImgHeading.length > 5) return true;
-
-                return false;
-              });
-
-              // ✅ 디버그: 매칭 실패 시 상세 로그
-              if (headingImages.length === 0) {
-                this.log(`   ⚠️[매칭 실패] 소제목 "${heading.title}" 에 대응하는 이미지를 찾지 못했습니다.`);
-                this.log(`   🔍 resolved.images의 heading 목록: `);
-                resolved.images.forEach((img, idx) => {
-                  this.log(`      [${idx}]"${img.heading}"(normalized: "${normalizeHeading(img.heading)}")`);
-                });
-              }
-
-              if (headingImages.length > 0) {
-                this.log(`   ✅[heading 매칭] resolved.images에서 ${headingImages.length}개 이미지 발견`);
-              } else {
-                // ✅ Full-Auto 모드에서는 인덱스 기반 폴백 허용 (2026-01-13 수정)
-                // Main Process(ImageManager 없음) + 풀오토 모드에서는 인덱스로 할당
-                const isMainProcess = typeof (global as any).ImageManager === 'undefined';
-                const isFullAutoMode = resolved.isFullAuto === true;
-
-                if (isMainProcess && isFullAutoMode && resolved.images && i < resolved.images.length) {
-                  // ✅ Full-Auto 폴백: 인덱스 기반 할당 (이미 할당된 이미지 제외)
-                  const candidateImage = resolved.images[i];
-                  if (candidateImage && candidateImage.filePath) {
-                    headingImages = [candidateImage];
-                    this.log(`   ✅[Full - Auto 폴백] 인덱스 ${i}번 이미지 할당: "${candidateImage.heading?.substring(0, 30)}..."`);
-                  } else {
-                    this.log(`   ⚠️[Full - Auto 폴백] 인덱스 ${i}번 이미지가 없거나 경로 없음`);
-                    headingImages = [];
-                  }
-                } else {
-                  // Renderer 컨텍스트 또는 일반 모드: 기존 로직 유지
-                  this.log(`   ℹ️[이미지 매칭] 이 소제목에 매칭된 이미지가 없습니다 → 이미지 없이 진행`);
-                  headingImages = [];
-                }
-              }
-
-            } else if (headingImages.length > 0) {
-              // ✅ ImageManager에서 이미지를 찾았으면 resolved.images 사용 안 함
-              this.log(`   ✅[우선순위] ImageManager에서 ${headingImages.length}개 이미지 발견 → 사용자 지정 이미지 우선`);
-            }
-
-            // ✅ [1단계] 본문 및 이미지 데이터 준비
-            const currentFrame = (await this.getAttachedFrame());
-            let cleanBody = '';
-
-            // 1-1. 본문 추출 (항상 실행)
-            if (heading.content && heading.content.trim().length > 30) {
-              cleanBody = heading.content.trim();
-            } else {
-              const headingBody = this.extractBodyForHeading(bodyText, heading.title, i, headings.length, headings);
-              cleanBody = headingBody.trim();
-
-              if (cleanBody.length < 30) {
-                const sentences = bodyText.split(/(?<=[.!?])\s+/).filter(s => s.trim());
-                const sentencesPerHeading = Math.max(5, Math.ceil(sentences.length / headings.length));
-                const startIdx = i * sentencesPerHeading;
-                const endIdx = Math.min(startIdx + sentencesPerHeading, sentences.length);
-                cleanBody = sentences.slice(startIdx, endIdx).join(' ').trim();
-              }
-            }
-
-            // 제목 중복 등 기초 정리 + URL 링크 텍스트 제거
-            const escapedTitleForRegex = heading.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            cleanBody = cleanBody
-              .replace(new RegExp(`^\\s * ${escapedTitleForRegex} \\s *:?\\s * `, 'i'), '')
-              .replace(/🔗[^\n]*\n?/g, '')
-              .replace(/도움이\s*되(었|셧|셨)으면[^\n]*/gi, '')
-              // ✅ URL 링크 텍스트 제거 (이미지에 링크가 걸리므로 본문에 텍스트로 나올 필요 없음)
-              .replace(/https?:\/\/[^\s\n]+/g, '')
-              .replace(/\n{3,}/g, '\n\n') // 연속 줄바꿈 정리
-              .trim();
-
-            // 1-2. 이미지 분류
-            const topImages = headingImages.filter((img: any) => (img.position || 'top') === 'top');
-            const middleImages = headingImages.filter((img: any) => img.position === 'middle');
-            const bottomImages = headingImages.filter((img: any) => img.position === 'bottom');
-
-            // ✅ [2단계] 순차적 삽입
-            // 쇼핑커넥트 첫 번째 섹션: 이미지 → 소제목 → 본문
-            // 그 외: 소제목(위에서 이미 삽입됨) → 이미지 → 본문
-
-            // A. 모든 이미지 삽입 (Top, Middle, Bottom 통합 또는 Top 우선)
-            const allSectionImages = [
-              ...topImages,
-              ...middleImages,
-              ...bottomImages
-            ];
-
-            if (allSectionImages.length > 0) {
-              this.log(`   📸[이미지] 총 ${allSectionImages.length}개 이미지 삽입 중...`);
-              await this.insertImagesAtCurrentCursor(allSectionImages, page, currentFrame, resolved.affiliateLink);
-            }
-
-            // B. 본문 타이핑
-            if (cleanBody.trim()) {
-              this.log(`   ⌨️[본문] 타이핑 시작...`);
-              await this.typeBodyWithRetry(currentFrame, page, cleanBody, 19);
-            }
-
-            // ✅ 쇼핑커넥트 모드: 표 이미지 삽입
-            if (isShoppingConnectMode) {
-              const productName = resolved.title?.split(' ').slice(0, 5).join(' ') || '제품';
-              const fullBodyText = bodyText || cleanBody;
-
-              // C-1. 첫 번째 섹션: 제품 스펙 표 이미지
-              if (i === 0) {
-                try {
-                  this.log(`   📊[쇼핑커넥트] 제품 스펙 표 이미지 생성 중...`);
-
-                  let specTablePath: string | null = null;
-
-                  // ✅ [핵심 수정] 공식 네이버 쇼핑 API 사용 (캡차 없음!)
-                  // 1차: 제휴링크에서 브랜드/스토어명 추출하여 검색
-                  // 2차: 제품명으로 검색
-                  let searchQuery = productName;
-                  let resolvedAffiliateUrl = resolved.affiliateLink || '';
-
-                  // ✅ [NEW] naver.me 단축 URL 리다이렉트 추적
-                  if (resolvedAffiliateUrl.includes('naver.me')) {
-                    this.log(`   🔗 naver.me 단축 URL 감지, 리다이렉트 추적 중...`);
-                    try {
-                      let currentUrl = resolvedAffiliateUrl;
-                      for (let i = 0; i < 5; i++) {
-                        const response = await fetch(currentUrl, {
-                          method: 'HEAD',
-                          redirect: 'manual',
-                          headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
-                        });
-                        if (response.status >= 300 && response.status < 400) {
-                          const location = response.headers.get('location');
-                          if (location) {
-                            currentUrl = location.startsWith('/')
-                              ? `${new URL(currentUrl).origin}${location} `
-                              : location;
-                            // 스마트스토어/브랜드스토어 URL 발견 시 중단
-                            if (currentUrl.includes('smartstore.naver.com') || currentUrl.includes('brand.naver.com')) {
-                              resolvedAffiliateUrl = currentUrl;
-                              this.log(`   ✅ 최종 스토어 URL: ${currentUrl.substring(0, 50)}...`);
-                              break;
-                            }
-                          } else break;
-                        } else break;
-                      }
-                    } catch (redirectError) {
-                      this.log(`   ⚠️ 리다이렉트 추적 실패: ${(redirectError as Error).message} `);
-                    }
-                  }
-
-                  // ✅ 제휴링크 URL에서 브랜드/스토어명 추출
-                  let extractedStoreName: string | null = null;
-                  if (resolvedAffiliateUrl) {
-                    const url = resolvedAffiliateUrl;
-                    // brand.naver.com 패턴
-                    const brandMatch = url.match(/brand\.naver\.com\/([^\/\?]+)/);
-                    if (brandMatch) {
-                      const brandId = brandMatch[1];
-                      const brandMap: Record<string, string> = {
-                        'samsungelectronics': '삼성전자',
-                        'lgelectronics': 'LG전자',
-                        'dyson': '다이슨',
-                        'apple': '애플',
-                        'philips': '필립스',
-                      };
-                      const brandName = brandMap[brandId.toLowerCase()] || brandId;
-                      extractedStoreName = brandName;
-                      searchQuery = `${brandName} ${productName.split(' ').slice(0, 3).join(' ')} `;
-                      this.log(`   📎 브랜드스토어 감지: ${brandName} `);
-                    }
-                    // smartstore.naver.com 패턴
-                    const storeMatch = url.match(/smartstore\.naver\.com\/([^\/\?]+)/);
-                    if (storeMatch) {
-                      const storeName = storeMatch[1];
-                      extractedStoreName = storeName;
-                      searchQuery = `${storeName} ${productName.split(' ').slice(0, 3).join(' ')} `;
-                      this.log(`   📎 스마트스토어 감지: ${storeName} `);
-                    }
-                  }
-
-                  // ✅ [완벽 해결] naver.me URL인데 스토어명 추출 실패 시 Puppeteer로 재시도
-                  if (!extractedStoreName && resolved.affiliateLink?.includes('naver.me') && page) {
-                    this.log(`   🔄 스토어명 추출 실패 → Puppeteer로 최종 URL 추적...`);
-                    try {
-                      // 현재 발행 중인 브라우저의 새 탭 사용
-                      const trackPage = await page.browser().newPage();
-                      await trackPage.setUserAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15');
-
-                      // 리소스 차단
-                      await trackPage.setRequestInterception(true);
-                      trackPage.on('request', (req: any) => {
-                        const type = req.resourceType();
-                        if (['image', 'font', 'media', 'stylesheet'].includes(type)) {
-                          req.abort();
-                        } else {
-                          req.continue();
-                        }
-                      });
-
-                      await trackPage.goto(resolved.affiliateLink, { waitUntil: 'domcontentloaded', timeout: 10000 });
-
-                      // 최대 5초 대기
-                      for (let wait = 0; wait < 5000; wait += 300) {
-                        await this.delay(300);
-                        const currentUrl = trackPage.url();
-                        if (currentUrl.includes('smartstore.naver.com') || currentUrl.includes('brand.naver.com')) {
-                          const storeMatch = currentUrl.match(/(?:smartstore|brand)\.naver\.com\/([^\/\?]+)/);
-                          if (storeMatch) {
-                            extractedStoreName = storeMatch[1];
-                            searchQuery = `${extractedStoreName} ${productName.split(' ').slice(0, 3).join(' ')} `;
-                            this.log(`   ✅ Puppeteer로 스토어명 확보: ${extractedStoreName} `);
-                          }
-                          break;
-                        }
-                      }
-
-                      // ✅ [핵심 수정] 에러 페이지 감지 - OG 태그 확인
-                      const ogTitle = await trackPage.evaluate(() => {
-                        const meta = document.querySelector('meta[property="og:title"]');
-                        return meta?.getAttribute('content') || '';
-                      });
-
-                      const errorKeywords = ['에러', '오류', 'error', '접근', '차단', '제한', '캡차', '시스템'];
-                      const isErrorPage = errorKeywords.some(kw => ogTitle.toLowerCase().includes(kw.toLowerCase()));
-
-                      if (isErrorPage) {
-                        this.log(`   ❌ 에러 페이지 감지! "${ogTitle.substring(0, 30)}..."`);
-                        this.log(`   🔄 제품명 기반 검색으로 폴백: "${productName}"`);
-                        extractedStoreName = null;
-                        searchQuery = productName;  // 제품명으로 폴백
-                      }
-
-                      await trackPage.close();
-                    } catch (puppeteerError) {
-                      this.log(`   ⚠️ Puppeteer 추적 실패: ${(puppeteerError as Error).message} `);
-                      this.log(`   🔄 제품명 기반 검색으로 폴백: "${productName}"`);
-                      searchQuery = productName;  // 실패 시 제품명으로 폴백
-                    }
-                  }
-
-                  this.log(`   🔍 공식 API로 상품 정보 조회 중: "${searchQuery.substring(0, 40)}..."`);
-                  try {
-                    const { searchShopping, stripHtmlTags } = await import('./naverSearchApi.js');
-                    const searchResult = await searchShopping({ query: searchQuery, display: 1 });
-
-                    if (searchResult.items.length > 0) {
-                      const item = searchResult.items[0];
-                      // ✅ [2026-01-18] 제품명 정리: 끝에 쉼표, 마침표 등 불필요한 문자 제거
-                      const cleanTitle = stripHtmlTags(item.title)
-                        .substring(0, 50)
-                        .replace(/[,.\s]+$/g, '') // 끝에 쉼표, 마침표, 공백 제거
-                        .trim();
-                      const specs = [
-                        { label: '제품명', value: cleanTitle },
-                        { label: '가격', value: item.lprice ? `${parseInt(item.lprice).toLocaleString()}원` : '가격 문의' },
-                        { label: '브랜드', value: item.brand || item.maker || '' },
-                        { label: '판매처', value: item.mallName || '네이버 쇼핑' },
-                        { label: '카테고리', value: [item.category1, item.category2].filter(Boolean).join(' > ') || '' },
-                      ].filter(s => s.value && s.value.length > 0);
-
-                      this.log(`   ✅ 공식 API 조회 성공: ${specs.length}개 스펙`);
-                      specTablePath = await generateProductSpecTableImage(productName, specs);
-                    } else {
-                      this.log(`   ⚠️ 공식 API 검색 결과 없음, 기본 스펙 사용`);
-                    }
-                  } catch (apiError) {
-                    this.log(`   ⚠️ 공식 API 호출 실패: ${(apiError as Error).message} `);
-                  }
-
-
-                  // ✅ [2026-01-18 수정] API 실패 시 스펙 표 대신 장단점 표 생성
-                  if (!specTablePath) {
-                    this.log(`   📝 API 실패 - 본문에서 장단점 추출하여 표 생성...`);
-                    // ✅ 제품명 정리: 끝에 쉼표, 마침표 등 불필요한 문자 제거
-                    const cleanProductName = productName
-                      .replace(/[,.\s]+$/g, '')
-                      .trim();
-                    // ✅ 본문에서 장단점 추출
-                    const { pros, cons } = extractProsConsFromContent(fullBodyText);
-                    if (pros.length >= 1 || cons.length >= 1) {
-                      // ✅ [2026-01-18] useAiTableImage 옵션에 따라 AI 표 또는 HTML 표 선택
-                      if (resolved.useAiTableImage) {
-                        const { generateProsConsWithAI } = await import('./image/nanoBananaProGenerator.js');
-                        specTablePath = await generateProsConsWithAI(cleanProductName, pros, cons) || await generateProsConsTableImage(cleanProductName, pros, cons);
-                        this.log(`   🤖 AI 장단점 표 생성 시도...`);
-                      } else {
-                        specTablePath = await generateProsConsTableImage(cleanProductName, pros, cons);
-                      }
-                      this.log(`   ✅ 장단점 표 생성 완료: 장점 ${pros.length}개, 단점 ${cons.length}개`);
-                    } else {
-                      this.log(`   ⚠️ 장단점 추출 실패 - 표 생성 건너뜀`);
-                    }
-                  }
-
-                  // ✅ 표 이미지 삽입
-                  if (specTablePath) {
-                    await page.keyboard.press('Enter');
-                    await this.delay(300);
-                    await this.insertBase64ImageAtCursor(specTablePath);
-                    await this.delay(1000);
-
-                    // 표 이미지에도 제휴 링크 삽입
-                    if (resolved.affiliateLink) {
-                      await this.attachLinkToLastImage(resolved.affiliateLink);
-                    }
-                    this.log(`   ✅ 제품 스펙 표 이미지 삽입 완료`);
-                  } else {
-                    this.log(`   ⚠️ 스펙이 없어 표 생성 건너뜀`);
-                  }
-                } catch (tableError) {
-                  this.log(`   ⚠️ 제품 스펙 표 생성 실패: ${(tableError as Error).message} `);
-                }
-              }
-
-              // C-2. 마지막 섹션: 장단점 비교 표 이미지
-              if (i === headings.length - 1) {
-                try {
-                  this.log(`   📊[쇼핑커넥트] 장단점 비교 표 이미지 생성 중...`);
-                  const { pros, cons } = extractProsConsFromContent(fullBodyText);
-                  if (pros.length >= 1 && cons.length >= 1) {
-                    // ✅ [2026-01-18] useAiTableImage 옵션에 따라 AI 표 또는 HTML 표 선택
-                    let prosConsTablePath: string;
-                    if (resolved.useAiTableImage) {
-                      const { generateProsConsWithAI } = await import('./image/nanoBananaProGenerator.js');
-                      prosConsTablePath = await generateProsConsWithAI(productName, pros, cons) || await generateProsConsTableImage(productName, pros, cons);
-                      this.log(`   🤖 AI 장단점 표 생성 시도...`);
-                    } else {
-                      prosConsTablePath = await generateProsConsTableImage(productName, pros, cons);
-                    }
-                    await page.keyboard.press('Enter');
-                    await this.delay(300);
-                    await this.insertBase64ImageAtCursor(prosConsTablePath);
-                    await this.delay(1000); // 렌더링 대기
-
-                    // ✅ 장단점 표 이미지에도 제휴 링크 삽입
-                    if (resolved.affiliateLink) {
-                      await this.attachLinkToLastImage(resolved.affiliateLink);
-                    }
-                    this.log(`   ✅ 장단점 비교 표 이미지 삽입 완료`);
-                  }
-                } catch (tableError) {
-                  this.log(`   ⚠️ 장단점 표 생성 실패: ${(tableError as Error).message} `);
-                }
-              }
-
-              // C-3. 2번 섹션 본문 아래: CTA 배너 이미지 추가
-              if (i === 1 && resolved.affiliateLink) {
-                try {
-                  this.log(`   📢[쇼핑커넥트] 2번 섹션 본문 아래 CTA 배너 삽입 중...`);
-
-                  let ctaBannerPath: string;
-
-                  // ✅ [2026-01-22] 배너 우선순위: autoBannerGenerate > customBannerPath > 자동생성
-                  if (resolved.autoBannerGenerate) {
-                    // 랜덤 배너 자동 생성
-                    const ctaHooks = [
-                      '[공식] 최저가 보러가기 →',
-                      '✓ 할인가 확인하기 →',
-                      '지금 바로 구매하기 →',
-                      '▶ 상품 자세히 보기',
-                      '할인 혜택 확인 →',
-                    ];
-                    const randomHook = ctaHooks[Math.floor(Math.random() * ctaHooks.length)];
-                    ctaBannerPath = await generateCtaBannerImage(randomHook, productName);
-                    this.log(`   🎲 [랜덤 배너] 2번 섹션 배너 자동 생성: ${randomHook}`);
-                  } else if (resolved.customBannerPath) {
-                    // 커스텀 배너 사용
-                    ctaBannerPath = resolved.customBannerPath;
-                    this.log(`   🎨 커스텀 배너 사용: ${ctaBannerPath.split(/[/\\]/).pop()}`);
-                  } else {
-                    // 기본 자동 생성 (랜덤 아닌 고정 풀에서)
-                    const ctaHooks = [
-                      '[공식] 최저가 보러가기 →',
-                      '✓ 할인가 확인하기 →',
-                      '지금 바로 구매하기 →',
-                    ];
-                    const randomHook = ctaHooks[Math.floor(Math.random() * ctaHooks.length)];
-                    ctaBannerPath = await generateCtaBannerImage(randomHook, productName);
-                  }
-
-                  await page.keyboard.press('Enter');
-                  await this.delay(300);
-                  await this.insertBase64ImageAtCursor(ctaBannerPath);
-                  await this.delay(1000);
-
-                  // ✅ 배너에 제휴 링크 삽입
-                  await this.attachLinkToLastImage(resolved.affiliateLink);
-                  this.log(`   ✅ 2번 섹션 CTA 배너 + 제휴 링크 삽입 완료`);
-                } catch (bannerError) {
-                  this.log(`   ⚠️ 2번 섹션 CTA 배너 생성 실패: ${(bannerError as Error).message} `);
-                }
-              }
-            }
-
-          } else {
-            // 이미지 건너뛰기 모드일 때
-            const cFrame = (await this.getAttachedFrame());
-            let cBody = '';
-            if (heading.content && heading.content.trim().length > 30) {
-              cBody = heading.content.trim();
-            } else {
-              cBody = this.extractBodyForHeading(bodyText, heading.title, i, headings.length, headings).trim();
-            }
-
-            if (cBody.trim()) {
-              this.log(`   ⌨️ 본문 타이핑 시작(이미지 없음)...`);
-              await this.typeBodyWithRetry(cFrame, page, cBody, 19);
-            }
-          }
-
-          // d) CTA 중간 삽입 (위치가 middle이고 중간 지점인 경우, skipCta가 false인 경우만)
-          if (!resolved.skipCta && resolved.ctaPosition === 'middle' && resolved.ctas.length > 0) {
-            const middleIndex = Math.floor(headings.length / 2);
-            if (i === middleIndex - 1) { // 중간 지점 직전 섹션 완료 후
-              for (let k = 0; k < 2; k++) {
-                await page.keyboard.press('Enter');
-                await this.delay(this.DELAYS.MEDIUM);
-              }
-              for (let ci = 0; ci < resolved.ctas.length; ci++) {
-                const c = resolved.ctas[ci];
-                this.log(`   → CTA 버튼 중간 삽입 중... (${ci + 1}/${resolved.ctas.length}, 텍스트: "${c.text}", 링크: "${resolved.affiliateLink || c.link || '#'}")`);
-                // ✅ [핸심 수정] affiliateLink 우선 사용
-                await this.insertCtaLink(resolved.affiliateLink || c.link || '#', c.text, 'middle');
-                await this.delay(this.DELAYS.MEDIUM);
-              }
-              this.log(`   ✅ CTA 버튼 중간 삽입 완료`);
-            }
-          }
-
-          // e) 다음 섹션 준비 (마지막 섹션이 아니면 구분선 추가)
-          if (i < headings.length - 1) {
-            this.log(`   → 구분선 생성 중...`);
-            await this.insertHorizontalLine();
-            await this.delay(this.DELAYS.MEDIUM);
-            await page.keyboard.press('Enter'); // ✅ [2026-01-19] 엔터 1회로 축소 (2회 → 1회)
-            await this.delay(this.DELAYS.MEDIUM);
-            this.log(`   ✅ 구분선 추가 완료`);
-          }
-
-          this.log(`   ✅ 섹션[${i + 1}/${headings.length}]완료\n`);
-
-          // ✅ 다음 섹션 준비: Frame 재설정 (마지막 섹션이 아닐 때만)
-          if (i < headings.length - 1) {
-            await this.delay(this.DELAYS.LONG); // 500ms 대기
-            try {
-              await this.switchToMainFrame();
-              this.log(`   ✅ 다음 섹션을 위한 Frame 재설정 완료`);
-            } catch (frameError) {
-              this.log(`   ⚠️ Frame 재설정 실패(무시하고 계속): ${(frameError as Error).message} `);
-            }
-          }
-        } catch (error) {
-          this.log(`   ❌ 섹션[${i + 1}/${headings.length}]실패: ${(error as Error).message} `);
-          throw error;
-        }
-      }
-
-      // ✅ [쇼핑커넥트 모드] 마무리(Conclusion) 작성 + 이미지 삽입
-      if (isShoppingConnectModeGlobal && structured.conclusion && structured.conclusion.trim().length > 10) {
-        this.log('📝 [쇼핑커넥트] 마무리 작성 중...');
-
-        // ✅ [2026-01-19 수정] 마무리 전 엔터 제거 (중복 방지)
-        // 마지막 소제목 본문 후 바로 마무리글로 이어짐
-        await this.delay(this.DELAYS.MEDIUM);
-
-        // 마무리 이미지 검색 ('📝 마무리' 키로 저장됨) - 제거됨 (사용자 요청)
-        // ✅ 쇼핑커넥트 마무리는 이미지 없이 본문만 (사용자 요청)
-
-        // 마무리 본문 타이핑
-        const currentFrame = (await this.getAttachedFrame());
-        await this.typeBodyWithRetry(currentFrame, page, structured.conclusion.trim(), 19);
-        await this.delay(this.DELAYS.MEDIUM);
-
-        // ✅ [2026-01-18 삭제] 마무리 후 2번 배너 삽입 제거 (사용자 요청)
-        // 배너가 CTA 전에만 삽입되도록 하고, 마무리글 아래 배너는 삭제
-        // (모든 사용자가 같은 배너를 사용하면 문제 발생 가능)
-        // if (resolved.affiliateLink) {
-        //   try {
-        //     this.log(`   📢[쇼핑커넥트] 마무리 후 2번 배너 삽입 중...`);
-        //     const { generateCtaBannerImage } = await import('./image/tableImageGenerator.js');
-        //     const ctaHooks = [
-        //       '✓ 마음에 드셨다면 여기서 구매!',
-        //       '▶ 지금 최저가 확인하기 →',
-        //       '놓치면 후회! 지금 바로 →',
-        //     ];
-        //     const randomHook = ctaHooks[Math.floor(Math.random() * ctaHooks.length)];
-        //     const productName = resolved.title?.split(' ').slice(0, 5).join(' ') || '제품';
-        //     const banner2Path = await generateCtaBannerImage(randomHook, productName);
-        //     await page.keyboard.press('Enter');
-        //     await this.delay(300);
-        //     await this.insertBase64ImageAtCursor(banner2Path);
-        //     await this.delay(500);
-        //     // 배너에 제휴 링크 삽입
-        //     await this.attachLinkToLastImage(resolved.affiliateLink);
-        //     this.log(`   ✅ 마무리 후 2번 배너 + 제휴 링크 삽입 완료`);
-        //   } catch (bannerError) {
-        //     this.log(`   ⚠️ 마무리 2번 배너 생성 실패: ${(bannerError as Error).message} `);
-        //   }
-        // }
-
-        this.log('   ✅ 마무리 작성 완료');
-      }
-
-      // ✅ 빠른 검증 (성능 최적화)
-      this.log('\n✅ 콘텐츠 작성 완료! 발행 준비 중...');
-
-      // 간단한 이미지 배치 현황만 로깅
-      if (resolved.images && resolved.images.length > 0) {
-        this.log(`   📊 이미지 ${Math.min(resolved.images.length, headings.length)}개 배치 완료`);
-      }
-
-      // 3. 마지막 본문 끝에서 Enter 2회 (CTA와 본문 사이 간격)
-      this.log('📝 [마지막 단계] CTA 및 해시태그 영역 준비 중...');
-      this.log('   → Enter 2회 입력 (CTA 삽입 준비)');
-      for (let i = 0; i < 2; i++) {
-        await page.keyboard.press('Enter');
-        await this.delay(this.DELAYS.SHORT); // 150ms
-        this.log(`   ✅ Enter ${i + 1}/2 완료`);
-      }
-
-      // 4. CTA 버튼 삽입 (해시태그 전에 배치, skipCta가 false인 경우만)
-      // ✅ 쇼핑커넥트 모드: CTA가 없어도 자동으로 후킹 CTA 생성
-      let effectiveCtas = resolved.ctas || [];
-      if (!resolved.skipCta && resolved.affiliateLink && effectiveCtas.length === 0) {
-        // 🛒 쇼핑커넥트 자동 CTA 생성 (구매 결심 유도 후킹 문구)
-        const hookTexts = [
-          '🔥 지금 바로 확인하기 →',
-          '✨ 특가 혜택 보러가기 →',
-          '🎁 한정 수량 확인하기 →',
-          '💰 최저가로 구매하기 →',
-          '🛒 품절 전에 확인하기 →'
-        ];
-        const randomHook = hookTexts[Math.floor(Math.random() * hookTexts.length)];
-        effectiveCtas = [{ text: randomHook, link: resolved.affiliateLink }];
-        this.log(`   🛒 [쇼핑커넥트] 자동 CTA 생성: "${randomHook}"`);
-      }
-
-      if (!resolved.skipCta && effectiveCtas.length > 0) {
-        const ctaPosition = resolved.ctaPosition || 'bottom'; // 풀오토는 항상 하단
-
-        // ✅ [2026-01-19 버그 수정] 쇼핑커넥트 모드에서는 CTA를 1개로 제한 (링크카드 중복 방지)
-        if (resolved.affiliateLink && effectiveCtas.length > 1) {
-          this.log(`   ⚠️ [쇼핑커넥트] CTA ${effectiveCtas.length}개 → 1개로 제한 (링크카드 중복 방지)`);
-          effectiveCtas = [effectiveCtas[0]]; // 첫 번째 CTA만 사용
-        }
-
-        // ✅ [수정] 제휴 마케팅 고지 문구는 최상단(첫 번째 섹션)에서 삽입됨
-        // 이전: CTA 앞에 삽입 → 변경: 글 최상단(1번 소제목 위)에 삽입
-
-        for (let i = 0; i < effectiveCtas.length; i++) {
-          const c = effectiveCtas[i];
-
-          // ✅ 쇼핑커넥트 모드(affiliateLink 존재 시)면 강화된 CTA 사용 (하단에만 적용)
-          if (resolved.affiliateLink && ctaPosition === 'bottom') {
-            this.log(`   → 쇼핑커넥트 모드: 강화된 CTA 하단 삽입 중... (${i + 1}/${effectiveCtas.length})`);
-            // ✅ [디버깅] 이전글 정보 확인
-            this.log(`   📋 [디버깅] 이전글 제목: ${resolved.previousPostTitle || '없음'}`);
-            this.log(`   📋 [디버깅] 이전글 URL: ${resolved.previousPostUrl || '없음'}`);
-            this.log(`   📋 [디버깅] 제휴링크: ${resolved.affiliateLink}`);
-
-            // ✅ [2026-01-19] 쇼핑커넥트 CTA 로직 재구성
-            // - 첫 번째 CTA(i===0): 배너 + affiliateLink (제품 CTA)
-            // - 추가 CTA들(i>0): 각자의 link 사용 (사용자 추가 CTA)
-            // - 마지막 CTA 후: 이전글 삽입
-            const isFirstCta = i === 0;
-            const isLastCta = i === effectiveCtas.length - 1;
-
-            if (isFirstCta) {
-              // ✅ 첫 번째 CTA: 배너 이미지 + 제휴링크 (Enhanced CTA)
-              this.log(`   🛒 [쇼핑커넥트] 첫 번째 CTA (제품): \"${c.text}\"`);
-              await this.insertEnhancedCta(
-                resolved.affiliateLink, // 제휴링크
-                c.text,
-                resolved.title || '',
-                undefined, // 이전글은 마지막에 별도 삽입
-                undefined,
-                resolved.hashtags,
-                resolved.useAiBanner,
-                resolved.customBannerPath,
-                resolved.autoBannerGenerate // ✅ [2026-01-21] 배너 자동 랜덤 생성
-              );
-            } else {
-              // ✅ 추가 CTA들: 배너 없이 구분선 + 후킹 + 링크만 (사용자 추가 CTA)
-              this.log(`   📎 [추가 CTA ${i}] \"${c.text}\" → ${c.link || '#'}`);
-              const page = this.ensurePage();
-
-              // 구분선 삽입
-              const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(divider, { delay: 5 });
-              await page.keyboard.press('Enter');
-
-              // 후킹 문구 + 링크 삽입
-              await page.keyboard.type(`📎 ${c.text}`, { delay: 10 });
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(`👉 ${c.link || '#'}`, { delay: 10 });
-              await page.keyboard.press('Enter');
-
-              // 링크 카드 로딩 대기
-              await this.delay(3000);
-            }
-
-            // ✅ 마지막 CTA 후: 이전글 삽입
-            if (isLastCta && resolved.previousPostUrl) {
-              this.log(`   📖 [이전글] 같은 카테고리 이전글 삽입`);
-              const page = this.ensurePage();
-
-              // 구분선
-              const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(divider, { delay: 5 });
-              await page.keyboard.press('Enter');
-
-              // ✅ [2026-01-23 FIX] 후킹 문구 + 이전글 제목
-              const prevPostHooks = [
-                '✨ 이런 글도 많이 봤어요!',
-                '📚 다음 글도 궁금하다면?',
-                '🔥 이 글도 인기 있어요!',
-                '💡 맛있게 읽었다면 이것도!',
-                '👀 놓치면 아까운 추천 글!',
-              ];
-              const randomPrevHook = prevPostHooks[Math.floor(Math.random() * prevPostHooks.length)];
-              await page.keyboard.type(randomPrevHook, { delay: 10 });
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(`📖 ${resolved.previousPostTitle || '이전 글 보기'}`, { delay: 10 });
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(`👉 ${resolved.previousPostUrl}`, { delay: 10 });
-              await page.keyboard.press('Enter');
-
-              // 링크 카드 로딩 대기
-              await this.delay(3000);
-              this.log(`   ✅ 이전글 삽입 완료 (후킹: ${randomPrevHook})`);
-            }
-          } else {
-            // ✅ [2026-01-22] 일반 모드 (affiliateLink 없음): CTA + 이전글 삽입
-            const isLastCta = i === effectiveCtas.length - 1;
-            const page = this.ensurePage();
-
-            // ✅ CTA가 있으면 CTA 삽입 (구분선 + 후킹 + 링크)
-            if (c.text && c.link) {
-              this.log(`   📎 [일반 CTA ${i + 1}] \"${c.text}\" → ${c.link}`);
-
-              // 구분선 삽입
-              const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(divider, { delay: 5 });
-              await page.keyboard.press('Enter');
-
-              // 후킹 문구 + 링크 삽입
-              await page.keyboard.type(`📎 ${c.text}`, { delay: 10 });
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(`👉 ${c.link}`, { delay: 10 });
-              await page.keyboard.press('Enter');
-
-              // 링크 카드 로딩 대기
-              await this.delay(3000);
-            }
-
-            // ✅ 마지막 CTA 후: 이전글 삽입 (중복 방지)
-            if (isLastCta && resolved.previousPostUrl) {
-              this.log(`   📖 [이전글] 같은 카테고리 이전글 연결`);
-
-              // 구분선
-              const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(divider, { delay: 5 });
-              await page.keyboard.press('Enter');
-
-              // ✅ [2026-01-23 FIX] 후킹 문구 + 이전글 제목
-              const prevPostHooks = [
-                '✨ 이런 글도 많이 봤어요!',
-                '📚 다음 글도 궁금하다면?',
-                '🔥 이 글도 인기 있어요!',
-                '💡 맛있게 읽었다면 이것도!',
-                '👀 놓치면 아까운 추천 글!',
-              ];
-              const randomPrevHook = prevPostHooks[Math.floor(Math.random() * prevPostHooks.length)];
-              await page.keyboard.type(randomPrevHook, { delay: 10 });
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(`📖 ${resolved.previousPostTitle || '이전 글 보기'}`, { delay: 10 });
-              await page.keyboard.press('Enter');
-              await page.keyboard.type(`👉 ${resolved.previousPostUrl}`, { delay: 10 });
-              await page.keyboard.press('Enter');
-
-              // 링크 카드 로딩 대기
-              await this.delay(3000);
-              this.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook})`);
-            }
-          }
-          await this.delay(500); // CTA 삽입 후 충분한 대기 시간
-        }
-        this.log(`   ✅ CTA 버튼 삽입 완료`);
-
-        // ✅ [2026-01-24 FIX] CTA 재시도 로직 제거 - 중복 CTA 삽입 방지
-        //    기존 로직: CTA 확인 실패 시 재삽입 → 이전글 후 CTA 중복 발생
-        //    수정: 재시도 로직 제거, CTA는 한 번만 삽입
-        await this.delay(500); // 삽입 후 대기
-        this.log(`   ✅ CTA 버튼 삽입 및 확인 완료 (재시도 건너뜀)`);
-      }
-
-      // ✅ 중복 문구 제거됨: '쇼핑커넥트 수익이 발생할 수 있습니다' 문구는 
-      // 이미 위에서 '제휴 마케팅 고지 문구'로 처리되므로 별도 추가하지 않음
-
-      // 5. 커서를 에디터 맨 끝으로 확실히 이동 (해시태그 짤림 방지)
-      this.log('   → 커서를 에디터 맨 끝으로 이동 (해시태그 영역 준비)');
-      await page.keyboard.press('End');
-      await this.delay(100);
-      await page.keyboard.down('Control');
-      await page.keyboard.press('End');
-      await page.keyboard.up('Control');
-      await this.delay(200);
-
-      // 6. Enter 3회 (CTA와 해시태그 사이 간격)
-      this.log('   → Enter 3회 입력 (해시태그 영역 준비)');
-      for (let i = 0; i < 3; i++) {
-        await page.keyboard.press('Enter');
-        await this.delay(this.DELAYS.SHORT); // 150ms
-      }
-      this.log(`   ✅ Enter 3회 완료`);
-
-      // ✅ CTA 카드 로딩 대기 (5초) - 카드가 3초 뒤에 뜨므로 여유있게 대기
-      this.log('   → CTA 카드 로딩 대기 (5초)...');
-      await this.delay(5000);
-      this.log('   ✅ CTA 카드 로딩 대기 완료');
-
-      // 7. 해시태그 입력 (최대 5개) - 본문에 직접 입력
-      const hashtagsToApply = resolved.hashtags.slice(0, 5);
-      if (hashtagsToApply.length > 0) {
-        this.log(`   → 해시태그 ${hashtagsToApply.length}개 입력 중...`);
-
-        // ✅ 해시태그 입력 전 다시 한번 커서 위치 확인
-        await page.keyboard.press('End');
-        await this.delay(100);
-
-        await this.applyHashtagsInBody(hashtagsToApply);
-        await this.delay(this.DELAYS.MEDIUM); // 200ms
-        this.log(`   ✅ 해시태그 입력 완료`);
-      }
-
-      // 7. CTA 버튼 최종 확인 (발행 전)
-      if (resolved.ctas.length > 0 || resolved.ctaText) {
-        this.log('\n🔍 CTA 버튼 최종 확인 중...');
-        const frame = (await this.getAttachedFrame());
-        const finalCheck = await this.verifyCtaInsertion(frame, resolved.ctas[0]?.text || resolved.ctaText || '');
-
-        if (finalCheck) {
-          this.log('✅ CTA 버튼이 정상적으로 삽입되었습니다.');
-        } else {
-          this.log('⚠️ CTA 버튼이 확인되지 않습니다. 발행 후 브라우저에서 직접 확인해주세요.');
-          this.log('💡 만약 버튼이 보이지 않으면, 네이버 블로그 에디터에서 직접 링크를 추가해주세요.');
-        }
-      }
-
-      // 8. 이미지 배치 검증 (skipImages가 false인 경우)
-      if (!resolved.skipImages && resolved.images && resolved.images.length > 0) {
-        await this.verifyImagePlacement(resolved.images);
-      }
-
-      this.log('\n✅ 구조화된 콘텐츠 작성이 완료되었습니다.');
-    }, 2, '콘텐츠 적용');
+    return await editorHelpers.applyStructuredContent(this, resolved);
   }
 
 
   private async setFontSize(size: number, force: boolean = false): Promise<void> {
-    const frame = (await this.getAttachedFrame());
-    const page = this.ensurePage();
-
-    this.log(`   → 폰트 크기 ${size}px 설정 중...`);
-
-    try {
-      // 방법 1: 툴바 버튼으로 설정
-      const fontSizeToggleButton = await frame.waitForSelector(
-        'button.se-font-size-code-toolbar-button[data-name="font-size"]',
-        { visible: true, timeout: 2000 }
-      ).catch(() => null);
-
-      if (fontSizeToggleButton) {
-        // 드롭다운 열기
-        await fontSizeToggleButton.click();
-        await this.delay(this.DELAYS.MEDIUM); // 300ms → 200ms
-
-        // 특정 크기 버튼 클릭 (네이버 표준 크기: 11, 13, 15, 16, 19, 24, 28, 30, 38)
-        const sizeButton = await frame.waitForSelector(
-          `button[data-value="fs${size}"], .se-toolbar-option-font-size-code-fs${size}-button`,
-          { visible: true, timeout: 1000 }
-        ).catch(() => null);
-
-        if (sizeButton) {
-          await sizeButton.click();
-          await this.delay(this.DELAYS.MEDIUM); // 300ms → 200ms
-          this.log(`   ✅ 폰트 크기 ${size}px 설정 완료 (툴바)`);
-          return;
-        }
-      }
-
-      // 방법 2: JavaScript로 강제 설정 (더 확실한 방법)
-      if (force) {
-        await frame.evaluate((fontSize) => {
-          // 네이버 에디터의 실제 편집 영역 찾기
-          const editorAreas = [
-            '.se-section-text',
-            '.se-main-container .se-editing-area',
-            '.se-editing-area',
-            '.se-component-content',
-            '[contenteditable="true"]'
-          ];
-
-          let editorElement: HTMLElement | null = null;
-          for (const selector of editorAreas) {
-            const element = document.querySelector(selector) as HTMLElement;
-            if (element && element.contentEditable === 'true') {
-              editorElement = element;
-              break;
-            }
-          }
-
-          if (!editorElement) {
-            // contentEditable이 명시되지 않은 경우도 시도
-            const activeElement = document.activeElement as HTMLElement;
-            if (activeElement) {
-              editorElement = activeElement;
-            }
-          }
-
-          if (editorElement) {
-            // 1. 편집 영역 전체에 기본 폰트 크기 설정
-            editorElement.style.fontSize = `${fontSize}px`;
-            editorElement.setAttribute('data-font-size', fontSize.toString());
-
-            // 2. 네이버 에디터 폰트 크기 클래스 적용
-            const classes = Array.from(editorElement.classList);
-            classes.forEach(cls => {
-              if (cls.startsWith('se-fs') || cls.startsWith('fs')) {
-                editorElement!.classList.remove(cls);
-              }
-            });
-
-            // 네이버 에디터 표준 클래스 추가
-            editorElement.classList.add(`se-fs${fontSize}`);
-
-            // 3. 현재 커서 위치의 모든 부모 요소에 폰트 크기 적용
-            const selection = window.getSelection();
-            if (selection && selection.rangeCount > 0) {
-              const range = selection.getRangeAt(0);
-              let container: Node = range.commonAncestorContainer;
-
-              // 텍스트 노드인 경우 부모 요소로 이동
-              if (container.nodeType === Node.TEXT_NODE) {
-                container = (container as Text).parentElement || container;
-              }
-
-              // 모든 부모 요소에 폰트 크기 적용 (최대 5단계까지)
-              let current: Element | null = container as Element;
-              let depth = 0;
-              while (current && depth < 5 && editorElement.contains(current)) {
-                if (current instanceof HTMLElement) {
-                  current.style.fontSize = `${fontSize}px`;
-                  current.setAttribute('data-font-size', fontSize.toString());
-
-                  // 네이버 에디터 클래스도 적용
-                  const currentClasses = Array.from(current.classList);
-                  currentClasses.forEach(cls => {
-                    if (cls.startsWith('se-fs') || cls.startsWith('fs')) {
-                      current!.classList.remove(cls);
-                    }
-                  });
-                  current.classList.add(`se-fs${fontSize}`);
-                }
-                current = current.parentElement;
-                depth++;
-              }
-            }
-
-            // 4. 네이버 에디터의 기본 스타일도 오버라이드
-            const style = document.createElement('style');
-            style.textContent = `
-              .se-section-text,
-              .se-section-text *,
-              .se-component-content,
-              .se-component-content * {
-                font-size: ${fontSize}px !important;
-              }
-              .se-fs${fontSize} {
-                font-size: ${fontSize}px !important;
-              }
-            `;
-
-            // 기존 스타일 태그 제거 후 새로 추가
-            const existingStyle = document.getElementById('naver-font-size-override');
-            if (existingStyle) {
-              existingStyle.remove();
-            }
-            style.id = 'naver-font-size-override';
-            document.head.appendChild(style);
-          }
-        }, size);
-
-        await this.delay(this.DELAYS.MEDIUM);
-        this.log(`   ✅ 폰트 크기 ${size}px 강제 설정 완료 (JavaScript + CSS)`);
-      }
-    } catch (error) {
-      this.log(`   ⚠️ 폰트 크기 설정 실패: ${(error as Error).message}`);
-    }
+    return await editorHelpers.setFontSize(this, size, force);
   }
 
   // 볼드(굵게) 스타일 설정
@@ -7671,912 +6099,66 @@ export class NaverBlogAutomation {
    * 네이버 이미지 업로드 버튼을 통해 이미지 업로드 (가장 확실한 방법)
    */
   private async insertImageViaUploadButton(filePath: string): Promise<void> {
-    const page = this.ensurePage();
-    const frame = (await this.getAttachedFrame());
-
-    try {
-      // 1. 이미지 업로드 버튼 찾기 (Frame과 Page 모두 검색)
-      const imageButtonSelectors = [
-        'button[aria-label*="이미지"]',
-        'button[data-tooltip*="이미지"]',
-        'button[class*="image"]',
-        'button[class*="photo"]',
-        'button[class*="picture"]',
-        'div[role="button"][aria-label*="이미지"]',
-        '.se-toolbar-item[aria-label*="이미지"]',
-        '.se-toolbar-item[data-tooltip*="이미지"]',
-        'button.se-toolbar-item',
-        // 네이버 에디터 특정 선택자들
-        '[data-name="image"]',
-        '[data-command="openImagePopup"]',
-        '.se-popup-image button',
-        'button[data-command="image"]',
-        '.se-image-toolbar-button'
-      ];
-
-      let imageButton: any = null;
-
-      // 먼저 Frame에서 찾기 (네이버 블로그는 iframe 구조)
-      for (const selector of imageButtonSelectors) {
-        try {
-          const buttons = await frame.$$(selector).catch(() => []);
-          for (const button of buttons) {
-            const isVisible = await button.isIntersectingViewport().catch(() => false);
-            const ariaLabel = await frame.evaluate(el => el.getAttribute('aria-label'), button).catch(() => '');
-            const dataTooltip = await frame.evaluate(el => el.getAttribute('data-tooltip'), button).catch(() => '');
-            const className = await frame.evaluate(el => el.getAttribute('class'), button).catch(() => '');
-
-            if (isVisible && (ariaLabel?.includes('이미지') || dataTooltip?.includes('이미지') ||
-              className?.includes('image') || className?.includes('photo'))) {
-              imageButton = button;
-              this.log(`   ✅ 이미지 업로드 버튼 발견 (Frame): ${selector}`);
-              break;
-            }
-          }
-          if (imageButton) break;
-        } catch (error) {
-          continue;
-        }
-      }
-
-      // Frame에서 못 찾으면 Page에서 찾기
-      if (!imageButton) {
-        for (const selector of imageButtonSelectors) {
-          try {
-            const buttons = await page.$$(selector).catch(() => []);
-            for (const button of buttons) {
-              const isVisible = await button.isIntersectingViewport().catch(() => false);
-              const ariaLabel = await page.evaluate(el => el.getAttribute('aria-label'), button).catch(() => '');
-              const dataTooltip = await page.evaluate(el => el.getAttribute('data-tooltip'), button).catch(() => '');
-              const className = await page.evaluate(el => el.getAttribute('class'), button).catch(() => '');
-
-              if (isVisible && (ariaLabel?.includes('이미지') || dataTooltip?.includes('이미지') ||
-                className?.includes('image') || className?.includes('photo'))) {
-                imageButton = button;
-                this.log(`   ✅ 이미지 업로드 버튼 발견 (Page): ${selector}`);
-                break;
-              }
-            }
-            if (imageButton) break;
-          } catch (error) {
-            continue;
-          }
-        }
-      }
-
-      if (!imageButton) {
-        throw new Error('네이버 블로그에서 이미지 업로드 버튼을 찾을 수 없습니다');
-      }
-
-      // 2. 파일 경로 준비
-      let absolutePath: string;
-      const fs = await import('fs/promises');
-      const pathModule = await import('path');
-
-      // ✅ file:// 프로토콜 제거 및 URL 디코딩
-      let cleanFilePath = filePath;
-      if (cleanFilePath.startsWith('file://')) {
-        // file:// 프로토콜 제거
-        cleanFilePath = cleanFilePath.replace(/^file:\/\//, '');
-        // Windows 경로의 경우 file:///C:/ 형태이므로 / 제거
-        if (cleanFilePath.startsWith('/') && /^\/[A-Za-z]:/.test(cleanFilePath)) {
-          cleanFilePath = cleanFilePath.substring(1);
-        }
-        // URL 디코딩
-        try {
-          cleanFilePath = decodeURIComponent(cleanFilePath);
-        } catch {
-          // 디코딩 실패 시 원본 사용
-        }
-        this.log(`   🔧 file:// 프로토콜 제거 및 디코딩: ${filePath.substring(0, 50)}... → ${cleanFilePath.substring(0, 50)}...`);
-      }
-
-      if (cleanFilePath.startsWith('http://') || cleanFilePath.startsWith('https://')) {
-        // URL인 경우 다운로드 후 임시 파일로 저장
-        this.log(`   🌐 URL 이미지 다운로드 중...`);
-        const os = await import('os');
-        const https = await import('https');
-        const http = await import('http');
-        const url = await import('url');
-
-        // SSL 검증 무시 (공공 사이트의 SSL 설정 문제 대응)
-        const agent = new https.Agent({
-          rejectUnauthorized: false,
-          secureOptions: 0x4,
-        });
-
-        // URL 파싱
-        const parsedUrl = new url.URL(cleanFilePath);
-        const isHttps = parsedUrl.protocol === 'https:';
-        const client = isHttps ? https : http;
-
-        // Promise로 래핑하여 다운로드
-        const buffer = await new Promise<Buffer>((resolve, reject) => {
-          const request = client.get(cleanFilePath, {
-            agent: isHttps ? agent : undefined,
-            headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            },
-            timeout: 10000,
-          }, (response) => {
-            if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
-              reject(new Error(`이미지 다운로드 실패: ${response.statusCode} ${response.statusMessage || ''}`));
-              return;
-            }
-
-            const chunks: Buffer[] = [];
-            response.on('data', (chunk) => chunks.push(chunk));
-            response.on('end', () => resolve(Buffer.concat(chunks)));
-            response.on('error', reject);
-          });
-
-          request.on('error', reject);
-          request.on('timeout', () => {
-            request.destroy();
-            reject(new Error('이미지 다운로드 타임아웃'));
-          });
-        });
-        const tempDir = os.tmpdir();
-        // URL에서 쿼리 파라미터 제거 후 확장자 추출 (안전한 방법)
-        let urlWithoutQuery = cleanFilePath;
-        try {
-          // URL 모듈을 사용하여 pathname만 추출 (쿼리 파라미터와 해시 자동 제거)
-          const url = await import('url');
-          const parsedUrl = new url.URL(cleanFilePath);
-          urlWithoutQuery = parsedUrl.pathname;
-        } catch {
-          // URL 파싱 실패 시 수동으로 제거 (?와 & 모두 처리)
-          urlWithoutQuery = cleanFilePath.split('?')[0].split('&')[0].split('#')[0];
-        }
-        const ext = urlWithoutQuery.split('.').pop()?.toLowerCase() || 'jpg';
-        // 유효한 확장자만 허용 (보안) - 확장자에 쿼리 파라미터가 포함되지 않도록 추가 검증
-        const cleanExt = ext.split('&')[0].split('?')[0].split('#')[0];
-        const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(cleanExt) ? cleanExt : 'jpg';
-        const tempFileName = `naver-blog-img-${Date.now()}.${validExt}`;
-        absolutePath = pathModule.join(tempDir, tempFileName);
-
-        await fs.writeFile(absolutePath, buffer);
-        this.log(`   💾 임시 파일 저장: ${tempFileName}`);
-      } else {
-        // 로컬 파일인 경우
-        // 절대 경로로 변환
-        absolutePath = pathModule.isAbsolute(cleanFilePath)
-          ? cleanFilePath
-          : pathModule.resolve(cleanFilePath);
-
-        // ✅ [수정] 쿼리 파라미터 제거는 HTTP URL에서만 적용
-        // 로컬 파일 경로에서는 & 등의 문자가 파일명에 포함될 수 있으므로 건너뜀
-        // (HTTP URL은 이미 위에서 처리됨)
-        // 로컬 파일은 그대로 사용
-      }
-
-      // 파일 존재 확인
-      try {
-        await fs.access(absolutePath);
-      } catch (error) {
-        throw new Error(`이미지 파일을 찾을 수 없습니다: ${absolutePath}`);
-      }
-
-      // 3. 파일 업로드 실행 (이미지 버튼 클릭 + FileChooser만 사용)
-      this.log(`   📤 파일 업로드 시작 (이미지 버튼 클릭 + FileChooser)...`);
-
-      // ✅ 업로드 전 이미지 개수 확인 (Frame에서 확인)
-      const imagesBeforeCount = await frame.$$eval(
-        'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"], img[src*="postfiles"], img[data-attachment-id]',
-        imgs => imgs.length
-      ).catch(() => 0);
-      this.log(`   📊 업로드 전 이미지 개수: ${imagesBeforeCount}`);
-
-      try {
-        this.log(`   🔄 FileChooser 대기 중...`);
-
-        const [fileChooser] = await Promise.all([
-          page.waitForFileChooser({ timeout: 5000 }),
-          imageButton.click()
-        ]);
-
-        // ✅ 파일 선택 먼저 수행
-        await fileChooser.accept([absolutePath]);
-        this.log(`   ✅ FileChooser로 파일 선택 완료`);
-
-        // ✅ 파일 선택 후 업로드 완료 대기 (충분히 기다림)
-        this.log(`   ⏳ 이미지 업로드 처리 중... (5초 대기)`);
-        await this.delay(5000);
-
-        // ✅ MYBOX 팝업이 있으면 닫기 (파일 선택 후)
-        await page.keyboard.press('Escape').catch(() => { });
-        await this.delay(300);
-        await page.keyboard.press('Escape').catch(() => { });
-        await this.delay(300);
-
-      } catch (fcError) {
-        throw new Error(`이미지 버튼 클릭 + FileChooser 실패: ${(fcError as Error).message}`);
-      }
-
-      // 4. 업로드 완료 확인 (Frame에서 이미지 요소 확인 - 가장 정확함)
-      this.log(`   🔍 이미지 삽입 확인 중...`);
-
-      // ✅ Frame에서 이미지 확인 (네이버 에디터는 iframe 구조)
-      const imagesAfterCount = await frame.$$eval(
-        'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"], img[src*="postfiles"], img[data-attachment-id]',
-        imgs => imgs.length
-      ).catch(() => 0);
-
-      const newImagesAdded = imagesAfterCount - imagesBeforeCount;
-
-      if (newImagesAdded > 0) {
-        this.log(`   ✅ 이미지 업로드 성공! (새로 추가된 이미지: ${newImagesAdded}개, 총 ${imagesAfterCount}개)`);
-
-        // ✅ 이미지 크기를 '문서 너비'로 설정
-        try {
-          await this.setImageSizeToDocumentWidth();
-          this.log(`   ✅ 이미지 크기 '문서 너비'로 설정 완료`);
-        } catch (sizeError) {
-          this.log(`   ⚠️ 이미지 크기 설정 실패 (계속 진행): ${(sizeError as Error).message}`);
-        }
-      } else {
-        this.log(`   ⚠️ 이미지가 삽입되지 않음 - Base64 방식으로 재시도...`);
-        // Base64 방식으로 폴백
-        await this.insertImageViaBase64(absolutePath, frame, page);
-      }
-
-      // 5. 커서 위치 조정 (이미지 아래로 이동)
-      await page.keyboard.press('ArrowDown');
-      await this.delay(200);
-      await page.keyboard.press('End');
-      await this.delay(200);
-
-      this.log(`   🎉 이미지 삽입 프로세스 완료`);
-
-    } catch (error) {
-      this.log(`   ❌ 이미지 업로드 실패: ${(error as Error).message}`);
-      throw error;
-    }
+    return await imageHelpers.insertImageViaUploadButton(this, filePath);
   }
 
   /**
    * 네이버 이미지 버튼을 통해 이미지 업로드 (메인 방식)
    */
   private async insertBase64ImageAtCursor(filePath: string): Promise<void> {
-    const frame = (await this.getAttachedFrame());
-    const page = this.ensurePage();
+    return await imageHelpers.insertBase64ImageAtCursor(this, filePath);
+  }
 
-    // ✅ 안전 검사: 열린 패널/모달 닫기 (ABOUT, 지도, 함수 등 방지)
-    for (let i = 0; i < 2; i++) {
-      await page.keyboard.press('Escape');
-      await this.delay(50);
-    }
+  /**
+   * ✅ [2026-02-26 NEW] 이미지 삽입 후 에디터에 실제 렌더링되었는지 검증
+   * - 네이버 에디터는 비동기적으로 이미지를 업로드/렌더링하므로
+   *   insertBase64ImageAtCursor 호출 후에도 이미지가 아직 표시되지 않을 수 있음
+   * - 최대 5초간 500ms 간격으로 폴링하여 이미지 존재 확인
+   */
+  async verifyImageInserted(frame: any, label: string = '이미지'): Promise<boolean> {
+    const MAX_POLLS = 10; // 최대 10회 (5초)
+    const POLL_INTERVAL = 500; // 500ms 간격
 
-    // 열린 패널 강제 닫기
-    await frame.evaluate(() => {
-      const panels = document.querySelectorAll('.se-popup, .se-panel, .se-layer, .se-modal, [class*="popup"], [class*="layer"]');
-      panels.forEach(panel => {
-        if (panel instanceof HTMLElement && panel.style.display !== 'none') {
-          const closeBtn = panel.querySelector('button[class*="close"], .close, [aria-label*="닫기"]');
-          if (closeBtn instanceof HTMLElement) {
-            closeBtn.click();
-          }
-        }
-      });
-    }).catch(() => { });
-
-    const fs = await import('fs/promises');
-    const pathModule = await import('path');
-    const os = await import('os');
-
-    let absolutePath: string;
-    let isTemporaryFile = false;
-
-    // ✅ Base64 Data URL 또는 프리픽스 없는 Base64인 경우 임시 파일로 저장
-    const isBase64 = filePath.startsWith('data:') || (/^[A-Za-z0-9+/=]{100,}$/.test(filePath) && !filePath.includes(':') && !filePath.includes('\\'));
-
-    if (isBase64) {
-      this.log(`   🔄 Base64 데이터 감지 → 임시 파일로 변환 중...`);
-
+    for (let attempt = 0; attempt < MAX_POLLS; attempt++) {
       try {
-        // data:image/jpeg;base64,/9j/... 형식에서 데이터 추출
-        const matches = filePath.match(/^data:image\/(\w+);base64,(.+)$/);
-        if (!matches) {
-          throw new Error('잘못된 Base64 Data URL 형식입니다');
-        }
-
-        const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1];
-        const base64Data = matches[2];
-        const buffer = Buffer.from(base64Data, 'base64');
-
-        const tempDir = os.tmpdir();
-        const tempFileName = `naver-blog-img-${Date.now()}.${ext}`;
-        absolutePath = pathModule.join(tempDir, tempFileName);
-
-        await fs.writeFile(absolutePath, buffer);
-        isTemporaryFile = true;
-
-        this.log(`   ✅ Base64 → 임시 파일 변환 완료: ${(buffer.length / 1024).toFixed(1)}KB`);
-      } catch (error) {
-        throw new Error(`Base64 이미지 변환 실패: ${(error as Error).message}`);
-      }
-    }
-    // URL인 경우 다운로드
-    else if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
-      this.log(`   🌐 URL 이미지 다운로드 중: ${filePath.substring(0, 80)}...`);
-
-      try {
-        const https = await import('https');
-        const http = await import('http');
-        const url = await import('url');
-
-        // SSL 검증 무시 (공공 사이트의 SSL 설정 문제 대응)
-        const agent = new https.Agent({
-          rejectUnauthorized: false,
-          // Legacy SSL renegotiation 허용 (OpenSSL 3.0+ 필수)
-          secureOptions: 0x4, // SSL_OP_LEGACY_SERVER_CONNECT
+        const imageCount = await frame.evaluate(() => {
+          const images = document.querySelectorAll('img.se-image-resource');
+          return images.length;
         });
 
-        // URL 파싱
-        const parsedUrl = new url.URL(filePath);
-        const isHttps = parsedUrl.protocol === 'https:';
-        const client = isHttps ? https : http;
-
-        // Promise로 래핑하여 다운로드
-        const buffer = await new Promise<Buffer>((resolve, reject) => {
-          const request = client.get(filePath, {
-            agent: isHttps ? agent : undefined,
-            headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            },
-            timeout: 10000, // 10초 타임아웃
-          }, (response) => {
-            if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
-              reject(new Error(`이미지 다운로드 실패: ${response.statusCode} ${response.statusMessage || ''}`));
-              return;
-            }
-
-            const chunks: Buffer[] = [];
-            response.on('data', (chunk) => chunks.push(chunk));
-            response.on('end', () => resolve(Buffer.concat(chunks)));
-            response.on('error', reject);
-          });
-
-          request.on('error', reject);
-          request.on('timeout', () => {
-            request.destroy();
-            reject(new Error('이미지 다운로드 타임아웃'));
-          });
-        });
-
-        // 임시 파일로 저장
-        const tempDir = os.tmpdir();
-        // URL에서 쿼리 파라미터 제거 후 확장자 추출 (안전한 방법)
-        let urlWithoutQuery = filePath;
-        try {
-          // URL 모듈을 사용하여 pathname만 추출 (쿼리 파라미터와 해시 자동 제거)
-          const parsedUrl = new url.URL(filePath);
-          urlWithoutQuery = parsedUrl.pathname;
-        } catch {
-          // URL 파싱 실패 시 수동으로 제거 (?와 & 모두 처리)
-          urlWithoutQuery = filePath.split('?')[0].split('&')[0].split('#')[0];
+        if (imageCount > 0) {
+          this.log(`   ✅ ${label} 삽입 검증 완료 (${imageCount}개 이미지 확인, ${attempt * POLL_INTERVAL}ms)`);
+          return true;
         }
-        const ext = urlWithoutQuery.split('.').pop()?.toLowerCase() || 'jpg';
-        // 유효한 확장자만 허용 (보안) - 확장자에 쿼리 파라미터가 포함되지 않도록 추가 검증
-        const cleanExt = ext.split('&')[0].split('?')[0].split('#')[0];
-        const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(cleanExt) ? cleanExt : 'jpg';
-        const tempFileName = `naver-blog-img-${Date.now()}.${validExt}`;
-        absolutePath = pathModule.join(tempDir, tempFileName);
-
-        await fs.writeFile(absolutePath, buffer);
-        isTemporaryFile = true;
-
-        this.log(`   ✅ 이미지 다운로드 완료: ${(buffer.length / 1024).toFixed(1)}KB`);
-      } catch (error) {
-        throw new Error(`URL 이미지 다운로드 실패: ${(error as Error).message}`);
-      }
-    } else {
-      // 로컬 파일 경로
-      // ✅ file:// 프로토콜 제거 및 URL 디코딩
-      let cleanFilePath = filePath;
-      if (cleanFilePath.startsWith('file://')) {
-        // file:// 프로토콜 제거
-        cleanFilePath = cleanFilePath.replace(/^file:\/\//, '');
-        // Windows 경로의 경우 file:///C:/ 형태이므로 / 제거
-        if (cleanFilePath.startsWith('/') && /^\/[A-Za-z]:/.test(cleanFilePath)) {
-          cleanFilePath = cleanFilePath.substring(1);
-        }
-        // URL 디코딩
-        try {
-          cleanFilePath = decodeURIComponent(cleanFilePath);
-        } catch {
-          // 디코딩 실패 시 원본 사용
-        }
-        this.log(`   🔧 file:// 프로토콜 제거 및 디코딩: ${filePath.substring(0, 50)}... → ${cleanFilePath.substring(0, 50)}...`);
+      } catch (e) {
+        // frame 접근 실패 시 무시하고 재시도
       }
 
-      absolutePath = pathModule.isAbsolute(cleanFilePath)
-        ? cleanFilePath
-        : pathModule.resolve(cleanFilePath);
-
-      // ✅ [수정] 쿼리 파라미터 제거는 HTTP URL에서만 적용
-      // 로컬 파일 경로에서는 & 등의 문자가 파일명에 포함될 수 있으므로 건너뜀
-      // (HTTP URL은 이미 위에서 처리됨)
-      // 로컬 파일은 그대로 사용
-
-      try {
-        await fs.access(absolutePath);
-      } catch {
-        throw new Error(`이미지 파일을 찾을 수 없습니다: ${absolutePath}`);
+      if (attempt < MAX_POLLS - 1) {
+        await this.delay(POLL_INTERVAL);
       }
     }
 
-    // 보안: 파일 경로 마스킹
-    const maskedPath = absolutePath.replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~');
-    this.log(`   📁 파일 경로: ${maskedPath}`);
-
-    // ✅ 이미지 버튼 클릭 + FileChooser만 사용 (file input 직접 사용 안 함)
-    this.log(`   📤 이미지 버튼 클릭 + FileChooser로 업로드 시작...`);
-
-    // 이미지 버튼 찾기
-    const imageButtonSelectors = [
-      'button[data-name="image"]',
-      'button.se-image-toolbar-button',
-      'button[data-command="image"]',
-      'button[aria-label*="이미지"]',
-      'button[title*="이미지"]',
-    ];
-
-    let imageButton = null;
-    for (const selector of imageButtonSelectors) {
-      imageButton = await frame.$(selector).catch(() => null);
-      if (imageButton) {
-        this.log(`   ✅ 이미지 버튼 발견: ${selector}`);
-        break;
-      }
-    }
-
-    if (!imageButton) {
-      throw new Error('네이버 블로그에서 이미지 업로드 버튼을 찾을 수 없습니다');
-    }
-
-    // 이미지 버튼 클릭 + FileChooser
-    try {
-      this.log(`   🔄 FileChooser 대기 중...`);
-
-      const [fileChooser] = await Promise.all([
-        page.waitForFileChooser({ timeout: 5000 }),
-        imageButton.click()
-      ]);
-
-      // ✅ 파일 선택 먼저 수행 (ESC 키는 나중에!)
-      await fileChooser.accept([absolutePath]);
-      this.log(`   ✅ FileChooser로 파일 선택 완료`);
-
-      // 업로드 완료 대기 (충분히 기다림)
-      this.log(`   ⏳ 이미지 업로드 처리 중... (5초 대기)`);
-      await this.delay(5000);
-
-      // ✅ 파일 업로드 후 MYBOX 팝업 닫기
-      await page.keyboard.press('Escape').catch(() => { });
-      await this.delay(300);
-      await page.keyboard.press('Escape').catch(() => { });
-      await this.delay(300);
-
-      // 확인 버튼이 있으면 클릭
-      const confirmButton = await frame.$('button:has-text("확인"), button:has-text("삽입")').catch(() => null);
-      if (confirmButton) {
-        await confirmButton.click();
-        await this.delay(1000);
-      }
-
-      // 이미지가 삽입되었는지 확인
-      const imgCount = await frame.$$eval(
-        'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"], img[src*="postfiles"], img[data-attachment-id]',
-        imgs => imgs.length
-      );
-
-      if (imgCount > 0) {
-        this.log(`   ✅ 이미지 버튼 클릭 + FileChooser 성공 (이미지 ${imgCount}개 확인됨)`);
-
-        // ✅ MyBox 팝업 자동 닫기
-        await this.delay(500); // 팝업이 뜰 시간 대기
-        await page.keyboard.press('Escape').catch(() => { });
-        await this.delay(300);
-        await page.keyboard.press('Escape').catch(() => { }); // 한 번 더 (확실히)
-        await this.delay(300);
-        this.log('   ✅ MyBox 팝업 자동 닫기 완료');
-
-        if (isTemporaryFile) {
-          await fs.unlink(absolutePath).catch(() => { });
-        }
-        return;
-      } else {
-        throw new Error('파일 선택했으나 이미지가 삽입되지 않음');
-      }
-    } catch (error) {
-      // ESC로 열린 패널 닫기
-      await page.keyboard.press('Escape').catch(() => { });
-      await this.delay(300);
-
-      this.log(`   ⚠️ FileChooser 방식 실패, Base64 변환 방식으로 폴백 시도...`);
-
-      // ✅ Base64 변환 방식으로 폴백
-      try {
-        await this.insertImageViaBase64(absolutePath, frame, page);
-        this.log(`   ✅ Base64 변환 방식으로 이미지 삽입 성공`);
-
-        if (isTemporaryFile) {
-          await fs.unlink(absolutePath).catch(() => { });
-        }
-        return;
-      } catch (base64Error) {
-        this.log(`   ❌ Base64 변환 방식도 실패: ${(base64Error as Error).message}`);
-        throw new Error(`이미지 삽입 실패 (FileChooser + Base64 모두 실패): ${(error as Error).message}`);
-      }
-    }
-
-    // ✅ 이미지 크기를 '문서 너비'로 설정
-    try {
-      await this.setImageSizeToDocumentWidth();
-      this.log(`   ✅ 이미지 크기 '문서 너비'로 설정 완료`);
-    } catch (sizeError) {
-      this.log(`   ⚠️ 이미지 크기 설정 실패 (계속 진행): ${(sizeError as Error).message}`);
-    }
-
-    // 임시 파일 정리
-    if (isTemporaryFile) {
-      try {
-        await fs.unlink(absolutePath);
-        this.log(`   🗑️ 임시 파일 삭제 완료`);
-      } catch (error) {
-        this.log(`   ⚠️ 임시 파일 삭제 실패: ${(error as Error).message}`);
-      }
-    }
-
-    // 이미지 삽입 후 커서를 다음 줄로 이동
-    await page.keyboard.press('ArrowDown');
-    await this.delay(100);
-    await page.keyboard.press('End');
-    await this.delay(100);
+    this.log(`   ⚠️ ${label} 삽입 검증 실패 (5초 내 이미지 미발견) — 발행은 계속 진행`);
+    return false;
   }
 
   /**
    * Base64 변환 방식으로 이미지 삽입 (클립보드 붙여넣기)
    */
   private async insertImageViaBase64(filePath: string, frame: Frame, page: Page): Promise<void> {
-    const fs = await import('fs/promises');
-    const pathModule = await import('path');
-
-    this.log(`   🔄 Base64 변환 방식으로 이미지 삽입 시작...`);
-
-    // 이미지를 Base64로 읽기
-    let absolutePath = filePath;
-    let imageBuffer: Buffer;
-
-    try {
-      imageBuffer = await fs.readFile(absolutePath);
-      this.log(`   ✅ 이미지 파일 읽기 완료: ${(imageBuffer.length / 1024).toFixed(1)}KB`);
-    } catch (error) {
-      throw new Error(`이미지 파일 읽기 실패: ${(error as Error).message}`);
-    }
-
-    // Base64로 변환
-    const base64 = imageBuffer.toString('base64');
-    const ext = pathModule.extname(absolutePath).toLowerCase().slice(1) || 'png';
-    const mimeType = ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' :
-      ext === 'png' ? 'image/png' :
-        ext === 'gif' ? 'image/gif' :
-          ext === 'webp' ? 'image/webp' : 'image/png';
-
-    this.log(`   🔄 Base64 변환 완료 (크기: ${(base64.length / 1024).toFixed(2)} KB, MIME: ${mimeType})`);
-
-    // 클립보드에 이미지 데이터 설정
-    const clipboardSet = await frame.evaluate(async (b64: string, mime: string) => {
-      try {
-        // Base64를 Blob으로 변환
-        const byteCharacters = atob(b64);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-          byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-        const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray], { type: mime });
-
-        // ClipboardItem 생성
-        const clipboardItem = new ClipboardItem({ [mime]: blob });
-
-        // 클립보드에 쓰기
-        await navigator.clipboard.write([clipboardItem]);
-        return true;
-      } catch (e) {
-        console.error('[Base64] 클립보드 설정 오류:', e);
-        return false;
-      }
-    }, base64, mimeType);
-
-    if (!clipboardSet) {
-      throw new Error('Base64 클립보드 설정 실패');
-    }
-
-    this.log(`   ✅ Base64 클립보드 설정 완료`);
-
-    // 에디터 요소 포커스
-    await frame.evaluate(() => {
-      const editorElement = document.querySelector('.se-section-text, .se-component-content, [contenteditable="true"]') as HTMLElement;
-      if (editorElement) {
-        editorElement.focus();
-        // 커서를 끝으로 이동
-        const range = document.createRange();
-        const selection = window.getSelection();
-        if (selection) {
-          range.selectNodeContents(editorElement);
-          range.collapse(false);
-          selection.removeAllRanges();
-          selection.addRange(range);
-        }
-      }
-    });
-
-    await this.delay(300);
-
-    // ✅ Puppeteer로 실제 Ctrl+V 키 입력 (더 확실한 방법)
-    this.log(`   📋 Ctrl+V 키 입력으로 이미지 붙여넣기...`);
-    await page.keyboard.down('Control');
-    await page.keyboard.press('v');
-    await page.keyboard.up('Control');
-
-    this.log(`   ✅ Ctrl+V 키 입력 완료`);
-
-    // 이미지 삽입 완료 대기
-    await this.delay(2500);
-
-    // 이미지가 삽입되었는지 확인
-    const imgCount = await frame.$$eval(
-      'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"], img[src*="postfiles"], img[data-attachment-id]',
-      imgs => imgs.length
-    ).catch(() => 0);
-
-    if (imgCount > 0) {
-      this.log(`   ✅ Base64 방식으로 이미지 삽입 성공 (이미지 ${imgCount}개 확인됨)`);
-    } else {
-      this.log(`   ⚠️ Base64 방식으로 삽입했으나 DOM에서 이미지를 찾을 수 없음`);
-    }
-
-    // ✅ 이미지 크기를 '문서 너비'로 설정
-    try {
-      await this.setImageSizeToDocumentWidth();
-      this.log(`   ✅ 이미지 크기 '문서 너비'로 설정 완료`);
-    } catch (sizeError) {
-      this.log(`   ⚠️ 이미지 크기 설정 실패 (계속 진행): ${(sizeError as Error).message}`);
-    }
-
-    // ✅ MyBox 팝업 자동 닫기 (3층 방어)
-    try {
-      await this.delay(500); // 팝업이 뜰 시간 대기
-      await page.keyboard.press('Escape');
-      await this.delay(300);
-      await page.keyboard.press('Escape'); // 한 번 더 (확실히)
-      await this.delay(300);
-      this.log('✅ MyBox 팝업 자동 닫기 완료');
-    } catch (escError) {
-      // ESC 키 입력 실패는 무시 (팝업이 없을 수도 있음)
-      this.log(`   ℹ️ ESC 키 입력 중 오류 (무시): ${(escError as Error).message}`);
-    }
+    return await imageHelpers.insertImageViaBase64(this, filePath, frame, page);
   }
 
   /**
    * 이미지 크기를 '문서 너비'로 설정 (안전 모드: DOM 스타일만 적용, 툴바 클릭 없음)
    */
   private async setImageSizeToDocumentWidth(): Promise<void> {
-    const frame = (await this.getAttachedFrame());
-    const page = this.ensurePage();
-
-    try {
-      await this.delay(150);
-
-      const appliedCount = await frame.evaluate(() => {
-        const imgs = document.querySelectorAll('img.se-image-resource, img[data-se-image-resource="true"], .se-module-image img, .se-section-image img');
-        let count = 0;
-
-        imgs.forEach((img) => {
-          const targetImage = img as HTMLImageElement;
-
-          // 상위 컨테이너들 설정
-          let el: HTMLElement | null = targetImage;
-          while (el && el !== document.body) {
-            if (el.classList.contains('se-section') || el.classList.contains('se-module') || el.classList.contains('se-component') || el.classList.contains('se-image')) {
-              el.classList.remove('se-l-left', 'se-l-right', 'se-l-original');
-              el.classList.add('se-l-default');
-              el.style.width = '100%';
-              el.style.maxWidth = '100%';
-              el.setAttribute('data-size', 'document-width');
-            }
-            el = el.parentElement;
-          }
-
-          // 이미지 스타일
-          targetImage.style.width = '100%';
-          targetImage.style.maxWidth = '100%';
-          targetImage.style.height = 'auto';
-          targetImage.style.display = 'block';
-
-          // figure/wrap 보정
-          const figure = targetImage.closest('figure, .se-image-wrap, .se-module-image-link, .se-component-image') as HTMLElement;
-          if (figure) {
-            figure.style.width = '100%';
-            figure.style.maxWidth = '100%';
-          }
-
-          count++;
-        });
-
-        return count;
-      });
-
-      if (appliedCount > 0) {
-        this.log(`   ✅ 직접 스타일 설정 완료 (${appliedCount}개 이미지)`);
-      } else {
-        this.log(`   ⚠️ 이미지를 찾을 수 없어 크기 조정을 건너뜁니다`);
-      }
-
-      await this.delay(200);
-
-      // 7. ✅ 중요: 툴바 포커스 해제 및 에디터 본문으로 포커스 이동
-      // 문서 너비 버튼 클릭 후 툴바에 포커스가 남아있으면 Enter가 잘못된 동작 유발
-      try {
-        // Escape로 툴바/패널 닫기
-        await page.keyboard.press('Escape');
-        await this.delay(100);
-
-        // 에디터 본문 클릭하여 포커스 이동
-        await frame.evaluate(() => {
-          // 이미지 아래 텍스트 영역 클릭
-          const textContainer = document.querySelector('.se-section-text, [contenteditable="true"]') as HTMLElement;
-          if (textContainer) {
-            textContainer.focus();
-            // 커서를 끝으로 이동
-            const selection = window.getSelection();
-            if (selection) {
-              const range = document.createRange();
-              range.selectNodeContents(textContainer);
-              range.collapse(false);
-              selection.removeAllRanges();
-              selection.addRange(range);
-            }
-          }
-        });
-        await this.delay(100);
-      } catch (focusError) {
-        // 포커스 이동 실패해도 계속 진행
-      }
-
-    } catch (error) {
-      this.log(`   ⚠️ 이미지 크기 조정 중 오류 발생 (계속 진행): ${(error as Error).message}`);
-    }
+    return await imageHelpers.setImageSizeToDocumentWidth(this);
   }
 
   private async insertSingleImage(image: AutomationImage): Promise<void> {
-    const frame = (await this.getAttachedFrame());
-    this.log(`🖼️ '${image.heading}' 이미지를 현재 커서 위치에 삽입합니다...`);
-
-    let imageDataUrl = image.filePath || (image as any).url || (image as any).previewDataUrl;
-    if (!imageDataUrl) {
-      this.log(`⚠️ '${image.heading}' 이미지 경로가 비어있습니다. 삽입을 건너뜁니다.`);
-      return;
-    }
-
-    const isUrl = imageDataUrl.startsWith('http://') || imageDataUrl.startsWith('https://');
-    const isBase64 = imageDataUrl.startsWith('data:');
-
-    if (!isUrl && !isBase64) {
-      try {
-        const fs = await import('fs/promises');
-        const imageBuffer = await fs.readFile(imageDataUrl);
-        const base64 = imageBuffer.toString('base64');
-
-        // 확장자 및 MimeType 추출
-        const urlWithoutQuery = imageDataUrl.split('?')[0].split('#')[0];
-        const ext = urlWithoutQuery.split('.').pop()?.toLowerCase() || 'png';
-        const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) ? ext : 'png';
-        const mimeType = validExt === 'jpg' || validExt === 'jpeg' ? 'image/jpeg' :
-          validExt === 'png' ? 'image/png' :
-            validExt === 'gif' ? 'image/gif' :
-              validExt === 'webp' ? 'image/webp' : 'image/png';
-
-        imageDataUrl = `data:${mimeType};base64,${base64}`;
-      } catch (err) {
-        this.log(`❌ 이미지 파일 로드 실패: ${imageDataUrl}. 상세: ${(err as Error).message}`);
-        return;
-      }
-    }
-
-    const inserted = await this.retry(async () => {
-      return await frame.evaluate((imgUrl) => {
-        const selection = window.getSelection();
-        if (!selection || selection.rangeCount === 0) {
-          return false;
-        }
-
-        const range = selection.getRangeAt(0);
-        const container = range.commonAncestorContainer;
-
-        const titleElement = document.querySelector('.se-section-documentTitle');
-        let currentNode = container.nodeType === Node.TEXT_NODE
-          ? container.parentElement
-          : container as HTMLElement;
-
-        if (titleElement && titleElement.contains(currentNode)) {
-          return false;
-        }
-
-        const bodyElement = document.querySelector('.se-section-text, .se-main-container, .se-component');
-        if (!bodyElement || !bodyElement.contains(currentNode)) {
-          return false;
-        }
-
-        const seComponent = document.createElement('div');
-        seComponent.className = 'se-component se-image se-l-default';
-        seComponent.style.margin = '15px 0';
-
-        const seComponentContent = document.createElement('div');
-        seComponentContent.className = 'se-component-content';
-
-        const seSection = document.createElement('div');
-        seSection.className = 'se-section se-section-image se-l-default se-align-center';
-
-        const seModule = document.createElement('div');
-        seModule.className = 'se-module se-module-image';
-
-        const seLink = document.createElement('a');
-        seLink.className = 'se-module-image-link';
-        seLink.setAttribute('data-linktype', 'img');
-
-        const img = document.createElement('img');
-        img.className = 'se-image-resource';
-        img.src = imgUrl;
-        img.setAttribute('data-width', 'original');
-        img.setAttribute('data-height', 'original');
-        img.style.maxWidth = '100%';
-        img.style.height = 'auto';
-
-        seLink.appendChild(img);
-        seModule.appendChild(seLink);
-        seSection.appendChild(seModule);
-        seComponentContent.appendChild(seSection);
-        seComponent.appendChild(seComponentContent);
-
-        try {
-          let insertPoint = currentNode;
-          while (insertPoint && !insertPoint.classList.contains('se-component') && insertPoint.parentElement) {
-            insertPoint = insertPoint.parentElement;
-          }
-
-          if (!insertPoint || !insertPoint.parentElement) {
-            range.collapse(false);
-            range.insertNode(seComponent);
-          } else {
-            if (insertPoint.nextSibling) {
-              insertPoint.parentElement.insertBefore(seComponent, insertPoint.nextSibling);
-            } else {
-              insertPoint.parentElement.appendChild(seComponent);
-            }
-          }
-
-          const newRange = document.createRange();
-          newRange.setStartAfter(seComponent);
-          newRange.collapse(true);
-          selection.removeAllRanges();
-          selection.addRange(newRange);
-
-          return true;
-        } catch (e) {
-          return false;
-        }
-      }, imageDataUrl);
-    }, 3, `"${image.heading}" 이미지 삽입`).catch(() => false);
-
-    if (inserted) {
-      this.log(`   ✅ "${image.heading}" 이미지 삽입 완료`);
-      await this.delay(this.DELAYS.MEDIUM);
-    } else {
-      this.log(`   ❌ "${image.heading}" 이미지 삽입 실패 (3회 시도)`);
-    }
+    return await imageHelpers.insertSingleImage(this, image);
   }
 
   /**
@@ -8694,121 +6276,7 @@ export class NaverBlogAutomation {
    * 이미지 배치 검증 - 타이핑 완료 후 이미지가 제대로 들어갔는지 확인
    */
   private async verifyImagePlacement(images: AutomationImage[]): Promise<void> {
-    const frame = (await this.getAttachedFrame());
-
-    this.log('\n🔍 [이미지 배치 검증 시작]');
-
-    try {
-      // 에디터 콘텐츠 영역에서 실제 콘텐츠 이미지 찾기
-      const imageInfo = await frame.evaluate(() => {
-        // 네이버 에디터의 실제 콘텐츠 편집 영역 찾기
-        const contentSelectors = [
-          '.se-main-container .se-editing-area',
-          '.se-main-container',
-          '.se-editing-area',
-          '.se-component-content',
-          '.se-canvas-area',
-          '[contenteditable="true"]',
-          '.se-section-text'
-        ];
-
-        let contentArea: Element | null = null;
-        for (const selector of contentSelectors) {
-          const element = document.querySelector(selector);
-          if (element) {
-            contentArea = element;
-            break;
-          }
-        }
-
-        // 콘텐츠 영역 내 실제 이미지 찾기
-        let contentImages = 0;
-        let uiImages = 0;
-        const imageDetails: Array<{ src: string, isContent: boolean }> = [];
-
-        if (contentArea) {
-          const allImages = contentArea.querySelectorAll('img');
-          allImages.forEach(img => {
-            const src = img.getAttribute('src') || '';
-
-            // 실제 업로드된 콘텐츠 이미지 판별 (엄격한 기준)
-            const isContentImage = src.length > 0 &&
-              (src.includes('blogfiles.naver.net') ||
-                src.includes('postfiles.pstatic.net') ||
-                src.includes('blob:') ||
-                (src.includes('http') && !src.includes('static.blog.naver.net'))) &&
-              !src.includes('icon') &&
-              !src.includes('btn_') &&
-              !src.includes('ico_');
-
-            if (isContentImage) {
-              contentImages++;
-            } else {
-              uiImages++;
-            }
-
-            imageDetails.push({
-              src: src.substring(0, 80) + (src.length > 80 ? '...' : ''),
-              isContent: isContentImage
-            });
-          });
-        }
-
-        return {
-          contentImages,
-          uiImages,
-          totalImages: contentImages + uiImages,
-          imageDetails,
-          contentAreaFound: !!contentArea
-        };
-      });
-
-      this.log(`   → 업로드 요청 이미지: ${images.length}개`);
-      this.log(`   → 콘텐츠 영역 찾음: ${imageInfo.contentAreaFound ? '예' : '아니오'}`);
-      this.log(`   → 콘텐츠 이미지: ${imageInfo.contentImages}개`);
-      this.log(`   → UI 아이콘: ${imageInfo.uiImages}개`);
-
-      // 상세 이미지 정보 로깅 (디버그용)
-      if (imageInfo.imageDetails.length > 0) {
-        this.log('   📋 발견된 이미지 목록:');
-        imageInfo.imageDetails.forEach((img, idx) => {
-          this.log(`     ${idx + 1}. [${img.isContent ? '콘텐츠' : 'UI'}] ${img.src}`);
-        });
-      }
-
-      if (!imageInfo.contentAreaFound) {
-        this.log('   ⚠️ 콘텐츠 편집 영역을 찾을 수 없습니다.');
-        this.log('   ℹ️ 네이버 블로그 에디터 UI가 변경되었을 수 있습니다.');
-      }
-
-      if (imageInfo.contentImages === 0) {
-        this.log('   ❌ 실제 콘텐츠 이미지가 하나도 없습니다!');
-        this.log('   ℹ️ 이미지 업로드가 완전히 실패했거나, 네이버 에디터가 이미지를 표시하지 않습니다.');
-      } else if (imageInfo.contentImages < images.length) {
-        const missing = images.length - imageInfo.contentImages;
-        this.log(`   ⚠️ ${missing}개 이미지가 누락되었습니다.`);
-        this.log('   ℹ️ 일부 이미지만 업로드되었을 수 있습니다.');
-      } else if (imageInfo.contentImages === images.length) {
-        this.log('   ✅ 모든 이미지가 정상적으로 업로드되었습니다!');
-      }
-
-      // 소제목별 이미지 배치 확인
-      const headingImageMap = new Map<string, number>();
-      for (const img of images) {
-        const count = headingImageMap.get(img.heading) || 0;
-        headingImageMap.set(img.heading, count + 1);
-      }
-
-      this.log('\n   📊 소제목별 이미지 배치 현황:');
-      for (const [heading, count] of headingImageMap.entries()) {
-        this.log(`      • "${heading}": ${count}개`);
-      }
-
-      this.log('\n✅ 이미지 배치 검증 완료');
-    } catch (error) {
-      this.log(`   ⚠️ 이미지 검증 중 오류: ${(error as Error).message}`);
-      this.log(`   ℹ️ 수동으로 이미지 배치를 확인해주세요.`);
-    }
+    await imageHelpers.verifyImagePlacement(this, images.length);
   }
 
   private async replaceEditorHtml(html: string): Promise<boolean> {
@@ -8938,14 +6406,14 @@ export class NaverBlogAutomation {
           const batch = hashtagList.slice(i, i + batchSize).join(' ');
 
           // 배치 입력 (delay 40ms - 한글 조합에 충분하면서 빠름)
-          await page.keyboard.type(batch, { delay: 40 });
+          await safeKeyboardType(page, batch, { delay: 40 });
 
           // 한글 조합 완료 대기 (최소화)
           await this.delay(80);
 
           // 다음 배치가 있으면 공백 추가
           if (i + batchSize < hashtagList.length) {
-            await page.keyboard.type(' ', { delay: 20 });
+            await safeKeyboardType(page, ' ', { delay: 20 });
           }
         }
 
@@ -9115,7 +6583,7 @@ export class NaverBlogAutomation {
       // ✅ 2. 구분선 삽입
       const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
       await page.keyboard.press('Enter'); // ✅ [2026-01-19] 엔터 1회로 축소
-      await page.keyboard.type(divider, { delay: 5 });
+      await safeKeyboardType(page, divider, { delay: 5 });
       await page.keyboard.press('Enter');
       this.log(`   ✅ 구분선 1 삽입 완료`);
 
@@ -9123,15 +6591,15 @@ export class NaverBlogAutomation {
       // 배너와 다른 강력한 구매 결심 유도 문구!
       this.log(`   🛒 CTA 텍스트 삽입 중: "${ctaHook}"`);
       await page.keyboard.press('Enter');
-      await page.keyboard.type(`📎 ${ctaHook}`, { delay: 10 });
+      await safeKeyboardType(page, `📎 ${ctaHook}`, { delay: 10 });
       await page.keyboard.press('Enter');
-      await page.keyboard.type(`👉 ${url}`, { delay: 10 });
+      await safeKeyboardType(page, `👉 ${url}`, { delay: 10 });
       await page.keyboard.press('Enter');
       this.log(`   ✅ CTA 텍스트 + 제휴링크 삽입 완료`);
 
-      // ✅ 4. [신규] 5초 대기 (링크 카드 로딩)
-      this.log(`   ⏳ 5초 대기 중 (링크 카드 로딩)...`);
-      await this.delay(5000);
+      // ✅ 4. [신규] 링크 카드 로딩 대기 (polling 방식)
+      this.log(`   ⏳ 링크 카드 로딩 대기 중...`);
+      await this.waitForLinkCard(15000, 500);
 
       // ✅ [2026-01-19] 마지막 구분선 제거 - 추가 CTA/이전글에서 각자 구분선 삽입
       // 중복 구분선 방지
@@ -9143,7 +6611,7 @@ export class NaverBlogAutomation {
         // ✅ 이전글 전 구분선 삽입
         const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
         await page.keyboard.press('Enter');
-        await page.keyboard.type(divider, { delay: 5 });
+        await safeKeyboardType(page, divider, { delay: 5 });
         await page.keyboard.press('Enter');
 
         // ✅ [2026-01-23 FIX] 후킹 문구 + 이전글 제목
@@ -9155,18 +6623,18 @@ export class NaverBlogAutomation {
           '👀 놓치면 아까운 추천 글!',
         ];
         const randomPrevHook = prevPostHooks[Math.floor(Math.random() * prevPostHooks.length)];
-        await page.keyboard.type(randomPrevHook, { delay: 10 });
+        await safeKeyboardType(page, randomPrevHook, { delay: 10 });
         await page.keyboard.press('Enter');
-        await page.keyboard.type(`📖 ${previousPostTitle}`, { delay: 10 });
+        await safeKeyboardType(page, `📖 ${previousPostTitle}`, { delay: 10 });
         await page.keyboard.press('Enter');
-        await page.keyboard.type(`👉 ${previousPostUrl}`, { delay: 10 });
+        await safeKeyboardType(page, `👉 ${previousPostUrl}`, { delay: 10 });
         await page.keyboard.press('Enter');
         this.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook})`);
 
 
-        // ✅ 7. [신규] 5초 대기 (이전글 링크 카드 로딩)
-        this.log(`   ⏳ 5초 대기 중 (이전글 카드 로딩)...`);
-        await this.delay(5000);
+        // ✅ 7. [신규] 이전글 링크 카드 로딩 대기 (polling 방식)
+        this.log(`   ⏳ 이전글 카드 로딩 대기 중...`);
+        await this.waitForLinkCard(15000, 500);
       } else {
         this.log(`   ℹ️ 이전글 정보 없음 - 건너뜀`);
       }
@@ -9185,15 +6653,15 @@ export class NaverBlogAutomation {
       try {
         const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
         await page.keyboard.press('Enter');
-        await page.keyboard.type(divider, { delay: 5 });
+        await safeKeyboardType(page, divider, { delay: 5 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
-        await page.keyboard.type(ctaHook, { delay: 10 });
+        await safeKeyboardType(page, ctaHook, { delay: 10 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
-        await page.keyboard.type(`🔗 ${displayProductName}`, { delay: 10 });
+        await safeKeyboardType(page, `🔗 ${displayProductName}`, { delay: 10 });
         await page.keyboard.press('Enter');
-        await page.keyboard.type(`👉 ${url}`, { delay: 10 });
+        await safeKeyboardType(page, `👉 ${url}`, { delay: 10 });
         await page.keyboard.press('Enter');
         this.log(`   ✅ 텍스트 CTA 폴백 완료`);
       } catch (fallbackError) {
@@ -9253,35 +6721,35 @@ export class NaverBlogAutomation {
       // 위치에 따라 텍스트 타이핑 (각 요소를 개별 줄에 배치)
       if (position === 'top') {
         this.log(`   → 상단 위치에 CTA 텍스트 삽입 중...`);
-        await page.keyboard.type(divider, { delay: 5 });
+        await safeKeyboardType(page, divider, { delay: 5 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
-        await page.keyboard.type(`🔗 ${cleanText}`, { delay: 10 });
+        await safeKeyboardType(page, `🔗 ${cleanText}`, { delay: 10 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
-        await page.keyboard.type(`👉 ${finalUrl}`, { delay: 10 });
+        await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
       } else if (position === 'middle') {
         this.log(`   → 중간 위치에 CTA 텍스트 삽입 중...`);
-        await page.keyboard.type(divider, { delay: 5 });
+        await safeKeyboardType(page, divider, { delay: 5 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
-        await page.keyboard.type(`🔗 ${cleanText}`, { delay: 10 });
+        await safeKeyboardType(page, `🔗 ${cleanText}`, { delay: 10 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
-        await page.keyboard.type(`👉 ${finalUrl}`, { delay: 10 });
+        await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
       } else {
         this.log(`   → 하단 위치에 CTA 텍스트 삽입 중...`);
-        await page.keyboard.type(divider, { delay: 5 });
+        await safeKeyboardType(page, divider, { delay: 5 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
-        await page.keyboard.type(`🔗 ${cleanText}`, { delay: 10 });
+        await safeKeyboardType(page, `🔗 ${cleanText}`, { delay: 10 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
-        await page.keyboard.type(`👉 ${finalUrl}`, { delay: 10 });
+        await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
         await page.keyboard.press('Enter');
       }
 
@@ -9616,7 +7084,7 @@ export class NaverBlogAutomation {
       const text = match[2];
 
       // 텍스트 입력
-      await page.keyboard.type(text, { delay: 30 });
+      await safeKeyboardType(page, text, { delay: 30 });
       await this.delay(100);
 
       // 텍스트 선택
@@ -9679,2003 +7147,23 @@ export class NaverBlogAutomation {
    * ✅ [2026-01-20 개선] 재시도 로직 + 안정성 강화
    */
   private async insertImagesAtCurrentCursor(images: any[], page: Page, frame: Frame, affiliateLink?: string): Promise<void> {
-    const fs = await import('fs/promises');
-    const MAX_RETRIES = 3;
-
-    for (let imgIdx = 0; imgIdx < images.length; imgIdx++) {
-      const image = images[imgIdx];
-      const maskedPath = (image.filePath || '').replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~');
-
-      this.log(`      📷 이미지 ${imgIdx + 1}/${images.length} 업로드 시도: ${maskedPath}`);
-
-      const imagePath = image.filePath || image.savedToLocal || image.url;
-      if (!imagePath) {
-        this.log(`      ⚠️ 이미지 경로가 없음, 건너뜀`);
-        continue;
-      }
-
-      // ✅ [신규] 파일 경로인 경우 존재 여부 확인
-      if (!imagePath.startsWith('http') && !imagePath.startsWith('data:')) {
-        try {
-          await fs.access(imagePath);
-        } catch {
-          this.log(`      ⚠️ 이미지 파일 없음: ${maskedPath}, 건너뜀`);
-          continue;
-        }
-      }
-
-      // ✅ [신규] 프레임 안정성 확인
-      try {
-        await frame.evaluate(() => true);
-      } catch {
-        this.log(`      ⚠️ 프레임 연결 불안정, 재연결 시도...`);
-        try {
-          await this.switchToMainFrame();
-          frame = await this.getAttachedFrame();
-        } catch (reconnectError) {
-          this.log(`      ❌ 프레임 재연결 실패, 이미지 건너뜀`);
-          continue;
-        }
-      }
-
-      // ✅ [신규] 삽입 전 이미지 개수 확인
-      const beforeCount = await frame.$$eval(
-        'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"]',
-        imgs => imgs.length
-      ).catch(() => 0);
-
-      // ✅ [핵심] 재시도 로직 (최대 3회)
-      let insertSuccess = false;
-      for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-        try {
-          await this.insertBase64ImageAtCursor(imagePath);
-          await this.delay(1500); // 안정화 대기: 1초 → 1.5초
-
-          // ✅ [신규] 삽입 성공 확인
-          const afterCount = await frame.$$eval(
-            'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"]',
-            imgs => imgs.length
-          ).catch(() => 0);
-
-          if (afterCount > beforeCount) {
-            this.log(`      ✅ 이미지 삽입 확인됨 (${beforeCount} → ${afterCount})`);
-            insertSuccess = true;
-            break;
-          } else {
-            throw new Error('이미지 삽입이 확인되지 않음');
-          }
-        } catch (error) {
-          this.log(`      ⚠️ 이미지 삽입 시도 ${attempt}/${MAX_RETRIES} 실패: ${(error as Error).message}`);
-          if (attempt < MAX_RETRIES) {
-            // 점진적 대기 (1초, 2초)
-            const waitTime = 1000 * attempt;
-            this.log(`      🔄 ${waitTime / 1000}초 후 재시도...`);
-            await this.delay(waitTime);
-
-            // ESC 눌러서 열린 팝업/패널 닫기
-            await page.keyboard.press('Escape').catch(() => { });
-            await this.delay(300);
-          }
-        }
-      }
-
-      if (!insertSuccess) {
-        this.log(`      ❌ 이미지 ${imgIdx + 1} 최종 삽입 실패, 건너뜀`);
-        continue;
-      }
-
-      // ✅ 문서너비 맞추기 + 링크 삽입
-      try {
-        if (affiliateLink) {
-          await this.setImageSizeAndAttachLink(affiliateLink);
-        } else {
-          await this.setImageSizeToDocumentWidth();
-        }
-      } catch (sizeError) {
-        this.log(`      ⚠️ 문서너비 설정 실패 (계속 진행): ${(sizeError as Error).message}`);
-      }
-
-      // 마지막 이미지가 아니면 줄바꿈 시도
-      if (imgIdx < images.length - 1) {
-        await page.keyboard.press('Enter');
-        await this.delay(500); // 300ms → 500ms
-      }
-    }
-
-    // 이미지 툴바 및 모달 닫기
-    try {
-      for (let k = 0; k < 2; k++) {
-        await page.keyboard.press('Escape');
-        await this.delay(100);
-      }
-
-      // 이미지 아래로 커서 이동 확보
-      await page.keyboard.press('Enter');
-      await this.delay(400); // 300ms → 400ms
-
-      // 공백 정리
-      await this.normalizeSpacingAfterLastImage(frame, 1);
-    } catch (sizeError) {
-      this.log(`      ⚠️ 이미지 후처리 실패: ${(sizeError as Error).message}`);
-    }
+    return await imageHelpers.insertImagesAtCurrentCursor(this, images, affiliateLink);
   }
 
   /**
    * ✅ [신규] 문서너비 맞추기 + 바로 링크 삽입 (물리 마우스 클릭 적용!)
    */
   private async setImageSizeAndAttachLink(link: string): Promise<void> {
-    const frame = (await this.getAttachedFrame());
-    const page = this.ensurePage();
-
-    try {
-      this.log(`   🔗 [통합] 문서너비 맞추기 + 링크 삽입: ${link.substring(0, 50)}...`);
-
-      // iframe 오프셋 계산
-      const frameElement = await page.$('iframe#mainFrame, iframe.se-iframe, iframe[name="mainFrame"]');
-      let offsetX = 0, offsetY = 0;
-      if (frameElement) {
-        const frameRect = await frameElement.boundingBox();
-        if (frameRect) {
-          offsetX = frameRect.x;
-          offsetY = frameRect.y;
-        }
-      }
-
-      // ✅ [핵심 1] 이미지 스크롤 + 좌표 가져오기
-      await frame.evaluate(() => {
-        const imgs = document.querySelectorAll('img.se-image-resource');
-        if (imgs.length > 0) {
-          const lastImg = imgs[imgs.length - 1] as HTMLElement;
-          lastImg.scrollIntoView({ behavior: 'instant', block: 'center' });
-        }
-      });
-      await this.delay(800);
-
-      const imgRect = await frame.evaluate(() => {
-        const imgs = document.querySelectorAll('img.se-image-resource');
-        if (imgs.length > 0) {
-          const lastImg = imgs[imgs.length - 1] as HTMLElement;
-          const rect = lastImg.getBoundingClientRect();
-          return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, found: true };
-        }
-        return { x: 0, y: 0, found: false };
-      });
-
-      if (!imgRect.found) {
-        this.log('   ⚠️ 이미지를 찾을 수 없습니다.');
-        return;
-      }
-
-      // ✅ [핵심 2] 물리 마우스 더블 클릭 (이미지 선택)
-      const clickX = offsetX + imgRect.x;
-      const clickY = offsetY + imgRect.y;
-      this.log(`   🎯 물리적 마우스 클릭: 이미지 정중앙 (${Math.round(clickX)}, ${Math.round(clickY)})`);
-
-      await page.mouse.move(clickX, clickY);
-      await this.delay(100);
-
-      // 첫 번째 클릭
-      this.log(`   🖱️ 첫 번째 클릭 (down → 200ms → up)`);
-      await page.mouse.down();
-      await this.delay(200);
-      await page.mouse.up();
-      await this.delay(300);
-
-      // 두 번째 클릭 (더블 클릭)
-      this.log(`   🖱️ 두 번째 클릭 (더블 클릭)`);
-      await page.mouse.down();
-      await this.delay(100);
-      await page.mouse.up();
-
-      await this.delay(2000); // 툴바 렌더링 충분히 대기
-      this.log(`   ✅ 물리적 더블 클릭 완료`);
-
-      // ✅ [핵심 3] image-link 버튼 확인
-      const imageLinkBtnSelector = 'button[data-name="image-link"]';
-      const toolbarVisible = await frame.evaluate((selector) => {
-        const btn = document.querySelector(selector);
-        return btn && (btn as HTMLElement).offsetParent !== null;
-      }, imageLinkBtnSelector);
-
-      if (!toolbarVisible) {
-        this.log('   ⚠️ 이미지가 선택되지 않았습니다 (image-link 버튼 안 보임)');
-        return;
-      }
-
-      this.log('   ✅ 이미지 선택됨 (초록색 테두리 + image-link 버튼 확인)');
-
-      // 2. 문서너비 버튼 클릭
-      const documentWidthClicked = await frame.evaluate(() => {
-        const selectors = [
-          'button[data-name="documentWidth"]',
-          'button[data-value="documentWidth"]',
-          '.se-component-toolbar button[data-name="documentWidth"]'
-        ];
-        for (const sel of selectors) {
-          const btn = document.querySelector(sel);
-          if (btn && (btn as HTMLElement).offsetParent !== null) {
-            (btn as HTMLElement).click();
-            return true;
-          }
-        }
-        return false;
-      });
-
-      if (documentWidthClicked) {
-        this.log('   ✅ 문서너비 버튼 클릭 성공');
-      }
-      await this.delay(500);
-
-      // 3. 이미지 다시 물리 클릭 (문서너비 후 선택이 해제될 수 있음)
-      await page.mouse.move(clickX, clickY);
-      await this.delay(100);
-      await page.mouse.down();
-      await this.delay(200);
-      await page.mouse.up();
-      await this.delay(1500); // 툴바 렌더링 충분히 대기
-
-      // ✅ [핵심 4] image-link 버튼만 클릭! (text-link 제외)
-      this.log('   🔗 이미지 링크 버튼(image-link) 클릭 시도...');
-      const linkButtonClicked = await frame.evaluate(() => {
-        // ✅ 반드시 data-name="image-link"인 버튼만!
-        const imageLinkBtn = document.querySelector('button[data-name="image-link"]') as HTMLElement;
-
-        if (imageLinkBtn && imageLinkBtn.offsetParent !== null) {
-          console.log('[링크 삽입] ✅ image-link 버튼 발견 및 클릭!');
-          imageLinkBtn.click();
-          return { success: true, selector: 'button[data-name="image-link"]' };
-        }
-
-        // ⚠️ 폴백에서도 text-link는 절대 클릭 안 함!
-        const allLinkBtns = document.querySelectorAll('.se-link-toolbar-button');
-        for (const btn of Array.from(allLinkBtns)) {
-          const htmlBtn = btn as HTMLElement;
-          const dataName = htmlBtn.getAttribute('data-name');
-
-          if (dataName === 'text-link') {
-            console.log('[링크 삽입] ⚠️ text-link 버튼 발견 - 건너뜀');
-            continue;
-          }
-
-          if (htmlBtn.offsetParent !== null) {
-            console.log('[링크 삽입] ✅ 폴백 링크 버튼 클릭:', dataName);
-            htmlBtn.click();
-            return { success: true, selector: `data-name="${dataName}"` };
-          }
-        }
-
-        return { success: false, selector: '' };
-      });
-
-      if (linkButtonClicked.success) {
-        this.log(`   ✅ 이미지 링크 버튼 클릭 성공: ${linkButtonClicked.selector}`);
-      } else {
-        this.log('   ⚠️ image-link 버튼을 찾을 수 없습니다.');
-        return;
-      }
-
-      await this.delay(800); // 링크 입력창 나타남 대기
-
-      // 5. 이미지 위에 나타난 링크 입력창 찾기 및 링크 입력
-      this.log('   📝 링크 입력창 찾는 중...');
-      const inputFound = await frame.evaluate(() => {
-        // 이미지 위에 나타나는 인라인 입력창 셀렉터
-        const inputSelectors = [
-          // 이미지 위 인라인 입력창
-          '.se-image-link-input input',
-          '.se-link-input input',
-          'input.se-image-link-url',
-          // 일반 링크 팝업 입력창
-          '.se-popup-link-url input',
-          'input.se-popup-input-text',
-          'input[placeholder*="URL"]',
-          'input[placeholder*="url"]',
-          'input[placeholder*="링크"]',
-          'input[placeholder*="http"]',
-          // 범용
-          '.se-layer input[type="text"]',
-          '.se-popup input[type="text"]'
-        ];
-
-        for (const sel of inputSelectors) {
-          const input = document.querySelector(sel) as HTMLInputElement;
-          if (input && input.offsetParent !== null) {
-            input.focus();
-            input.value = ''; // 기존 값 지우기
-            console.log('[링크 삽입] ✅ 입력창 발견:', sel);
-            return { found: true, selector: sel };
-          }
-        }
-        return { found: false, selector: '' };
-      });
-
-      if (inputFound.found) {
-        this.log(`   ✅ 링크 입력창 발견: ${inputFound.selector}`);
-      } else {
-        this.log('   ⚠️ 링크 입력창을 찾을 수 없습니다.');
-        await page.keyboard.press('Escape');
-        return;
-      }
-
-      // 6. 링크 입력
-      await page.keyboard.type(link, { delay: 15 });
-      await this.delay(400);
-
-      // 7. Enter 2번으로 확정
-      this.log('   ⏎ Enter 2회 입력 (링크 확정)...');
-      await page.keyboard.press('Enter');
-      await this.delay(300);
-      await page.keyboard.press('Enter');
-      await this.delay(500);
-
-      this.log('   ✅ 문서너비 + 링크 삽입 완료!');
-
-    } catch (error) {
-      this.log(`   ⚠️ 문서너비+링크 삽입 실패: ${(error as Error).message}`);
-      await this.setImageSizeToDocumentWidth();
-    }
+    return await imageHelpers.setImageSizeAndAttachLink(this, link);
   }
 
   // ✅ 이미지에 링크 삽입 (쇼핑커넥트용) - 강화된 버전
   private async attachLinkToLastImage(link: string): Promise<void> {
-    const frame = (await this.getAttachedFrame());
-    const page = this.ensurePage();
-
-    try {
-      this.log(`   🔗 이미지에 제휴 링크 삽입 중: ${link}`);
-
-      // 0. 기존 선택 해제
-      await page.keyboard.press('Escape');
-      await this.delay(300);
-
-      // 1. 마지막 이미지 위치 찾기
-      const imageInfo = await frame.evaluate(() => {
-        const selectors = [
-          'img.se-image-resource',
-          '.se-module-image img',
-          '.se-image-resource',
-          '.se-component-content img'
-        ];
-
-        for (const selector of selectors) {
-          const imgs = document.querySelectorAll(selector);
-          if (imgs.length > 0) {
-            const lastImg = imgs[imgs.length - 1] as HTMLElement;
-            const rect = lastImg.getBoundingClientRect();
-
-            // 스크롤하여 이미지를 화면에 표시
-            lastImg.scrollIntoView({ behavior: 'auto', block: 'center' });
-
-            console.log('[이미지 링크] ✅ 이미지 위치 확인:', rect);
-            return {
-              x: rect.left + rect.width / 2,
-              y: rect.top + rect.height / 2,
-              found: true
-            };
-          }
-        }
-        return { x: 0, y: 0, found: false };
-      });
-
-      if (!imageInfo.found) {
-        this.log('   ⚠️ 이미지를 찾을 수 없습니다.');
-        return;
-      }
-
-      this.log(`   📍 이미지 위치: x=${imageInfo.x}, y=${imageInfo.y}`);
-      await this.delay(500);
-
-      // ✅ [핵심 수정] 실제 마우스 클릭으로 이미지 선택 (DOM click은 네이버 에디터에서 안 먹음)
-      let imageSelected = false;
-
-      // iframe 오프셋 계산
-      const frameElement = await page.$('iframe#mainFrame, iframe.se-iframe, iframe[name="mainFrame"]');
-      let offsetX = 0, offsetY = 0;
-      if (frameElement) {
-        const frameRect = await frameElement.boundingBox();
-        if (frameRect) {
-          offsetX = frameRect.x;
-          offsetY = frameRect.y;
-        }
-      }
-
-      for (let attempt = 1; attempt <= 3; attempt++) {
-        this.log(`   🖱️ 이미지 클릭 시도 ${attempt}/3...`);
-
-        // ✅ [핵심 1] 스크롤 - 이미지를 화면 정중앙으로 가져옴 (behavior: 'instant' 필수!)
-        await frame.evaluate(() => {
-          const imgs = document.querySelectorAll('img.se-image-resource');
-          if (imgs.length > 0) {
-            const lastImg = imgs[imgs.length - 1] as HTMLElement;
-            lastImg.scrollIntoView({ behavior: 'instant', block: 'center' });
-          }
-        });
-        await this.delay(800); // 스크롤 안정화 대기 (증가)
-
-        // ✅ [핵심 2] 좌표 재계산 (스크롤 후 좌표가 바뀜!)
-        const imgRect = await frame.evaluate(() => {
-          const imgs = document.querySelectorAll('img.se-image-resource');
-          if (imgs.length > 0) {
-            const lastImg = imgs[imgs.length - 1] as HTMLElement;
-            const rect = lastImg.getBoundingClientRect();
-            return {
-              x: rect.left + rect.width / 2,
-              y: rect.top + rect.height / 2,
-              width: rect.width,
-              height: rect.height,
-              found: true
-            };
-          }
-          return { x: 0, y: 0, width: 0, height: 0, found: false };
-        });
-
-        if (!imgRect.found) {
-          this.log(`   ⚠️ 이미지 좌표 가져오기 실패 (시도 ${attempt}/3)`);
-          await this.delay(500);
-          continue;
-        }
-
-        // ✅ [핵심 3] 물리적 마우스 클릭 (iframe 오프셋 + 이미지 정중앙)
-        const clickX = offsetX + imgRect.x;
-        const clickY = offsetY + imgRect.y;
-        this.log(`   🎯 물리적 마우스 클릭: 이미지 정중앙 (${Math.round(clickX)}, ${Math.round(clickY)})`);
-
-        // ✅ [강화] 마우스 이동
-        await page.mouse.move(clickX, clickY);
-        await this.delay(100);
-
-        // ✅ [강화] 첫 번째 클릭 (꾹 누름)
-        this.log(`   🖱️ 첫 번째 클릭 (down → 200ms → up)`);
-        await page.mouse.down();
-        await this.delay(200); // 0.2초 꾹 누름
-        await page.mouse.up();
-        await this.delay(300);
-
-        // ✅ [강화] 두 번째 클릭 (더블 클릭 효과)
-        this.log(`   🖱️ 두 번째 클릭 (더블 클릭)`);
-        await page.mouse.down();
-        await this.delay(100);
-        await page.mouse.up();
-
-        this.log(`   ✅ 물리적 더블 클릭 완료`);
-
-        // ✅ [핵심 4] 툴바 확인 - 2초 대기 후 버튼 확인
-        await this.delay(2000);
-
-        const imageLinkBtnSelector = 'button[data-name="image-link"]';
-        const toolbarVisible = await frame.evaluate((selector) => {
-          const btn = document.querySelector(selector);
-          if (btn && (btn as HTMLElement).offsetParent !== null) {
-            console.log('[이미지 링크] ✅ 이미지 링크 버튼 발견!');
-            return true;
-          }
-          return false;
-        }, imageLinkBtnSelector);
-
-        if (toolbarVisible) {
-          this.log(`   ✅ 이미지 선택 성공! (초록색 테두리 + image-link 버튼 확인됨)`);
-          imageSelected = true;
-          break;
-        } else {
-          this.log(`   ⚠️ 클릭했는데 image-link 버튼 안 뜸, 재시도... (${attempt}/3)`);
-          // 재시도 전 Escape 눌러서 리셋 후 다시 시도
-          await page.keyboard.press('Escape');
-          await this.delay(500);
-        }
-      }
-
-      if (!imageSelected) {
-        this.log('   ⚠️ 이미지 선택 실패, 링크 삽입을 건너뜁니다.');
-        return;
-      }
-
-      // ✅ [2026-01-21] 문서너비 버튼 먼저 클릭 (이미지가 문서 너비에 맞게 표시되도록)
-      // 이미지 선택 후 (초록색 테두리) 툴바에 있는 "문서 너비" 버튼 클릭
-      this.log('   📐 문서너비 버튼 클릭 시도...');
-
-      const docWidthClicked = await frame.evaluate(() => {
-        // ✅ 정확한 셀렉터: data-name="content-mode-without-pagefull" 또는 data-value="fit"
-        const docWidthSelectors = [
-          'button[data-name="content-mode-without-pagefull"]',
-          'button[data-value="fit"]',
-          'button.se-object-arrangement-fit-toolbar-button',
-          'button[data-name*="fit"]'
-        ];
-
-        for (const selector of docWidthSelectors) {
-          const btn = document.querySelector(selector) as HTMLElement;
-          if (btn && btn.offsetParent !== null) {
-            // 이미 선택되어 있는지 확인 (se-is-selected 클래스)
-            const isAlreadySelected = btn.classList.contains('se-is-selected');
-
-            if (!isAlreadySelected) {
-              console.log('[문서너비] ✅ 문서너비 버튼 클릭:', selector);
-              btn.click();
-              return { found: true, clicked: true, selector, alreadySelected: false };
-            } else {
-              console.log('[문서너비] ℹ️ 문서너비 버튼 이미 선택됨:', selector);
-              return { found: true, clicked: false, selector, alreadySelected: true };
-            }
-          }
-        }
-
-        // 폴백: 텍스트로 찾기
-        const allButtons = document.querySelectorAll('button.se-icon-toolbar-button');
-        for (const btn of Array.from(allButtons)) {
-          const htmlBtn = btn as HTMLElement;
-          const tooltip = htmlBtn.querySelector('.se-toolbar-tooltip')?.textContent?.trim() || '';
-          const blind = htmlBtn.querySelector('.se-blind')?.textContent?.trim() || '';
-
-          if (tooltip.includes('문서 너비') || blind.includes('문서 너비')) {
-            const isAlreadySelected = htmlBtn.classList.contains('se-is-selected');
-
-            if (!isAlreadySelected) {
-              console.log('[문서너비] ✅ 문서너비 버튼 클릭 (텍스트 매칭):', tooltip || blind);
-              htmlBtn.click();
-              return { found: true, clicked: true, selector: '텍스트 매칭', alreadySelected: false };
-            } else {
-              console.log('[문서너비] ℹ️ 문서너비 버튼 이미 선택됨 (텍스트 매칭):', tooltip || blind);
-              return { found: true, clicked: false, selector: '텍스트 매칭', alreadySelected: true };
-            }
-          }
-        }
-
-        console.log('[문서너비] ⚠️ 문서너비 버튼을 찾을 수 없음');
-        return { found: false, clicked: false, selector: '', alreadySelected: false };
-      });
-
-      if (docWidthClicked.found) {
-        if (docWidthClicked.clicked) {
-          this.log(`   ✅ 문서너비 버튼 클릭 완료: ${docWidthClicked.selector}`);
-        } else if (docWidthClicked.alreadySelected) {
-          this.log(`   ℹ️ 문서너비 이미 선택됨: ${docWidthClicked.selector}`);
-        }
-        await this.delay(300); // 버튼 클릭 후 잠깐 대기
-      } else {
-        this.log('   ⚠️ 문서너비 버튼을 찾지 못함 (이미지 툴바에 없을 수 있음)');
-      }
-
-      // ✅ [수정] 이미지 선택 완료 후 링크 버튼 클릭으로 진행
-
-
-      // 툴바 한번 더 확인
-      const toolbarExists = await frame.evaluate(() => {
-        const toolbarSelectors = [
-          'button[data-name="image-link"]',
-          '.se-link-toolbar-button',
-          '.se-component-toolbar'
-        ];
-        for (const sel of toolbarSelectors) {
-          const el = document.querySelector(sel);
-          if (el && (el as HTMLElement).offsetParent !== null) {
-            return true;
-          }
-        }
-        return false;
-      });
-
-      if (!toolbarExists) {
-        this.log('      ⚠️ 이미지 툴바가 보이지 않음, 추가 대기...');
-        await this.delay(500);
-      }
-
-      // ✅ [수정] 2. 이미지 링크 버튼 클릭 (반드시 data-name="image-link"만 사용!)
-      this.log('      🔍 이미지 툴바에서 "image-link" 버튼 찾는 중...');
-
-      // ✅ [핵심] image-link 버튼만 클릭 (text-link 버튼 절대 클릭 금지!)
-      const linkButtonClicked = await frame.evaluate(() => {
-        // ✅ 반드시 data-name="image-link"인 버튼만 찾음 (text-link 제외)
-        const imageLinkBtn = document.querySelector('button[data-name="image-link"]') as HTMLElement;
-
-        if (imageLinkBtn && imageLinkBtn.offsetParent !== null) {
-          console.log('[이미지 링크] ✅ image-link 버튼 발견 및 클릭!');
-          imageLinkBtn.click();
-          return { success: true, selector: 'button[data-name="image-link"]' };
-        }
-
-        // ✅ 폴백: 이미지 컴포넌트 툴바 내의 링크 버튼 (text-link 제외)
-        const allLinkBtns = document.querySelectorAll('.se-link-toolbar-button, button[data-name="link"]');
-        for (const btn of Array.from(allLinkBtns)) {
-          const htmlBtn = btn as HTMLElement;
-          const dataName = htmlBtn.getAttribute('data-name');
-
-          // ⚠️ text-link는 절대 클릭하지 않음!
-          if (dataName === 'text-link') {
-            console.log('[이미지 링크] ⚠️ text-link 버튼 발견 - 건너뜀');
-            continue;
-          }
-
-          if (htmlBtn.offsetParent !== null) {
-            console.log('[이미지 링크] ✅ 폴백 링크 버튼 클릭:', dataName);
-            htmlBtn.click();
-            return { success: true, selector: `data-name="${dataName}"` };
-          }
-        }
-
-        return { success: false, selector: '' };
-      });
-
-      if (linkButtonClicked.success) {
-        this.log(`      ✅ 이미지 링크 버튼 클릭 성공: ${linkButtonClicked.selector}`);
-      } else {
-        this.log('      ⚠️ image-link 버튼을 찾을 수 없습니다. 이미지가 선택되지 않았을 수 있습니다.');
-        await page.keyboard.press('Escape');
-        return;
-      }
-
-      await this.delay(1000); // ✅ 팝업 열림 대기
-
-      // 3. 링크 입력창 찾기 및 URL 입력
-      this.log('      📝 링크 입력창 찾는 중...');
-
-      const inputSelectors = [
-        // ✅ 네이버 최신 에디터 셀렉터 추가
-        '.se-popup-link-url input',
-        '.se-popup-link input[type="text"]',
-        'input.se-popup-input-text',
-        'input[type="url"]',
-        'input[type="text"][placeholder*="링크"]',
-        'input[placeholder*="URL"]',
-        'input[placeholder*="url"]',
-        'input[placeholder*="주소"]',
-        'input[placeholder*="http"]',
-        '.se-popup input[type="text"]',
-        '.se-layer input[type="text"]',
-        '.se-link-input input',
-        '.se-link-input'
-      ];
-
-      let inputFound = false;
-      for (const selector of inputSelectors) {
-        const linkInput = await frame.$(selector).catch(() => null);
-        if (linkInput) {
-          this.log(`      ✅ 입력창 발견: ${selector}`);
-
-          // 입력창 클릭
-          await linkInput.click();
-          await this.delay(100);
-
-          // 기존 텍스트 전체 선택 후 삭제
-          await page.keyboard.down('Control');
-          await page.keyboard.press('KeyA');
-          await page.keyboard.up('Control');
-          await this.delay(50);
-          await page.keyboard.press('Backspace');
-          await this.delay(100);
-
-          // 링크 입력
-          await page.keyboard.type(link, { delay: 15 });
-          await this.delay(400);
-
-          inputFound = true;
-          break;
-        }
-      }
-
-      if (!inputFound) {
-        this.log('   ⚠️ 링크 입력창을 찾을 수 없습니다.');
-        // 팝업 닫기
-        await page.keyboard.press('Escape');
-        return;
-      }
-
-      // ✅ [개선] 링크 입력 후 확인 버튼 클릭으로 확정
-      this.log('      ⏎ 링크 확정 중...');
-
-      // 방법 1: 확인 버튼 찾아서 클릭
-      const confirmClicked = await frame.evaluate(() => {
-        const confirmSelectors = [
-          'button.se-popup-button-confirm',
-          'button[data-type="confirm"]',
-          'button.se-popup-confirm',
-          '.se-popup-button-wrap button:last-child',
-          'button[class*="confirm"]',
-          '.se-popup button:not([data-type="cancel"])'
-        ];
-
-        for (const sel of confirmSelectors) {
-          const btn = document.querySelector(sel) as HTMLElement;
-          if (btn && btn.offsetParent !== null && !btn.textContent?.includes('취소')) {
-            console.log('[링크 확정] ✅ 확인 버튼 클릭:', sel);
-            btn.click();
-            return true;
-          }
-        }
-        return false;
-      });
-
-      if (confirmClicked) {
-        this.log('      ✅ 확인 버튼 클릭 성공');
-        await this.delay(500);
-      } else {
-        // ✅ [수정] 확인 버튼을 못 찾으면 Enter 2회 시도 (사용자 피드백 반영)
-        this.log('      ⏎ 확인 버튼 없음, Enter 2회 시도...');
-        await page.keyboard.press('Enter');
-        await this.delay(200);
-        await page.keyboard.press('Enter');
-        await this.delay(500);
-      }
-
-      this.log('   ✅ 이미지에 제휴 링크 삽입 완료');
-
-      // ✅ [개선] 링크 삽입 후 Enter 두번으로 바로 커서 이탈
-      await this.delay(300);
-      this.log('      ⏎ Enter 2회 입력 (커서 이탈)...');
-      await page.keyboard.press('Enter');
-      await this.delay(150);
-      await page.keyboard.press('Enter');
-      await this.delay(300);
-
-    } catch (error) {
-      this.log(`   ⚠️ 이미지 링크 삽입 중 오류: ${(error as Error).message}`);
-      // 팝업이 열려있을 수 있으니 닫기
-      await page.keyboard.press('Escape').catch(() => { });
-    }
+    return await imageHelpers.attachLinkToLastImage(this, link);
   }
 
   private async insertImages(images: AutomationImage[], plans: ImagePlan[]): Promise<void> {
-    if (!images.length) {
-      return;
-    }
-
-    const planMap = new Map<string, ImagePlan>();
-    plans.forEach((plan) => {
-      planMap.set(plan.heading, plan);
-    });
-
-    const frame = (await this.getAttachedFrame());
-    const page = this.ensurePage();
-
-    for (const image of images) {
-      this.ensureNotCancelled();
-      const plan = planMap.get(image.heading);
-      let uploadSucceeded = false;
-
-      try {
-        this.log(`🖼️ '${image.heading}' 이미지를 업로드합니다...`);
-
-        // ✅ filePath가 없는 경우 건너뛰기
-        if (!image.filePath) {
-          this.log(`   ⚠️ 이미지 경로가 없습니다. 이 이미지를 건너뜁니다.`);
-          continue;
-        }
-
-        // 보안: 파일 경로 마스킹
-        const maskedPath = image.filePath.replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~');
-        this.log(`   📁 파일 경로: ${maskedPath}`);
-
-        // URL인지 확인 (파일 검증 전에 먼저 체크)
-        const isUrl = image.filePath.startsWith('http://') || image.filePath.startsWith('https://');
-
-        // 로컬 파일인 경우에만 검증
-        if (!isUrl) {
-          // 이미지 파일 검증: 앱에서 생성했거나 로컬에 저장된 파일만 사용
-          const fs = await import('fs/promises');
-          let isValidImage = false;
-
-          try {
-            await fs.access(image.filePath);
-            const stats = await fs.stat(image.filePath);
-            isValidImage = stats.isFile();
-
-            // 파일 확장자 확인
-            const path = await import('path');
-            const ext = path.extname(image.filePath).toLowerCase();
-            isValidImage = isValidImage && ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
-
-            // 파일 크기 확인 (최소 0.5KB, 최대 50MB)
-            const fileSizeKB = stats.size / 1024;
-            if (fileSizeKB < 0.5 || fileSizeKB > 51200) {
-              isValidImage = false;
-              this.log(`   ⚠️ 파일 크기가 적절하지 않습니다: ${fileSizeKB.toFixed(2)} KB`);
-            }
-          } catch (fileError) {
-            this.log(`   ❌ 이미지 파일 접근 실패: ${(fileError as Error).message}`);
-            isValidImage = false;
-          }
-
-          if (!isValidImage) {
-            this.log(`   ⚠️ 유효하지 않은 이미지 파일입니다. 이 이미지를 건너뜁니다.`);
-            continue; // 다음 이미지로 진행
-          }
-
-          this.log(`   ✅ 로컬에 저장된 이미지를 업로드합니다.`);
-        } else {
-          this.log(`   ✅ 이미지 URL을 사용합니다.`);
-        }
-
-        // 🎯 방법 1: 모든 이미지를 Base64 Data URL로 변환하여 DOM에 직접 삽입 (가장 확실한 방법)
-        let imageDataUrl = image.filePath;
-
-        // 로컬 파일인 경우 Base64 Data URL로 변환 (네이버 보안 우회)
-        if (!isUrl) {
-          this.log(`   🔄 로컬 파일을 Base64 Data URL로 변환 중... (네이버 보안 우회)`);
-          try {
-            const fs = await import('fs/promises');
-            const imageBuffer = await fs.readFile(image.filePath);
-            const base64 = imageBuffer.toString('base64');
-
-            // 확장자에 따라 MIME 타입 결정
-            // URL에서 쿼리 파라미터 제거 후 확장자 추출
-            const urlWithoutQuery = image.filePath.split('?')[0].split('#')[0];
-            const ext = urlWithoutQuery.split('.').pop()?.toLowerCase() || 'png';
-            // 유효한 확장자만 허용
-            const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) ? ext : 'png';
-            const mimeType = validExt === 'jpg' || validExt === 'jpeg' ? 'image/jpeg' :
-              validExt === 'png' ? 'image/png' :
-                validExt === 'gif' ? 'image/gif' :
-                  validExt === 'webp' ? 'image/webp' : 'image/png';
-
-            imageDataUrl = `data:${mimeType};base64,${base64}`;
-            this.log(`   ✅ Base64 변환 완료 (크기: ${(base64.length / 1024).toFixed(2)} KB)`);
-          } catch (base64Error) {
-            this.log(`   ❌ Base64 변환 실패: ${(base64Error as Error).message}`);
-            throw base64Error; // Base64 변환 실패 시 중단
-          }
-        } else {
-          // 외부 URL인 경우도 Base64로 변환 시도 (더 확실함)
-          this.log(`   🔄 외부 URL 이미지를 Base64로 변환 중...`);
-          try {
-            const https = await import('https');
-            const http = await import('http');
-            const url = await import('url');
-
-            // URL 파싱
-            const parsedUrl = new url.URL(image.filePath);
-            const isHttps = parsedUrl.protocol === 'https:';
-            const client = isHttps ? https : http;
-
-            // Promise로 래핑하여 다운로드
-            const buffer = await new Promise<Buffer>((resolve, reject) => {
-              const request = client.get(image.filePath, {
-                headers: {
-                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                },
-                timeout: 10000,
-              }, (response) => {
-                if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
-                  reject(new Error(`이미지 다운로드 실패: ${response.statusCode} ${response.statusMessage || ''}`));
-                  return;
-                }
-
-                const chunks: Buffer[] = [];
-                response.on('data', (chunk) => chunks.push(chunk));
-                response.on('end', () => resolve(Buffer.concat(chunks)));
-                response.on('error', reject);
-              });
-
-              request.on('error', reject);
-              request.on('timeout', () => {
-                request.destroy();
-                reject(new Error('이미지 다운로드 타임아웃'));
-              });
-            });
-            const base64 = buffer.toString('base64');
-
-            // URL에서 확장자 추출 (쿼리 파라미터 제거)
-            const urlPath = new URL(image.filePath).pathname;
-            const ext = urlPath.split('.').pop()?.toLowerCase() || 'png';
-            // 유효한 확장자만 허용
-            const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) ? ext : 'png';
-            const mimeType = validExt === 'jpg' || validExt === 'jpeg' ? 'image/jpeg' :
-              validExt === 'png' ? 'image/png' :
-                validExt === 'gif' ? 'image/gif' :
-                  validExt === 'webp' ? 'image/webp' : 'image/png';
-
-            imageDataUrl = `data:${mimeType};base64,${base64}`;
-            this.log(`   ✅ 외부 URL을 Base64로 변환 완료 (크기: ${(base64.length / 1024).toFixed(2)} KB)`);
-          } catch (urlError) {
-            this.log(`   ⚠️ 외부 URL을 Base64로 변환 실패, 원본 URL 사용: ${(urlError as Error).message}`);
-            // 실패 시 원본 URL 사용
-          }
-        }
-
-        // 외부 URL인 경우 네이버 에디터의 이미지 URL 삽입 기능 사용
-        if (isUrl && imageDataUrl) {
-          this.log(`   🔄 외부 이미지 URL을 에디터에 삽입 중...`);
-          this.log(`   📎 URL: ${imageDataUrl.substring(0, 100)}...`);
-
-          try {
-            // 네이버 에디터의 이미지 URL 삽입 기능 사용
-            // 방법 1: 이미지 버튼 클릭 → URL 입력 옵션 찾기
-            const imageButton = await frame.$('button[data-name="image"], button.se-image-toolbar-button').catch(() => null);
-
-            if (imageButton) {
-              await imageButton.click();
-              await this.delay(this.DELAYS.LONG);
-
-              // URL 입력 옵션 찾기 (여러 패턴 시도)
-              const urlInputOption = await frame.$('input[type="url"], input[placeholder*="URL"], input[placeholder*="url"], input[placeholder*="주소"], button:has-text("URL"), button:has-text("주소"), a[href*="url"], a:has-text("URL")').catch(() => null);
-
-              if (urlInputOption) {
-                this.log(`   ✅ URL 입력 옵션 발견`);
-                await urlInputOption.click().catch(() => {
-                  // 클릭 실패 시 직접 입력 시도
-                  return urlInputOption.type(imageDataUrl, { delay: 50 });
-                });
-                await this.delay(this.DELAYS.LONG);
-              }
-
-              // URL 입력 필드 찾기 및 입력
-              const urlInput = await frame.$('input[type="url"], input[placeholder*="URL"], input[placeholder*="url"], input[placeholder*="주소"], input[type="text"]').catch(() => null);
-
-              if (urlInput) {
-                await urlInput.click({ clickCount: 3 }); // 기존 내용 선택
-                await urlInput.type(imageDataUrl, { delay: 50 });
-                await this.delay(this.DELAYS.LONG);
-
-                // 확인/삽입 버튼 찾기 및 클릭
-                const insertButton = await frame.$('button:has-text("확인"), button:has-text("삽입"), button:has-text("OK"), button:has-text("Insert"), button[type="submit"]').catch(() => null);
-                if (insertButton) {
-                  await insertButton.click();
-                  await this.delay(2000);
-
-                  // 이미지가 삽입되었는지 확인
-                  const imgCheck = await frame.$$('img').catch(() => []);
-                  if (imgCheck.length > 0) {
-                    uploadSucceeded = true;
-                    this.log(`   ✅ 외부 이미지 URL 삽입 성공! (DOM에서 ${imgCheck.length}개 이미지 발견)`);
-                  }
-                }
-              }
-
-              // 패널이 열려있으면 닫기
-              await page.keyboard.press('Escape').catch(() => { });
-              await this.delay(this.DELAYS.MEDIUM);
-            }
-
-            // 방법 2: DOM에 직접 삽입 (방법 1 실패 시)
-            if (!uploadSucceeded) {
-              this.log(`   🔄 DOM에 직접 삽입 시도...`);
-
-              // 여러 방법으로 DOM 삽입 시도
-              for (let attempt = 0; attempt < 3; attempt++) {
-                try {
-                  const inserted = await frame.evaluate((imgUrl) => {
-                    // 방법 1: Selection API 사용
-                    const selection = window.getSelection();
-                    if (selection && selection.rangeCount > 0) {
-                      const range = selection.getRangeAt(0);
-
-                      const img = document.createElement('img');
-                      img.src = imgUrl;
-                      // ✅ 본문 크기에 딱 맞게 중앙 정렬
-                      img.style.width = '100%'; // 본문 전체 너비 사용
-                      img.style.maxWidth = '100%'; // 본문을 넘지 않도록 제한
-                      img.style.height = 'auto'; // 비율 유지
-                      img.style.display = 'block'; // 블록 요소로 표시
-                      img.style.margin = '20px auto'; // 중앙 정렬 + 상하 여백
-                      img.style.borderRadius = '8px'; // 약간 둥근 모서리
-                      img.style.objectFit = 'contain'; // 이미지 전체가 보이도록
-
-                      range.deleteContents();
-                      range.insertNode(img);
-
-                      // ✅ 다음 이미지가 바로 이어서 들어가도 공백이 생기지 않도록 <br>를 만들지 않고,
-                      // 커서를 이미지 바로 뒤로 이동
-                      range.setStartAfter(img);
-                      range.collapse(true);
-                      selection.removeAllRanges();
-                      selection.addRange(range);
-                      return true;
-                    }
-
-                    // 방법 2: 에디터 본문 영역에 직접 추가
-                    const editor = document.querySelector('.se-section-text, .se-main-container, .se-component');
-                    if (editor) {
-                      const img = document.createElement('img');
-                      img.src = imgUrl;
-                      // ✅ 본문 크기에 딱 맞게 중앙 정렬
-                      img.style.width = '100%'; // 본문 전체 너비 사용
-                      img.style.maxWidth = '100%'; // 본문을 넘지 않도록 제한
-                      img.style.height = 'auto'; // 비율 유지
-                      img.style.display = 'block'; // 블록 요소로 표시
-                      img.style.margin = '20px auto'; // 중앙 정렬 + 상하 여백
-                      img.style.borderRadius = '8px'; // 약간 둥근 모서리
-                      img.style.objectFit = 'contain'; // 이미지 전체가 보이도록
-
-                      editor.appendChild(img);
-
-                      // 커서를 이미지 뒤로 이동 (다음 삽입을 위해)
-                      const selection = window.getSelection();
-                      if (selection) {
-                        const r = document.createRange();
-                        r.setStartAfter(img);
-                        r.collapse(true);
-                        selection.removeAllRanges();
-                        selection.addRange(r);
-                      }
-                      return true;
-                    }
-
-                    return false;
-                  }, imageDataUrl);
-
-                  if (inserted) {
-                    await this.delay(1000);
-
-                    // 이미지가 삽입되었는지 확인
-                    const imgCheck = await frame.$$('img').catch(() => []);
-                    const contentImages = await frame.evaluate(() => {
-                      const imgs = Array.from(document.querySelectorAll('img'));
-                      return imgs.filter(img => {
-                        const src = img.getAttribute('src') || '';
-                        return src.startsWith('http') && !src.includes('static.blog.naver.net');
-                      });
-                    }).catch(() => []);
-
-                    if (contentImages.length > 0 || imgCheck.length > 0) {
-                      uploadSucceeded = true;
-                      this.log(`   ✅ 외부 이미지 DOM 삽입 성공! (시도 ${attempt + 1}, 이미지 ${contentImages.length || imgCheck.length}개 발견)`);
-                      break;
-                    }
-                  }
-                } catch (domError) {
-                  this.log(`   ⚠️ DOM 삽입 시도 ${attempt + 1} 실패: ${(domError as Error).message}`);
-                }
-
-                if (attempt < 2) {
-                  await this.delay(this.DELAYS.LONG);
-                }
-              }
-
-              if (!uploadSucceeded) {
-                this.log(`   ⚠️ DOM 직접 삽입이 실패했습니다. 외부 URL 이미지는 네이버 에디터에서 직접 삽입해야 할 수 있습니다.`);
-              }
-            }
-          } catch (insertError) {
-            this.log(`   ❌ 외부 이미지 삽입 실패: ${(insertError as Error).message}`);
-          }
-        }
-
-        // Base64 Data URL을 DOM에 직접 삽입 (가장 확실한 방법)
-        if (imageDataUrl && imageDataUrl.startsWith('data:')) {
-          this.log(`   🔄 Base64 Data URL을 네이버 에디터에 직접 삽입 중...`);
-          this.log(`   📎 Data URL 크기: ${(imageDataUrl.length / 1024).toFixed(2)} KB`);
-
-          // 여러 방법으로 시도
-          for (let attempt = 0; attempt < 5; attempt++) {
-            try {
-              const inserted = await frame.evaluate((imgUrl) => {
-                // ⚠️ 중요: 제목 필드가 아닌 본문 영역에만 삽입
-                const titleElement = document.querySelector('.se-section-documentTitle');
-                const bodyElement = document.querySelector('.se-section-text, .se-main-container, .se-component, .se-module-text');
-
-                if (!bodyElement) {
-                  return false; // 본문 영역을 찾을 수 없음
-                }
-
-                // 방법 1: Selection API 사용 (가장 정확) - 현재 커서 위치에 삽입
-                const selection = window.getSelection();
-                if (selection && selection.rangeCount > 0) {
-                  const range = selection.getRangeAt(0).cloneRange(); // 원본 range 복사
-                  const container = range.commonAncestorContainer;
-                  const node = container.nodeType === Node.TEXT_NODE ? container.parentElement : container;
-
-                  // ⚠️ 중요: 제목 필드에 있으면 본문 영역으로 이동하되, 최상단이 아닌 현재 위치 유지
-                  if (titleElement && titleElement.contains(node)) {
-                    // 제목 필드에 있으면 본문 영역의 현재 커서 위치를 찾기
-                    // 소제목이 입력된 위치를 찾기 위해 최근 입력된 텍스트를 찾음
-                    const textNodes = [];
-                    const walker = document.createTreeWalker(bodyElement, NodeFilter.SHOW_TEXT);
-                    let textNode;
-                    while (textNode = walker.nextNode()) {
-                      if (textNode.textContent && textNode.textContent.trim().length > 0) {
-                        textNodes.push(textNode);
-                      }
-                    }
-
-                    // 마지막 텍스트 노드(방금 입력한 소제목) 다음으로 이동
-                    if (textNodes.length > 0) {
-                      const lastTextNode = textNodes[textNodes.length - 1];
-                      const parent = lastTextNode.parentElement;
-                      if (parent && parent.nextSibling) {
-                        range.setStartBefore(parent.nextSibling);
-                      } else if (parent) {
-                        range.setStartAfter(parent);
-                      } else {
-                        range.setStartAfter(lastTextNode);
-                      }
-                      range.collapse(true);
-                    } else {
-                      // 텍스트 노드를 찾을 수 없으면 본문 영역 끝으로
-                      range.selectNodeContents(bodyElement);
-                      range.collapse(false);
-                    }
-                  }
-
-                  // ⚠️ 중요: 본문 영역에 있는지 확인하되, 최상단으로 이동하지 않음
-                  const currentContainer = range.commonAncestorContainer;
-                  const currentNode = currentContainer.nodeType === Node.TEXT_NODE ? currentContainer.parentElement : currentContainer;
-
-                  // 본문 영역이 아니면 현재 위치를 유지하지 않고 본문 영역으로 이동
-                  if (!bodyElement.contains(currentNode)) {
-                    // 본문 영역 끝으로 이동 (하지만 이미 위에서 처리했으므로 여기서는 최후의 수단)
-                    range.selectNodeContents(bodyElement);
-                    range.collapse(false);
-                  }
-
-                  // ⚠️ 중요: 현재 커서 위치에 이미지를 삽입 (소제목 바로 아래)
-                  // ✅ 이미지 요소 생성 (본문 크기에 딱 맞게 중앙 정렬)
-                  const img = document.createElement('img');
-                  img.src = imgUrl;
-
-                  // ✅ 네이버 블로그 본문 너비에 맞춤 (중앙 정렬)
-                  img.style.width = '100%'; // 본문 전체 너비 사용
-                  img.style.maxWidth = '100%'; // 본문을 넘지 않도록 제한
-                  img.style.height = 'auto'; // 비율 유지
-                  img.style.display = 'block'; // 블록 요소로 표시
-                  img.style.margin = '20px auto'; // 중앙 정렬 + 상하 여백
-                  img.style.borderRadius = '8px'; // 약간 둥근 모서리
-                  img.style.objectFit = 'contain'; // 이미지 전체가 보이도록 (잘리지 않음)
-                  img.setAttribute('data-se-image-resource', 'true');
-
-                  // 현재 위치에 이미지 삽입 (제목 필드 제외, 본문 영역만)
-                  try {
-                    // 컨테이너 생성 (이미지를 감싸는 div)
-                    const imgContainer = document.createElement('div');
-                    imgContainer.style.margin = '15px 0';
-                    imgContainer.style.textAlign = 'center';
-                    imgContainer.appendChild(img);
-
-
-                    // range가 collapse된 상태인지 확인
-                    if (range.collapsed) {
-                      // ⚠️ 중요: 제목 필드가 아닌 본문 영역 찾기
-                      const titleElement = document.querySelector('.se-section-documentTitle');
-                      const bodyElement = document.querySelector('.se-section-text, .se-main-container, .se-component');
-
-                      // 현재 커서가 있는 위치 확인
-                      const container = range.commonAncestorContainer;
-                      let parentElement = container.nodeType === Node.TEXT_NODE
-                        ? container.parentElement
-                        : container as HTMLElement;
-
-                      // 제목 필드에 있는지 확인
-                      if (titleElement && titleElement.contains(parentElement)) {
-                        // 제목 필드에 있으면 본문 영역으로 이동
-                        if (bodyElement) {
-                          // 본문 영역의 가장 마지막 텍스트 노드 찾기 (소제목)
-                          const textNodes = [];
-                          const walker = document.createTreeWalker(bodyElement, NodeFilter.SHOW_TEXT);
-                          let textNode;
-                          while (textNode = walker.nextNode()) {
-                            if (textNode.textContent && textNode.textContent.trim().length > 0) {
-                              textNodes.push(textNode);
-                            }
-                          }
-
-                          if (textNodes.length > 0) {
-                            // 마지막 텍스트 노드(소제목)의 부모 요소로 변경
-                            const lastTextNode = textNodes[textNodes.length - 1];
-                            parentElement = lastTextNode.parentElement as HTMLElement;
-                          } else {
-                            // 텍스트 노드가 없으면 본문 영역 자체 사용
-                            parentElement = bodyElement as HTMLElement;
-                          }
-                        }
-                      }
-
-                      if (parentElement) {
-                        // 부모 요소의 다음 위치에 삽입
-                        if (parentElement.nextSibling) {
-                          parentElement.parentNode?.insertBefore(imgContainer, parentElement.nextSibling);
-                        } else if (parentElement.parentNode) {
-                          parentElement.parentNode.appendChild(imgContainer);
-                        } else {
-                          // 폴백: 본문 영역에 추가
-                          if (bodyElement) {
-                            bodyElement.appendChild(imgContainer);
-                          }
-                        }
-                      } else {
-                        // 폴백: range에 직접 삽입
-                        range.insertNode(imgContainer);
-                      }
-
-                      // 커서를 이미지 뒤로 이동
-                      range.setStartAfter(imgContainer);
-                      range.collapse(true);
-                      selection.removeAllRanges();
-                      selection.addRange(range);
-                    } else {
-                      // range가 collapse되지 않았으면 현재 위치에 삽입
-                      const container = range.commonAncestorContainer;
-                      const parentElement = container.nodeType === Node.TEXT_NODE
-                        ? container.parentElement
-                        : container as HTMLElement;
-
-                      if (parentElement && parentElement.parentNode) {
-                        if (parentElement.nextSibling) {
-                          parentElement.parentNode.insertBefore(imgContainer, parentElement.nextSibling);
-                        } else {
-                          parentElement.parentNode.appendChild(imgContainer);
-                        }
-                      } else {
-                        range.insertNode(imgContainer);
-                      }
-
-                      range.setStartAfter(imgContainer);
-                      range.collapse(true);
-                      selection.removeAllRanges();
-                      selection.addRange(range);
-                    }
-
-                    return true;
-                  } catch (e) {
-                    // 삽입 실패 시 방법 2로 폴백
-                    // 이미지 삽입 실패 (에러는 상위에서 처리)
-                  }
-                }
-
-                // 방법 2: 에디터 본문 영역에 직접 추가 (제목 필드 제외)
-                if (bodyElement) {
-                  const img = document.createElement('img');
-                  img.src = imgUrl;
-                  // ✅ 본문 크기에 딱 맞게 중앙 정렬
-                  img.style.width = '100%'; // 본문 전체 너비 사용
-                  img.style.maxWidth = '100%'; // 본문을 넘지 않도록 제한
-                  img.style.height = 'auto'; // 비율 유지
-                  img.style.display = 'block'; // 블록 요소로 표시
-                  img.style.margin = '20px auto'; // 중앙 정렬 + 상하 여백
-                  img.style.borderRadius = '8px'; // 약간 둥근 모서리
-                  img.style.objectFit = 'contain'; // 이미지 전체가 보이도록
-                  img.setAttribute('data-se-image-resource', 'true');
-
-
-                  // 현재 커서 위치 찾기
-                  const selection = window.getSelection();
-                  if (selection && selection.rangeCount > 0) {
-                    const range = selection.getRangeAt(0);
-                    const container = range.commonAncestorContainer;
-                    const node = container.nodeType === Node.TEXT_NODE ? container.parentElement : container;
-
-                    // 제목 필드가 아닌 본문 영역에만 삽입
-                    if (node && bodyElement.contains(node) && (!titleElement || !titleElement.contains(node))) {
-                      // 커서 위치에 삽입
-                      range.insertNode(img);
-                      range.setStartAfter(img);
-                      range.collapse(true);
-                      selection.removeAllRanges();
-                      selection.addRange(range);
-                    } else {
-                      // 마지막으로 입력된 텍스트 노드(소제목) 찾기
-                      const textNodes = [];
-                      const walker = document.createTreeWalker(bodyElement, NodeFilter.SHOW_TEXT);
-                      let textNode;
-                      while (textNode = walker.nextNode()) {
-                        if (textNode.textContent && textNode.textContent.trim().length > 0) {
-                          textNodes.push(textNode);
-                        }
-                      }
-
-                      if (textNodes.length > 0) {
-                        // 마지막 텍스트 노드의 부모 요소 찾기
-                        const lastTextNode = textNodes[textNodes.length - 1];
-                        const parent = lastTextNode.parentElement;
-
-                        if (parent && parent.parentElement) {
-                          // 소제목 부모 요소 바로 다음에 이미지 삽입
-                          if (parent.nextSibling) {
-                            parent.parentElement.insertBefore(img, parent.nextSibling);
-                          } else {
-                            parent.parentElement.appendChild(img);
-                          }
-                        } else {
-                          // 폴백: 본문 영역 끝에 추가
-                          bodyElement.appendChild(img);
-                        }
-                      } else {
-                        // 텍스트 노드가 없으면 본문 영역 끝에 추가
-                        bodyElement.appendChild(img);
-                      }
-
-                      // 커서를 이미지 뒤로 이동
-                      const newRange = document.createRange();
-                      newRange.setStartAfter(img);
-                      newRange.collapse(true);
-                      if (selection) {
-                        selection.removeAllRanges();
-                        selection.addRange(newRange);
-                      }
-                    }
-                  } else {
-                    // 마지막으로 입력된 텍스트 노드(소제목) 찾기
-                    const textNodes = [];
-                    const walker = document.createTreeWalker(bodyElement, NodeFilter.SHOW_TEXT);
-                    let textNode;
-                    while (textNode = walker.nextNode()) {
-                      if (textNode.textContent && textNode.textContent.trim().length > 0) {
-                        textNodes.push(textNode);
-                      }
-                    }
-
-                    if (textNodes.length > 0) {
-                      // 마지막 텍스트 노드의 부모 요소 찾기
-                      const lastTextNode = textNodes[textNodes.length - 1];
-                      const parent = lastTextNode.parentElement;
-
-                      if (parent && parent.parentElement) {
-                        // 소제목 부모 요소 바로 다음에 이미지 삽입
-                        if (parent.nextSibling) {
-                          parent.parentElement.insertBefore(img, parent.nextSibling);
-                        } else {
-                          parent.parentElement.appendChild(img);
-                        }
-                      } else {
-                        // 폴백: 본문 영역 끝에 추가
-                        bodyElement.appendChild(img);
-                      }
-                    } else {
-                      // 텍스트 노드가 없으면 본문 영역 끝에 추가
-                      bodyElement.appendChild(img);
-                    }
-
-                    // 커서를 이미지 뒤로 이동
-                    const newRange = document.createRange();
-                    newRange.setStartAfter(img);
-                    newRange.collapse(true);
-                    if (selection) {
-                      selection.removeAllRanges();
-                      selection.addRange(newRange);
-                    }
-                  }
-
-                  return true;
-                }
-
-                return false;
-              }, imageDataUrl);
-
-              if (inserted) {
-                await this.delay(1500);
-
-                // 이미지가 실제로 삽입되었는지 확인
-                const imgCheck = await frame.$$('img').catch(() => []);
-                const dataUrlImages = await frame.evaluate((imgUrl) => {
-                  const imgs = Array.from(document.querySelectorAll('img'));
-                  return imgs.filter(img => img.src === imgUrl || img.src.startsWith('data:image'));
-                }, imageDataUrl).catch(() => []);
-
-                if (dataUrlImages.length > 0 || imgCheck.length > 0) {
-                  uploadSucceeded = true;
-                  this.log(`   ✅ Base64 Data URL 삽입 성공! (시도 ${attempt + 1}, 이미지 ${dataUrlImages.length || imgCheck.length}개 발견)`);
-                  break;
-                } else {
-                  this.log(`   ⚠️ 시도 ${attempt + 1}: 이미지가 DOM에 나타나지 않았습니다. 재시도...`);
-                }
-              }
-            } catch (insertError) {
-              this.log(`   ⚠️ 시도 ${attempt + 1} 실패: ${(insertError as Error).message}`);
-            }
-
-            if (attempt < 4) {
-              await this.delay(this.DELAYS.LONG);
-            }
-          }
-
-          if (!uploadSucceeded) {
-            this.log(`   ❌ Base64 Data URL 삽입 실패 (5회 시도)`);
-          }
-        }
-
-        // Base64 삽입이 실패한 경우에만 파일 업로드 시도 (네이버 보안 때문에 비추천)
-        if (!uploadSucceeded && !isUrl && !imageDataUrl.startsWith('data:')) {
-          // 🎯 방법 2: 이미지 버튼 클릭 + 파일 선택 대화상자 사용
-          this.log(`   🔄 이미지 삽입 버튼 클릭 → 파일 선택 대화상자 사용...`);
-
-          // 파일 존재 확인
-          const fs = await import('fs/promises');
-          try {
-            await fs.access(image.filePath);
-            const stats = await fs.stat(image.filePath);
-            this.log(`   📁 파일 확인 완료: ${image.filePath}`);
-            this.log(`   📏 파일 크기: ${(stats.size / 1024).toFixed(2)} KB`);
-          } catch (fileCheckError) {
-            this.log(`   ❌ 파일 접근 실패: ${(fileCheckError as Error).message}`);
-            this.log(`   💡 파일 경로를 확인해주세요: ${image.filePath}`);
-          }
-
-          try {
-            // 이미지 버튼 찾기
-            const imageButton = await frame.$('button[data-name="image"], button.se-image-toolbar-button').catch(() => null);
-
-            if (imageButton) {
-              this.log(`   ✅ 이미지 삽입 버튼 발견`);
-
-              // 파일 선택 대화상자 대기 + 버튼 클릭
-              const [fileChooser] = await Promise.all([
-                page.waitForFileChooser({ timeout: 10000 }), // 10초 대기
-                imageButton.click()
-              ]);
-
-              // ✅ 이미지 버튼 클릭 후 즉시 ESC 키로 MYBOX 팝업 차단
-              await page.keyboard.press('Escape');
-              await this.delay(100);
-
-              this.log(`   ✅ 파일 선택 대화상자 열림 (MYBOX 팝업 차단 완료)`);
-
-              // 파일 선택 (절대 경로 사용, 쿼리 파라미터 제거)
-              const pathModule = await import('path');
-              let absolutePath = pathModule.isAbsolute(image.filePath)
-                ? image.filePath
-                : pathModule.resolve(image.filePath);
-
-              // ✅ 파일 경로에서 쿼리 파라미터 제거 (파일명에 &type=a340 같은 파라미터가 포함되지 않도록)
-              if (absolutePath.includes('&') || absolutePath.includes('?')) {
-                const pathParts = absolutePath.split(pathModule.sep);
-                const fileName = pathParts[pathParts.length - 1];
-                const cleanFileName = fileName.split('?')[0].split('&')[0].split('#')[0];
-                if (fileName !== cleanFileName) {
-                  pathParts[pathParts.length - 1] = cleanFileName;
-                  absolutePath = pathParts.join(pathModule.sep);
-                  this.log(`   🔧 파일명 정리: "${fileName}" → "${cleanFileName}"`);
-                }
-              }
-
-              await fileChooser.accept([absolutePath]);
-              this.log(`   ✅ 파일 선택 완료: ${absolutePath}`);
-
-              // 파일 전송 대화상자의 "확인" 버튼 대기 및 클릭
-              await this.delay(this.DELAYS.LONG); // 대화상자가 나타날 시간
-
-              // ✅ 파일 전송 오류 다이얼로그 감지 및 처리
-              try {
-                // 오류 다이얼로그가 나타나는지 확인 (3초 대기)
-                const errorDialog = await frame.waitForSelector(
-                  'text="파일 전송 오류", text="파일 형식 오류", [class*="error"], [class*="오류"]',
-                  { timeout: 3000 }
-                ).catch(() => null);
-
-                if (errorDialog) {
-                  this.log(`   ⚠️ 파일 전송 오류 다이얼로그 감지됨`);
-
-                  // 오류 다이얼로그의 "확인" 버튼 찾기 및 클릭
-                  const confirmButtons = await frame.$$('button').catch(() => []);
-                  for (const btn of confirmButtons) {
-                    const text = await btn.evaluate((el: Element) => el.textContent?.trim() || '').catch(() => '');
-                    if (text === '확인' || text === 'OK') {
-                      await btn.click();
-                      this.log(`   ✅ 오류 다이얼로그 확인 버튼 클릭 완료`);
-                      await this.delay(500);
-                      break;
-                    }
-                  }
-
-                  // 오류 발생 시 이 이미지는 건너뛰고 다음 이미지로 진행
-                  this.log(`   ⚠️ 파일 형식 오류로 인해 이 이미지를 건너뜁니다: ${image.heading}`);
-                  continue;
-                }
-              } catch (error) {
-                // 오류 다이얼로그가 없으면 정상 진행
-              }
-
-              // "확인" 버튼 찾기 및 클릭 (여러 방식 시도) - 정상적인 파일 전송 확인 버튼
-              const confirmButton = await frame.$('button:has-text("확인"), button:has-text("OK"), button[class*="confirm"], button[type="submit"]').catch(() => null);
-              if (confirmButton) {
-                await confirmButton.click();
-                this.log(`   ✅ 파일 전송 확인 버튼 클릭 완료`);
-              } else {
-                // 텍스트로 버튼 찾기
-                const buttons = await frame.$$('button').catch(() => []);
-                for (const btn of buttons) {
-                  const text = await btn.evaluate((el: Element) => el.textContent?.trim() || '').catch(() => '');
-                  if (text === '확인' || text === 'OK') {
-                    await btn.click();
-                    this.log(`   ✅ 파일 전송 확인 버튼 클릭 완료`);
-                    break;
-                  }
-                }
-              }
-
-              this.log(`   ⏳ 네이버가 이미지를 처리하는 중...`);
-
-              // 네이버가 파일을 업로드하고 처리할 시간 대기 (시간 증가)
-              await this.delay(5000); // 3초 → 5초
-
-              // DOM에서 이미지 확인
-              const uploadCheck = await frame.$$('img').catch(() => []);
-              this.log(`   🔍 [즉시 확인] DOM에서 이미지 수: ${uploadCheck.length}개`);
-
-              if (uploadCheck.length > 0) {
-                uploadSucceeded = true;
-                this.log(`   ✅ 이미지 버튼 클릭 방식 성공! (이미지 ${uploadCheck.length}개 발견)`);
-              } else {
-                this.log(`   ⚠️ 아직 이미지가 DOM에 나타나지 않았습니다. 추가 대기...`);
-                await this.delay(5000); // 추가 5초 대기
-
-                const recheckImages = await frame.$$('img').catch(() => []);
-                this.log(`   🔍 [재확인] DOM에서 이미지 수: ${recheckImages.length}개`);
-
-                if (recheckImages.length > 0) {
-                  uploadSucceeded = true;
-                  this.log(`   ✅ 이미지 버튼 클릭 방식 성공! (이미지 ${recheckImages.length}개 발견)`);
-                } else {
-                  this.log(`   ❌ 10초 대기 후에도 이미지가 DOM에 나타나지 않았습니다`);
-                }
-              }
-            } else {
-              throw new Error('이미지 삽입 버튼을 찾을 수 없습니다');
-            }
-          } catch (buttonError) {
-            this.log(`   ❌ 이미지 버튼 클릭 방식 실패: ${(buttonError as Error).message}`);
-            this.log(`   💡 기존 방식(파일 input)으로 시도합니다...`);
-          }
-        } // if (!uploadSucceeded && !isUrl) 닫기 - 로컬 파일 처리
-
-        // 버튼 클릭 방식이 실패한 경우에만 기존 로직 실행 (로컬 파일인 경우에만)
-        if (!uploadSucceeded && !isUrl) {
-          // 네이버 이미지 라이브러리 패널이 열려있으면 즉시 닫기 (여러 번 시도)
-          for (let attempt = 0; attempt < 3; attempt++) {
-            const libraryPanel = await frame.$('.se-image-library, .se-image-selector, [class*="image-library"], [class*="image-selector"], [class*="인기"], [id*="image"], [id*="library"], [class*="se-image-panel"], [class*="se-image-popup"]').catch(() => null);
-            if (libraryPanel) {
-              const closeButton = await libraryPanel.$('button[aria-label*="닫기"], button[aria-label*="close"], .close-button, [class*="close"], button:has-text("X"), button:has-text("×"), [aria-label*="닫기"]').catch(() => null);
-              if (closeButton) {
-                await closeButton.click();
-                await this.delay(this.DELAYS.MEDIUM);
-                this.log(`   ✅ 네이버 이미지 라이브러리 패널 닫기 완료 (시도 ${attempt + 1})`);
-              } else {
-                // X 버튼을 찾지 못하면 ESC 키로 닫기 시도
-                await page.keyboard.press('Escape');
-                await this.delay(this.DELAYS.MEDIUM);
-                this.log(`   ✅ ESC 키로 네이버 이미지 라이브러리 패널 닫기 시도 (시도 ${attempt + 1})`);
-              }
-            } else {
-              break; // 패널이 없으면 종료
-            }
-          }
-
-          // 네이버 이미지 업로드 버튼 클릭 방지 (절대 클릭하지 않음)
-          // 버튼 클릭 없이 바로 파일 input 찾기 (네이버 이미지 라이브러리 패널이 열리지 않도록)
-          this.log('   🔄 앱에서 생성한 이미지를 직접 업로드합니다 (네이버 이미지 라이브러리 사용 안 함)...');
-
-          // 방법 1: 페이지와 프레임에서 파일 input 찾기 (가장 안정적)
-          // 네이버 이미지 라이브러리와 관련 없는 파일 input만 찾기
-          this.log('   🔍 파일 input을 찾는 중... (네이버 라이브러리 버튼은 절대 클릭하지 않음)');
-
-          const pageFileInputs = await page.$$('input[type="file"]').catch(() => []);
-          const frameFileInputs = await frame.$$('input[type="file"]').catch(() => []);
-          const allFileInputs = [...pageFileInputs, ...frameFileInputs];
-
-          if (allFileInputs.length > 0) {
-            this.log(`   ✅ 파일 input ${allFileInputs.length}개 발견`);
-            for (const input of allFileInputs) {
-              try {
-                // 네이버 이미지 라이브러리 패널 내부의 input이 아닌지 확인
-                const isInLibraryPanel = await input.evaluate((el: Element) => {
-                  let current = el.parentElement;
-                  while (current) {
-                    const className = current.className || '';
-                    const id = current.id || '';
-                    if (className.includes('image-library') ||
-                      className.includes('image-selector') ||
-                      className.includes('인기') ||
-                      id.includes('image') ||
-                      id.includes('library')) {
-                      return true;
-                    }
-                    current = current.parentElement;
-                  }
-                  return false;
-                }).catch(() => false);
-
-                if (isInLibraryPanel) {
-                  this.log(`   ⚠️ 네이버 이미지 라이브러리 패널 내부의 input은 건너뜁니다.`);
-                  continue;
-                }
-
-                // input이 보이는지 확인 (보이지 않아도 업로드는 가능)
-                const isVisible = await input.isIntersectingViewport().catch(() => true);
-
-                // input을 보이게 만들기 (필요한 경우)
-                if (!isVisible) {
-                  await input.evaluate((el: Element) => {
-                    const inputEl = el as HTMLInputElement;
-                    inputEl.style.display = 'block';
-                    inputEl.style.visibility = 'visible';
-                    inputEl.style.opacity = '1';
-                    inputEl.style.position = 'absolute';
-                    inputEl.style.left = '0';
-                    inputEl.style.top = '0';
-                    inputEl.style.width = '1px';
-                    inputEl.style.height = '1px';
-                  });
-                  await this.delay(100);
-                }
-
-                // 파일 업로드 전 최종 확인
-                const fs = await import('fs/promises');
-                const pathModule = await import('path');
-                try {
-                  // ✅ 파일 경로에서 쿼리 파라미터 제거 (파일명에 &type=a340 같은 파라미터가 포함되지 않도록)
-                  let cleanFilePath = image.filePath;
-                  if (cleanFilePath.includes('&') || cleanFilePath.includes('?')) {
-                    // URL이 아닌 로컬 파일 경로인 경우에도 쿼리 파라미터가 포함될 수 있음
-                    const pathParts = cleanFilePath.split(pathModule.sep);
-                    const fileName = pathParts[pathParts.length - 1];
-                    const cleanFileName = fileName.split('?')[0].split('&')[0].split('#')[0];
-                    if (fileName !== cleanFileName) {
-                      pathParts[pathParts.length - 1] = cleanFileName;
-                      cleanFilePath = pathParts.join(pathModule.sep);
-                      this.log(`   🔧 파일명 정리: "${fileName}" → "${cleanFileName}"`);
-                    }
-                  }
-
-                  await fs.access(cleanFilePath);
-                  const stats = await fs.stat(cleanFilePath);
-                  this.log(`   📤 앱에서 생성한 이미지 파일 업로드 중...`);
-                  this.log(`   📁 파일 경로: ${cleanFilePath}`);
-                  this.log(`   📏 파일 크기: ${(stats.size / 1024).toFixed(2)} KB`);
-
-                  // Puppeteer의 uploadFile() 사용 (로컬 파일 경로 필요)
-                  await input.uploadFile(cleanFilePath);
-                  this.log(`   ✅ 파일 input에 파일 설정 완료`);
-                  await this.delay(2000); // 업로드 진행 대기 (시간 증가)
-
-                  // ✅ 파일 전송 오류 다이얼로그 감지 및 처리
-                  try {
-                    // 오류 다이얼로그가 나타나는지 확인 (3초 대기)
-                    const errorDialog = await frame.waitForSelector(
-                      'text="파일 전송 오류", text="파일 형식 오류", [class*="error"], [class*="오류"]',
-                      { timeout: 3000 }
-                    ).catch(() => null);
-
-                    if (errorDialog) {
-                      this.log(`   ⚠️ 파일 전송 오류 다이얼로그 감지됨`);
-
-                      // 오류 다이얼로그의 "확인" 버튼 찾기 및 클릭
-                      const confirmButtons = await frame.$$('button').catch(() => []);
-                      for (const btn of confirmButtons) {
-                        const text = await btn.evaluate((el: Element) => el.textContent?.trim() || '').catch(() => '');
-                        if (text === '확인' || text === 'OK') {
-                          await btn.click();
-                          this.log(`   ✅ 오류 다이얼로그 확인 버튼 클릭 완료`);
-                          await this.delay(500);
-                          break;
-                        }
-                      }
-
-                      // 오류 발생 시 이 이미지는 건너뛰고 다음 이미지로 진행
-                      this.log(`   ⚠️ 파일 형식 오류로 인해 이 이미지를 건너뜁니다: ${image.heading}`);
-                      continue;
-                    }
-                  } catch (error) {
-                    // 오류 다이얼로그가 없으면 정상 진행
-                  }
-
-                  // 이미지가 DOM에 나타날 때까지 대기
-                  try {
-                    await frame.waitForSelector('img[src*="postfiles"], img[src*="blogfiles"], img.se-image-resource', {
-                      visible: true,
-                      timeout: 10000
-                    });
-                    uploadSucceeded = true;
-                    this.log(`   ✅ 이미지가 DOM에 나타남 - 업로드 성공`);
-                  } catch {
-                    this.log(`   ⚠️ 이미지 DOM 대기 타임아웃 (계속 진행)`);
-                    // 타임아웃이어도 업로드는 진행 중일 수 있음
-                  }
-                } catch (fileError) {
-                  this.log(`   ❌ 파일 접근 실패: ${(fileError as Error).message}`);
-                  throw fileError;
-                }
-
-                // change 이벤트 트리거 (일부 에디터에서 필요)
-                await input.evaluate((el: Element) => {
-                  const inputEl = el as HTMLInputElement;
-                  const event = new Event('change', { bubbles: true });
-                  inputEl.dispatchEvent(event);
-                });
-                await this.delay(this.DELAYS.MEDIUM);
-
-                // 네이버 라이브러리 패널이 다시 열렸는지 확인하고 닫기
-                const libraryPanelAfter = await frame.$('.se-image-library, .se-image-selector, [class*="image-library"], [class*="image-selector"], [class*="인기"]').catch(() => null);
-                if (libraryPanelAfter) {
-                  await page.keyboard.press('Escape');
-                  await this.delay(this.DELAYS.MEDIUM);
-                  this.log(`   ✅ 업로드 후 열린 네이버 라이브러리 패널 닫기 완료`);
-                }
-
-                break;
-              } catch (error) {
-                this.log(`   ⚠️ 파일 input 업로드 실패: ${(error as Error).message}`);
-                // continue to next input
-              }
-            }
-          }
-
-          // 방법 2: 파일 input을 찾지 못한 경우 JavaScript로 생성하여 업로드
-          if (!uploadSucceeded) {
-            this.log('   🔄 파일 input을 찾지 못해 JavaScript로 생성하여 업로드 시도...');
-            this.log('   ⚠️ 네이버 이미지 라이브러리는 절대 사용하지 않습니다.');
-            try {
-              // 본문 영역 또는 에디터 컨테이너 찾기
-              const contentElement = await frame.$('.se-section-text, .se-component, .se-module-text, .se-main-container').catch(() => null);
-              if (contentElement) {
-                // JavaScript로 파일 input 생성 및 업로드
-                const inputHandle = await contentElement.evaluateHandle((el) => {
-                  // 기존 파일 input이 있는지 확인 (부모 요소까지 검색)
-                  // 단, 네이버 이미지 라이브러리 패널 내부의 input은 제외
-                  let existingInput: HTMLInputElement | null = el.querySelector('input[type="file"]') as HTMLInputElement | null;
-                  if (existingInput) {
-                    // 네이버 라이브러리 패널 내부인지 확인
-                    let current = existingInput.parentElement;
-                    let isInLibrary = false;
-                    while (current) {
-                      const className = current.className || '';
-                      const id = current.id || '';
-                      if (className.includes('image-library') ||
-                        className.includes('image-selector') ||
-                        className.includes('인기') ||
-                        id.includes('image') ||
-                        id.includes('library')) {
-                        isInLibrary = true;
-                        break;
-                      }
-                      current = current.parentElement;
-                    }
-                    if (isInLibrary) {
-                      existingInput = null; // 라이브러리 내부 input은 사용하지 않음
-                    }
-                  }
-
-                  if (!existingInput) {
-                    // document.body에서도 찾기 (라이브러리 패널 외부만)
-                    const allInputs = document.body.querySelectorAll('input[type="file"]');
-                    for (const inp of Array.from(allInputs)) {
-                      let current = inp.parentElement;
-                      let isInLibrary = false;
-                      while (current) {
-                        const className = current.className || '';
-                        const id = current.id || '';
-                        if (className.includes('image-library') ||
-                          className.includes('image-selector') ||
-                          className.includes('인기') ||
-                          id.includes('image') ||
-                          id.includes('library')) {
-                          isInLibrary = true;
-                          break;
-                        }
-                        current = current.parentElement;
-                      }
-                      if (!isInLibrary) {
-                        existingInput = inp as HTMLInputElement;
-                        break;
-                      }
-                    }
-                  }
-
-                  if (!existingInput) {
-                    // 새로 생성 (네이버 라이브러리와 완전히 분리)
-                    existingInput = document.createElement('input');
-                    existingInput.type = 'file';
-                    existingInput.accept = 'image/*';
-                    existingInput.multiple = false;
-                    existingInput.style.cssText = 'position: absolute; left: -9999px; opacity: 0; width: 1px; height: 1px; pointer-events: none;';
-
-                    // 에디터 컨테이너에 추가 (네이버 라이브러리 패널 외부)
-                    const container = document.querySelector('.se-main-container') || document.body;
-                    container.appendChild(existingInput);
-                  }
-
-                  return existingInput;
-                });
-
-                if (inputHandle) {
-                  const input = inputHandle.asElement();
-                  if (input && inputHandle instanceof ElementHandle) {
-                    // 타입 가드를 사용하여 안전하게 변환
-                    const inputElement = inputHandle as ElementHandle<HTMLInputElement>;
-
-                    // 파일 업로드 전 확인
-                    const fs = await import('fs/promises');
-                    try {
-                      await fs.access(image.filePath);
-                      const stats = await fs.stat(image.filePath);
-                      this.log(`   📤 앱에서 생성한 이미지 파일 업로드 중...`);
-                      this.log(`   📁 파일 경로: ${image.filePath}`);
-                      this.log(`   📏 파일 크기: ${(stats.size / 1024).toFixed(2)} KB`);
-
-                      // Puppeteer의 uploadFile() 사용 (로컬 파일 경로 필요)
-                      await inputElement.uploadFile(image.filePath);
-                      this.log(`   ✅ 파일 input에 파일 설정 완료`);
-                      await this.delay(2000);
-
-                      // change 이벤트 트리거
-                      await inputElement.evaluate((el: Element) => {
-                        const inputEl = el as HTMLInputElement;
-                        const changeEvent = new Event('change', { bubbles: true, cancelable: true });
-                        inputEl.dispatchEvent(changeEvent);
-
-                        // input 이벤트도 트리거 (일부 에디터에서 필요)
-                        const inputEvent = new Event('input', { bubbles: true, cancelable: true });
-                        inputEl.dispatchEvent(inputEvent);
-                      });
-
-                      await this.delay(1000);
-
-                      // 이미지가 DOM에 나타날 때까지 대기
-                      try {
-                        await frame.waitForSelector('img[src*="postfiles"], img[src*="blogfiles"], img.se-image-resource', {
-                          visible: true,
-                          timeout: 10000
-                        });
-                        uploadSucceeded = true;
-                        this.log(`   ✅ 이미지가 DOM에 나타남 - 업로드 성공`);
-                      } catch {
-                        this.log(`   ⚠️ 이미지 DOM 대기 타임아웃 (계속 진행)`);
-                      }
-                    } catch (fileError) {
-                      this.log(`   ❌ 파일 접근 실패: ${(fileError as Error).message}`);
-                      throw fileError;
-                    }
-
-                    // 네이버 라이브러리 패널이 열렸는지 확인하고 닫기
-                    const libraryPanelAfter = await frame.$('.se-image-library, .se-image-selector, [class*="image-library"], [class*="image-selector"], [class*="인기"]').catch(() => null);
-                    if (libraryPanelAfter) {
-                      await page.keyboard.press('Escape');
-                      await this.delay(this.DELAYS.MEDIUM);
-                      this.log(`   ✅ 업로드 후 열린 네이버 라이브러리 패널 닫기 완료`);
-                    }
-                  }
-                }
-              }
-            } catch (jsError) {
-              this.log(`   ⚠️ JavaScript 파일 input 생성 실패: ${(jsError as Error).message}`);
-            }
-          }
-
-          // 여전히 실패한 경우 드래그 앤 드롭 시도 (로컬 파일인 경우에만)
-          if (!uploadSucceeded && !isUrl) {
-            this.log('   🔄 드래그 앤 드롭으로 이미지 삽입 시도...');
-            try {
-              const contentElement = await frame.$('.se-section-text, .se-component, .se-text-paragraph').catch(() => null);
-              if (contentElement) {
-                // 파일을 읽어서 DataTransfer로 드래그 앤 드롭 시뮬레이션
-                const fs = await import('fs/promises');
-                const fileBuffer = await fs.readFile(image.filePath);
-                // URL에서 파일명 추출 (쿼리 파라미터 제거)
-                const urlWithoutQuery = image.filePath.split('?')[0].split('#')[0];
-                const fileName = urlWithoutQuery.split(/[/\\]/).pop() || 'image.png';
-
-                // 파일 타입 결정
-                const ext = fileName.split('.').pop()?.toLowerCase() || 'png';
-                // 유효한 확장자만 허용
-                const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) ? ext : 'png';
-                const mimeType = validExt === 'jpg' || validExt === 'jpeg' ? 'image/jpeg' :
-                  validExt === 'gif' ? 'image/gif' :
-                    validExt === 'webp' ? 'image/webp' : 'image/png';
-
-                this.log(`   📁 파일: ${fileName} (${mimeType}, ${(fileBuffer.length / 1024).toFixed(2)} KB)`);
-
-                await contentElement.evaluate((el, buffer, name, mime) => {
-                  const file = new File([new Uint8Array(buffer)], name, { type: mime });
-                  const dataTransfer = new DataTransfer();
-                  dataTransfer.items.add(file);
-
-                  // dragenter 이벤트
-                  const dragEnterEvent = new DragEvent('dragenter', {
-                    bubbles: true,
-                    cancelable: true,
-                    dataTransfer: dataTransfer,
-                  });
-                  el.dispatchEvent(dragEnterEvent);
-
-                  // dragover 이벤트
-                  const dragOverEvent = new DragEvent('dragover', {
-                    bubbles: true,
-                    cancelable: true,
-                    dataTransfer: dataTransfer,
-                  });
-                  el.dispatchEvent(dragOverEvent);
-
-                  // drop 이벤트
-                  const dropEvent = new DragEvent('drop', {
-                    bubbles: true,
-                    cancelable: true,
-                    dataTransfer: dataTransfer,
-                  });
-                  el.dispatchEvent(dropEvent);
-                }, Array.from(fileBuffer), fileName, mimeType);
-
-                await this.delay(1000); // 드래그 앤 드롭 처리 대기 시간 증가
-                this.log(`   ✅ 드래그 앤 드롭 이벤트 발생 완료 (DOM 확인 필요)`);
-                // uploadSucceeded = true;  // DOM에서 확인 후에만 true로 설정
-              } else {
-                this.log(`   ⚠️ 드래그 앤 드롭 대상 요소를 찾을 수 없습니다`);
-              }
-            } catch (dropError) {
-              this.log(`   ⚠️ 드래그 앤 드롭 실패: ${(dropError as Error).message}`);
-            }
-          }
-
-          // 업로드 성공 여부와 관계없이 DOM에서 이미지 확인
-          if (!uploadSucceeded) {
-            this.log(`   ⏳ 네이버 서버 이미지 처리 대기 중... (최대 15초)`);
-
-            // 최대 15초 동안 이미지가 나타날 때까지 대기
-            let imageFound = false;
-            for (let waitAttempt = 0; waitAttempt < 15; waitAttempt++) {
-              await this.delay(1000);
-
-              const uploadedImages = await frame.$$('img.se-image-resource, .se-module-image img, img[src*="naver"], img[src*="postfiles"], img[src*="blogfiles"], img[src*="blob:"]').catch(() => []);
-
-              // UI 이미지 제외 (실제 콘텐츠 이미지만)
-              const contentImages = await frame.evaluate(() => {
-                const imgs = Array.from(document.querySelectorAll('img'));
-                return imgs.filter(img => {
-                  const src = img.getAttribute('src') || '';
-                  return (src.includes('postfiles') || src.includes('blogfiles') || src.includes('blob:')) &&
-                    !src.includes('static.blog.naver.net') &&
-                    !src.includes('icon') &&
-                    !src.includes('btn');
-                });
-              }).catch(() => []);
-
-              if (contentImages.length > 0) {
-                uploadSucceeded = true;
-                imageFound = true;
-                this.log(`   ✅ 이미지가 DOM에 나타남 (${waitAttempt + 1}초 후, ${contentImages.length}개 발견)`);
-                break;
-              }
-            }
-
-            if (!imageFound) {
-              this.log(`   ⚠️ 15초 대기 후에도 이미지가 DOM에 나타나지 않았습니다.`);
-            }
-          }
-
-          // 최종 확인
-          const allImages = await frame.$$('img').catch(() => []);
-          const contentImages = await frame.evaluate(() => {
-            const imgs = Array.from(document.querySelectorAll('img'));
-            return imgs.filter(img => {
-              const src = img.getAttribute('src') || '';
-              return (src.includes('postfiles') || src.includes('blogfiles') || src.includes('blob:')) &&
-                !src.includes('static.blog.naver.net') &&
-                !src.includes('icon') &&
-                !src.includes('btn');
-            });
-          }).catch(() => []);
-
-          this.log(`   🔍 DOM 확인: 전체 이미지 ${allImages.length}개, 콘텐츠 이미지 ${contentImages.length}개`);
-
-          if (uploadSucceeded || contentImages.length > 0) {
-            this.log(`   ✅ 이미지 업로드 성공 확인`);
-          } else {
-            // 보안: 파일 경로 마스킹
-            const maskedPath = image.filePath.replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~');
-            this.log(`   ⚠️ 이미지 업로드 실패 가능성: ${maskedPath}`);
-            this.log(`   💡 네이버 블로그 에디터의 UI가 변경되었을 수 있습니다.`);
-            this.log(`   💡 브라우저에서 수동으로 확인해주세요.`);
-          }
-        } // if (!uploadSucceeded) 닫기
-
-        // ✅ alt 태그에 출처 정보 자동 추가
-        const altWithSource = this.generateAltWithSource(image);
-        if (altWithSource) {
-          await frame
-            .evaluate((altText) => {
-              const editor = document.querySelector('.se-main-container');
-              if (!editor) return;
-              const imgs = editor.querySelectorAll('img');
-              const target = imgs[imgs.length - 1] as HTMLImageElement | undefined;
-              if (target) {
-                target.alt = altText;
-              }
-            }, altWithSource)
-            .catch(() => undefined);
-        }
-
-        if (plan?.caption) {
-          await this.applyCaption(plan.caption).catch(() => undefined);
-        }
-
-        this.log(`✅ 이미지 업로드 성공 (${image.filePath})`);
-      } catch (error) {
-        this.log(`⚠️ 이미지 삽입 중 오류: ${(error as Error).message}`);
-      }
-    }
+    return await imageHelpers.insertImages(this, images, plans);
   }
 
   /**
@@ -11683,71 +7171,11 @@ export class NaverBlogAutomation {
    * 형식: "소제목 | 출처: Provider명 (URL)"
    */
   private generateAltWithSource(image: any): string {
-    const parts: string[] = [];
-
-    // 1. 기본 alt 텍스트 (소제목 또는 heading)
-    const baseAlt = image.alt || image.heading || image.title || '';
-    if (baseAlt) {
-      parts.push(baseAlt);
-    }
-
-    // 2. 출처 정보 추가
-    const sourceInfo: string[] = [];
-
-    // Provider 정보
-    if (image.provider) {
-      const providerNames: { [key: string]: string } = {
-        'naver': '네이버',
-        'pexels': 'Pexels',
-        'pollinations': '나노 바나나 프로 (Gemini API 키, 과금 가능)',
-        'nano-banana-pro': '나노 바나나 프로 (Gemini API 키, 과금 가능)',
-        'dalle': 'DALL-E',
-        'gemini': 'Gemini',
-        'local': '로컬 파일',
-        'shopping': '쇼핑몰',
-        'blog': '블로그'
-      };
-      sourceInfo.push(providerNames[image.provider] || image.provider);
-    }
-
-    // 원본 URL 또는 출처 URL
-    const sourceUrl = image.sourceUrl || image.originalUrl || image.url || '';
-    if (sourceUrl && sourceUrl.startsWith('http')) {
-      try {
-        const url = new URL(sourceUrl);
-        // 도메인만 추출 (예: blog.naver.com)
-        sourceInfo.push(url.hostname);
-      } catch {
-        // URL 파싱 실패 시 무시
-      }
-    }
-
-    // 출처 정보가 있으면 추가
-    if (sourceInfo.length > 0) {
-      parts.push(`출처: ${sourceInfo.join(' - ')}`);
-    }
-
-    return parts.join(' | ');
+    return imageHelpers.generateAltWithSource(this, image);
   }
 
   private async applyCaption(caption: string): Promise<void> {
-    if (!caption) return;
-    const frame = (await this.getAttachedFrame());
-
-    const selectors = ['.se-caption-input input', '.se-caption-textarea textarea', '.se-image-caption input'];
-    for (const selector of selectors) {
-      const input = await frame.$(selector);
-      if (input) {
-        try {
-          await input.click({ clickCount: 3 });
-          await input.type(caption, { delay: 25 });
-          this.log('📝 이미지 캡션을 입력했습니다.');
-          return;
-        } catch {
-          continue;
-        }
-      }
-    }
+    return await imageHelpers.applyCaption(this, caption);
   }
 
   private async findElement(frame: Frame, selectors: string[]): Promise<ElementHandle<Element> | null> {
@@ -11981,6 +7409,11 @@ export class NaverBlogAutomation {
     this.cancelRequested = false;
     const resolvedOptions = this.resolveRunOptions(runOptions);
 
+    // ✅ [2026-02-15 FIX] RunOptions에서 전달된 categoryName을 this.options에 동기화
+    if (resolvedOptions.categoryName) {
+      this.options.categoryName = resolvedOptions.categoryName;
+    }
+
     try {
       // 브라우저가 없으면 새로 설정
       if (!this.browser) {
@@ -12157,6 +7590,17 @@ export class NaverBlogAutomation {
 
     const resolvedOptions = this.resolveRunOptions(runOptions);
 
+    // ✅ [2026-02-15 FIX] RunOptions에서 전달된 categoryName을 this.options에 동기화
+    // selectCategoryInPublishModal()은 this.options.categoryName을 참조하므로,
+    // run()에서 전달된 categoryName이 반드시 반영되어야 함
+    if (resolvedOptions.categoryName) {
+      this.options.categoryName = resolvedOptions.categoryName;
+      console.log(`[NaverBlogAutomation.run] 📂 categoryName 동기화: "${resolvedOptions.categoryName}"`);
+      this.log(`📂 카테고리 설정됨: "${resolvedOptions.categoryName}"`);
+    } else {
+      console.log('[NaverBlogAutomation.run] ⚠️ categoryName 없음 (undefined)');
+    }
+
     // ✅ [100점 수정] 자동 텍스트 오버레이 기능 비활성화
     // 사용자 요청: 나노바나나 텍스트 포함 체크만 남기고 자동 텍스트 오버레이 제거
     // createProductThumbnail 옵션은 이제 사용되지 않음 (항상 스킵)
@@ -12236,6 +7680,8 @@ export class NaverBlogAutomation {
         await this.applyPlainContent(resolvedOptions);
       }
 
+      // ✅ [2026-02-17] 전환점 로깅: 콘텐츠 작성 → 발행 프로세스
+      this.log('\n🔄 콘텐츠 작성 완료 → 발행 프로세스 시작...');
       await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
 
       // ✅ 자동화 완료 후 에디터를 편집 가능한 상태로 활성화

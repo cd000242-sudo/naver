@@ -210,10 +210,21 @@ function getFallbackPrompt(mode: PromptMode): string {
 - 공감·댓글·스크랩 반응을 유도할 것
 - 기자 글, 정보 글처럼 보이지 않게 할 것
 
+[토픽 매칭 필수 규칙]
+- 네이버 AI는 제목+본문에서 대분류→중분류→소분류로 토픽을 분류한다
+- 서브키워드가 제목과 본문(소제목 50% 이상)에 포함되어야 토픽 매칭 성공
+- 키워드 밀도: 메인키워드 1.5~3%, 서브키워드 각 0.5~1.5%
+- 서브키워드가 빠지면 홈피드 노출 자체가 불가능
+
 [자연스러움 강제 규칙]
 - 무조건 구어체 "~해요"
 - 한 문장 20~30자 이내
 - 연결어 남용 금지
+
+[도입부 3줄 규칙]
+- 정확히 3줄
+- 첫 문장 25자 이내
+- 배경 설명/요약 금지
 `.trim();
   }
 
@@ -336,8 +347,9 @@ function getToneInstruction(toneStyle?: string): string {
 [STYLE OVERRIDE: FRIENDLY & WARM]
 - ★ 문체 규칙: 친한 친구나 다정한 언니가 이야기하듯 따뜻하게 작성하세요.
 - ★ 필수 어미: "~해요", "~했답니다", "~더라고요", "~인 것 같아요" (부드러운 구어체 강제)
-- ★ 필수 요소: "저도 정말 공감되는데요", "이런 고민 한 번쯤 해보셨죠?" 등 공감 문구 3개 이상 삽입
+- ★ 필수 요소: 독자의 경험에 공감하는 자연스러운 표현을 글 흐름에 맞게 녹여 넣으세요. (단, 특정 문구를 반복 삽입하지 말 것)
 - ★ 금지: "~함", "~임", "~이다" 등 딱딱한 어휘, 격식 차리는 표현 전면 금지
+- ★ 금지: "이거정말", "진짜 되는데요" 같은 검증 문구 삽입 금지
       `.trim();
       break;
     case 'professional':
@@ -400,11 +412,20 @@ function getToneInstruction(toneStyle?: string): string {
   return instruction ? `\n\n${instruction}\n` : '';
 }
 
+// ✅ [2026-01-30] 제품 정보 파라미터 타입
+interface ProductInfoForPrompt {
+  name?: string;
+  spec?: string;
+  price?: string;
+  reviews?: string[];
+}
+
 export function buildFullPrompt(
   mode: PromptMode,
   categoryHint?: string,
   isFullAuto: boolean = false,
-  toneStyle?: string
+  toneStyle?: string,
+  productInfo?: ProductInfoForPrompt  // ✅ [2026-01-30] 제품 정보 파라미터 추가
 ): string {
   // 1. 기본 2축 분리 프롬프트
   const basePrompt = buildSystemPromptFromHint(mode, categoryHint);
@@ -433,5 +454,96 @@ export function buildFullPrompt(
 - 원본 제목의 핵심 키워드와 주어를 유지하되, 나머지 30%를 AI의 후킹/심리 트리거로 채워 클릭률을 높이세요.
 - **[필수]** 주제를 왜곡하거나 정보를 누락하지 말고, 원본의 의도를 살리면서 더 매력적인 문장으로 변환하세요.`;
 
+  // ✅ [2026-01-30] 쇼핑커넥트 제품 정보 블록 추가
+  if (productInfo && (productInfo.name || productInfo.spec || productInfo.price || productInfo.reviews?.length)) {
+    console.log(`[PromptLoader] 🛒 쇼핑커넥트 제품 정보 프롬프트에 추가`);
+
+    let productBlock = `\n\n[쇼핑커넥트 제품 정보 - 반드시 활용하세요!]\n`;
+
+    if (productInfo.name) {
+      productBlock += `📦 제품명: ${productInfo.name}\n`;
+    }
+    if (productInfo.price) {
+      productBlock += `💰 가격: ${productInfo.price}\n`;
+    }
+    if (productInfo.spec) {
+      productBlock += `📋 스펙: ${productInfo.spec}\n`;
+    }
+    if (productInfo.reviews && productInfo.reviews.length > 0) {
+      productBlock += `⭐ 실제 구매자 리뷰:\n`;
+      productInfo.reviews.forEach((review, idx) => {
+        productBlock += `  ${idx + 1}. "${review.substring(0, 200)}${review.length > 200 ? '...' : ''}"\n`;
+      });
+    }
+
+    productBlock += `
+[제품 정보 활용 지침]
+- 위 제품 정보를 본문에 자연스럽게 녹여서 작성하세요.
+- 가격 정보는 "현재 XX원에 판매 중" 형식으로 언급하세요.
+- 스펙 정보는 장점으로 풀어서 설명하세요 (예: "크기가 445mm로 슬림해서 어디든 배치 가능").
+- 리뷰는 "실제 구매하신 분들 반응을 보면~" 형식으로 인용하세요.
+- 정보를 지어내지 말고, 위에 제공된 정보만 활용하세요.
+
+[🛒 쇼핑커넥트 필수 제목 규칙]
+⛔ 크롤링된 상품 1개만 사용. 다른 상품과 비교 금지!
+
+📌 상품명 보존 규칙 (가장 중요!):
+- 상품명에서 브랜드명 + 모델명 + 핵심 스펙(용량, 사이즈, 색상 등)은 반드시 보존
+- 홍보성 수식어("프리미엄", "최고급", "인기")만 제거 가능
+- ⛔ 스펙 숫자(8GB, 256GB, 14인치 등)는 절대 변형/합산/생략 금지!
+  ❌ "8GB/256GB" → "/25614" (숫자 합산 금지!)
+  ❌ "8GB/256GB" → 생략 (스펙 삭제 금지!)
+  ✅ "8GB/256GB" → "8GB 256GB" 또는 그대로 유지
+- 예: "LG전자 오브제컬렉션 코드제로 A9S 무선청소기" → "LG 코드제로 A9S 무선청소기"
+- 예: "베이직북14 사무용 노트북 윈도우11 8GB/256GB" → "베이직북14 노트북 윈도우11 8GB 256GB"
+
+📌 제목 공식 (25~50자):
+{보존된 상품명} + {후킹 키워드 1개}
+⚠️ 상품명이 길면 50자까지 허용! 상품명을 짧게 줄이는 것보다 정확하게 전달하는 것이 중요!
+
+📌 후킹 키워드 (반드시 1개만 선택, 자연스러운 문장으로):
+- 경험: "실사용 후기", "솔직후기", "직접 써본"
+- 궁금증: "살까 말까", "어떨까", "진짜일까"
+- 시간: "1개월 사용기", "2주 써보니", "한달 후기"
+
+⛔ 금지 패턴:
+- 상품명만 (중복됨)
+- "총정리", "리뷰"로만 끝남 (흔함)
+- OO vs OO 비교 (상품 1개뿐)
+- ⛔ "장단점 꿀팁 내돈내산 비교 실사용 추천" 같은 키워드 나열 (스팸처럼 보임!)
+- ⛔ 스펙 숫자 변형/합산 (정확성 훼손!)`;
+
+    finalPrompt += productBlock;
+  }
+
+  return finalPrompt;
+}
+
+/**
+ * 쇼핑커넥트 전용 프롬프트 로드
+ * 
+ * articleType에 따라 다른 .prompt 파일을 로드하고,
+ * {{TONE_STYLE}} 플레이스홀더를 실제 toneStyle로 치환합니다.
+ * 
+ * @param articleType - 'shopping_review' | 'shopping_expert_review'
+ * @param toneStyle - 적용할 톤 스타일
+ * @returns 로드된 프롬프트 (로드 실패 시 빈 문자열)
+ */
+export function loadShoppingPrompt(articleType: string, toneStyle: string): string {
+  const promptFile = articleType === 'shopping_expert_review'
+    ? 'affiliate/shopping_expert_review.prompt'
+    : 'affiliate/shopping_review.prompt';
+
+  const rawPrompt = loadPromptFile(promptFile);
+
+  if (!rawPrompt) {
+    console.warn(`[PromptLoader] 쇼핑 프롬프트 로드 실패: ${promptFile}`);
+    return '';
+  }
+
+  // {{TONE_STYLE}} 플레이스홀더 치환
+  const finalPrompt = rawPrompt.replace(/\{\{TONE_STYLE\}\}/g, toneStyle || 'friendly');
+
+  console.log(`[PromptLoader] ✅ 쇼핑 프롬프트 로드: ${promptFile} (tone: ${toneStyle})`);
   return finalPrompt;
 }

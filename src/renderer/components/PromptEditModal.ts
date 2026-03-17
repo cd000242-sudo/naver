@@ -27,6 +27,9 @@ export async function showHeadingPromptEditModal(headingIndex: number): Promise<
         const idx = Number.isFinite(headingIndex) ? headingIndex : 0;
         const headingTitle =
             (window as any)._headingTitles?.[idx] ||
+            // ✅ [2026-03-16 FIX] data-heading-title 우선 사용 (배지 오염 방지)
+            (document.querySelector(`.prompt-item[data-index="${idx + 1}"]`) as HTMLElement | null)?.getAttribute('data-heading-title')?.trim() ||
+            (document.querySelector(`.prompt-item[data-index="${idx + 1}"] .heading-title-pure`) as HTMLElement | null)?.textContent?.trim() ||
             (document.querySelector(`.prompt-item[data-index="${idx + 1}"] .heading-title-text`) as HTMLElement | null)?.textContent?.trim() ||
             `소제목 ${idx + 1}`;
         const title = String(headingTitle || '').trim();
@@ -38,8 +41,8 @@ export async function showHeadingPromptEditModal(headingIndex: number): Promise<
                 const hp = (window as any)._headingPrompts || [];
                 const v = String(hp[idx] || '').trim();
                 if (v) return v;
-            } catch {
-                // ignore
+            } catch (e) {
+                console.warn('[PromptEditModal] catch ignored:', e);
             }
             return generateEnglishPromptForHeadingSync(title);
         })();
@@ -71,8 +74,8 @@ export async function showHeadingPromptEditModal(headingIndex: number): Promise<
         const close = () => {
             try {
                 overlay.remove();
-            } catch {
-                // ignore
+            } catch (e) {
+                console.warn('[PromptEditModal] catch ignored:', e);
             }
         };
 
@@ -105,8 +108,8 @@ export async function showHeadingPromptEditModal(headingIndex: number): Promise<
                     const hp = (window as any)._headingPrompts || [];
                     hp[idx] = v;
                     (window as any)._headingPrompts = hp;
-                } catch {
-                    // ignore
+                } catch (e) {
+                    console.warn('[PromptEditModal] catch ignored:', e);
                 }
                 const promptEl = document.querySelector(`.prompt-item[data-index="${idx + 1}"] .prompt-text`) as HTMLElement | null;
                 if (promptEl) {

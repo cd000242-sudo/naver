@@ -1,0 +1,63 @@
+﻿═══════════════════════════════════════════════════════
+1. DELEGATE CALLS ANALYSIS
+═══════════════════════════════════════════════════════
+Found 21 delegate calls:
+  publishHelpers: 5 methods → selectCategoryInPublishModal, debugCategoryElements, setScheduleDateTime, debugPublishModal, publishScheduled
+  editorHelpers: 4 methods → insertQuotation, typeBodyWithRetry, applyStructuredContent, setFontSize
+  imageHelpers: 12 methods → insertImageViaUploadButton, insertBase64ImageAtCursor, insertImageViaBase64, setImageSizeToDocumentWidth, insertSingleImage, verifyImagePlacement, insertImagesAtCurrentCursor, setImageSizeAndAttachLink, attachLinkToLastImage, insertImages, generateAltWithSource, applyCaption
+
+═══════════════════════════════════════════════════════
+2. HELPER EXPORTS ANALYSIS
+═══════════════════════════════════════════════════════
+imageHelpers exports: 13 → generateAltWithSource, applyCaption, setImageSizeToDocumentWidth, verifyImagePlacement, insertImageViaUploadButton, insertBase64ImageAtCursor, insertImageViaBase64, insertSingleImage, insertImagesAtHeadings, insertImagesAtCurrentCursor, setImageSizeAndAttachLink, attachLinkToLastImage, insertImages
+publishHelpers exports: 6 → selectCategoryInPublishModal, debugCategoryElements, setScheduleDateTime, debugPublishModal, publishScheduled, publishBlogPost
+editorHelpers exports: 5 → insertQuotation, typeBodyWithRetry, applyStructuredContent, setFontSize, extractBodyForHeading
+
+═══════════════════════════════════════════════════════
+3. DELEGATE ↔ EXPORT CROSS-CHECK
+═══════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════
+4. SELF PARAMETER CHECK
+═══════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════
+5. IMPORT CHECK
+═══════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════
+6. DELEGATE BODY SIZE CHECK
+═══════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════
+7. DUPLICATE / REMNANT CHECK
+═══════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════
+8. LOCAL UTILITY SYNC CHECK
+═══════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════
+FINAL REPORT
+═══════════════════════════════════════════════════════
+
+✅ INFO (6):
+  ✅ Import found: publishHelpers at L25: import * as publishHelpers from './automation/publishHelpers';
+  ✅ Import found: editorHelpers at L26: import * as editorHelpers from './automation/editorHelpers';
+  ✅ Import found: imageHelpers at L24: import * as imageHelpers from './automation/imageHelpers';
+  ✅ safeKeyboardType exists in both main and editorHelpers (local copy)
+  ✅ smartTypeWithAutoHighlight exists in editorHelpers (local copy)
+  ✅ extractCoreKeywords exists in editorHelpers (local copy)
+
+⚠️ WARNINGS (3):
+  ⚠️ ORPHAN EXPORT: imageHelpers.insertImagesAtHeadings() is exported but NOT called from naverBlogAutomation.ts
+  ⚠️ ORPHAN EXPORT: publishHelpers.publishBlogPost() is exported but NOT called from naverBlogAutomation.ts
+  ⚠️ ORPHAN EXPORT: editorHelpers.extractBodyForHeading() is exported but NOT called from naverBlogAutomation.ts
+
+❌ ISSUES (0):
+
+════════════════════════════════════
+🎉 NO CRITICAL ISSUES FOUND!
+════════════════════════════════════
+
+Full report saved to verification_report.txt

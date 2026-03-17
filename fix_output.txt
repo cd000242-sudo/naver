@@ -1,0 +1,44 @@
+﻿Original: 8961 lines
+
+=== STEP 1: Add imageHelpers import ===
+ℹ️ imageHelpers import already exists
+
+=== STEP 2: Replace remnant methods ===
+
+Methods to replace (13):
+  applyCaption: L8384-L8402 (19 lines)
+  generateAltWithSource: L8338-L8382 (45 lines)
+  insertImages: L7069-L8332 (1264 lines)
+  attachLinkToLastImage: L6673-L7067 (395 lines)
+  setImageSizeAndAttachLink: L6459-L6670 (212 lines)
+  insertImagesAtCurrentCursor: L6334-L6454 (121 lines)
+  verifyImagePlacement: L5349-L5465 (117 lines)
+  insertImagesAtHeadings: L5238-L5242 (5 lines)
+  insertSingleImage: L5107-L5233 (127 lines)
+  setImageSizeToDocumentWidth: L5019-L5105 (87 lines)
+  insertImageViaBase64: L4895-L5014 (120 lines)
+  insertBase64ImageAtCursor: L4593-L4890 (298 lines)
+  insertImageViaUploadButton: L4326-L4588 (263 lines)
+
+=== STEP 3: Execute replacements ===
+✅ applyCaption: L8384 — 19 lines → 3 lines (saved 16)
+✅ generateAltWithSource: L8338 — 45 lines → 3 lines (saved 42)
+✅ insertImages: L7069 — 1264 lines → 3 lines (saved 1261)
+✅ attachLinkToLastImage: L6673 — 395 lines → 3 lines (saved 392)
+✅ setImageSizeAndAttachLink: L6459 — 212 lines → 3 lines (saved 209)
+✅ insertImagesAtCurrentCursor: L6334 — 121 lines → 3 lines (saved 118)
+✅ verifyImagePlacement: L5349 — 117 lines → 3 lines (saved 114)
+✅ insertImagesAtHeadings: L5238 — 5 lines → 3 lines (saved 2)
+✅ insertSingleImage: L5107 — 127 lines → 3 lines (saved 124)
+✅ setImageSizeToDocumentWidth: L5019 — 87 lines → 3 lines (saved 84)
+✅ insertImageViaBase64: L4895 — 120 lines → 3 lines (saved 117)
+✅ insertBase64ImageAtCursor: L4593 — 298 lines → 3 lines (saved 295)
+✅ insertImageViaUploadButton: L4326 — 263 lines → 3 lines (saved 260)
+
+=== STEP 4: Fix parameter mismatches ===
+  imageHelpers.insertImagesAtCurrentCursor signature: export async function insertImagesAtCurrentCursor(self: any, images: any[], linkUrl?: string): Promise<void> {
+  imageHelpers.setImageSizeAndAttachLink signature: export async function setImageSizeAndAttachLink(self: any, linkUrl?: string): Promise<void> {
+  imageHelpers.attachLinkToLastImage signature: export async function attachLinkToLastImage(self: any, linkUrl: string): Promise<void> {
+  imageHelpers.verifyImagePlacement signature: export async function verifyImagePlacement(self: any, expectedCount: number): Promise<boolean> {
+
+✅ Done! 8961 lines → 5927 lines (removed 3034 lines)

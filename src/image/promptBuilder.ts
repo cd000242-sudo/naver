@@ -1,6 +1,20 @@
 /**
  * PromptBuilder - 이미지 생성 프롬프트 빌더 모듈
  * 프롬프트 생성 로직을 완벽하게 모듈화
+ * 
+ * ✅ [2026-02-24] 100점 리팩토링:
+ *   - 모든 프롬프트를 "긍정 지시 우선" 구조로 전환
+ *   - heading/subject를 최상단 배치 (AI 가중치 극대화)
+ *   - 부정 지시(NO X) 최소화 → 긍정 대체어로 변환
+ *   - 자기모순 제거 (텍스트 크기 지시 통일)
+ *   - 4지선다 옵션 제거 (이미지 AI는 reasoning 불가)
+ *   - 프롬프트 길이 50% 이상 축소 (핵심 농도 향상)
+ * 
+ * ✅ [2026-03-01] AI 추론 기반 리팩토링:
+ *   - categoryStyle을 하드코딩 스타일이 아닌 AI 추론 지시로 전환
+ *   - personRule 추가: 인물 규칙 (한국인 하드코딩)
+ *   - STYLE: 지시 제거 → REASONING: 지시로 대체 (AI가 주제에서 추론)
+ *   - 쇼핑커넥트만 전용 스타일 유지
  */
 
 import { ImageRequestItem } from './types.js';
@@ -9,9 +23,13 @@ import { sanitizeImagePrompt } from './imageUtils.js';
 export interface PromptOptions {
     isThumbnail: boolean;
     postTitle?: string;
-    categoryStyle: string;
+    categoryStyle: string; // 쇼핑커넥트 전용 스타일 또는 빈 문자열 (AI 추론 시)
+    personRule?: string; // ✅ [2026-03-01] 인물 규칙 (한국인 하드코딩)
     isShoppingConnect?: boolean;
     hasCollectedImages?: boolean; // ✅ 추가: collectedImages가 있을 때 참조 이미지 모드 활성화
+    provider?: string; // ✅ [2026-01-30] 이미지 생성 provider: 'nano-banana-pro' | 'deepinfra' | 'fal' | 'stability'
+    imageStyle?: string; // ✅ [2026-03-01] 적용할 이미지 스타일
+    stylePrompt?: string; // ✅ [2026-03-01] 스타일 상세 프롬프트
 }
 
 export class PromptBuilder {
@@ -19,7 +37,8 @@ export class PromptBuilder {
      * 최적의 이미지 생성 프롬프트를 조립합니다.
      */
     static build(item: ImageRequestItem, options: PromptOptions): string {
-        const { isThumbnail, postTitle, categoryStyle, isShoppingConnect } = options;
+        const { isThumbnail, postTitle, categoryStyle, isShoppingConnect, imageStyle, stylePrompt } = options;
+        const personRule = options.personRule || '';
 
         // 1. 기본 프롬프트 및 레퍼런스 체크
         const basePrompt = item.englishPrompt || sanitizeImagePrompt(item.prompt || item.heading || 'Abstract Image');
@@ -34,198 +53,160 @@ export class PromptBuilder {
 
         // 2. 레퍼런스 잠금(Lock) 문구 생성
         const referenceLock = hasReference
-            ? `
-REFERENCE IMAGE RULES (CRITICAL):
-- A reference product image is provided. You MUST keep the exact same product identity.
-- Do NOT change product model/variant, packaging design, colors, shapes, logo/brand marks, materials, or proportions.
-- Do NOT replace it with a different similar-looking product. Match the reference as closely as possible.
-- Keep the same product category and key visual details.
-`
+            ? `REFERENCE: Keep the exact same product identity from the provided reference image. Match model, colors, shape, logos, and proportions precisely.`
             : '';
 
-        // 3. 쇼핑 커넥트 모드 엄격성 강화
+        // 3. 쇼핑 커넥트 모드 강화
         const referenceStrictness = isShoppingConnect
-            ? `
-⚠️ ABSOLUTE PRODUCT IDENTITY (CRITICAL FOR SHOPPING CONNECT):
-- YOU MUST USE THE PROVIDED REFERENCE IMAGE AS THE SOURCE.
-- KEEP THE PRODUCT EXACTLY AS IT IS. DO NOT CHANGE COLORS, LOGOS, OR SHAPES.
-- Match the product appearance precisely. No generic versions.`
+            ? `PRODUCT IDENTITY: Use the provided reference image as the source. Keep the product exactly as-is — same colors, logos, shape, material.`
             : '';
 
-        // 4. 상황별 프롬프트 분기 (Thumbnail vs Infographic vs Section)
+        // 4. 상황별 프롬프트 분기
 
         // [Case A-1] ✅ 쇼핑커넥트 썸네일 (제품 이미지 유지 + 텍스트 오버레이)
         if (isThumbnail && postTitle && allowText && isShoppingConnect && options.hasCollectedImages) {
-            return this.buildShoppingConnectThumbnailPrompt(basePrompt, postTitle, categoryStyle, referenceLock);
+            return this.buildShoppingConnectThumbnailPrompt(basePrompt, postTitle, categoryStyle, referenceLock, imageStyle, stylePrompt);
         }
 
-        // [Case A-2] 일반 썸네일 (텍스트 포함) - 네이버 홈판 최적화
+        // [Case A-2] 일반 썸네일 - provider별 분기 처리
         if (isThumbnail && postTitle && allowText) {
-            return this.buildThumbnailWithTextPrompt(basePrompt, postTitle, categoryStyle, referenceStrictness, referenceLock);
+            if (options.provider === 'nano-banana-pro') {
+                console.log('[PromptBuilder] 🍌 나노바나나프로: AI가 직접 한글 텍스트 생성');
+                return this.buildThumbnailWithTextPrompt(basePrompt, postTitle, personRule, referenceStrictness, referenceLock, imageStyle, stylePrompt);
+            }
+            console.log(`[PromptBuilder] 🖼️ ${options.provider || 'unknown'}: NO TEXT 프롬프트 (후처리 오버레이)`);
+            return this.buildThumbnailNoTextPrompt(basePrompt, personRule, referenceLock, imageStyle, stylePrompt);
         }
 
         // [Case B] 썸네일 (텍스트 없음) - 시각적 임팩트 강조
         if (isThumbnail && postTitle) {
-            return this.buildThumbnailNoTextPrompt(basePrompt, categoryStyle, referenceLock);
+            return this.buildThumbnailNoTextPrompt(basePrompt, personRule, referenceLock, imageStyle, stylePrompt);
         }
 
         // [Case C] 인포그래픽/상세페이지 (텍스트 허용)
         if (allowText) {
-            return this.buildInfographicPrompt(basePrompt, item.heading, referenceLock);
+            return this.buildInfographicPrompt(basePrompt, item.heading, referenceLock, imageStyle, stylePrompt);
         }
 
-        // ✅ [Case D-1] 쇼핑커넥트 라이프스타일 이미지 (제품 이미지 기반 변환) - 100점짜리 구매욕구 자극
+        // ✅ [Case D-1] 쇼핑커넥트 라이프스타일 이미지
         if (isShoppingConnect && options.hasCollectedImages) {
-            return this.buildShoppingLifestylePrompt(basePrompt, item.heading, categoryStyle, referenceLock);
+            return this.buildShoppingLifestylePrompt(basePrompt, item.heading, categoryStyle, referenceLock, imageStyle, stylePrompt);
         }
 
-        // [Case D-2] 기본 소제목용 이미지 (텍스트 절대 금지)
-        return this.buildSectionImagePrompt(basePrompt, item.heading, categoryStyle, referenceLock);
+        // [Case D-2] 기본 소제목용 이미지
+        return this.buildSectionImagePrompt(basePrompt, item.heading, personRule, referenceLock, imageStyle, stylePrompt);
     }
 
     /**
      * [Case A] 썸네일 + 텍스트 포함 (네이버 홈판 최적화)
+     * ✅ [2026-03-01] AI 추론 기반: STYLE 제거 → AI가 주제에서 비주얼 추론
      */
     private static buildThumbnailWithTextPrompt(
         basePrompt: string,
         postTitle: string,
-        categoryStyle: string,
+        personRule: string,
         referenceStrictness: string,
-        referenceLock: string
+        referenceLock: string,
+        imageStyle?: string,
+        stylePrompt?: string
     ): string {
         const fullTitle = String(postTitle || '').trim();
-        return `Generate a 100-point MASTERPIECE blog thumbnail that PERFECTLY MATCHES the title: "${fullTitle}".
-Topic: ${basePrompt}.
-Aesthetic: Naver Homefeed Premium Style - high contrast, dynamic and energetic composition, vibrant colors, professional magazine quality.
-Category Style: ${categoryStyle}
+        const isRealistic = !imageStyle || imageStyle === 'realistic';
+        const styleInstruction = isRealistic
+            ? 'Magazine editorial quality, high contrast, vibrant colors, dynamic composition.'
+            : `ART STYLE: Render this scene in ${imageStyle}. ${stylePrompt}`;
 
-DESIGN REQUIREMENTS (NAVER HOMEFEED QUALITY):
-- Use BOLD, LARGE, and impactful typography for the title text overlay: "${fullTitle}".
-- Text must be CLEARLY VISIBLE and PROMINENT (use 48-64px equivalent font size for maximum readability).
-- THE TEXT SHOULD BE THE MAIN VISUAL ELEMENT. Make it BIG and BOLD. MAX 2 lines of text.
-- Use LARGE font sizes (around 48-64px equivalent) to ensure text is easily readable even on mobile.
+        // ✅ [2026-03-12 FIX v2] 프롬프트 전면 개선
+        // - 제목을 TOPIC으로 1회 포함 → 이미지 관련성 보장
+        // - TEXT OVERLAY 섹션에서만 렌더링 지시 → 중복 방지
+        // - 한글 텍스트 품질 향상: 간격·크기·배치 상세 지시
+        return `Create a Naver blog thumbnail about: "${fullTitle}"
+
+VISUAL SUBJECT: ${basePrompt}
 ${referenceStrictness}
-
-
-⚠️ CRITICAL TEXT PLACEMENT (ANTI-CROP SAFE ZONE FOR 1:1 RATIO):
-- ALL TEXT MUST be placed WITHIN THE CENTER 50% OF THE IMAGE (both width AND height).
-- NEVER place text near ANY EDGES. Leave at least 25% margin from ALL four sides.
-- Text should be placed in the LOWER-CENTER portion of the image (bottom 40% to 60% area).
-- Keep text in a SINGLE LINE or TWO SHORT LINES at most.
-- Use COMPACT text that fits within 60% of the image width.
-- TEXT MUST NOT EXTEND beyond the central safe zone.
-
-- Ensure high contrast between text and background using subtle shadows or glowing effects, but keep it elegant and professional.
-
-COMPOSITION & SUBJECT (CRITICAL FOR CTR):
-- The main subject (Hero Subject) must be CRYSTAL CLEAR and UNINTERRUPTED by text.
-- SQUARE 1:1 composition (1024x1024) - CRITICAL!
-- The PRODUCT/SUBJECT should occupy at least 60-70% of the visual space.
-- DYNAMIC & ENERGETIC composition (Avoid static or boring angles).
-- SINGLE COHESIVE IMAGE (NO collages, NO split-screen).
-- Place the main subject prominently in the center for mobile cropping.
-
 ${referenceLock}
+${personRule ? `PERSON: ${personRule}` : ''}
 
-⛔ ABSOLUTELY FORBIDDEN ELEMENTS (VIOLATION = 0 POINTS):
-- NO badges, labels, tags, ribbons, stamps, or stickers (especially in corners).
-- NO "리뷰" (Review) marks, stars, ratings, or any review indicators.
-- NO "SHOPPING CONNECT", "SHOPPING CONNECT REVIEW", "SC", or any English promotional phrases.
-- NO "후기" (Review), "체험단" (Experience Group), or any Korean promotional texts.
-- NO watermarks, logos, trademarks, or brand marks that are NOT part of the product.
-- NO promotional overlays like "EVENT", "SALE", "NEW", "HOT", "BEST", etc.
-- The ONLY text allowed is the title: "${fullTitle}".
+COMPOSITION:
+- Hero subject fills 60-70% of the frame, crystal clear.
+- ${styleInstruction}
+- Leave clean space in the lower 30% of image for text placement.
 
-ABSOLUTE REQUIREMENTS:
-- TOP-TIER professional photography/digital art style (Magazine Editorial Quality).
-- The resulting image must be visually stunning, unique, and viral-ready.
-- The text must feel like a SMALL SUBTITLE, not a headline. Keep it DISCREET.
-- PERFECT RELEVANCE between the visual subject and the title text.`;
+KOREAN TEXT OVERLAY (⚠️ CRITICAL RULES):
+- Render EXACTLY this Korean text ONCE: "${fullTitle}"
+- Place in the BOTTOM CENTER of the image.
+- Use BOLD sans-serif font, 36-48px equivalent size.
+- Split into 2 lines maximum if the title is long. Each line should be well-balanced in length.
+- Letter spacing must be generous (not cramped). Each character must be clearly separated.
+- Add a semi-transparent dark gradient behind the text for readability.
+- ⚠️ DO NOT render the title text more than once. DO NOT place text in multiple locations.
+- ⚠️ DO NOT overlap characters. Ensure clear spacing between every Korean character.
+
+No other text or watermark may appear.`;
     }
 
     /**
-     * ✅ [Case A-1] 쇼핑커넥트 썸네일 (제품 이미지 유지 + 텍스트 오버레이)
-     * 수집된 제품 이미지를 그대로 사용하면서 타이틀 텍스트만 오버레이
+     * [Case A-1] 쇼핑커넥트 썸네일 (제품 이미지 유지 + 텍스트 오버레이)
+     * ✅ 쇼핑커넥트는 전용 스타일 유지 (비즈니스 요구사항)
      */
     private static buildShoppingConnectThumbnailPrompt(
         basePrompt: string,
         postTitle: string,
         categoryStyle: string,
-        referenceLock: string
+        referenceLock: string,
+        imageStyle?: string,
+        stylePrompt?: string
     ): string {
         const fullTitle = String(postTitle || '').trim();
-        return `🛒 SHOPPING CONNECT THUMBNAIL: PRODUCT IMAGE WITH TEXT OVERLAY
+        const isRealistic = !imageStyle || imageStyle === 'realistic';
+        const styleInstruction = isRealistic
+            ? 'Clean product photography, e-commerce ready, 1:1 square'
+            : `ART STYLE: ${stylePrompt}`;
 
-⛔⛔⛔ ABSOLUTE CRITICAL RULE ⛔⛔⛔
-YOU ARE GIVEN A REFERENCE PRODUCT IMAGE.
-YOUR TASK IS TO KEEP THIS EXACT PRODUCT IMAGE AND ONLY ADD TEXT OVERLAY.
-
-🚫 WHAT YOU MUST NOT DO:
-- DO NOT CREATE A NEW BACKGROUND
-- DO NOT REPLACE THE PRODUCT WITH ANYTHING ELSE
-- DO NOT CREATE A "LIFESTYLE" OR "ARTISTIC" VERSION
-- DO NOT USE GRADIENTS, ABSTRACT BACKGROUNDS, OR SOLID COLORS AS THE MAIN VISUAL
-- DO NOT CHANGE THE PRODUCT IN ANY WAY
-
-✅ WHAT YOU MUST DO:
-1. USE THE REFERENCE PRODUCT IMAGE AS-IS (keep the product, keep the original background if present)
-2. ADD TEXT OVERLAY: "${fullTitle}"
-3. The product must REMAIN CLEARLY VISIBLE and be the HERO of the image
+        return `SHOPPING THUMBNAIL: Keep the reference product image exactly as-is, add title text overlay only.
 
 ${referenceLock}
 
+PRODUCT PRESERVATION (CRITICAL):
+- The reference product image IS the hero visual. Keep it 100% intact.
+- Product occupies 60-70% of the frame, fully visible and unobstructed.
+
+TEXT OVERLAY:
+- Add "${fullTitle}" in bold Korean typography over the lower-center area (bottom 40%).
+- High contrast text (white with shadow, or dark with glow). Maximum 2 lines.
+- Text must not obscure the product.
+
+STYLE: ${categoryStyle}, ${styleInstruction}.
 CONTEXT: ${basePrompt}
-CATEGORY: ${categoryStyle}
 
-TEXT OVERLAY REQUIREMENTS:
-- Add the title text: "${fullTitle}" in BOLD, LARGE typography
-- Place text in LOWER-CENTER portion of the image (bottom 40% area)
-- Use high contrast (white text with dark shadow, or dark text with light glow)
-- Text must NOT obscure the main product - product remains 100% visible
-- Keep text within the CENTER 60% of image width (avoid edge cropping)
-- MAX 2 lines of text
-
-COMPOSITION:
-- The PRODUCT from reference image = 60-70% of visual space
-- Text overlay = 30-40% (lower portion)
-- Product should remain unobstructed and clearly identifiable
-- SQUARE 1:1 composition (1024x1024)
-
-STYLE:
-- Clean, professional product photography style
-- Soft, neutral background if needed (NOT gradient, NOT abstract art)
-- Product-focused, e-commerce ready look
-- Samsung/LG advertisement quality
-
-⛔ FORBIDDEN ELEMENTS:
-- NO badges, labels, ribbons, stamps, or stickers
-- NO "리뷰", "SHOPPING CONNECT REVIEW", "SC", "후기" text
-- NO promotional overlays (EVENT, SALE, NEW, HOT, BEST)
-- The ONLY text allowed is the title: "${fullTitle}"
-
-⚠️ FINAL CHECK: Your output MUST contain the EXACT PRODUCT from the reference image. If the product is not visible or has been replaced, you have FAILED.`;
+Only "${fullTitle}" may appear as text.`;
     }
 
     /**
      * [Case B] 썸네일 + 텍스트 없음 (시각적 임팩트 강조)
-        */
+     * ✅ [2026-03-01] AI 추론 기반: STYLE 제거 → AI가 주제에서 비주얼 추론
+     */
     private static buildThumbnailNoTextPrompt(
         basePrompt: string,
-        categoryStyle: string,
-        referenceLock: string
+        personRule: string,
+        referenceLock: string,
+        imageStyle?: string,
+        stylePrompt?: string
     ): string {
-        return `Generate a premium, high-impact cinematic blog thumbnail without any text.
-Topic: ${basePrompt}.
-Aesthetic: Professional magazine cover style, high contrast, vibrant colors, artistic composition.
-Category Style: ${categoryStyle}
+        const isRealistic = !imageStyle || imageStyle === 'realistic';
+        const styleInstruction = isRealistic
+            ? 'Professional magazine cover quality. High contrast, vibrant colors, artistic lighting.'
+            : `ART STYLE: Render this scene in ${imageStyle} style. ${stylePrompt}`;
 
-REQUIREMENTS:
-- SINGLE COHESIVE IMAGE (NO collages, NO split-screen).
-- Place the main subject prominently.
-- Cinematic lighting, professional photography.
-- ABSOLUTELY NO TEXT, NO letters, NO words.
+        return `${basePrompt} — Premium cinematic blog thumbnail, text-free.
 
-${referenceLock}`;
+REASONING: Analyze the topic and infer the best style, lighting, and composition.
+${personRule ? `PERSON RULE: ${personRule}` : ''}
+${referenceLock}
+
+${styleInstruction}
+Single cohesive image with the subject prominently centered.
+Pure visual — absolutely no text, letters, or watermarks.`;
     }
 
     /**
@@ -234,140 +215,102 @@ ${referenceLock}`;
     private static buildInfographicPrompt(
         basePrompt: string,
         heading: string,
-        referenceLock: string
+        referenceLock: string,
+        imageStyle?: string,
+        stylePrompt?: string
     ): string {
-        return `Create a Korean e-commerce product detail page infographic image.
+        const isRealistic = !imageStyle || imageStyle === 'realistic';
+        const styleInstruction = isRealistic
+            ? 'High-end commercial photography + modern infographic design, sharp and print-ready.'
+            : `ART STYLE: Render this scene in ${imageStyle} style. ${stylePrompt}`;
 
-MAIN SUBJECT: "${basePrompt}"
-PRODUCT NAME/CONTEXT: "${heading}"
+        return `"${heading}" — Korean e-commerce product detail infographic.
 
+PRODUCT: ${basePrompt}
 ${referenceLock}
 
-LAYOUT REQUIREMENTS:
-- Clean white or very light background
-- Center the product prominently (photorealistic product rendering)
-- Add 3-6 feature callouts with simple icons
-- Add short, readable Korean text phrases (not gibberish)
-- Use neat grid layout, modern typography, and balanced spacing
-- Include a small "spec" box area (simple numbers/units) if appropriate
+LAYOUT:
+- Clean white background, product centered prominently.
+- 3-6 feature callouts with simple icons around the product.
+- Accurate, natural Korean text labels for each feature (3-10 words each).
+- Modern grid layout, balanced spacing, professional typography.
+- Include a small spec box with key numbers/units if appropriate.
 
-QUALITY:
-- High-end commercial product photography + modern infographic design
-- Sharp, clean, print-ready look
-
-TEXT REQUIREMENTS:
-- Korean language only
-- Keep phrases short and clear (e.g., 3~10 words)
-- No watermark
-
-ABSOLUTE REQUIREMENTS:
-- The resulting image must be unique and not similar to any other image in this batch.`;
+QUALITY: ${styleInstruction}`;
     }
 
     /**
      * [Case D] 기본 소제목용 이미지 (텍스트 절대 금지)
+     * ✅ [2026-03-01] AI 추론 기반 리팩토링:
+     *   - STYLE: 하드코딩 제거 → REASONING: AI가 주제에서 비주얼 추론
+     *   - personRule 파라미터로 인물 규칙 분리 (한국인 하드코딩)
      */
     private static buildSectionImagePrompt(
         basePrompt: string,
         heading: string,
-        categoryStyle: string,
-        referenceLock: string
+        personRule: string,
+        referenceLock: string,
+        imageStyle?: string,
+        stylePrompt?: string
     ): string {
-        return `Generate a photorealistic image for a Korean blog section.
-The image MUST look like a real photo taken in South Korea with Korean people.
+        // ✅ [2026-02-24] heading에 영어 번역(basePrompt)과 한국어 원본 모두 전달
+        const headingContext = heading && heading !== basePrompt
+            ? `TOPIC: "${heading}" (Korean original) = ${basePrompt}`
+            : basePrompt;
 
-SPECIFIC SUBJECT: "${heading}"
-CONTEXT: This is about "${basePrompt}" - create a visually compelling scene that directly represents this specific topic.
+        const isRealistic = !imageStyle || imageStyle === 'realistic';
+        const imageType = isRealistic ? 'photorealistic image' : `${imageStyle} style image`;
+        const styleInstruction = isRealistic
+            ? 'Hyper-realistic photography, 8K, professional lighting, modern Korean setting.\nDiverse visual approach: product shots, flat lays, environmental scenes, close-ups, overhead angles.'
+            : `ART STYLE: Render this scene in ${imageStyle} style. ${stylePrompt}`;
+
+        return `"${heading}" — Generate a ${imageType} that EXACTLY visualizes this specific topic.
+
+${headingContext}
 
 ${referenceLock}
 
-STYLE REQUIREMENTS:
-- ${categoryStyle}
-- HYPER-REALISTIC PHOTOGRAPHY, 8K resolution, stunning detail.
-- If people are present, they MUST be KOREAN with authentic K-style features.
-- If indoor/outdoor settings are shown, they MUST reflect modern South Korean environment.
-- High-end commercial photography, professional lighting.
-- Emotional and impactful composition.
+REASONING: Analyze the topic "${heading}" and infer the most appropriate color palette, lighting, and composition. Do NOT rely on generic templates — create a unique scene tailored to this specific subject.
+PERSON RULE: ${personRule}
 
-ABSOLUTE REQUIREMENTS:
-- NEVER TEXT. This MUST be a pure photograph with NO TEXT whatsoever.
-- NO letters, NO words, NO numbers, NO symbols, NO signs, NO labels, NO banners, NO watermarks.
-- Pure visual storytelling only.
-- If the subject is a product, focus on a "Desirable Lifestyle" composition that evokes positive emotions and a "Premium First-Class" feel (Conversion-Optimized).
-
-- The resulting image must be unique and not similar to any other image in this batch.
-
-Create a stunning, text-free, hyper-realistic Korean-style image that captures the essence of "${heading}".`;
+${styleInstruction}
+Pure visual — no text, letters, or watermarks.`;
     }
 
     /**
-     * ✅ [Case D-1] 쇼핑커넥트 라이프스타일 이미지 (제품 이미지 기반 변환)
-     * 100점짜리 구매욕구를 자극하는 프리미엄 라이프스타일 이미지 생성
-     * ✅ [2026-01-23 FIX] 참조 이미지 준수 강화 - AI가 다른 제품으로 생성하는 문제 해결
+     * [Case D-1] 쇼핑커넥트 라이프스타일 이미지 (제품 이미지 기반 변환)
+     * ✅ 쇼핑커넥트는 전용 스타일 유지 (비즈니스 요구사항)
      */
     private static buildShoppingLifestylePrompt(
         basePrompt: string,
         heading: string,
         categoryStyle: string,
-        referenceLock: string
+        referenceLock: string,
+        imageStyle?: string,
+        stylePrompt?: string
     ): string {
-        return `🛒 SHOPPING CONNECT MODE: PREMIUM LIFESTYLE TRANSFORMATION
+        const isRealistic = !imageStyle || imageStyle === 'realistic';
+        const styleInstruction = isRealistic
+            ? 'Samsung/LG advertisement level. Hyper-realistic commercial photography, 8K detail, K-style aesthetic.'
+            : `ART STYLE: Render this scene in ${imageStyle} style. ${stylePrompt}`;
 
-⛔⛔⛔ ULTRA-CRITICAL PRODUCT IDENTITY RULE ⛔⛔⛔
-YOU HAVE BEEN GIVEN A REFERENCE PRODUCT IMAGE.
-YOU MUST USE THAT EXACT PRODUCT IN YOUR OUTPUT.
-
-🚫 ABSOLUTELY FORBIDDEN:
-- DO NOT IMAGINE A DIFFERENT PRODUCT
-- DO NOT CREATE A "SIMILAR" PRODUCT
-- DO NOT CHANGE THE PRODUCT DESIGN, SHAPE, COLOR, OR MATERIAL
-- DO NOT USE A GENERIC VERSION OF THIS PRODUCT TYPE
-
-✅ YOU MUST:
-- COPY THE EXACT PRODUCT from the reference image
-- KEEP THE SAME: shape, color, material, size, proportions, logos, branding
-- The product in your output MUST be VISUALLY IDENTICAL to the reference
+        return `"${heading}" — Premium lifestyle photo featuring the EXACT product from the reference image.
 
 ${referenceLock}
 
-CONTEXT: "${heading}"
-TOPIC: "${basePrompt}"
+PRODUCT IDENTITY (CRITICAL):
+Use the exact product from the reference image. Same shape, color, material, size, logos, branding. The product in your output must be visually identical to the reference.
 
-🎯 TASK: LIFESTYLE TRANSFORMATION (NOT PRODUCT REPLACEMENT!)
-Take the EXACT product from the reference image and place it in a premium lifestyle setting.
-
-LIFESTYLE SETTING EXAMPLES:
-- Luxurious Korean apartment/penthouse interior
-- High-end café or hotel lounge setting
-- Elegant workspace with natural lighting
-- Minimalist, Instagram-worthy home decor
-
-COMPOSITION RULES:
-- Product should occupy 30-50% of the image
-- Show the product being USED or DISPLAYED in an enviable way
-- Include subtle luxury elements (marble, plants, soft textiles)
-- Natural, warm lighting (golden hour, soft window light)
-
-STYLE REQUIREMENTS:
+LIFESTYLE TRANSFORMATION:
+- Place the exact reference product in a premium, aspirational Korean lifestyle setting.
+- Choose a setting that naturally matches this product's category and "${heading}".
+- Product occupies 30-50% of the frame, shown being used or beautifully displayed.
+- Warm, natural lighting (golden hour, soft window light). Subtle luxury elements (marble, plants, soft textiles).
 - ${categoryStyle}
-- HYPER-REALISTIC commercial photography (Samsung, LG ad quality)
-- 8K resolution, stunning detail, professional lighting
-- Korean aesthetic sensibility (K-style home, K-beauty vibes)
-- Magazine editorial quality
 
-EMOTIONAL GOALS:
-- "This could be MY life" feeling
-- "I deserve this" emotional response
-- Purchase desire through visual appeal
+EMOTIONAL GOAL: "I want this in MY life" — purchase desire through visual aspiration.
 
-ABSOLUTE REQUIREMENTS:
-- NO TEXT, NO letters, NO words, NO watermarks
-- Pure visual storytelling only
-- The product MUST be the EXACT SAME as the reference image
-- NOT a similar product, NOT a generic version - THE EXACT SAME PRODUCT
-
-⚠️ FINAL CHECK: Before generating, verify that your output contains THE EXACT PRODUCT from the reference image, not a different or modified version.
-
-Generate a 100-point lifestyle image with the EXACT reference product.`;
+QUALITY: ${styleInstruction}
+Pure visual — no text, letters, or watermarks.`;
     }
 }

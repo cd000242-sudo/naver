@@ -1,11 +1,13 @@
 export const SHOPPING_SELECTORS = {
     // 네이버 브랜드 스토어 & 스마트스토어
     NAVER_BRAND: [
-        // 1순위: 리뷰 포토 (실사용기)
-        { priority: 'review', selector: '.review_item img, .review-photo img, .review_photo img, .photo_review img' },
-        // 2순위: 상세/제품 이미지
-        { priority: 'detail', selector: '.detail_img img, #INTRODUCE img, .se-main-container img, .product_detail img' },
-        // 3순위: 네이버 쇼핑 이미지 서버 (가장 확실함)
+        // 1순위: 갤러리/슬라이더 (상단 메인 이미지)
+        { priority: 'gallery', selector: '.swiper-slide img, ._2tD33dtvVN img, [class*="thumbnail"] img, [class*="gallery"] img, [class*="slider"] img, [class*="carousel"] img, .product_img img' },
+        // 2순위: 리뷰 포토 (실사용기)
+        { priority: 'review', selector: '.review_item img, .review-photo img, .review_photo img, .photo_review img, .YvTyxRfXAK img, img.K0hV0afCJe, [class*="review"] img' },
+        // 3순위: 상세/제품 이미지
+        { priority: 'detail', selector: '.detail_img img, #INTRODUCE img, .se-main-container img, .se-module-image img, .product_detail img, ._3xqm6OVqKs img, .product-description img' },
+        // 4순위: 네이버 쇼핑 이미지 서버 (가장 확실함)
         { priority: 'product', selector: 'img[src*="shop-phinf.pstatic.net"], img[src*="brand.naver.com"]' },
     ],
 
@@ -36,8 +38,13 @@ export const SHOPPING_SELECTORS = {
     UI_FILTERS: [
         '/icon/', '/logo/', '/button/', '/ad/', '/banner/',
         'loading.gif', 'blank.gif', 'placeholder', 'favicon',
-        'btn_', '_btn', 'nav_', '_nav'
+        'btn_', '_btn', 'nav_', '_nav',
+        // ✅ [2026-02-12] 뉴스/언론사/워터마크 이미지 패턴
+        '/news/', '/article/', '/reporter/', '/journalist/',
+        'watermark', 'copyright', 'press_',
+        'imgnews.pstatic.net', 'mimgnews.pstatic.net',
     ]
+
 };
 
 export const TEXT_SELECTORS = {

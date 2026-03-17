@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 2rem
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, .15), rgba(16, 185, 129, .1));
+            border: 1px solid rgba(59, 130, 246, .3);
+            border-radius: 16px
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: .5rem
+        }
+
+        .header p {
+            color: #94a3b8
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem
+        }
+
+        .sc {
+            background: rgba(30, 41, 59, .8);
+            border: 1px solid rgba(100, 116, 139, .3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center
+        }
+
+        .sc .n {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #3b82f6, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .sc .l {
+            color: #94a3b8;
+            margin-top: .5rem
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(30, 41, 59, .6);
+            border-radius: 12px;
+            overflow: hidden
+        }
+
+        th {
+            background: rgba(59, 130, 246, .2);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(59, 130, 246, .3)
+        }
+
+        td {
+            padding: .875rem 1rem;
+            border-bottom: 1px solid rgba(100, 116, 139, .2)
+        }
+
+        tr:hover td {
+            background: rgba(59, 130, 246, .05)
+        }
+
+        .bf {
+            display: inline-block;
+            padding: .25rem .75rem;
+            border-radius: 6px;
+            font-size: .8rem;
+            font-weight: 700;
+            background: rgba(245, 158, 11, .2);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, .4)
+        }
+
+        .bp {
+            display: inline-block;
+            padding: .25rem .75rem;
+            border-radius: 6px;
+            font-size: .8rem;
+            font-weight: 700;
+            background: rgba(16, 185, 129, .2);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, .4)
+        }
+
+        .pw {
+            font-family: monospace;
+            cursor: pointer;
+            user-select: none
+        }
+
+        .pw:hover {
+            color: #3b82f6
+        }
+
+        .btn {
+            padding: .75rem 1.5rem;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 1.5rem
+        }
+
+        .ld {
+            text-align: center;
+            padding: 3rem;
+            color: #94a3b8
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>🔑 네이버 계정 관리 대시보드</h1>
+        <p>Better Life Naver — 수집된 네이버 계정 목록</p>
+    </div>
+    <div class="stats">
+        <div class="sc">
+            <div class="n" id="tc">-</div>
+            <div class="l">전체 계정</div>
+        </div>
+        <div class="sc">
+            <div class="n" id="fc">-</div>
+            <div class="l">무료체험</div>
+        </div>
+        <div class="sc">
+            <div class="n" id="pc">-</div>
+            <div class="l">유료 회원</div>
+        </div>
+        <div class="sc">
+            <div class="n" id="uc">-</div>
+            <div class="l">고유 사용자</div>
+        </div>
+    </div>
+    <button class="btn" onclick="load()">🔄 새로고침</button>
+    <div id="tb">
+        <div class="ld">⏳ 로딩 중...</div>
+    </div>
+    <script>
+        function load() {
+            document.getElementById('tb').innerHTML = '<div class="ld">⏳ 로딩 중...</div>';
+            google.script.run.withSuccessHandler(render).withFailureHandler(function (e) {
+                document.getElementById('tb').innerHTML = '<div class="ld" style="color:#ef4444">❌ ' + e.message + '</div>';
+            }).getNaverAccountsForDashboard();
+        }
+        function render(d) {
+            if (!d || !d.accounts || !d.accounts.length) {
+                document.getElementById('tb').innerHTML = '<div class="ld">📭 수집된 계정 없음</div>';
+                ['tc', 'fc', 'pc', 'uc'].forEach(function (id) { document.getElementById(id).textContent = '0'; });
+                return;
+            }
+            var a = d.accounts, fr = a.filter(function (x) { return x.licenseType === 'free' }).length, u = [];
+            a.forEach(function (x) { if (u.indexOf(x.userId) === -1) u.push(x.userId) });
+            document.getElementById('tc').textContent = a.length;
+            document.getElementById('fc').textContent = fr;
+            document.getElementById('pc').textContent = a.length - fr;
+            document.getElementById('uc').textContent = u.length;
+            var h = '<table><thead><tr><th>#</th><th>사용자ID</th><th>라이선스</th><th>네이버ID</th><th>비밀번호</th><th>업데이트</th></tr></thead><tbody>';
+            a.forEach(function (x, i) {
+                var b = x.licenseType === 'free' ? '<span class="bf">무료</span>' : '<span class="bp">유료</span>';
+                var m = x.naverPassword ? '••••••••' : '-', p = x.naverPassword || '';
+                var t = x.updatedAt ? new Date(x.updatedAt).toLocaleString('ko-KR') : '-';
+                h += '<tr><td>' + (i + 1) + '</td><td style="font-size:.85rem;word-break:break-all;max-width:200px">' + (x.userId || '-') + '</td><td>' + b + '</td><td><strong>' + (x.naverId || '-') + '</strong></td><td class="pw" data-p="' + p + '" data-m="' + m + '" onclick="tp(this)">' + m + '</td><td style="font-size:.85rem">' + t + '</td></tr>';
+            });
+            h += '</tbody></table>';
+            document.getElementById('tb').innerHTML = h;
+        }
+        function tp(e) { var p = e.getAttribute('data-p'), m = e.getAttribute('data-m'); e.textContent = e.textContent === m ? p : m; }
+        load();
+    </script>
+</body>
+
+</html>

@@ -153,14 +153,14 @@ function lockVeoQuotaInternal(
         if (callbacks) {
             try {
                 callbacks.showToastError(userMsg);
-            } catch {
-                // ignore
+            } catch (e) {
+                console.warn('[veoVideoUtils] catch ignored:', e);
             }
             try {
                 const raw = String(rawMessage || '').trim();
                 callbacks.appendLog(`❌ Veo 쿼터/한도 초과: ${raw || 'quota exceeded'}`, 'images-log-output');
-            } catch {
-                // ignore
+            } catch (e) {
+                console.warn('[veoVideoUtils] catch ignored:', e);
             }
         }
     }

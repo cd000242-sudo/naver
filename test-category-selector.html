@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>카테고리 선택 테스트 - 네이버 블로그 발행 모달 시뮬레이션</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .publish_modal {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* 네이버 블로그 카테고리 드롭다운 시뮬레이션 */
+        .publish_category {
+            margin: 10px 0;
+        }
+
+        .category_selector {
+            position: relative;
+        }
+
+        button.select_btn {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            text-align: left;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        button.select_btn:hover {
+            border-color: #03c75a;
+        }
+
+        .category_list {
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ccc;
+            max-height: 200px;
+            overflow-y: auto;
+            position: absolute;
+            width: 100%;
+            background: white;
+            z-index: 100;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .category_list.open {
+            display: block;
+        }
+
+        .category_list li.category_item {
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .category_list li.category_item:hover {
+            background: #e8f5e9;
+        }
+
+        .category_list li.category_item span.text {
+            display: block;
+        }
+
+        /* data-testid 기반 항목 */
+        [data-testid^="categoryItemText_"] {
+            display: block;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .result.pass {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+        }
+
+        .result.fail {
+            background: #ffebee;
+            border: 1px solid #f44336;
+        }
+
+        .result.info {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+        }
+
+        #log {
+            margin-top: 20px;
+            padding: 10px;
+            background: #263238;
+            color: #aed581;
+            font-family: monospace;
+            font-size: 12px;
+            border-radius: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>카테고리 선택 로직 테스트</h2>
+
+    <!-- 시나리오 1: data-testid 기반 (네이버 스마트에디터 표준) -->
+    <div class="publish_modal" id="scenario1">
+        <h3>시나리오 1: data-testid 기반 드롭다운</h3>
+        <div class="publish_category">
+            <div class="category_selector">
+                <button class="select_btn" data-testid="seOneCategoryBtn">
+                    <span class="text">카테고리 선택</span>
+                </button>
+                <ul class="category_list" id="list1">
+                    <li class="category_item"><span data-testid="categoryItemText_0" class="text">일상·생각</span></li>
+                    <li class="category_item"><span data-testid="categoryItemText_1" class="text">맛집 리뷰</span></li>
+                    <li class="category_item"><span data-testid="categoryItemText_2" class="text">IT·테크</span></li>
+                    <li class="category_item"><span data-testid="categoryItemText_3" class="text">여행</span></li>
+                    <li class="category_item"><span data-testid="categoryItemText_4" class="text">건강·운동</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 시나리오 2: class 기반 드롭다운 (구버전 에디터) -->
+    <div class="publish_modal" id="scenario2" style="margin-top: 20px;">
+        <h3>시나리오 2: class 기반 드롭다운 + 특수문자 카테고리명</h3>
+        <div class="se-postCategory">
+            <button class="select_btn" id="cat-btn-2">
+                <span class="text">카테고리</span>
+            </button>
+            <ul class="category_list" id="list2">
+                <li class="category_item"><span class="text">비즈니스/경제</span></li>
+                <li class="category_item"><span class="text">스타·연예인</span></li>
+                <li class="category_item"><span class="text">건강_웰빙</span></li>
+                <li class="category_item"><span class="text">자동차 - 바이크</span></li>
+                <li class="category_item"><span class="text">인테리어\DIY</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 시나리오 3: 역방향 포함 매칭 테스트 -->
+    <div class="publish_modal" id="scenario3" style="margin-top: 20px;">
+        <h3>시나리오 3: 역방향 포함 매칭 (targetName이 더 긴 경우)</h3>
+        <div class="PublishCategory">
+            <button class="select_btn" id="cat-btn-3">
+                <span class="text">카테고리</span>
+            </button>
+            <ul class="category_list" id="list3">
+                <li class="category_item"><span class="text">맛집</span></li>
+                <li class="category_item"><span class="text">여행</span></li>
+                <li class="category_item"><span class="text">IT</span></li>
+                <li class="category_item"><span class="text">건강</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="log"></div>
+
+    <script>
+        // 드롭다운 열기/닫기 로직
+        document.querySelectorAll('.select_btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const list = btn.nextElementSibling;
+                if (list) list.classList.toggle('open');
+            });
+        });
+
+        // 카테고리 항목 클릭 로직
+        document.querySelectorAll('.category_item').forEach(item => {
+            item.addEventListener('click', () => {
+                const text = item.querySelector('.text')?.textContent || item.textContent;
+                const btn = item.closest('.publish_modal').querySelector('.select_btn .text, .select_btn');
+                if (btn) {
+                    const textEl = btn.querySelector('.text') || btn;
+                    textEl.textContent = text;
+                }
+                const list = item.closest('.category_list');
+                if (list) list.classList.remove('open');
+                log('✅ 카테고리 선택됨: ' + text);
+            });
+        });
+
+        function log(msg) {
+            const el = document.getElementById('log');
+            el.textContent += new Date().toLocaleTimeString() + ' ' + msg + '\n';
+            el.scrollTop = el.scrollHeight;
+        }
+
+        log('🚀 테스트 페이지 로드 완료');
+        log('📋 시나리오 1: data-testid 기반 (5개 카테고리)');
+        log('📋 시나리오 2: class 기반 + 특수문자 (5개 카테고리)');
+        log('📋 시나리오 3: 역방향 매칭 (4개 카테고리)');
+    </script>
+</body>
+
+</html>

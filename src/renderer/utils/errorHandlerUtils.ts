@@ -43,19 +43,9 @@ export function showError(message: string, details?: any): void {
     // 사용자 친화적인 오류 메시지 표시
     const userMessage = `🚨 오류 발생\n\n${message}\n\n문제가 지속되면 관리자에게 문의해주세요.`;
 
-    // 로컬에 오류 로그 저장
-    try {
-        const errorLog = {
-            timestamp: new Date().toISOString(),
-            message: message,
-            details: details,
-            userAgent: navigator.userAgent,
-            url: window.location.href
-        };
-        localStorage.setItem('lastError', JSON.stringify(errorLog));
-    } catch (e) {
-        console.error('[Error] 오류 로그 저장 실패:', e);
-    }
+    // ✅ [2026-03-10 CLEANUP] localStorage.setItem('lastError') dead write 제거
+    // 이 값은 코드베이스 어디에서도 getItem으로 읽히지 않았음
+    console.warn('[Error] 오류 로그:', { timestamp: new Date().toISOString(), message, details });
 
     alert(userMessage);
 }

@@ -11,6 +11,17 @@ import { Logger } from '../utils/logger.js';
 import { ensureLicenseValid, enforceFreeTier, isFreeTierUser } from '../utils/authUtils.js';
 import { sendLog, sendStatus, setMainWindowRef } from '../utils/ipcHelpers.js';
 
+// ✅ [FIX-6] 자동화 실행 뮤텍스 — 동시 실행 절대 방지
+let executionLock: Promise<any> | null = null;
+
+export function getExecutionLock(): Promise<any> | null {
+    return executionLock;
+}
+
+export function setExecutionLock(lock: Promise<any> | null): void {
+    executionLock = lock;
+}
+
 // ============================================
 // Types
 // ============================================
@@ -94,15 +105,21 @@ export async function validateAutomationRun(): Promise<{ valid: true } | { valid
         const now = Date.now();
         const timeSinceLastRun = now - lastRunTime;
 
-        // 5분 이상 실행 중이면 강제 리셋
-        if (timeSinceLastRun > 300000) {
-            Logger.warn('[automation:run] 자동화가 5분 이상 실행 중이므로 강제로 리셋합니다.');
+        // ✅ [FIX-3] 15분 이상 실행 중이면 강제 리셋 (heartbeat 덕분에 진짜 stale만 감지)
+        if (timeSinceLastRun > 900000) {
+            Logger.warn('[automation:run] 자동화가 15분 이상 응답 없으므로 강제로 리셋합니다.');
             await AutomationService.closeAllSessions();
         } else {
             const message = '이미 자동화가 실행 중입니다.';
             sendStatus({ success: false, message });
             return { valid: false, response: { success: false, message } };
         }
+    }
+
+    // ✅ [FIX-6] 이전 실행이 아직 진행 중이면 대기 (경쟁 방지)
+    if (executionLock) {
+        Logger.warn('[automation:run] 이전 실행 완료 대기 중...');
+        await executionLock.catch(() => { });
     }
 
     return { valid: true };
@@ -160,8 +177,10 @@ export async function handleAutomationCancel(): Promise<AutomationResponse> {
         return { success: false, message: '라이선스 인증이 필요합니다.' };
     }
 
+    // ✅ [2026-03-11 FIX] isRunning 체크 제거 — 렌더러에서 취소 요청 시
+    // 메인 프로세스의 isRunning이 이미 false일 수 있으므로 항상 취소 처리
     if (!AutomationService.isRunning()) {
-        return { success: false, message: '실행 중인 자동화가 없습니다.' };
+        Logger.info('[automation:cancel] 실행 중인 자동화 없음 — 안전하게 취소 처리');
     }
 
     AutomationService.requestCancel();

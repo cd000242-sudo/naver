@@ -26,6 +26,9 @@ class AutomationServiceImpl {
     // 다중계정 발행 중지 플래그
     private multiAccountAbortFlag = false;
 
+    // ✅ [2026-03-11] 즉시 취소용 AbortController
+    private multiAccountAbortController: AbortController | null = null;
+
     // 다중계정 활성 자동화 목록
     private activeMultiAccountAutomations: any[] = [];
 
@@ -183,6 +186,33 @@ class AutomationServiceImpl {
      */
     isMultiAccountAborted(): boolean {
         return this.multiAccountAbortFlag;
+    }
+
+    /**
+     * ✅ [2026-03-11] 즉시 취소용 AbortController 생성
+     * multiAccount:publish 시작 시 호출
+     */
+    createAbortController(): AbortController {
+        this.multiAccountAbortController = new AbortController();
+        return this.multiAccountAbortController;
+    }
+
+    /**
+     * ✅ [2026-03-11] 진행 중인 API 호출 즉시 중단
+     * multiAccount:cancel 시 호출 → 대기 중인 Promise 즉시 reject
+     */
+    abortCurrentOperation(): void {
+        if (this.multiAccountAbortController) {
+            this.multiAccountAbortController.abort();
+            this.multiAccountAbortController = null;
+        }
+    }
+
+    /**
+     * ✅ [2026-03-11] 현재 AbortSignal 가져오기
+     */
+    getAbortSignal(): AbortSignal | null {
+        return this.multiAccountAbortController?.signal || null;
     }
 
     /**
@@ -391,6 +421,11 @@ export interface PostCyclePayload {
     useAiImage?: boolean;
     createProductThumbnail?: boolean;
     includeThumbnailText?: boolean;
+    // ✅ [2026-01-28] 이미지 설정 전역 적용
+    scSubImageSource?: 'ai' | 'collected';  // 수집 이미지 직접 사용 여부
+    thumbnailImageRatio?: string;  // 썸네일 비율
+    subheadingImageRatio?: string;  // 소제목 비율
+    scAutoThumbnailSetting?: boolean;  // 쇼핑커넥트 자동 썸네일
 
     // 발행 설정
     publishMode?: 'draft' | 'publish' | 'schedule';

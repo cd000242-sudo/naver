@@ -53,7 +53,10 @@ function syncHeadingVideoInPromptItemsInternal(): void {
         promptItems.forEach((item) => {
             const headingTitleText = item.querySelector('.heading-title-text') as HTMLDivElement | null;
             if (!headingTitleText) return;
-            const rawTitle = String(headingTitleText.textContent || '').trim();
+            // ✅ [2026-03-16 FIX] data-heading-title 우선 사용 (배지 오염 방지)
+            const dataTitle = (item as HTMLElement).getAttribute('data-heading-title')?.trim();
+            const pureEl = item.querySelector('.heading-title-pure') as HTMLElement | null;
+            const rawTitle = dataTitle || pureEl?.textContent?.trim() || String(headingTitleText.textContent || '').trim();
             if (!rawTitle) return;
 
             const normalized = normalizeHeadingKeyForVideoCache(rawTitle);
@@ -204,11 +207,11 @@ function syncHeadingVideoSlotsInUnifiedPreviewInternal(ImageManager: ImageManage
                 existingVideo.setAttribute('src', cachedVideoUrl);
                 try {
                     existingVideo.load();
-                    existingVideo.play().catch(() => {
-                        // ignore
+                    existingVideo.play().catch((e) => {
+                        console.warn('[headingVideoPreviewUtils] promise catch ignored:', e);
                     });
-                } catch {
-                    // ignore
+                } catch (e) {
+                    console.warn('[headingVideoPreviewUtils] catch ignored:', e);
                 }
             }
             return;

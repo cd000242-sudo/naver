@@ -674,6 +674,16 @@
       font-weight: 500;
     }
 
+    /* ✅ [2026-02-05] 버전 표시 스타일 */
+    .version-display {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 11px;
+      margin-top: 12px;
+      font-weight: 500;
+      opacity: 0.7;
+    }
+
     /* 관리자 제어 스타일 */
     .admin-trigger {
       position: fixed;
@@ -770,6 +780,8 @@
     <div class="login-header">
       <h1>🔐 라이선스 인증</h1>
       <p>앱을 사용하려면 인증이 필요합니다</p>
+      <!-- ✅ [2026-02-05] 버전 표시 추가 -->
+      <div id="app-version-display" class="version-display">버전 확인 중...</div>
     </div>
 
     <!-- 성공 모달 구성 -->
@@ -787,6 +799,9 @@
         <p class="redirect-notice">잠시 후 메인 화면으로 이동합니다...</p>
       </div>
     </div>
+
+    <button type="button" id="free-use-button" class="free-use-button" style="margin-top: 0; margin-bottom: 18px;">👑 매일
+      발행 2회 무료 사용하기</button>
 
     <div id="error-message" class="error-message"></div>
 
@@ -866,7 +881,7 @@
         </div>
       </div>
     </div>
-    <button type="button" id="free-use-button" class="free-use-button">👑 무료로 체험해보기</button>
+
 
     <button type="button" id="price-button" class="price-button">💬 구매 문의하기</button>
 
@@ -964,6 +979,19 @@
         }
       } catch (error) {
         console.error('기기 ID 로드 실패:', error);
+      }
+    }
+
+    // ✅ [2026-02-05] 앱 버전 표시
+    async function loadAppVersion() {
+      try {
+        const version = await ipcRenderer.invoke('app:getVersion');
+        const versionEl = document.getElementById('app-version-display');
+        if (versionEl && version) {
+          versionEl.textContent = `v${version}`;
+        }
+      } catch (error) {
+        console.error('버전 로드 실패:', error);
       }
     }
 
@@ -1715,13 +1743,13 @@
               console.error('[Login] ❌ debugInfo.register.fullResponse:', JSON.stringify(registerResponse, null, 2));
             } else {
               // 응답 형식 오류 (registerResponse.ok나 registerResponse.valid가 없는 경우)
-              errorMessage = '서버 응답 형식이 올바르지 않습니다. 관리자에게 문의하세요.';
+              errorMessage = '서버 연결에 일시적인 문제가 발생했습니다. 잠시 후 다시 시도해주세요.';
               console.error('[Login] ❌ 응답 형식 오류:', registerResponse);
               console.error('[Login] ❌ registerResponse.ok:', registerResponse.ok, 'registerResponse.valid:', registerResponse.valid);
             }
           } else {
             // registerResponse가 없는 경우 (debugInfo가 없거나 register 정보가 없는 경우)
-            errorMessage = '서버 응답 형식이 올바르지 않습니다. 관리자에게 문의하세요.';
+            errorMessage = '서버 연결에 일시적인 문제가 발생했습니다. 잠시 후 다시 시도해주세요.';
             console.error('[Login] ❌ 인증 실패 - registerResponse가 없음');
             console.error('[Login] ❌ result:', result);
             console.error('[Login] ❌ result.debugInfo:', result?.debugInfo);
@@ -1758,6 +1786,7 @@
     // 초기화 (초기 인증창을 먼저 표시, 자동 로그인 하지 않음)
     async function initialize() {
       await loadDeviceId();
+      await loadAppVersion(); // ✅ [2026-02-05] 버전 표시
       await loadSavedCredentials();
 
       // ✅ 무료로 체험하기 버튼 활성화 여부 체크

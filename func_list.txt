@@ -1,0 +1,384 @@
+﻿233: function getGlobalImageSettings() {
+365: function hydrateImageManagerFromImages(structuredContent: any, images: any[]): v
+431: async function autoSearchAndPopulateImages(
+463: function saveGeneratedPostFromData(
+565: async function runUiActionLockedCompat<T>(key: string, message: string, fn: () =
+573: async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
+724: async function reserveExternalApiImageQuota(provider: string, requestCount: numb
+738: async function generateImagesWithCostSafety(options: any): Promise<any> {
+925: function syncGlobalImagesFromImageManager(): void {
+995: function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
+1123: function ensurePromptCardRemoveHandler(): void {
+1193: function syncHeadingVideoInPromptItems(): void {
+1204: async function openApplyVideoToHeadingModal(filePath: string, displayName?: stri
+1374: async function removeHeadingVideoByTitle(headingTitle: string): Promise<void> {
+1428: async function ensureGifImageForHeading(headingTitle: string, videoFilePath: str
+1549: async function applyHeadingVideoFromFile(headingTitle: string, filePath: string,
+1594: async function createKenBurnsFallbackVideoForHeading(headingTitle: string, refer
+1624: async function regenerateHeadingVideoByTitle(headingTitle: string): Promise<void
+1913: async function generateHeadingVideoForPrompt(headingIndex: number, headingTitle:
+2279: function getHeadingsForVeo(): Array<{ title: string; prompt: string }> {
+2299: function ensureUnifiedPreviewVideoDelegation(): void {
+2308: function ensurePreGenerationSelectionsOrWarn(): boolean {
+2319: function syncHeadingVideoSlotsInUnifiedPreview(): void {
+2325: async function getAiVideoFolderPath(): Promise<string> {
+2334: async function refreshMp4FilesList(): Promise<void> {
+2625: function prefetchHeadingVideoPreview(heading: string): void {
+2633: function buildMinimalSilentVeoPrompt(headingTitle: string): string {
+2640: function getReviewProductAnchor(): string {
+2647: function buildHeadingAlignedVeoPrompt(headingTitle: string, rawHeadingPrompt?: s
+2665: function lockVeoQuota(minutes: number, rawMessage?: string): string {
+2677: async function generateVeoVideoWithRetry(params: any, headingTitleForFallback: s
+2687: async function openVeoHeadingSelectModal(): Promise<void> {
+2936: function getProgressModal(): ProgressModal {
+3015: function readUnifiedCtasFromUi(): Array<{ text: string; link?: string }> {
+3211: async function autoLoadApiKeys() {
+3259: function setupHeaderButtons() {
+3523: function switchExternalLinksTab(tabName: string) {
+3558: function startContinuousMode(urls: string[]): void {
+3587: function processNextInQueue(): void {
+3703: function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): void {
+3786: function scheduleNextPosting(): void {
+3839: function toggleContinuousModeModal(): void {
+3940: function initContinuousUrlFields(): void {
+3988: function initContinuousKeywordFields(): void {
+4030: function updateContinuousKeywordFieldRemoveButtons(): void {
+4045: function initContinuousTitleFields(): void {
+4049: function updateContinuousTitleFieldRemoveButtons(): void {
+4054: function initContinuousScheduleEvents(): void {
+4177: function updateContinuousUrlFieldRemoveButtons(): void {
+4192: function getContinuousUrls(): string[] {
+4203: function startContinuousPublishing(): void {
+4211: function getContinuousKeywords(): string[] {
+4222: function getContinuousTitles(): string[] {
+4265: function applyKeywordPrefixToTitleContinuous(title: string, keyword: string): st
+4270: function setupMutualExclusiveCheckboxes(id1: string, id2: string): void {
+4284: function setKeywordTitleOptionsFromItem(keyword: string, keywordAsTitle?: boolea
+4297: function applyContinuousTitleOverrides(item: ContinuousQueueItem, structuredCont
+4348: function initContinuousPublishingV2(): void {
+5340: async function showContinuousPrevPostModal(): Promise<void> {
+5431: function addItemToQueueV2(): void {
+5599: function showImageGridModal(images: any[], sourceLabel: string): void {
+5765: function renderQueueListV2(): void {
+5908: function showItemScheduleModal(item: any): void {
+6030: function updateScheduleStatusSummary(): void {
+6050: function showRandomScheduleModal(): void {
+6253: function showIndividualScheduleModal(): void {
+6419: function showQueueFullViewModal(): void {
+6508: function showEditQueueItemModal(item: ContinuousQueueItem, options?: { fromFullV
+6597: function updateContinuousProgressModal(data: {
+6655: function hideContinuousProgressModal(): void {
+6665: async function waitWithInterrupt(seconds: number): Promise<boolean> {
+6684: async function startContinuousPublishingV2(): Promise<void> {
+7048: function skipNextFiveItemsV2(): void {
+7074: function startContinuousModeEnhanced(queue: typeof continuousPublishQueue): void
+7080: async function processNextInQueueEnhanced(): Promise<void> {
+7133: async function executeContinuousPublish(structuredContent: any, publishMode: str
+7163: async function testApiKeysAndFullAuto() {
+7250: async function runRealFullAutoTest() {
+7377: function migratePostCategories(): number {
+7410: function ensureCategoryMigration(): void {
+7419: function saveGeneratedPost(structuredContent: any, isUpdate: boolean = false, ov
+7558: function updatePostAfterPublish(postId: string, publishedUrl: string): void {
+7584: function updatePostImages(postId: string, images: any[]): void {
+7621: function migrateAccountPostsToGlobal(): void {
+7679: function migratePostsToPerAccount(): void {
+7687: function loadGeneratedPosts(naverId?: string): GeneratedPost[] {
+7704: function loadAllGeneratedPosts(): GeneratedPost[] {
+7708: function loadGeneratedPost(postId: string): GeneratedPost | null {
+7727: function deleteGeneratedPost(postId: string): void {
+7747: function copyGeneratedPost(postId: string): void {
+7785: function previewGeneratedPost(postId: string): void {
+7932: async function openPostImageFolder(postId: string): Promise<void> {
+7958: async function deletePostImageFolder(postId: string): Promise<void> {
+7984: function exportAllPosts(): void {
+8028: function importPosts(): void {
+8065: function showImportPostsSelectionModal(importedPosts: GeneratedPost[]): void {
+8147: async function importSelectedPosts(selectedPosts: GeneratedPost[]): Promise<void
+8329: function initExternalLinksUI(): void {
+8389: function renderExternalLinks(category: string): void {
+8533: function pushImageHistorySnapshot(reason: string): void {
+8555: function undoLastImageChange(): void {
+9634: function resetGlobalState(): void {
+9644: function setGlobalState(key: 'content' | 'images' | 'running' | 'postId', value:
+9666: function getGlobalState<T>(key: 'content' | 'images' | 'running' | 'postId'): T 
+9686: function registerEventListener(
+9706: function unregisterEventListener(key: string): void {
+9715: function clearAllEventListeners(): void {
+9733: function getElement<T extends HTMLElement = HTMLElement>(selector: string, refre
+9744: function getElementById<T extends HTMLElement = HTMLElement>(id: string, refresh
+9748: function clearDomCache(): void {
+9753: function disableDomCache(): void {
+9763: async function preventDuplicateApiCall<T>(
+9788: function debounce<T extends (...args: any[]) => any>(
+9799: function throttle<T extends (...args: any[]) => any>(
+9818: function setButtonLoading(buttonId: string, loadingText: string = '처리 중...'): vo
+9837: function resetButtonState(buttonId: string): void {
+9852: function disableButton(buttonId: string, disabled: boolean = true): void {
+9863: async function withErrorHandling<T>(
+9897: function createImageDataUrl(blob: Blob): string {
+9903: function revokeImageDataUrl(url: string): void {
+9911: function revokeAllImageDataUrls(): void {
+9918: function getAllUrls(): string[] {
+9927: function getUrlsAsString(): string {
+9942: function _flushLogEntries(logOutputs: HTMLElement[]): void {
+9988: function appendLog(message: string, logOutputId?: string): void {
+10066: function updateRiskIndicators(content: StructuredContent | null): void {
+10091: function updateProgress(percent: number, status: string): void {
+10104: function collectFormData(skipImages: boolean = false): RendererAutomationPayload
+10660: async function runAutomation(skipImages: boolean = false): Promise<void> {
+10787: async function cancelAutomation(): Promise<void> {
+11031: function displayStructuredContentPreview(content: StructuredContent): void {
+11086: async function autoGenerateFromUrl(urls: string): Promise<void> {
+11185: function addUrlField(): void {
+11296: async function warmupApiConnections(hasGemini: boolean): Promise<void> {
+11358: function showPriceImageModal(): void {
+11405: function ensurePaywallDom(): {
+11624: function setUiBlockedByPaywall(blocked: boolean): void {
+11679: function activatePaywall(payload?: PaywallResponse | any): void {
+11729: function wrapApiForPaywall(): void {
+11754: async function initPaywallSystem(): Promise<void> {
+11768: function initShoppingConnectCTA(): void {
+11849: function initShoppingBannerTab(): void {
+12080: function initPurchaseInquiryButton(): void {
+12091: async function initializeApplication(): Promise<void> {
+12181: function initContentHeadingImageGeneration(): void {
+12292: async function initImageLibrary(): Promise<void> {
+12419: async function loadLibraryImages(category?: string): Promise<void> {
+12507: async function useLibraryImage(imageId: string): Promise<void> {
+12606: function resolveFirstHeadingTitleForThumbnail(): string {
+12666: function initThumbnailGenerator(): void {
+13069: async function enhancedFetch(url: string, options: RequestInit = {}, retries: nu
+13172: function switchToTab(tabName: string): void {
+13199: function generateFavoritesContent(): string {
+13239: function generateTemplatesContent(): string {
+13276: function getEnhancedTemplates(): Array<{
+13413: function selectUnifiedItem(element: HTMLElement): void {
+13432: function applyUnifiedItem(type: string, index: number): void {
+13439: function applySelectedItem(): void {
+13449: function filterUnifiedContent(): void {
+13461: function sortUnifiedContent(): void {
+13467: function closeUnifiedModal(): void {
+13476: function handleModalKeydown(e: KeyboardEvent): void {
+13483: function initKeyboardShortcuts(): void {
+13546: function getFavoriteSettings(): Array<{ name: string; description: string; categ
+13555: function getAvailableTemplates(): Array<{ name: string; description: string }> {
+13565: function initContinuousCategorySync(): void {
+13570: function initMultiAccountCategorySync(): void {
+13579: function initRealCategorySync(): void {
+13651: function initCategoryModal(): void {
+14119: async function initUnifiedTab(): Promise<void> {
+16044: function initStopButton(): void {
+16103: function showStopButton(): void {
+16120: function hideStopButton(): void {
+16150: function showPostSelectionModal(
+16359: function initUnifiedModeSelection(): void {
+16749: function updateModeDescription(mode: string | null): void {
+16765: function toggleSemiAutoSection(show: boolean): void {
+16785: function showPublishStartNotification(message: string): void {
+16852: function initializePublishProgress(): void {
+16940: function logError(error: Error | string, type: ErrorLog['type'] = 'error', conte
+16982: function handleCrash(error: any, context: string): void {
+17053: function exportErrorLogs(): void {
+17077: function clearErrorLogs(): void {
+17087: function calculateEstimatedTime(currentPercent: number): string {
+17101: function resetAllFields(): void {
+17265: function syncIntegratedPreviewFromInputs(): void {
+17347: function autosaveContent(data: AutosaveData): void {
+17409: function loadAutosavedContent(): AutosaveData | null {
+17429: function clearAutosavedContent(): void {
+17435: function createBackup(): void {
+17489: function cleanupOldBackups(): void {
+17519: function listBackups(): AutosaveData[] {
+17541: function restoreFromBackup(timestamp: number): void {
+17592: function startAutoBackup(): void {
+17606: function stopAutoBackup(): void {
+17615: function startAutosave(): void {
+17639: function stopAutosave(): void {
+17648: function restoreAutosavedContent(): void {
+17729: function showImagesProgress(percent: number, text: string, details?: string): vo
+17771: function showUnifiedProgress(percent: number, text: string, details?: string): v
+17827: function hideUnifiedProgress(): void {
+17835: function resetLogAndProgress(logOutputId?: string, progressContainerId?: string)
+17914: function initUnifiedUrlFields(): void {
+17958: function updateUnifiedUrlFieldRemoveButtons(): void {
+17973: function getUnifiedUrls(): string[] {
+17984: function generateAutoCTA(title: string, keywords?: string): { ctaText: string; c
+18065: async function handleFullAutoPublish(): Promise<void> {
+18794: async function handleMultiAccountPublish(): Promise<void> {
+19034: async function handleSemiAutoPublish(): Promise<void> {
+19289: function initUnifiedImageSourceSelection(): void {
+19356: function injectDeepInfraImageSourceOption(): void {
+19446: function addThumbnailTextOptionUI(): void {
+19536: function addShoppingConnectAiImageOptions(): void {
+19609: function collectUnifiedFormData(): any {
+19688: async function generateContentFromUrl(
+19966: async function normalizeKeywordsForGeneration(title: string, rawKeywords: string
+20052: async function generateContentFromKeywords(
+20481: function disableFullAutoPublishButton(reason: string): void {
+20492: function enableFullAutoPublishButton(): void {
+20501: function enableSemiAutoPublishButton(): void {
+20511: function autoGenerateCTA(structuredContent: any): void {
+20538: function autoFillCTAFromContent(): void {
+20553: function fillSemiAutoFields(structuredContent: any): void {
+20687: async function paraphraseContent(): Promise<void> {
+20905: function normalizeGeneratedPostCategoryKey(raw: unknown): string {
+20945: function getGeneratedPostCategoryLabel(categoryKey: string): string {
+20953: function isGeneratedPostCategoryCollapsed(categoryKey: string): boolean {
+20958: function setGeneratedPostCategoryCollapsed(categoryKey: string, collapsed: boole
+20964: function refreshGeneratedPostsList(): void {
+21254: function attachPostItemEventListeners(listContainer: HTMLElement): void {
+21358: function updateBatchDeleteButton(): void {
+21373: function toggleSelectAllPosts(): void {
+21390: function batchDeletePosts(): void {
+21409: function showImageModal(imageUrl: string): void {
+21448: function showHeadingImagesModal(encodedHeadingTitle: string, initialImageUrl?: s
+21612: function showPostsStatsDashboard(): void {
+21711: function togglePostsView(): void {
+21721: async function loadGeneratedPostToFields(postId: string): Promise<void> {
+22028: async function validateAndRecoverImages(images: any[], postId: string): Promise<
+22143: function toggleFavoritePost(postId: string): void {
+22167: async function reusePostImages(postId: string): Promise<void> {
+22284: async function loadImagesFromFolder(postId: string): Promise<any[]> {
+22333: async function getAllGeneratedImagesFromFolders(): Promise<Array<{ postId: strin
+22448: async function showLocalImageManagementModal(): Promise<void> {
+22548: async function openGeneratedImagesFolder(): Promise<void> {
+22609: async function openExistingImageFolder(): Promise<void> {
+22658: async function showFolderSelectionModal(options?: { onFolderSelected?: (folderNa
+22923: async function showLocalImageSelectionModal(folderName?: string): Promise<void> 
+23354: async function showLoadImagesFromFoldersModal(): Promise<void> {
+23608: async function showImagePlacementModal(folderImages: any[]): Promise<void> {
+23859: function collectUnifiedFormDataForPublish(mode: 'full-auto' | 'semi-auto'): any 
+23940: function validateUnifiedFormData(data: any): boolean {
+23957: async function executeUnifiedAutomation(formData: any): Promise<void> {
+24037: async function executeFullAutoFlow(formData: any): Promise<any> {
+24713: async function executeSemiAutoFlow(formData: any): Promise<any> {
+24867: function updateUnifiedPreview(structuredContent: any): void {
+25104: function updateUnifiedImagePreview(headings: any[], generatedImages?: any[]): vo
+25266: function initFullAutoImageSourceSelection(): void {
+25305: function initFullAutoExecution(): void {
+25330: function collectFullAutoFormData(): any {
+25385: function validateFullAutoFormData(data: any): boolean {
+25438: async function executeFullAutoAutomation(formData: any): Promise<void> {
+25603: async function generateFullAutoContent(formData: any) {
+25700: async function displayContentInAllTabs(structuredContent: any) {
+25717: async function generateImagesForContent(structuredContent: any, formData: any) {
+25773: async function generateLibraryImagesForHeadings(headings: any[], formData: any) 
+25804: async function generateAIImagesForHeadings(headings: any[], formData: any) {
+26099: async function generateEnglishPromptWithGemini(headingText: string): Promise<str
+26178: async function generateEnglishPromptForHeading(heading: any, baseKeywords?: stri
+26195: async function executeBlogPublishing(structuredContent: any, generatedImages: an
+26573: function updateFullAutoProgress(percent: number, text: string, detail?: string):
+26586: function initFullAutoReset(): void {
+26598: function resetFullAutoForm(): void {
+26645: function initFullAutoRecommendTime(): void {
+26672: async function executeAutomationWithErrorHandling(payload: RendererAutomationPay
+26732: async function testLicenseCode(code: string): Promise<void> {
+26758: async function initLicenseBadge(): Promise<void> {
+27094: function initCustomerServiceButton(): void {
+27125: function initGlobalRefreshButton(): void {
+27145: function performGlobalRefresh(): void {
+27286: async function initLicenseModal(): Promise<void> {
+27408: function showErrorAlertModal(title: string, message: string): void {
+27458: function showRescheduleModal(postId: string, title: string, onConfirm: (newDate:
+27539: async function initScheduleManagement(): Promise<void> {
+27929: function showSchedulePreviewModal(postData: any): void {
+28017: async function connectToAdminPanel(): Promise<void> {
+28053: async function syncAdminSettings(): Promise<void> {
+28077: async function sendAdminReport(data: any): Promise<void> {
+28094: async function checkAdminPermissions(): Promise<any> {
+28115: async function initPriceInfoModal(): Promise<void> {
+28971: async function initCredentialsSave(): Promise<void> {
+29102: function initTitleGeneration(): void {
+29373: function initCharCountDisplay(): void {
+29446: function updateFullAutoPreview(structuredContent: any): void {
+29508: function updateFullAutoFinalImagePreview(generatedImages: any[]): void {
+29533: function toggleFullAutoPreview(): void {
+29543: function updateFullAutoHeadingsPreview(structuredContent: any): void {
+29558: function extractSearchKeywords(title: string, content?: string): string[] {
+29592: function setTitleInAllTabs(title: string): void {
+29621: async function autoGenerateImagesAndPublish(structuredContent: any): Promise<voi
+29655: function initImageManagementTab(): void {
+30051: function initHeadingImageGeneration(): void {
+31848: function displayCollectedImages(images: any[]): void {
+31889: function extractHeadingsFromContent(content: string): any[] {
+31906: function generateEnglishPromptForHeadingSync(heading: string): string {
+32298: function generateThumbnailPromptWithTitle(heading: string, blogTitle: string, ba
+32319: function generateImagePromptByIndex(heading: string, index: number, blogTitle?: 
+32336: async function autoAnalyzeHeadings(structuredContent: any): Promise<void> {
+32420: function displayImageHeadingsWithPrompts(headings: any[]): void {
+32584: function updateReserveImagesThumbnails(): void {
+32590: function getHeadingSelectedImageKeyStore(): Record<string, string> {
+32596: function getHeadingSelectedImageKey(headingKey: string): string {
+32601: function setHeadingSelectedImageKey(headingKey: string, imageKey: string): void 
+32611: function initUnifiedImageEventHandlers(): void {
+33124: async function regenerateSingleImage(headingTitle: string, prompt: string): Prom
+33286: async function selectLocalImageForHeading(headingIndex: number, headingTitle: st
+33368: async function showFolderSelectionForHeading(
+33521: async function loadImagesFromFolderForHeading(folderPath: string): Promise<any[]
+33544: function showImageSelectionForHeading(headingIndex: number, headingTitle: string
+33648: function applyImageToHeadingFromFolder(headingIndex: number, headingTitle: strin
+33702: async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
+33822: function skipHeadingImage(headingIndex: number, headingTitle: string): void {
+33846: function undoSkipHeadingImage(headingIndex: number, headingTitle: string): void 
+33865: async function addMultipleImagesToHeading(headingIndex: number, headingTitle: st
+33909: function showMultipleImageSelectionModal(headingIndex: number, headingTitle: str
+34022: function addImagesToHeadingGrid(headingIndex: number, headingTitle: string, imag
+34097: function clearHeadingImages(headingIndex: number, headingTitle: string): void {
+34123: function removeSingleImageFromHeading(headingIndex: number, imageIndex: number, 
+34244: function getCurrentImageHeadings(): any[] {
+34267: function displayGeneratedImages(images: any[]): void {
+34763: async function useSelectedImageFromPreview(image: any, index: number): Promise<v
+34802: function showHeadingSelectionModal(image: any, imageIndex: number, headings: any
+34882: async function applyImageToHeading(image: any, headingTitle: string, headingInde
+34925: async function regenerateImageFromGrid(imageIndex: number, prompt: string, headi
+35066: async function regenerateSingleImageWithPromptItem(imageIndex: number, prompt: s
+35236: async function searchNaverImage(prompt: string, isRegenerate: boolean = false): 
+35248: function resolveReferenceImageForHeading(headingTitle: string): { referenceImage
+35287: function getAutoReferenceSourceUrlCandidate(): string {
+35341: async function resolveReferenceImageForHeadingAsync(headingTitle: string): Promi
+35389: async function generateNanoBananaProImage(prompt: string, headingOrRegenerate?: 
+35414: function switchToUnifiedTab() {
+35421: function switchToImageTab() {
+35428: function switchToScheduleTab() {
+35436: function initDashboard() {
+35457: function initThumbnailTextSync(): void {
+35481: function updateClock() {
+35506: function updateDashboardStats() {
+35520: function initRecentActivity() {
+35529: function addRecentActivity(title: string, time: string) {
+35554: function initDashboardCalendar() {
+35559: function initTabSwitching() {
+35647: function initApiGuideModal(): void {
+36130: function initAllApiKeysModal(): void {
+36197: function initUserGuideModal(): void {
+36816: function initTutorialsTab(): void {
+36948: async function saveTutorialVideo(video: TutorialVideo): Promise<void> {
+36964: async function loadTutorialVideosData(): Promise<TutorialVideo[]> {
+36985: async function loadTutorialVideos(): Promise<void> {
+37087: async function deleteTutorialVideo(videoId: string): Promise<void> {
+37108: async function showHeadingSelectionModalV2(image: any, currentIndex: number): Pr
+37189: async function regenerateWithNewAI(index: number, heading: string): Promise<void
+37325: async function showSavedImagesForReplace(targetIndex: number): Promise<void> {
+37373: async function showLocalImagePickerForReplace(folderName: string, targetIndex: n
+37507: async function showFolderImagesForReplace(images: any[], targetIndex: number, mo
+37594: function ensurePromptCardRemoveButtons(): void {
+37642: function updatePromptItemsWithImages(images: any[]): void {
+37930: function resetThumbnailGeneratorOnPublish(): void {
+37974: function showVideoModal(videoUrl: string, title?: string): void {
+38029: function applyPresetThumbnailIfExists(mode: string): {
+38059: class ThumbnailGenerator {
+39109: class ImageConverter {
+40993: async function initMultiAccountManager() {
+41256: async function generateImagesForAutomation(
+41432: async function initMultiAccountPublishModal() {
+44202: function initMainAccountSelector() {
+44530: function initAIAssistant() {
+45025: function initToolsHubModal() {
+45128: function initGeminiSelectionUI(): void {
+45644: async function initImageQualitySettings(): Promise<void> {
+45714: function updateQualityUISubState(mode: string): void {
+45730: async function saveImageQualitySettings(): Promise<void> {
+45758: function showScheduleHelpModal(): void {
+45883: function injectScheduleHelpButton(container: Element): void {
+45968: function calculateAndApplyScheduleTimes(options: {

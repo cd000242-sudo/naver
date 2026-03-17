@@ -1,5 +1,6 @@
 import { crawlShoppingSite, CrawlResult } from './strategies/shoppingStrategy.js';
 import { tryNaverApiFirst, searchNaverImages } from './strategies/naverStrategy.js';
+import { resolveShortUrl } from './utils/urlUtils.js';
 
 export interface CrawlOptions {
     imagesOnly?: boolean;
@@ -14,6 +15,8 @@ export { CrawlResult };
  * 전략: 네이버 API (빠름) -> Puppeteer (확실함) -> 이미지 검색 API (최후 수단)
  */
 export async function fetchShoppingImages(url: string, options: CrawlOptions = {}): Promise<CrawlResult> {
+    // ✅ [2026-02-19] 단축 URL 자동 리졸브 (naver.me → smartstore.naver.com)
+    url = await resolveShortUrl(url);
     console.log(`[SourceCollector] 수집 시작: ${url}`);
 
     // 1. [Fast Path] 네이버 API 키가 있으면 우선 시도

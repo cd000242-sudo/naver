@@ -1,0 +1,41 @@
+489: function saveGeneratedPostFromData(
+3567: function migratePostCategories(): number {
+3609: function saveGeneratedPost(structuredContent: any, isUpdate: boolean = false, overrides?: 
+3748: function updatePostAfterPublish(postId: string, publishedUrl: string): void {
+3774: function updatePostImages(postId: string, images: any[]): void {
+3811: function migrateAccountPostsToGlobal(): void {
+3869: function migratePostsToPerAccount(): void {
+3877: function loadGeneratedPosts(naverId?: string): GeneratedPost[] {
+3894: function loadAllGeneratedPosts(): GeneratedPost[] {
+3898: function loadGeneratedPost(postId: string): GeneratedPost | null {
+3917: function deleteGeneratedPost(postId: string): void {
+3937: function copyGeneratedPost(postId: string): void {
+3975: function previewGeneratedPost(postId: string): void {
+4122: async function openPostImageFolder(postId: string): Promise<void> {
+4148: async function deletePostImageFolder(postId: string): Promise<void> {
+4174: function exportAllPosts(): void {
+4218: function importPosts(): void {
+4255: function showImportPostsSelectionModal(importedPosts: GeneratedPost[]): void {
+4337: async function importSelectedPosts(selectedPosts: GeneratedPost[]): Promise<void> {
+5833: function setGlobalState(key: 'content' | 'images' | 'running' | 'postId', value: any): voi
+5855: function getGlobalState<T>(key: 'content' | 'images' | 'running' | 'postId'): T {
+12368: function showPostSelectionModal(
+13454: function restoreAutosavedContent(): void {
+16734: function normalizeGeneratedPostCategoryKey(raw: unknown): string {
+16774: function getGeneratedPostCategoryLabel(categoryKey: string): string {
+16782: function isGeneratedPostCategoryCollapsed(categoryKey: string): boolean {
+16787: function setGeneratedPostCategoryCollapsed(categoryKey: string, collapsed: boolean): void 
+16793: function refreshGeneratedPostsList(): void {
+17083: function attachPostItemEventListeners(listContainer: HTMLElement): void {
+17202: function toggleSelectAllPosts(): void {
+17219: function batchDeletePosts(): void {
+17441: function showPostsStatsDashboard(): void {
+17540: function togglePostsView(): void {
+17550: async function loadGeneratedPostToFields(postId: string): Promise<void> {
+17857: async function validateAndRecoverImages(images: any[], postId: string): Promise<any[]> {
+17972: function toggleFavoritePost(postId: string): void {
+17996: async function reusePostImages(postId: string): Promise<void> {
+18113: async function loadImagesFromFolder(postId: string): Promise<any[]> {
+18162: async function getAllGeneratedImagesFromFolders(): Promise<Array<{ postId: string; postTit
+23727: function showRescheduleModal(postId: string, title: string, onConfirm: (newDate: string) =
+24198: function showSchedulePreviewModal(postData: any): void {

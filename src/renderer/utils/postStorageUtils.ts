@@ -72,22 +72,12 @@ export function getPostsStorageKey(naverId: string): string {
  * 현재 선택된 계정 ID 가져오기
  */
 export function getCurrentNaverId(): string {
-    // 1순위: 계정 관리에서 선택된 활성 계정
-    const activeAccountId = localStorage.getItem('active_account_id') || '';
-    if (activeAccountId) return activeAccountId.trim().toLowerCase();
+    // ✅ [2026-03-10 CLEANUP] active_account_id/app_config dead read 제거
+    // 이 두 키는 코드베이스 전체에서 setItem이 없어 항상 null이었음
 
-    // 2순위: 로그인 폼의 naverId 입력란
+    // 1순위: 로그인 폼의 naverId 입력란
     const naverIdInput = document.getElementById('naver-id') as HTMLInputElement;
     if (naverIdInput?.value) return naverIdInput.value.trim().toLowerCase();
-
-    // 3순위: 단일 계정 설정
-    const config = localStorage.getItem('app_config');
-    if (config) {
-        try {
-            const parsed = JSON.parse(config);
-            if (parsed.naverId) return parsed.naverId.trim().toLowerCase();
-        } catch { /* ignore */ }
-    }
 
     return ''; // 계정 정보 없음
 }

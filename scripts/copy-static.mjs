@@ -125,6 +125,7 @@ try {
   const utilsDir = path.join(projectRoot, 'dist', 'renderer', 'utils');
   const utilsModules = [
     // 기본 유틸리티 (의존성 없음)
+    'errorAndAutosave.js',
     'safeExecute.js',
     'htmlUtils.js',
     'headingKeyUtils.js',
@@ -152,6 +153,7 @@ try {
     'stabilityUtils.js',
     'headingVideoPreviewUtils.js',
     'veoVideoUtils.js',
+    'semiAutoImageSearch.js',
     // UI/이벤트 관련 (마지막에 로드)
     'categoryModalUtils.js',
     'appEventsHandler.js',
@@ -248,6 +250,84 @@ try {
   }
   // utils에 components 추가
   utilsSource += componentsSource;
+
+  // ✅ [2026-02-24] modules 디렉토리 인라인 (renderer.ts에서 추출된 대규모 모듈)
+  const modulesDir = path.join(projectRoot, 'dist', 'renderer', 'modules');
+  const modulesFiles = [
+    // ✅ [2026-02-26] renderer.ts에서 import하는 모든 모듈 완전 포함
+    'promptTranslation.js',
+    'paywallSystem.js',
+    'enhancedFetch.js',
+    'credentialsSave.js',
+    'charCountDisplay.js',
+    'tutorialsTab.js',
+    'apiGuideModals.js',
+    'priceInfoModal.js',
+    'imageManagementTab.js',
+    'guideModals.js',
+    'dashboardUI.js',
+    'tailUIUtils.js',
+    'formUtilities.js',
+    'aiAssistant.js',
+    'continuousPublishing.js',
+    'thumbnailGenerator.js',
+    'multiAccountManager.js',
+    'headingImageGen.js',
+    'imageDisplayGrid.js',
+    'licenseUI.js',
+    'scheduleManager.js',
+    'localImageModals.js',
+    'postListUI.js',
+    'videoManager.js',
+    'publishingHandlers.js',
+    'fullAutoFlow.js',
+    'contentGeneration.js',
+    'undoImageChange.js',
+    'formAndAutomation.js',
+    'thumbnailPreview.js',
+    'titleGeneration.js',
+    'bestProductModal.js',  // ✅ [2026-03-13] 베스트 상품 수집기 모듈 추가
+  ];
+  let modulesSource = '';
+  for (const modFile of modulesFiles) {
+    const modPath = path.join(modulesDir, modFile);
+    try {
+      await access(modPath);
+      let content = await readFile(modPath, 'utf-8');
+      // CommonJS exports 제거 - 더 정교한 처리
+      content = content
+        .replace(/Object\.defineProperty\(exports, "__esModule", \{ value: true \}\);\s*/g, '')
+        // ✅ [FIX] 체인된 void 0 선언 제거
+        .replace(/^exports\.\w+\s*(=\s*exports\.\w+\s*)*=\s*void\s+0;\s*$/gm, '')
+        .replace(/exports\.(\w+)\s*=\s*void\s+0;\s*/g, '')
+        .replace(/exports\.(\w+)\s*=\s*\1;/g, '')
+        .replace(/exports\.(\w+)\s*=\s*(\w+)\.getInstance\(\);/g, 'const $1 = $2.getInstance();')
+        // exports.xxx = {...}; 형태는 const xxx = {...}; 로 변환
+        .replace(/^(\s*)exports\.(\w+)\s*=\s*(\{|\[|function|class|new\s)/gm, '$1const $2 = $3')
+        // exports.xxx = 값; 형태는 const xxx = 값;으로 변환
+        .replace(/^(\s*)exports\.(\w+)\s*=\s*([^;=]+);/gm, (match, indent, name, value) => {
+          if (value.trim() === name) return '';
+          if (value.includes('exports.')) return '';
+          return `${indent}const ${name} = ${value};`;
+        })
+        .replace(/exports\.default\s*=/g, '// exports.default =')
+        .replace(/module\.exports\s*=/g, '// module.exports =');
+      // ✅ [FIX] 남은 exports.XXX 참조를 XXX로 변환
+      content = content.replace(/exports\.(\w+)/g, '$1');
+      // require 문 제거
+      content = content.replace(/const\s+\{[^}]+\}\s*=\s*require\([^)]+\);\s*/g, '');
+      content = content.replace(/const\s+\w+\s*=\s*require\([^)]+\);\s*/g, '');
+      // ✅ [FIX] window fallback 선언 제거
+      content = content.replace(/^const\s+(\w+)\s*=\s*window\.\1\s*\|\|\s*\{[^}]*\};\s*$/gm, '// $1 uses global from other module');
+      content = content.replace(/^const\s+(\w+)\s*=\s*window\.\1\s*\|\|[^;]+;\s*$/gm, '// $1 uses global from other module');
+      modulesSource += `\n// ===== modules/${modFile} inlined =====\n${content}\n`;
+      console.log(`📦 Inlined modules/${modFile}`);
+    } catch (e) {
+      console.warn(`⚠️ modules/${modFile} not found`);
+    }
+  }
+  // utilsSource에 modules 추가
+  utilsSource += modulesSource;
 
   // CommonJS를 ES 모듈로 변환
   let sanitized = rendererSource
@@ -471,12 +551,12 @@ try {
 
   // ✅ [2026-01-25] 브라우저에서 실행 불가능한 utils 함수 호출 주석 처리
   // 이 함수들은 별도 모듈에 정의되어 있어서 인라인 없이는 사용 불가
+  // ✅ [2026-01-27] initSettingsModal, initSettingsModalFunc는 인라인되어 정상 동작하므로 제외
   const utilsFunctionsToComment = [
     'initAllAppEventHandlers',
     'initCategorySelectionListener',
-    'initSettingsModal',
-    'initSettingsModalFunc',
-    // 'initHeadingImageButton', // ✅ 이 함수는 UI에 필요하므로 유지
+    // 'initSettingsModal',       // ✅ [2026-01-27] 인라인됨 - 주석 처리 불필요
+    // 'initSettingsModalFunc',   // ✅ [2026-01-27] 인라인됨 - 주석 처리 불필요
     'cleanupAllMemoryManagers',
   ];
   utilsFunctionsToComment.forEach(funcName => {

@@ -33,7 +33,47 @@ export function isShoppingConnectModeActive(): boolean {
     }
 }
 
+/**
+ * ✅ [2026-02-19] 제휴 URL 자동 감지 헬퍼
+ * 입력된 URL이 쿠팡/11번가 등의 제휴 링크인지 판별
+ */
+export function isAffiliateUrl(url: string): boolean {
+    if (!url || typeof url !== 'string') return false;
+    const trimmed = url.trim();
+    if (!trimmed) return false;
+    const AFFILIATE_PATTERNS = [
+        /link\.coupang\.com/i,
+        /coupa\.ng/i,
+        /coupang\.com\/vp\//i,
+        /11st\.co\.kr/i,
+        /cr\.shopping\.naver\.com/i,
+    ];
+    return AFFILIATE_PATTERNS.some(p => p.test(trimmed));
+}
+
+/**
+ * ✅ [2026-02-19] URL에서 제휴 링크 자동 추출 헬퍼
+ * 명시적 제휴 링크 입력이 없을 때, 소스 URL이 제휴 URL이면 그것을 반환
+ */
+export function resolveAffiliateLink(
+    explicitAffiliateLink: string | undefined,
+    sourceUrl: string | undefined
+): string | undefined {
+    // 1. 명시적 입력이 있으면 그대로 사용
+    if (explicitAffiliateLink && explicitAffiliateLink.trim()) {
+        return explicitAffiliateLink.trim();
+    }
+    // 2. 소스 URL이 제휴 URL이면 자동 적용
+    if (sourceUrl && isAffiliateUrl(sourceUrl)) {
+        console.log(`[ShoppingConnect] 🔗 URL 입력에서 제휴링크 자동 감지: ${sourceUrl.substring(0, 60)}...`);
+        return sourceUrl.trim();
+    }
+    return undefined;
+}
+
 // 전역 노출 (기존 코드와의 호환성)
 (window as any).isShoppingConnectModeActive = isShoppingConnectModeActive;
+(window as any).isAffiliateUrl = isAffiliateUrl;
+(window as any).resolveAffiliateLink = resolveAffiliateLink;
 
 console.log('[ShoppingConnectUtils] 📦 모듈 로드됨!');

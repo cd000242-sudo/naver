@@ -1,0 +1,177 @@
+﻿Original file from git: 13674 lines
+
+═══════════════════════════════════════════════════
+  CODE COMPLETENESS VERIFICATION
+═══════════════════════════════════════════════════
+
+✅ insertImageViaUploadButton: ~MATCH (95.2% identical, orig 227L, helper 227L)
+   diff@25: orig: const buttons = await frame.$$(selector).catch(() => []);
+           helper: const buttons = await frame.$(selector).catch(() => []);
+   diff@28: orig: const ariaLabel = await frame.evaluate(el => el.getAttribute('aria-label'), butt
+           helper: const ariaLabel = await frame.evaluate((el: any) => el.getAttribute('aria-label'
+   diff@29: orig: const dataTooltip = await frame.evaluate(el => el.getAttribute('data-tooltip'), 
+           helper: const dataTooltip = await frame.evaluate((el: any) => el.getAttribute('data-tool
+✅ insertBase64ImageAtCursor: ~MATCH (99.2% identical, orig 252L, helper 252L)
+   diff@195: orig: imgs => imgs.length
+           helper: (imgs: any) => imgs.length
+   diff@233: orig: await self.setImageSizeToDocumentWidth();
+           helper: await setImageSizeToDocumentWidth(self);
+✅ insertImageViaBase64: ~MATCH (98.0% identical, orig 99L, helper 99L)
+   diff@73: orig: imgs => imgs.length
+           helper: (imgs: any) => imgs.length
+   diff@82: orig: await self.setImageSizeToDocumentWidth();
+           helper: await setImageSizeToDocumentWidth(self);
+⚠️ setImageSizeToDocumentWidth: DIVERGENT (0.0% match, orig 72L, helper 17L)
+   diff@0: orig:   const frame = (await self.getAttachedFrame());
+             helper: const frame = await self.getAttachedFrame();
+   diff@1: orig:   const page = self.ensurePage();
+             helper: try {
+   diff@2: orig:   try {
+             helper: self.log(' 🔄 이미지 크기를 문서 너비로 설정 중...');
+   diff@3: orig:   await self.delay(150);
+             helper: await frame.evaluate(() => {
+   diff@4: orig:   const appliedCount = await frame.evaluate(() => {
+             helper: const imgs = document.querySelectorAll('img.se-image-resource, img[data-se-image
+   Line count: original=72 vs helper=17 (diff=55)
+✅ insertSingleImage: ~MATCH (99.0% identical, orig 103L, helper 103L)
+   diff@29: orig: return await frame.evaluate((imgUrl) => {
+           helper: return await frame.evaluate((imgUrl: any) => {
+⚠️ verifyImagePlacement: DIVERGENT (0.0% match, orig 99L, helper 15L)
+   diff@0: orig:   const frame = (await self.getAttachedFrame());
+             helper: try {
+   diff@1: orig:   self.log('\n🔍 [이미지 배치 검증 시작]');
+             helper: const frame = await self.getAttachedFrame();
+   diff@2: orig:   try {
+             helper: const actualCount = await frame.evaluate(() => {
+   diff@3: orig:   // 에디터 콘텐츠 영역에서 실제 콘텐츠 이미지 찾기
+             helper: let c = 0;
+   diff@4: orig:   const imageInfo = await frame.evaluate(() => {
+             helper: document.querySelectorAll('img').forEach((img) => {
+   Line count: original=99 vs helper=15 (diff=84)
+⚠️ insertImagesAtCurrentCursor: DIVERGENT (1.0% match, orig 103L, helper 105L)
+   diff@0: orig:   const fs = await import('fs/promises');
+             helper: const page = self.ensurePage();
+   diff@1: orig:   const MAX_RETRIES = 3;
+             helper: let frame = await self.getAttachedFrame();
+   diff@2: orig:   for (let imgIdx = 0; imgIdx < images.length; imgIdx++) {
+             helper: const fs = await import('fs/promises');
+   diff@3: orig:   const image = images[imgIdx];
+             helper: const MAX_RETRIES = 3;
+   diff@4: orig:   const maskedPath = (image.filePath || '').replace(/^C:\\Users\\[^\\]+/, '~').rep
+             helper: for (let imgIdx = 0; imgIdx < images.length; imgIdx++) {
+   Line count: original=103 vs helper=105 (diff=2)
+⚠️ setImageSizeAndAttachLink: DIVERGENT (3.3% match, orig 179L, helper 180L)
+   diff@2: orig:   try {
+             helper: const link = linkUrl || '';
+   diff@3: orig:   self.log(` 🔗 [통합] 문서너비 맞추기 + 링크 삽입: ${link.substring(0, 50)}...`);
+             helper: try {
+   diff@4: orig:   // iframe 오프셋 계산
+             helper: self.log(` 🔗 [통합] 문서너비 맞추기 + 링크 삽입: ${link.substring(0, 50)}...`);
+   diff@5: orig:   const frameElement = await page.$('iframe#mainFrame, iframe.se-iframe, iframe[na
+             helper: // iframe 오프셋 계산
+   diff@6: orig:   let offsetX = 0, offsetY = 0;
+             helper: const frameElement = await page.$('iframe#mainFrame, iframe.se-iframe, iframe[na
+   Line count: original=179 vs helper=180 (diff=1)
+⚠️ attachLinkToLastImage: DIVERGENT (3.9% match, orig 333L, helper 334L)
+   diff@2: orig:   try {
+             helper: const link = linkUrl || '';
+   diff@3: orig:   self.log(` 🔗 이미지에 제휴 링크 삽입 중: ${link}`);
+             helper: try {
+   diff@4: orig:   // 0. 기존 선택 해제
+             helper: self.log(` 🔗 이미지에 제휴 링크 삽입 중: ${link}`);
+   diff@5: orig:   await page.keyboard.press('Escape');
+             helper: // 0. 기존 선택 해제
+   diff@6: orig:   await self.delay(300);
+             helper: await page.keyboard.press('Escape');
+   Line count: original=333 vs helper=334 (diff=1)
+✅ insertImages: ~MATCH (99.0% identical, orig 1103L, helper 1103L)
+   diff@3: orig: const planMap = new Map<string, ImagePlan>();
+           helper: const planMap = new Map<string, any>();
+   diff@182: orig: const inserted = await frame.evaluate((imgUrl) => {
+           helper: const inserted = await frame.evaluate((imgUrl: any) => {
+   diff@273: orig: const inserted = await frame.evaluate((imgUrl) => {
+           helper: const inserted = await frame.evaluate((imgUrl: any) => {
+⚠️ generateAltWithSource: DIVERGENT (2.7% match, orig 37L, helper 19L)
+   diff@1: orig:   // 1. 기본 alt 텍스트 (소제목 또는 heading)
+             helper: const baseAlt = image.alt || image.heading || image.title || '';
+   diff@2: orig:   const baseAlt = image.alt || image.heading || image.title || '';
+             helper: if (baseAlt) parts.push(baseAlt);
+   diff@3: orig:   if (baseAlt) {
+             helper: const sourceInfo: string[] = [];
+   diff@4: orig:   parts.push(baseAlt);
+             helper: if (image.provider) {
+   diff@5: orig:   }
+             helper: const providerNames: { [key: string]: string } = {
+   Line count: original=37 vs helper=19 (diff=18)
+⚠️ applyCaption: DIVERGENT (31.3% match, orig 16L, helper 9L)
+   diff@1: orig:   const frame = (await self.getAttachedFrame());
+             helper: const frame = await self.getAttachedFrame();
+   diff@6: orig:   try {
+             helper: try { await input.click({ clickCount: 3 }); await input.type(caption, { delay: 2
+   diff@7: orig:   await input.click({ clickCount: 3 });
+             helper: }
+   diff@8: orig:   await input.type(caption, { delay: 25 });
+             helper: }
+   Line count: original=16 vs helper=9 (diff=7)
+⚠️ insertImagesAtHeadings: Not found in original — may not have been a class method
+⚠️ selectCategoryInPublishModal: DIVERGENT (5.6% match, orig 285L, helper 324L)
+   diff@15: orig:   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+             helper: // ✅ [2026-02-25 FIX] 발행 모달이 DOM에 렌더링될 때까지 대기
+   diff@16: orig:   try {
+             helper: // 카테고리 드롭다운은 발행 모달 내부에 존재하므로, 모달이 열리지 않으면 찾을 수 없음
+   diff@17: orig:   // ✅ [2026-02-19] 전체 타임아웃 가드 — 15초 초과 시 즉시 리턴
+             helper: const publishModalSelectors = [
+   diff@18: orig:   if (Date.now() - totalStart > TOTAL_TIMEOUT) {
+             helper: '[data-testid="seOnePublishBtn"]', // 발행 확인 버튼 (모달 내부)
+   diff@19: orig:   self.log('📂 [카테고리] 전체 타임아웃 (15초) → 기본 카테고리로 진행');
+             helper: 'button[data-click-area="tpb*i.publish"]', // 발행 확인 버튼 (대체)
+   Line count: original=285 vs helper=324 (diff=39)
+✅ debugCategoryElements: MATCH (47 lines)
+✅ setScheduleDateTime: ~MATCH (98.8% identical, orig 408L, helper 408L)
+   diff@196: orig: .catch(e => ({ results: [e.message], monthDiff: 0 }));
+           helper: .catch((e: any) => ({ results: [e.message], monthDiff: 0 }));
+   diff@198: orig: self.log(` 📅 달력 월 이동: ${calendarDateSet.results.join(' | ')}`);
+           helper: self.log(` 📅 달력 월 이동: ${calendarDateSet!.results.join(' | ')}`);
+   diff@200: orig: if (calendarDateSet.monthDiff !== 0) {
+           helper: if (calendarDateSet!.monthDiff !== 0) {
+✅ debugPublishModal: ~MATCH (98.4% identical, orig 64L, helper 64L)
+   diff@61: orig: } catch (error) {
+           helper: } catch (error: any) {
+✅ publishScheduled: ~MATCH (99.5% identical, orig 193L, helper 193L)
+   diff@176: orig: } catch (error) {
+           helper: } catch (error: any) {
+⚠️ publishBlogPost: Not found in original — may not have been a class method
+✅ insertQuotation: MATCH (151 lines)
+✅ typeBodyWithRetry: ~MATCH (99.0% identical, orig 294L, helper 294L)
+   diff@69: orig: .map(s => s.replace(/__NUM_DOT__/g, '. '))
+           helper: .map((s: any) => s.replace(/__NUM_DOT__/g, '. '))
+   diff@70: orig: .map(s => s.trim())
+           helper: .map((s: any) => s.trim())
+   diff@71: orig: .filter(s => s.length > 0);
+           helper: .filter((s: any) => s.length > 0);
+✅ applyStructuredContent: ~MATCH (98.9% identical, orig 1421L, helper 1421L)
+   diff@167: orig: const { generateThumbnailWithTextOverlay } = await import('./image/tableImageGen
+           helper: const { generateThumbnailWithTextOverlay } = await import('../image/tableImageGe
+   diff@233: orig: const { generateThumbnailWithTextOverlay } = await import('./image/tableImageGen
+           helper: const { generateThumbnailWithTextOverlay } = await import('../image/tableImageGe
+   diff@445: orig: headingImages.forEach((img, idx) => {
+           helper: headingImages.forEach((img: any, idx: number) => {
+✅ setFontSize: ~MATCH (99.2% identical, orig 121L, helper 121L)
+   diff@27: orig: await frame.evaluate((fontSize) => {
+           helper: await frame.evaluate((fontSize: any) => {
+✅ extractBodyForHeading: ~MATCH (99.8% identical, orig 557L, helper 557L)
+   diff@510: orig: const sentences = fullBody.split(/(?<=[.!?])\s+/).filter(s => s.trim());
+           helper: const sentences = fullBody.split(/(?<=[.!?])\s+/).filter((s: any) => s.trim());
+
+═══════════════════════════════════════════════════
+  SUMMARY
+═══════════════════════════════════════════════════
+Total checked: 22
+✅ Exact match: 2
+✅ Near match (>95%): 12
+⚠️ Divergent: 8
+❌ Missing: 0
+
+⚠️ 8 ISSUES NEED REVIEW
+
+Detailed report saved to completeness_report.json

@@ -12,15 +12,15 @@ export function getCurrentVideoProvider(): VideoProvider {
         const v = String(sel?.value || '').trim().toLowerCase();
         if (v === 'kenburns') return 'kenburns';
         if (v === 'veo') return 'veo';
-    } catch {
-        // ignore
+    } catch (e) {
+        console.warn('[videoProviderUtils] catch ignored:', e);
     }
     try {
         const raw = String(window.localStorage?.getItem('videoProvider') || '').trim().toLowerCase();
         if (raw === 'kenburns') return 'kenburns';
         if (raw === 'veo') return 'veo';
-    } catch {
-        // ignore
+    } catch (e) {
+        console.warn('[videoProviderUtils] catch ignored:', e);
     }
     return 'veo';
 }
@@ -28,14 +28,14 @@ export function getCurrentVideoProvider(): VideoProvider {
 export function setCurrentVideoProvider(provider: VideoProvider): void {
     try {
         window.localStorage?.setItem('videoProvider', provider);
-    } catch {
-        // ignore
+    } catch (e) {
+        console.warn('[videoProviderUtils] catch ignored:', e);
     }
     try {
         const sel = document.getElementById('video-provider-select') as HTMLSelectElement | null;
         if (sel) sel.value = provider;
-    } catch {
-        // ignore
+    } catch (e) {
+        console.warn('[videoProviderUtils] catch ignored:', e);
     }
 }
 

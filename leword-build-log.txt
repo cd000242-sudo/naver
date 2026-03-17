@@ -1,0 +1,55 @@
+﻿
+> leword@1.0.1 dist
+> npm run prepare-dist && npm run build && electron-builder
+
+
+> leword@1.0.1 prepare-dist
+> node scripts/prepare-dist.js
+
+🔧 배포 전 초기화 시작...
+
+✅ ui/default-config.json 생성됨 (빈 API 키)
+
+📦 빌드에 포함되는 파일:
+   - dist/**/*
+   - ui/**/*
+   - package.json
+
+🗑️ 기존 release 폴더 삭제 시도...
+✅ release 폴더 삭제됨
+
+📋 배포 전 체크리스트:
+   ✓ API 키 초기화 완료
+   ✓ 라이선스 파일 삭제 완료
+   ✓ 테스트 파일 삭제 완료
+   ✓ 기본 설정 파일 생성 완료
+
+✨ 배포 전 초기화 완료!
+
+다음 명령어로 배포 패키지를 생성하세요:
+  npm run dist:win
+
+
+> leword@1.0.1 build
+> tsc && tsc -p tsconfig.electron.json
+
+  • electron-builder  version=24.13.3 os=10.0.26200
+  • loaded configuration  file=package.json ("build" field)
+  • packaging       platform=win32 arch=x64 electron=28.3.3 appOutDir=release\win-unpacked
+  • Cannot detect repository by .git/config. Please specify "repository" in the package.json (https://docs.npmjs.com/files/package.json#repository).
+Please see https://electron.build/configuration/publish
+  • building        target=zip arch=x64 file=release\LEWORD-1.0.1-win.zip
+  • Cannot detect repository by .git/config. Please specify "repository" in the package.json (https://docs.npmjs.com/files/package.json#repository).
+Please see https://electron.build/configuration/publish
+  • building        target=nsis file=release\LEWORD Setup 1.0.1.exe archs=x64 oneClick=false perMachine=false
+  • building block map  blockMapFile=release\LEWORD Setup 1.0.1.exe.blockmap
+  • Cannot detect repository by .git/config. Please specify "repository" in the package.json (https://docs.npmjs.com/files/package.json#repository).
+Please see https://electron.build/configuration/publish
+  • Cannot detect repository by .git/config. Please specify "repository" in the package.json (https://docs.npmjs.com/files/package.json#repository).
+Please see https://electron.build/configuration/publish
+  • building        target=portable file=release\LEWORD-Portable-1.0.1.exe archs=x64
+  • Cannot detect repository by .git/config. Please specify "repository" in the package.json (https://docs.npmjs.com/files/package.json#repository).
+Please see https://electron.build/configuration/publish
+  ⨯ Cannot read properties of null (reading 'provider')  failedTask=build stackTrace=TypeError: Cannot read properties of null (reading 'provider')
+    at createUpdateInfoTasks (C:\Users\park\leword-app\node_modules\app-builder-lib\src\publish\updateInfoBuilder.ts:133:64)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)

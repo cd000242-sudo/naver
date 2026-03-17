@@ -64,6 +64,9 @@ export function normalizeReadableBodyText(raw: string): string {
     text = text.replace(/<\/?u\s*>/gi, ''); // 남은 <u>, </u> 단독 태그 제거
     text = text.replace(/<\/?(?:b|i|strong|em|mark|span)[^>]*>/gi, ''); // 기타 HTML 태그 제거
 
+    // ✅ [2026-03-09] AI 인용 번호 제거: [1], [2, 3], [1, 2, 3] 등 Perplexity/검색 기반 AI의 출처 표시
+    text = text.replace(/\s*\[\d+(?:\s*,\s*\d+)*\]\s*/g, ' ');
+
     const blocks = text.split(/\n\s*\n+/).map(b => b.trim()).filter(Boolean);
 
     // ✅ 소제목 감지 패턴 개선 (다양한 형식 지원)
@@ -123,7 +126,9 @@ export function normalizeReadableBodyText(raw: string): string {
                 flush();
                 buf = t;
             } else {
-                buf = `${buf} ${t}`;
+                // ✅ [2026-03-16 FIX] 비종결 문장도 줄바꿈 보존 (AI 문단 구분 유지)
+                flush();
+                buf = t;
             }
         }
 

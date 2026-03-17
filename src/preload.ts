@@ -13,7 +13,7 @@ type AutomationPayload = {
   structuredContent?: StructuredContent;
   generatedImages?: Array<{ heading: string; filePath: string; provider: string; alt?: string; caption?: string }>;
   hashtags?: string[];
-  generator?: 'gemini' | 'openai' | 'claude';
+  generator?: 'gemini' | 'openai' | 'claude' | 'perplexity';
   keywords?: string[];
   draft?: string;
   rssUrl?: string;
@@ -72,65 +72,44 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('automation:run', payload),
   // Excel 관련 API 제거됨
   cancelAutomation: () => ipcRenderer.invoke('automation:cancel'),
+  // ✅ [2026-02-23 FIX] 이미지 생성 전체 상태 초기화
+  resetImageState: (): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('automation:resetImageState'),
   closeBrowser: () => ipcRenderer.invoke('automation:closeBrowser'), // ✅ 추가
-  minimizeWindow: (): Promise<{ success: boolean; message?: string }> =>
-    ipcRenderer.invoke('window:minimize'), // ✅ 창 최소화
+  launchLeword: (): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('leword:launch'), // ✅ LEWORD 황금키워드 앱 실행
   freeActivate: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('free:activate'),
   forceQuit: (): Promise<{ success: boolean }> =>
     ipcRenderer.invoke('app:forceQuit'),
   getQuotaStatus: (): Promise<{ success: boolean; isFree: boolean; quota: any }> =>
     ipcRenderer.invoke('quota:getStatus'),
+  // ✅ [2026-03-02] 이미지 API 일일 사용량 조회
+  getImageApiUsage: (): Promise<{ success: boolean; todayCalls?: number; todayCostKrw?: number; date?: string }> =>
+    ipcRenderer.invoke('quota:getImageUsage'),
+  // ✅ [2026-03-02] Leonardo AI 크레딧 조회
+  getLeonardoCredits: (): Promise<{ success: boolean; credits?: number; message?: string; raw?: any }> =>
+    ipcRenderer.invoke('quota:getLeonardoCredits'),
   generateContent: (prompt: string): Promise<GenerateContentResult> =>
     ipcRenderer.invoke('automation:generateContent', prompt),
-  generateStructuredContent: (request: {
-    assembly: SourceAssemblyInput;
-  }): Promise<{ success: boolean; content?: StructuredContent; message?: string }> =>
+  // ✅ [2026-03-11 FIX] generateImages 바인딩 추가 (누락으로 인한 연속발행 이미지 생성 실패 수정)
+  generateImages: (options: any): Promise<GenerateImagesResult> =>
+    ipcRenderer.invoke('automation:generateImages', options),
+  // ✅ [2026-03-11 FIX] generateStructuredContent 바인딩 추가 (누락으로 인한 'is not a function' 에러 수정)
+  generateStructuredContent: (request: { assembly: SourceAssemblyInput }): Promise<{ success: boolean; content?: StructuredContent; message?: string; imageCount?: number }> =>
     ipcRenderer.invoke('automation:generateStructuredContent', request),
-  generateImages: (options: {
-    provider: string;
-    items: Array<{ heading: string; prompt: string; isThumbnail?: boolean; referenceImagePath?: string; referenceImageUrl?: string }>;
-    styleHint?: string;
-    postTitle?: string;
-    postId?: string; // ✅ 글 ID (이미지 폴더 정리용)
-    regenerate?: boolean; // ✅ 재생성 모드 (다른 이미지 선택)
-    sourceUrl?: string; // ✅ 크롤링한 원본 URL (이미지 수집용)
-    articleUrl?: string; // ✅ 뉴스 기사 URL (이미지 수집용)
-    headingImageMode?: 'all' | 'thumbnail-only' | 'odd-only' | 'even-only' | 'none'; // ✅ [2026-01-24] 소제목 이미지 모드
-  }): Promise<GenerateImagesResult> => {
-    // ✅ [2026-01-24] headingImageMode 자동 주입 - localStorage에서 읽기
-    if (!options.headingImageMode) {
-      try {
-        const savedMode = localStorage.getItem('headingImageMode') as 'all' | 'thumbnail-only' | 'odd-only' | 'even-only' | 'none' | null;
-        if (savedMode) {
-          options.headingImageMode = savedMode;
-          console.log(`[Preload] 🖼️ headingImageMode 자동 주입: "${savedMode}"`);
-        }
-      } catch (e) {
-        // localStorage 접근 실패 시 무시
-      }
-    }
-    return ipcRenderer.invoke('automation:generateImages', options);
+  // ✅ [2026-02-13 SPEED] 개별 이미지 완성 시 실시간 수신 리스너
+  onImageGenerated: (callback: (data: { image: any; index: number; total: number }) => void) => {
+    const handler = (_event: any, data: { image: any; index: number; total: number }) => callback(data);
+    ipcRenderer.on('automation:imageGenerated', handler);
+    // cleanup 함수 반환
+    return () => { ipcRenderer.removeListener('automation:imageGenerated', handler); };
   },
-  generateImagesNaverImproved: (payload: {
-    items: Array<{ heading: string; prompt: string }>;
-    postTitle?: string;
-    postId?: string;
-    isRegenerate?: boolean;
-    sourceUrl?: string;
-    articleUrl?: string;
-    options?: {
-      apiKey?: string;
-      aiProvider?: 'gemini' | 'openai';
-      minRelevanceScore?: number;
-      minPopularityScore?: number;
-      checkPopularity?: boolean;
-      expandKeywords?: boolean;
-    };
-  }): Promise<GenerateImagesResult> => ipcRenderer.invoke('automation:generateImagesNaverImproved', payload),
-  matchImages: (payload: { headings: any[]; collectedImages: any[] }): Promise<{ success: boolean; assignments?: any[]; message?: string }> =>
-    ipcRenderer.invoke('automation:matchImages', payload),
+  // ✅ [2026-02-12] 소제목별 이미지 자동 검색 (네이버 → 구글 폴백)
+  searchImagesForHeadings: (payload: { headings: string[]; mainKeyword: string }): Promise<{ success: boolean; images: Record<string, string[]>; message?: string }> =>
+    ipcRenderer.invoke('search-images-for-headings', payload),
   checkFileExists: (filePath: string): Promise<boolean> => ipcRenderer.invoke('file:checkExists', filePath),
+
   readDir: (dirPath: string): Promise<string[]> => ipcRenderer.invoke('file:readDir', dirPath),
   readDirWithStats: (dirPath: string): Promise<Array<{ name: string; isFile: boolean; isDirectory: boolean; size: number; mtime: number; birthtime: number; ctime: number }>> => ipcRenderer.invoke('file:readDirWithStats', dirPath),
   getFileStats: (filePath: string): Promise<{ isFile: boolean; isDirectory: boolean; size: number; mtime: number; birthtime: number; ctime: number } | null> => ipcRenderer.invoke('file:getStats', filePath),
@@ -152,8 +131,7 @@ contextBridge.exposeInMainWorld('api', {
 
   listMp4Files: (payload: { dirPath: string }): Promise<{ success: boolean; files?: Array<{ name: string; fullPath: string; mtime: number; size: number }>; message?: string }> =>
     ipcRenderer.invoke('media:listMp4Files', payload),
-  importMp4: (payload: { sourcePath: string; dirPath: string }): Promise<{ success: boolean; filePath?: string; fileName?: string; message?: string }> =>
-    ipcRenderer.invoke('media:importMp4', payload),
+
   convertMp4ToGif: (payload: { sourcePath: string }): Promise<{ success: boolean; gifPath?: string; message?: string }> =>
     ipcRenderer.invoke('media:convertMp4ToGif', payload),
   createKenBurnsVideo: (payload: { imagePath: string; heading?: string; durationSeconds?: number; aspectRatio?: '16:9' | '9:16' | '1:1' | 'original' }): Promise<{ success: boolean; filePath?: string; fileName?: string; message?: string }> =>
@@ -178,7 +156,7 @@ contextBridge.exposeInMainWorld('api', {
     keywords: string[];
     category: string;
     imageMode: 'full-auto' | 'semi-auto' | 'manual' | 'skip';
-    selectedImageSource?: 'dalle' | 'pexels' | 'library';
+    selectedImageSource?: 'nano-banana-pro' | 'library';
   }): Promise<{
     success: boolean;
     images?: any[];
@@ -278,6 +256,12 @@ contextBridge.exposeInMainWorld('api', {
       throw new Error(`라이선스 인증 중 오류가 발생했습니다: ${(error as Error).message}`);
     }
   },
+  // 중복 로그인 감지 시 강제 로그아웃 이벤트 리스너
+  onSessionForceLogout: (callback: (data: { message: string }) => void) => {
+    const handler = (_event: any, data: { message: string }) => callback(data);
+    ipcRenderer.on('session:forceLogout', handler);
+    return () => { ipcRenderer.removeListener('session:forceLogout', handler); };
+  },
   checkPatchFile: async (): Promise<boolean> => {
     try {
       return await ipcRenderer.invoke('license:checkPatchFile');
@@ -308,6 +292,15 @@ contextBridge.exposeInMainWorld('api', {
     } catch (error) {
       console.error('[Preload] Device ID get error:', error);
       throw new Error(`기기 ID를 가져오는 중 오류가 발생했습니다: ${(error as Error).message}`);
+    }
+  },
+  // ✅ [2026-02-05] 앱 버전 반환
+  getAppVersion: async (): Promise<string> => {
+    try {
+      return await ipcRenderer.invoke('app:getVersion');
+    } catch (error) {
+      console.error('[Preload] App version get error:', error);
+      return '';
     }
   },
   isPackaged: async (): Promise<boolean> => {
@@ -491,19 +484,24 @@ contextBridge.exposeInMainWorld('api', {
     }
   },
   // ✅ 이미지 URL 다운로드 및 저장
+  // ✅ [2026-02-02] category 파라미터 추가 - 카테고리별 폴더에 저장
   downloadAndSaveImage: (
     imageUrl: string,
     heading: string,
     postTitle?: string,
-    postId?: string
+    postId?: string,
+    category?: string
   ): Promise<{ success: boolean; filePath?: string; previewDataUrl?: string; savedToLocal?: string; message?: string }> =>
-    ipcRenderer.invoke('image:downloadAndSave', imageUrl, heading, postTitle, postId),
+    ipcRenderer.invoke('image:downloadAndSave', imageUrl, heading, postTitle, postId, category),
   // ✅ URL에서 이미지 수집
   collectImagesFromUrl: (url: string): Promise<{ success: boolean; images?: string[]; message?: string }> =>
     ipcRenderer.invoke('image:collectFromUrl', url),
   // ✅ 쇼핑몰에서 이미지 수집 (전용)
   collectImagesFromShopping: (url: string): Promise<{ success: boolean; images?: string[]; title?: string; message?: string }> =>
     ipcRenderer.invoke('image:collectFromShopping', url),
+  // ✅ [2026-02-01] Gemini 3 기반 소제목-이미지 의미적 매칭
+  matchImagesToHeadings: (images: string[], headings: string[]): Promise<{ success: boolean; matches?: number[]; message?: string }> =>
+    ipcRenderer.invoke('image:matchToHeadings', images, headings),
   // ✅ 네이버 이미지 검색 API
   searchNaverImages: (keyword: string): Promise<{ success: boolean; images?: any[]; message?: string }> =>
     ipcRenderer.invoke('image:searchNaver', keyword),
@@ -590,9 +588,9 @@ contextBridge.exposeInMainWorld('api', {
   getPendingScheduledPosts: (): Promise<{ success: boolean; posts?: any[]; message?: string }> =>
     ipcRenderer.invoke('scheduler:getPending'),
   reschedulePost: (postId: string, newTime: string): Promise<{ success: boolean; message?: string }> =>
-    ipcRenderer.invoke('scheduler:reschedule', postId, newTime),
+    ipcRenderer.invoke('schedule:reschedule', postId, newTime),
   retryScheduledPost: (postId: string): Promise<{ success: boolean; message?: string }> =>
-    ipcRenderer.invoke('scheduler:retry', postId),
+    ipcRenderer.invoke('schedule:retry', postId),
   getSchedulerStats: (): Promise<{ success: boolean; stats?: any; message?: string }> =>
     ipcRenderer.invoke('scheduler:getStats'),
   cancelAllScheduled: (): Promise<{ success: boolean; message?: string }> =>
@@ -611,6 +609,18 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('keyword:discoverGoldenBySingleCategory', categoryId, count),
   clearKeywordCache: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('keyword:clearCache'),
+
+  // ✅ 베스트 상품 자동 수집 API
+  getBestProductCategories: (platform?: string): Promise<{ success: boolean; categories?: any[] }> =>
+    ipcRenderer.invoke('bestProduct:getCategories', platform),
+  fetchCoupangBest: (categoryId?: string, maxCount?: number, useAdsPower?: boolean): Promise<any> =>
+    ipcRenderer.invoke('bestProduct:fetchCoupang', categoryId, maxCount, useAdsPower),
+  fetchNaverBest: (categoryId?: string, maxCount?: number, useAdsPower?: boolean): Promise<any> =>
+    ipcRenderer.invoke('bestProduct:fetchNaver', categoryId, maxCount, useAdsPower),
+  fetchAllBest: (categoryId?: string, maxCount?: number): Promise<any> =>
+    ipcRenderer.invoke('bestProduct:fetchAll', categoryId, maxCount),
+  clearBestProductCache: (): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('bestProduct:clearCache'),
 
   // ✅ 자동 내부링크 삽입 API (카테고리 지원)
   addPostToInternalLinks: (url: string, title: string, content?: string, category?: string): Promise<{ success: boolean; message?: string }> =>
@@ -646,6 +656,13 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('thumbnail:getStyles'),
   getThumbnailCategories: (): Promise<{ success: boolean; categories?: string[]; message?: string }> =>
     ipcRenderer.invoke('thumbnail:getCategories'),
+  // ✅ [2026-02-04] 수집 이미지에 텍스트 오버레이 적용 API
+  createProductThumbnail: (
+    imageUrl: string,
+    text: string,
+    options?: { position?: string; fontSize?: number; textColor?: string; opacity?: number }
+  ): Promise<{ success: boolean; outputPath?: string; previewDataUrl?: string; message?: string }> =>
+    ipcRenderer.invoke('thumbnail:createProductThumbnail', imageUrl, text, options),
 
   // ✅ 다중 블로그 관리 API
   addBlogAccount: (name: string, blogId: string, naverId?: string, naverPassword?: string, settings?: any): Promise<{ success: boolean; account?: any; message?: string }> =>
@@ -782,6 +799,52 @@ contextBridge.exposeInMainWorld('api', {
   // 네이버 자동완성 키워드를 활용하여 제품명에 세부 키워드 추가
   generateSeoTitle: (productName: string): Promise<{ success: boolean; title?: string; message?: string }> =>
     ipcRenderer.invoke('seo:generateTitle', productName),
+
+  // ✅ [2026-02-08] 테스트 이미지 생성 API - engine, textOverlay 파라미터 추가
+  generateTestImage: (options: { style: string; ratio: string; prompt: string; engine?: string; textOverlay?: { enabled: boolean; text: string } }): Promise<{ success: boolean; path?: string; previewDataUrl?: string; error?: string }> =>
+    ipcRenderer.invoke('generate-test-image', options),
+
+  // ✅ [2026-03-11] ADB IP 변경 API
+  adbCheckDevice: (): Promise<{ connected: boolean; deviceId?: string; message: string }> =>
+    ipcRenderer.invoke('adb:checkDevice'),
+  adbChangeIp: (waitSeconds?: number): Promise<{ success: boolean; oldIp?: string; newIp?: string; message: string }> =>
+    ipcRenderer.invoke('adb:changeIp', waitSeconds),
+  adbGetCurrentIp: (): Promise<{ success: boolean; ip: string }> =>
+    ipcRenderer.invoke('adb:getCurrentIp'),
+  // ✅ [2026-03-11] ADB 자동 다운로드
+  adbDownload: (): Promise<{ success: boolean; adbPath?: string; message: string }> =>
+    ipcRenderer.invoke('adb:downloadAdb'),
+
+  // ✅ [2026-03-13] AdsPower Local API
+  adsPowerCheckStatus: (): Promise<{ running: boolean; message: string }> =>
+    ipcRenderer.invoke('adspower:checkStatus'),
+  adsPowerSetApiKey: (apiKey: string): Promise<{ success: boolean }> =>
+    ipcRenderer.invoke('adspower:setApiKey', apiKey),
+  adsPowerOpenBrowser: (profileId: string): Promise<{ success: boolean; ws?: string; message: string }> =>
+    ipcRenderer.invoke('adspower:openBrowser', profileId),
+  adsPowerCloseBrowser: (profileId: string): Promise<{ success: boolean; message: string }> =>
+    ipcRenderer.invoke('adspower:closeBrowser', profileId),
+  adsPowerListProfiles: (): Promise<{ success: boolean; profiles: any[]; message: string }> =>
+    ipcRenderer.invoke('adspower:listProfiles'),
+  adsPowerCreateProfile: (profileName: string): Promise<{ success: boolean; profileId?: string; serialNumber?: string; message: string }> =>
+    ipcRenderer.invoke('adspower:createProfile', profileName),
+  adsPowerDeleteProfile: (profileIds: string[]): Promise<{ success: boolean; message: string }> =>
+    ipcRenderer.invoke('adspower:deleteProfile', profileIds),
+  openExternalUrlDirect: (url: string): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('open-external-url', url),
+
+  // ✅ [2026-03-13] AdsPower 토글 설정 → crawlerBrowser 전역 flag 동기화
+  setAdsPowerEnabled: (enabled: boolean): Promise<{ success: boolean; enabled: boolean }> =>
+    ipcRenderer.invoke('crawler:setAdsPowerEnabled', enabled),
+
+  // ✅ [2026-03-16] ImageFX Google 로그인 사전 확인 API
+  checkImageFxGoogleLogin: (): Promise<{ loggedIn: boolean; userName?: string; message: string }> =>
+    ipcRenderer.invoke('imagefx:checkGoogleLogin'),
+
+  // ✅ [2026-03-16] ImageFX Google 계정 변경 API
+  switchImageFxGoogleAccount: (): Promise<{ success: boolean; userName?: string; message: string }> =>
+    ipcRenderer.invoke('imagefx:switchGoogleAccount'),
+
 });
 
 // ✅ electronAPI로도 동일한 API 노출 (renderer.ts 호환성)
@@ -799,6 +862,18 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.invoke('keyword:discoverGoldenBySingleCategory', categoryId, count),
   clearKeywordCache: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('keyword:clearCache'),
+
+  // 베스트 상품 자동 수집 API
+  getBestProductCategories: (platform?: string): Promise<{ success: boolean; categories?: any[] }> =>
+    ipcRenderer.invoke('bestProduct:getCategories', platform),
+  fetchCoupangBest: (categoryId?: string, maxCount?: number): Promise<any> =>
+    ipcRenderer.invoke('bestProduct:fetchCoupang', categoryId, maxCount),
+  fetchNaverBest: (categoryId?: string, maxCount?: number): Promise<any> =>
+    ipcRenderer.invoke('bestProduct:fetchNaver', categoryId, maxCount),
+  fetchAllBest: (categoryId?: string, maxCount?: number): Promise<any> =>
+    ipcRenderer.invoke('bestProduct:fetchAll', categoryId, maxCount),
+  clearBestProductCache: (): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('bestProduct:clearCache'),
 
   // 경쟁 블로그 분석 API
   analyzeCompetitors: (keyword: string): Promise<{ success: boolean; result?: any; message?: string }> =>
@@ -823,12 +898,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.invoke('analytics:addPost', url),
   getAllTrackedPosts: (): Promise<{ success: boolean; posts?: any[]; message?: string }> =>
     ipcRenderer.invoke('analytics:getAllPosts'),
-  getPostPerformance: (postId: string): Promise<{ success: boolean; performance?: any; message?: string }> =>
-    ipcRenderer.invoke('analytics:getPerformance', postId),
 
-  // 이미지 생성 API
-  generateImages: (options: any): Promise<{ success: boolean; images?: any[]; message?: string }> =>
-    ipcRenderer.invoke('automation:generateImages', options),
+
+  // ✅ [2026-02-08] 테스트 이미지 생성 API - engine, textOverlay 파라미터 추가
+  generateTestImage: (options: { style: string; ratio: string; prompt: string; engine?: string; textOverlay?: { enabled: boolean; text: string } }): Promise<{ success: boolean; path?: string; previewDataUrl?: string; error?: string }> =>
+    ipcRenderer.invoke('generate-test-image', options),
 });
 
 type LicenseInfo = {

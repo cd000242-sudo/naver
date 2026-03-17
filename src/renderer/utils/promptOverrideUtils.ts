@@ -74,8 +74,8 @@ export function setManualEnglishPromptOverrideForHeading(headingTitle: string, p
             delete store[title];
             try {
                 window.localStorage?.setItem(STORAGE_KEY, JSON.stringify(store || {}));
-            } catch {
-                // ignore
+            } catch (e) {
+                console.warn('[promptOverrideUtils] catch ignored:', e);
             }
             return;
         }
@@ -86,8 +86,8 @@ export function setManualEnglishPromptOverrideForHeading(headingTitle: string, p
             delete store[title];
             try {
                 window.localStorage?.setItem(STORAGE_KEY, JSON.stringify(store || {}));
-            } catch {
-                // ignore
+            } catch (e) {
+                console.warn('[promptOverrideUtils] catch ignored:', e);
             }
             return;
         }
@@ -96,8 +96,8 @@ export function setManualEnglishPromptOverrideForHeading(headingTitle: string, p
 
     try {
         window.localStorage?.setItem(STORAGE_KEY, JSON.stringify(store || {}));
-    } catch {
-        // ignore
+    } catch (e) {
+        console.warn('[promptOverrideUtils] catch ignored:', e);
     }
 }
 
