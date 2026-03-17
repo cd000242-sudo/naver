@@ -269,6 +269,7 @@ try {
     'tailUIUtils.js',
     'formUtilities.js',
     'aiAssistant.js',
+    'scheduleDistributor.js',  // ✅ [2026-03-17] 예약 시간 분산 유틸리티 (continuousPublishing보다 먼저 로드 필수)
     'continuousPublishing.js',
     'thumbnailGenerator.js',
     'multiAccountManager.js',

@@ -11,11 +11,26 @@ import { checkAdbDevice, changeIpViaAirplaneMode, getCurrentIp, downloadAdb } fr
 import { checkAdsPowerStatus, openAdsPowerBrowser, closeAdsPowerBrowser, listAdsPowerProfiles, createAdsPowerProfile, deleteAdsPowerProfile, setAdsPowerApiKey } from '../utils/adsPowerManager';
 import { setAdsPowerEnabled } from '../../crawler/crawlerBrowser.js';
 import { setImageFxAdsPowerEnabled } from '../../image/imageFxGenerator.js';
+import { setProxyEnabled, isProxyEnabled, getPoolStatus } from '../../crawler/utils/proxyManager.js';
 
 /**
  * 시스템 관련 핸들러 등록
  */
 export function registerSystemHandlers(ctx: IpcContext): void {
+
+    // ✅ [2026-03-17] 프록시(SmartProxy) 온/오프 토글
+    ipcMain.handle('proxy:setEnabled', async (_event, enabled: boolean) => {
+        setProxyEnabled(enabled);
+        return { success: true, enabled };
+    });
+
+    ipcMain.handle('proxy:isEnabled', async () => {
+        return { enabled: isProxyEnabled() };
+    });
+
+    ipcMain.handle('proxy:getStatus', async () => {
+        return getPoolStatus();
+    });
 
     // ✅ [2026-03-16] AdsPower 토글 설정 → crawlerBrowser + ImageFX 전역 flag 동시 동기화
     ipcMain.handle('crawler:setAdsPowerEnabled', async (_event, enabled: boolean) => {

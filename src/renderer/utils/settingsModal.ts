@@ -91,7 +91,8 @@ export function openSettingsModal(): void {
             'settings-section-image-model',
             'settings-section-image-path',
             'settings-section-adb-ip',
-            'settings-section-adspower'
+            'settings-section-adspower',
+            'settings-section-proxy'
         ];
         sectionIds.forEach(id => {
             const section = document.getElementById(id);
@@ -128,7 +129,9 @@ export function closeSettingsModal(): void {
             'settings-section-text-engine',
             'settings-section-image-model',
             'settings-section-image-path',
-            'settings-section-adb-ip'
+            'settings-section-adb-ip',
+            'settings-section-adspower',
+            'settings-section-proxy'
         ];
         sectionIds.forEach(id => {
             const section = document.getElementById(id);
@@ -338,6 +341,9 @@ export function initSettingsModal(): void {
         // ✅ [2026-03-13] AdsPower 연동 설정 이벤트
         setupAdsPowerSettings();
 
+        // ✅ [2026-03-17] 프록시 설정 이벤트
+        setupProxySettings();
+
         console.log('[SettingsModal] 📦 환경설정 모달 초기화 완료!');
     } catch (error) {
         console.error('[SettingsModal] ❌ 초기화 중 에러:', error);
@@ -358,6 +364,7 @@ function setupSettingsSectionToggle(): void {
         { btnId: 'nav-image-path-btn', sectionId: 'settings-section-image-path', title: '📁 이미지 저장 경로', color: '#3b82f6' },
         { btnId: 'nav-adb-ip-btn', sectionId: 'settings-section-adb-ip', title: '📱 테더링 IP 변경', color: '#10b981' },
         { btnId: 'nav-adspower-btn', sectionId: 'settings-section-adspower', title: '🌐 AdsPower 연동', color: '#f97316' },
+        { btnId: 'nav-proxy-btn', sectionId: 'settings-section-proxy', title: '🛡️ 프록시 설정', color: '#a855f7' },
     ];
 
     // 모든 섹션 초기 숨김
@@ -470,7 +477,8 @@ function setupImageModelSettingsButton(): void {
                 'settings-section-text-engine',
                 'settings-section-image-path',
                 'settings-section-adb-ip',
-                'settings-section-adspower'
+                'settings-section-adspower',
+                'settings-section-proxy'
             ];
             otherSections.forEach(id => {
                 const el = document.getElementById(id);
@@ -1093,6 +1101,129 @@ function showAdsPowerGuideModal(): void {
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
+}
+
+// ✅ [2026-03-17] 프록시(SmartProxy) 설정 이벤트 핸들러
+function setupProxySettings(): void {
+    console.log('[SettingsModal] 🛡️ 프록시 설정 이벤트 연결 시작...');
+
+    const toggle = document.getElementById('proxy-settings-toggle') as HTMLInputElement;
+    const toggleBg = document.getElementById('proxy-settings-toggle-bg');
+    const toggleDot = document.getElementById('proxy-settings-toggle-dot');
+    const toggleWrap = document.getElementById('proxy-settings-toggle-wrap');
+    const statusText = document.getElementById('proxy-status-text');
+    const navStatus = document.getElementById('nav-proxy-status');
+
+    // 토글 시각 업데이트
+    const updateToggleVisual = (enabled: boolean) => {
+        if (toggleBg) toggleBg.style.background = enabled ? '#a855f7' : 'rgba(255,255,255,0.1)';
+        if (toggleDot) toggleDot.style.left = enabled ? '24px' : '2px';
+    };
+
+    // 네비게이션 버튼 상태 텍스트 업데이트
+    const updateNavStatus = (enabled: boolean) => {
+        if (navStatus) {
+            navStatus.textContent = enabled ? '✅ 프록시 활성 (SmartProxy)' : '❌ 프록시 비활성 (직접 연결)';
+        }
+    };
+
+    // 상태 정보 로드
+    const loadProxyStatus = async () => {
+        try {
+            const status = await (window as any).api?.getProxyStatus?.();
+            if (status && statusText) {
+                const lines = [
+                    `• 상태: ${status.enabled ? '✅ 활성' : '❌ 비활성'}`,
+                    `• 프로바이더: ${status.provider || 'N/A'}`,
+                    `• 엔드포인트: ${status.endpoint || 'N/A'}`,
+                    `• 설정 완료: ${status.configured ? '✅' : '❌ 자격증명 미설정'}`,
+                ];
+                statusText.innerHTML = lines.join('<br>');
+            }
+        } catch (err) {
+            if (statusText) statusText.textContent = '상태 조회 실패';
+        }
+    };
+
+    // localStorage에서 초기값 로드 + 백엔드 동기화
+    const initProxy = async () => {
+        // 백엔드에서 현재 상태 조회
+        try {
+            const result = await (window as any).api?.isProxyEnabled?.();
+            const savedLocal = localStorage.getItem('proxy_enabled');
+            // localStorage 값이 있으면 우선, 없으면 백엔드 값 사용
+            const enabled = savedLocal !== null ? savedLocal === 'true' : (result?.enabled ?? true);
+            
+            if (toggle) {
+                toggle.checked = enabled;
+                updateToggleVisual(enabled);
+                updateNavStatus(enabled);
+            }
+            // localStorage에 값이 없었으면 백엔드 값으로 초기화
+            if (savedLocal === null) {
+                localStorage.setItem('proxy_enabled', enabled ? 'true' : 'false');
+            }
+            // 백엔드와 동기화
+            await (window as any).api?.setProxyEnabled?.(enabled);
+        } catch (err) {
+            console.warn('[SettingsModal] 프록시 초기 상태 로드 실패:', err);
+            // 기본값: 활성
+            if (toggle) {
+                toggle.checked = true;
+                updateToggleVisual(true);
+                updateNavStatus(true);
+            }
+        }
+        // 상태 정보 로드
+        loadProxyStatus();
+    };
+
+    initProxy();
+
+    // 토글 클릭 이벤트
+    toggleWrap?.addEventListener('click', async () => {
+        if (!toggle) return;
+        toggle.checked = !toggle.checked;
+        const enabled = toggle.checked;
+
+        localStorage.setItem('proxy_enabled', enabled ? 'true' : 'false');
+        updateToggleVisual(enabled);
+        updateNavStatus(enabled);
+
+        // 백엔드 동기화
+        try {
+            await (window as any).api?.setProxyEnabled?.(enabled);
+        } catch (err) {
+            console.error('[SettingsModal] 프록시 토글 IPC 오류:', err);
+        }
+
+        // 상태 정보 갱신
+        loadProxyStatus();
+
+        if ((window as any).toastManager) {
+            if (enabled) {
+                (window as any).toastManager.success('🛡️ 프록시 활성화 — SmartProxy IP 보호 ON');
+            } else {
+                (window as any).toastManager.info('📡 프록시 비활성화 — 직접 연결 (테더링 IP)');
+            }
+        }
+    });
+
+    // 설정 완료 버튼
+    document.getElementById('settings-proxy-save-btn')?.addEventListener('click', () => {
+        if ((window as any).toastManager) {
+            (window as any).toastManager.success('✅ 프록시 설정이 저장되었습니다!');
+        }
+
+        const section = document.getElementById('settings-section-proxy');
+        const navButtons = document.getElementById('settings-nav-buttons');
+        if (section) section.style.display = 'none';
+        if (navButtons) navButtons.style.display = 'flex';
+
+        console.log('[SettingsModal] ✅ 프록시 설정 완료 저장');
+    });
+
+    console.log('[SettingsModal] ✅ 프록시 설정 이벤트 연결 완료');
 }
 
 // 전역 노출

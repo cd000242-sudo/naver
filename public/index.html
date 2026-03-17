@@ -3995,6 +3995,84 @@
                                     class="nav-arrow">→</span>
                             </button>
 
+                            <!-- 🛡️ 프록시 설정 버튼 -->
+                            <button type="button" id="nav-proxy-btn"
+                                style="width: 100%; padding: 1rem 1.25rem; background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(139, 92, 246, 0.08)); border: 2px solid #a855f7; border-radius: 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.25s ease; box-shadow: 0 3px 12px rgba(168, 85, 247, 0.15);">
+                                <div style="display: flex; align-items: center; gap: 0.85rem;">
+                                    <span style="font-size: 1.5rem;">🛡️</span>
+                                    <div style="text-align: left;">
+                                        <div style="font-weight: 700; color: #a855f7; font-size: 0.95rem;">프록시 설정
+                                        </div>
+                                        <div id="nav-proxy-status" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem;">
+                                            SmartProxy 자동 IP 보호</div>
+                                    </div>
+                                </div>
+                                <span style="font-size: 1.2rem; color: #a855f7; transition: transform 0.2s;"
+                                    class="nav-arrow">→</span>
+                            </button>
+
+                        </div>
+
+                        <!-- ✅ [2026-03-17] 프록시 설정 섹션 -->
+                        <div id="settings-section-proxy" style="display: none;">
+                            <div style="background: var(--bg-secondary, #1e1e2e); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(168, 85, 247, 0.2);">
+
+                                <!-- 헤더 -->
+                                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                    <div style="width: 42px; height: 42px; background: linear-gradient(135deg, #a855f7, #7c3aed); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                        <span style="font-size: 1.3rem;">🛡️</span>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h3 style="color: var(--text-strong, #fff); margin: 0; font-size: 1.1rem; font-weight: 800;">프록시 설정</h3>
+                                        <p style="color: var(--text-muted); margin: 0.1rem 0 0 0; font-size: 0.78rem;">SmartProxy Residential → 요청마다 자동 IP 변경</p>
+                                    </div>
+                                </div>
+
+                                <!-- ON/OFF 토글 -->
+                                <div id="proxy-enable-section" style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; background: rgba(168, 85, 247, 0.06); border: 1px solid rgba(168, 85, 247, 0.15); border-radius: 12px; margin-bottom: 1.25rem;">
+                                    <div>
+                                        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-strong, #fff);">🛡️ 프록시 사용</div>
+                                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.15rem;">OFF 시 직접 연결 (테더링 IP 등)</div>
+                                    </div>
+                                    <div style="position: relative; cursor: pointer;" id="proxy-settings-toggle-wrap">
+                                        <input type="checkbox" id="proxy-settings-toggle" checked style="display: none;">
+                                        <div id="proxy-settings-toggle-bg" style="width: 48px; height: 26px; background: #a855f7; border-radius: 13px; transition: all 0.3s; position: relative;">
+                                            <div id="proxy-settings-toggle-dot" style="width: 22px; height: 22px; background: #fff; border-radius: 50%; position: absolute; top: 2px; left: 24px; transition: all 0.3s ease; box-shadow: 0 1px 4px rgba(0,0,0,0.3);"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 프록시 상태 정보 -->
+                                <div id="proxy-status-info" style="padding: 0.85rem 1rem; background: rgba(168, 85, 247, 0.05); border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.12); margin-bottom: 1.25rem;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                        <span style="font-size: 0.85rem;">🌐</span>
+                                        <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-strong);">프록시 상태</span>
+                                    </div>
+                                    <div id="proxy-status-text" style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">
+                                        상태를 로딩 중...
+                                    </div>
+                                </div>
+
+                                <!-- 안내 텍스트 -->
+                                <div style="padding: 0.75rem 1rem; background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.15); border-radius: 10px; margin-bottom: 1.25rem;">
+                                    <div style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.6;">
+                                        <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.3rem;">💡 프록시 안내</div>
+                                        <div>• <strong>ON (권장)</strong>: SmartProxy 주거용 IP → 네이버/쿠팡 IP 차단 방지</div>
+                                        <div>• <strong>OFF</strong>: 프록시 없이 직접 연결 → 테더링 IP 사용 시 선택</div>
+                                        <div>• 대량 발행 시 프록시 ON + 테더링 IP 변경 병행 권장</div>
+                                    </div>
+                                </div>
+
+                                <!-- 설정 완료 버튼 -->
+                                <div style="margin-top: 1.25rem; border-top: 1px solid rgba(168, 85, 247, 0.15); padding-top: 1.25rem;">
+                                    <button type="button" id="settings-proxy-save-btn"
+                                        style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #a855f7 0%, #7c3aed 50%, #6d28d9 100%); color: white; border: 3px solid #1a1a1a; border-radius: 12px; font-weight: 800; font-size: 1.05rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(255,255,255,0.2); transition: all 0.2s;"
+                                        onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 8px 25px rgba(168, 85, 247, 0.5), inset 0 1px 0 rgba(255,255,255,0.2)';"
+                                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 20px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)';">
+                                        ✅ 설정 완료
+                                    </button>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- ✅ [2026-03-13] AdsPower 연동 설정 섹션 -->

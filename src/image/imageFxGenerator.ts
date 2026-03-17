@@ -14,7 +14,7 @@
 import type { ImageRequestItem, GeneratedImage } from './types.js';
 import { writeImageFile } from './imageUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
-import { getProxyUrl } from '../crawler/utils/proxyManager.js';
+// ✅ [2026-03-17] ImageFX는 Google 서비스라 프록시 불필요 → import 제거
 import type { Browser, Page, BrowserContext } from 'playwright';
 
 // ✅ 실시간 로그 → 렌더러 UI 전송
@@ -504,13 +504,7 @@ async function connectViaPlaywright(): Promise<Page> {
   console.log('[ImageFX] 🌐 자체 브라우저 실행 (숨김 모드)...');
   sendImageLog('🌐 [ImageFX] 자체 브라우저 준비 중...');
 
-  // ✅ [2026-03-16] SmartProxy 프록시 적용
-  const proxyUrl = await getProxyUrl();
-  const proxyArgs = proxyUrl ? [`--proxy-server=${proxyUrl}`] : [];
-  if (proxyUrl) {
-    console.log(`[ImageFX] 🌐 프록시 적용: ${proxyUrl.replace(/:[^:]+@/, ':***@')}`);
-    sendImageLog('🌐 [ImageFX] SmartProxy 프록시 적용됨');
-  }
+  // ✅ [2026-03-17] ImageFX는 Google 서비스(labs.google)라 프록시 불필요 → 직접 연결
 
   const launchOptions = {
     headless: true as boolean,
@@ -518,7 +512,6 @@ async function connectViaPlaywright(): Promise<Page> {
       '--no-first-run',
       '--disable-blink-features=AutomationControlled',
       '--disable-infobars',
-      ...proxyArgs,
     ],
     viewport: { width: 1280, height: 800 },
     ignoreDefaultArgs: ['--enable-automation'],
@@ -568,14 +561,13 @@ async function connectViaPlaywright(): Promise<Page> {
   // headless 브라우저 닫기
   await context.close();
 
-  // visible로 재실행 (시스템 Chrome/Edge 폴백 적용 + 프록시)
+  // visible로 재실행 (시스템 Chrome/Edge 폴백 적용)
   const visibleOptions = {
     headless: false as boolean,
     args: [
       '--no-first-run',
       '--disable-blink-features=AutomationControlled',
       '--disable-infobars',
-      ...proxyArgs,
     ],
     viewport: { width: 1280, height: 800 },
     ignoreDefaultArgs: ['--enable-automation'],
@@ -647,7 +639,7 @@ async function connectViaPlaywright(): Promise<Page> {
   sendImageLog('🔄 [ImageFX] 로그인 완료! 숨김 모드로 전환 중...');
   await context.close();
 
-  // headless로 재실행 (프록시 포함)
+  // headless로 재실행
   const headlessContext = await launchWithSystemBrowserFallback(chromium, profileDir, launchOptions);
   const headlessPage = headlessContext.pages()[0] || await headlessContext.newPage();
   await headlessPage.goto('https://labs.google/fx/tools/image-fx', {

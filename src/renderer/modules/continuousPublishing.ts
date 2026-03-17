@@ -2669,29 +2669,27 @@ function showRandomScheduleModal(): void {
     }
 
     const itemCount = continuousQueueV2.length;
-    const randomTimes: Date[] = [];
-    for (let i = 0; i < itemCount; i++) {
-      const raw = new Date(startTime.getTime() + Math.floor(Math.random() * rangeMs));
-      // ✅ [2026-02-08 FIX] 10분 단위 반올림 (네이버 서버 예약 10분 단위 제한)
-      const mins = raw.getMinutes();
-      const rounded = Math.round(mins / 10) * 10;
-      raw.setMinutes(rounded, 0, 0);
-      if (rounded >= 60) { raw.setMinutes(0); raw.setHours(raw.getHours() + 1); }
-      randomTimes.push(raw);
+    // ✅ [2026-03-17 FIX] 순수 Math.random() → Stratified Sampling 교체
+    // scheduleDistributor.ts의 distributeByRandomRange 사용
+    // → 범위를 N등분하고 각 구간에서 1개씩 선택, 10분 반올림 + 충돌 회피 내장
+    const distributeByRandomRange = (window as any).distributeByRandomRange;
+    if (!distributeByRandomRange) {
+      toastManager.error('❌ 시간 분산 모듈을 찾을 수 없습니다. 새로고침 후 다시 시도해주세요.');
+      return;
     }
-    randomTimes.sort((a, b) => a.getTime() - b.getTime());
+
+    const distributed = distributeByRandomRange(itemCount, {
+      startDate: startDateStr,
+      startTime: startTimeStr,
+      endDate: endDateStr,
+      endTime: endTimeStr,
+      roundingMinutes: 10,
+    });
 
     continuousQueueV2.forEach((item: any, i: number) => {
-      const t = randomTimes[i];
-      const yyyy = t.getFullYear();
-      const mo = String(t.getMonth() + 1).padStart(2, '0');
-      const dd = String(t.getDate()).padStart(2, '0');
-      const hh = String(t.getHours()).padStart(2, '0');
-      const mi = String(t.getMinutes()).padStart(2, '0');
-      item.scheduleDate = `${yyyy}-${mo}-${dd}`;  // ✅ [2026-03-11 FIX] 'YYYY-MM-DD' 날짜만 저장 (기존: 'YYYY-MM-DDThh:mm'으로 scheduleTime 불일치)
-      item.scheduleTime = `${hh}:${mi}`;           // ✅ 시간은 별도 저장
+      item.scheduleDate = distributed[i].date;   // 'YYYY-MM-DD'
+      item.scheduleTime = distributed[i].time;   // 'HH:mm'
       item.publishMode = 'schedule';
-      // ✅ [2026-02-08 FIX] item.interval = 600 제거 — 사용자 설정 간격 유지
     });
 
     // 미리보기

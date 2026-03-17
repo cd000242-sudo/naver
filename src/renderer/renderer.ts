@@ -8111,6 +8111,11 @@ URL: ${firstUrl}
     generatedImages: any[];
     formData: any;
     createdAt: string;
+    // ✅ [2026-03-17] 예약 발행 필드 추가 (scheduleDistributor 동기화)
+    publishMode?: 'publish' | 'draft' | 'schedule';
+    scheduleDate?: string;
+    scheduleTime?: string;
+    scheduleType?: 'app-schedule' | 'naver-server';
   }
 
   let publishQueue: PublishQueueItem[] = [];
@@ -8164,6 +8169,7 @@ URL: ${firstUrl}
         <div style="flex: 1; min-width: 0;">
           <div style="font-weight: 600; color: var(--text-strong); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
             <span style="color: #f59e0b;">👤</span> <span>${item.accountName}</span>
+            ${item.publishMode === 'schedule' && item.scheduleDate ? `<span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 0.1rem 0.35rem; border-radius: 3px; font-size: 0.65rem; font-weight: 600;">📅 ${item.scheduleDate} ${item.scheduleTime || ''}</span>` : item.publishMode === 'draft' ? `<span style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; padding: 0.1rem 0.35rem; border-radius: 3px; font-size: 0.65rem; font-weight: 600;">📝 임시저장</span>` : ''}
           </div>
           <div style="font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 0.25rem;">
             📝 ${item.title || '제목 없음'}
@@ -8280,7 +8286,8 @@ URL: ${firstUrl}
       ctas: skipCta ? [] : ctasUi,
       ctaPosition,
       includeThumbnailText,
-      publishMode: 'publish',
+      // ✅ [2026-03-17 FIX] 하드코딩 제거 → UI에서 실제 발행 모드 읽기 (scheduleDistributor 동기화)
+      publishMode: (document.getElementById('unified-publish-mode') as HTMLInputElement)?.value || 'publish',
       structuredContent,
     };
 
@@ -8326,6 +8333,28 @@ URL: ${firstUrl}
       }
 
       // 새 항목 추가 (동일 계정이라도 다른 글이면 추가될 수 있도록 덮어쓰기 로직 제거)
+      // ✅ [2026-03-17 FIX] 예약 발행 정보를 대기열 항목에 보존 (scheduleDistributor 동기화)
+      const currentPublishMode = settings.formData?.publishMode || 'publish';
+      let currentScheduleDate: string | undefined;
+      let currentScheduleTime: string | undefined;
+      if (currentPublishMode === 'schedule') {
+        const rawDateVal = (document.getElementById('unified-schedule-date') as HTMLInputElement)?.value || '';
+        if (rawDateVal.includes('T')) {
+          const parts = rawDateVal.split('T');
+          currentScheduleDate = parts[0];
+          currentScheduleTime = parts[1]?.substring(0, 5);
+        } else if (rawDateVal.includes(' ')) {
+          const parts = rawDateVal.split(' ');
+          currentScheduleDate = parts[0];
+          currentScheduleTime = parts[1]?.substring(0, 5);
+        } else if (rawDateVal) {
+          currentScheduleDate = rawDateVal;
+        }
+      }
+      const currentScheduleType = currentPublishMode === 'schedule'
+        ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'naver-server')
+        : undefined;
+
       const queueItem: PublishQueueItem = {
         id: targetId,
         accountId,
@@ -8335,6 +8364,10 @@ URL: ${firstUrl}
         generatedImages: JSON.parse(JSON.stringify(settings.generatedImages)),
         formData: JSON.parse(JSON.stringify(settings.formData)),
         createdAt: new Date().toISOString(),
+        publishMode: currentPublishMode as 'publish' | 'draft' | 'schedule',
+        scheduleDate: currentScheduleDate,
+        scheduleTime: currentScheduleTime,
+        scheduleType: currentScheduleType,
       };
 
       if (isUpdate && editingId) {
@@ -8598,6 +8631,21 @@ URL: ${firstUrl}
 
     appendLog(`🚀 일괄 발행 시작: ${publishQueue.length}개 계정`);
 
+    // ✅ [2026-03-17] 예약 모드 항목들에 scheduleDistributor 시간 분산 적용
+    {
+      const scheduleItems = publishQueue.filter(item => item.publishMode === 'schedule');
+      if (scheduleItems.length > 1 && typeof (window as any).distributeWithProtection === 'function') {
+        const firstItem = scheduleItems[0];
+        (window as any).distributeWithProtection(scheduleItems, {
+          baseDate: firstItem.scheduleDate || new Date().toISOString().split('T')[0],
+          baseTime: firstItem.scheduleTime || '09:00',
+          intervalMinutes: 360,
+        }, (msg: string, level: string) => appendLog(`[예약분산] ${msg}`));
+        appendLog(`📅 ${scheduleItems.length}개 예약 항목에 시간 분산 적용 완료`);
+        updateQueueUI(); // UI 갱신하여 분산된 시간 표시
+      }
+    }
+
     // ✅ 중지 플래그 초기화 및 중지 버튼 표시
     (window as any).stopBatchPublish = false;
     showStopButton();
@@ -8671,8 +8719,20 @@ URL: ${firstUrl}
           if (naverIdInput) naverIdInput.value = credResult.credentials.naverId;
           if (naverPwInput) naverPwInput.value = credResult.credentials.naverPassword;
 
+          // ✅ [2026-03-17 FIX] 대기열 항목의 발행 모드/예약 정보를 DOM에 반영
+          // handleSemiAutoPublish()는 DOM에서 publishMode를 읽으므로, 호출 전에 DOM을 세팅해야 함
+          const publishModeEl = document.getElementById('unified-publish-mode') as HTMLInputElement;
+          const scheduleDateEl = document.getElementById('unified-schedule-date') as HTMLInputElement;
+          if (publishModeEl && item.publishMode) {
+            publishModeEl.value = item.publishMode;
+          }
+          if (scheduleDateEl && item.publishMode === 'schedule' && item.scheduleDate) {
+            // datetime-local 형식: YYYY-MM-DDTHH:mm
+            scheduleDateEl.value = `${item.scheduleDate}T${item.scheduleTime || '09:00'}`;
+          }
+
           // ✅ 반자동 발행 실행 및 결과 추적
-          appendLog(`🌐 브라우저를 열고 발행을 시작합니다...`);
+          appendLog(`🌐 브라우저를 열고 발행을 시작합니다... (${item.publishMode === 'schedule' ? `📅 예약: ${item.scheduleDate} ${item.scheduleTime}` : item.publishMode === 'draft' ? '📝 임시저장' : '⚡ 즉시발행'})`);
 
           // ✅ 발행 결과를 추적하기 위한 Promise
           let publishSuccess = false;

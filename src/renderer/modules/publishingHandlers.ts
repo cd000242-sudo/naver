@@ -1359,6 +1359,14 @@ export async function handleSemiAutoPublish(): Promise<void> {
   const publishMode = (document.getElementById('unified-publish-mode') as HTMLInputElement)?.value || 'publish';
   console.log('[PublishingHandlers] 🔍 발행 모드 읽기 (semiAuto):', publishMode);
   const scheduleDate = publishMode === 'schedule' ? getScheduleDateFromInput('unified-schedule-date') : undefined;
+  // ✅ [2026-03-17 FIX] scheduleTime 명시적 추출 (datetime-local에서 시간 부분)
+  let scheduleTime: string | undefined;
+  if (publishMode === 'schedule') {
+    const rawVal = (document.getElementById('unified-schedule-date') as HTMLInputElement)?.value;
+    if (rawVal?.includes('T')) {
+      scheduleTime = rawVal.split('T')[1]?.substring(0, 5);
+    }
+  }
   const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'naver-server') : undefined;
 
   // ✅ 디버깅: 이미지 관리 이미지 확인
@@ -1412,6 +1420,7 @@ export async function handleSemiAutoPublish(): Promise<void> {
     skipImages,
     publishMode,
     scheduleDate,
+    scheduleTime,
     scheduleType,
     structuredContent: updatedStructuredContent,
     // ✅ 이미지 전달 (호환)

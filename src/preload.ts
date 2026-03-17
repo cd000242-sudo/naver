@@ -837,6 +837,14 @@ contextBridge.exposeInMainWorld('api', {
   setAdsPowerEnabled: (enabled: boolean): Promise<{ success: boolean; enabled: boolean }> =>
     ipcRenderer.invoke('crawler:setAdsPowerEnabled', enabled),
 
+  // ✅ [2026-03-17] 프록시(SmartProxy) 온/오프 토글
+  setProxyEnabled: (enabled: boolean): Promise<{ success: boolean; enabled: boolean }> =>
+    ipcRenderer.invoke('proxy:setEnabled', enabled),
+  isProxyEnabled: (): Promise<{ enabled: boolean }> =>
+    ipcRenderer.invoke('proxy:isEnabled'),
+  getProxyStatus: (): Promise<{ enabled: boolean; configured: boolean; provider: string; endpoint: string }> =>
+    ipcRenderer.invoke('proxy:getStatus'),
+
   // ✅ [2026-03-16] ImageFX Google 로그인 사전 확인 API
   checkImageFxGoogleLogin: (): Promise<{ loggedIn: boolean; userName?: string; message: string }> =>
     ipcRenderer.invoke('imagefx:checkGoogleLogin'),

@@ -1619,7 +1619,25 @@ export function collectFullAutoFormData(): any {
   const skipImages = localStorage.getItem('textOnlyPublish') === 'true';
   const publishMode = (document.getElementById('unified-publish-mode') as HTMLSelectElement)?.value
     || 'publish';
-  const scheduleDate = publishMode === 'schedule' ? (document.getElementById('unified-schedule-date') as HTMLInputElement)?.value : undefined;
+  // ✅ [2026-03-17 FIX] datetime-local에서 날짜+시간 올바르게 분리 (T 포함 방지)
+  let scheduleDate: string | undefined;
+  let scheduleTime: string | undefined;
+  if (publishMode === 'schedule') {
+    const rawScheduleVal = (document.getElementById('unified-schedule-date') as HTMLInputElement)?.value;
+    if (rawScheduleVal) {
+      if (rawScheduleVal.includes('T')) {
+        const parts = rawScheduleVal.split('T');
+        scheduleDate = parts[0]; // YYYY-MM-DD
+        scheduleTime = parts[1]?.substring(0, 5); // HH:mm
+      } else if (rawScheduleVal.includes(' ')) {
+        const parts = rawScheduleVal.split(' ');
+        scheduleDate = parts[0];
+        scheduleTime = parts[1]?.substring(0, 5);
+      } else {
+        scheduleDate = rawScheduleVal; // 날짜만 있는 경우
+      }
+    }
+  }
   const autoPublish = (document.getElementById('auto-publish-after-generate') as HTMLInputElement)?.checked || false;
 
   // ✅ 썸네일 텍스트 옵션 — localStorage 단일 소스
@@ -1647,6 +1665,7 @@ export function collectFullAutoFormData(): any {
     skipImages,
     publishMode,
     scheduleDate,
+    scheduleTime,
     includeThumbnailText,
     enablePreview,
     autoOptimize,
