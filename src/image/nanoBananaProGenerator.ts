@@ -569,9 +569,10 @@ export async function generateWithNanoBananaPro(
       }
     }
 
-    // ✅ [2026-03-15] ImageFX 메인 + 2장 병렬 처리
+    // ✅ [2026-03-17] ImageFX 우선 로직 제거 — 나노바나나 선택 시 Gemini API만 사용
+    // ImageFX는 사용자가 명시적으로 imagefx를 선택했을 때만 사용
     const PARALLEL_LIMIT = 2;
-    console.log(`[NanoBananaPro] 📷 2장 병렬 처리 모드 (ImageFX 우선)`);
+    console.log(`[NanoBananaPro] 📷 2장 병렬 처리 모드 (Gemini API)`);
 
     // 병렬 처리를 위한 세마포어 (동시 실행 제한)
     let activeCount = 0;
@@ -625,53 +626,8 @@ export async function generateWithNanoBananaPro(
 
             let result: GeneratedImage | null = null;
 
-            // ✅ [2026-03-15] ImageFX 우선 시도 (쇼핑커넥트가 아닌 경우)
-            if (!isShoppingConnect) {
-              try {
-                const { generateSingleImageWithImageFx } = await import('./imageFxGenerator.js');
-                const promptBuilder = new PromptBuilder();
-                // 이미지 비율 (config에서)
-                const configModuleForRatio = await import('../configManager.js');
-                const configForRatio = await configModuleForRatio.loadConfig();
-                const imageRatio = (modifiedItem as any).imageRatio || (configForRatio as any).imageRatio || '1:1';
-
-                // 영어 프롬프트 사용 (ImageFX는 영어 최적화)
-                const fxPrompt = modifiedItem.englishPrompt || modifiedItem.prompt || modifiedItem.heading;
-
-                console.log(`[NanoBananaPro] 🆓 [ImageFX] 무료 이미지 생성 시도: "${modifiedItem.heading}" (${i + 1}/${items.length})`);
-                sendImageLog(`🆓 [ImageFX] "${modifiedItem.heading}" 생성 중... (${i + 1}/${items.length})`);
-
-                const fxResult = await generateSingleImageWithImageFx(fxPrompt, imageRatio, sessionAbortController?.signal);
-
-                if (fxResult) {
-                  // ImageFX 성공! 파일 저장
-                  // ✅ [2026-03-16 FIX] mimeType → 확장자 변환 (image/png → png, image/jpeg → jpg)
-                  const fxExt = fxResult.mimeType.includes('/')
-                    ? fxResult.mimeType.split('/')[1].replace('jpeg', 'jpg')
-                    : fxResult.mimeType;
-                  const savedInfo = await writeImageFile(fxResult.buffer, fxExt, modifiedItem.heading, postTitle, postId);
-                  result = {
-                    heading: modifiedItem.heading,
-                    // ✅ [2026-03-16 FIX] savedToLocal(사용자 접근 가능 경로) 우선 사용
-                    filePath: savedInfo.savedToLocal || savedInfo.filePath,
-                    // ✅ [2026-03-16 FIX] writeImageFile의 전체 previewDataUrl 사용 (잘린 base64 제거)
-                    previewDataUrl: savedInfo.previewDataUrl || `data:${fxResult.mimeType};base64,${fxResult.buffer.toString('base64')}`,
-                    provider: 'imagefx' as any,
-                    ...(savedInfo.savedToLocal ? { savedToLocal: savedInfo.savedToLocal } : {}),
-                  };
-                  console.log(`[NanoBananaPro] ✅ [ImageFX] 무료 이미지 생성 성공! (${Math.round(fxResult.buffer.length / 1024)}KB)`);
-                  sendImageLog(`✅ [ImageFX] "${modifiedItem.heading}" 생성 완료!`);
-                }
-              } catch (fxError: any) {
-                console.warn(`[NanoBananaPro] ⚠️ [ImageFX] 실패: ${fxError.message}`);
-                sendImageLog(`⚠️ [ImageFX] 실패: ${fxError.message} — 재시도합니다`);
-                // ✅ [2026-03-16] Gemini 폴백 제거 — ImageFX 실패 시 Gemini로 넘어가지 않음 (result=null 유지 → 재시도 루프에서 처리)
-              }
-            }
-
-            // ImageFX 실패 또는 쇼핑커넥트 → 기존 Gemini 로직
-            if (!result) {
-              result = await generateSingleImageWithGemini(
+            // ✅ [2026-03-17] 나노바나나 = Gemini API 직접 사용 (ImageFX 우선 로직 제거)
+            result = await generateSingleImageWithGemini(
                 modifiedItem,
                 i,
                 isThumbnail,
@@ -688,7 +644,6 @@ export async function generateWithNanoBananaPro(
                 cachedReferenceImage,
                 keyPool
               );
-            }
 
             if (result) {
               console.log(`[NanoBananaPro] ✅ [Parallel] "${item.heading}" 생성 완료 (${i + 1}/${items.length})`);

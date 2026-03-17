@@ -179,7 +179,7 @@ export function getHeadingImageModeDisplayText(): string {
 }
 
 let currentHeadingImageMode: HeadingImageMode = 'all';
-let currentGlobalImageSource: GlobalImageSource = 'imagefx';
+let currentGlobalImageSource: GlobalImageSource = 'nano-banana-pro';
 let currentImageStyle: ImageStyleType = 'realistic'; // ✅ 기본값: 실사
 let currentImageRatio: ImageAspectRatio = '1:1'; // ✅ 기본값: 정사각형
 
@@ -220,7 +220,7 @@ export function getFullAutoImageSource(): GlobalImageSource {
   // ✅ [2026-02-13 FIX] 유효한 AI 엔진 목록 (이것 외의 값은 모두 무효)
   const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx'];
 
-  // 우선순위: fullAutoImageSource → globalImageSource → 'imagefx' (무료 기본값)
+  // 우선순위: fullAutoImageSource → globalImageSource → 'nano-banana-pro' (Gemini 기본값)
   const fullAutoSaved = safeLocalStorageGet('fullAutoImageSource');
   if (fullAutoSaved) {
     if (VALID_SOURCES.includes(fullAutoSaved as GlobalImageSource)) {
@@ -240,7 +240,7 @@ export function getFullAutoImageSource(): GlobalImageSource {
     console.warn(`[HeadingImageSettings] ⚠️ globalImageSource에 유효하지 않은 값 "${globalSaved}" → 제거`);
     try { localStorage.removeItem('globalImageSource'); } catch (_) { /* ignore */ }
   }
-  return 'imagefx';
+  return 'nano-banana-pro';
 }
 
 export function setFullAutoImageSource(source: GlobalImageSource): void {

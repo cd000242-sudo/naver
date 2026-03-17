@@ -733,8 +733,8 @@ export function initHeadingImageGeneration(): void {
         generateImagesBtnMain.disabled = true;
         generateImagesBtnMain.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>생성 중...</span>';
 
-        // ✅ [2026-03-16] ImageFX 사전 Google 로그인 확인
-        if (imageSource === 'imagefx' || (!['pollinations', 'nano-banana-pro', 'prodia', 'stability', 'falai', 'deepinfra', 'deepinfra-flux', 'leonardoai', 'openai-image', 'naver-search', 'naver'].includes(imageSource))) {
+        // ✅ [2026-03-17] ImageFX 사전 Google 로그인 확인 — ImageFX 명시적 선택 시에만
+        if (imageSource === 'imagefx') {
           appendLog('🔍 Google 로그인 확인 중... (ImageFX 사용 준비)', 'images-log-output');
           try {
             const loginResult = await (window as any).api.checkImageFxGoogleLogin();
@@ -1331,12 +1331,12 @@ export function initHeadingImageGeneration(): void {
               // ✅ 네이버 이미지 검색: 사용자가 명시적으로 선택한 경우에만 사용
               imageUrl = await searchNaverImage(promptForImage);
             } else {
-              // ✅ [2026-03-16 FIX] 기본값: 알 수 없는 이미지 소스는 imagefx 사용 (Gemini 불필요)
-              console.warn(`[ImageGen] 알 수 없는 이미지 소스 "${imageSource}", 기본 AI 이미지 생성기(imagefx) 사용`);
-              appendLog(`  ⚠️ 알 수 없는 엔진 "${imageSource}" → ImageFX (무료)로 대체`, 'images-log-output');
+              // ✅ [2026-03-17 FIX] 기본값: 알 수 없는 이미지 소스는 nano-banana-pro(Gemini) 사용
+              console.warn(`[ImageGen] 알 수 없는 이미지 소스 "${imageSource}", 나노 바나나 프로(Gemini)로 대체`);
+              appendLog(`  ⚠️ 알 수 없는 엔진 "${imageSource}" → 나노 바나나 프로(Gemini)로 대체`, 'images-log-output');
               const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
               const imageResult = await generateImagesWithCostSafety({
-                provider: 'imagefx',
+                provider: 'nano-banana-pro',
                 items: [{
                   heading: headingForImage,
                   prompt: promptForImage,
@@ -1516,7 +1516,7 @@ export function initHeadingImageGeneration(): void {
       const selectedSource = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
       // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
       const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
-      const imageSource = dropdownSource || selectedSource?.dataset.source || 'imagefx';
+      const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-pro';
       console.log(`[ImageGeneration] 남은 이미지 소스: ${imageSource}`);
 
       try {
@@ -4274,10 +4274,10 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       // ✅ 네이버 이미지 검색: 사용자가 명시적으로 선택한 경우에만 사용
       imageUrl = await searchNaverImage(finalPrompt);
     } else {
-      // ✅ [2026-03-16 FIX] 기본값: 알 수 없는 이미지 소스는 imagefx 사용 (Gemini 불필요)
-      console.warn(`[ImageGen] 알 수 없는 이미지 소스 "${imageSource}", 기본 AI 이미지 생성기(imagefx) 사용`);
+      // ✅ [2026-03-17 FIX] 기본값: 알 수 없는 이미지 소스는 nano-banana-pro(Gemini) 사용
+      console.warn(`[ImageGen] 알 수 없는 이미지 소스 "${imageSource}", 나노 바나나 프로(Gemini)로 대체`);
       const imageResult = await generateImagesWithCostSafety({
-        provider: 'imagefx',
+        provider: 'nano-banana-pro',
         items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen }],
         postTitle: blogTitle,
         isFullAuto: true,

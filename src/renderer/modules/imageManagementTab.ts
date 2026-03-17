@@ -353,7 +353,7 @@ export function initImageManagementTab(): void {
 
         if (!confirmed) {
           // 이전 선택으로 되돌리기 (나노 바나나 프로로)
-          imageSourceSelect.value = 'imagefx';
+          imageSourceSelect.value = 'nano-banana-pro';
           appendLog('⚠️ 저장된 이미지 사용이 취소되었습니다.');
           return;
         }

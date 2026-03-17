@@ -188,9 +188,9 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   console.log(`[ImageGenerator] 🔍🔍🔍 수신된 options.provider = "${options.provider}" (type: ${typeof options.provider})`);
 
   // ✅ [2026-01-28 FIX] 프로바이더 이름 정규화
-  let normalizedProvider: string = options.provider || 'imagefx';
+  let normalizedProvider: string = options.provider || 'nano-banana-pro';
   if (!options.provider) {
-    console.warn(`[ImageGenerator] ⚠️⚠️⚠️ options.provider가 비어있어 'imagefx' 기본값 적용! 호출자 확인 필요!`);
+    console.warn(`[ImageGenerator] ⚠️⚠️⚠️ options.provider가 비어있어 'nano-banana-pro' 기본값 적용! 호출자 확인 필요!`);
   }
 
   // deepinfra-flux, deepinfra-flux-2 등 → deepinfra
@@ -395,25 +395,28 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     }
   }
 
-  // ✅ [2026-03-16 FIX] 'saved', 'skip' 등 유효하지 않은 provider는 imagefx로 폴백 (Gemini 불필요)
-  console.warn(`[ImageGenerator] ⚠️ 지원하지 않는 제공자 "${normalizedProvider}" → imagefx로 폴백`);
-  normalizedProvider = 'imagefx';
+  // ✅ [2026-03-17 FIX] 'saved', 'skip' 등 유효하지 않은 provider는 nano-banana-pro로 폴백
+  console.warn(`[ImageGenerator] ⚠️ 지원하지 않는 제공자 "${normalizedProvider}" → nano-banana-pro(Gemini)로 폴백`);
+  normalizedProvider = 'nano-banana-pro';
 
-  // imagefx 폴백 실행 (Gemini API 키 불필요)
+  // nano-banana-pro 폴백 실행 (Gemini API)
   try {
-    console.log(`[이미지생성] ✨ 폴백: ImageFX(무료)로 ${items.length}개 이미지 생성 시작...`);
-    const fallbackImages = await generateWithImageFx(
+    console.log(`[이미지생성] 🍌 폴백: 나노 바나나 프로(Gemini)로 ${items.length}개 이미지 생성 시작...`);
+    const fallbackImages = await generateWithNanoBananaPro(
       items,
       options.postTitle,
       options.postId,
       options.isFullAuto,
-      options.isShoppingConnect || false,
+      apiKeys?.geminiApiKey,
+      options.isShoppingConnect,
+      options.collectedImages,
       options.stopCheck,
-      onImageGenerated
+      onImageGenerated,
+      (options as any).productData
     );
-    console.log(`[이미지생성] ✅ 폴백 ImageFX(무료)로 ${fallbackImages.length}개 이미지 생성 완료!`);
-    return await applyKoreanTextOverlayIfNeeded(fallbackImages, 'imagefx', options.postTitle, options.thumbnailTextInclude, items);
+    console.log(`[이미지생성] ✅ 폴백 나노 바나나 프로(Gemini)로 ${fallbackImages.length}개 이미지 생성 완료!`);
+    return fallbackImages;
   } catch (fallbackError) {
-    throw new Error(`이미지 생성 실패: 지원하지 않는 이미지 제공자(${options.provider}) 및 ImageFX 폴백 실패 - ${(fallbackError as Error).message}`);
+    throw new Error(`이미지 생성 실패: 지원하지 않는 이미지 제공자(${options.provider}) 및 Gemini 폴백 실패 - ${(fallbackError as Error).message}`);
   }
 }
