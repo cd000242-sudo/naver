@@ -104,8 +104,8 @@ const SYNONYM_MAP: Record<string, string[]> = {
   '그리고': ['또한', '게다가', '더불어', '아울러'],
 };
 
-// ✅ AI 특유 패턴 제거 (완전 제거 대상)
-const AI_PATTERN_REMOVALS: { pattern: RegExp; replacement: string }[] = [
+// ✅ AI 특유 패턴 제거 (완전 제거 대상) — 톤 공통 (모든 톤에서 제거해야 할 AI 패턴)
+const AI_PATTERN_REMOVALS_COMMON: { pattern: RegExp; replacement: string }[] = [
   { pattern: /물론,?\s*/g, replacement: '' },
   { pattern: /확실히,?\s*/g, replacement: '' },
   { pattern: /당연히,?\s*/g, replacement: '' },
@@ -117,6 +117,10 @@ const AI_PATTERN_REMOVALS: { pattern: RegExp; replacement: string }[] = [
   { pattern: /중요한 점은,?\s*/g, replacement: '' },
   { pattern: /기본적으로,?\s*/g, replacement: '' },
   { pattern: /일반적으로,?\s*/g, replacement: '보통 ' },
+];
+
+// ✅ 구어체 전용 AI 패턴 제거 — professional/formal 톤에서는 스킵
+const AI_PATTERN_REMOVALS_CASUAL_ONLY: { pattern: RegExp; replacement: string }[] = [
   { pattern: /~것입니다\./g, replacement: '거예요.' },
   { pattern: /~입니다\./g, replacement: '예요.' },
   { pattern: /알려드리겠습니다/g, replacement: '알려드릴게요' },
@@ -126,7 +130,7 @@ const AI_PATTERN_REMOVALS: { pattern: RegExp; replacement: string }[] = [
   { pattern: /도움이 되셨으면 좋겠습니다/g, replacement: '도움이 됐으면 해요' },
 ];
 
-// ✅ 구어체 전환 매핑 (확장)
+// ✅ 문장 끝 다양화 매핑 — 구어체 톤에서만 적용 (professional/formal 톤에서는 스킵!)
 const FORMAL_TO_CASUAL: Record<string, string[]> = {
   '입니다': ['이에요', '예요', '이랍니다', '거든요', '이죠'],
   '습니다': ['어요', '아요', '죠', '거든요', '네요'],
@@ -236,59 +240,62 @@ let _humanizerLogShown = false;
 /**
  * ✅ 메인 AI 회피 함수 (Humanize) - 끝판왕 버전
  */
-export function humanizeContent(content: string, intensity: 'light' | 'medium' | 'strong' = 'medium', silent: boolean = false): string {
+export function humanizeContent(content: string, intensity: 'light' | 'medium' | 'strong' = 'medium', silent: boolean = false, toneStyle?: string): string {
   if (!content) return content;
+
+  // 톤 분류: 격식체(professional/formal)인지 판별
+  const isFormalTone = toneStyle === 'professional' || toneStyle === 'formal';
 
   // 로그 한 번만 출력
   if (!silent && !_humanizerLogShown) {
-    console.log(`[Humanizer] 🚀 끝판왕 AI 탐지 회피 처리 시작 (강도: ${intensity})`);
+    console.log(`[Humanizer] 🚀 끝판왕 AI 탐지 회피 처리 시작 (강도: ${intensity}, 톤: ${toneStyle || '미지정'}${isFormalTone ? ' → 격식체 보호 모드' : ''})`);
     _humanizerLogShown = true;
   }
 
   let result = content;
 
-  // 0. 한국어 맞춤법 교정
+  // 0. 한국어 맞춤법 교정 (모든 톤 공통)
   result = correctSpelling(result);
 
-  // 1. AI 특유 패턴 완전 제거
-  result = removeAiPatterns(result);
+  // 1. AI 특유 패턴 제거 (톤 인지: 격식체에서는 구어체 변환 스킵)
+  result = removeAiPatterns(result, isFormalTone);
 
-  // 2. 번역투(피동→능동) 변환 ⭐ NEW
-  result = removeTranslationese(result);
+  // 2. 번역투(피동→능동) 변환 (톤 인지: 격식체에서는 격식→구어 변환 스킵)
+  result = removeTranslationese(result, isFormalTone);
 
-  // 3. 반복 패턴 제거
+  // 3. 반복 패턴 제거 (모든 톤 공통)
   result = removeRepetitivePatterns(result);
 
-  // 4. 문장 끝 다양화 (formal → casual 혼합)
-  if (intensity !== 'light') {
+  // 4. 문장 끝 다양화 — 격식체 톤에서는 완전 스킵! (STYLE OVERRIDE 보호)
+  if (intensity !== 'light' && !isFormalTone) {
     result = diversifyEndings(result, intensity === 'strong' ? 0.6 : 0.4);
   }
 
-  // 5. 연속 어미 다양화 (로봇 말투 방지) ⭐ NEW
-  result = diversifyConsecutiveEndings(result);
+  // 5. 연속 어미 다양화 (톤 인지: 격식체 전용 로테이션)
+  result = diversifyConsecutiveEndings(result, isFormalTone);
 
-  // 6. 연결어 다양화
+  // 6. 연결어 다양화 (모든 톤 공통)
   result = diversifyConnectors(result);
 
-  // 7. 동의어 치환
+  // 7. 동의어 치환 (모든 톤 공통)
   if (intensity !== 'light') {
     result = replaceSynonyms(result, intensity === 'strong' ? 0.3 : 0.15);
   }
 
-  // 8. 개인적 표현 삽입
-  if (intensity !== 'light') {
+  // 8. 개인적 표현 삽입 — 격식체에서는 스킵 ("제 생각엔" 등은 격식에 부적합)
+  if (intensity !== 'light' && !isFormalTone) {
     result = insertPersonalExpressions(result, intensity === 'strong' ? 0.2 : 0.1);
   }
 
-  // 9. 감탄사 삽입 (자연스럽게)
-  if (intensity === 'strong') {
+  // 9. 감탄사 삽입 — 격식체에서는 스킵 ("와", "대박" 등은 격식에 부적합)
+  if (intensity === 'strong' && !isFormalTone) {
     result = insertInterjections(result, 0.08);
   }
 
-  // 10. 문장 길이 불규칙화 (리듬감 부여)
+  // 10. 문장 길이 불규칙화 (모든 톤 공통 — 리듬감은 중요)
   result = irregularizeSentenceLength(result);
 
-  // 11. 숫자/날짜 자연화
+  // 11. 숫자/날짜 자연화 (모든 톤 공통)
   result = naturalizeNumbers(result);
 
   return result;
@@ -304,18 +311,30 @@ export function resetHumanizerLog(): void {
 /**
  * ✅ 번역투(Translationese) 제거 - 피동→능동 변환
  */
-function removeTranslationese(text: string): string {
+function removeTranslationese(text: string, isFormalTone: boolean = false): string {
   let result = text;
   let fixes = 0;
 
   for (const { pattern, replacement } of TRANSLATIONESE_FIXES) {
+    // ✅ 격식체 보호: professional/formal 톤에서 격식→구어 변환 스킵
+    if (isFormalTone) {
+      const repStr = String(replacement);
+      // 격식체 어미를 구어체로 바꾸는 규칙은 스킵
+      if (repStr.includes('것 같아요') || repStr.includes('예요') || 
+          repStr.includes('해요') || repStr.includes('했어요') ||
+          repStr.includes('할 수 있어요') || repStr.includes('해야 해요') ||
+          repStr.includes('하면 좋아요') || repStr.includes('하는 게 좋아요') ||
+          repStr.includes('돼요') || repStr.includes('이뤄요')) {
+        continue; // 이 규칙 스킵
+      }
+    }
     const before = result;
     result = result.replace(pattern, replacement);
     if (result !== before) fixes++;
   }
 
   if (fixes > 0) {
-    console.log(`[Humanizer] 번역투 제거: ${fixes}개`);
+    console.log(`[Humanizer] 번역투 제거: ${fixes}개${isFormalTone ? ' (격식체 보호 모드)' : ''}`);
   }
   return result;
 }
@@ -324,19 +343,33 @@ function removeTranslationese(text: string): string {
  * ✅ 연속 어미 다양화 (로봇 말투 방지)
  * "~해요. ~해요. ~해요." → "~해요. ~하죠. ~하거든요."
  */
-function diversifyConsecutiveEndings(text: string): string {
+// ✅ 격식체 전용 연속 어미 다양화 매핑
+const FORMAL_ENDING_VARIATIONS: Record<string, string[]> = {
+  '합니다': ['하겠습니다', '한 바 있습니다', '하는 것입니다'],
+  '입니다': ['이겠습니다', '인 것입니다', '인 셈입니다'],
+  '됩니다': ['되겠습니다', '되는 것입니다', '된 바 있습니다'],
+  '있습니다': ['있겠습니다', '있는 것입니다', '있는 셈입니다'],
+  '없습니다': ['없겠습니다', '없는 것입니다', '없는 셈입니다'],
+  '했습니다': ['한 바 있습니다', '하였습니다', '하게 됐습니다'],
+  '됐습니다': ['된 바 있습니다', '되었습니다', '되어 있습니다'],
+};
+
+function diversifyConsecutiveEndings(text: string, isFormalTone: boolean = false): string {
   let result = text;
   let changes = 0;
 
   // 문장 단위로 분리
   const sentences = result.split(/(?<=[.!?])\s+/);
 
+  // 톤에 따라 사용할 매핑 선택
+  const variationMap = isFormalTone ? FORMAL_ENDING_VARIATIONS : ENDING_VARIATIONS;
+
   // 연속된 같은 어미 감지 및 변환
   for (let i = 1; i < sentences.length; i++) {
     const prevSentence = sentences[i - 1];
     const currSentence = sentences[i];
 
-    for (const [ending, variations] of Object.entries(ENDING_VARIATIONS)) {
+    for (const [ending, variations] of Object.entries(variationMap)) {
       // 이전 문장과 현재 문장이 같은 어미로 끝나면
       if (prevSentence.endsWith(ending + '.') && currSentence.endsWith(ending + '.')) {
         // 현재 문장의 어미를 다른 것으로 변환
@@ -349,7 +382,7 @@ function diversifyConsecutiveEndings(text: string): string {
   }
 
   if (changes > 0) {
-    console.log(`[Humanizer] 연속 어미 다양화: ${changes}개`);
+    console.log(`[Humanizer] 연속 어미 다양화: ${changes}개${isFormalTone ? ' (격식체 모드)' : ''}`);
   }
 
   return sentences.join(' ');
@@ -379,18 +412,28 @@ function correctSpelling(text: string): string {
 /**
  * ✅ AI 특유 패턴 완전 제거
  */
-function removeAiPatterns(text: string): string {
+function removeAiPatterns(text: string, isFormalTone: boolean = false): string {
   let result = text;
   let removals = 0;
 
-  for (const { pattern, replacement } of AI_PATTERN_REMOVALS) {
+  // 모든 톤에서 공통으로 제거할 AI 패턴
+  for (const { pattern, replacement } of AI_PATTERN_REMOVALS_COMMON) {
     const before = result;
     result = result.replace(pattern, replacement);
     if (result !== before) removals++;
   }
 
+  // ✅ 구어체 전용 변환 — 격식체 톤에서는 스킵 (STYLE OVERRIDE 보호)
+  if (!isFormalTone) {
+    for (const { pattern, replacement } of AI_PATTERN_REMOVALS_CASUAL_ONLY) {
+      const before = result;
+      result = result.replace(pattern, replacement);
+      if (result !== before) removals++;
+    }
+  }
+
   if (removals > 0) {
-    console.log(`[Humanizer] AI 패턴 제거: ${removals}개`);
+    console.log(`[Humanizer] AI 패턴 제거: ${removals}개${isFormalTone ? ' (격식체 보호 모드)' : ''}`);
   }
   return result;
 }

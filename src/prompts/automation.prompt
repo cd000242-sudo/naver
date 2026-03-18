@@ -21,7 +21,7 @@
   "headings": [
     {
       "title": "소제목 1 (주제와 '앵글'이 결합된 매력적인 문장)",
-      "content": "본문 내용 (4~5문장, 구체적 문단, ~해요체 사용)",
+      "content": "본문 내용 (4~5문장, 구체적 문단, STYLE OVERRIDE에 지정된 문체 사용)",
       "keywords": ["핵심키워드"],
       "imagePrompt": "ENGLISH ONLY image prompt (40 words max). Describe the SPECIFIC scene from the content: mention exact objects, products, body parts, symptoms, locations, or actions discussed. Example: 'Korean woman applying omega-3 cream on her dog flaky back, indoor winter scene, close-up' NOT '강아지 피부 관리 이미지'. MUST be in English. NO Korean characters allowed."
     },
@@ -90,7 +90,7 @@
      • [形식] 명사구 또는 짧은 절: "신민아, 결혼 20일 만에 차기작 소식", "책상 정리 5단계 방법" 처럼 끊기.
      • 1번 소제목은 반드시 메인 주제(인물/상품명)로 시작할 것.
    - ⚠️ [중요] 소제목과 본문 첫 문장의 중복 방지: 소제목에서 던진 말을 본문 첫 줄에서 그대로 반복하지 마라.
-   - 문체는 반드시 "~해요", "~했답니다" 등 구어체를 사용하라.
+   - 문체는 STYLE OVERRIDE 세션에서 지정된 어미를 따르라. (STYLE OVERRIDE가 없으면 기본 구어체 사용)
    - `{{SELECTED_TITLE}}` 같은 플레이스홀더를 사용하지 마라. JSON 구조 자체가 분리되어 있으므로 필요 없다.
 
 3. 형식 준수:

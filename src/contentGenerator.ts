@@ -2844,7 +2844,7 @@ ${schema}
 - 정확히 3줄
 - 첫 문장 15~25자 이내
 - 배경 설명/요약/정리 금지
-- 문체: 구어체 "~해요"
+- 문체: 사용자 설정 글톤 어미 적용 (기본: 자연스러운 구어체)
 - ⚠️ 서브키워드 1개 이상 도입부에 자연스럽게 포함
 
 제목: ${selectedTitle || '(없음)'}
@@ -4042,8 +4042,10 @@ function buildModeBasedPrompt(
   // ⚠️ 홈판 모드에서는 friendly/casual만 허용 (professional/formal 금지 - 기자체/설명체 방지)
   const userSelectedTone = source.toneStyle;
   let toneStyle = userSelectedTone || getAutoToneByCategory(categoryHint);
-  if (mode === 'homefeed' && (toneStyle === 'professional' || toneStyle === 'formal')) {
-    console.log(`[PromptBuilder] ⚠️ 홈판 모드에서 ${toneStyle} 톤 금지 → friendly로 강제 변경`);
+  // ⚠️ 홈판 모드: 자동 톤에서 professional/formal이 선택된 경우만 friendly 폴백
+  // → 사용자가 명시적으로 선택한 톤은 STYLE OVERRIDE 원칙에 따라 항상 존중!
+  if (mode === 'homefeed' && !userSelectedTone && (toneStyle === 'professional' || toneStyle === 'formal')) {
+    console.log(`[PromptBuilder] ⚠️ 홈판 자동 톤 ${toneStyle} → friendly 폴백 (사용자 미선택)`);
     toneStyle = 'friendly';
   }
   if (userSelectedTone) {
@@ -4076,12 +4078,12 @@ ${source.customPrompt.trim()}
 ═══════════════════════════════════════════════════════════
 
 【글톤: ${customTone}】
-${customTone === 'friendly' ? '- 친구에게 이야기하듯 편안한 "~해요" 체' :
+${customTone === 'friendly' ? '- 친구에게 이야기하듯 편안한 구어체 (STYLE OVERRIDE 어미 적용)' :
   customTone === 'professional' ? '- 전문적이면서 읽기 쉬운 "~합니다" 체' :
   customTone === 'casual' ? '- 가벼운 수다 톤, 짧은 문장, "~거든요" "~잖아요" 체' :
   customTone === 'formal' ? '- 격식체, 정중한 어투 "~입니다" 체' :
   customTone === 'humorous' ? '- 재미있고 유쾌한 톤, 위트 있는 비유' :
-  '- 자연스럽고 친근한 "~해요" 체'}
+  '- 사용자 설정 글톤(toneStyle)에 맞는 자연스러운 문체'}
 
 【이모지 절대 금지】
 - 본문, 소제목 어디에서도 이모지/이모티콘 사용 금지
@@ -4544,7 +4546,7 @@ ${customTone === 'friendly' ? '- 친구에게 이야기하듯 편안한 "~해요
 - [강제] 1번 소제목은 반드시 인물명(주어)으로 시작 (예: "매니저의 폭로" - O / "의 폭로" - X)
 - 본문 중간에 "📌 당시 대중 반응 요약" 블록 필수 (반드시 앞에 빈 줄 삽입!, 실제 댓글처럼 3~4줄)
 - conclusion: 결론/정리 금지, 여운형 문장 2줄만
-- 전체 톤: 구어체 "~해요" 강제, 기자체/설명체 절대 금지
+- 전체 톤: 사용자 설정 글톤 어미 적용, 기자체/설명체 절대 금지
 ` : `
 ⚠️⚠️⚠️ [SEO 모드 필수 규칙] ⚠️⚠️⚠️
 - [강제] 1번 소제목은 반드시 메인 주제(주어)로 시작 (예: "아이폰16 디자인" - O / "의 디자인" - X)
@@ -8558,7 +8560,7 @@ ${extraInstruction}`;
 
         // Humanize 적용
         if (optimized.bodyPlain) {
-          optimized.bodyPlain = humanizeContent(optimized.bodyPlain, humanizeIntensity);
+          optimized.bodyPlain = humanizeContent(optimized.bodyPlain, humanizeIntensity, false, source.toneStyle);
         }
         if (optimized.bodyHtml) {
           optimized.bodyHtml = humanizeHtmlContent(optimized.bodyHtml, humanizeIntensity);
