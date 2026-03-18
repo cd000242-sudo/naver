@@ -6174,6 +6174,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           thumbnailImageRatio: options?.thumbnailImageRatio || '1:1',  // 썸네일 비율
           subheadingImageRatio: options?.subheadingImageRatio || '1:1',  // 소제목 비율
           scAutoThumbnailSetting: options?.scAutoThumbnailSetting || false,  // 자동 썸네일
+          // ✅ [2026-03-18 FIX] presetThumbnailPath → thumbnailPath 매핑 (BlogExecutor L415에서 payload.thumbnailPath 참조)
+          thumbnailPath: options?.thumbnailPath || options?.presetThumbnailPath || undefined,
         };
 
         // ✅ [2026-03-01 FIX] 선차감 패턴: 계정별 발행 전 쿼터 차감

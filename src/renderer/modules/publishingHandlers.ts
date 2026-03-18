@@ -1084,6 +1084,16 @@ export async function handleMultiAccountPublish(): Promise<void> {
 
       console.log(`[다중계정] 순차 예약 간격: ${scheduleIntervalValue}분, 시작 시간: ${scheduleTimeValue}, 랜덤: ${useRandomOffset}`);
 
+      // ✅ [2026-03-18 FIX] renderer에서 이미 생성된 이미지를 publishOptions에 포함
+      // main.ts L5958 (직접 경로) + L5972 (preGeneratedContent 내부 경로) 양쪽 활성화
+      const maImages = ImageManager.getAllImages();
+      const normalizedImagesForMultiAccount = (Array.isArray(maImages) ? maImages : [])
+        .map((img: any) => ({
+          ...img,
+          filePath: img?.filePath || img?.url || img?.previewDataUrl,
+        }))
+        .filter((img: any) => Boolean(img?.filePath));
+
       const publishOptions = {
         naverId: credResult.credentials.naverId,
         naverPassword: credResult.credentials.naverPassword,
@@ -1116,10 +1126,17 @@ export async function handleMultiAccountPublish(): Promise<void> {
           hashtags: mainSettings.generatedHashtags,
           // ✅ [2026-02-21 FIX] structuredContent 포함하여 main.ts에서 selectedTitle 참조 가능
           structuredContent: (window as any).currentStructuredContent || undefined,
+          // ✅ [2026-03-18 FIX] generatedImages를 preGeneratedContent 내부에도 포함
+          // main.ts L5972: generatedImages = preGenerated.generatedImages || generatedImages
+          generatedImages: normalizedImagesForMultiAccount.length > 0 ? normalizedImagesForMultiAccount : undefined,
         } : null,
+        // ✅ [2026-03-18 FIX] 최상위에도 generatedImages 포함 (main.ts L5958 직접 경로)
+        generatedImages: normalizedImagesForMultiAccount.length > 0 ? normalizedImagesForMultiAccount : undefined,
         // ✅ [2026-01-20] 프리셋 썸네일 정보 전달
         presetThumbnail: (window as any).maPresetThumbnail || undefined,
         presetThumbnailPath: (window as any).maPresetThumbnailPath || undefined,
+        // ✅ [2026-03-18 FIX] BlogExecutor에서 payload.thumbnailPath를 참조하므로 직접 매핑
+        thumbnailPath: (window as any).maPresetThumbnailPath || undefined,
       };
 
       // 발행 실행

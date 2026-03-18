@@ -266,6 +266,15 @@ export function humanizeContent(content: string, intensity: 'light' | 'medium' |
   // 3. 반복 패턴 제거 (모든 톤 공통)
   result = removeRepetitivePatterns(result);
 
+  // 3.5 [끝판왕] 출처 인용 반복 패턴 제거 ("참고 자료를 보면" 류)
+  result = deduplicateSourceCitations(result);
+
+  // 3.6 [끝판왕] 선언형 단독 문장 보정 ("이 지점이 중요합니다" 류)
+  result = softenDeclarativeSentences(result, isFormalTone);
+
+  // 3.7 [끝판왕] 연속 독립 문장 연결 (연결어 없이 3문장 이상 나열 방지)
+  result = connectIsolatedSentences(result, isFormalTone);
+
   // 4. 문장 끝 다양화 — 격식체 톤에서는 완전 스킵! (STYLE OVERRIDE 보호)
   if (intensity !== 'light' && !isFormalTone) {
     result = diversifyEndings(result, intensity === 'strong' ? 0.6 : 0.4);
@@ -639,6 +648,148 @@ function naturalizeNumbers(text: string): string {
   }
 
   return result;
+}
+
+// ════════════════════════════════════════════════════════════
+// ✅ [끝판왕] Stage 2 — 문장 흐름 보정 엔진 (3개 신규 함수)
+// ════════════════════════════════════════════════════════════
+
+/**
+ * ✅ [끝판왕 3.5] 출처 인용 반복 패턴 제거
+ * "참고 자료를 보면", "자료에 따르면" 등이 2회 이상 등장하면
+ * 2번째부터 다른 표현으로 치환하거나 제거
+ */
+function deduplicateSourceCitations(text: string): string {
+  const citationPatterns: { pattern: RegExp; alternatives: string[] }[] = [
+    {
+      pattern: /참고\s*자료를\s*보면/g,
+      alternatives: ['실제로 확인해보면', '찾아보니까', '알려진 바로는', '']
+    },
+    {
+      pattern: /자료에\s*따르면/g,
+      alternatives: ['확인해보면', '알고 보니', '실제로는', '']
+    },
+    {
+      pattern: /여러\s*(?:참고\s*)?자료(?:들)?(?:을|는|에서)/g,
+      alternatives: ['확인 결과', '알아본 바로는', '']
+    },
+    {
+      pattern: /연구\s*결과에\s*따르면/g,
+      alternatives: ['확인된 바로는', '알려진 것처럼', '']
+    },
+  ];
+
+  let result = text;
+  let changes = 0;
+
+  for (const { pattern, alternatives } of citationPatterns) {
+    let matchCount = 0;
+    result = result.replace(pattern, (match) => {
+      matchCount++;
+      if (matchCount === 1) return match; // 첫 번째는 유지
+      // 2번째부터 대체
+      const alt = alternatives[Math.floor(Math.random() * alternatives.length)];
+      changes++;
+      return alt; // 빈 문자열이면 완전 제거
+    });
+  }
+
+  if (changes > 0) {
+    console.log(`[Humanizer] 출처 인용 반복 제거: ${changes}개`);
+  }
+  return result;
+}
+
+/**
+ * ✅ [끝판왕 3.6] 선언형 단독 문장 보정
+ * "이 지점이 중요합니다.", "이 부분이 핵심입니다." 등
+ * 맥락 없이 단독으로 존재하는 선언형 문장을 탐지하여
+ * 앞 문장과 자연스럽게 합치거나 연결어를 삽입
+ */
+function softenDeclarativeSentences(text: string, isFormalTone: boolean = false): string {
+  // 선언형 패턴들
+  const declarativePatterns = [
+    /이\s*지점이\s*(중요|핵심|필수)[^.]*\./g,
+    /이\s*부분이\s*(중요|핵심|필수|관건)[^.]*\./g,
+    /이\s*차이를\s*함께\s*봐야[^.]*\./g,
+    /이것이?\s*(중요|핵심|필수)[^.]*\./g,
+    /이\s*사실이\s*(중요|핵심)[^.]*\./g,
+    /이\s*점을\s*꼭\s*기억[^.]*\./g,
+  ];
+
+  let result = text;
+  let changes = 0;
+
+  for (const pattern of declarativePatterns) {
+    result = result.replace(pattern, (match) => {
+      changes++;
+      if (isFormalTone) {
+        // 격식체: 연결어를 붙여서 완화
+        return match.replace(/\.\s*$/, ', 이에 대해 구체적으로 살펴보겠습니다.');
+      } else {
+        // 구어체: 더 자연스럽게 변환
+        return match
+          .replace('이 지점이 중요합니다', '왜 중요하냐면')
+          .replace('이 부분이 핵심입니다', '핵심은 바로')
+          .replace('이 부분이 중요합니다', '중요한 건')
+          .replace('이것이 중요합니다', '중요한 건')
+          .replace('이 차이를 함께 봐야 합니다', '이 차이를 알면')
+          .replace('이 점을 꼭 기억해야 합니다', '꼭 기억할 건');
+      }
+    });
+  }
+
+  if (changes > 0) {
+    console.log(`[Humanizer] 선언형 문장 보정: ${changes}개${isFormalTone ? ' (격식체)' : ''}`);
+  }
+  return result;
+}
+
+/**
+ * ✅ [끝판왕 3.7] 연속 독립 문장 연결
+ * 연결어 없이 3개 이상 독립적으로 나열된 문장을 탐지하여
+ * 2번째/3번째 문장 앞에 자연스러운 연결어 삽입
+ */
+function connectIsolatedSentences(text: string, isFormalTone: boolean = false): string {
+  // 연결어 목록 (톤별)
+  const formalConnectors = ['이에 따라 ', '이를 바탕으로 보면 ', '이러한 맥락에서 ', '한편 ', '다만 ', '아울러 '];
+  const casualConnectors = ['그래서 ', '근데 ', '알고 보니 ', '그러니까 ', '사실 ', '그런데 '];
+
+  const connectors = isFormalTone ? formalConnectors : casualConnectors;
+
+  // 연결어 존재 여부 체크용 패턴
+  const hasConnector = /^(그래서|근데|그런데|하지만|그러나|따라서|한편|다만|그리고|또한|그러므로|이에|아울러|더불어|반면|그렇지만|또|게다가|이를|이러한|알고 보니|사실|왜냐하면|물론|실제로)/;
+
+  const sentences = text.split(/(?<=[.!?])\s+/);
+  if (sentences.length < 3) return text;
+
+  let isolatedCount = 0;
+  let changes = 0;
+
+  for (let i = 0; i < sentences.length; i++) {
+    const s = sentences[i].trim();
+    if (!s) continue;
+
+    if (hasConnector.test(s)) {
+      isolatedCount = 0; // 연결어가 있으면 카운트 리셋
+    } else {
+      isolatedCount++;
+    }
+
+    // 3번째 연속 독립 문장부터 연결어 삽입
+    if (isolatedCount >= 3 && !hasConnector.test(s)) {
+      const connector = connectors[Math.floor(Math.random() * connectors.length)];
+      // 한국어는 대소문자 구분 없으므로 그대로 붙임
+      sentences[i] = connector + s;
+      changes++;
+      isolatedCount = 0; // 리셋
+    }
+  }
+
+  if (changes > 0) {
+    console.log(`[Humanizer] 독립 문장 연결: ${changes}개${isFormalTone ? ' (격식체)' : ''}`);
+  }
+  return sentences.join(' ');
 }
 
 /**
