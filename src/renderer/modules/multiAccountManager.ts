@@ -2285,6 +2285,9 @@ export async function initMultiAccountPublishModal() {
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
 
+    // ✅ 모달 열리면 플로팅 바 숨기기
+    hideMAFloatingBar();
+
     const stopBtn = document.getElementById('ma-progress-stop-btn');
     if (stopBtn) stopBtn.style.display = 'flex';
     const closeBtn = document.getElementById('ma-progress-close-btn');
@@ -2306,10 +2309,90 @@ export async function initMultiAccountPublishModal() {
     if (!modal) return;
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true');
+
+    // ✅ [2026-03-18] 최소화 시 하단 플로팅 진행률 바 표시
+    if (isPublishing) {
+      createOrShowMAFloatingBar();
+      toastManager.info('📊 하단 바에서 진행 상황을 확인할 수 있습니다.', 3000);
+    }
+  }
+
+  // ============================================
+  // ✅ [2026-03-18] 다중계정 하단 플로팅 진행률 바
+  // 연속발행의 continuous-status-indicator 패턴을 다중계정에 적용
+  // ============================================
+  function createOrShowMAFloatingBar() {
+    let bar = document.getElementById('ma-floating-progress-bar');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.id = 'ma-floating-progress-bar';
+      bar.style.cssText = `
+        position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        border-top: 2px solid rgba(59, 130, 246, 0.5);
+        padding: 10px 20px; cursor: pointer;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+        transition: opacity 0.3s, transform 0.3s;
+      `;
+      bar.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 12px; max-width: 800px; margin: 0 auto;">
+          <div style="font-size: 1.2rem; animation: spin 1s linear infinite;">🔄</div>
+          <div style="flex: 1; min-width: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <span id="ma-float-text" style="color: #e2e8f0; font-size: 0.85rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">다중계정 발행 중...</span>
+              <span id="ma-float-percent" style="color: #60a5fa; font-weight: 700; font-size: 0.9rem; margin-left: 8px; flex-shrink: 0;">0%</span>
+            </div>
+            <div style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;">
+              <div id="ma-float-bar-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #3b82f6, #60a5fa); border-radius: 2px; transition: width 0.3s ease;"></div>
+            </div>
+          </div>
+          <div style="color: #94a3b8; font-size: 0.7rem; flex-shrink: 0; padding: 4px 8px; background: rgba(255,255,255,0.05); border-radius: 4px;">👆 상세보기</div>
+        </div>
+      `;
+      bar.addEventListener('click', () => {
+        hideMAFloatingBar();
+        showMAProgressModal();
+      });
+      document.body.appendChild(bar);
+    }
+    bar.style.display = 'block';
+    // ✅ [2026-03-18 FIX] 현재 진행률 + 계정명/단계를 캐싱된 값으로 즉시 표시
+    updateMAFloatingBar(currentProgressPercent, currentProgressAccountName, currentProgressStep);
+  }
+
+  function updateMAFloatingBar(percent: number, accountName: string, step: string) {
+    const bar = document.getElementById('ma-floating-progress-bar');
+    if (!bar || bar.style.display === 'none') return;
+
+    const textEl = document.getElementById('ma-float-text');
+    const percentEl = document.getElementById('ma-float-percent');
+    const barFill = document.getElementById('ma-float-bar-fill');
+
+    const p = Math.max(0, Math.min(100, percent));
+    if (textEl && (accountName || step)) {
+      textEl.textContent = accountName ? `${accountName} - ${step || '진행 중...'}` : (step || '다중계정 발행 중...');
+    }
+    if (percentEl) percentEl.textContent = `${p.toFixed(0)}%`;
+    if (barFill) barFill.style.width = `${p.toFixed(0)}%`;
+  }
+
+  function hideMAFloatingBar() {
+    const bar = document.getElementById('ma-floating-progress-bar');
+    if (bar) {
+      bar.style.display = 'none';
+    }
+  }
+
+  // ✅ [2026-03-18] 플로팅 바 DOM 완전 제거 (발행 완전 종료 시)
+  function destroyMAFloatingBar() {
+    const bar = document.getElementById('ma-floating-progress-bar');
+    if (bar) bar.remove();
   }
 
   // 현재 진행률 상태 (콘솔 로그용)
   let currentProgressPercent = 0;
+  let currentProgressAccountName = '';
+  let currentProgressStep = '';
   let progressAnimationFrame: number | null = null;
 
   function updateMAProgress(current: number, total: number, accountName: string, step: string, subStep?: number, totalSubSteps?: number) {
@@ -2329,6 +2412,11 @@ export async function initMultiAccountPublishModal() {
     if (taskAccount) taskAccount.textContent = accountName || '진행 중...';
     const taskStep = document.getElementById('ma-task-step');
     if (taskStep) taskStep.textContent = step || '';
+
+    // ✅ [2026-03-18] 현재 상태 캐싱 + 플로팅 바 동시 업데이트
+    currentProgressAccountName = accountName || '';
+    currentProgressStep = step || '';
+    updateMAFloatingBar(percent, accountName, step);
   }
 
   function animateProgress(targetPercent: number) {
@@ -2432,6 +2520,9 @@ export async function initMultiAccountPublishModal() {
 
   function showMAResult(success: number, fail: number) {
     addMALog(`✅ 발행 완료 - 성공: ${success}건, 실패: ${fail}건`, 'success');
+
+    // ✅ [2026-03-18] 발행 완료 시 플로팅 바 숨기기
+    hideMAFloatingBar();
 
     const resultSummary = document.getElementById('ma-result-summary');
     if (resultSummary) resultSummary.style.display = 'block';
@@ -2550,12 +2641,17 @@ export async function initMultiAccountPublishModal() {
     let totalFail = 0;
     const totalItems = publishQueue.length;
 
-    const waitInterruptible = async (seconds: number) => {
+    const waitInterruptible = async (seconds: number, currentIdx?: number, totalCount?: number) => {
       const ms = Math.max(0, Math.floor(seconds * 1000));
       const start = Date.now();
       while (Date.now() - start < ms) {
         if (stopRequested || (window as any).stopFullAutoPublish) return false;
-        await new Promise((r) => setTimeout(r, 200));
+        // ✅ [2026-03-18] 실시간 카운트다운 갱신 (플로팅 바 + 모달 동시 업데이트)
+        const remaining = Math.max(0, Math.ceil((ms - (Date.now() - start)) / 1000));
+        if (typeof currentIdx === 'number' && typeof totalCount === 'number') {
+          updateMAProgress(currentIdx + 1, totalCount, '대기 중...', `⏳ ${formatWaitTime(remaining)} 후 다음 발행`);
+        }
+        await new Promise((r) => setTimeout(r, 500));
       }
       return true;
     };
@@ -3329,7 +3425,7 @@ export async function initMultiAccountPublishModal() {
             updateMAProgress(i + 1, totalItems, '대기 중...', `⏳ 다음 발행까지 ${waitMsg} 대기`);
             addMALog(`⏳ 다음 발행까지 ${waitMsg} 대기...`, 'info');
             addProgressItem(`⏳ 다음 발행까지 ${waitMsg} 대기...`, 'info');
-            const ok = await waitInterruptible(intervalSeconds);
+            const ok = await waitInterruptible(intervalSeconds, i, totalItems);
             if (!ok) {
               break;
             }
@@ -3339,6 +3435,9 @@ export async function initMultiAccountPublishModal() {
     } finally {
       isPublishing = false;
       const wasStopped = stopRequested || (window as any).stopFullAutoPublish;
+
+      // ✅ [2026-03-18] 발행 종료 → 플로팅 바 즉시 제거 (updateMAProgress보다 먼저!)
+      destroyMAFloatingBar();
 
       if (!wasStopped) {
         publishQueue = [];
@@ -3388,6 +3487,7 @@ export async function initMultiAccountPublishModal() {
           if (!progressCloseBtn.hasAttribute('data-listener-added')) {
             progressCloseBtn.setAttribute('data-listener-added', 'true');
             progressCloseBtn.addEventListener('click', () => {
+              hideMAFloatingBar(); // ✅ [2026-03-18] 명시적 플로팅 바 숨김 (Bug #2 방어)
               hideMAProgressModal();
             });
           }
@@ -3426,6 +3526,9 @@ export async function initMultiAccountPublishModal() {
     stopRequested = true;
     isPublishing = false; // ✅ [2026-03-11 FIX] 즉시 발행 상태 해제 — 중지 후 재발행 가능하도록
     (window as any).stopFullAutoPublish = true;
+
+    // ✅ [2026-03-18 FIX] 중지 시 플로팅 바 즉시 제거 (DOM까지 정리)
+    destroyMAFloatingBar();
 
     // ✅ 다중계정 발행 즉시 중지 (모든 브라우저 강제 종료)
     try {

@@ -42,6 +42,7 @@ export interface GeneratedImage {
   url?: string; // ✅ 이미지 URL (수집만 할 때 사용)
   sourceUrl?: string; // ✅ 원본 출처 URL (alt 태그에 출처 표시용)
   originalIndex?: number; // ✅ [2026-01-24] 원래 items 배열의 인덱스 (필터링 후에도 위치 추적)
+  isThumbnail?: boolean; // ✅ [2026-03-18 FIX] 썸네일 여부 (서론 위 이미지 배치에 사용)
 }
 
 export const ALLOWED_PROVIDER: ImageProvider[] = ['naver', 'loremflickr', 'picsum', 'placeholder', 'nano-banana-pro', 'nano-banana-pro-fallback', 'imagen-4-fallback', 'gemini-2.5-flash-fallback', 'gemini-3.1-flash-image-preview-fallback', 'gemini-3-pro-image-preview-fallback', 'imagen-4.0-generate-001-fallback', 'gemini-2.5-flash-image-fallback', 'deepinfra', 'openai-image', 'leonardoai', 'collected-image', 'collected-image-with-text', 'imagefx'];

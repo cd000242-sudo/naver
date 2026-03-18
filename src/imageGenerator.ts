@@ -28,6 +28,31 @@ export { abortImageGeneration };
 export { resetAllImageState };
 
 /**
+ * ✅ [2026-03-18 FIX] 반환 이미지에 isThumbnail 플래그 보존
+ * 모든 provider generator가 isThumbnail을 반환하지 않으므로
+ * generateImages 레벨에서 입력 items의 플래그를 출력에 합성
+ */
+function preserveThumbnailFlags(
+  generatedImages: GeneratedImage[],
+  inputItems: { heading: string; isThumbnail: boolean }[]
+): GeneratedImage[] {
+  return generatedImages.map((img, idx) => {
+    // 1. 인덱스 기반 매칭 (가장 정확)
+    if (idx < inputItems.length && inputItems[idx].isThumbnail) {
+      return { ...img, isThumbnail: true };
+    }
+    // 2. heading 이름 기반 매칭 (필터링으로 인덱스가 어긋난 경우)
+    const matchedItem = inputItems.find(item =>
+      item.isThumbnail && item.heading === img.heading
+    );
+    if (matchedItem) {
+      return { ...img, isThumbnail: true };
+    }
+    return img;
+  });
+}
+
+/**
  * 엔진이 한글 텍스트를 네이티브로 지원하는지 확인
  */
 function isKoreanTextSupportedEngine(engine: string): boolean {
@@ -258,7 +283,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     console.log(`[이미지생성] 🛒 쇼핑커넥트 모드: ${displayName}는 제품 재현 불가 → 수집 이미지 직접 사용`);
     const collectedResults = await convertCollectedImagesToResults(options.collectedImages || crawledImages, items, options.postTitle, options.postId);
     // ✅ [2026-03-16 FIX] 수집 이미지에도 텍스트 오버레이 적용 (쇼핑커넥트 모드)
-    return await applyKoreanTextOverlayIfNeeded(collectedResults, 'collected', options.postTitle, options.thumbnailTextInclude, items);
+    return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(collectedResults, 'collected', options.postTitle, options.thumbnailTextInclude, items), items);
   }
 
 
@@ -277,7 +302,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.collectedImages  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
       );
       console.log(`[이미지생성] ✅ OpenAI DALL-E로 ${openaiImages.length}개 이미지 생성 완료!`);
-      return await applyKoreanTextOverlayIfNeeded(openaiImages, 'openai-image', options.postTitle, options.thumbnailTextInclude, items);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(openaiImages, 'openai-image', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (openaiError) {
       console.warn(`[ImageGenerator] ⚠️ OpenAI Image 실패:`, (openaiError as Error).message);
       const userMsg = getImageErrorMessage(openaiError);
@@ -300,7 +325,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.collectedImages  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
       );
       console.log(`[이미지생성] ✅ Leonardo AI로 ${leonardoImages.length}개 이미지 생성 완료!`);
-      return await applyKoreanTextOverlayIfNeeded(leonardoImages, 'leonardoai', options.postTitle, options.thumbnailTextInclude, items);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(leonardoImages, 'leonardoai', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (leonardoError) {
       console.warn(`[ImageGenerator] ⚠️ Leonardo AI 실패:`, (leonardoError as Error).message);
       const userMsg = getImageErrorMessage(leonardoError);
@@ -322,7 +347,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         onImageGenerated
       );
       console.log(`[이미지생성] ✅ ImageFX로 ${imageFxImages.length}개 이미지 생성 완료!`);
-      return await applyKoreanTextOverlayIfNeeded(imageFxImages, 'imagefx', options.postTitle, options.thumbnailTextInclude, items);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(imageFxImages, 'imagefx', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (imageFxError) {
       console.warn(`[ImageGenerator] ⚠️ ImageFX 실패:`, (imageFxError as Error).message);
       throw new Error(`[ImageFX] Google 로그인을 확인해주세요. 오류: ${(imageFxError as Error).message}`);
@@ -348,7 +373,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       );
       console.log(`[이미지생성] ✅ 딥인프라 FLUX-2로 ${deepinfraImages.length}개 이미지 생성 완료!`);
       // ✅ [2026-01-30 FIX] DeepInfra도 텍스트 오버레이 적용 (한글 텍스트 지원 안함)
-      return await applyKoreanTextOverlayIfNeeded(deepinfraImages, 'deepinfra', options.postTitle, options.thumbnailTextInclude, items);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(deepinfraImages, 'deepinfra', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (deepinfraError) {
       console.warn(`[ImageGenerator] ⚠️ DeepInfra 실패:`, (deepinfraError as Error).message);
       const userMsg = getImageErrorMessage(deepinfraError);
@@ -358,7 +383,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
 
   // 네이버 선택 시
   if (normalizedProvider === 'naver') {
-    return generateWithNaver(items, options.postTitle, options.postId, options.regenerate, options.sourceUrl, options.articleUrl);
+    return preserveThumbnailFlags(await generateWithNaver(items, options.postTitle, options.postId, options.regenerate, options.sourceUrl, options.articleUrl), items);
   }
 
   // ✅ 나노 바나나 프로 선택 시 (Gemini 기반, 썸네일 제외 NEVER TEXT 적용)
@@ -382,14 +407,14 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         (options as any).productData  // ✅ [2026-02-23 FIX] 제품 가격 데이터 전달 → 스펙 표 가격 정확도 향상
       );
       console.log(`[이미지생성] ✅ 나노 바나나 프로(Gemini)로 ${nanoBananaImages.length}개 이미지 생성 완료!`);
-      return nanoBananaImages;
+      return preserveThumbnailFlags(nanoBananaImages, items);
     } catch (geminiError: any) {
       // ✅ [2026-03-03] 쇼핑커넥트에서 Gemini 실패 시 수집 이미지로 폴백
       if (options.isShoppingConnect) {
         console.warn(`[ImageGenerator] ⚠️ Gemini 실패 → 쇼핑커넥트 수집 이미지로 폴백: ${geminiError.message}`);
         const collectedResults = await convertCollectedImagesToResults(options.collectedImages || crawledImages, items, options.postTitle, options.postId);
         // ✅ [2026-03-16 FIX] 수집 이미지 폴백에도 텍스트 오버레이 적용
-        return await applyKoreanTextOverlayIfNeeded(collectedResults, 'collected', options.postTitle, options.thumbnailTextInclude, items);
+        return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(collectedResults, 'collected', options.postTitle, options.thumbnailTextInclude, items), items);
       }
       throw geminiError; // 일반 모드는 기존 에러 전파
     }
@@ -415,7 +440,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       (options as any).productData
     );
     console.log(`[이미지생성] ✅ 폴백 나노 바나나 프로(Gemini)로 ${fallbackImages.length}개 이미지 생성 완료!`);
-    return fallbackImages;
+    return preserveThumbnailFlags(fallbackImages, items);
   } catch (fallbackError) {
     throw new Error(`이미지 생성 실패: 지원하지 않는 이미지 제공자(${options.provider}) 및 Gemini 폴백 실패 - ${(fallbackError as Error).message}`);
   }

@@ -429,9 +429,53 @@ export function decomposeKoreanCompound(word: string, mainDict: Record<string, s
 }
 
 // ═══════════════════════════════════════════════════════════════════
+// ✅ [2026-03-18] AI 응답 정제 — 프롬프트 오염 차단 (100점 위생 처리)
+// Perplexity 자기 소개, 시스템 프롬프트 누출, 마크다운 서식 제거
+// ═══════════════════════════════════════════════════════════════════
+function sanitizeAIPromptResponse(raw: string): string {
+    let cleaned = raw;
+
+    // 1. AI 자기 소개 / 역할 선언 제거
+    cleaned = cleaned
+        .replace(/(?:^|\n)(?:I'm|I am|As an? )\s*(?:Perplexity|AI|assistant|language model|chatbot)[^.\n]*[.!]?/gi, '')
+        .replace(/(?:^|\n)(?:Sure|Certainly|Of course|Here(?:'s| is))[^.\n]*[.:!]?\s*/gi, '')
+        .replace(/(?:^|\n)(?:Here is|Below is|The following is)[^.\n]*[.:!]?\s*/gi, '');
+
+    // 2. 시스템 프롬프트 누출 제거
+    cleaned = cleaned
+        .replace(/(?:^|\n)(?:You are an expert|TASK:|HEADING:|STYLE:|CRITICAL RULES:|STYLE-SPECIFIC)[^\n]*/gi, '')
+        .replace(/(?:^|\n)(?:IMPORTANT:|Output ONLY|Keep under \d+ words|End with:)[^\n]*/gi, '');
+
+    // 3. 마크다운 서식 제거
+    cleaned = cleaned
+        .replace(/```[\s\S]*?```/g, '')
+        .replace(/`([^`]+)`/g, '$1')
+        .replace(/\*\*([^*]+)\*\*/g, '$1')
+        .replace(/\*([^*]+)\*/g, '$1')
+        .replace(/^#+\s*/gm, '')
+        .replace(/^[-*]\s+/gm, '');
+
+    // 4. 따옴표 래핑 제거
+    cleaned = cleaned.replace(/^["'`]+|["'`]+$/g, '');
+
+    // 5. 정리
+    cleaned = cleaned.replace(/\s{2,}/g, ' ').trim();
+
+    // 6. 빈 결과 방어
+    if (!cleaned || cleaned.length < 5) {
+        return raw.replace(/\s{2,}/g, ' ').trim();
+    }
+
+    if (cleaned !== raw.trim()) {
+        console.log(`[PromptTranslation] 🧹 AI 응답 정제: "${raw.substring(0, 40)}..." → "${cleaned.substring(0, 40)}..."`);
+    }
+    return cleaned;
+}
+
+// ═══════════════════════════════════════════════════════════════════
 // ✅ 멀티 모델 폴백 체인 — 소제목 영어 프롬프트 생성
-// OpenAI → Gemini → Claude → Perplexity → 형태소분해사전 → 한국어보존
-// [2026-02-27] OpenAI가 이미지 프롬프트 품질이 가장 우수하여 1순위로 변경
+// Gemini → OpenAI → Claude → Perplexity → 형태소분해사전 → 한국어보존
+// [2026-03-18] AI 응답 정제 sanitizeAIPromptResponse() 적용
 // ═══════════════════════════════════════════════════════════════════
 export async function generateEnglishPromptForHeading(heading: any, baseKeywords?: string, imageStyle?: string, contentContext?: string) {
     const headingTitle = heading.title || heading;
@@ -463,9 +507,11 @@ export async function generateEnglishPromptForHeading(heading: any, baseKeywords
         try {
             const result = await fn(headingTitle, imageStyle, resolvedContext);
             if (result) {
-                console.log(`[PromptTranslation] ✅ ${name} 성공 [${imageStyle}]: "${headingTitle}" → "${result.substring(0, 50)}..."`);
-                cacheTranslation(cacheKey, result);
-                return result;
+                // ✅ [2026-03-18] AI 응답 정제 — Perplexity 자기 소개, 시스템 프롬프트 누출 차단
+                const sanitized = sanitizeAIPromptResponse(result);
+                console.log(`[PromptTranslation] ✅ ${name} 성공 [${imageStyle}]: "${headingTitle}" → "${sanitized.substring(0, 50)}..."`);
+                cacheTranslation(cacheKey, sanitized);
+                return sanitized;
             }
         } catch (err) {
             console.warn(`[PromptTranslation] ${name} 실패:`, err);

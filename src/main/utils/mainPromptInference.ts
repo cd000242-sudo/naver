@@ -155,9 +155,54 @@ async function tryPerplexity(headingText: string, imageStyle?: string, apiKey?: 
   }
 }
 
+// ═══════════════════════════════════════════════════════════════════
+// ✅ [2026-03-18] AI 응답 정제 — 프롬프트 오염 차단 (100점 위생 처리)
+// Perplexity 자기 소개, 시스템 프롬프트 누출, 마크다운 서식 제거
+// ═══════════════════════════════════════════════════════════════════
+function sanitizeAIPromptResponse(raw: string): string {
+  let cleaned = raw;
+
+  // 1. AI 자기 소개 / 역할 선언 제거
+  cleaned = cleaned
+    .replace(/(?:^|\n)(?:I'm|I am|As an? )\s*(?:Perplexity|AI|assistant|language model|chatbot)[^.\n]*[.!]?/gi, '')
+    .replace(/(?:^|\n)(?:Sure|Certainly|Of course|Here(?:'s| is))[^.\n]*[.:!]?\s*/gi, '')
+    .replace(/(?:^|\n)(?:Here is|Below is|The following is)[^.\n]*[.:!]?\s*/gi, '');
+
+  // 2. 시스템 프롬프트 누출 제거
+  cleaned = cleaned
+    .replace(/(?:^|\n)(?:You are an expert|TASK:|HEADING:|STYLE:|CRITICAL RULES:|STYLE-SPECIFIC)[^\n]*/gi, '')
+    .replace(/(?:^|\n)(?:IMPORTANT:|Output ONLY|Keep under \d+ words|End with:)[^\n]*/gi, '');
+
+  // 3. 마크다운 서식 제거
+  cleaned = cleaned
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/^#+\s*/gm, '')
+    .replace(/^[-*]\s+/gm, '');
+
+  // 4. 따옴표 래핑 제거
+  cleaned = cleaned.replace(/^["'`]+|["'`]+$/g, '');
+
+  // 5. 정리
+  cleaned = cleaned.replace(/\s{2,}/g, ' ').trim();
+
+  // 6. 빈 결과 방어
+  if (!cleaned || cleaned.length < 5) {
+    return raw.replace(/\s{2,}/g, ' ').trim();
+  }
+
+  if (cleaned !== raw.trim()) {
+    console.log(`[MainPromptInference] 🧹 AI 응답 정제: "${raw.substring(0, 40)}..." → "${cleaned.substring(0, 40)}..."`);
+  }
+  return cleaned;
+}
+
 // ═══════ 최종 폴백: 간단한 영어 변환 ═══════
+// ✅ [2026-03-18] "NO TEXT NO WRITING" 제거 — ImageFX Imagen 3.5가 이를 텍스트로 렌더링
 function fallbackPrompt(headingText: string): string {
-  return `eye-catching blog thumbnail, visual metaphor for: ${headingText}, cinematic lighting, compelling composition, hero image style, NO TEXT NO WRITING`;
+  return `eye-catching blog thumbnail, visual metaphor for: ${headingText}, cinematic lighting, compelling composition, hero image style`;
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -201,9 +246,11 @@ export async function generateEnglishPromptMain(
     try {
       const result = await fn();
       if (result) {
-        console.log(`[MainPromptInference] ✅ ${name} 성공: "${headingText}" → "${result.substring(0, 60)}..."`);
-        cachePrompt(cacheKey, result);
-        return result;
+        // ✅ [2026-03-18] AI 응답 정제 — Perplexity 자기 소개, 시스템 프롬프트 누출 차단
+        const sanitized = sanitizeAIPromptResponse(result);
+        console.log(`[MainPromptInference] ✅ ${name} 성공: "${headingText}" → "${sanitized.substring(0, 60)}..."`);
+        cachePrompt(cacheKey, sanitized);
+        return sanitized;
       }
     } catch (err) {
       console.warn(`[MainPromptInference] ${name} 실패:`, err);

@@ -61,6 +61,97 @@ const ASPECT_RATIO_MAP: Record<string, string> = {
 };
 
 /**
+ * ✅ [2026-03-18] 100점 프롬프트 위생 처리 — AI 응답 오염 완전 차단
+ * 
+ * 문제: AI 모델(특히 Perplexity Sonar)이 자기 소개, 시스템 프롬프트, 마크다운 서식을
+ * 응답에 포함하면 Imagen 3.5가 이를 이미지 내 텍스트로 렌더링함.
+ * 
+ * 해결: ImageFX API 호출 직전에 프롬프트를 정제하여:
+ * 1. AI 자기 소개 제거 ("I'm Perplexity", "As an AI" 등)
+ * 2. 시스템 프롬프트 누출 제거 ("You are an expert", "CRITICAL RULES" 등)
+ * 3. 마크다운/서식 제거 (```, **, #, - 등)
+ * 4. 따옴표 래핑 제거
+ * 5. "NO TEXT" 류 negative instruction 제거 (Imagen 3.5가 오히려 텍스트를 그림)
+ * 6. 200자 초과 시 트렁케이션 (이미지 프롬프트는 간결해야 효과적)
+ */
+function sanitizeImagePrompt(prompt: string): string {
+  let cleaned = prompt;
+
+  // ── 1. AI 자기 소개 / 역할 선언 제거 ──
+  cleaned = cleaned
+    .replace(/(?:^|\n)(?:I'm|I am|As an? )\s*(?:Perplexity|AI|assistant|language model|chatbot)[^.\n]*[.!]?/gi, '')
+    .replace(/(?:^|\n)(?:Sure|Certainly|Of course|Here(?:'s| is))[^.\n]*[.:!]?\s*/gi, '')
+    .replace(/(?:^|\n)(?:Here is|Below is|The following is)[^.\n]*[.:!]?\s*/gi, '');
+
+  // ── 2. 시스템 프롬프트 누출 제거 ──
+  cleaned = cleaned
+    .replace(/(?:^|\n)(?:You are an expert|TASK:|HEADING:|STYLE:|CRITICAL RULES:|STYLE-SPECIFIC|CONTEXT \(use this)[^\n]*/gi, '')
+    .replace(/(?:^|\n)(?:IMPORTANT:|Output ONLY|Keep under \d+ words|End with:)[^\n]*/gi, '')
+    .replace(/(?:^|\n)\d+\.\s*(?:TRANSLATE|Korean compound|DECIDE whether|DO NOT include|Focus on|If CONTEXT)[^\n]*/gi, '');
+
+  // ── 3. 마크다운 서식 제거 ──
+  cleaned = cleaned
+    .replace(/```[\s\S]*?```/g, '')    // 코드 블록
+    .replace(/`([^`]+)`/g, '$1')       // 인라인 코드
+    .replace(/\*\*([^*]+)\*\*/g, '$1') // 볼드
+    .replace(/\*([^*]+)\*/g, '$1')     // 이탤릭
+    .replace(/^#+\s*/gm, '')           // 헤딩
+    .replace(/^[-*]\s+/gm, '')         // 리스트
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1'); // 링크
+
+  // ── 4. 따옴표 래핑 제거 ──
+  cleaned = cleaned.replace(/^["'`]+|["'`]+$/g, '');
+
+  // ── 5. "NO TEXT" 류 negative instruction 제거 ──
+  // ⚠️ 핵심: Imagen 3.5는 "NO TEXT"를 보면 오히려 "NO TEXT"라는 글자를 그림!
+  cleaned = cleaned
+    .replace(/,?\s*NO\s+TEXT[^,.]*/gi, '')
+    .replace(/,?\s*NO\s+WRITING[^,.]*/gi, '')
+    .replace(/,?\s*NO\s+LETTERS[^,.]*/gi, '')
+    .replace(/,?\s*NO\s+WATERMARK[^,.]*/gi, '')
+    .replace(/,?\s*NO\s+TYPOGRAPHY[^,.]*/gi, '')
+    .replace(/,?\s*NO\s+WORDS[^,.]*/gi, '')
+    .replace(/,?\s*NO\s+CAPTIONS?[^,.]*/gi, '')
+    .replace(/,?\s*NO\s+LABELS?[^,.]*/gi, '')
+    .replace(/IMPORTANT:\s*Do NOT include any text[^.]*/gi, '')
+    .replace(/The image must be purely visual[^.]*/gi, '')
+    .replace(/absolutely zero written content[^.]*/gi, '');
+
+  // ── 6. 정리: 다중 공백/줄바꿈/콤마 정리 ──
+  cleaned = cleaned
+    .replace(/,\s*,/g, ',')           // 연속 콤마
+    .replace(/\n{2,}/g, '\n')         // 다중 줄바꿈
+    .replace(/\s{2,}/g, ' ')          // 다중 공백
+    .replace(/^[,\s]+|[,\s]+$/g, '')  // 앞뒤 콤마/공백
+    .trim();
+
+  // ── 7. 200자 초과 시 트렁케이션 (마지막 완전한 구절에서 자름) ──
+  if (cleaned.length > 200) {
+    const truncated = cleaned.substring(0, 200);
+    const lastComma = truncated.lastIndexOf(',');
+    const lastSpace = truncated.lastIndexOf(' ');
+    const cutAt = lastComma > 150 ? lastComma : (lastSpace > 150 ? lastSpace : 200);
+    cleaned = truncated.substring(0, cutAt).trim();
+  }
+
+  // ── 8. 빈 프롬프트 방지 ──
+  if (!cleaned || cleaned.length < 10) {
+    console.warn(`[ImageFX] ⚠️ 정제 후 프롬프트 너무 짧음, 원본 사용: "${prompt.substring(0, 60)}"`);
+    // 원본에서 최소한의 정제만 적용
+    cleaned = prompt
+      .replace(/,?\s*NO\s+TEXT[^,.]*/gi, '')
+      .replace(/,?\s*NO\s+WRITING[^,.]*/gi, '')
+      .replace(/IMPORTANT:\s*Do NOT include any text[^.]*/gi, '')
+      .replace(/\s{2,}/g, ' ')
+      .trim()
+      .substring(0, 200);
+  }
+
+  console.log(`[ImageFX] 🧹 프롬프트 정제: "${prompt.substring(0, 50)}..." → "${cleaned.substring(0, 50)}..." (${prompt.length}→${cleaned.length}자)`);
+  return cleaned;
+}
+
+/**
  * ✅ 프롬프트 안전 필터 순화 — 차단된 프롬프트에서 민감 단어 제거
  */
 function sanitizePromptForSafety(prompt: string): string {
@@ -777,9 +868,9 @@ export async function generateSingleImageWithImageFx(
 ): Promise<{ buffer: Buffer; mimeType: string } | null> {
   const MAX_RETRIES = 3;
   let lastError: Error | null = null;
-  // ✅ [2026-03-16] Zero-Text 룰 — 텍스트가 포함된 이미지는 한글이 깨지므로 완전 차단
-  const ZERO_TEXT_SUFFIX = '\n\nIMPORTANT: Do NOT include any text, words, letters, numbers, captions, labels, watermarks, or typography anywhere in the image. The image must be purely visual with absolutely zero written content.';
-  let currentPrompt = prompt + ZERO_TEXT_SUFFIX;
+  // ✅ [2026-03-18] ZERO_TEXT_SUFFIX 제거! Imagen 3.5는 negative instruction을 텍스트로 렌더링함
+  // 대신 sanitizeImagePrompt()로 AI 응답 오염(Perplexity 자기 소개 등)을 정제
+  let currentPrompt = sanitizeImagePrompt(prompt);
   const fxAspectRatio = ASPECT_RATIO_MAP[aspectRatio] || ASPECT_RATIO_MAP['1:1'];
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
