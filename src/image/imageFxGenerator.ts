@@ -14,6 +14,7 @@
 import type { ImageRequestItem, GeneratedImage } from './types.js';
 import { writeImageFile } from './imageUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
+import { trackApiUsage } from '../apiUsageTracker.js';
 // ✅ [2026-03-17] ImageFX는 Google 서비스라 프록시 불필요 → import 제거
 import type { Browser, Page, BrowserContext } from 'playwright';
 
@@ -182,90 +183,237 @@ function getPlaywrightProfileDir(): string {
 }
 
 /**
- * ✅ [2026-03-16] Playwright Chromium 자동 설치
- * executablePath가 없거나 실행 불가능하면 자동으로 npx playwright install chromium 실행
- * ⚠️ headless_shell만 설치된 경우도 감지하여 전체 chromium을 설치
+ * ✅ [2026-03-18] Playwright 브라우저 설치 경로 (쓰기 가능한 디렉토리)
+ * 
+ * 기존: PLAYWRIGHT_BROWSERS_PATH: '0' → 패키지 옆(ASAR) → 읽기전용 가능
+ * 수정: app.getPath('userData')/pw-browsers → 항상 쓰기 가능
+ */
+function getPlaywrightBrowsersDir(): string {
+  try {
+    const { app } = require('electron');
+    const path = require('path');
+    return path.join(app.getPath('userData'), 'pw-browsers');
+  } catch {
+    const path = require('path');
+    const os = require('os');
+    return path.join(os.homedir(), 'naver-blog-automation', 'pw-browsers');
+  }
+}
+
+/**
+ * ✅ [2026-03-18] Windows 시스템 브라우저 자동 탐색 (100% 커버리지)
+ * 
+ * 4단계로 시스템에 설치된 Chromium 기반 브라우저를 찾습니다:
+ * 1. 직접 경로 탐색 — 가장 빠름 (8개 경로)
+ * 2. Windows 레지스트리 조회 — 비표준 설치 경로 대응
+ * 3. PATH 검색 — `where` 명령어
+ * 4. 추가 브라우저 — Edge Beta/Dev/Canary, Chrome Beta/Canary, Brave
+ * 
+ * @returns 발견된 브라우저 실행 파일의 절대 경로, 없으면 null
+ */
+function findSystemBrowserExecutable(): string | null {
+  const fs = require('fs');
+  const { execSync } = require('child_process');
+
+  const localAppData = process.env.LOCALAPPDATA || '';
+  const programFiles = process.env.PROGRAMFILES || 'C:\\Program Files';
+  const programFilesX86 = process.env['PROGRAMFILES(X86)'] || 'C:\\Program Files (x86)';
+  const userProfile = process.env.USERPROFILE || '';
+
+  // ── 1단계: 직접 경로 탐색 (가장 빠름) ──
+  const directPaths = [
+    // Edge (Windows 10/11 기본)
+    `${programFilesX86}\\Microsoft\\Edge\\Application\\msedge.exe`,
+    `${programFiles}\\Microsoft\\Edge\\Application\\msedge.exe`,
+    `${localAppData}\\Microsoft\\Edge\\Application\\msedge.exe`,
+    // Chrome
+    `${programFiles}\\Google\\Chrome\\Application\\chrome.exe`,
+    `${programFilesX86}\\Google\\Chrome\\Application\\chrome.exe`,
+    `${localAppData}\\Google\\Chrome\\Application\\chrome.exe`,
+    // Chrome per-user install
+    `${userProfile}\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe`,
+  ].filter(p => p && !p.startsWith('\\') && p.length > 10);
+
+  for (const p of directPaths) {
+    if (fs.existsSync(p)) {
+      console.log(`[ImageFX] 🔍 브라우저 발견 (직접 경로): ${p}`);
+      return p;
+    }
+  }
+
+  // ── 2단계: Windows 레지스트리 조회 ──
+  for (const exeName of ['msedge.exe', 'chrome.exe']) {
+    for (const hive of ['HKLM', 'HKCU']) {
+      try {
+        const regOutput = execSync(
+          `reg query "${hive}\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\${exeName}" /ve`,
+          { encoding: 'utf-8', timeout: 5000, stdio: 'pipe', windowsHide: true }
+        );
+        const match = regOutput.match(/REG_SZ\s+(.+)/i);
+        if (match?.[1]) {
+          const regPath = match[1].trim().replace(/^"|"$/g, '');
+          if (regPath && fs.existsSync(regPath)) {
+            console.log(`[ImageFX] 🔍 브라우저 발견 (레지스트리 ${hive}): ${regPath}`);
+            return regPath;
+          }
+        }
+      } catch { /* 레지스트리 키 없음 */ }
+    }
+  }
+
+  // ── 3단계: PATH 검색 (where 명령어) ──
+  for (const exeName of ['msedge', 'chrome']) {
+    try {
+      const whereOutput = execSync(`where ${exeName}`, {
+        encoding: 'utf-8', timeout: 5000, stdio: 'pipe', windowsHide: true,
+      });
+      const firstLine = whereOutput.trim().split('\n')[0]?.trim();
+      if (firstLine && fs.existsSync(firstLine)) {
+        console.log(`[ImageFX] 🔍 브라우저 발견 (where): ${firstLine}`);
+        return firstLine;
+      }
+    } catch { /* where 실패 */ }
+  }
+
+  // ── 4단계: 추가 브라우저 (Beta, Canary, Brave, Vivaldi) ──
+  const additionalPaths = [
+    `${programFilesX86}\\Microsoft\\Edge Beta\\Application\\msedge.exe`,
+    `${programFilesX86}\\Microsoft\\Edge Dev\\Application\\msedge.exe`,
+    `${localAppData}\\Microsoft\\Edge SxS\\Application\\msedge.exe`,
+    `${programFiles}\\Google\\Chrome Beta\\Application\\chrome.exe`,
+    `${localAppData}\\Google\\Chrome SxS\\Application\\chrome.exe`,
+    `${programFiles}\\BraveSoftware\\Brave-Browser\\Application\\brave.exe`,
+    `${programFilesX86}\\BraveSoftware\\Brave-Browser\\Application\\brave.exe`,
+    `${localAppData}\\BraveSoftware\\Brave-Browser\\Application\\brave.exe`,
+    `${localAppData}\\Vivaldi\\Application\\vivaldi.exe`,
+  ].filter(p => p && !p.startsWith('\\') && p.length > 10);
+
+  for (const p of additionalPaths) {
+    if (fs.existsSync(p)) {
+      console.log(`[ImageFX] 🔍 브라우저 발견 (추가 경로): ${p}`);
+      return p;
+    }
+  }
+
+  console.log('[ImageFX] ❌ 시스템 Chromium 기반 브라우저를 찾을 수 없습니다.');
+  return null;
+}
+
+/**
+ * ✅ [2026-03-18] Playwright Chromium 자동 설치 (패키징된 Electron 앱 호환)
+ * 
+ * 근본 문제 해결:
+ * - 기존: `node "cli.js"` → 패키징된 앱에서 `node` 없어 100% 실패
+ * - 기존: `PLAYWRIGHT_BROWSERS_PATH: '0'` → ASAR 옆 읽기전용 → 실패
+ * - 수정: `process.execPath` (Electron 내장 Node) + 쓰기 가능 디렉토리
  */
 async function ensurePlaywrightBrowserInstalled(): Promise<void> {
+  const browsersDir = getPlaywrightBrowsersDir();
+
+  // ── 0. 이미 설치되어 있는지 확인 ──
   try {
+    process.env.PLAYWRIGHT_BROWSERS_PATH = browsersDir;
     const { chromium } = await import('playwright');
     const execPath = chromium.executablePath();
     const fs = require('fs');
     if (execPath && fs.existsSync(execPath)) {
-      // ✅ 파일 존재 + 최소 크기(1MB) 확인 → 정상 설치로 판단
       const stat = fs.statSync(execPath);
       if (stat.size > 1_000_000) {
         return; // 이미 정상 설치됨
       }
-      console.warn(`[ImageFX] ⚠️ Chromium 실행 파일 크기 이상 (${stat.size}B) → 재설치 필요`);
+      console.warn(`[ImageFX] ⚠️ Chromium 크기 이상 (${stat.size}B) → 재설치`);
     }
-  } catch { /* executablePath 호출 실패 = 설치 안 됨 */ }
+  } catch { /* 설치 안 됨 */ }
 
-  console.log('[ImageFX] 📦 Playwright Chromium 브라우저 자동 설치 시작...');
+  console.log('[ImageFX] 📦 Playwright Chromium 자동 설치 시작...');
   sendImageLog('📦 [ImageFX] Chromium 브라우저를 자동 설치합니다. 잠시만 기다려주세요 (1~2분)...');
 
-  // ✅ [2026-03-16] 패키징된 Electron 앱에서도 동작하는 설치 방법
-  // npx는 패키징 후 사용 불가 → playwright 내부 cli.js를 직접 호출
-  try {
-    const { execSync } = require('child_process');
-    const path = require('path');
-    const fs = require('fs');
+  const { execSync } = require('child_process');
+  const path = require('path');
+  const fs = require('fs');
 
-    // 방법 1: playwright-core/cli.js 직접 경로 구성
-    // require.resolve('playwright-core/cli')는 ERR_PACKAGE_PATH_NOT_EXPORTED 발생
-    // → package.json 경로로 디렉토리를 찾아 cli.js 경로를 직접 구성
-    let installed = false;
+  if (!fs.existsSync(browsersDir)) {
+    fs.mkdirSync(browsersDir, { recursive: true });
+  }
+
+  const installEnv = { ...process.env, PLAYWRIGHT_BROWSERS_PATH: browsersDir };
+  // ✅ [2026-03-18] ELECTRON_RUN_AS_NODE=1: 패키징된 Electron 바이너리를 Node.js로 동작시킴
+  // 이 ENV 없이 process.execPath로 cli.js 실행하면 전체 앱이 재시작되는 치명적 버그 발생
+  const electronNodeEnv = { ...installEnv, ELECTRON_RUN_AS_NODE: '1' };
+  let installed = false;
+
+  // ── 방법 1: process.execPath + playwright-core/cli.js (패키징된 앱에서도 동작) ──
+  if (!installed) {
+    try {
+      const pkgPath = require.resolve('playwright-core/package.json');
+      const cliPath = path.join(path.dirname(pkgPath), 'cli.js');
+      if (fs.existsSync(cliPath)) {
+        execSync(`"${process.execPath}" "${cliPath}" install chromium`, {
+          stdio: 'pipe', timeout: 300000, env: electronNodeEnv,
+        });
+        console.log('[ImageFX] ✅ Chromium 설치 완료! (process.execPath + playwright-core/cli.js)');
+        sendImageLog('✅ [ImageFX] Chromium 브라우저 설치 완료!');
+        installed = true;
+      }
+    } catch (e: any) {
+      console.warn(`[ImageFX] ⚠️ 방법1 실패: ${(e.message || '').substring(0, 100)}`);
+    }
+  }
+
+  // ── 방법 2: process.execPath + playwright/cli.js ──
+  if (!installed) {
+    try {
+      const pkgPath = require.resolve('playwright/package.json');
+      const cliPath = path.join(path.dirname(pkgPath), 'cli.js');
+      if (fs.existsSync(cliPath)) {
+        execSync(`"${process.execPath}" "${cliPath}" install chromium`, {
+          stdio: 'pipe', timeout: 300000, env: electronNodeEnv,
+        });
+        console.log('[ImageFX] ✅ Chromium 설치 완료! (process.execPath + playwright/cli.js)');
+        sendImageLog('✅ [ImageFX] Chromium 브라우저 설치 완료!');
+        installed = true;
+      }
+    } catch (e: any) {
+      console.warn(`[ImageFX] ⚠️ 방법2 실패: ${(e.message || '').substring(0, 100)}`);
+    }
+  }
+
+  // ── 방법 3: 시스템 node + cli.js (개발 환경) ──
+  if (!installed) {
     try {
       const pkgPath = require.resolve('playwright-core/package.json');
       const cliPath = path.join(path.dirname(pkgPath), 'cli.js');
       if (fs.existsSync(cliPath)) {
         execSync(`node "${cliPath}" install chromium`, {
-          stdio: 'pipe',
-          timeout: 300000,
-          env: { ...process.env, PLAYWRIGHT_BROWSERS_PATH: '0' },
+          stdio: 'pipe', timeout: 300000, env: installEnv,
         });
-        console.log('[ImageFX] ✅ Playwright Chromium 설치 완료! (playwright-core/cli.js)');
+        console.log('[ImageFX] ✅ Chromium 설치 완료! (node + cli.js)');
         sendImageLog('✅ [ImageFX] Chromium 브라우저 설치 완료!');
         installed = true;
       }
-    } catch (cliErr: any) {
-      console.warn(`[ImageFX] playwright-core/cli.js 실패: ${(cliErr.message || '').substring(0, 80)}, 대안 시도...`);
+    } catch (e: any) {
+      console.warn(`[ImageFX] ⚠️ 방법3 실패: ${(e.message || '').substring(0, 100)}`);
     }
+  }
 
-    // 방법 2: playwright/cli.js 직접 경로 구성
-    if (!installed) {
-      try {
-        const pkgPath = require.resolve('playwright/package.json');
-        const cliPath = path.join(path.dirname(pkgPath), 'cli.js');
-        if (fs.existsSync(cliPath)) {
-          execSync(`node "${cliPath}" install chromium`, {
-            stdio: 'pipe',
-            timeout: 300000,
-            env: { ...process.env, PLAYWRIGHT_BROWSERS_PATH: '0' },
-          });
-          console.log('[ImageFX] ✅ Playwright Chromium 설치 완료! (playwright/cli.js)');
-          sendImageLog('✅ [ImageFX] Chromium 브라우저 설치 완료!');
-          installed = true;
-        }
-      } catch (altErr: any) {
-        console.warn(`[ImageFX] playwright/cli.js 실패: ${(altErr.message || '').substring(0, 80)}`);
-      }
-    }
-
-    // 방법 3: npx 시도 (개발 환경 폴백)
-    if (!installed) {
+  // ── 방법 4: npx (개발 환경 최후 폴백) ──
+  if (!installed) {
+    try {
       execSync('npx playwright install chromium', {
-        stdio: 'pipe',
-        timeout: 300000,
-        env: { ...process.env, PLAYWRIGHT_BROWSERS_PATH: '0' },
+        stdio: 'pipe', timeout: 300000, env: installEnv,
       });
-      console.log('[ImageFX] ✅ Playwright Chromium 설치 완료! (npx)');
+      console.log('[ImageFX] ✅ Chromium 설치 완료! (npx)');
       sendImageLog('✅ [ImageFX] Chromium 브라우저 설치 완료!');
+      installed = true;
+    } catch (e: any) {
+      console.warn(`[ImageFX] ⚠️ 방법4 실패: ${(e.message || '').substring(0, 100)}`);
     }
-  } catch (installErr: any) {
-    console.error(`[ImageFX] ❌ Chromium 설치 실패: ${installErr.message}`);
-    sendImageLog(`❌ [ImageFX] Chromium 자동 설치 실패. 프로그램 폴더에서 터미널을 열고 'npx playwright install chromium'을 실행해주세요.`);
-    throw new Error(`Playwright Chromium 자동 설치 실패: ${installErr.message}. 터미널에서 'npx playwright install chromium' 명령어를 직접 실행해주세요.`);
+  }
+
+  if (!installed) {
+    console.error('[ImageFX] ❌ Chromium 자동 설치 모든 방법 실패');
+    sendImageLog('❌ [ImageFX] Chromium 자동 설치 실패. Chrome 또는 Edge가 필요합니다.');
+    throw new Error('Playwright Chromium 자동 설치 실패. Chrome 또는 Edge를 설치해주세요.');
   }
 }
 
@@ -499,13 +647,15 @@ async function connectViaAdsPower(): Promise<Page> {
 }
 
 /**
- * ✅ [2026-03-16] 시스템 브라우저 폴백 전략
+ * ✅ [2026-03-18] 시스템 브라우저 폴백 전략 v3 — 100% 커버리지
  * 
- * Playwright Chromium이 설치되지 않은 패키징 환경에서도 동작하도록:
- * 1. 시스템 Chrome (대부분의 사용자)
- * 2. 시스템 Edge (Windows 기본 설치)  
- * 3. Playwright 기본 Chromium (ensurePlaywrightBrowserInstalled 시도)
- * 4. 최후 수단: Playwright Chromium (설치 없이 직접 시도)
+ * 4단계 폴백으로 어떤 환경에서든 브라우저를 실행합니다:
+ * 1. channel: 'chrome' — Playwright 내장 Chrome 탐색
+ * 2. channel: 'msedge' — Playwright 내장 Edge 탐색
+ * 3. findSystemBrowserExecutable() → executablePath — 직접경로+레지스트리+where+추가브라우저
+ * 4. ensurePlaywrightBrowserInstalled() → Playwright Chromium 자동 설치
+ * 
+ * 모든 단계의 에러를 수집하여 최종 에러 메시지에 포함합니다.
  */
 async function launchWithSystemBrowserFallback(
   chromium: any,
@@ -517,55 +667,91 @@ async function launchWithSystemBrowserFallback(
     ignoreDefaultArgs: string[];
   }
 ): Promise<BrowserContext> {
-  // ── 방법 1: 시스템 Chrome ──
+  const errorLog: string[] = [];
+
+  // ── 방법 1: 시스템 Chrome (channel) ──
   try {
-    console.log('[ImageFX] 🔍 시스템 Chrome 탐색...');
+    console.log('[ImageFX] 🔍 [1/4] 시스템 Chrome 탐색 (channel)...');
     const ctx = await chromium.launchPersistentContext(profileDir, {
       ...options,
       channel: 'chrome',
     });
-    console.log('[ImageFX] ✅ 시스템 Chrome 사용');
+    console.log('[ImageFX] ✅ 시스템 Chrome 사용 (channel)');
+    sendImageLog('✅ [ImageFX] Chrome 브라우저 연결 성공');
     return ctx;
-  } catch (chromeErr: any) {
-    console.log(`[ImageFX] ⚠️ 시스템 Chrome 없음: ${chromeErr.message?.substring(0, 60)}`);
+  } catch (err: any) {
+    const msg = err.message?.substring(0, 120) || 'unknown';
+    errorLog.push(`Chrome channel: ${msg}`);
+    console.log(`[ImageFX] ⚠️ Chrome channel 실패: ${msg}`);
   }
 
-  // ── 방법 2: 시스템 Edge (Windows 기본) ──
+  // ── 방법 2: 시스템 Edge (channel) ──
   try {
-    console.log('[ImageFX] 🔍 시스템 Edge 탐색...');
+    console.log('[ImageFX] 🔍 [2/4] 시스템 Edge 탐색 (channel)...');
     const ctx = await chromium.launchPersistentContext(profileDir, {
       ...options,
       channel: 'msedge',
     });
-    console.log('[ImageFX] ✅ 시스템 Edge 사용');
+    console.log('[ImageFX] ✅ 시스템 Edge 사용 (channel)');
+    sendImageLog('✅ [ImageFX] Edge 브라우저 연결 성공');
     return ctx;
-  } catch (edgeErr: any) {
-    console.log(`[ImageFX] ⚠️ 시스템 Edge 없음: ${edgeErr.message?.substring(0, 60)}`);
+  } catch (err: any) {
+    const msg = err.message?.substring(0, 120) || 'unknown';
+    errorLog.push(`Edge channel: ${msg}`);
+    console.log(`[ImageFX] ⚠️ Edge channel 실패: ${msg}`);
   }
 
-  // ── 방법 3: Playwright 자체 Chromium (설치 필요할 수 있음) ──
+  // ── 방법 3: 시스템 브라우저 자동 탐색 (직접 경로 + 레지스트리 + where + 추가 브라우저) ──
+  console.log('[ImageFX] 🔍 [3/4] 시스템 브라우저 자동 탐색 (직접 경로 + 레지스트리 + where)...');
+  const systemBrowserPath = findSystemBrowserExecutable();
+  if (systemBrowserPath) {
+    try {
+      const ctx = await chromium.launchPersistentContext(profileDir, {
+        ...options,
+        executablePath: systemBrowserPath,
+      });
+      const browserName = systemBrowserPath.toLowerCase().includes('edge') ? 'Edge' :
+                          systemBrowserPath.toLowerCase().includes('chrome') ? 'Chrome' :
+                          systemBrowserPath.toLowerCase().includes('brave') ? 'Brave' : '브라우저';
+      console.log(`[ImageFX] ✅ ${browserName} 사용 (executablePath: ${systemBrowserPath})`);
+      sendImageLog(`✅ [ImageFX] ${browserName} 브라우저 연결 성공`);
+      return ctx;
+    } catch (err: any) {
+      const msg = err.message?.substring(0, 120) || 'unknown';
+      errorLog.push(`직접 경로 (${systemBrowserPath}): ${msg}`);
+      console.log(`[ImageFX] ⚠️ 직접 경로 실패: ${msg}`);
+    }
+  } else {
+    errorLog.push('시스템 브라우저 자동 탐색: Chrome, Edge, Brave 등을 찾을 수 없음');
+  }
+
+  // ── 방법 4: Playwright Chromium 자동 설치 ──
   try {
+    console.log('[ImageFX] 🔍 [4/4] Playwright Chromium 자동 설치 시도...');
+    process.env.PLAYWRIGHT_BROWSERS_PATH = getPlaywrightBrowsersDir();
     await ensurePlaywrightBrowserInstalled();
     const ctx = await chromium.launchPersistentContext(profileDir, options);
     console.log('[ImageFX] ✅ Playwright 내장 Chromium 사용');
+    sendImageLog('✅ [ImageFX] Playwright Chromium 설치 및 연결 성공');
     return ctx;
-  } catch (pwErr: any) {
-    console.log(`[ImageFX] ⚠️ Playwright Chromium 실패: ${pwErr.message?.substring(0, 80)}`);
+  } catch (err: any) {
+    const msg = err.message?.substring(0, 120) || 'unknown';
+    errorLog.push(`Playwright Chromium: ${msg}`);
+    console.log(`[ImageFX] ⚠️ Playwright Chromium 실패: ${msg}`);
   }
 
-  // ── 방법 4: 최후 수단 — 설치 없이 직접 시도 ──
-  try {
-    const ctx = await chromium.launchPersistentContext(profileDir, options);
-    console.log('[ImageFX] ✅ Playwright Chromium 직접 실행 성공');
-    return ctx;
-  } catch (lastErr: any) {
-    const msg = [
-      'Chrome, Edge, Playwright Chromium 모두 사용할 수 없습니다.',
-      'Chrome 또는 Edge 브라우저를 설치해주세요.',
-      `상세: ${lastErr.message?.substring(0, 100)}`
-    ].join(' ');
-    throw new Error(msg);
-  }
+  // ── 모든 방법 실패 — 상세 에러 + 다운로드 링크 ──
+  const errorDetail = errorLog.map((e, i) => `  ${i + 1}. ${e}`).join('\n');
+  console.error(`[ImageFX] ❌ 모든 브라우저 실행 방법 실패:\n${errorDetail}`);
+
+  throw new Error(
+    '브라우저를 찾을 수 없습니다.\n\n' +
+    'Chrome 또는 Edge 브라우저를 설치해주세요:\n' +
+    '• Chrome: https://www.google.com/chrome/\n' +
+    '• Edge: https://www.microsoft.com/edge/\n\n' +
+    '설치 후 프로그램을 재시작하면 자동으로 연결됩니다.\n\n' +
+    `실패 상세 (${errorLog.length}건):\n${errorDetail}`
+  );
 }
 
 /**
@@ -948,6 +1134,7 @@ export async function generateSingleImageWithImageFx(
         const buffer = Buffer.from(genResult.encodedImage, 'base64');
         console.log(`[ImageFX] ✅ 이미지 생성 성공! (${Math.round(buffer.length / 1024)}KB, 시도 ${attempt})`);
         sendImageLog(`✅ [ImageFX] 이미지 생성 완료 (${Math.round(buffer.length / 1024)}KB)`);
+        trackApiUsage('gemini', { images: 1, model: 'imagen-3.5-imagefx', costOverride: 0 });
         // ✅ [2026-03-16 FIX] 실제 이미지 포맷을 버퍼에서 감지 (하드코딩 제거)
         const isJPEG = buffer[0] === 0xFF && buffer[1] === 0xD8 && buffer[2] === 0xFF;
         const isWebP = buffer[0] === 0x52 && buffer[1] === 0x49 && buffer[2] === 0x46 && buffer[3] === 0x46;

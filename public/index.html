@@ -606,10 +606,9 @@
                             <select id="unified-gemini-model"
                                 style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: var(--radius-sm); font-size: 0.9rem;">
                                 <optgroup label="⭐ 사용 가능한 Gemini 모델">
-                                    <option value="gemini-3.1-pro-preview">🆕 Gemini 3.1 Pro (최신, 최고 성능)</option>
-                                    <option value="gemini-3-flash-preview" selected>🚀 Gemini 3 Flash (고속, 기본)</option>
-                                    <option value="gemini-3.1-pro-preview">💎 Gemini 3.1 Pro (최고 품질)</option>
-                                    <option value="gemini-2.5-flash">⚡ Gemini 2.5 Flash</option>
+                                    <option value="gemini-3.1-flash-preview" selected>⚡ Gemini 3.1 Flash (고속, 기본)</option>
+                                    <option value="gemini-3.1-pro-preview">🏆 Gemini 3.1 Pro (최고 품질)</option>
+                                    <option value="gemini-2.5-flash">💎 Gemini 2.5 Flash (안정)</option>
                                 </optgroup>
                             </select>
                             <input type="hidden" id="unified-generator" value="gemini">
@@ -4299,9 +4298,16 @@
                                 </div>
                                 <div class="field" style="margin-bottom: 0;">
                                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                                        <input type="password" id="gemini-api-key"
-                                            placeholder="Gemini API 키를 입력하세요 (AI Studio)"
-                                            style="width: 100%; background: #ffffff; border: 2px solid var(--border-gold); color: #000000; padding: 1rem; font-size: 1rem; border-radius: 8px; font-weight: 600;">
+                                        <div style="position: relative; width: 100%;">
+                                            <input type="password" id="gemini-api-key"
+                                                placeholder="Gemini API 키를 입력하세요 (AI Studio)"
+                                                style="width: 100%; background: #ffffff; border: 2px solid var(--border-gold); color: #000000; padding: 1rem; padding-right: 3rem; font-size: 1rem; border-radius: 8px; font-weight: 600; box-sizing: border-box;">
+                                            <button type="button" id="gemini-api-key-toggle"
+                                                style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.3rem; padding: 0.25rem 0.4rem; border-radius: 6px; color: #9ca3af; transition: all 0.2s; line-height: 1;"
+                                                title="API 키 표시/숨기기"
+                                                onmouseover="this.style.background='rgba(0,0,0,0.06)'; this.style.color='#6b7280';"
+                                                onmouseout="this.style.background='none'; this.style.color='#9ca3af';">👁</button>
+                                        </div>
 
                                         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                                             <button type="button" id="gemini-api-guide-btn" class="api-guide-btn"
@@ -4315,6 +4321,12 @@
                                             <button type="button" id="open-price-info-btn"
                                                 style="flex: 1; padding: 0.75rem; background: #fff; color: #b45309; border: 2px solid #b45309; border-radius: 8px; font-weight: 700; cursor: pointer; white-space: nowrap; font-size: 0.9rem; transition: all 0.2s;">💰
                                                 비용표 확인</button>
+                                            <button type="button" id="gemini-quota-check-btn"
+                                                style="flex: 1; padding: 0.75rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; white-space: nowrap; font-size: 0.9rem; transition: all 0.2s; min-width: 120px;">📊
+                                                할당량 확인</button>
+                                        </div>
+                                        <!-- ✅ [2026-03-18] Gemini API 할당량 결과 표시 영역 -->
+                                        <div id="gemini-quota-result" style="display: none; margin-top: 0.75rem; padding: 1rem; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 10px; font-size: 0.82rem; color: var(--text-strong, #fff); line-height: 1.7;">
                                         </div>
 
                                     </div>
@@ -4381,13 +4393,21 @@
                                     </div>
                                 </div>
                                 <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-                                    <input type="password" id="leonardoai-api-key" placeholder="Leonardo AI API 키"
-                                        style="flex: 1; min-width: 200px; background: var(--bg-secondary); border: 2px solid #eab308; color: var(--text-strong); padding: 0.65rem; border-radius: 6px; font-size: 0.9rem;">
+                                    <div style="position: relative; flex: 1; min-width: 200px;">
+                                        <input type="password" id="leonardoai-api-key" placeholder="Leonardo AI API 키"
+                                            style="width: 100%; background: var(--bg-secondary); border: 2px solid #eab308; color: var(--text-strong); padding: 0.65rem; padding-right: 2.5rem; border-radius: 6px; font-size: 0.9rem; box-sizing: border-box;">
+                                        <button type="button" id="leonardoai-api-key-toggle"
+                                            style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.15rem 0.3rem; border-radius: 4px; color: #9ca3af; transition: all 0.2s; line-height: 1;"
+                                            title="API 키 표시/숨기기">👁</button>
+                                    </div>
                                     <button type="button" class="api-guide-btn" data-api="leonardoai"
                                         onclick="window.api.openExternalUrl('https://app.leonardo.ai/api-access'); return false;"
                                         style="padding: 0.65rem 1rem; background: linear-gradient(135deg, #eab308, #ca8a04); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem;">🔑
                                         발급</button>
+                                    <button type="button" id="leonardoai-validate-btn"
+                                        style="padding: 0.65rem 0.85rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">✅ 키 확인</button>
                                 </div>
+                                <div id="leonardoai-validate-result" style="display: none; margin-top: 0.5rem; padding: 0.6rem 0.85rem; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 8px; font-size: 0.78rem; color: var(--text-strong); line-height: 1.5;"></div>
                             </div>
 
                             <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -4404,12 +4424,20 @@
                                     </div>
                                 </div>
                                 <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-                                    <input type="password" id="perplexity-api-key" placeholder="pplx-로 시작하는 API 키"
-                                        style="flex: 1; min-width: 200px; background: var(--bg-secondary); border: 2px solid #a855f7; color: var(--text-strong); padding: 0.65rem; border-radius: 6px; font-size: 0.9rem;">
+                                    <div style="position: relative; flex: 1; min-width: 200px;">
+                                        <input type="password" id="perplexity-api-key" placeholder="pplx-로 시작하는 API 키"
+                                            style="width: 100%; background: var(--bg-secondary); border: 2px solid #a855f7; color: var(--text-strong); padding: 0.65rem; padding-right: 2.5rem; border-radius: 6px; font-size: 0.9rem; box-sizing: border-box;">
+                                        <button type="button" id="perplexity-api-key-toggle"
+                                            style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.15rem 0.3rem; border-radius: 4px; color: #9ca3af; transition: all 0.2s; line-height: 1;"
+                                            title="API 키 표시/숨기기">👁</button>
+                                    </div>
                                     <button type="button" class="api-guide-btn" data-api="perplexity"
                                         style="padding: 0.65rem 1rem; background: linear-gradient(135deg, #a855f7, #8b5cf6); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem;">🔑
                                         발급 가이드</button>
+                                    <button type="button" id="perplexity-validate-btn"
+                                        style="padding: 0.65rem 0.85rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">✅ 키 확인</button>
                                 </div>
+                                <div id="perplexity-validate-result" style="display: none; margin-top: 0.5rem; padding: 0.6rem 0.85rem; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 8px; font-size: 0.78rem; color: var(--text-strong); line-height: 1.5;"></div>
                             </div>
 
                             <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -4426,12 +4454,20 @@
                                     </div>
                                 </div>
                                 <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-                                    <input type="password" id="openai-api-key" placeholder="sk-로 시작하는 API 키"
-                                        style="flex: 1; min-width: 200px; background: var(--bg-secondary); border: 2px solid #22c55e; color: var(--text-strong); padding: 0.65rem; border-radius: 6px; font-size: 0.9rem;">
+                                    <div style="position: relative; flex: 1; min-width: 200px;">
+                                        <input type="password" id="openai-api-key" placeholder="sk-로 시작하는 API 키"
+                                            style="width: 100%; background: var(--bg-secondary); border: 2px solid #22c55e; color: var(--text-strong); padding: 0.65rem; padding-right: 2.5rem; border-radius: 6px; font-size: 0.9rem; box-sizing: border-box;">
+                                        <button type="button" id="openai-api-key-toggle"
+                                            style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.15rem 0.3rem; border-radius: 4px; color: #9ca3af; transition: all 0.2s; line-height: 1;"
+                                            title="API 키 표시/숨기기">👁</button>
+                                    </div>
                                     <button type="button" class="api-guide-btn" data-api="openai"
                                         style="padding: 0.65rem 1rem; background: linear-gradient(135deg, #22c55e, #16a34a); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem;">🔑
                                         발급 가이드</button>
+                                    <button type="button" id="openai-validate-btn"
+                                        style="padding: 0.65rem 0.85rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">✅ 키 확인</button>
                                 </div>
+                                <div id="openai-validate-result" style="display: none; margin-top: 0.5rem; padding: 0.6rem 0.85rem; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 8px; font-size: 0.78rem; color: var(--text-strong); line-height: 1.5;"></div>
                             </div>
 
                             <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -4448,12 +4484,20 @@
                                     </div>
                                 </div>
                                 <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-                                    <input type="password" id="claude-api-key" placeholder="sk-ant-로 시작하는 API 키"
-                                        style="flex: 1; min-width: 200px; background: var(--bg-secondary); border: 2px solid #f97316; color: var(--text-strong); padding: 0.65rem; border-radius: 6px; font-size: 0.9rem;">
+                                    <div style="position: relative; flex: 1; min-width: 200px;">
+                                        <input type="password" id="claude-api-key" placeholder="sk-ant-로 시작하는 API 키"
+                                            style="width: 100%; background: var(--bg-secondary); border: 2px solid #f97316; color: var(--text-strong); padding: 0.65rem; padding-right: 2.5rem; border-radius: 6px; font-size: 0.9rem; box-sizing: border-box;">
+                                        <button type="button" id="claude-api-key-toggle"
+                                            style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.15rem 0.3rem; border-radius: 4px; color: #9ca3af; transition: all 0.2s; line-height: 1;"
+                                            title="API 키 표시/숨기기">👁</button>
+                                    </div>
                                     <button type="button" class="api-guide-btn" data-api="claude"
                                         style="padding: 0.65rem 1rem; background: linear-gradient(135deg, #f97316, #ea580c); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem;">🔑
                                         발급 가이드</button>
+                                    <button type="button" id="claude-validate-btn"
+                                        style="padding: 0.65rem 0.85rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">✅ 키 확인</button>
                                 </div>
+                                <div id="claude-validate-result" style="display: none; margin-top: 0.5rem; padding: 0.6rem 0.85rem; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 8px; font-size: 0.78rem; color: var(--text-strong); line-height: 1.5;"></div>
                             </div>
 
                             <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -4470,12 +4514,20 @@
                                     </div>
                                 </div>
                                 <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-                                    <input type="password" id="deepinfra-api-key" placeholder="DeepInfra API 키"
-                                        style="flex: 1; min-width: 200px; background: var(--bg-secondary); border: 2px solid #fb923c; color: var(--text-strong); padding: 0.65rem; border-radius: 6px; font-size: 0.9rem;">
+                                    <div style="position: relative; flex: 1; min-width: 200px;">
+                                        <input type="password" id="deepinfra-api-key" placeholder="DeepInfra API 키"
+                                            style="width: 100%; background: var(--bg-secondary); border: 2px solid #fb923c; color: var(--text-strong); padding: 0.65rem; padding-right: 2.5rem; border-radius: 6px; font-size: 0.9rem; box-sizing: border-box;">
+                                        <button type="button" id="deepinfra-api-key-toggle"
+                                            style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.15rem 0.3rem; border-radius: 4px; color: #9ca3af; transition: all 0.2s; line-height: 1;"
+                                            title="API 키 표시/숨기기">👁</button>
+                                    </div>
                                     <button type="button" class="api-guide-btn" data-api="deepinfra"
                                         style="padding: 0.65rem 1rem; background: linear-gradient(135deg, #fb923c, #f97316); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem;">🔑
                                         발급 가이드</button>
+                                    <button type="button" id="deepinfra-validate-btn"
+                                        style="padding: 0.65rem 0.85rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">✅ 키 확인</button>
                                 </div>
+                                <div id="deepinfra-validate-result" style="display: none; margin-top: 0.5rem; padding: 0.6rem 0.85rem; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 8px; font-size: 0.78rem; color: var(--text-strong); line-height: 1.5;"></div>
                             </div>
 
 
@@ -4557,33 +4609,38 @@
                                 </h4>
                                 <div class="gemini-model-list"
                                     style="display: flex; flex-direction: column; gap: 0.75rem;">
-                                    <!-- Gemini 2.5 Flash (기본 추천, 속도+품질 밸런스) -->
+
+                                    <!-- ═══ 🔷 GEMINI 엔진 ═══ -->
+                                    <div style="font-size: 0.8rem; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; padding-left: 0.25rem;">🔷 Google Gemini</div>
+
+                                    <!-- ✅ Gemini 3.1 Flash (가성비 추천) -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #10b981; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #ecfdf5, #d1fae5); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);">
                                         <div
                                             style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #d1fae5; border-radius: 50%;">
-                                            <input type="radio" name="primaryGeminiTextModel" value="gemini-2.5-flash"
+                                            <input type="radio" name="primaryGeminiTextModel" value="gemini-3.1-flash-preview"
                                                 checked
                                                 style="width: 18px; height: 18px; cursor: pointer; accent-color: #10b981;">
                                         </div>
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>Gemini 2.5 Flash</span>
+                                                <span>⚡ Gemini 3.1 Flash</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);">⚡
-                                                    추천</span>
+                                                    style="background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);">💰 가성비 추천</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
-                                                빠른 속도 · 안정적 · 최적 글쓰기 품질</div>
+                                                빠른 속도 · 고품질 · 최신 모델 · Search Grounding 무료</div>
+                                            <div style="font-size: 0.8rem; color: #059669; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 1편당 ₩6 ($0.004)</div>
                                         </div>
                                     </label>
 
-                                    <!-- Gemini 3.1 Pro -->
+                                    <!-- 🏆 Gemini 3.1 Pro (홈판 노출용) -->
                                     <label class="gemini-model-card"
-                                        style="cursor: pointer; border: 2px solid #d4af37; border-radius: 12px; padding: 1.25rem; background: #ffffff; display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);">
+                                        style="cursor: pointer; border: 2px solid #d4af37; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #fffbeb, #fef3c7); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);">
                                         <div
-                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #fffbeb; border-radius: 50%;">
+                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #fef3c7; border-radius: 50%;">
                                             <input type="radio" name="primaryGeminiTextModel"
                                                 value="gemini-3.1-pro-preview"
                                                 style="width: 18px; height: 18px; cursor: pointer; accent-color: #d4af37;">
@@ -4591,64 +4648,21 @@
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>Gemini 3.1 Pro</span>
+                                                <span>🏆 Gemini 3.1 Pro</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #d4af37, #f59e0b); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);">BEST</span>
+                                                    style="background: linear-gradient(135deg, #d4af37, #f59e0b); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);">🔥 홈판 노출</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
-                                                압도적인
-                                                추론
-                                                능력과
-                                                깊이 있는 글쓰기 품질</div>
+                                                압도적 추론 · 깊이 있는 글쓰기 · 홈피드 최적화</div>
+                                            <div style="font-size: 0.8rem; color: #b45309; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 1편당 ₩93 ($0.066)</div>
                                         </div>
                                     </label>
 
-                                    <!-- Gemini 3 Flash -->
-                                    <label class="gemini-model-card"
-                                        style="cursor: pointer; border: 2px solid #e5e7eb; border-radius: 12px; padding: 1.25rem; background: #ffffff; display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
-                                        <div
-                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #f3f4f6; border-radius: 50%;">
-                                            <input type="radio" name="primaryGeminiTextModel"
-                                                value="gemini-3-flash-preview"
-                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #6b7280;">
-                                        </div>
-                                        <div style="flex: 1;">
-                                            <div
-                                                style="font-weight: 700; color: #374151; font-size: 1rem; margin-bottom: 0.35rem;">
-                                                Gemini 3 Flash
-                                            </div>
-                                            <div style="font-size: 0.9rem; color: #6b7280; line-height: 1.4;">가장
-                                                빠른
-                                                처리
-                                                속도와
-                                                효율성</div>
-                                        </div>
-                                    </label>
+                                    <!-- ═══ 🔮 PERPLEXITY 엔진 ═══ -->
+                                    <div style="font-size: 0.8rem; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.75rem; padding-left: 0.25rem;">🔮 Perplexity</div>
 
-                                    <!-- Gemini 2.5 Flash -->
-                                    <label class="gemini-model-card"
-                                        style="cursor: pointer; border: 2px solid #e5e7eb; border-radius: 12px; padding: 1.25rem; background: #ffffff; display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
-                                        <div
-                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #f3f4f6; border-radius: 50%;">
-                                            <input type="radio" name="primaryGeminiTextModel" value="gemini-2.5-flash"
-                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #6b7280;">
-                                        </div>
-                                        <div style="flex: 1;">
-                                            <div
-                                                style="font-weight: 700; color: #374151; font-size: 1rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>Gemini 2.5 Flash</span>
-                                                <span
-                                                    style="background: #e5e7eb; color: #6b7280; font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; font-weight: 600;">Good</span>
-                                            </div>
-                                            <div style="font-size: 0.9rem; color: #6b7280; line-height: 1.4;">
-                                                검증된
-                                                안정성과
-                                                최적화된
-                                                가성비</div>
-                                        </div>
-                                    </label>
-
-                                    <!-- ✅ [2026-01-25] Perplexity AI (Sonar) -->
+                                    <!-- Perplexity AI Sonar -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #a855f7; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #faf5ff, #f3e8ff); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15);">
                                         <div
@@ -4659,21 +4673,43 @@
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 800; color: #6b21a8; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>🔮 Perplexity AI (Sonar)</span>
+                                                <span>🔮 Perplexity Sonar</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #a855f7, #8b5cf6); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">실시간
-                                                    검색</span>
+                                                    style="background: linear-gradient(135deg, #a855f7, #8b5cf6); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">실시간 검색</span>
                                             </div>
-                                            <div style="font-size: 0.9rem; color: #7c3aed; line-height: 1.4;">최신
-                                                웹
-                                                정보
-                                                기반
-                                                실시간
-                                                검색 + AI 분석 (출처 자동 인용)</div>
+                                            <div style="font-size: 0.9rem; color: #7c3aed; line-height: 1.4;">
+                                                최신 웹 정보 기반 실시간 검색 + AI 분석</div>
+                                            <div style="font-size: 0.8rem; color: #7c3aed; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 1편당 ₩15 ($0.011)</div>
                                         </div>
                                     </label>
 
-                                    <!-- ✅ [2026-02-22] OpenAI GPT-4o -->
+                                    <!-- ═══ 🧠 OPENAI 엔진 ═══ -->
+                                    <div style="font-size: 0.8rem; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.75rem; padding-left: 0.25rem;">🧠 OpenAI</div>
+
+                                    <!-- GPT-4.1 mini (가성비) -->
+                                    <label class="gemini-model-card"
+                                        style="cursor: pointer; border: 2px solid #86efac; border-radius: 12px; padding: 1.25rem; background: #ffffff; display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #dcfce7; border-radius: 50%;">
+                                            <input type="radio" name="primaryGeminiTextModel" value="openai-gpt4o-mini"
+                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #22c55e;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-weight: 700; color: #15803d; font-size: 1rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
+                                                <span>🧠 GPT-4.1 mini</span>
+                                                <span
+                                                    style="background: #dcfce7; color: #15803d; font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; font-weight: 600;">가성비</span>
+                                            </div>
+                                            <div style="font-size: 0.9rem; color: #166534; line-height: 1.4;">
+                                                빠른 속도 · 합리적 가격 · 안정적 품질</div>
+                                            <div style="font-size: 0.8rem; color: #15803d; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 1편당 ₩16 ($0.012)</div>
+                                        </div>
+                                    </label>
+
+                                    <!-- GPT-5.4 (프리미엄) -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #22c55e; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f0fdf4, #dcfce7); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);">
                                         <div
@@ -4684,32 +4720,61 @@
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 800; color: #15803d; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>🧠 OpenAI GPT-5.2</span>
+                                                <span>🚀 GPT-5.4</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">GPT</span>
+                                                    style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">프리미엄</span>
                                             </div>
-                                            <div style="font-size: 0.9rem; color: #166534; line-height: 1.4;">최신
-                                                GPT-5.2 · 강력한 추론 · 정확한 지시 이행</div>
+                                            <div style="font-size: 0.9rem; color: #166534; line-height: 1.4;">
+                                                최신 GPT-5.4 · 강력한 추론 · 정확한 지시 이행</div>
+                                            <div style="font-size: 0.8rem; color: #15803d; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 1편당 ₩101 ($0.072)</div>
                                         </div>
                                     </label>
 
-                                    <!-- ✅ [2026-02-22] Claude 3.5 Sonnet -->
+                                    <!-- ═══ 🎭 CLAUDE 엔진 ═══ -->
+                                    <div style="font-size: 0.8rem; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.75rem; padding-left: 0.25rem;">🎭 Anthropic Claude</div>
+
+                                    <!-- Claude Haiku 3.5 (가성비) -->
+                                    <label class="gemini-model-card"
+                                        style="cursor: pointer; border: 2px solid #fdba74; border-radius: 12px; padding: 1.25rem; background: #ffffff; display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #ffedd5; border-radius: 50%;">
+                                            <input type="radio" name="primaryGeminiTextModel" value="claude-haiku"
+                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #f97316;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-weight: 700; color: #c2410c; font-size: 1rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
+                                                <span>💜 Claude Haiku 3.5</span>
+                                                <span
+                                                    style="background: #ffedd5; color: #c2410c; font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; font-weight: 600;">가성비</span>
+                                            </div>
+                                            <div style="font-size: 0.9rem; color: #9a3412; line-height: 1.4;">
+                                                빠른 응답 · 자연스러운 한국어 · 창의적 문체</div>
+                                            <div style="font-size: 0.8rem; color: #c2410c; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 1편당 ₩39 ($0.028)</div>
+                                        </div>
+                                    </label>
+
+                                    <!-- Claude Opus 4.6 (최고 품질) -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #f97316; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #fff7ed, #ffedd5); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);">
                                         <div
                                             style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #ffedd5; border-radius: 50%;">
-                                            <input type="radio" name="primaryGeminiTextModel" value="claude-sonnet"
+                                            <input type="radio" name="primaryGeminiTextModel" value="claude-opus"
                                                 style="width: 18px; height: 18px; cursor: pointer; accent-color: #f97316;">
                                         </div>
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 800; color: #c2410c; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>🎭 Claude Sonnet 4.6</span>
+                                                <span>👑 Claude Opus 4.6</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">Anthropic</span>
+                                                    style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">최고 품질</span>
                                             </div>
-                                            <div style="font-size: 0.9rem; color: #9a3412; line-height: 1.4;">최신
-                                                Sonnet 4.6 · 탁월한 글쓰기 · 창의적 표현</div>
+                                            <div style="font-size: 0.9rem; color: #9a3412; line-height: 1.4;">
+                                                최상급 추론 · 완벽한 글쓰기 · 프리미엄 품질</div>
+                                            <div style="font-size: 0.8rem; color: #c2410c; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 1편당 ₩735 ($0.525)</div>
                                         </div>
                                     </label>
                                 </div>
@@ -4717,8 +4782,8 @@
 
                             <p
                                 style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.6;">
-                                ✅ <strong>정책/계정 설정에 따라 무료 티어 또는 과금</strong> | 할당량은 Google 정책에 따름<br>
-                                ✅ <strong>글 생성</strong>: Gemini 3.1 Pro / 2.5 Flash (최신 모델 풀가동)<br>
+                                ✅ <strong>정책/계정 설정에 따라 무료 티어 또는 과금</strong> | 할당량은 각 AI 정책에 따름<br>
+                                ✅ <strong>글 생성</strong>: Gemini 3.1 Flash/Pro · GPT-4.1/5.4 · Claude Haiku/Opus (선택)<br>
                                 ✅ <strong>이미지 생성</strong>: 나노 바나나 프로 (Gemini 3 Pro 4K) / Fal.ai (FLUX) /
                                 Stability AI (Ultra) / Prodia / 공공자료
                             </p>

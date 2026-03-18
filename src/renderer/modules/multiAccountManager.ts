@@ -3284,6 +3284,23 @@ export async function initMultiAccountPublishModal() {
           addMALog('📤 블로그 발행 중...', 'info');
           addProgressItem(`   🚀 ${queueItem.accountName} 발행 중...`, 'info');
 
+          // ✅ [2026-03-19 FIX] 다중계정 발행: generatedImages에서 thumbnailPath 추출
+          // 단건/풀오토 발행은 filterImagesForPublish()로 처리하지만,
+          // 다중계정 흐름은 독립 파이프라인이므로 직접 추출 필요
+          let extractedThumbnailPath: string | undefined;
+          if (Array.isArray(generatedImages) && generatedImages.length > 0) {
+            const thumbImg = generatedImages.find((img: any) => img.isThumbnail === true);
+            if (thumbImg) {
+              extractedThumbnailPath = thumbImg.filePath || thumbImg.url || undefined;
+              console.log(`[FullAuto] 🖼️ 썸네일 추출 (isThumbnail): ${extractedThumbnailPath?.substring(0, 80)}`);
+            }
+            if (!extractedThumbnailPath && generatedImages[0]) {
+              // isThumbnail 플래그 없으면 첫 번째 이미지를 썸네일로 사용
+              extractedThumbnailPath = generatedImages[0].filePath || generatedImages[0].url || undefined;
+              console.log(`[FullAuto] 🖼️ 썸네일 폴백 (첫 이미지): ${extractedThumbnailPath?.substring(0, 80)}`);
+            }
+          }
+
           const publishOptions = {
             naverId: credResult.credentials.naverId,
             naverPassword: credResult.credentials.naverPassword,
@@ -3337,6 +3354,7 @@ export async function initMultiAccountPublishModal() {
             // ✅ [2026-02-02 FIX] 이전글 엮기 필드 추가 (기존 누락으로 인한 버그 수정)
             previousPostUrl: (queueItem as any)?.previousPostUrl || undefined,
             previousPostTitle: (queueItem as any)?.previousPostTitle || undefined,
+            thumbnailPath: extractedThumbnailPath || undefined, // ✅ [2026-03-19 FIX] 다중계정 썸네일 경로 전달
           };
 
           console.log('[FullAuto] 발행 옵션:', publishOptions);

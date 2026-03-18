@@ -81,7 +81,7 @@ export interface AppConfig {
   deepinfraApiKey?: string;
 
   // ✅ Gemini 텍스트 생성 주 모델 선택
-  primaryGeminiTextModel?: 'gemini-3.1-pro-preview' | 'gemini-3-flash-preview' | 'gemini-2.5-flash' | string;
+  primaryGeminiTextModel?: 'gemini-3.1-pro-preview' | 'gemini-3.1-flash-preview' | 'gemini-2.5-flash' | string;
 
   // ✅ 이미지 품질 티어 시스템 (비용 최적화)
   imageQualityMode?: 'balanced' | 'all-budget' | 'all-premium' | 'all-4k';
@@ -97,6 +97,30 @@ export interface AppConfig {
   // ✅ [2026-01-25] 전역 AI 제공자 설정
   defaultAiProvider?: 'gemini' | 'perplexity' | 'openai' | 'claude';
   perplexityModel?: 'sonar' | 'sonar-pro';
+
+  // ✅ [2026-03-18] Gemini API 사용량 추적 (로컬 누적)
+  geminiUsageTracker?: {
+    totalInputTokens: number;
+    totalOutputTokens: number;
+    totalCalls: number;
+    estimatedCostUSD: number;
+    lastUpdated: string; // ISO date
+    firstTracked: string; // ISO date - 추적 시작일
+  };
+  geminiCreditBudget?: number; // 사용자 설정 예산 (USD, 기본 $300)
+
+  // ✅ [2026-03-19] 통합 API 사용량 추적 (모든 제공자)
+  apiUsageTrackers?: {
+    [provider: string]: {
+      totalCalls: number;
+      totalInputTokens: number;
+      totalOutputTokens: number;
+      totalImages: number;
+      estimatedCostUSD: number;
+      lastUpdated: string;
+      firstTracked: string;
+    };
+  };
 }
 
 const CONFIG_FILE = 'settings.json';
@@ -173,7 +197,7 @@ export async function loadConfig(): Promise<AppConfig> {
     const DEPRECATED_MODELS = ['gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-pro', 'gemini-pro-vision'];
     if (geminiModel && DEPRECATED_MODELS.some(m => geminiModel.includes(m))) {
       const oldModel = geminiModel;
-      geminiModel = 'gemini-3-flash-preview';  // 새 기본 모델로 자동 전환
+      geminiModel = 'gemini-3.1-flash-preview';  // 새 기본 모델로 자동 전환
       console.log(`[Config] ⚠️ 구 모델(${oldModel}) → 새 모델(${geminiModel})로 자동 마이그레이션`);
     }
 
@@ -419,12 +443,17 @@ export function applyConfigToEnv(config: AppConfig): void {
 
   // (removed prodiaToken env injection - deprecated)
 
-  // ✅ Gemini 모델 설정 (2026-01-04: 강제 변환 제거, 화읷성 최우선)
-  // 사용자가 직접 선택한 모델을 존중하고, 실패 시 폴백 로직이 처리
-  const geminiModel = config.primaryGeminiTextModel || config.geminiModel;
+  // ✅ [2026-03-18 FIX] Gemini 모델 설정 — 비-Gemini 모델명 오염 방지
+  // primaryGeminiTextModel은 'claude-haiku', 'openai-gpt4o', 'perplexity-sonar' 등
+  // 비-Gemini 값을 가질 수 있으므로, gemini- 접두사가 있는 값만 GEMINI_MODEL에 설정
+  const rawModel = config.primaryGeminiTextModel || config.geminiModel;
+  const geminiModel = (rawModel && rawModel.startsWith('gemini-')) ? rawModel : undefined;
   if (geminiModel) {
     process.env.GEMINI_MODEL = geminiModel;
     console.log('[Config] GEMINI_MODEL 설정됨:', geminiModel);
+  } else if (rawModel) {
+    // 비-Gemini 모델은 GEMINI_MODEL에 넣지 않음 (defaultAiProvider로 관리)
+    console.log(`[Config] ⚠️ primaryGeminiTextModel(${rawModel})은 비-Gemini 모델 → GEMINI_MODEL 미설정 (provider 경로로 처리)`);
   }
 
   if (config.openaiApiKey && config.openaiApiKey.trim()) {
@@ -453,6 +482,12 @@ export function applyConfigToEnv(config: AppConfig): void {
     console.log('[Config] PERPLEXITY_API_KEY 설정됨 (길이:', config.perplexityApiKey.trim().length, ')');
   } else {
     delete process.env.PERPLEXITY_API_KEY;
+  }
+
+  // ✅ [2026-03-20 FIX] Perplexity 모델 설정 (sonar / sonar-pro)
+  if (config.perplexityModel) {
+    process.env.PERPLEXITY_MODEL = config.perplexityModel;
+    console.log('[Config] PERPLEXITY_MODEL 설정됨:', config.perplexityModel);
   }
 
   // ✅ 네이버 검색 API (sourceAssembler, blogAccountManager 등에서 사용)

@@ -14,7 +14,8 @@ import { createDatalabClient, NaverDatalabClient } from './naverDatalab.js';
 import type { ContentSource, StructuredContent, ContentGeneratorProvider, ArticleType } from './contentGenerator.js';
 import { assembleContentSource, type SourceAssemblyInput } from './sourceAssembler.js';
 import { applyConfigToEnv, loadConfig, saveConfig, validateApiKeyFormat, type AppConfig } from './configManager.js';
-import { generateBlogContent, setGeminiModel } from './gemini.js';
+import { generateBlogContent, setGeminiModel, flushGeminiUsage, getGeminiUsageSnapshot } from './gemini.js';
+import { flushAllApiUsage, getApiUsageSnapshot, resetApiUsage, type ApiProvider } from './apiUsageTracker.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
 import { PostPublishBooster } from './publisher/postPublishBooster.js';
 import { TrendMonitor, type TrendAlertEvent } from './monitor/trendMonitor.js';
@@ -2970,16 +2971,20 @@ ipcMain.handle('image:matchToHeadings', async (_event, images: string[], heading
 
     const { matchImagesToHeadings } = await import('./imageHeadingMatcher.js');
 
-    // ✅ 설정 기반 AI 매칭 실행
+    // ✅ [2026-03-20 FIX] 설정 기반 AI 매칭 실행 — openai/claude는 미지원이므로 Gemini로 안전 폴백
+    const resolvedMatcherProvider = (provider === 'perplexity' && hasPerplexity) ? 'perplexity' as const : 'gemini' as const;
+    if ((provider === 'openai' || provider === 'claude') && hasGemini) {
+      console.log(`[Main] ⚠️ 이미지-소제목 매칭: ${provider}는 미지원 → Gemini로 폴백합니다.`);
+    }
     const matcherConfig = {
-      provider: (provider === 'perplexity' && hasPerplexity) ? 'perplexity' as const : 'gemini' as const,
+      provider: resolvedMatcherProvider,
       geminiApiKey,
       perplexityApiKey,
       geminiModel: config.geminiModel || process.env.GEMINI_MODEL,
       perplexityModel: config.perplexityModel,
     };
 
-    console.log(`[Main] 🤖 AI 공급자: ${matcherConfig.provider}`);
+    console.log(`[Main] 🤖 AI 공급자: ${matcherConfig.provider} (설정: ${provider})`);
     const matches = await matchImagesToHeadings(images, headings, matcherConfig);
 
     console.log(`[Main] ✅ 이미지-소제목 매칭 완료: ${JSON.stringify(matches)}`);
@@ -4192,7 +4197,26 @@ ipcMain.handle('automation:generateContent', async (_event, prompt: string) => {
   if (!check.valid) return check.response;
 
   try {
-    const content = await generateBlogContent(prompt ?? '');
+    // ✅ [2026-03-20 FIX] defaultAiProvider에 따라 올바른 엔진 선택
+    // 기존: generateBlogContent() (Gemini 전용)만 호출 → 다른 provider 무시
+    // 수정: config.defaultAiProvider를 확인하여 generateStructuredContent 사용
+    const config = await loadConfig();
+    const provider = config.defaultAiProvider || 'gemini';
+    let content: string;
+
+    if (provider === 'gemini') {
+      // Gemini: 기존 레거시 경로 유지 (폴백 모델 체인 포함)
+      content = await generateBlogContent(prompt ?? '');
+    } else {
+      // OpenAI/Claude/Perplexity: generateStructuredContent의 provider-aware 경로 사용
+      const source = { rawText: prompt ?? '', title: '', contentMode: 'seo' as const, sourceType: 'custom_text' as const };
+      const result = await generateStructuredContent(source, { provider } as any);
+      content = result?.bodyPlain || result?.bodyHtml || '';
+      if (!content?.trim()) {
+        throw new Error(`${provider} 엔진으로 콘텐츠를 생성하지 못했습니다.`);
+      }
+    }
+
     if (await isFreeTierUser()) {
       await consumeQuota('content', 1);
     }
@@ -4200,6 +4224,450 @@ ipcMain.handle('automation:generateContent', async (_event, prompt: string) => {
   } catch (error) {
     const message = (error as Error).message ?? '콘텐츠 생성 중 오류가 발생했습니다.';
     return { success: false, message };
+  }
+});
+
+// ✅ [2026-03-18] Gemini API 할당량 확인 핸들러 (정확한 공식 데이터 기반)
+ipcMain.handle('gemini:checkQuota', async (_event, apiKey: string) => {
+  try {
+    if (!apiKey || !apiKey.trim()) {
+      return { success: false, message: 'API 키를 먼저 입력해주세요.' };
+    }
+
+    const key = apiKey.trim();
+    console.log(`[Gemini] 🔍 할당량 확인 시작 - API 키 길이: ${key.length}자, 접두사: ${key.substring(0, 6)}...`);
+    const axios = (await import('axios')).default;
+    const baseUrl = 'https://generativelanguage.googleapis.com/v1beta';
+
+    // 1. 모델 목록 조회 (API 키 유효성 + 사용 가능 모델 확인) — 실제 API 응답
+    let models: any[] = [];
+    try {
+      const modelsResp = await axios.get(`${baseUrl}/models`, {
+        headers: { 'x-goog-api-key': key },
+        timeout: 15000,
+      });
+      models = modelsResp.data?.models || [];
+      console.log(`[Gemini] ✅ 모델 목록 조회 성공: ${models.length}개 모델`);
+    } catch (modelsErr: any) {
+      const status = modelsErr?.response?.status;
+      const respData = modelsErr?.response?.data;
+      const errorDetail = respData?.error?.message || respData?.error?.status || JSON.stringify(respData || {}).substring(0, 200);
+      console.error(`[Gemini] ❌ 모델 목록 조회 실패 - HTTP ${status}, 상세: ${errorDetail}`);
+      console.error(`[Gemini]   API 키 길이: ${key.length}자, 접두사: ${key.substring(0, 6)}...`);
+      if (status === 400 || status === 401 || status === 403) {
+        return { success: false, message: `❌ API 키가 유효하지 않습니다 (HTTP ${status}).\n상세: ${errorDetail}\n\n키 길이: ${key.length}자 | 접두사: ${key.substring(0, 6)}...\n\n💡 Google AI Studio에서 키를 다시 확인해주세요.` };
+      }
+      if (status === 429) {
+        return { success: false, message: '⚠️ API 요청 한도 초과 (429). 잠시 후 다시 시도해주세요.' };
+      }
+      return { success: false, message: `API 연결 실패 (HTTP ${status || '?'}): ${modelsErr?.message || '알 수 없는 오류'}\n상세: ${errorDetail}` };
+    }
+
+    // 2. 주요 모델 필터링 — 실제 API 응답에서 추출
+    const geminiModels = models.filter((m: any) =>
+      m.name?.includes('gemini') && m.supportedGenerationMethods?.includes('generateContent')
+    );
+    const flashModels = geminiModels.filter((m: any) => m.name?.includes('flash'));
+    const proModels = geminiModels.filter((m: any) => m.name?.includes('pro') && !m.name?.includes('flash'));
+
+    // 3. 경량 테스트 호출 — 실제 토큰 사용량 확인 (usageMetadata)
+    let testCallResult: any = null;
+    try {
+      const testResp = await axios.post(
+        `${baseUrl}/models/gemini-2.0-flash:generateContent`,
+        { contents: [{ parts: [{ text: 'Hi' }] }] },
+        {
+          headers: { 'x-goog-api-key': key, 'Content-Type': 'application/json' },
+          timeout: 15000,
+        }
+      );
+      const usage = testResp.data?.usageMetadata;
+      if (usage) {
+        testCallResult = {
+          promptTokens: usage.promptTokenCount || 0,
+          outputTokens: usage.candidatesTokenCount || 0,
+          totalTokens: usage.totalTokenCount || 0,
+        };
+      }
+    } catch (testErr: any) {
+      if (testErr?.response?.status === 429) {
+        testCallResult = { error: '현재 분당 요청 한도 초과 (429)' };
+      } else {
+        testCallResult = { error: testErr?.message || '테스트 호출 실패' };
+      }
+    }
+
+    // 4. 사용자의 현재 플랜 설정 읽기
+    const config = await loadConfig();
+    const userPlanType = config.geminiPlanType || 'paid'; // 사용자 설정값
+
+    // ✅ [2026-03-19] flush 후 메모리+디스크 합산 스냅샷 사용 (배치 중 누적분 포함)
+    await flushGeminiUsage();
+    const usageTracker = await getGeminiUsageSnapshot();
+    const creditBudget = (config as any).geminiCreditBudget || 300; // 기본 $300
+
+    // 5. Google 공식 가격표 기반 플랜별 정보 (2026-03 기준)
+    // 출처: https://ai.google.dev/pricing
+    const planInfo = userPlanType === 'free' ? {
+      label: '🆓 무료 (Free tier)',
+      limits: {
+        rpm: 15,         // 분당 요청 수
+        rpd: 1500,       // 일일 요청 수
+        tpm: '1,000,000', // 분당 토큰
+      },
+      pricing: {
+        flash_input: '$0 (무료)',
+        flash_output: '$0 (무료)',
+        pro_input: '$0 (무료)',
+        pro_output: '$0 (무료)',
+        note: '무료 티어는 속도 제한이 있으며, 상업적 사용이 제한됩니다.',
+      },
+    } : {
+      label: '💎 유료 (Pay-as-you-go)',
+      limits: {
+        rpm: 2000,        // 분당 요청 수  
+        rpd: '무제한',     // 일일 요청 수
+        tpm: '4,000,000', // 분당 토큰
+      },
+      pricing: {
+        flash_input: '$0.10 / 1M tokens',
+        flash_output: '$0.40 / 1M tokens',
+        pro_input: '$1.25 / 1M tokens',
+        pro_output: '$5.00 / 1M tokens',
+        note: '유료 플랜은 높은 속도 제한과 상업적 사용이 가능합니다.',
+      },
+    };
+
+    // 6. 결과 조합 — 모든 데이터가 실제 API 응답 또는 공식 문서 기반
+    return {
+      success: true,
+      data: {
+        keyValid: true,
+        userPlanType, // 사용자가 설정한 플랜
+        planLabel: planInfo.label,
+        totalModels: geminiModels.length,
+        flashModels: flashModels.map((m: any) => m.name?.replace('models/', '')).slice(0, 5),
+        proModels: proModels.map((m: any) => m.name?.replace('models/', '')).slice(0, 5),
+        limits: planInfo.limits,
+        pricing: planInfo.pricing,
+        testCallResult,
+        // ✅ [2026-03-18] 앱 내 누적 사용량 데이터
+        usageTracker: {
+          totalInputTokens: usageTracker.totalInputTokens,
+          totalOutputTokens: usageTracker.totalOutputTokens,
+          totalCalls: usageTracker.totalCalls,
+          estimatedCostUSD: usageTracker.estimatedCostUSD,
+          lastUpdated: usageTracker.lastUpdated,
+          firstTracked: usageTracker.firstTracked,
+        },
+        creditBudget, // 사용자 설정 예산
+      },
+    };
+  } catch (error) {
+    console.error('[Gemini] 할당량 확인 실패:', error);
+    return { success: false, message: `할당량 확인 실패: ${(error as Error).message}` };
+  }
+});
+
+// ✅ [2026-03-18] Gemini 사용량 추적 관리 IPC 핸들러
+ipcMain.handle('gemini:resetUsageTracker', async () => {
+  try {
+    const config = await loadConfig();
+    await saveConfig({
+      geminiUsageTracker: {
+        totalInputTokens: 0,
+        totalOutputTokens: 0,
+        totalCalls: 0,
+        estimatedCostUSD: 0,
+        lastUpdated: new Date().toISOString(),
+        firstTracked: new Date().toISOString(),
+      },
+    } as any);
+    console.log('[Gemini] 🔄 사용량 추적 초기화 완료');
+    return { success: true };
+  } catch (e) {
+    return { success: false, message: (e as Error).message };
+  }
+});
+
+ipcMain.handle('gemini:setCreditBudget', async (_event, budget: number) => {
+  try {
+    await saveConfig({ geminiCreditBudget: budget } as any);
+    console.log(`[Gemini] 💰 예산 설정: $${budget}`);
+    return { success: true };
+  } catch (e) {
+    return { success: false, message: (e as Error).message };
+  }
+});
+
+// ✅ [2026-03-19] 통합 API 사용량 조회 핸들러
+ipcMain.handle('api:getAllUsageSnapshots', async () => {
+  try {
+    await flushAllApiUsage();
+    const snapshots = await getApiUsageSnapshot();
+    return { success: true, data: snapshots };
+  } catch (e) {
+    console.error('[ApiUsage] 스냅샷 조회 실패:', e);
+    return { success: false, message: (e as Error).message };
+  }
+});
+
+// ✅ [2026-03-19] 통합 API 사용량 초기화 핸들러 (제공자별 또는 전체)
+ipcMain.handle('api:resetUsage', async (_event, provider?: string) => {
+  try {
+    await resetApiUsage(provider as ApiProvider | undefined);
+    return { success: true };
+  } catch (e) {
+    console.error('[ApiUsage] 초기화 실패:', e);
+    return { success: false, message: (e as Error).message };
+  }
+});
+
+// ✅ [2026-03-19] 범용 API 키 유효성 검증 + 잔액/사용량 조회 핸들러
+ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: string) => {
+  try {
+    if (!apiKey || !apiKey.trim()) {
+      return { success: false, message: 'API 키를 입력해주세요.' };
+    }
+
+    const key = apiKey.trim();
+    const axios = (await import('axios')).default;
+    const { getApiUsageSnapshot, flushAllApiUsage } = await import('./apiUsageTracker.js');
+
+    // ✅ [2026-03-19 FIX] 앱 내 누적 사용량 조회 (geminiUsageTracker 합산 포함)
+    await flushAllApiUsage();
+    const allSnapshots = await getApiUsageSnapshot() as Record<string, any>;
+    const providerKey = provider === 'openai' ? 'openai' : provider;
+    const usage = { ...(allSnapshots[providerKey] || { totalCalls: 0, estimatedCostUSD: 0, totalInputTokens: 0, totalOutputTokens: 0, totalImages: 0, firstTracked: '', lastUpdated: '' }) };
+
+    // ✅ Gemini: 기존 geminiUsageTracker (2026-03-18~) 데이터 합산
+    // apiUsageTrackers.gemini는 3/19 이후 데이터만 있을 수 있으므로 이전 추적 데이터 병합
+    if (provider === 'gemini') {
+      // gemini 전용: 레거시 트래커 합산
+      {
+        const config = await loadConfig() as any;
+        const legacyTracker = config.geminiUsageTracker;
+        if (legacyTracker) {
+          // 레거시에만 있고 새 트래커에 없는 데이터 합산
+          usage.totalCalls += legacyTracker.totalCalls || 0;
+          usage.totalInputTokens += legacyTracker.totalInputTokens || 0;
+          usage.totalOutputTokens += legacyTracker.totalOutputTokens || 0;
+          usage.estimatedCostUSD += legacyTracker.estimatedCostUSD || 0;
+          // firstTracked: 더 오래된 날짜 사용
+          if (legacyTracker.firstTracked && (!usage.firstTracked || legacyTracker.firstTracked < usage.firstTracked)) {
+            usage.firstTracked = legacyTracker.firstTracked;
+          }
+          if (legacyTracker.lastUpdated && (!usage.lastUpdated || legacyTracker.lastUpdated > usage.lastUpdated)) {
+            usage.lastUpdated = legacyTracker.lastUpdated;
+          }
+        }
+      }
+    }
+
+    // OpenAI 이미지 사용량도 합산
+    if (provider === 'openai') {
+      const imgUsage = allSnapshots['openai-image'] || { totalCalls: 0, estimatedCostUSD: 0, totalImages: 0 };
+      usage.totalCalls += imgUsage.totalCalls;
+      usage.estimatedCostUSD += imgUsage.estimatedCostUSD;
+      usage.totalImages = (usage.totalImages || 0) + (imgUsage.totalImages || 0);
+      // 이미지 트래커의 firstTracked도 병합
+      if (imgUsage.firstTracked && (!usage.firstTracked || imgUsage.firstTracked < usage.firstTracked)) {
+        usage.firstTracked = imgUsage.firstTracked;
+      }
+    }
+
+    // 대시보드 URL 매핑
+    const dashboardUrls: Record<string, string> = {
+      openai: 'https://platform.openai.com/settings/organization/billing/overview',
+      leonardoai: 'https://app.leonardo.ai/api-access',
+      deepinfra: 'https://deepinfra.com/dash/billing',
+      claude: 'https://console.anthropic.com/settings/billing',
+      perplexity: 'https://www.perplexity.ai/settings/api',
+    };
+
+    const makeBalanceObj = (extra?: { remaining?: string; total?: string }) => ({
+      usedCost: `$${usage.estimatedCostUSD.toFixed(4)}`,
+      totalCalls: usage.totalCalls,
+      totalInputTokens: usage.totalInputTokens || 0,
+      totalOutputTokens: usage.totalOutputTokens || 0,
+      totalImages: usage.totalImages || 0,
+      firstTracked: usage.firstTracked || '',
+      lastUpdated: usage.lastUpdated || '',
+      dashboardUrl: dashboardUrls[provider] || '',
+      remaining: extra?.remaining || '',
+      total: extra?.total || '',
+    });
+
+    switch (provider) {
+      case 'leonardoai': {
+        try {
+          const resp = await axios.get('https://cloud.leonardo.ai/api/rest/v1/me', {
+            headers: { 'Authorization': `Bearer ${key}`, 'Accept': 'application/json' },
+            timeout: 10000,
+          });
+          const user = resp.data?.user_details?.[0] || resp.data;
+          const paidTokens = user?.apiPaidTokens ?? user?.apiCredit ?? null;
+          const subTokens = user?.apiSubscriptionTokens ?? null;
+          const totalCredits = (paidTokens !== null && subTokens !== null) ? (paidTokens + subTokens) : (paidTokens ?? subTokens ?? null);
+
+          return {
+            success: true,
+            details: `사용자: ${user?.username || '확인됨'}`,
+            balance: makeBalanceObj({
+              remaining: totalCredits !== null ? `${totalCredits.toLocaleString()} 크레딧` : '대시보드 확인',
+              total: paidTokens !== null ? `유료: ${paidTokens.toLocaleString()}` : '',
+            }),
+          };
+        } catch (err: any) {
+          const status = err?.response?.status;
+          if (status === 401 || status === 403) {
+            return { success: false, message: 'API 키가 유효하지 않습니다. 키를 확인해주세요.' };
+          }
+          return { success: false, message: `Leonardo AI 연결 실패: ${err?.message || '알 수 없는 오류'}` };
+        }
+      }
+
+      case 'perplexity': {
+        try {
+          const resp = await axios.post('https://api.perplexity.ai/chat/completions', {
+            model: 'sonar',
+            messages: [{ role: 'user', content: 'Hi' }],
+            max_tokens: 5,
+          }, {
+            headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+            timeout: 15000,
+          });
+          const model = resp.data?.model || 'sonar';
+          return {
+            success: true,
+            details: `Perplexity API 연결 성공 | 모델: ${model}`,
+            balance: makeBalanceObj(),
+          };
+        } catch (err: any) {
+          const status = err?.response?.status;
+          if (status === 401 || status === 403) {
+            return { success: false, message: 'API 키가 유효하지 않습니다. 키를 확인해주세요.' };
+          }
+          if (status === 429) {
+            return { success: true, details: 'API 키 유효 (현재 요청 한도 초과)', balance: makeBalanceObj() };
+          }
+          return { success: false, message: `Perplexity 연결 실패: ${err?.message || '알 수 없는 오류'}` };
+        }
+      }
+
+      case 'openai': {
+        try {
+          const resp = await axios.get('https://api.openai.com/v1/models', {
+            headers: { 'Authorization': `Bearer ${key}` },
+            timeout: 10000,
+          });
+          const models = resp.data?.data || [];
+          const gptModels = models.filter((m: any) => m.id?.includes('gpt')).length;
+
+          // 잔액 조회 시도 (비공식 — 실패해도 무시)
+          let creditInfo = { remaining: '', total: '' };
+          try {
+            const billingResp = await axios.get('https://api.openai.com/dashboard/billing/credit_grants', {
+              headers: { 'Authorization': `Bearer ${key}` },
+              timeout: 8000,
+            });
+            const grants = billingResp.data;
+            if (grants?.total_granted !== undefined) {
+              creditInfo.total = `$${Number(grants.total_granted).toFixed(2)}`;
+              creditInfo.remaining = `$${Number(grants.total_available || 0).toFixed(2)}`;
+            }
+          } catch { /* 잔액 API 미지원 키 — 무시 */ }
+
+          return {
+            success: true,
+            details: `OpenAI 연결 성공 | 모델 ${models.length}개 (GPT ${gptModels}개)`,
+            balance: makeBalanceObj(creditInfo),
+          };
+        } catch (err: any) {
+          const status = err?.response?.status;
+          if (status === 401) {
+            return { success: false, message: 'API 키가 유효하지 않습니다. 키를 확인해주세요.' };
+          }
+          if (status === 429) {
+            return { success: true, details: 'API 키 유효 (현재 요청 한도 초과)', balance: makeBalanceObj() };
+          }
+          return { success: false, message: `OpenAI 연결 실패: ${err?.message || '알 수 없는 오류'}` };
+        }
+      }
+
+      case 'claude': {
+        try {
+          const resp = await axios.post('https://api.anthropic.com/v1/messages', {
+            model: 'claude-3-haiku-20240307',
+            messages: [{ role: 'user', content: 'Hi' }],
+            max_tokens: 5,
+          }, {
+            headers: {
+              'x-api-key': key,
+              'anthropic-version': '2023-06-01',
+              'Content-Type': 'application/json',
+            },
+            timeout: 15000,
+          });
+          const model = resp.data?.model || 'claude-3-haiku';
+          return {
+            success: true,
+            details: `Claude API 연결 성공 | 모델: ${model}`,
+            balance: makeBalanceObj(),
+          };
+        } catch (err: any) {
+          const status = err?.response?.status;
+          if (status === 401) {
+            return { success: false, message: 'API 키가 유효하지 않습니다. 키를 확인해주세요.' };
+          }
+          if (status === 429) {
+            return { success: true, details: 'API 키 유효 (현재 요청 한도 초과)', balance: makeBalanceObj() };
+          }
+          return { success: false, message: `Claude 연결 실패: ${err?.message || '알 수 없는 오류'}` };
+        }
+      }
+
+      case 'deepinfra': {
+        try {
+          const resp = await axios.get('https://api.deepinfra.com/v1/openai/models', {
+            headers: { 'Authorization': `Bearer ${key}` },
+            timeout: 10000,
+          });
+          const models = resp.data?.data || [];
+
+          // ✅ DeepInfra 잔액 조회 시도
+          let creditInfo = { remaining: '', total: '' };
+          try {
+            const billingResp = await axios.get('https://api.deepinfra.com/v1/api_token/me', {
+              headers: { 'Authorization': `Bearer ${key}` },
+              timeout: 8000,
+            });
+            const credits = billingResp.data?.credits;
+            if (credits !== undefined && credits !== null) {
+              creditInfo.remaining = `$${Number(credits).toFixed(2)}`;
+            }
+          } catch { /* 잔액 API 미지원 — 무시 */ }
+
+          return {
+            success: true,
+            details: `DeepInfra 연결 성공 | 모델 ${models.length}개`,
+            balance: makeBalanceObj(creditInfo),
+          };
+        } catch (err: any) {
+          const status = err?.response?.status;
+          if (status === 401 || status === 403) {
+            return { success: false, message: 'API 키가 유효하지 않습니다. 키를 확인해주세요.' };
+          }
+          return { success: false, message: `DeepInfra 연결 실패: ${err?.message || '알 수 없는 오류'}` };
+        }
+      }
+
+      default:
+        return { success: false, message: `지원하지 않는 프로바이더: ${provider}` };
+    }
+  } catch (error) {
+    console.error('[ApiKey] 유효성 검증 실패:', error);
+    return { success: false, message: `검증 실패: ${(error as Error).message}` };
   }
 });
 
@@ -4709,32 +5177,28 @@ ipcMain.handle('aiAssistant:runAutoFix', async () => {
     const config = await loadConfig() as any;
     let configChanged = false;
 
-    // 1. Gemini 모델 수정 - ✅ [2026-02-27] Gemini 2.5 기본, GA 모델 유지
+    // 1. Gemini 모델 수정 - ✅ [2026-03-18] Gemini 3.1 Flash 기본, GA + 최신 모델 유지
     const validModels = [
+      'gemini-3.1-flash-preview',
+      'gemini-3.1-pro-preview',
       'gemini-2.5-flash',
       'gemini-2.5-pro',
       'gemini-2.0-flash',
-      'gemini-3.1-pro-preview',
-      'gemini-3-flash-preview',
     ];
 
-    // ✅ 이전 모델명 → 새 모델명 자동 마이그레이션 (2026-03-05: 모든 텍스트 모델 → gemini-2.5-flash 통합)
+    // ✅ 이전 모델명 → 새 모델명 자동 마이그레이션 (2026-03-18: 모든 텍스트 모델 → gemini-3.1-flash-preview 통합)
     const modelMigrationMap: Record<string, string> = {
-      'gemini-3.1-pro-preview': 'gemini-2.5-flash', // ✅ 3.1 Pro → 2.5 Flash (속도 우선)
-      'gemini-3-pro': 'gemini-2.5-flash',           // 3 Pro → 2.5 Flash
-      'gemini-3-flash': 'gemini-2.5-flash',
-      'gemini-3-pro-preview': 'gemini-2.5-flash',   // ✅ 3 Pro Preview → 2.5 Flash
-      'gemini-3-flash-preview': 'gemini-2.5-flash',
-      'gemini-2.5-pro-preview': 'gemini-2.5-flash', // GA 모델로
-      'gemini-2.5-pro': 'gemini-2.5-flash',         // Pro → Flash (속도 우선)
-      'gemini-2.5-flash': 'gemini-2.5-flash',       // 자기 자신 유지
-      'gemini-2.0-flash-exp': 'gemini-2.5-flash',   // 2.5로 업그레이드
-      'gemini-2.0-flash': 'gemini-2.5-flash',       // 2.5로 업그레이드
-      'gemini-1.5-flash': 'gemini-2.5-flash',       // 2.5로 업그레이드
-      'gemini-1.5-flash-latest': 'gemini-2.5-flash',
-      'gemini-1.5-pro': 'gemini-2.5-flash',
-      'gemini-1.5-pro-latest': 'gemini-2.5-flash',
-      'gemini-1.5-flash-8b': 'gemini-2.5-flash',
+      'gemini-3-pro': 'gemini-3.1-flash-preview',
+      'gemini-3-flash': 'gemini-3.1-flash-preview',
+      'gemini-3-pro-preview': 'gemini-3.1-flash-preview',
+      'gemini-3-flash-preview': 'gemini-3.1-flash-preview',
+      'gemini-2.5-pro-preview': 'gemini-2.5-flash',
+      'gemini-2.0-flash-exp': 'gemini-3.1-flash-preview',
+      'gemini-1.5-flash': 'gemini-3.1-flash-preview',
+      'gemini-1.5-flash-latest': 'gemini-3.1-flash-preview',
+      'gemini-1.5-pro': 'gemini-3.1-flash-preview',
+      'gemini-1.5-pro-latest': 'gemini-3.1-flash-preview',
+      'gemini-1.5-flash-8b': 'gemini-3.1-flash-preview',
     };
 
     // 저장된 모델이 마이그레이션 대상인 경우 자동 변환
@@ -4746,13 +5210,13 @@ ipcMain.handle('aiAssistant:runAutoFix', async () => {
     }
 
     if (config.geminiModel && !validModels.includes(config.geminiModel)) {
-      config.geminiModel = 'gemini-2.5-flash';
+      config.geminiModel = 'gemini-3.1-flash-preview';
       configChanged = true;
-      fixResults.push({ action: 'Gemini 모델', success: true, message: '권장 모델(gemini-2.5-flash)로 변경됨' });
+      fixResults.push({ action: 'Gemini 모델', success: true, message: '권장 모델(gemini-3.1-flash-preview)로 변경됨' });
     }
 
     if (!config.geminiModel) {
-      config.geminiModel = 'gemini-2.5-flash';
+      config.geminiModel = 'gemini-3.1-flash-preview';
       configChanged = true;
       fixResults.push({ action: 'Gemini 모델 설정', success: true, message: '기본 모델 설정됨' });
     }
@@ -10283,5 +10747,15 @@ ipcMain.handle('seo:generateTitle', async (_event, productName: string): Promise
   } catch (error) {
     console.error('[SEO] 제목 생성 오류:', error);
     return { success: false, title: productName, message: (error as Error).message };
+  }
+});
+
+// ✅ [2026-03-19] 앱 종료 시 Gemini 사용량 메모리 누적분 안전 저장
+app.on('before-quit', async () => {
+  try {
+    await flushGeminiUsage();
+    console.log('[App] ✅ Gemini 사용량 flush 완료');
+  } catch (e) {
+    console.warn('[App] Gemini flush 실패:', (e as Error).message);
   }
 });

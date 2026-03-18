@@ -8,6 +8,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { app } from 'electron';
 import { loadConfig } from '../configManager.js';
+import { trackApiUsage } from '../apiUsageTracker.js';
 import { ImageRequestItem, GeneratedImage } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { STYLE_PROMPT_MAP, isNoPersonCategory, getPresetStyleMapping, getStyleNegativePrompt, getImageDiversityHints } from './imageStyles.js';
@@ -368,6 +369,9 @@ export async function generateWithLeonardoAI(
                         savedToLocal: savedResult.savedToLocal,
                         originalIndex: (item as any).originalIndex, // ✅ [2026-03-05 FIX] headingImageMode 필터링 후 정확한 소제목 매칭
                     });
+
+                    // ✅ [2026-03-19] 사용량 추적
+                    trackApiUsage('leonardoai', { images: 1, model: selectedModelKey });
 
                     console.log(`[LeonardoAI] ✅ [${i + 1}/${items.length}] "${item.heading}" 생성 완료!`);
 

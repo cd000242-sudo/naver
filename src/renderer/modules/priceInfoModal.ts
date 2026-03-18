@@ -34,6 +34,8 @@ export async function initPriceInfoModal(): Promise<void> {
     openPriceInfoBtn.addEventListener('click', () => {
       priceInfoModal.style.display = 'flex';
       priceInfoModal.setAttribute('aria-hidden', 'false');
+      // ✅ [2026-03-19] 모달 열릴 때 통합 대시보드 자동 갱신
+      refreshApiCostDashboard();
     });
 
     // 닫기 함수
@@ -50,6 +52,259 @@ export async function initPriceInfoModal(): Promise<void> {
       if (e.target === priceInfoModal) closePriceModal();
     });
   }
+
+  // ✅ [2026-03-19] 통합 API 비용 대시보드 초기화
+  initApiCostDashboard();
+
+
+  // ✅ [2026-03-18] Gemini API 할당량 확인 버튼 이벤트 (정확한 공식 데이터 기반)
+  const geminiQuotaCheckBtn = document.getElementById('gemini-quota-check-btn');
+  const geminiQuotaResult = document.getElementById('gemini-quota-result');
+  if (geminiQuotaCheckBtn && geminiQuotaResult) {
+    geminiQuotaCheckBtn.addEventListener('click', async () => {
+      const apiKeyInput = document.getElementById('gemini-api-key') as HTMLInputElement;
+      const apiKey = apiKeyInput?.value?.trim();
+
+      if (!apiKey) {
+        geminiQuotaResult.style.display = 'block';
+        geminiQuotaResult.innerHTML = '⚠️ <b>API 키를 먼저 입력해주세요.</b>';
+        return;
+      }
+
+      geminiQuotaResult.style.display = 'block';
+      geminiQuotaResult.innerHTML = '⏳ <b>할당량 확인 중...</b>';
+      (geminiQuotaCheckBtn as HTMLButtonElement).disabled = true;
+
+      try {
+        const result = await window.api.checkGeminiQuota(apiKey);
+
+        if (!result.success) {
+          const msg = (result.message || '확인 실패').replace(/\\n/g, '<br>');
+          geminiQuotaResult.innerHTML = `❌ <b>${msg}</b>`;
+          return;
+        }
+
+        const d = result.data;
+        if (!d) { geminiQuotaResult.innerHTML = `❌ <b>데이터 없음</b>`; return; }
+
+        // ✅ [2026-03-19] 100점 UX 개선 — 중복 제거, 단일 라인, AI Studio 링크
+        const tracker = d.usageTracker || { totalInputTokens: 0, totalOutputTokens: 0, totalCalls: 0, estimatedCostUSD: 0 };
+        const budget = d.creditBudget || 300;
+        const usedCost = tracker.estimatedCostUSD || 0;
+        const isFree = d.userPlanType === 'free';
+        const pct = isFree ? 0 : Math.min(100, (usedCost / budget) * 100);
+        const barColor = pct > 90 ? '#ef4444' : pct > 70 ? '#f59e0b' : '#22c55e';
+
+        // 토큰 포맷 헬퍼 (1,234,567 → 1.2M | 45,678 → 45.7K)
+        const fmtTokens = (n: number) => n >= 1_000_000 ? (n/1_000_000).toFixed(1)+'M' : n >= 1_000 ? (n/1_000).toFixed(1)+'K' : String(n);
+
+        // ✅ [2026-03-19] 다크 배경 강제 적용으로 텍스트 가독성 보장
+        let html = `<div style="background:rgba(15,17,25,0.95);border-radius:12px;padding:16px;color:#e2e8f0;">`;
+        html += `<div style="text-align:center;margin-bottom:12px;">`;
+
+        if (isFree) {
+          // 무료 플랜: 비용 없음 표시
+          html += `<div style="font-size:1.5rem;font-weight:700;color:#22c55e;">🆓 무료 플랜</div>`;
+          html += `<div style="font-size:0.75rem;color:#94a3b8;">비용이 발생하지 않습니다 (분당 15회 제한)</div>`;
+        } else {
+          // 유료 플랜: "$X / $Y 예산" 단일 라인 (중복 제거)
+          html += `<div style="font-size:2rem;font-weight:800;color:${barColor};letter-spacing:-1px;">`;
+          html += `$${usedCost.toFixed(2)} <span style="color:#94a3b8;font-weight:400;">/ $${budget} 예산</span></div>`;
+          html += `<div style="font-size:0.72rem;color:#94a3b8;">${pct.toFixed(1)}% 사용</div>`;
+        }
+        html += `</div>`;
+
+        // 진행률 바 (유료만)
+        if (!isFree) {
+          html += `<div style="background:rgba(255,255,255,0.1);border-radius:6px;height:8px;margin-bottom:10px;overflow:hidden;">`;
+          html += `<div style="background:${barColor};height:100%;width:${pct.toFixed(1)}%;border-radius:6px;transition:width 0.5s;"></div></div>`;
+        }
+
+        // 상세 정보 (토큰은 K/M 단위로 가독성 향상)
+        html += `<div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 10px;font-size:0.78rem;margin-bottom:10px;color:#cbd5e1;">`;
+        html += `📊 API 호출 <b>${tracker.totalCalls.toLocaleString()}회</b> | 입력 <b>${fmtTokens(tracker.totalInputTokens)}</b> | 출력 <b>${fmtTokens(tracker.totalOutputTokens)}</b> 토큰`;
+        if (tracker.firstTracked) {
+          html += `<br>🕐 ${new Date(tracker.firstTracked).toLocaleDateString('ko-KR')} ~ ${tracker.lastUpdated ? new Date(tracker.lastUpdated).toLocaleDateString('ko-KR') : '현재'} 추적 중`;
+        }
+        html += `</div>`;
+
+        // API 키 상태 + 모델 정보
+        html += `<div style="font-size:0.78rem;color:#94a3b8;margin-bottom:10px;">`;
+        html += `✅ API 키 유효 | ${d.planLabel} | 모델 ${d.totalModels}개`;
+        if (d.testCallResult?.error) html += `<br>⚠️ ${d.testCallResult.error}`;
+        html += `</div>`;
+
+        // 예산 설정 + 초기화 (유료만)
+        if (!isFree) {
+          html += `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">`;
+          html += `<label style="font-size:0.75rem;color:#94a3b8;">예산($):</label>`;
+          html += `<input type="number" id="gemini-budget-input" value="${budget}" min="1" max="99999" step="10" style="width:80px;padding:3px 6px;border-radius:4px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#e2e8f0;font-size:0.8rem;">`;
+          html += `<button id="gemini-budget-save-btn" style="padding:3px 10px;border-radius:4px;border:1px solid rgba(59,130,246,0.4);background:rgba(59,130,246,0.15);color:#93c5fd;font-size:0.75rem;cursor:pointer;">저장</button>`;
+          html += `<button id="gemini-usage-reset-btn" style="padding:3px 10px;border-radius:4px;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.1);color:#fca5a5;font-size:0.75rem;cursor:pointer;">🔄 초기화</button>`;
+          html += `</div>`;
+        }
+
+        // 안내 문구 (추정치 이유 설명 + AI Studio 링크)
+        html += `<div style="font-size:0.7rem;color:#64748b;line-height:1.5;">`;
+        html += `⚠️ 앱에서 추적 가능한 호출만 집계된 <b>추정치</b>입니다.<br>`;
+        html += `정확한 청구 금액은 <a href="#" id="aistudio-billing-link" style="color:#93c5fd;text-decoration:underline;">Google AI Studio</a>에서 확인하세요.`;
+        html += `</div>`;
+        html += `</div>`; // 다크 배경 래퍼 닫기
+
+        geminiQuotaResult.innerHTML = html;
+
+        // 이벤트 바인딩 (예산 저장 / 초기화 / 링크)
+        document.getElementById('gemini-budget-save-btn')?.addEventListener('click', async () => {
+          const v = Math.max(1, Number((document.getElementById('gemini-budget-input') as HTMLInputElement)?.value) || 300);
+          try { await (window.api as any).setGeminiCreditBudget(v); toastManager.success(`💰 예산 $${v} 설정!`); } catch { toastManager.error('예산 설정 실패'); }
+        });
+        document.getElementById('gemini-usage-reset-btn')?.addEventListener('click', async () => {
+          if (!confirm('사용량 추적을 초기화하시겠습니까?')) return;
+          try { await (window.api as any).resetGeminiUsageTracker(); toastManager.success('🔄 초기화 완료!'); geminiQuotaCheckBtn.click(); } catch { toastManager.error('초기화 실패'); }
+        });
+        document.getElementById('aistudio-billing-link')?.addEventListener('click', (e) => { e.preventDefault(); window.api.openExternalUrl('https://aistudio.google.com/apikey'); });
+
+      } catch (err: any) {
+        geminiQuotaResult.innerHTML = `❌ <b>오류:</b> ${err?.message || '알 수 없는 오류'}`;
+      } finally {
+        (geminiQuotaCheckBtn as HTMLButtonElement).disabled = false;
+      }
+    });
+  }
+
+  // ✅ [2026-03-18] API 키 표시/숨김 (👁 눈 아이콘) 토글 - 범용 헬퍼
+  function setupApiKeyToggle(inputId: string, toggleId: string): void {
+    const input = document.getElementById(inputId) as HTMLInputElement;
+    const toggle = document.getElementById(toggleId) as HTMLButtonElement;
+    if (input && toggle) {
+      toggle.addEventListener('click', () => {
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        toggle.textContent = isPassword ? '🙈' : '👁';
+        toggle.title = isPassword ? 'API 키 숨기기' : 'API 키 표시/숨기기';
+      });
+    }
+  }
+  setupApiKeyToggle('gemini-api-key', 'gemini-api-key-toggle');
+  setupApiKeyToggle('leonardoai-api-key', 'leonardoai-api-key-toggle');
+  setupApiKeyToggle('perplexity-api-key', 'perplexity-api-key-toggle');
+  setupApiKeyToggle('openai-api-key', 'openai-api-key-toggle');
+  setupApiKeyToggle('claude-api-key', 'claude-api-key-toggle');
+  setupApiKeyToggle('deepinfra-api-key', 'deepinfra-api-key-toggle');
+
+  // ✅ [2026-03-18] 범용 API 키 유효성 검증 헬퍼
+  function setupApiKeyValidation(
+    provider: string,
+    inputId: string,
+    btnId: string,
+    resultId: string,
+    displayName: string
+  ): void {
+    const btn = document.getElementById(btnId) as HTMLButtonElement;
+    const resultEl = document.getElementById(resultId);
+    if (!btn || !resultEl) return;
+
+    btn.addEventListener('click', async () => {
+      const input = document.getElementById(inputId) as HTMLInputElement;
+      const apiKey = input?.value?.trim();
+
+      if (!apiKey) {
+        resultEl.style.display = 'block';
+        resultEl.innerHTML = `⚠️ <b>${displayName} API 키를 먼저 입력해주세요.</b>`;
+        return;
+      }
+
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = `⏳ <b>${displayName} API 키 확인 중...</b>`;
+      btn.disabled = true;
+
+      try {
+        const result = await window.api.validateApiKey(provider, apiKey);
+
+        if (result.success) {
+          let html = `✅ <b>${displayName} API 키 유효!</b><br>`;
+          if (result.details) html += `📋 ${result.details}`;
+
+          // ✅ [2026-03-19] 잔액/사용량 카드 렌더링
+          if (result.balance) {
+            const b = result.balance;
+            const hasRemaining = b.remaining && b.remaining !== '';
+            const hasTotal = b.total && b.total !== '';
+            const hasTokens = (b.totalInputTokens || 0) > 0 || (b.totalOutputTokens || 0) > 0;
+            const hasImages = (b.totalImages || 0) > 0;
+
+            // 추적 기간 계산
+            let periodText = '';
+            if (b.firstTracked) {
+              const first = new Date(b.firstTracked);
+              const now = new Date();
+              const days = Math.max(1, Math.ceil((now.getTime() - first.getTime()) / (1000 * 60 * 60 * 24)));
+              periodText = `${days}일간`;
+            }
+
+            html += `<div style="margin-top:10px;padding:12px 14px;background:rgba(15,23,42,0.85);border-radius:10px;border:1px solid rgba(99,102,241,0.25);color:#e2e8f0;font-size:12.5px;line-height:1.7;">`;
+
+            // 잔액/충전금액 (있으면 강조 표시)
+            if (hasRemaining) {
+              html += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">`;
+              html += `<span style="color:#94a3b8;">💰 잔액</span>`;
+              html += `<span style="color:#22d3ee;font-weight:700;font-size:15px;">${b.remaining}</span>`;
+              html += `</div>`;
+            }
+            if (hasTotal) {
+              html += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">`;
+              html += `<span style="color:#94a3b8;">💳 충전</span>`;
+              html += `<span style="color:#a78bfa;font-weight:600;">${b.total}</span>`;
+              html += `</div>`;
+            }
+            if (hasRemaining || hasTotal) {
+              html += `<hr style="border:none;border-top:1px solid rgba(99,102,241,0.15);margin:6px 0;">`;
+            }
+
+            // 앱 내 누적 사용량
+            html += `<div style="color:#94a3b8;font-size:11px;margin-bottom:4px;">📊 앱 내 누적 사용량 ${periodText ? `(${periodText})` : ''}</div>`;
+            html += `<div style="display:flex;justify-content:space-between;"><span style="color:#cbd5e1;">비용</span><span style="color:#fbbf24;font-weight:600;">${b.usedCost}</span></div>`;
+            html += `<div style="display:flex;justify-content:space-between;"><span style="color:#cbd5e1;">호출</span><span>${b.totalCalls.toLocaleString()}회</span></div>`;
+            if (hasTokens) {
+              html += `<div style="display:flex;justify-content:space-between;"><span style="color:#cbd5e1;">토큰</span><span>${(b.totalInputTokens + b.totalOutputTokens).toLocaleString()}</span></div>`;
+            }
+            if (hasImages) {
+              html += `<div style="display:flex;justify-content:space-between;"><span style="color:#cbd5e1;">이미지</span><span>${b.totalImages.toLocaleString()}장</span></div>`;
+            }
+
+            // 대시보드 링크
+            if (b.dashboardUrl) {
+              html += `<div style="margin-top:8px;text-align:center;">`;
+              html += `<a href="#" onclick="window.api?.openExternalUrl?.('${b.dashboardUrl}');return false;" style="color:#818cf8;text-decoration:none;font-size:11.5px;">🔗 정확한 잔액은 대시보드에서 확인 →</a>`;
+              html += `</div>`;
+            }
+
+            html += `</div>`;
+          }
+
+          resultEl.innerHTML = html;
+          resultEl.style.borderColor = 'rgba(34, 197, 94, 0.4)';
+          resultEl.style.background = 'rgba(34, 197, 94, 0.08)';
+        } else {
+          resultEl.innerHTML = `❌ <b>${result.message || '유효하지 않은 API 키입니다.'}</b>`;
+          resultEl.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+          resultEl.style.background = 'rgba(239, 68, 68, 0.08)';
+        }
+      } catch (err: any) {
+        resultEl.innerHTML = `❌ <b>오류:</b> ${err?.message || '알 수 없는 오류'}`;
+        resultEl.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+        resultEl.style.background = 'rgba(239, 68, 68, 0.08)';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+
+  setupApiKeyValidation('leonardoai', 'leonardoai-api-key', 'leonardoai-validate-btn', 'leonardoai-validate-result', 'Leonardo AI');
+  setupApiKeyValidation('perplexity', 'perplexity-api-key', 'perplexity-validate-btn', 'perplexity-validate-result', 'Perplexity');
+  setupApiKeyValidation('openai', 'openai-api-key', 'openai-validate-btn', 'openai-validate-result', 'OpenAI');
+  setupApiKeyValidation('claude', 'claude-api-key', 'claude-validate-btn', 'claude-validate-result', 'Claude');
+  setupApiKeyValidation('deepinfra', 'deepinfra-api-key', 'deepinfra-validate-btn', 'deepinfra-validate-result', 'DeepInfra');
 
   // ✅ 이미지 경로 설정 버튼 이벤트
   const browseImagePathBtn = document.getElementById('browse-image-path-btn') as HTMLButtonElement;
@@ -484,7 +739,7 @@ export async function initPriceInfoModal(): Promise<void> {
           // ✅ [2026-02-22 FIX] primaryGeminiTextModel에서 defaultAiProvider 자동 파생
           openaiApiKey: (document.getElementById('openai-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-02-22] OpenAI API
           claudeApiKey: (document.getElementById('claude-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-02-22] Claude API
-          defaultAiProvider: (() => { const m = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value; return m === 'perplexity-sonar' ? 'perplexity' : m === 'openai-gpt4o' ? 'openai' : m === 'claude-sonnet' ? 'claude' : 'gemini'; })(),
+          defaultAiProvider: (() => { const m = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value; return m === 'perplexity-sonar' ? 'perplexity' : (m === 'openai-gpt4o' || m === 'openai-gpt4o-mini') ? 'openai' : (m === 'claude-haiku' || m === 'claude-opus') ? 'claude' : 'gemini'; })(),
         };
 
 
@@ -922,5 +1177,143 @@ export async function initPriceInfoModal(): Promise<void> {
         networkOptimizeBtn.textContent = '⚡ 원클릭 네트워크 최적화';
       }
     });
+  }
+}
+
+// ==================== ✅ [2026-03-19] 통합 API 비용 대시보드 ====================
+
+const PROVIDER_META: Record<string, { label: string; icon: string; color: string; type: 'text' | 'image' }> = {
+  gemini:        { label: 'Gemini',        icon: '💎', color: '#4285f4', type: 'text' },
+  openai:        { label: 'OpenAI (텍스트)', icon: '🤖', color: '#10a37f', type: 'text' },
+  'openai-image': { label: 'OpenAI (이미지)', icon: '🎨', color: '#10a37f', type: 'image' },
+  claude:        { label: 'Claude',        icon: '🧠', color: '#d97706', type: 'text' },
+  perplexity:    { label: 'Perplexity',    icon: '🔮', color: '#7c3aed', type: 'text' },
+  deepinfra:     { label: 'DeepInfra',     icon: '⚡', color: '#ef4444', type: 'image' },
+  leonardoai:    { label: 'Leonardo AI',   icon: '🖌️', color: '#ec4899', type: 'image' },
+};
+
+const DASHBOARD_CONTAINER_ID = 'api-cost-dashboard-container';
+
+function initApiCostDashboard(): void {
+  // 대시보드 삽입 위치: gemini-quota-result 아래
+  const anchor = document.getElementById('gemini-quota-result');
+  if (!anchor || document.getElementById(DASHBOARD_CONTAINER_ID)) return;
+
+  const container = document.createElement('div');
+  container.id = DASHBOARD_CONTAINER_ID;
+  container.style.cssText = 'margin-top:16px; display:none;'; // 데이터 로드 전 숨김
+  anchor.parentElement?.insertBefore(container, anchor.nextSibling);
+}
+
+async function refreshApiCostDashboard(): Promise<void> {
+  const container = document.getElementById(DASHBOARD_CONTAINER_ID);
+  if (!container) return;
+
+  container.style.display = 'block';
+  container.innerHTML = '<div style="text-align:center;padding:12px;color:#94a3b8;font-size:0.82rem;background:rgba(15,17,25,0.95);border-radius:12px;">⏳ 통합 API 사용량 로딩 중...</div>';
+
+  try {
+    const result = await (window.api as any).getAllApiUsageSnapshots();
+    if (!result.success || !result.data) {
+      container.innerHTML = `<div style="text-align:center;padding:12px;color:#fca5a5;font-size:0.82rem;">❌ 사용량 조회 실패: ${result.message || '알 수 없는 오류'}</div>`;
+      return;
+    }
+
+    const data: Record<string, any> = result.data;
+
+    // 총 비용 계산
+    let totalCost = 0;
+    let totalCalls = 0;
+    const activeProviders: Array<{ key: string; meta: typeof PROVIDER_META[string]; usage: any }> = [];
+
+    for (const [key, meta] of Object.entries(PROVIDER_META)) {
+      const usage = data[key];
+      if (!usage) continue;
+      totalCost += usage.estimatedCostUSD || 0;
+      totalCalls += usage.totalCalls || 0;
+      if (usage.totalCalls > 0) {
+        activeProviders.push({ key, meta, usage });
+      }
+    }
+
+    // 비활성 제공자 (호출 0건)도 포함
+    for (const [key, meta] of Object.entries(PROVIDER_META)) {
+      const usage = data[key];
+      if (!usage || usage.totalCalls > 0) continue;
+      activeProviders.push({ key, meta, usage });
+    }
+
+    // 토큰/비용 포맷 헬퍼
+    const fmtTokens = (n: number) => n >= 1_000_000 ? (n / 1_000_000).toFixed(1) + 'M' : n >= 1_000 ? (n / 1_000).toFixed(1) + 'K' : String(n);
+    const fmtCost = (n: number) => n >= 0.01 ? `$${n.toFixed(2)}` : n > 0 ? `$${n.toFixed(4)}` : '$0.00';
+
+    let html = '';
+
+    // 헤더: 총 비용 요약
+    html += `<div style="background:linear-gradient(135deg,rgba(30,34,55,0.98),rgba(25,20,50,0.98));border:1px solid rgba(147,51,234,0.3);border-radius:12px;padding:14px 16px;margin-bottom:12px;">`;
+    html += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">`;
+    html += `<span style="font-size:0.85rem;font-weight:700;color:#e2e8f0;">📊 통합 API 비용 대시보드</span>`;
+    html += `<button id="api-cost-refresh-btn" style="padding:2px 8px;border-radius:4px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#94a3b8;font-size:0.7rem;cursor:pointer;" title="새로고침">🔄</button>`;
+    html += `</div>`;
+    html += `<div style="text-align:center;">`;
+    const costColor = totalCost > 10 ? '#ef4444' : totalCost > 5 ? '#f59e0b' : '#22c55e';
+    html += `<div style="font-size:1.8rem;font-weight:800;color:${costColor};letter-spacing:-1px;">${fmtCost(totalCost)}</div>`;
+    html += `<div style="font-size:0.72rem;color:#94a3b8;">총 ${totalCalls.toLocaleString()}회 호출 | ${activeProviders.filter(p => p.usage.totalCalls > 0).length}개 제공자 활성</div>`;
+    html += `</div>`;
+    html += `</div>`;
+
+    // 제공자별 카드
+    html += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">`;
+
+    for (const { key, meta, usage } of activeProviders) {
+      const cost = usage.estimatedCostUSD || 0;
+      const calls = usage.totalCalls || 0;
+      const opacity = calls > 0 ? '1' : '0.4';
+      const borderCol = calls > 0 ? `${meta.color}44` : 'rgba(255,255,255,0.08)';
+
+      html += `<div style="background:rgba(255,255,255,0.04);border:1px solid ${borderCol};border-radius:8px;padding:8px 10px;opacity:${opacity};">`;
+      html += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">`;
+      html += `<span style="font-size:0.75rem;font-weight:600;color:${meta.color};">${meta.icon} ${meta.label}</span>`;
+      html += `<span style="font-size:0.82rem;font-weight:700;color:#e2e8f0;">${fmtCost(cost)}</span>`;
+      html += `</div>`;
+
+      // 상세 정보
+      html += `<div style="font-size:0.68rem;color:#94a3b8;line-height:1.4;">`;
+      if (calls > 0) {
+        html += `${calls.toLocaleString()}회 호출`;
+        if (meta.type === 'text') {
+          html += ` | ${fmtTokens(usage.totalInputTokens || 0)}in/${fmtTokens(usage.totalOutputTokens || 0)}out`;
+        } else {
+          html += ` | 이미지 ${(usage.totalImages || 0).toLocaleString()}장`;
+        }
+      } else {
+        html += `사용 기록 없음`;
+      }
+      html += `</div>`;
+      html += `</div>`;
+    }
+
+    html += `</div>`;
+
+    // 하단: 안내 + 전체 초기화
+    html += `<div style="display:flex;justify-content:space-between;align-items:center;">`;
+    html += `<div style="font-size:0.68rem;color:#64748b;line-height:1.4;">⚠️ 앱 실행 중 추적된 <b>추정치</b>입니다.</div>`;
+    html += `<button id="api-cost-reset-all-btn" style="padding:2px 10px;border-radius:4px;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.1);color:#fca5a5;font-size:0.7rem;cursor:pointer;">🔄 전체 초기화</button>`;
+    html += `</div>`;
+
+    container.innerHTML = html;
+
+    // 이벤트 바인딩
+    document.getElementById('api-cost-refresh-btn')?.addEventListener('click', () => refreshApiCostDashboard());
+    document.getElementById('api-cost-reset-all-btn')?.addEventListener('click', async () => {
+      if (!confirm('전체 API 사용량 추적을 초기화하시겠습니까?\n(실제 청구에는 영향 없음)')) return;
+      try {
+        await (window.api as any).resetApiUsage();
+        toastManager.success('🔄 전체 API 사용량 초기화 완료!');
+        refreshApiCostDashboard();
+      } catch { toastManager.error('초기화 실패'); }
+    });
+  } catch (err: any) {
+    container.innerHTML = `<div style="text-align:center;padding:12px;color:#fca5a5;font-size:0.82rem;">❌ 오류: ${err?.message || '알 수 없는 오류'}</div>`;
   }
 }

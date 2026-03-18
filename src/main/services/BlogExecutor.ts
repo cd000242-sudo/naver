@@ -347,6 +347,20 @@ export async function processImages(
         }
     }
 
+    // ✅ [2026-03-19 FIX] Defense-in-depth: payload.thumbnailPath가 없을 때
+    // processedImages에서 isThumbnail 플래그로 자동 발견
+    if (!payload.thumbnailPath && processedImages.length > 0) {
+        const thumbImg = processedImages.find((img: any) => img.isThumbnail === true);
+        if (thumbImg?.filePath) {
+            payload.thumbnailPath = thumbImg.filePath;
+            sendLog(`🖼️ 썸네일 자동 발견 (isThumbnail): ${path.basename(thumbImg.filePath)}`);
+        } else if (processedImages[0]?.filePath) {
+            // 마지막 폴백: 첫 번째 이미지를 썸네일로
+            payload.thumbnailPath = processedImages[0].filePath;
+            sendLog(`🖼️ 썸네일 폴백 (첫 이미지): ${path.basename(processedImages[0].filePath)}`);
+        }
+    }
+
     return { folder: postsImageDir, images: processedImages };
 }
 

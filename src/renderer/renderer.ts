@@ -1468,7 +1468,9 @@ const UnifiedDOMCache = {
     const modelToProvider: Record<string, string> = {
       'perplexity-sonar': 'perplexity',
       'openai-gpt4o': 'openai',
-      'claude-sonnet': 'claude',
+      'openai-gpt4o-mini': 'openai',
+      'claude-haiku': 'claude',
+      'claude-opus': 'claude',
     };
     const derivedProvider = modelToProvider[selectedModel];
     if (derivedProvider) {

@@ -217,6 +217,12 @@ type RendererStatus =
   | { success: false; cancelled?: boolean; message?: string };
 
 interface AutomationAPI {
+  // ✅ [2026-03-18] Gemini API 할당량 확인 (정확한 공식 데이터 기반)
+  checkGeminiQuota: (apiKey: string) => Promise<{ success: boolean; message?: string; data?: { keyValid: boolean; userPlanType: string; planLabel: string; totalModels: number; flashModels: string[]; proModels: string[]; limits: { rpm: number | string; rpd: number | string; tpm: string }; pricing: { flash_input: string; flash_output: string; pro_input: string; pro_output: string; note: string }; testCallResult: { promptTokens?: number; outputTokens?: number; totalTokens?: number; error?: string } | null; usageTracker?: { totalInputTokens: number; totalOutputTokens: number; totalCalls: number; estimatedCostUSD: number; lastUpdated?: string; firstTracked?: string }; creditBudget?: number } }>;
+  // ✅ [2026-03-18] 범용 API 키 유효성 검증
+  validateApiKey: (provider: string, apiKey: string) => Promise<{ success: boolean; message?: string; details?: string; balance?: { usedCost: string; totalCalls: number; totalInputTokens: number; totalOutputTokens: number; totalImages: number; firstTracked: string; lastUpdated: string; dashboardUrl: string; remaining: string; total: string } }>;
+  resetGeminiUsageTracker: () => Promise<{ success: boolean; message?: string }>;
+  setGeminiCreditBudget: (budget: number) => Promise<{ success: boolean; message?: string }>;
   runAutomation: (payload: RendererAutomationPayload) => Promise<RendererStatus>;
   // Excel 관련 API 제거됨
   cancelAutomation: () => Promise<boolean>;

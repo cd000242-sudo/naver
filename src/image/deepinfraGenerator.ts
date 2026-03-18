@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { app } from 'electron';
 import { loadConfig } from '../configManager.js';
+import { trackApiUsage } from '../apiUsageTracker.js';
 import { ImageRequestItem, GeneratedImage } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { STYLE_PROMPT_MAP, getWebtoonStylePrompt, WebtoonGender, WebtoonSubStyle, getImageDiversityHints } from './imageStyles.js';
@@ -598,6 +599,9 @@ export async function generateWithDeepInfra(
 
                 // 임시 파일 정리
                 try { fs.unlinkSync(res.localPath); } catch { }
+
+                // ✅ [2026-03-19] 사용량 추적
+                trackApiUsage('deepinfra', { images: 1, model: actualModel });
 
                 console.log(`[DeepInfra] ✅ [${i + 1}/${items.length}] "${item.heading}" 완료`);
 

@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai';
 import { buildSystemPromptFromHint, type PromptMode } from './promptLoader.js';
+import { loadConfig, saveConfig } from './configManager.js';
 
 // ==================== 타입 정의 ====================
 
@@ -28,20 +29,29 @@ interface GenerateResult {
 // ==================== 상수 ====================
 
 // ✅ Gemini 모델 선택 (2026-01-09: Gemini 3 Flash 최우선 설정)
-const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-3-flash-preview';
+const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-3.1-flash-preview';
 
 // ✅ 사용 가능한 모델 목록 (환경설정에서 선택 가능)
 export const AVAILABLE_MODELS = [
   { id: 'gemini-3.1-pro-preview', name: 'Gemini 3.1 Pro (최신, 최고 성능)', tier: 'premium' },
-  { id: 'gemini-3-flash-preview', name: 'Gemini 3 Flash (고속)', tier: 'premium' },
+  { id: 'gemini-3.1-flash-preview', name: 'Gemini 3.1 Flash (가성비 추천)', tier: 'premium' },
   { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash', tier: 'premium' },
 ];
 
-const FALLBACK_MODELS = [
+const BASE_FALLBACK_MODELS = [
   'gemini-2.5-flash',
-  'gemini-3-flash-preview',
+  'gemini-3.1-flash-preview',
   'gemini-3.1-pro-preview',
 ];
+
+// ✅ [2026-03-18] UI 선택 모델을 최우선 배치하는 동적 폴백 체인
+function getFallbackModels(): string[] {
+  const userModel = resolveModelName();
+  // 사용자 선택 모델이 기본 폴백 목록에 이미 있으면 맨 앞으로 이동
+  // 없으면 맨 앞에 추가 (새 커스텀 모델 대응)
+  const rest = BASE_FALLBACK_MODELS.filter(m => m !== userModel);
+  return [userModel, ...rest];
+}
 
 // ✅ 런타임에서 설정된 모델 (main.ts에서 설정)
 let runtimeModel: string | null = null;
@@ -61,6 +71,46 @@ const MODEL_ENFORCEMENT_ERROR =
 // - 홈피드 모드: src/prompts/homefeed/base.prompt + 카테고리별 .prompt
 // - 로드: buildSystemPromptFromHint() (promptLoader.ts)
 
+// ==================== 사용량 추적 (통합 모듈 위임) ====================
+
+/**
+ * ✅ [2026-03-19] 통합 apiUsageTracker 모듈로 위임
+ * - 기존 함수 시그니처 유지 (하위 호환)
+ * - 실제 추적은 apiUsageTracker.ts에서 처리
+ */
+import { trackApiUsage, flushAllApiUsage, getApiUsageSnapshot, type ProviderUsageData } from './apiUsageTracker.js';
+
+/** 사용량을 메모리에 누적 (즉시 반환, 논블로킹) — 통합 추적기로 위임 */
+export function trackGeminiUsage(
+  modelName: string,
+  inputTokens: number,
+  outputTokens: number
+): void {
+  trackApiUsage('gemini', { inputTokens, outputTokens, model: modelName });
+}
+
+/** 메모리 누적분을 config에 저장 (앱 종료/할당량 조회 시 호출) — 통합 추적기로 위임 */
+export async function flushGeminiUsage(): Promise<void> {
+  await flushAllApiUsage();
+}
+
+/** 현재 메모리 + 디스크 합산 스냅샷 반환 (UI 표시용) — 통합 추적기로 위임 */
+export async function getGeminiUsageSnapshot(): Promise<{
+  totalInputTokens: number; totalOutputTokens: number;
+  totalCalls: number; estimatedCostUSD: number;
+  lastUpdated?: string; firstTracked?: string;
+}> {
+  const snapshot = await getApiUsageSnapshot('gemini') as ProviderUsageData;
+  return {
+    totalInputTokens: snapshot.totalInputTokens,
+    totalOutputTokens: snapshot.totalOutputTokens,
+    totalCalls: snapshot.totalCalls,
+    estimatedCostUSD: snapshot.estimatedCostUSD,
+    lastUpdated: snapshot.lastUpdated || undefined,
+    firstTracked: snapshot.firstTracked || undefined,
+  };
+}
+
 // ==================== 캐싱 ====================
 
 let cachedClient: GoogleGenerativeAI | null = null;
@@ -79,12 +129,9 @@ function resolveModelName(): string {
   // ✅ 런타임 설정 > 환경변수 > 기본값 순서
   const configuredModel = runtimeModel || process.env.GEMINI_MODEL || DEFAULT_MODEL;
 
-  // ✅ 2026-01-04: 모델 강제 변환(터보 모드) 제거 - 사용자가 선택한 모델 존중
-  // (이전에는 Pro 모델을 Flash로 강제 변환했으나, 할당량 문제 및 사용자 혼란 방지)
-
-  // 유효성 검사: gemini- 로 시작하는 모든 모델 허용
+  // ✅ [2026-03-18 FIX] 비-Gemini 모델명은 즉시 에러 → 다른 엔진 전환 유도
   if (!configuredModel.startsWith('gemini-')) {
-    console.warn(`[Gemini] 경고: 비표준 모델명 감지 (${configuredModel}). 실행은 계속됩니다.`);
+    throw new Error(`⏳ [사용량 초과] Gemini API 할당량이 소진되었습니다. 다른 AI 엔진(Claude/OpenAI)으로 전환하거나 잠시 후 다시 시도해주세요. (감지된 모델: ${configuredModel})`);
   }
 
   return configuredModel;
@@ -233,8 +280,9 @@ export async function generateBlogContent(
   // 재시도 루프
   for (let retry = 0; retry < maxRetries; retry++) {
     // 모델 폴백 루프
-    for (let modelIdx = 0; modelIdx < FALLBACK_MODELS.length; modelIdx++) {
-      const modelName = FALLBACK_MODELS[modelIdx];
+    const fallbackModels = getFallbackModels();
+    for (let modelIdx = 0; modelIdx < fallbackModels.length; modelIdx++) {
+      const modelName = fallbackModels[modelIdx];
       let perModelRetryCount = 0;
       const PER_MODEL_MAX = 1; // ✅ 2 → 1 (빠른 모델 전환)
 
@@ -270,6 +318,11 @@ export async function generateBlogContent(
 
           const usage = (apiResult.response as any).usageMetadata;
           const totalTokens = usage?.totalTokenCount || 0;
+          const promptTokens = usage?.promptTokenCount || 0;
+          const completionTokens = usage?.candidatesTokenCount || 0;
+
+          // ✅ [2026-03-19] 사용량 누적 추적 (동기, 메모리 누적)
+          trackGeminiUsage(modelName, promptTokens, completionTokens);
 
           console.log(`✅ [Gemini Success] ${modelName} (전체 루프 ${retry + 1}, 모델 시도 ${perModelRetryCount + 1})`);
 
@@ -284,8 +337,8 @@ export async function generateBlogContent(
           const generateResult: GenerateResult = {
             content: cleanedText,
             usage: {
-              promptTokens: usage?.promptTokenCount || 0,
-              completionTokens: usage?.candidatesTokenCount || 0,
+              promptTokens,
+              completionTokens,
               totalTokens,
               estimatedCost: (totalTokens / 1_000_000) * 0.075,
             },
@@ -362,8 +415,9 @@ export async function* generateBlogContentStream(
   const splitPrompt = buildSplitPrompt(prompt, options);
   let lastError: Error | null = null;
 
-  // 스트리밍에서의 모델 폴백 체인 (generateBlogContent와 동일한 순서 보장)
-  for (const modelName of FALLBACK_MODELS) {
+  // ✅ [2026-03-18] 스트리밍에서도 UI 선택 모델 우선 폴백 체인 사용
+  const fallbackModels = getFallbackModels();
+  for (const modelName of fallbackModels) {
     try {
       console.log(`[Gemini Stream] Attempting with model: ${modelName} [systemInstruction: ON, Search Grounding: ON]`);
       const client = getClient(apiKey);
@@ -396,6 +450,15 @@ export async function* generateBlogContentStream(
         // 품질 미달 시 다음 모델로 넘어가거나 종료 (스트리밍은 중간에 이미 데이터가 나갔으므로 예외 처리 필요)
         // 여기서는 일단 성공한 것으로 간주하되 경고만 남김
       }
+
+      // ✅ [2026-03-19] 사용량 추적 (스트리밍 완료 후 aggregated response에서 추출)
+      try {
+        const aggResponse = await result.response;
+        const streamUsage = (aggResponse as any).usageMetadata;
+        if (streamUsage) {
+          trackGeminiUsage(modelName, streamUsage.promptTokenCount || 0, streamUsage.candidatesTokenCount || 0);
+        }
+      } catch { /* usage 추출 실패 무시 */ }
 
       console.log(`✅ [Gemini Stream Success] ${modelName}`);
       return; // 성공 시 함수 종료
@@ -491,6 +554,10 @@ JSON만 출력하세요. 설명 없이.`;
     const result = await model.generateContent(prompt);
     const text = result.response.text().trim();
 
+    // ✅ [2026-03-19] 사용량 추적
+    const _u = (result.response as any).usageMetadata;
+    if (_u) trackGeminiUsage('gemini-2.0-flash', _u.promptTokenCount || 0, _u.candidatesTokenCount || 0);
+
     // JSON 파싱
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
@@ -571,6 +638,11 @@ export async function extractCoreSubject(
 
     const result = await model.generateContent(prompt);
     const text = result.response.text().trim();
+
+    // ✅ [2026-03-19] 사용량 추적
+    const _u2 = (result.response as any).usageMetadata;
+    if (_u2) trackGeminiUsage('gemini-2.0-flash', _u2.promptTokenCount || 0, _u2.candidatesTokenCount || 0);
+
     console.log(`[Gemini] 핵심 주제 추출: "${title}" → "${text}"`);
     return text || title.split(' ')[0];
   } catch (error) {
@@ -644,6 +716,10 @@ JSON만 출력하세요. 설명 없이.`;
 
     const result = await model.generateContent(prompt);
     const text = result.response.text().trim();
+
+    // ✅ [2026-03-19] 사용량 추적
+    const _u3 = (result.response as any).usageMetadata;
+    if (_u3) trackGeminiUsage('gemini-2.0-flash', _u3.promptTokenCount || 0, _u3.candidatesTokenCount || 0);
 
     // JSON 배열 파싱
     const jsonMatch = text.match(/\[[\s\S]*\]/);

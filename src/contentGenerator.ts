@@ -5,6 +5,7 @@ import { generatePerplexityContent, translatePerplexityError } from './perplexit
 
 import JSON5 from 'json5';
 import { getGeminiModel } from './gemini.js';
+import { trackApiUsage } from './apiUsageTracker.js';
 import { calculateSEOScore } from './seoCalculator';
 // ✅ [2026-02-11] getRelatedKeywords import 제거 — 인라인 템플릿 전용이었음
 import { app } from 'electron';
@@ -6517,18 +6518,18 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   if (!apiKey) throw new Error('Gemini API 키가 설정되지 않았습니다.');
   const trimmedKey = apiKey.trim();
 
-  // 2. 모델 목록 설정 (✅ [2026-02-27] Gemini 2.5 기본, 나머지 폴백)
-  // ✅ [2026-01-26 FIX] perplexity 계열 모델은 Gemini에서 필터링 (별도 provider 사용)
-  let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || 'gemini-2.5-flash';
-  if (primaryModel.toLowerCase().includes('perplexity')) {
-    primaryModel = 'gemini-2.5-flash'; // perplexity 선택 시 Gemini 기본값 사용
+  // 2. 모델 목록 설정 (✅ [2026-03-18] Gemini 3.1 Flash 기본, 나머지 폴백)
+  // ✅ [2026-03-18 FIX] 비-Gemini 모델(perplexity/openai/claude)은 Gemini 기본값으로 교체 (별도 provider에서 호출)
+  let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || 'gemini-3.1-flash-preview';
+  if (primaryModel.toLowerCase().includes('perplexity') || primaryModel.toLowerCase().includes('openai') || primaryModel.toLowerCase().includes('claude')) {
+    primaryModel = 'gemini-3.1-flash-preview'; // 비-Gemini 선택 시 Gemini 기본값 사용
   }
   const baseModels = [
-    'gemini-2.5-flash',       // ✅ 기본: 고속/안정 (GA)
-    'gemini-2.5-pro',         // 폴백1: 고품질 (GA)
-    'gemini-2.0-flash',       // 폴백2: 안정적 (GA)
-    'gemini-3-flash-preview', // 폴백3: 최신 (미확인)
-    'gemini-3.1-pro-preview',  // 폴백4: 최신 고품질
+    'gemini-3.1-flash-preview', // ✅ 기본: 고속/고품질 (최신)
+    'gemini-2.5-flash',         // 폴백1: 안정적 (GA)
+    'gemini-2.5-pro',           // 폴백2: 고품질 (GA)
+    'gemini-2.0-flash',         // 폴백3: 안정적 (GA)
+    'gemini-3.1-pro-preview',   // 폴백4: 최신 고품질
   ];
 
   // 선택된 모델을 가장 앞에 두고 나머지를 배치 (중복 제거)
@@ -6585,6 +6586,19 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
 
         if (text && text.trim()) {
           console.log(`✅ [Gemini] 응답 수신 완료 (모델: ${modelName}, 길이: ${text.length})`);
+
+          // ✅ [2026-03-19] 사용량 추적 (스트리밍 완료 후 aggregated response에서 추출)
+          try {
+            const aggResponse = await streamResult.response;
+            const usageMeta = (aggResponse as any).usageMetadata;
+            if (usageMeta) {
+              trackApiUsage('gemini', {
+                inputTokens: usageMeta.promptTokenCount || 0,
+                outputTokens: usageMeta.candidatesTokenCount || 0,
+                model: modelName,
+              });
+            }
+          } catch { /* usage 추출 실패는 무시 — 생성 성공이 우선 */ }
 
           // 1. 인코딩 보정
           text = fixUtf8Encoding(text);
@@ -6775,7 +6789,15 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
   }
 
   // 2. 모델 및 타임아웃 설정
-  const modelName = process.env.PERPLEXITY_MODEL || 'sonar';
+  // ✅ [2026-03-20 FIX] config에서 직접 읽기 (env보다 config 우선 — 이중 안전장치)
+  const configForModel = apiKey ? null : null; // config는 이미 위에서 로드됨
+  let modelName = 'sonar';
+  try {
+    const cfg = await loadConfig();
+    modelName = cfg.perplexityModel || process.env.PERPLEXITY_MODEL || 'sonar';
+  } catch {
+    modelName = process.env.PERPLEXITY_MODEL || 'sonar';
+  }
   const timeoutMs = getTimeoutMs(minChars);
   const maxRetries = 2;
   let lastError: Error | null = null;
@@ -6825,6 +6847,14 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
         throw new Error('Perplexity API 빈 응답');
       }
 
+      // ✅ [2026-03-19] 사용량 추적
+      const pplxUsage = (response as any).usage;
+      trackApiUsage('perplexity', {
+        inputTokens: pplxUsage?.prompt_tokens || 0,
+        outputTokens: pplxUsage?.completion_tokens || 0,
+        model: modelName,
+      });
+
       console.log(`[Perplexity] ✅ 생성 완료: ${modelName} (시도 ${retry + 1}), ${text.length}자`);
       return text;
 
@@ -6856,9 +6886,10 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   console.log('[OpenAI] JSON 형식 준수 요청 - 유니코드 이스케이프 4자리, 쉼표 필수');
 
   // ✅ [2026-02-24 FIX] 방어적 설정 로드 (callGemini/callPerplexity 패턴 통일)
+  let config: any = null;
   try {
     const { loadConfig, applyConfigToEnv } = await import('./configManager.js');
-    const config = await loadConfig();
+    config = await loadConfig();
     applyConfigToEnv(config);
   } catch (e) {
     console.warn('[OpenAI] Config 로드 실패 (env 폴백 사용):', e);
@@ -6878,11 +6909,24 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
 
   const client = getOpenAIClient();
 
-  // OpenAI 사용 가능한 모델 목록 (우선순위 순서)
-  // ✅ [2026-03-11] 최신 모델 업데이트: GPT-5.4 단일 모델 사용
-  const openAIModels = [
-    'gpt-5.4',                   // 최신 플래그십 모델 (2026-03)
-  ];
+  // ✅ [2026-03-18 FIX] UI 선택 모델에 따라 OpenAI 모델 우선순위 동적 결정
+  const uiSelectedModel = config?.primaryGeminiTextModel || '';
+  let openAIModels: string[];
+  if (uiSelectedModel === 'openai-gpt4o-mini') {
+    // GPT-4.1 mini 선택 시: mini 우선, 플래그십 폴백
+    openAIModels = [
+      'gpt-4.1-mini',              // ✅ UI 선택: 가성비 모델
+      'gpt-5.4',                   // 폴백: 플래그십
+    ];
+    console.log('[OpenAI] 🧠 UI 선택: GPT-4.1 mini (가성비 모드)');
+  } else {
+    // GPT-5.4 선택 또는 기본: 플래그십 우선
+    openAIModels = [
+      'gpt-5.4',                   // ✅ UI 선택: 최고 성능
+      'gpt-4.1-mini',              // 폴백: 가성비
+    ];
+    console.log('[OpenAI] 🚀 UI 선택: GPT-5.4 (최고 성능 모드)');
+  }
 
   const customModel = process.env.OPENAI_STRUCTURED_MODEL;
   const modelsToTry = customModel
@@ -6920,6 +6964,14 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         const text = response.choices[0]?.message?.content?.trim() || '';
 
         if (!text) throw new Error('빈 응답');
+
+        // ✅ [2026-03-19] 사용량 추적
+        const oaiUsage = (response as any).usage;
+        trackApiUsage('openai', {
+          inputTokens: oaiUsage?.prompt_tokens || 0,
+          outputTokens: oaiUsage?.completion_tokens || 0,
+          model: modelName,
+        });
 
         console.log(`[OpenAI] ✅ 성공: ${modelName}, ${text.length}자`);
         return text;
@@ -7007,9 +7059,10 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
   console.log('[Claude] JSON 형식 준수 요청 - 유니코드 이스케이프 4자리, 쉼표 필수');
 
   // ✅ [2026-02-24 FIX] 방어적 설정 로드 (callGemini/callPerplexity 패턴 통일)
+  let config: any = null;
   try {
     const { loadConfig, applyConfigToEnv } = await import('./configManager.js');
-    const config = await loadConfig();
+    config = await loadConfig();
     applyConfigToEnv(config);
   } catch (e) {
     console.warn('[Claude] Config 로드 실패 (env 폴백 사용):', e);
@@ -7020,14 +7073,36 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
 
   const client = getAnthropicClient();
 
-  // Claude 사용 가능한 모델 목록 (우선순위 순서)
-  const claudeModels = [
-    'claude-sonnet-4-6',               // 최신 Sonnet 4.6 (2026-02-17)
-    'claude-sonnet-4-20250514',        // Sonnet 4
-    'claude-3-7-sonnet-20250219',      // Sonnet 3.7
-    'claude-3-5-sonnet-20241022',      // Sonnet 3.5 v2
-    'claude-3-5-haiku-20241022',       // Haiku 3.5
-  ];
+  // ✅ [2026-03-18 FIX] UI 선택 모델에 따라 Claude 모델 우선순위 동적 결정
+  const uiSelectedModel = config?.primaryGeminiTextModel || '';
+  let claudeModels: string[];
+  if (uiSelectedModel === 'claude-haiku') {
+    // Haiku 선택 시: Haiku 우선, 나머지 폴백
+    claudeModels = [
+      'claude-3-5-haiku-20241022',       // ✅ UI 선택: Haiku 3.5 (가성비)
+      'claude-sonnet-4-6',               // 폴백1: Sonnet 4.6
+      'claude-sonnet-4-20250514',        // 폴백2: Sonnet 4
+    ];
+    console.log('[Claude] 💜 UI 선택: Claude Haiku 3.5 (가성비 모드)');
+  } else if (uiSelectedModel === 'claude-opus') {
+    // Opus 선택 시: Opus 우선, Sonnet 폴백
+    claudeModels = [
+      'claude-opus-4-20250514',          // ✅ UI 선택: Opus 4 (최고 성능)
+      'claude-sonnet-4-6',               // 폴백1: Sonnet 4.6
+      'claude-sonnet-4-20250514',        // 폴백2: Sonnet 4
+    ];
+    console.log('[Claude] 👑 UI 선택: Claude Opus 4.6 (최고 성능 모드)');
+  } else {
+    // 기본 (claude provider로 왔지만 specific 모델 미지정): Sonnet 우선
+    claudeModels = [
+      'claude-sonnet-4-6',               // 기본: Sonnet 4.6 (균형)
+      'claude-sonnet-4-20250514',        // 폴백1: Sonnet 4
+      'claude-3-7-sonnet-20250219',      // 폴백2: Sonnet 3.7
+      'claude-3-5-sonnet-20241022',      // 폴백3: Sonnet 3.5 v2
+      'claude-3-5-haiku-20241022',       // 폴백4: Haiku 3.5
+    ];
+    console.log('[Claude] ✨ 기본 모드: Claude Sonnet 4.6');
+  }
 
   // 환경 변수로 지정된 모델이 있으면 맨 앞에 추가
   const customModel = process.env.CLAUDE_STRUCTURED_MODEL;
@@ -7095,6 +7170,14 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
         if (!text.trim()) {
           throw new Error('Claude 응답이 비어 있습니다.');
         }
+
+        // ✅ [2026-03-19] 사용량 추적
+        const claudeUsage = (response as any).usage;
+        trackApiUsage('claude', {
+          inputTokens: claudeUsage?.input_tokens || 0,
+          outputTokens: claudeUsage?.output_tokens || 0,
+          model: modelName,
+        });
 
         const elapsed = (Date.now() - startTime) / 1000;
         console.log(`✅ [Claude] 생성 완료: ${text.length}자, ${elapsed.toFixed(1)}초`);
@@ -7436,13 +7519,16 @@ export async function researchWithPerplexity(keyword: string): Promise<{
   try {
     // API 키 확인
     let apiKey: string | undefined;
+    let perplexityModel: string = 'sonar';
     try {
       const { loadConfig, applyConfigToEnv } = await import('./configManager.js');
       const config = await loadConfig();
       applyConfigToEnv(config);
       apiKey = config?.perplexityApiKey?.trim() || process.env.PERPLEXITY_API_KEY;
+      perplexityModel = config?.perplexityModel || process.env.PERPLEXITY_MODEL || 'sonar';
     } catch (e) {
       apiKey = process.env.PERPLEXITY_API_KEY;
+      perplexityModel = process.env.PERPLEXITY_MODEL || 'sonar';
     }
 
     if (!apiKey) {
@@ -7478,7 +7564,7 @@ export async function researchWithPerplexity(keyword: string): Promise<{
 
     const response = await Promise.race([
       client.chat.completions.create({
-        model: 'sonar',
+        model: perplexityModel, // ✅ [2026-03-19 FIX] 하드코딩 'sonar' 제거 → 사용자 설정 perplexityModel 존중
         messages: [
           {
             role: 'system',

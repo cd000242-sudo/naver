@@ -7,6 +7,7 @@ import type { ImageRequestItem, GeneratedImage } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { getImageErrorMessage } from './imageErrorMessages.js';
 import { PromptBuilder } from './promptBuilder.js';
+import { trackApiUsage } from '../apiUsageTracker.js';
 import { promises as fs } from 'fs';
 import { createHash } from 'crypto';
 import sharp from 'sharp';
@@ -1216,6 +1217,7 @@ async function generateSingleImageWithGemini(
 
                 const savedResult = await writeImageFile(finalBuffer, extension, item.heading, postTitle, postId);
                 console.log(`[NanoBananaPro] ✅ ${fallback.name} 폴백 성공! (${Math.round(finalBuffer.length / 1024)}KB)`);
+                trackApiUsage('gemini', { images: 1, model: fallback.model });
 
                 return {
                   heading: item.heading,
@@ -1263,6 +1265,7 @@ async function generateSingleImageWithGemini(
                     if (isThumbnail) fbBuffer = await cropThumbnail(fbBuffer, fbExt);
                     const fbSaved = await writeImageFile(fbBuffer, fbExt, item.heading, postTitle, postId);
                     console.log(`[NanoBananaPro] ✅ ${fallback.name} 폴백 성공! (${Math.round(fbBuffer.length / 1024)}KB)`);
+                    trackApiUsage('gemini', { images: 1, model: fallback.model });
                     return {
                       heading: item.heading,
                       filePath: fbSaved.savedToLocal || fbSaved.filePath,
@@ -1313,6 +1316,7 @@ async function generateSingleImageWithGemini(
 
           const savedResult = await writeImageFile(finalBuffer, extension, item.heading, postTitle, postId);
           console.log(`[NanoBananaPro] ✅ Imagen 4 직접 생성 성공! (${Math.round(finalBuffer.length / 1024)}KB)`);
+          trackApiUsage('gemini', { images: 1, model: 'imagen-4.0-generate-001' });
 
           return {
             heading: item.heading,
@@ -1445,6 +1449,7 @@ async function generateSingleImageWithGemini(
             // ===== 파일 저장 =====
             const savedResult = await writeImageFile(buffer, extension, item.heading, postTitle, postId);
             console.log(`[NanoBananaPro] ✅ 생성 성공 (${Math.round(buffer.length / 1024)}KB)`);
+            trackApiUsage('gemini', { images: 1, model: selectedModel });
 
             // ✅ [2026-02-18] 성공 시 503 카운터 리셋 (서버 정상화 확인)
             if (global503FallbackActive || global503Count > 0) {
@@ -1580,6 +1585,7 @@ async function generateSingleImageWithGemini(
 
             const savedResult = await writeImageFile(finalBuffer, extension, item.heading, postTitle, postId);
             console.log(`[NanoBananaPro] ✅ Imagen 4 폴백 성공! (${Math.round(finalBuffer.length / 1024)}KB)`);
+            trackApiUsage('gemini', { images: 1, model: 'imagen-4.0-generate-001' });
 
             // 503 카운터 부분 리셋 (폴백 상태 유지, 30분 후 원래 모델 복구)
             consecutive503Count = 0;
@@ -1634,6 +1640,7 @@ async function generateSingleImageWithGemini(
 
       const savedResult = await writeImageFile(finalBuffer, extension, item.heading, postTitle, postId);
       console.log(`[NanoBananaPro] ✅ Imagen 4 최종 안전망 성공! (${Math.round(finalBuffer.length / 1024)}KB)`);
+      trackApiUsage('gemini', { images: 1, model: 'imagen-4.0-generate-001' });
 
       return {
         heading: item.heading,

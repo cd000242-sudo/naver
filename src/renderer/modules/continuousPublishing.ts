@@ -3876,7 +3876,7 @@ export async function runRealFullAutoTest() {
     // 테스트용 데이터
     const testFormData = {
       mode: 'full-auto',
-      generator: 'gemini',
+      generator: UnifiedDOMCache.getGenerator(), // ✅ [2026-03-20 FIX] 하드코딩 제거 → 사용자 설정 존중
       targetAge: 'all',
       toneStyle: 'professional',
       imageSource: 'pollinations',

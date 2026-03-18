@@ -40,7 +40,7 @@ export class MasterAgent {
 
         const preferredModels = [
           'gemini-2.5-flash',
-          'gemini-3-flash-preview',
+          'gemini-3.1-flash-preview',
           'gemini-3.1-pro-preview',
         ];
 
@@ -516,7 +516,7 @@ export class MasterAgent {
         }
 
         // 6. Gemini 모델 검증
-        const validModels = ['gemini-2.5-flash', 'gemini-3.1-pro-preview', 'gemini-3-flash-preview', 'gemini-2.0-flash-exp', 'gemini-1.5-pro', 'gemini-1.5-flash'];
+        const validModels = ['gemini-3.1-flash-preview', 'gemini-2.5-flash', 'gemini-3.1-pro-preview', 'gemini-2.5-pro', 'gemini-2.0-flash'];
         if (config.geminiModel && !validModels.includes(config.geminiModel)) {
           issues.push({
             category: '🤖 AI 모델',
@@ -734,7 +734,7 @@ export class MasterAgent {
 
       const modelsToTry = [
         'gemini-2.5-flash',
-        'gemini-3-flash-preview',
+        'gemini-3.1-flash-preview',
         'gemini-3.1-pro-preview',
         'gemini-2.0-flash-exp',
         'gemini-1.5-flash'
@@ -1416,7 +1416,7 @@ AI 이미지 생성 엔진을 선택하세요
   ): Promise<{ success: boolean; keywords: { keyword: string; reason?: string }[] }> {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-3-flash-preview' });
+      const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-preview' });
 
       const now = new Date();
       const dateStr = `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일`;

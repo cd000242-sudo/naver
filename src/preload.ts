@@ -90,6 +90,24 @@ contextBridge.exposeInMainWorld('api', {
   // ✅ [2026-03-02] Leonardo AI 크레딧 조회
   getLeonardoCredits: (): Promise<{ success: boolean; credits?: number; message?: string; raw?: any }> =>
     ipcRenderer.invoke('quota:getLeonardoCredits'),
+  // ✅ [2026-03-18] Gemini API 할당량 확인
+  checkGeminiQuota: (apiKey: string): Promise<{ success: boolean; message?: string; data?: any }> =>
+    ipcRenderer.invoke('gemini:checkQuota', apiKey),
+  // ✅ [2026-03-18] Gemini 사용량 추적 초기화
+  resetGeminiUsageTracker: (): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('gemini:resetUsageTracker'),
+  // ✅ [2026-03-18] Gemini 크레딧 예산 설정
+  setGeminiCreditBudget: (budget: number): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('gemini:setCreditBudget', budget),
+  // ✅ [2026-03-19] 통합 API 사용량 조회 (전 제공자)
+  getAllApiUsageSnapshots: (): Promise<{ success: boolean; data?: any; message?: string }> =>
+    ipcRenderer.invoke('api:getAllUsageSnapshots'),
+  // ✅ [2026-03-19] 통합 API 사용량 초기화 (제공자별 또는 전체)
+  resetApiUsage: (provider?: string): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('api:resetUsage', provider),
+  // ✅ [2026-03-18] 범용 API 키 유효성 검증
+  validateApiKey: (provider: string, apiKey: string): Promise<{ success: boolean; message?: string; details?: string; balance?: any }> =>
+    ipcRenderer.invoke('apiKey:validate', provider, apiKey),
   generateContent: (prompt: string): Promise<GenerateContentResult> =>
     ipcRenderer.invoke('automation:generateContent', prompt),
   // ✅ [2026-03-11 FIX] generateImages 바인딩 추가 (누락으로 인한 연속발행 이미지 생성 실패 수정)
