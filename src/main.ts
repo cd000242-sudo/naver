@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cron from 'node-cron';
 import { NaverBlogAutomation, RunOptions, type PublishMode, type AutomationImage } from './naverBlogAutomation.js';
 import { generateImages, resetAllImageState } from './imageGenerator.js';
+import { generateEnglishPromptMain } from './main/utils/mainPromptInference.js';
 // (stabilityGenerator removed - deprecated provider)
 import { convertMp4ToGif } from './image/gifConverter.js'; // ✅ 추가
 import type { GenerateImagesOptions, GeneratedImage } from './imageGenerator.js';
@@ -6034,49 +6035,156 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           continue;
         }
 
-        // ✅ [2026-02-20 FIX] 다중계정 발행: AI 이미지 생성 (기존 누락 — 연속발행에만 있고 다중계정에는 없었음)
-        if (options?.useAiImage !== false && structuredContent?.headings?.length > 0 && generatedImages.length === 0) {
+        // ✅ [2026-03-18 FIX] 다중계정 발행: 전용 썸네일 + 소제목 이미지 생성 (fullAutoFlow.ts L600-703 패턴 이식)
+        // 기존 문제: headings 없으면 이미지 전체 스킵, 전용 썸네일 미생성, AI 프롬프트 추론 없음
+        let generatedThumbnailPath: string | undefined;
+        if (options?.useAiImage !== false && generatedImages.length === 0) {
           try {
             const imageProvider = options?.imageSource || 'nano-banana-pro';
-            sendLog(`   🎨 AI 이미지 생성 시작... (엔진: ${imageProvider}, ${structuredContent.headings.length}개 소제목)`);
+            const headingImageMode = options?.headingImageMode || 'all';
+            const isThumbnailOnly = options?.thumbnailOnly === true;
 
-            const imageItems = structuredContent.headings.map((h: any, idx: number) => ({
-              heading: h.title || h,
-              prompt: h.imagePrompt || h.title || h,
-              isThumbnail: idx === 0,
-              imageStyle: options?.imageStyle,
-              imageRatio: options?.thumbnailImageRatio || '1:1',
-            }));
-
-            const imgConfig = await loadConfig();
-            const imgApiKeys = {
-              geminiApiKey: imgConfig.geminiApiKey,
-              deepinfraApiKey: (imgConfig as any).deepinfraApiKey,
-              // ✅ [2026-02-22] 새 이미지 프로바이더 API 키
-              openaiImageApiKey: (imgConfig as any).openaiImageApiKey,
-              leonardoaiApiKey: (imgConfig as any).leonardoaiApiKey,
-
-            };
-
-            const imgResult = await withAbortCheck(
-              generateImages({
-                provider: imageProvider,
-                items: imageItems,
-                postTitle: title,
-                isFullAuto: true,
-                isShoppingConnect: options?.contentMode === 'affiliate',
-                imageStyle: options?.imageStyle,
-                imageRatio: options?.thumbnailImageRatio || '1:1',
-                collectedImages: options?.collectedImages || structuredContent?.collectedImages || [],
-              } as any, imgApiKeys),
-              abortController.signal
-            );
-
-            if (imgResult && imgResult.length > 0) {
-              generatedImages = imgResult;
-              sendLog(`   ✅ AI 이미지 ${imgResult.length}개 생성 완료!`);
+            // ✅ headingImageMode === 'none'이면 모든 이미지 생성 건너뛰기
+            if (headingImageMode === 'none') {
+              sendLog(`   🚫 이미지 없이 모드: 썸네일 포함 모든 이미지 생성 건너뛰기`);
             } else {
-              sendLog(`   ⚠️ AI 이미지 생성 결과 없음 (이미지 없이 발행)`);
+              const imgConfig = await loadConfig();
+              const imgApiKeys = {
+                geminiApiKey: imgConfig.geminiApiKey,
+                deepinfraApiKey: (imgConfig as any).deepinfraApiKey,
+                openaiImageApiKey: (imgConfig as any).openaiImageApiKey,
+                leonardoaiApiKey: (imgConfig as any).leonardoaiApiKey,
+              };
+
+              // ═══ Phase 1: 전용 썸네일 별도 생성 (headings 유무 무관) ═══
+              let dedicatedThumbnail: any = null;
+              try {
+                // ✅ AI 추론 프롬프트: 블로그 제목 기반 영어 프롬프트 생성
+                let thumbnailPrompt: string;
+                try {
+                  thumbnailPrompt = await generateEnglishPromptMain(
+                    title || '블로그 썸네일',
+                    options?.imageStyle
+                  );
+                  sendLog(`   🎨 AI 썸네일 프롬프트: "${thumbnailPrompt.substring(0, 60)}..."`);
+                } catch {
+                  thumbnailPrompt = `eye-catching blog thumbnail, visual metaphor for: ${title}, cinematic lighting, compelling composition, hero image style, NO TEXT NO WRITING`;
+                  sendLog(`   ⚠️ AI 썸네일 프롬프트 생성 실패 → 기본 프롬프트 사용`);
+                }
+
+                sendLog(`   🖼️ 전용 썸네일 별도 생성 중... (엔진: ${imageProvider})`);
+
+                const thumbResult = await withAbortCheck(
+                  generateImages({
+                    provider: imageProvider,
+                    items: [{
+                      heading: title || '🖼️ 썸네일',
+                      prompt: thumbnailPrompt,
+                      englishPrompt: thumbnailPrompt,
+                      isThumbnail: true,
+                      imageStyle: options?.imageStyle,
+                      imageRatio: options?.thumbnailImageRatio || '1:1',
+                    }],
+                    postTitle: title,
+                    isFullAuto: true,
+                    isShoppingConnect: options?.contentMode === 'affiliate',
+                    imageStyle: options?.imageStyle,
+                    imageRatio: options?.thumbnailImageRatio || '1:1',
+                    collectedImages: options?.collectedImages || structuredContent?.collectedImages || [],
+                  } as any, imgApiKeys),
+                  abortController.signal
+                );
+
+                if (thumbResult && thumbResult.length > 0) {
+                  dedicatedThumbnail = {
+                    ...thumbResult[0],
+                    heading: title || '🖼️ 썸네일',
+                    isThumbnail: true,
+                  };
+                  generatedThumbnailPath = dedicatedThumbnail.filePath || dedicatedThumbnail.url;
+                  sendLog(`   ✅ 전용 썸네일 생성 완료!`);
+                } else {
+                  sendLog(`   ⚠️ 전용 썸네일 생성 실패 → 썸네일 없이 진행`);
+                }
+              } catch (thumbErr) {
+                if ((thumbErr as Error).name === 'AbortError' || (thumbErr as Error).message === 'PUBLISH_CANCELLED') {
+                  throw thumbErr; // abort는 상위로 전파
+                }
+                sendLog(`   ⚠️ 전용 썸네일 생성 오류: ${(thumbErr as Error).message}`);
+              }
+
+              // ═══ Phase 2: 소제목 이미지 생성 (thumbnailOnly면 건너뛰기) ═══
+              let subheadingImages: any[] = [];
+              const headings = structuredContent?.headings || [];
+
+              if (isThumbnailOnly) {
+                sendLog(`   📷 썸네일만 생성 모드: 소제목 이미지 없이 전용 썸네일만 사용`);
+              } else if (headings.length > 0) {
+                try {
+                  sendLog(`   🎨 소제목 이미지 생성 시작... (엔진: ${imageProvider}, ${headings.length}개 소제목)`);
+
+                  // ✅ 각 소제목에 AI 프롬프트 추론 적용
+                  const imageItems = [];
+                  for (const h of headings) {
+                    const headingTitle = h.title || h;
+                    let englishPrompt: string;
+                    try {
+                      englishPrompt = await generateEnglishPromptMain(
+                        String(headingTitle),
+                        options?.imageStyle
+                      );
+                    } catch {
+                      englishPrompt = h.imagePrompt || String(headingTitle);
+                    }
+                    imageItems.push({
+                      heading: headingTitle,
+                      prompt: englishPrompt,
+                      englishPrompt: englishPrompt,
+                      isThumbnail: false,
+                      imageStyle: options?.imageStyle,
+                      imageRatio: options?.subheadingImageRatio || options?.thumbnailImageRatio || '1:1',
+                    });
+                  }
+
+                  const imgResult = await withAbortCheck(
+                    generateImages({
+                      provider: imageProvider,
+                      items: imageItems,
+                      postTitle: title,
+                      isFullAuto: true,
+                      isShoppingConnect: options?.contentMode === 'affiliate',
+                      imageStyle: options?.imageStyle,
+                      imageRatio: options?.subheadingImageRatio || options?.thumbnailImageRatio || '1:1',
+                      collectedImages: options?.collectedImages || structuredContent?.collectedImages || [],
+                    } as any, imgApiKeys),
+                    abortController.signal
+                  );
+
+                  if (imgResult && imgResult.length > 0) {
+                    subheadingImages = imgResult.map((img: any) => ({ ...img, isThumbnail: false }));
+                    sendLog(`   ✅ 소제목 이미지 ${subheadingImages.length}개 생성 완료!`);
+                  } else {
+                    sendLog(`   ⚠️ 소제목 이미지 생성 결과 없음`);
+                  }
+                } catch (subErr) {
+                  if ((subErr as Error).name === 'AbortError' || (subErr as Error).message === 'PUBLISH_CANCELLED') {
+                    throw subErr; // abort는 상위로 전파
+                  }
+                  sendLog(`   ⚠️ 소제목 이미지 생성 실패: ${(subErr as Error).message}`);
+                }
+              }
+
+              // ═══ Phase 3: 최종 이미지 배열 조립 (전용 썸네일을 맨 앞에) ═══
+              generatedImages = [
+                ...(dedicatedThumbnail ? [dedicatedThumbnail] : []),
+                ...subheadingImages,
+              ];
+
+              if (generatedImages.length > 0) {
+                sendLog(`   ✅ AI 이미지 총 ${generatedImages.length}개 준비 완료! (썸네일 ${dedicatedThumbnail ? '포함' : '미포함'})`);
+              } else {
+                sendLog(`   ⚠️ AI 이미지 생성 결과 없음 (이미지 없이 발행)`);
+              }
             }
           } catch (imgError) {
             // ✅ [2026-03-11] AbortError는 중지 요청으로 처리
@@ -6174,8 +6282,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           thumbnailImageRatio: options?.thumbnailImageRatio || '1:1',  // 썸네일 비율
           subheadingImageRatio: options?.subheadingImageRatio || '1:1',  // 소제목 비율
           scAutoThumbnailSetting: options?.scAutoThumbnailSetting || false,  // 자동 썸네일
-          // ✅ [2026-03-18 FIX] presetThumbnailPath → thumbnailPath 매핑 (BlogExecutor L415에서 payload.thumbnailPath 참조)
-          thumbnailPath: options?.thumbnailPath || options?.presetThumbnailPath || undefined,
+          // ✅ [2026-03-18 FIX] 전용 썸네일 생성 경로 → thumbnailPath 자동 매핑
+          thumbnailPath: options?.thumbnailPath || options?.presetThumbnailPath || generatedThumbnailPath || undefined,
         };
 
         // ✅ [2026-03-01 FIX] 선차감 패턴: 계정별 발행 전 쿼터 차감

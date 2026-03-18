@@ -14,7 +14,30 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const GITHUB_TOKEN = process.env.GH_TOKEN;
+// ─── GH_TOKEN 자동 로드 (.env.release → 환경변수 순서) ────────
+function loadGHToken() {
+    // 1. 환경변수에 이미 있으면 그대로 사용
+    if (process.env.GH_TOKEN) return process.env.GH_TOKEN;
+
+    // 2. .env.release 파일에서 읽기
+    const envReleasePath = path.join(__dirname, '..', '.env.release');
+    try {
+        if (fs.existsSync(envReleasePath)) {
+            const content = fs.readFileSync(envReleasePath, 'utf-8');
+            const match = content.match(/GH_TOKEN=(.+)/);
+            if (match && match[1].trim()) {
+                console.log('   📋 토큰: .env.release 파일에서 로드됨');
+                return match[1].trim();
+            }
+        }
+    } catch (e) {
+        // 파일 읽기 실패 시 무시
+    }
+
+    return null;
+}
+
+const GITHUB_TOKEN = loadGHToken();
 const OWNER = 'cd000242-sudo';
 const REPO = 'naver';
 
