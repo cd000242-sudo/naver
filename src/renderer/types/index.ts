@@ -42,6 +42,7 @@ export type RendererAutomationPayload = {
     autoGenerate?: boolean;
     publishMode?: 'draft' | 'publish' | 'schedule';
     scheduleDate?: string;
+    scheduleTime?: string; // ✅ [2026-03-19 FIX] 예약 시간 (HH:mm)
     scheduleType?: 'app-schedule' | 'naver-server';
     scheduleMethod?: 'datetime-local' | 'individual-inputs';
     ctaLink?: string;

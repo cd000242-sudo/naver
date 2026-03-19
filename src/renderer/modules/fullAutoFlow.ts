@@ -2762,6 +2762,10 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
       title: h.title?.substring(0, 20),
       contentLen: h.content?.length || 0,
     })),
+    // ✅ [2026-03-19 FIX] 예약 발행 디버그
+    publishMode: formData.publishMode,
+    scheduleDate: formData.scheduleDate,
+    scheduleTime: formData.scheduleTime,
   });
 
   // 자동화 페이로드 구성
@@ -2778,6 +2782,7 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
     autoGenerate: true,
     publishMode: formData.publishMode as 'draft' | 'publish' | 'schedule',
     scheduleDate: formData.publishMode === 'schedule' ? formData.scheduleDate : undefined,
+    scheduleTime: formData.publishMode === 'schedule' ? formData.scheduleTime : undefined, // ✅ [2026-03-19 FIX] 예약 시간 명시적 전달
     scheduleType: formData.publishMode === 'schedule' ? (formData.scheduleType as 'app-schedule' | 'naver-server' || 'naver-server') : undefined,
     toneStyle: formData.toneStyle as 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info' | undefined,
     postId: currentPostId || undefined, // ✅ 현재 글 ID 전달

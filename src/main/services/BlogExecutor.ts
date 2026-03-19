@@ -405,18 +405,25 @@ export async function executePublishing(
             // ✅ [2026-02-08 FIX] scheduleDate + scheduleTime 합성 (네이버 예약발행 'YYYY-MM-DD HH:mm' 형식 필수)
             scheduleDate: (() => {
                 if (payload.publishMode === 'schedule' && payload.scheduleDate) {
+                    Logger.info(`[BlogExecutor] 📅 scheduleDate 합성: date="${payload.scheduleDate}", time="${(payload as any).scheduleTime || '(없음)'}"}`);
                     // scheduleTime이 별도 필드로 있으면 합성
                     if ((payload as any).scheduleTime) {
-                        return `${payload.scheduleDate} ${(payload as any).scheduleTime}`;
+                        const synthesized = `${payload.scheduleDate} ${(payload as any).scheduleTime}`;
+                        Logger.info(`[BlogExecutor] 📅 scheduleDate+time 합성 결과: "${synthesized}"`);
+                        return synthesized;
                     }
                     // 이미 'YYYY-MM-DD HH:mm' 형식이면 그대로
                     if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(payload.scheduleDate)) {
+                        Logger.info(`[BlogExecutor] 📅 scheduleDate 이미 YYYY-MM-DD HH:mm 형식, 그대로 사용`);
                         return payload.scheduleDate;
                     }
                     // 'T' 구분자 형식이면 공백으로 변환
                     if (payload.scheduleDate.includes('T')) {
-                        return payload.scheduleDate.replace('T', ' ');
+                        const converted = payload.scheduleDate.replace('T', ' ');
+                        Logger.info(`[BlogExecutor] 📅 scheduleDate T→공백 변환: "${converted}"`);
+                        return converted;
                     }
+                    Logger.warn(`[BlogExecutor] ⚠️ scheduleDate 형식 불명: "${payload.scheduleDate}" — 그대로 통과`);
                 }
                 return payload.scheduleDate;
             })(),

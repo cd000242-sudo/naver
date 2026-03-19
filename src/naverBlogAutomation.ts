@@ -195,6 +195,7 @@ export interface RunOptions {
   publishMode?: PublishMode;
   categoryName?: string; // ✅ 추가: 발행할 카테고리(폴더)명
   scheduleDate?: string; // 예약발행 날짜 (YYYY-MM-DD HH:mm 형식)
+  scheduleTime?: string; // ✅ [2026-03-19 FIX] 예약 시간 (HH:mm) — scheduleDate와 별도 전달 시 사용
   scheduleType?: 'app-schedule' | 'naver-server'; // 예약 발행 타입: 앱 스케줄 관리 vs 네이버 서버 예약
   scheduleMethod?: 'datetime-local' | 'individual-inputs'; // 예약발행 방식
   ctaLink?: string;

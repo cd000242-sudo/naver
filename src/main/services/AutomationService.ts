@@ -430,6 +430,7 @@ export interface PostCyclePayload {
     // 발행 설정
     publishMode?: 'draft' | 'publish' | 'schedule';
     scheduleDate?: string;
+    scheduleTime?: string; // ✅ [2026-03-19 FIX] 예약 시간 (HH:mm) — scheduleDate와 별도 전달 시 사용
     scheduleType?: 'app-schedule' | 'naver-server';
 
     // CTA/제휴
