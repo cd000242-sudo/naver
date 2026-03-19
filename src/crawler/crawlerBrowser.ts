@@ -220,7 +220,7 @@ export async function getSharedContext(): Promise<BrowserContext> {
 
             console.log(`[CrawlerBrowser] 🍪 프로필: ${profileDir}`);
 
-            // ✅ [2026-03-16] 프록시 자동 적용
+            // ✅ [2026-03-19] 프록시 자동 적용 (Playwright proxy 옵션으로 인증 지원)
             _currentProxyUrl = await getProxyUrl();
             const launchArgs = [
                     '--disable-blink-features=AutomationControlled',
@@ -232,9 +232,26 @@ export async function getSharedContext(): Promise<BrowserContext> {
                     '--disable-gpu',
                     '--window-size=1920,1080',
             ];
+
+            // ✅ [2026-03-19] 프록시 인증을 Playwright proxy 옵션으로 올바르게 적용
+            // --proxy-server 인자는 인증(username:password)을 지원하지 않으므로
+            // Playwright의 context proxy 옵션을 사용해야 함
+            let proxyOption: { server: string; username?: string; password?: string } | undefined;
             if (_currentProxyUrl) {
-                launchArgs.push(`--proxy-server=${_currentProxyUrl}`);
-                console.log(`[CrawlerBrowser] 🌐 프록시 적용: ${_currentProxyUrl}`);
+                try {
+                    const proxyUrl = new URL(_currentProxyUrl);
+                    proxyOption = {
+                        server: `${proxyUrl.protocol}//${proxyUrl.hostname}:${proxyUrl.port}`,
+                        username: decodeURIComponent(proxyUrl.username) || undefined,
+                        password: decodeURIComponent(proxyUrl.password) || undefined,
+                    };
+                    const maskedUser = proxyOption.username ? proxyOption.username.substring(0, 6) + '***' : 'N/A';
+                    console.log(`[CrawlerBrowser] 🌐 프록시 적용: ${proxyOption.server} (user: ${maskedUser})`);
+                } catch (e) {
+                    console.warn(`[CrawlerBrowser] ⚠️ 프록시 URL 파싱 실패: ${(e as Error).message}`);
+                    // fallback: 인증 없는 --proxy-server
+                    launchArgs.push(`--proxy-server=${_currentProxyUrl}`);
+                }
             }
 
             _context = await stealthChromium.launchPersistentContext(profileDir, {
@@ -246,6 +263,7 @@ export async function getSharedContext(): Promise<BrowserContext> {
                 locale: 'ko-KR',
                 timezoneId: 'Asia/Seoul',
                 ignoreDefaultArgs: ['--enable-automation'],
+                ...(proxyOption ? { proxy: proxyOption } : {}),
             });
 
             _isAdsPower = false;
@@ -382,10 +400,76 @@ export async function checkForError(page: Page): Promise<boolean> {
 }
 
 /**
- * 자동 리트라이 + 워밍업 (에러 시 최대 3회 재시도)
+ * ✅ [2026-03-19] 캡차 전용 감지 (에러와 분리)
+ * checkForError와 달리 캡차만 감지 — 캡차가 뜨면 사용자가 풀 시간을 줘야 함
+ */
+export async function checkForCaptcha(page: Page): Promise<boolean> {
+    try {
+        return await page.evaluate(() => {
+            const body = document.body?.innerText || '';
+            const html = document.documentElement?.innerHTML || '';
+            const combined = body.toLowerCase();
+
+            // 네이버 캡차 키워드 ("N번째 자리 숫자를 입력하세요" 패턴)
+            const captchaKeywords = [
+                '캡차', 'captcha', '보안 확인', '정답을 입력',
+                '실제 사용자임을 확인', '번째 자리', '숫자를 입력',
+                '자동 입력 방지',
+            ];
+            if (captchaKeywords.some(k => combined.includes(k))) return true;
+
+            // HTML 내 캡차 스크립트/요소
+            if (html.includes('wtm_captcha') || html.includes('ncpt.naver.com')) return true;
+
+            return false;
+        });
+    } catch {
+        return false; // 감지 실패 시 캡차 아님으로 처리 (안전)
+    }
+}
+
+/**
+ * ✅ [2026-03-19] 캡차 대기 헬퍼
+ * 캡차가 감지되면 page를 앞으로 가져오고 최대 maxWaitMs 동안 대기
+ * 3초마다 캡차가 사라졌는지 폴링
+ * @returns true = 캡차 해결됨, false = 타임아웃
+ */
+async function waitForCaptchaSolved(page: Page, maxWaitMs = 120000): Promise<boolean> {
+    console.log('[CrawlerBrowser] 🔐 캡차 감지! 사용자가 풀어줄 때까지 최대 120초 대기...');
+    console.log('[CrawlerBrowser] 🔐 브라우저 창에서 캡차 숫자를 클릭하세요!');
+
+    // 브라우저 창을 앞으로 가져오기 (사용자가 캡차를 볼 수 있도록)
+    try { await page.bringToFront(); } catch {}
+
+    const start = Date.now();
+    while (Date.now() - start < maxWaitMs) {
+        await page.waitForTimeout(3000); // 3초마다 체크
+
+        const stillCaptcha = await checkForCaptcha(page);
+        if (!stillCaptcha) {
+            const elapsed = Math.round((Date.now() - start) / 1000);
+            console.log(`[CrawlerBrowser] ✅ 캡차 해결됨! (${elapsed}초 소요)`);
+            // 캡차 해결 후 페이지가 리다이렉트될 수 있으므로 잠시 대기
+            await page.waitForTimeout(3000);
+            return true;
+        }
+
+        const remaining = Math.round((maxWaitMs - (Date.now() - start)) / 1000);
+        if (remaining > 0) {
+            console.log(`[CrawlerBrowser] ⏳ 캡차 대기 중... (남은: ${remaining}초)`);
+        }
+    }
+
+    console.log('[CrawlerBrowser] ⏰ 캡차 120초 타임아웃 → 리트라이로 전환');
+    return false;
+}
+
+/**
+ * ✅ [2026-03-19] 자동 리트라이 + 캡차 대기
+ * 캡차 감지 시 사용자가 풀 수 있도록 최대 120초 대기 후 리트라이
  */
 export async function navigateWithRetry(page: Page, url: string, maxRetries = 3): Promise<boolean> {
-    // 첫 시도
+    // ═══ ① 첫 시도 ═══
     try {
         await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
     } catch {
@@ -393,17 +477,35 @@ export async function navigateWithRetry(page: Page, url: string, maxRetries = 3)
     }
     await page.waitForTimeout(5000); // SPA 렌더링 대기
 
-    let isError = await checkForError(page);
-    if (!isError) return true;
+    // ═══ ② 캡차 먼저 체크 → 대기 ═══
+    const hasCaptcha = await checkForCaptcha(page);
+    if (hasCaptcha) {
+        const solved = await waitForCaptchaSolved(page);
+        if (solved) {
+            // 캡차 해결 후 에러 재체크
+            const stillError = await checkForError(page);
+            if (!stillError) {
+                console.log('[CrawlerBrowser] ✅ 캡차 해결 → 페이지 정상!');
+                if (_currentProxyUrl) reportProxySuccess(_currentProxyUrl);
+                return true;
+            }
+            // 캡차는 풀었지만 여전히 에러 (예: 접속 불가 페이지로 리다이렉트)
+            console.log('[CrawlerBrowser] ⚠️ 캡차 해결됐지만 에러 페이지 → 리트라이');
+        }
+    } else {
+        // 캡차가 아닌 경우 일반 에러 체크
+        const isError = await checkForError(page);
+        if (!isError) return true; // 정상!
+    }
 
-    // 리트라이
+    // ═══ ③ 리트라이 루프 ═══
     const retryUrls = [
         'https://shopping.naver.com/home',
         'https://www.naver.com',
         'https://search.naver.com/search.naver?query=%EC%9D%B8%EA%B8%B0%EC%83%81%ED%92%88',
     ];
 
-    for (let r = 0; r < maxRetries && isError; r++) {
+    for (let r = 0; r < maxRetries; r++) {
         console.log(`[CrawlerBrowser] ⚠️ 자동 리트라이 ${r + 1}/${maxRetries}...`);
 
         // 워밍업 페이지 방문
@@ -428,31 +530,58 @@ export async function navigateWithRetry(page: Page, url: string, maxRetries = 3)
         }
         await page.waitForTimeout(5000);
 
-        isError = await checkForError(page);
+        // ✅ 리트라이에서도 캡차 먼저 체크
+        const retryCaptcha = await checkForCaptcha(page);
+        if (retryCaptcha) {
+            const solved = await waitForCaptchaSolved(page);
+            if (solved) {
+                const stillError = await checkForError(page);
+                if (!stillError) {
+                    console.log(`[CrawlerBrowser] ✅ 리트라이 ${r + 1} 캡차 해결 → 성공!`);
+                    if (_currentProxyUrl) reportProxySuccess(_currentProxyUrl);
+                    return true;
+                }
+            }
+            continue; // 캡차 타임아웃이면 다음 리트라이
+        }
+
+        const isError = await checkForError(page);
         if (!isError) {
             console.log(`[CrawlerBrowser] ✅ 리트라이 ${r + 1} 성공!`);
             if (_currentProxyUrl) reportProxySuccess(_currentProxyUrl);
             return true;
         } else if (_currentProxyUrl) {
-            // ✅ [2026-03-16] IP 차단 감지 → 프록시 실패 보고 (다음엔 다른 프록시 사용)
             reportProxyFailed(_currentProxyUrl);
             console.log(`[CrawlerBrowser] 🔄 프록시 실패 보고: ${_currentProxyUrl}`);
         }
     }
 
-    // 최후 수단: 자동 새로고침 (60초)
-    if (isError) {
-        console.log('[CrawlerBrowser] 🚨 자동 새로고침 시도 (최대 60초)...');
-        for (let i = 0; i < 12 && isError; i++) {
-            try {
-                await page.reload({ waitUntil: 'networkidle', timeout: 10000 });
-            } catch {}
-            await page.waitForTimeout(5000);
-            isError = await checkForError(page);
-            if (!isError) {
-                console.log(`[CrawlerBrowser] ✅ ${(i + 1) * 5}초에 복구됨!`);
-                return true;
+    // ═══ ④ 최후 수단: 자동 새로고침 (60초) ═══
+    console.log('[CrawlerBrowser] 🚨 자동 새로고침 시도 (최대 60초)...');
+    for (let i = 0; i < 12; i++) {
+        try {
+            await page.reload({ waitUntil: 'networkidle', timeout: 10000 });
+        } catch {}
+        await page.waitForTimeout(5000);
+
+        // ✅ 새로고침에서도 캡차 먼저 체크
+        const refreshCaptcha = await checkForCaptcha(page);
+        if (refreshCaptcha) {
+            const solved = await waitForCaptchaSolved(page);
+            if (solved) {
+                const stillError = await checkForError(page);
+                if (!stillError) {
+                    console.log(`[CrawlerBrowser] ✅ 새로고침 ${i + 1} 캡차 해결 → 성공!`);
+                    return true;
+                }
             }
+            continue;
+        }
+
+        const isError = await checkForError(page);
+        if (!isError) {
+            console.log(`[CrawlerBrowser] ✅ ${(i + 1) * 5}초에 복구됨!`);
+            return true;
         }
     }
 
