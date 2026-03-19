@@ -18,7 +18,7 @@ export type BlogAccount = {
     isJabBlog?: boolean;
     // ✅ 계정별 개별 설정 (다중계정 동시발행용)
     imageSource?: 'gemini' | 'imagen' | 'pexels' | 'unsplash' | 'skip'; // 이미지 소스
-    toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous'; // 글 톤
+    toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'; // 글 톤 (10개 전체)
     publishMode?: 'publish' | 'draft'; // 발행 모드
     keywords?: string[]; // 키워드 목록 (순차 사용)
     urls?: string[]; // URL 목록 (순차 사용)

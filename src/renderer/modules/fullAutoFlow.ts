@@ -2779,7 +2779,7 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
     publishMode: formData.publishMode as 'draft' | 'publish' | 'schedule',
     scheduleDate: formData.publishMode === 'schedule' ? formData.scheduleDate : undefined,
     scheduleType: formData.publishMode === 'schedule' ? (formData.scheduleType as 'app-schedule' | 'naver-server' || 'naver-server') : undefined,
-    toneStyle: formData.toneStyle as 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | undefined,
+    toneStyle: formData.toneStyle as 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info' | undefined,
     postId: currentPostId || undefined, // ✅ 현재 글 ID 전달
     thumbnailPath: thumbnailPath, // ✅ 대표사진 경로 추가
     categoryName: formData.categoryName || formData.category, // ✅ 발행 카테고리명 추가 (category도 호환성 지원)

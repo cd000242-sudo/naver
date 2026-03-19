@@ -2179,7 +2179,10 @@ const toneStyleNames: Record<string, string> = {
   'formal': '🎩 격식체',
   'humorous': '😄 유머',
   'community_fan': '🔥 찐팬',
-  'mom_cafe': '👩‍👧 맘카페'
+  'mom_cafe': '👩‍👧 맘카페',
+  'storyteller': '📖 스토리텔러',
+  'expert_review': '🔬 전문 리뷰',
+  'calm_info': '🍃 차분한 정보체'
 };
 
 const contentModeNames: Record<string, string> = {

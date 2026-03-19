@@ -206,7 +206,7 @@ export interface RunOptions {
   thumbnailPath?: string; // 대표 이미지 경로
   imageMode?: 'full-auto' | 'semi-auto' | 'manual' | 'skip'; // 이미지 모드
   collectedImages?: Array<{ id: string; url: string; thumbnailUrl: string; title: string; source: string; tags?: string[] }>; // 수집된 이미지 (풀오토 모드용)
-  toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe'; // 글 톤 설정
+  toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'; // 글 톤 설정 (10개 전체)
   keepBrowserOpen?: boolean; // ✅ 추가
   useIntelligentImagePlacement?: boolean; // ✅ 추가: 지능형 이미지 배치 사용 여부
   onlyImagePlacement?: boolean; // ✅ 추가: 이미지 배치만 수행하고 종료 (이미지 관리 탭 용)
@@ -251,7 +251,7 @@ interface ResolvedRunOptions {
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   imageMode?: 'full-auto' | 'semi-auto' | 'manual' | 'skip'; // 이미지 모드
   collectedImages?: Array<{ id: string; url: string; thumbnailUrl: string; title: string; source: string; tags?: string[] }>; // 수집된 이미지 (풀오토 모드용)
-  toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe'; // 글 톤 설정
+  toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'; // 글 톤 설정 (10개 전체)
   keepBrowserOpen: boolean; // ✅ 추가
   useIntelligentImagePlacement?: boolean; // ✅ 추가: 지능형 이미지 배치 사용 여부
   onlyImagePlacement?: boolean; // ✅ 추가: 이미지 배치만 수행하고 종료
@@ -5272,7 +5272,7 @@ export class NaverBlogAutomation {
   /**
    * 네이버 블로그 에디터에서 글 톤 설정
    */
-  private async setToneStyle(toneStyle: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe'): Promise<void> {
+  private async setToneStyle(toneStyle: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'): Promise<void> {
     const frame = (await this.getAttachedFrame());
     const page = this.ensurePage();
 
@@ -5330,6 +5330,11 @@ export class NaverBlogAutomation {
         'casual': ['일상적', '일상', 'casual', 'informal'],
         'formal': ['격식적', '격식', 'formal', 'official'],
         'humorous': ['유머러스', '유머', 'humorous', 'funny'],
+        'community_fan': ['커뮤니티', '팬', 'community', 'fan'],
+        'mom_cafe': ['맘카페', '살림', 'mom', 'cafe'],
+        'storyteller': ['스토리텔러', '서사', 'storyteller', 'narrative'],
+        'expert_review': ['전문리뷰', '리뷰어', 'expert_review', 'review'],
+        'calm_info': ['차분한', '정보전달', 'calm', 'info'],
       };
 
       const toneKeywords = toneOptionMap[toneStyle] || [];
@@ -5346,6 +5351,11 @@ export class NaverBlogAutomation {
         'button[data-tone="casual"]',
         'button[data-tone="formal"]',
         'button[data-tone="humorous"]',
+        'button[data-tone="community_fan"]',
+        'button[data-tone="mom_cafe"]',
+        'button[data-tone="storyteller"]',
+        'button[data-tone="expert_review"]',
+        'button[data-tone="calm_info"]',
       ];
 
       for (const selector of toneOptionSelectors) {

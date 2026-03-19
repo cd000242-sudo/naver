@@ -51,7 +51,7 @@ export type RendererAutomationPayload = {
     skipCta?: boolean;
     skipImages?: boolean;
     targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
-    toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe';
+    toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info';
     keepBrowserOpen?: boolean;
     thumbnailPath?: string;
     skipDailyLimitWarning?: boolean;

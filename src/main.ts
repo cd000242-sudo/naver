@@ -906,7 +906,7 @@ type AutomationRequest = {
   collectedImages?: Array<{ id: string; url: string; thumbnailUrl: string; title: string; source: string; tags?: string[] }>; // 수집된 이미지 (풀오토 모드용)
   useAiImage?: boolean; // ✅ 추가
   createProductThumbnail?: boolean; // ✅ 추가
-  toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous'; // 글 톤 설정
+  toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'; // 글 톤 설정 (10개 전체)
   postId?: string; // ✅ 글 ID (예약 발행용)
   geminiModel?: string; // ✅ Gemini 모델 선택
   customPrompt?: string; // ✅ 사용자 정의 프롬프트 (추가 지시사항)

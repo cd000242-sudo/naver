@@ -1161,7 +1161,7 @@ export async function initMultiAccountPublishModal() {
 
     container.innerHTML = publishQueue.map((item, index) => {
       const sourceDisplay = item.sourceUrl ? `🔗 ${item.sourceUrl.substring(0, 30)}...` : `🔑 ${item.sourceKeyword}`;
-      const toneEmoji = { friendly: '😊', professional: '💼', casual: '🎒', formal: '🎩', humorous: '😄', community_fan: '🔥', mom_cafe: '👩‍👧' }[item.toneStyle] || '😊';
+      const toneEmoji = { friendly: '😊', professional: '💼', casual: '🎒', formal: '🎩', humorous: '😄', community_fan: '🔥', mom_cafe: '👩‍👧', storyteller: '📖', expert_review: '🔬', calm_info: '🍃' }[item.toneStyle] || '😊';
       const ctaBadge = item.ctaType === 'previous-post' ? '<span style="background: #3b82f6; color: white; padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.65rem; margin-left: 0.25rem;">🔗이전글</span>' :
         item.ctaType === 'custom' ? '<span style="background: #8b5cf6; color: white; padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.65rem; margin-left: 0.25rem;">✏️CTA</span>' : '';
       // ✅ [2026-02-08] 예약/임시 배지 표시

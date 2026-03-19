@@ -204,7 +204,7 @@ type RendererAutomationPayload = {
   imageMode?: 'full-auto' | 'semi-auto' | 'manual' | 'skip'; // 이미지 모드
   collectedImages?: Array<{ id: string; url: string; thumbnailUrl: string; title: string; source: string; tags?: string[] }>; // 수집된 이미지 (풀오토 모드용)
   postId?: string; // ✅ 글 ID (예약 발행용)
-  toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe'; // ✅ 글 톤 설정
+  toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'; // ✅ 글 톤 설정 (10개 전체)
   keepBrowserOpen?: boolean; // ✅ 브라우저 유지 여부
   includeThumbnailText?: boolean; // ✅ 썸네일에 텍스트 포함 여부
   affiliateLink?: string; // ✅ 제휴마케팅 링크 추가
@@ -727,7 +727,7 @@ type BlogAccountSettings = {
   isJabBlog?: boolean;
   // ✅ 계정별 개별 설정 (다중계정 동시발행용)
   imageSource?: 'gemini' | 'imagen' | 'unsplash' | 'skip';
-  toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous';
+  toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info';
   publishMode?: 'publish' | 'draft';
   keywords?: string[];
   urls?: string[];

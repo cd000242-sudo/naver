@@ -243,8 +243,8 @@ let _humanizerLogShown = false;
 export function humanizeContent(content: string, intensity: 'light' | 'medium' | 'strong' = 'medium', silent: boolean = false, toneStyle?: string): string {
   if (!content) return content;
 
-  // 톤 분류: 격식체(professional/formal)인지 판별
-  const isFormalTone = toneStyle === 'professional' || toneStyle === 'formal';
+  // 톤 분류: 격식체(professional/formal/expert_review/calm_info)인지 판별
+  const isFormalTone = toneStyle === 'professional' || toneStyle === 'formal' || toneStyle === 'expert_review' || toneStyle === 'calm_info';
 
   // 로그 한 번만 출력
   if (!silent && !_humanizerLogShown) {
