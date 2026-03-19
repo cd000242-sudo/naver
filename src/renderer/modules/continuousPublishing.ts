@@ -3540,9 +3540,18 @@ async function startContinuousPublishingV2(): Promise<void> {
           scheduleType: item.scheduleType || 'naver-server',
           includeThumbnailText,
           keywords: item.customKeyword,
-          // ✅ [2026-02-03 FIX] CTA 필드명 불일치 수정 - PostCyclePayload 스키마에 맞게 변환
-          ctaLink: item.ctaUrl, // ctaUrl → ctaLink로 매핑
-          ctaText: item.ctaText,
+          // ✅ [2026-03-20 FIX] CTA 필드 매핑 — 3개 필드의 역할 구분:
+          //   ctaLink: executeBlogPublishing에서 CTA 버튼 렌더링에 사용
+          //   ctaUrl:  autoLinkPreviousPost에서 자동검색 스킵 판단에 사용
+          //   previousPostUrl: 네이버 에디터의 "이전글 엮기" UI 기능에 사용
+          // ctaType='previous-post'일 때: 3개 필드 모두 이전글 URL로 통일
+          // ⚠️ URL 유효성 검증: http(s)로 시작하는 URL만 세팅 (빈 문자열/undefined 방지)
+          ctaLink: item.ctaType === 'previous-post' && item.previousPostUrl?.startsWith('http')
+            ? item.previousPostUrl   // 체이닝된 이전글 URL → CTA 버튼에도 반영
+            : item.ctaUrl,           // 기존 커스텀 CTA URL
+          ctaText: item.ctaType === 'previous-post' && item.previousPostUrl
+            ? (item.previousPostTitle && !item.ctaText?.startsWith('📖') ? `📖 추천 글: ${item.previousPostTitle}` : item.ctaText)
+            : item.ctaText,
           // ✅ ctaType에 따른 skipCta 및 ctas 설정
           skipCta: item.ctaType === 'none',
           ctas: item.ctaType === 'custom' && item.ctaUrl ? [{
@@ -3558,9 +3567,12 @@ async function startContinuousPublishingV2(): Promise<void> {
           autoBannerGenerate, // ✅ [2026-01-21] 배너 자동 생성 옵션
           customBannerPath: (window as any).customBannerPath || undefined, // ✅ [2026-02-19] 커스텀 배너 경로 추가
           // ✅ [2026-02-09 FIX] ctaType 전달 — 이전글 자동 검색 조건에 필수
-          // executeFullAutoFlow L23996: isPreviousPostMode = formData.ctaType === 'previous-post'
           ctaType: item.ctaType || 'none',
-          // ✅ [2026-02-09 FIX] 이전글 정보 (executeFullAutoFlow에서 동적으로 찾지만 초기값도 전달)
+          // ✅ [2026-03-20 FIX] ctaUrl: autoLinkPreviousPost 자동검색 스킵 판단용
+          ctaUrl: item.ctaType === 'previous-post' && item.previousPostUrl
+            ? item.previousPostUrl
+            : (item.ctaUrl || undefined),
+          // ✅ previousPostUrl: 네이버 에디터 "이전글 엮기" UI에 사용
           previousPostUrl: item.previousPostUrl || undefined,
           previousPostTitle: item.previousPostTitle || undefined,
           // ✅ [2026-03-12 FIX] thumbnailOnly 설정 전달 (localStorage에서 읽어 fullAutoFlow에 전달)
@@ -3579,6 +3591,32 @@ async function startContinuousPublishingV2(): Promise<void> {
       item.status = 'completed';
       successCount++;
       appendLog(`✅ 완료: ${item.value.substring(0, 30)}... (${modeLabel})`);
+
+      // ✅ [2026-03-20 FIX] 이전글 체이닝: 발행 성공 후 방금 발행한 URL을 다음 아이템에 전달
+      // - 글 선택 안 하면: 첫 글 → 카테고리 최신 발행글 엮기(autoLinkPreviousPost), 2번째부터 → 방금 발행한 글
+      // - 글 선택하면: 첫 글 → 선택한 글, 2번째부터 → 방금 발행한 글
+      if (item.ctaType === 'previous-post') {
+        try {
+          // 방금 발행한 글의 URL을 currentPostId로부터 가져오기
+          const recentPosts = loadAllGeneratedPosts();
+          const justPublished = recentPosts.find((p: any) => p.id === currentPostId && p.publishedUrl);
+          const justPublishedUrl = justPublished?.publishedUrl || '';
+          if (justPublishedUrl) {
+            // 다음 pending 아이템 중 ctaType='previous-post'인 첫 번째에만 전달
+            const nextPendingIdx = continuousQueueV2.findIndex(
+              (it, idx) => idx > i && it.status === 'pending' && it.ctaType === 'previous-post'
+            );
+            if (nextPendingIdx >= 0) {
+              continuousQueueV2[nextPendingIdx].previousPostUrl = justPublishedUrl;
+              continuousQueueV2[nextPendingIdx].previousPostTitle = finalStructuredContent?.selectedTitle || '이전 글';
+              console.log(`[Continuous] 🔗 이전글 체이닝: 대기열[${nextPendingIdx}]에 URL 전달 → ${justPublishedUrl}`);
+              appendLog(`🔗 이전글 체이닝: 다음 글에 방금 발행한 URL을 전달합니다.`);
+            }
+          }
+        } catch (chainErr) {
+          console.warn('[Continuous] 이전글 체이닝 오류 (무시 가능):', chainErr);
+        }
+      }
 
       updateContinuousProgressModal({
         success: successCount,

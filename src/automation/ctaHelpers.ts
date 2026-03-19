@@ -9,6 +9,15 @@ import { Frame, Page } from 'puppeteer';
 import { safeKeyboardType } from './typingUtils.js';
 import { generateCtaBannerImage } from '../image/tableImageGenerator.js';
 
+// ✅ [2026-03-20] 이전글 후킹 문구 공유 상수 (editorHelpers에서도 import하여 사용)
+export const PREV_POST_HOOKS = [
+  '✨ 이런 글도 많이 봤어요!',
+  '📚 다음 글도 궁금하다면?',
+  '🔥 이 글도 인기 있어요!',
+  '💡 맛있게 읽었다면 이것도!',
+  '👀 놓치면 아까운 추천 글!',
+] as const;
+
 // ========== CTA 삽입 확인 ==========
 
 export async function verifyCtaInsertion(self: any, frame: any, ctaText: string): Promise<boolean> {
@@ -180,38 +189,10 @@ export async function insertEnhancedCta(
         self.log(`   ⏳ 링크 카드 로딩 대기 중...`);
         await self.waitForLinkCard(15000, 500);
 
-        // ✅ 6. 이전글 제목 + 링크 삽입 (구분선 포함)
+        // ✅ [2026-03-20] 이전글 삽입은 editorHelpers.ts에서 일원화 처리 (이중 삽입 방지)
+        // insertEnhancedCta에서는 CTA 배너+텍스트만 담당, 이전글은 editorHelpers에서 삽입
         if (previousPostTitle && previousPostUrl) {
-            self.log(`🔗 [이전글] 같은 카테고리 이전글 삽입 중: "${previousPostTitle}"`);
-
-            // ✅ 이전글 전 구분선 삽입
-            const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-            await page.keyboard.press('Enter');
-            await safeKeyboardType(page, divider, { delay: 5 });
-            await page.keyboard.press('Enter');
-
-            // ✅ [2026-01-23 FIX] 후킹 문구 + 이전글 제목
-            const prevPostHooks = [
-                '✨ 이런 글도 많이 봤어요!',
-                '📚 다음 글도 궁금하다면?',
-                '🔥 이 글도 인기 있어요!',
-                '💡 맛있게 읽었다면 이것도!',
-                '👀 놓치면 아까운 추천 글!',
-            ];
-            const randomPrevHook = prevPostHooks[Math.floor(Math.random() * prevPostHooks.length)];
-            await safeKeyboardType(page, randomPrevHook, { delay: 10 });
-            await page.keyboard.press('Enter');
-            await safeKeyboardType(page, `📖 ${previousPostTitle}`, { delay: 10 });
-            await page.keyboard.press('Enter');
-            await safeKeyboardType(page, `👉 ${previousPostUrl}`, { delay: 10 });
-            await page.keyboard.press('Enter');
-            self.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook})`);
-
-            // ✅ 7. [신규] 이전글 링크 카드 로딩 대기 (polling 방식)
-            self.log(`   ⏳ 이전글 카드 로딩 대기 중...`);
-            await self.waitForLinkCard(15000, 500);
-        } else {
-            self.log(`   ℹ️ 이전글 정보 없음 - 건너뜀`);
+            self.log(`   ℹ️ 이전글 정보 있음 ("${previousPostTitle}") — editorHelpers에서 삽입 예정`);
         }
 
         // ✅ [2026-01-18 수정] 해시태그는 본문 작성 후 별도로 삽입됨 (6291행)

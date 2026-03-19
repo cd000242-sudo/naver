@@ -4564,19 +4564,9 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
           const models = resp.data?.data || [];
           const gptModels = models.filter((m: any) => m.id?.includes('gpt')).length;
 
-          // 잔액 조회 시도 (비공식 — 실패해도 무시)
-          let creditInfo = { remaining: '', total: '' };
-          try {
-            const billingResp = await axios.get('https://api.openai.com/dashboard/billing/credit_grants', {
-              headers: { 'Authorization': `Bearer ${key}` },
-              timeout: 8000,
-            });
-            const grants = billingResp.data;
-            if (grants?.total_granted !== undefined) {
-              creditInfo.total = `$${Number(grants.total_granted).toFixed(2)}`;
-              creditInfo.remaining = `$${Number(grants.total_available || 0).toFixed(2)}`;
-            }
-          } catch { /* 잔액 API 미지원 키 — 무시 */ }
+          // ✅ [2026-03-20] OpenAI는 공식 잔액 API가 없음 (billing/credit_grants 폐기됨)
+          // 앱 내 누적 사용량만 표시, 정확한 잔액은 대시보드에서 확인
+          const creditInfo = { remaining: '', total: '' };
 
           return {
             success: true,
@@ -4610,10 +4600,15 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
             timeout: 15000,
           });
           const model = resp.data?.model || 'claude-3-haiku';
+
+          // ✅ [2026-03-20] Anthropic은 API 키로 잔액 조회 불가 (세션 쿠키 필요)
+          // 앱 내 누적 사용량만 표시, 정확한 잔액은 대시보드에서 확인
+          const creditInfo = { remaining: '', total: '' };
+
           return {
             success: true,
             details: `Claude API 연결 성공 | 모델: ${model}`,
-            balance: makeBalanceObj(),
+            balance: makeBalanceObj(creditInfo),
           };
         } catch (err: any) {
           const status = err?.response?.status;
@@ -4621,7 +4616,7 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
             return { success: false, message: 'API 키가 유효하지 않습니다. 키를 확인해주세요.' };
           }
           if (status === 429) {
-            return { success: true, details: 'API 키 유효 (현재 요청 한도 초과)', balance: makeBalanceObj() };
+            return { success: true, details: 'API 키 유효 (현재 요청 한도 초과)', balance: makeBalanceObj({ remaining: '대시보드 확인' }) };
           }
           return { success: false, message: `Claude 연결 실패: ${err?.message || '알 수 없는 오류'}` };
         }
@@ -4635,18 +4630,28 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
           });
           const models = resp.data?.data || [];
 
-          // ✅ DeepInfra 잔액 조회 시도
+          // ✅ [2026-03-20] DeepInfra 잔액 조회 — 다양한 응답 필드 탐색
           let creditInfo = { remaining: '', total: '' };
           try {
             const billingResp = await axios.get('https://api.deepinfra.com/v1/api_token/me', {
               headers: { 'Authorization': `Bearer ${key}` },
               timeout: 8000,
             });
-            const credits = billingResp.data?.credits;
-            if (credits !== undefined && credits !== null) {
-              creditInfo.remaining = `$${Number(credits).toFixed(2)}`;
+            const d = billingResp.data || {};
+            console.log('[DeepInfra] /v1/api_token/me 응답 필드:', Object.keys(d));
+            // 다양한 필드명 탐색 (공식 미문서화)
+            const remaining = d.credits ?? d.balance ?? d.remaining_credits ?? d.credit_balance;
+            const total = d.max_credits ?? d.total_credits ?? d.topped_up_credits;
+            if (remaining !== undefined && remaining !== null) {
+              creditInfo.remaining = `$${Number(remaining).toFixed(2)}`;
             }
-          } catch { /* 잔액 API 미지원 — 무시 */ }
+            if (total !== undefined && total !== null) {
+              creditInfo.total = `$${Number(total).toFixed(2)}`;
+            }
+          } catch (billingErr: any) {
+            console.log('[DeepInfra] 잔액 API 조회 실패:', billingErr?.response?.status || billingErr?.message);
+            // 폴백 없음 — 앱 내 누적 사용량만 표시
+          }
 
           return {
             success: true,

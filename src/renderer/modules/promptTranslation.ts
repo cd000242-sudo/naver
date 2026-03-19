@@ -9,6 +9,10 @@ import { generateEnglishPromptForHeadingSync } from './headingImageGen.js';
 // ✅ 번역 캐시 (최대 100개, 모든 모델 공유)
 export const _promptTranslationCache = new Map<string, string>();
 
+// ✅ [2026-03-20] 세션 내 실패 카운터 — 3회 연속 실패 시 해당 모델 건너뛰기
+const _modelFailureCount = new Map<string, number>();
+const MAX_CONSECUTIVE_FAILURES = 3;
+
 // ✅ 공통 번역 프롬프트 (모든 AI 모델에 동일 적용)
 export function getTranslationPrompt(headingText: string, imageStyle?: string, contentContext?: string): string {
     // ✅ [2026-02-26] 스타일별 AI 프롬프트 생성 가이드 (카메라 앵글/색감은 제너레이터 다양성 시스템이 추가)
@@ -504,6 +508,12 @@ export async function generateEnglishPromptForHeading(heading: any, baseKeywords
     }
 
     for (const { name, fn } of aiTranslators) {
+        // ✅ [2026-03-20] 실패 카운터 체크 — 3회 연속 실패 시 세션 내 건너뛰기
+        const failures = _modelFailureCount.get(name) || 0;
+        if (failures >= MAX_CONSECUTIVE_FAILURES) {
+            continue; // 해당 모델은 이 세션에서 비활성
+        }
+
         try {
             const result = await fn(headingTitle, imageStyle, resolvedContext);
             if (result) {
@@ -511,9 +521,13 @@ export async function generateEnglishPromptForHeading(heading: any, baseKeywords
                 const sanitized = sanitizeAIPromptResponse(result);
                 console.log(`[PromptTranslation] ✅ ${name} 성공 [${imageStyle}]: "${headingTitle}" → "${sanitized.substring(0, 50)}..."`);
                 cacheTranslation(cacheKey, sanitized);
+                _modelFailureCount.set(name, 0); // 성공 시 카운터 리셋
                 return sanitized;
             }
+            // null 반환 = API 키 없음 또는 응답 실패 → 실패 카운트 증가
+            _modelFailureCount.set(name, failures + 1);
         } catch (err) {
+            _modelFailureCount.set(name, failures + 1);
             console.warn(`[PromptTranslation] ${name} 실패:`, err);
         }
     }

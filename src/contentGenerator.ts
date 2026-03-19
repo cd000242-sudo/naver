@@ -8229,7 +8229,7 @@ export async function generateStructuredContent(
             if (hasOpenAI) {
               provider = 'openai';
               networkErrorCount = 0;
-              console.log('🚀 [Fallback] Gemini 타임아웃 → OpenAI(gpt-5.4)로 즉시 전환합니다.');
+              console.log('🚀 [Fallback] Gemini 타임아웃 → OpenAI로 즉시 전환합니다.');
               continue;
             } else if (hasClaude) {
               provider = 'claude';

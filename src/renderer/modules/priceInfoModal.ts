@@ -272,11 +272,19 @@ export async function initPriceInfoModal(): Promise<void> {
               html += `<div style="display:flex;justify-content:space-between;"><span style="color:#cbd5e1;">이미지</span><span>${b.totalImages.toLocaleString()}장</span></div>`;
             }
 
-            // 대시보드 링크
+            // 대시보드 링크 + 잔액 미표시 시 안내
             if (b.dashboardUrl) {
-              html += `<div style="margin-top:8px;text-align:center;">`;
-              html += `<a href="#" onclick="window.api?.openExternalUrl?.('${b.dashboardUrl}');return false;" style="color:#818cf8;text-decoration:none;font-size:11.5px;">🔗 정확한 잔액은 대시보드에서 확인 →</a>`;
-              html += `</div>`;
+              if (!hasRemaining) {
+                // 잔액 조회 불가 시 — 눈에 띄는 버튼 스타일 링크
+                html += `<div style="margin-top:10px;text-align:center;">`;
+                html += `<div style="font-size:10.5px;color:#64748b;margin-bottom:6px;">⚠️ 이 제공자는 API로 잔액 조회를 지원하지 않습니다</div>`;
+                html += `<a href="#" onclick="window.api?.openExternalUrl?.('${b.dashboardUrl}');return false;" style="display:inline-block;padding:6px 16px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);border-radius:6px;color:#a5b4fc;text-decoration:none;font-size:12px;font-weight:600;transition:all 0.2s;" onmouseover="this.style.background='rgba(99,102,241,0.25)'" onmouseout="this.style.background='rgba(99,102,241,0.15)'" >🔗 대시보드에서 잔액 확인</a>`;
+                html += `</div>`;
+              } else {
+                html += `<div style="margin-top:8px;text-align:center;">`;
+                html += `<a href="#" onclick="window.api?.openExternalUrl?.('${b.dashboardUrl}');return false;" style="color:#818cf8;text-decoration:none;font-size:11.5px;">🔗 대시보드에서 상세 확인 →</a>`;
+                html += `</div>`;
+              }
             }
 
             html += `</div>`;

@@ -3399,6 +3399,27 @@ export async function initMultiAccountPublishModal() {
             addMALog(`✅ ${queueItem.accountName}: 발행 성공!`, 'success');
             addProgressItem(`✅ [${i + 1}/${totalItems}] ${queueItem.accountName}: 발행 성공!`, 'success');
             totalSuccess++;
+
+            // ✅ [2026-03-20 FIX] 이전글 체이닝: 다중계정 발행 시 방금 발행한 URL을 다음 아이템에 전달
+            // 첫 글 → 선택한 글 또는 카테고리 최신글, 2번째부터 → 방금 발행한 글
+            // ⚠️ 크로스계정 방지: 같은 계정(accountName)의 다음 아이템에만 체이닝
+            // (A계정 발행글이 B계정에 엮이는 것을 방지)
+            if (queueItem.ctaType === 'previous-post' && publishedUrl) {
+              for (let j = i + 1; j < publishQueue.length; j++) {
+                const nextItem = publishQueue[j];
+                if (nextItem.ctaType === 'previous-post' && nextItem.accountName === queueItem.accountName) {
+                  const validChainUrl = publishedUrl.startsWith('http') ? publishedUrl : '';
+                  (nextItem as any).ctaUrl = validChainUrl;
+                  (nextItem as any).ctaLink = validChainUrl;  // ✅ [2026-03-20 FIX] ctaLink도 동기화
+                  (nextItem as any).ctaText = `📖 추천 글: ${structuredContent?.selectedTitle || '이전 글'}`;
+                  (nextItem as any).previousPostUrl = validChainUrl;
+                  (nextItem as any).previousPostTitle = structuredContent?.selectedTitle || '이전 글';
+                  console.log(`[FullAuto] 🔗 이전글 체이닝: 대기열[${j}] (${nextItem.accountName})에 URL 전달 → ${publishedUrl}`);
+                  addMALog(`🔗 이전글 체이닝: ${nextItem.accountName}의 다음 항목에 방금 발행한 URL 전달`, 'info');
+                  break; // 같은 계정의 바로 다음 아이템 1개만
+                }
+              }
+            }
           } else {
             throw new Error(result.results?.[0]?.message || '발행 실패');
           }

@@ -105,6 +105,19 @@ declare const headingVideoPreviewCache: Map<string, any>;
 declare const headingVideoPreviewInFlight: Map<string, any>;
 
 // ✅ [2026-03-05] 이전글 엮기 공통 함수 — 모든 발행 모드에서 동일하게 사용
+/**
+ * 이전글 자동 엮기 — 같은 계정+카테고리의 이전 발행글을 찾아 formData에 설정
+ *
+ * ⚠️ CTA 관련 3개 필드 역할 구분:
+ *   - formData.ctaUrl:         이 함수의 자동검색 스킵 판단용 (비어있으면 검색 실행)
+ *   - formData.ctaLink:        executeBlogPublishing에서 CTA 버튼 렌더링에 사용
+ *   - formData.previousPostUrl: 네이버 에디터의 "이전글 엮기" UI 기능에 사용 (IPC payload로 전달)
+ *
+ * ctaType='previous-post'일 때 3개 필드 모두 같은 이전글 URL을 가져야 완전한 동작:
+ *   1) ctaUrl → autoLinkPreviousPost 자동검색 스킵
+ *   2) ctaLink → 본문 CTA 버튼에 이전글 링크 표시
+ *   3) previousPostUrl → 네이버 에디터에서 이전글 카드 삽입
+ */
 function autoLinkPreviousPost(formData: any, modal?: any): void {
   appendLog(`🔗 이전글 자동 엮기: 같은 계정+카테고리의 이전 발행글 찾기 시작...`);
 
@@ -131,7 +144,10 @@ function autoLinkPreviousPost(formData: any, modal?: any): void {
 
   // ✅ CTA 이전글 엮기 (ctaType === 'previous-post' 일 때)
   const canAutoLink = formData.ctaType === 'previous-post';
-  const needsLinkLookup = !formData.ctaUrl || formData.ctaUrl.trim() === '' || isContinuousMode;
+  // ✅ [2026-03-20 FIX] isContinuousMode 강제검색 제거
+  // 기존: 연속발행 시 항상 자동검색하여 사용자 선택/체이닝 URL 무시
+  // 수정: ctaUrl이 있으면(사용자 선택 또는 이전 발행에서 체이닝) 자동검색 스킵
+  const needsLinkLookup = !formData.ctaUrl || formData.ctaUrl.trim() === '';
 
   if (canAutoLink && needsLinkLookup) {
     // 같은 카테고리의 최신 발행글 찾기
@@ -151,7 +167,11 @@ function autoLinkPreviousPost(formData: any, modal?: any): void {
 
     const prevPost = prevPosts[0];
     if (prevPost) {
-      formData.ctaUrl = prevPost.publishedUrl;
+      // ✅ [2026-03-20 FIX] 3개 필드 동기화 — ctaUrl + ctaLink + previousPostUrl 모두 설정
+      // ⚠️ URL 유효성 검증: http(s)로 시작하는 유효한 URL만 세팅 (빈 문자열/undefined 방지)
+      const validUrl = prevPost.publishedUrl && prevPost.publishedUrl.startsWith('http') ? prevPost.publishedUrl : '';
+      formData.ctaUrl = validUrl;                      // autoLinkPreviousPost 자동검색 스킵용
+      if (validUrl) formData.ctaLink = validUrl;       // CTA 버튼 렌더링용 (유효한 URL만)
       formData.previousPostTitle = prevPost.title || '이전 글 보기';
       if (!formData.ctaText || formData.ctaText.startsWith('📖')) {
         formData.ctaText = `📖 추천 글: ${prevPost.title}`;
