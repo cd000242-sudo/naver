@@ -1,6 +1,8 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import crypto from 'crypto';
+import { getProxyUrl, isProxyEnabled } from '../crawler/utils/proxyManager.js';
+import { BestProductCollector } from '../services/bestProductCollector.js';
 
 // ✅ 키워드 경쟁도 분석 결과 타입
 export type KeywordCompetition = {
@@ -59,6 +61,40 @@ export class KeywordAnalyzer {
   private cacheExpiry = 30 * 60 * 1000; // 30분 캐시
   private naverAdConfig: NaverAdApiConfig | null = null;
   private naverSearchConfig: NaverSearchApiConfig | null = null;
+  private bestProductCollector: BestProductCollector = new BestProductCollector();
+
+  // ✅ [2026-03-20] 프록시 적용 axios 설정 헬퍼
+  private async getAxiosConfig(extraHeaders?: Record<string, string>): Promise<Record<string, any>> {
+    const config: Record<string, any> = {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+        ...extraHeaders,
+      },
+      timeout: 15000,
+    };
+
+    // ✅ SmartProxy 적용 (활성 시)
+    if (isProxyEnabled()) {
+      const proxyUrl = await getProxyUrl();
+      if (proxyUrl) {
+        // axios proxy 설정으로 변환
+        const url = new URL(proxyUrl);
+        config.proxy = {
+          host: url.hostname,
+          port: parseInt(url.port),
+          auth: {
+            username: decodeURIComponent(url.username),
+            password: decodeURIComponent(url.password),
+          },
+          protocol: url.protocol.replace(':', ''),
+        };
+      }
+    }
+
+    return config;
+  }
 
   // ✅ 네이버 검색 API 설정
   setNaverSearchConfig(config: NaverSearchApiConfig): void {
@@ -394,17 +430,11 @@ export class KeywordAnalyzer {
       }
     }
 
-    // 2. 스크래핑 폴백
+    // 2. 스크래핑 폴백 (프록시 적용)
     try {
       const url = `https://search.naver.com/search.naver?where=blog&query=${encodeURIComponent(keyword)}`;
-      const response = await axios.get(url, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-          'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-        },
-        timeout: 10000,
-      });
+      const axiosConfig = await this.getAxiosConfig();
+      const response = await axios.get(url, axiosConfig);
 
       const $ = cheerio.load(response.data);
       
@@ -463,12 +493,8 @@ export class KeywordAnalyzer {
   }> {
     try {
       const url = `https://search.naver.com/search.naver?where=news&query=${encodeURIComponent(keyword)}`;
-      const response = await axios.get(url, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        },
-        timeout: 10000,
-      });
+      const axiosConfig = await this.getAxiosConfig();
+      const response = await axios.get(url, axiosConfig);
 
       const $ = cheerio.load(response.data);
       
@@ -503,12 +529,8 @@ export class KeywordAnalyzer {
   private async fetchRelatedKeywords(keyword: string): Promise<string[]> {
     try {
       const url = `https://search.naver.com/search.naver?where=nexearch&query=${encodeURIComponent(keyword)}`;
-      const response = await axios.get(url, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        },
-        timeout: 10000,
-      });
+      const axiosConfig = await this.getAxiosConfig();
+      const response = await axios.get(url, axiosConfig);
 
       const $ = cheerio.load(response.data);
       const related: string[] = [];
@@ -765,9 +787,6 @@ export class KeywordAnalyzer {
           }
           
           // ✅ 블루오션 필터링 조건 (엄격)
-          // 1. 검색량 500회 이상
-          // 2. 문서량 10만 이하
-          // 3. 점수 50 이상
           const hasSearchVolume = monthlySearchVolume >= 500;
           const hasLowCompetition = blogCount <= 100000;
           const hasGoodScore = blueOceanScore >= 50;
@@ -836,112 +855,153 @@ export class KeywordAnalyzer {
     this.cache.clear();
   }
 
-  // ✅ 자동 블루오션 키워드 발견 (입력 없이 트렌드 기반)
+  // ✅ [2026-03-20] 쇼핑커넥트 수익형 상품 키워드 발견
+  // 라이프스타일 인기상품 크롤링 → 상품명 블로그 경쟁도 분석 → 고수익 저경쟁 상품 키워드 선별
   async discoverBlueOceanKeywords(count: number = 10): Promise<BlueOceanKeyword[]> {
     const results: BlueOceanKeyword[] = [];
     
     try {
-      console.log('[KeywordAnalyzer] 🔍 자동 블루오션 키워드 발견 시작...');
+      console.log('[KeywordAnalyzer] 🛒 쇼핑커넥트 수익형 상품 키워드 발견 시작...');
       
-      // 1. 네이버 실시간 트렌드 키워드 수집
-      const trendKeywords = await this.fetchTrendKeywords();
-      console.log(`[KeywordAnalyzer] 트렌드 키워드 ${trendKeywords.length}개 수집`);
+      // ═══════════════════════════════════════════
+      // 1단계: 고가 라이프스타일 상품 키워드 수집 (2가지 소스)
+      // ═══════════════════════════════════════════
+      const productKeywords: string[] = [];
       
-      if (trendKeywords.length === 0) {
-        console.log('[KeywordAnalyzer] 트렌드 키워드가 없습니다');
-        return [];
+      // ✅ 소스 A: BestProductCollector 인기상품 (식품 제외, 라이프스타일만)
+      const lifestyleCategories = ['digital', 'living', 'beauty', 'fashion', 'sports'];
+      const selectedCats = lifestyleCategories.sort(() => Math.random() - 0.5).slice(0, 2);
+      
+      for (const catId of selectedCats) {
+        try {
+          const result = await this.bestProductCollector.fetchNaverBest(catId, 15, false);
+          if (result.success && result.products.length > 0) {
+            for (const product of result.products) {
+              if (product.name && product.name.length >= 3) {
+                // 식품/과자 필터링
+                if (this.isFoodItem(product.name)) continue;
+                
+                if (product.name.length <= 25) {
+                  productKeywords.push(product.name);
+                }
+                const words = product.name.split(/[\s/\[\]()·,]+/).filter((w: string) => w.length >= 2 && w.length <= 12);
+                if (words.length >= 2) {
+                  productKeywords.push(words.slice(0, 3).join(' '));
+                }
+              }
+            }
+            console.log(`[KeywordAnalyzer] 🛒 ${result.categoryName}: ${result.products.length}개 상품`);
+          }
+        } catch { /* skip */ }
       }
       
-      // 2. 각 트렌드 키워드의 연관 키워드 수집 및 분석
-      for (const trendKw of trendKeywords.slice(0, 10)) {
-        await sleep(500); // API 부하 방지
+      // ✅ 소스 B: 네이버 쇼핑 인기 상품 검색 (나혼산/SNS 바이럴 상품류)
+      const trendingProductQueries = this.getLifestyleProductQueries();
+      const selectedQueries = trendingProductQueries.sort(() => Math.random() - 0.5).slice(0, 3);
+      
+      for (const query of selectedQueries) {
+        try {
+          const shopKeywords = await this.searchNaverShoppingProducts(query);
+          productKeywords.push(...shopKeywords);
+          console.log(`[KeywordAnalyzer] 🔍 쇼핑검색 "${query}": ${shopKeywords.length}개`);
+        } catch { /* skip */ }
+        await sleep(300);
+      }
+      
+      // 중복 제거 + 셔플
+      const uniqueProducts = [...new Set(productKeywords)].sort(() => Math.random() - 0.5);
+      console.log(`[KeywordAnalyzer] 📦 총 상품 키워드 후보: ${uniqueProducts.length}개`);
+      
+      if (uniqueProducts.length === 0) {
+        console.log('[KeywordAnalyzer] ⚠️ 상품 키워드 0개 — 일반 트렌드 폴백');
+        return await this.discoverBlueOceanKeywordsFallback(count);
+      }
+      
+      // ═══════════════════════════════════════════
+      // 2단계: 각 상품 키워드의 블로그 경쟁도 분석
+      // ═══════════════════════════════════════════
+      console.log('[KeywordAnalyzer] 📊 상품 키워드 경쟁도 분석 시작...');
+      
+      for (const keyword of uniqueProducts.slice(0, 20)) {
+        await sleep(400); // API 부하 방지
         
         try {
-          // 연관 키워드 수집
-          const relatedKeywords = await this.fetchRelatedKeywords(trendKw);
+          const analysis = await this.analyzeKeyword(keyword);
           
-          // 각 연관 키워드 분석
-          for (const keyword of relatedKeywords.slice(0, 5)) {
-            await sleep(300);
-            
-            try {
-              const analysis = await this.analyzeKeyword(keyword);
-              
-              let monthlySearchVolume = 0;
-              if (analysis.naverAdData) {
-                monthlySearchVolume = analysis.naverAdData.monthlyPcQcCnt + analysis.naverAdData.monthlyMobileQcCnt;
-              }
-              
-              const blogCount = analysis.blogCount || 0;
-              
-              // ✅ 황금키워드 점수 계산 (검색량↑ 문서량↓)
-              let blueOceanScore = 0;
-              
-              if (monthlySearchVolume > 0) {
-                // 1. 문서량 기반 점수 (낮을수록 높음) - 최대 60점
-                if (blogCount <= 100) {
-                  blueOceanScore = 60; // 🔥 초황금
-                } else if (blogCount <= 500) {
-                  blueOceanScore = 55;
-                } else if (blogCount <= 1000) {
-                  blueOceanScore = 50;
-                } else if (blogCount <= 5000) {
-                  blueOceanScore = 40;
-                } else if (blogCount <= 10000) {
-                  blueOceanScore = 30;
-                } else if (blogCount <= 50000) {
-                  blueOceanScore = 20;
-                } else if (blogCount <= 100000) {
-                  blueOceanScore = 10;
-                } else {
-                  blueOceanScore = 0;
-                }
-                
-                // 2. 검색량 기반 보너스 - 최대 40점
-                if (monthlySearchVolume >= 100000) {
-                  blueOceanScore += 40;
-                } else if (monthlySearchVolume >= 50000) {
-                  blueOceanScore += 35;
-                } else if (monthlySearchVolume >= 10000) {
-                  blueOceanScore += 30;
-                } else if (monthlySearchVolume >= 5000) {
-                  blueOceanScore += 25;
-                } else if (monthlySearchVolume >= 1000) {
-                  blueOceanScore += 20;
-                } else if (monthlySearchVolume >= 500) {
-                  blueOceanScore += 10;
-                }
-                
-                blueOceanScore = Math.min(100, blueOceanScore);
-              }
-              
-              // 블루오션 조건: 검색량 500+, 문서량 10만 이하, 점수 50+
-              const hasSearchVolume = monthlySearchVolume >= 500;
-              const hasLowCompetition = blogCount <= 100000;
-              const hasGoodScore = blueOceanScore >= 50;
-              
-              if (hasSearchVolume && hasLowCompetition && hasGoodScore) {
-                // 중복 체크
-                if (!results.find(r => r.keyword === keyword)) {
-                  results.push({
-                    keyword,
-                    score: Math.round(blueOceanScore),
-                    searchVolume: monthlySearchVolume > 0 
-                      ? `${monthlySearchVolume.toLocaleString()}회/월` 
-                      : analysis.searchVolume,
-                    competition: blogCount > 0 
-                      ? `${blogCount.toLocaleString()}개` 
-                      : analysis.competition,
-                    reason: this.generateBlueOceanReason(analysis, monthlySearchVolume, blogCount),
-                  });
-                }
-              }
-            } catch (err) {
-              // 개별 키워드 분석 실패는 무시
+          let monthlySearchVolume = 0;
+          if (analysis.naverAdData) {
+            monthlySearchVolume = analysis.naverAdData.monthlyPcQcCnt + analysis.naverAdData.monthlyMobileQcCnt;
+          }
+          
+          const blogCount = analysis.blogCount || 0;
+          
+          // ✅ 쇼핑커넥트 수익형 점수 계산
+          let score = 0;
+          
+          // 1. 문서량 기반 점수 (경쟁 낮을수록 높음) - 최대 50점
+          if (blogCount <= 100) {
+            score = 50; // 🔥 초황금: 거의 아무도 안 씀
+          } else if (blogCount <= 500) {
+            score = 45;
+          } else if (blogCount <= 1000) {
+            score = 40;
+          } else if (blogCount <= 5000) {
+            score = 35;
+          } else if (blogCount <= 10000) {
+            score = 25;
+          } else if (blogCount <= 50000) {
+            score = 15;
+          } else if (blogCount <= 100000) {
+            score = 5;
+          }
+          
+          // 2. 검색량 기반 보너스 (수요 높을수록 좋음) - 최대 30점
+          if (monthlySearchVolume >= 50000) {
+            score += 30;
+          } else if (monthlySearchVolume >= 10000) {
+            score += 25;
+          } else if (monthlySearchVolume >= 5000) {
+            score += 20;
+          } else if (monthlySearchVolume >= 1000) {
+            score += 15;
+          } else if (monthlySearchVolume >= 500) {
+            score += 10;
+          } else if (monthlySearchVolume >= 100) {
+            score += 5;
+          }
+          
+          // 3. 검색량/문서량 비율 보너스 (수요 대비 경쟁 낮을수록) - 최대 20점
+          if (monthlySearchVolume > 0 && blogCount > 0) {
+            const ratio = monthlySearchVolume / blogCount;
+            if (ratio >= 10) score += 20;       // 검색 10배 > 문서
+            else if (ratio >= 5) score += 15;
+            else if (ratio >= 2) score += 10;
+            else if (ratio >= 1) score += 5;
+          }
+          
+          score = Math.min(100, score);
+          
+          // ✅ 수익형 상품 키워드 조건 (일반 키워드보다 기준 완화)
+          // 쇼핑 상품은 검색량 100+만 되어도 가치 있음 (구매 의도 높음)
+          const isGoodProduct = score >= 30 && (monthlySearchVolume >= 100 || blogCount <= 500);
+          
+          if (isGoodProduct) {
+            if (!results.find(r => r.keyword === keyword)) {
+              results.push({
+                keyword,
+                score: Math.round(score),
+                searchVolume: monthlySearchVolume > 0 
+                  ? `${monthlySearchVolume.toLocaleString()}회/월` 
+                  : analysis.searchVolume,
+                competition: blogCount > 0 
+                  ? `${blogCount.toLocaleString()}개` 
+                  : analysis.competition,
+                reason: this.generateProductKeywordReason(keyword, monthlySearchVolume, blogCount, score),
+              });
             }
           }
-        } catch (err) {
-          // 트렌드 키워드 분석 실패는 무시
+        } catch {
+          // 개별 분석 실패 무시
         }
         
         // 충분한 결과가 모이면 중단
@@ -951,115 +1011,443 @@ export class KeywordAnalyzer {
       // 점수순 정렬
       results.sort((a, b) => b.score - a.score);
       
-      console.log(`[KeywordAnalyzer] ✅ 자동 발견 블루오션 키워드 ${results.length}개`);
+      console.log(`[KeywordAnalyzer] ✅ 쇼핑커넥트 수익형 상품 키워드 ${results.length}개 발견`);
       
       return results.slice(0, count);
     } catch (error) {
-      console.error('[KeywordAnalyzer] 자동 블루오션 키워드 발견 실패:', error);
+      console.error('[KeywordAnalyzer] 상품 키워드 발견 실패:', error);
       return [];
     }
   }
 
-  // ✅ 네이버 트렌드 키워드 수집 (실시간 검색어 / 쇼핑 트렌드)
+  // ✅ 수익형 상품 키워드 추천 이유 생성
+  private generateProductKeywordReason(keyword: string, searchVolume: number, blogCount: number, score: number): string {
+    const parts: string[] = [];
+    
+    if (blogCount <= 100) {
+      parts.push('🔥 초저경쟁 (문서 100개 이하)');
+    } else if (blogCount <= 1000) {
+      parts.push('✅ 저경쟁 (문서 1,000개 이하)');
+    } else if (blogCount <= 5000) {
+      parts.push('📊 중저경쟁');
+    }
+    
+    if (searchVolume >= 10000) {
+      parts.push('🚀 고수요 (월 1만+)');
+    } else if (searchVolume >= 1000) {
+      parts.push('📈 수요 양호 (월 1천+)');
+    } else if (searchVolume >= 100) {
+      parts.push('💡 니치 수요');
+    }
+    
+    if (searchVolume > 0 && blogCount > 0) {
+      const ratio = Math.round(searchVolume / blogCount * 10) / 10;
+      if (ratio >= 5) {
+        parts.push(`⭐ 검색/문서 비율 ${ratio}배 (블루오션)`);
+      }
+    }
+    
+    if (score >= 80) {
+      parts.push('💰 글만 써도 수익 보장');
+    } else if (score >= 60) {
+      parts.push('💵 높은 수익 가능성');
+    }
+    
+    return parts.length > 0 ? parts.join(' | ') : '쇼핑커넥트 인기상품';
+  }
+
+  // ✅ 폴백: 일반 트렌드 키워드 기반 블루오션 (상품 크롤링 실패 시)
+  private async discoverBlueOceanKeywordsFallback(count: number): Promise<BlueOceanKeyword[]> {
+    const results: BlueOceanKeyword[] = [];
+    const trendKeywords = await this.fetchTrendKeywords();
+    
+    for (const trendKw of trendKeywords.slice(0, 10)) {
+      await sleep(500);
+      try {
+        const relatedKeywords = await this.fetchRelatedKeywords(trendKw);
+        for (const keyword of relatedKeywords.slice(0, 5)) {
+          await sleep(300);
+          try {
+            const analysis = await this.analyzeKeyword(keyword);
+            let vol = 0;
+            if (analysis.naverAdData) vol = analysis.naverAdData.monthlyPcQcCnt + analysis.naverAdData.monthlyMobileQcCnt;
+            const bc = analysis.blogCount || 0;
+            let s = 0;
+            if (vol > 0) {
+              if (bc <= 100) s = 60; else if (bc <= 500) s = 55; else if (bc <= 1000) s = 50; else if (bc <= 5000) s = 40; else if (bc <= 10000) s = 30; else if (bc <= 50000) s = 20; else s = 10;
+              if (vol >= 10000) s += 30; else if (vol >= 5000) s += 25; else if (vol >= 1000) s += 20; else if (vol >= 500) s += 10;
+              s = Math.min(100, s);
+            }
+            if (s >= 50 && vol >= 500 && bc <= 100000 && !results.find(r => r.keyword === keyword)) {
+              results.push({ keyword, score: s, searchVolume: vol > 0 ? `${vol.toLocaleString()}회/월` : analysis.searchVolume, competition: bc > 0 ? `${bc.toLocaleString()}개` : analysis.competition, reason: this.generateBlueOceanReason(analysis, vol, bc) });
+            }
+          } catch { /* skip */ }
+        }
+      } catch { /* skip */ }
+      if (results.length >= count * 2) break;
+    }
+    results.sort((a, b) => b.score - a.score);
+    return results.slice(0, count);
+  }
+
+  // ✅ 식품/과자 아이템 필터
+  private isFoodItem(name: string): boolean {
+    const foodKeywords = [
+      '떡', '과자', '쿠키', '초콜릿', '빵', '케이크', '젤리', '캔디', '사탕',
+      '라면', '즉석', '간식', '음료', '우유', '커피믹스', '차류', '양념', '소스',
+      '견과', '김', '반찬', '밀키트', '냉동', '통조림', '잼', '꿀', '식빵',
+      '아이스크림', '젤라또', '마카롱', '도넛', '베이커리', '롯데웰푸드', '농심',
+      '오리온', '해태', '크라운', '삼양', '풀무원', '비비고', '햇반'
+    ];
+    const lower = name.toLowerCase();
+    return foodKeywords.some(fw => lower.includes(fw));
+  }
+
+  // ✅ 라이프스타일 상품 검색 쿼리 (나혼산/SNS 바이럴 상품류)
+  private getLifestyleProductQueries(): string[] {
+    const month = new Date().getMonth() + 1;
+    
+    // 계절별 핫 상품 쿼리
+    const seasonalQueries: Record<string, string[]> = {
+      spring: ['봄 가디건', '자외선차단제', '러닝화', '캠핑의자', '원피스'],
+      summer: ['선풍기', '에어컨', '냉감이불', '수영복', '아이스메이커'],
+      fall: ['가을자켓', '무선청소기', '커피머신', '담요', '가습기'],
+      winter: ['전기요', '패딩', '핸드크림', '공기청정기', '어그부츠'],
+    };
+    
+    const season = month >= 3 && month <= 5 ? 'spring' :
+                   month >= 6 && month <= 8 ? 'summer' :
+                   month >= 9 && month <= 11 ? 'fall' : 'winter';
+    
+    // 상시 인기 상품 카테고리
+    const evergreen = [
+      '에어프라이어', '무선청소기', '스팀다리미', '전동칫솔', '마사지건',
+      '블루투스 이어폰', '스마트워치', '태블릿', '노트북 거치대', '모니터',
+      '헤어드라이기', '안마의자', '로봇청소기', '공기청정기', '제습기',
+      '커피머신', '전기포트', '믹서기', '식기세척기', '빔프로젝터',
+      '러닝머신', '요가매트', '아령', '캠핑텐트', '캠핑체어',
+      '향수 추천', '바디로션', '스킨케어', '선크림', '파운데이션',
+      '골프웨어', '운동화 추천', '크로스백', '지갑 추천', '선글라스',
+    ];
+    
+    return [...seasonalQueries[season], ...evergreen.sort(() => Math.random() - 0.5).slice(0, 10)];
+  }
+
+  // ✅ 네이버 쇼핑 검색으로 상품명 키워드 추출
+  private async searchNaverShoppingProducts(query: string): Promise<string[]> {
+    const keywords: string[] = [];
+    try {
+      const config = this.getAxiosConfig();
+      const url = `https://search.shopping.naver.com/search/all?query=${encodeURIComponent(query)}&sort=rel`;
+      const response = await axios.get(url, {
+        ...config,
+        timeout: 10000,
+      });
+      
+      const $ = cheerio.load(response.data);
+      
+      // 상품명 추출 (다양한 셀렉터)
+      const selectors = [
+        '[class*="basicList_title"]',
+        '[class*="product_title"]',
+        '[class*="adProduct_title"]',
+        '.product_link',
+      ];
+      
+      for (const sel of selectors) {
+        $(sel).each((_: number, el: any) => {
+          const name = $(el).text().trim();
+          if (name && name.length >= 4 && name.length <= 30 && !this.isFoodItem(name)) {
+            keywords.push(name);
+          }
+        });
+        if (keywords.length >= 10) break;
+      }
+      
+      // __NEXT_DATA__ 파싱 폴백
+      if (keywords.length === 0) {
+        const nextScript = $('script#__NEXT_DATA__').html();
+        if (nextScript) {
+          try {
+            const data = JSON.parse(nextScript);
+            const products = data?.props?.pageProps?.initialState?.products?.list || [];
+            for (const p of products.slice(0, 15)) {
+              const name = p?.item?.productTitle || '';
+              if (name && name.length >= 4 && name.length <= 30 && !this.isFoodItem(name)) {
+                keywords.push(name);
+              }
+            }
+          } catch { /* skip */ }
+        }
+      }
+    } catch { /* skip */ }
+    return keywords;
+  }
+
+  // ✅ [2026-03-20] 네이버 트렌드 키워드 수집 (다각화 - 5개 소스)
   private async fetchTrendKeywords(): Promise<string[]> {
     const trendKeywords: string[] = [];
     
     try {
-      // 1. 네이버 쇼핑 트렌드 키워드 수집
-      const shoppingTrends = await this.fetchShoppingTrends();
-      trendKeywords.push(...shoppingTrends);
-      
-      // 2. 네이버 데이터랩 인기 검색어 수집
-      const datalabTrends = await this.fetchDatalabTrends();
-      trendKeywords.push(...datalabTrends);
-      
-      // 3. 시즌/계절 키워드 추가
+      // ✅ 병렬로 모든 소스에서 키워드 수집 (속도 최적화)
+      const results = await Promise.allSettled([
+        this.fetchGoogleTrendsKR(),          // 1. Google Trends 한국 RSS (가장 안정적)
+        this.fetchNaverNewsHeadlines(),       // 2. 네이버 뉴스 헤드라인 키워드
+        this.fetchNaverAutocompleteTrends(),  // 3. 네이버 자동완성 인기 키워드
+        this.fetchShoppingTrends(),           // 4. 네이버 쇼핑 트렌드 (프록시로 CAPTCHA 우회)
+      ]);
+
+      for (const result of results) {
+        if (result.status === 'fulfilled' && result.value.length > 0) {
+          trendKeywords.push(...result.value);
+        }
+      }
+
+      console.log(`[KeywordAnalyzer] 소스별 수집 결과: Google=${(results[0] as any).value?.length || 0}, News=${(results[1] as any).value?.length || 0}, AC=${(results[2] as any).value?.length || 0}, Shop=${(results[3] as any).value?.length || 0}`);
+
+      // 5. 확장된 시즌/계절 키워드 추가 (항상 포함)
       const seasonalKeywords = this.getSeasonalKeywords();
       trendKeywords.push(...seasonalKeywords);
       
-      // 중복 제거
-      return [...new Set(trendKeywords)];
+      // 중복 제거 + 셔플
+      const unique = [...new Set(trendKeywords)];
+      // 랜덤 셔플 (Fisher-Yates)
+      for (let i = unique.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [unique[i], unique[j]] = [unique[j], unique[i]];
+      }
+
+      console.log(`[KeywordAnalyzer] ✅ 총 트렌드 키워드 ${unique.length}개 수집 (중복제거 후)`);
+      return unique;
     } catch (error) {
       console.error('[KeywordAnalyzer] 트렌드 키워드 수집 실패:', error);
       return this.getSeasonalKeywords(); // 폴백: 시즌 키워드
     }
   }
 
-  // ✅ 네이버 쇼핑 트렌드 키워드
+  // ✅ [2026-03-20] 쇼핑커넥트 인기상품에서 키워드 추출 (BestProductCollector 연동)
   private async fetchShoppingTrends(): Promise<string[]> {
     try {
-      const response = await axios.get('https://search.shopping.naver.com/best/home', {
-        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
-        timeout: 10000,
-      });
+      // ✅ 네이버 쇼핑 인기상품 크롤링 (기존 bestProductCollector 활용)
+      const categories = ['all', 'fashion', 'beauty', 'food', 'living'];
+      const randomCat = categories[Math.floor(Math.random() * categories.length)];
       
+      const result = await this.bestProductCollector.fetchNaverBest(randomCat, 20, false);
+      
+      if (result.success && result.products.length > 0) {
+        // 상품명에서 핵심 키워드 추출
+        const keywords: string[] = [];
+        for (const product of result.products) {
+          const name = product.name;
+          if (!name || name.length < 3) continue;
+          
+          // 상품명 전체 추가
+          if (name.length <= 20) {
+            keywords.push(name);
+          }
+          
+          // 핵심 단어 추출 (브랜드명, 상품 카테고리 등)
+          const words = name.split(/[\s/\[\]()]+/).filter(w => w.length >= 2 && w.length <= 10);
+          if (words.length >= 2) {
+            keywords.push(words.slice(0, 3).join(' '));
+          }
+        }
+        
+        const unique = [...new Set(keywords)];
+        console.log(`[KeywordAnalyzer] 🛒 쇼핑커넥트 인기상품 키워드 ${unique.length}개 수집 (카테고리: ${randomCat})`);
+        return unique.slice(0, 25);
+      }
+      
+      console.log('[KeywordAnalyzer] 쇼핑 인기상품 0개 — 프록시 크롤링 폴백');
+      // 폴백: 프록시로 직접 크롤링
+      return await this.fetchShoppingTrendsFallback();
+    } catch (error) {
+      console.warn('[KeywordAnalyzer] 쇼핑 키워드 수집 실패:', (error as Error).message);
+      return [];
+    }
+  }
+
+  // 쇼핑 트렌드 폴백 (프록시 직접 크롤링)
+  private async fetchShoppingTrendsFallback(): Promise<string[]> {
+    try {
+      const axiosConfig = await this.getAxiosConfig();
+      const response = await axios.get('https://search.shopping.naver.com/best/home', axiosConfig);
       const $ = cheerio.load(response.data);
       const keywords: string[] = [];
-      
-      // 인기 검색어 추출
       $('a[href*="query="]').each((_, el) => {
         const href = $(el).attr('href') || '';
         const match = href.match(/query=([^&]+)/);
         if (match) {
           const keyword = decodeURIComponent(match[1]).trim();
-          if (keyword && keyword.length >= 2 && keyword.length <= 20) {
-            keywords.push(keyword);
-          }
+          if (keyword && keyword.length >= 2 && keyword.length <= 20) keywords.push(keyword);
         }
       });
-      
       return keywords.slice(0, 20);
     } catch {
       return [];
     }
   }
 
-  // ✅ 네이버 데이터랩 트렌드
-  private async fetchDatalabTrends(): Promise<string[]> {
+  // ✅ [2026-03-20] Google Trends 한국 실시간 인기 검색어 (RSS — 가장 안정적)
+  private async fetchGoogleTrendsKR(): Promise<string[]> {
     try {
-      const response = await axios.get('https://datalab.naver.com/shoppingInsight/sCategory.naver', {
-        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
+      const response = await axios.get('https://trends.google.co.kr/trending/rss?geo=KR', {
         timeout: 10000,
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BlogBot/1.0)' },
       });
       
-      const $ = cheerio.load(response.data);
+      const $ = cheerio.load(response.data, { xmlMode: true });
       const keywords: string[] = [];
       
-      // 인기 카테고리/키워드 추출
-      $('.keyword_rank a, .rank_list a').each((_, el) => {
+      $('item title').each((_, el) => {
         const text = $(el).text().trim();
-        if (text && text.length >= 2 && text.length <= 20) {
+        if (text && text.length >= 2 && text.length <= 30) {
           keywords.push(text);
         }
       });
       
+      console.log(`[KeywordAnalyzer] 🌍 Google Trends KR ${keywords.length}개 수집`);
       return keywords.slice(0, 20);
-    } catch {
+    } catch (error) {
+      console.warn('[KeywordAnalyzer] Google Trends RSS 실패:', (error as Error).message);
       return [];
     }
   }
 
-  // ✅ 시즌/계절 키워드 (폴백용)
+  // ✅ [2026-03-20] 네이버 뉴스 헤드라인에서 키워드 추출
+  private async fetchNaverNewsHeadlines(): Promise<string[]> {
+    try {
+      const axiosConfig = await this.getAxiosConfig();
+      const response = await axios.get('https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=105', axiosConfig);
+      
+      const $ = cheerio.load(response.data);
+      const keywords: string[] = [];
+      
+      // 뉴스 제목에서 키워드 추출
+      $('a.cluster_text_headline, .sh_text_headline, .ranking_headline a, .rankingnews_name, a[class*="headline"]').each((_, el) => {
+        const text = $(el).text().trim();
+        if (text && text.length >= 4) {
+          // 제목에서 핵심 키워드 추출 (첫 2~4단어)
+          const words = text.split(/[\s,…·"']+/).filter(w => w.length >= 2 && w.length <= 10);
+          if (words.length >= 2) {
+            keywords.push(words.slice(0, 3).join(' '));
+          }
+          if (words.length >= 1) {
+            keywords.push(words[0]);
+          }
+        }
+      });
+      
+      // 중복 제거 후 반환
+      const unique = [...new Set(keywords)];
+      console.log(`[KeywordAnalyzer] 📰 뉴스 헤드라인 키워드 ${unique.length}개 수집`);
+      return unique.slice(0, 15);
+    } catch (error) {
+      console.warn('[KeywordAnalyzer] 뉴스 헤드라인 수집 실패:', (error as Error).message);
+      return [];
+    }
+  }
+
+  // ✅ [2026-03-20] 네이버 연관검색어 크롤링 (API 아닌 실제 검색 페이지 크롤링)
+  private async fetchNaverAutocompleteTrends(): Promise<string[]> {
+    try {
+      const seeds = this.getAutocompletSeeds();
+      const keywords: string[] = [];
+      
+      // 3개 시드 랜덤 선택하여 연관검색어 크롤링
+      const shuffled = seeds.sort(() => Math.random() - 0.5).slice(0, 3);
+      
+      for (const seed of shuffled) {
+        try {
+          const axiosConfig = await this.getAxiosConfig();
+          const response = await axios.get(`https://search.naver.com/search.naver?where=nexearch&query=${encodeURIComponent(seed)}`, axiosConfig);
+          
+          const $ = cheerio.load(response.data);
+          
+          // 연관 검색어 크롤링 (다양한 셀렉터)
+          $('.related_srch .keyword, .fds-comps-keyword-chip, .fds-keyword-text').each((_, el) => {
+            const text = $(el).text().trim();
+            if (text && text.length >= 2 && text.length <= 20 && text !== seed) {
+              keywords.push(text);
+            }
+          });
+          
+          // 연관검색어 링크에서도 추출
+          $('a[href*="query="]').each((_, el) => {
+            const cls = $(el).attr('class') || '';
+            const href = $(el).attr('href') || '';
+            if (cls.includes('keyword') || cls.includes('relate') || cls.includes('chip') || href.includes('&oquery=')) {
+              const text = $(el).text().trim();
+              if (text && text.length >= 2 && text.length <= 20 && text !== seed) {
+                keywords.push(text);
+              }
+            }
+          });
+          
+          await sleep(300); // 요청 간격
+        } catch {
+          // 개별 실패 무시
+        }
+      }
+      
+      const unique = [...new Set(keywords)];
+      console.log(`[KeywordAnalyzer] 🔍 연관검색어 크롤링 ${unique.length}개 수집`);
+      return unique.slice(0, 20);
+    } catch (error) {
+      console.warn('[KeywordAnalyzer] 연관검색어 크롤링 실패:', (error as Error).message);
+      return [];
+    }
+  }
+
+  // ✅ 자동완성 시드 키워드 (다양한 카테고리에서 랜덤 선택)
+  private getAutocompletSeeds(): string[] {
+    const month = new Date().getMonth() + 1;
+    const baseSeeds = [
+      '추천', '인기', '맛집', '여행', '다이어트', '레시피', '리뷰',
+      '꿀팁', '비교', '순위', '신상', '트렌드', '할인', '가성비',
+      '방법', '효과', '후기', '정보', '가격', '종류',
+    ];
+    // 월별 시즌 시드 추가
+    const monthSeeds: Record<number, string[]> = {
+      1: ['새해', '겨울', '설날'], 2: ['발렌타인', '졸업', '봄'],
+      3: ['벚꽃', '이사', '신학기'], 4: ['캠핑', '피크닉', '봄나들이'],
+      5: ['어버이날', '어린이날', '여름'], 6: ['여름휴가', '에어컨', '장마'],
+      7: ['휴가', '물놀이', '빙수'], 8: ['가을', '추석', '피서'],
+      9: ['추석', '단풍', '가을여행'], 10: ['할로윈', '가을', '핫플'],
+      11: ['블프', '김장', '패딩'], 12: ['크리스마스', '연말', '선물'],
+    };
+    return [...baseSeeds, ...(monthSeeds[month] || [])];
+  }
+
+  // ✅ [2026-03-20] 시즌/계절 키워드 (대폭 확장 + 랜덤 셔플)
   private getSeasonalKeywords(): string[] {
     const month = new Date().getMonth() + 1;
     
-    // 계절별 인기 키워드
+    // ✅ 월별 15개+ 키워드 (기존 5개에서 대폭 확장)
     const seasonalMap: Record<number, string[]> = {
-      1: ['신년 다이어트', '새해 목표', '겨울 여행', '설날 선물', '스키장'],
-      2: ['발렌타인데이', '입학 준비', '봄 신상', '꽃배달', '졸업 선물'],
-      3: ['벚꽃 명소', '봄 나들이', '신학기', '이사 준비', '봄 인테리어'],
-      4: ['봄 여행', '피크닉', '골프', '캠핑', '봄 패션'],
-      5: ['어버이날 선물', '어린이날', '가정의달', '야외 활동', '여름 준비'],
-      6: ['여름 휴가', '에어컨', '선풍기', '제습기', '수영복'],
-      7: ['휴가지 추천', '물놀이', '여름 맛집', '시원한 음식', '빙수'],
-      8: ['여름 세일', '가을 신상', '추석 선물', '캠핑', '피서지'],
-      9: ['추석', '가을 여행', '단풍 명소', '환절기 건강', '가을 패션'],
-      10: ['할로윈', '가을 나들이', '핫플레이스', '가을 데이트', '단풍'],
-      11: ['블랙프라이데이', '김장', '겨울 준비', '난방비', '패딩'],
-      12: ['크리스마스', '연말 선물', '송년회', '겨울 여행', '스키'],
+      1: ['신년 다이어트', '새해 목표', '겨울 여행', '설날 선물', '스키장', '떡국 레시피', '새해 운세', '겨울 코디', '실내 운동', '가습기 추천', '연초 재테크', '세뱃돈 활용', '방학 체험', '겨울 핫초코', '홈트레이닝'],
+      2: ['발렌타인데이', '입학 준비', '봄 신상', '꽃배달', '졸업 선물', '초콜릿 만들기', '봄 인테리어', '이직 준비', '봄 스킨케어', '졸업 여행', '학용품 추천', '봄 원피스', '면접 팁', '꽃 종류', '데이트 코스'],
+      3: ['벚꽃 명소', '봄 나들이', '신학기', '이사 준비', '봄 인테리어', '미세먼지 대비', '원룸 꾸미기', '봄 등산', '화분 키우기', '봄 패션', '알레르기 예방', '졸업식 옷', '제주도 여행', '봄맞이 대청소', '피크닉 도시락'],
+      4: ['봄 여행', '피크닉', '골프', '캠핑', '봄 패션', '텃밭 가꾸기', '바베큐', '자전거 추천', '봄 꽃 축제', '야외 활동', '샌드위치 레시피', '봄 향수', '아웃도어', '맥주 추천', '소풍 준비'],
+      5: ['어버이날 선물', '어린이날', '가정의달', '야외 활동', '여름 준비', '카네이션', '가족 여행', '스승의날', '자외선 차단제', '여름 신발', '장미축제', '캠핑 장비', '에어컨 청소', '수박', '5월 축제'],
+      6: ['여름 휴가', '에어컨', '선풍기', '제습기', '수영복', '장마 대비', '여름 맛집', '서핑', '물놀이', '썬크림', '다이어트 식단', '여름 이불', '아이스크림', '워터파크', '시원한 음료'],
+      7: ['휴가지 추천', '물놀이', '여름 맛집', '시원한 음식', '빙수', '계곡', '바다 여행', '여름 캠핑', '냉면 맛집', '수영장', '여름 책', '삼계탕', '해외여행', '자외선 관리', '서울 핫플'],
+      8: ['여름 세일', '가을 신상', '추석 선물', '캠핑', '피서지', '가을 패션', '추석 레시피', '입추', '초가을 여행', '개학 준비', '가을 인테리어', '다이어리', '가을 맥주', '서핑', '백패킹'],
+      9: ['추석', '가을 여행', '단풍 명소', '환절기 건강', '가을 패션', '추석 음식', '가을 등산', '송편 만들기', '가을 캠핑', '명절 레시피', '가을 독서', '코스모스', '포도', '가을 운동', '피부관리'],
+      10: ['할로윈', '가을 나들이', '핫플레이스', '가을 데이트', '단풍', '할로윈 코스튬', '가을 카페', '가을 축제', '핑크뮬리', '가을 코디', '독서의 달', '전시회', '와인', '가을 사진', '억새'],
+      11: ['블랙프라이데이', '김장', '겨울 준비', '난방비', '패딩', '김장 레시피', '겨울 코디', '11월 여행', '가습기', '겨울 이불', '전기세 절약', '블프 세일', '핫딜', '온풍기', '겨울 간식'],
+      12: ['크리스마스', '연말 선물', '송년회', '겨울 여행', '스키', '크리스마스 선물', '연말 파티', '겨울 맛집', '눈 오는 곳', '신년 계획', '연하장', '겨울왕국', '연말 공연', '크리스마스 케이크', '새해 여행'],
     };
     
-    return seasonalMap[month] || ['맛집 추천', '여행', '다이어트', '인테리어', '재테크'];
+    const keywords = seasonalMap[month] || ['맛집 추천', '여행', '다이어트', '인테리어', '재테크', '독서', '운동', '요리', '건강', '패션'];
+    
+    // ✅ 랜덤 셔플하여 매번 다른 순서 반환
+    for (let i = keywords.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [keywords[i], keywords[j]] = [keywords[j], keywords[i]];
+    }
+    
+    return keywords;
   }
 
   // ✅ 단일 카테고리 황금키워드 발견 (사용자 선택)

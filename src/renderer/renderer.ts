@@ -5795,6 +5795,7 @@ async function initializeApplication(): Promise<void> {
   initCharCountDisplay();
   initImageManagementTab();
   initDashboard();
+  showGeminiInstabilityNotice(); // ✅ [2026-03-21] Gemini 서버 불안정 공지
   initTabSwitching();
   initLicenseBadge(); // 라이선스 배지 초기화
   initCustomerServiceButton(); // 고객센터 버튼 초기화
@@ -11614,6 +11615,99 @@ function switchToScheduleTab() {
   if (tabButton) {
     tabButton.click();
   }
+}
+
+// ✅ [2026-03-21] Gemini 서버 불안정 공지 배너
+function showGeminiInstabilityNotice(): void {
+  // 24시간 내 이미 닫았으면 다시 표시하지 않음
+  const dismissedAt = localStorage.getItem('geminiNotice_dismissed');
+  if (dismissedAt) {
+    const elapsed = Date.now() - parseInt(dismissedAt, 10);
+    if (elapsed < 24 * 60 * 60 * 1000) return; // 24시간
+  }
+
+  const banner = document.createElement('div');
+  banner.id = 'gemini-instability-notice';
+  banner.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #e8520e 100%);
+    color: #fff;
+    padding: 14px 20px;
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: slideDown 0.4s ease-out;
+  `;
+
+  banner.innerHTML = `
+    <div style="flex: 1;">
+      <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">
+        ⚠️ Gemini AI 서버 불안정 안내 (2026년 3월)
+      </div>
+      <div style="opacity: 0.95; font-size: 13px;">
+        현재 Google Gemini API 서버가 불안정합니다 (503/429 에러 빈발).
+        <b>글 생성 엔진</b>은 <b>OpenAI 또는 Perplexity</b>를 권장하며,
+        <b>이미지 생성</b>은 <b>ImageFX</b>를 사용해주세요.
+        Gemini 안정화 후 다시 사용하시기 바랍니다.
+      </div>
+    </div>
+    <button id="gemini-notice-dismiss" style="
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background 0.2s;
+    " onmouseover="this.style.background='rgba(255,255,255,0.35)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+      확인
+    </button>
+  `;
+
+  // 슬라이드 다운 애니메이션
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-100%); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+
+  document.body.prepend(banner);
+
+  // 닫기 버튼
+  const dismissBtn = document.getElementById('gemini-notice-dismiss');
+  if (dismissBtn) {
+    dismissBtn.addEventListener('click', () => {
+      banner.style.animation = 'slideUp 0.3s ease-in forwards';
+      setTimeout(() => banner.remove(), 300);
+      localStorage.setItem('geminiNotice_dismissed', String(Date.now()));
+    });
+  }
+
+  // 30초 후 자동 닫기
+  setTimeout(() => {
+    if (banner.parentNode) {
+      banner.style.animation = 'slideUp 0.3s ease-in forwards';
+      setTimeout(() => banner.remove(), 300);
+    }
+  }, 30000);
 }
 
 // 메인 대시보드 초기화

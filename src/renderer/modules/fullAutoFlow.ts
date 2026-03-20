@@ -194,7 +194,14 @@ function autoLinkPreviousPost(formData: any, modal?: any): void {
   const isShoppingConnectMode = formData.affiliateLink && formData.affiliateLink.trim();
   const skipBecauseCtaIsPrevPost = formData.ctaType === 'previous-post' && !isShoppingConnectMode;
 
-  if (needsPreviousPostLookup && formData.ctaType !== 'none' && !skipBecauseCtaIsPrevPost) {
+  // ✅ [2026-03-21 FIX] ctaLink에 이미 이전글 URL이 설정되어 있으면 previousPostUrl 중복 설정 방지
+  // generateAutoCTA()가 ctaLink에 이전글 URL을 이미 넣었으면, previousPostUrl에 같은 URL을 또 넣으면
+  // CTA 버튼 + 네이버 에디터 이전글 카드 양쪽에 동일 글이 표시되는 중복 문제 발생
+  const ctaLinkAlreadyHasPreviousPost = formData.ctaLink && formData.ctaLink.trim() &&
+    formData.ctaLink.startsWith('http') && formData.ctaLink.includes('blog.naver.com');
+  const skipBecauseCtaLinkAlreadySet = ctaLinkAlreadyHasPreviousPost && !isShoppingConnectMode;
+
+  if (needsPreviousPostLookup && formData.ctaType !== 'none' && !skipBecauseCtaIsPrevPost && !skipBecauseCtaLinkAlreadySet) {
     let prevPosts: any[] = [];
 
     // 쇼핑커넥트모드: 쇼핑커넥트 글 우선
