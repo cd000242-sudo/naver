@@ -84,6 +84,19 @@ function sanitizeImagePrompt(prompt: string): string {
     .replace(/(?:^|\n)(?:Sure|Certainly|Of course|Here(?:'s| is))[^.\n]*[.:!]?\s*/gi, '')
     .replace(/(?:^|\n)(?:Here is|Below is|The following is)[^.\n]*[.:!]?\s*/gi, '');
 
+  // ── 1.5. ✅ [2026-03-20] AI 브랜드명 완전 제거 — 어떤 위치든 Perplexity/GPT/Claude 등 제거 ──
+  // ⚠️ 핵심: Perplexity Sonar가 자기 이름을 문장 중간에 삽입 → Imagen이 로고를 렌더링
+  cleaned = cleaned
+    .replace(/\bPerplexity\b/gi, '')
+    .replace(/\bChatGPT\b/gi, '')
+    .replace(/\bOpenAI\b/gi, '')
+    .replace(/\bAnthropic\b/gi, '')
+    .replace(/\bClaude\b/gi, '')
+    .replace(/\bGemini\b/gi, '')
+    .replace(/\bSonar\b/gi, '')
+    .replace(/\bGPT-?\d[\w.-]*/gi, '')
+    .replace(/\bpowered by [\w.]+/gi, '');
+
   // ── 2. 시스템 프롬프트 누출 제거 ──
   cleaned = cleaned
     .replace(/(?:^|\n)(?:You are an expert|TASK:|HEADING:|STYLE:|CRITICAL RULES:|STYLE-SPECIFIC|CONTEXT \(use this)[^\n]*/gi, '')

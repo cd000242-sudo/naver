@@ -3,6 +3,49 @@
 // 연속 발행 모듈 (Continuous Publishing)
 // modules/continuousPublishing.ts
 // ============================================
+
+// ═══════════════════════════════════════════════════════════════════
+// ✅ [2026-03-20] 네이버 캡차 방지 — 안전 발행 간격 시스템
+// 
+// 문제: 짧은 간격(30초)으로 8개 이상 연속 발행 시 네이버가 봇으로 판정
+//       → 캡차 발생 → 캡차 풀어도 로그인 불가 (세션 완전 차단)
+// 
+// 해결: 3단계 안전 장치
+//   1. 최소 발행 간격 3분(180초) 강제
+//   2. ±20% 랜덤 jitter로 정형화된 봇 패턴 회피
+//   3. 5개 발행마다 5~10분 추가 쿨다운
+// ═══════════════════════════════════════════════════════════════════
+
+const SAFE_PUBLISH_MIN_INTERVAL_SEC = 180; // 최소 3분 (네이버 봇 감지 임계값)
+let _continuousPublishCount = 0;           // 현재 세션 발행 횟수 (쿨다운 계산용)
+const COOLDOWN_EVERY_N = 5;                // N개마다 쿨다운
+const COOLDOWN_MIN_SEC = 300;              // 쿨다운 최소 5분
+const COOLDOWN_MAX_SEC = 600;              // 쿨다운 최대 10분
+
+/**
+ * ✅ [2026-03-20] 안전 발행 간격 계산
+ * @param userInterval 사용자 설정 간격(초)
+ * @param publishIndex 현재 발행 인덱스 (0부터)
+ * @returns 실제 대기 시간(초) — 최소 3분 + jitter + 쿨다운
+ */
+function getSafePublishInterval(userInterval: number, publishIndex: number): number {
+  // 1. 최소 간격 강제 (사용자가 30초로 설정해도 3분 이상 보장)
+  let interval = Math.max(SAFE_PUBLISH_MIN_INTERVAL_SEC, userInterval);
+
+  // 2. ±20% 랜덤 jitter 추가 (봇 패턴 회피)
+  const jitterRange = interval * 0.2;
+  const jitter = (Math.random() * jitterRange * 2) - jitterRange; // -20% ~ +20%
+  interval = Math.round(interval + jitter);
+
+  // 3. N개 발행마다 추가 쿨다운 (세션 보호)
+  if (publishIndex > 0 && publishIndex % COOLDOWN_EVERY_N === 0) {
+    const cooldown = COOLDOWN_MIN_SEC + Math.floor(Math.random() * (COOLDOWN_MAX_SEC - COOLDOWN_MIN_SEC));
+    console.log(`[AntiCaptcha] 🧊 ${publishIndex}번째 발행 완료 → ${cooldown}초(${Math.round(cooldown/60)}분) 쿨다운 추가`);
+    interval += cooldown;
+  }
+
+  return Math.max(SAFE_PUBLISH_MIN_INTERVAL_SEC, interval);
+}
 // 외부유입 탭 전환 함수
 export function switchExternalLinksTab(tabName: string) {
   console.log('[Tab] 외부유입 탭 전환:', tabName);
@@ -54,6 +97,7 @@ export function startContinuousMode(urls: string[]): void {
   // ✅ [2026-03-11 FIX] 새 연속발행 시작 시 이전 중지 플래그 초기화
   (window as any).stopFullAutoPublish = false;
   (window as any).stopBatchPublish = false;
+  _continuousPublishCount = 0; // ✅ [2026-03-20] 캡차 방지 카운터 리셋
   continuousQueue = [...urls];
   console.log('[Continuous] 큐에 저장된 URL들:', continuousQueue);
   appendLog(`🚀 연속 발행 모드 시작: ${urls.length}개 포스팅`);
@@ -287,13 +331,19 @@ export function scheduleNextPosting(): void {
     return;
   }
 
-  // ✅ 사용자 설정 시간 가져오기 (기본값 15초)
+  // ✅ [2026-03-20] 안전 발행 간격 적용 (최소 3분, jitter, 쿨다운)
   const intervalInput = document.getElementById('continuous-interval-seconds') as HTMLInputElement;
-  const userInterval = intervalInput ? parseInt(intervalInput.value) || 15 : 15;
-  continuousCountdown = Math.max(5, Math.min(3600, userInterval)); // 5초 ~ 1시간 범위 제한
+  const userInterval = intervalInput ? parseInt(intervalInput.value) || 180 : 180;
+  _continuousPublishCount++;
+  const safeInterval = getSafePublishInterval(userInterval, _continuousPublishCount);
+  continuousCountdown = Math.max(SAFE_PUBLISH_MIN_INTERVAL_SEC, Math.min(3600, safeInterval));
 
-  console.log(`[Continuous] ${continuousCountdown}초 카운트다운 시작 (사용자 설정)`);
-  appendLog(`⏰ 다음 포스팅까지 ${continuousCountdown}초 대기...`);
+  if (userInterval < SAFE_PUBLISH_MIN_INTERVAL_SEC) {
+    console.log(`[AntiCaptcha] ⚠️ 사용자 간격(${userInterval}초)이 최소 안전 간격(${SAFE_PUBLISH_MIN_INTERVAL_SEC}초)보다 짧아 자동 보정`);
+    appendLog(`⚠️ 캡차 방지: 발행 간격이 ${SAFE_PUBLISH_MIN_INTERVAL_SEC}초(${Math.round(SAFE_PUBLISH_MIN_INTERVAL_SEC/60)}분) 이상으로 자동 조정되었습니다.`);
+  }
+  console.log(`[Continuous] ${continuousCountdown}초 카운트다운 시작 (안전 간격 적용, 발행#${_continuousPublishCount})`);
+  appendLog(`⏰ 다음 포스팅까지 ${continuousCountdown}초(${Math.round(continuousCountdown/60)}분) 대기...`);
 
   const countdownElement = document.getElementById('continuous-countdown');
   console.log('[Continuous] 카운트다운 엘리먼트 찾음:', countdownElement ? '있음' : '없음');
@@ -3182,6 +3232,7 @@ async function startContinuousPublishingV2(): Promise<void> {
   // 이전 중지 후 stopFullAutoPublish=true가 남아있으면 즉시 중단되는 버그 방지
   (window as any).stopFullAutoPublish = false;
   (window as any).stopBatchPublish = false;
+  _continuousPublishCount = 0; // ✅ [2026-03-20] 캡차 방지 카운터 리셋
 
   // ✅ [2026-01-21] 연속 발행 시작 시 락 강제 해제 (이전 세션 잔여 락 제거)
   clearImageGenerationLocks();
@@ -3641,11 +3692,29 @@ async function startContinuousPublishingV2(): Promise<void> {
     // ✅ [2026-02-15] rAF로 배치하여 발행 루프 중 UI 깜빡임 방지
     requestAnimationFrame(() => renderQueueListV2());
 
-    // 다음 항목 대기
+    // ✅ [2026-03-20] 안전 발행 간격 적용 (캡차 방지)
+    // 예약 발행(네이버 서버)은 네이버가 지정 시간에 발행하므로 봇 감지와 무관 → 간격 스킵
     const nextPending = continuousQueueV2.find(it => it.status === 'pending');
     if (nextPending && isContinuousMode) {
-      const waitOk = await waitWithInterrupt(item.interval);
-      if (!waitOk) break;
+      const isScheduleMode = item.publishMode === 'schedule';
+      if (isScheduleMode) {
+        // 예약 발행: 최소 대기만 적용 (콘텐츠 생성/전송 후 바로 다음 예약 처리)
+        const quickWait = 10 + Math.floor(Math.random() * 10); // 10~20초
+        appendLog(`⏰ 예약 발행 모드 → ${quickWait}초 후 다음 항목 처리...`);
+        const waitOk = await waitWithInterrupt(quickWait);
+        if (!waitOk) break;
+      } else {
+        // 즉시 발행: 안전 간격 적용 (캡차 방지)
+        _continuousPublishCount++;
+        const rawInterval = Number(item.interval) || 180;
+        const safeWait = getSafePublishInterval(rawInterval, _continuousPublishCount);
+        if (rawInterval < SAFE_PUBLISH_MIN_INTERVAL_SEC) {
+          appendLog(`⚠️ 캡차 방지: 발행 간격 ${rawInterval}초 → ${safeWait}초(${Math.round(safeWait/60)}분)로 자동 조정`);
+        }
+        appendLog(`⏰ 다음 발행까지 ${safeWait}초(${Math.round(safeWait/60)}분) 대기... (발행#${_continuousPublishCount}, ${_continuousPublishCount % COOLDOWN_EVERY_N === 0 ? '🧊 쿨다운 포함' : '일반 대기'})`);
+        const waitOk = await waitWithInterrupt(safeWait);
+        if (!waitOk) break;
+      }
     }
   }
 
@@ -3732,6 +3801,7 @@ export function startContinuousModeEnhanced(queue: typeof continuousPublishQueue
   // ✅ [2026-03-11 FIX] 새 연속발행 시작 시 이전 중지 플래그 초기화
   (window as any).stopFullAutoPublish = false;
   (window as any).stopBatchPublish = false;
+  _continuousPublishCount = 0; // ✅ [2026-03-20] 캡차 방지 카운터 리셋
   processNextInQueueEnhanced();
 }
 
@@ -3774,13 +3844,25 @@ async function processNextInQueueEnhanced(): Promise<void> {
     appendLog(`❌ 발행 실패: ${(error as Error).message}`);
   }
 
-  // 다음 항목 처리 (사용자 설정 시간 대기)
+  // ✅ [2026-03-20] 안전 발행 간격 적용 (캡차 방지)
+  // 예약 발행(네이버 서버)은 봇 감지와 무관 → 빠른 대기만
   if (continuousPublishQueue.length > 0) {
-    const intervalInput = document.getElementById('continuous-interval-seconds') as HTMLInputElement;
-    const userInterval = intervalInput ? parseInt(intervalInput.value) || 30 : 30;
-    const waitTime = Math.max(5, Math.min(3600, userInterval));
-    appendLog(`⏰ ${waitTime}초 후 다음 발행 시작...`);
-    setTimeout(() => processNextInQueueEnhanced(), waitTime * 1000);
+    const isScheduleMode = item?.publishMode === 'schedule';
+    if (isScheduleMode) {
+      const quickWait = 10 + Math.floor(Math.random() * 10); // 10~20초
+      appendLog(`⏰ 예약 발행 모드 → ${quickWait}초 후 다음 항목 처리...`);
+      setTimeout(() => processNextInQueueEnhanced(), quickWait * 1000);
+    } else {
+      const intervalInput = document.getElementById('continuous-interval-seconds') as HTMLInputElement;
+      const userInterval = Number(intervalInput?.value) || 180;
+      _continuousPublishCount++;
+      const safeWait = getSafePublishInterval(userInterval, _continuousPublishCount);
+      if (userInterval < SAFE_PUBLISH_MIN_INTERVAL_SEC) {
+        appendLog(`⚠️ 캡차 방지: 발행 간격 ${userInterval}초 → ${safeWait}초(${Math.round(safeWait/60)}분)로 자동 조정`);
+      }
+      appendLog(`⏰ ${safeWait}초(${Math.round(safeWait/60)}분) 후 다음 발행 시작... (발행#${_continuousPublishCount})`);
+      setTimeout(() => processNextInQueueEnhanced(), safeWait * 1000);
+    }
   } else {
     appendLog('✅ 모든 연속 발행 완료!');
     stopContinuousMode('complete');
