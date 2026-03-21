@@ -903,9 +903,18 @@ export async function handleFullAutoPublish(): Promise<void> {
 
   } catch (error) {
     appendLog(`❌ 풀오토 발행 실패: ${(error as Error).message}`);
-    // ✅ 진행상황 모달 에러 표시
+    // ✅ 진행상황 모달 에러 표시 (8초 후 자동 닫기 + 확인 버튼)
     modal.showError('❌ 발행 실패', (error as Error).message);
-    throw error;
+
+    // ✅ [2026-03-22 FIX] 실패 시 발행 상태 리셋 (재시도 가능하도록)
+    try {
+      if (typeof (window as any).resetPublishing === 'function') {
+        (window as any).resetPublishing();
+      }
+    } catch (e) {
+      console.warn('[handleFullAutoPublish] resetPublishing 오류:', e);
+    }
+    // ✅ [2026-03-22 FIX] throw 제거 — showError가 UX 전담, throw 시 호출자 중복 에러 핸들링 위험
   }
 }
 

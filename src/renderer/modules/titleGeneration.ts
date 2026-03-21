@@ -520,6 +520,11 @@ export async function autoGenerateImagesAndPublish(structuredContent: any): Prom
   } catch (error) {
     appendLog(`❌ 자동 발행 실패: ${(error as Error).message}`);
     alert(`❌ 자동 발행 실패: ${(error as Error).message}`);
+
+    // ✅ [2026-03-22 FIX] 실패 시 발행 상태 리셋 (재시도 가능하도록)
+    if (typeof (window as any).resetPublishing === 'function') {
+      (window as any).resetPublishing();
+    }
   }
 }
 

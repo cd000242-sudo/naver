@@ -5,6 +5,7 @@
 
 import { toastManager } from '../utils/uiManagers.js';
 import { GENERATED_POSTS_KEY } from '../utils/postStorageUtils.js';
+import { createTime24Select, bindTime24Events } from '../utils/time24Select';
 
 // TS 컴파일용 — 런타임에서는 renderer.ts의 동일 스코프 함수 사용
 declare function showErrorAlertModal(title: string, message: string): void;
@@ -19,7 +20,8 @@ export function showRescheduleModal(postId: string, title: string, onConfirm: (n
 
     // 기본값: 현재 시간 + 10분
     const defaultDate = new Date(Date.now() + 10 * 60 * 1000);
-    const defaultDateStr = defaultDate.toISOString().slice(0, 16);
+    const defaultDateOnly = defaultDate.toISOString().slice(0, 10); // YYYY-MM-DD
+    const defaultTimeOnly = `${String(defaultDate.getHours()).padStart(2, '0')}:${String(Math.floor(defaultDate.getMinutes() / 10) * 10).padStart(2, '0')}`; // HH:mm (10분 단위)
 
     const modal = document.createElement('div');
     modal.id = 'reschedule-modal';
@@ -40,7 +42,17 @@ export function showRescheduleModal(postId: string, title: string, onConfirm: (n
       </div>
       <div style="margin-bottom: 1.5rem;">
         <label style="display: block; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">새 발행 시간</label>
-        <input type="datetime-local" id="reschedule-datetime" value="${defaultDateStr}" style="width: 100%; padding: 0.75rem; background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: 8px; color: var(--text-strong); font-size: 1rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+          <div>
+            <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">📅 날짜</label>
+            <input type="date" id="reschedule-date" value="${defaultDateOnly}" style="width: 100%; padding: 0.75rem; background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: 8px; color: var(--text-strong); font-size: 0.9rem; color-scheme: dark;">
+          </div>
+          <div>
+            <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">🕐 시간</label>
+            ${createTime24Select({ id: 'reschedule-time', defaultValue: defaultTimeOnly, step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-light); background: var(--bg-primary); color: var(--text-strong); font-size: 0.9rem; cursor: pointer; flex: 1;' })}
+          </div>
+        </div>
+      </div>
       </div>
       <div style="display: flex; gap: 0.75rem;">
         <button type="button" id="reschedule-cancel-btn" style="flex: 1; padding: 0.75rem; background: var(--bg-tertiary); color: var(--text-muted); border: 1px solid var(--border-light); border-radius: 8px; font-weight: 600; cursor: pointer;">
@@ -54,6 +66,7 @@ export function showRescheduleModal(postId: string, title: string, onConfirm: (n
   `;
 
     document.body.appendChild(modal);
+    bindTime24Events(modal);
 
     // 취소 버튼
     const cancelBtn = document.getElementById('reschedule-cancel-btn');
@@ -63,15 +76,18 @@ export function showRescheduleModal(postId: string, title: string, onConfirm: (n
 
     // 확인 버튼
     const confirmBtn = document.getElementById('reschedule-confirm-btn');
-    const datetimeInput = document.getElementById('reschedule-datetime') as HTMLInputElement;
+    const dateInput = document.getElementById('reschedule-date') as HTMLInputElement;
+    const timeInput = document.getElementById('reschedule-time') as HTMLInputElement;
 
-    if (confirmBtn && datetimeInput) {
+    if (confirmBtn && dateInput && timeInput) {
         confirmBtn.addEventListener('click', () => {
-            const newDate = datetimeInput.value;
-            if (!newDate) {
-                toastManager.warning('발행 시간을 선택해주세요.');
+            const dateVal = dateInput.value;
+            const timeVal = timeInput.value || '09:00';
+            if (!dateVal) {
+                toastManager.warning('발행 날짜를 선택해주세요.');
                 return;
             }
+            const newDate = `${dateVal}T${timeVal}`;
 
             const selectedDate = new Date(newDate);
             if (selectedDate <= new Date()) {

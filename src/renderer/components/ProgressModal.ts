@@ -50,6 +50,9 @@ export class ProgressModal {
     private currentPercent: number = 0;
     private isWorkInProgress: boolean = false;
 
+    // ✅ [2026-03-22] 에러 자동 닫기 타이머 (클래스 멤버 → 누수 방지)
+    private autoCloseTimerId: ReturnType<typeof setTimeout> | null = null;
+
     // ✅ [2026-02-13] 캐러셀 네비게이션 상태
     private currentImageIndex: number = 0;
     private currentImages: Array<{ url?: string; filePath?: string; heading?: string }> = [];
@@ -219,6 +222,10 @@ export class ProgressModal {
         this.isWorkInProgress = true;
         this.startTime = Date.now();
         this.reset();
+
+        // ✅ [2026-03-22 FIX] 이전 에러의 자동 닫기 타이머 + 확인 버튼 정리
+        this.clearAutoCloseTimer();
+        document.getElementById('progress-dismiss-btn')?.remove();
 
         if (this.progressTitle) this.progressTitle.textContent = title;
         if (this.progressSubtitle) this.progressSubtitle.textContent = subtitle;
@@ -412,6 +419,47 @@ export class ProgressModal {
         const detail = this.parseErrorMessage(subtitle);
         if (detail) {
             this.showErrorDetails(detail);
+        }
+
+        // ✅ [2026-03-22 FIX] 이전 타이머 정리 후 8초 자동 닫기 (클래스 멤버로 누수 방지)
+        this.clearAutoCloseTimer();
+        this.autoCloseTimerId = setTimeout(() => {
+            this.autoCloseTimerId = null;
+            // 에러 상태에서 hide() → isWorkInProgress=false이므로 FAB 뜨지 않음 (안전)
+            this.hide();
+        }, 8000);
+
+        // ✅ [2026-03-22 FIX] "확인" 버튼 추가 (즉시 닫기)
+        const cancelBtn = document.getElementById('progress-cancel-btn');
+        if (cancelBtn && cancelBtn.parentElement) {
+            document.getElementById('progress-dismiss-btn')?.remove();
+
+            const dismissBtn = document.createElement('button');
+            dismissBtn.id = 'progress-dismiss-btn';
+            dismissBtn.textContent = '✔ 확인';
+            dismissBtn.style.cssText = `
+                padding: 8px 20px; border: none; border-radius: 8px;
+                background: linear-gradient(135deg, #3b82f6, #2563eb);
+                color: white; font-size: 13px; font-weight: 600;
+                cursor: pointer; transition: all 0.2s;
+                margin-left: 8px;
+            `;
+            dismissBtn.onmouseenter = () => { dismissBtn.style.transform = 'scale(1.05)'; };
+            dismissBtn.onmouseleave = () => { dismissBtn.style.transform = 'scale(1)'; };
+            dismissBtn.onclick = () => {
+                this.clearAutoCloseTimer();
+                this.hide();
+                dismissBtn.remove();
+            };
+            cancelBtn.parentElement.appendChild(dismissBtn);
+        }
+    }
+
+    // ✅ [2026-03-22] 자동 닫기 타이머 안전 정리
+    private clearAutoCloseTimer(): void {
+        if (this.autoCloseTimerId !== null) {
+            clearTimeout(this.autoCloseTimerId);
+            this.autoCloseTimerId = null;
         }
     }
 

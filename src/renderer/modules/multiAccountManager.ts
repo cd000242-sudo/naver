@@ -3,6 +3,8 @@
 // 다중계정 관리 모듈 (Multi-Account Manager)
 // modules/multiAccountManager.ts
 // ============================================
+
+import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
 // ✅ 다계정 관리 기능 초기화 함수
 export async function initMultiAccountManager() {
   console.log('[MultiAccount] 다계정 관리 기능 초기화 시작');
@@ -835,8 +837,7 @@ export async function initMultiAccountPublishModal() {
             </div>
             <div>
               <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
-              <input type="time" id="ma-rnd-start-time" value="09:00" step="600"
-                style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+              ${createTime24Select({ id: 'ma-rnd-start-time', defaultValue: '09:00', step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark; cursor: pointer; flex: 1;' })}
             </div>
           </div>
         </div>
@@ -852,8 +853,7 @@ export async function initMultiAccountPublishModal() {
             </div>
             <div>
               <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
-              <input type="time" id="ma-rnd-end-time" value="18:00" step="600"
-                style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+              ${createTime24Select({ id: 'ma-rnd-end-time', defaultValue: '18:00', step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark; cursor: pointer; flex: 1;' })}
             </div>
           </div>
         </div>
@@ -883,14 +883,15 @@ export async function initMultiAccountPublishModal() {
     `;
 
     document.body.appendChild(overlay);
+    bindTime24Events(overlay);
 
     // 프리셋 버튼
     overlay.querySelectorAll('.ma-rnd-preset').forEach(btn => {
       btn.addEventListener('click', () => {
         const s = (btn as HTMLElement).dataset.start || '09:00';
         const e = (btn as HTMLElement).dataset.end || '18:00';
-        (document.getElementById('ma-rnd-start-time') as HTMLInputElement).value = s;
-        (document.getElementById('ma-rnd-end-time') as HTMLInputElement).value = e;
+        setTime24Value('ma-rnd-start-time', s);
+        setTime24Value('ma-rnd-end-time', e);
         toastManager.info(`⏰ ${s} ~ ${e} 시간대가 설정되었습니다.`);
       });
     });
@@ -995,7 +996,7 @@ export async function initMultiAccountPublishModal() {
           <input type="checkbox" class="ma-indv-check" data-idx="${i}" ${isScheduled ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
           <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8rem; color: var(--text-strong, #fff);" title="${label}">${shortLabel}</div>
           <input type="date" class="ma-indv-date" data-idx="${i}" value="${curDate}" style="padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.8rem; color-scheme: dark; width: 130px;">
-          <input type="time" class="ma-indv-time" data-idx="${i}" value="${curTime}" step="600" style="padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.8rem; color-scheme: dark; width: 100px;">
+          ${createTime24Select({ className: 'ma-indv-time', dataIdx: i, defaultValue: curTime, step: 10, style: 'width: 100px;', selectStyle: 'padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark; cursor: pointer;' })}
         </div>`;
     }).join('');
 
@@ -1016,7 +1017,7 @@ export async function initMultiAccountPublishModal() {
           <div style="margin-left: auto; display: flex; align-items: center; gap: 0.4rem;">
             <span style="font-size: 0.75rem; color: var(--text-muted);">선택 항목 일괄:</span>
             <input type="date" id="ma-indv-bulk-date" style="padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark;">
-            <input type="time" id="ma-indv-bulk-time" value="09:00" step="600" style="padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark;">
+            ${createTime24Select({ id: 'ma-indv-bulk-time', defaultValue: '09:00', step: 10, selectStyle: 'padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.7rem; color-scheme: dark; cursor: pointer;' })}
             <button type="button" id="ma-indv-bulk-apply" style="padding: 0.3rem 0.6rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 6px; color: #60a5fa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">적용</button>
           </div>
         </div>
@@ -1043,6 +1044,7 @@ export async function initMultiAccountPublishModal() {
     `;
 
     document.body.appendChild(overlay);
+    bindTime24Events(overlay);
 
     // 전체 선택
     document.getElementById('ma-indv-select-all')?.addEventListener('change', (e) => {
@@ -1065,9 +1067,8 @@ export async function initMultiAccountPublishModal() {
         if ((cb as HTMLInputElement).checked) {
           const idx = (cb as HTMLElement).dataset.idx;
           const dateInput = overlay.querySelector(`.ma-indv-date[data-idx="${idx}"]`) as HTMLInputElement;
-          const timeInput = overlay.querySelector(`.ma-indv-time[data-idx="${idx}"]`) as HTMLInputElement;
           if (dateInput) dateInput.value = bulkDate;
-          if (timeInput) timeInput.value = bulkTime;
+          setTime24ValueByIdx(idx, bulkTime, overlay);
           appliedCount++;
         }
       });
@@ -2678,6 +2679,25 @@ export async function initMultiAccountPublishModal() {
           baseTime: firstItem.scheduleTime || '09:00',
           intervalMinutes: firstItem.scheduleInterval || 360,
         }, (msg: string, level: string) => addMALog(msg, level));
+
+        // ✅ [2026-03-22 FIX] 분산 결과 개별 로깅 — 어떤 계정에 어떤 시간이 배정되었는지 명시
+        scheduleItems.forEach((item, idx) => {
+          addMALog(`  📅 [${idx + 1}/${scheduleItems.length}] ${(item as any).accountName || '계정'}: ${item.scheduleDate} ${item.scheduleTime}${item.scheduleUserModified ? ' (수동)' : ' (자동)'}`, 'info');
+        });
+      }
+
+      // ✅ [2026-03-22 BUG-4 FIX] 단일 항목 스케줄에서 날짜 누락 시 자동 생성
+      // distributeWithProtection은 auto 항목이 2개 이상일 때만 분배 → 1개 항목은 건너뜀 → scheduleDate=undefined
+      const singleScheduleItems = publishQueue.filter(item => item.publishMode === 'schedule' && !item.scheduleDate);
+      for (const item of singleScheduleItems) {
+        const autoTime = new Date(Date.now() + 30 * 60 * 1000); // 30분 후
+        const ceilMin = Math.ceil(autoTime.getMinutes() / 10) * 10;
+        autoTime.setMinutes(ceilMin % 60, 0, 0);
+        if (ceilMin >= 60) autoTime.setHours(autoTime.getHours() + 1);
+        item.scheduleDate = `${autoTime.getFullYear()}-${String(autoTime.getMonth() + 1).padStart(2, '0')}-${String(autoTime.getDate()).padStart(2, '0')}`;
+        item.scheduleTime = `${String(autoTime.getHours()).padStart(2, '0')}:${String(autoTime.getMinutes()).padStart(2, '0')}`;
+        addMALog(`⚠️ [BUG-4 FIX] 단일 항목 날짜 자동 생성: ${item.scheduleDate} ${item.scheduleTime}`, 'warning');
+        console.log(`[BUG-4 FIX] 단일 항목 스케줄 날짜 자동 생성: ${item.scheduleDate} ${item.scheduleTime}`);
       }
     }
 
@@ -3281,7 +3301,32 @@ export async function initMultiAccountPublishModal() {
             }
           }
 
+          // ✅ [2026-03-22 FIX] 발행 직전 예약시간이 처리 중 과거가 된 경우 자동 보정
+          // 콘텐츠 생성 + 이미지 생성에 2~10분 소요되므로, 실제 IPC 호출 직전에 재검증
+          if (queueItem.publishMode === 'schedule' && queueItem.scheduleDate && queueItem.scheduleTime) {
+            const scheduledMoment = new Date(`${queueItem.scheduleDate}T${queueItem.scheduleTime}`);
+            const now = new Date();
+            if (scheduledMoment.getTime() <= now.getTime()) {
+              const BUFFER_MS = 20 * 60 * 1000; // 20분 여유
+              const corrected = new Date(now.getTime() + BUFFER_MS);
+              // 10분 단위 올림 (네이버 서버 예약 호환)
+              corrected.setMinutes(Math.ceil(corrected.getMinutes() / 10) * 10, 0, 0);
+              const newDate = corrected.toISOString().split('T')[0];
+              const hh = String(corrected.getHours()).padStart(2, '0');
+              const mm = String(corrected.getMinutes()).padStart(2, '0');
+              const newTime = `${hh}:${mm}`;
+              addMALog(`⚠️ 예약 시간 과거 감지: ${queueItem.scheduleDate} ${queueItem.scheduleTime} → ${newDate} ${newTime}로 자동 보정`, 'warning');
+              console.log(`[FullAuto] ⚠️ 예약 시간 과거 보정: ${queueItem.scheduleDate} ${queueItem.scheduleTime} → ${newDate} ${newTime}`);
+              queueItem.scheduleDate = newDate;
+              queueItem.scheduleTime = newTime;
+            }
+          }
+
           addMALog('📤 블로그 발행 중...', 'info');
+          // ✅ [2026-03-22 FIX] 예약 모드 최종 시간 로깅 (디버깅용)
+          if (queueItem.publishMode === 'schedule') {
+            addMALog(`📅 예약 시간: ${queueItem.scheduleDate} ${queueItem.scheduleTime} (타입: ${queueItem.scheduleType || 'naver-server'})`, 'info');
+          }
           addProgressItem(`   🚀 ${queueItem.accountName} 발행 중...`, 'info');
 
           // ✅ [2026-03-19 FIX] 다중계정 발행: generatedImages에서 thumbnailPath 추출

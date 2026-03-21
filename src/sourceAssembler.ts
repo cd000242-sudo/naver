@@ -5693,25 +5693,58 @@ async function fetchSingleSource(url: string, options?: { naverClientId?: string
     // ✅ [2026-03-12 FIX] smartstore/brand.naver.com/naver.me URL → crawlFromAffiliateLink로 정확한 상품 정보 수집
     // 기존: 스토어명으로 검색 API → 같은 스토어의 엉뚱한 상품 반환 버그
     // 변경: productId 기반 직접 API 호출로 정확한 상품 매칭
-    const isNaverStore = url.includes('smartstore.naver.com') || url.includes('brand.naver.com') || url.includes('naver.me/');
+    // ✅ [2026-03-22 FIX] naver.me 단축 URL → 리다이렉트 해서 실제 목적지 URL 파악 후 분기
+    //   naver.me는 블로그일 수도, 스마트스토어일 수도 있으므로 먼저 확인 필요
+    let resolvedUrl = url;
+    const isShortUrl = url.includes('naver.me/');
 
-    if (isNaverStore) {
+    if (isShortUrl) {
+      console.log(`[fetchSingleSource] 🔗 네이버 단축 URL 감지 → 리다이렉트 확인 중...`);
+      try {
+        const resp = await fetch(url, { method: 'HEAD', redirect: 'follow', signal: AbortSignal.timeout(10000) });
+        resolvedUrl = resp.url || url;
+        console.log(`[fetchSingleSource] 🔗 리다이렉트 결과: ${resolvedUrl}`);
+      } catch (e) {
+        // HEAD 실패 시 GET으로 재시도
+        try {
+          const resp2 = await fetch(url, { redirect: 'follow', signal: AbortSignal.timeout(10000) });
+          resolvedUrl = resp2.url || url;
+          console.log(`[fetchSingleSource] 🔗 GET 리다이렉트 결과: ${resolvedUrl}`);
+        } catch (e2) {
+          console.warn(`[fetchSingleSource] ⚠️ 리다이렉트 확인 실패: ${(e2 as Error).message}`);
+        }
+      }
+    }
+
+    const isNaverStore = resolvedUrl.includes('smartstore.naver.com') || resolvedUrl.includes('brand.naver.com')
+      || resolvedUrl.includes('brandconnect.naver.com')
+      || (resolvedUrl.includes('naver.me/') && !resolvedUrl.includes('blog'));
+    const isNaverBlogFromShortUrl = isShortUrl && (resolvedUrl.includes('blog.naver.com') || resolvedUrl.includes('m.blog.naver.com'));
+
+    // 단축 URL이 블로그로 리다이렉트되면 스마트스토어 로직 건너뛰고 블로그 로직으로 진행
+    if (isNaverBlogFromShortUrl) {
+      console.log(`[fetchSingleSource] 📝 naver.me → 블로그 URL로 확인됨! 블로그 크롤링 로직으로 분기: ${resolvedUrl}`);
+      url = resolvedUrl; // 실제 블로그 URL로 교체하여 아래 블로그 로직에서 처리
+    } else if (isNaverStore) {
+
       console.log(`[fetchSingleSource] 🛒 네이버 스토어 URL 감지 → crawlFromAffiliateLink로 정확한 상품 정보 수집`);
 
       // URL에서 스토어명과 상품번호 추출 (naver.me 단축 URL은 내부에서 리다이렉트 처리)
-      const isShortUrl = url.includes('naver.me/');
-      const storeMatch = url.match(/(?:smartstore|brand)\.naver\.com\/([^\/\?]+)/);
-      const productMatch = url.match(/products\/(\d+)/);
+      const storeMatch = resolvedUrl.match(/(?:smartstore|brand)\.naver\.com\/([^\/\?]+)/);
+      const productMatch = resolvedUrl.match(/products\/(\d+)/);
+      const channelProductMatch = resolvedUrl.match(/channelProductNo=(\d+)/);
       const storeName = storeMatch ? storeMatch[1] : '';
-      const productId = productMatch ? productMatch[1] : '';
+      const productId = productMatch ? productMatch[1] : (channelProductMatch ? channelProductMatch[1] : '');
+      const isBrandConnect = resolvedUrl.includes('brandconnect.naver.com');
 
-      console.log(`[fetchSingleSource] 📎 스토어: "${storeName}", 상품번호: "${productId}", 단축URL: ${isShortUrl}`);
+      console.log(`[fetchSingleSource] 📎 스토어: "${storeName}", 상품번호: "${productId}", 단축URL: ${isShortUrl}, brandConnect: ${isBrandConnect}`);
 
       // ✅ [핵심] crawlFromAffiliateLink로 정확한 상품 정보 수집 (productId 기반 또는 단축 URL 리다이렉트)
-      if ((storeName && productId) || isShortUrl) {
+      if ((storeName && productId) || isShortUrl || isBrandConnect) {
         try {
           const { crawlFromAffiliateLink } = await import('./crawler/productSpecCrawler.js');
-          const productInfo = await crawlFromAffiliateLink(url);
+          // ✅ [2026-03-22 FIX] resolvedUrl 전달 → 내부에서 중복 리다이렉트 방지
+          const productInfo = await crawlFromAffiliateLink(resolvedUrl);
 
           if (productInfo && productInfo.name && productInfo.name !== '상품명을 불러올 수 없습니다') {
             const productName = productInfo.name;
@@ -5759,10 +5792,74 @@ ${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
         }
       }
 
-      // ✅ [2026-03-15 FIX] 스마트스토어 URL은 crawlFromAffiliateLink만 사용
-      // 검색 API 폴백이나 가짜 콘텐츠 생성 없이 실패 반환 → assembleContentSource에서 재시도
-      console.warn(`[fetchSingleSource] ❌ 스마트스토어 상품 정보 수집 실패 → 검색 API 폴백 없이 실패 반환`);
-      return { success: false, error: '스마트스토어 상품 정보 수집 실패' };
+      // ✅ [2026-03-22 FIX] crawlFromAffiliateLink 실패 시 OG 태그로 기본 정보 추출 폴백
+      // 스마트스토어/브랜드스토어 URL을 넣어도 최소한 글 생성 가능하도록!
+      console.warn(`[fetchSingleSource] ⚠️ crawlFromAffiliateLink 실패 → OG 태그 폴백 시도...`);
+      try {
+        const axios = (await import('axios')).default;
+        const fallbackResp = await axios.get(resolvedUrl, {
+          maxRedirects: 10,
+          timeout: 15000,
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 13; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'ko-KR,ko;q=0.9',
+          },
+          validateStatus: () => true,
+        });
+
+        const html = typeof fallbackResp.data === 'string' ? fallbackResp.data : '';
+        if (html.length > 100) {
+          const ogTitle = (html.match(/<meta\s+property="og:title"\s+content="([^"]+)"/i) ||
+            html.match(/<meta\s+content="([^"]+)"\s+property="og:title"/i))?.[1]?.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#x27;/g, "'").trim() || '';
+          const ogDesc = (html.match(/<meta\s+property="og:description"\s+content="([^"]+)"/i) ||
+            html.match(/<meta\s+name="description"\s+content="([^"]+)"/i))?.[1]?.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#x27;/g, "'").trim() || '';
+          const ogImage = (html.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i) ||
+            html.match(/<meta\s+content="([^"]+)"\s+property="og:image"/i))?.[1] || '';
+
+          // JSON-LD에서 가격 정보 추출
+          let price = 0;
+          const jsonLdMatch = html.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i);
+          if (jsonLdMatch) {
+            try {
+              const jsonLd = JSON.parse(jsonLdMatch[1]);
+              if (jsonLd.offers?.price) price = parseInt(jsonLd.offers.price) || 0;
+              else if (jsonLd.price) price = parseInt(jsonLd.price) || 0;
+            } catch {}
+          }
+
+          const errorKeywords = ['에러', '오류', 'error', '차단', '캡차', '찾을 수 없', 'not found'];
+          const isErrorPage = errorKeywords.some(k => ogTitle.toLowerCase().includes(k.toLowerCase()));
+
+          if (ogTitle && ogTitle.length > 2 && !isErrorPage) {
+            const storeNameFallback = (resolvedUrl.match(/(?:smartstore|brand)\.naver\.com\/([^\/\?]+)/)?.[1] || '네이버 스토어');
+            console.log(`[fetchSingleSource] ✅ OG 태그 폴백 성공: "${ogTitle}" (${storeNameFallback})`);
+
+            return {
+              title: ogTitle,
+              content: `
+상품명: ${ogTitle}
+${price > 0 ? `가격: ${price.toLocaleString()}원` : ''}
+판매처: ${storeNameFallback} (네이버)
+
+=== 상품 설명 ===
+${ogDesc || `${ogTitle} 상품입니다.`}
+
+이 제품은 ${storeNameFallback}에서 판매 중인 상품입니다.
+`.trim(),
+              publishedAt: new Date().toISOString(),
+              images: ogImage ? [ogImage] : [],
+              keywords: [ogTitle, storeNameFallback].filter(Boolean),
+              success: true,
+            };
+          }
+        }
+      } catch (fallbackErr) {
+        console.warn(`[fetchSingleSource] ⚠️ OG 태그 폴백도 실패: ${(fallbackErr as Error).message}`);
+      }
+
+      console.warn(`[fetchSingleSource] ❌ 스마트스토어/브랜드스토어 모든 방법 실패`);
+      return { success: false, error: '스마트스토어 상품 정보 수집 실패 (OG 폴백 포함)' };
     }
 
     // RSS 피드인 경우 기존 방식 사용

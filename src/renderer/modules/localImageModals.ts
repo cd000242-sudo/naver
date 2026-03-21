@@ -959,35 +959,50 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
           try {
             // ✅ 순서 모드에서도 소제목당 여러 장 누적 지원
             ImageManager.addImage(headingTitle, newImage);
+
+            try {
+              syncGlobalImagesFromImageManager();
+            } catch (e) {
+              console.warn('[localImageModals] catch ignored:', e);
+            }
+
+            appendLog(`✅ [${nextHeadingIndex + 1}/${headings.length}] "${imageName}" → "${headingTitle}"`);
+            toastManager.success(`✅ ${nextHeadingIndex + 1}번 소제목에 배치 완료!`);
+
+            nextHeadingIndex++;
+
+            // 모든 소제목에 배치 완료
+            if (nextHeadingIndex >= headings.length) {
+              const allImages = (() => {
+                try {
+                  return ImageManager.getAllImages();
+                } catch {
+                  return (window as any).imageManagementGeneratedImages || generatedImages || [];
+                }
+              })();
+              displayGeneratedImages(allImages);
+              updatePromptItemsWithImages(allImages);
+
+              alert(`🎉 모든 소제목에 이미지 배치 완료!\n\n총 ${headings.length}개 이미지가 배치되었습니다.`);
+              modal.remove();
+            }
           } catch (e) {
-            console.warn('[localImageModals] catch ignored:', e);
-          }
+            // ✅ [2026-03-22 FIX] addImage 실패 시 완전 롤백 → 재시도 가능
+            console.error('[localImageModals] 순서 모드 이미지 배치 실패:', e);
+            appendLog(`❌ 이미지 배치 실패: ${(e as Error).message}`);
+            toastManager.error('이미지 배치에 실패했습니다. 다시 클릭해주세요.');
 
-          try {
-            syncGlobalImagesFromImageManager();
-          } catch (e) {
-            console.warn('[localImageModals] catch ignored:', e);
-          }
+            // 배지 제거
+            const addedBadge = (item as HTMLElement).querySelector('.order-badge');
+            if (addedBadge) addedBadge.remove();
 
-          appendLog(`✅ [${nextHeadingIndex + 1}/${headings.length}] "${imageName}" → "${headingTitle}"`);
-          toastManager.success(`✅ ${nextHeadingIndex + 1}번 소제목에 배치 완료!`);
+            // 테두리 초기화
+            (item as HTMLElement).style.borderColor = 'var(--border-light)';
+            (item as HTMLElement).style.borderWidth = '2px';
+            (item as HTMLElement).style.boxShadow = 'none';
 
-          nextHeadingIndex++;
-
-          // 모든 소제목에 배치 완료
-          if (nextHeadingIndex >= headings.length) {
-            const allImages = (() => {
-              try {
-                return ImageManager.getAllImages();
-              } catch {
-                return (window as any).imageManagementGeneratedImages || generatedImages || [];
-              }
-            })();
-            displayGeneratedImages(allImages);
-            updatePromptItemsWithImages(allImages);
-
-            alert(`🎉 모든 소제목에 이미지 배치 완료!\n\n총 ${headings.length}개 이미지가 배치되었습니다.`);
-            modal.remove();
+            // clickedImages 롤백
+            clickedImages.pop();
           }
 
           return;
@@ -1040,27 +1055,37 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
             const imagePath = selectedImagePath; // 타입 단언을 위한 변수
             const imageName = selectedImageName;
             setTimeout(() => {
-              const newImage = {
-                heading: headingTitle,
-                filePath: imagePath,
-                previewDataUrl: `file:///${imagePath}`,
-                provider: 'local' as any,
-                savedToLocal: true,
-                url: `file:///${imagePath}`
-              };
+              try {
+                const newImage = {
+                  heading: headingTitle,
+                  filePath: imagePath,
+                  previewDataUrl: `file:///${imagePath}`,
+                  provider: 'local' as any,
+                  savedToLocal: true,
+                  url: `file:///${imagePath}`
+                };
 
-              ImageManager.setImage(headingTitle, newImage);
-              appendLog(`✅ "${imageName}"을(를) ${headingIndex + 1}번 소제목 "${headingTitle}"에 배치했습니다.`);
-
-              toastManager.success(`✅ ${headingIndex + 1}번 소제목에 새 이미지 배치 완료!`);
-
-              // 선택 초기화
-              modal.querySelectorAll('.local-image-item').forEach(i => {
-                (i as HTMLElement).style.borderColor = 'var(--border-light)';
-                (i as HTMLElement).style.borderWidth = '2px';
-              });
-              selectedImagePath = null;
-              selectedImageName = null;
+                // ✅ [2026-03-22 FIX] 기존 대표 이미지 보존: addImage로 추가
+                if (ImageManager.hasImage(headingTitle)) {
+                  ImageManager.addImage(headingTitle, newImage);
+                } else {
+                  ImageManager.setImage(headingTitle, newImage);
+                }
+                appendLog(`✅ "${imageName}"을(를) ${headingIndex + 1}번 소제목 "${headingTitle}"에 배치했습니다.`);
+                toastManager.success(`✅ ${headingIndex + 1}번 소제목에 새 이미지 배치 완료!`);
+              } catch (err) {
+                console.error('[localImageModals] 이미지 재배치 실패:', err);
+                appendLog(`❌ 이미지 재배치 실패: ${(err as Error).message}`);
+                toastManager.error('이미지 배치에 실패했습니다. 다시 시도해주세요.');
+              } finally {
+                // ✅ 성공/실패 관계없이 선택 상태 초기화 → 재시도 가능
+                modal.querySelectorAll('.local-image-item').forEach(i => {
+                  (i as HTMLElement).style.borderColor = 'var(--border-light)';
+                  (i as HTMLElement).style.borderWidth = '2px';
+                });
+                selectedImagePath = null;
+                selectedImageName = null;
+              }
             }, 100);
           }
           return;
@@ -1082,40 +1107,50 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
           url: `file:///${selectedImagePath}`
         };
 
-        // ✅ ImageManager를 통해 이미지 설정 (자동으로 교체 또는 추가)
+        // ✅ ImageManager를 통해 이미지 추가 또는 설정
         const existingImage = ImageManager.getImage(headingTitle);
-        const isReplacing = existingImage !== null;
+        const isAdding = existingImage !== null;
 
-        if (isReplacing) {
-          const oldImageName = existingImage.filePath?.split('/').pop() || '이전 이미지';
-          appendLog(`🔄 ${headingIndex + 1}번 소제목 이미지 교체: "${oldImageName}" → "${selectedImageName}"`);
+        if (isAdding) {
+          appendLog(`➕ ${headingIndex + 1}번 소제목에 이미지 추가: "${selectedImageName}" (대표 이미지 유지)`);
         } else {
           appendLog(`✅ "${selectedImageName}"을(를) ${headingIndex + 1}번 소제목 "${headingTitle}"에 배치했습니다.`);
         }
 
-        ImageManager.setImage(headingTitle, newImage);
+        try {
+          // ✅ [2026-03-22 FIX] 기존 대표 이미지 보존: addImage로 추가
+          if (ImageManager.hasImage(headingTitle)) {
+            ImageManager.addImage(headingTitle, newImage);
+          } else {
+            ImageManager.setImage(headingTitle, newImage);
+          }
 
-        syncGlobalImagesFromImageManager();
+          syncGlobalImagesFromImageManager();
 
-        // 소제목 번호
-        const headingNumber = headingIndex + 1;
+          // 소제목 번호
+          const headingNumber = headingIndex + 1;
 
-        // ✅ 시각적 알림
-        if (isReplacing) {
-          toastManager.success(`🔄 ${headingNumber}번 소제목 이미지 교체 완료!`);
-          alert(`🔄 이미지 교체 완료!\n\n📍 위치: ${headingNumber}번 소제목\n📝 제목: ${headingTitle}\n🖼️ 새 이미지: ${selectedImageName}`);
-        } else {
-          toastManager.success(`✅ ${headingNumber}번 소제목에 이미지 배치 완료!`);
-          alert(`✅ 이미지 배치 완료!\n\n📍 위치: ${headingNumber}번 소제목\n📝 제목: ${headingTitle}\n🖼️ 이미지: ${selectedImageName}`);
+          // ✅ 시각적 알림
+          if (isAdding) {
+            toastManager.success(`➕ ${headingNumber}번 소제목에 이미지 추가 완료!`);
+            alert(`➕ 이미지 추가 완료!\n\n📍 위치: ${headingNumber}번 소제목\n📝 제목: ${headingTitle}\n🖼️ 추가 이미지: ${selectedImageName}\n💡 대표 이미지는 유지됩니다.`);
+          } else {
+            toastManager.success(`✅ ${headingNumber}번 소제목에 이미지 배치 완료!`);
+            alert(`✅ 이미지 배치 완료!\n\n📍 위치: ${headingNumber}번 소제목\n📝 제목: ${headingTitle}\n🖼️ 이미지: ${selectedImageName}`);
+          }
+        } catch (err) {
+          console.error('[localImageModals] 이미지 배치 실패:', err);
+          appendLog(`❌ 이미지 배치 실패: ${(err as Error).message}`);
+          toastManager.error('이미지 배치에 실패했습니다. 다시 시도해주세요.');
+        } finally {
+          // ✅ 성공/실패 관계없이 선택 상태 초기화 → 재시도 가능
+          modal.querySelectorAll('.local-image-item').forEach(i => {
+            (i as HTMLElement).style.borderColor = 'var(--border-light)';
+            (i as HTMLElement).style.borderWidth = '2px';
+          });
+          selectedImagePath = null;
+          selectedImageName = null;
         }
-
-        // 선택 초기화
-        modal.querySelectorAll('.local-image-item').forEach(i => {
-          (i as HTMLElement).style.borderColor = 'var(--border-light)';
-          (i as HTMLElement).style.borderWidth = '2px';
-        });
-        selectedImagePath = null;
-        selectedImageName = null;
       });
     });
 
@@ -1613,36 +1648,55 @@ export async function showImagePlacementModal(folderImages: any[]): Promise<void
     }
 
     // ImageManager에 배치 적용
-    placements.forEach((imgIdx, headingIdx) => {
-      const img = folderImages[imgIdx];
-      const heading = headings[headingIdx];
-      if (img && heading) {
-        const headingTitle = typeof heading === 'string' ? String(heading || '').trim() : String((heading as any)?.title || heading || '').trim();
-        if (!headingTitle) return;
-        ImageManager.setImage(headingTitle, {
-          heading: headingTitle,
-          filePath: img.filePath || img.url,
-          previewDataUrl: img.previewDataUrl || img.filePath || img.url,
-          provider: 'local',
-          savedToLocal: !!img.filePath,
-        });
-      }
-    });
+    let appliedCount = 0;
+    try {
+      placements.forEach((imgIdx, headingIdx) => {
+        const img = folderImages[imgIdx];
+        const heading = headings[headingIdx];
+        if (img && heading) {
+          const headingTitle = typeof heading === 'string' ? String(heading || '').trim() : String((heading as any)?.title || heading || '').trim();
+          if (!headingTitle) return;
+          const newImg = {
+            heading: headingTitle,
+            filePath: img.filePath || img.url,
+            previewDataUrl: img.previewDataUrl || img.filePath || img.url,
+            provider: 'local',
+            savedToLocal: !!img.filePath,
+          };
+          // ✅ [2026-03-22 FIX] public API 사용 (undo 히스토리 보존 + 캡슐화 유지)
+          if (ImageManager.hasImage(headingTitle)) {
+            ImageManager.addImage(headingTitle, newImg);
+          } else {
+            ImageManager.setImage(headingTitle, newImg);
+          }
+          appliedCount++;
+        }
+      });
 
-    // ✅ 단일 소스(ImageManager)에서 전역 배열 + 모든 미리보기 동기화
-    ImageManager.syncGeneratedImagesArray();
-    const allImagesAfter = ImageManager.getAllImages();
-    (window as any).imageManagementGeneratedImages = allImagesAfter;
+      // ✅ 단일 소스(ImageManager)에서 전역 배열 + 모든 미리보기 동기화
+      ImageManager.syncGeneratedImagesArray();
+      const allImagesAfter = ImageManager.getAllImages();
+      (window as any).imageManagementGeneratedImages = allImagesAfter;
 
-    // UI 업데이트 (영어 프롬프트 미리보기 & 생성 이미지 & 통합 미리보기 연동)
-    updateUnifiedImagePreview(headings, allImagesAfter);
-    displayGeneratedImages(allImagesAfter);
-    updatePromptItemsWithImages(allImagesAfter);
-    ImageManager.syncAllPreviews();
+      // UI 업데이트 (영어 프롬프트 미리보기 & 생성 이미지 & 통합 미리보기 연동)
+      updateUnifiedImagePreview(headings, allImagesAfter);
+      displayGeneratedImages(allImagesAfter);
+      updatePromptItemsWithImages(allImagesAfter);
+      ImageManager.syncAllPreviews();
 
-    appendLog(`✅ ${placements.size}개의 이미지가 소제목에 배치되었습니다.`);
-    toastManager.success(`✅ ${placements.size}개의 이미지가 소제목에 배치되었습니다!`);
-    modal.remove();
+      appendLog(`✅ ${appliedCount}개의 이미지가 소제목에 배치되었습니다.`);
+      toastManager.success(`✅ ${appliedCount}개의 이미지가 소제목에 배치되었습니다!`);
+      modal.remove();
+    } catch (err) {
+      console.error('[localImageModals] 배치 적용 실패:', err);
+      appendLog(`❌ 이미지 배치 적용 실패 (${appliedCount}개 적용됨): ${(err as Error).message}`);
+      toastManager.error(`이미지 배치 중 오류 발생 (${appliedCount}개 적용됨). 초기화 후 다시 시도해주세요.`);
+      // ✅ 부분 적용된 경우에도 sync 시도 → 일관성 유지
+      try {
+        ImageManager.syncGeneratedImagesArray();
+        ImageManager.syncAllPreviews();
+      } catch { /* ignore */ }
+    }
   });
 
   // 닫기 버튼

@@ -166,8 +166,87 @@ export function resetAfterPublish(): void {
     console.log('[FullAutoUtils] ✅ 전체 상태 초기화 완료 → 새 발행 준비 완료');
 }
 
+/**
+ * ✅ [2026-03-22 NEW] 진행률 UI 및 타이머 초기화 헬퍼
+ * - 발행 실패 시 진행률 바가 멈춘 상태로 남는 것 방지
+ * - 타이머 + DOM 진행률 바 모두 정리
+ */
+function resetProgressUI(): void {
+    const state = getWindowState();
+    if (state.publishTimeoutId) {
+        clearTimeout(state.publishTimeoutId);
+        setWindowState('publishTimeoutId', null);
+    }
+    if (state.progressIntervalId) {
+        clearInterval(state.progressIntervalId);
+        setWindowState('progressIntervalId', null);
+    }
+
+    // ✅ [2026-03-22] DOM 진행률 바 숨기기 (잔류 방지)
+    try {
+        const progressContainer = document.getElementById('unified-progress-container');
+        if (progressContainer) progressContainer.style.display = 'none';
+    } catch (e) { /* DOM 접근 실패 무시 */ }
+}
+
+/**
+ * ✅ [2026-03-22 NEW] 이미지 생성 락 해제
+ */
+function clearImageGenerationLocks(): void {
+    (window as any).imageGenerationLock = false;
+    (window as any).imageGenerationAbortController = null;
+}
+
+/**
+ * ✅ [2026-03-22 NEW] 글 생성 실패 시 — 글 생성 상태만 리셋
+ * - 이미지/발행 상태는 건드리지 않음
+ * - 재시도 시 바로 글 생성 가능
+ * @description 세분화 API: 글 생성 단계만 실패했을 때 사용
+ */
+export function resetContentGeneration(): void {
+    console.log('[FullAutoUtils] 🔄 글 생성 실패 → 글 생성 상태만 리셋');
+    setWindowState('isGeneratingContent', false);
+    setWindowState('isPublishing', false);
+    resetProgressUI();
+    console.log('[FullAutoUtils] ✅ 글 생성 상태 리셋 완료 → 재시도 가능');
+}
+
+/**
+ * ✅ [2026-03-22 NEW] 이미지 생성 실패 시 — 이미지 상태만 리셋
+ * - 이미 생성된 글(currentStructuredContent)은 보존
+ * - 이미지만 재생성 가능
+ * @description 세분화 API: 이미지 생성 단계만 실패했을 때 사용. 생성된 글 보존.
+ */
+export function resetImageGeneration(): void {
+    console.log('[FullAutoUtils] 🔄 이미지 생성 실패 → 이미지 상태만 리셋');
+    setWindowState('isGeneratingImages', false);
+    setWindowState('isPublishing', false);
+    setWindowState('generatedImages', []);
+    clearImageGenerationLocks();
+    resetProgressUI();
+    console.log('[FullAutoUtils] ✅ 이미지 상태 리셋 완료 → 재시도 가능 (글 보존)');
+}
+
+/**
+ * ✅ [2026-03-22 NEW] 발행 실패 시 — 발행 상태만 리셋
+ * - 이미 생성된 글 + 이미지 모두 보존
+ * - 발행만 재시도 가능
+ */
+export function resetPublishing(): void {
+    console.log('[FullAutoUtils] 🔄 발행 실패 → 발행 상태만 리셋');
+    setWindowState('isPublishing', false);
+    setWindowState('isGeneratingContent', false);
+    setWindowState('isGeneratingImages', false);
+    setWindowState('stopRequested', false);
+    resetProgressUI();
+    console.log('[FullAutoUtils] ✅ 발행 상태 리셋 완료 → 재시도 가능 (글+이미지 보존)');
+}
+
 // 전역 노출
 (window as any).resetAfterPublish = resetAfterPublish;
+(window as any).resetContentGeneration = resetContentGeneration;
+(window as any).resetImageGeneration = resetImageGeneration;
+(window as any).resetPublishing = resetPublishing;
 
-console.log('[FullAutoUtils] 📦 모듈 로드됨 (타입 안전 버전)!');
+console.log('[FullAutoUtils] 📦 모듈 로드됨 (타입 안전 버전 + 기능별 리셋)!');
 

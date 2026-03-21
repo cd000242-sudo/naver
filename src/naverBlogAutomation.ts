@@ -4195,6 +4195,28 @@ export class NaverBlogAutomation {
           try {
             if (scheduleAttempt > 1) {
               this.log(`🔁 예약발행 재시도 (${scheduleAttempt}/${MAX_SCHEDULE_RETRIES})...`);
+              // ✅ [2026-03-22 BUG-6 FIX] 재시도 시 과거 시간이면 현재+20분으로 보정
+              // 이전: 같은 과거 scheduleDate로 재시도 → validateScheduleDate 에러 반복
+              if (scheduleDate) {
+                const [sd, st] = scheduleDate.split(' ');
+                if (sd && st) {
+                  const scheduledTime = new Date(`${sd}T${st}`);
+                  const now = new Date();
+                  if (scheduledTime.getTime() <= now.getTime()) {
+                    const corrected = new Date(now.getTime() + 20 * 60 * 1000);
+                    const cm = Math.ceil(corrected.getMinutes() / 10) * 10;
+                    corrected.setMinutes(cm % 60, 0, 0);
+                    if (cm >= 60) corrected.setHours(corrected.getHours() + 1);
+                    const cy = corrected.getFullYear();
+                    const cmo = String(corrected.getMonth() + 1).padStart(2, '0');
+                    const cd = String(corrected.getDate()).padStart(2, '0');
+                    const ch = String(corrected.getHours()).padStart(2, '0');
+                    const cmi = String(corrected.getMinutes()).padStart(2, '0');
+                    scheduleDate = `${cy}-${cmo}-${cd} ${ch}:${cmi}`;
+                    this.log(`⚠️ [BUG-6 FIX] 재시도 #${scheduleAttempt}: 과거 시간 보정 → ${scheduleDate}`);
+                  }
+                }
+              }
             }
             await this.publishScheduled(scheduleDate);
             scheduleSuccess = true;

@@ -71,34 +71,41 @@ export function cacheTranslation(key: string, value: string): void {
     _promptTranslationCache.set(key, value);
 }
 
-// ═══════ 1순위: Gemini ═══════
-async function generateEnglishPromptWithGemini(headingText: string, imageStyle?: string, contentContext?: string): Promise<string | null> {
+// ✅ [2026-03-22] 공통 fetch 헬퍼 — AbortController 8초 타임아웃 내장
+async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs: number = 8000): Promise<Response> {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
-        if (_promptTranslationCache.has(headingText)) {
-            console.log(`[PromptTranslation] 캐시 히트: "${headingText}"`);
-            return _promptTranslationCache.get(headingText)!;
-        }
+        const response = await fetch(url, { ...options, signal: controller.signal });
+        return response;
+    } finally {
+        clearTimeout(timer);
+    }
+}
 
-        const config = await window.api.getConfig();
+// ✅ [2026-03-22] config 1회 호출 후 공유하기 위한 타입 (IPC 최소화)
+type AppConfig = Record<string, any>;
+
+// ═══════ 1순위: Gemini ═══════
+async function generateEnglishPromptWithGemini(headingText: string, imageStyle?: string, contentContext?: string, sharedConfig?: AppConfig): Promise<string | null> {
+    try {
+        const config = sharedConfig || await window.api.getConfig();
         const apiKey = (config as any).geminiApiKey;
         if (!apiKey) {
             console.log('[GeminiPrompt] Gemini API 키 없음 → 다음 모델 시도');
             return null;
         }
 
-        // ✅ [2026-02-27 FIX] 환경설정의 주력 모델 사용 (gemini-2.0-flash 404 에러 해결)
         const geminiModel = (config as any).geminiTextModel || 'gemini-2.5-flash';
-        console.log(`[GeminiPrompt] 사용 모델: ${geminiModel}`);
 
-        // Gemini API 호출
-        const response = await fetch(
+        const response = await fetchWithTimeout(
             `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${apiKey}`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     contents: [{ parts: [{ text: getTranslationPrompt(headingText, imageStyle, contentContext) }] }],
-                    generationConfig: { temperature: 0.7, maxOutputTokens: 1024 } // ✅ [2026-03-03] Gemini 2.5 Flash thinking model은 thinking+output 합산이므로 충분히 크게 설정
+                    generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
                 })
             }
         );
@@ -116,26 +123,29 @@ async function generateEnglishPromptWithGemini(headingText: string, imageStyle?:
             return null;
         }
 
-        cacheTranslation(headingText, generatedPrompt);
         console.log(`[GeminiPrompt] ✅ 생성 성공: "${headingText}" → "${generatedPrompt.substring(0, 60)}..."`);
         return generatedPrompt;
-    } catch (error) {
-        console.warn(`[GeminiPrompt] 오류:`, error);
+    } catch (error: any) {
+        if (error?.name === 'AbortError') {
+            console.warn(`[GeminiPrompt] ⏱️ 8초 타임아웃 → 다음 모델 시도`);
+        } else {
+            console.warn(`[GeminiPrompt] 오류:`, error);
+        }
         return null;
     }
 }
 
 // ═══════ 2순위: OpenAI GPT ═══════
-async function generateEnglishPromptWithOpenAI(headingText: string, imageStyle?: string, contentContext?: string): Promise<string | null> {
+async function generateEnglishPromptWithOpenAI(headingText: string, imageStyle?: string, contentContext?: string, sharedConfig?: AppConfig): Promise<string | null> {
     try {
-        const config = await window.api.getConfig();
+        const config = sharedConfig || await window.api.getConfig();
         const apiKey = (config as any).openaiApiKey || (config as any).OPENAI_API_KEY;
         if (!apiKey) {
             console.log('[OpenAIPrompt] OpenAI API 키 없음 → 다음 모델 시도');
             return null;
         }
 
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        const response = await fetchWithTimeout('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -165,26 +175,29 @@ async function generateEnglishPromptWithOpenAI(headingText: string, imageStyle?:
             return null;
         }
 
-        cacheTranslation(headingText, generatedPrompt);
         console.log(`[OpenAIPrompt] ✅ 생성 성공: "${headingText}" → "${generatedPrompt.substring(0, 60)}..."`);
         return generatedPrompt;
-    } catch (error) {
-        console.warn(`[OpenAIPrompt] 오류:`, error);
+    } catch (error: any) {
+        if (error?.name === 'AbortError') {
+            console.warn(`[OpenAIPrompt] ⏱️ 8초 타임아웃 → 다음 모델 시도`);
+        } else {
+            console.warn(`[OpenAIPrompt] 오류:`, error);
+        }
         return null;
     }
 }
 
 // ═══════ 3순위: Claude ═══════
-async function generateEnglishPromptWithClaude(headingText: string, imageStyle?: string, contentContext?: string): Promise<string | null> {
+async function generateEnglishPromptWithClaude(headingText: string, imageStyle?: string, contentContext?: string, sharedConfig?: AppConfig): Promise<string | null> {
     try {
-        const config = await window.api.getConfig();
+        const config = sharedConfig || await window.api.getConfig();
         const apiKey = (config as any).claudeApiKey || (config as any).CLAUDE_API_KEY || (config as any).ANTHROPIC_API_KEY;
         if (!apiKey) {
             console.log('[ClaudePrompt] Claude API 키 없음 → 다음 모델 시도');
             return null;
         }
 
-        const response = await fetch('https://api.anthropic.com/v1/messages', {
+        const response = await fetchWithTimeout('https://api.anthropic.com/v1/messages', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -214,26 +227,29 @@ async function generateEnglishPromptWithClaude(headingText: string, imageStyle?:
             return null;
         }
 
-        cacheTranslation(headingText, generatedPrompt);
         console.log(`[ClaudePrompt] ✅ 생성 성공: "${headingText}" → "${generatedPrompt.substring(0, 60)}..."`);
         return generatedPrompt;
-    } catch (error) {
-        console.warn(`[ClaudePrompt] 오류:`, error);
+    } catch (error: any) {
+        if (error?.name === 'AbortError') {
+            console.warn(`[ClaudePrompt] ⏱️ 8초 타임아웃 → 다음 모델 시도`);
+        } else {
+            console.warn(`[ClaudePrompt] 오류:`, error);
+        }
         return null;
     }
 }
 
 // ═══════ 4순위: Perplexity ═══════
-async function generateEnglishPromptWithPerplexity(headingText: string, imageStyle?: string, contentContext?: string): Promise<string | null> {
+async function generateEnglishPromptWithPerplexity(headingText: string, imageStyle?: string, contentContext?: string, sharedConfig?: AppConfig): Promise<string | null> {
     try {
-        const config = await window.api.getConfig();
+        const config = sharedConfig || await window.api.getConfig();
         const apiKey = (config as any).perplexityApiKey || (config as any).PERPLEXITY_API_KEY;
         if (!apiKey) {
             console.log('[PerplexityPrompt] Perplexity API 키 없음 → 다음 모델 시도');
             return null;
         }
 
-        const response = await fetch('https://api.perplexity.ai/chat/completions', {
+        const response = await fetchWithTimeout('https://api.perplexity.ai/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -263,11 +279,14 @@ async function generateEnglishPromptWithPerplexity(headingText: string, imageSty
             return null;
         }
 
-        cacheTranslation(headingText, generatedPrompt);
         console.log(`[PerplexityPrompt] ✅ 생성 성공: "${headingText}" → "${generatedPrompt.substring(0, 60)}..."`);
         return generatedPrompt;
-    } catch (error) {
-        console.warn(`[PerplexityPrompt] 오류:`, error);
+    } catch (error: any) {
+        if (error?.name === 'AbortError') {
+            console.warn(`[PerplexityPrompt] ⏱️ 8초 타임아웃 → 다음 모델 시도`);
+        } else {
+            console.warn(`[PerplexityPrompt] 오류:`, error);
+        }
         return null;
     }
 }
@@ -507,14 +526,36 @@ export async function generateEnglishPromptForHeading(heading: any, baseKeywords
         return cached;
     }
 
-    // ✅ 1순위~4순위: AI 멀티 모델 순차 시도
-    // [2026-03-05] Gemini 1순위로 변경 — 무료/저렴 + 동일 프롬프트 템플릿으로 품질 동등
-    const aiTranslators: Array<{ name: string; fn: (h: string, s?: string, c?: string) => Promise<string | null> }> = [
+    // ✅ [2026-03-22] 사용자 선택 엔진 1순위 → 나머지는 폴백
+    // getConfig() 1회 호출 → 모든 엔진 함수에 공유 (IPC 최소화)
+    let sharedConfig: AppConfig = {};
+    try {
+        sharedConfig = await window.api.getConfig() as AppConfig;
+    } catch { /* config 실패 시 각 함수가 자체 호출 */ }
+
+    const allTranslators: Array<{ name: string; fn: (h: string, s?: string, c?: string, cfg?: AppConfig) => Promise<string | null> }> = [
         { name: 'Gemini', fn: generateEnglishPromptWithGemini },
         { name: 'OpenAI', fn: generateEnglishPromptWithOpenAI },
         { name: 'Claude', fn: generateEnglishPromptWithClaude },
         { name: 'Perplexity', fn: generateEnglishPromptWithPerplexity },
     ];
+
+    // 사용자 선택 엔진을 1순위로 배치 (UI 라디오 버튼에서 직접 읽기)
+    let userEngine = '';
+    try {
+        // ✅ primaryGeminiTextModel 라디오 버튼 = 실제 글생성 엔진 선택 UI
+        const selectedRadio = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || '';
+        if (selectedRadio.includes('claude')) userEngine = 'Claude';
+        else if (selectedRadio.includes('openai') || selectedRadio.includes('gpt')) userEngine = 'OpenAI';
+        else if (selectedRadio.includes('perplexity') || selectedRadio.includes('sonar')) userEngine = 'Perplexity';
+        else userEngine = 'Gemini';
+    } catch { userEngine = 'Gemini'; }
+
+    const aiTranslators = [
+        ...allTranslators.filter(t => t.name === userEngine),
+        ...allTranslators.filter(t => t.name !== userEngine),
+    ];
+    console.log(`[PromptTranslation] 🎯 선택 엔진: ${userEngine} → 순서: ${aiTranslators.map(t => t.name).join(' → ')}`);
 
     if (resolvedContext) {
         console.log(`[PromptTranslation] 📝 본문 맥락 포함 (${resolvedContext.length}자): "${String(resolvedContext).substring(0, 60)}..."`);
@@ -524,20 +565,18 @@ export async function generateEnglishPromptForHeading(heading: any, baseKeywords
         // ✅ [2026-03-20] 실패 카운터 체크 — 3회 연속 실패 시 세션 내 건너뛰기
         const failures = _modelFailureCount.get(name) || 0;
         if (failures >= MAX_CONSECUTIVE_FAILURES) {
-            continue; // 해당 모델은 이 세션에서 비활성
+            continue;
         }
 
         try {
-            const result = await fn(headingTitle, imageStyle, resolvedContext);
+            const result = await fn(headingTitle, imageStyle, resolvedContext, sharedConfig);
             if (result) {
-                // ✅ [2026-03-18] AI 응답 정제 — Perplexity 자기 소개, 시스템 프롬프트 누출 차단
                 const sanitized = sanitizeAIPromptResponse(result);
                 console.log(`[PromptTranslation] ✅ ${name} 성공 [${imageStyle}]: "${headingTitle}" → "${sanitized.substring(0, 50)}..."`);
                 cacheTranslation(cacheKey, sanitized);
-                _modelFailureCount.set(name, 0); // 성공 시 카운터 리셋
+                _modelFailureCount.set(name, 0);
                 return sanitized;
             }
-            // null 반환 = API 키 없음 또는 응답 실패 → 실패 카운트 증가
             _modelFailureCount.set(name, failures + 1);
         } catch (err) {
             _modelFailureCount.set(name, failures + 1);

@@ -470,7 +470,7 @@ export async function debugCategoryElements(self: any, frame: Frame, page: Page)
  */
 export async function setScheduleDateTime(self: any, frame: Frame, scheduleDate: string): Promise<void> {
   const [datePart, timePart] = scheduleDate.split(' ');
-  const [year, month, day] = datePart.split('-');
+  let [year, month, day] = datePart.split('-');
   const [hour, minute] = timePart.split(':');
   const page = self.ensurePage();
 
@@ -519,12 +519,27 @@ export async function setScheduleDateTime(self: any, frame: Frame, scheduleDate:
   const roundedMinute = Math.round(minuteNum / 10) * 10;
   let adjustedHour = hour;
   let adjustedMinute = String(roundedMinute).padStart(2, '0');
+  let adjustedDatePart = datePart; // ✅ [BUG-5 FIX] 자정 교차 대비
   if (roundedMinute >= 60) {
     adjustedMinute = '00';
-    adjustedHour = String((parseInt(hour, 10) + 1) % 24).padStart(2, '0');
+    const newHour = parseInt(hour, 10) + 1;
+    adjustedHour = String(newHour % 24).padStart(2, '0');
+    // ✅ [2026-03-22 BUG-5 FIX] 자정 교차 시 날짜도 +1일 (23:55 → 00:00 → 다음 날)
+    if (newHour >= 24) {
+      const nextDay = new Date(`${datePart}T00:00:00`);
+      nextDay.setDate(nextDay.getDate() + 1);
+      adjustedDatePart = `${nextDay.getFullYear()}-${String(nextDay.getMonth() + 1).padStart(2, '0')}-${String(nextDay.getDate()).padStart(2, '0')}`;
+      self.log(`   ⚠️ [BUG-5 FIX] 자정 교차 감지: ${datePart} → ${adjustedDatePart} (시간: ${adjustedHour}:${adjustedMinute})`);
+    }
   }
   if (minute !== adjustedMinute) {
     self.log(`   ⏰ 분 반올림: ${minute}분 → ${adjustedMinute}분 (네이버 10분 단위 제한)`);
+  }
+
+  // ✅ [BUG-5 FIX] 자정 교차로 날짜가 변경된 경우 year/month/day 재파생
+  if (adjustedDatePart !== datePart) {
+    [year, month, day] = adjustedDatePart.split('-');
+    self.log(`   📅 [BUG-5 FIX] 날짜 변수 갱신: ${year}년 ${month}월 ${day}일`);
   }
 
   self.log(`   📝 방법 0 (최우선): 네이버 Smart Editor 전용 시간 입력 시도 (${adjustedHour}:${adjustedMinute})`);

@@ -4,6 +4,8 @@
 // modules/continuousPublishing.ts
 // ============================================
 
+import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
+
 // ═══════════════════════════════════════════════════════════════════
 // ✅ [2026-03-20] 네이버 캡차 방지 — 안전 발행 간격 시스템
 // 
@@ -331,7 +333,12 @@ export function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): vo
       console.log('[Continuous] ✅ 발행 완료 → 상태 초기화 완료');
     }
   } else {
-    console.log('[Continuous] 🛑 수동 중지 → resetAfterPublish 생략 (중지 플래그 유지)');
+    console.log('[Continuous] 🛑 수동 중지 → 발행 상태만 부분 리셋');
+    // ✅ [2026-03-22 FIX] 수동 중지에서도 isPublishing/isGenerating 플래그는 리셋
+    // 중지 후 재시도 시 "이미 실행 중" 오류 방지
+    (window as any).isPublishing = false;
+    (window as any).isGeneratingContent = false;
+    (window as any).isGeneratingImages = false;
   }
 
   renderQueueListV2(); // 큐 리스트 갱신
@@ -2490,8 +2497,7 @@ function showItemScheduleModal(item: any): void {
         </div>
         <div>
           <label style="font-size: 0.75rem; color: var(--text-muted, #999); display: block; margin-bottom: 0.25rem;">🕐 시간</label>
-          <input type="time" id="item-schedule-time" value="${currentTime || '09:00'}" step="600"
-            style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+          ${createTime24Select({ id: 'item-schedule-time', defaultValue: currentTime || '09:00', step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark; cursor: pointer; flex: 1;' })}
         </div>
       </div>
 
@@ -2507,6 +2513,7 @@ function showItemScheduleModal(item: any): void {
   `;
 
   document.body.appendChild(overlay);
+  bindTime24Events(overlay);
 
   // 닫기
   const closeModal = () => overlay.remove();
@@ -2633,8 +2640,7 @@ function showRandomScheduleModal(): void {
           </div>
           <div>
             <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
-            <input type="time" id="rnd-schedule-start-time" value="${defaultStartTime}" step="600"
-              style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+            ${createTime24Select({ id: 'rnd-schedule-start-time', defaultValue: defaultStartTime, step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark; cursor: pointer; flex: 1;' })}
           </div>
         </div>
       </div>
@@ -2650,8 +2656,7 @@ function showRandomScheduleModal(): void {
           </div>
           <div>
             <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
-            <input type="time" id="rnd-schedule-end-time" value="${defaultEndTime}" step="600"
-              style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+            ${createTime24Select({ id: 'rnd-schedule-end-time', defaultValue: defaultEndTime, step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark; cursor: pointer; flex: 1;' })}
           </div>
         </div>
       </div>
@@ -2681,14 +2686,15 @@ function showRandomScheduleModal(): void {
   `;
 
   document.body.appendChild(overlay);
+  bindTime24Events(overlay);
 
   // 프리셋 버튼
   overlay.querySelectorAll('.rnd-preset').forEach(btn => {
     btn.addEventListener('click', () => {
       const s = (btn as HTMLElement).dataset.start || '09:00';
       const e = (btn as HTMLElement).dataset.end || '18:00';
-      (document.getElementById('rnd-schedule-start-time') as HTMLInputElement).value = s;
-      (document.getElementById('rnd-schedule-end-time') as HTMLInputElement).value = e;
+      setTime24Value('rnd-schedule-start-time', s);
+      setTime24Value('rnd-schedule-end-time', e);
       toastManager.info(`⏰ ${s} ~ ${e} 시간대가 설정되었습니다.`);
     });
   });
@@ -2815,7 +2821,7 @@ function showIndividualScheduleModal(): void {
         <input type="checkbox" class="indv-check" data-idx="${i}" ${isScheduled ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
         <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8rem; color: var(--text-strong, #fff);" title="${label}">${shortLabel}</div>
         <input type="date" class="indv-date" data-idx="${i}" value="${curDate}" style="padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.8rem; color-scheme: dark; width: 130px;">
-        <input type="time" class="indv-time" data-idx="${i}" value="${curTime || '09:00'}" step="600" style="padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.8rem; color-scheme: dark; width: 100px;">
+        ${createTime24Select({ className: 'indv-time', dataIdx: i, defaultValue: curTime || '09:00', step: 10, style: 'width: 100px;', selectStyle: 'padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark; cursor: pointer;' })}
       </div>`;
   }).join('');
 
@@ -2836,7 +2842,7 @@ function showIndividualScheduleModal(): void {
         <div style="margin-left: auto; display: flex; align-items: center; gap: 0.4rem;">
           <span style="font-size: 0.75rem; color: var(--text-muted);">선택 항목 일괄:</span>
           <input type="date" id="indv-bulk-date" style="padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark;">
-          <input type="time" id="indv-bulk-time" value="09:00" step="600" style="padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark;">
+          ${createTime24Select({ id: 'indv-bulk-time', defaultValue: '09:00', step: 10, selectStyle: 'padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.7rem; color-scheme: dark; cursor: pointer;' })}
           <button type="button" id="indv-bulk-apply" style="padding: 0.3rem 0.6rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 6px; color: #60a5fa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">적용</button>
         </div>
       </div>
@@ -2863,6 +2869,7 @@ function showIndividualScheduleModal(): void {
   `;
 
   document.body.appendChild(overlay);
+  bindTime24Events(overlay);
 
   // 전체 선택
   document.getElementById('indv-select-all')?.addEventListener('change', (e) => {
@@ -2885,9 +2892,8 @@ function showIndividualScheduleModal(): void {
       if ((cb as HTMLInputElement).checked) {
         const idx = (cb as HTMLElement).dataset.idx;
         const dateInput = overlay.querySelector(`.indv-date[data-idx="${idx}"]`) as HTMLInputElement;
-        const timeInput = overlay.querySelector(`.indv-time[data-idx="${idx}"]`) as HTMLInputElement;
         if (dateInput) dateInput.value = bulkDate;
-        if (timeInput) timeInput.value = bulkTime;
+        setTime24ValueByIdx(idx, bulkTime, overlay);
         appliedCount++;
       }
     });

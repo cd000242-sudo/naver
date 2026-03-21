@@ -85,6 +85,9 @@ declare function ensureUnifiedPreviewVideoDelegation(): void;
 declare function getHeadingVideoPreviewFromCache(heading: string): any;
 declare function prefetchHeadingVideoPreview(heading: string, ...args: any[]): void;
 declare function withErrorHandling(fn: Function, fallback?: any): any;
+declare function resetPublishing(): void;
+declare function resetImageGeneration(): void;
+declare function resetContentGeneration(): void;
 declare function isPaywallPayload(payload: any): boolean;
 declare function resetThumbnailGeneratorOnPublish(): void;
 declare function collectUnifiedCtas(): any[];
@@ -977,6 +980,11 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
     return automationResult;
   } catch (error) {
     console.error('[FullAutoFlow] 오류:', error);
+
+    // ✅ [2026-03-22 FIX] 실패 시 발행 상태 리셋 (재시도 가능하도록)
+    try { resetPublishing(); } catch (e) { console.warn('[FullAutoFlow] resetPublishing 오류:', e); }
+    try { hideUnifiedProgress(); } catch (e) { /* ignore */ }
+
     throw error;
   }
 }
@@ -997,6 +1005,7 @@ export async function executeSemiAutoFlow(formData: any): Promise<any> {
     }
   };
 
+  try {
   // 반자동 로직 구현
   appendLog('🔧 반자동 모드: 수동 콘텐츠 기반 자동화 시작');
   showUnifiedProgress(5, '수동 콘텐츠 처리 시작', '입력된 콘텐츠를 분석하고 있습니다.');
@@ -1166,6 +1175,15 @@ export async function executeSemiAutoFlow(formData: any): Promise<any> {
   }, 3000);
 
   return automationResult;
+  } catch (error) {
+    console.error('[SemiAutoFlow] 오류:', error);
+
+    // ✅ [2026-03-22 FIX] 반자동 발행 실패 시 발행 상태 리셋 (재시도 가능하도록)
+    try { resetPublishing(); } catch (e) { console.warn('[SemiAutoFlow] resetPublishing 오류:', e); }
+    try { hideUnifiedProgress(); } catch (e) { /* ignore */ }
+
+    throw error;
+  }
 }
 
 // 통합 미리보기 업데이트

@@ -982,6 +982,11 @@ export async function generateContentFromKeywords(
     // 에러 로그는 항상 기록
     if (activeModal.addLog) activeModal.addLog(`❌ 오류: ${(error as Error).message}`);
 
+    // ✅ [2026-03-22 FIX] 글 생성 실패 시 글 생성 상태만 리셋 (세분화 리셋)
+    if (typeof (window as any).resetContentGeneration === 'function') {
+      (window as any).resetContentGeneration();
+    }
+
     // 개별 모달인 경우에만 닫기
     if (!suppressModal && aiProgressModal.hide) {
       aiProgressModal.hide();

@@ -2333,9 +2333,24 @@ async function fetchProductByIdDirectly(productId: string, originalUrl: string):
 export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateProductInfo | null> {
     console.log(`[AffiliateCrawler] 🔗 원본 URL: ${rawUrl}`);
 
+    // ✅ [2026-03-22] 네이버 스토어 공통 CSS 셀렉터 (중복 방지용 상수)
+    const STORE_SELECTORS = {
+      productName: 'h3.DCVBehA8ZB._copyable, .P2lBbUWPNi h3, h3[class*="DCVBehA8ZB"]',
+      waitFor: 'h3.DCVBehA8ZB, .P2lBbUWPNi h3, [class*="ProductName"]',
+      discountPrice: 'strong.Xu9MEKUuIo span.e1DMQNBPJ_',
+      originalPrice: 'del.VaZJPclpdJ span.e1DMQNBPJ_',
+      specRows: '.BQJHG3qqZ4 table.RCLS1uAn0a tr',
+      specTh: 'th.rSg_SEReAx',
+      specTd: 'td.jO2sMomC3g',
+      thumbnails: 'img.fxmqPhYp6y, .K4l1t0ryUq img, .MLx6OjiZJZ img',
+      bigImage: 'img.TgO1N1wWTm',
+      reviewImages: ['img.b4oJEbKqQ2', 'img[alt="review_image"]', 'img[src*="checkout.phinf"]'],
+    };
+
     // ✅ [속도 최적화] 1단계: HTTP HEAD로 빠르게 리다이렉트 추적 (Puppeteer 없이!)
     let resolvedUrl = rawUrl;
-    if (rawUrl.includes('naver.me') || rawUrl.includes('brandconnect.naver.com')) {
+    // brandconnect는 JS redirect이므로 HEAD로 따라갈 수 없음 → naver.me만 HEAD 시도
+    if (rawUrl.includes('naver.me')) {
         console.log(`[AffiliateCrawler] 🔄 단축 URL 감지 → HTTP HEAD로 빠르게 추적...`);
         try {
             let currentUrl = rawUrl;
@@ -2353,10 +2368,10 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
                             ? `${new URL(currentUrl).origin}${location}`
                             : location;
 
-                        // 스마트스토어/브랜드스토어 URL 발견 시 즉시 중단
-                        if (currentUrl.includes('smartstore.naver.com') || currentUrl.includes('brand.naver.com')) {
+                        // 스마트스토어/브랜드스토어/브랜드커넥트 URL 발견 시 즉시 중단
+                        if (currentUrl.includes('smartstore.naver.com') || currentUrl.includes('brand.naver.com') || currentUrl.includes('brandconnect.naver.com')) {
                             resolvedUrl = currentUrl;
-                            console.log(`[AffiliateCrawler] ✅ 스토어 URL 발견: ${currentUrl.substring(0, 60)}...`);
+                            console.log(`[AffiliateCrawler] ✅ 스토어 URL 발견: ${currentUrl.substring(0, 80)}...`);
                             break;
                         }
                     } else break;
@@ -2370,6 +2385,202 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
     // ✅ [속도 최적화] 2단계: URL에서 스토어명 추출 후 공식 API 먼저 시도
     let storeMatch = resolvedUrl.match(/(?:smartstore|brand)\.naver\.com\/([^\/\?]+)/);
     let storeName = storeMatch ? storeMatch[1] : null;
+
+    // ✅ [2026-03-22 FIX] brandconnect URL → Playwright로 JS 리다이렉트 따라가서 실제 스토어 도달 + 상품 크롤링
+    if (!storeName && resolvedUrl.includes('brandconnect.naver.com')) {
+      console.log(`[AffiliateCrawler] 🔗 brandconnect URL 감지 → Playwright로 JS 리다이렉트 추적 + 상품 크롤링`);
+      let bcPage: any = null;
+      try {
+        const { createPage, releasePage, warmup } = await import('./crawlerBrowser.js');
+        bcPage = await createPage();
+        await warmup(bcPage);
+
+        console.log(`[AffiliateCrawler] 🌐 brandconnect 페이지 로딩...`);
+        await bcPage.goto(resolvedUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
+
+        // JS 리다이렉트 대기 (최대 12초, smartstore/brand.naver.com 도달할 때까지)
+        const maxWait = 12000;
+        const interval = 500;
+        let elapsed = 0;
+        let arrivedAtStore = false;
+
+        while (elapsed < maxWait) {
+          await bcPage.waitForTimeout(interval);
+          elapsed += interval;
+          const currentUrl = bcPage.url();
+
+          if (currentUrl.includes('smartstore.naver.com') || currentUrl.includes('brand.naver.com')) {
+            resolvedUrl = currentUrl;
+            const newStoreMatch = currentUrl.match(/(?:smartstore|brand)\.naver\.com\/([^\/\?]+)/);
+            if (newStoreMatch) {
+              storeName = newStoreMatch[1];
+              console.log(`[AffiliateCrawler] ✅ brandconnect → 스토어 도달! 스토어: ${storeName}, URL: ${currentUrl.substring(0, 80)}`);
+              arrivedAtStore = true;
+            }
+            break;
+          }
+        }
+
+        if (arrivedAtStore && storeName) {
+          // ✅ 실제 스토어 페이지에 도달 → 상품 정보 직접 크롤링
+          console.log(`[AffiliateCrawler] 📦 스토어 페이지에서 상품 정보 크롤링...`);
+
+          // SPA 렌더링 대기
+          try {
+            await bcPage.waitForSelector(STORE_SELECTORS.waitFor, { timeout: 8000 });
+          } catch { console.log('[AffiliateCrawler] ⚠️ 상품명 셀렉터 대기 타임아웃, 계속 진행'); }
+
+          await bcPage.waitForTimeout(1000 + Math.random() * 500);
+
+          // 상품 정보 추출 (공통 셀렉터 사용)
+          const sels = STORE_SELECTORS;
+          const productData = await bcPage.evaluate((s: any) => {
+            const ogTitle = document.querySelector('meta[property="og:title"]')?.getAttribute('content') || '';
+            const ogImage = document.querySelector('meta[property="og:image"]')?.getAttribute('content') || '';
+            const ogDesc = document.querySelector('meta[property="og:description"]')?.getAttribute('content') || '';
+
+            const nameEl = document.querySelector(s.productName);
+            const productName = nameEl?.textContent?.trim() || ogTitle;
+
+            const discountPrice = document.querySelector(s.discountPrice)?.textContent?.trim() || '';
+            const originalPrice = document.querySelector(s.originalPrice)?.textContent?.trim() || '';
+            const price = discountPrice || originalPrice;
+
+            // 상품 스펙 테이블
+            let specs = '';
+            document.querySelectorAll(s.specRows).forEach(row => {
+              const th = row.querySelector(s.specTh)?.textContent?.trim() || '';
+              const td = row.querySelector(s.specTd)?.textContent?.trim() || '';
+              if (th && td) specs += `${th}: ${td}\n`;
+            });
+
+            return { productName, price, ogImage, ogDesc, specs };
+          }, sels);
+
+
+          // 갤러리 이미지 수집 (썸네일 클릭)
+          const galleryImages: string[] = [];
+          try {
+            const thumbnails = await bcPage.$$(STORE_SELECTORS.thumbnails);
+            const seenUrls = new Set<string>();
+            for (let ti = 0; ti < thumbnails.length && ti < 10; ti++) {
+              try {
+                await thumbnails[ti].click();
+                await bcPage.waitForTimeout(400 + Math.random() * 300);
+                const bigImgSel = STORE_SELECTORS.bigImage;
+                const bigImgUrl = await bcPage.evaluate((sel: string) => {
+                  const bigImg = document.querySelector(sel) as HTMLImageElement;
+                  return bigImg ? (bigImg.src || bigImg.dataset?.src || null) : null;
+                }, bigImgSel);
+                if (bigImgUrl && bigImgUrl.length > 20) {
+                  const baseUrl = bigImgUrl.split('?')[0];
+                  if (!seenUrls.has(baseUrl)) {
+                    galleryImages.push(baseUrl + '?type=m1000_pd');
+                    seenUrls.add(baseUrl);
+                  }
+                }
+              } catch {}
+            }
+            // OG 이미지 추가
+            if (productData.ogImage && !seenUrls.has(productData.ogImage.split('?')[0])) {
+              galleryImages.unshift(productData.ogImage.split('?')[0] + '?type=m1000_pd');
+            }
+          } catch (gallErr) {
+            console.log(`[AffiliateCrawler] ⚠️ 갤러리 수집 실패: ${(gallErr as Error).message}`);
+            if (productData.ogImage) galleryImages.push(productData.ogImage);
+          }
+
+          // 리뷰 이미지 수집
+          let reviewImages: string[] = [];
+          try {
+            for (let si = 0; si < 6; si++) {
+              await bcPage.evaluate(() => window.scrollBy(0, 800));
+              await bcPage.waitForTimeout(400 + Math.random() * 200);
+            }
+            await bcPage.waitForTimeout(1000);
+
+            const revSels = STORE_SELECTORS.reviewImages;
+            reviewImages = await bcPage.evaluate((selectors: string[]) => {
+              const imgs: string[] = [];
+              const seen = new Set<string>();
+              selectors.forEach(sel => {
+                document.querySelectorAll(sel).forEach(el => {
+                  const img = el as HTMLImageElement;
+                  const src = img.src || img.dataset?.src || '';
+                  if (!src || src.length < 20) return;
+                  if (src.includes('banner') || src.includes('icon') || src.includes('logo')) return;
+                  const base = src.split('?')[0];
+                  if (!seen.has(base) && src.includes('pstatic.net')) {
+                    imgs.push(src.includes('checkout.phinf') ? base : src.replace(/\?type=.*$/, '?type=f640_640'));
+                    seen.add(base);
+                  }
+                });
+              });
+              return imgs.slice(0, 8);
+            }, revSels);
+          } catch {}
+
+          await releasePage(bcPage);
+          bcPage = null;
+
+          const allImages = [...galleryImages, ...reviewImages];
+          const priceNum = parseInt((productData.price || '').replace(/[^0-9]/g, '')) || 0;
+          const description = [
+            productData.ogDesc || '',
+            productData.specs ? `\n주요 스펙:\n${productData.specs}` : '',
+          ].filter(Boolean).join('\n').trim();
+
+          if (productData.productName && productData.productName.length > 2) {
+            console.log(`[AffiliateCrawler] ✅ brandconnect 크롤링 성공! "${productData.productName}" (${priceNum.toLocaleString()}원, 이미지 ${allImages.length}장)`);
+            return {
+              name: productData.productName,
+              price: priceNum,
+              stock: 1,
+              options: [],
+              detailUrl: rawUrl,
+              mainImage: allImages[0] || null,
+              galleryImages: allImages,
+              detailImages: [],
+              description: description || `${productData.productName} 상품입니다.`,
+            };
+          }
+        }
+
+        // 스토어에 도달 못한 경우 → 현재 페이지에서 OG 태그라도 추출
+        if (!arrivedAtStore && bcPage) {
+          const fallbackInfo = await bcPage.evaluate(() => {
+            return {
+              title: document.querySelector('meta[property="og:title"]')?.getAttribute('content')?.trim() || '',
+              desc: document.querySelector('meta[property="og:description"]')?.getAttribute('content')?.trim() || '',
+              image: document.querySelector('meta[property="og:image"]')?.getAttribute('content') || '',
+            };
+          });
+
+          await releasePage(bcPage);
+          bcPage = null;
+
+          if (fallbackInfo.title && fallbackInfo.title.length > 2) {
+            console.log(`[AffiliateCrawler] ⚠️ 스토어 미도달, OG 태그 폴백: "${fallbackInfo.title}"`);
+            return {
+              name: fallbackInfo.title,
+              price: 0,
+              stock: 1,
+              options: [],
+              detailUrl: rawUrl,
+              mainImage: fallbackInfo.image || null,
+              galleryImages: fallbackInfo.image ? [fallbackInfo.image] : [],
+              detailImages: [],
+              description: fallbackInfo.desc || `${fallbackInfo.title} 상품입니다.`,
+            };
+          }
+        }
+
+        if (bcPage) { await releasePage(bcPage); }
+      } catch (bcErr) {
+        console.warn(`[AffiliateCrawler] ⚠️ brandconnect Playwright 실패: ${(bcErr as Error).message}`);
+        if (bcPage) { try { const { releasePage: rp } = await import('./crawlerBrowser.js'); await rp(bcPage); } catch {} }
+      }
+    }
 
     // ✅ [2026-02-01] naver.me URL인데 스토어명 추출 실패 시, Playwright 전에 HTTP GET으로 시도
     if (!storeName && rawUrl.includes('naver.me')) {

@@ -2779,19 +2779,25 @@ export async function autoAnalyzeHeadings(structuredContent: any): Promise<void>
     appendLog(`🔍 ${allSections.length}개 섹션 분석 시작... (서론: ${structuredContent.introduction ? '있음' : '없음'}, 마무리: ${structuredContent.conclusion ? '있음' : '없음'})`);
 
     // 소제목을 이미지 관리 탭 형식으로 변환
-    // ✅ [2026-02-27 FIX] AI 기반 프롬프트 생성 (Gemini→OpenAI→Claude→Perplexity 폴백 체인)
-    const headings = await Promise.all(allSections.map(async (section: any) => {
-      const title = section.title;
-      const override = getManualEnglishPromptOverrideForHeading(title);
-      const prompt = override || await generateEnglishPromptForHeading(title);
-      return {
-        title,
-        content: section.content,
-        prompt,
-        isIntro: section.isIntro,
-        isConclusion: section.isConclusion
-      };
-    }));
+    // ✅ [2026-03-22] 동시성 제한 (2개씩) — Promise.all 전체 동시 발사 → Rate limit 방지
+    const CONCURRENCY = 2;
+    const headings: Array<{ title: string; content: string; prompt: string; isIntro?: boolean; isConclusion?: boolean }> = [];
+    for (let i = 0; i < allSections.length; i += CONCURRENCY) {
+      const batch = allSections.slice(i, i + CONCURRENCY);
+      const batchResults = await Promise.all(batch.map(async (section: any) => {
+        const title = section.title;
+        const override = getManualEnglishPromptOverrideForHeading(title);
+        const prompt = override || await generateEnglishPromptForHeading(title);
+        return {
+          title,
+          content: section.content,
+          prompt,
+          isIntro: section.isIntro,
+          isConclusion: section.isConclusion
+        };
+      }));
+      headings.push(...batchResults);
+    }
 
     // ✅ [2026-02-27 CRITICAL FIX] AI 프롬프트를 structuredContent.headings에 write-back
     // autoAnalyzeHeadings가 생성한 영어 프롬프트가 LOCAL headings 배열에만 저장되고

@@ -3504,27 +3504,28 @@ const ImageManager = {
   syncGeneratedImagesArray(): void {
     generatedImages = [];
 
-    // ✅ 소제목 순서대로 1장씩 유지 (발행/썸네일/매칭 안정화)
+    // ✅ [2026-03-22 FIX] 소제목 순서대로 모든 이미지 포함 (대표+추가 이미지 모두 발행)
+    // 기존: getImage()로 1장만 → 추가 이미지 발행 누락 버그
     if (Array.isArray(this.headings) && this.headings.length > 0) {
       this.headings.forEach((h: any, idx: number) => {
         const title = typeof h === 'string' ? String(h).trim() : String(h?.title || h || '').trim();
         if (!title) return;
-        const img = this.getImage(title);
-        if (img) {
+        const imgs = this.getImages(title) || [];
+        imgs.forEach((img: any) => {
           // ✅ [2026-02-12 P3 FIX #17] 원본 mutation 방지: 복사본 사용
           const imgCopy = { ...img };
           if (imgCopy.headingIndex === undefined || imgCopy.headingIndex === null) {
             imgCopy.headingIndex = idx;
           }
           generatedImages.push(imgCopy);
-        }
+        });
       });
     } else {
-      // fallback
+      // fallback: 모든 이미지 포함
       this.imageMap.forEach((images) => {
-        if (images.length > 0) {
-          generatedImages.push(images[0]);
-        }
+        images.forEach((img: any) => {
+          generatedImages.push({ ...img });
+        });
       });
     }
     // ✅ [2026-02-27 FIX] 썸네일 이미지도 generatedImages에 포함 (UI 표시용)
@@ -11480,6 +11481,14 @@ async function executeUnifiedAutomation(formData: any): Promise<void> {
 
   if (!result) {
     toastManager.error('❌ 통합 자동화 실행에 실패했습니다.');
+
+    // ✅ [2026-03-22 FIX] 실패 시 발행 상태 리셋 (재시도 가능하도록)
+    // withErrorHandling이 에러를 삼키고 null 반환 → 여기서 상태 정리 필수
+    // resetPublishing 내부의 resetProgressUI가 진행률 바 DOM도 자동 정리
+    if (typeof (window as any).resetPublishing === 'function') {
+      (window as any).resetPublishing();
+    }
+
     // ✅ [2026-02-26 FIX] 실패 시에도 연속 발행 모드면 다음 글로 진행 (기존: 실패 시 멈춤)
     if (isContinuousMode) {
       console.log('[Continuous] ⚠️ 발행 실패했지만 연속 발행 모드이므로 다음 글로 진행');
