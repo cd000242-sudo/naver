@@ -2094,7 +2094,7 @@ export function openHeadingImageModal(): void {
 
       // ✅ [2026-01-28] 쇼핑커넥트 전용 필드들 로드
       if (isShoppingConnect) {
-        const scSubImageSource = localStorage.getItem('scSubImageSource') || 'ai';
+        const scSubImageSource = localStorage.getItem('scSubImageSource') || 'collected';
         const scSubImageRadio = document.querySelector(`input[name="sc-sub-image-source"][value="${scSubImageSource}"]`) as HTMLInputElement;
         if (scSubImageRadio) scSubImageRadio.checked = true;
 

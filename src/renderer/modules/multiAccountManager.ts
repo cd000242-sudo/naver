@@ -2932,7 +2932,7 @@ export async function initMultiAccountPublishModal() {
 
             // ✅ [2026-02-16 FIX] 쇼핑커넥트 이미지-소제목 매칭 + 썸네일 오버레이
             // executeUnifiedAutomation에 있지만 다중계정 흐름에서 누락되었던 후처리 로직
-            const scSubImageSourcePre = localStorage.getItem('scSubImageSource') || 'ai';
+            const scSubImageSourcePre = localStorage.getItem('scSubImageSource') || 'collected';
             if (generatedImages.length > 0 && queueItem.contentMode === 'affiliate') {
               // A. 이미지-소제목 매칭
               const shouldMatchCollected = scSubImageSourcePre === 'collected';
@@ -3349,7 +3349,7 @@ export async function initMultiAccountPublishModal() {
             videoOption: queueItem.videoOption,      // ✅ [2026-01-20] VEO 영상 변환 옵션
             useAiImage: queueItem.useAiImage ?? true, // ✅ [2026-01-20] AI 이미지 생성 사용 여부
             createProductThumbnail: queueItem.createProductThumbnail ?? false, // ✅ [2026-01-20] 제품 썸네일 합성
-            scSubImageSource: localStorage.getItem('scSubImageSource') || 'ai', // ✅ [2026-02-16 FIX] 수집이미지 직접 사용 설정 전달
+            scSubImageSource: localStorage.getItem('scSubImageSource') || 'collected', // ✅ [2026-02-16 FIX] 수집이미지 직접 사용 설정 전달
             collectedImages: structuredContent?.collectedImages || [],          // ✅ [2026-02-16 FIX] 수집 이미지 직접 전달
             // ✅ [2026-02-02 FIX] 이전글 엮기 필드 추가 (기존 누락으로 인한 버그 수정)
             previousPostUrl: (queueItem as any)?.previousPostUrl || undefined,

@@ -426,7 +426,7 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
 
     // 3. 이미지가 없고 skipImages가 false면 선택된 이미지 소스로 이미지 생성
     // ✅ [2026-02-01 FIX] 쇼핑커넥트 "수집 이미지" 모드면 AI 생성하지 않음
-    const scSubImageSource = localStorage.getItem('scSubImageSource') || 'ai';
+    const scSubImageSource = localStorage.getItem('scSubImageSource') || 'collected';
     const isCollectedMode = formData.contentMode === 'affiliate' && scSubImageSource === 'collected';
 
     // ✅ [2026-02-01 FIX] 수집 이미지 모드일 때 structuredContent에서 이미지 가져오기

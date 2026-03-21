@@ -1469,7 +1469,9 @@ const UnifiedDOMCache = {
       'perplexity-sonar': 'perplexity',
       'openai-gpt4o': 'openai',
       'openai-gpt4o-mini': 'openai',
+      'openai-gpt41': 'openai',
       'claude-haiku': 'claude',
+      'claude-sonnet': 'claude',
       'claude-opus': 'claude',
     };
     const derivedProvider = modelToProvider[selectedModel];

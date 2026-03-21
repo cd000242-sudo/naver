@@ -124,6 +124,51 @@ function resetAutoCloseTimer(): void {
     }, AUTO_CLOSE_MS);
 }
 
+/**
+ * ✅ [2026-03-21] about:blank 탭 안전 정리 헬퍼
+ * - launchPersistentContext / AdsPower CDP 연결 후 자동 생성되는 about:blank 탭 닫기
+ * - 최후 1개 페이지는 절대 닫지 않음 (context 무효화 방지)
+ * - Stealth 모드에서만 CDP 최소화 (AdsPower는 자체 CDP → 미지원 가능)
+ * @param ctx BrowserContext
+ * @param skipCdpMinimize true면 CDP 최소화 시도 안 함 (AdsPower 등)
+ */
+async function cleanupInitialBlankPages(ctx: BrowserContext, skipCdpMinimize = false): Promise<void> {
+    try {
+        const pages = ctx.pages();
+        if (pages.length <= 1) {
+            console.log('[CrawlerBrowser] ℹ️ 페이지 1개뿐 → about:blank 유지 (context 보호)');
+            // ✅ Stealth 모드에서만 CDP 최소화 (AdsPower는 자체 CDP → 호환성 문제)
+            if (!skipCdpMinimize && pages.length === 1) {
+                try {
+                    const cdp = await pages[0].context().newCDPSession(pages[0]);
+                    await cdp.send('Browser.setWindowBounds', {
+                        windowId: (await cdp.send('Browser.getWindowForTarget')).windowId,
+                        bounds: { windowState: 'minimized' }
+                    });
+                    console.log('[CrawlerBrowser] 📐 브라우저 창 최소화 완료');
+                } catch { /* CDP 최소화 실패는 무시 */ }
+            }
+            return;
+        }
+
+        // 2개 이상이면 about:blank 탭만 닫기 (최소 1개 유지)
+        let closedCount = 0;
+        for (const p of pages) {
+            if (ctx.pages().length <= 1) break;
+            const url = p.url();
+            if (url === 'about:blank' || url === '') {
+                await p.close();
+                closedCount++;
+            }
+        }
+        if (closedCount > 0) {
+            console.log(`[CrawlerBrowser] 🗑️ about:blank ${closedCount}개 탭 닫기 완료`);
+        }
+    } catch (e) {
+        console.warn('[CrawlerBrowser] ⚠️ 탭 정리 실패 (무시):', (e as Error).message);
+    }
+}
+
 // ═══════════════════════════════════════════════════
 // 공개 API
 // ═══════════════════════════════════════════════════
@@ -184,6 +229,9 @@ export async function getSharedContext(): Promise<BrowserContext> {
                         _context = contexts[0] || await _adsPowerBrowser.newContext();
                         _isAdsPower = true;
                         _adsPowerProfileId = profileId;
+                        
+                        // ✅ [2026-03-21] AdsPower: about:blank 정리 (CDP 최소화 스킵 — 자체 CDP 비호환)
+                        await cleanupInitialBlankPages(_context, true);
                         
                         console.log('[CrawlerBrowser] ✅ AdsPower 브라우저 연결 완료! (지문 마스킹 활성)');
                         resetAutoCloseTimer();
@@ -267,6 +315,10 @@ export async function getSharedContext(): Promise<BrowserContext> {
             });
 
             _isAdsPower = false;
+
+            // ✅ [2026-03-21] Stealth에서도 about:blank 정리 + 최소화
+            await cleanupInitialBlankPages(_context);
+
             console.log('[CrawlerBrowser] ✅ Stealth 브라우저 컨텍스트 준비 완료');
             resetAutoCloseTimer();
             return _context;
@@ -300,6 +352,18 @@ export async function createPage(): Promise<Page> {
 
     const context = await getSharedContext();
     const page = await context.newPage();
+
+    // ✅ [2026-03-21] 새 페이지 생성 후 남아있는 about:blank 탭 정리
+    // launchPersistentContext 시 pages.length <= 1이어서 유지했던 about:blank를
+    // 이제 새 페이지가 생겼으므로 안전하게 닫을 수 있음
+    try {
+        for (const p of context.pages()) {
+            if (p !== page && (p.url() === 'about:blank' || p.url() === '')) {
+                await p.close();
+                console.log('[CrawlerBrowser] 🗑️ 잔여 about:blank 탭 정리');
+            }
+        }
+    } catch { /* 이미 닫힌 페이지 무시 */ }
 
     // Stealth 초기화 스크립트 주입
     await page.addInitScript(STEALTH_INIT_SCRIPT);

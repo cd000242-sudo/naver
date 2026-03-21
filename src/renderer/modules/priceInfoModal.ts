@@ -484,6 +484,8 @@ export async function initPriceInfoModal(): Promise<void> {
           'gemini-3-flash-preview': 'Gemini 3 Flash',
           'gemini-2.5-flash': 'Gemini 2.5 Flash',
           'perplexity-sonar': '🔮 Perplexity AI',
+          'openai-gpt41': '⚖️ GPT-4.1',
+          'claude-sonnet': '📜 Claude Sonnet 4.6',
         };
         navStatusEl.textContent = `현재: ${modelNames[config.primaryGeminiTextModel] || config.primaryGeminiTextModel}`;
       }
@@ -747,7 +749,7 @@ export async function initPriceInfoModal(): Promise<void> {
           // ✅ [2026-02-22 FIX] primaryGeminiTextModel에서 defaultAiProvider 자동 파생
           openaiApiKey: (document.getElementById('openai-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-02-22] OpenAI API
           claudeApiKey: (document.getElementById('claude-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-02-22] Claude API
-          defaultAiProvider: (() => { const m = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value; return m === 'perplexity-sonar' ? 'perplexity' : (m === 'openai-gpt4o' || m === 'openai-gpt4o-mini') ? 'openai' : (m === 'claude-haiku' || m === 'claude-opus') ? 'claude' : 'gemini'; })(),
+          defaultAiProvider: (() => { const m = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value; return m === 'perplexity-sonar' ? 'perplexity' : (m === 'openai-gpt4o' || m === 'openai-gpt4o-mini' || m === 'openai-gpt41') ? 'openai' : (m === 'claude-haiku' || m === 'claude-sonnet' || m === 'claude-opus') ? 'claude' : 'gemini'; })(),
         };
 
 
@@ -827,6 +829,8 @@ export async function initPriceInfoModal(): Promise<void> {
                 'gemini-3-flash-preview': 'Gemini 3 Flash',
                 'gemini-2.5-flash': 'Gemini 2.5 Flash',
                 'perplexity-sonar': '🔮 Perplexity AI',
+                'openai-gpt41': '⚖️ GPT-4.1',
+                'claude-sonnet': '📜 Claude Sonnet 4.6',
               };
               statusEl.textContent = `현재: ${names[config.primaryGeminiTextModel] || config.primaryGeminiTextModel}`;
             }

@@ -4186,47 +4186,37 @@ export class NaverBlogAutomation {
           throw new Error('예약발행 날짜가 지정되지 않았습니다.');
         }
 
-        // ✅ 예약발행 시도, 실패 시 임시저장으로 폴백
-        try {
-          await this.publishScheduled(scheduleDate);
-        } catch (scheduleError) {
-          this.log(`❌ 예약발행 실패 (목표 날짜: ${scheduleDate}): ${(scheduleError as Error).message}`);
-          this.log(`💾 예약발행 실패로 인해 임시저장으로 폴백합니다...`);
+        // ✅ [2026-03-21 FIX] 예약발행 재시도 (최대 3회, 임시저장 폴백 제거)
+        const MAX_SCHEDULE_RETRIES = 3;
+        let scheduleSuccess = false;
+        let lastScheduleError: Error | null = null;
 
-          // 모달이 열려있으면 닫기
-          const frame = (await this.getAttachedFrame());
-          const page = this.ensurePage();
-          await page.keyboard.press('Escape').catch(() => { });
-          await this.delay(500);
-
-          // 임시저장 시도
+        for (let scheduleAttempt = 1; scheduleAttempt <= MAX_SCHEDULE_RETRIES; scheduleAttempt++) {
           try {
-            this.log('🔄 임시저장 시도 중...');
-            const saveButtonSelectors = [
-              'button.save_btn__bzc5B[data-click-area="tpb.save"]',
-              'button.save_btn__bzc5B',
-              'button[data-click-area="tpb.save"]',
-            ];
-
-            let saveButton: ElementHandle<Element> | null = null;
-            for (const selector of saveButtonSelectors) {
-              saveButton = await frame.waitForSelector(selector, { visible: true, timeout: 3000 }).catch(() => null);
-              if (saveButton) break;
+            if (scheduleAttempt > 1) {
+              this.log(`🔁 예약발행 재시도 (${scheduleAttempt}/${MAX_SCHEDULE_RETRIES})...`);
             }
+            await this.publishScheduled(scheduleDate);
+            scheduleSuccess = true;
+            break; // 성공 시 루프 탈출
+          } catch (scheduleError) {
+            lastScheduleError = scheduleError as Error;
+            this.log(`❌ 예약발행 실패 (시도 ${scheduleAttempt}/${MAX_SCHEDULE_RETRIES}, 목표: ${scheduleDate}): ${lastScheduleError.message}`);
 
-            if (saveButton) {
-              await saveButton.click();
-              await this.delay(this.DELAYS.MEDIUM);
-              await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
-              this.log('✅ 예약발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
-            } else {
-              this.log('⚠️ 임시저장 버튼도 찾을 수 없습니다. 저장 버튼을 수동으로 확인해주세요.');
-              throw new Error('임시저장 버튼을 찾을 수 없습니다.');
+            if (scheduleAttempt < MAX_SCHEDULE_RETRIES) {
+              // 모달이 열려있으면 닫고 재시도 준비
+              const page = this.ensurePage();
+              await page.keyboard.press('Escape').catch(() => { });
+              await this.delay(500);
+              await page.keyboard.press('Escape').catch(() => { }); // 중첩 모달 대비 2회
+              await this.delay(2000 * scheduleAttempt); // 재시도마다 대기 증가 (2초, 4초)
+              this.log(`⏳ ${2 * scheduleAttempt}초 대기 후 재시도합니다...`);
             }
-          } catch (fallbackError) {
-            this.log(`❌ 임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
-            throw new Error(`예약발행 실패: ${(scheduleError as Error).message}\n임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
           }
+        }
+
+        if (!scheduleSuccess) {
+          throw new Error(`예약발행 ${MAX_SCHEDULE_RETRIES}회 시도 모두 실패: ${lastScheduleError?.message || '알 수 없는 오류'}`);
         }
       }
     }, 3, '블로그 발행');

@@ -520,7 +520,7 @@ export async function handleFullAutoPublish(): Promise<void> {
         // 1. 수집된 이미지와 소제목 매칭 (지능형 매칭)
         // ✅ [2026-02-07 FIX] AI 이미지 생성 모드에서는 수집 이미지 매칭 스킵!
         // → AI 이미지 생성을 선택한 경우 수집 이미지 매칭은 불필요하고 혼란만 줌
-        const scSubImageSourcePre = localStorage.getItem('scSubImageSource') || 'ai';
+        const scSubImageSourcePre = localStorage.getItem('scSubImageSource') || 'collected';
         const shouldMatchCollected = !formData.useAiImage ||
           (formData.contentMode === 'affiliate' && scSubImageSourcePre === 'collected');
 
@@ -531,7 +531,7 @@ export async function handleFullAutoPublish(): Promise<void> {
               headings: structuredContent.headings || [],
               collectedImages: collectedImgs,
               // ✅ [2026-01-28] 수집 이미지 직접 사용 설정 전달 (localStorage에서 읽음)
-              scSubImageSource: localStorage.getItem('scSubImageSource') || 'ai'
+              scSubImageSource: localStorage.getItem('scSubImageSource') || 'collected'
             });
             if (matchResult.success && matchResult.assignments) {
               matchResult.assignments.forEach((assignment: any) => {
@@ -560,7 +560,7 @@ export async function handleFullAutoPublish(): Promise<void> {
         let generatedImgs: any[] = [];
 
         // ✅ [2026-01-31 FIX] 쇼핑커넥트 모드에서 "수집 이미지 사용" 설정 확인
-        const scSubImageSource = localStorage.getItem('scSubImageSource') || 'ai';
+        const scSubImageSource = localStorage.getItem('scSubImageSource') || 'collected';
         const isShoppingConnectCollected = formData.contentMode === 'affiliate' && scSubImageSource === 'collected';
 
         if (isShoppingConnectCollected) {
@@ -982,7 +982,7 @@ export async function handleMultiAccountPublish(): Promise<void> {
     generatedHashtags: (document.getElementById('unified-generated-hashtags') as HTMLInputElement)?.value || '',
     category: UnifiedDOMCache.getRealCategory() || undefined, // ✅ 카테고리 추가
     // ✅ [2026-01-28] 이미지 설정 전역 적용 (연속발행/다중계정에도 적용)
-    scSubImageSource: localStorage.getItem('scSubImageSource') || 'ai',  // 수집 이미지 직접 사용 여부
+    scSubImageSource: localStorage.getItem('scSubImageSource') || 'collected',  // 수집 이미지 직접 사용 여부
     thumbnailImageRatio: localStorage.getItem('thumbnailImageRatio') || '1:1',  // 썸네일 비율
     subheadingImageRatio: localStorage.getItem('subheadingImageRatio') || '1:1',  // 소제목 비율
     thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true',  // 썸네일 텍스트

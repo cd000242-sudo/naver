@@ -16,8 +16,21 @@
 //   3. 5개 발행마다 5~10분 추가 쿨다운
 // ═══════════════════════════════════════════════════════════════════
 
+/**
+ * ✅ [2026-03-21] 사용자 취소 전용 에러 클래스
+ * - 문자열 매칭('취소' 포함?) 대신 instanceof로 정확한 취소 판별
+ * - '카테고리 분석 취소' 같은 거짓 양성 방지
+ */
+class UserCancelledError extends Error {
+  constructor(message = '사용자가 작업을 취소했습니다.') {
+    super(message);
+    this.name = 'UserCancelledError';
+  }
+}
+
 const SAFE_PUBLISH_MIN_INTERVAL_SEC = 180; // 최소 3분 (네이버 봇 감지 임계값)
 let _continuousPublishCount = 0;           // 현재 세션 발행 횟수 (쿨다운 계산용)
+let _consecutiveFailCount = 0;             // ✅ [2026-03-21] 연속 실패 전용 카운터
 const COOLDOWN_EVERY_N = 5;                // N개마다 쿨다운
 const COOLDOWN_MIN_SEC = 300;              // 쿨다운 최소 5분
 const COOLDOWN_MAX_SEC = 600;              // 쿨다운 최대 10분
@@ -1210,7 +1223,7 @@ export function initContinuousPublishingV2(): void {
           }
 
           // ✅ [2026-02-19] localStorage → 서브탭 UI 복원
-          const scSubSrc = localStorage.getItem('scSubImageSource') || 'nano-banana-pro';
+          const scSubSrc = localStorage.getItem('scSubImageSource') || 'collected';
           document.querySelectorAll('input[name="continuous-modal-shopping-subimage-source"]').forEach(r => {
             (r as HTMLInputElement).checked = (r as HTMLInputElement).value === scSubSrc;
           });
@@ -3429,6 +3442,9 @@ async function startContinuousPublishingV2(): Promise<void> {
       }
       // 재생성 후 최신 structuredContent 다시 참조
       const finalStructuredContent = (window as any).currentStructuredContent;
+      if (!finalStructuredContent || !finalStructuredContent.selectedTitle) {
+        throw new Error('콘텐츠 생성에 실패했습니다 (본문이 비어있음). 이 항목을 건너뛰고 다음으로 넘어갑니다.');
+      }
       if (finalStructuredContent) {
         updateContinuousProgressModal({
           step: '블로그 발행 중...',
@@ -3470,7 +3486,7 @@ async function startContinuousPublishingV2(): Promise<void> {
             clearImageGenerationLocks();
 
             // ✅ [2026-01-28] 이미지 설정 전역 적용 (localStorage에서 읽음)
-            const scSubImageSource = localStorage.getItem('scSubImageSource') || 'ai';
+            const scSubImageSource = localStorage.getItem('scSubImageSource') || 'collected';
             const isCollectedMode = item.contentMode === 'affiliate' && scSubImageSource === 'collected';
 
             // ✅ [2026-03-07 FIX] 쇼핑커넥트 수집 이미지 모드일 때 AI 이미지 생성 완전 스킵
@@ -3633,7 +3649,7 @@ async function startContinuousPublishingV2(): Promise<void> {
         // ✅ [2026-03-11 FIX] 발행 실행 직전 최종 중지 체크 — 어떤 발행 모드든 반드시 적용
         if (!isContinuousMode || (window as any).stopFullAutoPublish) {
           appendLog('⏹️ 발행 전 중지 요청 감지 — 이 항목을 건너뜁니다.');
-          throw new Error('사용자가 작업을 취소했습니다.');
+          throw new UserCancelledError();
         }
 
         await executeUnifiedAutomation(formData);
@@ -3641,6 +3657,7 @@ async function startContinuousPublishingV2(): Promise<void> {
 
       item.status = 'completed';
       successCount++;
+      _consecutiveFailCount = 0; // ✅ 성공 시 연속 실패 카운터 리셋
       appendLog(`✅ 완료: ${item.value.substring(0, 30)}... (${modeLabel})`);
 
       // ✅ [2026-03-20 FIX] 이전글 체이닝: 발행 성공 후 방금 발행한 URL을 다음 아이템에 전달
@@ -3677,16 +3694,81 @@ async function startContinuousPublishingV2(): Promise<void> {
       });
 
     } catch (error) {
+      const errMsg = (error as Error).message || '';
+
+      // ✅ [2026-03-21] instanceof로 정확한 사용자 취소 판별
+      if (error instanceof UserCancelledError || !isContinuousMode || (window as any).stopFullAutoPublish) {
+        item.status = 'cancelled' as any;
+        appendLog(`⏹️ 사용자 중지 → 발행을 종료합니다.`);
+        updateContinuousProgressModal({
+          step: '사용자 중지',
+          log: '사용자가 발행을 중지했습니다.',
+          percentage: (currentIdx / totalCount) * 100
+        });
+        break;
+      }
+
+      // ✅ [2026-03-21] 실패 후 전역 상태 정리 (다음 시도 오염 방지)
+      try {
+        (window as any).currentStructuredContent = null;
+        (window as any).generatedImages = [];
+        (window as any).headingImageMap = new Map();
+        if (typeof clearImageGenerationLocks === 'function') clearImageGenerationLocks();
+        console.log('[Continuous] 🧹 실패 후 상태 정리 완료');
+      } catch (cleanupErr) {
+        console.warn('[Continuous] 상태 정리 오류 (무시):', cleanupErr);
+      }
+
+      _consecutiveFailCount++;
+
+      // ✅ [2026-03-21] 재시도 중간에 사용자가 중지 눌렀을 수 있으므로 재확인
+      if (!isContinuousMode || (window as any).stopFullAutoPublish) {
+        item.status = 'cancelled' as any;
+        appendLog(`⏹️ 사용자 중지 → 발행을 종료합니다.`);
+        break;
+      }
+
+      // ✅ [2026-03-21] 1회 재시도 (아이템별 _retryCount로 무한루프 완벽 방지)
+      // 기존 i-- 방식은 다른 조건이 pending으로 되돌릴 때 무한루프 위험
+      const retryCount = (item as any)._retryCount || 0;
+      if (retryCount < 1) {
+        (item as any)._retryCount = retryCount + 1;
+        appendLog(`⚠️ 실패: ${errMsg} — 15초 후 1회 재시도합니다... (${retryCount + 1}/1)`);
+        updateContinuousProgressModal({
+          step: '실패 → 재시도 중...',
+          log: `오류: ${errMsg} → 15초 후 재시도`,
+          percentage: (currentIdx / totalCount) * 100
+        });
+        item.status = 'pending';
+        await new Promise(r => setTimeout(r, 15000));
+        i--; // 같은 인덱스 재시도 (단, _retryCount로 최대 1회 보장)
+        continue;
+      }
+
+      // 2회 이상 실패: 건너뛰고 다음으로
       item.status = 'failed';
       failCount++;
-      appendLog(`❌ 실패: ${(error as Error).message}`);
+      // ✅ _consecutiveFailCount는 리셋하지 않음 — 성공 시에만 리셋 (line 3660)
+      appendLog(`❌ 실패 (건너뜀): ${errMsg}`);
+      appendLog(`ℹ️ 다음 항목으로 자동 넘어갑니다.`);
 
       updateContinuousProgressModal({
         fail: failCount,
-        step: '발행 실패',
-        log: `오류: ${(error as Error).message}`,
+        step: '실패 → 다음 항목으로 이동',
+        log: `오류: ${errMsg}`,
         percentage: (currentIdx / totalCount) * 100
       });
+
+      // ✅ [2026-03-21] 연속 3회 실패 시 전체 중단 (_consecutiveFailCount 전용 카운터 사용)
+      if (_consecutiveFailCount >= 3) {
+        appendLog(`🚨 연속 ${_consecutiveFailCount}회 실패 → 안전을 위해 발행을 중단합니다.`);
+        appendLog(`💡 해결: API 키, 네트워크, AI 설정을 점검해주세요.`);
+        updateContinuousProgressModal({
+          step: '🚨 연속 실패로 중단',
+          log: `연속 ${_consecutiveFailCount}회 실패 → 자동 중단. 설정 확인 필요.`
+        });
+        break;
+      }
     }
 
     // ✅ [2026-02-15] rAF로 배치하여 발행 루프 중 UI 깜빡임 방지

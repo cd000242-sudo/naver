@@ -133,6 +133,13 @@ function buildEnhancedPrompt(topic: string, options: PerplexityGenerateOptions =
         friendly: '친구와 대화하듯 편안하고 친근하게',
         professional: '전문적이지만 이해하기 쉽게',
         casual: '매우 가볍고 재미있게',
+        formal: '정중하고 격식있는 하십시오체',
+        humorous: '재치 있는 비유와 위트 넘치게',
+        community_fan: '커뮤니티 찐팬의 날것 수다체',
+        mom_cafe: '맘카페 살림고수 언니 말투',
+        storyteller: '에세이 내레이터의 서사적 묘사체',
+        expert_review: '매체 에디터의 체계적 분석체',
+        calm_info: '차분하고 신뢰감 있는 안내체',
     };
 
     // 홈판 모드

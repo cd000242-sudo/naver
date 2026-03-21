@@ -476,8 +476,8 @@ export async function setScheduleDateTime(self: any, frame: Frame, scheduleDate:
 
   self.log(`   📅 입력할 날짜: ${year}년 ${month}월 ${day}일 ${hour}:${minute}`);
 
-  // ✅ 예약 라디오 클릭 후 날짜/시간 입력 필드가 나타날 때까지 대기
-  await self.delay(1500);
+  // ✅ [2026-03-21 FIX] 예약 라디오 클릭 후 날짜/시간 입력 필드가 나타날 때까지 충분히 대기
+  await self.delay(2500);
 
   let inputSuccess = false;
 
@@ -643,7 +643,7 @@ export async function setScheduleDateTime(self: any, frame: Frame, scheduleDate:
             await self.delay(1000);
           }
 
-          // 1단계: 날짜 input 클릭하여 달력 열기
+          // 1단계: 날짜 input 클릭하여 달력 열기 (✅ [2026-03-21 FIX] 재시도 포함)
           const dateInputSelectors = [
             'input[class*="input_date"]',
             'button[class*="calendar"]',
@@ -653,14 +653,32 @@ export async function setScheduleDateTime(self: any, frame: Frame, scheduleDate:
           ];
 
           let calendarOpened = false;
-          for (const sel of dateInputSelectors) {
-            const dateEl = await frame.$(sel) || await page.$(sel);
-            if (dateEl) {
-              await dateEl.click();
-              await self.delay(800);
-              calendarOpened = true;
-              self.log(`   📅 달력 열기 성공: ${sel}`);
-              break;
+          for (let calAttempt = 0; calAttempt < 2 && !calendarOpened; calAttempt++) {
+            if (calAttempt > 0) {
+              self.log(`   🔁 달력 열기 재시도 (${calAttempt + 1}/2)...`);
+              await self.delay(1000);
+            }
+            for (const sel of dateInputSelectors) {
+              const dateEl = await frame.$(sel) || await page.$(sel);
+              if (dateEl) {
+                await dateEl.click();
+                await self.delay(1500);
+                // 달력이 실제로 열렸는지 확인
+                const calendarVisible = await frame.evaluate(() => {
+                  const dp = document.querySelector('.ui-datepicker');
+                  return dp && (dp as HTMLElement).offsetParent !== null;
+                }).catch(() => false) || await page.evaluate(() => {
+                  const dp = document.querySelector('.ui-datepicker');
+                  return dp && (dp as HTMLElement).offsetParent !== null;
+                }).catch(() => false);
+                if (calendarVisible) {
+                  calendarOpened = true;
+                  self.log(`   📅 달력 열기 성공: ${sel}`);
+                  break;
+                } else {
+                  self.log(`   ⚠️ ${sel} 클릭했으나 달력 미표시, 다음 시도...`);
+                }
+              }
             }
           }
 
@@ -705,41 +723,38 @@ export async function setScheduleDateTime(self: any, frame: Frame, scheduleDate:
                 const monthDiff = (tYear - currentYear) * 12 + (tMonth - currentMonth);
                 results.push(`month diff: ${monthDiff}`);
 
-                // ✅ [2026-03-12 FIX] 월 이동: 매 클릭마다 버튼을 다시 쿼리 (DOM 재렌더 대응)
+                // ✅ [2026-03-12 FIX] 월 이동은 1회만 클릭하고 리턴 (외부에서 delay 후 재확인)
                 if (monthDiff > 0) {
-                  let clicked = 0;
-                  for (let i = 0; i < monthDiff && i < 12; i++) {
-                    const btn = document.querySelector('.ui-datepicker-next:not(.ui-state-disabled)') as HTMLElement
-                      || document.querySelector('a.ui-datepicker-next') as HTMLElement;
-                    if (btn) { btn.click(); clicked++; }
-                    else break;
-                  }
-                  results.push(`clicked next ${clicked}/${monthDiff} times`);
+                  const btn = document.querySelector('.ui-datepicker-next:not(.ui-state-disabled)') as HTMLElement
+                    || document.querySelector('a.ui-datepicker-next') as HTMLElement;
+                  if (btn) { btn.click(); results.push(`clicked next 1 time (remaining: ${monthDiff - 1})`); }
+                  else { results.push(`next button not found`); }
                 } else if (monthDiff < 0) {
-                  let clicked = 0;
-                  for (let i = 0; i < Math.abs(monthDiff) && i < 12; i++) {
-                    const btn = document.querySelector('.ui-datepicker-prev:not(.ui-state-disabled)') as HTMLElement
-                      || document.querySelector('a.ui-datepicker-prev') as HTMLElement;
-                    if (btn) { btn.click(); clicked++; }
-                    else break;
-                  }
-                  results.push(`clicked prev ${clicked}/${Math.abs(monthDiff)} times`);
+                  const btn = document.querySelector('.ui-datepicker-prev:not(.ui-state-disabled)') as HTMLElement
+                    || document.querySelector('a.ui-datepicker-prev') as HTMLElement;
+                  if (btn) { btn.click(); results.push(`clicked prev 1 time (remaining: ${Math.abs(monthDiff) - 1})`); }
+                  else { results.push(`prev button not found`); }
                 }
 
                 return { results, monthDiff };
               };
 
-              let calendarDateSet = await frame.evaluate(calendarNavFn, targetYearNum, targetMonthNum, targetDayNum)
-                .catch(() => null);
-              if (!calendarDateSet || calendarDateSet.results.includes('calendar header: not found')) {
-                calendarDateSet = await page.evaluate(calendarNavFn, targetYearNum, targetMonthNum, targetDayNum)
-                  .catch((e: any) => ({ results: [e.message], monthDiff: 0 }));
-              }
+              // ✅ [2026-03-21 FIX] 월 이동: 한 번에 1칸씩 이동하고 매번 delay + 재확인
+              let remainingMonths = 99; // 초기값 (루프 진입용)
+              for (let navStep = 0; navStep < 24 && remainingMonths !== 0; navStep++) {
+                let calendarDateSet = await frame.evaluate(calendarNavFn, targetYearNum, targetMonthNum, targetDayNum)
+                  .catch(() => null);
+                if (!calendarDateSet || calendarDateSet.results.includes('calendar header: not found')) {
+                  calendarDateSet = await page.evaluate(calendarNavFn, targetYearNum, targetMonthNum, targetDayNum)
+                    .catch((e: any) => ({ results: [e.message], monthDiff: 0 }));
+                }
 
-              self.log(`   📅 달력 월 이동: ${calendarDateSet!.results.join(' | ')}`);
+                remainingMonths = calendarDateSet!.monthDiff;
+                self.log(`   📅 달력 월 이동 (step ${navStep + 1}): ${calendarDateSet!.results.join(' | ')}`);
 
-              if (calendarDateSet!.monthDiff !== 0) {
-                await self.delay(500);
+                if (remainingMonths !== 0) {
+                  await self.delay(500); // ✅ 매 클릭마다 DOM 재렌더 대기
+                }
               }
 
               // ✅ [2026-03-12 FIX] 3단계: 날짜 셀 클릭 — <a> + <button> 양쪽 지원
@@ -1137,7 +1152,7 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
     }
 
     await publishButton.click();
-    await self.delay(2000);
+    await self.delay(3000); // ✅ [2026-03-21 FIX] 발행 모달 열기 후 대기 2000→3000ms
     self.log('✅ 발행 모달 열림');
 
     // ✅ [2026-02-09] 카테고리 자동 선택 (공통 메서드 사용)
@@ -1177,8 +1192,8 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
       }
     }
 
-    // ✅ 중요: 예약 UI가 나타날 때까지 충분히 대기!
-    await self.delay(2000);
+    // ✅ [2026-03-21 FIX] 중요: 예약 UI가 나타날 때까지 충분히 대기!
+    await self.delay(3000);
 
     // ✅ [2026-02-09 FIX] 예약 라디오 버튼이 실제로 선택되었는지 검증 (frame + page 양쪽)
     const radioCheckFn = () => {
@@ -2004,47 +2019,36 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
         throw new Error('예약발행 날짜가 지정되지 않았습니다.');
       }
 
-      // ✅ 예약발행 시도, 실패 시 임시저장으로 폴백
-      try {
-        await self.publishScheduled(scheduleDate);
-      } catch (scheduleError) {
-        self.log(`❌ 예약발행 실패 (목표 날짜: ${scheduleDate}): ${(scheduleError as Error).message}`);
-        self.log(`💾 예약발행 실패로 인해 임시저장으로 폴백합니다...`);
+      // ✅ [2026-03-21 FIX] 예약발행 재시도 (최대 3회, 임시저장 폴백 제거)
+      const MAX_SCHEDULE_RETRIES = 3;
+      let scheduleSuccess = false;
+      let lastScheduleError: Error | null = null;
 
-        // 모달이 열려있으면 닫기
-        const frame = (await self.getAttachedFrame());
-        const page = self.ensurePage();
-        await page.keyboard.press('Escape').catch(() => { });
-        await self.delay(500);
-
-        // 임시저장 시도
+      for (let scheduleAttempt = 1; scheduleAttempt <= MAX_SCHEDULE_RETRIES; scheduleAttempt++) {
         try {
-          self.log('🔄 임시저장 시도 중...');
-          const saveButtonSelectors = [
-            'button.save_btn__bzc5B[data-click-area="tpb.save"]',
-            'button.save_btn__bzc5B',
-            'button[data-click-area="tpb.save"]',
-          ];
-
-          let saveButton: ElementHandle<Element> | null = null;
-          for (const selector of saveButtonSelectors) {
-            saveButton = await frame.waitForSelector(selector, { visible: true, timeout: 3000 }).catch(() => null);
-            if (saveButton) break;
+          if (scheduleAttempt > 1) {
+            self.log(`🔁 예약발행 재시도 (${scheduleAttempt}/${MAX_SCHEDULE_RETRIES})...`);
           }
+          await self.publishScheduled(scheduleDate);
+          scheduleSuccess = true;
+          break;
+        } catch (scheduleError) {
+          lastScheduleError = scheduleError as Error;
+          self.log(`❌ 예약발행 실패 (시도 ${scheduleAttempt}/${MAX_SCHEDULE_RETRIES}, 목표: ${scheduleDate}): ${lastScheduleError.message}`);
 
-          if (saveButton) {
-            await saveButton.click();
-            await self.delay(self.DELAYS.MEDIUM);
-            await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
-            self.log('✅ 예약발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
-          } else {
-            self.log('⚠️ 임시저장 버튼도 찾을 수 없습니다. 저장 버튼을 수동으로 확인해주세요.');
-            throw new Error('임시저장 버튼을 찾을 수 없습니다.');
+          if (scheduleAttempt < MAX_SCHEDULE_RETRIES) {
+            const page = self.ensurePage();
+            await page.keyboard.press('Escape').catch(() => { });
+            await self.delay(500);
+            await page.keyboard.press('Escape').catch(() => { });
+            await self.delay(2000 * scheduleAttempt);
+            self.log(`⏳ ${2 * scheduleAttempt}초 대기 후 재시도합니다...`);
           }
-        } catch (fallbackError) {
-          self.log(`❌ 임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
-          throw new Error(`예약발행 실패: ${(scheduleError as Error).message}\n임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
         }
+      }
+
+      if (!scheduleSuccess) {
+        throw new Error(`예약발행 ${MAX_SCHEDULE_RETRIES}회 시도 모두 실패: ${lastScheduleError?.message || '알 수 없는 오류'}`);
       }
     }
   }, 3, '블로그 발행');

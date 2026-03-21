@@ -6746,7 +6746,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           contentMode: options?.contentMode || (account.settings as any)?.contentMode || 'homefeed',  // ✅ contentMode 전달
           affiliateLink: options?.affiliateLink || (account.settings as any)?.affiliateLink,  // ✅ 제휴링크 전달
           // ✅ [2026-01-28] 이미지 설정 전역 적용 (renderer에서 전달받은 설정)
-          scSubImageSource: options?.scSubImageSource || 'ai',  // 수집 이미지 직접 사용 여부
+          scSubImageSource: options?.scSubImageSource || 'collected',  // 수집 이미지 직접 사용 여부
           collectedImages: options?.collectedImages || structuredContent?.collectedImages || [],  // 수집 이미지
           thumbnailImageRatio: options?.thumbnailImageRatio || '1:1',  // 썸네일 비율
           subheadingImageRatio: options?.subheadingImageRatio || '1:1',  // 소제목 비율
