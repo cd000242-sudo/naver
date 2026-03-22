@@ -6785,9 +6785,11 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
   // 1. API 키 로드 (config 우선, env 폴백)
   let apiKey: string | undefined;
   try {
+    const { loadConfig } = await import('./configManager.js');
     const config = await loadConfig();
     apiKey = config?.perplexityApiKey?.trim() || process.env.PERPLEXITY_API_KEY;
-  } catch {
+  } catch (e) {
+    console.warn('[Perplexity] Config 로드 실패 (env 폴백 사용):', e);
     apiKey = process.env.PERPLEXITY_API_KEY;
   }
 
@@ -6797,9 +6799,9 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
 
   // 2. 모델 및 타임아웃 설정
   // ✅ [2026-03-20 FIX] config에서 직접 읽기 (env보다 config 우선 — 이중 안전장치)
-  const configForModel = apiKey ? null : null; // config는 이미 위에서 로드됨
   let modelName = 'sonar';
   try {
+    const { loadConfig } = await import('./configManager.js');
     const cfg = await loadConfig();
     modelName = cfg.perplexityModel || process.env.PERPLEXITY_MODEL || 'sonar';
   } catch {
