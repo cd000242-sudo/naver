@@ -3519,61 +3519,18 @@ async function startContinuousPublishingV2(): Promise<void> {
                 appendLog('🚫 이미지 없이 모드 — 이미지 생성을 건너뜁니다.');
                 console.log('[Continuous] 🚫 headingImageMode=none: generateImagesForAutomation 스킵');
               } else if (item.imageSource === 'local-folder') {
-                // ✅ [2026-03-23 FIX] 연속발행에서 local-folder 지원
-                const folderPath = localStorage.getItem('localFolderPath');
-                const fallbackMode = localStorage.getItem('localFolderFallback') || 'skip';
-                if (folderPath) {
-                  appendLog('📂 로컬 폴더에서 이미지 로드 중...');
-                  try {
-                    const localImages = await (window as any).parseLocalFolderImages(folderPath, headings);
-                    if (localImages.length > 0) {
-                      generatedImgs = localImages;
-                      appendLog(`✅ 로컬 이미지 ${localImages.length}장 로드 완료`);
-                      // 부족분 AI 생성
-                      if (localImages.length < headings.length && fallbackMode === 'ai-generate') {
-                        const shortage = headings.length - localImages.length;
-                        appendLog(`⚠️ 이미지 부족 ${shortage}장 → AI 폴백 생성`);
-                        const aiProvider = localStorage.getItem('fullAutoImageSource') || 'nano-banana-pro';
-                        const safeProvider = aiProvider === 'local-folder' ? 'nano-banana-pro' : aiProvider;
-                        try {
-                          const aiImgs = await generateImagesForAutomation(
-                            safeProvider, headings, finalStructuredContent.selectedTitle,
-                            { stopCheck: () => !isContinuousMode, allowThumbnailText: includeThumbnailText }
-                          );
-                          // 로컬 이미지가 이미 커버한 소제목 제외
-                          const localHeadingSet = new Set(localImages.map((img: any) => img.heading));
-                          const aiOnly = aiImgs.filter((img: any) => !localHeadingSet.has(img.heading));
-                          generatedImgs = [...localImages, ...aiOnly];
-                          appendLog(`✅ 병합: 로컬 ${localImages.length}장 + AI ${aiOnly.length}장 = 총 ${generatedImgs.length}장`);
-                        } catch (aiErr) {
-                          console.warn('[Continuous] AI 폴백 실패, 로컬 이미지만 사용:', aiErr);
-                        }
-                      }
-                    } else if (fallbackMode === 'ai-generate') {
-                      appendLog('⚠️ 폴더 이미지 없음 → AI 생성');
-                      const aiProvider = localStorage.getItem('fullAutoImageSource') || 'nano-banana-pro';
-                      generatedImgs = await generateImagesForAutomation(
-                        aiProvider === 'local-folder' ? 'nano-banana-pro' : aiProvider,
-                        headings, finalStructuredContent.selectedTitle,
-                        { stopCheck: () => !isContinuousMode, allowThumbnailText: includeThumbnailText }
-                      );
-                    } else {
-                      appendLog('⚠️ 폴더 이미지 없음 → 이미지 없이 발행');
-                    }
-                  } catch (e) {
-                    appendLog(`⚠️ 폴더 이미지 로드 실패: ${(e as Error).message}`);
-                    if (fallbackMode === 'ai-generate') {
-                      const aiProvider = localStorage.getItem('fullAutoImageSource') || 'nano-banana-pro';
-                      generatedImgs = await generateImagesForAutomation(
-                        aiProvider === 'local-folder' ? 'nano-banana-pro' : aiProvider,
-                        headings, finalStructuredContent.selectedTitle,
-                        { stopCheck: () => !isContinuousMode, allowThumbnailText: includeThumbnailText }
-                      );
-                    }
-                  }
-                } else {
-                  appendLog('⚠️ 이미지 폴더 미선택 → 이미지 없이 발행');
-                }
+                // ✅ [2026-03-23 REFACTOR] 연속발행 local-folder: 공통 함수로 통합
+                const lfResult = await (window as any).loadLocalFolderWithFallback({
+                  headings,
+                  postTitle: finalStructuredContent.selectedTitle,
+                  onLog: (msg: string) => appendLog(msg),
+                  aiFallbackFn: generateImagesForAutomation,
+                  aiOptions: {
+                    stopCheck: () => !isContinuousMode,
+                    allowThumbnailText: includeThumbnailText,
+                  },
+                });
+                generatedImgs = lfResult.images;
               } else {
                 // ✅ [2026-02-20 FIX] structuredContent에서 수집 이미지 우선 참조
                 // 전역 배열은 line 6780에서 초기화되므로 비어있음 → structuredContent.collectedImages 우선

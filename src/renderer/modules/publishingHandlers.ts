@@ -37,6 +37,7 @@ declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function generateAutoCTA(title: string, keywords?: string): any;
 declare function resolveAffiliateLink(link1?: string, link2?: string): string | undefined;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
+declare function parseLocalFolderImages(folderPath: string, headings: any[]): Promise<any[]>;
 declare function isFullAutoStopRequested(modal: any): boolean;
 declare function getProgressModal(): any;
 declare function applyPresetThumbnailIfExists(...args: any[]): any;
@@ -673,23 +674,44 @@ export async function handleFullAutoPublish(): Promise<void> {
               generatedImgs.push(...aiImgs);
             }
           } else {
-            // ✅ 일반 SEO 모드: 기존 로직 그대로
+            // ✅ 일반 SEO 모드
             // ✅ [2026-02-24 FIX] 서론이 있으면 썸네일 섹션을 맨 앞에 별도 추가
             const seoHeadings = structuredContent.introduction
               ? [{ title: structuredContent.selectedTitle || '🖼️ 썸네일', content: structuredContent.introduction, isThumbnail: true, isIntro: true }, ...(structuredContent.headings || [])]
               : (structuredContent.headings || []);
-            generatedImgs = await generateImagesForAutomation(
-              imageSource,
-              seoHeadings,
-              structuredContent.selectedTitle || title,
-              {
-                stopCheck: () => isFullAutoStopRequested(modal),
-                onProgress: (msg: any) => modal.addLog(msg),
-                allowThumbnailText: formData.includeThumbnailText,
-                referenceImagePath,
-                collectedImages: collectedImgs
-              }
-            );
+
+            // ✅ [2026-03-23 REFACTOR] local-folder 모드: 공통 함수로 통합
+            if (imageSource === 'local-folder') {
+              const lfResult = await (window as any).loadLocalFolderWithFallback({
+                headings: seoHeadings,
+                postTitle: structuredContent.selectedTitle || title,
+                onLog: (msg: string, level?: string) => {
+                  modal.addLog(msg);
+                  appendLog(msg);
+                },
+                aiFallbackFn: generateImagesForAutomation,
+                aiOptions: {
+                  stopCheck: () => isFullAutoStopRequested(modal),
+                  onProgress: (msg: any) => modal.addLog(msg),
+                  allowThumbnailText: formData.includeThumbnailText,
+                },
+              });
+              generatedImgs = lfResult.images;
+            } else {
+              // ✅ 기존 AI 생성 로직
+              generatedImgs = await generateImagesForAutomation(
+                imageSource,
+                seoHeadings,
+                structuredContent.selectedTitle || title,
+                {
+                  stopCheck: () => isFullAutoStopRequested(modal),
+                  onProgress: (msg: any) => modal.addLog(msg),
+                  allowThumbnailText: formData.includeThumbnailText,
+                  referenceImagePath,
+                  collectedImages: collectedImgs
+                }
+              );
+            }
           }
         } else if (isShoppingConnectCollected || collectedImgs.length > 0) {
           // ✅ B. 수집 이미지 그대로 사용 모드 (통일된 로직)
@@ -852,11 +874,17 @@ export async function handleFullAutoPublish(): Promise<void> {
           saveGeneratedPost(structuredContent, true); // isUpdate=true로 업데이트
           modal.addLog(`💾 이미지 포함하여 글 목록에 저장 완료`);
         } else {
-          // ✅ [2026-03-09 FIX] 이미지 생성이 전부 실패하면 발행 중단
-          // 기존: 로그만 남기고 발행 진행 → '파일 전송 오류' 발생
-          modal.addLog('❌ 이미지 생성에 실패했습니다. 발행을 중단합니다.');
-          appendLog('❌ 이미지 생성 실패: 성공적으로 생성된 이미지가 없습니다.');
-          throw new Error('이미지 생성에 실패했습니다. 모든 이미지가 생성되지 않아 발행을 중단합니다.\n\n해결 방법:\n1. 이미지 생성 엔진 설정을 확인해주세요\n2. API 키가 올바른지 확인해주세요\n3. 네트워크 연결을 확인해주세요\n4. "이미지 없이 발행" 옵션을 사용할 수도 있습니다');
+          // ✅ [2026-03-23 FIX] local-folder + skip 모드: 이미지 없이 발행 가능
+          const isLocalFolderSkip = imageSource === 'local-folder' && (localStorage.getItem('localFolderFallback') || 'skip') === 'skip';
+          if (isLocalFolderSkip) {
+            modal.addLog('📂 로컬 폴더 이미지 없음 → 이미지 없이 발행 진행');
+            appendLog('📂 로컬 폴더에 이미지가 없어 이미지 없이 발행합니다.');
+          } else {
+            // ✅ [2026-03-09 FIX] 이미지 생성이 전부 실패하면 발행 중단
+            modal.addLog('❌ 이미지 생성에 실패했습니다. 발행을 중단합니다.');
+            appendLog('❌ 이미지 생성 실패: 성공적으로 생성된 이미지가 없습니다.');
+            throw new Error('이미지 생성에 실패했습니다. 모든 이미지가 생성되지 않아 발행을 중단합니다.\n\n해결 방법:\n1. 이미지 생성 엔진 설정을 확인해주세요\n2. API 키가 올바른지 확인해주세요\n3. 네트워크 연결을 확인해주세요\n4. "이미지 없이 발행" 옵션을 사용할 수도 있습니다');
+          }
         }
 
       } catch (imgErr) {

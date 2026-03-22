@@ -128,6 +128,13 @@ export async function parseLocalFolderImages(
 
   // 6. 5MB 초과 리사이즈 (IPC 호출)
   for (const p of [...thumbnails, ...numbered]) {
+    // ✅ [2026-03-23 FIX] GIF는 리사이즈하면 애니메이션이 파괴됨 → 원본 사용
+    if (p.fullPath.toLowerCase().endsWith('.gif')) {
+      if (p.fileSize > MAX_FILE_SIZE) {
+        console.log(`[LocalFolder] ⚠️ GIF 파일은 리사이즈 스킵 (애니메이션 보존): ${p.fileName} (${(p.fileSize / 1024 / 1024).toFixed(1)}MB)`);
+      }
+      continue;
+    }
     if (p.fileSize > MAX_FILE_SIZE) {
       try {
         console.log(`[LocalFolder] 📐 리사이즈: ${p.fileName} (${(p.fileSize / 1024 / 1024).toFixed(1)}MB)`);
@@ -203,10 +210,136 @@ export async function parseLocalFolderImages(
 }
 
 // ═══════════════════════════════════════════════════════════════════
+// ✅ [2026-03-23] 공통 로컬 폴더 이미지 로드 + AI 폴백 함수
+// 4개 발행 경로(publishingHandlers, fullAutoFlow, continuousPublishing,
+// multiAccountManager)에서 동일한 local-folder 로직이 반복되므로
+// 이 함수 하나로 통합하여 일관성 확보 및 코드 중복 제거
+// ═══════════════════════════════════════════════════════════════════
+
+/** 로컬 폴더 로드 + AI 폴백 옵션 */
+export interface LoadLocalFolderOptions {
+  /** heading 배열 (title 필드 필수) */
+  headings: Array<{ title: string; isThumbnail?: boolean; isIntro?: boolean }>;
+  /** 게시글 제목 (AI 폴백 시 사용) */
+  postTitle: string;
+  /** 로그 콜백 (각 발행 경로마다 다른 로깅 메커니즘 사용) */
+  onLog?: (msg: string, level?: 'info' | 'warning' | 'success' | 'error') => void;
+  /** AI 이미지 생성 함수 (DI: generateImagesForAutomation 주입) */
+  aiFallbackFn?: (
+    provider: string,
+    headings: any[],
+    postTitle: string,
+    options?: any
+  ) => Promise<any[]>;
+  /** AI 폴백 시 추가 옵션 (stopCheck, onProgress, allowThumbnailText 등) */
+  aiOptions?: Record<string, any>;
+}
+
+/** 로컬 폴더 로드 결과 */
+export interface LoadLocalFolderResult {
+  images: any[];
+  source: 'local' | 'ai' | 'mixed' | 'empty';
+  localCount: number;
+  aiCount: number;
+}
+
+/**
+ * 로컬 폴더 이미지 로드 + AI 폴백 통합 함수
+ * 
+ * 동작:
+ * 1. localStorage에서 folderPath, fallbackMode 읽기
+ * 2. parseLocalFolderImages() 호출
+ * 3. 이미지 부족 + fallback=ai-generate → AI 생성 + 병합
+ * 4. 이미지 0개 + fallback=skip → 빈 배열 반환
+ */
+export async function loadLocalFolderWithFallback(
+  options: LoadLocalFolderOptions
+): Promise<LoadLocalFolderResult> {
+  const { headings, postTitle, onLog, aiFallbackFn, aiOptions = {} } = options;
+  const log = onLog || ((msg: string) => console.log(`[LocalFolder] ${msg}`));
+
+  const folderPath = localStorage.getItem('localFolderPath');
+  const fallbackMode = localStorage.getItem('localFolderFallback') || 'skip';
+
+  // 1. 폴더 미선택
+  if (!folderPath) {
+    if (fallbackMode === 'ai-generate' && aiFallbackFn) {
+      log('⚠️ 이미지 폴더 미선택 → AI 이미지로 생성합니다', 'warning');
+      const safeProvider = getSafeAiProvider();
+      const aiImgs = await aiFallbackFn(safeProvider, headings, postTitle, aiOptions);
+      return { images: aiImgs, source: 'ai', localCount: 0, aiCount: aiImgs.length };
+    }
+    log('⚠️ 이미지 폴더 미선택 → 이미지 없이 발행합니다', 'warning');
+    return { images: [], source: 'empty', localCount: 0, aiCount: 0 };
+  }
+
+  // 2. 로컬 이미지 로드
+  log('📂 로컬 폴더에서 이미지 로드 중...', 'info');
+  let localImages: LocalFolderImage[] = [];
+  try {
+    localImages = await parseLocalFolderImages(folderPath, headings);
+  } catch (e) {
+    const errMsg = (e as Error).message;
+    if (fallbackMode === 'ai-generate' && aiFallbackFn) {
+      log(`⚠️ 폴더 이미지 로드 실패: ${errMsg} → AI 이미지로 생성합니다`, 'warning');
+      const safeProvider = getSafeAiProvider();
+      const aiImgs = await aiFallbackFn(safeProvider, headings, postTitle, aiOptions);
+      return { images: aiImgs, source: 'ai', localCount: 0, aiCount: aiImgs.length };
+    }
+    log(`⚠️ 폴더 이미지 로드 실패: ${errMsg} → 이미지 없이 발행합니다`, 'warning');
+    return { images: [], source: 'empty', localCount: 0, aiCount: 0 };
+  }
+
+  // 3. 이미지 0개
+  if (localImages.length === 0) {
+    if (fallbackMode === 'ai-generate' && aiFallbackFn) {
+      log('⚠️ 폴더에 이미지 없음 → AI 이미지 생성', 'warning');
+      const safeProvider = getSafeAiProvider();
+      const aiImgs = await aiFallbackFn(safeProvider, headings, postTitle, aiOptions);
+      return { images: aiImgs, source: 'ai', localCount: 0, aiCount: aiImgs.length };
+    }
+    log('⚠️ 폴더에 이미지가 없습니다 → 이미지 없이 발행합니다', 'warning');
+    return { images: [], source: 'empty', localCount: 0, aiCount: 0 };
+  }
+
+  // 4. 이미지 존재
+  log(`✅ 로컬 이미지 ${localImages.length}장 로드 완료`, 'success');
+
+  // 5. 부족분 AI 폴백
+  if (localImages.length < headings.length && fallbackMode === 'ai-generate' && aiFallbackFn) {
+    const shortage = headings.length - localImages.length;
+    log(`⚠️ 이미지 부족 ${shortage}장 → AI 폴백 생성`, 'warning');
+    const localHeadingSet = new Set(localImages.map(img => img.heading));
+    const missingHeadings = headings.filter(h => !localHeadingSet.has(h.title));
+    if (missingHeadings.length > 0) {
+      try {
+        const safeProvider = getSafeAiProvider();
+        const aiImgs = await aiFallbackFn(safeProvider, missingHeadings, postTitle, aiOptions);
+        const merged = [...localImages, ...aiImgs];
+        log(`✅ 병합: 로컬 ${localImages.length}장 + AI ${aiImgs.length}장 = 총 ${merged.length}장`, 'success');
+        return { images: merged, source: 'mixed', localCount: localImages.length, aiCount: aiImgs.length };
+      } catch (aiErr) {
+        log(`⚠️ AI 폴백 실패, 로컬 이미지만 사용: ${(aiErr as Error).message}`, 'warning');
+      }
+    }
+  }
+
+  return { images: localImages, source: 'local', localCount: localImages.length, aiCount: 0 };
+}
+
+/** AI 폴백 시 안전한 provider 반환 (local-folder 자기참조 방지) */
+function getSafeAiProvider(): string {
+  const aiProvider = localStorage.getItem('fullAutoImageSource') || 'nano-banana-pro';
+  return aiProvider === 'local-folder' ? 'nano-banana-pro' : aiProvider;
+}
+
+// ═══════════════════════════════════════════════════════════════════
 // ✅ 모듈 등록 (dual-pattern)
 // - ES Module export: multiAccountManager.ts가 import로 사용
 // - Window 전역 등록: fullAutoFlow.ts가 declare로 사용
 // ═══════════════════════════════════════════════════════════════════
 (window as any).parseLocalFolderImages = parseLocalFolderImages;
+(window as any).loadLocalFolderWithFallback = loadLocalFolderWithFallback;
 
 console.log('[LocalFolderImageLoader] 📦 모듈 로드됨!');
+

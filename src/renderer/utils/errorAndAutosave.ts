@@ -150,7 +150,8 @@ export function autosaveContent(data: AutosaveData): void {
         }
 
         localStorage.setItem(AUTOSAVE_KEY, jsonString);
-        console.log('[Autosave] 콘텐츠 임시 저장 완료:', new Date().toLocaleTimeString(), `(${Math.round(jsonString.length / 1024)}KB)`);
+        // ✅ [2026-03-23 FIX] console.debug로 변경 → 콘솔 도배 방지 (30초마다 출력되므로)
+        console.debug('[Autosave] 콘텐츠 임시 저장 완료:', new Date().toLocaleTimeString(), `(${Math.round(jsonString.length / 1024)}KB)`);
     } catch (error: any) {
         if (error?.name === 'QuotaExceededError' || error?.message?.includes('quota')) {
             console.warn('[Autosave] localStorage 용량 초과, 이미지 없이 재시도...');
@@ -207,7 +208,7 @@ function cleanupOldBackups(): void {
         if (backupKeys.length > MAX_BACKUPS) {
             for (let i = MAX_BACKUPS; i < backupKeys.length; i++) {
                 localStorage.removeItem(backupKeys[i]);
-                console.log('[Backup] 오래된 백업 삭제:', backupKeys[i]);
+                console.debug('[Backup] 오래된 백업 삭제:', backupKeys[i]);
             }
         }
     } catch (error) {
@@ -246,8 +247,7 @@ export function createBackup(): void {
 
         localStorage.setItem(backupKey, jsonString);
         cleanupOldBackups();
-        console.log('[Backup] 백업 생성 완료:', new Date().toLocaleTimeString(), `(${Math.round(jsonString.length / 1024)}KB)`);
-        _appendLog(`💾 백업 생성 완료 (${new Date().toLocaleTimeString()})`);
+        console.debug('[Backup] 백업 생성 완료:', new Date().toLocaleTimeString(), `(${Math.round(jsonString.length / 1024)}KB)`);
     } catch (error: any) {
         if (error?.name === 'QuotaExceededError' || error?.message?.includes('quota')) {
             console.warn('[Backup] localStorage 용량 초과, 백업 건너뜀');
@@ -299,7 +299,6 @@ export function startAutosave(): void {
         }
     }, AUTOSAVE_INTERVAL);
     console.log('[Autosave] 자동 저장 시작 (30초 간격)');
-    _appendLog('💾 자동 저장 시작 (30초 간격)');
 }
 
 export function stopAutosave(): void {
@@ -314,7 +313,6 @@ export function startAutoBackup(): void {
     if (backupTimer) clearInterval(backupTimer);
     backupTimer = setInterval(() => { createBackup(); }, BACKUP_INTERVAL);
     console.log('[Backup] 자동 백업 시작 (5분 간격)');
-    _appendLog('💾 자동 백업 시작 (5분 간격)');
 }
 
 export function stopAutoBackup(): void {

@@ -2082,59 +2082,25 @@ export async function generateImagesForContent(structuredContent: any, formData:
   }
 
   appendLog(`🎨 ${headings.length}개 소제목의 이미지를 생성합니다.`);
-  // ✅ [2026-03-22] 로컬 폴더 이미지 분기 (AI 생성 전에 처리)
-  let _localFolderImages: any[] = []; // ✅ [2026-03-23] AI 폴백 시 병합용 로컬 이미지 저장
+  // ✅ [2026-03-23 REFACTOR] 로컬 폴더 이미지: 공통 함수로 통합
   if (formData.imageSource === 'local-folder') {
-    const folderPath = localStorage.getItem('localFolderPath');
-    const fallbackMode = localStorage.getItem('localFolderFallback') || 'skip';
-    if (folderPath) {
-      appendLog('📂 로컬 폴더에서 이미지 로드 중...');
-      try {
-        const localImages = await parseLocalFolderImages(folderPath, headings);
-        if (localImages.length > 0) {
-          appendLog(`✅ 로컬 이미지 ${localImages.length}장 로드 완료`);
-          try { displayGeneratedImages(localImages); } catch {}
-          try { updatePromptItemsWithImages(localImages); } catch {}
-          (window as any).generatedImages = localImages;
-          (window as any).imageManagementGeneratedImages = localImages;
-
-          // ✅ [2026-03-23] 이미지 부족 시 처리
-          if (localImages.length < headings.length && fallbackMode === 'ai-generate') {
-            const shortage = headings.length - localImages.length;
-            appendLog(`⚠️ 폴더 이미지 ${localImages.length}장 < 소제목 ${headings.length}개 → 부족분 ${shortage}장 AI 생성`);
-            _localFolderImages = localImages; // AI 생성 후 병합할 로컬 이미지 저장
-          } else {
-            return localImages;
-          }
-        } else {
-          if (fallbackMode === 'ai-generate') {
-            appendLog('⚠️ 폴더에 이미지가 없습니다 → AI 이미지로 생성합니다');
-          } else {
-            appendLog('⚠️ 폴더에 이미지가 없습니다 → 이미지 없이 발행합니다');
-            return [];
-          }
-        }
-      } catch (e) {
-        if (fallbackMode === 'ai-generate') {
-          appendLog(`⚠️ 폴더 이미지 로드 실패: ${(e as Error).message} → AI 이미지로 생성합니다`);
-        } else {
-          appendLog(`⚠️ 폴더 이미지 로드 실패: ${(e as Error).message} → 이미지 없이 발행합니다`);
-          return [];
-        }
-      }
-    } else {
-      if (fallbackMode === 'ai-generate') {
-        appendLog('⚠️ 이미지 폴더 미선택 → AI 이미지로 생성합니다');
-      } else {
-        appendLog('⚠️ 이미지 폴더 미선택 → 이미지 없이 발행합니다');
-        return [];
-      }
+    const lfResult = await (window as any).loadLocalFolderWithFallback({
+      headings,
+      postTitle: currentStructuredContent?.selectedTitle || formData.postTitle || '',
+      onLog: (msg: string) => appendLog(msg),
+      aiFallbackFn: async (provider: string, missingHeadings: any[], title: string, opts: any) => {
+        // AI 폴백: formData.imageSource를 안전한 provider로 교체 후 기존 AI 파이프라인 사용
+        formData.imageSource = provider;
+        return await generateAIImagesForHeadings(missingHeadings, formData);
+      },
+    });
+    if (lfResult.images.length > 0) {
+      try { displayGeneratedImages(lfResult.images); } catch {}
+      try { updatePromptItemsWithImages(lfResult.images); } catch {}
+      (window as any).generatedImages = lfResult.images;
+      (window as any).imageManagementGeneratedImages = lfResult.images;
     }
-    // ✅ AI 생성 폴백: imageSource를 globalImageSource의 폴백으로 변경
-    const globalFallback = localStorage.getItem('fullAutoImageSource') || localStorage.getItem('globalImageSource') || 'nano-banana-pro';
-    // ✅ [2026-03-23 FIX] local-folder 자기참조 방지
-    formData.imageSource = (globalFallback === 'local-folder') ? 'nano-banana-pro' : globalFallback;
-    appendLog(`🔄 AI 이미지 엔진으로 전환: ${formData.imageSource}`);
+    return lfResult.images;
   }
 
   const sourceDisplayNames: Record<string, string> = {
@@ -2183,22 +2149,7 @@ export async function generateImagesForContent(structuredContent: any, formData:
     updateFullAutoFinalImagePreview(generatedImages);
   }
 
-  // ✅ [2026-03-23 FIX] local-folder AI 폴백 시 로컬 이미지 + AI 이미지 병합
-  if (_localFolderImages.length > 0) {
-    const localHeadings = new Set(_localFolderImages.map((img: any) => img.heading));
-    // AI가 생성한 이미지 중 로컬이 이미 커버한 소제목은 제외
-    const aiOnlyImages = generatedImages.filter((img: any) => !localHeadings.has(img.heading));
-    const mergedImages = [..._localFolderImages, ...aiOnlyImages];
-    appendLog(`✅ 이미지 병합: 로컬 ${_localFolderImages.length}장 + AI ${aiOnlyImages.length}장 = 총 ${mergedImages.length}장`);
-
-    // UI 업데이트 (병합 결과 반영)
-    try { displayGeneratedImages(mergedImages); } catch {}
-    try { updatePromptItemsWithImages(mergedImages); } catch {}
-    (window as any).generatedImages = mergedImages;
-    (window as any).imageManagementGeneratedImages = mergedImages;
-
-    return mergedImages;
-  }
+  // ✅ [2026-03-23 REFACTOR] local-folder 병합 로직 제거됨 (loadLocalFolderWithFallback에서 처리)
 
   return generatedImages;
 }

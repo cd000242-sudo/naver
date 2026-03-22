@@ -1206,8 +1206,8 @@ export function fillSemiAutoFields(structuredContent: any): void {
   // ✅ 자동 저장 및 백업 시작
   startAutosave();
   startAutoBackup();
-  appendLog('💾 자동 저장 시작 (30초마다)');
-  appendLog('💾 자동 백업 시작 (5분마다)');
+  // ✅ [2026-03-23 FIX] errorAndAutosave.ts에서 이미 시작하므로 여기서는 debug만
+  console.debug('[contentGeneration] 자동 저장/백업 시작됨');
 
   // ✅ 생성된 글 목록 새로고침
   refreshGeneratedPostsList();

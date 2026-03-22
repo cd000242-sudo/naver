@@ -3041,26 +3041,23 @@ export async function initMultiAccountPublishModal() {
               console.log('[FullAuto] 쇼핑커넥트 수집 이미지 사용:', generatedImages.length);
 
             } else if (imageSource === 'local-folder') {
-              // ✅ [2026-03-22] 로컬 폴더 이미지 로드
-              const folderPath = localStorage.getItem('localFolderPath');
-              if (folderPath) {
-                addMALog('📂 로컬 폴더에서 이미지 로드 중...', 'info');
-                try {
-                  const { parseLocalFolderImages: parseLF } = await import('./localFolderImageLoader');
-                  generatedImages = await parseLF(folderPath, headings);
-                  if (generatedImages.length === 0) {
-                    addMALog('⚠️ 폴더에 이미지가 없습니다 → 이미지 없이 발행합니다', 'warning');
-                    addProgressItem('⚠️ 📂 로컬 폴더에 이미지 없음 — 이미지 없이 진행', 'warning');
-                  } else {
-                    addMALog(`✅ 로컬 이미지 ${generatedImages.length}장 로드 완료`, 'success');
-                  }
-                } catch (e) {
-                  addMALog(`⚠️ 로컬 폴더 이미지 실패: ${(e as Error).message} → 이미지 없이 발행`, 'warning');
-                  addProgressItem(`⚠️ 📂 폴더 이미지 로드 실패 — 이미지 없이 진행`, 'warning');
-                }
-              } else {
-                addMALog('⚠️ 폴더 미선택 → 이미지 없이 발행합니다', 'warning');
-                addProgressItem('⚠️ 📂 로컬 폴더 미선택 — 이미지 없이 진행', 'warning');
+              // ✅ [2026-03-23 REFACTOR] 다중계정 local-folder: 공통 함수로 통합
+              const { loadLocalFolderWithFallback: loadLF } = await import('./localFolderImageLoader');
+              const lfResult = await loadLF({
+                headings,
+                postTitle: structuredContent.selectedTitle,
+                onLog: (msg: string, level?: string) => {
+                  addMALog(msg, level === 'success' ? 'success' : level === 'warning' ? 'warning' : 'info');
+                },
+                aiFallbackFn: generateImagesForAutomation,
+                aiOptions: {
+                  stopCheck: () => stopRequested || (window as any).stopFullAutoPublish,
+                  allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true',
+                },
+              });
+              generatedImages = lfResult.images;
+              if (lfResult.source === 'empty') {
+                addProgressItem('⚠️ 📂 이미지 없이 진행', 'warning');
               }
 
             } else if (imageSource === 'naver') {
