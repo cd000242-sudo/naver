@@ -1424,9 +1424,19 @@ export class NaverBlogAutomation {
 
           return; // 세션 재사용 성공!
         } catch {
-          this.log('⚠️ 세션 페이지가 유효하지 않음, 새 페이지 생성...');
-          this.page = await this.browser.newPage();
+          // ✅ [2026-03-22 FIX] 닫힌 페이지 감지 시 세션 완전 재생성
+          // 기존 bug: bare newPage()는 stealth/UA/proxy/viewport 없이 생성됨 → CAPTCHA 발생
+          // 수정: browserSessionManager에서 세션 삭제 후 재생성 → 모든 보호 조치 적용
+          this.log('⚠️ 세션 페이지가 유효하지 않음, 세션 재생성...');
+          await browserSessionManager.closeSession(this.options.naverId);
+          const freshSession = await browserSessionManager.getOrCreateSession(
+            this.options.naverId,
+            this.options.headless ?? false
+          );
+          this.browser = freshSession.browser;
+          this.page = freshSession.page;
           this.cursor = createGhostCursor(this.page);
+          this.log('✅ 세션 재생성 완료 (stealth + proxy 적용됨)');
           return;
         }
       }

@@ -1,6 +1,6 @@
 // ✅ [2026-02-22] 이미지 프로바이더 정리: Fal.ai, Pollinations, Prodia, Stability AI 제거 → DALL-E, Leonardo AI 추가
 // ✅ [2026-03-15] ImageFX 프로바이더 추가 (메인 무료 이미지 생성)
-export type ImageProvider = 'naver' | 'loremflickr' | 'picsum' | 'placeholder' | 'nano-banana-pro' | 'nano-banana-pro-fallback' | 'imagen-4-fallback' | 'gemini-2.5-flash-fallback' | 'gemini-3.1-flash-image-preview-fallback' | 'gemini-3-pro-image-preview-fallback' | 'imagen-4.0-generate-001-fallback' | 'gemini-2.5-flash-image-fallback' | 'deepinfra' | 'openai-image' | 'leonardoai' | 'collected-image' | 'collected-image-with-text' | 'imagefx';
+export type ImageProvider = 'naver' | 'loremflickr' | 'picsum' | 'placeholder' | 'nano-banana-pro' | 'nano-banana-pro-fallback' | 'imagen-4-fallback' | 'gemini-2.5-flash-fallback' | 'gemini-3.1-flash-image-preview-fallback' | 'gemini-3-pro-image-preview-fallback' | 'imagen-4.0-generate-001-fallback' | 'gemini-2.5-flash-image-fallback' | 'deepinfra' | 'openai-image' | 'leonardoai' | 'collected-image' | 'collected-image-with-text' | 'imagefx' | 'local-folder';
 
 export interface ImageRequestItem {
   heading: string;
@@ -45,7 +45,7 @@ export interface GeneratedImage {
   isThumbnail?: boolean; // ✅ [2026-03-18 FIX] 썸네일 여부 (서론 위 이미지 배치에 사용)
 }
 
-export const ALLOWED_PROVIDER: ImageProvider[] = ['naver', 'loremflickr', 'picsum', 'placeholder', 'nano-banana-pro', 'nano-banana-pro-fallback', 'imagen-4-fallback', 'gemini-2.5-flash-fallback', 'gemini-3.1-flash-image-preview-fallback', 'gemini-3-pro-image-preview-fallback', 'imagen-4.0-generate-001-fallback', 'gemini-2.5-flash-image-fallback', 'deepinfra', 'openai-image', 'leonardoai', 'collected-image', 'collected-image-with-text', 'imagefx'];
+export const ALLOWED_PROVIDER: ImageProvider[] = ['naver', 'loremflickr', 'picsum', 'placeholder', 'nano-banana-pro', 'nano-banana-pro-fallback', 'imagen-4-fallback', 'gemini-2.5-flash-fallback', 'gemini-3.1-flash-image-preview-fallback', 'gemini-3-pro-image-preview-fallback', 'imagen-4.0-generate-001-fallback', 'gemini-2.5-flash-image-fallback', 'deepinfra', 'openai-image', 'leonardoai', 'collected-image', 'collected-image-with-text', 'imagefx', 'local-folder'];
 
 export function assertProvider(provider: string): asserts provider is ImageProvider {
   if (!ALLOWED_PROVIDER.includes(provider as ImageProvider)) {

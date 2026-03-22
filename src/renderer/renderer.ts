@@ -11604,7 +11604,10 @@ async function executeAutomationWithErrorHandling(payload: RendererAutomationPay
 
 
 
-initPriceInfoModal();
+// ✅ [2026-03-22 FIX] initPriceInfoModal() 중복 호출 제거
+// → initializeApplication() (L5788)에서 이미 1회 호출됨
+// → 여기서 2번째 호출 시 setupApiKeyToggle 이벤트 리스너가 2중 등록되어
+//   클릭 시 password→text→password 연속 전환 → 눈 아이콘 토글 불능 버그 발생
 
 // ============================================
 // AI 자동 제목 생성 기능

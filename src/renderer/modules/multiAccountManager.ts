@@ -289,7 +289,8 @@ export async function generateImagesForAutomation(
     console.log('[generateImagesForAutomation] ⏭️ provider="skip" → 이미지 생성 건너뜀');
     return [];
   }
-  const INVALID_PROVIDERS = ['saved', '', 'null', 'undefined'];
+  // ✅ [2026-03-22 FIX] 'local-folder'는 AI 엔진이 아님 → 폴백 필요 (이미지 로컬 로딩은 fullAutoFlow에서 사전 처리됨)
+  const INVALID_PROVIDERS = ['saved', '', 'null', 'undefined', 'local-folder'];
   if (!provider || INVALID_PROVIDERS.includes(provider.trim())) {
     // ✅ [2026-02-18 FIX] localStorage에서도 "null"/"undefined" 문자열 필터링
     const rawFullAuto = localStorage.getItem('fullAutoImageSource');
