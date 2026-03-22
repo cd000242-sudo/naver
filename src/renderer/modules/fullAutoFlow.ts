@@ -2084,7 +2084,8 @@ export async function generateImagesForContent(structuredContent: any, formData:
   appendLog(`🎨 ${headings.length}개 소제목의 이미지를 생성합니다.`);
   // ✅ [2026-03-23 REFACTOR] 로컬 폴더 이미지: 공통 함수로 통합
   if (formData.imageSource === 'local-folder') {
-    const lfResult = await (window as any).loadLocalFolderWithFallback({
+    const { loadLocalFolderWithFallback } = await import('./localFolderImageLoader');
+    const lfResult = await loadLocalFolderWithFallback({
       headings,
       postTitle: currentStructuredContent?.selectedTitle || formData.postTitle || '',
       onLog: (msg: string) => appendLog(msg),

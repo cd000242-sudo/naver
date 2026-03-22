@@ -3520,7 +3520,8 @@ async function startContinuousPublishingV2(): Promise<void> {
                 console.log('[Continuous] 🚫 headingImageMode=none: generateImagesForAutomation 스킵');
               } else if (item.imageSource === 'local-folder') {
                 // ✅ [2026-03-23 REFACTOR] 연속발행 local-folder: 공통 함수로 통합
-                const lfResult = await (window as any).loadLocalFolderWithFallback({
+                const { loadLocalFolderWithFallback } = await import('./localFolderImageLoader');
+                const lfResult = await loadLocalFolderWithFallback({
                   headings,
                   postTitle: finalStructuredContent.selectedTitle,
                   onLog: (msg: string) => appendLog(msg),
