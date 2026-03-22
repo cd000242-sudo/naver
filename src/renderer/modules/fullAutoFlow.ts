@@ -106,6 +106,7 @@ type VideoProvider = any;
 type HeadingVideoPreviewCacheEntry = any;
 declare const headingVideoPreviewCache: Map<string, any>;
 declare const headingVideoPreviewInFlight: Map<string, any>;
+declare function parseLocalFolderImages(folderPath: string, headings: any[]): Promise<any[]>;
 
 // ✅ [2026-03-05] 이전글 엮기 공통 함수 — 모든 발행 모드에서 동일하게 사용
 /**
@@ -1922,12 +1923,16 @@ export async function executeFullAutoAutomation(formData: any): Promise<void> {
     if (progressContainer.parentNode) {
       progressContainer.parentNode.removeChild(progressContainer);
     }
+    // ✅ [2026-03-22 FIX] 실패 시 통합 진행률 모달 숨김 + 발행 상태 리셋 (재시도 가능하도록)
+    try { hideUnifiedProgress(); } catch (e) { /* ignore */ }
+    try { resetPublishing(); } catch (e) { console.warn('[FullAuto] resetPublishing 오류:', e); }
     toastManager.error('❌ 풀오토 실행에 실패했습니다.');
   } else {
     // ✅ 발행 성공 시 추가 초기화 (3초 후)
     setTimeout(() => {
       console.log('[FullAuto] 발행 완료 후 필드 초기화 시작');
       resetAllFields();
+      hideUnifiedProgress();
       toastManager.success('🆕 다음 글 작성을 위해 필드가 초기화되었습니다.');
       // ✅ 생성된 글 목록도 새로고침
       refreshGeneratedPostsList();
@@ -2077,7 +2082,36 @@ export async function generateImagesForContent(structuredContent: any, formData:
   }
 
   appendLog(`🎨 ${headings.length}개 소제목의 이미지를 생성합니다.`);
+  // ✅ [2026-03-22] 로컬 폴더 이미지 분기 (AI 생성 전에 처리)
+  if (formData.imageSource === 'local-folder') {
+    const folderPath = localStorage.getItem('localFolderPath');
+    if (folderPath) {
+      appendLog('📂 로컬 폴더에서 이미지 로드 중...');
+      try {
+        const localImages = await parseLocalFolderImages(folderPath, headings);
+        if (localImages.length > 0) {
+          appendLog(`✅ 로컬 이미지 ${localImages.length}장 로드 완료`);
+          try { displayGeneratedImages(localImages); } catch {}
+          try { updatePromptItemsWithImages(localImages); } catch {}
+          (window as any).generatedImages = localImages;
+          (window as any).imageManagementGeneratedImages = localImages;
+          return localImages;
+        } else {
+          appendLog('⚠️ 폴더에 이미지가 없습니다 → AI 이미지로 대체');
+          formData.imageSource = 'nano-banana-pro';
+        }
+      } catch (e) {
+        appendLog(`⚠️ 폴더 이미지 로드 실패: ${(e as Error).message} → AI 이미지로 대체`);
+        formData.imageSource = 'nano-banana-pro';
+      }
+    } else {
+      appendLog('⚠️ 이미지 폴더 미선택 → AI 이미지로 대체');
+      formData.imageSource = 'nano-banana-pro';
+    }
+  }
+
   const sourceDisplayNames: Record<string, string> = {
+    'local-folder': '📂 내 폴더 (로컬 이미지)',
     'pollinations': 'Pollinations (FLUX, 무료)',
     'nano-banana-pro': '나노 바나나 프로 (Gemini API 키, 과금 가능)',
     'stability': 'Stability AI',
@@ -2177,6 +2211,7 @@ export async function generateAIImagesForHeadings(headings: any[], formData: any
 
 
   const sourceNames: Record<string, string> = {
+    'local-folder': '📂 내 폴더 (로컬)',
     'pollinations': 'Pollinations (FLUX, 무료)',
     'nano-banana-pro': '나노 바나나 프로 (Gemini Native)',
     'prodia': 'Prodia (과금 가능)',
@@ -2226,7 +2261,7 @@ export async function generateAIImagesForHeadings(headings: any[], formData: any
   const isShoppingConnect = formData.isShoppingConnect === true || formData.contentMode === 'affiliate';
 
   // ✅ [2026-02-26] 쇼핑커넥트 모드: 나노바나나프로 전용 (제품 원본 참조 이미지 생성은 나노바나나프로만 가능)
-  if (isShoppingConnect && imageSource !== 'nano-banana-pro') {
+  if (isShoppingConnect && imageSource !== 'nano-banana-pro' && imageSource !== 'local-folder') {
     console.log(`[AI Images] 🛒 쇼핑커넥트 모드: 이미지 엔진 '${imageSource}' → 'nano-banana-pro' 강제 전환 (제품 정확도 보장)`);
     appendLog(`🛒 쇼핑커넥트 모드: 제품 정확도를 위해 나노바나나프로로 자동 전환됩니다.`);
     imageSource = 'nano-banana-pro';

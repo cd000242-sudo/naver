@@ -375,6 +375,24 @@ export function initImageManagementTab(): void {
         appendLog('✅ Leonardo AI가 선택되었습니다. API 키가 필요합니다.');
       } else if (selectedSource === 'imagefx') {
         appendLog('✅ ImageFX (Google 무료)가 선택되었습니다. 첫 사용 시 Google 로그인이 필요합니다.');
+      } else if (selectedSource === 'local-folder') {
+        // ✅ [2026-03-22] 내 폴더 선택 시 폴더 선택 다이얼로그
+        try {
+          const result = await (window as any).api.selectFolder();
+          if (result && result.filePaths && result.filePaths.length > 0) {
+            const folderPath = result.filePaths[0];
+            localStorage.setItem('localFolderPath', folderPath);
+            appendLog(`✅ 📂 내 폴더가 선택되었습니다: ${folderPath}`);
+          } else {
+            appendLog('⚠️ 폴더 선택이 취소되었습니다. AI 이미지가 사용됩니다.');
+            imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'imagefx';
+            return;
+          }
+        } catch (e: any) {
+          appendLog(`❌ 폴더 선택 오류: ${e.message}`);
+          imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'imagefx';
+          return;
+        }
       }
       // ✅ [2026-03-16] ImageFX 선택 시 Google 계정 변경 버튼 표시/숨기기
       ensureImageFxSwitchButton(imageSourceSelect, selectedSource === 'imagefx');
@@ -428,6 +446,7 @@ export function initImageManagementTab(): void {
           'openai-image': 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
           'leonardoai': 'linear-gradient(135deg, #ea580c, #dc2626)',
           'imagefx': 'linear-gradient(135deg, #10b981, #059669)',
+          'local-folder': 'linear-gradient(135deg, #4338ca, #6366f1)',
           'saved': 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
         };
         imageSourceInfoBadge.style.background = colorMap[selectedSource] || colorMap['nano-banana-pro'];

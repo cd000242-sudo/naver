@@ -784,7 +784,16 @@ export async function generateWithNanoBananaPro(
         console.log(`[NanoBananaPro] 📊 [표 이미지] 스펙 추출 중...`);
         // ✅ [2026-02-23 FIX] productData가 있으면 crawledData 구성하여 정확한 가격 반영
         // ✅ [2026-03-04 FIX] 가격 없으면 '정보없음' 대신 아예 제외 → Gemini 혼동 방지
-        const priceStr = productData?.price ? `가격: ${productData.price}원` : '';
+        // ✅ [2026-03-22 FIX] 가격 포맷 정규화: "원" 중복 방지 + 콤마 포맷팅
+        //   입력 소스별 형식 차이: "29900" / "29,900원" / "29900원" → 모두 "29,900원"으로 통일
+        let priceStr = '';
+        if (productData?.price) {
+          const rawPrice = String(productData.price).replace(/[,원\s]/g, '');
+          const numPrice = parseInt(rawPrice, 10);
+          priceStr = !isNaN(numPrice) && numPrice > 0
+            ? `가격: ${numPrice.toLocaleString()}원`
+            : '';
+        }
         const crawledData = productData ? `제품명: ${productData.name || postTitle}\n${priceStr}\n브랜드: ${productData.brand || ''}\n카테고리: ${productData.category || ''}`.replace(/\n{2,}/g, '\n').trim() : null;
         if (crawledData) {
           console.log(`[NanoBananaPro] 💰 [표 이미지] 실제 제품 데이터로 스펙 추출: price=${productData?.price}`);

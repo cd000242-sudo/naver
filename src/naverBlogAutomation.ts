@@ -24,6 +24,7 @@ import { createGhostCursor, safeClick, safeType, safeClickInFrame, waitRandom, r
 import * as imageHelpers from './automation/imageHelpers';
 import * as publishHelpers from './automation/publishHelpers';
 import * as editorHelpers from './automation/editorHelpers';
+import { getProxyUrl } from './crawler/utils/proxyManager.js';
 
 // ✅ 쇼핑커넥트 모드 전용 강력한 후킹 메시지 (구매 전환 극대화)
 const SHOPPING_HOOKS = [
@@ -1567,6 +1568,28 @@ export class NaverBlogAutomation {
           this.log('ℹ️ Puppeteer Chrome 사용');
         }
 
+        // ✅ [2026-03-22 FIX] 프록시 적용 (다중계정 CAPTCHA 방지!)
+        const proxyUrl = await getProxyUrl();
+        let proxyAuth: { username: string; password: string } | null = null;
+
+        if (proxyUrl) {
+            try {
+                const parsedProxy = new URL(proxyUrl);
+                const proxyServer = `${parsedProxy.protocol}//${parsedProxy.hostname}:${parsedProxy.port}`;
+                (launchOptions.args as string[]).push(`--proxy-server=${proxyServer}`);
+                if (parsedProxy.username) {
+                    proxyAuth = {
+                        username: decodeURIComponent(parsedProxy.username),
+                        password: decodeURIComponent(parsedProxy.password),
+                    };
+                }
+                this.log(`🌐 프록시 적용: ${proxyServer}`);
+            } catch {
+                (launchOptions.args as string[]).push(`--proxy-server=${proxyUrl}`);
+                this.log(`🌐 프록시 적용 (raw): ${proxyUrl.replace(/:[^:]+@/, ':***@')}`);
+            }
+        }
+
         this.browser = await puppeteer.launch(launchOptions);
 
         // ✅ 팝업 차단
@@ -1588,7 +1611,11 @@ export class NaverBlogAutomation {
 
         this.page = await this.browser.newPage();
 
-        // 🧹 처음 실행 시 기본 빈 탭 정리 (Puppeteer가 launch 시 생성하는 기본 탭 제거)
+        // ✅ [2026-03-22 FIX] 프록시 인증 적용
+        if (proxyAuth) {
+            await this.page.authenticate(proxyAuth);
+            this.log(`   🔐 프록시 인증 설정 완료 (user: ${proxyAuth.username.substring(0, 5)}...)`);
+        }
         const initialPages = await this.browser.pages();
         for (const p of initialPages) {
           if (p !== this.page) {

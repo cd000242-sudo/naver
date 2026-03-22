@@ -2309,6 +2309,21 @@ ipcMain.handle('file:deleteFile', async (_event, filePath: string) => {
 
 // ✅ 누락된 핸들러들 추가
 
+// ✅ [2026-03-22] 로컬 폴더 이미지 리사이즈 (sharp 사용)
+ipcMain.handle('localFolder:resizeImage', async (_event, filePath: string, maxWidth: number, maxHeight: number) => {
+  try {
+    const sharp = (await import('sharp')).default;
+    const outputPath = filePath.replace(/(\.[^.]+)$/, `_resized_${Date.now()}$1`);
+    await sharp(filePath)
+      .resize(maxWidth, maxHeight, { fit: 'inside', withoutEnlargement: true })
+      .toFile(outputPath);
+    return { success: true, filePath: outputPath };
+  } catch (error) {
+    console.error('[LocalFolder] 이미지 리사이즈 실패:', error);
+    return { success: true, filePath }; // 실패 시 원본 경로 반환
+  }
+});
+
 // 폴더 읽기 (상세 정보 포함)
 ipcMain.handle('file:readDirWithStats', async (_event, dirPath: string) => {
   try {

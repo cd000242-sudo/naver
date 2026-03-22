@@ -476,6 +476,11 @@ export async function generateContentFromUrl(
     // 에러 로그는 항상 기록
     if (activeModal.addLog) activeModal.addLog(`❌ 오류: ${(error as Error).message}`);
 
+    // ✅ [2026-03-22 FIX] 에러 표시 후 3초 뒤 통합 진행률 모달 자동 숨김 (재시도 가능하도록)
+    setTimeout(() => {
+      try { hideUnifiedProgress(); } catch (e) { /* ignore */ }
+    }, 3000);
+
     // 개별 모달인 경우에만 닫기
     if (!suppressModal && aiProgressModal.hide) {
       aiProgressModal.hide();
@@ -981,6 +986,11 @@ export async function generateContentFromKeywords(
     appendLog(`❌ 키워드 기반 콘텐츠 생성 실패: ${(error as Error).message}`);
     // 에러 로그는 항상 기록
     if (activeModal.addLog) activeModal.addLog(`❌ 오류: ${(error as Error).message}`);
+
+    // ✅ [2026-03-22 FIX] 에러 표시 후 3초 뒤 통합 진행률 모달 자동 숨김 (재시도 가능하도록)
+    setTimeout(() => {
+      try { hideUnifiedProgress(); } catch (e) { /* ignore */ }
+    }, 3000);
 
     // ✅ [2026-03-22 FIX] 글 생성 실패 시 글 생성 상태만 리셋 (세분화 리셋)
     if (typeof (window as any).resetContentGeneration === 'function') {

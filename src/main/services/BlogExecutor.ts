@@ -408,6 +408,14 @@ export async function executePublishing(
                     Logger.info(`[BlogExecutor] 📅 scheduleDate 합성: date="${payload.scheduleDate}", time="${(payload as any).scheduleTime || '(없음)'}"}`);
                     // scheduleTime이 별도 필드로 있으면 합성
                     if ((payload as any).scheduleTime) {
+                        // ✅ [2026-03-22 FIX] scheduleDate에 이미 시간이 포함되어 있으면 재합성하지 않음
+                        // semi-auto에서 getScheduleDateFromInput()이 "YYYY-MM-DD HH:mm" 형식을 반환하는 경우
+                        // 재합성하면 "YYYY-MM-DD HH:mm HH:mm" 같은 잘못된 형식이 생성됨
+                        const alreadyHasTime = /^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}$/.test(payload.scheduleDate!);
+                        if (alreadyHasTime) {
+                            Logger.info(`[BlogExecutor] 📅 scheduleDate에 이미 시간 포함됨, 재합성 건너뜀: "${payload.scheduleDate}"`);
+                            return payload.scheduleDate;
+                        }
                         const synthesized = `${payload.scheduleDate} ${(payload as any).scheduleTime}`;
                         Logger.info(`[BlogExecutor] 📅 scheduleDate+time 합성 결과: "${synthesized}"`);
                         return synthesized;

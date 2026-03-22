@@ -163,6 +163,8 @@ import { ThumbnailGenerator, applyPresetThumbnailIfExists } from './modules/thum
 declare let thumbnailGenerator: ThumbnailGenerator | null;
 // ✅ [2026-02-25 모듈화] 다중계정 관리
 import { initMultiAccountManager, initMultiAccountPublishModal, initMainAccountSelector, generateImagesForAutomation } from './modules/multiAccountManager.js';
+// ✅ [2026-03-22] 로컬 폴더 이미지 로더 (window 전역 등록 — fullAutoFlow.ts에서 declare로 사용)
+import './modules/localFolderImageLoader.js';
 // ✅ [2026-03-17 모듈화] 예약 시간 분산 유틸리티
 import { distributeByInterval, distributeByRandomRange, distributeWithProtection } from './modules/scheduleDistributor.js';
 // window 전역 노출 (@ts-nocheck 파일에서 사용)
@@ -1507,7 +1509,7 @@ const UnifiedDOMCache = {
   getImageSource(): string {
     // ✅ [2026-02-02] 풀오토/연속/다중계정 발행 전용 이미지 소스
     // 이미지 관리 탭의 globalImageSource와 완전히 분리됨
-    const VALID_AI_SOURCES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx'];
+    const VALID_AI_SOURCES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'local-folder'];
 
     // 1순위: fullAutoImageSource (풀오토 전용)
     const fullAutoSource = localStorage.getItem('fullAutoImageSource');

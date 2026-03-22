@@ -132,6 +132,8 @@ contextBridge.exposeInMainWorld('api', {
   readDirWithStats: (dirPath: string): Promise<Array<{ name: string; isFile: boolean; isDirectory: boolean; size: number; mtime: number; birthtime: number; ctime: number }>> => ipcRenderer.invoke('file:readDirWithStats', dirPath),
   getFileStats: (filePath: string): Promise<{ isFile: boolean; isDirectory: boolean; size: number; mtime: number; birthtime: number; ctime: number } | null> => ipcRenderer.invoke('file:getStats', filePath),
   deleteFolder: (folderPath: string): Promise<boolean> => ipcRenderer.invoke('file:deleteFolder', folderPath),
+  // ✅ [2026-03-22] 로컬 폴더 이미지 리사이즈
+  resizeImage: (filePath: string, maxWidth: number, maxHeight: number): Promise<{ success: boolean; filePath?: string; message?: string }> => ipcRenderer.invoke('localFolder:resizeImage', filePath, maxWidth, maxHeight),
   deleteFile: (filePath: string): Promise<{ success: boolean; message?: string }> => ipcRenderer.invoke('file:deleteFile', filePath),
   getUserHomeDir: (): Promise<string> => ipcRenderer.invoke('os:homedir'),
   openPath: (path: string): Promise<{ success: boolean; message?: string }> => ipcRenderer.invoke('shell:openPath', path),

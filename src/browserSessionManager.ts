@@ -13,6 +13,7 @@ import { Browser, Page, Frame } from 'puppeteer';
 import * as path from 'path';
 import * as os from 'os';
 import { promises as fs } from 'fs';
+import { getProxyUrl, isProxyEnabled } from './crawler/utils/proxyManager.js';
 
 // Stealth Plugin 적용
 puppeteer.use(StealthPlugin());
@@ -176,11 +177,10 @@ class BrowserSessionManager {
         const profile = this.getAccountConsistentProfile(accountId);
         const chromeExecutablePath = this.findChromeExecutable();
 
-        const launchOptions: Parameters<typeof puppeteer.launch>[0] = {
-            headless,
-            userDataDir: profileDir,
-            protocolTimeout: 300000,
-            args: [
+        // ✅ [2026-03-22 FIX] 프록시 적용 (다중계정 CAPTCHA 방지 핵심!)
+        const proxyUrl = await getProxyUrl();
+        let proxyAuth: { username: string; password: string } | null = null;
+        const launchArgs = [
                 '--disable-blink-features=AutomationControlled',
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
@@ -200,7 +200,33 @@ class BrowserSessionManager {
                 '--disable-component-update',
                 // ✅ [2026-02-17 FIX] OS 키체인 대신 기본 저장소 사용 (비밀번호 저장 프롬프트 방지)
                 '--password-store=basic',
-            ],
+        ];
+
+        // ✅ [2026-03-22] 프록시 서버 인자 추가 (SmartProxy 인증 분리 처리)
+        if (proxyUrl) {
+            try {
+                const parsedProxy = new URL(proxyUrl);
+                const proxyServer = `${parsedProxy.protocol}//${parsedProxy.hostname}:${parsedProxy.port}`;
+                launchArgs.push(`--proxy-server=${proxyServer}`);
+                if (parsedProxy.username) {
+                    proxyAuth = {
+                        username: decodeURIComponent(parsedProxy.username),
+                        password: decodeURIComponent(parsedProxy.password),
+                    };
+                }
+                console.log(`[BrowserSessionManager] 🌐 프록시 적용: ${proxyServer}`);
+            } catch {
+                // URL 파싱 실패 시 raw --proxy-server
+                launchArgs.push(`--proxy-server=${proxyUrl}`);
+                console.log(`[BrowserSessionManager] 🌐 프록시 적용 (raw): ${proxyUrl.replace(/:[^:]+@/, ':***@')}`);
+            }
+        }
+
+        const launchOptions: Parameters<typeof puppeteer.launch>[0] = {
+            headless,
+            userDataDir: profileDir,
+            protocolTimeout: 300000,
+            args: launchArgs,
             ignoreDefaultArgs: ['--enable-automation'],
         };
 
@@ -217,6 +243,12 @@ class BrowserSessionManager {
             if (p !== page) {
                 await p.close().catch(() => { });
             }
+        }
+
+        // ✅ [2026-03-22 FIX] 프록시 인증 적용 (page.authenticate)
+        if (proxyAuth) {
+            await page.authenticate(proxyAuth);
+            console.log(`[BrowserSessionManager] 🔐 프록시 인증 설정 완료 (user: ${proxyAuth.username.substring(0, 5)}...)`);
         }
 
         // User-Agent 및 언어 설정

@@ -7,7 +7,7 @@
 
 export type HeadingImageMode = 'all' | 'thumbnail-only' | 'odd-only' | 'even-only' | 'none';
 // ✅ [2026-02-08 FIX] 이미지 관리 탭 드롭다운 value와 완전 통일
-export type GlobalImageSource = 'nano-banana-pro' | 'falai' | 'prodia' | 'stability' | 'pollinations' | 'deepinfra' | 'openai-image' | 'leonardoai' | 'imagefx';
+export type GlobalImageSource = 'nano-banana-pro' | 'falai' | 'prodia' | 'stability' | 'pollinations' | 'deepinfra' | 'openai-image' | 'leonardoai' | 'imagefx' | 'local-folder';
 
 // ✅ [2026-02-18] 이미지 스타일 타입 (5개)
 export type ImageStyleType =
@@ -39,7 +39,8 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'deepinfra': 'FLUX-2 (DeepInfra)',
   'openai-image': 'OpenAI DALL-E',
   'leonardoai': 'Leonardo AI',
-  'imagefx': 'ImageFX (무료)'
+  'imagefx': 'ImageFX (무료)',
+  'local-folder': '📂 내 폴더'
 };
 
 export const STYLE_NAMES: Record<ImageStyleType, string> = {
@@ -206,7 +207,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   safeLocalStorageSet('globalImageSource', source);
   // ✅ [2026-02-18 FIX] fullAutoImageSource도 동기화 — 이전에는 globalImageSource만 설정되어
   // getImageSource()가 fullAutoImageSource(="null")를 거부한 후 DOM 폴백으로 nano-banana-pro 반환
-  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx'];
+  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'local-folder'];
   if (VALID_AI_SOURCES.includes(source)) {
     safeLocalStorageSet('fullAutoImageSource', source);
     console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${source}`);
@@ -218,7 +219,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
 // ✅ [2026-02-02] 풀오토 전용 이미지 소스 설정 (이미지 관리 탭과 완전히 분리)
 export function getFullAutoImageSource(): GlobalImageSource {
   // ✅ [2026-02-13 FIX] 유효한 AI 엔진 목록 (이것 외의 값은 모두 무효)
-  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx'];
+  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'local-folder'];
 
   // 우선순위: fullAutoImageSource → globalImageSource → 'nano-banana-pro' (Gemini 기본값)
   const fullAutoSaved = safeLocalStorageGet('fullAutoImageSource');
@@ -765,6 +766,11 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #047857;">ImageFX</div>
             <div style="font-size: 10px; color: #059669;">Google 무료 | 1000장/일</div>
           </label>
+          <label class="source-option" data-value="local-folder" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); text-align: center; transition: all 0.2s; position: relative;">
+            <div style="font-size: 1.5rem;">📂</div>
+            <div style="font-size: 12px; font-weight: 600; color: #4338ca;">내 폴더</div>
+            <div style="font-size: 10px; color: #6366f1;" id="local-folder-path-display">폴더 선택 필요</div>
+          </label>
         </div>
         <button id="image-source-confirm" style="width: 100%; margin-top: 14px; padding: 12px; background: #667eea; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">확인</button>
       </div>
@@ -1229,7 +1235,34 @@ export function createHeadingImageModal(): void {
   });
 
   // ✅ AI 엔진 서브 모달 확인 버튼
-  document.getElementById('image-source-confirm')?.addEventListener('click', () => {
+  document.getElementById('image-source-confirm')?.addEventListener('click', async () => {
+    // ✅ [2026-03-22] local-folder 선택 시 폴더 선택 다이얼로그
+    if (selectedSourceValue === 'local-folder') {
+      try {
+        const result = await (window as any).api.selectFolder();
+        if (result && result.filePaths && result.filePaths.length > 0) {
+          const folderPath = result.filePaths[0];
+          localStorage.setItem('localFolderPath', folderPath);
+          console.log(`[HeadingImageSettings] 📂 로컬 폴더 선택: ${folderPath}`);
+          // 카드에 폴더 경로 표시
+          const pathDisplay = document.getElementById('local-folder-path-display');
+          if (pathDisplay) {
+            const shortPath = folderPath.length > 20 ? '...' + folderPath.slice(-20) : folderPath;
+            pathDisplay.textContent = shortPath;
+          }
+        } else {
+          // 폴더 선택 취소 → 이전 소스로 복원
+          console.log('[HeadingImageSettings] 폴더 선택 취소');
+          if ((window as any).toastManager) {
+            (window as any).toastManager.warning('📂 폴더를 선택하지 않으면 AI 이미지가 사용됩니다.');
+          }
+          return; // 모달 닫지 않음
+        }
+      } catch (e) {
+        console.error('[HeadingImageSettings] 폴더 선택 실패:', e);
+        return;
+      }
+    }
     setGlobalImageSource(selectedSourceValue);
     // 메인 모달 표시 업데이트
     const display = document.getElementById('current-image-source-display');
