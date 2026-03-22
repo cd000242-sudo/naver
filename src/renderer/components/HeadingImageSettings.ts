@@ -163,9 +163,13 @@ export function shouldGenerateImageForHeading(headingIndex: number, isThumbnail:
     case 'thumbnail-only':
       return isThumbnail;
     case 'odd-only':
-      return isThumbnail || (headingIndex + 1) % 2 === 1;
+      // ✅ [2026-03-23 FIX] main.ts:3921과 동일한 0-indexed 기준
+      // origIdx=0(썸네일)→항상포함, origIdx=1→홀수(포함), origIdx=2→짝수(제외)
+      return isThumbnail || headingIndex % 2 === 1;
     case 'even-only':
-      return isThumbnail || (headingIndex + 1) % 2 === 0;
+      // ✅ [2026-03-23 FIX] main.ts:3933과 동일한 0-indexed 기준
+      // origIdx=0(썸네일)→항상포함, origIdx=1→홀수(제외), origIdx=2→짝수(포함)
+      return isThumbnail || headingIndex % 2 === 0;
     case 'none':
       return false;
     default:
@@ -614,6 +618,28 @@ export function createHeadingImageModal(): void {
                 <div class="checkbox-desc">이미지 비용을 절약합니다</div>
               </div>
             </div>
+          </div>
+
+          <!-- ✅ [2026-03-23] 내 폴더 선택 시 부족 이미지 처리 옵션 -->
+          <div id="local-folder-fallback-options" style="display: none; margin-bottom: 16px; padding: 14px 16px; border-radius: 12px; background: linear-gradient(135deg, #1e1e2e 0%, #2a2a3e 100%); border: 1px solid rgba(99,102,241,0.3);">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+              <span style="font-size: 1.1rem;">📂</span>
+              <span style="font-weight: 600; color: #a5b4fc; font-size: 13px;">폴더 이미지 부족 시 처리</span>
+            </div>
+            <label style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 6px; border-radius: 8px; cursor: pointer; transition: background 0.2s; background: rgba(255,255,255,0.04);" onmouseover="this.style.background='rgba(99,102,241,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
+              <input type="radio" name="local-folder-fallback" value="skip" checked style="accent-color: #6366f1; width: 16px; height: 16px;">
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #e2e8f0;">⏭️ 부족한 이미지는 건너뛰기</div>
+                <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">추가 비용 없이 있는 이미지만 사용</div>
+              </div>
+            </label>
+            <label style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: background 0.2s; background: rgba(255,255,255,0.04);" onmouseover="this.style.background='rgba(99,102,241,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
+              <input type="radio" name="local-folder-fallback" value="ai-generate" style="accent-color: #6366f1; width: 16px; height: 16px;">
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #e2e8f0;">✨ 부족한 이미지는 AI 생성하기</div>
+                <div style="font-size: 11px; color: #f59e0b; margin-top: 2px;">⚠️ AI 이미지 생성 비용이 발생할 수 있음</div>
+              </div>
+            </label>
           </div>
           
           <!-- ✅ 쇼핑커넥트 전용 옵션 (기본 숨김) - [2026-01-28] 연속발행과 동일한 UI로 업데이트 -->
@@ -1121,6 +1147,13 @@ export function createHeadingImageModal(): void {
     if (textOnlyCheck) localStorage.setItem('textOnlyPublish', String(textOnlyCheck.checked));
     if (lifestyleCheck) localStorage.setItem('lifestyleImageGenerate', String(lifestyleCheck.checked));
 
+    // ✅ [2026-03-23] 내 폴더 부족 이미지 처리 옵션 저장
+    const localFolderFallbackRadio = document.querySelector('input[name="local-folder-fallback"]:checked') as HTMLInputElement;
+    if (localFolderFallbackRadio) {
+      localStorage.setItem('localFolderFallback', localFolderFallbackRadio.value);
+      console.log(`[HeadingImageSettings] 📂 내 폴더 부족 이미지 처리: ${localFolderFallbackRadio.value}`);
+    }
+
     // ✅ [2026-01-28] 쇼핑커넥트 전용 필드들 저장
     const scSubImageSourceRadio = document.querySelector('input[name="sc-sub-image-source"]:checked') as HTMLInputElement;
     const scAutoThumbnailCheck = document.getElementById('sc-auto-thumbnail-setting') as HTMLInputElement;
@@ -1266,9 +1299,29 @@ export function createHeadingImageModal(): void {
     setGlobalImageSource(selectedSourceValue);
     // 메인 모달 표시 업데이트
     const display = document.getElementById('current-image-source-display');
-    if (display) display.textContent = SOURCE_NAMES[selectedSourceValue];
+    if (display) {
+      if (selectedSourceValue === 'local-folder') {
+        const savedPath = localStorage.getItem('localFolderPath') || '';
+        const folderName = savedPath.split(/[/\\]/).filter(Boolean).pop() || '';
+        display.textContent = folderName ? `📂 ${folderName}` : '📂 내 폴더';
+      } else {
+        display.textContent = SOURCE_NAMES[selectedSourceValue];
+      }
+    }
     const subModal = document.getElementById('image-source-submodal');
     if (subModal) subModal.style.display = 'none';
+
+    // ✅ [2026-03-23] local-folder 선택 시 부족 이미지 옵션 표시/숨김
+    const fallbackSection = document.getElementById('local-folder-fallback-options');
+    if (fallbackSection) {
+      fallbackSection.style.display = selectedSourceValue === 'local-folder' ? 'block' : 'none';
+      // 저장된 값 복원
+      if (selectedSourceValue === 'local-folder') {
+        const savedFallback = localStorage.getItem('localFolderFallback') || 'skip';
+        const radio = document.querySelector(`input[name="local-folder-fallback"][value="${savedFallback}"]`) as HTMLInputElement;
+        if (radio) radio.checked = true;
+      }
+    }
   });
 
   // ✅ [2026-01-26] 이미지 스타일 버튼 클릭 → 서브 모달 열기
@@ -2076,7 +2129,26 @@ export function openHeadingImageModal(): void {
 
     const currentSource = getGlobalImageSource();
     const sourceDisplay = document.getElementById('current-image-source-display');
-    if (sourceDisplay) sourceDisplay.textContent = SOURCE_NAMES[currentSource];
+    if (sourceDisplay) {
+      if (currentSource === 'local-folder') {
+        const savedPath = localStorage.getItem('localFolderPath') || '';
+        const folderName = savedPath.split(/[/\\]/).filter(Boolean).pop() || '';
+        sourceDisplay.textContent = folderName ? `📂 ${folderName}` : '📂 내 폴더';
+      } else {
+        sourceDisplay.textContent = SOURCE_NAMES[currentSource];
+      }
+    }
+
+    // ✅ [2026-03-23] local-folder 선택 시 부족 이미지 옵션 토글
+    const fallbackSection = document.getElementById('local-folder-fallback-options');
+    if (fallbackSection) {
+      fallbackSection.style.display = currentSource === 'local-folder' ? 'block' : 'none';
+      if (currentSource === 'local-folder') {
+        const savedFallback = localStorage.getItem('localFolderFallback') || 'skip';
+        const radio = document.querySelector(`input[name="local-folder-fallback"][value="${savedFallback}"]`) as HTMLInputElement;
+        if (radio) radio.checked = true;
+      }
+    }
 
     // ✅ [2026-01-26] 이미지 스타일 표시 초기화 (통합 상수 사용)
     const currentStyle = getImageStyle();

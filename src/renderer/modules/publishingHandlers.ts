@@ -312,6 +312,12 @@ export async function handleFullAutoPublish(): Promise<void> {
         ) ||
         isShoppingConnectModeActive()
       ) ? 'affiliate' : 'seo',
+      // ✅ [2026-03-23 FIX] 이미지 설정 명시적 전달 (localStorage 폴백 의존 제거)
+      imageStyle: localStorage.getItem('imageStyle') || 'realistic',
+      headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+      imageRatio: localStorage.getItem('imageRatio') || '1:1',
+      thumbnailImageRatio: localStorage.getItem('thumbnailImageRatio') || '1:1',
+      subheadingImageRatio: localStorage.getItem('subheadingImageRatio') || '1:1',
     };
 
     // ✅ [2026-02-16 DEBUG] categoryName 전달 상태 진단 (터미널에 출력)

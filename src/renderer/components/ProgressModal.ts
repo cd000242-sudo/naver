@@ -422,12 +422,15 @@ export class ProgressModal {
         }
 
         // ✅ [2026-03-22 FIX] 이전 타이머 정리 후 8초 자동 닫기 (클래스 멤버로 누수 방지)
+        // ✅ [2026-03-23 FIX] 취소/에러 모달 자동 닫힘 방지 (사용자 불만 접수) -> 자동 닫기 제거
         this.clearAutoCloseTimer();
+        /*
         this.autoCloseTimerId = setTimeout(() => {
             this.autoCloseTimerId = null;
             // 에러 상태에서 hide() → isWorkInProgress=false이므로 FAB 뜨지 않음 (안전)
             this.hide();
         }, 8000);
+        */
 
         // ✅ [2026-03-22 FIX] "확인" 버튼 추가 (즉시 닫기)
         const cancelBtn = document.getElementById('progress-cancel-btn');

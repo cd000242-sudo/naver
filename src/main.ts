@@ -3922,11 +3922,12 @@ ipcMain.handle(
               }
               break;
             case 'even-only':
-              // ✅ [2026-02-23 FIX] 썸네일 항상 포함 + 짝수 인덱스 (썸네일 포함 카운트)
-              // 썸네일(origIdx=0) = 항상 포함
-              // 소제목1(origIdx=1) = 홀수 → 제외
-              // 소제목2(origIdx=2) = 짝수 → 포함
-              // 소제목3(origIdx=3) = 홀수 → 제외
+              // ✅ [2026-02-23 FIX] 썸네일 항상 포함 + 짝수 인덱스 (origIdx 기준, 썸네일=0 포함 카운트)
+              // [사용자 관점: 2번째, 4번째 소제목에만 이미지]
+              // 썸네일(origIdx=0) = 항상 포함 (짝수이므로 자연스럽게 포함)
+              // 소제목1(origIdx=1) = 홀수 → ❌ 제외 (사용자 관점 1번째)
+              // 소제목2(origIdx=2) = 짝수 → ✅ 포함 (사용자 관점 2번째)
+              // 소제목3(origIdx=3) = 홀수 → ❌ 제외 (사용자 관점 3번째)
               if (isThumbnail) {
                 shouldInclude = true;
               } else {
@@ -6626,7 +6627,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                       englishPrompt: englishPrompt,
                       isThumbnail: false,
                       imageStyle: options?.imageStyle,
-                      imageRatio: options?.subheadingImageRatio || options?.thumbnailImageRatio || '1:1',
+                      imageRatio: options?.subheadingImageRatio || options?.imageRatio || '1:1', // ✅ [2026-03-23 FIX] 소제목 비율 폴백: thumbnailImageRatio → imageRatio (기존 thumbnailImageRatio 폴백은 잘못됨)
                     });
                   }
 

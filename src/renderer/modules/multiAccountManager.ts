@@ -289,8 +289,14 @@ export async function generateImagesForAutomation(
     console.log('[generateImagesForAutomation] ⏭️ provider="skip" → 이미지 생성 건너뜀');
     return [];
   }
-  // ✅ [2026-03-22 FIX] 'local-folder'는 AI 엔진이 아님 → 폴백 필요 (이미지 로컬 로딩은 fullAutoFlow에서 사전 처리됨)
-  const INVALID_PROVIDERS = ['saved', '', 'null', 'undefined', 'local-folder'];
+  // ✅ [2026-03-23 FIX] 'local-folder'는 AI 이미지 생성 대상이 아님 → 빈 배열 반환
+  // 로컬 폴더 이미지 로딩은 호출자(fullAutoFlow, multiAccountManager 내 분기)에서 직접 처리
+  if (provider === 'local-folder') {
+    console.log('[generateImagesForAutomation] 📂 provider="local-folder" → AI 생성 불필요, 빈 배열 반환');
+    return [];
+  }
+  // ✅ [2026-03-23 FIX] 'local-folder' 제거 — 호출자 분기에서 이미 처리됨
+  const INVALID_PROVIDERS = ['saved', '', 'null', 'undefined'];
   if (!provider || INVALID_PROVIDERS.includes(provider.trim())) {
     // ✅ [2026-02-18 FIX] localStorage에서도 "null"/"undefined" 문자열 필터링
     const rawFullAuto = localStorage.getItem('fullAutoImageSource');
@@ -338,7 +344,19 @@ export async function generateImagesForAutomation(
         console.log(`[generateImagesForAutomation] ⚠️ AI 썸네일 프롬프트 실패 → 기본 프롬프트 사용`);
       }
     } else {
-      rawPrompt = h.prompt || h.imagePrompt || title || 'Abstract Image';
+      // ✅ [2026-03-23 FIX] 소제목도 AI 영어 프롬프트 변환 + imageStyle 반영
+      // 기존: h.prompt || title (한국어 원문 → imageStyle 무시)
+      // 수정: generateEnglishPromptForHeading(title, postTitle, imageStyle) → 풀오토와 동일 품질
+      try {
+        const globalImgSettings = typeof getGlobalImageSettings === 'function' ? getGlobalImageSettings() : {};
+        const subheadingStyle = globalImgSettings.imageStyle || '';
+        rawPrompt = await generateEnglishPromptForHeading(title, postTitle, subheadingStyle);
+        console.log(`[generateImagesForAutomation] 🎨 소제목[${headingIdx}] AI 프롬프트: "${rawPrompt.substring(0, 60)}..."`);
+      } catch {
+        // AI 실패 시 기존 방식 폴백
+        rawPrompt = h.prompt || h.imagePrompt || title || 'Abstract Image';
+        console.log(`[generateImagesForAutomation] ⚠️ 소제목[${headingIdx}] AI 프롬프트 실패 → 원문 사용`);
+      }
     }
 
     items.push({
