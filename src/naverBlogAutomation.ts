@@ -1927,10 +1927,27 @@ export class NaverBlogAutomation {
     try {
       // ✅ 1단계: 블로그 글쓰기 페이지로 이동 (가장 확실한 진입점)
       this.log('   🔍 세션 상태 확인 중 (영역 진입)...');
-      await page.goto('https://blog.naver.com/GoBlogWrite.naver', {
-        waitUntil: 'domcontentloaded',
-        timeout: 15000
-      });
+
+      // ✅ [2026-03-23 FIX] 네트워크 오류 대응 재시도 (ERR_CONNECTION_RESET 등)
+      let sessionCheckSuccess = false;
+      for (let attempt = 1; attempt <= 2; attempt++) {
+        try {
+          await page.goto('https://blog.naver.com/GoBlogWrite.naver', {
+            waitUntil: 'domcontentloaded',
+            timeout: 15000
+          });
+          sessionCheckSuccess = true;
+          break;
+        } catch (gotoErr: any) {
+          const msg = gotoErr.message || '';
+          if ((msg.includes('net::') || msg.includes('ERR_')) && attempt < 2) {
+            this.log(`   ⚠️ 세션 확인 네트워크 오류 (${msg.substring(0, 50)}), ${attempt * 3}초 후 재시도...`);
+            await this.delay(attempt * 3000);
+            continue;
+          }
+          throw gotoErr;
+        }
+      }
       await this.delay(1500);
 
       const currentUrl = page.url();
@@ -2027,12 +2044,48 @@ export class NaverBlogAutomation {
 
     // 이미 로그인 페이지에 있으면 이동하지 않음
     if (!currentUrl.includes('nidlogin')) {
-      await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      // ✅ [2026-03-23 FIX] ERR_CONNECTION_RESET 대응: 점진적 대기 재시도 (최대 3회)
+      const LOGIN_MAX_RETRIES = 3;
+      let loginPageLoaded = false;
 
-      // ✅ [FIX-5] 로그인 페이지 로드 검증
-      const loadedUrl = page.url();
-      if (!loadedUrl.includes('nid.naver.com') && !loadedUrl.includes('nidlogin')) {
-        this.log(`⚠️ 로그인 페이지 로드 실패 (URL: ${loadedUrl}), 재시도...`);
+      for (let loginAttempt = 1; loginAttempt <= LOGIN_MAX_RETRIES; loginAttempt++) {
+        try {
+          this.log(`🔄 로그인 페이지 접속 시도 ${loginAttempt}/${LOGIN_MAX_RETRIES}...`);
+          await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+          // 로드 검증
+          const loadedUrl = page.url();
+          if (loadedUrl.includes('nid.naver.com') || loadedUrl.includes('nidlogin')) {
+            loginPageLoaded = true;
+            break; // 성공
+          }
+
+          this.log(`⚠️ 로그인 페이지 로드 실패 (URL: ${loadedUrl})`);
+        } catch (gotoError: any) {
+          const errorMsg = gotoError.message || '';
+          const isNetworkError = errorMsg.includes('ERR_CONNECTION_RESET') ||
+            errorMsg.includes('ERR_CONNECTION_REFUSED') ||
+            errorMsg.includes('ERR_CONNECTION_TIMED_OUT') ||
+            errorMsg.includes('ERR_NAME_NOT_RESOLVED') ||
+            errorMsg.includes('ERR_INTERNET_DISCONNECTED') ||
+            errorMsg.includes('net::');
+
+          if (isNetworkError && loginAttempt < LOGIN_MAX_RETRIES) {
+            const waitSec = loginAttempt * 5; // 5초, 10초, 15초
+            this.log(`⚠️ 네트워크 오류 (${errorMsg.substring(0, 60)})`);
+            this.log(`⏳ ${waitSec}초 후 재시도합니다... (${loginAttempt}/${LOGIN_MAX_RETRIES})`);
+            await this.delay(waitSec * 1000);
+            continue;
+          }
+
+          // 마지막 시도이거나 네트워크 오류가 아닌 경우 → 즉시 throw
+          throw gotoError;
+        }
+      }
+
+      if (!loginPageLoaded) {
+        // 모든 시도 후에도 로드 실패 → 마지막으로 한번 더 시도
+        this.log(`⚠️ ${LOGIN_MAX_RETRIES}회 시도 후에도 실패, 최종 시도...`);
         await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
       }
 

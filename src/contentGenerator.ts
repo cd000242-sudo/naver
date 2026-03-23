@@ -6916,7 +6916,16 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
     return openAIClients.get(key)!;
   }
 
-  const client = getOpenAIClient();
+  // ✅ [2026-03-23 FIX] config에서 직접 API 키를 가져와 전달 (process.env 폴백)
+  // applyConfigToEnv가 빈 문자열일 때 delete process.env.OPENAI_API_KEY 하므로
+  // config.openaiApiKey가 있으면 직접 전달해야 확실히 로드됨
+  const configApiKey = config?.openaiApiKey?.trim() || undefined;
+  if (configApiKey) {
+    console.log(`[OpenAI] ✅ config에서 직접 API 키 로드됨 (길이: ${configApiKey.length})`);
+  } else {
+    console.log(`[OpenAI] config.openaiApiKey 없음, process.env.OPENAI_API_KEY 폴백 (${process.env.OPENAI_API_KEY ? '있음' : '없음'})`);
+  }
+  const client = getOpenAIClient(configApiKey);
 
   // ✅ [2026-03-18 FIX] UI 선택 모델에 따라 OpenAI 모델 우선순위 동적 결정
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
@@ -6975,6 +6984,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           temperature: temperature,
           top_p: 0.9,
           max_completion_tokens: 16000,
+          response_format: { type: 'json_object' },  // ✅ [2026-03-23] JSON 출력 보장
         } as any);
 
         const response = await Promise.race([createPromise, timeoutPromise]);
@@ -6991,6 +7001,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         });
 
         console.log(`[OpenAI] ✅ 성공: ${modelName}, ${text.length}자`);
+        console.log(`[OpenAI] 📋 응답 미리보기: ${text.substring(0, 200)}...`);
         return text;
 
       } catch (error) {
@@ -7088,7 +7099,15 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
   const timeoutMs = getTimeoutMs(minChars);
   console.log(`[Claude] 시작: 목표 ${minChars}자, 타임아웃 ${timeoutMs / 1000}초`);
 
-  const client = getAnthropicClient();
+  // ✅ [2026-03-23 FIX] config에서 직접 API 키를 가져와 전달 (process.env 폴백)
+  // callOpenAI와 동일한 패턴: applyConfigToEnv가 빈 문자열일 때 delete하므로 직접 전달 필요
+  const configClaudeKey = config?.claudeApiKey?.trim() || undefined;
+  if (configClaudeKey) {
+    console.log(`[Claude] ✅ config에서 직접 API 키 로드됨 (길이: ${configClaudeKey.length})`);
+  } else {
+    console.log(`[Claude] config.claudeApiKey 없음, process.env.CLAUDE_API_KEY 폴백 (${process.env.CLAUDE_API_KEY ? '있음' : '없음'})`);
+  }
+  const client = getAnthropicClient(configClaudeKey);
 
   // ✅ [2026-03-18 FIX] UI 선택 모델에 따라 Claude 모델 우선순위 동적 결정
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
@@ -7952,6 +7971,7 @@ export async function generateStructuredContent(
   const warningMinChars = Math.round(minChars * 0.50); // 경고 기준 50%
 
   let extraInstruction = '';
+  let lastFailReason = ''; // ✅ [2026-03-23] 실패 원인 추적
   for (let attempt = 0; attempt <= MAX_ATTEMPTS; attempt += 1) {
     try {
       // 재시도 전 대기 (Rate Limit 회피)
@@ -8188,6 +8208,7 @@ export async function generateStructuredContent(
             // ✅ 마지막 시도든 아니든 동일 provider로 재시도 (Gemini 폴백 제거)
             extraInstruction = `\n⚠️ 이전 응답이 올바른 JSON이 아니었습니다. 반드시 { 로 시작하는 유효한 JSON만 출력하세요. 설명, 인사말, 마크다운 없이 오직 JSON 객체만 반환하세요.\n${extraInstruction}`;
             if (attempt < MAX_ATTEMPTS) {
+              lastFailReason = `AI 거부 응답 (${raw.substring(0, 60)}...)`;
               continue;
             }
             // 마지막 시도: 거부 응답에서도 JSON 추출 시도 (후속 코드에서 safeParseJson이 처리)
@@ -8314,6 +8335,8 @@ export async function generateStructuredContent(
         console.log(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: JSON 파싱 성공`);
       } catch (parseError) {
         console.error(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: JSON 파싱 실패 - 재시도 필요:`, (parseError as Error).message);
+        console.error(`[ContentGenerator] 📋 파싱 실패한 raw 응답 앞 300자: ${raw?.substring(0, 300)}`);
+        lastFailReason = `JSON 파싱 실패: ${(parseError as Error).message?.substring(0, 100)}`;
 
         // 마지막 시도가 아니면 재시도
         if (attempt < MAX_ATTEMPTS) {
@@ -8423,6 +8446,7 @@ ${extraInstruction}`;
       if (!duplicateContentValidation.valid && attempt < MAX_ATTEMPTS) {
         const errs = duplicateContentValidation.errors.slice(0, 3).join(', ');
         console.warn(`[ContentGenerator] 중복/패턴 하드게이트 실패: ${errs}`);
+        lastFailReason = `중복/패턴 감지: ${errs}`;
         extraInstruction = `
 [CRITICAL DUPLICATE/PATTERN DETECTED]
 - Duplicate/pattern issues were detected: ${errs}
@@ -8855,6 +8879,8 @@ ${extraInstruction}`;
       // 재시도 시 목표치 증가
       // - 1차 재시도: 1.20배 (20% 증가)
       // - 2차 재시도: 1.40배 (40% 증가)
+      lastFailReason = `글자수 미달: ${plainLength}자 / 목표 ${minChars}자 (${Math.round((plainLength / minChars) * 100)}%)`;
+      console.warn(`[ContentGenerator] ⚠️ 시도 ${attempt + 1}: ${lastFailReason}`);
       const targetChars = Math.min(
         Math.round(requestedMinChars * (1 + attempt * 0.20)), // 재시도마다 20% 증가
         SAFE_MAX_CHARS // 최대 80,000자
@@ -8901,6 +8927,7 @@ ${extraInstruction}`;
         throw error;
       }
       // 재시도 가능한 오류면 계속
+      lastFailReason = `에러 발생: ${(error as Error).message?.substring(0, 150)}`;
       console.warn(`[시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}] 오류 발생, 재시도 중:`, (error as Error).message);
       extraInstruction = `\n\n⚠️ 이전 시도에서 오류가 발생했습니다. JSON 형식을 정확히 지켜주세요.`;
     }
@@ -8918,7 +8945,7 @@ ${extraInstruction}`;
     console.warn('[ContentGenerator] 통계 파일 저장 실패:', (saveError as Error).message);
   }
 
-  throw new Error(`콘텐츠 생성 실패 (엔진: ${provider}, ${MAX_ATTEMPTS + 1}회 시도 후 실패)`);
+  throw new Error(`콘텐츠 생성 실패 (엔진: ${provider}, ${MAX_ATTEMPTS + 1}회 시도 후 실패) [마지막 실패 원인: ${lastFailReason || '알 수 없음'}]`);
 }
 
 function optimizeForViral(content: StructuredContent, source: ContentSource): StructuredContent {

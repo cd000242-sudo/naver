@@ -2084,7 +2084,9 @@ export async function generateImagesForContent(structuredContent: any, formData:
   appendLog(`🎨 ${headings.length}개 소제목의 이미지를 생성합니다.`);
   // ✅ [2026-03-23 REFACTOR] 로컬 폴더 이미지: 공통 함수로 통합
   if (formData.imageSource === 'local-folder') {
-    const { loadLocalFolderWithFallback } = await import('./localFolderImageLoader');
+    // ✅ [2026-03-23 FIX] 동적 import → window 전역 호출 (require is not defined 에러 수정)
+    const loadLocalFolderWithFallback = (window as any).loadLocalFolderWithFallback;
+    if (!loadLocalFolderWithFallback) throw new Error('loadLocalFolderWithFallback 함수가 아직 로드되지 않았습니다');
     const lfResult = await loadLocalFolderWithFallback({
       headings,
       postTitle: currentStructuredContent?.selectedTitle || formData.postTitle || '',
@@ -2967,6 +2969,47 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
   // 에러는 실제 오류로 정확히 전달
   if (!apiResponse.success) {
     const errorMsg = apiResponse.error || '블로그 발행 실패';
+
+    // ✅ [2026-03-23 FIX] 네트워크 오류(ERR_CONNECTION_RESET 등)인 경우 자동 재시도
+    const isNetworkError = errorMsg.includes('ERR_CONNECTION_RESET') ||
+      errorMsg.includes('ERR_CONNECTION_REFUSED') ||
+      errorMsg.includes('ERR_CONNECTION_TIMED_OUT') ||
+      errorMsg.includes('ERR_INTERNET_DISCONNECTED') ||
+      errorMsg.includes('net::');
+
+    if (isNetworkError) {
+      const retryAttempts = (payload as any)._networkRetryCount || 0;
+      const MAX_NETWORK_RETRIES = 2;
+
+      if (retryAttempts < MAX_NETWORK_RETRIES) {
+        const waitSec = (retryAttempts + 1) * 10; // 10초, 20초
+        appendLog(`⚠️ 네트워크 오류 감지: ${errorMsg.substring(0, 60)}`);
+        appendLog(`🔄 ${waitSec}초 후 발행을 다시 시도합니다... (${retryAttempts + 1}/${MAX_NETWORK_RETRIES})`);
+        showUnifiedProgress(88, `네트워크 오류 → ${waitSec}초 후 재시도...`, `재시도 ${retryAttempts + 1}/${MAX_NETWORK_RETRIES}`);
+
+        await new Promise(resolve => setTimeout(resolve, waitSec * 1000));
+
+        (payload as any)._networkRetryCount = retryAttempts + 1;
+
+        appendLog(`🚀 발행 재시도 시작... (${retryAttempts + 1}/${MAX_NETWORK_RETRIES})`);
+        const retryResponse = await apiClient.call(
+          'runAutomation',
+          [payload],
+          { retryCount: 0, retryDelay: 5000, timeout: 0 }
+        );
+
+        if (retryResponse.success && retryResponse.data?.success) {
+          appendLog(`✅ 재시도 성공! 블로그 발행이 완료되었습니다.`);
+          return retryResponse.data;
+        }
+
+        // 재시도도 실패
+        const retryErrorMsg = retryResponse.error || retryResponse.data?.message || '재시도 실패';
+        appendLog(`❌ 재시도도 실패했습니다: ${retryErrorMsg}`);
+        throw new Error(retryErrorMsg);
+      }
+    }
+
     appendLog(`❌ 블로그 발행에 실패했습니다: ${errorMsg}`);
     throw new Error(errorMsg);
   } else if (!apiResponse.data?.success) {
@@ -2979,6 +3022,35 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
       await new Promise(resolve => setTimeout(resolve, 3000));
       // 재시도하지 않고 성공으로 간주 (실제로는 진행 중)
       return { success: true };
+    }
+
+    // ✅ [2026-03-23 FIX] apiResponse.data 단에서도 네트워크 오류 재시도
+    const isNetworkError2 = errorMsg.includes('ERR_CONNECTION_RESET') ||
+      errorMsg.includes('ERR_CONNECTION_REFUSED') ||
+      errorMsg.includes('ERR_CONNECTION_TIMED_OUT') ||
+      errorMsg.includes('net::');
+
+    if (isNetworkError2) {
+      const retryAttempts = (payload as any)._networkRetryCount || 0;
+      if (retryAttempts < 2) {
+        const waitSec = (retryAttempts + 1) * 10;
+        appendLog(`⚠️ 네트워크 오류: ${errorMsg.substring(0, 60)}`);
+        appendLog(`🔄 ${waitSec}초 후 발행을 다시 시도합니다... (${retryAttempts + 1}/2)`);
+
+        await new Promise(resolve => setTimeout(resolve, waitSec * 1000));
+        (payload as any)._networkRetryCount = retryAttempts + 1;
+
+        const retryResponse2 = await apiClient.call(
+          'runAutomation',
+          [payload],
+          { retryCount: 0, retryDelay: 5000, timeout: 0 }
+        );
+
+        if (retryResponse2.success && retryResponse2.data?.success) {
+          appendLog(`✅ 재시도 성공!`);
+          return retryResponse2.data;
+        }
+      }
     }
 
     appendLog(`❌ 블로그 발행에 실패했습니다: ${errorMsg}`);

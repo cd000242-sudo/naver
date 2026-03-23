@@ -270,6 +270,7 @@ try {
     'formUtilities.js',
     'aiAssistant.js',
     'scheduleDistributor.js',  // ✅ [2026-03-17] 예약 시간 분산 유틸리티 (continuousPublishing보다 먼저 로드 필수)
+    'localFolderImageLoader.js', // ✅ [2026-03-23] 로컬 폴더 이미지 로더 (continuousPublishing/publishingHandlers에서 window 전역 호출 필요)
     'continuousPublishing.js',
     'thumbnailGenerator.js',
     'multiAccountManager.js',

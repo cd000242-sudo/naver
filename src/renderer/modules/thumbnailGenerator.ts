@@ -1717,7 +1717,19 @@ class ImageConverter {
       });
 
       // @imgly/background-removal 동적 import
-      const { removeBackground } = await import('@imgly/background-removal');
+      // ✅ [2026-03-23 FIX] 인라인 빌드에서 require()→null 변환 대응
+      let removeBackground: any;
+      try {
+        const bgModule = await import('@imgly/background-removal');
+        removeBackground = bgModule?.removeBackground;
+      } catch (_importErr) {
+        // 인라인 빌드 환경에서는 import 불가
+      }
+      if (!removeBackground) {
+        toastManager.error('⚠️ AI 배경 제거 기능은 현재 환경에서 지원되지 않습니다.');
+        if (removeBgBtn) { removeBgBtn.disabled = false; removeBgBtn.innerHTML = originalText; }
+        return;
+      }
 
       // 배경 제거 실행
       const resultBlob = await removeBackground(blob, {

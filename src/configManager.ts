@@ -456,22 +456,18 @@ export function applyConfigToEnv(config: AppConfig): void {
     console.log(`[Config] ⚠️ primaryGeminiTextModel(${rawModel})은 비-Gemini 모델 → GEMINI_MODEL 미설정 (provider 경로로 처리)`);
   }
 
+  // ✅ [2026-03-23 FIX] delete 패턴 제거 — GEMINI_API_KEY와 동일한 안전 패턴
+  // 빈 값이어도 기존 process.env 값을 보존 (다른 경로에서 설정된 값 유지)
   if (config.openaiApiKey && config.openaiApiKey.trim()) {
     process.env.OPENAI_API_KEY = config.openaiApiKey.trim();
-  } else {
-    delete process.env.OPENAI_API_KEY;
   }
 
   if (config.pexelsApiKey && config.pexelsApiKey.trim()) {
     process.env.PEXELS_API_KEY = config.pexelsApiKey.trim();
-  } else {
-    delete process.env.PEXELS_API_KEY;
   }
 
   if (config.claudeApiKey && config.claudeApiKey.trim()) {
     process.env.CLAUDE_API_KEY = config.claudeApiKey.trim();
-  } else {
-    delete process.env.CLAUDE_API_KEY;
   }
 
   // (removed stabilityApiKey env injection - deprecated)
@@ -480,8 +476,6 @@ export function applyConfigToEnv(config: AppConfig): void {
   if (config.perplexityApiKey && config.perplexityApiKey.trim()) {
     process.env.PERPLEXITY_API_KEY = config.perplexityApiKey.trim();
     console.log('[Config] PERPLEXITY_API_KEY 설정됨 (길이:', config.perplexityApiKey.trim().length, ')');
-  } else {
-    delete process.env.PERPLEXITY_API_KEY;
   }
 
   // ✅ [2026-03-20 FIX] Perplexity 모델 설정 (sonar / sonar-pro)
@@ -576,8 +570,6 @@ export function applyConfigToEnv(config: AppConfig): void {
   if (config.deepinfraApiKey && config.deepinfraApiKey.trim()) {
     process.env.DEEPINFRA_API_KEY = config.deepinfraApiKey.trim();
     console.log('[Config] DEEPINFRA_API_KEY 설정됨 (길이:', config.deepinfraApiKey.trim().length, ')');
-  } else {
-    delete process.env.DEEPINFRA_API_KEY;
   }
 }
 

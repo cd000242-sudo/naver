@@ -3042,7 +3042,9 @@ export async function initMultiAccountPublishModal() {
 
             } else if (imageSource === 'local-folder') {
               // ✅ [2026-03-23 REFACTOR] 다중계정 local-folder: 공통 함수로 통합
-              const { loadLocalFolderWithFallback: loadLF } = await import('./localFolderImageLoader');
+              // ✅ [2026-03-23 FIX] 동적 import → window 전역 호출 (require is not defined 에러 수정)
+              const loadLF = (window as any).loadLocalFolderWithFallback;
+              if (!loadLF) throw new Error('loadLocalFolderWithFallback 함수가 아직 로드되지 않았습니다');
               const lfResult = await loadLF({
                 headings,
                 postTitle: structuredContent.selectedTitle,

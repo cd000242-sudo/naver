@@ -3520,7 +3520,9 @@ async function startContinuousPublishingV2(): Promise<void> {
                 console.log('[Continuous] 🚫 headingImageMode=none: generateImagesForAutomation 스킵');
               } else if (item.imageSource === 'local-folder') {
                 // ✅ [2026-03-23 REFACTOR] 연속발행 local-folder: 공통 함수로 통합
-                const { loadLocalFolderWithFallback } = await import('./localFolderImageLoader');
+                // ✅ [2026-03-23 FIX] 동적 import → window 전역 호출 (require is not defined 에러 수정)
+                const loadLocalFolderWithFallback = (window as any).loadLocalFolderWithFallback;
+                if (!loadLocalFolderWithFallback) throw new Error('loadLocalFolderWithFallback 함수가 아직 로드되지 않았습니다');
                 const lfResult = await loadLocalFolderWithFallback({
                   headings,
                   postTitle: finalStructuredContent.selectedTitle,

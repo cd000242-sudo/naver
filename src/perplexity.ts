@@ -203,7 +203,16 @@ export async function generatePerplexityContent(
         throw new Error('생성할 내용을 입력해주세요.');
     }
 
-    const apiKey = process.env.PERPLEXITY_API_KEY;
+    // ✅ [2026-03-23 FIX] config에서 직접 API 키 로드 (process.env 폴백)
+    // applyConfigToEnv 관련 레이스 컨디션 방지를 위해 config 우선 참조
+    let apiKey: string | undefined;
+    try {
+        const { loadConfig } = await import('./configManager.js');
+        const config = await loadConfig();
+        apiKey = config?.perplexityApiKey?.trim() || process.env.PERPLEXITY_API_KEY;
+    } catch {
+        apiKey = process.env.PERPLEXITY_API_KEY;
+    }
     if (!apiKey) {
         throw new Error('PERPLEXITY_API_KEY가 설정되어 있지 않습니다. 환경설정에서 Perplexity API 키를 입력해주세요.');
     }

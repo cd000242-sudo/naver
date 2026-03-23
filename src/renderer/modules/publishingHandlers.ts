@@ -682,7 +682,9 @@ export async function handleFullAutoPublish(): Promise<void> {
 
             // ✅ [2026-03-23 REFACTOR] local-folder 모드: 공통 함수로 통합
             if (imageSource === 'local-folder') {
-              const { loadLocalFolderWithFallback } = await import('./localFolderImageLoader');
+              // ✅ [2026-03-23 FIX] 동적 import → window 전역 호출 (require is not defined 에러 수정)
+              const loadLocalFolderWithFallback = (window as any).loadLocalFolderWithFallback;
+              if (!loadLocalFolderWithFallback) throw new Error('loadLocalFolderWithFallback 함수가 아직 로드되지 않았습니다');
               const lfResult = await loadLocalFolderWithFallback({
                 headings: seoHeadings,
                 postTitle: structuredContent.selectedTitle || title,

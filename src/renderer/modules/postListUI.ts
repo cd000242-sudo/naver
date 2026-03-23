@@ -1273,8 +1273,7 @@ export async function validateAndRecoverImages(images: any[], postId: string): P
           }));
         } else {
           // 파일이 없으면 폴더에서 찾기 시도
-          const os = await import('os');
-          const path = await import('path');
+          // ✅ [2026-03-23 FIX] os/path 동적 import 제거 (dead code, renderer에서 require 에러 유발)
           if (!window.api.getUserHomeDir || !window.api.checkFileExists) {
             console.error('[Image] 파일 시스템 API를 사용할 수 없습니다.');
             continue;
