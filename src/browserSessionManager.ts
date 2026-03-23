@@ -43,8 +43,9 @@ class BrowserSessionManager {
     // 프로필 베이스 경로
     private readonly PROFILE_BASE = path.join(os.homedir(), '.naver-blog-automation', 'profiles');
 
-    // ✅ [Stability] 세션 최대 수명 (1시간) - 장시간 실행 시 자동 재시작
-    private readonly SESSION_MAX_AGE = 60 * 60 * 1000; // 1시간
+    // ✅ [2026-03-23] 세션 최대 수명 4시간 — 연속발행 중 재로그인 방지 (캡차 방지 핵심!)
+    // 1시간→4시간 확장: 10개+ 연속발행 시 세션 만료로 인한 재로그인이 가장 강력한 캡차 트리거
+    private readonly SESSION_MAX_AGE = 4 * 60 * 60 * 1000; // 4시간
 
     private constructor() {
         console.log('[BrowserSessionManager] 싱글톤 인스턴스 생성됨');
@@ -91,7 +92,8 @@ class BrowserSessionManager {
     } {
         const seed = accountId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
-        const chromeVersions = ['128.0.0.0', '129.0.0.0', '130.0.0.0', '131.0.0.0'];
+        // ✅ [2026-03-23] Chrome 버전 최신화 — 구형(128~131)은 봇 의심 대상
+        const chromeVersions = ['133.0.0.0', '134.0.0.0', '135.0.0.0'];
         const version = chromeVersions[seed % chromeVersions.length];
         const userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${version} Safari/537.36`;
 
@@ -137,7 +139,7 @@ class BrowserSessionManager {
     /**
      * 세션 가져오기 또는 생성
      */
-    async getOrCreateSession(accountId: string, headless: boolean = false): Promise<SessionInfo> {
+    async getOrCreateSession(accountId: string, headless: boolean = false, accountProxyUrl?: string): Promise<SessionInfo> {
         // 이미 존재하는 세션 반환
         const existingSession = this.sessions.get(accountId);
         if (existingSession) {
@@ -177,8 +179,8 @@ class BrowserSessionManager {
         const profile = this.getAccountConsistentProfile(accountId);
         const chromeExecutablePath = this.findChromeExecutable();
 
-        // ✅ [2026-03-22 FIX] 프록시 적용 (다중계정 CAPTCHA 방지 핵심!)
-        const proxyUrl = await getProxyUrl();
+        // ✅ [2026-03-23] 계정별 프록시 우선, 미설정 시 글로벌 SmartProxy 폴백
+        const proxyUrl = accountProxyUrl || await getProxyUrl();
         let proxyAuth: { username: string; password: string } | null = null;
         const launchArgs = [
                 '--disable-blink-features=AutomationControlled',

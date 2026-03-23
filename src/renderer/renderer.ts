@@ -215,36 +215,11 @@ import {
 } from '../ui/index.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// ✅ [2026-01-20] 전역 에러 핸들러 - 예상치 못한 오류 캡처 및 로깅
+// ✅ [2026-03-23 FIX] 중복 에러 핸들러 제거
+// 전역 에러 핸들링은 registerGlobalErrorHandlers() (errorAndAutosave.ts)에서 통합 처리
+// → window.addEventListener('error') + window.addEventListener('unhandledrejection')
+// → 로깅 + appendLog + handleCrash + Toast 표시까지 단일 지점에서 관리
 // ═══════════════════════════════════════════════════════════════════════════════
-(function setupGlobalErrorHandlers() {
-  // 동기 에러 캡처
-  window.onerror = (message, source, lineno, colno, error) => {
-    console.error('[GlobalError] 예상치 못한 오류 발생:', {
-      message,
-      source,
-      line: lineno,
-      column: colno,
-      error: error?.stack || error
-    });
-    // UI에 표시하지 않고 로그만 남김 (사용자 경험 보호)
-    return false; // 기본 에러 핸들링도 허용
-  };
-
-  // 비동기 Promise 에러 캡처
-  window.onunhandledrejection = (event) => {
-    console.error('[GlobalError] 처리되지 않은 Promise 거부:', {
-      reason: event.reason?.message || event.reason,
-      stack: event.reason?.stack
-    });
-    // 개발 모드에서만 콘솔에 상세 정보 표시
-    if ((window as any).DEBUG_MODE) {
-      console.trace('[GlobalError] Promise 거부 위치 추적');
-    }
-  };
-
-  console.log('[Stability] 전역 에러 핸들러 등록 완료');
-})();
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // ✅ [2026-02-05] 업데이터 로그 리스너 - DevTools 콘솔에 업데이트 진행 상황 표시
@@ -364,23 +339,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-
-// ✅ [Global Safety Net] 전역 에러 핸들러 (구매자 환경 보호)
-// 알 수 없는 에러가 발생해도 흰 화면 대신 친절한 메시지를 보여줍니다.
-window.addEventListener('unhandledrejection', (event) => {
-  const reason = event.reason;
-  // 명시적 취소나 무시 가능한 에러는 스킵
-  if (reason?.message?.includes('cancelled') || reason === 'cancelled') return;
-
-  const msg = reason instanceof Error ? translateGeminiError(reason) : String(reason);
-  console.error('⚠️ [Global Catch] Unhandled Rejection:', reason);
-
-  // UI 토스트가 준비되었으면 표시, 아니면 콘솔만
-  if ((window as any).showToast) {
-    (window as any).showToast(`⚠️ 예기치 않은 오류: ${msg}`, 'error', 5000);
-  }
-});
+// ✅ [2026-03-23] 중복 unhandledrejection 리스너 제거됨
+// → L220 IIFE의 window.onunhandledrejection이 1차 처리
+// → L10093 registerGlobalErrorHandlers()가 2차 처리 (로깅 + appendLog)
+// → 여기서 3번째로 등록하면 사용자에게 Toast가 중복 표시되므로 제거
 
 
 initAllAppEventHandlers();
@@ -3686,6 +3648,8 @@ const ImageManager = {
               console.warn('[renderer] catch ignored:', e);
             }
           }
+        }).catch((e) => {
+          console.warn('[renderer] headingVideoPreviewInFlight promise catch ignored:', e);
         });
       }
 

@@ -880,7 +880,7 @@ export class SmartCrawler {
         };
       }, extractImages);
 
-      await browser.close();
+      await browser.close().catch(() => undefined);
 
       result.content = this.cleanText(result.content);
       result.content = result.content.slice(0, maxLength);
@@ -889,7 +889,7 @@ export class SmartCrawler {
       return result;
 
     } catch (error) {
-      await browser.close();
+      await browser.close().catch(() => undefined);
       throw error;
     }
   }
@@ -1331,7 +1331,7 @@ export class SmartCrawler {
         return { title: title.trim(), content: content.trim(), meta: { description }, images };
       }, extractImages);
 
-      await browser.close();
+      await browser.close().catch(() => undefined);
       
       result.content = this.cleanText(result.content || '').slice(0, maxLength);
 
@@ -1340,7 +1340,7 @@ export class SmartCrawler {
 
     } catch (error) {
       console.error('[쿠팡] ❌ Playwright 실패:', (error as Error).message);
-      if (browser) await browser.close();
+      if (browser) await browser.close().catch(() => undefined);
       throw error;
     }
   }
@@ -1510,7 +1510,7 @@ export class SmartCrawler {
 
       // 브라우저/컨텍스트 종료
       if (context) await context.close();
-      if (browser) await browser.close();
+      if (browser) await browser.close().catch(() => undefined);
 
       result.content = this.cleanText(result.content).slice(0, maxLength);
 
@@ -1520,7 +1520,7 @@ export class SmartCrawler {
     } catch (error) {
       console.error('[네이버] ❌ Playwright 실패:', (error as Error).message);
       if (context) await context.close();
-      if (browser) await browser.close();
+      if (browser) await browser.close().catch(() => undefined);
       throw error;
     }
   }

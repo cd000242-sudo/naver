@@ -5,6 +5,7 @@
  * 의존성: appendLog는 콜백으로 주입받음 (renderer.ts 커플링 제거)
  */
 import type { ErrorLog, AutosaveData } from '../types/index.js';
+import { translateGeminiError } from './errorUtils.js';
 
 // ═══════════════════════════════════════════════════════════════
 // 상수
@@ -328,12 +329,24 @@ export function stopAutoBackup(): void {
 // ═══════════════════════════════════════════════════════════════
 export function registerGlobalErrorHandlers(): void {
     window.addEventListener('error', (event) => {
+        // ✅ [2026-03-23 FIX] Script error 노이즈 필터링 (크로스 오리진 에러)
+        if (event.message?.includes('Script error')) return;
+
         logError(event.error || event.message, 'error', {
             filename: event.filename,
             lineno: event.lineno,
             colno: event.colno
         });
         handleCrash(event.error || event.message, 'window.error');
+
+        // ✅ [2026-03-23 FIX] Toast 표시 통합 (appEventsHandler.ts에서 이관)
+        try {
+            const msg = event.error instanceof Error ? translateGeminiError(event.error) : event.message;
+            if ((window as any).showToast) {
+                (window as any).showToast(`⚠️ 시스템 오류: ${msg}`, 'error', 5000);
+            }
+        } catch { /* Toast 실패 무시 */ }
+
         event.preventDefault();
     });
 
@@ -350,7 +363,9 @@ export function registerGlobalErrorHandlers(): void {
             promise: event.promise,
             details: errorDetails
         });
-        handleCrash(event.reason, 'unhandledRejection');
+        // ✅ [2026-03-23 FIX] handleCrash 호출 제거
+        // unhandledrejection은 단순 .catch() 누락이지 심각한 크래시가 아님
+        // handleCrash를 호출하면 3회 이상 발생 시 가짜 크래시 다이얼로그가 표시됨
         event.preventDefault();
     });
 }

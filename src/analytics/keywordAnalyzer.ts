@@ -211,13 +211,17 @@ export class KeywordAnalyzer {
     console.log(`[KeywordAnalyzer] 키워드 분석 시작: ${keyword}`);
 
     try {
-      // 병렬로 데이터 수집 (네이버 광고 API 포함)
-      const [blogData, newsData, relatedData, naverAdData] = await Promise.all([
+      // 병렬로 데이터 수집 (네이버 광고 API 포함) — allSettled로 부분 실패 허용
+      const _settled = await Promise.allSettled([
         this.fetchBlogSearchResults(keyword),
         this.fetchNewsSearchResults(keyword),
         this.fetchRelatedKeywords(keyword),
         this.fetchNaverAdKeywordData(keyword),
       ]);
+      const blogData    = _settled[0].status === 'fulfilled' ? _settled[0].value : { totalCount: 0, topAuthority: 'low' as const, recentPostCount: 0, avgInfluencer: 0 };
+      const newsData    = _settled[1].status === 'fulfilled' ? _settled[1].value : { totalCount: 0, recentNewsCount: 0, isTrending: false };
+      const relatedData = _settled[2].status === 'fulfilled' ? _settled[2].value : [];
+      const naverAdData = _settled[3].status === 'fulfilled' ? _settled[3].value : null;
 
       // 네이버 광고 API 데이터가 있으면 더 정확한 분석
       let searchVolume: 'high' | 'medium' | 'low';

@@ -77,6 +77,6 @@ export async function crawlGeneralPage(url: string): Promise<GeneralCrawlResult>
         console.error(`[General Crawler] Error: ${(error as Error).message}`);
         return { title: '', content: '', images: [] };
     } finally {
-        if (browser) await browser.close();
+        if (browser) await browser.close().catch(() => undefined);
     }
 }

@@ -302,7 +302,7 @@ async function resolveShortUrl(url: string): Promise<string> {
         finalUrl = page.url();
       }
 
-      await browser.close();
+      await browser.close().catch(() => undefined);
       browser = null;
 
       if (finalUrl !== url && !finalUrl.includes('naver.me')) {
@@ -1000,7 +1000,7 @@ async function extractProductNameFromUrl(url: string): Promise<string> {
         await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 10000 });
 
         const pageTitle = await page.title();
-        await browser.close();
+        await browser.close().catch(() => undefined);
 
         // ✅ [100점 수정] 에러 페이지 감지 강화 - 에러 메시지가 검색 키워드로 사용되는 버그 수정
         // Knowledge Item 참조: "Naver Access Denied Search Fallback Bug"
@@ -1112,7 +1112,7 @@ async function extractProductNameFromUrl(url: string): Promise<string> {
         } catch { }
       }
 
-      await browser.close();
+      await browser.close().catch(() => undefined);
 
       if (productName) {
         // 불필요한 텍스트 제거
@@ -1453,13 +1453,17 @@ async function collectNaverSearchContent(
   console.log(`\n[네이버 API] ⚡ 빠른 콘텐츠 수집 시작: "${query}"`);
   const startTime = Date.now();
 
-  // ✅ 블로그, 뉴스, 웹문서, 쇼핑을 병렬로 검색 (빠른 속도)
-  const [blogResults, newsResults, webResults, shopResults] = await Promise.all([
+  // ✅ 블로그, 뉴스, 웹문서, 쇼핑을 병렬로 검색 (빠른 속도) — allSettled로 부분 실패 허용
+  const _settled = await Promise.allSettled([
     searchNaverForContent(query, clientId, clientSecret, 'blog', 30),
     searchNaverForContent(query, clientId, clientSecret, 'news', 20),
     searchNaverForContent(query, clientId, clientSecret, 'webkr', 10),
-    searchNaverShopping(query, clientId, clientSecret, 20), // ✅ 쇼핑 검색 추가
+    searchNaverShopping(query, clientId, clientSecret, 20),
   ]);
+  const blogResults = _settled[0].status === 'fulfilled' ? _settled[0].value : [];
+  const newsResults = _settled[1].status === 'fulfilled' ? _settled[1].value : [];
+  const webResults  = _settled[2].status === 'fulfilled' ? _settled[2].value : [];
+  const shopResults = _settled[3].status === 'fulfilled' ? _settled[3].value : [];
 
   const allResults = [...blogResults, ...newsResults, ...webResults];
   const sources: string[] = [];
@@ -1995,7 +1999,7 @@ async function fetchWithPuppeteer(url: string): Promise<{ html: string; finalUrl
     // HTML 추출
     const html = await page.content();
 
-    await browser.close();
+    await browser.close().catch(() => undefined);
     browser = null;
 
     // cheerio로 파싱
@@ -3882,7 +3886,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
           }
         }
 
-        await browser.close();
+        await browser.close().catch(() => undefined);
 
         // ✅ imagesOnly === false이면 텍스트만 반환
         if (options.imagesOnly === false) {
@@ -3925,7 +3929,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
             console.log(`[스마트스토어] HTML 샘플 (처음 500자):`, html.substring(0, 500));
 
             // ✅ 브라우저 닫고 에러 던지기
-            await browser.close();
+            await browser.close().catch(() => undefined);
             throw new Error('네이버 스마트스토어가 봇 접근을 차단했습니다. 잠시 후 다시 시도해주세요.');
           } else if (!hasProductInfo) {
             console.warn(`[스마트스토어] ⚠️ 제품 정보가 HTML에 없습니다.`);
@@ -3935,7 +3939,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
           }
         }
 
-        await browser.close();
+        await browser.close().catch(() => undefined);
         console.log(`[쇼핑몰 크롤링] 브라우저 닫음. HTML 파싱 시작...`);
       } catch (puppeteerError) {
         console.warn(`[쇼핑몰 크롤링] Puppeteer 실패, 일반 크롤링으로 폴백: ${(puppeteerError as Error).message}`);

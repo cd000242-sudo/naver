@@ -7,15 +7,16 @@
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
 
 // ═══════════════════════════════════════════════════════════════════
-// ✅ [2026-03-20] 네이버 캡차 방지 — 안전 발행 간격 시스템
+// ✅ [2026-03-23] 네이버 캡차 방지 — 강화된 안전 발행 간격 시스템
 // 
-// 문제: 짧은 간격(30초)으로 8개 이상 연속 발행 시 네이버가 봇으로 판정
+// 문제: 짧은 간격으로 연속 발행 시 네이버가 봇으로 판정
 //       → 캡차 발생 → 캡차 풀어도 로그인 불가 (세션 완전 차단)
 // 
-// 해결: 3단계 안전 장치
-//   1. 최소 발행 간격 3분(180초) 강제
+// 해결: 4단계 안전 장치
+//   1. 최소 발행 간격 5분(300초) 강제
 //   2. ±20% 랜덤 jitter로 정형화된 봇 패턴 회피
-//   3. 5개 발행마다 5~10분 추가 쿨다운
+//   3. 3개 발행마다 7~12분 추가 쿨다운
+//   4. 캡차 실패 시 10분 장기 쿨다운 + 점진적 간격 증가
 // ═══════════════════════════════════════════════════════════════════
 
 /**
@@ -30,36 +31,109 @@ class UserCancelledError extends Error {
   }
 }
 
-const SAFE_PUBLISH_MIN_INTERVAL_SEC = 180; // 최소 3분 (네이버 봇 감지 임계값)
+// ═══════════════════════════════════════════════════════════════════════
+// 🛡️ [2026-03-23] 끝판왕 캡차 방지 시스템 — 사용자 설정 존중 + 적응형 방어
+// ═══════════════════════════════════════════════════════════════════════
+const SAFE_PUBLISH_MIN_INTERVAL_SEC = 180; // 🔒 절대 최소 3분 (하드 플로어)
 let _continuousPublishCount = 0;           // 현재 세션 발행 횟수 (쿨다운 계산용)
 let _consecutiveFailCount = 0;             // ✅ [2026-03-21] 연속 실패 전용 카운터
-const COOLDOWN_EVERY_N = 5;                // N개마다 쿨다운
+let _captchaFailCount = 0;                 // ✅ [2026-03-23] 캡차 관련 실패 전용 카운터
+let _dailyPublishCount = 0;                // 🔒 하루 발행 횟수 (일일 상한용)
+let _lastDailyReset = 0;                   // 마지막 일일 카운터 리셋 시각
+const COOLDOWN_EVERY_N = 3;                // 3개마다 쿨다운 (짧은 간격일 때만)
 const COOLDOWN_MIN_SEC = 300;              // 쿨다운 최소 5분
 const COOLDOWN_MAX_SEC = 600;              // 쿨다운 최대 10분
+const CAPTCHA_COOLDOWN_SEC = 900;          // 🔒 캡차 감지 시 15분 쿨다운
+const CAPTCHA_LONG_COOLDOWN_SEC = 1800;    // 🔒 캡차 2회 연속 시 30분 장기 쿨다운
+const DAILY_POST_LIMIT = 20;               // 🔒 하루 최대 20개 발행
+const DAILY_LIMIT_COOLDOWN_SEC = 1800;     // 🔒 일일 상한 초과 시 30분 강제 쿨다운
+const LATE_NIGHT_MULTIPLIER = 1.5;         // 🔒 심야 시간(01~06시) 간격 1.5배
+// 적응형 방어 임계값
+const SAFE_THRESHOLD_SEC = 600;            // 10분 이상이면 "안전" → jitter만 적용
+const MODERATE_THRESHOLD_SEC = 420;        // 7분 이상이면 "보통" → 경량 보호
 
 /**
- * ✅ [2026-03-20] 안전 발행 간격 계산
- * @param userInterval 사용자 설정 간격(초)
- * @param publishIndex 현재 발행 인덱스 (0부터)
- * @returns 실제 대기 시간(초) — 최소 3분 + jitter + 쿨다운
+ * 🛡️ [2026-03-23] 끝판왕 안전 발행 간격 계산 — 사용자 설정 존중 + 적응형 방어
+ *
+ * 핵심 원칙:
+ *   - 사용자가 설정한 간격을 최대한 존중합니다!
+ *   - 10분+ 설정: ±15% jitter만 (이미 안전)
+ *   - 7~10분 설정: jitter + 심야 감지만
+ *   - 3~7분 설정: jitter + 심야 + 프로그레시브 + 쿨다운 (보호 필요)
+ *   - 3분 미만: 최소 3분으로 강제 + 풀 방어
+ *   - 일일 상한(20개)은 모든 경우에 적용
  */
-function getSafePublishInterval(userInterval: number, publishIndex: number): number {
-  // 1. 최소 간격 강제 (사용자가 30초로 설정해도 3분 이상 보장)
+function getSafePublishInterval(userInterval: number, publishIndex: number): { interval: number; logs: string[] } {
+  const logs: string[] = [];
+
+  // 일일 카운터 자동 리셋 (자정 기준)
+  const now = Date.now();
+  const todayStart = new Date().setHours(0, 0, 0, 0);
+  if (_lastDailyReset < todayStart) {
+    _dailyPublishCount = 0;
+    _lastDailyReset = now;
+    logs.push('🔄 [캡차방지] 일일 발행 카운터가 리셋되었습니다.');
+  }
+  _dailyPublishCount++;
+
+  // === 최소 간격 강제 (3분 하드 플로어) ===
   let interval = Math.max(SAFE_PUBLISH_MIN_INTERVAL_SEC, userInterval);
-
-  // 2. ±20% 랜덤 jitter 추가 (봇 패턴 회피)
-  const jitterRange = interval * 0.2;
-  const jitter = (Math.random() * jitterRange * 2) - jitterRange; // -20% ~ +20%
-  interval = Math.round(interval + jitter);
-
-  // 3. N개 발행마다 추가 쿨다운 (세션 보호)
-  if (publishIndex > 0 && publishIndex % COOLDOWN_EVERY_N === 0) {
-    const cooldown = COOLDOWN_MIN_SEC + Math.floor(Math.random() * (COOLDOWN_MAX_SEC - COOLDOWN_MIN_SEC));
-    console.log(`[AntiCaptcha] 🧊 ${publishIndex}번째 발행 완료 → ${cooldown}초(${Math.round(cooldown/60)}분) 쿨다운 추가`);
-    interval += cooldown;
+  if (userInterval < SAFE_PUBLISH_MIN_INTERVAL_SEC) {
+    logs.push(`🔒 최소 간격 보정: ${userInterval}초 → ${SAFE_PUBLISH_MIN_INTERVAL_SEC}초(${Math.round(SAFE_PUBLISH_MIN_INTERVAL_SEC/60)}분)`);
   }
 
-  return Math.max(SAFE_PUBLISH_MIN_INTERVAL_SEC, interval);
+  // === 방어 수준 결정 ===
+  const isAlreadySafe = interval >= SAFE_THRESHOLD_SEC;       // 10분+ → jitter만
+  const isModerate = interval >= MODERATE_THRESHOLD_SEC;       // 7분+ → 경량 보호
+  const protectionLevel = isAlreadySafe ? '안전' : isModerate ? '보통' : '주의';
+  logs.push(`📊 사용자 설정: ${Math.round(interval/60)}분${interval % 60 > 0 ? ` ${interval%60}초` : ''} → 방어 수준: [${protectionLevel}]`);
+
+  // === Jitter (모든 수준에 적용, 크기만 다름) ===
+  const jitterPct = isAlreadySafe ? 0.15 : 0.20; // 안전: ±15%, 그 외: ±20%
+  const jitterRange = interval * jitterPct;
+  const jitter = Math.round((Math.random() * jitterRange * 2) - jitterRange);
+  interval = Math.round(interval + jitter);
+  logs.push(`🎲 랜덤 Jitter: ${jitter >= 0 ? '+' : ''}${jitter}초 (±${Math.round(jitterPct*100)}%)`);
+
+  // === 프로그레시브 간격 증가 (주의 수준에서만, 사용자가 짧게 설정했을 때) ===
+  if (!isModerate && publishIndex > 1) {
+    const progressiveAdd = Math.min((publishIndex - 1) * 15, 120); // 최대 2분 추가
+    if (progressiveAdd > 0) {
+      interval += progressiveAdd;
+      logs.push(`📈 피로 시뮬레이션: +${progressiveAdd}초 (${publishIndex}번째 발행)`);
+    }
+  }
+
+  // === 정기 쿨다운 (주의 수준에서만) ===
+  if (!isModerate && publishIndex > 0 && publishIndex % COOLDOWN_EVERY_N === 0) {
+    const cooldown = COOLDOWN_MIN_SEC + Math.floor(Math.random() * (COOLDOWN_MAX_SEC - COOLDOWN_MIN_SEC));
+    interval += cooldown;
+    logs.push(`🧊 쿨다운: +${Math.round(cooldown/60)}분 (${publishIndex}건 완료 → 잠시 휴식)`);
+  }
+
+  // === 심야 시간대 감지 (보통/주의 수준에서 적용) ===
+  const currentHour = new Date().getHours();
+  if (!isAlreadySafe && currentHour >= 1 && currentHour < 6) {
+    const before = interval;
+    interval = Math.round(interval * LATE_NIGHT_MULTIPLIER);
+    logs.push(`🌙 심야 시간(${currentHour}시): ×${LATE_NIGHT_MULTIPLIER} (${Math.round(before/60)}분 → ${Math.round(interval/60)}분)`);
+  }
+
+  // === 일일 상한 (모든 수준에 적용) ===
+  if (_dailyPublishCount > DAILY_POST_LIMIT) {
+    interval += DAILY_LIMIT_COOLDOWN_SEC;
+    logs.push(`🚨 일일 상한 초과! (${_dailyPublishCount}/${DAILY_POST_LIMIT}건) → +${DAILY_LIMIT_COOLDOWN_SEC/60}분 대기`);
+  }
+
+  interval = Math.max(SAFE_PUBLISH_MIN_INTERVAL_SEC, interval);
+
+  // 최종 요약
+  logs.push(`🛡️ → 다음 발행까지 ${Math.round(interval/60)}분 ${interval % 60}초 대기 (오늘 ${_dailyPublishCount}/${DAILY_POST_LIMIT}건)`);
+
+  // console에도 출력
+  logs.forEach(l => console.log(`[AntiCaptcha] ${l}`));
+
+  return { interval, logs };
 }
 // 외부유입 탭 전환 함수
 export function switchExternalLinksTab(tabName: string) {
@@ -351,19 +425,20 @@ export function scheduleNextPosting(): void {
     return;
   }
 
-  // ✅ [2026-03-20] 안전 발행 간격 적용 (최소 3분, jitter, 쿨다운)
+  // 🛡️ [끝판왕] 사용자 가시 로그 + 안전 간격 적용
   const intervalInput = document.getElementById('continuous-interval-seconds') as HTMLInputElement;
-  const userInterval = intervalInput ? parseInt(intervalInput.value) || 180 : 180;
+  const userInterval = intervalInput ? parseInt(intervalInput.value) || 420 : 420;
   _continuousPublishCount++;
-  const safeInterval = getSafePublishInterval(userInterval, _continuousPublishCount);
-  continuousCountdown = Math.max(SAFE_PUBLISH_MIN_INTERVAL_SEC, Math.min(3600, safeInterval));
+  const result = getSafePublishInterval(userInterval, _continuousPublishCount);
+  continuousCountdown = Math.max(SAFE_PUBLISH_MIN_INTERVAL_SEC, Math.min(3600, result.interval));
 
-  if (userInterval < SAFE_PUBLISH_MIN_INTERVAL_SEC) {
-    console.log(`[AntiCaptcha] ⚠️ 사용자 간격(${userInterval}초)이 최소 안전 간격(${SAFE_PUBLISH_MIN_INTERVAL_SEC}초)보다 짧아 자동 보정`);
-    appendLog(`⚠️ 캡차 방지: 발행 간격이 ${SAFE_PUBLISH_MIN_INTERVAL_SEC}초(${Math.round(SAFE_PUBLISH_MIN_INTERVAL_SEC/60)}분) 이상으로 자동 조정되었습니다.`);
-  }
+  // 🛡️ 캡차 방지 레이어 상세 로그 출력 (사용자에게 보임)
+  appendLog(``);
+  appendLog(`═══ 🛡️ 끝판왕 캡차방지 [발행#${_continuousPublishCount}] ═══`);
+  result.logs.forEach(msg => appendLog(msg));
+  appendLog(`══════════════════════════════`);
+
   console.log(`[Continuous] ${continuousCountdown}초 카운트다운 시작 (안전 간격 적용, 발행#${_continuousPublishCount})`);
-  appendLog(`⏰ 다음 포스팅까지 ${continuousCountdown}초(${Math.round(continuousCountdown/60)}분) 대기...`);
 
   const countdownElement = document.getElementById('continuous-countdown');
   console.log('[Continuous] 카운트다운 엘리먼트 찾음:', countdownElement ? '있음' : '없음');
@@ -1991,8 +2066,9 @@ function addItemToQueueV2(): void {
   // ✅ [2026-03-07 FIX] 텍스트만 발행 설정 시 이미지 소스를 'skip'으로 설정
   const textOnlyPublish = localStorage.getItem('textOnlyPublish') === 'true';
   const imageSource = textOnlyPublish ? 'skip' : getFullAutoImageSource();
-  const intervalValue = parseInt((document.getElementById('continuous-interval-value') as HTMLInputElement)?.value || '30');
-  const intervalUnit = parseInt((document.getElementById('continuous-interval-unit') as HTMLSelectElement)?.value || '1');
+  // 🛡️ [2026-03-23] 끝판왕: 기본값 7(분 단위)로 변경
+  const intervalValue = parseInt((document.getElementById('continuous-interval-value') as HTMLInputElement)?.value || '7');
+  const intervalUnit = parseInt((document.getElementById('continuous-interval-unit') as HTMLSelectElement)?.value || '60');
   const interval = intervalValue * intervalUnit;
   const publishModeRadio = document.querySelector('input[name="continuous-publish-mode"]:checked') as HTMLInputElement;
   const publishMode = (publishModeRadio?.value || 'publish') as 'publish' | 'draft' | 'schedule';
@@ -3680,6 +3756,7 @@ async function startContinuousPublishingV2(): Promise<void> {
       item.status = 'completed';
       successCount++;
       _consecutiveFailCount = 0; // ✅ 성공 시 연속 실패 카운터 리셋
+      _captchaFailCount = 0;     // ✅ [2026-03-23] 성공 시 캡차 실패 카운터도 리셋
       appendLog(`✅ 완료: ${item.value.substring(0, 30)}... (${modeLabel})`);
 
       // ✅ [2026-03-20 FIX] 이전글 체이닝: 발행 성공 후 방금 발행한 URL을 다음 아이템에 전달
@@ -3780,6 +3857,23 @@ async function startContinuousPublishingV2(): Promise<void> {
         log: `오류: ${errMsg}`,
         percentage: (currentIdx / totalCount) * 100
       });
+
+      // ✅ [2026-03-23] 캡차 관련 실패 감지 → 장기 쿨다운 적용
+      const isCaptchaError = errMsg.includes('캡차') || errMsg.includes('captcha') ||
+        errMsg.includes('CAPTCHA') || errMsg.includes('자동입력 방지') ||
+        errMsg.includes('보안문자') || errMsg.includes('로그인에 실패');
+      if (isCaptchaError) {
+        _captchaFailCount++;
+        const captchaCooldown = _captchaFailCount >= 2 ? CAPTCHA_LONG_COOLDOWN_SEC : CAPTCHA_COOLDOWN_SEC;
+        appendLog(`🚨 캡차/로그인 관련 실패 감지! (${_captchaFailCount}회) → ${Math.round(captchaCooldown/60)}분 장기 쿨다운 적용`);
+        appendLog(`💡 이 시간 동안 네이버 세션이 안정화됩니다.`);
+        updateContinuousProgressModal({
+          step: `🧊 캡차 쿨다운 (${Math.round(captchaCooldown/60)}분)`,
+          log: `캡차 감지 → ${Math.round(captchaCooldown/60)}분 대기 중...`
+        });
+        const waitOk = await waitWithInterrupt(captchaCooldown);
+        if (!waitOk) break;
+      }
 
       // ✅ [2026-03-21] 연속 3회 실패 시 전체 중단 (_consecutiveFailCount 전용 카운터 사용)
       if (_consecutiveFailCount >= 3) {
@@ -3957,15 +4051,19 @@ async function processNextInQueueEnhanced(): Promise<void> {
       appendLog(`⏰ 예약 발행 모드 → ${quickWait}초 후 다음 항목 처리...`);
       setTimeout(() => processNextInQueueEnhanced(), quickWait * 1000);
     } else {
+      // 🛡️ [끝판왕] 사용자 가시 로그 + 안전 간격 적용
       const intervalInput = document.getElementById('continuous-interval-seconds') as HTMLInputElement;
-      const userInterval = Number(intervalInput?.value) || 180;
+      const userInterval = Number(intervalInput?.value) || 420;
       _continuousPublishCount++;
-      const safeWait = getSafePublishInterval(userInterval, _continuousPublishCount);
-      if (userInterval < SAFE_PUBLISH_MIN_INTERVAL_SEC) {
-        appendLog(`⚠️ 캡차 방지: 발행 간격 ${userInterval}초 → ${safeWait}초(${Math.round(safeWait/60)}분)로 자동 조정`);
-      }
-      appendLog(`⏰ ${safeWait}초(${Math.round(safeWait/60)}분) 후 다음 발행 시작... (발행#${_continuousPublishCount})`);
-      setTimeout(() => processNextInQueueEnhanced(), safeWait * 1000);
+      const result = getSafePublishInterval(userInterval, _continuousPublishCount);
+
+      // 🛡️ 캡차 방지 레이어 상세 로그 출력 (사용자에게 보임)
+      appendLog(``);
+      appendLog(`═══ 🛡️ 끝판왕 캡차방지 [발행#${_continuousPublishCount}] ═══`);
+      result.logs.forEach(msg => appendLog(msg));
+      appendLog(`══════════════════════════════`);
+
+      setTimeout(() => processNextInQueueEnhanced(), result.interval * 1000);
     }
   } else {
     appendLog('✅ 모든 연속 발행 완료!');

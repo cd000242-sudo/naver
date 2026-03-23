@@ -734,6 +734,11 @@ type BlogAccountSettings = {
   urls?: string[];
   keywordIndex?: number;
   urlIndex?: number;
+  // ✅ 계정별 프록시 설정
+  proxyHost?: string;
+  proxyPort?: string;
+  proxyUsername?: string;
+  proxyPassword?: string;
 };
 
 type BlogAccount = {

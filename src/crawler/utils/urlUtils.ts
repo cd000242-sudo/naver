@@ -77,7 +77,7 @@ export async function resolveShortUrl(url: string): Promise<string> {
             finalUrl = page.url();
         }
 
-        await browser.close();
+        await browser.close().catch(() => undefined);
         browser = null;
 
         if (finalUrl !== url && !finalUrl.includes('naver.me')) {

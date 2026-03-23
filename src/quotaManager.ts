@@ -210,11 +210,13 @@ async function writeState(state: QuotaState): Promise<void> {
 
   await fs.mkdir(path.dirname(storageFile), { recursive: true });
 
-  // ✅ [2026-03-05] 메인 + 백업 동시 저장
-  await Promise.all([
+  // ✅ [2026-03-05] 메인 + 백업 동시 저장 — allSettled로 한쪽 실패해도 다른 쪽 보존
+  const _writeResults = await Promise.allSettled([
     fs.writeFile(storageFile, json, 'utf-8'),
     fs.writeFile(backupFile, json, 'utf-8'),
   ]);
+  if (_writeResults[0].status === 'rejected') console.error('[QuotaManager] ⚠️ 메인 파일 저장 실패:', _writeResults[0].reason);
+  if (_writeResults[1].status === 'rejected') console.error('[QuotaManager] ⚠️ 백업 파일 저장 실패:', _writeResults[1].reason);
 }
 
 export async function getUsageToday(type: QuotaType): Promise<number> {

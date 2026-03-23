@@ -1570,6 +1570,8 @@ export function updateUnifiedImagePreview(headings: any[], generatedImages?: any
             console.warn('[fullAutoFlow] catch ignored:', e);
           }
         }
+      }).catch((e: any) => {
+        console.warn('[fullAutoFlow] headingVideoPreviewInFlight promise catch ignored:', e);
       });
     }
   });

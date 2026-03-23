@@ -4,7 +4,7 @@
  * - 공지사항 모달, 종료 카운트다운, 전역 에러 핸들러
  */
 
-import { translateGeminiError } from './errorUtils.js';
+// ✅ [2026-03-23] translateGeminiError import 제거 — errorAndAutosave.ts로 이관됨
 
 /**
  * 배너 탭으로 이동하는 전역 함수
@@ -161,17 +161,13 @@ export function initShutdownCountdownListener(): void {
 
 /**
  * 전역 에러 핸들러 초기화
+ * ✅ [2026-03-23 FIX] 중복 제거 — error 리스너는 registerGlobalErrorHandlers() (errorAndAutosave.ts)에서 통합 처리
+ * Toast 표시도 errorAndAutosave.ts에서 처리
  */
 export function initGlobalErrorHandler(): void {
-    window.addEventListener('error', (event) => {
-        if (event.message?.includes('Script error')) return;
-        const msg = event.error instanceof Error ? translateGeminiError(event.error) : event.message;
-        console.error('⚠️ [Global Catch] Uncaught Exception:', event.error);
-
-        if ((window as any).showToast) {
-            (window as any).showToast(`⚠️ 시스템 오류: ${msg}`, 'error', 5000);
-        }
-    });
+    // 기존 중복 window.addEventListener('error') 제거됨
+    // 에러 핸들링은 registerGlobalErrorHandlers() 단일 지점에서 처리
+    console.log('[AppEventsHandler] 전역 에러 핸들러는 registerGlobalErrorHandlers()에서 통합 관리');
 }
 
 /**

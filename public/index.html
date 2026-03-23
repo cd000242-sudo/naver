@@ -6032,34 +6032,41 @@
                                 </div>
                             </div>
 
-                            <!-- 발행 간격 -->
+                            <!-- 🛡️ [2026-03-23] 발행 간격 (적응형 캡차 방지) -->
                             <div>
                                 <label
                                     style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">⏱️
                                     발행 간격</label>
                                 <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <input type="number" id="continuous-interval-value" value="30" min="1"
+                                    <input type="number" id="continuous-interval-value" value="7" min="3"
                                         style="width: 70px; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); padding: 0.5rem; text-align: center; font-weight: 600;">
                                     <select id="continuous-interval-unit"
                                         style="background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); padding: 0.5rem; font-size: 0.85rem; cursor: pointer;">
                                         <option value="1">초</option>
-                                        <option value="60">분</option>
+                                        <option value="60" selected>분</option>
                                         <option value="3600">시간</option>
                                     </select>
                                     <div
                                         style="display: flex; gap: 0.25rem; margin-left: auto; flex-wrap: wrap; justify-content: flex-end;">
                                         <button type="button"
-                                            onclick="document.getElementById('continuous-interval-value').value='30'; document.getElementById('continuous-interval-unit').value='1';"
-                                            style="padding: 0.35rem 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.7rem;">30초</button>
+                                            onclick="document.getElementById('continuous-interval-value').value='5'; document.getElementById('continuous-interval-unit').value='60';"
+                                            style="padding: 0.35rem 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.7rem;">5분</button>
+                                        <button type="button"
+                                            onclick="document.getElementById('continuous-interval-value').value='7'; document.getElementById('continuous-interval-unit').value='60';"
+                                            style="padding: 0.35rem 0.5rem; background: var(--primary); border: 1px solid var(--primary); border-radius: 4px; color: white; cursor: pointer; font-size: 0.7rem; font-weight: 600;">7분</button>
+                                        <button type="button"
+                                            onclick="document.getElementById('continuous-interval-value').value='10'; document.getElementById('continuous-interval-unit').value='60';"
+                                            style="padding: 0.35rem 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.7rem;">10분</button>
                                         <button type="button"
                                             onclick="document.getElementById('continuous-interval-value').value='30'; document.getElementById('continuous-interval-unit').value='60';"
                                             style="padding: 0.35rem 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.7rem;">30분</button>
-                                        <button type="button"
-                                            onclick="document.getElementById('continuous-interval-value').value='12'; document.getElementById('continuous-interval-unit').value='3600';"
-                                            style="padding: 0.35rem 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.7rem;">12시간</button>
-                                        <button type="button"
-                                            onclick="document.getElementById('continuous-interval-value').value='24'; document.getElementById('continuous-interval-unit').value='3600';"
-                                            style="padding: 0.35rem 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.7rem;">24시간</button>
+                                    </div>
+                                </div>
+                                <!-- 🛡️ 적응형 캡차 방지 안내 -->
+                                <div style="margin-top: 0.5rem; padding: 0.5rem 0.75rem; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(234, 179, 8, 0.05)); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 6px;">
+                                    <div style="font-size: 0.7rem; color: #f59e0b; font-weight: 700;">🛡️ 적응형 캡차 방지</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.15rem; line-height: 1.4;">
+                                        설정값 존중 · 10분+ 안전(jitter만) · 7~10분 경량 보호 · 7분 미만 풀 방어 · 일일 20개 상한
                                     </div>
                                 </div>
                             </div>
@@ -6413,27 +6420,40 @@
 
                         <!-- ✅ [2026-02-19] 쇼핑 커넥트 설정 → 쇼핑커넥트 서브탭으로 통합 (중복 제거) -->
 
-                        <!-- 발행 간격 -->
+                        <!-- 🛡️ [2026-03-23] 발행 간격 (적응형 캡차 방지) -->
                         <div style="margin-bottom: 1rem;">
                             <label
                                 style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">⏱️
                                 발행 간격</label>
                             <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="number" id="continuous-modal-interval-value" value="30" min="1"
+                                <input type="number" id="continuous-modal-interval-value" value="7" min="3"
                                     style="width: 80px; background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); padding: 0.5rem; text-align: center; font-weight: 600;">
                                 <select id="continuous-modal-interval-unit"
                                     style="background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); padding: 0.5rem; font-size: 0.85rem;">
                                     <option value="1">초</option>
-                                    <option value="60">분</option>
+                                    <option value="60" selected>분</option>
                                     <option value="3600">시간</option>
                                 </select>
                                 <div style="display: flex; gap: 0.25rem; margin-left: auto;">
-                                    <button type="button" class="continuous-modal-interval-preset" data-value="30"
-                                        data-unit="1"
-                                        style="padding: 0.35rem 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.7rem;">30초</button>
+                                    <button type="button" class="continuous-modal-interval-preset" data-value="5"
+                                        data-unit="60"
+                                        style="padding: 0.35rem 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.7rem;">5분</button>
+                                    <button type="button" class="continuous-modal-interval-preset" data-value="7"
+                                        data-unit="60"
+                                        style="padding: 0.35rem 0.5rem; background: var(--primary); border: 1px solid var(--primary); border-radius: 4px; color: white; cursor: pointer; font-size: 0.7rem; font-weight: 600;">7분</button>
+                                    <button type="button" class="continuous-modal-interval-preset" data-value="10"
+                                        data-unit="60"
+                                        style="padding: 0.35rem 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.7rem;">10분</button>
                                     <button type="button" class="continuous-modal-interval-preset" data-value="30"
                                         data-unit="60"
                                         style="padding: 0.35rem 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.7rem;">30분</button>
+                                </div>
+                            </div>
+                            <!-- 🛡️ 적응형 캡차 방지 안내 -->
+                            <div style="margin-top: 0.5rem; padding: 0.5rem 0.75rem; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(234, 179, 8, 0.05)); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 6px;">
+                                <div style="font-size: 0.7rem; color: #f59e0b; font-weight: 700;">🛡️ 적응형 캡차 방지</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.15rem; line-height: 1.4;">
+                                    설정값 존중 · 10분+ 안전(jitter만) · 7~10분 경량 보호 · 7분 미만 풀 방어 · 일일 20개 상한
                                 </div>
                             </div>
                         </div>
@@ -8658,6 +8678,50 @@
                                     </div>
                                 </div>
                             </label>
+                        </div>
+
+                        <!-- ✅ [2026-03-23] 계정별 프록시 설정 -->
+                        <div class="field" style="margin-top: 0.5rem;">
+                            <details style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 12px; overflow: hidden;">
+                                <summary style="padding: 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; user-select: none; list-style: none;">
+                                    <span style="font-size: 1.1rem;">🌐</span>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 700; color: var(--text-strong); font-size: 0.95rem;">프록시 설정 (선택)</div>
+                                        <div style="font-size: 0.75rem; color: var(--text-muted);">계정별 개별 프록시를 설정합니다. 미입력 시 기본 프록시 사용</div>
+                                    </div>
+                                    <span style="color: var(--text-muted); font-size: 0.8rem; transition: transform 0.2s;">▼</span>
+                                </summary>
+                                <div style="padding: 0 1rem 1rem 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.75rem;">
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">🖥️ 호스트</label>
+                                            <input type="text" id="ma-edit-proxy-host" placeholder="예: gate.smartproxy.com"
+                                                style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: 8px; font-size: 0.85rem;">
+                                        </div>
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">🔌 포트</label>
+                                            <input type="text" id="ma-edit-proxy-port" placeholder="예: 7777"
+                                                style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: 8px; font-size: 0.85rem;">
+                                        </div>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">👤 사용자명</label>
+                                            <input type="text" id="ma-edit-proxy-username" placeholder="프록시 사용자명"
+                                                style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: 8px; font-size: 0.85rem;">
+                                        </div>
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">🔑 비밀번호</label>
+                                            <input type="password" id="ma-edit-proxy-password" placeholder="프록시 비밀번호"
+                                                style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: 8px; font-size: 0.85rem;">
+                                        </div>
+                                    </div>
+                                    <p style="margin: 0; font-size: 0.7rem; color: var(--text-muted); line-height: 1.4;">
+                                        💡 SmartProxy, BrightData 등 프록시 서비스의 인증 정보를 입력하세요.<br>
+                                        비워두면 글로벌 프록시 설정이 적용됩니다.
+                                    </p>
+                                </div>
+                            </details>
                         </div>
                     </div>
                 </div>

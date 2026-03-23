@@ -3406,6 +3406,11 @@ export function initUnifiedImageEventHandlers(): void {
           promptEl.textContent = autoPrompt;
         }
         console.log(`[HeadingImageGen] ✅ AI 프롬프트 초기화 완료: "${headingTitle}" → "${autoPrompt.substring(0, 50)}..."`);
+      }).catch((e) => {
+        console.warn('[HeadingImageGen] AI 프롬프트 생성 실패:', e);
+        if (promptEl) {
+          promptEl.textContent = '⚠️ 프롬프트 생성 실패 — 다시 시도해주세요';
+        }
       });
       toastManager.success('영어 프롬프트를 자동 생성값으로 초기화했습니다.');
       return;

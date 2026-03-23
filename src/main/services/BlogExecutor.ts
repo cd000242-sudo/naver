@@ -29,7 +29,7 @@ export interface ExecutionDependencies {
     generateImages?: (options: any, apiKeys: any) => Promise<any[]>;
 
     // 자동화 인스턴스 생성
-    createAutomation: (naverId: string, naverPassword: string) => any;
+    createAutomation: (naverId: string, naverPassword: string, accountProxyUrl?: string) => any;
 
     // 계정 관리 (any 타입으로 느슨하게)
     blogAccountManager?: any;
@@ -145,7 +145,7 @@ export async function resolveAccount(
  * 3단계: 브라우저 세션 관리
  */
 export async function getOrCreateBrowserSession(
-    account: { naverId: string; naverPassword: string }
+    account: { naverId: string; naverPassword: string; accountId?: string }
 ): Promise<any> {
     const deps = getDependencies();
     const normalizedId = account.naverId.trim().toLowerCase();
@@ -158,9 +158,19 @@ export async function getOrCreateBrowserSession(
         return automation;
     }
 
+    // ✅ 계정별 프록시 URL 해결 (blogAccountManager에서 직접 조회)
+    let accountProxyUrl: string | undefined;
+    if (account.accountId && deps.blogAccountManager) {
+        const proxyUrl = deps.blogAccountManager.getAccountProxyUrl(account.accountId);
+        if (proxyUrl) {
+            accountProxyUrl = proxyUrl;
+            sendLog(`🌐 계정별 프록시 적용: ${proxyUrl.replace(/:[^:]+@/, ':***@')}`);
+        }
+    }
+
     // 새 세션 생성
     sendLog(`🌐 새 브라우저 세션을 생성합니다...`);
-    automation = deps.createAutomation(account.naverId, account.naverPassword);
+    automation = deps.createAutomation(account.naverId, account.naverPassword, accountProxyUrl);
     AutomationService.set(normalizedId, automation);
     AutomationService.setCurrentInstance(automation);
 
@@ -560,15 +570,33 @@ export async function runFullPostCycle(
         const automation = await getOrCreateBrowserSession(account);
         AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — stale guard 오판 방지
 
-        // 7. 이미지 처리
-        const { images: processedImages } = await processImages(payload);
-        AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — 이미지 처리 후 갱신
+        // 7. 이미지 처리 (실패해도 발행은 계속)
+        let processedImages: any[] = [];
+        try {
+            const imageResult = await processImages(payload);
+            processedImages = imageResult.images || [];
+            AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — 이미지 처리 후 갱신
+        } catch (imageError) {
+            const imgMsg = (imageError as Error).message || '이미지 처리 중 알 수 없는 오류';
+            Logger.error('[BlogExecutor] ⚠️ 이미지 처리 실패 — 이미지 없이 발행 계속', imageError as Error);
+            sendLog(`⚠️ 이미지 처리 실패: ${imgMsg.substring(0, 100)} — 이미지 없이 발행을 계속합니다.`);
+            processedImages = [];
+        }
 
-        // 8. 발행 실행
+        // 8. 취소 체크 (이미지 처리 후 재확인)
+        if (AutomationService.isCancelRequested()) {
+            return {
+                success: false,
+                cancelled: true,
+                message: '사용자가 자동화를 취소했습니다.'
+            };
+        }
+
+        // 9. 발행 실행
         const result = await executePublishing(automation, payload, processedImages);
         AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — 발행 완료 후 갱신
 
-        // 9. 성공 시 정리
+        // 10. 성공 시 정리
         const elapsed = Date.now() - startTime;
         sendLog(`⏱️ 총 소요 시간: ${(elapsed / 1000).toFixed(1)}초`);
 

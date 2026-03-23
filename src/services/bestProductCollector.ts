@@ -990,10 +990,17 @@ export class BestProductCollector {
     coupang: BestProductResult;
     naver: BestProductResult;
   }> {
-    const [coupang, naver] = await Promise.all([
+    const _settled = await Promise.allSettled([
       this.fetchCoupangBest(categoryId, maxCount),
       this.fetchNaverBest(categoryId, maxCount),
     ]);
+    const failResult = (platform: 'coupang' | 'naver'): BestProductResult => ({
+      success: false, products: [], platform, category: categoryId,
+      categoryName: categoryId, fetchedAt: new Date().toISOString(),
+      error: 'Promise rejected',
+    });
+    const coupang = _settled[0].status === 'fulfilled' ? _settled[0].value : failResult('coupang');
+    const naver   = _settled[1].status === 'fulfilled' ? _settled[1].value : failResult('naver');
 
     return { coupang, naver };
   }

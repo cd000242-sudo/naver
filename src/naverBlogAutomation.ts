@@ -181,6 +181,7 @@ export interface AutomationOptions {
   defaultContent?: string;
   defaultLines?: number;
   categoryName?: string; // ✅ 추가: 발행할 카테고리(폴더)명
+  accountProxyUrl?: string; // ✅ 계정별 프록시 URL (미설정 시 글로벌 SmartProxy 폴백)
 }
 
 export type PublishMode = 'draft' | 'publish' | 'schedule';
@@ -401,7 +402,8 @@ export class NaverBlogAutomation {
     const seed = this.options.naverId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
     // 1. 고정된 User-Agent (최신 크롬 버전 계열)
-    const chromeVersions = ['128.0.0.0', '129.0.0.0', '130.0.0.0', '131.0.0.0'];
+    // ✅ [2026-03-23] Chrome 버전 최신화 — 구형(128~131)은 네이버 보안 서버에서 봇 의심 대상
+    const chromeVersions = ['133.0.0.0', '134.0.0.0', '135.0.0.0'];
     const version = chromeVersions[seed % chromeVersions.length];
     const userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${version} Safari/537.36`;
 
@@ -1391,7 +1393,8 @@ export class NaverBlogAutomation {
       this.log('🔄 BrowserSessionManager에서 세션 확인 중...');
       const session = await browserSessionManager.getOrCreateSession(
         this.options.naverId,
-        this.options.headless ?? false
+        this.options.headless ?? false,
+        this.options.accountProxyUrl // ✅ 계정별 프록시 전달
       );
 
       // 세션에서 브라우저와 페이지 가져오기
@@ -1431,7 +1434,8 @@ export class NaverBlogAutomation {
           await browserSessionManager.closeSession(this.options.naverId);
           const freshSession = await browserSessionManager.getOrCreateSession(
             this.options.naverId,
-            this.options.headless ?? false
+            this.options.headless ?? false,
+            this.options.accountProxyUrl // ✅ 계정별 프록시 전달
           );
           this.browser = freshSession.browser;
           this.page = freshSession.page;
@@ -1578,8 +1582,8 @@ export class NaverBlogAutomation {
           this.log('ℹ️ Puppeteer Chrome 사용');
         }
 
-        // ✅ [2026-03-22 FIX] 프록시 적용 (다중계정 CAPTCHA 방지!)
-        const proxyUrl = await getProxyUrl();
+        // ✅ [2026-03-23] 계정별 프록시 우선, 미설정 시 글로벌 SmartProxy 폴백
+        const proxyUrl = this.options.accountProxyUrl || await getProxyUrl();
         let proxyAuth: { username: string; password: string } | null = null;
 
         if (proxyUrl) {
@@ -1615,7 +1619,12 @@ export class NaverBlogAutomation {
                   await newPage.close().catch(() => { });
                 }
               }
-            } catch (error) { }
+            } catch (error) {
+              // 팝업 감지/차단 중 오류 (페이지 이미 닫힘 등) — 무시해도 안전
+              if (error instanceof Error && !error.message.includes('Target closed')) {
+                this.log(`⚠️ 팝업 처리 오류: ${error.message.substring(0, 80)}`);
+              }
+            }
           }
         });
 
@@ -2634,6 +2643,94 @@ export class NaverBlogAutomation {
         '2. 캡차가 나타나면 수동으로 해결해주세요.\n' +
         '3. 로그인 완료 후 다시 시도해주세요.'
       );
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 🛡️ [2026-03-23] 끝판왕 워밍업 브라우징 — 네이버 메인 → (랜덤 서비스) → 블로그 홈 → 글쓰기
+    // 인간은 절대 blog.naver.com/NaverWriteEditor 로 직행하지 않음
+    // ═══════════════════════════════════════════════════════════════════
+    this.log('   🛡️ 끝판왕 워밍업 브라우징 시작...');
+    try {
+      // Step 1: 네이버 메인 방문 (5~8초 체류)
+      this.log('   🌐 네이버 메인 방문 중...');
+      await page.goto('https://www.naver.com', { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => {});
+      const naverStay = this.randomInt(5000, 8000);
+      
+      // 네이버 메인에서 자연스러운 행동
+      await page.evaluate(() => window.scrollBy(0, 150 + Math.random() * 250)).catch(() => {});
+      await this.humanDelay(1500, 2500);
+      
+      // 마우스 이동 시뮬레이션 (검색창 근처)
+      const vs1 = page.viewport();
+      if (vs1) {
+        await page.mouse.move(
+          this.randomInt(300, vs1.width - 300),
+          this.randomInt(80, 200),
+          { steps: this.randomInt(10, 20) }
+        ).catch(() => {});
+      }
+      await this.humanDelay(1000, 2000);
+      await page.evaluate(() => window.scrollBy(0, 100 + Math.random() * 300)).catch(() => {});
+      await this.delay(naverStay - 3000);
+      this.log(`   ✅ 네이버 메인 ${Math.round(naverStay/1000)}초 체류 완료`);
+      
+      // Step 1.5: (끝판왕) 20% 확률로 랜덤 네이버 서비스 경유 — 실제 사용자는 뉴스/카페도 봄
+      if (Math.random() < 0.20) {
+        const naverServices = [
+          { name: '네이버 뉴스', url: 'https://news.naver.com' },
+          { name: '네이버 카페', url: 'https://cafe.naver.com' },
+          { name: '네이버 쇼핑', url: 'https://shopping.naver.com' },
+          { name: '네이버 블로그 탐색', url: 'https://section.blog.naver.com' },
+        ];
+        const service = naverServices[Math.floor(Math.random() * naverServices.length)];
+        this.log(`   🎲 랜덤 서비스 경유: ${service.name} (끝판왕 행동)`);
+        await page.goto(service.url, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
+        
+        const serviceStay = this.randomInt(3000, 7000);
+        // 서비스 페이지에서 자연스러운 행동
+        for (let s = 0; s < this.randomInt(1, 3); s++) {
+          await page.evaluate(() => window.scrollBy(0, 200 + Math.random() * 400)).catch(() => {});
+          await this.humanDelay(800, 1800);
+        }
+        await this.delay(Math.max(0, serviceStay - 2000));
+        this.log(`   ✅ ${service.name} ${Math.round(serviceStay/1000)}초 체류 완료`);
+      }
+      
+      // Step 2: 블로그 홈 방문 (5~10초 체류)
+      const blogHomeUrl = `https://blog.naver.com/${this.options.naverId}`;
+      this.log('   🏠 블로그 홈 방문 중...');
+      await page.goto(blogHomeUrl, { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => {});
+      
+      const blogStay = this.randomInt(5000, 10000);
+      this.log(`   👀 블로그 홈 둘러보는 중... (${Math.round(blogStay/1000)}초)`);
+      
+      // 자연스러운 스크롤 (여러 번)
+      for (let scroll = 0; scroll < this.randomInt(2, 4); scroll++) {
+        await page.evaluate(() => window.scrollBy(0, 200 + Math.random() * 300)).catch(() => {});
+        await this.humanDelay(800, 2000);
+      }
+      
+      // 마우스 이동 시뮬레이션 (여러 번)
+      const vs2 = page.viewport();
+      if (vs2) {
+        for (let mm = 0; mm < this.randomInt(2, 3); mm++) {
+          await page.mouse.move(
+            this.randomInt(150, vs2.width - 150),
+            this.randomInt(150, vs2.height - 150),
+            { steps: this.randomInt(8, 15) }
+          ).catch(() => {});
+          await this.humanDelay(500, 1200);
+        }
+      }
+      
+      await this.delay(Math.max(0, blogStay - 4000));
+      
+      // 스크롤 복귀
+      await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'smooth' })).catch(() => {});
+      await this.humanDelay(800, 1500);
+      this.log('   🛡️ 끝판왕 워밍업 브라우징 완료!');
+    } catch (warmupErr) {
+      this.log(`   ⚠️ 워밍업 브라우징 스킵 (${(warmupErr as Error).message})`);
     }
 
     // 블로그 글쓰기 페이지로 이동
@@ -7829,7 +7926,56 @@ export class NaverBlogAutomation {
         this.log('🔚 브라우저가 종료되었습니다.');
       } else if (keepOpen) {
         this.log('ℹ️ 세션 유지를 위해 브라우저를 열어둡니다.');
-        // ✅ 페이지(탭)는 닫고, 브라우저 프로세스만 유지 (다음 발행 시 새 탭 생성)
+
+        // ✅ [2026-03-23] 발행 후 "여운 행동" 극한 강화 — 발행글 확인 + 스크롤 + 블로그 홈 방문 (봇 감지 회피)
+        // 인간은 발행 후 자신의 글을 확인하고, 블로그 홈을 둘러보는 패턴
+        if (this.page && this.publishedUrl) {
+          try {
+            this.log('👀 발행된 글 확인 중... (여운 행동)');
+            await this.page.goto(this.publishedUrl, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
+            
+            // 발행된 글에서 5~10초 체류 (인간적 확인 행동)
+            const reviewDuration = this.randomInt(5000, 10000);
+            this.log(`   📖 발행글 읽는 중... (${Math.round(reviewDuration/1000)}초)`);
+            
+            // 여러 번 스크롤 (글을 읽는 것처럼)
+            for (let s = 0; s < this.randomInt(3, 5); s++) {
+              await this.page.evaluate(() => window.scrollBy(0, 200 + Math.random() * 400)).catch(() => {});
+              await this.humanDelay(800, 2000);
+            }
+            
+            // 마우스 이동
+            const vs = this.page.viewport();
+            if (vs) {
+              await this.page.mouse.move(
+                this.randomInt(100, vs.width - 100),
+                this.randomInt(200, vs.height - 100),
+                { steps: this.randomInt(8, 15) }
+              ).catch(() => {});
+            }
+            await this.delay(Math.max(0, reviewDuration - 4000));
+            
+            // 스크롤 복귀
+            await this.page.evaluate(() => window.scrollTo({ top: 0, behavior: 'smooth' })).catch(() => {});
+            await this.humanDelay(500, 1000);
+            
+            // 블로그 홈으로 자연스럽게 이동 (2~5초 체류)
+            this.log('🏠 블로그 홈으로 이동...');
+            const blogHomeUrl = `https://blog.naver.com/${this.options.naverId}`;
+            await this.page.goto(blogHomeUrl, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
+            const homeStay = this.randomInt(2000, 5000);
+            
+            // 블로그 홈에서 스크롤
+            await this.page.evaluate(() => window.scrollBy(0, 150 + Math.random() * 300)).catch(() => {});
+            await this.humanDelay(800, 1500);
+            await this.page.evaluate(() => window.scrollTo({ top: 0, behavior: 'smooth' })).catch(() => {});
+            await this.delay(Math.max(0, homeStay - 1500));
+            
+            this.log('✅ 여운 행동 완료 (발행글 확인 → 블로그 홈)');
+          } catch (afterErr) {
+            this.log(`⚠️ 여운 행동 스킵: ${(afterErr as Error).message}`);
+          }
+        }
         if (this.page) {
           try {
             await this.page.close().catch(() => { });

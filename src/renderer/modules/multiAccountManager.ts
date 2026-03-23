@@ -709,6 +709,7 @@ export async function initMultiAccountPublishModal() {
                 <div>
                   <div style="font-weight: 700; color: var(--text-strong); font-size: 1rem;">
                     👤 ${escapeHtml(account.name)}
+                    ${account.settings?.proxyHost ? '<span style="font-size: 0.65rem; background: rgba(59, 130, 246, 0.25); color: #60a5fa; padding: 0.1rem 0.4rem; border-radius: 4px; margin-left: 0.25rem;">🌐 프록시</span>' : ''}
                   </div>
                   <div style="font-size: 0.75rem; color: var(--text-muted);">ID: ${escapeHtml(account.blogId || account.name)}</div>
                 </div>
@@ -2090,6 +2091,16 @@ export async function initMultiAccountPublishModal() {
           const keywordsArray = account.settings?.keywords || [];
           keywordsTextarea.value = keywordsArray.join(', ');
         }
+
+        // ✅ 프록시 설정 로드
+        const proxyHostInput = document.getElementById('ma-edit-proxy-host') as HTMLInputElement;
+        const proxyPortInput = document.getElementById('ma-edit-proxy-port') as HTMLInputElement;
+        const proxyUsernameInput = document.getElementById('ma-edit-proxy-username') as HTMLInputElement;
+        const proxyPasswordInput = document.getElementById('ma-edit-proxy-password') as HTMLInputElement;
+        if (proxyHostInput) proxyHostInput.value = account.settings?.proxyHost || '';
+        if (proxyPortInput) proxyPortInput.value = account.settings?.proxyPort || '';
+        if (proxyUsernameInput) proxyUsernameInput.value = account.settings?.proxyUsername || '';
+        if (proxyPasswordInput) proxyPasswordInput.value = account.settings?.proxyPassword || '';
       }
 
       // ✅ 편집 모드에서는 네이버 아이디 수정 불가 (readonly 적용)
@@ -2126,6 +2137,16 @@ export async function initMultiAccountPublishModal() {
       const keywordsTextarea = document.getElementById('ma-edit-keywords') as HTMLTextAreaElement;
       if (categorySelect) categorySelect.value = '';
       if (keywordsTextarea) keywordsTextarea.value = '';
+
+      // ✅ 프록시 설정 초기화
+      const proxyHostInput = document.getElementById('ma-edit-proxy-host') as HTMLInputElement;
+      const proxyPortInput = document.getElementById('ma-edit-proxy-port') as HTMLInputElement;
+      const proxyUsernameInput = document.getElementById('ma-edit-proxy-username') as HTMLInputElement;
+      const proxyPasswordInput = document.getElementById('ma-edit-proxy-password') as HTMLInputElement;
+      if (proxyHostInput) proxyHostInput.value = '';
+      if (proxyPortInput) proxyPortInput.value = '';
+      if (proxyUsernameInput) proxyUsernameInput.value = '';
+      if (proxyPasswordInput) proxyPasswordInput.value = '';
     }
 
     accountEditModal.style.display = 'flex';
@@ -2201,6 +2222,11 @@ export async function initMultiAccountPublishModal() {
       publishMode: publishModeSelect?.value || 'publish',
       autoRotate: autoRotateCheckbox?.checked !== false,
       isJabBlog: isJabBlogCheckbox?.checked === true,
+      // ✅ 계정별 프록시 설정
+      proxyHost: (document.getElementById('ma-edit-proxy-host') as HTMLInputElement)?.value?.trim() || undefined,
+      proxyPort: (document.getElementById('ma-edit-proxy-port') as HTMLInputElement)?.value?.trim() || undefined,
+      proxyUsername: (document.getElementById('ma-edit-proxy-username') as HTMLInputElement)?.value?.trim() || undefined,
+      proxyPassword: (document.getElementById('ma-edit-proxy-password') as HTMLInputElement)?.value?.trim() || undefined,
     };
 
     try {
@@ -3769,6 +3795,9 @@ export async function initMultiAccountPublishModal() {
               renderMultiAccountList();
               updateSelectedCount();
               toastManager.success('계정이 삭제되었습니다.');
+            }).catch((e) => {
+              console.error('[MultiAccountPublish] 계정 삭제 실패:', e);
+              toastManager.error('계정 삭제 중 오류가 발생했습니다.');
             });
           }
         }

@@ -81,31 +81,85 @@ import { WindowManager } from './main/core/WindowManager.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // ✅ [2026-01-20] 전역 에러 핸들러 - 예상치 못한 크래시 방지
+// ✅ [2026-03-23] 강화: UI 알림 + 에러 카운팅 + 반복 에러 감지
 // ═══════════════════════════════════════════════════════════════════════════════
+let _globalErrorCount = 0;
+const _recentErrors: string[] = [];
+
+function notifyRendererOfError(errorType: string, message: string) {
+  try {
+    const { BrowserWindow: BW } = require('electron');
+    const win = BW.getAllWindows().find((w: any) => !w.isDestroyed());
+    if (win?.webContents) {
+      win.webContents.send('log-message', `⚠️ [시스템 오류] ${errorType}: ${message.substring(0, 200)}`);
+    }
+  } catch {
+    // UI 알림 실패는 무시 — 순환 에러 방지
+  }
+}
+
 process.on('uncaughtException', (error: Error, origin: string) => {
-  console.error('[CRITICAL] 처리되지 않은 예외:', {
+  _globalErrorCount++;
+  const errorKey = error.message?.substring(0, 100) || 'unknown';
+  _recentErrors.push(errorKey);
+  if (_recentErrors.length > 20) _recentErrors.shift();
+
+  console.error(`[CRITICAL #${_globalErrorCount}] 처리되지 않은 예외:`, {
     message: error.message,
-    stack: error.stack,
+    stack: error.stack?.substring(0, 500),
     origin
   });
-  // 앱 크래시를 방지하기 위해 에러를 로그만 남기고 계속 진행
-  // 심각한 에러의 경우 사용자에게 알림
-  if (error.message.includes('FATAL') || error.message.includes('ENOENT')) {
-    console.error('[CRITICAL] 심각한 오류 - 앱 상태 점검 필요');
+
+  // UI에 에러 알림
+  notifyRendererOfError('UncaughtException', error.message || 'Unknown error');
+
+  // 동일 에러 5회 반복 시 경고
+  const sameErrorCount = _recentErrors.filter(e => e === errorKey).length;
+  if (sameErrorCount >= 5) {
+    console.error(`[CRITICAL] 동일 에러 ${sameErrorCount}회 반복 감지! 앱 재시작 권장.`);
+    notifyRendererOfError('반복 에러', `동일 오류가 ${sameErrorCount}회 반복되었습니다. 앱 재시작을 권장합니다.`);
   }
 });
 
 process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
-  console.error('[CRITICAL] 처리되지 않은 Promise 거부:', {
-    reason: reason?.message || reason,
-    stack: reason?.stack
+  _globalErrorCount++;
+  const message = reason?.message || String(reason).substring(0, 200);
+  console.error(`[CRITICAL #${_globalErrorCount}] 처리되지 않은 Promise 거부:`, {
+    reason: message,
+    stack: reason?.stack?.substring(0, 500)
   });
+
+  // UI에 에러 알림 (단, 너무 빈번하면 억제)
+  if (_globalErrorCount <= 50) {
+    notifyRendererOfError('UnhandledRejection', message);
+  }
 });
 
 // ✅ 메모리 누수 경고 임계값 상향 (이벤트 리스너 과다 등록 경고 방지)
 process.setMaxListeners(50);
 
-console.log('[Stability] Main 프로세스 전역 에러 핸들러 등록 완료');
+console.log('[Stability] Main 프로세스 전역 에러 핸들러 등록 완료 (UI 알림 포함)');
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ✅ [2026-03-23] IPC 핸들러 글로벌 안전 래퍼
+// - 모든 ipcMain.handle 호출에 자동 try-catch 적용
+// - 206개+ 핸들러를 개별 수정하지 않고 한 번에 보호
+// ═══════════════════════════════════════════════════════════════════════════════
+const _originalIpcHandle = ipcMain.handle.bind(ipcMain);
+(ipcMain as any).handle = (channel: string, handler: (...args: any[]) => any) => {
+  _originalIpcHandle(channel, async (event: any, ...args: any[]) => {
+    try {
+      return await handler(event, ...args);
+    } catch (error) {
+      const msg = (error as Error).message || '알 수 없는 오류';
+      console.error(`[SafeIPC] ❌ "${channel}" 핸들러 에러: ${msg}`);
+      console.error(`[SafeIPC] Stack:`, (error as Error).stack?.split('\n').slice(0, 3).join('\n'));
+      // 렌더러가 항상 응답을 받도록 보장
+      return { success: false, message: `[${channel}] ${msg}`, error: msg };
+    }
+  });
+};
+console.log('[Stability] IPC 핸들러 글로벌 안전 래퍼 등록 완료');
 
 // ✅ [리팩토링] blogHandlers 로직 함수 import
 import {
@@ -1937,7 +1991,7 @@ ipcMain.handle('blog:getRecentPosts', async (_event, blogId: string) => {
         return results.slice(0, 20); // 최대 20개
       }, blogId.trim());
 
-      await browser.close();
+      await browser.close().catch(() => undefined);
 
       if (posts.length === 0) {
         return { success: true, posts: [], message: '포스팅을 찾지 못했습니다.' };
@@ -1945,7 +1999,7 @@ ipcMain.handle('blog:getRecentPosts', async (_event, blogId: string) => {
 
       return { success: true, posts };
     } catch (error) {
-      await browser.close();
+      await browser.close().catch(() => undefined);
       throw error;
     }
   } catch (error) {
@@ -6298,7 +6352,7 @@ ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: 
         }
       }
 
-      await browser.close();
+      await browser.close().catch(() => undefined);
 
       if (categories.length > 0) {
         console.log('[Main] Stage 2 성공:', categories.length, '개 추출 완료');
@@ -6312,7 +6366,7 @@ ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: 
       };
 
     } catch (error) {
-      await browser.close();
+      await browser.close().catch(() => undefined);
       throw error;
     }
 
@@ -8286,7 +8340,7 @@ ipcMain.handle('image:crawlFromUrl', async (_event, url: string): Promise<{
         return imageUrls.slice(0, 10); // 최대 10개
       });
 
-      await browser.close();
+      await browser.close().catch(() => undefined);
 
       if (images.length > 0) {
         console.log(`[Main] URL에서 ${images.length}개 이미지 추출 완료`);
@@ -8295,7 +8349,7 @@ ipcMain.handle('image:crawlFromUrl', async (_event, url: string): Promise<{
         return { success: false, message: '이미지를 찾을 수 없습니다.' };
       }
     } catch (pageError) {
-      await browser.close();
+      await browser.close().catch(() => undefined);
       throw pageError;
     }
   } catch (error) {
@@ -10092,9 +10146,10 @@ app.whenReady().then(async () => {
     (injectBlogExecutorDeps as (deps: any) => void)({
       loadConfig,
       applyConfigToEnv,
-      createAutomation: (naverId: string, naverPassword: string) => {
+      createAutomation: (naverId: string, naverPassword: string, accountProxyUrl?: string) => {
         // ✅ [2026-03-02] sendLog 주입 → 브라우저 자동화 로그가 UI에 실시간 표시
-        return new NaverBlogAutomation({ naverId, naverPassword }, (msg: string) => {
+        // ✅ [2026-03-23] accountProxyUrl → 계정별 프록시 우선, 미설정 시 글로벌 SmartProxy 폴백
+        return new NaverBlogAutomation({ naverId, naverPassword, accountProxyUrl }, (msg: string) => {
           console.log(msg);  // 터미널에도 출력
           sendLog(msg);      // 렌더러 UI에도 전달
         });
@@ -10674,24 +10729,9 @@ app.on('before-quit', async (event) => {
   }
 });
 
-// 글로벌 예외 처리 - 앱 크래시 방지
-process.on('uncaughtException', (error) => {
-  console.error('[Main] 처리되지 않은 예외:', error);
-  const errorMsg = translatePuppeteerError(error);
-
-  // 크래시를 방지하되, 심각한 에러는 로깅
-  if (mainWindow && !mainWindow.isDestroyed()) {
-    mainWindow.webContents.send('error', {
-      message: '예기치 않은 오류가 발생했습니다.',
-      detail: errorMsg
-    });
-  }
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('[Main] 처리되지 않은 Promise 거부:', reason);
-  // Promise 거부도 로깅만 하고 앱은 유지
-});
+// ✅ [2026-03-23] 중복 글로벌 에러 핸들러 제거됨
+// → L85~103의 첫 번째 등록이 uncaughtException/unhandledRejection 처리
+// → 중복 등록은 에러가 2번 처리되는 문제를 일으키므로 삭제
 
 // 이미지 라이브러리 수집 핸들러
 ipcMain.handle('library:collectImagesByTitle', async (_event, title: string, selectedSources?: string[]) => {

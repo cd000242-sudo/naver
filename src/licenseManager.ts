@@ -458,9 +458,7 @@ export async function registerLicense(
         appVersion: app.getVersion(),
       };
 
-      console.log('[LicenseManager] 요청 본문:', JSON.stringify(requestBody, null, 2));
-      console.log('[LicenseManager] userId 길이:', userId.length, 'password 길이:', password.length);
-      console.log('[LicenseManager] userId (trimmed):', `"${userId.trim()}"`, 'password (trimmed):', `"${password.trim().substring(0, 3)}***"`);
+      console.log('[LicenseManager] 요청 전송: action=' + requestBody.action + ', userId=' + userId.trim());
 
       // 타임아웃 추가 (60초 - GAS 배치 쓰기 기반, 10초 이내 응답 기대)
       const controller = new AbortController();
@@ -693,9 +691,7 @@ export async function verifyLicenseWithCredentials(
         appVersion: app.getVersion(),
       };
 
-      console.log('[LicenseManager] 요청 본문:', JSON.stringify(requestBody, null, 2));
-      console.log('[LicenseManager] userId 길이:', userId.length, 'password 길이:', password.length);
-      console.log('[LicenseManager] userId (trimmed):', `"${userId.trim()}"`, 'password (trimmed):', `"${password.trim().substring(0, 3)}***"`);
+      console.log('[LicenseManager] 요청 전송: action=' + requestBody.action + ', userId=' + userId.trim());
 
       // 타임아웃 추가 (60초) - GAS 배치 쓰기 기반
       const controller = new AbortController();

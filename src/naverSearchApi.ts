@@ -421,7 +421,7 @@ export async function crawlNaverAutocomplete(keyword: string): Promise<string[]>
             return items;
         });
 
-        await browser.close();
+        await browser.close().catch(() => undefined);
 
         // 검색어에서 추가된 세부 키워드만 추출
         const keywordLower = keyword.trim().toLowerCase();

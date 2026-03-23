@@ -517,7 +517,7 @@ export class CoupangProvider extends BaseProvider {
             // ✅ [2026-03-16] 브라우저 확실히 닫기 — 어떤 경로든 반드시 실행
             if (browser) {
                 try {
-                    await browser.close();
+                    await browser.close().catch(() => undefined);
                     console.log('[Coupang:AbsoluteHuman] 🧹 브라우저 정상 종료');
                 } catch (closeErr: any) {
                     console.warn(`[Coupang:AbsoluteHuman] ⚠️ 브라우저 닫기 실패: ${closeErr.message}`);

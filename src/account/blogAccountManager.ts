@@ -24,6 +24,11 @@ export type BlogAccount = {
     urls?: string[]; // URL 목록 (순차 사용)
     keywordIndex?: number; // 현재 키워드 인덱스
     urlIndex?: number; // 현재 URL 인덱스
+    // ✅ 계정별 프록시 설정 (CAPTCHA 방지용 개별 IP)
+    proxyHost?: string; // 프록시 호스트 (예: proxy.example.com)
+    proxyPort?: string; // 프록시 포트 (예: 8080)
+    proxyUsername?: string; // 프록시 인증 사용자명
+    proxyPassword?: string; // 프록시 인증 비밀번호
   };
 };
 
@@ -474,5 +479,20 @@ export class BlogAccountManager {
     this.saveToStorage();
 
     return account.isActive;
+  }
+
+  // ✅ 계정별 프록시 URL 생성 (http://user:pass@host:port 형식)
+  getAccountProxyUrl(accountId: string): string | null {
+    const account = this.accounts.get(accountId);
+    if (!account) return null;
+
+    const { proxyHost, proxyPort } = account.settings;
+    if (!proxyHost || !proxyPort) return null;
+
+    const { proxyUsername, proxyPassword } = account.settings;
+    if (proxyUsername && proxyPassword) {
+      return `http://${encodeURIComponent(proxyUsername)}:${encodeURIComponent(proxyPassword)}@${proxyHost}:${proxyPort}`;
+    }
+    return `http://${proxyHost}:${proxyPort}`;
   }
 }

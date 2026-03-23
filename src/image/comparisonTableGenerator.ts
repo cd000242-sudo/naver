@@ -396,7 +396,7 @@ export async function generateComparisonTableImage(
     };
   } finally {
     if (browser) {
-      await browser.close();
+      await browser.close().catch(() => undefined);
     }
   }
 }

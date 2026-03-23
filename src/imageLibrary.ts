@@ -359,7 +359,7 @@ export class ImageLibrary {
       console.error('뉴스 크롤링 오류:', error);
     } finally {
       if (browser) {
-        await browser.close();
+        await browser.close().catch(() => undefined);
       }
       // ✅ 메모리 최적화: 가비지 컬렉션 힌트
       if (typeof global !== 'undefined' && (global as any).gc) {
@@ -472,7 +472,7 @@ export class ImageLibrary {
       console.error('블로그 크롤링 오류:', error);
     } finally {
       if (browser) {
-        await browser.close();
+        await browser.close().catch(() => undefined);
       }
       // ✅ 메모리 최적화: 가비지 컬렉션 힌트
       if (typeof global !== 'undefined' && (global as any).gc) {

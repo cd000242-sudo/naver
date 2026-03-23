@@ -409,7 +409,7 @@ async function crawlNaverSmartStore(url: string): Promise<ProductSpec | null> {
             };
         });
 
-        await browser.close();
+        await browser.close().catch(() => undefined);
 
         if (!spec.productName) {
             console.log('[ProductSpecCrawler] ⚠️ 스마트스토어 제품명 추출 실패');
@@ -421,7 +421,7 @@ async function crawlNaverSmartStore(url: string): Promise<ProductSpec | null> {
 
     } catch (error) {
         console.error('[ProductSpecCrawler] ❌ 스마트스토어 크롤링 실패:', error);
-        if (browser) await browser.close();
+        if (browser) await browser.close().catch(() => undefined);
         return null;
     }
 }
@@ -478,7 +478,7 @@ async function crawl11St(url: string): Promise<ProductSpec | null> {
             };
         });
 
-        await browser.close();
+        await browser.close().catch(() => undefined);
 
         if (!spec.productName) return null;
 
@@ -486,7 +486,7 @@ async function crawl11St(url: string): Promise<ProductSpec | null> {
         return spec;
 
     } catch (error) {
-        if (browser) await browser.close();
+        if (browser) await browser.close().catch(() => undefined);
         return null;
     }
 }
@@ -533,7 +533,7 @@ async function crawlGmarket(url: string): Promise<ProductSpec | null> {
             };
         });
 
-        await browser.close();
+        await browser.close().catch(() => undefined);
 
         if (!spec.productName) return null;
 
@@ -541,7 +541,7 @@ async function crawlGmarket(url: string): Promise<ProductSpec | null> {
         return spec;
 
     } catch (error) {
-        if (browser) await browser.close();
+        if (browser) await browser.close().catch(() => undefined);
         return null;
     }
 }
@@ -1899,7 +1899,7 @@ async function fetchProductByIdDirectly(productId: string, originalUrl: string):
                     (el: Element) => el.getAttribute('content')?.trim() || ''
                 ).catch(() => '');
 
-                await browser.close();
+                await browser.close().catch(() => undefined);
 
                 if (productName && productName.length > 2) {
                     console.log(`[AffiliateCrawler] ✅ Puppeteer 성공: [${productName}] (설명: ${description.length}자)`);
