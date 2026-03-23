@@ -8840,40 +8840,53 @@ ${extraInstruction}`;
 
       // 60% 미만일 때만 재시도
       if (attempt === MAX_ATTEMPTS) {
-        // 최종 시도에서도 50% 이상이면 경고만 하고 통과
-        const finalMinChars = Math.round(minChars * 0.50); // 50%
-        if (plainLength >= finalMinChars) {
-          console.warn(`[ContentGenerator] 글자수 경고 (최종): ${plainLength}자 (목표: ${minChars}자, ${Math.round((plainLength / minChars) * 100)}%)`);
-          if (!optimized.quality) {
-            optimized.quality = {
-              aiDetectionRisk: 'low',
-              legalRisk: 'safe',
-              seoScore: 0,
-              originalityScore: 0,
-              readabilityScore: 0,
-              warnings: [],
-            };
-          }
-
-          // ✅ [2026-01-23] 본문이 짧아도 에러 없이 진행 (연속발행 안정성)
-          // 60% 미만이어도 경고만 남기고 콘텐츠 반환
-          if (!optimized.quality.warnings) {
-            optimized.quality.warnings = [];
-          }
-
-          if (plainLength >= minChars * 0.6) {
-            optimized.quality.warnings.push(
-              `본문 길이가 목표보다 약간 짧습니다 (${plainLength}자 / 목표: ${minChars}자). 최대한 내용을 보존하여 출력합니다.`
-            );
-          } else {
-            // 60% 미만이어도 경고만 남기고 진행 (에러 throw 제거)
-            console.warn(`[ContentGenerator] ⚠️ 본문 길이 미달 (${plainLength}자 / 목표: ${minChars}자, ${Math.round((plainLength / minChars) * 100)}%) - 진행 계속`);
-            optimized.quality.warnings.push(
-              `⚠️ 본문이 목표보다 많이 짧습니다 (${plainLength}자 / 목표: ${minChars}자). 내용 보강을 권장합니다.`
-            );
-          }
-          return finalizeStructuredContent(optimized, source);
+        // ✅ [2026-03-23 FIX] 최종 시도에서는 글자수에 관계없이 항상 경고 후 통과
+        // 이전: 50% 미만이면 throw → 발행 전체 실패
+        // 수정: 짧은 글이라도 발행하는 것이 에러보다 나음
+        console.warn(`[ContentGenerator] 글자수 경고 (최종): ${plainLength}자 (목표: ${minChars}자, ${Math.round((plainLength / minChars) * 100)}%)`);
+        if (!optimized.quality) {
+          optimized.quality = {
+            aiDetectionRisk: 'low',
+            legalRisk: 'safe',
+            seoScore: 0,
+            originalityScore: 0,
+            readabilityScore: 0,
+            warnings: [],
+          };
         }
+
+        if (!optimized.quality.warnings) {
+          optimized.quality.warnings = [];
+        }
+
+        if (plainLength >= minChars * 0.6) {
+          optimized.quality.warnings.push(
+            `본문 길이가 목표보다 약간 짧습니다 (${plainLength}자 / 목표: ${minChars}자). 최대한 내용을 보존하여 출력합니다.`
+          );
+        } else {
+          // ✅ [2026-03-23] 50% 미만이어도 에러 없이 진행 — 연속발행 안정성 최우선
+          console.warn(`[ContentGenerator] ⚠️ 본문 길이 미달 (${plainLength}자 / 목표: ${minChars}자, ${Math.round((plainLength / minChars) * 100)}%) - 그래도 진행`);
+          optimized.quality.warnings.push(
+            `⚠️ 본문이 목표보다 많이 짧습니다 (${plainLength}자 / 목표: ${minChars}자). 내용 보강을 권장합니다.`
+          );
+        }
+
+        // ✅ 성공 통계 (경고 후 통과)
+        stats.success++;
+        if (attempt === 0) stats.attempts.first++;
+        else if (attempt === 1) stats.attempts.second++;
+        else if (attempt === 2) stats.attempts.third++;
+        else if (attempt === 3) stats.attempts.fourth++;
+        const successRate = stats.total > 0 ? Math.round((stats.success / stats.total) * 100) : 0;
+        console.log(`[ContentGenerator] ✅ 최종 경고 후 통과 (시도 ${attempt + 1}번째) | 전체 성공률: ${successRate}% (${stats.success}/${stats.total})`);
+
+        try {
+          await fs.writeFile(statsFile, JSON.stringify(stats, null, 2), 'utf-8');
+        } catch (error) {
+          console.warn('[ContentGenerator] 통계 파일 저장 실패:', (error as Error).message);
+        }
+
+        return finalizeStructuredContent(optimized, source);
       }
 
       // 재시도 시 목표치 증가
