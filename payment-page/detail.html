@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better Life Naver - 네이버 블로그 자동화의 끝판왕</title>
+    <meta name="description" content="AI가 글을 쓰고, 이미지를 만들고, 발행까지 자동으로. 블로그 수익화의 시작, Better Life Naver.">
+    <meta property="og:title" content="Better Life Naver - 블로그 자동화의 끝판왕">
+    <meta property="og:description" content="키워드 하나면 AI가 알아서 글 작성부터 발행까지. 월 100만원 블로그 수익, 이제 자동화하세요.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #FFD700;
+            --gold-dark: #B8860B;
+            --neon-green: #00FF88;
+            --neon-blue: #00AAFF;
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-section: #0d0d14;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --gradient-gold: linear-gradient(135deg, #FFD700, #FFA500, #FF6B00);
+            --gradient-premium: linear-gradient(135deg, #667eea, #764ba2);
+            --gradient-fire: linear-gradient(135deg, #f12711, #f5af19);
+            --gradient-ocean: linear-gradient(135deg, #00c6ff, #0072ff);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Noto Sans KR', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(ellipse at 50% 0%, rgba(255,215,0,0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 50%, rgba(102,126,234,0.06) 0%, transparent 50%),
+                        var(--bg-dark);
+            padding: 40px 20px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .hero-content { position: relative; z-index: 1; max-width: 900px; }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,215,0,0.1);
+            border: 1px solid rgba(255,215,0,0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            color: var(--gold);
+            margin-bottom: 30px;
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(255,215,0,0.2); }
+            50% { box-shadow: 0 0 20px rgba(255,215,0,0.4); }
+        }
+        
+        .hero h1 {
+            font-size: clamp(32px, 6vw, 64px);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 .highlight {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+        
+        .hero-pain {
+            font-size: clamp(18px, 3vw, 28px);
+            font-weight: 700;
+            color: #ff6b6b;
+            margin-bottom: 40px;
+        }
+        
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient-gold);
+            color: #000;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(255,215,0,0.3);
+        }
+        
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 500;
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            text-align: center;
+        }
+        
+        .hero-stat .number {
+            font-size: 32px;
+            font-weight: 900;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-stat .label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* ========== PAIN SECTION ========== */
+        .pain-section {
+            padding: 100px 20px;
+            background: var(--bg-section);
+            text-align: center;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .section-desc {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 50px;
+        }
+        
+        .pain-card {
+            background: rgba(255,107,107,0.05);
+            border: 1px solid rgba(255,107,107,0.15);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: left;
+            transition: all 0.3s;
+        }
+        
+        .pain-card:hover {
+            border-color: rgba(255,107,107,0.4);
+            transform: translateY(-4px);
+        }
+        
+        .pain-card .icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+        
+        .pain-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #ff6b6b;
+        }
+        
+        .pain-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        
+        /* ========== SCREENSHOT SHOWCASE ========== */
+        .showcase-section {
+            padding: 100px 20px;
+            background: var(--bg-dark);
+        }
+        
+        .app-mockup {
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .app-frame {
+            background: #1a1a2e;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 30px 100px rgba(0,0,0,0.5),
+                        0 0 0 1px rgba(255,255,255,0.05);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .app-frame-titlebar {
+            background: #2a2a3e;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .app-frame-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .app-frame-dot.red { background: #ff5f57; }
+        .app-frame-dot.yellow { background: #febc2e; }
+        .app-frame-dot.green { background: #28c840; }
+        
+        .app-frame-title {
+            margin-left: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .app-frame img {
+            width: 100%;
+            display: block;
+        }
+        
+        .screenshot-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(ellipse, rgba(255,215,0,0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* ========== FEATURES ========== */
+        .features-section {
+            padding: 100px 20px;
+            background: var(--bg-section);
+        }
+        
+        .feature-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+        
+        .feature-row:nth-child(even) {
+            direction: rtl;
+        }
+        
+        .feature-row:nth-child(even) > * {
+            direction: ltr;
+        }
+        
+        .feature-row:last-child { margin-bottom: 0; }
+        
+        .feature-text { flex: 1; }
+        
+        .feature-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .tag-ai { background: rgba(102,126,234,0.2); color: #667eea; }
+        .tag-auto { background: rgba(0,255,136,0.15); color: #00ff88; }
+        .tag-image { background: rgba(255,107,107,0.15); color: #ff6b6b; }
+        .tag-seo { background: rgba(255,215,0,0.15); color: #ffd700; }
+        .tag-schedule { background: rgba(0,170,255,0.15); color: #00aaff; }
+        
+        .feature-text h3 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 900;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        
+        .feature-text p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .feature-bullets {
+            list-style: none;
+        }
+        
+        .feature-bullets li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .feature-bullets li::before {
+            content: '✓';
+            color: var(--neon-green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .feature-visual {
+            position: relative;
+            margin: auto 0;
+        }
+        
+        .feature-screenshot {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.05);
+            width: 100%;
+        }
+        
+        .feature-screenshot img {
+            width: 100%;
+            display: block;
+        }
+        
+        /* ========== COMPARISON TABLE ========== */
+        .comparison-section {
+            padding: 100px 20px;
+            background: var(--bg-dark);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            max-width: 900px;
+            margin: 50px auto 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 18px 24px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        
+        .comparison-table thead th {
+            background: rgba(255,215,0,0.05);
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .comparison-table thead th:last-child {
+            color: var(--gold);
+            position: relative;
+        }
+        
+        .comparison-table thead th:last-child::after {
+            content: '추천';
+            position: absolute;
+            top: -12px;
+            right: 10px;
+            background: var(--gradient-fire);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: white;
+        }
+        
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .comparison-table td:last-child {
+            background: rgba(255,215,0,0.02);
+        }
+        
+        .comparison-table .check { color: var(--neon-green); font-size: 20px; }
+        .comparison-table .cross { color: #ff4444; font-size: 20px; }
+        .comparison-table .partial { color: #ffaa00; font-size: 14px; }
+        
+        /* ========== SOCIAL PROOF ========== */
+        .proof-section {
+            padding: 100px 20px;
+            background: var(--bg-section);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 16px;
+            right: 24px;
+            font-size: 64px;
+            color: rgba(255,215,0,0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-stars {
+            color: var(--gold);
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        
+        .testimonial-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient-premium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 15px;
+        }
+        
+        .testimonial-role {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        /* ========== PRICING V2 — PREMIUM ========== */
+        .pricing-section {
+            padding: 100px 20px;
+            background: radial-gradient(ellipse at 30% 0%, rgba(102,126,234,0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 100%, rgba(255,215,0,0.05) 0%, transparent 50%),
+                        var(--bg-dark);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .pricing-section::before {
+            content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 600px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,215,0,0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .pricing-subtitle { color: var(--text-secondary); font-size: 16px; max-width: 600px; margin: 0 auto 20px; }
+        .pricing-savings-bar {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.25);
+            padding: 8px 20px; border-radius: 50px; font-size: 14px; color: var(--neon-green);
+            margin-bottom: 48px; font-weight: 600;
+        }
+        .pricing-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 0; max-width: 1100px; margin: 0 auto;
+            align-items: stretch;
+        }
+        .pricing-card {
+            background: rgba(18,18,26,0.7); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 40px 28px 36px; position: relative;
+            transition: all 0.4s cubic-bezier(.4,0,.2,1);
+            display: flex; flex-direction: column;
+        }
+        .pricing-card:first-child { border-radius: 24px 0 0 24px; }
+        .pricing-card:last-child { border-radius: 0 24px 24px 0; }
+        .pricing-card:hover {
+            transform: translateY(-8px); z-index: 2;
+            border-color: rgba(255,215,0,0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .pricing-card.popular {
+            background: linear-gradient(180deg, rgba(255,215,0,0.06) 0%, rgba(18,18,26,0.9) 40%);
+            border: 2px solid rgba(255,215,0,0.4);
+            border-radius: 24px;
+            transform: scale(1.06);
+            z-index: 3;
+            box-shadow: 0 0 60px rgba(255,215,0,0.08), 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .pricing-card.popular:hover {
+            transform: scale(1.06) translateY(-8px);
+            box-shadow: 0 0 80px rgba(255,215,0,0.15), 0 30px 80px rgba(0,0,0,0.4);
+        }
+        .popular-badge {
+            position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+            background: var(--gradient-fire); padding: 6px 28px; border-radius: 50px;
+            font-size: 13px; font-weight: 800; color: #fff; white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(241,39,17,0.4);
+            animation: badge-glow 2s infinite;
+        }
+        @keyframes badge-glow {
+            0%, 100% { box-shadow: 0 4px 20px rgba(241,39,17,0.3); }
+            50% { box-shadow: 0 4px 30px rgba(241,39,17,0.6); }
+        }
+        .pricing-header { text-align: center; margin-bottom: 28px; }
+        .pricing-header h3 { font-size: 22px; font-weight: 800; margin-bottom: 16px; }
+        .pricing-price {
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+        }
+        .original-price {
+            font-size: 16px; color: var(--text-secondary);
+            text-decoration: line-through; opacity: 0.6;
+        }
+        .current-price {
+            font-size: 44px; font-weight: 900; line-height: 1.1;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .pricing-per {
+            font-size: 14px; color: var(--neon-green); font-weight: 600;
+            margin-top: 4px;
+        }
+        .pricing-discount-tag {
+            display: inline-block; background: rgba(255,107,0,0.15);
+            color: #ff8c00; font-size: 12px; font-weight: 700;
+            padding: 3px 10px; border-radius: 6px; margin-top: 8px;
+        }
+        .pricing-features {
+            list-style: none; text-align: left;
+            margin-bottom: 28px; flex: 1;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 20px;
+        }
+        .pricing-features li {
+            padding: 7px 0; font-size: 14px; color: var(--text-secondary);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .pricing-features li .check-icon {
+            color: var(--neon-green); font-weight: 700; flex-shrink: 0; width: 18px;
+        }
+        .btn-pricing {
+            display: block; width: 100%; padding: 16px; border-radius: 14px;
+            font-size: 16px; font-weight: 700; cursor: pointer;
+            transition: all 0.3s; border: none; text-decoration: none;
+            text-align: center; color: #fff;
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+        }
+        .btn-pricing:hover {
+            background: rgba(255,255,255,0.1); transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .btn-popular {
+            background: var(--gradient-gold) !important; color: #000 !important;
+            border: none !important; font-size: 17px;
+            box-shadow: 0 4px 20px rgba(255,215,0,0.25);
+        }
+        .btn-popular:hover {
+            box-shadow: 0 8px 40px rgba(255,215,0,0.4) !important;
+        }
+        .pricing-permanent {
+            margin-top: 36px; text-align: center;
+        }
+        .pricing-permanent a {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: linear-gradient(135deg, rgba(45,27,105,0.6) 0%, rgba(26,26,46,0.8) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--gold); border-radius: 16px;
+            padding: 18px 48px; font-size: 16px; font-weight: 700;
+            color: var(--gold); text-decoration: none;
+            transition: all 0.3s;
+        }
+        .pricing-permanent a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(255,215,0,0.2);
+            border-color: var(--gold);
+        }
+        .guarantee-strip {
+            display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+            margin-top: 40px; padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+        .guarantee-strip-item {
+            display: flex; align-items: center; gap: 8px;
+            color: var(--text-secondary); font-size: 14px;
+        }
+        .guarantee-strip-item .gs-icon { font-size: 18px; }
+        
+        /* ========== GUARANTEE ========== */
+        .guarantee-section {
+            padding: 80px 20px;
+            background: var(--bg-section);
+            text-align: center;
+        }
+        
+        .guarantee-box {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(0,255,136,0.03);
+            border: 1px solid rgba(0,255,136,0.15);
+            border-radius: 20px;
+            padding: 40px;
+        }
+        
+        .guarantee-box .icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+        }
+        
+        .guarantee-box h3 {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+        
+        .guarantee-box p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        /* ========== URGENCY BANNER ========== */
+        .urgency-banner {
+            background: var(--gradient-fire);
+            padding: 16px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: urgency-pulse 3s infinite;
+        }
+        
+        @keyframes urgency-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+        
+        .urgency-banner .timer {
+            font-size: 22px;
+            margin-left: 10px;
+        }
+        
+        /* ========== FINAL CTA ========== */
+        .final-cta-section {
+            padding: 120px 20px;
+            background: radial-gradient(ellipse at center, rgba(255,215,0,0.05) 0%, transparent 60%),
+                        var(--bg-dark);
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: clamp(28px, 5vw, 52px);
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .final-cta p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* ========== FLOATING CTA ========== */
+        .floating-cta {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            animation: float-bounce 2s infinite;
+        }
+        
+        @keyframes float-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .floating-cta a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradient-gold);
+            color: #000;
+            padding: 16px 28px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 8px 30px rgba(255,215,0,0.3);
+            transition: all 0.3s;
+        }
+        
+        .floating-cta a:hover {
+            box-shadow: 0 12px 40px rgba(255,215,0,0.5);
+            transform: scale(1.05);
+        }
+        
+        /* ========== COUNTER ANIMATION ========== */
+        .counter-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, var(--bg-section) 0%, var(--bg-dark) 100%);
+        }
+        
+        .counter-item {
+            text-align: center;
+            padding: 24px;
+        }
+        
+        .counter-item .number {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 900;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .counter-item .text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        /* ========== RESPONSIVE — TABLET (768px) ========== */
+        @media (max-width: 768px) {
+            .feature-row { grid-template-columns: 1fr; gap: 30px; }
+            .feature-row:nth-child(even) { direction: ltr; }
+            .comparison-table { font-size: 13px; }
+            .comparison-table th, .comparison-table td { padding: 12px 8px; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; gap: 20px; }
+            .pricing-card { border-radius: 20px !important; }
+            .pricing-card.popular { transform: none; }
+            .pricing-card.popular:hover { transform: translateY(-6px); }
+            .counter-row { grid-template-columns: repeat(2, 1fr); }
+            .hero-stats { gap: 20px; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+            .pain-cards { gap: 16px; }
+            .pain-card { padding: 24px; }
+            .section-title { font-size: clamp(24px, 5vw, 36px); }
+            .section-desc { font-size: 15px; margin-bottom: 40px; }
+            .features-section, .comparison-section, .proof-section,
+            .pain-section, .pricing-section, .guarantee-section { padding: 60px 16px; }
+            .final-cta-section { padding: 80px 16px; }
+            .mid-cta { padding: 40px 16px; }
+            .mid-cta p { font-size: 17px; }
+            .hero { padding: 30px 16px; min-height: auto; min-height: 100dvh; }
+            .hero h1 { font-size: clamp(28px, 7vw, 42px); }
+            .hero-subtitle { font-size: 16px; }
+            .hero-pain { font-size: 18px; margin-bottom: 28px; }
+            .hero-buttons { flex-direction: column; align-items: center; gap: 12px; }
+            .hero-buttons .btn-primary, .hero-buttons .btn-secondary {
+                width: 100%; max-width: 320px; text-align: center; justify-content: center;
+                padding: 16px 24px; font-size: 16px;
+            }
+            .guarantee-strip { gap: 16px; }
+            .guarantee-strip-item { font-size: 13px; }
+            /* Floating CTA → full-width bottom bar */
+            .floating-cta {
+                bottom: 0; left: 0; right: 0;
+                animation: none; padding: 12px 16px;
+                background: rgba(10,10,15,0.95); backdrop-filter: blur(12px);
+                border-top: 1px solid rgba(255,215,0,0.2);
+            }
+            .floating-cta a {
+                border-radius: 12px; width: 100%; justify-content: center;
+                padding: 14px; font-size: 15px;
+            }
+            body { padding-bottom: 76px; }
+        }
+        /* ========== RESPONSIVE — MOBILE (480px) ========== */
+        @media (max-width: 480px) {
+            .urgency-banner { font-size: 13px; padding: 12px 16px; line-height: 1.4; }
+            .urgency-banner .timer { font-size: 17px; display: block; margin-top: 4px; margin-left: 0; }
+            .hero h1 { font-size: 26px; }
+            .hero-badge { font-size: 12px; padding: 6px 14px; }
+            .hero-stats { gap: 12px; }
+            .hero-stat .number, .stat-number { font-size: 24px; }
+            .hero-stat .label, .stat-label { font-size: 11px; }
+            .pain-card .icon { font-size: 32px; }
+            .pain-card h3 { font-size: 17px; }
+            .pain-card p { font-size: 14px; }
+            .loss-callout p { font-size: 15px; }
+            .loss-callout .big { font-size: 26px; }
+            .feature-text h3 { font-size: 22px; }
+            .feature-text p { font-size: 14px; }
+            .feature-bullets li { font-size: 13px; }
+            .comparison-table { font-size: 12px; }
+            .comparison-table th, .comparison-table td { padding: 10px 6px; }
+            .section-title { font-size: 22px; }
+            .pricing-card { padding: 32px 20px 28px; }
+            .current-price { font-size: 36px; }
+            .pricing-permanent a { padding: 14px 24px; font-size: 14px; }
+            .testimonial-card { padding: 24px; }
+            .testimonial-text { font-size: 14px; }
+            .faq-question span:first-child { font-size: 14px; }
+            .faq-answer p { font-size: 13px; }
+            .final-cta-section { padding: 60px 16px; }
+            .final-cta-section .section-title { font-size: 24px; }
+            .social-proof-section { padding: 60px 0 !important; }
+        }
+        
+        /* ========== SCROLL ANIMATIONS ========== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ========== TRUST LOGOS ========== */
+        .trust-bar {
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        
+        .trust-bar p {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .trust-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            opacity: 0.5;
+        }
+        
+        .trust-logos span {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        /* ========== HERO VIDEO ========== */
+        .hero-video-bg {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            overflow: hidden; z-index: 0;
+        }
+        .hero-video-bg video {
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0.15; filter: blur(2px);
+        }
+
+        /* ========== FEATURE GALLERY CAROUSEL ========== */
+        .carousel-wrapper {
+            position: relative; margin-top: 20px;
+        }
+        .feature-gallery {
+            display: flex; gap: 0; overflow: hidden;
+            padding: 8px 0;
+        }
+        .gallery-item {
+            flex: 0 0 100%; min-width: 100%;
+            border-radius: 12px; overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex; align-items: center; justify-content: center;
+            background: #0a0a0f;
+        }
+        .gallery-item img { max-width: 100%; max-height: 100%; display: block; object-fit: contain; }
+        .carousel-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 44px; height: 44px; border-radius: 50%;
+            background: rgba(255,215,0,0.15); border: 1px solid rgba(255,215,0,0.4);
+            color: var(--gold); font-size: 18px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s; z-index: 5; backdrop-filter: blur(8px);
+        }
+        .carousel-arrow:hover {
+            background: rgba(255,215,0,0.3); transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+        .carousel-arrow.prev { left: -16px; }
+        .carousel-arrow.next { right: -16px; }
+        .carousel-dots {
+            display: flex; justify-content: center; gap: 8px;
+            margin-top: 16px;
+        }
+        .carousel-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(255,255,255,0.2); border: none; cursor: pointer;
+            transition: all 0.3s;
+        }
+        .carousel-dot.active {
+            width: 24px; border-radius: 4px;
+            background: var(--gold);
+        }
+        @media (max-width: 768px) {
+            .carousel-arrow { width: 36px; height: 36px; font-size: 14px; }
+            .carousel-arrow.prev { left: -8px; }
+            .carousel-arrow.next { right: -8px; }
+        }
+
+        /* ========== MID CTA ========== */
+        .mid-cta {
+            padding: 60px 20px; text-align: center;
+            background: linear-gradient(135deg, rgba(255,215,0,0.06) 0%, rgba(255,107,0,0.04) 100%);
+            border-top: 1px solid rgba(255,215,0,0.1);
+            border-bottom: 1px solid rgba(255,215,0,0.1);
+        }
+        .mid-cta p { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+        .mid-cta .btn-primary { font-size: 16px; padding: 16px 36px; }
+
+        /* ========== SUB FEATURES ========== */
+        .sub-features {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px; margin-top: 24px;
+        }
+        .sub-feature {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px; padding: 20px; text-align: center;
+            transition: all 0.3s;
+        }
+        .sub-feature:hover { border-color: rgba(255,215,0,0.3); transform: translateY(-2px); }
+        .sub-feature .sf-icon { font-size: 28px; margin-bottom: 8px; }
+        .sub-feature .sf-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+        .sub-feature .sf-desc { font-size: 12px; color: var(--text-secondary); }
+
+        /* ========== BONUS GRID ========== */
+        .bonus-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px; margin-top: 50px;
+        }
+        .bonus-card {
+            background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px; overflow: hidden; transition: all 0.3s;
+        }
+        .bonus-card:hover { border-color: rgba(255,215,0,0.3); transform: translateY(-4px); }
+        .bonus-card img { width: 100%; display: block; height: 160px; object-fit: cover; object-position: top; }
+        .bonus-card-body { padding: 20px; }
+        .bonus-card-body h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .bonus-card-body p { font-size: 13px; color: var(--text-secondary); }
+
+        /* ========== SOCIAL PROOF GALLERY ========== */
+        .proof-card {
+            position: relative; border-radius: 14px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: var(--bg-card); transition: all 0.35s cubic-bezier(.4,0,.2,1);
+            cursor: zoom-in;
+        }
+        .proof-card:hover {
+            border-color: rgba(255,215,0,0.35);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(255,215,0,0.12);
+        }
+        .proof-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .proof-card::after {
+            content: attr(data-label);
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 10px 14px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            color: #fff; font-size: 12px; font-weight: 600;
+            pointer-events: none;
+        }
+        @media (max-width: 768px) {
+            .proof-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .proof-card[style*='grid-row'] { grid-row: auto !important; }
+        }
+        @media (max-width: 480px) {
+            .proof-grid { grid-template-columns: 1fr !important; }
+        }
+
+        /* ========== LOSS AVERSION ========== */
+        .loss-callout {
+            background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.2);
+            border-radius: 12px; padding: 24px; margin-top: 40px; text-align: center;
+        }
+        .loss-callout p { font-size: 18px; font-weight: 700; color: #ff8888; }
+        .loss-callout .big { font-size: 32px; color: #ff6b6b; }
+
+        /* ========== AUTHORITY ========== */
+        .authority-bar {
+            text-align: center; padding: 30px 20px;
+            background: rgba(255,215,0,0.03);
+            border-top: 1px solid rgba(255,215,0,0.08);
+        }
+        .authority-bar p { font-size: 16px; color: var(--text-secondary); font-weight: 500; }
+        .authority-bar strong { color: var(--gold); }
+
+        @media (max-width: 768px) {
+            .gallery-item { flex: 0 0 92%; }
+            .bonus-grid { grid-template-columns: 1fr; }
+            .sub-features { grid-template-columns: repeat(2, 1fr); }
+            .comparison-table-wrapper {
+                overflow-x: auto; -webkit-overflow-scrolling: touch;
+                margin: 50px -16px 0; padding: 0 16px;
+            }
+            .comparison-table { min-width: 500px; }
+        }
+        @media (max-width: 480px) {
+            .sub-features { grid-template-columns: 1fr; gap: 12px; }
+            .sub-feature { padding: 16px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- URGENCY BANNER -->
+<div class="urgency-banner">
+    🔥 오늘 마감 — 특가 할인 종료까지 <span class="timer" id="countdown">--:--:--</span> | 지금 시작하면 <strong>첫 달 50% 할인</strong>
+</div>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+    <div class="hero-video-bg"><video autoplay muted loop playsinline><source src="images/hero-demo.mp4" type="video/mp4"></video></div>
+
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span>🏆</span>
+            <span>2026 네이버 블로그 자동화 도구 1위</span>
+        </div>
+        
+        <h1>
+            키워드 하나면<br>
+            <span class="highlight">블로그 글이 자동으로 완성됩니다</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+            AI가 글 작성부터 이미지 생성, 발행까지 원클릭으로.<br>
+            하루 10편도 거뜬합니다.
+        </p>
+        
+        <p class="hero-pain">
+            "블로그 하나 운영하는 데 매일 3시간..."<br>
+            이제 그 시간, AI가 대신합니다.
+        </p>
+        
+        <div class="hero-buttons">
+            <a href="https://www.leaderspro.kr/#pricing" class="btn-primary">지금 시작하기</a>
+            <a href="#features" class="btn-secondary">기능 자세히 보기 ↓</a>
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number counter" data-count="2847">0</div>
+                <div class="stat-label">활성 사용자</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number counter" data-count="158430">0</div>
+                <div class="stat-label">발행된 글</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4.9<span style="font-size:0.5em">★</span></div>
+                <div class="stat-label">사용자 만족도</div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- ========== PAIN POINTS ========== -->
+<section class="pain-section">
+    <div class="container">
+        <div class="section-label" style="color: #ff6b6b">😰 이런 고민, 있으시죠?</div>
+        <h2 class="section-title" style="text-align:center">블로그 운영, <span style="color: #ff6b6b">이렇게 힘들어야 하나요?</span></h2>
+        
+        <div class="pain-cards">
+            <div class="pain-card">
+                <div class="icon">⏰</div>
+                <h3>매일 3시간씩 글쓰기</h3>
+                <p>키워드 찾고, 글 쓰고, 이미지 만들고... 하루가 다 가도 1~2편이 한계</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">📉</div>
+                <h3>노출이 안 되는 글</h3>
+                <p>열심히 썼는데 검색에도 안 걸리고, 홈피드에도 안 뜨는 현실</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">🤖</div>
+                <h3>AI 글 저품질 걱정</h3>
+                <p>ChatGPT로 쓰면 AI 티가 나서 저품질 먹을까 불안...</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">💸</div>
+                <h3>수익화가 안 됨</h3>
+                <p>애드포스트 수익은 하루 커피값, 제휴마케팅은 링크 넣기조차 번거로움</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">😓</div>
+                <h3>다계정 관리 불가능</h3>
+                <p>블로그 수익을 키우려면 계정이 여러 개 필요한데... 하나도 힘든 걸 여러 개?</p>
+            </div>
+        </div>
+        
+        <div class="loss-callout fade-up">
+            <p>하루 3시간 × 30일 = <span class="big">90시간</span></p>
+            <p>시급 1만원이면 매달 <span class="big">90만원</span>을 블로그에 버리는 셈입니다</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== MEGA SECTION 1: AI 글 작성 ========== -->
+<section class="features-section" id="features">
+    <div class="container">
+        <div class="section-label" style="color: var(--neon-green)">🧠 MEGA FEATURE 01</div>
+        <h2 class="section-title" style="text-align:center">10종 AI 엔진이<br><span style="color: var(--neon-green)">전문가 수준의 글을 대신 써줍니다</span></h2>
+        <p class="section-desc">Gemini 3.1 Flash · GPT-5.4 · Claude 4 Sonnet — 세계 최고 AI를 한 곳에서</p>
+        
+        <div class="feature-row fade-up">
+            <div class="feature-text">
+                <span class="feature-tag tag-ai">AI POWERED</span>
+                <h3>키워드 하나로<br>6,000~10,000자 고품질 글 완성</h3>
+                <p>10개 AI 엔진이 네이버 SEO에 최적화된 자연스러운 문체로 글을 생성합니다. AI 탐지를 우회하며, 실시간 SEO 점수까지 표시합니다.</p>
+                <ul class="feature-bullets">
+                    <li>키워드 입력 → 10종 AI 엔진 중 최적 선택</li>
+                    <li>네이버 AI 탐지 우회 자연 문체</li>
+                    <li>SEO 점수 · AI 탐지 위험도 실시간 분석</li>
+                    <li>14개 카테고리별 홈피드 최적화 제목 생성</li>
+                </ul>
+            </div>
+            <div class="feature-visual" style="margin:auto 0;align-self:center">
+                <div class="feature-screenshot">
+                    <img src="images/mega01-hero.jpg" alt="키워드 하나로 고품질 글 완성" loading="lazy">
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-wrapper fade-up">
+            <button class="carousel-arrow prev" onclick="slideCarousel(this,-1)">❮</button>
+            <div class="feature-gallery">
+                <div class="gallery-item"><img src="images/engine-gemini.png" alt="Gemini 엔진" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/engine-gpt.png" alt="GPT 엔진" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/engine-claude.png" alt="Claude 엔진" loading="lazy"></div>
+            </div>
+            <button class="carousel-arrow next" onclick="slideCarousel(this,1)">❯</button>
+            <div class="carousel-dots"><button class="carousel-dot active"></button><button class="carousel-dot"></button><button class="carousel-dot"></button></div>
+        </div>
+        
+        <div class="sub-features fade-up">
+            <div class="sub-feature"><div class="sf-icon">🎯</div><div class="sf-title">4가지 콘텐츠 모드</div><div class="sf-desc">SEO · 홈판 · 쇼핑커넥트 · 사용자정의</div></div>
+            <div class="sub-feature"><div class="sf-icon">✍️</div><div class="sf-title">11가지 글 톤/스타일</div><div class="sf-desc">전문적 · 친근한 · 경험담 등</div></div>
+            <div class="sub-feature"><div class="sf-icon">📂</div><div class="sf-title">32개 카테고리</div><div class="sf-desc">자동 분류 · 최적 키워드 매칭</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MID CTA 1 ===== -->
+<div class="mid-cta">
+    <p>✍️ AI가 쓴 글, 직접 확인해보세요</p>
+    <a href="https://www.leaderspro.kr/#pricing" class="btn-primary">무료 체험 시작 →</a>
+</div>
+
+<!-- ========== MEGA SECTION 2: AI 이미지 & 영상 ========== -->
+<section class="features-section" style="background: var(--bg-dark)">
+    <div class="container">
+        <div class="section-label" style="color: #ff6b6b">🎨 MEGA FEATURE 02</div>
+        <h2 class="section-title" style="text-align:center">6종 AI 이미지 엔진 +<br><span style="color: #ff6b6b">Veo 영상 자동 생성</span></h2>
+        <p class="section-desc">8가지 스타일 프리셋으로 클릭 한 번이면 블로그 이미지 완성. 저작권 걱정 제로.</p>
+        
+        <div class="feature-row fade-up">
+            <div class="feature-text">
+                <span class="feature-tag tag-image">AI IMAGE</span>
+                <h3>나노 바나나 프로 · FLUX-2<br>6종 이미지 엔진 탑재</h3>
+                <p>글 내용을 분석해 맞춤 이미지를 자동 생성. 한국형 이미지(한국인, 한국 배경) 특화. ImageFX로 무료 1,000장/일 생성 가능.</p>
+                <ul class="feature-bullets">
+                    <li>글 내용 분석 → 맞춤 이미지 자동 생성</li>
+                    <li>8가지 스타일 프리셋 (수채화, 3D, 웹툰 등)</li>
+                    <li>Veo AI 영상 자동 변환</li>
+                    <li>한국형 이미지 (한국인, 한국 배경)</li>
+                </ul>
+            </div>
+            <div class="feature-visual" style="margin:auto 0;align-self:center">
+                <div class="feature-screenshot">
+                    <img src="images/mega02-hero.jpg" alt="나노 바나나 프로 FLUX-2 이미지 엔진" loading="lazy">
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-wrapper fade-up">
+            <button class="carousel-arrow prev" onclick="slideCarousel(this,-1)">❮</button>
+            <div class="feature-gallery">
+                <div class="gallery-item"><img src="images/image-styles-grid.png" alt="이미지 스타일" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/image-result.png" alt="이미지 생성 결과" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/image-editor.png" alt="이미지 편집기" loading="lazy"></div>
+            </div>
+            <button class="carousel-arrow next" onclick="slideCarousel(this,1)">❯</button>
+            <div class="carousel-dots"><button class="carousel-dot active"></button><button class="carousel-dot"></button><button class="carousel-dot"></button></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== MEGA SECTION 3: 원클릭 자동 발행 ========== -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-label" style="color: var(--neon-green)">🚀 MEGA FEATURE 03</div>
+        <h2 class="section-title" style="text-align:center">키워드 입력 → AI 글 작성 → 이미지 생성 → 발행<br><span style="color: var(--neon-green)">전부 자동.</span></h2>
+        <p class="section-desc">발행 버튼 한 번이면 끝. 예약 발행, 연속 발행, 다중계정까지.</p>
+        
+        <div class="feature-row fade-up">
+            <div class="feature-text">
+                <span class="feature-tag tag-auto">FULL AUTO</span>
+                <h3>자는 동안에도<br>블로그가 운영됩니다</h3>
+                <p>글 작성부터 이미지 삽입, 썸네일 생성, 카테고리 지정, 발행까지 올 자동. 지능형 간격 조절로 봇 탐지도 회피합니다.</p>
+                <ul class="feature-bullets">
+                    <li>글 작성 → 이미지 → 발행 완전 자동</li>
+                    <li>예약 발행 · 연속 발행 · 큐 시스템</li>
+                    <li>스마트 시간차 발행 (캡차 방지)</li>
+                    <li>에러 자동 복구 &amp; 재시도</li>
+                </ul>
+            </div>
+            <div class="feature-visual" style="margin:auto 0;align-self:center">
+                <div class="feature-screenshot">
+                    <img src="images/mega03-hero.jpg" alt="자는 동안에도 블로그가 운영됩니다" loading="lazy">
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-wrapper fade-up">
+            <button class="carousel-arrow prev" onclick="slideCarousel(this,-1)">❮</button>
+            <div class="feature-gallery">
+                <div class="gallery-item"><img src="images/smart-publish.png" alt="스마트 발행" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/continuous-publish.png" alt="연속 발행" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/schedule-calendar.png" alt="스케줄 캘린더" loading="lazy"></div>
+            </div>
+            <button class="carousel-arrow next" onclick="slideCarousel(this,1)">❯</button>
+            <div class="carousel-dots"><button class="carousel-dot active"></button><button class="carousel-dot"></button><button class="carousel-dot"></button></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MID CTA 2 ===== -->
+<div class="mid-cta">
+    <p>⚡ 하루 10편 자동 발행, 지금 시작하기</p>
+    <a href="https://www.leaderspro.kr/#pricing" class="btn-primary">요금제 확인 →</a>
+</div>
+
+<!-- ========== MEGA SECTION 4: 다중계정 ========== -->
+<section class="features-section" style="background: var(--bg-dark)">
+    <div class="container">
+        <div class="section-label" style="color: var(--neon-blue)">👥 MEGA FEATURE 04</div>
+        <h2 class="section-title" style="text-align:center">계정 6개를<br><span style="color: var(--neon-blue)">한 화면에서 동시 관리</span></h2>
+        <p class="section-desc">계정별 독립 설정, 순차 발행 대기열, 원클릭 일괄 발행. 블로그 팜 운영의 끝판왕.</p>
+        
+        <div class="feature-row fade-up">
+            <div class="feature-text">
+                <span class="feature-tag tag-auto">MULTI ACCOUNT</span>
+                <h3>블로그 수익 스케일<br>무제한 계정 동시 운영</h3>
+                <p>한 화면에서 모든 계정을 관리하고, 대기열 시스템으로 순차 자동 발행. 계정별 독립 설정으로 최적화된 운영이 가능합니다.</p>
+                <ul class="feature-bullets">
+                    <li>다중 계정 무제한 동시 운영</li>
+                    <li>계정별 독립 설정 (카테고리, 톤, 스타일)</li>
+                    <li>순차 발행 대기열 시스템</li>
+                    <li>한 번에 전체 계정 일괄 발행</li>
+                </ul>
+            </div>
+            <div class="feature-visual" style="margin:auto 0;align-self:center">
+                <div class="feature-screenshot">
+                    <img src="images/mega04-hero.jpg" alt="블로그 수익 스케일 무제한 계정" loading="lazy">
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-wrapper fade-up">
+            <button class="carousel-arrow prev" onclick="slideCarousel(this,-1)">❮</button>
+            <div class="feature-gallery">
+                <div class="gallery-item"><img src="images/multi-account.png" alt="다중계정 관리" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/multi-account-settings.png" alt="다중계정 설정" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/multi_account.png" alt="다중계정 풀오토" loading="lazy"></div>
+            </div>
+            <button class="carousel-arrow next" onclick="slideCarousel(this,1)">❯</button>
+            <div class="carousel-dots"><button class="carousel-dot active"></button><button class="carousel-dot"></button><button class="carousel-dot"></button></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== MEGA SECTION 5: 쇼핑 커넥트 ========== -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-label" style="color: var(--gold)">💰 MEGA FEATURE 05</div>
+        <h2 class="section-title" style="text-align:center">블로그로 매달 부수입 만드는<br><span class="highlight">가장 쉬운 방법</span></h2>
+        <p class="section-desc">쿠팡/네이버 제휴링크 자동 삽입 + CTA 배너 자동 생성. 글 쓰면서 돈도 벌기.</p>
+        
+        <div class="feature-row fade-up">
+            <div class="feature-text">
+                <span class="feature-tag tag-seo">SHOPPING CONNECT</span>
+                <h3>제휴 마케팅 자동화<br>CTA 배너까지 원클릭</h3>
+                <p>쇼핑 커넥트로 쿠팡/네이버 제휴링크를 자동 삽입하고, 전환율 높은 CTA 배너와 장단점 비교표를 자동 생성합니다.</p>
+                <ul class="feature-bullets">
+                    <li>쿠팡 파트너스 · 네이버 제휴링크 자동 삽입</li>
+                    <li>CTA 배너 자동 생성 (커스텀 디자인)</li>
+                    <li>장단점 비교표 자동 삽입</li>
+                    <li>베스트 상품 수집기 연동</li>
+                </ul>
+            </div>
+            <div class="feature-visual" style="margin:auto 0;align-self:center">
+                <div class="feature-screenshot">
+                    <img src="images/mega05-hero.jpg" alt="제휴 마케팅 CTA 배너 원클릭" loading="lazy">
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-wrapper fade-up">
+            <button class="carousel-arrow prev" onclick="slideCarousel(this,-1)">❮</button>
+            <div class="feature-gallery">
+                <div class="gallery-item"><img src="images/shopping-connect.png" alt="쇼핑커넥트" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/shopping-cta-preview.png" alt="CTA 미리보기" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/shopping-banner-preview.png" alt="배너 미리보기" loading="lazy"></div>
+            </div>
+            <button class="carousel-arrow next" onclick="slideCarousel(this,1)">❯</button>
+            <div class="carousel-dots"><button class="carousel-dot active"></button><button class="carousel-dot"></button><button class="carousel-dot"></button></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MID CTA 3 ===== -->
+<div class="mid-cta">
+    <p>💰 쇼핑 커넥트로 블로그 수익화 시작</p>
+    <a href="https://www.leaderspro.kr/#pricing" class="btn-primary">지금 시작하기 →</a>
+</div>
+
+<!-- ========== MEGA SECTION 6: 보너스 도구 ========== -->
+<section class="features-section" style="background: var(--bg-dark)">
+    <div class="container">
+        <div class="section-label" style="color: var(--gold)">🛠️ MEGA FEATURE 06</div>
+        <h2 class="section-title" style="text-align:center">이것까지 다 포함?<br><span class="highlight">네, 전부 포함입니다.</span></h2>
+        <p class="section-desc">썸네일 생성, 이미지 편집, SEO 분석, AI탐지 검사까지. 블로거에게 필요한 모든 것.</p>
+        
+        <div class="bonus-grid fade-up">
+            <div class="bonus-card">
+                <img src="images/thumbnail-generator.png" alt="썸네일 생성기" loading="lazy">
+                <div class="bonus-card-body">
+                    <h4>🎨 썸네일 생성기</h4>
+                    <p>텍스트/배경/스타일 프리셋으로 전문가급 썸네일을 원클릭 생성</p>
+                </div>
+            </div>
+            <div class="bonus-card">
+                <img src="images/image-editor.png" alt="이미지 편집기" loading="lazy">
+                <div class="bonus-card-body">
+                    <h4>✂️ 이미지 편집기</h4>
+                    <p>크기 조절, 필터, AI 보정 올인원 편집 도구</p>
+                </div>
+            </div>
+            <div class="bonus-card">
+                <img src="images/seo-analysis.png" alt="SEO 분석" loading="lazy">
+                <div class="bonus-card-body">
+                    <h4>📊 SEO 분석</h4>
+                    <p>실시간 최적화 점수로 검색 1페이지 노출 극대화</p>
+                </div>
+            </div>
+            <div class="bonus-card">
+                <img src="images/ai-detection.png" alt="AI 탐지 검사" loading="lazy">
+                <div class="bonus-card-body">
+                    <h4>🛡️ AI 탐지 검사</h4>
+                    <p>발행 전 AI 글 탐지율 체크로 저품질 방지</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== COMPARISON ========== -->
+<section class="comparison-section">
+    <div class="container">
+        <div class="section-label" style="color: var(--neon-blue)">📊 비교</div>
+        <h2 class="section-title" style="text-align:center">왜 Better Life Naver인가?</h2>
+        
+        <table class="comparison-table fade-up">
+            <thead>
+                <tr>
+                    <th>기능</th>
+                    <th>수동 블로깅</th>
+                    <th>타사 자동화</th>
+                    <th>Better Life Naver</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AI 글 작성</td>
+                    <td class="cross">✕</td>
+                    <td class="partial">일부 지원</td>
+                    <td class="check">✓ 10종 AI 엔진</td>
+                </tr>
+                <tr>
+                    <td>AI 이미지 생성</td>
+                    <td class="cross">✕</td>
+                    <td class="cross">✕</td>
+                    <td class="check">✓ 6종 이미지 엔진</td>
+                </tr>
+                <tr>
+                    <td>완전 자동 발행</td>
+                    <td class="cross">✕</td>
+                    <td class="partial">반자동</td>
+                    <td class="check">✓ 100% 풀오토</td>
+                </tr>
+                <tr>
+                    <td>다중 계정</td>
+                    <td class="cross">✕</td>
+                    <td class="partial">제한적</td>
+                    <td class="check">✓ 무제한</td>
+                </tr>
+                <tr>
+                    <td>AI 탐지 우회</td>
+                    <td class="cross">✕</td>
+                    <td class="cross">✕</td>
+                    <td class="check">✓ 자동 우회</td>
+                </tr>
+                <tr>
+                    <td>스케줄 발행</td>
+                    <td class="cross">✕</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓ 스마트 예약</td>
+                </tr>
+                <tr>
+                    <td>쇼핑 커넥트</td>
+                    <td class="cross">✕</td>
+                    <td class="cross">✕</td>
+                    <td class="check">✓ 자동 수익화</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- AUTHORITY BAR -->
+<div class="authority-bar">
+    <p><strong>대한민국 블로그 자동화 1위</strong> — 2,847명이 선택한 이유가 있습니다</p>
+</div>
+
+<!-- ========== SOCIAL PROOF ========== -->
+<section class="proof-section">
+    <div class="container">
+        <div class="section-label" style="color: var(--gold)">💬 실제 사용 후기</div>
+        <h2 class="section-title" style="text-align:center">사용자들의 <span class="highlight">리얼 후기</span></h2>
+        
+        <div class="testimonial-grid">
+            <div class="testimonial-card fade-up">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">👩‍💼</div>
+                    <div>
+                        <div class="testimonial-name">김*진</div>
+                        <div class="testimonial-role">육아맘 블로거 · 6개월차</div>
+                    </div>
+                </div>
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"아이 재우고 새벽에 글 쓰던 게 일상이었는데... 이제 키워드만 넣으면 AI가 다 써줘요. 하루 5편씩 올리니까 방문자가 3배 늘었어요!"</p>
+                <div class="testimonial-result">📈 월 방문자 3,200 → 12,400</div>
+            </div>
+            <div class="testimonial-card fade-up">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">👨‍💻</div>
+                    <div>
+                        <div class="testimonial-name">이*현</div>
+                        <div class="testimonial-role">직장인 부업 블로거 · 3개월차</div>
+                    </div>
+                </div>
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"퇴근 후 30분이면 다음날 발행할 글 10편을 세팅합니다. 쇼핑 커넥트로 쿠팡 수익도 자동이라 진짜 편해요."</p>
+                <div class="testimonial-result">💰 월 부수입 0원 → 87만원</div>
+            </div>
+            <div class="testimonial-card fade-up">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">👨‍🔧</div>
+                    <div>
+                        <div class="testimonial-name">박*수</div>
+                        <div class="testimonial-role">전업 블로거 · 1년차</div>
+                    </div>
+                </div>
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"6개 블로그를 혼자 운영하는 게 가능해졌습니다. 다중계정 기능이 진짜 사기예요. 이전에는 하나도 벅찼는데."</p>
+                <div class="testimonial-result">📊 블로그 6개 동시 운영 중</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MID CTA 4 (FINAL) ===== -->
+<div class="mid-cta" style="background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(102,126,234,0.08) 100%);">
+    <p>🚀 지금 시작하면 내일부터 블로그가 자동으로 돌아갑니다</p>
+    <a href="https://www.leaderspro.kr/#pricing" class="btn-primary" style="font-size:18px; padding:18px 44px;">요금제 보기 →</a>
+</div>
+
+<!-- ========== PRICING ========== -->
+<section class="pricing-section" id="pricing">
+    <div class="container">
+        <div class="section-label" style="color: var(--gold)">💎 PRICING</div>
+        <h2 class="section-title" style="text-align:center">블로그 외주 1편 가격으로<br><span class="highlight">한 달을 자동화하세요</span></h2>
+        <p class="pricing-subtitle">매달 블로그 외주비 90만원 vs Better Life Naver 월 5만원</p>
+        <div class="pricing-savings-bar">💡 하루 커피 한잔 값으로 블로그 완전 자동화</div>
+        
+        <div class="pricing-grid">
+            <!-- 1개월 -->
+            <div class="pricing-card fade-up">
+                <div class="pricing-header">
+                    <h3>스타터</h3>
+                    <div class="pricing-price">
+                        <span class="original-price">₩100,000</span>
+                        <span class="current-price">₩50,000</span>
+                    </div>
+                    <div class="pricing-per">1개월</div>
+                    <div class="pricing-discount-tag">50% OFF — 첫 달 한정</div>
+                </div>
+                <ul class="pricing-features">
+                    <li><span class="check-icon">✓</span> AI 10종 엔진 풀 액세스</li>
+                    <li><span class="check-icon">✓</span> AI 이미지 6종 엔진</li>
+                    <li><span class="check-icon">✓</span> 풀오토 자동 발행</li>
+                    <li><span class="check-icon">✓</span> 다중계정 관리</li>
+                    <li><span class="check-icon">✓</span> 쇼핑 커넥트 수익화</li>
+                    <li><span class="check-icon">✓</span> 무제한 글 생성</li>
+                </ul>
+                <a href="https://www.leaderspro.kr/#pricing" class="btn-pricing">시작하기 →</a>
+            </div>
+            
+            <!-- 3개월 — 인기 -->
+            <div class="pricing-card popular fade-up">
+                <div class="popular-badge">🔥 가장 인기</div>
+                <div class="pricing-header">
+                    <h3>프로</h3>
+                    <div class="pricing-price">
+                        <span class="original-price">₩300,000</span>
+                        <span class="current-price">₩120,000</span>
+                    </div>
+                    <div class="pricing-per">3개월 · 월 ₩40,000</div>
+                    <div class="pricing-discount-tag">60% OFF — ₩180,000 절약</div>
+                </div>
+                <ul class="pricing-features">
+                    <li><span class="check-icon">✓</span> 스타터의 모든 기능</li>
+                    <li><span class="check-icon">✓</span> 우선 기술 지원</li>
+                    <li><span class="check-icon">✓</span> 신기능 얼리 액세스</li>
+                    <li><span class="check-icon">✓</span> 보너스 키워드팩 증정</li>
+                    <li><span class="check-icon">✓</span> 카카오 VIP 채널 초대</li>
+                </ul>
+                <a href="https://www.leaderspro.kr/#pricing" class="btn-pricing btn-popular">가장 인기 있는 플랜 →</a>
+            </div>
+            
+            <!-- 1년 -->
+            <div class="pricing-card fade-up">
+                <div class="pricing-header">
+                    <h3>마스터</h3>
+                    <div class="pricing-price">
+                        <span class="original-price">₩1,200,000</span>
+                        <span class="current-price">₩400,000</span>
+                    </div>
+                    <div class="pricing-per">1년 · 월 ₩33,333</div>
+                    <div class="pricing-discount-tag">67% OFF — ₩800,000 절약</div>
+                </div>
+                <ul class="pricing-features">
+                    <li><span class="check-icon">✓</span> 프로의 모든 기능</li>
+                    <li><span class="check-icon">✓</span> 전담 매니저 배정</li>
+                    <li><span class="check-icon">✓</span> 커스텀 프롬프트 설정</li>
+                    <li><span class="check-icon">✓</span> 베타 기능 우선 체험</li>
+                    <li><span class="check-icon">✓</span> 블로그 성장 컨설팅</li>
+                </ul>
+                <a href="https://www.leaderspro.kr/#pricing" class="btn-pricing">시작하기 →</a>
+            </div>
+        </div>
+        
+        <!-- 영구제 -->
+        <div class="pricing-permanent fade-up">
+            <a href="https://www.leaderspro.kr/#pricing">
+                🏆 영구제 ₩2,000,000 — 평생 업데이트 · 평생 지원
+            </a>
+        </div>
+        
+        <!-- 보장 스트립 -->
+        <div class="guarantee-strip">
+            <div class="guarantee-strip-item"><span class="gs-icon">🔒</span> 안전한 결제</div>
+            <div class="guarantee-strip-item"><span class="gs-icon">🔄</span> 7일 전액 환불</div>
+            <div class="guarantee-strip-item"><span class="gs-icon">💬</span> 카카오 즉시 지원</div>
+            <div class="guarantee-strip-item"><span class="gs-icon">🔑</span> 즉시 활성화</div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== GUARANTEE ========== -->
+<section class="guarantee-section">
+    <div class="container" style="text-align:center">
+        <div class="guarantee-badge">🛡️</div>
+        <h2 class="section-title">100% 만족 보장</h2>
+        <p class="section-desc">
+            사용 후 만족하지 않으면 7일 이내 전액 환불.<br>
+            질문이나 어려움이 있으면 카카오톡 1:1 문의로 즉시 도움을 드립니다.
+        </p>
+        <div style="margin-top:24px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+            <div style="background:rgba(255,255,255,0.05); border-radius:12px; padding:16px 24px;">
+                <div style="font-size:24px;">🔒</div>
+                <div style="color:#ccc; font-size:14px;">안전한 결제</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.05); border-radius:12px; padding:16px 24px;">
+                <div style="font-size:24px;">💬</div>
+                <div style="color:#ccc; font-size:14px;">카카오 1:1 지원</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.05); border-radius:12px; padding:16px 24px;">
+                <div style="font-size:24px;">🔄</div>
+                <div style="color:#ccc; font-size:14px;">7일 환불 보장</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SOCIAL PROOF ========== -->
+<section class="social-proof-section" style="padding:80px 0; position:relative; background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(255,215,0,0.02) 50%, var(--bg-dark) 100%);">
+    <div class="container">
+        <div class="section-label" style="color: var(--neon-green)">📊 실제 성과</div>
+        <h2 class="section-title" style="text-align:center">말이 아닌, <br><span class="highlight">결과로 증명합니다.</span></h2>
+        <p class="section-desc">Better Life Naver 사용자들의 실제 블로그 통계와 수익 데이터입니다.</p>
+
+        <!-- Stats counter bar -->
+        <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin:40px 0 48px">
+            <div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);border-radius:16px;padding:20px 32px;text-align:center;min-width:160px">
+                <div style="font-size:32px;font-weight:900;background:var(--gradient-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">19,896</div>
+                <div style="color:var(--text-secondary);font-size:13px;margin-top:4px">일 최대 조회수</div>
+            </div>
+            <div style="background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.2);border-radius:16px;padding:20px 32px;text-align:center;min-width:160px">
+                <div style="font-size:32px;font-weight:900;color:var(--neon-green)">₩12,978</div>
+                <div style="color:var(--text-secondary);font-size:13px;margin-top:4px">일 수익 달성</div>
+            </div>
+            <div style="background:rgba(0,170,255,0.06);border:1px solid rgba(0,170,255,0.2);border-radius:16px;padding:20px 32px;text-align:center;min-width:160px">
+                <div style="font-size:32px;font-weight:900;color:var(--neon-blue)">10,003</div>
+                <div style="color:var(--text-secondary);font-size:13px;margin-top:4px">일 방문자 돌파</div>
+            </div>
+        </div>
+
+        <!-- Masonry gallery grid -->
+        <div class="proof-grid fade-up" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1100px;margin:0 auto">
+            <!-- Hero: 수익 인증 (spans 2 rows) -->
+            <div class="proof-card" style="grid-row:span 2" data-label="💰 수익 인증">
+                <img src="images/proof-revenue-12978.jpg" alt="일 수익 ₩12,978 달성" loading="lazy">
+            </div>
+            <!-- 조회수 9,177 -->
+            <div class="proof-card" data-label="📈 조회수 9,177">
+                <img src="images/proof-views-9177.jpg" alt="일 조회수 9,177" loading="lazy">
+            </div>
+            <!-- 조회수 급상승 차트 -->
+            <div class="proof-card" data-label="🚀 조회수 급상승">
+                <img src="images/proof-growth-chart.jpg" alt="1,062 → 5,928 급상승" loading="lazy">
+            </div>
+            <!-- 카톡 만명 인증 -->
+            <div class="proof-card" style="grid-row:span 2" data-label="💬 사용자 후기">
+                <img src="images/proof-chat-10000.jpg" alt="오늘 만명 찍었네요 카톡 인증" loading="lazy">
+            </div>
+            <!-- 조회수 1,514 -->
+            <div class="proof-card" data-label="📊 일 1,514 조회">
+                <img src="images/proof-views-1514.jpg" alt="일 1,514 조회수" loading="lazy">
+            </div>
+            <!-- 조회수 1,187 -->
+            <div class="proof-card" data-label="📊 일 1,187 조회">
+                <img src="images/proof-views-1187.jpg" alt="일 1,187 조회수" loading="lazy">
+            </div>
+            <!-- 글별 조회수 1,122 급상승 -->
+            <div class="proof-card" data-label="⚡ 글별 1,122 조회">
+                <img src="images/proof-post-1122.png" alt="글별 조회수 1,122 급상승" loading="lazy">
+            </div>
+            <!-- 최고 기록: 19,896 -->
+            <div class="proof-card" data-label="🏆 최고 19,896">
+                <img src="images/proof-views-19896.png" alt="조회수 19,896 달성" loading="lazy">
+            </div>
+            <!-- 사용자 리뷰 -->
+            <div class="proof-card" data-label="💬 사용자 리뷰">
+                <img src="images/proof-chat-review.png" alt="리더남님 프로그램 후기" loading="lazy">
+            </div>
+        </div>
+
+        <!-- Video proof -->
+        <div style="text-align:center;margin-top:32px">
+            <p style="color:var(--text-secondary);font-size:14px;margin-bottom:12px">📹 실제 자동 발행 영상</p>
+            <video src="images/proof-video.mp4" controls playsinline muted preload="metadata" style="max-width:600px;width:100%;border-radius:16px;border:1px solid rgba(255,255,255,0.1)"></video>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-section">
+    <div class="container">
+        <div class="section-label" style="color: var(--neon-blue)">❓ 자주 묻는 질문</div>
+        <h2 class="section-title" style="text-align:center">궁금한 점이 있으신가요?</h2>
+        
+        <div class="faq-list">
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>네이버 저품질에 걸리지 않나요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Better Life Naver는 네이버 AI 탐지를 우회하는 자연스러운 문체로 글을 생성합니다. 실시간 AI 탐지 위험도 분석 기능으로 발행 전 안전성을 확인할 수 있으며, 스마트 시간차 발행으로 봇 탐지도 방지합니다.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>AI가 작성한 글의 품질은 어떤가요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Gemini, GPT, Claude 등 세계 최고 수준의 AI 엔진 10종이 네이버 SEO에 최적화된 6,000~10,000자 분량의 글을 작성합니다. 14개 카테고리별 맞춤 프롬프트와 11가지 문체 스타일로 전문가 수준의 콘텐츠를 생성합니다.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>쇼핑 커넥트로 얼마나 벌 수 있나요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>수익은 블로그 방문자 수와 포스팅 빈도에 따라 달라집니다. 하루 5~10편씩 꾸준히 발행하는 사용자들은 평균 월 30~100만원의 제휴마케팅 수익을 올리고 있습니다. 쿠팡 파트너스와 네이버 제휴링크가 자동으로 삽입됩니다.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>환불은 어떻게 하나요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>구매 후 7일 이내에 카카오톡 1:1 문의로 환불 요청하시면 전액 환불해 드립니다. 어떠한 조건이나 위약금도 없습니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FINAL CTA ========== -->
+<section class="final-cta-section">
+    <div class="container" style="text-align:center">
+        <h2 class="section-title" style="font-size:2.5rem">지금 시작하면<br><span class="highlight">내일부터 블로그가 자동으로 돌아갑니다</span></h2>
+        <p class="section-desc" style="max-width:600px; margin:0 auto 32px">더 이상 글쓰기에 시간 낭비하지 마세요.<br>Better Life Naver가 당신의 블로그 수익을 바꿔드립니다.</p>
+        <a href="https://www.leaderspro.kr/#pricing" class="btn-primary" style="font-size:20px; padding:20px 48px;">지금 시작하기 →</a>
+        <p style="margin-top:16px; color:#888; font-size:14px;">🔒 안전한 결제 · 7일 환불 보장 · 카카오톡 즉시 지원</p>
+    </div>
+</section>
+
+<!-- FLOATING CTA (Mobile) -->
+<div class="floating-cta">
+    <a href="https://www.leaderspro.kr/#pricing" class="btn-primary" style="width:100%; text-align:center; font-size:16px; padding:16px;">
+        🚀 지금 시작하기 — 첫 달 50% 할인
+    </a>
+</div>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+// Countdown Timer
+function updateCountdown() {
+    const now = new Date();
+    const endOfDay = new Date(now);
+    endOfDay.setHours(23, 59, 59, 999);
+    const diff = endOfDay - now;
+    
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    const el = document.getElementById('countdown');
+    if (el) el.textContent = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Counter Animation
+const counters = document.querySelectorAll('.counter');
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const target = parseInt(entry.target.getAttribute('data-count'));
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                entry.target.textContent = Math.floor(current).toLocaleString();
+            }, 20);
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
+
+// Fade-up Animation
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Carousel Logic
+function slideCarousel(btn, dir) {
+    const wrapper = btn.closest('.carousel-wrapper');
+    const gallery = wrapper.querySelector('.feature-gallery');
+    const items = gallery.querySelectorAll('.gallery-item');
+    const dots = wrapper.querySelectorAll('.carousel-dot');
+    const total = items.length;
+    
+    let current = parseInt(wrapper.dataset.index || '0');
+    current += dir;
+    if (current < 0) current = total - 1;
+    if (current >= total) current = 0;
+    
+    wrapper.dataset.index = current;
+    items.forEach(item => {
+        item.style.transform = `translateX(-${current * 100}%)`;
+    });
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === current);
+    });
+}
+
+// Dot click navigation
+document.querySelectorAll('.carousel-dot').forEach(dot => {
+    dot.addEventListener('click', function() {
+        const wrapper = this.closest('.carousel-wrapper');
+        const dots = wrapper.querySelectorAll('.carousel-dot');
+        const items = wrapper.querySelectorAll('.gallery-item');
+        const idx = Array.from(dots).indexOf(this);
+        
+        wrapper.dataset.index = idx;
+        items.forEach(item => {
+            item.style.transform = `translateX(-${idx * 100}%)`;
+        });
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    });
+});
+
+// Touch swipe support
+document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+    let startX = 0;
+    const gallery = wrapper.querySelector('.feature-gallery');
+    gallery.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive: true});
+    gallery.addEventListener('touchend', e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+            const nextBtn = wrapper.querySelector(diff > 0 ? '.carousel-arrow.next' : '.carousel-arrow.prev');
+            if (nextBtn) nextBtn.click();
+        }
+    }, {passive: true});
+});
+</script>
+
+<!-- ========== LIGHTBOX MODAL ========== -->
+<div id="lightbox-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);cursor:zoom-out;align-items:center;justify-content:center" onclick="this.style.display='none'">
+    <img id="lightbox-img" style="max-width:92vw;max-height:90vh;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.6);object-fit:contain;cursor:default" onclick="event.stopPropagation()">
+    <button onclick="document.getElementById('lightbox-overlay').style.display='none'" style="position:absolute;top:24px;right:32px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:28px;width:44px;height:44px;border-radius:50%;cursor:pointer;backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;transition:background .2s" onmouseenter="this.style.background='rgba(255,255,255,.3)'" onmouseleave="this.style.background='rgba(255,255,255,.15)'">&times;</button>
+</div>
+<script>
+// Lightbox: click any bonus-card or gallery image to enlarge
+document.querySelectorAll('.bonus-card img, .gallery-item img, .feature-visual img, .proof-card img').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', e => {
+        e.stopPropagation();
+        const overlay = document.getElementById('lightbox-overlay');
+        document.getElementById('lightbox-img').src = img.src;
+        overlay.style.display = 'flex';
+    });
+});
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.getElementById('lightbox-overlay').style.display = 'none';
+});
+</script>
+
+</body>
+</html>
