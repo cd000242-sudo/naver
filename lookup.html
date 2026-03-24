@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문 조회 — Leaders Pro</title>
+    <meta name="description" content="Leaders Pro 라이선스 코드 조회. 이메일 또는 주문번호로 구매 내역을 확인하세요.">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">홈</a>
+                <a href="index.html#pricing" class="nav-link">가격</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="lookup-container">
+        <div class="lookup-card">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <div style="font-size: 2.5rem; margin-bottom: 8px;">🔍</div>
+                <h2>주문 조회</h2>
+                <p>구매 시 입력한 이메일 또는 주문번호로<br>라이선스 코드를 확인하세요.</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="lookup-tabs" style="display: flex; gap: 8px; margin-bottom: 20px;">
+                <button class="lookup-tab active" id="tab-email" onclick="switchTab('email')"
+                    style="flex:1; padding: 10px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: var(--radius-sm); color: var(--gold-primary); font-weight: 600; font-size: 0.85rem; cursor: pointer; font-family: var(--font-primary); transition: all 0.2s;">
+                    📧 이메일로 조회
+                </button>
+                <button class="lookup-tab" id="tab-order" onclick="switchTab('order')"
+                    style="flex:1; padding: 10px; background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); color: var(--text-secondary); font-weight: 500; font-size: 0.85rem; cursor: pointer; font-family: var(--font-primary); transition: all 0.2s;">
+                    📋 주문번호로 조회
+                </button>
+            </div>
+
+            <!-- Email Lookup -->
+            <div id="email-lookup">
+                <input type="email" class="lookup-input" id="lookup-email" placeholder="구매 시 입력한 이메일 주소">
+                <button class="btn-lookup" onclick="lookupByEmail()">조회하기</button>
+            </div>
+
+            <!-- Order ID Lookup -->
+            <div id="order-lookup" class="hidden">
+                <input type="text" class="lookup-input" id="lookup-order-id" placeholder="주문번호 (예: LP-1234567890-ABCDEF)">
+                <button class="btn-lookup" onclick="lookupByOrderId()">조회하기</button>
+            </div>
+
+            <!-- Loading -->
+            <div id="lookup-loading" class="hidden" style="text-align: center; padding: 30px 0;">
+                <div class="loading-spinner-lg"></div>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 12px;">조회 중...</p>
+            </div>
+
+            <!-- Results -->
+            <div id="lookup-results" class="hidden"></div>
+
+            <!-- Error -->
+            <div id="lookup-error" class="hidden"
+                style="margin-top: 20px; padding: 16px; background: rgba(255,92,117,0.06); border: 1px solid rgba(255,92,117,0.15); border-radius: var(--radius-sm); text-align: center;">
+                <p style="font-size: 0.85rem; color: var(--error); font-weight: 600; margin-bottom: 4px;" id="lookup-error-title">조회 실패</p>
+                <p style="font-size: 0.8rem; color: var(--text-secondary);" id="lookup-error-message"></p>
+            </div>
+        </div>
+
+        <!-- Help Notice -->
+        <div style="margin-top: 20px; text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+            조회가 되지 않으시면 <a href="mailto:cd000242@gmail.com" style="color: var(--gold-primary);">cd000242@gmail.com</a>으로 문의해주세요.
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+                <span>Leaders Pro</span>
+            </div>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const CONFIG = {
+            GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
+            TIMEOUT_MS: 15000,
+        };
+
+        // Tab switching
+        function switchTab(tab) {
+            const emailTab = document.getElementById('tab-email');
+            const orderTab = document.getElementById('tab-order');
+            const emailLookup = document.getElementById('email-lookup');
+            const orderLookup = document.getElementById('order-lookup');
+
+            // Hide results/errors
+            document.getElementById('lookup-results').classList.add('hidden');
+            document.getElementById('lookup-error').classList.add('hidden');
+
+            if (tab === 'email') {
+                emailTab.style.background = 'rgba(201,168,76,0.1)';
+                emailTab.style.borderColor = 'rgba(201,168,76,0.3)';
+                emailTab.style.color = 'var(--gold-primary)';
+                emailTab.style.fontWeight = '600';
+                orderTab.style.background = 'var(--bg-glass)';
+                orderTab.style.borderColor = 'var(--border-glass)';
+                orderTab.style.color = 'var(--text-secondary)';
+                orderTab.style.fontWeight = '500';
+                emailLookup.classList.remove('hidden');
+                orderLookup.classList.add('hidden');
+            } else {
+                orderTab.style.background = 'rgba(201,168,76,0.1)';
+                orderTab.style.borderColor = 'rgba(201,168,76,0.3)';
+                orderTab.style.color = 'var(--gold-primary)';
+                orderTab.style.fontWeight = '600';
+                emailTab.style.background = 'var(--bg-glass)';
+                emailTab.style.borderColor = 'var(--border-glass)';
+                emailTab.style.color = 'var(--text-secondary)';
+                emailTab.style.fontWeight = '500';
+                orderLookup.classList.remove('hidden');
+                emailLookup.classList.add('hidden');
+            }
+        }
+
+        // JSONP helper
+        function callGAS(action, params) {
+            return new Promise((resolve, reject) => {
+                const callbackName = '__lookupCb_' + Date.now();
+                const timeoutId = setTimeout(() => { delete window[callbackName]; reject(new Error('TIMEOUT')); }, CONFIG.TIMEOUT_MS);
+
+                window[callbackName] = function (data) { clearTimeout(timeoutId); delete window[callbackName]; resolve(data); };
+
+                const queryParts = Object.entries(params).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+                const script = document.createElement('script');
+                script.src = `${CONFIG.GAS_URL}?action=${action}&${queryParts}&callback=${callbackName}`;
+                script.onerror = () => { clearTimeout(timeoutId); delete window[callbackName]; reject(new Error('NETWORK')); };
+                document.head.appendChild(script);
+            });
+        }
+
+        function showLoading() {
+            document.getElementById('lookup-loading').classList.remove('hidden');
+            document.getElementById('lookup-results').classList.add('hidden');
+            document.getElementById('lookup-error').classList.add('hidden');
+        }
+
+        function showError(title, message) {
+            document.getElementById('lookup-loading').classList.add('hidden');
+            document.getElementById('lookup-results').classList.add('hidden');
+            document.getElementById('lookup-error').classList.remove('hidden');
+            document.getElementById('lookup-error-title').textContent = title;
+            document.getElementById('lookup-error-message').textContent = message;
+        }
+
+        function showResults(orders) {
+            document.getElementById('lookup-loading').classList.add('hidden');
+            document.getElementById('lookup-error').classList.add('hidden');
+
+            const container = document.getElementById('lookup-results');
+            container.classList.remove('hidden');
+
+            if (!orders || orders.length === 0) {
+                container.innerHTML = `
+                    <div style="margin-top: 20px; padding: 20px; background: rgba(255,200,76,0.06); border: 1px solid rgba(255,200,76,0.15); border-radius: var(--radius-sm); text-align: center;">
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">주문 내역이 없습니다.</p>
+                    </div>`;
+                return;
+            }
+
+            let html = '';
+            orders.forEach((order, i) => {
+                html += `
+                <div class="lookup-result" style="margin-top: ${i === 0 ? 20 : 12}px; animation: fadeInUp 0.4s ${i * 0.1}s both;">
+                    <div class="lookup-result-item">
+                        <span class="label">상품</span>
+                        <span class="value" style="color: var(--text-primary);">${order.product || '—'}</span>
+                    </div>
+                    <div class="lookup-result-item">
+                        <span class="label">라이선스 코드</span>
+                        <span class="value" style="font-family: monospace; letter-spacing: 1px; cursor: pointer;" onclick="copyText('${order.code}')" title="클릭하여 복사">${order.code || '—'}</span>
+                    </div>
+                    <div class="lookup-result-item">
+                        <span class="label">주문번호</span>
+                        <span class="value" style="color: var(--text-secondary); font-size: 0.75rem;">${order.orderId || '—'}</span>
+                    </div>
+                    <div class="lookup-result-item">
+                        <span class="label">결제일</span>
+                        <span class="value" style="color: var(--text-secondary);">${order.date || '—'}</span>
+                    </div>
+                </div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        async function copyText(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                // Brief visual feedback
+                const tooltip = document.createElement('div');
+                tooltip.textContent = '✅ 복사됨!';
+                tooltip.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--gold-gradient);color:#0a0a0f;padding:8px 20px;border-radius:100px;font-size:0.85rem;font-weight:600;z-index:9999;animation:fadeInUp 0.3s both;';
+                document.body.appendChild(tooltip);
+                setTimeout(() => tooltip.remove(), 1500);
+            } catch (e) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            }
+        }
+
+        // Lookup by email
+        async function lookupByEmail() {
+            const email = document.getElementById('lookup-email').value.trim();
+            if (!email || !email.includes('@')) {
+                showError('입력 오류', '올바른 이메일 주소를 입력해주세요.');
+                return;
+            }
+            showLoading();
+            try {
+                const result = await callGAS('lookup-by-email', { email });
+                if (result.ok) {
+                    showResults(result.orders || []);
+                } else {
+                    showError('조회 실패', result.error || '해당 이메일로 등록된 주문이 없습니다.');
+                }
+            } catch (err) {
+                showError('연결 실패', '서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.');
+            }
+        }
+
+        // Lookup by order ID
+        async function lookupByOrderId() {
+            const orderId = document.getElementById('lookup-order-id').value.trim();
+            if (!orderId) {
+                showError('입력 오류', '주문번호를 입력해주세요.');
+                return;
+            }
+            showLoading();
+            try {
+                const result = await callGAS('check-order', { orderId });
+                if (result.ok && result.code) {
+                    showResults([{
+                        product: result.product,
+                        code: result.code,
+                        orderId: orderId,
+                        date: result.date || '—'
+                    }]);
+                } else {
+                    showError('조회 실패', result.error || '해당 주문번호를 찾을 수 없습니다.');
+                }
+            } catch (err) {
+                showError('연결 실패', '서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.');
+            }
+        }
+
+        // Particles
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w, h;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 2; }
+            resize(); window.addEventListener('resize', resize);
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * w; this.y = Math.random() * h;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedY = -(Math.random() * 0.3 + 0.1);
+                    this.speedX = (Math.random() - 0.5) * 0.2;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                    this.gold = Math.random() > 0.3;
+                }
+                update() {
+                    this.y += this.speedY; this.x += this.speedX;
+                    this.opacity += (Math.random() - 0.5) * 0.01;
+                    this.opacity = Math.max(0.05, Math.min(0.6, this.opacity));
+                    if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.gold
+                        ? `rgba(201, 168, 76, ${this.opacity})`
+                        : `rgba(255, 255, 255, ${this.opacity * 0.4})`;
+                    ctx.fill();
+                }
+            }
+            for (let i = 0; i < 40; i++) particles.push(new Particle());
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Enter key handlers
+        document.addEventListener('DOMContentLoaded', () => {
+            initParticles();
+            document.getElementById('lookup-email').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') lookupByEmail();
+            });
+            document.getElementById('lookup-order-id').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') lookupByOrderId();
+            });
+        });
+    </script>
+</body>
+
+</html>

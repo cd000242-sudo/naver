@@ -1,297 +1,546 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Better Life 네이버 자동화 — AI가 만드는 블로그</title>
-    <meta name="description" content="AI가 글을 쓰고, 이미지를 만들고, 발행까지. 네이버 블로그 자동화의 끝판왕.">
-    <meta property="og:title" content="Better Life 네이버 자동화 — AI가 만드는 블로그">
-    <meta property="og:description" content="네이버 블로그 자동화의 시작. 1개월 50,000원 / 3개월 120,000원 / 1년권 400,000원 / 영구제 2,000,000원">
+    <title>Leaders Pro — 프리미엄 자동화 솔루션</title>
+    <meta name="description" content="Leaders Pro 프리미엄 자동화 솔루션. AI 블로그 자동화, 콘텐츠 생성, 다계정 관리까지.">
+    <meta property="og:title" content="Leaders Pro — 프리미엄 자동화 솔루션">
+    <meta property="og:description" content="네이버 블로그 자동화부터 시작하는 프리미엄 비즈니스 자동화. 지금 선택하세요.">
     <meta property="og:type" content="website">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <script src="https://js.tosspayments.com/v2/standard"></script>
 </head>
+
 <body>
+    <!-- Particle Canvas Background -->
+    <canvas id="particles-canvas"></canvas>
 
-<!-- Background Effects -->
-<div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
-<div class="particles" id="particles"></div>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <div class="nav-links">
+                <a href="#products" class="nav-link">제품</a>
+                <a href="#pricing" class="nav-link">가격</a>
+                <a href="lookup.html" class="nav-link">주문 조회</a>
+            </div>
+        </div>
+    </nav>
 
-<!-- AI Robot Cursor -->
-<div id="ai-robot">
-  <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="10" y="12" width="40" height="36" rx="12" fill="url(#rg)" stroke="#7c3aed" stroke-width="2"/>
-    <circle cx="24" cy="28" r="4" fill="#fff"/><circle cx="24" cy="28" r="2" fill="#1e1b4b">
-      <animate attributeName="r" values="2;1.5;2" dur="3s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="36" cy="28" r="4" fill="#fff"/><circle cx="36" cy="28" r="2" fill="#1e1b4b">
-      <animate attributeName="r" values="2;1.5;2" dur="3s" repeatCount="indefinite"/>
-    </circle>
-    <path d="M24 36 Q30 40 36 36" stroke="#7c3aed" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <rect x="22" y="4" width="16" height="6" rx="3" fill="#06B6D4"/>
-    <circle cx="30" cy="4" r="3" fill="#06B6D4"/>
-    <defs><linearGradient id="rg" x1="10" y1="12" x2="50" y2="48"><stop stop-color="#c4b5fd"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs>
-  </svg>
-</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span>PREMIUM AUTOMATION</span>
+            </div>
+            <h1 class="hero-title">
+                자동화의 새로운 기준,<br>
+                <span class="gold-text">Leaders Pro</span>
+            </h1>
+            <p class="hero-subtitle">
+                AI 콘텐츠 생성부터 다계정 자동 발행까지.<br>
+                당신의 비즈니스를 한 단계 끌어올리세요.
+            </p>
+            <a href="#pricing" class="hero-cta">
+                <span>시작하기</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+        </div>
 
-<!-- Nav -->
-<nav class="nav">
-  <div class="nav-brand"><span class="dot"></span> Better Life</div>
-  <div class="nav-links">
-    <a href="#features">기능</a>
-    <a href="#pricing">요금제</a>
-    <a href="#faq">FAQ</a>
-    <a href="mailto:cd000242@gmail.com">문의</a>
-  </div>
-</nav>
+        <!-- 3D Robot Section -->
+        <div class="hero-3d">
+            <div class="hero-3d-glow"></div>
+            <iframe
+                src="https://my.spline.design/nexbotrobotcharacterconcept-mQLqodza99cchehegYbwsdiu/"
+                frameborder="0" width="100%" height="100%"
+                allowfullscreen loading="lazy"
+                style="border:none; pointer-events:auto;"
+            ></iframe>
+        </div>
+    </section>
 
-<div class="container">
+    <!-- Trust Bar -->
+    <section class="trust-bar">
+        <div class="trust-item">
+            <span class="trust-number" data-target="2847">0</span>
+            <span class="trust-label">활성 사용자</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+            <span class="trust-number" data-target="15000">0</span>
+            <span class="trust-label">일일 자동 발행</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+            <span class="trust-number" data-target="99">0</span>
+            <span class="trust-label">가동률 %</span>
+        </div>
+    </section>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-badge">⚡ AI-Powered Automation</div>
-    <h1 id="hero-title">AI가 글을 쓰고<br>블로그를 만듭니다<span class="typing-cursor"></span></h1>
-    <p class="hero-sub">키워드 입력만 하면 AI가 SEO 최적화 글 작성, 이미지 생성,<br>네이버 블로그 발행까지 자동으로 처리합니다.</p>
-    <a href="#pricing" class="hero-cta">요금제 보기 →</a>
-    <div class="hero-visual reveal">
-      <div class="hero-visual-inner">
-        <div class="hero-card-mini"><div class="icon">🤖</div><div class="label">AI 글 작성</div></div>
-        <div class="hero-card-mini"><div class="icon">🎨</div><div class="label">AI 이미지 생성</div></div>
-        <div class="hero-card-mini"><div class="icon">🚀</div><div class="label">자동 발행</div></div>
-      </div>
-    </div>
-  </section>
+    <!-- Products Section -->
+    <section class="section" id="products">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">PRODUCTS</span>
+                <h2 class="section-title">프리미엄 자동화 솔루션</h2>
+                <p class="section-desc">Leaders Pro가 제공하는 강력한 자동화 도구를 만나보세요.</p>
+            </div>
 
-  <!-- FEATURES -->
-  <section id="features" style="text-align:center">
-    <div class="section-tag">💡 Features</div>
-    <h2 class="section-title">왜 Better Life인가요?</h2>
-    <p class="section-desc">블로그 운영에 필요한 모든 것을 AI가 대신합니다.</p>
-    <div class="features-grid">
-      <div class="feature-card reveal">
-        <div class="feature-icon">✍️</div>
-        <h3>AI SEO 콘텐츠</h3>
-        <p>네이버 검색 로봇이 좋아하는 구조로 글을 자동 생성합니다. 키워드만 입력하면 끝.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">🎨</div>
-        <h3>AI 이미지 생성</h3>
-        <p>Gemini, DALL-E 등 최신 AI로 블로그 내용에 맞는 이미지를 자동 생성합니다.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">📊</div>
-        <h3>다계정 자동 발행</h3>
-        <p>여러 네이버 계정에 예약 발행. 연속발행, 스마트 스케줄링까지.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">📹</div>
-        <h3>AI 동영상 생성</h3>
-        <p>Google Veo 기반 블로그용 동영상을 자동 생성하여 품질을 높입니다.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">🛒</div>
-        <h3>쇼핑커넥트</h3>
-        <p>쿠팡, 스마트스토어 제품 크롤링 → 리뷰 자동 생성 → 어필리엇 수익화.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">🔒</div>
-        <h3>안전한 자동화</h3>
-        <p>인간처럼 타이핑, CAPTCHA 회피, 랜덤 딜레이로 안전하게 운영합니다.</p>
-      </div>
-    </div>
-  </section>
+            <!-- Product: 네이버 블로그 자동화 -->
+            <div class="product-showcase" id="naver-auto">
+                <div class="product-info">
+                    <div class="product-tag">🚀 FLAGSHIP</div>
+                    <h3 class="product-title">네이버 블로그 자동화</h3>
+                    <p class="product-desc">
+                        AI가 글을 쓰고, 이미지를 생성하고, 자동으로 발행합니다.<br>
+                        다계정 동시 운영부터 예약 발행까지, 블로그 수익화의 모든 것.
+                    </p>
+                    <ul class="product-feature-list">
+                        <li>
+                            <span class="feature-icon">⚡</span>
+                            <div>
+                                <strong>AI 콘텐츠 자동 생성</strong>
+                                <span>GPT-4, Gemini 등 최신 AI로 사람이 쓴 것 같은 자연스러운 글</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">🎨</span>
+                            <div>
+                                <strong>AI 이미지 자동 생성</strong>
+                                <span>본문에 맞는 고품질 이미지를 자동으로 생성·삽입</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">👥</span>
+                            <div>
+                                <strong>다계정 동시 관리</strong>
+                                <span>여러 네이버 계정을 한 곳에서 통합 관리·자동 발행</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">📊</span>
+                            <div>
+                                <strong>스마트 예약 발행</strong>
+                                <span>최적 시간대에 자동 발행, 봇 감지 우회 기술 적용</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="product-visual">
+                    <div class="product-visual-card">
+                        <div class="visual-mockup">
+                            <div class="mockup-header">
+                                <span class="mockup-dot red"></span>
+                                <span class="mockup-dot yellow"></span>
+                                <span class="mockup-dot green"></span>
+                                <span class="mockup-title">Leaders Pro — Dashboard</span>
+                            </div>
+                            <div class="mockup-body">
+                                <div class="mockup-stat">
+                                    <span class="stat-label">오늘 발행</span>
+                                    <span class="stat-value gold-text">127건</span>
+                                </div>
+                                <div class="mockup-stat">
+                                    <span class="stat-label">전체 계정</span>
+                                    <span class="stat-value">12개</span>
+                                </div>
+                                <div class="mockup-bar-chart">
+                                    <div class="bar" style="height:40%"></div>
+                                    <div class="bar" style="height:65%"></div>
+                                    <div class="bar" style="height:85%"></div>
+                                    <div class="bar active" style="height:100%"></div>
+                                    <div class="bar" style="height:75%"></div>
+                                    <div class="bar" style="height:55%"></div>
+                                    <div class="bar" style="height:90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <!-- PRICING -->
-  <section id="pricing" style="text-align:center">
-    <div class="section-tag">💳 Pricing</div>
-    <h2 class="section-title">요금제</h2>
-    <p class="section-desc">모든 플랜에 전체 기능이 포함됩니다. 부담 없이 시작하세요.</p>
-    <div class="pricing-grid">
-      <div class="price-card reveal" data-product="monthly" data-amount="50000" onclick="selectProduct(this)">
-        <div class="price-name">1개월</div>
-        <div class="price-desc">부담 없이 체험해보세요.</div>
-        <div class="price-amount">50,000<span class="currency">원</span></div>
-        <div class="price-vat">VAT 포함</div>
-        <ul class="price-features">
-          <li><span class="icon">✓</span> 전체 기능 이용</li>
-          <li><span class="icon">✓</span> AI 콘텐츠 자동 생성</li>
-          <li><span class="icon">✓</span> 다계정 자동 발행</li>
-          <li><span class="icon">✓</span> 1개월 무료 업데이트</li>
-        </ul>
-      </div>
-      <div class="price-card reveal" data-product="quarterly" data-amount="120000" onclick="selectProduct(this)">
-        <div class="price-name">3개월</div>
-        <div class="price-desc">월 4만원, 20% 할인 혜택.</div>
-        <div class="price-amount">120,000<span class="currency">원</span></div>
-        <div class="price-per-month">월 40,000원</div>
-        <div class="price-vat">VAT 포함</div>
-        <ul class="price-features">
-          <li><span class="icon">✓</span> 전체 기능 이용</li>
-          <li><span class="icon">✓</span> AI 콘텐츠 자동 생성</li>
-          <li><span class="icon">✓</span> 다계정 자동 발행</li>
-          <li><span class="icon">✓</span> 3개월 무료 업데이트</li>
-        </ul>
-      </div>
-      <div class="price-card reveal" data-product="yearly" data-amount="400000" onclick="selectProduct(this)">
-        <span class="price-badge">인기</span>
-        <div class="price-name">1년권</div>
-        <div class="price-desc">12개월간 모든 기능을 자유롭게.</div>
-        <div class="price-amount">400,000<span class="currency">원</span></div>
-        <div class="price-per-month">월 33,333원</div>
-        <div class="price-vat">VAT 포함</div>
-        <ul class="price-features">
-          <li><span class="icon">✓</span> 전체 기능 이용</li>
-          <li><span class="icon">✓</span> AI 콘텐츠 자동 생성</li>
-          <li><span class="icon">✓</span> 다계정 자동 발행</li>
-          <li><span class="icon">✓</span> 1년간 무료 업데이트</li>
-        </ul>
-      </div>
-      <div class="price-card featured reveal" data-product="lifetime" data-amount="2000000" onclick="selectProduct(this)">
-        <span class="price-badge">Best Value</span>
-        <div class="price-name">영구제</div>
-        <div class="price-desc">한 번 구매로 평생 사용.</div>
-        <div class="price-amount">2,000,000<span class="currency">원</span></div>
-        <div class="price-vat">VAT 포함</div>
-        <ul class="price-features">
-          <li><span class="icon">✓</span> 전체 기능 이용</li>
-          <li><span class="icon">✓</span> AI 콘텐츠 자동 생성</li>
-          <li><span class="icon">✓</span> 다계정 자동 발행</li>
-          <li><span class="icon">✓</span> 평생 무료 업데이트</li>
-          <li><span class="icon">✓</span> 우선 고객 지원</li>
-        </ul>
-      </div>
-    </div>
-    <!-- Payment -->
-    <div class="payment-section">
-      <button class="btn-pay" id="btn-pay" disabled onclick="requestPayment()">
-        <span class="spinner"></span>
-        <span class="btn-text">상품을 선택해주세요</span>
-      </button>
-      <div class="payment-notice">결제 진행 시 <a href="terms.html" target="_blank">이용약관</a> 및 <a href="privacy.html" target="_blank">개인정보처리방침</a>에 동의하는 것으로 간주됩니다.</div>
-    </div>
-  </section>
+            <!-- Coming Soon: 다른 제품 -->
+            <div class="coming-soon-banner">
+                <span class="coming-soon-icon">🔮</span>
+                <div>
+                    <strong>더 많은 자동화 도구가 준비 중입니다</strong>
+                    <span>티스토리, 워드프레스, 쇼핑몰 자동화 등 새로운 제품이 곧 출시됩니다.</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- FAQ -->
-  <section id="faq" style="text-align:center">
-    <div class="section-tag">❓ FAQ</div>
-    <h2 class="section-title">자주 묻는 질문</h2>
-    <p class="section-desc">궁금한 점이 있으신가요?</p>
-    <div class="faq-list">
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">구매 후 바로 사용할 수 있나요? <span class="arrow">▼</span></div><div class="faq-a">네, 결제 완료 후 라이선스 키가 즉시 발급됩니다. 키를 프로그램에 입력하면 바로 사용 가능합니다.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">환불이 가능한가요? <span class="arrow">▼</span></div><div class="faq-a">구매 후 7일 이내 미사용 시 전액 환불 가능합니다. cd000242@gmail.com으로 연락해주세요.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">몧 개 계정까지 사용할 수 있나요? <span class="arrow">▼</span></div><div class="faq-a">네이버 계정 수 제한은 없습니다. 다만 PC 1대에서만 사용 가능합니다.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">업데이트는 어떻게 받나요? <span class="arrow">▼</span></div><div class="faq-a">프로그램 실행 시 자동으로 최신 버전을 감지하고 업데이트합니다. 별도 작업 필요 없습니다.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">블로그가 저품질로 나오지 않나요? <span class="arrow">▼</span></div><div class="faq-a">GPT-4.1, Gemini 2.5 등 최신 AI를 사용하며, SEO 최적화된 구조로 작성됩니다. 실제 상위노출 사례가 많습니다.</div></div>
-    </div>
-  </section>
+    <!-- Pricing Section -->
+    <section class="section section-dark" id="pricing">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">PRICING</span>
+                <h2 class="section-title">합리적인 요금제</h2>
+                <p class="section-desc">비즈니스 규모에 맞는 플랜을 선택하세요.</p>
+            </div>
 
-  <!-- Footer -->
-  <footer class="page-footer">
-    <div class="footer-links">
-      <a href="terms.html">이용약관</a>
-      <a href="privacy.html">개인정보처리방침</a>
-      <a href="mailto:cd000242@gmail.com">고객 문의</a>
-    </div>
-    <p>© 2026 Better Life. All rights reserved.</p>
-  </footer>
-</div>
+            <div class="pricing-grid">
+                <!-- 1개월 -->
+                <div class="pricing-card" data-product="monthly" data-amount="50000" onclick="selectProduct(this)">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">1개월</h3>
+                        <p class="pricing-desc">가볍게 체험해보세요</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-amount">50,000</span>
+                        <span class="price-unit">원</span>
+                    </div>
+                    <div class="pricing-period">/ 월</div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> 전체 기능 이용</li>
+                        <li><span class="check">✓</span> AI 콘텐츠 자동 생성</li>
+                        <li><span class="check">✓</span> 다계정 자동 발행</li>
+                        <li><span class="check">✓</span> 이메일 고객 지원</li>
+                    </ul>
+                    <div class="pricing-select">선택하기</div>
+                </div>
 
-<script>
-// ===== CONFIG =====
-const CONFIG = {
-    TOSS_CLIENT_KEY: 'test_ck_Poxy1XQL8R27R2BKJkm987nO5Wml',
-    GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
-    SUCCESS_URL: window.location.origin + window.location.pathname.replace('index.html', '') + 'success.html',
-    FAIL_URL: window.location.origin + window.location.pathname.replace('index.html', '') + 'fail.html',
-};
-const PRODUCTS = {
-    monthly: { name: 'Better Life 1\uac1c\uc6d4', amount: 50000 },
-    quarterly: { name: 'Better Life 3\uac1c\uc6d4', amount: 120000 },
-    yearly: { name: 'Better Life 1\ub144\uad8c', amount: 400000 },
-    lifetime: { name: 'Better Life \uc601\uad6c\uc81c', amount: 2000000 },
-};
-let selectedProduct = null;
-let tossPayments = null;
+                <!-- 3개월 -->
+                <div class="pricing-card" data-product="quarterly" data-amount="120000" onclick="selectProduct(this)">
+                    <div class="pricing-save">20% 절약</div>
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">3개월</h3>
+                        <p class="pricing-desc">인기 있는 선택</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-amount">120,000</span>
+                        <span class="price-unit">원</span>
+                    </div>
+                    <div class="pricing-period">/ 3개월 <span class="price-monthly">(월 40,000원)</span></div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> 전체 기능 이용</li>
+                        <li><span class="check">✓</span> AI 콘텐츠 자동 생성</li>
+                        <li><span class="check">✓</span> 다계정 자동 발행</li>
+                        <li><span class="check">✓</span> 우선 고객 지원</li>
+                    </ul>
+                    <div class="pricing-select">선택하기</div>
+                </div>
 
-async function initToss() {
-    try { tossPayments = TossPayments(CONFIG.TOSS_CLIENT_KEY); } catch(e) { console.error(e); }
-}
-function selectProduct(card) {
-    document.querySelectorAll('.price-card').forEach(c => c.classList.remove('selected'));
-    card.classList.add('selected');
-    selectedProduct = card.dataset.product;
-    const btn = document.getElementById('btn-pay');
-    btn.disabled = false;
-    btn.querySelector('.btn-text').textContent = `${PRODUCTS[selectedProduct].amount.toLocaleString()}\uc6d0 \uacb0\uc81c\ud558\uae30`;
-}
-function generateOrderId() {
-    return `BL-${Date.now()}-${Math.random().toString(36).substring(2,8).toUpperCase()}`;
-}
-async function requestPayment() {
-    if (!selectedProduct || !tossPayments) return;
-    const btn = document.getElementById('btn-pay');
-    btn.classList.add('loading'); btn.disabled = true;
-    const product = PRODUCTS[selectedProduct];
-    try {
-        const payment = tossPayments.payment({ customerKey: TossPayments.ANONYMOUS });
-        await payment.requestPayment({
-            method: 'CARD',
-            amount: { value: product.amount, currency: 'KRW' },
-            orderId: generateOrderId(),
-            orderName: product.name,
-            successUrl: CONFIG.SUCCESS_URL,
-            failUrl: CONFIG.FAIL_URL,
+                <!-- 1년 — 추천 -->
+                <div class="pricing-card featured" data-product="yearly" data-amount="400000" onclick="selectProduct(this)">
+                    <div class="pricing-badge">👑 BEST VALUE</div>
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">1년</h3>
+                        <p class="pricing-desc">가장 합리적인 선택</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-amount">400,000</span>
+                        <span class="price-unit">원</span>
+                    </div>
+                    <div class="pricing-period">/ 년 <span class="price-monthly">(월 33,333원)</span></div>
+                    <ul class="pricing-features">
+                        <li><span class="check gold">✓</span> 전체 기능 이용</li>
+                        <li><span class="check gold">✓</span> AI 콘텐츠 자동 생성</li>
+                        <li><span class="check gold">✓</span> 다계정 자동 발행</li>
+                        <li><span class="check gold">✓</span> 전용 커뮤니티 입장</li>
+                        <li><span class="check gold">✓</span> 1:1 우선 지원</li>
+                    </ul>
+                    <div class="pricing-select">선택하기</div>
+                </div>
+
+                <!-- 영구제 -->
+                <div class="pricing-card premium" data-product="lifetime" data-amount="2000000" onclick="selectProduct(this)">
+                    <div class="pricing-badge premium-badge">💎 LIFETIME</div>
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">영구제</h3>
+                        <p class="pricing-desc">한 번 구매, 평생 사용</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-amount">2,000,000</span>
+                        <span class="price-unit">원</span>
+                    </div>
+                    <div class="pricing-period">일회성 결제</div>
+                    <ul class="pricing-features">
+                        <li><span class="check gold">✓</span> 전체 기능 평생 이용</li>
+                        <li><span class="check gold">✓</span> AI 콘텐츠 자동 생성</li>
+                        <li><span class="check gold">✓</span> 다계정 자동 발행</li>
+                        <li><span class="check gold">✓</span> 평생 무료 업데이트</li>
+                        <li><span class="check gold">✓</span> VIP 전용 커뮤니티</li>
+                        <li><span class="check gold">✓</span> 최우선 1:1 지원</li>
+                    </ul>
+                    <div class="pricing-select">선택하기</div>
+                </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="payment-section" id="payment-section">
+                <div class="payment-email-row">
+                    <label for="buyer-email" class="email-label">📧 라이선스를 받을 이메일</label>
+                    <input type="email" id="buyer-email" class="email-input" placeholder="example@email.com" required>
+                    <p class="email-hint">결제 완료 후 이 이메일로 라이선스 코드가 발송됩니다.</p>
+                </div>
+                <button class="btn-pay" id="btn-pay" disabled onclick="requestPayment()">
+                    <span class="spinner"></span>
+                    <span class="btn-text">플랜을 선택해주세요</span>
+                </button>
+                <div class="payment-notice">
+                    결제 진행 시 <a href="terms.html" target="_blank">이용약관</a> 및
+                    <a href="privacy.html" target="_blank">개인정보처리방침</a>에 동의하는 것으로 간주됩니다.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+                <span>Leaders Pro</span>
+            </div>
+            <div class="footer-links">
+                <a href="terms.html">이용약관</a>
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="lookup.html">주문 조회</a>
+                <a href="mailto:cd000242@gmail.com">고객 문의</a>
+            </div>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== CONFIG =====
+        const CONFIG = {
+            TOSS_CLIENT_KEY: 'test_ck_Poxy1XQL8R27R2BKJkm987nO5Wml',
+            GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
+            SUCCESS_URL: window.location.origin + window.location.pathname.replace('index.html', '') + 'success.html',
+            FAIL_URL: window.location.origin + window.location.pathname.replace('index.html', '') + 'fail.html',
+        };
+
+        const PRODUCTS = {
+            monthly:   { name: 'Leaders Pro 1개월', amount: 50000 },
+            quarterly: { name: 'Leaders Pro 3개월', amount: 120000 },
+            yearly:    { name: 'Leaders Pro 1년',   amount: 400000 },
+            lifetime:  { name: 'Leaders Pro 영구제', amount: 2000000 },
+        };
+
+        let selectedProduct = null;
+        let tossPayments = null;
+
+        // ===== Toss Init =====
+        async function initToss() {
+            try { tossPayments = TossPayments(CONFIG.TOSS_CLIENT_KEY); }
+            catch (e) { console.error('Toss SDK init failed', e); }
+        }
+
+        // ===== Product Selection =====
+        function selectProduct(card) {
+            document.querySelectorAll('.pricing-card').forEach(c => {
+                c.classList.remove('selected');
+                c.querySelector('.pricing-select').textContent = '선택하기';
+            });
+            card.classList.add('selected');
+            card.querySelector('.pricing-select').textContent = '✓ 선택됨';
+            selectedProduct = card.dataset.product;
+
+            const btn = document.getElementById('btn-pay');
+            const product = PRODUCTS[selectedProduct];
+            btn.disabled = false;
+            btn.querySelector('.btn-text').textContent = `${product.amount.toLocaleString()}원 결제하기`;
+
+            // Scroll to payment
+            document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // ===== Order ID =====
+        function generateOrderId() {
+            const ts = Date.now();
+            const rand = Math.random().toString(36).substring(2, 8).toUpperCase();
+            return `LP-${ts}-${rand}`;
+        }
+
+        // ===== Payment =====
+        async function requestPayment() {
+            if (!selectedProduct || !tossPayments) return;
+
+            const emailInput = document.getElementById('buyer-email');
+            const email = emailInput.value.trim();
+            if (!email || !email.includes('@')) {
+                emailInput.focus();
+                emailInput.classList.add('shake');
+                setTimeout(() => emailInput.classList.remove('shake'), 600);
+                return;
+            }
+
+            const btn = document.getElementById('btn-pay');
+            btn.classList.add('loading');
+            btn.disabled = true;
+
+            const product = PRODUCTS[selectedProduct];
+            const orderId = generateOrderId();
+
+            try {
+                const payment = tossPayments.payment({ customerKey: TossPayments.ANONYMOUS });
+                await payment.requestPayment({
+                    method: 'CARD',
+                    amount: { value: product.amount, currency: 'KRW' },
+                    orderId,
+                    orderName: product.name,
+                    successUrl: CONFIG.SUCCESS_URL + '?email=' + encodeURIComponent(email),
+                    failUrl: CONFIG.FAIL_URL,
+                });
+            } catch (err) {
+                console.log('결제 취소:', err);
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
+        }
+
+        // ===== Particles =====
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w, h;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight * 3;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * w;
+                    this.y = Math.random() * h;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedY = -(Math.random() * 0.3 + 0.1);
+                    this.speedX = (Math.random() - 0.5) * 0.2;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                    this.gold = Math.random() > 0.3;
+                }
+                update() {
+                    this.y += this.speedY;
+                    this.x += this.speedX;
+                    this.opacity += (Math.random() - 0.5) * 0.01;
+                    this.opacity = Math.max(0.05, Math.min(0.6, this.opacity));
+                    if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.gold
+                        ? `rgba(201, 168, 76, ${this.opacity})`
+                        : `rgba(255, 255, 255, ${this.opacity * 0.4})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // ===== Scroll Animations =====
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, i) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transitionDelay = `${i * 0.08}s`;
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in, .pricing-card, .product-showcase, .trust-item, .coming-soon-banner').forEach(el => observer.observe(el));
+        }
+
+        // ===== Counter Animation =====
+        function initCounters() {
+            const counters = document.querySelectorAll('.trust-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const target = parseInt(el.dataset.target);
+                        let current = 0;
+                        const step = Math.ceil(target / 60);
+                        const timer = setInterval(() => {
+                            current += step;
+                            if (current >= target) { current = target; clearInterval(timer); }
+                            el.textContent = current.toLocaleString();
+                        }, 30);
+                        observer.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+            counters.forEach(c => observer.observe(c));
+        }
+
+        // ===== Navbar Scroll =====
+        function initNavbar() {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                navbar.classList.toggle('scrolled', window.scrollY > 50);
+            });
+        }
+
+        // ===== Tilt Effect on Cards =====
+        function initTilt() {
+            document.querySelectorAll('.pricing-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+
+                    // Light reflection
+                    const glare = card.querySelector('.card-glare');
+                    if (glare) {
+                        glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(201,168,76,0.15), transparent 60%)`;
+                    }
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+
+                // Add glare div
+                const glare = document.createElement('div');
+                glare.className = 'card-glare';
+                card.appendChild(glare);
+            });
+        }
+
+        // ===== Init =====
+        document.addEventListener('DOMContentLoaded', () => {
+            initToss();
+            initParticles();
+            initScrollAnimations();
+            initCounters();
+            initNavbar();
+            initTilt();
         });
-    } catch(e) {
-        console.log('\uacb0\uc81c \ucde8\uc18c:', e);
-        btn.classList.remove('loading'); btn.disabled = false;
-    }
-}
-
-// ===== FAQ =====
-function toggleFaq(el) {
-    el.parentElement.classList.toggle('open');
-}
-
-// ===== PARTICLES =====
-(function() {
-    const c = document.getElementById('particles');
-    for (let i = 0; i < 20; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        p.style.left = Math.random()*100+'%';
-        p.style.top = Math.random()*100+'%';
-        p.style.animationDelay = (Math.random()*4)+'s';
-        p.style.width = p.style.height = (2+Math.random()*4)+'px';
-        c.appendChild(p);
-    }
-})();
-
-// ===== AI ROBOT CURSOR =====
-(function() {
-    const robot = document.getElementById('ai-robot');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-    function animate() {
-        rx += (mx - rx - 25) * 0.08;
-        ry += (my - ry - 25) * 0.08;
-        robot.style.left = rx + 'px';
-        robot.style.top = ry + 'px';
-        requestAnimationFrame(animate);
-    }
-    animate();
-})();
-
-// ===== SCROLL REVEAL =====
-const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-document.addEventListener('DOMContentLoaded', initToss);
-</script>
+    </script>
 </body>
+
 </html>
