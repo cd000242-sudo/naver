@@ -4,24 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개인정보처리방침 — Better Life</title>
+    <title>개인정보처리방침 — Leaders Pro</title>
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link
-        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
-        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <style>
-        .legal-content {
-            max-width: 720px;
+        .legal-container {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
             margin: 0 auto;
+            padding: 120px 32px 80px;
+        }
+
+        .legal-hero {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .legal-hero h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .legal-hero .effective {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .legal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            backdrop-filter: blur(20px);
         }
 
         .legal-content h2 {
-            font-size: 1.3rem;
+            font-size: 1.15rem;
+            font-weight: 700;
             margin: 32px 0 12px;
-            color: var(--text-primary);
+            color: var(--gold-primary);
+        }
+
+        .legal-content h2:first-child {
+            margin-top: 0;
         }
 
         .legal-content p,
@@ -45,7 +78,7 @@
         .legal-content th,
         .legal-content td {
             border: 1px solid var(--border-glass);
-            padding: 10px 14px;
+            padding: 12px 16px;
             font-size: 0.85rem;
             text-align: left;
         }
@@ -60,25 +93,53 @@
             color: var(--text-secondary);
         }
 
-        .legal-content .effective {
+        .legal-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 32px;
+            padding: 12px 24px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            text-decoration: none;
             font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 32px;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .legal-back:hover {
+            border-color: var(--border-gold);
+            color: var(--gold-primary);
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-pattern"></div>
-    <div class="container">
-        <header class="page-header">
-            <div class="brand-badge"><span class="dot"></span> Better Life</div>
-            <h1 class="page-title" style="font-size: 2rem;">개인정보처리방침</h1>
-        </header>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">홈</a>
+                <a href="lookup.html" class="nav-link">주문 조회</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="legal-container">
+        <div class="legal-hero">
+            <h1>개인정보처리방침</h1>
+            <p class="effective">시행일: 2026년 3월 24일 (최종 수정)</p>
+        </div>
 
         <div class="legal-content">
-            <p class="effective">시행일: 2026년 2월 17일</p>
-
             <h2>1. 수집하는 개인정보</h2>
             <table>
                 <thead>
@@ -132,7 +193,7 @@
             <h2>4. 개인정보의 안전성 확보</h2>
             <ul>
                 <li>결제 정보는 토스페이먼츠의 PCI-DSS 인증 시스템에서 처리됩니다.</li>
-                <li>라이선스 코드는 구글 스프레드시트에 암호화 없이 저장되며, 접근 권한이 관리됩니다.</li>
+                <li>라이선스 코드는 접근 권한이 제한된 시스템에 저장되며 관리됩니다.</li>
                 <li>이메일 주소는 발송 완료 후 서버에 저장되지 않습니다.</li>
             </ul>
 
@@ -142,14 +203,68 @@
             <h2>6. 방침 변경</h2>
             <p>본 방침은 변경 시 본 페이지를 통해 공지됩니다.</p>
 
-            <p style="margin-top: 40px;"><a href="index.html" style="color: var(--accent-secondary);">← 결제 페이지로 돌아가기</a>
-            </p>
+            <a href="index.html" class="legal-back">← 메인으로 돌아가기</a>
         </div>
-
-        <footer class="page-footer">
-            <p>© 2026 Better Life. All rights reserved.</p>
-        </footer>
     </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+                <span>Leaders Pro</span>
+            </div>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [], w, h, animId;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 2; }
+            resize(); window.addEventListener('resize', resize);
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * w; this.y = Math.random() * h;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedY = -(Math.random() * 0.3 + 0.1);
+                    this.speedX = (Math.random() - 0.5) * 0.2;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                    this.gold = Math.random() > 0.3;
+                }
+                update() {
+                    this.y += this.speedY; this.x += this.speedX;
+                    this.opacity += (Math.random() - 0.5) * 0.01;
+                    this.opacity = Math.max(0.05, Math.min(0.6, this.opacity));
+                    if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.gold
+                        ? `rgba(201, 168, 76, ${this.opacity})`
+                        : `rgba(255, 255, 255, ${this.opacity * 0.4})`;
+                    ctx.fill();
+                }
+            }
+            for (let i = 0; i < 30; i++) particles.push(new Particle());
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => { p.update(); p.draw(); });
+                animId = requestAnimationFrame(animate);
+            }
+            const observer = new IntersectionObserver(([entry]) => {
+                if (entry.isIntersecting) { animate(); } else { cancelAnimationFrame(animId); }
+            });
+            observer.observe(canvas);
+            animate();
+        }
+        document.addEventListener('DOMContentLoaded', initParticles);
+    </script>
 </body>
 
 </html>

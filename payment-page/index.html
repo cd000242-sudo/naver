@@ -7,8 +7,14 @@
     <title>Leaders Pro — 블로그 자동화의 끝판왕</title>
     <meta name="description" content="매일 100건, 사람이 쓴 것처럼. 키워드만 넣으면 AI가 글·이미지·발행까지 자동으로. Leaders Pro 프리미엄 블로그 자동화.">
     <meta property="og:title" content="Leaders Pro — 블로그 자동화의 끝판왕">
-    <meta property="og:description" content="매일 100건, 사람이 쓴 것처럼. 키워드만 넣으면 끝.">
+    <meta property="og:description" content="매일 100건, 사람이 쓴 것처럼. 키워드만 넣으면 AI가 글·이미지·발행까지 자동으로.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.leaderspro.kr/">
+    <meta property="og:image" content="https://www.leaderspro.kr/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Leaders Pro — 블로그 자동화의 끝판왕">
+    <meta name="twitter:description" content="매일 100건, 사람이 쓴 것처럼. 키워드만 넣으면 끝.">
+    <meta name="twitter:image" content="https://www.leaderspro.kr/og-image.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,10 +36,14 @@
                 <img src="logo.png" alt="Leaders Pro" class="nav-logo">
                 <span class="nav-brand-text">Leaders Pro</span>
             </a>
-            <div class="nav-links">
-                <a href="#products" class="nav-link">제품</a>
-                <a href="#social-proof" class="nav-link">후기</a>
-                <a href="#pricing" class="nav-link">가격</a>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="#products" class="nav-link" onclick="closeMobileMenu()">제품</a>
+                <a href="#social-proof" class="nav-link" onclick="closeMobileMenu()">후기</a>
+                <a href="#faq" class="nav-link" onclick="closeMobileMenu()">FAQ</a>
+                <a href="#pricing" class="nav-link" onclick="closeMobileMenu()">가격</a>
                 <a href="lookup.html" class="nav-link">주문 조회</a>
             </div>
         </div>
@@ -620,6 +630,81 @@
         </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- FAQ SECTION -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section class="section" id="faq">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">FAQ</span>
+                <h2 class="section-title">자주 묻는 질문</h2>
+                <p class="section-desc">궁금한 점을 빠르게 해결하세요</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Leaders Pro는 어떤 프로그램인가요?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Leaders Pro는 AI 기반 네이버 블로그 자동화 솔루션입니다. 키워드만 입력하면 GPT-4o, Gemini 2.5 등 7종의 AI가 6,000~10,000자의 자연스러운 포스팅을 작성하고, AI 이미지·영상을 생성하며, 네이버 블로그에 자동으로 발행합니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>봇 감지에 걸리지 않나요?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>사람처럼 타이핑하는 고급 봇 회피 엔진을 탑재했습니다. 랜덤 딜레이, 최적 시간대 발행, 쿨다운 기간 등의 기술로 봇 감지를 우회합니다. 실제로 수천 명의 사용자가 안전하게 사용 중입니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>계정을 몇 개까지 등록할 수 있나요?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>계정 수 제한이 없습니다. 네이버 블로그 ID를 원하는 만큼 등록하고, 각 계정별로 독립적인 스케줄을 설정하여 통합 관리할 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>환불이 가능한가요?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>라이선스 코드 발급 후 7일 이내, 서비스 미사용 시 전액 환불 가능합니다. 환불 요청은 cd000242@gmail.com으로 보내주세요.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Leaders Orbit과 Leaders Pro의 차이는?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Leaders Pro는 <strong>네이버 블로그 전용</strong>, Leaders Orbit은 <strong>워드프레스 + 블로그스팟</strong> 글로벌 플랫폼을 대상으로 합니다. Orbit은 100% API 기반이라 봇 감지 걱정 없이 구글 애드센스 수익화에 최적화되어 있습니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>기기 변경 시 어떻게 하나요?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>라이선스는 동시에 1대의 기기에서만 사용 가능합니다. 기기를 변경하면 이전 기기에서 자동으로 로그아웃됩니다. 별도의 이전 절차 없이 새 기기에서 바로 로그인하시면 됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-inner">
@@ -894,6 +979,37 @@
             });
         }
 
+        // ===== FAQ Toggle =====
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+            // Close all others
+            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+        // ===== Mobile Menu =====
+        function toggleMobileMenu() {
+            const hamburger = document.getElementById('nav-hamburger');
+            const links = document.getElementById('nav-links');
+            hamburger.classList.toggle('active');
+            links.classList.toggle('mobile-open');
+        }
+        function closeMobileMenu() {
+            document.getElementById('nav-hamburger').classList.remove('active');
+            document.getElementById('nav-links').classList.remove('mobile-open');
+        }
+
+        // ===== Mobile 3D iframe optimization =====
+        function handleMobile3D() {
+            const hero3d = document.querySelector('.hero-3d');
+            if (!hero3d) return;
+            if (window.innerWidth <= 768) {
+                const iframe = hero3d.querySelector('iframe');
+                if (iframe) iframe.remove();
+            }
+        }
+
         // ===== Init =====
         document.addEventListener('DOMContentLoaded', () => {
             initToss();
@@ -902,6 +1018,7 @@
             initCounters();
             initNavbar();
             initTilt();
+            handleMobile3D();
         });
     </script>
 </body>

@@ -820,20 +820,32 @@
 
     <script>
         // ===== CONFIG =====
-        const ADMIN_ID = 'cd00242';
-        const ADMIN_PW = 'w2021645';
-        const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv2b4PobrwzYWBn1/exec';
+        // Auth: SHA-256 hashed credentials (never store plaintext)
+        const ADMIN_ID_HASH = '340ecd3d8edb927ef26c6d0703fabd15612b7d8a5be2241719b619975836d5e7'; // hashed
+        const ADMIN_PW_HASH = '39cc994b55f33b94f5b8f2d99507b40e155792b1d1e9cb0595a22c30b0e9e7c5'; // hashed
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
         const ADMIN_TOKEN = 'qkrtjdgus2021645';
 
         let allCodes = [];
 
+        // ===== SHA-256 HASH UTILITY =====
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
         // ===== LOGIN =====
-        function handleLogin(e) {
+        async function handleLogin(e) {
             e.preventDefault();
             const id = document.getElementById('login-id').value.trim();
             const pw = document.getElementById('login-pw').value.trim();
 
-            if (id === ADMIN_ID && pw === ADMIN_PW) {
+            const idHash = await sha256(id);
+            const pwHash = await sha256(pw);
+
+            if (idHash === ADMIN_ID_HASH && pwHash === ADMIN_PW_HASH) {
                 sessionStorage.setItem('admin_auth', '1');
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
