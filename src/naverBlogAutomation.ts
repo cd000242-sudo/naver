@@ -1881,18 +1881,8 @@ export class NaverBlogAutomation {
       this.page.setDefaultNavigationTimeout(this.options.navigationTimeoutMs ?? 60000);
       this.page.setDefaultTimeout(60000);
 
-      // ✅ [2026-03-12 FIX] beforeunload 다이얼로그 자동 수락
-      // 네이버 에디터에서 페이지 떠날 때 "사이트에서 나가시겠습니까?" 팝업 방지
-      this.page.on('dialog', async (dialog) => {
-        const type = dialog.type();
-        const message = dialog.message();
-        this.log(`🔔 다이얼로그 자동 수락: [${type}] ${message.substring(0, 50)}`);
-        try {
-          await dialog.accept();
-        } catch (e) {
-          // 이미 닫힌 다이얼로그 무시
-        }
-      });
+      // ✅ [2026-03-24 FIX] dialog 핸들러는 run()에서 ensureDialogHandler()로 매 사이클 등록
+      // setupBrowser는 세션 재사용 시 early-return하므로 여기서 등록하면 누락됨
 
       this.page.on('console', (msg) => {
         if (msg.type() === 'error') {
@@ -1907,6 +1897,45 @@ export class NaverBlogAutomation {
     } catch (error) {
       throw new Error(`드라이버 설정 중 오류 발생: ${(error as Error).message}`);
     }
+  }
+
+  /**
+   * ✅ [2026-03-24 FIX] Dialog 핸들러 확정 등록
+   * 
+   * 핵심 문제: setupBrowser()는 세션 재사용 시 early-return하여 dialog 핸들러를 건너뜀.
+   * 또한 run() finally에서 page.close() 후 다음 사이클에서 새 page에 핸들러가 없음.
+   * 
+   * 해결: run()에서 setupBrowser() 직후 이 메서드를 호출하여,
+   * 어떤 코드 경로를 타든 dialog 자동 수락이 항상 보장됨.
+   */
+  private ensureDialogHandler(): void {
+    if (!this.page) return;
+
+    // 기존 dialog 핸들러 중복 방지 — 제거 후 재등록
+    this.page.removeAllListeners('dialog');
+
+    this.page.on('dialog', async (dialog) => {
+      const type = dialog.type();
+      const message = dialog.message();
+      // 네이버 에디터 내부 상태 충돌 alert 감지 (발행 후 에디터 재진입 시 발생)
+      const isEditorStateAlert = message.includes('삭제되었거나') ||
+        message.includes('다른 페이지로 변경') ||
+        message.includes('게시물이 삭제') ||
+        message.includes('이미 발행') ||
+        message.includes('작성 중인 글');
+      if (isEditorStateAlert) {
+        this.log(`🔔 [에디터 상태 충돌] 자동 수락: ${message.substring(0, 80)}`);
+      } else {
+        this.log(`🔔 다이얼로그 자동 수락: [${type}] ${message.substring(0, 50)}`);
+      }
+      try {
+        await dialog.accept();
+      } catch (e) {
+        // 이미 닫힌 다이얼로그 무시
+      }
+    });
+
+    this.log('🛡️ Dialog 자동 수락 핸들러 등록 완료');
   }
 
   /**
@@ -2628,6 +2657,22 @@ export class NaverBlogAutomation {
     const currentUrl = page.url();
     this.log(`   현재 URL: ${currentUrl}`);
 
+    // ✅ [2026-03-24 FIX] 이전 에디터 상태 완전 초기화
+    // 이전 발행 사이클의 에디터 상태가 남아있으면 네이버 에디터가
+    // "게시물이 삭제되었거나 다른 페이지로 변경되었습니다" alert를 반복 발생시킴
+    // about:blank로 먼저 이동하여 이전 에디터의 JS 컨텍스트를 완전히 해제
+    if (currentUrl.includes('blog.naver.com') || currentUrl.includes('GoBlogWrite') ||
+        currentUrl.includes('blogPostWrite') || currentUrl.includes('NaverWriteEditor')) {
+      this.log('   🧹 이전 에디터 상태 초기화 (about:blank 경유)...');
+      try {
+        await page.goto('about:blank', { waitUntil: 'load', timeout: 5000 });
+        await this.delay(500);
+        this.log('   ✅ 이전 에디터 상태 해제 완료');
+      } catch (blankErr) {
+        this.log(`   ⚠️ about:blank 이동 실패 (무시): ${(blankErr as Error).message}`);
+      }
+    }
+
     // 로그인 페이지에 있으면 로그인이 필요함
     if (currentUrl.includes('nidlogin') || currentUrl.includes('login')) {
       this.log('   ⚠️ 로그인 페이지에 있습니다. 로그인을 다시 시도합니다...');
@@ -3127,6 +3172,31 @@ export class NaverBlogAutomation {
     } catch { }
 
     this.mainFrame = frame;
+
+    // ✅ [2026-03-24 FIX] 에디터 iframe 내 beforeunload 이벤트 제거
+    // 네이버 에디터가 등록한 beforeunload 핸들러가 페이지 이동 시
+    // "게시물이 삭제되었거나 다른 페이지로 변경되었습니다" alert를 발생시키는 것을 방지
+    try {
+      await frame.evaluate(() => {
+        // beforeunload 이벤트 핸들러 제거
+        window.onbeforeunload = null;
+        // ✅ [2026-03-24 FIX] 무효한 noop removeEventListener 제거
+        // removeEventListener는 동일 참조 함수만 제거 가능 — noop은 새 참조이므로 무의미
+        // 대신 addEventListener override로 새 등록만 차단 (기존 핸들러는 dialog 자동수락으로 방어)
+        // 강제 override: 새로운 beforeunload 핸들러가 등록되어도 무시
+        const originalAddEventListener = window.addEventListener;
+        window.addEventListener = function(type: string, ...args: any[]) {
+          if (type === 'beforeunload') {
+            return; // beforeunload 이벤트 등록 차단
+          }
+          return originalAddEventListener.apply(this, [type, ...args] as any);
+        };
+      });
+      this.log('   🛡️ beforeunload 이벤트 차단 완료 (alert 방지)');
+    } catch (beforeUnloadErr) {
+      this.log(`   ⚠️ beforeunload 제거 실패 (무시): ${(beforeUnloadErr as Error).message}`);
+    }
+
     this.log('✅ 메인 프레임으로 성공적으로 전환했습니다.');
   }
 
@@ -7862,11 +7932,10 @@ export class NaverBlogAutomation {
         this.page.removeAllListeners('console');
         this.page.removeAllListeners('error');
 
-        // 페이지 메모리 정리
+        // ✅ [2026-03-24 FIX] localStorage.clear() 제거 — 네이버 세션 쿠키 데이터 파괴 방지
+        // sessionStorage만 정리 (브라우저 종료 시 자동 소멸하는 데이터)
         try {
           await this.page.evaluate(() => {
-            // 전역 변수 정리
-            if (window.localStorage) window.localStorage.clear();
             if (window.sessionStorage) window.sessionStorage.clear();
             // DOM 정리
             document.body.innerHTML = '';
@@ -7970,6 +8039,11 @@ export class NaverBlogAutomation {
     }
 
     await this.setupBrowser();
+
+    // ✅ [2026-03-24 FIX] 매 run() 사이클마다 dialog 핸들러 보장
+    // setupBrowser()는 세션 재사용 시 early-return하여 핸들러 등록을 건너뛸 수 있음
+    // → run()에서 확정적으로 등록하여 어떤 경로든 dialog 자동 수락 보장
+    this.ensureDialogHandler();
 
     try {
       await this.loginToNaver();
