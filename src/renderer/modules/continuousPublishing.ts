@@ -906,6 +906,26 @@ export function setKeywordTitleOptionsFromItem(keyword: string, keywordAsTitle?:
 function applyContinuousTitleOverrides(item: ContinuousQueueItem, structuredContent: any): void {
   if (!structuredContent) return;
 
+  // ✅ [2026-03-24 FIX] keywordAsTitle=true → 키워드 그대로 보존 (제목 변형 방지)
+  // ContinuousQueueItem.keywordAsTitle가 true이면 모든 제목 조작/접두사를 건너뜀
+  if (item.keywordAsTitle && item.value) {
+    const kwTitle = item.value.trim();
+    structuredContent.selectedTitle = kwTitle;
+    if (Array.isArray(structuredContent.titleAlternatives)) {
+      structuredContent.titleAlternatives = [kwTitle];
+    }
+    if (Array.isArray(structuredContent.titleCandidates)) {
+      structuredContent.titleCandidates = [{ text: kwTitle, score: 100, reasoning: '사용자 지정 키워드 제목' }];
+    }
+    const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement;
+    if (titleInput) {
+      titleInput.value = kwTitle;
+      titleInput.readOnly = false;
+    }
+    console.log('[ContinuousTitle] ✅ keywordAsTitle=true → 키워드 그대로 보존:', kwTitle);
+    return;
+  }
+
   const keyword = (item.customKeyword || '').trim();
   const requestedTitle = (item.customTitle || '').trim();
   

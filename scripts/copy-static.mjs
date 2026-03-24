@@ -135,6 +135,7 @@ try {
     'errorUtils.js',
     'categoryNormalizeUtils.js',
     'textFormatUtils.js',
+    'time24Select.js',  // ✅ [2026-03-24] 예약 시간 선택 UI 컴포넌트 (continuousPublishing, scheduleManager, multiAccountManager에서 사용)
     // 중간 유틸리티 (기본에 의존)
     'kenBurnsStyles.js',
     'imageHelpers.js',
@@ -276,6 +277,7 @@ try {
     'multiAccountManager.js',
     'headingImageGen.js',
     'imageDisplayGrid.js',
+    'accountSettingsManager.js',  // ✅ [2026-03-24] 계정별 설정 관리 (licenseUI보다 먼저 로드 필수 - onAccountLogin/onAccountLogout 의존)
     'licenseUI.js',
     'scheduleManager.js',
     'localImageModals.js',
@@ -550,6 +552,13 @@ try {
   sanitized = sanitized.replace(/(\w+)_js_1\.(\w+)/g, '$2');
   // xxx_js_1['functionName'] -> functionName
   sanitized = sanitized.replace(/(\w+)_js_1\[["'](\w+)["']\]/g, '$2');
+
+  // ✅ [2026-03-24] tsc가 .js 확장자 없이 import한 모듈에 대해 _1 suffix를 사용하는 패턴 정리
+  // time24Select_1.createTime24Select → createTime24Select 등
+  // (0, time24Select_1.functionName)() -> functionName()
+  sanitized = sanitized.replace(/\(0,\s*time24Select_1\.(\w+)\)/g, '$1');
+  // time24Select_1.functionName -> functionName
+  sanitized = sanitized.replace(/time24Select_1\.(\w+)/g, '$1');
 
   // ✅ [2026-01-25] 브라우저에서 실행 불가능한 utils 함수 호출 주석 처리
   // 이 함수들은 별도 모듈에 정의되어 있어서 인라인 없이는 사용 불가

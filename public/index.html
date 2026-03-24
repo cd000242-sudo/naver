@@ -4014,6 +4014,22 @@
                                     class="nav-arrow">→</span>
                             </button>
 
+                            <!-- 🗑️ 캐시 관리 버튼 -->
+                            <button type="button" id="nav-cache-btn"
+                                style="width: 100%; padding: 1rem 1.25rem; background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(220, 38, 38, 0.08)); border: 2px solid #ef4444; border-radius: 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.25s ease; box-shadow: 0 3px 12px rgba(239, 68, 68, 0.15);">
+                                <div style="display: flex; align-items: center; gap: 0.85rem;">
+                                    <span style="font-size: 1.5rem;">🗑️</span>
+                                    <div style="text-align: left;">
+                                        <div style="font-weight: 700; color: #ef4444; font-size: 0.95rem;">캐시 관리
+                                        </div>
+                                        <div id="nav-cache-status" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem;">
+                                            이미지/세션 캐시 정리</div>
+                                    </div>
+                                </div>
+                                <span style="font-size: 1.2rem; color: #ef4444; transition: transform 0.2s;"
+                                    class="nav-arrow">→</span>
+                            </button>
+
                         </div>
 
                         <!-- ✅ [2026-03-17] 프록시 설정 섹션 -->
@@ -4073,6 +4089,91 @@
                                         onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 8px 25px rgba(168, 85, 247, 0.5), inset 0 1px 0 rgba(255,255,255,0.2)';"
                                         onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 20px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)';">
                                         ✅ 설정 완료
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ✅ [2026-03-24] 캐시 관리 섹션 -->
+                        <div id="settings-section-cache" style="display: none;">
+                            <div style="background: var(--bg-secondary, #1e1e2e); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(239, 68, 68, 0.2);">
+
+                                <!-- 헤더 -->
+                                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                    <div style="width: 42px; height: 42px; background: linear-gradient(135deg, #ef4444, #dc2626); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                        <span style="font-size: 1.3rem;">🗑️</span>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h3 style="color: var(--text-strong, #fff); margin: 0; font-size: 1.1rem; font-weight: 800;">캐시 관리</h3>
+                                        <p style="color: var(--text-muted); margin: 0.1rem 0 0 0; font-size: 0.78rem;">이미지, 세션, 브라우저 캐시를 정리하여 디스크 공간을 확보합니다</p>
+                                    </div>
+                                </div>
+
+                                <!-- 현재 캐시 용량 표시 -->
+                                <div id="cache-size-info" style="padding: 1rem; background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.15); border-radius: 12px; margin-bottom: 1.25rem;">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-strong);">📊 캐시 사용량</span>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <span id="cache-last-checked" style="font-size: 0.68rem; color: var(--text-muted);"></span>
+                                            <button type="button" id="cache-refresh-btn"
+                                                style="padding: 0.3rem 0.6rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 6px; color: #ef4444; cursor: pointer; font-size: 0.72rem; font-weight: 700;">
+                                                🔄 새로고침
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="cache-size-details" style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.8;">
+                                        <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                            <span>🖼️ 다운로드된 이미지</span>
+                                            <span id="cache-size-images" style="font-weight: 700; color: var(--text-strong);">계산 중...</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                            <span>🎨 생성된 이미지</span>
+                                            <span id="cache-size-generated" style="font-weight: 700; color: var(--text-strong);">계산 중...</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                            <span>🌐 브라우저 세션</span>
+                                            <span id="cache-size-sessions" style="font-weight: 700; color: var(--text-strong);">계산 중...</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                            <span>💾 브라우저 캐시</span>
+                                            <span id="cache-size-browser" style="font-weight: 700; color: var(--text-strong);">계산 중...</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0 0.2rem 0; font-size: 0.95rem;">
+                                            <span style="font-weight: 800; color: #ef4444;">📦 전체 캐시</span>
+                                            <span id="cache-size-total" style="font-weight: 800; color: #ef4444;">계산 중...</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 개별 삭제 버튼들 -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1.25rem;">
+                                    <button type="button" id="clear-cache-images-btn"
+                                        style="padding: 0.7rem; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 10px; color: #ef4444; cursor: pointer; font-size: 0.78rem; font-weight: 700; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
+                                        🖼️ 이미지 캐시 삭제
+                                    </button>
+                                    <button type="button" id="clear-cache-sessions-btn"
+                                        style="padding: 0.7rem; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 10px; color: #ef4444; cursor: pointer; font-size: 0.78rem; font-weight: 700; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
+                                        🌐 세션 캐시 삭제
+                                    </button>
+                                </div>
+
+                                <!-- 안내 텍스트 -->
+                                <div style="padding: 0.75rem 1rem; background: rgba(251, 191, 36, 0.06); border: 1px solid rgba(251, 191, 36, 0.15); border-radius: 10px; margin-bottom: 1.25rem;">
+                                    <div style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.6;">
+                                        <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.3rem;">⚠️ 삭제 안내</div>
+                                        <div>• <strong>이미지 캐시</strong>: 발행에 사용된 이미지 파일들 (재생성 가능)</div>
+                                        <div>• <strong>세션 캐시</strong>: 브라우저 세션 데이터 (다시 로그인 필요할 수 있음)</div>
+                                        <div>• 설정, 계정 정보, 라이선스는 <strong>삭제되지 않습니다</strong></div>
+                                    </div>
+                                </div>
+
+                                <!-- 전체 캐시 비우기 -->
+                                <div style="margin-top: 1.25rem; border-top: 1px solid rgba(239, 68, 68, 0.15); padding-top: 1.25rem;">
+                                    <button type="button" id="clear-cache-all-btn"
+                                        style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%); color: white; border: 3px solid #1a1a1a; border-radius: 12px; font-weight: 800; font-size: 1.05rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4), inset 0 1px 0 rgba(255,255,255,0.2); transition: all 0.2s;"
+                                        onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 8px 25px rgba(239, 68, 68, 0.5), inset 0 1px 0 rgba(255,255,255,0.2)';"
+                                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 20px rgba(239, 68, 68, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)';">
+                                        🗑️ 전체 캐시 비우기
                                     </button>
                                 </div>
                             </div>

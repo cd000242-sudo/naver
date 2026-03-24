@@ -78,15 +78,24 @@ export function safeLocalStorageSetItem(key: string, value: string, retryCount: 
                         return cleaned > 0;
                     },
                     // 3단계: 임시 데이터 정리 (백업, 에러 로그 등)
+                    // ✅ [2026-03-24 FIX] 'log_' 패턴이 'blog_*' 키를 오삭제하는 치명적 버그 수정
+                    // 기존: k.includes('log_') → 'blog_settings' 삭제됨!
+                    // 수정: 접두사 매칭 + 세분화된 패턴으로 안전하게 변경
                     () => {
                         let removed = 0;
-                        const deletePatterns = [
-                            'autosave_backup_', '_temp_', '_cache_',
-                            'debug_', 'log_', 'prev_'
+                        const deletePrefixes = [
+                            'autosave_backup_', 'debug_', 'error_log_',
+                            'crash_log_', 'prev_config_'
+                        ];
+                        const deleteInfixes = [
+                            '_temp_', '_cache_'
                         ];
                         for (let i = localStorage.length - 1; i >= 0; i--) {
                             const k = localStorage.key(i);
-                            if (k && deletePatterns.some(p => k.includes(p))) {
+                            if (k && (
+                                deletePrefixes.some(p => k.startsWith(p)) ||
+                                deleteInfixes.some(p => k.includes(p))
+                            )) {
                                 localStorage.removeItem(k);
                                 removed++;
                             }

@@ -32,7 +32,9 @@ export function getTranslationPrompt(headingText: string, imageStyle?: string, c
         ? `\nCONTEXT (use this to understand the EXACT scene described in the article — extract specific objects, actions, settings):\n"${contentContext.substring(0, 300)}"\n`
         : '';
 
-    return `You are an expert AI image prompt engineer specializing in ${imageStyle || 'realistic'} style.
+    return `OUTPUT FORMAT: Return ONLY the raw English image prompt. No explanation, no greeting, no markdown, no quotes, no "Sure, here is", no "Here's a prompt". Just the prompt text itself.
+
+You are an expert AI image prompt engineer specializing in ${imageStyle || 'realistic'} style.
 
 TASK: Generate a complete, ready-to-use image generation prompt from this Korean heading and its article context.
 
@@ -58,8 +60,9 @@ CRITICAL RULES:
 5. Focus on: subject, composition, environment, and mood
 6. If CONTEXT is provided, extract SPECIFIC details from it (e.g., specific product names, body parts, symptoms, locations, tools) and use them in the prompt instead of generic descriptions
 7. Keep under 50 words — be dense and specific, not verbose
-8. End with: NO TEXT NO WRITING
-9. Output ONLY the English prompt, nothing else`;
+8. End with: NO TEXT NO WRITING NO WATERMARK
+9. NEVER include: your name, greetings, "Here is", "Sure", explanations, markdown formatting, or quotes around the prompt
+10. Output ONLY the raw English prompt — a single paragraph, nothing else`;
 }
 
 // ✅ 캐시 저장 유틸리티 (최대 100개, 모든 모델 공유)
@@ -99,10 +102,10 @@ async function generateEnglishPromptWithGemini(headingText: string, imageStyle?:
         const geminiModel = (config as any).geminiTextModel || 'gemini-2.5-flash';
 
         const response = await fetchWithTimeout(
-            `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${apiKey}`,
+            `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent`,
             {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
                 body: JSON.stringify({
                     contents: [{ parts: [{ text: getTranslationPrompt(headingText, imageStyle, contentContext) }] }],
                     generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
@@ -154,7 +157,7 @@ async function generateEnglishPromptWithOpenAI(headingText: string, imageStyle?:
             body: JSON.stringify({
                 model: 'gpt-5.4',
                 messages: [
-                    { role: 'system', content: `You are an expert AI image prompt engineer for ${imageStyle || 'realistic'} style. Output ONLY the English prompt.` },
+                    { role: 'system', content: `You are an image prompt generator. Output ONLY the raw English prompt. No greetings, no explanations, no markdown, no "Here is". Just the prompt text.` },
                     { role: 'user', content: getTranslationPrompt(headingText, imageStyle, contentContext) }
                 ],
                 max_tokens: 200,
@@ -258,7 +261,7 @@ async function generateEnglishPromptWithPerplexity(headingText: string, imageSty
             body: JSON.stringify({
                 model: 'sonar',
                 messages: [
-                    { role: 'system', content: `You are an expert AI image prompt engineer for ${imageStyle || 'realistic'} style. Output ONLY the English prompt.` },
+                    { role: 'system', content: `You are an image prompt generator. Output ONLY the raw English prompt. No greetings, no explanations, no markdown, no "Here is". Just the prompt text.` },
                     { role: 'user', content: getTranslationPrompt(headingText, imageStyle, contentContext) }
                 ],
                 max_tokens: 200,
@@ -452,20 +455,36 @@ export function decomposeKoreanCompound(word: string, mainDict: Record<string, s
 }
 
 // ═══════════════════════════════════════════════════════════════════
-// ✅ [2026-03-18] AI 응답 정제 — 프롬프트 오염 차단 (100점 위생 처리)
-// Perplexity 자기 소개, 시스템 프롬프트 누출, 마크다운 서식 제거
+// ✅ [2026-03-24] AI 응답 정제 v2 — 대화성 응답 완전 차단
+// Perplexity Sonar가 시스템 프롬프트를 무시하고 대화체로 응답하는 문제 해결
 // ═══════════════════════════════════════════════════════════════════
+
+// ✅ 대화성 응답 감지 패턴 — 이 패턴으로 시작하면 해당 문장 전체 제거
+const CONVERSATIONAL_SENTENCE_STARTERS = /^(?:I\s+(?:appreciate|understand|need to|can't|cannot|would|'d|'ll|am\b|'m\b)|(?:Sure|Certainly|Of course|Here(?:'s| is| are)|Below is|The following|Let me|Thank you|Unfortunately|However|Please note|Note that|It(?:'s| is) (?:important|worth|not))[,\s])/i;
+
+// ✅ 대화성 키워드 밀도 체크 — 프롬프트에 이 단어가 3개 이상이면 대화체로 판정
+const CONVERSATIONAL_KEYWORDS = /\b(clarify|instructions|appreciate|understand|apologize|sorry|unfortunately|however|instead|rather|suggest|recommend|provide|generate|create for you|happy to|glad to|help you|assist|request|your prompt|your question)\b/gi;
+
 function sanitizeAIPromptResponse(raw: string): string {
     let cleaned = raw;
 
-    // 1. AI 자기 소개 / 역할 선언 제거
+    // 0. ✅ [2026-03-24] 대화성 문장 단위 제거 — 각 문장을 검사하여 대화체 문장 삭제
+    // "I appreciate your detailed instructions, but I need to clarify..." 같은 전체 문장 제거
+    const sentences = cleaned.split(/(?<=[.!?])\s+|(?:\n)/);
+    const nonConversationalSentences = sentences.filter(s => {
+        const trimmed = s.trim();
+        if (!trimmed) return false;
+        return !CONVERSATIONAL_SENTENCE_STARTERS.test(trimmed);
+    });
+    cleaned = nonConversationalSentences.join(' ');
+
+    // 1. AI 자기 소개 / 역할 선언 제거 (기존 유지)
     cleaned = cleaned
         .replace(/(?:^|\n)(?:I'm|I am|As an? )\s*(?:Perplexity|AI|assistant|language model|chatbot)[^.\n]*[.!]?/gi, '')
         .replace(/(?:^|\n)(?:Sure|Certainly|Of course|Here(?:'s| is))[^.\n]*[.:!]?\s*/gi, '')
         .replace(/(?:^|\n)(?:Here is|Below is|The following is)[^.\n]*[.:!]?\s*/gi, '');
 
-    // 1.5. ✅ [2026-03-20] AI 브랜드명 완전 제거 — 프롬프트 내 어디든 Perplexity 등 삭제
-    // Perplexity Sonar가 문장 중간에 자기 이름 삽입 → Imagen이 로고를 렌더링하는 버그 방지
+    // 1.5. AI 브랜드명 완전 제거
     cleaned = cleaned
         .replace(/\bPerplexity\b/gi, '')
         .replace(/\bChatGPT\b/gi, '')
@@ -497,7 +516,14 @@ function sanitizeAIPromptResponse(raw: string): string {
     // 5. 정리
     cleaned = cleaned.replace(/\s{2,}/g, ' ').trim();
 
-    // 6. 빈 결과 방어
+    // 6. ✅ [2026-03-24] 대화성 밀도 검증 — 정제 후에도 대화체 키워드가 3개 이상이면 전체 폐기
+    const convMatches = cleaned.match(CONVERSATIONAL_KEYWORDS);
+    if (convMatches && convMatches.length >= 3) {
+        console.warn(`[PromptTranslation] 🚫 대화성 응답 폐기 (키워드 ${convMatches.length}개): "${cleaned.substring(0, 60)}..."`);
+        return ''; // 빈 문자열 → 호출측에서 null로 처리 → 폴백 체인 진행
+    }
+
+    // 7. 빈 결과 방어
     if (!cleaned || cleaned.length < 5) {
         return raw.replace(/\s{2,}/g, ' ').trim();
     }
@@ -572,6 +598,13 @@ export async function generateEnglishPromptForHeading(heading: any, baseKeywords
             const result = await fn(headingTitle, imageStyle, resolvedContext, sharedConfig);
             if (result) {
                 const sanitized = sanitizeAIPromptResponse(result);
+                // ✅ [2026-03-24 FIX] 정제 후 빈 문자열/짧은 결과 검증 — 대화성 응답 폐기 시 빈 문자열 반환됨
+                // 빈 문자열을 캐시하거나 반환하면 이미지 생성이 빈 프롬프트로 실행되는 치명적 버그
+                if (!sanitized || sanitized.length < 10) {
+                    console.warn(`[PromptTranslation] ⚠️ ${name} 정제 후 무효 (${sanitized.length}자) → 폴백 진행`);
+                    _modelFailureCount.set(name, failures + 1);
+                    continue; // 다음 모델로 폴백
+                }
                 console.log(`[PromptTranslation] ✅ ${name} 성공 [${imageStyle}]: "${headingTitle}" → "${sanitized.substring(0, 50)}..."`);
                 cacheTranslation(cacheKey, sanitized);
                 _modelFailureCount.set(name, 0);

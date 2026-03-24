@@ -6,17 +6,18 @@
  */
 import type { ErrorLog, AutosaveData } from '../types/index.js';
 import { translateGeminiError } from './errorUtils.js';
+import { safeLocalStorageSetItem } from './storageUtils.js';
 
 // ═══════════════════════════════════════════════════════════════
 // 상수
 // ═══════════════════════════════════════════════════════════════
 const ERROR_LOG_KEY = 'naver_blog_error_logs';
-const MAX_ERROR_LOGS = 50;
+const MAX_ERROR_LOGS = 20; // ✅ [2026-03-24 FIX] 50→20 축소 (localStorage 용량 절약)
 const AUTOSAVE_KEY = 'naver_blog_autosave';
 const AUTOSAVE_INTERVAL = 30000; // 30초
 export const BACKUP_KEY_PREFIX = 'naver_blog_backup_';
 const BACKUP_INTERVAL = 300000; // 5분
-const MAX_BACKUPS = 10;
+const MAX_BACKUPS = 5; // ✅ [2026-03-24 FIX] 10→5 축소 (각 백업 최대 2MB → 총 10MB 이하로 제한)
 
 // ═══════════════════════════════════════════════════════════════
 // 콜백 주입 (renderer.ts 커플링 제거용)
@@ -53,7 +54,7 @@ export function logError(error: Error | string, type: ErrorLog['type'] = 'error'
         if (logs.length > MAX_ERROR_LOGS) {
             logs.splice(MAX_ERROR_LOGS);
         }
-        localStorage.setItem(ERROR_LOG_KEY, JSON.stringify(logs));
+        safeLocalStorageSetItem(ERROR_LOG_KEY, JSON.stringify(logs));
         console.error(`[${type.toUpperCase()}] ${errorLog.timestamp}`, {
             message: errorLog.message,
             stack: errorLog.stack,
@@ -150,21 +151,24 @@ export function autosaveContent(data: AutosaveData): void {
             }
         }
 
-        localStorage.setItem(AUTOSAVE_KEY, jsonString);
-        // ✅ [2026-03-23 FIX] console.debug로 변경 → 콘솔 도배 방지 (30초마다 출력되므로)
-        console.debug('[Autosave] 콘텐츠 임시 저장 완료:', new Date().toLocaleTimeString(), `(${Math.round(jsonString.length / 1024)}KB)`);
-    } catch (error: any) {
-        if (error?.name === 'QuotaExceededError' || error?.message?.includes('quota')) {
-            console.warn('[Autosave] localStorage 용량 초과, 이미지 없이 재시도...');
-            try {
-                localStorage.setItem(AUTOSAVE_KEY, JSON.stringify({ ...data, timestamp: Date.now(), generatedImages: [] }));
-                console.log('[Autosave] 이미지 제외하고 저장 성공');
-            } catch (retryError) {
-                console.error('[Autosave] 최소 데이터도 저장 실패:', retryError);
-            }
+        // ✅ [2026-03-24 FIX] safeLocalStorageSetItem으로 교체 → 할당량 초과 시 자동 정리
+        const saved = safeLocalStorageSetItem(AUTOSAVE_KEY, jsonString);
+        if (saved) {
+            console.debug('[Autosave] 콘텐츠 임시 저장 완료:', new Date().toLocaleTimeString(), `(${Math.round(jsonString.length / 1024)}KB)`);
         } else {
-            console.error('[Autosave] 임시 저장 실패:', error);
+            // safeLocalStorageSetItem이 5단계 정리 후에도 실패 → 이미지 제거하고 최소한으로 재시도
+            console.warn('[Autosave] ⚠️ 저장 실패, 이미지 제거 후 최소 저장 시도...');
+            const minimalJson = JSON.stringify({ ...data, timestamp: Date.now(), generatedImages: [] });
+            const retrySaved = safeLocalStorageSetItem(AUTOSAVE_KEY, minimalJson);
+            if (retrySaved) {
+                console.log('[Autosave] ✅ 이미지 제외 최소 저장 성공');
+            } else {
+                console.error('[Autosave] ❌ 최소 데이터도 저장 불가 — localStorage 심각한 용량 부족');
+            }
         }
+    } catch (error: any) {
+        // JSON.stringify 등 다른 예외만 여기서 처리
+        console.error('[Autosave] 임시 저장 실패:', error);
     }
 }
 
@@ -246,16 +250,18 @@ export function createBackup(): void {
             jsonString = JSON.stringify({ ...backupData, generatedImages: [] });
         }
 
-        localStorage.setItem(backupKey, jsonString);
-        cleanupOldBackups();
-        console.debug('[Backup] 백업 생성 완료:', new Date().toLocaleTimeString(), `(${Math.round(jsonString.length / 1024)}KB)`);
-    } catch (error: any) {
-        if (error?.name === 'QuotaExceededError' || error?.message?.includes('quota')) {
-            console.warn('[Backup] localStorage 용량 초과, 백업 건너뜀');
+        // ✅ [2026-03-24 FIX] safeLocalStorageSetItem으로 교체 → 할당량 초과 시 자동 정리
+        const saved = safeLocalStorageSetItem(backupKey, jsonString);
+        if (saved) {
             cleanupOldBackups();
+            console.debug('[Backup] 백업 생성 완료:', new Date().toLocaleTimeString(), `(${Math.round(jsonString.length / 1024)}KB)`);
         } else {
-            console.error('[Backup] 백업 생성 실패:', error);
+            console.warn('[Backup] localStorage 용량 부족으로 백업 건너뜀');
+            cleanupOldBackups(); // 공간 확보 시도
         }
+    } catch (error: any) {
+        console.error('[Backup] 백업 생성 실패:', error);
+        cleanupOldBackups();
     }
 }
 

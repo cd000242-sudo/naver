@@ -9,6 +9,12 @@ import { loadConfig } from '../../configManager.js';
 // ✅ 프롬프트 캐시 (최대 100개)
 const _mainPromptCache = new Map<string, string>();
 
+// ✅ [2026-03-24 SYNC] Renderer promptTranslation.ts v2 대화성 필터 이식
+// Perplexity Sonar의 대화성 응답("I appreciate...", "Sure, here is...")이
+// 이미지 프롬프트로 오염되어 Imagen이 텍스트를 렌더링하는 버그 방지
+const CONVERSATIONAL_SENTENCE_STARTERS = /^(?:I (?:appreciate|understand|can|would|need|want|think|believe|hope|see|know)|(?:Sure|Certainly|Of course|Here(?:'s| is)|Let me|Allow me|Thank you|Thanks|Please note|Note that|It'?s (?:important|worth|interesting)|As (?:an?|your|the)|Based on|In (?:this|my|the|order)|For (?:this|your)|To (?:create|help|make|provide|generate|ensure)|Allow me to|I'?d (?:like|love|be)|You (?:can|may|should|might)|This (?:is|was|will)|That (?:said|being)|With (?:that|this|all)|Welcome|Greetings|Great|Absolutely|Indeed|Actually|Apolog))/i;
+const CONVERSATIONAL_KEYWORDS = /\b(?:apologize|sorry|understand|clarify|however|additionally|furthermore|therefore|consequently|nevertheless|regarding|concerning|specifically|unfortunately|importantly|interestingly|originally|alternatively|basically|essentially|typically|generally|approach|method of|methodology|in terms of)\b/gi;
+
 function cachePrompt(key: string, value: string): void {
   if (_mainPromptCache.size > 100) {
     const firstKey = _mainPromptCache.keys().next().value;
@@ -62,10 +68,10 @@ async function tryGemini(headingText: string, imageStyle?: string, apiKey?: stri
   try {
     const model = geminiModel || 'gemini-2.5-flash';
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
         body: JSON.stringify({
           contents: [{ parts: [{ text: getTranslationPrompt(headingText, imageStyle) }] }],
           generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
@@ -162,6 +168,16 @@ async function tryPerplexity(headingText: string, imageStyle?: string, apiKey?: 
 function sanitizeAIPromptResponse(raw: string): string {
   let cleaned = raw;
 
+  // 0. ✅ [2026-03-24 SYNC] 대화성 문장 단위 제거 — Renderer v2 동기화
+  // "I appreciate your detailed instructions, but..." 같은 전체 문장 제거
+  const sentences = cleaned.split(/(?<=[.!?])\s+|(?:\n)/);
+  const nonConversationalSentences = sentences.filter(s => {
+    const trimmed = s.trim();
+    if (!trimmed) return false;
+    return !CONVERSATIONAL_SENTENCE_STARTERS.test(trimmed);
+  });
+  cleaned = nonConversationalSentences.join(' ');
+
   // 1. AI 자기 소개 / 역할 선언 제거
   cleaned = cleaned
     .replace(/(?:^|\n)(?:I'm|I am|As an? )\s*(?:Perplexity|AI|assistant|language model|chatbot)[^.\n]*[.!]?/gi, '')
@@ -201,7 +217,14 @@ function sanitizeAIPromptResponse(raw: string): string {
   // 5. 정리
   cleaned = cleaned.replace(/\s{2,}/g, ' ').trim();
 
-  // 6. 빈 결과 방어
+  // 6. ✅ [2026-03-24 SYNC] 대화성 밀도 검증 — 키워드 3개 이상이면 전체 폐기
+  const convMatches = cleaned.match(CONVERSATIONAL_KEYWORDS);
+  if (convMatches && convMatches.length >= 3) {
+    console.warn(`[MainPromptInference] 🚫 대화성 응답 폐기 (키워드 ${convMatches.length}개): "${cleaned.substring(0, 60)}..."`);
+    return ''; // 빈 문자열 → 호출측에서 폴백 처리
+  }
+
+  // 7. 빈 결과 방어
   if (!cleaned || cleaned.length < 5) {
     return raw.replace(/\s{2,}/g, ' ').trim();
   }
@@ -261,6 +284,12 @@ export async function generateEnglishPromptMain(
       if (result) {
         // ✅ [2026-03-18] AI 응답 정제 — Perplexity 자기 소개, 시스템 프롬프트 누출 차단
         const sanitized = sanitizeAIPromptResponse(result);
+        // ✅ [2026-03-24 FIX] 정제 후 빈 문자열/짧은 결과 검증 — 대화성 응답 폐기 시 빈 문자열 반환됨
+        // 빈 문자열을 캐시하거나 반환하면 이미지 생성이 빈 프롬프트로 실행되는 치명적 버그
+        if (!sanitized || sanitized.length < 10) {
+          console.warn(`[MainPromptInference] ⚠️ ${name} 정제 후 무효 (${sanitized.length}자) → 폴백 진행`);
+          continue; // 다음 모델로 폴백
+        }
         console.log(`[MainPromptInference] ✅ ${name} 성공: "${headingText}" → "${sanitized.substring(0, 60)}..."`);
         cachePrompt(cacheKey, sanitized);
         return sanitized;

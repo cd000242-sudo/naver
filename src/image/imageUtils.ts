@@ -181,7 +181,7 @@ export function sanitizeImagePrompt(prompt: string): string {
   if (!prompt) return '';
   let sanitized = String(prompt).trim();
 
-  // 위험한 키워드와 안전한 대체 표현 매핑
+  // 위험한 키워드와 안전한 대체 표현 매핑 (한국어만 — 이미지 생성 API 콘텐츠 정책 회피용)
   const dangerousKeywords: Record<string, string> = {
     // 건강/의료 관련 - 중립적 표현으로 변경
     '멍투성이': '일상적인 생활',
@@ -213,39 +213,13 @@ export function sanitizeImagePrompt(prompt: string): string {
     }
   }
 
-  // 영어 프롬프트 변환 시 안전한 표현으로 변환
-  const englishReplacements: Record<string, string> = {
-    'bruised': 'healthy',
-    'injured': 'active',
-    'hospital': 'home',
-    'sick': 'wellness',
-    'pain': 'comfort',
-    'suffering': 'living',
-    'hurt': 'care',
-    'wound': 'daily life',
-    'medical': 'everyday',
-    'treatment': 'routine',
-    'illness': 'health',
-    'disease': 'wellness',
-  };
+  // ✅ [2026-03-24] 영어 키워드 치환 삭제 — AI가 정확히 번역한 의미를 훼손하지 않음
+  // 이전: disease→wellness, medical→everyday 등으로 프롬프트 의미가 완전히 변질됨
+  // 예: "skin disease prevention" → "skin wellness prevention" (의미 훼손)
+  // 이제: AI 프롬프트 지시문 강화로 처음부터 깨끗한 프롬프트 생성 (promptTranslation.ts)
 
-  for (const [dangerous, safe] of Object.entries(englishReplacements)) {
-    sanitized = sanitized.replace(new RegExp(`\\b${dangerous}\\b`, 'gi'), safe);
-  }
-
-  // 안전한 접두사 추가 (프롬프트를 더 안전하게 만들기)
-  if (!sanitized.toLowerCase().includes('professional') && !sanitized.toLowerCase().includes('safe')) {
-    sanitized = `Professional, safe, positive, ${sanitized}`;
-  }
-
-  // 부정적 단어가 남아있는지 확인
-  const negativeWords = ['bruised', 'injured', 'hurt', 'pain', 'sick', 'hospital', 'medical treatment'];
-  for (const word of negativeWords) {
-    if (sanitized.toLowerCase().includes(word)) {
-      // 부정적 단어가 있으면 일반적인 긍정적 표현으로 대체
-      sanitized = sanitized.replace(new RegExp(`\\b${word}\\b`, 'gi'), 'healthy lifestyle');
-    }
-  }
+  // ✅ [2026-03-24] "Professional, safe, positive" 접두사 삭제
+  // Imagen 3.5가 프롬프트 내 텍스트를 이미지에 렌더링하므로, 불필요한 영어 텍스트 접두사 제거
 
   return sanitized.trim();
 }

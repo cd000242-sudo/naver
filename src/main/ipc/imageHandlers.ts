@@ -260,7 +260,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     }
 
                     const response = await axios.post(
-                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${geminiApiKey}`,
+                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent`,
                         {
                             contents: [{ parts: [{ text: fullPrompt }] }],
                             generationConfig: {
@@ -268,7 +268,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
                             }
                         },
                         {
-                            headers: { 'Content-Type': 'application/json' },
+                            headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiApiKey },
                             timeout: 120000
                         }
                     );
@@ -493,7 +493,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     }
 
                     const response = await axios.post(
-                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${geminiApiKey}`,
+                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent`,
                         {
                             contents: [{ parts: [{ text: fullPrompt }] }],
                             generationConfig: {
@@ -501,7 +501,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
                             }
                         },
                         {
-                            headers: { 'Content-Type': 'application/json' },
+                            headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiApiKey },
                             timeout: 120000
                         }
                     );
@@ -688,9 +688,9 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     if (!geminiApiKey) return { success: false, error: 'Gemini API 키가 설정되지 않았습니다.' };
 
                     const response = await axios.post(
-                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent?key=${geminiApiKey}`,
+                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent`,
                         { contents: [{ parts: [{ text: finalPrompt }] }], generationConfig: { responseModalities: ['Text', 'Image'] } },
-                        { headers: { 'Content-Type': 'application/json' }, timeout: 120000 }
+                        { headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiApiKey }, timeout: 120000 }
                     );
 
                     const candidates = response.data?.candidates;
@@ -784,9 +784,9 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     if (!geminiApiKey) return { success: false, error: 'Gemini API 키가 설정되지 않았습니다.' };
 
                     const response = await axios.post(
-                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${geminiApiKey}`,
+                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent`,
                         { contents: [{ parts: [{ text: finalPrompt }] }], generationConfig: { responseModalities: ['Text', 'Image'] } },
-                        { headers: { 'Content-Type': 'application/json' }, timeout: 120000 }
+                        { headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiApiKey }, timeout: 120000 }
                     );
 
                     const candidates = response.data?.candidates;
@@ -1046,10 +1046,10 @@ export function registerMediaHandlers(ctx: IpcContext): void {
             }
 
             const response = await axios.post(
-                `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+                `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
                 requestBody,
                 {
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
                     timeout: 180000 // 3분 타임아웃 (영상 생성은 오래 걸림)
                 }
             );

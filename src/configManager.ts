@@ -297,16 +297,16 @@ export async function loadConfig(): Promise<AppConfig> {
     console.log('[Config] 설정 파일 로드 성공:', filePath);
     console.log('[Config] 로드된 키 개수:', Object.keys(compatibleConfig).length);
     if (compatibleConfig.geminiApiKey) {
-      console.log('[Config] Gemini API 키 존재:', compatibleConfig.geminiApiKey.substring(0, 10) + '...');
+      console.log('[Config] Gemini API 키 존재: ✅');
     }
     if (compatibleConfig.openaiApiKey) {
-      console.log('[Config] OpenAI API 키 존재:', compatibleConfig.openaiApiKey.substring(0, 10) + '...');
+      console.log('[Config] OpenAI API 키 존재: ✅');
     }
     if (compatibleConfig.claudeApiKey) {
-      console.log('[Config] Claude API 키 존재:', compatibleConfig.claudeApiKey.substring(0, 10) + '...');
+      console.log('[Config] Claude API 키 존재: ✅');
     }
     if (compatibleConfig.pexelsApiKey) {
-      console.log('[Config] Pexels API 키 존재:', compatibleConfig.pexelsApiKey.substring(0, 10) + '...');
+      console.log('[Config] Pexels API 키 존재: ✅');
     }
 
     // 네이버 아이디/비밀번호 저장 상태 확인

@@ -92,7 +92,8 @@ export function openSettingsModal(): void {
             'settings-section-image-path',
             'settings-section-adb-ip',
             'settings-section-adspower',
-            'settings-section-proxy'
+            'settings-section-proxy',
+            'settings-section-cache'
         ];
         sectionIds.forEach(id => {
             const section = document.getElementById(id);
@@ -131,7 +132,8 @@ export function closeSettingsModal(): void {
             'settings-section-image-path',
             'settings-section-adb-ip',
             'settings-section-adspower',
-            'settings-section-proxy'
+            'settings-section-proxy',
+            'settings-section-cache'
         ];
         sectionIds.forEach(id => {
             const section = document.getElementById(id);
@@ -344,6 +346,9 @@ export function initSettingsModal(): void {
         // ✅ [2026-03-17] 프록시 설정 이벤트
         setupProxySettings();
 
+        // ✅ [2026-03-24] 캐시 관리 이벤트
+        setupCacheSettings();
+
         console.log('[SettingsModal] 📦 환경설정 모달 초기화 완료!');
     } catch (error) {
         console.error('[SettingsModal] ❌ 초기화 중 에러:', error);
@@ -365,6 +370,7 @@ function setupSettingsSectionToggle(): void {
         { btnId: 'nav-adb-ip-btn', sectionId: 'settings-section-adb-ip', title: '📱 테더링 IP 변경', color: '#10b981' },
         { btnId: 'nav-adspower-btn', sectionId: 'settings-section-adspower', title: '🌐 AdsPower 연동', color: '#f97316' },
         { btnId: 'nav-proxy-btn', sectionId: 'settings-section-proxy', title: '🛡️ 프록시 설정', color: '#a855f7' },
+        { btnId: 'nav-cache-btn', sectionId: 'settings-section-cache', title: '🗑️ 캐시 관리', color: '#ef4444' },
     ];
 
     // 모든 섹션 초기 숨김
@@ -478,7 +484,8 @@ function setupImageModelSettingsButton(): void {
                 'settings-section-image-path',
                 'settings-section-adb-ip',
                 'settings-section-adspower',
-                'settings-section-proxy'
+                'settings-section-proxy',
+                'settings-section-cache'
             ];
             otherSections.forEach(id => {
                 const el = document.getElementById(id);
@@ -1224,6 +1231,95 @@ function setupProxySettings(): void {
     });
 
     console.log('[SettingsModal] ✅ 프록시 설정 이벤트 연결 완료');
+}
+
+// ✅ [2026-03-24] 캐시 관리 설정 이벤트 핸들러 (v2: confirm 대화상자 + 조회 시간 + api 방어)
+function setupCacheSettings(): void {
+    console.log('[SettingsModal] 🗑️ 캐시 관리 이벤트 연결 시작...');
+
+    const api = (window as any).api;
+    if (!api?.getCacheSize || !api?.clearAppCache) {
+        console.warn('[SettingsModal] ⚠️ 캐시 관리 API가 preload에 없음 — 이벤트 연결 생략');
+        return;
+    }
+
+    const formatBytes = (bytes: number): string => {
+        if (bytes === 0) return '0 B';
+        if (bytes < 1024) return `${bytes} B`;
+        if (bytes < 1048576) return `${(bytes / 1024).toFixed(1)} KB`;
+        if (bytes < 1073741824) return `${(bytes / 1048576).toFixed(1)} MB`;
+        return `${(bytes / 1073741824).toFixed(2)} GB`;
+    };
+
+    const refreshCacheSize = async () => {
+        try {
+            const sizes = await api.getCacheSize();
+            const el = (id: string) => document.getElementById(id);
+            if (el('cache-size-images')) el('cache-size-images')!.textContent = formatBytes(sizes.images);
+            if (el('cache-size-generated')) el('cache-size-generated')!.textContent = formatBytes(sizes.generated);
+            if (el('cache-size-sessions')) el('cache-size-sessions')!.textContent = formatBytes(sizes.sessions);
+            if (el('cache-size-browser')) el('cache-size-browser')!.textContent = formatBytes(sizes.browser);
+            if (el('cache-size-total')) el('cache-size-total')!.textContent = formatBytes(sizes.total);
+            // ✅ 마지막 조회 시간 표시
+            const timeEl = el('cache-last-checked');
+            if (timeEl) {
+                const now = new Date();
+                timeEl.textContent = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')} 조회됨`;
+            }
+            console.log(`[SettingsModal] 캐시 용량: ${formatBytes(sizes.total)}`);
+        } catch (err) {
+            console.error('[SettingsModal] 캐시 용량 조회 실패:', err);
+        }
+    };
+
+    // 캐시 섹션이 열릴 때 자동 조회
+    document.getElementById('nav-cache-btn')?.addEventListener('click', () => {
+        setTimeout(refreshCacheSize, 100);
+    });
+
+    // 새로고침 버튼
+    document.getElementById('cache-refresh-btn')?.addEventListener('click', refreshCacheSize);
+
+    // ✅ 공통 삭제 핸들러 (중복 코드 제거)
+    const handleClear = async (category: 'images' | 'sessions' | 'all', btn: HTMLButtonElement | null, originalLabel: string) => {
+        if (btn) { btn.disabled = true; btn.innerHTML = '⏳ 삭제 중...'; }
+        try {
+            const result = await api.clearAppCache(category);
+            if ((window as any).toastManager) {
+                (window as any).toastManager[result.success ? 'success' : 'error'](
+                    result.success ? `✅ ${result.message}` : `❌ ${result.message}`
+                );
+            }
+            await refreshCacheSize();
+        } catch (err) {
+            if ((window as any).toastManager) (window as any).toastManager.error(`❌ 오류: ${(err as Error).message}`);
+        } finally {
+            if (btn) { btn.disabled = false; btn.innerHTML = originalLabel; }
+        }
+    };
+
+    // 이미지 캐시 삭제
+    document.getElementById('clear-cache-images-btn')?.addEventListener('click', () => {
+        const btn = document.getElementById('clear-cache-images-btn') as HTMLButtonElement;
+        handleClear('images', btn, '🖼️ 이미지 캐시 삭제');
+    });
+
+    // 세션 캐시 삭제
+    document.getElementById('clear-cache-sessions-btn')?.addEventListener('click', () => {
+        const btn = document.getElementById('clear-cache-sessions-btn') as HTMLButtonElement;
+        handleClear('sessions', btn, '🌐 세션 캐시 삭제');
+    });
+
+    // 전체 캐시 비우기 (✅ confirm 대화상자 추가 — 위험 작업 보호)
+    document.getElementById('clear-cache-all-btn')?.addEventListener('click', () => {
+        if (!confirm('⚠️ 전체 캐시를 삭제하시겠습니까?\n\n• 이미지, 세션, 브라우저 캐시가 모두 삭제됩니다\n• 네이버 로그인을 다시 해야 할 수 있습니다\n• 설정과 라이선스는 유지됩니다')) {
+            return;
+        }
+        const btn = document.getElementById('clear-cache-all-btn') as HTMLButtonElement;
+        handleClear('all', btn, '🗑️ 전체 캐시 비우기');
+    });
+
+    console.log('[SettingsModal] ✅ 캐시 관리 이벤트 연결 완료');
 }
 
 // 전역 노출

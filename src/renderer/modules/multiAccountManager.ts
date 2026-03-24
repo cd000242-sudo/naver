@@ -2731,18 +2731,22 @@ export async function initMultiAccountPublishModal() {
         });
       }
 
-      // ✅ [2026-03-22 BUG-4 FIX] 단일 항목 스케줄에서 날짜 누락 시 자동 생성
-      // distributeWithProtection은 auto 항목이 2개 이상일 때만 분배 → 1개 항목은 건너뜀 → scheduleDate=undefined
-      const singleScheduleItems = publishQueue.filter(item => item.publishMode === 'schedule' && !item.scheduleDate);
-      for (const item of singleScheduleItems) {
+      // ✅ [2026-03-24 BUG-4 FIX v2] 스케줄 항목에서 날짜 OR 시간 누락 시 자동 생성
+      // distributeWithProtection은 auto 항목이 2개 이상일 때만 분배 → 1개 항목은 건너뜀 → scheduleDate/Time=undefined
+      const incompleteScheduleItems = publishQueue.filter(item => item.publishMode === 'schedule' && (!item.scheduleDate || !item.scheduleTime));
+      for (const item of incompleteScheduleItems) {
         const autoTime = new Date(Date.now() + 30 * 60 * 1000); // 30분 후
         const ceilMin = Math.ceil(autoTime.getMinutes() / 10) * 10;
         autoTime.setMinutes(ceilMin % 60, 0, 0);
         if (ceilMin >= 60) autoTime.setHours(autoTime.getHours() + 1);
-        item.scheduleDate = `${autoTime.getFullYear()}-${String(autoTime.getMonth() + 1).padStart(2, '0')}-${String(autoTime.getDate()).padStart(2, '0')}`;
-        item.scheduleTime = `${String(autoTime.getHours()).padStart(2, '0')}:${String(autoTime.getMinutes()).padStart(2, '0')}`;
-        addMALog(`⚠️ [BUG-4 FIX] 단일 항목 날짜 자동 생성: ${item.scheduleDate} ${item.scheduleTime}`, 'warning');
-        console.log(`[BUG-4 FIX] 단일 항목 스케줄 날짜 자동 생성: ${item.scheduleDate} ${item.scheduleTime}`);
+        if (!item.scheduleDate) {
+          item.scheduleDate = `${autoTime.getFullYear()}-${String(autoTime.getMonth() + 1).padStart(2, '0')}-${String(autoTime.getDate()).padStart(2, '0')}`;
+        }
+        if (!item.scheduleTime) {
+          item.scheduleTime = `${String(autoTime.getHours()).padStart(2, '0')}:${String(autoTime.getMinutes()).padStart(2, '0')}`;
+        }
+        addMALog(`⚠️ [BUG-4 FIX v2] 예약 정보 자동 보정: ${item.scheduleDate} ${item.scheduleTime}`, 'warning');
+        console.log(`[BUG-4 FIX v2] 예약 정보 자동 보정: ${item.scheduleDate} ${item.scheduleTime}`);
       }
     }
 
@@ -3422,9 +3426,20 @@ export async function initMultiAccountPublishModal() {
             imageSource: queueItem.imageSource,
             toneStyle: queueItem.toneStyle,
             publishMode: queueItem.publishMode || 'publish',
-            // ✅ [2026-03-11 FIX] publishMode≠schedule이면 scheduleDate/Time 전달 안 함 (즉시발행인데 예약날짜 검증에 걸리는 버그 수정)
-            scheduleDate: (queueItem.publishMode === 'schedule') ? queueItem.scheduleDate : undefined,
-            scheduleTime: (queueItem.publishMode === 'schedule') ? queueItem.scheduleTime : undefined,
+            // ✅ [2026-03-24 FIX v2] 단일 Date 인스턴스 공유 — 자정 경계 불일치 방지
+            ...(() => {
+                if (queueItem.publishMode !== 'schedule') return { scheduleDate: undefined, scheduleTime: undefined };
+                if (queueItem.scheduleDate && queueItem.scheduleTime) return { scheduleDate: queueItem.scheduleDate, scheduleTime: queueItem.scheduleTime };
+                // 누락 시 30분 후 자동 생성 (단일 인스턴스로 날짜/시간 일관성 보장)
+                const fb = new Date(Date.now() + 30 * 60 * 1000);
+                const cm = Math.ceil(fb.getMinutes() / 10) * 10;
+                fb.setMinutes(cm >= 60 ? 0 : cm, 0, 0);
+                if (cm >= 60) fb.setHours(fb.getHours() + 1);
+                return {
+                    scheduleDate: queueItem.scheduleDate || `${fb.getFullYear()}-${String(fb.getMonth()+1).padStart(2,'0')}-${String(fb.getDate()).padStart(2,'0')}`,
+                    scheduleTime: queueItem.scheduleTime || `${String(fb.getHours()).padStart(2,'0')}:${String(fb.getMinutes()).padStart(2,'0')}`,
+                };
+            })(),
             scheduleType: queueItem.scheduleType || 'naver-server',
             scheduleInterval: queueItem.scheduleInterval, // ✅ [2026-02-08 FIX] 계정 간 발행 간격
             categoryName: String(queueItem.realCategoryName || '').trim() || undefined, // ✅ [2026-02-09 FIX] 실제 블로그 카테고리(폴더) 이름 사용 (콘텐츠 카테고리 아님)

@@ -506,7 +506,7 @@ async function connectViaAdsPower(): Promise<Page> {
   // labs.google/fx 접속 + 세션 확인
   await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'networkidle',
-    timeout: 30000,
+    timeout: 60000,
   });
   await cachedPage.waitForTimeout(1500);
 
@@ -563,7 +563,7 @@ async function connectViaAdsPower(): Promise<Page> {
 
   await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'networkidle',
-    timeout: 30000,
+    timeout: 60000,
   });
 
   sendImageLog('🔐 [ImageFX] AdsPower 브라우저에서 Google 계정으로 로그인해주세요. (최대 5분 대기)');
@@ -649,7 +649,7 @@ async function connectViaAdsPower(): Promise<Page> {
 
   await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'networkidle',
-    timeout: 30000,
+    timeout: 60000,
   });
   await new Promise(resolve => setTimeout(resolve, 1500));
 
@@ -814,7 +814,7 @@ async function connectViaPlaywright(): Promise<Page> {
   // labs.google/fx 접속 + 세션 확인
   await page.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'networkidle',
-    timeout: 30000,
+    timeout: 60000,
   });
   await page.waitForTimeout(1500);
 
@@ -867,7 +867,7 @@ async function connectViaPlaywright(): Promise<Page> {
   page = context.pages()[0] || await context.newPage();
   await page.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'networkidle',
-    timeout: 30000,
+    timeout: 60000,
   });
 
   sendImageLog('🔐 [ImageFX] 브라우저에서 Google 계정으로 로그인해주세요. (최대 5분 대기)');
@@ -934,7 +934,7 @@ async function connectViaPlaywright(): Promise<Page> {
   const headlessPage = headlessContext.pages()[0] || await headlessContext.newPage();
   await headlessPage.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'networkidle',
-    timeout: 30000,
+    timeout: 60000,
   });
   await new Promise(resolve => setTimeout(resolve, 1500));
 
@@ -1010,7 +1010,7 @@ async function ensureBrowserPage(): Promise<Page> {
     console.log('[ImageFX] 🌐 labs.google/fx 접속...');
     await page.goto('https://labs.google/fx/tools/image-fx', {
       waitUntil: 'networkidle',
-      timeout: 30000,
+      timeout: 60000,
     });
     await page.waitForTimeout(2000);
   }
@@ -1249,7 +1249,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
         if (!currentUrl.includes('labs.google/fx')) {
           await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
             waitUntil: 'networkidle',
-            timeout: 30000,
+            timeout: 60000,
           });
           await cachedPage.waitForTimeout(1500);
         }
@@ -1312,7 +1312,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
 
         await page.goto('https://labs.google/fx/tools/image-fx', {
           waitUntil: 'networkidle',
-          timeout: 30000,
+          timeout: 60000,
         });
         await page.waitForTimeout(1500);
         
@@ -1361,7 +1361,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
         page = context.pages()[0] || await context.newPage();
         await page.goto('https://labs.google/fx/tools/image-fx', {
           waitUntil: 'networkidle',
-          timeout: 30000,
+          timeout: 60000,
         });
 
         sendImageLog('🔐 [ImageFX] AdsPower 브라우저에서 Google 계정으로 로그인해주세요. (최대 5분 대기)');
@@ -1453,7 +1453,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
 
     await page.goto('https://labs.google/fx/tools/image-fx', {
       waitUntil: 'networkidle',
-      timeout: 30000,
+      timeout: 60000,
     });
     await page.waitForTimeout(1500);
 
@@ -1503,7 +1503,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
     page = context.pages()[0] || await context.newPage();
     await page.goto('https://labs.google/fx/tools/image-fx', {
       waitUntil: 'networkidle',
-      timeout: 30000,
+      timeout: 60000,
     });
 
     sendImageLog('🔐 [ImageFX] 브라우저에서 Google 계정으로 로그인해주세요. (최대 5분 대기)');
@@ -1762,7 +1762,7 @@ export async function switchGoogleAccountForImageFx(): Promise<{
       try {
         await page.goto('https://accounts.google.com/Logout', {
           waitUntil: 'domcontentloaded',  // networkidle 대신 — 리다이렉트 체인에서 안전
-          timeout: 15000,
+          timeout: 30000,
         });
       } catch (navErr: any) {
         console.warn(`[ImageFX] ⚠️ 로그아웃 네비게이션 경고 (계속 진행): ${navErr.message}`);
@@ -1791,7 +1791,7 @@ export async function switchGoogleAccountForImageFx(): Promise<{
       try {
         await page.goto('https://labs.google/fx/tools/image-fx', {
           waitUntil: 'networkidle',
-          timeout: 30000,
+          timeout: 60000,
         });
       } catch (navErr: any) {
         console.warn(`[ImageFX] ⚠️ ImageFX 네비게이션 경고: ${navErr.message}`);
@@ -1800,7 +1800,7 @@ export async function switchGoogleAccountForImageFx(): Promise<{
           page = await context.newPage();
           await page.goto('https://labs.google/fx/tools/image-fx', {
             waitUntil: 'domcontentloaded', // networkidle 대신 더 빠른 전략
-            timeout: 30000,
+            timeout: 60000,
           });
         } catch (retryErr: any) {
           console.warn(`[ImageFX] ⚠️ ImageFX 2차 네비게이션도 실패: ${retryErr.message}`);

@@ -419,8 +419,6 @@ export async function executePublishing(
                     // scheduleTime이 별도 필드로 있으면 합성
                     if ((payload as any).scheduleTime) {
                         // ✅ [2026-03-22 FIX] scheduleDate에 이미 시간이 포함되어 있으면 재합성하지 않음
-                        // semi-auto에서 getScheduleDateFromInput()이 "YYYY-MM-DD HH:mm" 형식을 반환하는 경우
-                        // 재합성하면 "YYYY-MM-DD HH:mm HH:mm" 같은 잘못된 형식이 생성됨
                         const alreadyHasTime = /^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}$/.test(payload.scheduleDate!);
                         if (alreadyHasTime) {
                             Logger.info(`[BlogExecutor] 📅 scheduleDate에 이미 시간 포함됨, 재합성 건너뜀: "${payload.scheduleDate}"`);
@@ -443,6 +441,17 @@ export async function executePublishing(
                     }
                     Logger.warn(`[BlogExecutor] ⚠️ scheduleDate 형식 불명: "${payload.scheduleDate}" — 그대로 통과`);
                 }
+                // ✅ [2026-03-24 FIX] 예약 모드인데 scheduleDate 누락 — 1시간 후 자동 생성 (최종 방어선)
+                if (payload.publishMode === 'schedule' && !payload.scheduleDate) {
+                    const fb = new Date(Date.now() + 60 * 60 * 1000);
+                    const cm = Math.ceil(fb.getMinutes() / 10) * 10;
+                    fb.setMinutes(cm >= 60 ? 0 : cm, 0, 0);
+                    if (cm >= 60) fb.setHours(fb.getHours() + 1);
+                    const d = `${fb.getFullYear()}-${String(fb.getMonth()+1).padStart(2,'0')}-${String(fb.getDate()).padStart(2,'0')}`;
+                    const t = `${String(fb.getHours()).padStart(2,'0')}:${String(fb.getMinutes()).padStart(2,'0')}`;
+                    Logger.warn(`[BlogExecutor] ⚠️ 예약 모드인데 scheduleDate 누락 → 자동 생성: ${d} ${t}`);
+                    return `${d} ${t}`;
+                }
                 return payload.scheduleDate;
             })(),
             scheduleType: payload.scheduleType,
@@ -456,8 +465,6 @@ export async function executePublishing(
             contentMode: payload.contentMode,
             toneStyle: payload.toneStyle,
             categoryName: payload.categoryName,
-            // ✅ [2026-02-16 DEBUG] IPC 수신된 categoryName 확인
-            ...((() => { console.log(`[BlogExecutor] 📂 payload.categoryName: "${payload.categoryName || '(없음)'}"`); return {}; })()),
             previousPostTitle: payload.previousPostTitle,
             previousPostUrl: payload.previousPostUrl,
             isFullAuto: payload.isFullAuto,

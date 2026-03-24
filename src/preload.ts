@@ -331,6 +331,23 @@ contextBridge.exposeInMainWorld('api', {
       return false;
     }
   },
+  // ✅ [2026-03-24] 캐시 관리 API
+  getCacheSize: async (): Promise<{ images: number; generated: number; sessions: number; browser: number; total: number }> => {
+    try {
+      return await ipcRenderer.invoke('app:getCacheSize');
+    } catch (error) {
+      console.error('[Preload] getCacheSize error:', error);
+      return { images: 0, generated: 0, sessions: 0, browser: 0, total: 0 };
+    }
+  },
+  clearAppCache: async (category: 'images' | 'sessions' | 'all'): Promise<{ success: boolean; freedBytes: number; message: string }> => {
+    try {
+      return await ipcRenderer.invoke('app:clearCache', category);
+    } catch (error) {
+      console.error('[Preload] clearAppCache error:', error);
+      return { success: false, freedBytes: 0, message: `캐시 삭제 실패: ${(error as Error).message}` };
+    }
+  },
   testLicenseServer: async (serverUrl?: string): Promise<{ success: boolean; message: string; response?: any }> => {
     try {
       return await ipcRenderer.invoke('license:testServer', serverUrl);

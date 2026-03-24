@@ -183,13 +183,13 @@ Complete image prompt:`;
     if (geminiApiKey) {
         try {
             const response = await axios.post(
-                `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiApiKey}`,
+                `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`,
                 {
                     contents: [{ parts: [{ text: promptText }] }],
                     generationConfig: { temperature: 0.7, maxOutputTokens: 150, topP: 0.9 }
                 },
                 {
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiApiKey },
                     timeout: 5000
                 }
             );

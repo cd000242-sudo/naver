@@ -1253,7 +1253,7 @@ async function generateSingleImageWithGemini(
               // ✅ [2026-03-02] RPM 쓰로틀 적용 (폴백 Gemini 호출)
               await geminiRpmThrottler.throttle();
               const fallbackResponse = await axiosFallback.post(
-                `https://generativelanguage.googleapis.com/v1beta/models/${fallback.model}:generateContent?key=${apiKey}`,
+                `https://generativelanguage.googleapis.com/v1beta/models/${fallback.model}:generateContent`,
                 {
                   contents: [{ parts: fallbackParts }],
                   generationConfig: {
@@ -1261,7 +1261,7 @@ async function generateSingleImageWithGemini(
                     imageConfig: { imageSize: '1K', aspectRatio: effectiveRatio }
                   }
                 },
-                { headers: { 'Content-Type': 'application/json' }, timeout: 60000, signal }
+                { headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey || '' }, timeout: 60000, signal }
               );
               geminiRpmThrottler.recordCall();
 
@@ -1364,7 +1364,7 @@ async function generateSingleImageWithGemini(
       await geminiRpmThrottler.throttle();
       console.log(`[NanoBananaPro] 📊 RPM 상태: ${geminiRpmThrottler.getStatus()}`);
       const response = await axios.post(
-        `https://generativelanguage.googleapis.com/v1beta/models/${selectedModel}:generateContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/${selectedModel}:generateContent`,
         {
           contents: [{ parts }],
           generationConfig: {
@@ -1373,7 +1373,7 @@ async function generateSingleImageWithGemini(
           }
         },
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey || '' },
           timeout: selectedResolution === '4K' ? 120000 : 90000,  // ✅ [2026-03-11 FIX] 타임아웃 상향 (4K:120초, 1K:90초) - 원래 엔진 성공률 극대화
           signal: signal  // ✅ [100점 수정] AbortSignal로 요청 취소 지원
         }
@@ -1763,7 +1763,7 @@ ABSOLUTE REQUIREMENTS:
   try {
     const axios = (await import('axios')).default;
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:generateContent?key=${key}`,  // ✅ [2026-01-21] 변경됨
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:generateContent`,  // ✅ [2026-03-24] API 키 헤더 전환
       {
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
@@ -1771,7 +1771,7 @@ ABSOLUTE REQUIREMENTS:
           imageConfig: { imageSize: '1K' }
         }
       },
-      { headers: { 'Content-Type': 'application/json' }, timeout: 60000 }
+      { headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, timeout: 60000 }
     );
 
     const candidates = response.data?.candidates;
@@ -1844,7 +1844,7 @@ ABSOLUTE REQUIREMENTS:
   try {
     const axios = (await import('axios')).default;
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:generateContent?key=${key}`,  // ✅ [2026-01-21] 변경됨
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:generateContent`,  // ✅ [2026-03-24] API 키 헤더 전환
       {
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
@@ -1852,7 +1852,7 @@ ABSOLUTE REQUIREMENTS:
           imageConfig: { imageSize: '1K' }
         }
       },
-      { headers: { 'Content-Type': 'application/json' }, timeout: 60000 }
+      { headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, timeout: 60000 }
     );
 
     const candidates = response.data?.candidates;

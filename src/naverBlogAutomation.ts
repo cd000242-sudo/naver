@@ -2777,8 +2777,21 @@ export class NaverBlogAutomation {
           continue; // 바이패스 후 다시 블로그 이동 시도
         }
 
+        // ✅ [2026-03-24 FIX] 로그인/세션 문제 감지 — 로그인 페이지 + 메인 페이지 리다이렉트 통합 처리
+        const isLoginRedirect = finalUrl.includes('nidlogin') || finalUrl.includes('login.naver') ||
+                                (finalUrl.includes('/login') && !finalUrl.includes('blog.naver.com'));
+        const isEditorUrl = finalUrl.includes('blogPostWrite') ||
+                            finalUrl.includes('GoBlogWrite') ||
+                            finalUrl.includes('NaverWriteEditor');
+        const isBlogDomain = finalUrl.includes('blog.naver.com');
+
+        // 에디터 URL 패턴이 확인되면 즉시 성공 (가장 빠른 경로)
+        if (isEditorUrl) {
+          this.log(`   ✅ 에디터 페이지 확인됨`);
+          // 아래 성공 처리로 진행
+        }
         // 로그인 페이지로 리다이렉트된 경우
-        if (finalUrl.includes('nidlogin') || finalUrl.includes('login')) {
+        else if (isLoginRedirect) {
           this.log(`   ⚠️ 로그인 페이지로 리다이렉트됨. 로그인 세션이 만료되었습니다.`);
 
           // 마지막 시도가 아니면 재로그인 시도
@@ -2823,23 +2836,65 @@ export class NaverBlogAutomation {
             await this.delay(3000);
 
             const retryUrl = page.url();
-            if (retryUrl.includes('blog.naver.com')) {
+            const retryIsEditor = retryUrl.includes('blogPostWrite') ||
+                                  retryUrl.includes('GoBlogWrite') ||
+                                  retryUrl.includes('NaverWriteEditor');
+            const retryHasEditorFrame = !retryIsEditor ? await page.evaluate(() => {
+              return !!document.querySelector('#mainFrame, iframe[name="mainFrame"]');
+            }).catch(() => false) : true;
+
+            if (retryUrl.includes('blog.naver.com') && (retryIsEditor || retryHasEditorFrame)) {
               navigationSuccess = true;
               break;
+            } else if (retryUrl.includes('blog.naver.com')) {
+              // 블로그 도메인이지만 에디터가 아님 → 재시도 (에러 대신)
+              this.log(`   ⚠️ 수동 로그인 후 블로그 메인으로 이동됨 (에디터 아님): ${retryUrl}`);
+              throw new Error('수동 로그인 후 블로그 에디터가 아닌 메인 페이지로 이동되었습니다.');
             } else {
               throw new Error('수동 로그인 후에도 블로그 페이지 접근 실패');
             }
           }
         }
-
-        // 블로그 페이지 확인
-        if (!finalUrl.includes('blog.naver.com')) {
+        // ✅ [2026-03-24 FIX] 메인 페이지 또는 비-에디터 페이지로 리다이렉트 감지
+        // 네이버 메인(www.naver.com) 또는 블로그 홈(blog.naver.com/{id})으로 리다이렉트된 경우
+        // → 세션이 유효하지만 GoBlogWrite 리다이렉트가 에디터 대신 메인으로 이동한 경우
+        else if (!isBlogDomain) {
+          // 네이버 메인이나 완전히 다른 페이지로 이동됨
+          this.log(`   ⚠️ 메인 페이지로 리다이렉트됨: ${finalUrl}`);
+          if (attempt < 3) {
+            this.log(`   🔄 세션 문제로 판단, 재로그인 후 재시도합니다...`);
+            await this.loginToNaver();
+            continue;
+          }
           throw new Error(
             `블로그 글쓰기 페이지로 이동하지 못했습니다.\n\n` +
             `현재 URL: ${finalUrl}\n` +
             `예상 URL: https://blog.naver.com/GoBlogWrite.naver\n\n` +
-            `네이버 서버 오류이거나 네트워크 문제일 수 있습니다.`
+            `네이버 메인 페이지로 리다이렉트되었습니다. 세션이 만료되었을 수 있습니다.`
           );
+        }
+        // blog.naver.com 도메인이지만 에디터가 아닌 경우 (블로그 홈 등)
+        else if (isBlogDomain && !isEditorUrl) {
+          // DOM에서 에디터 프레임 존재 여부로 최종 판단
+          const hasEditorFrame = await page.evaluate(() => {
+            return !!document.querySelector('#mainFrame, iframe[name="mainFrame"]');
+          }).catch(() => false);
+
+          if (hasEditorFrame) {
+            this.log(`   ✅ URL에 에디터 패턴은 없지만 에디터 프레임 확인됨`);
+            // 아래 성공 처리로 진행
+          } else {
+            this.log(`   ⚠️ 블로그 메인 페이지로 리다이렉트됨 (에디터 프레임 없음): ${finalUrl}`);
+            if (attempt < 3) {
+              this.log(`   🔄 에디터가 아닌 블로그 페이지입니다. 재시도합니다...`);
+              continue;
+            }
+            throw new Error(
+              `블로그 에디터가 아닌 블로그 메인 페이지로 이동되었습니다.\n\n` +
+              `현재 URL: ${finalUrl}\n` +
+              `에디터 페이지로 직접 이동해주세요.`
+            );
+          }
         }
 
         // 성공!
@@ -2919,16 +2974,63 @@ export class NaverBlogAutomation {
       }
     }
 
-    // 블로그 글쓰기 페이지가 아니면 에러
-    if (!currentUrl.includes('blog.naver.com') && !currentUrl.includes('GoBlogWrite')) {
-      throw new Error(
-        `메인 프레임을 찾을 수 없습니다.\n` +
-        `페이지 URL: ${currentUrl}\n` +
-        `가능한 원인:\n` +
-        `1. 블로그 글쓰기 페이지로 이동하지 못했습니다.\n` +
-        `2. 네이버 블로그 UI가 변경되었을 수 있습니다.\n` +
-        `해결 방법: 블로그 글쓰기 페이지로 이동한 후 다시 시도해주세요.`
-      );
+    // ✅ [2026-03-24 FIX] 블로그 글쓰기 페이지 검증 강화 — URL 패턴 + DOM 기반
+    const isOnEditorByUrl = currentUrl.includes('GoBlogWrite') ||
+                            currentUrl.includes('blogPostWrite') ||
+                            currentUrl.includes('NaverWriteEditor');
+    const isOnBlogDomain = currentUrl.includes('blog.naver.com');
+
+    if (!isOnEditorByUrl && !isOnBlogDomain) {
+      // 완전히 다른 도메인(www.naver.com 등)에 있는 경우 → 자동 재이동
+      this.log(`   ⚠️ 에디터가 아닌 페이지에 있습니다: ${currentUrl}`);
+      this.log(`   🔄 블로그 글쓰기 페이지로 재이동 시도...`);
+      try {
+        await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
+          waitUntil: 'domcontentloaded',
+          timeout: 30000
+        });
+        await this.delay(3000);
+        currentUrl = page.url();
+        this.log(`   재이동 후 URL: ${currentUrl}`);
+      } catch (retryErr) {
+        // 재이동도 실패하면 에러
+      }
+
+      // 재이동 후에도 에디터가 아니면 에러
+      const stillNotEditor = !currentUrl.includes('blog.naver.com') &&
+                             !currentUrl.includes('GoBlogWrite') &&
+                             !currentUrl.includes('blogPostWrite');
+      if (stillNotEditor) {
+        throw new Error(
+          `메인 프레임을 찾을 수 없습니다.\n` +
+          `페이지 URL: ${currentUrl}\n` +
+          `가능한 원인:\n` +
+          `1. 블로그 글쓰기 페이지로 이동하지 못했습니다.\n` +
+          `2. 네이버 메인 페이지로 리다이렉트되었습니다.\n` +
+          `해결 방법: 블로그 글쓰기 페이지로 이동한 후 다시 시도해주세요.`
+        );
+      }
+    } else if (isOnBlogDomain && !isOnEditorByUrl) {
+      // blog.naver.com 도메인이지만 에디터 URL 패턴이 없는 경우 → DOM으로 확인
+      const hasEditorFrame = await page.evaluate(() => {
+        return !!document.querySelector('#mainFrame, iframe[name="mainFrame"]');
+      }).catch(() => false);
+
+      if (!hasEditorFrame) {
+        this.log(`   ⚠️ 블로그 도메인이지만 에디터 프레임이 없습니다: ${currentUrl}`);
+        this.log(`   🔄 블로그 글쓰기 페이지로 재이동 시도...`);
+        try {
+          await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
+            waitUntil: 'domcontentloaded',
+            timeout: 30000
+          });
+          await this.delay(3000);
+          currentUrl = page.url();
+          this.log(`   재이동 후 URL: ${currentUrl}`);
+        } catch (retryErr) {
+          this.log(`   ⚠️ 재이동 실패: ${(retryErr as Error).message}`);
+        }
+      }
     }
 
     // ✅ 최적화: 짧은 대기 후 즉시 프레임 찾기 시작

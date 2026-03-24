@@ -23,15 +23,17 @@ export function safeHandle(
   const silent = options?.silent ?? false;
 
   ipcMain.handle(channel, async (event, ...args) => {
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
     try {
-      // 타임아웃 래핑
+      // 타임아웃 래핑 — ✅ [2026-03-24] clearTimeout 추가로 메모리 누수 방지
       const result = await Promise.race([
         handler(event, ...args),
-        new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error(`IPC 핸들러 타임아웃 (${timeoutMs / 1000}초): ${channel}`)), timeoutMs)
-        ),
+        new Promise<never>((_, reject) => {
+          timeoutId = setTimeout(() => reject(new Error(`IPC 핸들러 타임아웃 (${timeoutMs / 1000}초): ${channel}`)), timeoutMs);
+        }),
       ]);
 
+      clearTimeout(timeoutId);
       return result;
     } catch (error) {
       const errorMessage = (error as Error).message || '알 수 없는 오류';
