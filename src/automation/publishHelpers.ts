@@ -966,17 +966,25 @@ export async function setScheduleDateTime(self: any, frame: Frame, scheduleDate:
   }
 
   // 방법 1: datetime-local input (일반적인 HTML5 방식)
+  // ✅ [2026-03-24 FIX] 반올림된 시간 사용 + frame/page 양쪽 탐색
   if (!inputSuccess) {
-    const dateTimeInput = await frame.waitForSelector('input[type="datetime-local"]', {
+    let dateTimeInput = await frame.waitForSelector('input[type="datetime-local"]', {
       visible: true,
       timeout: 2000
     }).catch(() => null);
+    if (!dateTimeInput) {
+      dateTimeInput = await page.waitForSelector('input[type="datetime-local"]', {
+        visible: true,
+        timeout: 1000
+      }).catch(() => null);
+    }
 
     if (dateTimeInput) {
-      const dateTimeValue = `${year}-${month}-${day}T${hour}:${minute}`;
+      const dateTimeValue = `${year}-${month}-${day}T${adjustedHour}:${adjustedMinute}`;
       self.log(`   📝 방법 1: datetime-local 입력 시도 (${dateTimeValue})`);
 
-      await frame.evaluate((el: Element, value: string) => {
+      const ctx = dateTimeInput;
+      await (ctx as any).evaluate((el: Element, value: string) => {
         const input = el as HTMLInputElement;
         const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
           window.HTMLInputElement.prototype, 'value'
@@ -988,7 +996,7 @@ export async function setScheduleDateTime(self: any, frame: Frame, scheduleDate:
         }
         input.dispatchEvent(new Event('input', { bubbles: true }));
         input.dispatchEvent(new Event('change', { bubbles: true }));
-      }, dateTimeInput, dateTimeValue);
+      }, dateTimeValue);
 
       await self.delay(300);
       self.log(`   ✅ 방법 1 성공: 날짜/시간 입력 완료 (datetime-local: ${dateTimeValue})`);
@@ -997,16 +1005,21 @@ export async function setScheduleDateTime(self: any, frame: Frame, scheduleDate:
   }
 
   // 방법 2: date + time 분리
+  // ✅ [2026-03-24 FIX] 반올림된 시간 사용 + frame/page 양쪽 탐색
   if (!inputSuccess) {
-    const dateInput = await frame.$('input[type="date"]').catch(() => null);
-    const timeInput = await frame.$('input[type="time"]').catch(() => null);
+    let dateInput = await frame.$('input[type="date"]').catch(() => null);
+    let timeInput = await frame.$('input[type="time"]').catch(() => null);
+    if (!dateInput || !timeInput) {
+      dateInput = await page.$('input[type="date"]').catch(() => null);
+      timeInput = await page.$('input[type="time"]').catch(() => null);
+    }
 
     if (dateInput && timeInput) {
       const dateValue = `${year}-${month}-${day}`;
-      const timeValue = `${hour}:${minute}`;
+      const timeValue = `${adjustedHour}:${adjustedMinute}`;
       self.log(`   📝 방법 2: date + time 분리 입력 시도 (${dateValue} ${timeValue})`);
 
-      await frame.evaluate((dateEl: Element, timeEl: Element, dv: string, tv: string) => {
+      const setInputFn = (dateEl: Element, timeEl: Element, dv: string, tv: string) => {
         const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
           window.HTMLInputElement.prototype, 'value'
         )?.set;
@@ -1024,11 +1037,22 @@ export async function setScheduleDateTime(self: any, frame: Frame, scheduleDate:
         di.dispatchEvent(new Event('change', { bubbles: true }));
         ti.dispatchEvent(new Event('input', { bubbles: true }));
         ti.dispatchEvent(new Event('change', { bubbles: true }));
-      }, dateInput, timeInput, dateValue, timeValue);
+      };
 
-      await self.delay(300);
-      self.log(`   ✅ 방법 2 성공: 날짜/시간 입력 완료 (date: ${dateValue}, time: ${timeValue})`);
-      inputSuccess = true;
+      // dateInput과 timeInput이 같은 context에 있으므로 해당 context에서 evaluate
+      for (const ctx of [frame, page]) {
+        try {
+          const dEl = await ctx.$('input[type="date"]');
+          const tEl = await ctx.$('input[type="time"]');
+          if (dEl && tEl) {
+            await ctx.evaluate(setInputFn, dEl, tEl, dateValue, timeValue);
+            await self.delay(300);
+            self.log(`   ✅ 방법 2 성공: 날짜/시간 입력 완료 (date: ${dateValue}, time: ${timeValue})`);
+            inputSuccess = true;
+            break;
+          }
+        } catch { /* 다음 context 시도 */ }
+      }
     }
   }
 
@@ -1147,27 +1171,81 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
     // ✅ 날짜 유효성 검증
     self.validateScheduleDate(scheduleDate);
 
-    // 1단계: 발행 버튼 클릭
+    // 1단계: 발행 버튼 클릭 (✅ [2026-03-24 FIX] 재시도 + 모달 열림 확인 강화)
     self.log('📌 1단계: 발행 모달 열기');
     const publishBtnSelectors = [
-      'button.publish_btn__m9KHH[data-click-area="tpb.publish"]',
       'button[data-click-area="tpb.publish"]',
-      'button:has-text("발행")',
+      'button.publish_btn__m9KHH[data-click-area="tpb.publish"]',
+      'button.publish_btn__m9KHH',
     ];
-    // ✅ [2026-02-09 FIX] frame + page 양쪽에서 발행 버튼 찾기
+
+    // ✅ 발행 버튼 찾기: frame + page 양쪽
     let publishButton = await self.waitForAnySelector(frame, publishBtnSelectors, 10000);
     if (!publishButton) {
       self.log('⚠️ frame에서 발행 버튼 미발견, page에서 재시도...');
       publishButton = await self.waitForAnySelectorPage(page, publishBtnSelectors, 5000);
     }
+    // ✅ 텍스트 기반 폴백
+    if (!publishButton) {
+      self.log('⚠️ 셀렉터 실패 → 텍스트 기반 발행 버튼 탐색...');
+      for (const ctx of [frame, page]) {
+        publishButton = await ctx.evaluateHandle(() => {
+          const buttons = document.querySelectorAll('button');
+          for (const btn of buttons) {
+            const text = (btn.textContent || '').trim();
+            if (text === '발행' && btn.getBoundingClientRect().width > 0) return btn;
+          }
+          return null;
+        }).catch(() => null);
+        if (publishButton) {
+          const isEl = await publishButton.evaluate((el: any) => el instanceof HTMLElement).catch(() => false);
+          if (isEl) break;
+          publishButton = null;
+        }
+      }
+    }
 
     if (!publishButton) {
-      await page.screenshot({ path: 'error-no-publish-btn.png', fullPage: true });
+      await page.screenshot({ path: 'error-no-publish-btn.png', fullPage: true }).catch(() => {});
       throw new Error('발행 버튼을 찾을 수 없습니다. 스크린샷을 확인하세요.');
     }
 
-    await publishButton.click();
-    await self.delay(3000); // ✅ [2026-03-21 FIX] 발행 모달 열기 후 대기 2000→3000ms
+    // ✅ [2026-03-24 FIX] 발행 모달 열기 재시도 (최대 3회)
+    const modalIndicatorSelectors = [
+      'input#radio_time1',
+      'input#radio_time2',
+      'input[name="radio_time"]',
+      '[data-click-area="tpb*i.category"]',
+      'button[data-testid="seOnePublishBtn"]',
+      'button[data-click-area="tpb*i.publish"]',
+    ];
+    let modalOpened = false;
+    const MAX_MODAL_CLICKS = 3;
+
+    for (let mAttempt = 1; mAttempt <= MAX_MODAL_CLICKS; mAttempt++) {
+      self.log(`📌 발행 모달 열기 시도 ${mAttempt}/${MAX_MODAL_CLICKS}...`);
+      await publishButton.click();
+
+      const waitTimeout = 3000 + (mAttempt - 1) * 2000;
+      for (const sel of modalIndicatorSelectors) {
+        const el = await frame.waitForSelector(sel, { visible: true, timeout: waitTimeout }).catch(() => null)
+          || await page.waitForSelector(sel, { visible: true, timeout: 1000 }).catch(() => null);
+        if (el) {
+          modalOpened = true;
+          self.log(`   ✅ 발행 모달 열림 확인 (${sel})`);
+          break;
+        }
+      }
+      if (modalOpened) break;
+      if (mAttempt < MAX_MODAL_CLICKS) {
+        self.log(`   ⚠️ 모달 미열림, ${mAttempt + 1}번째 시도...`);
+        await self.delay(1500);
+      }
+    }
+    if (!modalOpened) {
+      self.log('⚠️ 모달 열림 확인 실패 — 그래도 진행합니다 (3초 대기)');
+      await self.delay(3000);
+    }
     self.log('✅ 발행 모달 열림');
 
     // ✅ [2026-02-09] 카테고리 자동 선택 (공통 메서드 사용)
@@ -1182,15 +1260,43 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
       'input[type="radio"][value="pre"]',
       'label[for="radio_time2"]',  // 레이블 클릭도 가능
     ];
-    // ✅ [2026-02-09 FIX] frame에서 먼저 찾고, 없으면 page에서도 시도
+    // ✅ [2026-03-24 FIX] frame + page 양쪽에서 찾기
     let scheduleRadio = await self.waitForAnySelector(frame, scheduleRadioSelectors, 5000);
     if (!scheduleRadio) {
       self.log('⚠️ frame에서 예약 라디오 버튼 미발견, page에서 재시도...');
       scheduleRadio = await self.waitForAnySelectorPage(page, scheduleRadioSelectors, 5000);
     }
+    // ✅ [2026-03-24 FIX] 텍스트 기반 폴백 — '예약' 텍스트가 포함된 label 또는 라디오 찾기
+    if (!scheduleRadio) {
+      self.log('⚠️ 셀렉터 실패 → 텍스트 기반 예약 라디오 탐색...');
+      for (const ctx of [frame, page]) {
+        scheduleRadio = await ctx.evaluateHandle(() => {
+          // 방법 1: label 텍스트로 찾기
+          const labels = document.querySelectorAll('label');
+          for (const label of labels) {
+            const text = (label.textContent || '').trim();
+            if (text.includes('예약') && label.getBoundingClientRect().width > 0) {
+              return label;
+            }
+          }
+          // 방법 2: 두 번째 radio_time 찾기 (첫 번째=즉시, 두 번째=예약)
+          const radios = document.querySelectorAll('input[name="radio_time"]');
+          if (radios.length >= 2) return radios[1];
+          return null;
+        }).catch(() => null);
+        if (scheduleRadio) {
+          const isEl = await scheduleRadio.evaluate((el: any) => el instanceof HTMLElement).catch(() => false);
+          if (isEl) {
+            self.log('✅ 텍스트 기반 예약 라디오 발견!');
+            break;
+          }
+          scheduleRadio = null;
+        }
+      }
+    }
 
     if (!scheduleRadio) {
-      await page.screenshot({ path: 'error-no-schedule-radio.png', fullPage: true });
+      await page.screenshot({ path: 'error-no-schedule-radio.png', fullPage: true }).catch(() => {});
       throw new Error('예약 라디오 버튼을 찾을 수 없습니다.');
     }
 
@@ -1293,20 +1399,45 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
     // 4단계: 확인 버튼 클릭
     self.log('📌 4단계: 예약발행 확인');
 
-    // ✅ [2026-02-09 FIX] 확인 버튼 — frame + page 양쪽에서 찾기
+    // ✅ [2026-03-24 FIX] 확인 버튼 — frame + page 양쪽 + 텍스트 폴백
     const confirmSelectors = [
       'button[data-testid="seOnePublishBtn"]',
-      'button.confirm_btn__WEaBq',
       'button[data-click-area="tpb*i.publish"]',
+      'button.confirm_btn__WEaBq',
     ];
     let confirmButton = await self.waitForAnySelector(frame, confirmSelectors, 5000);
     if (!confirmButton) {
       self.log('⚠️ frame에서 확인 버튼 미발견, page에서 재시도...');
       confirmButton = await self.waitForAnySelectorPage(page, confirmSelectors, 5000);
     }
+    // ✅ [2026-03-24 FIX] 텍스트 기반 폴백
+    if (!confirmButton) {
+      self.log('⚠️ 셀렉터 실패 → 텍스트 기반 확인 버튼 탐색...');
+      for (const ctx of [frame, page]) {
+        confirmButton = await ctx.evaluateHandle(() => {
+          const buttons = document.querySelectorAll('button');
+          for (const btn of buttons) {
+            const text = (btn.textContent || '').trim();
+            if ((text === '발행' || text === '확인' || text.includes('예약발행')) && !btn.hasAttribute('disabled')) {
+              const rect = btn.getBoundingClientRect();
+              if (rect.width > 0 && rect.height > 0) return btn;
+            }
+          }
+          return null;
+        }).catch(() => null);
+        if (confirmButton) {
+          const isEl = await confirmButton.evaluate((el: any) => el instanceof HTMLElement).catch(() => false);
+          if (isEl) {
+            self.log('✅ 텍스트 기반 확인 버튼 발견!');
+            break;
+          }
+          confirmButton = null;
+        }
+      }
+    }
 
     if (!confirmButton) {
-      await page.screenshot({ path: 'error-no-confirm-btn.png', fullPage: true });
+      await page.screenshot({ path: 'error-no-confirm-btn.png', fullPage: true }).catch(() => {});
 
       // 디버깅: frame + page 모든 버튼 찾기
       const scanButtons = () => {
@@ -1321,8 +1452,8 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
       };
       const frameButtons = await frame.evaluate(scanButtons).catch(() => []);
       const pageButtons = await page.evaluate(scanButtons).catch(() => []);
-      console.log('발행/확인 버튼 목록 (frame):', frameButtons);
-      console.log('발행/확인 버튼 목록 (page):', pageButtons);
+      self.log(`🔍 발행/확인 버튼 목록 (frame): ${JSON.stringify(frameButtons)}`);
+      self.log(`🔍 발행/확인 버튼 목록 (page): ${JSON.stringify(pageButtons)}`);
 
       throw new Error('확인 버튼을 찾을 수 없습니다. 스크린샷을 확인하세요.');
     }
