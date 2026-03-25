@@ -4,138 +4,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>결제 확인 중... — Better Life</title>
+    <title>결제 확인 중... — Leaders Pro</title>
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link
-        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
-        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="bg-pattern"></div>
+    <canvas id="particles-canvas"></canvas>
 
-    <div class="container">
-        <header class="page-header">
-            <div class="brand-badge">
-                <span class="dot"></span>
-                Better Life
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">홈</a>
+                <a href="lookup.html" class="nav-link">주문 조회</a>
             </div>
-        </header>
+        </div>
+    </nav>
 
-        <div class="code-container">
-            <!-- Phase 1: 로딩 -->
-            <div id="loading-section" class="loading-section">
-                <div class="loading-spinner-lg"></div>
-                <div class="loading-text">결제를 확인하고 있습니다</div>
-                <div class="loading-subtext">잠시만 기다려주세요... 코드가 곧 발급됩니다.</div>
-            </div>
+    <div class="lookup-container" style="padding-top: 120px; max-width: 600px;">
+        <!-- Phase 1: 로딩 -->
+        <div id="loading-section" class="loading-section">
+            <div class="loading-spinner-lg"></div>
+            <div class="loading-text">결제를 확인하고 있습니다</div>
+            <div class="loading-subtext">잠시만 기다려주세요... 코드가 곧 발급됩니다.</div>
+        </div>
 
-            <!-- Phase 2a: 코드 표시 (성공) -->
-            <div id="code-section" class="hidden">
-                <div class="code-card">
-                    <div class="success-icon">✓</div>
-                    <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 4px;">결제가 완료되었습니다!</h2>
-                    <p id="product-name" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 28px;">
+        <!-- Phase 2a: 코드 표시 (성공) -->
+        <div id="code-section" class="hidden">
+            <div class="code-card">
+                <div class="success-icon">✓</div>
+                <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 4px;">결제가 완료되었습니다!</h2>
+                <p id="product-name" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 28px;">
+                </p>
+
+                <div class="code-label">라이선스 코드</div>
+                <div class="code-display" id="license-code"></div>
+
+                <button class="btn-copy" id="btn-copy" onclick="copyCode()">
+                    📋 코드 복사하기
+                </button>
+
+                <div
+                    style="background: rgba(68, 215, 182, 0.06); border: 1px solid rgba(68, 215, 182, 0.15); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
+                    <p style="font-size: 0.85rem; color: var(--success); font-weight: 600; margin-bottom: 6px;">💡
+                        사용 방법</p>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+                        Leaders Pro 앱을 실행하고 라이선스 등록 화면에서<br>
+                        위 코드를 입력하면 바로 사용할 수 있습니다.
                     </p>
-
-                    <div class="code-label">라이선스 코드</div>
-                    <div class="code-display" id="license-code"></div>
-
-                    <button class="btn-copy" id="btn-copy" onclick="copyCode()">
-                        📋 코드 복사하기
-                    </button>
-
-                    <div
-                        style="background: rgba(68, 215, 182, 0.06); border: 1px solid rgba(68, 215, 182, 0.15); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
-                        <p style="font-size: 0.85rem; color: var(--success); font-weight: 600; margin-bottom: 6px;">💡
-                            사용 방법</p>
-                        <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
-                            Better Life 앱을 실행하고 라이선스 등록 화면에서<br>
-                            위 코드를 입력하면 바로 사용할 수 있습니다.
-                        </p>
-                    </div>
-
-                    <!-- 이메일 백업 -->
-                    <div class="email-backup">
-                        <div class="email-backup-label">📧 이메일로 코드 백업 받기 (선택)</div>
-                        <div class="email-input-group">
-                            <input type="email" class="email-input" id="backup-email" placeholder="이메일 주소 입력">
-                            <button class="btn-send-email" id="btn-send-email" onclick="sendBackupEmail()">발송</button>
-                        </div>
-                        <div class="email-status" id="email-status"></div>
-                    </div>
-
-                    <!-- ✅ 유료 커뮤니티 입장 -->
-                    <div
-                        style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(109,40,217,0.04)); border: 1px solid rgba(124,58,237,0.2); border-radius: var(--radius-sm);">
-                        <p style="font-size: 0.9rem; font-weight: 700; color: #a78bfa; margin-bottom: 6px;">🎉 Pro 커뮤니티에
-                            오신 것을 환영합니다!</p>
-                        <p
-                            style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
-                            아래 버튼으로 유료 사용자 전용 단톡방에 입장하세요.<br>
-                            입장 비밀번호: <strong
-                                style="color: #fff; background: rgba(124,58,237,0.3); padding: 2px 8px; border-radius: 4px;">1645</strong>
-                        </p>
-                        <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <a href="https://open.kakao.com/o/g4NRKlwh" target="_blank" rel="noreferrer"
-                                style="display: block; padding: 14px; text-align: center; border-radius: 12px; background: linear-gradient(135deg, #7C3AED, #6D28D9); color: #fff; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 15px rgba(124,58,237,0.3);"
-                                onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(124,58,237,0.4)'"
-                                onmouseout="this.style.transform='';this.style.boxShadow='0 4px 15px rgba(124,58,237,0.3)'">
-                                👥 Pro 전용 커뮤니티 입장하기
-                            </a>
-                            <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noreferrer"
-                                style="display: block; padding: 12px; text-align: center; border-radius: 10px; background: linear-gradient(135deg, #FEE500, #F5D100); color: #3C1E1E; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: all 0.2s;"
-                                onmouseover="this.style.transform='translateY(-1px)'"
-                                onmouseout="this.style.transform=''">
-                                💬 1:1 카카오톡 문의
-                            </a>
-                        </div>
-                    </div>
                 </div>
-            </div>
 
-            <!-- Phase 2b: 에러/타임아웃 -->
-            <div id="error-section" class="hidden">
-                <div class="error-card">
-                    <div class="error-icon">⚠️</div>
-                    <div class="error-title" id="error-title">결제 확인에 실패했습니다</div>
-                    <div class="error-message" id="error-message"></div>
-                    <button class="btn-retry" id="btn-check-order" onclick="checkOrder()" style="margin-bottom: 12px;">
-                        🔍 주문 확인하기
-                    </button>
-                    <br>
-                    <a href="index.html" class="btn-retry"
-                        style="background: var(--bg-glass); border: 1px solid var(--border-glass); font-size: 0.9rem; padding: 12px 24px;">
-                        ← 처음으로 돌아가기
-                    </a>
-                    <p style="margin-top: 16px; font-size: 0.8rem; color: var(--text-muted);">
-                        문의: <a href="mailto:cd000242@gmail.com"
-                            style="color: var(--accent-secondary);">cd000242@gmail.com</a>
+                <!-- 이메일 발송 상태 -->
+                <div id="email-sent-notice" class="hidden"
+                    style="background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
+                    <p style="font-size: 0.85rem; color: var(--gold-primary); font-weight: 600; margin-bottom: 4px;">📧 이메일 발송 완료</p>
+                    <p id="email-sent-address" style="font-size: 0.8rem; color: var(--text-secondary);">
+                        입력하신 이메일로 라이선스 코드가 발송되었습니다.
                     </p>
+                </div>
+
+                <!-- 이메일 백업 (이메일이 없을 때만) -->
+                <div class="email-backup" id="email-backup-section">
+                    <div class="email-backup-label">📧 이메일로 코드 백업 받기 (선택)</div>
+                    <div class="email-input-group">
+                        <input type="email" class="email-input" id="backup-email" placeholder="이메일 주소 입력">
+                        <button class="btn-send-email" id="btn-send-email" onclick="sendBackupEmail()">발송</button>
+                    </div>
+                    <div class="email-status" id="email-status"></div>
+                </div>
+
+                <!-- ✅ 유료 커뮤니티 입장 -->
+                <div
+                    style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(201,168,76,0.02)); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius-sm);">
+                    <p style="font-size: 0.9rem; font-weight: 700; color: var(--gold-primary); margin-bottom: 6px;">🎉 Pro 커뮤니티에
+                        오신 것을 환영합니다!</p>
+                    <p
+                        style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+                        아래 버튼으로 유료 사용자 전용 단톡방에 입장하세요.<br>
+                        입장 비밀번호: <strong
+                            style="color: #fff; background: rgba(201,168,76,0.3); padding: 2px 8px; border-radius: 4px;">1645</strong>
+                    </p>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="https://open.kakao.com/o/g4NRKlwh" target="_blank" rel="noreferrer"
+                            style="display: block; padding: 14px; text-align: center; border-radius: 12px; background: var(--gold-gradient); color: #0a0a0f; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 15px rgba(201,168,76,0.3);"
+                            onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(201,168,76,0.4)'"
+                            onmouseout="this.style.transform='';this.style.boxShadow='0 4px 15px rgba(201,168,76,0.3)'">
+                            👥 Pro 전용 커뮤니티 입장하기
+                        </a>
+                        <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noreferrer"
+                            style="display: block; padding: 12px; text-align: center; border-radius: 10px; background: linear-gradient(135deg, #FEE500, #F5D100); color: #3C1E1E; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: all 0.2s;"
+                            onmouseover="this.style.transform='translateY(-1px)'"
+                            onmouseout="this.style.transform=''">
+                            💬 1:1 카카오톡 문의
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="page-footer">
-            <p>© 2026 Better Life. All rights reserved.</p>
-        </footer>
+        <!-- Phase 2b: 에러/타임아웃 -->
+        <div id="error-section" class="hidden">
+            <div class="error-card" style="margin: 0; max-width: none;">
+                <div class="error-icon">⚠️</div>
+                <div class="error-title" id="error-title">결제 확인에 실패했습니다</div>
+                <div class="error-message" id="error-message"></div>
+                <button class="btn-retry" id="btn-check-order" onclick="checkOrder()" style="margin-bottom: 12px;">
+                    🔍 주문 확인하기
+                </button>
+                <br>
+                <a href="index.html" class="btn-retry"
+                    style="background: var(--bg-glass); border: 1px solid var(--border-glass); font-size: 0.9rem; padding: 12px 24px; color: var(--text-primary);">
+                    ← 처음으로 돌아가기
+                </a>
+                <p style="margin-top: 16px; font-size: 0.8rem; color: var(--text-muted);">
+                    문의: <a href="mailto:cd000242@gmail.com"
+                        style="color: var(--gold-primary);">cd000242@gmail.com</a>
+                </p>
+            </div>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+                <span>Leaders Pro</span>
+            </div>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         // ===== 설정 =====
         const CONFIG = {
-            // ★ GAS 웹앱 URL (배포 후 교체 필요)
             GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
-            TIMEOUT_MS: 20000, // 20초 타임아웃
+            TIMEOUT_MS: 20000,
         };
 
         let currentCode = null;
         let currentProduct = null;
         let currentOrderId = null;
+        let buyerEmail = null;
 
         // ===== URL 파라미터 파싱 =====
         function getParams() {
@@ -144,42 +165,39 @@
                 paymentKey: params.get('paymentKey'),
                 orderId: params.get('orderId'),
                 amount: params.get('amount'),
+                email: params.get('email'),
             };
         }
 
         // ===== JSONP 호출 =====
         function callGASviaJSONP(params) {
             return new Promise((resolve, reject) => {
-                // 타임아웃 설정
                 const timeoutId = setTimeout(() => {
                     cleanup();
                     reject(new Error('TIMEOUT'));
                 }, CONFIG.TIMEOUT_MS);
 
-                // 고유 콜백명
                 const callbackName = '__tossCallback_' + Date.now();
 
-                // 전역 콜백 등록
                 window[callbackName] = function (data) {
                     clearTimeout(timeoutId);
                     cleanup();
                     resolve(data);
                 };
 
-                // 정리 함수
                 function cleanup() {
                     delete window[callbackName];
                     const script = document.getElementById('jsonp-script');
                     if (script) script.remove();
                 }
 
-                // JSONP script 태그 생성
                 const script = document.createElement('script');
                 script.id = 'jsonp-script';
                 script.src = `${CONFIG.GAS_URL}?action=confirm-payment` +
                     `&paymentKey=${encodeURIComponent(params.paymentKey)}` +
                     `&orderId=${encodeURIComponent(params.orderId)}` +
                     `&amount=${encodeURIComponent(params.amount)}` +
+                    (params.email ? `&email=${encodeURIComponent(params.email)}` : '') +
                     `&callback=${callbackName}`;
 
                 script.onerror = function () {
@@ -204,8 +222,12 @@
             document.getElementById('error-section').classList.add('hidden');
             document.getElementById('code-section').classList.remove('hidden');
 
-            // 페이지 타이틀 변경
-            document.title = '라이선스 발급 완료 — Better Life';
+            document.title = '라이선스 발급 완료 — Leaders Pro';
+
+            // 이메일이 있으면 자동 발송
+            if (buyerEmail) {
+                autoSendEmail(buyerEmail, code, product);
+            }
         }
 
         // ===== 에러 표시 =====
@@ -231,7 +253,6 @@
                     btn.innerHTML = '📋 코드 복사하기';
                 }, 2000);
             } catch (err) {
-                // fallback
                 const textarea = document.createElement('textarea');
                 textarea.value = currentCode;
                 document.body.appendChild(textarea);
@@ -249,7 +270,49 @@
             }
         }
 
-        // ===== 이메일 백업 발송 =====
+        // ===== 이메일 자동 발송 =====
+        async function autoSendEmail(email, code, product) {
+            try {
+                const callbackName = '__autoEmailCallback_' + Date.now();
+
+                await new Promise((resolve, reject) => {
+                    const timeoutId = setTimeout(() => {
+                        delete window[callbackName];
+                        reject(new Error('TIMEOUT'));
+                    }, 15000);
+
+                    window[callbackName] = function (data) {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        resolve(data);
+                    };
+
+                    const script = document.createElement('script');
+                    script.src = `${CONFIG.GAS_URL}?action=send-code-email` +
+                        `&email=${encodeURIComponent(email)}` +
+                        `&code=${encodeURIComponent(code)}` +
+                        `&product=${encodeURIComponent(product)}` +
+                        `&callback=${callbackName}`;
+                    script.onerror = () => {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        reject(new Error('NETWORK'));
+                    };
+                    document.head.appendChild(script);
+                });
+
+                // 이메일 발송 성공: UI 업데이트
+                document.getElementById('email-sent-notice').classList.remove('hidden');
+                document.getElementById('email-sent-address').textContent =
+                    `${email}로 라이선스 코드가 발송되었습니다.`;
+                document.getElementById('email-backup-section').classList.add('hidden');
+            } catch (err) {
+                // 자동 발송 실패: 수동 백업 섹션 유지
+                console.log('이메일 자동 발송 실패, 수동 백업 UI 표시');
+            }
+        }
+
+        // ===== 이메일 백업 발송 (수동) =====
         async function sendBackupEmail() {
             const emailInput = document.getElementById('backup-email');
             const btn = document.getElementById('btn-send-email');
@@ -267,7 +330,6 @@
             status.textContent = '';
 
             try {
-                // GAS에 이메일 발송 요청 (JSONP)
                 const callbackName = '__emailCallback_' + Date.now();
 
                 await new Promise((resolve, reject) => {
@@ -315,7 +377,6 @@
                 return;
             }
 
-            // 로딩 상태로 전환
             document.getElementById('error-section').classList.add('hidden');
             document.getElementById('loading-section').classList.remove('hidden');
             document.querySelector('.loading-text').textContent = '주문을 확인하고 있습니다...';
@@ -357,11 +418,63 @@
             }
         }
 
+        // ===== Particles (same as main page) =====
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w, h;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight * 2;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * w;
+                    this.y = Math.random() * h;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedY = -(Math.random() * 0.3 + 0.1);
+                    this.speedX = (Math.random() - 0.5) * 0.2;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                    this.gold = Math.random() > 0.3;
+                }
+                update() {
+                    this.y += this.speedY;
+                    this.x += this.speedX;
+                    this.opacity += (Math.random() - 0.5) * 0.01;
+                    this.opacity = Math.max(0.05, Math.min(0.6, this.opacity));
+                    if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.gold
+                        ? `rgba(201, 168, 76, ${this.opacity})`
+                        : `rgba(255, 255, 255, ${this.opacity * 0.4})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < 50; i++) particles.push(new Particle());
+
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
         // ===== 메인 실행 =====
         async function main() {
             const params = getParams();
 
-            // 파라미터 검증
             if (!params.paymentKey || !params.orderId || !params.amount) {
                 showError('결제 정보가 올바르지 않습니다. 처음부터 다시 시도해주세요.', '잘못된 접근');
                 document.getElementById('btn-check-order').style.display = 'none';
@@ -369,9 +482,9 @@
             }
 
             currentOrderId = params.orderId;
+            buyerEmail = params.email || null;
 
             try {
-                // JSONP로 GAS 결제 승인 요청
                 const result = await callGASviaJSONP(params);
 
                 if (result.ok && result.code) {
@@ -391,8 +504,10 @@
             }
         }
 
-        // 페이지 로드 시 자동 실행
-        document.addEventListener('DOMContentLoaded', main);
+        document.addEventListener('DOMContentLoaded', () => {
+            initParticles();
+            main();
+        });
     </script>
 </body>
 
