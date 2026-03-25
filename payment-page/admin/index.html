@@ -1384,18 +1384,25 @@
         }
 
         // ===== SITE EDITOR =====
+        const DEFAULT_DOWNLOAD_URLS = {
+            naver: 'https://github.com/cd000242-sudo/naver/releases/download/v1.3.0/Better.Life.Naver.Setup.1.3.0.zip',
+            orbit: '',
+            tistory: '',
+            leword: 'https://github.com/cd000242-sudo/leword-app/releases/download/v1.0.5/LEWORD.Setup.1.0.5.zip'
+        };
+
         function loadEditorContent() {
             const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
             if (saved.heroTitle) document.getElementById('edit-hero-title').value = saved.heroTitle;
             if (saved.heroDesc) document.getElementById('edit-hero-desc').value = saved.heroDesc;
             if (saved.heroBenefit) document.getElementById('edit-hero-benefit').value = saved.heroBenefit;
             if (saved.notice) document.getElementById('edit-notice').value = saved.notice;
-            // 제품별 다운로드 URL 로드
+            // 제품별 다운로드 URL 로드 (저장값 > 기본값)
             const urls = saved.downloadUrls || {};
-            if (urls.naver) document.getElementById('edit-dl-naver').value = urls.naver;
-            if (urls.orbit) document.getElementById('edit-dl-orbit').value = urls.orbit;
-            if (urls.tistory) document.getElementById('edit-dl-tistory').value = urls.tistory;
-            if (urls.leword) document.getElementById('edit-dl-leword').value = urls.leword;
+            document.getElementById('edit-dl-naver').value = urls.naver || DEFAULT_DOWNLOAD_URLS.naver;
+            document.getElementById('edit-dl-orbit').value = urls.orbit || DEFAULT_DOWNLOAD_URLS.orbit;
+            document.getElementById('edit-dl-tistory').value = urls.tistory || DEFAULT_DOWNLOAD_URLS.tistory;
+            document.getElementById('edit-dl-leword').value = urls.leword || DEFAULT_DOWNLOAD_URLS.leword;
         }
 
         function saveEditorContent() {
