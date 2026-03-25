@@ -155,6 +155,10 @@ class BrowserSessionManager {
                         console.log(`[BrowserSessionManager] ✅ 기존 세션 재사용: ${accountId.substring(0, 3)}*** (수명: ${Math.floor(sessionAge / 60000)}분)`);
                         existingSession.lastActivity = Date.now();
                         this.activeAccountId = accountId;
+
+                        // ✅ [2026-03-26] 발행 후 최소화된 창 자동 복원
+                        await this.restoreWindow(accountId);
+
                         return existingSession;
                     }
                 }
@@ -323,6 +327,27 @@ class BrowserSessionManager {
             session.isLoggedIn = isLoggedIn;
             session.lastActivity = Date.now();
             console.log(`[BrowserSessionManager] 로그인 상태 업데이트: ${accountId.substring(0, 3)}*** → ${isLoggedIn ? '✅ 로그인됨' : '❌ 로그아웃'}`);
+        }
+    }
+
+    /**
+     * ✅ [2026-03-26] 최소화된 브라우저 창 복원
+     * 발행 완료 후 최소화된 창을 다음 사용 시 복원합니다.
+     */
+    async restoreWindow(accountId: string): Promise<void> {
+        const session = this.sessions.get(accountId);
+        if (!session?.page) return;
+        try {
+            const client = await session.page.target().createCDPSession();
+            const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
+            await client.send('Browser.setWindowBounds', {
+                windowId,
+                bounds: { windowState: 'normal' }
+            });
+            await client.detach();
+            console.log(`[BrowserSessionManager] 🔼 창 복원: ${accountId.substring(0, 3)}***`);
+        } catch {
+            // 복원 실패 시 무시 — 새 브라우저 실행으로 자동 해결됨
         }
     }
 

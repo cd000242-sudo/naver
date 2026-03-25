@@ -1425,6 +1425,9 @@ export class NaverBlogAutomation {
           this.cursor = createGhostCursor(this.page);
           this.log('   🎯 Ghost Cursor 초기화 완료');
 
+          // ✅ [2026-03-26] 최소화된 브라우저 창 복원 (이전 발행 후 최소화 상태일 수 있음)
+          await this.restoreBrowserWindow();
+
           return; // 세션 재사용 성공!
         } catch {
           // ✅ [2026-03-22 FIX] 닫힌 페이지 감지 시 세션 완전 재생성
@@ -7931,6 +7934,48 @@ export class NaverBlogAutomation {
     }
   }
 
+  /**
+   * ✅ [2026-03-26] 발행 완료 후 브라우저 창 최소화 (세션 유지)
+   * CDP Browser.setWindowBounds를 사용하여 창을 최소화합니다.
+   * 사용자가 실수로 창을 닫는 것을 방지하면서 세션(쿠키/로그인)은 유지됩니다.
+   */
+  async minimizeBrowserWindow(): Promise<void> {
+    if (!this.page) return;
+    try {
+      const client = await this.page.target().createCDPSession();
+      const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
+      await client.send('Browser.setWindowBounds', {
+        windowId,
+        bounds: { windowState: 'minimized' }
+      });
+      await client.detach();
+      this.log('🔽 브라우저 창 최소화 완료 (세션 유지)');
+    } catch (e) {
+      this.log(`⚠️ 브라우저 창 최소화 실패: ${(e as Error).message}`);
+    }
+  }
+
+  /**
+   * ✅ [2026-03-26] 다음 발행 시작 시 브라우저 창 복원
+   * 최소화된 창을 다시 보이도록 복원합니다.
+   */
+  async restoreBrowserWindow(): Promise<void> {
+    if (!this.page) return;
+    try {
+      const client = await this.page.target().createCDPSession();
+      const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
+      await client.send('Browser.setWindowBounds', {
+        windowId,
+        bounds: { windowState: 'normal' }
+      });
+      await client.detach();
+      this.log('🔼 브라우저 창 복원 완료');
+    } catch (e) {
+      // 복원 실패는 심각하지 않음 — 새 브라우저 시작 시 자동 해결
+      this.log(`⚠️ 브라우저 창 복원 실패 (무시): ${(e as Error).message}`);
+    }
+  }
+
   async closeBrowser(): Promise<void> {
     if (this.browser) {
       this.log('⏳ 브라우저 종료 중...');
@@ -8155,6 +8200,9 @@ export class NaverBlogAutomation {
             this.log(`⚠️ 여운 행동 스킵: ${(afterErr as Error).message}`);
           }
         }
+
+        // ✅ [2026-03-26] 발행 완료 후 브라우저 창 최소화 — 사용자가 실수로 닫는 것 방지
+        await this.minimizeBrowserWindow();
         // ✅ [2026-03-25 FIX] keepBrowserOpen=true일 때 page를 닫지 않음 — 세션 재사용 보장
         // page.close() 호출 시 this.page=null → 다음 발행에서 setupBrowser() → 재로그인 → 캡차 유발
 
