@@ -1326,9 +1326,18 @@
         };
 
         function getDownloadUrl(product) {
+            // Default download URLs (GitHub Releases)
+            const defaults = {
+                naver: 'https://github.com/cd000242-sudo/naver/releases/download/v1.3.0/Better.Life.Naver.Setup.1.3.0.zip',
+                leword: 'https://github.com/cd000242-sudo/leword-app/releases/download/v1.0.5/LEWORD.Setup.1.0.5.zip',
+                orbit: '',
+                tistory: ''
+            };
+            // Admin overrides from localStorage
             const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
             const urls = saved.downloadUrls || {};
             if (product && urls[product]) return urls[product];
+            if (product && defaults[product]) return defaults[product];
             return saved.downloadUrl || '';
         }
 
