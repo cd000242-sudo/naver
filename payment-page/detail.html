@@ -59,8 +59,40 @@
             0%, 100% { box-shadow: 0 4px 20px rgba(255,107,138,0.2); }
             50% { box-shadow: 0 4px 30px rgba(255,107,138,0.6), 0 0 60px rgba(255,183,197,0.3); }
         }
+        /* ========== MUSIC HINT TOOLTIP ========== */
+        .music-hint {
+            position: fixed; bottom: 108px; right: 84px; z-index: 10000;
+            background: rgba(255,183,197,0.92); color: #1a0a10;
+            padding: 10px 16px; border-radius: 12px;
+            font-size: 13px; font-weight: 600; white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(255,107,138,0.3);
+            animation: hintFadeIn 0.5s ease-out both, hintFadeOut 0.5s 6s ease-in both;
+            pointer-events: none;
+        }
+        .music-hint::after {
+            content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%);
+            border: 6px solid transparent; border-left-color: rgba(255,183,197,0.92);
+        }
+        @keyframes hintFadeIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes hintFadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+        .music-toggle.attention {
+            animation: bounceAttention 1s ease-in-out 3;
+        }
+        @keyframes bounceAttention {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(0.95); }
+            75% { transform: scale(1.1); }
+        }
         @media (max-width: 768px) {
             .music-toggle { bottom: 90px; right: 16px; width: 44px; height: 44px; font-size: 18px; }
+            .music-hint { bottom: 98px; right: 68px; font-size: 11px; padding: 8px 12px; }
         }
 
         /* ========== SPRING ACCENT OVERLAY ========== */
@@ -1979,7 +2011,8 @@
 <div class="petal-container" id="petalContainer"></div>
 
 <!-- MUSIC TOGGLE -->
-<button class="music-toggle" id="musicToggle" title="🌸 봄 배경음악 켜기/끄기">🔇</button>
+<button class="music-toggle attention" id="musicToggle" title="🌸 봄 배경음악 켜기/끄기">🔇</button>
+<div class="music-hint" id="musicHint">🌸 클릭하면 봄 음악이 흘러요</div>
 
 <!-- ========== SCRIPTS ========== -->
 <script>
@@ -2176,6 +2209,10 @@ document.addEventListener('keydown', e => {
     };
 
     btn.addEventListener('click', function() {
+        // Dismiss hint tooltip
+        var hint = document.getElementById('musicHint');
+        if (hint) hint.remove();
+        btn.classList.remove('attention');
         if (!apiReady) return;
         if (!isPlaying) {
             player.playVideo();
