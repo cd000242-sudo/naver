@@ -6197,11 +6197,15 @@ ${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
   // ✅✅✅ 네이버 API 우선 사용 (빠르고 안정적!) ✅✅✅
   // ✅ [2026-03-08 FIX] 네이버 블로그 URL이 있으면 검색 API 우선 수집 건너뜀 (엉뚱한 콘텐츠 방지)
   // ✅ [2026-03-15 FIX] 스마트스토어 URL이면 검색 API 우선 수집 건너뜀 (다른 제품 콘텐츠 주입 방지)
+  // ✅ [2026-03-25 FIX] 명시적 URL 입력 시 검색 API 우선 수집 건너뜀 (노이즈 오염 방지)
   let naverApiContent = '';
   const searchQuery = (baseText && baseText.length > 0 && baseText.length < 200 ? baseText : '') || (keywords.length > 0 ? keywords.slice(0, 5).join(' ') : '');
   const hasExplicitNaverBlogUrlGlobal = /blog\.naver\.com/i.test(rssUrlInput);
+  // ✅ [2026-03-25 FIX] URL이 명시적으로 입력된 경우 → 해당 URL 크롤링 결과를 우선 사용
+  // 검색 API가 URL과 무관한 키워드 기반 콘텐츠를 가져와 baseBody를 덮어씌우는 문제 방지
+  const hasExplicitUrl = rssUrlInput.length > 0 && /^https?:\/\//i.test(rssUrlInput);
 
-  if (hasNaverApi && searchQuery && !hasExplicitNaverBlogUrlGlobal && !isNaverStoreUrl) {
+  if (hasNaverApi && searchQuery && !hasExplicitNaverBlogUrlGlobal && !isNaverStoreUrl && !hasExplicitUrl) {
     console.log(`\n🚀 [네이버 API 우선] 빠른 콘텐츠 수집 시작! 검색어: "${searchQuery}"`);
     const startTime = Date.now();
 
@@ -6218,6 +6222,9 @@ ${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
     } catch (error) {
       console.warn(`⚠️ [네이버 API] 실패: ${(error as Error).message}`);
     }
+  } else if (hasExplicitUrl && hasNaverApi) {
+    // ✅ [2026-03-25 FIX] 명시적 URL 입력 시 검색 API 우선 수집 건너뜀
+    console.log(`[네이버 API 우선] ⛔ 명시적 URL 입력 감지 (${rssUrlInput.substring(0, 50)}...) → 검색 API 우선 수집 건너뜀 (URL 크롤링 결과 우선)`);
   } else if (hasExplicitNaverBlogUrlGlobal && hasNaverApi) {
     console.log(`[네이버 API 우선] ⛔ 네이버 블로그 URL 감지 → 검색 API 우선 수집 건너뜀 (엉뚱한 콘텐츠 방지)`);
   } else if (isNaverStoreUrl && hasNaverApi) {

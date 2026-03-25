@@ -2163,12 +2163,22 @@ export class NaverBlogAutomation {
       // ✅ [FIX-5 + FIX-7] 로그인 필드 탐색 실패 → 쿠키 클리어 + 페이지 리로드 후 재시도
       this.log('⚠️ 아이디 입력 필드 미발견, 쿠키 클리어 + 리로드 후 재시도...');
 
-      // ✅ [FIX-7] CDP로 손상된 쿠키 제거 (Windows userDataDir 잠금 경합 대응)
+      // ✅ [2026-03-25 FIX] 네이버 도메인 쿠키만 선택적 삭제 (전체 삭제는 유효한 세션까지 파괴하여 캡차 유발)
       try {
         const client = await page.target().createCDPSession();
-        await client.send('Network.clearBrowserCookies');
+        const { cookies } = await client.send('Network.getAllCookies') as { cookies: Array<{name: string; domain: string; path: string}> };
+        const naverCookies = cookies.filter((c) => 
+          c.domain.includes('.naver.com')
+        );
+        for (const cookie of naverCookies) {
+          await client.send('Network.deleteCookies', {
+            name: cookie.name,
+            domain: cookie.domain,
+            path: cookie.path,
+          });
+        }
         await client.detach();
-        this.log('🧹 브라우저 쿠키 클리어 완료');
+        this.log(`🧹 네이버 도메인 쿠키 ${naverCookies.length}개 선택적 삭제 완료`);
       } catch (cookieError) {
         this.log(`⚠️ 쿠키 클리어 실패 (무시): ${(cookieError as Error).message}`);
       }
@@ -7932,19 +7942,12 @@ export class NaverBlogAutomation {
         this.page.removeAllListeners('console');
         this.page.removeAllListeners('error');
 
-        // ✅ [2026-03-24 FIX] localStorage.clear() 제거 — 네이버 세션 쿠키 데이터 파괴 방지
-        // sessionStorage만 정리 (브라우저 종료 시 자동 소멸하는 데이터)
-        try {
-          await this.page.evaluate(() => {
-            if (window.sessionStorage) window.sessionStorage.clear();
-            // DOM 정리
-            document.body.innerHTML = '';
-          });
-        } catch (e) {
-          // 페이지가 이미 닫혔을 수 있음
-        }
+        // ✅ [2026-03-25 FIX] 브라우저 종료 시 sessionStorage는 자동 소멸하므로 명시적 정리 불필요
+        // DOM 파괴(innerHTML='')/ sessionStorage.clear() 모두 제거 — 쿠키 flush 방해 방지
       }
 
+      // ✅ [2026-03-25 FIX] 쿠키 flush 보장을 위해 1초 대기 후 종료
+      await new Promise(resolve => setTimeout(resolve, 1000));
       await this.browser.close().catch(() => null);
       this.browser = null;
       this.page = null;
@@ -8152,13 +8155,20 @@ export class NaverBlogAutomation {
             this.log(`⚠️ 여운 행동 스킵: ${(afterErr as Error).message}`);
           }
         }
+        // ✅ [2026-03-25 FIX] keepBrowserOpen=true일 때 page를 닫지 않음 — 세션 재사용 보장
+        // page.close() 호출 시 this.page=null → 다음 발행에서 setupBrowser() → 재로그인 → 캡차 유발
+
+        // ✅ [2026-03-25 FIX] 에러 등으로 page가 오염된 상태일 수 있으므로 건강성 체크
         if (this.page) {
           try {
-            await this.page.close().catch(() => { });
+            await this.page.url(); // 생존 체크 (disconnect된 page라면 예외 발생)
+            this.log('ℹ️ 페이지와 브라우저 세션이 유지됩니다. (다음 발행에서 재사용)');
+          } catch {
+            // page가 disconnect/crash 상태 → 참조 제거하여 다음 setupBrowser()에서 새 페이지 생성
+            this.log('⚠️ 페이지가 오염된 상태입니다. 다음 발행 시 새 페이지를 생성합니다.');
             this.page = null;
             this.mainFrame = null;
-            this.log('🔚 페이지가 닫혔습니다. (브라우저 세션은 유지됨)');
-          } catch { }
+          }
         }
       }
     }

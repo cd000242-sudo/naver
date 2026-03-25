@@ -962,7 +962,19 @@ export class SmartCrawler {
       '.end_btn', '.end_ad', '.article_end',
       '[class*="recommend"]', '[class*="popular"]',
       '[class*="ranking"]', '[class*="related"]',
-      '[class*="other_news"]', '[class*="more_"]'
+      '[class*="other_news"]', '[class*="more_"]',
+      // ✅ [2026-03-25 FIX] 연합뉴스 실제 HTML 구조 기반 노이즈 제거 (Playwright 실증 검증)
+      '[class*="box-ranking"]', '[class*="box-editors"]',
+      '[class*="box-hotnews"]', '[class*="box-long-stay"]',
+      '[class*="video-group"]', '.txt-copyright',
+      '.keyword-zone', '.empathy-zone', '.comment-zone',
+      '.writer-zone01', '[class*="aside-box"]',
+      // 일반 뉴스 사이트 공통 노이즈
+      '.most-viewed', '.most-read', '.most-popular',
+      '[class*="hotissue"]', '[class*="ranknews"]',
+      '[class*="editorpick"]', '[class*="editor-pick"]',
+      '[class*="most-"]', '[class*="side-"]',
+      '[class*="sub_"]', '[class*="aside"]'
     ];
     $(noiseSelectors.join(',')).remove();
 
@@ -980,14 +992,74 @@ export class SmartCrawler {
 
     // ✅ [2026-01-24 FIX] 네이버 스포츠/뉴스 전용 본문 셀렉터 최우선
     const naverSportsArticle = $('#newsEndContents, .news_end, .article_body, ._article_content, .newsct_article, #dic_area, .article_view');
+    // ✅ [2026-03-25 FIX] 연합뉴스 실제 HTML 구조 기반 본문 셀렉터 (Playwright 실증 검증)
+    // 연합뉴스: div.story-news (class="story-news article"), article.article-wrap01
+    const newsArticleBody = $('div.story-news, .article-wrap01, .article-text, .article_txt, #article-view-content-div, .news_body_area, .article__content, #articeBody, .view_article_body, .article_view_content');
     // 1순위: article 태그
     const article = $('article');
     // 2순위: 본문 컨테이닝 요소 (일반적인 클래스명)
     const mainContent = $('#main-content, .post-content, .article-content, .view_content, .news_view, #articleBody, .article_body, .contents_view');
 
-    // ✅ 네이버 뉴스/스포츠 본문 최우선
-    let target = naverSportsArticle.length ? naverSportsArticle : (article.length ? article : (mainContent.length ? mainContent : $('main')));
+    // ✅ 네이버 뉴스/스포츠 본문 최우선, 뉴스 사이트 본문 차순위
+    let target = naverSportsArticle.length ? naverSportsArticle : (newsArticleBody.length ? newsArticleBody : (article.length ? article : (mainContent.length ? mainContent : $('main'))));
     if (!target.length) target = $('body');
+
+    // ✅ [2026-03-25 FIX] body 폴백 시 본문 노드 자동 식별 (Boilerpipe 스타일)
+    // KBS/MBN 등 P태그를 쓰지 않는 사이트도 대응
+    // 핵심: 뉴스 본문 = 링크 비율 낮음 + 적정 크기 + DOM 깊이 깊음
+    if (target.is('body')) {
+      let bestNode: any = null;
+      let bestScore = 0;
+      $('body').find('div, section, main, article').each((i, elem) => {
+        const el = $(elem);
+        const totalText = el.text().trim();
+        const totalLen = totalText.length;
+        if (totalLen < 300) return;
+        
+        // 1. 링크 텍스트 비율 (낮을수록 본문)
+        const linkText = el.find('a').toArray().reduce((sum, a) => sum + $(a).text().trim().length, 0);
+        const linkRatio = linkText / Math.max(totalLen, 1);
+        if (linkRatio > 0.5) return;
+        
+        const nonLinkLen = totalLen - linkText;
+        let score = nonLinkLen * Math.pow(1 - linkRatio, 2);
+        
+        // 2. DOM 깊이 보너스 — 깊은 노드가 더 구체적인 본문 컨테이너
+        let depth = 0;
+        let cur = el;
+        while (cur.parent().length && cur.parent()[0]?.tagName !== 'body') {
+          depth++;
+          cur = cur.parent();
+          if (depth > 20) break;
+        }
+        score *= (1 + depth * 0.15);  // 깊이 1당 15% 보너스
+        
+        // 3. 이상적 크기 보너스 — 뉴스 본문은 보통 500~8000자
+        if (totalLen >= 500 && totalLen <= 8000) {
+          score *= 1.5;
+        } else if (totalLen > 8000) {
+          score *= 0.5;  // 너무 크면 wrapper div 가능성
+        }
+        
+        // 4. 구조 컨테이너 페널티 — 내부 div/section이 많으면 wrapper
+        const innerStructure = el.find('div, section').length;
+        if (innerStructure > 20) {
+          score *= 0.1;  // 20개 이상 구조 요소 → 거의 확실히 wrapper
+        } else if (innerStructure > 10) {
+          score *= 0.3;
+        }
+        
+        if (score > bestScore) {
+          bestScore = score;
+          bestNode = el;
+        }
+      });
+      
+      if (bestNode && bestScore > 500) {
+        target = bestNode;
+        console.log(`[parseHTMLAdvanced] 📊 본문 자동 식별 (score: ${Math.round(bestScore)}, class: "${bestNode.attr('class')?.substring(0, 60) || ''}")`);
+      }
+    }
 
     if (target.length) {
       const paragraphs: string[] = [];
@@ -1009,6 +1081,29 @@ export class SmartCrawler {
     }
 
     content = this.cleanText(content).slice(0, maxLength);
+
+    // ✅ [2026-03-25 FIX] OG 타이틀 기반 신뢰도 검증 — 노이즈 오염 감지
+    // 본문에 OG 타이틀의 핵심 키워드가 거의 없으면 → OG 메타 기반 폴백
+    if (title && title.length > 5 && content.length > 100) {
+      const ogKeywords = title
+        .replace(/[''""\[\]()（）\-–—:：|,，.·…!！?？]/g, ' ')
+        .split(/\s+/)
+        .filter(w => w.length >= 2 && !/^(종합|속보|단독|사진|영상|Photo|OSEN|뉴시스|연합뉴스|기자)$/i.test(w));
+      if (ogKeywords.length >= 2) {
+        const matchCount = ogKeywords.filter(kw => content.includes(kw)).length;
+        const relevance = matchCount / ogKeywords.length;
+        if (relevance < 0.3) {
+          // 본문에 OG 타이틀 키워드가 30% 미만 포함 → 노이즈 오염 판정
+          console.warn(`[parseHTMLAdvanced] ⚠️ OG-본문 신뢰도 낮음 (${Math.round(relevance * 100)}%) → OG 메타 기반 폴백`);
+          console.warn(`[parseHTMLAdvanced]   OG 키워드: [${ogKeywords.join(', ')}]`);
+          console.warn(`[parseHTMLAdvanced]   매칭: ${matchCount}/${ogKeywords.length}`);
+          const ogDescription = description || '';
+          content = `${title}\n\n${ogDescription}`.trim();
+        } else {
+          console.log(`[parseHTMLAdvanced] ✅ OG-본문 신뢰도 OK (${Math.round(relevance * 100)}%)`);
+        }
+      }
+    }
 
     let images: string[] = [];
     if (extractImages) {

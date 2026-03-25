@@ -1,4 +1,4 @@
-﻿node_modules/
+node_modules/
 dist/
 backups/
 backup_*/
@@ -7,3 +7,4 @@ release_final/
 *.exe
 *.asar
 *.log
+.env.release

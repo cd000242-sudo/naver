@@ -227,10 +227,31 @@
             border-radius: var(--radius);
             padding: 24px;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .stat-card:hover {
-            border-color: rgba(255,255,255,0.15);
-            transform: translateY(-2px);
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            opacity: 0.08;
+            transition: opacity 0.3s;
+        }
+        .stat-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+        .stat-card:hover::before { opacity: 0.15; }
+        .stat-card.card-gold::before { background: var(--gold); }
+        .stat-card.card-green::before { background: var(--accent-green); }
+        .stat-card.card-blue::before { background: var(--accent-blue); }
+        .stat-card.card-purple::before { background: var(--accent-purple); }
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
         }
         .stat-label {
             font-size: 0.75rem;
@@ -238,8 +259,19 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: 600;
-            margin-bottom: 8px;
         }
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .stat-icon.icon-gold { background: rgba(201,168,76,0.15); color: var(--gold); }
+        .stat-icon.icon-green { background: rgba(68,215,182,0.15); color: var(--accent-green); }
+        .stat-icon.icon-blue { background: rgba(79,172,254,0.15); color: var(--accent-blue); }
+        .stat-icon.icon-purple { background: rgba(168,85,247,0.15); color: var(--accent-purple); }
         .stat-value {
             font-size: 2rem;
             font-weight: 800;
@@ -253,8 +285,90 @@
             font-size: 0.75rem;
             margin-top: 8px;
             color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         .stat-change.negative { color: var(--accent-red); }
+        .stat-change.neutral { color: var(--text-secondary); }
+
+        /* Platform Badges */
+        .platform-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .platform-naver { background: rgba(3,199,90,0.15); color: #03c75a; }
+        .platform-blogger { background: rgba(255,152,0,0.15); color: #ff9800; }
+        .platform-tistory { background: rgba(233,84,32,0.15); color: #e95420; }
+        .platform-leword { background: rgba(168,85,247,0.15); color: #a855f7; }
+        .platform-default { background: rgba(255,255,255,0.06); color: var(--text-secondary); }
+
+        /* Sidebar System Info */
+        .sidebar-info {
+            padding: 12px 24px;
+            border-top: 1px solid var(--border);
+        }
+        .sidebar-info-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .sidebar-info-item span:last-child {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .sidebar-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            color: var(--accent-green);
+            margin-top: 8px;
+        }
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 16px 0 8px;
+        }
+        .page-btn {
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .page-btn:hover { border-color: var(--gold); color: var(--gold); }
+        .page-btn.active { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700; }
+        .page-btn:disabled { opacity: 0.3; cursor: default; }
+        .page-info {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            padding: 0 8px;
+        }
 
         /* ===== DATA TABLE ===== */
         .table-card {
@@ -616,7 +730,7 @@
     <div class="login-screen" id="login-screen">
         <div class="login-card">
             <div class="login-logo">
-                <img src="logo.png" alt="Leaders Pro">
+                <img src="../logo.png" alt="Leaders Pro">
                 <h1>Admin Panel</h1>
                 <p>관리자 전용 대시보드</p>
             </div>
@@ -640,7 +754,7 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-brand">
-                <img src="logo.png" alt="Leaders Pro">
+                <img src="../logo.png" alt="Leaders Pro">
                 <div>
                     <h2>Leaders Pro</h2>
                     <span>ADMIN</span>
@@ -664,6 +778,15 @@
                     <span>사이트 편집</span>
                 </div>
             </nav>
+            <div class="sidebar-info">
+                <div class="sidebar-info-item"><span>버전</span><span>v1.2.28</span></div>
+                <div class="sidebar-info-item"><span>엔진</span><span>GAS API</span></div>
+                <div class="sidebar-info-item"><span>라이선스</span><span id="sidebar-license-count">—</span></div>
+                <div class="sidebar-status">
+                    <div class="status-dot"></div>
+                    <span>시스템 정상 운영 중</span>
+                </div>
+            </div>
             <div class="sidebar-footer">
                 <button class="logout-btn" onclick="handleLogout()">🚪 로그아웃</button>
             </div>
@@ -679,23 +802,45 @@
                     <p>오늘의 트래픽과 주문 현황을 한눈에 확인하세요.</p>
                 </div>
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-label">오늘 방문자</div>
+                    <div class="stat-card card-gold">
+                        <div class="stat-top">
+                            <div class="stat-label">오늘 방문자</div>
+                            <div class="stat-icon icon-gold">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                        </div>
                         <div class="stat-value gold" id="stat-visitors">—</div>
                         <div class="stat-change" id="stat-visitors-change"></div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-label">오늘 주문</div>
+                    <div class="stat-card card-green">
+                        <div class="stat-top">
+                            <div class="stat-label">오늘 주문</div>
+                            <div class="stat-icon icon-green">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+                            </div>
+                        </div>
                         <div class="stat-value green" id="stat-orders">—</div>
                         <div class="stat-change" id="stat-orders-change"></div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-label">총 라이선스</div>
+                    <div class="stat-card card-blue">
+                        <div class="stat-top">
+                            <div class="stat-label">총 라이선스</div>
+                            <div class="stat-icon icon-blue">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                            </div>
+                        </div>
                         <div class="stat-value blue" id="stat-total">—</div>
+                        <div class="stat-change neutral" id="stat-total-change"></div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-label">활성 라이선스</div>
+                    <div class="stat-card card-purple">
+                        <div class="stat-top">
+                            <div class="stat-label">활성 라이선스</div>
+                            <div class="stat-icon icon-purple">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                        </div>
                         <div class="stat-value purple" id="stat-active">—</div>
+                        <div class="stat-change neutral" id="stat-active-change"></div>
                     </div>
                 </div>
 
@@ -849,6 +994,9 @@
         const ADMIN_TOKEN = 'qkrtjdgus2021645';
 
         let allCodes = [];
+        let codesPage = 1;
+        let ordersPage = 1;
+        const PAGE_SIZE = 20;
 
         // ===== SHA-256 HASH UTILITY =====
         async function sha256(message) {
@@ -921,6 +1069,42 @@
         }
         trackVisit();
 
+        // ===== HELPER: Stat Change Display =====
+        function setStatChange(elementId, current, previous, label) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            if (previous === 0 && current === 0) {
+                el.className = 'stat-change neutral';
+                el.innerHTML = `<span>${label} — 데이터 없음</span>`;
+                return;
+            }
+            const diff = current - previous;
+            if (diff > 0) {
+                el.className = 'stat-change';
+                el.innerHTML = `<span>▲ ${diff} ${label}</span>`;
+            } else if (diff < 0) {
+                el.className = 'stat-change negative';
+                el.innerHTML = `<span>▼ ${Math.abs(diff)} ${label}</span>`;
+            } else {
+                el.className = 'stat-change neutral';
+                el.innerHTML = `<span>— ${label} 동일</span>`;
+            }
+        }
+
+        // ===== HELPER: Platform Badge =====
+        function platformBadge(platform) {
+            if (!platform) return '—';
+            const p = platform.toUpperCase();
+            const map = {
+                'NAVER': 'platform-naver',
+                'BLOGGER': 'platform-blogger',
+                'TISTORY': 'platform-tistory',
+                'LEWORD': 'platform-leword'
+            };
+            const cls = map[p] || 'platform-default';
+            return `<span class="platform-badge ${cls}">${platform}</span>`;
+        }
+
         // ===== GAS API CALLS =====
         async function fetchGASList() {
             try {
@@ -981,6 +1165,27 @@
             document.getElementById('stat-total').textContent = allCodes.length.toLocaleString();
             document.getElementById('stat-active').textContent = activeCount.toLocaleString();
 
+            // Sidebar license count
+            const sidebarEl = document.getElementById('sidebar-license-count');
+            if (sidebarEl) sidebarEl.textContent = activeCount + '/' + allCodes.length;
+
+            // Yesterday comparison
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yKey = 'lp_traffic_' + yesterday.toISOString().slice(0, 10);
+            const yTraffic = JSON.parse(localStorage.getItem(yKey) || '{"views":0}');
+            const yDate = yesterday.toISOString().slice(0, 10);
+            const yOrders = allCodes.filter(c => c.usedAt && c.usedAt.slice(0, 10) === yDate);
+
+            // Stat changes
+            setStatChange('stat-visitors-change', traffic.views, yTraffic.views, '어제 대비');
+            setStatChange('stat-orders-change', todayOrders.length, yOrders.length, '어제 대비');
+
+            // Active rate
+            const activeRate = allCodes.length > 0 ? Math.round((activeCount / allCodes.length) * 100) : 0;
+            document.getElementById('stat-total-change').innerHTML = `<span>총 ${allCodes.length}건 발급됨</span>`;
+            document.getElementById('stat-active-change').innerHTML = `<span>활성화율 ${activeRate}%</span>`;
+
             // Recent activations
             const recent = allCodes
                 .filter(c => c.used && c.usedAt)
@@ -998,7 +1203,7 @@
                     const dateStr = c.usedAt ? new Date(c.usedAt).toLocaleString('ko-KR') : '—';
                     recentHtml += `<tr>
                         <td><span class="code-text">${c.code}</span></td>
-                        <td>${c.platform || '—'}</td>
+                        <td>${platformBadge(c.platform)}</td>
                         <td>${c.type || '—'}</td>
                         <td>${c.userId || c.user || '—'}</td>
                         <td>${dateStr}</td>
@@ -1023,22 +1228,28 @@
                     (c.platform || '').toLowerCase().includes(q) ||
                     (c.userId || '').toLowerCase().includes(q)
                 );
+                codesPage = 1;
             }
+
+            const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+            if (codesPage > totalPages) codesPage = totalPages;
+            const start = (codesPage - 1) * PAGE_SIZE;
+            const pageItems = filtered.slice(start, start + PAGE_SIZE);
 
             let html = '<table class="data-table"><thead><tr>';
             html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>상태</th><th>사용자</th><th>만료일</th><th>작업</th>';
             html += '</tr></thead><tbody>';
 
-            if (filtered.length === 0) {
+            if (pageItems.length === 0) {
                 html += '<tr><td colspan="7" style="text-align:center;color:var(--text-secondary);padding:32px;">코드가 없습니다.</td></tr>';
             } else {
-                filtered.forEach(c => {
+                pageItems.forEach(c => {
                     const status = c.used ? '<span class="badge badge-active">활성</span>' :
                         (c.expiresAt && new Date(c.expiresAt) < new Date() ? '<span class="badge badge-expired">만료</span>' : '<span class="badge badge-unused">미사용</span>');
                     const expires = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString('ko-KR') : '—';
                     html += `<tr>
                         <td><span class="code-text">${c.code}</span></td>
-                        <td>${c.platform || '—'}</td>
+                        <td>${platformBadge(c.platform)}</td>
                         <td>${c.type || '—'}</td>
                         <td>${status}</td>
                         <td>${c.userId || c.user || '—'}</td>
@@ -1048,6 +1259,7 @@
                 });
             }
             html += '</tbody></table>';
+            html += buildPagination(codesPage, totalPages, filtered.length, 'codes');
             document.getElementById('codes-table-body').innerHTML = html;
         }
 
@@ -1069,19 +1281,24 @@
                 .filter(c => c.used && c.usedAt)
                 .sort((a, b) => new Date(b.usedAt) - new Date(a.usedAt));
 
+            const totalPages = Math.max(1, Math.ceil(orders.length / PAGE_SIZE));
+            if (ordersPage > totalPages) ordersPage = totalPages;
+            const start = (ordersPage - 1) * PAGE_SIZE;
+            const pageItems = orders.slice(start, start + PAGE_SIZE);
+
             let html = '<table class="data-table"><thead><tr>';
             html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>사용자 ID</th><th>활성화 일시</th><th>만료일</th>';
             html += '</tr></thead><tbody>';
 
-            if (orders.length === 0) {
+            if (pageItems.length === 0) {
                 html += '<tr><td colspan="6" style="text-align:center;color:var(--text-secondary);padding:32px;">주문 내역이 없습니다.</td></tr>';
             } else {
-                orders.forEach(c => {
+                pageItems.forEach(c => {
                     const dateStr = c.usedAt ? new Date(c.usedAt).toLocaleString('ko-KR') : '—';
                     const expires = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString('ko-KR') : '영구';
                     html += `<tr>
                         <td><span class="code-text">${c.code}</span></td>
-                        <td>${c.platform || '—'}</td>
+                        <td>${platformBadge(c.platform)}</td>
                         <td>${c.type || '—'}</td>
                         <td>${c.userId || '—'}</td>
                         <td>${dateStr}</td>
@@ -1090,7 +1307,41 @@
                 });
             }
             html += '</tbody></table>';
+            html += buildPagination(ordersPage, totalPages, orders.length, 'orders');
             document.getElementById('orders-table-body').innerHTML = html;
+        }
+
+        // ===== PAGINATION HELPER =====
+        function buildPagination(currentPage, totalPages, totalItems, type) {
+            if (totalPages <= 1) return '';
+            let html = '<div class="pagination">';
+            html += `<button class="page-btn" onclick="goPage('${type}', 1)" ${currentPage === 1 ? 'disabled' : ''}>«</button>`;
+            html += `<button class="page-btn" onclick="goPage('${type}', ${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`;
+
+            const maxVisible = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+            if (endPage - startPage < maxVisible - 1) startPage = Math.max(1, endPage - maxVisible + 1);
+
+            for (let i = startPage; i <= endPage; i++) {
+                html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goPage('${type}', ${i})">${i}</button>`;
+            }
+
+            html += `<button class="page-btn" onclick="goPage('${type}', ${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>›</button>`;
+            html += `<button class="page-btn" onclick="goPage('${type}', ${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>»</button>`;
+            html += `<span class="page-info">${totalItems}건 중 ${(currentPage-1)*PAGE_SIZE+1}-${Math.min(currentPage*PAGE_SIZE, totalItems)}</span>`;
+            html += '</div>';
+            return html;
+        }
+
+        function goPage(type, page) {
+            if (type === 'codes') {
+                codesPage = page;
+                renderCodesTable(document.getElementById('code-search')?.value || '');
+            } else {
+                ordersPage = page;
+                renderOrdersTable();
+            }
         }
 
         // ===== ISSUE CODE =====
