@@ -52,7 +52,7 @@
 
         /* ========== MUSIC TOGGLE ========== */
         .music-toggle {
-            position: fixed; bottom: 100px; right: 24px; z-index: 10000;
+            position: fixed; bottom: 170px; right: 24px; z-index: 10000;
             width: 52px; height: 52px; border-radius: 50%;
             background: rgba(255,183,197,0.25); border: 1px solid rgba(255,183,197,0.5);
             backdrop-filter: blur(12px); cursor: pointer;
@@ -120,6 +120,89 @@
             pointer-events: none; z-index: 0;
             opacity: 0.35;
         }
+
+        /* ========== UNIFIED PRODUCT ICONS (Gold Gradient) ========== */
+        .product-icon-sm {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 22px; height: 22px; border-radius: 5px;
+            background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%);
+            color: #1a1a2e; font-weight: 800; font-size: 13px; font-family: 'Inter', sans-serif;
+            margin-right: 6px; vertical-align: middle; line-height: 1;
+        }
+        .product-icon-lg {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 48px; height: 48px; border-radius: 14px;
+            background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%);
+            color: #1a1a2e; font-weight: 900; font-size: 28px; font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 20px rgba(245,200,66,0.3);
+            line-height: 1;
+        }
+        /* keep old class for backward compat */
+        .n-icon-sm { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 5px; background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%); color: #1a1a2e; font-weight: 800; font-size: 13px; font-family: 'Inter', sans-serif; margin-right: 6px; vertical-align: middle; line-height: 1; }
+        .n-logo-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%); color: #1a1a2e; font-weight: 900; font-size: 28px; font-family: 'Inter', sans-serif; box-shadow: 0 4px 20px rgba(245,200,66,0.3); line-height: 1; }
+
+        /* ========== YOUTUBE FLOATING BUTTON ========== */
+        .youtube-float {
+            position: fixed; bottom: 100px; right: 24px; z-index: 10001;
+            display: flex; align-items: center; justify-content: center;
+            width: 52px; height: 52px; border-radius: 50%;
+            background: rgba(255, 0, 0, 0.85);
+            border: 1px solid rgba(255, 100, 100, 0.4);
+            backdrop-filter: blur(12px); text-decoration: none;
+            box-shadow: 0 4px 20px rgba(255,0,0,0.3);
+            transition: all 0.3s; font-size: 22px;
+        }
+        .youtube-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(255,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .youtube-float { bottom: 90px; right: 16px; width: 44px; height: 44px; font-size: 18px; }
+        }
+
+        /* ========== FLOATING KAKAO INQUIRY ========== */
+        .kakao-float {
+            position: fixed; bottom: 30px; right: 24px; z-index: 10001;
+            display: flex; align-items: center; gap: 10px;
+            padding: 14px 22px; border-radius: 50px;
+            background: rgba(60, 29, 0, 0.85);
+            border: 1px solid rgba(254, 229, 0, 0.4);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            cursor: grab; user-select: none; text-decoration: none;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(254,229,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Pretendard Variable', 'Inter', sans-serif;
+        }
+        .kakao-float:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(254,229,0,0.25);
+        }
+        .kakao-float:active { cursor: grabbing; }
+        .kakao-float-icon {
+            width: 28px; height: 28px;
+            background: #fee500; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; flex-shrink: 0;
+        }
+        .kakao-float-text {
+            color: #fee500; font-weight: 700; font-size: 14px;
+            white-space: nowrap; letter-spacing: -0.3px;
+        }
+        .kakao-float-pulse {
+            position: absolute; top: -3px; right: -3px;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: #ff3b5c;
+            animation: kakaoPulse 2s ease-in-out infinite;
+        }
+        @keyframes kakaoPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.6; }
+        }
+        @media (max-width: 768px) {
+            .kakao-float { bottom: 24px; right: 16px; padding: 12px 18px; }
+            .kakao-float-text { font-size: 13px; }
+            .music-toggle { bottom: 90px; }
+        }
     </style>
 </head>
 
@@ -142,7 +225,9 @@
                 <a href="#social-proof" class="nav-link" onclick="closeMobileMenu()">후기</a>
                 <a href="#faq" class="nav-link" onclick="closeMobileMenu()">FAQ</a>
                 <a href="#pricing" class="nav-link" onclick="closeMobileMenu()">가격</a>
+                <a href="#download" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
                 <a href="lookup.html" class="nav-link">주문 조회</a>
+                <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="nav-link" style="color:#ff4444;">▶ YouTube</a>
             </div>
         </div>
     </nav>
@@ -474,15 +559,30 @@
 
             <!-- Product Tabs -->
             <div class="pricing-tabs" id="pricing-tabs">
-                <button class="pricing-tab active" data-tab="naver" onclick="switchPricingTab('naver')">🚀 Leaders Pro</button>
-                <button class="pricing-tab" data-tab="orbit" onclick="switchPricingTab('orbit')">🌐 Leaders Orbit</button>
-                <button class="pricing-tab" data-tab="tistory" onclick="switchPricingTab('tistory')">🔥 Leaders Tistory</button>
-                <button class="pricing-tab" data-tab="leword" onclick="switchPricingTab('leword')">💎 Leword</button>
+                <button class="pricing-tab active" data-tab="naver" onclick="switchPricingTab('naver')"><span class="product-icon-sm">N</span> Better Life Naver</button>
+                <button class="pricing-tab" data-tab="orbit" onclick="switchPricingTab('orbit')"><span class="product-icon-sm">W</span> Leaders Orbit</button>
+                <button class="pricing-tab" data-tab="tistory" onclick="switchPricingTab('tistory')"><span class="product-icon-sm">T</span> Leaders Tistory</button>
+                <button class="pricing-tab" data-tab="leword" onclick="switchPricingTab('leword')"><span class="product-icon-sm">L</span> Leword</button>
             </div>
 
             <!-- ═══ Leaders Pro 요금제 ═══ -->
             <div class="pricing-panel active" id="panel-naver">
                 <div class="pricing-grid">
+                    <!-- 무료 체험 카드 -->
+                    <div class="pricing-card trial" onclick="downloadFree('naver')">
+                        <div class="pricing-badge trial-badge">🎁 FREE</div>
+                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">부담 없이 시작</p></div>
+                        <div class="pricing-price"><span class="price-amount">0</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">무료</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 전체 기능 체험</li>
+                            <li><span class="check">✓</span> AI 콘텐츠 생성</li>
+                            <li><span class="check">✓</span> 매일 2회 발행 제한</li>
+                            <li><span class="check">✓</span> 기간 제한 없음</li>
+                        </ul>
+                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
+                    </div>
+
                     <div class="pricing-card" data-product="naver-monthly" data-amount="50000" onclick="selectProduct(this)">
                         <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">가볍게 시작하기</p></div>
                         <div class="pricing-price"><span class="price-amount">50,000</span><span class="price-unit">원</span></div>
@@ -540,6 +640,21 @@
             <!-- ═══ Leaders Orbit 요금제 ═══ -->
             <div class="pricing-panel" id="panel-orbit">
                 <div class="pricing-grid">
+                    <!-- 무료 체험 카드 -->
+                    <div class="pricing-card trial" onclick="downloadFree('orbit')">
+                        <div class="pricing-badge trial-badge">🎁 FREE</div>
+                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">글로벌 입문</p></div>
+                        <div class="pricing-price"><span class="price-amount">0</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">무료</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> WordPress + Blogspot</li>
+                            <li><span class="check">✓</span> 다국어 콘텐츠 생성</li>
+                            <li><span class="check">✓</span> 매일 2회 발행 제한</li>
+                            <li><span class="check">✓</span> 기간 제한 없음</li>
+                        </ul>
+                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
+                    </div>
+
                     <div class="pricing-card" data-product="orbit-monthly" data-amount="60000" onclick="selectProduct(this)">
                         <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">글로벌 입문</p></div>
                         <div class="pricing-price"><span class="price-amount">60,000</span><span class="price-unit">원</span></div>
@@ -597,6 +712,20 @@
             <!-- ═══ Leaders Tistory 요금제 ═══ -->
             <div class="pricing-panel" id="panel-tistory">
                 <div class="pricing-grid">
+                    <!-- 무료 체험 카드 -->
+                    <div class="pricing-card trial" onclick="downloadFree('tistory')">
+                        <div class="pricing-badge trial-badge">🎁 FREE TRIAL</div>
+                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">먼저 체험해보세요</p></div>
+                        <div class="pricing-price"><span class="price-amount">무료</span></div>
+                        <div class="pricing-period">매일 2회 발행</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 전체 기능 체험</li>
+                            <li><span class="check">✓</span> 사람형 타이핑 엔진</li>
+                            <li><span class="check">✓</span> 매일 2회 발행 제한</li>
+                            <li><span class="check">✓</span> 기간 제한 없음</li>
+                        </ul>
+                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
+                    </div>
                     <div class="pricing-card" data-product="tistory-monthly" data-amount="30000" onclick="selectProduct(this)">
                         <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">티스토리 시작</p></div>
                         <div class="pricing-price"><span class="price-amount">30,000</span><span class="price-unit">원</span></div>
@@ -653,7 +782,22 @@
 
             <!-- ═══ Leword 요금제 ═══ -->
             <div class="pricing-panel" id="panel-leword">
-                <div class="pricing-grid pricing-grid-3">
+                <div class="pricing-grid">
+                    <!-- 무료 체험 카드 -->
+                    <div class="pricing-card trial" onclick="downloadFree('leword')">
+                        <div class="pricing-badge trial-badge">🎁 FREE</div>
+                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">키워드 분석 체험</p></div>
+                        <div class="pricing-price"><span class="price-amount">0</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">무료</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 키워드 경쟁 분석</li>
+                            <li><span class="check">✓</span> 블루오션 발굴</li>
+                            <li><span class="check">✓</span> 매일 5회 검색 제한</li>
+                            <li><span class="check">✓</span> 기간 제한 없음</li>
+                        </ul>
+                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
+                    </div>
+
                     <div class="pricing-card" data-product="leword-monthly" data-amount="30000" onclick="selectProduct(this)">
                         <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">키워드 분석 시작</p></div>
                         <div class="pricing-price"><span class="price-amount">30,000</span><span class="price-unit">원</span></div>
@@ -783,6 +927,85 @@
                     </button>
                     <div class="faq-answer">
                         <p>라이선스는 동시에 1대의 기기에서만 사용 가능합니다. 기기를 변경하면 이전 기기에서 자동으로 로그아웃됩니다. 별도의 이전 절차 없이 새 기기에서 바로 로그인하시면 됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- DOWNLOAD SECTION -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section class="section section-dark" id="download">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">DOWNLOAD</span>
+                <h2 class="section-title">프로그램 다운로드</h2>
+                <p class="section-desc">비밀번호를 입력하면 최신 버전을 다운로드할 수 있습니다.</p>
+            </div>
+
+            <div class="download-grid">
+                <!-- Better Life Naver -->
+                <div class="download-card" data-product="naver">
+                    <div class="download-icon"><span class="product-icon-lg">N</span></div>
+                    <h3 class="download-title">Better Life Naver</h3>
+                    <p class="download-version">네이버 블로그 자동화 · Windows 64-bit</p>
+                    <div class="download-form">
+                        <div class="download-input-group">
+                            <input type="password" class="download-input" data-pw="naver" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('naver')">
+                            <button class="download-btn" onclick="downloadWithPassword('naver')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            </button>
+                        </div>
+                        <p class="download-error" data-error="naver">비밀번호가 올바르지 않습니다.</p>
+                    </div>
+                </div>
+
+                <!-- Leaders Orbit -->
+                <div class="download-card" data-product="orbit">
+                    <div class="download-icon"><span class="product-icon-lg">W</span></div>
+                    <h3 class="download-title">Leaders Orbit</h3>
+                    <p class="download-version">워드프레스·블로그스팟 · Windows 64-bit</p>
+                    <div class="download-form">
+                        <div class="download-input-group">
+                            <input type="password" class="download-input" data-pw="orbit" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('orbit')">
+                            <button class="download-btn" onclick="downloadWithPassword('orbit')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            </button>
+                        </div>
+                        <p class="download-error" data-error="orbit">비밀번호가 올바르지 않습니다.</p>
+                    </div>
+                </div>
+
+                <!-- Leaders Tistory -->
+                <div class="download-card" data-product="tistory">
+                    <div class="download-icon"><span class="product-icon-lg">T</span></div>
+                    <h3 class="download-title">Leaders Tistory</h3>
+                    <p class="download-version">티스토리 자동화 · Windows 64-bit</p>
+                    <div class="download-form">
+                        <div class="download-input-group">
+                            <input type="password" class="download-input" data-pw="tistory" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('tistory')">
+                            <button class="download-btn" onclick="downloadWithPassword('tistory')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            </button>
+                        </div>
+                        <p class="download-error" data-error="tistory">비밀번호가 올바르지 않습니다.</p>
+                    </div>
+                </div>
+
+                <!-- Leword -->
+                <div class="download-card" data-product="leword">
+                    <div class="download-icon"><span class="product-icon-lg">L</span></div>
+                    <h3 class="download-title">Leword</h3>
+                    <p class="download-version">AI 키워드 인텔리전스 · Windows 64-bit</p>
+                    <div class="download-form">
+                        <div class="download-input-group">
+                            <input type="password" class="download-input" data-pw="leword" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('leword')">
+                            <button class="download-btn" onclick="downloadWithPassword('leword')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            </button>
+                        </div>
+                        <p class="download-error" data-error="leword">비밀번호가 올바르지 않습니다.</p>
                     </div>
                 </div>
             </div>
@@ -1094,8 +1317,100 @@
             }
         }
 
+        // ===== Download Functions =====
+        const PRODUCT_NAMES = {
+            naver: 'Better Life Naver',
+            orbit: 'Leaders Orbit',
+            tistory: 'Leaders Tistory',
+            leword: 'Leword'
+        };
+
+        function getDownloadUrl(product) {
+            const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
+            const urls = saved.downloadUrls || {};
+            if (product && urls[product]) return urls[product];
+            return saved.downloadUrl || '';
+        }
+
+        function downloadFree(product) {
+            // Scroll to download section
+            const downloadSection = document.getElementById('download');
+            if (downloadSection) {
+                downloadSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Focus on the password input for the specific product
+                setTimeout(() => {
+                    const input = document.querySelector(`.download-input[data-pw="${product}"]`);
+                    if (input) { input.focus(); input.placeholder = '비밀번호 입력 후 다운로드'; }
+                }, 600);
+            }
+        }
+
+        function downloadWithPassword(product) {
+            const input = document.querySelector(`.download-input[data-pw="${product}"]`);
+            const errorEl = document.querySelector(`.download-error[data-error="${product}"]`);
+            const pw = input.value.trim();
+
+            if (pw === '1645') {
+                errorEl.classList.remove('visible');
+                const url = getDownloadUrl(product);
+                const name = PRODUCT_NAMES[product] || product;
+                if (!url) {
+                    alert(`${name} 다운로드 파일이 아직 준비되지 않았습니다.\n관리자에게 문의해주세요.`);
+                    return;
+                }
+                window.open(url, '_blank');
+                input.value = '';
+            } else {
+                errorEl.classList.add('visible');
+                input.classList.add('shake');
+                setTimeout(() => { input.classList.remove('shake'); errorEl.classList.remove('visible'); }, 2000);
+            }
+        }
+
+        // ===== Apply Admin Panel Edits =====
+        function applySiteEdits() {
+            const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
+            if (!saved || Object.keys(saved).length === 0) return;
+
+            // Hero Title — 첫 줄 텍스트 교체 (gold-text span 구조 보존)
+            if (saved.heroTitle) {
+                const heroEl = document.querySelector('.hero-title');
+                if (heroEl) {
+                    const goldSpan = heroEl.querySelector('.gold-text');
+                    const goldText = goldSpan ? goldSpan.textContent : '';
+                    heroEl.innerHTML = saved.heroTitle + '<br><span class="gold-text">' + goldText + '</span>';
+                }
+            }
+            // Hero Benefit — gold-text span 내용 교체
+            if (saved.heroBenefit) {
+                const benefitEl = document.querySelector('.hero-title .gold-text');
+                if (benefitEl) benefitEl.textContent = saved.heroBenefit;
+            }
+            // Hero Description — .hero-subtitle
+            if (saved.heroDesc) {
+                const descEl = document.querySelector('.hero-subtitle');
+                if (descEl) descEl.textContent = saved.heroDesc;
+            }
+
+            // Notice Banner
+            if (saved.notice && saved.notice.trim()) {
+                let noticeBanner = document.getElementById('admin-notice-banner');
+                if (!noticeBanner) {
+                    noticeBanner = document.createElement('div');
+                    noticeBanner.id = 'admin-notice-banner';
+                    noticeBanner.style.cssText = 'background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:16px 24px;margin:0 auto 24px;max-width:800px;text-align:center;color:var(--gold);font-weight:600;font-size:0.95rem;';
+                    const hero = document.querySelector('.hero');
+                    if (hero && hero.nextElementSibling) {
+                        hero.nextElementSibling.prepend(noticeBanner);
+                    }
+                }
+                noticeBanner.textContent = '📢 ' + saved.notice;
+            }
+        }
+
         // ===== Init =====
         document.addEventListener('DOMContentLoaded', () => {
+            applySiteEdits();
             initToss();
             initParticles();
             initScrollAnimations();
@@ -1200,6 +1515,66 @@
             btn.classList.remove('playing');
             btn.title = '\uD83C\uDF38 \uBD04 \uBC30\uACBD\uC74C\uC545 \uCF1C\uAE30';
         }
+    });
+})();
+</script>
+
+<!-- FLOATING YOUTUBE BUTTON -->
+<a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" id="youtubeFloat" title="공식 유튜브 채널">
+    ▶
+</a>
+
+<!-- FLOATING KAKAO INQUIRY BUTTON -->
+<a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 카카오톡 문의">
+    <div class="kakao-float-pulse"></div>
+    <div class="kakao-float-icon">💬</div>
+    <span class="kakao-float-text">1:1 문의</span>
+</a>
+
+<script>
+// Draggable Kakao Float Button
+(function() {
+    const el = document.getElementById('kakaoFloat');
+    if (!el) return;
+    let isDragging = false, wasDragged = false;
+    let startX, startY, origX, origY;
+
+    function onStart(e) {
+        isDragging = true; wasDragged = false;
+        const touch = e.touches ? e.touches[0] : e;
+        startX = touch.clientX; startY = touch.clientY;
+        const rect = el.getBoundingClientRect();
+        origX = rect.left; origY = rect.top;
+        el.style.transition = 'none';
+        el.style.cursor = 'grabbing';
+        e.preventDefault();
+    }
+    function onMove(e) {
+        if (!isDragging) return;
+        const touch = e.touches ? e.touches[0] : e;
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+        if (Math.abs(dx) > 4 || Math.abs(dy) > 4) wasDragged = true;
+        const newX = Math.max(0, Math.min(window.innerWidth - el.offsetWidth, origX + dx));
+        const newY = Math.max(0, Math.min(window.innerHeight - el.offsetHeight, origY + dy));
+        el.style.left = newX + 'px'; el.style.top = newY + 'px';
+        el.style.right = 'auto'; el.style.bottom = 'auto';
+    }
+    function onEnd() {
+        isDragging = false;
+        el.style.transition = 'transform 0.2s, box-shadow 0.2s';
+        el.style.cursor = 'grab';
+    }
+
+    el.addEventListener('mousedown', onStart);
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onEnd);
+    el.addEventListener('touchstart', onStart, { passive: false });
+    document.addEventListener('touchmove', onMove, { passive: false });
+    document.addEventListener('touchend', onEnd);
+
+    el.addEventListener('click', function(e) {
+        if (wasDragged) { e.preventDefault(); e.stopPropagation(); }
     });
 })();
 </script>

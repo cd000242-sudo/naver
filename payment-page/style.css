@@ -868,6 +868,171 @@ body {
   border-color: rgba(160, 124, 40, 0.2);
 }
 
+/* ========== Trial Card ========== */
+.pricing-card.trial {
+  border-color: rgba(68, 215, 182, 0.25);
+  background: rgba(68, 215, 182, 0.03);
+}
+
+.pricing-card.trial:hover {
+  border-color: rgba(68, 215, 182, 0.5);
+  box-shadow: 0 0 40px rgba(68, 215, 182, 0.12);
+}
+
+.pricing-card.trial .pricing-name { color: #44d7b6; }
+.pricing-card.trial .price-amount { color: #44d7b6; font-size: 2.2rem; }
+.pricing-card.trial .check { color: #44d7b6; }
+
+.trial-badge {
+  background: linear-gradient(135deg, #44d7b6, #2ebd9b) !important;
+  color: #fff !important;
+}
+
+.trial-select {
+  background: linear-gradient(135deg, #44d7b6, #2ebd9b) !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: 700 !important;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  transition: all 0.3s;
+}
+
+.pricing-card.trial:hover .trial-select {
+  box-shadow: 0 6px 24px rgba(68, 215, 182, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ========== Pricing Grid 5-col for trial ========== */
+.pricing-grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* ========== Download Section ========== */
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.download-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 32px 28px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s;
+}
+
+.download-card:hover {
+  border-color: var(--border-gold);
+  box-shadow: 0 20px 60px rgba(201, 168, 76, 0.08);
+}
+
+.download-icon {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+}
+
+.download-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.download-version {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.download-form { width: 100%; }
+
+.download-input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.download-input {
+  flex: 1;
+  padding: 12px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-family: var(--font-primary);
+  outline: none;
+  transition: all 0.3s;
+}
+
+.download-input:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.1);
+}
+
+.download-input.shake {
+  animation: shake 0.5s ease-in-out;
+  border-color: var(--error);
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  background: var(--gold-gradient);
+  color: #0a0a0f;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: var(--font-primary);
+  white-space: nowrap;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(201, 168, 76, 0.3);
+}
+
+.download-error {
+  font-size: 0.75rem;
+  color: var(--error);
+  display: none;
+  margin-bottom: 6px;
+}
+
+.download-error.visible { display: block; }
+
+.download-trial-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  margin-top: 8px;
+  background: linear-gradient(135deg, #44d7b6, #2ebd9b);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: var(--font-primary);
+}
+
+.download-trial-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(68, 215, 182, 0.3);
+}
+
 /* ========== Payment Section ========== */
 .payment-section {
   text-align: center;
@@ -1589,6 +1754,7 @@ body {
   .btn-pay { min-width: auto; width: 100%; }
 
   .compact-grid { grid-template-columns: 1fr; }
+  .download-grid { grid-template-columns: 1fr; max-width: 480px; }
   .testimonials-grid { grid-template-columns: 1fr; }
   .testimonial-card:last-child { max-width: none; }
 }
@@ -1613,6 +1779,11 @@ body {
 
   .code-display { font-size: 1.1rem; letter-spacing: 1px; padding: 16px; }
   .email-input-group { flex-direction: column; }
+
+  .download-card { padding: 24px 16px; }
+  .download-input-group { flex-direction: column; }
+  .download-btn { width: 100%; justify-content: center; }
+  .download-trial-btn { font-size: 0.78rem; padding: 10px 14px; }
 }
 
 /* ========== Lookup Page ========== */

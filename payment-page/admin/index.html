@@ -772,6 +772,28 @@
                         <h4>📢 공지사항</h4>
                         <textarea id="edit-notice" placeholder="공지사항이 없습니다."></textarea>
                     </div>
+                    <div class="editor-card" style="grid-column: 1 / -1;">
+                        <h4>📥 제품별 다운로드 URL</h4>
+                        <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:16px;">각 제품의 다운로드 버튼과 무료 체험 버튼이 해당 URL로 연결됩니다.<br>Google Drive, GitHub Releases 등의 직접 다운로드 링크를 입력하세요.</p>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                            <div>
+                                <label style="display:block;font-size:0.75rem;color:var(--gold);font-weight:600;margin-bottom:6px;">🟢 Better Life Naver</label>
+                                <input type="url" id="edit-dl-naver" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                            </div>
+                            <div>
+                                <label style="display:block;font-size:0.75rem;color:#4fc3f7;font-weight:600;margin-bottom:6px;">🔵 Leaders Orbit (블로거/WP)</label>
+                                <input type="url" id="edit-dl-orbit" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                            </div>
+                            <div>
+                                <label style="display:block;font-size:0.75rem;color:#ff9800;font-weight:600;margin-bottom:6px;">🟠 Leaders Tistory</label>
+                                <input type="url" id="edit-dl-tistory" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                            </div>
+                            <div>
+                                <label style="display:block;font-size:0.75rem;color:#a78bfa;font-weight:600;margin-bottom:6px;">🟣 Leword</label>
+                                <input type="url" id="edit-dl-leword" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="editor-save-bar">
                     <button class="btn" onclick="resetEditorContent()">↩️ 초기화</button>
@@ -1116,6 +1138,12 @@
             if (saved.heroDesc) document.getElementById('edit-hero-desc').value = saved.heroDesc;
             if (saved.heroBenefit) document.getElementById('edit-hero-benefit').value = saved.heroBenefit;
             if (saved.notice) document.getElementById('edit-notice').value = saved.notice;
+            // 제품별 다운로드 URL 로드
+            const urls = saved.downloadUrls || {};
+            if (urls.naver) document.getElementById('edit-dl-naver').value = urls.naver;
+            if (urls.orbit) document.getElementById('edit-dl-orbit').value = urls.orbit;
+            if (urls.tistory) document.getElementById('edit-dl-tistory').value = urls.tistory;
+            if (urls.leword) document.getElementById('edit-dl-leword').value = urls.leword;
         }
 
         function saveEditorContent() {
@@ -1124,6 +1152,12 @@
                 heroDesc: document.getElementById('edit-hero-desc').value,
                 heroBenefit: document.getElementById('edit-hero-benefit').value,
                 notice: document.getElementById('edit-notice').value,
+                downloadUrls: {
+                    naver: document.getElementById('edit-dl-naver').value.trim(),
+                    orbit: document.getElementById('edit-dl-orbit').value.trim(),
+                    tistory: document.getElementById('edit-dl-tistory').value.trim(),
+                    leword: document.getElementById('edit-dl-leword').value.trim()
+                },
                 updatedAt: new Date().toISOString()
             };
             localStorage.setItem('lp_site_edits', JSON.stringify(data));
@@ -1137,6 +1171,10 @@
             document.getElementById('edit-hero-desc').value = '키워드 하나면 끝. AI가 글을 쓰고, 이미지를 만들고, 블로그에 올립니다.';
             document.getElementById('edit-hero-benefit').value = '매일 100건, 사람이 쓴 것처럼';
             document.getElementById('edit-notice').value = '';
+            document.getElementById('edit-dl-naver').value = '';
+            document.getElementById('edit-dl-orbit').value = '';
+            document.getElementById('edit-dl-tistory').value = '';
+            document.getElementById('edit-dl-leword').value = '';
             showToast('↩️ 초기화되었습니다.');
         }
 
