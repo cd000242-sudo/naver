@@ -111,9 +111,38 @@ export async function downloadAdb(
 
     onProgress?.(80, 'ZIP 압축 해제 중...');
 
-    // 2. 기존 폴더 삭제
+    // 2. 기존 폴더 삭제 (adb.exe 잠금 방지를 위해 프로세스 먼저 종료)
     if (fs.existsSync(targetDir)) {
-      fs.rmSync(targetDir, { recursive: true, force: true });
+      // ADB 서버 종료 시도 (adb.exe 잠금 해제)
+      try {
+        const localAdb = getLocalAdbPath();
+        if (fs.existsSync(localAdb)) {
+          await execAsync(`"${localAdb}" kill-server`, { timeout: 5000 });
+        }
+      } catch { /* 무시 — adb가 없거나 실행 불가 */ }
+
+      // Windows: taskkill로 adb.exe 강제 종료
+      try {
+        await execAsync('taskkill /F /IM adb.exe', { timeout: 5000 });
+      } catch { /* adb.exe 프로세스가 없으면 무시 */ }
+
+      // 잠금 해제 대기
+      await new Promise(r => setTimeout(r, 1000));
+
+      // 삭제 시도 (재시도 포함)
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          fs.rmSync(targetDir, { recursive: true, force: true });
+          break;
+        } catch (rmErr) {
+          if (attempt < 2) {
+            console.warn(`[ADB Download] 폴더 삭제 재시도 ${attempt + 1}/3...`);
+            await new Promise(r => setTimeout(r, 2000));
+          } else {
+            throw new Error(`기존 ADB 폴더 삭제 실패 (adb.exe가 사용 중). 앱을 재시작 후 다시 시도해주세요: ${(rmErr as Error).message}`);
+          }
+        }
+      }
     }
 
     // 3. ZIP 해제 (PowerShell 사용)
