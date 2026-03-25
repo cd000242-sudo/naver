@@ -1058,14 +1058,15 @@
         function getTrafficData() {
             const key = 'lp_traffic_' + new Date().toISOString().slice(0, 10);
             const data = JSON.parse(localStorage.getItem(key) || '{"views":0,"unique":[]}');
+            // Ensure views reflects unique count
+            data.views = data.unique ? data.unique.length : data.views;
             return data;
         }
 
         function trackVisit() {
-            const key = 'lp_traffic_' + new Date().toISOString().slice(0, 10);
-            const data = getTrafficData();
-            data.views++;
-            localStorage.setItem(key, JSON.stringify(data));
+            // Mark admin session so main page can filter us out
+            sessionStorage.setItem('lp_admin_logged_in', '1');
+            // Admin does NOT increment visit counter — we only READ data
         }
         trackVisit();
 

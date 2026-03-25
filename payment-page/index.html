@@ -1578,6 +1578,41 @@
     });
 })();
 </script>
+
+<!-- Unique Visitor Tracking (shared with admin panel via localStorage) -->
+<script>
+(function() {
+    // Skip if admin session is active (관리자 필터링)
+    if (sessionStorage.getItem('lp_admin_logged_in')) return;
+
+    const today = new Date().toISOString().slice(0, 10);
+    const key = 'lp_traffic_' + today;
+
+    // Generate or retrieve persistent visitor ID
+    let visitorId = localStorage.getItem('lp_visitor_id');
+    if (!visitorId) {
+        visitorId = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('lp_visitor_id', visitorId);
+    }
+
+    // Check if already counted today (session-level dedup)
+    const sessionKey = 'lp_counted_' + today;
+    if (sessionStorage.getItem(sessionKey)) return;
+
+    // Load traffic data
+    const data = JSON.parse(localStorage.getItem(key) || '{"views":0,"unique":[]}');
+
+    // Only count if this visitor ID hasn't been counted today
+    if (!data.unique.includes(visitorId)) {
+        data.unique.push(visitorId);
+        data.views = data.unique.length; // views = unique count
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    // Mark as counted for this session
+    sessionStorage.setItem(sessionKey, '1');
+})();
+</script>
 </body>
 
 </html>
