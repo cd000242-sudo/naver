@@ -11,6 +11,65 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
+        /* ========== SPRING CHERRY BLOSSOM ========== */
+        .petal-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999; overflow: hidden;
+        }
+        .petal {
+            position: absolute; top: -60px;
+            width: 18px; height: 18px;
+            background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%);
+            border-radius: 50% 0 50% 50%;
+            opacity: 0;
+            animation: petalFall linear infinite;
+            filter: blur(0.5px);
+            box-shadow: 0 0 6px rgba(255,183,197,0.3);
+        }
+        .petal:nth-child(odd) {
+            background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%);
+            border-radius: 0 50% 50% 50%;
+        }
+        @keyframes petalFall {
+            0%   { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); }
+            10%  { opacity: 0.9; }
+            90%  { opacity: 0.6; }
+            100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); }
+        }
+
+        /* ========== MUSIC TOGGLE ========== */
+        .music-toggle {
+            position: fixed; bottom: 100px; right: 24px; z-index: 10000;
+            width: 52px; height: 52px; border-radius: 50%;
+            background: rgba(255,183,197,0.25); border: 1px solid rgba(255,183,197,0.5);
+            backdrop-filter: blur(12px); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(255,107,138,0.2);
+        }
+        .music-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255,183,197,0.4);
+            box-shadow: 0 6px 30px rgba(255,107,138,0.4);
+        }
+        .music-toggle.playing {
+            animation: musicPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(255,107,138,0.2); }
+            50% { box-shadow: 0 4px 30px rgba(255,107,138,0.6), 0 0 60px rgba(255,183,197,0.3); }
+        }
+        @media (max-width: 768px) {
+            .music-toggle { bottom: 90px; right: 16px; width: 44px; height: 44px; font-size: 18px; }
+        }
+
+        /* ========== SPRING ACCENT OVERLAY ========== */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 20% 0%, rgba(255,183,197,0.04) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 0%, rgba(255,218,233,0.03) 0%, transparent 50%);
+            pointer-events: none; z-index: 0;
+        }
         :root {
             --gold: #FFD700;
             --gold-dark: #B8860B;
@@ -1791,34 +1850,103 @@
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    <p>Better Life Naver는 네이버 AI 탐지를 우회하는 자연스러운 문체로 글을 생성합니다. 실시간 AI 탐지 위험도 분석 기능으로 발행 전 안전성을 확인할 수 있으며, 스마트 시간차 발행으로 봇 탐지도 방지합니다.</p>
+                    <p><strong>3단계 안전장치</strong>로 저품질을 방지합니다.<br><br>
+                    ① <strong>AI 탐지 위험도 실시간 분석</strong> — 발행 전 글의 AI 패턴 점수를 체크하여 위험도가 높으면 자동으로 문체를 재조정합니다.<br>
+                    ② <strong>11가지 문체 스타일</strong> — '엄마 블로거', '직장인 후기', '전문가 칼럼' 등 사람마다 다른 톤으로 작성하여 AI 티가 나지 않습니다.<br>
+                    ③ <strong>스마트 시간차 발행</strong> — 글마다 3~15분 랜덤 딜레이 + 일일 발행 쿨다운으로 봇 탐지를 우회합니다.<br><br>
+                    실제 사용자 2,800명 이상이 6개월 넘게 운영 중이며, 저품질 보고 사례가 없습니다.</p>
                 </div>
             </div>
             <div class="faq-item fade-up">
                 <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
-                    <span>AI가 작성한 글의 품질은 어떤가요?</span>
+                    <span>AI가 작성한 글의 품질은 어떤가요? 직접 수정해야 하나요?</span>
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    <p>Gemini, GPT, Claude 등 세계 최고 수준의 AI 엔진 10종이 네이버 SEO에 최적화된 6,000~10,000자 분량의 글을 작성합니다. 14개 카테고리별 맞춤 프롬프트와 11가지 문체 스타일로 전문가 수준의 콘텐츠를 생성합니다.</p>
+                    <p><strong>별도 수정 없이 바로 발행 가능한 수준</strong>입니다.<br><br>
+                    • <strong>AI 엔진 7종</strong> — GPT-4o, Gemini 2.5 Flash/Pro, Claude 3.5 Sonnet, DeepSeek 등 목적에 맞는 AI를 자동 선택합니다.<br>
+                    • <strong>글 분량</strong> — 네이버 SEO 최적 기준인 6,000~10,000자로 생성됩니다. '간단 리뷰'부터 '전문 정보글'까지 길이 조절 가능합니다.<br>
+                    • <strong>14개 카테고리 전용 프롬프트</strong> — 맛집/여행/IT/건강/육아 등 카테고리마다 전문적인 글쓰기 패턴이 적용됩니다.<br>
+                    • <strong>자동 구조화</strong> — 서론→본론→마무리 + 소제목 + 이미지 삽입 위치까지 자동 배치되어 사람이 쓴 블로그 글과 동일한 구조입니다.<br><br>
+                    물론 발행 전 미리보기에서 직접 수정도 가능합니다.</p>
                 </div>
             </div>
             <div class="faq-item fade-up">
                 <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
-                    <span>쇼핑 커넥트로 얼마나 벌 수 있나요?</span>
+                    <span>쇼핑 커넥트로 구체적으로 얼마나 벌 수 있나요?</span>
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    <p>수익은 블로그 방문자 수와 포스팅 빈도에 따라 달라집니다. 하루 5~10편씩 꾸준히 발행하는 사용자들은 평균 월 30~100만원의 제휴마케팅 수익을 올리고 있습니다. 쿠팡 파트너스와 네이버 제휴링크가 자동으로 삽입됩니다.</p>
+                    <p><strong>하루 10편 발행 기준, 월 30~100만원</strong>이 일반적입니다.<br><br>
+                    • <strong>수익 구조</strong> — 쿠팡 파트너스(구매액 3~5% 커미션) + 네이버 애드포스트(조회당 단가) + 스마트스토어 제휴링크가 글마다 자동 삽입됩니다.<br>
+                    • <strong>상품 크롤링</strong> — 쿠팡/네이버 스마트스토어에서 인기 상품 정보·이미지·가격을 자동 수집하여 리뷰형 포스팅을 생성합니다.<br>
+                    • <strong>실제 사례</strong> — 블로그 3개를 운영하며 하루 15편씩 발행하는 사용자가 월 평균 127만원의 제휴 수익을 올리고 있습니다.<br><br>
+                    수익은 블로그 지수, 카테고리, 발행 빈도에 따라 달라질 수 있습니다.</p>
                 </div>
             </div>
             <div class="faq-item fade-up">
                 <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
-                    <span>환불은 어떻게 하나요?</span>
+                    <span>다계정은 몇 개까지 등록할 수 있나요?</span>
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    <p>구매 후 7일 이내에 카카오톡 1:1 문의로 환불 요청하시면 전액 환불해 드립니다. 어떠한 조건이나 위약금도 없습니다.</p>
+                    <p><strong>계정 수 제한 없이 무제한 등록</strong> 가능합니다.<br><br>
+                    • 네이버 블로그 계정을 원하는 만큼 추가하고 통합 관리할 수 있습니다.<br>
+                    • <strong>계정별 개별 설정</strong> — 각 계정마다 발행 카테고리, AI 엔진, 발행 시간대, 문체 스타일을 따로 설정할 수 있습니다.<br>
+                    • <strong>계정별 스케줄링</strong> — A 계정은 오전 9시~12시, B 계정은 오후 2시~6시처럼 시간대를 분산해서 자연스럽게 운영됩니다.<br>
+                    • <strong>대시보드</strong>에서 전체 계정의 발행 현황, 예약 글, 성과를 한눈에 확인할 수 있습니다.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>이미지는 어떻게 생성되나요? 저작권 문제는 없나요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>100% AI 생성 이미지</strong>로 저작권 문제가 없습니다.<br><br>
+                    • <strong>이미지 엔진 6종</strong> — Google Imagen 4, DALL-E 3, ImageFX, Ideogram 등 최신 AI 이미지 생성기가 연동되어 있습니다.<br>
+                    • <strong>영상 지원</strong> — Google Veo로 6초 분량의 짧은 AI 영상을 생성하여 글에 자동 삽입할 수도 있습니다.<br>
+                    • <strong>자동 삽입</strong> — 글 내용에 맞는 이미지가 본문 흐름에 맞게 자동 배치됩니다. 글당 3~8장이 삽입됩니다.<br>
+                    • <strong>직접 이미지 사용</strong> — 내 PC에 저장된 이미지를 업로드하여 AI 이미지 대신 사용할 수도 있습니다.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>설치 방법이 복잡한가요? 컴퓨터를 잘 못해도 사용할 수 있나요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>설치 파일 1개 다운로드 → 실행 → 끝.</strong> 5분이면 시작합니다.<br><br>
+                    • <strong>Windows 전용</strong> 데스크톱 앱으로, 별도 서버 세팅이나 코딩 지식이 필요 없습니다.<br>
+                    • <strong>결제 후 즉시</strong> — 라이선스 키를 입력하면 바로 모든 기능을 사용할 수 있습니다.<br>
+                    • <strong>자동 업데이트</strong> — 새 버전이 나오면 앱 내에서 클릭 한 번으로 업데이트됩니다. 매주 1~2회 정기 업데이트가 진행됩니다.<br>
+                    • <strong>카카오톡 1:1 지원</strong> — 설치나 사용 중 문제가 생기면 카카오톡으로 즉시 도움을 받을 수 있습니다.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>예약 발행(스케줄링)은 어떻게 작동하나요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>캘린더에서 날짜와 시간대만 선택하면 자동으로 발행</strong>됩니다.<br><br>
+                    • <strong>스마트 스케줄러</strong> — 네이버 트래픽이 가장 높은 시간대(오전 7~9시, 오후 12~2시, 저녁 8~10시)를 자동 추천합니다.<br>
+                    • <strong>랜덤 딜레이</strong> — 설정한 시간대 내에서 3~15분 랜덤으로 발행되어 기계적인 패턴이 생기지 않습니다.<br>
+                    • <strong>반복 스케줄</strong> — '매일 오전 9시~오후 6시 사이 5편' 같은 반복 패턴을 저장해두면 키워드만 넣으면 됩니다.<br>
+                    • <strong>실시간 모니터링</strong> — 발행 성공/실패 현황을 대시보드에서 실시간으로 확인할 수 있습니다.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>환불 정책은 어떻게 되나요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>구매 후 7일 이내 무조건 전액 환불</strong>해 드립니다.<br><br>
+                    • <strong>환불 방법</strong> — 카카오톡 채널 '리더스프로'로 1:1 문의 → '환불 요청' 메시지 전송 → 24시간 이내 처리 완료.<br>
+                    • <strong>위약금 없음</strong> — 사유를 묻지 않으며, 어떠한 조건이나 위약금도 없습니다.<br>
+                    • <strong>월간 구독</strong> — 월 단위 자동 결제이므로, 다음 달 구독을 취소하면 추가 비용이 발생하지 않습니다.<br>
+                    • <strong>연간 구독</strong> — 1년 플랜도 7일 이내 환불 가능하며, 7일 이후에는 사용 일수를 제외한 잔여 금액을 환불해 드립니다.</p>
                 </div>
             </div>
         </div>
@@ -1841,6 +1969,12 @@
         🚀 지금 시작하기 — 첫 달 50% 할인
     </a>
 </div>
+
+<!-- CHERRY BLOSSOM PETALS -->
+<div class="petal-container" id="petalContainer"></div>
+
+<!-- MUSIC TOGGLE -->
+<button class="music-toggle" id="musicToggle" title="🌸 봄 배경음악 켜기/끄기">🔇</button>
 
 <!-- ========== SCRIPTS ========== -->
 <script>
@@ -1966,6 +2100,104 @@ document.querySelectorAll('.bonus-card img, .gallery-item img, .feature-visual i
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.getElementById('lightbox-overlay').style.display = 'none';
 });
+</script>
+
+<!-- ========== CHERRY BLOSSOM + MUSIC ========== -->
+<script>
+// Cherry blossom petals
+(function() {
+    const container = document.getElementById('petalContainer');
+    if (!container) return;
+    const PETAL_COUNT = 25;
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        const size = Math.random() * 14 + 8;
+        petal.style.width = size + 'px';
+        petal.style.height = size + 'px';
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.animationDuration = (Math.random() * 8 + 7) + 's';
+        petal.style.animationDelay = (Math.random() * 10) + 's';
+        container.appendChild(petal);
+    }
+    for (let i = 0; i < PETAL_COUNT; i++) createPetal();
+})();
+
+// Spring ambient music with Web Audio API
+(function() {
+    const btn = document.getElementById('musicToggle');
+    if (!btn) return;
+    let audioCtx = null;
+    let isPlaying = false;
+    let nodes = [];
+
+    function createSpringAmbient() {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const master = audioCtx.createGain();
+        master.gain.value = 0.08;
+        master.connect(audioCtx.destination);
+
+        // Warm pad chord (C major 7)
+        const freqs = [261.63, 329.63, 392.00, 493.88, 523.25];
+        freqs.forEach((freq, i) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+            gain.gain.value = 0.03 - i * 0.004;
+
+            // Gentle vibrato
+            const lfo = audioCtx.createOscillator();
+            const lfoGain = audioCtx.createGain();
+            lfo.frequency.value = 0.3 + Math.random() * 0.5;
+            lfoGain.gain.value = 1.5;
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc.frequency);
+            lfo.start();
+
+            osc.connect(gain);
+            gain.connect(master);
+            osc.start();
+            nodes.push(osc, lfo);
+        });
+
+        // Soft chime tinkle every few seconds
+        function chime() {
+            if (!isPlaying || !audioCtx) return;
+            const chimeFreqs = [523.25, 659.25, 783.99, 1046.5, 1318.5];
+            const f = chimeFreqs[Math.floor(Math.random() * chimeFreqs.length)];
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.value = f;
+            gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 2);
+            osc.connect(gain);
+            gain.connect(master);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 2.5);
+            setTimeout(chime, 2500 + Math.random() * 4000);
+        }
+        setTimeout(chime, 1500);
+    }
+
+    btn.addEventListener('click', () => {
+        if (!isPlaying) {
+            if (!audioCtx) createSpringAmbient();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            isPlaying = true;
+            btn.textContent = '🎵';
+            btn.classList.add('playing');
+            btn.title = '🌸 봄 배경음악 끄기';
+        } else {
+            isPlaying = false;
+            if (audioCtx) audioCtx.suspend();
+            btn.textContent = '🔇';
+            btn.classList.remove('playing');
+            btn.title = '🌸 봄 배경음악 켜기';
+        }
+    });
+})();
 </script>
 
 </body>
