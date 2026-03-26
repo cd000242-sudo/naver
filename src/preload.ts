@@ -78,8 +78,8 @@ contextBridge.exposeInMainWorld('api', {
   closeBrowser: () => ipcRenderer.invoke('automation:closeBrowser'), // ✅ 추가
   launchLeword: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('leword:launch'), // ✅ LEWORD 황금키워드 앱 실행
-  freeActivate: (): Promise<{ success: boolean; message?: string }> =>
-    ipcRenderer.invoke('free:activate'),
+  freeActivate: (userInfo?: { email: string; nickname: string; phone: string }): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('free:activate', userInfo),
   forceQuit: (): Promise<{ success: boolean }> =>
     ipcRenderer.invoke('app:forceQuit'),
   getQuotaStatus: (): Promise<{ success: boolean; isFree: boolean; quota: any }> =>

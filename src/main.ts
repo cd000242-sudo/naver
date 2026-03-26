@@ -737,13 +737,69 @@ async function enforceFreeTier(action: QuotaType, amount: number = 1): Promise<{
   return { allowed: true, quota };
 }
 
-async function activateFreeTier(): Promise<{ success: boolean; message?: string }> {
+async function activateFreeTier(userInfo?: { email: string; nickname: string; phone: string }): Promise<{ success: boolean; message?: string }> {
   try {
     const quota = await getFreeQuotaStatus();
     if (quota?.isPaywalled) {
       const res = await getPaywallResponse();
       return { success: false, message: res.message };
     }
+
+    // ✅ [2026-03-26 v2] 필수 정보 검증 강화: 하나라도 안 적으면 체험 거부
+    if (!userInfo?.email || !userInfo?.nickname || !userInfo?.phone) {
+      return { success: false, message: '이메일, 닉네임, 전화번호를 모두 입력해야 합니다.' };
+    }
+
+    // 이메일 서버사이드 정규화
+    const normalizedEmail = userInfo.email.trim().toLowerCase();
+    const normalizedPhone = userInfo.phone.trim().replace(/[-\s]/g, '');
+
+    // 입력 포맷 검증
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      return { success: false, message: '올바른 이메일 주소를 입력하세요.' };
+    }
+    if (userInfo.nickname.trim().length < 2) {
+      return { success: false, message: '닉네임을 2자 이상 입력하세요.' };
+    }
+    if (!/^01[0-9]{8,9}$/.test(normalizedPhone)) {
+      return { success: false, message: '올바른 전화번호를 입력하세요. (예: 01012345678)' };
+    }
+
+    try {
+      const gasUrl = process.env.LICENSE_SERVER_URL || DEFAULT_LICENSE_SERVER_URL;
+      const deviceId = await getDeviceId();
+      const payload = {
+        action: 'trial-activate',
+        email: normalizedEmail,
+        nickname: userInfo.nickname.trim(),
+        phone: normalizedPhone,
+        deviceId,
+        appVersion: app.getVersion(),
+      };
+      debugLog(`[Main] activateFreeTier: GAS 체험 사용자 등록 요청 — ${normalizedEmail}`);
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+      const response = await fetch(gasUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+      clearTimeout(timeout);
+      const result = await response.json();
+      debugLog(`[Main] activateFreeTier: GAS 응답 — ${JSON.stringify(result)}`);
+
+      if (result.ok === false && result.blocked) {
+        return { success: false, message: result.error || '차단된 사용자입니다. 관리자에게 문의하세요.' };
+      }
+      if (result.ok === false) {
+        return { success: false, message: result.error || '체험 등록에 실패했습니다.' };
+      }
+    } catch (gasError) {
+      // 네트워크 오류 시에도 체험은 허용 (오프라인 환경 대비)
+      debugLog(`[Main] activateFreeTier: GAS 전송 실패 (오프라인 허용) — ${(gasError as Error).message}`);
+    }
+
     const now = new Date().toISOString();
     const license: LicenseInfo = {
       licenseCode: 'FREE-TIER',
@@ -2008,8 +2064,8 @@ ipcMain.handle('blog:getRecentPosts', async (_event, blogId: string) => {
   }
 });
 
-ipcMain.handle('free:activate', async () => {
-  return await activateFreeTier();
+ipcMain.handle('free:activate', async (_event, userInfo?: { email: string; nickname: string; phone: string }) => {
+  return await activateFreeTier(userInfo);
 });
 
 ipcMain.handle('app:forceQuit', async () => {

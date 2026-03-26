@@ -1,36 +1,22 @@
 // src/main/ipc/authHandlers.ts
 // 인증/라이선스 관련 IPC 핸들러
+// ⚠️ [2026-03-26] free:activate, license:checkStatus, quota:getStatus는
+//    main.ts에 실제 구현이 존재하므로 여기서 등록하지 않음 (이중 등록 크래시 방지)
 
-import { ipcMain } from 'electron';
 import { IpcContext } from '../types';
 
 /**
  * 라이선스 핸들러 등록
+ * NOTE: 핵심 핸들러는 main.ts에서 직접 등록됨. 향후 모듈화 시 이동 예정.
  */
-export function registerLicenseHandlers(ctx: IpcContext): void {
-    // 라이선스 상태 확인
-    ipcMain.handle('license:checkStatus', async () => {
-        // TODO: 기존 main.ts의 license:checkStatus 로직 이동
-        console.log('[licenseHandlers] license:checkStatus - placeholder');
-        return { isValid: true, type: 'free' };
-    });
-
-    // 무료 활성화
-    ipcMain.handle('free:activate', async () => {
-        // TODO: 기존 main.ts의 free:activate 로직 이동
-        console.log('[licenseHandlers] free:activate - placeholder');
-        return { success: true };
-    });
+export function registerLicenseHandlers(_ctx: IpcContext): void {
+    // 모든 핸들러는 main.ts에서 등록됨 — 이중 등록 방지
 }
 
 /**
  * 할당량 핸들러 등록
+ * NOTE: 핵심 핸들러는 main.ts에서 직접 등록됨. 향후 모듈화 시 이동 예정.
  */
-export function registerQuotaHandlers(ctx: IpcContext): void {
-    // 할당량 상태
-    ipcMain.handle('quota:getStatus', async () => {
-        // TODO: 기존 main.ts의 quota:getStatus 로직 이동
-        console.log('[quotaHandlers] quota:getStatus - placeholder');
-        return { remaining: 100, total: 100 };
-    });
+export function registerQuotaHandlers(_ctx: IpcContext): void {
+    // 모든 핸들러는 main.ts에서 등록됨 — 이중 등록 방지
 }

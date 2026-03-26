@@ -1162,6 +1162,7 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
             ...img,
             heading: title,
             headingIndex: typeof img?.headingIndex === 'number' ? img.headingIndex : idx,
+            originalIndex: idx + 1, // ✅ [2026-03-26 FIX] 썬네일(0) 다음부터 1-based — editorHelpers originalIndex 매칭용
           });
         });
       }
@@ -1206,6 +1207,7 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
           ...img,
           heading: title,
           headingIndex: typeof img?.headingIndex === 'number' ? img.headingIndex : idx,
+          originalIndex: idx + 1, // ✅ [2026-03-26 FIX] 썬네일(0) 다음부터 1-based — editorHelpers originalIndex 매칭용
         });
       });
       return;
@@ -1218,6 +1220,7 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
           ...img,
           heading: title,
           headingIndex: typeof img?.headingIndex === 'number' ? img.headingIndex : idx,
+          originalIndex: idx + 1, // ✅ [2026-03-26 FIX] 썬네일(0) 다음부터 1-based — editorHelpers originalIndex 매칭용
         });
       });
     }

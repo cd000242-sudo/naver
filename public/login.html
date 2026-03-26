@@ -772,6 +772,186 @@
       padding-top: 16px;
       border-top: 1px solid rgba(212, 175, 55, 0.2);
     }
+
+    /* ✅ [2026-03-26] 무료 체험 개인정보 수집 모달 */
+    .trial-modal-backdrop {
+      position: fixed;
+      left: 0; top: 0; right: 0; bottom: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(8px);
+      z-index: 100001;
+      animation: fadeIn 0.3s ease-out;
+      padding: 24px;
+    }
+
+    .trial-modal {
+      background: linear-gradient(135deg, #1A1A1A 0%, #252525 100%);
+      border: 2px solid rgba(16, 185, 129, 0.5);
+      border-radius: 20px;
+      padding: 28px 32px;
+      width: 90%;
+      max-width: 440px;
+      box-shadow:
+        0 0 50px rgba(16, 185, 129, 0.2),
+        inset 0 1px 0 rgba(16, 185, 129, 0.1);
+      transform: scale(0.9);
+      animation: scaleUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .trial-modal-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .trial-modal-header .trial-icon {
+      font-size: 36px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .trial-modal-header h2 {
+      color: #10b981;
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .trial-modal-header p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+    }
+
+    .trial-form-group {
+      margin-bottom: 14px;
+    }
+
+    .trial-form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #10b981;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+    }
+
+    .trial-form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg-input);
+      border: 2px solid rgba(16, 185, 129, 0.25);
+      border-radius: 10px;
+      font-size: 14px;
+      color: #e0e0e0;
+      transition: all 0.3s ease;
+    }
+
+    .trial-form-group input::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .trial-form-group input:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15), 0 0 12px rgba(16, 185, 129, 0.2);
+      background: #2F2F2F;
+    }
+
+    .trial-form-group input.trial-input-error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+
+    .trial-consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 16px 0;
+      padding: 12px;
+      background: rgba(16, 185, 129, 0.06);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: 10px;
+    }
+
+    .trial-consent-row input[type="checkbox"] {
+      width: auto;
+      margin-top: 3px;
+      accent-color: #10b981;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .trial-consent-row label {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .trial-error-msg {
+      display: none;
+      color: #ef4444;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      padding: 8px 12px;
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+    }
+
+    .trial-error-msg.show {
+      display: block;
+    }
+
+    .trial-modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .trial-submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .trial-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+    }
+
+    .trial-submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .trial-cancel-btn {
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 13px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .trial-cancel-btn:hover {
+      color: rgba(255, 255, 255, 0.6);
+    }
   </style>
 </head>
 
@@ -878,6 +1058,44 @@
           <button id="paywall-later-btn"
             style="background: transparent; border: none; color: rgba(255,255,255,0.35); font-size: 13px; padding: 12px; cursor: pointer;">네,
             성장을 멈출게요</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ [2026-03-26] 무료 체험 개인정보 수집 모달 -->
+    <div id="trial-modal-backdrop" class="trial-modal-backdrop">
+      <div class="trial-modal">
+        <div class="trial-modal-header">
+          <span class="trial-icon">👑</span>
+          <h2>무료 체험 시작하기</h2>
+          <p>간단한 정보 입력 후 매일 2회 무료 체험이 가능합니다</p>
+        </div>
+
+        <div class="trial-form-group">
+          <label for="trial-email">이메일 <span style="color: #ef4444;">*</span></label>
+          <input type="email" id="trial-email" placeholder="example@email.com">
+        </div>
+
+        <div class="trial-form-group">
+          <label for="trial-nickname">단톡방 닉네임 <span style="color: #ef4444;">*</span></label>
+          <input type="text" id="trial-nickname" placeholder="오픈채팅 닉네임을 입력하세요">
+        </div>
+
+        <div class="trial-form-group">
+          <label for="trial-phone">전화번호 <span style="color: #ef4444;">*</span></label>
+          <input type="tel" id="trial-phone" placeholder="01012345678">
+        </div>
+
+        <div class="trial-consent-row">
+          <input type="checkbox" id="trial-consent">
+          <label for="trial-consent">체험 서비스 제공을 위해 이메일, 닉네임, 전화번호를 수집·이용하는 것에 동의합니다. 수집된 정보는 서비스 운영 목적으로만 사용됩니다.</label>
+        </div>
+
+        <div id="trial-error-msg" class="trial-error-msg"></div>
+
+        <div class="trial-modal-actions">
+          <button type="button" id="trial-submit-btn" class="trial-submit-btn">🚀 체험 시작하기</button>
+          <button type="button" id="trial-cancel-btn" class="trial-cancel-btn">취소</button>
         </div>
       </div>
     </div>
@@ -1338,74 +1556,122 @@
       }
     });
 
+    // ✅ [2026-03-26] free-use-button → 개인정보 수집 모달 먼저 표시
     document.getElementById('free-use-button')?.addEventListener('click', async () => {
       hideError();
-      const btn = document.getElementById('free-use-button');
-      const loginButton = document.getElementById('login-button');
       try {
+        // 페이월 체크 (이미 한도 초과된 경우)
         try {
           const status = await ipcRenderer.invoke('quota:getStatus');
           const used = Number(status?.quota?.usage?.publish) || 0;
           const limit = 2;
           if (status?.success && status?.isFree && (status?.quota?.isPaywalled || used >= limit)) {
-            // ✅ 새로운 페이월 모달 표시
             const paywallModal = document.getElementById('paywall-modal-backdrop');
-            if (paywallModal) {
-              paywallModal.style.display = 'flex';
-            }
+            if (paywallModal) paywallModal.style.display = 'flex';
             return;
           }
-        } catch (e) {
-        }
-        if (btn) {
-          btn.disabled = true;
-          btn.textContent = '무료 체험 설정 중...';
-        }
-        if (loginButton) {
-          loginButton.disabled = true;
-        }
-        const result = await ipcRenderer.invoke('free:activate');
+        } catch (e) { /* ignore */ }
+
+        // 개인정보 수집 모달 표시
+        const trialModal = document.getElementById('trial-modal-backdrop');
+        if (trialModal) trialModal.style.display = 'flex';
+      } catch (error) {
+        showError(`무료 체험 준비 중 오류: ${error.message}`);
+      }
+    });
+
+    // ✅ [2026-03-26] 체험 모달: 취소 버튼
+    document.getElementById('trial-cancel-btn')?.addEventListener('click', () => {
+      const trialModal = document.getElementById('trial-modal-backdrop');
+      if (trialModal) trialModal.style.display = 'none';
+    });
+
+    // ✅ [2026-03-26] 체험 모달: 배경 클릭 닫기
+    document.getElementById('trial-modal-backdrop')?.addEventListener('click', (e) => {
+      if (e.target === document.getElementById('trial-modal-backdrop')) {
+        document.getElementById('trial-modal-backdrop').style.display = 'none';
+      }
+    });
+
+    // ✅ [2026-03-26] 체험 모달: 제출 핸들러
+    document.getElementById('trial-submit-btn')?.addEventListener('click', async () => {
+      const emailInput = document.getElementById('trial-email');
+      const nicknameInput = document.getElementById('trial-nickname');
+      const phoneInput = document.getElementById('trial-phone');
+      const consentCheck = document.getElementById('trial-consent');
+      const errorMsg = document.getElementById('trial-error-msg');
+      const submitBtn = document.getElementById('trial-submit-btn');
+      const freeBtn = document.getElementById('free-use-button');
+      const loginButton = document.getElementById('login-button');
+
+      const email = (emailInput?.value || '').trim().toLowerCase();
+      const nickname = (nicknameInput?.value || '').trim();
+      const phone = (phoneInput?.value || '').trim().replace(/[-\s]/g, '');
+
+      // 입력 에러 초기화
+      [emailInput, nicknameInput, phoneInput].forEach(el => el?.classList.remove('trial-input-error'));
+      if (errorMsg) { errorMsg.textContent = ''; errorMsg.classList.remove('show'); }
+
+      // 유효성 검증
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailInput?.classList.add('trial-input-error');
+        if (errorMsg) { errorMsg.textContent = '올바른 이메일을 입력하세요.'; errorMsg.classList.add('show'); }
+        return;
+      }
+      if (!nickname || nickname.length < 2) {
+        nicknameInput?.classList.add('trial-input-error');
+        if (errorMsg) { errorMsg.textContent = '닉네임을 2자 이상 입력하세요.'; errorMsg.classList.add('show'); }
+        return;
+      }
+      if (!phone || !/^01[0-9]{8,9}$/.test(phone)) {
+        phoneInput?.classList.add('trial-input-error');
+        if (errorMsg) { errorMsg.textContent = '올바른 전화번호를 입력하세요. (예: 01012345678)'; errorMsg.classList.add('show'); }
+        return;
+      }
+      if (!consentCheck?.checked) {
+        if (errorMsg) { errorMsg.textContent = '개인정보 수집·이용에 동의해주세요.'; errorMsg.classList.add('show'); }
+        return;
+      }
+
+      // 제출 시작
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '체험 설정 중...'; }
+      if (freeBtn) freeBtn.disabled = true;
+      if (loginButton) loginButton.disabled = true;
+
+      try {
+        const result = await window.api.freeActivate({ email, nickname, phone });
+
         if (!result || result.success !== true) {
-          const msg = (result && result.message) ? String(result.message) : '무료 사용자 설정에 실패했습니다.';
-          const isQuota = /할당량|quota|PAYWALL|소진/i.test(msg);
+          const msg = (result && result.message) ? String(result.message) : '무료 체험 설정에 실패했습니다.';
+          const isQuota = /할당량|quota|PAYWALL|소진|한도|초과|차단/i.test(msg);
           if (isQuota) {
-            // [개선] 고급스러운 페이월 모달 표시
+            document.getElementById('trial-modal-backdrop').style.display = 'none';
             const paywallModal = document.getElementById('paywall-modal-backdrop');
-            if (paywallModal) {
-              paywallModal.style.display = 'flex';
-            }
+            if (paywallModal) paywallModal.style.display = 'flex';
           } else {
-            showError(msg);
+            if (errorMsg) { errorMsg.textContent = msg; errorMsg.classList.add('show'); }
           }
-          if (btn) {
-            btn.disabled = false;
-            btn.textContent = '👑 무료로 체험해보기';
-          }
-          if (loginButton) {
-            loginButton.disabled = false;
-          }
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '🚀 체험 시작하기'; }
+          if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = '👑 매일 발행 2회 무료 사용하기'; }
+          if (loginButton) loginButton.disabled = false;
           return;
         }
+
+        // 성공
+        document.getElementById('trial-modal-backdrop').style.display = 'none';
         showInfoModal(
           '✅ 환영합니다!',
           '무료 2회 발행 가능합니다.\nPro 버전은 오픈채팅으로 문의해주세요.'
         );
         window.setTimeout(async () => {
-          try {
-            await ipcRenderer.invoke('login:success');
-          } catch (e) {
-          }
+          try { await ipcRenderer.invoke('login:success'); } catch (e) { /* ignore */ }
           window.close();
         }, 1100);
       } catch (error) {
-        showError(`무료 사용자 설정 중 오류가 발생했습니다: ${error.message}`);
-        if (btn) {
-          btn.disabled = false;
-          btn.textContent = '👑 무료로 체험해보기';
-        }
-        if (loginButton) {
-          loginButton.disabled = false;
-        }
+        if (errorMsg) { errorMsg.textContent = `오류: ${error.message}`; errorMsg.classList.add('show'); }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '🚀 체험 시작하기'; }
+        if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = '👑 매일 발행 2회 무료 사용하기'; }
+        if (loginButton) loginButton.disabled = false;
       }
     });
 

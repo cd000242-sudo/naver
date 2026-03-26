@@ -707,7 +707,14 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     const headings = structured.headings || [];
     const bodyText = structured.bodyPlain || '';
 
-    // ✅ [2026-02-28 FIX] 사용자 수정 감지 시 bodyText를 heading title 위치 기반으로 직접 분할
+    // ✅ [2026-03-26 DEBUG] 반자동 편집 반영 확인 — bodyText와 resolved.content 일치 검증
+    self.log(`🔍 [편집 검증] _bodyManuallyEdited=${structured._bodyManuallyEdited}, bodyText길이=${bodyText.length}, resolved.content길이=${resolved.content?.length}`);
+    if (bodyText.length > 0) {
+      self.log(`🔍 [편집 검증] bodyText 시작 50자: ${bodyText.substring(0, 50)}...`);
+    }
+    if (resolved.content && bodyText !== resolved.content) {
+      self.log(`⚠️ [편집 검증] bodyText≠resolved.content! bodyText(${bodyText.length}자) vs content(${resolved.content.length}자)`);
+    }
     // extractBodyForHeading 복잡한 파싱을 완전 우회하여 100% 편집 반영 보장
     if (structured._bodyManuallyEdited && headings.length > 0) {
       self.log('📝 [편집 감지] 사용자가 수정한 내용을 heading 위치 기반으로 직접 분할합니다.');
@@ -770,8 +777,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     // ✅ [2026-02-24 FIX] 이미 삽입된 이미지 파일 경로를 추적하여 중복 삽입 방지
     const usedImagePaths = new Set<string>();
 
-    // ✅ [2026-02-23 FIX] 모든 모드에서 서론 작성 + 썸네일 이미지 삽입
-    if (structured.introduction && structured.introduction.trim().length > 10) {
+    // ✅ [2026-03-26 FIX] 서론이 존재하면 무조건 작성 (10자 제한 제거 — 서론 스킵 완전 방지)
+    if (structured.introduction && structured.introduction.trim().length > 0) {
       self.log('📖 서론 작성 중...');
 
       // ✅ [수정] 제휴 마케팅 고지 문구를 최상단에 먼저 삽입 (썸네일보다 위!)
@@ -891,6 +898,16 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                 if (resolved.affiliateLink) {
                   await self.attachLinkToLastImage(resolved.affiliateLink);
                 }
+
+                // ✅ [2026-03-26 FIX] 대표이미지에 추가 이미지가 있으면 오버레이 후 순차 삽입
+                // introImages[0]은 오버레이 처리 완료 → 나머지(인덱스 1~)를 원본 그대로 삽입
+                if (introImages.length > 1) {
+                  const remainingImages = introImages.slice(1);
+                  self.log(`   📸 대표이미지 추가 이미지 ${remainingImages.length}개 삽입 중...`);
+                  await self.insertImagesAtCurrentCursor(remainingImages, page, frame, resolved.affiliateLink);
+                  remainingImages.forEach((img: any) => { const p = img?.filePath || img?.url; if (p) usedImagePaths.add(p); });
+                  self.log(`   ✅ 대표이미지 추가 이미지 ${remainingImages.length}개 삽입 완료`);
+                }
               } else {
                 self.log(`   ⚠️ 텍스트 오버레이 실패 → 원본 AI 이미지 삽입`);
                 await self.insertImagesAtCurrentCursor(introImages, page, frame, resolved.affiliateLink);
@@ -927,11 +944,41 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
       self.log('   ✅ 서론 작성 완료');
     } else {
-      self.log('   ⏭️ 서론 건너뛰기 (서론 없음 또는 10자 미만)');
+      self.log('   ⏭️ 서론 텍스트 없음 (서론이 비어있습니다)');
+
+      // ✅ [2026-03-26 FIX] Safety Net: 서론이 없어도 썸네일 이미지는 반드시 삽입
+      // 서론 블록 내부의 썸네일 삽입 로직이 실행되지 않으므로, 여기서 별도로 삽입
+      if (!resolved.skipImages && !thumbnailInsertedInIntro) {
+        const safetyNetImages = (resolved.images || []).filter((img: any) =>
+          img.heading === '🖼️ 썸네일' || img.heading === '썸네일' || img.isThumbnail === true || img.isIntro === true
+        );
+        if (safetyNetImages.length > 0) {
+          self.log(`   🖼️ [Safety Net] 서론 없이 썸네일 이미지 ${safetyNetImages.length}개 삽입 중...`);
+          try {
+            await self.insertImagesAtCurrentCursor(safetyNetImages, page, frame, resolved.affiliateLink);
+            thumbnailInsertedInIntro = true;
+            safetyNetImages.forEach((img: any) => { const p = img?.filePath || img?.url; if (p) usedImagePaths.add(p); });
+            self.log('   ✅ [Safety Net] 썸네일 이미지 삽입 완료');
+            // 썸네일과 첫 소제목 사이 간격 확보
+            await page.keyboard.press('Enter');
+            await self.delay(200);
+            await page.keyboard.press('Enter');
+            await self.delay(200);
+          } catch (safetyNetError) {
+            self.log(`   ⚠️ [Safety Net] 썸네일 삽입 실패: ${(safetyNetError as Error).message}`);
+          }
+        } else {
+          self.log('   ℹ️ [Safety Net] 삽입할 썸네일 이미지 없음');
+        }
+      }
     }
 
     // 3. 소제목과 본문을 순차적으로 작성 (완전 순차 실행)
     self.log(`📋 총 ${headings.length}개의 섹션을 순차적으로 작성합니다.`);
+
+    // ✅ [2026-03-26] expectedIdx 계산 헬퍼 (3곳 통합)
+    const getExpectedOriginalIndex = (sectionIdx: number) =>
+      thumbnailInsertedInIntro ? sectionIdx + 1 : sectionIdx;
 
     // for문으로 완전 순차 실행 (클릭 절대 금지, 키보드만 사용)
     for (let i = 0; i < headings.length; i++) {
@@ -1185,19 +1232,34 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
               return false;
             });
 
-            // ✅ [2026-02-24 FIX] headingImageMode 필터링 시 originalIndex 교차 검증
-            // heading title 매칭이 성공해도, originalIndex가 현재 소제목 위치와 불일치하면 폐기
-            // (공격적 부분 문자열 매칭으로 다른 소제목의 이미지가 잘못 매칭되는 것 방지)
+            // ✅ [2026-03-26 FIX v2] Confidence-Gated 교차 검증
+            // heading title 매칭이 성공해도, originalIndex가 현재 소제목 위치와 불일치하면 필터링
+            // 검증 결과 0개 시: 정확 매칭(exact/normalized)만 유지, 정확 매칭도 없으면 폐기 (오매칭 방지)
             if (headingImages.length > 0) {
               const hasOriginalIndices = headingImages.some((img: any) => img.originalIndex !== undefined);
               if (hasOriginalIndices) {
-                const expectedIdx = thumbnailInsertedInIntro ? i + 1 : i;
+                const expectedIdx = getExpectedOriginalIndex(i);
                 const validated = headingImages.filter((img: any) =>
                   img.originalIndex === undefined || img.originalIndex === expectedIdx
                 );
                 if (validated.length !== headingImages.length) {
                   self.log(`   🔍[originalIndex 검증] heading title 매칭 ${headingImages.length}개 중 ${validated.length}개만 originalIndex=${expectedIdx} 일치`);
-                  headingImages = validated;
+                  if (validated.length > 0) {
+                    headingImages = validated;
+                  } else {
+                    // ✅ 교차 검증 0개: 정확 매칭(exact/normalized)만 골라서 유지
+                    const exactMatched = headingImages.filter((img: any) => {
+                      const normalizedImgH = normalizeHeading(img.heading);
+                      return img.heading === heading.title || normalizedImgH === normalizedHeadingTitle;
+                    });
+                    if (exactMatched.length > 0) {
+                      headingImages = exactMatched;
+                      self.log(`   ⚠️[originalIndex 검증] 교차 검증 0개 → 정확 매칭 ${exactMatched.length}개만 유지`);
+                    } else {
+                      self.log(`   ⚠️[originalIndex 검증] 교차 검증 0개 + 정확 매칭 0개 → 전부 폐기 (오매칭 방지)`);
+                      headingImages = [];
+                    }
+                  }
                 }
               }
             }
@@ -1244,7 +1306,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                 });
 
                 // ✅ [2026-02-24 FIX] 서론에 썸네일이 실제로 삽입되었는지로 판단 (기존 usesAutoThumbnail 대체)
-                const expectedOriginalIndex = thumbnailInsertedInIntro ? i + 1 : i;
+                const expectedOriginalIndex = getExpectedOriginalIndex(i);
 
                 self.log(`   🔄[이미지 인덱스] 서론썸네일=${thumbnailInsertedInIntro}, 현재소제목=${i}, 예상originalIndex=${expectedOriginalIndex}`);
 
@@ -1297,7 +1359,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                   });
 
                   // ✅ [2026-03-09 FIX] 1순위: originalIndex 기반 다중 매칭 (headingImageMode 필터링 대응)
-                  const expectedIdx = thumbnailInsertedInIntro ? i + 1 : i;
+                  const expectedIdx = getExpectedOriginalIndex(i);
                   let matchedImages = nonThumbnailForFallback.filter((img: any) =>
                     img.originalIndex !== undefined && img.originalIndex === expectedIdx
                   );
@@ -1370,6 +1432,17 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             // extractBodyForHeading + 필터링 완전 우회 → 100% 원문 반영
             cleanBody = heading.content.trim();
             self.log(`   ✅ [편집 반영] heading.content 직접 사용: ${cleanBody.length}자`);
+          } else if (structured._bodyManuallyEdited && (!heading.content || heading.content.trim().length === 0) && bodyText.trim().length > 0) {
+            // ✅ [2026-03-26 FIX] _bodyManuallyEdited=true인데 heading.content가 비어있는 경우
+            // L712 재분할에서 heading title indexOf 실패했을 때 발생
+            // bodyText에서 heading 인덱스 기반 균등 분배로 안전하게 추출
+            self.log(`   ⚠️ [편집 안전장치] heading.content가 비어있음 → bodyText에서 균등 분배 추출`);
+            const allLines = bodyText.split('\n').filter((l: string) => l.trim().length > 0);
+            const lph = Math.max(1, Math.ceil(allLines.length / headings.length));
+            const sl = i * lph;
+            const el = Math.min(sl + lph, allLines.length);
+            cleanBody = allLines.slice(sl, el).join('\n').trim();
+            self.log(`   ✅ 균등 분배 추출: ${cleanBody.length}자`);
           } else {
             // ✅ [기존 로직] extractBodyForHeading 기반 추출 + 필터링
             const headingBody = self.extractBodyForHeading(bodyText, heading.title, i, headings.length, headings);

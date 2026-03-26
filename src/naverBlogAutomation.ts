@@ -3725,87 +3725,126 @@ export class NaverBlogAutomation {
         }
 
         if (publishButton) {
-          // ✅ [2026-03-04 FIX v4] 발행 모달 열기 전 에디터의 첫 번째 이미지를 물리적 마우스 클릭으로 활성화
-          // 네이버 SmartEditor는 React 기반 → JS click()으로는 이벤트 핸들러가 트리거되지 않음
-          // iframe 좌표 보정 후 page.mouse.click() 사용
+          // ✅ [2026-03-26 v11] 발행 모달 열기 전 대표이미지 설정 + AI 마크 일괄 활성화
+          // button.se-set-rep-image-button 직접 클릭 + button.se-set-ai-mark-button-toggle 일괄 활성화
           try {
-            this.log('🖼️ 에디터 내 첫 번째 이미지 물리적 클릭 중 (대표이미지 사전 선택)...');
+            this.log('🖼️ [대표사진 v11] 에디터 내 대표이미지 직접 설정 + AI 마크 활성화 중...');
+            const page = this.ensurePage();
 
-            // Step 1: iframe 내 첫 번째 의미있는 이미지의 좌표를 가져옴
-            const firstImgCoords = await frame.evaluate(() => {
-              const editorSelectors = [
-                'img.se-image-resource',
-                '.se-component.se-image img[src]',
-                '.se-main-container img[src]',
-                '.se-component-content img[src]',
-                'img[src*="pstatic.net"]',
-                'img[src*="blogfiles"]',
-              ];
+            // Step 1: 에디터 내 모든 이미지 컴포넌트 수집
+            const imageComponents = await frame.$$('.se-component.se-image, .se-component.se-imageStrip');
+            this.log(`   📊 에디터 내 이미지 컴포넌트: ${imageComponents.length}개`);
 
-              for (const sel of editorSelectors) {
-                const imgs = document.querySelectorAll(sel);
-                for (const img of imgs) {
-                  const htmlImg = img as HTMLImageElement;
-                  if (!htmlImg.src || htmlImg.src.length < 20) continue;
-                  const rect = htmlImg.getBoundingClientRect();
-                  if (rect.width < 50 || rect.height < 50) continue;
+            if (imageComponents.length > 0) {
+              // Step 2: 첫 번째 이미지 컴포넌트 클릭하여 활성화 (대표사진 후보)
+              const targetComponent = imageComponents[0];
+              const imgElement = await targetComponent.$('img');
+              if (imgElement) {
+                const imgCoords = await imgElement.evaluate((el: HTMLImageElement) => {
+                  el.scrollIntoView({ block: 'center', behavior: 'instant' as any });
+                  void el.offsetHeight;
+                  const rect = el.getBoundingClientRect();
+                  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, found: true };
+                }).catch(() => ({ x: 0, y: 0, found: false }));
 
-                  // 스크롤하여 보이게 함
-                  htmlImg.scrollIntoView({ block: 'center', behavior: 'instant' as any });
-                  // 스크롤 후 좌표 재계산
-                  const newRect = htmlImg.getBoundingClientRect();
-                  return {
-                    x: newRect.left + newRect.width / 2,
-                    y: newRect.top + newRect.height / 2,
-                    width: newRect.width,
-                    height: newRect.height,
-                    found: true
-                  };
+                if (imgCoords.found) {
+                  await this.delay(300);
+                  const iframeOffset = await page.evaluate(() => {
+                    const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
+                    if (iframe) { const r = iframe.getBoundingClientRect(); return { x: r.x, y: r.y }; }
+                    return { x: 0, y: 0 };
+                  }).catch(() => ({ x: 0, y: 0 }));
+
+                  const clickX = iframeOffset.x + imgCoords.x;
+                  const clickY = iframeOffset.y + imgCoords.y;
+                  await page.mouse.click(clickX, clickY);
+                  await this.delay(500);
+                  await page.mouse.click(clickX, clickY);
+                  await this.delay(800);
+
+                  // Step 3: 대표사진 버튼 클릭 (se-set-rep-image-button)
+                  const repBtn = await frame.$('button.se-set-rep-image-button').catch(() => null);
+                  if (repBtn) {
+                    const isAlreadySelected = await repBtn.evaluate((btn: HTMLButtonElement) =>
+                      btn.classList.contains('se-is-selected')
+                    ).catch(() => false);
+
+                    if (isAlreadySelected) {
+                      this.log('   ✅ [대표사진 v11] 첫 번째 이미지가 이미 대표로 설정됨');
+                    } else {
+                      const repBtnCoords = await repBtn.evaluate((btn: HTMLButtonElement) => {
+                        const rect = btn.getBoundingClientRect();
+                        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+                      }).catch(() => ({ x: 0, y: 0 }));
+                      await page.mouse.click(iframeOffset.x + repBtnCoords.x, iframeOffset.y + repBtnCoords.y);
+                      await this.delay(500);
+
+                      const verified = await frame.$eval('button.se-set-rep-image-button',
+                        (btn: Element) => btn.classList.contains('se-is-selected')
+                      ).catch(() => false);
+                      this.log(verified
+                        ? '   ✅ [대표사진 v11] 첫 번째 이미지 대표 설정 성공 (se-is-selected 확인)'
+                        : '   ⚠️ [대표사진 v11] 대표 버튼 클릭했으나 se-is-selected 미확인');
+                    }
+                  } else {
+                    this.log('   ⚠️ [대표사진 v11] 대표사진 버튼 미발견 — 기본 선택 유지');
+                  }
                 }
               }
-              return { x: 0, y: 0, width: 0, height: 0, found: false };
-            }).catch(() => ({ x: 0, y: 0, width: 0, height: 0, found: false }));
 
-            if (firstImgCoords.found) {
-              await this.delay(500); // 스크롤 안정화
+              // Step 4: AI 활용 마크 일괄 활성화
+              try {
+                this.log('🤖 [AI 마크] AI 생성 이미지 마크 일괄 활성화 중...');
+                let aiMarkCount = 0;
+                for (let i = 0; i < imageComponents.length; i++) {
+                  const compImg = await imageComponents[i].$('img');
+                  if (!compImg) continue;
 
-              // Step 2: iframe 오프셋을 가져옴
-              const page = this.ensurePage();
-              const iframeOffset = await page.evaluate(() => {
-                const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
-                if (iframe) {
-                  const rect = iframe.getBoundingClientRect();
-                  return { x: rect.x, y: rect.y };
+                  const compCoords = await compImg.evaluate((el: HTMLImageElement) => {
+                    el.scrollIntoView({ block: 'center', behavior: 'instant' as any });
+                    void el.offsetHeight;
+                    const rect = el.getBoundingClientRect();
+                    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, found: true };
+                  }).catch(() => ({ x: 0, y: 0, found: false }));
+
+                  if (!compCoords.found) continue;
+
+                  const iframeOff = await page.evaluate(() => {
+                    const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
+                    if (iframe) { const r = iframe.getBoundingClientRect(); return { x: r.x, y: r.y }; }
+                    return { x: 0, y: 0 };
+                  }).catch(() => ({ x: 0, y: 0 }));
+
+                  await page.mouse.click(iframeOff.x + compCoords.x, iframeOff.y + compCoords.y);
+                  await this.delay(400);
+
+                  const aiBtn = await frame.$('button.se-set-ai-mark-button-toggle').catch(() => null);
+                  if (aiBtn) {
+                    const isAiActive = await aiBtn.evaluate((btn: HTMLButtonElement) =>
+                      btn.classList.contains('se-is-selected') ||
+                      btn.getAttribute('aria-pressed') === 'true'
+                    ).catch(() => false);
+
+                    if (!isAiActive) {
+                      const aiBtnCoords = await aiBtn.evaluate((btn: HTMLButtonElement) => {
+                        const rect = btn.getBoundingClientRect();
+                        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+                      }).catch(() => ({ x: 0, y: 0 }));
+                      await page.mouse.click(iframeOff.x + aiBtnCoords.x, iframeOff.y + aiBtnCoords.y);
+                      await this.delay(300);
+                      aiMarkCount++;
+                    }
+                  }
                 }
-                return { x: 0, y: 0 };
-              }).catch(() => ({ x: 0, y: 0 }));
-
-              // Step 3: 물리적 마우스 클릭 (iframe 오프셋 + 이미지 중심)
-              const clickX = iframeOffset.x + firstImgCoords.x;
-              const clickY = iframeOffset.y + firstImgCoords.y;
-              this.log(`   🎯 물리적 마우스 클릭: (${Math.round(clickX)}, ${Math.round(clickY)}) — 이미지 크기: ${Math.round(firstImgCoords.width)}x${Math.round(firstImgCoords.height)}`);
-
-              await page.mouse.move(clickX, clickY);
-              await this.delay(100);
-              await page.mouse.click(clickX, clickY);
-              await this.delay(500);
-              // 한 번 더 클릭 (SmartEditor 컴포넌트 활성화 확실히)
-              await page.mouse.click(clickX, clickY);
-
-              this.log('   ✅ 에디터 첫 번째 이미지 물리적 클릭 완료 → 대표이미지 사전 지정');
-              await this.delay(800); // 에디터가 이미지 활성화 처리할 시간
-
-              // ✅ [2026-03-14 FIX v7] Escape+body 클릭 제거!
-              // 이전 v6에서 Escape+body 클릭으로 이미지 선택을 해제하면
-              // 네이버가 대표이미지 사전 선택을 인식하지 못하여 마지막 삽입 이미지가 대표가 되는 버그 발생.
-              // 발행 버튼은 에디터 상단 고정 영역에 있으므로 이미지 툴바(본문 내부)와 겹치지 않음.
-              // → 이미지 선택 상태 유지 + 스크롤 복귀만으로 발행 버튼 접근 가능.
-              this.log('   ℹ️ 이미지 선택 상태 유지 (Escape 생략 → 대표이미지 사전 지정 보존)');
+                this.log(`   ✅ [AI 마크] ${aiMarkCount}개 이미지에 AI 활용 마크 활성화 완료`);
+              } catch (aiMarkError) {
+                this.log(`   ⚠️ [AI 마크] AI 마크 활성화 오류 (무시): ${(aiMarkError as Error).message}`);
+              }
             } else {
-              this.log('   ℹ️ 에디터 내 이미지를 찾지 못함 → 기본 대표이미지 사용');
+              this.log('   ℹ️ 에디터 내 이미지 컴포넌트 없음 → 대표이미지/AI 마크 설정 건너뜀');
             }
-          } catch (preSelectError) {
-            this.log(`   ⚠️ 이미지 사전 선택 중 오류 (무시): ${(preSelectError as Error).message}`);
+          } catch (v11Error) {
+            this.log(`   ⚠️ [대표사진 v11] 오류 (발행은 계속): ${(v11Error as Error).message}`);
           }
 
           // ✅ [2026-03-04 FIX v6] 이미지 사전 클릭으로 에디터 스크롤이 변경되었으므로
@@ -3926,87 +3965,8 @@ export class NaverBlogAutomation {
           // ✅ [2026-02-09] 카테고리 자동 선택 (공통 메서드 사용)
           await this.selectCategoryInPublishModal(frame, this.ensurePage());
 
-          // ✅ [2026-03-03 FIX] 대표사진 로딩 대기 + 첫 번째 이미지 명시적 선택
-          // 네이버 SmartEditor는 마지막 삽입 이미지를 대표사진으로 자동 선택하는 경향이 있어
-          // 사용자가 설정한 대표이미지(=첫 번째 이미지)가 무시되고 마지막 이미지가 대표사진이 되는 버그 발생
-          try {
-            this.log('🖼️ 발행 모달 대표사진 설정 중...');
-            const thumbLoadStart = Date.now();
-            const THUMB_TIMEOUT = 8000;
-            const THUMB_POLL_INTERVAL = 500;
-            let thumbFound = false;
-
-            while (Date.now() - thumbLoadStart < THUMB_TIMEOUT) {
-              this.ensureNotCancelled();
-
-              // 발행 모달 내 대표사진 영역에서 이미지가 로드되었는지 확인
-              thumbFound = await frame.evaluate(() => {
-                // 네이버 발행 모달 대표사진 미리보기 이미지 탐색
-                const thumbSelectors = [
-                  '[class*="thumbnail"] img[src]',
-                  '[class*="Thumbnail"] img[src]',
-                  '[class*="cover_thumb"] img[src]',
-                  '[class*="coverThumb"] img[src]',
-                  '[class*="thumb_area"] img[src]',
-                  '[class*="thumbArea"] img[src]',
-                  '[class*="represent"] img[src]',
-                  '[class*="cover_image"] img[src]',
-                  '[class*="publish"] img[src]',
-                ];
-
-                for (const sel of thumbSelectors) {
-                  const img = document.querySelector(sel) as HTMLImageElement | null;
-                  if (img && img.src && img.src.length > 10 && img.naturalWidth > 0) {
-                    return true;
-                  }
-                }
-
-                // 폴백: 발행 모달 영역 내 이미지 확인
-                const allImgs = document.querySelectorAll('img[src]');
-                for (const img of allImgs) {
-                  const htmlImg = img as HTMLImageElement;
-                  if (!htmlImg.src || htmlImg.src.length < 10 || htmlImg.naturalWidth < 10) continue;
-                  let parent = htmlImg.parentElement;
-                  let depth = 0;
-                  while (parent && depth < 10) {
-                    const cls = parent.className?.toString() || '';
-                    if (cls.includes('publish') || cls.includes('Publish') ||
-                      cls.includes('popup_option') || cls.includes('setting') ||
-                      cls.includes('Setting') || cls.includes('modal')) {
-                      return true;
-                    }
-                    parent = parent.parentElement;
-                    depth++;
-                  }
-                }
-                return false;
-              }).catch(() => false);
-
-              if (thumbFound) {
-                const elapsed = Math.round((Date.now() - thumbLoadStart) / 100) / 10;
-                this.log(`   ✅ 대표사진 영역 로딩 완료! (${elapsed}초 소요)`);
-                break;
-              }
-
-              await this.delay(THUMB_POLL_INTERVAL);
-            }
-
-            if (!thumbFound) {
-              this.log('   ⚠️ 대표사진 로딩 타임아웃 (8초) — 이미지 없이 계속 진행합니다');
-              await this.delay(1000);
-            }
-
-            // ✅ [2026-03-04 FIX v6] 대표사진 설정 — 발행 모달 내에서만 작업
-            // ⚠️ 주의: 에디터 본문의 "대표" 버튼을 클릭하면 발행 모달이 닫히는 부작용이 있으므로
-            // 발행 모달이 열린 상태에서는 모달 내부 요소만 조작해야 함
-            if (thumbFound) {
-              this.log('   ✅ 대표사진 영역 로딩 확인 — 네이버 기본 선택(첫 번째 이미지) 유지');
-              // 네이버는 기본적으로 첫 번째 이미지를 대표사진으로 선택하므로
-              // filterImagesForPublish에서 이미 thumbail을 맨 앞에 배치했으므로 추가 조작 불필요
-            }
-          } catch (thumbError) {
-            this.log(`   ⚠️ 대표사진 설정 중 오류 (무시하고 계속): ${(thumbError as Error).message}`);
-          }
+          // ✅ [2026-03-26] v10 발행 모달 대표사진 검증 코드 제거됨
+          // 발행 모달에는 대표사진 선택 UI가 없음. v11에서 에디터 내 직접 설정됨.
 
 
           // ✅ [2026-03-05 FIX] 모달 재확인 — 카테고리 선택 시 ESC 키가 발행 모달을 닫을 수 있음

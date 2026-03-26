@@ -1241,13 +1241,17 @@ export async function handleMultiAccountPublish(): Promise<void> {
  */
 function reSyncHeadingsContent(headings: any[], editedBody: string): any[] {
   if (!headings || !headings.length || !editedBody) return headings || [];
-  return headings.map((h: any, i: number) => {
-    if (!h?.title) return h;
+
+  // ✅ [2026-03-26 FIX] 1단계: heading title 위치 기반 재분할 시도
+  const results = headings.map((h: any, i: number) => {
+    if (!h?.title) return { ...h, _matched: false };
     const escaped = h.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const match = editedBody.match(new RegExp(escaped, 'i'));
-    if (!match || match.index === undefined) return h;
+    if (!match || match.index === undefined) {
+      console.log(`[reSyncHeadingsContent] ⚠️ 소제목 매칭 실패: "${h.title.substring(0, 20)}..." → 원본 content 유지 위험!`);
+      return { ...h, _matched: false };
+    }
     const startIdx = match.index + match[0].length;
-    // 다음 소제목까지의 텍스트를 추출
     let endIdx = editedBody.length;
     for (let j = i + 1; j < headings.length; j++) {
       if (!headings[j]?.title) continue;
@@ -1256,8 +1260,30 @@ function reSyncHeadingsContent(headings: any[], editedBody: string): any[] {
       if (nextMatch?.index !== undefined) { endIdx = startIdx + nextMatch.index; break; }
     }
     const newContent = editedBody.substring(startIdx, endIdx).trim();
-    // ✅ [2026-02-28 FIX] stale content fallback 제거 — 10자 이하여도 재추출 결과만 사용
-    return { ...h, content: newContent };
+    return { ...h, content: newContent, _matched: true };
+  });
+
+  // ✅ [2026-03-26 FIX] 2단계: 매칭 실패한 heading이 있으면 균등 분배 폴백
+  const unmatchedCount = results.filter((r: any) => !r._matched && r.title).length;
+  if (unmatchedCount > 0 && unmatchedCount === results.filter((r: any) => r.title).length) {
+    // 모든 heading이 매칭 실패 → editedBody를 균등 분배
+    console.log(`[reSyncHeadingsContent] ⚠️ 모든 소제목 매칭 실패 (${unmatchedCount}개) → 균등 분배 폴백`);
+    const lines = editedBody.split('\n').filter((l: string) => l.trim().length > 0);
+    const linesPerHeading = Math.max(1, Math.ceil(lines.length / headings.length));
+    return results.map((r: any, i: number) => {
+      if (!r.title) return r;
+      const startLine = i * linesPerHeading;
+      const endLine = Math.min(startLine + linesPerHeading, lines.length);
+      const chunk = lines.slice(startLine, endLine).join('\n').trim();
+      const { _matched, ...rest } = r;
+      return { ...rest, content: chunk.length > 0 ? chunk : r.content };
+    });
+  }
+
+  // _matched 내부 플래그 제거 후 반환
+  return results.map((r: any) => {
+    const { _matched, ...rest } = r;
+    return rest;
   });
 }
 
@@ -1335,8 +1361,23 @@ export async function handleSemiAutoPublish(): Promise<void> {
     content: content,
     hashtags: hashtagsStr ? hashtagsStr.split(' ').filter(tag => tag.length > 0) : [],
     // ✅ [2026-02-27 FIX] 소제목 content를 편집된 본문에서 재파싱 (이미지-소제목 매칭 정확도)
-    headings: reSyncHeadingsContent(structuredContent.headings || [], content)
+    headings: reSyncHeadingsContent(structuredContent.headings || [], content),
+    // ✅ [2026-03-26 FIX] 사용자 수정 플래그 명시적 설정 — spread에만 의존 금지
+    // applyStructuredContent에서 이 플래그로 heading.content 직접 사용 분기가 결정됨
+    _bodyManuallyEdited: true,
   };
+
+  // ✅ [2026-03-26 DEBUG] 반자동 발행 데이터 무결성 검증 로그
+  console.log('[handleSemiAutoPublish] ✅ DOM 수정 내용 반영 확인:', {
+    domTitle: title?.substring(0, 30),
+    domContentLen: content?.length,
+    domContentStart: content?.substring(0, 50),
+    structuredTitle: updatedStructuredContent.selectedTitle?.substring(0, 30),
+    structuredBodyPlainLen: updatedStructuredContent.bodyPlain?.length,
+    _bodyManuallyEdited: updatedStructuredContent._bodyManuallyEdited,
+    headingsCount: updatedStructuredContent.headings?.length,
+    headingsContentLens: updatedStructuredContent.headings?.map((h: any) => ({ t: h.title?.substring(0, 15), len: h.content?.length || 0 })),
+  });
 
   // ✅ [2026-02-27 FIX] 전역 변수 즉시 업데이트 (핵심!)
   // 다중계정 발행 시 handleMultiAccountPublish가 (window).currentStructuredContent를 읽으므로
@@ -1486,6 +1527,9 @@ export async function handleSemiAutoPublish(): Promise<void> {
     scheduleTime,
     scheduleType,
     structuredContent: updatedStructuredContent,
+    // ✅ [2026-03-26 FIX] 최상위 title/content redundancy — structuredContent 파싱 실패 시 폴백
+    title: title,
+    content: content,
     // ✅ 이미지 전달 (호환)
     imageManagementImages: normalizedImagesForPublish,
     generatedImages: normalizedImagesForPublish,
