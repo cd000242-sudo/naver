@@ -881,6 +881,12 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('proxy:isEnabled'),
   getProxyStatus: (): Promise<{ enabled: boolean; configured: boolean; provider: string; endpoint: string }> =>
     ipcRenderer.invoke('proxy:getStatus'),
+  // ✅ [2026-03-27] 계정별 Sticky Session 프록시 자동 생성
+  generateStickyProxy: (naverId: string): Promise<{ success: boolean; proxy?: { host: string; port: string; username: string; password: string }; message?: string }> =>
+    ipcRenderer.invoke('proxy:generateSticky', naverId),
+  // ✅ [2026-03-27] 전체 계정 일괄 Sticky Proxy 설정
+  bulkSetupStickyProxy: (): Promise<{ success: boolean; message?: string; updated?: number; skipped?: number; total?: number }> =>
+    ipcRenderer.invoke('proxy:bulkSetupSticky'),
 
   // ✅ [2026-03-16] ImageFX Google 로그인 사전 확인 API
   checkImageFxGoogleLogin: (): Promise<{ loggedIn: boolean; userName?: string; message: string }> =>

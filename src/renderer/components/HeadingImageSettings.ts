@@ -587,14 +587,17 @@ export function createHeadingImageModal(): void {
             </button>
           </div>
 
-          <!-- ✅ [2026-03-16] Google 계정 변경 버튼 (ImageFX) -->
+          <!-- ✅ [2026-03-27] Google 계정 연동 상태 + 변경 버튼 (ImageFX) -->
           <div style="margin-bottom: 16px;">
             <button type="button" class="premium-setting-btn" id="switch-google-account-btn">
               <div style="display: flex; align-items: center; gap: 14px;">
-                <div class="btn-icon" style="background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%);">🔄</div>
+                <div class="btn-icon" id="google-account-icon" style="background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%);">🔗</div>
                 <div>
-                  <div class="btn-text">Google 계정 변경하기</div>
-                  <div class="btn-value" id="google-account-status" style="color: #4285F4;">ImageFX 로그인 계정 변경 →</div>
+                  <div class="btn-text">Google 계정 (ImageFX)</div>
+                  <div class="btn-value" id="google-account-status" style="color: #9ca3af; display: flex; align-items: center; gap: 6px;">
+                    <span id="google-account-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #6b7280; display: inline-block; flex-shrink: 0;"></span>
+                    <span id="google-account-text">확인 중...</span>
+                  </div>
                 </div>
               </div>
               <span class="arrow">›</span>
@@ -1856,25 +1859,38 @@ export function createHeadingImageModal(): void {
   styleSubModal?.addEventListener('click', (e) => { if (e.target === styleSubModal) styleSubModal.style.display = 'none'; });
 
   // ✅ [2026-01-27] 이미지 생성 모델 상세 설정 버튼 클릭 → 동적 서브 모달 생성
-  // ✅ [2026-03-16] Google 계정 변경 버튼 → ImageFX 계정 전환
+  // ✅ [2026-03-27] Google 계정 변경 버튼 → ImageFX 계정 전환 + 연동 상태 갱신
   document.getElementById('switch-google-account-btn')?.addEventListener('click', async () => {
     console.log('[HeadingImageSettings] 🔄 Google 계정 변경 시작');
+    const dotEl = document.getElementById('google-account-dot');
+    const textEl = document.getElementById('google-account-text');
     const statusEl = document.getElementById('google-account-status');
+    const iconEl = document.getElementById('google-account-icon');
     const btn = document.getElementById('switch-google-account-btn') as HTMLButtonElement | null;
     if (btn) btn.disabled = true;
-    if (statusEl) statusEl.textContent = '⏳ 계정 변경 중...';
+    if (dotEl) dotEl.style.background = '#3b82f6';
+    if (textEl) textEl.textContent = '⏳ 계정 변경 중...';
+    if (statusEl) statusEl.style.color = '#3b82f6';
     try {
       const result = await (window as any).api.switchImageFxGoogleAccount();
       if (result?.success) {
-        if (statusEl) statusEl.textContent = `✅ ${result.userName || '변경 완료'}`;
+        if (dotEl) dotEl.style.background = '#22c55e';
+        if (textEl) textEl.textContent = `✅ ${result.userName || '변경 완료'} (변경 →)`;
+        if (statusEl) statusEl.style.color = '#22c55e';
+        if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'; iconEl.textContent = '✅'; }
         console.log('[HeadingImageSettings] ✅ Google 계정 변경 완료:', result.userName);
       } else {
-        if (statusEl) statusEl.textContent = `⚠️ ${result?.message || '변경 실패'}`;
+        if (dotEl) dotEl.style.background = '#f59e0b';
+        if (textEl) textEl.textContent = `⚠️ ${result?.message || '변경 실패'}`;
+        if (statusEl) statusEl.style.color = '#f59e0b';
+        if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'; iconEl.textContent = '⚠️'; }
         console.warn('[HeadingImageSettings] ⚠️ Google 계정 변경 실패:', result?.message);
       }
     } catch (err: any) {
       console.error('[HeadingImageSettings] ❌ Google 계정 변경 오류:', err);
-      if (statusEl) statusEl.textContent = '❌ 오류 발생';
+      if (dotEl) dotEl.style.background = '#ef4444';
+      if (textEl) textEl.textContent = '❌ 오류 발생';
+      if (statusEl) statusEl.style.color = '#ef4444';
     } finally {
       if (btn) btn.disabled = false;
     }
@@ -2163,6 +2179,53 @@ export function openHeadingImageModal(): void {
         styleDisplay.textContent = STYLE_NAMES[currentStyle] || currentStyle;
       }
     }
+
+    // ✅ [2026-03-27] Google 계정 연동 상태 자동 체크 (30초 캐싱)
+    (async () => {
+      const statusEl = document.getElementById('google-account-status');
+      const dotEl = document.getElementById('google-account-dot');
+      const textEl = document.getElementById('google-account-text');
+      const iconEl = document.getElementById('google-account-icon');
+
+      // 30초 캐싱 — 모달을 빠르게 열었다 닫았다 할 때 IPC 반복 호출 방지
+      const CACHE_KEY = '_googleAccountCheckCache';
+      const CACHE_TTL = 30000; // 30초
+      const cached = (window as any)[CACHE_KEY];
+      const now = Date.now();
+
+      try {
+        if (textEl) textEl.textContent = '확인 중...';
+        if (dotEl) dotEl.style.background = '#6b7280';
+
+        let result: any;
+        if (cached && (now - cached.ts < CACHE_TTL)) {
+          result = cached.data;
+        } else {
+          result = await (window as any).api.checkImageFxGoogleLogin();
+          (window as any)[CACHE_KEY] = { data: result, ts: now };
+        }
+
+        if (result?.loggedIn) {
+          if (dotEl) dotEl.style.background = '#22c55e';
+          if (textEl) textEl.textContent = `✅ ${result.userName || 'Google 연동됨'} (변경 →)`;
+          if (statusEl) statusEl.style.color = '#22c55e';
+          if (iconEl) iconEl.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
+          if (iconEl) iconEl.textContent = '✅';
+        } else {
+          if (dotEl) dotEl.style.background = '#f59e0b';
+          if (textEl) textEl.textContent = '⚠️ 미연동 — 클릭하여 로그인';
+          if (statusEl) statusEl.style.color = '#f59e0b';
+          if (iconEl) iconEl.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+          if (iconEl) iconEl.textContent = '⚠️';
+        }
+      } catch (err: any) {
+        const reason = err?.message?.includes('IPC') ? 'IPC 통신 오류' : '연동 확인 실패';
+        if (dotEl) dotEl.style.background = '#ef4444';
+        if (textEl) textEl.textContent = `❌ ${reason}`;
+        if (statusEl) statusEl.style.color = '#ef4444';
+        console.error('[HeadingImageSettings] Google 연동 확인 오류:', err);
+      }
+    })();
 
     // ✅ 비율 라디오 버튼 초기화
     const currentRatio = getImageRatio();

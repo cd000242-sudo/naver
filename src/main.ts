@@ -6158,6 +6158,55 @@ ipcMain.handle('account:updateSettings', async (_event, accountId: string, setti
   }
 });
 
+// ✅ [2026-03-27] 전체 계정 일괄 Sticky Proxy 설정
+// 전역 blogAccountManager 인스턴스를 직접 사용 → 인메모리 캐시 일관성 보장
+ipcMain.handle('proxy:bulkSetupSticky', async () => {
+  try {
+    const { getSmartProxyConfig } = require('./crawler/utils/proxyManager.js');
+    const config = getSmartProxyConfig();
+    const accounts = blogAccountManager.getAllAccounts();
+
+    // FNV-1a hash (systemHandlers.ts와 동일 알고리즘)
+    const fnv1a = (str: string): string => {
+      let hash = 0x811c9dc5;
+      for (let i = 0; i < str.length; i++) {
+        hash ^= str.charCodeAt(i);
+        hash = Math.imul(hash, 0x01000193);
+      }
+      return (hash >>> 0).toString(16).padStart(8, '0');
+    };
+
+    let updated = 0;
+    let skipped = 0;
+
+    for (const account of accounts) {
+      if (account.settings?.proxyHost) { skipped++; continue; }
+
+      const naverId = account.naverId || account.blogId || account.name;
+      if (!naverId) { skipped++; continue; }
+
+      const sessionId = fnv1a(naverId.trim());
+      const stickyUsername = `${config.username}-session-${sessionId}-sessionduration-1440`;
+
+      blogAccountManager.updateAccountSettings(account.id, {
+        proxyHost: config.host,
+        proxyPort: String(config.port),
+        proxyUsername: stickyUsername,
+        proxyPassword: config.password,
+      });
+      updated++;
+    }
+
+    return {
+      success: true,
+      message: `✅ ${updated}개 계정에 프록시 설정 완료 (${skipped}개 건너뜀 — 이미 설정됨)`,
+      updated, skipped, total: accounts.length,
+    };
+  } catch (error) {
+    return { success: false, message: `일괄 설정 실패: ${(error as Error).message}` };
+  }
+});
+
 // ✅ 계정별 다음 콘텐츠 소스 가져오기
 ipcMain.handle('account:getNextContentSource', async (_event, accountId: string) => {
   try {

@@ -11,7 +11,20 @@ import { checkAdbDevice, changeIpViaAirplaneMode, getCurrentIp, downloadAdb } fr
 import { checkAdsPowerStatus, openAdsPowerBrowser, closeAdsPowerBrowser, listAdsPowerProfiles, createAdsPowerProfile, deleteAdsPowerProfile, setAdsPowerApiKey } from '../utils/adsPowerManager';
 import { setAdsPowerEnabled } from '../../crawler/crawlerBrowser.js';
 import { setImageFxAdsPowerEnabled } from '../../image/imageFxGenerator.js';
-import { setProxyEnabled, isProxyEnabled, getPoolStatus } from '../../crawler/utils/proxyManager.js';
+import { setProxyEnabled, isProxyEnabled, getPoolStatus, getSmartProxyConfig } from '../../crawler/utils/proxyManager.js';
+
+/**
+ * ✅ [2026-03-27] FNV-1a 해시 → 8자리 hex (계정별 Sticky Session ID 생성용)
+ */
+function fnv1aHash(str: string): string {
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) {
+    hash ^= str.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return (hash >>> 0).toString(16).padStart(8, '0');
+}
+
 
 /**
  * 시스템 관련 핸들러 등록
@@ -177,6 +190,33 @@ export function registerSystemHandlers(ctx: IpcContext): void {
             version: app.getVersion(),
             name: app.getName()
         };
+    });
+
+    // ✅ [2026-03-27] 계정별 Sticky Session 프록시 자동 생성
+    // C-1 해결: SmartProxy 자격증명은 main process에서만 처리 (렌더러 노출 차단)
+    // M-1 해결: Decodo 공식 format — session-{id}-sessionduration-{min}
+    ipcMain.handle('proxy:generateSticky', async (_event, naverId: string) => {
+        try {
+            if (!naverId || naverId.trim().length === 0) {
+                return { success: false, message: '네이버 ID가 비어있습니다.' };
+            }
+            const config = getSmartProxyConfig();
+            const sessionId = fnv1aHash(naverId.trim());
+            // Decodo Sticky Session: -session-{id}-sessionduration-1440 (24시간 유지)
+            const stickyUsername = `${config.username}-session-${sessionId}-sessionduration-1440`;
+
+            return {
+                success: true,
+                proxy: {
+                    host: config.host,
+                    port: String(config.port),
+                    username: stickyUsername,
+                    password: config.password,
+                },
+            };
+        } catch (error) {
+            return { success: false, message: `프록시 생성 실패: ${(error as Error).message}` };
+        }
     });
 }
 

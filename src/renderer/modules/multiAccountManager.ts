@@ -695,7 +695,26 @@ export async function initMultiAccountPublishModal() {
       if (noAccountsMsg) noAccountsMsg.style.display = 'none';
 
       // 계정 카드 HTML 생성 (풀오토 세팅 버튼 추가)
-      container.innerHTML = accounts.map((account: any) => {
+      // ✅ [2026-03-27] 전체 프록시 일괄 설정 버튼 (M-3 해결)
+      const unsetCount = accounts.filter((a: any) => !a.settings?.proxyHost).length;
+      const bulkProxyHtml = `
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 0.5rem; gap: 0.5rem;">
+          <button type="button" id="ma-bulk-proxy-btn" style="
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: 600;
+            opacity: ${unsetCount > 0 ? '1' : '0.5'};
+          " ${unsetCount === 0 ? 'disabled' : ''}>
+            🔐 전체 프록시 일괄 설정 (${unsetCount}개 미설정)
+          </button>
+        </div>
+      `;
+      container.innerHTML = bulkProxyHtml + accounts.map((account: any) => {
         return `
           <div class="ma-account-card" data-account-id="${account.id}" style="
             background: rgba(255, 255, 255, 0.03);
@@ -736,6 +755,25 @@ export async function initMultiAccountPublishModal() {
           }
         });
       });
+
+      // ✅ [2026-03-27] 전체 프록시 일괄 설정 버튼 이벤트
+      const bulkProxyBtn = document.getElementById('ma-bulk-proxy-btn');
+      if (bulkProxyBtn) {
+        bulkProxyBtn.addEventListener('click', async () => {
+          if (!confirm(`프록시 미설정 계정 ${unsetCount}개에 SmartProxy Sticky Session을 자동 설정합니다.\n계정별 고정 IP가 할당됩니다. 계속할까요?`)) return;
+          bulkProxyBtn.textContent = '🔄 설정 중...';
+          (bulkProxyBtn as HTMLButtonElement).disabled = true;
+          try {
+            const result = await (window.api as any).bulkSetupStickyProxy();
+            if (result.success) {
+              toastManager.success(result.message);
+              await renderMultiAccountList();
+            } else { toastManager.error(result.message || '일괄 설정 실패'); }
+          } catch (err) {
+            toastManager.error(`오류: ${(err as Error).message}`);
+          }
+        });
+      }
 
       // 편집 버튼 이벤트
       container.querySelectorAll('.ma-edit-btn').forEach(btn => {
@@ -2101,6 +2139,23 @@ export async function initMultiAccountPublishModal() {
         if (proxyPortInput) proxyPortInput.value = account.settings?.proxyPort || '';
         if (proxyUsernameInput) proxyUsernameInput.value = account.settings?.proxyUsername || '';
         if (proxyPasswordInput) proxyPasswordInput.value = account.settings?.proxyPassword || '';
+
+        // ✅ [2026-03-27] 프록시 자동 세팅 버튼 바인딩 (편집 모드)
+        const autoProxyBtn = document.getElementById('ma-auto-proxy-btn');
+        if (autoProxyBtn) {
+          autoProxyBtn.onclick = async () => {
+            const nid = naverIdInput?.value?.trim() || account.naverId || account.blogId;
+            if (!nid) { toastManager.warning('네이버 ID가 없어 프록시를 생성할 수 없습니다.'); return; }
+            const result = await (window.api as any).generateStickyProxy(nid);
+            if (result.success && result.proxy) {
+              if (proxyHostInput) proxyHostInput.value = result.proxy.host;
+              if (proxyPortInput) proxyPortInput.value = result.proxy.port;
+              if (proxyUsernameInput) proxyUsernameInput.value = result.proxy.username;
+              if (proxyPasswordInput) proxyPasswordInput.value = result.proxy.password;
+              toastManager.success(`✅ Sticky 프록시 자동 생성 완료! 하단 저장 버튼을 눌러주세요.`);
+            } else { toastManager.error(result.message || '프록시 생성 실패'); }
+          };
+        }
       }
 
       // ✅ 편집 모드에서는 네이버 아이디 수정 불가 (readonly 적용)
@@ -2147,6 +2202,23 @@ export async function initMultiAccountPublishModal() {
       if (proxyPortInput) proxyPortInput.value = '';
       if (proxyUsernameInput) proxyUsernameInput.value = '';
       if (proxyPasswordInput) proxyPasswordInput.value = '';
+
+      // ✅ [2026-03-27] 프록시 자동 세팅 버튼 바인딩 (추가 모드)
+      const autoProxyBtn = document.getElementById('ma-auto-proxy-btn');
+      if (autoProxyBtn) {
+        autoProxyBtn.onclick = async () => {
+          const nid = naverIdInput?.value?.trim();
+          if (!nid) { toastManager.warning('네이버 ID를 먼저 입력해주세요.'); return; }
+          const result = await (window.api as any).generateStickyProxy(nid);
+          if (result.success && result.proxy) {
+            if (proxyHostInput) proxyHostInput.value = result.proxy.host;
+            if (proxyPortInput) proxyPortInput.value = result.proxy.port;
+            if (proxyUsernameInput) proxyUsernameInput.value = result.proxy.username;
+            if (proxyPasswordInput) proxyPasswordInput.value = result.proxy.password;
+            toastManager.success(`✅ Sticky 프록시 자동 생성 완료! 하단 저장 버튼을 눌러주세요.`);
+          } else { toastManager.error(result.message || '프록시 생성 실패'); }
+        };
+      }
     }
 
     accountEditModal.style.display = 'flex';

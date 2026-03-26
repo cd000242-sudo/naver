@@ -1,7 +1,7 @@
 // ✅ puppeteer-extra + stealth plugin 적용 (봇 감지 완벽 우회)
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
-import { Browser, Frame, Page, ElementHandle } from 'puppeteer';
+import { Browser, Frame, Page, ElementHandle, KeyInput } from 'puppeteer';
 import type { StructuredContent, ImagePlan } from './contentGenerator.js';
 import { removeOrdinalHeadingLabelsFromBody, stripAllFormatting } from './contentGenerator.js';
 import * as path from 'path';
@@ -59,15 +59,22 @@ function extractCoreKeywords(text: string): string[] {
 }
 
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
-// page.keyboard.type()으로 한 글자씩 타이핑하면 네이버 스마트 에디터가
-// 특정 단어 패턴을 감지하여 자동완성 팝업을 표시 → Escape으로 즉시 닫기
+// ✅ [2026-03-27 FIX] 매번 Escape 전송 → 팝업 존재 시에만 조건부 Escape
+// 이전: 타이핑마다 Escape → 포스트 1개당 20~50회 Escape = 봇 패턴
 async function safeKeyboardType(
   page: Page,
   text: string,
   options?: { delay?: number }
 ): Promise<void> {
   await page.keyboard.type(text, options);
-  await page.keyboard.press('Escape').catch(() => { });
+  // 자동완성 팝업이 실제로 보이는 경우에만 Escape
+  const hasPopup = await page.evaluate(() => {
+    const popup = document.querySelector('.se-popup, .se-autocomplete-layer, .se-sticker-layer, [class*="autocomplete"], [class*="suggest"]');
+    return popup !== null && (popup as HTMLElement).offsetParent !== null;
+  }).catch(() => false);
+  if (hasPopup) {
+    await page.keyboard.press('Escape').catch(() => { });
+  }
 }
 
 // ✅ [Smart Typing] 스마트 타이핑 함수 (핵심 키워드 자동 굵게+밑줄)
@@ -181,7 +188,7 @@ export interface AutomationOptions {
   defaultContent?: string;
   defaultLines?: number;
   categoryName?: string; // ✅ 추가: 발행할 카테고리(폴더)명
-  accountProxyUrl?: string; // ✅ 계정별 프록시 URL (미설정 시 글로벌 SmartProxy 폴백)
+  accountProxyUrl?: string; // ✅ 계정별 프록시 URL (미설정 시 프록시 없이 직접 연결)
 }
 
 export type PublishMode = 'draft' | 'publish' | 'schedule';
@@ -392,40 +399,45 @@ export class NaverBlogAutomation {
     return path.join(this.ACCOUNT_PROFILE_BASE, accountHash);
   }
 
-  // ✅ 계정별 고정된 프로필 정보 (일관성 유지하여 캡차 방지)
+  // 계정별 고정 프로필 (UA + 해상도)
   private getAccountConsistentProfile(): {
     userAgent: string;
     screen: { width: number; height: number };
-    webGL: { vendor: string; renderer: string };
   } {
-    // 계정 ID 기반 시드 생성
-    const seed = this.options.naverId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    // ✅ [2026-03-27 FIX] FNV-1a 해시 — 문자 순서 구분 + 균등 분포
+    let hash = 0x811c9dc5;
+    for (let i = 0; i < this.options.naverId.length; i++) {
+      hash ^= this.options.naverId.charCodeAt(i);
+      hash = Math.imul(hash, 0x01000193);
+    }
+    hash = hash >>> 0; // unsigned 32-bit
 
-    // 1. 고정된 User-Agent (최신 크롬 버전 계열)
-    // ✅ [2026-03-23] Chrome 버전 최신화 — 구형(128~131)은 네이버 보안 서버에서 봇 의심 대상
-    const chromeVersions = ['133.0.0.0', '134.0.0.0', '135.0.0.0'];
-    const version = chromeVersions[seed % chromeVersions.length];
+    // ✅ Chrome 버전 풀 확대 (10개 — 마이너 버전 다양화)
+    const chromeVersions = [
+      '131.0.6778.205', '132.0.6834.160', '133.0.6917.141',
+      '133.0.6943.98', '134.0.6998.89', '134.0.6998.117',
+      '134.0.7025.40', '135.0.7049.42', '135.0.7049.84',
+      '135.0.7049.96',
+    ];
+    const version = chromeVersions[hash % chromeVersions.length];
     const userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${version} Safari/537.36`;
 
-    // 2. 고정된 해상도
+    // ✅ 해상도 풀 확대 (8개)
     const screenConfigs = [
       { width: 1920, height: 1080 },
       { width: 1536, height: 864 },
       { width: 1440, height: 900 },
-      { width: 1366, height: 768 }
+      { width: 1366, height: 768 },
+      { width: 1600, height: 900 },
+      { width: 1680, height: 1050 },
+      { width: 1280, height: 720 },
+      { width: 1360, height: 768 },
     ];
-    const screen = screenConfigs[seed % screenConfigs.length];
+    // 두 번째 해시로 해상도 선택 (버전과 독립적으로)
+    const hash2 = Math.imul(hash, 0x9e3779b9) >>> 0;
+    const screen = screenConfigs[hash2 % screenConfigs.length];
 
-    // 3. 고정된 WebGL
-    const webGLConfigs = [
-      { vendor: 'Intel Inc.', renderer: 'Intel Iris OpenGL Engine' },
-      { vendor: 'Intel Inc.', renderer: 'Intel(R) UHD Graphics 630' },
-      { vendor: 'NVIDIA Corporation', renderer: 'GeForce GTX 1060/PCIe/SSE2' },
-      { vendor: 'Google Inc. (Intel)', renderer: 'ANGLE (Intel, Intel(R) UHD Graphics 630)' },
-    ];
-    const webGL = webGLConfigs[seed % webGLConfigs.length];
-
-    return { userAgent, screen, webGL };
+    return { userAgent, screen };
   }
 
   private randomInt(min: number, max: number): number {
@@ -457,62 +469,207 @@ export class NaverBlogAutomation {
     return Math.max(50, Math.min(350, delay));  // 50-350ms 범위
   }
 
+  /**
+   * ✅ [2026-03-27] 로그인 전용 타이핑 함수 (bvsd keyStrokeLogs 대응)
+   * Puppeteer의 keyboard.type()는 keydown→keyup 간격이 1~6ms로 기계적.
+   * 실제 사용자는 keydown→keyup가 30~100ms.
+   * 이 함수는 keyboard.down()/up()을 직접 사용하여 두 간격 모두 자연스랽게 제어.
+   */
+  private async loginKeyType(page: Page, char: string): Promise<void> {
+    // keydown → 인간적 hold 시간 → keyup
+    const holdTime = this.randomInt(30, 100); // 실제 사용자의 keydown-keyup 간격
+    await page.keyboard.down(char as KeyInput);
+    await this.delay(holdTime);
+    await page.keyboard.up(char as KeyInput);
+    
+    // 다음 키까지의 inter-key 딜레이 (정규분포)
+    const interKeyDelay = this.getTypingDelay();
+    await this.delay(interKeyDelay);
+  }
+
   // ✅ 인간적인 딜레이
   private async humanDelay(min: number, max: number): Promise<void> {
     const delay = this.randomInt(min, max);
     await this.delay(delay);
   }
 
-  // ✅ 캡차 감지 함수
-  private async detectCaptcha(page: Page): Promise<boolean> {
-    try {
-      const captchaSelectors = [
-        '#captcha',
-        '.captcha',
-        '[class*="captcha"]',
-        '[id*="captcha"]',
-        '[class*="Captcha"]',
-        'iframe[src*="captcha"]',
-        'iframe[src*="challenge"]',
-        '.challenge-container',
-        '[class*="challenge"]',
-        // 네이버 특유의 캡차 셀렉터
-        '.captcha_wrap',
-        '#captchaimg',
-        'input[name="captcha"]',
-        '[data-ui-component="CaptchaComponent"]',
-      ];
+  /**
+   * ✅ [2026-03-27] Stealth 보완 스크립트 (세션 재사용 시에도 재적용 가능한 독립 메서드)
+   * - Canvas/Audio fingerprint 노이즈
+   * - Screen 정보 오버라이드
+   * - WebGL renderer/vendor 스푸핑 (C-1)
+   * - navigator.hardwareConcurrency/deviceMemory 오버라이드
+   * - CDP Network.setUserAgentOverride + brands 알고리즘
+   * - Viewport 설정
+   */
+  private async setupStealthSupplements(): Promise<void> {
+    if (!this.page) return;
 
-      for (const selector of captchaSelectors) {
-        const element = await page.$(selector).catch(() => null);
-        if (element) {
-          const isVisible = await element.evaluate((el: Element) => {
-            const htmlEl = el as HTMLElement;
-            return htmlEl.offsetParent !== null &&
-              htmlEl.style.display !== 'none' &&
-              htmlEl.style.visibility !== 'hidden';
-          }).catch(() => false);
+    const profile = this.getAccountConsistentProfile();
 
-          if (isVisible) {
-            return true;
+    // evaluateOnNewDocument — 새 네비게이션 시 자동 주입
+    await this.page.evaluateOnNewDocument((hw: any) => {
+      try {
+        const spoofNative = (fn: Function, name: string) => {
+          const nativeStr = `function ${name}() { [native code] }`;
+          fn.toString = () => nativeStr;
+          fn.toLocaleString = () => nativeStr;
+          const toStrNative = 'function toString() { [native code] }';
+          fn.toString.toString = () => toStrNative;
+          fn.toLocaleString.toString = () => toStrNative;
+        };
+
+        // navigator.connection
+        const connRtt = 30 + Math.floor((Date.now() % 50));
+        const connDownlink = 5 + ((Date.now() % 100) / 10);
+        Object.defineProperty(navigator, 'connection', {
+          get: () => ({ effectiveType: '4g', rtt: connRtt, downlink: connDownlink, saveData: false }),
+        });
+
+        // ✅ [C-1] navigator.hardwareConcurrency / deviceMemory (서버 코어수 노출 방지)
+        const cores = [4, 8, 12, 16];
+        const memory = [4, 8, 16];
+        const coreSeed = (hw.screen.width * 7 + hw.screen.height * 13) % cores.length;
+        const memSeed = (hw.screen.width * 11 + hw.screen.height * 3) % memory.length;
+        Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => cores[coreSeed] });
+        Object.defineProperty(navigator, 'deviceMemory', { get: () => memory[memSeed] });
+
+        // Canvas fingerprint (비파괴 방식)
+        const canvasSeed = Date.now() % 65536;
+        const origToDataURL = HTMLCanvasElement.prototype.toDataURL;
+        HTMLCanvasElement.prototype.toDataURL = function (type?: string) {
+          if (type === 'image/png' || !type) {
+            try {
+              const tmp = document.createElement('canvas');
+              tmp.width = this.width; tmp.height = this.height;
+              const ctx = tmp.getContext('2d');
+              if (ctx) {
+                ctx.drawImage(this, 0, 0);
+                const img = ctx.getImageData(0, 0, tmp.width, tmp.height);
+                for (let i = 0; i < img.data.length; i += 4) {
+                  if (((canvasSeed * (i + 1) * 31) % 1000) < 1) img.data[i] ^= 1;
+                }
+                ctx.putImageData(img, 0, 0);
+                return origToDataURL.call(tmp, type);
+              }
+            } catch { }
           }
+          return origToDataURL.apply(this, arguments as any);
+        };
+        spoofNative(HTMLCanvasElement.prototype.toDataURL, 'toDataURL');
+
+        // Audio fingerprint
+        const audioSeed = canvasSeed ^ 0xA5A5;
+        const origGetChannelData = AudioBuffer.prototype.getChannelData;
+        AudioBuffer.prototype.getChannelData = function (channel: number) {
+          const data = origGetChannelData.call(this, channel);
+          for (let i = 0; i < data.length; i += 100) {
+            data[i] += (((audioSeed * (i + 1) * 17) % 10000) - 5000) / 50000000;
+          }
+          return data;
+        };
+        spoofNative(AudioBuffer.prototype.getChannelData, 'getChannelData');
+
+        // Screen
+        const screen = hw.screen;
+        Object.defineProperty(window.screen, 'width', { get: () => screen.width });
+        Object.defineProperty(window.screen, 'height', { get: () => screen.height });
+        Object.defineProperty(window.screen, 'availWidth', { get: () => screen.width });
+        Object.defineProperty(window.screen, 'availHeight', { get: () => screen.height - 40 });
+        Object.defineProperty(window.screen, 'colorDepth', { get: () => 24 });
+        Object.defineProperty(window.screen, 'pixelDepth', { get: () => 24 });
+
+        // ✅ [C-1] WebGL renderer/vendor 스푸핑
+        const getParameterOrig = WebGLRenderingContext.prototype.getParameter;
+        WebGLRenderingContext.prototype.getParameter = function (param: number) {
+          const UNMASKED_VENDOR = 0x9245;
+          const UNMASKED_RENDERER = 0x9246;
+          if (param === UNMASKED_VENDOR) return 'Google Inc. (NVIDIA)';
+          if (param === UNMASKED_RENDERER) return 'ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER Direct3D11 vs_5_0 ps_5_0, D3D11)';
+          return getParameterOrig.call(this, param);
+        };
+        spoofNative(WebGLRenderingContext.prototype.getParameter, 'getParameter');
+
+        // WebGL2도 동일 적용
+        if (typeof WebGL2RenderingContext !== 'undefined') {
+          const getParam2Orig = WebGL2RenderingContext.prototype.getParameter;
+          WebGL2RenderingContext.prototype.getParameter = function (param: number) {
+            if (param === 0x9245) return 'Google Inc. (NVIDIA)';
+            if (param === 0x9246) return 'ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER Direct3D11 vs_5_0 ps_5_0, D3D11)';
+            return getParam2Orig.call(this, param);
+          };
+          spoofNative(WebGL2RenderingContext.prototype.getParameter, 'getParameter');
         }
-      }
+      } catch { }
+    }, profile);
 
-      // 페이지 텍스트로도 캡차 감지
-      const pageText = await page.evaluate(() => document.body.innerText).catch(() => '');
-      if (pageText.includes('자동입력 방지') ||
-        pageText.includes('auto-input prevention') ||
-        pageText.includes('captcha') ||
-        pageText.includes('보안문자')) {
-        return true;
-      }
+    // CDP UA override + brands
+    const userAgent = profile.userAgent;
+    const chromeVersion = userAgent.match(/Chrome\/(\d+)/)?.[1] || '134';
+    const fullChromeVersion = userAgent.match(/Chrome\/(\d+\.\d+\.\d+\.\d+)/)?.[1] || `${chromeVersion}.0.0.0`;
 
-      return false;
-    } catch {
-      return false;
+    const seed = parseInt(chromeVersion);
+    const brandOrders = [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
+    const order = brandOrders[seed % 6];
+    const escapedChars = [' ', ' ', ';'];
+    const greaseyBrand = `${escapedChars[order[0]]}Not${escapedChars[order[1]]}A${escapedChars[order[2]]}Brand`;
+    const brands: { brand: string; version: string }[] = [];
+    brands[order[0]] = { brand: greaseyBrand, version: '99' };
+    brands[order[1]] = { brand: 'Chromium', version: chromeVersion };
+    brands[order[2]] = { brand: 'Google Chrome', version: chromeVersion };
+
+    const fullBrands: { brand: string; version: string }[] = [];
+    fullBrands[order[0]] = { brand: greaseyBrand, version: '99.0.0.0' };
+    fullBrands[order[1]] = { brand: 'Chromium', version: fullChromeVersion };
+    fullBrands[order[2]] = { brand: 'Google Chrome', version: fullChromeVersion };
+
+    let cdpClient: any = null;
+    try {
+      cdpClient = await this.page.createCDPSession();
+      await cdpClient.send('Network.setUserAgentOverride', {
+        userAgent,
+        platform: 'Win32',
+        acceptLanguage: 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+        userAgentMetadata: {
+          brands, fullVersionList: fullBrands, fullVersion: fullChromeVersion,
+          platform: 'Windows', platformVersion: '15.0.0',
+          architecture: 'x86', model: '', mobile: false, bitness: '64', wow64: false,
+        },
+      });
+      this.log(`🔧 Stealth 보완: Chrome/${chromeVersion} + WebGL + Screen ${profile.screen.width}x${profile.screen.height}`);
+    } catch (cdpError) {
+      this.log(`⚠️ CDP UA 설정 실패: ${(cdpError as Error).message}`);
+    } finally {
+      // ✅ [M-4] CDP 세션 detach (리소스 누수 방지)
+      if (cdpClient) {
+        try { await cdpClient.detach(); } catch { }
+      }
     }
+
+    // Client Hints 헤더
+    try {
+      const brandsHeader = brands.map(b => `"${b.brand}";v="${b.version}"`).join(', ');
+      await this.page.setExtraHTTPHeaders({
+        'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Sec-CH-UA': brandsHeader,
+        'Sec-CH-UA-Mobile': '?0',
+        'Sec-CH-UA-Platform': '"Windows"',
+      });
+    } catch { }
+
+    // Viewport
+    await this.page.setViewport({
+      width: profile.screen.width,
+      height: profile.screen.height - 100,
+      deviceScaleFactor: 1, hasTouch: false, isLandscape: true, isMobile: false,
+    });
+
+    this.page.setDefaultNavigationTimeout(this.options.navigationTimeoutMs ?? 60000);
+    this.page.setDefaultTimeout(60000);
   }
+
+  // ✅ [2026-03-27] detectCaptcha() 데드코드 제거됨
+  // 캡차 감지는 loginToNaver() 내부 루프에서 인라인으로 처리
 
   private async setBold(enabled: boolean): Promise<void> {
     const frame = (await this.getAttachedFrame());
@@ -1228,13 +1385,13 @@ export class NaverBlogAutomation {
    * ✅ [NEW] 자동화 즉시 중지 (AutomationService에서 호출)
    * cancel()과 동일한 기능이지만 명시적인 메서드명으로 제공
    */
-  stopAutomation(): void {
+  async stopAutomation(): Promise<void> {
     this.cancelRequested = true;
     this.log('⚠️ 즉시 중지 요청 (stopAutomation 호출됨)');
 
-    // 브라우저 즉시 종료 (비동기 처리)
+    // ✅ [2026-03-27 FIX] M-3: browser.close() 완료 대기 후 null 할당
     if (this.browser) {
-      this.browser.close().catch(() => undefined);
+      try { await this.browser.close(); } catch { }
       this.browser = null;
       this.page = null;
       this.mainFrame = null;
@@ -1428,6 +1585,9 @@ export class NaverBlogAutomation {
           // ✅ [2026-03-26] 최소화된 브라우저 창 복원 (이전 발행 후 최소화 상태일 수 있음)
           await this.restoreBrowserWindow();
 
+          // ✅ [2026-03-27 FIX] C-3: 세션 재사용 시에도 stealth 보완 스크립트 재적용
+          await this.setupStealthSupplements();
+
           return; // 세션 재사용 성공!
         } catch {
           // ✅ [2026-03-22 FIX] 닫힌 페이지 감지 시 세션 완전 재생성
@@ -1443,6 +1603,8 @@ export class NaverBlogAutomation {
           this.browser = freshSession.browser;
           this.page = freshSession.page;
           this.cursor = createGhostCursor(this.page);
+          // ✅ [2026-03-27 FIX] C-3: 세션 재생성 시에도 stealth 보완 스크립트 적용
+          await this.setupStealthSupplements();
           this.log('✅ 세션 재생성 완료 (stealth + proxy 적용됨)');
           return;
         }
@@ -1545,35 +1707,24 @@ export class NaverBlogAutomation {
             '--disable-infobars',
             `--window-size=${screenRes.width},${screenRes.height}`,
 
-            // ✅ 추가 우회 설정
-            '--disable-features=IsolateOrigins,site-per-process',
-            '--disable-web-security',
-            '--allow-running-insecure-content',
-            '--disable-features=AutomationControlled',
+            // ✅ [2026-03-27 FIX] 리스크22: --disable-features 하나로 통합 (Chrome은 마지막 값만 사용)
+            '--disable-features=IsolateOrigins,site-per-process,AutomationControlled,ThirdPartyCookieBlocking,SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure,TranslateUI',
 
-            // ✅ 쿠키/세션 관련
-            '--disable-features=ThirdPartyCookieBlocking,SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure',
+            // ✅ [2026-03-27 FIX] 리스크36: WebRTC IP 누출 방지 (프록시 사용 시 로컬 IP 노출 차단)
+            '--enforce-webrtc-ip-permission-check',
+            '--webrtc-ip-handling-policy=disable_non_proxied_udp',
             '--disable-site-isolation-trials',
 
-            // ✅ 성능 최적화
+            // ✅ 성능 최적화 (봇 감지와 무관한 것만 유지)
             '--disable-dev-shm-usage',
-            '--disable-gpu',
-            '--disable-extensions',
-            '--disable-background-networking',
             '--disable-background-timer-throttling',
             '--disable-renderer-backgrounding',
             '--disable-backgrounding-occluded-windows',
             '--disable-ipc-flooding-protection',
-            '--disable-software-rasterizer',
-            '--disable-accelerated-2d-canvas',
-            '--disable-features=TranslateUI',
             '--disable-sync',
             '--disable-default-apps',
             '--no-first-run',
             '--no-default-browser-check',
-            '--disable-client-side-phishing-detection',
-            '--disable-component-update',
-            '--disable-domain-reliability',
           ],
           ignoreDefaultArgs: ['--enable-automation'],  // ✅ 자동화 플래그 제거 (핵심!)
         };
@@ -1585,8 +1736,10 @@ export class NaverBlogAutomation {
           this.log('ℹ️ Puppeteer Chrome 사용');
         }
 
-        // ✅ [2026-03-23] 계정별 프록시 우선, 미설정 시 글로벌 SmartProxy 폴백
-        const proxyUrl = this.options.accountProxyUrl || await getProxyUrl();
+        // 블로그 자동화는 본인 계정 로그인이므로 프록시 불필요 (직접 연결)
+        // SmartProxy는 크롤링(sourceAssembler/crawlerBrowser)에만 사용
+        // 계정별 프록시가 명시적으로 설정된 경우에만 적용
+        const proxyUrl = this.options.accountProxyUrl || null;
         let proxyAuth: { username: string; password: string } | null = null;
 
         if (proxyUrl) {
@@ -1605,6 +1758,12 @@ export class NaverBlogAutomation {
                 (launchOptions.args as string[]).push(`--proxy-server=${proxyUrl}`);
                 this.log(`🌐 프록시 적용 (raw): ${proxyUrl.replace(/:[^:]+@/, ':***@')}`);
             }
+        } else {
+            // 프록시 미사용 시 시스템 프록시/캐시된 프록시 설정 완전 차단
+            // 이것이 없으면 Windows 시스템 프록시 또는 userDataDir 캐시에서
+            // 이전 프록시 설정이 적용되어 HTTP 407 에러 발생 가능
+            (launchOptions.args as string[]).push('--no-proxy-server');
+            this.log('🌐 프록시 없음 (직접 연결)');
         }
 
         this.browser = await puppeteer.launch(launchOptions);
@@ -1695,181 +1854,145 @@ export class NaverBlogAutomation {
       // ✅ 계정별 고정 프로필 가져오기
       const profile = this.getAccountConsistentProfile();
 
-      // ✅ 고급 자동화 감지 우회 스크립트 (Stealth Plugin 보완)
+      // Stealth Plugin이 이미 처리하는 17개 evasion 외 보완 항목만 유지
       await this.page.evaluateOnNewDocument((hw: any) => {
-        // 1. webdriver 속성 완전 제거
-        Object.defineProperty(navigator, 'webdriver', {
-          get: () => undefined,
-          configurable: true
-        });
+        try {
+          // native code toString 위장 유틸리티
+          const spoofNative = (fn: Function, name: string) => {
+            const nativeStr = `function ${name}() { [native code] }`;
+            fn.toString = () => nativeStr;
+            fn.toLocaleString = () => nativeStr;
+            const toStrNative = 'function toString() { [native code] }';
+            fn.toString.toString = () => toStrNative;
+            fn.toLocaleString.toString = () => toStrNative;
+          };
 
-        // 2. Chrome 객체 완벽 구현
-        (window as any).chrome = {
-          runtime: {
-            id: undefined,
-            onConnect: { addListener: () => { } },
-            onMessage: { addListener: () => { } },
-            connect: () => ({ onMessage: { addListener: () => { } }, postMessage: () => { } }),
-            sendMessage: () => { },
-            getPlatformInfo: (cb: (info: any) => void) => cb({ os: 'win', arch: 'x86-64', nacl_arch: 'x86-64' }),
-            getManifest: () => ({}),
-          },
-          loadTimes: () => ({
-            commitLoadTime: Date.now() / 1000 - Math.random() * 5,
-            connectionInfo: 'h2',
-            finishDocumentLoadTime: Date.now() / 1000,
-            finishLoadTime: Date.now() / 1000,
-            firstPaintAfterLoadTime: 0,
-            firstPaintTime: Date.now() / 1000 - Math.random(),
-            navigationType: 'Other',
-            npnNegotiatedProtocol: 'h2',
-            requestTime: Date.now() / 1000 - Math.random() * 10,
-            startLoadTime: Date.now() / 1000 - Math.random() * 5,
-            wasAlternateProtocolAvailable: false,
-            wasFetchedViaSpdy: true,
-            wasNpnNegotiated: true,
-          }),
-          csi: () => ({
-            onloadT: Date.now(),
-            pageT: Date.now() - performance.timing.navigationStart,
-            startE: performance.timing.navigationStart,
-            tran: 15,
-          }),
-          app: {
-            isInstalled: false,
-            InstallState: { DISABLED: 'disabled', INSTALLED: 'installed', NOT_INSTALLED: 'not_installed' },
-            RunningState: { CANNOT_RUN: 'cannot_run', READY_TO_RUN: 'ready_to_run', RUNNING: 'running' },
-            getDetails: () => null,
-            getIsInstalled: () => false,
-            runningState: () => 'cannot_run',
-          },
-        };
+          // 1. navigator.connection (세션 고정값)
+          const connRtt = 30 + Math.floor((Date.now() % 50));
+          const connDownlink = 5 + ((Date.now() % 100) / 10);
+          Object.defineProperty(navigator, 'connection', {
+            get: () => ({
+              effectiveType: '4g',
+              rtt: connRtt,
+              downlink: connDownlink,
+              saveData: false,
+            }),
+          });
 
-        // 3. Plugins 배열
-        Object.defineProperty(navigator, 'plugins', {
-          get: () => {
-            const plugins: any = [
-              { name: 'Chrome PDF Plugin', filename: 'internal-pdf-viewer', description: 'Portable Document Format', length: 1 },
-              { name: 'Chrome PDF Viewer', filename: 'mhjfbmdgcfjbbpaeojofohoefgiehjai', description: '', length: 1 },
-              { name: 'Native Client', filename: 'internal-nacl-plugin', description: '', length: 2 },
-            ];
-            plugins.item = (i: number) => plugins[i] || null;
-            plugins.namedItem = (name: string) => plugins.find((p: any) => p.name === name) || null;
-            plugins.refresh = () => { };
-            return plugins;
-          }
-        });
-
-        // 4. Languages
-        Object.defineProperty(navigator, 'languages', {
-          get: () => ['ko-KR', 'ko', 'en-US', 'en'],
-        });
-
-        // 5. Platform
-        Object.defineProperty(navigator, 'platform', {
-          get: () => 'Win32',
-        });
-
-        // 6. 하드웨어 정보 (계정별 고정)
-        Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => 8 });
-        Object.defineProperty(navigator, 'deviceMemory', { get: () => 8 });
-
-        // 7. Connection
-        Object.defineProperty(navigator, 'connection', {
-          get: () => ({
-            effectiveType: '4g',
-            rtt: 30 + Math.floor(Math.random() * 50),
-            downlink: 5 + Math.random() * 10,
-            saveData: false,
-          }),
-        });
-
-        // 8. WebGL 정보 (계정별 고정)
-        const webGL = hw.webGL;
-
-        const getParameterOriginal = WebGLRenderingContext.prototype.getParameter;
-        WebGLRenderingContext.prototype.getParameter = function (parameter: number) {
-          if (parameter === 37445) return webGL.vendor;
-          if (parameter === 37446) return webGL.renderer;
-          return getParameterOriginal.call(this, parameter);
-        };
-
-        const getParameter2Original = WebGL2RenderingContext.prototype.getParameter;
-        WebGL2RenderingContext.prototype.getParameter = function (parameter: number) {
-          if (parameter === 37445) return webGL.vendor;
-          if (parameter === 37446) return webGL.renderer;
-          return getParameter2Original.call(this, parameter);
-        };
-
-        // 9. Canvas fingerprint 노이즈
-        const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
-        HTMLCanvasElement.prototype.toDataURL = function (type?: string) {
-          if (type === 'image/png' || !type) {
-            const context = this.getContext('2d');
-            if (context) {
+          // 2. Canvas fingerprint (세션 시드 기반 결정적 노이즈, 비파괴 방식)
+          const canvasSeed = Date.now() % 65536;
+          const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
+          HTMLCanvasElement.prototype.toDataURL = function (type?: string) {
+            if (type === 'image/png' || !type) {
               try {
-                const imageData = context.getImageData(0, 0, this.width, this.height);
-                for (let i = 0; i < imageData.data.length; i += 4) {
-                  imageData.data[i] = imageData.data[i] ^ (Math.random() < 0.001 ? 1 : 0);
+                // ✅ 비파괴: 임시 Canvas에 복사 후 노이즈 적용 (원본 보존)
+                const tmpCanvas = document.createElement('canvas');
+                tmpCanvas.width = this.width;
+                tmpCanvas.height = this.height;
+                const tmpCtx = tmpCanvas.getContext('2d');
+                if (tmpCtx) {
+                  tmpCtx.drawImage(this, 0, 0);
+                  const imageData = tmpCtx.getImageData(0, 0, tmpCanvas.width, tmpCanvas.height);
+                  for (let i = 0; i < imageData.data.length; i += 4) {
+                    const noise = ((canvasSeed * (i + 1) * 31) % 1000) < 1 ? 1 : 0;
+                    imageData.data[i] = imageData.data[i] ^ noise;
+                  }
+                  tmpCtx.putImageData(imageData, 0, 0);
+                  return originalToDataURL.call(tmpCanvas, type);
                 }
-                context.putImageData(imageData, 0, 0);
               } catch (e) { }
             }
-          }
-          return originalToDataURL.apply(this, arguments as any);
-        };
+            return originalToDataURL.apply(this, arguments as any);
+          };
+          spoofNative(HTMLCanvasElement.prototype.toDataURL, 'toDataURL');
 
-        // 10. AudioContext fingerprint 노이즈
-        const originalGetChannelData = AudioBuffer.prototype.getChannelData;
-        AudioBuffer.prototype.getChannelData = function (channel: number) {
-          const data = originalGetChannelData.call(this, channel);
-          for (let i = 0; i < data.length; i += 100) {
-            data[i] = data[i] + (Math.random() - 0.5) * 0.0001;
-          }
-          return data;
-        };
+          // 3. AudioContext fingerprint (세션 시드 기반 결정적 노이즈)
+          const audioSeed = canvasSeed ^ 0xA5A5;
+          const originalGetChannelData = AudioBuffer.prototype.getChannelData;
+          AudioBuffer.prototype.getChannelData = function (channel: number) {
+            const data = originalGetChannelData.call(this, channel);
+            for (let i = 0; i < data.length; i += 100) {
+              const noise = (((audioSeed * (i + 1) * 17) % 10000) - 5000) / 50000000;
+              data[i] = data[i] + noise;
+            }
+            return data;
+          };
+          spoofNative(AudioBuffer.prototype.getChannelData, 'getChannelData');
 
-        // 11. Permissions API
-        const originalQuery = navigator.permissions.query;
-        navigator.permissions.query = function (parameters: any) {
-          if (parameters.name === 'notifications') {
-            return Promise.resolve({ state: Notification.permission, onchange: null } as PermissionStatus);
-          }
-          return originalQuery.call(this, parameters);
-        };
-
-        // 12. 자동화 관련 속성 제거
-        Object.defineProperty(navigator, 'automationController', { get: () => undefined });
-        delete (window as any).cdc_adoQpoasnfa76pfcZLmcfl_Array;
-        delete (window as any).cdc_adoQpoasnfa76pfcZLmcfl_Promise;
-        delete (window as any).cdc_adoQpoasnfa76pfcZLmcfl_Symbol;
-
-        // 13. Screen 정보 (계정별 고정)
-        const screen = hw.screen;
-        Object.defineProperty(window.screen, 'width', { get: () => screen.width });
-        Object.defineProperty(window.screen, 'height', { get: () => screen.height });
-        Object.defineProperty(window.screen, 'availWidth', { get: () => screen.width });
-        Object.defineProperty(window.screen, 'availHeight', { get: () => screen.height - 40 });
-        Object.defineProperty(window.screen, 'colorDepth', { get: () => 24 });
-        Object.defineProperty(window.screen, 'pixelDepth', { get: () => 24 });
-
-        console.log('🛡️ Stealth mode activated with consistent profile');
+          // 4. Screen 정보 (계정별 고정)
+          const screen = hw.screen;
+          Object.defineProperty(window.screen, 'width', { get: () => screen.width });
+          Object.defineProperty(window.screen, 'height', { get: () => screen.height });
+          Object.defineProperty(window.screen, 'availWidth', { get: () => screen.width });
+          Object.defineProperty(window.screen, 'availHeight', { get: () => screen.height - 40 });
+          Object.defineProperty(window.screen, 'colorDepth', { get: () => 24 });
+          Object.defineProperty(window.screen, 'pixelDepth', { get: () => 24 });
+        } catch (e) {
+          // 보완 스크립트 실패해도 페이지 로딩은 계속 진행
+        }
       }, profile);
 
-      // ✅ 고정 User-Agent + 한국어 설정
+      // CDP Network.setUserAgentOverride로 UA + metadata 통합 설정 (Stealth와 동일 메커니즘)
       const userAgent = profile.userAgent;
-      await this.page.setUserAgent(userAgent);
-      this.log(`🔧 User-Agent: Chrome/${userAgent.match(/Chrome\/(\d+)/)?.[1]} (Fixed Profile)`);
+      const chromeVersion = userAgent.match(/Chrome\/(\d+)/)?.[1] || '134';
+      const fullChromeVersion = userAgent.match(/Chrome\/(\d+\.\d+\.\d+\.\d+)/)?.[1] || `${chromeVersion}.0.0.0`;
 
-      // ✅ 브라우저 언어를 한국어로 설정 (영어 페이지 방지)
-      await this.page.setExtraHTTPHeaders({
-        'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
-      });
+      // Chrome 공식 brands 순서 알고리즘 (Chromium 소스코드 기반)
+      const seed = parseInt(chromeVersion);
+      const brandOrders = [
+        [0, 1, 2], [0, 2, 1], [1, 0, 2],
+        [1, 2, 0], [2, 0, 1], [2, 1, 0]
+      ];
+      const order = brandOrders[seed % 6];
+      const escapedChars = [' ', ' ', ';'];
+      const greaseyBrand = `${escapedChars[order[0]]}Not${escapedChars[order[1]]}A${escapedChars[order[2]]}Brand`;
+      const brands: { brand: string; version: string }[] = [];
+      brands[order[0]] = { brand: greaseyBrand, version: '99' };
+      brands[order[1]] = { brand: 'Chromium', version: chromeVersion };
+      brands[order[2]] = { brand: 'Google Chrome', version: chromeVersion };
 
-      // ... (리소스 차단 생략) ...
-      // ✅ 브라우저 언어 및 캐시 설정 등 유지
-      await this.page.setBypassCSP(true);
-      await this.page.setCacheEnabled(true);
+      const fullBrands: { brand: string; version: string }[] = [];
+      fullBrands[order[0]] = { brand: greaseyBrand, version: '99.0.0.0' };
+      fullBrands[order[1]] = { brand: 'Chromium', version: fullChromeVersion };
+      fullBrands[order[2]] = { brand: 'Google Chrome', version: fullChromeVersion };
+
+      try {
+        const cdpClient = await this.page.createCDPSession();
+        await cdpClient.send('Network.setUserAgentOverride', {
+          userAgent: userAgent,
+          platform: 'Win32',
+          acceptLanguage: 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+          userAgentMetadata: {
+            brands: brands,
+            fullVersionList: fullBrands,
+            fullVersion: fullChromeVersion,
+            platform: 'Windows',
+            platformVersion: '15.0.0',
+            architecture: 'x86',
+            model: '',
+            mobile: false,
+            bitness: '64',
+            wow64: false,
+          },
+        });
+        this.log(`🔧 User-Agent: Chrome/${chromeVersion} (CDP + Chrome brands algorithm)`);
+      } catch (cdpError) {
+        // CDP 실패 시 fallback: Stealth이 기본 UA를 설정하므로 로그만 남김
+        this.log(`⚠️ CDP UA 설정 실패 (Stealth 기본값 사용): ${(cdpError as Error).message}`);
+      }
+
+      // Client Hints 헤더 (CDP brands와 일치)
+      try {
+        const brandsHeader = brands.map(b => `"${b.brand}";v="${b.version}"`).join(', ');
+        await this.page.setExtraHTTPHeaders({
+          'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+          'Sec-CH-UA': brandsHeader,
+          'Sec-CH-UA-Mobile': '?0',
+          'Sec-CH-UA-Platform': '"Windows"',
+        });
+      } catch (headerError) {
+        this.log(`⚠️ HTTP 헤더 설정 실패: ${(headerError as Error).message}`);
+      }
 
       const screenRes = profile.screen;
       await this.page.setViewport({
@@ -1960,101 +2083,62 @@ export class NaverBlogAutomation {
   }
 
   /**
-   * 저장된 세션으로 로그인 상태 확인 (블로그 페이지 직접 접속 시도)
+   * ✅ [2026-03-27 FIX] 경량 세션 확인 — GoBlogWrite 이동 없이 쿠키 + 현재 페이지 기반
+   * 이전: GoBlogWrite.naver로 이동하여 세션 확인 → navigateToBlogWrite()에서 또 이동 = 이중 히팅 (캡차 유발)
+   * 현재: 페이지 이동 없이 쿠키(NID_AUT, NID_SES) + URL/DOM 기반으로 판단
    */
   private async checkLoginStatus(): Promise<boolean> {
     const page = this.ensurePage();
 
     try {
-      // ✅ 1단계: 블로그 글쓰기 페이지로 이동 (가장 확실한 진입점)
-      this.log('   🔍 세션 상태 확인 중 (영역 진입)...');
+      this.log('   🔍 세션 상태 경량 확인 중 (페이지 이동 없음)...');
 
-      // ✅ [2026-03-23 FIX] 네트워크 오류 대응 재시도 (ERR_CONNECTION_RESET 등)
-      let sessionCheckSuccess = false;
-      for (let attempt = 1; attempt <= 2; attempt++) {
-        try {
-          await page.goto('https://blog.naver.com/GoBlogWrite.naver', {
-            waitUntil: 'domcontentloaded',
-            timeout: 15000
-          });
-          sessionCheckSuccess = true;
-          break;
-        } catch (gotoErr: any) {
-          const msg = gotoErr.message || '';
-          if ((msg.includes('net::') || msg.includes('ERR_')) && attempt < 2) {
-            this.log(`   ⚠️ 세션 확인 네트워크 오류 (${msg.substring(0, 50)}), ${attempt * 3}초 후 재시도...`);
-            await this.delay(attempt * 3000);
-            continue;
-          }
-          throw gotoErr;
-        }
+      // ✅ 1단계: 쿠키 기반 세션 확인 (가장 가벼움 — 네트워크 요청 없음)
+      const cookies = await page.cookies('https://nid.naver.com', 'https://www.naver.com', 'https://blog.naver.com');
+      const hasNidAut = cookies.some(c => c.name === 'NID_AUT' && c.value.length > 0);
+      const hasNidSes = cookies.some(c => c.name === 'NID_SES' && c.value.length > 0);
+
+      if (hasNidAut && hasNidSes) {
+        this.log(`   ✅ 세션 쿠키 유효 (NID_AUT: ✓, NID_SES: ✓)`);
+        return true;
       }
-      await this.delay(1500);
 
+      // ✅ 2단계: 현재 URL 기반 판단 (이미 블로그/에디터에 있으면 유효)
       const currentUrl = page.url();
-
-      // 로그인 페이지로 리다이렉트되면 확실히 로그인 안 됨
-      if (currentUrl.includes('nidlogin') || currentUrl.includes('login.naver')) {
-        this.log('   ❌ 세션 만료됨 (로그인 페이지 리다이렉트)');
-        return false;
+      if (currentUrl.includes('blog.naver.com') && !currentUrl.includes('login') && !currentUrl.includes('nidlogin')) {
+        // 블로그 도메인에 있고 로그인 페이지가 아니면 유효
+        this.log('   ✅ 세션 유효 (현재 블로그 도메인에 위치)');
+        return true;
       }
 
-      // ✅ [2026-03-07] 기기 등록 페이지 감지 → 자동 바이패스 후 재확인
-      if (await this.isDeviceConfirmPage(page)) {
-        this.log('   📱 세션 확인 중 기기 등록 페이지 감지 → 자동 바이패스...');
-        await this.handleDeviceConfirmPage(page);
-        await this.delay(2000);
-        // 바이패스 후 블로그 페이지로 재이동하여 로그인 상태 재확인
+      // ✅ 3단계: 현재 페이지가 네이버 도메인이면 DOM으로 정밀 확인
+      if (currentUrl.includes('naver.com') && !currentUrl.includes('nidlogin') && !currentUrl.includes('login')) {
         try {
-          await page.goto('https://blog.naver.com/GoBlogWrite.naver', {
-            waitUntil: 'domcontentloaded',
-            timeout: 15000
+          const loginIndicators = await page.evaluate(() => {
+            const logoutBtn = document.querySelector('a[href*="logout"], .gnb_btn_login, #gnb_login_button');
+            const loginName = document.querySelector('.gnb_name, .gnb_my_name, .user_name');
+            const editArea = document.querySelector('.se-container, .se-main-container, #write_area');
+            return {
+              hasLogoutBtn: !!logoutBtn,
+              hasLoginName: !!loginName,
+              hasEditArea: !!editArea
+            };
           });
-          await this.delay(1500);
-          const afterUrl = page.url();
-          if (afterUrl.includes('blog.naver.com') && !afterUrl.includes('login')) {
-            this.log('   ✅ 기기 등록 바이패스 후 세션 유효 확인!');
+
+          if (loginIndicators.hasEditArea || loginIndicators.hasLogoutBtn || loginIndicators.hasLoginName) {
+            this.log('   ✅ 세션 유효 확인 (DOM 요소 감지)');
             return true;
           }
-        } catch (e) {
-          this.log(`   ⚠️ 기기 등록 바이패스 후 재확인 실패: ${(e as Error).message}`);
+        } catch {
+          // DOM 확인 실패 — 쿠키 결과 기반으로 판단
         }
       }
 
-      // ✅ 2단계: DOM 요소로 로그인 상태 정밀 확인
-      // 블로그 프레임이나 GNB에 로그인 정보가 있는지 확인
-      const loginIndicators = await page.evaluate(() => {
-        // 로그아웃 버튼이나 내 정보 버튼 등이 있는지 확인 (네이버 공통 GNB)
-        const logoutBtn = document.querySelector('a[href*="logout"], .gnb_btn_login, #gnb_login_button');
-        const loginName = document.querySelector('.gnb_name, .gnb_my_name, .user_name');
-
-        // 블로그 에디터 요소
-        const editArea = document.querySelector('.se-container, .se-main-container, #write_area');
-
-        return {
-          hasLogoutBtn: !!logoutBtn,
-          hasLoginName: !!loginName,
-          hasEditArea: !!editArea,
-          text: document.body.innerText.substring(0, 500)
-        };
-      });
-
-      if (loginIndicators.hasEditArea || loginIndicators.hasLogoutBtn || loginIndicators.hasLoginName) {
-        this.log('   ✅ 세션 유효 확인 (DOM 요소 감지)');
-        return true;
-      }
-
-      // ✅ 3단계: URL 기반 최종 판단 (블로그 서비스 도메인 유지 여부)
-      if (currentUrl.includes('blog.naver.com')) {
-        this.log('   ✅ 세션 유효 (URL 도메인 기반)');
-        return true;
-      }
-
-      this.log('   ❓ 로그인 상태 불분명 (기본값: 재로그인)');
+      // 쿠키가 없고 블로그 도메인도 아닌 경우 → 재로그인 필요
+      this.log(`   ❌ 세션 확인 실패 (NID_AUT: ${hasNidAut ? '✓' : '✗'}, NID_SES: ${hasNidSes ? '✓' : '✗'}, URL: ${currentUrl.substring(0, 60)})`);
       return false;
     } catch (error) {
       this.log(`   ⚠️ 상태 확인 중 오류: ${(error as Error).message}`);
-      // 오류 발생 시 안전하게 로그인이 필요한 것으로 판단
       return false;
     }
   }
@@ -2064,11 +2148,21 @@ export class NaverBlogAutomation {
 
     this.ensureNotCancelled();
 
+    // ✅ [2026-03-26 FIX] BrowserSessionManager 빠른 경로: isLoggedIn 플래그 확인
+    // checkLoginStatus()는 GoBlogWrite.naver로 매번 네비게이션하여 15초 timeout 위험 + 불필요한 페이지 전환 발생
+    // 이전 발행에서 로그인 성공 시 setLoggedIn(true)가 호출되므로, 이를 활용하여 불필요한 세션 체크 생략
+    if (browserSessionManager.isAccountLoggedIn(this.options.naverId)) {
+      this.log('✅ 이미 로그인되어 있습니다! (BrowserSessionManager 캐시 — 세션 체크 생략)');
+      return; // 로그인 스킵 — GoBlogWrite.naver 불필요한 이동 방지
+    }
+
     // ✅ 1. 먼저 기존 세션으로 로그인 상태 확인 (캡차 방지)
     this.log('🔄 기존 세션 확인 중...');
     const alreadyLoggedIn = await this.checkLoginStatus();
     if (alreadyLoggedIn) {
       this.log('✅ 이미 로그인되어 있습니다! (세션 유지됨)');
+      // ✅ [2026-03-26 FIX] 세션 체크로 확인된 로그인 상태도 캐시에 반영
+      browserSessionManager.setLoggedIn(this.options.naverId, true);
       return; // 로그인 스킵
     }
 
@@ -2085,14 +2179,38 @@ export class NaverBlogAutomation {
 
     // 이미 로그인 페이지에 있으면 이동하지 않음
     if (!currentUrl.includes('nidlogin')) {
-      // ✅ [2026-03-23 FIX] ERR_CONNECTION_RESET 대응: 점진적 대기 재시도 (최대 3회)
       const LOGIN_MAX_RETRIES = 3;
       let loginPageLoaded = false;
 
       for (let loginAttempt = 1; loginAttempt <= LOGIN_MAX_RETRIES; loginAttempt++) {
         try {
           this.log(`🔄 로그인 페이지 접속 시도 ${loginAttempt}/${LOGIN_MAX_RETRIES}...`);
-          await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+          const response = await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+          // 응답 상태 코드 검사 (407/502/503)
+          const statusCode = response?.status() ?? 0;
+          if (statusCode === 407 || statusCode === 502 || statusCode === 503) {
+            this.log(`🔴 서버 에러 감지 (HTTP ${statusCode})`);
+            if (loginAttempt < LOGIN_MAX_RETRIES) {
+              const waitSec = loginAttempt * 5;
+              this.log(`⏳ ${waitSec}초 후 재시도합니다...`);
+              await this.delay(waitSec * 1000);
+              continue;
+            }
+          }
+
+          // 페이지 본문에서 에러 감지 ("페이지가 작동하지 않습니다", "HTTP ERROR")
+          if (statusCode >= 400 || statusCode === 0) {
+            const bodyText = await page.evaluate(() => document.body?.innerText?.substring(0, 500) || '').catch(() => '');
+            if (bodyText.includes('작동하지 않습니다') || bodyText.includes('HTTP ERROR') ||
+                bodyText.includes('ERR_') || bodyText.includes('프록시') || bodyText.includes('proxy')) {
+              this.log(`🔴 에러 페이지 감지: ${bodyText.substring(0, 100)}`);
+              if (loginAttempt < LOGIN_MAX_RETRIES) {
+                await this.delay(loginAttempt * 5 * 1000);
+                continue;
+              }
+            }
+          }
 
           // 로드 검증
           const loadedUrl = page.url();
@@ -2109,23 +2227,34 @@ export class NaverBlogAutomation {
             errorMsg.includes('ERR_CONNECTION_TIMED_OUT') ||
             errorMsg.includes('ERR_NAME_NOT_RESOLVED') ||
             errorMsg.includes('ERR_INTERNET_DISCONNECTED') ||
+            errorMsg.includes('ERR_TUNNEL_CONNECTION_FAILED') ||
+            errorMsg.includes('ERR_PROXY_CONNECTION_FAILED') ||
+            errorMsg.includes('ERR_PROXY_AUTH_REQUESTED') ||
+            errorMsg.includes('ERR_NO_SUPPORTED_PROXIES') ||
+            errorMsg.includes('ERR_SOCKS_CONNECTION_FAILED') ||
+            errorMsg.includes('ERR_PROXY') ||
             errorMsg.includes('net::');
 
+          // 프록시 관련 에러 감지 (accountProxyUrl 사용 시에만 의미 있음)
+          const isProxyError = errorMsg.includes('PROXY') || errorMsg.includes('TUNNEL') || errorMsg.includes('407');
+          if (isProxyError) {
+            this.log(`🔴 프록시/터널 연결 실패: ${errorMsg.substring(0, 80)}`);
+            // ⚠️ 크롤링 모듈의 전역 프록시 상태를 건드리지 않음 (블로그 자동화와 크롤링은 독립)
+          }
+
           if (isNetworkError && loginAttempt < LOGIN_MAX_RETRIES) {
-            const waitSec = loginAttempt * 5; // 5초, 10초, 15초
+            const waitSec = loginAttempt * 5;
             this.log(`⚠️ 네트워크 오류 (${errorMsg.substring(0, 60)})`);
             this.log(`⏳ ${waitSec}초 후 재시도합니다... (${loginAttempt}/${LOGIN_MAX_RETRIES})`);
             await this.delay(waitSec * 1000);
             continue;
           }
 
-          // 마지막 시도이거나 네트워크 오류가 아닌 경우 → 즉시 throw
           throw gotoError;
         }
       }
 
       if (!loginPageLoaded) {
-        // 모든 시도 후에도 로드 실패 → 마지막으로 한번 더 시도
         this.log(`⚠️ ${LOGIN_MAX_RETRIES}회 시도 후에도 실패, 최종 시도...`);
         await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
       }
@@ -2153,49 +2282,70 @@ export class NaverBlogAutomation {
 
     // ✅ 캡차 사전 체크 제거 - 먼저 자동 로그인 시도하고, 캡차 나오면 그때 대기
 
-    // 로그인 필드 확인
-    let idInput = await page.waitForSelector('#id', { visible: true, timeout: 10000 }).catch(() => null);
+    // ✅ [2026-03-26 FIX] 다중 셀렉터 폴백 + 진단 로깅 강화
+    const ID_INPUT_SELECTORS = ['#id', 'input.input_id', 'input[name="id"]', 'input[aria-label*="아이디"]'];
+
+    // 로그인 필드 확인 — 다중 셀렉터 순회
+    let idInput: import('puppeteer-core').ElementHandle<Element> | null = null;
+    for (const sel of ID_INPUT_SELECTORS) {
+      idInput = await page.waitForSelector(sel, { visible: true, timeout: 3000 }).catch(() => null);
+      if (idInput) {
+        this.log(`✅ 아이디 입력 필드 발견 (셀렉터: ${sel})`);
+        break;
+      }
+    }
+
     if (!idInput) {
+      // ✅ 현재 페이지 상태 진단 로그 (디버깅용)
+      const diagUrl = page.url();
+      const diagTitle = await page.title().catch(() => '(제목 가져오기 실패)');
+      this.log(`⚠️ 아이디 입력 필드 1차 탐색 실패`);
+      this.log(`   📍 현재 URL: ${diagUrl}`);
+      this.log(`   📍 페이지 제목: ${diagTitle}`);
+
       // 이미 로그인되어 있을 수 있음
-      const finalCheck = await this.checkLoginStatus();
-      if (finalCheck) {
-        this.log('✅ 이미 로그인되어 있습니다.');
-        return;
-      }
-
-      // ✅ [FIX-5 + FIX-7] 로그인 필드 탐색 실패 → 쿠키 클리어 + 페이지 리로드 후 재시도
-      this.log('⚠️ 아이디 입력 필드 미발견, 쿠키 클리어 + 리로드 후 재시도...');
-
-      // ✅ [2026-03-25 FIX] 네이버 도메인 쿠키만 선택적 삭제 (전체 삭제는 유효한 세션까지 파괴하여 캡차 유발)
-      try {
-        const client = await page.target().createCDPSession();
-        const { cookies } = await client.send('Network.getAllCookies') as { cookies: Array<{name: string; domain: string; path: string}> };
-        const naverCookies = cookies.filter((c) => 
-          c.domain.includes('.naver.com')
-        );
-        for (const cookie of naverCookies) {
-          await client.send('Network.deleteCookies', {
-            name: cookie.name,
-            domain: cookie.domain,
-            path: cookie.path,
-          });
+      if (!diagUrl.includes('nidlogin') && !diagUrl.includes('nid.naver.com')) {
+        const finalCheck = await this.checkLoginStatus();
+        if (finalCheck) {
+          this.log('✅ 이미 로그인되어 있습니다.');
+          browserSessionManager.setLoggedIn(this.options.naverId, true); // ✅ 캐시 반영
+          return;
         }
-        await client.detach();
-        this.log(`🧹 네이버 도메인 쿠키 ${naverCookies.length}개 선택적 삭제 완료`);
-      } catch (cookieError) {
-        this.log(`⚠️ 쿠키 클리어 실패 (무시): ${(cookieError as Error).message}`);
       }
 
-      // 페이지 리로드 후 재시도
+      // ✅ [2026-03-27 FIX] 쿠키 삭제 제거 — 유효한 세션까지 파괴하여 캡차를 강제 유발하는 치명적 버그였음
+      // 로그인 필드가 안 보이는 이유는 쿠키 문제가 아니라 페이지 로딩 지연/리다이렉트일 가능성이 높음
+      // 쿠키를 보존한 채 로그인 페이지만 다시 이동하여 ID/PW 필드 탐색 재시도
+      this.log('🔄 로그인 페이지 재이동 (쿠키 보존)...');
+
       await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
       await this.humanDelay(2000, 3000);
 
-      const retryIdInput = await page.waitForSelector('#id', { visible: true, timeout: 15000 }).catch(() => null);
-      if (!retryIdInput) {
-        throw new Error('아이디 입력 필드를 찾을 수 없습니다. (쿠키 클리어 + 리로드 후에도 실패)');
+      // 2차 시도 — 다중 셀렉터 순회 (3초 × 4 = 최대 12초)
+      for (const sel of ID_INPUT_SELECTORS) {
+        idInput = await page.waitForSelector(sel, { visible: true, timeout: 3000 }).catch(() => null);
+        if (idInput) {
+          this.log(`✅ 아이디 입력 필드 발견 (2차, 셀렉터: ${sel})`);
+          break;
+        }
       }
-      // ✅ retryIdInput을 idInput에 재할당하여 이후 로직에서 사용
-      idInput = retryIdInput;
+
+      if (!idInput) {
+        const failUrl = page.url();
+        const failTitle = await page.title().catch(() => '');
+        const failBodySnippet = await page.evaluate(() => document.body?.innerText?.substring(0, 300) || '').catch(() => '');
+        this.log(`❌ 최종 실패 — URL: ${failUrl}`);
+        this.log(`❌ 최종 실패 — 제목: ${failTitle}`);
+        this.log(`❌ 최종 실패 — 본문: ${failBodySnippet.substring(0, 150)}`);
+
+        // 에러 원인 세분화
+        const isProxyPage = failBodySnippet.includes('407') || failBodySnippet.includes('작동하지 않습니다') ||
+          failBodySnippet.includes('proxy') || failBodySnippet.includes('프록시');
+        if (isProxyPage) {
+          throw new Error(`프록시 연결 실패로 로그인 페이지를 열 수 없습니다. (HTTP 407) 프록시 설정을 확인하거나 비활성화하세요.`);
+        }
+        throw new Error(`아이디 입력 필드를 찾을 수 없습니다. (URL: ${failUrl}, 제목: ${failTitle})`);
+      }
     }
 
     // ✅ Ghost Cursor 사용 (사람 같은 마우스 이동)
@@ -2212,17 +2362,27 @@ export class NaverBlogAutomation {
         log: this.log.bind(this),
       });
 
-      // 기존 내용 삭제
-      await page.keyboard.down('Control');
-      await page.keyboard.press('a');
-      await page.keyboard.up('Control');
-      await waitRandom(100, 200);
-      await page.keyboard.press('Backspace');
-      await waitRandom(100, 200);
+      // ✅ [2026-03-27 FIX] bvsd._data._tseq 대응: focus → 첫 키 입력까지 인간적 관찰 대기
+      // 실제 사용자는 필드 클릭 후 1~3초 정도 커서 위치/내용을 확인한 후 타이핑 시작
+      await this.humanDelay(1000, 3000);
 
-      // 아이디 타이핑 (인간적인 속도)
+      // ✅ [2026-03-27 FIX] 리스크12: 필드가 비어있으면 Ctrl+A→Backspace 스킵 (bvsd에 기계적 초기화 패턴 기록 방지)
+      const idCurrentValue = await page.evaluate(() => {
+        const el = document.querySelector('#id') as HTMLInputElement;
+        return el?.value || '';
+      });
+      if (idCurrentValue.length > 0) {
+        await page.keyboard.down('Control');
+        await page.keyboard.press('a');
+        await page.keyboard.up('Control');
+        await waitRandom(100, 200);
+        await page.keyboard.press('Backspace');
+        await waitRandom(100, 200);
+      }
+
+      // ✅ [2026-03-27 FIX] 리스크13: loginKeyType 사용 (keydown-keyup 간격 30~100ms)
       for (const char of this.options.naverId) {
-        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
+        await this.loginKeyType(page, char);
         if (Math.random() < 0.05) {
           await this.humanDelay(200, 400);
         }
@@ -2239,10 +2399,19 @@ export class NaverBlogAutomation {
         );
         await this.humanDelay(200, 500);
       }
-      await idInput.click({ clickCount: 3 });
+      // ✅ [2026-03-27 FIX] 리스크14: triple-click → 단일 클릭 + Ctrl+A (보다 자연스러움)
+      await idInput.click();
       await this.humanDelay(300, 600);
+      // 필드 내용 있으면 선택 → 덮어쓰기
+      const idFallbackValue = await idInput.evaluate((el) => (el as HTMLInputElement).value);
+      if (idFallbackValue.length > 0) {
+        await page.keyboard.down('Control');
+        await page.keyboard.press('a');
+        await page.keyboard.up('Control');
+        await waitRandom(100, 200);
+      }
       for (const char of this.options.naverId) {
-        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
+        await this.loginKeyType(page, char);
         if (Math.random() < 0.05) {
           await this.humanDelay(200, 400);
         }
@@ -2257,46 +2426,65 @@ export class NaverBlogAutomation {
     });
     if (typedId !== this.options.naverId) {
       this.log('⚠️ 아이디 입력이 제대로 되지 않았습니다. 다시 시도합니다...');
-      await idInput.click({ clickCount: 3 });
-      await this.humanDelay(300, 500);
+      // ✅ [2026-03-27 FIX] triple-click → 단일클릭 + Ctrl+A
+      await idInput.click();
+      await this.humanDelay(200, 400);
+      await page.keyboard.down('Control');
+      await page.keyboard.press('a');
+      await page.keyboard.up('Control');
+      await this.humanDelay(100, 200);
       for (const char of this.options.naverId) {
-        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
+        await this.loginKeyType(page, char);
       }
       await this.humanDelay(400, 700);
     }
     this.log(`✅ 아이디 입력 완료: ${this.options.naverId.substring(0, 3)}***`);
 
-    // ✅ Tab 키로 다음 필드로 이동 (더 자연스러운 행동)
-    await page.keyboard.press('Tab');
-    await this.humanDelay(200, 500);
+    // ✅ [2026-03-27 FIX] bvsd 대응: ID→PW 이동을 Tab vs 마우스 클릭 랜덤화 (70:30)
+    // bvsd._data._tseq가 Tab 이벤트와 Mouse 이벤트 모두 수집 → 실제 사용자처럼 랜덤
+    const useTabForPw = Math.random() < 0.7;
 
     const pwInput = await page.waitForSelector('#pw', { visible: true, timeout: 8000 });
     if (!pwInput) {
       throw new Error('비밀번호 입력 필드를 찾을 수 없습니다.');
     }
 
-    // ✅ Ghost Cursor 사용 (사람 같은 마우스 이동)
     if (this.cursor) {
       this.log('🎯 Ghost Cursor로 비밀번호 입력 중...');
 
-      // 비밀번호 입력 필드 클릭
-      await safeClick(page, this.cursor, '#pw', {
-        delayBefore: [300, 600],
-        delayAfter: [200, 400],
-        log: this.log.bind(this),
+      if (useTabForPw) {
+        // Tab 키로 이동 (70% 확률) — 가장 자연스러운 행동
+        await page.keyboard.press('Tab');
+        await this.humanDelay(500, 1500);
+      } else {
+        // 마우스로 PW 필드 직접 클릭 (30% 확률)
+        await safeClick(page, this.cursor, '#pw', {
+          delayBefore: [300, 600],
+          delayAfter: [200, 400],
+          log: this.log.bind(this),
+        });
+      }
+
+      // ✅ bvsd._data._tseq: PW 필드 focus 후 인간적 관찰 대기
+      await this.humanDelay(800, 2000);
+
+      // ✅ [2026-03-27 FIX] 리스크12: PW필드도 비어있으면 Ctrl+A 스킵
+      const pwCurrentValue = await page.evaluate(() => {
+        const el = document.querySelector('#pw') as HTMLInputElement;
+        return el?.value || '';
       });
+      if (pwCurrentValue.length > 0) {
+        await page.keyboard.down('Control');
+        await page.keyboard.press('a');
+        await page.keyboard.up('Control');
+        await waitRandom(100, 200);
+        await page.keyboard.press('Backspace');
+        await waitRandom(100, 200);
+      }
 
-      // 기존 내용 삭제
-      await page.keyboard.down('Control');
-      await page.keyboard.press('a');
-      await page.keyboard.up('Control');
-      await waitRandom(100, 200);
-      await page.keyboard.press('Backspace');
-      await waitRandom(100, 200);
-
-      // 비밀번호 타이핑 (인간적인 속도)
+      // ✅ [2026-03-27 FIX] 리스크13: loginKeyType 사용
       for (const char of this.options.naverPassword) {
-        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
+        await this.loginKeyType(page, char);
         if (Math.random() < 0.05) {
           await this.humanDelay(200, 400);
         }
@@ -2304,18 +2492,32 @@ export class NaverBlogAutomation {
       await this.humanDelay(400, 800);
     } else {
       // ✅ 폴백: 기존 마우스 이동 방식
-      const pwBox = await pwInput.boundingBox();
-      if (pwBox) {
-        await page.mouse.move(
-          pwBox.x + pwBox.width / 2 + this.randomInt(-30, 30),
-          pwBox.y + pwBox.height / 2 + this.randomInt(-10, 10)
-        );
-        await this.humanDelay(200, 500);
+      // ✅ [2026-03-27 FIX] 리스크14: triple-click → 단일 클릭 + Ctrl+A
+      if (useTabForPw) {
+        await page.keyboard.press('Tab');
+        await this.humanDelay(500, 1500);
+      } else {
+        const pwBox = await pwInput.boundingBox();
+        if (pwBox) {
+          await page.mouse.move(
+            pwBox.x + pwBox.width / 2 + this.randomInt(-30, 30),
+            pwBox.y + pwBox.height / 2 + this.randomInt(-10, 10)
+          );
+          await this.humanDelay(200, 500);
+        }
+        await pwInput.click();
       }
-      await pwInput.click({ clickCount: 3 });
       await this.humanDelay(300, 600);
+      // PW 필드 내용 있으면 선택
+      const pwFallbackValue = await pwInput.evaluate((el) => (el as HTMLInputElement).value);
+      if (pwFallbackValue.length > 0) {
+        await page.keyboard.down('Control');
+        await page.keyboard.press('a');
+        await page.keyboard.up('Control');
+        await waitRandom(100, 200);
+      }
       for (const char of this.options.naverPassword) {
-        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
+        await this.loginKeyType(page, char);
         if (Math.random() < 0.05) {
           await this.humanDelay(200, 400);
         }
@@ -2330,10 +2532,15 @@ export class NaverBlogAutomation {
     }) as string;
     if (typedPw.length === 0) {
       this.log('⚠️ 비밀번호 입력이 제대로 되지 않았습니다. 다시 시도합니다...');
-      await pwInput.click({ clickCount: 3 });
-      await this.humanDelay(300, 500);
+      // ✅ [2026-03-27 FIX] triple-click → 단일클릭 + Ctrl+A
+      await pwInput.click();
+      await this.humanDelay(200, 400);
+      await page.keyboard.down('Control');
+      await page.keyboard.press('a');
+      await page.keyboard.up('Control');
+      await this.humanDelay(100, 200);
       for (const char of this.options.naverPassword) {
-        await safeKeyboardType(page, char, { delay: this.getTypingDelay() });
+        await this.loginKeyType(page, char);
       }
       await this.humanDelay(400, 700);
     }
@@ -2352,7 +2559,14 @@ export class NaverBlogAutomation {
 
         if (!isChecked) {
           this.log('✅ 로그인 상태 유지 활성화...');
-          await keepLoggedIn.click();
+          // ✅ [2026-03-27 FIX] Ghost Cursor로 통일 (이전: Puppeteer .click() → 클릭 메커니즘 불일치)
+          if (this.cursor) {
+            await this.cursor.click('#keep').catch(async () => {
+              await keepLoggedIn!.click(); // fallback
+            });
+          } else {
+            await keepLoggedIn.click();
+          }
         } else {
           this.log('ℹ️ 로그인 상태 유지가 이미 활성화되어 있습니다.');
         }
@@ -2427,12 +2641,34 @@ export class NaverBlogAutomation {
       await this.delay(1000);
     }
 
+    // ✅ [2026-03-27 FIX] 리스크7: JS evaluate click → Ghost Cursor 클릭으로 교체
+    // 이전: htmlEl.click() → event.isTrusted=false, 마우스 이벤트 미생성 → 봇 감지
+    // 현재: Ghost Cursor로 실제 마우스 이동+클릭 → isTrusted=true
     await loginButton.evaluate((el: Element) => {
-      const htmlEl = el as HTMLElement;
-      htmlEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      htmlEl.click();
+      (el as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
-    await this.delay(300);
+    await this.humanDelay(300, 600);
+
+    if (this.cursor) {
+      // Ghost Cursor로 버튼 위치 계산 후 클릭
+      const box = await loginButton.boundingBox();
+      if (box) {
+        const targetX = box.x + box.width / 2 + (Math.random() - 0.5) * 6;
+        const targetY = box.y + box.height / 2 + (Math.random() - 0.5) * 4;
+        await this.cursor.moveTo({ x: targetX, y: targetY });
+        await this.humanDelay(100, 300);
+        await page.mouse.down();
+        await this.humanDelay(50, 150);
+        await page.mouse.up();
+      } else {
+        // boundingBox 실패 시 Puppeteer 클릭 fallback
+        await loginButton.click();
+      }
+    } else {
+      // Ghost Cursor 미초기화 시 Puppeteer 클릭
+      await loginButton.click();
+    }
+    await this.humanDelay(200, 500);
 
     try {
       await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 10000 });
@@ -2670,25 +2906,20 @@ export class NaverBlogAutomation {
     const currentUrl = page.url();
     this.log(`   현재 URL: ${currentUrl}`);
 
-    // ✅ [2026-03-24 FIX] 이전 에디터 상태 완전 초기화
-    // 이전 발행 사이클의 에디터 상태가 남아있으면 네이버 에디터가
-    // "게시물이 삭제되었거나 다른 페이지로 변경되었습니다" alert를 반복 발생시킴
-    // about:blank로 먼저 이동하여 이전 에디터의 JS 컨텍스트를 완전히 해제
+    // ✅ [2026-03-27 FIX] about:blank 경유 제거 — 네이버 세션 의심 유발 + 캡차 트리거
+    // 이전 에디터의 alert는 ensureDialogHandler()가 자동으로 수락하므로 about:blank 불필요
+    // about:blank → blog.naver.com 패턴은 봇 행동으로 감지될 수 있음
     if (currentUrl.includes('blog.naver.com') || currentUrl.includes('GoBlogWrite') ||
         currentUrl.includes('blogPostWrite') || currentUrl.includes('NaverWriteEditor')) {
-      this.log('   🧹 이전 에디터 상태 초기화 (about:blank 경유)...');
-      try {
-        await page.goto('about:blank', { waitUntil: 'load', timeout: 5000 });
-        await this.delay(500);
-        this.log('   ✅ 이전 에디터 상태 해제 완료');
-      } catch (blankErr) {
-        this.log(`   ⚠️ about:blank 이동 실패 (무시): ${(blankErr as Error).message}`);
-      }
+      this.log('   ℹ️ 이전 에디터 페이지에서 GoBlogWrite로 직접 이동합니다 (about:blank 미경유)');
     }
 
     // 로그인 페이지에 있으면 로그인이 필요함
     if (currentUrl.includes('nidlogin') || currentUrl.includes('login')) {
       this.log('   ⚠️ 로그인 페이지에 있습니다. 로그인을 다시 시도합니다...');
+      // ✅ [2026-03-26 FIX] isLoggedIn 캐시 무효화 — 서버 측 세션 만료 감지
+      // 이 호출이 없으면 다음 run()에서 loginToNaver()가 스킵되어 무한 실패
+      browserSessionManager.setLoggedIn(this.options.naverId, false);
       throw new Error(
         '로그인이 필요합니다.\n\n' +
         '현재 로그인 페이지에 있습니다.\n' +
@@ -2705,8 +2936,16 @@ export class NaverBlogAutomation {
 
     // ═══════════════════════════════════════════════════════════════════
     // 🛡️ [2026-03-23] 끝판왕 워밍업 브라우징 — 네이버 메인 → (랜덤 서비스) → 블로그 홈 → 글쓰기
-    // 인간은 절대 blog.naver.com/NaverWriteEditor 로 직행하지 않음
+    // ✅ [2026-03-27 FIX] 이미 블로그/에디터에 있으면 워밍업 스킵 — 매 발행마다 반복하면 봇 패턴
     // ═══════════════════════════════════════════════════════════════════
+    const shouldSkipWarmup = currentUrl.includes('blog.naver.com') ||
+                              currentUrl.includes('GoBlogWrite') ||
+                              currentUrl.includes('blogPostWrite') ||
+                              currentUrl.includes('NaverWriteEditor');
+
+    if (shouldSkipWarmup) {
+      this.log('   ⚡ 워밍업 스킵 (이미 블로그 도메인에 위치 — 연속 발행 최적화)');
+    } else {
     this.log('   🛡️ 끝판왕 워밍업 브라우징 시작...');
     try {
       // Step 1: 네이버 메인 방문 (5~8초 체류)
@@ -2790,6 +3029,7 @@ export class NaverBlogAutomation {
     } catch (warmupErr) {
       this.log(`   ⚠️ 워밍업 브라우징 스킵 (${(warmupErr as Error).message})`);
     }
+    } // ✅ [2026-03-27] shouldSkipWarmup else 블록 종료
 
     // 블로그 글쓰기 페이지로 이동
     this.log('   📝 블로그 글쓰기 페이지로 이동합니다...');
@@ -2851,6 +3091,8 @@ export class NaverBlogAutomation {
         // 로그인 페이지로 리다이렉트된 경우
         else if (isLoginRedirect) {
           this.log(`   ⚠️ 로그인 페이지로 리다이렉트됨. 로그인 세션이 만료되었습니다.`);
+          // ✅ [2026-03-26 FIX] isLoggedIn 캐시 무효화 — 이게 없으면 loginToNaver()가 캐시 때문에 스킵됨
+          browserSessionManager.setLoggedIn(this.options.naverId, false);
 
           // 마지막 시도가 아니면 재로그인 시도
           if (attempt < 3) {
@@ -2885,8 +3127,10 @@ export class NaverBlogAutomation {
             // 수동 로그인 대기 (최대 10분)
             await this.waitForManualLogin(page, 600000);
 
-            // 로그인 성공 후 블로그 페이지로 다시 이동
+            // 수동 로그인 성공 후 블로그 페이지로 다시 이동
             this.log('🔄 블로그 글쓰기 페이지로 다시 이동합니다...');
+            // ✅ [2026-03-26 FIX] 수동 로그인 성공 캐시 반영
+            browserSessionManager.setLoggedIn(this.options.naverId, true);
             await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
               waitUntil: 'domcontentloaded',
               timeout: 30000
@@ -2919,6 +3163,8 @@ export class NaverBlogAutomation {
         else if (!isBlogDomain) {
           // 네이버 메인이나 완전히 다른 페이지로 이동됨
           this.log(`   ⚠️ 메인 페이지로 리다이렉트됨: ${finalUrl}`);
+          // ✅ [2026-03-26 FIX] isLoggedIn 캐시 무효화 — 이게 없으면 loginToNaver()가 캐시 때문에 스킵됨
+          browserSessionManager.setLoggedIn(this.options.naverId, false);
           if (attempt < 3) {
             this.log(`   🔄 세션 문제로 판단, 재로그인 후 재시도합니다...`);
             await this.loginToNaver();
@@ -3017,6 +3263,8 @@ export class NaverBlogAutomation {
 
       // 로그인 성공 후 블로그 페이지로 이동
       this.log('🔄 블로그 글쓰기 페이지로 이동합니다...');
+      // ✅ [2026-03-26 FIX] 수동 로그인 성공 캐시 반영
+      browserSessionManager.setLoggedIn(this.options.naverId, true);
       await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
         waitUntil: 'domcontentloaded',
         timeout: 30000
@@ -7895,39 +8143,64 @@ export class NaverBlogAutomation {
   }
 
   /**
-   * ✅ [2026-03-26] 발행 완료 후 브라우저 창 최소화 (세션 유지)
-   * CDP Browser.setWindowBounds를 사용하여 창을 최소화합니다.
-   * 사용자가 실수로 창을 닫는 것을 방지하면서 세션(쿠키/로그인)은 유지됩니다.
+   * ✅ [2026-03-27 FIX] 발행 완료 후 브라우저 창 숨기기 (세션 유지)
+   * 1단계: CDP Browser.setWindowBounds로 창을 화면 밖(-32000, -32000)으로 이동
+   * 2단계: 최소화 적용 (이중 보험)
+   * 최소화만 하면 작업 표시줄 클릭 시 다시 보이므로, 화면 밖 이동이 더 확실
    */
   async minimizeBrowserWindow(): Promise<void> {
     if (!this.page) return;
     try {
       const client = await this.page.target().createCDPSession();
       const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
+      
+      // 1단계: 화면 밖으로 이동 (normal 상태에서만 위치 변경 가능)
+      await client.send('Browser.setWindowBounds', {
+        windowId,
+        bounds: { windowState: 'normal' }
+      }).catch(() => {});
+      
+      await client.send('Browser.setWindowBounds', {
+        windowId,
+        bounds: { left: -32000, top: -32000, width: 800, height: 600 }
+      });
+      
+      // 2단계: 최소화 (이중 보험)
       await client.send('Browser.setWindowBounds', {
         windowId,
         bounds: { windowState: 'minimized' }
       });
+      
       await client.detach();
-      this.log('🔽 브라우저 창 최소화 완료 (세션 유지)');
+      this.log('🔽 브라우저 창 숨기기 완료 (화면 밖 이동 + 최소화)');
     } catch (e) {
-      this.log(`⚠️ 브라우저 창 최소화 실패: ${(e as Error).message}`);
+      this.log(`⚠️ 브라우저 창 숨기기 실패: ${(e as Error).message}`);
     }
   }
 
   /**
-   * ✅ [2026-03-26] 다음 발행 시작 시 브라우저 창 복원
-   * 최소화된 창을 다시 보이도록 복원합니다.
+   * ✅ [2026-03-27 FIX] 다음 발행 시작 시 브라우저 창 복원
+   * 화면 밖(-32000)에서 정상 위치로 복원합니다.
    */
   async restoreBrowserWindow(): Promise<void> {
     if (!this.page) return;
     try {
       const client = await this.page.target().createCDPSession();
       const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
+      
+      // 먼저 normal 상태로 전환 (minimized에서 위치 변경 불가)
       await client.send('Browser.setWindowBounds', {
         windowId,
         bounds: { windowState: 'normal' }
       });
+      
+      // 화면 안으로 위치 복원 (프로필 해상도 사용)
+      const profile = this.getAccountConsistentProfile();
+      await client.send('Browser.setWindowBounds', {
+        windowId,
+        bounds: { left: 100, top: 100, width: profile.screen.width, height: profile.screen.height }
+      });
+      
       await client.detach();
       this.log('🔼 브라우저 창 복원 완료');
     } catch (e) {

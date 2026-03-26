@@ -13,19 +13,40 @@ import { Browser, Page, Frame } from 'puppeteer';
 import * as path from 'path';
 import * as os from 'os';
 import { promises as fs } from 'fs';
-import { getProxyUrl, isProxyEnabled } from './crawler/utils/proxyManager.js';
+import { getProxyUrl } from './crawler/utils/proxyManager.js';
 
-// Stealth Plugin 적용
-puppeteer.use(StealthPlugin());
+// ✅ [2026-03-27 FIX] Stealth Plugin — 모든 evasion 모듈 명시적 활성화
+// 기본 설정에서 일부 모듈(chrome.csi 등)이 비활성화되어 있을 수 있으므로 명시적으로 설정
+const stealthPlugin = StealthPlugin();
+// 사용 가능한 모든 evasion 활성화 확인
+stealthPlugin.enabledEvasions.add('chrome.app');
+stealthPlugin.enabledEvasions.add('chrome.csi');
+stealthPlugin.enabledEvasions.add('chrome.loadTimes');
+stealthPlugin.enabledEvasions.add('chrome.runtime');
+stealthPlugin.enabledEvasions.add('defaultArgs');
+stealthPlugin.enabledEvasions.add('iframe.contentWindow');
+stealthPlugin.enabledEvasions.add('media.codecs');
+stealthPlugin.enabledEvasions.add('navigator.hardwareConcurrency');
+stealthPlugin.enabledEvasions.add('navigator.languages');
+stealthPlugin.enabledEvasions.add('navigator.permissions');
+stealthPlugin.enabledEvasions.add('navigator.plugins');
+stealthPlugin.enabledEvasions.add('navigator.webdriver');
+stealthPlugin.enabledEvasions.add('sourceurl');
+stealthPlugin.enabledEvasions.add('user-agent-override');
+stealthPlugin.enabledEvasions.add('webgl.vendor');
+stealthPlugin.enabledEvasions.add('window.outerdimensions');
+puppeteer.use(stealthPlugin);
 
 export interface SessionInfo {
     accountId: string;
     browser: Browser;
     page: Page;
     isLoggedIn: boolean;
+    loginVerifiedAt: number; // ✅ [2026-03-26] 로그인 상태가 마지막으로 확인된 시각 (TTL 방어용)
     lastActivity: number;
-    createdAt: number; // ✅ [Stability] 세션 생성 시간 추가
+    createdAt: number;
     profileDir: string;
+    proxyUrl: string | undefined; // ✅ [2026-03-26] 세션 생성 시 사용된 프록시 URL 추적
 }
 
 /**
@@ -43,12 +64,24 @@ class BrowserSessionManager {
     // 프로필 베이스 경로
     private readonly PROFILE_BASE = path.join(os.homedir(), '.naver-blog-automation', 'profiles');
 
-    // ✅ [2026-03-23] 세션 최대 수명 4시간 — 연속발행 중 재로그인 방지 (캡차 방지 핵심!)
-    // 1시간→4시간 확장: 10개+ 연속발행 시 세션 만료로 인한 재로그인이 가장 강력한 캡차 트리거
-    private readonly SESSION_MAX_AGE = 4 * 60 * 60 * 1000; // 4시간
+    // ✅ [2026-03-23] 세션 최대 수명 4시간
+    private readonly SESSION_MAX_AGE = 4 * 60 * 60 * 1000;
+
+    // ✅ [2026-03-26] isLoggedIn 캐시 TTL — 30분 경과 시 재검증 필수
+    // 네이버 서버 측 세션 만료(약 30분~1시간)에 대응
+    private readonly LOGIN_CACHE_TTL = 2 * 60 * 60 * 1000; // ✅ [2026-03-27] 2시간 (30분→2시간, 연속발행 캡차 방지)
 
     private constructor() {
         console.log('[BrowserSessionManager] 싱글톤 인스턴스 생성됨');
+    }
+
+    /**
+     * ✅ [2026-03-26] 프록시 URL 정규화 — "", null, undefined를 모두 undefined로 통일
+     * 비교 시 falsy 값 차이로 인한 오탐 방지
+     */
+    private normalizeProxyUrl(url: string | null | undefined): string | undefined {
+        if (!url || url.trim() === '') return undefined;
+        return url.trim();
     }
 
     /**
@@ -86,16 +119,16 @@ class BrowserSessionManager {
      * 계정별 고정 프로필 정보 (CAPTCHA 방지용 일관성 유지)
      */
     private getAccountConsistentProfile(accountId: string): {
-        userAgent: string;
+        userAgent: string | null;
         screen: { width: number; height: number };
         webGL: { vendor: string; renderer: string };
     } {
         const seed = accountId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
-        // ✅ [2026-03-23] Chrome 버전 최신화 — 구형(128~131)은 봇 의심 대상
-        const chromeVersions = ['133.0.0.0', '134.0.0.0', '135.0.0.0'];
-        const version = chromeVersions[seed % chromeVersions.length];
-        const userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${version} Safari/537.36`;
+        // ✅ [2026-03-27 FIX] UA 하드코딩 제거 — Stealth Plugin이 실제 Chrome 버전을 자동 감지
+        // 이전: 하드코딩된 Chrome 133~135 → 실제 설치된 Chrome과 불일치하여 봇 감지 유발
+        // 현재: null → Stealth Plugin의 기본 UA 사용 (실제 바이너리 버전과 자동 동기화)
+        const userAgent: string | null = null; // Stealth Plugin에 위임
 
         const screenConfigs = [
             { width: 1920, height: 1080 },
@@ -140,33 +173,46 @@ class BrowserSessionManager {
      * 세션 가져오기 또는 생성
      */
     async getOrCreateSession(accountId: string, headless: boolean = false, accountProxyUrl?: string): Promise<SessionInfo> {
+        // ✅ [2026-03-26] 현재 프록시 설정 확인 + 정규화 ("", null, undefined → undefined로 통일)
+        const currentProxyUrl = this.normalizeProxyUrl(accountProxyUrl || await getProxyUrl());
+
         // 이미 존재하는 세션 반환
         const existingSession = this.sessions.get(accountId);
         if (existingSession) {
-            // 브라우저 연결 상태 확인
-            try {
-                if (existingSession.browser.isConnected()) {
-                    // ✅ [Stability] 세션 수명 확인 - 1시간 초과 시 재시작
-                    const sessionAge = Date.now() - existingSession.createdAt;
-                    if (sessionAge > this.SESSION_MAX_AGE) {
-                        console.log(`[BrowserSessionManager] ⏰ 세션 수명 초과 (${Math.floor(sessionAge / 60000)}분), 재생성...`);
-                        await this.closeSession(accountId);
-                    } else {
-                        console.log(`[BrowserSessionManager] ✅ 기존 세션 재사용: ${accountId.substring(0, 3)}*** (수명: ${Math.floor(sessionAge / 60000)}분)`);
-                        existingSession.lastActivity = Date.now();
-                        this.activeAccountId = accountId;
+            // ✅ [2026-03-26 FIX] 프록시 변경 감지 — Chrome은 launch 시 --proxy-server가 고정되므로,
+            // 프록시가 변경되면 (켜기→끄기, 끄기→켜기, 서버 변경) 세션을 폐기하고 새 Chrome을 시작해야 함.
+            if (existingSession.proxyUrl !== currentProxyUrl) {
+                const oldProxy = existingSession.proxyUrl ? existingSession.proxyUrl.replace(/:[^:]+@/, ':***@') : '(없음)';
+                const newProxy = currentProxyUrl ? currentProxyUrl.replace(/:[^:]+@/, ':***@') : '(없음)';
+                console.log(`[BrowserSessionManager] 🔄 프록시 변경 감지! ${oldProxy} → ${newProxy}`);
+                console.log(`[BrowserSessionManager] 🔄 기존 세션 폐기 후 새 Chrome으로 재시작합니다...`);
+                await this.closeSession(accountId);
+                // fall through → 아래 새 세션 생성으로 진행
+            } else {
+                // 브라우저 연결 상태 확인
+                try {
+                    if (existingSession.browser.isConnected()) {
+                        const sessionAge = Date.now() - existingSession.createdAt;
+                        if (sessionAge > this.SESSION_MAX_AGE) {
+                            console.log(`[BrowserSessionManager] ⏰ 세션 수명 초과 (${Math.floor(sessionAge / 60000)}분), 재생성...`);
+                            await this.closeSession(accountId);
+                        } else {
+                            console.log(`[BrowserSessionManager] ✅ 기존 세션 재사용: ${accountId.substring(0, 3)}*** (수명: ${Math.floor(sessionAge / 60000)}분)`);
+                            existingSession.lastActivity = Date.now();
+                            this.activeAccountId = accountId;
 
-                        // ✅ [2026-03-26] 발행 후 최소화된 창 자동 복원
-                        await this.restoreWindow(accountId);
+                            // ✅ [2026-03-26] 발행 후 최소화된 창 자동 복원
+                            await this.restoreWindow(accountId);
 
-                        return existingSession;
+                            return existingSession;
+                        }
                     }
+                } catch {
+                    console.log(`[BrowserSessionManager] ⚠️ 기존 세션 연결 끊김, 재생성...`);
                 }
-            } catch {
-                console.log(`[BrowserSessionManager] ⚠️ 기존 세션 연결 끊김, 재생성...`);
+                // 연결 끊긴/수명 초과 세션 제거
+                this.sessions.delete(accountId);
             }
-            // 연결 끊긴 세션 제거
-            this.sessions.delete(accountId);
         }
 
         // 새 세션 생성
@@ -183,8 +229,8 @@ class BrowserSessionManager {
         const profile = this.getAccountConsistentProfile(accountId);
         const chromeExecutablePath = this.findChromeExecutable();
 
-        // ✅ [2026-03-23] 계정별 프록시 우선, 미설정 시 글로벌 SmartProxy 폴백
-        const proxyUrl = accountProxyUrl || await getProxyUrl();
+        // ✅ [2026-03-26] currentProxyUrl은 함수 상단에서 이미 resolve됨 (중복 호출 방지)
+        const proxyUrl = currentProxyUrl;
         let proxyAuth: { username: string; password: string } | null = null;
         const launchArgs = [
                 '--disable-blink-features=AutomationControlled',
@@ -192,19 +238,18 @@ class BrowserSessionManager {
                 '--disable-setuid-sandbox',
                 '--disable-infobars',
                 `--window-size=${profile.screen.width},${profile.screen.height}`,
-                '--disable-features=IsolateOrigins,site-per-process,PasswordManager',
-                '--disable-web-security',
-                '--disable-features=ThirdPartyCookieBlocking,SameSiteByDefaultCookies',
-                '--disable-site-isolation-trials',
+                '--disable-features=IsolateOrigins,site-per-process,PasswordManager,ThirdPartyCookieBlocking,SameSiteByDefaultCookies',
+                // ✅ [2026-03-27 FIX] --disable-web-security 제거 — JS로 감지 가능한 봇 footprint
+                // ✅ [2026-03-27 FIX] --disable-site-isolation-trials 제거 — 일반 Chrome과 다른 보안 설정
+                // ✅ [2026-03-27 FIX] --disable-gpu 제거 — WebGL 스푸핑(GTX 1060 등)과 논리적 모순
+                // ✅ [2026-03-27 FIX] --disable-extensions 제거 — 일반 사용자도 확장 프로그램을 사용함
                 '--disable-dev-shm-usage',
-                '--disable-gpu',
-                '--disable-extensions',
                 '--no-first-run',
                 '--no-default-browser-check',
-                // ✅ [2026-02-08] 비밀번호 저장 팝업 비활성화 (기기등록 자동 바이패스 방해 방지)
+                // ✅ [2026-02-08] 비밀번호 저장 팝업 비활성화
                 '--disable-save-password-bubble',
                 '--disable-component-update',
-                // ✅ [2026-02-17 FIX] OS 키체인 대신 기본 저장소 사용 (비밀번호 저장 프롬프트 방지)
+                // ✅ [2026-02-17 FIX] OS 키체인 대신 기본 저장소 사용
                 '--password-store=basic',
         ];
 
@@ -257,8 +302,11 @@ class BrowserSessionManager {
             console.log(`[BrowserSessionManager] 🔐 프록시 인증 설정 완료 (user: ${proxyAuth.username.substring(0, 5)}...)`);
         }
 
-        // User-Agent 및 언어 설정
-        await page.setUserAgent(profile.userAgent);
+        // ✅ [2026-03-27 FIX] UA: Stealth Plugin 기본값 사용 시 setUserAgent 스킵
+        if (profile.userAgent) {
+          await page.setUserAgent(profile.userAgent);
+        }
+        // 언어 설정은 유지 (한국어 사이트 접근)
         await page.setExtraHTTPHeaders({
             'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
         });
@@ -269,21 +317,18 @@ class BrowserSessionManager {
             deviceScaleFactor: 1,
         });
 
-        // Stealth 스크립트 주입
+        // ✅ [2026-03-27 FIX] 최소 Stealth 보조 — window.chrome 오버라이드 제거됨
+        // 이전: window.chrome을 불완전하게 직접 정의 → Stealth Plugin과 충돌하여 독특한 fingerprint 생성
+        // 현재: webdriver 제거 + 언어/플랫폼/하드웨어 정보만 설정, 나머지는 Stealth Plugin에 위임
         await page.evaluateOnNewDocument((hw: any) => {
+            // navigator.webdriver 제거 (Stealth Plugin과 함께 이중 방어)
             Object.defineProperty(navigator, 'webdriver', { get: () => undefined, configurable: true });
-            (window as any).chrome = {
-                runtime: { id: undefined, onConnect: { addListener: () => { } }, onMessage: { addListener: () => { } } },
-                loadTimes: () => ({}),
-                csi: () => ({}),
-                app: { isInstalled: false }
-            };
+            // 기본 환경 정보 (한국어 환경 일관성)
             Object.defineProperty(navigator, 'languages', { get: () => ['ko-KR', 'ko', 'en-US', 'en'] });
             Object.defineProperty(navigator, 'platform', { get: () => 'Win32' });
             Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => 8 });
             Object.defineProperty(navigator, 'deviceMemory', { get: () => 8 });
-
-            // WebGL 정보
+            // ✅ WebGL 스푸핑 유지 (GPU 활성화 상태이므로 모순 없음)
             const webGL = hw.webGL;
             const getParameterOriginal = WebGLRenderingContext.prototype.getParameter;
             WebGLRenderingContext.prototype.getParameter = function (parameter: number) {
@@ -298,9 +343,11 @@ class BrowserSessionManager {
             browser,
             page,
             isLoggedIn: false,
+            loginVerifiedAt: 0,
             lastActivity: Date.now(),
-            createdAt: Date.now(), // ✅ [Stability] 세션 생성 시간
+            createdAt: Date.now(),
             profileDir,
+            proxyUrl: currentProxyUrl,
         };
 
         this.sessions.set(accountId, sessionInfo);
@@ -325,9 +372,27 @@ class BrowserSessionManager {
         const session = this.sessions.get(accountId);
         if (session) {
             session.isLoggedIn = isLoggedIn;
+            session.loginVerifiedAt = isLoggedIn ? Date.now() : 0; // ✅ TTL 기준점 기록
             session.lastActivity = Date.now();
             console.log(`[BrowserSessionManager] 로그인 상태 업데이트: ${accountId.substring(0, 3)}*** → ${isLoggedIn ? '✅ 로그인됨' : '❌ 로그아웃'}`);
         }
+    }
+
+    /**
+     * ✅ [2026-03-26] 계정 로그인 상태 조회 (TTL 방어 포함)
+     * 로그인 성공 후 LOGIN_CACHE_TTL(30분) 이내면 true, 초과하면 false 반환하여 재검증 트리거
+     */
+    isAccountLoggedIn(accountId: string): boolean {
+        const session = this.sessions.get(accountId);
+        if (!session?.isLoggedIn) return false;
+
+        // ✅ TTL 방어: loginVerifiedAt으로부터 30분 초과 시 재검증 필요
+        const elapsed = Date.now() - session.loginVerifiedAt;
+        if (elapsed > this.LOGIN_CACHE_TTL) {
+            console.log(`[BrowserSessionManager] ⏰ 로그인 캐시 TTL 초과 (${Math.floor(elapsed / 60000)}분 경과), 재검증 필요`);
+            return false; // checkLoginStatus()로 실제 네이버 세션 확인 필요
+        }
+        return true;
     }
 
     /**
