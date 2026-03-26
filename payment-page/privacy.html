@@ -120,14 +120,21 @@
     <canvas id="particles-canvas"></canvas>
 
     <!-- Navigation -->
-    <nav class="navbar scrolled">
+    <nav class="navbar scrolled" id="navbar">
         <div class="nav-inner">
             <a href="index.html" class="nav-brand">
                 <img src="logo.png" alt="Leaders Pro" class="nav-logo">
                 <span class="nav-brand-text">Leaders Pro</span>
             </a>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">홈</a>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">가격</a>
+                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
+                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
+                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
                 <a href="lookup.html" class="nav-link">주문 조회</a>
             </div>
         </div>
@@ -263,6 +270,8 @@
             observer.observe(canvas);
             animate();
         }
+        function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
+        function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
         document.addEventListener('DOMContentLoaded', initParticles);
     </script>
 </body>

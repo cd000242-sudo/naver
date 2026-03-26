@@ -777,6 +777,10 @@
                     <span class="nav-icon">✏️</span>
                     <span>사이트 편집</span>
                 </div>
+                <div class="nav-item" data-tab="trial" onclick="switchTab('trial')">
+                    <span class="nav-icon">🎁</span>
+                    <span>체험 관리</span>
+                </div>
             </nav>
             <div class="sidebar-info">
                 <div class="sidebar-info-item"><span>버전</span><span>v1.2.28</span></div>
@@ -945,6 +949,49 @@
                     <button class="btn btn-gold" onclick="saveEditorContent()">💾 저장하기</button>
                 </div>
             </div>
+
+            <!-- TAB: Trial Management -->
+            <div class="tab-panel" id="tab-trial">
+                <div class="page-header">
+                    <h1>체험 사용자 관리</h1>
+                    <p>무료 체험 사용자 목록을 조회하고 차단/해제할 수 있습니다.</p>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+                    <div class="stat-card card-purple">
+                        <div class="stat-top">
+                            <div class="stat-label">전체 체험 사용자</div>
+                            <div class="stat-icon icon-purple">🎁</div>
+                        </div>
+                        <div class="stat-value purple" id="trial-stat-total">—</div>
+                    </div>
+                    <div class="stat-card card-green">
+                        <div class="stat-top">
+                            <div class="stat-label">활성 사용자</div>
+                            <div class="stat-icon icon-green">✅</div>
+                        </div>
+                        <div class="stat-value green" id="trial-stat-active">—</div>
+                    </div>
+                    <div class="stat-card" style="border-left: 3px solid #ef4444;">
+                        <div class="stat-top">
+                            <div class="stat-label">차단된 사용자</div>
+                            <div class="stat-icon" style="background:rgba(239,68,68,0.1);color:#ef4444;">🚫</div>
+                        </div>
+                        <div class="stat-value" style="color:#ef4444;" id="trial-stat-blocked">—</div>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>체험 사용자 목록</h3>
+                        <div class="table-actions">
+                            <input class="search-input" id="trial-search" placeholder="🔍 이메일/닉네임 검색..." oninput="filterTrialUsers()">
+                            <button class="btn" onclick="loadTrialUsers()">🔄 새로고침</button>
+                        </div>
+                    </div>
+                    <div id="trial-table-body">
+                        <div class="loading-spinner"><div class="spinner-ring"></div> 체험 사용자 로딩 중...</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1050,8 +1097,12 @@
                 overview: { title: '대시보드', desc: '오늘의 트래픽과 주문 현황을 한눈에 확인하세요.' },
                 codes: { title: '코드 관리', desc: '라이선스 코드를 발급, 조회, 무효화합니다.' },
                 orders: { title: '주문 내역', desc: '결제 완료된 주문과 활성화된 라이선스 내역입니다.' },
-                editor: { title: '사이트 편집', desc: '메인 결제 페이지의 핵심 콘텐츠를 수정합니다.' }
+                editor: { title: '사이트 편집', desc: '메인 결제 페이지의 핵심 콘텐츠를 수정합니다.' },
+                trial: { title: '체험 관리', desc: '무료 체험 사용자 목록을 조회하고 관리합니다.' }
             };
+
+            // Load data for the tab
+            if (tabId === 'trial') loadTrialUsers();
         }
 
         // ===== TRAFFIC TRACKING =====
@@ -1339,6 +1390,9 @@
             if (type === 'codes') {
                 codesPage = page;
                 renderCodesTable(document.getElementById('code-search')?.value || '');
+            } else if (type === 'trial') {
+                trialPage = page;
+                renderTrialTable(document.getElementById('trial-search')?.value || '');
             } else {
                 ordersPage = page;
                 renderOrdersTable();
@@ -1446,6 +1500,128 @@
             toast.classList.add('visible');
             setTimeout(() => toast.classList.remove('visible'), 3000);
         }
+        // ===== TRIAL USER MANAGEMENT =====
+        // ✅ [2026-03-26] XSS 방지 유틸
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+        }
+
+        let allTrialUsers = [];
+        let trialPage = 1;
+
+        async function fetchTrialUsers() {
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'trial-list', adminToken: ADMIN_TOKEN })
+                });
+                const json = await res.json();
+                if (json.ok) return json.users || [];
+                throw new Error(json.error);
+            } catch (err) {
+                console.error('Trial API Error:', err);
+                return [];
+            }
+        }
+
+        async function loadTrialUsers() {
+            document.getElementById('trial-table-body').innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 체험 사용자 로딩 중...</div>';
+            allTrialUsers = await fetchTrialUsers();
+
+            // Stats
+            const total = allTrialUsers.length;
+            const blocked = allTrialUsers.filter(u => u.blocked === 'true' || u.blocked === 'Y').length;
+            const active = total - blocked;
+            document.getElementById('trial-stat-total').textContent = total.toLocaleString();
+            document.getElementById('trial-stat-active').textContent = active.toLocaleString();
+            document.getElementById('trial-stat-blocked').textContent = blocked.toLocaleString();
+
+            renderTrialTable();
+        }
+
+        function renderTrialTable(filter = '') {
+            let filtered = allTrialUsers;
+            if (filter) {
+                const q = filter.toLowerCase();
+                filtered = allTrialUsers.filter(u =>
+                    (u.email || '').toLowerCase().includes(q) ||
+                    (u.nickname || '').toLowerCase().includes(q) ||
+                    (u.phone || '').includes(q)
+                );
+                trialPage = 1;
+            }
+
+            const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+            if (trialPage > totalPages) trialPage = totalPages;
+            const start = (trialPage - 1) * PAGE_SIZE;
+            const pageItems = filtered.slice(start, start + PAGE_SIZE);
+
+            let html = '<table class="data-table"><thead><tr>';
+            html += '<th>이메일</th><th>닉네임</th><th>전화번호</th><th>상태</th><th>활성화 횟수</th><th>등록일</th><th>최근 활동</th><th>작업</th>';
+            html += '</tr></thead><tbody>';
+
+            if (pageItems.length === 0) {
+                html += '<tr><td colspan="8" style="text-align:center;color:var(--text-secondary);padding:32px;">체험 사용자가 없습니다.</td></tr>';
+            } else {
+                pageItems.forEach(u => {
+                    const isBlocked = u.blocked === 'true' || u.blocked === 'Y';
+                    const statusBadge = isBlocked
+                        ? '<span class="badge badge-expired">차단됨</span>'
+                        : '<span class="badge badge-active">활성</span>';
+                    const regDate = u.registeredAt ? new Date(u.registeredAt).toLocaleDateString('ko-KR') : '—';
+                    const lastDate = u.lastActiveAt ? new Date(u.lastActiveAt).toLocaleString('ko-KR') : '—';
+                    const safeEmail = escapeHtml(u.email);
+                    const actionBtn = isBlocked
+                        ? `<button class="btn" onclick="toggleBlockTrialUser('${safeEmail}', false)" style="padding:4px 10px;font-size:0.7rem;">해제</button>`
+                        : `<button class="btn btn-red" onclick="toggleBlockTrialUser('${safeEmail}', true)" style="padding:4px 10px;font-size:0.7rem;">차단</button>`;
+
+                    html += `<tr${isBlocked ? ' style="opacity:0.5;"' : ''}>
+                        <td><span class="code-text">${safeEmail}</span></td>
+                        <td>${escapeHtml(u.nickname) || '—'}</td>
+                        <td>${escapeHtml(u.phone) || '—'}</td>
+                        <td>${statusBadge}</td>
+                        <td style="text-align:center;">${u.totalActivations || 0}</td>
+                        <td>${escapeHtml(regDate)}</td>
+                        <td>${escapeHtml(lastDate)}</td>
+                        <td>${actionBtn}</td>
+                    </tr>`;
+                });
+            }
+            html += '</tbody></table>';
+            html += buildPagination(trialPage, totalPages, filtered.length, 'trial');
+            document.getElementById('trial-table-body').innerHTML = html;
+        }
+
+        function filterTrialUsers() {
+            const q = document.getElementById('trial-search').value;
+            renderTrialTable(q);
+        }
+
+        async function toggleBlockTrialUser(email, block) {
+            const action = block ? '차단' : '해제';
+            if (!confirm(`${email}을(를) ${action}하시겠습니까?`)) return;
+
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'trial-block', adminToken: ADMIN_TOKEN, email, block })
+                });
+                const json = await res.json();
+                if (json.ok) {
+                    showToast(`✅ ${email} ${action} 완료`);
+                    await loadTrialUsers();
+                } else {
+                    showToast('❌ ' + (json.error || '실패'));
+                }
+            } catch (err) {
+                showToast('❌ 네트워크 오류: ' + err.message);
+            }
+        }
+
+
     </script>
 </body>
 </html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>후기 & FAQ — Leaders Pro</title>
+    <meta name="description" content="Leaders Pro 실제 사용자 후기와 자주 묻는 질문. 구매 고객님들의 생생한 경험을 확인하세요.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
+        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
+        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
+        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 10% 5%, rgba(255,183,197,0.07) 0%, transparent 40%), radial-gradient(ellipse at 90% 10%, rgba(255,218,233,0.05) 0%, transparent 35%), radial-gradient(ellipse at 50% 95%, rgba(255,182,193,0.04) 0%, transparent 40%), url('spring-bg.png') center/cover no-repeat fixed; pointer-events: none; z-index: 0; opacity: 0.35; }
+        .kakao-float { position: fixed; bottom: 30px; right: 24px; z-index: 10001; display: flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 50px; background: rgba(60, 29, 0, 0.85); border: 1px solid rgba(254, 229, 0, 0.4); backdrop-filter: blur(16px); cursor: grab; user-select: none; text-decoration: none; box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(254,229,0,0.15); transition: transform 0.2s, box-shadow 0.2s; font-family: 'Pretendard Variable', 'Inter', sans-serif; }
+        .kakao-float:hover { transform: scale(1.05); }
+        .kakao-float-icon { width: 28px; height: 28px; background: #fee500; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        .kakao-float-text { color: #fee500; font-weight: 700; font-size: 14px; white-space: nowrap; }
+        .kakao-float-pulse { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: #ff3b5c; animation: kakaoPulse 2s ease-in-out infinite; }
+        @keyframes kakaoPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+        .youtube-float { position: fixed; bottom: 100px; right: 24px; z-index: 10001; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 0, 0, 0.85); border: 1px solid rgba(255, 100, 100, 0.4); backdrop-filter: blur(12px); text-decoration: none; box-shadow: 0 4px 20px rgba(255,0,0,0.3); transition: all 0.3s; font-size: 22px; }
+        .youtube-float:hover { transform: scale(1.1); }
+
+        /* ========== REVIEW FORM ========== */
+        .review-write-section { max-width: 700px; margin: 48px auto 0; padding: 36px; background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.2); border-radius: 20px; backdrop-filter: blur(12px); }
+        .review-write-title { font-size: 1.3rem; font-weight: 700; color: var(--gold); margin-bottom: 8px; text-align: center; }
+        .review-write-desc { font-size: 0.85rem; color: var(--text-secondary); text-align: center; margin-bottom: 24px; }
+        .review-verify { display: flex; gap: 12px; margin-bottom: 20px; }
+        .review-verify input { flex: 1; padding: 12px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: var(--text-primary); font-size: 0.9rem; outline: none; transition: border 0.3s; }
+        .review-verify input:focus { border-color: var(--gold); }
+        .review-verify-btn { padding: 12px 24px; background: linear-gradient(135deg, var(--gold), #d4a012); color: #1a1a2e; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; white-space: nowrap; }
+        .review-verify-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(201,168,76,0.3); }
+        .review-verify-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .review-form-body { display: none; }
+        .review-form-body.active { display: block; }
+        .review-stars { display: flex; gap: 6px; justify-content: center; margin-bottom: 16px; }
+        .review-star { font-size: 32px; cursor: pointer; transition: transform 0.2s; color: rgba(255,255,255,0.2); }
+        .review-star:hover, .review-star.active { color: #f5c842; transform: scale(1.15); }
+        .review-field { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: var(--text-primary); font-size: 0.9rem; margin-bottom: 12px; outline: none; resize: vertical; font-family: inherit; transition: border 0.3s; box-sizing: border-box; }
+        .review-field:focus { border-color: var(--gold); }
+        .review-field::placeholder { color: rgba(255,255,255,0.3); }
+        .review-submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--gold), #d4a012); color: #1a1a2e; font-weight: 700; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s; }
+        .review-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(201,168,76,0.3); }
+        .review-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .review-msg { text-align: center; padding: 12px; margin-top: 12px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; display: none; }
+        .review-msg.success { display: block; background: rgba(68,215,182,0.1); color: #44d7b6; border: 1px solid rgba(68,215,182,0.3); }
+        .review-msg.error { display: block; background: rgba(255,59,92,0.1); color: #ff3b5c; border: 1px solid rgba(255,59,92,0.3); }
+        /* Dynamic reviews */
+        .dynamic-reviews { margin-top: 32px; }
+        .dynamic-review-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .dynamic-review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .dynamic-review-author { font-weight: 600; color: var(--text-primary); }
+        .dynamic-review-date { font-size: 0.8rem; color: var(--text-secondary); }
+        .dynamic-review-stars { color: #f5c842; margin-bottom: 8px; }
+        .dynamic-review-text { color: var(--text-secondary); line-height: 1.7; }
+        @media (max-width: 768px) {
+            .review-verify { flex-direction: column; }
+            .kakao-float { bottom: 24px; right: 16px; padding: 12px 18px; }
+            .youtube-float { bottom: 90px; right: 16px; width: 44px; height: 44px; font-size: 18px; }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">가격</a>
+                <a href="reviews.html" class="nav-link active" onclick="closeMobileMenu()">후기</a>
+                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
+                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
+                <a href="lookup.html" class="nav-link">주문 조회</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══ TESTIMONIALS ═══ -->
+    <section class="section section-proof" id="social-proof" style="padding-top: 120px;">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">TESTIMONIALS</span>
+                <h2 class="section-title">실제 사용자들의 이야기</h2>
+                <p class="section-desc">Leaders Pro를 경험한 분들의 생생한 후기</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">블로그 10개를 혼자 운영하는데, <strong>리더스 프로 없었으면 불가능</strong>했어요. 출근 전에 키워드만 세팅하면 퇴근할 때 50건이 올라가 있습니다.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">K</div>
+                        <div class="author-info"><strong>K 대표</strong><span>마케팅 에이전시 · 10개월 사용</span></div>
+                    </div>
+                    <div class="testimonial-result"><span class="result-badge">📈 월 방문자 12만 달성</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">쿠팡 파트너스 블로그를 4개 돌리고 있는데, 쇼핑 커넥트 기능으로 <strong>월 수익이 3배</strong> 뛰었어요. AI가 생성한 리뷰 글이 정말 자연스러워요.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">P</div>
+                        <div class="author-info"><strong>P님</strong><span>제휴 마케터 · 6개월 사용</span></div>
+                    </div>
+                    <div class="testimonial-result"><span class="result-badge">💰 월 수익 3배 성장</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">글로벌 블로그 5개를 Leaders Orbit으로 운영 중입니다. <strong>애드센스 승인이 2주 만에</strong> 떨어졌고, 지금은 월 $400 이상 벌고 있어요.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">L</div>
+                        <div class="author-info"><strong>L님</strong><span>글로벌 블로거 · 8개월 사용</span></div>
+                    </div>
+                    <div class="testimonial-result"><span class="result-badge">🌍 월 $400+ 애드센스 수익</span></div>
+                </div>
+            </div>
+
+            <!-- Dynamic user reviews -->
+            <div class="dynamic-reviews" id="dynamic-reviews"></div>
+
+            <!-- ═══ REVIEW WRITE FORM ═══ -->
+            <div class="review-write-section" id="review-write">
+                <h3 class="review-write-title">✍️ 후기 작성하기</h3>
+                <p class="review-write-desc">구매 고객이신가요? 주문번호와 이메일로 인증 후 후기를 남겨주세요.</p>
+
+                <div class="review-verify" id="review-verify">
+                    <input type="text" id="review-order-id" placeholder="주문번호 (예: LP-1234567890-ABCDEF)">
+                    <input type="email" id="review-email" placeholder="결제 시 사용한 이메일">
+                    <button class="review-verify-btn" id="review-verify-btn" onclick="verifyPurchase()">인증하기</button>
+                </div>
+
+                <div class="review-form-body" id="review-form-body">
+                    <div class="review-stars" id="review-stars">
+                        <span class="review-star" data-star="1" onclick="setRating(1)">★</span>
+                        <span class="review-star" data-star="2" onclick="setRating(2)">★</span>
+                        <span class="review-star" data-star="3" onclick="setRating(3)">★</span>
+                        <span class="review-star" data-star="4" onclick="setRating(4)">★</span>
+                        <span class="review-star" data-star="5" onclick="setRating(5)">★</span>
+                    </div>
+                    <input type="text" class="review-field" id="review-summary" placeholder="한줄 요약 (예: 블로그 운영이 정말 편해졌어요!)" maxlength="50">
+                    <textarea class="review-field" id="review-detail" rows="4" placeholder="상세 후기를 작성해주세요..." maxlength="500"></textarea>
+                    <button class="review-submit-btn" id="review-submit-btn" onclick="submitReview()">후기 등록하기</button>
+                </div>
+                <div class="review-msg" id="review-msg"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FAQ SECTION ═══ -->
+    <section class="section" id="faq">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">FAQ</span>
+                <h2 class="section-title">자주 묻는 질문</h2>
+                <p class="section-desc">궁금한 점을 빠르게 해결하세요</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Leaders Pro는 어떤 프로그램인가요?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><p>Leaders Pro는 AI 기반 네이버 블로그 자동화 솔루션입니다. 키워드만 입력하면 GPT-4o, Gemini 2.5 등 7종의 AI가 6,000~10,000자의 자연스러운 포스팅을 작성하고, AI 이미지·영상을 생성하며, 네이버 블로그에 자동으로 발행합니다.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>봇 감지에 걸리지 않나요?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><p>사람처럼 타이핑하는 고급 봇 회피 엔진을 탑재했습니다. 랜덤 딜레이, 최적 시간대 발행, 쿨다운 기간 등의 기술로 봇 감지를 우회합니다. 실제로 수천 명의 사용자가 안전하게 사용 중입니다.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>계정을 몇 개까지 등록할 수 있나요?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><p>계정 수 제한이 없습니다. 네이버 블로그 ID를 원하는 만큼 등록하고, 각 계정별로 독립적인 스케줄을 설정하여 통합 관리할 수 있습니다.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>환불이 가능한가요?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><p>라이선스 코드 발급 후 7일 이내, 서비스 미사용 시 전액 환불 가능합니다. 환불 요청은 cd000242@gmail.com으로 보내주세요. <a href="refund.html" style="color:var(--gold);">환불정책 자세히 보기 →</a></p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Leaders Orbit과 Leaders Pro의 차이는?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><p>Leaders Pro는 <strong>네이버 블로그 전용</strong>, Leaders Orbit은 <strong>워드프레스 + 블로그스팟</strong> 글로벌 플랫폼을 대상으로 합니다. Orbit은 100% API 기반이라 봇 감지 걱정 없이 구글 애드센스 수익화에 최적화되어 있습니다.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>기기 변경 시 어떻게 하나요?</span>
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer"><p>라이선스는 동시에 1대의 기기에서만 사용 가능합니다. 기기를 변경하면 이전 기기에서 자동으로 로그아웃됩니다. 별도의 이전 절차 없이 새 기기에서 바로 로그인하시면 됩니다.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand"><img src="logo.png" alt="Leaders Pro" class="footer-logo"><span>Leaders Pro</span></div>
+            <div class="footer-links">
+                <a href="terms.html">이용약관</a>
+                <a href="refund.html">환불정책</a>
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="lookup.html">주문 조회</a>
+                <a href="mailto:cd000242@gmail.com">고객 문의</a>
+            </div>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
+        let verifiedOrderId = null;
+        let verifiedEmail = null;
+        let selectedRating = 0;
+
+        // ===== Verify Purchase =====
+        async function verifyPurchase() {
+            const orderId = document.getElementById('review-order-id').value.trim();
+            const email = document.getElementById('review-email').value.trim();
+            const btn = document.getElementById('review-verify-btn');
+            const msg = document.getElementById('review-msg');
+
+            if (!orderId || !email) { showMsg('주문번호와 이메일을 모두 입력해주세요.', 'error'); return; }
+
+            btn.disabled = true; btn.textContent = '인증 중...';
+
+            try {
+                const url = `${GAS_URL}?action=check-order&orderId=${encodeURIComponent(orderId)}&email=${encodeURIComponent(email)}`;
+                const res = await fetch(url);
+                const data = await res.json();
+
+                if (data.success && data.order) {
+                    verifiedOrderId = orderId;
+                    verifiedEmail = email;
+                    document.getElementById('review-form-body').classList.add('active');
+                    document.getElementById('review-verify').style.display = 'none';
+                    showMsg('✅ 구매 확인 완료! 후기를 작성해주세요.', 'success');
+                } else {
+                    showMsg('주문 정보를 찾을 수 없습니다. 주문번호와 이메일을 확인해주세요.', 'error');
+                }
+            } catch (err) {
+                showMsg('인증 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.', 'error');
+            }
+            btn.disabled = false; btn.textContent = '인증하기';
+        }
+
+        // ===== Star Rating =====
+        function setRating(n) {
+            selectedRating = n;
+            document.querySelectorAll('.review-star').forEach((star, i) => {
+                star.classList.toggle('active', i < n);
+            });
+        }
+
+        // ===== Submit Review =====
+        async function submitReview() {
+            const summary = document.getElementById('review-summary').value.trim();
+            const detail = document.getElementById('review-detail').value.trim();
+            const btn = document.getElementById('review-submit-btn');
+
+            if (selectedRating === 0) { showMsg('별점을 선택해주세요.', 'error'); return; }
+            if (!summary) { showMsg('한줄 요약을 입력해주세요.', 'error'); return; }
+
+            btn.disabled = true; btn.textContent = '등록 중...';
+
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({
+                        action: 'submit-review',
+                        orderId: verifiedOrderId,
+                        email: verifiedEmail,
+                        rating: selectedRating,
+                        summary: summary,
+                        detail: detail,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    showMsg('🎉 후기가 등록되었습니다! 감사합니다.', 'success');
+                    document.getElementById('review-form-body').classList.remove('active');
+                    btn.textContent = '✓ 등록 완료';
+                    // Reload reviews
+                    loadReviews();
+                } else {
+                    showMsg(data.message || '후기 등록에 실패했습니다.', 'error');
+                    btn.disabled = false; btn.textContent = '후기 등록하기';
+                }
+            } catch (err) {
+                showMsg('등록 중 오류가 발생했습니다.', 'error');
+                btn.disabled = false; btn.textContent = '후기 등록하기';
+            }
+        }
+
+        function showMsg(text, type) {
+            const msg = document.getElementById('review-msg');
+            msg.className = 'review-msg ' + type;
+            msg.textContent = text;
+        }
+
+        // ===== Load Dynamic Reviews =====
+        async function loadReviews() {
+            try {
+                const res = await fetch(`${GAS_URL}?action=get-reviews`);
+                const data = await res.json();
+                if (data.success && data.reviews && data.reviews.length > 0) {
+                    const container = document.getElementById('dynamic-reviews');
+                    container.innerHTML = '<h3 style="text-align:center; color:var(--gold); margin-bottom:20px; font-size:1.1rem;">📝 구매 고객 후기</h3>';
+                    data.reviews.forEach(r => {
+                        const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+                        const date = new Date(r.timestamp).toLocaleDateString('ko-KR');
+                        container.innerHTML += `
+                            <div class="dynamic-review-card">
+                                <div class="dynamic-review-header">
+                                    <span class="dynamic-review-author">${r.email.replace(/(.{2}).*(@.*)/, '$1***$2')}</span>
+                                    <span class="dynamic-review-date">${date}</span>
+                                </div>
+                                <div class="dynamic-review-stars">${stars}</div>
+                                <p class="dynamic-review-text"><strong>${r.summary}</strong>${r.detail ? '<br>' + r.detail : ''}</p>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (err) { console.log('Reviews load failed:', err); }
+        }
+
+        // ===== FAQ Toggle =====
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+        // ===== Common =====
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas'); if (!canvas) return;
+            const ctx = canvas.getContext('2d'); let particles = []; let w, h;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 3; } resize(); window.addEventListener('resize', resize);
+            class Particle { constructor() { this.reset(); } reset() { this.x = Math.random() * w; this.y = Math.random() * h; this.size = Math.random() * 2 + 0.5; this.speedY = -(Math.random() * 0.3 + 0.1); this.speedX = (Math.random() - 0.5) * 0.2; this.opacity = Math.random() * 0.5 + 0.1; this.gold = Math.random() > 0.3; } update() { this.y += this.speedY; this.x += this.speedX; this.opacity += (Math.random() - 0.5) * 0.01; this.opacity = Math.max(0.05, Math.min(0.6, this.opacity)); if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; } } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.gold ? `rgba(201, 168, 76, ${this.opacity})` : `rgba(255, 255, 255, ${this.opacity * 0.4})`; ctx.fill(); } }
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+            function animate() { ctx.clearRect(0, 0, w, h); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); } animate();
+        }
+        function initScrollAnimations() { const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) { entry.target.style.transitionDelay = `${i * 0.08}s`; entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 }); document.querySelectorAll('.fade-in, .testimonial-card, .faq-item').forEach(el => observer.observe(el)); }
+        function initNavbar() { const navbar = document.getElementById('navbar'); window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); }); }
+        function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
+        function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initParticles(); initScrollAnimations(); initNavbar();
+            loadReviews();
+        });
+    </script>
+
+    <div class="petal-container" id="petalContainer"></div>
+    <script>
+    (function() { const container = document.getElementById('petalContainer'); if (!container) return; for (let i = 0; i < 30; i++) { const petal = document.createElement('div'); petal.className = 'petal'; const size = Math.random() * 14 + 8; petal.style.width = size + 'px'; petal.style.height = size + 'px'; petal.style.left = Math.random() * 100 + '%'; petal.style.animationDuration = (Math.random() * 8 + 7) + 's'; petal.style.animationDelay = (Math.random() * 10) + 's'; container.appendChild(petal); } })();
+    </script>
+    <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" title="공식 유튜브 채널">▶</a>
+    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 카카오톡 문의">
+        <div class="kakao-float-pulse"></div>
+        <div class="kakao-float-icon">💬</div>
+        <span class="kakao-float-text">1:1 문의</span>
+    </a>
+</body>
+</html>

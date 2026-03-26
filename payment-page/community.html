@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커뮤니티 — Leaders Pro</title>
+    <meta name="description" content="Leaders Pro 공식 커뮤니티. 공지사항, 수익 인증, 사용 팁을 확인하세요.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
+        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
+        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
+        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 10% 5%, rgba(255,183,197,0.07) 0%, transparent 40%), radial-gradient(ellipse at 90% 10%, rgba(255,218,233,0.05) 0%, transparent 35%), url('spring-bg.png') center/cover no-repeat fixed; pointer-events: none; z-index: 0; opacity: 0.35; }
+        .kakao-float { position: fixed; bottom: 30px; right: 24px; z-index: 10001; display: flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 50px; background: rgba(60, 29, 0, 0.85); border: 1px solid rgba(254, 229, 0, 0.4); backdrop-filter: blur(16px); cursor: grab; user-select: none; text-decoration: none; box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(254,229,0,0.15); transition: transform 0.2s, box-shadow 0.2s; font-family: 'Pretendard Variable', 'Inter', sans-serif; }
+        .kakao-float:hover { transform: scale(1.05); }
+        .kakao-float-icon { width: 28px; height: 28px; background: #fee500; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        .kakao-float-text { color: #fee500; font-weight: 700; font-size: 14px; white-space: nowrap; }
+        .kakao-float-pulse { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: #ff3b5c; animation: kakaoPulse 2s ease-in-out infinite; }
+        @keyframes kakaoPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+        .youtube-float { position: fixed; bottom: 100px; right: 24px; z-index: 10001; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 0, 0, 0.85); border: 1px solid rgba(255, 100, 100, 0.4); backdrop-filter: blur(12px); text-decoration: none; box-shadow: 0 4px 20px rgba(255,0,0,0.3); transition: all 0.3s; font-size: 22px; }
+        .youtube-float:hover { transform: scale(1.1); }
+        @media (max-width: 768px) {
+            .kakao-float { bottom: 24px; right: 16px; padding: 12px 18px; }
+            .youtube-float { bottom: 90px; right: 16px; width: 44px; height: 44px; font-size: 18px; }
+        }
+
+        /* ========== COMMUNITY TABS ========== */
+        .community-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+        .community-tab { padding: 12px 28px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: var(--text-secondary); font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+        .community-tab:hover { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.3); color: var(--text-primary); }
+        .community-tab.active { background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.08)); border-color: var(--gold); color: var(--gold); box-shadow: 0 0 20px rgba(201,168,76,0.15); }
+
+        .community-panel { display: none; }
+        .community-panel.active { display: block; }
+
+        /* ========== NOTICE CARDS ========== */
+        .notice-list { max-width: 800px; margin: 0 auto; }
+        .notice-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px 28px; margin-bottom: 16px; cursor: pointer; transition: all 0.3s; }
+        .notice-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+        .notice-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+        .notice-badge { display: inline-flex; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; }
+        .notice-badge.important { background: rgba(255,59,92,0.15); color: #ff3b5c; }
+        .notice-badge.update { background: rgba(68,215,182,0.15); color: #44d7b6; }
+        .notice-badge.event { background: rgba(201,168,76,0.15); color: var(--gold); }
+        .notice-badge.tip { background: rgba(100,149,237,0.15); color: #6495ed; }
+        .notice-date { font-size: 0.8rem; color: var(--text-secondary); }
+        .notice-title { font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+        .notice-preview { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+        .notice-body { display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; }
+        .notice-card.open .notice-body { display: block; }
+
+        /* ========== INCOME PROOF GALLERY ========== */
+        .income-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
+        .income-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; transition: all 0.3s; }
+        .income-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+        .income-card-image { width: 100%; aspect-ratio: 16/10; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+        .income-card-image img { width: 100%; height: 100%; object-fit: cover; }
+        .income-card-image .income-placeholder { font-size: 3rem; opacity: 0.3; }
+        .income-amount-badge { position: absolute; top: 12px; right: 12px; padding: 6px 14px; border-radius: 20px; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); border: 1px solid rgba(201,168,76,0.4); color: var(--gold); font-weight: 700; font-size: 0.85rem; }
+        .income-card-body { padding: 20px; }
+        .income-card-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+        .income-card-author { font-weight: 600; color: var(--text-primary); font-size: 0.95rem; }
+        .income-card-date { font-size: 0.8rem; color: var(--text-secondary); }
+        .income-card-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+        .income-card-tags { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+        .income-tag { padding: 4px 10px; border-radius: 12px; background: rgba(201,168,76,0.1); color: var(--gold); font-size: 0.7rem; font-weight: 600; }
+
+        /* ========== TIPS PANEL ========== */
+        .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
+        .tip-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px; transition: all 0.3s; }
+        .tip-card:hover { border-color: rgba(100,149,237,0.3); transform: translateY(-4px); }
+        .tip-card-icon { font-size: 2rem; margin-bottom: 12px; }
+        .tip-card-title { font-weight: 700; color: var(--text-primary); margin-bottom: 8px; font-size: 1.05rem; }
+        .tip-card-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">가격</a>
+                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
+                <a href="community.html" class="nav-link active" onclick="closeMobileMenu()">커뮤니티</a>
+                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
+                <a href="lookup.html" class="nav-link">주문 조회</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══ COMMUNITY ═══ -->
+    <section class="section" id="community" style="padding-top: 120px;">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">COMMUNITY</span>
+                <h2 class="section-title">Leaders Pro 커뮤니티</h2>
+                <p class="section-desc">공지사항, 수익 인증, 활용 팁을 확인하세요</p>
+            </div>
+
+            <!-- Community Tabs -->
+            <div class="community-tabs">
+                <button class="community-tab active" data-ctab="notices" onclick="switchCommunityTab('notices')">📢 공지사항</button>
+                <button class="community-tab" data-ctab="income" onclick="switchCommunityTab('income')">💰 수익 인증</button>
+                <button class="community-tab" data-ctab="tips" onclick="switchCommunityTab('tips')">💡 활용 팁</button>
+            </div>
+
+            <!-- ═══ 공지사항 패널 ═══ -->
+            <div class="community-panel active" id="cpanel-notices">
+                <div class="notice-list">
+                    <div class="notice-card" onclick="toggleNotice(this)">
+                        <div class="notice-card-header">
+                            <span class="notice-badge important">중요</span>
+                            <span class="notice-date">2026.03.27</span>
+                        </div>
+                        <h4 class="notice-title">Leaders Pro v1.3.0 업데이트 안내</h4>
+                        <p class="notice-preview">멀티페이지 구조 개편, 후기 시스템 도입, 성능 최적화가 포함된 대규모 업데이트입니다.</p>
+                        <div class="notice-body">
+                            <p>안녕하세요, Leaders Pro 팀입니다.</p>
+                            <p>v1.3.0 업데이트가 적용되었습니다. 주요 변경 사항:</p>
+                            <ul style="margin: 12px 0; padding-left: 20px;">
+                                <li>웹사이트 멀티페이지 구조 개편 (제품/가격/후기/커뮤니티/다운로드 분리)</li>
+                                <li>구매자 후기 작성 시스템 도입 (주문번호 인증)</li>
+                                <li>커뮤니티 페이지 신설 (공지사항, 수익 인증, 활용 팁)</li>
+                                <li>AI 콘텐츠 생성 품질 향상</li>
+                                <li>봇 감지 우회 엔진 고도화</li>
+                            </ul>
+                            <p>문의사항은 <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" style="color:var(--gold);">카카오톡 1:1 상담</a>을 이용해주세요.</p>
+                        </div>
+                    </div>
+
+                    <div class="notice-card" onclick="toggleNotice(this)">
+                        <div class="notice-card-header">
+                            <span class="notice-badge update">업데이트</span>
+                            <span class="notice-date">2026.03.20</span>
+                        </div>
+                        <h4 class="notice-title">Gemini 2.5 Flash AI 엔진 추가</h4>
+                        <p class="notice-preview">Google의 최신 AI 모델 Gemini 2.5 Flash가 콘텐츠 생성 옵션에 추가되었습니다.</p>
+                        <div class="notice-body">
+                            <p>Gemini 2.5 Flash 모델이 AI 콘텐츠 생성 엔진에 추가되었습니다.</p>
+                            <p>기존 GPT-4o, Claude, DeepSeek에 더해 총 7종의 AI를 활용하실 수 있습니다. 설정 > AI 엔진에서 선택 가능합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="notice-card" onclick="toggleNotice(this)">
+                        <div class="notice-card-header">
+                            <span class="notice-badge event">이벤트</span>
+                            <span class="notice-date">2026.03.15</span>
+                        </div>
+                        <h4 class="notice-title">봄맞이 20% 할인 이벤트 🌸</h4>
+                        <p class="notice-preview">3월 한정! 전 제품 1년권 20% 특별 할인 이벤트를 진행합니다.</p>
+                        <div class="notice-body">
+                            <p>봄을 맞아 전 제품 1년권 20% 할인 이벤트를 진행합니다.</p>
+                            <p><strong>기간:</strong> 2026년 3월 15일 ~ 3월 31일</p>
+                            <p><strong>대상:</strong> Better Life Naver, Leaders Orbit, Leaders Tistory, Leword 1년권</p>
+                            <p>결제 페이지에서 자동 적용됩니다. 이 기회를 놓치지 마세요! 🎉</p>
+                        </div>
+                    </div>
+
+                    <div class="notice-card" onclick="toggleNotice(this)">
+                        <div class="notice-card-header">
+                            <span class="notice-badge tip">안내</span>
+                            <span class="notice-date">2026.03.10</span>
+                        </div>
+                        <h4 class="notice-title">환불 정책 안내</h4>
+                        <p class="notice-preview">라이선스 코드 발급 후 7일 이내, 서비스 미사용 시 전액 환불이 가능합니다.</p>
+                        <div class="notice-body">
+                            <p>Leaders Pro의 환불 정책을 안내드립니다.</p>
+                            <ul style="margin: 12px 0; padding-left: 20px;">
+                                <li><strong>전액 환불:</strong> 라이선스 코드 발급 후 7일 이내 + 미사용 시</li>
+                                <li><strong>부분 환불:</strong> 라이선스 활성화 후 7일 이내 → 사용일수 차감 후 환불</li>
+                                <li><strong>환불 불가:</strong> 라이선스 발급 후 7일 초과 또는 서비스 정상 이용 후</li>
+                            </ul>
+                            <p>자세한 내용은 <a href="refund.html" style="color:var(--gold);">환불정책 페이지</a>를 참고해주세요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ 수익 인증 패널 ═══ -->
+            <div class="community-panel" id="cpanel-income">
+                <div class="income-grid">
+                    <div class="income-card">
+                        <div class="income-card-image">
+                            <div class="income-placeholder">📊</div>
+                            <span class="income-amount-badge">월 127만원</span>
+                        </div>
+                        <div class="income-card-body">
+                            <div class="income-card-meta">
+                                <span class="income-card-author">블로그왕 K님</span>
+                                <span class="income-card-date">2026.03</span>
+                            </div>
+                            <p class="income-card-desc">네이버 블로그 7개 운영, 쿠팡 파트너스 + 체험단 수익입니다. Better Life Naver로 하루 평균 35건 발행 중.</p>
+                            <div class="income-card-tags">
+                                <span class="income-tag">Better Life Naver</span>
+                                <span class="income-tag">쿠팡파트너스</span>
+                                <span class="income-tag">7개 블로그</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="income-card">
+                        <div class="income-card-image">
+                            <div class="income-placeholder">💵</div>
+                            <span class="income-amount-badge">월 $420</span>
+                        </div>
+                        <div class="income-card-body">
+                            <div class="income-card-meta">
+                                <span class="income-card-author">글로벌 블로거 L님</span>
+                                <span class="income-card-date">2026.03</span>
+                            </div>
+                            <p class="income-card-desc">WordPress 3개 + Blogspot 2개 운영. 영어 콘텐츠로 구글 애드센스 수익화 성공. Leaders Orbit 8개월차.</p>
+                            <div class="income-card-tags">
+                                <span class="income-tag">Leaders Orbit</span>
+                                <span class="income-tag">구글 애드센스</span>
+                                <span class="income-tag">다국어</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="income-card">
+                        <div class="income-card-image">
+                            <div class="income-placeholder">🏆</div>
+                            <span class="income-amount-badge">월 85만원</span>
+                        </div>
+                        <div class="income-card-body">
+                            <div class="income-card-meta">
+                                <span class="income-card-author">부업러 P님</span>
+                                <span class="income-card-date">2026.02</span>
+                            </div>
+                            <p class="income-card-desc">직장인 부업으로 네이버 블로그 4개 운영 중. 출근 전 키워드 세팅만 하면 퇴근 시 30건 완료.</p>
+                            <div class="income-card-tags">
+                                <span class="income-tag">Better Life Naver</span>
+                                <span class="income-tag">직장인 부업</span>
+                                <span class="income-tag">4개 블로그</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="income-card">
+                        <div class="income-card-image">
+                            <div class="income-placeholder">🎯</div>
+                            <span class="income-amount-badge">월 200만원+</span>
+                        </div>
+                        <div class="income-card-body">
+                            <div class="income-card-meta">
+                                <span class="income-card-author">에이전시 대표 M님</span>
+                                <span class="income-card-date">2026.03</span>
+                            </div>
+                            <p class="income-card-desc">마케팅 에이전시 운영. 클라이언트 블로그 12개를 Leaders Pro로 통합 관리. 인건비 절약 + 품질 향상.</p>
+                            <div class="income-card-tags">
+                                <span class="income-tag">Better Life Naver</span>
+                                <span class="income-tag">에이전시</span>
+                                <span class="income-tag">12개 블로그</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 32px;">
+                    💬 수익 인증을 공유하고 싶으시다면 <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" style="color: var(--gold);">카카오톡 1:1 문의</a>로 보내주세요!
+                </p>
+            </div>
+
+            <!-- ═══ 활용 팁 패널 ═══ -->
+            <div class="community-panel" id="cpanel-tips">
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-card-icon">🎯</div>
+                        <h4 class="tip-card-title">키워드 선정이 수익의 80%</h4>
+                        <p class="tip-card-desc">경쟁이 낮고 검색량이 있는 블루오션 키워드를 찾는 것이 핵심입니다. Leword를 활용하면 경쟁 강도·난이도를 한눈에 파악할 수 있습니다.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-card-icon">⏰</div>
+                        <h4 class="tip-card-title">최적 발행 시간대</h4>
+                        <p class="tip-card-desc">네이버 상위노출을 위한 최적 발행 시간: 오전 7-9시, 오후 12-1시, 저녁 8-10시. 스케줄링으로 자동 설정하세요.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-card-icon">📈</div>
+                        <h4 class="tip-card-title">일 10건으로 시작하세요</h4>
+                        <p class="tip-card-desc">처음부터 100건을 발행하면 봇 감지 위험이 있습니다. 일 10건부터 시작해서 2주 후 20건, 한 달 후 30건으로 천천히 늘려가세요.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-card-icon">🛡️</div>
+                        <h4 class="tip-card-title">랜덤 딜레이 활용</h4>
+                        <p class="tip-card-desc">발행 간 랜덤 딜레이(3~8분)를 설정하면 봇 감지 확률이 크게 감소합니다. 자동 설정 옵션을 활성화하세요.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-card-icon">🌍</div>
+                        <h4 class="tip-card-title">글로벌 수익화 전략</h4>
+                        <p class="tip-card-desc">Leaders Orbit으로 영어 블로그를 운영하면 구글 애드센스 단가가 한국어 대비 2~5배 높습니다. 다국어 콘텐츠 생성을 활용하세요.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-card-icon">🎨</div>
+                        <h4 class="tip-card-title">AI 이미지 품질 높이기</h4>
+                        <p class="tip-card-desc">Imagen 4 또는 DALL-E를 선택하면 가장 높은 품질의 AI 이미지가 생성됩니다. 글 내용에 맞는 키워드 이미지로 체류시간을 높이세요.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand"><img src="logo.png" alt="Leaders Pro" class="footer-logo"><span>Leaders Pro</span></div>
+            <div class="footer-links">
+                <a href="terms.html">이용약관</a>
+                <a href="refund.html">환불정책</a>
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="lookup.html">주문 조회</a>
+                <a href="mailto:cd000242@gmail.com">고객 문의</a>
+            </div>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchCommunityTab(tabId) {
+            document.querySelectorAll('.community-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`.community-tab[data-ctab="${tabId}"]`).classList.add('active');
+            document.querySelectorAll('.community-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(`cpanel-${tabId}`).classList.add('active');
+        }
+
+        function toggleNotice(card) {
+            const wasOpen = card.classList.contains('open');
+            document.querySelectorAll('.notice-card.open').forEach(c => c.classList.remove('open'));
+            if (!wasOpen) card.classList.add('open');
+        }
+
+        // ===== Common =====
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas'); if (!canvas) return;
+            const ctx = canvas.getContext('2d'); let particles = []; let w, h;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 3; } resize(); window.addEventListener('resize', resize);
+            class Particle { constructor() { this.reset(); } reset() { this.x = Math.random() * w; this.y = Math.random() * h; this.size = Math.random() * 2 + 0.5; this.speedY = -(Math.random() * 0.3 + 0.1); this.speedX = (Math.random() - 0.5) * 0.2; this.opacity = Math.random() * 0.5 + 0.1; this.gold = Math.random() > 0.3; } update() { this.y += this.speedY; this.x += this.speedX; this.opacity += (Math.random() - 0.5) * 0.01; this.opacity = Math.max(0.05, Math.min(0.6, this.opacity)); if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; } } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.gold ? `rgba(201, 168, 76, ${this.opacity})` : `rgba(255, 255, 255, ${this.opacity * 0.4})`; ctx.fill(); } }
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+            function animate() { ctx.clearRect(0, 0, w, h); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); } animate();
+        }
+        function initScrollAnimations() { const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) { entry.target.style.transitionDelay = `${i * 0.08}s`; entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 }); document.querySelectorAll('.fade-in, .notice-card, .income-card, .tip-card').forEach(el => observer.observe(el)); }
+        function initNavbar() { const navbar = document.getElementById('navbar'); window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); }); }
+        function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
+        function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
+
+        document.addEventListener('DOMContentLoaded', () => { initParticles(); initScrollAnimations(); initNavbar(); });
+    </script>
+
+    <div class="petal-container" id="petalContainer"></div>
+    <script>
+    (function() { const container = document.getElementById('petalContainer'); if (!container) return; for (let i = 0; i < 30; i++) { const petal = document.createElement('div'); petal.className = 'petal'; const size = Math.random() * 14 + 8; petal.style.width = size + 'px'; petal.style.height = size + 'px'; petal.style.left = Math.random() * 100 + '%'; petal.style.animationDuration = (Math.random() * 8 + 7) + 's'; petal.style.animationDelay = (Math.random() * 10) + 's'; container.appendChild(petal); } })();
+    </script>
+    <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" title="공식 유튜브 채널">▶</a>
+    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 카카오톡 문의">
+        <div class="kakao-float-pulse"></div>
+        <div class="kakao-float-icon">💬</div>
+        <span class="kakao-float-text">1:1 문의</span>
+    </a>
+</body>
+</html>
