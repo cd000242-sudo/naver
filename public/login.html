@@ -1639,7 +1639,7 @@
       if (loginButton) loginButton.disabled = true;
 
       try {
-        const result = await window.api.freeActivate({ email, nickname, phone });
+        const result = await ipcRenderer.invoke('free:activate', { email, nickname, phone });
 
         if (!result || result.success !== true) {
           const msg = (result && result.message) ? String(result.message) : '무료 체험 설정에 실패했습니다.';
