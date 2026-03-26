@@ -1657,7 +1657,19 @@
           return;
         }
 
-        // 성공
+        // 성공 → config에 무료체험 등록 기록 저장 (재접속 시 자동 로그인용)
+        try {
+          const cfgNow = await ipcRenderer.invoke('config:get');
+          await ipcRenderer.invoke('config:save', {
+            ...cfgNow,
+            freeTrialActivated: true,
+            freeTrialEmail: email,
+          });
+          console.log('[Login] ✅ 무료체험 등록 정보 config에 저장 완료');
+        } catch (saveErr) {
+          console.error('[Login] 무료체험 config 저장 실패:', saveErr);
+        }
+
         document.getElementById('trial-modal-backdrop').style.display = 'none';
         showInfoModal(
           '✅ 환영합니다!',
@@ -2064,13 +2076,54 @@
       await loadAppVersion(); // ✅ [2026-02-05] 버전 표시
       await loadSavedCredentials();
 
-      // ✅ 무료로 체험하기 버튼 활성화 여부 체크
+      // ✅ 무료로 체험하기 버튼 활성화 여부 체크 + 자동 로그인
       try {
         const config = await ipcRenderer.invoke('config:get');
         if (config && config.enableFreeTrialButton === false) {
           const freeBtn = document.getElementById('free-use-button');
           if (freeBtn) freeBtn.style.display = 'none';
           console.log('[Login] 무료 체험 버튼이 비활성화되었습니다. (설정 기반)');
+        }
+
+        // ✅ [2026-03-26] 이전에 무료체험 등록한 기기 → 자동 로그인 시도
+        if (config && config.freeTrialActivated === true) {
+          console.log('[Login] 🔄 이전 무료체험 등록 감지 — 자동 로그인 시도...');
+          const freeBtn = document.getElementById('free-use-button');
+          if (freeBtn) {
+            freeBtn.disabled = true;
+            freeBtn.textContent = '⏳ 자동 로그인 중...';
+          }
+
+          try {
+            // userInfo 없이 호출하면 main.ts에서 검증만 수행 → 실패 시 폼 표시
+            const status = await ipcRenderer.invoke('quota:getStatus');
+            if (status?.success && status?.isFree) {
+              // 할당량 초과 체크
+              const used = Number(status?.quota?.usage?.publish) || 0;
+              const limit = 2;
+              if (status?.quota?.isPaywalled || used >= limit) {
+                console.log('[Login] ⚠️ 무료체험 할당량 소진 — 페이월 표시');
+                const paywallModal = document.getElementById('paywall-modal-backdrop');
+                if (paywallModal) paywallModal.style.display = 'flex';
+                if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = '👑 매일 발행 2회 무료 사용하기'; }
+                initAdminPanel();
+                return;
+              }
+
+              // ✅ 정상 무료체험 사용자 → 자동 진입
+              console.log('[Login] ✅ 무료체험 자동 로그인 성공!');
+              await ipcRenderer.invoke('login:success');
+              window.close();
+              return;
+            } else {
+              // 무료체험 상태가 아님 (만료 등) → 일반 로그인 화면 표시
+              console.log('[Login] ⚠️ 무료체험 상태 확인 실패 — 일반 로그인 화면 표시');
+              if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = '👑 매일 발행 2회 무료 사용하기'; }
+            }
+          } catch (autoErr) {
+            console.error('[Login] 무료체험 자동 로그인 실패:', autoErr);
+            if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = '👑 매일 발행 2회 무료 사용하기'; }
+          }
         }
       } catch (e) {
         console.error('[Login] 설정 로드 중 오류:', e);
