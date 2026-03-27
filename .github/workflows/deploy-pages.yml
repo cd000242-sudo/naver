@@ -1,10 +1,11 @@
-name: Deploy Payment Page to GitHub Pages
+name: Deploy Website to GitHub Pages
 
 on:
   push:
     branches: [main]
     paths:
       - 'payment-page/**'
+      - 'admin/**'
   workflow_dispatch:
 
 permissions:
@@ -26,13 +27,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Prepare deploy directory
+        run: |
+          mkdir -p _site
+          cp -r payment-page/* _site/
+          cp -r admin _site/admin
+      
       - name: Setup Pages
         uses: actions/configure-pages@v5
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: payment-page
+          path: _site
       
       - name: Deploy to GitHub Pages
         id: deployment
