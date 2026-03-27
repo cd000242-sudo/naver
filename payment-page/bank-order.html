@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계좌이체 결제 — Leaders Pro</title>
+    <meta name="description" content="Leaders Pro 계좌이체 결제 페이지. 상품을 선택하고 입금 후 라이선스를 발급받으세요.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .order-container { max-width: 640px; margin: 0 auto; padding: 40px 20px; }
+        .order-title { text-align: center; margin-bottom: 40px; }
+        .order-title h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #c9a84c, #e8d48b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 8px; }
+        .order-title p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .order-step { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px; margin-bottom: 20px; }
+        .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .step-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #c9a84c, #e8d48b); color: #0a0a0f; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .step-label { color: var(--text-primary); font-weight: 700; font-size: 1.1rem; }
+
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .product-option { padding: 16px; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; cursor: pointer; transition: all 0.2s; text-align: center; }
+        .product-option:hover { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.04); }
+        .product-option.selected { border-color: #c9a84c; background: rgba(201,168,76,0.08); box-shadow: 0 0 20px rgba(201,168,76,0.1); }
+        .product-option .po-name { color: var(--text-primary); font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+        .product-option .po-price { color: #c9a84c; font-weight: 800; font-size: 1.1rem; }
+        .product-option .po-period { color: var(--text-muted); font-size: 0.75rem; }
+
+        .product-tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+        .product-tab { padding: 8px 16px; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; background: transparent; color: var(--text-muted); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .product-tab.active { border-color: #c9a84c; color: #c9a84c; background: rgba(201,168,76,0.08); }
+
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; color: var(--text-secondary); font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+        .input-group input { width: 100%; padding: 12px 16px; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; background: rgba(255,255,255,0.04); color: var(--text-primary); font-size: 0.95rem; font-family: inherit; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
+        .input-group input:focus { border-color: rgba(201,168,76,0.5); }
+        .input-group input::placeholder { color: var(--text-muted); }
+
+        .bank-info { background: rgba(68,215,182,0.06); border: 1px solid rgba(68,215,182,0.15); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .bank-info h4 { color: #44d7b6; font-size: 0.9rem; margin: 0 0 12px; }
+        .bank-info .bank-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .bank-info .bank-row:last-child { border-bottom: none; }
+        .bank-info .bank-label { color: var(--text-muted); font-size: 0.85rem; }
+        .bank-info .bank-value { color: var(--text-primary); font-weight: 700; font-size: 0.85rem; }
+        .bank-info .bank-copy { color: #c9a84c; cursor: pointer; font-size: 0.75rem; margin-left: 8px; }
+
+        .btn-order { width: 100%; padding: 16px; border: none; border-radius: 12px; background: linear-gradient(135deg, #c9a84c, #d4b85a); color: #0a0a0f; font-size: 1rem; font-weight: 800; cursor: pointer; font-family: inherit; transition: all 0.2s; letter-spacing: -0.3px; }
+        .btn-order:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(201,168,76,0.3); }
+        .btn-order:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .order-result { display: none; text-align: center; padding: 40px 20px; }
+        .order-result.show { display: block; }
+        .result-icon { font-size: 3rem; margin-bottom: 16px; }
+        .result-title { color: var(--text-primary); font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+        .result-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 24px; }
+        .result-order-id { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; padding: 14px; margin-bottom: 20px; }
+        .result-order-id span { color: #c9a84c; font-family: monospace; font-weight: 800; font-size: 1.1rem; }
+
+        .order-notice { color: var(--text-muted); font-size: 0.8rem; line-height: 1.6; text-align: center; margin-top: 16px; }
+        .order-notice a { color: #c9a84c; text-decoration: underline; }
+
+        .shake { animation: shake 0.4s ease-in-out; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+        @media (max-width: 480px) {
+            .product-grid { grid-template-columns: 1fr; }
+            .order-container { padding: 20px 16px; }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
+                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">가격</a>
+                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
+                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
+                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
+                <a href="lookup.html" class="nav-link">주문 조회</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="section section-dark" style="padding-top: 120px; min-height: 100vh;">
+        <div class="order-container" id="order-form">
+            <div class="order-title">
+                <h1>💰 계좌이체 결제</h1>
+                <p>상품 선택 → 정보 입력 → 입금 → 라이선스 발급</p>
+            </div>
+
+            <!-- Step 1: 제품 선택 -->
+            <div class="order-step">
+                <div class="step-header">
+                    <div class="step-num">1</div>
+                    <div class="step-label">제품 선택</div>
+                </div>
+                <div class="product-tabs" id="product-tabs">
+                    <button class="product-tab active" onclick="switchTab('naver')">Better Life Naver</button>
+                    <button class="product-tab" onclick="switchTab('orbit')">Leaders Orbit</button>
+                    <button class="product-tab" onclick="switchTab('tistory')">Leaders Tistory</button>
+                    <button class="product-tab" onclick="switchTab('leword')">Leword</button>
+                </div>
+                <div class="product-grid" id="product-grid"></div>
+            </div>
+
+            <!-- Step 2: 정보 입력 -->
+            <div class="order-step">
+                <div class="step-header">
+                    <div class="step-num">2</div>
+                    <div class="step-label">정보 입력</div>
+                </div>
+                <div class="input-group">
+                    <label>입금자명 (실명)</label>
+                    <input type="text" id="buyer-name" placeholder="홍길동" maxlength="20">
+                </div>
+                <div class="input-group">
+                    <label>이메일 (라이선스 코드 수신)</label>
+                    <input type="email" id="buyer-email" placeholder="example@email.com">
+                </div>
+            </div>
+
+            <!-- Step 3: 입금 안내 -->
+            <div class="order-step">
+                <div class="step-header">
+                    <div class="step-num">3</div>
+                    <div class="step-label">입금 계좌 안내</div>
+                </div>
+                <div class="bank-info">
+                    <h4>💰 아래 계좌로 입금해주세요</h4>
+                    <div class="bank-row">
+                        <span class="bank-label">은행</span>
+                        <span class="bank-value">토스뱅크</span>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">계좌번호</span>
+                        <span class="bank-value">1000-1770-4358 <span class="bank-copy" onclick="copyAccount()">📋 복사</span></span>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">예금주</span>
+                        <span class="bank-value">박성현</span>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">입금 금액</span>
+                        <span class="bank-value" id="display-amount">상품을 선택해주세요</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-order" id="btn-order" disabled onclick="submitOrder()">상품을 선택해주세요</button>
+
+            <div class="order-notice">
+                주문 접수 후 입금이 확인되면 라이선스 코드가 이메일로 발송됩니다.<br>
+                결제 진행 시 <a href="terms.html" target="_blank">이용약관</a> 및 <a href="privacy.html" target="_blank">개인정보처리방침</a>에 동의하는 것으로 간주됩니다.
+            </div>
+        </div>
+
+        <!-- 주문 완료 화면 -->
+        <div class="order-container order-result" id="order-result">
+            <div class="result-icon">✅</div>
+            <div class="result-title">주문이 접수되었습니다!</div>
+            <div class="result-desc">
+                아래 계좌로 입금해주세요.<br>
+                입금 확인 후 <strong>라이선스 코드</strong>가 이메일로 발송됩니다.
+            </div>
+            <div class="result-order-id">
+                주문번호: <span id="result-order-id"></span>
+            </div>
+            <div class="bank-info">
+                <h4>💰 입금 계좌</h4>
+                <div class="bank-row">
+                    <span class="bank-label">은행</span>
+                    <span class="bank-value">토스뱅크</span>
+                </div>
+                <div class="bank-row">
+                    <span class="bank-label">계좌번호</span>
+                    <span class="bank-value">1000-1770-4358</span>
+                </div>
+                <div class="bank-row">
+                    <span class="bank-label">예금주</span>
+                    <span class="bank-value">박성현</span>
+                </div>
+                <div class="bank-row">
+                    <span class="bank-label">입금 금액</span>
+                    <span class="bank-value" id="result-amount"></span>
+                </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 20px;">문의: <a href="mailto:cd000242@gmail.com" style="color: #c9a84c;">cd000242@gmail.com</a> | <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" style="color: #FEE500;">카카오톡 1:1 문의</a></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+                <span>Leaders Pro</span>
+            </div>
+            <div class="footer-links">
+                <a href="terms.html">이용약관</a>
+                <a href="refund.html">환불정책</a>
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="lookup.html">주문 조회</a>
+                <a href="mailto:cd000242@gmail.com">고객 문의</a>
+            </div>
+            <div class="footer-biz">
+                <p>상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802</p>
+                <p>주소: 경남 김해시 장유로334번길9</p>
+                <p>이메일: tjdgus24280@naver.com | 전화: 010-7545-1645</p>
+            </div>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
+
+        const ALL_PRODUCTS = {
+            naver: [
+                { id: 'naver-monthly', name: '1개월', price: 50000, period: '/ 월' },
+                { id: 'naver-quarterly', name: '3개월', price: 120000, period: '월 40,000원' },
+                { id: 'naver-yearly', name: '1년', price: 400000, period: '월 33,333원' },
+                { id: 'naver-lifetime', name: '영구제', price: 2000000, period: '일회성' },
+            ],
+            orbit: [
+                { id: 'orbit-monthly', name: '1개월', price: 60000, period: '/ 월' },
+                { id: 'orbit-quarterly', name: '3개월', price: 150000, period: '월 50,000원' },
+                { id: 'orbit-yearly', name: '1년', price: 600000, period: '월 50,000원' },
+                { id: 'orbit-lifetime', name: '영구제', price: 3000000, period: '일회성' },
+            ],
+            tistory: [
+                { id: 'tistory-monthly', name: '1개월', price: 30000, period: '/ 월' },
+                { id: 'tistory-quarterly', name: '3개월', price: 80000, period: '월 26,667원' },
+                { id: 'tistory-yearly', name: '1년', price: 300000, period: '월 25,000원' },
+                { id: 'tistory-lifetime', name: '영구제', price: 1500000, period: '일회성' },
+            ],
+            leword: [
+                { id: 'leword-monthly', name: '1개월', price: 30000, period: '/ 월' },
+                { id: 'leword-quarterly', name: '3개월', price: 100000, period: '월 33,333원' },
+                { id: 'leword-yearly', name: '1년', price: 300000, period: '월 25,000원' },
+            ],
+        };
+
+        const PRODUCT_LABELS = {
+            naver: 'Better Life Naver',
+            orbit: 'Leaders Orbit',
+            tistory: 'Leaders Tistory',
+            leword: 'Leword',
+        };
+
+        let currentTab = 'naver';
+        let selectedProduct = null;
+
+        function switchTab(tab) {
+            currentTab = tab;
+            selectedProduct = null;
+            document.querySelectorAll('.product-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            renderProducts();
+            updateButton();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            const products = ALL_PRODUCTS[currentTab];
+            grid.innerHTML = products.map(p => `
+                <div class="product-option ${selectedProduct?.id === p.id ? 'selected' : ''}" onclick="selectProduct('${p.id}')">
+                    <div class="po-name">${p.name}</div>
+                    <div class="po-price">${p.price.toLocaleString()}원</div>
+                    <div class="po-period">${p.period}</div>
+                </div>
+            `).join('');
+        }
+
+        function selectProduct(id) {
+            const products = ALL_PRODUCTS[currentTab];
+            selectedProduct = products.find(p => p.id === id);
+            renderProducts();
+            updateButton();
+            document.getElementById('display-amount').textContent = selectedProduct.price.toLocaleString() + '원';
+        }
+
+        function updateButton() {
+            const btn = document.getElementById('btn-order');
+            if (selectedProduct) {
+                btn.disabled = false;
+                btn.textContent = `${selectedProduct.price.toLocaleString()}원 주문 접수하기`;
+            } else {
+                btn.disabled = true;
+                btn.textContent = '상품을 선택해주세요';
+            }
+        }
+
+        function copyAccount() {
+            navigator.clipboard.writeText('1000-1770-4358').then(() => {
+                const el = document.querySelector('.bank-copy');
+                el.textContent = '✅ 복사됨';
+                setTimeout(() => el.textContent = '📋 복사', 2000);
+            });
+        }
+
+        async function submitOrder() {
+            if (!selectedProduct) return;
+
+            const nameInput = document.getElementById('buyer-name');
+            const emailInput = document.getElementById('buyer-email');
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            if (!name || name.length < 2) {
+                nameInput.classList.add('shake');
+                nameInput.focus();
+                setTimeout(() => nameInput.classList.remove('shake'), 500);
+                return;
+            }
+            if (!email || !email.includes('@')) {
+                emailInput.classList.add('shake');
+                emailInput.focus();
+                setTimeout(() => emailInput.classList.remove('shake'), 500);
+                return;
+            }
+
+            const btn = document.getElementById('btn-order');
+            btn.disabled = true;
+            btn.textContent = '접수 중...';
+
+            const productLabel = PRODUCT_LABELS[currentTab] + ' ' + selectedProduct.name;
+
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({
+                        action: 'bank-order',
+                        name: name,
+                        email: email,
+                        product: productLabel,
+                        amount: selectedProduct.price,
+                    }),
+                });
+                const result = await res.json();
+
+                if (result.ok) {
+                    document.getElementById('order-form').style.display = 'none';
+                    document.getElementById('order-result').classList.add('show');
+                    document.getElementById('result-order-id').textContent = result.orderId;
+                    document.getElementById('result-amount').textContent = selectedProduct.price.toLocaleString() + '원';
+                } else {
+                    alert(result.error || '주문 접수에 실패했습니다.');
+                    btn.disabled = false;
+                    btn.textContent = `${selectedProduct.price.toLocaleString()}원 주문 접수하기`;
+                }
+            } catch (err) {
+                alert('서버 연결 오류: ' + err.message);
+                btn.disabled = false;
+                btn.textContent = `${selectedProduct.price.toLocaleString()}원 주문 접수하기`;
+            }
+        }
+
+        // Init
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas'); if (!canvas) return;
+            const ctx = canvas.getContext('2d'); let particles = []; let w, h;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 3; } resize(); window.addEventListener('resize', resize);
+            class Particle { constructor() { this.reset(); } reset() { this.x = Math.random() * w; this.y = Math.random() * h; this.size = Math.random() * 2 + 0.5; this.speedY = -(Math.random() * 0.3 + 0.1); this.speedX = (Math.random() - 0.5) * 0.2; this.opacity = Math.random() * 0.5 + 0.1; this.gold = Math.random() > 0.3; } update() { this.y += this.speedY; this.x += this.speedX; this.opacity += (Math.random() - 0.5) * 0.01; this.opacity = Math.max(0.05, Math.min(0.6, this.opacity)); if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; } } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.gold ? `rgba(201, 168, 76, ${this.opacity})` : `rgba(255, 255, 255, ${this.opacity * 0.4})`; ctx.fill(); } }
+            for (let i = 0; i < 60; i++) particles.push(new Particle());
+            function animate() { ctx.clearRect(0, 0, w, h); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); } animate();
+        }
+        function initNavbar() { const navbar = document.getElementById('navbar'); window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); }); }
+        function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
+        function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initParticles();
+            initNavbar();
+            renderProducts();
+        });
+    </script>
+</body>
+</html>
