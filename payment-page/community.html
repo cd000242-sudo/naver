@@ -80,6 +80,26 @@
         .tip-card-title { font-weight: 700; color: var(--text-primary); margin-bottom: 8px; font-size: 1.05rem; }
         .tip-card-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; }
     </style>
+
+    <style>
+        /* CHERRY BLOSSOM */
+        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
+        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
+        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
+        /* MUSIC TOGGLE */
+        .music-toggle { position: fixed; bottom: 170px; right: 24px; z-index: 10000; width: 52px; height: 52px; border-radius: 50%; background: rgba(255,183,197,0.25); border: 1px solid rgba(255,183,197,0.5); backdrop-filter: blur(12px); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(255,107,138,0.2); }
+        .music-toggle:hover { transform: scale(1.1); background: rgba(255,183,197,0.4); box-shadow: 0 6px 30px rgba(255,107,138,0.4); }
+        .music-toggle.playing { animation: musicPulse 1.5s ease-in-out infinite; }
+        @keyframes musicPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(255,107,138,0.2); } 50% { box-shadow: 0 4px 30px rgba(255,107,138,0.6), 0 0 60px rgba(255,183,197,0.3); } }
+        .music-hint { position: fixed; bottom: 108px; right: 84px; z-index: 10000; background: rgba(255,183,197,0.92); color: #1a0a10; padding: 10px 16px; border-radius: 12px; font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 20px rgba(255,107,138,0.3); animation: hintFadeIn 0.5s ease-out both, hintFadeOut 0.5s 6s ease-in both; pointer-events: none; }
+        .music-hint::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-left-color: rgba(255,183,197,0.92); }
+        @keyframes hintFadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes hintFadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
+        .music-toggle.attention { animation: bounceAttention 1s ease-in-out 3; }
+        @keyframes bounceAttention { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        @media (max-width: 768px) { .music-toggle { bottom: 90px; } }
+    </style>
 </head>
 
 <body>
@@ -373,5 +393,72 @@
         <div class="kakao-float-icon">💬</div>
         <span class="kakao-float-text">1:1 문의</span>
     </a>
+
+<!-- CHERRY BLOSSOM PETALS -->
+<div class="petal-container" id="petalContainer"></div>
+
+<!-- MUSIC TOGGLE -->
+<button class="music-toggle attention" id="musicToggle" title="🌸 봄 배경음악 켜기/끄기">🔇</button>
+<div class="music-hint" id="musicHint">🌸 클릭하면 봄 음악이 흘러요</div>
+
+<script>
+// Cherry blossom petals
+(function() {
+    const container = document.getElementById('petalContainer');
+    if (!container) return;
+    const PETAL_COUNT = 30;
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        const size = Math.random() * 14 + 8;
+        petal.style.width = size + 'px';
+        petal.style.height = size + 'px';
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.animationDuration = (Math.random() * 8 + 7) + 's';
+        petal.style.animationDelay = (Math.random() * 10) + 's';
+        container.appendChild(petal);
+    }
+    for (let i = 0; i < PETAL_COUNT; i++) createPetal();
+})();
+
+// YouTube IFrame API Music
+(function() {
+    const btn = document.getElementById('musicToggle');
+    if (!btn) return;
+    let player = null, isPlaying = false, apiReady = false;
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+    const playerDiv = document.createElement('div');
+    playerDiv.id = 'yt-music-player';
+    playerDiv.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
+    document.body.appendChild(playerDiv);
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('yt-music-player', {
+            videoId: 'r4EHi65fa-0',
+            playerVars: { autoplay: 0, loop: 1, playlist: 'r4EHi65fa-0', controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0 },
+            events: {
+                onReady: function() { apiReady = true; player.setVolume(40); },
+                onStateChange: function(e) { if (e.data === YT.PlayerState.ENDED) { player.seekTo(0); player.playVideo(); } }
+            }
+        });
+    };
+    btn.addEventListener('click', function() {
+        var hint = document.getElementById('musicHint');
+        if (hint) hint.remove();
+        btn.classList.remove('attention');
+        if (!apiReady) return;
+        if (!isPlaying) {
+            player.playVideo(); isPlaying = true;
+            btn.textContent = '\uD83C\uDFB5'; btn.classList.add('playing');
+            btn.title = '\uD83C\uDF38 봄 배경음악 끄기';
+        } else {
+            player.pauseVideo(); isPlaying = false;
+            btn.textContent = '\uD83D\uDD07'; btn.classList.remove('playing');
+            btn.title = '\uD83C\uDF38 봄 배경음악 켜기';
+        }
+    });
+})();
+</script>
 </body>
 </html>
