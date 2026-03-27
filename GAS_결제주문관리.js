@@ -78,6 +78,22 @@ function doPost(e) {
       case 'update-naver-accounts':
         return handleUpdateNaverAccounts(data);
 
+      // ✅ [2026-03-26] 무료 체험 사용자 관리
+      case 'trial-activate':
+        return handleTrialActivate(data);
+      case 'trial-list':
+        return handleTrialList(data);
+      case 'trial-block':
+        return handleTrialBlock(data);
+
+      // ✅ [2026-03-27] 계좌이체 주문 관리
+      case 'bank-order':
+        return handleBankOrder(data);
+      case 'bank-approve':
+        return handleBankApprove(data);
+      case 'bank-list':
+        return handleBankList(data);
+
       default:
         return ContentService.createTextOutput(JSON.stringify({
           ok: false, error: 'Unknown POST action: ' + action
@@ -670,4 +686,430 @@ function findRowByCode(sheet, code) {
     if (String(data[i][codeCol]).trim() === code.trim()) return i + 1;
   }
   return null;
+}
+
+
+// ═══════════════════════════════════════════════════════════
+// ▣ 12. 무료 체험 사용자 관리 — TrialUsers 시트
+// ═══════════════════════════════════════════════════════════
+
+function getTrialSheet() {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var sheet = ss.getSheetByName('TrialUsers');
+  if (!sheet) {
+    sheet = ss.insertSheet('TrialUsers');
+    sheet.appendRow(['email', 'nickname', 'phone', 'deviceId', 'appVersion', 'blocked', 'registeredAt', 'lastActiveAt', 'totalActivations']);
+    sheet.getRange(1, 1, 1, 9)
+      .setFontWeight('bold')
+      .setBackground('#6366f1')
+      .setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+    [220, 150, 150, 250, 100, 80, 180, 180, 100].forEach(function (w, i) {
+      sheet.setColumnWidth(i + 1, w);
+    });
+  }
+  return sheet;
+}
+
+// ── trial-activate: 앱에서 무료 체험 시 호출 ──
+// ✅ [2026-03-26 v2] 배치 setValue, deviceId/phone 교차 차단, TextFinder 최적화
+function handleTrialActivate(data) {
+  var email = (data.email || '').trim().toLowerCase();
+  var nickname = (data.nickname || '').trim();
+  var phone = (data.phone || '').trim().replace(/[-\s]/g, '');
+  var deviceId = data.deviceId || '';
+  var appVersion = data.appVersion || '';
+
+  // ✅ 필수 입력 검증 강화: 하나라도 비면 거부
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '올바른 이메일을 입력하세요.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  if (!nickname || nickname.length < 2) {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '닉네임을 2자 이상 입력하세요.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  if (!phone || !/^01[0-9]{8,9}$/.test(phone)) {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '올바른 전화번호를 입력하세요. (예: 01012345678)'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var sheet = getTrialSheet();
+  var allData = sheet.getDataRange().getValues();
+  var now = new Date().toISOString();
+
+  // ✅ 차단 교차 검사: 이메일뿐 아니라 deviceId·phone이 차단된 사용자와 동일하면 거부
+  for (var i = 1; i < allData.length; i++) {
+    var isBlocked = String(allData[i][5]).toLowerCase() === 'true' || String(allData[i][5]) === 'Y';
+    if (!isBlocked) continue;
+
+    var rowEmail = String(allData[i][0]).trim().toLowerCase();
+    var rowPhone = String(allData[i][2]).trim();
+    var rowDeviceId = String(allData[i][3]).trim();
+
+    if (rowEmail === email ||
+        (deviceId && rowDeviceId && rowDeviceId === deviceId) ||
+        (phone && rowPhone && rowPhone === phone)) {
+      Logger.log('[TrialActivate] 차단 교차 감지: email=' + email + ' matched blocked row=' + rowEmail);
+      return ContentService.createTextOutput(JSON.stringify({
+        ok: false, blocked: true, error: '차단된 사용자입니다. 관리자에게 문의하세요.'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+
+  // ✅ 기존 사용자 찾기 (이메일 기준 — TextFinder 최적화)
+  var finder = sheet.getRange('A:A').createTextFinder(email).matchCase(false).matchEntireCell(true);
+  var found = finder.findNext();
+
+  if (found) {
+    var rowNum = found.getRow();
+    var rowData = sheet.getRange(rowNum, 1, 1, 9).getValues()[0];
+    var count = Number(rowData[8]) || 0;
+
+    // ✅ 배치 업데이트: 1회 setValues 호출로 6개 셀 동시 갱신
+    sheet.getRange(rowNum, 2, 1, 8).setValues([[
+      nickname, phone, deviceId, appVersion, rowData[5], rowData[6], now, count + 1
+    ]]);
+    SpreadsheetApp.flush();
+
+    Logger.log('[TrialActivate] 기존 사용자 업데이트: ' + email + ', count=' + (count + 1));
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: true, message: 'existing', activations: count + 1
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // 신규 사용자 등록
+  sheet.appendRow([email, nickname, phone, deviceId, appVersion, 'false', now, now, 1]);
+  SpreadsheetApp.flush();
+
+  Logger.log('[TrialActivate] 신규 사용자 등록: ' + email);
+  return ContentService.createTextOutput(JSON.stringify({
+    ok: true, message: 'new', activations: 1
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ── trial-list: 관리자 패널에서 체험 사용자 목록 조회 ──
+function handleTrialList(data) {
+  var adminToken = data.adminToken || '';
+  if (adminToken !== 'qkrtjdgus2021645') {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '관리자 인증 실패'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var sheet = getTrialSheet();
+  var allData = sheet.getDataRange().getValues();
+  var users = [];
+
+  for (var i = 1; i < allData.length; i++) {
+    users.push({
+      email: String(allData[i][0] || ''),
+      nickname: String(allData[i][1] || ''),
+      phone: String(allData[i][2] || ''),
+      deviceId: String(allData[i][3] || ''),
+      appVersion: String(allData[i][4] || ''),
+      blocked: String(allData[i][5] || 'false'),
+      registeredAt: String(allData[i][6] || ''),
+      lastActiveAt: String(allData[i][7] || ''),
+      totalActivations: Number(allData[i][8]) || 0
+    });
+  }
+
+  // 최신순 정렬
+  users.sort(function (a, b) { return (b.lastActiveAt || '').localeCompare(a.lastActiveAt || ''); });
+
+  return ContentService.createTextOutput(JSON.stringify({
+    ok: true, total: users.length, users: users
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ── trial-block: 체험 사용자 차단/해제 ──
+function handleTrialBlock(data) {
+  var adminToken = data.adminToken || '';
+  if (adminToken !== 'qkrtjdgus2021645') {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '관리자 인증 실패'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var email = (data.email || '').trim().toLowerCase();
+  var block = data.block !== false; // default: true (차단)
+
+  if (!email) {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '이메일이 필요합니다.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var sheet = getTrialSheet();
+
+  // ✅ TextFinder로 최적화된 이메일 검색
+  var finder = sheet.getRange('A:A').createTextFinder(email).matchCase(false).matchEntireCell(true);
+  var found = finder.findNext();
+
+  if (found) {
+    var rowNum = found.getRow();
+    sheet.getRange(rowNum, 6).setValue(block ? 'true' : 'false');
+    SpreadsheetApp.flush();
+
+    Logger.log('[TrialBlock] ' + email + ' → ' + (block ? '차단' : '해제'));
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: true, email: email, blocked: block
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  return ContentService.createTextOutput(JSON.stringify({
+    ok: false, error: '해당 이메일을 찾을 수 없습니다.'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+
+// ═══════════════════════════════════════════════════════════
+// ▣ 13. 계좌이체 주문 관리 — BankOrders 시트
+// ═══════════════════════════════════════════════════════════
+
+function getBankOrderSheet() {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var sheet = ss.getSheetByName('계좌이체주문');
+  if (!sheet) {
+    sheet = ss.insertSheet('계좌이체주문');
+    sheet.appendRow(['orderId', 'name', 'email', 'product', 'amount', 'status', 'licenseCode', 'createdAt', 'approvedAt']);
+    sheet.getRange(1, 1, 1, 9)
+      .setFontWeight('bold')
+      .setBackground('#e95e2c')
+      .setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+    [200, 100, 220, 200, 100, 80, 300, 180, 180].forEach(function (w, i) {
+      sheet.setColumnWidth(i + 1, w);
+    });
+  }
+  return sheet;
+}
+
+// ── bank-order: 고객 주문 접수 ──
+function handleBankOrder(data) {
+  var name = (data.name || '').trim();
+  var email = (data.email || '').trim().toLowerCase();
+  var product = data.product || '';
+  var amount = Number(data.amount) || 0;
+
+  if (!name || name.length < 2) {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '이름을 2자 이상 입력하세요.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '올바른 이메일을 입력하세요.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  if (!product || !amount) {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '상품 정보가 올바르지 않습니다.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var orderId = 'BK-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+  var now = new Date().toISOString();
+
+  var sheet = getBankOrderSheet();
+  sheet.appendRow([orderId, name, email, product, amount, 'pending', '', now, '']);
+  SpreadsheetApp.flush();
+
+  // ── 관리자 이메일 알림 ──
+  try {
+    MailApp.sendEmail({
+      to: 'cd000242@gmail.com',
+      subject: '🔔 [Leaders Pro] 새 계좌이체 주문 접수 — ' + name,
+      htmlBody: ''
+        + '<div style="max-width:500px;margin:0 auto;font-family:sans-serif;background:#0a0a0f;border-radius:16px;overflow:hidden;border:1px solid rgba(233,94,44,0.4);">'
+        + '  <div style="background:linear-gradient(135deg,#e95e2c,#ff9800);padding:24px 32px;text-align:center;">'
+        + '    <h1 style="margin:0;font-size:20px;color:#fff;font-weight:800;">🔔 새 주문 접수</h1>'
+        + '  </div>'
+        + '  <div style="padding:28px 32px;">'
+        + '    <p style="color:#e8e6e3;font-size:14px;margin:0 0 16px;">계좌이체 주문이 접수되었습니다.</p>'
+        + '    <table style="width:100%;border-collapse:collapse;">'
+        + '      <tr><td style="color:#8a8686;padding:6px 0;font-size:13px;">주문번호</td><td style="color:#e8e6e3;padding:6px 0;font-size:13px;font-weight:600;">' + orderId + '</td></tr>'
+        + '      <tr><td style="color:#8a8686;padding:6px 0;font-size:13px;">입금자명</td><td style="color:#e8e6e3;padding:6px 0;font-size:13px;font-weight:600;">' + name + '</td></tr>'
+        + '      <tr><td style="color:#8a8686;padding:6px 0;font-size:13px;">이메일</td><td style="color:#e8e6e3;padding:6px 0;font-size:13px;">' + email + '</td></tr>'
+        + '      <tr><td style="color:#8a8686;padding:6px 0;font-size:13px;">상품</td><td style="color:#c9a84c;padding:6px 0;font-size:13px;font-weight:600;">' + product + '</td></tr>'
+        + '      <tr><td style="color:#8a8686;padding:6px 0;font-size:13px;">금액</td><td style="color:#e8e6e3;padding:6px 0;font-size:13px;font-weight:700;">' + amount.toLocaleString() + '원</td></tr>'
+        + '    </table>'
+        + '    <p style="color:#44d7b6;font-size:12px;margin:20px 0 0;">입금 확인 후 관리자 패널에서 승인해주세요.</p>'
+        + '  </div>'
+        + '</div>'
+    });
+  } catch (mailErr) {
+    Logger.log('[BankOrder] 관리자 알림 메일 오류: ' + mailErr.message);
+  }
+
+  // ── 고객 주문 확인 메일 ──
+  try {
+    MailApp.sendEmail({
+      to: email,
+      subject: '📋 [Leaders Pro] 주문이 접수되었습니다 — ' + product,
+      htmlBody: ''
+        + '<div style="max-width:520px;margin:0 auto;font-family:sans-serif;background:#0a0a0f;border-radius:16px;overflow:hidden;border:1px solid rgba(201,168,76,0.3);">'
+        + '  <div style="background:linear-gradient(135deg,#c9a84c,#e8d48b);padding:28px 32px;text-align:center;">'
+        + '    <h1 style="margin:0;font-size:22px;color:#0a0a0f;font-weight:800;">📋 주문 접수 완료</h1>'
+        + '  </div>'
+        + '  <div style="padding:32px;">'
+        + '    <p style="color:#e8e6e3;font-size:15px;margin:0 0 20px;">' + name + '님, 주문이 접수되었습니다!</p>'
+        + '    <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:20px;margin-bottom:20px;">'
+        + '      <p style="color:#8a8686;font-size:12px;margin:0 0 4px;">주문번호</p>'
+        + '      <p style="color:#c9a84c;font-size:16px;font-weight:800;margin:0 0 12px;font-family:monospace;">' + orderId + '</p>'
+        + '      <p style="color:#8a8686;font-size:12px;margin:0 0 4px;">상품</p>'
+        + '      <p style="color:#e8e6e3;font-size:14px;font-weight:600;margin:0 0 12px;">' + product + '</p>'
+        + '      <p style="color:#8a8686;font-size:12px;margin:0 0 4px;">결제 금액</p>'
+        + '      <p style="color:#e8e6e3;font-size:18px;font-weight:800;margin:0;">' + amount.toLocaleString() + '원</p>'
+        + '    </div>'
+        + '    <div style="background:rgba(68,215,182,0.06);border:1px solid rgba(68,215,182,0.15);border-radius:8px;padding:14px;margin-bottom:20px;">'
+        + '      <p style="color:#44d7b6;font-size:13px;font-weight:600;margin:0 0 8px;">💰 입금 안내</p>'
+        + '      <p style="color:#e8e6e3;font-size:13px;margin:0;line-height:1.8;">'
+        + '        은행: <strong>토스뱅크</strong><br>'
+        + '        계좌: <strong>1000-1770-4358</strong><br>'
+        + '        예금주: <strong>박성현</strong><br>'
+        + '        금액: <strong>' + amount.toLocaleString() + '원</strong>'
+        + '      </p>'
+        + '    </div>'
+        + '    <p style="color:#8a8686;font-size:12px;line-height:1.6;margin:0;">입금 확인 후 라이선스 코드가 이메일로 발송됩니다.<br>문의: cd000242@gmail.com</p>'
+        + '  </div>'
+        + '</div>'
+    });
+  } catch (mailErr2) {
+    Logger.log('[BankOrder] 고객 확인 메일 오류: ' + mailErr2.message);
+  }
+
+  Logger.log('[BankOrder] 주문 접수: orderId=' + orderId + ', name=' + name + ', product=' + product);
+
+  return ContentService.createTextOutput(JSON.stringify({
+    ok: true, orderId: orderId, message: '주문이 접수되었습니다.'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ── bank-approve: 관리자 승인 → 코드 발급 + 고객 이메일 ──
+function handleBankApprove(data) {
+  var adminToken = data.adminToken || '';
+  if (adminToken !== 'qkrtjdgus2021645') {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '관리자 인증 실패'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var orderId = (data.orderId || '').trim();
+  var reject = data.reject === true;
+
+  if (!orderId) {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '주문번호가 필요합니다.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var sheet = getBankOrderSheet();
+  var allData = sheet.getDataRange().getValues();
+
+  for (var i = 1; i < allData.length; i++) {
+    if (String(allData[i][0]).trim() === orderId) {
+      var rowNum = i + 1;
+      var currentStatus = String(allData[i][5]);
+
+      if (currentStatus !== 'pending') {
+        return ContentService.createTextOutput(JSON.stringify({
+          ok: false, error: '이미 처리된 주문입니다. (상태: ' + currentStatus + ')'
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+
+      var now = new Date().toISOString();
+
+      if (reject) {
+        sheet.getRange(rowNum, 6).setValue('rejected');
+        sheet.getRange(rowNum, 9).setValue(now);
+        SpreadsheetApp.flush();
+        Logger.log('[BankApprove] 거절: orderId=' + orderId);
+        return ContentService.createTextOutput(JSON.stringify({
+          ok: true, orderId: orderId, status: 'rejected'
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+
+      // 승인 처리
+      var code = generateLicenseCode();
+      var email = String(allData[i][2]);
+      var product = String(allData[i][3]);
+
+      sheet.getRange(rowNum, 6).setValue('approved');
+      sheet.getRange(rowNum, 7).setValue(code);
+      sheet.getRange(rowNum, 9).setValue(now);
+      SpreadsheetApp.flush();
+
+      // 주문내역 시트에도 기록
+      try {
+        var orderSheet = getOrderSheet();
+        orderSheet.appendRow([
+          orderId, 'bank-transfer', Number(allData[i][4]), email,
+          '계좌이체', product, code, 'completed', now
+        ]);
+        SpreadsheetApp.flush();
+      } catch (orderErr) {
+        Logger.log('[BankApprove] 주문내역 저장 오류: ' + orderErr.message);
+      }
+
+      // 고객에게 라이선스 코드 발송
+      try {
+        sendLicenseEmail(email, code, product);
+      } catch (mailErr) {
+        Logger.log('[BankApprove] 이메일 발송 오류: ' + mailErr.message);
+      }
+
+      Logger.log('[BankApprove] 승인: orderId=' + orderId + ', code=' + code);
+      return ContentService.createTextOutput(JSON.stringify({
+        ok: true, orderId: orderId, code: code, status: 'approved'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+
+  return ContentService.createTextOutput(JSON.stringify({
+    ok: false, error: '주문번호를 찾을 수 없습니다.'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ── bank-list: 관리자 패널에서 주문 목록 조회 ──
+function handleBankList(data) {
+  var adminToken = data.adminToken || '';
+  if (adminToken !== 'qkrtjdgus2021645') {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '관리자 인증 실패'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var statusFilter = data.status || 'all'; // 'pending', 'approved', 'rejected', 'all'
+  var sheet = getBankOrderSheet();
+  var allData = sheet.getDataRange().getValues();
+  var orders = [];
+
+  for (var i = 1; i < allData.length; i++) {
+    var status = String(allData[i][5] || 'pending');
+    if (statusFilter !== 'all' && status !== statusFilter) continue;
+
+    orders.push({
+      orderId: String(allData[i][0] || ''),
+      name: String(allData[i][1] || ''),
+      email: String(allData[i][2] || ''),
+      product: String(allData[i][3] || ''),
+      amount: Number(allData[i][4]) || 0,
+      status: status,
+      licenseCode: String(allData[i][6] || ''),
+      createdAt: String(allData[i][7] || ''),
+      approvedAt: String(allData[i][8] || '')
+    });
+  }
+
+  // 최신순 정렬
+  orders.sort(function (a, b) { return (b.createdAt || '').localeCompare(a.createdAt || ''); });
+
+  return ContentService.createTextOutput(JSON.stringify({
+    ok: true, total: orders.length, orders: orders
+  })).setMimeType(ContentService.MimeType.JSON);
 }
