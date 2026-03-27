@@ -1203,6 +1203,19 @@ body {
   color: var(--text-muted);
 }
 
+.footer-biz {
+  margin: 16px 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-glass);
+}
+
+.footer-biz p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin: 0;
+}
+
 /* ========== Animations ========== */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
