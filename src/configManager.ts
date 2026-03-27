@@ -124,6 +124,7 @@ export interface AppConfig {
 }
 
 const CONFIG_FILE = 'settings.json';
+const LAST_USER_FILE = '.last_active_user';
 
 let cachedConfig: AppConfig | null = null;
 let configPath: string | null = null;
@@ -131,6 +132,24 @@ let configPath: string | null = null;
 /** ✅ [2026-02-26] 계정별 설정 파일 지원 */
 let _activeUserId: string = '';
 let _userConfigPaths: Map<string, string> = new Map();
+
+/** ✅ [2026-03-27] 마지막 활성 사용자 ID 저장/로드 */
+async function saveLastActiveUserId(userId: string): Promise<void> {
+  try {
+    const filePath = path.join(app.getPath('userData'), LAST_USER_FILE);
+    await fs.writeFile(filePath, userId, 'utf-8');
+  } catch { /* 비필수 */ }
+}
+
+async function loadLastActiveUserId(): Promise<string> {
+  try {
+    const filePath = path.join(app.getPath('userData'), LAST_USER_FILE);
+    const userId = (await fs.readFile(filePath, 'utf-8')).trim();
+    return userId;
+  } catch {
+    return '';
+  }
+}
 
 async function ensureConfigPath(userId?: string): Promise<string> {
   if (!app.isReady()) {
@@ -166,10 +185,27 @@ async function ensureConfigPath(userId?: string): Promise<string> {
     return userPath;
   }
 
-  // 기본 경로
-  if (configPath) return configPath;
-  configPath = path.join(app.getPath('userData'), CONFIG_FILE);
-  console.log('[Config] 설정 파일 경로:', configPath);
+  // ✅ [2026-03-27 FIX] 기본 경로 — 마지막 활성 사용자의 계정별 파일이 있으면 우선 사용
+  // 앱 재시작 시 로그인 전에도 이전 세션의 API 키가 보이도록 함
+  if (!configPath) {
+    const lastUserId = await loadLastActiveUserId();
+    if (lastUserId) {
+      const userConfigFile = `settings_${lastUserId.replace(/[^a-zA-Z0-9_-]/g, '_')}.json`;
+      const userPath = path.join(app.getPath('userData'), userConfigFile);
+      try {
+        await fs.access(userPath);
+        configPath = userPath;
+        _activeUserId = lastUserId;
+        _userConfigPaths.set(lastUserId, userPath);
+        console.log(`[Config] ✅ 마지막 활성 사용자(${lastUserId}) 설정 파일 자동 로드:`, userPath);
+        return configPath;
+      } catch {
+        console.log(`[Config] 마지막 사용자 설정 파일 없음, 기본 파일 사용`);
+      }
+    }
+    configPath = path.join(app.getPath('userData'), CONFIG_FILE);
+    console.log('[Config] 설정 파일 경로:', configPath);
+  }
   return configPath;
 }
 
@@ -379,9 +415,13 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
   if (updateAny.__userId && typeof updateAny.__userId === 'string') {
     _activeUserId = updateAny.__userId;
     delete updateAny.__userId;
+    // ✅ [2026-03-27] configPath 초기화 — 이전 세션의 기본/다른 계정 경로를 리셋
+    configPath = null;
     // 캐시 초기화하여 계정별 파일에서 새로 로드하도록
     cachedConfig = null;
     console.log(`[Config] ✅ 계정별 설정 모드 활성화: ${_activeUserId}`);
+    // ✅ [2026-03-27] 마지막 활성 사용자 ID 저장 (앱 재시작 시 자동 로드용)
+    await saveLastActiveUserId(_activeUserId);
     // 계정별 설정 로드
     const loaded = await loadConfig();
     cachedConfig = { ...loaded, ...updateAny };
@@ -431,6 +471,50 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
   }
 
   await fs.writeFile(filePath, JSON.stringify(cachedConfig, null, 2), 'utf-8');
+
+  // ✅ [2026-03-27 FIX] 계정별 파일에 저장할 때, 기본 settings.json에도 API 키 백싱크
+  // 앱 재시작 시 로그인 전에도 API 키가 유지되도록 함
+  if (_activeUserId && cachedConfig) {
+    try {
+      const defaultPath = path.join(app.getPath('userData'), CONFIG_FILE);
+      // 기본 파일이 다른 경로일 때만 백싱크 (같은 파일이면 불필요)
+      if (filePath !== defaultPath) {
+        let defaultConfig: any = {};
+        try {
+          const raw = await fs.readFile(defaultPath, 'utf-8');
+          defaultConfig = JSON.parse(raw);
+        } catch { /* 파일 없으면 빈 객체 */ }
+
+        // API 키와 모델 설정만 백싱크 (민감한 계정 정보는 제외)
+        const API_KEY_FIELDS = [
+          'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey',
+          'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey', 'perplexityApiKey',
+          'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey',
+          'naverDatalabClientId', 'naverDatalabClientSecret',
+          'naverClientId', 'naverClientSecret',
+          'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
+          'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
+          'perplexityModel', 'geminiPlanType',
+        ];
+        let changed = false;
+        for (const field of API_KEY_FIELDS) {
+          if ((cachedConfig as any)[field] !== undefined && (cachedConfig as any)[field] !== '') {
+            if (defaultConfig[field] !== (cachedConfig as any)[field]) {
+              defaultConfig[field] = (cachedConfig as any)[field];
+              changed = true;
+            }
+          }
+        }
+        if (changed) {
+          await fs.writeFile(defaultPath, JSON.stringify(defaultConfig, null, 2), 'utf-8');
+          console.log('[Config] ✅ 기본 설정 파일에 API 키 백싱크 완료');
+        }
+      }
+    } catch (syncError) {
+      console.warn('[Config] ⚠️ API 키 백싱크 실패 (비필수):', syncError);
+    }
+  }
+
   return cachedConfig;
 }
 
