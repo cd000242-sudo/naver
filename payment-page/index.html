@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-    <script src="https://js.tosspayments.com/v2/standard"></script>
+
     <style>
         /* ========== SPRING CHERRY BLOSSOM ========== */
         .petal-container {
@@ -249,7 +249,7 @@
                 블로그 10개를 혼자 운영하는 분들의 <strong>비밀 무기</strong>.
             </p>
             <div class="hero-cta-group">
-                <a href="#pricing" class="hero-cta">
+                <a href="pricing.html" class="hero-cta">
                     <span>지금 자동화 시작하기</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
@@ -299,196 +299,87 @@
         </div>
     </section>
 
+
     <!-- ═══════════════════════════════════════════════ -->
-    <!-- PRODUCTS SECTION — 쇼케이스 2 + 컴팩트 카드 3 -->
+    <!-- QUICK NAV — 서브페이지 CTA 그리드 -->
     <!-- ═══════════════════════════════════════════════ -->
-    <section class="section" id="products">
+    <section class="section" id="explore">
         <div class="section-inner">
             <div class="section-header">
-                <span class="section-tag">PRODUCTS</span>
-                <h2 class="section-title">당신에게 맞는 자동화를 선택하세요</h2>
-                <p class="section-desc">각 플랫폼에 최적화된 전문 자동화 솔루션</p>
+                <span class="section-tag">EXPLORE</span>
+                <h2 class="section-title">원하는 정보를 빠르게 확인하세요</h2>
+                <p class="section-desc">각 페이지에서 상세 정보를 확인할 수 있습니다</p>
             </div>
 
-            <!-- ═══ SHOWCASE 1: Better Life Naver (네이버 블로그) ═══ -->
-            <div class="product-showcase" id="naver-auto">
-                <div class="product-info">
-                    <div class="product-tag">🚀 FLAGSHIP</div>
-                    <h3 class="product-title">Better Life Naver</h3>
-                    <p class="product-subtitle">네이버 블로그 자동화</p>
-                    <p class="product-desc">
-                        키워드 하나만 입력하면 끝.<br>
-                        AI가 글을 쓰고, 이미지를 만들고, <strong>네이버 블로그에 자동으로 올립니다.</strong>
-                    </p>
-                    <ul class="product-benefit-list">
-                        <li>
-                            <span class="benefit-icon">⚡</span>
-                            <div>
-                                <strong>매일 100건, 사람이 쓴 것처럼</strong>
-                                <span>GPT-4o, Gemini 2.5 등 AI 7종이 6,000~10,000자 자연스러운 본문 생성</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">👥</span>
-                            <div>
-                                <strong>블로그 10개를 혼자 운영하세요</strong>
-                                <span>계정 수 제한 없이 통합 관리. 계정별 개별 스케줄링</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">🌙</span>
-                            <div>
-                                <strong>자는 동안에도 블로그가 자란다</strong>
-                                <span>최적 시간대 자동 발행, 랜덤 딜레이로 봇 감지 우회</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">🎨</span>
-                            <div>
-                                <strong>저작권 걱정 없는 고유 이미지</strong>
-                                <span>Imagen 4, DALL-E, ImageFX, Google Veo 영상까지 자동 생성·삽입</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">🛒</span>
-                            <div>
-                                <strong>쿠팡 파트너스로 월 수익 창출</strong>
-                                <span>쿠팡·네이버 스마트스토어 상품 크롤링 → 리뷰형 포스팅 → 제휴 링크 자동</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">🎯</span>
-                            <div>
-                                <strong>네이버 상위노출, AI가 알아서</strong>
-                                <span>14개 카테고리 맞춤 제목 생성, 홈피드 노출 최적화 100점 프로토콜</span>
-                            </div>
-                        </li>
-                    </ul>
-                    <a href="detail.html" class="product-cta-btn">
-                        자세히 보기 →
-                    </a>
-                </div>
-                <div class="product-visual">
-                    <div class="product-visual-card">
-                        <div class="visual-mockup">
-                            <div class="mockup-header">
-                                <span class="mockup-dot red"></span>
-                                <span class="mockup-dot yellow"></span>
-                                <span class="mockup-dot green"></span>
-                                <span class="mockup-title">Better Life Naver — Dashboard</span>
-                            </div>
-                            <div class="mockup-body" style="padding:0; overflow:hidden;">
-                                <video autoplay muted loop playsinline style="width:100%; display:block;">
-                                    <source src="images/hero-demo.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto;">
+                <!-- 제품 소개 -->
+                <a href="products.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;" 
+                   onmouseenter="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.15)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)'; this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">🚀</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">제품 소개</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">Better Life Naver, Leaders Orbit, Tistory, Leword<br>4가지 제품의 기능을 자세히 확인하세요</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">자세히 보기 →</span>
+                </a>
 
-            <!-- ═══ SHOWCASE 2: Leaders Orbit (WP/블로그스팟) ═══ -->
-            <div class="product-showcase product-alt" id="wp-auto">
-                <div class="product-visual">
-                    <div class="product-visual-card">
-                        <div class="visual-mockup mockup-blue">
-                            <div class="mockup-header">
-                                <span class="mockup-dot red"></span>
-                                <span class="mockup-dot yellow"></span>
-                                <span class="mockup-dot green"></span>
-                                <span class="mockup-title">Leaders Orbit — Global Publisher</span>
-                            </div>
-                            <div class="mockup-body">
-                                <div class="mockup-stat"><span class="stat-label">WordPress</span><span class="stat-value" style="color:#21759b;">42건</span></div>
-                                <div class="mockup-stat"><span class="stat-label">Blogspot</span><span class="stat-value" style="color:#f57c00;">38건</span></div>
-                                <div class="mockup-stat"><span class="stat-label">애드센스 수익</span><span class="stat-value" style="color:#44d7b6;">$127</span></div>
-                                <div class="mockup-progress"><div class="progress-bar" style="width:78%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <div class="product-tag tag-blue">🌐 GLOBAL</div>
-                    <h3 class="product-title">Leaders Orbit</h3>
-                    <p class="product-subtitle">워드프레스 / 블로그스팟 자동화</p>
-                    <p class="product-desc">
-                        구글 애드센스 수익화에 최적화된 글로벌 블로그 자동화.<br>
-                        <strong>100% API 기반</strong>이라 봇 감지 걱정 Zero.
-                    </p>
-                    <ul class="product-benefit-list">
-                        <li><span class="benefit-icon">💰</span><div><strong>애드센스 승인률 극대화</strong><span>E-E-A-T 기준 충족, Clean Mode 스킨, FAQ Schema 자동</span></div></li>
-                        <li><span class="benefit-icon">🌍</span><div><strong>다국어로 글로벌 수익</strong><span>한국어·영어·일본어 등 다국어 SEO 콘텐츠 자동 생성</span></div></li>
-                        <li><span class="benefit-icon">🔗</span><div><strong>두 플랫폼을 한 화면에서</strong><span>WordPress + Blogspot 통합 운영, API 기반 안정 발행</span></div></li>
-                        <li><span class="benefit-icon">📈</span><div><strong>구글 상위노출 SEO 자동화</strong><span>메타 태그, 구조화 데이터, 키워드 밀도 자동 최적화</span></div></li>
-                    </ul>
-                    <a href="#pricing" class="product-cta-btn btn-blue" onclick="switchPricingTab('orbit')">월 60,000원부터 →</a>
-                </div>
-            </div>
+                <!-- 가격 & 구매 -->
+                <a href="pricing.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; position: relative; overflow: hidden;"
+                   onmouseenter="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.25)';" 
+                   onmouseleave="this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg, var(--gold-primary), var(--gold-light)); color: #000; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 20px;">💳 결제</div>
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">💰</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">가격 & 구매</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">제품별 요금제 비교 및<br>토스페이먼츠 안전 결제</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">요금제 보기 →</span>
+                </a>
 
-            <!-- ═══ COMPACT CARDS: 티스토리 + Leword + 유튜브 ═══ -->
-            <div class="compact-products-header">
-                <h3 class="compact-title">더 많은 솔루션</h3>
-                <p class="compact-desc">모든 플랫폼을 하나의 에코시스템으로</p>
-            </div>
-            <div class="compact-grid">
-                <!-- 카드 1: Leaders Tistory -->
-                <div class="compact-card compact-orange" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'}); switchPricingTab('tistory');">
-                    <div class="compact-icon">🔥</div>
-                    <div class="compact-tag">NEW</div>
-                    <h4 class="compact-name">Leaders Tistory</h4>
-                    <p class="compact-platform">티스토리 자동화</p>
-                    <p class="compact-benefit">사람처럼 타이핑하는 고급 봇 회피 기술로<br>안전한 대량 발행</p>
-                    <ul class="compact-features">
-                        <li>⌨️ 사람형 타이핑 엔진 (봇 감지 우회)</li>
-                        <li>🎯 티스토리 v2 에디터 완벽 호환</li>
-                        <li>💰 카카오 애드핏 수익 극대화</li>
-                        <li>🏷️ 카테고리·태그 자동 설정</li>
-                    </ul>
-                    <div class="compact-price">월 <strong>30,000</strong>원부터</div>
-                    <div class="compact-cta">요금제 보기 →</div>
-                </div>
+                <!-- 사용자 후기 -->
+                <a href="reviews.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;"
+                   onmouseenter="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.15)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)'; this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">⭐</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">후기 & FAQ</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">실제 사용자들의 생생한 후기와<br>자주 묻는 질문 모음</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">후기 보기 →</span>
+                </a>
 
-                <!-- 카드 2: Leword -->
-                <div class="compact-card compact-purple" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'}); switchPricingTab('leword');">
-                    <div class="compact-icon">💎</div>
-                    <div class="compact-tag">INTELLIGENCE</div>
-                    <h4 class="compact-name">Leword</h4>
-                    <p class="compact-platform">AI 키워드 인텔리전스</p>
-                    <p class="compact-benefit">어떤 키워드로 글을 써야 상위 노출?<br>데이터가 알려줍니다</p>
-                    <ul class="compact-features">
-                        <li>🔍 경쟁 강도·난이도 점수 분석</li>
-                        <li>💡 블루오션 황금 키워드 자동 추천</li>
-                        <li>📊 네이버·구글 실시간 트렌드</li>
-                        <li>🤖 Leaders Pro 원클릭 연동</li>
-                    </ul>
-                    <div class="compact-price">월 <strong>30,000</strong>원부터</div>
-                    <div class="compact-cta">요금제 보기 →</div>
-                </div>
+                <!-- 커뮤니티 -->
+                <a href="community.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;"
+                   onmouseenter="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.15)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)'; this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">👥</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">커뮤니티</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">공지사항, 수익 인증,<br>활용 팁 확인</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">커뮤니티 →</span>
+                </a>
 
-                <!-- 카드 3: 유튜브 Coming Soon -->
-                <div class="compact-card compact-red compact-coming">
-                    <div class="compact-icon">🎬</div>
-                    <div class="compact-tag">COMING SOON</div>
-                    <h4 class="compact-name">유튜브 자동화</h4>
-                    <p class="compact-platform">AI 영상 생성 · 자동 업로드</p>
-                    <p class="compact-benefit">유튜브 쇼츠·롱폼 콘텐츠를<br>풀 자동화로 운영</p>
-                    <ul class="compact-features">
-                        <li>🎥 텍스트 → 영상 자동 변환</li>
-                        <li>📱 쇼츠 & 롱폼 동시 지원</li>
-                        <li>📈 유튜브 SEO 자동 최적화</li>
-                        <li>🔮 2026년 하반기 출시 예정</li>
-                    </ul>
-                    <div class="compact-price"><strong>출시 알림 신청</strong></div>
-                    <div class="compact-cta coming-cta">고객 문의 →</div>
-                </div>
+                <!-- 다운로드 -->
+                <a href="download.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;"
+                   onmouseenter="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.15)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)'; this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">📥</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">다운로드</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">구매 후 비밀번호 입력으로<br>최신 버전 다운로드</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">다운로드 →</span>
+                </a>
+
+                <!-- 주문 조회 -->
+                <a href="lookup.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;"
+                   onmouseenter="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.15)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)'; this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">🔍</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">주문 조회</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">이메일 또는 주문번호로<br>구매 내역 확인</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">조회하기 →</span>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════ -->
-    <!-- SOCIAL PROOF — 사용자 후기 + 성과 -->
+    <!-- TESTIMONIALS HIGHLIGHT — 대표 후기 3건 -->
     <!-- ═══════════════════════════════════════════════ -->
-    <section class="section section-proof" id="social-proof">
+    <section class="section" id="testimonials">
         <div class="section-inner">
             <div class="section-header">
                 <span class="section-tag">TESTIMONIALS</span>
@@ -496,521 +387,53 @@
                 <p class="section-desc">Leaders Pro를 경험한 분들의 생생한 후기</p>
             </div>
 
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"</div>
-                    <p class="testimonial-text">블로그 10개를 혼자 운영하는데, <strong>리더스 프로 없었으면 불가능</strong>했어요. 출근 전에 키워드만 세팅하면 퇴근할 때 50건이 올라가 있습니다.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">K</div>
-                        <div class="author-info">
-                            <strong>K 대표</strong>
-                            <span>마케팅 에이전시 · 10개월 사용</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto;">
+                <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 32px; backdrop-filter: blur(20px);">
+                    <div style="font-size: 2rem; color: var(--gold-primary); margin-bottom: 12px;">"</div>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">블로그 10개를 혼자 운영하는데, <strong style="color: var(--text-primary);">리더스 프로 없었으면 불가능</strong>했어요. 출근 전에 키워드만 세팅하면 퇴근할 때 50건이 올라가 있습니다.</p>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.85rem;">K</div>
+                        <div>
+                            <strong style="color: var(--text-primary); font-size: 0.85rem;">K 대표</strong>
+                            <div style="color: var(--text-muted); font-size: 0.75rem;">마케팅 에이전시 · 10개월 사용</div>
                         </div>
-                    </div>
-                    <div class="testimonial-result">
-                        <span class="result-badge">📈 월 방문자 12만 달성</span>
                     </div>
                 </div>
 
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"</div>
-                    <p class="testimonial-text">쿠팡 파트너스 블로그를 4개 돌리고 있는데, 쇼핑 커넥트 기능으로 <strong>월 수익이 3배</strong> 뛰었어요. AI가 생성한 리뷰 글이 정말 자연스러워요.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">P</div>
-                        <div class="author-info">
-                            <strong>P님</strong>
-                            <span>제휴 마케터 · 6개월 사용</span>
+                <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 32px; backdrop-filter: blur(20px);">
+                    <div style="font-size: 2rem; color: var(--gold-primary); margin-bottom: 12px;">"</div>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">쿠팡 파트너스 블로그를 4개 돌리고 있는데, 쇼핑 커넥트 기능으로 <strong style="color: var(--text-primary);">월 수익이 3배</strong> 뛰었어요. AI가 생성한 리뷰 글이 정말 자연스러워요.</p>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f093fb, #f5576c); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.85rem;">P</div>
+                        <div>
+                            <strong style="color: var(--text-primary); font-size: 0.85rem;">P님</strong>
+                            <div style="color: var(--text-muted); font-size: 0.75rem;">제휴 마케터 · 6개월 사용</div>
                         </div>
-                    </div>
-                    <div class="testimonial-result">
-                        <span class="result-badge">💰 월 수익 3배 성장</span>
                     </div>
                 </div>
 
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"</div>
-                    <p class="testimonial-text">글로벌 블로그 5개를 Leaders Orbit으로 운영 중입니다. <strong>애드센스 승인이 2주 만에</strong> 떨어졌고, 지금은 월 $400 이상 벌고 있어요.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">L</div>
-                        <div class="author-info">
-                            <strong>L님</strong>
-                            <span>글로벌 블로거 · 8개월 사용</span>
+                <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 32px; backdrop-filter: blur(20px);">
+                    <div style="font-size: 2rem; color: var(--gold-primary); margin-bottom: 12px;">"</div>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">글로벌 블로그 5개를 Leaders Orbit으로 운영 중입니다. <strong style="color: var(--text-primary);">애드센스 승인이 2주 만에</strong> 떨어졌고, 지금은 월 $400 이상 벌고 있어요.</p>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.85rem;">L</div>
+                        <div>
+                            <strong style="color: var(--text-primary); font-size: 0.85rem;">L님</strong>
+                            <div style="color: var(--text-muted); font-size: 0.75rem;">글로벌 블로거 · 8개월 사용</div>
                         </div>
                     </div>
-                    <div class="testimonial-result">
-                        <span class="result-badge">🌍 월 $400+ 애드센스 수익</span>
-                    </div>
                 </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="reviews.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); color: var(--gold-primary); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: all 0.3s;" 
+                   onmouseenter="this.style.borderColor='var(--border-gold)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)';">
+                    더 많은 후기 보기 →
+                </a>
             </div>
         </div>
     </section>
-
-    <!-- ═══════════════════════════════════════════════ -->
-    <!-- PRICING SECTION -->
-    <!-- ═══════════════════════════════════════════════ -->
-    <section class="section section-dark" id="pricing">
-        <div class="section-inner">
-            <div class="section-header">
-                <span class="section-tag">PRICING</span>
-                <h2 class="section-title">제품별 요금제</h2>
-                <p class="section-desc">각 제품에 맞는 최적의 플랜을 선택하세요.</p>
-            </div>
-
-            <!-- Product Tabs -->
-            <div class="pricing-tabs" id="pricing-tabs">
-                <button class="pricing-tab active" data-tab="naver" onclick="switchPricingTab('naver')"><span class="product-icon-sm">N</span> Better Life Naver</button>
-                <button class="pricing-tab" data-tab="orbit" onclick="switchPricingTab('orbit')"><span class="product-icon-sm">W</span> Leaders Orbit</button>
-                <button class="pricing-tab" data-tab="tistory" onclick="switchPricingTab('tistory')"><span class="product-icon-sm">T</span> Leaders Tistory</button>
-                <button class="pricing-tab" data-tab="leword" onclick="switchPricingTab('leword')"><span class="product-icon-sm">L</span> Leword</button>
-            </div>
-
-            <!-- ═══ Leaders Pro 요금제 ═══ -->
-            <div class="pricing-panel active" id="panel-naver">
-                <div class="pricing-grid">
-                    <!-- 무료 체험 카드 -->
-                    <div class="pricing-card trial" onclick="downloadFree('naver')">
-                        <div class="pricing-badge trial-badge">🎁 FREE</div>
-                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">부담 없이 시작</p></div>
-                        <div class="pricing-price"><span class="price-amount">0</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">무료</div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 전체 기능 체험</li>
-                            <li><span class="check">✓</span> AI 콘텐츠 생성</li>
-                            <li><span class="check">✓</span> 매일 2회 발행 제한</li>
-                            <li><span class="check">✓</span> 기간 제한 없음</li>
-                        </ul>
-                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
-                    </div>
-
-                    <div class="pricing-card" data-product="naver-monthly" data-amount="50000" onclick="selectProduct(this)">
-                        <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">가볍게 시작하기</p></div>
-                        <div class="pricing-price"><span class="price-amount">50,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 월</div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 전체 기능 이용</li>
-                            <li><span class="check">✓</span> AI 콘텐츠 자동 생성 (7종 AI)</li>
-                            <li><span class="check">✓</span> 다계정 무제한 발행</li>
-                            <li><span class="check">✓</span> 이메일 고객 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card" data-product="naver-quarterly" data-amount="120000" onclick="selectProduct(this)">
-                        <div class="pricing-save">20% 절약</div>
-                        <div class="pricing-header"><h3 class="pricing-name">3개월</h3><p class="pricing-desc">인기 있는 선택</p></div>
-                        <div class="pricing-price"><span class="price-amount">120,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 3개월 <span class="price-monthly">(월 40,000원)</span></div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 전체 기능 이용</li>
-                            <li><span class="check">✓</span> AI 이미지·영상 생성</li>
-                            <li><span class="check">✓</span> 쇼핑 커넥트 (제휴 마케팅)</li>
-                            <li><span class="check">✓</span> 우선 고객 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card featured" data-product="naver-yearly" data-amount="400000" onclick="selectProduct(this)">
-                        <div class="pricing-badge">👑 BEST VALUE</div>
-                        <div class="pricing-header"><h3 class="pricing-name">1년</h3><p class="pricing-desc">가장 합리적인 선택</p></div>
-                        <div class="pricing-price"><span class="price-amount">400,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 년 <span class="price-monthly">(월 33,333원)</span></div>
-                        <ul class="pricing-features">
-                            <li><span class="check gold">✓</span> 전체 기능 이용</li>
-                            <li><span class="check gold">✓</span> 스마트 스케줄링</li>
-                            <li><span class="check gold">✓</span> 전용 커뮤니티 입장</li>
-                            <li><span class="check gold">✓</span> 1:1 우선 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card premium" data-product="naver-lifetime" data-amount="2000000" onclick="selectProduct(this)">
-                        <div class="pricing-badge premium-badge">💎 LIFETIME</div>
-                        <div class="pricing-header"><h3 class="pricing-name">영구제</h3><p class="pricing-desc">한 번 구매, 평생 사용</p></div>
-                        <div class="pricing-price"><span class="price-amount">2,000,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">일회성 결제</div>
-                        <ul class="pricing-features">
-                            <li><span class="check gold">✓</span> 전체 기능 평생 이용</li>
-                            <li><span class="check gold">✓</span> 평생 무료 업데이트</li>
-                            <li><span class="check gold">✓</span> VIP 전용 커뮤니티</li>
-                            <li><span class="check gold">✓</span> 최우선 1:1 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ═══ Leaders Orbit 요금제 ═══ -->
-            <div class="pricing-panel" id="panel-orbit">
-                <div class="pricing-grid">
-                    <!-- 무료 체험 카드 -->
-                    <div class="pricing-card trial" onclick="downloadFree('orbit')">
-                        <div class="pricing-badge trial-badge">🎁 FREE</div>
-                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">글로벌 입문</p></div>
-                        <div class="pricing-price"><span class="price-amount">0</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">무료</div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> WordPress + Blogspot</li>
-                            <li><span class="check">✓</span> 다국어 콘텐츠 생성</li>
-                            <li><span class="check">✓</span> 매일 2회 발행 제한</li>
-                            <li><span class="check">✓</span> 기간 제한 없음</li>
-                        </ul>
-                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
-                    </div>
-
-                    <div class="pricing-card" data-product="orbit-monthly" data-amount="60000" onclick="selectProduct(this)">
-                        <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">글로벌 입문</p></div>
-                        <div class="pricing-price"><span class="price-amount">60,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 월</div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> WordPress + Blogspot</li>
-                            <li><span class="check">✓</span> 다국어 콘텐츠 생성</li>
-                            <li><span class="check">✓</span> 애드센스 최적화 모드</li>
-                            <li><span class="check">✓</span> 이메일 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card" data-product="orbit-quarterly" data-amount="150000" onclick="selectProduct(this)">
-                        <div class="pricing-save">17% 절약</div>
-                        <div class="pricing-header"><h3 class="pricing-name">3개월</h3><p class="pricing-desc">빠른 수익화</p></div>
-                        <div class="pricing-price"><span class="price-amount">150,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 3개월 <span class="price-monthly">(월 50,000원)</span></div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 전체 기능 이용</li>
-                            <li><span class="check">✓</span> SEO 고급 최적화</li>
-                            <li><span class="check">✓</span> 애드센스 승인 가이드</li>
-                            <li><span class="check">✓</span> 우선 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card featured" data-product="orbit-yearly" data-amount="600000" onclick="selectProduct(this)">
-                        <div class="pricing-badge">👑 추천</div>
-                        <div class="pricing-header"><h3 class="pricing-name">1년</h3><p class="pricing-desc">17% 할인</p></div>
-                        <div class="pricing-price"><span class="price-amount">600,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 년 <span class="price-monthly">(월 50,000원)</span></div>
-                        <ul class="pricing-features">
-                            <li><span class="check gold">✓</span> 전체 기능 이용</li>
-                            <li><span class="check gold">✓</span> SEO 고급 최적화</li>
-                            <li><span class="check gold">✓</span> 커뮤니티 입장</li>
-                            <li><span class="check gold">✓</span> 1:1 우선 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card premium" data-product="orbit-lifetime" data-amount="3000000" onclick="selectProduct(this)">
-                        <div class="pricing-badge premium-badge">💎 LIFETIME</div>
-                        <div class="pricing-header"><h3 class="pricing-name">영구제</h3><p class="pricing-desc">평생 사용</p></div>
-                        <div class="pricing-price"><span class="price-amount">3,000,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">일회성 결제</div>
-                        <ul class="pricing-features">
-                            <li><span class="check gold">✓</span> 전체 기능 평생 이용</li>
-                            <li><span class="check gold">✓</span> 평생 무료 업데이트</li>
-                            <li><span class="check gold">✓</span> VIP 커뮤니티</li>
-                            <li><span class="check gold">✓</span> 최우선 1:1 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ═══ Leaders Tistory 요금제 ═══ -->
-            <div class="pricing-panel" id="panel-tistory">
-                <div class="pricing-grid">
-                    <!-- 무료 체험 카드 -->
-                    <div class="pricing-card trial" onclick="downloadFree('tistory')">
-                        <div class="pricing-badge trial-badge">🎁 FREE TRIAL</div>
-                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">먼저 체험해보세요</p></div>
-                        <div class="pricing-price"><span class="price-amount">무료</span></div>
-                        <div class="pricing-period">매일 2회 발행</div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 전체 기능 체험</li>
-                            <li><span class="check">✓</span> 사람형 타이핑 엔진</li>
-                            <li><span class="check">✓</span> 매일 2회 발행 제한</li>
-                            <li><span class="check">✓</span> 기간 제한 없음</li>
-                        </ul>
-                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
-                    </div>
-                    <div class="pricing-card" data-product="tistory-monthly" data-amount="30000" onclick="selectProduct(this)">
-                        <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">티스토리 시작</p></div>
-                        <div class="pricing-price"><span class="price-amount">30,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 월</div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 사람형 타이핑 엔진</li>
-                            <li><span class="check">✓</span> AI 콘텐츠 생성</li>
-                            <li><span class="check">✓</span> 카테고리·태그 자동화</li>
-                            <li><span class="check">✓</span> 이메일 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card" data-product="tistory-quarterly" data-amount="80000" onclick="selectProduct(this)">
-                        <div class="pricing-save">11% 절약</div>
-                        <div class="pricing-header"><h3 class="pricing-name">3개월</h3><p class="pricing-desc">안정적 운영</p></div>
-                        <div class="pricing-price"><span class="price-amount">80,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 3개월 <span class="price-monthly">(월 26,667원)</span></div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 전체 기능 이용</li>
-                            <li><span class="check">✓</span> 봇 감지 고급 우회</li>
-                            <li><span class="check">✓</span> 다계정 관리</li>
-                            <li><span class="check">✓</span> 우선 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card featured" data-product="tistory-yearly" data-amount="300000" onclick="selectProduct(this)">
-                        <div class="pricing-badge">👑 추천</div>
-                        <div class="pricing-header"><h3 class="pricing-name">1년</h3><p class="pricing-desc">17% 할인</p></div>
-                        <div class="pricing-price"><span class="price-amount">300,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 년 <span class="price-monthly">(월 25,000원)</span></div>
-                        <ul class="pricing-features">
-                            <li><span class="check gold">✓</span> 전체 기능 이용</li>
-                            <li><span class="check gold">✓</span> 봇 감지 고급 우회</li>
-                            <li><span class="check gold">✓</span> 커뮤니티 입장</li>
-                            <li><span class="check gold">✓</span> 1:1 우선 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card premium" data-product="tistory-lifetime" data-amount="1500000" onclick="selectProduct(this)">
-                        <div class="pricing-badge premium-badge">💎 LIFETIME</div>
-                        <div class="pricing-header"><h3 class="pricing-name">영구제</h3><p class="pricing-desc">평생 사용</p></div>
-                        <div class="pricing-price"><span class="price-amount">1,500,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">일회성 결제</div>
-                        <ul class="pricing-features">
-                            <li><span class="check gold">✓</span> 전체 기능 평생 이용</li>
-                            <li><span class="check gold">✓</span> 평생 무료 업데이트</li>
-                            <li><span class="check gold">✓</span> VIP 커뮤니티</li>
-                            <li><span class="check gold">✓</span> 최우선 1:1 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ═══ Leword 요금제 ═══ -->
-            <div class="pricing-panel" id="panel-leword">
-                <div class="pricing-grid">
-                    <!-- 무료 체험 카드 -->
-                    <div class="pricing-card trial" onclick="downloadFree('leword')">
-                        <div class="pricing-badge trial-badge">🎁 FREE</div>
-                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">키워드 분석 체험</p></div>
-                        <div class="pricing-price"><span class="price-amount">0</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">무료</div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 키워드 경쟁 분석</li>
-                            <li><span class="check">✓</span> 블루오션 발굴</li>
-                            <li><span class="check">✓</span> 매일 5회 검색 제한</li>
-                            <li><span class="check">✓</span> 기간 제한 없음</li>
-                        </ul>
-                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
-                    </div>
-
-                    <div class="pricing-card" data-product="leword-monthly" data-amount="30000" onclick="selectProduct(this)">
-                        <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">키워드 분석 시작</p></div>
-                        <div class="pricing-price"><span class="price-amount">30,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 월</div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 키워드 경쟁 분석</li>
-                            <li><span class="check">✓</span> 블루오션 발굴</li>
-                            <li><span class="check">✓</span> 트렌드 모니터링</li>
-                            <li><span class="check">✓</span> 이메일 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card" data-product="leword-quarterly" data-amount="100000" onclick="selectProduct(this)">
-                        <div class="pricing-save">11% 절약</div>
-                        <div class="pricing-header"><h3 class="pricing-name">3개월</h3><p class="pricing-desc">인기 있는 선택</p></div>
-                        <div class="pricing-price"><span class="price-amount">100,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 3개월 <span class="price-monthly">(월 33,333원)</span></div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 전체 기능 이용</li>
-                            <li><span class="check">✓</span> Leaders Pro 연동</li>
-                            <li><span class="check">✓</span> 블루오션 키워드 자동 추천</li>
-                            <li><span class="check">✓</span> 우선 고객 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card featured" data-product="leword-yearly" data-amount="300000" onclick="selectProduct(this)">
-                        <div class="pricing-badge">👑 BEST VALUE</div>
-                        <div class="pricing-header"><h3 class="pricing-name">1년</h3><p class="pricing-desc">가장 합리적인 선택</p></div>
-                        <div class="pricing-price"><span class="price-amount">300,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 년 <span class="price-monthly">(월 25,000원)</span></div>
-                        <ul class="pricing-features">
-                            <li><span class="check gold">✓</span> 전체 기능 이용</li>
-                            <li><span class="check gold">✓</span> Leaders Pro 연동</li>
-                            <li><span class="check gold">✓</span> 커뮤니티 입장</li>
-                            <li><span class="check gold">✓</span> 1:1 우선 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Payment Section -->
-            <div class="payment-section" id="payment-section">
-                <div class="payment-email-row">
-                    <label for="buyer-email" class="email-label">📧 라이선스를 받을 이메일</label>
-                    <input type="email" id="buyer-email" class="email-input" placeholder="example@email.com" required>
-                    <p class="email-hint">결제 완료 후 이 이메일로 라이선스 코드가 발송됩니다.</p>
-                </div>
-                <button class="btn-pay" id="btn-pay" disabled onclick="requestPayment()">
-                    <span class="spinner"></span>
-                    <span class="btn-text">플랜을 선택해주세요</span>
-                </button>
-                <div class="payment-notice">
-                    결제 진행 시 <a href="terms.html" target="_blank">이용약관</a> 및
-                    <a href="privacy.html" target="_blank">개인정보처리방침</a>에 동의하는 것으로 간주됩니다.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════ -->
-    <!-- FAQ SECTION -->
-    <!-- ═══════════════════════════════════════════════ -->
-    <section class="section" id="faq">
-        <div class="section-inner">
-            <div class="section-header">
-                <span class="section-tag">FAQ</span>
-                <h2 class="section-title">자주 묻는 질문</h2>
-                <p class="section-desc">궁금한 점을 빠르게 해결하세요</p>
-            </div>
-
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>Leaders Pro는 어떤 프로그램인가요?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Leaders Pro는 AI 기반 네이버 블로그 자동화 솔루션입니다. 키워드만 입력하면 GPT-4o, Gemini 2.5 등 7종의 AI가 6,000~10,000자의 자연스러운 포스팅을 작성하고, AI 이미지·영상을 생성하며, 네이버 블로그에 자동으로 발행합니다.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>봇 감지에 걸리지 않나요?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer">
-                        <p>사람처럼 타이핑하는 고급 봇 회피 엔진을 탑재했습니다. 랜덤 딜레이, 최적 시간대 발행, 쿨다운 기간 등의 기술로 봇 감지를 우회합니다. 실제로 수천 명의 사용자가 안전하게 사용 중입니다.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>계정을 몇 개까지 등록할 수 있나요?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer">
-                        <p>계정 수 제한이 없습니다. 네이버 블로그 ID를 원하는 만큼 등록하고, 각 계정별로 독립적인 스케줄을 설정하여 통합 관리할 수 있습니다.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>환불이 가능한가요?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer">
-                        <p>라이선스 코드 발급 후 7일 이내, 서비스 미사용 시 전액 환불 가능합니다. 환불 요청은 cd000242@gmail.com으로 보내주세요.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>Leaders Orbit과 Leaders Pro의 차이는?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Leaders Pro는 <strong>네이버 블로그 전용</strong>, Leaders Orbit은 <strong>워드프레스 + 블로그스팟</strong> 글로벌 플랫폼을 대상으로 합니다. Orbit은 100% API 기반이라 봇 감지 걱정 없이 구글 애드센스 수익화에 최적화되어 있습니다.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>기기 변경 시 어떻게 하나요?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer">
-                        <p>라이선스는 동시에 1대의 기기에서만 사용 가능합니다. 기기를 변경하면 이전 기기에서 자동으로 로그아웃됩니다. 별도의 이전 절차 없이 새 기기에서 바로 로그인하시면 됩니다.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════ -->
-    <!-- DOWNLOAD SECTION -->
-    <!-- ═══════════════════════════════════════════════ -->
-    <section class="section section-dark" id="download">
-        <div class="section-inner">
-            <div class="section-header">
-                <span class="section-tag">DOWNLOAD</span>
-                <h2 class="section-title">프로그램 다운로드</h2>
-                <p class="section-desc">비밀번호를 입력하면 최신 버전을 다운로드할 수 있습니다.</p>
-            </div>
-
-            <div class="download-grid">
-                <!-- Better Life Naver -->
-                <div class="download-card" data-product="naver">
-                    <div class="download-icon"><span class="product-icon-lg">N</span></div>
-                    <h3 class="download-title">Better Life Naver</h3>
-                    <p class="download-version">네이버 블로그 자동화 · Windows 64-bit</p>
-                    <div class="download-form">
-                        <div class="download-input-group">
-                            <input type="password" class="download-input" data-pw="naver" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('naver')">
-                            <button class="download-btn" onclick="downloadWithPassword('naver')">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            </button>
-                        </div>
-                        <p class="download-error" data-error="naver">비밀번호가 올바르지 않습니다.</p>
-                    </div>
-                </div>
-
-                <!-- Leaders Orbit -->
-                <div class="download-card" data-product="orbit">
-                    <div class="download-icon"><span class="product-icon-lg">W</span></div>
-                    <h3 class="download-title">Leaders Orbit</h3>
-                    <p class="download-version">워드프레스·블로그스팟 · Windows 64-bit</p>
-                    <div class="download-form">
-                        <div class="download-input-group">
-                            <input type="password" class="download-input" data-pw="orbit" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('orbit')">
-                            <button class="download-btn" onclick="downloadWithPassword('orbit')">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            </button>
-                        </div>
-                        <p class="download-error" data-error="orbit">비밀번호가 올바르지 않습니다.</p>
-                    </div>
-                </div>
-
-                <!-- Leaders Tistory -->
-                <div class="download-card" data-product="tistory">
-                    <div class="download-icon"><span class="product-icon-lg">T</span></div>
-                    <h3 class="download-title">Leaders Tistory</h3>
-                    <p class="download-version">티스토리 자동화 · Windows 64-bit</p>
-                    <div class="download-form">
-                        <div class="download-input-group">
-                            <input type="password" class="download-input" data-pw="tistory" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('tistory')">
-                            <button class="download-btn" onclick="downloadWithPassword('tistory')">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            </button>
-                        </div>
-                        <p class="download-error" data-error="tistory">비밀번호가 올바르지 않습니다.</p>
-                    </div>
-                </div>
-
-                <!-- Leword -->
-                <div class="download-card" data-product="leword">
-                    <div class="download-icon"><span class="product-icon-lg">L</span></div>
-                    <h3 class="download-title">Leword</h3>
-                    <p class="download-version">AI 키워드 인텔리전스 · Windows 64-bit</p>
-                    <div class="download-form">
-                        <div class="download-input-group">
-                            <input type="password" class="download-input" data-pw="leword" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('leword')">
-                            <button class="download-btn" onclick="downloadWithPassword('leword')">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            </button>
-                        </div>
-                        <p class="download-error" data-error="leword">비밀번호가 올바르지 않습니다.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-inner">
@@ -1028,135 +451,6 @@
             <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        // ===== CONFIG =====
-        const CONFIG = {
-            TOSS_CLIENT_KEY: 'test_ck_Poxy1XQL8R27R2BKJkm987nO5Wml',
-            GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
-            SUCCESS_URL: window.location.origin + window.location.pathname.replace('index.html', '') + 'success.html',
-            FAIL_URL: window.location.origin + window.location.pathname.replace('index.html', '') + 'fail.html',
-        };
-
-        const PRODUCTS = {
-            // Leaders Pro (네이버 블로그)
-            'naver-monthly':    { name: '네이버 블로그 1개월', amount: 50000 },
-            'naver-quarterly':  { name: '네이버 블로그 3개월', amount: 120000 },
-            'naver-yearly':     { name: '네이버 블로그 1년',   amount: 400000 },
-            'naver-lifetime':   { name: '네이버 블로그 영구제', amount: 2000000 },
-            // Leaders Orbit (WP/블로그스팟)
-            'orbit-monthly':    { name: 'Leaders Orbit 1개월', amount: 60000 },
-            'orbit-quarterly':  { name: 'Leaders Orbit 3개월', amount: 150000 },
-            'orbit-yearly':     { name: 'Leaders Orbit 1년',   amount: 600000 },
-            'orbit-lifetime':   { name: 'Leaders Orbit 영구제', amount: 3000000 },
-            // Leaders Tistory
-            'tistory-monthly':  { name: 'Leaders Tistory 1개월', amount: 30000 },
-            'tistory-quarterly':{ name: 'Leaders Tistory 3개월', amount: 80000 },
-            'tistory-yearly':   { name: 'Leaders Tistory 1년',   amount: 300000 },
-            'tistory-lifetime': { name: 'Leaders Tistory 영구제', amount: 1500000 },
-            // Leword
-            'leword-monthly':   { name: 'Leword 1개월',       amount: 30000 },
-            'leword-quarterly': { name: 'Leword 3개월',       amount: 100000 },
-            'leword-yearly':    { name: 'Leword 1년',         amount: 300000 },
-        };
-
-        let selectedProduct = null;
-        let tossPayments = null;
-
-        // ===== Toss Init =====
-        async function initToss() {
-            try { tossPayments = TossPayments(CONFIG.TOSS_CLIENT_KEY); }
-            catch (e) { console.error('Toss SDK init failed', e); }
-        }
-
-        // ===== Pricing Tab Switch =====
-        function switchPricingTab(tabId) {
-            document.querySelectorAll('.pricing-tab').forEach(t => t.classList.remove('active'));
-            const activeTab = document.querySelector(`.pricing-tab[data-tab="${tabId}"]`);
-            if (activeTab) activeTab.classList.add('active');
-
-            document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
-            const activePanel = document.getElementById(`panel-${tabId}`);
-            if (activePanel) activePanel.classList.add('active');
-
-            // Reset selection
-            document.querySelectorAll('.pricing-card').forEach(c => {
-                c.classList.remove('selected');
-                const sel = c.querySelector('.pricing-select');
-                if (sel) sel.textContent = '선택하기';
-            });
-            selectedProduct = null;
-            const btn = document.getElementById('btn-pay');
-            btn.disabled = true;
-            btn.querySelector('.btn-text').textContent = '플랜을 선택해주세요';
-
-            initTilt();
-        }
-
-        // ===== Product Selection =====
-        function selectProduct(card) {
-            const panel = card.closest('.pricing-panel');
-            if (panel) {
-                panel.querySelectorAll('.pricing-card').forEach(c => {
-                    c.classList.remove('selected');
-                    c.querySelector('.pricing-select').textContent = '선택하기';
-                });
-            }
-            card.classList.add('selected');
-            card.querySelector('.pricing-select').textContent = '✓ 선택됨';
-            selectedProduct = card.dataset.product;
-
-            const btn = document.getElementById('btn-pay');
-            const product = PRODUCTS[selectedProduct];
-            btn.disabled = false;
-            btn.querySelector('.btn-text').textContent = `${product.amount.toLocaleString()}원 결제하기`;
-
-            document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        // ===== Order ID =====
-        function generateOrderId() {
-            const ts = Date.now();
-            const rand = Math.random().toString(36).substring(2, 8).toUpperCase();
-            return `LP-${ts}-${rand}`;
-        }
-
-        // ===== Payment =====
-        async function requestPayment() {
-            if (!selectedProduct || !tossPayments) return;
-
-            const emailInput = document.getElementById('buyer-email');
-            const email = emailInput.value.trim();
-            if (!email || !email.includes('@')) {
-                emailInput.focus();
-                emailInput.classList.add('shake');
-                setTimeout(() => emailInput.classList.remove('shake'), 600);
-                return;
-            }
-
-            const btn = document.getElementById('btn-pay');
-            btn.classList.add('loading');
-            btn.disabled = true;
-
-            const product = PRODUCTS[selectedProduct];
-            const orderId = generateOrderId();
-
-            try {
-                const payment = tossPayments.payment({ customerKey: TossPayments.ANONYMOUS });
-                await payment.requestPayment({
-                    method: 'CARD',
-                    amount: { value: product.amount, currency: 'KRW' },
-                    orderId,
-                    orderName: product.name,
-                    successUrl: CONFIG.SUCCESS_URL + '?email=' + encodeURIComponent(email),
-                    failUrl: CONFIG.FAIL_URL,
-                });
-            } catch (err) {
-                console.log('결제 취소:', err);
-                btn.classList.remove('loading');
-                btn.disabled = false;
-            }
-        }
 
         // ===== Particles =====
         function initParticles() {
@@ -1420,7 +714,7 @@
         // ===== Init =====
         document.addEventListener('DOMContentLoaded', () => {
             applySiteEdits();
-            initToss();
+
             initParticles();
             initScrollAnimations();
             initCounters();
