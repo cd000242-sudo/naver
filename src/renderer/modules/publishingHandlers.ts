@@ -1299,12 +1299,13 @@ export async function handleSemiAutoPublish(): Promise<void> {
   const existingTitle = (document.getElementById('unified-generated-title') as HTMLInputElement)?.value?.trim();
   const existingContent = (document.getElementById('unified-generated-content') as HTMLTextAreaElement)?.value?.trim();
 
-  // 필드가 비어있을 때만 fillSemiAutoFields 호출 (사용자 수정 내용 보존)
-  if (!existingTitle && !existingContent && structuredContent) {
+  // ✅ [2026-03-29 FIX] 필드가 하나라도 비어있으면 fillSemiAutoFields 호출
+  // 기존 AND 조건 → OR 조건 변경: 발행 실패 후 DOM 일부만 남아있는 경우 대응
+  if ((!existingTitle || !existingContent) && structuredContent) {
     try {
       fillSemiAutoFields(structuredContent);
     } catch (e) {
-      console.warn('[publishingHandlers] catch ignored:', e);
+      console.warn('[publishingHandlers] fillSemiAutoFields 오류 (무시):', e);
     }
   }
 
@@ -1342,9 +1343,28 @@ export async function handleSemiAutoPublish(): Promise<void> {
   }
 
   // 수정된 콘텐츠 가져오기
-  const title = (document.getElementById('unified-generated-title') as HTMLInputElement)?.value?.trim();
-  const content = (document.getElementById('unified-generated-content') as HTMLTextAreaElement)?.value?.trim();
+  let title = (document.getElementById('unified-generated-title') as HTMLInputElement)?.value?.trim();
+  let content = (document.getElementById('unified-generated-content') as HTMLTextAreaElement)?.value?.trim();
   const hashtagsStr = (document.getElementById('unified-generated-hashtags') as HTMLInputElement)?.value?.trim();
+
+  // ✅ [2026-03-29 FIX] DOM 필드가 비어있어도 structuredContent에서 fallback
+  // 발행 실패 후 재시도 시 DOM이 초기화되었지만 structuredContent는 보존된 경우 대응
+  if ((!title || !content) && structuredContent) {
+    if (!title && (structuredContent.selectedTitle || structuredContent.title)) {
+      title = structuredContent.selectedTitle || structuredContent.title;
+      console.log('[handleSemiAutoPublish] ⚠️ DOM 제목 비어있음 → structuredContent에서 복원:', title?.substring(0, 30));
+      // DOM에도 반영
+      const titleEl = document.getElementById('unified-generated-title') as HTMLInputElement;
+      if (titleEl) titleEl.value = title || '';
+    }
+    if (!content && (structuredContent.bodyPlain || structuredContent.content)) {
+      content = structuredContent.bodyPlain || structuredContent.content;
+      console.log('[handleSemiAutoPublish] ⚠️ DOM 본문 비어있음 → structuredContent에서 복원 (길이:', content?.length, ')');
+      // DOM에도 반영
+      const contentEl = document.getElementById('unified-generated-content') as HTMLTextAreaElement;
+      if (contentEl) contentEl.value = content || '';
+    }
+  }
 
   if (!title || !content) {
     alert('제목과 본문을 모두 입력해주세요.');

@@ -1216,19 +1216,62 @@ export function fillSemiAutoFields(structuredContent: any): void {
   syncIntegratedPreviewFromInputs();
 }
 
+// ✅ [2026-03-29] 페러프레이징 모드 100점 개선
+// 결함 수정: 다중클릭방지, 원본백업/복원, 응답검증, saveGeneratedPost, 프롬프트이중주입제거, 에러토스트
+
+// ✅ 불용어 목록 (키워드 추출 품질 향상)
+const KOREAN_STOP_WORDS = new Set([
+  '이', '그', '저', '것', '수', '등', '및', '더', '를', '을', '에서', '으로', '에게', '까지',
+  '부터', '대한', '위한', '통한', '따른', '관한', '있는', '없는', '하는', '되는', '같은',
+  '모든', '매우', '아주', '정말', '진짜', '완전', '방법', '추천', '후기', '리뷰', '정리',
+  '소개', '안내', '가이드', '비교', '분석', '총정리', '핵심', '포인트', '기본',
+]);
+
+// ✅ 다중 클릭 방지 플래그
+let isParaphrasing = false;
+
 // ✅ 페러프레이징 모드로 글쓰기
 export async function paraphraseContent(): Promise<void> {
+  console.log('[paraphraseContent] 함수 시작됨');
+
+  // ✅ [결함 #5] 다중 클릭 방지
+  if (isParaphrasing) {
+    toastManager.warning('⏳ 페러프레이징이 이미 진행 중입니다. 잠시 기다려주세요.', 3000);
+    console.warn('[paraphraseContent] 중복 호출 차단됨');
+    return;
+  }
+
+  const paraphraseBtn = document.getElementById('paraphrase-mode-btn') as HTMLButtonElement | null;
+
   const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement;
   const contentTextarea = document.getElementById('unified-generated-content') as HTMLTextAreaElement;
   const hashtagsInput = document.getElementById('unified-generated-hashtags') as HTMLInputElement;
+
+  console.log('[paraphraseContent] DOM 요소 확인:', { titleInput: !!titleInput, contentTextarea: !!contentTextarea, hashtagsInput: !!hashtagsInput });
 
   const title = titleInput?.value.trim() || '';
   const content = contentTextarea?.value.trim() || '';
   const hashtags = hashtagsInput?.value.trim() || '';
 
+  console.log('[paraphraseContent] 입력값:', { titleLen: title.length, contentLen: content.length, hashtagsLen: hashtags.length });
+
   if (!title && !content) {
-    alert('제목 또는 본문을 입력해주세요.');
+    toastManager.warning('⚠️ 제목 또는 본문을 먼저 입력해주세요.', 5000);
+    appendLog('⚠️ 페러프레이징 취소: 제목과 본문이 비어있습니다.');
     return;
+  }
+
+  // ✅ [결함 #7] 원본 백업 (실패 시 복원용)
+  const backupTitle = title;
+  const backupContent = content;
+  const backupHashtags = hashtags;
+
+  // ✅ 실행 잠금
+  isParaphrasing = true;
+  if (paraphraseBtn) {
+    paraphraseBtn.disabled = true;
+    paraphraseBtn.style.opacity = '0.5';
+    paraphraseBtn.style.cursor = 'not-allowed';
   }
 
   try {
@@ -1248,15 +1291,18 @@ export async function paraphraseContent(): Promise<void> {
     const articleType = (document.getElementById('unified-article-type') as HTMLSelectElement)?.value || 'general';
     const minChars = parseInt((document.getElementById('unified-min-chars') as HTMLInputElement)?.value) || 2000;
 
-    // ✅ [2026-03-16 FIX] 페러프레이징 프롬프트 구성
-    // 원문은 draftText에, 재작성 규칙은 customPrompt에 분리 배치 (SEO 프롬프트 충돌 방지)
+    // ✅ 원문 구성
     let originalContent = '';
     if (title) originalContent += `제목: ${title}\n\n`;
     if (content) originalContent += `본문:\n${content}\n\n`;
     if (hashtags) originalContent += `해시태그: ${hashtags}`;
 
-    // 제목에서 키워드 추출 (프롬프트 빌더에서 키워드 기반 처리를 위해)
-    const paraphraseKeywords = title ? title.split(/[\s,]+/).filter((w: string) => w.length >= 2).slice(0, 5) : [];
+    // ✅ [결함 #8] 키워드 추출 개선 — 불용어 제거
+    const paraphraseKeywords = title
+      ? title.split(/[\s,]+/)
+          .filter((w: string) => w.length >= 2 && !KOREAN_STOP_WORDS.has(w))
+          .slice(0, 5)
+      : [];
 
     const paraphrasePrompt = `위 글을 완전히 새롭게 재작성해주세요.
 
@@ -1356,6 +1402,11 @@ export async function paraphraseContent(): Promise<void> {
 - 비교/대조 문장 1개 이상
 
 ════════════════════════════════════════
+📌 원본 해시태그 참고
+════════════════════════════════════════
+${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여 유사하지만 더 최적화된 해시태그를 생성하세요.` : '자유롭게 최적 해시태그를 생성하세요.'}
+
+════════════════════════════════════════
 ⚠️ 최종 체크리스트
 ════════════════════════════════════════
 
@@ -1371,24 +1422,18 @@ export async function paraphraseContent(): Promise<void> {
 
     showUnifiedProgress(30, 'AI가 글을 개선 중...', '페러프레이징 및 퀄리티 향상 중');
 
+    // ✅ [결함 #3] 프롬프트 이중 주입 제거
+    // draftText에는 원문만, customPrompt에만 재작성 규칙 전달
     const payload = {
       assembly: {
         generator: generator as 'gemini' | 'openai' | 'claude' | 'perplexity',
-        // ✅ [2026-03-16 FIX] draftText에 원문+규칙을 합쳐서 전달
-        // 이유: 원문만 보내면 baseBody가 짧아서 네이버/Perplexity 보충 로직이 트리거되어 엉뚱한 글 혼입
-        // 규칙까지 합치면 baseBody가 ~2000자 이상이므로 보충 로직을 안전하게 우회
-        draftText: `${originalContent}\n\n${paraphrasePrompt}`,
-        // ⚠️ baseText 의도적 미전달: baseText가 있으면 RSS 자동검색이 실행되어 원문과 무관한 크롤링 발생
+        draftText: originalContent,
         targetAge: targetAge as '20s' | '30s' | '40s' | '50s' | 'all',
         minChars,
         articleType,
         toneStyle,
-        // ✅ custom 모드로 설정하여 SEO 프롬프트 충돌 방지
         contentMode: 'custom' as const,
-        // ✅ 페러프레이징 규칙을 customPrompt로도 전달 (시스템 프롬프트에 반영)
-        // draftText에도 있지만, systemInstruction에서 재작성 의도를 명확히 강화
         customPrompt: paraphrasePrompt,
-        // ✅ 키워드 전달
         keywords: paraphraseKeywords,
       }
     };
@@ -1411,36 +1456,77 @@ export async function paraphraseContent(): Promise<void> {
     showUnifiedProgress(80, '페러프레이징 완료!', '개선된 글을 필드에 채우는 중');
 
     const result = apiResponse.data;
-    const structuredContent = result.content;
 
-    // 필드에 개선된 글 채우기
-    if (titleInput && structuredContent.selectedTitle) {
+    // ✅ [결함 #6] API 응답 구조 검증
+    const structuredContent = result.content;
+    if (!structuredContent || typeof structuredContent !== 'object') {
+      throw new Error('페러프레이징 응답 데이터가 유효하지 않습니다.');
+    }
+
+    // 필드에 개선된 글 채우기 (검증 후 반영)
+    if (titleInput && structuredContent.selectedTitle && typeof structuredContent.selectedTitle === 'string') {
       titleInput.value = structuredContent.selectedTitle;
     }
-    if (contentTextarea && structuredContent.bodyPlain) {
+    if (contentTextarea && structuredContent.bodyPlain && typeof structuredContent.bodyPlain === 'string') {
       const normalized = normalizeReadableBodyText(structuredContent.bodyPlain);
       structuredContent.bodyPlain = normalized;
       structuredContent.content = normalized;
       contentTextarea.value = normalized;
+    } else if (contentTextarea) {
+      // bodyPlain이 없으면 원본 유지 (덮어쓰기 방지)
+      console.warn('[paraphraseContent] ⚠️ bodyPlain 없음 — 원본 본문 유지');
+      appendLog('⚠️ AI 응답에 본문이 없어 원본을 유지합니다.');
     }
-    if (hashtagsInput && structuredContent.hashtags) {
+    if (hashtagsInput && Array.isArray(structuredContent.hashtags) && structuredContent.hashtags.length > 0) {
       hashtagsInput.value = structuredContent.hashtags.join(' ');
     }
-
-    appendLog('✨ 페러프레이징 완료! 필드를 확인해주세요.');
 
     // 글로벌 상태 업데이트
     currentStructuredContent = structuredContent;
     (window as any).currentStructuredContent = structuredContent;
 
+    // ✅ [결함 #2] saveGeneratedPost 호출 — 결과 영구 저장
+    try {
+      saveGeneratedPost(structuredContent, false, { source: 'paraphrase' });
+      console.log('[paraphraseContent] ✅ 페러프레이징 결과 저장 완료');
+    } catch (saveErr) {
+      console.warn('[paraphraseContent] ⚠️ 저장 실패 (기능에는 영향 없음):', saveErr);
+    }
+
     // 미리보기 및 목록 업데이트
     updateUnifiedPreview(structuredContent);
     refreshGeneratedPostsList();
+
+    appendLog('✨ 페러프레이징 완료! 필드를 확인해주세요.');
+    toastManager.success('✅ 페러프레이징 완료! 개선된 글이 반영되었습니다.', 5000);
   } catch (error: any) {
     console.error('Paraphrase failed:', error);
     appendLog(`❌ 페러프레이징 실패: ${error.message}`);
+
+    // ✅ [결함 #4] catch 블록에 토스트 에러 표시
+    toastManager.error(`❌ 페러프레이징 실패: ${error.message}`, 8000);
+
+    // ✅ [결함 #7] 실패 시 원본 복원
+    if (backupTitle && document.getElementById('unified-generated-title')) {
+      (document.getElementById('unified-generated-title') as HTMLInputElement).value = backupTitle;
+    }
+    if (backupContent && document.getElementById('unified-generated-content')) {
+      (document.getElementById('unified-generated-content') as HTMLTextAreaElement).value = backupContent;
+    }
+    if (backupHashtags && document.getElementById('unified-generated-hashtags')) {
+      (document.getElementById('unified-generated-hashtags') as HTMLInputElement).value = backupHashtags;
+    }
+    appendLog('🔄 원본 복원됨 — 페러프레이징 전 상태로 돌아갔습니다.');
   } finally {
     hideUnifiedProgress();
+
+    // ✅ 실행 잠금 해제
+    isParaphrasing = false;
+    if (paraphraseBtn) {
+      paraphraseBtn.disabled = false;
+      paraphraseBtn.style.opacity = '1';
+      paraphraseBtn.style.cursor = 'pointer';
+    }
   }
 }
 

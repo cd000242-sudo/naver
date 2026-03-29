@@ -140,6 +140,17 @@ export function resetAfterPublish(): void {
     setWindowState('selectedThumbnail', null);
     setWindowState('manualThumbnailPath', null);
 
+    // ✅ [2026-03-29 FIX] ImageManager 초기화 — 이전에 누락되어 imageMap 잔존
+    // 이 함수는 10+ 곳에서 호출되므로 여기서 한번 초기화하면 모든 모드에서 적용됨
+    try {
+      if (typeof (window as any).ImageManager !== 'undefined' && typeof (window as any).ImageManager.clearAll === 'function') {
+        (window as any).ImageManager.clearAll();
+      }
+      (window as any).imageManagementGeneratedImages = [];
+    } catch (e) {
+      console.warn('[FullAutoUtils] ImageManager.clearAll() 실패:', e);
+    }
+
     // 4. 발행 진행 상태 초기화
     setWindowState('publishProgress', { current: 0, total: 0 });
     setWindowState('publishQueue', []);
@@ -222,6 +233,15 @@ export function resetImageGeneration(): void {
     setWindowState('isGeneratingImages', false);
     setWindowState('isPublishing', false);
     setWindowState('generatedImages', []);
+    // ✅ [2026-03-29 FIX] ImageManager도 초기화 — 이전 이미지 잔존으로 재시도 시 오염 방지
+    try {
+      if (typeof (window as any).ImageManager !== 'undefined' && typeof (window as any).ImageManager.clear === 'function') {
+        (window as any).ImageManager.clear();
+      }
+      (window as any).imageManagementGeneratedImages = [];
+    } catch (e) {
+      console.warn('[FullAutoUtils] ImageManager.clear() 실패:', e);
+    }
     clearImageGenerationLocks();
     resetProgressUI();
     console.log('[FullAutoUtils] ✅ 이미지 상태 리셋 완료 → 재시도 가능 (글 보존)');

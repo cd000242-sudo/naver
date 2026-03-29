@@ -1260,6 +1260,19 @@ export function initContinuousPublishingV2(): void {
         scheduleDateInput.value = `${yyyy}-${mm}-${dd}`;
       }
 
+      // ✅ [2026-03-29] 예약 시간 10분 단위 선택기 — 최초 1회만 렌더링
+      const timeWrap = document.getElementById('continuous-modal-schedule-time-wrap');
+      if (timeWrap && !timeWrap.querySelector('.time24-select-wrap')) {
+        timeWrap.innerHTML = createTime24Select({
+          id: 'continuous-modal-schedule-time',
+          defaultValue: '09:00',
+          step: 10,
+          style: 'width: 100%;',
+          selectStyle: 'width: 48%; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border-medium); background: var(--bg-secondary); color: var(--text-strong); font-size: 0.85rem; color-scheme: dark; cursor: pointer;',
+        });
+        bindTime24Events(timeWrap);
+      }
+
       // 열 때 현재 메인 UI 값을 모달에 반영
       syncContinuousSettings('main');
 
@@ -3184,7 +3197,11 @@ function showEditQueueItemModal(item: ContinuousQueueItem, options?: { fromFullV
     const scheduleDateEl = document.getElementById('continuous-modal-schedule-date') as HTMLInputElement | null;
     if (scheduleDateEl) scheduleDateEl.value = datePart || '';
     const scheduleTimeEl = document.getElementById('continuous-modal-schedule-time') as HTMLInputElement | null;
-    if (scheduleTimeEl) scheduleTimeEl.value = timePart;
+    if (scheduleTimeEl) {
+      scheduleTimeEl.value = timePart;
+      // ✅ [2026-03-29] time24Select UI도 동기화
+      setTime24Value('continuous-modal-schedule-time', timePart);
+    }
   }
 
   // 카테고리
@@ -3664,7 +3681,7 @@ async function startContinuousPublishingV2(): Promise<void> {
             // ImageManager에도 동기화 (필요시)
             try {
               if (typeof ImageManager !== 'undefined') {
-                ImageManager.clear();
+                ImageManager.clearAll(); // ✅ [2026-03-29 FIX] clear→clearAll (currentStructuredContent도 초기화)
                 if (headings.length > 0) ImageManager.setHeadings(headings);
 
                 generatedImgs.forEach((img: any) => {
@@ -3828,12 +3845,17 @@ async function startContinuousPublishingV2(): Promise<void> {
       }
 
       // ✅ [2026-03-21] 실패 후 전역 상태 정리 (다음 시도 오염 방지)
+      // ✅ [2026-03-29 FIX] ImageManager.clearAll() 추가 — imageMap 잔존으로 다음 항목 오염 방지
       try {
+        if (typeof ImageManager !== 'undefined' && typeof ImageManager.clearAll === 'function') {
+          ImageManager.clearAll();
+        }
         (window as any).currentStructuredContent = null;
         (window as any).generatedImages = [];
+        (window as any).imageManagementGeneratedImages = [];
         (window as any).headingImageMap = new Map();
         if (typeof clearImageGenerationLocks === 'function') clearImageGenerationLocks();
-        console.log('[Continuous] 🧹 실패 후 상태 정리 완료');
+        console.log('[Continuous] 🧹 실패 후 상태 정리 완료 (ImageManager + 전역 변수)');
       } catch (cleanupErr) {
         console.warn('[Continuous] 상태 정리 오류 (무시):', cleanupErr);
       }
@@ -3925,10 +3947,13 @@ async function startContinuousPublishingV2(): Promise<void> {
         // 즉시 발행: 안전 간격 적용 (캡차 방지)
         _continuousPublishCount++;
         const rawInterval = Number(item.interval) || 180;
-        const safeWait = getSafePublishInterval(rawInterval, _continuousPublishCount);
+        const safeResult = getSafePublishInterval(rawInterval, _continuousPublishCount);
+        const safeWait = safeResult.interval;
         if (rawInterval < SAFE_PUBLISH_MIN_INTERVAL_SEC) {
           appendLog(`⚠️ 캡차 방지: 발행 간격 ${rawInterval}초 → ${safeWait}초(${Math.round(safeWait/60)}분)로 자동 조정`);
         }
+        // ✅ [2026-03-29 FIX] 캡차방지 상세 로그 출력 (Enhanced 큐와 동일)
+        safeResult.logs.forEach(msg => appendLog(msg));
         appendLog(`⏰ 다음 발행까지 ${safeWait}초(${Math.round(safeWait/60)}분) 대기... (발행#${_continuousPublishCount}, ${_continuousPublishCount % COOLDOWN_EVERY_N === 0 ? '🧊 쿨다운 포함' : '일반 대기'})`);
         const waitOk = await waitWithInterrupt(safeWait);
         if (!waitOk) break;
@@ -3969,7 +3994,7 @@ async function startContinuousPublishingV2(): Promise<void> {
 
       // ImageManager 초기화
       if (typeof ImageManager !== 'undefined') {
-        ImageManager.clear();
+        ImageManager.clearAll(); // ✅ [2026-03-29 FIX] clear→clearAll (currentStructuredContent도 초기화)
       }
 
       console.log('[Continuous] ✅ 전체 상태 초기화 완료 → 새 발행 준비 완료');

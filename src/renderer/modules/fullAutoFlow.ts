@@ -325,6 +325,21 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
     // ✅ 중지 체크
     checkShouldStop();
 
+    // ✅ [2026-03-29 FIX v2] 이전 세션의 이미지 잔존 방지 — 풀오토 시작 시 무조건 초기화
+    // 원인: ImageManager에 이전 글(쇼핑커넥트 등)의 이미지가 남아있으면
+    //       L427에서 "ImageManager에서 이미지 가져오기"로 그대로 재사용되어
+    //       매번 같은 이미지(가습기 등)가 발행됨
+    // v1: formData.imageManagementImages 조건 → continuousPublishing 흐름에서 맹점 발생
+    // v2: 무조건 초기화 (이미지는 이후 단계에서 새로 생성/수집됨)
+    try {
+      ImageManager.clearAll();
+      generatedImages = [];
+      (window as any).generatedImages = [];
+      console.log('[FullAuto] ✅ ImageManager/generatedImages 초기화 완료 (이전 이미지 잔존 방지)');
+    } catch (clearErr) {
+      console.error('[FullAuto] ImageManager 초기화 실패:', clearErr);
+    }
+
     // ✅ 이미 생성된 콘텐츠가 있으면 재사용 (중복 생성 방지!)
     let structuredContent = formData.structuredContent;
 
@@ -967,16 +982,23 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
       console.error('[FullAutoFlow] 임시 데이터 정리 중 오류:', e);
     }
 
-    // ✅ 모든 필드 초기화 (3초 후)
-    setTimeout(() => {
-      try {
-        resetAllFields();
-        // ✅ Unified Progress Bar 숨기기 추가
-        hideUnifiedProgress();
-      } catch (e) {
-        console.error('[FullAutoFlow] 필드 초기화 중 오류:', e);
-      }
-    }, 3000);
+    // ✅ [2026-03-29 FIX] 발행 성공 시에만 필드 초기화 (3초 후)
+    // executeBlogPublishing이 throw 없이 { success: false } 반환하는 경우에도 콘텐츠 보존
+    if (automationResult?.success) {
+      setTimeout(() => {
+        try {
+          resetAllFields();
+          // ✅ Unified Progress Bar 숨기기 추가
+          hideUnifiedProgress();
+        } catch (e) {
+          console.error('[FullAutoFlow] 필드 초기화 중 오류:', e);
+        }
+      }, 3000);
+    } else {
+      console.log('[FullAutoFlow] ⚠️ 발행 결과가 성공이 아니므로 콘텐츠/이미지 보존 (재시도 가능)');
+      // 실패 시에는 resetPublishing만 호출 (콘텐츠 보존)
+      try { resetPublishing(); } catch (e) { /* ignore */ }
+    }
 
     return automationResult;
   } catch (error) {
@@ -1160,20 +1182,25 @@ export async function executeSemiAutoFlow(formData: any): Promise<any> {
   clearAutosavedContent();
   appendLog('💾 임시 저장 데이터 삭제 완료');
 
-  // ✅ 모든 필드 초기화 (3초 후)
-  setTimeout(() => {
-    resetAllFields();
-    // 썸네일 생성기도 함께 초기화
-    resetThumbnailGeneratorOnPublish();
-  }, 3000);
+  // ✅ [2026-03-29 FIX] 발행 성공 시에만 필드 초기화 (3초 후)
+  if (automationResult?.success) {
+    setTimeout(() => {
+      resetAllFields();
+      // 썸네일 생성기도 함께 초기화
+      resetThumbnailGeneratorOnPublish();
+    }, 3000);
 
-  // 2초 후 진행률 숨김
-  setTimeout(() => {
-    const progressContainer = document.getElementById('unified-progress-container');
-    if (progressContainer) {
-      progressContainer.style.display = 'none';
-    }
-  }, 3000);
+    // 3초 후 진행률 숨김
+    setTimeout(() => {
+      const progressContainer = document.getElementById('unified-progress-container');
+      if (progressContainer) {
+        progressContainer.style.display = 'none';
+      }
+    }, 3000);
+  } else {
+    console.log('[SemiAutoFlow] ⚠️ 발행 결과가 성공이 아니므로 콘텐츠/이미지 보존 (재시도 가능)');
+    try { resetPublishing(); } catch (e) { /* ignore */ }
+  }
 
   return automationResult;
   } catch (error) {

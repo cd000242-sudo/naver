@@ -6603,8 +6603,10 @@ ${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
   // ✅ [2026-02-08] Perplexity 엔진 선택 시: 네이버 보충 건너뛰고 바로 Perplexity 리서치
   // Perplexity는 팩트 기반 실시간 웹 검색이므로 네이버 2차/3차 보충보다 훨씬 신뢰성이 높음
   const isPerplexityEngine = (input.generator || '').toLowerCase() === 'perplexity';
+  // ✅ [2026-03-29 FIX] custom 모드(페러프레이징 등)에서는 외부 보충 차단 (원문 오염 방지)
+  const isCustomMode = (input as any).contentMode === 'custom';
 
-  if (isPerplexityEngine && (!baseBody || baseBody.length < 500) && (keywords.length > 0 || baseTitle)) {
+  if (isPerplexityEngine && !isCustomMode && (!baseBody || baseBody.length < 500) && (keywords.length > 0 || baseTitle)) {
     const searchKeyword = baseTitle || keywords.slice(0, 5).join(' ');
     console.log(`\n🔍 [Perplexity 엔진] 네이버 소스 부족 (${baseBody?.length || 0}자) → Perplexity 팩트 기반 리서치 우선 실행`);
     console.log(`   검색 키워드: "${searchKeyword}"`);
@@ -6636,7 +6638,8 @@ ${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
 
   // ✅ 본문이 너무 짧거나 의미 없는 경우 네이버 검색 API로 보충
   // (Perplexity 엔진이 아니거나, Perplexity 리서치로도 부족한 경우)
-  if (baseBody && baseBody.length < 500) {
+  // ✅ [2026-03-29 FIX] custom 모드(페러프레이징 등)에서는 보충 차단 (원문 오염 방지)
+  if (baseBody && baseBody.length < 500 && !isCustomMode) {
     // ✅ [2026-03-08 FIX] 네이버 블로그 URL이면 검색 API 보충도 차단 (다른 글 혼입 방지)
     const hasExplicitNaverBlogUrl3 = urlPatterns.some(u => /blog\.naver\.com/i.test(u));
 
@@ -6678,7 +6681,8 @@ ${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
 
   // ✅ 키워드/제목만 있을 때 네이버 검색 API로 콘텐츠 수집
   // ✅ [2026-03-08 FIX] 네이버 블로그 URL이 있으면 검색 API 폴백 차단
-  if ((!baseBody || baseBody.length < 200) && (keywords.length > 0 || baseTitle) && !hasExplicitNaverBlogUrlGlobal && !isNaverStoreUrl) {
+  // ✅ [2026-03-29 FIX] custom 모드(페러프레이징 등)에서는 수집 차단 (원문 오염 방지)
+  if ((!baseBody || baseBody.length < 200) && (keywords.length > 0 || baseTitle) && !hasExplicitNaverBlogUrlGlobal && !isNaverStoreUrl && !isCustomMode) {
     const naverClientId = input.naverClientId || process.env.NAVER_CLIENT_ID;
     const naverClientSecret = input.naverClientSecret || process.env.NAVER_CLIENT_SECRET;
 

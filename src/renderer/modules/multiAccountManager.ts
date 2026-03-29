@@ -3701,7 +3701,7 @@ export async function initMultiAccountPublishModal() {
 
         // ImageManager 초기화
         if (typeof ImageManager !== 'undefined') {
-          ImageManager.clear();
+          ImageManager.clearAll(); // ✅ [2026-03-29 FIX] clear→clearAll (currentStructuredContent도 초기화)
         }
 
         console.log('[FullAuto] ✅ 전체 상태 초기화 완료 → 새 발행 준비 완료');

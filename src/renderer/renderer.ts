@@ -111,6 +111,8 @@ import {
   getScheduleDateFromInput,
   getRecommendedScheduleTime
 } from './utils/dateUtils.js';
+// ✅ [2026-03-29] 24시간 시간 선택 유틸리티 (10분 단위)
+import { createTime24Select, bindTime24Events } from './utils/time24Select.js';
 // ✅ [2026-01-25 모듈화] 제목 처리 유틸리티
 import {
   applyKeywordPrefixToTitle
@@ -505,16 +507,42 @@ function saveGeneratedPostFromData(
       isThumbnail: img.isThumbnail || false, // ✅ [2026-03-09 FIX] 썸네일 플래그 보존
     }));
 
+    // ✅ [2026-03-29 FIX] localStorage 할당량 초과 방지: structuredContent 경량화
+    // 전체 본문/소제목 content를 저장하면 글 1개당 50KB+ → 100개 시 5MB 초과
+    // 목록 표시에 필요한 메타데이터만 보존하고, 발행 시에는 currentStructuredContent 사용
+    const lightHeadings = (structuredContent?.headings || []).map((h: any) => ({
+      title: h.title || '',
+      // content는 저장하지 않음 (목록에서 불필요, 발행 시 currentStructuredContent 사용)
+    }));
+    const lightStructuredContent = {
+      selectedTitle: structuredContent?.selectedTitle || '',
+      hashtags: structuredContent?.hashtags || [],
+      // bodyPlain, introduction, headings.content 등 대용량 필드 제외
+      articleType: structuredContent?.articleType || '',
+      category: structuredContent?.category || '',
+      toneStyle: structuredContent?.toneStyle || '',
+    };
+
+    // ✅ [2026-03-29 FIX] 이미지 base64 데이터 URL 제거 (1개당 수백KB)
+    const lightImages = normalizedImages.map((img: any) => ({
+      heading: img.heading || '',
+      provider: img.provider || 'unknown',
+      filePath: img.filePath || '',
+      url: (img.url && !img.url.startsWith('data:')) ? img.url : '',
+      isThumbnail: img.isThumbnail || false,
+      savedToLocal: img.savedToLocal || false,
+    }));
+
     const post: GeneratedPost = {
       id: postId,
       title: structuredContent?.selectedTitle || '',
-      content: structuredContent?.bodyPlain || structuredContent?.content || '',
+      content: (structuredContent?.bodyPlain || structuredContent?.content || '').substring(0, 200), // 미리보기용 200자만
       hashtags: structuredContent?.hashtags || [],
-      headings: structuredContent?.headings || [],
-      structuredContent: structuredContent,
+      headings: lightHeadings,
+      structuredContent: lightStructuredContent,
       createdAt: now,
       updatedAt: now,
-      images: normalizedImages.length > 0 ? normalizedImages : undefined,
+      images: lightImages.length > 0 ? lightImages : undefined,
       imageCount: normalizedImages.length || undefined,
       isFavorite: false,
       category: resolvedCategory || undefined,
@@ -1996,18 +2024,38 @@ function saveGeneratedPost(structuredContent: any, isUpdate: boolean = false, ov
       (document.querySelector('input[name="article-type"]:checked') as HTMLInputElement)?.value ||
       'seo';
 
+    // ✅ [2026-03-29 FIX] localStorage 할당량 초과 방지: 경량화 (saveGeneratedPostFromData와 동일)
+    const lightHeadings2 = (structuredContent.headings || []).map((h: any) => ({
+      title: h.title || '',
+    }));
+    const lightStructuredContent2 = {
+      selectedTitle: structuredContent.selectedTitle || '',
+      hashtags: structuredContent.hashtags || [],
+      articleType: structuredContent.articleType || '',
+      category: structuredContent.category || '',
+      toneStyle: structuredContent.toneStyle || '',
+    };
+    const lightImages2 = (normalizedImagesForSave || []).map((img: any) => ({
+      heading: img.heading || '',
+      provider: img.provider || 'unknown',
+      filePath: img.filePath || '',
+      url: (img.url && !img.url.startsWith('data:')) ? img.url : '',
+      isThumbnail: img.isThumbnail || false,
+      savedToLocal: img.savedToLocal || false,
+    }));
+
     const post: GeneratedPost = {
       id: postId,
       title: structuredContent.selectedTitle || '',
-      content: structuredContent.bodyPlain || structuredContent.content || '',
+      content: (structuredContent.bodyPlain || structuredContent.content || '').substring(0, 200), // 미리보기용 200자만
       hashtags: structuredContent.hashtags || [],
-      headings: structuredContent.headings || [],
-      structuredContent: structuredContent, // ✅ 전체 구조화된 콘텐츠 저장
+      headings: lightHeadings2,
+      structuredContent: lightStructuredContent2,
       createdAt: existingPost?.createdAt || now, // 기존 생성일 유지
       updatedAt: isUpdate ? now : (existingPost?.updatedAt || now), // 업데이트 시에만 수정일 갱신
       // ✅ 새 글에서는 이전 글 이미지 상속 금지 (미리보기 이미지 섞임 방지)
-      images: normalizedImagesForSave.length > 0
-        ? normalizedImagesForSave
+      images: lightImages2.length > 0
+        ? lightImages2
         : (isUpdate ? (existingPost?.images || undefined) : undefined),
       isFavorite: existingPost?.isFavorite || false, // 기존 즐겨찾기 유지
       category: resolvedCategory || undefined,
@@ -3455,9 +3503,11 @@ const ImageManager = {
     this.unsetHeadings.clear();
     this.headings = [];
     // ✅ [2026-02-12 P0 FIX] 전역변수도 함께 초기화
+    // ✅ [2026-03-29 FIX] currentStructuredContent도 초기화 (clearAll과 동일 수준)
     try {
       (window as any).generatedImages = [];
       (window as any).imageManagementGeneratedImages = [];
+      (window as any).currentStructuredContent = null;
     } catch (e) {
       console.warn('[renderer] catch ignored:', e);
     }
@@ -7233,8 +7283,16 @@ async function initUnifiedTab(): Promise<void> {
   const paraphraseBtn = document.getElementById('paraphrase-mode-btn');
   if (paraphraseBtn) {
     paraphraseBtn.addEventListener('click', async () => {
-      await paraphraseContent();
+      try {
+        console.log('[Paraphrase] 버튼 클릭됨');
+        await paraphraseContent();
+      } catch (err) {
+        console.error('[Paraphrase] 실행 중 오류:', err);
+        toastManager.error(`❌ 페러프레이징 실패: ${(err as Error).message}`);
+      }
     });
+  } else {
+    console.warn('[Paraphrase] paraphrase-mode-btn 요소를 찾을 수 없습니다!');
   }
 
   // ✅ 생성된 글 목록 새로고침 버튼
@@ -9543,19 +9601,47 @@ function initUnifiedModeSelection(): void {
       if (scheduleContainer) {
         if (mode === 'schedule') {
           scheduleContainer.style.display = 'block';
-          // 최소 예약 시간 설정
-          const scheduleInput = document.getElementById('unified-schedule-date') as HTMLInputElement;
-          if (scheduleInput) {
+          // ✅ [2026-03-29] date picker + time24Select (10분 단위) 초기화
+          const datePicker = document.getElementById('unified-schedule-date-picker') as HTMLInputElement;
+          const timeWrap = document.getElementById('unified-schedule-time-select-wrap');
+          if (datePicker) {
             const now = new Date();
             const minDate = new Date(now.getTime() + 60000);
-            const roundedMin = String(Math.ceil(minDate.getMinutes() / 10) * 10 % 60).padStart(2, '0'); // 10분 단위 올림
-            const formattedDateTime = `${minDate.getFullYear()}-${String(minDate.getMonth() + 1).padStart(2, '0')}-${String(minDate.getDate()).padStart(2, '0')}T${String(minDate.getHours()).padStart(2, '0')}:${roundedMin}`;
-            scheduleInput.min = formattedDateTime;
-            scheduleInput.value = formattedDateTime;
+            const dateStr = `${minDate.getFullYear()}-${String(minDate.getMonth() + 1).padStart(2, '0')}-${String(minDate.getDate()).padStart(2, '0')}`;
+            datePicker.min = dateStr;
+            datePicker.value = dateStr;
             setTimeout(() => {
-              scheduleInput.focus();
-              scheduleInput.showPicker?.();
+              datePicker.focus();
+              datePicker.showPicker?.();
             }, 100);
+          }
+          // time24Select 렌더링 (최초 1회만)
+          if (timeWrap && !timeWrap.querySelector('.time24-select-wrap')) {
+            const now = new Date();
+            const roundedMin = Math.ceil(now.getMinutes() / 10) * 10 % 60;
+            const defaultTime = `${String(now.getHours()).padStart(2, '0')}:${String(roundedMin).padStart(2, '0')}`;
+            timeWrap.innerHTML = createTime24Select({
+              id: 'unified-schedule-time',
+              defaultValue: defaultTime,
+              step: 10,
+              style: 'width: 100%;',
+              selectStyle: 'padding: 0.85rem; border-radius: 8px; border: 2px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 1rem; color-scheme: dark; cursor: pointer; flex: 1;'
+            });
+            bindTime24Events(timeWrap);
+            // date 또는 time 변경 시 hidden input 동기화
+            const syncScheduleHidden = () => {
+              const dp = document.getElementById('unified-schedule-date-picker') as HTMLInputElement;
+              const hiddenTime = document.getElementById('unified-schedule-time') as HTMLInputElement;
+              const hiddenFinal = document.getElementById('unified-schedule-date') as HTMLInputElement;
+              if (dp?.value && hiddenTime?.value && hiddenFinal) {
+                hiddenFinal.value = `${dp.value}T${hiddenTime.value}`;
+                hiddenFinal.dispatchEvent(new Event('change', { bubbles: true }));
+              }
+            };
+            datePicker?.addEventListener('change', syncScheduleHidden);
+            timeWrap.addEventListener('change', syncScheduleHidden);
+            // 초기값 동기화
+            syncScheduleHidden();
           }
         } else {
           scheduleContainer.style.display = 'none';
@@ -9653,42 +9739,47 @@ function initUnifiedModeSelection(): void {
       if (scheduleContainer) {
         if (mode === 'schedule') {
           scheduleContainer.style.display = 'block';
-          // 최소 예약 시간 설정 (현재 시간 + 1분)
-          const scheduleInput = document.getElementById('unified-schedule-date') as HTMLInputElement;
+          // ✅ [2026-03-29] date picker + time24Select (10분 단위) 초기화
+          const datePicker = document.getElementById('unified-schedule-date-picker') as HTMLInputElement;
+          const timeWrap = document.getElementById('unified-schedule-time-select-wrap');
           const scheduleConfirmBtn = document.getElementById('unified-schedule-confirm-btn') as HTMLButtonElement;
 
-          if (scheduleInput) {
+          if (datePicker) {
             const now = new Date();
-            const minDate = new Date(now.getTime() + 60000); // 1분 후
-            const year = minDate.getFullYear();
-            const month = String(minDate.getMonth() + 1).padStart(2, '0');
-            const day = String(minDate.getDate()).padStart(2, '0');
-            const hours = String(minDate.getHours()).padStart(2, '0');
-            const minutes = String(Math.ceil(minDate.getMinutes() / 10) * 10 % 60).padStart(2, '0'); // 10분 단위 올림
-            const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
-            scheduleInput.min = formattedDateTime;
-            scheduleInput.value = formattedDateTime;
-
-            // 입력 필드에 포커스하여 달력 바로 표시
+            const minDate = new Date(now.getTime() + 60000);
+            const dateStr = `${minDate.getFullYear()}-${String(minDate.getMonth() + 1).padStart(2, '0')}-${String(minDate.getDate()).padStart(2, '0')}`;
+            datePicker.min = dateStr;
+            datePicker.value = dateStr;
             setTimeout(() => {
-              scheduleInput.focus();
-              scheduleInput.showPicker?.(); // showPicker API 지원 시 달력 바로 표시
+              datePicker.focus();
+              datePicker.showPicker?.();
             }, 100);
           }
-
-          // 확인 버튼 표시
-          if (scheduleConfirmBtn) {
-            scheduleConfirmBtn.style.display = 'block';
-          }
-
-          // 날짜/시간 변경 시 확인 버튼 활성화
-          if (scheduleInput) {
-            scheduleInput.addEventListener('change', () => {
-              if (scheduleConfirmBtn && scheduleInput.value) {
-                scheduleConfirmBtn.disabled = false;
-                scheduleConfirmBtn.style.opacity = '1';
-              }
+          // time24Select 렌더링 (최초 1회만)
+          if (timeWrap && !timeWrap.querySelector('.time24-select-wrap')) {
+            const now = new Date();
+            const roundedMin = Math.ceil(now.getMinutes() / 10) * 10 % 60;
+            const defaultTime = `${String(now.getHours()).padStart(2, '0')}:${String(roundedMin).padStart(2, '0')}`;
+            timeWrap.innerHTML = createTime24Select({
+              id: 'unified-schedule-time',
+              defaultValue: defaultTime,
+              step: 10,
+              style: 'width: 100%;',
+              selectStyle: 'padding: 0.85rem; border-radius: 8px; border: 2px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 1rem; color-scheme: dark; cursor: pointer; flex: 1;'
             });
+            bindTime24Events(timeWrap);
+            const syncScheduleHidden = () => {
+              const dp = document.getElementById('unified-schedule-date-picker') as HTMLInputElement;
+              const hiddenTime = document.getElementById('unified-schedule-time') as HTMLInputElement;
+              const hiddenFinal = document.getElementById('unified-schedule-date') as HTMLInputElement;
+              if (dp?.value && hiddenTime?.value && hiddenFinal) {
+                hiddenFinal.value = `${dp.value}T${hiddenTime.value}`;
+                hiddenFinal.dispatchEvent(new Event('change', { bubbles: true }));
+              }
+            };
+            datePicker?.addEventListener('change', syncScheduleHidden);
+            timeWrap.addEventListener('change', syncScheduleHidden);
+            syncScheduleHidden();
           }
         } else {
           scheduleContainer.style.display = 'none';
@@ -9780,8 +9871,9 @@ function initUnifiedModeSelection(): void {
       publishModeSelect.addEventListener('change', () => {
         if (publishModeSelect.value === 'schedule') {
           // 약간의 딜레이 후 달력 열기 (UI 렌더링 대기)
+          const dp = document.getElementById('unified-schedule-date-picker') as HTMLInputElement;
           setTimeout(() => {
-            scheduleInput.showPicker?.();
+            dp?.showPicker?.();
           }, 100);
         }
       });
@@ -10203,6 +10295,13 @@ function resetAllFields(): void {
 
     const generatedImagesSection = document.getElementById('generated-images-section');
     if (generatedImagesSection) generatedImagesSection.style.display = 'none';
+
+    // ✅ [2026-03-29 FIX] ImageManager도 초기화 (이전에 누락되어 imageMap 잔존)
+    try {
+      ImageManager.clear();
+    } catch (e) {
+      console.warn('[resetAllFields] ImageManager.clear() 실패:', e);
+    }
 
     // 전역 변수 초기화 (발행 후 캐시 완전 제거)
     (window as any).currentStructuredContent = null;

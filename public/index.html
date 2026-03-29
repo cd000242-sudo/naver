@@ -1256,17 +1256,24 @@
                         </div>
                         <div
                             style="position: relative; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.05)); border: 2px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                            <!-- 달력 입력 + 버튼 -->
+                            <!-- 날짜 + 시간 입력 (10분 단위) -->
                             <div style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 1rem;">
-                                <input type="datetime-local" id="unified-schedule-date" step="600"
-                                    style="flex: 1; padding: 1rem; font-size: 1.1rem; border: 2px solid var(--border-medium); border-radius: 8px; background: var(--bg-primary); color: var(--text-strong);">
+                                <input type="date" id="unified-schedule-date-picker"
+                                    style="flex: 1; padding: 1rem; font-size: 1.1rem; border: 2px solid var(--border-medium); border-radius: 8px; background: var(--bg-primary); color: var(--text-strong); color-scheme: dark;">
                                 <button type="button" id="open-calendar-btn"
-                                    onclick="document.getElementById('unified-schedule-date').showPicker()"
+                                    onclick="document.getElementById('unified-schedule-date-picker').showPicker()"
                                     style="padding: 1rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1.3rem; transition: all 0.2s; box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);"
                                     title="달력 열기">
                                     📅
                                 </button>
                             </div>
+                            <!-- 시간 선택 (10분 단위 커스텀 select) -->
+                            <div style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 1rem;">
+                                <label style="font-weight: 600; color: var(--text-strong); font-size: 0.95rem; white-space: nowrap;">🕐 시간</label>
+                                <div id="unified-schedule-time-select-wrap" style="flex: 1;"></div>
+                            </div>
+                            <!-- hidden input (기존 코드 호환용 - 값은 JS에서 동기화) -->
+                            <input type="hidden" id="unified-schedule-date" value="">
 
                             <!-- 선택된 시간 미리보기 -->
                             <div
@@ -6353,8 +6360,7 @@
                             <div>
                                 <label
                                     style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
-                                <input type="time" id="continuous-modal-schedule-time" value="09:00" step="600"
-                                    style="width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border-medium); background: var(--bg-secondary); color: var(--text-strong); font-size: 0.85rem; color-scheme: dark;">
+                                <div id="continuous-modal-schedule-time-wrap"></div>
                             </div>
                         </div>
                         <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">💡 네이버
