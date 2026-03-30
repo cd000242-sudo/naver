@@ -2546,10 +2546,22 @@ export class NaverBlogAutomation {
     }
     this.log('✅ 비밀번호 입력 완료');
 
-    // ✅ 로그인 상태 유지 체크 (세션 만료 방지)
+    // ✅ [2026-03-30 FIX] 로그인 상태 유지 체크 (세션 만료 방지)
+    // [Playwright 검증] 실제 셀렉터: #nvlong (class: input_keep, name: nvlong)
+    // ⚠️ 이전 #keep은 존재하지 않아 항상 null → 세션 미유지 → 매번 재로그인 → 캡차 유발 근본 원인!
     try {
-      // #keep 뿐만 아니라 관련 라벨이나 체크박스 상태 확인
-      const keepLoggedIn = await page.$('#keep');
+      // 다중 셀렉터 폴백: #nvlong (현재) → #keep (레거시) → input.input_keep (클래스)
+      const KEEP_LOGIN_SELECTORS = ['#nvlong', '#keep', 'input.input_keep', 'input[name="nvlong"]'];
+      let keepLoggedIn: import('puppeteer-core').ElementHandle<Element> | null = null;
+      let usedSelector = '';
+      for (const sel of KEEP_LOGIN_SELECTORS) {
+        keepLoggedIn = await page.$(sel);
+        if (keepLoggedIn) {
+          usedSelector = sel;
+          break;
+        }
+      }
+
       if (keepLoggedIn) {
         // 이미 체크되어 있는지 확인
         const isChecked = await page.evaluate((el) => {
@@ -2558,21 +2570,32 @@ export class NaverBlogAutomation {
         }, keepLoggedIn);
 
         if (!isChecked) {
-          this.log('✅ 로그인 상태 유지 활성화...');
-          // ✅ [2026-03-27 FIX] Ghost Cursor로 통일 (이전: Puppeteer .click() → 클릭 메커니즘 불일치)
+          this.log(`✅ 로그인 상태 유지 활성화... (셀렉터: ${usedSelector})`);
+          // ✅ Ghost Cursor로 클릭 (봇 감지 우회)
           if (this.cursor) {
-            await this.cursor.click('#keep').catch(async () => {
+            await this.cursor.click(usedSelector).catch(async () => {
               await keepLoggedIn!.click(); // fallback
             });
           } else {
             await keepLoggedIn.click();
           }
+          // 체크 확인
+          const nowChecked = await page.evaluate((el) => (el as HTMLInputElement).checked, keepLoggedIn).catch(() => false);
+          if (!nowChecked) {
+            // 클릭이 안 먹은 경우 JavaScript로 강제 체크
+            await page.evaluate((el) => { (el as HTMLInputElement).checked = true; }, keepLoggedIn);
+            this.log('   ⚠️ 클릭 실패 → JavaScript로 강제 체크');
+          }
         } else {
           this.log('ℹ️ 로그인 상태 유지가 이미 활성화되어 있습니다.');
         }
         await this.humanDelay(300, 600);
+      } else {
+        this.log('⚠️ 로그인 상태 유지 체크박스를 찾을 수 없습니다 (시도된 셀렉터: ' + KEEP_LOGIN_SELECTORS.join(', ') + ')');
       }
-    } catch (e) { /* 무시 */ }
+    } catch (e) {
+      this.log(`⚠️ 로그인 상태 유지 체크 실패: ${(e as Error).message}`);
+    }
 
     // ✅ 로그인 버튼 클릭 전 인간적인 행동 추가 (CAPTCHA 방지)
     // 1. 입력 내용 확인하듯 잠시 대기
@@ -2671,191 +2694,97 @@ export class NaverBlogAutomation {
     await this.humanDelay(200, 500);
 
     try {
-      await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 10000 });
+      // ✅ [2026-03-30 FIX] 타임아웃 10초→20초 (네이버 서버 지연 대응)
+      await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 20000 });
     } catch (navError) {
+      // 네비게이션 타임아웃은 캡차/2FA 등으로 인한 것일 수 있으므로 단순 대기 후 루프 진입
       await this.delay(1000);
     }
 
-    // URL 확인 및 캡차 처리
-    let captchaDetected = false;
+    // ✅ [2026-03-30 OVERHAUL] 캡차/보안 감지 + 사용자 알림 통합 개선
+    // 핵심 변경:
+    // 1. 텍스트 기반 캡차 감지 (DOM innerText로 '자동입력 방지', '보안문자' 등 탐지)
+    // 2. 로그인 에러 메시지 감지 (비밀번호 틀림, 계정 잠금 등)
+    // 3. 시간 기반 루프 (10분 통합 타임아웃, 캡차 미감지 시에도 충분한 대기)
+    // 4. 30초마다 반복 알림 소리 (사용자가 자리 비운 경우 대비)
+    // 5. 브라우저 창 포그라운드로 올리기 (BrowserWindow.focus)
+    let challengeDetected = false;  // 캡차/보안문자/인증 등 사용자 개입 필요 상태
     let loginSuccess = false;
     let twoFactorDetected = false;
-    const maxChecks = 120; // ✅ 120회로 증가 (캡차 해결 시간 확보: 최대 10분)
-    let captchaWaitStartTime: number | null = null;
-    const CAPTCHA_MAX_WAIT_TIME = 600000; // ✅ 10분 최대 대기
+    let loginErrorDetected: string | null = null;
+    const LOGIN_TOTAL_TIMEOUT = 600000; // 10분 통합 타임아웃
+    const loginStartTime = Date.now();
+    let lastSoundTime = 0;
+    const SOUND_INTERVAL = 30000; // 30초마다 알림 소리
+    let stuckOnLoginPageSince: number | null = null; // 로그인 페이지에 머무른 시점
+    const STUCK_THRESHOLD = 15000; // 15초 이상 로그인 페이지에 머물면 사용자 개입 필요로 판단
 
-    for (let checkAttempt = 0; checkAttempt < maxChecks; checkAttempt++) {
-      this.ensureNotCancelled();
-
-      // 대기 시간 (캡차 감지 시 더 길게)
-      const waitTime = captchaDetected ? 2000 : 500; // 캡차 감지 시 2초, 일반 0.5초
-      await this.delay(waitTime);
-
-      const currentUrl = page.url();
-
-      // 캡차 감지
+    // 🔊 [2026-03-30 FIX] 알림 소리 재생 헬퍼 — execFile + timeout/unref로 좀비 프로세스 방지
+    const playAlertSound = async (count: number = 3) => {
       try {
-        const captchaSelectors = [
-          '#captcha',
-          '.captcha',
-          '[class*="captcha"]',
-          '[id*="captcha"]',
-          '[class*="Captcha"]',
-          'iframe[src*="captcha"]',
-          'iframe[src*="challenge"]',
-          '.challenge-container',
-          '[class*="challenge"]',
-        ];
+        const { execFile } = await import('child_process');
+        const child = execFile('powershell', [
+          '-NoProfile', '-NonInteractive', '-Command',
+          `Add-Type -AssemblyName System.Media; 1..${count} | ForEach-Object { (New-Object Media.SoundPlayer 'C:\\Windows\\Media\\notify.wav').PlaySync(); Start-Sleep -Milliseconds 300 }`
+        ], { timeout: 10000 });
+        child.unref();
+      } catch { }
+    };
 
-        let hasCaptcha = false;
-        for (const selector of captchaSelectors) {
-          const element = await page.$(selector).catch(() => null);
-          if (element) {
-            const isVisible = await element.evaluate((el: Element) => {
-              const htmlEl = el as HTMLElement;
-              return htmlEl.offsetParent !== null &&
-                htmlEl.style.display !== 'none' &&
-                htmlEl.style.visibility !== 'hidden';
-            }).catch(() => false);
-
-            if (isVisible) {
-              hasCaptcha = true;
+    // 🪟 [2026-03-30 FIX] 브라우저 창 포커스 헬퍼
+    // 이전: page.bringToFront()는 탭만 전환하지 실제 윈도우를 올리지 않음
+    // 현재: Electron BrowserWindow.focus() + setAlwaysOnTop으로 실제 윈도우 활성화
+    const bringBrowserToFront = async () => {
+      try {
+        // Puppeteer 탭 포커스 (기본)
+        if (this.page) {
+          await this.page.bringToFront();
+        }
+        // Electron BrowserWindow 활성화 (실제 윈도우를 최상위로)
+        try {
+          const { BrowserWindow } = await import('electron');
+          const allWindows = BrowserWindow.getAllWindows();
+          for (const win of allWindows) {
+            if (!win.isDestroyed()) {
+              if (win.isMinimized()) win.restore();
+              win.focus();
+              // 일시적으로 최상위에 표시 후 해제 (사용자 경험 보호)
+              win.setAlwaysOnTop(true);
+              setTimeout(() => {
+                try { win.setAlwaysOnTop(false); } catch { }
+              }, 3000);
               break;
             }
           }
-        }
+        } catch { /* Electron import 실패 시 무시 (테스트 환경) */ }
+      } catch { }
+    };
 
-        if (hasCaptcha) {
-          if (!captchaDetected) {
-            captchaDetected = true;
-            captchaWaitStartTime = Date.now();
-            this.log('');
-            this.log('🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨');
-            this.log('⚠️  캡차가 감지되었습니다!');
-            this.log('🖱️  브라우저 창에서 캡차를 직접 해결해주세요!');
-            this.log('⏳  해결될 때까지 최대 10분간 기다립니다...');
-            this.log('🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨');
-            this.log('');
+    while (true) {
+      this.ensureNotCancelled();
 
-            // Windows 소리 알림 (3번 울림)
-            try {
-              const { exec } = await import('child_process');
-              exec('powershell -c "1..3 | ForEach-Object { (New-Object Media.SoundPlayer \\"C:\\Windows\\Media\\notify.wav\\").PlaySync(); Start-Sleep -Milliseconds 500 }"');
-            } catch { }
-
-            // progressCallback으로 UI에 알림
-            if (this.progressCallback) {
-              this.progressCallback(0, 100, '🚨 캡차 감지! 브라우저에서 캡차를 해결해주세요!');
-            }
-          } else {
-            // 캡차 대기 중 시간 체크
-            if (captchaWaitStartTime) {
-              const elapsed = Date.now() - captchaWaitStartTime;
-              const remaining = Math.max(0, CAPTCHA_MAX_WAIT_TIME - elapsed);
-              const remainingMinutes = Math.floor(remaining / 60000);
-              const remainingSeconds = Math.floor((remaining % 60000) / 1000);
-
-              if (remaining > 0) {
-                // 20초마다 한 번씩만 로그 출력 (너무 많이 출력 방지)
-                if (checkAttempt % 10 === 0) {
-                  this.log(`⏳ 캡차 해결 대기 중... (남은 시간: ${remainingMinutes}분 ${remainingSeconds}초)`);
-                  this.log(`   💡 브라우저 창에서 캡차를 직접 해결해주세요!`);
-                }
-              } else {
-                throw new Error('캡차 해결 시간이 초과되었습니다. (10분)');
-              }
-            }
-          }
-          continue;
-        } else if (captchaDetected) {
-          // 캡차가 사라졌으면 해결된 것으로 간주
-          captchaDetected = false;
-          captchaWaitStartTime = null;
-          this.log('✅ 캡차가 해결되었습니다. 로그인을 계속 진행합니다...');
-
-          // 캡차 해결 후 로그인 버튼 재클릭 시도
-          await this.delay(1000);
-          try {
-            const loginButtonSelectors = [
-              ...this.LOGIN_BUTTON_SELECTORS,
-              'button[type="submit"].next_step',
-            ];
-
-            for (const selector of loginButtonSelectors) {
-              const loginButton = await page.$(selector).catch(() => null);
-              if (loginButton) {
-                const isClickable = await loginButton.evaluate((el: Element) => {
-                  const htmlEl = el as HTMLElement;
-                  const buttonEl = el as HTMLButtonElement;
-                  return !buttonEl.disabled && htmlEl.offsetParent !== null;
-                }).catch(() => false);
-
-                if (isClickable) {
-                  await loginButton.click();
-                  this.log('🔄 로그인 버튼을 다시 클릭했습니다.');
-                  await this.delay(2000);
-                  break;
-                }
-              }
-            }
-          } catch (error) {
-            // 로그인 버튼 재클릭 실패는 무시 (이미 해결되었을 수 있음)
-            this.log(`ℹ️ 로그인 버튼 재클릭 시도 중 오류 (무시): ${(error as Error).message}`);
-          }
-        }
-      } catch (error) {
-        // 캡차 감지 오류 무시
-        if ((error as Error).message.includes('캡차 해결 시간이 초과')) {
-          throw error;
+      // ⏰ 전체 타임아웃 확인
+      const elapsed = Date.now() - loginStartTime;
+      if (elapsed >= LOGIN_TOTAL_TIMEOUT) {
+        const finalUrl = page.url();
+        if (challengeDetected) {
+          throw new Error(`보안 인증 해결 시간이 초과되었습니다. (10분) 최종 URL: ${finalUrl}`);
+        } else if (loginErrorDetected) {
+          throw new Error(loginErrorDetected);
+        } else {
+          throw new Error(`로그인 시간이 초과되었습니다. (10분) 최종 URL: ${finalUrl}`);
         }
       }
 
-      // ✅ 보호조치/본인인증 페이지 감지
-      if (currentUrl.includes('protect') || currentUrl.includes('security') || currentUrl.includes('verification')) {
-        this.log('');
-        this.log('🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒');
-        this.log('⚠️  보호조치/본인인증 페이지 감지!');
-        this.log('🖱️  브라우저에서 본인인증을 완료해주세요!');
-        this.log('🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒');
-        this.log('');
+      // 대기 시간 (챌린지 감지 시 2초, 일반 1초)
+      await this.delay(challengeDetected ? 2000 : 1000);
 
-        // Windows 소리 알림
-        try {
-          const { exec } = await import('child_process');
-          exec('powershell -c "1..3 | ForEach-Object { (New-Object Media.SoundPlayer \\"C:\\Windows\\Media\\notify.wav\\").PlaySync(); Start-Sleep -Milliseconds 500 }"');
-        } catch { }
+      const currentUrl = page.url();
 
-        if (this.progressCallback) {
-          this.progressCallback(0, 100, '🔒 보호조치 감지! 브라우저에서 본인인증을 완료해주세요!');
-        }
-
-        await this.delay(3000);
-        continue;
-      }
-
-      // ✅ [2026-02-14] 기기 등록 페이지 자동 처리 (URL + 페이지 텍스트 이중 감지)
-      if (await this.isDeviceConfirmPage(page)) {
-        await this.handleDeviceConfirmPage(page);
-        continue;
-      }
-
-      // ✅ [2026-02-09] 2단계 인증 페이지 자동 처리
-      const is2FALogin = await this.handleTwoFactorAuthPage(page, twoFactorDetected);
-      if (is2FALogin) {
-        if (!twoFactorDetected) {
-          twoFactorDetected = true;
-        } else if (checkAttempt % 15 === 0) {
-          this.log('⏳ 2단계 인증 승인 대기 중... 네이버 앱에서 승인해주세요!');
-        }
-        continue;
-      } else if (twoFactorDetected) {
-        twoFactorDetected = false;
-        this.log('✅ 2단계 인증이 완료되었습니다! 로그인을 계속 진행합니다.');
-        await this.delay(1500);
-      }
-
-      // 로그인 성공 여부 확인
-      if (!currentUrl.includes('nidlogin') && !currentUrl.includes('login')) {
+      // ═══════════════════════════════════════════════════════════════
+      // 1️⃣ 로그인 성공 여부 우선 확인
+      // ═══════════════════════════════════════════════════════════════
+      if (!currentUrl.includes('nidlogin') && !currentUrl.includes('nid.naver.com/login')) {
         if (currentUrl.includes('naver.com')) {
           loginSuccess = true;
           this.log('✅ 네이버 로그인이 성공적으로 완료되었습니다.');
@@ -2872,13 +2801,476 @@ export class NaverBlogAutomation {
           }
         }
       }
+
+      // ═══════════════════════════════════════════════════════════════
+      // 2️⃣ 보호조치/본인인증 페이지 감지 (URL 기반)
+      // ═══════════════════════════════════════════════════════════════
+      if (currentUrl.includes('protect') || currentUrl.includes('security') || currentUrl.includes('verification')) {
+        if (!challengeDetected) {
+          challengeDetected = true;
+          this.log('');
+          this.log('🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒');
+          this.log('⚠️  보호조치/본인인증 페이지 감지!');
+          this.log('🖱️  브라우저에서 본인인증을 완료해주세요!');
+          this.log('⏳  최대 10분간 기다립니다...');
+          this.log('🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒');
+          this.log('');
+          await bringBrowserToFront();
+          await playAlertSound(5);
+          if (this.progressCallback) {
+            this.progressCallback(0, 100, '🔒 보호조치 감지! 브라우저에서 본인인증을 완료해주세요!');
+          }
+        }
+        // 주기적 알림
+        if (Date.now() - lastSoundTime > SOUND_INTERVAL) {
+          lastSoundTime = Date.now();
+          const remainSec = Math.floor((LOGIN_TOTAL_TIMEOUT - elapsed) / 1000);
+          this.log(`⏳ 보호조치 대기 중... (남은 시간: ${Math.floor(remainSec / 60)}분 ${remainSec % 60}초)`);
+          await playAlertSound(2);
+          if (this.progressCallback) {
+            this.progressCallback(0, 100, `🔒 보호조치 대기 중 (${Math.floor(remainSec / 60)}분 ${remainSec % 60}초 남음)`);
+          }
+        }
+        continue;
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // 3️⃣ 기기 등록 페이지 자동 처리
+      // ═══════════════════════════════════════════════════════════════
+      if (await this.isDeviceConfirmPage(page)) {
+        await this.handleDeviceConfirmPage(page);
+        continue;
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // 4️⃣ 2단계 인증 처리
+      // ═══════════════════════════════════════════════════════════════
+      const is2FALogin = await this.handleTwoFactorAuthPage(page, twoFactorDetected);
+      if (is2FALogin) {
+        if (!twoFactorDetected) {
+          twoFactorDetected = true;
+          challengeDetected = true;
+          await bringBrowserToFront();
+          await playAlertSound(5);
+        }
+        // 주기적 알림
+        if (Date.now() - lastSoundTime > SOUND_INTERVAL) {
+          lastSoundTime = Date.now();
+          const remainSec = Math.floor((LOGIN_TOTAL_TIMEOUT - elapsed) / 1000);
+          this.log(`⏳ 2단계 인증 승인 대기 중... 네이버 앱에서 승인해주세요! (${Math.floor(remainSec / 60)}분 ${remainSec % 60}초 남음)`);
+          await playAlertSound(2);
+          if (this.progressCallback) {
+            this.progressCallback(0, 100, `📱 2단계 인증 대기 중 (${Math.floor(remainSec / 60)}분 ${remainSec % 60}초 남음)`);
+          }
+        }
+        continue;
+      } else if (twoFactorDetected) {
+        twoFactorDetected = false;
+        challengeDetected = false;
+        this.log('✅ 2단계 인증이 완료되었습니다! 로그인을 계속 진행합니다.');
+        await this.delay(1500);
+        continue;
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // 5️⃣ 로그인 페이지에 머물러 있는 경우 — 종합 진단
+      // ═══════════════════════════════════════════════════════════════
+      if (currentUrl.includes('nidlogin') || currentUrl.includes('nid.naver.com')) {
+        try {
+          // 🔍 [Playwright 검증 완료] 페이지 DOM 종합 분석 (2026-03-30 실제 nid.naver.com 확인)
+          // 검증된 셀렉터:
+          //   ID: #id (class: input_id), PW: #pw (class: input_pw)
+          //   로그인 버튼: #log.login (class: btn_login off next_step nlog-click)
+          //   캡차 hidden input: #ncaptchaSplit (value="none" → 캡차 활성 시 값 변경)
+          //   에러 div: #err_common, #err_empty_id, #err_empty_pw, #err_capslock (모두 class: login_error_wrap)
+          //   에러 텍스트: .error_message 내부
+          const pageAnalysis = await page.evaluate(() => {
+            const bodyText = document.body?.innerText || '';
+
+            // ═══ 1. 캡차/보안문자 감지 ═══
+
+            // [Playwright 검증] #ncaptchaSplit: 기본값 "none", 캡차 활성 시 값 변경
+            const ncaptchaSplit = document.querySelector('#ncaptchaSplit') as HTMLInputElement | null;
+            const ncaptchaSplitActive = ncaptchaSplit && ncaptchaSplit.value !== 'none' && ncaptchaSplit.value !== '';
+
+            // 텍스트 기반 캡차 감지
+            const captchaKeywords = [
+              '자동입력 방지', '자동 입력 방지', '보안문자', '자동등록방지',
+              '아래 문자를 입력', '이미지에 보이는', '보이는 문자',
+              '글자를 입력', '인증 문자', 'captcha', 'CAPTCHA',
+              '자동입력방지문자', '방지 문자',
+            ];
+            const hasCaptchaText = captchaKeywords.some(function(kw) { return bodyText.includes(kw); });
+
+            // CSS 셀렉터 기반 캡차 요소 감지 (visible 요소만)
+            const captchaSelectors = [
+              '#captcha', '.captcha', '#captchaimg', '.captcha_img',
+              'iframe[src*="captcha"]', 'iframe[src*="challenge"]',
+              'iframe[src*="recaptcha"]', 'iframe[src*="hcaptcha"]',
+              '#chptchaArea', '#captcha_area', '.login_captcha',
+              '[class*="captcha_wrap"]', '[class*="chptcha"]',
+              'img[src*="captcha"]', 'img[alt*="자동입력"]', 'img[alt*="보안"]',
+            ];
+            var hasCaptchaElement = false;
+            for (var i = 0; i < captchaSelectors.length; i++) {
+              try {
+                var el = document.querySelector(captchaSelectors[i]);
+                if (el) {
+                  var htmlEl = el as HTMLElement;
+                  var style = getComputedStyle(htmlEl);
+                  if (style.display !== 'none' && style.visibility !== 'hidden' && htmlEl.offsetParent !== null) {
+                    hasCaptchaElement = true;
+                    break;
+                  }
+                }
+              } catch (e) { /* 무시 */ }
+            }
+
+            // 캡차 이미지 감지 (src에 captcha 포함)
+            var hasCaptchaImage = false;
+            var imgs = document.querySelectorAll('img');
+            for (var j = 0; j < imgs.length; j++) {
+              var src = imgs[j].src || '';
+              if (src.includes('captcha') || src.includes('Captcha') || src.includes('CAPTCHA')) {
+                hasCaptchaImage = true;
+                break;
+              }
+            }
+
+            // iframe 내 CAPTCHA 감지
+            var suspiciousIframeCount = 0;
+            var iframes = document.querySelectorAll('iframe');
+            for (var k = 0; k < iframes.length; k++) {
+              var iframeSrc = iframes[k].src || '';
+              if (iframeSrc.includes('captcha') || iframeSrc.includes('challenge') ||
+                  iframeSrc.includes('recaptcha') || iframeSrc.includes('hcaptcha') ||
+                  iframeSrc.includes('turnstile') || iframeSrc.includes('arkose')) {
+                suspiciousIframeCount++;
+              }
+            }
+
+            var hasCaptcha = !!(ncaptchaSplitActive || hasCaptchaText || hasCaptchaElement || hasCaptchaImage || suspiciousIframeCount > 0);
+
+            // ═══ 2. 로그인 에러 메시지 감지 ═══
+            // [Playwright 검증] 네이버 에러 div들 (기본 display:none, 에러 시 visible)
+            var errorMessages: { type: string; text: string }[] = [];
+            var naverErrorDivs = ['#err_common', '#err_empty_id', '#err_empty_pw', '#err_capslock',
+                                  '#err_passkey_common', '#err_passkey_common2', '#err_passkey_common3', '#err_passkey_common4'];
+            for (var m = 0; m < naverErrorDivs.length; m++) {
+              try {
+                var errDiv = document.querySelector(naverErrorDivs[m]) as HTMLElement | null;
+                if (errDiv) {
+                  var errStyle = getComputedStyle(errDiv);
+                  // [Playwright 검증] 기본은 display:none, 에러 시 display가 변경됨
+                  if (errStyle.display !== 'none') {
+                    var errText = errDiv.innerText.trim();
+                    if (errText) {
+                      errorMessages.push({ type: naverErrorDivs[m], text: errText });
+                    }
+                  }
+                }
+              } catch (e) { /* 무시 */ }
+            }
+
+            // [Playwright 검증] .error_message 클래스 (에러 div 내부 텍스트 컨테이너)
+            var errMsgEls = document.querySelectorAll('.error_message');
+            for (var n = 0; n < errMsgEls.length; n++) {
+              try {
+                var errMsgEl = errMsgEls[n] as HTMLElement;
+                var errMsgStyle = getComputedStyle(errMsgEl);
+                if (errMsgStyle.display !== 'none' && errMsgEl.offsetParent !== null) {
+                  var msgText = errMsgEl.innerText.trim();
+                  if (msgText) {
+                    errorMessages.push({ type: '.error_message', text: msgText });
+                  }
+                }
+              } catch (e) { /* 무시 */ }
+            }
+
+            // ✅ [2026-03-30 FIX] 에러 키워드를 visible 에러 div 텍스트에서만 검색
+            // 이전: bodyText 전체에서 검색 → footer/약관의 '잠시 후 다시' 같은 일반 텍스트에 오탐
+            // 현재: 에러 div에서 추출된 errorMessages 텍스트 + #err_common 내용에서만 검색
+            var visibleErrorText = errorMessages.map(function(e) { return e.text; }).join(' ');
+
+            var errorKeywords = [
+              { keyword: '비밀번호가 일치하지', type: 'wrong_password' },
+              { keyword: '비밀번호를 잘못', type: 'wrong_password' },
+              { keyword: '비밀번호가 틀', type: 'wrong_password' },
+              { keyword: '아이디 또는 비밀번호가', type: 'wrong_credentials' },
+              { keyword: '아이디 또는 비밀번호를 다시', type: 'wrong_credentials' },
+              { keyword: '존재하지 않는 아이디', type: 'wrong_id' },
+              { keyword: '등록되지 않은', type: 'wrong_id' },
+              { keyword: '제한된 아이디', type: 'account_locked' },
+              { keyword: '이용이 제한', type: 'account_locked' },
+              { keyword: '계정이 잠', type: 'account_locked' },
+              { keyword: '로그인 제한', type: 'login_restricted' },
+              { keyword: '해외 로그인 차단', type: 'overseas_blocked' },
+              { keyword: '비정상적인 로그인', type: 'suspicious_login' },
+              { keyword: '횟수가 초과', type: 'too_many_attempts' },
+              { keyword: '잠시 후 다시', type: 'too_many_attempts' },
+              { keyword: '새로운 환경', type: 'new_environment' },
+            ];
+            var detectedErrors: { keyword: string; type: string }[] = [];
+            // visible 에러 div 텍스트에서만 키워드 검색 (false positive 방지)
+            if (visibleErrorText.length > 0) {
+              for (var p = 0; p < errorKeywords.length; p++) {
+                if (visibleErrorText.includes(errorKeywords[p].keyword)) {
+                  detectedErrors.push(errorKeywords[p]);
+                }
+              }
+            }
+
+            // ═══ 3. 페이지 요소 존재 확인 ═══
+            var hasIdField = !!document.querySelector('#id');
+            var hasPwField = !!document.querySelector('#pw');
+            var hasLoginButton = !!(
+              document.querySelector('#log\\.login') ||
+              document.querySelector('button.btn_login') ||
+              document.querySelector('button[type="submit"]')
+            );
+
+            // 캡차 감지 방식 (디버깅용)
+            var captchaMethod = ncaptchaSplitActive ? 'ncaptchaSplit' :
+              hasCaptchaText ? '텍스트' :
+              hasCaptchaElement ? 'DOM요소' :
+              hasCaptchaImage ? '이미지' :
+              suspiciousIframeCount > 0 ? 'iframe' : 'none';
+
+            return {
+              hasCaptchaText: hasCaptchaText,
+              hasCaptchaElement: hasCaptchaElement,
+              hasCaptchaImage: hasCaptchaImage,
+              ncaptchaSplitActive: !!ncaptchaSplitActive,
+              hasCaptcha: hasCaptcha,
+              captchaMethod: captchaMethod,
+              errorMessages: errorMessages,
+              detectedErrors: detectedErrors,
+              hasIdField: hasIdField,
+              hasPwField: hasPwField,
+              hasLoginButton: hasLoginButton,
+              suspiciousIframeCount: suspiciousIframeCount,
+              bodyTextSnippet: bodyText.substring(0, 500),
+            };
+          }).catch(() => null);
+
+          if (!pageAnalysis) {
+            // evaluate 실패 — 페이지 전환 중일 수 있음
+            continue;
+          }
+
+          // ─── 5-A: 로그인 에러 메시지 감지 → 즉시 실패 (재시도 무의미) ───
+          if (pageAnalysis.detectedErrors.length > 0) {
+            const firstError = pageAnalysis.detectedErrors[0];
+            const errorTexts = pageAnalysis.errorMessages.map(e => e.text).join(', ');
+
+            switch (firstError.type) {
+              case 'wrong_password':
+                loginErrorDetected = `❌ 비밀번호가 틀렸습니다. 네이버 로그인 비밀번호를 확인해주세요.${errorTexts ? ` (${errorTexts})` : ''}`;
+                break;
+              case 'wrong_credentials':
+                loginErrorDetected = `❌ 아이디 또는 비밀번호가 일치하지 않습니다. 다시 확인해주세요.${errorTexts ? ` (${errorTexts})` : ''}`;
+                break;
+              case 'wrong_id':
+                loginErrorDetected = `❌ 존재하지 않는 아이디입니다. 아이디를 확인해주세요.${errorTexts ? ` (${errorTexts})` : ''}`;
+                break;
+              case 'account_locked':
+                loginErrorDetected = `🔒 계정이 잠겼거나 이용이 제한되었습니다. 네이버 고객센터에서 확인해주세요.${errorTexts ? ` (${errorTexts})` : ''}`;
+                break;
+              case 'too_many_attempts':
+                loginErrorDetected = `⏳ 로그인 시도 횟수가 초과되었습니다. 잠시 후 다시 시도해주세요.${errorTexts ? ` (${errorTexts})` : ''}`;
+                break;
+              default:
+                loginErrorDetected = `❌ 로그인 에러: ${firstError.keyword}${errorTexts ? ` (${errorTexts})` : ''}`;
+            }
+
+            this.log(`❌ 로그인 에러 감지: ${loginErrorDetected}`);
+
+            // 사용자에게 알림
+            if (this.progressCallback) {
+              this.progressCallback(0, 100, loginErrorDetected);
+            }
+            await playAlertSound(3);
+
+            // ⚠️ 단, 'too_many_attempts'와 'new_environment'는 사용자 개입으로 해결 가능
+            if (firstError.type === 'too_many_attempts' || firstError.type === 'new_environment' || firstError.type === 'suspicious_login') {
+              challengeDetected = true;
+              stuckOnLoginPageSince = stuckOnLoginPageSince || Date.now();
+              continue; // 사용자가 해결할 수 있으므로 대기 계속
+            }
+
+            // 비밀번호 틀림 등은 즉시 실패
+            throw new Error(loginErrorDetected);
+          }
+
+          // ─── 5-B: 캡차/보안문자 감지 ───
+          if (pageAnalysis.hasCaptcha) {
+            if (!challengeDetected) {
+              challengeDetected = true;
+              lastSoundTime = Date.now();
+              stuckOnLoginPageSince = null; // 캡차 감지되었으므로 stuck 카운터 리셋
+
+              const detectionMethod = pageAnalysis.captchaMethod || 'unknown';
+
+              this.log('');
+              this.log('🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨');
+              this.log(`⚠️  캡차/보안문자가 감지되었습니다! (감지 방식: ${detectionMethod})`);
+              this.log('🖱️  브라우저 창에서 캡차를 직접 해결해주세요!');
+              this.log('📝  캡차 해결 후 비밀번호가 지워졌다면 다시 입력해주세요!');
+              this.log('⏳  해결될 때까지 최대 10분간 기다립니다...');
+              this.log('🔔  30초마다 알림 소리가 울립니다.');
+              this.log('🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨');
+              this.log('');
+
+              await bringBrowserToFront();
+              await playAlertSound(5); // 첫 감지 시 5번 울림
+
+              if (this.progressCallback) {
+                this.progressCallback(0, 100, '🚨 캡차 감지! 브라우저에서 캡차를 해결해주세요!');
+              }
+            } else {
+              // 주기적 알림 (30초 간격)
+              if (Date.now() - lastSoundTime > SOUND_INTERVAL) {
+                lastSoundTime = Date.now();
+                const remainSec = Math.floor((LOGIN_TOTAL_TIMEOUT - elapsed) / 1000);
+                this.log(`⏳ 캡차 해결 대기 중... (남은 시간: ${Math.floor(remainSec / 60)}분 ${remainSec % 60}초)`);
+                this.log(`   💡 브라우저 창에서 캡차를 직접 해결해주세요!`);
+                await playAlertSound(2);
+                if (this.progressCallback) {
+                  this.progressCallback(0, 100, `🚨 캡차 대기 중 (${Math.floor(remainSec / 60)}분 ${remainSec % 60}초 남음)`);
+                }
+              }
+            }
+            continue;
+          } else if (challengeDetected && !twoFactorDetected) {
+            // 캡차가 사라졌으면 해결된 것으로 간주
+            challengeDetected = false;
+            stuckOnLoginPageSince = null;
+            this.log('✅ 캡차/보안 인증이 해결되었습니다! 로그인을 계속 진행합니다...');
+
+            // ✅ [2026-03-30 FIX] 캡차 해결 후 비밀번호 필드 확인 — 캡차 과정에서 초기화되었을 수 있음
+            try {
+              const pwAfterCaptcha = await page.evaluate(() => {
+                const pw = document.querySelector('#pw') as HTMLInputElement;
+                return pw?.value?.length || 0;
+              });
+              if (pwAfterCaptcha === 0) {
+                this.log('⚠️ 비밀번호가 초기화되었습니다. 자동 재입력 시도...');
+                const pwInput = await page.$('#pw');
+                if (pwInput) {
+                  await pwInput.click();
+                  await this.humanDelay(300, 600);
+                  for (const char of this.options.naverPassword) {
+                    await this.loginKeyType(page, char);
+                    if (Math.random() < 0.05) await this.humanDelay(200, 400);
+                  }
+                  await this.humanDelay(400, 800);
+                  this.log('✅ 비밀번호 재입력 완료');
+                }
+              }
+            } catch (pwCheckErr) {
+              this.log(`⚠️ 비밀번호 확인 중 오류 (무시): ${(pwCheckErr as Error).message?.substring(0, 60)}`);
+            }
+
+            // 캡차 해결 후 로그인 버튼 재클릭 시도
+            await this.delay(1000);
+            try {
+              const retryBtnSelectors = [
+                ...this.LOGIN_BUTTON_SELECTORS,
+                'button[type="submit"].next_step',
+              ];
+
+              for (const selector of retryBtnSelectors) {
+                const retryBtn = await page.$(selector).catch(() => null);
+                if (retryBtn) {
+                  const isClickable = await retryBtn.evaluate((el: Element) => {
+                    const htmlEl = el as HTMLElement;
+                    const buttonEl = el as HTMLButtonElement;
+                    return !buttonEl.disabled && htmlEl.offsetParent !== null;
+                  }).catch(() => false);
+
+                  if (isClickable) {
+                    if (this.cursor) {
+                      const box = await retryBtn.boundingBox();
+                      if (box) {
+                        await this.cursor.moveTo({ x: box.x + box.width / 2, y: box.y + box.height / 2 });
+                        await this.humanDelay(100, 300);
+                        await page.mouse.down();
+                        await this.humanDelay(50, 150);
+                        await page.mouse.up();
+                      } else {
+                        await retryBtn.click();
+                      }
+                    } else {
+                      await retryBtn.click();
+                    }
+                    this.log('🔄 로그인 버튼을 다시 클릭했습니다.');
+                    await this.delay(2000);
+                    break;
+                  }
+                }
+              }
+            } catch (error) {
+              this.log(`ℹ️ 로그인 버튼 재클릭 시도 중 오류 (무시): ${(error as Error).message}`);
+            }
+            continue;
+          }
+
+          // ─── 5-C: 로그인 페이지에 너무 오래 머물러 있음 (미감지 챌린지) ───
+          // 캡차도, 에러도 감지 안 됐는데 여전히 로그인 페이지면 → 무언가 사용자 개입이 필요
+          if (pageAnalysis.hasIdField || pageAnalysis.hasPwField) {
+            if (!stuckOnLoginPageSince) {
+              stuckOnLoginPageSince = Date.now();
+            }
+
+            const stuckDuration = Date.now() - stuckOnLoginPageSince;
+            if (stuckDuration > STUCK_THRESHOLD && !challengeDetected) {
+              challengeDetected = true;
+              lastSoundTime = Date.now();
+
+              this.log('');
+              this.log('🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔');
+              this.log('⚠️  로그인이 진행되지 않고 있습니다!');
+              this.log('🖱️  브라우저를 확인해주세요!');
+              this.log('   가능한 원인:');
+              this.log('   • 캡차/보안문자가 떴을 수 있습니다');
+              this.log('   • 비밀번호가 틀렸을 수 있습니다');
+              this.log('   • 새로운 보안 인증이 필요할 수 있습니다');
+              this.log('⏳  최대 10분간 기다립니다. 브라우저에서 직접 로그인을 완료해주세요!');
+              this.log('🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔');
+              this.log('');
+              this.log(`   📍 현재 페이지 내용 (일부): ${pageAnalysis.bodyTextSnippet.substring(0, 200)}`);
+
+              await bringBrowserToFront();
+              await playAlertSound(5);
+
+              if (this.progressCallback) {
+                this.progressCallback(0, 100, '🔔 로그인 진행 안 됨! 브라우저를 확인해주세요!');
+              }
+            } else if (challengeDetected && Date.now() - lastSoundTime > SOUND_INTERVAL) {
+              // 주기적 알림 (30초 간격)
+              lastSoundTime = Date.now();
+              const remainSec = Math.floor((LOGIN_TOTAL_TIMEOUT - elapsed) / 1000);
+              this.log(`⏳ 브라우저 확인 대기 중... (남은 시간: ${Math.floor(remainSec / 60)}분 ${remainSec % 60}초)`);
+              await playAlertSound(2);
+              if (this.progressCallback) {
+                this.progressCallback(0, 100, `🔔 브라우저 확인 필요 (${Math.floor(remainSec / 60)}분 ${remainSec % 60}초 남음)`);
+              }
+            }
+          }
+        } catch (evalError) {
+          // evaluate 실패 — 페이지 전환 중일 수 있으므로 무시
+          this.log(`   ⚠️ 페이지 분석 중 오류 (무시): ${(evalError as Error).message?.substring(0, 80)}`);
+        }
+      }
     }
 
     // 최종 확인
     const finalUrl = page.url();
     if (!loginSuccess && (finalUrl.includes('nidlogin') || finalUrl.includes('login'))) {
-      if (captchaDetected) {
-        throw new Error(`캡차 해결 시간이 초과되었습니다. 최종 URL: ${finalUrl}`);
+      if (loginErrorDetected) {
+        throw new Error(loginErrorDetected);
+      } else if (challengeDetected) {
+        throw new Error(`보안 인증 해결 시간이 초과되었습니다. 최종 URL: ${finalUrl}`);
       } else {
         throw new Error(`로그인에 실패했습니다. 아이디/비밀번호를 확인해주세요. 최종 URL: ${finalUrl}`);
       }
