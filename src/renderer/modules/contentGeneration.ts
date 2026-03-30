@@ -318,9 +318,9 @@ export async function generateContentFromUrl(
       'generateStructuredContent',
       [payload],
       {
-        retryCount: 5,
-        retryDelay: 2000,
-        timeout: 600000 // ✅ 10분 타임아웃 (네트워크 느린 환경 대응)
+        retryCount: 2,
+        retryDelay: 3000,
+        timeout: 900000 // ✅ 15분 타임아웃 (Main 모델 폴백 체인 최대 12분 + 여유)
       }
     );
 
@@ -852,9 +852,9 @@ export async function generateContentFromKeywords(
       'generateStructuredContent',
       [payload],
       {
-        retryCount: 5,
-        retryDelay: 2000,
-        timeout: 600000 // ✅ 10분 타임아웃 (네트워크 느린 환경 대응)
+        retryCount: 2,
+        retryDelay: 3000,
+        timeout: 900000 // ✅ 15분 타임아웃 (Main 모델 폴백 체인 최대 12분 + 여유)
       }
     );
 
@@ -1443,9 +1443,9 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
       'generateStructuredContent',
       [payload],
       {
-        retryCount: 5,
-        retryDelay: 2000,
-        timeout: 600000 // ✅ 10분 타임아웃
+        retryCount: 2,
+        retryDelay: 3000,
+        timeout: 900000 // ✅ 15분 타임아웃
       }
     );
 

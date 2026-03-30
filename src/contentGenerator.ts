@@ -6492,8 +6492,8 @@ function getTimeoutMs(minChars: number, retryAttempt: number = 0): number {
   if (minChars < 1000) baseTimeout = 120000;       // 제목만: 2분
   else if (minChars < 3000) baseTimeout = 180000;  // 짧은 글: 3분
   else if (minChars < 5000) baseTimeout = 240000;  // 중간 글: 4분
-  else if (minChars < 10000) baseTimeout = 300000; // 긴 글: 5분
-  else baseTimeout = 360000;                       // 매우 긴 글: 6분
+  else if (minChars < 10000) baseTimeout = 240000; // 긴 글: 4분
+  else baseTimeout = 300000;                       // 매우 긴 글: 5분
 
   // ✅ 재시도 시 타임아웃 약간 증가 (빠른 폴백 우선)
   // 1회 재시도: +20%, 2회: +40%, 3회 이상: +60%
@@ -6785,6 +6785,13 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
   try {
     const { loadConfig } = await import('./configManager.js');
     const config = await loadConfig();
+    // ✅ [2026-03-30 DEBUG] API 키 로드 상태 진단 로그
+    console.log('[Perplexity] Config 로드 결과:', {
+      hasConfig: !!config,
+      configKeys: config ? Object.keys(config).filter(k => k.toLowerCase().includes('perplexity')) : [],
+      perplexityApiKey: config?.perplexityApiKey ? `${config.perplexityApiKey.substring(0, 8)}...` : '(없음)',
+      envKey: process.env.PERPLEXITY_API_KEY ? `${process.env.PERPLEXITY_API_KEY.substring(0, 8)}...` : '(없음)',
+    });
     apiKey = config?.perplexityApiKey?.trim() || process.env.PERPLEXITY_API_KEY;
   } catch (e) {
     console.warn('[Perplexity] Config 로드 실패 (env 폴백 사용):', e);
@@ -6792,8 +6799,11 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
   }
 
   if (!apiKey) {
-    throw new Error('Perplexity API 키가 설정되지 않았습니다. 환경설정에서 Perplexity API 키를 입력해주세요.');
+    console.error('[Perplexity] ❌ API 키를 찾을 수 없습니다. config와 env 모두 비어있음.');
+    throw new Error('Perplexity API 키가 설정되지 않았습니다. 환경설정(⚙️)에서 Perplexity API 키를 입력해주세요. (Perplexity 웹 구독과 API 키는 별도입니다. https://www.perplexity.ai/settings/api 에서 API 키를 발급받으세요)');
   }
+  console.log(`[Perplexity] ✅ API 키 확인됨: ${apiKey.substring(0, 8)}... (길이: ${apiKey.length})`);
+
 
   // 2. 모델 및 타임아웃 설정
   // ✅ [2026-03-20 FIX] config에서 직접 읽기 (env보다 config 우선 — 이중 안전장치)
@@ -6959,7 +6969,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
 
   let lastError: Error | null = null;
   const timeoutMs = getTimeoutMs(minChars);
-  const maxRetriesPerModel = 2; // ✅ 모델당 최대 재시도 횟수
+  const maxRetriesPerModel = 1; // ✅ 모델당 1회만 시도 (빠른 폴백 우선 — 3모델 순회로 충분)
 
   for (const modelName of modelsToTry) {
     for (let retry = 0; retry < maxRetriesPerModel; retry++) {

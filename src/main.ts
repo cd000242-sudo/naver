@@ -7343,6 +7343,7 @@ ipcMain.handle(
         gemini: process.env.GEMINI_API_KEY ? `설정됨 (${process.env.GEMINI_API_KEY.length}자)` : '없음',
         openai: process.env.OPENAI_API_KEY ? `설정됨 (${process.env.OPENAI_API_KEY.length}자)` : '없음',
         claude: process.env.CLAUDE_API_KEY ? `설정됨 (${process.env.CLAUDE_API_KEY.length}자)` : '없음',
+        perplexity: process.env.PERPLEXITY_API_KEY ? `설정됨 (${process.env.PERPLEXITY_API_KEY.length}자)` : '없음',
       });
 
       // RSS/URL에서 이미지 추출 여부 확인 (여러 URL 지원)
@@ -7482,6 +7483,15 @@ ipcMain.handle('config:set', async (_event, payload: AppConfig) => {
     const keyLength = nextConfig.claudeApiKey.trim().length;
     const isValid = validateApiKeyFormat(nextConfig.claudeApiKey, 'claude').valid;
     sendLog(`✅ Claude API 키 저장됨 (길이: ${keyLength}자, 형식: ${isValid ? '올바름' : '오류'})`);
+  }
+
+  // ✅ [2026-03-30] Perplexity API 키 저장 확인 로그
+  if (nextConfig.perplexityApiKey && nextConfig.perplexityApiKey.trim()) {
+    const keyLength = nextConfig.perplexityApiKey.trim().length;
+    sendLog(`✅ Perplexity API 키 저장됨 (길이: ${keyLength}자, 접두사: ${nextConfig.perplexityApiKey.substring(0, 5)}...)`);
+    console.log('[Main] Perplexity API 키 환경변수 설정 확인:', process.env.PERPLEXITY_API_KEY ? '설정됨' : '설정 안됨');
+  } else {
+    console.log('[Main] ⚠️ Perplexity API 키 미저장 (config에 없음)');
   }
 
   if (nextConfig.dailyPostLimit !== undefined) {

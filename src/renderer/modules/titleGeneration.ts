@@ -107,9 +107,9 @@ export function initTitleGeneration(): void {
             }
           }],
           {
-            retryCount: 3,
-            retryDelay: 2000,
-            timeout: 600000
+            retryCount: 2,
+            retryDelay: 3000,
+            timeout: 900000      // ✅ 15분 (Main 모델 폴백 체인 최대 12분 + 여유)
           }
         );
 
@@ -234,9 +234,9 @@ export function initTitleGeneration(): void {
             }
           }],
           {
-            retryCount: 3,
-            retryDelay: 2000,
-            timeout: 600000
+            retryCount: 2,
+            retryDelay: 3000,
+            timeout: 900000      // ✅ 15분 (Main 모델 폴백 체인 최대 12분 + 여유)
           }
         );
 

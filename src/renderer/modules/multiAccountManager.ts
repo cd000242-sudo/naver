@@ -2909,9 +2909,9 @@ export async function initMultiAccountPublishModal() {
             'generateStructuredContent',
             [contentPayload],
             {
-              retryCount: 3,
-              retryDelay: 2000,
-              timeout: 600000
+              retryCount: 2,       // ✅ 2회 재시도 (Main의 모델 폴백 체인이 이미 3모델 순회)
+              retryDelay: 3000,
+              timeout: 900000      // ✅ 15분 (Main 최대 12분 + 여유 3분)
             }
           );
           const contentResult = apiResponse.data || { success: false, message: apiResponse.error };

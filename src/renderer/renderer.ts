@@ -5221,9 +5221,9 @@ async function autoGenerateFromUrl(urls: string): Promise<void> {
           } as { rssUrl: string; targetAge: '20s' | '30s' | '40s' | '50s' | 'all'; generator: string; contentMode?: string; customPrompt?: string },
         }],
         {
-          retryCount: 3,
-          retryDelay: 2000,
-          timeout: 600000
+          retryCount: 2,
+          retryDelay: 3000,
+          timeout: 900000      // ✅ 15분 (Main 모델 폴백 체인 최대 12분 + 여유)
         }
       );
 
@@ -7530,7 +7530,7 @@ URL: ${firstUrl}
           {
             retryCount: 3,
             retryDelay: 2000,
-            timeout: 600000 // ✅ 10분 타임아웃 (크롤링 + Gemini 폴백 시간 고려)
+            timeout: 900000 // ✅ 15분 타임아웃 (크롤링 + 모델 폴백 체인 고려)
           }
         );
 
@@ -7793,8 +7793,29 @@ URL: ${firstUrl}
         // ✅ 오류 유형별 친절한 해결 가이드 제공
         let solutionGuide = '';
 
-        if (errorMessage.includes('API 키') || errorMessage.includes('GEMINI_API_KEY') || errorMessage.includes('설정되지 않')) {
-          solutionGuide = `
+        if (errorMessage.includes('API 키') || errorMessage.includes('GEMINI_API_KEY') || errorMessage.includes('설정되지 않') || errorMessage.includes('Perplexity')) {
+          // ✅ [2026-03-30 FIX] 선택된 AI 엔진에 따라 맞춤 API 키 안내 제공
+          const currentGenerator = UnifiedDOMCache.getGenerator();
+          if (currentGenerator === 'perplexity' || errorMessage.includes('Perplexity')) {
+            solutionGuide = `
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔑 Perplexity API 키 문제 해결 방법
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ Perplexity 웹 구독(유료 플랜)과 API 키는 별도입니다!
+
+1️⃣ https://www.perplexity.ai/settings/api 접속
+2️⃣ "Generate API Key" 클릭하여 키 발급
+3️⃣ 발급된 API 키 복사
+4️⃣ 앱 환경설정(⚙️) 버튼 클릭
+5️⃣ "Perplexity API Key" 입력란에 붙여넣기
+6️⃣ "저장" 버튼 클릭 후 다시 시도
+
+💡 API 키는 "pplx-"로 시작합니다
+💡 API 사용에는 별도 크레딧 충전이 필요할 수 있습니다
+`;
+          } else {
+            solutionGuide = `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🔑 API 키 문제 해결 방법
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -7810,6 +7831,7 @@ URL: ${firstUrl}
 
 💡 API 키는 "AIza"로 시작합니다
 `;
+          }
         } else if (errorMessage.includes('타임아웃') || errorMessage.includes('timeout') || errorMessage.includes('시간 초과')) {
           solutionGuide = `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
