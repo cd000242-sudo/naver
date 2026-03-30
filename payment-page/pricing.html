@@ -157,19 +157,7 @@
                         </ul>
                         <div class="pricing-select">선택하기</div>
                     </div>
-                    <div class="pricing-card premium" data-product="naver-lifetime" data-amount="2000000" onclick="selectProduct(this)">
-                        <div class="pricing-badge premium-badge">💎 LIFETIME</div>
-                        <div class="pricing-header"><h3 class="pricing-name">영구제</h3><p class="pricing-desc">한 번 구매, 평생 사용</p></div>
-                        <div class="pricing-price"><span class="price-amount">2,000,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">일회성 결제</div>
-                        <ul class="pricing-features">
-                            <li><span class="check gold">✓</span> 전체 기능 평생 이용</li>
-                            <li><span class="check gold">✓</span> 평생 무료 업데이트</li>
-                            <li><span class="check gold">✓</span> VIP 전용 커뮤니티</li>
-                            <li><span class="check gold">✓</span> 최우선 1:1 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
+
                 </div>
             </div>
 
@@ -227,19 +215,7 @@
                         </ul>
                         <div class="pricing-select">선택하기</div>
                     </div>
-                    <div class="pricing-card premium" data-product="orbit-lifetime" data-amount="3000000" onclick="selectProduct(this)">
-                        <div class="pricing-badge premium-badge">💎 LIFETIME</div>
-                        <div class="pricing-header"><h3 class="pricing-name">영구제</h3><p class="pricing-desc">평생 사용</p></div>
-                        <div class="pricing-price"><span class="price-amount">3,000,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">일회성 결제</div>
-                        <ul class="pricing-features">
-                            <li><span class="check gold">✓</span> 전체 기능 평생 이용</li>
-                            <li><span class="check gold">✓</span> 평생 무료 업데이트</li>
-                            <li><span class="check gold">✓</span> VIP 커뮤니티</li>
-                            <li><span class="check gold">✓</span> 최우선 1:1 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
+
                 </div>
             </div>
 
@@ -297,19 +273,7 @@
                         </ul>
                         <div class="pricing-select">선택하기</div>
                     </div>
-                    <div class="pricing-card premium" data-product="tistory-lifetime" data-amount="1500000" onclick="selectProduct(this)">
-                        <div class="pricing-badge premium-badge">💎 LIFETIME</div>
-                        <div class="pricing-header"><h3 class="pricing-name">영구제</h3><p class="pricing-desc">평생 사용</p></div>
-                        <div class="pricing-price"><span class="price-amount">1,500,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">일회성 결제</div>
-                        <ul class="pricing-features">
-                            <li><span class="check gold">✓</span> 전체 기능 평생 이용</li>
-                            <li><span class="check gold">✓</span> 평생 무료 업데이트</li>
-                            <li><span class="check gold">✓</span> VIP 커뮤니티</li>
-                            <li><span class="check gold">✓</span> 최우선 1:1 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
+
                 </div>
             </div>
 
@@ -389,8 +353,13 @@
 
             <!-- Refund Banner -->
             <div class="refund-banner">
-                💡 라이선스 코드 발급 후 7일 이내, 서비스 미사용 시 전액 환불 가능합니다.
-                <a href="refund.html" target="_blank">환불정책 자세히 보기 →</a>
+                📋 <strong>환불 규정 안내</strong>: 라이선스 코드 발급일로부터 <strong>48시간(2일) 이내</strong>, 서비스 미사용(미로그인) 시 전액 환불 가능합니다.
+                결제 전 반드시 무료 체험으로 서비스를 확인해주세요.
+                <a href="refund.html" target="_blank">환불정책 전문 보기 →</a>
+            </div>
+            <div class="refund-banner" style="margin-top: 12px; border-color: rgba(100,149,237,0.2); background: rgba(100,149,237,0.04);">
+                🔄 <strong>정기구독 안내</strong>: 모든 유료 플랜은 정기구독 상품이며, 구독 기간 종료 전 언제든 해지할 수 있습니다.
+                해지 시 현재 결제 주기가 종료될 때까지 서비스를 이용할 수 있습니다.
             </div>
             <div class="refund-banner" style="margin-top: 12px; border-color: rgba(68,215,182,0.2); background: rgba(68,215,182,0.04);">
                 💰 카드 결제가 어려우신가요? <a href="bank-order.html" style="color: #44d7b6;">계좌이체로 결제하기 →</a>
@@ -431,21 +400,18 @@
         };
 
         const PRODUCTS = {
-            'naver-monthly': { name: '네이버 블로그 1개월', amount: 50000 },
-            'naver-quarterly': { name: '네이버 블로그 3개월', amount: 120000 },
-            'naver-yearly': { name: '네이버 블로그 1년', amount: 400000 },
-            'naver-lifetime': { name: '네이버 블로그 영구제', amount: 2000000 },
-            'orbit-monthly': { name: 'Leaders Orbit 1개월', amount: 60000 },
-            'orbit-quarterly': { name: 'Leaders Orbit 3개월', amount: 150000 },
-            'orbit-yearly': { name: 'Leaders Orbit 1년', amount: 600000 },
-            'orbit-lifetime': { name: 'Leaders Orbit 영구제', amount: 3000000 },
-            'tistory-monthly': { name: 'Leaders Tistory 1개월', amount: 30000 },
-            'tistory-quarterly': { name: 'Leaders Tistory 3개월', amount: 80000 },
-            'tistory-yearly': { name: 'Leaders Tistory 1년', amount: 300000 },
-            'tistory-lifetime': { name: 'Leaders Tistory 영구제', amount: 1500000 },
-            'leword-monthly': { name: 'Leword 1개월', amount: 30000 },
-            'leword-quarterly': { name: 'Leword 3개월', amount: 100000 },
-            'leword-yearly': { name: 'Leword 1년', amount: 300000 },
+            'naver-monthly': { name: '네이버 블로그 1개월 정기구독', amount: 50000 },
+            'naver-quarterly': { name: '네이버 블로그 3개월 정기구독', amount: 120000 },
+            'naver-yearly': { name: '네이버 블로그 1년 정기구독', amount: 400000 },
+            'orbit-monthly': { name: 'Leaders Orbit 1개월 정기구독', amount: 60000 },
+            'orbit-quarterly': { name: 'Leaders Orbit 3개월 정기구독', amount: 150000 },
+            'orbit-yearly': { name: 'Leaders Orbit 1년 정기구독', amount: 600000 },
+            'tistory-monthly': { name: 'Leaders Tistory 1개월 정기구독', amount: 30000 },
+            'tistory-quarterly': { name: 'Leaders Tistory 3개월 정기구독', amount: 80000 },
+            'tistory-yearly': { name: 'Leaders Tistory 1년 정기구독', amount: 300000 },
+            'leword-monthly': { name: 'Leword 1개월 정기구독', amount: 30000 },
+            'leword-quarterly': { name: 'Leword 3개월 정기구독', amount: 100000 },
+            'leword-yearly': { name: 'Leword 1년 정기구독', amount: 300000 },
         };
 
         let selectedProduct = null;
@@ -492,9 +458,16 @@
             btn.classList.add('loading'); btn.disabled = true;
             const product = PRODUCTS[selectedProduct];
             const orderId = generateOrderId();
+            const customerKey = 'LP_' + email.replace(/[^a-zA-Z0-9]/g, '_') + '_' + Date.now();
             try {
-                const payment = tossPayments.payment({ customerKey: TossPayments.ANONYMOUS });
-                await payment.requestPayment({ method: 'CARD', amount: { value: product.amount, currency: 'KRW' }, orderId, orderName: product.name, successUrl: CONFIG.SUCCESS_URL + '?email=' + encodeURIComponent(email), failUrl: CONFIG.FAIL_URL });
+                // ✅ 빌링 결제창 (자동결제 카드 등록)
+                const payment = tossPayments.payment({ customerKey });
+                await payment.requestBillingAuth({
+                    method: 'CARD',
+                    successUrl: CONFIG.SUCCESS_URL + '?email=' + encodeURIComponent(email) + '&product=' + encodeURIComponent(selectedProduct) + '&amount=' + product.amount + '&orderName=' + encodeURIComponent(product.name) + '&orderId=' + orderId,
+                    failUrl: CONFIG.FAIL_URL,
+                    customerEmail: email,
+                });
             } catch (err) { console.log('결제 취소:', err); btn.classList.remove('loading'); btn.disabled = false; }
         }
 
