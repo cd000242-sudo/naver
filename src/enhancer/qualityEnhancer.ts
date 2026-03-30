@@ -259,10 +259,127 @@ export class QualityEnhancer {
       body = body.replace(from, to);
     });
 
+    // ✅ [2026-03-30] AI 지문 후처리 강화 — 접속사 정규화
+    const conjunctionNorm = [
+      { from: /또한\s/g, to: '그리고 ' },
+      { from: /이러한\s/g, to: '이런 ' },
+      { from: /그러므로\s/g, to: '그래서 ' },
+      { from: /따라서\s/g, to: '그래서 ' },
+      { from: /이에 따라\s/g, to: '그러다 보니 ' },
+      { from: /더불어\s/g, to: '또 ' },
+    ];
+
+    let conjunctionFixed = 0;
+    conjunctionNorm.forEach(({ from, to }) => {
+      const matches = body.match(from);
+      if (matches && matches.length > 1) {
+        // 2회 이상이면 첫 번째만 남기고 나머지를 구어체로 교체
+        let count = 0;
+        body = body.replace(from, (match: string) => {
+          count++;
+          if (count === 1) return match; // 첫 번째는 유지
+          conjunctionFixed++;
+          return to;
+        });
+      }
+    });
+    if (conjunctionFixed > 0) {
+      console.log(`  ✓ 접속사 정규화 ${conjunctionFixed}개 교체 (또한→그리고, 이러한→이런 등)`);
+    }
+
+    // ✅ [2026-03-30 v2] 연속 동일 어미 3회 자동 교체 엔진
+    const endingSentences = body.split(/(?<=[.!?])\s+/);
+    if (endingSentences.length >= 3) {
+      const endingMap: Record<string, string[]> = {
+        '합니다': ['한데요', '하죠', '하거든요'],
+        '입니다': ['인데요', '이죠', '이거든요'],
+        '습니다': ['는데요', '죠', '거든요'],
+        '해요': ['하죠', '하거든요', '한 거예요'],
+        '네요': ['더라고요', '잖아요', '거든요'],
+        '거든요': ['잖아요', '더라고요', '네요'],
+        '더라고요': ['네요', '거든요', '잖아요'],
+        '잖아요': ['거든요', '네요', '더라고요'],
+        '예요': ['이죠', '인 거예요', '이에요'],
+        '이에요': ['예요', '이죠', '인 거예요'],
+        '인가요': ['나요', '일까요', '인 건가요'],
+        '나요': ['인가요', '일까요', '인 건가요'],
+      };
+      const endingRegex = /(합니다|입니다|습니다|해요|네요|거든요|더라고요|잖아요|인가요|나요|예요|이에요)([.!?]*)$/;
+      let consecutiveCount = 0;
+      let lastEndingWord = '';
+      let fixedEndings = 0;
+
+      for (let i = 0; i < endingSentences.length; i++) {
+        const endMatch = endingSentences[i].match(endingRegex);
+        const currentEndingWord = endMatch ? endMatch[1] : '';
+        const punctuation = endMatch ? endMatch[2] : '';
+
+        if (currentEndingWord && currentEndingWord === lastEndingWord) {
+          consecutiveCount++;
+          if (consecutiveCount >= 2) {
+            // 3연속 동일 어미 → 실제 교체!
+            const alternatives = endingMap[currentEndingWord];
+            if (alternatives && alternatives.length > 0) {
+              const replacement = alternatives[Math.floor(Math.random() * alternatives.length)];
+              endingSentences[i] = endingSentences[i].replace(endingRegex, `${replacement}${punctuation}`);
+              fixedEndings++;
+              consecutiveCount = 0; // 교체 후 카운트 리셋
+            }
+          }
+        } else {
+          consecutiveCount = 0;
+        }
+        lastEndingWord = currentEndingWord;
+      }
+
+      if (fixedEndings > 0) {
+        body = endingSentences.join(' ');
+        console.log(`  ✓ 동일 어미 3연속 ${fixedEndings}회 자동 교체 완료`);
+      }
+    }
+
     // 7. 공백 정리
     body = body.replace(/\n{3,}/g, '\n\n');
     body = body.replace(/\s{2,}/g, ' ');
     body = body.trim();
+
+    // ✅ [2026-03-30] 8. 접속사 교체 — AI 전형적 접속사를 자연어로 변환
+    const conjunctionReplacements = [
+      { from: /또한,?\s/g, to: () => ['그리고 ', '게다가 ', '거기에 '][Math.floor(Math.random() * 3)] },
+      { from: /이러한\s/g, to: () => ['이런 ', '이렇게 ', '이처럼 '][Math.floor(Math.random() * 3)] },
+      { from: /그러므로,?\s/g, to: () => ['그래서 ', '그러니까 ', '결국 '][Math.floor(Math.random() * 3)] },
+      { from: /따라서,?\s/g, to: () => ['그래서 ', '그러다 보니 ', '결국은 '][Math.floor(Math.random() * 3)] },
+      { from: /그럼에도 불구하고,?\s/g, to: () => ['그래도 ', '근데 ', '하지만 '][Math.floor(Math.random() * 3)] },
+    ];
+
+    let conjunctionsReplaced = 0;
+    conjunctionReplacements.forEach(({ from, to }) => {
+      const matches = body.match(from);
+      if (matches && matches.length > 0) {
+        body = body.replace(from, () => {
+          conjunctionsReplaced++;
+          return to();
+        });
+      }
+    });
+    if (conjunctionsReplaced > 0) {
+      console.log(`  ✓ AI 접속사 ${conjunctionsReplaced}개 자연어 교체`);
+    }
+
+    // ✅ [2026-03-30 v2] 9. 문장 길이 균일도 체크 (Burstiness Enforcement)
+    const burstTokens = body.split(/(?<=[.!?])\s+/).filter((s: string) => s.length > 3);
+    if (burstTokens.length >= 5) {
+      const lengths = burstTokens.map((s: string) => s.length);
+      const avgLen = lengths.reduce((a: number, b: number) => a + b, 0) / lengths.length;
+      const variance = lengths.reduce((sum: number, l: number) => sum + Math.pow(l - avgLen, 2), 0) / lengths.length;
+      const stdDev = Math.sqrt(variance);
+
+      if (stdDev < 5) {
+        console.log(`  ⚠️ 문장 길이 균일도 경고: 표준편차 ${stdDev.toFixed(1)} (최소 5 이상 권장) — AI 패턴 위험`);
+      } else {
+        console.log(`  ✅ 문장 길이 분산도 양호: 표준편차 ${stdDev.toFixed(1)}`);
+      }
+    }
 
     console.log(`  ✅ AI 표현 최적화 완료`);
 
@@ -350,18 +467,95 @@ export class QualityEnhancer {
     return `${minutes}분`;
   }
 
+  // ✅ [2026-03-30 v2] AI 탐지 위험도 계산 — 12패턴 + 문장균일도 + 어미반복 + 구조검증
   private calculateAIDetectionRisk(body: string): number {
-    const aiPhrases = ['물론', '확실히', '것입니다', '하겠습니다'];
-    let count = 0;
+    let riskScore = 0;
+
+    // 1. AI 전형적 문구 탐지 (12패턴)
+    const aiPhrases = [
+      '물론', '확실히', '것입니다', '하겠습니다',
+      '에 대해 알아보겠습니다', '살펴보겠습니다', '소개해드리겠습니다',
+      '종합적으로', '결론적으로', '요약하면',
+      '주목할 만한', '귀추가 주목'
+    ];
+    let phraseCount = 0;
     aiPhrases.forEach(phrase => {
       const matches = body.match(new RegExp(phrase, 'g'));
-      count += matches ? matches.length : 0;
+      phraseCount += matches ? matches.length : 0;
     });
+    riskScore += phraseCount * 5;
 
-    if (count === 0) return 5;
-    if (count <= 3) return 20;
-    if (count <= 7) return 50;
-    return 80;
+    // 2. 접속사 반복 체크
+    const formalConjunctions = body.match(/(?:또한|이러한|그러므로|따라서|그럼에도 불구하고)/g);
+    if (formalConjunctions && formalConjunctions.length > 3) {
+      riskScore += (formalConjunctions.length - 3) * 3;
+    }
+
+    // 3. 문장 길이 균일도 (표준편차가 낮으면 AI)
+    const riskSentences = body.split(/(?<=[.!?])\s+/).filter((s: string) => s.length > 3);
+    if (riskSentences.length >= 5) {
+      const lens = riskSentences.map((s: string) => s.length);
+      const avg = lens.reduce((a: number, b: number) => a + b, 0) / lens.length;
+      const stdDev = Math.sqrt(lens.reduce((sum: number, l: number) => sum + Math.pow(l - avg, 2), 0) / lens.length);
+      if (stdDev < 3) riskScore += 15;       // 매우 균일 → 고위험
+      else if (stdDev < 5) riskScore += 8;   // 약간 균일 → 중위험
+    }
+
+    // 4. 연속 동일 어미 잔존 체크
+    const endCheckSentences = body.split(/(?<=[.!?])\s+/);
+    const endRx = /(합니다|입니다|습니다|해요|네요|거든요|더라고요|잖아요|예요|이에요)[.!?]*$/;
+    let consecEnd = 0;
+    let prevEnd = '';
+    for (const sent of endCheckSentences) {
+      const m = sent.match(endRx);
+      const curr = m ? m[1] : '';
+      if (curr && curr === prevEnd) {
+        consecEnd++;
+        if (consecEnd >= 2) riskScore += 5; // 3연속 어미 잔존
+      } else {
+        consecEnd = 0;
+      }
+      prevEnd = curr;
+    }
+
+    // 5. 도입부↔소제목1 톤 겹침 검증
+    const h2Sections = body.split(/<h2>/);
+    if (h2Sections.length >= 3) {
+      const intro = h2Sections[0].trim();
+      const firstSection = h2Sections[1]?.split('</h2>')[1]?.trim() || '';
+      if (intro && firstSection) {
+        const introEndings = intro.match(/(합니다|해요|네요|거든요|더라고요|잖아요|예요)[.!?]/g) || [];
+        const secEndings = firstSection.substring(0, 200).match(/(합니다|해요|네요|거든요|더라고요|잖아요|예요)[.!?]/g) || [];
+        if (introEndings.length > 0 && secEndings.length > 0) {
+          const introSet = new Set(introEndings);
+          const overlap = secEndings.filter((e: string) => introSet.has(e)).length;
+          if (overlap / secEndings.length > 0.7) {
+            riskScore += 8; // 도입부와 소제목1 어미 70%+ 중복
+          }
+        }
+      }
+    }
+
+    // 6. 소제목 간 의미 중복 체크 (키워드 유사도)
+    if (h2Sections.length >= 3) {
+      const headings = body.match(/<h2>([^<]+)<\/h2>/g)?.map((h: string) => h.replace(/<[^>]+>/g, '').trim()) || [];
+      for (let i = 0; i < headings.length; i++) {
+        for (let j = i + 1; j < headings.length; j++) {
+          const wordsA = new Set(headings[i].split(/\s+/));
+          const wordsB = new Set(headings[j].split(/\s+/));
+          let common = 0;
+          wordsA.forEach((w: string) => { if (wordsB.has(w) && w.length >= 2) common++; });
+          const similarity = common / Math.max(wordsA.size, wordsB.size);
+          if (similarity > 0.5) {
+            riskScore += 5; // 소제목 간 단어 50%+ 겹침
+            console.log(`  ⚠️ 소제목 유사도 경고: "${headings[i]}" ↔ "${headings[j]}" (${(similarity * 100).toFixed(0)}%)`);
+          }
+        }
+      }
+    }
+
+    // 최종 스코어 (0~100)
+    return Math.min(riskScore, 100);
   }
 
   /**

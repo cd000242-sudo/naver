@@ -1745,7 +1745,9 @@ function preprocessLongKeyword(rawKeyword: string): { coreKeyword: string; conte
   // 콜론 없으면 첫 번째 쉼표 또는 공백 기준으로 25자 내에서 자르기
   const commaIdx = trimmed.indexOf(',');
   if (commaIdx > 0 && commaIdx <= 25) {
-    return { coreKeyword: trimmed.substring(0, commaIdx).trim(), contextHint: trimmed.substring(commaIdx + 1).trim(), isLong: true };
+    const core = trimmed.substring(0, commaIdx).trim();
+    const context = trimmed.substring(commaIdx + 1).trim();
+    return { coreKeyword: core, contextHint: context, isLong: true };
   }
 
   // 공백 기준으로 최대 4단어까지만 핵심 키워드로 사용
@@ -1888,21 +1890,21 @@ function applyHomefeedNarrativeHookBlock(content: StructuredContent, source: Con
       console.log(`[HomefeedHook] ✅ AI 표현 0개 — 사람 냄새 양호`);
     }
 
-    // ✅ [2026-03-06] 소제목 수 검증 — 5~6개가 최적
+    // ✅ [2026-03-06] 소제목 수 검증 — 3~8개가 최적 (구조 변동 엔진 대응)
     const headingCount = content.headings.length;
-    if (headingCount < 4) {
-      console.log(`[HomefeedHook] ⚠️ 소제목 ${headingCount}개 — 최소 5개 필요 (체류시간 2분30초 부족)`);
+    if (headingCount < 3) {
+      console.log(`[HomefeedHook] ⚠️ 소제목 ${headingCount}개 — 최소 3개 필요`);
     } else if (headingCount > 8) {
       console.log(`[HomefeedHook] ⚠️ 소제목 ${headingCount}개 — 너무 많음 (8개 이하 권장)`);
     } else {
-      console.log(`[HomefeedHook] ✅ 소제목 ${headingCount}개 — 체류시간 최적 구간`);
+      console.log(`[HomefeedHook] ✅ 소제목 ${headingCount}개 — 구조 변동 엔진 허용 범위`);
     }
 
     // ✅ [2026-03-06] 본문 품질 종합 점수 로깅
     let bodyScore = 100;
     if (triggerCount < 3) bodyScore -= 15;
     if (aiCount > 0) bodyScore -= (aiCount * 10);
-    if (headingCount < 4) bodyScore -= 20;
+    if (headingCount < 3) bodyScore -= 20;
     if (headingCount > 8) bodyScore -= 10;
     // 서브키워드 밀도 반영
     if (subKwArr.length > 0) {
@@ -1974,20 +1976,20 @@ function applySeoQualityHookBlock(content: StructuredContent, source: ContentSou
       console.log(`[SeoHook] ✅ 스크롤 트리거 양호 (${triggerCount}개)`);
     }
 
-    // ✅ 소제목 수 검증 (5~7개 최적)
+    // ✅ 소제목 수 검증 (3~8개 — 구조 변동 엔진 대응)
     const hCount = content.headings.length;
-    if (hCount < 4) {
-      console.log(`[SeoHook] ⚠️ 소제목 ${hCount}개 — 최소 5개 필요`);
+    if (hCount < 3) {
+      console.log(`[SeoHook] ⚠️ 소제목 ${hCount}개 — 최소 3개 필요`);
     } else if (hCount > 8) {
-      console.log(`[SeoHook] ⚠️ 소제목 ${hCount}개 — 7개 이하 권장`);
+      console.log(`[SeoHook] ⚠️ 소제목 ${hCount}개 — 8개 이하 권장`);
     } else {
-      console.log(`[SeoHook] ✅ 소제목 ${hCount}개 — SEO 최적`);
+      console.log(`[SeoHook] ✅ 소제목 ${hCount}개 — 구조 변동 엔진 허용 범위`);
     }
 
     // ✅ SEO 본문 품질 종합 점수
     let seoBodyScore = 100;
     if (triggerCount < 3) seoBodyScore -= 10;
-    if (hCount < 4) seoBodyScore -= 15;
+    if (hCount < 3) seoBodyScore -= 15;
     if (hCount > 8) seoBodyScore -= 5;
 
     // AI 표현 체크
@@ -3748,13 +3750,16 @@ export function validateShoppingConnectContent(content: StructuredContent): { sc
   const feedback: string[] = [];
   let score = 100;
 
-  // 1. 소제목 수 체크 (5~6개 필수)
+  // 1. 소제목 수 체크 (3~8개 — 구조 변동 엔진 대응)
   const headingCount = content.headings?.length || 0;
-  if (headingCount < 5) {
+  if (headingCount < 3) {
     score -= 20;
-    feedback.push(`❌ 소제목 ${headingCount}개 (5개 이상 필요)`);
+    feedback.push(`❌ 소제목 ${headingCount}개 (최소 3개 필요)`);
+  } else if (headingCount > 8) {
+    score -= 10;
+    feedback.push(`⚠️ 소제목 ${headingCount}개 (8개 이하 권장)`);
   } else {
-    feedback.push(`✅ 소제목 ${headingCount}개`);
+    feedback.push(`✅ 소제목 ${headingCount}개 (구조 변동 엔진 허용 범위)`);
   }
 
   // 2. 금지 패턴 체크
@@ -4112,8 +4117,8 @@ ${{
 - 첫 문단에 1회, 마지막 문단에 1회 필수 포함
 - 키워드가 억지스럽게 반복되지 않도록 유의어/동의어 활용
 
-【글 구조 (소제목 4~6개)】
-- 도입부(2~3줄) → 소제목 4~6개(각 4~6문장) → 마무리(2~3줄)
+【글 구조 (소제목 3~8개)】
+- 도입부(2~3줄) → 소제목 3~8개(각 4~6문장) → 마무리(2~3줄)
 - 소제목은 독자의 궁금증을 유발하는 구체적 표현 사용
 - "포인트 1", "포인트 2" 같은 번호형 소제목 금지
 - "삶의 질이 달라졌어요", "이것 하나로 끝" 같은 뻔한 표현 금지
@@ -4135,8 +4140,7 @@ ${{
   "headings": [
     {"title": "소제목 1", "content": "본문 내용 (4~6문장, 상세 서술)", "summary": "한 줄 요약", "keywords": ["관련키워드"], "imagePrompt": "이 소제목에 맞는 구체적 이미지 묘사 (한국어)"},
     {"title": "소제목 2", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 묘사"},
-    {"title": "소제목 3", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 묘사"},
-    {"title": "소제목 4", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 묘사"}
+    {"title": "소제목 3", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 묘사"}
   ],
   "conclusion": "마무리 텍스트 (2~3줄, 여운형)",
   "hashtags": ["해시태그1", "해시태그2", "해시태그3", "해시태그4", "해시태그5"],
@@ -4368,7 +4372,7 @@ ${{
 ═══════════════════════════════════════════════════════════════
 **소제목은 반드시 아래 10단계 구조를 따르세요. 매번 새롭고 독창적으로 작성하세요!**
 
-🔥 **10단계 글 구조 (순서대로 소제목 6~7개 생성):**
+🔥 **10단계 글 구조 (순서대로 소제목 3~8개 생성):**
 1️⃣ **후킹(Hook)** → 첫 문장에서 시선 강탈 (궁금증, 공감, 충격)
 2️⃣ **문제 제기** → 독자의 고민/고통 건드리기
 3️⃣ **해결책 제시** → 이 제품이 어떻게 해결하는지
@@ -4487,7 +4491,7 @@ ${{
 - "이 제품은 ~한 스펙을 갖추고 있어요", "이런 분에게 적합해요" 식의 **분석적 관점**으로 작성하세요.
 - 객관적 정보 + 전문가적 판단을 결합하세요.
 
-📦 **리뷰형 필수 구조 (6~7개 소제목)**
+📦 **리뷰형 필수 구조 (3~8개 소제목)**
 1. **제품 소개 / 핵심 요약** → "이 제품이 주목받는 이유" (3줄 핵심 정리)
 2. **스펙 & 핵심 기능 분석** → 제품의 주요 사양, 기능, 차별점 정리 (원문 rawText 기반)
 3. **이런 분에게 추천** → 구매 타겟별 적합도 분석 (예: "1인 가구에 적합 / 대가족은 부족할 수 있음")
@@ -4529,18 +4533,9 @@ ${{
 
   console.log(`[PromptBuilder] 2축 분리 프롬프트 생성: mode=${mode}, category=${categoryHint || 'general'}, isFullAuto=${isFullAuto}, isReviewType=${isReviewType}`);
 
-  // JSON 출력 형식 지시 (홈판 모드: 소제목 5~6개, SEO 모드: 3~5개)
+  // JSON 출력 형식 지시 (홈판 모드: 소제목 3~8개, SEO 모드: 3~8개)
   const isHomefeed = mode === 'homefeed';
-  const headingsExample = isHomefeed
-    ? `"headings": [
-    {"title": "소제목 1 (상황/발언)", "content": "본문 4~5문장...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"},
-    {"title": "소제목 2 (대중 반응)", "content": "본문 4~5문장...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"},
-    {"title": "소제목 3 (과거 비교/맥락)", "content": "본문 4~5문장...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"},
-    {"title": "소제목 4 (전문가/관계자 반응)", "content": "본문 4~5문장...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"},
-    {"title": "소제목 5 (앞으로 전망/여운)", "content": "본문 4~5문장...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"},
-    {"title": "소제목 6 (선택: 추가 이슈)", "content": "본문 4~5문장...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"}
-  ]`
-    : `"headings": [
+  const headingsExample = `"headings": [
     {"title": "소제목 1", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"},
     {"title": "소제목 2", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"},
     {"title": "소제목 3", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"}
@@ -4550,7 +4545,7 @@ ${{
   const homefeedStructureRule = isHomefeed ? `
 ⚠️⚠️⚠️ [홈판 모드 필수 구조 규칙] ⚠️⚠️⚠️
 - introduction: 정확히 3줄, 첫 문장 25자 이내, 상황/발언/반응으로 시작
-- headings: 반드시 5~6개 (3개 금지!)
+- headings: STRUCTURE OVERRIDE에서 지정한 소제목 개수를 따를 것 (3~8개)
 - [강제] 1번 소제목은 반드시 인물명(주어)으로 시작 (예: "매니저의 폭로" - O / "의 폭로" - X)
 - 본문 중간에 "📌 당시 대중 반응 요약" 블록 필수 (반드시 앞에 빈 줄 삽입!, 실제 댓글처럼 3~4줄)
 - conclusion: 결론/정리 금지, 여운형 문장 2줄만
@@ -4640,7 +4635,7 @@ ${contentMode === 'homefeed' && subKeywords ? `
 
 📌 필수 규칙:
 1. 메인키워드: 본문 전체에 5~8회 자연스럽게 분산 (밀도 1.5~3%)
-2. 서브키워드: 5~6개 소제목 중 최소 3개의 소제목 제목 또는 첫 문장(F)에 포함
+2. 서브키워드: 3~8개 소제목 중 최소 3개의 소제목 제목 또는 첫 문장(F)에 포함
 3. 도입부 첫 3줄에 메인키워드 + 서브키워드 각 1회씩 포함
 4. 키워드를 억지로 반복하지 말고, 문맥에 맞게 자연스럽게 녹이세요
 5. 결론부에도 메인키워드 1회 + 서브키워드 1회 포함
@@ -6348,11 +6343,11 @@ function validateHomefeedContent(content: StructuredContent, source: ContentSour
 
   console.log(`[HomefeedValidator] 📊 제목 점수: ${titleScore}/100 ("${title.substring(0, 30)}...")`);
 
-  // 1. 소제목 개수 검증 (5~6개 필수)
+  // 1. 소제목 개수 검증 (4~7개 — 구조 변동 엔진 대응)
   const headingsCount = content.headings?.length || 0;
-  if (headingsCount < 5) {
-    warnings.push(`⚠️ 소제목 ${headingsCount}개 (홈판 권장: 5~6개)`);
-    console.warn(`[HomefeedValidator] ⚠️ 소제목 부족: ${headingsCount}개 (권장 5~6개)`);
+  if (headingsCount < 3) {
+    warnings.push(`⚠️ 소제목 ${headingsCount}개 (최소 3개 필요)`);
+    console.warn(`[HomefeedValidator] ⚠️ 소제목 심각 부족: ${headingsCount}개`);
 
     // 소제목이 3개 이하면 추가 소제목 생성 시도
     // ✅ [2026-02-02] 폴백 소제목을 범용적으로 변경 (연예 전용 '당시 대중 반응 요약' 제거)
@@ -6363,10 +6358,13 @@ function validateHomefeedContent(content: StructuredContent, source: ContentSour
         { title: primaryKW ? `${primaryKW}, 놓치면 후회할 포인트` : '놓치면 후회할 핵심 포인트', content: '여기서부터가 진짜 중요해요.', summary: '', keywords: [], imagePrompt: '' },
         { title: '직접 경험해보니 달랐어요', content: '솔직히 기대 안 했는데, 생각보다 달랐어요.', summary: '', keywords: [], imagePrompt: '' },
       ];
-      content.headings.push(...additionalHeadings.slice(0, 5 - headingsCount));
-      console.log(`[HomefeedValidator] 소제목 ${5 - headingsCount}개 자동 추가 (토픽 연관 폴백)`);
+      content.headings.push(...additionalHeadings.slice(0, 4 - headingsCount));
+      console.log(`[HomefeedValidator] 소제목 ${4 - headingsCount}개 자동 추가 (토픽 연관 폴백)`);
     }
 
+  } else if (headingsCount > 8) {
+    warnings.push(`⚠️ 소제목 ${headingsCount}개 — 너무 많음 (8개 이하 권장)`);
+    console.warn(`[HomefeedValidator] ⚠️ 소제목 과다: ${headingsCount}개`);
   }
 
   // 2. 도입부 검증 (3줄 권장)

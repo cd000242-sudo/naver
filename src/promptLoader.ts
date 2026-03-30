@@ -495,6 +495,106 @@ interface ProductInfoForPrompt {
   reviews?: string[];
 }
 
+// ═══════════════════════════════════════════════════════════════
+// ✅ [2026-03-30] 구조 변동 엔진 (Structure Variation Engine)
+// AI 지문 방지: 매 글마다 다른 구조 아키타입을 랜덤 배정
+// ═══════════════════════════════════════════════════════════════
+
+interface StructureArchetype {
+  name: string;
+  headingCount: number;
+  sentencesPerHeading: string;
+  structureDescription: string;
+  fifoVariation: string;
+}
+
+const STRUCTURE_ARCHETYPES: StructureArchetype[] = [
+  {
+    name: '딥다이브형',
+    headingCount: 4,
+    sentencesPerHeading: '5~7',
+    structureDescription: '소제목 4개, 각 섹션을 깊고 풍성하게. 하나의 주제를 다각도로 파고드는 구조.',
+    fifoVariation: '소제목1: F→I→R→O (정석) / 소제목2: R→F→I→O (반응 먼저) / 소제목3: I→F→O→R (해석 선행) / 소제목4: O→F→R (의견부터)',
+  },
+  {
+    name: '스탠다드형',
+    headingCount: 5,
+    sentencesPerHeading: '4~5',
+    structureDescription: '소제목 5개, 균형 잡힌 표준 구조. 정보 밀도와 감정 밸런스.',
+    fifoVariation: '소제목1: F→I→R→O / 소제목2: F→R→I→O / 소제목3: R→F→O / 소제목4: I→R→F→O / 소제목5: O→F→R',
+  },
+  {
+    name: '속보·이슈형',
+    headingCount: 6,
+    sentencesPerHeading: '3~5',
+    structureDescription: '소제목 6개, 빠른 전개. 이슈의 다양한 측면을 짧고 임팩트 있게 다룸.',
+    fifoVariation: '소제목1: F→I→R→O / 소제목2: R→O→F / 소제목3: F→I→O / 소제목4: R→F→I→O / 소제목5: F→R→O / 소제목6: O→R→F',
+  },
+  {
+    name: '종합분석형',
+    headingCount: 7,
+    sentencesPerHeading: '3~4',
+    structureDescription: '소제목 7개, 넓은 커버리지. 주제를 최대한 다양한 관점에서 훑는 구조.',
+    fifoVariation: '소제목1: F→I→R→O / 소제목2: F→R→O / 소제목3: I→F→R / 소제목4: R→I→F→O / 소제목5: F→O→R / 소제목6: R→F→O / 소제목7: O→F→R (여운)',
+  },
+];
+
+/**
+ * 글마다 랜덤 구조 아키타입 선택
+ * → 같은 카테고리여도 매번 다른 구조의 글이 생성됨
+ */
+function getRandomStructureArchetype(): StructureArchetype {
+  const idx = Math.floor(Math.random() * STRUCTURE_ARCHETYPES.length);
+  return STRUCTURE_ARCHETYPES[idx];
+}
+
+/**
+ * 글 길이 변동 엔진: 같은 카테고리에서도 ±20% 분량 변동
+ */
+function getContentLengthVariation(): { sentenceJitter: string; paragraphNote: string } {
+  const variations = [
+    { sentenceJitter: '짧은 편 (전체 1800~2200자)', paragraphNote: '간결하고 핵심만. 군더더기 없이.' },
+    { sentenceJitter: '보통 (전체 2200~2800자)', paragraphNote: '표준 분량. 충분한 깊이와 적절한 길이.' },
+    { sentenceJitter: '풍성한 편 (전체 2800~3500자)', paragraphNote: '에피소드와 디테일 풍부. 체류시간 극대화.' },
+  ];
+  const idx = Math.floor(Math.random() * variations.length);
+  return variations[idx];
+}
+
+/**
+ * 구조 변동 + 글 길이 변동 지침 생성
+ * homefeed 모드에서만 주입됨
+ */
+export function buildStructureVariationDirective(): string {
+  const archetype = getRandomStructureArchetype();
+  const lengthVar = getContentLengthVariation();
+
+  console.log(`[StructureEngine] 🎲 구조 아키타입: ${archetype.name} (소제목 ${archetype.headingCount}개) / 분량: ${lengthVar.sentenceJitter}`);
+
+  return `
+════════════════════════════════════════
+🎲 [STRUCTURE OVERRIDE — 이번 글의 구조 지정] 🎲
+════════════════════════════════════════
+
+⚠️ 이 지침은 base.prompt의 "소제목 5~6개" 규칙보다 최우선 적용.
+이번 글은 아래 구조를 따라라. 매번 다른 구조가 지정되므로 무조건 따를 것.
+
+■ 구조 아키타입: [${archetype.name}]
+■ 소제목 개수: 정확히 ${archetype.headingCount}개
+■ 각 소제목 본문: ${archetype.sentencesPerHeading}문장
+■ 구조 설명: ${archetype.structureDescription}
+
+■ FIRO 순서 배치 (이번 글 전용):
+${archetype.fifoVariation}
+
+■ 분량 지정: ${lengthVar.sentenceJitter}
+  ${lengthVar.paragraphNote}
+
+⛔ 위 소제목 개수와 FIRO 순서를 무시하고 기본 5~6개로 회귀하면 0점.
+════════════════════════════════════════
+`;
+}
+
 export function buildFullPrompt(
   mode: PromptMode,
   categoryHint?: string,
@@ -509,6 +609,12 @@ export function buildFullPrompt(
   const tonePrompt = getToneInstruction(toneStyle);
 
   let finalPrompt = basePrompt;
+
+  // ✅ [2026-03-30] 홈피드 모드: 구조 변동 엔진 주입 (AI 지문 방지)
+  if (mode === 'homefeed') {
+    const structureDirective = buildStructureVariationDirective();
+    finalPrompt = `${finalPrompt}\n\n${structureDirective}`;
+  }
 
   // 3. 완전자동 모드면 자동화 보조 프롬프트 추가
   if (isFullAuto) {
