@@ -583,62 +583,78 @@ body {
 
 /* ═══════════ PRODUCT THEME: NAVER (Emerald Green) ═══════════ */
 .product-showcase.theme-naver {
-  border-color: rgba(16, 185, 129, 0.2);
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.03) 0%, var(--bg-card) 60%);
+  border-color: rgba(16, 185, 129, 0.35);
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(5, 150, 105, 0.08) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 78, 59, 0.08) 50%, rgba(10, 10, 15, 0.95) 100%);
 }
-.product-showcase.theme-naver:hover { border-color: rgba(16, 185, 129, 0.35); box-shadow: 0 8px 40px rgba(16, 185, 129, 0.08); }
+.product-showcase.theme-naver:hover { border-color: rgba(16, 185, 129, 0.5); box-shadow: 0 8px 48px rgba(16, 185, 129, 0.15), inset 0 0 60px rgba(16, 185, 129, 0.03); }
 .theme-naver .product-tag { background: linear-gradient(135deg, #10b981, #34d399); }
-.theme-naver .mockup-header { background: rgba(16, 185, 129, 0.04); border-bottom-color: rgba(16, 185, 129, 0.15); }
-.theme-naver .visual-mockup { border-color: rgba(16, 185, 129, 0.2); }
+.theme-naver .product-title { color: #6ee7b7; }
+.theme-naver .mockup-header { background: rgba(16, 185, 129, 0.08); border-bottom-color: rgba(16, 185, 129, 0.2); }
+.theme-naver .visual-mockup { border-color: rgba(16, 185, 129, 0.3); background: rgba(6, 78, 59, 0.2); }
 .theme-naver .product-cta-btn.btn-theme { background: linear-gradient(135deg, #059669, #10b981); color: #fff; }
-.theme-naver .product-cta-btn.btn-theme:hover { box-shadow: 0 6px 24px rgba(16, 185, 129, 0.35); }
-.theme-naver .benefit-icon { color: #10b981; }
-.theme-naver .stat-value { color: #10b981 !important; }
+.theme-naver .product-cta-btn.btn-theme:hover { box-shadow: 0 6px 28px rgba(16, 185, 129, 0.4); }
+.theme-naver .benefit-icon { color: #34d399; }
+.theme-naver .stat-value { color: #34d399 !important; }
 .theme-naver .progress-bar { background: linear-gradient(90deg, #059669, #34d399); }
 
 /* ═══════════ PRODUCT THEME: ORBIT (Yellow + Sky Blue) ═══════════ */
 .product-showcase.theme-orbit {
-  border-color: rgba(56, 189, 248, 0.2);
-  background: linear-gradient(135deg, rgba(250, 204, 21, 0.03) 0%, rgba(56, 189, 248, 0.03) 50%, var(--bg-card) 100%);
+  border-color: rgba(56, 189, 248, 0.3);
+  background:
+    radial-gradient(ellipse at 15% 30%, rgba(250, 204, 21, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 70%, rgba(56, 189, 248, 0.14) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(250, 204, 21, 0.08) 0%, rgba(56, 189, 248, 0.08) 50%, rgba(10, 10, 15, 0.95) 100%);
 }
-.product-showcase.theme-orbit:hover { border-color: rgba(56, 189, 248, 0.35); box-shadow: 0 8px 40px rgba(56, 189, 248, 0.08), 0 0 30px rgba(250, 204, 21, 0.04); }
+.product-showcase.theme-orbit:hover { border-color: rgba(56, 189, 248, 0.5); box-shadow: 0 8px 48px rgba(56, 189, 248, 0.12), 0 0 40px rgba(250, 204, 21, 0.06); }
 .theme-orbit .product-tag { background: linear-gradient(135deg, #facc15, #38bdf8); color: #0a0a0f; }
-.theme-orbit .mockup-header { background: linear-gradient(135deg, rgba(250, 204, 21, 0.04), rgba(56, 189, 248, 0.04)); border-bottom-color: rgba(56, 189, 248, 0.15); }
-.theme-orbit .visual-mockup { border-color: rgba(56, 189, 248, 0.2); }
+.theme-orbit .product-title { background: linear-gradient(135deg, #fde68a, #7dd3fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.theme-orbit .mockup-header { background: linear-gradient(135deg, rgba(250, 204, 21, 0.08), rgba(56, 189, 248, 0.08)); border-bottom-color: rgba(56, 189, 248, 0.2); }
+.theme-orbit .visual-mockup { border-color: rgba(56, 189, 248, 0.3); background: rgba(12, 74, 110, 0.15); }
 .theme-orbit .product-cta-btn.btn-theme { background: linear-gradient(135deg, #0ea5e9, #38bdf8); color: #fff; }
-.theme-orbit .product-cta-btn.btn-theme:hover { box-shadow: 0 6px 24px rgba(56, 189, 248, 0.35); }
-.theme-orbit .benefit-icon { color: #38bdf8; }
-.theme-orbit .stat-value { color: #38bdf8 !important; }
+.theme-orbit .product-cta-btn.btn-theme:hover { box-shadow: 0 6px 28px rgba(56, 189, 248, 0.4); }
+.theme-orbit .benefit-icon { color: #7dd3fc; }
+.theme-orbit .stat-value { color: #7dd3fc !important; }
 .theme-orbit .progress-bar { background: linear-gradient(90deg, #facc15, #38bdf8); }
 
 /* ═══════════ PRODUCT THEME: TISTORY (Deep Orange) ═══════════ */
 .product-showcase.theme-tistory {
-  border-color: rgba(251, 146, 60, 0.2);
-  background: linear-gradient(135deg, rgba(251, 146, 60, 0.03) 0%, var(--bg-card) 60%);
+  border-color: rgba(251, 146, 60, 0.35);
+  background:
+    radial-gradient(ellipse at 25% 40%, rgba(251, 146, 60, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 85%, rgba(234, 88, 12, 0.08) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(251, 146, 60, 0.10) 0%, rgba(124, 45, 18, 0.08) 50%, rgba(10, 10, 15, 0.95) 100%);
 }
-.product-showcase.theme-tistory:hover { border-color: rgba(251, 146, 60, 0.35); box-shadow: 0 8px 40px rgba(251, 146, 60, 0.08); }
+.product-showcase.theme-tistory:hover { border-color: rgba(251, 146, 60, 0.5); box-shadow: 0 8px 48px rgba(251, 146, 60, 0.15), inset 0 0 60px rgba(251, 146, 60, 0.03); }
 .theme-tistory .product-tag { background: linear-gradient(135deg, #ea580c, #fb923c); }
-.theme-tistory .mockup-header { background: rgba(251, 146, 60, 0.04); border-bottom-color: rgba(251, 146, 60, 0.15); }
-.theme-tistory .visual-mockup { border-color: rgba(251, 146, 60, 0.2); }
+.theme-tistory .product-title { color: #fdba74; }
+.theme-tistory .mockup-header { background: rgba(251, 146, 60, 0.08); border-bottom-color: rgba(251, 146, 60, 0.2); }
+.theme-tistory .visual-mockup { border-color: rgba(251, 146, 60, 0.3); background: rgba(124, 45, 18, 0.15); }
 .theme-tistory .product-cta-btn.btn-theme { background: linear-gradient(135deg, #ea580c, #fb923c); color: #fff; }
-.theme-tistory .product-cta-btn.btn-theme:hover { box-shadow: 0 6px 24px rgba(251, 146, 60, 0.35); }
+.theme-tistory .product-cta-btn.btn-theme:hover { box-shadow: 0 6px 28px rgba(251, 146, 60, 0.4); }
 .theme-tistory .benefit-icon { color: #fb923c; }
-.theme-tistory .stat-value { color: #fb923c !important; }
+.theme-tistory .stat-value { color: #fdba74 !important; }
 .theme-tistory .progress-bar { background: linear-gradient(90deg, #ea580c, #fb923c); }
 
 /* ═══════════ PRODUCT THEME: LEWORD (Cotton Blue) ═══════════ */
 .product-showcase.theme-leword {
-  border-color: rgba(147, 197, 253, 0.2);
-  background: linear-gradient(135deg, rgba(147, 197, 253, 0.04) 0%, var(--bg-card) 60%);
+  border-color: rgba(147, 197, 253, 0.3);
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(147, 197, 253, 0.15) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(147, 197, 253, 0.12) 0%, rgba(30, 58, 138, 0.08) 50%, rgba(10, 10, 15, 0.95) 100%);
 }
-.product-showcase.theme-leword:hover { border-color: rgba(147, 197, 253, 0.35); box-shadow: 0 8px 40px rgba(147, 197, 253, 0.1); }
+.product-showcase.theme-leword:hover { border-color: rgba(147, 197, 253, 0.5); box-shadow: 0 8px 48px rgba(147, 197, 253, 0.15), inset 0 0 60px rgba(147, 197, 253, 0.03); }
 .theme-leword .product-tag { background: linear-gradient(135deg, #60a5fa, #93c5fd); color: #0a0a0f; }
-.theme-leword .mockup-header { background: rgba(147, 197, 253, 0.04); border-bottom-color: rgba(147, 197, 253, 0.15); }
-.theme-leword .visual-mockup { border-color: rgba(147, 197, 253, 0.2); }
+.theme-leword .product-title { color: #bfdbfe; }
+.theme-leword .mockup-header { background: rgba(147, 197, 253, 0.08); border-bottom-color: rgba(147, 197, 253, 0.2); }
+.theme-leword .visual-mockup { border-color: rgba(147, 197, 253, 0.3); background: rgba(30, 58, 138, 0.15); }
 .theme-leword .product-cta-btn.btn-theme { background: linear-gradient(135deg, #3b82f6, #93c5fd); color: #fff; }
-.theme-leword .product-cta-btn.btn-theme:hover { box-shadow: 0 6px 24px rgba(147, 197, 253, 0.35); }
+.theme-leword .product-cta-btn.btn-theme:hover { box-shadow: 0 6px 28px rgba(147, 197, 253, 0.4); }
 .theme-leword .benefit-icon { color: #93c5fd; }
-.theme-leword .stat-value { color: #93c5fd !important; }
+.theme-leword .stat-value { color: #bfdbfe !important; }
 .theme-leword .progress-bar { background: linear-gradient(90deg, #3b82f6, #93c5fd); }
 
 /* ========== Progress Bar in Mockup ========== */
