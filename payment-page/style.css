@@ -1745,7 +1745,9 @@ body {
   .hero-cta-group { flex-direction: column; align-items: flex-start; }
 
   .product-showcase { grid-template-columns: 1fr; gap: 32px; padding: 28px; }
+  .product-showcase .product-visual { order: -1; }
   .product-showcase.product-alt { direction: ltr; }
+  .product-showcase.product-alt .product-visual { order: -1; }
   .pricing-grid, .pricing-grid-3 { grid-template-columns: 1fr; }
 
   .pricing-card.featured.visible { transform: translateY(0) scale(1); }
