@@ -903,9 +903,9 @@ body {
   transform: translateY(-2px);
 }
 
-/* ========== Pricing Grid 5-col for trial ========== */
+/* ========== Pricing Grid 4-col (trial + 3 paid plans) ========== */
 .pricing-grid {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 /* ========== Download Section ========== */
