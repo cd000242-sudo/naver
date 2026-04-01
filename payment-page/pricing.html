@@ -390,12 +390,12 @@
             const panel = card.closest('.pricing-panel');
             if (panel) { panel.querySelectorAll('.pricing-card').forEach(c => { c.classList.remove('selected'); c.querySelector('.pricing-select').textContent = '?�택?�기'; }); }
             card.classList.add('selected');
-            card.querySelector('.pricing-select').textContent = '???�택??;
+            card.querySelector('.pricing-select').textContent = '✅ 선택됨';
             selectedProduct = card.dataset.product;
             const btn = document.getElementById('btn-pay');
             const product = PRODUCTS[selectedProduct];
             btn.disabled = false;
-            btn.querySelector('.btn-text').textContent = `${product.amount.toLocaleString()}??결제?�기`;
+            btn.querySelector('.btn-text').textContent = `${product.amount.toLocaleString()}원 정기구독하기`;
             document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
