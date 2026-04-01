@@ -1,0 +1,198 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - generic [ref=e7]:
+    - banner [ref=e9]:
+      - generic [ref=e10]:
+        - link "Google Apps Script" [ref=e17] [cursor=pointer]:
+          - /url: /home
+          - img [ref=e18]
+          - generic [ref=e19]: Apps Script
+        - generic [ref=e20]:
+          - generic [ref=e23]:
+            - button "이름 변경하기" [ref=e139] [cursor=pointer]: license-backend
+            - generic [ref=e484]: cloud_done
+          - generic [ref=e34]:
+            - button "배포" [ref=e150] [cursor=pointer]:
+              - generic [ref=e153]:
+                - text: 배포
+                - generic [ref=e154]: 
+            - button "이 프로젝트를 다른 사용자와 공유" [ref=e158] [cursor=pointer]:
+              - generic [ref=e159]: person_add
+            - button "지원" [ref=e161] [cursor=pointer]:
+              - generic [ref=e164]: help_outline
+        - generic [ref=e41]:
+          - button "Google 앱" [ref=e45] [cursor=pointer]:
+            - img [ref=e46]
+          - 'button "Google 계정: song Love (cd000242@gmail.com)" [ref=e51] [cursor=pointer]':
+            - img [ref=e53]
+            - img [ref=e59]
+    - generic [ref=e166]:
+      - navigation "Apps Script 프로젝트 페이지" [ref=e168]:
+        - link "개요" [ref=e169] [cursor=pointer]:
+          - generic [ref=e171]: info_outline
+          - generic [ref=e172]: 개요
+        - link "편집기" [ref=e173] [cursor=pointer]:
+          - generic [ref=e175]: code
+          - generic [ref=e176]: 편집기
+        - link "프로젝트 기록" [ref=e177] [cursor=pointer]:
+          - generic [ref=e179]: history
+          - generic [ref=e180]: 프로젝트 기록
+        - link "트리거" [ref=e181] [cursor=pointer]:
+          - generic [ref=e183]: alarm
+          - generic [ref=e184]: 트리거
+        - link "실행" [ref=e185] [cursor=pointer]:
+          - generic [ref=e187]: playlist_play
+          - generic [ref=e188]: 실행
+        - link "프로젝트 설정" [ref=e189] [cursor=pointer]:
+          - generic [ref=e191]: settings
+          - generic [ref=e192]: 프로젝트 설정
+      - generic [ref=e193]:
+        - heading "편집기" [level=1] [ref=e194]
+        - generic [ref=e195]:
+          - generic [ref=e197]:
+            - generic [ref=e198]:
+              - heading "파일" [level=2] [ref=e199]
+              - generic [ref=e201]:
+                - button "알파벳순으로 파일 정렬" [disabled] [ref=e203]:
+                  - generic [ref=e206]: sort_by_alpha
+                - button "파일 추가" [ref=e208] [cursor=pointer]:
+                  - generic [ref=e211]: add
+            - listbox "프로젝트 파일" [ref=e213]:
+              - option "Code.gs" [ref=e214] [cursor=pointer]:
+                - generic "Code.gs" [ref=e215]
+                - button "Code.gs에 대한 파일 작업 메뉴" [ref=e216]:
+                  - button "Code.gs에 대한 파일 작업 메뉴" [ref=e217]:
+                    - generic [ref=e220]: 
+            - generic [ref=e221]:
+              - heading "라이브러리" [level=2] [ref=e222]
+              - button "라이브러리 추가" [ref=e225] [cursor=pointer]:
+                - generic [ref=e228]: add
+            - generic:
+              - listbox "라이브러리 종속성"
+            - generic [ref=e229]:
+              - heading "서비스" [level=2] [ref=e230]
+              - button "서비스 추가" [ref=e233] [cursor=pointer]:
+                - generic [ref=e236]: add
+            - generic:
+              - listbox "서비스 종속성"
+          - generic [ref=e243]:
+            - region [ref=e244]:
+              - generic [ref=e245]:
+                - generic [ref=e246]:
+                  - button "코드 수정 실행취소" [ref=e376]:
+                    - generic [ref=e379]: undo
+                  - generic [ref=e252]:
+                    - button "코드 수정 재실행" [disabled]:
+                      - generic: redo
+                - generic [ref=e256]:
+                  - button "Drive에 프로젝트 저장" [disabled]:
+                    - img
+                - generic [ref=e459]:
+                  - button "선택한 기능 실행" [ref=e463]:
+                    - generic [ref=e466]: play_arrow
+                    - generic [ref=e467]: 실행
+                  - button "선택한 기능 디버그" [ref=e471]:
+                    - img [ref=e474]
+                    - generic [ref=e477]: 디버그
+                  - listbox "실행할 함수 선택" [expanded] [ref=e480] [cursor=pointer]:
+                    - generic [ref=e487]: getAdminToken
+                    - option "getAdminToken" [active] [selected] [ref=e488]
+                    - option "getTossSecretKey" [ref=e489]
+                    - option "hashPassword" [ref=e490]
+                    - option "getSheet" [ref=e491]
+                    - option "getHeaders" [ref=e492]
+                    - option "findColumnIndex" [ref=e493]
+                    - option "findRowByCode" [ref=e494]
+                    - option "findRowByUserId" [ref=e495]
+                    - option "autoCleanExpiredCodes" [ref=e496]
+                    - option "ensureHeaders" [ref=e497]
+                    - option "doGet" [ref=e498]
+                    - option "doPost" [ref=e499]
+                    - option "handleDbInfo" [ref=e500]
+                    - option "handleList" [ref=e501]
+                    - option "handleIssue" [ref=e502]
+                    - option "handleRevoke" [ref=e503]
+                    - option "handleRevokeBatch" [ref=e504]
+                    - option "handleDeleteBatch" [ref=e505]
+                    - option "handleActivate" [ref=e506]
+                    - option "handleRegister" [ref=e507]
+                    - option "handleVerifyCredentials" [ref=e508]
+                    - option "handleUpdateNaverAccount" [ref=e509]
+                    - option "handleUpdateBloggerAccount" [ref=e510]
+                    - option "calculateLicenseType" [ref=e511]
+                    - option "handleUpdateCode" [ref=e512]
+                    - option "handleGetCode" [ref=e513]
+                    - option "generateSessionToken" [ref=e514]
+                    - option "handleValidateSession" [ref=e515]
+                    - option "handleLogout" [ref=e516]
+                    - option "handleForceLogout" [ref=e517]
+                    - option "getSettingsSheet" [ref=e518]
+                    - option "getUsersSheet" [ref=e519]
+                    - option "getFreeLogsSheet" [ref=e520]
+                    - option "isUserBlockedByDeviceId" [ref=e521]
+                    - option "handleSync" [ref=e522]
+                    - option "handleFreePing" [ref=e523]
+                    - option "handleListUsers" [ref=e524]
+                    - option "handleUpdateBlock" [ref=e525]
+                    - option "handleGetSettings" [ref=e526]
+                    - option "handleReportAccounts" [ref=e527]
+                    - option "handleUpdateSettings" [ref=e528]
+                    - option "generateCode" [ref=e529]
+                    - option "testConnection" [ref=e530]
+                    - option "initCodePool" [ref=e531]
+                    - option "handleListPool" [ref=e532]
+                    - option "handleAddPool" [ref=e533]
+                    - option "handleDeletePool" [ref=e534]
+                    - option "jsonpResponse" [ref=e535]
+                    - option "handleUpdateNaverAccounts" [ref=e536]
+                    - option "handleGetNaverAccounts" [ref=e537]
+                    - option "getNaverAccountsForDashboard" [ref=e538]
+                    - option "getOrderSheet" [ref=e539]
+                    - option "generateLicenseCode" [ref=e540]
+                    - option "getAvailableCode" [ref=e541]
+                    - option "sendLicenseEmail" [ref=e542]
+                    - option "handleConfirmPaymentJSONP" [ref=e543]
+                    - option "handleCheckOrderJSONP" [ref=e544]
+                    - option "handleLookupByEmailJSONP" [ref=e545]
+                    - option "handleSendCodeEmailJSONP" [ref=e546]
+                    - option "getTrialSheet" [ref=e547]
+                    - option "handleTrialActivate" [ref=e548]
+                    - option "handleTrialList" [ref=e549]
+                    - option "handleTrialBlock" [ref=e550]
+                    - option "getBankOrderSheet" [ref=e551]
+                    - option "handleBankOrder" [ref=e552]
+                    - option "handleBankApprove" [ref=e553]
+                    - option "handleBankList" [ref=e554]
+                - button "실행 로그 패널 열기" [ref=e284]:
+                  - generic [ref=e287]: 실행 로그
+            - generic [ref=e289]:
+              - main [ref=e293]:
+                - generic [ref=e294]: .
+                - generic [ref=e296]:
+                  - iframe [ref=e297]:
+                    
+                  - code [ref=e299]:
+                    - generic [ref=e300]:
+                      - generic [ref=e303]:
+                        - generic [ref=e388]: "3403"
+                        - generic [ref=e391]: "3404"
+                        - generic [ref=e435]: "3405"
+                      - generic [ref=e318]:
+                        - generic [ref=e447]: "length, orders: orders"
+                        - generic [ref=e449]: "})).setMimeType(ContentService."
+                        - generic [ref=e451]: MimeType.JSON);
+                        - generic [ref=e453]: "}"
+                      - textbox "편집기 콘텐츠;접근성 옵션은 Alt+F1을 눌러여 합니다." [ref=e330]: "}"
+              - generic:
+                - generic:
+                  - button "실행 로그 창 닫기" [ref=e331] [cursor=pointer]:
+                    - generic [ref=e332]: close
+                  - tooltip [ref=e333]: 실행 로그 닫기
+  - generic: 프로젝트 저장 중...
+  - generic [ref=e335]:
+    - alert
+    - alert
+    - complementary
+    - complementary
+  - generic [ref=e421]: 프로젝트 저장 중...

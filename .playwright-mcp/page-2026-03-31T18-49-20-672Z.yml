@@ -1,0 +1,36 @@
+- generic [active] [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - region "script.google.com 에서는 서비스 제공 및 서비스 품질 개선과 트래픽 분석을 위해 Google 쿠키를 사용합니다." [ref=e3]:
+    - paragraph [ref=e4]:
+      - text: script.google.com 에서는 서비스 제공 및 서비스 품질 개선과 트래픽 분석을 위해 Google 쿠키를 사용합니다.
+      - link "Google에서 쿠키를 사용하는 방법을 자세히 알아보세요. 새 탭에서 열립니다." [ref=e5] [cursor=pointer]:
+        - /url: https://policies.google.com/technologies/cookies?hl=ko
+        - text: 자세히 알아보세요
+    - button "확인" [ref=e6] [cursor=pointer]
+  - generic [ref=e7]:
+    - banner [ref=e9]:
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - button "기본 메뉴" [ref=e12] [cursor=pointer]:
+            - img [ref=e13]
+          - link "Google Apps Script" [ref=e17] [cursor=pointer]:
+            - /url: /home
+            - img [ref=e18]
+            - generic [ref=e19]: Apps Script
+        - generic [ref=e20]:
+          - search [ref=e27]:
+            - button "검색" [ref=e28] [cursor=pointer]:
+              - img [ref=e29]
+          - button "지원" [ref=e36] [cursor=pointer]:
+            - generic [ref=e39]: help_outline
+        - generic [ref=e41]:
+          - button "Google 앱" [ref=e45] [cursor=pointer]:
+            - img [ref=e46]
+          - 'button "Google 계정: song Love (cd000242@gmail.com)" [ref=e51] [cursor=pointer]':
+            - img [ref=e53]
+            - img [ref=e59]
+    - generic [ref=e60]:
+      - heading "내 프로젝트" [level=1] [ref=e62]
+      - generic [ref=e68]:
+        - generic: 로드 중

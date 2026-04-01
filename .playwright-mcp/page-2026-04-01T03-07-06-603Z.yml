@@ -1,0 +1,176 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - generic [ref=e3]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - link "Google Apps Script" [ref=e1679] [cursor=pointer]:
+          - /url: /home
+          - img [ref=e14]
+          - generic [ref=e15]: Apps Script
+        - generic [ref=e16]:
+          - generic [ref=e19]:
+            - button "이름 변경하기" [ref=e1680] [cursor=pointer]: license-backend
+            - generic [ref=e1443]: cloud_done
+          - generic [ref=e38]:
+            - button "배포" [ref=e1681] [cursor=pointer]:
+              - generic [ref=e250]:
+                - text: 배포
+                - generic [ref=e251]: 
+            - button "이 프로젝트를 다른 사용자와 공유" [ref=e1682] [cursor=pointer]:
+              - generic [ref=e256]: person_add
+            - button "지원" [ref=e1683] [cursor=pointer]:
+              - generic [ref=e261]: help_outline
+        - generic [ref=e45]:
+          - button "Google 앱" [ref=e1684] [cursor=pointer]:
+            - img [ref=e50]
+          - 'button "Google 계정: song Love (cd000242@gmail.com)" [ref=e1685] [cursor=pointer]':
+            - img [ref=e57]
+            - img [ref=e63]
+    - generic [ref=e263]:
+      - navigation "Apps Script 프로젝트 페이지" [ref=e1686]:
+        - link "개요" [ref=e1687] [cursor=pointer]:
+          - generic [ref=e268]: info_outline
+          - generic [ref=e269]: 개요
+        - link "편집기" [ref=e1688] [cursor=pointer]:
+          - generic [ref=e272]: code
+          - generic [ref=e273]: 편집기
+        - link "프로젝트 기록" [ref=e1689] [cursor=pointer]:
+          - generic [ref=e276]: history
+          - generic [ref=e277]: 프로젝트 기록
+        - link "트리거" [ref=e1690] [cursor=pointer]:
+          - generic [ref=e280]: alarm
+          - generic [ref=e281]: 트리거
+        - link "실행" [ref=e1691] [cursor=pointer]:
+          - generic [ref=e284]: playlist_play
+          - generic [ref=e285]: 실행
+        - link "프로젝트 설정" [ref=e1692] [cursor=pointer]:
+          - generic [ref=e288]: settings
+          - generic [ref=e289]: 프로젝트 설정
+      - generic [ref=e290]:
+        - heading "편집기" [level=1] [ref=e1693]
+        - generic [ref=e292]:
+          - generic [ref=e294]:
+            - generic [ref=e295]:
+              - heading "파일" [level=2] [ref=e1694]
+              - generic [ref=e298]:
+                - button "알파벳순으로 파일 정렬" [disabled] [ref=e1695]:
+                  - generic [ref=e303]: sort_by_alpha
+                - button "파일 추가" [ref=e1696] [cursor=pointer]:
+                  - generic [ref=e308]: add
+            - listbox "프로젝트 파일" [ref=e1697]:
+              - option "Code.gs" [ref=e1698] [cursor=pointer]:
+                - generic "Code.gs" [ref=e1699]
+                - button "Code.gs에 대한 파일 작업 메뉴" [ref=e1700]:
+                  - button "Code.gs에 대한 파일 작업 메뉴" [ref=e1701]:
+                    - generic [ref=e317]: 
+            - generic [ref=e318]:
+              - heading "라이브러리" [level=2] [ref=e1702]
+              - button "라이브러리 추가" [ref=e1703] [cursor=pointer]:
+                - generic [ref=e325]: add
+            - generic:
+              - listbox "라이브러리 종속성"
+            - generic [ref=e326]:
+              - heading "서비스" [level=2] [ref=e1704]
+              - button "서비스 추가" [ref=e1705] [cursor=pointer]:
+                - generic [ref=e333]: add
+            - generic:
+              - listbox "서비스 종속성"
+          - generic [ref=e340]:
+            - region [ref=e341]:
+              - generic [ref=e342]:
+                - generic [ref=e343]:
+                  - button "코드 수정 실행취소" [ref=e1706]:
+                    - generic [ref=e875]: undo
+                  - generic [ref=e349]:
+                    - button "코드 수정 재실행" [disabled]:
+                      - generic: redo
+                - generic [ref=e353]:
+                  - button "Drive에 프로젝트 저장" [disabled]:
+                    - img
+                - generic [ref=e1414]:
+                  - generic [ref=e1417]:
+                    - button "선택한 기능 실행" [disabled]:
+                      - generic: play_arrow
+                      - generic: 실행
+                  - generic [ref=e1425]:
+                    - button "선택한 기능 디버그" [disabled]:
+                      - img
+                      - generic: 디버그
+                  - listbox "실행할 함수 선택" [disabled] [ref=e1707]:
+                    - option "testMailPermission" [disabled] [selected] [ref=e1708]
+                  - button "실행 중지" [ref=e1709]:
+                    - generic [ref=e1551]: stop
+                    - generic [ref=e1552]: 중지
+                - button "실행 로그 패널 닫기" [ref=e1710]:
+                  - generic [ref=e384]: 실행 로그
+            - generic [ref=e386]:
+              - main [ref=e390]:
+                - generic [ref=e391]: .
+                - generic [ref=e393]:
+                  - iframe [ref=e394]:
+                    
+                  - code [ref=e396]:
+                    - generic [ref=e397]:
+                      - generic [ref=e400]:
+                        - generic [ref=e1555]: "3443"
+                        - generic [ref=e1557]: "3444"
+                        - generic [ref=e1559]: "3445"
+                        - generic [ref=e1561]: "3446"
+                        - generic [ref=e1563]: "3447"
+                        - generic [ref=e1565]: "3448"
+                        - generic [ref=e1567]: "3449"
+                        - generic [ref=e1568]:
+                          - generic [ref=e1569] [cursor=pointer]: 
+                          - generic [ref=e1570]: "3450"
+                        - generic [ref=e1572]: "3451"
+                        - generic [ref=e1574]: "3452"
+                        - generic [ref=e1576]: "3453"
+                        - generic [ref=e1578]: "3454"
+                        - generic [ref=e1580]: "3455"
+                        - generic [ref=e1583]: "3456"
+                      - generic [ref=e511]:
+                        - generic [ref=e1610]: "subject: subject,"
+                        - generic [ref=e1612]: "htmlBody: htmlBody"
+                        - generic [ref=e1614]: "});"
+                        - generic [ref=e1616]: "Logger.log('[sendLicenseEmail] 발송 완료: ' + email + ', code=' + code);"
+                        - generic [ref=e1618]: "}"
+                        - generic [ref=e1622]: "function testMailPermission() {"
+                        - generic [ref=e1624]: var q = MailApp.getRemainingDailyQuota();
+                        - generic [ref=e1626]: "Logger.log(\"quota: \" + q);"
+                        - generic [ref=e1628]: "MailApp.sendEmail({to: ADMIN_EMAIL, subject: \"[Leaders Pro] Mail Test\", htmlBody: \"<h2>OK</h2><p>quota:\" + q + \"</p>\"});"
+                        - generic [ref=e1630]: Logger.log("sent to " + ADMIN_EMAIL);
+                        - generic [ref=e1632]: "}"
+                      - textbox "편집기 콘텐츠;접근성 옵션은 Alt+F1을 눌러여 합니다." [active] [ref=e1711]: "} function testMailPermission() { var q = MailApp.getRemainingDailyQuota(); Logger.log(\"quota: \" + q); MailApp.sendEmail({to: ADMIN_EMAIL, subject: \"[Leaders Pro] Mail Test\", htmlBody: \"<h2>OK</h2><p>quota:\" + q + \"</p>\"}); Logger.log(\"sent to \" + ADMIN_EMAIL); }"
+              - generic [ref=e1636]:
+                - complementary [ref=e1638]:
+                  - generic [ref=e1640]: 실행 로그
+                  - list "로그" [ref=e1712]:
+                    - listitem "1번째 로그 PM 12:06:43. 알림. 실행이 시작됨." [ref=e1713]:
+                      - generic [ref=e1647]: PM 12:06:43
+                      - generic [ref=e1648]: 알림
+                      - generic [ref=e1649]: 실행이 시작됨
+                    - 'listitem "2번째 로그 PM 12:06:44. 오류. Exception: You do not have permission to call MailApp.getRemainingDailyQuota. Required permissions: https://www.googleapis.com/auth/script.send_mail. For more information, see https://developers.google.com/apps-script/guides/support/troubleshooting#authorization-is. 스택 프레임 1개." [ref=e1714]':
+                      - generic [ref=e1651]: PM 12:06:44
+                      - generic [ref=e1652]: 오류
+                      - generic [ref=e1653]:
+                        - 'generic "Exception: You do not have permission to call MailApp.getRemainingDailyQuota. Required permissions: https://www.googleapis.com/auth/script.send_mail. For more information, see https://developers.google.com/apps-script/guides/support/troubleshooting#authorization-is." [ref=e1715]': "Exception: You do not have permission to call MailApp.getRemainingDailyQuota. Required permissions: https://www.googleapis.com/auth/script.send_mail. For more information, see https://developers.google.com/apps-script/guides/support/troubleshooting#authorization-is"
+                        - link "여기를 클릭하여 권한 제공" [ref=e1716] [cursor=pointer]:
+                          - /url: https://script.google.com/macros/u/0/d/MGg77XdGa_JK394zw8jxh1gPQ_ghjHivN/authorize?scopes=https://www.googleapis.com/auth/script.send_mail+https://www.googleapis.com/auth/spreadsheets&addrequired=false&enable_granular_consent=true
+                        - list [ref=e1656]:
+                          - listitem [ref=e1657]:
+                            - generic [ref=e1658]: testMailPermission
+                            - generic [ref=e1659]:
+                              - text: "@"
+                              - button "1번째 스택 프레임에서 Code.gs 파일 내 3451행의 testMailPermission." [ref=e1717] [cursor=pointer]: Code.gs:3451
+                - generic:
+                  - button "실행 로그 창 닫기" [ref=e1718] [cursor=pointer]:
+                    - generic [ref=e575]: close
+                  - tooltip [ref=e576]: 실행 로그 닫기
+  - generic: 프로젝트 저장 중...
+  - generic [ref=e577]: "구문 오류: SyntaxError: Unexpected token '}' 라인: 3462 파일: Code.gs"
+  - generic [ref=e578]:
+    - alert
+    - alert
+    - complementary
+    - complementary

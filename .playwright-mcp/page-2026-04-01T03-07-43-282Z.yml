@@ -1,0 +1,89 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - progressbar [ref=e5]
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - generic [ref=e16]:
+            - img [ref=e18]
+            - generic [ref=e23]: Google 계정으로 로그인
+          - generic [ref=e24]:
+            - heading "license-backend에서 Google 계정에 대한 추가 액세스를 요청합니다." [level=1] [ref=e25]:
+              - generic [ref=e27]: license-backend에서 Google 계정에 대한 추가 액세스를 요청합니다.
+            - generic [ref=e34]: cd000242@gmail.com
+        - generic [ref=e37]:
+          - generic [ref=e40]:
+            - generic [ref=e41]:
+              - heading [level=2] [ref=e43]:
+                - img [ref=e45]
+              - generic [ref=e48]:
+                - generic [ref=e49]:
+                  - text: Google에서 인증하지 않은 앱입니다. 앱에서 Google 계정 액세스 권한 일부를 요청하므로 이 앱 개발자를 알고 있으며 신뢰하는 경우에만 진행해야 합니다.
+                  - link "자세히 알아보기" [ref=e50] [cursor=pointer]:
+                    - /url: https://support.google.com/cloud/answer/7454865
+                - generic [ref=e51]:
+                  - text: 앱의 Google 인증 요청을 제출해야 한다는 사실을 앱 개발자(
+                  - link "cd000242@gmail.com" [ref=e52] [cursor=pointer]:
+                    - /url: mailto:cd000242@gmail.com
+                  - text: )에게 알릴 수 있습니다. 그러지 않으면 내 데이터에 대한 앱의 액세스 권한 중 일부가 상실될 수 있습니다.
+            - generic [ref=e53]:
+              - heading "이 액세스를 허용하면 license-backend 앱에서 다음 작업을 할 수 있습니다." [level=2] [ref=e55]:
+                - generic [ref=e56]:
+                  - text: 이 액세스를 허용하면
+                  - button "license-backend" [ref=e57] [cursor=pointer]
+                  - text: 앱에서 다음 작업을 할 수 있습니다.
+              - list [ref=e61]:
+                - listitem [ref=e62]:
+                  - generic [ref=e63]:
+                    - img [ref=e65]
+                    - generic [ref=e66]:
+                      - text: 내 이메일 주소로 이메일 보내기.
+                      - link "자세히 알아보기" [ref=e67] [cursor=pointer]:
+                        - /url: ""
+            - generic [ref=e68]:
+              - heading "license-backend에 이미 일부 액세스 권한이 있음" [level=2] [ref=e70]:
+                - img [ref=e72]
+                - generic [ref=e74]: license-backend에 이미 일부 액세스 권한이 있음
+              - generic [ref=e77]:
+                - text: license-backend에서 액세스할 수 있는 서비스
+                - button "1개 서비스" [ref=e78] [cursor=pointer]
+                - text: 개를 확인하세요.
+          - generic [ref=e81]:
+            - heading "license-backend 앱을 신뢰할 수 있는지 확인" [level=2] [ref=e83]:
+              - generic [ref=e84]: license-backend 앱을 신뢰할 수 있는지 확인
+            - generic [ref=e87]:
+              - generic [ref=e88]:
+                - heading [level=2] [ref=e90]:
+                  - img [ref=e92]
+                - link "license-backend의 개인정보처리방침 또는 서비스 약관 링크가 표시되지 않는 이유 알아보기" [ref=e97] [cursor=pointer]:
+                  - /url: https://support.google.com/accounts?p=oauth_notos
+              - generic [ref=e98]: license-backend의 개인정보처리방침 및 서비스 약관을 검토하여 license-backend에서 내 데이터를 처리하고 보호하는 방법을 알아보세요.
+              - generic [ref=e99]:
+                - link "Google 계정" [ref=e100] [cursor=pointer]:
+                  - /url: https://myaccount.google.com/connections
+                - text: 에서 언제든지 변경할 수 있습니다.
+              - generic [ref=e101]:
+                - text: Google이
+                - link "데이터를 안전하게 공유" [ref=e102] [cursor=pointer]:
+                  - /url: https://support.google.com/accounts/answer/14012355
+                - text: 하는 방법을 알아보세요.
+        - generic [ref=e105]:
+          - button "취소" [ref=e109]: 취소
+          - button "계속" [ref=e115]: 계속
+    - contentinfo [ref=e119]:
+      - combobox "‪한국어‬" [ref=e123] [cursor=pointer]:
+        - generic:
+          - generic: ‪한국어‬
+        - generic:
+          - img
+      - list [ref=e125]:
+        - listitem [ref=e126]:
+          - link "도움말" [ref=e127] [cursor=pointer]:
+            - /url: https://support.google.com/accounts?hl=ko&p=account_iph
+        - listitem [ref=e128]:
+          - link "개인정보처리방침" [ref=e129] [cursor=pointer]:
+            - /url: https://accounts.google.com/TOS?loc=KR&hl=ko&privacy=true
+        - listitem [ref=e130]:
+          - link "약관" [ref=e131] [cursor=pointer]:
+            - /url: https://accounts.google.com/TOS?loc=KR&hl=ko
+  - generic [ref=e133]: license-backend에서 Google 계정에 대한 추가 액세스를 요청합니다.

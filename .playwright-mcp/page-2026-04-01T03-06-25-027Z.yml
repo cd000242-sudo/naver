@@ -1,0 +1,191 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - generic [ref=e3]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - link "Google Apps Script" [ref=e13] [cursor=pointer]:
+          - /url: /home
+          - img [ref=e14]
+          - generic [ref=e15]: Apps Script
+        - generic [ref=e16]:
+          - generic [ref=e19]:
+            - button "이름 변경하기" [ref=e236] [cursor=pointer]: license-backend
+            - generic [ref=e1443]: cloud_done
+          - generic [ref=e38]:
+            - button "배포" [ref=e247] [cursor=pointer]:
+              - generic [ref=e250]:
+                - text: 배포
+                - generic [ref=e251]: 
+            - button "이 프로젝트를 다른 사용자와 공유" [ref=e255] [cursor=pointer]:
+              - generic [ref=e256]: person_add
+            - button "지원" [ref=e258] [cursor=pointer]:
+              - generic [ref=e261]: help_outline
+        - generic [ref=e45]:
+          - button "Google 앱" [ref=e49] [cursor=pointer]:
+            - img [ref=e50]
+          - 'button "Google 계정: song Love (cd000242@gmail.com)" [ref=e55] [cursor=pointer]':
+            - img [ref=e57]
+            - img [ref=e63]
+    - generic [ref=e263]:
+      - navigation "Apps Script 프로젝트 페이지" [ref=e265]:
+        - link "개요" [ref=e266] [cursor=pointer]:
+          - generic [ref=e268]: info_outline
+          - generic [ref=e269]: 개요
+        - link "편집기" [ref=e270] [cursor=pointer]:
+          - generic [ref=e272]: code
+          - generic [ref=e273]: 편집기
+        - link "프로젝트 기록" [ref=e274] [cursor=pointer]:
+          - generic [ref=e276]: history
+          - generic [ref=e277]: 프로젝트 기록
+        - link "트리거" [ref=e278] [cursor=pointer]:
+          - generic [ref=e280]: alarm
+          - generic [ref=e281]: 트리거
+        - link "실행" [ref=e282] [cursor=pointer]:
+          - generic [ref=e284]: playlist_play
+          - generic [ref=e285]: 실행
+        - link "프로젝트 설정" [ref=e286] [cursor=pointer]:
+          - generic [ref=e288]: settings
+          - generic [ref=e289]: 프로젝트 설정
+      - generic [ref=e290]:
+        - heading "편집기" [level=1] [ref=e291]
+        - generic [ref=e292]:
+          - generic [ref=e294]:
+            - generic [ref=e295]:
+              - heading "파일" [level=2] [ref=e296]
+              - generic [ref=e298]:
+                - button "알파벳순으로 파일 정렬" [disabled] [ref=e300]:
+                  - generic [ref=e303]: sort_by_alpha
+                - button "파일 추가" [ref=e305] [cursor=pointer]:
+                  - generic [ref=e308]: add
+            - listbox "프로젝트 파일" [ref=e310]:
+              - option "Code.gs" [ref=e311] [cursor=pointer]:
+                - generic "Code.gs" [ref=e312]
+                - button "Code.gs에 대한 파일 작업 메뉴" [ref=e313]:
+                  - button "Code.gs에 대한 파일 작업 메뉴" [ref=e314]:
+                    - generic [ref=e317]: 
+            - generic [ref=e318]:
+              - heading "라이브러리" [level=2] [ref=e319]
+              - button "라이브러리 추가" [ref=e322] [cursor=pointer]:
+                - generic [ref=e325]: add
+            - generic:
+              - listbox "라이브러리 종속성"
+            - generic [ref=e326]:
+              - heading "서비스" [level=2] [ref=e327]
+              - button "서비스 추가" [ref=e330] [cursor=pointer]:
+                - generic [ref=e333]: add
+            - generic:
+              - listbox "서비스 종속성"
+          - generic [ref=e340]:
+            - region [ref=e341]:
+              - generic [ref=e342]:
+                - generic [ref=e343]:
+                  - button "코드 수정 실행취소" [ref=e872]:
+                    - generic [ref=e875]: undo
+                  - generic [ref=e349]:
+                    - button "코드 수정 재실행" [disabled]:
+                      - generic: redo
+                - generic [ref=e353]:
+                  - button "Drive에 프로젝트 저장" [disabled]:
+                    - img
+                - generic [ref=e1414]:
+                  - button "선택한 기능 실행" [ref=e1418]:
+                    - generic [ref=e1421]: play_arrow
+                    - generic [ref=e1422]: 실행
+                  - button "선택한 기능 디버그" [ref=e1426]:
+                    - img [ref=e1429]
+                    - generic [ref=e1432]: 디버그
+                  - listbox "실행할 함수 선택" [ref=e1435] [cursor=pointer]:
+                    - option "getAdminToken" [selected] [ref=e1436]
+                - button "실행 로그 패널 열기" [ref=e381]:
+                  - generic [ref=e384]: 실행 로그
+            - generic [ref=e386]:
+              - main [ref=e390]:
+                - generic [ref=e391]: .
+                - generic [ref=e393]:
+                  - iframe [ref=e394]:
+                    
+                  - code [ref=e396]:
+                    - generic [ref=e397]:
+                      - generic [ref=e400]:
+                        - generic [ref=e683]: "3432"
+                        - generic [ref=e685]: "3433"
+                        - generic [ref=e687]: "3434"
+                        - generic [ref=e689]: "3435"
+                        - generic [ref=e1172]: "3436"
+                        - generic [ref=e693]: "3437"
+                        - generic [ref=e696]: "3438"
+                        - generic [ref=e698]: "3439"
+                        - generic [ref=e700]: "3440"
+                        - generic [ref=e701]:
+                          - generic [ref=e702] [cursor=pointer]: 
+                          - generic [ref=e703]: "3441"
+                        - generic [ref=e705]: "3442"
+                        - generic [ref=e707]: "3443"
+                        - generic [ref=e709]: "3444"
+                        - generic [ref=e711]: "3445"
+                        - generic [ref=e713]: "3446"
+                        - generic [ref=e715]: "3447"
+                        - generic [ref=e1438]: "3448"
+                        - generic [ref=e1316]: "3431"
+                        - generic [ref=e1319]: "3430"
+                        - generic [ref=e1321]: "3429"
+                        - generic [ref=e1323]: "3428"
+                        - generic [ref=e1325]: "3426"
+                        - generic [ref=e1327]: "3427"
+                        - generic [ref=e1329]:
+                          - generic [ref=e1330] [cursor=pointer]: 
+                          - generic [ref=e1331]: "3425"
+                        - generic [ref=e1333]: "3424"
+                        - generic [ref=e1335]: "3422"
+                        - generic [ref=e1336]:
+                          - generic [ref=e1337] [cursor=pointer]: 
+                          - generic [ref=e1338]: "3423"
+                        - generic [ref=e1340]: "3421"
+                        - generic [ref=e1341]:
+                          - generic [ref=e1342] [cursor=pointer]: 
+                          - generic [ref=e1343]: "3420"
+                      - generic [ref=e511]:
+                        - generic [ref=e829]: + '<p style="color:#c9a84c;font-size:24px;font-weight:800;letter-spacing:2px;margin:0;font-family:monospace;">' + code + '</p></div>'
+                        - generic [ref=e831]: + '<p style="color:#8a8686;font-size:12px;margin:0 0 4px;">상품</p>'
+                        - generic [ref=e833]: + '<p style="color:#e8e6e3;font-size:14px;font-weight:600;margin:0 0 16px;">' + product + '</p>'
+                        - generic [ref=e835]: + '<div style="background:rgba(68,215,182,0.06);border:1px solid rgba(68,215,182,0.15);border-radius:8px;padding:14px;margin-bottom:16px;">'
+                        - generic [ref=e837]: + '<p style="color:#44d7b6;font-size:13px;font-weight:600;margin:0 0 8px;">사용 방법</p>'
+                        - generic [ref=e839]: + '<p style="color:#e8e6e3;font-size:13px;margin:0;line-height:1.8;">1. Leaders Pro 앱 실행<br>2. 라이선스 입력란에 위 코드 붙여넣기<br>3. 활성화
+                        - generic [ref=e841]: 완료!</p></div>'
+                        - generic [ref=e843]: "+ '<p style=\"color:#8a8686;font-size:11px;line-height:1.6;margin:0;\">문의: ' + ADMIN_EMAIL + '</p>'"
+                        - generic [ref=e845]: + '</div></div>';
+                        - generic [ref=e849]: "MailApp.sendEmail({"
+                        - generic [ref=e851]: "to: email,"
+                        - generic [ref=e853]: "subject: subject,"
+                        - generic [ref=e855]: "htmlBody: htmlBody"
+                        - generic [ref=e857]: "});"
+                        - generic [ref=e859]: "Logger.log('[sendLicenseEmail] 발송 완료: ' + email + ', code=' + code);"
+                        - generic [ref=e861]: "}"
+                        - generic [ref=e1380]: + '<p style="color:#8a8686;font-size:12px;margin:0 0 8px;">라이선스 코드</p>'
+                        - generic [ref=e1382]: margin-bottom:20px;">'
+                        - generic [ref=e1384]: + '<div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:20px;text-align:center;
+                        - generic [ref=e1386]: + '<p style="color:#e8e6e3;font-size:14px;line-height:1.8;margin:0 0 20px;">입금이 확인되어 라이선스가 발급되었습니다.</p>'
+                        - generic [ref=e1388]: + '<div style="padding:28px;">'
+                        - generic [ref=e1390]: + '<div style="background:linear-gradient(135deg,#c9a84c,#e8d48b);padding:24px;text-align:center;">'
+                        - generic [ref=e1392]: + '<h1 style="margin:0;color:#0a0a0f;font-size:22px;font-weight:800;">🎉 라이선스 발급 완료</h1></div>'
+                        - generic [ref=e1394]: overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">'
+                        - generic [ref=e1396]: var htmlBody = '<div style="max-width:560px;margin:0 auto;background:#0a0a0f;border:1px solid rgba(255,255,255,0.08);border-radius:16px;
+                        - generic [ref=e1398]: var subject = '🎉 [Leaders Pro] 라이선스 발급 완료 — ' + product;
+                        - generic [ref=e1400]: "*/"
+                        - generic [ref=e1402]: "function sendLicenseEmail(email, code, product) {"
+                        - generic [ref=e1404]: "* 승인 시 고객에게 라이선스 코드 이메일 발송"
+                        - generic [ref=e1406]: /**
+                      - textbox "편집기 콘텐츠;접근성 옵션은 Alt+F1을 눌러여 합니다." [active] [ref=e573]: "} function testMailPermission() { var q = MailApp.getRemainingDailyQuota(); Logger.log(\"quota: \" + q); MailApp.sendEmail({to: ADMIN_EMAIL, subject: \"[Leaders Pro] Mail Test\", htmlBody: \"<h2>OK</h2><p>quota:\" + q + \"</p>\"}); Logger.log(\"sent to \" + ADMIN_EMAIL); }"
+              - generic:
+                - generic:
+                  - button "실행 로그 창 닫기" [ref=e574] [cursor=pointer]:
+                    - generic [ref=e575]: close
+                  - tooltip [ref=e576]: 실행 로그 닫기
+  - generic: 프로젝트 저장 중...
+  - generic [ref=e577]: "구문 오류: SyntaxError: Unexpected token '}' 라인: 3462 파일: Code.gs"
+  - generic [ref=e578]:
+    - alert
+    - alert
+    - complementary
+    - complementary

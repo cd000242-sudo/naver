@@ -1,0 +1,131 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - generic [ref=e3]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - link "Google Apps Script" [ref=e10] [cursor=pointer]:
+          - /url: /home
+          - img [ref=e11]
+          - generic [ref=e12]: Apps Script
+        - generic [ref=e13]:
+          - generic [ref=e16]:
+            - button "이름 변경하기" [ref=e18] [cursor=pointer]: license-backend
+            - generic [ref=e22]:
+              - generic [ref=e23]: cloud_done
+              - text: Drive에 저장됨
+          - generic [ref=e26]:
+            - button "배포" [ref=e31] [cursor=pointer]:
+              - generic [ref=e34]:
+                - text: 배포
+                - generic [ref=e35]: 
+            - button "이 프로젝트를 다른 사용자와 공유" [ref=e39] [cursor=pointer]:
+              - generic [ref=e40]: person_add
+            - button "지원" [ref=e42] [cursor=pointer]:
+              - generic [ref=e45]: help_outline
+        - generic [ref=e47]:
+          - button "Google 앱" [ref=e51] [cursor=pointer]:
+            - img [ref=e52]
+          - 'button "Google 계정: song Love (cd000242@gmail.com)" [ref=e57] [cursor=pointer]':
+            - img [ref=e59]
+            - img [ref=e65]
+    - generic [ref=e67]:
+      - navigation "Apps Script 프로젝트 페이지" [ref=e69]:
+        - link "개요" [ref=e70] [cursor=pointer]:
+          - generic [ref=e72]: info_outline
+          - generic [ref=e73]: 개요
+        - link "편집기" [ref=e74] [cursor=pointer]:
+          - generic [ref=e76]: code
+          - generic [ref=e77]: 편집기
+        - link "프로젝트 기록" [ref=e78] [cursor=pointer]:
+          - generic [ref=e80]: history
+          - generic [ref=e81]: 프로젝트 기록
+        - link "트리거" [ref=e82] [cursor=pointer]:
+          - generic [ref=e84]: alarm
+          - generic [ref=e85]: 트리거
+        - link "실행" [ref=e86] [cursor=pointer]:
+          - generic [ref=e88]: playlist_play
+          - generic [ref=e89]: 실행
+        - link "프로젝트 설정" [ref=e90] [cursor=pointer]:
+          - generic [ref=e92]: settings
+          - generic [ref=e93]: 프로젝트 설정
+      - generic [ref=e94]:
+        - heading "편집기" [level=1] [ref=e95]
+        - generic [ref=e96]:
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - heading "파일" [level=2] [ref=e100]
+              - generic [ref=e102]:
+                - button "알파벳순으로 파일 정렬" [disabled] [ref=e104]:
+                  - generic [ref=e107]: sort_by_alpha
+                - button "파일 추가" [ref=e109] [cursor=pointer]:
+                  - generic [ref=e112]: add
+            - listbox "프로젝트 파일" [ref=e114]:
+              - option "Code.gs" [ref=e115] [cursor=pointer]:
+                - generic "Code.gs" [ref=e116]
+                - button "Code.gs에 대한 파일 작업 메뉴" [ref=e117]:
+                  - button "Code.gs에 대한 파일 작업 메뉴" [ref=e118]:
+                    - generic [ref=e121]: 
+            - generic [ref=e122]:
+              - heading "라이브러리" [level=2] [ref=e123]
+              - button "라이브러리 추가" [ref=e126] [cursor=pointer]:
+                - generic [ref=e129]: add
+            - generic:
+              - listbox "라이브러리 종속성"
+            - generic [ref=e130]:
+              - heading "서비스" [level=2] [ref=e131]
+              - button "서비스 추가" [ref=e134] [cursor=pointer]:
+                - generic [ref=e137]: add
+            - generic:
+              - listbox "서비스 종속성"
+          - generic [ref=e144]:
+            - region [ref=e145]:
+              - generic [ref=e146]:
+                - generic [ref=e147]:
+                  - generic [ref=e150]:
+                    - button "코드 수정 실행취소" [disabled]:
+                      - generic: undo
+                  - generic [ref=e153]:
+                    - button "코드 수정 재실행" [disabled]:
+                      - generic: redo
+                - generic [ref=e157]:
+                  - button "Drive에 프로젝트 저장" [disabled]:
+                    - img
+                - generic [ref=e158]:
+                  - button "선택한 기능 실행" [ref=e162]:
+                    - generic [ref=e165]: play_arrow
+                    - generic [ref=e166]: 실행
+                  - button "선택한 기능 디버그" [ref=e170]:
+                    - img [ref=e173]
+                    - generic [ref=e176]: 디버그
+                  - listbox "실행할 함수 선택" [ref=e179] [cursor=pointer]:
+                    - option "getAdminToken" [selected] [ref=e180]
+                - button "실행 로그 패널 열기" [ref=e185]:
+                  - generic [ref=e188]: 실행 로그
+            - generic [ref=e190]:
+              - main [ref=e194]:
+                - generic [ref=e195]: .
+                - generic [ref=e197]:
+                  - iframe [ref=e198]:
+                    
+                  - code [ref=e200]:
+                    - generic [ref=e201]:
+                      - generic [ref=e204]:
+                        - generic [ref=e207]: "1"
+                        - generic [ref=e210]: "2"
+                      - generic [ref=e219]:
+                        - generic [ref=e221]: /** ===================== 설정
+                        - generic [ref=e223]: ===================== **/
+                        - generic [ref=e225]: "// ★ 보안: 민감한 값은"
+                        - generic [ref=e227]: PropertiesService에서 로드 (GAS
+                      - textbox "편집기 콘텐츠;접근성 옵션은 Alt+F1을 눌러여 합니다." [active] [ref=e232]: "/** ===================== 설정 ===================== **/ // ★ 보안: 민감한 값은 PropertiesService에서 로드 (GAS 에디터 → 프로젝트 설정 → 스크립트 속성) // 스크립트 속성에 아래 키를 수동 등록하세요: // ADMIN_TOKEN = qkrtjdgus2021645 // TOSS_SECRET_KEY = test_sk_ma60RZblrq5YMv2b4PobrwzYWBn1"
+              - generic:
+                - generic:
+                  - button "실행 로그 창 닫기" [ref=e233] [cursor=pointer]:
+                    - generic [ref=e234]: close
+                  - tooltip [ref=e235]: 실행 로그 닫기
+  - generic [ref=e236]:
+    - alert
+    - alert
+    - complementary
+    - complementary

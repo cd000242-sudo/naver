@@ -1,0 +1,52 @@
+- generic [active] [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - generic [ref=e7]:
+    - banner [ref=e9]:
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - button "기본 메뉴" [ref=e12] [cursor=pointer]:
+            - img [ref=e13]
+          - link "Google Apps Script" [ref=e17] [cursor=pointer]:
+            - /url: /home
+            - img [ref=e18]
+            - generic [ref=e19]: Apps Script
+        - generic [ref=e20]:
+          - search [ref=e27]:
+            - button "검색" [ref=e28] [cursor=pointer]:
+              - img [ref=e29]
+          - button "지원" [ref=e36] [cursor=pointer]:
+            - generic [ref=e39]: help_outline
+        - generic [ref=e41]:
+          - button "Google 앱" [ref=e45] [cursor=pointer]:
+            - img [ref=e46]
+          - 'button "Google 계정: song Love (cd000242@gmail.com)" [ref=e51] [cursor=pointer]':
+            - img [ref=e53]
+            - img [ref=e59]
+    - generic [ref=e60]:
+      - generic [ref=e61]:
+        - heading "내 프로젝트" [level=1] [ref=e62]
+        - generic [ref=e98]: 프로젝트 1개 표시
+      - generic [ref=e64]:
+        - generic [ref=e99]:
+          - button "프로젝트" [ref=e101] [cursor=pointer]:
+            - generic [ref=e104]: 프로젝트
+          - generic [ref=e105]: 소유자
+          - 'button "정렬 기준: 최종 수정 시간, 내림차순. 반대로 정렬" [ref=e107] [cursor=pointer]':
+            - generic [ref=e110]:
+              - text: 최종 수정 시간
+              - generic [ref=e112]: 
+        - listbox "프로젝트 목록" [ref=e116]:
+          - 'option "license-backend - Apps Script 프로젝트 상태 모니터링 사용 안함 소유자: 나 최종 수정일: 2026. 3. 27. 프로젝트 개요 옵션 더보기" [ref=e117] [cursor=pointer]':
+            - 'button "license-backend - Apps Script 프로젝트 상태 모니터링 사용 안함 소유자: 나 최종 수정일: 2026. 3. 27. 프로젝트 개요 옵션 더보기" [ref=e118]':
+              - generic [ref=e119]:
+                - img [ref=e121]
+                - generic "license-backend - Apps Script 프로젝트 상태 모니터링 사용 안함" [ref=e125]: license-backend
+                - generic [ref=e126]: 
+              - 'generic "소유자: 나" [ref=e127]': 나
+              - 'generic "최종 수정일: 2026. 3. 27." [ref=e128]': 2026. 3. 27.
+              - button "프로젝트 개요" [ref=e129]:
+                - generic [ref=e132]: 
+              - button "옵션 더보기" [ref=e135]:
+                - generic [ref=e138]: 
+  - generic: "정렬 기준: 최종 수정 시간, 내림차순. 반대로 정렬"

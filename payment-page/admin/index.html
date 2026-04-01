@@ -1345,22 +1345,24 @@
             const pageItems = filtered.slice(start, start + PAGE_SIZE);
 
             let html = '<table class="data-table"><thead><tr>';
-            html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>상태</th><th>사용자</th><th>만료일</th><th>작업</th>';
+            html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>상태</th><th>사용자</th><th>비밀번호</th><th>만료일</th><th>작업</th>';
             html += '</tr></thead><tbody>';
 
             if (pageItems.length === 0) {
-                html += '<tr><td colspan="7" style="text-align:center;color:var(--text-secondary);padding:32px;">코드가 없습니다.</td></tr>';
+                html += '<tr><td colspan="8" style="text-align:center;color:var(--text-secondary);padding:32px;">코드가 없습니다.</td></tr>';
             } else {
                 pageItems.forEach(c => {
                     const status = c.used ? '<span class="badge badge-active">활성</span>' :
                         (c.expiresAt && new Date(c.expiresAt) < new Date() ? '<span class="badge badge-expired">만료</span>' : '<span class="badge badge-unused">미사용</span>');
                     const expires = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString('ko-KR') : '—';
+                    const pwDisplay = c.userPassword && c.userPassword.length <= 30 ? c.userPassword : (c.userPassword ? c.userPassword.substring(0,6) + '...' : '—');
                     html += `<tr>
                         <td><span class="code-text">${c.code}</span></td>
                         <td>${platformBadge(c.platform)}</td>
                         <td>${c.type || '—'}</td>
                         <td>${status}</td>
                         <td>${c.userId || c.user || '—'}</td>
+                        <td>${pwDisplay}</td>
                         <td>${expires}</td>
                         <td><button class="btn btn-red" onclick="revokeCode('${c.code}')" style="padding:4px 10px;font-size:0.7rem;">무효화</button></td>
                     </tr>`;
@@ -1395,20 +1397,22 @@
             const pageItems = orders.slice(start, start + PAGE_SIZE);
 
             let html = '<table class="data-table"><thead><tr>';
-            html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>사용자 ID</th><th>활성화 일시</th><th>만료일</th>';
+            html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>사용자 ID</th><th>비밀번호</th><th>활성화 일시</th><th>만료일</th>';
             html += '</tr></thead><tbody>';
 
             if (pageItems.length === 0) {
-                html += '<tr><td colspan="6" style="text-align:center;color:var(--text-secondary);padding:32px;">주문 내역이 없습니다.</td></tr>';
+                html += '<tr><td colspan="7" style="text-align:center;color:var(--text-secondary);padding:32px;">주문 내역이 없습니다.</td></tr>';
             } else {
                 pageItems.forEach(c => {
                     const dateStr = c.usedAt ? new Date(c.usedAt).toLocaleString('ko-KR') : '—';
                     const expires = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString('ko-KR') : '영구';
+                    const pwDisplay = c.userPassword && c.userPassword.length <= 30 ? c.userPassword : (c.userPassword ? c.userPassword.substring(0,6) + '...' : '—');
                     html += `<tr>
                         <td><span class="code-text">${c.code}</span></td>
                         <td>${platformBadge(c.platform)}</td>
                         <td>${c.type || '—'}</td>
                         <td>${c.userId || '—'}</td>
+                        <td>${pwDisplay}</td>
                         <td>${dateStr}</td>
                         <td>${expires}</td>
                     </tr>`;

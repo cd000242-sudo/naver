@@ -1,0 +1,521 @@
+﻿﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>요금제 — Leaders Pro</title>
+    <meta name="description" content="Leaders Pro 제품군 요금제. Better Life Naver, Leaders Orbit, Leaders Tistory, Leword 각 제품의 가격과 플랜을 비교하세요.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://js.tosspayments.com/v2/standard"></script>
+    <style>
+        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
+        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
+        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
+        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 10% 5%, rgba(255,183,197,0.07) 0%, transparent 40%), radial-gradient(ellipse at 90% 10%, rgba(255,218,233,0.05) 0%, transparent 35%), radial-gradient(ellipse at 50% 95%, rgba(255,182,193,0.04) 0%, transparent 40%), radial-gradient(ellipse at 75% 50%, rgba(255,192,203,0.03) 0%, transparent 30%), url('spring-bg.png') center/cover no-repeat fixed; pointer-events: none; z-index: 0; opacity: 0.35; }
+        .product-icon-sm { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 5px; background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%); color: #1a1a2e; font-weight: 800; font-size: 13px; font-family: 'Inter', sans-serif; margin-right: 6px; vertical-align: middle; line-height: 1; }
+        .kakao-float { position: fixed; bottom: 30px; right: 24px; z-index: 10001; display: flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 50px; background: rgba(60, 29, 0, 0.85); border: 1px solid rgba(254, 229, 0, 0.4); backdrop-filter: blur(16px); cursor: grab; user-select: none; text-decoration: none; box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(254,229,0,0.15); transition: transform 0.2s, box-shadow 0.2s; font-family: 'Pretendard Variable', 'Inter', sans-serif; }
+        .kakao-float:hover { transform: scale(1.05); box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(254,229,0,0.25); }
+        .kakao-float-icon { width: 28px; height: 28px; background: #fee500; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        .kakao-float-text { color: #fee500; font-weight: 700; font-size: 14px; white-space: nowrap; letter-spacing: -0.3px; }
+        .kakao-float-pulse { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: #ff3b5c; animation: kakaoPulse 2s ease-in-out infinite; }
+        @keyframes kakaoPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+        .youtube-float { position: fixed; bottom: 30px; left: 24px; z-index: 10001; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 0, 0, 0.85); border: 1px solid rgba(255, 100, 100, 0.4); backdrop-filter: blur(12px); text-decoration: none; box-shadow: 0 4px 20px rgba(255,0,0,0.3); transition: all 0.3s; font-size: 22px; }
+        .youtube-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(255,0,0,0.5); }
+        /* Refund banner */
+        .refund-banner { max-width: 800px; margin: 32px auto 0; padding: 20px 28px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 14px; text-align: center; color: var(--text-secondary); font-size: 0.9rem; }
+        .refund-banner a { color: var(--gold); text-decoration: underline; font-weight: 600; }
+        @media (max-width: 768px) {
+            .kakao-float { bottom: 24px; right: 16px; padding: 12px 18px; }
+            .youtube-float { bottom: 24px; left: 16px; width: 44px; height: 44px; font-size: 18px; }
+        }
+    </style>
+
+    <style>
+        /* CHERRY BLOSSOM */
+        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
+        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
+        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
+        /* MUSIC TOGGLE */
+        .music-toggle { position: fixed; bottom: 170px; right: 24px; z-index: 10000; width: 52px; height: 52px; border-radius: 50%; background: rgba(255,183,197,0.25); border: 1px solid rgba(255,183,197,0.5); backdrop-filter: blur(12px); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(255,107,138,0.2); }
+        .music-toggle:hover { transform: scale(1.1); background: rgba(255,183,197,0.4); box-shadow: 0 6px 30px rgba(255,107,138,0.4); }
+        .music-toggle.playing { animation: musicPulse 1.5s ease-in-out infinite; }
+        @keyframes musicPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(255,107,138,0.2); } 50% { box-shadow: 0 4px 30px rgba(255,107,138,0.6), 0 0 60px rgba(255,183,197,0.3); } }
+        .music-hint { position: fixed; bottom: 108px; right: 84px; z-index: 10000; background: rgba(255,183,197,0.92); color: #1a0a10; padding: 10px 16px; border-radius: 12px; font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 20px rgba(255,107,138,0.3); animation: hintFadeIn 0.5s ease-out both, hintFadeOut 0.5s 6s ease-in both; pointer-events: none; }
+        .music-hint::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-left-color: rgba(255,183,197,0.92); }
+        @keyframes hintFadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes hintFadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
+        .music-toggle.attention { animation: bounceAttention 1s ease-in-out 3; }
+        @keyframes bounceAttention { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        @media (max-width: 768px) { .music-toggle { bottom: 90px; } }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
+                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품정보</a>
+                <a href="pricing.html" class="nav-link active" onclick="closeMobileMenu()">구매</a>
+                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
+                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
+                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
+                <a href="lookup.html" class="nav-link">주문조회</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- PRICING SECTION -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section class="section section-dark" id="pricing" style="padding-top: 120px;">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">PRICING</span>
+                <h2 class="section-title">제품별 요금제</h2>
+                <p class="section-desc">각 제품에 맞는 최적의 플랜을 선택하세요.</p>
+            </div>
+
+            <!-- Product Tabs -->
+            <div class="pricing-tabs" id="pricing-tabs">
+                <button class="pricing-tab active" data-tab="naver" onclick="switchPricingTab('naver')"><span class="product-icon-sm">N</span> Better Life Naver</button>
+                <button class="pricing-tab" data-tab="orbit" onclick="switchPricingTab('orbit')"><span class="product-icon-sm">W</span> Leaders Orbit</button>
+                <button class="pricing-tab" data-tab="tistory" onclick="switchPricingTab('tistory')"><span class="product-icon-sm">T</span> Leaders Tistory</button>
+                <button class="pricing-tab" data-tab="leword" onclick="switchPricingTab('leword')"><span class="product-icon-sm">L</span> Leword</button>
+            </div>
+
+            <!-- ═══ Leaders Pro 요금제 ═══ -->
+            <div class="pricing-panel active" id="panel-naver">
+                <div class="pricing-grid">
+                    <div class="pricing-card trial" onclick="downloadFree('naver')">
+                        <div class="pricing-badge trial-badge">🎁 FREE</div>
+                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">부담 없이 시작</p></div>
+                        <div class="pricing-price"><span class="price-amount">0</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">무료</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 전체 기능 체험</li>
+                            <li><span class="check">✓</span> AI 콘텐츠 생성</li>
+                            <li><span class="check">✓</span> 매일 2회 발행 제한</li>
+                            <li><span class="check">✓</span> 기간 제한 없음</li>
+                        </ul>
+                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
+                    </div>
+                    <div class="pricing-card" data-product="naver-monthly" data-amount="50000" onclick="selectProduct(this)">
+                        <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">가볍게 시작하기</p></div>
+                        <div class="pricing-price"><span class="price-amount">50,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 월</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 전체 기능 이용</li>
+                            <li><span class="check">✓</span> AI 콘텐츠 자동 생성 (7종 AI)</li>
+                            <li><span class="check">✓</span> 다계정 무제한 발행</li>
+                            <li><span class="check">✓</span> 이메일 고객 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+                    <div class="pricing-card" data-product="naver-quarterly" data-amount="120000" onclick="selectProduct(this)">
+                        <div class="pricing-save">20% 절약</div>
+                        <div class="pricing-header"><h3 class="pricing-name">3개월</h3><p class="pricing-desc">인기 있는 선택</p></div>
+                        <div class="pricing-price"><span class="price-amount">120,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 3개월 <span class="price-monthly">(월 40,000원)</span></div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 전체 기능 이용</li>
+                            <li><span class="check">✓</span> AI 이미지·영상 생성</li>
+                            <li><span class="check">✓</span> 쇼핑 커넥트 (제휴 마케팅)</li>
+                            <li><span class="check">✓</span> 우선 고객 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+                    <div class="pricing-card featured" data-product="naver-yearly" data-amount="400000" onclick="selectProduct(this)">
+                        <div class="pricing-badge">👑 BEST VALUE</div>
+                        <div class="pricing-header"><h3 class="pricing-name">1년</h3><p class="pricing-desc">가장 합리적인 선택</p></div>
+                        <div class="pricing-price"><span class="price-amount">400,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 년 <span class="price-monthly">(월 33,333원)</span></div>
+                        <ul class="pricing-features">
+                            <li><span class="check gold">✓</span> 전체 기능 이용</li>
+                            <li><span class="check gold">✓</span> 스마트 스케줄링</li>
+                            <li><span class="check gold">✓</span> 전용 커뮤니티 입장</li>
+                            <li><span class="check gold">✓</span> 1:1 우선 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ═══ Leaders Orbit 요금제 ═══ -->
+            <div class="pricing-panel" id="panel-orbit">
+                <div class="pricing-grid">
+                    <div class="pricing-card trial" onclick="downloadFree('orbit')">
+                        <div class="pricing-badge trial-badge">🎁 FREE</div>
+                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">글로벌 입문</p></div>
+                        <div class="pricing-price"><span class="price-amount">0</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">무료</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> WordPress + Blogspot</li>
+                            <li><span class="check">✓</span> 다국어 콘텐츠 생성</li>
+                            <li><span class="check">✓</span> 매일 2회 발행 제한</li>
+                            <li><span class="check">✓</span> 기간 제한 없음</li>
+                        </ul>
+                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
+                    </div>
+                    <div class="pricing-card" data-product="orbit-monthly" data-amount="60000" onclick="selectProduct(this)">
+                        <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">글로벌 입문</p></div>
+                        <div class="pricing-price"><span class="price-amount">60,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 월</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> WordPress + Blogspot</li>
+                            <li><span class="check">✓</span> 다국어 콘텐츠 생성</li>
+                            <li><span class="check">✓</span> 애드센스 최적화 모드</li>
+                            <li><span class="check">✓</span> 이메일 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+                    <div class="pricing-card" data-product="orbit-quarterly" data-amount="150000" onclick="selectProduct(this)">
+                        <div class="pricing-save">17% 절약</div>
+                        <div class="pricing-header"><h3 class="pricing-name">3개월</h3><p class="pricing-desc">빠른 수익화</p></div>
+                        <div class="pricing-price"><span class="price-amount">150,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 3개월 <span class="price-monthly">(월 50,000원)</span></div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 전체 기능 이용</li>
+                            <li><span class="check">✓</span> SEO 고급 최적화</li>
+                            <li><span class="check">✓</span> 애드센스 승인 가이드</li>
+                            <li><span class="check">✓</span> 우선 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+                    <div class="pricing-card featured" data-product="orbit-yearly" data-amount="600000" onclick="selectProduct(this)">
+                        <div class="pricing-badge">👑 추천</div>
+                        <div class="pricing-header"><h3 class="pricing-name">1년</h3><p class="pricing-desc">17% 할인</p></div>
+                        <div class="pricing-price"><span class="price-amount">600,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 년 <span class="price-monthly">(월 50,000원)</span></div>
+                        <ul class="pricing-features">
+                            <li><span class="check gold">✓</span> 전체 기능 이용</li>
+                            <li><span class="check gold">✓</span> SEO 고급 최적화</li>
+                            <li><span class="check gold">✓</span> 커뮤니티 입장</li>
+                            <li><span class="check gold">✓</span> 1:1 우선 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ═══ Leaders Tistory 요금제 ═══ -->
+            <div class="pricing-panel" id="panel-tistory">
+                <div class="pricing-grid">
+                    <div class="pricing-card trial" onclick="downloadFree('tistory')">
+                        <div class="pricing-badge trial-badge">🎁 FREE TRIAL</div>
+                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">먼저 체험해보세요</p></div>
+                        <div class="pricing-price"><span class="price-amount">무료</span></div>
+                        <div class="pricing-period">매일 2회 발행</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 전체 기능 체험</li>
+                            <li><span class="check">✓</span> 사람형 타이핑 엔진</li>
+                            <li><span class="check">✓</span> 매일 2회 발행 제한</li>
+                            <li><span class="check">✓</span> 기간 제한 없음</li>
+                        </ul>
+                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
+                    </div>
+                    <div class="pricing-card" data-product="tistory-monthly" data-amount="30000" onclick="selectProduct(this)">
+                        <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">티스토리 시작</p></div>
+                        <div class="pricing-price"><span class="price-amount">30,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 월</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 사람형 타이핑 엔진</li>
+                            <li><span class="check">✓</span> AI 콘텐츠 생성</li>
+                            <li><span class="check">✓</span> 카테고리·태그 자동화</li>
+                            <li><span class="check">✓</span> 이메일 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+                    <div class="pricing-card" data-product="tistory-quarterly" data-amount="80000" onclick="selectProduct(this)">
+                        <div class="pricing-save">11% 절약</div>
+                        <div class="pricing-header"><h3 class="pricing-name">3개월</h3><p class="pricing-desc">안정적 운영</p></div>
+                        <div class="pricing-price"><span class="price-amount">80,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 3개월 <span class="price-monthly">(월 26,667원)</span></div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 전체 기능 이용</li>
+                            <li><span class="check">✓</span> 봇 감지 고급 우회</li>
+                            <li><span class="check">✓</span> 다계정 관리</li>
+                            <li><span class="check">✓</span> 우선 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+                    <div class="pricing-card featured" data-product="tistory-yearly" data-amount="300000" onclick="selectProduct(this)">
+                        <div class="pricing-badge">👑 추천</div>
+                        <div class="pricing-header"><h3 class="pricing-name">1년</h3><p class="pricing-desc">17% 할인</p></div>
+                        <div class="pricing-price"><span class="price-amount">300,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 년 <span class="price-monthly">(월 25,000원)</span></div>
+                        <ul class="pricing-features">
+                            <li><span class="check gold">✓</span> 전체 기능 이용</li>
+                            <li><span class="check gold">✓</span> 봇 감지 고급 우회</li>
+                            <li><span class="check gold">✓</span> 커뮤니티 입장</li>
+                            <li><span class="check gold">✓</span> 1:1 우선 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ═══ Leword 요금제 ═══ -->
+            <div class="pricing-panel" id="panel-leword">
+                <div class="pricing-grid">
+                    <div class="pricing-card trial" onclick="downloadFree('leword')">
+                        <div class="pricing-badge trial-badge">🎁 FREE</div>
+                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">키워드 분석 체험</p></div>
+                        <div class="pricing-price"><span class="price-amount">0</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">무료</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 키워드 경쟁 분석</li>
+                            <li><span class="check">✓</span> 블루오션 발굴</li>
+                            <li><span class="check">✓</span> 매일 5회 검색 제한</li>
+                            <li><span class="check">✓</span> 기간 제한 없음</li>
+                        </ul>
+                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
+                    </div>
+                    <div class="pricing-card" data-product="leword-monthly" data-amount="30000" onclick="selectProduct(this)">
+                        <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">키워드 분석 시작</p></div>
+                        <div class="pricing-price"><span class="price-amount">30,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 월</div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 키워드 경쟁 분석</li>
+                            <li><span class="check">✓</span> 블루오션 발굴</li>
+                            <li><span class="check">✓</span> 트렌드 모니터링</li>
+                            <li><span class="check">✓</span> 이메일 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+                    <div class="pricing-card" data-product="leword-quarterly" data-amount="100000" onclick="selectProduct(this)">
+                        <div class="pricing-save">11% 절약</div>
+                        <div class="pricing-header"><h3 class="pricing-name">3개월</h3><p class="pricing-desc">인기 있는 선택</p></div>
+                        <div class="pricing-price"><span class="price-amount">100,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 3개월 <span class="price-monthly">(월 33,333원)</span></div>
+                        <ul class="pricing-features">
+                            <li><span class="check">✓</span> 전체 기능 이용</li>
+                            <li><span class="check">✓</span> Leaders Pro 연동</li>
+                            <li><span class="check">✓</span> 블루오션 키워드 자동 추천</li>
+                            <li><span class="check">✓</span> 우선 고객 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+                    <div class="pricing-card featured" data-product="leword-yearly" data-amount="300000" onclick="selectProduct(this)">
+                        <div class="pricing-badge">👑 BEST VALUE</div>
+                        <div class="pricing-header"><h3 class="pricing-name">1년</h3><p class="pricing-desc">가장 합리적인 선택</p></div>
+                        <div class="pricing-price"><span class="price-amount">300,000</span><span class="price-unit">원</span></div>
+                        <div class="pricing-period">/ 년 <span class="price-monthly">(월 25,000원)</span></div>
+                        <ul class="pricing-features">
+                            <li><span class="check gold">✓</span> 전체 기능 이용</li>
+                            <li><span class="check gold">✓</span> Leaders Pro 연동</li>
+                            <li><span class="check gold">✓</span> 커뮤니티 입장</li>
+                            <li><span class="check gold">✓</span> 1:1 우선 지원</li>
+                        </ul>
+                        <div class="pricing-select">선택하기</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="payment-section" id="payment-section">
+                <div class="payment-email-row">
+                    <label for="buyer-email" class="email-label">📧 라이선스를 받을 이메일</label>
+                    <input type="email" id="buyer-email" class="email-input" placeholder="example@email.com" required>
+                    <p class="email-hint">결제 완료 후 이 이메일로 라이선스 코드가 발송됩니다.</p>
+                </div>
+                <button class="btn-pay" id="btn-pay" disabled onclick="requestPayment()">
+                    <span class="spinner"></span>
+                    <span class="btn-text">플랜을 선택해주세요</span>
+                </button>
+                <div class="payment-notice">
+                    결제 진행 시 <a href="terms.html" target="_blank">이용약관</a> 및
+                    <a href="privacy.html" target="_blank">개인정보처리방침</a>에 동의하는 것으로 간주됩니다.
+                </div>
+            </div>
+
+            <!-- Refund Banner -->
+            <div class="refund-banner">
+                📋 <strong>환불 규정 안내</strong>: 라이선스 코드 발급일로부터 <strong>48시간(2일) 이내</strong>, 서비스 미사용(미로그인) 시 전액 환불 가능합니다.
+                결제 전 반드시 무료 체험으로 서비스를 확인해주세요.
+                <a href="refund.html" target="_blank">환불정책 전문 보기 →</a>
+            </div>
+            <div class="refund-banner" style="margin-top: 12px; border-color: rgba(100,149,237,0.2); background: rgba(100,149,237,0.04);">
+                🔄 <strong>정기구독 안내</strong>: 모든 유료 플랜은 정기구독 상품이며, 구독 기간 종료 전 언제든 해지할 수 있습니다.
+                해지 시 현재 결제 주기가 종료될 때까지 서비스를 이용할 수 있습니다.
+            </div>
+            <div class="refund-banner" style="margin-top: 12px; border-color: rgba(68,215,182,0.2); background: rgba(68,215,182,0.04);">
+                💰 카드 결제가 어려우신가요? <a href="bank-order.html" style="color: #44d7b6;">계좌이체로 결제하기 →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+                <span>Leaders Pro</span>
+            </div>
+            <div class="footer-links">
+                <a href="terms.html">이용약관</a>
+                <a href="refund.html">환불정책</a>
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="lookup.html">주문 조회</a>
+                <a href="mailto:cd000242@gmail.com">고객 문의</a>
+            </div>
+            <div class="footer-biz">
+                <p>상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802</p>
+                <p>주소: 경남 김해시 장유로334번길9</p>
+                <p>이메일: tjdgus24280@naver.com | 전화: 010-7545-1645</p>
+            </div>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== CONFIG =====
+        const CONFIG = {
+            TOSS_CLIENT_KEY: 'test_ck_Poxy1XQL8R27R2BKJkm987nO5Wml',
+            GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
+            SUCCESS_URL: window.location.origin + window.location.pathname.replace('pricing.html', '') + 'success.html',
+            FAIL_URL: window.location.origin + window.location.pathname.replace('pricing.html', '') + 'fail.html',
+        };
+
+        const PRODUCTS = {
+            'naver-monthly': { name: '네이버 블로그 1개월 정기구독', amount: 50000 },
+            'naver-quarterly': { name: '네이버 블로그 3개월 정기구독', amount: 120000 },
+            'naver-yearly': { name: '네이버 블로그 1년 정기구독', amount: 400000 },
+            'orbit-monthly': { name: 'Leaders Orbit 1개월 정기구독', amount: 60000 },
+            'orbit-quarterly': { name: 'Leaders Orbit 3개월 정기구독', amount: 150000 },
+            'orbit-yearly': { name: 'Leaders Orbit 1년 정기구독', amount: 600000 },
+            'tistory-monthly': { name: 'Leaders Tistory 1개월 정기구독', amount: 30000 },
+            'tistory-quarterly': { name: 'Leaders Tistory 3개월 정기구독', amount: 80000 },
+            'tistory-yearly': { name: 'Leaders Tistory 1년 정기구독', amount: 300000 },
+            'leword-monthly': { name: 'Leword 1개월 정기구독', amount: 30000 },
+            'leword-quarterly': { name: 'Leword 3개월 정기구독', amount: 100000 },
+            'leword-yearly': { name: 'Leword 1년 정기구독', amount: 300000 },
+        };
+
+        let selectedProduct = null;
+        let tossPayments = null;
+
+        async function initToss() { try { tossPayments = TossPayments(CONFIG.TOSS_CLIENT_KEY); } catch (e) { console.error('Toss SDK init failed', e); } }
+
+        function switchPricingTab(tabId) {
+            document.querySelectorAll('.pricing-tab').forEach(t => t.classList.remove('active'));
+            const activeTab = document.querySelector(`.pricing-tab[data-tab="${tabId}"]`);
+            if (activeTab) activeTab.classList.add('active');
+            document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
+            const activePanel = document.getElementById(`panel-${tabId}`);
+            if (activePanel) activePanel.classList.add('active');
+            document.querySelectorAll('.pricing-card').forEach(c => { c.classList.remove('selected'); const sel = c.querySelector('.pricing-select'); if (sel) sel.textContent = '선택하기'; });
+            selectedProduct = null;
+            const btn = document.getElementById('btn-pay');
+            btn.disabled = true;
+            btn.querySelector('.btn-text').textContent = '플랜을 선택해주세요';
+            initTilt();
+        }
+
+        function selectProduct(card) {
+            const panel = card.closest('.pricing-panel');
+            if (panel) { panel.querySelectorAll('.pricing-card').forEach(c => { c.classList.remove('selected'); c.querySelector('.pricing-select').textContent = '선택하기'; }); }
+            card.classList.add('selected');
+            card.querySelector('.pricing-select').textContent = '✓ 선택됨';
+            selectedProduct = card.dataset.product;
+            const btn = document.getElementById('btn-pay');
+            const product = PRODUCTS[selectedProduct];
+            btn.disabled = false;
+            btn.querySelector('.btn-text').textContent = `${product.amount.toLocaleString()}원 결제하기`;
+            document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function generateOrderId() { const ts = Date.now(); const rand = Math.random().toString(36).substring(2, 8).toUpperCase(); return `LP-${ts}-${rand}`; }
+
+        async function requestPayment() {
+            if (!selectedProduct || !tossPayments) return;
+            const emailInput = document.getElementById('buyer-email');
+            const email = emailInput.value.trim();
+            if (!email || !email.includes('@')) { emailInput.focus(); emailInput.classList.add('shake'); setTimeout(() => emailInput.classList.remove('shake'), 600); return; }
+            const btn = document.getElementById('btn-pay');
+            btn.classList.add('loading'); btn.disabled = true;
+            const product = PRODUCTS[selectedProduct];
+            const orderId = generateOrderId();
+            const customerKey = 'LP_' + email.replace(/[^a-zA-Z0-9]/g, '_') + '_' + Date.now();
+            try {
+                // ✅ 빌링 결제창 (자동결제 카드 등록)
+                const payment = tossPayments.payment({ customerKey });
+                await payment.requestBillingAuth({
+                    method: 'CARD',
+                    successUrl: CONFIG.SUCCESS_URL + '?email=' + encodeURIComponent(email) + '&product=' + encodeURIComponent(selectedProduct) + '&amount=' + product.amount + '&orderName=' + encodeURIComponent(product.name) + '&orderId=' + orderId,
+                    failUrl: CONFIG.FAIL_URL,
+                    customerEmail: email,
+                });
+            } catch (err) { console.log('결제 취소:', err); btn.classList.remove('loading'); btn.disabled = false; }
+        }
+
+        function downloadFree(product) { location.href = 'download.html'; }
+
+        // ===== Particles =====
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas'); if (!canvas) return;
+            const ctx = canvas.getContext('2d'); let particles = []; let w, h;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 3; } resize(); window.addEventListener('resize', resize);
+            class Particle { constructor() { this.reset(); } reset() { this.x = Math.random() * w; this.y = Math.random() * h; this.size = Math.random() * 2 + 0.5; this.speedY = -(Math.random() * 0.3 + 0.1); this.speedX = (Math.random() - 0.5) * 0.2; this.opacity = Math.random() * 0.5 + 0.1; this.gold = Math.random() > 0.3; } update() { this.y += this.speedY; this.x += this.speedX; this.opacity += (Math.random() - 0.5) * 0.01; this.opacity = Math.max(0.05, Math.min(0.6, this.opacity)); if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; } } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.gold ? `rgba(201, 168, 76, ${this.opacity})` : `rgba(255, 255, 255, ${this.opacity * 0.4})`; ctx.fill(); } }
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+            function animate() { ctx.clearRect(0, 0, w, h); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); } animate();
+        }
+        function initScrollAnimations() { const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) { entry.target.style.transitionDelay = `${i * 0.08}s`; entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 }); document.querySelectorAll('.fade-in, .pricing-card').forEach(el => observer.observe(el)); }
+        function initNavbar() { const navbar = document.getElementById('navbar'); window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); }); }
+        function initTilt() { document.querySelectorAll('.pricing-card').forEach(card => { card.addEventListener('mousemove', (e) => { const rect = card.getBoundingClientRect(); const x = e.clientX - rect.left; const y = e.clientY - rect.top; const centerX = rect.width / 2; const centerY = rect.height / 2; const rotateX = (y - centerY) / 20; const rotateY = (centerX - x) / 20; card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`; const glare = card.querySelector('.card-glare'); if (glare) glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(201,168,76,0.15), transparent 60%)`; }); card.addEventListener('mouseleave', () => { card.style.transform = ''; }); if (!card.querySelector('.card-glare')) { const glare = document.createElement('div'); glare.className = 'card-glare'; card.appendChild(glare); } }); }
+        function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
+        function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initToss(); initParticles(); initScrollAnimations(); initNavbar(); initTilt();
+            // Handle URL tab parameter
+            const params = new URLSearchParams(window.location.search);
+            const tab = params.get('tab');
+            if (tab && ['naver', 'orbit', 'tistory', 'leword'].includes(tab)) { switchPricingTab(tab); }
+        });
+    </script>
+
+    <div class="petal-container" id="petalContainer"></div>
+    <script>
+    (function() { const container = document.getElementById('petalContainer'); if (!container) return; for (let i = 0; i < 30; i++) { const petal = document.createElement('div'); petal.className = 'petal'; const size = Math.random() * 14 + 8; petal.style.width = size + 'px'; petal.style.height = size + 'px'; petal.style.left = Math.random() * 100 + '%'; petal.style.animationDuration = (Math.random() * 8 + 7) + 's'; petal.style.animationDelay = (Math.random() * 10) + 's'; container.appendChild(petal); } })();
+    </script>
+    <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" title="공식 유튜브 채널">▶</a>
+    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 카카오톡 문의">
+        <div class="kakao-float-pulse"></div>
+        <div class="kakao-float-icon">💬</div>
+        <span class="kakao-float-text">1:1 문의</span>
+    </a>
+
+<!-- CHERRY BLOSSOM PETALS -->
+<div class="petal-container" id="petalContainer"></div>
+
+<!-- MUSIC TOGGLE -->
+<button class="music-toggle attention" id="musicToggle" title="🌸 봄 배경음악 켜기/끄기">🔇</button>
+<div class="music-hint" id="musicHint">🌸 클릭하면 봄 음악이 흘러요</div>
+
+<script src="music.js"></script>
+</body>
+</html>
+

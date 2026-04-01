@@ -1,0 +1,216 @@
+- generic [active] [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - generic [ref=e3]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - link [ref=e1767] [cursor=pointer]:
+          - /url: /home
+          - img [ref=e14]
+          - generic [ref=e15]: Apps Script
+        - generic [ref=e16]:
+          - generic [ref=e19]:
+            - button [ref=e1768] [cursor=pointer]: license-backend
+            - generic [ref=e2377]: cloud_done
+          - generic [ref=e38]:
+            - button [ref=e1769] [cursor=pointer]:
+              - generic [ref=e250]:
+                - text: 배포
+                - generic [ref=e251]: 
+            - button [ref=e1770] [cursor=pointer]:
+              - generic [ref=e256]: person_add
+            - button [ref=e1771] [cursor=pointer]:
+              - generic [ref=e261]: help_outline
+        - generic [ref=e45]:
+          - button [ref=e1772] [cursor=pointer]:
+            - img [ref=e50]
+          - button [ref=e1773] [cursor=pointer]:
+            - img [ref=e57]
+            - img [ref=e63]
+    - generic [ref=e263]:
+      - navigation [ref=e1774]:
+        - link [ref=e1775] [cursor=pointer]:
+          - generic [ref=e268]: info_outline
+          - generic [ref=e269]: 개요
+        - link [ref=e1776] [cursor=pointer]:
+          - generic [ref=e272]: code
+          - generic [ref=e273]: 편집기
+        - link [ref=e1777] [cursor=pointer]:
+          - generic [ref=e276]: history
+          - generic [ref=e277]: 프로젝트 기록
+        - link [ref=e1778] [cursor=pointer]:
+          - generic [ref=e280]: alarm
+          - generic [ref=e281]: 트리거
+        - link [ref=e1779] [cursor=pointer]:
+          - generic [ref=e284]: playlist_play
+          - generic [ref=e285]: 실행
+        - link [ref=e1780] [cursor=pointer]:
+          - generic [ref=e288]: settings
+          - generic [ref=e289]: 프로젝트 설정
+      - generic [ref=e290]:
+        - heading [level=1] [ref=e1781]: 편집기
+        - generic [ref=e292]:
+          - generic [ref=e294]:
+            - generic [ref=e295]:
+              - heading [level=2] [ref=e1782]: 파일
+              - generic [ref=e298]:
+                - button [disabled] [ref=e1783]:
+                  - generic [ref=e303]: sort_by_alpha
+                - button [ref=e1784] [cursor=pointer]:
+                  - generic [ref=e308]: add
+            - listbox [ref=e1785]:
+              - option [ref=e1786] [cursor=pointer]:
+                - generic [ref=e1787]: Code.gs
+                - button [ref=e1788]:
+                  - button [ref=e1789]:
+                    - generic [ref=e317]: 
+            - generic [ref=e318]:
+              - heading [level=2] [ref=e1790]: 라이브러리
+              - button [ref=e1791] [cursor=pointer]:
+                - generic [ref=e325]: add
+            - generic [ref=e326]:
+              - heading [level=2] [ref=e1792]: 서비스
+              - button [ref=e1793] [cursor=pointer]:
+                - generic [ref=e333]: add
+          - generic [ref=e340]:
+            - region [ref=e341]:
+              - generic [ref=e342]:
+                - generic [ref=e343]:
+                  - button [ref=e1794]:
+                    - generic [ref=e875]: undo
+                  - generic [ref=e349]:
+                    - button [disabled]:
+                      - generic: redo
+                - generic [ref=e353]:
+                  - button [disabled]:
+                    - img
+                - generic [ref=e1414]:
+                  - button [ref=e1795]:
+                    - generic [ref=e1421]: play_arrow
+                    - generic [ref=e1422]: 실행
+                  - button [ref=e1796]:
+                    - img [ref=e1429]
+                    - generic [ref=e1432]: 디버그
+                  - listbox [ref=e1797] [cursor=pointer]:
+                    - option [selected] [ref=e1798]: testMailPermission
+                - button [ref=e1799]:
+                  - generic [ref=e384]: 실행 로그
+            - generic [ref=e386]:
+              - main [ref=e390]:
+                - generic [ref=e391]: .
+                - generic [ref=e393]:
+                  - iframe [ref=e394]:
+                    
+                  - code [ref=e396]:
+                    - generic [ref=e397]:
+                      - generic [ref=e400]:
+                        - generic [ref=e1555]: "3443"
+                        - generic [ref=e1557]: "3444"
+                        - generic [ref=e1559]: "3445"
+                        - generic [ref=e1561]: "3446"
+                        - generic [ref=e1563]: "3447"
+                        - generic [ref=e1565]: "3448"
+                        - generic [ref=e1567]: "3449"
+                        - generic [ref=e1568]:
+                          - generic [ref=e1569] [cursor=pointer]: 
+                          - generic [ref=e1570]: "3450"
+                        - generic [ref=e1572]: "3451"
+                        - generic [ref=e1574]: "3452"
+                        - generic [ref=e1576]: "3453"
+                        - generic [ref=e1578]: "3454"
+                        - generic [ref=e1580]: "3455"
+                        - generic [ref=e1583]: "3456"
+                        - generic [ref=e2218]: "3427"
+                        - generic [ref=e2220]: "3428"
+                        - generic [ref=e2222]: "3429"
+                        - generic [ref=e2224]: "3430"
+                        - generic [ref=e2227]: "3431"
+                        - generic [ref=e2229]: "3432"
+                        - generic [ref=e2231]: "3433"
+                        - generic [ref=e2233]: "3434"
+                        - generic [ref=e2235]: "3435"
+                        - generic [ref=e2237]: "3436"
+                        - generic [ref=e2239]: "3437"
+                        - generic [ref=e2242]: "3438"
+                        - generic [ref=e2244]: "3439"
+                        - generic [ref=e2246]: "3440"
+                        - generic [ref=e2247]:
+                          - generic [ref=e2248] [cursor=pointer]: 
+                          - generic [ref=e2249]: "3441"
+                        - generic [ref=e2251]: "3442"
+                      - generic [ref=e511]:
+                        - generic [ref=e1610]: "subject: subject,"
+                        - generic [ref=e1612]: "htmlBody: htmlBody"
+                        - generic [ref=e1614]: "});"
+                        - generic [ref=e1616]: "Logger.log('[sendLicenseEmail] 발송 완료: ' + email + ', code=' + code);"
+                        - generic [ref=e1618]: "}"
+                        - generic [ref=e1622]: "function testMailPermission() {"
+                        - generic [ref=e1624]: var q = MailApp.getRemainingDailyQuota();
+                        - generic [ref=e1626]: "Logger.log(\"quota: \" + q);"
+                        - generic [ref=e1628]: "MailApp.sendEmail({to: ADMIN_EMAIL, subject: \"[Leaders Pro] Mail Test\", htmlBody: \"<h2>OK</h2><p>quota:\" + q + \"</p>\"});"
+                        - generic [ref=e1630]: Logger.log("sent to " + ADMIN_EMAIL);
+                        - generic [ref=e1632]: "}"
+                        - generic [ref=e2306]: + '<h1 style="margin:0;color:#0a0a0f;font-size:22px;font-weight:800;">🎉 라이선스 발급 완료</h1></div>'
+                        - generic [ref=e2308]: + '<div style="padding:28px;">'
+                        - generic [ref=e2310]: + '<p style="color:#e8e6e3;font-size:14px;line-height:1.8;margin:0 0 20px;">입금이 확인되어 라이선스가 발급되었습니다.</p>'
+                        - generic [ref=e2312]: + '<div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:20px;text-align:center;
+                        - generic [ref=e2314]: margin-bottom:20px;">'
+                        - generic [ref=e2316]: + '<p style="color:#8a8686;font-size:12px;margin:0 0 8px;">라이선스 코드</p>'
+                        - generic [ref=e2318]: + '<p style="color:#c9a84c;font-size:24px;font-weight:800;letter-spacing:2px;margin:0;font-family:monospace;">' + code + '</p></div>'
+                        - generic [ref=e2320]: + '<p style="color:#8a8686;font-size:12px;margin:0 0 4px;">상품</p>'
+                        - generic [ref=e2322]: + '<p style="color:#e8e6e3;font-size:14px;font-weight:600;margin:0 0 16px;">' + product + '</p>'
+                        - generic [ref=e2324]: + '<div style="background:rgba(68,215,182,0.06);border:1px solid rgba(68,215,182,0.15);border-radius:8px;padding:14px;margin-bottom:16px;">'
+                        - generic [ref=e2326]: + '<p style="color:#44d7b6;font-size:13px;font-weight:600;margin:0 0 8px;">사용 방법</p>'
+                        - generic [ref=e2328]: + '<p style="color:#e8e6e3;font-size:13px;margin:0;line-height:1.8;">1. Leaders Pro 앱 실행<br>2. 라이선스 입력란에 위 코드 붙여넣기<br>3. 활성화
+                        - generic [ref=e2330]: 완료!</p></div>'
+                        - generic [ref=e2332]: "+ '<p style=\"color:#8a8686;font-size:11px;line-height:1.6;margin:0;\">문의: ' + ADMIN_EMAIL + '</p>'"
+                        - generic [ref=e2334]: + '</div></div>';
+                        - generic [ref=e2338]: "MailApp.sendEmail({"
+                        - generic [ref=e2340]: "to: email,"
+                      - textbox [ref=e1800]: "} function testMailPermission() { var q = MailApp.getRemainingDailyQuota(); Logger.log(\"quota: \" + q); MailApp.sendEmail({to: ADMIN_EMAIL, subject: \"[Leaders Pro] Mail Test\", htmlBody: \"<h2>OK</h2><p>quota:\" + q + \"</p>\"}); Logger.log(\"sent to \" + ADMIN_EMAIL); }"
+              - button [ref=e1806] [cursor=pointer]:
+                - generic [ref=e575]: close
+              - tooltip [ref=e576]: 실행 로그 닫기
+    - dialog "배포 관리" [ref=e1808]:
+      - heading "배포 관리" [level=2] [ref=e1809]
+      - generic [ref=e1811]:
+        - generic [ref=e2381]:
+          - generic [ref=e2382]: 배포가 업데이트되었습니다.
+          - generic [ref=e2384]: 버전 71(2026. 4. 1., PM 12:11)
+          - generic [ref=e2385]:
+            - generic [ref=e2386]: 배포 ID
+            - generic [ref=e2387]:
+              - generic [ref=e2390]: AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw
+              - button "배포 ID 복사" [ref=e2393]:
+                - generic [ref=e2396]: content_copy
+                - generic [ref=e2397]: 복사
+          - generic [ref=e2398]:
+            - generic [ref=e2399]: 웹 앱
+            - generic [ref=e2400]:
+              - generic [ref=e2401]: URL
+              - generic [ref=e2402]:
+                - link "https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec" [ref=e2406] [cursor=pointer]:
+                  - /url: https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec
+                - button "웹 앱 URL 복사" [ref=e2409]:
+                  - generic [ref=e2412]: content_copy
+                  - generic [ref=e2413]: 복사
+          - generic [ref=e2414]:
+            - generic [ref=e2415]: 라이브러리
+            - generic [ref=e2417]:
+              - generic [ref=e2418]: URL
+              - generic [ref=e2419]:
+                - link "https://script.google.com/macros/library/d/1ZjXAhWK8mUFlQDz0meCW1Tc1eEfxNAJpfdLaaCtQfkuefFcvWZ47ILgi/71" [ref=e2423] [cursor=pointer]:
+                  - /url: https://script.google.com/macros/library/d/1ZjXAhWK8mUFlQDz0meCW1Tc1eEfxNAJpfdLaaCtQfkuefFcvWZ47ILgi/71
+                - button "라이브러리 URL 복사" [ref=e2426]:
+                  - generic [ref=e2429]: content_copy
+                  - generic [ref=e2430]: 복사
+            - generic [ref=e2431]: 다른 사용자 및 그룹이 이 프로젝트를 라이브러리로 사용하도록 하려면 이 프로젝트를 해당 사용자 및 그룹과 공유하세요.
+        - button "완료" [ref=e2434] [cursor=pointer]:
+          - generic [ref=e2437]: 완료
+  - generic: 프로젝트가 배포됨
+  - generic [ref=e577]: "구문 오류: SyntaxError: Unexpected token '}' 라인: 3462 파일: Code.gs"
+  - generic [ref=e578]:
+    - alert
+    - alert
+    - complementary
+    - complementary

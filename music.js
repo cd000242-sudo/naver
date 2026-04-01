@@ -29,12 +29,15 @@
     ];
     const STORAGE_KEY = 'lp_music_playing';
     const TRACK_KEY = 'lp_music_track';
+    const TIME_KEY = 'lp_music_time';        // ← NEW: 재생 위치 저장
+    const TIME_SAVE_KEY = 'lp_music_time_ts'; // ← NEW: 저장 시점 타임스탬프
 
     let player = null, isPlaying = false, apiReady = false;
     let currentTrack = parseInt(localStorage.getItem(TRACK_KEY) || '0') % PLAYLIST.length;
     const userExplicitlyOff = localStorage.getItem(STORAGE_KEY) === 'false';
     const shouldAutoPlay = !userExplicitlyOff;
     let expanded = false;
+    let timeSaveInterval = null; // ← 주기적 시간 저장 인터벌
 
     // === Remove old elements ===
     const oldBtn = document.getElementById('musicToggle');
@@ -54,19 +57,22 @@
             font-family: 'Pretendard Variable', 'Inter', 'Noto Sans KR', sans-serif;
             transition: all 0.4s cubic-bezier(.4,0,.2,1);
         }
-        /* Collapsed: just the FAB */
+
+        /* ===== FAB (Floating Action Button) ===== */
         .lp-music-fab {
-            width: 54px; height: 54px; border-radius: 50%;
+            display: flex; align-items: center; gap: 8px;
+            height: 46px; padding: 0 16px 0 14px;
+            border-radius: 23px;
             background: linear-gradient(135deg, rgba(255,183,197,0.35) 0%, rgba(255,107,138,0.25) 100%);
             border: 1px solid rgba(255,183,197,0.5);
             backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 22px; transition: all 0.3s;
+            cursor: pointer;
+            font-size: 14px; transition: all 0.3s;
             box-shadow: 0 4px 24px rgba(255,107,138,0.25), 0 0 0 0 rgba(255,183,197,0);
             position: relative; overflow: visible;
         }
         .lp-music-fab:hover {
-            transform: scale(1.08);
+            transform: scale(1.05);
             box-shadow: 0 6px 32px rgba(255,107,138,0.4), 0 0 20px rgba(255,183,197,0.2);
         }
         .lp-music-fab.playing {
@@ -77,23 +83,42 @@
             0%, 100% { box-shadow: 0 4px 24px rgba(255,107,138,0.25); }
             50% { box-shadow: 0 6px 36px rgba(255,107,138,0.5), 0 0 48px rgba(255,183,197,0.15); }
         }
+
+        /* FAB Icon */
+        .lp-fab-icon {
+            font-size: 20px; line-height: 1; flex-shrink: 0;
+        }
+
+        /* FAB Label */
+        .lp-fab-label {
+            font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.9);
+            white-space: nowrap;
+        }
+        .lp-fab-sublabel {
+            font-size: 10px; font-weight: 500;
+            color: rgba(255,183,197,0.8);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            max-width: 100px;
+        }
+
         /* Equalizer bars on FAB when playing */
         .lp-eq-bars {
-            display: flex; align-items: flex-end; gap: 2px; height: 18px;
+            display: flex; align-items: flex-end; gap: 2px; height: 16px; flex-shrink: 0;
         }
         .lp-eq-bars span {
             width: 3px; border-radius: 2px;
             background: linear-gradient(180deg, #ffb7c5, #ff6b8a);
         }
         .lp-eq-bars.active span { animation: lpmEq 0.8s ease-in-out infinite alternate; }
-        .lp-eq-bars span:nth-child(1) { height: 6px; animation-delay: 0s; }
-        .lp-eq-bars span:nth-child(2) { height: 12px; animation-delay: 0.15s; }
-        .lp-eq-bars span:nth-child(3) { height: 8px; animation-delay: 0.3s; }
-        .lp-eq-bars span:nth-child(4) { height: 14px; animation-delay: 0.1s; }
-        .lp-eq-bars span:nth-child(5) { height: 10px; animation-delay: 0.25s; }
+        .lp-eq-bars span:nth-child(1) { height: 5px; animation-delay: 0s; }
+        .lp-eq-bars span:nth-child(2) { height: 10px; animation-delay: 0.15s; }
+        .lp-eq-bars span:nth-child(3) { height: 7px; animation-delay: 0.3s; }
+        .lp-eq-bars span:nth-child(4) { height: 12px; animation-delay: 0.1s; }
+        .lp-eq-bars span:nth-child(5) { height: 8px; animation-delay: 0.25s; }
         @keyframes lpmEq {
-            0% { height: 4px; }
-            100% { height: 18px; }
+            0% { height: 3px; }
+            100% { height: 16px; }
         }
         .lp-eq-bars:not(.active) span { height: 3px !important; animation: none !important; }
 
@@ -198,10 +223,23 @@
         .lp-pl-item.active .lp-pl-num { opacity: 1; }
         .lp-pl-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+        /* First-time entrance animation */
+        @keyframes lpmFabEntrance {
+            0% { opacity: 0; transform: translateX(60px) scale(0.8); }
+            60% { opacity: 1; transform: translateX(-5px) scale(1.03); }
+            100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .lp-music-fab.entrance {
+            animation: lpmFabEntrance 0.8s cubic-bezier(.4,0,.2,1) both;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .lp-music-player { bottom: 90px; right: 16px; }
-            .lp-music-fab { width: 46px; height: 46px; font-size: 18px; }
+            .lp-music-fab { height: 40px; padding: 0 12px 0 10px; gap: 6px; }
+            .lp-fab-icon { font-size: 16px; }
+            .lp-fab-label { font-size: 11px; }
+            .lp-fab-sublabel { display: none; }
             .lp-music-panel { width: 240px; }
         }
     `;
@@ -230,7 +268,12 @@
             </div>
             <div class="lp-playlist" id="lpmList"></div>
         </div>
-        <div class="lp-music-fab" id="lpmFab" title="🌸 음악 플레이어">
+        <div class="lp-music-fab entrance" id="lpmFab" title="🌸 음악 플레이어">
+            <span class="lp-fab-icon">🎵</span>
+            <div style="display:flex;flex-direction:column;gap:1px;">
+                <span class="lp-fab-label">Music</span>
+                <span class="lp-fab-sublabel" id="lpmFabTrack">${PLAYLIST[currentTrack].title}</span>
+            </div>
             <div class="lp-eq-bars" id="lpmEq">
                 <span></span><span></span><span></span><span></span><span></span>
             </div>
@@ -248,6 +291,10 @@
     const artEl = document.getElementById('lpmArt');
     const eqEl = document.getElementById('lpmEq');
     const listEl = document.getElementById('lpmList');
+    const fabTrackEl = document.getElementById('lpmFabTrack');
+
+    // Remove entrance animation after it plays
+    setTimeout(() => { fab.classList.remove('entrance'); }, 1000);
 
     // Build playlist items
     function renderPlaylist() {
@@ -272,6 +319,10 @@
         playBtn.textContent = isPlaying ? '⏸' : '▶';
         fab.classList.toggle('playing', isPlaying);
         eqEl.classList.toggle('active', isPlaying);
+        // Update FAB sub-label with current track name
+        if (fabTrackEl) {
+            fabTrackEl.textContent = isPlaying ? PLAYLIST[currentTrack].title : '일시정지';
+        }
         renderPlaylist();
     }
 
@@ -309,10 +360,13 @@
             player.playVideo();
             isPlaying = true;
             localStorage.setItem(STORAGE_KEY, 'true');
+            startTimeSaving();
         } else {
             player.pauseVideo();
             isPlaying = false;
             localStorage.setItem(STORAGE_KEY, 'false');
+            saveCurrentTime(); // 일시정지 시 현재 시간 저장
+            stopTimeSaving();
         }
         updateUI();
     }
@@ -320,13 +374,56 @@
     function loadTrack(idx) {
         currentTrack = idx;
         localStorage.setItem(TRACK_KEY, idx);
+        // 트랙을 변경했으므로 저장된 시간 초기화
+        localStorage.removeItem(TIME_KEY);
+        localStorage.removeItem(TIME_SAVE_KEY);
         if (apiReady && player) {
             player.loadVideoById(PLAYLIST[idx].id);
             isPlaying = true;
             localStorage.setItem(STORAGE_KEY, 'true');
+            startTimeSaving();
         }
         updateUI();
     }
+
+    // === 재생 시간 저장/복원 (탭 이동 시 이어재생) ===
+    function saveCurrentTime() {
+        if (apiReady && player && typeof player.getCurrentTime === 'function') {
+            try {
+                const t = player.getCurrentTime();
+                if (t > 0) {
+                    localStorage.setItem(TIME_KEY, t.toString());
+                    localStorage.setItem(TIME_SAVE_KEY, Date.now().toString());
+                }
+            } catch(e) {}
+        }
+    }
+
+    function startTimeSaving() {
+        stopTimeSaving();
+        timeSaveInterval = setInterval(saveCurrentTime, 2000); // 2초마다 저장
+    }
+
+    function stopTimeSaving() {
+        if (timeSaveInterval) {
+            clearInterval(timeSaveInterval);
+            timeSaveInterval = null;
+        }
+    }
+
+    function getResumeTime() {
+        const savedTime = parseFloat(localStorage.getItem(TIME_KEY) || '0');
+        const savedTs = parseInt(localStorage.getItem(TIME_SAVE_KEY) || '0');
+        if (savedTime <= 0 || savedTs <= 0) return 0;
+        // 저장 후 경과 시간 계산 (탭 이동 중에도 음악이 흘렀다 가정)
+        const elapsed = (Date.now() - savedTs) / 1000;
+        return savedTime + elapsed;
+    }
+
+    // 페이지 떠나기 전 현재 시간 저장
+    window.addEventListener('beforeunload', () => {
+        saveCurrentTime();
+    });
 
     // === YouTube IFrame API ===
     const tag = document.createElement('script');
@@ -343,7 +440,17 @@
     function tryAutoPlay() {
         if (autoPlayAttempted || !apiReady || !shouldAutoPlay || isPlaying) return;
         autoPlayAttempted = true;
-        try { player.playVideo(); isPlaying = true; localStorage.setItem(STORAGE_KEY, 'true'); updateUI(); } catch(e) {}
+        try {
+            const resumeTime = getResumeTime();
+            if (resumeTime > 0) {
+                player.seekTo(resumeTime, true);
+            }
+            player.playVideo();
+            isPlaying = true;
+            localStorage.setItem(STORAGE_KEY, 'true');
+            startTimeSaving();
+            updateUI();
+        } catch(e) {}
     }
     function onFirstInteraction() {
         tryAutoPlay();
@@ -354,10 +461,12 @@
     }
 
     window.onYouTubeIframeAPIReady = function() {
+        const resumeTime = getResumeTime();
         player = new YT.Player('yt-music-player', {
             videoId: PLAYLIST[currentTrack].id,
             playerVars: {
                 autoplay: shouldAutoPlay ? 1 : 0,
+                start: resumeTime > 0 ? Math.floor(resumeTime) : 0, // ← 이어재생 위치
                 loop: 0, controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0
             },
             events: {
@@ -365,9 +474,14 @@
                     apiReady = true;
                     player.setVolume(40);
                     if (shouldAutoPlay) {
+                        // seekTo로 더 정밀하게 이어재생
+                        if (resumeTime > 0) {
+                            player.seekTo(resumeTime, true);
+                        }
                         player.playVideo();
                         isPlaying = true;
                         localStorage.setItem(STORAGE_KEY, 'true');
+                        startTimeSaving();
                     }
                     updateUI();
                 },
@@ -375,6 +489,17 @@
                     if (e.data === YT.PlayerState.ENDED) {
                         // Auto next track
                         loadTrack((currentTrack + 1) % PLAYLIST.length);
+                    }
+                    // YouTube가 실제로 재생 중인지 상태 동기화
+                    if (e.data === YT.PlayerState.PLAYING) {
+                        isPlaying = true;
+                        startTimeSaving();
+                        updateUI();
+                    } else if (e.data === YT.PlayerState.PAUSED) {
+                        isPlaying = false;
+                        saveCurrentTime();
+                        stopTimeSaving();
+                        updateUI();
                     }
                 }
             }

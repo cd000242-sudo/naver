@@ -1,0 +1,389 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    
+  - generic [ref=e3]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - link [ref=e1767] [cursor=pointer]:
+          - /url: /home
+          - img [ref=e14]
+          - generic [ref=e15]: Apps Script
+        - generic [ref=e16]:
+          - generic [ref=e19]:
+            - button [ref=e1768] [cursor=pointer]: license-backend
+            - generic [ref=e1443]: cloud_done
+          - generic [ref=e38]:
+            - button [ref=e1769] [cursor=pointer]:
+              - generic [ref=e250]:
+                - text: 배포
+                - generic [ref=e251]: 
+            - button [ref=e1770] [cursor=pointer]:
+              - generic [ref=e256]: person_add
+            - button [ref=e1771] [cursor=pointer]:
+              - generic [ref=e261]: help_outline
+        - generic [ref=e45]:
+          - button [ref=e1772] [cursor=pointer]:
+            - img [ref=e50]
+          - button [ref=e1773] [cursor=pointer]:
+            - img [ref=e57]
+            - img [ref=e63]
+    - generic [ref=e263]:
+      - navigation [ref=e1774]:
+        - link [ref=e1775] [cursor=pointer]:
+          - generic [ref=e268]: info_outline
+          - generic [ref=e269]: 개요
+        - link [ref=e1776] [cursor=pointer]:
+          - generic [ref=e272]: code
+          - generic [ref=e273]: 편집기
+        - link [ref=e1777] [cursor=pointer]:
+          - generic [ref=e276]: history
+          - generic [ref=e277]: 프로젝트 기록
+        - link [ref=e1778] [cursor=pointer]:
+          - generic [ref=e280]: alarm
+          - generic [ref=e281]: 트리거
+        - link [ref=e1779] [cursor=pointer]:
+          - generic [ref=e284]: playlist_play
+          - generic [ref=e285]: 실행
+        - link [ref=e1780] [cursor=pointer]:
+          - generic [ref=e288]: settings
+          - generic [ref=e289]: 프로젝트 설정
+      - generic [ref=e290]:
+        - heading [level=1] [ref=e1781]: 편집기
+        - generic [ref=e292]:
+          - generic [ref=e294]:
+            - generic [ref=e295]:
+              - heading [level=2] [ref=e1782]: 파일
+              - generic [ref=e298]:
+                - button [disabled] [ref=e1783]:
+                  - generic [ref=e303]: sort_by_alpha
+                - button [ref=e1784] [cursor=pointer]:
+                  - generic [ref=e308]: add
+            - listbox [ref=e1785]:
+              - option [ref=e1786] [cursor=pointer]:
+                - generic [ref=e1787]: Code.gs
+                - button [ref=e1788]:
+                  - button [ref=e1789]:
+                    - generic [ref=e317]: 
+            - generic [ref=e318]:
+              - heading [level=2] [ref=e1790]: 라이브러리
+              - button [ref=e1791] [cursor=pointer]:
+                - generic [ref=e325]: add
+            - generic [ref=e326]:
+              - heading [level=2] [ref=e1792]: 서비스
+              - button [ref=e1793] [cursor=pointer]:
+                - generic [ref=e333]: add
+          - generic [ref=e340]:
+            - region [ref=e341]:
+              - generic [ref=e342]:
+                - generic [ref=e343]:
+                  - button [ref=e1794]:
+                    - generic [ref=e875]: undo
+                  - generic [ref=e349]:
+                    - button [disabled]:
+                      - generic: redo
+                - generic [ref=e353]:
+                  - button [disabled]:
+                    - img
+                - generic [ref=e1414]:
+                  - button [ref=e1795]:
+                    - generic [ref=e1421]: play_arrow
+                    - generic [ref=e1422]: 실행
+                  - button [ref=e1796]:
+                    - img [ref=e1429]
+                    - generic [ref=e1432]: 디버그
+                  - listbox [ref=e1797] [cursor=pointer]:
+                    - option [selected] [ref=e1798]: testMailPermission
+                - button [ref=e1799]:
+                  - generic [ref=e384]: 실행 로그
+            - generic [ref=e386]:
+              - main [ref=e390]:
+                - generic [ref=e391]: .
+                - generic [ref=e393]:
+                  - iframe [ref=e394]:
+                    
+                  - code [ref=e396]:
+                    - generic [ref=e397]:
+                      - generic [ref=e400]:
+                        - generic [ref=e1555]: "3443"
+                        - generic [ref=e1557]: "3444"
+                        - generic [ref=e1559]: "3445"
+                        - generic [ref=e1561]: "3446"
+                        - generic [ref=e1563]: "3447"
+                        - generic [ref=e1565]: "3448"
+                        - generic [ref=e1567]: "3449"
+                        - generic [ref=e1568]:
+                          - generic [ref=e1569] [cursor=pointer]: 
+                          - generic [ref=e1570]: "3450"
+                        - generic [ref=e1572]: "3451"
+                        - generic [ref=e1574]: "3452"
+                        - generic [ref=e1576]: "3453"
+                        - generic [ref=e1578]: "3454"
+                        - generic [ref=e1580]: "3455"
+                        - generic [ref=e1583]: "3456"
+                      - generic [ref=e511]:
+                        - generic [ref=e1610]: "subject: subject,"
+                        - generic [ref=e1612]: "htmlBody: htmlBody"
+                        - generic [ref=e1614]: "});"
+                        - generic [ref=e1616]: "Logger.log('[sendLicenseEmail] 발송 완료: ' + email + ', code=' + code);"
+                        - generic [ref=e1618]: "}"
+                        - generic [ref=e1622]: "function testMailPermission() {"
+                        - generic [ref=e1624]: var q = MailApp.getRemainingDailyQuota();
+                        - generic [ref=e1626]: "Logger.log(\"quota: \" + q);"
+                        - generic [ref=e1628]: "MailApp.sendEmail({to: ADMIN_EMAIL, subject: \"[Leaders Pro] Mail Test\", htmlBody: \"<h2>OK</h2><p>quota:\" + q + \"</p>\"});"
+                        - generic [ref=e1630]: Logger.log("sent to " + ADMIN_EMAIL);
+                        - generic [ref=e1632]: "}"
+                      - textbox [ref=e1800]: "} function testMailPermission() { var q = MailApp.getRemainingDailyQuota(); Logger.log(\"quota: \" + q); MailApp.sendEmail({to: ADMIN_EMAIL, subject: \"[Leaders Pro] Mail Test\", htmlBody: \"<h2>OK</h2><p>quota:\" + q + \"</p>\"}); Logger.log(\"sent to \" + ADMIN_EMAIL); }"
+              - generic [ref=e1636]:
+                - complementary [ref=e1638]:
+                  - generic [ref=e1640]: 실행 로그
+                  - list [ref=e1801]:
+                    - listitem [ref=e1802]:
+                      - generic [ref=e1740]: PM 12:08:22
+                      - generic [ref=e1741]: 알림
+                      - generic [ref=e1742]: 실행이 시작됨
+                    - listitem [ref=e1803]:
+                      - generic [ref=e1744]: PM 12:08:24
+                      - generic [ref=e1745]: 정보
+                      - generic [ref=e1746]: "quota: 98"
+                    - listitem [ref=e1804]:
+                      - generic [ref=e1748]: PM 12:08:24
+                      - generic [ref=e1749]: 정보
+                      - generic [ref=e1750]: sent to cd000242@gmail.com
+                    - listitem [ref=e1805]:
+                      - generic [ref=e1752]: PM 12:08:23
+                      - generic [ref=e1753]: 알림
+                      - generic [ref=e1754]: 실행이 완료됨
+                - button [ref=e1806] [cursor=pointer]:
+                  - generic [ref=e575]: close
+                - tooltip [ref=e576]: 실행 로그 닫기
+    - dialog "배포 관리" [ref=e1808]:
+      - heading "배포 관리" [level=2] [ref=e1809]
+      - generic [ref=e1811]:
+        - generic [ref=e1812]:
+          - generic [ref=e1813]:
+            - generic [ref=e1814]:
+              - generic [ref=e1816]: 활성
+              - listbox "진행 중인 배포 목록" [ref=e1819]:
+                - option "제목 없음" [ref=e1820] [cursor=pointer]:
+                  - generic [ref=e1821]: 제목 없음
+                - option "완전 최종" [ref=e1822] [cursor=pointer]:
+                  - generic [ref=e1823]: 완전 최종
+                - option "xptmxm" [ref=e1824] [cursor=pointer]:
+                  - generic [ref=e1825]: xptmxm
+                - option "최종본" [ref=e1826] [cursor=pointer]:
+                  - generic [ref=e1827]: 최종본
+                - option "leadernam" [ref=e1828] [cursor=pointer]:
+                  - generic [ref=e1829]: leadernam
+                - option "리더남" [ref=e1830] [cursor=pointer]:
+                  - generic [ref=e1831]: 리더남
+                - option "시작하자" [ref=e1832] [cursor=pointer]:
+                  - generic [ref=e1833]: 시작하자
+                - option "시작" [ref=e1834] [cursor=pointer]:
+                  - generic [ref=e1835]: 시작
+                - option "like" [ref=e1836] [cursor=pointer]:
+                  - generic [ref=e1837]: like
+                - option "남" [ref=e1838] [cursor=pointer]:
+                  - generic [ref=e1839]: 남
+                - option "new2" [ref=e1840] [cursor=pointer]:
+                  - generic [ref=e1841]: new2
+                - option "new" [ref=e1842] [cursor=pointer]:
+                  - generic [ref=e1843]: new
+                - option "leadernam" [ref=e1844] [cursor=pointer]:
+                  - generic [ref=e1845]: leadernam
+            - generic [ref=e1846]:
+              - generic [ref=e1848]: 보관처리됨
+              - listbox "보관처리된 배포 목록" [ref=e1851]:
+                - option "제목 없음" [ref=e1852] [cursor=pointer]:
+                  - generic [ref=e1853]: 제목 없음
+                - option "제목 없음" [ref=e1854] [cursor=pointer]:
+                  - generic [ref=e1855]: 제목 없음
+                - option "제목 없음" [ref=e1856] [cursor=pointer]:
+                  - generic [ref=e1857]: 제목 없음
+                - option "제목 없음" [ref=e1858] [cursor=pointer]:
+                  - generic [ref=e1859]: 제목 없음
+                - option "제목 없음" [ref=e1860] [cursor=pointer]:
+                  - generic [ref=e1861]: 제목 없음
+                - option "제목 없음" [ref=e1862] [cursor=pointer]:
+                  - generic [ref=e1863]: 제목 없음
+                - option "제목 없음" [ref=e1864] [cursor=pointer]:
+                  - generic [ref=e1865]: 제목 없음
+                - option "제목 없음" [ref=e1866] [cursor=pointer]:
+                  - generic [ref=e1867]: 제목 없음
+                - option "제목 없음" [ref=e1868] [cursor=pointer]:
+                  - generic [ref=e1869]: 제목 없음
+                - option "제목 없음" [ref=e1870] [cursor=pointer]:
+                  - generic [ref=e1871]: 제목 없음
+                - option "제목 없음" [ref=e1872] [cursor=pointer]:
+                  - generic [ref=e1873]: 제목 없음
+                - option "제목 없음" [ref=e1874] [cursor=pointer]:
+                  - generic [ref=e1875]: 제목 없음
+                - option "제목 없음" [ref=e1876] [cursor=pointer]:
+                  - generic [ref=e1877]: 제목 없음
+                - option "제목 없음" [ref=e1878] [cursor=pointer]:
+                  - generic [ref=e1879]: 제목 없음
+                - option "제목 없음" [ref=e1880] [cursor=pointer]:
+                  - generic [ref=e1881]: 제목 없음
+                - option "제목 없음" [ref=e1882] [cursor=pointer]:
+                  - generic [ref=e1883]: 제목 없음
+                - option "제목 없음" [ref=e1884] [cursor=pointer]:
+                  - generic [ref=e1885]: 제목 없음
+                - option "제목 없음" [ref=e1886] [cursor=pointer]:
+                  - generic [ref=e1887]: 제목 없음
+                - option "제목 없음" [ref=e1888] [cursor=pointer]:
+                  - generic [ref=e1889]: 제목 없음
+                - option "제목 없음" [ref=e1890] [cursor=pointer]:
+                  - generic [ref=e1891]: 제목 없음
+                - option "제목 없음" [ref=e1892] [cursor=pointer]:
+                  - generic [ref=e1893]: 제목 없음
+                - option "제목 없음" [ref=e1894] [cursor=pointer]:
+                  - generic [ref=e1895]: 제목 없음
+                - option "제목 없음" [ref=e1896] [cursor=pointer]:
+                  - generic [ref=e1897]: 제목 없음
+                - option "제목 없음" [ref=e1898] [cursor=pointer]:
+                  - generic [ref=e1899]: 제목 없음
+                - option "제목 없음" [ref=e1900] [cursor=pointer]:
+                  - generic [ref=e1901]: 제목 없음
+                - option "제목 없음" [ref=e1902] [cursor=pointer]:
+                  - generic [ref=e1903]: 제목 없음
+                - option "제목 없음" [ref=e1904] [cursor=pointer]:
+                  - generic [ref=e1905]: 제목 없음
+                - option "제목 없음" [ref=e1906] [cursor=pointer]:
+                  - generic [ref=e1907]: 제목 없음
+                - option "제목 없음" [ref=e1908] [cursor=pointer]:
+                  - generic [ref=e1909]: 제목 없음
+                - option "제목 없음" [ref=e1910] [cursor=pointer]:
+                  - generic [ref=e1911]: 제목 없음
+                - option "제목 없음" [ref=e1912] [cursor=pointer]:
+                  - generic [ref=e1913]: 제목 없음
+                - option "제목 없음" [ref=e1914] [cursor=pointer]:
+                  - generic [ref=e1915]: 제목 없음
+                - option "제목 없음" [ref=e1916] [cursor=pointer]:
+                  - generic [ref=e1917]: 제목 없음
+                - option "제목 없음" [ref=e1918] [cursor=pointer]:
+                  - generic [ref=e1919]: 제목 없음
+                - option "패널" [ref=e1920] [cursor=pointer]:
+                  - generic [ref=e1921]: 패널
+                - option "제목 없음" [ref=e1922] [cursor=pointer]:
+                  - generic [ref=e1923]: 제목 없음
+                - option "제목 없음" [ref=e1924] [cursor=pointer]:
+                  - generic [ref=e1925]: 제목 없음
+                - option "제목 없음" [ref=e1926] [cursor=pointer]:
+                  - generic [ref=e1927]: 제목 없음
+                - option "제목 없음" [ref=e1928] [cursor=pointer]:
+                  - generic [ref=e1929]: 제목 없음
+                - option "제목 없음" [ref=e1930] [cursor=pointer]:
+                  - generic [ref=e1931]: 제목 없음
+                - option "제목 없음" [ref=e1932] [cursor=pointer]:
+                  - generic [ref=e1933]: 제목 없음
+                - option "제목 없음" [ref=e1934] [cursor=pointer]:
+                  - generic [ref=e1935]: 제목 없음
+                - option "제목 없음" [ref=e1936] [cursor=pointer]:
+                  - generic [ref=e1937]: 제목 없음
+                - option "제목 없음" [ref=e1938] [cursor=pointer]:
+                  - generic [ref=e1939]: 제목 없음
+                - option "제목 없음" [ref=e1940] [cursor=pointer]:
+                  - generic [ref=e1941]: 제목 없음
+                - option "제목 없음" [ref=e1942] [cursor=pointer]:
+                  - generic [ref=e1943]: 제목 없음
+                - option "제목 없음" [ref=e1944] [cursor=pointer]:
+                  - generic [ref=e1945]: 제목 없음
+                - option "제목 없음" [ref=e1946] [cursor=pointer]:
+                  - generic [ref=e1947]: 제목 없음
+                - option "제목 없음" [ref=e1948] [cursor=pointer]:
+                  - generic [ref=e1949]: 제목 없음
+                - option "asd" [ref=e1950] [cursor=pointer]:
+                  - generic [ref=e1951]: asd
+                - option "제목 없음" [ref=e1952] [cursor=pointer]:
+                  - generic [ref=e1953]: 제목 없음
+                - option "제목 없음" [ref=e1954] [cursor=pointer]:
+                  - generic [ref=e1955]: 제목 없음
+                - option "제목 없음" [ref=e1956] [cursor=pointer]:
+                  - generic [ref=e1957]: 제목 없음
+                - option "제목 없음" [ref=e1958] [cursor=pointer]:
+                  - generic [ref=e1959]: 제목 없음
+                - option "제목 없음" [ref=e1960] [cursor=pointer]:
+                  - generic [ref=e1961]: 제목 없음
+                - option "제목 없음" [ref=e1962] [cursor=pointer]:
+                  - generic [ref=e1963]: 제목 없음
+                - option "찐찐 마지막 최종" [ref=e1964] [cursor=pointer]:
+                  - generic [ref=e1965]: 찐찐 마지막 최종
+          - generic [ref=e1966]:
+            - generic [ref=e1967]:
+              - generic [ref=e1968]: 구성
+              - generic [ref=e1969]:
+                - generic [ref=e1970] [cursor=pointer]:
+                  - generic [ref=e1971]: help_outline
+                  - link "배포에 대해 자세히 알아보기" [ref=e1972]:
+                    - /url: https://developers.google.com/apps-script/concepts/deployments
+                - tooltip [ref=e1973]: 배포에 대해 자세히 알아보기
+              - generic [ref=e1975]:
+                - button "수정" [disabled] [ref=e1976]:
+                  - generic [ref=e1977]: edit
+                - tooltip [ref=e1978]: 수정
+              - generic [ref=e1980]:
+                - button "배포 보관처리" [disabled] [ref=e1981]:
+                  - generic [ref=e1982]: archive
+                - tooltip [ref=e1983]: 배포 보관처리
+            - generic [ref=e1985]:
+              - combobox "버전 버전 70(2026. 4. 1., AM 11:52)" [active] [ref=e2056] [cursor=pointer]:
+                - generic:
+                  - generic:
+                    - generic: 버전
+                - generic:
+                  - generic: 버전 70(2026. 4. 1., AM 11:52)
+                - generic:
+                  - img
+              - generic [ref=e2058]:
+                - generic:
+                  - generic:
+                    - generic: 설명
+                - textbox "설명" [ref=e1990]
+              - generic [ref=e1992]:
+                - generic [ref=e1993]: 배포 ID
+                - generic [ref=e1994]:
+                  - generic [ref=e1997]: AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw
+                  - button "배포 ID 복사" [ref=e2000]:
+                    - generic [ref=e2003]: content_copy
+                    - generic [ref=e2004]: 복사
+              - generic [ref=e2006]:
+                - generic [ref=e2007]: 웹 앱
+                - generic [ref=e2008]:
+                  - generic [ref=e2009]: URL
+                  - generic [ref=e2010]:
+                    - link "https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec" [ref=e2014] [cursor=pointer]:
+                      - /url: https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec
+                    - button "웹 앱 URL 복사" [ref=e2017]:
+                      - generic [ref=e2020]: content_copy
+                      - generic [ref=e2021]: 복사
+                - combobox "다음 사용자 인증 정보로 실행 나(cd000242@gmail.com)" [ref=e2060] [cursor=pointer]:
+                  - generic:
+                    - generic:
+                      - generic: 다음 사용자 인증 정보로 실행
+                  - generic:
+                    - generic: 나(cd000242@gmail.com)
+                  - generic:
+                    - img
+                - generic [ref=e2024]: 웹 앱에서 내 계정 데이터를 사용하여 실행하도록 권한이 부여됩니다.
+                - combobox "액세스 권한이 있는 사용자 모든 사용자" [ref=e2063] [cursor=pointer]:
+                  - generic:
+                    - generic:
+                      - generic: 액세스 권한이 있는 사용자
+                  - generic:
+                    - generic: 모든 사용자
+                  - generic:
+                    - img
+              - generic [ref=e2027]:
+                - generic [ref=e2028]: 라이브러리
+                - generic [ref=e2044]: 다른 사용자 및 그룹이 이 프로젝트를 라이브러리로 사용하도록 하려면 이 프로젝트를 해당 사용자 및 그룹과 공유하세요.
+        - generic [ref=e2045]:
+          - button "취소" [ref=e2047]:
+            - generic [ref=e2050]: 취소
+          - button "배포" [ref=e2065]:
+            - generic [ref=e2068]: 배포
+  - generic: 프로젝트 저장 중...
+  - generic [ref=e577]: "구문 오류: SyntaxError: Unexpected token '}' 라인: 3462 파일: Code.gs"
+  - generic [ref=e578]:
+    - alert
+    - alert
+    - complementary
+    - complementary

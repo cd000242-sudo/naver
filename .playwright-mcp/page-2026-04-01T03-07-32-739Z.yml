@@ -1,0 +1,21 @@
+- generic [ref=e2]:
+  - heading "Google에서 확인하지 않은 앱" [level=1] [ref=e3]
+  - paragraph [ref=e4]:
+    - text: 앱에서 Google 계정의 민감한 정보에 대한 액세스를 요청합니다. 개발자(
+    - link "cd000242@gmail.com" [ref=e5] [cursor=pointer]:
+      - /url: mailto:cd000242@gmail.com
+    - text: )의 앱이 Google에서 인증을 받기 전에는 앱을 사용하지 마세요.
+  - generic [ref=e6]:
+    - link "고급 설정 숨기기" [active] [ref=e12] [cursor=pointer]:
+      - /url: "#"
+    - button "안전한 환경으로 돌아가기" [ref=e8] [cursor=pointer]:
+      - generic [ref=e11]: 안전한 환경으로 돌아가기
+  - generic [ref=e13]:
+    - paragraph [ref=e14]:
+      - text: 어떠한 위험이 발생할지 이해하고 개발자(
+      - link "cd000242@gmail.com" [ref=e15] [cursor=pointer]:
+        - /url: mailto:cd000242@gmail.com
+      - text: )를 신뢰할 수 있는 경우에만 계속하세요.
+    - paragraph [ref=e16]:
+      - link "license-backend(으)로 이동(안전하지 않음)" [ref=e17] [cursor=pointer]:
+        - /url: "#"

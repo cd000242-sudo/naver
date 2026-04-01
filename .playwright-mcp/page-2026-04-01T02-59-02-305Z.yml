@@ -1,0 +1,107 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Leaders Pro Leaders Pro" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+        - img "Leaders Pro" [ref=e5]
+        - generic [ref=e6]: Leaders Pro
+      - generic [ref=e7]:
+        - link "홈" [ref=e8] [cursor=pointer]:
+          - /url: index.html
+        - link "제품정보" [ref=e9] [cursor=pointer]:
+          - /url: products.html
+        - link "구매" [ref=e10] [cursor=pointer]:
+          - /url: pricing.html
+        - link "후기" [ref=e11] [cursor=pointer]:
+          - /url: reviews.html
+        - link "커뮤니티" [ref=e12] [cursor=pointer]:
+          - /url: community.html
+        - link "다운로드" [ref=e13] [cursor=pointer]:
+          - /url: download.html
+        - link "주문조회" [ref=e14] [cursor=pointer]:
+          - /url: lookup.html
+  - generic [ref=e16]:
+    - generic [ref=e17]:
+      - heading "💰 계좌이체 결제" [level=1] [ref=e18]
+      - paragraph [ref=e19]: 상품 선택 → 정보 입력 → 입금 → 라이선스 발급
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: "1"
+        - generic [ref=e23]: 제품 선택
+      - generic [ref=e24]:
+        - button "Better Life Naver" [ref=e25] [cursor=pointer]
+        - button "Leaders Orbit" [ref=e26] [cursor=pointer]
+        - button "Leaders Tistory 준비중" [ref=e27]
+        - button "Leword" [ref=e28] [cursor=pointer]
+      - generic [ref=e29]:
+        - generic [ref=e90] [cursor=pointer]:
+          - generic [ref=e91]: 1개월
+          - generic [ref=e92]: 50,000원
+          - generic [ref=e93]: / 월
+        - generic [ref=e94] [cursor=pointer]:
+          - generic [ref=e95]: 3개월
+          - generic [ref=e96]: 120,000원
+          - generic [ref=e97]: 월 40,000원
+        - generic [ref=e98] [cursor=pointer]:
+          - generic [ref=e99]: 1년
+          - generic [ref=e100]: 400,000원
+          - generic [ref=e101]: 월 33,333원
+    - generic [ref=e42]:
+      - generic [ref=e43]:
+        - generic [ref=e44]: "2"
+        - generic [ref=e45]: 정보 입력
+      - generic [ref=e46]:
+        - generic [ref=e47]: 입금자명 (실명)
+        - textbox "홍길동" [ref=e48]
+      - generic [ref=e49]:
+        - generic [ref=e50]: 이메일 (라이선스 코드 수신)
+        - textbox "example@email.com" [ref=e51]
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - generic [ref=e54]: "3"
+        - generic [ref=e55]: 입금 계좌 안내
+      - generic [ref=e56]:
+        - heading "💰 아래 계좌로 입금해주세요" [level=4] [ref=e57]
+        - generic [ref=e58]:
+          - generic [ref=e59]: 은행
+          - generic [ref=e60]: 토스뱅크
+        - generic [ref=e61]:
+          - generic [ref=e62]: 계좌번호
+          - generic [ref=e63]: 1000-1770-4358 📋 복사
+        - generic [ref=e64]:
+          - generic [ref=e65]: 예금주
+          - generic [ref=e66]: 박성현
+        - generic [ref=e67]:
+          - generic [ref=e68]: 입금 금액
+          - generic [ref=e69]: 50,000원
+    - button "50,000원 주문 접수하기" [ref=e102] [cursor=pointer]
+    - generic [ref=e71]:
+      - text: 주문 접수 후 입금이 확인되면 라이선스 코드가 이메일로 발송됩니다.
+      - text: 결제 진행 시
+      - link "이용약관" [ref=e72] [cursor=pointer]:
+        - /url: terms.html
+      - text: 및
+      - link "개인정보처리방침" [ref=e73] [cursor=pointer]:
+        - /url: privacy.html
+      - text: 에 동의하는 것으로 간주됩니다.
+  - contentinfo [ref=e74]:
+    - generic [ref=e75]:
+      - generic [ref=e76]:
+        - img "Leaders Pro" [ref=e77]
+        - generic [ref=e78]: Leaders Pro
+      - generic [ref=e79]:
+        - link "이용약관" [ref=e80] [cursor=pointer]:
+          - /url: terms.html
+        - link "환불정책" [ref=e81] [cursor=pointer]:
+          - /url: refund.html
+        - link "개인정보처리방침" [ref=e82] [cursor=pointer]:
+          - /url: privacy.html
+        - link "주문 조회" [ref=e83] [cursor=pointer]:
+          - /url: lookup.html
+        - link "고객 문의" [ref=e84] [cursor=pointer]:
+          - /url: mailto:cd000242@gmail.com
+      - generic [ref=e85]:
+        - paragraph [ref=e86]: "상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802"
+        - paragraph [ref=e87]: "주소: 경남 김해시 장유로334번길9"
+        - paragraph [ref=e88]: "이메일: tjdgus24280@naver.com | 전화: 010-7545-1645"
+      - paragraph [ref=e89]: © 2026 Leaders Pro. All rights reserved.

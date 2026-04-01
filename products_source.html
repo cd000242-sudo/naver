@@ -1,0 +1,384 @@
+﻿﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품 소개 — Leaders Pro</title>
+    <meta name="description" content="Leaders Pro 제품군을 소개합니다. Better Life Naver, Leaders Orbit, Leaders Tistory, Leword — 각 플랫폼에 최적화된 블로그 자동화 솔루션.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        /* ========== SPRING CHERRY BLOSSOM ========== */
+        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
+        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
+        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
+        /* ========== SPRING ACCENT OVERLAY ========== */
+        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 10% 5%, rgba(255,183,197,0.07) 0%, transparent 40%), radial-gradient(ellipse at 90% 10%, rgba(255,218,233,0.05) 0%, transparent 35%), radial-gradient(ellipse at 50% 95%, rgba(255,182,193,0.04) 0%, transparent 40%), radial-gradient(ellipse at 75% 50%, rgba(255,192,203,0.03) 0%, transparent 30%), url('spring-bg.png') center/cover no-repeat fixed; pointer-events: none; z-index: 0; opacity: 0.35; }
+        /* ========== UNIFIED PRODUCT ICONS ========== */
+        .product-icon-sm { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 5px; background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%); color: #1a1a2e; font-weight: 800; font-size: 13px; font-family: 'Inter', sans-serif; margin-right: 6px; vertical-align: middle; line-height: 1; }
+        .product-icon-lg { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%); color: #1a1a2e; font-weight: 900; font-size: 28px; font-family: 'Inter', sans-serif; box-shadow: 0 4px 20px rgba(245,200,66,0.3); line-height: 1; }
+        .n-icon-sm { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 5px; background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%); color: #1a1a2e; font-weight: 800; font-size: 13px; font-family: 'Inter', sans-serif; margin-right: 6px; vertical-align: middle; line-height: 1; }
+        .n-logo-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%); color: #1a1a2e; font-weight: 900; font-size: 28px; font-family: 'Inter', sans-serif; box-shadow: 0 4px 20px rgba(245,200,66,0.3); line-height: 1; }
+        /* ========== FLOATING KAKAO ========== */
+        .kakao-float { position: fixed; bottom: 30px; right: 24px; z-index: 10001; display: flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 50px; background: rgba(60, 29, 0, 0.85); border: 1px solid rgba(254, 229, 0, 0.4); backdrop-filter: blur(16px); cursor: grab; user-select: none; text-decoration: none; box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(254,229,0,0.15); transition: transform 0.2s, box-shadow 0.2s; font-family: 'Pretendard Variable', 'Inter', sans-serif; }
+        .kakao-float:hover { transform: scale(1.05); box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(254,229,0,0.25); }
+        .kakao-float-icon { width: 28px; height: 28px; background: #fee500; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        .kakao-float-text { color: #fee500; font-weight: 700; font-size: 14px; white-space: nowrap; letter-spacing: -0.3px; }
+        .kakao-float-pulse { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: #ff3b5c; animation: kakaoPulse 2s ease-in-out infinite; }
+        @keyframes kakaoPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+        /* ========== YOUTUBE FLOAT ========== */
+        .youtube-float { position: fixed; bottom: 30px; left: 24px; z-index: 10001; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 0, 0, 0.85); border: 1px solid rgba(255, 100, 100, 0.4); backdrop-filter: blur(12px); text-decoration: none; box-shadow: 0 4px 20px rgba(255,0,0,0.3); transition: all 0.3s; font-size: 22px; }
+        .youtube-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(255,0,0,0.5); }
+        @media (max-width: 768px) {
+            .kakao-float { bottom: 24px; right: 16px; padding: 12px 18px; }
+            .youtube-float { bottom: 24px; left: 16px; width: 44px; height: 44px; font-size: 18px; }
+        }
+    </style>
+
+    <style>
+        /* CHERRY BLOSSOM */
+        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
+        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
+        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
+        /* MUSIC TOGGLE */
+        .music-toggle { position: fixed; bottom: 170px; right: 24px; z-index: 10000; width: 52px; height: 52px; border-radius: 50%; background: rgba(255,183,197,0.25); border: 1px solid rgba(255,183,197,0.5); backdrop-filter: blur(12px); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(255,107,138,0.2); }
+        .music-toggle:hover { transform: scale(1.1); background: rgba(255,183,197,0.4); box-shadow: 0 6px 30px rgba(255,107,138,0.4); }
+        .music-toggle.playing { animation: musicPulse 1.5s ease-in-out infinite; }
+        @keyframes musicPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(255,107,138,0.2); } 50% { box-shadow: 0 4px 30px rgba(255,107,138,0.6), 0 0 60px rgba(255,183,197,0.3); } }
+        .music-hint { position: fixed; bottom: 108px; right: 84px; z-index: 10000; background: rgba(255,183,197,0.92); color: #1a0a10; padding: 10px 16px; border-radius: 12px; font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 20px rgba(255,107,138,0.3); animation: hintFadeIn 0.5s ease-out both, hintFadeOut 0.5s 6s ease-in both; pointer-events: none; }
+        .music-hint::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-left-color: rgba(255,183,197,0.92); }
+        @keyframes hintFadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes hintFadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
+        .music-toggle.attention { animation: bounceAttention 1s ease-in-out 3; }
+        @keyframes bounceAttention { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        @media (max-width: 768px) { .music-toggle { bottom: 90px; } }
+    </style>
+</head>
+
+<body>
+    <!-- Particle Canvas Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="products.html" class="nav-link active" onclick="closeMobileMenu()">제품정보</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">구매</a>
+                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
+                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
+                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
+                <a href="lookup.html" class="nav-link">주문조회</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- PRODUCTS SECTION -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section class="section" id="products" style="padding-top: 120px;">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">PRODUCTS</span>
+                <h2 class="section-title">당신에게 맞는 자동화를 선택하세요</h2>
+                <p class="section-desc">각 플랫폼에 최적화된 전문 자동화 솔루션</p>
+            </div>
+
+            <!-- ═══ SHOWCASE 1: Better Life Naver ═══ -->
+            <div class="product-showcase" id="naver-auto">
+                <div class="product-info">
+                    <div class="product-tag">🚀 FLAGSHIP</div>
+                    <h3 class="product-title">Better Life Naver</h3>
+                    <p class="product-subtitle">네이버 블로그 자동화</p>
+                    <p class="product-desc">
+                        키워드 하나만 입력하면 끝.<br>
+                        AI가 글을 쓰고, 이미지를 만들고, <strong>네이버 블로그에 자동으로 올립니다.</strong>
+                    </p>
+                    <ul class="product-benefit-list">
+                        <li>
+                            <span class="benefit-icon">⚡</span>
+                            <div>
+                                <strong>매일 100건, 사람이 쓴 것처럼</strong>
+                                <span>GPT-4o, Gemini 2.5 등 AI 7종이 6,000~10,000자 자연스러운 본문 생성</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">👥</span>
+                            <div>
+                                <strong>블로그 10개를 혼자 운영하세요</strong>
+                                <span>계정 수 제한 없이 통합 관리. 계정별 개별 스케줄링</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">🌙</span>
+                            <div>
+                                <strong>자는 동안에도 블로그가 자란다</strong>
+                                <span>최적 시간대 자동 발행, 랜덤 딜레이로 봇 감지 우회</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">🎨</span>
+                            <div>
+                                <strong>저작권 걱정 없는 고유 이미지</strong>
+                                <span>Imagen 4, DALL-E, ImageFX, Google Veo 영상까지 자동 생성·삽입</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">🛒</span>
+                            <div>
+                                <strong>쿠팡 파트너스로 월 수익 창출</strong>
+                                <span>쿠팡·네이버 스마트스토어 상품 크롤링 → 리뷰형 포스팅 → 제휴 링크 자동</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">🎯</span>
+                            <div>
+                                <strong>네이버 상위노출, AI가 알아서</strong>
+                                <span>14개 카테고리 맞춤 제목 생성, 홈피드 노출 최적화 100점 프로토콜</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="detail.html" class="product-cta-btn">
+                        자세히 보기 →
+                    </a>
+                </div>
+                <div class="product-visual">
+                    <div class="product-visual-card">
+                        <div class="visual-mockup">
+                            <div class="mockup-header">
+                                <span class="mockup-dot red"></span>
+                                <span class="mockup-dot yellow"></span>
+                                <span class="mockup-dot green"></span>
+                                <span class="mockup-title">Better Life Naver — Dashboard</span>
+                            </div>
+                            <div class="mockup-body" style="padding:0; overflow:hidden;">
+                                <video autoplay muted loop playsinline style="width:100%; display:block;">
+                                    <source src="images/hero-demo.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ SHOWCASE 2: Leaders Orbit ═══ -->
+            <div class="product-showcase product-alt" id="wp-auto">
+                <div class="product-visual">
+                    <div class="product-visual-card">
+                        <div class="visual-mockup mockup-blue">
+                            <div class="mockup-header">
+                                <span class="mockup-dot red"></span>
+                                <span class="mockup-dot yellow"></span>
+                                <span class="mockup-dot green"></span>
+                                <span class="mockup-title">Leaders Orbit — Global Publisher</span>
+                            </div>
+                            <div class="mockup-body">
+                                <div class="mockup-stat"><span class="stat-label">WordPress</span><span class="stat-value" style="color:#21759b;">42건</span></div>
+                                <div class="mockup-stat"><span class="stat-label">Blogspot</span><span class="stat-value" style="color:#f57c00;">38건</span></div>
+                                <div class="mockup-stat"><span class="stat-label">애드센스 수익</span><span class="stat-value" style="color:#44d7b6;">$127</span></div>
+                                <div class="mockup-progress"><div class="progress-bar" style="width:78%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-tag tag-blue">🌐 GLOBAL</div>
+                    <h3 class="product-title">Leaders Orbit</h3>
+                    <p class="product-subtitle">워드프레스 / 블로그스팟 자동화</p>
+                    <p class="product-desc">
+                        구글 애드센스 수익화에 최적화된 글로벌 블로그 자동화.<br>
+                        <strong>100% API 기반</strong>이라 봇 감지 걱정 Zero.
+                    </p>
+                    <ul class="product-benefit-list">
+                        <li><span class="benefit-icon">💰</span><div><strong>애드센스 승인률 극대화</strong><span>E-E-A-T 기준 충족, Clean Mode 스킨, FAQ Schema 자동</span></div></li>
+                        <li><span class="benefit-icon">🌍</span><div><strong>다국어로 글로벌 수익</strong><span>한국어·영어·일본어 등 다국어 SEO 콘텐츠 자동 생성</span></div></li>
+                        <li><span class="benefit-icon">🔗</span><div><strong>두 플랫폼을 한 화면에서</strong><span>WordPress + Blogspot 통합 운영, API 기반 안정 발행</span></div></li>
+                        <li><span class="benefit-icon">📈</span><div><strong>구글 상위노출 SEO 자동화</strong><span>메타 태그, 구조화 데이터, 키워드 밀도 자동 최적화</span></div></li>
+                    </ul>
+                    <a href="pricing.html?tab=orbit" class="product-cta-btn btn-blue">월 60,000원부터 →</a>
+                </div>
+            </div>
+
+            <!-- ═══ COMPACT CARDS ═══ -->
+            <div class="compact-products-header">
+                <h3 class="compact-title">더 많은 솔루션</h3>
+                <p class="compact-desc">모든 플랫폼을 하나의 에코시스템으로</p>
+            </div>
+            <div class="compact-grid">
+                <div class="compact-card compact-orange" onclick="location.href='pricing.html?tab=tistory'">
+                    <div class="compact-icon">🔥</div>
+                    <div class="compact-tag">NEW</div>
+                    <h4 class="compact-name">Leaders Tistory</h4>
+                    <p class="compact-platform">티스토리 자동화</p>
+                    <p class="compact-benefit">사람처럼 타이핑하는 고급 봇 회피 기술로<br>안전한 대량 발행</p>
+                    <ul class="compact-features">
+                        <li>⌨️ 사람형 타이핑 엔진 (봇 감지 우회)</li>
+                        <li>🎯 티스토리 v2 에디터 완벽 호환</li>
+                        <li>💰 카카오 애드핏 수익 극대화</li>
+                        <li>🏷️ 카테고리·태그 자동 설정</li>
+                    </ul>
+                    <div class="compact-price">월 <strong>30,000</strong>원부터</div>
+                    <div class="compact-cta">요금제 보기 →</div>
+                </div>
+
+                <div class="compact-card compact-purple" onclick="location.href='pricing.html?tab=leword'">
+                    <div class="compact-icon">💎</div>
+                    <div class="compact-tag">INTELLIGENCE</div>
+                    <h4 class="compact-name">Leword</h4>
+                    <p class="compact-platform">AI 키워드 인텔리전스</p>
+                    <p class="compact-benefit">어떤 키워드로 글을 써야 상위 노출?<br>데이터가 알려줍니다</p>
+                    <ul class="compact-features">
+                        <li>🔍 경쟁 강도·난이도 점수 분석</li>
+                        <li>💡 블루오션 황금 키워드 자동 추천</li>
+                        <li>📊 네이버·구글 실시간 트렌드</li>
+                        <li>🤖 Leaders Pro 원클릭 연동</li>
+                    </ul>
+                    <div class="compact-price">월 <strong>30,000</strong>원부터</div>
+                    <div class="compact-cta">요금제 보기 →</div>
+                </div>
+
+                <div class="compact-card compact-red compact-coming">
+                    <div class="compact-icon">🎬</div>
+                    <div class="compact-tag">COMING SOON</div>
+                    <h4 class="compact-name">유튜브 자동화</h4>
+                    <p class="compact-platform">AI 영상 생성 · 자동 업로드</p>
+                    <p class="compact-benefit">유튜브 쇼츠·롱폼 콘텐츠를<br>풀 자동화로 운영</p>
+                    <ul class="compact-features">
+                        <li>🎥 텍스트 → 영상 자동 변환</li>
+                        <li>📱 쇼츠 & 롱폼 동시 지원</li>
+                        <li>📈 유튜브 SEO 자동 최적화</li>
+                        <li>🔮 2026년 하반기 출시 예정</li>
+                    </ul>
+                    <div class="compact-price"><strong>출시 알림 신청</strong></div>
+                    <div class="compact-cta coming-cta">고객 문의 →</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+                <span>Leaders Pro</span>
+            </div>
+            <div class="footer-links">
+                <a href="terms.html">이용약관</a>
+                <a href="refund.html">환불정책</a>
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="lookup.html">주문 조회</a>
+                <a href="mailto:cd000242@gmail.com">고객 문의</a>
+            </div>
+            <div class="footer-biz">
+                <p>상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802</p>
+                <p>주소: 경남 김해시 장유로334번길9</p>
+                <p>이메일: tjdgus24280@naver.com | 전화: 010-7545-1645</p>
+            </div>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== Particles =====
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w, h;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 3; }
+            resize();
+            window.addEventListener('resize', resize);
+            class Particle {
+                constructor() { this.reset(); }
+                reset() { this.x = Math.random() * w; this.y = Math.random() * h; this.size = Math.random() * 2 + 0.5; this.speedY = -(Math.random() * 0.3 + 0.1); this.speedX = (Math.random() - 0.5) * 0.2; this.opacity = Math.random() * 0.5 + 0.1; this.gold = Math.random() > 0.3; }
+                update() { this.y += this.speedY; this.x += this.speedX; this.opacity += (Math.random() - 0.5) * 0.01; this.opacity = Math.max(0.05, Math.min(0.6, this.opacity)); if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; } }
+                draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.gold ? `rgba(201, 168, 76, ${this.opacity})` : `rgba(255, 255, 255, ${this.opacity * 0.4})`; ctx.fill(); }
+            }
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+            function animate() { ctx.clearRect(0, 0, w, h); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+            animate();
+        }
+
+        // ===== Scroll Animations =====
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, i) => { if (entry.isIntersecting) { entry.target.style.transitionDelay = `${i * 0.08}s`; entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in, .product-showcase, .compact-card').forEach(el => observer.observe(el));
+        }
+
+        // ===== Navbar =====
+        function initNavbar() {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
+        }
+
+        // ===== Mobile Menu =====
+        function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
+        function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
+
+        // ===== Init =====
+        document.addEventListener('DOMContentLoaded', () => {
+            initParticles();
+            initScrollAnimations();
+            initNavbar();
+        });
+    </script>
+
+    <!-- CHERRY BLOSSOM PETALS -->
+    <div class="petal-container" id="petalContainer"></div>
+    <script>
+    (function() {
+        const container = document.getElementById('petalContainer');
+        if (!container) return;
+        for (let i = 0; i < 30; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            const size = Math.random() * 14 + 8;
+            petal.style.width = size + 'px'; petal.style.height = size + 'px';
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (Math.random() * 8 + 7) + 's';
+            petal.style.animationDelay = (Math.random() * 10) + 's';
+            container.appendChild(petal);
+        }
+    })();
+    </script>
+
+    <!-- FLOATING YOUTUBE BUTTON -->
+    <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" title="공식 유튜브 채널">▶</a>
+
+    <!-- FLOATING KAKAO INQUIRY BUTTON -->
+    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 카카오톡 문의">
+        <div class="kakao-float-pulse"></div>
+        <div class="kakao-float-icon">💬</div>
+        <span class="kakao-float-text">1:1 문의</span>
+    </a>
+
+<!-- CHERRY BLOSSOM PETALS -->
+<div class="petal-container" id="petalContainer"></div>
+
+<!-- MUSIC TOGGLE -->
+<button class="music-toggle attention" id="musicToggle" title="🌸 봄 배경음악 켜기/끄기">🔇</button>
+<div class="music-hint" id="musicHint">🌸 클릭하면 봄 음악이 흘러요</div>
+
+<script src="music.js"></script>
+</body>
+</html>
+
