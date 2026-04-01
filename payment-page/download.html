@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>다운로드 — Leaders Pro</title>
-    <meta name="description" content="Leaders Pro 프로그램을 다운로드하세요. Better Life Naver, Leaders Orbit, Leaders Tistory, Leword.">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <title>�ٿ�ε� ? Leaders Pro</title>
+    <meta name="description" content="Leaders Pro ���α׷��� �ٿ�ε��ϼ���. Leaders Pro - AI 블로그 자동화 솔루션">
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -63,85 +63,85 @@
                 <img src="logo.png" alt="Leaders Pro" class="nav-logo">
                 <span class="nav-brand-text">Leaders Pro</span>
             </a>
-            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="�޴� ����" onclick="toggleMobileMenu()">
                 <span></span><span></span><span></span>
             </button>
             <div class="nav-links" id="nav-links">
-                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
-                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품정보</a>
-                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">구매</a>
-                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
-                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
-                <a href="download.html" class="nav-link active" onclick="closeMobileMenu()">다운로드</a>
-                <a href="lookup.html" class="nav-link">주문조회</a>
+                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">Ȩ</a>
+                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">��ǰ����</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">����</a>
+                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">�ı�</a>
+                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">Ŀ�´�Ƽ</a>
+                <a href="download.html" class="nav-link active" onclick="closeMobileMenu()">�ٿ�ε�</a>
+                <a href="lookup.html" class="nav-link">�ֹ���ȸ</a>
             </div>
         </div>
     </nav>
 
-    <!-- ═══ DOWNLOAD SECTION ═══ -->
+    <!-- ??? DOWNLOAD SECTION ??? -->
     <section class="section section-dark" id="download" style="padding-top: 120px;">
         <div class="section-inner">
             <div class="section-header">
                 <span class="section-tag">DOWNLOAD</span>
-                <h2 class="section-title">프로그램 다운로드</h2>
-                <p class="section-desc">비밀번호를 입력하면 최신 버전을 다운로드할 수 있습니다.</p>
+                <h2 class="section-title">���α׷� �ٿ�ε�</h2>
+                <p class="section-desc">��й�ȣ�� �Է��ϸ� �ֽ� ������ �ٿ�ε��� �� �ֽ��ϴ�.</p>
             </div>
 
             <div class="download-grid">
                 <div class="download-card" data-product="naver">
                     <div class="download-icon"><span class="product-icon-lg">N</span></div>
                     <h3 class="download-title">Better Life Naver</h3>
-                    <p class="download-version">네이버 블로그 자동화 · Windows 64-bit</p>
+                    <p class="download-version">���̹� ��α� �ڵ�ȭ �� Windows 64-bit</p>
                     <div class="download-form">
                         <div class="download-input-group">
-                            <input type="password" class="download-input" data-pw="naver" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('naver')">
+                            <input type="password" class="download-input" data-pw="naver" placeholder="��й�ȣ �Է�" onkeydown="if(event.key==='Enter')downloadWithPassword('naver')">
                             <button class="download-btn" onclick="downloadWithPassword('naver')">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                             </button>
                         </div>
-                        <p class="download-error" data-error="naver">비밀번호가 올바르지 않습니다.</p>
+                        <p class="download-error" data-error="naver">��й�ȣ�� �ùٸ��� �ʽ��ϴ�.</p>
                     </div>
                 </div>
-                <div class="download-card" data-product="orbit">
+                <div class="download-card" data-product="orbit" style="display:none !important">
                     <div class="download-icon"><span class="product-icon-lg">W</span></div>
                     <h3 class="download-title">Leaders Orbit</h3>
-                    <p class="download-version">워드프레스·블로그스팟 · Windows 64-bit</p>
+                    <p class="download-version">��������������α׽��� �� Windows 64-bit</p>
                     <div class="download-form">
                         <div class="download-input-group">
-                            <input type="password" class="download-input" data-pw="orbit" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('orbit')">
+                            <input type="password" class="download-input" data-pw="orbit" placeholder="��й�ȣ �Է�" onkeydown="if(event.key==='Enter')downloadWithPassword('orbit')">
                             <button class="download-btn" onclick="downloadWithPassword('orbit')">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                             </button>
                         </div>
-                        <p class="download-error" data-error="orbit">비밀번호가 올바르지 않습니다.</p>
+                        <p class="download-error" data-error="orbit">��й�ȣ�� �ùٸ��� �ʽ��ϴ�.</p>
                     </div>
                 </div>
-                <div class="download-card" data-product="tistory">
+                <div class="download-card" data-product="tistory" style="display:none !important">
                     <div class="download-icon"><span class="product-icon-lg">T</span></div>
                     <h3 class="download-title">Leaders Tistory</h3>
-                    <p class="download-version">티스토리 자동화 · Windows 64-bit</p>
+                    <p class="download-version">Ƽ���丮 �ڵ�ȭ �� Windows 64-bit</p>
                     <div class="download-form">
                         <div class="download-input-group">
-                            <input type="password" class="download-input" data-pw="tistory" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('tistory')">
+                            <input type="password" class="download-input" data-pw="tistory" placeholder="��й�ȣ �Է�" onkeydown="if(event.key==='Enter')downloadWithPassword('tistory')">
                             <button class="download-btn" onclick="downloadWithPassword('tistory')">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                             </button>
                         </div>
-                        <p class="download-error" data-error="tistory">비밀번호가 올바르지 않습니다.</p>
+                        <p class="download-error" data-error="tistory">��й�ȣ�� �ùٸ��� �ʽ��ϴ�.</p>
                     </div>
                 </div>
-                <div class="download-card" data-product="leword">
+                <div class="download-card" data-product="leword" style="display:none !important">
                     <div class="download-icon"><span class="product-icon-lg">L</span></div>
                     <h3 class="download-title">Leword</h3>
-                    <p class="download-version">AI 키워드 인텔리전스 · Windows 64-bit</p>
+                    <p class="download-version">AI Ű���� ���ڸ����� �� Windows 64-bit</p>
                     <div class="download-form">
                         <div class="download-input-group">
-                            <input type="password" class="download-input" data-pw="leword" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('leword')">
+                            <input type="password" class="download-input" data-pw="leword" placeholder="��й�ȣ �Է�" onkeydown="if(event.key==='Enter')downloadWithPassword('leword')">
                             <button class="download-btn" onclick="downloadWithPassword('leword')">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                             </button>
                         </div>
-                        <p class="download-error" data-error="leword">비밀번호가 올바르지 않습니다.</p>
+                        <p class="download-error" data-error="leword">��й�ȣ�� �ùٸ��� �ʽ��ϴ�.</p>
                     </div>
                 </div>
             </div>
@@ -153,18 +153,18 @@
         <div class="footer-inner">
             <div class="footer-brand"><img src="logo.png" alt="Leaders Pro" class="footer-logo"><span>Leaders Pro</span></div>
             <div class="footer-links">
-                <a href="terms.html">이용약관</a>
-                <a href="refund.html">환불정책</a>
-                <a href="privacy.html">개인정보처리방침</a>
-                <a href="lookup.html">주문 조회</a>
-                <a href="mailto:cd000242@gmail.com">고객 문의</a>
+                <a href="terms.html">�̿���</a>
+                <a href="refund.html">ȯ����å</a>
+                <a href="privacy.html">��������ó����ħ</a>
+                <a href="lookup.html">�ֹ� ��ȸ</a>
+                <a href="mailto:cd000242@gmail.com">��� ����</a>
             </div>
             <div class="footer-biz">
-                <p>상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802</p>
-                <p>주소: 경남 김해시 장유로334번길9</p>
-                <p>이메일: tjdgus24280@naver.com | 전화: 010-7545-1645</p>
+                <p>��ȣ: Leaders Pro | ��ǥ: �ڼ��� | ����ڵ�Ϲ�ȣ: 515-97-01802</p>
+                <p>�ּ�: �泲 ���ؽ� ������334����9</p>
+                <p>�̸���: tjdgus24280@naver.com | ��ȭ: 010-7545-1645</p>
             </div>
-            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+            <p class="footer-copy">�� 2026 Leaders Pro. All rights reserved.</p>
         </div>
     </footer>
 
@@ -192,7 +192,7 @@
                 errorEl.classList.remove('visible');
                 const url = getDownloadUrl(product);
                 const name = PRODUCT_NAMES[product] || product;
-                if (!url) { alert(`${name} 다운로드 파일이 아직 준비되지 않았습니다.\n관리자에게 문의해주세요.`); return; }
+                if (!url) { alert(`${name} �ٿ�ε� ������ ���� �غ���� �ʾҽ��ϴ�.\n�����ڿ��� �������ּ���.`); return; }
                 window.open(url, '_blank');
                 input.value = '';
             } else {
@@ -223,19 +223,19 @@
     <script>
     (function() { const container = document.getElementById('petalContainer'); if (!container) return; for (let i = 0; i < 30; i++) { const petal = document.createElement('div'); petal.className = 'petal'; const size = Math.random() * 14 + 8; petal.style.width = size + 'px'; petal.style.height = size + 'px'; petal.style.left = Math.random() * 100 + '%'; petal.style.animationDuration = (Math.random() * 8 + 7) + 's'; petal.style.animationDelay = (Math.random() * 10) + 's'; container.appendChild(petal); } })();
     </script>
-    <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" title="공식 유튜브 채널">▶</a>
-    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 카카오톡 문의">
+    <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" title="���� ��Ʃ�� ä��">��</a>
+    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 īī���� ����">
         <div class="kakao-float-pulse"></div>
-        <div class="kakao-float-icon">💬</div>
-        <span class="kakao-float-text">1:1 문의</span>
+        <div class="kakao-float-icon">??</div>
+        <span class="kakao-float-text">1:1 ����</span>
     </a>
 
 <!-- CHERRY BLOSSOM PETALS -->
 <div class="petal-container" id="petalContainer"></div>
 
 <!-- MUSIC TOGGLE -->
-<button class="music-toggle attention" id="musicToggle" title="🌸 봄 배경음악 켜기/끄기">🔇</button>
-<div class="music-hint" id="musicHint">🌸 클릭하면 봄 음악이 흘러요</div>
+<button class="music-toggle attention" id="musicToggle" title="?? �� ������� �ѱ�/���">??</button>
+<div class="music-hint" id="musicHint">?? Ŭ���ϸ� �� ������ �귯��</div>
 
 <script src="music.js"></script>
 </body>
