@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구독 관리 | Leaders Pro</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .sub-container { max-width: 520px; margin: 0 auto; padding: 140px 20px 60px; }
+        .sub-card { background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: 20px; padding: 40px 32px; backdrop-filter: blur(20px); }
+        .sub-title { font-size: 1.4rem; font-weight: 800; color: var(--text-primary); margin-bottom: 8px; text-align: center; }
+        .sub-desc { font-size: 0.9rem; color: var(--text-secondary); text-align: center; margin-bottom: 32px; line-height: 1.6; }
+        .sub-input { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 12px; color: var(--text-primary); font-size: 0.95rem; outline: none; margin-bottom: 16px; box-sizing: border-box; transition: border-color 0.3s; }
+        .sub-input:focus { border-color: var(--gold-primary); }
+        .sub-input::placeholder { color: var(--text-muted); }
+        .sub-label { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; display: block; }
+        .sub-status { padding: 16px; border-radius: 12px; margin-top: 20px; font-size: 0.9rem; line-height: 1.6; display: none; }
+        .sub-status.success { display: block; background: rgba(68,215,182,0.06); border: 1px solid rgba(68,215,182,0.2); color: var(--success); }
+        .sub-status.error { display: block; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.2); color: var(--error); }
+        .sub-status.info { display: block; background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.2); color: var(--gold-primary); }
+
+        .btn-check { width: 100%; padding: 16px; background: var(--gold-gradient); color: #0a0a0f; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; margin-top: 8px; }
+        .btn-check:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,168,76,0.4); }
+        .btn-check:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* 구독 상세 정보 카드 */
+        .sub-info-card { background: rgba(201,168,76,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: 16px; padding: 24px; margin-top: 24px; display: none; }
+        .sub-info-card.visible { display: block; }
+        .sub-info-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .sub-info-row:last-child { border-bottom: none; }
+        .sub-info-label { font-size: 0.85rem; color: var(--text-muted); }
+        .sub-info-value { font-size: 0.9rem; color: var(--text-primary); font-weight: 600; }
+        .sub-info-value.active { color: var(--success); }
+
+        /* ★ 구독 해지 섹션 — 찾기 어렵게 */
+        .cancel-section { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.03); }
+        .cancel-toggle { background: none; border: none; color: var(--text-muted); font-size: 0.75rem; cursor: pointer; opacity: 0.4; transition: opacity 0.3s; padding: 0; }
+        .cancel-toggle:hover { opacity: 0.6; }
+        .cancel-hidden { display: none; margin-top: 20px; }
+        .cancel-hidden.shown { display: block; }
+
+        /* 해지 방어 벽 (되돌리기 어렵게) */
+        .cancel-warning { background: rgba(239,68,68,0.04); border: 1px solid rgba(239,68,68,0.12); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .cancel-warning h4 { color: var(--error); font-size: 0.95rem; margin: 0 0 12px; font-weight: 700; }
+        .cancel-warning ul { margin: 0; padding: 0 0 0 16px; list-style: disc; }
+        .cancel-warning li { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.8; }
+        .cancel-warning li strong { color: rgba(239,68,68,0.8); }
+        .cancel-alternatives { background: rgba(68,215,182,0.04); border: 1px solid rgba(68,215,182,0.12); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .cancel-alternatives h4 { color: var(--success); font-size: 0.95rem; margin: 0 0 12px; font-weight: 700; }
+        .cancel-alternatives p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.6; margin: 0; }
+        .cancel-alternatives a { color: var(--gold-primary); text-decoration: underline; }
+
+        .cancel-confirm-area { margin-top: 20px; }
+        .cancel-confirm-area label { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 8px; margin-bottom: 12px; cursor: pointer; line-height: 1.5; }
+        .cancel-confirm-area input[type="checkbox"] { margin-top: 3px; accent-color: var(--error); }
+        .btn-cancel { width: 100%; padding: 14px; background: transparent; border: 1px solid rgba(239,68,68,0.2); border-radius: 12px; color: rgba(239,68,68,0.5); font-size: 0.85rem; font-weight: 500; cursor: not-allowed; opacity: 0.4; transition: all 0.3s; }
+        .btn-cancel.enabled { cursor: pointer; opacity: 1; color: var(--error); border-color: rgba(239,68,68,0.4); }
+        .btn-cancel.enabled:hover { background: rgba(239,68,68,0.06); }
+
+        .cancel-reason { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 10px; color: var(--text-primary); font-size: 0.85rem; resize: vertical; min-height: 60px; outline: none; box-sizing: border-box; margin-bottom: 12px; font-family: inherit; }
+        .cancel-reason::placeholder { color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    <nav class="navbar scrolled">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand"><img src="logo.png" alt="Leaders Pro" class="nav-logo"><span class="nav-brand-text">Leaders Pro</span></a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">홈</a>
+                <a href="pricing.html" class="nav-link">구독하기</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sub-container">
+        <div class="sub-card">
+            <h1 class="sub-title">�� 구독 관리</h1>
+            <p class="sub-desc">구독 상태를 확인하고 관리할 수 있습니다.<br>결제 시 사용한 이메일과 라이선스 코드를 입력해주세요.</p>
+
+            <label class="sub-label">이메일 주소</label>
+            <input type="email" class="sub-input" id="sub-email" placeholder="결제 시 입력한 이메일">
+
+            <label class="sub-label">라이선스 코드</label>
+            <input type="text" class="sub-input" id="sub-code" placeholder="XXXX-XXXX-XXXX-XXXX" style="text-transform: uppercase;">
+
+            <button class="btn-check" id="btn-lookup" onclick="lookupSubscription()">구독 상태 조회</button>
+
+            <div class="sub-status" id="sub-status"></div>
+
+            <!-- 구독 정보 카드 (조회 후 표시) -->
+            <div class="sub-info-card" id="sub-info-card">
+                <div class="sub-info-row"><span class="sub-info-label">상품</span><span class="sub-info-value" id="info-product">—</span></div>
+                <div class="sub-info-row"><span class="sub-info-label">결제 금액</span><span class="sub-info-value" id="info-amount">—</span></div>
+                <div class="sub-info-row"><span class="sub-info-label">다음 결제일</span><span class="sub-info-value" id="info-next-pay">—</span></div>
+                <div class="sub-info-row"><span class="sub-info-label">구독 상태</span><span class="sub-info-value active" id="info-status">—</span></div>
+            </div>
+
+            <!-- ★ 구독 해지 (찾기 어렵게) -->
+            <div class="cancel-section" id="cancel-section" style="display:none;">
+                <button class="cancel-toggle" onclick="toggleCancelArea()">구독 해지를 원하시나요?</button>
+                <div class="cancel-hidden" id="cancel-area">
+                    <div class="cancel-warning">
+                        <h4>⚠️ 구독 해지 시 다음 혜택을 잃게 됩니다</h4>
+                        <ul>
+                            <li><strong>AI 자동 블로그 발행</strong>이 중단됩니다</li>
+                            <li><strong>7종 AI 엔진</strong> 접근이 차단됩니다</li>
+                            <li>예약 발행, 쇼핑 커넥트 등 <strong>프리미엄 기능</strong>이 비활성화됩니다</li>
+                            <li>블로그 최적화 및 <strong>홈피드 노출 성능</strong>이 저하됩니다</li>
+                            <li>해지 후 재구독 시 <strong>현재 할인 혜택</strong>이 적용되지 않을 수 있습니다</li>
+                        </ul>
+                    </div>
+
+                    <div class="cancel-alternatives">
+                        <h4>💡 혹시 문제가 있으신가요?</h4>
+                        <p>사용 중 불편한 점이 있으시다면 해지 대신 1:1 상담을 통해 해결해드릴 수 있습니다.<br>
+                        <a href="https://open.kakao.com/o/sPcaslwh" target="_blank">→ 카카오톡 1:1 상담받기</a></p>
+                    </div>
+
+                    <label class="sub-label">해지 사유 (선택)</label>
+                    <textarea class="cancel-reason" id="cancel-reason" placeholder="개선할 점이 있다면 말씀해주세요..."></textarea>
+
+                    <div class="cancel-confirm-area">
+                        <label><input type="checkbox" id="cancel-check-1" onchange="validateCancel()"> 구독 해지 시 다음 결제일부터 서비스가 중단되며, 기존 라이선스 코드는 만료됩니다.</label>
+                        <label><input type="checkbox" id="cancel-check-2" onchange="validateCancel()"> 해지 후 재구독 시 현재 혜택이 적용되지 않을 수 있음을 이해합니다.</label>
+                        <button class="btn-cancel" id="btn-cancel" onclick="cancelSubscription()">구독 해지하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand"><img src="logo.png" alt="Leaders Pro" class="footer-logo"><span>Leaders Pro</span></div>
+            <div class="footer-biz">
+                <p>상호: Leaders Pro | 대표자: 박성현 | 사업자등록번호: 515-97-01802</p>
+                <p>주소: 충남 천안시 서북구 쌍용대로334번길9</p>
+                <p>고객문의: tjdgus24280@naver.com | 전화번호: 010-7545-1645</p>
+            </div>
+            <p class="footer-copy">&copy; 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const CONFIG = {
+            GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
+        };
+
+        let currentSubData = null;
+
+        async function lookupSubscription() {
+            const email = document.getElementById('sub-email').value.trim();
+            const code = document.getElementById('sub-code').value.trim().toUpperCase();
+            const btn = document.getElementById('btn-lookup');
+            const statusEl = document.getElementById('sub-status');
+            const infoCard = document.getElementById('sub-info-card');
+            const cancelSection = document.getElementById('cancel-section');
+
+            if (!email || !email.includes('@')) { showStatus('error', '올바른 이메일을 입력해주세요.'); return; }
+            if (!code || code.length < 10) { showStatus('error', '라이선스 코드를 입력해주세요.'); return; }
+
+            btn.disabled = true; btn.textContent = '조회 중...';
+            statusEl.className = 'sub-status'; statusEl.style.display = 'none';
+            infoCard.classList.remove('visible');
+            cancelSection.style.display = 'none';
+
+            try {
+                const result = await callGAS('lookup-subscription', { email, licenseCode: code });
+                btn.disabled = false; btn.textContent = '구독 상태 조회';
+
+                if (result.ok) {
+                    currentSubData = result;
+                    document.getElementById('info-product').textContent = result.productName || '—';
+                    document.getElementById('info-amount').textContent = (result.amount || 0).toLocaleString() + '원';
+                    document.getElementById('info-next-pay').textContent = (result.nextPaymentDate || '').split('T')[0] || '—';
+
+                    const statusLabel = document.getElementById('info-status');
+                    if (result.status === 'active') {
+                        statusLabel.textContent = '✅ 구독 중';
+                        statusLabel.style.color = 'var(--success)';
+                        cancelSection.style.display = 'block';
+                    } else if (result.status === 'cancelled') {
+                        statusLabel.textContent = '🔴 해지 예약됨';
+                        statusLabel.style.color = 'var(--error)';
+                    } else {
+                        statusLabel.textContent = '⚪ ' + result.status;
+                        statusLabel.style.color = 'var(--text-muted)';
+                    }
+
+                    infoCard.classList.add('visible');
+                    showStatus('success', '구독 정보를 성공적으로 조회했습니다.');
+                } else {
+                    showStatus('error', result.error || '구독 정보를 찾을 수 없습니다.');
+                }
+            } catch (err) {
+                btn.disabled = false; btn.textContent = '구독 상태 조회';
+                showStatus('error', '서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        }
+
+        function toggleCancelArea() {
+            document.getElementById('cancel-area').classList.toggle('shown');
+        }
+
+        function validateCancel() {
+            const c1 = document.getElementById('cancel-check-1').checked;
+            const c2 = document.getElementById('cancel-check-2').checked;
+            const btn = document.getElementById('btn-cancel');
+            if (c1 && c2) { btn.classList.add('enabled'); }
+            else { btn.classList.remove('enabled'); }
+        }
+
+        async function cancelSubscription() {
+            const btn = document.getElementById('btn-cancel');
+            if (!btn.classList.contains('enabled')) return;
+
+            if (!confirm('정말로 구독을 해지하시겠습니까?\n해지 후에는 다음 결제일부터 서비스가 중단됩니다.')) return;
+
+            const email = document.getElementById('sub-email').value.trim();
+            const code = document.getElementById('sub-code').value.trim().toUpperCase();
+            const reason = document.getElementById('cancel-reason').value.trim();
+
+            btn.textContent = '처리 중...'; btn.classList.remove('enabled');
+
+            try {
+                const response = await fetch(CONFIG.GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'cancel-subscription', email, licenseCode: code, reason })
+                });
+                const result = await response.json();
+
+                if (result.ok) {
+                    showStatus('info', result.message);
+                    document.getElementById('info-status').textContent = '�� 해지 예약됨';
+                    document.getElementById('info-status').style.color = 'var(--error)';
+                    document.getElementById('cancel-section').style.display = 'none';
+                } else {
+                    showStatus('error', result.error || '해지 처리에 실패했습니다.');
+                    btn.textContent = '구독 해지하기'; btn.classList.add('enabled');
+                }
+            } catch (err) {
+                showStatus('error', '서버 연결에 실패했습니다.');
+                btn.textContent = '구독 해지하기'; btn.classList.add('enabled');
+            }
+        }
+
+        function showStatus(type, message) {
+            const el = document.getElementById('sub-status');
+            el.className = 'sub-status ' + type;
+            el.textContent = message;
+        }
+
+        async function callGAS(action, params) {
+            return new Promise((resolve, reject) => {
+                const callbackName = '__subCallback_' + Date.now();
+                const timeoutId = setTimeout(() => { delete window[callbackName]; reject(new Error('TIMEOUT')); }, 15000);
+                window[callbackName] = function(data) { clearTimeout(timeoutId); delete window[callbackName]; resolve(data); };
+                const script = document.createElement('script');
+                const qs = Object.entries(params).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+                script.src = `${CONFIG.GAS_URL}?action=${action}&${qs}&callback=${callbackName}`;
+                script.onerror = () => { clearTimeout(timeoutId); delete window[callbackName]; reject(new Error('NETWORK')); };
+                document.head.appendChild(script);
+            });
+        }
+
+        // Particles
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas'); if (!canvas) return;
+            const ctx = canvas.getContext('2d'); let particles = [], w, h;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 2; } resize(); window.addEventListener('resize', resize);
+            class Particle { constructor() { this.reset(); } reset() { this.x = Math.random() * w; this.y = Math.random() * h; this.size = Math.random() * 2 + 0.5; this.speedY = -(Math.random() * 0.3 + 0.1); this.speedX = (Math.random() - 0.5) * 0.2; this.opacity = Math.random() * 0.5 + 0.1; this.gold = Math.random() > 0.3; } update() { this.y += this.speedY; this.x += this.speedX; if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; } } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.gold ? `rgba(201,168,76,${this.opacity})` : `rgba(255,255,255,${this.opacity*0.4})`; ctx.fill(); } }
+            for (let i = 0; i < 40; i++) particles.push(new Particle());
+            function animate() { ctx.clearRect(0, 0, w, h); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); } animate();
+        }
+
+        document.addEventListener('DOMContentLoaded', initParticles);
+    </script>
+</body>
+</html>
