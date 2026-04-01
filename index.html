@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaders Pro — 블로그 자동화의 끝판왕</title>
+    <meta name="description" content="매일 100건, 사람이 쓴 것처럼. 키워드만 넣으면 AI가 글·이미지·발행까지 자동으로. Leaders Pro 프리미엄 블로그 자동화.">
+    <meta property="og:title" content="Leaders Pro — 블로그 자동화의 끝판왕">
+    <meta property="og:description" content="매일 100건, 사람이 쓴 것처럼. 키워드만 넣으면 AI가 글·이미지·발행까지 자동으로.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.leaderspro.kr/">
+    <meta property="og:image" content="https://www.leaderspro.kr/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Leaders Pro — 블로그 자동화의 끝판왕">
+    <meta name="twitter:description" content="매일 100건, 사람이 쓴 것처럼. 키워드만 넣으면 끝.">
+    <meta name="twitter:image" content="https://www.leaderspro.kr/og-image.jpg">
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <link rel="apple-touch-icon" href="favicon.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+    <style>
+        /* ========== SPRING CHERRY BLOSSOM ========== */
+        .petal-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999; overflow: hidden;
+        }
+        .petal {
+            position: absolute; top: -60px;
+            width: 18px; height: 18px;
+            background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%);
+            border-radius: 50% 0 50% 50%;
+            opacity: 0;
+            animation: petalFall linear infinite;
+            filter: blur(0.5px);
+            box-shadow: 0 0 6px rgba(255,183,197,0.3);
+        }
+        .petal:nth-child(odd) {
+            background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%);
+            border-radius: 0 50% 50% 50%;
+        }
+        @keyframes petalFall {
+            0%   { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); }
+            10%  { opacity: 0.9; }
+            90%  { opacity: 0.6; }
+            100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); }
+        }
+
+        /* ========== MUSIC TOGGLE ========== */
+        .music-toggle {
+            position: fixed; bottom: 170px; right: 24px; z-index: 10000;
+            width: 52px; height: 52px; border-radius: 50%;
+            background: rgba(255,183,197,0.25); border: 1px solid rgba(255,183,197,0.5);
+            backdrop-filter: blur(12px); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(255,107,138,0.2);
+        }
+        .music-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255,183,197,0.4);
+            box-shadow: 0 6px 30px rgba(255,107,138,0.4);
+        }
+        .music-toggle.playing {
+            animation: musicPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(255,107,138,0.2); }
+            50% { box-shadow: 0 4px 30px rgba(255,107,138,0.6), 0 0 60px rgba(255,183,197,0.3); }
+        }
+        /* ========== MUSIC HINT TOOLTIP ========== */
+        .music-hint {
+            position: fixed; bottom: 108px; right: 84px; z-index: 10000;
+            background: rgba(255,183,197,0.92); color: #1a0a10;
+            padding: 10px 16px; border-radius: 12px;
+            font-size: 13px; font-weight: 600; white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(255,107,138,0.3);
+            animation: hintFadeIn 0.5s ease-out both, hintFadeOut 0.5s 6s ease-in both;
+            pointer-events: none;
+        }
+        .music-hint::after {
+            content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%);
+            border: 6px solid transparent; border-left-color: rgba(255,183,197,0.92);
+        }
+        @keyframes hintFadeIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes hintFadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+        .music-toggle.attention {
+            animation: bounceAttention 1s ease-in-out 3;
+        }
+        @keyframes bounceAttention {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(0.95); }
+            75% { transform: scale(1.1); }
+        }
+        @media (max-width: 768px) {
+            .music-toggle { bottom: 90px; right: 16px; width: 44px; height: 44px; font-size: 18px; }
+            .music-hint { bottom: 98px; right: 68px; font-size: 11px; padding: 8px 12px; }
+        }
+
+        /* ========== SPRING ACCENT OVERLAY ========== */
+        body::after {
+            content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 10% 5%, rgba(255,183,197,0.07) 0%, transparent 40%),
+                radial-gradient(ellipse at 90% 10%, rgba(255,218,233,0.05) 0%, transparent 35%),
+                radial-gradient(ellipse at 50% 95%, rgba(255,182,193,0.04) 0%, transparent 40%),
+                radial-gradient(ellipse at 75% 50%, rgba(255,192,203,0.03) 0%, transparent 30%),
+                url('spring-bg.png') center/cover no-repeat fixed;
+            pointer-events: none; z-index: 0;
+            opacity: 0.35;
+        }
+
+        /* ========== UNIFIED PRODUCT ICONS (Gold Gradient) ========== */
+        .product-icon-sm {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 22px; height: 22px; border-radius: 5px;
+            background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%);
+            color: #1a1a2e; font-weight: 800; font-size: 13px; font-family: 'Inter', sans-serif;
+            margin-right: 6px; vertical-align: middle; line-height: 1;
+        }
+        .product-icon-lg {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 48px; height: 48px; border-radius: 14px;
+            background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%);
+            color: #1a1a2e; font-weight: 900; font-size: 28px; font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 20px rgba(245,200,66,0.3);
+            line-height: 1;
+        }
+        /* keep old class for backward compat */
+        .n-icon-sm { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 5px; background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%); color: #1a1a2e; font-weight: 800; font-size: 13px; font-family: 'Inter', sans-serif; margin-right: 6px; vertical-align: middle; line-height: 1; }
+        .n-logo-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%); color: #1a1a2e; font-weight: 900; font-size: 28px; font-family: 'Inter', sans-serif; box-shadow: 0 4px 20px rgba(245,200,66,0.3); line-height: 1; }
+
+        /* ========== YOUTUBE FLOATING BUTTON ========== */
+        .youtube-float {
+            position: fixed; bottom: 30px; left: 24px; z-index: 10001;
+            display: flex; align-items: center; justify-content: center;
+            width: 52px; height: 52px; border-radius: 50%;
+            background: rgba(255, 0, 0, 0.85);
+            border: 1px solid rgba(255, 100, 100, 0.4);
+            backdrop-filter: blur(12px); text-decoration: none;
+            box-shadow: 0 4px 20px rgba(255,0,0,0.3);
+            transition: all 0.3s; font-size: 22px;
+        }
+        .youtube-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(255,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .youtube-float { bottom: 24px; left: 16px; width: 44px; height: 44px; font-size: 18px; }
+        }
+
+        /* ========== FLOATING KAKAO INQUIRY ========== */
+        .kakao-float {
+            position: fixed; bottom: 30px; right: 24px; z-index: 10001;
+            display: flex; align-items: center; gap: 10px;
+            padding: 14px 22px; border-radius: 50px;
+            background: rgba(60, 29, 0, 0.85);
+            border: 1px solid rgba(254, 229, 0, 0.4);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            cursor: grab; user-select: none; text-decoration: none;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(254,229,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Pretendard Variable', 'Inter', sans-serif;
+        }
+        .kakao-float:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(254,229,0,0.25);
+        }
+        .kakao-float:active { cursor: grabbing; }
+        .kakao-float-icon {
+            width: 28px; height: 28px;
+            background: #fee500; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; flex-shrink: 0;
+        }
+        .kakao-float-text {
+            color: #fee500; font-weight: 700; font-size: 14px;
+            white-space: nowrap; letter-spacing: -0.3px;
+        }
+        .kakao-float-pulse {
+            position: absolute; top: -3px; right: -3px;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: #ff3b5c;
+            animation: kakaoPulse 2s ease-in-out infinite;
+        }
+        @keyframes kakaoPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.6; }
+        }
+        @media (max-width: 768px) {
+            .kakao-float { bottom: 24px; right: 16px; padding: 12px 18px; }
+            .kakao-float-text { font-size: 13px; }
+            .music-toggle { bottom: 90px; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Particle Canvas Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
+                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품정보</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">구매</a>
+                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
+                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
+                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
+                <a href="lookup.html" class="nav-link">주문조회</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- HERO SECTION — 혜택 중심 카피 -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span>PREMIUM AUTOMATION</span>
+            </div>
+            <h1 class="hero-title">
+                매일 100건,<br>
+                <span class="gold-text">사람이 쓴 것처럼.</span>
+            </h1>
+            <p class="hero-subtitle">
+                키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로.<br>
+                블로그 10개를 혼자 운영하는 분들의 <strong>비밀 무기</strong>.
+            </p>
+            <div class="hero-cta-group">
+                <a href="pricing.html" class="hero-cta">
+                    <span>지금 자동화 시작하기</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+                <div class="hero-trust-micro">
+                    <div class="micro-avatars">
+                        <div class="micro-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">J</div>
+                        <div class="micro-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">K</div>
+                        <div class="micro-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">L</div>
+                    </div>
+                    <span class="micro-text">2,800+명이 사용 중</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3D Robot Section -->
+        <div class="hero-3d">
+            <div class="hero-3d-glow"></div>
+            <iframe
+                src="https://my.spline.design/nexbotrobotcharacterconcept-mQLqodza99cchehegYbwsdiu/"
+                frameborder="0" width="100%" height="100%"
+                allowfullscreen loading="lazy"
+                style="border:none; pointer-events:auto;"
+            ></iframe>
+        </div>
+    </section>
+
+    <!-- Trust Bar — 성과 데이터 -->
+    <section class="trust-bar">
+        <div class="trust-item">
+            <span class="trust-number" data-target="127000">0</span>
+            <span class="trust-label">누적 발행</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+            <span class="trust-number" data-target="2847">0</span>
+            <span class="trust-label">활성 사용자</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+            <span class="trust-number" data-target="99">0</span>
+            <span class="trust-label">가동률 %</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+            <span class="trust-number" data-target="15000">0</span>
+            <span class="trust-label">일일 자동 발행</span>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- QUICK NAV — 서브페이지 CTA 그리드 -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section class="section" id="explore">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">EXPLORE</span>
+                <h2 class="section-title">원하는 정보를 빠르게 확인하세요</h2>
+                <p class="section-desc">각 페이지에서 상세 정보를 확인할 수 있습니다</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto;">
+                <!-- 제품 소개 -->
+                <a href="products.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;" 
+                   onmouseenter="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.15)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)'; this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">🚀</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">제품 소개</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">Leaders Pro의 강력한 블로그 자동화 기능을<br>자세히 확인하세요</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">자세히 보기 →</span>
+                </a>
+
+                <!-- 가격 & 구매 -->
+                <a href="pricing.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; position: relative; overflow: hidden;"
+                   onmouseenter="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.25)';" 
+                   onmouseleave="this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg, var(--gold-primary), var(--gold-light)); color: #000; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 20px;">💳 결제</div>
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">💰</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">가격 & 구매</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">제품별 요금제 비교 및<br>토스페이먼츠 안전 결제</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">요금제 보기 →</span>
+                </a>
+
+                <!-- 사용자 후기 -->
+                <a href="reviews.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;"
+                   onmouseenter="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.15)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)'; this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">⭐</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">후기 & FAQ</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">실제 사용자들의 생생한 후기와<br>자주 묻는 질문 모음</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">후기 보기 →</span>
+                </a>
+
+                <!-- 커뮤니티 -->
+                <a href="community.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;"
+                   onmouseenter="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.15)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)'; this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">👥</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">커뮤니티</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">공지사항, 수익 인증,<br>활용 팁 확인</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">커뮤니티 →</span>
+                </a>
+
+                <!-- 다운로드 -->
+                <a href="download.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;"
+                   onmouseenter="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.15)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)'; this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">📥</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">다운로드</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">구매 후 비밀번호 입력으로<br>최신 버전 다운로드</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">다운로드 →</span>
+                </a>
+
+                <!-- 주문 조회 -->
+                <a href="lookup.html" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 36px 28px; backdrop-filter: blur(20px); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer;"
+                   onmouseenter="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 40px rgba(201,168,76,0.15)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)'; this.style.transform='none'; this.style.boxShadow='none';">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">🔍</div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">주문 조회</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">이메일 또는 주문번호로<br>구매 내역 확인</p>
+                    <span style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600;">조회하기 →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TESTIMONIALS HIGHLIGHT — 대표 후기 3건 -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section class="section" id="testimonials">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">TESTIMONIALS</span>
+                <h2 class="section-title">실제 사용자들의 이야기</h2>
+                <p class="section-desc">Leaders Pro를 경험한 분들의 생생한 후기</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto;">
+                <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 32px; backdrop-filter: blur(20px);">
+                    <div style="font-size: 2rem; color: var(--gold-primary); margin-bottom: 12px;">"</div>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">블로그 10개를 혼자 운영하는데, <strong style="color: var(--text-primary);">리더스 프로 없었으면 불가능</strong>했어요. 출근 전에 키워드만 세팅하면 퇴근할 때 50건이 올라가 있습니다.</p>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.85rem;">K</div>
+                        <div>
+                            <strong style="color: var(--text-primary); font-size: 0.85rem;">K 대표</strong>
+                            <div style="color: var(--text-muted); font-size: 0.75rem;">마케팅 에이전시 · 10개월 사용</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 32px; backdrop-filter: blur(20px);">
+                    <div style="font-size: 2rem; color: var(--gold-primary); margin-bottom: 12px;">"</div>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">쿠팡 파트너스 블로그를 4개 돌리고 있는데, 쇼핑 커넥트 기능으로 <strong style="color: var(--text-primary);">월 수익이 3배</strong> 뛰었어요. AI가 생성한 리뷰 글이 정말 자연스러워요.</p>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f093fb, #f5576c); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.85rem;">P</div>
+                        <div>
+                            <strong style="color: var(--text-primary); font-size: 0.85rem;">P님</strong>
+                            <div style="color: var(--text-muted); font-size: 0.75rem;">제휴 마케터 · 6개월 사용</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 32px; backdrop-filter: blur(20px);">
+                    <div style="font-size: 2rem; color: var(--gold-primary); margin-bottom: 12px;">"</div>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">글로벌 블로그 5개를 Leaders Orbit으로 운영 중입니다. <strong style="color: var(--text-primary);">애드센스 승인이 2주 만에</strong> 떨어졌고, 지금은 월 $400 이상 벌고 있어요.</p>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.85rem;">L</div>
+                        <div>
+                            <strong style="color: var(--text-primary); font-size: 0.85rem;">L님</strong>
+                            <div style="color: var(--text-muted); font-size: 0.75rem;">글로벌 블로거 · 8개월 사용</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="reviews.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); color: var(--gold-primary); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: all 0.3s;" 
+                   onmouseenter="this.style.borderColor='var(--border-gold)';" 
+                   onmouseleave="this.style.borderColor='var(--border-glass)';">
+                    더 많은 후기 보기 →
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+                <span>Leaders Pro</span>
+            </div>
+            <div class="footer-links">
+                <a href="terms.html">이용약관</a>
+                <a href="refund.html">환불정책</a>
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="lookup.html">주문 조회</a>
+                <a href="mailto:cd000242@gmail.com">고객 문의</a>
+            </div>
+            <div class="footer-biz">
+                <p>상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802</p>
+                <p>주소: 경남 김해시 장유로334번길9</p>
+                <p>이메일: tjdgus24280@naver.com | 전화: 010-7545-1645</p>
+            </div>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== Particles =====
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w, h;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight * 3;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * w;
+                    this.y = Math.random() * h;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedY = -(Math.random() * 0.3 + 0.1);
+                    this.speedX = (Math.random() - 0.5) * 0.2;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                    this.gold = Math.random() > 0.3;
+                }
+                update() {
+                    this.y += this.speedY;
+                    this.x += this.speedX;
+                    this.opacity += (Math.random() - 0.5) * 0.01;
+                    this.opacity = Math.max(0.05, Math.min(0.6, this.opacity));
+                    if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.gold
+                        ? `rgba(201, 168, 76, ${this.opacity})`
+                        : `rgba(255, 255, 255, ${this.opacity * 0.4})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // ===== Scroll Animations =====
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, i) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transitionDelay = `${i * 0.08}s`;
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in, .pricing-card, .product-showcase, .trust-item, .compact-card, .testimonial-card').forEach(el => observer.observe(el));
+        }
+
+        // ===== Counter Animation =====
+        function initCounters() {
+            const counters = document.querySelectorAll('.trust-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const target = parseInt(el.dataset.target);
+                        let current = 0;
+                        const step = Math.ceil(target / 60);
+                        const timer = setInterval(() => {
+                            current += step;
+                            if (current >= target) { current = target; clearInterval(timer); }
+                            el.textContent = current.toLocaleString();
+                        }, 30);
+                        observer.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+            counters.forEach(c => observer.observe(c));
+        }
+
+        // ===== Navbar Scroll =====
+        function initNavbar() {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                navbar.classList.toggle('scrolled', window.scrollY > 50);
+            });
+        }
+
+        // ===== Tilt Effect on Cards =====
+        function initTilt() {
+            document.querySelectorAll('.pricing-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+
+                    const glare = card.querySelector('.card-glare');
+                    if (glare) {
+                        glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(201,168,76,0.15), transparent 60%)`;
+                    }
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+
+                if (!card.querySelector('.card-glare')) {
+                    const glare = document.createElement('div');
+                    glare.className = 'card-glare';
+                    card.appendChild(glare);
+                }
+            });
+        }
+
+        // ===== FAQ Toggle =====
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+            // Close all others
+            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+        // ===== Mobile Menu =====
+        function toggleMobileMenu() {
+            const hamburger = document.getElementById('nav-hamburger');
+            const links = document.getElementById('nav-links');
+            hamburger.classList.toggle('active');
+            links.classList.toggle('mobile-open');
+        }
+        function closeMobileMenu() {
+            document.getElementById('nav-hamburger').classList.remove('active');
+            document.getElementById('nav-links').classList.remove('mobile-open');
+        }
+
+        // ===== Mobile 3D iframe optimization =====
+        function handleMobile3D() {
+            const hero3d = document.querySelector('.hero-3d');
+            if (!hero3d) return;
+            if (window.innerWidth <= 768) {
+                const iframe = hero3d.querySelector('iframe');
+                if (iframe) iframe.remove();
+            }
+        }
+
+        // ===== Download Functions =====
+        const PRODUCT_NAMES = {
+            naver: 'Better Life Naver',
+            orbit: 'Leaders Orbit',
+            tistory: 'Leaders Tistory',
+            leword: 'Leword'
+        };
+
+        function getDownloadUrl(product) {
+            // Default download URLs (GitHub Releases)
+            const defaults = {
+                naver: 'https://github.com/cd000242-sudo/naver/releases/download/v1.3.0/Better.Life.Naver.Setup.1.3.0.zip',
+                leword: 'https://github.com/cd000242-sudo/leword-app/releases/download/v1.0.5/LEWORD.Setup.1.0.5.zip',
+                orbit: '',
+                tistory: ''
+            };
+            // Admin overrides from localStorage
+            const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
+            const urls = saved.downloadUrls || {};
+            if (product && urls[product]) return urls[product];
+            if (product && defaults[product]) return defaults[product];
+            return saved.downloadUrl || '';
+        }
+
+        function downloadFree(product) {
+            // Scroll to download section
+            const downloadSection = document.getElementById('download');
+            if (downloadSection) {
+                downloadSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Focus on the password input for the specific product
+                setTimeout(() => {
+                    const input = document.querySelector(`.download-input[data-pw="${product}"]`);
+                    if (input) { input.focus(); input.placeholder = '비밀번호 입력 후 다운로드'; }
+                }, 600);
+            }
+        }
+
+        function downloadWithPassword(product) {
+            const input = document.querySelector(`.download-input[data-pw="${product}"]`);
+            const errorEl = document.querySelector(`.download-error[data-error="${product}"]`);
+            const pw = input.value.trim();
+
+            if (pw === '1645') {
+                errorEl.classList.remove('visible');
+                const url = getDownloadUrl(product);
+                const name = PRODUCT_NAMES[product] || product;
+                if (!url) {
+                    alert(`${name} 다운로드 파일이 아직 준비되지 않았습니다.\n관리자에게 문의해주세요.`);
+                    return;
+                }
+                window.open(url, '_blank');
+                input.value = '';
+            } else {
+                errorEl.classList.add('visible');
+                input.classList.add('shake');
+                setTimeout(() => { input.classList.remove('shake'); errorEl.classList.remove('visible'); }, 2000);
+            }
+        }
+
+        // ===== Apply Admin Panel Edits =====
+        function applySiteEdits() {
+            const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
+            if (!saved || Object.keys(saved).length === 0) return;
+
+            // Hero Title — 첫 줄 텍스트 교체 (gold-text span 구조 보존)
+            if (saved.heroTitle) {
+                const heroEl = document.querySelector('.hero-title');
+                if (heroEl) {
+                    const goldSpan = heroEl.querySelector('.gold-text');
+                    const goldText = goldSpan ? goldSpan.textContent : '';
+                    heroEl.innerHTML = saved.heroTitle + '<br><span class="gold-text">' + goldText + '</span>';
+                }
+            }
+            // Hero Benefit — gold-text span 내용 교체
+            if (saved.heroBenefit) {
+                const benefitEl = document.querySelector('.hero-title .gold-text');
+                if (benefitEl) benefitEl.textContent = saved.heroBenefit;
+            }
+            // Hero Description — .hero-subtitle
+            if (saved.heroDesc) {
+                const descEl = document.querySelector('.hero-subtitle');
+                if (descEl) descEl.textContent = saved.heroDesc;
+            }
+
+            // Notice Banner
+            if (saved.notice && saved.notice.trim()) {
+                let noticeBanner = document.getElementById('admin-notice-banner');
+                if (!noticeBanner) {
+                    noticeBanner = document.createElement('div');
+                    noticeBanner.id = 'admin-notice-banner';
+                    noticeBanner.style.cssText = 'background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:16px 24px;margin:0 auto 24px;max-width:800px;text-align:center;color:var(--gold);font-weight:600;font-size:0.95rem;';
+                    const hero = document.querySelector('.hero');
+                    if (hero && hero.nextElementSibling) {
+                        hero.nextElementSibling.prepend(noticeBanner);
+                    }
+                }
+                noticeBanner.textContent = '📢 ' + saved.notice;
+            }
+        }
+
+        // ===== Init =====
+        document.addEventListener('DOMContentLoaded', () => {
+            applySiteEdits();
+
+            initParticles();
+            initScrollAnimations();
+            initCounters();
+            initNavbar();
+            initTilt();
+            handleMobile3D();
+        });
+    </script>
+
+<!-- CHERRY BLOSSOM PETALS -->
+<div class="petal-container" id="petalContainer"></div>
+
+<!-- MUSIC TOGGLE -->
+<button class="music-toggle attention" id="musicToggle" title="🌸 봄 배경음악 켜기/끄기">🔇</button>
+<div class="music-hint" id="musicHint">🌸 클릭하면 봄 음악이 흘러요</div>
+
+<!-- ========== CHERRY BLOSSOM + YOUTUBE MUSIC ========== -->
+<script src="music.js"></script>
+
+<!-- FLOATING YOUTUBE BUTTON -->
+<a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" id="youtubeFloat" title="공식 유튜브 채널">
+    ▶
+</a>
+
+<!-- FLOATING KAKAO INQUIRY BUTTON -->
+<a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 카카오톡 문의">
+    <div class="kakao-float-pulse"></div>
+    <div class="kakao-float-icon">💬</div>
+    <span class="kakao-float-text">1:1 문의</span>
+</a>
+
+<script>
+// Draggable Kakao Float Button
+(function() {
+    const el = document.getElementById('kakaoFloat');
+    if (!el) return;
+    let isDragging = false, wasDragged = false;
+    let startX, startY, origX, origY;
+
+    function onStart(e) {
+        isDragging = true; wasDragged = false;
+        const touch = e.touches ? e.touches[0] : e;
+        startX = touch.clientX; startY = touch.clientY;
+        const rect = el.getBoundingClientRect();
+        origX = rect.left; origY = rect.top;
+        el.style.transition = 'none';
+        el.style.cursor = 'grabbing';
+        e.preventDefault();
+    }
+    function onMove(e) {
+        if (!isDragging) return;
+        const touch = e.touches ? e.touches[0] : e;
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+        if (Math.abs(dx) > 4 || Math.abs(dy) > 4) wasDragged = true;
+        const newX = Math.max(0, Math.min(window.innerWidth - el.offsetWidth, origX + dx));
+        const newY = Math.max(0, Math.min(window.innerHeight - el.offsetHeight, origY + dy));
+        el.style.left = newX + 'px'; el.style.top = newY + 'px';
+        el.style.right = 'auto'; el.style.bottom = 'auto';
+    }
+    function onEnd() {
+        isDragging = false;
+        el.style.transition = 'transform 0.2s, box-shadow 0.2s';
+        el.style.cursor = 'grab';
+    }
+
+    el.addEventListener('mousedown', onStart);
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onEnd);
+    el.addEventListener('touchstart', onStart, { passive: false });
+    document.addEventListener('touchmove', onMove, { passive: false });
+    document.addEventListener('touchend', onEnd);
+
+    el.addEventListener('click', function(e) {
+        if (wasDragged) { e.preventDefault(); e.stopPropagation(); }
+    });
+})();
+</script>
+
+<!-- Unique Visitor Tracking (shared with admin panel via localStorage) -->
+<script>
+(function() {
+    // Skip if admin session is active (관리자 필터링)
+    if (sessionStorage.getItem('lp_admin_logged_in')) return;
+
+    const today = new Date().toISOString().slice(0, 10);
+    const key = 'lp_traffic_' + today;
+
+    // Generate or retrieve persistent visitor ID
+    let visitorId = localStorage.getItem('lp_visitor_id');
+    if (!visitorId) {
+        visitorId = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('lp_visitor_id', visitorId);
+    }
+
+    // Check if already counted today (session-level dedup)
+    const sessionKey = 'lp_counted_' + today;
+    if (sessionStorage.getItem(sessionKey)) return;
+
+    // Load traffic data
+    const data = JSON.parse(localStorage.getItem(key) || '{"views":0,"unique":[]}');
+
+    // Only count if this visitor ID hasn't been counted today
+    if (!data.unique.includes(visitorId)) {
+        data.unique.push(visitorId);
+        data.views = data.unique.length; // views = unique count
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    // Mark as counted for this session
+    sessionStorage.setItem(sessionKey, '1');
+})();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 실패 ? Leaders Pro</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg"><text y='.9em' font-size='90'>??</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">홈</a>
+                <a href="lookup.html" class="nav-link">주문조회</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="lookup-container" style="padding-top: 120px;">
+        <div class="error-card" style="margin: 0; max-width: none;">
+            <div class="error-icon">??</div>
+            <div class="error-title" id="error-title">결제가 완료되지 않았습니다</div>
+            <div class="error-message" id="error-message"></div>
+            <a href="index.html" class="btn-retry">
+                ?? 다시 시도하기
+            </a>
+            <p style="margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);">
+                문제가 지속되면 <a href="mailto:cd000242@gmail.com" style="color: var(--gold-primary);">cd000242@gmail.com</a>으로 문의해주세요.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+                <span>Leaders Pro</span>
+            </div>
+            <div class="footer-biz">
+                <p>상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802</p>
+                <p>주소: 경남 김해시 장유로334번길9</p>
+                <p>이메일: tjdgus24280@naver.com | 전화: 010-7545-1645</p>
+            </div>
+            <p class="footer-copy">ⓒ 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Particles
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w, h;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 2; }
+            resize(); window.addEventListener('resize', resize);
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * w; this.y = Math.random() * h;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedY = -(Math.random() * 0.3 + 0.1);
+                    this.speedX = (Math.random() - 0.5) * 0.2;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                    this.gold = Math.random() > 0.3;
+                }
+                update() {
+                    this.y += this.speedY; this.x += this.speedX;
+                    this.opacity += (Math.random() - 0.5) * 0.01;
+                    this.opacity = Math.max(0.05, Math.min(0.6, this.opacity));
+                    if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.gold
+                        ? `rgba(201, 168, 76, ${this.opacity})`
+                        : `rgba(255, 255, 255, ${this.opacity * 0.4})`;
+                    ctx.fill();
+                }
+            }
+            for (let i = 0; i < 40; i++) particles.push(new Particle());
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Parse error from URL
+        document.addEventListener('DOMContentLoaded', () => {
+            initParticles();
+            const params = new URLSearchParams(window.location.search);
+            const code = params.get('code') || '';
+            const message = params.get('message') || '결제가 취소되었거나 오류가 발생했습니다.';
+
+            document.getElementById('error-message').textContent = message;
+            if (code) {
+                document.getElementById('error-title').textContent = `결제 실패 (${code})`;
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>���� Ȯ�� ��... ? Leaders Pro</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg"><text y='.9em' font-size='90'>??</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Ȩ</a>
+                <a href="lookup.html" class="nav-link">�ֹ���ȸ</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="lookup-container" style="padding-top: 120px; max-width: 600px;">
+        <!-- Phase 1: �ε� -->
+        <div id="loading-section" class="loading-section">
+            <div class="loading-spinner-lg"></div>
+            <div class="loading-text">������ Ȯ���ϰ� �ֽ��ϴ�</div>
+            <div class="loading-subtext">��ø� ��ٷ��ּ���... �ڵ尡 �� �߱޵˴ϴ�.</div>
+        </div>
+
+        <!-- Phase 2a: �ڵ� ǥ�� (����) -->
+        <div id="code-section" class="hidden">
+            <div class="code-card">
+                <div class="success-icon">?</div>
+                <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 4px;">������ �Ϸ�Ǿ����ϴ�!</h2>
+                <p id="product-name" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 28px;">
+                </p>
+
+                <div class="code-label">���̼��� �ڵ�</div>
+                <div class="code-display" id="license-code"></div>
+
+                <button class="btn-copy" id="btn-copy" onclick="copyCode()">
+                    ?? �ڵ� �����ϱ�
+                </button>
+
+                <div
+                    style="background: rgba(68, 215, 182, 0.06); border: 1px solid rgba(68, 215, 182, 0.15); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
+                    <p style="font-size: 0.85rem; color: var(--success); font-weight: 600; margin-bottom: 6px;">??
+                        ��� ���</p>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+                        Leaders Pro ���� �����ϰ� ���̼��� ��� ȭ�鿡��<br>
+                        �� �ڵ带 �Է��ϸ� �ٷ� ����� �� �ֽ��ϴ�.
+                    </p>
+                </div>
+
+                <!-- �̸��� �߼� ���� -->
+                <div id="email-sent-notice" class="hidden"
+                    style="background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
+                    <p style="font-size: 0.85rem; color: var(--gold-primary); font-weight: 600; margin-bottom: 4px;">?? �̸��� �߼� �Ϸ�</p>
+                    <p id="email-sent-address" style="font-size: 0.8rem; color: var(--text-secondary);">
+                        �Է��Ͻ� �̸��Ϸ� ���̼��� �ڵ尡 �߼۵Ǿ����ϴ�.
+                    </p>
+                </div>
+
+                <!-- �̸��� ��� (�̸����� ���� ����) -->
+                <div class="email-backup" id="email-backup-section">
+                    <div class="email-backup-label">?? �̸��Ϸ� �ڵ� ��� �ޱ� (����)</div>
+                    <div class="email-input-group">
+                        <input type="email" class="email-input" id="backup-email" placeholder="�̸��� �ּ� �Է�">
+                        <button class="btn-send-email" id="btn-send-email" onclick="sendBackupEmail()">�߼�</button>
+                    </div>
+                    <div class="email-status" id="email-status"></div>
+                </div>
+
+                <!-- ? ���� Ŀ�´�Ƽ ���� -->
+                <div
+                    style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(201,168,76,0.02)); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius-sm);">
+                    <p style="font-size: 0.9rem; font-weight: 700; color: var(--gold-primary); margin-bottom: 6px;">?? Pro Ŀ�´�Ƽ��
+                        ���� ���� ȯ���մϴ�!</p>
+                    <p
+                        style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+                        �Ʒ� ��ư���� ���� ����� ���� ����濡 �����ϼ���.<br>
+                        ���� ��й�ȣ: <strong
+                            style="color: #fff; background: rgba(201,168,76,0.3); padding: 2px 8px; border-radius: 4px;">1645</strong>
+                    </p>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="https://open.kakao.com/o/g4NRKlwh" target="_blank" rel="noreferrer"
+                            style="display: block; padding: 14px; text-align: center; border-radius: 12px; background: var(--gold-gradient); color: #0a0a0f; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 15px rgba(201,168,76,0.3);"
+                            onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(201,168,76,0.4)'"
+                            onmouseout="this.style.transform='';this.style.boxShadow='0 4px 15px rgba(201,168,76,0.3)'">
+                            ?? Pro ���� Ŀ�´�Ƽ �����ϱ�
+                        </a>
+                        <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noreferrer"
+                            style="display: block; padding: 12px; text-align: center; border-radius: 10px; background: linear-gradient(135deg, #FEE500, #F5D100); color: #3C1E1E; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: all 0.2s;"
+                            onmouseover="this.style.transform='translateY(-1px)'"
+                            onmouseout="this.style.transform=''">
+                            ?? 1:1 īī���� ����
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 2b: ����/Ÿ�Ӿƿ� -->
+        <div id="error-section" class="hidden">
+            <div class="error-card" style="margin: 0; max-width: none;">
+                <div class="error-icon">??</div>
+                <div class="error-title" id="error-title">���� Ȯ�ο� �����߽��ϴ�</div>
+                <div class="error-message" id="error-message"></div>
+                <button class="btn-retry" id="btn-check-order" onclick="checkOrder()" style="margin-bottom: 12px;">
+                    ?? �ֹ� Ȯ���ϱ�
+                </button>
+                <br>
+                <a href="index.html" class="btn-retry"
+                    style="background: var(--bg-glass); border: 1px solid var(--border-glass); font-size: 0.9rem; padding: 12px 24px; color: var(--text-primary);">
+                    �� ó������ ���ư���
+                </a>
+                <p style="margin-top: 16px; font-size: 0.8rem; color: var(--text-muted);">
+                    ����: <a href="mailto:cd000242@gmail.com"
+                        style="color: var(--gold-primary);">cd000242@gmail.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+                <span>Leaders Pro</span>
+            </div>
+            <div class="footer-biz">
+                <p>��ȣ: Leaders Pro | ��ǥ: �ڼ��� | ����ڵ�Ϲ�ȣ: 515-97-01802</p>
+                <p>�ּ�: �泲 ���ؽ� ������334����9</p>
+                <p>�̸���: tjdgus24280@naver.com | ��ȭ: 010-7545-1645</p>
+            </div>
+            <p class="footer-copy">�� 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== ���� =====
+        const CONFIG = {
+            GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
+            TIMEOUT_MS: 20000,
+        };
+
+        let currentCode = null;
+        let currentProduct = null;
+        let currentOrderId = null;
+        let buyerEmail = null;
+
+        // ===== URL �Ķ���� �Ľ� =====
+        function getParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                authKey: params.get('authKey'),
+                customerKey: params.get('customerKey'),
+                paymentKey: params.get('paymentKey'),
+                orderId: params.get('orderId'),
+                amount: params.get('amount'),
+                email: params.get('email'),
+                product: params.get('product'),
+            };
+        }
+
+        // ===== JSONP ȣ�� =====
+        function callGASviaJSONP(params) {
+            return new Promise((resolve, reject) => {
+                const timeoutId = setTimeout(() => {
+                    cleanup();
+                    reject(new Error('TIMEOUT'));
+                }, CONFIG.TIMEOUT_MS);
+
+                const callbackName = '__tossCallback_' + Date.now();
+
+                window[callbackName] = function (data) {
+                    clearTimeout(timeoutId);
+                    cleanup();
+                    resolve(data);
+                };
+
+                function cleanup() {
+                    delete window[callbackName];
+                    const script = document.getElementById('jsonp-script');
+                    if (script) script.remove();
+                }
+
+                const script = document.createElement('script');
+                script.id = 'jsonp-script';
+                script.src = `${CONFIG.GAS_URL}?action=register-billing` +
+                    `&authKey=${encodeURIComponent(params.authKey || params.paymentKey)}` +
+                    `&customerKey=${encodeURIComponent(params.customerKey || '')}` +
+                    `&orderId=${encodeURIComponent(params.orderId)}` +
+                    `&amount=${encodeURIComponent(params.amount)}` +
+                    (params.email ? `&email=${encodeURIComponent(params.email)}` : '') +
+                    (params.product ? `&product=${encodeURIComponent(params.product)}` : '') +
+                    `&callback=${callbackName}`;
+
+                script.onerror = function () {
+                    clearTimeout(timeoutId);
+                    cleanup();
+                    reject(new Error('NETWORK_ERROR'));
+                };
+
+                document.head.appendChild(script);
+            });
+        }
+
+        // ===== �ڵ� ǥ�� =====
+        function showCode(code, product) {
+            currentCode = code;
+            currentProduct = product;
+
+            document.getElementById('license-code').textContent = code;
+            document.getElementById('product-name').textContent = product;
+
+            document.getElementById('loading-section').classList.add('hidden');
+            document.getElementById('error-section').classList.add('hidden');
+            document.getElementById('code-section').classList.remove('hidden');
+
+            document.title = '���̼��� �߱� �Ϸ� ? Leaders Pro';
+
+            // �̸����� ������ �ڵ� �߼�
+            if (buyerEmail) {
+                autoSendEmail(buyerEmail, code, product);
+            }
+        }
+
+        // ===== ���� ǥ�� =====
+        function showError(message, title) {
+            document.getElementById('error-title').textContent = title || '���� Ȯ�ο� �����߽��ϴ�';
+            document.getElementById('error-message').textContent = message;
+
+            document.getElementById('loading-section').classList.add('hidden');
+            document.getElementById('code-section').classList.add('hidden');
+            document.getElementById('error-section').classList.remove('hidden');
+        }
+
+        // ===== �ڵ� ���� =====
+        async function copyCode() {
+            if (!currentCode) return;
+            try {
+                await navigator.clipboard.writeText(currentCode);
+                const btn = document.getElementById('btn-copy');
+                btn.classList.add('copied');
+                btn.innerHTML = '? ���� �Ϸ�!';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '?? �ڵ� �����ϱ�';
+                }, 2000);
+            } catch (err) {
+                const textarea = document.createElement('textarea');
+                textarea.value = currentCode;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+
+                const btn = document.getElementById('btn-copy');
+                btn.classList.add('copied');
+                btn.innerHTML = '? ���� �Ϸ�!';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '?? �ڵ� �����ϱ�';
+                }, 2000);
+            }
+        }
+
+        // ===== �̸��� �ڵ� �߼� =====
+        async function autoSendEmail(email, code, product) {
+            try {
+                const callbackName = '__autoEmailCallback_' + Date.now();
+
+                await new Promise((resolve, reject) => {
+                    const timeoutId = setTimeout(() => {
+                        delete window[callbackName];
+                        reject(new Error('TIMEOUT'));
+                    }, 15000);
+
+                    window[callbackName] = function (data) {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        resolve(data);
+                    };
+
+                    const script = document.createElement('script');
+                    script.src = `${CONFIG.GAS_URL}?action=send-code-email` +
+                        `&email=${encodeURIComponent(email)}` +
+                        `&code=${encodeURIComponent(code)}` +
+                        `&product=${encodeURIComponent(product)}` +
+                        `&callback=${callbackName}`;
+                    script.onerror = () => {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        reject(new Error('NETWORK'));
+                    };
+                    document.head.appendChild(script);
+                });
+
+                // �̸��� �߼� ����: UI ������Ʈ
+                document.getElementById('email-sent-notice').classList.remove('hidden');
+                document.getElementById('email-sent-address').textContent =
+                    `${email}�� ���̼��� �ڵ尡 �߼۵Ǿ����ϴ�.`;
+                document.getElementById('email-backup-section').classList.add('hidden');
+            } catch (err) {
+                // �ڵ� �߼� ����: ���� ��� ���� ����
+                console.log('�̸��� �ڵ� �߼� ����, ���� ��� UI ǥ��');
+            }
+        }
+
+        // ===== �̸��� ��� �߼� (����) =====
+        async function sendBackupEmail() {
+            const emailInput = document.getElementById('backup-email');
+            const btn = document.getElementById('btn-send-email');
+            const status = document.getElementById('email-status');
+            const email = emailInput.value.trim();
+
+            if (!email || !email.includes('@')) {
+                status.textContent = '�ùٸ� �̸��� �ּҸ� �Է����ּ���.';
+                status.style.color = 'var(--error)';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = '�߼� ��...';
+            status.textContent = '';
+
+            try {
+                const callbackName = '__emailCallback_' + Date.now();
+
+                await new Promise((resolve, reject) => {
+                    const timeoutId = setTimeout(() => {
+                        delete window[callbackName];
+                        reject(new Error('TIMEOUT'));
+                    }, 15000);
+
+                    window[callbackName] = function (data) {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        resolve(data);
+                    };
+
+                    const script = document.createElement('script');
+                    script.src = `${CONFIG.GAS_URL}?action=send-code-email` +
+                        `&email=${encodeURIComponent(email)}` +
+                        `&code=${encodeURIComponent(currentCode)}` +
+                        `&product=${encodeURIComponent(currentProduct)}` +
+                        `&callback=${callbackName}`;
+                    script.onerror = () => {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        reject(new Error('NETWORK'));
+                    };
+                    document.head.appendChild(script);
+                });
+
+                btn.classList.add('sent');
+                btn.textContent = '�߼� �Ϸ� ?';
+                status.textContent = `${email}�� �ڵ尡 �߼۵Ǿ����ϴ�.`;
+                status.style.color = 'var(--success)';
+            } catch (err) {
+                btn.disabled = false;
+                btn.textContent = '�߼�';
+                status.textContent = '�߼ۿ� �����߽��ϴ�. �ٽ� �õ����ּ���.';
+                status.style.color = 'var(--error)';
+            }
+        }
+
+        // ===== �ֹ� Ȯ�� (Ÿ�Ӿƿ� ����) =====
+        async function checkOrder() {
+            if (!currentOrderId) {
+                showError('�ֹ� ������ ã�� �� �����ϴ�.', '�ֹ� Ȯ�� ����');
+                return;
+            }
+
+            document.getElementById('error-section').classList.add('hidden');
+            document.getElementById('loading-section').classList.remove('hidden');
+            document.querySelector('.loading-text').textContent = '�ֹ��� Ȯ���ϰ� �ֽ��ϴ�...';
+
+            try {
+                const callbackName = '__checkCallback_' + Date.now();
+
+                const result = await new Promise((resolve, reject) => {
+                    const timeoutId = setTimeout(() => {
+                        delete window[callbackName];
+                        reject(new Error('TIMEOUT'));
+                    }, 15000);
+
+                    window[callbackName] = function (data) {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        resolve(data);
+                    };
+
+                    const script = document.createElement('script');
+                    script.src = `${CONFIG.GAS_URL}?action=check-order` +
+                        `&orderId=${encodeURIComponent(currentOrderId)}` +
+                        `&callback=${callbackName}`;
+                    script.onerror = () => {
+                        clearTimeout(timeoutId);
+                        delete window[callbackName];
+                        reject(new Error('NETWORK'));
+                    };
+                    document.head.appendChild(script);
+                });
+
+                if (result.ok && result.code) {
+                    showCode(result.code, result.product);
+                } else {
+                    showError(result.error || '�ֹ��� ã�� �� �����ϴ�. ��� ������ �������ּ���.', '�ֹ� Ȯ�� ����');
+                }
+            } catch (err) {
+                showError('���� ���ῡ �����߽��ϴ�. ��� �� �ٽ� �õ����ּ���.', '���� ����');
+            }
+        }
+
+        // ===== Particles (same as main page) =====
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w, h;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight * 2;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * w;
+                    this.y = Math.random() * h;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedY = -(Math.random() * 0.3 + 0.1);
+                    this.speedX = (Math.random() - 0.5) * 0.2;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                    this.gold = Math.random() > 0.3;
+                }
+                update() {
+                    this.y += this.speedY;
+                    this.x += this.speedX;
+                    this.opacity += (Math.random() - 0.5) * 0.01;
+                    this.opacity = Math.max(0.05, Math.min(0.6, this.opacity));
+                    if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.gold
+                        ? `rgba(201, 168, 76, ${this.opacity})`
+                        : `rgba(255, 255, 255, ${this.opacity * 0.4})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < 50; i++) particles.push(new Particle());
+
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // ===== ���� ���� =====
+        async function main() {
+            const params = getParams();
+
+            if ((!params.authKey && !params.paymentKey) || !params.amount) {
+                showError('���� ������ �ùٸ��� �ʽ��ϴ�. ó������ �ٽ� �õ����ּ���.', '�߸��� ����');
+                document.getElementById('btn-check-order').style.display = 'none';
+                return;
+            }
+
+            currentOrderId = params.orderId;
+            buyerEmail = params.email || null;
+
+            try {
+                const result = await callGASviaJSONP(params);
+
+                if (result.ok && result.code) {
+                    showCode(result.code, result.product);
+                } else {
+                    showError(result.error || '���� ó�� �� ������ �߻��߽��ϴ�.', '���� Ȯ�� ����');
+                }
+            } catch (err) {
+                if (err.message === 'TIMEOUT') {
+                    showError(
+                        '���� ������ �����ǰ� �ֽ��ϴ�. ������ ���� ó���Ǿ��� �� �ֽ��ϴ�. �Ʒ� ��ư�� ���� �ֹ��� Ȯ���غ�����.',
+                        '���� ����'
+                    );
+                } else {
+                    showError('���� ���ῡ �����߽��ϴ�. �Ʒ� ��ư�� ���� �ֹ��� Ȯ���غ�����.', '���� ����');
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initParticles();
+            main();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>�ٿ�ε� ? Leaders Pro</title>
+    <meta name="description" content="Leaders Pro ���α׷��� �ٿ�ε��ϼ���. Leaders Pro - AI 블로그 자동화 솔루션">
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
+        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
+        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
+        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 10% 5%, rgba(255,183,197,0.07) 0%, transparent 40%), radial-gradient(ellipse at 90% 10%, rgba(255,218,233,0.05) 0%, transparent 35%), url('spring-bg.png') center/cover no-repeat fixed; pointer-events: none; z-index: 0; opacity: 0.35; }
+        .product-icon-lg { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #f5c842 0%, #d4a012 100%); color: #1a1a2e; font-weight: 900; font-size: 28px; font-family: 'Inter', sans-serif; box-shadow: 0 4px 20px rgba(245,200,66,0.3); line-height: 1; }
+        .kakao-float { position: fixed; bottom: 30px; right: 24px; z-index: 10001; display: flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 50px; background: rgba(60, 29, 0, 0.85); border: 1px solid rgba(254, 229, 0, 0.4); backdrop-filter: blur(16px); cursor: grab; user-select: none; text-decoration: none; box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(254,229,0,0.15); transition: transform 0.2s, box-shadow 0.2s; font-family: 'Pretendard Variable', 'Inter', sans-serif; }
+        .kakao-float:hover { transform: scale(1.05); }
+        .kakao-float-icon { width: 28px; height: 28px; background: #fee500; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        .kakao-float-text { color: #fee500; font-weight: 700; font-size: 14px; white-space: nowrap; }
+        .kakao-float-pulse { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: #ff3b5c; animation: kakaoPulse 2s ease-in-out infinite; }
+        @keyframes kakaoPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+        .youtube-float { position: fixed; bottom: 30px; left: 24px; z-index: 10001; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 0, 0, 0.85); border: 1px solid rgba(255, 100, 100, 0.4); backdrop-filter: blur(12px); text-decoration: none; box-shadow: 0 4px 20px rgba(255,0,0,0.3); transition: all 0.3s; font-size: 22px; }
+        .youtube-float:hover { transform: scale(1.1); }
+        @media (max-width: 768px) {
+            .kakao-float { bottom: 24px; right: 16px; padding: 12px 18px; }
+            .youtube-float { bottom: 24px; left: 16px; width: 44px; height: 44px; font-size: 18px; }
+        }
+    </style>
+
+    <style>
+        /* CHERRY BLOSSOM */
+        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
+        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
+        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
+        /* MUSIC TOGGLE */
+        .music-toggle { position: fixed; bottom: 170px; right: 24px; z-index: 10000; width: 52px; height: 52px; border-radius: 50%; background: rgba(255,183,197,0.25); border: 1px solid rgba(255,183,197,0.5); backdrop-filter: blur(12px); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(255,107,138,0.2); }
+        .music-toggle:hover { transform: scale(1.1); background: rgba(255,183,197,0.4); box-shadow: 0 6px 30px rgba(255,107,138,0.4); }
+        .music-toggle.playing { animation: musicPulse 1.5s ease-in-out infinite; }
+        @keyframes musicPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(255,107,138,0.2); } 50% { box-shadow: 0 4px 30px rgba(255,107,138,0.6), 0 0 60px rgba(255,183,197,0.3); } }
+        .music-hint { position: fixed; bottom: 108px; right: 84px; z-index: 10000; background: rgba(255,183,197,0.92); color: #1a0a10; padding: 10px 16px; border-radius: 12px; font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 20px rgba(255,107,138,0.3); animation: hintFadeIn 0.5s ease-out both, hintFadeOut 0.5s 6s ease-in both; pointer-events: none; }
+        .music-hint::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-left-color: rgba(255,183,197,0.92); }
+        @keyframes hintFadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes hintFadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
+        .music-toggle.attention { animation: bounceAttention 1s ease-in-out 3; }
+        @keyframes bounceAttention { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        @media (max-width: 768px) { .music-toggle { bottom: 90px; } }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="�޴� ����" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">Ȩ</a>
+                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">��ǰ����</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">����</a>
+                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">�ı�</a>
+                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">Ŀ�´�Ƽ</a>
+                <a href="download.html" class="nav-link active" onclick="closeMobileMenu()">�ٿ�ε�</a>
+                <a href="lookup.html" class="nav-link">�ֹ���ȸ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ??? DOWNLOAD SECTION ??? -->
+    <section class="section section-dark" id="download" style="padding-top: 120px;">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">DOWNLOAD</span>
+                <h2 class="section-title">���α׷� �ٿ�ε�</h2>
+                <p class="section-desc">��й�ȣ�� �Է��ϸ� �ֽ� ������ �ٿ�ε��� �� �ֽ��ϴ�.</p>
+            </div>
+
+            <div class="download-grid">
+                <div class="download-card" data-product="naver">
+                    <div class="download-icon"><span class="product-icon-lg">N</span></div>
+                    <h3 class="download-title">Better Life Naver</h3>
+                    <p class="download-version">���̹� ��α� �ڵ�ȭ �� Windows 64-bit</p>
+                    <div class="download-form">
+                        <div class="download-input-group">
+                            <input type="password" class="download-input" data-pw="naver" placeholder="��й�ȣ �Է�" onkeydown="if(event.key==='Enter')downloadWithPassword('naver')">
+                            <button class="download-btn" onclick="downloadWithPassword('naver')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            </button>
+                        </div>
+                        <p class="download-error" data-error="naver">��й�ȣ�� �ùٸ��� �ʽ��ϴ�.</p>
+                    </div>
+                </div>
+                <div class="download-card" data-product="orbit" style="display:none !important">
+                    <div class="download-icon"><span class="product-icon-lg">W</span></div>
+                    <h3 class="download-title">Leaders Orbit</h3>
+                    <p class="download-version">��������������α׽��� �� Windows 64-bit</p>
+                    <div class="download-form">
+                        <div class="download-input-group">
+                            <input type="password" class="download-input" data-pw="orbit" placeholder="��й�ȣ �Է�" onkeydown="if(event.key==='Enter')downloadWithPassword('orbit')">
+                            <button class="download-btn" onclick="downloadWithPassword('orbit')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            </button>
+                        </div>
+                        <p class="download-error" data-error="orbit">��й�ȣ�� �ùٸ��� �ʽ��ϴ�.</p>
+                    </div>
+                </div>
+                <div class="download-card" data-product="tistory" style="display:none !important">
+                    <div class="download-icon"><span class="product-icon-lg">T</span></div>
+                    <h3 class="download-title">Leaders Tistory</h3>
+                    <p class="download-version">Ƽ���丮 �ڵ�ȭ �� Windows 64-bit</p>
+                    <div class="download-form">
+                        <div class="download-input-group">
+                            <input type="password" class="download-input" data-pw="tistory" placeholder="��й�ȣ �Է�" onkeydown="if(event.key==='Enter')downloadWithPassword('tistory')">
+                            <button class="download-btn" onclick="downloadWithPassword('tistory')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            </button>
+                        </div>
+                        <p class="download-error" data-error="tistory">��й�ȣ�� �ùٸ��� �ʽ��ϴ�.</p>
+                    </div>
+                </div>
+                <div class="download-card" data-product="leword" style="display:none !important">
+                    <div class="download-icon"><span class="product-icon-lg">L</span></div>
+                    <h3 class="download-title">Leword</h3>
+                    <p class="download-version">AI Ű���� ���ڸ����� �� Windows 64-bit</p>
+                    <div class="download-form">
+                        <div class="download-input-group">
+                            <input type="password" class="download-input" data-pw="leword" placeholder="��й�ȣ �Է�" onkeydown="if(event.key==='Enter')downloadWithPassword('leword')">
+                            <button class="download-btn" onclick="downloadWithPassword('leword')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            </button>
+                        </div>
+                        <p class="download-error" data-error="leword">��й�ȣ�� �ùٸ��� �ʽ��ϴ�.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand"><img src="logo.png" alt="Leaders Pro" class="footer-logo"><span>Leaders Pro</span></div>
+            <div class="footer-links">
+                <a href="terms.html">�̿���</a>
+                <a href="refund.html">ȯ����å</a>
+                <a href="privacy.html">��������ó����ħ</a>
+                <a href="lookup.html">�ֹ� ��ȸ</a>
+                <a href="mailto:cd000242@gmail.com">��� ����</a>
+            </div>
+            <div class="footer-biz">
+                <p>��ȣ: Leaders Pro | ��ǥ: �ڼ��� | ����ڵ�Ϲ�ȣ: 515-97-01802</p>
+                <p>�ּ�: �泲 ���ؽ� ������334����9</p>
+                <p>�̸���: tjdgus24280@naver.com | ��ȭ: 010-7545-1645</p>
+            </div>
+            <p class="footer-copy">�� 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const PRODUCT_NAMES = { naver: 'Better Life Naver', orbit: 'Leaders Orbit', tistory: 'Leaders Tistory', leword: 'Leword' };
+
+        function getDownloadUrl(product) {
+            const defaults = {
+                naver: 'https://github.com/cd000242-sudo/naver/releases/download/v1.3.0/Better.Life.Naver.Setup.1.3.0.zip',
+                leword: 'https://github.com/cd000242-sudo/leword-app/releases/download/v1.0.5/LEWORD.Setup.1.0.5.zip',
+                orbit: '', tistory: ''
+            };
+            const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
+            const urls = saved.downloadUrls || {};
+            if (product && urls[product]) return urls[product];
+            if (product && defaults[product]) return defaults[product];
+            return saved.downloadUrl || '';
+        }
+
+        function downloadWithPassword(product) {
+            const input = document.querySelector(`.download-input[data-pw="${product}"]`);
+            const errorEl = document.querySelector(`.download-error[data-error="${product}"]`);
+            const pw = input.value.trim();
+            if (pw === '1645') {
+                errorEl.classList.remove('visible');
+                const url = getDownloadUrl(product);
+                const name = PRODUCT_NAMES[product] || product;
+                if (!url) { alert(`${name} �ٿ�ε� ������ ���� �غ���� �ʾҽ��ϴ�.\n�����ڿ��� �������ּ���.`); return; }
+                window.open(url, '_blank');
+                input.value = '';
+            } else {
+                errorEl.classList.add('visible');
+                input.classList.add('shake');
+                setTimeout(() => { input.classList.remove('shake'); errorEl.classList.remove('visible'); }, 2000);
+            }
+        }
+
+        // ===== Common =====
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas'); if (!canvas) return;
+            const ctx = canvas.getContext('2d'); let particles = []; let w, h;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 3; } resize(); window.addEventListener('resize', resize);
+            class Particle { constructor() { this.reset(); } reset() { this.x = Math.random() * w; this.y = Math.random() * h; this.size = Math.random() * 2 + 0.5; this.speedY = -(Math.random() * 0.3 + 0.1); this.speedX = (Math.random() - 0.5) * 0.2; this.opacity = Math.random() * 0.5 + 0.1; this.gold = Math.random() > 0.3; } update() { this.y += this.speedY; this.x += this.speedX; this.opacity += (Math.random() - 0.5) * 0.01; this.opacity = Math.max(0.05, Math.min(0.6, this.opacity)); if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; } } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.gold ? `rgba(201, 168, 76, ${this.opacity})` : `rgba(255, 255, 255, ${this.opacity * 0.4})`; ctx.fill(); } }
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+            function animate() { ctx.clearRect(0, 0, w, h); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); } animate();
+        }
+        function initScrollAnimations() { const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) { entry.target.style.transitionDelay = `${i * 0.08}s`; entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 }); document.querySelectorAll('.fade-in, .download-card').forEach(el => observer.observe(el)); }
+        function initNavbar() { const navbar = document.getElementById('navbar'); window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); }); }
+        function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
+        function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
+
+        document.addEventListener('DOMContentLoaded', () => { initParticles(); initScrollAnimations(); initNavbar(); });
+    </script>
+
+    <div class="petal-container" id="petalContainer"></div>
+    <script>
+    (function() { const container = document.getElementById('petalContainer'); if (!container) return; for (let i = 0; i < 30; i++) { const petal = document.createElement('div'); petal.className = 'petal'; const size = Math.random() * 14 + 8; petal.style.width = size + 'px'; petal.style.height = size + 'px'; petal.style.left = Math.random() * 100 + '%'; petal.style.animationDuration = (Math.random() * 8 + 7) + 's'; petal.style.animationDelay = (Math.random() * 10) + 's'; container.appendChild(petal); } })();
+    </script>
+    <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" title="���� ��Ʃ�� ä��">��</a>
+    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 īī���� ����">
+        <div class="kakao-float-pulse"></div>
+        <div class="kakao-float-icon">??</div>
+        <span class="kakao-float-text">1:1 ����</span>
+    </a>
+
+<!-- CHERRY BLOSSOM PETALS -->
+<div class="petal-container" id="petalContainer"></div>
+
+<!-- MUSIC TOGGLE -->
+<button class="music-toggle attention" id="musicToggle" title="?? �� ������� �ѱ�/���">??</button>
+<div class="music-hint" id="musicHint">?? Ŭ���ϸ� �� ������ �귯��</div>
+
+<script src="music.js"></script>
+</body>
+</html>
