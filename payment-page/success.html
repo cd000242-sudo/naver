@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>���� Ȯ�� ��... ? Leaders Pro</title>
-    <link rel="icon" type="image/jpeg" href="favicon.jpg"><text y='.9em' font-size='90'>??</text></svg>">
+    <title>결제 확인 중... — Leaders Pro</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -25,73 +26,73 @@
                 <span class="nav-brand-text">Leaders Pro</span>
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link">Ȩ</a>
-                <a href="lookup.html" class="nav-link">�ֹ���ȸ</a>
+                <a href="index.html" class="nav-link">홈</a>
+                <a href="lookup.html" class="nav-link">주문 조회</a>
             </div>
         </div>
     </nav>
 
     <div class="lookup-container" style="padding-top: 120px; max-width: 600px;">
-        <!-- Phase 1: �ε� -->
+        <!-- Phase 1: 로딩 -->
         <div id="loading-section" class="loading-section">
             <div class="loading-spinner-lg"></div>
-            <div class="loading-text">������ Ȯ���ϰ� �ֽ��ϴ�</div>
-            <div class="loading-subtext">��ø� ��ٷ��ּ���... �ڵ尡 �� �߱޵˴ϴ�.</div>
+            <div class="loading-text">결제를 확인하고 있습니다</div>
+            <div class="loading-subtext">잠시만 기다려주세요... 코드가 곧 발급됩니다.</div>
         </div>
 
-        <!-- Phase 2a: �ڵ� ǥ�� (����) -->
+        <!-- Phase 2a: 코드 표시 (성공) -->
         <div id="code-section" class="hidden">
             <div class="code-card">
-                <div class="success-icon">?</div>
-                <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 4px;">������ �Ϸ�Ǿ����ϴ�!</h2>
+                <div class="success-icon">✓</div>
+                <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 4px;">결제가 완료되었습니다!</h2>
                 <p id="product-name" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 28px;">
                 </p>
 
-                <div class="code-label">���̼��� �ڵ�</div>
+                <div class="code-label">라이선스 코드</div>
                 <div class="code-display" id="license-code"></div>
 
                 <button class="btn-copy" id="btn-copy" onclick="copyCode()">
-                    ?? �ڵ� �����ϱ�
+                    📋 코드 복사하기
                 </button>
 
                 <div
                     style="background: rgba(68, 215, 182, 0.06); border: 1px solid rgba(68, 215, 182, 0.15); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
-                    <p style="font-size: 0.85rem; color: var(--success); font-weight: 600; margin-bottom: 6px;">??
-                        ��� ���</p>
+                    <p style="font-size: 0.85rem; color: var(--success); font-weight: 600; margin-bottom: 6px;">💡
+                        사용 방법</p>
                     <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
-                        Leaders Pro ���� �����ϰ� ���̼��� ��� ȭ�鿡��<br>
-                        �� �ڵ带 �Է��ϸ� �ٷ� ����� �� �ֽ��ϴ�.
+                        Leaders Pro 앱을 실행하고 라이선스 등록 화면에서<br>
+                        위 코드를 입력하면 바로 사용할 수 있습니다.
                     </p>
                 </div>
 
-                <!-- �̸��� �߼� ���� -->
+                <!-- 이메일 발송 상태 -->
                 <div id="email-sent-notice" class="hidden"
                     style="background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
-                    <p style="font-size: 0.85rem; color: var(--gold-primary); font-weight: 600; margin-bottom: 4px;">?? �̸��� �߼� �Ϸ�</p>
+                    <p style="font-size: 0.85rem; color: var(--gold-primary); font-weight: 600; margin-bottom: 4px;">📧 이메일 발송 완료</p>
                     <p id="email-sent-address" style="font-size: 0.8rem; color: var(--text-secondary);">
-                        �Է��Ͻ� �̸��Ϸ� ���̼��� �ڵ尡 �߼۵Ǿ����ϴ�.
+                        입력하신 이메일로 라이선스 코드가 발송되었습니다.
                     </p>
                 </div>
 
-                <!-- �̸��� ��� (�̸����� ���� ����) -->
+                <!-- 이메일 백업 (이메일이 없을 때만) -->
                 <div class="email-backup" id="email-backup-section">
-                    <div class="email-backup-label">?? �̸��Ϸ� �ڵ� ��� �ޱ� (����)</div>
+                    <div class="email-backup-label">📧 이메일로 코드 백업 받기 (선택)</div>
                     <div class="email-input-group">
-                        <input type="email" class="email-input" id="backup-email" placeholder="�̸��� �ּ� �Է�">
-                        <button class="btn-send-email" id="btn-send-email" onclick="sendBackupEmail()">�߼�</button>
+                        <input type="email" class="email-input" id="backup-email" placeholder="이메일 주소 입력">
+                        <button class="btn-send-email" id="btn-send-email" onclick="sendBackupEmail()">발송</button>
                     </div>
                     <div class="email-status" id="email-status"></div>
                 </div>
 
-                <!-- ? ���� Ŀ�´�Ƽ ���� -->
+                <!-- ✅ 유료 커뮤니티 입장 -->
                 <div
                     style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(201,168,76,0.02)); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius-sm);">
-                    <p style="font-size: 0.9rem; font-weight: 700; color: var(--gold-primary); margin-bottom: 6px;">?? Pro Ŀ�´�Ƽ��
-                        ���� ���� ȯ���մϴ�!</p>
+                    <p style="font-size: 0.9rem; font-weight: 700; color: var(--gold-primary); margin-bottom: 6px;">🎉 Pro 커뮤니티에
+                        오신 것을 환영합니다!</p>
                     <p
                         style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
-                        �Ʒ� ��ư���� ���� ����� ���� ����濡 �����ϼ���.<br>
-                        ���� ��й�ȣ: <strong
+                        아래 버튼으로 유료 사용자 전용 단톡방에 입장하세요.<br>
+                        입장 비밀번호: <strong
                             style="color: #fff; background: rgba(201,168,76,0.3); padding: 2px 8px; border-radius: 4px;">1645</strong>
                     </p>
                     <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -99,35 +100,35 @@
                             style="display: block; padding: 14px; text-align: center; border-radius: 12px; background: var(--gold-gradient); color: #0a0a0f; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 15px rgba(201,168,76,0.3);"
                             onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(201,168,76,0.4)'"
                             onmouseout="this.style.transform='';this.style.boxShadow='0 4px 15px rgba(201,168,76,0.3)'">
-                            ?? Pro ���� Ŀ�´�Ƽ �����ϱ�
+                            👥 Pro 전용 커뮤니티 입장하기
                         </a>
                         <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noreferrer"
                             style="display: block; padding: 12px; text-align: center; border-radius: 10px; background: linear-gradient(135deg, #FEE500, #F5D100); color: #3C1E1E; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: all 0.2s;"
                             onmouseover="this.style.transform='translateY(-1px)'"
                             onmouseout="this.style.transform=''">
-                            ?? 1:1 īī���� ����
+                            💬 1:1 카카오톡 문의
                         </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Phase 2b: ����/Ÿ�Ӿƿ� -->
+        <!-- Phase 2b: 에러/타임아웃 -->
         <div id="error-section" class="hidden">
             <div class="error-card" style="margin: 0; max-width: none;">
-                <div class="error-icon">??</div>
-                <div class="error-title" id="error-title">���� Ȯ�ο� �����߽��ϴ�</div>
+                <div class="error-icon">⚠️</div>
+                <div class="error-title" id="error-title">결제 확인에 실패했습니다</div>
                 <div class="error-message" id="error-message"></div>
                 <button class="btn-retry" id="btn-check-order" onclick="checkOrder()" style="margin-bottom: 12px;">
-                    ?? �ֹ� Ȯ���ϱ�
+                    🔍 주문 확인하기
                 </button>
                 <br>
                 <a href="index.html" class="btn-retry"
                     style="background: var(--bg-glass); border: 1px solid var(--border-glass); font-size: 0.9rem; padding: 12px 24px; color: var(--text-primary);">
-                    �� ó������ ���ư���
+                    ← 처음으로 돌아가기
                 </a>
                 <p style="margin-top: 16px; font-size: 0.8rem; color: var(--text-muted);">
-                    ����: <a href="mailto:cd000242@gmail.com"
+                    문의: <a href="mailto:cd000242@gmail.com"
                         style="color: var(--gold-primary);">cd000242@gmail.com</a>
                 </p>
             </div>
@@ -141,17 +142,12 @@
                 <img src="logo.png" alt="Leaders Pro" class="footer-logo">
                 <span>Leaders Pro</span>
             </div>
-            <div class="footer-biz">
-                <p>��ȣ: Leaders Pro | ��ǥ: �ڼ��� | ����ڵ�Ϲ�ȣ: 515-97-01802</p>
-                <p>�ּ�: �泲 ���ؽ� ������334����9</p>
-                <p>�̸���: tjdgus24280@naver.com | ��ȭ: 010-7545-1645</p>
-            </div>
-            <p class="footer-copy">�� 2026 Leaders Pro. All rights reserved.</p>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // ===== ���� =====
+        // ===== 설정 =====
         const CONFIG = {
             GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
             TIMEOUT_MS: 20000,
@@ -162,21 +158,18 @@
         let currentOrderId = null;
         let buyerEmail = null;
 
-        // ===== URL �Ķ���� �Ľ� =====
+        // ===== URL 파라미터 파싱 =====
         function getParams() {
             const params = new URLSearchParams(window.location.search);
             return {
-                authKey: params.get('authKey'),
-                customerKey: params.get('customerKey'),
                 paymentKey: params.get('paymentKey'),
                 orderId: params.get('orderId'),
                 amount: params.get('amount'),
                 email: params.get('email'),
-                product: params.get('product'),
             };
         }
 
-        // ===== JSONP ȣ�� =====
+        // ===== JSONP 호출 =====
         function callGASviaJSONP(params) {
             return new Promise((resolve, reject) => {
                 const timeoutId = setTimeout(() => {
@@ -200,13 +193,11 @@
 
                 const script = document.createElement('script');
                 script.id = 'jsonp-script';
-                script.src = `${CONFIG.GAS_URL}?action=register-billing` +
-                    `&authKey=${encodeURIComponent(params.authKey || params.paymentKey)}` +
-                    `&customerKey=${encodeURIComponent(params.customerKey || '')}` +
+                script.src = `${CONFIG.GAS_URL}?action=confirm-payment` +
+                    `&paymentKey=${encodeURIComponent(params.paymentKey)}` +
                     `&orderId=${encodeURIComponent(params.orderId)}` +
                     `&amount=${encodeURIComponent(params.amount)}` +
                     (params.email ? `&email=${encodeURIComponent(params.email)}` : '') +
-                    (params.product ? `&product=${encodeURIComponent(params.product)}` : '') +
                     `&callback=${callbackName}`;
 
                 script.onerror = function () {
@@ -219,7 +210,7 @@
             });
         }
 
-        // ===== �ڵ� ǥ�� =====
+        // ===== 코드 표시 =====
         function showCode(code, product) {
             currentCode = code;
             currentProduct = product;
@@ -231,17 +222,17 @@
             document.getElementById('error-section').classList.add('hidden');
             document.getElementById('code-section').classList.remove('hidden');
 
-            document.title = '���̼��� �߱� �Ϸ� ? Leaders Pro';
+            document.title = '라이선스 발급 완료 — Leaders Pro';
 
-            // �̸����� ������ �ڵ� �߼�
+            // 이메일이 있으면 자동 발송
             if (buyerEmail) {
                 autoSendEmail(buyerEmail, code, product);
             }
         }
 
-        // ===== ���� ǥ�� =====
+        // ===== 에러 표시 =====
         function showError(message, title) {
-            document.getElementById('error-title').textContent = title || '���� Ȯ�ο� �����߽��ϴ�';
+            document.getElementById('error-title').textContent = title || '결제 확인에 실패했습니다';
             document.getElementById('error-message').textContent = message;
 
             document.getElementById('loading-section').classList.add('hidden');
@@ -249,17 +240,17 @@
             document.getElementById('error-section').classList.remove('hidden');
         }
 
-        // ===== �ڵ� ���� =====
+        // ===== 코드 복사 =====
         async function copyCode() {
             if (!currentCode) return;
             try {
                 await navigator.clipboard.writeText(currentCode);
                 const btn = document.getElementById('btn-copy');
                 btn.classList.add('copied');
-                btn.innerHTML = '? ���� �Ϸ�!';
+                btn.innerHTML = '✅ 복사 완료!';
                 setTimeout(() => {
                     btn.classList.remove('copied');
-                    btn.innerHTML = '?? �ڵ� �����ϱ�';
+                    btn.innerHTML = '📋 코드 복사하기';
                 }, 2000);
             } catch (err) {
                 const textarea = document.createElement('textarea');
@@ -271,15 +262,15 @@
 
                 const btn = document.getElementById('btn-copy');
                 btn.classList.add('copied');
-                btn.innerHTML = '? ���� �Ϸ�!';
+                btn.innerHTML = '✅ 복사 완료!';
                 setTimeout(() => {
                     btn.classList.remove('copied');
-                    btn.innerHTML = '?? �ڵ� �����ϱ�';
+                    btn.innerHTML = '📋 코드 복사하기';
                 }, 2000);
             }
         }
 
-        // ===== �̸��� �ڵ� �߼� =====
+        // ===== 이메일 자동 발송 =====
         async function autoSendEmail(email, code, product) {
             try {
                 const callbackName = '__autoEmailCallback_' + Date.now();
@@ -310,18 +301,18 @@
                     document.head.appendChild(script);
                 });
 
-                // �̸��� �߼� ����: UI ������Ʈ
+                // 이메일 발송 성공: UI 업데이트
                 document.getElementById('email-sent-notice').classList.remove('hidden');
                 document.getElementById('email-sent-address').textContent =
-                    `${email}�� ���̼��� �ڵ尡 �߼۵Ǿ����ϴ�.`;
+                    `${email}로 라이선스 코드가 발송되었습니다.`;
                 document.getElementById('email-backup-section').classList.add('hidden');
             } catch (err) {
-                // �ڵ� �߼� ����: ���� ��� ���� ����
-                console.log('�̸��� �ڵ� �߼� ����, ���� ��� UI ǥ��');
+                // 자동 발송 실패: 수동 백업 섹션 유지
+                console.log('이메일 자동 발송 실패, 수동 백업 UI 표시');
             }
         }
 
-        // ===== �̸��� ��� �߼� (����) =====
+        // ===== 이메일 백업 발송 (수동) =====
         async function sendBackupEmail() {
             const emailInput = document.getElementById('backup-email');
             const btn = document.getElementById('btn-send-email');
@@ -329,13 +320,13 @@
             const email = emailInput.value.trim();
 
             if (!email || !email.includes('@')) {
-                status.textContent = '�ùٸ� �̸��� �ּҸ� �Է����ּ���.';
+                status.textContent = '올바른 이메일 주소를 입력해주세요.';
                 status.style.color = 'var(--error)';
                 return;
             }
 
             btn.disabled = true;
-            btn.textContent = '�߼� ��...';
+            btn.textContent = '발송 중...';
             status.textContent = '';
 
             try {
@@ -368,27 +359,27 @@
                 });
 
                 btn.classList.add('sent');
-                btn.textContent = '�߼� �Ϸ� ?';
-                status.textContent = `${email}�� �ڵ尡 �߼۵Ǿ����ϴ�.`;
+                btn.textContent = '발송 완료 ✓';
+                status.textContent = `${email}로 코드가 발송되었습니다.`;
                 status.style.color = 'var(--success)';
             } catch (err) {
                 btn.disabled = false;
-                btn.textContent = '�߼�';
-                status.textContent = '�߼ۿ� �����߽��ϴ�. �ٽ� �õ����ּ���.';
+                btn.textContent = '발송';
+                status.textContent = '발송에 실패했습니다. 다시 시도해주세요.';
                 status.style.color = 'var(--error)';
             }
         }
 
-        // ===== �ֹ� Ȯ�� (Ÿ�Ӿƿ� ����) =====
+        // ===== 주문 확인 (타임아웃 복구) =====
         async function checkOrder() {
             if (!currentOrderId) {
-                showError('�ֹ� ������ ã�� �� �����ϴ�.', '�ֹ� Ȯ�� ����');
+                showError('주문 정보를 찾을 수 없습니다.', '주문 확인 실패');
                 return;
             }
 
             document.getElementById('error-section').classList.add('hidden');
             document.getElementById('loading-section').classList.remove('hidden');
-            document.querySelector('.loading-text').textContent = '�ֹ��� Ȯ���ϰ� �ֽ��ϴ�...';
+            document.querySelector('.loading-text').textContent = '주문을 확인하고 있습니다...';
 
             try {
                 const callbackName = '__checkCallback_' + Date.now();
@@ -420,10 +411,10 @@
                 if (result.ok && result.code) {
                     showCode(result.code, result.product);
                 } else {
-                    showError(result.error || '�ֹ��� ã�� �� �����ϴ�. ��� ������ �������ּ���.', '�ֹ� Ȯ�� ����');
+                    showError(result.error || '주문을 찾을 수 없습니다. 고객 지원에 문의해주세요.', '주문 확인 실패');
                 }
             } catch (err) {
-                showError('���� ���ῡ �����߽��ϴ�. ��� �� �ٽ� �õ����ּ���.', '���� ����');
+                showError('서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.', '연결 실패');
             }
         }
 
@@ -480,12 +471,12 @@
             animate();
         }
 
-        // ===== ���� ���� =====
+        // ===== 메인 실행 =====
         async function main() {
             const params = getParams();
 
-            if ((!params.authKey && !params.paymentKey) || !params.amount) {
-                showError('���� ������ �ùٸ��� �ʽ��ϴ�. ó������ �ٽ� �õ����ּ���.', '�߸��� ����');
+            if (!params.paymentKey || !params.orderId || !params.amount) {
+                showError('결제 정보가 올바르지 않습니다. 처음부터 다시 시도해주세요.', '잘못된 접근');
                 document.getElementById('btn-check-order').style.display = 'none';
                 return;
             }
@@ -499,16 +490,16 @@
                 if (result.ok && result.code) {
                     showCode(result.code, result.product);
                 } else {
-                    showError(result.error || '���� ó�� �� ������ �߻��߽��ϴ�.', '���� Ȯ�� ����');
+                    showError(result.error || '결제 처리 중 오류가 발생했습니다.', '결제 확인 실패');
                 }
             } catch (err) {
                 if (err.message === 'TIMEOUT') {
                     showError(
-                        '���� ������ �����ǰ� �ֽ��ϴ�. ������ ���� ó���Ǿ��� �� �ֽ��ϴ�. �Ʒ� ��ư�� ���� �ֹ��� Ȯ���غ�����.',
-                        '���� ����'
+                        '서버 응답이 지연되고 있습니다. 결제는 정상 처리되었을 수 있습니다. 아래 버튼을 눌러 주문을 확인해보세요.',
+                        '응답 지연'
                     );
                 } else {
-                    showError('���� ���ῡ �����߽��ϴ�. �Ʒ� ��ư�� ���� �ֹ��� Ȯ���غ�����.', '���� ����');
+                    showError('서버 연결에 실패했습니다. 아래 버튼을 눌러 주문을 확인해보세요.', '연결 실패');
                 }
             }
         }

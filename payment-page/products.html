@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>?�품 ?�개 ??Leaders Pro</title>
-    <meta name="description" content="Leaders Pro ?�품군을 ?�개?�니?? Leaders Pro ??�??�랫?�에 최적?�된 블로�??�동???�루??">
-    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <title>제품 소개 — Leaders Pro</title>
+    <meta name="description" content="Leaders Pro - AI 네이버 블로그 자동화 솔루션. 키워드만 입력하면 AI가 글·이미지·발행까지 자동으로.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -34,11 +34,11 @@
         .kakao-float-pulse { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: #ff3b5c; animation: kakaoPulse 2s ease-in-out infinite; }
         @keyframes kakaoPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
         /* ========== YOUTUBE FLOAT ========== */
-        .youtube-float { position: fixed; bottom: 30px; left: 24px; z-index: 10001; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 0, 0, 0.85); border: 1px solid rgba(255, 100, 100, 0.4); backdrop-filter: blur(12px); text-decoration: none; box-shadow: 0 4px 20px rgba(255,0,0,0.3); transition: all 0.3s; font-size: 22px; }
+        .youtube-float { position: fixed; bottom: 100px; right: 24px; z-index: 10001; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 0, 0, 0.85); border: 1px solid rgba(255, 100, 100, 0.4); backdrop-filter: blur(12px); text-decoration: none; box-shadow: 0 4px 20px rgba(255,0,0,0.3); transition: all 0.3s; font-size: 22px; }
         .youtube-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(255,0,0,0.5); }
         @media (max-width: 768px) {
             .kakao-float { bottom: 24px; right: 16px; padding: 12px 18px; }
-            .youtube-float { bottom: 24px; left: 16px; width: 44px; height: 44px; font-size: 18px; }
+            .youtube-float { bottom: 90px; right: 16px; width: 44px; height: 44px; font-size: 18px; }
         }
     </style>
 
@@ -74,90 +74,87 @@
                 <img src="logo.png" alt="Leaders Pro" class="nav-logo">
                 <span class="nav-brand-text">Leaders Pro</span>
             </a>
-            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 ?�기" onclick="toggleMobileMenu()">
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
                 <span></span><span></span><span></span>
             </button>
             <div class="nav-links" id="nav-links">
-                <a href="products.html" class="nav-link active" onclick="closeMobileMenu()">?�품?�보</a>
-                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">구매</a>
-                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">?�기</a>
-                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커�??�티</a>
-                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">?�운로드</a>
-                <a href="lookup.html" class="nav-link">주문조회</a>
+                <a href="products.html" class="nav-link active" onclick="closeMobileMenu()">제품</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">가격</a>
+                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
+                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
+                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
+                <a href="lookup.html" class="nav-link">주문 조회</a>
             </div>
         </div>
     </nav>
 
-    <!-- ?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═??-->
+    <!-- ═══════════════════════════════════════════════ -->
     <!-- PRODUCTS SECTION -->
-    <!-- ?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═?�═??-->
+    <!-- ═══════════════════════════════════════════════ -->
     <section class="section" id="products" style="padding-top: 120px;">
         <div class="section-inner">
             <div class="section-header">
                 <span class="section-tag">PRODUCTS</span>
-                <h2 class="section-title">?�신?�게 맞는 ?�동?��? ?�택?�세??/h2>
-                <p class="section-desc">�??�랫?�에 최적?�된 ?�문 ?�동???�루??/p>
+                <h2 class="section-title">당신에게 맞는 자동화를 선택하세요</h2>
+                <p class="section-desc">각 플랫폼에 최적화된 전문 자동화 솔루션</p>
             </div>
 
-            <!-- ?�═??SHOWCASE 1: Better Life Naver (Emerald Green) ?�═??-->
-            <div class="product-showcase theme-naver" id="naver-auto">
+            <!-- ═══ SHOWCASE 1: Better Life Naver ═══ -->
+            <div class="product-showcase" id="naver-auto">
                 <div class="product-info">
-                    <div class="product-tag">?? FLAGSHIP</div>
+                    <div class="product-tag">🚀 FLAGSHIP</div>
                     <h3 class="product-title">Better Life Naver</h3>
-                    <p class="product-subtitle">?�이�?블로�??�동??/p>
+                    <p class="product-subtitle">네이버 블로그 자동화</p>
                     <p class="product-desc">
-                        ?�워???�나�??�력?�면 ??<br>
-                        AI가 글???�고, ?��?지�?만들�? <strong>?�이�?블로그에 ?�동?�로 ?�립?�다.</strong>
+                        키워드 하나만 입력하면 끝.<br>
+                        AI가 글을 쓰고, 이미지를 만들고, <strong>네이버 블로그에 자동으로 올립니다.</strong>
                     </p>
                     <ul class="product-benefit-list">
                         <li>
-                            <span class="benefit-icon">??/span>
+                            <span class="benefit-icon">⚡</span>
                             <div>
-                                <strong>매일 100�? ?�람????것처??/strong>
-                                <span>GPT-4o, Gemini 2.5 ??AI 7종이 6,000~10,000???�연?�러??본문 ?�성</span>
+                                <strong>매일 100건, 사람이 쓴 것처럼</strong>
+                                <span>GPT-4o, Gemini 2.5 등 AI 7종이 6,000~10,000자 자연스러운 본문 생성</span>
                             </div>
                         </li>
                         <li>
-                            <span class="benefit-icon">?��</span>
+                            <span class="benefit-icon">👥</span>
                             <div>
-                                <strong>블로�?10개�? ?�자 ?�영?�세??/strong>
-                                <span>계정 ???�한 ?�이 ?�합 관�? 계정�?개별 ?��?줄링</span>
+                                <strong>블로그 10개를 혼자 운영하세요</strong>
+                                <span>계정 수 제한 없이 통합 관리. 계정별 개별 스케줄링</span>
                             </div>
                         </li>
                         <li>
-                            <span class="benefit-icon">?��</span>
+                            <span class="benefit-icon">🌙</span>
                             <div>
-                                <strong>?�는 ?�안?�도 블로그�? ?��???/strong>
-                                <span>최적 ?�간?� ?�동 발행, ?�덤 ?�레?�로 �?감�? ?�회</span>
+                                <strong>자는 동안에도 블로그가 자란다</strong>
+                                <span>최적 시간대 자동 발행, 랜덤 딜레이로 봇 감지 우회</span>
                             </div>
                         </li>
                         <li>
-                            <span class="benefit-icon">?��</span>
+                            <span class="benefit-icon">🎨</span>
                             <div>
-                                <strong>?�?�권 걱정 ?�는 고유 ?��?지</strong>
-                                <span>Imagen 4, DALL-E, ImageFX, Google Veo ?�상까�? ?�동 ?�성·?�입</span>
+                                <strong>저작권 걱정 없는 고유 이미지</strong>
+                                <span>Imagen 4, DALL-E, ImageFX, Google Veo 영상까지 자동 생성·삽입</span>
                             </div>
                         </li>
                         <li>
-                            <span class="benefit-icon">?��</span>
+                            <span class="benefit-icon">🛒</span>
                             <div>
-                                <strong>쿠팡 ?�트?�스�????�익 창출</strong>
-                                <span>쿠팡·?�이�??�마?�스?�어 ?�품 ?�롤�???리뷰???�스?????�휴 링크 ?�동</span>
+                                <strong>쿠팡 파트너스로 월 수익 창출</strong>
+                                <span>쿠팡·네이버 스마트스토어 상품 크롤링 → 리뷰형 포스팅 → 제휴 링크 자동</span>
                             </div>
                         </li>
                         <li>
-                            <span class="benefit-icon">?��</span>
+                            <span class="benefit-icon">🎯</span>
                             <div>
-                                <strong>?�이�??�위?�출, AI가 ?�아??/strong>
-                                <span>14�?카테고리 맞춤 ?�목 ?�성, ?�피???�출 최적??100???�로?�콜</span>
+                                <strong>네이버 상위노출, AI가 알아서</strong>
+                                <span>14개 카테고리 맞춤 제목 생성, 홈피드 노출 최적화 100점 프로토콜</span>
                             </div>
                         </li>
                     </ul>
-                    <a href="detail.html" class="product-cta-btn btn-theme" style="margin-right:12px;">
-                        ?�세??보기 ??
-                    </a>
-                    <a href="pricing.html?tab=naver" class="product-cta-btn" style="background:var(--gradient-gold); color:#000; border-color:transparent;">
-                        ?�금??보기 ??
+                    <a href="detail.html" class="product-cta-btn">
+                        자세히 보기 →
                     </a>
                 </div>
                 <div class="product-visual">
@@ -167,7 +164,7 @@
                                 <span class="mockup-dot red"></span>
                                 <span class="mockup-dot yellow"></span>
                                 <span class="mockup-dot green"></span>
-                                <span class="mockup-title">Better Life Naver ??Dashboard</span>
+                                <span class="mockup-title">Better Life Naver — Dashboard</span>
                             </div>
                             <div class="mockup-body" style="padding:0; overflow:hidden;">
                                 <video autoplay muted loop playsinline style="width:100%; display:block;">
@@ -179,227 +176,98 @@
                 </div>
             </div>
 
-            <!-- ?�═??SHOWCASE 2: Leaders Orbit (Yellow + Sky Blue) ?�═??-->
-            <div class="product-showcase product-alt theme-orbit launching-soon" id="wp-auto" style="display:none !important">
+            <!-- ═══ SHOWCASE 2: Leaders Orbit ═══ -->
+            <!-- ★ 심사대응: 미출시 제품 숨김 -->
+            <div class="product-showcase product-alt" id="wp-auto" style="display:none !important">
                 <div class="product-visual">
                     <div class="product-visual-card">
-                        <div class="visual-mockup">
+                        <div class="visual-mockup mockup-blue">
                             <div class="mockup-header">
                                 <span class="mockup-dot red"></span>
                                 <span class="mockup-dot yellow"></span>
                                 <span class="mockup-dot green"></span>
-                                <span class="mockup-title">Leaders Orbit ??Global Publisher</span>
+                                <span class="mockup-title">Leaders Orbit — Global Publisher</span>
                             </div>
                             <div class="mockup-body">
-                                <div class="mockup-stat"><span class="stat-label">WordPress</span><span class="stat-value">42�?/span></div>
-                                <div class="mockup-stat"><span class="stat-label">Blogspot</span><span class="stat-value" style="color:#facc15 !important;">38�?/span></div>
-                                <div class="mockup-stat"><span class="stat-label">?�드?�스 ?�익</span><span class="stat-value">$127</span></div>
+                                <div class="mockup-stat"><span class="stat-label">WordPress</span><span class="stat-value" style="color:#21759b;">42건</span></div>
+                                <div class="mockup-stat"><span class="stat-label">Blogspot</span><span class="stat-value" style="color:#f57c00;">38건</span></div>
+                                <div class="mockup-stat"><span class="stat-label">애드센스 수익</span><span class="stat-value" style="color:#44d7b6;">$127</span></div>
                                 <div class="mockup-progress"><div class="progress-bar" style="width:78%"></div></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product-info">
-                    <div class="product-tag">?�� GLOBAL</div>
-                    <h3 class="product-title">Leaders Orbit <span class="product-status-badge badge-launching">�??�칭</span></h3>
-                    <p class="product-subtitle">?�드?�레??/ 블로그스???�동??/p>
+                    <div class="product-tag tag-blue">🌐 GLOBAL</div>
+                    <h3 class="product-title">Leaders Orbit</h3>
+                    <p class="product-subtitle">워드프레스 / 블로그스팟 자동화</p>
                     <p class="product-desc">
-                        구�? ?�드?�스 ?�익?�에 최적?�된 글로벌 블로�??�동??<br>
-                        <strong>100% API 기반</strong>?�라 �?감�? 걱정 Zero.
+                        구글 애드센스 수익화에 최적화된 글로벌 블로그 자동화.<br>
+                        <strong>100% API 기반</strong>이라 봇 감지 걱정 Zero.
                     </p>
                     <ul class="product-benefit-list">
-                        <li><span class="benefit-icon">?��</span><div><strong>?�드?�스 ?�인�?극�???/strong><span>E-E-A-T 기�? 충족, Clean Mode ?�킨, FAQ Schema ?�동</span></div></li>
-                        <li><span class="benefit-icon">?��</span><div><strong>?�국?�로 글로벌 ?�익</strong><span>?�국?�·영?�·일본어 ???�국??SEO 콘텐�??�동 ?�성</span></div></li>
-                        <li><span class="benefit-icon">?��</span><div><strong>???�랫?�을 ???�면?�서</strong><span>WordPress + Blogspot ?�합 ?�영, API 기반 ?�정 발행</span></div></li>
-                        <li><span class="benefit-icon">?��</span><div><strong>구�? ?�위?�출 SEO ?�동??/strong><span>메�? ?�그, 구조???�이?? ?�워??밀???�동 최적??/span></div></li>
+                        <li><span class="benefit-icon">💰</span><div><strong>애드센스 승인률 극대화</strong><span>E-E-A-T 기준 충족, Clean Mode 스킨, FAQ Schema 자동</span></div></li>
+                        <li><span class="benefit-icon">🌍</span><div><strong>다국어로 글로벌 수익</strong><span>한국어·영어·일본어 등 다국어 SEO 콘텐츠 자동 생성</span></div></li>
+                        <li><span class="benefit-icon">🔗</span><div><strong>두 플랫폼을 한 화면에서</strong><span>WordPress + Blogspot 통합 운영, API 기반 안정 발행</span></div></li>
+                        <li><span class="benefit-icon">📈</span><div><strong>구글 상위노출 SEO 자동화</strong><span>메타 태그, 구조화 데이터, 키워드 밀도 자동 최적화</span></div></li>
                     </ul>
-                    <a href="pricing.html?tab=orbit" class="product-cta-btn btn-theme">?�금??보기 ??/a>
+                    <a href="pricing.html?tab=orbit" class="product-cta-btn btn-blue">월 60,000원부터 →</a>
                 </div>
             </div>
 
-            <!-- ?�═??SHOWCASE 3: Leaders Tistory (Deep Orange) ?�═??-->
-            <div class="product-showcase theme-tistory product-coming-soon" id="tistory-auto" style="display:none !important">
-                <div class="product-info">
-                    <div class="product-tag">?�� COMING SOON</div>
-                    <h3 class="product-title">Leaders Tistory <span class="product-status-badge badge-coming">개발�?/span></h3>
-                    <p class="product-subtitle">?�스?�리 블로�??�동??/p>
-                    <p class="product-desc">
-                        ?�람처럼 ?�?�핑?�는 고급 �??�피 기술.<br>
-                        <strong>카카???�드???�익 극�???/strong>�??�한 ?�문 ?�동??
-                    </p>
-                    <ul class="product-benefit-list">
-                        <li>
-                            <span class="benefit-icon">?�️</span>
-                            <div>
-                                <strong>?�람???�?�핑 ?�진</strong>
-                                <span>�?감�? ?�회 ???�제 ?�람처럼 ??글?�씩 ?�연?�럽�??�력</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">?��</span>
-                            <div>
-                                <strong>?�스?�리 v2 ?�디???�벽 ?�환</strong>
-                                <span>최신 React 기반 ?�디?�에 최적?? CSS ?�택???�동 ?�데?�트</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">?��</span>
-                            <div>
-                                <strong>카카???�드???�익 극�???/strong>
-                                <span>SEO 최적??+ 광고 배치 ?�략?�로 ?�릭�?극�???/span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">?���?/span>
-                            <div>
-                                <strong>카테고리·?�그 ?�동 ?�정</strong>
-                                <span>AI가 콘텐�?분석 ??최적 카테고리?� ?�그 ?�동 매칭</span>
-                            </div>
-                        </li>
-                    </ul>
-                    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" class="product-cta-btn btn-theme" style="opacity:0.7;">출시 ?�림 ?�청 ??/a>
-                </div>
-                <div class="product-visual">
-                    <div class="product-visual-card">
-                        <div class="visual-mockup">
-                            <div class="mockup-header">
-                                <span class="mockup-dot red"></span>
-                                <span class="mockup-dot yellow"></span>
-                                <span class="mockup-dot green"></span>
-                                <span class="mockup-title">Leaders Tistory ??Auto Publisher</span>
-                            </div>
-                            <div class="mockup-body">
-                                <div class="mockup-stat"><span class="stat-label">?�늘 발행</span><span class="stat-value">24�?/span></div>
-                                <div class="mockup-stat"><span class="stat-label">�?감�? ?�회</span><span class="stat-value">100%</span></div>
-                                <div class="mockup-stat"><span class="stat-label">?�드???�익</span><span class="stat-value">??9,400</span></div>
-                                <div class="mockup-progress"><div class="progress-bar" style="width:92%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- ═══ COMPACT CARDS ═══ -->
+            <div class="compact-products-header" style="display:none !important">
+                <h3 class="compact-title">더 많은 솔루션</h3>
+                <p class="compact-desc">모든 플랫폼을 하나의 에코시스템으로</p>
             </div>
-
-            <!-- ?�═??SHOWCASE 4: Leword (Cotton Blue) ?�═??-->
-            <div class="product-showcase product-alt theme-leword" id="leword-auto" style="display:none !important">
-                <div class="product-visual">
-                    <div class="product-visual-card">
-                        <div class="visual-mockup">
-                            <div class="mockup-header">
-                                <span class="mockup-dot red"></span>
-                                <span class="mockup-dot yellow"></span>
-                                <span class="mockup-dot green"></span>
-                                <span class="mockup-title">Leword ??Keyword Intelligence</span>
-                            </div>
-                            <div class="mockup-body">
-                                <div class="mockup-stat"><span class="stat-label">분석 ?�워??/span><span class="stat-value">1,247�?/span></div>
-                                <div class="mockup-stat"><span class="stat-label">블루?�션 발견</span><span class="stat-value">38�?/span></div>
-                                <div class="mockup-stat"><span class="stat-label">경쟁 강도</span><span class="stat-value">??�� ??/span></div>
-                                <div class="mockup-progress"><div class="progress-bar" style="width:85%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <div class="product-tag">?�� INTELLIGENCE</div>
-                    <h3 class="product-title">Leword</h3>
-                    <p class="product-subtitle">AI ?�워???�텔리전??/p>
-                    <p class="product-desc">
-                        ?�떤 ?�워?�로 글???�야 ?�위 ?�출?<br>
-                        <strong>?�이?��? ?�려줍니??</strong> 블루?�션 ?�워?��? ?�동?�로 찾아?�립?�다.
-                    </p>
-                    <ul class="product-benefit-list">
-                        <li>
-                            <span class="benefit-icon">?��</span>
-                            <div>
-                                <strong>경쟁 강도·?�이???�수 분석</strong>
-                                <span>�??�워?�의 경쟁 ?�이?��? ?�치?�하???�률 ?��? ?�워???�별</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">?��</span>
-                            <div>
-                                <strong>블루?�션 ?�금 ?�워???�동 추천</strong>
-                                <span>검?�량?� ?�고 경쟁?� ??? '???�는' ?�워?�만 ?�터�?/span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">?��</span>
-                            <div>
-                                <strong>?�이버·구글 ?�시�??�렌??/strong>
-                                <span>?��? 검?�엔진의 ?�시�??�렌?��? ?�눈??모니?�링</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">?��</span>
-                            <div>
-                                <strong>Leaders Pro ?�클�??�동</strong>
-                                <span>발견???�워?�로 바로 블로�??�스???�동 ?�성 가??/span>
-                            </div>
-                        </li>
+            <!-- ★ 심사대응: 미출시 compact 카드 숨김 -->
+            <div class="compact-grid" style="display:none !important">
+                <div class="compact-card compact-orange" onclick="location.href='pricing.html?tab=tistory'">
+                    <div class="compact-icon">🔥</div>
+                    <div class="compact-tag">NEW</div>
+                    <h4 class="compact-name">Leaders Tistory</h4>
+                    <p class="compact-platform">티스토리 자동화</p>
+                    <p class="compact-benefit">사람처럼 타이핑하는 고급 봇 회피 기술로<br>안전한 대량 발행</p>
+                    <ul class="compact-features">
+                        <li>⌨️ 사람형 타이핑 엔진 (봇 감지 우회)</li>
+                        <li>🎯 티스토리 v2 에디터 완벽 호환</li>
+                        <li>💰 카카오 애드핏 수익 극대화</li>
+                        <li>🏷️ 카테고리·태그 자동 설정</li>
                     </ul>
-                    <a href="pricing.html?tab=leword" class="product-cta-btn btn-theme">?�금??보기 ??/a>
+                    <div class="compact-price">월 <strong>30,000</strong>원부터</div>
+                    <div class="compact-cta">요금제 보기 →</div>
                 </div>
-            </div>
 
-            <!-- ?�═??SHOWCASE 5: YouTube Automation (Crimson Red) ?�═??-->
-            <div class="product-showcase theme-youtube product-coming-soon" id="youtube-auto">
-                <div class="product-info">
-                    <div class="product-tag">?�� COMING SOON</div>
-                    <h3 class="product-title">?�튜�??�동??<span class="product-status-badge badge-coming">개발�?/span></h3>
-                    <p class="product-subtitle">AI ?�상 ?�성 · ?�동 ?�로??/p>
-                    <p class="product-desc">
-                        ?�스?�만 ?�력?�면 AI가 ?�상??만들�?<br>
-                        <strong>?�튜브에 ?�동?�로 ?�로?�합?�다.</strong>
-                    </p>
-                    <ul class="product-benefit-list">
-                        <li>
-                            <span class="benefit-icon">?��</span>
-                            <div>
-                                <strong>?�스?????�상 ?�전 ?�동 변??/strong>
-                                <span>Google Veo, Sora ??최신 AI�?고품�??�상 ?�동 ?�성</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">?��</span>
-                            <div>
-                                <strong>?�츠 & 롱폼 ?�시 지??/strong>
-                                <span>?�로???�츠?� 가로형 롱폼????번에 ?�성·?�로??/span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">?��</span>
-                            <div>
-                                <strong>?�튜�?SEO ?�동 최적??/strong>
-                                <span>?�목, ?�명, ?�그, ?�네?�까지 ?�고리즘 최적???�동 ?�정</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="benefit-icon">?��</span>
-                            <div>
-                                <strong>?�익???�이?�라??구축</strong>
-                                <span>?�드?�스 + ?�휴 마�??�을 ?�상???�동 ?�입, ?�시�??�컴</span>
-                            </div>
-                        </li>
+                <div class="compact-card compact-purple" onclick="location.href='pricing.html?tab=leword'">
+                    <div class="compact-icon">💎</div>
+                    <div class="compact-tag">INTELLIGENCE</div>
+                    <h4 class="compact-name">Leword</h4>
+                    <p class="compact-platform">AI 키워드 인텔리전스</p>
+                    <p class="compact-benefit">어떤 키워드로 글을 써야 상위 노출?<br>데이터가 알려줍니다</p>
+                    <ul class="compact-features">
+                        <li>🔍 경쟁 강도·난이도 점수 분석</li>
+                        <li>💡 블루오션 황금 키워드 자동 추천</li>
+                        <li>📊 네이버·구글 실시간 트렌드</li>
+                        <li>🤖 Leaders Pro 원클릭 연동</li>
                     </ul>
-                    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" class="product-cta-btn btn-theme" style="opacity:0.7;">출시 ?�림 ?�청 ??/a>
+                    <div class="compact-price">월 <strong>30,000</strong>원부터</div>
+                    <div class="compact-cta">요금제 보기 →</div>
                 </div>
-                <div class="product-visual">
-                    <div class="product-visual-card">
-                        <div class="visual-mockup">
-                            <div class="mockup-header">
-                                <span class="mockup-dot red"></span>
-                                <span class="mockup-dot yellow"></span>
-                                <span class="mockup-dot green"></span>
-                                <span class="mockup-title">YouTube Auto ??Studio</span>
-                            </div>
-                            <div class="mockup-body">
-                                <div class="mockup-stat"><span class="stat-label">?�성 ?�상</span><span class="stat-value">??/span></div>
-                                <div class="mockup-stat"><span class="stat-label">?�츠 조회??/span><span class="stat-value">??/span></div>
-                                <div class="mockup-stat"><span class="stat-label">?�상 ?�익</span><span class="stat-value">??/span></div>
-                                <div class="mockup-progress"><div class="progress-bar" style="width:0%"></div></div>
-                            </div>
-                        </div>
-                    </div>
+
+                <div class="compact-card compact-red compact-coming">
+                    <div class="compact-icon">🎬</div>
+                    <div class="compact-tag">COMING SOON</div>
+                    <h4 class="compact-name">유튜브 자동화</h4>
+                    <p class="compact-platform">AI 영상 생성 · 자동 업로드</p>
+                    <p class="compact-benefit">유튜브 쇼츠·롱폼 콘텐츠를<br>풀 자동화로 운영</p>
+                    <ul class="compact-features">
+                        <li>🎥 텍스트 → 영상 자동 변환</li>
+                        <li>📱 쇼츠 & 롱폼 동시 지원</li>
+                        <li>📈 유튜브 SEO 자동 최적화</li>
+                        <li>🔮 2026년 하반기 출시 예정</li>
+                    </ul>
+                    <div class="compact-price"><strong>출시 알림 신청</strong></div>
+                    <div class="compact-cta coming-cta">고객 문의 →</div>
                 </div>
             </div>
         </div>
@@ -413,16 +281,11 @@
                 <span>Leaders Pro</span>
             </div>
             <div class="footer-links">
-                <a href="terms.html">?�용?��?</a>
-                <a href="refund.html">?�불?�책</a>
-                <a href="privacy.html">개인?�보처리방침</a>
+                <a href="terms.html">이용약관</a>
+                <a href="refund.html">환불정책</a>
+                <a href="privacy.html">개인정보처리방침</a>
                 <a href="lookup.html">주문 조회</a>
                 <a href="mailto:cd000242@gmail.com">고객 문의</a>
-            </div>
-            <div class="footer-biz">
-                <p>?�호: Leaders Pro | ?�?? 박성??| ?�업?�등록번?? 515-97-01802</p>
-                <p>주소: 경남 김?�시 ?�유�?34번길9</p>
-                <p>?�메?? tjdgus24280@naver.com | ?�화: 010-7545-1645</p>
             </div>
             <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
         </div>
@@ -496,12 +359,12 @@
     </script>
 
     <!-- FLOATING YOUTUBE BUTTON -->
-    <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" title="공식 ?�튜�?채널">??/a>
+    <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" title="공식 유튜브 채널">▶</a>
 
     <!-- FLOATING KAKAO INQUIRY BUTTON -->
-    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 카카?�톡 문의">
+    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 카카오톡 문의">
         <div class="kakao-float-pulse"></div>
-        <div class="kakao-float-icon">?��</div>
+        <div class="kakao-float-icon">💬</div>
         <span class="kakao-float-text">1:1 문의</span>
     </a>
 
@@ -509,9 +372,67 @@
 <div class="petal-container" id="petalContainer"></div>
 
 <!-- MUSIC TOGGLE -->
-<button class="music-toggle attention" id="musicToggle" title="?�� �?배경?�악 켜기/?�기">?��</button>
-<div class="music-hint" id="musicHint">?�� ?�릭?�면 �??�악???�러??/div>
+<button class="music-toggle attention" id="musicToggle" title="🌸 봄 배경음악 켜기/끄기">🔇</button>
+<div class="music-hint" id="musicHint">🌸 클릭하면 봄 음악이 흘러요</div>
 
-<script src="music.js"></script>
+<script>
+// Cherry blossom petals
+(function() {
+    const container = document.getElementById('petalContainer');
+    if (!container) return;
+    const PETAL_COUNT = 30;
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        const size = Math.random() * 14 + 8;
+        petal.style.width = size + 'px';
+        petal.style.height = size + 'px';
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.animationDuration = (Math.random() * 8 + 7) + 's';
+        petal.style.animationDelay = (Math.random() * 10) + 's';
+        container.appendChild(petal);
+    }
+    for (let i = 0; i < PETAL_COUNT; i++) createPetal();
+})();
+
+// YouTube IFrame API Music
+(function() {
+    const btn = document.getElementById('musicToggle');
+    if (!btn) return;
+    let player = null, isPlaying = false, apiReady = false;
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+    const playerDiv = document.createElement('div');
+    playerDiv.id = 'yt-music-player';
+    playerDiv.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
+    document.body.appendChild(playerDiv);
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('yt-music-player', {
+            videoId: 'r4EHi65fa-0',
+            playerVars: { autoplay: 0, loop: 1, playlist: 'r4EHi65fa-0', controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0 },
+            events: {
+                onReady: function() { apiReady = true; player.setVolume(40); },
+                onStateChange: function(e) { if (e.data === YT.PlayerState.ENDED) { player.seekTo(0); player.playVideo(); } }
+            }
+        });
+    };
+    btn.addEventListener('click', function() {
+        var hint = document.getElementById('musicHint');
+        if (hint) hint.remove();
+        btn.classList.remove('attention');
+        if (!apiReady) return;
+        if (!isPlaying) {
+            player.playVideo(); isPlaying = true;
+            btn.textContent = '\uD83C\uDFB5'; btn.classList.add('playing');
+            btn.title = '\uD83C\uDF38 봄 배경음악 끄기';
+        } else {
+            player.pauseVideo(); isPlaying = false;
+            btn.textContent = '\uD83D\uDD07'; btn.classList.remove('playing');
+            btn.title = '\uD83C\uDF38 봄 배경음악 켜기';
+        }
+    });
+})();
+</script>
 </body>
 </html>
