@@ -15,7 +15,7 @@
     <style>
         .order-container { max-width: 640px; margin: 0 auto; padding: 40px 20px; }
         .order-title { text-align: center; margin-bottom: 40px; }
-        .order-title h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #c9a84c, #e8d48b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 8px; }
+        .order-title h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #c9a84c, #e8d48b); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 8px; }
         .order-title p { color: var(--text-muted); font-size: 0.95rem; }
 
         .order-step { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px; margin-bottom: 20px; }
@@ -237,19 +237,16 @@
                 { id: 'naver-monthly', name: '1개월', price: 50000, period: '/ 월' },
                 { id: 'naver-quarterly', name: '3개월', price: 120000, period: '월 40,000원' },
                 { id: 'naver-yearly', name: '1년', price: 400000, period: '월 33,333원' },
-                { id: 'naver-lifetime', name: '영구제', price: 2000000, period: '일회성' },
             ],
             orbit: [
                 { id: 'orbit-monthly', name: '1개월', price: 60000, period: '/ 월' },
                 { id: 'orbit-quarterly', name: '3개월', price: 150000, period: '월 50,000원' },
                 { id: 'orbit-yearly', name: '1년', price: 600000, period: '월 50,000원' },
-                { id: 'orbit-lifetime', name: '영구제', price: 3000000, period: '일회성' },
             ],
             tistory: [
                 { id: 'tistory-monthly', name: '1개월', price: 30000, period: '/ 월' },
                 { id: 'tistory-quarterly', name: '3개월', price: 80000, period: '월 26,667원' },
                 { id: 'tistory-yearly', name: '1년', price: 300000, period: '월 25,000원' },
-                { id: 'tistory-lifetime', name: '영구제', price: 1500000, period: '일회성' },
             ],
             leword: [
                 { id: 'leword-monthly', name: '1개월', price: 30000, period: '/ 월' },
