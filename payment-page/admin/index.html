@@ -777,6 +777,10 @@
                     <span class="nav-icon">✏️</span>
                     <span>사이트 편집</span>
                 </div>
+                <div class="nav-item" data-tab="bank" onclick="switchTab('bank')">
+                    <span class="nav-icon">💰</span>
+                    <span>계좌이체</span>
+                </div>
                 <div class="nav-item" data-tab="trial" onclick="switchTab('trial')">
                     <span class="nav-icon">🎁</span>
                     <span>체험 관리</span>
@@ -992,6 +996,56 @@
                     </div>
                 </div>
             </div>
+
+            <!-- TAB: Bank Transfer Management -->
+            <div class="tab-panel" id="tab-bank">
+                <div class="page-header">
+                    <h1>계좌이체 관리</h1>
+                    <p>계좌이체 주문을 확인하고 승인/거절할 수 있습니다.</p>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+                    <div class="stat-card" style="border-left: 3px solid #f59e0b;">
+                        <div class="stat-top">
+                            <div class="stat-label">대기 중</div>
+                            <div class="stat-icon" style="background:rgba(245,158,11,0.1);color:#f59e0b;">⏳</div>
+                        </div>
+                        <div class="stat-value" style="color:#f59e0b;" id="bank-stat-pending">—</div>
+                    </div>
+                    <div class="stat-card card-green">
+                        <div class="stat-top">
+                            <div class="stat-label">승인 완료</div>
+                            <div class="stat-icon icon-green">✅</div>
+                        </div>
+                        <div class="stat-value green" id="bank-stat-approved">—</div>
+                    </div>
+                    <div class="stat-card" style="border-left: 3px solid #ef4444;">
+                        <div class="stat-top">
+                            <div class="stat-label">거절됨</div>
+                            <div class="stat-icon" style="background:rgba(239,68,68,0.1);color:#ef4444;">❌</div>
+                        </div>
+                        <div class="stat-value" style="color:#ef4444;" id="bank-stat-rejected">—</div>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>계좌이체 주문 목록</h3>
+                        <div class="table-actions">
+                            <select id="bank-status-filter" onchange="filterBankOrders()" style="padding:8px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.8rem;cursor:pointer;">
+                                <option value="all">전체</option>
+                                <option value="pending" selected>대기 중</option>
+                                <option value="approved">승인됨</option>
+                                <option value="rejected">거절됨</option>
+                            </select>
+                            <input class="search-input" id="bank-search" placeholder="🔍 이름/이메일 검색..." oninput="filterBankOrders()">
+                            <button class="btn" onclick="loadBankOrders()">🔄 새로고침</button>
+                        </div>
+                    </div>
+                    <div id="bank-table-body">
+                        <div class="loading-spinner"><div class="spinner-ring"></div> 계좌이체 주문 로딩 중...</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -1098,11 +1152,13 @@
                 codes: { title: '코드 관리', desc: '라이선스 코드를 발급, 조회, 무효화합니다.' },
                 orders: { title: '주문 내역', desc: '결제 완료된 주문과 활성화된 라이선스 내역입니다.' },
                 editor: { title: '사이트 편집', desc: '메인 결제 페이지의 핵심 콘텐츠를 수정합니다.' },
+                bank: { title: '계좌이체 관리', desc: '계좌이체 주문을 확인하고 승인/거절합니다.' },
                 trial: { title: '체험 관리', desc: '무료 체험 사용자 목록을 조회하고 관리합니다.' }
             };
 
             // Load data for the tab
             if (tabId === 'trial') loadTrialUsers();
+            if (tabId === 'bank') loadBankOrders();
         }
 
         // ===== TRAFFIC TRACKING =====
@@ -1621,6 +1677,157 @@
             }
         }
 
+
+        // ===== BANK TRANSFER MANAGEMENT =====
+        let allBankOrders = [];
+        let bankPage = 1;
+
+        async function loadBankOrders() {
+            document.getElementById('bank-table-body').innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 계좌이체 주문 로딩 중...</div>';
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'bank-list', adminToken: ADMIN_TOKEN, status: 'all' })
+                });
+                const json = await res.json();
+                if (json.ok) {
+                    allBankOrders = json.orders || [];
+                    // Update stats
+                    const pending = allBankOrders.filter(o => o.status === 'pending').length;
+                    const approved = allBankOrders.filter(o => o.status === 'approved').length;
+                    const rejected = allBankOrders.filter(o => o.status === 'rejected').length;
+                    document.getElementById('bank-stat-pending').textContent = pending;
+                    document.getElementById('bank-stat-approved').textContent = approved;
+                    document.getElementById('bank-stat-rejected').textContent = rejected;
+                    renderBankTable();
+                } else {
+                    document.getElementById('bank-table-body').innerHTML = `<div style="text-align:center;padding:32px;color:var(--text-secondary);">❌ ${json.error || '로딩 실패'}</div>`;
+                }
+            } catch (err) {
+                document.getElementById('bank-table-body').innerHTML = `<div style="text-align:center;padding:32px;color:var(--text-secondary);">❌ 네트워크 오류: ${err.message}</div>`;
+            }
+        }
+
+        function filterBankOrders() {
+            bankPage = 1;
+            renderBankTable();
+        }
+
+        function renderBankTable(customQuery) {
+            const q = (customQuery || document.getElementById('bank-search').value || '').toLowerCase();
+            const statusFilter = document.getElementById('bank-status-filter').value;
+
+            let filtered = allBankOrders;
+            if (statusFilter !== 'all') {
+                filtered = filtered.filter(o => o.status === statusFilter);
+            }
+            if (q) {
+                filtered = filtered.filter(o =>
+                    (o.name || '').toLowerCase().includes(q) ||
+                    (o.email || '').toLowerCase().includes(q) ||
+                    (o.orderId || '').toLowerCase().includes(q) ||
+                    (o.product || '').toLowerCase().includes(q)
+                );
+            }
+
+            const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+            bankPage = Math.min(bankPage, totalPages);
+            const start = (bankPage - 1) * PAGE_SIZE;
+            const pageItems = filtered.slice(start, start + PAGE_SIZE);
+
+            let html = '<table class="data-table"><thead><tr>';
+            html += '<th>주문번호</th><th>입금자명</th><th>이메일</th><th>상품</th><th>금액</th><th>상태</th><th>라이선스</th><th>접수일</th><th>작업</th>';
+            html += '</tr></thead><tbody>';
+
+            if (pageItems.length === 0) {
+                html += '<tr><td colspan="9" style="text-align:center;color:var(--text-secondary);padding:32px;">주문이 없습니다.</td></tr>';
+            } else {
+                pageItems.forEach(o => {
+                    let statusBadge = '';
+                    if (o.status === 'pending') statusBadge = '<span class="badge" style="background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);padding:4px 10px;border-radius:20px;font-size:0.7rem;font-weight:600;">⏳ 대기</span>';
+                    else if (o.status === 'approved') statusBadge = '<span class="badge badge-active">✅ 승인</span>';
+                    else if (o.status === 'rejected') statusBadge = '<span class="badge badge-expired">❌ 거절</span>';
+                    else statusBadge = `<span class="badge">${o.status}</span>`;
+
+                    const createdDate = o.createdAt ? new Date(o.createdAt).toLocaleString('ko-KR') : '—';
+                    const amount = o.amount ? o.amount.toLocaleString() + '원' : '—';
+                    const code = o.licenseCode ? `<span class="code-text">${escapeHtml(o.licenseCode)}</span>` : '—';
+                    const safeOrderId = escapeHtml(o.orderId);
+
+                    let actionBtns = '';
+                    if (o.status === 'pending') {
+                        actionBtns = `
+                            <button class="btn btn-gold" onclick="approveBankOrder('${safeOrderId}')" style="padding:4px 10px;font-size:0.7rem;margin-right:4px;">✅ 승인</button>
+                            <button class="btn btn-red" onclick="rejectBankOrder('${safeOrderId}')" style="padding:4px 10px;font-size:0.7rem;">❌ 거절</button>
+                        `;
+                    } else if (o.status === 'approved') {
+                        actionBtns = '<span style="color:var(--text-secondary);font-size:0.7rem;">처리 완료</span>';
+                    } else {
+                        actionBtns = '<span style="color:var(--text-secondary);font-size:0.7rem;">거절됨</span>';
+                    }
+
+                    html += `<tr>
+                        <td><span class="code-text">${safeOrderId}</span></td>
+                        <td>${escapeHtml(o.name) || '—'}</td>
+                        <td>${escapeHtml(o.email) || '—'}</td>
+                        <td>${escapeHtml(o.product) || '—'}</td>
+                        <td style="font-weight:600;">${amount}</td>
+                        <td>${statusBadge}</td>
+                        <td>${code}</td>
+                        <td>${escapeHtml(createdDate)}</td>
+                        <td>${actionBtns}</td>
+                    </tr>`;
+                });
+            }
+            html += '</tbody></table>';
+            html += buildPagination(bankPage, totalPages, filtered.length, 'bank');
+            document.getElementById('bank-table-body').innerHTML = html;
+        }
+
+        async function approveBankOrder(orderId) {
+            if (!confirm(`주문 ${orderId}을(를) 승인하시겠습니까?\n\n승인하면 라이선스가 자동 발급되고 고객에게 메일이 발송됩니다.`)) return;
+
+            showToast('⏳ 승인 처리 중...');
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'bank-approve', adminToken: ADMIN_TOKEN, orderId: orderId, reject: false })
+                });
+                const json = await res.json();
+                if (json.ok) {
+                    showToast(`✅ 승인 완료! 라이선스: ${json.code}`);
+                    await loadBankOrders();
+                } else {
+                    showToast('❌ 승인 실패: ' + (json.error || '알 수 없는 오류'));
+                }
+            } catch (err) {
+                showToast('❌ 네트워크 오류: ' + err.message);
+            }
+        }
+
+        async function rejectBankOrder(orderId) {
+            if (!confirm(`주문 ${orderId}을(를) 거절하시겠습니까?`)) return;
+
+            showToast('⏳ 거절 처리 중...');
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'bank-approve', adminToken: ADMIN_TOKEN, orderId: orderId, reject: true })
+                });
+                const json = await res.json();
+                if (json.ok) {
+                    showToast('✅ 주문이 거절되었습니다.');
+                    await loadBankOrders();
+                } else {
+                    showToast('❌ 거절 실패: ' + (json.error || '알 수 없는 오류'));
+                }
+            } catch (err) {
+                showToast('❌ 네트워크 오류: ' + err.message);
+            }
+        }
 
     </script>
 </body>

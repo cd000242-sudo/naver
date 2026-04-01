@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -99,7 +99,7 @@
             <div class="pricing-tabs" id="pricing-tabs">
                 <button class="pricing-tab active" data-tab="naver" onclick="switchPricingTab('naver')"><span class="product-icon-sm">N</span> Better Life Naver</button>
                 <button class="pricing-tab" data-tab="orbit" onclick="switchPricingTab('orbit')"><span class="product-icon-sm">W</span> Leaders Orbit</button>
-                <button class="pricing-tab" data-tab="tistory" onclick="switchPricingTab('tistory')"><span class="product-icon-sm">T</span> Leaders Tistory</button>
+                <button class="pricing-tab" data-tab="tistory" onclick="alert('Leaders Tistory는 현재 개발 중입니다. 출시 알림은 카카오톡으로 문의해주세요!'); return false;" style="opacity:0.5; cursor:not-allowed; position:relative;"><span class="product-icon-sm">T</span> Leaders Tistory <span style="font-size:0.6rem; background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:8px; margin-left:4px;">준비중</span></button>
                 <button class="pricing-tab" data-tab="leword" onclick="switchPricingTab('leword')"><span class="product-icon-sm">L</span> Leword</button>
             </div>
 
@@ -219,61 +219,12 @@
                 </div>
             </div>
 
-            <!-- ═══ Leaders Tistory 요금제 ═══ -->
             <div class="pricing-panel" id="panel-tistory">
-                <div class="pricing-grid">
-                    <div class="pricing-card trial" onclick="downloadFree('tistory')">
-                        <div class="pricing-badge trial-badge">🎁 FREE TRIAL</div>
-                        <div class="pricing-header"><h3 class="pricing-name">무료 체험</h3><p class="pricing-desc">먼저 체험해보세요</p></div>
-                        <div class="pricing-price"><span class="price-amount">무료</span></div>
-                        <div class="pricing-period">매일 2회 발행</div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 전체 기능 체험</li>
-                            <li><span class="check">✓</span> 사람형 타이핑 엔진</li>
-                            <li><span class="check">✓</span> 매일 2회 발행 제한</li>
-                            <li><span class="check">✓</span> 기간 제한 없음</li>
-                        </ul>
-                        <div class="pricing-select trial-select">🚀 체험하기 (다운로드)</div>
-                    </div>
-                    <div class="pricing-card" data-product="tistory-monthly" data-amount="30000" onclick="selectProduct(this)">
-                        <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">티스토리 시작</p></div>
-                        <div class="pricing-price"><span class="price-amount">30,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 월</div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 사람형 타이핑 엔진</li>
-                            <li><span class="check">✓</span> AI 콘텐츠 생성</li>
-                            <li><span class="check">✓</span> 카테고리·태그 자동화</li>
-                            <li><span class="check">✓</span> 이메일 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card" data-product="tistory-quarterly" data-amount="80000" onclick="selectProduct(this)">
-                        <div class="pricing-save">11% 절약</div>
-                        <div class="pricing-header"><h3 class="pricing-name">3개월</h3><p class="pricing-desc">안정적 운영</p></div>
-                        <div class="pricing-price"><span class="price-amount">80,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 3개월 <span class="price-monthly">(월 26,667원)</span></div>
-                        <ul class="pricing-features">
-                            <li><span class="check">✓</span> 전체 기능 이용</li>
-                            <li><span class="check">✓</span> 봇 감지 고급 우회</li>
-                            <li><span class="check">✓</span> 다계정 관리</li>
-                            <li><span class="check">✓</span> 우선 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-                    <div class="pricing-card featured" data-product="tistory-yearly" data-amount="300000" onclick="selectProduct(this)">
-                        <div class="pricing-badge">👑 추천</div>
-                        <div class="pricing-header"><h3 class="pricing-name">1년</h3><p class="pricing-desc">17% 할인</p></div>
-                        <div class="pricing-price"><span class="price-amount">300,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 년 <span class="price-monthly">(월 25,000원)</span></div>
-                        <ul class="pricing-features">
-                            <li><span class="check gold">✓</span> 전체 기능 이용</li>
-                            <li><span class="check gold">✓</span> 봇 감지 고급 우회</li>
-                            <li><span class="check gold">✓</span> 커뮤니티 입장</li>
-                            <li><span class="check gold">✓</span> 1:1 우선 지원</li>
-                        </ul>
-                        <div class="pricing-select">선택하기</div>
-                    </div>
-
+                <div style="text-align:center; padding:60px 20px;">
+                    <div style="font-size:3rem; margin-bottom:16px;">🔮</div>
+                    <h3 style="color:var(--text-primary); font-size:1.4rem; font-weight:800; margin:0 0 8px;">Leaders Tistory — 준비 중</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6; margin:0 0 24px;">티스토리 자동화는 현재 개발 중입니다.<br>출시되면 가장 먼저 알려드릴게요!</p>
+                    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" style="display:inline-block; padding:12px 28px; background:linear-gradient(135deg,#FEE500,#F5D100); color:#3C1E1E; border-radius:10px; text-decoration:none; font-weight:700; font-size:0.9rem;">💬 출시 알림 신청 (카카오톡)</a>
                 </div>
             </div>
 
