@@ -20,6 +20,9 @@ import { registerQuotaHandlers } from './quotaHandlers';
 import { registerScheduleHandlers } from './scheduleHandlers';
 import { registerAccountHandlers, AccountHandlerDeps } from './accountHandlers';
 import { registerConfigHandlers, ConfigHandlerContext } from './configHandlers';
+import { registerKeywordHandlers } from './keywordHandlers';
+import { registerProductHandlers } from './productHandlers';
+import { registerEngagementHandlers } from './engagementHandlers';
 
 /**
  * IPC 컨텍스트 생성
@@ -70,6 +73,15 @@ export function registerAllHandlers(): void {
     // 스케줄
     registerScheduleHandlers(ctx);
 
+    // 키워드 분석
+    registerKeywordHandlers();
+
+    // 베스트 상품
+    registerProductHandlers();
+
+    // 댓글/경쟁분석
+    registerEngagementHandlers();
+
     // 계정 관리 — deps가 필요하므로 registerAccountHandlersWithDeps()로 별도 호출
     // registerAccountHandlers(ctx, deps);
 
@@ -99,7 +111,10 @@ export {
     registerQuotaHandlers,
     registerScheduleHandlers,
     registerAccountHandlers,
-    registerConfigHandlers
+    registerConfigHandlers,
+    registerKeywordHandlers,
+    registerProductHandlers,
+    registerEngagementHandlers
 };
 
 export type { AccountHandlerDeps, ConfigHandlerContext };
