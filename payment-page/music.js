@@ -71,6 +71,13 @@
             box-shadow: 0 4px 24px rgba(255,107,138,0.25), 0 0 0 0 rgba(255,183,197,0);
             position: relative; overflow: visible;
         }
+        .lp-fab-play-icon {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b8a, #e0558e);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; color: #fff; flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(255,107,138,0.4);
+        }
         .lp-music-fab:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 32px rgba(255,107,138,0.4), 0 0 20px rgba(255,183,197,0.2);
@@ -269,9 +276,9 @@
             <div class="lp-playlist" id="lpmList"></div>
         </div>
         <div class="lp-music-fab entrance" id="lpmFab" title="🌸 음악 플레이어">
-            <span class="lp-fab-icon">🎵</span>
+            <div class="lp-fab-play-icon" id="lpmFabPlayIcon">▶</div>
             <div style="display:flex;flex-direction:column;gap:1px;">
-                <span class="lp-fab-label">Music</span>
+                <span class="lp-fab-label">♪ Music</span>
                 <span class="lp-fab-sublabel" id="lpmFabTrack">${PLAYLIST[currentTrack].title}</span>
             </div>
             <div class="lp-eq-bars" id="lpmEq">
@@ -319,6 +326,9 @@
         playBtn.textContent = isPlaying ? '⏸' : '▶';
         fab.classList.toggle('playing', isPlaying);
         eqEl.classList.toggle('active', isPlaying);
+        // Update FAB play icon
+        const fabPlayIcon = document.getElementById('lpmFabPlayIcon');
+        if (fabPlayIcon) fabPlayIcon.textContent = isPlaying ? '⏸' : '▶';
         // Update FAB sub-label with current track name
         if (fabTrackEl) {
             fabTrackEl.textContent = isPlaying ? PLAYLIST[currentTrack].title : '일시정지';

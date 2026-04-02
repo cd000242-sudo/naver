@@ -90,7 +90,7 @@
             <div class="nav-links" id="nav-links">
                 <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
                 <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품</a>
-                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">가격</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">구매</a>
                 <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
                 <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
                 <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
@@ -114,9 +114,10 @@
                 </div>
                 <div class="product-tabs" id="product-tabs">
                     <button class="product-tab active" onclick="switchTab('naver')">Better Life Naver</button>
-                    <button class="product-tab" onclick="switchTab('orbit')">Leaders Orbit</button>
-                    <button class="product-tab" onclick="switchTab('tistory')">Leaders Tistory</button>
-                    <button class="product-tab" onclick="switchTab('leword')">Leword</button>
+                    <!-- ★ 심사대응: 미출시 제품 숨김 -->
+                    <button class="product-tab" onclick="switchTab('orbit')" style="display:none">Leaders Orbit</button>
+                    <button class="product-tab" onclick="switchTab('tistory')" style="display:none">Leaders Tistory</button>
+                    <button class="product-tab" onclick="switchTab('leword')" style="display:none">Leword</button>
                 </div>
                 <div class="product-grid" id="product-grid"></div>
             </div>
@@ -237,7 +238,7 @@
                 { id: 'naver-monthly', name: '1개월', price: 50000, period: '/ 월' },
                 { id: 'naver-quarterly', name: '3개월', price: 120000, period: '월 40,000원' },
                 { id: 'naver-yearly', name: '1년', price: 400000, period: '월 33,333원' },
-                { id: 'naver-lifetime', name: '영구제', price: 2000000, period: '일회성' },
+                // ★ 영구제 제거됨
             ],
             orbit: [
                 { id: 'orbit-monthly', name: '1개월', price: 60000, period: '/ 월' },
