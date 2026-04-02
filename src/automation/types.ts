@@ -60,7 +60,7 @@ export interface RunOptions {
     toneStyle?: string;
     ctaLink?: string;
     ctaText?: string;
-    ctaPosition?: 'top' | 'middle' | 'bottom';
+    ctaPosition?: 'top' | 'middle' | 'bottom' | 'each-heading';
     useIntelligentImagePlacement?: boolean;
     onlyImagePlacement?: boolean;
     affiliateLink?: string;

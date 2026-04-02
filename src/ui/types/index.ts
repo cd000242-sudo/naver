@@ -88,7 +88,7 @@ export interface AutomationOptions {
     skipImages?: boolean;
     skipCta?: boolean;
     ctas?: CtaItem[];
-    ctaPosition?: 'top' | 'middle' | 'bottom';
+    ctaPosition?: 'top' | 'middle' | 'bottom' | 'each-heading';
     affiliateLink?: string;
     category?: string;
 }

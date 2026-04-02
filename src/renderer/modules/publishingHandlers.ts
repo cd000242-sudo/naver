@@ -268,7 +268,7 @@ export async function handleFullAutoPublish(): Promise<void> {
     }
 
     // ✅ CTA 위치 고정
-    const ctaPosition = ((document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value as 'top' | 'middle' | 'bottom') || 'bottom';
+    const ctaPosition = ((document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value as 'top' | 'middle' | 'bottom' | 'each-heading') || 'bottom';
 
     // ✅ [2026-03-10 CLEANUP] full-auto-thumbnail-text 유령 참조 제거 → localStorage 단일 소스
     const includeThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true' ||
@@ -1057,7 +1057,7 @@ export async function handleMultiAccountPublish(): Promise<void> {
 
   const ctasUi = readUnifiedCtasFromUi();
   const skipCta = (document.getElementById('unified-skip-cta') as HTMLInputElement)?.checked || false;
-  const ctaPosition = ((document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value as 'top' | 'middle' | 'bottom') || 'bottom';
+  const ctaPosition = ((document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value as 'top' | 'middle' | 'bottom' | 'each-heading') || 'bottom';
   const preferredTitle = String(mainSettings.generatedTitle || mainSettings.title || '').trim();
 
   // 콘텐츠 소스 확인
@@ -1522,7 +1522,7 @@ export async function handleSemiAutoPublish(): Promise<void> {
   }
 
   // ✅ CTA 위치 고정
-  const ctaPosition = ((document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value as 'top' | 'middle' | 'bottom') || 'bottom';
+  const ctaPosition = ((document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value as 'top' | 'middle' | 'bottom' | 'each-heading') || 'bottom';
 
   // ✅ 이미지 객체 정규화: main 프로세스에서 filePath가 없으면 드랍될 수 있어서 여기서 보강
   const normalizedImagesForPublish = (Array.isArray(imageManagementImages) ? imageManagementImages : [])

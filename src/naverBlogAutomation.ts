@@ -210,7 +210,7 @@ export interface RunOptions {
   ctaLink?: string;
   ctaText?: string;
   ctas?: Array<{ text: string; link?: string }>;
-  ctaPosition?: 'top' | 'middle' | 'bottom'; // CTA 위치
+  ctaPosition?: 'top' | 'middle' | 'bottom' | 'each-heading'; // CTA 위치
   skipCta?: boolean; // ✅ CTA 없이 발행하기
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   thumbnailPath?: string; // 대표 이미지 경로
@@ -256,7 +256,7 @@ interface ResolvedRunOptions {
   ctaLink?: string;
   ctaText?: string;
   ctas: Array<{ text: string; link?: string }>;
-  ctaPosition?: 'top' | 'middle' | 'bottom'; // CTA 위치
+  ctaPosition?: 'top' | 'middle' | 'bottom' | 'each-heading'; // CTA 위치
   skipCta?: boolean; // ✅ CTA 없이 발행하기
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   imageMode?: 'full-auto' | 'semi-auto' | 'manual' | 'skip'; // 이미지 모드

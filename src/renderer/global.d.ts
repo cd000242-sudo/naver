@@ -196,7 +196,7 @@ type RendererAutomationPayload = {
   ctaLink?: string;
   ctaText?: string;
   ctas?: Array<{ text: string; link?: string }>;
-  ctaPosition?: 'top' | 'middle' | 'bottom';
+  ctaPosition?: 'top' | 'middle' | 'bottom' | 'each-heading';
   skipCta?: boolean; // ✅ CTA 없이 발행하기
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';

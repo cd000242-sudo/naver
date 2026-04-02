@@ -1449,6 +1449,7 @@
                                 <option value="bottom">하단 (해시태그 다음)</option>
                                 <option value="top">상단 (제목 다음)</option>
                                 <option value="middle">중간 (본문 중간)</option>
+                                <option value="each-heading">각 소제목 아래</option>
                             </select>
                         </div>
 
@@ -6490,7 +6491,9 @@
                             CTA
                             설정
                         </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+
+                        <!-- CTA 유형 + 이전글 선택 -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
                             <div>
                                 <label
                                     style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">CTA
@@ -6502,28 +6505,40 @@
                                     <option value="custom">✏️ 커스텀 CTA</option>
                                 </select>
                             </div>
-                            <div>
-                                <label
-                                    style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">링크
-                                    URL</label>
-                                <input type="text" id="continuous-modal-cta-url"
-                                    placeholder="https://blog.naver.com/..."
-                                    style="width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border-medium); background: var(--bg-secondary); color: var(--text-strong); font-size: 0.85rem;">
-                            </div>
-                            <div style="margin-top: 0.5rem;">
+                            <div style="display: flex; align-items: flex-end;">
                                 <button type="button" id="continuous-modal-select-prevpost-btn"
-                                    style="width: 100%; padding: 0.55rem 0.75rem; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.45); border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 0.85rem;">
+                                    style="width: 100%; padding: 0.5rem 0.75rem; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.45); border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 0.85rem;">
                                     🔍 이전글 선택
                                 </button>
                             </div>
-                            <div style="margin-top: 0.5rem;">
-                                <label
-                                    style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">CTA
-                                    텍스트</label>
-                                <input type="text" id="continuous-modal-cta-text" placeholder="예: 더 많은 정보는 여기를 클릭하세요!"
-                                    style="width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border-medium); background: var(--bg-secondary); color: var(--text-strong); font-size: 0.85rem;">
-                            </div>
                         </div>
+
+                        <!-- 다중 CTA 항목 -->
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">CTA 항목</div>
+                            <button type="button" id="continuous-modal-add-cta-btn"
+                                style="padding: 0.35rem 0.7rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.8rem;">➕ CTA 추가</button>
+                        </div>
+                        <div id="continuous-modal-cta-items-container"
+                            style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem;">
+                        </div>
+
+                        <!-- CTA 위치 선택 -->
+                        <div style="margin-bottom: 0.5rem;">
+                            <label
+                                style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">📍 CTA 위치</label>
+                            <select id="continuous-modal-cta-position"
+                                style="width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border-medium); background: var(--bg-secondary); color: var(--text-strong); font-size: 0.85rem;">
+                                <option value="bottom">하단 (해시태그 다음)</option>
+                                <option value="top">상단 (제목 다음)</option>
+                                <option value="middle">중간 (본문 중간)</option>
+                                <option value="each-heading">각 소제목 아래</option>
+                            </select>
+                        </div>
+
+                        <!-- 레거시 hidden 필드 (호환용) -->
+                        <input type="hidden" id="continuous-modal-cta-url" value="">
+                        <input type="hidden" id="continuous-modal-cta-text" value="">
 
                         <!-- ✅ [2026-02-19] 쇼핑 커넥트 설정 → 쇼핑커넥트 서브탭으로 통합 (중복 제거) -->
 

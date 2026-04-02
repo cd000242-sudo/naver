@@ -26,7 +26,7 @@ type AutomationPayload = {
   ctaLink?: string;
   ctaText?: string;
   ctas?: Array<{ text: string; link?: string }>;
-  ctaPosition?: 'top' | 'middle' | 'bottom';
+  ctaPosition?: 'top' | 'middle' | 'bottom' | 'each-heading';
   skipCta?: boolean;
   skipImages?: boolean;
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';

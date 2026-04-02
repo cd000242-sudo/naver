@@ -48,7 +48,7 @@ export type RendererAutomationPayload = {
     ctaLink?: string;
     ctaText?: string;
     ctas?: Array<{ text: string; link?: string }>;
-    ctaPosition?: 'top' | 'middle' | 'bottom';
+    ctaPosition?: 'top' | 'middle' | 'bottom' | 'each-heading';
     skipCta?: boolean;
     skipImages?: boolean;
     targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
@@ -97,6 +97,8 @@ export interface ContinuousQueueItem {
     ctaType?: string;
     ctaUrl?: string;
     ctaText?: string;
+    ctas?: Array<{ text: string; link?: string }>;
+    ctaPosition?: 'top' | 'middle' | 'bottom' | 'each-heading';
     category?: string;
     contentMode?: 'seo' | 'homefeed' | 'affiliate' | 'custom';
     toneStyle?: string;

@@ -1,6 +1,13 @@
 import { app, BrowserWindow, dialog, ipcMain, nativeImage, NativeImage, shell, Notification, Tray, Menu } from 'electron';
 import path from 'path';
 import dotenv from 'dotenv';
+
+// ✅ [2026-04-03] 앱 시작 디버그 로그 (silent crash 진단용)
+try {
+  const _fs = require('fs');
+  const debugPath = path.join(process.env.TEMP || '/tmp', 'bln-startup-debug.log');
+  _fs.writeFileSync(debugPath, `[${new Date().toISOString()}] App starting...\napp: ${typeof app}\nipcMain: ${typeof ipcMain}\nisPackaged: ${app?.isPackaged}\nprocess.type: ${process.type}\n`);
+} catch(e) { /* ignore */ }
 import cron from 'node-cron';
 import { NaverBlogAutomation, RunOptions, type PublishMode, type AutomationImage } from './naverBlogAutomation.js';
 import { generateImages, resetAllImageState } from './imageGenerator.js';
@@ -145,21 +152,24 @@ console.log('[Stability] Main 프로세스 전역 에러 핸들러 등록 완료
 // - 모든 ipcMain.handle 호출에 자동 try-catch 적용
 // - 206개+ 핸들러를 개별 수정하지 않고 한 번에 보호
 // ═══════════════════════════════════════════════════════════════════════════════
-const _originalIpcHandle = ipcMain.handle.bind(ipcMain);
-(ipcMain as any).handle = (channel: string, handler: (...args: any[]) => any) => {
-  _originalIpcHandle(channel, async (event: any, ...args: any[]) => {
-    try {
-      return await handler(event, ...args);
-    } catch (error) {
-      const msg = (error as Error).message || '알 수 없는 오류';
-      console.error(`[SafeIPC] ❌ "${channel}" 핸들러 에러: ${msg}`);
-      console.error(`[SafeIPC] Stack:`, (error as Error).stack?.split('\n').slice(0, 3).join('\n'));
-      // 렌더러가 항상 응답을 받도록 보장
-      return { success: false, message: `[${channel}] ${msg}`, error: msg };
-    }
-  });
-};
-console.log('[Stability] IPC 핸들러 글로벌 안전 래퍼 등록 완료');
+if (ipcMain && typeof ipcMain.handle === 'function') {
+  const _originalIpcHandle = ipcMain.handle.bind(ipcMain);
+  (ipcMain as any).handle = (channel: string, handler: (...args: any[]) => any) => {
+    _originalIpcHandle(channel, async (event: any, ...args: any[]) => {
+      try {
+        return await handler(event, ...args);
+      } catch (error) {
+        const msg = (error as Error).message || '알 수 없는 오류';
+        console.error(`[SafeIPC] ❌ "${channel}" 핸들러 에러: ${msg}`);
+        console.error(`[SafeIPC] Stack:`, (error as Error).stack?.split('\n').slice(0, 3).join('\n'));
+        return { success: false, message: `[${channel}] ${msg}`, error: msg };
+      }
+    });
+  };
+  console.log('[Stability] IPC 핸들러 글로벌 안전 래퍼 등록 완료');
+} else {
+  console.warn('[Stability] ipcMain 사용 불가 — 안전 래퍼 건너뜀');
+}
 
 // ✅ [리팩토링] blogHandlers 로직 함수 import
 import {
@@ -1006,7 +1016,7 @@ type AutomationRequest = {
   ctaLink?: string;
   ctaText?: string;
   ctas?: Array<{ text: string; link?: string }>;
-  ctaPosition?: 'top' | 'middle' | 'bottom'; // ✅ [신규] CTA 위치
+  ctaPosition?: 'top' | 'middle' | 'bottom' | 'each-heading'; // ✅ [신규] CTA 위치
   skipCta?: boolean; // ✅ [신규] CTA 없이 발행
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
@@ -10228,12 +10238,33 @@ async function showLicenseInputDialog(): Promise<string | null> {
 // Single Instance Lock - 중복 실행 방지
 // ✅ [2026-02-18] setName을 lock 앞에 호출하여 admin-panel과 lock 충돌 방지
 app.setName('better-life-naver');
+
+// ✅ [2026-04-03] 디버그 로그 확장
+try {
+  const _fs2 = require('fs');
+  const _p = require('path');
+  const dbg = _p.join(process.env.TEMP || '/tmp', 'bln-startup-debug.log');
+  _fs2.appendFileSync(dbg, `\n[${new Date().toISOString()}] Before requestSingleInstanceLock\n`);
+} catch(e) {}
+
 const gotTheLock = app.requestSingleInstanceLock();
 
+try {
+  const _fs2 = require('fs');
+  const _p = require('path');
+  const dbg = _p.join(process.env.TEMP || '/tmp', 'bln-startup-debug.log');
+  _fs2.appendFileSync(dbg, `[${new Date().toISOString()}] gotTheLock: ${gotTheLock}\n`);
+} catch(e) {}
+
 if (!gotTheLock) {
-  console.log('[Main] Another instance is already running. Exiting immediately...');
-  // 즉시 종료 (다른 코드 실행 없이)
-  process.exit(0);
+  console.error('[Main] Another instance is already running. Exiting immediately...');
+  app.whenReady().then(() => {
+    const { dialog: dlg } = require('electron');
+    dlg.showErrorBox('이미 실행 중', '앱이 이미 실행 중입니다. 기존 창을 확인해주세요.');
+    app.quit();
+  });
+  // 5초 후 강제 종료 (dialog가 안 뜰 경우 대비)
+  setTimeout(() => process.exit(0), 5000);
 } else {
   console.log('[Main] Single instance lock acquired');
 
@@ -10362,9 +10393,13 @@ app.whenReady().then(async () => {
     // ✅ [2026-03-11] 업데이트를 먼저 확인하고, 결과에 따라 인증창 표시 여부 결정
     // 사용자 요청: "앱을 키면 업데이트 확인 먼저 → 업데이트 없으면 인증창, 있으면 업데이트"
     if (app.isPackaged) {
-      initAutoUpdaterEarly();
-      debugLog('[Main] 업데이트 확인 중...');
-      const hasUpdate = await waitForUpdateCheck();
+      try {
+        initAutoUpdaterEarly();
+        debugLog('[Main] 업데이트 확인 중...');
+      } catch (updErr) {
+        debugLog(`[Main] ⚠️ 업데이터 초기화 실패 (무시): ${(updErr as Error).message}`);
+      }
+      const hasUpdate = await waitForUpdateCheck().catch(() => false);
       if (hasUpdate) {
         debugLog('[Main] 업데이트 발견 → 다운로드 진행 중, 인증창 생성 안 함');
         // 업데이트 다운로드 → 자동 재시작 (updater.ts에서 처리)

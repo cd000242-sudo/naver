@@ -1378,6 +1378,81 @@ export function initContinuousPublishingV2(): void {
       }
     });
 
+    // ✅ [2026-04-02] 연속발행 상세설정 모달 — 다중 CTA 항목 관리
+    {
+      const modalCtaContainer = document.getElementById('continuous-modal-cta-items-container') as HTMLDivElement | null;
+      const modalAddCtaBtn = document.getElementById('continuous-modal-add-cta-btn') as HTMLButtonElement | null;
+
+      const appendModalCtaRow = (preset?: { text?: string; link?: string }) => {
+        if (!modalCtaContainer) return;
+        const row = document.createElement('div');
+        row.className = 'continuous-modal-cta-item';
+        row.style.cssText = 'display:flex; gap:0.4rem; align-items:center;';
+        const presetText = String(preset?.text || '').trim();
+        const presetLink = String(preset?.link || '').trim();
+        row.innerHTML = `
+          <input type="text" class="cm-cta-text" placeholder="CTA 텍스트" value="${presetText.replace(/"/g, '&quot;')}"
+            style="flex:1; padding:0.45rem; border-radius:6px; border:1px solid var(--border-medium); background:var(--bg-secondary); color:var(--text-strong); font-size:0.82rem;">
+          <input type="url" class="cm-cta-link" placeholder="링크 URL" value="${presetLink.replace(/"/g, '&quot;')}"
+            style="flex:1; padding:0.45rem; border-radius:6px; border:1px solid var(--border-medium); background:var(--bg-secondary); color:var(--text-strong); font-size:0.82rem;">
+          <button type="button" class="cm-cta-remove" style="padding:0.35rem 0.6rem; background:rgba(239,68,68,0.15); color:#ef4444; border:1px solid rgba(239,68,68,0.35); border-radius:6px; cursor:pointer; font-size:0.8rem;">✕</button>
+        `;
+        modalCtaContainer.appendChild(row);
+      };
+
+      const ensureModalCtaRow = () => {
+        if (!modalCtaContainer) return;
+        if (modalCtaContainer.querySelectorAll('.continuous-modal-cta-item').length === 0) {
+          appendModalCtaRow();
+        }
+      };
+
+      // 초기 1개 행 보장
+      if (modalCtaContainer) ensureModalCtaRow();
+
+      // 추가 버튼
+      if (modalAddCtaBtn && !modalAddCtaBtn.hasAttribute('data-listener-added')) {
+        modalAddCtaBtn.setAttribute('data-listener-added', 'true');
+        modalAddCtaBtn.addEventListener('click', () => appendModalCtaRow());
+      }
+
+      // 삭제 위임
+      if (modalCtaContainer && !modalCtaContainer.hasAttribute('data-cta-delegation')) {
+        modalCtaContainer.setAttribute('data-cta-delegation', 'true');
+        modalCtaContainer.addEventListener('click', (e) => {
+          const target = e.target as HTMLElement | null;
+          if (target?.classList.contains('cm-cta-remove')) {
+            const row = target.closest('.continuous-modal-cta-item') as HTMLElement | null;
+            if (row) row.remove();
+            ensureModalCtaRow();
+          }
+        });
+      }
+
+      // 글로벌 헬퍼: 모달 CTA 아이템 읽기
+      (window as any)._getModalCtaItems = (): Array<{ text: string; link?: string }> => {
+        if (!modalCtaContainer) return [];
+        const items: Array<{ text: string; link?: string }> = [];
+        modalCtaContainer.querySelectorAll('.continuous-modal-cta-item').forEach(row => {
+          const text = (row.querySelector('.cm-cta-text') as HTMLInputElement)?.value?.trim() || '';
+          const link = (row.querySelector('.cm-cta-link') as HTMLInputElement)?.value?.trim() || '';
+          if (text || link) items.push({ text, link: link || undefined });
+        });
+        return items;
+      };
+
+      // 글로벌 헬퍼: 모달 CTA 아이템 세팅
+      (window as any)._setModalCtaItems = (items: Array<{ text: string; link?: string }>) => {
+        if (!modalCtaContainer) return;
+        modalCtaContainer.innerHTML = '';
+        if (!items || items.length === 0) {
+          appendModalCtaRow();
+          return;
+        }
+        items.forEach(item => appendModalCtaRow({ text: item.text, link: item.link }));
+      };
+    }
+
     // ✅ [2026-01-27] 연속발행/다중계정 이미지 설정 버튼 → 자동완성 이미지 설정 모달 열기 (이벤트 위임)
     document.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
@@ -1501,6 +1576,11 @@ export function initContinuousPublishingV2(): void {
             if (dateVal && timeVal) scheduleDate = `${dateVal}T${timeVal}`;
           }
 
+          // ✅ [2026-04-02] 다중 CTA 항목 + 위치 수집
+          const modalCtas = (window as any)._getModalCtaItems?.() || [];
+          const ctaPositionEl = document.getElementById('continuous-modal-cta-position') as HTMLSelectElement | null;
+          const firstCta = modalCtas[0] || {};
+
           continuousQueueV2[editingIndex] = {
             ...item,
             category: categorySelect?.value || 'entertainment',
@@ -1508,8 +1588,10 @@ export function initContinuousPublishingV2(): void {
             toneStyle: toneStyleSelect?.value || 'professional',
             imageSource: imageSourceSelect?.value || getFullAutoImageSource(),
             ctaType: ctaTypeSelect?.value || 'none',
-            ctaUrl: ctaUrlInput?.value || '',
-            ctaText: ctaTextInput?.value || '',
+            ctaUrl: firstCta.link || ctaUrlInput?.value || '',
+            ctaText: firstCta.text || ctaTextInput?.value || '',
+            ctas: modalCtas.length > 0 ? modalCtas : undefined,
+            ctaPosition: (ctaPositionEl?.value as any) || 'bottom',
             publishMode: (publishModeRadio?.value || 'publish') as any,
             interval: parseInt(intervalValueInput?.value || '30') * parseInt(intervalUnitSelect?.value || '1'),
             realCategory,
@@ -2194,6 +2276,14 @@ function addItemToQueueV2(): void {
       ctaType,
       ctaUrl,
       ctaText,
+      // ✅ [2026-04-02] 다중 CTA + 위치 (모달에서 수집)
+      ctas: (() => {
+        const modalCtas = (window as any)._getModalCtaItems?.() || [];
+        if (modalCtas.length > 0) return modalCtas;
+        if (ctaType !== 'none' && (ctaUrl || ctaText)) return [{ text: ctaText || '자세히 보러가기', link: ctaUrl || undefined }];
+        return undefined;
+      })(),
+      ctaPosition: ((document.getElementById('continuous-modal-cta-position') as HTMLSelectElement | null)?.value as 'top' | 'middle' | 'bottom' | 'each-heading') || 'bottom',
       category,       // ✅ 카테고리 추가
       contentMode,    // ✅ 콘텐츠 모드 추가
       toneStyle: (document.getElementById('continuous-tone-style-select') as HTMLSelectElement)?.value || 'professional', // ✅ 글톤 추가
@@ -3236,6 +3326,21 @@ function showEditQueueItemModal(item: ContinuousQueueItem, options?: { fromFullV
   const ctaTextEl = document.getElementById('continuous-modal-cta-text') as HTMLInputElement | null;
   if (ctaTextEl) ctaTextEl.value = item.ctaText || '';
 
+  // ✅ [2026-04-02] 다중 CTA 항목 복원
+  if ((window as any)._setModalCtaItems) {
+    if (item.ctas && item.ctas.length > 0) {
+      (window as any)._setModalCtaItems(item.ctas);
+    } else if (item.ctaUrl || item.ctaText) {
+      (window as any)._setModalCtaItems([{ text: item.ctaText || '', link: item.ctaUrl || '' }]);
+    } else {
+      (window as any)._setModalCtaItems([]);
+    }
+  }
+
+  // CTA 위치 복원
+  const ctaPositionEl = document.getElementById('continuous-modal-cta-position') as HTMLSelectElement | null;
+  if (ctaPositionEl) ctaPositionEl.value = item.ctaPosition || 'bottom';
+
   const thumbnailTextEl = document.getElementById('continuous-modal-include-thumbnail-text') as HTMLInputElement | null;
   if (thumbnailTextEl) thumbnailTextEl.checked = !!item.includeThumbnailText;
 
@@ -3760,13 +3865,16 @@ async function startContinuousPublishingV2(): Promise<void> {
           ctaText: item.ctaType === 'previous-post' && item.previousPostUrl
             ? (item.previousPostTitle && !item.ctaText?.startsWith('📖') ? `📖 추천 글: ${item.previousPostTitle}` : item.ctaText)
             : item.ctaText,
-          // ✅ ctaType에 따른 skipCta 및 ctas 설정
+          // ✅ ctaType에 따른 skipCta 및 ctas 설정 (다중 CTA + 위치 지원)
           skipCta: item.ctaType === 'none',
-          ctas: item.ctaType === 'custom' && item.ctaUrl ? [{
-            link: item.ctaUrl,
-            text: item.ctaText || '자세히 보러가기',
-            position: 'bottom'
-          }] : undefined,
+          ctas: item.ctaType !== 'none' && item.ctas && item.ctas.length > 0
+            ? item.ctas.map(c => ({ link: c.link, text: c.text || '자세히 보러가기', position: item.ctaPosition || 'bottom' }))
+            : (item.ctaType === 'custom' && item.ctaUrl ? [{
+                link: item.ctaUrl,
+                text: item.ctaText || '자세히 보러가기',
+                position: item.ctaPosition || 'bottom'
+              }] : undefined),
+          ctaPosition: item.ctaPosition || 'bottom',
           category: item.category || selectedCategory, // ✅ [2026-01-22 FIX] 연속발행 항목의 콘텐츠 카테고리 우선 사용 (CTA 이전글 찾기용)
           categoryName: item.realCategoryName, // ✅ [2026-02-03 FIX] 네이버 블로그 카테고리 이름 전달
           contentMode: item.contentMode, // ✅ 콘텐츠 모드 추가

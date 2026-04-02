@@ -4,14 +4,25 @@
  * - 앱 시작 시 자동 체크, 백그라운드 다운로드, 강제 설치 후 재시작
  */
 
-import { autoUpdater, UpdateInfo, ProgressInfo } from 'electron-updater';
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 
-// 로깅 설정 (console 사용)
-
-// 설정
-autoUpdater.autoDownload = true; // ✅ 자동 다운로드 (사용자 확인 없이 백그라운드에서 다운로드)
-autoUpdater.autoInstallOnAppQuit = true;
+// ✅ [2026-04-03] electron-updater 지연 로드 (개발 모드 crash 방지)
+let _autoUpdater: any = null;
+function getAutoUpdater() {
+  if (!_autoUpdater) {
+    try {
+      const { autoUpdater: au } = require('electron-updater');
+      au.autoDownload = true;
+      au.autoInstallOnAppQuit = true;
+      _autoUpdater = au;
+    } catch (e) {
+      console.warn('[Updater] electron-updater 로드 실패:', (e as Error).message);
+    }
+  }
+  return _autoUpdater;
+}
+type UpdateInfo = any;
+type ProgressInfo = any;
 
 let mainWindow: BrowserWindow | null = null;
 let loginWindow: BrowserWindow | null = null; // ✅ [2026-03-07] 인증창 참조 (업데이트 재시작 시 닫기용)
@@ -240,8 +251,10 @@ function sendStatusToWindow(channel: string, data?: any): void {
  */
 export async function checkForUpdates(): Promise<void> {
     try {
+        const updater = getAutoUpdater();
+        if (!updater) return;
         console.log('[Updater] 업데이트 확인 시작...');
-        await autoUpdater.checkForUpdates();
+        await updater.checkForUpdates();
     } catch (error) {
         console.error('[Updater] 업데이트 확인 실패:', error);
     }
@@ -251,14 +264,16 @@ export async function checkForUpdates(): Promise<void> {
  * 업데이트 다운로드 시작
  */
 export function downloadUpdate(): void {
-    autoUpdater.downloadUpdate();
+    const updater = getAutoUpdater();
+    if (updater) updater.downloadUpdate();
 }
 
 /**
  * 업데이트 설치 및 재시작
  */
 export function quitAndInstall(): void {
-    autoUpdater.quitAndInstall();
+    const updater = getAutoUpdater();
+    if (updater) updater.quitAndInstall();
 }
 
 /**
@@ -275,14 +290,21 @@ export function initAutoUpdaterEarly(): void {
 
     sendLogToRenderer('[Updater] 자동 업데이터 초기화 시작...');
 
+    const updater = getAutoUpdater();
+    if (!updater) {
+        sendLogToRenderer('[Updater] updater 로드 실패 → 초기화 건너뜀');
+        if (updateCheckResolve) { updateCheckResolve(false); updateCheckResolve = null; }
+        return;
+    }
+
     // ✅ 업데이트 체크 중
-    autoUpdater.on('checking-for-update', () => {
+    updater.on('checking-for-update', () => {
         sendLogToRenderer('[Updater] 업데이트 확인 중...');
         sendStatusToWindow('update-checking');
     });
 
     // ✅ 업데이트 발견 (자동 다운로드 중이므로 알림만 표시)
-    autoUpdater.on('update-available', (info: UpdateInfo) => {
+    updater.on('update-available', (info: UpdateInfo) => {
         sendLogToRenderer(`[Updater] 새 업데이트 발견: ${info.version}`);
         sendStatusToWindow('update-available', {
             version: info.version,
@@ -310,7 +332,7 @@ export function initAutoUpdaterEarly(): void {
     });
 
     // ✅ 업데이트 없음
-    autoUpdater.on('update-not-available', () => {
+    updater.on('update-not-available', () => {
         sendLogToRenderer('[Updater] 최신 버전입니다.');
         sendStatusToWindow('update-not-available');
         // ✅ [2026-03-11] Promise resolve: 업데이트 없음 → main.ts에서 인증창 생성
@@ -321,7 +343,7 @@ export function initAutoUpdaterEarly(): void {
     });
 
     // ✅ 다운로드 진행률
-    autoUpdater.on('download-progress', (progress: ProgressInfo) => {
+    updater.on('download-progress', (progress: ProgressInfo) => {
         const percent = Math.round(progress.percent);
         sendLogToRenderer(`[Updater] 다운로드 중: ${percent}%`);
 
@@ -337,7 +359,7 @@ export function initAutoUpdaterEarly(): void {
     });
 
     // ✅ 다운로드 완료 - 강제 재시작
-    autoUpdater.on('update-downloaded', (info: UpdateInfo) => {
+    updater.on('update-downloaded', (info: UpdateInfo) => {
         sendLogToRenderer(`[Updater] 다운로드 완료: ${info.version}`);
 
         // ✅ [Premium UI] 세련된 강제 재시작 알림
@@ -371,7 +393,7 @@ export function initAutoUpdaterEarly(): void {
                     sendLogToRenderer('[Updater] 인증창 닫기 (업데이트 재시작)');
                     loginWindow.close();
                 }
-                autoUpdater.quitAndInstall();
+                updater.quitAndInstall();
             }).catch((err) => {
                 sendLogToRenderer(`[Updater] 다이얼로그 에러: ${err}`);
                 closeProgressWindow();
@@ -379,7 +401,7 @@ export function initAutoUpdaterEarly(): void {
                 if (loginWindow && !loginWindow.isDestroyed()) {
                     loginWindow.close();
                 }
-                autoUpdater.quitAndInstall();
+                updater.quitAndInstall();
             });
         } else {
             sendLogToRenderer('[Updater] targetWindow 없음, 진행률 창에서 완료 표시');
@@ -398,7 +420,7 @@ export function initAutoUpdaterEarly(): void {
                         sendLogToRenderer('[Updater] 인증창 닫기 (업데이트 재시작)');
                         loginWindow.close();
                     }
-                    autoUpdater.quitAndInstall();
+                    updater.quitAndInstall();
                 };
 
                 progressWindow.webContents.executeJavaScript(`
@@ -429,7 +451,7 @@ export function initAutoUpdaterEarly(): void {
                     if (loginWindow && !loginWindow.isDestroyed()) {
                         loginWindow.close();
                     }
-                    autoUpdater.quitAndInstall();
+                    updater.quitAndInstall();
                 });
             }
         }
@@ -440,7 +462,7 @@ export function initAutoUpdaterEarly(): void {
     });
 
     // ✅ 에러 처리 - [2026-02-05 FIX] 진행률 창을 바로 닫지 않고 에러 표시 후 사용자 확인 대기
-    autoUpdater.on('error', (error) => {
+    updater.on('error', (error: any) => {
         sendLogToRenderer(`[Updater] ❌ 오류: ${error.message}`);
 
         // ✅ [2026-03-11] 업데이트 실패 시 플래그 해제
