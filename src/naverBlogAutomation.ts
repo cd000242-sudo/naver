@@ -8572,67 +8572,68 @@ export class NaverBlogAutomation {
    * ✅ [2026-03-27 FIX] 발행 완료 후 브라우저 창 숨기기 (세션 유지)
    * 1단계: CDP Browser.setWindowBounds로 창을 화면 밖(-32000, -32000)으로 이동
    * 2단계: 최소화 적용 (이중 보험)
-   * 최소화만 하면 작업 표시줄 클릭 시 다시 보이므로, 화면 밖 이동이 더 확실
+   * ✅ [2026-04-02 FIX] Win32 ShowWindow(SW_HIDE)로 완전 숨김
+   * 최소화는 작업표시줄에 여전히 보이므로, SW_HIDE로 작업표시줄에서도 제거
+   * 세션은 유지되므로 다음 발행 시 showBrowserWindow()로 복원 가능
    */
   async minimizeBrowserWindow(): Promise<void> {
-    if (!this.page) return;
+    if (!this.browser) return;
     try {
-      const client = await this.page.target().createCDPSession();
-      const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
-      
-      // 1단계: 화면 밖으로 이동 (normal 상태에서만 위치 변경 가능)
-      await client.send('Browser.setWindowBounds', {
-        windowId,
-        bounds: { windowState: 'normal' }
-      }).catch(() => {});
-      
-      await client.send('Browser.setWindowBounds', {
-        windowId,
-        bounds: { left: -32000, top: -32000, width: 800, height: 600 }
-      });
-      
-      // 2단계: 최소화 (이중 보험)
-      await client.send('Browser.setWindowBounds', {
-        windowId,
-        bounds: { windowState: 'minimized' }
-      });
-      
-      await client.detach();
-      this.log('🔽 브라우저 창 숨기기 완료 (화면 밖 이동 + 최소화)');
+      const pid = this.browser.process()?.pid;
+      if (!pid) {
+        this.log('⚠️ 브라우저 PID를 찾을 수 없어 숨기기 스킵');
+        return;
+      }
+
+      // Win32 ShowWindow(SW_HIDE = 0) — 작업표시줄에서도 완전히 제거
+      // ✅ [2026-04-02] -MemberDefinition 단일라인 (here-string 멀티라인 cmd.exe 호환 문제 해결)
+      const hideCmd = `powershell -NoProfile -NonInteractive -Command "Add-Type -MemberDefinition '[DllImport(\\\"user32.dll\\\")] public static extern bool ShowWindow(IntPtr h, int c);' -Name WinApi -Namespace HideBrowser -EA SilentlyContinue; Get-Process -Id ${pid} -EA SilentlyContinue | Where-Object { $_.MainWindowHandle -ne [IntPtr]::Zero } | ForEach-Object { [HideBrowser.WinApi]::ShowWindow($_.MainWindowHandle, 0) }"`;
+      execSync(hideCmd, { stdio: 'ignore', timeout: 8000 });
+      this.log('🙈 브라우저 창 완전 숨김 (작업표시줄 포함)');
     } catch (e) {
-      this.log(`⚠️ 브라우저 창 숨기기 실패: ${(e as Error).message}`);
+      // Win32 실패 시 CDP 폴백 (화면 밖 이동)
+      this.log(`⚠️ Win32 숨기기 실패, CDP 폴백 시도: ${(e as Error).message}`);
+      try {
+        if (this.page) {
+          const client = await this.page.target().createCDPSession();
+          const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
+          await client.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'normal' } }).catch(() => {});
+          await client.send('Browser.setWindowBounds', { windowId, bounds: { left: -32000, top: -32000, width: 800, height: 600 } });
+          await client.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'minimized' } });
+          await client.detach();
+          this.log('🔽 CDP 폴백: 화면 밖 이동 + 최소화');
+        }
+      } catch { /* 무시 */ }
     }
   }
 
   /**
-   * ✅ [2026-03-27 FIX] 다음 발행 시작 시 브라우저 창 복원
-   * 화면 밖(-32000)에서 정상 위치로 복원합니다.
+   * ✅ [2026-04-02 FIX] Win32 ShowWindow(SW_SHOW) + CDP 최대화
+   * SW_HIDE로 숨겨진 창을 다시 보이게 하고 최대화합니다.
    */
   async restoreBrowserWindow(): Promise<void> {
-    if (!this.page) return;
+    if (!this.browser) return;
     try {
-      const client = await this.page.target().createCDPSession();
-      const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
-      
-      // 먼저 normal 상태로 전환 (minimized에서 위치 변경 불가)
-      await client.send('Browser.setWindowBounds', {
-        windowId,
-        bounds: { windowState: 'normal' }
-      });
-      
-      // ✅ [2026-04-01 FIX] Windows 윈도우 매니저가 상태 전환 완료할 시간 확보
-      await new Promise(r => setTimeout(r, 100));
-      
-      // ✅ [2026-04-01 FIX] 최대화로 복원 (화면 밖 방지 + 모니터링 용이)
-      await client.send('Browser.setWindowBounds', {
-        windowId,
-        bounds: { windowState: 'maximized' }
-      });
-      
-      await client.detach();
-      this.log('🔼 브라우저 창 복원 + 최대화 완료');
+      const pid = this.browser.process()?.pid;
+      if (!pid) return;
+
+      // 1단계: Win32 ShowWindow(SW_SHOW = 5) — 작업표시줄 + 화면에 복원
+      // ✅ [2026-04-02] -MemberDefinition 단일라인 (here-string 멀티라인 cmd.exe 호환 문제 해결)
+      const showCmd = `powershell -NoProfile -NonInteractive -Command "Add-Type -MemberDefinition '[DllImport(\\\"user32.dll\\\")] public static extern bool ShowWindow(IntPtr h, int c);' -Name WinApi -Namespace ShowBrowser -EA SilentlyContinue; Get-Process -Id ${pid} -EA SilentlyContinue | Where-Object { $_.MainWindowHandle -ne [IntPtr]::Zero } | ForEach-Object { [ShowBrowser.WinApi]::ShowWindow($_.MainWindowHandle, 5) }"`;
+      execSync(showCmd, { stdio: 'ignore', timeout: 8000 });
+
+      // 2단계: CDP로 최대화 (보이는 상태에서만 작동)
+      if (this.page) {
+        const client = await this.page.target().createCDPSession();
+        const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
+        await client.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'normal' } });
+        await new Promise(r => setTimeout(r, 100));
+        await client.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'maximized' } });
+        await client.detach();
+      }
+
+      this.log('👁️ 브라우저 창 복원 + 최대화 완료');
     } catch (e) {
-      // 복원 실패는 심각하지 않음 — 새 브라우저 시작 시 자동 해결
       this.log(`⚠️ 브라우저 창 복원 실패 (무시): ${(e as Error).message}`);
     }
   }

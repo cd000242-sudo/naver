@@ -414,28 +414,36 @@ class BrowserSessionManager {
     }
 
     /**
-     * ✅ [2026-03-26] 최소화된 브라우저 창 복원
-     * 발행 완료 후 최소화된 창을 다음 사용 시 복원합니다.
+     * ✅ [2026-04-02 FIX] Win32 ShowWindow(SW_SHOW)로 숨겨진 창 복원
+     * SW_HIDE 상태에서 복원 + CDP 최대화
      */
     async restoreWindow(accountId: string): Promise<void> {
         const session = this.sessions.get(accountId);
-        if (!session?.page) return;
+        if (!session?.browser) return;
         try {
-            const client = await session.page.target().createCDPSession();
-            const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
-            // ✅ [2026-04-01 FIX] normal 복원 후 maximized로 전환 (화면 밖 방지 + 전체화면)
-            await client.send('Browser.setWindowBounds', {
-                windowId,
-                bounds: { windowState: 'normal' }
-            });
-            // ✅ [2026-04-01 FIX] Windows 윈도우 매니저가 상태 전환 완료할 시간 확보
-            await new Promise(r => setTimeout(r, 100));
-            await client.send('Browser.setWindowBounds', {
-                windowId,
-                bounds: { windowState: 'maximized' }
-            });
-            await client.detach();
-            console.log(`[BrowserSessionManager] 🔼 창 복원 + 최대화: ${accountId.substring(0, 3)}***`);
+            const pid = session.browser.process()?.pid;
+            if (!pid) return;
+
+            // Win32 ShowWindow(SW_SHOW = 5)
+            const { execSync } = require('child_process');
+            execSync(`powershell -NoProfile -NonInteractive -Command "Add-Type @'
+using System; using System.Runtime.InteropServices;
+public class WinApi { [DllImport(\\\"user32.dll\\\")] public static extern bool ShowWindow(IntPtr h, int c); }
+'@; Get-Process -Id ${pid} -EA SilentlyContinue | Where-Object { $_.MainWindowHandle -ne [IntPtr]::Zero } | ForEach-Object { [WinApi]::ShowWindow($_.MainWindowHandle, 5) }"`,
+                { stdio: 'ignore', timeout: 8000 }
+            );
+
+            // CDP 최대화
+            if (session.page) {
+                const client = await session.page.target().createCDPSession();
+                const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
+                await client.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'normal' } });
+                await new Promise(r => setTimeout(r, 100));
+                await client.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'maximized' } });
+                await client.detach();
+            }
+
+            console.log(`[BrowserSessionManager] 👁️ 창 복원 + 최대화: ${accountId.substring(0, 3)}***`);
         } catch {
             // 복원 실패 시 무시 — 새 브라우저 실행으로 자동 해결됨
         }
