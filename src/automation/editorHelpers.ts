@@ -9,36 +9,8 @@ type ResolvedRunOptions = any;
 import type { StructuredContent, ImagePlan } from '../contentGenerator.js';
 import type { GhostCursor } from '../ghostCursorHelper.js';
 import { PREV_POST_HOOKS } from './ctaHelpers.js';
-// ── Local utility: safeKeyboardType (copied from naverBlogAutomation.ts) ──
-async function safeKeyboardType(
-  page: Page,
-  text: string,
-  options?: { delay?: number }
-): Promise<void> {
-  await page.keyboard.type(text, options);
-  await page.keyboard.press('Escape').catch(() => { });
-}
-
-// ── Local utility: extractCoreKeywords ──
-function extractCoreKeywords(text: string): string[] {
-  const words = text.replace(/[.,?!""''()]/g, "").split(/\s+/);
-  const wordMap: Record<string, number> = {};
-
-  words.forEach(word => {
-    if (word.length >= 2) {
-      wordMap[word] = (wordMap[word] || 0) + 1;
-    }
-  });
-
-  const sortedWords = Object.keys(wordMap).sort((a, b) => {
-    const scoreA = wordMap[a] * 2 + a.length;
-    const scoreB = wordMap[b] * 2 + b.length;
-    return scoreB - scoreA;
-  });
-
-  // ✅ 가독성 개선: 상위 1개 키워드만 반환 (너무 많은 하이라이트는 오히려 가독성 저하)
-  return sortedWords.slice(0, 1);
-}
+// ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
+import { extractCoreKeywords, safeKeyboardType } from './typingUtils.js';
 
 // ── Local utility: smartTypeWithAutoHighlight ──
 async function smartTypeWithAutoHighlight(

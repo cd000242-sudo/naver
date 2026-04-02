@@ -8,43 +8,17 @@ import path from 'path';
 import { app } from 'electron';
 import fs from 'fs/promises';
 
-// NaverBlogAutomation은 any 타입으로 처리 (순환 의존성 방지)
+// ✅ [Phase 4B] 순환 의존성 방지를 위한 인터페이스 import
+import type { IExecutionDependencies } from '../../types/automation.js';
 import { AutomationService, type PostCyclePayload, type PostCycleContext, type PostCycleResult } from './AutomationService.js';
 import { Logger } from '../utils/logger.js';
 import { sendLog, sendStatus, sendProgress } from '../utils/ipcHelpers.js';
 
-// ============================================
-// 타입 정의
-// ============================================
-
-export interface ExecutionDependencies {
-    // 설정 로드
-    loadConfig: () => Promise<any>;
-    applyConfigToEnv: (config: any) => void;
-
-    // 콘텐츠 생성
-    generateBlogContent?: (prompt: string) => Promise<string>;
-
-    // 이미지 생성
-    generateImages?: (options: any, apiKeys: any) => Promise<any[]>;
-
-    // 자동화 인스턴스 생성
-    createAutomation: (naverId: string, naverPassword: string, accountProxyUrl?: string) => any;
-
-    // 계정 관리 (any 타입으로 느슨하게)
-    blogAccountManager?: any;
-
-    // 일일 제한 (any 타입으로 느슨하게)
-    getDailyLimit?: any;
-    getTodayCount?: any;
-    incrementTodayCount?: any;
-
-    // Gemini 모델
-    setGeminiModel?: (model: string) => void;
-}
+// ✅ [Phase 4B] ExecutionDependencies는 types/automation.ts에서 정의 — 재export
+export type ExecutionDependencies = IExecutionDependencies;
 
 // 전역 의존성 저장소 (main.ts에서 주입)
-let dependencies: ExecutionDependencies | null = null;
+let dependencies: IExecutionDependencies | null = null;
 
 /**
  * 의존성 주입 (main.ts에서 호출)

@@ -7038,11 +7038,7 @@ ipcMain.handle('multiAccount:cancel', async () => {
   const currentInstance = AutomationService.getCurrentInstance();
   if (currentInstance) {
     try {
-      if (typeof currentInstance.closeBrowser === 'function') {
-        await currentInstance.closeBrowser();
-      } else if (typeof currentInstance.close === 'function') {
-        await currentInstance.close();
-      }
+      await currentInstance.closeBrowser();
     } catch (e) {
       // 이미 닫힌 브라우저일 수 있음 - 무시
     }

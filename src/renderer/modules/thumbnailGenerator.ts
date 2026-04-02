@@ -1,8 +1,18 @@
-// @ts-nocheck
 // ============================================
 // 썸네일 생성기 모듈 (Thumbnail Generator)
 // modules/thumbnailGenerator.ts
 // ============================================
+
+// ✅ [Phase 4C] renderer.ts 글로벌 변수 타입 선언 (@ts-nocheck 제거 후)
+// Phase 5에서 모듈 import 패턴으로 전환 예정
+declare const toastManager: { success: (msg: string) => void; error: (msg: string) => void; warning: (msg: string) => void; info: (msg: string) => void };
+declare const ImageManager: { getAll: () => any[]; getAllImages: () => any[]; setAll: (imgs: any[]) => void; add: (img: any) => void; clear: () => void; count: () => number; headings: any[]; setImage: (key: string | number, img: any) => void; hasImage: (key: string | number) => boolean };
+declare const appendLog: (msg: string) => void;
+declare let generatedImages: any[];
+declare function generateImagesWithCostSafety(options: any): Promise<any>;
+declare function syncGlobalImagesFromImageManager(): void;
+declare function resolveFirstHeadingTitleForThumbnail(): string;
+declare function initShoppingBannerTab(): void;
 // ============================================
 // ✅ [2026-01-20] 프리셋 썸네일 적용 헬퍼 함수
 // 발행 모드별로 미리 세팅된 썸네일을 반환

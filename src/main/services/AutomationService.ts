@@ -1,8 +1,8 @@
 // src/main/services/AutomationService.ts
 // 자동화 서비스 싱글톤 - 브라우저 인스턴스 및 자동화 상태 관리
 
-// NaverBlogAutomation은 any 타입으로 처리 (순환 의존성 방지)
-// 실제 타입 검증은 런타임에서 수행
+// ✅ [Phase 4B] 순환 의존성 방지를 위한 인터페이스 import
+import type { IAutomationInstance } from '../../types/automation.js';
 
 /**
  * 자동화 서비스 싱글톤
@@ -11,11 +11,11 @@
 class AutomationServiceImpl {
     private static instance: AutomationServiceImpl | null = null;
 
-    // 실행 중인 자동화 인스턴스 맵 (accountId -> any)
-    private automationMap: Map<string, any> = new Map();
+    // 실행 중인 자동화 인스턴스 맵 (accountId -> IAutomationInstance)
+    private automationMap: Map<string, IAutomationInstance> = new Map();
 
     // 현재 활성 자동화 인스턴스
-    private currentInstance: any = null;
+    private currentInstance: IAutomationInstance | null = null;
 
     // 자동화 실행 중 플래그
     private running = false;
@@ -30,7 +30,7 @@ class AutomationServiceImpl {
     private multiAccountAbortController: AbortController | null = null;
 
     // 다중계정 활성 자동화 목록
-    private activeMultiAccountAutomations: any[] = [];
+    private activeMultiAccountAutomations: IAutomationInstance[] = [];
 
     // 마지막 실행 시간 (중복 실행 체크용)
     private lastRunTime: number = 0;
@@ -54,21 +54,21 @@ class AutomationServiceImpl {
     /**
      * 전체 자동화 맵 가져오기
      */
-    getMap(): Map<string, any> {
+    getMap(): Map<string, IAutomationInstance> {
         return this.automationMap;
     }
 
     /**
      * 특정 계정의 자동화 인스턴스 가져오기
      */
-    get(accountId: string): any {
+    get(accountId: string): IAutomationInstance | undefined {
         return this.automationMap.get(accountId);
     }
 
     /**
      * 자동화 인스턴스 저장
      */
-    set(accountId: string, instance: any): void {
+    set(accountId: string, instance: IAutomationInstance): void {
         this.automationMap.set(accountId, instance);
     }
 
@@ -93,14 +93,14 @@ class AutomationServiceImpl {
     /**
      * 현재 활성 자동화 인스턴스 가져오기
      */
-    getCurrentInstance(): any {
+    getCurrentInstance(): IAutomationInstance | null {
         return this.currentInstance;
     }
 
     /**
      * 현재 활성 자동화 인스턴스 설정
      */
-    setCurrentInstance(instance: any): void {
+    setCurrentInstance(instance: IAutomationInstance | null): void {
         this.currentInstance = instance;
     }
 
@@ -136,9 +136,8 @@ class AutomationServiceImpl {
     requestCancel(): void {
         this.cancelRequested = true;
         // 현재 인스턴스에도 취소 요청 전달
-        // ✅ [수정] stopAutomation이 아닌 cancel 메서드 호출
-        if (this.currentInstance && typeof (this.currentInstance as any).cancel === 'function') {
-            (this.currentInstance as any).cancel().catch(() => { });
+        if (this.currentInstance) {
+            this.currentInstance.cancel().catch(() => { });
         }
     }
 
@@ -218,14 +217,14 @@ class AutomationServiceImpl {
     /**
      * 다중계정 활성 자동화 추가
      */
-    addMultiAccountAutomation(auto: any): void {
+    addMultiAccountAutomation(auto: IAutomationInstance): void {
         this.activeMultiAccountAutomations.push(auto);
     }
 
     /**
      * 다중계정 활성 자동화 목록 가져오기
      */
-    getMultiAccountAutomations(): any[] {
+    getMultiAccountAutomations(): IAutomationInstance[] {
         return this.activeMultiAccountAutomations;
     }
 
@@ -247,9 +246,7 @@ class AutomationServiceImpl {
         const auto = this.automationMap.get(accountId);
         if (auto) {
             try {
-                if (typeof (auto as any).close === 'function') {
-                    await (auto as any).close();
-                }
+                await auto.closeBrowser();
                 console.log(`[AutomationService] Session closed for ${accountId}`);
             } catch (e) {
                 console.warn(`[AutomationService] Failed to close session for ${accountId}:`, e);
@@ -271,9 +268,7 @@ class AutomationServiceImpl {
         // 현재 인스턴스도 정리
         if (this.currentInstance) {
             try {
-                if (typeof (this.currentInstance as any).close === 'function') {
-                    await (this.currentInstance as any).close();
-                }
+                await this.currentInstance.closeBrowser();
             } catch (e) {
                 console.warn('[AutomationService] Failed to close current instance:', e);
             }
@@ -283,9 +278,7 @@ class AutomationServiceImpl {
         // 다중계정 자동화도 정리
         for (const auto of this.activeMultiAccountAutomations) {
             try {
-                if (typeof (auto as any).close === 'function') {
-                    await (auto as any).close();
-                }
+                await auto.closeBrowser();
             } catch (e) {
                 console.warn('[AutomationService] Failed to close multi-account automation:', e);
             }
@@ -375,7 +368,7 @@ class AutomationServiceImpl {
      */
     private async getOrCreateAutomation(
         account: { naverId: string; naverPassword: string }
-    ): Promise<any> {
+    ): Promise<IAutomationInstance | null> {
         const normalizedId = account.naverId.trim().toLowerCase();
 
         // 기존 인스턴스 확인
