@@ -1706,6 +1706,8 @@ export class NaverBlogAutomation {
             '--disable-setuid-sandbox',
             '--disable-infobars',
             `--window-size=${screenRes.width},${screenRes.height}`,
+            '--start-maximized',
+            '--window-position=0,0',
 
             // ✅ [2026-03-27 FIX] 리스크22: --disable-features 하나로 통합 (Chrome은 마지막 값만 사용)
             '--disable-features=IsolateOrigins,site-per-process,AutomationControlled,ThirdPartyCookieBlocking,SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure,TranslateUI',
@@ -1814,6 +1816,21 @@ export class NaverBlogAutomation {
         });
 
         this.log(`✅ 브라우저 실행 성공 (${attempt}번째 시도)`);
+
+        // ✅ [2026-04-01 FIX] launch 직후 CDP로 창 최대화 강제
+        // --start-maximized가 모든 환경에서 작동하지 않을 수 있으므로 CDP로 이중 보장
+        try {
+          const cdpClient = await this.page!.target().createCDPSession();
+          const { windowId } = await cdpClient.send('Browser.getWindowForTarget') as { windowId: number };
+          await cdpClient.send('Browser.setWindowBounds', {
+            windowId,
+            bounds: { windowState: 'maximized' }
+          });
+          await cdpClient.detach();
+          this.log('   🗖️ 브라우저 창 최대화 적용');
+        } catch (maxErr) {
+          this.log(`   ⚠️ 창 최대화 실패 (무시): ${(maxErr as Error).message}`);
+        }
 
         // ✅ Ghost Cursor 초기화 (사람 같은 마우스 이동)
         this.cursor = createGhostCursor(this.page);
@@ -5156,6 +5173,23 @@ export class NaverBlogAutomation {
       } else if (mode === 'schedule') {
         if (!scheduleDate) {
           throw new Error('예약발행 날짜가 지정되지 않았습니다.');
+        }
+
+        // ✅ [2026-04-01 PIPELINE-GUARD] 예약 날짜 이상 감지 — 7일 이상 미래면 경고
+        // BUG-7/BUG-8 재발 시 조기 감지용 (발행은 차단하지 않음)
+        {
+          const [sd] = scheduleDate.split(' ');
+          if (sd) {
+            const scheduledDay = new Date(`${sd}T00:00:00`);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const diffDays = Math.floor((scheduledDay.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+            if (diffDays > 7) {
+              this.log(`⚠️ [PIPELINE-GUARD] 예약 날짜가 ${diffDays}일 후입니다 (${scheduleDate}). 날짜 밀림이 의심됩니다. scheduleDistributor를 점검하세요.`);
+            } else {
+              this.log(`📅 [PIPELINE-GUARD] 예약 날짜 정상: ${scheduleDate} (${diffDays}일 후)`);
+            }
+          }
         }
 
         // ✅ [2026-03-21 FIX] 예약발행 재시도 (최대 3회, 임시저장 폴백 제거)
@@ -8586,15 +8620,17 @@ export class NaverBlogAutomation {
         bounds: { windowState: 'normal' }
       });
       
-      // 화면 안으로 위치 복원 (프로필 해상도 사용)
-      const profile = this.getAccountConsistentProfile();
+      // ✅ [2026-04-01 FIX] Windows 윈도우 매니저가 상태 전환 완료할 시간 확보
+      await new Promise(r => setTimeout(r, 100));
+      
+      // ✅ [2026-04-01 FIX] 최대화로 복원 (화면 밖 방지 + 모니터링 용이)
       await client.send('Browser.setWindowBounds', {
         windowId,
-        bounds: { left: 100, top: 100, width: profile.screen.width, height: profile.screen.height }
+        bounds: { windowState: 'maximized' }
       });
       
       await client.detach();
-      this.log('🔼 브라우저 창 복원 완료');
+      this.log('🔼 브라우저 창 복원 + 최대화 완료');
     } catch (e) {
       // 복원 실패는 심각하지 않음 — 새 브라우저 시작 시 자동 해결
       this.log(`⚠️ 브라우저 창 복원 실패 (무시): ${(e as Error).message}`);

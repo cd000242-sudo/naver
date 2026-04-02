@@ -8171,6 +8171,7 @@ URL: ${firstUrl}
     scheduleDate?: string;
     scheduleTime?: string;
     scheduleType?: 'app-schedule' | 'naver-server';
+    scheduleUserModified?: boolean; // ✅ [2026-04-01 PIPELINE-GUARD] 예약 보호 플래그
   }
 
   let publishQueue: PublishQueueItem[] = [];
@@ -8687,16 +8688,26 @@ URL: ${firstUrl}
     appendLog(`🚀 일괄 발행 시작: ${publishQueue.length}개 계정`);
 
     // ✅ [2026-03-17] 예약 모드 항목들에 scheduleDistributor 시간 분산 적용
+    // ✅ [2026-04-01 BUG-7/BUG-8 FIX] 이미 설정된 항목 보호 + 기본 간격 30분
     {
       const scheduleItems = publishQueue.filter(item => item.publishMode === 'schedule');
       if (scheduleItems.length > 1 && typeof (window as any).distributeWithProtection === 'function') {
-        const firstItem = scheduleItems[0];
-        (window as any).distributeWithProtection(scheduleItems, {
-          baseDate: firstItem.scheduleDate || new Date().toISOString().split('T')[0],
-          baseTime: firstItem.scheduleTime || '09:00',
-          intervalMinutes: 360,
-        }, (msg: string, level: string) => appendLog(`[예약분산] ${msg}`));
-        appendLog(`📅 ${scheduleItems.length}개 예약 항목에 시간 분산 적용 완료`);
+        // ✅ [2026-04-01 BUG-7 FIX] 이미 모든 항목이 예약 시간을 가지고 있으면 재분배 건너뛰기
+        const allHaveSchedule = scheduleItems.every(item => item.scheduleDate && item.scheduleTime);
+        const autoItems = scheduleItems.filter(item => !item.scheduleUserModified);
+
+        if (allHaveSchedule && autoItems.length === 0) {
+          appendLog(`📅 모든 ${scheduleItems.length}개 예약 항목이 이미 설정됨 → 재분배 건너뜀`);
+        } else {
+          const firstItem = scheduleItems.find(item => !item.scheduleUserModified) || scheduleItems[0];
+          (window as any).distributeWithProtection(scheduleItems, {
+            baseDate: firstItem.scheduleDate || new Date().toISOString().split('T')[0],
+            baseTime: firstItem.scheduleTime || '09:00',
+            // ✅ [2026-04-01 BUG-8 FIX] 기본 간격 360→30분
+            intervalMinutes: 30,
+          }, (msg: string, level: string) => appendLog(`[예약분산] ${msg}`));
+          appendLog(`📅 ${scheduleItems.length}개 예약 항목에 시간 분산 적용 완료`);
+        }
         updateQueueUI(); // UI 갱신하여 분산된 시간 표시
       }
     }

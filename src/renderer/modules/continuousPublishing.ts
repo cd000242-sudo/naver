@@ -426,8 +426,12 @@ export function scheduleNextPosting(): void {
   }
 
   // 🛡️ [끝판왕] 사용자 가시 로그 + 안전 간격 적용
-  const intervalInput = document.getElementById('continuous-interval-seconds') as HTMLInputElement;
-  const userInterval = intervalInput ? parseInt(intervalInput.value) || 420 : 420;
+  // ✅ [2026-04-01 FIX] 존재하지 않는 'continuous-interval-seconds' 대신 실제 UI 요소 참조
+  // 이전: continuous-interval-seconds (DOM에 미존재) → null → 폴백 420초(7분) 강제 적용
+  // 수정: continuous-interval-value(숫자) × continuous-interval-unit(단위 배수) = 실제 사용자 설정 반영
+  const intervalValEl = document.getElementById('continuous-interval-value') as HTMLInputElement;
+  const intervalUnitEl = document.getElementById('continuous-interval-unit') as HTMLSelectElement;
+  const userInterval = (parseInt(intervalValEl?.value || '7') || 7) * (parseInt(intervalUnitEl?.value || '60') || 60);
   _continuousPublishCount++;
   const result = getSafePublishInterval(userInterval, _continuousPublishCount);
   continuousCountdown = Math.max(SAFE_PUBLISH_MIN_INTERVAL_SEC, Math.min(3600, result.interval));
@@ -1581,7 +1585,7 @@ export function initContinuousPublishingV2(): void {
         item.scheduleDate = distributed[index].date;
         item.scheduleTime = distributed[index].time;
         item.publishMode = 'schedule';
-        item.scheduleUserModified = undefined; // 자동 생성 시 수동 플래그 초기화
+        item.scheduleUserModified = true; // ✅ [2026-04-01 BUG-7 FIX] 자동 생성 시에도 true 설정 (distributeWithProtection 재분배 방지)
         console.log(`[AutoSchedule] ${index + 1}번 항목: ${item.scheduleDate} ${item.scheduleTime}`);
       });
 
@@ -2871,6 +2875,8 @@ function showRandomScheduleModal(): void {
       item.scheduleDate = distributed[i].date;   // 'YYYY-MM-DD'
       item.scheduleTime = distributed[i].time;   // 'HH:mm'
       item.publishMode = 'schedule';
+      // ✅ [2026-04-01 BUG-7 FIX] 랜덤 배분 후 수동 설정 플래그 부여 (재분배 방지)
+      item.scheduleUserModified = true;
     });
 
     // 미리보기
@@ -4097,8 +4103,10 @@ async function processNextInQueueEnhanced(): Promise<void> {
       setTimeout(() => processNextInQueueEnhanced(), quickWait * 1000);
     } else {
       // 🛡️ [끝판왕] 사용자 가시 로그 + 안전 간격 적용
-      const intervalInput = document.getElementById('continuous-interval-seconds') as HTMLInputElement;
-      const userInterval = Number(intervalInput?.value) || 420;
+      // ✅ [2026-04-01 FIX] 존재하지 않는 'continuous-interval-seconds' 대신 실제 UI 요소 참조
+      const intervalValEl = document.getElementById('continuous-interval-value') as HTMLInputElement;
+      const intervalUnitEl = document.getElementById('continuous-interval-unit') as HTMLSelectElement;
+      const userInterval = (parseInt(intervalValEl?.value || '7') || 7) * (parseInt(intervalUnitEl?.value || '60') || 60);
       _continuousPublishCount++;
       const result = getSafePublishInterval(userInterval, _continuousPublishCount);
 

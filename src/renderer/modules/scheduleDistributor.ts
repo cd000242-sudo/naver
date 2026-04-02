@@ -276,21 +276,27 @@ export function distributeWithProtection<T extends ScheduleItem>(
   const log = logger || (() => {});
 
   const userModifiedItems = items.filter(item => item.scheduleUserModified);
-  const autoDistributeItems = items.filter(item => !item.scheduleUserModified);
+  // ✅ [2026-04-01 PIPELINE-GUARD] 이미 날짜+시간이 설정된 항목도 보호 (scheduleUserModified 누락 방어)
+  // scheduleUserModified가 false/undefined여도. scheduleDate+scheduleTime이 모두 있으면 재분배 대상에서 제외
+  const autoDistributeItems = items.filter(item => !item.scheduleUserModified && !(item.scheduleDate && item.scheduleTime));
 
-  // 수동 설정 항목 로그
-  if (userModifiedItems.length > 0) {
-    log(`🔒 수동 예약 ${userModifiedItems.length}개 항목 보호 (자동 분산 제외)`, 'info');
-    userModifiedItems.forEach(item => {
-      console.log(`  🔒 ${item.scheduleDate} ${item.scheduleTime} (수동)`);
+  // ✅ [2026-04-01 PIPELINE-GUARD] 보호 항목 = 수동 + 이미 시간 설정된 항목
+  const protectedItems = items.filter(item => !autoDistributeItems.includes(item));
+
+  // 보호 항목 로그
+  if (protectedItems.length > 0) {
+    log(`🔒 보호 항목 ${protectedItems.length}개 (수동: ${userModifiedItems.length}, 시간설정: ${protectedItems.length - userModifiedItems.length}) — 자동 분산 제외`, 'info');
+    protectedItems.forEach(item => {
+      console.log(`  🔒 ${item.scheduleDate} ${item.scheduleTime} (${item.scheduleUserModified ? '수동' : '시간설정'})`);
     });
   }
 
   // 자동 분산 대상이 2개 이상일 때만 분산
   if (autoDistributeItems.length >= 2) {
-    // 수동 설정 항목의 시간을 충돌 회피 키로 수집
+    // 수동 설정 항목 + 이미 시간이 설정된 보호 항목의 시간을 충돌 회피 키로 수집
     const usedKeys = new Set<string>();
-    userModifiedItems.forEach(item => {
+    // ✅ [2026-04-01 PIPELINE-GUARD] autoDistributeItems에 포함되지 않은 모든 항목의 시간을 수집
+    items.filter(item => !autoDistributeItems.includes(item)).forEach(item => {
       if (item.scheduleDate && item.scheduleTime) {
         usedKeys.add(new Date(`${item.scheduleDate}T${item.scheduleTime}`).toISOString());
       }

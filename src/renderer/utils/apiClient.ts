@@ -244,22 +244,20 @@ export class EnhancedApiClient {
                 const isAlreadyRunningError = errorMsg.includes('이미 자동화가 실행 중');
 
                 if (isAlreadyRunningError) {
-                    // ✅ [2026-03-05 FIX] 자동화가 이미 진행 중 → 즉시 성공 반환
-                    // 기존: 5초×120회(10분) 폴링 후 '자동화 완료 대기 시간 초과' 에러 반환
-                    //   → '시간 초과' ≠ '타임아웃' 패턴 불일치로 executeBlogPublishing에서 throw
-                    //   → 진행률 95%에서 영구 멈춤 버그 발생
-                    // 수정: 자동화가 실행 중이므로 성공으로 간주하고 즉시 반환
-                    //   (실제 자동화 결과는 main 프로세스에서 IPC 이벤트로 전달됨)
-                    console.log(`[API] ${apiMethod} - 자동화가 이미 실행 중 → 성공으로 간주하여 즉시 반환`);
+                    // ✅ [2026-04-01 FIX] "이미 실행 중" → success: false 반환 (이전: success: true → 발행 안 됐는데 성공 오인)
+                    // 기존 문제: success: true로 반환 → executeBlogPublishing이 성공으로 간주
+                    //   → 실제로는 발행이 전혀 실행되지 않았는데 사용자에게 "완료"로 표시
+                    // 수정: success: false + 명확한 메시지로 반환하여 재시도 가능하도록
+                    console.warn(`[API] ${apiMethod} - 자동화가 이미 실행 중 → 실패로 반환 (재시도 필요)`);
                     if (typeof appendLog === 'function') {
-                        appendLog('ℹ️ 자동화가 이미 실행 중입니다. 발행이 진행되고 있습니다.');
+                        appendLog('⚠️ 이전 자동화가 아직 실행 중입니다. 완료 후 다시 시도해주세요.');
                     }
 
-                    this.recordSuccess();
-
+                    // 재시도하지 않고 즉시 반환 (중복 실행 방지)
                     return {
-                        success: true,
-                        data: { success: true, message: '자동화가 이미 실행 중입니다.' } as any,
+                        success: false,
+                        data: { success: false, message: '이미 자동화가 실행 중입니다. 완료 후 다시 시도해주세요.' } as any,
+                        error: '이미 자동화가 실행 중입니다.',
                         retryCount: attempt
                     };
                 }

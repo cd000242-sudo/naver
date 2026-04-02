@@ -1000,7 +1000,10 @@ export async function initMultiAccountPublishModal() {
         item.scheduleTime = distributed[i].time;
         item.publishMode = 'schedule';
         item.scheduleType = 'naver-server';
-        item.scheduleUserModified = undefined; // 벌크 적용 시 수동 플래그 초기화
+        // ✅ [2026-04-01 BUG-7 FIX] 랜덤 배분 후에도 scheduleUserModified=true로 설정
+        // 기존: undefined → distributeWithProtection이 발행 직전에 360분 간격으로 재배분하여 날짜 밀림 발생
+        // 수정: true → distributeWithProtection에서 "수동 설정"으로 인식되어 보호됨
+        item.scheduleUserModified = true;
       });
 
       // 미리보기
@@ -2787,20 +2790,39 @@ export async function initMultiAccountPublishModal() {
     // 원인: renderer가 multiAccountPublish([accountId])로 계정 1개씩 IPC 호출 → main.ts의 i가 항상 0 → 시간 분산 안 됨
     // 수정: renderer 쪽에서 큐 순번에 맞게 예약 시간을 미리 계산하여 queueItem에 적용
     // ✅ [2026-03-17 MOD] scheduleDistributor 모듈로 위임 (100줄 → 10줄)
+    // ✅ [2026-04-01 BUG-7 FIX] 이미 예약 시간이 설정된 항목은 재분배하지 않음
+    //    랜덤 배분(distributeByRandomRange) 후 scheduleUserModified=true로 설정되므로
+    //    distributeWithProtection이 해당 항목을 "수동"으로 인식하여 보호함
     {
       const scheduleItems = publishQueue.filter(item => item.publishMode === 'schedule');
       if (scheduleItems.length > 1) {
-        const firstItem = scheduleItems.find(item => !item.scheduleUserModified) || scheduleItems[0];
-        (window as any).distributeWithProtection(scheduleItems, {
-          baseDate: firstItem.scheduleDate || new Date().toISOString().split('T')[0],
-          baseTime: firstItem.scheduleTime || '09:00',
-          intervalMinutes: firstItem.scheduleInterval || 360,
-        }, (msg: string, level: string) => addMALog(msg, level));
+        // ✅ [2026-04-01 BUG-7 FIX] 이미 모든 항목이 예약 시간을 가지고 있으면 재분배 건너뛰기
+        // 랜덤 배분이나 개별 예약으로 이미 설정된 경우 distributeWithProtection이 덮어쓰는 것을 방지
+        const allHaveSchedule = scheduleItems.every(item => item.scheduleDate && item.scheduleTime);
+        const autoItems = scheduleItems.filter(item => !item.scheduleUserModified);
+        
+        if (allHaveSchedule && autoItems.length === 0) {
+          // 모든 항목이 수동 설정(랜덤 배분 포함) → 재분배 불필요
+          addMALog(`📅 모든 ${scheduleItems.length}개 예약 항목이 이미 설정됨 → 재분배 건너뜀`, 'info');
+          scheduleItems.forEach((item, idx) => {
+            addMALog(`  📅 [${idx + 1}/${scheduleItems.length}] ${(item as any).accountName || '계정'}: ${item.scheduleDate} ${item.scheduleTime} (확정)`, 'info');
+          });
+        } else {
+          // 미설정 항목이 있을 때만 distributeWithProtection 실행
+          const firstItem = scheduleItems.find(item => !item.scheduleUserModified) || scheduleItems[0];
+          (window as any).distributeWithProtection(scheduleItems, {
+            baseDate: firstItem.scheduleDate || new Date().toISOString().split('T')[0],
+            baseTime: firstItem.scheduleTime || '09:00',
+            // ✅ [2026-04-01 BUG-8 FIX] 기본 간격 360분(6시간) → 30분으로 변경
+            // 6시간 간격은 10개 계정에서 54시간(2.25일) 밀림 유발
+            intervalMinutes: firstItem.scheduleInterval || 30,
+          }, (msg: string, level: string) => addMALog(msg, level));
 
-        // ✅ [2026-03-22 FIX] 분산 결과 개별 로깅 — 어떤 계정에 어떤 시간이 배정되었는지 명시
-        scheduleItems.forEach((item, idx) => {
-          addMALog(`  📅 [${idx + 1}/${scheduleItems.length}] ${(item as any).accountName || '계정'}: ${item.scheduleDate} ${item.scheduleTime}${item.scheduleUserModified ? ' (수동)' : ' (자동)'}`, 'info');
-        });
+          // ✅ [2026-03-22 FIX] 분산 결과 개별 로깅 — 어떤 계정에 어떤 시간이 배정되었는지 명시
+          scheduleItems.forEach((item, idx) => {
+            addMALog(`  📅 [${idx + 1}/${scheduleItems.length}] ${(item as any).accountName || '계정'}: ${item.scheduleDate} ${item.scheduleTime}${item.scheduleUserModified ? ' (수동)' : ' (자동)'}`, 'info');
+          });
+        }
       }
 
       // ✅ [2026-03-24 BUG-4 FIX v2] 스케줄 항목에서 날짜 OR 시간 누락 시 자동 생성

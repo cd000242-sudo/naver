@@ -6525,7 +6525,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
     // ✅ [2026-01-20] 순차 예약 시간 계산을 위한 기준값
     let baseScheduleDate = options?.scheduleDate;
     let baseScheduleTime = options?.scheduleTime;
-    const scheduleIntervalMinutes = options?.scheduleInterval || 360;  // 기본 6시간 (360분)
+    const scheduleIntervalMinutes = options?.scheduleInterval || 30;  // ✅ [2026-04-01 BUG-8 FIX] 기본 30분 (기존 360분=6시간은 날짜 밀림 유발)
     const useRandomOffset = options?.scheduleRandomOffset !== false;  // ✅ 기본값: 랜덤 편차 사용 (false면 정확한 간격)
 
     // ✅ [2026-03-11 FIX] renderer가 scheduleDate를 combined 형식으로 보낼 때 자동 분리
@@ -6895,6 +6895,17 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
             accountScheduleTime = `${hh}:${mi}`;
 
             sendLog(`   📅 [${account.name}] 예약 시간: ${accountScheduleDate} ${accountScheduleTime} (${i + 1}/${limitedAccountIds.length})`);
+          }
+
+          // ✅ [2026-04-01 PIPELINE-GUARD] 날짜 밀림 이상 감지 (main.ts 레벨)
+          if (accountScheduleDate) {
+            const scheduledDay = new Date(`${accountScheduleDate}T00:00:00`);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const diffDays = Math.floor((scheduledDay.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+            if (diffDays > 7) {
+              sendLog(`⚠️ [PIPELINE-GUARD] [${account.name}] 예약 날짜가 ${diffDays}일 후입니다! (${accountScheduleDate} ${accountScheduleTime}) — 날짜 밀림 의심`);
+            }
           }
         }
 

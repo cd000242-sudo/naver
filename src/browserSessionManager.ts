@@ -238,6 +238,8 @@ class BrowserSessionManager {
                 '--disable-setuid-sandbox',
                 '--disable-infobars',
                 `--window-size=${profile.screen.width},${profile.screen.height}`,
+                '--start-maximized',
+                '--window-position=0,0',
                 '--disable-features=IsolateOrigins,site-per-process,PasswordManager,ThirdPartyCookieBlocking,SameSiteByDefaultCookies',
                 // ✅ [2026-03-27 FIX] --disable-web-security 제거 — JS로 감지 가능한 봇 footprint
                 // ✅ [2026-03-27 FIX] --disable-site-isolation-trials 제거 — 일반 Chrome과 다른 보안 설정
@@ -354,6 +356,22 @@ class BrowserSessionManager {
         this.activeAccountId = accountId;
 
         console.log(`[BrowserSessionManager] ✅ 새 세션 생성 완료: ${accountId.substring(0, 3)}***`);
+
+        // ✅ [2026-04-01 FIX] 새 세션 생성 직후 CDP로 창 최대화 강제
+        // --start-maximized가 모든 환경에서 작동하지 않을 수 있으므로 CDP로 이중 보장
+        try {
+            const client = await page.target().createCDPSession();
+            const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
+            await client.send('Browser.setWindowBounds', {
+                windowId,
+                bounds: { windowState: 'maximized' }
+            });
+            await client.detach();
+            console.log(`[BrowserSessionManager] 🗖️ 창 최대화 적용 완료`);
+        } catch (maxErr) {
+            console.warn(`[BrowserSessionManager] ⚠️ 창 최대화 실패 (무시):`, (maxErr as Error).message);
+        }
+
         return sessionInfo;
     }
 
@@ -405,12 +423,19 @@ class BrowserSessionManager {
         try {
             const client = await session.page.target().createCDPSession();
             const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
+            // ✅ [2026-04-01 FIX] normal 복원 후 maximized로 전환 (화면 밖 방지 + 전체화면)
             await client.send('Browser.setWindowBounds', {
                 windowId,
                 bounds: { windowState: 'normal' }
             });
+            // ✅ [2026-04-01 FIX] Windows 윈도우 매니저가 상태 전환 완료할 시간 확보
+            await new Promise(r => setTimeout(r, 100));
+            await client.send('Browser.setWindowBounds', {
+                windowId,
+                bounds: { windowState: 'maximized' }
+            });
             await client.detach();
-            console.log(`[BrowserSessionManager] 🔼 창 복원: ${accountId.substring(0, 3)}***`);
+            console.log(`[BrowserSessionManager] 🔼 창 복원 + 최대화: ${accountId.substring(0, 3)}***`);
         } catch {
             // 복원 실패 시 무시 — 새 브라우저 실행으로 자동 해결됨
         }

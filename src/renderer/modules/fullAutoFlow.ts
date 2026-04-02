@@ -2978,24 +2978,26 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
   modal?.setStep(4, 'active', '발행 중...');
   modal?.setProgress(75, '블로그 발행 중...');
 
+  // ✅ [2026-04-01 FIX] 진행률 95%를 IPC 호출 **전**에 표시
+  // 이전: apiClient.call 이후에 배치 → IPC가 freeze되면 95% 표시 자체가 실행 안 됨
+  showUnifiedProgress(95, '콘텐츠 발행 중...', '네이버 블로그에 콘텐츠를 업로드하고 있습니다.');
+
   // ✅ [FIX-2] 블로그 발행 API 호출
   // retryCount=0: 재시도 없음 — 이중 실행 방지
-  // timeout=0: 무한 대기 — IPC 완료까지 기다림 (main 프로세스에서 실행 완료 시 응답)
+  // ✅ [2026-04-01 FIX] timeout=300000(5분): 안전 타임아웃 — main 측 crash/freeze 시 영원히 멈추는 것 방지
+  // 이전: timeout=0 (무한 대기) → main 프로세스 장애 시 renderer 영원히 블록
   const apiResponse = await apiClient.call(
     'runAutomation',
     [payload],
     {
       retryCount: 0,     // ✅ [FIX-2] 재시도 없음 — stale guard 레이스 컨디션 방지
       retryDelay: 5000,
-      timeout: 0         // ✅ [FIX-2] 타임아웃 없음 — IPC 완료까지 무한 대기
+      timeout: 300000    // ✅ [2026-04-01 FIX] 5분 안전 타임아웃 (이전: 0=무한 대기)
     }
   );
 
-  // 진행률을 95%로 업데이트
-  showUnifiedProgress(95, '콘텐츠 발행 중...', '네이버 블로그에 콘텐츠를 업로드하고 있습니다.');
-
-  // ✅ [FIX-4] 타임아웃 마스킹 제거 — timeout=0이므로 타임아웃 발생 불가
-  // 에러는 실제 오류로 정확히 전달
+  // ✅ [2026-04-01 FIX] timeout=300000(5분)으로 변경됨
+  // 5분 내 미응답 시 타임아웃 에러로 전환되어 사용자에게 실패 표시
   if (!apiResponse.success) {
     const errorMsg = apiResponse.error || '블로그 발행 실패';
 
@@ -3024,7 +3026,7 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
         const retryResponse = await apiClient.call(
           'runAutomation',
           [payload],
-          { retryCount: 0, retryDelay: 5000, timeout: 0 }
+          { retryCount: 0, retryDelay: 5000, timeout: 300000 }
         );
 
         if (retryResponse.success && retryResponse.data?.success) {
@@ -3044,13 +3046,11 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
   } else if (!apiResponse.data?.success) {
     const errorMsg = apiResponse.data?.message || apiResponse.error || '블로그 발행 실패';
 
-    // "이미 자동화가 실행 중" 오류는 실제로 진행 중이므로 무시
+    // ✅ [2026-04-01 FIX] "이미 실행 중" → 에러로 전파 (이전: success: true → 발행 안 됐는데 성공 오인)
     if (errorMsg.includes('이미 자동화가 실행 중')) {
-      appendLog('ℹ️ 자동화가 이미 실행 중입니다. 진행 상황을 확인합니다...');
-      // 자동화가 완료될 때까지 대기
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      // 재시도하지 않고 성공으로 간주 (실제로는 진행 중)
-      return { success: true };
+      appendLog('⚠️ 이전 자동화가 아직 실행 중입니다. 발행이 실행되지 않았습니다.');
+      appendLog('💡 잠시 후 다시 시도하거나, 브라우저 닫기 후 재시도해주세요.');
+      throw new Error('이전 자동화가 아직 실행 중입니다. 완료 후 다시 시도해주세요.');
     }
 
     // ✅ [2026-03-23 FIX] apiResponse.data 단에서도 네트워크 오류 재시도
@@ -3072,7 +3072,7 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
         const retryResponse2 = await apiClient.call(
           'runAutomation',
           [payload],
-          { retryCount: 0, retryDelay: 5000, timeout: 0 }
+          { retryCount: 0, retryDelay: 5000, timeout: 300000 }
         );
 
         if (retryResponse2.success && retryResponse2.data?.success) {

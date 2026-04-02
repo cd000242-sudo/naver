@@ -89,6 +89,21 @@ function translateErrorMessage(errorMsg: string | undefined | null): string {
     return '입력 정보 검증에 실패했습니다. 입력 내용을 확인해주세요.';
   }
 
+  // ✅ [2026-04-01 FIX] 라이선스 관련 한글 에러 메시지 명시적 매칭
+  // GAS 서버가 보내는 비즈니스 에러 메시지를 정확히 전달
+  if (errorMsg.includes('이미 사용된 코드')) {
+    return '이미 사용된 라이선스 코드입니다. 새로운 코드를 입력해주세요.';
+  }
+  if (errorMsg.includes('이미 사용 중인 아이디')) {
+    return '이미 사용 중인 아이디입니다. 다른 아이디를 사용해주세요.';
+  }
+  if (errorMsg.includes('유효하지 않은 라이선스')) {
+    return '유효하지 않은 라이선스 코드입니다. 코드를 다시 확인해주세요.';
+  }
+  if (errorMsg.includes('만료일 정보가 없')) {
+    return '만료일 정보가 누락되었습니다. 관리자에게 문의해주세요.';
+  }
+
   // 이미 한글이 포함되어 있으면 그대로 반환
   const koreanPattern = /[가-힣]/;
   if (koreanPattern.test(errorMsg)) {
