@@ -51,7 +51,7 @@ function loadProxyState(): boolean {
       }
     }
   } catch { /* 파일 읽기 실패 시 기본값 사용 */ }
-  _proxyEnabled = true;
+  _proxyEnabled = false;  // ✅ [2026-04-02] 기본값: 비활성화
   return _proxyEnabled as boolean;
 }
 

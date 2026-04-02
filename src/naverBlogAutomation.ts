@@ -8586,9 +8586,10 @@ export class NaverBlogAutomation {
       }
 
       // Win32 ShowWindow(SW_HIDE = 0) — 작업표시줄에서도 완전히 제거
-      // ✅ [2026-04-02] -MemberDefinition 단일라인 (here-string 멀티라인 cmd.exe 호환 문제 해결)
-      const hideCmd = `powershell -NoProfile -NonInteractive -Command "Add-Type -MemberDefinition '[DllImport(\\\"user32.dll\\\")] public static extern bool ShowWindow(IntPtr h, int c);' -Name WinApi -Namespace HideBrowser -EA SilentlyContinue; Get-Process -Id ${pid} -EA SilentlyContinue | Where-Object { $_.MainWindowHandle -ne [IntPtr]::Zero } | ForEach-Object { [HideBrowser.WinApi]::ShowWindow($_.MainWindowHandle, 0) }"`;
-      execSync(hideCmd, { stdio: 'ignore', timeout: 8000 });
+      // ✅ [2026-04-02] -EncodedCommand Base64 방식 (escaping 문제 완전 회피)
+      const psScript = `Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr h, int c);' -Name WinApi -Namespace HideBrowser -EA SilentlyContinue; Get-Process -Id ${pid} -EA SilentlyContinue | Where-Object { $_.MainWindowHandle -ne [IntPtr]::Zero } | ForEach-Object { [HideBrowser.WinApi]::ShowWindow($_.MainWindowHandle, 0) }`;
+      const encoded = Buffer.from(psScript, 'utf16le').toString('base64');
+      execSync(`powershell -NoProfile -NonInteractive -EncodedCommand ${encoded}`, { stdio: 'ignore', timeout: 8000 });
       this.log('🙈 브라우저 창 완전 숨김 (작업표시줄 포함)');
     } catch (e) {
       // Win32 실패 시 CDP 폴백 (화면 밖 이동)
@@ -8618,9 +8619,10 @@ export class NaverBlogAutomation {
       if (!pid) return;
 
       // 1단계: Win32 ShowWindow(SW_SHOW = 5) — 작업표시줄 + 화면에 복원
-      // ✅ [2026-04-02] -MemberDefinition 단일라인 (here-string 멀티라인 cmd.exe 호환 문제 해결)
-      const showCmd = `powershell -NoProfile -NonInteractive -Command "Add-Type -MemberDefinition '[DllImport(\\\"user32.dll\\\")] public static extern bool ShowWindow(IntPtr h, int c);' -Name WinApi -Namespace ShowBrowser -EA SilentlyContinue; Get-Process -Id ${pid} -EA SilentlyContinue | Where-Object { $_.MainWindowHandle -ne [IntPtr]::Zero } | ForEach-Object { [ShowBrowser.WinApi]::ShowWindow($_.MainWindowHandle, 5) }"`;
-      execSync(showCmd, { stdio: 'ignore', timeout: 8000 });
+      // ✅ [2026-04-02] -EncodedCommand Base64 방식 (escaping 문제 완전 회피)
+      const psScript = `Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr h, int c);' -Name WinApi -Namespace ShowBrowser -EA SilentlyContinue; Get-Process -Id ${pid} -EA SilentlyContinue | Where-Object { $_.MainWindowHandle -ne [IntPtr]::Zero } | ForEach-Object { [ShowBrowser.WinApi]::ShowWindow($_.MainWindowHandle, 5) }`;
+      const encoded = Buffer.from(psScript, 'utf16le').toString('base64');
+      execSync(`powershell -NoProfile -NonInteractive -EncodedCommand ${encoded}`, { stdio: 'ignore', timeout: 8000 });
 
       // 2단계: CDP로 최대화 (보이는 상태에서만 작동)
       if (this.page) {

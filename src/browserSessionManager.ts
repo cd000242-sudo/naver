@@ -425,13 +425,11 @@ class BrowserSessionManager {
             if (!pid) return;
 
             // Win32 ShowWindow(SW_SHOW = 5)
+            // ✅ [2026-04-02] -EncodedCommand Base64 방식 (escaping 문제 완전 회피)
             const { execSync } = require('child_process');
-            execSync(`powershell -NoProfile -NonInteractive -Command "Add-Type @'
-using System; using System.Runtime.InteropServices;
-public class WinApi { [DllImport(\\\"user32.dll\\\")] public static extern bool ShowWindow(IntPtr h, int c); }
-'@; Get-Process -Id ${pid} -EA SilentlyContinue | Where-Object { $_.MainWindowHandle -ne [IntPtr]::Zero } | ForEach-Object { [WinApi]::ShowWindow($_.MainWindowHandle, 5) }"`,
-                { stdio: 'ignore', timeout: 8000 }
-            );
+            const psScript = `Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr h, int c);' -Name WinApi -Namespace ShowBrowser -EA SilentlyContinue; Get-Process -Id ${pid} -EA SilentlyContinue | Where-Object { $_.MainWindowHandle -ne [IntPtr]::Zero } | ForEach-Object { [ShowBrowser.WinApi]::ShowWindow($_.MainWindowHandle, 5) }`;
+            const encoded = Buffer.from(psScript, 'utf16le').toString('base64');
+            execSync(`powershell -NoProfile -NonInteractive -EncodedCommand ${encoded}`, { stdio: 'ignore', timeout: 8000 });
 
             // CDP 최대화
             if (session.page) {

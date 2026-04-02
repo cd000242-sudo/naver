@@ -1159,7 +1159,7 @@ function setupProxySettings(): void {
             const result = await (window as any).api?.isProxyEnabled?.();
             const savedLocal = localStorage.getItem('proxy_enabled');
             // localStorage 값이 있으면 우선, 없으면 백엔드 값 사용
-            const enabled = savedLocal !== null ? savedLocal === 'true' : (result?.enabled ?? true);
+            const enabled = savedLocal !== null ? savedLocal === 'true' : (result?.enabled ?? false);  // ✅ [2026-04-02] 기본값: 비활성화
             
             if (toggle) {
                 toggle.checked = enabled;
@@ -1174,11 +1174,11 @@ function setupProxySettings(): void {
             await (window as any).api?.setProxyEnabled?.(enabled);
         } catch (err) {
             console.warn('[SettingsModal] 프록시 초기 상태 로드 실패:', err);
-            // 기본값: 활성
+            // 기본값: 비활성
             if (toggle) {
-                toggle.checked = true;
-                updateToggleVisual(true);
-                updateNavStatus(true);
+                toggle.checked = false;
+                updateToggleVisual(false);
+                updateNavStatus(false);
             }
         }
         // 상태 정보 로드
