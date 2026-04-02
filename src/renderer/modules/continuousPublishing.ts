@@ -1,10 +1,42 @@
-// @ts-nocheck
 // ============================================
 // 연속 발행 모듈 (Continuous Publishing)
 // modules/continuousPublishing.ts
 // ============================================
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
+import type { ContinuousQueueItem } from '../types/index';
+
+// ── 렌더러 전역 변수/함수 선언 (renderer.ts에서 정의) ──
+declare const toastManager: { success: (msg: string, duration?: number) => void; error: (msg: string, duration?: number) => void; warning: (msg: string, duration?: number) => void; info: (msg: string, duration?: number) => void };
+declare const ImageManager: { getAll: () => any[]; getAllImages: () => any[]; setAll: (imgs: any[]) => void; add: (img: any) => void; clear: () => void; clearAll: () => void; count: () => number; headings: any[]; setImage: (key: string | number, img: any) => void; hasImage: (key: string | number) => boolean; imageMap: Map<string, any[]>; setHeadings: (h: any[]) => void; unsetHeadings: Set<string>; getImagesByHeading: (heading: string) => any[]; removeImage: (key: string | number, idx?: number) => void; addImage: (heading: string, img: any) => void };
+declare const UnifiedDOMCache: { getImageSource: () => string; [key: string]: any };
+declare const appendLog: (msg: string, logOutputId?: string) => void;
+declare let isContinuousMode: boolean;
+declare let continuousQueue: string[];
+declare let continuousCountdown: number;
+declare let continuousInterval: NodeJS.Timeout | null;
+declare let currentStructuredContent: any;
+declare let currentPostId: string | null;
+declare let __continuousV2Initialized: boolean;
+declare function escapeHtml(str: string): string;
+declare function getFullAutoImageSource(): string;
+declare function clearImageGenerationLocks(): void;
+declare function applyPresetThumbnailIfExists(mode: string): { applied: boolean; forHeading?: any; forThumbnail?: any };
+declare function getScheduleDateFromInput(inputId: string): string | undefined;
+declare function generateContentFromUrl(url: string, title?: string, tone?: string, suppressModal?: boolean, contentMode?: string, category?: string): Promise<void>;
+declare function generateContentFromKeywords(title: string, keywords?: string, tone?: string, suppressModal?: boolean, contentMode?: string, category?: string): Promise<void>;
+declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
+declare function executeUnifiedAutomation(formData: any): Promise<void>;
+declare function updateUnifiedPreview(content: any): void;
+declare function syncGlobalImagesFromImageManager(): void;
+declare function openHeadingImageModal(): void;
+declare function showImageModal(imageUrl: string, title?: string): void;
+declare function showHeadingImagesModal(encodedHeadingTitle: string, initialImageUrl?: string): void;
+declare function loadGeneratedPosts(naverId?: string): any[];
+declare function loadAllGeneratedPosts(): any[];
+declare function saveGeneratedPostFromData(content: any, images?: any[], opts?: any): string | null;
+declare function resolveAffiliateLink(link1?: string, link2?: string): string | undefined;
+declare function applyKeywordPrefixToTitle(title: string, keyword: string): string;
 
 // ═══════════════════════════════════════════════════════════════════
 // ✅ [2026-03-23] 네이버 캡차 방지 — 강화된 안전 발행 간격 시스템
@@ -3096,6 +3128,7 @@ function showIndividualScheduleModal(): void {
     overlay.querySelectorAll('.indv-check').forEach(cb => {
       if ((cb as HTMLInputElement).checked) {
         const idx = (cb as HTMLElement).dataset.idx;
+        if (!idx) return;
         const dateInput = overlay.querySelector(`.indv-date[data-idx="${idx}"]`) as HTMLInputElement;
         if (dateInput) dateInput.value = bulkDate;
         setTime24ValueByIdx(idx, bulkTime, overlay);
@@ -3771,7 +3804,7 @@ async function startContinuousPublishingV2(): Promise<void> {
                   finalStructuredContent.selectedTitle,
                   {
                     stopCheck: () => !isContinuousMode,
-                    onProgress: (msg) => {
+                    onProgress: (msg: string) => {
                       appendLog(msg);
                       // 진행 모달에 로그 업데이트 (너무 빈번하면 생략 가능)
                       const modalLog = document.getElementById('continuous-progress-log');

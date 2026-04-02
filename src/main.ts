@@ -84,7 +84,8 @@ import { initAutoUpdater, initAutoUpdaterEarly, setUpdaterLoginWindow, isUpdatin
 import { Logger, debugLog as newDebugLog, sanitizeFileName as utilSanitizeFileName, ensureMp4Dir as utilEnsureMp4Dir, ensureHeadingMp4Dir as utilEnsureHeadingMp4Dir, getUniqueMp4Path as utilGetUniqueMp4Path, validateLicenseAndQuota, validateLicenseOnly } from './main/utils/index.js';
 import * as AuthUtils from './main/utils/authUtils.js'; // ✅ 충돌 방지용 Namespace Import
 import { AutomationService, injectDependencies as injectBlogExecutorDeps } from './main/services/index.js';
-import { registerAllHandlers } from './main/ipc/index.js';
+import { registerAllHandlers, registerAccountHandlers } from './main/ipc/index.js';
+import { registerConfigHandlers } from './main/ipc/configHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -3643,60 +3644,8 @@ ipcMain.handle('app:getInfo', async () => {
 });
 
 // 라이선스 상태 확인
-// ✅ [2026-01-16] 쿼터 상태 조회 핸들러 추가
-ipcMain.handle('quota:getStatus', async () => {
-  try {
-    // ✅ [2026-01-16] 상단 정적 import 사용 (동적 import 제거)
-    const isFree = await AuthUtils.isFreeTierUser();
-    if (!isFree) {
-      return { success: true, isFree: false };
-    }
-
-    const limits = await AuthUtils.getFreeQuotaLimits();
-    const quota = await getQuotaStatus(limits); // 상단에서 getStatus as getQuotaStatus로 import됨
-
-    return { success: true, isFree: true, quota };
-  } catch (error) {
-    console.error('[Main] quota:getStatus 오류:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// ✅ [2026-03-02] 이미지 API 일일 사용량 조회 (대시보드용)
-ipcMain.handle('quota:getImageUsage', async () => {
-  try {
-    const { getImageApiStatus } = await import('./quotaManager.js');
-    const status = await getImageApiStatus();
-    return { success: true, ...status };
-  } catch (error) {
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// ✅ [2026-03-02] Leonardo AI 크레딧 잔액 조회
-ipcMain.handle('quota:getLeonardoCredits', async () => {
-  try {
-    const config = await loadConfig();
-    const apiKey = (config as any).leonardoaiApiKey as string;
-    if (!apiKey) {
-      return { success: false, message: 'API 키 미설정' };
-    }
-    const axios = (await import('axios')).default;
-    const response = await axios.get('https://cloud.leonardo.ai/api/rest/v1/me', {
-      headers: { 'Authorization': `Bearer ${apiKey}` },
-      timeout: 10000,
-    });
-    const userData = response.data?.user_details?.[0] || response.data;
-    return {
-      success: true,
-      credits: userData.apiConcurrencySlots || userData.apiCredit || userData.tokenRenewalDate || 0,
-      apiPlanTokenRenewalDate: userData.apiPlanTokenRenewalDate || null,
-      raw: userData,
-    };
-  } catch (error: any) {
-    return { success: false, message: error?.response?.status === 401 ? 'API 키 인증 실패' : (error as Error).message };
-  }
-});
+// ✅ [2026-04-03] quota:getStatus, quota:getImageUsage, quota:getLeonardoCredits →
+//    src/main/ipc/quotaHandlers.ts로 이동 완료
 
 ipcMain.handle('license:checkStatus', async () => {
   try {
@@ -6025,210 +5974,19 @@ ipcMain.handle('thumbnail:createProductThumbnail', async (
   }
 });
 
-// ✅ 다중 블로그 관리 IPC 핸들러
-ipcMain.handle('account:add', async (_event, name: string, blogId: string, naverId?: string, naverPassword?: string, settings?: any) => {
-  try {
-    const account = blogAccountManager.addAccount(name, blogId, naverId, naverPassword, settings);
-
-    // ✅ 계정 추가 시 패널에 동기화
-    reportUserActivity().catch(err => console.error('[Main] Sync after add failed:', err));
-
-    return { success: true, account };
-  } catch (error) {
-    return { success: false, message: `추가 실패: ${(error as Error).message}` };
+// ✅ [2026-04-03] 계정 관련 핸들러 → accountHandlers.ts로 추출
+registerAccountHandlers(
+  {
+    getMainWindow: () => mainWindow!,
+    getAutomationMap: () => automationMap,
+    notify: (title: string, body: string) => { /* no-op */ },
+    sendToRenderer: (channel: string, ...args: unknown[]) => mainWindow?.webContents.send(channel, ...args)
+  },
+  {
+    blogAccountManager,
+    reportUserActivity
   }
-});
-
-// ✅ 계정 로그인 정보 가져오기
-ipcMain.handle('account:getCredentials', async (_event, accountId: string) => {
-  try {
-    const credentials = blogAccountManager.getAccountCredentials(accountId);
-    return { success: true, credentials };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ 계정 로그인 정보 업데이트
-ipcMain.handle('account:updateCredentials', async (_event, accountId: string, naverId: string, naverPassword: string) => {
-  try {
-    const result = blogAccountManager.updateAccountCredentials(accountId, naverId, naverPassword);
-    return { success: result, message: result ? '로그인 정보 업데이트 완료' : '계정을 찾을 수 없습니다.' };
-  } catch (error) {
-    return { success: false, message: `업데이트 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('account:update', async (_event, accountId: string, updates: any) => {
-  try {
-    const success = blogAccountManager.updateAccount(accountId, updates);
-    if (success) {
-      // ✅ 계정 수정 시 패널에 동기화
-      reportUserActivity().catch(err => console.error('[Main] Sync after update failed:', err));
-    }
-    return { success };
-  } catch (error) {
-    return { success: false, message: `업데이트 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('account:remove', async (_event, accountId: string) => {
-  try {
-    const success = blogAccountManager.removeAccount(accountId);
-    if (success) {
-      // ✅ 계정 삭제 시 패널에 동기화
-      reportUserActivity().catch(err => console.error('[Main] Sync after remove failed:', err));
-    }
-    return { success };
-  } catch (error) {
-    return { success: false, message: `삭제 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('account:setActive', async (_event, accountId: string) => {
-  try {
-    const result = blogAccountManager.setActiveAccount(accountId);
-    return { success: result };
-  } catch (error) {
-    return { success: false, message: `설정 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('account:getActive', async () => {
-  try {
-    const account = blogAccountManager.getActiveAccount();
-    return { success: true, account };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('account:getAll', async () => {
-  try {
-    const accounts = blogAccountManager.getAllAccounts();
-    return { success: true, accounts };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('account:getNext', async () => {
-  try {
-    const account = blogAccountManager.getNextAccountForPublish();
-    return { success: true, account };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('account:getStats', async (_event, accountId: string) => {
-  try {
-    const stats = blogAccountManager.getAccountStats(accountId);
-    return { success: true, stats };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('account:getTotalStats', async () => {
-  try {
-    const stats = blogAccountManager.getTotalStats();
-    return { success: true, stats };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('account:toggle', async (_event, accountId: string) => {
-  try {
-    const isActive = blogAccountManager.toggleAccountActive(accountId);
-
-    // ✅ 활성화 상태 변경 시 패널에 동기화
-    reportUserActivity().catch(err => console.error('[Main] Sync after toggle failed:', err));
-
-    return { success: true, isActive };
-  } catch (error) {
-    return { success: false, message: `토글 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('account:recordPublish', async (_event, accountId: string) => {
-  try {
-    blogAccountManager.recordPublish(accountId);
-    return { success: true };
-  } catch (error) {
-    return { success: false, message: `기록 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ 계정 설정 업데이트 (개별 설정 포함)
-ipcMain.handle('account:updateSettings', async (_event, accountId: string, settings: any) => {
-  try {
-    const result = blogAccountManager.updateAccountSettings(accountId, settings);
-    return { success: result, message: result ? '설정 업데이트 완료' : '계정을 찾을 수 없습니다.' };
-  } catch (error) {
-    return { success: false, message: `설정 업데이트 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ [2026-03-27] 전체 계정 일괄 Sticky Proxy 설정
-// 전역 blogAccountManager 인스턴스를 직접 사용 → 인메모리 캐시 일관성 보장
-ipcMain.handle('proxy:bulkSetupSticky', async () => {
-  try {
-    const { getSmartProxyConfig } = require('./crawler/utils/proxyManager.js');
-    const config = getSmartProxyConfig();
-    const accounts = blogAccountManager.getAllAccounts();
-
-    // FNV-1a hash (systemHandlers.ts와 동일 알고리즘)
-    const fnv1a = (str: string): string => {
-      let hash = 0x811c9dc5;
-      for (let i = 0; i < str.length; i++) {
-        hash ^= str.charCodeAt(i);
-        hash = Math.imul(hash, 0x01000193);
-      }
-      return (hash >>> 0).toString(16).padStart(8, '0');
-    };
-
-    let updated = 0;
-    let skipped = 0;
-
-    for (const account of accounts) {
-      if (account.settings?.proxyHost) { skipped++; continue; }
-
-      const naverId = account.naverId || account.blogId || account.name;
-      if (!naverId) { skipped++; continue; }
-
-      const sessionId = fnv1a(naverId.trim());
-      const stickyUsername = `${config.username}-session-${sessionId}-sessionduration-1440`;
-
-      blogAccountManager.updateAccountSettings(account.id, {
-        proxyHost: config.host,
-        proxyPort: String(config.port),
-        proxyUsername: stickyUsername,
-        proxyPassword: config.password,
-      });
-      updated++;
-    }
-
-    return {
-      success: true,
-      message: `✅ ${updated}개 계정에 프록시 설정 완료 (${skipped}개 건너뜀 — 이미 설정됨)`,
-      updated, skipped, total: accounts.length,
-    };
-  } catch (error) {
-    return { success: false, message: `일괄 설정 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ 계정별 다음 콘텐츠 소스 가져오기
-ipcMain.handle('account:getNextContentSource', async (_event, accountId: string) => {
-  try {
-    const source = blogAccountManager.getNextContentSource(accountId);
-    return { success: true, source };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
+);
 
 // ✅ 네이버 블로그 카테고리 분석 (크롤링)
 ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: string; blogId?: string }) => {
@@ -7430,106 +7188,11 @@ ipcMain.handle(
   },
 );
 
-ipcMain.handle('config:get', async () => {
-  try {
-    // 항상 최신 설정을 로드 (캐시된 값이 있어도 파일에서 다시 읽기)
-    appConfig = await loadConfig();
-    applyConfigToEnv(appConfig);
-    console.log('[Main] config:get 호출 - 설정 로드 완료');
-    console.log('[Main] 로드된 설정 키:', Object.keys(appConfig).filter(k => k.includes('ApiKey') || k.includes('Key')));
-    // ✅ tutorialVideos 확인 로그
-    const tutorials = (appConfig as any).tutorialVideos;
-    console.log('[Main] tutorialVideos 개수:', tutorials ? tutorials.length : 0);
-    return appConfig;
-  } catch (error) {
-    console.error('[Main] config:get 오류:', error);
-    // 오류 발생 시 기존 캐시된 설정 반환
-    return appConfig;
-  }
-});
-
-ipcMain.handle('config:save', async (_event, payload: AppConfig) => {
-  appConfig = await saveConfig(payload);
-  applyConfigToEnv(appConfig);
-  return appConfig;
-});
-
-ipcMain.handle('config:set', async (_event, payload: AppConfig) => {
-  // API 키 형식 검증
-  const validationErrors: string[] = [];
-
-  if (payload.geminiApiKey) {
-    const validation = validateApiKeyFormat(payload.geminiApiKey, 'gemini');
-    if (!validation.valid) {
-      validationErrors.push(`Gemini: ${validation.message}`);
-    }
-  }
-
-  if (payload.openaiApiKey) {
-    const validation = validateApiKeyFormat(payload.openaiApiKey, 'openai');
-    if (!validation.valid) {
-      validationErrors.push(`OpenAI: ${validation.message}`);
-    }
-  }
-
-
-  if (payload.claudeApiKey) {
-    const validation = validateApiKeyFormat(payload.claudeApiKey, 'claude');
-    if (!validation.valid) {
-      validationErrors.push(`Claude: ${validation.message}`);
-    }
-  }
-
-  if (validationErrors.length > 0) {
-    const errorMessage = `⚠️ API 키 형식 오류:\n${validationErrors.join('\n')}`;
-    sendLog(errorMessage);
-    console.error('[Main] API 키 검증 실패:', validationErrors);
-  }
-
-  const nextConfig = await saveConfig(payload ?? {});
-  appConfig = nextConfig;
-  applyConfigToEnv(nextConfig);
-
-  // API 키 저장 확인 로그
-  if (nextConfig.geminiApiKey && nextConfig.geminiApiKey.trim()) {
-    const keyLength = nextConfig.geminiApiKey.trim().length;
-    const isValid = validateApiKeyFormat(nextConfig.geminiApiKey, 'gemini').valid;
-    sendLog(`✅ Gemini API 키 저장됨 (길이: ${keyLength}자, 형식: ${isValid ? '올바름' : '오류'})`);
-    console.log('[Main] Gemini API 키 환경변수 설정 확인:', process.env.GEMINI_API_KEY ? '설정됨' : '설정 안됨');
-  } else {
-    sendLog('⚠️ Gemini API 키가 저장되지 않았습니다.');
-  }
-
-  if (nextConfig.openaiApiKey && nextConfig.openaiApiKey.trim()) {
-    const keyLength = nextConfig.openaiApiKey.trim().length;
-    const isValid = validateApiKeyFormat(nextConfig.openaiApiKey, 'openai').valid;
-    sendLog(`✅ OpenAI API 키 저장됨 (길이: ${keyLength}자, 형식: ${isValid ? '올바름' : '오류'})`);
-  }
-
-
-  if (nextConfig.claudeApiKey && nextConfig.claudeApiKey.trim()) {
-    const keyLength = nextConfig.claudeApiKey.trim().length;
-    const isValid = validateApiKeyFormat(nextConfig.claudeApiKey, 'claude').valid;
-    sendLog(`✅ Claude API 키 저장됨 (길이: ${keyLength}자, 형식: ${isValid ? '올바름' : '오류'})`);
-  }
-
-  // ✅ [2026-03-30] Perplexity API 키 저장 확인 로그
-  if (nextConfig.perplexityApiKey && nextConfig.perplexityApiKey.trim()) {
-    const keyLength = nextConfig.perplexityApiKey.trim().length;
-    sendLog(`✅ Perplexity API 키 저장됨 (길이: ${keyLength}자, 접두사: ${nextConfig.perplexityApiKey.substring(0, 5)}...)`);
-    console.log('[Main] Perplexity API 키 환경변수 설정 확인:', process.env.PERPLEXITY_API_KEY ? '설정됨' : '설정 안됨');
-  } else {
-    console.log('[Main] ⚠️ Perplexity API 키 미저장 (config에 없음)');
-  }
-
-  if (nextConfig.dailyPostLimit !== undefined) {
-    setDailyLimit(nextConfig.dailyPostLimit);
-  }
-  if (nextConfig.appIconPath) {
-    sendLog(`🖼️ 사용자 지정 앱 아이콘 경로: ${nextConfig.appIconPath}`);
-  }
-  sendLog('⚙️ 설정이 저장되었습니다.');
-  return nextConfig;
+// ✅ config:get / config:save / config:set → configHandlers.ts로 추출
+registerConfigHandlers({
+  getAppConfig: () => appConfig,
+  setAppConfig: (config) => { appConfig = config; },
+  sendLog,
 });
 
 // 이미지 라이브러리 카테고리 조회 IPC 핸들러

@@ -1,8 +1,38 @@
-// @ts-nocheck
 // ============================================
 // 다중계정 관리 모듈 (Multi-Account Manager)
 // modules/multiAccountManager.ts
 // ============================================
+
+// Globals exposed by renderer.ts via window / script-level scope
+declare const toastManager: { success: (msg: string, duration?: number) => void; error: (msg: string) => void; warning: (msg: string) => void; info: (msg: string, duration?: number) => void };
+declare const ImageManager: { getAll: () => any[]; getAllImages: () => any[]; setAll: (imgs: any[]) => void; add: (img: any) => void; clear: () => void; clearAll: () => void; count: () => number; headings: any[]; setImage: (key: string | number, img: any) => void; hasImage: (key: string | number) => boolean; imageMap: Map<string, any[]>; getImages: (key: string) => any[]; resolveHeadingKey: (key: string) => string; syncGeneratedImagesArray: () => void };
+declare const UnifiedDOMCache: { getGenerator: () => string; getImageSource: () => string };
+declare const EnhancedApiClient: { getInstance: () => { call: (method: string, args: any[], opts?: any) => Promise<any> } };
+declare function appendLog(msg: string, ...args: any[]): void;
+declare function escapeHtml(str: string): string;
+declare function getGlobalImageSettings(): any;
+declare function generateEnglishPromptForHeading(title: string, postTitle: string, style: string): Promise<string>;
+declare function generateImagesWithCostSafety(opts: any): Promise<any>;
+declare function getFullAutoImageSource(): string;
+declare function isPaywallPayload(result: any): boolean;
+declare function activatePaywall(result: any): void;
+declare function autoAnalyzeHeadings(content: any): Promise<void>;
+declare function syncGlobalImagesFromImageManager(): void;
+declare function displayGeneratedImages(images: any[]): void;
+declare function saveGeneratedPostFromData(content: any, images: any[], opts?: any): string | null;
+declare function loadGeneratedPosts(): any[];
+declare function showPostSelectionModal(posts: any[], callback: (post: any) => void, opts?: any): void;
+declare function setupMutualExclusiveCheckboxes(id1: string, id2: string): void;
+declare function openHeadingImageModal(): void;
+declare function setKeywordTitleOptionsFromItem(keyword: string, asTitle?: boolean, titlePrefix?: boolean): void;
+declare function cleanKeywordFromTitle(keyword: string, title: string): string;
+declare function isFatalApiError(error: unknown): boolean;
+declare function friendlyErrorMessage(error: unknown): string;
+declare function savePublishedPost(date: Date, title: string, url: string): void;
+declare function updatePostAfterPublish(postId: string, url: string, publishMode?: string): void;
+declare function updatePostImages(postId: string, images: any[]): void;
+declare function refreshGeneratedPostsList(): void;
+declare function readUnifiedCtasFromUi(): any[];
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
 // ✅ 다계정 관리 기능 초기화 함수
@@ -1129,7 +1159,7 @@ export async function initMultiAccountPublishModal() {
           const idx = (cb as HTMLElement).dataset.idx;
           const dateInput = overlay.querySelector(`.ma-indv-date[data-idx="${idx}"]`) as HTMLInputElement;
           if (dateInput) dateInput.value = bulkDate;
-          setTime24ValueByIdx(idx, bulkTime, overlay);
+          if (idx != null) setTime24ValueByIdx(idx, bulkTime, overlay);
           appliedCount++;
         }
       });
@@ -1334,7 +1364,7 @@ export async function initMultiAccountPublishModal() {
         } catch (e) {
           console.warn('[multiAccountManager] catch ignored:', e);
         }
-      }).catch((e) => {
+      }).catch((e: any) => {
         console.warn('[multiAccountManager] promise catch ignored:', e);
       });
     } catch (e) {
@@ -2147,7 +2177,7 @@ export async function initMultiAccountPublishModal() {
         const autoProxyBtn = document.getElementById('ma-auto-proxy-btn');
         if (autoProxyBtn) {
           autoProxyBtn.onclick = async () => {
-            const nid = naverIdInput?.value?.trim() || account.naverId || account.blogId;
+            const nid = naverIdInput?.value?.trim() || (account as any).naverId || account.blogId;
             if (!nid) { toastManager.warning('네이버 ID가 없어 프록시를 생성할 수 없습니다.'); return; }
             const result = await (window.api as any).generateStickyProxy(nid);
             if (result.success && result.proxy) {
@@ -2816,7 +2846,7 @@ export async function initMultiAccountPublishModal() {
             // ✅ [2026-04-01 BUG-8 FIX] 기본 간격 360분(6시간) → 30분으로 변경
             // 6시간 간격은 10개 계정에서 54시간(2.25일) 밀림 유발
             intervalMinutes: firstItem.scheduleInterval || 30,
-          }, (msg: string, level: string) => addMALog(msg, level));
+          }, (msg: string, level: string) => addMALog(msg, level as 'info' | 'success' | 'error' | 'warning'));
 
           // ✅ [2026-03-22 FIX] 분산 결과 개별 로깅 — 어떤 계정에 어떤 시간이 배정되었는지 명시
           scheduleItems.forEach((item, idx) => {
@@ -3665,7 +3695,7 @@ export async function initMultiAccountPublishModal() {
               addMALog(`📱 ADB IP 변경 시작 (${publishedCount}번째 발행 완료 후)...`, 'info');
               addProgressItem(`📱 ADB IP 변경 중...`, 'info');
 
-              const adbResult = await window.api.adbChangeIp(5);
+              const adbResult = await (window.api as any).adbChangeIp(5);
               if (adbResult.success) {
                 addMALog(`✅ IP 변경 성공: ${adbResult.oldIp} → ${adbResult.newIp}`, 'success');
                 addProgressItem(`✅ IP 변경: ${adbResult.oldIp} → ${adbResult.newIp}`, 'success');

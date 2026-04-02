@@ -1,8 +1,80 @@
-// @ts-nocheck
 // ============================================
 // 소제목 이미지 생성 모듈 (Heading Image Generation)
 // modules/headingImageGen.ts
 // ============================================
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+// --- Global declarations (exposed by renderer.ts via window) ---
+declare const toastManager: { success: (msg: string) => void; error: (msg: string) => void; warning: (msg: string) => void; info: (msg: string) => void };
+declare const ImageManager: {
+  getAll: () => any[];
+  getAllImages: () => any[];
+  setAll: (imgs: any[]) => void;
+  add: (img: any) => void;
+  addImage: (key: string, img: any) => void;
+  clear: () => void;
+  count: () => number;
+  headings: any[];
+  setImage: (key: string | number, img: any) => void;
+  getImage: (key: string | number) => any;
+  getImages: (key: string) => any[];
+  hasImage: (key: string | number) => boolean;
+  removeImage: (key: string) => void;
+  removeImageAtIndex: (key: string, index: number) => void;
+  setHeadings: (headings: any[]) => void;
+  resolveHeadingKey: (title: string) => string;
+  syncAllPreviews: () => void;
+  syncGeneratedImagesArray: () => void;
+  setPrimaryImageByKey: (headingTitle: string, imageKey: string) => void;
+  imageMap: Map<string, any[]>;
+  unsetHeadings: Set<string>;
+};
+declare const appendLog: (msg: string, target?: string) => void;
+declare let generatedImages: any[];
+declare let currentStructuredContent: any;
+declare let currentPostId: string | null;
+declare let thumbnailGenerator: any;
+declare const ThumbnailGenerator: new () => any;
+declare const EnhancedApiClient: { getInstance: () => any };
+declare const UnifiedDOMCache: { getGenerator: () => any };
+declare const escapeHtml: (str: string) => string;
+declare const toFileUrlMaybe: (url: string) => string;
+declare function generateEnglishPromptForHeading(title: string, subtitle?: string, style?: string, context?: string): Promise<string>;
+declare function getManualEnglishPromptOverrideForHeading(heading: string): string;
+declare function clearManualEnglishPromptOverrideForHeading(heading: string): void;
+declare function generateImagesWithCostSafety(options: any): Promise<any>;
+declare function generateNanoBananaProImage(prompt: string): Promise<string>;
+declare function searchNaverImage(query: string): Promise<string>;
+declare function showImagesProgress(progress: number, title: string, subtitle: string): void;
+declare function displayGeneratedImages(images: any[]): void;
+declare function updatePromptItemsWithImages(images: any[]): void;
+declare function updateUnifiedImagePreview(headings: any[], images: any[]): void;
+declare function syncGlobalImagesFromImageManager(): void;
+declare function resolveReferenceImageForHeading(title: string): any;
+declare function resolveFirstHeadingTitleForThumbnail(): string;
+declare function isCostRiskImageProvider(provider: string): boolean;
+declare function getCostRiskProviderLabel(provider: string): string;
+declare function getReviewProductAnchor(): string;
+declare function decomposeKoreanCompound(text: string, dict?: any): any;
+declare function getStableImageKey(img: any): string;
+declare function showSavedImagesForReplace(headingIndex: number): void;
+declare function showImageModal(imgSrc: string): void;
+declare function ensurePromptCardRemoveButtons(): void;
+declare function ensurePromptCardRemoveHandler(): void;
+declare function getRequiredImageBasePath(): Promise<string>;
+declare function pushImageHistorySnapshot(label: string): void;
+declare function getGlobalImageSettings(): any;
+declare function removeHeadingVideoByTitle(title: string): Promise<void>;
+declare function regenerateHeadingVideoByTitle(title: string): Promise<void>;
+declare function generateHeadingVideoForPrompt(headingIndex: number, headingTitle: string): void;
+declare const aiProgressModal: {
+  show: (title: string, options?: any) => void;
+  update: (progress: number, title: string) => void;
+  addLog: (msg: string) => void;
+  complete: (success: boolean, options?: any) => void;
+};
+declare function getHeadingTitleByIndex(index: number): string;
 
 export function initHeadingImageGeneration(): void {
   const analyzeBtn = document.getElementById('analyze-headings-btn') as HTMLButtonElement;

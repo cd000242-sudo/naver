@@ -15,8 +15,11 @@ import { registerImageHandlers, registerMediaHandlers, registerHeadingVideoHandl
 // blogHandlers는 로직 함수만 export하므로 여기서 register 함수 대신 export
 // import { ... } from './blogHandlers'; // 아직 main.ts에서 처리
 import { registerDatalabHandlers, registerTrendHandlers, registerAnalyticsHandlers } from './analyticsHandlers';
-import { registerLicenseHandlers, registerQuotaHandlers } from './authHandlers';
+import { registerLicenseHandlers } from './authHandlers';
+import { registerQuotaHandlers } from './quotaHandlers';
 import { registerScheduleHandlers } from './scheduleHandlers';
+import { registerAccountHandlers, AccountHandlerDeps } from './accountHandlers';
+import { registerConfigHandlers, ConfigHandlerContext } from './configHandlers';
 
 /**
  * IPC 컨텍스트 생성
@@ -67,6 +70,12 @@ export function registerAllHandlers(): void {
     // 스케줄
     registerScheduleHandlers(ctx);
 
+    // 계정 관리 — deps가 필요하므로 registerAccountHandlersWithDeps()로 별도 호출
+    // registerAccountHandlers(ctx, deps);
+
+    // 설정(config) — appConfig 접근이 필요하므로 main.ts에서 별도 호출
+    // registerConfigHandlers(configCtx);
+
     console.log('[IPC Router] All handlers registered successfully');
 }
 
@@ -88,8 +97,12 @@ export {
     registerAnalyticsHandlers,
     registerLicenseHandlers,
     registerQuotaHandlers,
-    registerScheduleHandlers
+    registerScheduleHandlers,
+    registerAccountHandlers,
+    registerConfigHandlers
 };
+
+export type { AccountHandlerDeps, ConfigHandlerContext };
 
 // blogHandlers 로직 함수 re-export
 export * from './blogHandlers';
