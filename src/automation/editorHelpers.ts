@@ -687,20 +687,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     await self.clearAllFormatting();
     await self.delay(300);
 
-    // 1-2. CTA 상단 삽입 (위치가 top인 경우, skipCta가 false인 경우만)
+    // 1-2. CTA skipCta 체크
     if (resolved.skipCta) {
       self.log(`   🚫 CTA 없이 발행하기가 선택되어 CTA를 추가하지 않습니다.`);
-    } else if (resolved.ctaPosition === 'top' && resolved.ctas.length > 0) {
-      for (let i = 0; i < resolved.ctas.length; i++) {
-        const c = resolved.ctas[i];
-        self.log(`   → CTA 버튼 상단 삽입 중... (${i + 1}/${resolved.ctas.length}, 텍스트: "${c.text}", 링크: "${resolved.affiliateLink || c.link || '#'}")`);
-        // ✅ [핸심 수정] affiliateLink 우선 사용
-        await self.insertCtaLink(resolved.affiliateLink || c.link || '#', c.text, 'top');
-        await self.delay(self.DELAYS.MEDIUM);
-      }
-      self.log(`   ✅ CTA 버튼 상단 삽입 완료`);
-    } else if (resolved.ctaPosition === 'top') {
-      self.log(`   ⚠️ CTA 위치는 'top'이지만 CTA가 없어서 삽입하지 않습니다.`);
     }
 
     // 2. 서론(Introduction) 작성
@@ -1843,38 +1832,24 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         }
 
         // d) CTA 중간 삽입 (위치가 middle이고 중간 지점인 경우, skipCta가 false인 경우만)
-        if (!resolved.skipCta && resolved.ctaPosition === 'middle' && resolved.ctas.length > 0) {
-          const middleIndex = Math.floor(headings.length / 2);
-          if (i === middleIndex - 1) { // 중간 지점 직전 섹션 완료 후
+        // d) CTA 특정 소제목 아래 삽입 (위치가 heading-N인 경우)
+        const headingMatch = resolved.ctaPosition?.match(/^heading-(\d+)$/);
+        if (!resolved.skipCta && headingMatch && resolved.ctas.length > 0) {
+          const targetHeadingIndex = parseInt(headingMatch[1], 10) - 1; // 1-based → 0-based
+          if (i === targetHeadingIndex) {
+            self.log(`   → CTA ${i + 1}번 소제목 본문 아래 삽입 중...`);
             for (let k = 0; k < 2; k++) {
               await page.keyboard.press('Enter');
               await self.delay(self.DELAYS.MEDIUM);
             }
             for (let ci = 0; ci < resolved.ctas.length; ci++) {
               const c = resolved.ctas[ci];
-              self.log(`   → CTA 버튼 중간 삽입 중... (${ci + 1}/${resolved.ctas.length}, 텍스트: "${c.text}", 링크: "${resolved.affiliateLink || c.link || '#'}")`);
-              // ✅ [핸심 수정] affiliateLink 우선 사용
-              await self.insertCtaLink(resolved.affiliateLink || c.link || '#', c.text, 'middle');
+              self.log(`   → CTA 삽입 (${ci + 1}/${resolved.ctas.length}, 텍스트: "${c.text}", 링크: "${resolved.affiliateLink || c.link || '#'}")`);
+              await self.insertCtaLink(resolved.affiliateLink || c.link || '#', c.text, 'heading');
               await self.delay(self.DELAYS.MEDIUM);
             }
-            self.log(`   ✅ CTA 버튼 중간 삽입 완료`);
+            self.log(`   ✅ ${i + 1}번 소제목 CTA 삽입 완료`);
           }
-        }
-
-        // d-2) CTA 각 소제목 아래 삽입 (위치가 each-heading인 경우)
-        if (!resolved.skipCta && resolved.ctaPosition === 'each-heading' && resolved.ctas.length > 0) {
-          self.log(`   → CTA 소제목[${i + 1}] 본문 아래 삽입 중...`);
-          for (let k = 0; k < 2; k++) {
-            await page.keyboard.press('Enter');
-            await self.delay(self.DELAYS.MEDIUM);
-          }
-          for (let ci = 0; ci < resolved.ctas.length; ci++) {
-            const c = resolved.ctas[ci];
-            self.log(`   → CTA 삽입 (${ci + 1}/${resolved.ctas.length}, 텍스트: "${c.text}", 링크: "${resolved.affiliateLink || c.link || '#'}")`);
-            await self.insertCtaLink(resolved.affiliateLink || c.link || '#', c.text, 'middle');
-            await self.delay(self.DELAYS.MEDIUM);
-          }
-          self.log(`   ✅ 소제목[${i + 1}] CTA 삽입 완료`);
         }
 
         // e) 다음 섹션 준비 (마지막 섹션이 아니면 구분선 추가)
@@ -1985,8 +1960,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       self.log(`   🛒 [쇼핑커넥트] 자동 CTA 생성: "${randomHook}"`);
     }
 
-    if (!resolved.skipCta && effectiveCtas.length > 0 && resolved.ctaPosition !== 'each-heading') {
-      // ✅ each-heading인 경우 이미 각 소제목 아래에 삽입 완료 → 하단 CTA 건너뜀
+    const isHeadingPosition = /^heading-\d+$/.test(resolved.ctaPosition || '');
+    if (!resolved.skipCta && effectiveCtas.length > 0 && !isHeadingPosition) {
+      // ✅ heading-N인 경우 이미 해당 소제목 아래에 삽입 완료 → 하단 CTA 건너뜀
       const ctaPosition = resolved.ctaPosition || 'bottom'; // 풀오토는 항상 하단
 
       // ✅ [2026-01-19 버그 수정] 쇼핑커넥트 모드에서는 CTA를 1개로 제한 (링크카드 중복 방지)

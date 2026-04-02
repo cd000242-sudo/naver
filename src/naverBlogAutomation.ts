@@ -210,7 +210,7 @@ export interface RunOptions {
   ctaLink?: string;
   ctaText?: string;
   ctas?: Array<{ text: string; link?: string }>;
-  ctaPosition?: 'top' | 'middle' | 'bottom' | 'each-heading'; // CTA 위치
+  ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
   skipCta?: boolean; // ✅ CTA 없이 발행하기
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   thumbnailPath?: string; // 대표 이미지 경로
@@ -256,7 +256,7 @@ interface ResolvedRunOptions {
   ctaLink?: string;
   ctaText?: string;
   ctas: Array<{ text: string; link?: string }>;
-  ctaPosition?: 'top' | 'middle' | 'bottom' | 'each-heading'; // CTA 위치
+  ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
   skipCta?: boolean; // ✅ CTA 없이 발행하기
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   imageMode?: 'full-auto' | 'semi-auto' | 'manual' | 'skip'; // 이미지 모드
@@ -7699,7 +7699,7 @@ export class NaverBlogAutomation {
     }
   }
 
-  private async insertCtaLink(url: string, text: string, position: 'top' | 'middle' | 'bottom' = 'bottom'): Promise<void> {
+  private async insertCtaLink(url: string, text: string, position: 'heading' | 'bottom' = 'bottom'): Promise<void> {
     const frame = (await this.getAttachedFrame());
     const page = this.ensurePage();
     this.ensureNotCancelled();
@@ -7737,30 +7737,10 @@ export class NaverBlogAutomation {
 
     try {
       // ✅ 네이버 블로그용 텍스트 형식 CTA (세로 정렬)
-      // 형식: 
-      // ━━━━━━━━ (구분선)
-      // 
-      // 🔗 텍스트
-      // 
-      // 👉 링크
-      // 
-      // [URL 카드 자동 생성됨]
       const divider = '━━━━━━━━━━━━━━━━━━━';
 
-      // 위치에 따라 텍스트 타이핑 (각 요소를 개별 줄에 배치)
-      if (position === 'top') {
-        this.log(`   → 상단 위치에 CTA 텍스트 삽입 중...`);
-        await safeKeyboardType(page, divider, { delay: 5 });
-        await page.keyboard.press('Enter');
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, `🔗 ${cleanText}`, { delay: 10 });
-        await page.keyboard.press('Enter');
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
-        await page.keyboard.press('Enter');
-        await page.keyboard.press('Enter');
-      } else if (position === 'middle') {
-        this.log(`   → 중간 위치에 CTA 텍스트 삽입 중...`);
+      if (position === 'heading') {
+        this.log(`   → 소제목 아래 CTA 텍스트 삽입 중...`);
         await safeKeyboardType(page, divider, { delay: 5 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');

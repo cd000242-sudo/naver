@@ -437,7 +437,7 @@ export interface PostCyclePayload {
     ctaLink?: string;
     ctaText?: string;
     ctas?: any[];
-    ctaPosition?: 'top' | 'bottom' | 'both';
+    ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
     skipCta?: boolean;
     affiliateLink?: string;
     contentMode?: 'seo' | 'affiliate';

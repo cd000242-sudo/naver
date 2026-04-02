@@ -2283,7 +2283,7 @@ function addItemToQueueV2(): void {
         if (ctaType !== 'none' && (ctaUrl || ctaText)) return [{ text: ctaText || '자세히 보러가기', link: ctaUrl || undefined }];
         return undefined;
       })(),
-      ctaPosition: ((document.getElementById('continuous-modal-cta-position') as HTMLSelectElement | null)?.value as 'top' | 'middle' | 'bottom' | 'each-heading') || 'bottom',
+      ctaPosition: (document.getElementById('continuous-modal-cta-position') as HTMLSelectElement | null)?.value || 'bottom',
       category,       // ✅ 카테고리 추가
       contentMode,    // ✅ 콘텐츠 모드 추가
       toneStyle: (document.getElementById('continuous-tone-style-select') as HTMLSelectElement)?.value || 'professional', // ✅ 글톤 추가

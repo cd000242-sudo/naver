@@ -232,7 +232,7 @@ export async function insertCtaLink(
     self: any,
     url: string,
     text: string,
-    position: 'top' | 'middle' | 'bottom' = 'bottom'
+    position: 'heading' | 'bottom' = 'bottom'
 ): Promise<void> {
     const frame = (await self.getAttachedFrame());
     const page = self.ensurePage();
@@ -273,20 +273,8 @@ export async function insertCtaLink(
         // ✅ 네이버 블로그용 텍스트 형식 CTA (세로 정렬)
         const divider = '━━━━━━━━━━━━━━━━━━━';
 
-        // 위치에 따라 텍스트 타이핑 (각 요소를 개별 줄에 배치)
-        if (position === 'top') {
-            self.log(`   → 상단 위치에 CTA 텍스트 삽입 중...`);
-            await safeKeyboardType(page, divider, { delay: 5 });
-            await page.keyboard.press('Enter');
-            await page.keyboard.press('Enter');
-            await safeKeyboardType(page, `🔗 ${cleanText}`, { delay: 10 });
-            await page.keyboard.press('Enter');
-            await page.keyboard.press('Enter');
-            await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
-            await page.keyboard.press('Enter');
-            await page.keyboard.press('Enter');
-        } else if (position === 'middle') {
-            self.log(`   → 중간 위치에 CTA 텍스트 삽입 중...`);
+        if (position === 'heading') {
+            self.log(`   → 소제목 아래 CTA 텍스트 삽입 중...`);
             await safeKeyboardType(page, divider, { delay: 5 });
             await page.keyboard.press('Enter');
             await page.keyboard.press('Enter');

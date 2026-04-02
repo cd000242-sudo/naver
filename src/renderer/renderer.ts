@@ -8323,7 +8323,7 @@ URL: ${firstUrl}
     const ctasUi = readUnifiedCtasFromUi();
     const ctaText = ctasUi[0]?.text || (document.getElementById('unified-cta-text') as HTMLInputElement)?.value || '';
     const ctaLink = ctasUi[0]?.link || (document.getElementById('unified-cta-link') as HTMLInputElement)?.value || '';
-    const ctaPosition = ((document.getElementById('unified-cta-position') as HTMLSelectElement)?.value as 'top' | 'middle' | 'bottom' | 'each-heading') || 'bottom';
+    const ctaPosition = (document.getElementById('unified-cta-position') as HTMLSelectElement)?.value || 'bottom';
     // ✅ [2026-01-28 FIX] HeadingImageSettings 모달의 localStorage 설정 최우선
     // ✅ [2026-03-10 CLEANUP] full-auto-thumbnail-text, semi-auto-thumbnail-text 유령 참조 제거 → localStorage 단일 소스
     const includeThumbnailText =

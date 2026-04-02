@@ -2901,7 +2901,7 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
     ctaText: formData.skipCta ? undefined : ctaText,
     ctaLink: formData.skipCta ? undefined : ctaLink,
     ctas: formData.skipCta ? [] : resolvedCtas,
-    ctaPosition: formData.ctaPosition as 'top' | 'middle' | 'bottom' | 'each-heading' || 'bottom', // ✅ CTA 위치
+    ctaPosition: formData.ctaPosition || 'bottom', // ✅ CTA 위치
     skipCta: formData.skipCta || false, // ✅ CTA 없이 발행
     contentMode: formData.contentMode || 'seo', // ✅ 콘텐츠 모드 추가
     affiliateLink: formData.affiliateLink, // ✅ 제휴 링크 추가

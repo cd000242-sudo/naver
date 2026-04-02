@@ -3540,7 +3540,7 @@ export async function initMultiAccountPublishModal() {
             category: queueItem.category || undefined, // ✅ 콘텐츠 카테고리 (CTA 이전글 찾기용)
             // ✅ [2026-02-03 FIX] CTA 설정 - ctaType === 'none'일 때도 skipCta 적용
             skipCta: queueItem.ctaType === 'none' || (queueItem as any)?.formData?.skipCta === true || (queueItem as any)?.skipCta === true,
-            ctaPosition: ((queueItem as any)?.formData?.ctaPosition as 'top' | 'middle' | 'bottom' | 'each-heading') || 'bottom',
+            ctaPosition: (queueItem as any)?.formData?.ctaPosition || (queueItem as any)?.ctaPosition || 'bottom',
             ctas: (() => {
               const fromForm = Array.isArray((queueItem as any)?.formData?.ctas) ? (queueItem as any).formData.ctas : [];
               const list = fromForm
