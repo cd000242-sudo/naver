@@ -17,6 +17,7 @@ import { convertMp4ToGif } from './image/gifConverter.js'; // ✅ 추가
 import type { GenerateImagesOptions, GeneratedImage } from './imageGenerator.js';
 import { getDailyLimit, getTodayCount, incrementTodayCount, setDailyLimit } from './postLimitManager.js';
 import { generateStructuredContent, removeOrdinalHeadingLabelsFromBody } from './contentGenerator.js';
+import { withRetry, isRetryableError } from './errorRecovery.js';
 import { createDatalabClient, NaverDatalabClient } from './naverDatalab.js';
 import type { ContentSource, StructuredContent, ContentGeneratorProvider, ArticleType } from './contentGenerator.js';
 import { assembleContentSource, type SourceAssemblyInput } from './sourceAssembler.js';
@@ -1441,6 +1442,7 @@ async function createWindow(): Promise<void> {
 
       // ✅ [2026-03-13] 프리미엄 커스텀 종료 확인 다이얼로그
       // 세팅 후 실수로 X 버튼을 눌러 앱이 종료되는 것을 방지
+      const dialogPreloadPath = path.join(__dirname, 'preloadDialog.js');
       const confirmWindow = new BrowserWindow({
         width: 440,
         height: 330,
@@ -1456,8 +1458,9 @@ async function createWindow(): Promise<void> {
         alwaysOnTop: true,
         show: false,
         webPreferences: {
-          nodeIntegration: true,
-          contextIsolation: false,
+          nodeIntegration: false,
+          contextIsolation: true,
+          preload: dialogPreloadPath,
         },
       });
 
@@ -1726,14 +1729,14 @@ ipcMain.handle('leword:launch', async () => {
   try {
     const winUnpackedExe = path.join(releaseDir, 'win-unpacked', 'LEWORD.exe');
     if (fs.existsSync(winUnpackedExe)) devPaths.push(winUnpackedExe);
-  } catch { }
+  } catch (e) { Logger.logDebug('system', 'LEWORD exe 탐색 실패 (win-unpacked)', { error: String(e) }); }
   try {
     if (fs.existsSync(releaseDir)) {
       const files = fs.readdirSync(releaseDir) as string[];
       const setupExe = files.find((f: string) => (f.startsWith('LEWORD-Setup-') || f.startsWith('LEWORD-Portable-')) && f.endsWith('.exe'));
       if (setupExe) devPaths.push(path.join(releaseDir, setupExe));
     }
-  } catch { }
+  } catch (e) { Logger.logDebug('system', 'LEWORD setup exe 탐색 실패', { error: String(e) }); }
 
   // 0) 개발 환경이면 바로 실행
   const devExe = devPaths.find((p: string) => { try { return fs.existsSync(p); } catch { return false; } });
@@ -1746,7 +1749,7 @@ ipcMain.handle('leword:launch', async () => {
 
   // 1) 저장된 버전 읽기 + GitHub 최신 버전 확인
   let localVersion = '';
-  try { localVersion = fs.readFileSync(LEWORD_VERSION_FILE, 'utf-8').trim(); } catch { }
+  try { localVersion = fs.readFileSync(LEWORD_VERSION_FILE, 'utf-8').trim(); } catch (e) { Logger.logDebug('system', 'LEWORD 버전 파일 읽기 실패', { error: String(e) }); }
 
   let latestTag = '';
   try {
@@ -1764,7 +1767,7 @@ ipcMain.handle('leword:launch', async () => {
         });
       }).on('error', () => { clearTimeout(timer); resolve(''); });
     });
-  } catch { }
+  } catch (e) { Logger.logWarn('system', 'LEWORD GitHub 최신 버전 확인 실패', e); }
 
   // 2) 이미 최신 버전이 설치되어 있으면 → 설치된 경로에서 바로 실행
   const isUpToDate = localVersion && (!latestTag || latestTag === localVersion);
@@ -1796,7 +1799,7 @@ ipcMain.handle('leword:launch', async () => {
         if (!fs.existsSync(LEWORD_DOWNLOAD_DIR)) fs.mkdirSync(LEWORD_DOWNLOAD_DIR, { recursive: true });
         fs.writeFileSync(LEWORD_VERSION_FILE, latestTag, 'utf-8');
         console.log(`[Main] ✅ 버전 저장: ${latestTag}`);
-      } catch { }
+      } catch (e) { Logger.logWarn('system', 'LEWORD 버전 파일 저장 실패', e); }
       mainWindow?.webContents.send('log-message', `✅ LEWORD 실행 중...`);
       const child = spawn(existingExe, [], { detached: true, stdio: 'ignore' });
       child.unref();
@@ -2256,8 +2259,8 @@ ipcMain.handle('media:convertMp4ToGif', async (_event, payload: { sourcePath: st
       if (stat.isFile() && stat.size > 1024) {
         return { success: true, gifPath };
       }
-      try { await fs.unlink(gifPath); } catch { }
-    } catch { }
+      try { await fs.unlink(gifPath); } catch (e) { Logger.logDebug('image', 'GIF 임시파일 삭제 실패', { error: String(e) }); }
+    } catch (e) { Logger.logDebug('image', 'GIF 파일 stat 확인 실패', { error: String(e) }); }
 
     // ✅ 헬퍼 함수 사용 (중복 로직 제거 및 1:1 크롭 적용)
     // 720px 너비 기준
@@ -6012,7 +6015,7 @@ ipcMain.handle('thumbnail:createProductThumbnail', async (
     const previewDataUrl = `data:image/png;base64,${outputBuffer.toString('base64')}`;
 
     // 임시 파일 정리
-    try { fsSync.unlinkSync(inputPath); } catch { }
+    try { fsSync.unlinkSync(inputPath); } catch (e) { Logger.logDebug('image', '썸네일 임시파일 삭제 실패', { error: String(e) }); }
 
     console.log(`[Main] ✅ 썸네일 텍스트 오버레이 완료: ${outputPath}`);
     return { success: true, outputPath, previewDataUrl };
@@ -7381,10 +7384,18 @@ ipcMain.handle(
 
       console.log('[Main] 최소 글자수 설정:', { customMin, targetAge, minChars });
 
-      const content = await generateStructuredContent(source, {
-        provider,
-        minChars,
-      });
+      // ✅ [Phase 3B] 네트워크/타임아웃 에러 시 자동 재시도 (최대 2회, exponential backoff)
+      const content = await withRetry(
+        () => generateStructuredContent(source, { provider, minChars }),
+        {
+          maxRetries: 2,
+          baseDelayMs: 3000,
+          shouldRetry: isRetryableError,
+          onRetry: (error, attempt) => {
+            console.log(`[Main] ⚠️ 콘텐츠 생성 재시도 (${attempt}/2): ${error.message}`);
+          },
+        }
+      );
 
       if (warnings.length) {
         content.quality.warnings = Array.from(new Set([...(content.quality.warnings ?? []), ...warnings]));
@@ -9201,16 +9212,18 @@ ipcMain.handle('app:getCacheSize', async (): Promise<{ images: number; generated
     const browserDirs = ['Cache', 'Code Cache', 'GPUCache', 'DawnGraphiteCache', 'DawnWebGPUCache'];
 
     // ✅ 병렬 스캔 (4개 카테고리 동시 실행 → 2~4배 속도 향상)
+    // ✅ [Phase 3A] Promise.allSettled — 일부 디렉토리 접근 실패해도 나머지 결과 사용
     const sumDirs = async (dirs: string[]) => {
-      const sizes = await Promise.all(dirs.map(d => getDirSize(pathModule.join(userDataPath, d))));
-      return sizes.reduce((a, b) => a + b, 0);
+      const results = await Promise.allSettled(dirs.map(d => getDirSize(pathModule.join(userDataPath, d))));
+      return results.reduce((sum, r) => sum + (r.status === 'fulfilled' ? r.value : 0), 0);
     };
-    const [images, generated, sessions, browser] = await Promise.all([
+    const categoryResults = await Promise.allSettled([
       sumDirs(imagesDirs),
       sumDirs(generatedDirs),
       sumDirs(sessionDirs),
       sumDirs(browserDirs),
     ]);
+    const [images, generated, sessions, browser] = categoryResults.map(r => r.status === 'fulfilled' ? r.value : 0);
 
     const total = images + generated + sessions + browser;
     console.log(`[Cache] 용량 조회: images=${(images/1048576).toFixed(1)}MB, generated=${(generated/1048576).toFixed(1)}MB, sessions=${(sessions/1048576).toFixed(1)}MB, browser=${(browser/1048576).toFixed(1)}MB, total=${(total/1048576).toFixed(1)}MB`);
@@ -9857,6 +9870,7 @@ ipcMain.handle('openExternalUrl', async (_event, url: string): Promise<{ success
 async function createLoginWindow(): Promise<BrowserWindow> {
   debugLog('[createLoginWindow] Creating login window...');
 
+  const loginPreloadPath = path.join(__dirname, 'preloadLogin.js');
   loginWindow = new BrowserWindow({
     width: 500,
     height: 650,
@@ -9865,10 +9879,11 @@ async function createLoginWindow(): Promise<BrowserWindow> {
     frame: true,
     center: true, // 화면 중앙에 표시
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: loginPreloadPath,
       webSecurity: true,
-      devTools: true, // 개발자 도구 활성화
+      devTools: !app.isPackaged, // ✅ 프로덕션에서는 비활성화
     },
     title: '라이선스 인증',
     icon: resolveIconImage(),
@@ -10115,6 +10130,7 @@ async function showLicenseInputDialog(): Promise<string | null> {
   return new Promise((resolve) => {
     // Electron의 dialog.showInputBox는 없으므로, 별도 창을 만들어야 합니다
     // 여기서는 간단한 예시로 null을 반환하고, 실제 구현은 별도 창으로 처리
+    const licenseDialogPreloadPath = path.join(__dirname, 'preloadDialog.js');
     const licenseWindow = new BrowserWindow({
       width: 500,
       height: 300,
@@ -10122,8 +10138,9 @@ async function showLicenseInputDialog(): Promise<string | null> {
       modal: true,
       parent: mainWindow || undefined,
       webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false,
+        nodeIntegration: false,
+        contextIsolation: true,
+        preload: licenseDialogPreloadPath,
       },
     });
 
@@ -10201,8 +10218,7 @@ async function showLicenseInputDialog(): Promise<string | null> {
           submitBtn.addEventListener('click', () => {
             const code = input.value.trim();
             if (code.length === 19 && /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code)) {
-              const { ipcRenderer } = require('electron');
-              ipcRenderer.send('license:code', code);
+              window.dialogAPI.send('license:code', code);
             } else {
               error.textContent = '올바른 형식으로 입력해주세요.';
               error.style.display = 'block';
@@ -10245,7 +10261,7 @@ try {
   const _p = require('path');
   const dbg = _p.join(process.env.TEMP || '/tmp', 'bln-startup-debug.log');
   _fs2.appendFileSync(dbg, `\n[${new Date().toISOString()}] Before requestSingleInstanceLock\n`);
-} catch(e) {}
+} catch(e) { /* 스타트업 디버그 로그 실패 — Logger 미초기화 상태이므로 무시 */ }
 
 const gotTheLock = app.requestSingleInstanceLock();
 
@@ -10254,7 +10270,7 @@ try {
   const _p = require('path');
   const dbg = _p.join(process.env.TEMP || '/tmp', 'bln-startup-debug.log');
   _fs2.appendFileSync(dbg, `[${new Date().toISOString()}] gotTheLock: ${gotTheLock}\n`);
-} catch(e) {}
+} catch(e) { /* 스타트업 디버그 로그 실패 — Logger 미초기화 상태이므로 무시 */ }
 
 if (!gotTheLock) {
   console.error('[Main] Another instance is already running. Exiting immediately...');

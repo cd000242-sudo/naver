@@ -347,7 +347,7 @@ export async function loadConfig(): Promise<AppConfig> {
 
     // 네이버 아이디/비밀번호 저장 상태 확인
     if (compatibleConfig.savedNaverId) {
-      console.log('[Config] 저장된 네이버 아이디 존재:', compatibleConfig.savedNaverId.substring(0, 3) + '***');
+      console.log('[Config] 저장된 네이버 아이디 존재: ✅');
     }
     if (compatibleConfig.savedNaverPassword) {
       console.log('[Config] 저장된 네이버 비밀번호 존재:', '***');
@@ -522,7 +522,7 @@ export function applyConfigToEnv(config: AppConfig): void {
   // API 키 설정 (빈 문자열이 아닌 경우만 주입, 기존 .env 값 보존을 위해 삭제는 하지 않음)
   if (config.geminiApiKey && config.geminiApiKey.trim()) {
     process.env.GEMINI_API_KEY = config.geminiApiKey.trim();
-    console.log('[Config] GEMINI_API_KEY 설정됨 (길이:', config.geminiApiKey.trim().length, ')');
+    console.log('[Config] GEMINI_API_KEY 설정됨: ✅');
   }
 
   // (removed prodiaToken env injection - deprecated)
@@ -559,7 +559,7 @@ export function applyConfigToEnv(config: AppConfig): void {
   // ✅ [2026-01-25] Perplexity API 키 설정
   if (config.perplexityApiKey && config.perplexityApiKey.trim()) {
     process.env.PERPLEXITY_API_KEY = config.perplexityApiKey.trim();
-    console.log('[Config] PERPLEXITY_API_KEY 설정됨 (길이:', config.perplexityApiKey.trim().length, ')');
+    console.log('[Config] PERPLEXITY_API_KEY 설정됨: ✅');
   }
 
   // ✅ [2026-03-20 FIX] Perplexity 모델 설정 (sonar / sonar-pro)
@@ -624,11 +624,11 @@ export function applyConfigToEnv(config: AppConfig): void {
   if (config.rememberCredentials) {
     if (config.savedNaverId) {
       process.env.NAVER_ID = config.savedNaverId;
-      console.log('[Config] NAVER_ID 환경변수 설정됨:', config.savedNaverId.substring(0, 3) + '***');
+      console.log('[Config] NAVER_ID 환경변수 설정됨: ✅');
     }
     if (config.savedNaverPassword) {
       process.env.NAVER_PASSWORD = config.savedNaverPassword;
-      console.log('[Config] NAVER_PASSWORD 환경변수 설정됨 (길이:', config.savedNaverPassword.length, ')');
+      console.log('[Config] NAVER_PASSWORD 환경변수 설정됨: ✅');
     }
   } else {
     delete process.env.NAVER_ID;
@@ -639,13 +639,13 @@ export function applyConfigToEnv(config: AppConfig): void {
   // ✅ [2026-02-22] OpenAI Image API 키 설정
   if ((config as any).openaiImageApiKey && (config as any).openaiImageApiKey.trim()) {
     process.env.OPENAI_IMAGE_API_KEY = (config as any).openaiImageApiKey.trim();
-    console.log('[Config] OPENAI_IMAGE_API_KEY 설정됨 (길이:', (config as any).openaiImageApiKey.trim().length, ')');
+    console.log('[Config] OPENAI_IMAGE_API_KEY 설정됨: ✅');
   }
 
   // ✅ [2026-02-22] Leonardo AI API 키 설정
   if ((config as any).leonardoaiApiKey && (config as any).leonardoaiApiKey.trim()) {
     process.env.LEONARDOAI_API_KEY = (config as any).leonardoaiApiKey.trim();
-    console.log('[Config] LEONARDOAI_API_KEY 설정됨 (길이:', (config as any).leonardoaiApiKey.trim().length, ')');
+    console.log('[Config] LEONARDOAI_API_KEY 설정됨: ✅');
   }
 
 
@@ -653,7 +653,7 @@ export function applyConfigToEnv(config: AppConfig): void {
   // ✅ [2026-01-30] DeepInfra API 키 설정
   if (config.deepinfraApiKey && config.deepinfraApiKey.trim()) {
     process.env.DEEPINFRA_API_KEY = config.deepinfraApiKey.trim();
-    console.log('[Config] DEEPINFRA_API_KEY 설정됨 (길이:', config.deepinfraApiKey.trim().length, ')');
+    console.log('[Config] DEEPINFRA_API_KEY 설정됨: ✅');
   }
 }
 

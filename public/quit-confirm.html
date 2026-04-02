@@ -214,20 +214,19 @@
   </div>
 
   <script>
-    const { ipcRenderer } = require('electron');
-
+    // contextIsolation: true — preloadDialog.ts의 dialogAPI 사용
     document.getElementById('btnQuit').addEventListener('click', () => {
-      ipcRenderer.send('quit-confirm-response', true);
+      window.dialogAPI.send('quit-confirm-response', true);
     });
 
     document.getElementById('btnCancel').addEventListener('click', () => {
-      ipcRenderer.send('quit-confirm-response', false);
+      window.dialogAPI.send('quit-confirm-response', false);
     });
 
     // Esc키 → 취소
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        ipcRenderer.send('quit-confirm-response', false);
+        window.dialogAPI.send('quit-confirm-response', false);
       }
       if (e.key === 'Enter') {
         // Enter키는 포커스된 버튼 실행 (기본: 계속 사용)

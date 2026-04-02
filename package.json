@@ -5,6 +5,8 @@
   "author": "Better Life Team",
   "main": "dist/main.js",
   "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
     "build": "tsc && node scripts/copy-static.mjs",
     "build:safe": "node scripts/build.js",
     "start": "npm run build && electron .",
@@ -70,6 +72,7 @@
     "ora": "^9.0.0",
     "playwright": "^1.58.1",
     "playwright-extra": "^4.3.6",
+    "pptxgenjs": "^4.0.1",
     "puppeteer": "^24.40.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
@@ -93,7 +96,8 @@
     "rcedit": "^5.0.2",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.6",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "^4.1.2"
   },
   "build": {
     "appId": "com.betterlife.naver",

@@ -1182,7 +1182,8 @@
   </div>
 
   <script>
-    const { ipcRenderer } = require('electron');
+    // contextIsolation: true — preloadLogin.ts의 electronAPI 사용
+    const ipcRenderer = window.electronAPI || (typeof require !== 'undefined' ? require('electron').ipcRenderer : null);
     const KAKAO_OPEN_CHAT_URL = 'https://open.kakao.com/o/sPcaslwh';
 
     let deviceId = '';

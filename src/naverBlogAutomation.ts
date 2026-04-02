@@ -552,7 +552,7 @@ export class NaverBlogAutomation {
                 ctx.putImageData(img, 0, 0);
                 return origToDataURL.call(tmp, type);
               }
-            } catch { }
+            } catch (e) { console.debug('[Stealth] Canvas fingerprint spoof 실패:', e); }
           }
           return origToDataURL.apply(this, arguments as any);
         };
@@ -600,7 +600,7 @@ export class NaverBlogAutomation {
           };
           spoofNative(WebGL2RenderingContext.prototype.getParameter, 'getParameter');
         }
-      } catch { }
+      } catch (e) { console.debug('[Stealth] Fingerprint 전체 spoof 실패:', e); }
     }, profile);
 
     // CDP UA override + brands
@@ -642,7 +642,7 @@ export class NaverBlogAutomation {
     } finally {
       // ✅ [M-4] CDP 세션 detach (리소스 누수 방지)
       if (cdpClient) {
-        try { await cdpClient.detach(); } catch { }
+        try { await cdpClient.detach(); } catch (e) { console.debug('[CDP] 세션 detach 실패 (이미 닫힘):', (e as Error).message); }
       }
     }
 
@@ -655,7 +655,7 @@ export class NaverBlogAutomation {
         'Sec-CH-UA-Mobile': '?0',
         'Sec-CH-UA-Platform': '"Windows"',
       });
-    } catch { }
+    } catch (e) { console.debug('[Browser] Client Hints 헤더 설정 실패:', (e as Error).message); }
 
     // Viewport
     await this.page.setViewport({
@@ -1391,7 +1391,7 @@ export class NaverBlogAutomation {
 
     // ✅ [2026-03-27 FIX] M-3: browser.close() 완료 대기 후 null 할당
     if (this.browser) {
-      try { await this.browser.close(); } catch { }
+      try { await this.browser.close(); } catch (e) { console.debug('[Browser] stopAutomation 브라우저 종료 실패 (이미 닫힘):', (e as Error).message); }
       this.browser = null;
       this.page = null;
       this.mainFrame = null;
@@ -1642,7 +1642,7 @@ export class NaverBlogAutomation {
 
         // 선택된 페이지 활성화
         this.page = targetPage;
-        try { await this.page.bringToFront().catch(() => { }); } catch { }
+        try { await this.page.bringToFront().catch(() => { }); } catch (e) { console.debug('[Browser] 페이지 활성화 실패:', (e as Error).message); }
 
         // 🧹 탭 정리: 선택된 페이지 이외의 모든 탭 닫기 (메모리 누수/탭 폭탄 방지)
         const cleanupPages = await this.browser.pages();
@@ -1666,7 +1666,7 @@ export class NaverBlogAutomation {
 
         // 브라우저 완전 종료 시도 (좀비 프로세스 방지)
         if (this.browser) {
-          try { await this.browser.close(); } catch { }
+          try { await this.browser.close(); } catch (e) { console.debug('[Browser] 재사용 실패 후 종료 에러:', (e as Error).message); }
         }
         this.browser = null;
         this.page = null;
@@ -1770,7 +1770,8 @@ export class NaverBlogAutomation {
 
         this.browser = await puppeteer.launch(launchOptions);
 
-        // ✅ 팝업 차단
+        // ✅ 팝업 차단 (리스너 누적 방지: 등록 전 기존 리스너 제거)
+        this.browser.removeAllListeners('targetcreated');
         this.browser.on('targetcreated', async (target) => {
           if (target.type() === 'page') {
             try {
@@ -1808,6 +1809,8 @@ export class NaverBlogAutomation {
 
         this.ensureNotCancelled();
 
+        // ✅ 팝업 핸들러 (리스너 누적 방지: 등록 전 기존 리스너 제거)
+        this.page.removeAllListeners('popup');
         this.page.on('popup', async (popup) => {
           if (popup) {
             this.log(`🚫 팝업 차단: ${popup.url()}`);
@@ -1843,7 +1846,7 @@ export class NaverBlogAutomation {
         this.log(`⚠️ 브라우저 실행 실패 (${attempt}/${MAX_RETRIES}): ${lastError.message}`);
 
         if (this.browser) {
-          try { await this.browser.close(); } catch { }
+          try { await this.browser.close(); } catch (e) { console.debug('[Browser] 실행 실패 후 종료 에러:', (e as Error).message); }
           this.browser = null;
         }
         this.page = null;
@@ -1917,7 +1920,7 @@ export class NaverBlogAutomation {
                   tmpCtx.putImageData(imageData, 0, 0);
                   return originalToDataURL.call(tmpCanvas, type);
                 }
-              } catch (e) { }
+              } catch (e) { console.debug('[Stealth] Canvas toDataURL spoof 실패:', e); }
             }
             return originalToDataURL.apply(this, arguments as any);
           };
@@ -2027,6 +2030,8 @@ export class NaverBlogAutomation {
       // ✅ [2026-03-24 FIX] dialog 핸들러는 run()에서 ensureDialogHandler()로 매 사이클 등록
       // setupBrowser는 세션 재사용 시 early-return하므로 여기서 등록하면 누락됨
 
+      // ✅ 콘솔 에러 캡처 (리스너 누적 방지: 등록 전 기존 리스너 제거)
+      this.page.removeAllListeners('console');
       this.page.on('console', (msg) => {
         if (msg.type() === 'error') {
           const text = msg.text();
@@ -2745,7 +2750,7 @@ export class NaverBlogAutomation {
           `Add-Type -AssemblyName System.Media; 1..${count} | ForEach-Object { (New-Object Media.SoundPlayer 'C:\\Windows\\Media\\notify.wav').PlaySync(); Start-Sleep -Milliseconds 300 }`
         ], { timeout: 10000 });
         child.unref();
-      } catch { }
+      } catch (e) { console.debug('[Sound] 알림 사운드 재생 실패:', (e as Error).message); }
     };
 
     // 🪟 [2026-03-30 FIX] 브라우저 창 포커스 헬퍼
@@ -2768,13 +2773,13 @@ export class NaverBlogAutomation {
               // 일시적으로 최상위에 표시 후 해제 (사용자 경험 보호)
               win.setAlwaysOnTop(true);
               setTimeout(() => {
-                try { win.setAlwaysOnTop(false); } catch { }
+                try { win.setAlwaysOnTop(false); } catch (e) { console.debug('[Window] setAlwaysOnTop(false) 실패:', (e as Error).message); }
               }, 3000);
               break;
             }
           }
         } catch { /* Electron import 실패 시 무시 (테스트 환경) */ }
-      } catch { }
+      } catch (e) { console.debug('[Window] bringBrowserToFront 실패:', (e as Error).message); }
     };
 
     while (true) {
@@ -3527,7 +3532,7 @@ export class NaverBlogAutomation {
             try {
               const { exec } = await import('child_process');
               exec('powershell -c "1..5 | ForEach-Object { [console]::beep(1000,200); Start-Sleep -Milliseconds 100 }"');
-            } catch { }
+            } catch (e) { console.debug('[Sound] 세션만료 알림음 실패:', (e as Error).message); }
 
             if (this.progressCallback) {
               this.progressCallback(0, 100, '🚨 세션 만료! 브라우저에서 직접 로그인해주세요!');
@@ -3661,7 +3666,7 @@ export class NaverBlogAutomation {
       try {
         const { exec } = await import('child_process');
         exec('powershell -c "1..5 | ForEach-Object { [console]::beep(1000,200); Start-Sleep -Milliseconds 100 }"');
-      } catch { }
+      } catch (e) { console.debug('[Sound] 로그인 알림음 실패:', (e as Error).message); }
 
       if (this.progressCallback) {
         this.progressCallback(0, 100, '🚨 로그인 필요! 브라우저에서 직접 로그인해주세요!');
@@ -3839,7 +3844,7 @@ export class NaverBlogAutomation {
     // ✅ 프레임이 실제 콘텐츠를 로드할 때까지 잠시 대기
     try {
       await frame.waitForFunction(() => window.location.href !== 'about:blank', { timeout: 3000 }).catch(() => null);
-    } catch { }
+    } catch (e) { console.debug('[Editor] 프레임 로드 대기 타임아웃 (정상 진행):', (e as Error).message); }
 
     this.mainFrame = frame;
 
@@ -4378,7 +4383,7 @@ export class NaverBlogAutomation {
               return buttonInfo.slice(0, 15).join('\n');
             });
             this.log(`   🔍 현재 페이지 버튼 목록:\n${toolbarHTML}`);
-          } catch { }
+          } catch (e) { console.debug('[Editor] 발행 버튼 목록 조회 실패:', (e as Error).message); }
         }
 
         if (publishButton) {
@@ -4523,7 +4528,7 @@ export class NaverBlogAutomation {
                 break;
               }
             }
-          } catch { }
+          } catch (e) { console.debug('[Editor] 발행 버튼 핸들 재탐색 실패:', (e as Error).message); }
 
           // ✅ [2026-02-27 FIX v2] 발행 모달 열기 — Playwright waitForSelector 기반
           // delay 폴링 대신 Playwright 네이티브 대기로 모달 트랜지션 완료까지 정확히 대기
@@ -8861,6 +8866,23 @@ export class NaverBlogAutomation {
             this.page = null;
             this.mainFrame = null;
           }
+        }
+
+        // ✅ [Phase 2B] 스테일 페이지 정리 — this.page 이외의 여분 페이지 닫기 (메모리 누수 방지)
+        if (this.browser) {
+          try {
+            const allPages = await this.browser.pages();
+            let staleCount = 0;
+            for (const p of allPages) {
+              if (p !== this.page) {
+                await p.close().catch(() => {});
+                staleCount++;
+              }
+            }
+            if (staleCount > 0) {
+              this.log(`🧹 스테일 페이지 ${staleCount}개 정리 완료`);
+            }
+          } catch (e) { console.debug('[Browser] 스테일 페이지 정리 실패:', (e as Error).message); }
         }
       }
     }
