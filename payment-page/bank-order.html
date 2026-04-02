@@ -15,7 +15,7 @@
     <style>
         .order-container { max-width: 640px; margin: 0 auto; padding: 40px 20px; }
         .order-title { text-align: center; margin-bottom: 40px; }
-        .order-title h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #c9a84c, #e8d48b); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 8px; }
+        .order-title h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #c9a84c, #e8d48b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 8px; }
         .order-title p { color: var(--text-muted); font-size: 0.95rem; }
 
         .order-step { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px; margin-bottom: 20px; }
@@ -89,12 +89,12 @@
             </button>
             <div class="nav-links" id="nav-links">
                 <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
-                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품정보</a>
-                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">구매</a>
+                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">가격</a>
                 <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
                 <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
                 <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
-                <a href="lookup.html" class="nav-link">주문조회</a>
+                <a href="lookup.html" class="nav-link">주문 조회</a>
             </div>
         </div>
     </nav>
@@ -115,7 +115,7 @@
                 <div class="product-tabs" id="product-tabs">
                     <button class="product-tab active" onclick="switchTab('naver')">Better Life Naver</button>
                     <button class="product-tab" onclick="switchTab('orbit')">Leaders Orbit</button>
-                    <button class="product-tab" onclick="alert('Leaders Tistory는 현재 개발 중입니다.'); return false;" style="opacity:0.5;cursor:not-allowed;">Leaders Tistory <span style="font-size:0.6rem;opacity:0.7;">준비중</span></button>
+                    <button class="product-tab" onclick="switchTab('tistory')">Leaders Tistory</button>
                     <button class="product-tab" onclick="switchTab('leword')">Leword</button>
                 </div>
                 <div class="product-grid" id="product-grid"></div>
@@ -177,8 +177,8 @@
             <div class="result-icon">✅</div>
             <div class="result-title">주문이 접수되었습니다!</div>
             <div class="result-desc">
-                📧 <strong>주문 확인 메일</strong>이 입력하신 이메일로 전송되었습니다.<br>
-                아래 계좌로 입금해주시면, 확인 후 <strong>라이선스 코드</strong>가 이메일로 발송됩니다.
+                아래 계좌로 입금해주세요.<br>
+                입금 확인 후 <strong>라이선스 코드</strong>가 이메일로 발송됩니다.
             </div>
             <div class="result-order-id">
                 주문번호: <span id="result-order-id"></span>
@@ -203,7 +203,6 @@
                 </div>
             </div>
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 20px;">문의: <a href="mailto:cd000242@gmail.com" style="color: #c9a84c;">cd000242@gmail.com</a> | <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" style="color: #FEE500;">카카오톡 1:1 문의</a></p>
-            <a href="lookup.html" style="display: inline-block; margin-top: 16px; padding: 12px 24px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 10px; color: #c9a84c; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.2s;">📋 주문 조회 페이지로 이동</a>
         </div>
     </section>
 
@@ -231,23 +230,26 @@
     </footer>
 
     <script>
-        const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv2b4PobrwzYWBn1/exec';
 
         const ALL_PRODUCTS = {
             naver: [
                 { id: 'naver-monthly', name: '1개월', price: 50000, period: '/ 월' },
                 { id: 'naver-quarterly', name: '3개월', price: 120000, period: '월 40,000원' },
                 { id: 'naver-yearly', name: '1년', price: 400000, period: '월 33,333원' },
+                { id: 'naver-lifetime', name: '영구제', price: 2000000, period: '일회성' },
             ],
             orbit: [
                 { id: 'orbit-monthly', name: '1개월', price: 60000, period: '/ 월' },
                 { id: 'orbit-quarterly', name: '3개월', price: 150000, period: '월 50,000원' },
                 { id: 'orbit-yearly', name: '1년', price: 600000, period: '월 50,000원' },
+                { id: 'orbit-lifetime', name: '영구제', price: 3000000, period: '일회성' },
             ],
             tistory: [
                 { id: 'tistory-monthly', name: '1개월', price: 30000, period: '/ 월' },
                 { id: 'tistory-quarterly', name: '3개월', price: 80000, period: '월 26,667원' },
                 { id: 'tistory-yearly', name: '1년', price: 300000, period: '월 25,000원' },
+                { id: 'tistory-lifetime', name: '영구제', price: 1500000, period: '일회성' },
             ],
             leword: [
                 { id: 'leword-monthly', name: '1개월', price: 30000, period: '/ 월' },
