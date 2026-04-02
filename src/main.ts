@@ -84,8 +84,9 @@ import { initAutoUpdater, initAutoUpdaterEarly, setUpdaterLoginWindow, isUpdatin
 import { Logger, debugLog as newDebugLog, sanitizeFileName as utilSanitizeFileName, ensureMp4Dir as utilEnsureMp4Dir, ensureHeadingMp4Dir as utilEnsureHeadingMp4Dir, getUniqueMp4Path as utilGetUniqueMp4Path, validateLicenseAndQuota, validateLicenseOnly } from './main/utils/index.js';
 import * as AuthUtils from './main/utils/authUtils.js'; // ✅ 충돌 방지용 Namespace Import
 import { AutomationService, injectDependencies as injectBlogExecutorDeps } from './main/services/index.js';
-import { registerAllHandlers, registerAccountHandlers } from './main/ipc/index.js';
+import { registerAllHandlers, registerAccountHandlers, registerAdminHandlers } from './main/ipc/index.js';
 import { registerConfigHandlers } from './main/ipc/configHandlers.js';
+import { registerContentHandlers } from './main/ipc/contentHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -4315,201 +4316,9 @@ ipcMain.handle('automation:generateContent', async (_event, prompt: string) => {
   }
 });
 
-// ✅ [2026-03-18] Gemini API 할당량 확인 핸들러 (정확한 공식 데이터 기반)
-ipcMain.handle('gemini:checkQuota', async (_event, apiKey: string) => {
-  try {
-    if (!apiKey || !apiKey.trim()) {
-      return { success: false, message: 'API 키를 먼저 입력해주세요.' };
-    }
+// ✅ gemini:checkQuota, gemini:resetUsageTracker, gemini:setCreditBudget,
+// api:getAllUsageSnapshots, api:resetUsage → src/main/ipc/apiHandlers.ts로 이동
 
-    const key = apiKey.trim();
-    console.log(`[Gemini] 🔍 할당량 확인 시작 - API 키 길이: ${key.length}자, 접두사: ${key.substring(0, 6)}...`);
-    const axios = (await import('axios')).default;
-    const baseUrl = 'https://generativelanguage.googleapis.com/v1beta';
-
-    // 1. 모델 목록 조회 (API 키 유효성 + 사용 가능 모델 확인) — 실제 API 응답
-    let models: any[] = [];
-    try {
-      const modelsResp = await axios.get(`${baseUrl}/models`, {
-        headers: { 'x-goog-api-key': key },
-        timeout: 15000,
-      });
-      models = modelsResp.data?.models || [];
-      console.log(`[Gemini] ✅ 모델 목록 조회 성공: ${models.length}개 모델`);
-    } catch (modelsErr: any) {
-      const status = modelsErr?.response?.status;
-      const respData = modelsErr?.response?.data;
-      const errorDetail = respData?.error?.message || respData?.error?.status || JSON.stringify(respData || {}).substring(0, 200);
-      console.error(`[Gemini] ❌ 모델 목록 조회 실패 - HTTP ${status}, 상세: ${errorDetail}`);
-      console.error(`[Gemini]   API 키 길이: ${key.length}자, 접두사: ${key.substring(0, 6)}...`);
-      if (status === 400 || status === 401 || status === 403) {
-        return { success: false, message: `❌ API 키가 유효하지 않습니다 (HTTP ${status}).\n상세: ${errorDetail}\n\n키 길이: ${key.length}자 | 접두사: ${key.substring(0, 6)}...\n\n💡 Google AI Studio에서 키를 다시 확인해주세요.` };
-      }
-      if (status === 429) {
-        return { success: false, message: '⚠️ API 요청 한도 초과 (429). 잠시 후 다시 시도해주세요.' };
-      }
-      return { success: false, message: `API 연결 실패 (HTTP ${status || '?'}): ${modelsErr?.message || '알 수 없는 오류'}\n상세: ${errorDetail}` };
-    }
-
-    // 2. 주요 모델 필터링 — 실제 API 응답에서 추출
-    const geminiModels = models.filter((m: any) =>
-      m.name?.includes('gemini') && m.supportedGenerationMethods?.includes('generateContent')
-    );
-    const flashModels = geminiModels.filter((m: any) => m.name?.includes('flash'));
-    const proModels = geminiModels.filter((m: any) => m.name?.includes('pro') && !m.name?.includes('flash'));
-
-    // 3. 경량 테스트 호출 — 실제 토큰 사용량 확인 (usageMetadata)
-    let testCallResult: any = null;
-    try {
-      const testResp = await axios.post(
-        `${baseUrl}/models/gemini-2.0-flash:generateContent`,
-        { contents: [{ parts: [{ text: 'Hi' }] }] },
-        {
-          headers: { 'x-goog-api-key': key, 'Content-Type': 'application/json' },
-          timeout: 15000,
-        }
-      );
-      const usage = testResp.data?.usageMetadata;
-      if (usage) {
-        testCallResult = {
-          promptTokens: usage.promptTokenCount || 0,
-          outputTokens: usage.candidatesTokenCount || 0,
-          totalTokens: usage.totalTokenCount || 0,
-        };
-      }
-    } catch (testErr: any) {
-      if (testErr?.response?.status === 429) {
-        testCallResult = { error: '현재 분당 요청 한도 초과 (429)' };
-      } else {
-        testCallResult = { error: testErr?.message || '테스트 호출 실패' };
-      }
-    }
-
-    // 4. 사용자의 현재 플랜 설정 읽기
-    const config = await loadConfig();
-    const userPlanType = config.geminiPlanType || 'paid'; // 사용자 설정값
-
-    // ✅ [2026-03-19] flush 후 메모리+디스크 합산 스냅샷 사용 (배치 중 누적분 포함)
-    await flushGeminiUsage();
-    const usageTracker = await getGeminiUsageSnapshot();
-    const creditBudget = (config as any).geminiCreditBudget || 300; // 기본 $300
-
-    // 5. Google 공식 가격표 기반 플랜별 정보 (2026-03 기준)
-    // 출처: https://ai.google.dev/pricing
-    const planInfo = userPlanType === 'free' ? {
-      label: '🆓 무료 (Free tier)',
-      limits: {
-        rpm: 15,         // 분당 요청 수
-        rpd: 1500,       // 일일 요청 수
-        tpm: '1,000,000', // 분당 토큰
-      },
-      pricing: {
-        flash_input: '$0 (무료)',
-        flash_output: '$0 (무료)',
-        pro_input: '$0 (무료)',
-        pro_output: '$0 (무료)',
-        note: '무료 티어는 속도 제한이 있으며, 상업적 사용이 제한됩니다.',
-      },
-    } : {
-      label: '💎 유료 (Pay-as-you-go)',
-      limits: {
-        rpm: 2000,        // 분당 요청 수  
-        rpd: '무제한',     // 일일 요청 수
-        tpm: '4,000,000', // 분당 토큰
-      },
-      pricing: {
-        flash_input: '$0.10 / 1M tokens',
-        flash_output: '$0.40 / 1M tokens',
-        pro_input: '$1.25 / 1M tokens',
-        pro_output: '$5.00 / 1M tokens',
-        note: '유료 플랜은 높은 속도 제한과 상업적 사용이 가능합니다.',
-      },
-    };
-
-    // 6. 결과 조합 — 모든 데이터가 실제 API 응답 또는 공식 문서 기반
-    return {
-      success: true,
-      data: {
-        keyValid: true,
-        userPlanType, // 사용자가 설정한 플랜
-        planLabel: planInfo.label,
-        totalModels: geminiModels.length,
-        flashModels: flashModels.map((m: any) => m.name?.replace('models/', '')).slice(0, 5),
-        proModels: proModels.map((m: any) => m.name?.replace('models/', '')).slice(0, 5),
-        limits: planInfo.limits,
-        pricing: planInfo.pricing,
-        testCallResult,
-        // ✅ [2026-03-18] 앱 내 누적 사용량 데이터
-        usageTracker: {
-          totalInputTokens: usageTracker.totalInputTokens,
-          totalOutputTokens: usageTracker.totalOutputTokens,
-          totalCalls: usageTracker.totalCalls,
-          estimatedCostUSD: usageTracker.estimatedCostUSD,
-          lastUpdated: usageTracker.lastUpdated,
-          firstTracked: usageTracker.firstTracked,
-        },
-        creditBudget, // 사용자 설정 예산
-      },
-    };
-  } catch (error) {
-    console.error('[Gemini] 할당량 확인 실패:', error);
-    return { success: false, message: `할당량 확인 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ [2026-03-18] Gemini 사용량 추적 관리 IPC 핸들러
-ipcMain.handle('gemini:resetUsageTracker', async () => {
-  try {
-    const config = await loadConfig();
-    await saveConfig({
-      geminiUsageTracker: {
-        totalInputTokens: 0,
-        totalOutputTokens: 0,
-        totalCalls: 0,
-        estimatedCostUSD: 0,
-        lastUpdated: new Date().toISOString(),
-        firstTracked: new Date().toISOString(),
-      },
-    } as any);
-    console.log('[Gemini] 🔄 사용량 추적 초기화 완료');
-    return { success: true };
-  } catch (e) {
-    return { success: false, message: (e as Error).message };
-  }
-});
-
-ipcMain.handle('gemini:setCreditBudget', async (_event, budget: number) => {
-  try {
-    await saveConfig({ geminiCreditBudget: budget } as any);
-    console.log(`[Gemini] 💰 예산 설정: $${budget}`);
-    return { success: true };
-  } catch (e) {
-    return { success: false, message: (e as Error).message };
-  }
-});
-
-// ✅ [2026-03-19] 통합 API 사용량 조회 핸들러
-ipcMain.handle('api:getAllUsageSnapshots', async () => {
-  try {
-    await flushAllApiUsage();
-    const snapshots = await getApiUsageSnapshot();
-    return { success: true, data: snapshots };
-  } catch (e) {
-    console.error('[ApiUsage] 스냅샷 조회 실패:', e);
-    return { success: false, message: (e as Error).message };
-  }
-});
-
-// ✅ [2026-03-19] 통합 API 사용량 초기화 핸들러 (제공자별 또는 전체)
-ipcMain.handle('api:resetUsage', async (_event, provider?: string) => {
-  try {
-    await resetApiUsage(provider as ApiProvider | undefined);
-    return { success: true };
-  } catch (e) {
-    console.error('[ApiUsage] 초기화 실패:', e);
-    return { success: false, message: (e as Error).message };
-  }
-});
 
 // ✅ [2026-03-19] 범용 API 키 유효성 검증 + 잔액/사용량 조회 핸들러
 ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: string) => {
@@ -5540,112 +5349,7 @@ ipcMain.handle('scheduler:cancelAll', async () => {
 
 // ✅ [Phase 5A.2] keyword:* 핸들러 → keywordHandlers.ts로 이관 완료
 // ✅ [Phase 5A.2] bestProduct:* 핸들러 → productHandlers.ts로 이관 완료
-
-// ✅ 자동 내부링크 삽입 IPC 핸들러
-ipcMain.handle('internalLink:addPost', async (_event, url: string, title: string, content?: string, category?: string) => {
-  try {
-    internalLinkManager.addPostFromUrl(url, title, content, category);
-    return { success: true, message: '글이 내부링크 목록에 추가되었습니다.' };
-  } catch (error) {
-    return { success: false, message: `추가 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('internalLink:findRelated', async (_event, title: string, content: string, maxResults?: number, categoryFilter?: string) => {
-  try {
-    const links = internalLinkManager.findRelatedPosts(title, content, maxResults, categoryFilter);
-    return { success: true, links };
-  } catch (error) {
-    return { success: false, message: `검색 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('internalLink:insertLinks', async (_event, content: string, title: string, options?: any) => {
-  try {
-    const result = internalLinkManager.insertInternalLinks(content, title, options);
-    return { success: true, result };
-  } catch (error) {
-    return { success: false, message: `삽입 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('internalLink:getAllPosts', async () => {
-  try {
-    const posts = internalLinkManager.getAllPosts();
-    return { success: true, posts };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('internalLink:getStats', async () => {
-  try {
-    const stats = internalLinkManager.getStats();
-    return { success: true, stats };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ 카테고리별 글 목록 조회
-ipcMain.handle('internalLink:getPostsByCategory', async (_event, category: string) => {
-  try {
-    const posts = internalLinkManager.getPostsByCategory(category);
-    return { success: true, posts };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ 모든 카테고리 목록 조회
-ipcMain.handle('internalLink:getAllCategories', async () => {
-  try {
-    const categories = internalLinkManager.getAllCategories();
-    return { success: true, categories };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ 글 카테고리 업데이트
-ipcMain.handle('internalLink:updatePostCategory', async (_event, postId: string, category: string) => {
-  try {
-    const success = internalLinkManager.updatePostCategory(postId, category);
-    return { success, message: success ? '카테고리가 업데이트되었습니다.' : '글을 찾을 수 없습니다.' };
-  } catch (error) {
-    return { success: false, message: `업데이트 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ 기존 글 자동 카테고리 분류
-ipcMain.handle('internalLink:autoCategorize', async () => {
-  try {
-    const result = internalLinkManager.autoCategorizeAllPosts();
-    return { success: true, ...result };
-  } catch (error) {
-    return { success: false, message: `자동 분류 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ 미분류 글 목록 조회
-ipcMain.handle('internalLink:getUncategorized', async () => {
-  try {
-    const posts = internalLinkManager.getUncategorizedPosts();
-    return { success: true, posts };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ 기존 카테고리명 정규화 (영어/다른형식 → 표준 한글)
-ipcMain.handle('internalLink:normalizeCategories', async () => {
-  try {
-    const result = internalLinkManager.normalizeAllCategories();
-    return { success: true, ...result };
-  } catch (error) {
-    return { success: false, message: `정규화 실패: ${(error as Error).message}` };
-  }
-});
+// ✅ [Phase 5A.2] internalLink:* + title:* 핸들러 → contentHandlers.ts로 이관 완료
 
 // ✅ 썸네일 자동 생성 IPC 핸들러
 ipcMain.handle('thumbnail:generateSvg', async (_event, title: string, options?: any, category?: string) => {
@@ -5721,6 +5425,14 @@ ipcMain.handle('thumbnail:createProductThumbnail', async (
     console.error(`[Main] ❌ 썸네일 오버레이 실패:`, error);
     return { success: false, message: `오버레이 실패: ${(error as Error).message}` };
   }
+});
+
+// ✅ [2026-04-03] 콘텐츠(내부링크 + 제목) 핸들러 → contentHandlers.ts로 추출
+registerContentHandlers({
+  internalLinkManager,
+  titleABTester,
+  loadConfig,
+  applyConfigToEnv
 });
 
 // ✅ [2026-04-03] 계정 관련 핸들러 → accountHandlers.ts로 추출
@@ -6567,58 +6279,7 @@ ipcMain.handle('multiAccount:cancel', async () => {
   return { success: true, message: '다중계정 발행이 중지되었습니다.' };
 });
 
-// ✅ AI 제목 A/B 테스트 IPC 핸들러
-ipcMain.handle('title:generateCandidates', async (_event, keyword: string, category?: string, count?: number) => {
-  // ✅ 실행 직전 최신 설정 강제 동기화
-  try {
-    const config = await loadConfig();
-    applyConfigToEnv(config);
-  } catch (e) {
-    console.error('[Main] title:generateCandidates - 설정 동기화 실패:', e);
-  }
-
-  try {
-    const result = titleABTester.generateTitleCandidates(keyword, category, count);
-    return { success: true, result };
-  } catch (error) {
-    return { success: false, message: `생성 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('title:evaluate', async (_event, title: string, category?: string) => {
-  // ✅ 실행 직전 최신 설정 강제 동기화
-  try {
-    const config = await loadConfig();
-    applyConfigToEnv(config);
-  } catch (e) {
-    console.error('[Main] title:evaluate - 설정 동기화 실패:', e);
-  }
-
-  try {
-    const evaluation = titleABTester.evaluateTitle(title, category);
-    return { success: true, evaluation };
-  } catch (error) {
-    return { success: false, message: `평가 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('title:suggestImprovements', async (_event, title: string) => {
-  try {
-    const suggestions = titleABTester.suggestImprovements(title);
-    return { success: true, suggestions };
-  } catch (error) {
-    return { success: false, message: `제안 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('title:getStyles', async () => {
-  try {
-    const styles = titleABTester.getAvailableStyles();
-    return { success: true, styles };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
+// ✅ [Phase 5A.2] title:* 핸들러 → contentHandlers.ts로 이관 완료
 
 // ✅ [Phase 5A.2] comment:* + competitor:* 핸들러 → engagementHandlers.ts로 이관 완료
 
@@ -8377,66 +8038,8 @@ ipcMain.handle('license:register', async (_event, code: string, userId: string, 
   }
 });
 
-ipcMain.handle('license:verify', async (_event, code: string, deviceId: string, email?: string): Promise<{ valid: boolean; license?: LicenseInfo; message?: string }> => {
-  try {
-    const serverUrl = process.env.LICENSE_SERVER_URL || 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-    return await verifyLicense(code, deviceId, serverUrl, email);
-  } catch (error) {
-    return {
-      valid: false,
-      message: `라이선스 검증 중 오류: ${(error as Error).message}`,
-    };
-  }
-});
-
-ipcMain.handle('license:verifyWithCredentials', async (_event, userId: string, password: string, deviceId: string): Promise<{ valid: boolean; license?: LicenseInfo; message?: string; debugInfo?: any }> => {
-  try {
-    const serverUrl = process.env.LICENSE_SERVER_URL || 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-    return await verifyLicenseWithCredentials(userId, password, deviceId, serverUrl);
-  } catch (error) {
-    return {
-      valid: false,
-      message: `라이선스 검증 중 오류: ${(error as Error).message}`,
-    };
-  }
-});
-
-// 외부 유입 90일 라이선스 등록
-ipcMain.handle('license:registerExternalInflow', async (): Promise<{ success: boolean; message: string; expiresAt?: string }> => {
-  try {
-    console.log('[Main] 외부 유입 90일 라이선스 등록 요청');
-    const result = await registerExternalInflowLicense();
-    console.log('[Main] 외부 유입 라이선스 등록 결과:', result);
-    return result;
-  } catch (error) {
-    console.error('[Main] 외부 유입 라이선스 등록 오류:', error);
-    return {
-      success: false,
-      message: `외부 유입 라이선스 등록 실패: ${(error as Error).message}`
-    };
-  }
-});
-
-// 외부 유입 기능 사용 가능 여부 확인
-ipcMain.handle('license:canUseExternalInflow', async (): Promise<boolean> => {
-  try {
-    const canUse = await canUseExternalInflow();
-    console.log('[Main] 외부 유입 기능 사용 가능 여부:', canUse);
-    return canUse;
-  } catch (error) {
-    console.error('[Main] 외부 유입 기능 검증 오류:', error);
-    return false;
-  }
-});
-
-ipcMain.handle('license:checkPatchFile', async (): Promise<boolean> => {
-  try {
-    return await checkPatchFile();
-  } catch (error) {
-    console.error('[Main] 패치 파일 확인 실패:', (error as Error).message);
-    return false;
-  }
-});
+// ✅ [2026-04-03] license:verify, license:verifyWithCredentials, license:registerExternalInflow,
+// license:canUseExternalInflow, license:checkPatchFile → src/main/ipc/authHandlers.ts로 이관
 
 ipcMain.handle('app:isPackaged', async (): Promise<boolean> => {
   return app.isPackaged;
@@ -8465,14 +8068,7 @@ ipcMain.handle('login:success', async (): Promise<void> => {
   }
 });
 
-ipcMain.handle('license:getDeviceId', async (): Promise<string> => {
-  try {
-    return await getDeviceId();
-  } catch (error) {
-    console.error('[Main] 기기 ID 생성 실패:', (error as Error).message);
-    return '';
-  }
-});
+// ✅ [2026-04-03] license:getDeviceId → src/main/ipc/authHandlers.ts로 이관
 
 // ✅ [2026-02-05] 앱 버전 반환 (라이선스 창 및 메인 창에서 버전 표시용)
 ipcMain.handle('app:getVersion', async (): Promise<string> => {
@@ -8661,17 +8257,7 @@ ipcMain.handle('app:clearCache', async (_event, category: 'images' | 'sessions' 
   }
 });
 
-ipcMain.handle('license:testServer', async (_event, serverUrl?: string): Promise<{ success: boolean; message: string; response?: any }> => {
-  try {
-    return await testLicenseServer(serverUrl);
-  } catch (error) {
-    console.error('[Main] License server test error:', (error as Error).message);
-    return {
-      success: false,
-      message: `테스트 실패: ${(error as Error).message}`,
-    };
-  }
-});
+// ✅ [2026-04-03] license:testServer → src/main/ipc/authHandlers.ts로 이관
 
 // ✅ 원클릭 네트워크 최적화 핸들러
 ipcMain.handle('network:optimize', async (): Promise<{ success: boolean; message: string; results: string[] }> => {
@@ -8763,145 +8349,13 @@ ipcMain.handle('network:optimize', async (): Promise<{ success: boolean; message
   }
 });
 
-// 관리자 패널 API 핸들러들
-ipcMain.handle('admin:connect', async (): Promise<{ success: boolean; message: string }> => {
-  try {
-    console.log('[Admin] 관리자 패널 연결 시도...');
-
-    // 라이선스 검증
-    const isValid = await ensureLicenseValid();
-    if (!isValid) {
-      return { success: false, message: '라이선스가 유효하지 않습니다.' };
-    }
-
-    // 관리자 패널 연결 로직 (실제로는 서버 API 호출)
-    // TODO: 관리자 패널 서버에 연결
-
-    console.log('[Admin] 관리자 패널 연결 성공');
-    return { success: true, message: '관리자 패널에 연결되었습니다.' };
-  } catch (error) {
-    console.error('[Admin] 연결 실패:', error);
-    return { success: false, message: `연결 실패: ${(error as Error).message}` };
-  }
+// ✅ [2026-04-03] 관리자 패널 핸들러 → adminHandlers.ts로 추출
+registerAdminHandlers({
+  ensureLicenseValid,
+  reportUserActivity
 });
 
-ipcMain.handle('admin:syncSettings', async (): Promise<{ success: boolean; message: string; settings?: any }> => {
-  try {
-    console.log('[Admin] 관리자 설정 동기화 시도...');
-
-    // 라이선스 검증
-    const isValid = await ensureLicenseValid();
-    if (!isValid) {
-      return { success: false, message: '라이선스가 유효하지 않습니다.' };
-    }
-
-    // 관리자 설정 동기화 로직
-    // TODO: 서버에서 설정을 가져와서 로컬에 적용
-
-    console.log('[Admin] 관리자 설정 동기화 완료');
-    return { success: true, message: '설정이 동기화되었습니다.', settings: {} };
-  } catch (error) {
-    console.error('[Admin] 설정 동기화 실패:', error);
-    return { success: false, message: `동기화 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('admin:sendReport', async (_event, reportData: any): Promise<{ success: boolean; message: string }> => {
-  try {
-    console.log('[Admin] 관리자 보고서 전송 시도...');
-
-    // 라이선스 검증
-    const isValid = await ensureLicenseValid();
-    if (!isValid) {
-      return { success: false, message: '라이선스가 유효하지 않습니다.' };
-    }
-
-    // 관리자 보고서 전송 로직
-    // TODO: 사용 통계, 오류 정보 등을 서버로 전송
-
-    console.log('[Admin] 관리자 보고서 전송 완료');
-    return { success: true, message: '보고서가 전송되었습니다.' };
-  } catch (error) {
-    console.error('[Admin] 보고서 전송 실패:', error);
-    return { success: false, message: `전송 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('admin:checkPermissions', async (): Promise<{ success: boolean; permissions?: any }> => {
-  try {
-    console.log('[Admin] 관리자 권한 확인 시도...');
-
-    // 라이선스 검증
-    const isValid = await ensureLicenseValid();
-    if (!isValid) {
-      return { success: false, permissions: { isValid: false } };
-    }
-
-    // 관리자 권한 확인 로직
-    // TODO: 서버에서 권한 정보를 가져옴
-
-    console.log('[Admin] 관리자 권한 확인 완료');
-    return {
-      success: true,
-      permissions: {
-        isValid: true,
-        canAccessAdminPanel: true,
-        canSyncSettings: true,
-        canSendReports: true
-      }
-    };
-  } catch (error) {
-    console.error('[Admin] 권한 확인 실패:', error);
-    return { success: false, permissions: { isValid: false, error: (error as Error).message } };
-  }
-});
-
-ipcMain.handle('admin:syncAccounts', async () => {
-  try {
-    console.log('[Admin] 수동 계정 동기화 시도...');
-    await reportUserActivity();
-    return { success: true, message: '패널과 계정 정보 동기화 완료' };
-  } catch (error) {
-    console.error('[Admin] 계정 동기화 실패:', error);
-    return { success: false, message: `동기화 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('admin:verifyPin', async (_event, pin: string): Promise<{ success: boolean; message?: string }> => {
-  try {
-    const configured = (process.env.ADMIN_PIN || '').trim();
-    if (!configured) {
-      return { success: false, message: 'ADMIN_PIN이 설정되지 않았습니다.' };
-    }
-    const input = String(pin || '').trim();
-    if (!input) {
-      return { success: false, message: 'PIN이 입력되지 않았습니다.' };
-    }
-    if (input !== configured) {
-      return { success: false, message: 'PIN이 올바르지 않습니다.' };
-    }
-    return { success: true };
-  } catch (error) {
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-ipcMain.handle('license:clear', async (): Promise<void> => {
-  try {
-    await clearLicense();
-  } catch (error) {
-    console.error('[Main] 라이선스 삭제 실패:', (error as Error).message);
-  }
-});
-
-ipcMain.handle('license:revalidate', async (_event, serverUrl?: string): Promise<boolean> => {
-  try {
-    return await revalidateLicense(serverUrl || process.env.LICENSE_SERVER_URL);
-  } catch (error) {
-    console.error('[Main] License revalidation error:', (error as Error).message);
-    return false;
-  }
-});
+// ✅ [2026-04-03] license:clear, license:revalidate → src/main/ipc/authHandlers.ts로 이관
 
 // Excel 자동 포스팅 기능 제거됨
 

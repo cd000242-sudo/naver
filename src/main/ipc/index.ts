@@ -23,6 +23,9 @@ import { registerConfigHandlers, ConfigHandlerContext } from './configHandlers';
 import { registerKeywordHandlers } from './keywordHandlers';
 import { registerProductHandlers } from './productHandlers';
 import { registerEngagementHandlers } from './engagementHandlers';
+import { registerContentHandlers, ContentHandlerDeps } from './contentHandlers';
+import { registerAdminHandlers, AdminHandlerDeps } from './adminHandlers';
+import { registerApiHandlers } from './apiHandlers';
 
 /**
  * IPC 컨텍스트 생성
@@ -59,12 +62,15 @@ export function registerAllHandlers(): void {
     // registerBlogHandlers(ctx);
     // registerAutomationHandlers(ctx);
     // registerGeminiHandlers(ctx);
-    // registerContentHandlers(ctx);
+    // registerContentHandlers(deps); — deps가 필요하므로 main.ts에서 별도 호출
 
     // 분석/트렌드
     registerDatalabHandlers(ctx);
     registerTrendHandlers(ctx);
     registerAnalyticsHandlers(ctx);
+
+    // API/Gemini
+    registerApiHandlers(ctx);
 
     // 인증/라이선스
     registerLicenseHandlers(ctx);
@@ -81,6 +87,9 @@ export function registerAllHandlers(): void {
 
     // 댓글/경쟁분석
     registerEngagementHandlers();
+
+    // 관리자 패널 — deps가 필요하므로 main.ts에서 별도 호출
+    // registerAdminHandlers(deps);
 
     // 계정 관리 — deps가 필요하므로 registerAccountHandlersWithDeps()로 별도 호출
     // registerAccountHandlers(ctx, deps);
@@ -103,7 +112,8 @@ export {
     // registerBlogHandlers,
     // registerAutomationHandlers,
     // registerGeminiHandlers,
-    // registerContentHandlers,
+    registerContentHandlers,
+    registerApiHandlers,
     registerDatalabHandlers,
     registerTrendHandlers,
     registerAnalyticsHandlers,
@@ -114,10 +124,11 @@ export {
     registerConfigHandlers,
     registerKeywordHandlers,
     registerProductHandlers,
-    registerEngagementHandlers
+    registerEngagementHandlers,
+    registerAdminHandlers
 };
 
-export type { AccountHandlerDeps, ConfigHandlerContext };
+export type { AccountHandlerDeps, AdminHandlerDeps, ConfigHandlerContext, ContentHandlerDeps };
 
 // blogHandlers 로직 함수 re-export
 export * from './blogHandlers';
