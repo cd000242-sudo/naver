@@ -1,7 +1,7 @@
 // src/main/ipc/systemHandlers.ts
 // 시스템/파일/설정 관련 IPC 핸들러
 
-import { ipcMain, shell, dialog } from 'electron';
+import { ipcMain, shell, dialog, app } from 'electron';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
@@ -164,32 +164,91 @@ export function registerSystemHandlers(ctx: IpcContext): void {
     // ✅ LEWORD 실행 핸들러는 main.ts에서 등록 (leword:launch)
     // window:minimize 핸들러 제거됨 → 황금키워드 실행 버튼으로 교체
 
-    // 셸에서 경로 열기
+    // 셸에서 경로 열기 (경로 정규화 + 홈 디렉토리 확장 + 폴더 자동 생성)
     ipcMain.handle('shell:openPath', async (_event, targetPath: string) => {
         try {
-            await shell.openPath(targetPath);
+            const fsPromises = await import('fs/promises');
+            const osModule = await import('os');
+
+            // 경로 정규화
+            let normalizedPath = targetPath.replace(/\\/g, '/');
+
+            // 홈 디렉토리 경로 확장
+            if (normalizedPath.startsWith('~')) {
+                normalizedPath = normalizedPath.replace('~', osModule.homedir());
+            }
+
+            // 폴더가 없으면 생성
+            try {
+                await fsPromises.access(normalizedPath);
+            } catch {
+                await fsPromises.mkdir(normalizedPath, { recursive: true });
+            }
+
+            // 폴더 열기
+            const result = await shell.openPath(normalizedPath);
+
+            if (result) {
+                return { success: false, message: result };
+            }
+
             return { success: true };
         } catch (error) {
-            console.error('[systemHandlers] shell:openPath error:', error);
-            return { success: false, error: String(error) };
+            console.error('[systemHandlers] shell:openPath 실패:', error);
+            return { success: false, message: (error as Error).message };
         }
     });
 
     // 앱 강제 종료
     ipcMain.handle('app:forceQuit', async () => {
-        WindowManager.setQuitting(true);
-        const { app } = require('electron');
-        app.quit();
-        return true;
+        try {
+            setTimeout(() => {
+                try {
+                    app.quit();
+                } finally {
+                    process.exit(0);
+                }
+            }, 200);
+        } catch {
+        }
+        return { success: true };
     });
 
     // 앱 정보 가져오기
     ipcMain.handle('app:getInfo', async () => {
-        const { app } = require('electron');
-        return {
-            version: app.getVersion(),
-            name: app.getName()
-        };
+        return { isPackaged: app.isPackaged };
+    });
+
+    // 앱 패키징 여부 확인
+    ipcMain.handle('app:isPackaged', async (): Promise<boolean> => {
+        return app.isPackaged;
+    });
+
+    // 앱 버전 반환
+    ipcMain.handle('app:getVersion', async (): Promise<string> => {
+        return app.getVersion();
+    });
+
+    // 외부 URL을 브라우저에서 열기
+    ipcMain.handle('openExternalUrl', async (_event, url: string): Promise<{ success: boolean; message?: string }> => {
+        try {
+            if (!url || !url.trim()) {
+                return { success: false, message: 'URL이 비어있습니다.' };
+            }
+
+            // URL 유효성 검사
+            const urlPattern = /^https?:\/\//i;
+            if (!urlPattern.test(url.trim())) {
+                return { success: false, message: '유효하지 않은 URL 형식입니다.' };
+            }
+
+            await shell.openExternal(url.trim());
+            console.log(`[systemHandlers] 외부 URL 열기: ${url}`);
+            return { success: true };
+        } catch (error) {
+            console.error('[systemHandlers] 외부 URL 열기 실패:', (error as Error).message);
+            return { success: false, message: (error as Error).message };
+        }
     });
 
     // ✅ [2026-03-27] 계정별 Sticky Session 프록시 자동 생성

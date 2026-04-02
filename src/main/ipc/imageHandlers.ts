@@ -1088,57 +1088,5 @@ export function registerMediaHandlers(ctx: IpcContext): void {
     });
 }
 
-/**
- * 소제목-비디오 매핑 핸들러 등록
- */
-const headingVideoMap = new Map<string, Array<{ provider: string; filePath: string; previewDataUrl: string; updatedAt: number }>>();
-
-export function registerHeadingVideoHandlers(ctx: IpcContext): void {
-    // 비디오 적용
-    safeHandle('heading:applyVideo', async (_event, heading: string, video: any) => {
-        try {
-            const existing = headingVideoMap.get(heading) || [];
-            existing.push({
-                provider: video.provider || 'unknown',
-                filePath: video.filePath,
-                previewDataUrl: video.previewDataUrl || '',
-                updatedAt: video.updatedAt || Date.now()
-            });
-            headingVideoMap.set(heading, existing);
-            return { success: true };
-        } catch (error) {
-            return { success: false, message: (error as Error).message };
-        }
-    });
-
-    // 적용된 비디오 가져오기
-    safeHandle('heading:getAppliedVideo', async (_event, heading: string) => {
-        const videos = headingVideoMap.get(heading);
-        if (videos && videos.length > 0) {
-            return { success: true, video: videos[videos.length - 1] };
-        }
-        return { success: false };
-    });
-
-    // 적용된 비디오 목록 가져오기
-    safeHandle('heading:getAppliedVideos', async (_event, heading: string) => {
-        const videos = headingVideoMap.get(heading) || [];
-        return { success: true, videos };
-    });
-
-    // 비디오 제거
-    safeHandle('heading:removeVideo', async (_event, heading: string) => {
-        headingVideoMap.delete(heading);
-        return { success: true };
-    });
-
-    // 모든 적용된 비디오 가져오기
-    safeHandle('heading:getAllAppliedVideos', async () => {
-        const result: Record<string, any[]> = {};
-        for (const [key, value] of headingVideoMap.entries()) {
-            result[key] = value;
-        }
-        return { success: true, videos: result };
-    });
-}
+// ✅ [2026-04-03] registerHeadingVideoHandlers → headingHandlers.ts로 이동
 

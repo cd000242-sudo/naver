@@ -87,6 +87,7 @@ import { AutomationService, injectDependencies as injectBlogExecutorDeps } from 
 import { registerAllHandlers, registerAccountHandlers, registerAdminHandlers } from './main/ipc/index.js';
 import { registerConfigHandlers } from './main/ipc/configHandlers.js';
 import { registerContentHandlers } from './main/ipc/contentHandlers.js';
+import { registerHeadingHandlers } from './main/ipc/headingHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -1965,39 +1966,7 @@ ipcMain.handle('leword:launch', async () => {
   }
 });
 
-ipcMain.handle('shell:openPath', async (_event, targetPath: string) => {
-  try {
-    const fs = await import('fs/promises');
-    const os = await import('os');
-
-    // 경로 정규화
-    let normalizedPath = targetPath.replace(/\\/g, '/');
-
-    // 홈 디렉토리 경로 확장
-    if (normalizedPath.startsWith('~')) {
-      normalizedPath = normalizedPath.replace('~', os.homedir());
-    }
-
-    // 폴더가 없으면 생성
-    try {
-      await fs.access(normalizedPath);
-    } catch {
-      await fs.mkdir(normalizedPath, { recursive: true });
-    }
-
-    // 폴더 열기
-    const result = await shell.openPath(normalizedPath);
-
-    if (result) {
-      return { success: false, message: result };
-    }
-
-    return { success: true };
-  } catch (error) {
-    console.error('[Shell] openPath 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
+// ✅ [2026-04-03] shell:openPath → src/main/ipc/systemHandlers.ts로 이관
 
 // ✅ 이전글 목록 가져오기 (블로그 포스트 목록 크롤링)
 ipcMain.handle('blog:getRecentPosts', async (_event, blogId: string) => {
@@ -2083,117 +2052,11 @@ ipcMain.handle('free:activate', async (_event, userInfo?: { email: string; nickn
   return await activateFreeTier(userInfo);
 });
 
-ipcMain.handle('app:forceQuit', async () => {
-  try {
-    setTimeout(() => {
-      try {
-        app.quit();
-      } finally {
-        process.exit(0);
-      }
-    }, 200);
-  } catch {
-  }
-  return { success: true };
-});
+// ✅ [2026-04-03] app:forceQuit → src/main/ipc/systemHandlers.ts로 이관
 
 
 
-// 소제목 영상 관리 IPC 핸들러
-ipcMain.handle('heading:applyVideo', async (_event, heading: string, video: HeadingVideoRecord): Promise<{ success: boolean; message?: string }> => {
-  // ✅ [리팩토링] 통합 검증
-  const check = await validateLicenseOnly();
-  if (!check.valid) return check.response;
-
-  try {
-    if (!heading || !heading.trim()) {
-      return { success: false, message: '소제목이 비어있습니다.' };
-    }
-    if (!video || !video.filePath) {
-      return { success: false, message: '영상 정보가 올바르지 않습니다.' };
-    }
-
-    const key = heading.trim();
-    const current = headingVideosStore.get(key) || [];
-    const nextRecord: HeadingVideoRecord = {
-      provider: video.provider,
-      filePath: video.filePath,
-      previewDataUrl: video.previewDataUrl,
-      updatedAt: video.updatedAt || Date.now(),
-    };
-
-    // ✅ 최신 배치가 항상 0번에 오도록(프론트가 videos[0]을 사용)
-    const deduped = current.filter((v) => String(v?.filePath || '') !== String(nextRecord.filePath || ''));
-    deduped.unshift(nextRecord);
-    deduped.sort((a, b) => Number(b?.updatedAt || 0) - Number(a?.updatedAt || 0));
-    headingVideosStore.set(key, deduped);
-
-    await saveHeadingVideosStore();
-    console.log(`[Main] 소제목 "${heading}"에 영상 적용 완료`);
-    return { success: true };
-  } catch (error) {
-    console.error('[Main] 소제목 영상 적용 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-ipcMain.handle('heading:getAppliedVideo', async (_event, heading: string): Promise<{ success: boolean; video?: HeadingVideoRecord; message?: string }> => {
-  try {
-    if (!heading || !heading.trim()) {
-      return { success: false, message: '소제목이 비어있습니다.' };
-    }
-
-    const videos = headingVideosStore.get(heading.trim()) || [];
-    // ✅ 하위호환: 기존 UI는 단일 video만 기대
-    return { success: true, video: videos[0] };
-  } catch (error) {
-    console.error('[Main] 소제목 영상 조회 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-ipcMain.handle('heading:getAppliedVideos', async (_event, heading: string): Promise<{ success: boolean; videos?: HeadingVideoRecord[]; message?: string }> => {
-  try {
-    if (!heading || !heading.trim()) {
-      return { success: false, message: '소제목이 비어있습니다.' };
-    }
-
-    const videos = headingVideosStore.get(heading.trim()) || [];
-    return { success: true, videos };
-  } catch (error) {
-    console.error('[Main] 소제목 영상 목록 조회 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-ipcMain.handle('heading:removeVideo', async (_event, heading: string): Promise<{ success: boolean; message?: string }> => {
-  try {
-    if (!heading || !heading.trim()) {
-      return { success: false, message: '소제목이 비어있습니다.' };
-    }
-
-    const deleted = headingVideosStore.delete(heading.trim());
-    if (deleted) {
-      await saveHeadingVideosStore();
-      console.log(`[Main] 소제목 "${heading}"의 영상 제거 완료`);
-    }
-
-    return { success: true };
-  } catch (error) {
-    console.error('[Main] 소제목 영상 제거 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-ipcMain.handle('heading:getAllAppliedVideos', async (): Promise<{ success: boolean; videos?: Record<string, HeadingVideoRecord[]>; message?: string }> => {
-  try {
-    const videos = Object.fromEntries(headingVideosStore);
-    return { success: true, videos };
-  } catch (error) {
-    console.error('[Main] 모든 소제목 영상 조회 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
+// ✅ [2026-04-03] 소제목 영상 핸들러 → headingHandlers.ts로 추출
 
 ipcMain.handle('media:listMp4Files', async (_event, payload: { dirPath: string }) => {
   try {
@@ -2502,20 +2365,7 @@ ipcMain.handle('file:getStats', async (_event, filePath: string) => {
   }
 });
 
-// ✅ 튜토리얼 영상 목록 가져오기
-ipcMain.handle('tutorials:getVideos', async () => {
-  console.log('[Main] tutorials:getVideos 핸들러 시작');
-  try {
-    const config = await loadConfig();
-    console.log('[Main] tutorials:getVideos config 로드 완료');
-    const videos = (config as any).tutorialVideos || [];
-    console.log('[Main] tutorials:getVideos 영상 수:', videos.length);
-    return videos;
-  } catch (error) {
-    console.error('[Main] tutorials:getVideos 오류:', error);
-    return [];
-  }
-});
+// ✅ [2026-04-03] tutorials:getVideos → src/main/ipc/miscHandlers.ts로 이관
 
 // 영상 파일 선택 다이얼로그
 ipcMain.handle('dialog:selectVideoFile', async () => {
@@ -3283,366 +3133,18 @@ ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ u
   }
 });
 
-// ✅ 비교표 이미지 생성
-ipcMain.handle('image:generateComparisonTable', async (_event, options: {
-  title?: string;
-  products: Array<{
-    name: string;
-    price?: string;
-    rating?: string;
-    pros?: string[];
-    cons?: string[];
-    specs?: Record<string, string>;
-    isRecommended?: boolean;
-  }>;
-  theme?: 'light' | 'dark' | 'gradient';
-  accentColor?: string;
-  width?: number;
-  showRanking?: boolean;
-}) => {
-  try {
-    console.log('[Main] 비교표 이미지 생성 요청:', options.title, options.products?.length);
-    const { generateComparisonTableImage } = await import('./image/comparisonTableGenerator.js');
+// ✅ [2026-04-03] image:generateComparisonTable → src/main/ipc/imageTableHandlers.ts로 이관
 
-    const result = await generateComparisonTableImage(options);
+// ✅ [2026-04-03] image:generateCustomBanner → src/main/ipc/imageTableHandlers.ts로 이관
 
-    if (result.success) {
-      console.log('[Main] 비교표 이미지 생성 완료:', result.imagePath);
-    } else {
-      console.error('[Main] 비교표 이미지 생성 실패:', result.error);
-    }
+// ✅ [2026-04-03] image:generateProsConsTable → src/main/ipc/imageTableHandlers.ts로 이관
 
-    return result;
-  } catch (error) {
-    console.error('[Main] 비교표 이미지 생성 오류:', error);
-    return { success: false, error: (error as Error).message };
-  }
-});
+// ✅ [2026-04-03] generate-test-image → src/main/ipc/imageTableHandlers.ts로 이관
 
-// ✅ [2026-01-18] 커스텀 CTA 배너 생성 핸들러
-ipcMain.handle('image:generateCustomBanner', async (_event, options: {
-  text: string;
-  colorKey: string;
-  sizeKey: string;
-  animationKey: string;
-  customImagePath?: string;
-}) => {
-  try {
-    console.log('[Main] 커스텀 배너 생성 요청:', options.text, options.colorKey);
-    const { generateCustomBanner } = await import('./image/tableImageGenerator.js');
+// ✅ [2026-04-03] content:collectFromPlatforms → src/main/ipc/miscHandlers.ts로 이관
 
-    const bannerPath = await generateCustomBanner({
-      text: options.text || '지금 바로 구매하기 →',
-      colorKey: options.colorKey || 'naver-green',
-      sizeKey: options.sizeKey || 'standard',
-      animationKey: options.animationKey || 'shimmer',
-      customImagePath: options.customImagePath,
-    });
-
-    console.log('[Main] 커스텀 배너 생성 완료:', bannerPath);
-    return { success: true, path: bannerPath };
-  } catch (error) {
-    console.error('[Main] 커스텀 배너 생성 오류:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// ✅ [2026-01-19] 장단점 표 이미지 생성 핸들러
-ipcMain.handle('image:generateProsConsTable', async (_event, options: {
-  productName: string;
-  pros: string[];
-  cons: string[];
-}) => {
-  try {
-    const { productName, pros, cons } = options;
-    console.log(`[Main] 장단점 표 생성 요청: ${productName}, 장점 ${pros.length}개, 단점 ${cons.length}개`);
-
-    const { generateProsConsTableImage } = await import('./image/tableImageGenerator.js');
-    const result = await generateProsConsTableImage(productName, pros, cons);
-
-    if (result) {
-      console.log(`[Main] 장단점 표 생성 완료: ${result}`);
-      return { success: true, path: result };
-    } else {
-      return { success: false, message: '장단점 표 생성 실패' };
-    }
-  } catch (error) {
-    console.error('[Main] 장단점 표 생성 오류:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// ✅ [2026-01-27] 테스트 이미지 생성 핸들러 (스타일 미리보기용)
-// ✅ [2026-02-08] engine, textOverlay 파라미터 추가
-ipcMain.handle('generate-test-image', async (_event, options: {
-  style: string;
-  ratio: string;
-  prompt: string;
-  engine?: string;
-  textOverlay?: { enabled: boolean; text: string };
-}) => {
-  try {
-    const { style, ratio, prompt, engine, textOverlay } = options;
-    console.log(`[Main] 🎨 테스트 이미지 생성: style=${style}, ratio=${ratio}, engine=${engine || '(config)'}, textOverlay=${textOverlay?.enabled || false}`);
-
-    const config = await loadConfig();
-    // ✅ [2026-02-08] engine 파라미터가 있으면 임시 엔진 사용, 없으면 저장된 설정
-    const imageSource = engine || (config as any).globalImageSource || 'deepinfra';
-
-    // API 키 결정
-    let apiKey = '';
-    if (imageSource === 'nano-banana-pro' || imageSource.includes('gemini')) {
-      apiKey = config.geminiApiKey || '';
-    } else {
-      apiKey = (config as any).deepinfraApiKey || '';
-    }
-
-    if (!apiKey) {
-      return { success: false, error: '이미지 생성을 위한 API 키가 설정되지 않았습니다.' };
-    }
-
-    // ✅ [2026-02-08] 11가지 스타일별 프롬프트 (3카테고리 동기화)
-    const stylePromptMap: Record<string, string> = {
-      // 📷 실사
-      'realistic': 'Hyper-realistic professional photography, 8K UHD quality, DSLR camera, natural lighting, cinematic composition, Fujifilm XT3 quality', // ✅ [2026-02-12] authentic Korean person 제거 (카테고리별 스타일에서 처리)
-      'bokeh': 'Beautiful bokeh photography, shallow depth of field, dreamy out-of-focus background lights, soft circular bokeh orbs, DSLR wide aperture f/1.4 quality, romantic atmosphere',
-      // 🖌️ 아트
-      'vintage': 'Vintage retro illustration, 1950s poster art style, muted color palette, nostalgic aesthetic, old-fashioned charm, classic design elements, aged paper texture',
-      'minimalist': 'Minimalist flat design, simple clean lines, solid colors, modern aesthetic, geometric shapes, professional infographic style, san-serif typography',
-      '3d-render': '3D render, Octane render quality, Cinema 4D style, Blender 3D art, realistic materials and textures, studio lighting setup, high-end 3D visualization',
-      'korean-folk': 'Korean traditional Minhwa folk painting style, vibrant primary colors on hanji paper, stylized tiger and magpie motifs, peony flowers, pine trees, traditional Korean decorative patterns, bold flat color areas with fine ink outlines, cheerful folk art aesthetic',
-      // ✨ 이색
-      'stickman': 'Cute chibi cartoon character with oversized round white head much larger than body, simple black dot eyes, small expressive mouth showing emotion, tiny simple body wearing colorful casual clothes, thick bold black outlines, flat cel-shaded colors with NO gradients, detailed colorful background scene that matches the topic, Korean internet meme comic art style, humorous and lighthearted mood, web comic panel composition, clean high quality digital vector art, NO TEXT NO LETTERS NO WATERMARK',
-      'roundy': 'Adorable chubby round blob character with extremely round soft body and very short stubby limbs, small dot eyes and tiny happy smile, pure white or soft pastel colored body, soft rounded outlines with NO sharp edges, dreamy pastel colored background with gentle gradient, Molang and Sumikko Gurashi inspired kawaii aesthetic, healing and cozy atmosphere, minimalist cute Korean character design, soft lighting with gentle shadows, warm comforting mood, high quality digital illustration, NO TEXT NO LETTERS NO WATERMARK',
-      'claymation': 'Claymation stop-motion style, cute clay figurines, handmade plasticine texture, soft rounded shapes, miniature diorama set, warm studio lighting',
-      'neon-glow': 'Neon glow effect, luminous light trails, dark background with vibrant neon lights, synthwave aesthetic, glowing outlines, electric blue and hot pink',
-      'papercut': 'Paper cut art style, layered paper craft, 3D paper sculpture effect, shadow between layers, handmade tactile texture, colorful construction paper, kirigami aesthetic',
-      'isometric': 'Isometric 3D illustration, cute isometric pixel world, 30-degree angle view, clean geometric shapes, pastel color palette, miniature city/scene, game-like perspective',
-      // 🎨 2D 일러스트 (✅ [2026-02-17] 신규)
-      '2d': 'Korean webtoon style 2D illustration, vibrant flat colors, clean line art, manhwa aesthetic, modern Korean digital illustration, soft pastel palette, cute and expressive character design, NO TEXT NO WRITING'
-    };
-
-    const stylePrompt = stylePromptMap[style] || stylePromptMap['realistic'];
-
-    // ✅ 실사 외 스타일인 경우 강화 (실제 생성과 동일 - nanoBananaProGenerator.ts 553-556)
-    let finalPrompt: string;
-    if (style !== 'realistic') {
-      finalPrompt = `[ART STYLE: ${style.toUpperCase()}]\n${stylePrompt}\n\n${prompt}\n\nIMPORTANT: Generate the image in ${style} style. DO NOT generate photorealistic images.`;
-      console.log(`[Main] 🎨 스타일 프롬프트 강화 적용: ${style}`);
-    } else {
-      finalPrompt = `${stylePrompt}\n\n${prompt}`;
-    }
-
-    // 비율 → 해상도 매핑
-    const ratioMap: Record<string, { width: number; height: number }> = {
-      '1:1': { width: 1024, height: 1024 },
-      '16:9': { width: 1344, height: 768 },
-      '9:16': { width: 768, height: 1344 },
-      '4:3': { width: 1152, height: 896 },
-      '3:4': { width: 896, height: 1152 },
-    };
-    const resolution = ratioMap[ratio] || ratioMap['1:1'];
-
-    // 이미지 생성 (사용자 설정에 따라 엔진 선택)
-    let imagePath: string;
-
-    console.log(`[Main] 🎨 테스트 이미지 생성 - 엔진: ${imageSource}, 스타일: ${style}`);
-
-    if (imageSource === 'nano-banana-pro' || imageSource.includes('gemini')) {
-      // ✅ 나노바나나프로 (Gemini) 사용 - 실제 생성과 동일 옵션
-      const { generateWithNanoBananaPro } = await import('./image/nanoBananaProGenerator.js');
-      const testItem = {
-        heading: prompt || '테스트 이미지',
-        prompt: finalPrompt,
-        imageStyle: style,  // ✅ 스타일 전달
-        imageRatio: ratio,
-        aspectRatio: ratio,
-      };
-
-      const results = await generateWithNanoBananaPro(
-        [testItem],
-        'test-image',
-        'Test',
-        false,
-        apiKey,
-        false,
-        undefined,
-        undefined
-      );
-
-      if (results && results.length > 0 && results[0].filePath) {
-        imagePath = results[0].filePath;
-      } else {
-        throw new Error('나노바나나프로 이미지 생성 실패');
-      }
-    } else if (imageSource === 'deepinfra' || imageSource === 'deepinfra-flux') {
-      // ✅ [2026-02-08] DeepInfra 사용 - 설정 모델 동적 선택
-      const DEEPINFRA_MODEL_MAP: Record<string, string> = {
-        'flux-2-dev': 'black-forest-labs/FLUX-2-dev',
-        'flux-dev': 'black-forest-labs/FLUX-1-dev',
-        'flux-schnell': 'black-forest-labs/FLUX-1-schnell'
-      };
-      const selectedModelKey = (config as any).deepinfraModel || 'flux-2-dev';
-      const actualModel = DEEPINFRA_MODEL_MAP[selectedModelKey] || 'black-forest-labs/FLUX-2-dev';
-      console.log(`[Main] 🔧 DeepInfra 모델: ${selectedModelKey} → ${actualModel}`);
-
-      const { generateSingleDeepInfraImage } = await import('./image/deepinfraGenerator.js');
-      const sizeStr = `${resolution.width}x${resolution.height}`;
-      const result = await generateSingleDeepInfraImage(
-        { prompt: finalPrompt, size: sizeStr, model: actualModel },
-        apiKey
-      );
-
-      if (result.success && result.localPath) {
-        imagePath = result.localPath;
-      } else {
-        throw new Error(result.error || 'DeepInfra 이미지 생성 실패');
-      }
-    } else if (imageSource === 'openai-image') {
-      // ✅ [2026-02-22] OpenAI Image (DALL-E / gpt-image-1)
-      console.log(`[Main] 🎨 OpenAI Image 엔진으로 테스트 이미지 생성`);
-      const { generateSingleOpenAIImage } = await import('./image/openaiImageGenerator.js');
-      const apiKeyOpenAI = (config as any).openaiImageApiKey;
-      if (!apiKeyOpenAI) throw new Error('OpenAI Image API 키가 설정되지 않았습니다.');
-
-      const result = await generateSingleOpenAIImage(
-        { prompt: finalPrompt, size: `${resolution.width}x${resolution.height}` },
-        apiKeyOpenAI
-      );
-
-      if (result.success && result.localPath) {
-        imagePath = result.localPath;
-      } else {
-        throw new Error(result.error || 'OpenAI Image 이미지 생성 실패');
-      }
-    } else if (imageSource === 'leonardoai') {
-      // ✅ [2026-02-22] Leonardo AI
-      console.log(`[Main] 🎨 Leonardo AI 엔진으로 테스트 이미지 생성`);
-      const { generateSingleLeonardoAIImage } = await import('./image/leonardoAIGenerator.js');
-      const leonardoKey = (config as any).leonardoaiApiKey;
-      if (!leonardoKey) throw new Error('Leonardo AI API 키가 설정되지 않았습니다.');
-      const leonardoModel = (config as any).leonardoaiModel || 'seedream-4.5';
-
-      const result = await generateSingleLeonardoAIImage(
-        { prompt: finalPrompt, size: `${resolution.width}x${resolution.height}`, model: leonardoModel },
-        leonardoKey
-      );
-
-      if (result.success && result.localPath) {
-        imagePath = result.localPath;
-      } else {
-        throw new Error(result.error || 'Leonardo AI 이미지 생성 실패');
-      }
-    } else {
-      // ✅ 알 수 없는 엔진 → DeepInfra 폴백
-      console.warn(`[Main] ⚠️ 알 수 없는 엔진 "${imageSource}", DeepInfra로 폴백`);
-      const { generateSingleDeepInfraImage } = await import('./image/deepinfraGenerator.js');
-      const sizeStr = `${resolution.width}x${resolution.height}`;
-      const result = await generateSingleDeepInfraImage(
-        { prompt: finalPrompt, size: sizeStr },
-        apiKey
-      );
-
-      if (result.success && result.localPath) {
-        imagePath = result.localPath;
-      } else {
-        throw new Error(result.error || '이미지 생성 실패');
-      }
-    }
-
-    // 파일 저장 (이미 생성된 이미지 경로를 test-images 폴더로 복사)
-    const testImagesDir = path.join(app.getPath('userData'), 'test-images');
-    await fs.mkdir(testImagesDir, { recursive: true });
-
-    const fileName = `test_${style}_${ratio.replace(':', 'x')}_${Date.now()}.png`;
-    const filePath = path.join(testImagesDir, fileName);
-
-    // 생성된 이미지를 test-images 폴더로 복사
-    await fs.copyFile(imagePath, filePath);
-
-    // ✅ [2026-02-08] 텍스트 오버레이 적용 (활성화된 경우)
-    let previewDataUrl: string | undefined;
-    if (textOverlay?.enabled && textOverlay.text) {
-      try {
-        console.log(`[Main] 📝 텍스트 오버레이 적용 중: "${textOverlay.text}"`);
-        const { ThumbnailService } = await import('./thumbnailService.js');
-        const thumbnailService = new ThumbnailService();
-
-        // ✅ 오버레이 적용된 이미지를 별도 파일로 저장
-        const overlayFileName = `test_overlay_${style}_${ratio.replace(':', 'x')}_${Date.now()}.png`;
-        const overlayFilePath = path.join(testImagesDir, overlayFileName);
-
-        const resultPath = await thumbnailService.createProductThumbnail(
-          filePath,
-          textOverlay.text,
-          overlayFilePath,
-          { fontSize: 48, textColor: '#FFFFFF', position: 'bottom' }
-        );
-
-        if (resultPath && typeof resultPath === 'string') {
-          // base64로 변환하여 previewDataUrl 생성
-          const imageBuffer = await fs.readFile(resultPath);
-          previewDataUrl = `data:image/png;base64,${imageBuffer.toString('base64')}`;
-
-          console.log(`[Main] ✅ 텍스트 오버레이 완료: ${resultPath}`);
-          return { success: true, path: resultPath, previewDataUrl };
-        } else {
-          console.warn(`[Main] ⚠️ 텍스트 오버레이 실패, 원본 이미지 반환`);
-        }
-      } catch (overlayError) {
-        console.warn(`[Main] ⚠️ 텍스트 오버레이 오류 (원본 이미지 반환):`, (overlayError as Error).message);
-      }
-    }
-
-    console.log(`[Main] ✅ 테스트 이미지 생성 완료: ${filePath}`);
-    return { success: true, path: filePath, previewDataUrl };
-
-  } catch (error) {
-    console.error('[Main] ❌ 테스트 이미지 생성 오류:', error);
-    return { success: false, error: (error as Error).message };
-  }
-});
-
-// 플랫폼에서 콘텐츠 수집 (실시간 정보)
-ipcMain.handle('content:collectFromPlatforms', async (_event, keyword: string, options?: { maxPerSource?: number; targetDate?: string }) => {
-  try {
-    const { collectContentFromPlatforms } = await import('./sourceAssembler.js');
-    const config = await loadConfig();
-    const result = await collectContentFromPlatforms(keyword, {
-      maxPerSource: options?.maxPerSource || 5,
-      clientId: config.naverDatalabClientId,
-      clientSecret: config.naverDatalabClientSecret,
-      logger: (msg) => console.log(msg),
-      targetDate: options?.targetDate, // ✅ 발행 날짜 전달
-    });
-    return result;
-  } catch (error) {
-    console.error('[Main] 플랫폼 콘텐츠 수집 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// 저장된 이미지 경로 가져오기
-ipcMain.handle('images:getSavedPath', async () => {
-  return path.join(app.getPath('userData'), 'images');
-});
-
-// 저장된 이미지 목록 가져오기
-ipcMain.handle('images:getSaved', async (_event, dirPath: string) => {
-  try {
-    const files = await fs.readdir(dirPath);
-    const imageFiles = files.filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f));
-    const images = imageFiles.map(f => path.join(dirPath, f));
-    return { success: true, images };
-  } catch (error) {
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// 앱 정보 가져오기
-ipcMain.handle('app:getInfo', async () => {
-  return { isPackaged: app.isPackaged };
-});
+// ✅ [2026-04-03] images:getSavedPath, images:getSaved → src/main/ipc/miscHandlers.ts로 이관
+// ✅ [2026-04-03] app:getInfo → src/main/ipc/systemHandlers.ts로 이관
 
 // 라이선스 상태 확인
 // ✅ [2026-04-03] quota:getStatus, quota:getImageUsage, quota:getLeonardoCredits →
@@ -5227,125 +4729,7 @@ ipcMain.handle('analytics:removePost', async (_event, postId: string) => {
   }
 });
 
-// ✅ 최적 시간 자동 예약 발행 IPC 핸들러
-ipcMain.handle('scheduler:getOptimalTimes', async (_event, count: number = 5, category?: string) => {
-  try {
-    const times = smartScheduler.getNextOptimalTimes(count, category);
-    return { success: true, times };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('scheduler:schedulePost', async (_event, title: string, keyword: string, scheduledAt: string) => {
-  try {
-    const post = smartScheduler.schedulePost(title, keyword, scheduledAt);
-    sendLog(`📅 예약 발행 등록: ${title} (${new Date(scheduledAt).toLocaleString()})`);
-    return { success: true, post };
-  } catch (error) {
-    return { success: false, message: `예약 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('scheduler:scheduleAtOptimal', async (_event, title: string, keyword: string, category?: string) => {
-  try {
-    const post = smartScheduler.scheduleAtOptimalTime(title, keyword, category);
-    sendLog(`📅 최적 시간 예약: ${title} (${new Date(post.scheduledAt).toLocaleString()})`);
-    return { success: true, post };
-  } catch (error) {
-    return { success: false, message: `예약 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('scheduler:cancelSchedule', async (_event, postId: string) => {
-  try {
-    const result = smartScheduler.cancelSchedule(postId);
-    if (result) {
-      sendLog(`🛑 예약 취소됨`);
-      return { success: true, message: '예약이 취소되었습니다.' };
-    }
-    return { success: false, message: '취소할 수 없는 예약입니다.' };
-  } catch (error) {
-    return { success: false, message: `취소 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('scheduler:getAllScheduled', async () => {
-  try {
-    const posts = smartScheduler.getAllScheduled();
-    return { success: true, posts };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('scheduler:getPending', async () => {
-  try {
-    const posts = smartScheduler.getPendingScheduled();
-    return { success: true, posts };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('scheduler:reschedule', async (_event, postId: string, newTime: string) => {
-  try {
-    const result = smartScheduler.reschedule(postId, newTime);
-    if (result) {
-      sendLog(`📅 예약 시간 변경: ${new Date(newTime).toLocaleString()}`);
-      return { success: true, message: '예약 시간이 변경되었습니다.' };
-    }
-    return { success: false, message: '변경할 수 없는 예약입니다.' };
-  } catch (error) {
-    return { success: false, message: `변경 실패: ${(error as Error).message}` };
-  }
-});
-
-// ✅ 실패한 예약 즉시 재시도
-ipcMain.handle('scheduler:retry', async (_event, postId: string) => {
-  try {
-    // 실패한 포스트를 찾아서 상태를 pending으로 변경하고 즉시 실행
-    const post = smartScheduler.getScheduledPost(postId);
-    if (!post) {
-      return { success: false, message: '해당 예약을 찾을 수 없습니다.' };
-    }
-
-    if (post.status !== 'failed') {
-      return { success: false, message: '실패한 예약만 재시도할 수 있습니다.' };
-    }
-
-    // 현재 시간 + 10초 후로 예약 변경 (즉시 실행)
-    const retryTime = new Date(Date.now() + 10 * 1000).toISOString();
-    const result = smartScheduler.reschedule(postId, retryTime);
-
-    if (result) {
-      sendLog(`🔄 예약 재시도: ${post.title}`);
-      return { success: true, message: '재시도가 예약되었습니다. 잠시 후 자동 발행됩니다.' };
-    }
-    return { success: false, message: '재시도 예약에 실패했습니다.' };
-  } catch (error) {
-    return { success: false, message: `재시도 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('scheduler:getStats', async () => {
-  try {
-    const stats = smartScheduler.getStats();
-    return { success: true, stats };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('scheduler:cancelAll', async () => {
-  try {
-    smartScheduler.cancelAll();
-    sendLog(`🛑 모든 예약 취소됨`);
-    return { success: true, message: '모든 예약이 취소되었습니다.' };
-  } catch (error) {
-    return { success: false, message: `취소 실패: ${(error as Error).message}` };
-  }
-});
+// ✅ scheduler:* 핸들러 → scheduleHandlers.ts로 이관 완료 (10개 채널)
 
 // ✅ [Phase 5A.2] keyword:* 핸들러 → keywordHandlers.ts로 이관 완료
 // ✅ [Phase 5A.2] bestProduct:* 핸들러 → productHandlers.ts로 이관 완료
@@ -5433,6 +4817,15 @@ registerContentHandlers({
   titleABTester,
   loadConfig,
   applyConfigToEnv
+});
+
+// ✅ [2026-04-03] 소제목 이미지/영상 핸들러 → headingHandlers.ts로 추출
+registerHeadingHandlers({
+  headingImagesStore,
+  headingVideosStore,
+  saveHeadingImagesStore,
+  saveHeadingVideosStore,
+  validateLicenseOnly,
 });
 
 // ✅ [2026-04-03] 계정 관련 핸들러 → accountHandlers.ts로 추출
@@ -7480,80 +6873,7 @@ ipcMain.handle('image:crawlFromUrl', async (_event, url: string): Promise<{
   }
 });
 
-// 소제목 이미지 관리 IPC 핸들러
-ipcMain.handle('heading:applyImage', async (_event, heading: string, image: HeadingImageRecord): Promise<{ success: boolean; message?: string }> => {
-  try {
-    if (!heading || !heading.trim()) {
-      return { success: false, message: '소제목이 비어있습니다.' };
-    }
-    if (!image || !image.filePath) {
-      return { success: false, message: '이미지 정보가 올바르지 않습니다.' };
-    }
-
-    headingImagesStore.set(heading.trim(), {
-      provider: image.provider,
-      filePath: image.filePath,
-      previewDataUrl: image.previewDataUrl,
-      updatedAt: image.updatedAt || Date.now(),
-      alt: image.alt,
-      caption: image.caption,
-    });
-
-    await saveHeadingImagesStore();
-    console.log(`[Main] 소제목 "${heading}"에 이미지 적용 완료`);
-    return { success: true };
-  } catch (error) {
-    console.error('[Main] 소제목 이미지 적용 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-ipcMain.handle('heading:getAppliedImage', async (_event, heading: string): Promise<{ success: boolean; image?: HeadingImageRecord; message?: string }> => {
-  try {
-    if (!heading || !heading.trim()) {
-      return { success: false, message: '소제목이 비어있습니다.' };
-    }
-
-    const image = headingImagesStore.get(heading.trim());
-    if (!image) {
-      return { success: true, image: undefined };
-    }
-
-    return { success: true, image };
-  } catch (error) {
-    console.error('[Main] 소제목 이미지 조회 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-ipcMain.handle('heading:removeImage', async (_event, heading: string): Promise<{ success: boolean; message?: string }> => {
-  try {
-    if (!heading || !heading.trim()) {
-      return { success: false, message: '소제목이 비어있습니다.' };
-    }
-
-    const deleted = headingImagesStore.delete(heading.trim());
-    if (deleted) {
-      await saveHeadingImagesStore();
-      console.log(`[Main] 소제목 "${heading}"의 이미지 제거 완료`);
-    }
-
-    return { success: true };
-  } catch (error) {
-    console.error('[Main] 소제목 이미지 제거 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-ipcMain.handle('heading:getAllAppliedImages', async (): Promise<{ success: boolean; images?: Record<string, HeadingImageRecord>; message?: string }> => {
-  try {
-    const images = Object.fromEntries(headingImagesStore);
-    return { success: true, images };
-  } catch (error) {
-    console.error('[Main] 모든 소제목 이미지 조회 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
+// ✅ [2026-04-03] 소제목 이미지 핸들러 → headingHandlers.ts로 추출
 
 // 이미지 라이브러리 기능 제거됨
 /*
@@ -8041,9 +7361,7 @@ ipcMain.handle('license:register', async (_event, code: string, userId: string, 
 // ✅ [2026-04-03] license:verify, license:verifyWithCredentials, license:registerExternalInflow,
 // license:canUseExternalInflow, license:checkPatchFile → src/main/ipc/authHandlers.ts로 이관
 
-ipcMain.handle('app:isPackaged', async (): Promise<boolean> => {
-  return app.isPackaged;
-});
+// ✅ [2026-04-03] app:isPackaged → src/main/ipc/systemHandlers.ts로 이관
 
 ipcMain.handle('login:success', async (): Promise<void> => {
   isLicenseValid = true;
@@ -8070,10 +7388,7 @@ ipcMain.handle('login:success', async (): Promise<void> => {
 
 // ✅ [2026-04-03] license:getDeviceId → src/main/ipc/authHandlers.ts로 이관
 
-// ✅ [2026-02-05] 앱 버전 반환 (라이선스 창 및 메인 창에서 버전 표시용)
-ipcMain.handle('app:getVersion', async (): Promise<string> => {
-  return app.getVersion();
-});
+// ✅ [2026-04-03] app:getVersion → src/main/ipc/systemHandlers.ts로 이관
 
 // ✅ [2026-03-24] 캐시 용량 조회 (v2: 병렬 스캔 + symlink 안전 처리)
 ipcMain.handle('app:getCacheSize', async (): Promise<{ images: number; generated: number; sessions: number; browser: number; total: number }> => {
@@ -8613,27 +7928,7 @@ ipcMain.handle('schedule:retry', async (_event, postId: string): Promise<{ succe
   }
 });
 
-// 외부 URL을 브라우저에서 열기
-ipcMain.handle('openExternalUrl', async (_event, url: string): Promise<{ success: boolean; message?: string }> => {
-  try {
-    if (!url || !url.trim()) {
-      return { success: false, message: 'URL이 비어있습니다.' };
-    }
-
-    // URL 유효성 검사
-    const urlPattern = /^https?:\/\//i;
-    if (!urlPattern.test(url.trim())) {
-      return { success: false, message: '유효하지 않은 URL 형식입니다.' };
-    }
-
-    await shell.openExternal(url.trim());
-    console.log(`[Main] 외부 URL 열기: ${url}`);
-    return { success: true };
-  } catch (error) {
-    console.error('[Main] 외부 URL 열기 실패:', (error as Error).message);
-    return { success: false, message: (error as Error).message };
-  }
-});
+// ✅ [2026-04-03] openExternalUrl → src/main/ipc/systemHandlers.ts로 이관
 
 async function createLoginWindow(): Promise<BrowserWindow> {
   debugLog('[createLoginWindow] Creating login window...');
@@ -9291,7 +8586,7 @@ app.whenReady().then(async () => {
     // ⚠️ [2026-01-19] main.ts에 이미 대부분 핸들러가 있으므로, 누락된 핸들러만 개별 등록
     // registerAllHandlers() 전체 호출 시 중복 충돌 발생
     try {
-      const { registerImageHandlers, registerMediaHandlers, registerHeadingVideoHandlers } = await import('./main/ipc/imageHandlers.js');
+      const { registerImageHandlers, registerMediaHandlers } = await import('./main/ipc/imageHandlers.js');
       const { registerSystemHandlers } = await import('./main/ipc/systemHandlers.js');
       const ctx = {
         getMainWindow: () => mainWindow,
@@ -9301,9 +8596,18 @@ app.whenReady().then(async () => {
       };
       registerImageHandlers(ctx);
       registerMediaHandlers(ctx);
-      registerHeadingVideoHandlers(ctx);
+      // ✅ registerHeadingVideoHandlers → headingHandlers.ts (위에서 이미 등록)
       registerSystemHandlers(ctx);
-      debugLog('[Main] Image/Media/HeadingVideo/System handlers registered');
+
+      // misc:* 핸들러 등록 (tutorials, images, content, seo)
+      const { registerMiscHandlers } = await import('./main/ipc/miscHandlers.js');
+      registerMiscHandlers();
+
+      // scheduler:* 핸들러 등록 (DI)
+      const { registerScheduleHandlers } = await import('./main/ipc/scheduleHandlers.js');
+      registerScheduleHandlers({ smartScheduler });
+
+      debugLog('[Main] Image/Media/HeadingVideo/System/Misc/Scheduler handlers registered');
     } catch (e) {
       debugLog(`[Main] ⚠️ 핸들러 등록 실패: ${(e as Error).message}`);
     }
@@ -9915,26 +9219,7 @@ function translatePuppeteerError(error: Error): string {
   return `⚠️ [시스템 오류] ${error.message}`;
 }
 
-// ✅ [2026-01-24] 쇼핑커넥트 SEO 제목 생성 IPC 핸들러
-// 네이버 자동완성 키워드를 사용하여 제품명에 세부 키워드 추가
-ipcMain.handle('seo:generateTitle', async (_event, productName: string): Promise<{ success: boolean; title?: string; message?: string }> => {
-  try {
-    console.log(`[SEO] 제목 생성 요청: "${productName}"`);
-
-    if (!productName || productName.trim().length < 3) {
-      return { success: true, title: productName || '' };
-    }
-
-    const { generateShoppingConnectTitle } = await import('./naverSearchApi.js');
-    const seoTitle = await generateShoppingConnectTitle(productName.trim(), 3);
-
-    console.log(`[SEO] 제목 생성 완료: "${seoTitle}"`);
-    return { success: true, title: seoTitle };
-  } catch (error) {
-    console.error('[SEO] 제목 생성 오류:', error);
-    return { success: false, title: productName, message: (error as Error).message };
-  }
-});
+// ✅ [2026-04-03] seo:generateTitle → src/main/ipc/miscHandlers.ts로 이관
 
 // ✅ [2026-03-19] 앱 종료 시 Gemini 사용량 메모리 누적분 안전 저장
 app.on('before-quit', async () => {

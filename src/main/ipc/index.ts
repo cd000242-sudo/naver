@@ -11,13 +11,14 @@ import { AutomationService } from '../services/AutomationService';
 
 // 핸들러 모듈 import
 import { registerSystemHandlers, registerFileHandlers, registerDialogHandlers } from './systemHandlers';
-import { registerImageHandlers, registerMediaHandlers, registerHeadingVideoHandlers } from './imageHandlers';
+import { registerImageHandlers, registerMediaHandlers } from './imageHandlers';
+import { registerHeadingHandlers, HeadingHandlerDeps } from './headingHandlers';
 // blogHandlers는 로직 함수만 export하므로 여기서 register 함수 대신 export
 // import { ... } from './blogHandlers'; // 아직 main.ts에서 처리
 import { registerDatalabHandlers, registerTrendHandlers, registerAnalyticsHandlers } from './analyticsHandlers';
 import { registerLicenseHandlers } from './authHandlers';
 import { registerQuotaHandlers } from './quotaHandlers';
-import { registerScheduleHandlers } from './scheduleHandlers';
+import { registerScheduleHandlers, SchedulerHandlerDeps } from './scheduleHandlers';
 import { registerAccountHandlers, AccountHandlerDeps } from './accountHandlers';
 import { registerConfigHandlers, ConfigHandlerContext } from './configHandlers';
 import { registerKeywordHandlers } from './keywordHandlers';
@@ -26,6 +27,8 @@ import { registerEngagementHandlers } from './engagementHandlers';
 import { registerContentHandlers, ContentHandlerDeps } from './contentHandlers';
 import { registerAdminHandlers, AdminHandlerDeps } from './adminHandlers';
 import { registerApiHandlers } from './apiHandlers';
+import { registerImageTableHandlers } from './imageTableHandlers';
+import { registerMiscHandlers } from './miscHandlers';
 
 /**
  * IPC 컨텍스트 생성
@@ -52,10 +55,13 @@ export function registerAllHandlers(): void {
     registerFileHandlers(ctx);
     registerDialogHandlers(ctx);
 
+    // 이미지 테이블/배너 (비교표, 장단점, 배너, 테스트 이미지)
+    registerImageTableHandlers();
+
     // 이미지/미디어
     registerImageHandlers(ctx);
     registerMediaHandlers(ctx);
-    registerHeadingVideoHandlers(ctx);
+    // registerHeadingHandlers(deps); — deps가 필요하므로 main.ts에서 별도 호출
 
     // 블로그/자동화 - 아직 main.ts에서 처리 (점진적 마이그레이션 중)
     // TODO: 마이그레이션 완료 후 아래 주석 해제
@@ -76,8 +82,8 @@ export function registerAllHandlers(): void {
     registerLicenseHandlers(ctx);
     registerQuotaHandlers(ctx);
 
-    // 스케줄
-    registerScheduleHandlers(ctx);
+    // 스케줄 — smartScheduler deps가 필요하므로 main.ts에서 별도 호출
+    // registerScheduleHandlers({ smartScheduler });
 
     // 키워드 분석
     registerKeywordHandlers();
@@ -87,6 +93,9 @@ export function registerAllHandlers(): void {
 
     // 댓글/경쟁분석
     registerEngagementHandlers();
+
+    // 기타 (튜토리얼, 이미지 저장, 콘텐츠 수집, SEO)
+    registerMiscHandlers();
 
     // 관리자 패널 — deps가 필요하므로 main.ts에서 별도 호출
     // registerAdminHandlers(deps);
@@ -107,7 +116,7 @@ export {
     registerDialogHandlers,
     registerImageHandlers,
     registerMediaHandlers,
-    registerHeadingVideoHandlers,
+    registerHeadingHandlers,
     // blogHandlers는 로직 함수만 제공 (main.ts에서 처리)
     // registerBlogHandlers,
     // registerAutomationHandlers,
@@ -125,10 +134,12 @@ export {
     registerKeywordHandlers,
     registerProductHandlers,
     registerEngagementHandlers,
-    registerAdminHandlers
+    registerAdminHandlers,
+    registerImageTableHandlers,
+    registerMiscHandlers
 };
 
-export type { AccountHandlerDeps, AdminHandlerDeps, ConfigHandlerContext, ContentHandlerDeps };
+export type { AccountHandlerDeps, AdminHandlerDeps, ConfigHandlerContext, ContentHandlerDeps, HeadingHandlerDeps, SchedulerHandlerDeps };
 
 // blogHandlers 로직 함수 re-export
 export * from './blogHandlers';
