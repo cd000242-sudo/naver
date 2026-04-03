@@ -8608,7 +8608,31 @@ app.whenReady().then(async () => {
       const { registerScheduleHandlers } = await import('./main/ipc/scheduleHandlers.js');
       registerScheduleHandlers({ smartScheduler });
 
-      debugLog('[Main] Image/Media/HeadingVideo/System/Misc/Scheduler handlers registered');
+      // ✅ [FIX] Phase 5A에서 추출된 핸들러 등록 누락 수정
+      const { registerLicenseHandlers } = await import('./main/ipc/authHandlers.js');
+      registerLicenseHandlers(ctx);
+
+      const { registerQuotaHandlers } = await import('./main/ipc/quotaHandlers.js');
+      registerQuotaHandlers(ctx);
+
+      const { registerApiHandlers } = await import('./main/ipc/apiHandlers.js');
+      registerApiHandlers(ctx);
+
+      const { registerKeywordHandlers } = await import('./main/ipc/keywordHandlers.js');
+      registerKeywordHandlers();
+
+      const { registerProductHandlers } = await import('./main/ipc/productHandlers.js');
+      registerProductHandlers();
+
+      const { registerEngagementHandlers } = await import('./main/ipc/engagementHandlers.js');
+      registerEngagementHandlers();
+
+      const { registerImageTableHandlers } = await import('./main/ipc/imageTableHandlers.js');
+      registerImageTableHandlers();
+
+      // analyticsHandlers는 main.ts에 인라인으로 이미 등록되어 있으므로 생략 (중복 방지)
+
+      debugLog('[Main] Image/Media/System/Misc/Scheduler/License/Quota/API/Keyword/Product/Engagement/ImageTable handlers registered');
     } catch (e) {
       debugLog(`[Main] ⚠️ 핸들러 등록 실패: ${(e as Error).message}`);
     }
