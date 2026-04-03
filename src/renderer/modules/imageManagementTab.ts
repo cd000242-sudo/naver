@@ -13,15 +13,8 @@ declare function displayGeneratedImages(images: any[]): void;
 declare function updatePromptItemsWithImages(images: any[]): void;
 declare let generatedImages: any[];
 
-// appendLog 유틸 (renderer.ts에서 분리)
-function appendLog(message: string, logOutputId?: string): void {
-  const logEl = document.getElementById(logOutputId || 'log-output');
-  if (logEl) {
-    logEl.innerHTML += message + '<br>';
-    logEl.scrollTop = logEl.scrollHeight;
-  }
-  console.log('[Log]', message.replace(/<[^>]*>/g, ''));
-}
+// appendLog는 rendererUtils.ts에서 전역 스코프로 제공됨
+declare function appendLog(message: string, logOutputId?: string): void;
 
 /**
  * ✅ [2026-03-16] ImageFX Google 계정 변경 버튼 생성/표시/숨김 헬퍼

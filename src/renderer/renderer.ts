@@ -191,6 +191,15 @@ import { distributeByInterval, distributeByRandomRange, distributeWithProtection
 import { initHeadingImageGeneration, generateEnglishPromptForHeadingSync, generateImagePromptByIndex, autoAnalyzeHeadings, updateReserveImagesThumbnails, initUnifiedImageEventHandlers, getCurrentImageHeadings, getHeadingSelectedImageKey, setHeadingSelectedImageKey, displayCollectedImages, extractHeadingsFromContent, displayImageHeadingsWithPrompts, getHeadingSelectedImageKeyStore } from './modules/headingImageGen.js';
 // ✅ [2026-02-25 모듈화] 이미지 표시/그리드/재생성
 import { displayGeneratedImages, searchNaverImage, resolveReferenceImageForHeadingAsync, generateNanoBananaProImage, resolveReferenceImageForHeading, getAutoReferenceSourceUrlCandidate } from './modules/imageDisplayGrid.js';
+// ✅ [Phase 5B] renderer.ts에서 추출된 모듈들
+import { registeredEventListeners, registerEventListener, unregisterEventListener, clearAllEventListeners, rendererDomCache, getElement, getElementById, clearDomCache, disableDomCache, apiCallsInProgress, preventDuplicateApiCall, buttonStates, setButtonLoading, resetButtonState, disableButton, withErrorHandling, imageDataUrls, createImageDataUrl, revokeImageDataUrl, revokeAllImageDataUrls, getAllUrls, getUrlsAsString, appendLog, _logUpdatePending, _logPendingEntries, _flushLogEntries } from './modules/rendererUtils.js';
+import { UnifiedDOMCache } from './modules/unifiedDOMCache.js';
+import { ImageManager, imageHistoryStack, pushImageHistorySnapshot } from './modules/imageManagerCore.js';
+import { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImagesFromImageManager, filterImagesForPublish } from './modules/imageSyncService.js';
+import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApiCostConsent, reserveExternalApiImageQuota, generateImagesWithCostSafety, ensurePromptCardRemoveHandler } from './modules/costAndAutoGen.js';
+import { initImageLibrary, loadLibraryImages, useLibraryImage, switchToTab, generateFavoritesContent, generateTemplatesContent, getEnhancedTemplates } from './modules/contentPreviewAndLibrary.js';
+declare let thumbnailBackgroundImage: string | null;
+declare let thumbnailBackgroundDataUrl: string | null;
 
 // ✅ [리팩토링] 새 UI 모듈 import - 점진적 마이그레이션용
 // 새로 작성하는 코드에서는 아래 모듈들(ui* 접두사)을 사용하세요.
@@ -288,9 +297,6 @@ import { onAccountLogout as accountLogout } from './modules/accountSettingsManag
   }
 })();
 
-// ✅ [Phase 5B-4] getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImagesFromImageManager, filterImagesForPublish → modules/imageSyncService.ts로 추출됨
-import { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImagesFromImageManager, filterImagesForPublish } from './modules/imageSyncService.js';
-
 
 
 
@@ -367,9 +373,6 @@ declare global {
 
 
 
-
-// ✅ [Phase 5B-6] costAndAutoGen → modules/costAndAutoGen.ts로 추출됨
-import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApiCostConsent, reserveExternalApiImageQuota, generateImagesWithCostSafety, ensurePromptCardRemoveHandler } from './modules/costAndAutoGen.js';
 
 // 전역 진행상황 모달 인스턴스
 let progressModal: ProgressModal | null = null;
@@ -461,9 +464,6 @@ if (typeof window !== 'undefined') {
 // ============================================
 
 
-
-// ✅ [Phase 5B-2] UnifiedDOMCache → modules/unifiedDOMCache.ts로 추출됨
-import { UnifiedDOMCache } from './modules/unifiedDOMCache.js';
 
 // API 키들을 자동으로 로드하는 함수
 // ✅ 배포 시 안전: API 키는 사용자 로컬 설정 파일(settings.json)에만 저장됨
@@ -1140,9 +1140,6 @@ let generatedImages: Array<{ heading: string; filePath: string; previewDataUrl: 
 let automationRunning = false;
 let currentPostId: string | null = null; // ✅ 현재 글 ID (이미지 폴더 정리용)
 
-// ✅ [Phase 5B-3] ImageManager + imageHistoryStack → modules/imageManagerCore.ts로 추출됨
-import { ImageManager, imageHistoryStack, pushImageHistorySnapshot } from './modules/imageManagerCore.js';
-
 // ✅ 전역 상태 초기화 함수
 
 function resetGlobalState(): void {
@@ -1192,25 +1189,12 @@ function getGlobalState<T>(key: 'content' | 'images' | 'running' | 'postId'): T 
   }
 }
 
-// ✅ [Phase 5B-1] 유틸리티 함수들은 modules/rendererUtils.ts로 추출됨
-// registeredEventListeners, registerEventListener, unregisterEventListener, clearAllEventListeners
-// rendererDomCache, getElement, getElementById, clearDomCache, disableDomCache
-// apiCallsInProgress, preventDuplicateApiCall
-// debounce, throttle
-// buttonStates, setButtonLoading, resetButtonState, disableButton
-// withErrorHandling
-// imageDataUrls, createImageDataUrl, revokeImageDataUrl, revokeAllImageDataUrls, getAllUrls, getUrlsAsString
-import { registeredEventListeners, registerEventListener, unregisterEventListener, clearAllEventListeners, rendererDomCache, getElement, getElementById, clearDomCache, disableDomCache, apiCallsInProgress, preventDuplicateApiCall, debounce, throttle, buttonStates, setButtonLoading, resetButtonState, disableButton, withErrorHandling, imageDataUrls, createImageDataUrl, revokeImageDataUrl, revokeAllImageDataUrls, getAllUrls, getUrlsAsString } from './modules/rendererUtils.js';
-
 // 연속 발행 관련 전역 변수
 let isContinuousMode = false;
 let continuousCountdown = 0;
 let continuousInterval: NodeJS.Timeout | null = null;
 let continuousQueue: string[] = []; // 연속 발행할 URL/콘텐츠 큐
 let __continuousV2Initialized = false; // V2 초기화 플래그
-
-// ✅ [Phase 5B-1] 로깅 시스템은 modules/rendererUtils.ts의 appendLog로 추출됨
-import { appendLog, _logUpdatePending, _logPendingEntries, _flushLogEntries } from './modules/rendererUtils.js';
 
 // 위험 지표 업데이트
 function updateRiskIndicators(content: StructuredContent | null): void {
@@ -2508,11 +2492,6 @@ function initContentHeadingImageGeneration(): void {
     });
   }
 }
-
-// ✅ [Phase 5B-7] initImageLibrary~getEnhancedTemplates → modules/contentPreviewAndLibrary.ts로 추출됨
-import { initImageLibrary, loadLibraryImages, useLibraryImage, switchToTab, generateFavoritesContent, generateTemplatesContent, getEnhancedTemplates } from './modules/contentPreviewAndLibrary.js';
-declare let thumbnailBackgroundImage: string | null;
-declare let thumbnailBackgroundDataUrl: string | null;
 
 // 아이템 선택
 function selectUnifiedItem(element: HTMLElement): void {

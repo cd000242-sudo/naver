@@ -105,33 +105,7 @@ async function preventDuplicateApiCall<T>(
   return promise;
 }
 
-// ============================================
-// 디바운스/스로틀 유틸리티
-// ============================================
-function debounce<T extends (...args: any[]) => any>(
-  func: T,
-  wait: number
-): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout | null = null;
-  return (...args: Parameters<T>) => {
-    if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-}
-
-function throttle<T extends (...args: any[]) => any>(
-  func: T,
-  limit: number
-): (...args: Parameters<T>) => void {
-  let inThrottle = false;
-  return (...args: Parameters<T>) => {
-    if (!inThrottle) {
-      func(...args);
-      inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
-    }
-  };
-}
+// debounce/throttle는 performanceUtils.ts에서 전역 스코프로 제공됨 (중복 제거)
 
 // ============================================
 // 버튼 상태 관리 시스템
@@ -388,9 +362,6 @@ export {
   // API 중복 방지
   apiCallsInProgress,
   preventDuplicateApiCall,
-  // 디바운스/스로틀
-  debounce,
-  throttle,
   // 버튼 상태
   buttonStates,
   setButtonLoading,

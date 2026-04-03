@@ -12,15 +12,8 @@ declare function initMultiAccountManager(): Promise<void>;
 declare function testLicenseCode(code: string): Promise<void>;
 declare const apiClient: { call: (method: string, args: any[], opts?: any) => Promise<any> };
 
-// appendLog 유틸 (renderer.ts에서 분리)
-function appendLog(message: string, logOutputId?: string): void {
-  const logEl = document.getElementById(logOutputId || 'log-output');
-  if (logEl) {
-    logEl.innerHTML += message + '<br>';
-    logEl.scrollTop = logEl.scrollHeight;
-  }
-  console.log('[Log]', message.replace(/<[^>]*>/g, ''));
-}
+// appendLog는 rendererUtils.ts에서 전역 스코프로 제공됨
+declare function appendLog(message: string, logOutputId?: string): void;
 
 export async function initPriceInfoModal(): Promise<void> {
   // ✅ 가격 정보 모달 열기/닫기 로직 추가
