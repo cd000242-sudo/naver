@@ -38,21 +38,12 @@ function getConfigPath(): string {
   }
 }
 
-/** 디스크에서 proxyEnabled 상태 로드 (최초 1회) */
+/** 디스크에서 proxyEnabled 상태 로드 — 항상 비활성화로 시작, 사용자가 수동 활성화해야 함 */
 function loadProxyState(): boolean {
   if (_proxyEnabled !== null) return _proxyEnabled as boolean;
-  try {
-    const configPath = getConfigPath();
-    if (configPath && fs.existsSync(configPath)) {
-      const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-      if (typeof config.proxyEnabled === 'boolean') {
-        _proxyEnabled = config.proxyEnabled;
-        return _proxyEnabled as boolean;
-      }
-    }
-  } catch { /* 파일 읽기 실패 시 기본값 사용 */ }
-  _proxyEnabled = false;  // ✅ [2026-04-02] 기본값: 비활성화
-  return _proxyEnabled as boolean;
+  // ✅ [2026-04-03] 프록시는 기본 비활성화 — config.json 값 무시, 사용자가 환경설정에서 수동 켜야 함
+  _proxyEnabled = false;
+  return false;
 }
 
 /** 디스크에 proxyEnabled 상태 저장 */
