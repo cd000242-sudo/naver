@@ -8368,13 +8368,10 @@ try {
 
 if (!gotTheLock) {
   console.error('[Main] Another instance is already running. Exiting immediately...');
-  app.whenReady().then(() => {
-    const { dialog: dlg } = require('electron');
-    dlg.showErrorBox('이미 실행 중', '앱이 이미 실행 중입니다. 기존 창을 확인해주세요.');
-    app.quit();
-  });
-  // 5초 후 강제 종료 (dialog가 안 뜰 경우 대비)
-  setTimeout(() => process.exit(0), 5000);
+  // ✅ 에러박스 대신 조용히 종료 — second-instance 이벤트가 기존 창을 자동 포커스함
+  app.quit();
+  // 2초 후 강제 종료 (quit이 안 먹힐 경우 대비)
+  setTimeout(() => process.exit(0), 2000);
 } else {
   console.log('[Main] Single instance lock acquired');
 
