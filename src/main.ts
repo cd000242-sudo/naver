@@ -4869,6 +4869,9 @@ registerKeywordHandlers();
 registerProductHandlers();
 registerEngagementHandlers();
 registerImageTableHandlers();
+// ✅ miscHandlers: content:collectFromPlatforms 등 — 연속발행에서 크롤링 시 필요
+import { registerMiscHandlers } from './main/ipc/miscHandlers.js';
+registerMiscHandlers();
 
 // ✅ 네이버 블로그 카테고리 분석 (크롤링)
 ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: string; blogId?: string }) => {
@@ -8627,9 +8630,9 @@ app.whenReady().then(async () => {
       registerSystemHandlers(ctx);
       registerFileHandlers(ctx);
       registerDialogHandlers(ctx);
-      registerMiscHandlers();
+      // miscHandlers는 최상위에서 이미 등록됨
       registerScheduleHandlers({ smartScheduler });
-      debugLog('[Main] Image/Media/System/File/Dialog/Misc/Scheduler handlers registered');
+      debugLog('[Main] Image/Media/System/File/Dialog/Scheduler handlers registered');
     } catch (e) {
       debugLog(`[Main] ⚠️ 핸들러 등록 실패: ${(e as Error).message}`);
     }

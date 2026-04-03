@@ -112,8 +112,12 @@ export function activateLocalStorageProxy(): void {
             const originalValue = _originalGetItem!.call(this, key);
             if (originalValue !== null) {
                 // 자동 마이그레이션: 원본 → 네임스페이스 키로 복사
-                _originalSetItem!.call(this, nsKey, originalValue);
-                console.log(`[AccountSettings] 🔄 자동 마이그레이션: ${key} → ${nsKey.substring(0, 50)}...`);
+                try {
+                    _originalSetItem!.call(this, nsKey, originalValue);
+                    console.log(`[AccountSettings] 🔄 자동 마이그레이션: ${key} → ${nsKey.substring(0, 50)}...`);
+                } catch (e) {
+                    console.warn(`[AccountSettings] ⚠️ 마이그레이션 실패 (할당량 초과): ${key}`);
+                }
                 return originalValue;
             }
         }
