@@ -595,10 +595,10 @@ async function handleGracefulShutdown(reason: string) {
   gracefulShutdownTimer = setTimeout(() => {
     console.log('[Main] ⏱️ 60초 유예 시간 종료 - 앱 강제 종료');
     app.quit();
-    // 앱이 종료되지 않으면 강제 종료
+    // before-quit 로그아웃 완료 대기 후 강제 종료 (10초로 늘려 logout 처리 보장)
     setTimeout(() => {
       process.exit(0);
-    }, 3000);
+    }, 10000);
   }, GRACE_PERIOD_SECONDS * 1000);
 
   // ✅ 렌더러에 종료 카운트다운 시작 알림 (UI에 카운트다운 표시용)
@@ -637,9 +637,10 @@ async function handleGracefulShutdown(reason: string) {
       gracefulShutdownTimer = null;
     }
     app.quit();
+    // before-quit 로그아웃 완료 대기 후 강제 종료 (10초로 늘려 logout 처리 보장)
     setTimeout(() => {
       process.exit(0);
-    }, 3000);
+    }, 10000);
   }
   // '자동 종료' 선택 시 타이머가 이미 실행 중이므로 대기
   console.log(`[Main] 앱이 ${GRACE_PERIOD_SECONDS}초 후 자동 종료됩니다...`);
@@ -1864,7 +1865,7 @@ ipcMain.handle('leword:launch', async () => {
         buttons: ['오픈채팅 문의하기', '확인']
       }).then((r: any) => {
         if (r.response === 0) shell.openExternal('https://open.kakao.com/o/sPcaslwh');
-      });
+      }).catch((err: any) => console.error('[Dialog] showMessageBox error:', err));
       return { success: false, message: 'GitHub Release에서 다운로드 파일을 찾을 수 없습니다.' };
     }
 
@@ -1961,7 +1962,7 @@ ipcMain.handle('leword:launch', async () => {
       buttons: ['오픈채팅 문의하기', '확인']
     }).then((r: any) => {
       if (r.response === 0) shell.openExternal('https://open.kakao.com/o/sPcaslwh');
-    });
+    }).catch((err: any) => console.error('[Dialog] showMessageBox error:', err));
     return { success: false, message: `LEWORD 다운로드 실패: ${error.message}` };
   }
 });

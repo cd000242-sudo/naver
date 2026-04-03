@@ -675,13 +675,18 @@ export async function generateWithNanoBananaPro(
     runNext();
 
     // 모든 작업 완료 대기
-    const allResults = await Promise.all(generatePromises);
+    const settledResults = await Promise.allSettled(generatePromises);
+    const fulfilledResults = settledResults.filter((r): r is PromiseFulfilledResult<GeneratedImage | null> => r.status === 'fulfilled').map(r => r.value);
+    const rejectedResults = settledResults.filter(r => r.status === 'rejected');
+    if (rejectedResults.length > 0) {
+      console.warn(`[NanoBananaPro] ${rejectedResults.length}/${settledResults.length} image generations failed`);
+    }
 
     // ✅ [2026-03-11 FIX] 실패 재시도 2라운드로 증가 - 원래 엔진 성공률 극대화
     const MAX_RETRY_ROUNDS = 2; // 실패한 이미지에 대해 2회 추가 재시도
 
     // 인덱스별 결과 매핑 (null = 실패)
-    const indexedResults: (GeneratedImage | null)[] = [...allResults];
+    const indexedResults: (GeneratedImage | null)[] = [...fulfilledResults];
 
     // 실패한 이미지 인덱스 수집
     let failedIndices = indexedResults

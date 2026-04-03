@@ -37,6 +37,7 @@ declare function loadAllGeneratedPosts(): any[];
 declare function saveGeneratedPostFromData(content: any, images?: any[], opts?: any): string | null;
 declare function resolveAffiliateLink(link1?: string, link2?: string): string | undefined;
 declare function applyKeywordPrefixToTitle(title: string, keyword: string): string;
+declare function revokeAllImageDataUrls(): void;
 
 // ═══════════════════════════════════════════════════════════════════
 // ✅ [2026-03-23] 네이버 캡차 방지 — 강화된 안전 발행 간격 시스템
@@ -3510,6 +3511,13 @@ async function startContinuousPublishingV2(): Promise<void> {
   (window as any).stopBatchPublish = false;
   _continuousPublishCount = 0; // ✅ [2026-03-20] 캡차 방지 카운터 리셋
 
+  // ✅ [FIX] 새로운 배치 시작 시 날짜가 바뀌었으면 일일 카운터 리셋
+  const today = new Date().toDateString();
+  if ((startContinuousPublishingV2 as any)._lastRunDate !== today) {
+    _dailyPublishCount = 0;
+    (startContinuousPublishingV2 as any)._lastRunDate = today;
+  }
+
   // ✅ [2026-01-21] 연속 발행 시작 시 락 강제 해제 (이전 세션 잔여 락 제거)
   clearImageGenerationLocks();
   console.log('[Continuous] 🔓 이미지 생성 락 초기화 완료');
@@ -3595,6 +3603,8 @@ async function startContinuousPublishingV2(): Promise<void> {
         if (typeof ImageManager.clearAll === 'function') ImageManager.clearAll();
         else if (typeof ImageManager.clear === 'function') ImageManager.clear();
       }
+      // ✅ [FIX] 이미지 blob URL 메모리 해제 — 장시간 연속발행 시 메모리 누수 방지
+      try { revokeAllImageDataUrls(); } catch (e) { console.warn('[Continuous] revokeAllImageDataUrls failed:', e); }
       // 이미지 전역 변수 초기화
       (window as any).generatedImages = [];
       (window as any).imageManagementGeneratedImages = [];
@@ -3721,6 +3731,8 @@ async function startContinuousPublishingV2(): Promise<void> {
         // ✅ [2026-02-09 v2] 생성된 제목을 히스토리에 추가 (다음 발행 시 중복 방지)
         if (finalStructuredContent.selectedTitle) {
           previousTitles.push(finalStructuredContent.selectedTitle);
+          // Cap previousTitles to prevent prompt size inflation over long runs
+          if (previousTitles.length > 50) previousTitles.splice(0, previousTitles.length - 50);
           (window as any)._previousTitles = previousTitles;
           console.log(`[Continuous] 📝 제목 히스토리 누적: ${previousTitles.length}개`);
         }
@@ -3997,6 +4009,8 @@ async function startContinuousPublishingV2(): Promise<void> {
         if (typeof ImageManager !== 'undefined' && typeof ImageManager.clearAll === 'function') {
           ImageManager.clearAll();
         }
+        // ✅ [FIX] 이미지 blob URL 메모리 해제 — 장시간 연속발행 시 메모리 누수 방지
+        try { revokeAllImageDataUrls(); } catch (e) { console.warn('[Continuous] revokeAllImageDataUrls failed:', e); }
         (window as any).currentStructuredContent = null;
         (window as any).generatedImages = [];
         (window as any).imageManagementGeneratedImages = [];
@@ -4064,9 +4078,9 @@ async function startContinuousPublishingV2(): Promise<void> {
         if (!waitOk) break;
       }
 
-      // ✅ [2026-03-21] 연속 3회 실패 시 전체 중단 (_consecutiveFailCount 전용 카운터 사용)
-      if (_consecutiveFailCount >= 3) {
-        appendLog(`🚨 연속 ${_consecutiveFailCount}회 실패 → 안전을 위해 발행을 중단합니다.`);
+      // ✅ [2026-03-21] 연속 실패 시 전체 중단 (_consecutiveFailCount 전용 카운터 사용) — 임계값 5회로 상향
+      if (_consecutiveFailCount >= 5) {
+        appendLog(`🚨 연속 ${_consecutiveFailCount}회 실패 → 안전을 위해 발행을 중단합니다. (일시적 오류가 아닌 지속 장애로 판단)`);
         appendLog(`💡 해결: API 키, 네트워크, AI 설정을 점검해주세요.`);
         updateContinuousProgressModal({
           step: '🚨 연속 실패로 중단',

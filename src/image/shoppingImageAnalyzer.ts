@@ -448,8 +448,13 @@ export async function analyzeAndFilterShoppingImages(
             return analyzeImage(sharp, url, buffer);
         });
 
-        const batchResults = await Promise.all(batchPromises);
-        results.push(...batchResults);
+        const batchSettled = await Promise.allSettled(batchPromises);
+        const fulfilled = batchSettled.filter((r): r is PromiseFulfilledResult<any> => r.status === 'fulfilled').map(r => r.value);
+        const rejected = batchSettled.filter(r => r.status === 'rejected');
+        if (rejected.length > 0) {
+          console.warn(`[NanoBananaPro] ${rejected.length}/${batchSettled.length} image generations failed`);
+        }
+        results.push(...fulfilled);
     }
 
     // pHash 기반 시각적 중복 제거

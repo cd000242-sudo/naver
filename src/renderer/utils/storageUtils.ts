@@ -158,6 +158,7 @@ function _runAllCleanupStrategies(): void {
  * ✅ [2026-03-26] 핵 정리 — 최후의 수단
  */
 function _nuclearCleanup(): void {
+    console.error('[Storage] ⚠️ NUCLEAR CLEANUP: localStorage 용량 초과로 모든 글 데이터를 삭제합니다. 이 작업은 되돌릴 수 없습니다.');
     // 전역 글 목록 완전 삭제
     localStorage.removeItem('naver_blog_generated_posts');
     // 모든 계정별 글 목록 삭제
