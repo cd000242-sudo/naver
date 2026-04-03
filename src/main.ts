@@ -95,9 +95,6 @@ import { registerKeywordHandlers } from './main/ipc/keywordHandlers.js';
 import { registerProductHandlers } from './main/ipc/productHandlers.js';
 import { registerEngagementHandlers } from './main/ipc/engagementHandlers.js';
 import { registerImageTableHandlers } from './main/ipc/imageTableHandlers.js';
-import { registerSystemHandlers, registerFileHandlers, registerDialogHandlers } from './main/ipc/systemHandlers.js';
-import { registerMiscHandlers } from './main/ipc/miscHandlers.js';
-import { registerImageHandlers, registerMediaHandlers } from './main/ipc/imageHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -4860,19 +4857,16 @@ const _earlyCtx = {
   notify: (title: string, body: string) => { /* no-op */ },
   sendToRenderer: (channel: string, ...args: unknown[]) => mainWindow?.webContents.send(channel, ...args)
 };
+// ✅ 로그인 창에서 필요한 핸들러만 최상위에서 등록 (의존성 없는 것만)
 registerLicenseHandlers(_earlyCtx);
+// ✅ app:getVersion — 로그인 창에서 버전 표시용 (systemHandlers는 app.whenReady() 이후에 등록)
+try { ipcMain.handle('app:getVersion', async () => app.getVersion()); } catch { /* 이미 등록됨 */ }
 registerQuotaHandlers(_earlyCtx);
 registerApiHandlers(_earlyCtx);
 registerKeywordHandlers();
 registerProductHandlers();
 registerEngagementHandlers();
 registerImageTableHandlers();
-registerSystemHandlers(_earlyCtx);
-registerFileHandlers(_earlyCtx);
-registerDialogHandlers(_earlyCtx);
-registerMiscHandlers();
-registerImageHandlers(_earlyCtx);
-registerMediaHandlers(_earlyCtx);
 
 // ✅ 네이버 블로그 카테고리 분석 (크롤링)
 ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: string; blogId?: string }) => {
@@ -8614,13 +8608,26 @@ app.whenReady().then(async () => {
     });
     debugLog('[Main] BlogExecutor dependencies injected');
 
-    // ✅ [리팩토링] 대부분의 IPC 핸들러는 최상위 레벨에서 등록됨
-    // scheduleHandlers만 smartScheduler DI가 필요하므로 여기서 등록
+    // ✅ app.whenReady() 이후에 등록해야 하는 핸들러 (import 체인에 app.getPath 등 사용)
     try {
+      const { registerImageHandlers, registerMediaHandlers } = await import('./main/ipc/imageHandlers.js');
+      const { registerSystemHandlers, registerFileHandlers, registerDialogHandlers } = await import('./main/ipc/systemHandlers.js');
+      const { registerMiscHandlers } = await import('./main/ipc/miscHandlers.js');
       const { registerScheduleHandlers } = await import('./main/ipc/scheduleHandlers.js');
+      const ctx = {
+        getMainWindow: () => mainWindow,
+        getAutomationMap: () => automationMap,
+        notify: (title: string, body: string) => { /* no-op */ },
+        sendToRenderer: (channel: string, ...args: unknown[]) => mainWindow?.webContents.send(channel, ...args)
+      };
+      registerImageHandlers(ctx);
+      registerMediaHandlers(ctx);
+      registerSystemHandlers(ctx);
+      registerFileHandlers(ctx);
+      registerDialogHandlers(ctx);
+      registerMiscHandlers();
       registerScheduleHandlers({ smartScheduler });
-
-      debugLog('[Main] Scheduler handlers registered (others already at top-level)');
+      debugLog('[Main] Image/Media/System/File/Dialog/Misc/Scheduler handlers registered');
     } catch (e) {
       debugLog(`[Main] ⚠️ 핸들러 등록 실패: ${(e as Error).message}`);
     }
