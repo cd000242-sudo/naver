@@ -82,6 +82,8 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('free:activate', userInfo),
   forceQuit: (): Promise<{ success: boolean }> =>
     ipcRenderer.invoke('app:forceQuit'),
+  minimizeToTray: (): Promise<void> =>
+    ipcRenderer.invoke('app:minimize-to-tray'),
   getQuotaStatus: (): Promise<{ success: boolean; isFree: boolean; quota: any }> =>
     ipcRenderer.invoke('quota:getStatus'),
   // ✅ [2026-03-02] 이미지 API 일일 사용량 조회

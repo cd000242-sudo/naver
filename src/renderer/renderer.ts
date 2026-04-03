@@ -744,6 +744,19 @@ function setupHeaderButtons() {
   } else {
     console.debug('[Setup] externalLinksButton이 존재하지 않음 (레거시 - 무시 가능)');
   }
+
+  // ✅ [2026-04-03] 트레이 아이콘화 버튼
+  const minimizeToTrayBtn = document.getElementById('minimize-to-tray-btn');
+  if (minimizeToTrayBtn) {
+    minimizeToTrayBtn.addEventListener('click', async () => {
+      try {
+        await (window as any).api.minimizeToTray();
+      } catch (err) {
+        console.error('[Tray] 트레이 숨기기 실패:', err);
+      }
+    });
+    console.log('[Setup] 트레이 숨기기 버튼 이벤트 연결됨');
+  }
 }
 
 // 여러 타이밍에 이벤트 리스너 연결 시도 (중복 방지)

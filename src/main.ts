@@ -1432,136 +1432,33 @@ async function createWindow(): Promise<void> {
     // ✅ [2026-03-13] 종료 확인 다이얼로그 중복 생성 방지 플래그
     let isConfirmDialogOpen = false;
 
-    mainWindow.on('close', (event) => {
-      console.log('[Main] 창 닫기 이벤트 발생');
+    // ✅ [2026-04-03] X 버튼 = 바로 앱 종료 (확인 다이얼로그 제거)
+    mainWindow.on('close', async () => {
+      console.log('[Main] 창 닫기 → 즉시 종료');
+      (globalThis as any).isQuitting = true;
 
-      // 이미 종료 절차 중이면 기본 동작 허용 (창 닫기)
-      if ((globalThis as any).isQuitting) {
-        console.log('[Main] isQuitting=true, 즉시 종료 허용');
-        return;
+      // 실행 중인 자동화 정리
+      if (automationRunning || AutomationService.isRunning()) {
+        console.log('[Main] 실행 중인 자동화 정리 중...');
+        AutomationService.requestCancel();
+        await AutomationService.closeAllSessions().catch(() => { });
+        automationRunning = false;
+        automation = null;
       }
 
-      // ✅ [핵심] 기본 동작(창 닫기)을 막음
-      event.preventDefault();
-
-      // ✅ 다이얼로그가 이미 열려있으면 중복 생성 방지 (X 버튼 연타 대응)
-      if (isConfirmDialogOpen) {
-        console.log('[Main] 종료 확인 다이얼로그가 이미 열려있습니다');
-        return;
+      // 트레이 정리
+      if (tray) {
+        tray.destroy();
+        tray = null;
       }
-      isConfirmDialogOpen = true;
 
-      // ✅ [2026-03-13] 프리미엄 커스텀 종료 확인 다이얼로그
-      // 세팅 후 실수로 X 버튼을 눌러 앱이 종료되는 것을 방지
-      const dialogPreloadPath = path.join(__dirname, 'preloadDialog.js');
-      const confirmWindow = new BrowserWindow({
-        width: 440,
-        height: 330,
-        parent: mainWindow!,
-        modal: true,
-        frame: false,
-        transparent: true,
-        resizable: false,
-        movable: false,
-        minimizable: false,
-        maximizable: false,
-        skipTaskbar: true,
-        alwaysOnTop: true,
-        show: false,
-        webPreferences: {
-          nodeIntegration: false,
-          contextIsolation: true,
-          preload: dialogPreloadPath,
-        },
-      });
-
-      const confirmHtmlPath = path.join(publicPath, 'quit-confirm.html');
-      confirmWindow.loadFile(confirmHtmlPath);
-
-      confirmWindow.once('ready-to-show', () => {
-        confirmWindow.show();
-      });
-
-      // IPC로 사용자 응답 수신
-      const handleResponse = (_event: any, shouldQuit: boolean) => {
-        ipcMain.removeListener('quit-confirm-response', handleResponse);
-
-        if (!confirmWindow.isDestroyed()) {
-          confirmWindow.destroy();
-        }
-
-        if (!shouldQuit) {
-          console.log('[Main] 사용자가 종료를 취소했습니다');
-          isConfirmDialogOpen = false;
-          return;
-        }
-
-        // 종료 절차 시작
-        (async () => {
-          (globalThis as any).isQuitting = true;
-          console.log('[Main] 종료 절차 시작...');
-
-          // 실행 중인 자동화가 있으면 정리
-          if (automationRunning || AutomationService.isRunning()) {
-            console.log('[Main] 실행 중인 자동화 정리 중...');
-            AutomationService.requestCancel();
-            await AutomationService.closeAllSessions().catch(() => { });
-            automationRunning = false;
-            automation = null;
-          }
-
-          // 트레이 정리
-          if (tray) {
-            tray.destroy();
-            tray = null;
-          }
-
-          console.log('[Main] 정리 완료, 앱 종료');
-
-          // ✅ 비동기 정리 완료 후 종료
-          app.quit();
-
-          // 앱이 종료되지 않으면 3초 후 강제 종료
-          setTimeout(() => {
-            console.log('[Main] 강제 종료 (process.exit)');
-            process.exit(0);
-          }, 3000);
-        })();
-      };
-
-      ipcMain.on('quit-confirm-response', handleResponse);
-
-      // 다이얼로그가 외부에서 닫히면 (Alt+F4 등) → 취소 처리
-      confirmWindow.on('closed', () => {
-        ipcMain.removeListener('quit-confirm-response', handleResponse);
-        isConfirmDialogOpen = false;
-      });
+      app.quit();
     });
 
-    // ✅ [수정] 최소화(-) 버튼 = 트레이로 숨기기
-    // ⚠️ [2026-01-21] 개발 모드에서는 일반 최소화, 배포 모드에서만 트레이로 숨기기
-    // TypeScript 타입 에러 우회 (minimize 이벤트는 존재하지만 타입 정의에 없음)
-    (mainWindow as any).on('minimize', (event: Electron.Event) => {
-      // 개발 모드에서는 일반 최소화 허용 (트레이 숨기기 건너뜀)
-      if (!app.isPackaged) {
-        console.log('[Main] 개발 모드: 일반 최소화 허용');
-        // event.preventDefault() 하지 않음 = 일반 최소화 동작
-        return;
-      }
-
-      // 배포 모드: 트레이로 숨기기
-      event.preventDefault();
-      mainWindow?.hide();
-      console.log('[Main] 창이 트레이로 숨겨졌습니다');
-
-      // 트레이 알림 (처음 숨길 때만)
-      if (tray && !(globalThis as any).trayNotified) {
-        tray.displayBalloon({
-          title: 'Leaders Pro',
-          content: '앱이 트레이로 최소화되었습니다. 아이콘을 클릭하면 다시 열 수 있습니다.',
-        });
-        (globalThis as any).trayNotified = true;
-      }
+    // ✅ [2026-04-03] 최소화(-) 버튼 = 일반 최소화 (작업표시줄에 남음)
+    // 트레이 숨기기는 별도 IPC 'app:minimize-to-tray'로 처리
+    (mainWindow as any).on('minimize', () => {
+      console.log('[Main] 일반 최소화 (작업표시줄에 남음)');
     });
 
     // ✅ [2026-02-27] 윈도우 포커스 시 webContents에도 포커스 전달
@@ -4863,6 +4760,17 @@ registerLicenseHandlers(_earlyCtx);
 try { ipcMain.handle('app:getVersion', async () => app.getVersion()); } catch { /* 이미 등록됨 */ }
 // ✅ openExternalUrl — 로그인 창 구매문의 버튼용
 try { ipcMain.handle('openExternalUrl', async (_e: any, url: string) => { const { shell } = require('electron'); await shell.openExternal(url); }); } catch { /* 이미 등록됨 */ }
+// ✅ [2026-04-03] 트레이 아이콘화 — 렌더러에서 버튼 클릭 시 호출
+try { ipcMain.handle('app:minimize-to-tray', async () => {
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    mainWindow.hide();
+    console.log('[Main] 트레이로 숨김');
+    if (tray && !(globalThis as any).trayNotified) {
+      tray.displayBalloon({ title: 'Leaders Pro', content: '트레이로 최소화되었습니다. 아이콘 클릭으로 복원합니다.' });
+      (globalThis as any).trayNotified = true;
+    }
+  }
+}); } catch { /* 이미 등록됨 */ }
 registerQuotaHandlers(_earlyCtx);
 registerApiHandlers(_earlyCtx);
 registerKeywordHandlers();
