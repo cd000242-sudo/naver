@@ -95,6 +95,9 @@ import { registerKeywordHandlers } from './main/ipc/keywordHandlers.js';
 import { registerProductHandlers } from './main/ipc/productHandlers.js';
 import { registerEngagementHandlers } from './main/ipc/engagementHandlers.js';
 import { registerImageTableHandlers } from './main/ipc/imageTableHandlers.js';
+import { registerSystemHandlers, registerFileHandlers, registerDialogHandlers } from './main/ipc/systemHandlers.js';
+import { registerMiscHandlers } from './main/ipc/miscHandlers.js';
+import { registerImageHandlers, registerMediaHandlers } from './main/ipc/imageHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -4864,6 +4867,12 @@ registerKeywordHandlers();
 registerProductHandlers();
 registerEngagementHandlers();
 registerImageTableHandlers();
+registerSystemHandlers(_earlyCtx);
+registerFileHandlers(_earlyCtx);
+registerDialogHandlers(_earlyCtx);
+registerMiscHandlers();
+registerImageHandlers(_earlyCtx);
+registerMediaHandlers(_earlyCtx);
 
 // ✅ 네이버 블로그 카테고리 분석 (크롤링)
 ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: string; blogId?: string }) => {
@@ -8605,34 +8614,13 @@ app.whenReady().then(async () => {
     });
     debugLog('[Main] BlogExecutor dependencies injected');
 
-    // ✅ [리팩토링] IPC 핸들러 일괄 등록
-    // ⚠️ [2026-01-19] main.ts에 이미 대부분 핸들러가 있으므로, 누락된 핸들러만 개별 등록
-    // registerAllHandlers() 전체 호출 시 중복 충돌 발생
+    // ✅ [리팩토링] 대부분의 IPC 핸들러는 최상위 레벨에서 등록됨
+    // scheduleHandlers만 smartScheduler DI가 필요하므로 여기서 등록
     try {
-      const { registerImageHandlers, registerMediaHandlers } = await import('./main/ipc/imageHandlers.js');
-      const { registerSystemHandlers } = await import('./main/ipc/systemHandlers.js');
-      const ctx = {
-        getMainWindow: () => mainWindow,
-        getAutomationMap: () => automationMap,
-        notify: (title: string, body: string) => { /* no-op */ },
-        sendToRenderer: (channel: string, ...args: unknown[]) => mainWindow?.webContents.send(channel, ...args)
-      };
-      registerImageHandlers(ctx);
-      registerMediaHandlers(ctx);
-      // ✅ registerHeadingVideoHandlers → headingHandlers.ts (위에서 이미 등록)
-      registerSystemHandlers(ctx);
-
-      // misc:* 핸들러 등록 (tutorials, images, content, seo)
-      const { registerMiscHandlers } = await import('./main/ipc/miscHandlers.js');
-      registerMiscHandlers();
-
-      // scheduler:* 핸들러 등록 (DI)
       const { registerScheduleHandlers } = await import('./main/ipc/scheduleHandlers.js');
       registerScheduleHandlers({ smartScheduler });
 
-      // analyticsHandlers는 main.ts에 인라인으로 이미 등록됨
-
-      debugLog('[Main] Image/Media/System/Misc/Scheduler handlers registered');
+      debugLog('[Main] Scheduler handlers registered (others already at top-level)');
     } catch (e) {
       debugLog(`[Main] ⚠️ 핸들러 등록 실패: ${(e as Error).message}`);
     }
