@@ -9,13 +9,45 @@ import { app } from 'electron';
 import fs from 'fs/promises';
 
 // ✅ [Phase 4B] 순환 의존성 방지를 위한 인터페이스 import
-import type { IExecutionDependencies } from '../../types/automation.js';
+import type { IExecutionDependencies, IAutomationInstance } from '../../types/automation.js';
 import { AutomationService, type PostCyclePayload, type PostCycleContext, type PostCycleResult } from './AutomationService.js';
 import { Logger } from '../utils/logger.js';
 import { sendLog, sendStatus, sendProgress } from '../utils/ipcHelpers.js';
 
 // ✅ [Phase 4B] ExecutionDependencies는 types/automation.ts에서 정의 — 재export
 export type ExecutionDependencies = IExecutionDependencies;
+
+/**
+ * 블로그 이미지 정보 인터페이스
+ * processImages()에서 사용하는 이미지 객체의 타입
+ */
+interface BlogImage {
+    heading?: string;
+    title?: string;
+    filePath?: string;
+    url?: string;
+    thumbnailUrl?: string;
+    provider?: string;
+    alt?: string;
+    caption?: string;
+    originalIndex?: number;
+    isThumbnail?: boolean;
+    isIntro?: boolean;
+}
+
+/**
+ * 처리된 이미지 정보 인터페이스
+ */
+interface ProcessedImage {
+    heading?: string;
+    filePath: string;
+    provider?: string;
+    alt?: string;
+    caption?: string;
+    originalIndex?: number;
+    isThumbnail: boolean;
+    isIntro: boolean;
+}
 
 // 전역 의존성 저장소 (main.ts에서 주입)
 let dependencies: IExecutionDependencies | null = null;
@@ -120,7 +152,7 @@ export async function resolveAccount(
  */
 export async function getOrCreateBrowserSession(
     account: { naverId: string; naverPassword: string; accountId?: string }
-): Promise<any> {
+): Promise<IAutomationInstance> {
     const deps = getDependencies();
     const normalizedId = account.naverId.trim().toLowerCase();
 
@@ -158,18 +190,18 @@ export async function getOrCreateBrowserSession(
  */
 export async function processImages(
     payload: PostCyclePayload
-): Promise<{ folder: string | null; images: any[] }> {
+): Promise<{ folder: string | null; images: ProcessedImage[] }> {
     // ✅ [2026-01-28] scSubImageSource === 'collected'이면 수집 이미지 우선 사용
     const useCollectedDirectly = payload.scSubImageSource === 'collected';
 
-    let sourceImages: any[] = [];
+    let sourceImages: BlogImage[] = [];
 
     if (useCollectedDirectly && payload.collectedImages && payload.collectedImages.length > 0) {
         // ✅ 수집 이미지 직접 사용 모드: 중복 필터링 적용
         sendLog(`🖼️ 수집 이미지 직접 사용 모드: ${payload.collectedImages.length}개 이미지`);
 
         const seenBaseUrls = new Set<string>();
-        const uniqueImages: any[] = [];
+        const uniqueImages: BlogImage[] = [];
 
         for (const img of payload.collectedImages) {
             const url = img.url || img.thumbnailUrl || img.filePath || '';
@@ -225,7 +257,7 @@ export async function processImages(
 
     sendLog(`📁 글별 이미지 폴더 생성: ${postsImageDir}`);
 
-    const processedImages: any[] = [];
+    const processedImages: ProcessedImage[] = [];
 
     for (const image of sourceImages) {
         // ✅ [2026-02-12 FIX] file:/// URL → 절대 경로 변환 (GIF 등 로컬 파일 지원)
@@ -265,9 +297,9 @@ export async function processImages(
                         provider: image.provider,
                         alt: image.alt,
                         caption: image.caption,
-                        originalIndex: (image as any).originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
-                        isThumbnail: (image as any).isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
-                        isIntro: (image as any).isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
+                        originalIndex: image.originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
+                        isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
+                        isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
                     });
 
                     sendLog(`✅ base64 이미지 저장: ${filename}`);
@@ -285,13 +317,13 @@ export async function processImages(
             sendLog(`✅ 외부 이미지 URL 사용: ${image.filePath.substring(0, 80)}...`);
             processedImages.push({
                 heading: image.heading,
-                filePath: image.filePath,
+                filePath: image.filePath!,
                 provider: image.provider,
                 alt: image.alt,
                 caption: image.caption,
-                originalIndex: (image as any).originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
-                isThumbnail: (image as any).isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
-                isIntro: (image as any).isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
+                originalIndex: image.originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
+                isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
+                isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
             });
             continue;
         }
@@ -320,9 +352,9 @@ export async function processImages(
                 provider: image.provider,
                 alt: image.alt,
                 caption: image.caption,
-                originalIndex: (image as any).originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
-                isThumbnail: (image as any).isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
-                isIntro: (image as any).isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
+                originalIndex: image.originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
+                isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
+                isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
             });
 
             sendLog(`✅ 이미지 복사: ${filename}`);
@@ -334,7 +366,7 @@ export async function processImages(
     // ✅ [2026-03-19 FIX] Defense-in-depth: payload.thumbnailPath가 없을 때
     // processedImages에서 isThumbnail 플래그로 자동 발견
     if (!payload.thumbnailPath && processedImages.length > 0) {
-        const thumbImg = processedImages.find((img: any) => img.isThumbnail === true);
+        const thumbImg = processedImages.find((img) => img.isThumbnail === true);
         if (thumbImg?.filePath) {
             payload.thumbnailPath = thumbImg.filePath;
             sendLog(`🖼️ 썸네일 자동 발견 (isThumbnail): ${path.basename(thumbImg.filePath)}`);
@@ -352,9 +384,9 @@ export async function processImages(
  * 5단계: 실제 발행 실행
  */
 export async function executePublishing(
-    automation: any,
+    automation: IAutomationInstance,
     payload: PostCyclePayload,
-    processedImages: any[]
+    processedImages: ProcessedImage[]
 ): Promise<{ success: boolean; url?: string; message?: string }> {
     // 취소 체크
     if (AutomationService.isCancelRequested()) {
@@ -377,7 +409,7 @@ export async function executePublishing(
 
         sendLog(`📝 최종 제목: ${finalTitle?.substring(0, 40)}...`);
 
-        const result = await (automation as any).run({
+        const result = await automation.run({
             title: finalTitle,
             content: payload.content,
             lines: payload.lines,
@@ -389,16 +421,16 @@ export async function executePublishing(
             // ✅ [2026-02-08 FIX] scheduleDate + scheduleTime 합성 (네이버 예약발행 'YYYY-MM-DD HH:mm' 형식 필수)
             scheduleDate: (() => {
                 if (payload.publishMode === 'schedule' && payload.scheduleDate) {
-                    Logger.info(`[BlogExecutor] 📅 scheduleDate 합성: date="${payload.scheduleDate}", time="${(payload as any).scheduleTime || '(없음)'}"}`);
+                    Logger.info(`[BlogExecutor] 📅 scheduleDate 합성: date="${payload.scheduleDate}", time="${payload.scheduleTime || '(없음)'}"}`);
                     // scheduleTime이 별도 필드로 있으면 합성
-                    if ((payload as any).scheduleTime) {
+                    if (payload.scheduleTime) {
                         // ✅ [2026-03-22 FIX] scheduleDate에 이미 시간이 포함되어 있으면 재합성하지 않음
                         const alreadyHasTime = /^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}$/.test(payload.scheduleDate!);
                         if (alreadyHasTime) {
                             Logger.info(`[BlogExecutor] 📅 scheduleDate에 이미 시간 포함됨, 재합성 건너뜀: "${payload.scheduleDate}"`);
                             return payload.scheduleDate;
                         }
-                        const synthesized = `${payload.scheduleDate} ${(payload as any).scheduleTime}`;
+                        const synthesized = `${payload.scheduleDate} ${payload.scheduleTime}`;
                         Logger.info(`[BlogExecutor] 📅 scheduleDate+time 합성 결과: "${synthesized}"`);
                         return synthesized;
                     }
@@ -552,7 +584,7 @@ export async function runFullPostCycle(
         AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — stale guard 오판 방지
 
         // 7. 이미지 처리 (실패해도 발행은 계속)
-        let processedImages: any[] = [];
+        let processedImages: ProcessedImage[] = [];
         try {
             const imageResult = await processImages(payload);
             processedImages = imageResult.images || [];

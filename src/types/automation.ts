@@ -6,7 +6,7 @@
 
 export interface IAutomationInstance {
   /** 자동화 실행 */
-  run(options?: Record<string, unknown>): Promise<{ success: boolean; url?: string }>;
+  run(options?: Record<string, unknown>): Promise<{ success: boolean; url?: string; message?: string }>;
 
   /** 실행 취소 */
   cancel(): Promise<void>;
