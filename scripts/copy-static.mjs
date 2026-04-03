@@ -261,6 +261,7 @@ try {
     'imageManagerCore.js',         // 5B-3: ImageManager + imageHistoryStack
     'imageSyncService.js',         // 5B-4: 이미지 동기화 서비스
     'costAndAutoGen.js',           // 5B-6: 비용 안전 + 자동 이미지 생성
+    'postManager.js',              // 5B-5: 포스트 CRUD (renderer.ts에서 삭제된 함수들)
     'contentPreviewAndLibrary.js', // 5B-7: 이미지 라이브러리 + 탭 + 템플릿
     // ✅ [2026-02-26] renderer.ts에서 import하는 모든 모듈 완전 포함
     'promptTranslation.js',

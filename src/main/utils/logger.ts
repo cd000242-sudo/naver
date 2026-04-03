@@ -72,7 +72,7 @@ class LoggerServiceImpl {
             const maxAge = LOG_RETENTION_DAYS * 24 * 60 * 60 * 1000;
 
             for (const file of files) {
-                if (!file.startsWith('bln-') || !file.endsWith('.log')) continue;
+                if (!file.endsWith('.log')) continue;
                 const filePath = path.join(this.logDir, file);
                 try {
                     const stat = fs.statSync(filePath);

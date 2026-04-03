@@ -407,7 +407,7 @@ export async function initPriceInfoModal(): Promise<void> {
     if (geminiApiKey) {
       geminiApiKey.value = config.geminiApiKey || '';
       if (config.geminiApiKey) {
-        console.log('[Settings] Gemini API 키 로드됨:', config.geminiApiKey.substring(0, 10) + '...');
+        console.log('[Settings] Gemini API 키 로드됨:', config.geminiApiKey ? '✅' : '❌');
       }
     }
 
@@ -418,7 +418,7 @@ export async function initPriceInfoModal(): Promise<void> {
     if (leonardoaiApiKeyInput) {
       leonardoaiApiKeyInput.value = (config as any).leonardoaiApiKey || '';
       if ((config as any).leonardoaiApiKey) {
-        console.log('[Settings] Leonardo AI API 키 로드됨:', (config as any).leonardoaiApiKey.substring(0, 10) + '...');
+        console.log('[Settings] Leonardo AI API 키 로드됨:', (config as any).leonardoaiApiKey ? '✅' : '❌');
       }
     }
 
@@ -429,7 +429,7 @@ export async function initPriceInfoModal(): Promise<void> {
     if (deepinfraApiKeyInput) {
       deepinfraApiKeyInput.value = config.deepinfraApiKey || '';
       if (config.deepinfraApiKey) {
-        console.log('[Settings] DeepInfra API 키 로드됨:', config.deepinfraApiKey.substring(0, 10) + '...');
+        console.log('[Settings] DeepInfra API 키 로드됨:', config.deepinfraApiKey ? '✅' : '❌');
       }
     }
 
@@ -438,7 +438,7 @@ export async function initPriceInfoModal(): Promise<void> {
     if (openaiApiKeyInput) {
       openaiApiKeyInput.value = config.openaiApiKey || '';
       if (config.openaiApiKey) {
-        console.log('[Settings] OpenAI API 키 로드됨:', config.openaiApiKey.substring(0, 10) + '...');
+        console.log('[Settings] OpenAI API 키 로드됨:', config.openaiApiKey ? '✅' : '❌');
       }
     }
 
@@ -447,7 +447,7 @@ export async function initPriceInfoModal(): Promise<void> {
     if (claudeApiKeyInput) {
       claudeApiKeyInput.value = config.claudeApiKey || '';
       if (config.claudeApiKey) {
-        console.log('[Settings] Claude API 키 로드됨:', config.claudeApiKey.substring(0, 10) + '...');
+        console.log('[Settings] Claude API 키 로드됨:', config.claudeApiKey ? '✅' : '❌');
       }
     }
 
@@ -456,7 +456,7 @@ export async function initPriceInfoModal(): Promise<void> {
     if (perplexityApiKeyInput) {
       perplexityApiKeyInput.value = config.perplexityApiKey || '';
       if (config.perplexityApiKey) {
-        console.log('[Settings] Perplexity API 키 로드됨:', config.perplexityApiKey.substring(0, 10) + '...');
+        console.log('[Settings] Perplexity API 키 로드됨:', config.perplexityApiKey ? '✅' : '❌');
       }
     }
 
@@ -530,13 +530,13 @@ export async function initPriceInfoModal(): Promise<void> {
     if (naverClientId) {
       naverClientId.value = config.naverClientId || config.naverDatalabClientId || '';
       if (config.naverClientId || config.naverDatalabClientId) {
-        console.log('[Settings] 네이버 Client ID 로드됨:', (config.naverClientId || config.naverDatalabClientId).substring(0, 10) + '...');
+        console.log('[Settings] 네이버 Client ID 로드됨:', (config.naverClientId || config.naverDatalabClientId) ? '✅' : '❌');
       }
     }
     if (naverClientSecret) {
       naverClientSecret.value = config.naverClientSecret || config.naverDatalabClientSecret || '';
       if (config.naverClientSecret || config.naverDatalabClientSecret) {
-        console.log('[Settings] 네이버 Client Secret 로드됨:', (config.naverClientSecret || config.naverDatalabClientSecret).substring(0, 10) + '...');
+        console.log('[Settings] 네이버 Client Secret 로드됨:', (config.naverClientSecret || config.naverDatalabClientSecret) ? '✅' : '❌');
       }
     }
     // ✅ 네이버 광고 API 키 로드
@@ -546,13 +546,13 @@ export async function initPriceInfoModal(): Promise<void> {
     if (naverAdApiKey) {
       naverAdApiKey.value = config.naverAdApiKey || '';
       if (config.naverAdApiKey) {
-        console.log('[Settings] 네이버 광고 API Key 로드됨:', config.naverAdApiKey.substring(0, 10) + '...');
+        console.log('[Settings] 네이버 광고 API Key 로드됨:', config.naverAdApiKey ? '✅' : '❌');
       }
     }
     if (naverAdSecretKey) {
       naverAdSecretKey.value = config.naverAdSecretKey || '';
       if (config.naverAdSecretKey) {
-        console.log('[Settings] 네이버 광고 Secret Key 로드됨:', config.naverAdSecretKey.substring(0, 10) + '...');
+        console.log('[Settings] 네이버 광고 Secret Key 로드됨:', config.naverAdSecretKey ? '✅' : '❌');
       }
     }
     if (naverAdCustomerId) {
@@ -715,9 +715,9 @@ export async function initPriceInfoModal(): Promise<void> {
         const naverAdCustomerIdInput = document.getElementById('naver-ad-customer-id') as HTMLInputElement;
 
         // 디버깅 로그
-        console.log('[Settings] 네이버 Client ID 입력값:', naverClientIdInput?.value?.substring(0, 10) + '...');
+        console.log('[Settings] 네이버 Client ID 입력값:', naverClientIdInput?.value ? '✅' : '❌');
         console.log('[Settings] 네이버 Client Secret 입력값:', naverClientSecretInput?.value ? '***' : '없음');
-        console.log('[Settings] 네이버 광고 API Key 입력값:', naverAdApiKeyInput?.value?.substring(0, 10) + '...');
+        console.log('[Settings] 네이버 광고 API Key 입력값:', naverAdApiKeyInput?.value ? '✅' : '❌');
 
         // ✅ [2026-02-22] 이미지 생성 필드 (deprecated: prodia, stability, falai 제거)
         const prodiaTokenInput = undefined; // deprecated

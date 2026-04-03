@@ -23,11 +23,14 @@ export function switchToScheduleTab() {
     }
 }
 
+let clockIntervalId: ReturnType<typeof setInterval> | null = null;
+
 // 메인 대시보드 초기화
 export function initDashboard() {
     // 시계 업데이트
     updateClock();
-    setInterval(updateClock, 1000);
+    if (clockIntervalId) clearInterval(clockIntervalId);
+    clockIntervalId = setInterval(updateClock, 1000);
 
     // 대시보드 통계 업데이트
     updateDashboardStats();

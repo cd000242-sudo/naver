@@ -41,6 +41,8 @@ export async function testLicenseCode(code: string): Promise<void> {
 // ============================================
 // 라이선스 배지 초기화 및 업데이트
 // ============================================
+let licenseBadgeIntervalId: ReturnType<typeof setInterval> | null = null;
+
 export async function initLicenseBadge(): Promise<void> {
     const licenseBadge = document.getElementById('license-badge') as HTMLDivElement;
     const licenseBadgeText = document.getElementById('license-badge-text') as HTMLSpanElement;
@@ -376,7 +378,8 @@ export async function initLicenseBadge(): Promise<void> {
     await updateLicenseBadge();
 
     // 1시간마다 업데이트 (만료일이 가까워질 수 있으므로)
-    setInterval(updateLicenseBadge, 60 * 60 * 1000);
+    if (licenseBadgeIntervalId) clearInterval(licenseBadgeIntervalId);
+    licenseBadgeIntervalId = setInterval(updateLicenseBadge, 60 * 60 * 1000);
 }
 
 // ============================================
