@@ -375,6 +375,7 @@ interface AutomationAPI {
   adminSendReport: (reportData: any) => Promise<{ success: boolean; message: string }>;
   adminCheckPermissions: () => Promise<{ success: boolean; permissions?: any }>;
   clearLicense: () => Promise<void>;
+  logout: () => Promise<{ success: boolean; message?: string }>;
   revalidateLicense: (serverUrl?: string) => Promise<boolean>;
   getLibraryImageData: (filePath: string) => Promise<string | null>;
   saveImageToLocal: (filePath: string, suggestedName: string) => Promise<boolean>;

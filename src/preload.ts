@@ -431,6 +431,14 @@ contextBridge.exposeInMainWorld('api', {
       throw new Error(`라이선스 제거 중 오류가 발생했습니다: ${(error as Error).message}`);
     }
   },
+  logout: async (): Promise<{ success: boolean; message?: string }> => {
+    try {
+      return await ipcRenderer.invoke('auth:logout');
+    } catch (error) {
+      console.error('[Preload] Logout error:', error);
+      return { success: false, message: (error as Error).message };
+    }
+  },
   revalidateLicense: async (serverUrl?: string): Promise<boolean> => {
     try {
       return await ipcRenderer.invoke('license:revalidate', serverUrl);

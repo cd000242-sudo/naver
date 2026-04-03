@@ -83,8 +83,28 @@ export async function initLicenseBadge(): Promise<void> {
                 '<span style="display:inline-flex;align-items:center;gap:0.6rem;justify-content:center;">' +
                 '<span id="member-badge-icon" style="width:22px;height:22px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:rgba(212,175,55,0.20);border:1px solid rgba(212,175,55,0.55);font-size:12px;color:#22c55e;">👤</span>' +
                 '<span id="member-badge-text">회원</span>' +
+                '<button id="logout-btn" style="margin-left:0.5rem;padding:2px 8px;font-size:0.7rem;font-weight:600;border:1px solid rgba(255,100,100,0.4);border-radius:8px;background:rgba(255,100,100,0.12);color:#ff6b6b;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background=\'rgba(255,100,100,0.25)\'" onmouseout="this.style.background=\'rgba(255,100,100,0.12)\'">로그아웃</button>' +
                 '</span>';
             leftStatusContainer.appendChild(memberBadge);
+
+            // 로그아웃 버튼 클릭 핸들러
+            const logoutBtn = memberBadge.querySelector('#logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    const confirmed = confirm('정말 로그아웃하시겠습니까?\n\n앱이 재시작되며 로그인 화면으로 돌아갑니다.');
+                    if (!confirmed) return;
+
+                    try {
+                        if (window.api && window.api.logout) {
+                            await window.api.logout();
+                        }
+                    } catch (err) {
+                        console.error('[Logout] 로그아웃 실패:', err);
+                        alert('로그아웃 중 오류가 발생했습니다.');
+                    }
+                });
+            }
         }
         return memberBadge;
     };

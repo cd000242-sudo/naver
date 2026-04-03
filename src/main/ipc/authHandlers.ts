@@ -123,4 +123,34 @@ export function registerLicenseHandlers(_ctx: IpcContext): void {
             return false;
         }
     });
+
+    // ✅ 로그아웃 핸들러 — 서버 로그아웃 + 라이선스 클리어 + 앱 재시작
+    ipcMain.handle('auth:logout', async (): Promise<{ success: boolean; message?: string }> => {
+        try {
+            console.log('[Auth] 로그아웃 요청 처리 중...');
+
+            // 1. 서버 로그아웃 (세션 토큰 무효화)
+            try {
+                const { logoutFromServer } = await import('../../licenseManager.js');
+                await logoutFromServer();
+                console.log('[Auth] ✅ 서버 로그아웃 완료');
+            } catch (e) {
+                console.warn('[Auth] ⚠️ 서버 로그아웃 실패 (계속 진행):', (e as Error).message);
+            }
+
+            // 2. 라이선스 파일 + 캐시 + 자동로그인 설정 클리어
+            await clearLicense();
+            console.log('[Auth] ✅ 라이선스 클리어 완료');
+
+            // 3. 앱 재시작 (로그인 창으로 돌아감)
+            const { app } = await import('electron');
+            app.relaunch();
+            app.exit(0);
+
+            return { success: true };
+        } catch (error) {
+            console.error('[Auth] ❌ 로그아웃 실패:', (error as Error).message);
+            return { success: false, message: (error as Error).message };
+        }
+    });
 }
