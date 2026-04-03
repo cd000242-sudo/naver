@@ -3854,8 +3854,18 @@ async function startContinuousPublishingV2(): Promise<void> {
           } catch (imgErr) {
             console.error('[Continuous] 이미지 생성 실패:', imgErr);
             appendLog(`❌ 이미지 생성 실패: ${(imgErr as Error).message}`);
-            // ✅ [2026-03-09 FIX] 이미지 생성 실패 시 해당 항목 실패 처리
-            // 기존: 에러 삼키고 이미지 없이 발행 → '파일 전송 오류' 발생
+            // ✅ [2026-04-03 FIX] 이미지 실패해도 글은 저장 — AI 글 생성 비용 보존
+            try {
+              saveGeneratedPostFromData(finalStructuredContent, [], {
+                category: item.category || selectedCategory,
+                toneStyle: item.toneStyle,
+                ctaText: item.ctaText || '',
+                ctaLink: item.ctaUrl || '',
+              });
+              appendLog(`💾 이미지 없이 글만 저장되었습니다. (재사용 가능)`);
+            } catch (saveErr) {
+              console.warn('[Continuous] 실패 글 저장 오류:', saveErr);
+            }
             updateContinuousProgressModal({
               log: `❌ 이미지 생성 실패로 이 항목을 건너뜁니다: ${(imgErr as Error).message}`
             });
