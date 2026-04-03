@@ -4861,6 +4861,8 @@ const _earlyCtx = {
 registerLicenseHandlers(_earlyCtx);
 // ✅ app:getVersion — 로그인 창에서 버전 표시용 (systemHandlers는 app.whenReady() 이후에 등록)
 try { ipcMain.handle('app:getVersion', async () => app.getVersion()); } catch { /* 이미 등록됨 */ }
+// ✅ openExternalUrl — 로그인 창 구매문의 버튼용
+try { ipcMain.handle('openExternalUrl', async (_e: any, url: string) => { const { shell } = require('electron'); await shell.openExternal(url); }); } catch { /* 이미 등록됨 */ }
 registerQuotaHandlers(_earlyCtx);
 registerApiHandlers(_earlyCtx);
 registerKeywordHandlers();
