@@ -7093,54 +7093,7 @@ function collectUnifiedFormData(): any {
   }
 }
 
-// ✅ [2026-03-14 FIX] 영어 카테고리 코드 → 한글 변환 맵
-// unified-article-type select의 value(영어 코드)가 저장될 때 한글로 변환
-const ENGLISH_TO_KOREAN_CATEGORY: Record<string, string> = {
-  'general': '일상·생각',
-  'literature': '문학·책',
-  'movie': '영화',
-  'art_design': '미술·디자인',
-  'performance': '공연·전시',
-  'music': '음악',
-  'drama': '드라마',
-  'celebrity': '스타·연예인',
-  'cartoon': '만화·애니',
-  'broadcast': '방송',
-  'tips': '생활 꿀팁',
-  'parenting': '육아·결혼',
-  'pet': '반려동물',
-  'good_writing': '좋은글·이미지',
-  'fashion': '패션·미용',
-  'interior': '인테리어·DIY',
-  'food_recipe': '요리·레시피',
-  'shopping_review': '상품리뷰',
-  'gardening': '원예·재배',
-  'game': '게임',
-  'sports': '스포츠',
-  'photo': '사진',
-  'car': '자동차',
-  'hobby': '취미',
-  'travel_domestic': '국내여행',
-  'travel_world': '세계여행',
-  'tasty_restaurant': '맛집',
-  'it_computer': 'IT·컴퓨터',
-  'society_politics': '사회·정치',
-  'health': '건강·의학',
-  'business_economy': '비즈니스·경제',
-  'language': '어학·외국어',
-  'education_scholarship': '교육·학문',
-  'realestate': '부동산',
-  'self_dev': '자기계발',
-  'entertainment': '스타·연예인',
-  'shopping': '상품리뷰',
-  'tech': 'IT·컴퓨터',
-  'affiliate': '상품리뷰',
-  'seo': '일상·생각',
-  'homefeed': '일상·생각',
-};
-
-// ✅ [Phase 5B-5] normalizeGeneratedPostCategoryKey, CATEGORY_LABEL_MAP, getGeneratedPostCategoryLabel,
-// GENERATED_POSTS_CATEGORY_COLLAPSE_PREFIX, isGeneratedPostCategoryCollapsed, setGeneratedPostCategoryCollapsed
+// ENGLISH_TO_KOREAN_CATEGORY → postManager.ts로 이동 완료 (전역 스코프에서 접근)
 // → postManager.ts로 이동 완료
 
 
