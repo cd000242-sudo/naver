@@ -1432,27 +1432,79 @@ async function createWindow(): Promise<void> {
     // ✅ [2026-03-13] 종료 확인 다이얼로그 중복 생성 방지 플래그
     let isConfirmDialogOpen = false;
 
-    // ✅ [2026-04-03] X 버튼 = 바로 앱 종료 (확인 다이얼로그 제거)
-    mainWindow.on('close', async () => {
-      console.log('[Main] 창 닫기 → 즉시 종료');
-      (globalThis as any).isQuitting = true;
+    // ✅ [2026-04-03] X 버튼 = 확인 다이얼로그 표시 (실수로 종료 방지)
+    mainWindow.on('close', (event) => {
+      console.log('[Main] 창 닫기 이벤트 발생');
 
-      // 실행 중인 자동화 정리
-      if (automationRunning || AutomationService.isRunning()) {
-        console.log('[Main] 실행 중인 자동화 정리 중...');
-        AutomationService.requestCancel();
-        await AutomationService.closeAllSessions().catch(() => { });
-        automationRunning = false;
-        automation = null;
+      if ((globalThis as any).isQuitting) {
+        console.log('[Main] isQuitting=true, 즉시 종료 허용');
+        return;
       }
 
-      // 트레이 정리
-      if (tray) {
-        tray.destroy();
-        tray = null;
-      }
+      event.preventDefault();
 
-      app.quit();
+      if (isConfirmDialogOpen) {
+        console.log('[Main] 종료 확인 다이얼로그가 이미 열려있습니다');
+        return;
+      }
+      isConfirmDialogOpen = true;
+
+      const dialogPreloadPath = path.join(__dirname, 'preloadDialog.js');
+      const confirmWindow = new BrowserWindow({
+        width: 440,
+        height: 330,
+        parent: mainWindow!,
+        modal: true,
+        frame: false,
+        transparent: true,
+        resizable: false,
+        movable: false,
+        minimizable: false,
+        maximizable: false,
+        skipTaskbar: true,
+        alwaysOnTop: true,
+        show: false,
+        webPreferences: {
+          nodeIntegration: false,
+          contextIsolation: true,
+          preload: dialogPreloadPath,
+        },
+      });
+
+      const confirmHtmlPath = path.join(publicPath, 'quit-confirm.html');
+      confirmWindow.loadFile(confirmHtmlPath);
+      confirmWindow.once('ready-to-show', () => confirmWindow.show());
+
+      const handleResponse = (_event: any, shouldQuit: boolean) => {
+        ipcMain.removeListener('quit-confirm-response', handleResponse);
+        if (!confirmWindow.isDestroyed()) confirmWindow.destroy();
+
+        if (!shouldQuit) {
+          console.log('[Main] 사용자가 종료를 취소했습니다');
+          isConfirmDialogOpen = false;
+          return;
+        }
+
+        (async () => {
+          (globalThis as any).isQuitting = true;
+          console.log('[Main] 종료 절차 시작...');
+          if (automationRunning || AutomationService.isRunning()) {
+            AutomationService.requestCancel();
+            await AutomationService.closeAllSessions().catch(() => { });
+            automationRunning = false;
+            automation = null;
+          }
+          if (tray) { tray.destroy(); tray = null; }
+          app.quit();
+          setTimeout(() => process.exit(0), 10000);
+        })();
+      };
+
+      ipcMain.on('quit-confirm-response', handleResponse);
+      confirmWindow.on('closed', () => {
+        ipcMain.removeListener('quit-confirm-response', handleResponse);
+        isConfirmDialogOpen = false;
+      });
     });
 
     // ✅ [2026-04-03] 최소화(-) 버튼 = 일반 최소화 (작업표시줄에 남음)
