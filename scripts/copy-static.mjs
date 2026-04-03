@@ -255,6 +255,13 @@ try {
   // ✅ [2026-02-24] modules 디렉토리 인라인 (renderer.ts에서 추출된 대규모 모듈)
   const modulesDir = path.join(projectRoot, 'dist', 'renderer', 'modules');
   const modulesFiles = [
+    // ✅ [Phase 5B] renderer.ts에서 추출된 모듈 (의존성 순서: 유틸→DOM캐시→이미지→포스트→기능)
+    'rendererUtils.js',            // 5B-1: 이벤트리스너, DOM캐시, 디바운스, 버튼, 로깅
+    'unifiedDOMCache.js',          // 5B-2: UnifiedDOMCache 객체
+    'imageManagerCore.js',         // 5B-3: ImageManager + imageHistoryStack
+    'imageSyncService.js',         // 5B-4: 이미지 동기화 서비스
+    'costAndAutoGen.js',           // 5B-6: 비용 안전 + 자동 이미지 생성
+    'contentPreviewAndLibrary.js', // 5B-7: 이미지 라이브러리 + 탭 + 템플릿
     // ✅ [2026-02-26] renderer.ts에서 import하는 모든 모듈 완전 포함
     'promptTranslation.js',
     'paywallSystem.js',
