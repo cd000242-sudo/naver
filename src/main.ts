@@ -3291,12 +3291,13 @@ ipcMain.handle('automation:cancel', async () => {
   const check = await validateLicenseOnly();
   if (!check.valid) return check.response;
 
-  if (!automationRunning || !automation) {
-    return false;
-  }
-
-  // ✅ [리팩토링] AutomationService에도 취소 요청
+  // ✅ [2026-04-03 FIX] 항상 취소 요청 — AI 콘텐츠 생성/이미지 생성도 즉시 abort
+  // automationRunning이 false여도 generateStructuredContent가 돌고 있을 수 있음
   AutomationService.requestCancel();
+
+  if (!automationRunning || !automation) {
+    return true; // ✅ abort signal은 발동했으므로 true 반환
+  }
 
   await automation.cancel().catch(() => undefined);
   sendStatus({ success: false, cancelled: true, message: '사용자가 자동화를 취소했습니다.' });
@@ -3542,6 +3543,11 @@ ipcMain.handle(
 
       // ✅ [2026-02-23 FIX] 이미지 생성 전 이전 캐시 완전 초기화
       resetAllImageState();
+
+      // ✅ [2026-04-03 FIX] 이미지 생성 전 취소 체크
+      if (AutomationService.isCancelRequested()) {
+        return { success: false, message: '사용자가 작업을 취소했습니다.' };
+      }
 
       const images = await generateImages(options, apiKeys, onImageGenerated);
 
@@ -5838,13 +5844,25 @@ ipcMain.handle(
 
       console.log('[Main] 최소 글자수 설정:', { customMin, targetAge, minChars });
 
+      // ✅ [2026-04-03 FIX] 콘텐츠 생성 전 AbortController 생성 — 중지 시 즉시 abort
+      const genAbortController = AutomationService.createGeneralAbortController();
+      const genSignal = genAbortController.signal;
+
       // ✅ [Phase 3B] 네트워크/타임아웃 에러 시 자동 재시도 (최대 2회, exponential backoff)
       const content = await withRetry(
-        () => generateStructuredContent(source, { provider, minChars }),
+        () => {
+          // ✅ [2026-04-03] 매 시도마다 abort 체크
+          if (genSignal.aborted) throw new Error('사용자가 작업을 취소했습니다.');
+          return generateStructuredContent(source, { provider, minChars, signal: genSignal } as any);
+        },
         {
           maxRetries: 2,
           baseDelayMs: 3000,
-          shouldRetry: isRetryableError,
+          shouldRetry: (error) => {
+            // ✅ [2026-04-03] abort 에러는 재시도하지 않음
+            if (genSignal.aborted) return false;
+            return isRetryableError(error);
+          },
           onRetry: (error, attempt) => {
             console.log(`[Main] ⚠️ 콘텐츠 생성 재시도 (${attempt}/2): ${error.message}`);
           },

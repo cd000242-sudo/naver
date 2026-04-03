@@ -7269,7 +7269,9 @@ async function executeUnifiedAutomation(formData: any): Promise<void> {
     }
 
     // ✅ [2026-02-26 FIX] 실패 시에도 연속 발행 모드면 다음 글로 진행 (기존: 실패 시 멈춤)
-    if (isContinuousMode) {
+    // ✅ [2026-04-03 FIX] stopFullAutoPublish 체크 추가 — 중지 버튼 → cancelAutomation → 에러 발생 시
+    // isContinuousMode가 아직 true일 수 있는 경합 조건 방지
+    if (isContinuousMode && !(window as any).stopFullAutoPublish) {
       console.log('[Continuous] ⚠️ 발행 실패했지만 연속 발행 모드이므로 다음 글로 진행');
       const hasItemsV1 = continuousQueue.length > 0;
       const hasItemsV2 = continuousQueueV2.some(i => i.status === 'pending');
@@ -7292,11 +7294,12 @@ async function executeUnifiedAutomation(formData: any): Promise<void> {
     const hasItemsV1 = continuousQueue.length > 0;
     const hasItemsV2 = continuousQueueV2.some(i => i.status === 'pending');
 
-    if (isContinuousMode && hasItemsV1 && !hasItemsV2) {
+    // ✅ [2026-04-03 FIX] stopFullAutoPublish 추가 체크 — 경합 조건 방지
+    if (isContinuousMode && !(window as any).stopFullAutoPublish && hasItemsV1 && !hasItemsV2) {
       // ✅ V1 방식만 해당될 때만 scheduleNextPosting 호출
       console.log('[Continuous] V1 방식 다음 포스팅 예약 호출');
       scheduleNextPosting();
-    } else if (isContinuousMode && !hasItemsV1 && !hasItemsV2) {
+    } else if (isContinuousMode && !(window as any).stopFullAutoPublish && !hasItemsV1 && !hasItemsV2) {
       // ✅ 둘 다 남은 항목이 없으면 연속 발행 종료
       console.log('[Continuous] 연속 발행 완료 - 큐가 비어있음');
       stopContinuousMode('complete');

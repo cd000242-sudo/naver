@@ -64,6 +64,56 @@ class UserCancelledError extends Error {
   }
 }
 
+/**
+ * ✅ [2026-04-03 FIX] 중지 신호 감지 래퍼 — 장시간 await 중에도 즉시 중단
+ *
+ * 문제: generateContentFromUrl 등 AI API 호출은 최대 15분 걸림.
+ *       중지 버튼 눌러도 await가 완료될 때까지 루프가 못 빠져나옴.
+ * 해결: 500ms마다 중지 플래그를 폴링, 감지 즉시 UserCancelledError throw.
+ *       원본 Promise는 백그라운드에서 완료되지만 결과는 무시됨.
+ */
+function withStopCheck<T>(promise: Promise<T>): Promise<T> {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+
+    const interval = setInterval(() => {
+      if (!isContinuousMode || (window as any).stopFullAutoPublish) {
+        clearInterval(interval);
+        if (!settled) {
+          settled = true;
+          reject(new UserCancelledError());
+        }
+      }
+    }, 500);
+
+    promise.then(
+      (value) => { clearInterval(interval); if (!settled) { settled = true; resolve(value); } },
+      (error) => { clearInterval(interval); if (!settled) { settled = true; reject(error); } }
+    );
+  });
+}
+
+/**
+ * ✅ [2026-04-03 FIX] 중지 가능한 대기 — 500ms마다 중지 체크
+ *
+ * 문제: 재시도 대기(15초) 중 중지 버튼이 무시됨.
+ * 해결: 짧은 간격으로 체크하여 중지 시 즉시 resolve.
+ */
+function cancellableSleep(ms: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const start = Date.now();
+    const check = setInterval(() => {
+      if (!isContinuousMode || (window as any).stopFullAutoPublish) {
+        clearInterval(check);
+        resolve(true); // true = cancelled
+      } else if (Date.now() - start >= ms) {
+        clearInterval(check);
+        resolve(false); // false = completed normally
+      }
+    }, 500);
+  });
+}
+
 // ═══════════════════════════════════════════════════════════════════════
 // 🛡️ [2026-03-23] 끝판왕 캡차 방지 시스템 — 사용자 설정 존중 + 적응형 방어
 // ═══════════════════════════════════════════════════════════════════════
@@ -383,6 +433,14 @@ export function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): vo
   // ✅ [FIX] 중지 시 큐를 초기화하지 않음 - 대기 중인 항목은 유지
   // continuousQueue = [];
   // continuousQueueV2 = [];
+
+  // ✅ [2026-04-03 FIX] 전역 콘텐츠/이미지 상태 즉시 클리어
+  // withStopCheck로 루프는 빠져나오지만, 백그라운드 AI API 호출이 완료되면서
+  // currentStructuredContent 등을 다시 설정할 수 있음 → 중지 시 먼저 null로 밀어놓기
+  (window as any).currentStructuredContent = null;
+  currentStructuredContent = null;
+  (window as any).generatedImages = [];
+  (window as any).imageManagementGeneratedImages = [];
 
   // ✅ [FIX] 진행 중(processing)이던 항목을 'cancelled' 상태로 변경
   continuousQueueV2.forEach(item => {
@@ -3475,7 +3533,7 @@ async function waitWithInterrupt(seconds: number): Promise<boolean> {
   const start = Date.now();
   const ms = seconds * 1000;
   while (Date.now() - start < ms) {
-    if (!isContinuousMode) return false; // 중지됨
+    if (!isContinuousMode || (window as any).stopFullAutoPublish) return false; // 중지됨
 
     // 모달 로그 업데이트 (카운트다운 시각화)
     const remaining = Math.max(0, Math.ceil((ms - (Date.now() - start)) / 1000));
@@ -3655,6 +3713,7 @@ async function startContinuousPublishingV2(): Promise<void> {
       } catch (e) { /* DOM sync 실패 무시 */ }
 
       // 콘텐츠 생성
+      // ✅ [2026-04-03 FIX] withStopCheck 래퍼: 중지 버튼 즉시 반응 (AI API 15분 대기 중에도)
       if (item.type === 'url') {
         const customKeyword = item.customKeyword || '';
         // ✅ [2026-01-21] 다중 URL 지원: 메인 URL + additionalUrls 합치기
@@ -3663,11 +3722,11 @@ async function startContinuousPublishingV2(): Promise<void> {
           combinedUrls = [item.value, ...item.additionalUrls].join('\n');
           console.log(`[Continuous] 📚 다중 URL 사용: ${1 + item.additionalUrls.length}개 소스`);
         }
-        await generateContentFromUrl(combinedUrls, customKeyword, item.toneStyle, true, item.contentMode, item.category);
+        await withStopCheck(generateContentFromUrl(combinedUrls, customKeyword, item.toneStyle, true, item.contentMode, item.category));
       } else {
         // ✅ [2026-02-13] V2 큐: 키워드 제목 옵션 적용
         setKeywordTitleOptionsFromItem(item.value, item.keywordAsTitle, item.keywordTitlePrefix);
-        await generateContentFromKeywords(item.customTitle || '', item.value, item.toneStyle, true, item.contentMode, item.category);
+        await withStopCheck(generateContentFromKeywords(item.customTitle || '', item.value, item.toneStyle, true, item.contentMode, item.category));
       }
 
       if (!isContinuousMode) break;
@@ -3697,11 +3756,12 @@ async function startContinuousPublishingV2(): Promise<void> {
               (window as any).currentStructuredContent = null;
               currentStructuredContent = null;
               (window as any)._keywordTitleOptions = null;
+              // ✅ [2026-04-03 FIX] 재생성에도 withStopCheck 적용
               if (item.type === 'url') {
-                await generateContentFromUrl(item.value, expectedKeyword, item.toneStyle, true, item.contentMode, item.category);
+                await withStopCheck(generateContentFromUrl(item.value, expectedKeyword, item.toneStyle, true, item.contentMode, item.category));
               } else {
                 setKeywordTitleOptionsFromItem(item.value, item.keywordAsTitle, item.keywordTitlePrefix);
-                await generateContentFromKeywords(item.customTitle || '', item.value, item.toneStyle, true, item.contentMode, item.category);
+                await withStopCheck(generateContentFromKeywords(item.customTitle || '', item.value, item.toneStyle, true, item.contentMode, item.category));
               }
               const retried = (window as any).currentStructuredContent;
               if (retried && retried.selectedTitle) {
@@ -3956,7 +4016,8 @@ async function startContinuousPublishingV2(): Promise<void> {
           throw new UserCancelledError();
         }
 
-        await executeUnifiedAutomation(formData);
+        // ✅ [2026-04-03 FIX] withStopCheck 래퍼: 발행 중에도 중지 즉시 반응
+        await withStopCheck(executeUnifiedAutomation(formData));
       }
 
       item.status = 'completed';
@@ -4052,7 +4113,13 @@ async function startContinuousPublishingV2(): Promise<void> {
           percentage: (currentIdx / totalCount) * 100
         });
         item.status = 'pending';
-        await new Promise(r => setTimeout(r, 15000));
+        // ✅ [2026-04-03 FIX] cancellableSleep: 대기 중에도 중지 버튼 즉시 반응
+        const wasCancelled = await cancellableSleep(15000);
+        if (wasCancelled) {
+          item.status = 'cancelled' as any;
+          appendLog('⏹️ 재시도 대기 중 중지 요청 감지');
+          break;
+        }
         i--; // 같은 인덱스 재시도 (단, _retryCount로 최대 1회 보장)
         continue;
       }

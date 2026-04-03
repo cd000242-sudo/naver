@@ -29,6 +29,9 @@ class AutomationServiceImpl {
     // ✅ [2026-03-11] 즉시 취소용 AbortController
     private multiAccountAbortController: AbortController | null = null;
 
+    // ✅ [2026-04-03] 일반 자동화(콘텐츠 생성/이미지 생성) 즉시 취소용 AbortController
+    private generalAbortController: AbortController | null = null;
+
     // 다중계정 활성 자동화 목록
     private activeMultiAccountAutomations: IAutomationInstance[] = [];
 
@@ -121,6 +124,11 @@ class AutomationServiceImpl {
     startRunning(): void {
         this.running = true;
         this.cancelRequested = false;
+        // ✅ [2026-04-03] 새 작업 시작 시 AbortController 생성
+        // 단, 이미 활성 controller가 있으면 유지 (콘텐츠 생성 IPC에서 생성한 것)
+        if (!this.generalAbortController || this.generalAbortController.signal.aborted) {
+            this.generalAbortController = new AbortController();
+        }
     }
 
     /**
@@ -139,6 +147,8 @@ class AutomationServiceImpl {
         if (this.currentInstance) {
             this.currentInstance.cancel().catch(() => { });
         }
+        // ✅ [2026-04-03] 진행 중인 AI API 호출 즉시 중단
+        this.abortGeneralOperation();
     }
 
     /**
@@ -208,10 +218,37 @@ class AutomationServiceImpl {
     }
 
     /**
-     * ✅ [2026-03-11] 현재 AbortSignal 가져오기
+     * ✅ [2026-03-11] 현재 AbortSignal 가져오기 (다중계정)
      */
     getAbortSignal(): AbortSignal | null {
         return this.multiAccountAbortController?.signal || null;
+    }
+
+    /**
+     * ✅ [2026-04-03] 일반 자동화용 AbortSignal 가져오기
+     * generateStructuredContent, generateImages 등에서 사용
+     */
+    getGeneralAbortSignal(): AbortSignal | null {
+        return this.generalAbortController?.signal || null;
+    }
+
+    /**
+     * ✅ [2026-04-03] 일반 자동화 진행 중인 API 호출 즉시 중단
+     */
+    abortGeneralOperation(): void {
+        if (this.generalAbortController) {
+            this.generalAbortController.abort();
+            this.generalAbortController = null;
+        }
+    }
+
+    /**
+     * ✅ [2026-04-03] 일반 자동화용 AbortController 생성/리셋
+     * 콘텐츠 생성 IPC 핸들러에서 호출
+     */
+    createGeneralAbortController(): AbortController {
+        this.generalAbortController = new AbortController();
+        return this.generalAbortController;
     }
 
     /**

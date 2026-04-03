@@ -3690,6 +3690,7 @@ interface GenerateOptions {
   provider?: ContentGeneratorProvider;
   minChars?: number;
   contentMode?: 'seo' | 'homefeed'; // ✅ SEO 모드 또는 홈판 노출 최적화 모드
+  signal?: AbortSignal; // ✅ [2026-04-03] 중지 시 즉시 AI API 호출 abort
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -7980,13 +7981,25 @@ export async function generateStructuredContent(
 
   let extraInstruction = '';
   let lastFailReason = ''; // ✅ [2026-03-23] 실패 원인 추적
+  // ✅ [2026-04-03] signal 추출 — 중지 시 즉시 abort
+  const signal = options.signal;
+
   for (let attempt = 0; attempt <= MAX_ATTEMPTS; attempt += 1) {
     try {
+      // ✅ [2026-04-03] 매 시도 전 abort 체크
+      if (signal?.aborted) {
+        throw new Error('사용자가 콘텐츠 생성을 취소했습니다.');
+      }
+
       // 재시도 전 대기 (Rate Limit 회피)
       if (attempt > 0) {
         const delay = RETRY_DELAYS[Math.min(attempt, RETRY_DELAYS.length - 1)];
         console.log(`[ContentGenerator] 재시도 ${attempt}/${MAX_ATTEMPTS}: ${delay / 1000}초 대기 후 재개`);
         await new Promise(resolve => setTimeout(resolve, delay));
+        // ✅ [2026-04-03] 대기 후에도 abort 체크
+        if (signal?.aborted) {
+          throw new Error('사용자가 콘텐츠 생성을 취소했습니다.');
+        }
       }
 
       // 재시도 시에도 동일한 분량 요청 (일관성 유지)
@@ -8177,15 +8190,30 @@ export async function generateStructuredContent(
       console.log(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: ${provider} API 호출 중...`);
       try {
         const apiStart = Date.now();
+
+        // ✅ [2026-04-03 FIX] signal abort 시 즉시 reject하는 래퍼
+        const withAbortRace = <T>(promise: Promise<T>): Promise<T> => {
+          if (!signal) return promise;
+          if (signal.aborted) return Promise.reject(new Error('사용자가 콘텐츠 생성을 취소했습니다.'));
+          return new Promise<T>((resolve, reject) => {
+            const onAbort = () => reject(new Error('사용자가 콘텐츠 생성을 취소했습니다.'));
+            signal.addEventListener('abort', onAbort, { once: true });
+            promise.then(
+              (v) => { signal.removeEventListener('abort', onAbort); resolve(v); },
+              (e) => { signal.removeEventListener('abort', onAbort); reject(e); }
+            );
+          });
+        };
+
         if (provider === 'openai') {
-          rawResponse = await callOpenAI(systemPrompt, temperature, adjustedMinChars);
+          rawResponse = await withAbortRace(callOpenAI(systemPrompt, temperature, adjustedMinChars));
         } else if (provider === 'claude') {
-          rawResponse = await callClaude(systemPrompt, temperature, adjustedMinChars);
+          rawResponse = await withAbortRace(callClaude(systemPrompt, temperature, adjustedMinChars));
         } else if (provider === 'perplexity') {
           // ✅ [2026-01-25] Perplexity AI (Sonar) 실시간 검색 기반 콘텐츠 생성
-          rawResponse = await callPerplexity(systemPrompt, temperature, adjustedMinChars);
+          rawResponse = await withAbortRace(callPerplexity(systemPrompt, temperature, adjustedMinChars));
         } else {
-          rawResponse = await callGemini(systemPrompt, temperature, adjustedMinChars);
+          rawResponse = await withAbortRace(callGemini(systemPrompt, temperature, adjustedMinChars));
         }
         raw = rawResponse; // Assign rawResponse to raw for subsequent processing
         console.log(`[ContentGenerator] API 완료: ${provider} (${Date.now() - apiStart}ms)`);
