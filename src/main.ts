@@ -88,6 +88,13 @@ import { registerAllHandlers, registerAccountHandlers, registerAdminHandlers } f
 import { registerConfigHandlers } from './main/ipc/configHandlers.js';
 import { registerContentHandlers } from './main/ipc/contentHandlers.js';
 import { registerHeadingHandlers } from './main/ipc/headingHandlers.js';
+import { registerLicenseHandlers } from './main/ipc/authHandlers.js';
+import { registerQuotaHandlers } from './main/ipc/quotaHandlers.js';
+import { registerApiHandlers } from './main/ipc/apiHandlers.js';
+import { registerKeywordHandlers } from './main/ipc/keywordHandlers.js';
+import { registerProductHandlers } from './main/ipc/productHandlers.js';
+import { registerEngagementHandlers } from './main/ipc/engagementHandlers.js';
+import { registerImageTableHandlers } from './main/ipc/imageTableHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -4843,6 +4850,21 @@ registerAccountHandlers(
   }
 );
 
+// ✅ [FIX] Phase 5A에서 추출된 핸들러 등록 — 앱 시작 전(최상위)에서 등록해야 로그인 창에서 사용 가능
+const _earlyCtx = {
+  getMainWindow: () => mainWindow!,
+  getAutomationMap: () => automationMap,
+  notify: (title: string, body: string) => { /* no-op */ },
+  sendToRenderer: (channel: string, ...args: unknown[]) => mainWindow?.webContents.send(channel, ...args)
+};
+registerLicenseHandlers(_earlyCtx);
+registerQuotaHandlers(_earlyCtx);
+registerApiHandlers(_earlyCtx);
+registerKeywordHandlers();
+registerProductHandlers();
+registerEngagementHandlers();
+registerImageTableHandlers();
+
 // ✅ 네이버 블로그 카테고리 분석 (크롤링)
 ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: string; blogId?: string }) => {
   // ✅ 실행 직전 최신 설정 강제 동기화
@@ -8608,31 +8630,9 @@ app.whenReady().then(async () => {
       const { registerScheduleHandlers } = await import('./main/ipc/scheduleHandlers.js');
       registerScheduleHandlers({ smartScheduler });
 
-      // ✅ [FIX] Phase 5A에서 추출된 핸들러 등록 누락 수정
-      const { registerLicenseHandlers } = await import('./main/ipc/authHandlers.js');
-      registerLicenseHandlers(ctx);
+      // analyticsHandlers는 main.ts에 인라인으로 이미 등록됨
 
-      const { registerQuotaHandlers } = await import('./main/ipc/quotaHandlers.js');
-      registerQuotaHandlers(ctx);
-
-      const { registerApiHandlers } = await import('./main/ipc/apiHandlers.js');
-      registerApiHandlers(ctx);
-
-      const { registerKeywordHandlers } = await import('./main/ipc/keywordHandlers.js');
-      registerKeywordHandlers();
-
-      const { registerProductHandlers } = await import('./main/ipc/productHandlers.js');
-      registerProductHandlers();
-
-      const { registerEngagementHandlers } = await import('./main/ipc/engagementHandlers.js');
-      registerEngagementHandlers();
-
-      const { registerImageTableHandlers } = await import('./main/ipc/imageTableHandlers.js');
-      registerImageTableHandlers();
-
-      // analyticsHandlers는 main.ts에 인라인으로 이미 등록되어 있으므로 생략 (중복 방지)
-
-      debugLog('[Main] Image/Media/System/Misc/Scheduler/License/Quota/API/Keyword/Product/Engagement/ImageTable handlers registered');
+      debugLog('[Main] Image/Media/System/Misc/Scheduler handlers registered');
     } catch (e) {
       debugLog(`[Main] ⚠️ 핸들러 등록 실패: ${(e as Error).message}`);
     }
