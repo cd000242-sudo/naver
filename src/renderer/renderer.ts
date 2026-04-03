@@ -376,7 +376,8 @@ declare global {
 
 // 전역 진행상황 모달 인스턴스
 let progressModal: ProgressModal | null = null;
-let clockIntervalId: ReturnType<typeof setInterval> | null = null;
+// clockIntervalId는 dashboardUI.ts에서 선언됨 (전역 스코프 공유)
+declare let clockIntervalId: ReturnType<typeof setInterval> | null;
 
 function getProgressModal(): ProgressModal {
   if (!progressModal) {
