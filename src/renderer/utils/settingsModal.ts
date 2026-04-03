@@ -1152,29 +1152,22 @@ function setupProxySettings(): void {
         }
     };
 
-    // localStorage에서 초기값 로드 + 백엔드 동기화
+    // ✅ [2026-04-03 FIX] 앱 시작 시 항상 프록시 비활성화
+    // 프록시는 사용자가 매 세션마다 수동으로 켜야 함 (localStorage 이전 값 무시)
     const initProxy = async () => {
-        // 백엔드에서 현재 상태 조회
         try {
-            const result = await (window as any).api?.isProxyEnabled?.();
-            const savedLocal = localStorage.getItem('proxy_enabled');
-            // localStorage 값이 있으면 우선, 없으면 백엔드 값 사용
-            const enabled = savedLocal !== null ? savedLocal === 'true' : (result?.enabled ?? false);  // ✅ [2026-04-02] 기본값: 비활성화
-            
+            const enabled = false; // 항상 비활성화로 시작
+            localStorage.setItem('proxy_enabled', 'false');
+
             if (toggle) {
-                toggle.checked = enabled;
-                updateToggleVisual(enabled);
-                updateNavStatus(enabled);
-            }
-            // localStorage에 값이 없었으면 백엔드 값으로 초기화
-            if (savedLocal === null) {
-                localStorage.setItem('proxy_enabled', enabled ? 'true' : 'false');
+                toggle.checked = false;
+                updateToggleVisual(false);
+                updateNavStatus(false);
             }
             // 백엔드와 동기화
-            await (window as any).api?.setProxyEnabled?.(enabled);
+            await (window as any).api?.setProxyEnabled?.(false);
         } catch (err) {
             console.warn('[SettingsModal] 프록시 초기 상태 로드 실패:', err);
-            // 기본값: 비활성
             if (toggle) {
                 toggle.checked = false;
                 updateToggleVisual(false);
