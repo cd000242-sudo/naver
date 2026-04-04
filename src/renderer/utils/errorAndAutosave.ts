@@ -156,13 +156,19 @@ export function autosaveContent(data: AutosaveData): void {
         if (saved) {
             console.debug('[Autosave] 콘텐츠 임시 저장 완료:', new Date().toLocaleTimeString(), `(${Math.round(jsonString.length / 1024)}KB)`);
         } else {
-            // safeLocalStorageSetItem이 5단계 정리 후에도 실패 → 이미지 제거하고 최소한으로 재시도
+            // ✅ [2026-04-04 FIX] safeLocalStorageSetItem이 이미 2회 정리+재시도 완료 후 실패한 상태.
+            // 이미지 제거 최소 데이터로 1회만 추가 시도 (재귀 방지를 위해 retryCount=2로 시작)
             console.warn('[Autosave] ⚠️ 저장 실패, 이미지 제거 후 최소 저장 시도...');
-            const minimalJson = JSON.stringify({ ...data, timestamp: Date.now(), generatedImages: [] });
-            const retrySaved = safeLocalStorageSetItem(AUTOSAVE_KEY, minimalJson);
-            if (retrySaved) {
+            const minimalJson = JSON.stringify({
+                timestamp: Date.now(),
+                mode: data.mode,
+                structuredContent: data.structuredContent,
+                generatedImages: [],
+            });
+            try {
+                localStorage.setItem(AUTOSAVE_KEY, minimalJson);
                 console.log('[Autosave] ✅ 이미지 제외 최소 저장 성공');
-            } else {
+            } catch {
                 console.error('[Autosave] ❌ 최소 데이터도 저장 불가 — localStorage 심각한 용량 부족');
             }
         }
