@@ -2968,18 +2968,16 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
   // 블로그 자동화 실행 (향상된 재시도 로직 적용)
   const apiClient = EnhancedApiClient.getInstance();
 
-  // 진행률을 92%로 업데이트
-  setTimeout(() => {
-    showUnifiedProgress(92, '블로그 로그인 중...', '네이버 계정으로 로그인하고 있습니다.');
-    modal?.setProgress(70, '네이버 로그인 중...');
-  }, 1000);
-
   // ✅ 진행상황 모달 업데이트 - 발행 단계 시작
   modal?.setStep(4, 'active', '발행 중...');
   modal?.setProgress(75, '블로그 발행 중...');
 
-  // ✅ [2026-04-01 FIX] 진행률 95%를 IPC 호출 **전**에 표시
-  // 이전: apiClient.call 이후에 배치 → IPC가 freeze되면 95% 표시 자체가 실행 안 됨
+  // ✅ [2026-04-04 FIX] 진행률 단계적 업데이트 — setTimeout 순서를 IPC 호출 후 덮어쓰지 않도록 수정
+  // 이전: setTimeout(92%, 1초)가 즉시 설정한 95%를 되돌려 발행 중 92%에 멈춰 보이는 버그
+  showUnifiedProgress(92, '블로그 로그인 중...', '네이버 계정으로 로그인하고 있습니다.');
+  modal?.setProgress(70, '네이버 로그인 중...');
+
+  // ✅ [2026-04-04 FIX] 95% 표시를 IPC 호출 직전에 동기적으로 설정
   showUnifiedProgress(95, '콘텐츠 발행 중...', '네이버 블로그에 콘텐츠를 업로드하고 있습니다.');
 
   // ✅ [FIX-2] 블로그 발행 API 호출

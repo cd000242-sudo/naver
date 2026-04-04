@@ -45,6 +45,7 @@ interface ProcessedImage {
     alt?: string;
     caption?: string;
     originalIndex?: number;
+    headingIndex?: number; // ✅ [2026-04-04 FIX] 소제목 인덱스 보존
     isThumbnail: boolean;
     isIntro: boolean;
 }
@@ -298,6 +299,7 @@ export async function processImages(
                         alt: image.alt,
                         caption: image.caption,
                         originalIndex: image.originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
+                        headingIndex: (image as any).headingIndex, // ✅ [2026-04-04 FIX] 소제목 인덱스 보존
                         isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
                         isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
                     });
@@ -322,6 +324,7 @@ export async function processImages(
                 alt: image.alt,
                 caption: image.caption,
                 originalIndex: image.originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
+                headingIndex: (image as any).headingIndex, // ✅ [2026-04-04 FIX] 소제목 인덱스 보존
                 isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
                 isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
             });
@@ -353,13 +356,26 @@ export async function processImages(
                 alt: image.alt,
                 caption: image.caption,
                 originalIndex: image.originalIndex, // ✅ [2026-02-05] 원래 인덱스 보존
+                headingIndex: (image as any).headingIndex, // ✅ [2026-04-04 FIX] 소제목 인덱스 보존
                 isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
                 isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
             });
 
             sendLog(`✅ 이미지 복사: ${filename}`);
         } catch (error) {
-            sendLog(`⚠️ 이미지 처리 실패: ${image.filePath}`);
+            // ✅ [2026-04-04 FIX] 복사 실패 시 원본 경로를 그대로 사용 (이미지 누락 방지)
+            sendLog(`⚠️ 이미지 복사 실패: ${image.filePath} → 원본 경로로 폴백`);
+            processedImages.push({
+                heading: image.heading,
+                filePath: image.filePath!,
+                provider: image.provider,
+                alt: image.alt,
+                caption: image.caption,
+                originalIndex: image.originalIndex,
+                headingIndex: (image as any).headingIndex,
+                isThumbnail: image.isThumbnail || false,
+                isIntro: image.isIntro || false,
+            });
         }
     }
 
@@ -538,6 +554,7 @@ export async function runFullPostCycle(
 ): Promise<PostCycleResult> {
     const startTime = Date.now();
     let accountId: string | undefined;
+    let finalResult: PostCycleResult;
 
     try {
         // 1. 설정 동기화
@@ -613,7 +630,7 @@ export async function runFullPostCycle(
         const elapsed = Date.now() - startTime;
         sendLog(`⏱️ 총 소요 시간: ${(elapsed / 1000).toFixed(1)}초`);
 
-        return {
+        finalResult = {
             success: result.success,
             url: result.url,
             message: result.message,
@@ -623,9 +640,21 @@ export async function runFullPostCycle(
         const message = (error as Error).message || '알 수 없는 오류가 발생했습니다.';
         Logger.error('[BlogExecutor] 발행 사이클 오류', error as Error);
         sendStatus({ success: false, message });
+        // ✅ [2026-04-04 FIX] cleanup을 finally가 아닌 catch에서 비동기 실행
+        // finally에서 await cleanup()하면 cleanup 에러/행이 IPC 응답을 블록하여
+        // renderer가 92%에서 멈추는 간헐적 버그 발생
+        cleanup(payload, accountId).catch(e =>
+            Logger.error('[BlogExecutor] cleanup 오류 (무시됨)', e as Error)
+        );
         return { success: false, message };
-
-    } finally {
-        await cleanup(payload, accountId);
     }
+
+    // ✅ [2026-04-04 FIX] cleanup을 비동기로 분리 — IPC 응답을 즉시 반환
+    // 이전: finally { await cleanup() } → cleanup 행/에러 시 IPC 응답 블록 → renderer 92% 멈춤
+    // 수정: return 후 cleanup을 fire-and-forget으로 실행
+    cleanup(payload, accountId).catch(e =>
+        Logger.error('[BlogExecutor] cleanup 오류 (무시됨)', e as Error)
+    );
+
+    return finalResult;
 }
