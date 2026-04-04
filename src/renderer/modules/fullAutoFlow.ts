@@ -340,6 +340,18 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
       console.error('[FullAuto] ImageManager 초기화 실패:', clearErr);
     }
 
+    // ✅ [2026-04-04 FIX] 이전 글 제목이 UI 필드에 남아서 발행 시 재사용되는 버그 수정
+    // executeBlogPublishing이 unified-generated-title을 최우선으로 읽는데,
+    // 풀오토 흐름에서는 이 필드를 갱신하지 않아 이전 제목이 그대로 발행됨
+    // + formData.title도 초기화 — API 힌트 및 preferredTitle 3순위로 누출 방지
+    try {
+      const prevTitleInput = document.getElementById('unified-generated-title') as HTMLInputElement;
+      if (prevTitleInput) prevTitleInput.value = '';
+      const prevTitleInput2 = document.getElementById('unified-title') as HTMLInputElement;
+      if (prevTitleInput2) prevTitleInput2.value = '';
+    } catch { /* ignore */ }
+    formData.title = '';
+
     // ✅ 이미 생성된 콘텐츠가 있으면 재사용 (중복 생성 방지!)
     let structuredContent = formData.structuredContent;
 
@@ -411,6 +423,17 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
 
     await yieldToUI(); // UI 업데이트 허용
     await displayContentInAllTabs(structuredContent);
+
+    // ✅ [2026-04-04 FIX] 풀오토에서도 제목 필드 + formData 갱신 — 이전 글 제목 발행 방지
+    // displayContentInAllTabs는 미리보기만 업데이트하고 제목 input은 건드리지 않음
+    // formData.title도 갱신해야 executeBlogPublishing 3순위 폴백에서 이전 제목 누출 방지
+    const newTitle = structuredContent.selectedTitle || structuredContent.title || '';
+    if (newTitle && !/^https?:\/\//i.test(newTitle.trim())) {
+      const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement;
+      if (titleInput) titleInput.value = newTitle;
+      formData.title = newTitle;
+    }
+
     await yieldToUI();
 
     // ✅ 콘텐츠 저장 및 postId 생성
