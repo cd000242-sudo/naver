@@ -640,18 +640,18 @@ export async function runFullPostCycle(
         const message = (error as Error).message || '알 수 없는 오류가 발생했습니다.';
         Logger.error('[BlogExecutor] 발행 사이클 오류', error as Error);
         sendStatus({ success: false, message });
-        // ✅ [2026-04-04 FIX] cleanup을 finally가 아닌 catch에서 비동기 실행
-        // finally에서 await cleanup()하면 cleanup 에러/행이 IPC 응답을 블록하여
-        // renderer가 92%에서 멈추는 간헐적 버그 발생
+        // ✅ [2026-04-05 FIX] stopRunning을 즉시 호출 — 재실행 시 "이미 실행 중" 에러 방지
+        AutomationService.stopRunning();
         cleanup(payload, accountId).catch(e =>
             Logger.error('[BlogExecutor] cleanup 오류 (무시됨)', e as Error)
         );
         return { success: false, message };
     }
 
-    // ✅ [2026-04-04 FIX] cleanup을 비동기로 분리 — IPC 응답을 즉시 반환
-    // 이전: finally { await cleanup() } → cleanup 행/에러 시 IPC 응답 블록 → renderer 92% 멈춤
-    // 수정: return 후 cleanup을 fire-and-forget으로 실행
+    // ✅ [2026-04-05 FIX] stopRunning을 즉시 호출 후 cleanup은 비동기 분리
+    // 이전: cleanup 안에서만 stopRunning → fire-and-forget으로 변경 후
+    // 재실행 시 isRunning()이 아직 true → "이미 실행 중" 에러 발생
+    AutomationService.stopRunning();
     cleanup(payload, accountId).catch(e =>
         Logger.error('[BlogExecutor] cleanup 오류 (무시됨)', e as Error)
     );

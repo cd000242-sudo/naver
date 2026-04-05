@@ -3294,6 +3294,9 @@ ipcMain.handle('automation:cancel', async () => {
   // ✅ [2026-04-03 FIX] 항상 취소 요청 — AI 콘텐츠 생성/이미지 생성도 즉시 abort
   // automationRunning이 false여도 generateStructuredContent가 돌고 있을 수 있음
   AutomationService.requestCancel();
+  // ✅ [2026-04-06 FIX] 항상 stopRunning 호출 — 새 엔진 사용 시 automation=null이라
+  // 아래 early return에서 stopRunning이 호출되지 않아 재실행 시 "이미 실행 중" 에러 발생
+  AutomationService.stopRunning();
 
   if (!automationRunning || !automation) {
     return true; // ✅ abort signal은 발동했으므로 true 반환
@@ -3302,7 +3305,6 @@ ipcMain.handle('automation:cancel', async () => {
   await automation.cancel().catch(() => undefined);
   sendStatus({ success: false, cancelled: true, message: '사용자가 자동화를 취소했습니다.' });
   automationRunning = false;
-  AutomationService.stopRunning(); // ✅ 동기화
   automation = null;
   return true;
 });
