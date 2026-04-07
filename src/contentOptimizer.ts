@@ -322,7 +322,19 @@ export function optimizeContentForNaver(content: string, toneStyle: string = 'fr
   // 8. 애드포스트 최적화 (CTR 향상)
   result = optimizeForAdpost(result);
 
-  // 9. 최종 정리
+  // 9. ✅ [Phase 1-2] AuthGR 방어 (전문성 신호 + 출처 다양화 + 경험 표현)
+  try {
+    const { applyAuthGRDefense } = require('./authgrDefense');
+    const authgrResult = applyAuthGRDefense(result, detectCategory(toneStyle));
+    result = authgrResult.content;
+    if (!silent && authgrResult.totalModifications > 0) {
+      console.log(`[ContentOptimizer] 🛡️ AuthGR 방어: risk ${authgrResult.fingerprint.overallRisk}, +${authgrResult.totalModifications} 수정`);
+    }
+  } catch (e) {
+    // AuthGR 모듈 로드 실패 시 무시 (기존 동작 유지)
+  }
+
+  // 10. 최종 정리
   result = finalCleanup(result);
 
   return result;
@@ -591,6 +603,25 @@ function addHumanExpressions(text: string, toneStyle: string = 'professional', s
     console.log(`[ContentOptimizer] 인간적 표현 ${added}개 추가 (톤: ${mappedTone})`);
   }
   return optimized.join(' ');
+}
+
+/**
+ * ✅ [Phase 1-2] 톤스타일 → AuthGR 카테고리 매핑
+ */
+function detectCategory(toneStyle: string): string {
+  const mapping: Record<string, string> = {
+    'expert_review': 'tech',
+    'calm_info': 'health',
+    'mom_cafe': 'lifestyle',
+    'community_fan': 'general',
+    'storyteller': 'travel',
+    'professional': 'tech',
+    'formal': 'general',
+    'friendly': 'lifestyle',
+    'casual': 'general',
+    'humorous': 'general',
+  };
+  return mapping[toneStyle] ?? 'general';
 }
 
 /**

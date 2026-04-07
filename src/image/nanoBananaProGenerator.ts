@@ -927,7 +927,7 @@ async function generateSingleImageWithGemini(
   // ✅ [2026-02-20] 503 폴백 타이머 체크 (10분 후 원래 모델 복구 시도) — 30분→10분 단축
   if (global503FallbackActive) {
     const elapsed = Date.now() - global503FallbackStartTime;
-    const RECOVERY_TIMEOUT = 10 * 60 * 1000; // ✅ [2026-02-20] 10분 (최근 503은 빠르게 해결되는 경향)
+    const RECOVERY_TIMEOUT = 3 * 60 * 1000; // ✅ [2026-04-06] 3분으로 단축 (나노바나나 로테이션으로 빠른 복구)
     if (elapsed > RECOVERY_TIMEOUT) {
       console.log(`[NanoBananaPro] 🔄 폴백 ${Math.round(elapsed / 60000)}분 경과 → 원래 모델 복구 시도`);
       global503FallbackActive = false;
@@ -938,9 +938,10 @@ async function generateSingleImageWithGemini(
     }
   }
 
-  let imageRatio = '1:1'; // 기본값 (try 블록에서 재설정) — 루프 밖으로 이동 (Imagen 4 안전망 접근용)
+  let imageRatio = '1:1'; // 기본값 (try 블록에서 재설정) — 루프 밖으로 이동 (안전망 접근용)
   let prompt = '';        // 기본값 (try 블록에서 재설정) — 루프 밖으로 이동
-  let lastApiKey = apiKey; // ✅ [2026-02-21] 마지막 사용 API 키 추적 (Imagen 4 안전망용)
+  let lastApiKey = apiKey; // ✅ [2026-02-21] 마지막 사용 API 키 추적 (안전망용)
+  let lastSelectedModel = ''; // ✅ [2026-04-06] 마지막 선택 모델 추적 (최종 안전망 로테이션용)
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
@@ -1181,6 +1182,7 @@ async function generateSingleImageWithGemini(
         selectedResolution = configForSub.resolution;
         console.log(`[NanoBananaPro] 📷 서브 이미지: ${userSubModel} (${selectedModel}, ${selectedResolution})`);
       }
+      lastSelectedModel = selectedModel; // ✅ [2026-04-06] 최종 안전망용 추적
 
 
 
@@ -1193,12 +1195,13 @@ async function generateSingleImageWithGemini(
       if (global503FallbackActive) {
         const effectiveRatio = isShoppingConnect ? '1:1' : imageRatio;
 
-        // 폴백 체인 정의 (우선순위 순서)
+        // ✅ [2026-04-06] 폴백 체인: 나노바나나 계열만 로테이션 (Imagen 4 제거)
+        // Imagen 4는 서버 과부하 시 동일하게 실패하므로, Gemini 모델 간 로테이션이 더 안정적
         const FALLBACK_CHAIN = [
           { name: '나노바나나2', model: 'gemini-3.1-flash-image-preview', type: 'gemini' },
           { name: '나노바나나프로', model: 'gemini-3-pro-image-preview', type: 'gemini' },
-          { name: '이미진4', model: 'imagen-4.0-generate-001', type: 'imagen' },
           { name: '나노바나나', model: 'gemini-2.5-flash-image', type: 'gemini' },
+          { name: '나노바나나(무료)', model: 'gemini-2.0-flash-exp-image-generation', type: 'gemini' },
         ];
 
         // 현재 선택된 모델은 이미 실패했으므로 건너뜀
@@ -1551,8 +1554,8 @@ async function generateSingleImageWithGemini(
           if (nextKey) {
             // 새 키로 전환 성공 → 짧은 대기 후 즉시 재시도
             apiKey = nextKey;
-            waitTime = 2000; // 2초만 대기 (키 전환이므로 긴 대기 불필요)
-            console.log(`[NanoBananaPro] 🔄 429 감지 → 새 API 키로 전환 완료, 2초 후 재시도`);
+            waitTime = 8000; // ✅ [2026-04-06] 8초 대기 (Gemini가 새 키를 인식할 시간 확보)
+            console.log(`[NanoBananaPro] 🔄 429 감지 → 새 API 키로 전환 완료, 8초 후 재시도`);
             sendImageLog(`🔄 할당량 초과 → 다른 API 키로 전환하여 재시도합니다...`);
           } else {
             // 모든 키 소진 → 긴 대기
@@ -1572,52 +1575,45 @@ async function generateSingleImageWithGemini(
         global503Count = (global503Count || 0) + 1;
         console.log(`[NanoBananaPro] ⚠️ 서버 오류(${statusCode}) 감지 - 연속 ${consecutive503Count}회 (전체 ${global503Count}회)`);
 
-        // ✅ [2026-03-01] 1회라도 발생 → 즉시 4단계 폴백 체인 활성화
+        // ✅ [2026-04-06] 1회라도 발생 → 즉시 나노바나나 로테이션 폴백 활성화
         if (consecutive503Count >= 1) {
-          console.log(`[NanoBananaPro] 🔄 에러 ${statusCode} (${consecutive503Count}회 연속) → 4단계 폴백 체인 활성화`);
+          console.log(`[NanoBananaPro] 🔄 에러 ${statusCode} (${consecutive503Count}회 연속) → 나노바나나 로테이션 폴백 활성화`);
           global503FallbackActive = true;
           global503FallbackStartTime = Date.now();
 
-          // Imagen 4로 이미지 생성 시도 (텍스트 프롬프트만 사용)
-          const imagen4Result = await generateImageWithImagen4(
-            prompt,
-            apiKey || '',
-            isShoppingConnect ? '1:1' : imageRatio,
-            signal
-          );
+          // 나노바나나 계열 모델 로테이션 (현재 모델 제외)
+          const NANO_ROTATION = [
+            { name: '나노바나나2', model: 'gemini-3.1-flash-image-preview' },
+            { name: '나노바나나프로', model: 'gemini-3-pro-image-preview' },
+            { name: '나노바나나', model: 'gemini-2.5-flash-image' },
+            { name: '나노바나나(무료)', model: 'gemini-2.0-flash-exp-image-generation' },
+          ].filter(m => m.model !== lastSelectedModel);
 
-          if (imagen4Result) {
-            // Imagen 4 성공 → 바로 파일 저장 및 반환
-            let finalBuffer = imagen4Result.buffer;
-            const extension = imagen4Result.mimeType.includes('jpeg') ? 'jpg' : 'png';
-
-            // 해상도 최적화 (top-level sharp import 사용)
-            const metadata = await sharp(finalBuffer).metadata();
-            if (metadata.width && metadata.width > 2048) {
-              finalBuffer = await sharp(finalBuffer).resize(2048, null, { withoutEnlargement: true }).toBuffer();
+          let rotationSuccess = false;
+          for (const fallbackModel of NANO_ROTATION) {
+            console.log(`[NanoBananaPro] 🔄 ${fallbackModel.name} (${fallbackModel.model}) 즉시 시도...`);
+            try {
+              // 8초 대기 후 다른 모델로 시도 (같은 서버 과부하 방지)
+              await new Promise(resolve => setTimeout(resolve, 8000));
+              // 다음 재시도에서 이 모델을 사용하도록 추적
+              lastSelectedModel = fallbackModel.model;
+              rotationSuccess = true;
+              console.log(`[NanoBananaPro] 🔄 → ${fallbackModel.name}으로 전환, 재시도 진행`);
+              sendImageLog(`🔄 서버 과부하 → ${fallbackModel.name}으로 전환하여 재시도합니다...`);
+              break;
+            } catch (rotErr: any) {
+              console.warn(`[NanoBananaPro] ⚠️ ${fallbackModel.name} 전환 실패: ${rotErr?.message}`);
             }
-
-            const savedResult = await writeImageFile(finalBuffer, extension, item.heading, postTitle, postId);
-            console.log(`[NanoBananaPro] ✅ Imagen 4 폴백 성공! (${Math.round(finalBuffer.length / 1024)}KB)`);
-            trackApiUsage('gemini', { images: 1, model: 'imagen-4.0-generate-001' });
-
-            // 503 카운터 부분 리셋 (폴백 상태 유지, 30분 후 원래 모델 복구)
-            consecutive503Count = 0;
-
-            return {
-              heading: item.heading,
-              filePath: savedResult.savedToLocal || savedResult.filePath,
-              provider: 'imagen-4-fallback',  // ✅ 실제 사용 모델 표시 (디버깅용)
-              previewDataUrl: savedResult.previewDataUrl,
-              savedToLocal: savedResult.savedToLocal,
-              originalIndex: (item as any).originalIndex,
-            };
-          } else {
-            // Imagen 4도 실패 → 대기 후 재시도
-            console.error(`[NanoBananaPro] ❌ Imagen 4 폴백도 실패 → 계속 재시도`);
-            const baseWait = 10000;
-            waitTime = baseWait + (Math.random() * 5000);
           }
+
+          if (!rotationSuccess) {
+            // 모든 로테이션 실패 → 대기 후 원래 모델 재시도
+            console.error(`[NanoBananaPro] ❌ 모든 나노바나나 모델 전환 실패 → 대기 후 재시도`);
+            waitTime = 10000 + (Math.random() * 5000);
+          } else {
+            waitTime = 2000; // 모델 전환 성공 → 짧은 대기
+          }
+          consecutive503Count = 0;
         }
       } else {
         consecutive503Count = 0;  // 다른 에러(인증/타임아웃 등)는 503 카운트 리셋
@@ -1628,53 +1624,88 @@ async function generateSingleImageWithGemini(
     }
   }
 
-  // ===== 🔥 [2026-02-21] 최종 안전망: Imagen 4 무조건 폴백 (100% 생성 보장) =====
-  // Gemini 모든 재시도 실패 후 → Imagen 4로 최종 시도
-  console.log(`[NanoBananaPro] 🛡️ Gemini 모든 재시도 실패 → Imagen 4 최종 안전망 시도`);
-  try {
-    const finalFallbackResult = await generateImageWithImagen4(
-      prompt || item.heading,
-      lastApiKey || apiKey || '',
-      isShoppingConnect ? '1:1' : imageRatio,
-      signal
-    );
+  // ===== 🔥 [2026-04-06] 최종 안전망: 나노바나나 계열 전체 로테이션 =====
+  // 선택 모델 재시도 실패 후 → 다른 나노바나나 모델을 순차 시도
+  const FINAL_ROTATION = [
+    { name: '나노바나나2', model: 'gemini-3.1-flash-image-preview' },
+    { name: '나노바나나프로', model: 'gemini-3-pro-image-preview' },
+    { name: '나노바나나', model: 'gemini-2.5-flash-image' },
+    { name: '나노바나나(무료)', model: 'gemini-2.0-flash-exp-image-generation' },
+  ].filter(m => m.model !== lastSelectedModel); // 이미 실패한 모델 제외
 
-    if (finalFallbackResult) {
-      let finalBuffer = finalFallbackResult.buffer;
-      const extension = finalFallbackResult.mimeType.includes('jpeg') ? 'jpg' : 'png';
+  console.log(`[NanoBananaPro] 🛡️ 최종 안전망: ${FINAL_ROTATION.length}개 나노바나나 모델 순차 시도 (실패 모델: ${lastSelectedModel})`);
 
-      // 해상도 최적화
-      const metadata = await sharp(finalBuffer).metadata();
-      if (metadata.width && metadata.width > 2048) {
-        finalBuffer = await sharp(finalBuffer).resize(2048, null, { withoutEnlargement: true }).toBuffer();
+  for (const fallback of FINAL_ROTATION) {
+    try {
+      console.log(`[NanoBananaPro] 🛡️ 최종 안전망 시도: ${fallback.name} (${fallback.model})`);
+      sendImageLog(`🛡️ 최종 안전망: ${fallback.name}으로 이미지 생성 시도...`);
+
+      // 8초 대기 후 다른 모델 시도 (서버 과부하 분산)
+      await new Promise(resolve => setTimeout(resolve, 8000));
+
+      await geminiRpmThrottler.throttle();
+      const effectiveKey = lastApiKey || apiKey || '';
+      const effectiveRatio = isShoppingConnect ? '1:1' : imageRatio;
+
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${fallback.model}:generateContent?key=${effectiveKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt || item.heading }] }],
+            generationConfig: {
+              responseModalities: ['TEXT', 'IMAGE'],
+              temperature: 1.0,
+            },
+          }),
+          signal: signal || (AbortSignal as any).timeout?.(90000),
+        },
+      );
+      geminiRpmThrottler.recordCall();
+
+      if (!response.ok) {
+        console.warn(`[NanoBananaPro] ⚠️ ${fallback.name} 최종 안전망 HTTP ${response.status} → 다음 모델`);
+        continue;
       }
 
-      // 썸네일 크롭
-      if (isThumbnail) finalBuffer = await cropThumbnail(finalBuffer, extension);
+      const data = await response.json();
+      const candidates = data?.candidates;
+      if (!candidates?.[0]?.content?.parts) continue;
 
-      const savedResult = await writeImageFile(finalBuffer, extension, item.heading, postTitle, postId);
-      console.log(`[NanoBananaPro] ✅ Imagen 4 최종 안전망 성공! (${Math.round(finalBuffer.length / 1024)}KB)`);
-      trackApiUsage('gemini', { images: 1, model: 'imagen-4.0-generate-001' });
+      for (const part of candidates[0].content.parts) {
+        if (part.inlineData?.mimeType?.startsWith('image/')) {
+          let finalBuffer: Buffer = Buffer.from(part.inlineData.data, 'base64');
+          const extension = part.inlineData.mimeType.includes('jpeg') ? 'jpg' : 'png';
 
-      return {
-        heading: item.heading,
-        filePath: savedResult.savedToLocal || savedResult.filePath,
-        provider: 'imagen-4-fallback' as any,
-        previewDataUrl: savedResult.previewDataUrl,
-        savedToLocal: savedResult.savedToLocal,
-        originalIndex: (item as any).originalIndex,
-      };
+          const metadata = await sharp(finalBuffer).metadata();
+          if (metadata.width && metadata.width > 2048) {
+            finalBuffer = await sharp(finalBuffer).resize(2048, null, { withoutEnlargement: true }).toBuffer() as Buffer;
+          }
+          if (isThumbnail) finalBuffer = await cropThumbnail(finalBuffer, extension);
+
+          const savedResult = await writeImageFile(finalBuffer, extension, item.heading, postTitle, postId);
+          console.log(`[NanoBananaPro] ✅ ${fallback.name} 최종 안전망 성공! (${Math.round(finalBuffer.length / 1024)}KB)`);
+          trackApiUsage('gemini', { images: 1, model: fallback.model });
+
+          return {
+            heading: item.heading,
+            filePath: savedResult.savedToLocal || savedResult.filePath,
+            provider: `${fallback.model}-final-fallback` as any,
+            previewDataUrl: savedResult.previewDataUrl,
+            savedToLocal: savedResult.savedToLocal,
+            originalIndex: (item as any).originalIndex,
+          };
+        }
+      }
+      console.warn(`[NanoBananaPro] ⚠️ ${fallback.name} 최종 안전망: 이미지 파트 없음 → 다음 모델`);
+    } catch (fallbackErr: any) {
+      console.error(`[NanoBananaPro] ❌ ${fallback.name} 최종 안전망 실패:`, fallbackErr?.message);
     }
-  } catch (imagen4Err: any) {
-    console.error(`[NanoBananaPro] ❌ Imagen 4 최종 안전망도 실패:`, imagen4Err?.message || imagen4Err);
-
-    // ✅ [2026-03-09 FIX] 최종 실패 시 구체적인 에러 메시지 제공
-    const lastErrorMsg = getImageErrorMessage(imagen4Err || { message: 'Gemini + Imagen 4 모두 실패' });
-    throw new Error(`[Gemini] ${lastErrorMsg}`);
   }
 
-  // Imagen 4 응답이 null (이미지 없음)인 경우
-  throw new Error(`[Gemini] ❌ 이미지 생성에 실패했습니다. Gemini + Imagen 4 모두 결과를 반환하지 않았습니다. API 키와 네트워크를 확인해주세요.`);
+  // 모든 나노바나나 모델 실패
+  throw new Error(`[Gemini] ❌ 이미지 생성에 실패했습니다. 나노바나나 모든 모델(${lastSelectedModel} + ${FINAL_ROTATION.map(f => f.name).join(', ')})이 응답하지 않았습니다. API 키와 네트워크를 확인해주세요.`);
 }
 
 /**

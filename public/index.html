@@ -1475,6 +1475,40 @@
                                 생성</button>
                         </div>
 
+                        <!-- 공정위 문구 (FTC 공시) — v2 프리셋 + 직접 입력 -->
+                        <div id="ftc-disclosure-section" style="margin-top: 1rem; padding: 1rem; background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: var(--radius-md); transition: border-color 0.2s;">
+                            <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none; margin-bottom: 0.75rem;">
+                                <input type="checkbox" id="unified-ftc-disclosure"
+                                    style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary);">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; color: var(--text-strong);">⚖️ 공정위 문구 삽입</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">글 상단에 제휴/광고 공시 문구를 자동 삽입합니다</div>
+                                </div>
+                                <span id="ftc-status-badge" style="display: none; padding: 2px 8px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; background: rgba(34,197,94,0.15); color: #16a34a;">ON</span>
+                            </label>
+                            <!-- 프리셋 선택 -->
+                            <div id="ftc-options-panel" style="display: none;">
+                                <div style="margin-bottom: 0.5rem;">
+                                    <label style="font-size: 0.8rem; font-weight: 500; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">프리셋 선택</label>
+                                    <select id="unified-ftc-preset" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.85rem; background: var(--bg-primary); cursor: pointer;">
+                                        <option value="affiliate">제휴마케팅 (쇼핑커넥트)</option>
+                                        <option value="experience">체험단 (제품 제공)</option>
+                                        <option value="sponsored">원고료 (광고)</option>
+                                        <option value="collab">협찬 (업체 협찬)</option>
+                                        <option value="custom">직접 입력</option>
+                                    </select>
+                                </div>
+                                <!-- 프리셋 미리보기 / 직접 입력 -->
+                                <textarea id="unified-ftc-text"
+                                    placeholder="공정위 문구를 직접 입력하세요"
+                                    rows="2"
+                                    style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.85rem; background: var(--bg-primary); resize: vertical;">이 포스팅은 제휴마케팅이 포함된 광고로 일정 커미션을 지급 받을 수 있습니다.</textarea>
+                                <div style="margin-top: 0.4rem; display: flex; justify-content: flex-end;">
+                                    <button type="button" id="ftc-reset-btn" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: none; border: 1px solid var(--border-light); border-radius: var(--radius-sm); cursor: pointer; color: var(--text-muted);">기본값 복원</button>
+                                </div>
+                            </div>
+                        </div>
+
                         <div id="cta-preview"
                             style="margin-top: 0.75rem; padding: 0.75rem; background: var(--bg-primary); border: 1px dashed var(--border-light); border-radius: var(--radius-sm); display: none;">
                             <div id="cta-preview-text" style="margin: 0; text-align: center;"></div>

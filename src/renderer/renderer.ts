@@ -5255,6 +5255,106 @@ URL: ${firstUrl}
     });
   }
 
+  // ✅ [2026-04-06 v2] 공정위 문구 — 프리셋 + 직접 입력 + 쇼커 자동 연동
+  {
+    const ftcCheckbox = document.getElementById('unified-ftc-disclosure') as HTMLInputElement;
+    const ftcTextarea = document.getElementById('unified-ftc-text') as HTMLTextAreaElement;
+    const ftcPreset = document.getElementById('unified-ftc-preset') as HTMLSelectElement;
+    const ftcPanel = document.getElementById('ftc-options-panel') as HTMLDivElement;
+    const ftcSection = document.getElementById('ftc-disclosure-section') as HTMLDivElement;
+    const ftcBadge = document.getElementById('ftc-status-badge') as HTMLSpanElement;
+    const ftcResetBtn = document.getElementById('ftc-reset-btn') as HTMLButtonElement;
+
+    // 프리셋 사전
+    const FTC_PRESETS: Record<string, string> = {
+      affiliate: '이 포스팅은 제휴마케팅이 포함된 광고로 일정 커미션을 지급 받을 수 있습니다.',
+      experience: '이 포스팅은 업체로부터 제품을 무상으로 제공받아 솔직하게 작성한 후기입니다.',
+      sponsored: '이 포스팅은 소정의 원고료를 지급받아 작성된 광고입니다.',
+      collab: '이 포스팅은 해당 업체의 협찬을 받아 작성되었습니다.',
+      custom: '',
+    };
+
+    if (ftcCheckbox && ftcTextarea && ftcPreset && ftcPanel) {
+      // localStorage에서 복원
+      const savedEnabled = localStorage.getItem('ftcDisclosureEnabled') === 'true';
+      const savedText = localStorage.getItem('ftcDisclosureText') || '';
+      const savedPreset = localStorage.getItem('ftcDisclosurePreset') || 'affiliate';
+
+      ftcCheckbox.checked = savedEnabled;
+      ftcPanel.style.display = savedEnabled ? 'block' : 'none';
+      ftcPreset.value = savedPreset;
+      ftcTextarea.value = savedText || FTC_PRESETS[savedPreset] || FTC_PRESETS.affiliate;
+      // custom이 아니면 textarea readonly
+      ftcTextarea.readOnly = savedPreset !== 'custom';
+      ftcTextarea.style.opacity = savedPreset !== 'custom' ? '0.7' : '1';
+
+      // ON/OFF 뱃지
+      const updateBadge = () => {
+        if (ftcBadge) {
+          ftcBadge.style.display = ftcCheckbox.checked ? 'inline-block' : 'none';
+        }
+        if (ftcSection) {
+          ftcSection.style.borderColor = ftcCheckbox.checked
+            ? 'rgba(34, 197, 94, 0.5)' : 'rgba(59, 130, 246, 0.2)';
+        }
+      };
+      updateBadge();
+
+      // 체크박스 토글
+      ftcCheckbox.addEventListener('change', () => {
+        ftcPanel.style.display = ftcCheckbox.checked ? 'block' : 'none';
+        localStorage.setItem('ftcDisclosureEnabled', String(ftcCheckbox.checked));
+        updateBadge();
+      });
+
+      // 프리셋 변경
+      ftcPreset.addEventListener('change', () => {
+        const preset = ftcPreset.value;
+        localStorage.setItem('ftcDisclosurePreset', preset);
+        if (preset !== 'custom') {
+          ftcTextarea.value = FTC_PRESETS[preset] || '';
+          ftcTextarea.readOnly = true;
+          ftcTextarea.style.opacity = '0.7';
+        } else {
+          ftcTextarea.readOnly = false;
+          ftcTextarea.style.opacity = '1';
+          ftcTextarea.focus();
+        }
+        localStorage.setItem('ftcDisclosureText', ftcTextarea.value);
+      });
+
+      // 직접 입력 시 저장
+      ftcTextarea.addEventListener('input', () => {
+        localStorage.setItem('ftcDisclosureText', ftcTextarea.value);
+      });
+
+      // 기본값 복원 버튼
+      ftcResetBtn?.addEventListener('click', () => {
+        const currentPreset = ftcPreset.value;
+        const defaultText = FTC_PRESETS[currentPreset] || FTC_PRESETS.affiliate;
+        ftcTextarea.value = defaultText;
+        localStorage.setItem('ftcDisclosureText', defaultText);
+      });
+
+      // ✅ 쇼핑커넥트 모드 자동 연동: affiliate 모드 선택 시 자동 ON
+      const contentModeSelect = document.getElementById('unified-content-mode') as HTMLSelectElement;
+      contentModeSelect?.addEventListener('change', () => {
+        if (contentModeSelect.value === 'affiliate' && !ftcCheckbox.checked) {
+          ftcCheckbox.checked = true;
+          ftcPanel.style.display = 'block';
+          ftcPreset.value = 'affiliate';
+          ftcTextarea.value = FTC_PRESETS.affiliate;
+          ftcTextarea.readOnly = true;
+          ftcTextarea.style.opacity = '0.7';
+          localStorage.setItem('ftcDisclosureEnabled', 'true');
+          localStorage.setItem('ftcDisclosurePreset', 'affiliate');
+          localStorage.setItem('ftcDisclosureText', FTC_PRESETS.affiliate);
+          updateBadge();
+        }
+      });
+    }
+  }
+
   // ✅ 중지 버튼 초기화
   initStopButton();
 

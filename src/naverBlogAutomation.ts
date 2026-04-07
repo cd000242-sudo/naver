@@ -25,6 +25,14 @@ import * as imageHelpers from './automation/imageHelpers';
 import * as publishHelpers from './automation/publishHelpers';
 import * as editorHelpers from './automation/editorHelpers';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
+import {
+  SELECTORS,
+  findElement,
+  findAllElements,
+  waitForElement,
+  getAllSelectors,
+  getSelectorStrings,
+} from './automation/selectors';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords } from './automation/typingUtils.js';
 
@@ -39,7 +47,7 @@ async function safeKeyboardType(
   await page.keyboard.type(text, options);
   // 자동완성 팝업이 실제로 보이는 경우에만 Escape
   const hasPopup = await page.evaluate(() => {
-    const popup = document.querySelector('.se-popup, .se-autocomplete-layer, .se-sticker-layer, [class*="autocomplete"], [class*="suggest"]');
+    const popup = document.querySelector('.se-popup, .se-autocomplete-layer, .se-sticker-layer, [class*="autocomplete"], [class*="suggest"]'); /* allPopups + autocompleteLayer */
     return popup !== null && (popup as HTMLElement).offsetParent !== null;
   }).catch(() => false);
   if (hasPopup) {
@@ -280,29 +288,10 @@ export class NaverBlogAutomation {
     'profiles'
   );
 
-  // 셀렉터 상수
-  private readonly PUBLISH_BUTTON_SELECTORS = [
-    'button.publish_btn__m9KHH[data-click-area="tpb.publish"]',
-    'button.publish_btn__m9KHH',
-    'button[data-click-area="tpb.publish"]',
-  ];
-
-  private readonly CONFIRM_PUBLISH_SELECTORS = [
-    'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"]',
-    'button[data-testid="seOnePublishBtn"]',
-    'button[data-click-area="tpb*i.publish"]',
-    'button.confirm_btn__WEaBq',
-    // ✅ [2026-03-05] 네이버 CSS 모듈 해시 변경 대응 — 와일드카드 패턴
-    'button[class*="confirm_btn"][data-testid="seOnePublishBtn"]',
-    'button[class*="confirm_btn"]',
-  ];
-
-  private readonly LOGIN_BUTTON_SELECTORS = [
-    '#log\\.login',
-    'button[type="submit"].btn_login',
-    'button.btn_login',
-    'button[type="submit"]',
-  ];
+  // ✅ [Phase 1-1] 셀렉터 레지스트리에서 가져온 상수 (하위 호환)
+  private readonly PUBLISH_BUTTON_SELECTORS = getAllSelectors(SELECTORS.publish.publishButton);
+  private readonly CONFIRM_PUBLISH_SELECTORS = getAllSelectors(SELECTORS.publish.confirmPublishButton);
+  private readonly LOGIN_BUTTON_SELECTORS = getAllSelectors(SELECTORS.login.loginButton);
 
   // Delay 상수
   private readonly DELAYS = {
@@ -652,8 +641,8 @@ export class NaverBlogAutomation {
         .evaluate(() => {
           try {
             const el =
-              (document.querySelector('.se-section-text, .se-main-container .se-editing-area, .se-editing-area, .se-component-content') as HTMLElement) ||
-              (document.querySelector('[contenteditable="true"]') as HTMLElement) ||
+              (document.querySelector('.se-section-text, .se-main-container .se-editing-area, .se-editing-area, .se-component-content') as HTMLElement) /* bodyFocusable */ ||
+              (document.querySelector('[contenteditable="true"]') as HTMLElement) /* contentEditable fallback */ ||
               (document.activeElement as HTMLElement | null);
             if (el && typeof el.focus === 'function') {
               el.focus();
@@ -664,12 +653,8 @@ export class NaverBlogAutomation {
         })
         .catch(() => undefined);
 
-      const selectors = [
-        'button[data-name="bold"]',
-        'button.se-toolbar-button[data-command="bold"]',
-        'button[aria-label*="굵게"]',
-        'button[title*="굵게"]',
-      ];
+      // ✅ [Phase 1-1] 셀렉터 레지스트리 사용
+      const selectors = [...getAllSelectors(SELECTORS.editor.boldButton)];
 
       const readState = async (): Promise<boolean> => this.getBoldState(frame, page, selectors);
 

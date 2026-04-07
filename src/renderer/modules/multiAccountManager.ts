@@ -2981,6 +2981,17 @@ export async function initMultiAccountPublishModal() {
           structuredContent = contentResult.content;
           console.log('[FullAuto] 구조화된 콘텐츠:', structuredContent);
 
+          // ✅ [2026-04-06] 공정위 문구 주입 — 다중계정 발행에서도 적용
+          {
+            const _ftcEnabled = localStorage.getItem('ftcDisclosureEnabled') === 'true';
+            const _ftcText = (localStorage.getItem('ftcDisclosureText') || '').trim();
+            if (_ftcEnabled && _ftcText && structuredContent) {
+              structuredContent.ftcDisclosure = _ftcText;
+              addMALog(`⚖️ 공정위 문구 삽입됨: "${_ftcText.substring(0, 30)}..."`, 'info');
+              console.log(`[FullAuto] ⚖️ 공정위 문구 structuredContent에 주입 완료`);
+            }
+          }
+
           // ✅ [2026-03-10 FIX] 중앙화된 URL→제목 방어: 백엔드 응답 수신 직후 URL 즉시 제거
           // 이 방어가 있으면 이후 키워드제목, SEO제목, 이미지heading, preGeneratedContent 등 모든 하류 코드가 자동 보호됨
           if (structuredContent.selectedTitle && /^https?:\/\//i.test(String(structuredContent.selectedTitle).trim())) {

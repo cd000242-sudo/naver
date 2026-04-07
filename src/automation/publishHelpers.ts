@@ -3,6 +3,13 @@
  * naverBlogAutomation.ts에서 추출됨
  */
 import { Page, Frame, ElementHandle } from 'puppeteer';
+import {
+  SELECTORS,
+  findElement,
+  waitForElement,
+  getAllSelectors,
+  getSelectorStrings,
+} from './selectors';
 
 // PublishMode type from naverBlogAutomation
 type PublishMode = 'draft' | 'publish' | 'schedule';
@@ -62,12 +69,11 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
 
   // ✅ [2026-02-25 FIX] 발행 모달이 DOM에 렌더링될 때까지 대기
   // 카테고리 드롭다운은 발행 모달 내부에 존재하므로, 모달이 열리지 않으면 찾을 수 없음
+  // ✅ [Phase 1-1] 셀렉터 레지스트리 사용
   const publishModalSelectors = [
-    '[data-testid="seOnePublishBtn"]',                // 발행 확인 버튼 (모달 내부)
-    'button[data-click-area="tpb*i.publish"]',        // 발행 확인 버튼 (대체)
-    'button.confirm_btn__WEaBq',                      // 발행 확인 버튼 (CSS)
-    '[data-click-area="tpb*i.category"]',             // 카테고리 버튼 자체
-    'input#radio_time1',                              // 즉시발행 라디오 (모달 내부)
+    ...getAllSelectors(SELECTORS.publish.confirmPublishButton).slice(0, 3),
+    SELECTORS.publish.categoryButton.primary,
+    SELECTORS.publish.immediateRadio.primary,
   ];
   let modalReady = false;
   for (const sel of publishModalSelectors) {

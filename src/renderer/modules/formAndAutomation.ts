@@ -221,8 +221,17 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
     payload.hashtags = (hashtagsInput.value || '').split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
   }
 
+  // ✅ [2026-04-06] 공정위 문구 — 수동 발행에서도 적용
+  const ftcCheckbox = document.getElementById('unified-ftc-disclosure') as HTMLInputElement;
+  const ftcTextarea = document.getElementById('unified-ftc-text') as HTMLTextAreaElement;
+  const ftcEnabled = ftcCheckbox?.checked || false;
+  const ftcText = ftcTextarea?.value?.trim() || '';
+
   // 구조화된 콘텐츠
   if (currentStructuredContent) {
+    if (ftcEnabled && ftcText) {
+      currentStructuredContent.ftcDisclosure = ftcText;
+    }
     payload.structuredContent = currentStructuredContent;
     // ✅ [2026-02-01 FIX] selectedTitle (패치된 제목)이 우선, 없으면 titleInput 사용
     payload.title = currentStructuredContent.selectedTitle || payload.title;
@@ -277,6 +286,9 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
           filePath: img.filePath || img.url || img.previewDataUrl,
           provider: img.provider,
           isThumbnail: img.isThumbnail || false, // ✅ [2026-03-02 FIX] 대표이미지 플래그 보존
+          originalIndex: img.originalIndex, // ✅ [2026-04-04 FIX] 소제목-이미지 매칭용 인덱스 보존
+          headingIndex: img.headingIndex, // ✅ [2026-04-04 FIX] 소제목 인덱스 보존
+          isIntro: img.isIntro || false,
         }))
         .filter((img: any) => Boolean(img?.heading) && Boolean(img?.filePath));
 

@@ -3,6 +3,14 @@
  * naverBlogAutomation.ts에서 추출됨
  */
 import { Page, Frame, ElementHandle } from 'puppeteer';
+import {
+  SELECTORS,
+  findElement,
+  findAllElements,
+  waitForElement,
+  getAllSelectors,
+  getSelectorStrings,
+} from './selectors';
 
 // Type alias for resolved run options
 type ResolvedRunOptions = any;
@@ -106,12 +114,8 @@ import { extractProsConsWithGemini } from '../image/geminiTableExtractor.js';
 // 인용구 삽입 헬퍼
 // style: 'line' = 인용구 1 (기본), 'underline' = 인용구 4 (쇼핑커넥트용)
 export async function insertQuotation(self: any, frame: Frame, page: Page, style: string = 'line'): Promise<void> {
-  const selectors = [
-    'button[data-name="quotation"]',
-    'button.se-toolbar-button-quotation',
-    'button[aria-label="인용구"]',
-    'button[title="인용구"]'
-  ];
+  // ✅ [Phase 1-1] 셀렉터 레지스트리 사용
+  const selectors = [...getAllSelectors(SELECTORS.editor.quotationButton)];
 
   // 1) 인용구 버튼 클릭 (팝업 열기)
   const clicked = await self.clickToolbarButton(frame, page, selectors);
@@ -519,6 +523,10 @@ export async function typeBodyWithRetry(self: any,
 // ── applyStructuredContent ──
 
 export async function applyStructuredContent(self: any, resolved: ResolvedRunOptions): Promise<void> {
+  // ✅ [2026-04-06 FIX v3] 공정문구 중복 방지 플래그
+  // retry 재실행 시 이미 삽입된 공정문구를 다시 타이핑하지 않도록 함
+  let ftcAlreadyInserted = false;
+
   await self.retry(async () => {
     const structured = resolved.structuredContent;
     if (!structured) {
@@ -742,16 +750,38 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     if (structured.introduction && structured.introduction.trim().length > 0) {
       self.log('📖 서론 작성 중...');
 
-      // ✅ [수정] 제휴 마케팅 고지 문구를 최상단에 먼저 삽입 (썸네일보다 위!)
-      if (resolved.affiliateLink) {
-        const affiliateDisclosure = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
-        self.log(`   📋[쇼핑커넥트] 제휴 마케팅 고지 문구 최상단 삽입 중...`);
-        await safeKeyboardType(page, affiliateDisclosure, { delay: 15 });
-        await self.delay(300);
-        await page.keyboard.press('Enter');
-        await page.keyboard.press('Enter');
-        await self.delay(200);
-        self.log(`   ✅ 제휴 마케팅 고지 문구 최상단 삽입 완료`);
+      // ✅ [2026-04-06 FIX v4] 공정위 문구 최상단 삽입
+      // 주의: ensureBodyFocus는 호출하지 않음 — 마지막 paragraph 끝으로 커서를 이동시켜 위치가 틀어짐
+      // inputTitle() → Enter 2회 직후이므로 커서는 이미 본문 첫 paragraph 시작점에 있음
+      if (!ftcAlreadyInserted) {
+        const ftcText = structured.ftcDisclosure?.trim();
+        if (ftcText) {
+          self.log(`   ⚖️ 공정위 문구 최상단 삽입 중...`);
+          // 커서를 본문 시작점으로 강제 이동 (Home 키)
+          await page.keyboard.press('Home').catch(() => {});
+          await self.delay(100);
+          await safeKeyboardType(page, ftcText, { delay: 15 });
+          await self.delay(300);
+          await page.keyboard.press('Enter');
+          await page.keyboard.press('Enter');
+          await self.delay(200);
+          ftcAlreadyInserted = true;
+          self.log(`   ✅ 공정위 문구 삽입 완료`);
+        } else if (resolved.affiliateLink) {
+          const affiliateDisclosure = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
+          self.log(`   📋[쇼핑커넥트] 제휴 마케팅 고지 문구 최상단 삽입 중...`);
+          await page.keyboard.press('Home').catch(() => {});
+          await self.delay(100);
+          await safeKeyboardType(page, affiliateDisclosure, { delay: 15 });
+          await self.delay(300);
+          await page.keyboard.press('Enter');
+          await page.keyboard.press('Enter');
+          await self.delay(200);
+          ftcAlreadyInserted = true;
+          self.log(`   ✅ 제휴 마케팅 고지 문구 최상단 삽입 완료`);
+        }
+      } else {
+        self.log(`   ⏭️ 공정위 문구 이미 삽입됨 (retry 중복 방지)`);
       }
 
       // 썸네일 이미지 검색 ('🖼️ 썸네일' 키로 저장됨)
@@ -906,6 +936,37 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       self.log('   ✅ 서론 작성 완료');
     } else {
       self.log('   ⏭️ 서론 텍스트 없음 (서론이 비어있습니다)');
+
+      // ✅ [2026-04-06 FIX v4] 서론이 없어도 공정위 문구/제휴 고지문 삽입
+      if (!ftcAlreadyInserted) {
+        const ftcTextNoIntro = structured.ftcDisclosure?.trim();
+        if (ftcTextNoIntro) {
+          self.log(`   ⚖️ 공정위 문구 최상단 삽입 중 (서론 없음)...`);
+          await page.keyboard.press('Home').catch(() => {});
+          await self.delay(100);
+          await safeKeyboardType(page, ftcTextNoIntro, { delay: 15 });
+          await self.delay(300);
+          await page.keyboard.press('Enter');
+          await page.keyboard.press('Enter');
+          await self.delay(200);
+          ftcAlreadyInserted = true;
+          self.log(`   ✅ 공정위 문구 삽입 완료`);
+        } else if (resolved.affiliateLink) {
+          const affiliateDisclosure = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
+          self.log(`   📋[쇼핑커넥트] 제휴 마케팅 고지 문구 최상단 삽입 중 (서론 없음)...`);
+          await page.keyboard.press('Home').catch(() => {});
+          await self.delay(100);
+          await safeKeyboardType(page, affiliateDisclosure, { delay: 15 });
+          await self.delay(300);
+          await page.keyboard.press('Enter');
+          await page.keyboard.press('Enter');
+          await self.delay(200);
+          ftcAlreadyInserted = true;
+          self.log(`   ✅ 제휴 마케팅 고지 문구 최상단 삽입 완료`);
+        }
+      } else {
+        self.log(`   ⏭️ 공정위 문구 이미 삽입됨 (retry 중복 방지)`);
+      }
 
       // ✅ [2026-03-26 FIX] Safety Net: 서론이 없어도 썸네일 이미지는 반드시 삽입
       // 서론 블록 내부의 썸네일 삽입 로직이 실행되지 않으므로, 여기서 별도로 삽입
@@ -1450,6 +1511,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
           if (allSectionImages.length > 0) {
             self.log(`   📸[이미지] 총 ${allSectionImages.length}개 이미지 삽입 중...`);
+            allSectionImages.forEach((img: any, idx: number) => {
+              const p = (img?.filePath || img?.url || '').replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~');
+              self.log(`      [${idx}] heading="${img?.heading}", provider="${img?.provider}", path=${p.substring(0, 80)}`);
+            });
             await self.insertImagesAtCurrentCursor(allSectionImages, page, currentFrame, resolved.affiliateLink);
           }
 

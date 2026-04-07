@@ -7,6 +7,14 @@
 import { safeKeyboardType } from './typingUtils.js';
 import * as fsPromises from 'fs/promises';
 import * as path from 'path';
+import {
+  SELECTORS,
+  findElement,
+  findAllElements,
+  waitForElement,
+  getAllSelectors,
+  getSelectorStrings,
+} from './selectors';
 
 // ── 네이버 블로그 이미지 용량 제한 가드 (10MB) ──
 const NAVER_MAX_IMAGE_BYTES = 10 * 1024 * 1024; // 10MB (네이버 블로그 실제 업로드 제한)

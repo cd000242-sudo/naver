@@ -8,6 +8,13 @@
 import { Frame, Page } from 'puppeteer';
 import { safeKeyboardType } from './typingUtils.js';
 import { generateCtaBannerImage } from '../image/tableImageGenerator.js';
+import {
+  SELECTORS,
+  findElement,
+  findAllElements,
+  getAllSelectors,
+  getSelectorStrings,
+} from './selectors';
 
 // ✅ [2026-03-20] 이전글 후킹 문구 공유 상수 (editorHelpers에서도 import하여 사용)
 export const PREV_POST_HOOKS = [

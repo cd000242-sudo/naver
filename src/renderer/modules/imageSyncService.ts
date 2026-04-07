@@ -310,7 +310,11 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
       const h = String(img?.heading || '').trim().toLowerCase();
       if (h.includes('썸네일') || h.includes('thumbnail')) return false;
       const imgPath = img?.filePath || img?.url || img?.previewDataUrl;
-      if (imgPath && thumbnailPathSet.has(imgPath)) return false;
+      if (imgPath && thumbnailPathSet.has(imgPath)) {
+        // ✅ [2026-04-04 FIX] 썸네일과 경로가 같아서 필터링되는 이미지 로그
+        console.warn(`[filterImagesForPublish] ⚠️ 소제목 "${title}" 이미지가 thumbnailPathSet에 의해 제거됨: ${String(imgPath).substring(0, 80)}`);
+        return false;
+      }
       return true;
     });
 
@@ -319,10 +323,19 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
       const primaryKey = getStableImageKey(primary);
       if (!primaryKey) return list;
       const p = list.find((img: any) => getStableImageKey(img) === primaryKey);
-      if (!p) return list;
+      if (!p) {
+        // ✅ [2026-04-04 FIX] primary가 dedupedList에서 찾을 수 없는 경우 로그
+        console.warn(`[filterImagesForPublish] ⚠️ 소제목 "${title}" primary 이미지가 dedupedList에 없음 (thumbnailPathSet 필터링 가능성). primaryKey=${primaryKey?.substring(0, 60)}, headingImages=${headingImages.length}, deduped=${list.length}`);
+        return list;
+      }
       const rest = list.filter((img: any) => getStableImageKey(img) !== primaryKey);
       return [p, ...rest];
     })();
+
+    // ✅ [2026-04-04 FIX] 이미지 순서 디버깅 로그
+    if (headingImages.length !== dedupedHeadingImages.length) {
+      console.warn(`[filterImagesForPublish] ⚠️ 소제목 "${title}" 이미지 ${headingImages.length}개 → dedup 후 ${dedupedHeadingImages.length}개 (${headingImages.length - dedupedHeadingImages.length}개 제거됨)`);
+    }
 
     if (Array.isArray(ordered) && ordered.length > 0) {
       ordered.forEach((img: any) => {

@@ -2898,13 +2898,25 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
     scheduleTime: formData.scheduleTime,
   });
 
+  // ✅ [2026-04-06 FIX v2] 공정위 문구 — structuredContent.ftcDisclosure만 설정
+  // bodyPlain/content에는 삽입하지 않음 (editorHelpers가 에디터에서 직접 타이핑하므로 중복 방지)
+  const ftcCheckboxEl = document.getElementById('unified-ftc-disclosure') as HTMLInputElement;
+  const ftcTextareaEl = document.getElementById('unified-ftc-text') as HTMLTextAreaElement;
+  const ftcEnabled = ftcCheckboxEl?.checked || localStorage.getItem('ftcDisclosureEnabled') === 'true';
+  const ftcText = ftcTextareaEl?.value?.trim() || localStorage.getItem('ftcDisclosureText')?.trim() || '';
+  let finalContent = cleanedContent;
+  if (ftcEnabled && ftcText) {
+    structuredContent.ftcDisclosure = ftcText;
+    appendLog(`⚖️ 공정위 문구 설정됨: "${ftcText.substring(0, 30)}..." (에디터 삽입 예정)`);
+  }
+
   // 자동화 페이로드 구성
   const payload: RendererAutomationPayload = {
     naverId: naverId,
     naverPassword: naverPassword,
     title: preferredTitle || structuredContent.selectedTitle,
-    content: cleanedContent,
-    lines: cleanedContent.split('\n'),
+    content: finalContent,
+    lines: finalContent.split('\n'),
     hashtags: structuredContent.hashtags,
     structuredContent: structuredContent,
     generatedImages: normalizedImagesForPayload,

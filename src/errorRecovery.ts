@@ -5,11 +5,19 @@
  */
 
 import type { Frame, Page, ElementHandle } from 'puppeteer';
+import { AutomationError } from './errors/AutomationError';
+import { ErrorCode } from './errors/errorCodes';
 
 /**
  * 재시도 가능한 에러 여부 판단
+ * ✅ [Phase 2-2] AutomationError인 경우 enum 기반, 아닌 경우 레거시 문자열 매칭
  */
 export function isRetryableError(error: Error): boolean {
+    if (error instanceof AutomationError) {
+        return error.retryable;
+    }
+
+    // 레거시 호환: 문자열 기반 판별
     const msg = error.message.toLowerCase();
     const retryablePatterns = [
         'timeout',
@@ -29,8 +37,14 @@ export function isRetryableError(error: Error): boolean {
 
 /**
  * 치명적 에러 여부 판단 (재시도 불가)
+ * ✅ [Phase 2-2] AutomationError인 경우 enum 기반, 아닌 경우 레거시 문자열 매칭
  */
 export function isFatalError(error: Error): boolean {
+    if (error instanceof AutomationError) {
+        return error.fatal;
+    }
+
+    // 레거시 호환: 문자열 기반 판별
     const msg = error.message.toLowerCase();
     const fatalPatterns = [
         'browser is closed',
@@ -41,6 +55,13 @@ export function isFatalError(error: Error): boolean {
         'captcha',
     ];
     return fatalPatterns.some(pattern => msg.includes(pattern));
+}
+
+/**
+ * ✅ [Phase 2-2] 일반 Error를 AutomationError로 변환
+ */
+export function toAutomationError(error: Error, fallbackCode?: ErrorCode): AutomationError {
+    return AutomationError.fromError(error, fallbackCode);
 }
 
 /**

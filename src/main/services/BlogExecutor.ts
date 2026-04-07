@@ -423,6 +423,14 @@ export async function executePublishing(
             selectedTitle: finalTitle  // 패치된 제목으로 강제 업데이트
         } : undefined;
 
+        // ✅ [2026-04-06 FIX v3] ftcDisclosure 전달 확인 로깅
+        if (updatedStructuredContent?.ftcDisclosure) {
+            sendLog(`   ⚖️ 공정위 문구 전달됨: "${updatedStructuredContent.ftcDisclosure.substring(0, 30)}..."`);
+        }
+        if (!updatedStructuredContent) {
+            console.warn('[BlogExecutor] ⚠️ structuredContent가 undefined — applyPlainContent 경로 진입 예상 (공정문구 미삽입)');
+        }
+
         sendLog(`📝 최종 제목: ${finalTitle?.substring(0, 40)}...`);
 
         const result = await automation.run({
