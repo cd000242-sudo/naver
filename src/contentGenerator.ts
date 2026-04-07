@@ -6948,31 +6948,33 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   }
   const client = getOpenAIClient(configApiKey);
 
-  // ✅ [2026-03-18 FIX] UI 선택 모델에 따라 OpenAI 모델 우선순위 동적 결정
+  // ✅ [2026-04-08 FIX] OpenAI 모델 체인 업데이트 — GPT-5.4 시리즈 + GPT-4.1 레거시
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
   let openAIModels: string[];
   if (uiSelectedModel === 'openai-gpt4o-mini') {
-    // GPT-4.1 mini 선택 시: mini 우선, 플래그십 폴백
+    // 가성비 모드: GPT-5.4-mini (최신) → GPT-4.1-mini (레거시) → GPT-5.4-nano (초저가)
     openAIModels = [
-      'gpt-4.1-mini',              // ✅ UI 선택: 가성비 모델
-      'gpt-5.4',                   // 폴백: 플래그십
+      'gpt-5.4-mini',              // ✅ 최신 가성비 (GPT-5.4급 성능, 저비용)
+      'gpt-4.1-mini',              // 폴백: 레거시 가성비
+      'gpt-5.4-nano',              // 최후 폴백: 초저가
     ];
-    console.log('[OpenAI] 🧠 UI 선택: GPT-4.1 mini (가성비 모드)');
+    console.log('[OpenAI] 🧠 가성비 모드: gpt-5.4-mini → 4.1-mini → 5.4-nano');
   } else if (uiSelectedModel === 'openai-gpt41') {
-    // GPT-4.1 선택 시: 균형 모델 우선
+    // 균형 모드: GPT-4.1 → GPT-5.4 → GPT-5.4-mini
     openAIModels = [
-      'gpt-4.1',                   // ✅ UI 선택: 균형 모델
-      'gpt-5.4',                   // 폴백1: 플래그십
-      'gpt-4.1-mini',              // 폴백2: 가성비
+      'gpt-4.1',                   // ✅ UI 선택: 안정적 균형 모델
+      'gpt-5.4',                   // 폴백1: 최신 플래그십
+      'gpt-5.4-mini',              // 폴백2: 최신 가성비
     ];
-    console.log('[OpenAI] ⚖️ UI 선택: GPT-4.1 (균형 모드)');
+    console.log('[OpenAI] ⚖️ 균형 모드: gpt-4.1 → 5.4 → 5.4-mini');
   } else {
-    // GPT-5.4 선택 또는 기본: 플래그십 우선
+    // 최고 성능 모드 (기본): GPT-5.4 → GPT-5.4-mini → GPT-4.1
     openAIModels = [
-      'gpt-5.4',                   // ✅ UI 선택: 최고 성능
-      'gpt-4.1-mini',              // 폴백: 가성비
+      'gpt-5.4',                   // ✅ 최신 플래그십
+      'gpt-5.4-mini',              // 폴백1: 최신 가성비
+      'gpt-4.1',                   // 폴백2: 레거시 안정적
     ];
-    console.log('[OpenAI] 🚀 UI 선택: GPT-5.4 (최고 성능 모드)');
+    console.log('[OpenAI] 🚀 최고 성능 모드: gpt-5.4 → 5.4-mini → 4.1');
   }
 
   const customModel = process.env.OPENAI_STRUCTURED_MODEL;
