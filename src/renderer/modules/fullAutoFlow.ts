@@ -2031,12 +2031,20 @@ export async function generateFullAutoContent(formData: any) {
   const urls = formData.urls || [];
   const keywords = formData.keywords || '';
 
+  // ✅ [2026-04-08 FIX] 키워드가 비어있으면 제목을 draftText로 폴백 (본문 정보 없음 에러 방지)
+  const keywordList = keywords ? keywords.split(',').map((k: string) => k.trim()).filter((k: string) => k.length > 0) : [];
+  const titleStr = formData.title ? String(formData.title || '').trim() : '';
+  const draftText = keywordList.length === 0 && urls.length === 0 && titleStr
+    ? titleStr  // 키워드/URL 둘 다 없으면 제목을 draftText로 사용
+    : undefined;
+
   const payload = {
     assembly: {
       generator: formData.generator,
-      keywords: keywords ? keywords.split(',').map((k: string) => k.trim()).filter((k: string) => k.length > 0) : [],
+      keywords: keywordList,
       rssUrl: urls.length > 0 ? urls[0] : undefined,
-      title: formData.title ? String(formData.title || '').trim() || undefined : undefined,
+      title: titleStr || undefined,
+      draftText,
       targetAge: formData.targetAge,
       minChars: formData.minChars || 2500, // 기본 글자수
       customPrompt: (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim() || undefined,

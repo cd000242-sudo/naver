@@ -6535,16 +6535,17 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
 
   // ✅ [2026-04-08 FIX] 사용자가 선택한 모델 티어에 맞는 폴백만 사용
   // pro 모델을 선택하지 않았으면 pro 폴백 금지 (비용 폭증 방지)
+  // gemini-2.0-flash는 2026-09-24 종료 예정이므로 마지막 폴백으로 배치
   const isPro = primaryModel.includes('-pro');
   const flashModels = [
-    'gemini-3.1-flash-preview',
-    'gemini-2.5-flash',
-    'gemini-2.0-flash',
+    'gemini-3.1-flash-preview',  // 최신 flash
+    'gemini-2.5-flash',          // 안정적 GA
+    'gemini-2.0-flash',          // 종료 예정 (2026-09-24) — 최후 폴백
   ];
   const proModels = [
-    'gemini-3.1-pro-preview',
-    'gemini-2.5-pro',
-    ...flashModels, // pro 선택 시 flash도 폴백으로 포함
+    'gemini-3.1-pro-preview',    // 최신 pro
+    'gemini-2.5-pro',            // 안정적 GA
+    ...flashModels,              // pro 실패 시 flash로 폴백
   ];
   const baseModels = isPro ? proModels : flashModels;
 
