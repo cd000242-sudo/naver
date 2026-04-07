@@ -5767,6 +5767,10 @@ ipcMain.handle(
       // targetAge는 payload.assembly에서 먼저 확인 (assembleContentSource 호출 전)
       const targetAge = (payload.assembly.targetAge as '20s' | '30s' | '40s' | '50s' | 'all' | undefined) ?? 'all';
 
+      // ✅ [2026-04-08] 디버그 로그: assembly 입력 확인 (키워드 누락 추적)
+      const _asm = payload.assembly as any;
+      console.log(`[Main] assembly 입력: keywords=${JSON.stringify(payload.assembly.keywords)}, draftText=${(payload.assembly.draftText || '').substring(0, 50)}, title=${(_asm.title || '').substring(0, 30)}, rssUrl=${payload.assembly.rssUrl || '없음'}`);
+
       const { source, warnings } = await assembleContentSource(payload.assembly);
       const provider = payload.assembly.generator ?? source.generator ?? 'gemini';
 

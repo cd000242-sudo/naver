@@ -6586,6 +6586,19 @@ ${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
     baseBody = keywords.length ? keywords.join(', ') : '';
   }
 
+  // ✅ [2026-04-08 FIX] draft/baseText가 있으면 baseBody로 사용 (키워드 전달 실패 방어)
+  if (!baseBody.trim() && draft) {
+    baseBody = draft;
+    console.log(`[assembleContentSource] ℹ️ baseBody 비어있음 → draftText로 폴백 (${draft.length}자)`);
+  }
+  if (!baseBody.trim() && baseText) {
+    baseBody = baseText;
+    console.log(`[assembleContentSource] ℹ️ baseBody 비어있음 → baseText로 폴백 (${baseText.length}자)`);
+  }
+
+  // ✅ [2026-04-08] 디버그 로그: 에러 직전 상태 출력
+  console.log(`[assembleContentSource] 최종 상태: baseBody=${baseBody.length}자, baseTitle="${(baseTitle || '').substring(0, 30)}", keywords=${keywords.length}개, draft=${draft.length}자, urlPatterns=${urlPatterns.length}개`);
+
   // URL 크롤링이 있었고 제목이라도 있으면 에러를 던지지 않음
   if (!baseBody.trim()) {
     if (baseTitle && baseTitle.trim().length > 0) {
