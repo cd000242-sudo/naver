@@ -2942,17 +2942,21 @@ export async function initMultiAccountPublishModal() {
             console.warn('[multiAccountManager] catch ignored:', e);
           }
 
+          // ✅ [2026-04-08 FIX v3] keywords + draftText 이중 설정 (어느 하나라도 비어있으면 안 됨)
           const keywordList = queueItem.sourceKeyword
             ? queueItem.sourceKeyword.split(',').map(k => k.trim()).filter(Boolean)
             : [];
-          if (keywordList.length > 0) {
-            contentPayload.assembly.keywords = keywordList;
-          }
+          // keywords는 항상 설정 (빈 배열이어도)
+          contentPayload.assembly.keywords = keywordList;
 
           if (queueItem.sourceUrl) {
             contentPayload.assembly.rssUrl = [queueItem.sourceUrl];
-          } else if (queueItem.sourceKeyword) {
+          }
+          // draftText는 항상 설정 (키워드 또는 URL을 폴백으로)
+          if (queueItem.sourceKeyword) {
             contentPayload.assembly.draftText = queueItem.sourceKeyword;
+          } else if (queueItem.sourceUrl) {
+            contentPayload.assembly.draftText = queueItem.sourceUrl;
           }
 
           console.log('[FullAuto] 콘텐츠 생성 요청:', contentPayload);

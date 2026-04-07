@@ -6582,36 +6582,38 @@ ${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
     }
   }
 
+  // ✅ [2026-04-08 FIX v3] 완전한 폴백 체인 — 어떤 상황에서도 에러를 던지지 않음
+  // 우선순위: baseBody(크롤링) → keywords → draft → baseText → baseTitle → 최종 안전망
   if (!baseBody) {
     baseBody = keywords.length ? keywords.join(', ') : '';
   }
-
-  // ✅ [2026-04-08 FIX] draft/baseText가 있으면 baseBody로 사용 (키워드 전달 실패 방어)
   if (!baseBody.trim() && draft) {
     baseBody = draft;
-    console.log(`[assembleContentSource] ℹ️ baseBody 비어있음 → draftText로 폴백 (${draft.length}자)`);
+    console.log(`[assembleContentSource] 폴백 1: draftText 사용 (${draft.length}자)`);
   }
   if (!baseBody.trim() && baseText) {
     baseBody = baseText;
-    console.log(`[assembleContentSource] ℹ️ baseBody 비어있음 → baseText로 폴백 (${baseText.length}자)`);
+    console.log(`[assembleContentSource] 폴백 2: baseText 사용 (${baseText.length}자)`);
   }
-
-  // ✅ [2026-04-08] 디버그 로그: 에러 직전 상태 출력
-  console.log(`[assembleContentSource] 최종 상태: baseBody=${baseBody.length}자, baseTitle="${(baseTitle || '').substring(0, 30)}", keywords=${keywords.length}개, draft=${draft.length}자, urlPatterns=${urlPatterns.length}개`);
-
-  // URL 크롤링이 있었고 제목이라도 있으면 에러를 던지지 않음
+  if (!baseBody.trim() && baseTitle && baseTitle.trim().length > 0) {
+    baseBody = `${baseTitle.trim()}에 대한 상세한 내용을 작성합니다.`;
+    warnings.push(`ℹ️ 제목("${baseTitle}")을 기반으로 콘텐츠를 생성합니다.`);
+    console.log(`[assembleContentSource] 폴백 3: baseTitle 기반 생성 ("${baseTitle.substring(0, 30)}")`);
+  }
+  if (!baseBody.trim() && urlPatterns.length > 0) {
+    // URL은 있지만 크롤링이 전부 실패한 경우 — URL 자체를 힌트로 사용
+    baseBody = `다음 URL의 내용을 참고하여 글을 작성합니다: ${urlPatterns.join(', ')}`;
+    warnings.push(`⚠️ URL 크롤링에 실패했습니다. URL을 참고하여 AI가 직접 작성합니다.`);
+    console.log(`[assembleContentSource] 폴백 4: URL 힌트 사용 (${urlPatterns.length}개)`);
+  }
   if (!baseBody.trim()) {
-    if (baseTitle && baseTitle.trim().length > 0) {
-      // ✅ 제목만 있어도 제목 기반으로 콘텐츠 생성 가능
-      warnings.push(`ℹ️ 제목("${baseTitle}")을 기반으로 콘텐츠를 생성합니다.`);
-      baseBody = `${baseTitle}에 대한 상세한 내용을 작성합니다.`;
-    } else if (urlPatterns.length > 0) {
-      // URL은 있지만 제목도 본문도 없는 경우
-      throw new Error('URL에서 콘텐츠를 추출할 수 없습니다. 제목 또는 키워드를 입력해주세요.');
-    } else {
-      throw new Error('자동 생성에 필요한 본문 정보가 없습니다. 키워드 또는 초안 또는 RSS를 제공해주세요.');
-    }
+    // 최종 안전망: 모든 입력이 비어있어도 AI에게 자유 작성 요청
+    baseBody = '블로그 글을 작성합니다.';
+    warnings.push(`⚠️ 입력 정보가 없어 AI가 자유 주제로 작성합니다. 키워드나 URL을 입력하면 더 정확한 글이 생성됩니다.`);
+    console.log(`[assembleContentSource] 폴백 5: 최종 안전망 (자유 작성)`);
   }
+
+  console.log(`[assembleContentSource] 최종 상태: baseBody=${baseBody.length}자, baseTitle="${(baseTitle || '').substring(0, 30)}", keywords=${keywords.length}개, draft=${draft.length}자, urlPatterns=${urlPatterns.length}개`);
 
   // ✅ [2026-02-08] Perplexity 엔진 선택 시: 네이버 보충 건너뛰고 바로 Perplexity 리서치
   // Perplexity는 팩트 기반 실시간 웹 검색이므로 네이버 2차/3차 보충보다 훨씬 신뢰성이 높음
