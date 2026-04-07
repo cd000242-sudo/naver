@@ -291,6 +291,25 @@ export class EnhancedApiClient {
                     } as any;
                 }
 
+                // ✅ [2026-04-08 FIX] 사용자 입력 오류는 재시도 불필요 — 즉시 실패 반환
+                const isInputError = errorMsg.includes('본문 정보가 없습니다') ||
+                    errorMsg.includes('키워드 또는 초안') ||
+                    errorMsg.includes('콘텐츠를 추출할 수 없습니다') ||
+                    errorMsg.includes('제목이 없습니다') ||
+                    errorMsg.includes('본문 내용이 없습니다') ||
+                    errorMsg.includes('API 키가 설정되지 않았습니다') ||
+                    errorMsg.includes('라이선스');
+
+                if (isInputError) {
+                    console.warn(`[API] ${apiMethod} - 사용자 입력 오류 → 재시도 불필요: ${errorMsg}`);
+                    return {
+                        success: false,
+                        data: { success: false, message: errorMsg } as any,
+                        error: errorMsg,
+                        retryCount: attempt
+                    } as any;
+                }
+
                 // 마지막 시도가 아니면 재시도
                 if (attempt < retryCount) {
                     // 지수 백오프 (네트워크 오류 시 더 긴 대기)

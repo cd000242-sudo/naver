@@ -4101,10 +4101,19 @@ async function startContinuousPublishingV2(): Promise<void> {
         break;
       }
 
+      // ✅ [2026-04-08 FIX] 재시도 불가능한 에러 판별 — 사용자 입력 부족은 재시도 의미 없음
+      const isInputError = errMsg.includes('본문 정보가 없습니다') ||
+        errMsg.includes('키워드 또는 초안') ||
+        errMsg.includes('콘텐츠를 추출할 수 없습니다') ||
+        errMsg.includes('제목이 없습니다') ||
+        errMsg.includes('본문 내용이 없습니다') ||
+        errMsg.includes('API 키가 설정되지 않았습니다') ||
+        errMsg.includes('라이선스');
+
       // ✅ [2026-03-21] 1회 재시도 (아이템별 _retryCount로 무한루프 완벽 방지)
-      // 기존 i-- 방식은 다른 조건이 pending으로 되돌릴 때 무한루프 위험
+      // 단, 사용자 입력 오류는 재시도 없이 즉시 실패 처리
       const retryCount = (item as any)._retryCount || 0;
-      if (retryCount < 1) {
+      if (retryCount < 1 && !isInputError) {
         (item as any)._retryCount = retryCount + 1;
         appendLog(`⚠️ 실패: ${errMsg} — 15초 후 1회 재시도합니다... (${retryCount + 1}/1)`);
         updateContinuousProgressModal({
