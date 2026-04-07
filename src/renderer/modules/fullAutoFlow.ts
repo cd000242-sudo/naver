@@ -2031,12 +2031,17 @@ export async function generateFullAutoContent(formData: any) {
   const urls = formData.urls || [];
   const keywords = formData.keywords || '';
 
-  // ✅ [2026-04-08 FIX] 키워드가 비어있으면 제목을 draftText로 폴백 (본문 정보 없음 에러 방지)
+  // ✅ [2026-04-08 FIX v2] draftText를 항상 설정하여 "본문 정보 없음" 에러 완전 방지
   const keywordList = keywords ? keywords.split(',').map((k: string) => k.trim()).filter((k: string) => k.length > 0) : [];
   const titleStr = formData.title ? String(formData.title || '').trim() : '';
-  const draftText = keywordList.length === 0 && urls.length === 0 && titleStr
-    ? titleStr  // 키워드/URL 둘 다 없으면 제목을 draftText로 사용
-    : undefined;
+
+  // draftText: 키워드/제목 중 하나라도 있으면 설정 (sourceAssembler의 최종 안전망)
+  let draftText: string | undefined;
+  if (keywordList.length > 0) {
+    draftText = keywordList.join(', ');  // 키워드를 draftText로도 전달
+  } else if (titleStr) {
+    draftText = titleStr;  // 키워드 없으면 제목으로 폴백
+  }
 
   const payload = {
     assembly: {
