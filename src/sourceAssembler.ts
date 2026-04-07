@@ -6913,6 +6913,30 @@ export async function collectContentFromPlatforms(
       }
     }
 
+    // ✅ [1.5순위] Gemini Grounding Search (네이버 API 키 없어도 작동, Gemini API 키만 필요)
+    if (!clientId || !clientSecret) {
+      try {
+        logger(`[플랫폼 콘텐츠 수집] 🔍 네이버 API 키 없음 → Gemini Grounding 리서치 시도...`);
+        const { researchWithGeminiGrounding } = await import('./contentGenerator.js');
+        const groundingResult = await researchWithGeminiGrounding(keyword);
+
+        if (groundingResult.success && groundingResult.content && groundingResult.content.length > 300) {
+          logger(`[플랫폼 콘텐츠 수집] ✅ Gemini Grounding 성공: ${groundingResult.content.length}자`);
+          return {
+            collectedText: groundingResult.content,
+            sourceCount: groundingResult.sources.length,
+            urls: [],
+            success: true,
+            message: `Gemini Grounding으로 ${groundingResult.content.length}자 수집 완료`,
+          };
+        } else {
+          logger(`[플랫폼 콘텐츠 수집] ⚠️ Gemini Grounding 결과 부족, URL 크롤링으로 보충...`);
+        }
+      } catch (groundingError) {
+        logger(`[플랫폼 콘텐츠 수집] ⚠️ Gemini Grounding 실패: ${(groundingError as Error).message}`);
+      }
+    }
+
     // ✅ [2순위] URL 검색 및 크롤링 (API 실패 시 또는 API 키 없을 때)
     const { searchAllRssSources } = await import('./rssSearcher.js');
 
