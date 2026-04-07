@@ -6913,10 +6913,76 @@ export async function collectContentFromPlatforms(
       }
     }
 
-    // ✅ [1.5순위] Gemini Grounding Search (네이버 API 키 없어도 작동, Gemini API 키만 필요)
+    // ✅ [1.5순위] 네이버 모바일 검색 HTML 직접 파싱 (API 키 불필요, Gemini 불필요)
+    // API 키 없을 때 가장 안정적인 방법: 네이버 검색 결과 페이지를 직접 fetch하여 파싱
     if (!clientId || !clientSecret) {
       try {
-        logger(`[플랫폼 콘텐츠 수집] 🔍 네이버 API 키 없음 → Gemini Grounding 리서치 시도...`);
+        logger(`[플랫폼 콘텐츠 수집] 🔍 네이버 API 키 없음 → 네이버 모바일 검색 직접 파싱...`);
+        const fetchImpl = await ensureFetch();
+
+        const searchUrls = [
+          `https://m.search.naver.com/search.naver?where=m_blog&query=${encodeURIComponent(keyword)}&sm=mtb_viw.blog`,
+          `https://m.search.naver.com/search.naver?where=m_news&query=${encodeURIComponent(keyword)}&sm=mtb_viw.news`,
+        ];
+
+        const contentParts: string[] = [];
+
+        for (const searchUrl of searchUrls) {
+          try {
+            const resp = await fetchImpl(searchUrl, {
+              headers: {
+                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
+                'Accept-Language': 'ko-KR,ko;q=0.9',
+              },
+              signal: AbortSignal.timeout?.(10000),
+            });
+
+            if (resp.ok) {
+              const html = await resp.text();
+
+              // 검색 결과에서 제목(class="api_txt_lines")과 설명(class="api_txt_lines dsc_txt") 추출
+              const titleMatches = html.match(/class="api_txt_lines[^"]*"[^>]*>([^<]+)</g) || [];
+              const descMatches = html.match(/class="api_txt_lines dsc_txt[^"]*"[^>]*>([^<]+)</g) || [];
+
+              // HTML 태그 제거 + 디코딩
+              const cleanText = (raw: string): string =>
+                raw.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, ' ').replace(/class="[^"]*"/g, '').replace(/>/g, '').trim();
+
+              for (let idx = 0; idx < Math.max(titleMatches.length, descMatches.length) && idx < 15; idx++) {
+                const title = titleMatches[idx] ? cleanText(titleMatches[idx]) : '';
+                const desc = descMatches[idx] ? cleanText(descMatches[idx]) : '';
+                if (desc.length > 30) {
+                  contentParts.push(title ? `【${title}】\n${desc}` : desc);
+                }
+              }
+            }
+          } catch (singleErr) {
+            // 개별 URL 실패는 무시
+          }
+        }
+
+        if (contentParts.length > 0) {
+          const combinedContent = contentParts.join('\n\n');
+          logger(`[플랫폼 콘텐츠 수집] ✅ 네이버 모바일 검색 파싱 성공: ${combinedContent.length}자 (${contentParts.length}개 결과)`);
+
+          if (combinedContent.length > 300) {
+            return {
+              collectedText: combinedContent,
+              sourceCount: contentParts.length,
+              urls: [],
+              success: true,
+              message: `네이버 모바일 검색에서 ${combinedContent.length}자 수집 완료 (${contentParts.length}개)`,
+            };
+          }
+        }
+        logger(`[플랫폼 콘텐츠 수집] ⚠️ 네이버 모바일 검색 파싱 결과 부족, Gemini Grounding 시도...`);
+      } catch (mobileError) {
+        logger(`[플랫폼 콘텐츠 수집] ⚠️ 네이버 모바일 검색 파싱 실패: ${(mobileError as Error).message}`);
+      }
+
+      // ✅ [1.7순위] Gemini Grounding Search (Gemini API 키만 필요)
+      try {
+        logger(`[플랫폼 콘텐츠 수집] 🔍 Gemini Grounding 리서치 시도...`);
         const { researchWithGeminiGrounding } = await import('./contentGenerator.js');
         const groundingResult = await researchWithGeminiGrounding(keyword);
 
@@ -6929,8 +6995,6 @@ export async function collectContentFromPlatforms(
             success: true,
             message: `Gemini Grounding으로 ${groundingResult.content.length}자 수집 완료`,
           };
-        } else {
-          logger(`[플랫폼 콘텐츠 수집] ⚠️ Gemini Grounding 결과 부족, URL 크롤링으로 보충...`);
         }
       } catch (groundingError) {
         logger(`[플랫폼 콘텐츠 수집] ⚠️ Gemini Grounding 실패: ${(groundingError as Error).message}`);
