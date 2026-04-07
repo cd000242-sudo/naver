@@ -6524,22 +6524,33 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   if (!apiKey) throw new Error('Gemini API 키가 설정되지 않았습니다.');
   const trimmedKey = apiKey.trim();
 
-  // 2. 모델 목록 설정 (✅ [2026-03-18] Gemini 3.1 Flash 기본, 나머지 폴백)
-  // ✅ [2026-03-18 FIX] 비-Gemini 모델(perplexity/openai/claude)은 Gemini 기본값으로 교체 (별도 provider에서 호출)
+  // 2. 모델 목록 설정
+  // ✅ [2026-04-08 FIX] 사용자 선택 모델을 최우선 사용, 폴백은 같은 티어(flash/pro)만
   let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || 'gemini-3.1-flash-preview';
-  if (primaryModel.toLowerCase().includes('perplexity') || primaryModel.toLowerCase().includes('openai') || primaryModel.toLowerCase().includes('claude')) {
-    primaryModel = 'gemini-3.1-flash-preview'; // 비-Gemini 선택 시 Gemini 기본값 사용
+
+  // 비-Gemini 모델명이 들어온 경우 Gemini 기본값으로 교체
+  if (!primaryModel.startsWith('gemini-')) {
+    primaryModel = 'gemini-3.1-flash-preview';
   }
-  const baseModels = [
-    'gemini-3.1-flash-preview', // ✅ 기본: 고속/고품질 (최신)
-    'gemini-2.5-flash',         // 폴백1: 안정적 (GA)
-    'gemini-2.5-pro',           // 폴백2: 고품질 (GA)
-    'gemini-2.0-flash',         // 폴백3: 안정적 (GA)
-    'gemini-3.1-pro-preview',   // 폴백4: 최신 고품질
+
+  // ✅ [2026-04-08 FIX] 사용자가 선택한 모델 티어에 맞는 폴백만 사용
+  // pro 모델을 선택하지 않았으면 pro 폴백 금지 (비용 폭증 방지)
+  const isPro = primaryModel.includes('-pro');
+  const flashModels = [
+    'gemini-3.1-flash-preview',
+    'gemini-2.5-flash',
+    'gemini-2.0-flash',
   ];
+  const proModels = [
+    'gemini-3.1-pro-preview',
+    'gemini-2.5-pro',
+    ...flashModels, // pro 선택 시 flash도 폴백으로 포함
+  ];
+  const baseModels = isPro ? proModels : flashModels;
 
   // 선택된 모델을 가장 앞에 두고 나머지를 배치 (중복 제거)
   const uniqueModels = Array.from(new Set([primaryModel, ...baseModels]));
+  console.log(`[Gemini] 모델 체인: ${uniqueModels.join(' → ')} (사용자 선택: ${primaryModel}, 티어: ${isPro ? 'PRO' : 'FLASH'})`);
 
   let lastError: Error | null = null;
   const perModelMaxRetries = 3; // ✅ [2026-01-28 FIX] 재시도 3회로 증가 (유료 사용자 안정성)
