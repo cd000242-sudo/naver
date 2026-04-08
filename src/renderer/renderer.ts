@@ -5355,6 +5355,40 @@ URL: ${firstUrl}
     }
   }
 
+  // ✅ 연속발행/다중계정 공정문구 체크박스 ↔ 메인 체크박스 동기화
+  {
+    const syncFtcCheckboxes = () => {
+      const mainChecked = localStorage.getItem('ftcDisclosureEnabled') === 'true';
+      const continuousCb = document.getElementById('continuous-ftc-disclosure') as HTMLInputElement;
+      const maCb = document.getElementById('ma-ftc-disclosure') as HTMLInputElement;
+      if (continuousCb) continuousCb.checked = mainChecked;
+      if (maCb) maCb.checked = mainChecked;
+    };
+
+    // 초기 동기화 (DOM 렌더링 후)
+    setTimeout(syncFtcCheckboxes, 500);
+
+    // 메인 체크박스 변경 → 하위 체크박스 동기화
+    document.getElementById('unified-ftc-disclosure')?.addEventListener('change', syncFtcCheckboxes);
+
+    // 하위 체크박스 변경 → 메인 localStorage 업데이트
+    document.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      if (target.id === 'continuous-ftc-disclosure' || target.id === 'ma-ftc-disclosure') {
+        localStorage.setItem('ftcDisclosureEnabled', String(target.checked));
+        const mainCb = document.getElementById('unified-ftc-disclosure') as HTMLInputElement;
+        const ftcPanel = document.getElementById('ftc-options-panel') as HTMLDivElement;
+        const ftcBadge = document.getElementById('ftc-status-badge') as HTMLSpanElement;
+        const ftcSection = document.getElementById('ftc-disclosure-section') as HTMLDivElement;
+        if (mainCb) mainCb.checked = target.checked;
+        if (ftcPanel) ftcPanel.style.display = target.checked ? 'block' : 'none';
+        if (ftcBadge) ftcBadge.style.display = target.checked ? 'inline-block' : 'none';
+        if (ftcSection) ftcSection.style.borderColor = target.checked ? 'rgba(245, 158, 11, 0.6)' : 'rgba(245, 158, 11, 0.4)';
+        syncFtcCheckboxes();
+      }
+    });
+  }
+
   // ✅ 중지 버튼 초기화
   initStopButton();
 
