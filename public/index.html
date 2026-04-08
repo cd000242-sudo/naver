@@ -5944,6 +5944,33 @@
                                 </select>
                             </div>
 
+                            <!-- ✅ [v1.4.20] 업체 홍보 모드 — businessInfo 입력 패널 (모드 선택 시 표시) -->
+                            <div id="business-info-panel" style="display: none; margin-bottom: 0.75rem; padding: 1rem; background: rgba(245, 158, 11, 0.08); border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 10px;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                    <span style="font-size: 1.1rem;">🏢</span>
+                                    <strong style="color: #fbbf24; font-size: 0.95rem;">업체 정보 입력 (필수)</strong>
+                                </div>
+                                <p style="margin: 0 0 0.75rem 0; font-size: 0.78rem; color: #fde68a; line-height: 1.5;">
+                                    ⚠️ 입력하지 않으면 AI가 가짜 전화번호/주소를 만들 수 있습니다.<br>
+                                    필수: 업체명 + 전화번호 (또는 카톡). 나머지는 선택.
+                                </p>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <input type="text" id="business-info-name" placeholder="📛 업체명 *" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                    <input type="text" id="business-info-phone" placeholder="📞 전화번호 *" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                    <input type="text" id="business-info-kakao" placeholder="💬 카카오톡 (ID/링크)" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                    <input type="text" id="business-info-region" placeholder="🗺️ 서비스 지역 (예: 강남/송파)" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                    <input type="text" id="business-info-address" placeholder="📍 주소 (선택)" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                    <input type="text" id="business-info-hours" placeholder="🕐 영업시간 (선택)" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                </div>
+                                <textarea id="business-info-extra" placeholder="✨ 특징/경력/자격증 (예: 시공 15년차, A/S 1년 보장, 평수별 견적 가이드 등)" rows="2" style="width: 100%; padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem; resize: vertical;"></textarea>
+                                <div style="margin-top: 0.6rem; padding: 0.5rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; font-size: 0.75rem; color: #93c5fd; line-height: 1.5;">
+                                    💡 <strong>키워드 입력법</strong>: 메인 키워드 = "지역+업종" (예: <code>강남 인테리어</code>), 서브 키워드 = 세부 서비스 (예: <code>철거, 도배, 욕실</code>). 본문에서 자동으로 8~12회 반복됩니다.
+                                </div>
+                                <div id="business-medical-warning" style="display: none; margin-top: 0.6rem; padding: 0.6rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(248, 113, 113, 0.4); border-radius: 6px; font-size: 0.78rem; color: #fca5a5; line-height: 1.5;">
+                                    ⚠️ <strong>의료광고법 주의</strong>: 병원/한의원/피부과 등 의료기관 광고는 의료법 56조에 따라 환자 후기, 효과 보장, 단정 표현이 금지됩니다. 위반 시 1년 이하 징역 또는 1천만원 이하 벌금. <strong>의료광고심의 사전 신청을 권장합니다.</strong>
+                                </div>
+                            </div>
+
                             <!-- ✅ 글톤(Tone Style) 추가 -->
                             <div style="margin-bottom: 0.75rem;">
                                 <label

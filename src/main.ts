@@ -5804,6 +5804,13 @@ ipcMain.handle(
         source.customPrompt = customPrompt;
       }
 
+      // ✅ [v1.4.20] 업체 정보 전달 (business 모드 — 가짜 번호 생성 방지)
+      const businessInfo = (payload.assembly as any).businessInfo;
+      if (businessInfo && typeof businessInfo === 'object') {
+        source.businessInfo = businessInfo;
+        console.log(`[Main] 🏢 업체 정보 전달: ${businessInfo.name || '(미입력)'} / ${businessInfo.phone || '(전화 미입력)'}`);
+      }
+
       // ✅ toneStyle 전달 (글톤/말투 스타일 - 매우 중요!)
       const toneStyle = (payload.assembly as any).toneStyle as string | undefined;
       if (toneStyle) {

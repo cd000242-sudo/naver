@@ -2043,6 +2043,20 @@ export async function generateFullAutoContent(formData: any) {
     draftText = titleStr;  // 키워드 없으면 제목으로 폴백
   }
 
+  // ✅ [v1.4.20] business 모드: businessInfo 필드 수집 (가짜 번호 방지)
+  const businessInfo = formData.contentMode === 'business' ? (() => {
+    const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
+    return {
+      name: get('business-info-name'),
+      phone: get('business-info-phone'),
+      kakao: get('business-info-kakao'),
+      address: get('business-info-address'),
+      hours: get('business-info-hours'),
+      region: get('business-info-region'),
+      extra: get('business-info-extra'),
+    };
+  })() : undefined;
+
   const payload = {
     assembly: {
       generator: formData.generator,
@@ -2051,13 +2065,13 @@ export async function generateFullAutoContent(formData: any) {
       title: titleStr || undefined,
       draftText,
       targetAge: formData.targetAge,
-      minChars: formData.minChars || 2500, // 기본 글자수
+      minChars: formData.minChars || 2500,
       customPrompt: (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim() || undefined,
-      // ✅ CRITICAL: 카테고리, 모드, 톤 정보 추가 (제목/소제목 생성에 필수!)
       categoryHint: formData.category || formData.categoryName || formData.categoryHint,
       contentMode: formData.contentMode || 'seo',
       articleType: formData.articleType,
-      toneStyle: formData.toneStyle || formData.tone
+      toneStyle: formData.toneStyle || formData.tone,
+      businessInfo,  // ✅ [v1.4.20] 업체 홍보 모드 전용
     }
   };
 

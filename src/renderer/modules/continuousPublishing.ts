@@ -1894,12 +1894,42 @@ export function initContinuousPublishingV2(): void {
   const continuousContentModeSelect = document.getElementById('continuous-content-mode-select') as HTMLSelectElement;
   if (continuousContentModeSelect) {
     continuousContentModeSelect.addEventListener('change', () => {
-      const isAffiliateMode = continuousContentModeSelect.value === 'affiliate';
+      const mode = continuousContentModeSelect.value;
+      const isAffiliateMode = mode === 'affiliate';
+      const isBusinessMode = mode === 'business';
       const shoppingConnectSettings = document.getElementById('continuous-shopping-connect-settings');
       if (shoppingConnectSettings) {
         shoppingConnectSettings.style.display = isAffiliateMode ? 'block' : 'none';
       }
+      // ✅ [v1.4.20] business 모드 선택 시 업체 정보 패널 표시
+      const businessInfoPanel = document.getElementById('business-info-panel');
+      if (businessInfoPanel) {
+        businessInfoPanel.style.display = isBusinessMode ? 'block' : 'none';
+      }
     });
+
+    // ✅ [v1.4.20] 의료 키워드 자동 감지 → 경고 모달 표시
+    const checkMedicalKeyword = () => {
+      const isBusinessMode = continuousContentModeSelect.value === 'business';
+      const warning = document.getElementById('business-medical-warning');
+      if (!warning || !isBusinessMode) {
+        if (warning) warning.style.display = 'none';
+        return;
+      }
+      const keywordInput = document.getElementById('continuous-keyword-input') as HTMLTextAreaElement
+        || document.getElementById('continuous-keywords-input') as HTMLTextAreaElement;
+      const businessName = (document.getElementById('business-info-name') as HTMLInputElement)?.value || '';
+      const businessExtra = (document.getElementById('business-info-extra') as HTMLTextAreaElement)?.value || '';
+      const allText = `${keywordInput?.value || ''} ${businessName} ${businessExtra}`.toLowerCase();
+      const medicalKeywords = ['병원', '한의원', '피부과', '치과', '성형외과', '정형외과', '비뇨기과', '이비인후과', '안과', '소아과', '내과', '의원', '클리닉', '한방', '양방', '의료', '진료', '시술', '수술'];
+      const hasMedical = medicalKeywords.some(kw => allText.includes(kw));
+      warning.style.display = hasMedical ? 'block' : 'none';
+    };
+    ['continuous-keyword-input', 'continuous-keywords-input', 'business-info-name', 'business-info-extra'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', checkMedicalKeyword);
+    });
+    continuousContentModeSelect.addEventListener('change', checkMedicalKeyword);
   }
 
   // ✅ [2026-02-19] 상세 설정 모달의 콘텐츠 모드 변경 시 쇼핑커넥트 서브탭 자동 이동

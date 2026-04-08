@@ -3553,10 +3553,20 @@ export interface ContentSource {
   targetTraffic?: TargetTrafficStrategy;
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
   toneStyle?: 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'; // ✅ 글 톤/스타일 (10개 전체)
-  contentMode?: 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'custom'; // ✅ 4가지 모드 + 트래픽 사냥꾼
+  contentMode?: 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'custom' | 'business'; // ✅ [v1.4.20] business 추가
   isFullAuto?: boolean; // ✅ 완전자동 발행 모드 (자동화 보조 프롬프트 적용)
   isReviewType?: boolean; // ✅ 리뷰형 글 (구매전환 유도)
   customPrompt?: string; // ✅ 사용자 정의 프롬프트 (추가 지시사항)
+  // ✅ [v1.4.20] 업체 홍보 모드 전용 - 업체 정보 (가짜 번호 생성 방지)
+  businessInfo?: {
+    name?: string;       // 업체명
+    phone?: string;      // 전화번호
+    kakao?: string;      // 카카오톡 ID/링크
+    address?: string;    // 주소
+    hours?: string;      // 영업시간
+    region?: string;     // 서비스 지역 (시공/배달 등)
+    extra?: string;      // 추가 정보 (자격증/경력/특징 등)
+  };
   images?: string[]; // ✅ 크롤링된 이미지 URL 목록 (Shopping Connect)
   collectedImages?: string[]; // ✅ [2026-02-01 FIX] 수집된 이미지 (중복 크롤링 방지용)
   // ✅ [2026-01-30] 쇼핑커넥트 풀스펙 크롤링 정보
@@ -4289,8 +4299,22 @@ imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [원본 텍스트]
-${contentMode === 'homefeed' ? buildStructureVariationDirective() : ''}
-${source.customPrompt ? `
+${contentMode === 'homefeed' ? buildStructureVariationDirective() : ''}${contentMode === 'business' && source.businessInfo ? `
+══════════════════════════════════════════
+🏢 [업체 정보 — 절대 변경/조작 금지, 그대로 사용]
+══════════════════════════════════════════
+${source.businessInfo.name ? `📛 업체명: ${source.businessInfo.name}` : ''}
+${source.businessInfo.phone ? `📞 전화번호: ${source.businessInfo.phone}` : ''}
+${source.businessInfo.kakao ? `💬 카카오톡: ${source.businessInfo.kakao}` : ''}
+${source.businessInfo.address ? `📍 주소: ${source.businessInfo.address}` : ''}
+${source.businessInfo.hours ? `🕐 영업시간: ${source.businessInfo.hours}` : ''}
+${source.businessInfo.region ? `🗺️ 서비스 지역: ${source.businessInfo.region}` : ''}
+${source.businessInfo.extra ? `✨ 특징/경력: ${source.businessInfo.extra}` : ''}
+
+⛔ 위 연락처 정보는 한 글자도 변경하지 말고 그대로 사용하라.
+⛔ 절대 가짜 전화번호, 가짜 카카오톡 ID, 가짜 주소를 만들지 마라.
+⛔ 위 업체명을 본문에 8~12회 자연 반복하라.
+` : ''}${source.customPrompt ? `
 ══════════════════════════════════════════
 💡 [사용자 추가 지시사항 — 최우선 반영, 다른 모든 규칙보다 상위]
 ══════════════════════════════════════════
