@@ -8201,6 +8201,23 @@ export async function generateStructuredContent(
       const mode = (source.contentMode || 'seo') as PromptMode;
       const systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
 
+      // ✅ [v1.4.4] 70점 동적 Grounding 결정
+      const rawTextLen = (source.rawText || '').length;
+      const isUrlMode = !!source.url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news';
+      let smartGrounding: boolean;
+      if (isUrlMode) {
+        // URL 모드: 사용자가 신뢰한 출처 → 본문 1000자 이상이면 OFF
+        smartGrounding = rawTextLen < 1000;
+      } else {
+        // 키워드 모드: 길이 + 키워드 관련성 평가
+        const primaryKw = getPrimaryKeywordFromSource(source);
+        const hasKeywordInRawText = primaryKw && rawTextLen > 0
+          ? (source.rawText || '').toLowerCase().includes(primaryKw.toLowerCase())
+          : false;
+        smartGrounding = rawTextLen < 2000 || !hasKeywordInRawText;
+      }
+      console.log(`[ContentGenerator] 🧠 Grounding 결정: ${smartGrounding ? 'ON (보강 필요)' : 'OFF (rawText 충분)'} | mode=${isUrlMode ? 'URL' : 'KEYWORD'}, rawText=${rawTextLen}자`);
+
       // ✅ [Traffic Hunter 통합] buildModeBasedPrompt 내에서 계산된 temperature 값을 가져와야 함.
       // 하지만 buildModeBasedPrompt는 string만 반환하므로, 여기서 다시 온도 계산 (중복을 피하려면 리팩토링이 필요하지만 현재 흐름 유지)
       let temperature = 0.5;
@@ -8237,7 +8254,8 @@ export async function generateStructuredContent(
           // ✅ [2026-01-25] Perplexity AI (Sonar) 실시간 검색 기반 콘텐츠 생성
           rawResponse = await withAbortRace(callPerplexity(systemPrompt, temperature, adjustedMinChars));
         } else {
-          rawResponse = await withAbortRace(callGemini(systemPrompt, temperature, adjustedMinChars));
+          // ✅ [v1.4.4] 동적 Grounding 결정 적용
+          rawResponse = await withAbortRace(callGemini(systemPrompt, temperature, adjustedMinChars, { useGrounding: smartGrounding }));
         }
         raw = rawResponse; // Assign rawResponse to raw for subsequent processing
         console.log(`[ContentGenerator] API 완료: ${provider} (${Date.now() - apiStart}ms)`);
