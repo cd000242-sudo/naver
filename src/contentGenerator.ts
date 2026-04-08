@@ -6208,26 +6208,27 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   const trimmedKey = apiKey.trim();
 
   // 2. 모델 목록 설정
-  // ✅ [2026-04-08 FIX] 사용자 선택 모델을 최우선 사용, 폴백은 같은 티어(flash/pro)만
-  let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || 'gemini-3.1-flash-preview';
+  // ✅ [v1.4.16 FIX] 기본값을 gemini-2.5-flash로 변경 (확실한 무료 한도 1500회/일)
+  // 이전: gemini-3.1-flash-preview는 Preview 모델이라 무료 한도 없음 → 1회 후 즉시 한도 초과
+  let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || 'gemini-2.5-flash';
 
   // 비-Gemini 모델명이 들어온 경우 Gemini 기본값으로 교체
   if (!primaryModel.startsWith('gemini-')) {
-    primaryModel = 'gemini-3.1-flash-preview';
+    primaryModel = 'gemini-2.5-flash';
   }
 
-  // ✅ [2026-04-08 FIX] 사용자가 선택한 모델 티어에 맞는 폴백만 사용
-  // pro 모델을 선택하지 않았으면 pro 폴백 금지 (비용 폭증 방지)
-  // gemini-2.0-flash는 2026-09-24 종료 예정이므로 마지막 폴백으로 배치
+  // ✅ [v1.4.16] 폴백 체인 재정렬 — 무료 한도 있는 모델 우선
+  // gemini-3.1-flash-preview는 Preview = 무료 한도 없음 → 사용자가 명시 선택할 때만 사용
+  // gemini-2.5-flash, gemini-2.0-flash가 1500회/일 무료
   const isPro = primaryModel.includes('-pro');
   const flashModels = [
-    'gemini-3.1-flash-preview',  // 최신 flash
-    'gemini-2.5-flash',          // 안정적 GA
-    'gemini-2.0-flash',          // 종료 예정 (2026-09-24) — 최후 폴백
+    'gemini-2.5-flash',          // ✅ 무료 1500/일 (가장 안정적)
+    'gemini-2.0-flash',          // ✅ 무료 1500/일 (종료 2026-09-24)
+    'gemini-3.1-flash-preview',  // ⚠️ Preview, 무료 한도 없음 — 최후 폴백
   ];
   const proModels = [
-    'gemini-3.1-pro-preview',    // 최신 pro
-    'gemini-2.5-pro',            // 안정적 GA
+    'gemini-2.5-pro',            // ✅ 무료 25/일
+    'gemini-3.1-pro-preview',    // ⚠️ Preview, 무료 한도 없음
     ...flashModels,              // pro 실패 시 flash로 폴백
   ];
   const baseModels = isPro ? proModels : flashModels;
