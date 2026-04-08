@@ -4033,6 +4033,52 @@ function getAutoToneByCategory(category: string | undefined): 'friendly' | 'prof
 }
 
 // ✅ 2축 분리 구조 프롬프트 생성 함수 (노출 목적 × 카테고리)
+// ✅ [v1.4.5] 경량 재작성 프롬프트 — 비용 1/10 (Lite Mode)
+// 입력 토큰을 10,000 → 1,500으로 축소하여 비용 대폭 절감
+// rawText가 충분할 때 사용 (할루시네이션 위험 없음)
+function buildLiteRewritePrompt(source: ContentSource, minChars: number = 2000): string {
+  const rawText = (source.rawText || '').trim();
+  const title = source.title || '';
+  const primaryKeyword = getPrimaryKeywordFromSource(source);
+  const toneStyle = source.toneStyle || 'friendly';
+
+  return `당신은 네이버 블로그 글을 자연스럽게 재작성하는 전문가입니다.
+
+[핵심 작업]
+아래 [원본 자료]를 기반으로 ${minChars}자 이상의 자연스러운 블로그 글을 작성하세요.
+원본의 사실 정보(수치, 날짜, 고유명사)는 정확히 유지하되, 표현은 자유롭게 재구성합니다.
+
+[톤]
+${toneStyle}
+
+[필수 규칙]
+1. 원본에 없는 수치/날짜/사실은 절대 지어내지 마세요 (할루시네이션 금지)
+2. 키워드 "${primaryKeyword}"를 자연스럽게 본문에 포함
+3. 5~7개 소제목으로 구조화
+4. 각 소제목마다 3문장 이상
+5. 마크다운 사용 금지 (네이버 에디터용 평문)
+
+[원본 자료]
+제목: ${title}
+${rawText.substring(0, 6000)}
+
+[출력 형식]
+다음 JSON 형식으로만 출력하세요:
+{
+  "selectedTitle": "글 제목",
+  "introduction": "도입부 (2~3문장)",
+  "headings": [
+    {"title": "소제목 1", "body": "본문 1 (3문장 이상)"},
+    {"title": "소제목 2", "body": "본문 2"},
+    {"title": "소제목 3", "body": "본문 3"},
+    {"title": "소제목 4", "body": "본문 4"},
+    {"title": "소제목 5", "body": "본문 5"}
+  ],
+  "conclusion": "마무리 (2~3문장)",
+  "hashtags": ["태그1", "태그2", "태그3"]
+}`;
+}
+
 function buildModeBasedPrompt(
   source: ContentSource,
   mode: PromptMode,
@@ -7951,6 +7997,15 @@ export async function generateStructuredContent(
   // ✅ 기본 글자수: 3000자 (풍부한 내용 + 최적 분량, 양보다 질 최극상)
   const minChars = options.minChars ?? 3000;
 
+  // ✅ [v1.4.5] config 로드 (Lite Mode 설정 확인용)
+  let config: any = null;
+  try {
+    const { loadConfig } = await import('./configManager.js');
+    config = await loadConfig();
+  } catch (e) {
+    // config 로드 실패 시 무시 (기본값 사용)
+  }
+
   // ✅ [2026-01-26 FIX] provider가 명시적으로 전달되지 않으면 gemini 기본값 사용
   // Perplexity는 renderer에서 명시적으로 'perplexity'로 전달될 때만 사용
   if (!provider) {
@@ -8199,17 +8254,31 @@ export async function generateStructuredContent(
       // ✅ 다양성 극대화를 위해 temperature 높임 (매번 다른 글 생성)
       // ✅ 모드별 프롬프트 및 온도 설정 가져오기
       const mode = (source.contentMode || 'seo') as PromptMode;
-      const systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
 
-      // ✅ [v1.4.4] 70점 동적 Grounding 결정
+      // ✅ [v1.4.5] Lite Mode 결정 — 재작성 가능 조건 검사
+      // rawText가 충분(>= 1500자) + 사용자가 비활성화 안 했으면 → Lite Mode 사용
+      // Lite Mode = 경량 재작성 프롬프트 (입력 토큰 1/7로 축소 → 비용 1/10)
       const rawTextLen = (source.rawText || '').length;
       const isUrlMode = !!source.url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news';
+      const liteEnabled = (config as any)?.disableLiteMode !== true;
+      const useLiteMode = liteEnabled && rawTextLen >= 1500;
+
+      const systemPrompt = useLiteMode
+        ? buildLiteRewritePrompt(source, adjustedMinChars)
+        : buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
+
+      console.log(`[ContentGenerator] 📝 프롬프트 모드: ${useLiteMode ? 'Lite (재작성, 비용 1/10)' : 'Full (생성)'} | rawText=${rawTextLen}자, 입력 토큰 약 ${Math.round(systemPrompt.length / 3)}`);
+
+      // ✅ [v1.4.4] 70점 동적 Grounding 결정
       let smartGrounding: boolean;
-      if (isUrlMode) {
+      if (useLiteMode) {
+        // Lite 모드: rawText가 충분하므로 Grounding 불필요
+        smartGrounding = false;
+      } else if (isUrlMode) {
         // URL 모드: 사용자가 신뢰한 출처 → 본문 1000자 이상이면 OFF
         smartGrounding = rawTextLen < 1000;
       } else {
-        // 키워드 모드: 길이 + 키워드 관련성 평가
+        // 키워드 모드 + Full 프롬프트: 길이 + 키워드 관련성 평가
         const primaryKw = getPrimaryKeywordFromSource(source);
         const hasKeywordInRawText = primaryKw && rawTextLen > 0
           ? (source.rawText || '').toLowerCase().includes(primaryKw.toLowerCase())

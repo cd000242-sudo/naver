@@ -86,6 +86,9 @@ export interface AppConfig {
   // ✅ [v1.4.3] Google Search Grounding 옵션 (기본 OFF — 호출당 $0.035 추가 비용 방지)
   enableSearchGrounding?: boolean;
 
+  // ✅ [v1.4.5] Lite Mode 비활성화 옵션 (기본 false=활성화, true 시 Full 프롬프트 강제 사용)
+  disableLiteMode?: boolean;
+
   // ✅ 이미지 품질 티어 시스템 (비용 최적화)
   imageQualityMode?: 'balanced' | 'all-budget' | 'all-premium' | 'all-4k';
   thumbnailImageModel?: 'gemini-3-pro-4k' | 'gemini-3-pro' | 'gemini-2.5-flash' | 'gemini-2.0-flash-exp';
