@@ -4033,52 +4033,6 @@ function getAutoToneByCategory(category: string | undefined): 'friendly' | 'prof
 }
 
 // ✅ 2축 분리 구조 프롬프트 생성 함수 (노출 목적 × 카테고리)
-// ✅ [v1.4.5] 경량 재작성 프롬프트 — 비용 1/10 (Lite Mode)
-// 입력 토큰을 10,000 → 1,500으로 축소하여 비용 대폭 절감
-// rawText가 충분할 때 사용 (할루시네이션 위험 없음)
-function buildLiteRewritePrompt(source: ContentSource, minChars: number = 2000): string {
-  const rawText = (source.rawText || '').trim();
-  const title = source.title || '';
-  const primaryKeyword = getPrimaryKeywordFromSource(source);
-  const toneStyle = source.toneStyle || 'friendly';
-
-  return `당신은 네이버 블로그 글을 자연스럽게 재작성하는 전문가입니다.
-
-[핵심 작업]
-아래 [원본 자료]를 기반으로 ${minChars}자 이상의 자연스러운 블로그 글을 작성하세요.
-원본의 사실 정보(수치, 날짜, 고유명사)는 정확히 유지하되, 표현은 자유롭게 재구성합니다.
-
-[톤]
-${toneStyle}
-
-[필수 규칙]
-1. 원본에 없는 수치/날짜/사실은 절대 지어내지 마세요 (할루시네이션 금지)
-2. 키워드 "${primaryKeyword}"를 자연스럽게 본문에 포함
-3. 5~7개 소제목으로 구조화
-4. 각 소제목마다 3문장 이상
-5. 마크다운 사용 금지 (네이버 에디터용 평문)
-
-[원본 자료]
-제목: ${title}
-${rawText.substring(0, 6000)}
-
-[출력 형식]
-다음 JSON 형식으로만 출력하세요:
-{
-  "selectedTitle": "글 제목",
-  "introduction": "도입부 (2~3문장)",
-  "headings": [
-    {"title": "소제목 1", "body": "본문 1 (3문장 이상)"},
-    {"title": "소제목 2", "body": "본문 2"},
-    {"title": "소제목 3", "body": "본문 3"},
-    {"title": "소제목 4", "body": "본문 4"},
-    {"title": "소제목 5", "body": "본문 5"}
-  ],
-  "conclusion": "마무리 (2~3문장)",
-  "hashtags": ["태그1", "태그2", "태그3"]
-}`;
-}
-
 function buildModeBasedPrompt(
   source: ContentSource,
   mode: PromptMode,
@@ -6548,6 +6502,51 @@ function getTimeoutMs(minChars: number, retryAttempt: number = 0): number {
   return Math.floor(baseTimeout * multiplier);
 }
 
+// ✅ [v1.4.6] Gemini Context Caching — 정적 시스템 프롬프트를 캐시하여 입력 토큰 비용 75% 절감
+// 캐시 키: SHA-256(systemText + modelName) → 동일 system 프롬프트 + 동일 모델이면 재사용
+// 캐시 TTL: 1시간 (Google 권장값)
+// 최소 토큰: Flash 4096, Pro 2048 (그 이상이어야 캐시 가능)
+interface GeminiCacheEntry {
+  cacheName: string;        // 캐시 리소스 이름 (Google 서버에 저장)
+  modelName: string;
+  createdAt: number;        // 생성 시각 (만료 체크용)
+  ttlSeconds: number;       // TTL
+}
+
+const geminiPromptCache = new Map<string, GeminiCacheEntry>();
+const GEMINI_CACHE_TTL = 3600; // 1시간
+const GEMINI_CACHE_MIN_TOKENS = { flash: 4096, pro: 2048 };
+
+/**
+ * 시스템 프롬프트의 캐시 키 생성 (SHA-256)
+ */
+function getCacheKey(systemText: string, modelName: string): string {
+  const crypto = require('crypto') as typeof import('crypto');
+  const hash = crypto.createHash('sha256');
+  hash.update(`${modelName}::${systemText}`);
+  return hash.digest('hex').substring(0, 32);
+}
+
+/**
+ * 캐시 만료 체크
+ */
+function isCacheExpired(entry: GeminiCacheEntry): boolean {
+  const elapsed = (Date.now() - entry.createdAt) / 1000;
+  return elapsed >= entry.ttlSeconds - 60; // 60초 안전 마진
+}
+
+/**
+ * 캐시 정리 (만료된 항목 제거)
+ */
+function cleanExpiredCaches(): void {
+  for (const [key, entry] of geminiPromptCache.entries()) {
+    if (isCacheExpired(entry)) {
+      geminiPromptCache.delete(key);
+      console.log(`[GeminiCache] 만료 캐시 제거: ${entry.cacheName}`);
+    }
+  }
+}
+
 async function callGemini(prompt: string, temperature: number = 0.9, minChars: number = 2000, options: { useGrounding?: boolean } = {}): Promise<string> {
   const timeoutMs = getTimeoutMs(minChars);
 
@@ -6610,18 +6609,70 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
       try {
         const { GoogleGenerativeAI } = await import('@google/generative-ai');
         const client = new GoogleGenerativeAI(trimmedKey);
-        const model = client.getGenerativeModel({ model: modelName });
 
-        console.log(`[Gemini] 시도 중: ${modelName} (시도 ${modelRetryCount + 1}/${perModelMaxRetries}) [Search Grounding: ON]`);
+        // ✅ [v1.4.6] Gemini Context Caching — 시스템 프롬프트 재사용으로 75% 절감
+        // 캐시 가능 조건: system 프롬프트가 충분히 큼 (Flash 4096 토큰, Pro 2048 토큰)
+        // 1토큰 ≈ 4자 한국어 기준 → Flash 16,384자, Pro 8,192자
+        const minCacheChars = modelName.includes('-pro') ? 8192 : 16384;
+        const cacheEnabled = geminiSystemText.length >= minCacheChars;
+        let cachedContentName: string | undefined;
+
+        if (cacheEnabled) {
+          cleanExpiredCaches();
+          const cacheKey = getCacheKey(geminiSystemText, modelName);
+          const existingCache = geminiPromptCache.get(cacheKey);
+
+          if (existingCache && !isCacheExpired(existingCache)) {
+            // 캐시 히트 — 75% 절감
+            cachedContentName = existingCache.cacheName;
+            console.log(`[GeminiCache] ✅ 히트: ${cachedContentName.substring(0, 30)}... (system ${geminiSystemText.length}자, 75% 절감)`);
+          } else {
+            // 캐시 미스 — 새로 생성
+            try {
+              const { GoogleAICacheManager } = await import('@google/generative-ai/server' as any);
+              const cacheManager = new GoogleAICacheManager(trimmedKey);
+              const newCache = await cacheManager.create({
+                model: `models/${modelName}`,
+                systemInstruction: { role: 'system', parts: [{ text: geminiSystemText }] },
+                contents: [{ role: 'user', parts: [{ text: '준비 완료' }] }],
+                ttlSeconds: GEMINI_CACHE_TTL,
+              });
+              cachedContentName = newCache.name;
+              if (cachedContentName) {
+                geminiPromptCache.set(cacheKey, {
+                  cacheName: cachedContentName,
+                  modelName,
+                  createdAt: Date.now(),
+                  ttlSeconds: GEMINI_CACHE_TTL,
+                });
+                console.log(`[GeminiCache] 🆕 생성: ${cachedContentName.substring(0, 30)}... (다음 호출부터 75% 절감)`);
+              }
+            } catch (cacheErr: any) {
+              console.warn(`[GeminiCache] ⚠️ 캐시 생성 실패 (정상 호출로 폴백): ${cacheErr?.message?.substring(0, 100)}`);
+              cachedContentName = undefined;
+            }
+          }
+        }
+
+        // 모델 인스턴스 생성 (캐시 사용 여부에 따라 분기)
+        const model = cachedContentName
+          ? client.getGenerativeModelFromCachedContent({
+              model: modelName,
+              name: cachedContentName,
+            } as any)
+          : client.getGenerativeModel({ model: modelName });
+
+        console.log(`[Gemini] 시도 중: ${modelName} (시도 ${modelRetryCount + 1}/${perModelMaxRetries})${cachedContentName ? ' [캐시 사용 ✅]' : ''}`);
         // ✅ [v1.4.3] Search Grounding 스마트 적용 — 본문 생성만 ON, 패치는 OFF
-        // 본문(useGrounding=true): 할루시네이션 방지를 위해 Grounding 사용 ($0.035)
-        // 패치(useGrounding=false): 형식 수정만 → Grounding 불필요 (비용 절감)
-        // config.enableSearchGrounding=false면 본문도 OFF (사용자 선택)
-        const configGrounding = (config as any)?.enableSearchGrounding !== false; // 기본 true
+        const configGrounding = (config as any)?.enableSearchGrounding !== false;
         const useGrounding = (options.useGrounding !== false) && configGrounding;
+
+        // 캐시 사용 시 systemInstruction 중복 금지 (캐시에 이미 포함)
         const requestConfig: any = {
           contents: [{ role: 'user', parts: [{ text: geminiUserText }] }],
-          ...(geminiSystemText ? { systemInstruction: { role: 'system', parts: [{ text: geminiSystemText }] } } : {}),
+          ...(!cachedContentName && geminiSystemText
+            ? { systemInstruction: { role: 'system', parts: [{ text: geminiSystemText }] } }
+            : {}),
           generationConfig: {
             temperature: temperature,
             topP: 0.95,
@@ -8254,38 +8305,22 @@ export async function generateStructuredContent(
       // ✅ 다양성 극대화를 위해 temperature 높임 (매번 다른 글 생성)
       // ✅ 모드별 프롬프트 및 온도 설정 가져오기
       const mode = (source.contentMode || 'seo') as PromptMode;
+      const systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
 
-      // ✅ [v1.4.5] Lite Mode 결정 — 재작성 가능 조건 검사
-      // rawText가 충분(>= 1500자) + 사용자가 비활성화 안 했으면 → Lite Mode 사용
-      // Lite Mode = 경량 재작성 프롬프트 (입력 토큰 1/7로 축소 → 비용 1/10)
+      // ✅ [v1.4.4] 70점 동적 Grounding 결정 (할루시네이션 방지 + 비용 절감)
       const rawTextLen = (source.rawText || '').length;
       const isUrlMode = !!source.url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news';
-      const liteEnabled = (config as any)?.disableLiteMode !== true;
-      const useLiteMode = liteEnabled && rawTextLen >= 1500;
-
-      const systemPrompt = useLiteMode
-        ? buildLiteRewritePrompt(source, adjustedMinChars)
-        : buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
-
-      console.log(`[ContentGenerator] 📝 프롬프트 모드: ${useLiteMode ? 'Lite (재작성, 비용 1/10)' : 'Full (생성)'} | rawText=${rawTextLen}자, 입력 토큰 약 ${Math.round(systemPrompt.length / 3)}`);
-
-      // ✅ [v1.4.4] 70점 동적 Grounding 결정
       let smartGrounding: boolean;
-      if (useLiteMode) {
-        // Lite 모드: rawText가 충분하므로 Grounding 불필요
-        smartGrounding = false;
-      } else if (isUrlMode) {
-        // URL 모드: 사용자가 신뢰한 출처 → 본문 1000자 이상이면 OFF
+      if (isUrlMode) {
         smartGrounding = rawTextLen < 1000;
       } else {
-        // 키워드 모드 + Full 프롬프트: 길이 + 키워드 관련성 평가
         const primaryKw = getPrimaryKeywordFromSource(source);
         const hasKeywordInRawText = primaryKw && rawTextLen > 0
           ? (source.rawText || '').toLowerCase().includes(primaryKw.toLowerCase())
           : false;
         smartGrounding = rawTextLen < 2000 || !hasKeywordInRawText;
       }
-      console.log(`[ContentGenerator] 🧠 Grounding 결정: ${smartGrounding ? 'ON (보강 필요)' : 'OFF (rawText 충분)'} | mode=${isUrlMode ? 'URL' : 'KEYWORD'}, rawText=${rawTextLen}자`);
+      console.log(`[ContentGenerator] 🧠 Grounding: ${smartGrounding ? 'ON' : 'OFF'} | mode=${isUrlMode ? 'URL' : 'KEYWORD'}, rawText=${rawTextLen}자`);
 
       // ✅ [Traffic Hunter 통합] buildModeBasedPrompt 내에서 계산된 temperature 값을 가져와야 함.
       // 하지만 buildModeBasedPrompt는 string만 반환하므로, 여기서 다시 온도 계산 (중복을 피하려면 리팩토링이 필요하지만 현재 흐름 유지)
