@@ -612,10 +612,14 @@
                             <label>🤖 AI 엔진</label>
                             <select id="unified-gemini-model"
                                 style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: var(--radius-sm); font-size: 0.9rem;">
-                                <optgroup label="⭐ 사용 가능한 Gemini 모델">
-                                    <option value="gemini-3.1-flash-preview" selected>⚡ Gemini 3.1 Flash (고속, 기본)</option>
-                                    <option value="gemini-3.1-pro-preview">🏆 Gemini 3.1 Pro (최고 품질)</option>
-                                    <option value="gemini-2.5-flash">💎 Gemini 2.5 Flash (안정)</option>
+                                <optgroup label="⭐ 무료 한도 가능 (추천)">
+                                    <option value="gemini-2.5-flash" selected>💎 Gemini 2.5 Flash (무료 1500/일, 추천)</option>
+                                    <option value="gemini-2.0-flash">⚡ Gemini 2.0 Flash (무료 1500/일)</option>
+                                    <option value="gemini-2.5-pro">🏆 Gemini 2.5 Pro (무료 25/일, 고품질)</option>
+                                </optgroup>
+                                <optgroup label="🆕 Preview (유료, 무료 한도 없음)">
+                                    <option value="gemini-3.1-flash-preview">🆕 Gemini 3.1 Flash Preview (유료)</option>
+                                    <option value="gemini-3.1-pro-preview">💎 Gemini 3.1 Pro Preview (유료)</option>
                                 </optgroup>
                             </select>
                             <input type="hidden" id="unified-generator" value="gemini">
@@ -4769,26 +4773,25 @@
                                     <!-- ═══ 🔷 GEMINI 엔진 ═══ -->
                                     <div style="font-size: 0.8rem; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; padding-left: 0.25rem;">🔷 Google Gemini</div>
 
-                                    <!-- ✅ Gemini 3.1 Flash (가성비 추천) -->
+                                    <!-- ✅ Gemini 3.1 Flash Preview (유료) -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #10b981; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #ecfdf5, #d1fae5); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);">
                                         <div
                                             style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #d1fae5; border-radius: 50%;">
                                             <input type="radio" name="primaryGeminiTextModel" value="gemini-3.1-flash-preview"
-                                                checked
                                                 style="width: 18px; height: 18px; cursor: pointer; accent-color: #10b981;">
                                         </div>
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>⚡ Gemini 3.1 Flash</span>
+                                                <span>🆕 Gemini 3.1 Flash Preview</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);">💰 가성비 추천</span>
+                                                    style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);">💳 유료 (한도 없음)</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
-                                                빠른 속도 · 고품질 · 최신 모델 · Search Grounding 무료</div>
-                                            <div style="font-size: 0.8rem; color: #059669; font-weight: 700; margin-top: 0.3rem;">
-                                                📊 1편당 ₩6 ($0.004)</div>
+                                                Preview 모델 · 무료 한도 없음 · 첫 호출부터 유료 청구</div>
+                                            <div style="font-size: 0.8rem; color: #d97706; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 1편당 약 ₩4 (캐시 적중 시 ₩1.5)</div>
                                         </div>
                                     </label>
 
@@ -4811,16 +4814,17 @@
                                             <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
                                                 압도적 추론 · 깊이 있는 글쓰기 · 홈피드 최적화</div>
                                             <div style="font-size: 0.8rem; color: #b45309; font-weight: 700; margin-top: 0.3rem;">
-                                                📊 1편당 ₩93 ($0.066)</div>
+                                                📊 1편당 약 ₩50 (캐시 적중 시 ₩18, Preview = 유료)</div>
                                         </div>
                                     </label>
 
-                                    <!-- 🆓 Gemini 2.5 Flash (무료, 가장 인기) -->
+                                    <!-- 🆓 Gemini 2.5 Flash (무료, 기본/추천) -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #14b8a6; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f0fdfa, #ccfbf1); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);">
                                         <div
                                             style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #ccfbf1; border-radius: 50%;">
                                             <input type="radio" name="primaryGeminiTextModel" value="gemini-2.5-flash"
+                                                checked
                                                 style="width: 18px; height: 18px; cursor: pointer; accent-color: #14b8a6;">
                                         </div>
                                         <div style="flex: 1;">
