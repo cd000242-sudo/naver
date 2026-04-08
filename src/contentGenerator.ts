@@ -6259,6 +6259,33 @@ function cleanExpiredCaches(): void {
   }
 }
 
+// ✅ [v1.4.23] Gemini 모델 폴백 체인 빌더 — 테스트용으로 분리 export
+// v1.4.16 fix: 기본값 gemini-2.5-flash (1500/일 무료), Preview 모델은 최후 폴백
+export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string; geminiModel?: string }): {
+  primaryModel: string;
+  uniqueModels: string[];
+  isPro: boolean;
+} {
+  let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || 'gemini-2.5-flash';
+  if (!primaryModel.startsWith('gemini-')) {
+    primaryModel = 'gemini-2.5-flash';
+  }
+  const isPro = primaryModel.includes('-pro');
+  const flashModels = [
+    'gemini-2.5-flash',          // ✅ 무료 1500/일
+    'gemini-2.0-flash',          // ✅ 무료 1500/일 (종료 2026-09-24)
+    'gemini-3.1-flash-preview',  // ⚠️ Preview, 무료 한도 없음
+  ];
+  const proModels = [
+    'gemini-2.5-pro',            // ✅ 무료 25/일
+    'gemini-3.1-pro-preview',    // ⚠️ Preview, 무료 한도 없음
+    ...flashModels,
+  ];
+  const baseModels = isPro ? proModels : flashModels;
+  const uniqueModels = Array.from(new Set([primaryModel, ...baseModels]));
+  return { primaryModel, uniqueModels, isPro };
+}
+
 async function callGemini(prompt: string, temperature: number = 0.9, minChars: number = 2000, options: { useGrounding?: boolean } = {}): Promise<string> {
   const timeoutMs = getTimeoutMs(minChars);
 
@@ -6282,33 +6309,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   const trimmedKey = apiKey.trim();
 
   // 2. 모델 목록 설정
-  // ✅ [v1.4.16 FIX] 기본값을 gemini-2.5-flash로 변경 (확실한 무료 한도 1500회/일)
-  // 이전: gemini-3.1-flash-preview는 Preview 모델이라 무료 한도 없음 → 1회 후 즉시 한도 초과
-  let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || 'gemini-2.5-flash';
-
-  // 비-Gemini 모델명이 들어온 경우 Gemini 기본값으로 교체
-  if (!primaryModel.startsWith('gemini-')) {
-    primaryModel = 'gemini-2.5-flash';
-  }
-
-  // ✅ [v1.4.16] 폴백 체인 재정렬 — 무료 한도 있는 모델 우선
-  // gemini-3.1-flash-preview는 Preview = 무료 한도 없음 → 사용자가 명시 선택할 때만 사용
-  // gemini-2.5-flash, gemini-2.0-flash가 1500회/일 무료
-  const isPro = primaryModel.includes('-pro');
-  const flashModels = [
-    'gemini-2.5-flash',          // ✅ 무료 1500/일 (가장 안정적)
-    'gemini-2.0-flash',          // ✅ 무료 1500/일 (종료 2026-09-24)
-    'gemini-3.1-flash-preview',  // ⚠️ Preview, 무료 한도 없음 — 최후 폴백
-  ];
-  const proModels = [
-    'gemini-2.5-pro',            // ✅ 무료 25/일
-    'gemini-3.1-pro-preview',    // ⚠️ Preview, 무료 한도 없음
-    ...flashModels,              // pro 실패 시 flash로 폴백
-  ];
-  const baseModels = isPro ? proModels : flashModels;
-
-  // 선택된 모델을 가장 앞에 두고 나머지를 배치 (중복 제거)
-  const uniqueModels = Array.from(new Set([primaryModel, ...baseModels]));
+  const { primaryModel, uniqueModels, isPro } = buildGeminiModelChain(config as any);
   console.log(`[Gemini] 모델 체인: ${uniqueModels.join(' → ')} (사용자 선택: ${primaryModel}, 티어: ${isPro ? 'PRO' : 'FLASH'})`);
 
   let lastError: Error | null = null;
