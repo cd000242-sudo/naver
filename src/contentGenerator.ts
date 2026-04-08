@@ -2504,7 +2504,7 @@ JSON:
       } else if (provider === 'claude') {
         raw = await callClaude(titlePromptFull, titleTemp, 650);
       } else {
-        raw = await callGemini(titlePromptFull, titleTemp, 650);
+        raw = await callGemini(titlePromptFull, titleTemp, 650, { useGrounding: false }); // ✅ [v1.4.3] 제목 패치는 Grounding OFF (비용 절감)
       }
       console.log(`[TitleGen] 시도 ${attempt + 1}/${MAX_RETRIES + 1} — 공식: ${formula.name}`);
 
@@ -2874,7 +2874,7 @@ JSON:
     } else if (provider === 'claude') {
       raw = await callClaude(prompt, 0.9, 450);
     } else {
-      raw = await callGemini(prompt, 0.9, 450);
+      raw = await callGemini(prompt, 0.9, 450, { useGrounding: false }); // ✅ [v1.4.3] 도입부 패치는 Grounding OFF (비용 절감)
     }
     const parsed = safeParseJson<any>(raw);
     const introduction = typeof parsed?.introduction === 'string' ? String(parsed.introduction).trim() : '';
@@ -6502,7 +6502,7 @@ function getTimeoutMs(minChars: number, retryAttempt: number = 0): number {
   return Math.floor(baseTimeout * multiplier);
 }
 
-async function callGemini(prompt: string, temperature: number = 0.9, minChars: number = 2000): Promise<string> {
+async function callGemini(prompt: string, temperature: number = 0.9, minChars: number = 2000, options: { useGrounding?: boolean } = {}): Promise<string> {
   const timeoutMs = getTimeoutMs(minChars);
 
   // ✅ 설정 로드
@@ -6554,7 +6554,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   console.log(`[Gemini] 모델 체인: ${uniqueModels.join(' → ')} (사용자 선택: ${primaryModel}, 티어: ${isPro ? 'PRO' : 'FLASH'})`);
 
   let lastError: Error | null = null;
-  const perModelMaxRetries = 3; // ✅ [2026-01-28 FIX] 재시도 3회로 증가 (유료 사용자 안정성)
+  const perModelMaxRetries = 2; // ✅ [v1.4.3] 3 → 2 (비용 절감, 다음 모델로 빠른 폴백)
 
   for (let i = 0; i < uniqueModels.length; i++) {
     const modelName = uniqueModels[i];
@@ -6567,26 +6567,36 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         const model = client.getGenerativeModel({ model: modelName });
 
         console.log(`[Gemini] 시도 중: ${modelName} (시도 ${modelRetryCount + 1}/${perModelMaxRetries}) [Search Grounding: ON]`);
-        const streamPromise = model.generateContentStream({
+        // ✅ [v1.4.3] Search Grounding 스마트 적용 — 본문 생성만 ON, 패치는 OFF
+        // 본문(useGrounding=true): 할루시네이션 방지를 위해 Grounding 사용 ($0.035)
+        // 패치(useGrounding=false): 형식 수정만 → Grounding 불필요 (비용 절감)
+        // config.enableSearchGrounding=false면 본문도 OFF (사용자 선택)
+        const configGrounding = (config as any)?.enableSearchGrounding !== false; // 기본 true
+        const useGrounding = (options.useGrounding !== false) && configGrounding;
+        const requestConfig: any = {
           contents: [{ role: 'user', parts: [{ text: geminiUserText }] }],
           ...(geminiSystemText ? { systemInstruction: { role: 'system', parts: [{ text: geminiSystemText }] } } : {}),
-          // @ts-ignore - Google Search Grounding 상시 활성화 (실시간 검색 기반 콘텐츠 품질 향상)
-          tools: [{ googleSearch: {} }],
           generationConfig: {
             temperature: temperature,
             topP: 0.95,
             topK: 40,
             maxOutputTokens: 16000,
-            // ⚠️ responseMimeType: 'application/json' 제거 - Search Grounding과 JSON 모드는 동시 사용 불가
-            // 프롬프트에서 JSON 형식 출력을 지시함
           },
-        });
+        };
+        if (useGrounding) {
+          requestConfig.tools = [{ googleSearch: {} }];
+        } else {
+          // Grounding OFF 시 JSON 모드 사용 가능 (추가 비용 절감)
+          requestConfig.generationConfig.responseMimeType = 'application/json';
+        }
+        const streamPromise = model.generateContentStream(requestConfig);
 
         // ✅ [2026-01-28 FIX] 첫 응답 타임아웃 60초로 증가 (유료 API 안정성)
         const timeoutPromise = new Promise<never>((_, reject) => {
           setTimeout(() => reject(new Error('⏱️ 연결 타임아웃')), 60000);
         });
 
+        console.log(`[Gemini] 🚀 ${modelName} 호출 (Search Grounding: ${useGrounding ? 'ON +$0.035' : 'OFF (비용 절감)'})`);
         const streamResult = await Promise.race([streamPromise, timeoutPromise]);
         let text = '';
 
@@ -7948,7 +7958,7 @@ export async function generateStructuredContent(
   }
   console.log(`[ContentGenerator] 사용 엔진: ${provider} (목표: ${minChars}자)`);
 
-  const MAX_ATTEMPTS = Math.max(1, Number(process.env.CONTENT_MAX_ATTEMPTS ?? 3));
+  const MAX_ATTEMPTS = Math.max(1, Number(process.env.CONTENT_MAX_ATTEMPTS ?? 2));  // ✅ [v1.4.3] 3 → 2 (비용 절감)
   const RETRY_DELAYS = [0, 1200, 2000, 3000, 4500, 6000, 8000];
 
   // ✅ Gemini 전용 강화 재시도 시스템
