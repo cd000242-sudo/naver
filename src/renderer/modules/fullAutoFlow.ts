@@ -3030,15 +3030,16 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
 
   // ✅ [FIX-2] 블로그 발행 API 호출
   // retryCount=0: 재시도 없음 — 이중 실행 방지
-  // ✅ [2026-04-01 FIX] timeout=300000(5분): 안전 타임아웃 — main 측 crash/freeze 시 영원히 멈추는 것 방지
-  // 이전: timeout=0 (무한 대기) → main 프로세스 장애 시 renderer 영원히 블록
+  // ✅ [v1.4.13] timeout 5분 → 25분 — 이미지 6장+ 발행은 6~10분 정상, 5분 타임아웃은 짧음
+  // 실측: BlogExecutor 발행 사이클 +377초(6분 17초) → 5분 timeout fires → 모달 95%에 멈춤
+  // 25분이면 진짜 hang (브라우저 크래시)일 때만 fire하고 정상 발행은 모두 통과
   const apiResponse = await apiClient.call(
     'runAutomation',
     [payload],
     {
-      retryCount: 0,     // ✅ [FIX-2] 재시도 없음 — stale guard 레이스 컨디션 방지
+      retryCount: 0,
       retryDelay: 5000,
-      timeout: 300000    // ✅ [2026-04-01 FIX] 5분 안전 타임아웃 (이전: 0=무한 대기)
+      timeout: 1500000    // ✅ [v1.4.13] 25분 안전 타임아웃 (이전: 5분 — 6~10분 정상 발행 시 timeout)
     }
   );
 
@@ -3128,6 +3129,10 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
       }
     }
 
+    // ✅ [v1.4.13] 에러 시 진행률 모달 정리 — 95%에 갇히는 것 방지
+    try { hideUnifiedProgress(); } catch { /* ignore */ }
+    // ✅ [v1.4.13] 에러 시 진행률 모달 정리 — 95%에 갇히는 것 방지
+    try { hideUnifiedProgress(); } catch { /* ignore */ }
     appendLog(`❌ 블로그 발행에 실패했습니다: ${errorMsg}`);
     throw new Error(errorMsg);
   }
