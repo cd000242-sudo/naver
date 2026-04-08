@@ -30,23 +30,31 @@ declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function isShoppingConnectModeActive(): boolean;
 
 // ✅ [v1.4.24] business 모드 — businessInfo 수집 + 사전 검증 (helper)
-// ✅ [v1.4.26] unified-* (메인 UI) + business-* (모달 UI) 둘 다 시도
+// ✅ [v1.4.27] 4개 panel 지원: unified (메인) + continuous-modal (연속발행 모달) + ma (다중계정) + business (모달 폴백)
 function collectBusinessInfo(contentMode: string): any {
   if (contentMode !== 'business') return undefined;
   const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
-  const getBoth = (a: string, b: string) => get(a) || get(b);
-  const nationwide = (document.getElementById('unified-business-service-nationwide') as HTMLInputElement)?.checked
-    || (document.getElementById('business-service-nationwide') as HTMLInputElement)?.checked;
+  // 4가지 ID prefix를 순서대로 시도 (먼저 값이 있는 것을 사용)
+  const tryGet = (suffix: string) =>
+    get('unified-business-info-' + suffix) ||
+    get('continuous-modal-business-info-' + suffix) ||
+    get('ma-business-info-' + suffix) ||
+    get('business-info-' + suffix);
+  const nationwide =
+    (document.getElementById('unified-business-service-nationwide') as HTMLInputElement)?.checked ||
+    (document.getElementById('continuous-modal-business-service-nationwide') as HTMLInputElement)?.checked ||
+    (document.getElementById('ma-business-service-nationwide') as HTMLInputElement)?.checked ||
+    (document.getElementById('business-service-nationwide') as HTMLInputElement)?.checked;
   const serviceArea: 'nationwide' | 'regional' = nationwide ? 'nationwide' : 'regional';
   const info = {
-    name: getBoth('unified-business-info-name', 'business-info-name'),
-    phone: getBoth('unified-business-info-phone', 'business-info-phone'),
-    kakao: getBoth('unified-business-info-kakao', 'business-info-kakao'),
-    address: getBoth('unified-business-info-address', 'business-info-address'),
-    hours: getBoth('unified-business-info-hours', 'business-info-hours'),
-    region: serviceArea === 'nationwide' ? undefined : getBoth('unified-business-info-region', 'business-info-region'),
+    name: tryGet('name'),
+    phone: tryGet('phone'),
+    kakao: tryGet('kakao'),
+    address: tryGet('address'),
+    hours: tryGet('hours'),
+    region: serviceArea === 'nationwide' ? undefined : tryGet('region'),
     serviceArea,
-    extra: getBoth('unified-business-info-extra', 'business-info-extra'),
+    extra: tryGet('extra'),
   };
   const missing: string[] = [];
   if (!info.name) missing.push('업체명');

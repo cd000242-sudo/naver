@@ -1956,7 +1956,9 @@ export function initContinuousPublishingV2(): void {
   const continuousModalContentModeSelect = document.getElementById('continuous-modal-content-mode') as HTMLSelectElement;
   if (continuousModalContentModeSelect) {
     continuousModalContentModeSelect.addEventListener('change', () => {
-      const isAffiliateMode = continuousModalContentModeSelect.value === 'affiliate';
+      const mode = continuousModalContentModeSelect.value;
+      const isAffiliateMode = mode === 'affiliate';
+      const isBusinessMode = mode === 'business';
       // ✅ [2026-02-19] 쇼핑커넥트 모드 선택 시 → 쇼핑커넥트 서브탭으로 자동 이동
       if (isAffiliateMode && !(window as any)._syncingShoppingTab) {
         (window as any)._syncingShoppingTab = true;
@@ -1967,6 +1969,75 @@ export function initContinuousPublishingV2(): void {
         }
         (window as any)._syncingShoppingTab = false;
       }
+      // ✅ [v1.4.27] 업체 홍보 모드 선택 시 → 업체 정보 패널 표시
+      const businessPanel = document.getElementById('continuous-modal-business-info-panel');
+      if (businessPanel) businessPanel.style.display = isBusinessMode ? 'block' : 'none';
+    });
+
+    // 서비스 범위 라디오 + 의료 키워드 감지 (연속발행 모달)
+    const updateContinuousModalServiceArea = () => {
+      const nationwide = (document.getElementById('continuous-modal-business-service-nationwide') as HTMLInputElement)?.checked;
+      const regionInput = document.getElementById('continuous-modal-business-info-region') as HTMLInputElement;
+      if (regionInput) {
+        regionInput.disabled = nationwide;
+        regionInput.placeholder = nationwide ? '🌏 전국' : '🗺️ 지역 (예: 부산, 울산)';
+        if (nationwide) regionInput.value = '';
+        regionInput.style.opacity = nationwide ? '0.4' : '1';
+      }
+    };
+    document.getElementById('continuous-modal-business-service-nationwide')?.addEventListener('change', updateContinuousModalServiceArea);
+    document.getElementById('continuous-modal-business-service-regional')?.addEventListener('change', updateContinuousModalServiceArea);
+
+    const checkContinuousModalMedical = () => {
+      const warning = document.getElementById('continuous-modal-business-medical-warning');
+      if (!warning) return;
+      const isBiz = continuousModalContentModeSelect.value === 'business';
+      if (!isBiz) { warning.style.display = 'none'; return; }
+      const fields = ['continuous-modal-business-info-name', 'continuous-modal-business-info-extra'];
+      let allText = '';
+      fields.forEach(id => {
+        const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement;
+        if (el) allText += ' ' + (el.value || '');
+      });
+      const medical = ['병원', '한의원', '피부과', '치과', '성형외과', '정형외과', '비뇨기과', '이비인후과', '안과', '소아과', '내과', '의원', '클리닉', '한방', '양방', '의료', '진료', '시술', '수술'];
+      warning.style.display = medical.some(k => allText.includes(k)) ? 'block' : 'none';
+    };
+    ['continuous-modal-business-info-name', 'continuous-modal-business-info-extra'].forEach(id => {
+      document.getElementById(id)?.addEventListener('input', checkContinuousModalMedical);
+    });
+  }
+
+  // ✅ [v1.4.27] 다중계정 풀오토 모달 - 업체 홍보 패널 라디오/의료 핸들러
+  // (모드 select 핸들러는 아래쪽 기존 코드에 통합)
+  {
+    const updateMaServiceArea = () => {
+      const nationwide = (document.getElementById('ma-business-service-nationwide') as HTMLInputElement)?.checked;
+      const regionInput = document.getElementById('ma-business-info-region') as HTMLInputElement;
+      if (regionInput) {
+        regionInput.disabled = nationwide;
+        regionInput.placeholder = nationwide ? '🌏 전국' : '🗺️ 지역 (예: 부산, 울산)';
+        if (nationwide) regionInput.value = '';
+        regionInput.style.opacity = nationwide ? '0.4' : '1';
+      }
+    };
+    document.getElementById('ma-business-service-nationwide')?.addEventListener('change', updateMaServiceArea);
+    document.getElementById('ma-business-service-regional')?.addEventListener('change', updateMaServiceArea);
+
+    const checkMaMedical = () => {
+      const warning = document.getElementById('ma-business-medical-warning');
+      if (!warning) return;
+      const maSel = document.getElementById('ma-setting-content-mode') as HTMLSelectElement;
+      if (maSel?.value !== 'business') { warning.style.display = 'none'; return; }
+      let allText = '';
+      ['ma-business-info-name', 'ma-business-info-extra'].forEach(id => {
+        const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement;
+        if (el) allText += ' ' + (el.value || '');
+      });
+      const medical = ['병원', '한의원', '피부과', '치과', '성형외과', '정형외과', '비뇨기과', '이비인후과', '안과', '소아과', '내과', '의원', '클리닉', '한방', '양방', '의료', '진료', '시술', '수술'];
+      warning.style.display = medical.some(k => allText.includes(k)) ? 'block' : 'none';
+    };
+    ['ma-business-info-name', 'ma-business-info-extra'].forEach(id => {
+      document.getElementById(id)?.addEventListener('input', checkMaMedical);
     });
   }
 
@@ -2017,7 +2088,9 @@ export function initContinuousPublishingV2(): void {
   const maContentModeSelect = document.getElementById('ma-setting-content-mode') as HTMLSelectElement;
   if (maContentModeSelect) {
     maContentModeSelect.addEventListener('change', () => {
-      const isAffiliateMode = maContentModeSelect.value === 'affiliate';
+      const mode = maContentModeSelect.value;
+      const isAffiliateMode = mode === 'affiliate';
+      const isBusinessMode = mode === 'business';
       // 수집 이미지 기반 AI 생성 옵션 (쇼핑커넥트 전용)
       const maImageOptions = document.getElementById('ma-shopping-connect-image-options');
       if (maImageOptions) {
@@ -2028,6 +2101,9 @@ export function initContinuousPublishingV2(): void {
       if (maShoppingConnectSettings) {
         maShoppingConnectSettings.style.display = isAffiliateMode ? 'block' : 'none';
       }
+      // ✅ [v1.4.27] 업체 홍보 모드: 패널 표시
+      const maBizPanel = document.getElementById('ma-business-info-panel');
+      if (maBizPanel) maBizPanel.style.display = isBusinessMode ? 'block' : 'none';
     });
   }
 
@@ -2440,20 +2516,29 @@ function addItemToQueueV2(): void {
       // ✅ [2026-02-13] 키워드 제목 옵션
       keywordAsTitle: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-as-title') as HTMLInputElement)?.checked || false) : undefined,
       keywordTitlePrefix: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-title-prefix') as HTMLInputElement)?.checked || false) : undefined,
-      // ✅ [v1.4.24] business 모드: 업체 정보 수집 + 사전 검증
+      // ✅ [v1.4.27] 4개 panel 지원
       businessInfo: contentMode === 'business' ? (() => {
         const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
-        const nationwide = (document.getElementById('business-service-nationwide') as HTMLInputElement)?.checked;
+        const tryGet = (suffix: string) =>
+          get('continuous-modal-business-info-' + suffix) ||
+          get('unified-business-info-' + suffix) ||
+          get('ma-business-info-' + suffix) ||
+          get('business-info-' + suffix);
+        const nationwide =
+          (document.getElementById('continuous-modal-business-service-nationwide') as HTMLInputElement)?.checked ||
+          (document.getElementById('unified-business-service-nationwide') as HTMLInputElement)?.checked ||
+          (document.getElementById('ma-business-service-nationwide') as HTMLInputElement)?.checked ||
+          (document.getElementById('business-service-nationwide') as HTMLInputElement)?.checked;
         const serviceArea: 'nationwide' | 'regional' = nationwide ? 'nationwide' : 'regional';
         const info = {
-          name: get('business-info-name'),
-          phone: get('business-info-phone'),
-          kakao: get('business-info-kakao'),
-          address: get('business-info-address'),
-          hours: get('business-info-hours'),
-          region: serviceArea === 'nationwide' ? undefined : get('business-info-region'),
+          name: tryGet('name'),
+          phone: tryGet('phone'),
+          kakao: tryGet('kakao'),
+          address: tryGet('address'),
+          hours: tryGet('hours'),
+          region: serviceArea === 'nationwide' ? undefined : tryGet('region'),
           serviceArea,
-          extra: get('business-info-extra'),
+          extra: tryGet('extra'),
         };
         // 사전 검증
         const missing: string[] = [];

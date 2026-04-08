@@ -6592,6 +6592,42 @@
                         </select>
                     </div>
 
+                    <!-- ✅ [v1.4.27] 연속발행 모달 - 업체 홍보 모드 패널 -->
+                    <div id="continuous-modal-business-info-panel" style="display: none; margin-bottom: 1rem; padding: 0.85rem; background: rgba(245, 158, 11, 0.08); border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 8px;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+                            <span style="font-size: 1rem;">🏢</span>
+                            <strong style="color: #fbbf24; font-size: 0.85rem;">업체 정보 입력 (필수)</strong>
+                        </div>
+                        <p style="margin: 0 0 0.6rem 0; font-size: 0.7rem; color: #fde68a; line-height: 1.4;">
+                            ⚠️ 입력 안 하면 AI가 가짜 번호 생성. 업체명+전화/카톡 필수.
+                        </p>
+                        <div style="margin-bottom: 0.4rem; padding: 0.5rem; background: rgba(59, 130, 246, 0.08); border-radius: 5px;">
+                            <label style="display: block; margin-bottom: 0.3rem; font-size: 0.7rem; color: #93c5fd; font-weight: 600;">🌏 서비스 범위</label>
+                            <div style="display: flex; gap: 0.6rem; font-size: 0.78rem;">
+                                <label style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer; color: var(--text-strong);">
+                                    <input type="radio" name="continuous-modal-business-service-area" id="continuous-modal-business-service-regional" value="regional" checked />
+                                    🗺️ 지역구
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer; color: var(--text-strong);">
+                                    <input type="radio" name="continuous-modal-business-service-area" id="continuous-modal-business-service-nationwide" value="nationwide" />
+                                    🌏 전국구
+                                </label>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 0.4rem;">
+                            <input type="text" id="continuous-modal-business-info-name" placeholder="📛 업체명 *" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                            <input type="text" id="continuous-modal-business-info-phone" placeholder="📞 전화 *" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                            <input type="text" id="continuous-modal-business-info-kakao" placeholder="💬 카톡" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                            <input type="text" id="continuous-modal-business-info-region" placeholder="🗺️ 지역 (예: 부산, 울산)" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                            <input type="text" id="continuous-modal-business-info-address" placeholder="📍 주소" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                            <input type="text" id="continuous-modal-business-info-hours" placeholder="🕐 영업시간" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                        </div>
+                        <textarea id="continuous-modal-business-info-extra" placeholder="✨ 특징/경력 (예: 시공 15년차, A/S 1년)" rows="2" style="width: 100%; padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem; resize: vertical;"></textarea>
+                        <div id="continuous-modal-business-medical-warning" style="display: none; margin-top: 0.4rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(248, 113, 113, 0.4); border-radius: 5px; font-size: 0.7rem; color: #fca5a5; line-height: 1.4;">
+                            ⚠️ <strong>의료광고법 주의</strong>: 병원/한의원 등은 환자 후기/효과 보장 금지. 위반 시 1년 이하 징역 또는 1천만원 벌금.
+                        </div>
+                    </div>
+
                     <!-- 글 톤 -->
                     <div style="margin-bottom: 1rem;">
                         <label
@@ -8589,6 +8625,42 @@
                                 <option value="custom">✏️ 사용자정의</option>
                                 <option value="affiliate">🛒 쇼핑커넥트</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <!-- ✅ [v1.4.27] 다중계정 풀오토 - 업체 홍보 모드 패널 -->
+                    <div id="ma-business-info-panel" style="display: none; margin-bottom: 0.75rem; padding: 0.85rem; background: rgba(245, 158, 11, 0.08); border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 8px;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+                            <span style="font-size: 1rem;">🏢</span>
+                            <strong style="color: #fbbf24; font-size: 0.85rem;">업체 정보 입력 (필수)</strong>
+                        </div>
+                        <p style="margin: 0 0 0.6rem 0; font-size: 0.7rem; color: #fde68a; line-height: 1.4;">
+                            ⚠️ 입력 안 하면 AI가 가짜 번호 생성. 업체명+전화/카톡 필수.
+                        </p>
+                        <div style="margin-bottom: 0.4rem; padding: 0.5rem; background: rgba(59, 130, 246, 0.08); border-radius: 5px;">
+                            <label style="display: block; margin-bottom: 0.3rem; font-size: 0.7rem; color: #93c5fd; font-weight: 600;">🌏 서비스 범위</label>
+                            <div style="display: flex; gap: 0.6rem; font-size: 0.78rem;">
+                                <label style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer; color: var(--text-strong);">
+                                    <input type="radio" name="ma-business-service-area" id="ma-business-service-regional" value="regional" checked />
+                                    🗺️ 지역구
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer; color: var(--text-strong);">
+                                    <input type="radio" name="ma-business-service-area" id="ma-business-service-nationwide" value="nationwide" />
+                                    🌏 전국구
+                                </label>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 0.4rem;">
+                            <input type="text" id="ma-business-info-name" placeholder="📛 업체명 *" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                            <input type="text" id="ma-business-info-phone" placeholder="📞 전화 *" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                            <input type="text" id="ma-business-info-kakao" placeholder="💬 카톡" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                            <input type="text" id="ma-business-info-region" placeholder="🗺️ 지역 (예: 부산, 울산)" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                            <input type="text" id="ma-business-info-address" placeholder="📍 주소" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                            <input type="text" id="ma-business-info-hours" placeholder="🕐 영업시간" style="padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem;" />
+                        </div>
+                        <textarea id="ma-business-info-extra" placeholder="✨ 특징/경력" rows="2" style="width: 100%; padding: 0.4rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem; resize: vertical;"></textarea>
+                        <div id="ma-business-medical-warning" style="display: none; margin-top: 0.4rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(248, 113, 113, 0.4); border-radius: 5px; font-size: 0.7rem; color: #fca5a5; line-height: 1.4;">
+                            ⚠️ <strong>의료광고법 주의</strong>: 병원/한의원 등은 환자 후기/효과 보장 금지.
                         </div>
                     </div>
 
