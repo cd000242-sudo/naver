@@ -2043,8 +2043,22 @@ export async function generateFullAutoContent(formData: any) {
     draftText = titleStr;  // 키워드 없으면 제목으로 폴백
   }
 
-  // ✅ [v1.4.27] 4개 panel 지원: unified + continuous-modal + ma + business (폴백)
+  // ✅ [v1.4.28] window._businessInfo (글로벌 모달 저장값) 우선
   const businessInfo = formData.contentMode === 'business' ? (() => {
+    const globalInfo = (window as any)._businessInfo;
+    if (globalInfo && globalInfo.name) {
+      // 사전 검증 (글로벌 모달 저장 시 이미 했지만 한 번 더)
+      const m: string[] = [];
+      if (!globalInfo.name) m.push('업체명');
+      if (!globalInfo.phone && !globalInfo.kakao) m.push('전화 또는 카톡');
+      if (globalInfo.serviceArea === 'regional' && !globalInfo.region) m.push('서비스 지역');
+      if (m.length > 0) {
+        alert('🏢 업체 정보 누락:\n\n• ' + m.join('\n• ') + '\n\n다시 입력해주세요.');
+        (window as any).openBusinessGlobalModal?.();
+        throw new Error('업체 정보 누락');
+      }
+      return globalInfo;
+    }
     const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
     const tryGet = (suffix: string) =>
       get('unified-business-info-' + suffix) ||

@@ -30,9 +30,14 @@ declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function isShoppingConnectModeActive(): boolean;
 
 // ✅ [v1.4.24] business 모드 — businessInfo 수집 + 사전 검증 (helper)
-// ✅ [v1.4.27] 4개 panel 지원: unified (메인) + continuous-modal (연속발행 모달) + ma (다중계정) + business (모달 폴백)
+// ✅ [v1.4.28] window._businessInfo (글로벌 모달 저장값) 우선, 없으면 4-panel 폴백
 function collectBusinessInfo(contentMode: string): any {
   if (contentMode !== 'business') return undefined;
+  // 글로벌 모달 저장값 우선 (단일 진실)
+  const globalInfo = (window as any)._businessInfo;
+  if (globalInfo && globalInfo.name) {
+    return globalInfo;
+  }
   const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
   // 4가지 ID prefix를 순서대로 시도 (먼저 값이 있는 것을 사용)
   const tryGet = (suffix: string) =>

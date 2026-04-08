@@ -5740,6 +5740,11 @@ function initUnifiedModeSelection(): void {
       if (businessInfoPanel) {
         businessInfoPanel.style.display = mode === 'business' ? 'block' : 'none';
       }
+
+      // ✅ [v1.4.28] business 모드 선택 시 글로벌 모달 자동 열기 (단, 이미 정보 있으면 skip)
+      if (mode === 'business' && !(window as any)._businessInfo) {
+        setTimeout(() => (window as any).openBusinessGlobalModal?.(), 200);
+      }
     });
   });
 
@@ -5780,6 +5785,109 @@ function initUnifiedModeSelection(): void {
   };
   document.getElementById('unified-business-service-nationwide')?.addEventListener('change', updateBusinessServiceArea);
   document.getElementById('unified-business-service-regional')?.addEventListener('change', updateBusinessServiceArea);
+
+  // ✅ [v1.4.28] 글로벌 업체 정보 모달 — 어디서 business 모드를 선택해도 동일 모달
+  const openBusinessGlobalModal = () => {
+    const modal = document.getElementById('business-global-modal');
+    if (!modal) return;
+    // 기존 저장된 값 복원
+    const saved = (window as any)._businessInfo || {};
+    (document.getElementById('bgm-name') as HTMLInputElement).value = saved.name || '';
+    (document.getElementById('bgm-phone') as HTMLInputElement).value = saved.phone || '';
+    (document.getElementById('bgm-kakao') as HTMLInputElement).value = saved.kakao || '';
+    (document.getElementById('bgm-region') as HTMLInputElement).value = saved.region || '';
+    (document.getElementById('bgm-address') as HTMLInputElement).value = saved.address || '';
+    (document.getElementById('bgm-hours') as HTMLInputElement).value = saved.hours || '';
+    (document.getElementById('bgm-extra') as HTMLTextAreaElement).value = saved.extra || '';
+    if (saved.serviceArea === 'nationwide') {
+      (document.getElementById('bgm-service-nationwide') as HTMLInputElement).checked = true;
+    } else {
+      (document.getElementById('bgm-service-regional') as HTMLInputElement).checked = true;
+    }
+    modal.style.display = 'flex';
+  };
+  (window as any).openBusinessGlobalModal = openBusinessGlobalModal;
+
+  const closeBusinessGlobalModal = () => {
+    const modal = document.getElementById('business-global-modal');
+    if (modal) modal.style.display = 'none';
+  };
+
+  document.getElementById('business-global-modal-close')?.addEventListener('click', closeBusinessGlobalModal);
+  document.getElementById('business-global-modal-cancel')?.addEventListener('click', closeBusinessGlobalModal);
+
+  // 의료 키워드 자동 감지 (모달 내부)
+  const checkBgmMedical = () => {
+    const warning = document.getElementById('bgm-medical-warning');
+    if (!warning) return;
+    const name = (document.getElementById('bgm-name') as HTMLInputElement)?.value || '';
+    const extra = (document.getElementById('bgm-extra') as HTMLTextAreaElement)?.value || '';
+    const allText = (name + ' ' + extra).toLowerCase();
+    const medical = ['병원', '한의원', '피부과', '치과', '성형외과', '정형외과', '비뇨기과', '이비인후과', '안과', '소아과', '내과', '의원', '클리닉', '한방', '양방', '의료', '진료', '시술', '수술'];
+    warning.style.display = medical.some(k => allText.includes(k)) ? 'block' : 'none';
+  };
+  ['bgm-name', 'bgm-extra'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', checkBgmMedical);
+  });
+
+  // 라디오 변경 시 region 필드 토글
+  const updateBgmServiceArea = () => {
+    const nationwide = (document.getElementById('bgm-service-nationwide') as HTMLInputElement)?.checked;
+    const regionInput = document.getElementById('bgm-region') as HTMLInputElement;
+    if (regionInput) {
+      regionInput.disabled = nationwide;
+      regionInput.style.opacity = nationwide ? '0.4' : '1';
+      if (nationwide) regionInput.value = '';
+      regionInput.placeholder = nationwide ? '🌏 전국 — 입력 불필요' : '예: 부산, 울산 / 강남, 송파';
+    }
+  };
+  document.getElementById('bgm-service-nationwide')?.addEventListener('change', updateBgmServiceArea);
+  document.getElementById('bgm-service-regional')?.addEventListener('change', updateBgmServiceArea);
+
+  // 저장 버튼
+  document.getElementById('business-global-modal-save')?.addEventListener('click', () => {
+    const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || '';
+    const name = get('bgm-name');
+    const phone = get('bgm-phone');
+    const kakao = get('bgm-kakao');
+    const nationwide = (document.getElementById('bgm-service-nationwide') as HTMLInputElement)?.checked;
+    const serviceArea: 'nationwide' | 'regional' = nationwide ? 'nationwide' : 'regional';
+    const region = get('bgm-region');
+
+    // 사전 검증
+    const missing: string[] = [];
+    if (!name) missing.push('업체명');
+    if (!phone && !kakao) missing.push('전화번호 또는 카카오톡 (둘 중 하나)');
+    if (serviceArea === 'regional' && !region) missing.push('서비스 지역 (지역구 모드)');
+    if (missing.length > 0) {
+      alert('🏢 필수 정보 누락:\n\n• ' + missing.join('\n• ') + '\n\n빈 값으로 두면 AI가 가짜 정보를 생성할 수 있습니다.');
+      return;
+    }
+
+    // window._businessInfo에 저장 (전역 단일 소스)
+    (window as any)._businessInfo = {
+      name,
+      phone,
+      kakao,
+      address: get('bgm-address'),
+      hours: get('bgm-hours'),
+      region: serviceArea === 'nationwide' ? undefined : region,
+      serviceArea,
+      extra: get('bgm-extra'),
+    };
+    console.log('[BusinessGlobalModal] ✅ 업체 정보 저장:', (window as any)._businessInfo);
+    if ((window as any).toastManager) {
+      (window as any).toastManager.success('✅ 업체 정보 저장 완료');
+    }
+    closeBusinessGlobalModal();
+  });
+
+  // 오버레이 클릭 시 닫기 (배경 클릭만)
+  document.getElementById('business-global-modal')?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).id === 'business-global-modal') {
+      closeBusinessGlobalModal();
+    }
+  });
 
 
   // 통합 탭 발행 방식 선택 (select 요소 - 레거시 지원)

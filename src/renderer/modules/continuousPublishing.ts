@@ -1972,6 +1972,10 @@ export function initContinuousPublishingV2(): void {
       // ✅ [v1.4.27] 업체 홍보 모드 선택 시 → 업체 정보 패널 표시
       const businessPanel = document.getElementById('continuous-modal-business-info-panel');
       if (businessPanel) businessPanel.style.display = isBusinessMode ? 'block' : 'none';
+      // ✅ [v1.4.28] 글로벌 모달 자동 열기 (이미 정보 있으면 skip)
+      if (isBusinessMode && !(window as any)._businessInfo) {
+        setTimeout(() => (window as any).openBusinessGlobalModal?.(), 200);
+      }
     });
 
     // 서비스 범위 라디오 + 의료 키워드 감지 (연속발행 모달)
@@ -2104,6 +2108,10 @@ export function initContinuousPublishingV2(): void {
       // ✅ [v1.4.27] 업체 홍보 모드: 패널 표시
       const maBizPanel = document.getElementById('ma-business-info-panel');
       if (maBizPanel) maBizPanel.style.display = isBusinessMode ? 'block' : 'none';
+      // ✅ [v1.4.28] 글로벌 모달 자동 열기
+      if (isBusinessMode && !(window as any)._businessInfo) {
+        setTimeout(() => (window as any).openBusinessGlobalModal?.(), 200);
+      }
     });
   }
 
@@ -2516,8 +2524,12 @@ function addItemToQueueV2(): void {
       // ✅ [2026-02-13] 키워드 제목 옵션
       keywordAsTitle: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-as-title') as HTMLInputElement)?.checked || false) : undefined,
       keywordTitlePrefix: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-title-prefix') as HTMLInputElement)?.checked || false) : undefined,
-      // ✅ [v1.4.27] 4개 panel 지원
+      // ✅ [v1.4.28] window._businessInfo 우선
       businessInfo: contentMode === 'business' ? (() => {
+        const globalInfo = (window as any)._businessInfo;
+        if (globalInfo && globalInfo.name) {
+          return globalInfo;
+        }
         const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
         const tryGet = (suffix: string) =>
           get('continuous-modal-business-info-' + suffix) ||

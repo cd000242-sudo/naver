@@ -11646,6 +11646,86 @@
     <!-- ✅ AI 추천 후킹문구 모달 로직 (외부 파일) -->
     <script src="ai-hook-modal.js"></script>
 
+    <!-- ✅ [v1.4.28] 업체 홍보 모드 — 글로벌 입력 모달 (어디서 선택해도 동일 모달) -->
+    <div id="business-global-modal" style="display: none; position: fixed; inset: 0; z-index: 999999; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; padding: 1rem; backdrop-filter: blur(4px);">
+        <div style="width: min(680px, 95vw); max-height: 90vh; overflow-y: auto; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 2px solid #fbbf24; border-radius: 16px; padding: 1.5rem; box-shadow: 0 25px 50px rgba(0,0,0,0.6);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid rgba(251, 191, 36, 0.3);">
+                <h3 style="margin: 0; color: #fbbf24; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+                    🏢 업체 정보 입력 (필수)
+                </h3>
+                <button type="button" id="business-global-modal-close" style="background: none; border: none; color: #fff; font-size: 1.6rem; cursor: pointer; line-height: 1;">×</button>
+            </div>
+
+            <p style="margin: 0 0 1rem 0; font-size: 0.85rem; color: #fde68a; line-height: 1.5;">
+                ⚠️ 입력하지 않으면 AI가 가짜 전화번호/주소를 만들 수 있습니다.<br>
+                <strong>필수: 업체명 + 전화번호(또는 카카오톡)</strong>. 나머지는 선택입니다.
+            </p>
+
+            <!-- 서비스 범위 -->
+            <div style="margin-bottom: 0.75rem; padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 8px;">
+                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: #93c5fd; font-weight: 600;">🌏 서비스 범위</label>
+                <div style="display: flex; gap: 1rem; font-size: 0.9rem;">
+                    <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; color: #fff;">
+                        <input type="radio" name="bgm-service-area" id="bgm-service-regional" value="regional" checked />
+                        🗺️ 지역구 (특정 지역만)
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; color: #fff;">
+                        <input type="radio" name="bgm-service-area" id="bgm-service-nationwide" value="nationwide" />
+                        🌏 전국구 (전국 어디든)
+                    </label>
+                </div>
+            </div>
+
+            <!-- 입력 필드 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.6rem;">
+                <div>
+                    <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">📛 업체명 *</label>
+                    <input type="text" id="bgm-name" placeholder="예: ABC인테리어" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; box-sizing: border-box;" />
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">📞 전화번호 *</label>
+                    <input type="text" id="bgm-phone" placeholder="예: 051-123-4567" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; box-sizing: border-box;" />
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">💬 카카오톡 (ID/링크)</label>
+                    <input type="text" id="bgm-kakao" placeholder="예: abc_interior" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; box-sizing: border-box;" />
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">🗺️ 서비스 지역</label>
+                    <input type="text" id="bgm-region" placeholder="예: 부산, 울산 / 강남, 송파" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; box-sizing: border-box;" />
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">📍 사무소 주소 (선택)</label>
+                    <input type="text" id="bgm-address" placeholder="예: 부산광역시 해운대구 ○○로 123" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; box-sizing: border-box;" />
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">🕐 영업시간 (선택)</label>
+                    <input type="text" id="bgm-hours" placeholder="예: 09:00~19:00, 주말 휴무" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; box-sizing: border-box;" />
+                </div>
+            </div>
+            <div style="margin-bottom: 0.75rem;">
+                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">✨ 특징/경력/자격증</label>
+                <textarea id="bgm-extra" placeholder="예: 시공 15년차, A/S 1년 보장, 평수별 견적 가이드 제공, 전국 시공 사례 200건+" rows="3" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; resize: vertical; box-sizing: border-box; font-family: inherit;"></textarea>
+            </div>
+
+            <!-- 키워드 가이드 -->
+            <div style="margin-bottom: 0.75rem; padding: 0.6rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; font-size: 0.78rem; color: #93c5fd; line-height: 1.5;">
+                💡 <strong>키워드 입력 가이드</strong>: 메인 키워드 = "지역+업종" (예: <code style="background: rgba(255,255,255,0.1); padding: 1px 5px; border-radius: 3px;">강남 인테리어</code>), 서브 키워드 = 세부 서비스 (예: <code style="background: rgba(255,255,255,0.1); padding: 1px 5px; border-radius: 3px;">철거, 도배, 욕실</code>). 본문에서 자동으로 8~12회 반복됩니다.
+            </div>
+
+            <!-- 의료 경고 -->
+            <div id="bgm-medical-warning" style="display: none; margin-bottom: 0.75rem; padding: 0.75rem; background: rgba(239, 68, 68, 0.15); border: 2px solid rgba(248, 113, 113, 0.5); border-radius: 8px; font-size: 0.82rem; color: #fca5a5; line-height: 1.5;">
+                ⚠️ <strong>의료광고법 56조 주의</strong>: 병원/한의원/피부과 등 의료기관 광고는 환자 후기, 효과 보장, 단정 표현이 <strong>법적으로 금지</strong>됩니다. 위반 시 1년 이하 징역 또는 1천만원 이하 벌금. <strong>의료광고심의 사전 신청을 권장</strong>합니다.
+            </div>
+
+            <!-- 버튼 -->
+            <div style="display: flex; gap: 0.6rem; justify-content: flex-end; padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <button type="button" id="business-global-modal-cancel" style="padding: 0.7rem 1.2rem; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.9rem;">취소</button>
+                <button type="button" id="business-global-modal-save" style="padding: 0.7rem 1.5rem; background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #1f2937; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);">💾 저장하고 계속</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
