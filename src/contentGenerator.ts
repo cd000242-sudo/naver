@@ -8307,6 +8307,22 @@ export async function generateStructuredContent(
       const mode = (source.contentMode || 'seo') as PromptMode;
       const systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
 
+      // 🔧 [임시 디버그 v1.4.8-debug] 슬림화 10단계 측정용 — system 프롬프트 덤프
+      try {
+        const os = require('os');
+        const path = require('path');
+        const debugDir = path.join(os.homedir(), 'Desktop');
+        const ts = new Date().toISOString().replace(/[:.]/g, '-');
+        const lineCount = systemPrompt.split('\n').length;
+        const charCount = systemPrompt.length;
+        const tokenEst = Math.ceil(charCount / 2.5); // Korean rough estimate
+        const header = `=== 슬림화 측정 [${ts}] ===\nmode=${mode}\nprovider=${provider}\n총 글자수: ${charCount.toLocaleString()}자\n총 줄수: ${lineCount.toLocaleString()}줄\n예상 토큰: ${tokenEst.toLocaleString()} (Gemini 기준 ${(tokenEst * 0.30 / 1000).toFixed(0)}원)\n=====================================\n\n`;
+        fsSync.writeFileSync(path.join(debugDir, `프롬프트덤프_${ts}.txt`), header + systemPrompt, 'utf-8');
+        console.log(`[ContentGenerator] 🔧 [DEBUG] 프롬프트 덤프 저장: 바탕화면\\프롬프트덤프_${ts}.txt (${charCount.toLocaleString()}자, ${lineCount}줄)`);
+      } catch (dumpErr) {
+        console.warn('[ContentGenerator] 🔧 [DEBUG] 덤프 실패:', (dumpErr as Error).message);
+      }
+
       // ✅ [v1.4.4] 70점 동적 Grounding 결정 (할루시네이션 방지 + 비용 절감)
       const rawTextLen = (source.rawText || '').length;
       const isUrlMode = !!source.url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news';
