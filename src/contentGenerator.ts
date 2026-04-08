@@ -2408,7 +2408,7 @@ async function generateTitleOnlyPatch(source: ContentSource, mode: PromptMode, c
       ? `[필수 공식] {상품명(브랜드+모델명만)}, {사용기간} {자연어 후기 표현}. 단어 나열 금지, 자연어 문장형 필수. 예: "캐치웰 CX PRO, 한 달 써본 솔직 후기"`
       : `[필수 공식] {메인 키워드} + {구체적 숫자/기간} + {클릭 트리거}. 예: "자동차세 연납 1월까지, 4.57% 할인 받은 후기"`;
 
-  const schema = `Output ONLY valid JSON. NO markdown.\n\n{"selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95, "reasoning": "string"}, {"text": "string", "score": 90, "reasoning": "string"}, {"text": "string", "score": 85, "reasoning": "string"}]}`;
+  const schema = `Output ONLY valid JSON. NO markdown.\n\n{"selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95}, {"text": "string", "score": 90}, {"text": "string", "score": 85}]}`;
 
   const subKeywords = Array.isArray((source.metadata as any)?.keywords)
     ? (source.metadata as any).keywords.slice(1).filter((k: any) => String(k).length >= 2 && !/^\d+$/.test(String(k))).slice(0, 5).join(', ')
@@ -4117,24 +4117,19 @@ ${source.customPrompt.trim()}
 {
   "selectedTitle": "최종 선택된 제목 (25~45자)",
   "titleCandidates": [
-    {"text": "제목 후보 1", "score": 95, "reasoning": "선택 이유"},
-    {"text": "제목 후보 2", "score": 90, "reasoning": "선택 이유"},
-    {"text": "제목 후보 3", "score": 85, "reasoning": "선택 이유"}
+    {"text": "제목 후보 1", "score": 95},
+    {"text": "제목 후보 2", "score": 90},
+    {"text": "제목 후보 3", "score": 85}
   ],
   "introduction": "도입부 텍스트 (2~3줄, 자연스러운 시작)",
   "headings": [
-    {"title": "소제목 1", "content": "본문 내용 (4~6문장, 상세 서술)", "summary": "한 줄 요약", "keywords": ["관련키워드"], "imagePrompt": "이 소제목에 맞는 구체적 이미지 묘사 (한국어)"},
-    {"title": "소제목 2", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 묘사"},
-    {"title": "소제목 3", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 묘사"}
+    {"title": "소제목 1", "content": "본문 내용 (4~6문장, 상세 서술)", "summary": "한 줄 요약", "imagePrompt": "이 소제목에 맞는 구체적 이미지 묘사 (한국어)"},
+    {"title": "소제목 2", "content": "본문 내용...", "summary": "요약", "imagePrompt": "이미지 묘사"},
+    {"title": "소제목 3", "content": "본문 내용...", "summary": "요약", "imagePrompt": "이미지 묘사"}
   ],
   "conclusion": "마무리 텍스트 (2~3줄, 여운형)",
-  "hashtags": ["해시태그1", "해시태그2", "해시태그3", "해시태그4", "해시태그5"],
-  "category": "카테고리",
-  "metadata": {
-    "wordCount": 2500,
-    "estimatedReadTime": "4분",
-    "seoScore": 85
-  }
+  "hashtags": ["해시태그1", "해시태그2", "해시태그3"],
+  "category": "카테고리"
 }
 
 ═══════════════════════════════════════════════════════════
@@ -4202,10 +4197,9 @@ ${source.customPrompt.trim()}
 
   let systemPrompt = systemPromptResult;
 
-  // ✅ 글자수 지침 주입 (명시적 요청)
-  if (minChars && minChars > 0) {
-    systemPrompt += `\n\n[글자수 필수 준수]\n이 글은 최소 ${minChars}자 이상 작성되어야 합니다. 내용을 충분히 길게 풀어서 작성하고, 절대 요약하지 마세요. 각 소제목마다 5문장 이상 자세히 서술하여 목표 분량을 반드시 달성하세요.`;
-  }
+  // ✅ [v1.4.14] 글자수 지침은 user 파트로 이동 (캐시 적중률 향상)
+  // 이전: system에 ${minChars} 직접 삽입 → 매 글 캐시 미스
+  // 이후: [원본 텍스트] 마커 이후로 이동 → system 정적 유지
 
   const primaryKeyword = getPrimaryKeywordFromSource(source);
   const subKeywords = Array.isArray((source.metadata as any)?.keywords)
@@ -4273,20 +4267,15 @@ ${source.customPrompt.trim()}
 {
   "selectedTitle": "제목 1",
   "titleCandidates": [
-    {"text": "제목 1", "score": 95, "reasoning": "이유"},
-    {"text": "제목 2", "score": 90, "reasoning": "이유"},
-    {"text": "제목 3", "score": 85, "reasoning": "이유"}
+    {"text": "제목 1", "score": 95},
+    {"text": "제목 2", "score": 90},
+    {"text": "제목 3", "score": 85}
   ],
   ${headingsExample},
   "introduction": "${isHomefeed ? '도입부 (정확히 3줄, 첫 문장 25자 이내)' : '도입부'}",
   "conclusion": "${isHomefeed ? '마무리 (여운형 2줄, 결론/정리 금지)' : '마무리'}",
-  "hashtags": ["해시태그1", "해시태그2", "해시태그3", "해시태그4", "해시태그5"],
-  "category": "카테고리",
-  "metadata": {
-    "wordCount": 2000,
-    "estimatedReadTime": "3분",
-    "seoScore": 85
-  }
+  "hashtags": ["해시태그1", "해시태그2", "해시태그3"],
+  "category": "카테고리"
 }
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -4299,41 +4288,36 @@ imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ────────────────────
+이 규칙을 단 한 줄도 어기지 말고 즉시 작성하라.
+반드시 위 JSON 형식으로만 출력하라.
+
+[원본 텍스트]
+${rawText}
+
+${minChars && minChars > 0 ? `
+[글자수 필수] 최소 ${minChars}자 이상. 각 소제목 5문장 이상 자세히 서술. 요약 금지.
+` : ''}
 [원본 정보]
-${title ? `📌 SOURCE_TITLE (원본 제목): "${title}"
-   → 이 제목을 반드시 참고하여 더 강력한 후킹 제목으로 변환하라.
-   → 핵심 키워드는 유지하되, 감정 트리거나 호기심 유발 표현을 추가하라.
+${title ? `📌 SOURCE_TITLE: "${title}" → 이 제목을 참고하여 더 강력한 후킹 제목으로 변환. 핵심 키워드 유지 + 감정/호기심 트리거 추가.
 ` : ''}${(() => {
       if (!primaryKeyword) return '';
       const processed = preprocessLongKeyword(primaryKeyword);
       if (processed.isLong) {
-        return `메인 키워드: ${processed.coreKeyword}
-주제 문맥: ${processed.contextHint}
-⚠️ [필수] 위 "주제 문맥"은 참고만 하세요. 이 문장을 제목에 그대로 사용하지 마세요.
-⚠️ [필수] 제목은 반드시 새롭게 창작하세요. 키워드 입력 문구를 그대로 복사하면 감점됩니다.`;
+        return `메인 키워드: ${processed.coreKeyword}\n주제 문맥: ${processed.contextHint}\n⚠️ 주제 문맥은 참고만. 제목에 그대로 사용 금지. 새롭게 창작.`;
       }
       return `메인 키워드: ${processed.coreKeyword}`;
     })()}
 ${subKeywords ? `서브 키워드: ${subKeywords}` : ''}
 ${contentMode === 'homefeed' && subKeywords ? `
-⚠️ [홈판 서브키워드 밀도] 메인키워드 5~8회(밀도 1.5~3%), 서브키워드 최소 3개 소제목 첫 문장에 포함, 도입부 3줄에 메인+서브 각 1회, 결론부에 각 1회. 자연스럽게 녹이고 억지 반복 금지.
-📌 스크롤 트리거 3개 이상 의무 (예: "근데 여기서 반전이에요", "여기서 중요한 건요").
+⚠️ [홈판 서브키워드 밀도] 메인키워드 5~8회(1.5~3%), 서브키워드 최소 3개 소제목 첫 문장에 포함, 도입부·결론부 각 1회. 스크롤 트리거 3개 이상 의무.
 ` : ''}
-
-[원본 텍스트]
-${rawText}
-
 ${source.customPrompt ? `
 💡 [사용자 추가 지시사항 — 최우선 반영, 다른 모든 규칙보다 상위]
 ${source.customPrompt.trim()}
 ` : ''}
-
 ${metrics ? `
 📊 [키워드 지표] 월간검색량 ${metrics.searchVolume !== undefined && metrics.searchVolume >= 0 ? metrics.searchVolume.toLocaleString() + '건' : '집계중'} / 문서량 ${metrics.documentCount !== undefined ? metrics.documentCount.toLocaleString() + '건' : '집계중'} → ${metrics.searchVolume && metrics.searchVolume > 10000 ? '대형키워드: 전문성·최신성 강조' : '블루오션: 세부 경험·독점 정보'}
 ` : ''}
-────────────────────
-이 규칙을 단 한 줄도 어기지 말고 즉시 작성하라.
-반드시 위 JSON 형식으로만 출력하라.
 `;
 
   return `${systemPrompt}\n\n${jsonOutputFormat}`.trim();
@@ -7700,7 +7684,7 @@ export async function generateStructuredContent(
   // 글자수에 따라 최적 provider 자동 선택
   let provider = options.provider ?? source.generator ?? 'gemini';
   // ✅ 기본 글자수: 3000자 (풍부한 내용 + 최적 분량, 양보다 질 최극상)
-  const minChars = options.minChars ?? 3000;
+  const minChars = options.minChars ?? 2500; // ✅ [v1.4.14] 3000→2500 (출력 토큰 -15%, SEO 안전 1500자 이상 유지)
 
   // ✅ [v1.4.5] config 로드 (Lite Mode 설정 확인용)
   let config: any = null;
@@ -8193,41 +8177,8 @@ export async function generateStructuredContent(
         // 마지막 시도가 아니면 재시도
         if (attempt < MAX_ATTEMPTS) {
           console.log(`[시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}] 재시도 중... AI에게 더 엄격한 JSON 형식 요청`);
-          extraInstruction = `
-⚠️⚠️⚠️ CRITICAL JSON FORMAT ERROR - ATTEMPT ${attempt + 1} FAILED ⚠️⚠️⚠️
-
-ERROR: ${(parseError as Error).message}
-
-You MUST fix these issues immediately:
-
-1. ✅ MANDATORY COMMAS - This is the #1 error:
-   ✓ CORRECT: {"a": "value1", "b": "value2"}
-   ✗ WRONG: {"a": "value1" "b": "value2"}
-   ✗ WRONG: {"a": "value1""b": "value2"}
-   → Put comma (,) after EVERY property value, including the last one before the next property name
-
-2. ✅ PROPER STRING FORMATTING:
-   - NO literal line breaks inside strings
-   - Use spaces instead of newlines
-   - NO control characters (\\x00-\\x1F)
-   - Escape quotes: \\" not "
-
-3. ✅ CHECK YOUR OUTPUT:
-   - Start with {
-   - End with }
-   - Every property: "key": "value",
-   - Last property before } has NO trailing comma
-   - NO markdown blocks (no \`\`\`json)
-
-4. ✅ VALIDATION CHECKLIST:
-   [ ] Does every property have a comma after it (except the last)?
-   [ ] Are all strings properly quoted?
-   [ ] No extra or missing brackets?
-   [ ] Output starts with { and ends with }?
-
-TRY AGAIN NOW. Output ONLY valid JSON.
-
-${extraInstruction}`;
+          // ✅ [v1.4.14] 30줄 → 3줄로 축약. 재시도 시 토큰 -90%
+          extraInstruction = `\n⚠️ JSON 파싱 실패 (시도 ${attempt + 1}). 반드시 { 로 시작 } 로 끝나는 유효 JSON만 출력. 마크다운/설명 금지. 모든 키-값 사이 콤마 필수.\n${extraInstruction}`;
           continue; // 다음 시도로
         } else {
           // 마지막 시도도 실패
@@ -8299,13 +8250,8 @@ ${extraInstruction}`;
         const errs = duplicateContentValidation.errors.slice(0, 3).join(', ');
         console.warn(`[ContentGenerator] 중복/패턴 하드게이트 실패: ${errs}`);
         lastFailReason = `중복/패턴 감지: ${errs}`;
-        extraInstruction = `
-[CRITICAL DUPLICATE/PATTERN DETECTED]
-- Duplicate/pattern issues were detected: ${errs}
-- You MUST remove repeated structure, repeated phrases, and duplicated heading sections.
-- Rewrite the entire bodyPlain with fresh wording and different sentence patterns.
-
-${extraInstruction}`;
+        // ✅ [v1.4.14] 5줄 → 1줄 축약
+        extraInstruction = `\n⚠️ 중복/패턴 감지: ${errs}. 반복 구조/문구 제거하고 다른 표현으로 재작성.\n${extraInstruction}`;
         continue;
       }
 
@@ -8647,8 +8593,8 @@ ${extraInstruction}`;
         return finalizeStructuredContent(optimized, source);
       }
 
-      // 60% 이상이면 경고만 하고 통과 (질 우선) - 70%에서 60%로 완화
-      const minAcceptableChars = Math.round(minChars * 0.60); // 60% 기준
+      // ✅ [v1.4.14] 50% 이상이면 경고만 하고 통과 (재시도 비용 절감) - 60→50%로 완화
+      const minAcceptableChars = Math.round(minChars * 0.50); // 50% 기준
       if (plainLength >= minAcceptableChars) {
         console.warn(`[ContentGenerator] 글자수 경고: ${plainLength}자 (목표: ${minChars}자, ${Math.round((plainLength / minChars) * 100)}%)`);
 
@@ -8711,7 +8657,7 @@ ${extraInstruction}`;
           optimized.quality.warnings = [];
         }
 
-        if (plainLength >= minChars * 0.6) {
+        if (plainLength >= minChars * 0.5) {
           optimized.quality.warnings.push(
             `본문 길이가 목표보다 약간 짧습니다 (${plainLength}자 / 목표: ${minChars}자). 최대한 내용을 보존하여 출력합니다.`
           );
