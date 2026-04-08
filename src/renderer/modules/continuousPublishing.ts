@@ -1969,9 +1969,9 @@ export function initContinuousPublishingV2(): void {
         }
         (window as any)._syncingShoppingTab = false;
       }
-      // ✅ [v1.4.27] 업체 홍보 모드 선택 시 → 업체 정보 패널 표시
+      // ✅ [v1.4.29] 인라인 패널 항상 숨김 (글로벌 모달로 통일)
       const businessPanel = document.getElementById('continuous-modal-business-info-panel');
-      if (businessPanel) businessPanel.style.display = isBusinessMode ? 'block' : 'none';
+      if (businessPanel) businessPanel.style.display = 'none';
       // ✅ [v1.4.28] 글로벌 모달 자동 열기 (이미 정보 있으면 skip)
       if (isBusinessMode && !(window as any)._businessInfo) {
         setTimeout(() => (window as any).openBusinessGlobalModal?.(), 200);
@@ -2105,9 +2105,9 @@ export function initContinuousPublishingV2(): void {
       if (maShoppingConnectSettings) {
         maShoppingConnectSettings.style.display = isAffiliateMode ? 'block' : 'none';
       }
-      // ✅ [v1.4.27] 업체 홍보 모드: 패널 표시
+      // ✅ [v1.4.29] 인라인 패널 항상 숨김 (글로벌 모달로 통일)
       const maBizPanel = document.getElementById('ma-business-info-panel');
-      if (maBizPanel) maBizPanel.style.display = isBusinessMode ? 'block' : 'none';
+      if (maBizPanel) maBizPanel.style.display = 'none';
       // ✅ [v1.4.28] 글로벌 모달 자동 열기
       if (isBusinessMode && !(window as any)._businessInfo) {
         setTimeout(() => (window as any).openBusinessGlobalModal?.(), 200);

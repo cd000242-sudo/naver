@@ -5736,9 +5736,9 @@ function initUnifiedModeSelection(): void {
         customPromptArea.style.display = mode === 'custom' ? 'block' : 'none';
       }
 
-      // ✅ [v1.4.26] 업체 정보 패널: business 모드에서만 표시
+      // ✅ [v1.4.29] 인라인 패널은 항상 숨김 (글로벌 모달로 통일)
       if (businessInfoPanel) {
-        businessInfoPanel.style.display = mode === 'business' ? 'block' : 'none';
+        businessInfoPanel.style.display = 'none';
       }
 
       // ✅ [v1.4.28] business 모드 선택 시 글로벌 모달 자동 열기 (단, 이미 정보 있으면 skip)
