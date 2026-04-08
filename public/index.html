@@ -711,7 +711,7 @@
                             style="display: block; margin-bottom: 0.75rem; font-weight: 700; color: var(--text-strong); font-size: 0.95rem;">
                             🎯 콘텐츠 모드 선택
                         </label>
-                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;">
+                        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem;">
                             <div style="position: relative;">
                                 <button type="button" class="content-mode-btn selected" data-mode="seo"
                                     style="width: 100%; padding: 0.7rem 0.5rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: var(--radius-md); cursor: pointer; font-weight: 700; font-size: 0.8rem; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.2rem;">
@@ -753,6 +753,17 @@
                                 <button type="button" class="content-mode-help-btn" data-help-mode="custom"
                                     style="position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; background: rgba(99, 102, 241, 0.9); color: white; border: 2px solid white; border-radius: 50%; font-size: 0.7rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">?</button>
                             </div>
+                            <!-- ✅ [v1.4.26] 업체 홍보 모드 카드 -->
+                            <div style="position: relative;">
+                                <button type="button" class="content-mode-btn" data-mode="business"
+                                    style="width: 100%; padding: 0.7rem 0.5rem; background: var(--bg-tertiary); color: var(--text-muted); border: 2px solid var(--border-medium); border-radius: var(--radius-md); cursor: pointer; font-weight: 700; font-size: 0.8rem; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.2rem;">
+                                    <span style="font-size: 1.3rem;">🏢</span>
+                                    <span>업체 홍보</span>
+                                    <span style="font-size: 0.65rem; opacity: 0.9;">견적/문의 유도</span>
+                                </button>
+                                <button type="button" class="content-mode-help-btn" data-help-mode="business"
+                                    style="position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; background: rgba(245, 158, 11, 0.9); color: white; border: 2px solid white; border-radius: 50%; font-size: 0.7rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">?</button>
+                            </div>
                         </div>
                         <input type="hidden" id="unified-content-mode" value="seo" data-user-selected="false">
                         <div
@@ -769,6 +780,50 @@
                             </div>
                             <div id="content-mode-description-custom" style="display: none;">
                                 <strong>✏️ 사용자정의 모드:</strong> 아래에 직접 프롬프트를 입력하여 원하는 형태의 글을 생성합니다.
+                            </div>
+                            <div id="content-mode-description-business" style="display: none;">
+                                <strong>🏢 업체 홍보 모드:</strong> 시공/철거/인테리어/전문서비스/지역매장 업체의 견적·문의 유도 글을 생성합니다. 8가지 강조 각도(가격/사례/A/S/속도/무료/전문/친절/트렌드)를 매번 다르게 적용하여 같은 업체로 반복 발행해도 다른 글이 나옵니다. 광고법 준수 + 의료광고법 자동 경고.
+                            </div>
+                        </div>
+
+                        <!-- ✅ [v1.4.26] 업체 홍보 모드 — 업체 정보 입력 패널 (모드 선택 시 표시) -->
+                        <div id="unified-business-info-panel" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.08); border: 2px solid rgba(251, 191, 36, 0.4); border-radius: var(--radius-md);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                <span style="font-size: 1.1rem;">🏢</span>
+                                <strong style="color: #fbbf24; font-size: 0.95rem;">업체 정보 입력 (필수)</strong>
+                            </div>
+                            <p style="margin: 0 0 0.75rem 0; font-size: 0.78rem; color: #fde68a; line-height: 1.5;">
+                                ⚠️ 입력하지 않으면 AI가 가짜 전화번호/주소를 만들 수 있습니다.<br>
+                                필수: 업체명 + 전화번호(또는 카톡). 나머지는 선택.
+                            </p>
+                            <!-- 서비스 범위 라디오 -->
+                            <div style="margin-bottom: 0.5rem; padding: 0.6rem; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 6px;">
+                                <label style="display: block; margin-bottom: 0.4rem; font-size: 0.78rem; color: #93c5fd; font-weight: 600;">🌏 서비스 범위</label>
+                                <div style="display: flex; gap: 0.75rem; font-size: 0.85rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.3rem; cursor: pointer; color: var(--text-strong);">
+                                        <input type="radio" name="unified-business-service-area" id="unified-business-service-regional" value="regional" checked style="cursor: pointer;" />
+                                        🗺️ 지역구
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.3rem; cursor: pointer; color: var(--text-strong);">
+                                        <input type="radio" name="unified-business-service-area" id="unified-business-service-nationwide" value="nationwide" style="cursor: pointer;" />
+                                        🌏 전국구
+                                    </label>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <input type="text" id="unified-business-info-name" placeholder="📛 업체명 *" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                <input type="text" id="unified-business-info-phone" placeholder="📞 전화번호 *" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                <input type="text" id="unified-business-info-kakao" placeholder="💬 카카오톡 (ID/링크)" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                <input type="text" id="unified-business-info-region" placeholder="🗺️ 지역 (예: 부산, 울산)" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                <input type="text" id="unified-business-info-address" placeholder="📍 주소 (선택)" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                <input type="text" id="unified-business-info-hours" placeholder="🕐 영업시간 (선택)" style="padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                            </div>
+                            <textarea id="unified-business-info-extra" placeholder="✨ 특징/경력/자격증 (예: 시공 15년차, A/S 1년 보장, 평수별 견적 가이드)" rows="2" style="width: 100%; padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem; resize: vertical;"></textarea>
+                            <div style="margin-top: 0.6rem; padding: 0.5rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; font-size: 0.75rem; color: #93c5fd; line-height: 1.5;">
+                                💡 <strong>키워드 입력법</strong>: 메인 키워드 = "지역+업종" (예: <code>강남 인테리어</code>), 서브 키워드 = 세부 서비스 (예: <code>철거, 도배, 욕실</code>).
+                            </div>
+                            <div id="unified-business-medical-warning" style="display: none; margin-top: 0.6rem; padding: 0.6rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(248, 113, 113, 0.4); border-radius: 6px; font-size: 0.78rem; color: #fca5a5; line-height: 1.5;">
+                                ⚠️ <strong>의료광고법 주의</strong>: 병원/한의원/피부과 등 의료기관 광고는 의료법 56조에 따라 환자 후기, 효과 보장, 단정 표현이 금지됩니다. 위반 시 1년 이하 징역 또는 1천만원 이하 벌금. <strong>의료광고심의 사전 신청을 권장합니다.</strong>
                             </div>
                         </div>
                         <!-- ✅ 사용자정의 프롬프트 입력 영역 (custom 모드 선택 시만 표시) -->

@@ -2046,19 +2046,22 @@ export async function generateFullAutoContent(formData: any) {
   // ✅ [v1.4.20] business 모드: businessInfo 필드 수집 (가짜 번호 방지)
   // ✅ [v1.4.22] serviceArea 추가 (전국구/지역구 구분)
   // ✅ [v1.4.24] 빈 값 사전 검증
+  // ✅ [v1.4.26] unified-business-info-* (메인 UI) + business-info-* (모달 UI) 둘 다 시도
   const businessInfo = formData.contentMode === 'business' ? (() => {
     const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
-    const nationwideRadio = document.getElementById('business-service-nationwide') as HTMLInputElement;
+    const getBoth = (a: string, b: string) => get(a) || get(b);
+    const nationwideRadio = (document.getElementById('unified-business-service-nationwide') as HTMLInputElement)
+      || (document.getElementById('business-service-nationwide') as HTMLInputElement);
     const serviceArea: 'nationwide' | 'regional' = nationwideRadio?.checked ? 'nationwide' : 'regional';
     const info = {
-      name: get('business-info-name'),
-      phone: get('business-info-phone'),
-      kakao: get('business-info-kakao'),
-      address: get('business-info-address'),
-      hours: get('business-info-hours'),
-      region: serviceArea === 'nationwide' ? undefined : get('business-info-region'),
+      name: getBoth('unified-business-info-name', 'business-info-name'),
+      phone: getBoth('unified-business-info-phone', 'business-info-phone'),
+      kakao: getBoth('unified-business-info-kakao', 'business-info-kakao'),
+      address: getBoth('unified-business-info-address', 'business-info-address'),
+      hours: getBoth('unified-business-info-hours', 'business-info-hours'),
+      region: serviceArea === 'nationwide' ? undefined : getBoth('unified-business-info-region', 'business-info-region'),
       serviceArea,
-      extra: get('business-info-extra'),
+      extra: getBoth('unified-business-info-extra', 'business-info-extra'),
     };
     // ✅ [v1.4.24] 사전 검증: 필수 필드 (업체명 + 전화번호 또는 카카오톡)
     const missing: string[] = [];

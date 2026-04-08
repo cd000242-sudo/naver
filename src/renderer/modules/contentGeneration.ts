@@ -30,20 +30,23 @@ declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function isShoppingConnectModeActive(): boolean;
 
 // ✅ [v1.4.24] business 모드 — businessInfo 수집 + 사전 검증 (helper)
+// ✅ [v1.4.26] unified-* (메인 UI) + business-* (모달 UI) 둘 다 시도
 function collectBusinessInfo(contentMode: string): any {
   if (contentMode !== 'business') return undefined;
   const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
-  const nationwide = (document.getElementById('business-service-nationwide') as HTMLInputElement)?.checked;
+  const getBoth = (a: string, b: string) => get(a) || get(b);
+  const nationwide = (document.getElementById('unified-business-service-nationwide') as HTMLInputElement)?.checked
+    || (document.getElementById('business-service-nationwide') as HTMLInputElement)?.checked;
   const serviceArea: 'nationwide' | 'regional' = nationwide ? 'nationwide' : 'regional';
   const info = {
-    name: get('business-info-name'),
-    phone: get('business-info-phone'),
-    kakao: get('business-info-kakao'),
-    address: get('business-info-address'),
-    hours: get('business-info-hours'),
-    region: serviceArea === 'nationwide' ? undefined : get('business-info-region'),
+    name: getBoth('unified-business-info-name', 'business-info-name'),
+    phone: getBoth('unified-business-info-phone', 'business-info-phone'),
+    kakao: getBoth('unified-business-info-kakao', 'business-info-kakao'),
+    address: getBoth('unified-business-info-address', 'business-info-address'),
+    hours: getBoth('unified-business-info-hours', 'business-info-hours'),
+    region: serviceArea === 'nationwide' ? undefined : getBoth('unified-business-info-region', 'business-info-region'),
     serviceArea,
-    extra: get('business-info-extra'),
+    extra: getBoth('unified-business-info-extra', 'business-info-extra'),
   };
   const missing: string[] = [];
   if (!info.name) missing.push('업체명');

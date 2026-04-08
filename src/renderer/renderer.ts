@@ -5695,7 +5695,9 @@ function initUnifiedModeSelection(): void {
       const homefeedDescEl = document.getElementById('content-mode-description-homefeed');
       const affiliateDescEl = document.getElementById('content-mode-description-affiliate');
       const customDescEl = document.getElementById('content-mode-description-custom');
+      const businessDescEl = document.getElementById('content-mode-description-business');
       const customPromptArea = document.getElementById('custom-prompt-area');
+      const businessInfoPanel = document.getElementById('unified-business-info-panel');
 
       // 버튼 스타일 업데이트
       document.querySelectorAll('.content-mode-btn').forEach(b => {
@@ -5715,6 +5717,8 @@ function initUnifiedModeSelection(): void {
         (btn as HTMLElement).style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
       } else if (mode === 'custom') {
         (btn as HTMLElement).style.background = 'linear-gradient(135deg, #6366f1, #4f46e5)';
+      } else if (mode === 'business') {
+        (btn as HTMLElement).style.background = 'linear-gradient(135deg, #f59e0b, #ea580c)';
       }
 
       (btn as HTMLElement).style.color = 'white';
@@ -5725,13 +5729,57 @@ function initUnifiedModeSelection(): void {
       if (homefeedDescEl) homefeedDescEl.style.display = mode === 'homefeed' ? 'block' : 'none';
       if (affiliateDescEl) affiliateDescEl.style.display = mode === 'affiliate' ? 'block' : 'none';
       if (customDescEl) customDescEl.style.display = mode === 'custom' ? 'block' : 'none';
+      if (businessDescEl) businessDescEl.style.display = mode === 'business' ? 'block' : 'none';
 
       // 사용자정의 프롬프트 영역: custom 모드에서만 표시
       if (customPromptArea) {
         customPromptArea.style.display = mode === 'custom' ? 'block' : 'none';
       }
+
+      // ✅ [v1.4.26] 업체 정보 패널: business 모드에서만 표시
+      if (businessInfoPanel) {
+        businessInfoPanel.style.display = mode === 'business' ? 'block' : 'none';
+      }
     });
   });
+
+  // ✅ [v1.4.26] 업체 홍보 모드: 의료 키워드 자동 감지 → 경고
+  const checkBusinessMedicalKeyword = () => {
+    const hiddenInput = document.getElementById('unified-content-mode') as HTMLInputElement;
+    if (hiddenInput?.value !== 'business') return;
+    const warning = document.getElementById('unified-business-medical-warning');
+    if (!warning) return;
+    const fields = ['unified-business-info-name', 'unified-business-info-extra'];
+    let allText = '';
+    fields.forEach(id => {
+      const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement;
+      if (el) allText += ' ' + (el.value || '');
+    });
+    // 키워드 입력란들도 확인
+    ['unified-keyword-input', 'unified-keywords-input', 'unified-title-input'].forEach(id => {
+      const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement;
+      if (el) allText += ' ' + (el.value || '');
+    });
+    const medical = ['병원', '한의원', '피부과', '치과', '성형외과', '정형외과', '비뇨기과', '이비인후과', '안과', '소아과', '내과', '의원', '클리닉', '한방', '양방', '의료', '진료', '시술', '수술'];
+    const has = medical.some(k => allText.includes(k));
+    warning.style.display = has ? 'block' : 'none';
+  };
+  ['unified-business-info-name', 'unified-business-info-extra', 'unified-keyword-input', 'unified-keywords-input', 'unified-title-input'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', checkBusinessMedicalKeyword);
+  });
+  // ✅ [v1.4.26] 서비스 범위 라디오 변경 시 region 필드 토글
+  const updateBusinessServiceArea = () => {
+    const nationwide = (document.getElementById('unified-business-service-nationwide') as HTMLInputElement)?.checked;
+    const regionInput = document.getElementById('unified-business-info-region') as HTMLInputElement;
+    if (regionInput) {
+      regionInput.disabled = nationwide;
+      regionInput.placeholder = nationwide ? '🌏 전국 서비스 — 지역 입력 불필요' : '🗺️ 지역 (예: 부산, 울산)';
+      if (nationwide) regionInput.value = '';
+      regionInput.style.opacity = nationwide ? '0.4' : '1';
+    }
+  };
+  document.getElementById('unified-business-service-nationwide')?.addEventListener('change', updateBusinessServiceArea);
+  document.getElementById('unified-business-service-regional')?.addEventListener('change', updateBusinessServiceArea);
 
 
   // 통합 탭 발행 방식 선택 (select 요소 - 레거시 지원)
