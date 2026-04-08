@@ -4292,30 +4292,55 @@ imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국
 반드시 위 JSON 형식으로만 출력하라.
 
 [원본 텍스트]
-${rawText}
 
-${minChars && minChars > 0 ? `
-[글자수 필수] 최소 ${minChars}자 이상. 각 소제목 5문장 이상 자세히 서술. 요약 금지.
-` : ''}
-[원본 정보]
-${title ? `📌 SOURCE_TITLE: "${title}" → 이 제목을 참고하여 더 강력한 후킹 제목으로 변환. 핵심 키워드 유지 + 감정/호기심 트리거 추가.
+══════════════════════════════════════════
+🎯 [필수 키워드 정보 — 제목/소제목 작성에 반드시 반영]
+══════════════════════════════════════════
+${title ? `📌 원본 제목 참고: "${title}"
+   → 이 제목을 참고하여 더 강력한 후킹 제목으로 변환. 핵심 키워드 유지 + 감정/호기심 트리거 추가.
 ` : ''}${(() => {
       if (!primaryKeyword) return '';
       const processed = preprocessLongKeyword(primaryKeyword);
       if (processed.isLong) {
-        return `메인 키워드: ${processed.coreKeyword}\n주제 문맥: ${processed.contextHint}\n⚠️ 주제 문맥은 참고만. 제목에 그대로 사용 금지. 새롭게 창작.`;
+        return `🔑 메인 키워드: "${processed.coreKeyword}"
+   → 제목 맨 앞 3글자 이내 필수 배치
+   → 본문 전체에 5~8회 자연스럽게 분산 (밀도 1.5~3%)
+   → 주제 문맥(${processed.contextHint})은 참고만, 제목에 그대로 사용 금지`;
       }
-      return `메인 키워드: ${processed.coreKeyword}`;
+      return `🔑 메인 키워드: "${processed.coreKeyword}"
+   → 제목 맨 앞 3글자 이내 필수 배치
+   → 본문 전체에 5~8회 자연스럽게 분산 (밀도 1.5~3%)
+   → ⚠️ 모든 소제목에 메인 키워드 또는 그 변형(동의어/관련어) 포함 필수`;
     })()}
-${subKeywords ? `서브 키워드: ${subKeywords}` : ''}
+${subKeywords ? `🔖 서브 키워드: ${subKeywords}
+   → 소제목 5~7개 중 최소 3개의 소제목에 분산 포함
+   → 도입부·결론부 각 1회 이상 자연스럽게 등장` : ''}
 ${contentMode === 'homefeed' && subKeywords ? `
-⚠️ [홈판 서브키워드 밀도] 메인키워드 5~8회(1.5~3%), 서브키워드 최소 3개 소제목 첫 문장에 포함, 도입부·결론부 각 1회. 스크롤 트리거 3개 이상 의무.
-` : ''}
-${source.customPrompt ? `
+⚠️ [홈판 추가] 메인키워드 5~8회(1.5~3%), 서브키워드 최소 3개 소제목 첫 문장에 포함, 도입부·결론부 각 1회. 스크롤 트리거 3개 이상 의무.` : ''}
+${contentMode === 'seo' ? `
+⚠️ [SEO 모드 제목 필수 조건]
+1. 메인 키워드를 제목 맨 앞 3글자 이내 배치 (검색 매칭률 ↑)
+2. 28~45자 길이
+3. 1인칭 경험 + 구체적 기간 + 변화/결과 키워드 포함 (예: "써본 후기", "한 달 사용", "5kg 감량")
+4. AI 표현 절대 금지 ("결론적으로", "정리하면", "알아보겠습니다")` : ''}
+${contentMode === 'homefeed' ? `
+⚠️ [홈판 모드 제목 필수 조건]
+1. 28~35자 길이 (모바일 1.5초 법칙)
+2. 감정 트리거 1개 이상 (충격/공감/궁금증)
+3. 결핍 설계 5대 공식 중 하나 적용 (정보 결핍/사회적 결핍/경험 결핍/시간 결핍/금전 결핍)
+4. 메인 키워드 자연스럽게 포함 (단, SEO처럼 맨 앞 강제 아님)` : ''}
+
+══════════════════════════════════════════
+📄 [원본 본문]
+══════════════════════════════════════════
+${rawText}
+
+${minChars && minChars > 0 ? `
+[글자수 필수] 최소 ${minChars}자 이상. 각 소제목 5문장 이상 자세히 서술. 요약 금지.
+` : ''}${source.customPrompt ? `
 💡 [사용자 추가 지시사항 — 최우선 반영, 다른 모든 규칙보다 상위]
 ${source.customPrompt.trim()}
-` : ''}
-${metrics ? `
+` : ''}${metrics ? `
 📊 [키워드 지표] 월간검색량 ${metrics.searchVolume !== undefined && metrics.searchVolume >= 0 ? metrics.searchVolume.toLocaleString() + '건' : '집계중'} / 문서량 ${metrics.documentCount !== undefined ? metrics.documentCount.toLocaleString() + '건' : '집계중'} → ${metrics.searchVolume && metrics.searchVolume > 10000 ? '대형키워드: 전문성·최신성 강조' : '블루오션: 세부 경험·독점 정보'}
 ` : ''}
 `;
