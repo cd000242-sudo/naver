@@ -536,11 +536,8 @@ export function buildFullPrompt(
 
   let finalPrompt = basePrompt;
 
-  // ✅ [2026-03-30] 홈피드 모드: 구조 변동 엔진 주입 (AI 지문 방지)
-  if (mode === 'homefeed') {
-    const structureDirective = buildStructureVariationDirective();
-    finalPrompt = `${finalPrompt}\n\n${structureDirective}`;
-  }
+  // ✅ [v1.4.18] structureDirective를 system에서 제거 — 매 호출 random 변동 → 캐시 무효화 원인
+  // 이제 buildModeBasedPrompt가 user 파트에 직접 추가함 (캐시 적중률 보존)
 
   // 3. 완전자동 모드면 자동화 보조 프롬프트 추가
   if (isFullAuto) {

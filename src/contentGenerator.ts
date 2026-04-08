@@ -15,7 +15,7 @@ import path from 'path';
 import { JSON_SCHEMA_DESCRIPTION } from './contentGenerator/schema';
 import { humanizeContent, humanizeHtmlContent, analyzeAiDetectionRisk, resetHumanizerLog } from './aiHumanizer.js';
 import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog } from './contentOptimizer.js';
-import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, type PromptMode } from './promptLoader.js';
+import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, type PromptMode } from './promptLoader.js';
 import { processAutoPublishContent, type TitleSelectionResult } from './titleSelector.js';
 import { trendAnalyzer } from './agents/trendAnalyzer.js';
 import { loadConfig } from './configManager.js';
@@ -4287,12 +4287,14 @@ imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-────────────────────
-이 규칙을 단 한 줄도 어기지 말고 즉시 작성하라.
-반드시 위 JSON 형식으로만 출력하라.
-
 [원본 텍스트]
-
+${contentMode === 'homefeed' ? buildStructureVariationDirective() : ''}
+${source.customPrompt ? `
+══════════════════════════════════════════
+💡 [사용자 추가 지시사항 — 최우선 반영, 다른 모든 규칙보다 상위]
+══════════════════════════════════════════
+${source.customPrompt.trim()}
+` : ''}
 ══════════════════════════════════════════
 🎯 [필수 키워드 정보 — 제목/소제목 작성에 반드시 반영]
 ══════════════════════════════════════════
@@ -4329,20 +4331,24 @@ ${contentMode === 'homefeed' ? `
 2. 감정 트리거 1개 이상 (충격/공감/궁금증)
 3. 결핍 설계 5대 공식 중 하나 적용 (정보 결핍/사회적 결핍/경험 결핍/시간 결핍/금전 결핍)
 4. 메인 키워드 자연스럽게 포함 (단, SEO처럼 맨 앞 강제 아님)` : ''}
+${metrics ? `
+📊 [참고 지표] 월간검색량 ${metrics.searchVolume !== undefined && metrics.searchVolume >= 0 ? metrics.searchVolume.toLocaleString() + '건' : '집계중'} / 문서량 ${metrics.documentCount !== undefined ? metrics.documentCount.toLocaleString() + '건' : '집계중'} → ${metrics.searchVolume && metrics.searchVolume > 10000 ? '대형키워드: 전문성·최신성 강조' : '블루오션: 세부 경험·독점 정보'}` : ''}
 
 ══════════════════════════════════════════
-📄 [원본 본문]
+📄 [원본 본문 — 아래 내용을 바탕으로 작성하라]
 ══════════════════════════════════════════
 ${rawText}
 
-${minChars && minChars > 0 ? `
-[글자수 필수] 최소 ${minChars}자 이상. 각 소제목 5문장 이상 자세히 서술. 요약 금지.
-` : ''}${source.customPrompt ? `
-💡 [사용자 추가 지시사항 — 최우선 반영, 다른 모든 규칙보다 상위]
-${source.customPrompt.trim()}
-` : ''}${metrics ? `
-📊 [키워드 지표] 월간검색량 ${metrics.searchVolume !== undefined && metrics.searchVolume >= 0 ? metrics.searchVolume.toLocaleString() + '건' : '집계중'} / 문서량 ${metrics.documentCount !== undefined ? metrics.documentCount.toLocaleString() + '건' : '집계중'} → ${metrics.searchVolume && metrics.searchVolume > 10000 ? '대형키워드: 전문성·최신성 강조' : '블루오션: 세부 경험·독점 정보'}
-` : ''}
+══════════════════════════════════════════
+⚠️ [최종 강제 조건 — 위반 시 0점]
+══════════════════════════════════════════${minChars && minChars > 0 ? `
+1. 글자수: 최소 ${minChars}자 이상. 각 소제목 5문장 이상. 요약/축약 금지.` : ''}
+2. 메인 키워드를 제목 맨 앞 + 모든 소제목에 필수 포함
+3. 위 [필수 키워드 정보]의 모든 규칙을 한 줄도 어기지 말 것
+4. 출력은 오직 JSON 객체 하나만. 마크다운/설명 절대 금지.
+5. JSON은 반드시 { 로 시작하고 } 로 끝나야 함.
+
+이제 위 모든 정보를 종합하여 즉시 JSON으로 출력하라.
 `;
 
   return `${systemPrompt}\n\n${jsonOutputFormat}`.trim();
