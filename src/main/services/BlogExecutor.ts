@@ -564,9 +564,25 @@ export async function runFullPostCycle(
     let accountId: string | undefined;
     let finalResult: PostCycleResult;
 
+    // 🔧 [v1.4.10 디버그] 스테이지 트래커 — IPC 무관하게 바탕화면 파일에 직접 기록
+    // 발행 hang 시 어느 단계에서 멈췄는지 정확히 식별 가능
+    const stageTrack = (stage: string) => {
+        try {
+            const os = require('os');
+            const path = require('path');
+            const fs = require('fs');
+            const trackFile = path.join(os.homedir(), 'Desktop', '발행단계추적.txt');
+            const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+            const ts = new Date().toISOString();
+            fs.appendFileSync(trackFile, `[${ts}] +${elapsed}s ${stage}\n`, 'utf-8');
+        } catch { /* ignore */ }
+    };
+
     try {
+        stageTrack('=== 발행 사이클 시작 ===');
         // 1. 설정 동기화
         await syncConfiguration();
+        stageTrack('1. 설정 동기화 완료');
 
         // 2. 상태 초기화
         AutomationService.startRunning();
@@ -587,16 +603,20 @@ export async function runFullPostCycle(
         }
 
         // 4. 계정 정보 해결
+        stageTrack('4. 계정 정보 해결 시작');
         const account = await resolveAccount(payload, context);
         if (!account) {
+            stageTrack('4. ❌ 계정 정보 없음 → 종료');
             const message = '네이버 아이디와 비밀번호를 입력해주세요.';
             sendStatus({ success: false, message });
             return { success: false, message };
         }
         accountId = account.accountId;
+        stageTrack(`4. 계정 정보 해결 완료 (accountId=${accountId})`);
 
         // 5. 취소 체크
         if (AutomationService.isCancelRequested()) {
+            stageTrack('5. 사용자 취소');
             return {
                 success: false,
                 cancelled: true,
@@ -605,17 +625,22 @@ export async function runFullPostCycle(
         }
 
         // 6. 브라우저 세션 관리
+        stageTrack('6. 브라우저 세션 생성/복원 시작');
         const automation = await getOrCreateBrowserSession(account);
+        stageTrack('6. 브라우저 세션 준비 완료');
         AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — stale guard 오판 방지
 
         // 7. 이미지 처리 (실패해도 발행은 계속)
+        stageTrack('7. 이미지 처리 시작');
         let processedImages: ProcessedImage[] = [];
         try {
             const imageResult = await processImages(payload);
             processedImages = imageResult.images || [];
+            stageTrack(`7. 이미지 처리 완료 (${processedImages.length}개)`);
             AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — 이미지 처리 후 갱신
         } catch (imageError) {
             const imgMsg = (imageError as Error).message || '이미지 처리 중 알 수 없는 오류';
+            stageTrack(`7. ⚠️ 이미지 처리 실패: ${imgMsg.substring(0, 80)}`);
             Logger.error('[BlogExecutor] ⚠️ 이미지 처리 실패 — 이미지 없이 발행 계속', imageError as Error);
             sendLog(`⚠️ 이미지 처리 실패: ${imgMsg.substring(0, 100)} — 이미지 없이 발행을 계속합니다.`);
             processedImages = [];
@@ -623,6 +648,7 @@ export async function runFullPostCycle(
 
         // 8. 취소 체크 (이미지 처리 후 재확인)
         if (AutomationService.isCancelRequested()) {
+            stageTrack('8. 사용자 취소');
             return {
                 success: false,
                 cancelled: true,
@@ -631,7 +657,9 @@ export async function runFullPostCycle(
         }
 
         // 9. 발행 실행
+        stageTrack('9. executePublishing 진입 (네이버 에디터 자동화 시작)');
         const result = await executePublishing(automation, payload, processedImages);
+        stageTrack(`9. executePublishing 종료 (success=${result.success})`);
         AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — 발행 완료 후 갱신
 
         // 10. 성공 시 정리
@@ -646,6 +674,7 @@ export async function runFullPostCycle(
 
     } catch (error) {
         const message = (error as Error).message || '알 수 없는 오류가 발생했습니다.';
+        stageTrack(`❌ 사이클 오류: ${message.substring(0, 100)}`);
         Logger.error('[BlogExecutor] 발행 사이클 오류', error as Error);
         sendStatus({ success: false, message });
         // ✅ [2026-04-05 FIX] stopRunning을 즉시 호출 — 재실행 시 "이미 실행 중" 에러 방지
