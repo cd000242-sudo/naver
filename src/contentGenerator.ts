@@ -4187,13 +4187,14 @@ ${source.customPrompt.trim()}
 
   // ✅ [Traffic Hunter 통합] 모드별 온도(Temperature) 설정
   // SEO: 0.2 (일관성/정확도), Homefeed: 0.7 (창의성/후킹), Traffic Hunter: 0.9 (자극/변동성)
-  // Affiliate: 0.5 (신뢰성/균형), Custom: 0.7 (유연성)
+  // Affiliate: 0.5 (신뢰성/균형), Custom: 0.7 (유연성), Business: 0.4 (전문성+CTA 균형)
   let temperature = 0.5; // 기본값
   if (contentMode === 'seo') temperature = 0.2;
   else if (contentMode === 'homefeed') temperature = 0.7;
   else if (contentMode === 'traffic-hunter') temperature = 0.9;
-  else if (contentMode === 'affiliate') temperature = 0.5;  // ✅ 0.5 유지: 지침 준수 + 적당한 창의성
+  else if (contentMode === 'affiliate') temperature = 0.5;
   else if (contentMode === 'custom') temperature = 0.7;
+  else if (contentMode === 'business') temperature = 0.4; // ✅ [v1.4.18] 업체 홍보: 전문성 + 적당한 다양성
 
   let systemPrompt = systemPromptResult;
 
@@ -8439,6 +8440,46 @@ export async function generateStructuredContent(
               ...(parsed.quality.warnings || []),
               `IntroPatch(homefeed): ${introIssues.join(', ')}`,
             ];
+          }
+        }
+      }
+
+      // ✅ [v1.4.18] 소제목 키워드 누락 사후 패치 — 재시도 없이 즉시 보정
+      // SEO/홈판 모드에서 메인 키워드가 빠진 소제목을 자동으로 키워드 포함 형태로 변환
+      if ((mode === 'seo' || mode === 'homefeed') && Array.isArray(parsed.headings)) {
+        const primaryKw = getPrimaryKeywordFromSource(source);
+        if (primaryKw) {
+          const kwCore = primaryKw.trim().split(/[\s,/\-]+/).filter((w: string) => w.length >= 2)[0] || primaryKw.trim();
+          let patchedCount = 0;
+          for (const heading of parsed.headings) {
+            if (!heading?.title) continue;
+            const titleStr = String(heading.title);
+            // 메인 키워드 또는 핵심 단어가 소제목에 포함되어 있는지 체크 (대소문자 무관, 부분 매칭)
+            if (!titleStr.toLowerCase().includes(kwCore.toLowerCase())) {
+              // 키워드 누락 → 자연스럽게 prefix 추가 (조사 무시)
+              const original = titleStr;
+              heading.title = `${kwCore} ${titleStr}`.trim();
+              patchedCount++;
+              console.log(`[HeadingPatch] ⚠️ 소제목 키워드 누락 패치: "${original}" → "${heading.title}"`);
+            }
+          }
+          if (patchedCount > 0) {
+            if (!parsed.quality) {
+              parsed.quality = {
+                aiDetectionRisk: 'low',
+                legalRisk: 'safe',
+                seoScore: 70,
+                originalityScore: 70,
+                readabilityScore: 70,
+                warnings: [],
+              };
+            }
+            parsed.quality.warnings = [
+              ...(parsed.quality.warnings || []),
+              `HeadingPatch(${mode}): ${patchedCount}개 소제목에 메인 키워드 자동 추가`,
+            ];
+            // bodyPlain 재동기화
+            try { syncHeadingsWithBodyPlain(parsed); } catch { /* ignore */ }
           }
         }
       }

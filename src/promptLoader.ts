@@ -34,7 +34,7 @@ function getPromptsDir(): string {
 }
 
 // 프롬프트 모드 타입
-export type PromptMode = 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'custom';
+export type PromptMode = 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'custom' | 'business';
 
 // 프롬프트 카테고리 타입
 export type PromptCategory =
