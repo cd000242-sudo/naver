@@ -100,7 +100,18 @@ export interface ContinuousQueueItem {
     ctas?: Array<{ text: string; link?: string }>;
     ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
     category?: string;
-    contentMode?: 'seo' | 'homefeed' | 'affiliate' | 'custom';
+    contentMode?: 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business';
+    // ✅ [v1.4.24] business 모드 - 업체 정보
+    businessInfo?: {
+        name?: string;
+        phone?: string;
+        kakao?: string;
+        address?: string;
+        hours?: string;
+        region?: string;
+        serviceArea?: 'nationwide' | 'regional';
+        extra?: string;
+    };
     toneStyle?: string;
     realCategory?: string;
     realCategoryName?: string;

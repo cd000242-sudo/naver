@@ -28,6 +28,33 @@ declare function updateRiskIndicators(...args: any[]): void;
 declare function readUnifiedCtasFromUi(): any[];
 declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function isShoppingConnectModeActive(): boolean;
+
+// ✅ [v1.4.24] business 모드 — businessInfo 수집 + 사전 검증 (helper)
+function collectBusinessInfo(contentMode: string): any {
+  if (contentMode !== 'business') return undefined;
+  const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
+  const nationwide = (document.getElementById('business-service-nationwide') as HTMLInputElement)?.checked;
+  const serviceArea: 'nationwide' | 'regional' = nationwide ? 'nationwide' : 'regional';
+  const info = {
+    name: get('business-info-name'),
+    phone: get('business-info-phone'),
+    kakao: get('business-info-kakao'),
+    address: get('business-info-address'),
+    hours: get('business-info-hours'),
+    region: serviceArea === 'nationwide' ? undefined : get('business-info-region'),
+    serviceArea,
+    extra: get('business-info-extra'),
+  };
+  const missing: string[] = [];
+  if (!info.name) missing.push('업체명');
+  if (!info.phone && !info.kakao) missing.push('전화번호 또는 카카오톡');
+  if (info.serviceArea === 'regional' && !info.region) missing.push('서비스 지역');
+  if (missing.length > 0) {
+    alert(`🏢 업체 홍보 모드 필수 정보 누락:\n\n• ${missing.join('\n• ')}\n\n발행 전 입력해주세요.`);
+    throw new Error(`업체 정보 누락: ${missing.join(', ')}`);
+  }
+  return info;
+}
 declare function setKeywordTitleOptionsFromItem(...args: any[]): void;
 declare function getProgressModal(): any;
 declare function isFullAutoStopRequested(...args: any[]): boolean;
@@ -298,7 +325,8 @@ export async function generateContentFromUrl(
       categoryHint, // ✅ 카테고리 힌트 전달 (2축 분리 프롬프트)
       isReviewType, // ✅ 리뷰형 여부 전달
       // ✅ [2026-02-09 v2] 연속발행 시 이전 제목 히스토리 전달 (중복 방지)
-      previousTitles: ((window as any)._previousTitles as string[]) || undefined
+      previousTitles: ((window as any)._previousTitles as string[]) || undefined,
+      businessInfo: collectBusinessInfo(contentMode), // ✅ [v1.4.24]
     }
   };
 
@@ -833,6 +861,7 @@ export async function generateContentFromKeywords(
       // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 옵션 전달 (메인 프로세스에서 제목 조작 건너뛰기)
       useKeywordAsTitle: (window as any)._keywordTitleOptions?.useKeywordAsTitle || false,
       keywordForTitle: (window as any)._keywordTitleOptions?.keyword || undefined,
+      businessInfo: collectBusinessInfo(contentMode), // ✅ [v1.4.24]
     }
   };
 

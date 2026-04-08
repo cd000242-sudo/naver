@@ -6013,6 +6013,134 @@ function validateSeoContent(content: StructuredContent, source: ContentSource): 
  * - 도입부 3줄 체크
  * - 마무리 결론/정리 금지 체크
  */
+// ✅ [v1.4.24] business 모드 전용 검증 — 가짜 번호 생성 방지 + 소제목 개수 강제
+export function validateBusinessContent(content: StructuredContent, source: ContentSource): { hasCritical: boolean; violations: string[]; warnings: string[] } {
+  if (source.contentMode !== 'business') return { hasCritical: false, violations: [], warnings: [] };
+
+  const violations: string[] = [];
+  const warnings: string[] = [];
+  const bodyText = content.bodyPlain || '';
+  const allText = `${content.selectedTitle || ''} ${bodyText} ${(content.headings || []).map((h: any) => `${h?.title || ''} ${h?.content || ''}`).join(' ')}`;
+
+  console.log('[BusinessValidator] 🔍 업체 홍보 모드 검증 시작...');
+
+  // 1. businessInfo 필드가 본문에 그대로 있는지 검증
+  const info = source.businessInfo;
+  if (info) {
+    if (info.name) {
+      const nameCount = (allText.match(new RegExp(info.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+      if (nameCount === 0) {
+        violations.push(`업체명 "${info.name}"이 본문에 한 번도 없음 (필수 8~12회 반복)`);
+      } else if (nameCount < 3) {
+        warnings.push(`업체명 "${info.name}" 등장 ${nameCount}회 (권장 8~12회)`);
+      }
+    }
+
+    if (info.phone) {
+      // 입력한 전화번호가 본문에 있는지
+      if (!allText.includes(info.phone)) {
+        violations.push(`전화번호 "${info.phone}"이 본문에 없음 — AI가 가짜 번호 생성 또는 누락`);
+      }
+      // 가짜 번호 패턴 감지 (입력값 외 다른 번호)
+      const phonePatterns = allText.match(/(?:0\d{1,2}-?\d{3,4}-?\d{4}|01[0-9]-?\d{3,4}-?\d{4}|1[5-9]\d{2}-?\d{4})/g) || [];
+      for (const found of phonePatterns) {
+        const normalized = found.replace(/-/g, '');
+        const inputNormalized = info.phone.replace(/-/g, '');
+        if (normalized !== inputNormalized) {
+          violations.push(`⛔ 가짜 전화번호 감지: "${found}" (입력값 "${info.phone}"과 다름)`);
+        }
+      }
+    }
+
+    if (info.kakao && !allText.includes(info.kakao)) {
+      warnings.push(`카카오톡 "${info.kakao}"가 본문에 없음`);
+    }
+
+    if (info.address && !allText.includes(info.address.split(' ')[0])) {
+      warnings.push(`주소 일부가 본문에 없음`);
+    }
+
+    // 전국구 vs 지역구 일치 검증
+    if (info.serviceArea === 'regional' && info.region) {
+      const firstRegion = info.region.split(/[,/\s]+/)[0];
+      if (firstRegion && !allText.includes(firstRegion)) {
+        violations.push(`지역명 "${firstRegion}"이 본문/제목에 없음 (지역구 모드 필수)`);
+      }
+    }
+    if (info.serviceArea === 'nationwide') {
+      // 다른 지역명 임의 추가 감지 (강남/송파 등 특정 지역)
+      const suspiciousRegions = ['강남', '송파', '서초', '잠실', '명동', '홍대', '이태원'];
+      const found = suspiciousRegions.filter(r => allText.includes(r));
+      if (found.length > 0) {
+        warnings.push(`전국구인데 특정 지역명 발견: ${found.join(', ')}`);
+      }
+    }
+  }
+
+  // 2. 소제목 5~7개 검증
+  const headingCount = Array.isArray(content.headings) ? content.headings.length : 0;
+  if (headingCount < 5) {
+    violations.push(`소제목 ${headingCount}개 (필수 5~7개)`);
+  } else if (headingCount > 7) {
+    warnings.push(`소제목 ${headingCount}개 (권장 5~7개)`);
+  }
+
+  // 3. 마지막 소제목이 "문의/연락처" 안내인지 검증
+  if (Array.isArray(content.headings) && content.headings.length > 0) {
+    const lastHeading = content.headings[content.headings.length - 1];
+    const lastTitle = String(lastHeading?.title || '');
+    const ctaKeywords = ['문의', '견적', '상담', '연락', '예약', '안내', '신청'];
+    if (!ctaKeywords.some(kw => lastTitle.includes(kw))) {
+      warnings.push(`마지막 소제목이 CTA 안내 아님: "${lastTitle}" (필수: 문의/견적/상담/연락처 키워드)`);
+    }
+  }
+
+  // 4. 광고법 단정 표현 감지
+  const bannedTerms = [
+    { term: '100% 보장', regex: /100\s*%\s*보장/g },
+    { term: '100% 만족', regex: /100\s*%\s*만족/g },
+    { term: '최저가', regex: /최저가/g },
+    { term: '업계 1위', regex: /업계\s*1위/g },
+    { term: '국내 1위', regex: /국내\s*1위/g },
+    { term: '최고의', regex: /최고의/g },
+  ];
+  for (const { term, regex } of bannedTerms) {
+    if (regex.test(allText)) {
+      violations.push(`⛔ 광고법 위반 표현 감지: "${term}"`);
+    }
+  }
+
+  // 결과 로깅
+  if (violations.length > 0) {
+    console.error(`[BusinessValidator] ❌ Critical 위반 ${violations.length}개:`, violations);
+  }
+  if (warnings.length > 0) {
+    console.warn(`[BusinessValidator] ⚠️ 경고 ${warnings.length}개:`, warnings);
+  }
+  if (violations.length === 0 && warnings.length === 0) {
+    console.log('[BusinessValidator] ✅ 모든 검증 통과');
+  }
+
+  // quality 객체에 저장
+  if (!content.quality) {
+    content.quality = {
+      aiDetectionRisk: 'low',
+      legalRisk: (violations.length > 0 ? 'danger' : (warnings.length > 0 ? 'caution' : 'safe')) as LegalRiskLevel,
+      seoScore: 70,
+      originalityScore: 70,
+      readabilityScore: 70,
+      warnings: [],
+    };
+  }
+  content.quality.warnings = [
+    ...(content.quality.warnings || []),
+    ...violations.map(v => `BusinessValidator: ${v}`),
+    ...warnings.map(w => `BusinessValidator: ${w}`),
+  ];
+
+  return { hasCritical: violations.length > 0, violations, warnings };
+}
+
 function validateHomefeedContent(content: StructuredContent, source: ContentSource): { hasCritical: boolean; violations: string[] } {
   if (source.contentMode !== 'homefeed') return { hasCritical: false, violations: [] };
 
@@ -8377,6 +8505,7 @@ export async function generateStructuredContent(
       // ✅ 모드별 전용 검증 (제목/도입부/톤 등 추가 체크)
       validateSeoContent(parsed, source);      // SEO 모드: 키워드/숫자/트리거 검증
       validateHomefeedContent(parsed, source); // 홈판 모드: 소제목/도입부/기자체 검증
+      validateBusinessContent(parsed, source); // ✅ [v1.4.24] business 모드: 가짜 번호/광고법/CTA 검증
 
       if (mode === 'seo') {
         const seoKeyword = getPrimaryKeywordFromSource(source);

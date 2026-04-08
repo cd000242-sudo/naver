@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildModeBasedPrompt } from '../contentGenerator';
+import { buildModeBasedPrompt, validateBusinessContent } from '../contentGenerator';
 import { buildBusinessAngleDirective, TONE_PERSONAS } from '../promptLoader';
 import type { ContentSource } from '../contentGenerator';
 
@@ -250,6 +250,195 @@ describe('Business 모드 — 캐시 적중률', () => {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Test Suite 7: TONE_PERSONAS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Test Suite 8: validateBusinessContent (가짜 번호/광고법/CTA 검증)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+describe('validateBusinessContent — 가짜 번호 + 광고법 검증', () => {
+  function makeContent(overrides: any = {}): any {
+    return {
+      selectedTitle: '부산 인테리어 ABC인테리어 합리적 견적',
+      bodyPlain: 'ABC인테리어는 부산 시공 200건 이상의 경험. 전화 051-123-4567로 문의하세요. ABC인테리어가 책임집니다.',
+      headings: [
+        { title: '부산 인테리어 고민', content: 'ABC인테리어 소개' },
+        { title: '부산 인테리어 견적', content: '평수별 가격' },
+        { title: '부산 시공 사례', content: 'ABC인테리어 사례' },
+        { title: 'A/S 보장', content: 'ABC인테리어 1년 보장' },
+        { title: '부산 인테리어 견적 문의 안내', content: '051-123-4567' },
+      ],
+      ...overrides,
+    };
+  }
+
+  it('정상 케이스: 모든 정보 일치 → critical 없음', () => {
+    const content = makeContent();
+    const source = makeSource({ businessInfo: REGIONAL_INFO });
+    const result = validateBusinessContent(content, source);
+    expect(result.hasCritical).toBe(false);
+  });
+
+  it('업체명 누락 → critical violation', () => {
+    const content = makeContent({
+      selectedTitle: '부산 인테리어 합리적 견적', // 업체명 제거
+      bodyPlain: '부산 인테리어 시공. 전화 051-123-4567.',
+      headings: [
+        { title: '부산 인테리어 1', content: '시공' },
+        { title: '부산 인테리어 2', content: '견적' },
+        { title: '부산 인테리어 3', content: '사례' },
+        { title: '부산 인테리어 4', content: 'A/S' },
+        { title: '부산 인테리어 견적 문의 안내', content: '051-123-4567' },
+      ],
+    });
+    const source = makeSource({ businessInfo: REGIONAL_INFO });
+    const result = validateBusinessContent(content, source);
+    expect(result.hasCritical).toBe(true);
+    expect(result.violations.some(v => v.includes('업체명'))).toBe(true);
+  });
+
+  it('전화번호 누락 → critical violation', () => {
+    const content = makeContent({
+      bodyPlain: 'ABC인테리어 시공 안내. 부산 지역.',
+      headings: [
+        { title: '부산 인테리어 1', content: 'ABC인테리어' },
+        { title: '부산 인테리어 2', content: 'ABC인테리어' },
+        { title: '부산 인테리어 3', content: 'ABC인테리어' },
+        { title: '부산 인테리어 4', content: 'ABC인테리어' },
+        { title: '부산 인테리어 견적 문의 안내', content: '카톡' },
+      ],
+    });
+    const source = makeSource({ businessInfo: REGIONAL_INFO });
+    const result = validateBusinessContent(content, source);
+    expect(result.hasCritical).toBe(true);
+    expect(result.violations.some(v => v.includes('전화번호'))).toBe(true);
+  });
+
+  it('가짜 전화번호 감지 → critical violation', () => {
+    const content = makeContent({
+      bodyPlain: 'ABC인테리어 부산. 전화 010-9999-0000으로 문의하세요. 진짜 번호 051-123-4567도 있어요.',
+    });
+    const source = makeSource({ businessInfo: REGIONAL_INFO });
+    const result = validateBusinessContent(content, source);
+    expect(result.hasCritical).toBe(true);
+    expect(result.violations.some(v => v.includes('가짜 전화번호'))).toBe(true);
+  });
+
+  it('지역구인데 지역명 누락 → critical violation', () => {
+    const content = makeContent({
+      selectedTitle: 'ABC인테리어 합리적 견적',
+      bodyPlain: 'ABC인테리어 시공. 전화 051-123-4567.',
+      headings: [
+        { title: '인테리어 1', content: 'ABC인테리어' },
+        { title: '인테리어 2', content: 'ABC인테리어' },
+        { title: '인테리어 3', content: 'ABC인테리어' },
+        { title: '인테리어 4', content: 'ABC인테리어' },
+        { title: '견적 문의 안내', content: '051-123-4567' },
+      ],
+    });
+    const source = makeSource({ businessInfo: REGIONAL_INFO });
+    const result = validateBusinessContent(content, source);
+    expect(result.hasCritical).toBe(true);
+    expect(result.violations.some(v => v.includes('지역명'))).toBe(true);
+  });
+
+  it('소제목 5개 미만 → critical violation', () => {
+    const content = makeContent({
+      headings: [
+        { title: '부산 인테리어 1', content: 'ABC인테리어' },
+        { title: '부산 인테리어 2', content: 'ABC인테리어' },
+      ],
+    });
+    const source = makeSource({ businessInfo: REGIONAL_INFO });
+    const result = validateBusinessContent(content, source);
+    expect(result.hasCritical).toBe(true);
+    expect(result.violations.some(v => v.includes('소제목'))).toBe(true);
+  });
+
+  it('마지막 소제목 CTA 아니면 warning', () => {
+    const content = makeContent({
+      headings: [
+        { title: '부산 인테리어 1', content: 'ABC인테리어' },
+        { title: '부산 인테리어 2', content: 'ABC인테리어' },
+        { title: '부산 인테리어 3', content: 'ABC인테리어' },
+        { title: '부산 인테리어 4', content: 'ABC인테리어' },
+        { title: '부산 인테리어 5', content: 'ABC인테리어 끝' }, // CTA 아님
+      ],
+    });
+    const source = makeSource({ businessInfo: REGIONAL_INFO });
+    const result = validateBusinessContent(content, source);
+    expect(result.warnings.some(w => w.includes('CTA'))).toBe(true);
+  });
+
+  it('광고법 단정 표현 감지 → critical violation', () => {
+    const content = makeContent({
+      bodyPlain: 'ABC인테리어는 100% 만족 보장. 부산 최저가 시공. 전화 051-123-4567.',
+    });
+    const source = makeSource({ businessInfo: REGIONAL_INFO });
+    const result = validateBusinessContent(content, source);
+    expect(result.hasCritical).toBe(true);
+    expect(result.violations.some(v => v.includes('광고법'))).toBe(true);
+  });
+
+  it('전국구인데 특정 지역명 발견 → warning', () => {
+    const content = makeContent({
+      selectedTitle: '한국인테리어 전국 시공 사례',
+      bodyPlain: '한국인테리어는 전국 거점 50개. 강남, 송파에서도 시공. 1588-1234로 문의하세요.',
+      headings: [
+        { title: '한국인테리어 1', content: '한국인테리어' },
+        { title: '한국인테리어 2', content: '한국인테리어' },
+        { title: '한국인테리어 3', content: '한국인테리어' },
+        { title: '한국인테리어 4', content: '한국인테리어' },
+        { title: '문의 안내', content: '1588-1234' },
+      ],
+    });
+    const source = makeSource({ businessInfo: NATIONWIDE_INFO });
+    const result = validateBusinessContent(content, source);
+    expect(result.warnings.some(w => w.includes('전국구인데 특정 지역'))).toBe(true);
+  });
+
+  it('non-business 모드는 검증 스킵', () => {
+    const content = makeContent();
+    const source = makeSource({ contentMode: 'seo', businessInfo: undefined });
+    const result = validateBusinessContent(content, source);
+    expect(result.hasCritical).toBe(false);
+    expect(result.violations).toEqual([]);
+    expect(result.warnings).toEqual([]);
+  });
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Test Suite 9: category prompt 파일
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+describe('Business 모드 — 카테고리 prompt 파일', () => {
+  it('4개 카테고리 prompt 파일 모두 존재', () => {
+    const fs = require('fs');
+    const path = require('path');
+    const dir = path.join(__dirname, '..', 'prompts', 'business');
+    const expected = ['base.prompt', 'construction.prompt', 'professional.prompt', 'medical.prompt', 'local.prompt'];
+    for (const file of expected) {
+      const fullPath = path.join(dir, file);
+      expect(fs.existsSync(fullPath)).toBe(true);
+    }
+  });
+
+  it('의료 카테고리는 의료광고법 56조 강력 명시', () => {
+    const fs = require('fs');
+    const path = require('path');
+    const content = fs.readFileSync(path.join(__dirname, '..', 'prompts', 'business', 'medical.prompt'), 'utf-8');
+    expect(content).toContain('의료광고법 56조');
+    expect(content).toContain('환자 후기/체험담');
+    expect(content).toContain('절대 금지');
+  });
+
+  it('construction 카테고리는 평수별 가격 가이드 포함', () => {
+    const fs = require('fs');
+    const path = require('path');
+    const content = fs.readFileSync(path.join(__dirname, '..', 'prompts', 'business', 'construction.prompt'), 'utf-8');
+    expect(content).toContain('평수별');
+    expect(content).toContain('A/S');
+  });
+});
 
 describe('TONE_PERSONAS — 단일 소스 진실', () => {
   it('10개 톤 모두 정의됨', () => {

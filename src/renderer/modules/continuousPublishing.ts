@@ -2345,7 +2345,7 @@ function addItemToQueueV2(): void {
     'entertainment';
   // ✅ [FIX] select 요소에서 콘텐츠 모드 가져오기 (라디오 버튼이 아닌 select 사용)
   const contentModeSelect = document.getElementById('continuous-content-mode-select') as HTMLSelectElement;
-  const contentMode = (contentModeSelect?.value || 'seo') as 'seo' | 'homefeed' | 'affiliate' | 'custom';
+  const contentMode = (contentModeSelect?.value || 'seo') as 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business';
 
   // [FIX] 실제 블로그 카테고리는 메인 폼 또는 모달에서 가져오기
   const realCatSelect = document.getElementById('continuous-real-category-select') as HTMLSelectElement ||
@@ -2439,7 +2439,33 @@ function addItemToQueueV2(): void {
       videoOption: contentMode === 'affiliate' ? ((document.getElementById('continuous-video-option') as HTMLInputElement)?.checked || false) : undefined,
       // ✅ [2026-02-13] 키워드 제목 옵션
       keywordAsTitle: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-as-title') as HTMLInputElement)?.checked || false) : undefined,
-      keywordTitlePrefix: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-title-prefix') as HTMLInputElement)?.checked || false) : undefined
+      keywordTitlePrefix: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-title-prefix') as HTMLInputElement)?.checked || false) : undefined,
+      // ✅ [v1.4.24] business 모드: 업체 정보 수집 + 사전 검증
+      businessInfo: contentMode === 'business' ? (() => {
+        const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
+        const nationwide = (document.getElementById('business-service-nationwide') as HTMLInputElement)?.checked;
+        const serviceArea: 'nationwide' | 'regional' = nationwide ? 'nationwide' : 'regional';
+        const info = {
+          name: get('business-info-name'),
+          phone: get('business-info-phone'),
+          kakao: get('business-info-kakao'),
+          address: get('business-info-address'),
+          hours: get('business-info-hours'),
+          region: serviceArea === 'nationwide' ? undefined : get('business-info-region'),
+          serviceArea,
+          extra: get('business-info-extra'),
+        };
+        // 사전 검증
+        const missing: string[] = [];
+        if (!info.name) missing.push('업체명');
+        if (!info.phone && !info.kakao) missing.push('전화번호 또는 카카오톡');
+        if (info.serviceArea === 'regional' && !info.region) missing.push('서비스 지역');
+        if (missing.length > 0) {
+          alert(`🏢 업체 홍보 모드 필수 정보 누락:\n\n• ${missing.join('\n• ')}\n\n발행 전 입력해주세요.`);
+          throw new Error(`업체 정보 누락: ${missing.join(', ')}`);
+        }
+        return info;
+      })() : undefined,
     };
     // ✅ [2026-02-19] 제휴 URL 자동 감지 시 contentMode 자동 전환
     if (newItem.affiliateLink && newItem.contentMode !== 'affiliate') {

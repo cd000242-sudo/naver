@@ -2045,11 +2045,12 @@ export async function generateFullAutoContent(formData: any) {
 
   // ✅ [v1.4.20] business 모드: businessInfo 필드 수집 (가짜 번호 방지)
   // ✅ [v1.4.22] serviceArea 추가 (전국구/지역구 구분)
+  // ✅ [v1.4.24] 빈 값 사전 검증
   const businessInfo = formData.contentMode === 'business' ? (() => {
     const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
     const nationwideRadio = document.getElementById('business-service-nationwide') as HTMLInputElement;
     const serviceArea: 'nationwide' | 'regional' = nationwideRadio?.checked ? 'nationwide' : 'regional';
-    return {
+    const info = {
       name: get('business-info-name'),
       phone: get('business-info-phone'),
       kakao: get('business-info-kakao'),
@@ -2059,6 +2060,17 @@ export async function generateFullAutoContent(formData: any) {
       serviceArea,
       extra: get('business-info-extra'),
     };
+    // ✅ [v1.4.24] 사전 검증: 필수 필드 (업체명 + 전화번호 또는 카카오톡)
+    const missing: string[] = [];
+    if (!info.name) missing.push('업체명');
+    if (!info.phone && !info.kakao) missing.push('전화번호 또는 카카오톡 (둘 중 하나 필수)');
+    if (info.serviceArea === 'regional' && !info.region) missing.push('서비스 지역 (지역구 모드)');
+    if (missing.length > 0) {
+      const msg = `🏢 업체 홍보 모드 필수 정보가 누락되었습니다:\n\n• ${missing.join('\n• ')}\n\n⚠️ 빈 값으로 발행하면 AI가 가짜 정보를 만들 수 있습니다.`;
+      alert(msg);
+      throw new Error(`업체 정보 누락: ${missing.join(', ')}`);
+    }
+    return info;
   })() : undefined;
 
   const payload = {
