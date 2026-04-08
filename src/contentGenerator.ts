@@ -15,7 +15,7 @@ import path from 'path';
 import { JSON_SCHEMA_DESCRIPTION } from './contentGenerator/schema';
 import { humanizeContent, humanizeHtmlContent, analyzeAiDetectionRisk, resetHumanizerLog } from './aiHumanizer.js';
 import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog } from './contentOptimizer.js';
-import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, type PromptMode } from './promptLoader.js';
+import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, type PromptMode } from './promptLoader.js';
 import { processAutoPublishContent, type TitleSelectionResult } from './titleSelector.js';
 import { trendAnalyzer } from './agents/trendAnalyzer.js';
 import { loadConfig } from './configManager.js';
@@ -4204,7 +4204,7 @@ ${source.customPrompt.trim()}
   else if (contentMode === 'traffic-hunter') temperature = 0.9;
   else if (contentMode === 'affiliate') temperature = 0.5;
   else if (contentMode === 'custom') temperature = 0.7;
-  else if (contentMode === 'business') temperature = 0.4; // ✅ [v1.4.18] 업체 홍보: 전문성 + 적당한 다양성
+  else if (contentMode === 'business') temperature = 0.6; // ✅ [v1.4.21] 0.4→0.6 (같은 업체 반복 발행 시 다양성 확보)
 
   let systemPrompt = systemPromptResult;
 
@@ -4299,7 +4299,15 @@ imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [원본 텍스트]
-${contentMode === 'homefeed' ? buildStructureVariationDirective() : ''}${contentMode === 'business' && source.businessInfo ? `
+${contentMode === 'homefeed' ? buildStructureVariationDirective() : ''}${contentMode === 'business' ? buildBusinessAngleDirective() : ''}${source.previousTitles && source.previousTitles.length > 0 && (contentMode === 'business' || contentMode === 'seo' || contentMode === 'homefeed') ? `
+══════════════════════════════════════════
+🚫 [이전 작성 제목 — 비슷한 패턴 반복 금지]
+══════════════════════════════════════════
+${source.previousTitles.slice(-5).map((t, i) => `${i + 1}. ${t}`).join('\n')}
+
+⛔ 위 제목들과 같은 시작 단어, 같은 패턴, 같은 후킹 방식 절대 금지.
+⛔ 완전히 다른 각도로 새 제목 창작하라.
+` : ''}${contentMode === 'business' && source.businessInfo ? `
 ══════════════════════════════════════════
 🏢 [업체 정보 — 절대 변경/조작 금지, 그대로 사용]
 ══════════════════════════════════════════
