@@ -6540,45 +6540,31 @@ ${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
       // 하지만 제목이라도 있으면 경고만 하고 계속 진행
       const failedUrls = urlPatterns.filter(url => /blog\.naver\.com/i.test(url));
 
+      // ✅ [v1.4.7] throw 제거 — 폴백 체인으로 우회
+      // baseTitle 있으면 제목 기반, 없으면 키워드/URL 폴백 (아래 5단계 폴백에서 처리)
       if (baseTitle && baseTitle.trim().length > 0) {
-        // 제목이 있으면 경고만 하고 제목 기반으로 생성
         warnings.push(
           `⚠️ 네이버 블로그 URL 크롤링에 실패했습니다 (${failedUrls.join(', ')}).\n` +
-          `제목("${baseTitle}")을 기반으로 콘텐츠를 생성합니다.\n\n` +
-          `다음 방법을 권장합니다:\n` +
-          `1. 블로그 글의 실제 내용을 복사하여 "초안" 필드에 붙여넣기\n` +
-          `2. RSS URL 사용 (블로그 RSS 피드 URL)\n` +
-          `3. 키워드 입력 후 자동 생성`
+          `제목("${baseTitle}")을 기반으로 콘텐츠를 생성합니다.`
         );
         baseBody = `${baseTitle}에 대한 상세한 내용을 작성합니다.`;
       } else {
-        // 제목도 없으면 에러
-        throw new Error(
-          '네이버 블로그 URL 크롤링에 실패했습니다.\n\n' +
-          '전용 크롤러와 Puppeteer를 모두 사용했지만 실패했습니다.\n' +
-          '다음 방법을 시도해보세요:\n' +
-          '1. 블로그 글의 실제 내용을 복사하여 "초안" 필드에 붙여넣기\n' +
-          '2. RSS URL 사용 (블로그 RSS 피드 URL)\n' +
-          '3. 키워드 입력 후 자동 생성\n\n' +
-          `시도한 URL: ${failedUrls.join(', ')}`
+        warnings.push(
+          `⚠️ 네이버 블로그 URL 크롤링 실패 (${failedUrls.join(', ')}). 키워드/제목/draftText 폴백 시도.`
         );
+        // baseBody 비워둠 → 아래 5단계 폴백에서 처리
       }
     }
 
     if (baseTitle) {
-      // 제목이 있지만 본문이 없는 경우 - 경고와 함께 제목 기반으로 생성
       warnings.push(`⚠️ URL에서 본문을 추출하지 못했습니다. 제목("${baseTitle}")을 기반으로 콘텐츠를 생성합니다.`);
       baseBody = `${baseTitle}에 대한 상세한 내용을 작성합니다.`;
     } else {
-      // URL만 있는 경우
-      throw new Error(
-        `URL 크롤링에 실패했습니다. 본문을 추출할 수 없습니다.\n\n` +
-        `시도한 URL: ${urlPatterns.join(', ')}\n\n` +
-        `다음 방법을 시도해보세요:\n` +
-        `1. 블로그 글의 실제 내용을 복사하여 "초안" 필드에 붙여넣기\n` +
-        `2. RSS URL 사용 (블로그 RSS 피드 URL)\n` +
-        `3. 키워드 입력 후 자동 생성`
+      // ✅ [v1.4.7] throw 제거 — 5단계 폴백 체인으로 우회
+      warnings.push(
+        `⚠️ URL 크롤링 실패 (${urlPatterns.join(', ')}). 키워드/draftText 폴백 시도.`
       );
+      // baseBody 비워둠 → 아래 5단계 폴백에서 처리
     }
   }
 
