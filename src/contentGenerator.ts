@@ -4044,7 +4044,8 @@ function getAutoToneByCategory(category: string | undefined): 'friendly' | 'prof
 }
 
 // ✅ 2축 분리 구조 프롬프트 생성 함수 (노출 목적 × 카테고리)
-function buildModeBasedPrompt(
+// ✅ [v1.4.23] export for testing (vitest)
+export function buildModeBasedPrompt(
   source: ContentSource,
   mode: PromptMode,
   metrics?: { searchVolume?: number; documentCount?: number },
