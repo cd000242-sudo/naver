@@ -3562,9 +3562,10 @@ export interface ContentSource {
     name?: string;       // 업체명
     phone?: string;      // 전화번호
     kakao?: string;      // 카카오톡 ID/링크
-    address?: string;    // 주소
+    address?: string;    // 주소 (사무소/매장 위치)
     hours?: string;      // 영업시간
-    region?: string;     // 서비스 지역 (시공/배달 등)
+    region?: string;     // 서비스 지역 (지역구 시): "부산, 울산, 경남" / 전국구 시: 빈 값
+    serviceArea?: 'nationwide' | 'regional';  // ✅ [v1.4.22] 서비스 범위
     extra?: string;      // 추가 정보 (자격증/경력/특징 등)
   };
   images?: string[]; // ✅ 크롤링된 이미지 URL 목록 (Shopping Connect)
@@ -4316,11 +4317,19 @@ ${source.businessInfo.phone ? `📞 전화번호: ${source.businessInfo.phone}` 
 ${source.businessInfo.kakao ? `💬 카카오톡: ${source.businessInfo.kakao}` : ''}
 ${source.businessInfo.address ? `📍 주소: ${source.businessInfo.address}` : ''}
 ${source.businessInfo.hours ? `🕐 영업시간: ${source.businessInfo.hours}` : ''}
-${source.businessInfo.region ? `🗺️ 서비스 지역: ${source.businessInfo.region}` : ''}
+${source.businessInfo.serviceArea === 'nationwide' ? `🌏 서비스 범위: 전국 (지역 제한 없음)
+   → 제목/본문에 특정 지역명 강제 삽입 금지
+   → "전국 어디든", "전국 ○○ 시공", "지역 무관" 표현 활용
+   → 신뢰 요소로 "전국 ○○개 시공 사례", "전국 거점 ○○개" 등 강조
+   → 지역 키워드 대신 업종+차별점으로 검색 노출 (예: "원목 인테리어", "친환경 도배")` : source.businessInfo.region ? `🗺️ 서비스 지역: ${source.businessInfo.region}
+   → 제목 맨 앞에 위 지역명 중 1개 필수 배치 (예: "${source.businessInfo.region.split(/[,/\s]+/)[0]} 인테리어")
+   → 본문에 위 지역명들을 골고루 분산 등장 (각 지역 최소 1회)
+   → 신뢰 요소로 "${source.businessInfo.region} 시공 ○○건", "${source.businessInfo.region.split(/[,/\s]+/)[0]} 당일 방문 가능" 강조
+   → 다른 지역명(서울/강남 등) 임의 추가 절대 금지` : ''}
 ${source.businessInfo.extra ? `✨ 특징/경력: ${source.businessInfo.extra}` : ''}
 
 ⛔ 위 연락처 정보는 한 글자도 변경하지 말고 그대로 사용하라.
-⛔ 절대 가짜 전화번호, 가짜 카카오톡 ID, 가짜 주소를 만들지 마라.
+⛔ 절대 가짜 전화번호, 가짜 카카오톡 ID, 가짜 주소, 가짜 지역을 만들지 마라.
 ⛔ 위 업체명을 본문에 8~12회 자연 반복하라.
 ` : ''}${source.customPrompt ? `
 ══════════════════════════════════════════

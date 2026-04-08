@@ -2044,15 +2044,19 @@ export async function generateFullAutoContent(formData: any) {
   }
 
   // ✅ [v1.4.20] business 모드: businessInfo 필드 수집 (가짜 번호 방지)
+  // ✅ [v1.4.22] serviceArea 추가 (전국구/지역구 구분)
   const businessInfo = formData.contentMode === 'business' ? (() => {
     const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
+    const nationwideRadio = document.getElementById('business-service-nationwide') as HTMLInputElement;
+    const serviceArea: 'nationwide' | 'regional' = nationwideRadio?.checked ? 'nationwide' : 'regional';
     return {
       name: get('business-info-name'),
       phone: get('business-info-phone'),
       kakao: get('business-info-kakao'),
       address: get('business-info-address'),
       hours: get('business-info-hours'),
-      region: get('business-info-region'),
+      region: serviceArea === 'nationwide' ? undefined : get('business-info-region'),
+      serviceArea,
       extra: get('business-info-extra'),
     };
   })() : undefined;
