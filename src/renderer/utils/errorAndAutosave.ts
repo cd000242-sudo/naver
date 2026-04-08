@@ -128,14 +128,17 @@ export function handleCrash(error: any, context: string): void {
 // ═══════════════════════════════════════════════════════════════
 // 자동 저장 (Autosave)
 // ═══════════════════════════════════════════════════════════════
+// ✅ [v1.4.9] 세션 차단 플래그 — quota 초과 1회 발생 시 전체 세션 동안 autosave 중단
+// (매 30초마다 실패 → 콘솔 도배 + cleanup 무한 루프 방지)
+let _autosaveDisabledForSession = false;
 export function autosaveContent(data: AutosaveData): void {
+    if (_autosaveDisabledForSession) return; // 조용히 무시
     try {
         const saveData = { ...data, timestamp: Date.now() };
         let jsonString = JSON.stringify(saveData);
         const MAX_SIZE = 4 * 1024 * 1024;
 
         if (jsonString.length > MAX_SIZE) {
-            console.warn('[Autosave] 데이터 용량 초과, 이미지 제외하고 저장...');
             const slimData = {
                 ...saveData,
                 generatedImages: (saveData.generatedImages || []).map((img: any) => ({
@@ -147,34 +150,20 @@ export function autosaveContent(data: AutosaveData): void {
             jsonString = JSON.stringify(slimData);
             if (jsonString.length > MAX_SIZE) {
                 jsonString = JSON.stringify({ ...saveData, generatedImages: [] });
-                console.warn('[Autosave] 이미지 완전 제거하여 저장');
             }
         }
 
-        // ✅ [2026-03-24 FIX] safeLocalStorageSetItem으로 교체 → 할당량 초과 시 자동 정리
         const saved = safeLocalStorageSetItem(AUTOSAVE_KEY, jsonString);
         if (saved) {
             console.debug('[Autosave] 콘텐츠 임시 저장 완료:', new Date().toLocaleTimeString(), `(${Math.round(jsonString.length / 1024)}KB)`);
         } else {
-            // ✅ [2026-04-04 FIX] safeLocalStorageSetItem이 이미 2회 정리+재시도 완료 후 실패한 상태.
-            // 이미지 제거 최소 데이터로 1회만 추가 시도 (재귀 방지를 위해 retryCount=2로 시작)
-            console.warn('[Autosave] ⚠️ 저장 실패, 이미지 제거 후 최소 저장 시도...');
-            const minimalJson = JSON.stringify({
-                timestamp: Date.now(),
-                mode: data.mode,
-                structuredContent: data.structuredContent,
-                generatedImages: [],
-            });
-            try {
-                localStorage.setItem(AUTOSAVE_KEY, minimalJson);
-                console.log('[Autosave] ✅ 이미지 제외 최소 저장 성공');
-            } catch {
-                console.error('[Autosave] ❌ 최소 데이터도 저장 불가 — localStorage 심각한 용량 부족');
-            }
+            // ✅ [v1.4.9] 1차 실패 → 세션 차단 + 1회만 경고
+            _autosaveDisabledForSession = true;
+            console.warn('[Autosave] ⚠️ localStorage 용량 부족 — 이번 세션의 자동 저장을 중단합니다. (앱 재시작 시 재시도)');
         }
     } catch (error: any) {
-        // JSON.stringify 등 다른 예외만 여기서 처리
-        console.error('[Autosave] 임시 저장 실패:', error);
+        _autosaveDisabledForSession = true;
+        console.error('[Autosave] 임시 저장 실패 — 세션 자동 저장 중단:', error?.message || error);
     }
 }
 

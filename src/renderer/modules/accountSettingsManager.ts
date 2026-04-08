@@ -41,6 +41,8 @@ let _originalGetItem: typeof Storage.prototype.getItem | null = null;
 let _originalSetItem: typeof Storage.prototype.setItem | null = null;
 let _originalRemoveItem: typeof Storage.prototype.removeItem | null = null;
 let _originalKey: typeof Storage.prototype.key | null = null;
+// ✅ [v1.4.9] 마이그레이션 실패 키 추적 — 같은 키 반복 시도 차단
+const _migrationFailedKeys = new Set<string>();
 
 // ============================================
 // userId 관리
@@ -116,7 +118,14 @@ export function activateLocalStorageProxy(): void {
                     _originalSetItem!.call(this, nsKey, originalValue);
                     console.log(`[AccountSettings] 🔄 자동 마이그레이션: ${key} → ${nsKey.substring(0, 50)}...`);
                 } catch (e) {
-                    console.warn(`[AccountSettings] ⚠️ 마이그레이션 실패 (할당량 초과): ${key}`);
+                    // ✅ [v1.4.9] 마이그레이션 실패 시 원본 키 제거 — 무한 retry 차단
+                    // (매 getItem마다 같은 키를 다시 시도하면서 콘솔 도배되는 버그 수정)
+                    if (!_migrationFailedKeys.has(key)) {
+                        _migrationFailedKeys.add(key);
+                        console.warn(`[AccountSettings] ⚠️ 마이그레이션 실패 → 원본 키 제거: ${key} (한 번만 표시)`);
+                    }
+                    try { _originalRemoveItem!.call(this, key); } catch { /* ignore */ }
+                    return null;
                 }
                 return originalValue;
             }
