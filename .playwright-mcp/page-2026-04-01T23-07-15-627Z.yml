@@ -1,0 +1,32 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Leaders Pro Leaders Pro" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+        - img "Leaders Pro" [ref=e5]
+        - generic [ref=e6]: Leaders Pro
+      - generic [ref=e7]:
+        - link "홈" [ref=e8] [cursor=pointer]:
+          - /url: index.html
+        - link "구독하기" [ref=e9] [cursor=pointer]:
+          - /url: pricing.html
+  - generic [ref=e11]:
+    - heading "�� 구독 관리" [level=1] [ref=e12]
+    - paragraph [ref=e13]:
+      - text: 구독 상태를 확인하고 관리할 수 있습니다.
+      - text: 결제 시 사용한 이메일과 라이선스 코드를 입력해주세요.
+    - generic [ref=e14]: 이메일 주소
+    - textbox "결제 시 입력한 이메일" [ref=e15]
+    - generic [ref=e16]: 라이선스 코드
+    - textbox "XXXX-XXXX-XXXX-XXXX" [ref=e17]
+    - button "구독 상태 조회" [ref=e18] [cursor=pointer]
+  - contentinfo [ref=e19]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - img "Leaders Pro" [ref=e22]
+        - generic [ref=e23]: Leaders Pro
+      - generic [ref=e24]:
+        - paragraph [ref=e25]: "상호: Leaders Pro | 대표자: 박성현 | 사업자등록번호: 515-97-01802"
+        - paragraph [ref=e26]: "주소: 충남 천안시 서북구 쌍용대로334번길9"
+        - paragraph [ref=e27]: "고객문의: tjdgus24280@naver.com | 전화번호: 010-7545-1645"
+      - paragraph [ref=e28]: © 2026 Leaders Pro. All rights reserved.

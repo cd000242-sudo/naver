@@ -1,0 +1,14 @@
+﻿096:             </div>
+097: 
+098:             <!-- Product Tabs -->
+099:             <div class="pricing-tabs" id="pricing-tabs">
+100:                 <button class="pricing-tab active" data-tab="naver" onclick="switchPricingTab('naver')"><span class="product-icon-sm">N</span> Leaders Pro ???</button>
+101:                 <!-- ? ????: ??? ?? ?? --><button class="pricing-tab" data-tab="orbit" onclick="switchPricingTab('orbit')" style="display:none"><span class="product-icon-sm">W</span> Leaders Orbit</bu
+102:                 <button class="pricing-tab" data-tab="tistory" style="display:none" onclick="alert('Leaders Tistory????? ?? ?????. ?? ????? ???????? ????????!'); return false;" style="opacity:0.5; cur
+103:                 <button class="pricing-tab" data-tab="leword" onclick="switchPricingTab('leword')" style="display:none"><span class="product-icon-sm">L</span> Leword</button>
+104:             </div>
+105: 
+106:             <!-- ?????Leaders Pro ??????????-->
+107:             <div class="pricing-panel active" id="panel-naver">
+108:                 <p style="text-align:center; color:var(--text-muted); font-size:0.8rem; margin:0 0 16px; padding:0 12px;">?? ???? ?????. ??? ???? ???? ????, ???? ??? ? ????.</p>
+109:                 <div class="pricing-grid">

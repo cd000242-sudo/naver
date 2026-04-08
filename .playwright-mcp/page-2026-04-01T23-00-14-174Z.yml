@@ -1,0 +1,425 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Leaders Pro Leaders Pro" [ref=e4] [cursor=pointer]:
+        - /url: "#"
+        - img "Leaders Pro" [ref=e5]
+        - generic [ref=e6]: Leaders Pro
+      - generic [ref=e7]:
+        - link "홈" [ref=e8] [cursor=pointer]:
+          - /url: index.html
+        - link "제품정보" [ref=e9] [cursor=pointer]:
+          - /url: products.html
+        - link "구매" [ref=e10] [cursor=pointer]:
+          - /url: pricing.html
+        - link "후기" [ref=e11] [cursor=pointer]:
+          - /url: reviews.html
+        - link "커뮤니티" [ref=e12] [cursor=pointer]:
+          - /url: community.html
+        - link "다운로드" [ref=e13] [cursor=pointer]:
+          - /url: download.html
+        - link "주문조회" [ref=e14] [cursor=pointer]:
+          - /url: lookup.html
+  - generic [ref=e15]:
+    - generic [ref=e16]:
+      - generic [ref=e19]: PREMIUM AUTOMATION
+      - heading "매일 100건, 사람이 쓴 것처럼." [level=1] [ref=e20]:
+        - text: 매일 100건,
+        - text: 사람이 쓴 것처럼.
+      - paragraph [ref=e21]:
+        - text: 키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로.
+        - text: 블로그 10개를 혼자 운영하는 분들의
+        - strong [ref=e22]: 비밀 무기
+        - text: .
+      - generic [ref=e23]:
+        - link "지금 자동화 시작하기" [ref=e24] [cursor=pointer]:
+          - /url: pricing.html
+          - generic [ref=e25]: 지금 자동화 시작하기
+          - img [ref=e26]
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e30]: J
+            - generic [ref=e31]: K
+            - generic [ref=e32]: L
+          - generic [ref=e33]: 2,800+명이 사용 중
+    - iframe [ref=e35]:
+      - link [ref=f15e3] [cursor=pointer]:
+        - /url: https://spline.design/?utm_source=public-url&utm_campaign=spline-logo
+        - img [ref=f15e5]
+  - generic [ref=e36]:
+    - generic [ref=e37]:
+      - generic [ref=e38]: "0"
+      - text: 누적 발행
+    - generic [ref=e40]:
+      - generic [ref=e41]: "0"
+      - text: 활성 사용자
+    - generic [ref=e43]:
+      - generic [ref=e44]: "0"
+      - text: 가동률 %
+    - generic [ref=e46]:
+      - generic [ref=e47]: "0"
+      - text: 일일 자동 발행
+  - generic [ref=e49]:
+    - generic [ref=e50]:
+      - generic [ref=e51]: EXPLORE
+      - heading "원하는 정보를 빠르게 확인하세요" [level=2] [ref=e52]
+      - paragraph [ref=e53]: 각 페이지에서 상세 정보를 확인할 수 있습니다
+    - generic [ref=e54]:
+      - link "🚀 제품 소개 Leaders Pro의 강력한 블로그 자동화 기능을 자세히 확인하세요 자세히 보기 →" [ref=e55] [cursor=pointer]:
+        - /url: products.html
+        - generic [ref=e56]: 🚀
+        - heading "제품 소개" [level=3] [ref=e57]
+        - paragraph [ref=e58]:
+          - text: Leaders Pro의 강력한 블로그 자동화 기능을
+          - text: 자세히 확인하세요
+        - generic [ref=e59]: 자세히 보기 →
+      - link "💳 결제 💰 가격 & 구매 제품별 요금제 비교 및 토스페이먼츠 안전 결제 요금제 보기 →" [ref=e60] [cursor=pointer]:
+        - /url: pricing.html
+        - generic [ref=e61]: 💳 결제
+        - generic [ref=e62]: 💰
+        - heading "가격 & 구매" [level=3] [ref=e63]
+        - paragraph [ref=e64]:
+          - text: 제품별 요금제 비교 및
+          - text: 토스페이먼츠 안전 결제
+        - generic [ref=e65]: 요금제 보기 →
+      - link "⭐ 후기 & FAQ 실제 사용자들의 생생한 후기와 자주 묻는 질문 모음 후기 보기 →" [ref=e66] [cursor=pointer]:
+        - /url: reviews.html
+        - generic [ref=e67]: ⭐
+        - heading "후기 & FAQ" [level=3] [ref=e68]
+        - paragraph [ref=e69]:
+          - text: 실제 사용자들의 생생한 후기와
+          - text: 자주 묻는 질문 모음
+        - generic [ref=e70]: 후기 보기 →
+      - link "👥 커뮤니티 공지사항, 수익 인증, 활용 팁 확인 커뮤니티 →" [ref=e71] [cursor=pointer]:
+        - /url: community.html
+        - generic [ref=e72]: 👥
+        - heading "커뮤니티" [level=3] [ref=e73]
+        - paragraph [ref=e74]:
+          - text: 공지사항, 수익 인증,
+          - text: 활용 팁 확인
+        - generic [ref=e75]: 커뮤니티 →
+      - link "📥 다운로드 구매 후 비밀번호 입력으로 최신 버전 다운로드 다운로드 →" [ref=e76] [cursor=pointer]:
+        - /url: download.html
+        - generic [ref=e77]: 📥
+        - heading "다운로드" [level=3] [ref=e78]
+        - paragraph [ref=e79]:
+          - text: 구매 후 비밀번호 입력으로
+          - text: 최신 버전 다운로드
+        - generic [ref=e80]: 다운로드 →
+      - link "🔍 주문 조회 이메일 또는 주문번호로 구매 내역 확인 조회하기 →" [ref=e81] [cursor=pointer]:
+        - /url: lookup.html
+        - generic [ref=e82]: 🔍
+        - heading "주문 조회" [level=3] [ref=e83]
+        - paragraph [ref=e84]:
+          - text: 이메일 또는 주문번호로
+          - text: 구매 내역 확인
+        - generic [ref=e85]: 조회하기 →
+  - generic [ref=e87]:
+    - generic [ref=e88]:
+      - generic [ref=e89]: TESTIMONIALS
+      - heading "실제 사용자들의 이야기" [level=2] [ref=e90]
+      - paragraph [ref=e91]: Leaders Pro를 경험한 분들의 생생한 후기
+    - generic [ref=e92]:
+      - generic [ref=e93]:
+        - generic [ref=e94]: "\""
+        - paragraph [ref=e95]:
+          - text: 블로그 10개를 혼자 운영하는데,
+          - strong [ref=e96]: 리더스 프로 없었으면 불가능
+          - text: 했어요. 출근 전에 키워드만 세팅하면 퇴근할 때 50건이 올라가 있습니다.
+        - generic [ref=e97]:
+          - generic [ref=e98]: K
+          - generic [ref=e99]:
+            - strong [ref=e100]: K 대표
+            - generic [ref=e101]: 마케팅 에이전시 · 10개월 사용
+      - generic [ref=e102]:
+        - generic [ref=e103]: "\""
+        - paragraph [ref=e104]:
+          - text: 쿠팡 파트너스 블로그를 4개 돌리고 있는데, 쇼핑 커넥트 기능으로
+          - strong [ref=e105]: 월 수익이 3배
+          - text: 뛰었어요. AI가 생성한 리뷰 글이 정말 자연스러워요.
+        - generic [ref=e106]:
+          - generic [ref=e107]: P
+          - generic [ref=e108]:
+            - strong [ref=e109]: P님
+            - generic [ref=e110]: 제휴 마케터 · 6개월 사용
+      - generic [ref=e111]:
+        - generic [ref=e112]: "\""
+        - paragraph [ref=e113]:
+          - text: 글로벌 블로그 5개를 Leaders Orbit으로 운영 중입니다.
+          - strong [ref=e114]: 애드센스 승인이 2주 만에
+          - text: 떨어졌고, 지금은 월 $400 이상 벌고 있어요.
+        - generic [ref=e115]:
+          - generic [ref=e116]: L
+          - generic [ref=e117]:
+            - strong [ref=e118]: L님
+            - generic [ref=e119]: 글로벌 블로거 · 8개월 사용
+    - link "더 많은 후기 보기 →" [ref=e121] [cursor=pointer]:
+      - /url: reviews.html
+  - contentinfo [ref=e122]:
+    - generic [ref=e123]:
+      - generic [ref=e124]:
+        - img "Leaders Pro" [ref=e125]
+        - generic [ref=e126]: Leaders Pro
+      - generic [ref=e127]:
+        - link "이용약관" [ref=e128] [cursor=pointer]:
+          - /url: terms.html
+        - link "환불정책" [ref=e129] [cursor=pointer]:
+          - /url: refund.html
+        - link "개인정보처리방침" [ref=e130] [cursor=pointer]:
+          - /url: privacy.html
+        - link "주문 조회" [ref=e131] [cursor=pointer]:
+          - /url: lookup.html
+        - link "고객 문의" [ref=e132] [cursor=pointer]:
+          - /url: mailto:cd000242@gmail.com
+      - generic [ref=e133]:
+        - paragraph [ref=e134]: "상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802"
+        - paragraph [ref=e135]: "주소: 경남 김해시 장유로334번길9"
+        - paragraph [ref=e136]: "이메일: tjdgus24280@naver.com | 전화: 010-7545-1645"
+      - paragraph [ref=e137]: © 2026 Leaders Pro. All rights reserved.
+  - generic [ref=e138]:
+    - generic:
+      - generic:
+        - generic: 🌸 Playlist
+        - button "✕"
+      - generic:
+        - generic: 🌸
+        - generic:
+          - generic: Now Playing
+          - generic: 🌸 Spring Breeze
+      - generic:
+        - button "⏮"
+        - button "⏸"
+        - button "⏭"
+      - generic:
+        - generic:
+          - generic: ♪
+          - generic: 🌸 Spring Breeze
+        - generic:
+          - generic: "2"
+          - generic: 🌿 Peaceful Garden
+        - generic:
+          - generic: "3"
+          - generic: ☁️ Cloud Walk
+        - generic:
+          - generic: "4"
+          - generic: 🎋 Bamboo Rain
+        - generic:
+          - generic: "5"
+          - generic: 🎵 Lofi Beats
+    - generic "🌸 음악 플레이어" [ref=e139] [cursor=pointer]:
+      - generic [ref=e140]: 🎵
+      - generic [ref=e141]:
+        - generic [ref=e142]: Music
+        - generic [ref=e143]: 🌸 Spring Breeze
+  - iframe [ref=e150]:
+    - generic [active] [ref=f16e1]:
+      - generic "YouTube 동영상 플레이어" [ref=f16e3]
+      - generic [ref=f16e5]:
+        - generic:
+          - generic:
+            - button "동영상 재생" [ref=f16e10] [cursor=pointer]
+            - button "재생 컨트롤 숨기기" [ref=f16e12] [cursor=pointer]
+            - generic [ref=f16e14]:
+              - generic [ref=f16e19]:
+                - generic [ref=f16e20]:
+                  - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 듣기만 해도 기분 좋아지는 봄 플리🌿☀️ 𝗚𝗼𝗼𝗱 𝗩𝗶𝗯𝗲𝘀 (중간광고없음) 10시간":
+                    - /url: https://www.youtube.com/watch?v=r4EHi65fa-0
+                  - link "중간광고없음":
+                    - /url: /channel/UC1RPzsPQdCj0LR7VbPyHKzA
+                    - generic: 중간광고없음
+                - generic [ref=f16e21]:
+                  - button [ref=f16e22] [cursor=pointer]
+                  - generic [ref=f16e23]:
+                    - generic [ref=f16e24]:
+                      - generic: 중간광고없음
+                      - generic: 구독자 1.26만명
+                    - generic [ref=f16e32]:
+                      - generic [ref=f16e33]:
+                        - generic:
+                          - generic:
+                            - img
+                        - button "구독" [ref=f16e36] [cursor=pointer]:
+                          - generic [ref=f16e37]: 구독
+                      - generic:
+                        - generic:
+                          - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - link:
+                              - /url: https://www.youtube.com/watch?v=6Jpx8gbhp3A&feature=endscreen
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic: 10:33:16
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 그냥 이거 하나면 끝! 틀자마자 기분 좋아지는 음악 (중간광고없음) 10시간 | 팝송 플레이리스트 19시간 전":
+                                    - /url: https://www.youtube.com/watch?v=6Jpx8gbhp3A&feature=endscreen
+                                    - heading "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 그냥 이거 하나면 끝! 틀자마자 기분 좋아지는 음악 (중간광고없음) 10시간 | 팝송 플레이리스트" [level=3]
+                                    - generic:
+                                      - generic:
+                                        - generic: 19시간 전
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - link:
+                              - /url: https://www.youtube.com/watch?v=Q233ucWLtcI&feature=endscreen
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic: 10:21:19
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 딴 거 필요 없어. 이거 틀면 그냥 기분 날아감💨 (중간광고없음) 10시간 | 신나는 팝송 다 모아놨음! 1개월 전":
+                                    - /url: https://www.youtube.com/watch?v=Q233ucWLtcI&feature=endscreen
+                                    - heading "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 딴 거 필요 없어. 이거 틀면 그냥 기분 날아감💨 (중간광고없음) 10시간 | 신나는 팝송 다 모아놨음!" [level=3]
+                                    - generic:
+                                      - generic:
+                                        - generic: 1개월 전
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - link:
+                              - /url: https://www.youtube.com/watch?v=Oc-qj5BwAz4&feature=endscreen
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic: 10:37:11
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 햇살 좋은 날, 조용히 기분 좋아지는 노래들 (중간광고없음) 10시간 | 감성힙합 R&B 플레이리스트 1개월 전":
+                                    - /url: https://www.youtube.com/watch?v=Oc-qj5BwAz4&feature=endscreen
+                                    - heading "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 햇살 좋은 날, 조용히 기분 좋아지는 노래들 (중간광고없음) 10시간 | 감성힙합 R&B 플레이리스트" [level=3]
+                                    - generic:
+                                      - generic:
+                                        - generic: 1개월 전
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - link:
+                              - /url: https://www.youtube.com/watch?v=xTxdhFkEWKo&feature=endscreen
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic: 10:03:24
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 봄 기운 가득한 플레이리스트🌿☀️ 𝗚𝗼𝗼𝗱 𝗩𝗶𝗯𝗲𝘀 (중간광고없음) 10시간 3주 전":
+                                    - /url: https://www.youtube.com/watch?v=xTxdhFkEWKo&feature=endscreen
+                                    - heading "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 봄 기운 가득한 플레이리스트🌿☀️ 𝗚𝗼𝗼𝗱 𝗩𝗶𝗯𝗲𝘀 (중간광고없음) 10시간" [level=3]
+                                    - generic:
+                                      - generic:
+                                        - generic: 3주 전
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - link:
+                              - /url: https://www.youtube.com/watch?v=hWUiVS7bF2o&feature=endscreen
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic: 10:01:29
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 검증 완료된 (진-짜)인기곡만 모아봤음(중간광고없음)10시간 | 감성힙합 R&B 플레이리스트 2개월 전":
+                                    - /url: https://www.youtube.com/watch?v=hWUiVS7bF2o&feature=endscreen
+                                    - heading "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 검증 완료된 (진-짜)인기곡만 모아봤음(중간광고없음)10시간 | 감성힙합 R&B 플레이리스트" [level=3]
+                                    - generic:
+                                      - generic:
+                                        - generic: 2개월 전
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - link:
+                              - /url: https://www.youtube.com/watch?v=6ZzSt2TlxDM&feature=endscreen
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic: 10:11:08
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 버릴 곡이 단 1도 없는 느좋 플리 (중간광고없음) 10시간 | 감성힙합 R&B 플레이리스트 2개월 전":
+                                    - /url: https://www.youtube.com/watch?v=6ZzSt2TlxDM&feature=endscreen
+                                    - heading "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 버릴 곡이 단 1도 없는 느좋 플리 (중간광고없음) 10시간 | 감성힙합 R&B 플레이리스트" [level=3]
+                                    - generic:
+                                      - generic:
+                                        - generic: 2개월 전
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - link:
+                              - /url: https://www.youtube.com/watch?v=VpScVWPSTGg&feature=endscreen
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic: 10:09:37
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 봄을 가득 담은 플레이리스트🌸 𝗚𝗼𝗼𝗱 𝗩𝗶𝗯𝗲𝘀 (중간광고없음) 10시간 5일 전":
+                                    - /url: https://www.youtube.com/watch?v=VpScVWPSTGg&feature=endscreen
+                                    - heading "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 봄을 가득 담은 플레이리스트🌸 𝗚𝗼𝗼𝗱 𝗩𝗶𝗯𝗲𝘀 (중간광고없음) 10시간" [level=3]
+                                    - generic:
+                                      - generic:
+                                        - generic: 5일 전
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - link:
+                              - /url: https://www.youtube.com/watch?v=-dyQ3opsOL0&feature=endscreen
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic: 10:11:52
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 우연히 틀었는데 리듬이 진짜 미쳤어요… (중간광고없음) 10시간 | 감성힙합 R&B 플레이리스트 1개월 전":
+                                    - /url: https://www.youtube.com/watch?v=-dyQ3opsOL0&feature=endscreen
+                                    - heading "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 우연히 틀었는데 리듬이 진짜 미쳤어요… (중간광고없음) 10시간 | 감성힙합 R&B 플레이리스트" [level=3]
+                                    - generic:
+                                      - generic:
+                                        - generic: 1개월 전
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - link:
+                              - /url: https://www.youtube.com/watch?v=_gpi8eNyXh4&feature=endscreen
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic: 10:18:15
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 기분 UP 능률 UP 🙌 적당히 신나고 경쾌한 그루브 😎 (중간광고없음)10시간 | 매장음악 · 카페 · 집중 · 작업 · 노동요 1개월 전":
+                                    - /url: https://www.youtube.com/watch?v=_gpi8eNyXh4&feature=endscreen
+                                    - heading "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 기분 UP 능률 UP 🙌 적당히 신나고 경쾌한 그루브 😎 (중간광고없음)10시간 | 매장음악 · 카페 · 집중 · 작업 · 노동요" [level=3]
+                                    - generic:
+                                      - generic:
+                                        - generic: 1개월 전
+  - link "▶" [ref=e151] [cursor=pointer]:
+    - /url: https://www.youtube.com/@leadernam-s5e
+  - link "💬 1:1 문의" [ref=e152]:
+    - /url: https://open.kakao.com/o/sPcaslwh
+    - generic [ref=e154]: 💬
+    - generic [ref=e155]: 1:1 문의

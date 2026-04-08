@@ -1,0 +1,191 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Leaders Pro Leaders Pro" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+        - img "Leaders Pro" [ref=e5]
+        - generic [ref=e6]: Leaders Pro
+      - generic [ref=e7]:
+        - link "??/a>" [ref=e8] [cursor=pointer]:
+          - /url: index.html
+        - link "?�품?�보" [ref=e9] [cursor=pointer]:
+          - /url: products.html
+        - link "구매" [ref=e10] [cursor=pointer]:
+          - /url: pricing.html
+        - link "?�기" [ref=e11] [cursor=pointer]:
+          - /url: reviews.html
+        - link "커�??�티" [ref=e12] [cursor=pointer]:
+          - /url: community.html
+        - link "?�운로드" [ref=e13] [cursor=pointer]:
+          - /url: download.html
+        - link "주문조회" [ref=e14] [cursor=pointer]:
+          - /url: lookup.html
+  - generic [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]: PRICING
+      - heading "?�품�??�금??/h2> �??�품??맞는 최적???�랜???�택?�세??" [level=2] [ref=e19]:
+        - text: "?�품�??�금??/h2>"
+        - paragraph [ref=e20]: �??�품??맞는 최적???�랜???�택?�세??
+    - button "N Leaders Pro 네이버" [ref=e22] [cursor=pointer]:
+      - generic [ref=e23]: "N"
+      - text: Leaders Pro 네이버
+    - generic [ref=e24]:
+      - paragraph [ref=e25]: 🔄 정기구독 상품입니다. 선택한 기간마다 자동으로 결제되며, 언제든지 해지할 수 있습니다.
+      - generic [ref=e26]:
+        - generic [ref=e27] [cursor=pointer]:
+          - generic [ref=e28]: "?�� FREE"
+          - generic [ref=e29]:
+            - heading "무료 체험" [level=3] [ref=e30]
+            - paragraph [ref=e31]: 부???�이 ?�작
+          - generic [ref=e32]: 0??/span>
+          - generic [ref=e33]: 무료
+          - list [ref=e34]:
+            - listitem [ref=e35]:
+              - generic [ref=e36]: "??/span> ?�체 기능 체험"
+            - listitem [ref=e37]:
+              - generic [ref=e38]: "??/span> AI 콘텐�??�성"
+            - listitem [ref=e39]:
+              - generic [ref=e40]: "??/span> 매일 2??발행 ?�한"
+            - listitem [ref=e41]:
+              - generic [ref=e42]: "??/span> 기간 ?�한 ?�음"
+          - generic [ref=e43]: "?�택?�기"
+        - generic [ref=e44] [cursor=pointer]:
+          - generic [ref=e45]:
+            - heading "1개월" [level=3] [ref=e46]
+            - paragraph [ref=e47]: 가볍게 ?�작?�기
+          - generic [ref=e48]: 50,000??/span>
+          - generic [ref=e49]:
+            - text: / ??/div>
+            - list [ref=e50]:
+              - listitem [ref=e51]:
+                - generic [ref=e52]: "??/span> ?�체 기능 ?�용"
+              - listitem [ref=e53]:
+                - generic [ref=e54]: "??/span> AI 콘텐�??�동 ?�성 (7�?AI)"
+              - listitem [ref=e55]:
+                - generic [ref=e56]: "??/span> ?�계??무제??발행"
+              - listitem [ref=e57]:
+                - generic [ref=e58]: "??/span> ?�메??고객 지??/li>"
+            - generic [ref=e59]: ✅ 선택됨
+          - generic [ref=e60]:
+            - generic [ref=e61]: 20% ?�약
+            - generic [ref=e62]:
+              - heading "3개월" [level=3] [ref=e63]
+              - paragraph [ref=e64]: "?�기 ?�는 ?�택"
+            - generic [ref=e65]: 120,000??/span>
+            - generic [ref=e66]: / 3개월 (??40,000??
+            - list [ref=e67]:
+              - listitem [ref=e68]:
+                - generic [ref=e69]: "??/span> ?�체 기능 ?�용"
+              - listitem [ref=e70]:
+                - generic [ref=e71]: "??/span> AI ?��?지·?�상 ?�성"
+              - listitem [ref=e72]:
+                - generic [ref=e73]: "??/span> ?�핑 커넥??(?�휴 마�???"
+              - listitem [ref=e74]:
+                - generic [ref=e75]: "??/span> ?�선 고객 지??/li>"
+            - generic [ref=e76]: "?�택?�기"
+          - generic [ref=e77]:
+            - generic [ref=e78]: "?�� BEST VALUE"
+            - heading "1??/h3> 가???�리?�인 ?�택" [level=3] [ref=e80]:
+              - text: 1??/h3>
+              - paragraph [ref=e81]: 가???�리?�인 ?�택
+            - generic [ref=e82]: 400,000??/span>
+            - generic [ref=e83]: / ??(??33,333??
+            - list [ref=e84]:
+              - listitem [ref=e85]:
+                - generic [ref=e86]: "??/span> ?�체 기능 ?�용"
+              - listitem [ref=e87]:
+                - generic [ref=e88]: "??/span> ?�마???��?줄링"
+              - listitem [ref=e89]:
+                - generic [ref=e90]: "??/span> ?�용 커�??�티 ?�장"
+              - listitem [ref=e91]:
+                - generic [ref=e92]: "??/span> 1:1 ?�선 지??/li>"
+            - generic [ref=e93]: "?�택?�기"
+  - link:
+    - /url: bank-order.html
+  - contentinfo [ref=e94]:
+    - link:
+      - /url: bank-order.html
+    - generic [ref=e95]:
+      - link "Leaders Pro Leaders Pro" [ref=e96] [cursor=pointer]:
+        - /url: bank-order.html
+        - generic [ref=e97]:
+          - img "Leaders Pro" [ref=e98]
+          - generic [ref=e99]: Leaders Pro
+      - generic [ref=e100]:
+        - link:
+          - /url: bank-order.html
+        - link "?�용?��?" [ref=e101] [cursor=pointer]:
+          - /url: terms.html
+        - link "?�불?�책" [ref=e102] [cursor=pointer]:
+          - /url: refund.html
+        - link "개인?�보처리방침" [ref=e103] [cursor=pointer]:
+          - /url: privacy.html
+        - link "주문 조회" [ref=e104] [cursor=pointer]:
+          - /url: lookup.html
+        - link "고객 문의" [ref=e105] [cursor=pointer]:
+          - /url: mailto:cd000242@gmail.com
+      - generic [ref=e106]:
+        - paragraph [ref=e107]: "?�호: Leaders Pro | ?�?? 박성??| ?�업?�등록번?? 515-97-01802"
+        - paragraph [ref=e108]: "주소: 경남 김?�시 ?�유�?34번길9"
+        - paragraph [ref=e109]: "?�메?? tjdgus24280@naver.com | ?�화: 010-7545-1645"
+      - paragraph [ref=e110]: © 2026 Leaders Pro. All rights reserved.
+  - link "?�� 1:1 문의" [ref=e111]:
+    - /url: https://open.kakao.com/o/sPcaslwh
+    - generic [ref=e113]: "?��"
+    - generic [ref=e114]: 1:1 문의
+  - generic [ref=e115]:
+    - generic:
+      - generic:
+        - generic: 🌸 Playlist
+        - button "✕"
+      - generic:
+        - generic: 🌸
+        - generic:
+          - generic: Now Playing
+          - generic: 🌸 Spring Breeze
+      - generic:
+        - button "⏮"
+        - button "⏸"
+        - button "⏭"
+      - generic:
+        - generic:
+          - generic: ♪
+          - generic: 🌸 Spring Breeze
+        - generic:
+          - generic: "2"
+          - generic: 🌿 Peaceful Garden
+        - generic:
+          - generic: "3"
+          - generic: ☁️ Cloud Walk
+        - generic:
+          - generic: "4"
+          - generic: 🎋 Bamboo Rain
+        - generic:
+          - generic: "5"
+          - generic: 🎵 Lofi Beats
+    - generic "🌸 음악 플레이어" [ref=e116] [cursor=pointer]:
+      - generic [ref=e117]: 🎵
+      - generic [ref=e118]:
+        - generic [ref=e119]: Music
+        - generic [ref=e120]: 🌸 Spring Breeze
+  - iframe [ref=e127]:
+    - generic [active] [ref=f18e1]:
+      - generic "YouTube 동영상 플레이어" [ref=f18e3]
+      - generic [ref=f18e5]:
+        - generic:
+          - generic:
+            - button "재생 컨트롤 표시" [ref=f18e6] [cursor=pointer]
+            - generic [ref=f18e10]:
+              - generic [ref=f18e11]:
+                - generic: 중간광고없음
+                - generic: 구독자 1.26만명
+              - generic [ref=f18e19]:
+                - generic [ref=f18e20]:
+                  - generic:
+                    - generic:
+                      - img
+                  - button "구독" [ref=f18e23] [cursor=pointer]:
+                    - generic [ref=f18e24]: 구독
+                - generic:
+                  - generic:
+                    - img

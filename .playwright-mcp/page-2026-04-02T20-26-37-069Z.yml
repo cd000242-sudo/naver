@@ -1,0 +1,74 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Leaders Pro" [ref=e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=e4]: Leaders Pro
+    - generic [ref=e5]:
+      - link "홈" [ref=e6] [cursor=pointer]:
+        - /url: index.html
+      - link "제품" [ref=e7] [cursor=pointer]:
+        - /url: products.html
+      - link "구매" [ref=e8] [cursor=pointer]:
+        - /url: pricing.html
+      - link "후기" [ref=e9] [cursor=pointer]:
+        - /url: reviews.html
+      - link "커뮤니티" [ref=e10] [cursor=pointer]:
+        - /url: community.html
+      - link "다운로드" [ref=e11] [cursor=pointer]:
+        - /url: download.html
+      - link "주문 조회" [ref=e12] [cursor=pointer]:
+        - /url: lookup.html
+  - generic [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e16]: ✅
+      - heading "결제가 완료되었습니다!" [level=1] [ref=e17]
+      - paragraph [ref=e18]: 라이선스 코드가 이메일로 발송됩니다
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - generic [ref=e22]: 상품명
+          - generic [ref=e23]: Leaders Pro 네이버 — 3개월
+        - generic [ref=e24]:
+          - generic [ref=e25]: 결제 금액
+          - generic [ref=e26]: 120,000원
+        - generic [ref=e27]:
+          - generic [ref=e28]: 결제 방식
+          - generic [ref=e29]: 정기구독 (카드)
+        - generic [ref=e30]:
+          - generic [ref=e31]: 다음 결제일
+          - generic [ref=e32]: 2026.07.03
+        - generic [ref=e33]:
+          - generic [ref=e34]: 주문번호
+          - generic [ref=e35]: "#ORD-20260403-7K3M"
+      - generic [ref=e36]:
+        - paragraph [ref=e37]: 📋 발급된 라이선스 코드
+        - generic [ref=e38] [cursor=pointer]: LP-X9K4-M7H2-R5J8-W3N6
+        - paragraph [ref=e39]: 💡 클릭하여 복사 · 이메일로도 발송됩니다
+      - generic [ref=e40]:
+        - generic [ref=e41]: 📧
+        - paragraph [ref=e42]:
+          - strong [ref=e43]: cd000242@gmail.com
+          - text: 으로
+          - text: 라이선스 코드와 사용 가이드가 발송되었습니다.
+      - generic [ref=e44]:
+        - heading "🚀 시작하기" [level=3] [ref=e45]
+        - generic [ref=e46]:
+          - generic [ref=e47]: "1"
+          - generic [ref=e48]: Leaders Pro 앱 다운로드 및 설치
+        - generic [ref=e49]:
+          - generic [ref=e50]: "2"
+          - generic [ref=e51]: 앱 실행 후 라이선스 코드 입력
+        - generic [ref=e52]:
+          - generic [ref=e53]: "3"
+          - generic [ref=e54]: 활성화 완료! 자동화를 시작하세요
+      - generic [ref=e55]:
+        - link "📥 Leaders Pro 다운로드" [ref=e56] [cursor=pointer]:
+          - /url: download.html
+        - link "주문 내역 확인하기" [ref=e57] [cursor=pointer]:
+          - /url: lookup.html
+      - paragraph [ref=e59]:
+        - text: 정기구독 상품입니다. 다음 결제일에 자동으로 결제됩니다.
+        - text: 구독 해지는 고객지원을 통해 언제든 가능합니다.
+        - text: "문의: cd000242@gmail.com"
+  - contentinfo [ref=e60]:
+    - paragraph [ref=e61]: © 2026 Leaders Pro. All rights reserved.

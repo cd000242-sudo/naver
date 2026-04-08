@@ -1,0 +1,221 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Leaders Pro Leaders Pro" [ref=e4] [cursor=pointer]:
+        - /url: "#"
+        - img "Leaders Pro" [ref=e5]
+        - generic [ref=e6]: Leaders Pro
+      - generic [ref=e7]:
+        - link "홈" [ref=e8] [cursor=pointer]:
+          - /url: index.html
+        - link "제품정보" [ref=e9] [cursor=pointer]:
+          - /url: products.html
+        - link "구매" [ref=e10] [cursor=pointer]:
+          - /url: pricing.html
+        - link "후기" [ref=e11] [cursor=pointer]:
+          - /url: reviews.html
+        - link "커뮤니티" [ref=e12] [cursor=pointer]:
+          - /url: community.html
+        - link "다운로드" [ref=e13] [cursor=pointer]:
+          - /url: download.html
+        - link "주문조회" [ref=e14] [cursor=pointer]:
+          - /url: lookup.html
+  - generic [ref=e15]:
+    - generic [ref=e16]:
+      - generic [ref=e19]: PREMIUM AUTOMATION
+      - heading "매일 100건, 사람이 쓴 것처럼." [level=1] [ref=e20]:
+        - text: 매일 100건,
+        - text: 사람이 쓴 것처럼.
+      - paragraph [ref=e21]:
+        - text: 키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로.
+        - text: 블로그 10개를 혼자 운영하는 분들의
+        - strong [ref=e22]: 비밀 무기
+        - text: .
+      - generic [ref=e23]:
+        - link "지금 자동화 시작하기" [ref=e24] [cursor=pointer]:
+          - /url: pricing.html
+          - generic [ref=e25]: 지금 자동화 시작하기
+          - img [ref=e26]
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e30]: J
+            - generic [ref=e31]: K
+            - generic [ref=e32]: L
+          - generic [ref=e33]: 2,800+명이 사용 중
+    - iframe [ref=e35]:
+      - link [ref=f3e3] [cursor=pointer]:
+        - /url: https://spline.design/?utm_source=public-url&utm_campaign=spline-logo
+        - img [ref=f3e5]
+  - generic [ref=e36]:
+    - generic [ref=e37]:
+      - generic [ref=e38]: "0"
+      - text: 누적 발행
+    - generic [ref=e40]:
+      - generic [ref=e41]: "0"
+      - text: 활성 사용자
+    - generic [ref=e43]:
+      - generic [ref=e44]: "0"
+      - text: 가동률 %
+    - generic [ref=e46]:
+      - generic [ref=e47]: "0"
+      - text: 일일 자동 발행
+  - generic [ref=e49]:
+    - generic [ref=e50]:
+      - generic [ref=e51]: EXPLORE
+      - heading "원하는 정보를 빠르게 확인하세요" [level=2] [ref=e52]
+      - paragraph [ref=e53]: 각 페이지에서 상세 정보를 확인할 수 있습니다
+    - generic [ref=e54]:
+      - link "🚀 제품 소개 Leaders Pro의 강력한 블로그 자동화 기능을 자세히 확인하세요 자세히 보기 →" [ref=e55] [cursor=pointer]:
+        - /url: products.html
+        - generic [ref=e56]: 🚀
+        - heading "제품 소개" [level=3] [ref=e57]
+        - paragraph [ref=e58]:
+          - text: Leaders Pro의 강력한 블로그 자동화 기능을
+          - text: 자세히 확인하세요
+        - generic [ref=e59]: 자세히 보기 →
+      - link "💳 결제 💰 구매 제품별 요금제 비교 및 토스페이먼츠 안전 결제 요금제 보기 →" [ref=e60] [cursor=pointer]:
+        - /url: pricing.html
+        - generic [ref=e61]: 💳 결제
+        - generic [ref=e62]: 💰
+        - heading "구매" [level=3] [ref=e63]
+        - paragraph [ref=e64]:
+          - text: 제품별 요금제 비교 및
+          - text: 토스페이먼츠 안전 결제
+        - generic [ref=e65]: 요금제 보기 →
+      - link "⭐ 후기 & FAQ 실제 사용자들의 생생한 후기와 자주 묻는 질문 모음 후기 보기 →" [ref=e66] [cursor=pointer]:
+        - /url: reviews.html
+        - generic [ref=e67]: ⭐
+        - heading "후기 & FAQ" [level=3] [ref=e68]
+        - paragraph [ref=e69]:
+          - text: 실제 사용자들의 생생한 후기와
+          - text: 자주 묻는 질문 모음
+        - generic [ref=e70]: 후기 보기 →
+      - link "👥 커뮤니티 공지사항, 수익 인증, 활용 팁 확인 커뮤니티 →" [ref=e71] [cursor=pointer]:
+        - /url: community.html
+        - generic [ref=e72]: 👥
+        - heading "커뮤니티" [level=3] [ref=e73]
+        - paragraph [ref=e74]:
+          - text: 공지사항, 수익 인증,
+          - text: 활용 팁 확인
+        - generic [ref=e75]: 커뮤니티 →
+      - link "📥 다운로드 구매 후 비밀번호 입력으로 최신 버전 다운로드 다운로드 →" [ref=e76] [cursor=pointer]:
+        - /url: download.html
+        - generic [ref=e77]: 📥
+        - heading "다운로드" [level=3] [ref=e78]
+        - paragraph [ref=e79]:
+          - text: 구매 후 비밀번호 입력으로
+          - text: 최신 버전 다운로드
+        - generic [ref=e80]: 다운로드 →
+      - link "🔍 주문 조회 이메일 또는 주문번호로 구매 내역 확인 조회하기 →" [ref=e81] [cursor=pointer]:
+        - /url: lookup.html
+        - generic [ref=e82]: 🔍
+        - heading "주문 조회" [level=3] [ref=e83]
+        - paragraph [ref=e84]:
+          - text: 이메일 또는 주문번호로
+          - text: 구매 내역 확인
+        - generic [ref=e85]: 조회하기 →
+  - generic [ref=e87]:
+    - generic [ref=e88]:
+      - generic [ref=e89]: TESTIMONIALS
+      - heading "실제 사용자들의 이야기" [level=2] [ref=e90]
+      - paragraph [ref=e91]: Leaders Pro를 경험한 분들의 생생한 후기
+    - generic [ref=e92]:
+      - generic [ref=e93]:
+        - generic [ref=e94]: "\""
+        - paragraph [ref=e95]:
+          - text: 블로그 10개를 혼자 운영하는데,
+          - strong [ref=e96]: 리더스 프로 없었으면 불가능
+          - text: 했어요. 출근 전에 키워드만 세팅하면 퇴근할 때 50건이 올라가 있습니다.
+        - generic [ref=e97]:
+          - generic [ref=e98]: K
+          - generic [ref=e99]:
+            - strong [ref=e100]: K 대표
+            - generic [ref=e101]: 마케팅 에이전시 · 10개월 사용
+      - generic [ref=e102]:
+        - generic [ref=e103]: "\""
+        - paragraph [ref=e104]:
+          - text: 쿠팡 파트너스 블로그를 4개 돌리고 있는데, 쇼핑 커넥트 기능으로
+          - strong [ref=e105]: 월 수익이 3배
+          - text: 뛰었어요. AI가 생성한 리뷰 글이 정말 자연스러워요.
+        - generic [ref=e106]:
+          - generic [ref=e107]: P
+          - generic [ref=e108]:
+            - strong [ref=e109]: P님
+            - generic [ref=e110]: 제휴 마케터 · 6개월 사용
+      - generic [ref=e111]:
+        - generic [ref=e112]: "\""
+        - paragraph [ref=e113]:
+          - text: 글로벌 블로그 5개를 Leaders Orbit으로 운영 중입니다.
+          - strong [ref=e114]: 애드센스 승인이 2주 만에
+          - text: 떨어졌고, 지금은 월 $400 이상 벌고 있어요.
+        - generic [ref=e115]:
+          - generic [ref=e116]: L
+          - generic [ref=e117]:
+            - strong [ref=e118]: L님
+            - generic [ref=e119]: 글로벌 블로거 · 8개월 사용
+    - link "더 많은 후기 보기 →" [ref=e121] [cursor=pointer]:
+      - /url: reviews.html
+  - contentinfo [ref=e122]:
+    - generic [ref=e123]:
+      - generic [ref=e124]:
+        - img "Leaders Pro" [ref=e125]
+        - generic [ref=e126]: Leaders Pro
+      - generic [ref=e127]:
+        - link "이용약관" [ref=e128] [cursor=pointer]:
+          - /url: terms.html
+        - link "환불정책" [ref=e129] [cursor=pointer]:
+          - /url: refund.html
+        - link "개인정보처리방침" [ref=e130] [cursor=pointer]:
+          - /url: privacy.html
+        - link "주문 조회" [ref=e131] [cursor=pointer]:
+          - /url: lookup.html
+        - link "고객 문의" [ref=e132] [cursor=pointer]:
+          - /url: mailto:cd000242@gmail.com
+      - generic [ref=e133]:
+        - paragraph [ref=e134]: "상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802"
+        - paragraph [ref=e135]: "주소: 경남 김해시 장유로334번길9"
+        - paragraph [ref=e136]: "이메일: tjdgus24280@naver.com | 전화: 010-7545-1645"
+      - paragraph [ref=e137]: © 2026 Leaders Pro. All rights reserved.
+  - generic [ref=e138]:
+    - generic:
+      - generic:
+        - generic: 🌸 Playlist
+        - button "✕"
+      - generic:
+        - generic: 🌸
+        - generic:
+          - generic: Now Playing
+          - generic: 🌸 Spring Breeze
+      - generic:
+        - button "⏮"
+        - button "⏸"
+        - button "⏭"
+      - generic:
+        - generic:
+          - generic: ♪
+          - generic: 🌸 Spring Breeze
+        - generic:
+          - generic: "2"
+          - generic: 🌿 Peaceful Garden
+        - generic:
+          - generic: "3"
+          - generic: ☁️ Cloud Walk
+        - generic:
+          - generic: "4"
+          - generic: 🎋 Bamboo Rain
+        - generic:
+          - generic: "5"
+          - generic: 🎵 Lofi Beats
+    - generic "🌸 음악 플레이어" [ref=e139] [cursor=pointer]:
+      - generic [ref=e140]: ⏸
+      - generic [ref=e141]:
+        - generic [ref=e142]: ♪ Music
+        - generic [ref=e143]: 🌸 Spring Breeze
+  - iframe [ref=e150]:
+    - generic "YouTube 동영상 플레이어" [ref=f4e3]
+  - link "▶" [ref=e151] [cursor=pointer]:
+    - /url: https://www.youtube.com/@leadernam-s5e
+  - link "💬 1:1 문의" [ref=e152]:
+    - /url: https://open.kakao.com/o/sPcaslwh
+    - generic [ref=e154]: 💬
+    - generic [ref=e155]: 1:1 문의

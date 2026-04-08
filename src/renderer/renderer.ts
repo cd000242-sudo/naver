@@ -5355,36 +5355,88 @@ URL: ${firstUrl}
     }
   }
 
-  // ✅ 연속발행/다중계정 공정문구 체크박스 ↔ 메인 체크박스 동기화
+  // ✅ [v1.4.2] 3곳 공정문구 체크박스 + 패널 + 프리셋 완전 동기화
   {
-    const syncFtcCheckboxes = () => {
-      const mainChecked = localStorage.getItem('ftcDisclosureEnabled') === 'true';
-      const continuousCb = document.getElementById('continuous-ftc-disclosure') as HTMLInputElement;
-      const maCb = document.getElementById('ma-ftc-disclosure') as HTMLInputElement;
-      if (continuousCb) continuousCb.checked = mainChecked;
-      if (maCb) maCb.checked = mainChecked;
+    const FTC_PRESETS_SYNC: Record<string, string> = {
+      affiliate: '이 포스팅은 제휴마케팅이 포함된 광고로 일정 커미션을 지급 받을 수 있습니다.',
+      experience: '이 포스팅은 업체로부터 제품을 무상으로 제공받아 솔직하게 작성한 후기입니다.',
+      sponsored: '이 포스팅은 소정의 원고료를 지급받아 작성된 광고입니다.',
+      collab: '이 포스팅은 해당 업체의 협찬을 받아 작성되었습니다.',
+      custom: '',
     };
 
-    // 초기 동기화 (DOM 렌더링 후)
-    setTimeout(syncFtcCheckboxes, 500);
+    const ftcConfigs = [
+      { cb: 'unified-ftc-disclosure', panel: 'ftc-options-panel', preset: 'unified-ftc-preset', text: 'unified-ftc-text' },
+      { cb: 'continuous-ftc-disclosure', panel: 'continuous-ftc-panel', preset: 'continuous-ftc-preset', text: 'continuous-ftc-text' },
+      { cb: 'ma-ftc-disclosure', panel: 'ma-ftc-panel', preset: 'ma-ftc-preset', text: 'ma-ftc-text' },
+    ];
 
-    // 메인 체크박스 변경 → 하위 체크박스 동기화
-    document.getElementById('unified-ftc-disclosure')?.addEventListener('change', syncFtcCheckboxes);
+    const syncAllFtc = () => {
+      const enabled = localStorage.getItem('ftcDisclosureEnabled') === 'true';
+      const preset = localStorage.getItem('ftcDisclosurePreset') || 'affiliate';
+      const text = localStorage.getItem('ftcDisclosureText') || FTC_PRESETS_SYNC[preset] || FTC_PRESETS_SYNC.affiliate;
 
-    // 하위 체크박스 변경 → 메인 localStorage 업데이트
+      for (const cfg of ftcConfigs) {
+        const cb = document.getElementById(cfg.cb) as HTMLInputElement;
+        const panel = document.getElementById(cfg.panel) as HTMLDivElement;
+        const presetEl = document.getElementById(cfg.preset) as HTMLSelectElement;
+        const textEl = document.getElementById(cfg.text) as HTMLTextAreaElement;
+        if (cb) cb.checked = enabled;
+        if (panel) panel.style.display = enabled ? 'block' : 'none';
+        if (presetEl) presetEl.value = preset;
+        if (textEl) {
+          textEl.value = text;
+          textEl.readOnly = preset !== 'custom';
+          textEl.style.opacity = preset !== 'custom' ? '0.7' : '1';
+        }
+      }
+      const badge = document.getElementById('ftc-status-badge') as HTMLSpanElement;
+      const section = document.getElementById('ftc-disclosure-section') as HTMLDivElement;
+      if (badge) badge.style.display = enabled ? 'inline-block' : 'none';
+      if (section) section.style.borderColor = enabled ? 'rgba(245, 158, 11, 0.6)' : 'rgba(245, 158, 11, 0.4)';
+    };
+
+    setTimeout(syncAllFtc, 300);
+
+    // 체크박스 + 프리셋 변경 이벤트
     document.addEventListener('change', (e) => {
-      const target = e.target as HTMLInputElement;
-      if (target.id === 'continuous-ftc-disclosure' || target.id === 'ma-ftc-disclosure') {
-        localStorage.setItem('ftcDisclosureEnabled', String(target.checked));
-        const mainCb = document.getElementById('unified-ftc-disclosure') as HTMLInputElement;
-        const ftcPanel = document.getElementById('ftc-options-panel') as HTMLDivElement;
-        const ftcBadge = document.getElementById('ftc-status-badge') as HTMLSpanElement;
-        const ftcSection = document.getElementById('ftc-disclosure-section') as HTMLDivElement;
-        if (mainCb) mainCb.checked = target.checked;
-        if (ftcPanel) ftcPanel.style.display = target.checked ? 'block' : 'none';
-        if (ftcBadge) ftcBadge.style.display = target.checked ? 'inline-block' : 'none';
-        if (ftcSection) ftcSection.style.borderColor = target.checked ? 'rgba(245, 158, 11, 0.6)' : 'rgba(245, 158, 11, 0.4)';
-        syncFtcCheckboxes();
+      const t = e.target as HTMLElement;
+      if (t.id === 'unified-ftc-disclosure' || t.id === 'continuous-ftc-disclosure' || t.id === 'ma-ftc-disclosure') {
+        localStorage.setItem('ftcDisclosureEnabled', String((t as HTMLInputElement).checked));
+        syncAllFtc();
+      }
+      if (t.id === 'unified-ftc-preset' || t.id === 'continuous-ftc-preset' || t.id === 'ma-ftc-preset') {
+        const preset = (t as HTMLSelectElement).value;
+        localStorage.setItem('ftcDisclosurePreset', preset);
+        if (preset !== 'custom') localStorage.setItem('ftcDisclosureText', FTC_PRESETS_SYNC[preset] || '');
+        syncAllFtc();
+      }
+    });
+
+    // textarea 입력 동기화
+    document.addEventListener('input', (e) => {
+      const t = e.target as HTMLTextAreaElement;
+      if (t.id === 'unified-ftc-text' || t.id === 'continuous-ftc-text' || t.id === 'ma-ftc-text') {
+        localStorage.setItem('ftcDisclosureText', t.value);
+        for (const cfg of ftcConfigs) {
+          const el = document.getElementById(cfg.text) as HTMLTextAreaElement;
+          if (el && el !== t) el.value = t.value;
+        }
+      }
+    });
+
+    document.getElementById('ftc-reset-btn')?.addEventListener('click', () => {
+      const preset = localStorage.getItem('ftcDisclosurePreset') || 'affiliate';
+      localStorage.setItem('ftcDisclosureText', FTC_PRESETS_SYNC[preset] || FTC_PRESETS_SYNC.affiliate);
+      syncAllFtc();
+    });
+
+    document.getElementById('unified-content-mode')?.addEventListener('change', (e) => {
+      if ((e.target as HTMLSelectElement).value === 'affiliate') {
+        localStorage.setItem('ftcDisclosureEnabled', 'true');
+        localStorage.setItem('ftcDisclosurePreset', 'affiliate');
+        localStorage.setItem('ftcDisclosureText', FTC_PRESETS_SYNC.affiliate);
+        syncAllFtc();
       }
     });
   }

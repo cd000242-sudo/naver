@@ -1,0 +1,218 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Leaders Pro Leaders Pro" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+        - img "Leaders Pro" [ref=e5]
+        - generic [ref=e6]: Leaders Pro
+      - generic [ref=e7]:
+        - link "홈" [ref=e8] [cursor=pointer]:
+          - /url: index.html
+        - link "제품정보" [ref=e9] [cursor=pointer]:
+          - /url: products.html
+        - link "구매" [ref=e10] [cursor=pointer]:
+          - /url: pricing.html
+        - link "후기" [ref=e11] [cursor=pointer]:
+          - /url: reviews.html
+        - link "커뮤니티" [ref=e12] [cursor=pointer]:
+          - /url: community.html
+        - link "다운로드" [ref=e13] [cursor=pointer]:
+          - /url: download.html
+        - link "주문조회" [ref=e14] [cursor=pointer]:
+          - /url: lookup.html
+  - generic [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]: PRICING
+      - heading "제품별 요금제" [level=2] [ref=e19]
+      - paragraph [ref=e20]: 각 제품에 맞는 최적의 플랜을 선택하세요.
+    - generic [ref=e21]:
+      - button "N Better Life Naver" [ref=e22] [cursor=pointer]:
+        - generic [ref=e23]: "N"
+        - text: Better Life Naver
+      - button "W Leaders Orbit" [ref=e24] [cursor=pointer]:
+        - generic [ref=e25]: W
+        - text: Leaders Orbit
+      - button "T Leaders Tistory 준비중" [ref=e26]:
+        - generic [ref=e27]: T
+        - text: Leaders Tistory 준비중
+      - button "L Leword" [ref=e28] [cursor=pointer]:
+        - generic [ref=e29]: L
+        - text: Leword
+    - generic [ref=e31]:
+      - generic [ref=e32] [cursor=pointer]:
+        - generic [ref=e33]: 🎁 FREE
+        - generic [ref=e34]:
+          - heading "무료 체험" [level=3] [ref=e35]
+          - paragraph [ref=e36]: 부담 없이 시작
+        - generic [ref=e37]: 0원
+        - generic [ref=e38]: 무료
+        - list [ref=e39]:
+          - listitem [ref=e40]:
+            - generic [ref=e41]: ✓
+            - text: 전체 기능 체험
+          - listitem [ref=e42]:
+            - generic [ref=e43]: ✓
+            - text: AI 콘텐츠 생성
+          - listitem [ref=e44]:
+            - generic [ref=e45]: ✓
+            - text: 매일 2회 발행 제한
+          - listitem [ref=e46]:
+            - generic [ref=e47]: ✓
+            - text: 기간 제한 없음
+        - generic [ref=e48]: 🚀 체험하기 (다운로드)
+      - generic [ref=e49] [cursor=pointer]:
+        - generic [ref=e50]:
+          - heading "1개월" [level=3] [ref=e51]
+          - paragraph [ref=e52]: 가볍게 시작하기
+        - generic [ref=e53]: 50,000원
+        - generic [ref=e54]: / 월
+        - list [ref=e55]:
+          - listitem [ref=e56]:
+            - generic [ref=e57]: ✓
+            - text: 전체 기능 이용
+          - listitem [ref=e58]:
+            - generic [ref=e59]: ✓
+            - text: AI 콘텐츠 자동 생성 (7종 AI)
+          - listitem [ref=e60]:
+            - generic [ref=e61]: ✓
+            - text: 다계정 무제한 발행
+          - listitem [ref=e62]:
+            - generic [ref=e63]: ✓
+            - text: 이메일 고객 지원
+        - generic [ref=e64]: 선택하기
+      - generic [ref=e65] [cursor=pointer]:
+        - generic [ref=e66]: 20% 절약
+        - generic [ref=e67]:
+          - heading "3개월" [level=3] [ref=e68]
+          - paragraph [ref=e69]: 인기 있는 선택
+        - generic [ref=e70]: 120,000원
+        - generic [ref=e71]: / 3개월 (월 40,000원)
+        - list [ref=e72]:
+          - listitem [ref=e73]:
+            - generic [ref=e74]: ✓
+            - text: 전체 기능 이용
+          - listitem [ref=e75]:
+            - generic [ref=e76]: ✓
+            - text: AI 이미지·영상 생성
+          - listitem [ref=e77]:
+            - generic [ref=e78]: ✓
+            - text: 쇼핑 커넥트 (제휴 마케팅)
+          - listitem [ref=e79]:
+            - generic [ref=e80]: ✓
+            - text: 우선 고객 지원
+        - generic [ref=e81]: 선택하기
+      - generic [ref=e82] [cursor=pointer]:
+        - generic [ref=e83]: 👑 BEST VALUE
+        - generic [ref=e84]:
+          - heading "1년" [level=3] [ref=e85]
+          - paragraph [ref=e86]: 가장 합리적인 선택
+        - generic [ref=e87]: 400,000원
+        - generic [ref=e88]: / 년 (월 33,333원)
+        - list [ref=e89]:
+          - listitem [ref=e90]:
+            - generic [ref=e91]: ✓
+            - text: 전체 기능 이용
+          - listitem [ref=e92]:
+            - generic [ref=e93]: ✓
+            - text: 스마트 스케줄링
+          - listitem [ref=e94]:
+            - generic [ref=e95]: ✓
+            - text: 전용 커뮤니티 입장
+          - listitem [ref=e96]:
+            - generic [ref=e97]: ✓
+            - text: 1:1 우선 지원
+        - generic [ref=e98]: 선택하기
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - generic [ref=e101]: 📧 라이선스를 받을 이메일
+        - textbox "📧 라이선스를 받을 이메일" [ref=e102]:
+          - /placeholder: example@email.com
+        - paragraph [ref=e103]: 결제 완료 후 이 이메일로 라이선스 코드가 발송됩니다.
+      - button "플랜을 선택해주세요" [disabled] [ref=e104]:
+        - generic [ref=e105]: 플랜을 선택해주세요
+      - generic [ref=e106]:
+        - text: 결제 진행 시
+        - link "이용약관" [ref=e107] [cursor=pointer]:
+          - /url: terms.html
+        - text: 및
+        - link "개인정보처리방침" [ref=e108] [cursor=pointer]:
+          - /url: privacy.html
+        - text: 에 동의하는 것으로 간주됩니다.
+    - generic [ref=e109]:
+      - text: 📋
+      - strong [ref=e110]: 환불 규정 안내
+      - text: ": 라이선스 코드 발급일로부터"
+      - strong [ref=e111]: 48시간(2일) 이내
+      - text: ", 서비스 미사용(미로그인) 시 전액 환불 가능합니다. 결제 전 반드시 무료 체험으로 서비스를 확인해주세요."
+      - link "환불정책 전문 보기 →" [ref=e112] [cursor=pointer]:
+        - /url: refund.html
+    - generic [ref=e113]:
+      - text: 🔄
+      - strong [ref=e114]: 정기구독 안내
+      - text: ": 모든 유료 플랜은 정기구독 상품이며, 구독 기간 종료 전 언제든 해지할 수 있습니다. 해지 시 현재 결제 주기가 종료될 때까지 서비스를 이용할 수 있습니다."
+    - generic [ref=e115]:
+      - text: 💰 카드 결제가 어려우신가요?
+      - link "계좌이체로 결제하기 →" [ref=e116] [cursor=pointer]:
+        - /url: bank-order.html
+  - contentinfo [ref=e117]:
+    - generic [ref=e118]:
+      - generic [ref=e119]:
+        - img "Leaders Pro" [ref=e120]
+        - generic [ref=e121]: Leaders Pro
+      - generic [ref=e122]:
+        - link "이용약관" [ref=e123] [cursor=pointer]:
+          - /url: terms.html
+        - link "환불정책" [ref=e124] [cursor=pointer]:
+          - /url: refund.html
+        - link "개인정보처리방침" [ref=e125] [cursor=pointer]:
+          - /url: privacy.html
+        - link "주문 조회" [ref=e126] [cursor=pointer]:
+          - /url: lookup.html
+        - link "고객 문의" [ref=e127] [cursor=pointer]:
+          - /url: mailto:cd000242@gmail.com
+      - generic [ref=e128]:
+        - paragraph [ref=e129]: "상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802"
+        - paragraph [ref=e130]: "주소: 경남 김해시 장유로334번길9"
+        - paragraph [ref=e131]: "이메일: tjdgus24280@naver.com | 전화: 010-7545-1645"
+      - paragraph [ref=e132]: © 2026 Leaders Pro. All rights reserved.
+  - link "💬 1:1 문의" [ref=e133]:
+    - /url: https://open.kakao.com/o/sPcaslwh
+    - generic [ref=e135]: 💬
+    - generic [ref=e136]: 1:1 문의
+  - generic [ref=e137]:
+    - generic:
+      - generic:
+        - generic: 🌸 Playlist
+        - button "✕"
+      - generic:
+        - generic: 🌸
+        - generic:
+          - generic: Now Playing
+          - generic: 🌸 Spring Breeze
+      - generic:
+        - button "⏮"
+        - button "⏸"
+        - button "⏭"
+      - generic:
+        - generic:
+          - generic: ♪
+          - generic: 🌸 Spring Breeze
+        - generic:
+          - generic: "2"
+          - generic: 🌿 Peaceful Garden
+        - generic:
+          - generic: "3"
+          - generic: ☁️ Cloud Walk
+        - generic:
+          - generic: "4"
+          - generic: 🎋 Bamboo Rain
+        - generic:
+          - generic: "5"
+          - generic: 🎵 Lofi Beats
+    - generic "🌸 음악 플레이어" [ref=e138] [cursor=pointer]:
+      - generic [ref=e139]: 🎵
+      - generic [ref=e140]:
+        - generic [ref=e141]: Music
+        - generic [ref=e142]: 🌸 Spring Breeze
+  - iframe [ref=e149]:
+    - generic "YouTube 동영상 플레이어" [ref=f11e3]

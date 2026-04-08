@@ -1,0 +1,1 @@
+﻿LINE 419:                     successUrl: CONFIG.SUCCESS_URL + '?email=' + encodeURIComponent(email) + '&product=' + encodeURIComponent(selectedProduct) + '&amount=' + product.amount + '&customerKey=' + encodeURIComponent(customerKey) + '&amount=' + product.amount + '&orderName=' + encodeURIComponent(product.name) + '&orderId=' + orderId,

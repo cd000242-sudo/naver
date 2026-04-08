@@ -1,0 +1,124 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Leaders Pro Leaders Pro" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+        - img "Leaders Pro" [ref=e5]
+        - generic [ref=e6]: Leaders Pro
+      - generic [ref=e7]:
+        - link "제품" [ref=e8] [cursor=pointer]:
+          - /url: products.html
+        - link "구매" [ref=e9] [cursor=pointer]:
+          - /url: pricing.html
+        - link "후기" [ref=e10] [cursor=pointer]:
+          - /url: reviews.html
+        - link "커뮤니티" [ref=e11] [cursor=pointer]:
+          - /url: community.html
+        - link "다운로드" [ref=e12] [cursor=pointer]:
+          - /url: download.html
+        - link "주문 조회" [ref=e13] [cursor=pointer]:
+          - /url: lookup.html
+  - generic [ref=e15]:
+    - generic [ref=e16]:
+      - generic [ref=e17]: PRODUCTS
+      - heading "당신에게 맞는 자동화를 선택하세요" [level=2] [ref=e18]
+      - paragraph [ref=e19]: 각 플랫폼에 최적화된 전문 자동화 솔루션
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: 🚀 FLAGSHIP
+        - heading "Better Life Naver" [level=3] [ref=e23]
+        - paragraph [ref=e24]: 네이버 블로그 자동화
+        - paragraph [ref=e25]:
+          - text: 키워드 하나만 입력하면 끝.
+          - text: AI가 글을 쓰고, 이미지를 만들고,
+          - strong [ref=e26]: 네이버 블로그에 자동으로 올립니다.
+        - list [ref=e27]:
+          - listitem [ref=e28]:
+            - generic [ref=e29]: ⚡
+            - generic [ref=e30]:
+              - strong [ref=e31]: 매일 100건, 사람이 쓴 것처럼
+              - text: GPT-4o, Gemini 2.5 등 AI 7종이 6,000~10,000자 자연스러운 본문 생성
+          - listitem [ref=e32]:
+            - generic [ref=e33]: 👥
+            - generic [ref=e34]:
+              - strong [ref=e35]: 블로그 10개를 혼자 운영하세요
+              - text: 계정 수 제한 없이 통합 관리. 계정별 개별 스케줄링
+          - listitem [ref=e36]:
+            - generic [ref=e37]: 🌙
+            - generic [ref=e38]:
+              - strong [ref=e39]: 자는 동안에도 블로그가 자란다
+              - text: 최적 시간대 자동 발행, 랜덤 딜레이로 봇 감지 우회
+          - listitem [ref=e40]:
+            - generic [ref=e41]: 🎨
+            - generic [ref=e42]:
+              - strong [ref=e43]: 저작권 걱정 없는 고유 이미지
+              - text: Imagen 4, DALL-E, ImageFX, Google Veo 영상까지 자동 생성·삽입
+          - listitem [ref=e44]:
+            - generic [ref=e45]: 🛒
+            - generic [ref=e46]:
+              - strong [ref=e47]: 쿠팡 파트너스로 월 수익 창출
+              - text: 쿠팡·네이버 스마트스토어 상품 크롤링 → 리뷰형 포스팅 → 제휴 링크 자동
+          - listitem [ref=e48]:
+            - generic [ref=e49]: 🎯
+            - generic [ref=e50]:
+              - strong [ref=e51]: 네이버 상위노출, AI가 알아서
+              - text: 14개 카테고리 맞춤 제목 생성, 홈피드 노출 최적화 100점 프로토콜
+        - link "자세히 보기 →" [ref=e52] [cursor=pointer]:
+          - /url: detail.html
+      - generic [ref=e60]: Better Life Naver — Dashboard
+  - contentinfo [ref=e63]:
+    - generic [ref=e64]:
+      - generic [ref=e65]:
+        - img "Leaders Pro" [ref=e66]
+        - generic [ref=e67]: Leaders Pro
+      - generic [ref=e68]:
+        - link "이용약관" [ref=e69] [cursor=pointer]:
+          - /url: terms.html
+        - link "환불정책" [ref=e70] [cursor=pointer]:
+          - /url: refund.html
+        - link "개인정보처리방침" [ref=e71] [cursor=pointer]:
+          - /url: privacy.html
+        - link "주문 조회" [ref=e72] [cursor=pointer]:
+          - /url: lookup.html
+        - link "고객 문의" [ref=e73] [cursor=pointer]:
+          - /url: mailto:cd000242@gmail.com
+      - paragraph [ref=e74]: © 2026 Leaders Pro. All rights reserved.
+  - link "▶" [ref=e75] [cursor=pointer]:
+    - /url: https://www.youtube.com/@leadernam-s5e
+  - link "💬 1:1 문의" [ref=e76]:
+    - /url: https://open.kakao.com/o/sPcaslwh
+    - generic [ref=e78]: 💬
+    - generic [ref=e79]: 1:1 문의
+  - button "🔇" [ref=e80] [cursor=pointer]
+  - generic: 🌸 클릭하면 봄 음악이 흘러요
+  - iframe [ref=e81]:
+    - generic [active] [ref=f6e1]:
+      - generic "YouTube 동영상 플레이어" [ref=f6e3]
+      - generic [ref=f6e5]:
+        - generic:
+          - generic:
+            - button "동영상 재생" [ref=f6e10] [cursor=pointer]
+            - button "재생 컨트롤 숨기기" [ref=f6e12] [cursor=pointer]
+            - generic [ref=f6e19]:
+              - generic [ref=f6e20]:
+                - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 듣기만 해도 기분 좋아지는 봄 플리🌿☀️ 𝗚𝗼𝗼𝗱 𝗩𝗶𝗯𝗲𝘀 (중간광고없음) 10시간":
+                  - /url: https://www.youtube.com/watch?v=r4EHi65fa-0
+                - link "중간광고없음":
+                  - /url: /channel/UC1RPzsPQdCj0LR7VbPyHKzA
+                  - generic: 중간광고없음
+              - generic [ref=f6e21]:
+                - button [ref=f6e22] [cursor=pointer]
+                - generic [ref=f6e23]:
+                  - generic [ref=f6e24]:
+                    - generic: 중간광고없음
+                    - generic: 구독자 1.27만명
+                  - generic [ref=f6e32]:
+                    - generic [ref=f6e33]:
+                      - generic:
+                        - generic:
+                          - img
+                      - button "구독" [ref=f6e36] [cursor=pointer]:
+                        - generic [ref=f6e37]: 구독
+                    - generic:
+                      - generic:
+                        - img

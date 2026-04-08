@@ -1,0 +1,195 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Leaders Pro Leaders Pro" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+        - img "Leaders Pro" [ref=e5]
+        - generic [ref=e6]: Leaders Pro
+      - generic [ref=e7]:
+        - link "홈" [ref=e8] [cursor=pointer]:
+          - /url: index.html
+        - link "제품" [ref=e9] [cursor=pointer]:
+          - /url: products.html
+        - link "구매" [ref=e10] [cursor=pointer]:
+          - /url: pricing.html
+        - link "후기" [ref=e11] [cursor=pointer]:
+          - /url: reviews.html
+        - link "커뮤니티" [ref=e12] [cursor=pointer]:
+          - /url: community.html
+        - link "다운로드" [ref=e13] [cursor=pointer]:
+          - /url: download.html
+        - link "주문 조회" [ref=e14] [cursor=pointer]:
+          - /url: lookup.html
+  - generic [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]: PRICING
+      - heading "제품별 요금제" [level=2] [ref=e19]
+      - paragraph [ref=e20]: 각 제품에 맞는 최적의 플랜을 선택하세요.
+    - button "N Leaders Pro 네이버" [ref=e22] [cursor=pointer]:
+      - generic [ref=e23]: "N"
+      - text: Leaders Pro 네이버
+    - generic [ref=e25]:
+      - generic [ref=e26] [cursor=pointer]:
+        - generic [ref=e27]: 🎁 FREE
+        - generic [ref=e28]:
+          - heading "무료 체험" [level=3] [ref=e29]
+          - paragraph [ref=e30]: 부담 없이 시작
+        - generic [ref=e31]: 0원
+        - generic [ref=e32]: 무료
+        - list [ref=e33]:
+          - listitem [ref=e34]:
+            - generic [ref=e35]: ✓
+            - text: 전체 기능 체험
+          - listitem [ref=e36]:
+            - generic [ref=e37]: ✓
+            - text: AI 콘텐츠 생성
+          - listitem [ref=e38]:
+            - generic [ref=e39]: ✓
+            - text: 매일 2회 발행 제한
+          - listitem [ref=e40]:
+            - generic [ref=e41]: ✓
+            - text: 기간 제한 없음
+        - generic [ref=e42]: 🚀 체험하기 (다운로드)
+      - generic [ref=e43] [cursor=pointer]:
+        - generic [ref=e44]:
+          - heading "1개월" [level=3] [ref=e45]
+          - paragraph [ref=e46]: 가볍게 시작하기
+        - generic [ref=e47]: 50,000원
+        - generic [ref=e48]: / 월
+        - list [ref=e49]:
+          - listitem [ref=e50]:
+            - generic [ref=e51]: ✓
+            - text: 전체 기능 이용
+          - listitem [ref=e52]:
+            - generic [ref=e53]: ✓
+            - text: AI 콘텐츠 자동 생성 (7종 AI)
+          - listitem [ref=e54]:
+            - generic [ref=e55]: ✓
+            - text: 다계정 무제한 발행
+          - listitem [ref=e56]:
+            - generic [ref=e57]: ✓
+            - text: 이메일 고객 지원
+        - generic [ref=e58]: 선택하기
+      - generic [ref=e59] [cursor=pointer]:
+        - generic [ref=e60]: 20% 절약
+        - generic [ref=e61]:
+          - heading "3개월" [level=3] [ref=e62]
+          - paragraph [ref=e63]: 인기 있는 선택
+        - generic [ref=e64]: 120,000원
+        - generic [ref=e65]: / 3개월 (월 40,000원)
+        - list [ref=e66]:
+          - listitem [ref=e67]:
+            - generic [ref=e68]: ✓
+            - text: 전체 기능 이용
+          - listitem [ref=e69]:
+            - generic [ref=e70]: ✓
+            - text: AI 이미지·영상 생성
+          - listitem [ref=e71]:
+            - generic [ref=e72]: ✓
+            - text: 쇼핑 커넥트 (제휴 마케팅)
+          - listitem [ref=e73]:
+            - generic [ref=e74]: ✓
+            - text: 우선 고객 지원
+        - generic [ref=e75]: 선택하기
+      - generic [ref=e76] [cursor=pointer]:
+        - generic [ref=e77]: 👑 BEST VALUE
+        - generic [ref=e78]:
+          - heading "1년" [level=3] [ref=e79]
+          - paragraph [ref=e80]: 가장 합리적인 선택
+        - generic [ref=e81]: 400,000원
+        - generic [ref=e82]: / 년 (월 33,333원)
+        - list [ref=e83]:
+          - listitem [ref=e84]:
+            - generic [ref=e85]: ✓
+            - text: 전체 기능 이용
+          - listitem [ref=e86]:
+            - generic [ref=e87]: ✓
+            - text: 스마트 스케줄링
+          - listitem [ref=e88]:
+            - generic [ref=e89]: ✓
+            - text: 전용 커뮤니티 입장
+          - listitem [ref=e90]:
+            - generic [ref=e91]: ✓
+            - text: 1:1 우선 지원
+        - generic [ref=e92]: 선택하기
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - generic [ref=e95]: 📧 라이선스를 받을 이메일
+        - textbox "📧 라이선스를 받을 이메일" [ref=e96]:
+          - /placeholder: example@email.com
+        - paragraph [ref=e97]: 결제 완료 후 이 이메일로 라이선스 코드가 발송됩니다.
+      - button "플랜을 선택해주세요" [disabled] [ref=e98]:
+        - generic [ref=e99]: 플랜을 선택해주세요
+      - paragraph [ref=e100]: 📌 정기구독 상품입니다. 선택한 기간마다 자동으로 결제되며, 언제든지 해지할 수 있습니다.
+      - generic [ref=e101]:
+        - text: 결제 진행 시
+        - link "이용약관" [ref=e102] [cursor=pointer]:
+          - /url: terms.html
+        - text: 및
+        - link "개인정보처리방침" [ref=e103] [cursor=pointer]:
+          - /url: privacy.html
+        - text: 에 동의하는 것으로 간주됩니다.
+    - generic [ref=e104]:
+      - text: 💡 라이선스 코드 발급 후 7일 이내, 서비스 미사용 시 전액 환불 가능합니다.
+      - link "환불정책 자세히 보기 →" [ref=e105] [cursor=pointer]:
+        - /url: refund.html
+    - generic [ref=e106]:
+      - text: 🏦 카드 결제가 어려우신가요?
+      - link "계좌이체로 결제하기 →" [ref=e107] [cursor=pointer]:
+        - /url: bank-order.html
+  - contentinfo [ref=e108]:
+    - generic [ref=e109]:
+      - generic [ref=e110]:
+        - img "Leaders Pro" [ref=e111]
+        - generic [ref=e112]: Leaders Pro
+      - generic [ref=e113]:
+        - link "이용약관" [ref=e114] [cursor=pointer]:
+          - /url: terms.html
+        - link "환불정책" [ref=e115] [cursor=pointer]:
+          - /url: refund.html
+        - link "개인정보처리방침" [ref=e116] [cursor=pointer]:
+          - /url: privacy.html
+        - link "주문 조회" [ref=e117] [cursor=pointer]:
+          - /url: lookup.html
+        - link "고객 문의" [ref=e118] [cursor=pointer]:
+          - /url: mailto:cd000242@gmail.com
+      - paragraph [ref=e119]: © 2026 Leaders Pro. All rights reserved.
+  - link "▶" [ref=e120] [cursor=pointer]:
+    - /url: https://www.youtube.com/@leadernam-s5e
+  - link "💬 1:1 문의" [ref=e121]:
+    - /url: https://open.kakao.com/o/sPcaslwh
+    - generic [ref=e123]: 💬
+    - generic [ref=e124]: 1:1 문의
+  - button "🔇" [ref=e125] [cursor=pointer]
+  - generic: 🌸 클릭하면 봄 음악이 흘러요
+  - iframe [ref=e126]:
+    - generic [active] [ref=f8e1]:
+      - generic "YouTube 동영상 플레이어" [ref=f8e3]
+      - generic [ref=f8e5]:
+        - generic:
+          - generic:
+            - button "동영상 재생" [ref=f8e10] [cursor=pointer]
+            - button "재생 컨트롤 숨기기" [ref=f8e12] [cursor=pointer]
+            - generic [ref=f8e19]:
+              - generic [ref=f8e20]:
+                - link "𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 듣기만 해도 기분 좋아지는 봄 플리🌿☀️ 𝗚𝗼𝗼𝗱 𝗩𝗶𝗯𝗲𝘀 (중간광고없음) 10시간":
+                  - /url: https://www.youtube.com/watch?v=r4EHi65fa-0
+                - link "중간광고없음":
+                  - /url: /channel/UC1RPzsPQdCj0LR7VbPyHKzA
+                  - generic: 중간광고없음
+              - generic [ref=f8e21]:
+                - button [ref=f8e22] [cursor=pointer]
+                - generic [ref=f8e23]:
+                  - generic [ref=f8e24]:
+                    - generic: 중간광고없음
+                    - generic: 구독자 1.27만명
+                  - generic [ref=f8e32]:
+                    - generic [ref=f8e33]:
+                      - generic:
+                        - generic:
+                          - img
+                      - button "구독" [ref=f8e36] [cursor=pointer]:
+                        - generic [ref=f8e37]: 구독
+                    - generic:
+                      - generic:
+                        - img

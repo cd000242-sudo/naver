@@ -1,0 +1,17 @@
+﻿410:             btn.classList.add('loading'); btn.disabled = true;
+411:             const product = PRODUCTS[selectedProduct];
+412:             const orderId = generateOrderId();
+413:             const customerKey = 'LP_' + email.replace(/[^a-zA-Z0-9]/g, '_') + '_' + Date.now();
+414:             try {
+415:                 // ???? ????(????? ?? ???)
+416:                 const payment = tossPayments.payment({ customerKey });
+417:                 await payment.requestBillingAuth({
+418:                     method: 'CARD',
+419:                     successUrl: CONFIG.SUCCESS_URL + '?email=' + encodeURIComponent(email) + '&product=' + encodeURIComponent(selectedProduct) + '&amount=' + product.amount + '&customerKey=' + encodeURIComponent(customerKey) + '&amount=' + product.am
+420:                     failUrl: CONFIG.FAIL_URL,
+421:                     customerEmail: email,
+422:                 });
+423:             } catch (err) { console.log('?? ??:', err); btn.classList.remove('loading'); btn.disabled = false; }
+424:         }
+425: 
+426:         function downloadFree(product) { location.href = 'download.html'; }

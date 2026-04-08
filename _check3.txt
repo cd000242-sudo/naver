@@ -1,0 +1,53 @@
+﻿165:         // ===== URL ?????? ??? =====
+166:         function getParams() {
+167:             const params = new URLSearchParams(window.location.search);
+168:             return {
+169:                 authKey: params.get('authKey'),
+170:                 customerKey: params.get('customerKey'),
+171:                 paymentKey: params.get('paymentKey'),
+172:                 orderId: params.get('orderId'),
+173:                 amount: params.get('amount'),
+174:                 email: params.get('email'),
+175:                 product: params.get('product'),
+176:             };
+177:         }
+178: 
+179:         // ===== JSONP ??? =====
+180:         function callGASviaJSONP(params) {
+181:             return new Promise((resolve, reject) => {
+182:                 const timeoutId = setTimeout(() => {
+183:                     cleanup();
+184:                     reject(new Error('TIMEOUT'));
+185:                 }, CONFIG.TIMEOUT_MS);
+186: 
+187:                 const callbackName = '__tossCallback_' + Date.now();
+188: 
+189:                 window[callbackName] = function (data) {
+190:                     clearTimeout(timeoutId);
+191:                     cleanup();
+192:                     resolve(data);
+193:                 };
+194: 
+195:                 function cleanup() {
+196:                     delete window[callbackName];
+197:                     const script = document.getElementById('jsonp-script');
+198:                     if (script) script.remove();
+199:                 }
+200: 
+201:                 const script = document.createElement('script');
+202:                 script.id = 'jsonp-script';
+203:                 script.src = `${CONFIG.GAS_URL}?action=register-billing` +
+204:                     `&authKey=${encodeURIComponent(params.authKey || params.paymentKey)}` +
+205:                     `&customerKey=${encodeURIComponent(params.customerKey || '')}` +
+206:                     `&orderId=${encodeURIComponent(params.orderId)}` +
+207:                     `&amount=${encodeURIComponent(params.amount)}` +
+208:                     (params.email ? `&email=${encodeURIComponent(params.email)}` : '') +
+209:                     (params.product ? `&product=${encodeURIComponent(params.product)}` : '') +
+210:                     `&callback=${callbackName}`;
+211: 
+212:                 script.onerror = function () {
+213:                     clearTimeout(timeoutId);
+214:                     cleanup();
+215:                     reject(new Error('NETWORK_ERROR'));
+216:                 };
+217: 
