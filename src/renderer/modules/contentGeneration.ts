@@ -516,9 +516,16 @@ export async function generateContentFromUrl(
 
     // ✅ 발행 모드 상태 업데이트 (syncPublishMode에서 관리됨 — markContentGenerated가 처리)
   } catch (error) {
-    appendLog(`❌ URL 기반 콘텐츠 생성 실패: ${(error as Error).message}`);
+    // ✅ [v1.4.33] 에러 메시지가 잘리지 않고 표시되도록 + 풀 에러 직렬화로 콘솔 출력
+    const errMsg = (error as Error).message || String(error);
+    appendLog(`❌ URL 기반 콘텐츠 생성 실패: ${errMsg}`);
     // 에러 로그는 항상 기록
-    if (activeModal.addLog) activeModal.addLog(`❌ 오류: ${(error as Error).message}`);
+    if (activeModal.addLog) activeModal.addLog(`❌ 오류: ${errMsg}`);
+    // ✅ [v1.4.33] 디버그용 풀 에러 직렬화 (사장님이 콘솔 캡처만 받아도 진단 가능)
+    try {
+      console.error('[GenerateContent] 풀 에러 직렬화:',
+        JSON.stringify(error, Object.getOwnPropertyNames(error as object), 2));
+    } catch { /* 직렬화 실패는 무시 */ }
 
     // ✅ [2026-03-22 FIX] 에러 표시 후 3초 뒤 통합 진행률 모달 자동 숨김 (재시도 가능하도록)
     setTimeout(() => {

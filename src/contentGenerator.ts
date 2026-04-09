@@ -6644,51 +6644,64 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
 }
 
 // ✅ [2026-02-20] Gemini API 에러 → 사용자 친화적 한국어 변환
+// ✅ [v1.4.33] 모든 분기에 풀 에러 첨부 + 잘림 제거 — 진단을 위해
+//    손님이 화면 캡처 1장만 보내면 사장님이 즉시 원인 파악 가능
 function translateGeminiError(rawMessage: string): string {
   const msg = rawMessage.toLowerCase();
+  const detail = `\n📋 상세: ${rawMessage}`;
+  const captureGuide = `\n📸 이 화면을 캡처해서 사장님께 보내주시면 즉시 해결됩니다.`;
 
   // API 키 만료/무효
   if (msg.includes('api key expired') || msg.includes('api_key_invalid') || msg.includes('api key not valid')) {
-    return '🔑 Gemini API키가 만료됨! Google AI Studio에서 새 키를 발급받으세요.';
+    return '🔑 Gemini API키가 만료됨! Google AI Studio에서 새 키를 발급받으세요.' + detail;
   }
 
   // 할당량 초과 (429)
   if (msg.includes('429') || msg.includes('quota') || msg.includes('rate limit') || msg.includes('too many requests') || msg.includes('resource exhausted')) {
-    return '⚡ Gemini 유료/무료 할당량 초과! 잠시 후 다시 시도하거나, Google AI Studio에서 요금제를 확인하세요.';
+    return '⚡ Gemini 유료/무료 할당량 초과! 잠시 후 다시 시도하거나, Google AI Studio에서 요금제를 확인하세요.' + detail;
   }
 
   // 인증 실패 (401/403)
   if (msg.includes('401') || msg.includes('403') || msg.includes('permission') || msg.includes('forbidden')) {
-    return '🔒 Gemini API 인증 실패! API키가 올바른지 확인하세요.';
+    return '🔒 Gemini API 인증 실패! API키가 올바른지 확인하세요.' + detail;
   }
 
   // 서버 오류 (500/503)
   if (msg.includes('500') || msg.includes('503') || msg.includes('internal') || msg.includes('unavailable') || msg.includes('overloaded')) {
-    return '🔧 Gemini 서버 일시 장애! 잠시 후 다시 시도하세요.';
+    return '🔧 Gemini 서버 일시 장애! 잠시 후 다시 시도하세요.' + detail;
   }
 
   // 타임아웃
   if (msg.includes('timeout') || msg.includes('시간 초과') || msg.includes('타임아웃')) {
-    return '⏱️ Gemini 응답 시간 초과! 네트워크 상태를 확인하고 다시 시도하세요.';
+    return '⏱️ Gemini 응답 시간 초과! 네트워크 상태를 확인하고 다시 시도하세요.' + detail;
   }
 
   // 모델 없음 (404)
   if (msg.includes('404') || msg.includes('not found') || msg.includes('모델')) {
-    return '❌ Gemini 모델을 찾을 수 없음! 지원되는 모델인지 확인하세요.';
+    return '❌ Gemini 모델을 찾을 수 없음! 지원되는 모델인지 확인하세요.' + detail;
   }
 
   // 콘텐츠 차단
   if (msg.includes('blocked') || msg.includes('safety') || msg.includes('content policy')) {
-    return '🚫 Gemini 콘텐츠 정책 위반으로 차단됨! 프롬프트를 수정하세요.';
+    return '🚫 Gemini 콘텐츠 정책 위반으로 차단됨! 프롬프트를 수정하세요.' + detail;
+  }
+
+  // 네트워크 연결 실패 (fetch 자체 실패)
+  if (msg.includes('fetch failed') || msg.includes('error fetching') ||
+      msg.includes('econnreset') || msg.includes('econnrefused') ||
+      msg.includes('enotfound') || msg.includes('eai_') ||
+      msg.includes('getaddrinfo') || msg.includes('network') ||
+      msg.includes('ssl') || msg.includes('certificate') || msg.includes('handshake')) {
+    return '🌐 네트워크 연결 실패! 인터넷 연결, 백신/방화벽, 회사 프록시 설정을 확인하세요.' + detail + captureGuide;
   }
 
   // API키 미설정
   if (msg.includes('api 키가 설정되지') || msg.includes('api key')) {
-    return '⚙️ Gemini API키가 설정되지 않았습니다! 환경설정에서 API키를 입력하세요.';
+    return '⚙️ Gemini API키가 설정되지 않았습니다! 환경설정에서 API키를 입력하세요.' + detail;
   }
 
-  // 그 외 — 원본 메시지를 간략화
-  return `Gemini 오류: ${rawMessage.substring(0, 100)}`;
+  // 그 외 — 원본 메시지를 잘리지 않고 풀 출력 + 캡처 안내
+  return `Gemini 오류 (분류 안 됨): ${rawMessage}` + captureGuide;
 }
 
 function fixUtf8Encoding(text: string): string {

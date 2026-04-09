@@ -5913,7 +5913,12 @@ ipcMain.handle(
       console.error('[Main] 오류 타입:', err.constructor.name);
       console.error('[Main] 오류 메시지:', message);
       console.error('[Main] 오류 스택:', err.stack);
-      console.error('[Main] 전체 오류 객체:', error);
+      // ✅ [v1.4.33] 풀 직렬화 — debugLog로 %TEMP% 로그 파일에도 박힘
+      try {
+        const fullSerialized = JSON.stringify(error, Object.getOwnPropertyNames(error as object), 2);
+        console.error('[Main] 풀 에러 직렬화:', fullSerialized);
+        debugLog(`[Main] 구조화 콘텐츠 생성 실패 풀 직렬화: ${fullSerialized}`);
+      } catch { /* 직렬화 실패는 무시 */ }
 
       return { success: false, message };
     }
