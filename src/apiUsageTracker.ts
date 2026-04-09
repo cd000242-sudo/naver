@@ -55,14 +55,17 @@ const OPENAI_IMAGE_PRICING: Record<string, number> = {
   'default':         0.04,
 };
 
-/** Claude (Anthropic) 모델 가격 ($/1M tokens) */
+/** Claude (Anthropic) 모델 가격 ($/1M tokens) — Active 모델만 */
+// 매칭은 substring 기반(matchPricingKey). 더 구체적인 키를 위에 두어야 정확히 매칭됨.
 const CLAUDE_PRICING: Record<string, { input: number; output: number }> = {
+  'claude-opus-4-6':         { input: 15.00, output: 75.00 },
+  'claude-opus-4-5':         { input: 15.00, output: 75.00 },
+  'claude-opus-4-1':         { input: 15.00, output: 75.00 },
   'claude-opus-4':           { input: 15.00, output: 75.00 },
+  'claude-sonnet-4-6':       { input: 3.00,  output: 15.00 },
+  'claude-sonnet-4-5':       { input: 3.00,  output: 15.00 },
   'claude-sonnet-4':         { input: 3.00,  output: 15.00 },
-  'claude-3-7-sonnet':       { input: 3.00,  output: 15.00 },
-  'claude-3-5-sonnet':       { input: 3.00,  output: 15.00 },
-  'claude-3-5-haiku':        { input: 0.80,  output: 4.00 },
-  'claude-3-haiku':          { input: 0.25,  output: 1.25 },
+  'claude-haiku-4-5':        { input: 1.00,  output: 5.00 },
   'default':                 { input: 3.00,  output: 15.00 },
 };
 

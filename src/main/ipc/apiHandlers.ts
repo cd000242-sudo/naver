@@ -59,7 +59,7 @@ export function registerApiHandlers(_ctx: IpcContext): void {
             let testCallResult: any = null;
             try {
                 const testResp = await axios.post(
-                    `${baseUrl}/models/gemini-2.0-flash:generateContent`,
+                    `${baseUrl}/models/gemini-2.5-flash:generateContent`,
                     { contents: [{ parts: [{ text: 'Hi' }] }] },
                     {
                         headers: { 'x-goog-api-key': key, 'Content-Type': 'application/json' },

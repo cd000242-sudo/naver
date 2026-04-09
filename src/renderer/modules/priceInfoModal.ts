@@ -461,10 +461,10 @@ export async function initPriceInfoModal(): Promise<void> {
     }
 
     // ✅ Gemini 모델 선택 로드
-    const geminiModelSelect = document.getElementById('gemini-model-select') as HTMLSelectElement;
+    const geminiModelSelect = document.getElementById('settings-gemini-model') as HTMLSelectElement;
     if (geminiModelSelect) {
-      geminiModelSelect.value = config.geminiModel || 'gemini-1.5-flash';
-      console.log('[Settings] Gemini 모델 로드됨:', config.geminiModel || 'gemini-1.5-flash (기본)');
+      geminiModelSelect.value = config.geminiModel || 'gemini-2.5-flash';
+      console.log('[Settings] Gemini 모델 로드됨:', config.geminiModel || 'gemini-2.5-flash (기본)');
     }
 
     // ✅ Gemini 텍스트 주력 모델 라디오 버튼 로드
@@ -481,10 +481,9 @@ export async function initPriceInfoModal(): Promise<void> {
       const navStatusEl = document.getElementById('nav-text-engine-status');
       if (navStatusEl) {
         const modelNames: Record<string, string> = {
-          'gemini-3.1-pro-preview': 'Gemini 3.1 Pro',
-          'gemini-3-pro-preview': 'Gemini 3 Pro',
-          'gemini-3-flash-preview': 'Gemini 3 Flash',
+          'gemini-2.5-pro': 'Gemini 2.5 Pro',
           'gemini-2.5-flash': 'Gemini 2.5 Flash',
+          'gemini-2.5-flash-lite': 'Gemini 2.5 Flash-Lite',
           'perplexity-sonar': '🔮 Perplexity AI',
           'openai-gpt41': '⚖️ GPT-4.1',
           'claude-sonnet': '📜 Claude Sonnet 4.6',
@@ -506,7 +505,7 @@ export async function initPriceInfoModal(): Promise<void> {
     try {
       const unifiedGeminiModel = document.getElementById('unified-gemini-model') as HTMLSelectElement | null;
       if (unifiedGeminiModel) {
-        unifiedGeminiModel.value = config.geminiModel || 'gemini-1.5-flash';
+        unifiedGeminiModel.value = config.geminiModel || 'gemini-2.5-flash';
       }
     } catch (e) {
       console.warn('[priceInfoModal] catch ignored:', e);
@@ -827,10 +826,9 @@ export async function initPriceInfoModal(): Promise<void> {
             const statusEl = document.getElementById('nav-text-engine-status');
             if (statusEl && config.primaryGeminiTextModel) {
               const names: Record<string, string> = {
-                'gemini-3.1-pro-preview': 'Gemini 3.1 Pro',
-                'gemini-3-pro-preview': 'Gemini 3 Pro',
-                'gemini-3-flash-preview': 'Gemini 3 Flash',
+                'gemini-2.5-pro': 'Gemini 2.5 Pro',
                 'gemini-2.5-flash': 'Gemini 2.5 Flash',
+                'gemini-2.5-flash-lite': 'Gemini 2.5 Flash-Lite',
                 'perplexity-sonar': '🔮 Perplexity AI',
                 'openai-gpt41': '⚖️ GPT-4.1',
                 'claude-sonnet': '📜 Claude Sonnet 4.6',

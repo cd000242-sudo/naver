@@ -28,20 +28,20 @@ interface GenerateResult {
 
 // ==================== 상수 ====================
 
-// ✅ Gemini 모델 선택 (2026-01-09: Gemini 3 Flash 최우선 설정)
-const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-3.1-flash-preview';
+// ✅ [2026-04-09] Stable Gemini 모델만 사용 (Preview 제거)
+const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 
 // ✅ 사용 가능한 모델 목록 (환경설정에서 선택 가능)
 export const AVAILABLE_MODELS = [
-  { id: 'gemini-3.1-pro-preview', name: 'Gemini 3.1 Pro (최신, 최고 성능)', tier: 'premium' },
-  { id: 'gemini-3.1-flash-preview', name: 'Gemini 3.1 Flash (가성비 추천)', tier: 'premium' },
-  { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash', tier: 'premium' },
+  { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro (최고 성능)', tier: 'premium' },
+  { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash (가성비 추천)', tier: 'standard' },
+  { id: 'gemini-2.5-flash-lite', name: 'Gemini 2.5 Flash-Lite (가장 빠름)', tier: 'standard' },
 ];
 
 const BASE_FALLBACK_MODELS = [
   'gemini-2.5-flash',
-  'gemini-3.1-flash-preview',
-  'gemini-3.1-pro-preview',
+  'gemini-2.5-flash-lite',
+  'gemini-2.5-pro',
 ];
 
 // ✅ [2026-03-18] UI 선택 모델을 최우선 배치하는 동적 폴백 체인
@@ -64,7 +64,7 @@ export function getConfiguredModel(): string {
 }
 
 const MODEL_ENFORCEMENT_ERROR =
-  '지원되지 않는 Gemini 모델입니다. gemini-1.5, gemini-2.0, gemini-3.0 등의 유효한 모델을 선택해주세요.';
+  '지원되지 않는 Gemini 모델입니다. gemini-2.5-flash / gemini-2.5-flash-lite / gemini-2.5-pro 중에서 선택해주세요.';
 
 // ✅ 시스템 프롬프트는 .prompt 파일에서 로드됩니다.
 // - SEO 모드: src/prompts/seo/base.prompt + 카테고리별 .prompt
@@ -524,7 +524,7 @@ export async function optimizeImageSearchQuery(
   try {
     const client = getClient(apiKey);
     const model = client.getGenerativeModel({
-      model: 'gemini-2.0-flash',  // 빠른 모델 사용
+      model: 'gemini-2.5-flash',  // 빠른 모델 사용
       generationConfig: {
         temperature: 0.3,  // 정확성 우선
         maxOutputTokens: 200,
@@ -563,7 +563,7 @@ JSON만 출력하세요. 설명 없이.`;
 
     // ✅ [2026-03-19] 사용량 추적
     const _u = (result.response as any).usageMetadata;
-    if (_u) trackGeminiUsage('gemini-2.0-flash', _u.promptTokenCount || 0, _u.candidatesTokenCount || 0);
+    if (_u) trackGeminiUsage('gemini-2.5-flash', _u.promptTokenCount || 0, _u.candidatesTokenCount || 0);
 
     // JSON 파싱
     const jsonMatch = text.match(/\{[\s\S]*\}/);
@@ -626,7 +626,7 @@ export async function extractCoreSubject(
   try {
     const client = getClient(apiKey);
     const model = client.getGenerativeModel({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-2.5-flash',
       generationConfig: {
         temperature: 0.2,
         maxOutputTokens: 50,
@@ -648,7 +648,7 @@ export async function extractCoreSubject(
 
     // ✅ [2026-03-19] 사용량 추적
     const _u2 = (result.response as any).usageMetadata;
-    if (_u2) trackGeminiUsage('gemini-2.0-flash', _u2.promptTokenCount || 0, _u2.candidatesTokenCount || 0);
+    if (_u2) trackGeminiUsage('gemini-2.5-flash', _u2.promptTokenCount || 0, _u2.candidatesTokenCount || 0);
 
     console.log(`[Gemini] 핵심 주제 추출: "${title}" → "${text}"`);
     return text || title.split(' ')[0];
@@ -689,7 +689,7 @@ export async function batchOptimizeImageSearchQueries(
   try {
     const client = getClient(apiKey);
     const model = client.getGenerativeModel({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-2.5-flash',
       generationConfig: {
         temperature: 0.3,
         maxOutputTokens: 500,
@@ -726,7 +726,7 @@ JSON만 출력하세요. 설명 없이.`;
 
     // ✅ [2026-03-19] 사용량 추적
     const _u3 = (result.response as any).usageMetadata;
-    if (_u3) trackGeminiUsage('gemini-2.0-flash', _u3.promptTokenCount || 0, _u3.candidatesTokenCount || 0);
+    if (_u3) trackGeminiUsage('gemini-2.5-flash', _u3.promptTokenCount || 0, _u3.candidatesTokenCount || 0);
 
     // JSON 배열 파싱
     const jsonMatch = text.match(/\[[\s\S]*\]/);

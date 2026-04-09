@@ -5,7 +5,7 @@ import path from 'path';
 export interface AppConfig {
   geminiApiKey?: string;
   geminiApiKeys?: string[]; // ✅ [2026-02-13] 다중 Gemini API 키 (429 할당량 자동 로테이션)
-  geminiModel?: 'gemini-2.0-flash-exp' | 'gemini-2.0-flash' | 'gemini-1.5-flash' | 'gemini-1.5-pro' | string; // ✅ 최신 모델 및 문자열 허용
+  geminiModel?: 'gemini-2.5-flash' | 'gemini-2.5-flash-lite' | 'gemini-2.5-pro' | string; // ✅ Stable 모델만 hint, string으로 확장 허용
   openaiApiKey?: string;
   pexelsApiKey?: string;
   unsplashApiKey?: string;
@@ -81,7 +81,7 @@ export interface AppConfig {
   deepinfraApiKey?: string;
 
   // ✅ Gemini 텍스트 생성 주 모델 선택
-  primaryGeminiTextModel?: 'gemini-3.1-pro-preview' | 'gemini-3.1-flash-preview' | 'gemini-2.5-flash' | string;
+  primaryGeminiTextModel?: 'gemini-2.5-pro' | 'gemini-2.5-flash' | 'gemini-2.5-flash-lite' | string;
 
   // ✅ [v1.4.3] Google Search Grounding 옵션 (기본 OFF — 호출당 $0.035 추가 비용 방지)
   enableSearchGrounding?: boolean;
@@ -233,20 +233,37 @@ export async function loadConfig(): Promise<AppConfig> {
     // 주의: 패키지 생성 시에만 초기화되어야 하며, 사용자가 저장한 값은 그대로 유지되어야 함
     // 초기화는 scripts/reset-config-for-pack.js에서만 수행됨
 
-    // ✅ [2026-01-28 FIX] 구 모델명을 새 Gemini 3 모델로 마이그레이션
-    // gemini-1.5-pro, gemini-1.5-flash는 Google API v1beta에서 더 이상 지원되지 않음
+    // ✅ [2026-04-09 FIX] 텍스트 생성용 죽은 Gemini 모델을 stable로 마이그레이션
+    // exact match 사용 — 이미지 모델(gemini-2.0-flash-exp 등)은 다른 필드라 건드리지 않음
+    const DEAD_TEXT_MODELS = new Set([
+      'gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-1.5-flash-8b',
+      'gemini-pro', 'gemini-pro-vision',
+      'gemini-3.1-flash-preview', 'gemini-3-flash-preview',
+      'gemini-3.1-pro-preview', 'gemini-3-pro-preview',
+      'gemini-2.0-flash', 'gemini-2.0-flash-001',
+    ]);
     let geminiModel = parsed.geminiModel;
-    const DEPRECATED_MODELS = ['gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-pro', 'gemini-pro-vision'];
-    if (geminiModel && DEPRECATED_MODELS.some(m => geminiModel.includes(m))) {
+    if (geminiModel && DEAD_TEXT_MODELS.has(geminiModel)) {
       const oldModel = geminiModel;
-      geminiModel = 'gemini-3.1-flash-preview';  // 새 기본 모델로 자동 전환
-      console.log(`[Config] ⚠️ 구 모델(${oldModel}) → 새 모델(${geminiModel})로 자동 마이그레이션`);
+      geminiModel = geminiModel.includes('-pro') ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
+      console.log(`[Config] ⚠️ geminiModel(${oldModel}) → ${geminiModel}로 자동 마이그레이션`);
+    }
+
+    // ✅ primaryGeminiTextModel도 동일 마이그레이션 (Gemini ID인 경우만)
+    let primaryGeminiTextModel = parsed.primaryGeminiTextModel;
+    if (primaryGeminiTextModel && typeof primaryGeminiTextModel === 'string' &&
+        primaryGeminiTextModel.startsWith('gemini-') &&
+        DEAD_TEXT_MODELS.has(primaryGeminiTextModel)) {
+      const oldModel = primaryGeminiTextModel;
+      primaryGeminiTextModel = primaryGeminiTextModel.includes('-pro') ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
+      console.log(`[Config] ⚠️ primaryGeminiTextModel(${oldModel}) → ${primaryGeminiTextModel}로 자동 마이그레이션`);
     }
 
     // 하이픈 형식 키를 카멜케이스로 변환 (하위 호환성)
     const normalizedConfig: AppConfig = {
       ...parsed,
       geminiModel: geminiModel as any, // ✅ 변환된 모델 적용
+      primaryGeminiTextModel: primaryGeminiTextModel as any, // ✅ 변환된 모델 적용
       // 하이픈 형식 키가 있으면 카멜케이스로 변환 (값이 있으면 우선 사용)
       geminiApiKey: parsed.geminiApiKey || parsed['gemini-api-key'] || undefined,
       openaiApiKey: parsed.openaiApiKey || parsed['openai-api-key'] || undefined,

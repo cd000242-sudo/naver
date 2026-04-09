@@ -3952,7 +3952,7 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
       case 'claude': {
         try {
           const resp = await axios.post('https://api.anthropic.com/v1/messages', {
-            model: 'claude-3-haiku-20240307',
+            model: 'claude-haiku-4-5-20251001',
             messages: [{ role: 'user', content: 'Hi' }],
             max_tokens: 5,
           }, {
@@ -4546,28 +4546,29 @@ ipcMain.handle('aiAssistant:runAutoFix', async () => {
     const config = await loadConfig() as any;
     let configChanged = false;
 
-    // 1. Gemini 모델 수정 - ✅ [2026-03-18] Gemini 3.1 Flash 기본, GA + 최신 모델 유지
+    // 1. Gemini 모델 수정 - ✅ [2026-04-09] Stable 모델만 사용
     const validModels = [
-      'gemini-3.1-flash-preview',
-      'gemini-3.1-pro-preview',
       'gemini-2.5-flash',
+      'gemini-2.5-flash-lite',
       'gemini-2.5-pro',
-      'gemini-2.0-flash',
     ];
 
-    // ✅ 이전 모델명 → 새 모델명 자동 마이그레이션 (2026-03-18: 모든 텍스트 모델 → gemini-3.1-flash-preview 통합)
+    // ✅ 죽은/Preview 모델명 → Stable 모델로 자동 마이그레이션
     const modelMigrationMap: Record<string, string> = {
-      'gemini-3-pro': 'gemini-3.1-flash-preview',
-      'gemini-3-flash': 'gemini-3.1-flash-preview',
-      'gemini-3-pro-preview': 'gemini-3.1-flash-preview',
-      'gemini-3-flash-preview': 'gemini-3.1-flash-preview',
-      'gemini-2.5-pro-preview': 'gemini-2.5-flash',
-      'gemini-2.0-flash-exp': 'gemini-3.1-flash-preview',
-      'gemini-1.5-flash': 'gemini-3.1-flash-preview',
-      'gemini-1.5-flash-latest': 'gemini-3.1-flash-preview',
-      'gemini-1.5-pro': 'gemini-3.1-flash-preview',
-      'gemini-1.5-pro-latest': 'gemini-3.1-flash-preview',
-      'gemini-1.5-flash-8b': 'gemini-3.1-flash-preview',
+      'gemini-3-pro': 'gemini-2.5-pro',
+      'gemini-3-flash': 'gemini-2.5-flash',
+      'gemini-3-pro-preview': 'gemini-2.5-pro',
+      'gemini-3-flash-preview': 'gemini-2.5-flash',
+      'gemini-3.1-pro-preview': 'gemini-2.5-pro',
+      'gemini-3.1-flash-preview': 'gemini-2.5-flash',
+      'gemini-2.5-pro-preview': 'gemini-2.5-pro',
+      'gemini-2.0-flash': 'gemini-2.5-flash',
+      'gemini-2.0-flash-exp': 'gemini-2.5-flash',
+      'gemini-1.5-flash': 'gemini-2.5-flash',
+      'gemini-1.5-flash-latest': 'gemini-2.5-flash',
+      'gemini-1.5-pro': 'gemini-2.5-pro',
+      'gemini-1.5-pro-latest': 'gemini-2.5-pro',
+      'gemini-1.5-flash-8b': 'gemini-2.5-flash-lite',
     };
 
     // 저장된 모델이 마이그레이션 대상인 경우 자동 변환
@@ -4579,13 +4580,13 @@ ipcMain.handle('aiAssistant:runAutoFix', async () => {
     }
 
     if (config.geminiModel && !validModels.includes(config.geminiModel)) {
-      config.geminiModel = 'gemini-3.1-flash-preview';
+      config.geminiModel = 'gemini-2.5-flash';
       configChanged = true;
-      fixResults.push({ action: 'Gemini 모델', success: true, message: '권장 모델(gemini-3.1-flash-preview)로 변경됨' });
+      fixResults.push({ action: 'Gemini 모델', success: true, message: '권장 모델(gemini-2.5-flash)로 변경됨' });
     }
 
     if (!config.geminiModel) {
-      config.geminiModel = 'gemini-3.1-flash-preview';
+      config.geminiModel = 'gemini-2.5-flash';
       configChanged = true;
       fixResults.push({ action: 'Gemini 모델 설정', success: true, message: '기본 모델 설정됨' });
     }

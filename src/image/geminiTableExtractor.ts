@@ -37,7 +37,7 @@ export async function extractSpecsWithGemini(
 
     try {
         const genAI = new GoogleGenerativeAI(key);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
         // ✅ [2026-03-04 FIX] crawledData가 문자열이면 그대로, 객체면 JSON.stringify
         // 기존: 문자열도 JSON.stringify → 이스케이프된 "\\n" 형태로 Gemini에 전달되어 가격 인식 실패
@@ -112,7 +112,7 @@ export async function extractProsConsWithGemini(
 
     try {
         const genAI = new GoogleGenerativeAI(key);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
         const prompt = `
 당신은 객관적인 제품 리뷰어입니다.

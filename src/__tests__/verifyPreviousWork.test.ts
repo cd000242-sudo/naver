@@ -102,11 +102,10 @@ describe('v1.4.16 — Gemini 모델 체인 (무료 한도 우선)', () => {
     expect(isPro).toBe(false);
   });
 
-  it('Flash 체인은 2.5-flash → 2.0-flash → 3.1-flash-preview 순서 (무료 우선)', () => {
+  it('Flash 체인은 2.5-flash → 2.5-flash-lite 순서 (Stable 우선)', () => {
     const { uniqueModels } = buildGeminiModelChain();
     expect(uniqueModels[0]).toBe('gemini-2.5-flash');
-    expect(uniqueModels[1]).toBe('gemini-2.0-flash');
-    expect(uniqueModels[2]).toBe('gemini-3.1-flash-preview');
+    expect(uniqueModels[1]).toBe('gemini-2.5-flash-lite');
   });
 
   it('Pro 모델 선택 시 Pro 체인 활성화', () => {
@@ -122,13 +121,11 @@ describe('v1.4.16 — Gemini 모델 체인 (무료 한도 우선)', () => {
     expect(primaryModel).toBe('gemini-2.5-flash');
   });
 
-  it('preview 모델 명시 선택 시 그대로 사용 (사용자 의도 존중)', () => {
-    const { primaryModel, uniqueModels } = buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-3.1-flash-preview' });
-    expect(primaryModel).toBe('gemini-3.1-flash-preview');
-    // 첫 번째에 사용자 선택 모델
-    expect(uniqueModels[0]).toBe('gemini-3.1-flash-preview');
-    // 두 번째부터 안정적인 폴백
-    expect(uniqueModels[1]).toBe('gemini-2.5-flash');
+  it('Flash-Lite 명시 선택 시 그대로 사용', () => {
+    const { primaryModel, uniqueModels } = buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-2.5-flash-lite' });
+    expect(primaryModel).toBe('gemini-2.5-flash-lite');
+    expect(uniqueModels[0]).toBe('gemini-2.5-flash-lite');
+    expect(uniqueModels).toContain('gemini-2.5-flash');
   });
 });
 

@@ -6400,13 +6400,11 @@ export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string
   }
   const isPro = primaryModel.includes('-pro');
   const flashModels = [
-    'gemini-2.5-flash',          // ✅ 무료 1500/일
-    'gemini-2.0-flash',          // ✅ 무료 1500/일 (종료 2026-09-24)
-    'gemini-3.1-flash-preview',  // ⚠️ Preview, 무료 한도 없음
+    'gemini-2.5-flash',          // ✅ Stable, 무료 1500/일
+    'gemini-2.5-flash-lite',     // ✅ Stable, 가장 빠른/저렴
   ];
   const proModels = [
-    'gemini-2.5-pro',            // ✅ 무료 25/일
-    'gemini-3.1-pro-preview',    // ⚠️ Preview, 무료 한도 없음
+    'gemini-2.5-pro',            // ✅ Stable, 무료 25/일
     ...flashModels,
   ];
   const baseModels = isPro ? proModels : flashModels;
@@ -6897,33 +6895,33 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   }
   const client = getOpenAIClient(configApiKey);
 
-  // ✅ [2026-04-08 FIX] OpenAI 모델 체인 업데이트 — GPT-5.4 시리즈 + GPT-4.1 레거시
+  // ✅ [2026-04-09 FIX] OpenAI 모델 체인 — GPT-5.4 시리즈만 (GPT-4.1 시리즈 퇴역 제거)
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
   let openAIModels: string[];
   if (uiSelectedModel === 'openai-gpt4o-mini') {
-    // 가성비 모드: GPT-5.4-mini (최신) → GPT-4.1-mini (레거시) → GPT-5.4-nano (초저가)
+    // 가성비 모드: GPT-5.4-mini → GPT-5.4-nano → GPT-5.4 (폴백)
     openAIModels = [
       'gpt-5.4-mini',              // ✅ 최신 가성비 (GPT-5.4급 성능, 저비용)
-      'gpt-4.1-mini',              // 폴백: 레거시 가성비
-      'gpt-5.4-nano',              // 최후 폴백: 초저가
+      'gpt-5.4-nano',              // 폴백1: 초저가
+      'gpt-5.4',                   // 폴백2: 플래그십 (비용 높지만 확실)
     ];
-    console.log('[OpenAI] 🧠 가성비 모드: gpt-5.4-mini → 4.1-mini → 5.4-nano');
+    console.log('[OpenAI] 🧠 가성비 모드: gpt-5.4-mini → 5.4-nano → 5.4');
   } else if (uiSelectedModel === 'openai-gpt41') {
-    // 균형 모드: GPT-4.1 → GPT-5.4 → GPT-5.4-mini
+    // 균형 모드: GPT-5.4 → GPT-5.4-mini → GPT-5.4-nano
     openAIModels = [
-      'gpt-4.1',                   // ✅ UI 선택: 안정적 균형 모델
-      'gpt-5.4',                   // 폴백1: 최신 플래그십
-      'gpt-5.4-mini',              // 폴백2: 최신 가성비
+      'gpt-5.4',                   // ✅ UI 선택: 플래그십
+      'gpt-5.4-mini',              // 폴백1: 최신 가성비
+      'gpt-5.4-nano',              // 폴백2: 초저가
     ];
-    console.log('[OpenAI] ⚖️ 균형 모드: gpt-4.1 → 5.4 → 5.4-mini');
+    console.log('[OpenAI] ⚖️ 균형 모드: gpt-5.4 → 5.4-mini → 5.4-nano');
   } else {
-    // 최고 성능 모드 (기본): GPT-5.4 → GPT-5.4-mini → GPT-4.1
+    // 최고 성능 모드 (기본): GPT-5.4 → GPT-5.4-mini → GPT-5.4-nano
     openAIModels = [
       'gpt-5.4',                   // ✅ 최신 플래그십
       'gpt-5.4-mini',              // 폴백1: 최신 가성비
-      'gpt-4.1',                   // 폴백2: 레거시 안정적
+      'gpt-5.4-nano',              // 폴백2: 초저가
     ];
-    console.log('[OpenAI] 🚀 최고 성능 모드: gpt-5.4 → 5.4-mini → 4.1');
+    console.log('[OpenAI] 🚀 최고 성능 모드: gpt-5.4 → 5.4-mini → 5.4-nano');
   }
 
   const customModel = process.env.OPENAI_STRUCTURED_MODEL;
@@ -6991,11 +6989,15 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           throw new Error(`OpenAI API 키가 유효하지 않습니다. 환경설정에서 API 키를 확인해주세요.\n원본 오류: ${(error as Error).message}`);
         }
 
-        // 2) 결제/크레딧 오류 → 즉시 throw
-        const isBillingError = errorMessage.includes('billing') || errorMessage.includes('quota') ||
-          errorMessage.includes('insufficient') || errorMessage.includes('payment') ||
-          errorStr.includes('billing_hard_limit_reached');
-        if (isBillingError) {
+        // 2) 결제/크레딧 오류 → 진짜 billing hard limit만 즉시 throw
+        // ✅ [2026-04-09 FIX] 429 rate limit의 'quota' 키워드를 billing으로 오판하던 버그 수정
+        // OpenAI 429 에러: "You exceeded your current quota" → 일시적 rate limit일 수 있음
+        // 진짜 billing 에러: billing_hard_limit_reached, insufficient_quota (영구적)
+        const isHardBillingError = errorStr.includes('billing_hard_limit_reached') ||
+          errorMessage.includes('insufficient_quota') ||
+          (errorMessage.includes('billing') && !errorMessage.includes('429')) ||
+          (errorMessage.includes('payment') && errorMessage.includes('required'));
+        if (isHardBillingError) {
           throw new Error(`OpenAI API 결제 한도에 도달했습니다. OpenAI 대시보드에서 결제 정보를 확인해주세요.\n원본 오류: ${(error as Error).message}`);
         }
 
@@ -7007,9 +7009,17 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           break; // 이 모델의 재시도 루프 탈출 → 다음 모델
         }
 
-        // 4) 재시도 가능한 에러 → 대기 후 재시도 (같은 모델 또는 다음 모델)
-        const isRetryable = errorMessage.includes('429') || errorMessage.includes('rate limit') ||
-          errorMessage.includes('too many requests') ||
+        // 4) 429/quota/rate-limit → 다음 모델 폴백 (재시도보다 빠른 모델 전환 우선)
+        // ✅ [2026-04-09 FIX] 429 quota를 다른 모델로 즉시 폴백하여 빠른 복구
+        const isQuotaOrRateLimit = errorMessage.includes('429') || errorMessage.includes('rate limit') ||
+          errorMessage.includes('too many requests') || errorMessage.includes('quota');
+        if (isQuotaOrRateLimit) {
+          console.log(`[OpenAI] ⚠️ ${modelName} 할당량/속도 제한, 다음 모델로 즉시 전환: ${(error as Error).message}`);
+          break; // 같은 모델 재시도 대신 다음 모델로 빠른 폴백
+        }
+
+        // 5) 서버/네트워크 에러 → 대기 후 재시도
+        const isRetryable =
           errorMessage.includes('500') || errorMessage.includes('502') || errorMessage.includes('503') ||
           errorMessage.includes('server error') || errorMessage.includes('internal error') ||
           errorMessage.includes('시간 초과') || errorMessage.includes('timeout') ||
@@ -7085,37 +7095,33 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
   let claudeModels: string[];
   if (uiSelectedModel === 'claude-haiku') {
-    // Haiku 선택 시: Haiku 우선, 나머지 폴백
+    // Haiku 선택 시: Haiku 4.5 우선, Sonnet 폴백
     claudeModels = [
-      'claude-3-5-haiku-20241022',       // ✅ UI 선택: Haiku 3.5 (가성비)
-      'claude-sonnet-4-6',               // 폴백1: Sonnet 4.6
-      'claude-sonnet-4-20250514',        // 폴백2: Sonnet 4
+      'claude-haiku-4-5-20251001',       // ✅ UI 선택: Haiku 4.5 (가성비)
+      'claude-sonnet-4-6',               // 폴백: Sonnet 4.6
     ];
-    console.log('[Claude] 💜 UI 선택: Claude Haiku 3.5 (가성비 모드)');
+    console.log('[Claude] 💜 UI 선택: Claude Haiku 4.5 (가성비 모드)');
   } else if (uiSelectedModel === 'claude-sonnet') {
-    // Sonnet 선택 시: Sonnet 4.6 우선, 나머지 폴백
+    // Sonnet 선택 시: Sonnet 4.6 우선, Sonnet 4.5 폴백
     claudeModels = [
       'claude-sonnet-4-6',               // ✅ UI 선택: Sonnet 4.6 (균형)
-      'claude-sonnet-4-20250514',        // 폴백1: Sonnet 4
-      'claude-3-5-haiku-20241022',       // 폴백2: Haiku 3.5
+      'claude-sonnet-4-5-20250929',      // 폴백: Sonnet 4.5
     ];
     console.log('[Claude] 📜 UI 선택: Claude Sonnet 4.6 (균형 모드)');
   } else if (uiSelectedModel === 'claude-opus') {
-    // Opus 선택 시: Opus 우선, Sonnet 폴백
+    // Opus 선택 시: Opus 4.6 우선, Opus 4.5 → Sonnet 4.6 폴백
     claudeModels = [
-      'claude-opus-4-20250514',          // ✅ UI 선택: Opus 4 (최고 성능)
-      'claude-sonnet-4-6',               // 폴백1: Sonnet 4.6
-      'claude-sonnet-4-20250514',        // 폴백2: Sonnet 4
+      'claude-opus-4-6',                 // ✅ UI 선택: Opus 4.6 (최고 성능)
+      'claude-opus-4-5-20251101',        // 폴백1: Opus 4.5
+      'claude-sonnet-4-6',               // 폴백2: Sonnet 4.6
     ];
     console.log('[Claude] 👑 UI 선택: Claude Opus 4.6 (최고 성능 모드)');
   } else {
     // 기본 (claude provider로 왔지만 specific 모델 미지정): Sonnet 우선
     claudeModels = [
       'claude-sonnet-4-6',               // 기본: Sonnet 4.6 (균형)
-      'claude-sonnet-4-20250514',        // 폴백1: Sonnet 4
-      'claude-3-7-sonnet-20250219',      // 폴백2: Sonnet 3.7
-      'claude-3-5-sonnet-20241022',      // 폴백3: Sonnet 3.5 v2
-      'claude-3-5-haiku-20241022',       // 폴백4: Haiku 3.5
+      'claude-sonnet-4-5-20250929',      // 폴백1: Sonnet 4.5
+      'claude-haiku-4-5-20251001',       // 폴백2: Haiku 4.5
     ];
     console.log('[Claude] ✨ 기본 모드: Claude Sonnet 4.6');
   }
@@ -7666,11 +7672,10 @@ export async function researchWithGeminiGrounding(keyword: string): Promise<{
     const { GoogleGenerativeAI } = await import('@google/generative-ai');
     const client = new GoogleGenerativeAI(apiKey.trim());
 
-    // ✅ Google Search grounding이 지원되는 모델 사용
+    // ✅ Google Search grounding이 지원되는 stable 모델만 사용
     const modelsToTry = [
       'gemini-2.5-flash',
-      'gemini-2.0-flash',
-      'gemini-2.5-pro-preview',
+      'gemini-2.5-pro',
     ];
 
     const researchPrompt = `
