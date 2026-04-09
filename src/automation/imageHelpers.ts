@@ -1366,9 +1366,11 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
 
     self.log(`      📷 이미지 ${imgIdx + 1}/${images.length} 업로드 시도: ${maskedPath}`);
 
-    const imagePath = image.filePath || image.savedToLocal || image.url;
+    // ✅ [2026-04-10 FIX] previewDataUrl(base64) 폴백 추가
+    // ImageFX 등에서 filePath/savedToLocal/url 모두 없고 previewDataUrl만 있는 경우 대응
+    const imagePath = image.filePath || image.savedToLocal || image.url || image.previewDataUrl;
     if (!imagePath) {
-      self.log(`      ⚠️ 이미지 경로가 없음, 건너뜀`);
+      self.log(`      ⚠️ 이미지 경로가 없음, 건너뜀 (heading: "${image.heading}", provider: "${image.provider}", 키: ${Object.keys(image).join(',')})`);
       continue;
     }
 

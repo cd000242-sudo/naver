@@ -1358,8 +1358,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                   }
                 }
 
-                // filePath가 있는 유효한 이미지만 필터링
-                const validMatched = matchedImages.filter((img: any) => img.filePath || img.url);
+                // ✅ [2026-04-10 FIX] previewDataUrl(base64) 폴백 추가 — ImageFX 등 대응
+                const validMatched = matchedImages.filter((img: any) => img.filePath || img.url || img.savedToLocal || img.previewDataUrl);
                 if (validMatched.length > 0) {
                   headingImages = validMatched;
                   self.log(`   ✅[Full-Auto 매칭] ${validMatched.length}개 이미지 할당 (originalIndex=${expectedOriginalIndex})`);
@@ -1387,7 +1387,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                   );
 
                   if (matchedImages.length > 0) {
-                    const validMatched = matchedImages.filter((img: any) => img.filePath || img.url);
+                    // ✅ [2026-04-10 FIX] previewDataUrl 폴백 추가
+                    const validMatched = matchedImages.filter((img: any) => img.filePath || img.url || img.savedToLocal || img.previewDataUrl);
                     if (validMatched.length > 0) {
                       headingImages = validMatched;
                       self.log(`   ✅[반자동 매칭] ${validMatched.length}개 이미지 할당 (originalIndex=${expectedIdx})`);
@@ -1406,7 +1407,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                         );
                       }
                       if (matchedImages.length > 0) {
-                        headingImages = matchedImages.filter((img: any) => img.filePath || img.url);
+                        headingImages = matchedImages.filter((img: any) => img.filePath || img.url || img.savedToLocal || img.previewDataUrl);
                         self.log(`   🔄[반자동 폴백] heading 이름 매칭 → ${headingImages.length}개 이미지 사용`);
                       } else if (i < nonThumbnailForFallback.length && nonThumbnailForFallback[i]?.filePath) {
                         headingImages = [nonThumbnailForFallback[i]];
