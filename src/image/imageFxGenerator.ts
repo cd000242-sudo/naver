@@ -1626,11 +1626,22 @@ export async function cleanupImageFxBrowser(): Promise<void> {
  * 4. 사용자가 새 Google 계정으로 로그인
  * 5. 로그인 성공 시 새 계정 이름 반환
  */
+// ✅ [v1.4.38] 동시 호출 방지 락 — "로그인 버튼 두 번 클릭 → 응답없음" 방지
+let _switchAccountInProgress: Promise<{ success: boolean; userName?: string; message: string }> | null = null;
+
 export async function switchGoogleAccountForImageFx(): Promise<{
   success: boolean;
   userName?: string;
   message: string;
 }> {
+  // ✅ [v1.4.38] 이미 진행 중이면 기존 Promise 재사용 (중복 실행 방지)
+  if (_switchAccountInProgress) {
+    console.log('[ImageFX] ⚠️ Google 계정 변경이 이미 진행 중입니다. 기존 작업을 기다립니다...');
+    sendImageLog('⏳ [ImageFX] 이미 로그인 시도 중입니다. 잠시만 기다려주세요...');
+    return _switchAccountInProgress;
+  }
+
+  _switchAccountInProgress = (async () => {
   try {
     console.log('[ImageFX] 🔄 Google 계정 변경 시작...');
     sendImageLog('🔄 [ImageFX] Google 계정 변경 중... 기존 세션을 정리합니다.');
@@ -1907,6 +1918,14 @@ export async function switchGoogleAccountForImageFx(): Promise<{
     console.error(`[ImageFX] ❌ Google 계정 변경 실패: ${error.message}`);
     sendImageLog(`❌ [ImageFX] 계정 변경 실패: ${error.message}`);
     return { success: false, message: `계정 변경 실패: ${error.message}` };
+  }
+  })(); // ✅ [v1.4.38] IIFE 종료
+
+  try {
+    return await _switchAccountInProgress;
+  } finally {
+    // ✅ [v1.4.38] 작업 완료/실패 모두 락 해제 — 다음 시도 가능
+    _switchAccountInProgress = null;
   }
 }
 

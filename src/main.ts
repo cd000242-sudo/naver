@@ -1066,32 +1066,71 @@ function getIsPackaged(): boolean {
 let mainWindow: BrowserWindow | null = null;
 let tray: Tray | null = null; // ✅ 시스템 트레이
 
-// ✅ [v1.4.37] 메인 프로세스 콘솔 → 렌더러 DevTools 콘솔 미러링 (디버깅용)
-// 모든 console.log/warn/error 호출이 렌더러 DevTools 콘솔에도 [MAIN] 프리픽스로 표시됨
-// → 사용자가 DevTools 콘솔만 캡처해도 메인 프로세스 로그까지 모두 수집 가능
+// ✅ [v1.4.37/v1.4.38] 메인 프로세스 콘솔 → 렌더러 DevTools + 파일 로깅 (디버깅용)
+// 1) 모든 console.log/warn/error → 렌더러 DevTools에 [MAIN] 프리픽스로 표시
+// 2) 모든 console.log/warn/error → userData/logs/main-YYYY-MM-DD.log 파일에도 기록
+//    → 응답없음/크래시 시에도 파일에서 로그 회수 가능
 const _origConsole = {
   log: console.log.bind(console),
   warn: console.warn.bind(console),
   error: console.error.bind(console),
 };
+
+// 파일 로거 (지연 초기화 — app.getPath 사용 가능 시점부터)
+let _logFilePath: string | null = null;
+function _initLogFile(): void {
+  if (_logFilePath) return;
+  try {
+    const _fs = require('fs');
+    const _path = require('path');
+    const userData = app.getPath('userData');
+    const logsDir = _path.join(userData, 'logs');
+    if (!_fs.existsSync(logsDir)) _fs.mkdirSync(logsDir, { recursive: true });
+    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    _logFilePath = _path.join(logsDir, `main-${today}.log`);
+    _fs.appendFileSync(_logFilePath, `\n\n========== ${new Date().toISOString()} 앱 시작 ==========\n`);
+  } catch (e) {
+    _origConsole.error('[Main] 로그 파일 초기화 실패:', e);
+  }
+}
+
+function _writeToFile(level: string, msg: string): void {
+  try {
+    if (!_logFilePath) _initLogFile();
+    if (!_logFilePath) return;
+    const _fs = require('fs');
+    const ts = new Date().toISOString();
+    _fs.appendFileSync(_logFilePath, `[${ts}] [${level.toUpperCase()}] ${msg}\n`);
+  } catch { /* 파일 IO 실패는 무시 */ }
+}
+
 function _forwardConsoleToRenderer(level: 'log' | 'warn' | 'error', args: any[]): void {
+  // 메시지 직렬화 (한 번만)
+  const msg = args.map(a => {
+    if (a instanceof Error) return a.stack || a.message;
+    if (typeof a === 'object' && a !== null) {
+      try { return JSON.stringify(a); } catch { return String(a); }
+    }
+    return String(a);
+  }).join(' ');
+
+  // 1) 파일에 항상 기록 (응답없음 상태에서도 안전)
+  _writeToFile(level, msg);
+
+  // 2) 렌더러 DevTools로 전송 (가능하면)
   try {
     const win = mainWindow && !mainWindow.isDestroyed() ? mainWindow : BrowserWindow.getAllWindows()[0];
     if (!win || win.isDestroyed()) return;
-    const msg = args.map(a => {
-      if (a instanceof Error) return a.stack || a.message;
-      if (typeof a === 'object' && a !== null) {
-        try { return JSON.stringify(a); } catch { return String(a); }
-      }
-      return String(a);
-    }).join(' ');
     win.webContents.send('main:console', { level, msg });
   } catch { /* 렌더러 미준비 또는 파괴됨 — 무시 */ }
 }
+
 console.log = (...args: any[]): void => { _origConsole.log(...args); _forwardConsoleToRenderer('log', args); };
 console.warn = (...args: any[]): void => { _origConsole.warn(...args); _forwardConsoleToRenderer('warn', args); };
 console.error = (...args: any[]): void => { _origConsole.error(...args); _forwardConsoleToRenderer('error', args); };
-_origConsole.log('[Main] ✅ 콘솔 미러링 활성화 — 모든 main 로그가 렌더러 DevTools에 표시됩니다');
+
+// app.whenReady() 이전이라 _initLogFile은 첫 console 호출 시 lazy 초기화됨
+_origConsole.log('[Main] ✅ 콘솔 미러링 + 파일 로깅 활성화');
 
 // ✅ [레거시 호환] 전역 변수 유지 (AutomationService와 동기화됨)
 let automation: NaverBlogAutomation | null = null;
