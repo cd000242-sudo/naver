@@ -610,7 +610,14 @@ export function buildFullPrompt(
   // 2. 말투(Tone) 보정 프롬프트 추가 (가장 강력하게 작용하도록 상단 배치 고려 가능하나, 보통 뒤에 붙여도 됨)
   const tonePrompt = getToneInstruction(toneStyle);
 
-  let finalPrompt = basePrompt;
+  // ✅ [v1.4.35] 글톤 prompt를 system 시작(prefix)에도 추가 — primacy effect로 강제력 증대
+  // LLM은 prompt 시작 부분의 지시를 가장 강하게 따르는 경향. 톤은 끝에만 박으면 다른 규칙에 묻힘.
+  // 트레이드오프: 캐시 적중률 약간 감소 (톤이 변동 부분이라 캐시 키 다양화)
+  // 우선순위: 품질(사람보다 사람처럼) > 캐시 비용
+  const tonePrefix = tonePrompt
+    ? `${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [STYLE OVERRIDE]는 모든 규칙보다 최우선입니다. 100% 준수.\n═══════════════════════════════════════════\n\n`
+    : '';
+  let finalPrompt = `${tonePrefix}${basePrompt}`;
 
   // ✅ [v1.4.18] structureDirective를 system에서 제거 — 매 호출 random 변동 → 캐시 무효화 원인
   // 이제 buildModeBasedPrompt가 user 파트에 직접 추가함 (캐시 적중률 보존)

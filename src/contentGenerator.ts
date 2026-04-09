@@ -4198,10 +4198,11 @@ ${source.customPrompt.trim()}
   }
 
   // ✅ [Traffic Hunter 통합] 모드별 온도(Temperature) 설정
-  // SEO: 0.2 (일관성/정확도), Homefeed: 0.7 (창의성/후킹), Traffic Hunter: 0.9 (자극/변동성)
-  // Affiliate: 0.5 (신뢰성/균형), Custom: 0.7 (유연성), Business: 0.4 (전문성+CTA 균형)
+  // ✅ [v1.4.35] SEO 0.2 → 0.5 (로봇 회귀 방지, "사람보다 사람처럼" 우선)
+  //              0.2는 거의 deterministic이라 학습 데이터의 평균 어조로 회귀.
+  //              0.5는 키워드 정확도를 유지하면서 어휘/표현 다양성 확보.
   let temperature = 0.5; // 기본값
-  if (contentMode === 'seo') temperature = 0.2;
+  if (contentMode === 'seo') temperature = 0.5;  // 0.2 → 0.5
   else if (contentMode === 'homefeed') temperature = 0.7;
   else if (contentMode === 'traffic-hunter') temperature = 0.9;
   else if (contentMode === 'affiliate') temperature = 0.5;
@@ -8193,8 +8194,9 @@ export async function generateStructuredContent(
 
       // ✅ [Traffic Hunter 통합] buildModeBasedPrompt 내에서 계산된 temperature 값을 가져와야 함.
       // 하지만 buildModeBasedPrompt는 string만 반환하므로, 여기서 다시 온도 계산 (중복을 피하려면 리팩토링이 필요하지만 현재 흐름 유지)
+      // ✅ [v1.4.35] SEO 0.2 → 0.5 (로봇 회귀 방지). 4205 라인과 동일 값 유지.
       let temperature = 0.5;
-      if (mode === 'seo') temperature = 0.2;
+      if (mode === 'seo') temperature = 0.5;  // 0.2 → 0.5
       else if (mode === 'homefeed') temperature = 0.7;
 
       console.log(`[ContentGenerator] AI 호출 모드: ${mode}, 온도: ${temperature}`);
@@ -8742,10 +8744,12 @@ export async function generateStructuredContent(
         const riskAnalysis = analyzeAiDetectionRisk(optimized.bodyPlain || '');
         console.log(`[ContentGenerator] AI 탐지 위험도: ${riskAnalysis.score}/100`);
 
-        // 위험도에 따른 humanize 강도 결정
-        const humanizeIntensity: 'light' | 'medium' | 'strong' =
-          riskAnalysis.score >= 50 ? 'strong' :
-            riskAnalysis.score >= 25 ? 'medium' : 'light';
+        // ✅ [v1.4.35] humanize 항상 strong — "사람보다 사람처럼" 작성 우선
+        // 기존 문제: AI가 깔끔하게 만들수록 위험도 점수 낮음 → light로 떨어짐
+        //           → light는 4단계 스킵 (어미 다양화, 동의어, 개인 표현, 감탄사)
+        //           → 결과적으로 humanize가 거의 안 되고 로봇 같은 글 생성
+        // 변경: 항상 strong 적용. 위험도 점수는 quality 메타로만 사용.
+        const humanizeIntensity: 'strong' = 'strong';
 
         // Humanize 적용
         if (optimized.bodyPlain) {
