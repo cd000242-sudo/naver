@@ -32,10 +32,11 @@ interface GenerateResult {
 const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 
 // ✅ 사용 가능한 모델 목록 (환경설정에서 선택 가능)
+// [v1.4.32] 가격 순서대로 3티어 정렬: 가성비(Lite) → 균형(Flash) → 프리미엄(Pro)
 export const AVAILABLE_MODELS = [
-  { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro (최고 성능)', tier: 'premium' },
-  { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash (가성비 추천)', tier: 'standard' },
-  { id: 'gemini-2.5-flash-lite', name: 'Gemini 2.5 Flash-Lite (가장 빠름)', tier: 'standard' },
+  { id: 'gemini-2.5-flash-lite', name: 'Gemini 2.5 Flash-Lite (💰 가성비 ~₩15/글)', tier: 'budget' },
+  { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash (⚖️ 균형 ~₩80/글)', tier: 'standard' },
+  { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro (👑 프리미엄 ~₩300/글)', tier: 'premium' },
 ];
 
 const BASE_FALLBACK_MODELS = [

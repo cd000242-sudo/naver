@@ -8409,6 +8409,181 @@ app.on('before-quit', (event) => {
 app.commandLine.appendSwitch('disable-features', 'MediaFoundationVideoCapture');
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// ✅ [v1.4.32] 버전 업그레이드 시 자격증명 백업 → wipe → 복원
+// 이유: 손님 PC에서 stale settings/캐시로 인한 Gemini 호출 실패가 자동 업데이트로
+//       해결되지 않아 매번 수동 재설치 안내가 필요했음. wipe로 재설치 효과를 자동화하되
+//       API 키/라이선스/네이버 로그인은 보존해서 재설정 부담을 0으로 만든다.
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// 자격증명 백업 시 보존할 필드 화이트리스트
+// ⚠️ 의도적으로 제외: primaryGeminiTextModel, geminiModel — stale dead model ID가
+//    원인일 수 있어서 wipe와 함께 기본값(gemini-2.5-flash)으로 자동 리셋되게 둠
+const PRESERVE_FIELDS = [
+  // ===== API 키 (가장 중요) =====
+  'geminiApiKey', 'gemini-api-key', 'geminiApiKeys',
+  'openaiApiKey', 'openai-api-key',
+  'claudeApiKey', 'claude-api-key',
+  'perplexityApiKey', 'perplexity-api-key',
+  'openaiImageApiKey', 'leonardoaiApiKey', 'leonardoaiModel',
+  'deepinfraApiKey', 'deepinfra-api-key',
+  'falaiApiKey', 'falai-api-key', 'falaiModel',
+  'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey',
+  'stabilityApiKey', 'stability-api-key', 'stabilityModel',
+  // ===== 네이버 API =====
+  'naverClientId', 'naver-client-id',
+  'naverClientSecret', 'naver-client-secret',
+  'naverAdApiKey', 'naver-ad-api-key',
+  'naverAdSecretKey', 'naverAdCustomerId',
+  'naverDatalabClientId', 'naverDatalabClientSecret',
+  // ===== 사용자 자격증명 (재입력 면제) =====
+  'rememberCredentials', 'savedNaverId', 'savedNaverPassword',
+  'rememberLicenseCredentials', 'savedLicenseUserId', 'savedLicensePassword',
+  // ===== 사용자가 동의했던 항목 (재동의 요구 X) =====
+  'externalApiCostConsent', 'externalApiCostConsentAt',
+  // ===== 플랜/예산 정보 =====
+  'geminiPlanType', 'geminiCreditBudget',
+  // ===== 사용자 표시 정보 =====
+  'userDisplayName', 'userEmail', 'userTimezone', 'authorName',
+] as const;
+
+// userData 안의 settings_*.json 모두 스캔해서 자격증명만 병합 추출
+async function backupCredentialsFromAllSettings(userDataPath: string): Promise<Record<string, any>> {
+  const merged: Record<string, any> = {};
+  try {
+    const allFiles = await fs.readdir(userDataPath);
+    const settingsFiles = allFiles.filter(f =>
+      f === 'settings.json' || (f.startsWith('settings_') && f.endsWith('.json'))
+    );
+    // mtime 오름차순 → 최신 파일 값이 마지막에 덮어쓰게
+    const withMtime = await Promise.all(settingsFiles.map(async f => ({
+      name: f,
+      mtime: (await fs.stat(path.join(userDataPath, f))).mtimeMs,
+    })));
+    withMtime.sort((a, b) => a.mtime - b.mtime);
+
+    for (const { name } of withMtime) {
+      try {
+        const raw = await fs.readFile(path.join(userDataPath, name), 'utf-8');
+        const parsed = JSON.parse(raw);
+        for (const field of PRESERVE_FIELDS) {
+          const v = parsed[field];
+          if (v !== undefined && v !== null && v !== '') {
+            merged[field] = v;
+          }
+        }
+      } catch (e) {
+        console.warn(`[Wipe] ⚠️ ${name} 파싱 실패 (스킵):`, (e as Error).message);
+      }
+    }
+    console.log(`[Wipe] ✅ 자격증명 백업: ${Object.keys(merged).length}개 필드 / ${withMtime.length}개 파일 스캔`);
+  } catch (e) {
+    console.warn('[Wipe] ⚠️ settings 파일 스캔 실패:', (e as Error).message);
+  }
+  return merged;
+}
+
+// 버전 업그레이드 시 stale 데이터를 wipe하고 깨끗한 settings.json 재생성
+// 보존: API 키, 라이선스, 네이버 로그인 세션, 블로그 계정 목록, 이미지 결과물
+// 삭제: settings_*.json (모두), quota/통계 JSON, Local Storage/IndexedDB 등
+async function wipeUserDataPreservingCredentials(lastVersion: string, currentVersion: string): Promise<void> {
+  // 첫 실행(이전 버전 정보 없음)이면 wipe할 게 없음 → 스킵
+  if (!lastVersion) {
+    console.log('[Wipe] 첫 실행 — wipe 스킵');
+    return;
+  }
+
+  const userDataPath = app.getPath('userData');
+  console.log(`[Wipe] 🔄 ${lastVersion} → ${currentVersion} 업그레이드 — wipe 시작`);
+
+  // 1) 자격증명 백업
+  const credentials = await backupCredentialsFromAllSettings(userDataPath);
+
+  // 2) 삭제 대상 — settings_*.json은 동적으로 찾음
+  // ⚠️ scheduled-posts.json은 의도적으로 제외 — 손님이 예약해둔 발행 일정 보호
+  const filesToDelete = new Set<string>([
+    'settings.json',
+    '.last_active_user',
+    'config.json',
+    'quota-state.json',
+    'quota-state.backup.json',
+    'ai-learning.json',
+    'content-generation-stats.json',
+    'publish-records.json',
+    'post-limit.json',
+    'heading-videos.json',
+  ]);
+  try {
+    const allFiles = await fs.readdir(userDataPath);
+    for (const f of allFiles) {
+      if (f.startsWith('settings_') && f.endsWith('.json')) filesToDelete.add(f);
+    }
+  } catch { /* readdir 실패해도 진행 */ }
+
+  // 3) 삭제 대상 폴더 — Electron 내부 저장소 + 통계
+  // ⚠️ 보존: license/, playwright-session*/, puppeteer-session*/,
+  //         imagefx-chrome-profile/, blog-accounts.json,
+  //         images/, generated-images/, style-previews/, platform-tools/
+  const dirsToDelete = [
+    'Local Storage',
+    'Session Storage',
+    'IndexedDB',
+    'Network',
+    'WebStorage',
+    'SharedStorage',
+    'shared_proto_db',
+    'Service Worker',
+    'ScriptCache',
+    'Shared Dictionary',
+    'VideoDecodeStats',
+    'test-images',
+  ];
+
+  // 4) 파일 삭제 실행
+  let deletedFiles = 0;
+  for (const file of filesToDelete) {
+    try {
+      await fs.unlink(path.join(userDataPath, file));
+      deletedFiles++;
+    } catch (err: any) {
+      if (err.code !== 'ENOENT') {
+        console.warn(`[Wipe] ⚠️ ${file} 삭제 실패:`, err.message);
+      }
+    }
+  }
+
+  // 5) 폴더 삭제 실행
+  let deletedDirs = 0;
+  for (const dir of dirsToDelete) {
+    try {
+      await fs.rm(path.join(userDataPath, dir), { recursive: true, force: true });
+      deletedDirs++;
+    } catch (err: any) {
+      if (err.code !== 'ENOENT') {
+        console.warn(`[Wipe] ⚠️ ${dir} 삭제 실패:`, err.message);
+      }
+    }
+  }
+  console.log(`[Wipe] ✅ 삭제 완료: 파일 ${deletedFiles}개, 폴더 ${deletedDirs}개`);
+
+  // 6) 자격증명 복원 — 새 settings.json을 atomic write로 생성
+  if (Object.keys(credentials).length > 0) {
+    const freshPath = path.join(userDataPath, 'settings.json');
+    const tmpPath = freshPath + '.tmp';
+    try {
+      await fs.writeFile(tmpPath, JSON.stringify(credentials, null, 2), 'utf-8');
+      await fs.rename(tmpPath, freshPath);
+      console.log(`[Wipe] ✅ 새 settings.json 생성 (자격증명 ${Object.keys(credentials).length}개 복원)`);
+    } catch (e) {
+      console.error('[Wipe] ❌ 새 settings.json 생성 실패:', e);
+    }
+  } else {
+    console.log('[Wipe] ℹ️ 백업된 자격증명 없음 — 새 settings.json 생성 안 함');
+  }
+
+  console.log('[Wipe] 🛡️ 보존됨: license/, playwright-session*/, puppeteer-session*/, imagefx-chrome-profile/, blog-accounts.json, scheduled-posts.json, images/, generated-images/, platform-tools/');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // ✅ [2026-02-21] 업데이트 후 캐시 자동 정리 (이전 버전 캐시로 인한 오류 방지)
 // ═══════════════════════════════════════════════════════════════════════════════
 async function clearCacheOnVersionChange(): Promise<void> {
@@ -8431,6 +8606,11 @@ async function clearCacheOnVersionChange(): Promise<void> {
     }
 
     console.log(`[CacheClear] 🔄 버전 변경 감지: ${lastVersion || '(최초)'} → ${currentVersion}`);
+
+    // ✅ [v1.4.32] 캐시 정리 전에 stale settings/통계 wipe + 자격증명 복원
+    // (자동 업데이트만으로 손님 PC stale 문제 해결을 자동화)
+    await wipeUserDataPreservingCredentials(lastVersion, currentVersion);
+
     console.log(`[CacheClear] 🧹 이전 캐시 정리 시작...`);
 
     // 1) Electron 내부 캐시 디렉토리 삭제 (오래된 V8 코드 캐시, GPU 캐시 등)

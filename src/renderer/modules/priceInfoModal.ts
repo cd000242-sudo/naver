@@ -480,13 +480,15 @@ export async function initPriceInfoModal(): Promise<void> {
       // ✅ [2026-02-22 FIX] 로드 시 nav-text-engine-status UI 업데이트
       const navStatusEl = document.getElementById('nav-text-engine-status');
       if (navStatusEl) {
+        // [v1.4.32] 가격 표시 추가 — 사용자가 어떤 비용을 쓰는지 한눈에
         const modelNames: Record<string, string> = {
-          'gemini-2.5-pro': 'Gemini 2.5 Pro',
-          'gemini-2.5-flash': 'Gemini 2.5 Flash',
-          'gemini-2.5-flash-lite': 'Gemini 2.5 Flash-Lite',
-          'perplexity-sonar': '🔮 Perplexity AI',
-          'openai-gpt41': '⚖️ GPT-4.1',
-          'claude-sonnet': '📜 Claude Sonnet 4.6',
+          'gemini-2.5-flash-lite': '💰 Gemini 2.5 Flash-Lite (~₩15/글)',
+          'gemini-2.5-flash': '⚖️ Gemini 2.5 Flash (~₩80/글)',
+          'gemini-2.5-pro': '👑 Gemini 2.5 Pro (~₩300/글)',
+          'perplexity-sonar': '🔮 Perplexity Sonar (~₩15/글)',
+          'openai-gpt4o-mini': '🧠 GPT-4.1 mini (~₩16/글)',
+          'openai-gpt41': '⚖️ GPT-4.1 (~₩60/글)',
+          'claude-sonnet': '📜 Claude Sonnet 4.6 (~₩240/글)',
         };
         navStatusEl.textContent = `현재: ${modelNames[config.primaryGeminiTextModel] || config.primaryGeminiTextModel}`;
       }

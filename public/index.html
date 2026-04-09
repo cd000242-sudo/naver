@@ -4507,6 +4507,10 @@
                                             + 이미지 생성 모두 이 키 하나로 가능!</p>
                                     </div>
                                 </div>
+                                <!-- 💡 [v1.4.32] 무료 한도 다시 받는 법 안내 (paid 사용자 비용 절감 팁) -->
+                                <div style="background: rgba(255, 255, 255, 0.92); border: 1px solid #f59e0b; border-left: 4px solid #f59e0b; padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.82rem; color: #78350f; line-height: 1.6;">
+                                    💰 <strong>무료 한도 절약 팁:</strong> 이미 $300 크레딧을 다 쓰셨거나 카드가 등록된 Google 계정의 키를 쓰고 계시면 <strong>매번 유료 청구</strong>가 됩니다. 비용을 아끼려면 <strong>새 Google 계정</strong>을 만들어서 (Google Cloud에 카드 등록하지 말고) <a href="#" onclick="window.api.openExternalUrl('https://aistudio.google.com/apikey'); return false;" style="color: #b45309; text-decoration: underline; font-weight: 800;">aistudio.google.com/apikey</a> 에서 새 키를 발급받아 위 입력란에 붙여넣으세요. 새 계정 = 새 무료 한도 (Flash <strong>1500/일</strong>, Pro <strong>25/일</strong>, Flash-Lite 더 많음).
+                                </div>
                                 <div class="field" style="margin-bottom: 0;">
                                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                                         <div style="position: relative; width: 100%;">
@@ -4824,30 +4828,37 @@
                                     <!-- ═══ 🔷 GEMINI 엔진 ═══ -->
                                     <div style="font-size: 0.8rem; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; padding-left: 0.25rem;">🔷 Google Gemini</div>
 
-                                    <!-- 🏆 Gemini 2.5 Pro (Stable, 고품질) -->
+                                    <!-- 💡 [v1.4.32] Google Cloud 결제 등록자(=$300 크레딧 받은 분)는 무료 한도 적용 안 됨 — 모든 호출 유료 -->
+                                    <div style="font-size: 0.78rem; color: #92400e; background: #fef3c7; border-left: 3px solid #f59e0b; padding: 0.7rem 0.9rem; border-radius: 6px; margin-bottom: 0.5rem; line-height: 1.55;">
+                                        💡 <strong>가격 안내:</strong> Google Cloud에 카드 등록(또는 $300 크레딧 받은 분)은 <strong>무료 한도가 적용되지 않습니다</strong>. 등록 안 한 분만 무료 한도 사용 가능. 아래 표시된 가격은 유료 기준입니다.
+                                        <br><br>
+                                        💰 <strong>무료 한도 다시 받는 법:</strong> $300 크레딧 다 쓰셨거나 유료 청구가 부담스러우면 <strong>새 Google 계정</strong>을 만들어서 (Google Cloud 카드 등록하지 말고) <a href="https://aistudio.google.com/apikey" target="_blank" style="color: #b45309; text-decoration: underline; font-weight: 700;">aistudio.google.com/apikey</a> 에서 새 API 키를 발급받으세요. 새 계정 = 새 무료 한도(Flash 1500/일, Pro 25/일). 환경설정 → Gemini API 키 자리에 새 키를 붙여넣으면 즉시 적용됩니다.
+                                    </div>
+
+                                    <!-- 💰 Gemini 2.5 Flash-Lite (가성비) -->
                                     <label class="gemini-model-card"
-                                        style="cursor: pointer; border: 2px solid #d4af37; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #fffbeb, #fef3c7); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);">
+                                        style="cursor: pointer; border: 2px solid #38bdf8; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f0f9ff, #e0f2fe); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);">
                                         <div
-                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #fef3c7; border-radius: 50%;">
+                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #e0f2fe; border-radius: 50%;">
                                             <input type="radio" name="primaryGeminiTextModel"
-                                                value="gemini-2.5-pro"
-                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #d4af37;">
+                                                value="gemini-2.5-flash-lite"
+                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #0284c7;">
                                         </div>
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>🏆 Gemini 2.5 Pro</span>
+                                                <span>💰 Gemini 2.5 Flash-Lite</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #d4af37, #f59e0b); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);">👑 고품질</span>
+                                                    style="background: linear-gradient(135deg, #38bdf8, #0284c7); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(56, 189, 248, 0.3);">💰 가성비</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
-                                                심층 추론 · 깊이 있는 글쓰기 · 무료 25/일</div>
-                                            <div style="font-size: 0.8rem; color: #b45309; font-weight: 700; margin-top: 0.3rem;">
-                                                📊 무료 (일일 한도 내)</div>
+                                                대량 발행 · 가장 저렴 · 빠른 속도</div>
+                                            <div style="font-size: 0.8rem; color: #0369a1; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 유료: <strong>~₩15/글</strong> · 무료: 결제 미등록 시만</div>
                                         </div>
                                     </label>
 
-                                    <!-- 🆓 Gemini 2.5 Flash (무료, 기본/추천) -->
+                                    <!-- ⚖️ Gemini 2.5 Flash (균형, 기본/추천) -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #14b8a6; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f0fdfa, #ccfbf1); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);">
                                         <div
@@ -4859,14 +4870,37 @@
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>⚡ Gemini 2.5 Flash</span>
+                                                <span>⚖️ Gemini 2.5 Flash</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(20, 184, 166, 0.3);">🆓 무료 · 인기</span>
+                                                    style="background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(20, 184, 166, 0.3);">⚖️ 균형 · 추천</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
-                                                무료 티어 · 빠른 속도 · 안정적 품질 · 가장 많이 사용</div>
+                                                품질·속도·가격 균형 · 일반 블로그 글에 최적</div>
                                             <div style="font-size: 0.8rem; color: #0d9488; font-weight: 700; margin-top: 0.3rem;">
-                                                📊 무료 (일일 한도 내)</div>
+                                                📊 유료: <strong>~₩80/글</strong> · 무료: 결제 미등록 시 1500/일</div>
+                                        </div>
+                                    </label>
+
+                                    <!-- 👑 Gemini 2.5 Pro (프리미엄) -->
+                                    <label class="gemini-model-card"
+                                        style="cursor: pointer; border: 2px solid #d4af37; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #fffbeb, #fef3c7); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #fef3c7; border-radius: 50%;">
+                                            <input type="radio" name="primaryGeminiTextModel"
+                                                value="gemini-2.5-pro"
+                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #d4af37;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
+                                                <span>👑 Gemini 2.5 Pro</span>
+                                                <span
+                                                    style="background: linear-gradient(135deg, #d4af37, #f59e0b); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);">👑 프리미엄</span>
+                                            </div>
+                                            <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
+                                                심층 추론 · 깊이 있는 글쓰기 · 최고 품질</div>
+                                            <div style="font-size: 0.8rem; color: #b45309; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 유료: <strong>~₩300/글</strong> · 무료: 결제 미등록 시 25/일</div>
                                         </div>
                                     </label>
 
