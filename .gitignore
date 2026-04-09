@@ -8,3 +8,9 @@ release_final/
 *.asar
 *.log
 .env.release
+
+# Selector capture/debug artifacts
+.capture-userdata/
+capture-result.json
+probe-map-result.json
+probe-step-*.png

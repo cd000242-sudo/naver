@@ -25,6 +25,9 @@ export type { ImageSelectorKey } from './imageSelectors';
 export { CTA_SELECTORS } from './ctaSelectors';
 export type { CtaSelectorKey } from './ctaSelectors';
 
+export { PLACE_SELECTORS } from './placeSelectors';
+export type { PlaceSelectorKey } from './placeSelectors';
+
 // --- 유틸리티 ---
 export {
   findElement,
@@ -43,6 +46,7 @@ import { EDITOR_SELECTORS } from './editorSelectors';
 import { PUBLISH_SELECTORS } from './publishSelectors';
 import { IMAGE_SELECTORS } from './imageSelectors';
 import { CTA_SELECTORS } from './ctaSelectors';
+import { PLACE_SELECTORS } from './placeSelectors';
 
 /**
  * 모든 셀렉터를 카테고리별로 접근할 수 있는 통합 객체
@@ -58,4 +62,5 @@ export const SELECTORS = {
   publish: PUBLISH_SELECTORS,
   image: IMAGE_SELECTORS,
   cta: CTA_SELECTORS,
+  place: PLACE_SELECTORS,
 } as const;
