@@ -182,9 +182,15 @@ export class EnhancedApiClient {
     ): Promise<ApiResponse<T>> {
         let lastError: Error | null = null;
 
+        // ✅ [v1.4.39 FIX] 발행 관련 API에만 stopFullAutoPublish 체크 적용
+        // 이전: 모든 IPC 호출(saveConfig 등)이 발행 취소 후 영구 차단되는 버그
+        // 수정: 발행 자동화 메서드에만 체크하여 다른 IPC는 정상 동작
+        const isPublishMethod = apiMethod === 'runAutomation';
+
         for (let attempt = 0; attempt <= retryCount; attempt++) {
             // ✅ [2026-03-11 FIX] 재시도 루프에서 취소 체크 (최악 32분 취소 불가 방지)
-            if ((window as any).stopFullAutoPublish === true) {
+            // ✅ [v1.4.39 FIX] 발행 메서드에만 적용 — saveConfig 등은 통과
+            if (isPublishMethod && (window as any).stopFullAutoPublish === true) {
                 console.log(`[API] ${apiMethod} 취소됨 (사용자 요청)`);
                 return {
                     success: false,
@@ -320,7 +326,8 @@ export class EnhancedApiClient {
                     toastManager.warning(`⚠️ 연결 재시도 중... (${attempt + 1}/${retryCount})`, 2000);
 
                     // ✅ [2026-03-11 FIX] 재시도 대기 전 취소 체크
-                    if ((window as any).stopFullAutoPublish === true) {
+                    // ✅ [v1.4.39 FIX] 발행 메서드에만 적용
+                    if (isPublishMethod && (window as any).stopFullAutoPublish === true) {
                         console.log(`[API] ${apiMethod} 취소됨 (재시도 대기 중)`);
                         return {
                             success: false,
