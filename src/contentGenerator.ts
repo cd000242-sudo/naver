@@ -6520,11 +6520,20 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             maxOutputTokens: 16000,
           },
         };
+        // ✅ [v1.4.34 FIX] URL 모드 손님 PC 호출 실패 우회
+        // 기존: URL 모드(grounding OFF)는 responseMimeType: 'application/json' 활성화
+        //       → 일부 손님 PC에서 SDK fetch 단계 실패 (body 형태/크기/JSON 모드 조합)
+        //       → 키워드 모드(grounding ON)는 동일 손님 PC에서 정상 작동
+        // 변경: URL 모드도 grounding ON으로 통일 — 키워드 모드와 동일 request 형태
+        //       응답 cleaner(6571~6580)가 이미 markdown 코드블록 + { } 추출 처리하므로
+        //       JSON 모드 없어도 응답 파싱 안전
+        // 비용: +$0.035/글 (grounding) — 손님 사고 해결 가치가 더 큼
         if (useGrounding) {
           requestConfig.tools = [{ googleSearch: {} }];
         } else {
-          // Grounding OFF 시 JSON 모드 사용 가능 (추가 비용 절감)
-          requestConfig.generationConfig.responseMimeType = 'application/json';
+          // ✅ [v1.4.34] JSON 모드 제거 — 손님 PC fetch 거부 우회
+          // (이전: requestConfig.generationConfig.responseMimeType = 'application/json';)
+          requestConfig.tools = [{ googleSearch: {} }];
         }
         const streamPromise = model.generateContentStream(requestConfig);
 
