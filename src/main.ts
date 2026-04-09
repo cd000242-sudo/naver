@@ -1066,6 +1066,33 @@ function getIsPackaged(): boolean {
 let mainWindow: BrowserWindow | null = null;
 let tray: Tray | null = null; // ✅ 시스템 트레이
 
+// ✅ [v1.4.37] 메인 프로세스 콘솔 → 렌더러 DevTools 콘솔 미러링 (디버깅용)
+// 모든 console.log/warn/error 호출이 렌더러 DevTools 콘솔에도 [MAIN] 프리픽스로 표시됨
+// → 사용자가 DevTools 콘솔만 캡처해도 메인 프로세스 로그까지 모두 수집 가능
+const _origConsole = {
+  log: console.log.bind(console),
+  warn: console.warn.bind(console),
+  error: console.error.bind(console),
+};
+function _forwardConsoleToRenderer(level: 'log' | 'warn' | 'error', args: any[]): void {
+  try {
+    const win = mainWindow && !mainWindow.isDestroyed() ? mainWindow : BrowserWindow.getAllWindows()[0];
+    if (!win || win.isDestroyed()) return;
+    const msg = args.map(a => {
+      if (a instanceof Error) return a.stack || a.message;
+      if (typeof a === 'object' && a !== null) {
+        try { return JSON.stringify(a); } catch { return String(a); }
+      }
+      return String(a);
+    }).join(' ');
+    win.webContents.send('main:console', { level, msg });
+  } catch { /* 렌더러 미준비 또는 파괴됨 — 무시 */ }
+}
+console.log = (...args: any[]): void => { _origConsole.log(...args); _forwardConsoleToRenderer('log', args); };
+console.warn = (...args: any[]): void => { _origConsole.warn(...args); _forwardConsoleToRenderer('warn', args); };
+console.error = (...args: any[]): void => { _origConsole.error(...args); _forwardConsoleToRenderer('error', args); };
+_origConsole.log('[Main] ✅ 콘솔 미러링 활성화 — 모든 main 로그가 렌더러 DevTools에 표시됩니다');
+
 // ✅ [레거시 호환] 전역 변수 유지 (AutomationService와 동기화됨)
 let automation: NaverBlogAutomation | null = null;
 const automationMap = new Map<string, NaverBlogAutomation>();

@@ -1454,10 +1454,20 @@ function updateProgress(percent: number, status: string): void {
     // ✅ [2026-03-02] 이미지 생성 실시간 로그 리스너 (429/503/쓰로틀 대기 등)
     if (window.api && window.api.on) {
       window.api.on('image-generation:log', (message: string) => {
+        // ✅ [v1.4.37] DevTools 콘솔에도 출력 — 디버깅용 로그 수집 편의
+        console.log(`[ImageGen] ${message}`);
         appendLog(`🖼️ ${message}`);
         if (isContinuousMode) {
           try { updateContinuousProgressModal({ log: `🖼️ ${message}` }); } catch { /* 무시 */ }
         }
+      });
+
+      // ✅ [v1.4.37] 메인 프로세스 콘솔 → 렌더러 DevTools 콘솔 미러링
+      window.api.on('main:console', (data: { level: string; msg: string }) => {
+        const fn = (data.level === 'warn' ? console.warn
+                  : data.level === 'error' ? console.error
+                  : console.log).bind(console);
+        fn(`[MAIN] ${data.msg}`);
       });
     }
     // ✅ 예약 발행 완료 후 자동 초기화 리스너
