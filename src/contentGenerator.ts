@@ -8982,11 +8982,17 @@ export async function generateStructuredContent(
 
     } catch (error) {
       // 오류 처리
+      const errMsg = (error as Error).message || '알 수 없는 오류';
+
+      // ✅ [v1.4.41] 매번 lastFailReason 설정 (마지막 시도 포함) — "알 수 없음" 방지
+      lastFailReason = errMsg.substring(0, 300);
+
       if (attempt === MAX_ATTEMPTS) {
         // ✅ 실패 통계 업데이트
         stats.failed++;
         const successRate = stats.total > 0 ? Math.round((stats.success / stats.total) * 100) : 0;
         console.error(`[ContentGenerator] ❌ 실패! (최대 시도 횟수 초과) | 전체 성공률: ${successRate}% (${stats.success}/${stats.total})`);
+        console.error(`[ContentGenerator] 마지막 에러: ${errMsg}`);
 
         // 통계 파일 저장
         try {
@@ -8995,11 +9001,11 @@ export async function generateStructuredContent(
           console.warn('[ContentGenerator] 통계 파일 저장 실패:', (saveError as Error).message);
         }
 
-        throw error;
+        // ✅ [v1.4.41] 원본 에러 메시지를 보존하여 throw — 사용자가 진짜 원인을 알 수 있도록
+        throw new Error(`콘텐츠 생성 실패 (엔진: ${provider}, ${attempt + 1}회 시도): ${errMsg}`);
       }
       // 재시도 가능한 오류면 계속
-      lastFailReason = `에러 발생: ${(error as Error).message?.substring(0, 150)}`;
-      console.warn(`[시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}] 오류 발생, 재시도 중:`, (error as Error).message);
+      console.warn(`[시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}] 오류 발생, 재시도 중:`, errMsg);
       extraInstruction = `\n\n⚠️ 이전 시도에서 오류가 발생했습니다. JSON 형식을 정확히 지켜주세요.`;
     }
   }
@@ -9016,7 +9022,9 @@ export async function generateStructuredContent(
     console.warn('[ContentGenerator] 통계 파일 저장 실패:', (saveError as Error).message);
   }
 
-  throw new Error(`콘텐츠 생성 실패 (엔진: ${provider}, ${MAX_ATTEMPTS + 1}회 시도 후 실패) [마지막 실패 원인: ${lastFailReason || '알 수 없음'}]`);
+  // ✅ [v1.4.41] 의미 있는 에러 메시지 — "알 수 없음" 대신 구체적 가이드
+  const finalReason = lastFailReason || '루프가 비정상 종료됨 (개발자 콘솔 로그 확인 필요)';
+  throw new Error(`콘텐츠 생성 실패 (엔진: ${provider}, ${MAX_ATTEMPTS + 1}회 시도 후 실패): ${finalReason}`);
 }
 
 function optimizeForViral(content: StructuredContent, source: ContentSource): StructuredContent {

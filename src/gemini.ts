@@ -312,7 +312,19 @@ export async function generateBlogContent(
           });
 
           console.log(`[Gemini Request] Model: ${modelName} [systemInstruction: ON, Search Grounding: ON], Topic: ${splitPrompt.user.substring(0, 50)}...`);
-          const apiResult = await model.generateContent(splitPrompt.user);
+
+          // ✅ [v1.4.41] 5분 timeout 추가 — 30분~1시간 hang 방지
+          // Google이 503/지연으로 응답 안 주면 무한 대기하던 버그 차단
+          const GEMINI_TIMEOUT_MS = 5 * 60 * 1000; // 5분
+          const apiResult = await Promise.race([
+            model.generateContent(splitPrompt.user),
+            new Promise<never>((_, reject) =>
+              setTimeout(
+                () => reject(new Error(`GEMINI_TIMEOUT:Gemini ${modelName} 응답 시간 초과 (5분). Google 서버 일시 장애로 보입니다. 5~10분 후 다시 시도해주세요.`)),
+                GEMINI_TIMEOUT_MS
+              )
+            )
+          ]);
           const text = apiResult.response.text();
 
           if (!text?.trim()) {
@@ -362,6 +374,12 @@ export async function generateBlogContent(
         } catch (error) {
           const errorMessage = (error as Error).message;
           lastError = error as Error;
+
+          // ✅ [v1.4.41] Timeout 즉시 중단 — 다른 모델 폴백 안 함 (사용자가 선택한 모델 존중)
+          if (errorMessage.startsWith('GEMINI_TIMEOUT:')) {
+            console.error(`[Gemini Timeout] ${modelName} 5분 초과 → 즉시 중단`);
+            throw new Error(errorMessage.replace('GEMINI_TIMEOUT:', ''));
+          }
 
           // 즉시 중단 (API 키 오류만)
           if (errorMessage.includes('API key')) {
