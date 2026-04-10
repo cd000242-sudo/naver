@@ -7915,6 +7915,7 @@ export async function generateStructuredContent(
 
   // 글자수에 따라 최적 provider 자동 선택
   let provider = options.provider ?? source.generator ?? 'gemini';
+  const userSelectedProvider = provider; // ✅ [2026-04-11] 사용자가 선택한 원래 엔진 보존 (폴백 방지용)
   // ✅ 기본 글자수: 3000자 (풍부한 내용 + 최적 분량, 양보다 질 최극상)
   const minChars = options.minChars ?? 2500; // ✅ [v1.4.14] 3000→2500 (출력 토큰 -15%, SEO 안전 1500자 이상 유지)
 
@@ -8308,73 +8309,16 @@ export async function generateStructuredContent(
             continue;
           }
 
-          // ✅ [2026-03-11 FIX] Gemini 네트워크/타임아웃 재시도 소진 → 타 엔진 폴백
-          // 기존: 재시도 소진 후 바로 throw → 글생성 실패
-          // 수정: Claude/OpenAI로 즉시 전환하여 재시도
-          if (provider === 'gemini' && networkErrorCount > GEMINI_MAX_RETRIES) {
-            const config = await loadConfig();
-            const hasClaude = !!(config.claudeApiKey || process.env.CLAUDE_API_KEY);
-            const hasOpenAI = !!(config.openaiApiKey || process.env.OPENAI_API_KEY);
-            const hasPerplexity = !!(config.perplexityApiKey || process.env.PERPLEXITY_API_KEY);
-
-            if (hasOpenAI) {
-              provider = 'openai';
-              networkErrorCount = 0;
-              console.log('🚀 [Fallback] Gemini 타임아웃 → OpenAI로 즉시 전환합니다.');
-              continue;
-            } else if (hasClaude) {
-              provider = 'claude';
-              networkErrorCount = 0;
-              console.log('🚀 [Fallback] Gemini 타임아웃 → Claude로 즉시 전환합니다.');
-              continue;
-            } else if (hasPerplexity) {
-              provider = 'perplexity';
-              networkErrorCount = 0;
-              console.log('🚀 [Fallback] Gemini 타임아웃 → Perplexity로 즉시 전환합니다.');
-              continue;
-            }
-            // 타 엔진 없으면 기존대로 throw
-          }
+          // ✅ [2026-04-11 FIX] 네트워크 재시도 소진 → 타 엔진 자동 폴백 제거
+          // callGemini 내부에서 이미 모델 순환(Flash→Lite→Pro)을 수행하므로,
+          // 여기서 추가 재시도 없이 즉시 throw하여 사용자에게 실패 원인 표시
         }
 
-        // ✅ [신규] 할당량 초과(429) 시 타 엔진 폴백 전략
-        // "사용량 초과"는 gemini.ts에서 한글화된 메시지
+        // ✅ [2026-04-11 FIX] 할당량 초과(429) — 타 엔진 자동 폴백 제거
+        // callGemini 내부에서 이미 모델별 429 재시도 + 순환을 처리하므로,
+        // 여기까지 올라온 429는 모든 모델이 소진된 상태. 즉시 throw.
         if (errorMsg.includes('429') || errorMsg.includes('quota') || errorMsg.includes('limit: 0') || errorMsg.includes('사용량 초과')) {
-          console.warn(`[ContentGenerator] ${provider} 할당량 초과 감지. 타 엔진 전환 확인 중...`);
-
-          if (provider === 'gemini') {
-            const config = await loadConfig(); // 실시간 설정 로드
-            const hasClaude = !!(config.claudeApiKey || process.env.CLAUDE_API_KEY);
-            const hasOpenAI = !!(config.openaiApiKey || process.env.OPENAI_API_KEY);
-
-            if (hasClaude) {
-              provider = 'claude';
-              console.log('🚀 [Fallback] Gemini 대신 Claude로 엔진을 전환하여 즉시 재시도합니다.');
-              if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
-                (window as any).appendLog('🚀 Gemini 할당량 부족으로 Claude 엔진으로 전환하여 재시도합니다.');
-              }
-              continue;
-            } else if (hasOpenAI) {
-              provider = 'openai';
-              console.log('🚀 [Fallback] Gemini 대신 OpenAI로 엔진을 전환하여 즉시 재시도합니다.');
-              if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
-                (window as any).appendLog('🚀 Gemini 할당량 부족으로 OpenAI 엔진으로 전환하여 재시도합니다.');
-              }
-              continue;
-            } else {
-              // ✨ [신규] 타 엔진이 없는 경우: 제미니 내부 모델(Pro -> Flash -> Exp) 전환에 의존
-              if (attempt < MAX_ATTEMPTS) {
-                const retryWait = 30000; // 30초 대기 (할당량 초기화 시간 확보)
-                const logMsg = `타 엔진(Claude/OpenAI)이 설정되지 않아 Gemini 내부 모델들을 순환하며 재시도합니다. ${retryWait / 1000}초 후 다시 시작합니다.`;
-                console.warn(`⚠️ [Gemini ONLY] ${logMsg}`);
-                if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
-                  (window as any).appendLog(`⌛ ${logMsg}`);
-                }
-                await new Promise(r => setTimeout(r, retryWait));
-                continue;
-              }
-            }
-          }
+          console.warn(`[ContentGenerator] ${provider} 할당량 초과 — 모든 내부 모델 소진. 즉시 실패 처리.`);
         }
 
         // 네트워크 에러가 아닌 경우 (API 키 문제 등) 그대로 throw
@@ -9002,7 +8946,8 @@ export async function generateStructuredContent(
         }
 
         // ✅ [v1.4.41] 원본 에러 메시지를 보존하여 throw — 사용자가 진짜 원인을 알 수 있도록
-        throw new Error(`콘텐츠 생성 실패 (엔진: ${provider}, ${attempt + 1}회 시도): ${errMsg}`);
+        // ✅ [2026-04-11] userSelectedProvider 사용 — 폴백으로 provider가 바뀌어도 원래 엔진명 표시
+        throw new Error(`콘텐츠 생성 실패 (엔진: ${userSelectedProvider}, ${attempt + 1}회 시도): ${errMsg}`);
       }
       // 재시도 가능한 오류면 계속
       console.warn(`[시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}] 오류 발생, 재시도 중:`, errMsg);
@@ -9023,8 +8968,9 @@ export async function generateStructuredContent(
   }
 
   // ✅ [v1.4.41] 의미 있는 에러 메시지 — "알 수 없음" 대신 구체적 가이드
+  // ✅ [2026-04-11] userSelectedProvider 사용 — 사용자가 선택한 엔진명 정확히 표시
   const finalReason = lastFailReason || '루프가 비정상 종료됨 (개발자 콘솔 로그 확인 필요)';
-  throw new Error(`콘텐츠 생성 실패 (엔진: ${provider}, ${MAX_ATTEMPTS + 1}회 시도 후 실패): ${finalReason}`);
+  throw new Error(`콘텐츠 생성 실패 (엔진: ${userSelectedProvider}, ${MAX_ATTEMPTS + 1}회 시도 후 실패): ${finalReason}`);
 }
 
 function optimizeForViral(content: StructuredContent, source: ContentSource): StructuredContent {
