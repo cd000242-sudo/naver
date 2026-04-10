@@ -1165,7 +1165,20 @@ export async function generateSingleImageWithImageFx(
         sendImageLog('🔑 [ImageFX] 토큰 갱신 중...');
         cachedToken = null;
         cachedTokenExpiry = null;
+        // ✅ [v1.4.40] 401이 3회 연속 실패면 명확히 분류
+        if (attempt === MAX_RETRIES) {
+          lastError = new Error('IMAGEFX_AUTH_EXPIRED:Google 세션이 만료되었습니다. 환경설정 → ImageFX → "Google 계정 변경"으로 다시 로그인해주세요.');
+        }
         continue;
+      }
+
+      // ✅ [v1.4.40] 쿼터 초과 (429) — Google ImageFX는 명시적 한도 없이 동적 차단
+      if (errorCode === 'HTTP_429') {
+        console.warn(`[ImageFX] 🚫 쿼터 초과 (HTTP 429) — 시도 ${attempt}/${MAX_RETRIES}`);
+        sendImageLog('🚫 [ImageFX] 시간당 한도 초과 — 1시간 후 다시 시도해주세요.');
+        lastError = new Error('IMAGEFX_QUOTA_EXCEEDED:Google ImageFX 시간당 한도를 초과했습니다. 약 1시간 후 다시 시도하거나, 다른 이미지 엔진(Pollinations/DeepInfra)으로 전환해주세요.');
+        // 429는 재시도해도 의미 없음 — 즉시 종료
+        return null;
       }
 
       // 안전 필터 차단
@@ -1173,6 +1186,10 @@ export async function generateSingleImageWithImageFx(
         console.warn(`[ImageFX] 🛡️ 안전 필터 차단 (시도 ${attempt}) → 프롬프트 순화`);
         sendImageLog('🛡️ [ImageFX] 안전 필터 — 프롬프트 순화 중...');
         currentPrompt = sanitizePromptForSafety(currentPrompt);
+        // ✅ [v1.4.40] 마지막 시도에서도 차단되면 명확히 분류
+        if (attempt === MAX_RETRIES) {
+          lastError = new Error('IMAGEFX_SAFETY_BLOCK:Google 안전 필터가 이 프롬프트를 차단했습니다. 정부지원/금융/의료/정치 키워드는 자주 차단됩니다. 다른 키워드로 시도하거나 다른 이미지 엔진을 사용해주세요.');
+        }
         continue;
       }
 
@@ -1182,7 +1199,29 @@ export async function generateSingleImageWithImageFx(
         console.warn(`[ImageFX] ⏳ 서버 과부하 (시도 ${attempt}) → ${waitSec}초 대기`);
         sendImageLog(`⏳ [ImageFX] 서버 과부하 — ${waitSec}초 대기 중...`);
         await new Promise(resolve => setTimeout(resolve, waitSec * 1000));
+        // ✅ [v1.4.40] 마지막 503이면 명확히 분류
+        if (attempt === MAX_RETRIES) {
+          lastError = new Error('IMAGEFX_SERVER_BUSY:Google ImageFX 서버가 일시적으로 과부하 상태입니다. 잠시 후(5~30분) 다시 시도하거나 다른 시간대에 시도해주세요.');
+        }
         continue;
+      }
+
+      // ✅ [v1.4.40] HTTP 4xx 일반 (403 등) — 차단/접근 거부
+      if (errorCode.startsWith('HTTP_4')) {
+        console.error(`[ImageFX] ❌ 접근 거부 (${errorCode}): ${errorDetail.substring(0, 100)}`);
+        lastError = new Error(`IMAGEFX_FORBIDDEN:Google ImageFX 접근이 거부되었습니다 (${errorCode}). 한국 IP 차단 또는 계정 제한일 수 있습니다. 테더링 IP 변경 또는 다른 Google 계정을 시도해주세요.`);
+        return null;
+      }
+
+      // ✅ [v1.4.40] HTTP 5xx (500/502/504 등)
+      if (errorCode.startsWith('HTTP_5')) {
+        console.error(`[ImageFX] ❌ Google 서버 오류 (${errorCode})`);
+        lastError = new Error(`IMAGEFX_SERVER_ERROR:Google ImageFX 서버 오류 (${errorCode}). 잠시 후 다시 시도해주세요.`);
+        if (attempt < MAX_RETRIES) {
+          await new Promise(resolve => setTimeout(resolve, 5000));
+          continue;
+        }
+        return null;
       }
 
       // 기타 에러
@@ -1959,6 +1998,8 @@ export async function generateWithImageFx(
   const results: GeneratedImage[] = [];
   let consecutiveFailures = 0;
   const MAX_CONSECUTIVE_FAILURES = 3; // 3연속 실패 시 중단
+  // ✅ [v1.4.40] 마지막 분류된 에러 보존 — 0개 결과일 때 명확한 사유로 throw
+  let lastClassifiedError: Error | null = null;
 
   for (let i = 0; i < items.length; i++) {
     // 중지 체크
@@ -2025,12 +2066,27 @@ export async function generateWithImageFx(
       consecutiveFailures++;
       console.error(`[ImageFX] ❌ [${i + 1}/${items.length}] "${heading}" 예외: ${error.message}`);
       sendImageLog(`❌ [ImageFX] "${heading}" 오류: ${error.message}`);
+      // ✅ [v1.4.40] 분류된 에러는 보존 (IMAGEFX_QUOTA_EXCEEDED 등)
+      if (error.message && error.message.startsWith('IMAGEFX_')) {
+        lastClassifiedError = error;
+        // 쿼터/접근 거부는 즉시 중단 (재시도 무의미)
+        if (error.message.startsWith('IMAGEFX_QUOTA_EXCEEDED') ||
+            error.message.startsWith('IMAGEFX_FORBIDDEN') ||
+            error.message.startsWith('IMAGEFX_AUTH_EXPIRED')) {
+          console.error('[ImageFX] ⛔ 회복 불가능한 오류 → 즉시 중단');
+          break;
+        }
+      }
     }
 
     // 연속 실패 시 중단
     if (consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
-      console.error(`[ImageFX] ⛔ ${MAX_CONSECUTIVE_FAILURES}연속 실패 → 배치 중단 (Google 로그인 확인 필요)`);
-      sendImageLog(`⛔ [ImageFX] 연속 실패 — Google 로그인 상태를 확인해주세요.`);
+      console.error(`[ImageFX] ⛔ ${MAX_CONSECUTIVE_FAILURES}연속 실패 → 배치 중단`);
+      // ✅ [v1.4.40] 분류된 에러가 있으면 그걸 사용, 없으면 일반 메시지
+      if (!lastClassifiedError) {
+        lastClassifiedError = new Error('IMAGEFX_UNKNOWN_FAILURE:Google ImageFX 3연속 실패. Google 세션 상태 또는 시간당 한도를 확인해주세요.');
+      }
+      sendImageLog(`⛔ [ImageFX] 연속 실패 — ${lastClassifiedError.message.replace(/^IMAGEFX_[A-Z_]+:/, '')}`);
       break;
     }
 
@@ -2043,6 +2099,11 @@ export async function generateWithImageFx(
   const successRate = items.length > 0 ? Math.round((results.length / items.length) * 100) : 0;
   console.log(`[ImageFX] 🎯 최종 결과: ${results.length}/${items.length}개 성공 (${successRate}%)`);
   sendImageLog(`🎯 [ImageFX] 완료: ${results.length}/${items.length}개 생성 (${successRate}%)`);
+
+  // ✅ [v1.4.40] 결과 0개 + 분류된 에러 있음 → 사용자에게 명확한 사유 전달
+  if (results.length === 0 && lastClassifiedError) {
+    throw lastClassifiedError;
+  }
 
   return results;
 }

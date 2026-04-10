@@ -511,14 +511,30 @@ export async function generateImagesForAutomation(
           }
         }
       } else if (result.images && result.images.length === 0) {
-        throw new Error('이미지 생성 결과가 비어있음');
+        // ✅ [v1.4.40] 메인의 분류된 ImageFX 에러(message)가 있으면 그대로 사용
+        const detailMsg = result.message || '이미지 생성 결과가 비어있음';
+        throw new Error(detailMsg);
       } else {
         throw new Error(result.message || '이미지 생성 결과 없음');
       }
 
     } catch (error) {
       lastError = error as Error;
+      const errMsg = lastError.message || '';
       console.error(`[generateImagesForAutomation] 시도 ${attempt}/${MAX_RETRIES} 실패:`, error);
+
+      // ✅ [v1.4.40] 회복 불가능한 ImageFX 오류는 즉시 중단 (재시도 무의미)
+      if (errMsg.includes('[ImageFX]') && (
+        errMsg.includes('시간당 한도') ||
+        errMsg.includes('한도를 초과') ||
+        errMsg.includes('세션이 만료') ||
+        errMsg.includes('접근이 거부') ||
+        errMsg.includes('안전 필터')
+      )) {
+        console.error(`[generateImagesForAutomation] ⛔ 회복 불가능한 ImageFX 오류 → 재시도 중단`);
+        onProgress?.(`⛔ ${errMsg.substring(0, 200)}`);
+        throw lastError;
+      }
 
       if (attempt < MAX_RETRIES) {
         // ✅ [2026-01-24 FIX] 대기 시간 증가: 5초, 10초, 15초 (API 레이트 리밋 대응)
