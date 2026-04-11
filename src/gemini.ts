@@ -45,13 +45,11 @@ const BASE_FALLBACK_MODELS = [
   'gemini-2.5-pro',
 ];
 
-// ✅ [2026-03-18] UI 선택 모델을 최우선 배치하는 동적 폴백 체인
+// ✅ [v1.4.44] 사용자 선택 모델만 사용 — 타 모델 자동 폴백 제거
+// 유료 사용자가 Flash를 선택했는데 Flash Lite로 다운그레이드되는 문제 해결
 function getFallbackModels(): string[] {
   const userModel = resolveModelName();
-  // 사용자 선택 모델이 기본 폴백 목록에 이미 있으면 맨 앞으로 이동
-  // 없으면 맨 앞에 추가 (새 커스텀 모델 대응)
-  const rest = BASE_FALLBACK_MODELS.filter(m => m !== userModel);
-  return [userModel, ...rest];
+  return [userModel]; // 사용자 선택 모델만 반환
 }
 
 // ✅ 런타임에서 설정된 모델 (main.ts에서 설정)
@@ -278,21 +276,22 @@ export async function generateBlogContent(
     throw new Error('GEMINI_API_KEY가 설정되어 있지 않습니다.');
   }
 
-  const maxRetries = 2;  // ✅ 4 → 2 (과도한 재시도 방지)
+  const maxRetries = 2;
   const baseDelay = 1000;
 
   let lastError: Error | null = null;
 
-
+  // ✅ [v1.4.44] 반드시 성공 전략 — limit:0 시 폴백 모델 동적 추가
+  const userModel = resolveModelName();
+  const modelsToTry = [userModel];
+  const fallbackCandidates = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'].filter(m => m !== userModel);
 
   // 재시도 루프
   for (let retry = 0; retry < maxRetries; retry++) {
-    // 모델 폴백 루프
-    const fallbackModels = getFallbackModels();
-    for (let modelIdx = 0; modelIdx < fallbackModels.length; modelIdx++) {
-      const modelName = fallbackModels[modelIdx];
+    for (let modelIdx = 0; modelIdx < modelsToTry.length; modelIdx++) {
+      const modelName = modelsToTry[modelIdx];
       let perModelRetryCount = 0;
-      const PER_MODEL_MAX = 1; // ✅ 2 → 1 (빠른 모델 전환)
+      const PER_MODEL_MAX = 4; // ✅ [v1.4.44] 충분한 재시도
 
       while (perModelRetryCount < PER_MODEL_MAX) {
         try {
@@ -386,31 +385,52 @@ export async function generateBlogContent(
             throw new Error(translateGeminiError(error as Error));
           }
 
-          // 할당량 초과(429) 처리
-          if (errorMessage.includes('quota exceeded') || errorMessage.includes('429') || errorMessage.includes('limit: 0') || errorMessage.includes('Too Many Requests')) {
-            perModelRetryCount++;
+          const isQuota = errorMessage.includes('429') || errorMessage.includes('quota') || errorMessage.includes('Too Many Requests');
+          const isLimitZero = errorMessage.includes('limit: 0') || errorMessage.includes('free_tier');
+          const isServerError = errorMessage.includes('503') || errorMessage.includes('500') || errorMessage.includes('unavailable');
 
-            let waitMs = 5000; // ✅ 15초 → 5초 (빠른 응답)
+          // ✅ [v1.4.44] limit:0 → 폴백 모델 추가 후 전환
+          if (isQuota && isLimitZero) {
+            console.warn(`🚫 [Gemini] ${modelName} 무료 할당량 0 → 폴백 모델 전환`);
+            for (const fb of fallbackCandidates) {
+              if (!modelsToTry.includes(fb)) { modelsToTry.push(fb); }
+            }
+            break;
+          }
+
+          // ✅ [v1.4.44] 429 RPM → 지수 백오프 재시도
+          if (isQuota) {
+            perModelRetryCount++;
+            let waitMs = Math.min(5000 * Math.pow(1.5, perModelRetryCount - 1), 45000);
             const retryMatch = errorMessage.match(/retry in ([\d.]+)(s|ms)/i);
             if (retryMatch) {
               const val = parseFloat(retryMatch[1]);
               const unit = retryMatch[2].toLowerCase();
               waitMs = (unit === 's' ? val * 1000 : val) + 1000;
             }
-
             if (perModelRetryCount < PER_MODEL_MAX) {
-              console.warn(`⏳ [Gemini Quota] ${modelName} 바쁨. ${Math.round(waitMs / 1000)}초 후 동일 모델 재시도...`);
+              console.warn(`⏳ [Gemini] ${modelName} 바쁨. ${Math.round(waitMs / 1000)}초 후 재시도 (${perModelRetryCount}/${PER_MODEL_MAX})`);
               await new Promise(resolve => setTimeout(resolve, waitMs));
               continue;
-            } else {
-              console.warn(`🚀 [Gemini Switch] ${modelName} 시도 끝. 다음 모델로 전환합니다.`);
-              break; // while 종료 -> 다음 모델 for 루프로
             }
+            break;
           }
 
-          // Rate limit 또는 기타 오류 -> 다음 모델로
-          console.warn(`⚠️ ${modelName} 오류: ${errorMessage.substring(0, 50)}...`);
-          break; // while 종료 -> 다음 모델로
+          // ✅ [v1.4.44] 503/500 서버 에러 → 짧은 대기 후 재시도
+          if (isServerError) {
+            perModelRetryCount++;
+            if (perModelRetryCount < PER_MODEL_MAX) {
+              const waitMs = 3000 + perModelRetryCount * 2000;
+              console.warn(`🔧 [Gemini] ${modelName} 서버 에러 → ${Math.round(waitMs/1000)}초 후 재시도 (${perModelRetryCount}/${PER_MODEL_MAX})`);
+              await new Promise(resolve => setTimeout(resolve, waitMs));
+              continue;
+            }
+            break;
+          }
+
+          // 기타 오류
+          console.warn(`⚠️ ${modelName} 오류: ${errorMessage.substring(0, 80)}`);
+          break;
         }
       }
     }

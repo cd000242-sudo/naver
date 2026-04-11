@@ -1257,6 +1257,10 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
     // ✅ [2026-02-09] 카테고리 자동 선택 (공통 메서드 사용)
     await self.selectCategoryInPublishModal(frame, page);
 
+    // ✅ [2026-04-11 FIX] 카테고리 선택 후 모달 안정화 대기
+    // 카테고리 드롭다운 닫기 클릭이 모달 DOM을 일시적으로 불안정하게 만들 수 있음
+    await self.delay(1000);
+
     // 2단계: 예약발행 라디오 버튼 선택 (정확한 셀렉터!)
     self.log('📌 2단계: 예약발행 옵션 선택');
 
@@ -1266,17 +1270,22 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
       'input[type="radio"][value="pre"]',
       'label[for="radio_time2"]',  // 레이블 클릭도 가능
     ];
-    // ✅ [2026-03-24 FIX] frame + page 양쪽에서 찾기
-    let scheduleRadio = await self.waitForAnySelector(frame, scheduleRadioSelectors, 5000);
-    if (!scheduleRadio) {
+
+    // ✅ [2026-04-11 FIX] 라디오 버튼 탐색을 함수로 추출 — 재시도 가능하게
+    const findScheduleRadio = async (): Promise<any> => {
+      // 1차: frame에서 CSS 셀렉터로 찾기 (타임아웃 10초로 증가)
+      let radio = await self.waitForAnySelector(frame, scheduleRadioSelectors, 10000);
+      if (radio) return radio;
+
+      // 2차: page에서 CSS 셀렉터로 찾기
       self.log('⚠️ frame에서 예약 라디오 버튼 미발견, page에서 재시도...');
-      scheduleRadio = await self.waitForAnySelectorPage(page, scheduleRadioSelectors, 5000);
-    }
-    // ✅ [2026-03-24 FIX] 텍스트 기반 폴백 — '예약' 텍스트가 포함된 label 또는 라디오 찾기
-    if (!scheduleRadio) {
+      radio = await self.waitForAnySelectorPage(page, scheduleRadioSelectors, 5000);
+      if (radio) return radio;
+
+      // 3차: 텍스트 기반 폴백
       self.log('⚠️ 셀렉터 실패 → 텍스트 기반 예약 라디오 탐색...');
       for (const ctx of [frame, page]) {
-        scheduleRadio = await ctx.evaluateHandle(() => {
+        radio = await ctx.evaluateHandle(() => {
           // 방법 1: label 텍스트로 찾기
           const labels = document.querySelectorAll('label');
           for (const label of labels) {
@@ -1290,15 +1299,24 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
           if (radios.length >= 2) return radios[1];
           return null;
         }).catch(() => null);
-        if (scheduleRadio) {
-          const isEl = await scheduleRadio.evaluate((el: any) => el instanceof HTMLElement).catch(() => false);
+        if (radio) {
+          const isEl = await radio.evaluate((el: any) => el instanceof HTMLElement).catch(() => false);
           if (isEl) {
             self.log('✅ 텍스트 기반 예약 라디오 발견!');
-            break;
+            return radio;
           }
-          scheduleRadio = null;
+          radio = null;
         }
       }
+      return null;
+    };
+
+    // ✅ [2026-04-11 FIX] 1차 시도 실패 시, 모달 안정화 후 재시도 (최대 2회)
+    let scheduleRadio = await findScheduleRadio();
+    if (!scheduleRadio) {
+      self.log('⚠️ 1차 예약 라디오 탐색 실패 → 2초 대기 후 재시도...');
+      await self.delay(2000);
+      scheduleRadio = await findScheduleRadio();
     }
 
     if (!scheduleRadio) {

@@ -1517,9 +1517,18 @@ async function generateSingleImageWithGemini(
 
       // ✅ [2026-01-24 FIX] 에러 코드별 사용자 친화적 메시지
       const isQuotaError = errorMessage.includes('quota') || errorMessage.includes('429') || statusCode === 429;
+      const isLimitZero = errorMessage.includes('limit: 0') || errorMessage.includes('free_tier');
+      const isPaidOnly = errorMessage.includes('paid plan') || errorMessage.includes('paid plans');
       const isServerError = statusCode === 500 || statusCode === 503 || errorMessage.includes('500') || errorMessage.includes('503');
       const isAuthError = statusCode === 401 || statusCode === 403 || errorMessage.includes('401') || errorMessage.includes('403') || errorMessage.includes('API key');
       const isTimeoutError = errorMessage.includes('timeout') || errorMessage.includes('ETIMEDOUT') || errorMessage.includes('ECONNRESET');
+
+      // ✅ [v1.4.44] limit:0 또는 paid plans only → 재시도 무의미, 즉시 안내
+      if (isLimitZero || isPaidOnly) {
+        console.error(`[NanoBananaPro] 🚫 무료 할당량 0 또는 유료 전용 — 재시도 불가`);
+        sendImageLog(`🚫 나노바나나/Imagen은 Google이 무료 사용을 차단했습니다. 이미지 엔진을 ImageFX로 변경하세요 (무료). 참고: 유료 전환(Pay-as-you-go) 시 Flash/Flash-Lite 텍스트 무료 할당량도 사라지므로 주의!`);
+        return null; // 즉시 종료 — 재시도/폴백 모두 무의미
+      }
 
       // ✅ [2026-02-21] 최대 재시도 도달 → throw 대신 break → Imagen 4 최종 안전망으로 이동
       // ✅ [2026-03-09 FIX] 사용자 친화적 에러 메시지로 개선

@@ -101,16 +101,28 @@ function withStopCheck<T>(promise: Promise<T>): Promise<T> {
  */
 function cancellableSleep(ms: number): Promise<boolean> {
   return new Promise((resolve) => {
+    let resolved = false;
     const start = Date.now();
     const check = setInterval(() => {
+      if (resolved) return;
       if (!isContinuousMode || (window as any).stopFullAutoPublish) {
         clearInterval(check);
+        resolved = true;
         resolve(true); // true = cancelled
       } else if (Date.now() - start >= ms) {
         clearInterval(check);
+        resolved = true;
         resolve(false); // false = completed normally
       }
     }, 500);
+    // ✅ [2026-04-11 FIX] timeout 보험 — 극단적 상황에서 영구 대기 방지
+    setTimeout(() => {
+      if (!resolved) {
+        clearInterval(check);
+        resolved = true;
+        resolve(false);
+      }
+    }, ms + 2000);
   });
 }
 
@@ -270,6 +282,8 @@ export function startContinuousMode(urls: string[]): void {
   (window as any).stopFullAutoPublish = false;
   (window as any).stopBatchPublish = false;
   _continuousPublishCount = 0; // ✅ [2026-03-20] 캡차 방지 카운터 리셋
+  _consecutiveFailCount = 0;   // ✅ [2026-04-11 FIX] 이전 세션 연속 실패 카운터 잔존 방지
+  _captchaFailCount = 0;       // ✅ [2026-04-11 FIX] 이전 세션 캡차 실패 카운터 잔존 방지
   continuousQueue = [...urls];
   console.log('[Continuous] 큐에 저장된 URL들:', continuousQueue);
   appendLog(`🚀 연속 발행 모드 시작: ${urls.length}개 포스팅`);
@@ -302,7 +316,7 @@ function processNextInQueue(): void {
       value: continuousQueue[0],
       status: 'pending',
       imageSource: getFullAutoImageSource(), // ✅ [2026-02-11 FIX] V1 레거시 큐에도 imageSource 추가
-      publishMode: currentPublishMode,
+      publishMode: currentPublishMode || 'publish', // ✅ [2026-04-11 FIX] undefined 방지
       scheduleDate: currentPublishMode === 'schedule' ? currentScheduleDate : undefined
     };
   }
@@ -409,7 +423,13 @@ function processNextInQueue(): void {
   }, 1500);
 }
 
+let _isStoppingInProgress = false; // ✅ [2026-04-11] 더블클릭 방지 가드
 export function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): void {
+  if (_isStoppingInProgress) {
+    console.log('[Continuous] stopContinuousMode 중복 호출 무시');
+    return;
+  }
+  _isStoppingInProgress = true;
   console.log(`[Continuous] stopContinuousMode 호출됨 (사유: ${reason})`);
 
   // ✅ [2026-01-21] 이미지 생성 락 즉시 해제 - 중단 후 재시작 시 락 충돌 방지
@@ -441,6 +461,34 @@ export function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): vo
   currentStructuredContent = null;
   (window as any).generatedImages = [];
   (window as any).imageManagementGeneratedImages = [];
+  // ✅ [2026-04-11 FIX] 중지 시 전체 전역 상태 클리어 — 다음 발행 오염 방지
+  (window as any).collectedImages = [];
+  (window as any).crawledImages = [];
+  (window as any).headingImageMap = new Map();
+  (window as any).selectedThumbnail = null;
+  (window as any).manualThumbnailPath = null;
+  (window as any).currentHeadings = [];
+  (window as any).currentKeyword = '';
+  (window as any).currentTitle = '';
+  (window as any).currentSourceUrl = '';
+  (window as any)._keywordTitleOptions = null;
+  (window as any)._toneOverride = null;
+  (window as any).selectedContentType = null;
+  (window as any).customBannerPath = null;
+  (window as any).continuousPresetThumbnail = null;
+  (window as any).continuousPresetThumbnailPath = null;
+  // ✅ [2026-04-11 FIX] ImageManager + blob URL 메모리 해제
+  try {
+    if (typeof ImageManager !== 'undefined' && typeof ImageManager.clearAll === 'function') {
+      ImageManager.clearAll();
+    }
+    try { revokeAllImageDataUrls(); } catch (e) { /* ignore */ }
+  } catch (e) {
+    console.warn('[Continuous] 중지 시 ImageManager 정리 오류 (무시):', e);
+  }
+  // ✅ [2026-04-11 FIX] 연속 실패 카운터 리셋 — 중지 후 재시작 시 잔존 방지
+  _consecutiveFailCount = 0;
+  _captchaFailCount = 0;
 
   // ✅ [FIX] 진행 중(processing)이던 항목을 'cancelled' 상태로 변경
   continuousQueueV2.forEach(item => {
@@ -507,6 +555,7 @@ export function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): vo
   }
 
   renderQueueListV2(); // 큐 리스트 갱신
+  _isStoppingInProgress = false; // ✅ [2026-04-11] 가드 해제
 }
 
 export function scheduleNextPosting(): void {
@@ -3741,6 +3790,8 @@ async function startContinuousPublishingV2(): Promise<void> {
   (window as any).stopFullAutoPublish = false;
   (window as any).stopBatchPublish = false;
   _continuousPublishCount = 0; // ✅ [2026-03-20] 캡차 방지 카운터 리셋
+  _consecutiveFailCount = 0;   // ✅ [2026-04-11 FIX] 이전 세션 연속 실패 카운터 잔존 방지
+  _captchaFailCount = 0;       // ✅ [2026-04-11 FIX] 이전 세션 캡차 실패 카운터 잔존 방지
 
   // ✅ [FIX] 새로운 배치 시작 시 날짜가 바뀌었으면 일일 카운터 리셋
   const today = new Date().toDateString();
@@ -4126,7 +4177,7 @@ async function startContinuousPublishingV2(): Promise<void> {
           structuredContent: finalStructuredContent,
           imageSource: skipImages ? 'skip' : item.imageSource,
           skipImages,
-          publishMode: item.publishMode,
+          publishMode: item.publishMode || 'publish', // ✅ [2026-04-11 FIX] undefined 방지
           // ✅ [2026-03-11 FIX] scheduleDate + scheduleTime → 'YYYY-MM-DD HH:mm' 정규화
           // 방어 로직: scheduleDate에 T나 공백으로 시간이 포함되어 있어도 날짜만 추출 후 scheduleTime과 합성
           scheduleDate: item.publishMode === 'schedule' && item.scheduleDate
@@ -4235,10 +4286,29 @@ async function startContinuousPublishingV2(): Promise<void> {
     } catch (error) {
       const errMsg = (error as Error).message || '';
 
-      // ✅ [2026-03-21] instanceof로 정확한 사용자 취소 판별
-      if (error instanceof UserCancelledError || !isContinuousMode || (window as any).stopFullAutoPublish) {
+      // ✅ [2026-04-11 FIX] instanceof + 메시지 텍스트 양쪽으로 사용자 취소 판별
+      // 이미지 생성/콘텐츠 생성 등 하위 모듈에서 일반 Error로 취소를 throw하는 경우 대응
+      const isUserCancelled = error instanceof UserCancelledError
+        || errMsg.includes('취소했습니다')
+        || errMsg.includes('취소됨');
+      if (isUserCancelled || !isContinuousMode || (window as any).stopFullAutoPublish) {
         item.status = 'cancelled' as any;
         appendLog(`⏹️ 사용자 중지 → 발행을 종료합니다.`);
+        // ✅ [2026-04-11 FIX] 중지 시에도 메모리 정리 — 이미지/콘텐츠 잔존으로 다음 발행 오염 방지
+        try {
+          if (typeof ImageManager !== 'undefined' && typeof ImageManager.clearAll === 'function') {
+            ImageManager.clearAll();
+          }
+          try { revokeAllImageDataUrls(); } catch (e) { /* ignore */ }
+          (window as any).currentStructuredContent = null;
+          (window as any).generatedImages = [];
+          (window as any).imageManagementGeneratedImages = [];
+          (window as any).headingImageMap = new Map();
+          if (typeof clearImageGenerationLocks === 'function') clearImageGenerationLocks();
+          console.log('[Continuous] 🧹 중지 후 상태 정리 완료');
+        } catch (cleanupErr) {
+          console.warn('[Continuous] 중지 후 상태 정리 오류 (무시):', cleanupErr);
+        }
         updateContinuousProgressModal({
           step: '사용자 중지',
           log: '사용자가 발행을 중지했습니다.',
@@ -4345,6 +4415,9 @@ async function startContinuousPublishingV2(): Promise<void> {
           step: '🚨 연속 실패로 중단',
           log: `연속 ${_consecutiveFailCount}회 실패 → 자동 중단. 설정 확인 필요.`
         });
+        // ✅ [2026-04-11 FIX] stopContinuousMode 호출로 UI/상태 정리
+        // break만 하면 isContinuousMode=true로 남아 "모든 작업 완료" 메시지가 잘못 표시됨
+        stopContinuousMode('manual');
         break;
       }
     }
@@ -4399,6 +4472,8 @@ async function startContinuousPublishingV2(): Promise<void> {
     toastManager.success(`모든 발행이 완료되었습니다! (성공: ${successCount}, 실패: ${failCount})`);
 
     // ✅ [2026-01-29 개선] 발행 완료 후 전체 상태 초기화
+    _consecutiveFailCount = 0; // ✅ [2026-04-11 FIX] 완료 후 연속 실패 카운터 리셋
+    _captchaFailCount = 0;     // ✅ [2026-04-11 FIX] 완료 후 캡차 실패 카운터 리셋
     try {
       console.log('[Continuous] 🧹 발행 완료 → 전체 상태 초기화...');
 
@@ -4416,6 +4491,11 @@ async function startContinuousPublishingV2(): Promise<void> {
       if (typeof ImageManager !== 'undefined') {
         ImageManager.clearAll(); // ✅ [2026-03-29 FIX] clear→clearAll (currentStructuredContent도 초기화)
       }
+
+      // ✅ [2026-04-11 FIX] 완료된 항목의 동적 속성 정리 — 메모리 누적 방지
+      continuousQueueV2.forEach((item: any) => {
+        delete item._retryCount;
+      });
 
       console.log('[Continuous] ✅ 전체 상태 초기화 완료 → 새 발행 준비 완료');
     } catch (memErr) {
@@ -4465,6 +4545,8 @@ export function startContinuousModeEnhanced(queue: typeof continuousPublishQueue
   (window as any).stopFullAutoPublish = false;
   (window as any).stopBatchPublish = false;
   _continuousPublishCount = 0; // ✅ [2026-03-20] 캡차 방지 카운터 리셋
+  _consecutiveFailCount = 0;   // ✅ [2026-04-11 FIX] 이전 세션 연속 실패 카운터 잔존 방지
+  _captchaFailCount = 0;       // ✅ [2026-04-11 FIX] 이전 세션 캡차 실패 카운터 잔존 방지
   processNextInQueueEnhanced();
 }
 

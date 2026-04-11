@@ -2510,10 +2510,13 @@ JSON:
 
       const parsed = safeParseJson<any>(raw);
 
-      let selectedTitle = typeof parsed?.selectedTitle === 'string' ? String(parsed.selectedTitle).trim() : undefined;
+      // ✅ [2026-04-11 FIX] 개행 제거 — 제목에 \n이 포함되면 뒷부분 잘림 + 본문 혼입
+      let selectedTitle = typeof parsed?.selectedTitle === 'string'
+        ? String(parsed.selectedTitle).replace(/[\r\n]+/g, ' ').trim()
+        : undefined;
       let titleCandidates = Array.isArray(parsed?.titleCandidates)
         ? parsed.titleCandidates.map((c: any) => ({
-          text: String(c?.text || '').trim(),
+          text: String(c?.text || '').replace(/[\r\n]+/g, ' ').trim(),
           score: Number(c?.score) || 0,
           reasoning: String(c?.reasoning || '').trim(),
         })).filter((c: any) => c.text)
@@ -5196,6 +5199,10 @@ function cleanEscapeSequences(text: string): string {
 function validateStructuredContent(content: StructuredContent, source?: ContentSource): void {
   if (!content) throw new Error('구조화된 콘텐츠가 비어 있습니다.');
 
+  // ✅ [2026-04-11 FIX] 제목 개행 제거 — 최종 방어선
+  if (content.selectedTitle && typeof content.selectedTitle === 'string') {
+    content.selectedTitle = content.selectedTitle.replace(/[\r\n]+/g, ' ').trim();
+  }
   const rawSelectedTitleForHeadingStrip = String(content.selectedTitle || '').trim();
 
   // ✅ 누락된 필수 필드 자동 복구 (오류 대신 복구 시도)
@@ -6388,8 +6395,10 @@ function cleanExpiredCaches(): void {
   }
 }
 
-// ✅ [v1.4.23] Gemini 모델 폴백 체인 빌더 — 테스트용으로 분리 export
-// v1.4.16 fix: 기본값 gemini-2.5-flash (1500/일 무료), Preview 모델은 최후 폴백
+// ✅ [v1.4.44] Gemini 모델 체인 — 반드시 성공 전략
+// 1단계: 사용자 선택 모델로 최대 재시도 (429/503 지수 백오프)
+// 2단계: limit:0(무료 차단)이면 안내 후 Flash→Flash-Lite 자동 폴백
+// 일반 429/503은 같은 모델로 재시도, limit:0만 폴백
 export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string; geminiModel?: string }): {
   primaryModel: string;
   uniqueModels: string[];
@@ -6400,16 +6409,8 @@ export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string
     primaryModel = 'gemini-2.5-flash';
   }
   const isPro = primaryModel.includes('-pro');
-  const flashModels = [
-    'gemini-2.5-flash',          // ✅ Stable, 무료 1500/일
-    'gemini-2.5-flash-lite',     // ✅ Stable, 가장 빠른/저렴
-  ];
-  const proModels = [
-    'gemini-2.5-pro',            // ✅ Stable, 무료 25/일
-    ...flashModels,
-  ];
-  const baseModels = isPro ? proModels : flashModels;
-  const uniqueModels = Array.from(new Set([primaryModel, ...baseModels]));
+  // 사용자 선택 모델만 — 폴백은 limit:0 감지 시에만 callGemini 내부에서 처리
+  const uniqueModels = [primaryModel];
   return { primaryModel, uniqueModels, isPro };
 }
 
@@ -6430,21 +6431,37 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   // 기존 37줄 하드코딩 systemInstructionText 제거 → .prompt 파일의 규칙이 그대로 system으로 전달
   const { system: geminiSystemText, user: geminiUserText } = splitPromptByMarker(prompt);
 
-  // 1. API 키 로드 (Gemini Only)
-  let apiKey = config?.geminiApiKey?.trim() || process.env.GEMINI_API_KEY;
-  if (!apiKey) throw new Error('Gemini API 키가 설정되지 않았습니다.');
-  const trimmedKey = apiKey.trim();
+  // 1. API 키 로드 — 다중 키 로테이션 지원
+  const primaryApiKey = (config?.geminiApiKey?.trim() || process.env.GEMINI_API_KEY || '').trim();
+  if (!primaryApiKey) throw new Error('Gemini API 키가 설정되지 않았습니다.');
+  const extraKeys: string[] = (config?.geminiApiKeys || []).map((k: string) => k.trim()).filter((k: string) => k && k !== primaryApiKey);
+  const allApiKeys = [primaryApiKey, ...extraKeys];
+  let currentKeyIdx = 0;
+  const getNextKey = (): string | null => {
+    currentKeyIdx++;
+    return currentKeyIdx < allApiKeys.length ? allApiKeys[currentKeyIdx] : null;
+  };
+  let trimmedKey = allApiKeys[0];
 
-  // 2. 모델 목록 설정
-  const { primaryModel, uniqueModels, isPro } = buildGeminiModelChain(config as any);
-  console.log(`[Gemini] 모델 체인: ${uniqueModels.join(' → ')} (사용자 선택: ${primaryModel}, 티어: ${isPro ? 'PRO' : 'FLASH'})`);
+  if (allApiKeys.length > 1) {
+    console.log(`[Gemini] 🔑 API 키 ${allApiKeys.length}개 로테이션 준비 완료`);
+  }
+
+  // 2. 모델 목록 설정 — limit:0 시 폴백 체인 동적 확장
+  const { primaryModel, isPro } = buildGeminiModelChain(config as any);
+  const modelsToTry = [primaryModel];
+  // limit:0 감지 시 폴백할 모델 후보 (사용자 선택 모델 제외)
+  const fallbackCandidates = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'].filter(m => m !== primaryModel);
+  console.log(`[Gemini] 모델: ${primaryModel} (티어: ${isPro ? 'PRO' : 'FLASH'})`);
 
   let lastError: Error | null = null;
-  const perModelMaxRetries = 2; // ✅ [v1.4.3] 3 → 2 (비용 절감, 다음 모델로 빠른 폴백)
+  const perModelMaxRetries = 4;
 
-  for (let i = 0; i < uniqueModels.length; i++) {
-    const modelName = uniqueModels[i];
+  for (let i = 0; i < modelsToTry.length; i++) {
+    const modelName = modelsToTry[i];
     let modelRetryCount = 0;
+    // 폴백 모델은 키 인덱스 리셋
+    if (i > 0) { currentKeyIdx = 0; trimmedKey = allApiKeys[0]; }
 
     while (modelRetryCount < perModelMaxRetries) {
       try {
@@ -6596,54 +6613,90 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
       } catch (error) {
         const errMsg = (error as Error).message || String(error);
         lastError = error as Error;
+        const isQuota = errMsg.includes('429') || errMsg.includes('quota') || errMsg.includes('Too Many Requests') || errMsg.includes('resource exhausted');
+        const isLimitZero = errMsg.includes('limit: 0') || errMsg.includes('free_tier');
+        const isServerError = errMsg.includes('503') || errMsg.includes('500') || errMsg.includes('internal') || errMsg.includes('unavailable') || errMsg.includes('overloaded');
 
-        // 할당량 초과(429) 처리
-        const isQuota = errMsg.includes('429') || errMsg.includes('quota') || errMsg.includes('limit: 0') || errMsg.includes('Too Many Requests');
+        // ✅ [v1.4.44] limit:0 = 이 모델은 무료 완전 차단 → 폴백 모델 추가
+        if (isQuota && isLimitZero) {
+          console.error(`❌ [Gemini] ${modelName} 무료 할당량 0 → 폴백 모델로 전환`);
+          if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
+            (window as any).appendLog(`🚫 ${modelName} 무료 사용 불가 → 무료 모델(Flash/Flash-Lite)로 자동 전환합니다.`);
+          }
+          // 아직 추가하지 않은 폴백 모델이 있으면 체인에 추가
+          for (const fb of fallbackCandidates) {
+            if (!modelsToTry.includes(fb)) { modelsToTry.push(fb); }
+          }
+          break; // 이 모델 종료 → 다음 폴백 모델로
+        }
 
+        // ✅ [v1.4.44] 429 RPM 제한 → 키 로테이션 시도 → 지수 백오프 재시도
         if (isQuota) {
+          // 다른 키가 있으면 먼저 키 교체 시도 (대기 없이 즉시)
+          const nextKey = getNextKey();
+          if (nextKey) {
+            console.log(`🔑 [Gemini] 키 로테이션: ${trimmedKey.substring(0, 10)}... → ${nextKey.substring(0, 10)}...`);
+            trimmedKey = nextKey;
+            continue; // 대기 없이 즉시 재시도
+          }
+
           modelRetryCount++;
-          let waitMs = 15000; // ✅ 대기 시간을 60초 -> 15초로 대폭 단축 (사용자 경험 우선)
+          // Google이 알려주는 대기 시간 사용, 없으면 지수 백오프
+          let waitMs = Math.min(15000 * Math.pow(1.5, modelRetryCount - 1), 60000);
           const retryMatch = errMsg.match(/retry in ([\d.]+)(s|ms)/i);
           if (retryMatch) {
             const val = parseFloat(retryMatch[1]);
             const unit = retryMatch[2].toLowerCase();
             waitMs = (unit === 's' ? val * 1000 : val) + 1000;
           }
-
           const waitSec = Math.round(waitMs / 1000);
 
           if (modelRetryCount < perModelMaxRetries) {
-            // ✅ "다른 곳에서 하는게 빠르겠다"는 소리가 안 나오도록 문구 개선
-            const logMsg = `구글 서버가 바쁘네요. ${waitSec}초만 더 기다려보고 안 되면 즉시 다른 모델로 전환할게요.`;
-            console.warn(`⚠️ [Gemini Quota] ${logMsg}`);
+            const logMsg = `구글 서버가 바쁘네요. ${waitSec}초 후 재시도합니다. (${modelRetryCount}/${perModelMaxRetries})`;
+            console.warn(`⏳ [Gemini] ${logMsg}`);
             if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
               (window as any).appendLog(`⏳ ${logMsg}`);
             }
             await new Promise(resolve => setTimeout(resolve, waitMs));
+            // 키 인덱스 리셋 (로테이션 재시작)
+            currentKeyIdx = 0; trimmedKey = allApiKeys[0];
             continue;
-          } else {
-            // 동일 모델 재시도 실패 -> 다음 모델로 신속 전환
-            const nextModelName = uniqueModels[i + 1];
-            const logMsg = nextModelName
-              ? `${modelName} 할당량 초과. 기다리지 않고 더 빠른 ${nextModelName}(으)로 즉시 전환합니다!`
-              : `${modelName} 할당량 소진. 모든 Gemini 모델 시도 완료...`;
-
-            console.warn(`🚀 [Gemini Switch] ${logMsg}`);
-            if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
-              (window as any).appendLog(`🚀 ${logMsg}`);
-            }
-            break; // while 종료 -> 다음 모델 for 루프로
           }
+          break; // 모든 재시도 소진
         }
 
-        // 404 모델 없음
-        if (errMsg.includes('404') || errMsg.includes('not found')) {
-          console.warn(`[Gemini 폴백] ${modelName} 모델 없음, 다음 모델로...`);
+        // ✅ [v1.4.44] 503/500 서버 에러 → 짧은 대기 후 재시도
+        if (isServerError) {
+          modelRetryCount++;
+          if (modelRetryCount < perModelMaxRetries) {
+            const waitMs = 3000 + modelRetryCount * 2000; // 5초, 7초, 9초
+            console.warn(`🔧 [Gemini] ${modelName} 서버 에러 → ${Math.round(waitMs/1000)}초 후 재시도 (${modelRetryCount}/${perModelMaxRetries})`);
+            if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
+              (window as any).appendLog(`🔧 구글 서버 일시 장애. ${Math.round(waitMs/1000)}초 후 재시도합니다. (${modelRetryCount}/${perModelMaxRetries})`);
+            }
+            await new Promise(resolve => setTimeout(resolve, waitMs));
+            continue;
+          }
           break;
         }
 
-        // 타임아웃 또는 기타 오류
-        console.warn(`[Gemini 오류] ${modelName}: ${errMsg}`);
+        // 404 모델 없음 → 폴백 모델 추가
+        if (errMsg.includes('404') || errMsg.includes('not found')) {
+          console.warn(`[Gemini] ${modelName} 모델 없음 → 폴백 모델 전환`);
+          for (const fb of fallbackCandidates) {
+            if (!modelsToTry.includes(fb)) { modelsToTry.push(fb); }
+          }
+          break;
+        }
+
+        // 기타 오류 → 재시도 1회 후 실패
+        modelRetryCount++;
+        if (modelRetryCount < 2) {
+          console.warn(`[Gemini] ${modelName} 오류: ${errMsg.substring(0, 100)} → 5초 후 재시도`);
+          await new Promise(resolve => setTimeout(resolve, 5000));
+          continue;
+        }
+        console.warn(`[Gemini] ${modelName} 오류: ${errMsg.substring(0, 100)}`);
         break;
       }
     }
@@ -6666,9 +6719,14 @@ function translateGeminiError(rawMessage: string): string {
     return '🔑 Gemini API키가 만료됨! Google AI Studio에서 새 키를 발급받으세요.' + detail;
   }
 
-  // 할당량 초과 (429)
+  // 할당량 초과 (429) — limit:0 (무료 완전 차단) vs 일반 RPM 제한 구분
   if (msg.includes('429') || msg.includes('quota') || msg.includes('rate limit') || msg.includes('too many requests') || msg.includes('resource exhausted')) {
-    return '⚡ Gemini 유료/무료 할당량 초과! 잠시 후 다시 시도하거나, Google AI Studio에서 요금제를 확인하세요.' + detail;
+    if (msg.includes('limit: 0') || msg.includes('free_tier')) {
+      return '🚫 이 모델은 Google이 무료 사용을 차단했습니다!\n' +
+        '👉 해결: 모델을 Flash 또는 Flash-Lite로 변경하세요 (무료, 성능 충분).\n' +
+        '💡 참고: 유료 전환(Pay-as-you-go) 시 Flash/Flash-Lite 무료 할당량도 사라지므로 주의!' + detail;
+    }
+    return '⚡ Gemini 요청 제한(RPM) 초과! 1~2분 후 자동 해제됩니다. 계속 발생하면 Google AI Studio → 요금제에서 분당 요청 한도를 확인하세요.' + detail;
   }
 
   // 인증 실패 (401/403)
@@ -6918,43 +6976,26 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   }
   const client = getOpenAIClient(configApiKey);
 
-  // ✅ [2026-04-09 FIX] OpenAI 모델 체인 — GPT-5.4 시리즈만 (GPT-4.1 시리즈 퇴역 제거)
+  // ✅ [v1.4.44] 사용자 선택 모델 강제 — 다른 모델로 자동 폴백 제거
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
   let openAIModels: string[];
   if (uiSelectedModel === 'openai-gpt4o-mini') {
-    // 가성비 모드: GPT-5.4-mini → GPT-5.4-nano → GPT-5.4 (폴백)
-    openAIModels = [
-      'gpt-5.4-mini',              // ✅ 최신 가성비 (GPT-5.4급 성능, 저비용)
-      'gpt-5.4-nano',              // 폴백1: 초저가
-      'gpt-5.4',                   // 폴백2: 플래그십 (비용 높지만 확실)
-    ];
-    console.log('[OpenAI] 🧠 가성비 모드: gpt-5.4-mini → 5.4-nano → 5.4');
+    openAIModels = ['gpt-5.4-mini'];
+    console.log('[OpenAI] 🧠 가성비 모드: gpt-5.4-mini — 폴백 없음');
   } else if (uiSelectedModel === 'openai-gpt41') {
-    // 균형 모드: GPT-5.4 → GPT-5.4-mini → GPT-5.4-nano
-    openAIModels = [
-      'gpt-5.4',                   // ✅ UI 선택: 플래그십
-      'gpt-5.4-mini',              // 폴백1: 최신 가성비
-      'gpt-5.4-nano',              // 폴백2: 초저가
-    ];
-    console.log('[OpenAI] ⚖️ 균형 모드: gpt-5.4 → 5.4-mini → 5.4-nano');
+    openAIModels = ['gpt-5.4'];
+    console.log('[OpenAI] ⚖️ 균형 모드: gpt-5.4 — 폴백 없음');
   } else {
-    // 최고 성능 모드 (기본): GPT-5.4 → GPT-5.4-mini → GPT-5.4-nano
-    openAIModels = [
-      'gpt-5.4',                   // ✅ 최신 플래그십
-      'gpt-5.4-mini',              // 폴백1: 최신 가성비
-      'gpt-5.4-nano',              // 폴백2: 초저가
-    ];
-    console.log('[OpenAI] 🚀 최고 성능 모드: gpt-5.4 → 5.4-mini → 5.4-nano');
+    openAIModels = ['gpt-5.4'];
+    console.log('[OpenAI] 🚀 기본 모드: gpt-5.4');
   }
 
   const customModel = process.env.OPENAI_STRUCTURED_MODEL;
-  const modelsToTry = customModel
-    ? [customModel, ...openAIModels.filter(m => m !== customModel)]
-    : openAIModels;
+  const modelsToTry = customModel ? [customModel] : openAIModels;
 
   let lastError: Error | null = null;
   const timeoutMs = getTimeoutMs(minChars);
-  const maxRetriesPerModel = 1; // ✅ 모델당 1회만 시도 (빠른 폴백 우선 — 3모델 순회로 충분)
+  const maxRetriesPerModel = 3; // ✅ [v1.4.44] 1 → 3 (단일 모델 재시도 강화, 폴백 제거)
 
   for (const modelName of modelsToTry) {
     for (let retry = 0; retry < maxRetriesPerModel; retry++) {
@@ -7114,49 +7155,31 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
   }
   const client = getAnthropicClient(configClaudeKey);
 
-  // ✅ [2026-03-18 FIX] UI 선택 모델에 따라 Claude 모델 우선순위 동적 결정
+  // ✅ [v1.4.44] 사용자 선택 모델 강제 — 다른 모델로 자동 폴백 제거
+  // Haiku 선택 시 Sonnet으로 폴백되면 비용이 3~5배 증가하는 문제 해결
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
   let claudeModels: string[];
   if (uiSelectedModel === 'claude-haiku') {
-    // Haiku 선택 시: Haiku 4.5 우선, Sonnet 폴백
-    claudeModels = [
-      'claude-haiku-4-5-20251001',       // ✅ UI 선택: Haiku 4.5 (가성비)
-      'claude-sonnet-4-6',               // 폴백: Sonnet 4.6
-    ];
-    console.log('[Claude] 💜 UI 선택: Claude Haiku 4.5 (가성비 모드)');
+    claudeModels = ['claude-haiku-4-5-20251001'];
+    console.log('[Claude] 💜 UI 선택: Claude Haiku 4.5 (가성비 모드) — 폴백 없음');
   } else if (uiSelectedModel === 'claude-sonnet') {
-    // Sonnet 선택 시: Sonnet 4.6 우선, Sonnet 4.5 폴백
-    claudeModels = [
-      'claude-sonnet-4-6',               // ✅ UI 선택: Sonnet 4.6 (균형)
-      'claude-sonnet-4-5-20250929',      // 폴백: Sonnet 4.5
-    ];
-    console.log('[Claude] 📜 UI 선택: Claude Sonnet 4.6 (균형 모드)');
+    claudeModels = ['claude-sonnet-4-6'];
+    console.log('[Claude] 📜 UI 선택: Claude Sonnet 4.6 (균형 모드) — 폴백 없음');
   } else if (uiSelectedModel === 'claude-opus') {
-    // Opus 선택 시: Opus 4.6 우선, Opus 4.5 → Sonnet 4.6 폴백
-    claudeModels = [
-      'claude-opus-4-6',                 // ✅ UI 선택: Opus 4.6 (최고 성능)
-      'claude-opus-4-5-20251101',        // 폴백1: Opus 4.5
-      'claude-sonnet-4-6',               // 폴백2: Sonnet 4.6
-    ];
-    console.log('[Claude] 👑 UI 선택: Claude Opus 4.6 (최고 성능 모드)');
+    claudeModels = ['claude-opus-4-6'];
+    console.log('[Claude] 👑 UI 선택: Claude Opus 4.6 (최고 성능 모드) — 폴백 없음');
   } else {
-    // 기본 (claude provider로 왔지만 specific 모델 미지정): Sonnet 우선
-    claudeModels = [
-      'claude-sonnet-4-6',               // 기본: Sonnet 4.6 (균형)
-      'claude-sonnet-4-5-20250929',      // 폴백1: Sonnet 4.5
-      'claude-haiku-4-5-20251001',       // 폴백2: Haiku 4.5
-    ];
+    // 기본 (claude provider로 왔지만 specific 모델 미지정)
+    claudeModels = ['claude-sonnet-4-6'];
     console.log('[Claude] ✨ 기본 모드: Claude Sonnet 4.6');
   }
 
-  // 환경 변수로 지정된 모델이 있으면 맨 앞에 추가
+  // 환경 변수로 지정된 모델이 있으면 대체
   const customModel = process.env.CLAUDE_STRUCTURED_MODEL;
-  const modelsToTry = customModel
-    ? [customModel, ...claudeModels.filter(m => m !== customModel)]
-    : claudeModels;
+  const modelsToTry = customModel ? [customModel] : claudeModels;
 
   let lastError: Error | null = null;
-  const maxRetriesPerModel = 2; // ✅ 모델당 최대 재시도 횟수
+  const maxRetriesPerModel = 4; // ✅ [v1.4.44] 2 → 4 (단일 모델 재시도 강화, 폴백 제거)
 
   // 각 모델을 순차적으로 시도
   for (const modelName of modelsToTry) {
@@ -8330,6 +8353,18 @@ export async function generateStructuredContent(
       try {
         parsed = safeParseJson<StructuredContent>(raw);
         console.log(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: JSON 파싱 성공`);
+
+        // ✅ [2026-04-11 FIX] 제목 개행 제거 — AI가 selectedTitle에 줄바꿈을 넣으면
+        // 제목이 잘리거나 본문 첫 줄이 제목에 포함되는 버그 발생
+        if (parsed.selectedTitle && typeof parsed.selectedTitle === 'string') {
+          parsed.selectedTitle = parsed.selectedTitle.replace(/[\r\n]+/g, ' ').trim();
+        }
+        if (Array.isArray(parsed.titleCandidates)) {
+          parsed.titleCandidates = parsed.titleCandidates.map((c: any) => ({
+            ...c,
+            text: typeof c?.text === 'string' ? c.text.replace(/[\r\n]+/g, ' ').trim() : c?.text,
+          }));
+        }
       } catch (parseError) {
         console.error(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: JSON 파싱 실패 - 재시도 필요:`, (parseError as Error).message);
         console.error(`[ContentGenerator] 📋 파싱 실패한 raw 응답 앞 300자: ${raw?.substring(0, 300)}`);

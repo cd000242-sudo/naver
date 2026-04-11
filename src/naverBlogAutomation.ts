@@ -1077,10 +1077,15 @@ export class NaverBlogAutomation {
     this.logger?.(message);
   }
 
+  // ✅ [2026-04-11 FIX] 대기 중 cancel 체크 — 긴 delay에서도 취소 즉시 반응
   private async delay(ms: number): Promise<void> {
-    await new Promise((resolve) => {
-      setTimeout(resolve, ms);
-    });
+    const start = Date.now();
+    while (Date.now() - start < ms) {
+      if (this.cancelRequested) {
+        throw new Error('사용자가 자동화를 취소했습니다.');
+      }
+      await new Promise((resolve) => setTimeout(resolve, Math.min(500, ms - (Date.now() - start))));
+    }
   }
 
   /**
@@ -3963,9 +3968,10 @@ export class NaverBlogAutomation {
     this.ensureNotCancelled();
     this.log('🔄 제목 입력 중...');
 
-    // 제목이 문자열인지 확인
-    const titleText = typeof title === 'string' ? title : String(title || '');
-    if (!titleText.trim()) {
+    // 제목이 문자열인지 확인 + 개행 제거 (개행 시 본문으로 밀림 방지)
+    const titleText = (typeof title === 'string' ? title : String(title || ''))
+      .replace(/[\r\n]+/g, ' ').trim();
+    if (!titleText) {
       throw new Error('제목이 비어있습니다.');
     }
 

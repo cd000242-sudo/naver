@@ -123,7 +123,7 @@ async function tryClaude(headingText: string, imageStyle?: string, apiKey?: stri
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
+        model: 'claude-haiku-4-5-20251001', // ✅ [v1.4.44] 프롬프트 번역은 Haiku로 충분 (비용 1/5)
         max_tokens: 200,
         messages: [{ role: 'user', content: getTranslationPrompt(headingText, imageStyle) }],
       }),
