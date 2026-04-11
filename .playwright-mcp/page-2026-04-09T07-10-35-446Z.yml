@@ -1,0 +1,639 @@
+- generic [active] [ref=e1]:
+  - region "Notifications (F8)":
+    - list
+  - alert [ref=e2]
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - link "Claude API Docs Home" [ref=e7] [cursor=pointer]:
+          - /url: /docs/en/home
+          - img "Claude API Docs" [ref=e8]
+        - button "Switch product surface" [ref=e12] [cursor=pointer]:
+          - text: Messages
+          - img [ref=e14]
+      - navigation [ref=e16]:
+        - list [ref=e17]:
+          - listitem [ref=e18]:
+            - link "Build" [ref=e19] [cursor=pointer]:
+              - /url: /docs/en/intro
+          - listitem [ref=e20]:
+            - link "Admin" [ref=e21] [cursor=pointer]:
+              - /url: /docs/en/build-with-claude/administration-api
+          - listitem [ref=e22]:
+            - link "Models & pricing" [ref=e23] [cursor=pointer]:
+              - /url: /docs/en/about-claude/models/overview
+          - listitem [ref=e24]:
+            - link "Client SDKs" [ref=e25] [cursor=pointer]:
+              - /url: /docs/en/api/client-sdks
+          - listitem [ref=e26]:
+            - link "API Reference" [ref=e27] [cursor=pointer]:
+              - /url: /docs/en/api/overview
+      - generic [ref=e29]:
+        - button [ref=e30] [cursor=pointer]:
+          - img [ref=e32]
+        - button "English" [ref=e34] [cursor=pointer]:
+          - text: English
+          - img [ref=e36]
+        - link "Log in" [ref=e38] [cursor=pointer]:
+          - /url: /login?returnTo=%2Fdocs%2Fen%2Fabout-claude%2Fmodel-deprecations
+          - button "Log in" [ref=e39]
+    - generic [ref=e41]:
+      - complementary [ref=e42]:
+        - button "Search documentation" [ref=e44] [cursor=pointer]:
+          - generic:
+            - generic:
+              - img
+          - generic [ref=e45]: Search...
+          - generic:
+            - generic: ⌘K
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]: Models
+            - generic [ref=e51]:
+              - link "Models overview" [ref=e52] [cursor=pointer]:
+                - /url: /docs/en/about-claude/models/overview
+                - generic [ref=e54]: Models overview
+              - link "Choosing a model" [ref=e55] [cursor=pointer]:
+                - /url: /docs/en/about-claude/models/choosing-a-model
+                - generic [ref=e57]: Choosing a model
+              - link "What's new in Claude 4.6" [ref=e58] [cursor=pointer]:
+                - /url: /docs/en/about-claude/models/whats-new-claude-4-6
+                - generic [ref=e60]: What's new in Claude 4.6
+              - link "Migration guide" [ref=e61] [cursor=pointer]:
+                - /url: /docs/en/about-claude/models/migration-guide
+                - generic [ref=e63]: Migration guide
+              - link "Model deprecations" [ref=e64] [cursor=pointer]:
+                - /url: /docs/en/about-claude/model-deprecations
+                - generic [ref=e66]: Model deprecations
+              - link "Model cards" [ref=e67] [cursor=pointer]:
+                - /url: /docs/en/resources/overview
+                - generic [ref=e69]: Model cards
+              - link "System prompts" [ref=e70] [cursor=pointer]:
+                - /url: /docs/en/release-notes/system-prompts
+                - generic [ref=e72]: System prompts
+          - generic [ref=e73]:
+            - generic [ref=e74]: Pricing
+            - link "Pricing" [ref=e76] [cursor=pointer]:
+              - /url: /docs/en/about-claude/pricing
+              - generic [ref=e78]: Pricing
+        - link "Console" [ref=e81] [cursor=pointer]:
+          - /url: /
+          - img [ref=e83]
+          - generic [ref=e86]: Console
+      - main [ref=e88]:
+        - generic [ref=e89]:
+          - article [ref=e91]:
+            - generic [ref=e92]:
+              - generic [ref=e94]: Models
+              - generic [ref=e95]:
+                - heading "Model deprecations" [level=1] [ref=e96]
+                - generic [ref=e98]:
+                  - button "Copy page" [ref=e99] [cursor=pointer]:
+                    - generic [ref=e100]:
+                      - generic [ref=e101]:
+                        - img
+                        - img [ref=e102]
+                        - img
+                        - img
+                      - generic [ref=e104]: Copy page
+                  - button [ref=e105] [cursor=pointer]:
+                    - img [ref=e107]
+            - paragraph [ref=e109]: As safer and more capable models launch, Anthropic regularly retires older ones. Applications relying on Anthropic models may need occasional updates to keep working. Impacted customers will always be notified by email and in the documentation.
+            - paragraph [ref=e110]: This page lists all API deprecations, along with recommended replacements.
+            - heading "Copy link to clipboard Overview" [level=2] [ref=e111]:
+              - generic [ref=e112]:
+                - button "Copy link to clipboard" [ref=e114] [cursor=pointer]:
+                  - img [ref=e116]
+                - generic [ref=e118]: Overview
+            - paragraph [ref=e119]: "Anthropic uses the following terms to describe the model lifecycle:"
+            - list [ref=e120]:
+              - listitem [ref=e121]:
+                - text: •
+                - strong [ref=e122]: Active
+                - text: ": The model is fully supported and recommended for use."
+              - listitem [ref=e123]:
+                - text: •
+                - strong [ref=e124]: Legacy
+                - text: ": The model will no longer receive updates and may be deprecated in the future."
+              - listitem [ref=e125]:
+                - text: •
+                - strong [ref=e126]: Deprecated
+                - text: ": The model is still functional but no longer recommended. Anthropic provides a recommended replacement and assigns a retirement date."
+              - listitem [ref=e127]:
+                - text: •
+                - strong [ref=e128]: Retired
+                - text: ": The model is no longer available for use. Requests to retired models will fail."
+            - generic [ref=e129]:
+              - img [ref=e132]
+              - paragraph [ref=e135]: Deprecated models are likely to be less reliable than active models. Move workloads to active models to maintain the highest level of support and reliability.
+            - heading "Copy link to clipboard Migrating to replacements" [level=2] [ref=e136]:
+              - generic [ref=e137]:
+                - button "Copy link to clipboard" [ref=e139] [cursor=pointer]:
+                  - img [ref=e141]
+                - generic [ref=e143]: Migrating to replacements
+            - paragraph [ref=e144]: Once a model is deprecated, migrate all usage to a suitable replacement before the retirement date. Requests to models past the retirement date will fail.
+            - paragraph [ref=e145]: To help measure the performance of replacement models on your tasks, consider thorough testing of your applications with the new models well before the retirement date.
+            - paragraph [ref=e146]:
+              - text: For specific instructions on migrating to the latest Claude models, see the
+              - link "Migration guide" [ref=e147] [cursor=pointer]:
+                - /url: /docs/en/about-claude/models/migration-guide
+              - text: .
+            - heading "Copy link to clipboard Notifications" [level=2] [ref=e148]:
+              - generic [ref=e149]:
+                - button "Copy link to clipboard" [ref=e151] [cursor=pointer]:
+                  - img [ref=e153]
+                - generic [ref=e155]: Notifications
+            - paragraph [ref=e156]: Anthropic notifies customers with active deployments for models with upcoming retirements, providing at least 60 days notice before model retirement for publicly released models.
+            - heading "Copy link to clipboard Auditing model usage" [level=2] [ref=e157]:
+              - generic [ref=e158]:
+                - button "Copy link to clipboard" [ref=e160] [cursor=pointer]:
+                  - img [ref=e162]
+                - generic [ref=e164]: Auditing model usage
+            - paragraph [ref=e165]: "To help identify usage of deprecated models, customers can access an audit of their API usage. Follow these steps:"
+            - list [ref=e166]:
+              - listitem [ref=e167]:
+                - text: Go to the
+                - link "Usage" [ref=e168] [cursor=pointer]:
+                  - /url: /usage
+                - text: page in Console
+              - listitem [ref=e169]: Click the "Export" button
+              - listitem [ref=e170]: Review the downloaded CSV to see usage broken down by API key and model
+            - paragraph [ref=e171]: This audit will help you locate any instances where your application is still using deprecated models, allowing you to prioritize updates to newer models before the retirement date.
+            - heading "Copy link to clipboard Best practices" [level=2] [ref=e172]:
+              - generic [ref=e173]:
+                - button "Copy link to clipboard" [ref=e175] [cursor=pointer]:
+                  - img [ref=e177]
+                - generic [ref=e179]: Best practices
+            - list [ref=e180]:
+              - listitem [ref=e181]: Regularly check the documentation for updates on model deprecations.
+              - listitem [ref=e182]: Test your applications with newer models well before the retirement date of your current model.
+              - listitem [ref=e183]: Update your code to use the recommended replacement model as soon as possible.
+              - listitem [ref=e184]: Contact the support team if you need assistance with migration or have any questions.
+            - heading "Copy link to clipboard Deprecation downsides and mitigations" [level=2] [ref=e185]:
+              - generic [ref=e186]:
+                - button "Copy link to clipboard" [ref=e188] [cursor=pointer]:
+                  - img [ref=e190]
+                - generic [ref=e192]: Deprecation downsides and mitigations
+            - paragraph [ref=e193]: "Anthropic currently deprecates and retires models to ensure capacity for new model releases. This comes with downsides:"
+            - list [ref=e194]:
+              - listitem [ref=e195]: • Users who value specific models must migrate to new versions
+              - listitem [ref=e196]: • Researchers lose access to models for ongoing and comparative studies
+              - listitem [ref=e197]: • Model retirement introduces safety- and model welfare-related risks
+            - paragraph [ref=e198]:
+              - text: At some point, Anthropic hopes to make past models publicly available again. In the meantime, Anthropic has committed to long-term preservation of model weights and other measures to help mitigate these impacts. For more details, see
+              - link "Commitments on Model Deprecation and Preservation" [ref=e199] [cursor=pointer]:
+                - /url: https://www.anthropic.com/research/deprecation-commitments
+              - text: .
+            - heading "Copy link to clipboard Model status" [level=2] [ref=e200]:
+              - generic [ref=e201]:
+                - button "Copy link to clipboard" [ref=e203] [cursor=pointer]:
+                  - img [ref=e205]
+                - generic [ref=e207]: Model status
+            - paragraph [ref=e208]: "All publicly released models are listed below with their status:"
+            - table [ref=e210]:
+              - rowgroup [ref=e211]:
+                - row "API Model Name Current State Deprecated Tentative Retirement Date" [ref=e212]:
+                  - columnheader "API Model Name" [ref=e213]
+                  - columnheader "Current State" [ref=e214]
+                  - columnheader "Deprecated" [ref=e215]
+                  - columnheader "Tentative Retirement Date" [ref=e216]
+              - rowgroup [ref=e217]:
+                - row "claude-opus-4-6 Active N/A Not sooner than February 5, 2027" [ref=e218]:
+                  - cell "claude-opus-4-6" [ref=e219]:
+                    - code [ref=e220]: claude-opus-4-6
+                  - cell "Active" [ref=e221]
+                  - cell "N/A" [ref=e222]
+                  - cell "Not sooner than February 5, 2027" [ref=e223]
+                - row "claude-opus-4-5-20251101 Active N/A Not sooner than November 24, 2026" [ref=e224]:
+                  - cell "claude-opus-4-5-20251101" [ref=e225]:
+                    - code [ref=e226]: claude-opus-4-5-20251101
+                  - cell "Active" [ref=e227]
+                  - cell "N/A" [ref=e228]
+                  - cell "Not sooner than November 24, 2026" [ref=e229]
+                - row "claude-opus-4-1-20250805 Active N/A Not sooner than August 5, 2026" [ref=e230]:
+                  - cell "claude-opus-4-1-20250805" [ref=e231]:
+                    - code [ref=e232]: claude-opus-4-1-20250805
+                  - cell "Active" [ref=e233]
+                  - cell "N/A" [ref=e234]
+                  - cell "Not sooner than August 5, 2026" [ref=e235]
+                - row "claude-opus-4-20250514 Active N/A Not sooner than May 14, 2026" [ref=e236]:
+                  - cell "claude-opus-4-20250514" [ref=e237]:
+                    - code [ref=e238]: claude-opus-4-20250514
+                  - cell "Active" [ref=e239]
+                  - cell "N/A" [ref=e240]
+                  - cell "Not sooner than May 14, 2026" [ref=e241]
+                - row "claude-sonnet-4-6 Active N/A Not sooner than February 17, 2027" [ref=e242]:
+                  - cell "claude-sonnet-4-6" [ref=e243]:
+                    - code [ref=e244]: claude-sonnet-4-6
+                  - cell "Active" [ref=e245]
+                  - cell "N/A" [ref=e246]
+                  - cell "Not sooner than February 17, 2027" [ref=e247]
+                - row "claude-sonnet-4-5-20250929 Active N/A Not sooner than September 29, 2026" [ref=e248]:
+                  - cell "claude-sonnet-4-5-20250929" [ref=e249]:
+                    - code [ref=e250]: claude-sonnet-4-5-20250929
+                  - cell "Active" [ref=e251]
+                  - cell "N/A" [ref=e252]
+                  - cell "Not sooner than September 29, 2026" [ref=e253]
+                - row "claude-sonnet-4-20250514 Active N/A Not sooner than May 14, 2026" [ref=e254]:
+                  - cell "claude-sonnet-4-20250514" [ref=e255]:
+                    - code [ref=e256]: claude-sonnet-4-20250514
+                  - cell "Active" [ref=e257]
+                  - cell "N/A" [ref=e258]
+                  - cell "Not sooner than May 14, 2026" [ref=e259]
+                - row "claude-3-7-sonnet-20250219 Retired October 28, 2025 February 19, 2026" [ref=e260]:
+                  - cell "claude-3-7-sonnet-20250219" [ref=e261]:
+                    - code [ref=e262]: claude-3-7-sonnet-20250219
+                  - cell "Retired" [ref=e263]
+                  - cell "October 28, 2025" [ref=e264]
+                  - cell "February 19, 2026" [ref=e265]
+                - row "claude-haiku-4-5-20251001 Active N/A Not sooner than October 15, 2026" [ref=e266]:
+                  - cell "claude-haiku-4-5-20251001" [ref=e267]:
+                    - code [ref=e268]: claude-haiku-4-5-20251001
+                  - cell "Active" [ref=e269]
+                  - cell "N/A" [ref=e270]
+                  - cell "Not sooner than October 15, 2026" [ref=e271]
+                - row "claude-3-5-haiku-20241022 Retired December 19, 2025 February 19, 2026" [ref=e272]:
+                  - cell "claude-3-5-haiku-20241022" [ref=e273]:
+                    - code [ref=e274]: claude-3-5-haiku-20241022
+                  - cell "Retired" [ref=e275]
+                  - cell "December 19, 2025" [ref=e276]
+                  - cell "February 19, 2026" [ref=e277]
+                - row "claude-3-haiku-20240307 Deprecated February 19, 2026 April 20, 2026" [ref=e278]:
+                  - cell "claude-3-haiku-20240307" [ref=e279]:
+                    - code [ref=e280]: claude-3-haiku-20240307
+                  - cell "Deprecated" [ref=e281]
+                  - cell "February 19, 2026" [ref=e282]
+                  - cell "April 20, 2026" [ref=e283]
+            - heading "Copy link to clipboard Deprecation history" [level=2] [ref=e284]:
+              - generic [ref=e285]:
+                - button "Copy link to clipboard" [ref=e287] [cursor=pointer]:
+                  - img [ref=e289]
+                - generic [ref=e291]: Deprecation history
+            - paragraph [ref=e292]: All deprecations are listed below, with the most recent announcements at the top.
+            - 'heading "Copy link to clipboard 2026-02-19: Claude Haiku 3 model" [level=3] [ref=e293]':
+              - generic [ref=e294]:
+                - button "Copy link to clipboard" [ref=e296] [cursor=pointer]:
+                  - img [ref=e298]
+                - generic [ref=e300]: "2026-02-19: Claude Haiku 3 model"
+            - paragraph [ref=e301]: On February 19, 2026, Anthropic notified developers using Claude Haiku 3 model of its upcoming retirement on the Claude API.
+            - table [ref=e303]:
+              - rowgroup [ref=e304]:
+                - row "Retirement Date Deprecated Model Recommended Replacement" [ref=e305]:
+                  - columnheader "Retirement Date" [ref=e306]
+                  - columnheader "Deprecated Model" [ref=e307]
+                  - columnheader "Recommended Replacement" [ref=e308]
+              - rowgroup [ref=e309]:
+                - row "April 20, 2026 claude-3-haiku-20240307 claude-haiku-4-5-20251001" [ref=e310]:
+                  - cell "April 20, 2026" [ref=e311]
+                  - cell "claude-3-haiku-20240307" [ref=e312]:
+                    - code [ref=e313]: claude-3-haiku-20240307
+                  - cell "claude-haiku-4-5-20251001" [ref=e314]:
+                    - code [ref=e315]: claude-haiku-4-5-20251001
+            - 'heading "Copy link to clipboard 2025-12-19: Claude Haiku 3.5 model" [level=3] [ref=e316]':
+              - generic [ref=e317]:
+                - button "Copy link to clipboard" [ref=e319] [cursor=pointer]:
+                  - img [ref=e321]
+                - generic [ref=e323]: "2025-12-19: Claude Haiku 3.5 model"
+            - generic [ref=e324]:
+              - img [ref=e327]
+              - paragraph [ref=e330]: This model was retired February 19, 2026.
+            - paragraph [ref=e331]: On December 19, 2025, Anthropic notified developers using Claude Haiku 3.5 model of its upcoming retirement on the Claude API.
+            - table [ref=e333]:
+              - rowgroup [ref=e334]:
+                - row "Retirement Date Deprecated Model Recommended Replacement" [ref=e335]:
+                  - columnheader "Retirement Date" [ref=e336]
+                  - columnheader "Deprecated Model" [ref=e337]
+                  - columnheader "Recommended Replacement" [ref=e338]
+              - rowgroup [ref=e339]:
+                - row "February 19, 2026 claude-3-5-haiku-20241022 claude-haiku-4-5-20251001" [ref=e340]:
+                  - cell "February 19, 2026" [ref=e341]
+                  - cell "claude-3-5-haiku-20241022" [ref=e342]:
+                    - code [ref=e343]: claude-3-5-haiku-20241022
+                  - cell "claude-haiku-4-5-20251001" [ref=e344]:
+                    - code [ref=e345]: claude-haiku-4-5-20251001
+            - 'heading "Copy link to clipboard 2025-10-28: Claude Sonnet 3.7 model" [level=3] [ref=e346]':
+              - generic [ref=e347]:
+                - button "Copy link to clipboard" [ref=e349] [cursor=pointer]:
+                  - img [ref=e351]
+                - generic [ref=e353]: "2025-10-28: Claude Sonnet 3.7 model"
+            - generic [ref=e354]:
+              - img [ref=e357]
+              - paragraph [ref=e360]: This model was retired February 19, 2026.
+            - paragraph [ref=e361]: On October 28, 2025, Anthropic notified developers using Claude Sonnet 3.7 model of its upcoming retirement on the Claude API.
+            - table [ref=e363]:
+              - rowgroup [ref=e364]:
+                - row "Retirement Date Deprecated Model Recommended Replacement" [ref=e365]:
+                  - columnheader "Retirement Date" [ref=e366]
+                  - columnheader "Deprecated Model" [ref=e367]
+                  - columnheader "Recommended Replacement" [ref=e368]
+              - rowgroup [ref=e369]:
+                - row "February 19, 2026 claude-3-7-sonnet-20250219 claude-opus-4-6" [ref=e370]:
+                  - cell "February 19, 2026" [ref=e371]
+                  - cell "claude-3-7-sonnet-20250219" [ref=e372]:
+                    - code [ref=e373]: claude-3-7-sonnet-20250219
+                  - cell "claude-opus-4-6" [ref=e374]:
+                    - code [ref=e375]: claude-opus-4-6
+            - 'heading "Copy link to clipboard 2025-08-13: Claude Sonnet 3.5 models" [level=3] [ref=e376]':
+              - generic [ref=e377]:
+                - button "Copy link to clipboard" [ref=e379] [cursor=pointer]:
+                  - img [ref=e381]
+                - generic [ref=e383]: "2025-08-13: Claude Sonnet 3.5 models"
+            - generic [ref=e384]:
+              - img [ref=e387]
+              - paragraph [ref=e390]: These models were retired October 28, 2025.
+            - paragraph [ref=e391]: On August 13, 2025, Anthropic notified developers using Claude Sonnet 3.5 models of their upcoming retirement.
+            - table [ref=e393]:
+              - rowgroup [ref=e394]:
+                - row "Retirement Date Deprecated Model Recommended Replacement" [ref=e395]:
+                  - columnheader "Retirement Date" [ref=e396]
+                  - columnheader "Deprecated Model" [ref=e397]
+                  - columnheader "Recommended Replacement" [ref=e398]
+              - rowgroup [ref=e399]:
+                - row "October 28, 2025 claude-3-5-sonnet-20240620 claude-opus-4-6" [ref=e400]:
+                  - cell "October 28, 2025" [ref=e401]
+                  - cell "claude-3-5-sonnet-20240620" [ref=e402]:
+                    - code [ref=e403]: claude-3-5-sonnet-20240620
+                  - cell "claude-opus-4-6" [ref=e404]:
+                    - code [ref=e405]: claude-opus-4-6
+                - row "October 28, 2025 claude-3-5-sonnet-20241022 claude-opus-4-6" [ref=e406]:
+                  - cell "October 28, 2025" [ref=e407]
+                  - cell "claude-3-5-sonnet-20241022" [ref=e408]:
+                    - code [ref=e409]: claude-3-5-sonnet-20241022
+                  - cell "claude-opus-4-6" [ref=e410]:
+                    - code [ref=e411]: claude-opus-4-6
+            - 'heading "Copy link to clipboard 2025-06-30: Claude Opus 3 model" [level=3] [ref=e412]':
+              - generic [ref=e413]:
+                - button "Copy link to clipboard" [ref=e415] [cursor=pointer]:
+                  - img [ref=e417]
+                - generic [ref=e419]: "2025-06-30: Claude Opus 3 model"
+            - generic [ref=e420]:
+              - img [ref=e423]
+              - paragraph [ref=e426]: This model was retired January 5, 2026.
+            - paragraph [ref=e427]: On June 30, 2025, Anthropic notified developers using Claude Opus 3 model of its upcoming retirement.
+            - table [ref=e429]:
+              - rowgroup [ref=e430]:
+                - row "Retirement Date Deprecated Model Recommended Replacement" [ref=e431]:
+                  - columnheader "Retirement Date" [ref=e432]
+                  - columnheader "Deprecated Model" [ref=e433]
+                  - columnheader "Recommended Replacement" [ref=e434]
+              - rowgroup [ref=e435]:
+                - row "January 5, 2026 claude-3-opus-20240229 claude-opus-4-6" [ref=e436]:
+                  - cell "January 5, 2026" [ref=e437]
+                  - cell "claude-3-opus-20240229" [ref=e438]:
+                    - code [ref=e439]: claude-3-opus-20240229
+                  - cell "claude-opus-4-6" [ref=e440]:
+                    - code [ref=e441]: claude-opus-4-6
+            - 'heading "Copy link to clipboard 2025-01-21: Claude 2, Claude 2.1, and Claude Sonnet 3 models" [level=3] [ref=e442]':
+              - generic [ref=e443]:
+                - button "Copy link to clipboard" [ref=e445] [cursor=pointer]:
+                  - img [ref=e447]
+                - generic [ref=e449]: "2025-01-21: Claude 2, Claude 2.1, and Claude Sonnet 3 models"
+            - generic [ref=e450]:
+              - img [ref=e453]
+              - paragraph [ref=e456]: These models were retired July 21, 2025.
+            - paragraph [ref=e457]: On January 21, 2025, Anthropic notified developers using Claude 2, Claude 2.1, and Claude Sonnet 3 models of their upcoming retirements.
+            - table [ref=e459]:
+              - rowgroup [ref=e460]:
+                - row "Retirement Date Deprecated Model Recommended Replacement" [ref=e461]:
+                  - columnheader "Retirement Date" [ref=e462]
+                  - columnheader "Deprecated Model" [ref=e463]
+                  - columnheader "Recommended Replacement" [ref=e464]
+              - rowgroup [ref=e465]:
+                - row "July 21, 2025 claude-2.0 claude-opus-4-6" [ref=e466]:
+                  - cell "July 21, 2025" [ref=e467]
+                  - cell "claude-2.0" [ref=e468]:
+                    - code [ref=e469]: claude-2.0
+                  - cell "claude-opus-4-6" [ref=e470]:
+                    - code [ref=e471]: claude-opus-4-6
+                - row "July 21, 2025 claude-2.1 claude-opus-4-6" [ref=e472]:
+                  - cell "July 21, 2025" [ref=e473]
+                  - cell "claude-2.1" [ref=e474]:
+                    - code [ref=e475]: claude-2.1
+                  - cell "claude-opus-4-6" [ref=e476]:
+                    - code [ref=e477]: claude-opus-4-6
+                - row "July 21, 2025 claude-3-sonnet-20240229 claude-opus-4-6" [ref=e478]:
+                  - cell "July 21, 2025" [ref=e479]
+                  - cell "claude-3-sonnet-20240229" [ref=e480]:
+                    - code [ref=e481]: claude-3-sonnet-20240229
+                  - cell "claude-opus-4-6" [ref=e482]:
+                    - code [ref=e483]: claude-opus-4-6
+            - 'heading "Copy link to clipboard 2024-09-04: Claude 1 and Instant models" [level=3] [ref=e484]':
+              - generic [ref=e485]:
+                - button "Copy link to clipboard" [ref=e487] [cursor=pointer]:
+                  - img [ref=e489]
+                - generic [ref=e491]: "2024-09-04: Claude 1 and Instant models"
+            - generic [ref=e492]:
+              - img [ref=e495]
+              - paragraph [ref=e498]: These models were retired November 6, 2024.
+            - paragraph [ref=e499]: On September 4, 2024, Anthropic notified developers using Claude 1 and Instant models of their upcoming retirements.
+            - table [ref=e501]:
+              - rowgroup [ref=e502]:
+                - row "Retirement Date Deprecated Model Recommended Replacement" [ref=e503]:
+                  - columnheader "Retirement Date" [ref=e504]
+                  - columnheader "Deprecated Model" [ref=e505]
+                  - columnheader "Recommended Replacement" [ref=e506]
+              - rowgroup [ref=e507]:
+                - row "November 6, 2024 claude-1.0 claude-haiku-4-5-20251001" [ref=e508]:
+                  - cell "November 6, 2024" [ref=e509]
+                  - cell "claude-1.0" [ref=e510]:
+                    - code [ref=e511]: claude-1.0
+                  - cell "claude-haiku-4-5-20251001" [ref=e512]:
+                    - code [ref=e513]: claude-haiku-4-5-20251001
+                - row "November 6, 2024 claude-1.1 claude-haiku-4-5-20251001" [ref=e514]:
+                  - cell "November 6, 2024" [ref=e515]
+                  - cell "claude-1.1" [ref=e516]:
+                    - code [ref=e517]: claude-1.1
+                  - cell "claude-haiku-4-5-20251001" [ref=e518]:
+                    - code [ref=e519]: claude-haiku-4-5-20251001
+                - row "November 6, 2024 claude-1.2 claude-haiku-4-5-20251001" [ref=e520]:
+                  - cell "November 6, 2024" [ref=e521]
+                  - cell "claude-1.2" [ref=e522]:
+                    - code [ref=e523]: claude-1.2
+                  - cell "claude-haiku-4-5-20251001" [ref=e524]:
+                    - code [ref=e525]: claude-haiku-4-5-20251001
+                - row "November 6, 2024 claude-1.3 claude-haiku-4-5-20251001" [ref=e526]:
+                  - cell "November 6, 2024" [ref=e527]
+                  - cell "claude-1.3" [ref=e528]:
+                    - code [ref=e529]: claude-1.3
+                  - cell "claude-haiku-4-5-20251001" [ref=e530]:
+                    - code [ref=e531]: claude-haiku-4-5-20251001
+                - row "November 6, 2024 claude-instant-1.0 claude-haiku-4-5-20251001" [ref=e532]:
+                  - cell "November 6, 2024" [ref=e533]
+                  - cell "claude-instant-1.0" [ref=e534]:
+                    - code [ref=e535]: claude-instant-1.0
+                  - cell "claude-haiku-4-5-20251001" [ref=e536]:
+                    - code [ref=e537]: claude-haiku-4-5-20251001
+                - row "November 6, 2024 claude-instant-1.1 claude-haiku-4-5-20251001" [ref=e538]:
+                  - cell "November 6, 2024" [ref=e539]
+                  - cell "claude-instant-1.1" [ref=e540]:
+                    - code [ref=e541]: claude-instant-1.1
+                  - cell "claude-haiku-4-5-20251001" [ref=e542]:
+                    - code [ref=e543]: claude-haiku-4-5-20251001
+                - row "November 6, 2024 claude-instant-1.2 claude-haiku-4-5-20251001" [ref=e544]:
+                  - cell "November 6, 2024" [ref=e545]
+                  - cell "claude-instant-1.2" [ref=e546]:
+                    - code [ref=e547]: claude-instant-1.2
+                  - cell "claude-haiku-4-5-20251001" [ref=e548]:
+                    - code [ref=e549]: claude-haiku-4-5-20251001
+            - generic [ref=e550]:
+              - paragraph [ref=e551]: Was this page helpful?
+              - generic [ref=e552]:
+                - button "Thumbs up" [ref=e553] [cursor=pointer]:
+                  - img [ref=e555]
+                - button "Thumbs down" [ref=e557] [cursor=pointer]:
+                  - img [ref=e559]
+          - button "Toggle table of contents" [ref=e561] [cursor=pointer]:
+            - img [ref=e562]
+        - generic [ref=e565]:
+          - generic [ref=e566]:
+            - link "Claude API Docs home page" [ref=e568] [cursor=pointer]:
+              - /url: /docs
+              - img "Claude API Docs" [ref=e569]
+            - generic [ref=e572]:
+              - link "X (Twitter)" [ref=e573] [cursor=pointer]:
+                - /url: https://x.com/claudeai
+                - img [ref=e574]
+              - link "LinkedIn" [ref=e576] [cursor=pointer]:
+                - /url: https://www.linkedin.com/showcase/claude
+                - img [ref=e577]
+              - link "Instagram" [ref=e579] [cursor=pointer]:
+                - /url: https://instagram.com/claudeai
+                - img [ref=e580]
+          - generic [ref=e583]:
+            - generic [ref=e584]:
+              - generic [ref=e585]:
+                - heading "Solutions" [level=3] [ref=e586]
+                - list [ref=e587]:
+                  - listitem [ref=e588]:
+                    - link "AI agents" [ref=e589] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/agents
+                  - listitem [ref=e590]:
+                    - link "Code modernization" [ref=e591] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/code-modernization
+                  - listitem [ref=e592]:
+                    - link "Coding" [ref=e593] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/coding
+                  - listitem [ref=e594]:
+                    - link "Customer support" [ref=e595] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/customer-support
+                  - listitem [ref=e596]:
+                    - link "Education" [ref=e597] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/education
+                  - listitem [ref=e598]:
+                    - link "Financial services" [ref=e599] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/financial-services
+                  - listitem [ref=e600]:
+                    - link "Government" [ref=e601] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/government
+                  - listitem [ref=e602]:
+                    - link "Life sciences" [ref=e603] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/life-sciences
+              - generic [ref=e604]:
+                - heading "Partners" [level=3] [ref=e605]
+                - list [ref=e606]:
+                  - listitem [ref=e607]:
+                    - link "Amazon Bedrock" [ref=e608] [cursor=pointer]:
+                      - /url: https://claude.com/partners/amazon-bedrock
+                  - listitem [ref=e609]:
+                    - link "Google Cloud's Vertex AI" [ref=e610] [cursor=pointer]:
+                      - /url: https://claude.com/partners/google-cloud-vertex-ai
+            - generic [ref=e611]:
+              - generic [ref=e612]:
+                - heading "Learn" [level=3] [ref=e613]
+                - list [ref=e614]:
+                  - listitem [ref=e615]:
+                    - link "Blog" [ref=e616] [cursor=pointer]:
+                      - /url: https://claude.com/blog
+                  - listitem [ref=e617]:
+                    - link "Catalog" [ref=e618] [cursor=pointer]:
+                      - /url: https://claude.ai/catalog/artifacts
+                  - listitem [ref=e619]:
+                    - link "Courses" [ref=e620] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/learn
+                  - listitem [ref=e621]:
+                    - link "Use cases" [ref=e622] [cursor=pointer]:
+                      - /url: https://claude.com/resources/use-cases
+                  - listitem [ref=e623]:
+                    - link "Connectors" [ref=e624] [cursor=pointer]:
+                      - /url: https://claude.com/partners/mcp
+                  - listitem [ref=e625]:
+                    - link "Customer stories" [ref=e626] [cursor=pointer]:
+                      - /url: https://claude.com/customers
+                  - listitem [ref=e627]:
+                    - link "Engineering at Anthropic" [ref=e628] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/engineering
+                  - listitem [ref=e629]:
+                    - link "Events" [ref=e630] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/events
+                  - listitem [ref=e631]:
+                    - link "Powered by Claude" [ref=e632] [cursor=pointer]:
+                      - /url: https://claude.com/partners/powered-by-claude
+                  - listitem [ref=e633]:
+                    - link "Service partners" [ref=e634] [cursor=pointer]:
+                      - /url: https://claude.com/partners/services
+                  - listitem [ref=e635]:
+                    - link "Startups program" [ref=e636] [cursor=pointer]:
+                      - /url: https://claude.com/programs/startups
+              - generic [ref=e637]:
+                - heading "Company" [level=3] [ref=e638]
+                - list [ref=e639]:
+                  - listitem [ref=e640]:
+                    - link "Anthropic" [ref=e641] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/company
+                  - listitem [ref=e642]:
+                    - link "Careers" [ref=e643] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/careers
+                  - listitem [ref=e644]:
+                    - link "Economic Futures" [ref=e645] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/economic-futures
+                  - listitem [ref=e646]:
+                    - link "Research" [ref=e647] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/research
+                  - listitem [ref=e648]:
+                    - link "News" [ref=e649] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/news
+                  - listitem [ref=e650]:
+                    - link "Responsible Scaling Policy" [ref=e651] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy
+                  - listitem [ref=e652]:
+                    - link "Security and compliance" [ref=e653] [cursor=pointer]:
+                      - /url: https://trust.anthropic.com
+                  - listitem [ref=e654]:
+                    - link "Transparency" [ref=e655] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/transparency
+            - generic [ref=e656]:
+              - generic [ref=e657]:
+                - heading "Help and security" [level=3] [ref=e658]
+                - list [ref=e659]:
+                  - listitem [ref=e660]:
+                    - link "Availability" [ref=e661] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/supported-countries
+                  - listitem [ref=e662]:
+                    - link "Status" [ref=e663] [cursor=pointer]:
+                      - /url: https://status.claude.com/
+                  - listitem [ref=e664]:
+                    - link "Support" [ref=e665] [cursor=pointer]:
+                      - /url: https://support.claude.com/
+                  - listitem [ref=e666]:
+                    - link "Discord" [ref=e667] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/discord
+              - generic [ref=e668]:
+                - heading "Terms and policies" [level=3] [ref=e669]
+                - list [ref=e670]:
+                  - listitem [ref=e671]:
+                    - link "Privacy policy" [ref=e672] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/legal/privacy
+                  - listitem [ref=e673]:
+                    - link "Responsible disclosure policy" [ref=e674] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/responsible-disclosure-policy
+                  - listitem [ref=e675]:
+                    - 'link "Terms of service: Commercial" [ref=e676] [cursor=pointer]':
+                      - /url: https://www.anthropic.com/legal/commercial-terms
+                  - listitem [ref=e677]:
+                    - 'link "Terms of service: Consumer" [ref=e678] [cursor=pointer]':
+                      - /url: https://www.anthropic.com/legal/consumer-terms
+                  - listitem [ref=e679]:
+                    - link "Usage policy" [ref=e680] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/legal/aup
+  - button "Ask Docs" [ref=e684] [cursor=pointer]:
+    - generic [ref=e685]: Ask Docs

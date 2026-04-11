@@ -1,0 +1,1458 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "OpenAI Developers" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "OpenAI Developers" [ref=e5]
+      - navigation [ref=e6]:
+        - link "Home" [ref=e8] [cursor=pointer]:
+          - /url: /
+        - link "API" [ref=e10] [cursor=pointer]:
+          - /url: /api
+          - text: API
+          - img [ref=e11]
+        - link "Codex" [ref=e14] [cursor=pointer]:
+          - /url: /codex
+          - text: Codex
+          - img [ref=e15]
+        - link "ChatGPT" [ref=e18] [cursor=pointer]:
+          - /url: /chatgpt
+          - text: ChatGPT
+          - img [ref=e19]
+        - link "Resources" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+          - text: Resources
+          - img [ref=e23]
+      - generic [ref=e25]:
+        - link "API Dashboard" [ref=e28] [cursor=pointer]:
+          - /url: https://platform.openai.com/login
+          - generic [ref=e29]:
+            - generic [ref=e30]: API Dashboard
+            - img [ref=e31]
+        - button "Toggle light and dark theme" [ref=e33] [cursor=pointer]:
+          - img [ref=e34]
+        - button "Search the API docs" [ref=e36] [cursor=pointer]:
+          - img [ref=e37]
+  - generic [ref=e40]:
+    - navigation [ref=e42]:
+      - generic [ref=e43]:
+        - heading "Get started" [level=3] [ref=e44]
+        - list [ref=e45]:
+          - listitem [ref=e46]:
+            - link "Overview" [ref=e47] [cursor=pointer]:
+              - /url: /api/docs
+              - generic [ref=e48]: Overview
+          - listitem [ref=e49]:
+            - link "Quickstart" [ref=e50] [cursor=pointer]:
+              - /url: /api/docs/quickstart
+              - generic [ref=e51]: Quickstart
+          - listitem [ref=e52]:
+            - link "Models" [ref=e53] [cursor=pointer]:
+              - /url: /api/docs/models
+              - generic [ref=e54]: Models
+          - listitem [ref=e55]:
+            - link "Pricing" [ref=e56] [cursor=pointer]:
+              - /url: /api/docs/pricing
+              - generic [ref=e57]: Pricing
+          - listitem [ref=e58]:
+            - link "Libraries" [ref=e59] [cursor=pointer]:
+              - /url: /api/docs/libraries
+              - generic [ref=e60]: Libraries
+          - listitem [ref=e61]:
+            - 'link "Latest: GPT-5.4" [ref=e62] [cursor=pointer]':
+              - /url: /api/docs/guides/latest-model
+              - generic [ref=e63]: "Latest: GPT-5.4"
+          - listitem [ref=e64]:
+            - link "Prompt guidance" [ref=e65] [cursor=pointer]:
+              - /url: /api/docs/guides/prompt-guidance
+              - generic [ref=e66]: Prompt guidance
+      - generic [ref=e67]:
+        - heading "Core concepts" [level=3] [ref=e68]
+        - list [ref=e69]:
+          - listitem [ref=e70]:
+            - link "Text generation" [ref=e71] [cursor=pointer]:
+              - /url: /api/docs/guides/text
+              - generic [ref=e72]: Text generation
+          - listitem [ref=e73]:
+            - link "Code generation" [ref=e74] [cursor=pointer]:
+              - /url: /api/docs/guides/code-generation
+              - generic [ref=e75]: Code generation
+          - listitem [ref=e76]:
+            - link "Images and vision" [ref=e77] [cursor=pointer]:
+              - /url: /api/docs/guides/images-vision
+              - generic [ref=e78]: Images and vision
+          - listitem [ref=e79]:
+            - link "Audio and speech" [ref=e80] [cursor=pointer]:
+              - /url: /api/docs/guides/audio
+              - generic [ref=e81]: Audio and speech
+          - listitem [ref=e82]:
+            - link "Structured output" [ref=e83] [cursor=pointer]:
+              - /url: /api/docs/guides/structured-outputs
+              - generic [ref=e84]: Structured output
+          - listitem [ref=e85]:
+            - link "Function calling" [ref=e86] [cursor=pointer]:
+              - /url: /api/docs/guides/function-calling
+              - generic [ref=e87]: Function calling
+          - listitem [ref=e88]:
+            - link "Responses API" [ref=e89] [cursor=pointer]:
+              - /url: /api/docs/guides/migrate-to-responses
+              - generic [ref=e90]: Responses API
+          - listitem [ref=e91]:
+            - link "Using tools" [ref=e92] [cursor=pointer]:
+              - /url: /api/docs/guides/tools
+              - generic [ref=e93]: Using tools
+      - generic [ref=e94]:
+        - heading "Agents SDK" [level=3] [ref=e95]
+        - list [ref=e96]:
+          - listitem [ref=e97]:
+            - link "Overview" [ref=e98] [cursor=pointer]:
+              - /url: /api/docs/guides/agents
+              - generic [ref=e99]: Overview
+          - listitem [ref=e100]:
+            - link "Quickstart" [ref=e101] [cursor=pointer]:
+              - /url: /api/docs/guides/agents/quickstart
+              - generic [ref=e102]: Quickstart
+          - listitem [ref=e103]:
+            - link "Agent definitions" [ref=e104] [cursor=pointer]:
+              - /url: /api/docs/guides/agents/define-agents
+              - generic [ref=e105]: Agent definitions
+          - listitem [ref=e106]:
+            - link "Models and providers" [ref=e107] [cursor=pointer]:
+              - /url: /api/docs/guides/agents/models
+              - generic [ref=e108]: Models and providers
+          - listitem [ref=e109]:
+            - link "Running agents" [ref=e110] [cursor=pointer]:
+              - /url: /api/docs/guides/agents/running-agents
+              - generic [ref=e111]: Running agents
+          - listitem [ref=e112]:
+            - link "Orchestration" [ref=e113] [cursor=pointer]:
+              - /url: /api/docs/guides/agents/orchestration
+              - generic [ref=e114]: Orchestration
+          - listitem [ref=e115]:
+            - link "Guardrails" [ref=e116] [cursor=pointer]:
+              - /url: /api/docs/guides/agents/guardrails-approvals
+              - generic [ref=e117]: Guardrails
+          - listitem [ref=e118]:
+            - link "Results and state" [ref=e119] [cursor=pointer]:
+              - /url: /api/docs/guides/agents/results
+              - generic [ref=e120]: Results and state
+          - listitem [ref=e121]:
+            - link "Integrations and observability" [ref=e122] [cursor=pointer]:
+              - /url: /api/docs/guides/agents/integrations-observability
+              - generic [ref=e123]: Integrations and observability
+          - listitem [ref=e124]:
+            - link "Evaluate agent workflows" [ref=e125] [cursor=pointer]:
+              - /url: /api/docs/guides/agent-evals
+              - generic [ref=e126]: Evaluate agent workflows
+          - listitem [ref=e127]:
+            - link "Voice agents" [ref=e128] [cursor=pointer]:
+              - /url: /api/docs/guides/voice-agents
+              - generic [ref=e129]: Voice agents
+          - listitem [ref=e130]:
+            - group [ref=e131]:
+              - generic "Agent Builder" [ref=e132] [cursor=pointer]:
+                - generic [ref=e133]: Agent Builder
+                - img [ref=e134]
+      - generic [ref=e136]:
+        - heading "Tools" [level=3] [ref=e137]
+        - list [ref=e138]:
+          - listitem [ref=e139]:
+            - link "Web search" [ref=e140] [cursor=pointer]:
+              - /url: /api/docs/guides/tools-web-search
+              - generic [ref=e141]: Web search
+          - listitem [ref=e142]:
+            - link "MCP and Connectors" [ref=e143] [cursor=pointer]:
+              - /url: /api/docs/guides/tools-connectors-mcp
+              - generic [ref=e144]: MCP and Connectors
+          - listitem [ref=e145]:
+            - link "Skills" [ref=e146] [cursor=pointer]:
+              - /url: /api/docs/guides/tools-skills
+              - generic [ref=e147]: Skills
+          - listitem [ref=e148]:
+            - link "Shell" [ref=e149] [cursor=pointer]:
+              - /url: /api/docs/guides/tools-shell
+              - generic [ref=e150]: Shell
+          - listitem [ref=e151]:
+            - link "Computer use" [ref=e152] [cursor=pointer]:
+              - /url: /api/docs/guides/tools-computer-use
+              - generic [ref=e153]: Computer use
+          - listitem [ref=e154]:
+            - group [ref=e155]:
+              - generic "File search and retrieval" [ref=e156] [cursor=pointer]:
+                - generic [ref=e157]: File search and retrieval
+                - img [ref=e158]
+          - listitem [ref=e160]:
+            - link "Tool search" [ref=e161] [cursor=pointer]:
+              - /url: /api/docs/guides/tools-tool-search
+              - generic [ref=e162]: Tool search
+          - listitem [ref=e163]:
+            - group [ref=e164]:
+              - generic "More tools" [ref=e165] [cursor=pointer]:
+                - generic [ref=e166]: More tools
+                - img [ref=e167]
+      - generic [ref=e169]:
+        - heading "Run and scale" [level=3] [ref=e170]
+        - list [ref=e171]:
+          - listitem [ref=e172]:
+            - link "Conversation state" [ref=e173] [cursor=pointer]:
+              - /url: /api/docs/guides/conversation-state
+              - generic [ref=e174]: Conversation state
+          - listitem [ref=e175]:
+            - link "Background mode" [ref=e176] [cursor=pointer]:
+              - /url: /api/docs/guides/background
+              - generic [ref=e177]: Background mode
+          - listitem [ref=e178]:
+            - link "Streaming" [ref=e179] [cursor=pointer]:
+              - /url: /api/docs/guides/streaming-responses
+              - generic [ref=e180]: Streaming
+          - listitem [ref=e181]:
+            - link "WebSocket mode" [ref=e182] [cursor=pointer]:
+              - /url: /api/docs/guides/websocket-mode
+              - generic [ref=e183]: WebSocket mode
+          - listitem [ref=e184]:
+            - link "Webhooks" [ref=e185] [cursor=pointer]:
+              - /url: /api/docs/guides/webhooks
+              - generic [ref=e186]: Webhooks
+          - listitem [ref=e187]:
+            - link "File inputs" [ref=e188] [cursor=pointer]:
+              - /url: /api/docs/guides/file-inputs
+              - generic [ref=e189]: File inputs
+          - listitem [ref=e190]:
+            - group [ref=e191]:
+              - generic "Context management" [ref=e192] [cursor=pointer]:
+                - generic [ref=e193]: Context management
+                - img [ref=e194]
+          - listitem [ref=e196]:
+            - group [ref=e197]:
+              - generic "Prompting" [ref=e198] [cursor=pointer]:
+                - generic [ref=e199]: Prompting
+                - img [ref=e200]
+          - listitem [ref=e202]:
+            - group [ref=e203]:
+              - generic "Reasoning" [ref=e204] [cursor=pointer]:
+                - generic [ref=e205]: Reasoning
+                - img [ref=e206]
+      - generic [ref=e208]:
+        - heading "Evaluation" [level=3] [ref=e209]
+        - list [ref=e210]:
+          - listitem [ref=e211]:
+            - link "Getting started" [ref=e212] [cursor=pointer]:
+              - /url: /api/docs/guides/evaluation-getting-started
+              - generic [ref=e213]: Getting started
+          - listitem [ref=e214]:
+            - link "Working with evals" [ref=e215] [cursor=pointer]:
+              - /url: /api/docs/guides/evals
+              - generic [ref=e216]: Working with evals
+          - listitem [ref=e217]:
+            - link "Prompt optimizer" [ref=e218] [cursor=pointer]:
+              - /url: /api/docs/guides/prompt-optimizer
+              - generic [ref=e219]: Prompt optimizer
+          - listitem [ref=e220]:
+            - link "External models" [ref=e221] [cursor=pointer]:
+              - /url: /api/docs/guides/external-models
+              - generic [ref=e222]: External models
+          - listitem [ref=e223]:
+            - link "Best practices" [ref=e224] [cursor=pointer]:
+              - /url: /api/docs/guides/evaluation-best-practices
+              - generic [ref=e225]: Best practices
+      - generic [ref=e226]:
+        - heading "Realtime API" [level=3] [ref=e227]
+        - list [ref=e228]:
+          - listitem [ref=e229]:
+            - link "Overview" [ref=e230] [cursor=pointer]:
+              - /url: /api/docs/guides/realtime
+              - generic [ref=e231]: Overview
+          - listitem [ref=e232]:
+            - group [ref=e233]:
+              - generic "Connect" [ref=e234] [cursor=pointer]:
+                - generic [ref=e235]: Connect
+                - img [ref=e236]
+          - listitem [ref=e238]:
+            - group [ref=e239]:
+              - generic "Usage" [ref=e240] [cursor=pointer]:
+                - generic [ref=e241]: Usage
+                - img [ref=e242]
+      - generic [ref=e244]:
+        - heading "Model optimization" [level=3] [ref=e245]
+        - list [ref=e246]:
+          - listitem [ref=e247]:
+            - link "Optimization cycle" [ref=e248] [cursor=pointer]:
+              - /url: /api/docs/guides/model-optimization
+              - generic [ref=e249]: Optimization cycle
+          - listitem [ref=e250]:
+            - group [ref=e251]:
+              - generic "Fine-tuning" [ref=e252] [cursor=pointer]:
+                - generic [ref=e253]: Fine-tuning
+                - img [ref=e254]
+          - listitem [ref=e256]:
+            - link "Graders" [ref=e257] [cursor=pointer]:
+              - /url: /api/docs/guides/graders
+              - generic [ref=e258]: Graders
+      - generic [ref=e259]:
+        - heading "Specialized models" [level=3] [ref=e260]
+        - list [ref=e261]:
+          - listitem [ref=e262]:
+            - link "Image generation" [ref=e263] [cursor=pointer]:
+              - /url: /api/docs/guides/image-generation
+              - generic [ref=e264]: Image generation
+          - listitem [ref=e265]:
+            - link "Video generation" [ref=e266] [cursor=pointer]:
+              - /url: /api/docs/guides/video-generation
+              - generic [ref=e267]: Video generation
+          - listitem [ref=e268]:
+            - link "Text to speech" [ref=e269] [cursor=pointer]:
+              - /url: /api/docs/guides/text-to-speech
+              - generic [ref=e270]: Text to speech
+          - listitem [ref=e271]:
+            - link "Speech to text" [ref=e272] [cursor=pointer]:
+              - /url: /api/docs/guides/speech-to-text
+              - generic [ref=e273]: Speech to text
+          - listitem [ref=e274]:
+            - link "Deep research" [ref=e275] [cursor=pointer]:
+              - /url: /api/docs/guides/deep-research
+              - generic [ref=e276]: Deep research
+          - listitem [ref=e277]:
+            - link "Embeddings" [ref=e278] [cursor=pointer]:
+              - /url: /api/docs/guides/embeddings
+              - generic [ref=e279]: Embeddings
+          - listitem [ref=e280]:
+            - link "Moderation" [ref=e281] [cursor=pointer]:
+              - /url: /api/docs/guides/moderation
+              - generic [ref=e282]: Moderation
+      - generic [ref=e283]:
+        - heading "Going live" [level=3] [ref=e284]
+        - list [ref=e285]:
+          - listitem [ref=e286]:
+            - link "Production best practices" [ref=e287] [cursor=pointer]:
+              - /url: /api/docs/guides/production-best-practices
+              - generic [ref=e288]: Production best practices
+          - listitem [ref=e289]:
+            - group [ref=e290]:
+              - generic "Latency optimization" [ref=e291] [cursor=pointer]:
+                - generic [ref=e292]: Latency optimization
+                - img [ref=e293]
+          - listitem [ref=e295]:
+            - group [ref=e296]:
+              - generic "Cost optimization" [ref=e297] [cursor=pointer]:
+                - generic [ref=e298]: Cost optimization
+                - img [ref=e299]
+          - listitem [ref=e301]:
+            - link "Accuracy optimization" [ref=e302] [cursor=pointer]:
+              - /url: /api/docs/guides/optimizing-llm-accuracy
+              - generic [ref=e303]: Accuracy optimization
+          - listitem [ref=e304]:
+            - group [ref=e305]:
+              - generic "Safety" [ref=e306] [cursor=pointer]:
+                - generic [ref=e307]: Safety
+                - img [ref=e308]
+      - generic [ref=e310]:
+        - heading "Legacy APIs" [level=3] [ref=e311]
+        - list [ref=e312]:
+          - listitem [ref=e313]:
+            - group [ref=e314]:
+              - generic "Assistants API" [ref=e315] [cursor=pointer]:
+                - generic [ref=e316]: Assistants API
+                - img [ref=e317]
+      - generic [ref=e319]:
+        - heading "Resources" [level=3] [ref=e320]
+        - list [ref=e321]:
+          - listitem [ref=e322]:
+            - link "Terms and policies" [ref=e323] [cursor=pointer]:
+              - /url: https://openai.com/policies
+              - generic [ref=e324]: Terms and policies
+              - img [ref=e325]
+          - listitem [ref=e327]:
+            - link "Changelog" [ref=e328] [cursor=pointer]:
+              - /url: /api/docs/changelog
+              - generic [ref=e329]: Changelog
+          - listitem [ref=e330]:
+            - link "Your data" [ref=e331] [cursor=pointer]:
+              - /url: /api/docs/guides/your-data
+              - generic [ref=e332]: Your data
+          - listitem [ref=e333]:
+            - link "Permissions" [ref=e334] [cursor=pointer]:
+              - /url: /api/docs/guides/rbac
+              - generic [ref=e335]: Permissions
+          - listitem [ref=e336]:
+            - link "Rate limits" [ref=e337] [cursor=pointer]:
+              - /url: /api/docs/guides/rate-limits
+              - generic [ref=e338]: Rate limits
+          - listitem [ref=e339]:
+            - link "Deprecations" [ref=e340] [cursor=pointer]:
+              - /url: /api/docs/deprecations
+              - generic [ref=e341]: Deprecations
+          - listitem [ref=e342]:
+            - link "MCP for deep research" [ref=e343] [cursor=pointer]:
+              - /url: /api/docs/mcp
+              - generic [ref=e344]: MCP for deep research
+          - listitem [ref=e345]:
+            - link "Developer mode" [ref=e346] [cursor=pointer]:
+              - /url: /api/docs/guides/developer-mode
+              - generic [ref=e347]: Developer mode
+          - listitem [ref=e348]:
+            - group [ref=e349]:
+              - generic "ChatGPT Actions" [ref=e350] [cursor=pointer]:
+                - generic [ref=e351]: ChatGPT Actions
+                - img [ref=e352]
+    - main [ref=e354]:
+      - generic [ref=e357]:
+        - generic [ref=e363]:
+          - button "Copy Page" [ref=e364] [cursor=pointer]:
+            - generic [ref=e365]:
+              - img [ref=e368]
+              - generic [ref=e370]: Copy Page
+          - button "More page actions" [ref=e371] [cursor=pointer]:
+            - generic [ref=e372]:
+              - img [ref=e373]
+              - generic [ref=e375]: More page actions
+        - generic [ref=e377]:
+          - heading "Deprecations" [level=1] [ref=e378]
+          - paragraph [ref=e379]: Find deprecated features and recommended replacements.
+          - button "Copy Page" [ref=e385] [cursor=pointer]:
+            - generic [ref=e386]:
+              - img [ref=e389]
+              - generic [ref=e391]: Copy Page
+        - article [ref=e392]:
+          - heading "Overview Copy link to overview" [level=2] [ref=e393]:
+            - generic [ref=e394]: Overview
+            - button "Copy link to overview" [ref=e395] [cursor=pointer]:
+              - img [ref=e396]
+          - paragraph [ref=e398]:
+            - text: As we launch safer and more capable models, we regularly retire older models. Software relying on OpenAI models may need occasional updates to keep working. Impacted customers will always be notified by email and in our documentation along with
+            - link "blog posts" [ref=e399] [cursor=pointer]:
+              - /url: https://openai.com/blog
+            - text: for larger changes.
+          - paragraph [ref=e400]: This page lists all API deprecations, along with recommended replacements.
+          - heading "Deprecation vs. legacy Copy link to deprecation vs legacy" [level=2] [ref=e401]:
+            - generic [ref=e402]: Deprecation vs. legacy
+            - button "Copy link to deprecation vs legacy" [ref=e403] [cursor=pointer]:
+              - img [ref=e404]
+          - paragraph [ref=e406]: We use the term “deprecation” to refer to the process of retiring a model or endpoint. When we announce that a model or endpoint is being deprecated, it immediately becomes deprecated. All deprecated models and endpoints will also have a shut down date. At the time of the shut down, the model or endpoint will no longer be accessible.
+          - paragraph [ref=e407]: We use the terms “sunset” and “shut down” interchangeably to mean a model or endpoint is no longer accessible.
+          - paragraph [ref=e408]: We use the term “legacy” to refer to models and endpoints that no longer receive updates. We tag endpoints and models as legacy to signal to developers where we’re moving as a platform and that they should likely migrate to newer models or endpoints. You can expect that a legacy model or endpoint will be deprecated at some point in the future.
+          - heading "Deprecation history Copy link to deprecation history" [level=2] [ref=e409]:
+            - generic [ref=e410]: Deprecation history
+            - button "Copy link to deprecation history" [ref=e411] [cursor=pointer]:
+              - img [ref=e412]
+          - paragraph [ref=e414]: All deprecations are listed below, with the most recent announcements at the top.
+          - 'heading "2026-03-24: Sora 2 video generation models and Videos API Copy link to 2026 03 24 sora 2 video generation models and videos api" [level=3] [ref=e415]':
+            - generic [ref=e416]: "2026-03-24: Sora 2 video generation models and Videos API"
+            - button "Copy link to 2026 03 24 sora 2 video generation models and videos api" [ref=e417] [cursor=pointer]:
+              - img [ref=e418]
+          - paragraph [ref=e420]: On March 24th, 2026, we notified developers using the Videos API and Sora 2 video generation model aliases and snapshots of their deprecation and removal from the API on September 24, 2026.
+          - table [ref=e422]:
+            - rowgroup [ref=e423]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e424]:
+                - columnheader "Shutdown date" [ref=e425]
+                - columnheader "Model / system" [ref=e426]
+                - columnheader "Recommended replacement" [ref=e427]
+            - rowgroup [ref=e428]:
+              - row "2026-09-24 Videos API ---" [ref=e429]:
+                - cell "2026-09-24" [ref=e430]
+                - cell "Videos API" [ref=e431]
+                - cell "---" [ref=e432]
+              - row "2026-09-24 sora-2 ---" [ref=e433]:
+                - cell "2026-09-24" [ref=e434]
+                - cell "sora-2" [ref=e435]:
+                  - code [ref=e436]: sora-2
+                - cell "---" [ref=e437]
+              - row "2026-09-24 sora-2-pro ---" [ref=e438]:
+                - cell "2026-09-24" [ref=e439]
+                - cell "sora-2-pro" [ref=e440]:
+                  - code [ref=e441]: sora-2-pro
+                - cell "---" [ref=e442]
+              - row "2026-09-24 sora-2-2025-10-06 ---" [ref=e443]:
+                - cell "2026-09-24" [ref=e444]
+                - cell "sora-2-2025-10-06" [ref=e445]:
+                  - code [ref=e446]: sora-2-2025-10-06
+                - cell "---" [ref=e447]
+              - row "2026-09-24 sora-2-2025-12-08 ---" [ref=e448]:
+                - cell "2026-09-24" [ref=e449]
+                - cell "sora-2-2025-12-08" [ref=e450]:
+                  - code [ref=e451]: sora-2-2025-12-08
+                - cell "---" [ref=e452]
+              - row "2026-09-24 sora-2-pro-2025-10-06 ---" [ref=e453]:
+                - cell "2026-09-24" [ref=e454]
+                - cell "sora-2-pro-2025-10-06" [ref=e455]:
+                  - code [ref=e456]: sora-2-pro-2025-10-06
+                - cell "---" [ref=e457]
+          - 'heading "2025-11-18: chatgpt-4o-latest snapshot Copy link to 2025 11 18 chatgpt 4o latest snapshot" [level=3] [ref=e458]':
+            - generic [ref=e459]: "2025-11-18: chatgpt-4o-latest snapshot"
+            - button "Copy link to 2025 11 18 chatgpt 4o latest snapshot" [ref=e460] [cursor=pointer]:
+              - img [ref=e461]
+          - paragraph [ref=e463]:
+            - text: On November 18th, 2025, we notified developers using
+            - code [ref=e464]: chatgpt-4o-latest
+            - text: model snapshot of its deprecation and removal from the API on February 17, 2026.
+          - table [ref=e466]:
+            - rowgroup [ref=e467]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e468]:
+                - columnheader "Shutdown date" [ref=e469]
+                - columnheader "Model / system" [ref=e470]
+                - columnheader "Recommended replacement" [ref=e471]
+            - rowgroup [ref=e472]:
+              - row "2026-02-17 chatgpt-4o-latest gpt-5.1-chat-latest" [ref=e473]:
+                - cell "2026-02-17" [ref=e474]
+                - cell "chatgpt-4o-latest" [ref=e475]:
+                  - code [ref=e476]: chatgpt-4o-latest
+                - cell "gpt-5.1-chat-latest" [ref=e477]:
+                  - code [ref=e478]: gpt-5.1-chat-latest
+          - 'heading "2025-11-17: codex-mini-latest model snapshot Copy link to 2025 11 17 codex mini latest model snapshot" [level=3] [ref=e479]':
+            - generic [ref=e480]: "2025-11-17: codex-mini-latest model snapshot"
+            - button "Copy link to 2025 11 17 codex mini latest model snapshot" [ref=e481] [cursor=pointer]:
+              - img [ref=e482]
+          - paragraph [ref=e484]:
+            - text: On November 17th, 2025, we notified developers using
+            - code [ref=e485]: codex-mini-latest
+            - text: model of its deprecation and removal from the API on February 12, 2026. As part of this deprecation, we will no longer support our legacy local shell tool, which is only available for use with
+            - code [ref=e486]: codex-mini-latest
+            - text: . For new use cases, please use our latest shell tool.
+          - table [ref=e488]:
+            - rowgroup [ref=e489]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e490]:
+                - columnheader "Shutdown date" [ref=e491]
+                - columnheader "Model / system" [ref=e492]
+                - columnheader "Recommended replacement" [ref=e493]
+            - rowgroup [ref=e494]:
+              - row "2026-02-12 codex-mini-latest gpt-5-codex-mini" [ref=e495]:
+                - cell "2026-02-12" [ref=e496]
+                - cell "codex-mini-latest" [ref=e497]:
+                  - code [ref=e498]: codex-mini-latest
+                - cell "gpt-5-codex-mini" [ref=e499]:
+                  - code [ref=e500]: gpt-5-codex-mini
+          - 'heading "2025-11-14: DALL·E model snapshots Copy link to 2025 11 14 dalle model snapshots" [level=3] [ref=e501]':
+            - generic [ref=e502]: "2025-11-14: DALL·E model snapshots"
+            - button "Copy link to 2025 11 14 dalle model snapshots" [ref=e503] [cursor=pointer]:
+              - img [ref=e504]
+          - paragraph [ref=e506]: On November 14th, 2025, we notified developers using DALL·E model snapshots of their deprecation and removal from the API on May 12, 2026.
+          - table [ref=e508]:
+            - rowgroup [ref=e509]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e510]:
+                - columnheader "Shutdown date" [ref=e511]
+                - columnheader "Model / system" [ref=e512]
+                - columnheader "Recommended replacement" [ref=e513]
+            - rowgroup [ref=e514]:
+              - row "2026-05-12 dall-e-2 gpt-image-1 or gpt-image-1-mini" [ref=e515]:
+                - cell "2026-05-12" [ref=e516]
+                - cell "dall-e-2" [ref=e517]:
+                  - code [ref=e518]: dall-e-2
+                - cell "gpt-image-1 or gpt-image-1-mini" [ref=e519]:
+                  - code [ref=e520]: gpt-image-1
+                  - text: or
+                  - code [ref=e521]: gpt-image-1-mini
+              - row "2026-05-12 dall-e-3 gpt-image-1 or gpt-image-1-mini" [ref=e522]:
+                - cell "2026-05-12" [ref=e523]
+                - cell "dall-e-3" [ref=e524]:
+                  - code [ref=e525]: dall-e-3
+                - cell "gpt-image-1 or gpt-image-1-mini" [ref=e526]:
+                  - code [ref=e527]: gpt-image-1
+                  - text: or
+                  - code [ref=e528]: gpt-image-1-mini
+          - 'heading "2025-09-26: Legacy GPT model snapshots Copy link to 2025 09 26 legacy gpt model snapshots" [level=3] [ref=e529]':
+            - generic [ref=e530]: "2025-09-26: Legacy GPT model snapshots"
+            - button "Copy link to 2025 09 26 legacy gpt model snapshots" [ref=e531] [cursor=pointer]:
+              - img [ref=e532]
+          - paragraph [ref=e534]: To improve reliability and make it easier for developers to choose the right models, we are deprecating a set of older OpenAI models with declining usage over the next six to twelve months. Access to these models will be shut down on the dates below.
+          - table [ref=e536]:
+            - rowgroup [ref=e537]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e538]:
+                - columnheader "Shutdown date" [ref=e539]
+                - columnheader "Model / system" [ref=e540]
+                - columnheader "Recommended replacement" [ref=e541]
+            - rowgroup [ref=e542]:
+              - row "2026‑03‑26 gpt-4-0314 gpt-5 or gpt-4.1*" [ref=e543]:
+                - cell "2026‑03‑26" [ref=e544]
+                - cell "gpt-4-0314" [ref=e545]:
+                  - code [ref=e546]: gpt-4-0314
+                - cell "gpt-5 or gpt-4.1*" [ref=e547]:
+                  - code [ref=e548]: gpt-5
+                  - text: or
+                  - code [ref=e549]: gpt-4.1*
+              - row "2026‑03‑26 gpt-4-1106-preview gpt-5 or gpt-4.1*" [ref=e550]:
+                - cell "2026‑03‑26" [ref=e551]
+                - cell "gpt-4-1106-preview" [ref=e552]:
+                  - code [ref=e553]: gpt-4-1106-preview
+                - cell "gpt-5 or gpt-4.1*" [ref=e554]:
+                  - code [ref=e555]: gpt-5
+                  - text: or
+                  - code [ref=e556]: gpt-4.1*
+              - row "2026‑03‑26 gpt-4-0125-preview (including gpt-4-turbo-preview and gpt-4-turbo-preview-completions, which point to this snapshot) gpt-5 or gpt-4.1*" [ref=e557]:
+                - cell "2026‑03‑26" [ref=e558]
+                - cell "gpt-4-0125-preview (including gpt-4-turbo-preview and gpt-4-turbo-preview-completions, which point to this snapshot)" [ref=e559]:
+                  - code [ref=e560]: gpt-4-0125-preview
+                  - text: (including
+                  - code [ref=e561]: gpt-4-turbo-preview
+                  - text: and
+                  - code [ref=e562]: gpt-4-turbo-preview-completions
+                  - text: ", which point to this snapshot)"
+                - cell "gpt-5 or gpt-4.1*" [ref=e563]:
+                  - code [ref=e564]: gpt-5
+                  - text: or
+                  - code [ref=e565]: gpt-4.1*
+              - row "2026-09-28 gpt-3.5-turbo-instruct gpt-5.4-mini or gpt-5-mini" [ref=e566]:
+                - cell "2026-09-28" [ref=e567]
+                - cell "gpt-3.5-turbo-instruct" [ref=e568]:
+                  - code [ref=e569]: gpt-3.5-turbo-instruct
+                - cell "gpt-5.4-mini or gpt-5-mini" [ref=e570]:
+                  - code [ref=e571]: gpt-5.4-mini
+                  - text: or
+                  - code [ref=e572]: gpt-5-mini
+              - row "2026-09-28 babbage-002 gpt-5.4-mini or gpt-5-mini" [ref=e573]:
+                - cell "2026-09-28" [ref=e574]
+                - cell "babbage-002" [ref=e575]:
+                  - code [ref=e576]: babbage-002
+                - cell "gpt-5.4-mini or gpt-5-mini" [ref=e577]:
+                  - code [ref=e578]: gpt-5.4-mini
+                  - text: or
+                  - code [ref=e579]: gpt-5-mini
+              - row "2026-09-28 davinci-002 gpt-5.4-mini or gpt-5-mini" [ref=e580]:
+                - cell "2026-09-28" [ref=e581]
+                - cell "davinci-002" [ref=e582]:
+                  - code [ref=e583]: davinci-002
+                - cell "gpt-5.4-mini or gpt-5-mini" [ref=e584]:
+                  - code [ref=e585]: gpt-5.4-mini
+                  - text: or
+                  - code [ref=e586]: gpt-5-mini
+              - row "2026-09-28 gpt-3.5-turbo-1106 gpt-5.4-mini or gpt-5-mini" [ref=e587]:
+                - cell "2026-09-28" [ref=e588]
+                - cell "gpt-3.5-turbo-1106" [ref=e589]:
+                  - code [ref=e590]: gpt-3.5-turbo-1106
+                - cell "gpt-5.4-mini or gpt-5-mini" [ref=e591]:
+                  - code [ref=e592]: gpt-5.4-mini
+                  - text: or
+                  - code [ref=e593]: gpt-5-mini
+          - paragraph [ref=e594]: "*For tasks that are especially latency sensitive and don’t require reasoning"
+          - 'heading "2025-09-15: Realtime API Beta Copy link to 2025 09 15 realtime api beta" [level=3] [ref=e595]':
+            - generic [ref=e596]: "2025-09-15: Realtime API Beta"
+            - button "Copy link to 2025 09 15 realtime api beta" [ref=e597] [cursor=pointer]:
+              - img [ref=e598]
+          - paragraph [ref=e600]: The Realtime API Beta will be deprecated and removed from the API on May 7, 2026.
+          - paragraph [ref=e601]:
+            - text: There are a few key differences between the interfaces in the Realtime beta API and the released GA API. See
+            - link "the migration guide" [ref=e602] [cursor=pointer]:
+              - /url: /api/docs/guides/realtime#beta-to-ga-migration
+            - text: to learn more about how to migrate your current beta integration.
+          - table [ref=e604]:
+            - rowgroup [ref=e605]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e606]:
+                - columnheader "Shutdown date" [ref=e607]
+                - columnheader "Model / system" [ref=e608]
+                - columnheader "Recommended replacement" [ref=e609]
+            - rowgroup [ref=e610]:
+              - 'row "2026‑05‑07 OpenAI-Beta: realtime=v1 Realtime API" [ref=e611]':
+                - cell "2026‑05‑07" [ref=e612]
+                - 'cell "OpenAI-Beta: realtime=v1" [ref=e613]'
+                - cell "Realtime API" [ref=e614]
+          - 'heading "2025-08-20: Assistants API Copy link to 2025 08 20 assistants api" [level=3] [ref=e615]':
+            - generic [ref=e616]: "2025-08-20: Assistants API"
+            - button "Copy link to 2025 08 20 assistants api" [ref=e617] [cursor=pointer]:
+              - img [ref=e618]
+          - paragraph [ref=e620]: On August 26th, 2025, we notified developers using the Assistants API of its deprecation and removal from the API one year later, on August 26, 2026.
+          - paragraph [ref=e621]:
+            - text: When we released the
+            - link "Responses API" [ref=e622] [cursor=pointer]:
+              - /url: /api/docs/api-reference/responses/create
+            - text: in
+            - link "March 2025" [ref=e623] [cursor=pointer]:
+              - /url: /api/docs/changelog
+            - text: ", we announced plans to bring all Assistants API features to the easier to use Responses API, with a sunset date in 2026."
+          - paragraph [ref=e624]:
+            - text: See the Assistants to Conversations
+            - link "migration guide" [ref=e625] [cursor=pointer]:
+              - /url: /api/docs/assistants/migration
+            - text: to learn more about how to migrate your current integration to the Responses API and Conversations API.
+          - table [ref=e627]:
+            - rowgroup [ref=e628]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e629]:
+                - columnheader "Shutdown date" [ref=e630]
+                - columnheader "Model / system" [ref=e631]
+                - columnheader "Recommended replacement" [ref=e632]
+            - rowgroup [ref=e633]:
+              - row "2026‑08‑26 Assistants API Responses API and Conversations API" [ref=e634]:
+                - cell "2026‑08‑26" [ref=e635]
+                - cell "Assistants API" [ref=e636]
+                - cell "Responses API and Conversations API" [ref=e637]
+          - 'heading "2025-09-15: gpt-4o-realtime-preview models Copy link to 2025 09 15 gpt 4o realtime preview models" [level=3] [ref=e638]':
+            - generic [ref=e639]: "2025-09-15: gpt-4o-realtime-preview models"
+            - button "Copy link to 2025 09 15 gpt 4o realtime preview models" [ref=e640] [cursor=pointer]:
+              - img [ref=e641]
+          - paragraph [ref=e643]: In September, 2025, we notified developers using gpt-4o-realtime-preview models of their deprecation and removal from the API in six months.
+          - table [ref=e645]:
+            - rowgroup [ref=e646]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e647]:
+                - columnheader "Shutdown date" [ref=e648]
+                - columnheader "Model / system" [ref=e649]
+                - columnheader "Recommended replacement" [ref=e650]
+            - rowgroup [ref=e651]:
+              - row "2026-05-07 gpt-4o-realtime-preview gpt-realtime-1.5" [ref=e652]:
+                - cell "2026-05-07" [ref=e653]
+                - cell "gpt-4o-realtime-preview" [ref=e654]
+                - cell "gpt-realtime-1.5" [ref=e655]
+              - row "2026-05-07 gpt-4o-realtime-preview-2025-06-03 gpt-realtime-1.5" [ref=e656]:
+                - cell "2026-05-07" [ref=e657]
+                - cell "gpt-4o-realtime-preview-2025-06-03" [ref=e658]
+                - cell "gpt-realtime-1.5" [ref=e659]
+              - row "2026-05-07 gpt-4o-realtime-preview-2024-12-17 gpt-realtime-1.5" [ref=e660]:
+                - cell "2026-05-07" [ref=e661]
+                - cell "gpt-4o-realtime-preview-2024-12-17" [ref=e662]
+                - cell "gpt-realtime-1.5" [ref=e663]
+              - row "2026-05-07 gpt-4o-mini-realtime-preview gpt-realtime-mini" [ref=e664]:
+                - cell "2026-05-07" [ref=e665]
+                - cell "gpt-4o-mini-realtime-preview" [ref=e666]
+                - cell "gpt-realtime-mini" [ref=e667]
+              - row "2026-05-07 gpt-4o-audio-preview gpt-audio-1.5" [ref=e668]:
+                - cell "2026-05-07" [ref=e669]
+                - cell "gpt-4o-audio-preview" [ref=e670]
+                - cell "gpt-audio-1.5" [ref=e671]
+              - row "2026-05-07 gpt-4o-mini-audio-preview gpt-audio-mini" [ref=e672]:
+                - cell "2026-05-07" [ref=e673]
+                - cell "gpt-4o-mini-audio-preview" [ref=e674]
+                - cell "gpt-audio-mini" [ref=e675]
+          - 'heading "2025-06-10: gpt-4o-realtime-preview-2024-10-01 Copy link to 2025 06 10 gpt 4o realtime preview 2024 10 01" [level=3] [ref=e676]':
+            - generic [ref=e677]: "2025-06-10: gpt-4o-realtime-preview-2024-10-01"
+            - button "Copy link to 2025 06 10 gpt 4o realtime preview 2024 10 01" [ref=e678] [cursor=pointer]:
+              - img [ref=e679]
+          - paragraph [ref=e681]: On June 10th, 2025, we notified developers using gpt-4o-realtime-preview-2024-10-01 of its deprecation and removal from the API in three months.
+          - table [ref=e683]:
+            - rowgroup [ref=e684]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e685]:
+                - columnheader "Shutdown date" [ref=e686]
+                - columnheader "Model / system" [ref=e687]
+                - columnheader "Recommended replacement" [ref=e688]
+            - rowgroup [ref=e689]:
+              - row "2025-10-10 gpt-4o-realtime-preview-2024-10-01 gpt-realtime-1.5" [ref=e690]:
+                - cell "2025-10-10" [ref=e691]
+                - cell "gpt-4o-realtime-preview-2024-10-01" [ref=e692]
+                - cell "gpt-realtime-1.5" [ref=e693]
+          - 'heading "2025-06-10: gpt-4o-audio-preview-2024-10-01 Copy link to 2025 06 10 gpt 4o audio preview 2024 10 01" [level=3] [ref=e694]':
+            - generic [ref=e695]: "2025-06-10: gpt-4o-audio-preview-2024-10-01"
+            - button "Copy link to 2025 06 10 gpt 4o audio preview 2024 10 01" [ref=e696] [cursor=pointer]:
+              - img [ref=e697]
+          - paragraph [ref=e699]:
+            - text: On June 10th, 2025, we notified developers using
+            - code [ref=e700]: gpt-4o-audio-preview-2024-10-01
+            - text: of its deprecation and removal from the API in three months.
+          - table [ref=e702]:
+            - rowgroup [ref=e703]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e704]:
+                - columnheader "Shutdown date" [ref=e705]
+                - columnheader "Model / system" [ref=e706]
+                - columnheader "Recommended replacement" [ref=e707]
+            - rowgroup [ref=e708]:
+              - row "2025-10-10 gpt-4o-audio-preview-2024-10-01 gpt-audio-1.5" [ref=e709]:
+                - cell "2025-10-10" [ref=e710]
+                - cell "gpt-4o-audio-preview-2024-10-01" [ref=e711]:
+                  - code [ref=e712]: gpt-4o-audio-preview-2024-10-01
+                - cell "gpt-audio-1.5" [ref=e713]:
+                  - code [ref=e714]: gpt-audio-1.5
+          - 'heading "2025-04-28: text-moderation Copy link to 2025 04 28 text moderation" [level=3] [ref=e715]':
+            - generic [ref=e716]: "2025-04-28: text-moderation"
+            - button "Copy link to 2025 04 28 text moderation" [ref=e717] [cursor=pointer]:
+              - img [ref=e718]
+          - paragraph [ref=e720]:
+            - text: On April 28th, 2025, we notified developers using
+            - code [ref=e721]: text-moderation
+            - text: of its deprecation and removal from the API in six months.
+          - table [ref=e723]:
+            - rowgroup [ref=e724]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e725]:
+                - columnheader "Shutdown date" [ref=e726]
+                - columnheader "Model / system" [ref=e727]
+                - columnheader "Recommended replacement" [ref=e728]
+            - rowgroup [ref=e729]:
+              - row "2025-10-27 text-moderation-007 omni-moderation" [ref=e730]:
+                - cell "2025-10-27" [ref=e731]
+                - cell "text-moderation-007" [ref=e732]:
+                  - code [ref=e733]: text-moderation-007
+                - cell "omni-moderation" [ref=e734]:
+                  - code [ref=e735]: omni-moderation
+              - row "2025-10-27 text-moderation-stable omni-moderation" [ref=e736]:
+                - cell "2025-10-27" [ref=e737]
+                - cell "text-moderation-stable" [ref=e738]:
+                  - code [ref=e739]: text-moderation-stable
+                - cell "omni-moderation" [ref=e740]:
+                  - code [ref=e741]: omni-moderation
+              - row "2025-10-27 text-moderation-latest omni-moderation" [ref=e742]:
+                - cell "2025-10-27" [ref=e743]
+                - cell "text-moderation-latest" [ref=e744]:
+                  - code [ref=e745]: text-moderation-latest
+                - cell "omni-moderation" [ref=e746]:
+                  - code [ref=e747]: omni-moderation
+          - 'heading "2025-04-28: o1-preview and o1-mini Copy link to 2025 04 28 o1 preview and o1 mini" [level=3] [ref=e748]':
+            - generic [ref=e749]: "2025-04-28: o1-preview and o1-mini"
+            - button "Copy link to 2025 04 28 o1 preview and o1 mini" [ref=e750] [cursor=pointer]:
+              - img [ref=e751]
+          - paragraph [ref=e753]:
+            - text: On April 28th, 2025, we notified developers using
+            - code [ref=e754]: o1-preview
+            - text: and
+            - code [ref=e755]: o1-mini
+            - text: of their deprecations and removal from the API in three months and six months respectively.
+          - table [ref=e757]:
+            - rowgroup [ref=e758]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e759]:
+                - columnheader "Shutdown date" [ref=e760]
+                - columnheader "Model / system" [ref=e761]
+                - columnheader "Recommended replacement" [ref=e762]
+            - rowgroup [ref=e763]:
+              - row "2025-07-28 o1-preview o3" [ref=e764]:
+                - cell "2025-07-28" [ref=e765]
+                - cell "o1-preview" [ref=e766]:
+                  - code [ref=e767]: o1-preview
+                - cell "o3" [ref=e768]:
+                  - code [ref=e769]: o3
+              - row "2025-10-27 o1-mini o4-mini" [ref=e770]:
+                - cell "2025-10-27" [ref=e771]
+                - cell "o1-mini" [ref=e772]:
+                  - code [ref=e773]: o1-mini
+                - cell "o4-mini" [ref=e774]:
+                  - code [ref=e775]: o4-mini
+          - 'heading "2025-04-14: GPT-4.5-preview Copy link to 2025 04 14 gpt 45 preview" [level=3] [ref=e776]':
+            - generic [ref=e777]: "2025-04-14: GPT-4.5-preview"
+            - button "Copy link to 2025 04 14 gpt 45 preview" [ref=e778] [cursor=pointer]:
+              - img [ref=e779]
+          - paragraph [ref=e781]:
+            - text: On April 14th, 2025, we notified developers that the
+            - code [ref=e782]: gpt-4.5-preview
+            - text: model is deprecated and will be removed from the API in the coming months.
+          - table [ref=e784]:
+            - rowgroup [ref=e785]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e786]:
+                - columnheader "Shutdown date" [ref=e787]
+                - columnheader "Model / system" [ref=e788]
+                - columnheader "Recommended replacement" [ref=e789]
+            - rowgroup [ref=e790]:
+              - row "2025-07-14 gpt-4.5-preview gpt-4.1" [ref=e791]:
+                - cell "2025-07-14" [ref=e792]
+                - cell "gpt-4.5-preview" [ref=e793]:
+                  - code [ref=e794]: gpt-4.5-preview
+                - cell "gpt-4.1" [ref=e795]:
+                  - code [ref=e796]: gpt-4.1
+          - 'heading "2024-10-02: Assistants API beta v1 Copy link to 2024 10 02 assistants api beta v1" [level=3] [ref=e797]':
+            - generic [ref=e798]: "2024-10-02: Assistants API beta v1"
+            - button "Copy link to 2024 10 02 assistants api beta v1" [ref=e799] [cursor=pointer]:
+              - img [ref=e800]
+          - paragraph [ref=e802]:
+            - text: In
+            - link "April 2024" [ref=e803] [cursor=pointer]:
+              - /url: /api/docs/assistants/whats-new
+            - text: when we released the v2 beta version of the Assistants API, we announced that access to the v1 beta would be shut off by the end of 2024. Access to the v1 beta will be discontinued on December 18, 2024.
+          - paragraph [ref=e804]:
+            - text: See the Assistants API v2 beta
+            - link "migration guide" [ref=e805] [cursor=pointer]:
+              - /url: /api/docs/assistants/migration
+            - text: to learn more about how to migrate your tool usage to the latest version of the Assistants API.
+          - table [ref=e807]:
+            - rowgroup [ref=e808]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e809]:
+                - columnheader "Shutdown date" [ref=e810]
+                - columnheader "Model / system" [ref=e811]
+                - columnheader "Recommended replacement" [ref=e812]
+            - rowgroup [ref=e813]:
+              - 'row "2024-12-18 OpenAI-Beta: assistants=v1 OpenAI-Beta: assistants=v2" [ref=e814]':
+                - cell "2024-12-18" [ref=e815]
+                - 'cell "OpenAI-Beta: assistants=v1" [ref=e816]'
+                - 'cell "OpenAI-Beta: assistants=v2" [ref=e817]'
+          - 'heading "2024-08-29: Fine-tuning training on babbage-002 and davinci-002 models Copy link to 2024 08 29 fine tuning training on babbage 002 and davinci 002 models" [level=3] [ref=e818]':
+            - generic [ref=e819]: "2024-08-29: Fine-tuning training on babbage-002 and davinci-002 models"
+            - button "Copy link to 2024 08 29 fine tuning training on babbage 002 and davinci 002 models" [ref=e820] [cursor=pointer]:
+              - img [ref=e821]
+          - paragraph [ref=e823]:
+            - text: On August 29th, 2024, we notified developers fine-tuning
+            - code [ref=e824]: babbage-002
+            - text: and
+            - code [ref=e825]: davinci-002
+            - text: that new fine-tuning training runs on these models will no longer be supported starting October 28, 2024.
+          - paragraph [ref=e826]: Fine-tuned models created from these base models are not affected by this deprecation, but you will no longer be able to create new fine-tuned versions with these models.
+          - table [ref=e828]:
+            - rowgroup [ref=e829]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e830]:
+                - columnheader "Shutdown date" [ref=e831]
+                - columnheader "Model / system" [ref=e832]
+                - columnheader "Recommended replacement" [ref=e833]
+            - rowgroup [ref=e834]:
+              - row "2024-10-28 New fine-tuning training on babbage-002 gpt-4o-mini" [ref=e835]:
+                - cell "2024-10-28" [ref=e836]
+                - cell "New fine-tuning training on babbage-002" [ref=e837]:
+                  - text: New fine-tuning training on
+                  - code [ref=e838]: babbage-002
+                - cell "gpt-4o-mini" [ref=e839]:
+                  - code [ref=e840]: gpt-4o-mini
+              - row "2024-10-28 New fine-tuning training on davinci-002 gpt-4o-mini" [ref=e841]:
+                - cell "2024-10-28" [ref=e842]
+                - cell "New fine-tuning training on davinci-002" [ref=e843]:
+                  - text: New fine-tuning training on
+                  - code [ref=e844]: davinci-002
+                - cell "gpt-4o-mini" [ref=e845]:
+                  - code [ref=e846]: gpt-4o-mini
+          - 'heading "2024-06-06: GPT-4-32K and Vision Preview models Copy link to 2024 06 06 gpt 4 32k and vision preview models" [level=3] [ref=e847]':
+            - generic [ref=e848]: "2024-06-06: GPT-4-32K and Vision Preview models"
+            - button "Copy link to 2024 06 06 gpt 4 32k and vision preview models" [ref=e849] [cursor=pointer]:
+              - img [ref=e850]
+          - paragraph [ref=e852]:
+            - text: On June 6th, 2024, we notified developers using
+            - code [ref=e853]: gpt-4-32k
+            - text: and
+            - code [ref=e854]: gpt-4-vision-preview
+            - text: of their upcoming deprecations in one year and six months respectively. As of June 17, 2024, only existing users of these models will be able to continue using them.
+          - table [ref=e856]:
+            - rowgroup [ref=e857]:
+              - row "Shutdown date Deprecated model Deprecated model price Recommended replacement" [ref=e858]:
+                - columnheader "Shutdown date" [ref=e859]
+                - columnheader "Deprecated model" [ref=e860]
+                - columnheader "Deprecated model price" [ref=e861]
+                - columnheader "Recommended replacement" [ref=e862]
+            - rowgroup [ref=e863]:
+              - row "2025-06-06 gpt-4-32k $60.00 / 1M input tokens + $120 / 1M output tokens gpt-4o" [ref=e864]:
+                - cell "2025-06-06" [ref=e865]
+                - cell "gpt-4-32k" [ref=e866]:
+                  - code [ref=e867]: gpt-4-32k
+                - cell "$60.00 / 1M input tokens + $120 / 1M output tokens" [ref=e868]
+                - cell "gpt-4o" [ref=e869]:
+                  - code [ref=e870]: gpt-4o
+              - row "2025-06-06 gpt-4-32k-0613 $60.00 / 1M input tokens + $120 / 1M output tokens gpt-4o" [ref=e871]:
+                - cell "2025-06-06" [ref=e872]
+                - cell "gpt-4-32k-0613" [ref=e873]:
+                  - code [ref=e874]: gpt-4-32k-0613
+                - cell "$60.00 / 1M input tokens + $120 / 1M output tokens" [ref=e875]
+                - cell "gpt-4o" [ref=e876]:
+                  - code [ref=e877]: gpt-4o
+              - row "2025-06-06 gpt-4-32k-0314 $60.00 / 1M input tokens + $120 / 1M output tokens gpt-4o" [ref=e878]:
+                - cell "2025-06-06" [ref=e879]
+                - cell "gpt-4-32k-0314" [ref=e880]:
+                  - code [ref=e881]: gpt-4-32k-0314
+                - cell "$60.00 / 1M input tokens + $120 / 1M output tokens" [ref=e882]
+                - cell "gpt-4o" [ref=e883]:
+                  - code [ref=e884]: gpt-4o
+              - row "2024-12-06 gpt-4-vision-preview $10.00 / 1M input tokens + $30 / 1M output tokens gpt-4o" [ref=e885]:
+                - cell "2024-12-06" [ref=e886]
+                - cell "gpt-4-vision-preview" [ref=e887]:
+                  - code [ref=e888]: gpt-4-vision-preview
+                - cell "$10.00 / 1M input tokens + $30 / 1M output tokens" [ref=e889]
+                - cell "gpt-4o" [ref=e890]:
+                  - code [ref=e891]: gpt-4o
+              - row "2024-12-06 gpt-4-1106-vision-preview $10.00 / 1M input tokens + $30 / 1M output tokens gpt-4o" [ref=e892]:
+                - cell "2024-12-06" [ref=e893]
+                - cell "gpt-4-1106-vision-preview" [ref=e894]:
+                  - code [ref=e895]: gpt-4-1106-vision-preview
+                - cell "$10.00 / 1M input tokens + $30 / 1M output tokens" [ref=e896]
+                - cell "gpt-4o" [ref=e897]:
+                  - code [ref=e898]: gpt-4o
+          - 'heading "2023-11-06: Chat model updates Copy link to 2023 11 06 chat model updates" [level=3] [ref=e899]':
+            - generic [ref=e900]: "2023-11-06: Chat model updates"
+            - button "Copy link to 2023 11 06 chat model updates" [ref=e901] [cursor=pointer]:
+              - img [ref=e902]
+          - paragraph [ref=e904]:
+            - text: On November 6th, 2023, we
+            - link "announced" [ref=e905] [cursor=pointer]:
+              - /url: https://openai.com/blog/new-models-and-developer-products-announced-at-devday
+            - text: the release of an updated GPT-3.5-Turbo model (which now comes by default with 16k context) along with deprecation of
+            - code [ref=e906]: gpt-3.5-turbo-0613
+            - text: and
+            - code [ref=e907]: gpt-3.5-turbo-16k-0613
+            - text: . As of June 17, 2024, only existing users of these models will be able to continue using them.
+          - table [ref=e909]:
+            - rowgroup [ref=e910]:
+              - row "Shutdown date Deprecated model Deprecated model price Recommended replacement" [ref=e911]:
+                - columnheader "Shutdown date" [ref=e912]
+                - columnheader "Deprecated model" [ref=e913]
+                - columnheader "Deprecated model price" [ref=e914]
+                - columnheader "Recommended replacement" [ref=e915]
+            - rowgroup [ref=e916]:
+              - row "2024-09-13 gpt-3.5-turbo-0613 $1.50 / 1M input tokens + $2.00 / 1M output tokens gpt-3.5-turbo" [ref=e917]:
+                - cell "2024-09-13" [ref=e918]
+                - cell "gpt-3.5-turbo-0613" [ref=e919]:
+                  - code [ref=e920]: gpt-3.5-turbo-0613
+                - cell "$1.50 / 1M input tokens + $2.00 / 1M output tokens" [ref=e921]
+                - cell "gpt-3.5-turbo" [ref=e922]:
+                  - code [ref=e923]: gpt-3.5-turbo
+              - row "2024-09-13 gpt-3.5-turbo-16k-0613 $3.00 / 1M input tokens + $4.00 / 1M output tokens gpt-3.5-turbo" [ref=e924]:
+                - cell "2024-09-13" [ref=e925]
+                - cell "gpt-3.5-turbo-16k-0613" [ref=e926]:
+                  - code [ref=e927]: gpt-3.5-turbo-16k-0613
+                - cell "$3.00 / 1M input tokens + $4.00 / 1M output tokens" [ref=e928]
+                - cell "gpt-3.5-turbo" [ref=e929]:
+                  - code [ref=e930]: gpt-3.5-turbo
+          - paragraph [ref=e931]: Fine-tuned models created from these base models are not affected by this deprecation, but you will no longer be able to create new fine-tuned versions with these models.
+          - 'heading "2023-08-22: Fine-tunes endpoint Copy link to 2023 08 22 fine tunes endpoint" [level=3] [ref=e932]':
+            - generic [ref=e933]: "2023-08-22: Fine-tunes endpoint"
+            - button "Copy link to 2023 08 22 fine tunes endpoint" [ref=e934] [cursor=pointer]:
+              - img [ref=e935]
+          - paragraph [ref=e937]:
+            - text: On August 22nd, 2023, we
+            - link "announced" [ref=e938] [cursor=pointer]:
+              - /url: https://openai.com/blog/gpt-3-5-turbo-fine-tuning-and-api-updates
+            - text: the new fine-tuning API (
+            - code [ref=e939]: /v1/fine_tuning/jobs
+            - text: ) and that the original
+            - code [ref=e940]: /v1/fine-tunes
+            - text: API along with legacy models (including those fine-tuned with the
+            - code [ref=e941]: /v1/fine-tunes
+            - text: API) will be shut down on January 04, 2024. This means that models fine-tuned using the
+            - code [ref=e942]: /v1/fine-tunes
+            - text: API will no longer be accessible and you would have to fine-tune new models with the updated endpoint and associated base models.
+          - heading "Fine-tunes endpoint Copy link to fine tunes endpoint" [level=4] [ref=e943]:
+            - generic [ref=e944]: Fine-tunes endpoint
+            - button "Copy link to fine tunes endpoint" [ref=e945] [cursor=pointer]:
+              - img [ref=e946]
+          - table [ref=e949]:
+            - rowgroup [ref=e950]:
+              - row "Shutdown date System Recommended replacement" [ref=e951]:
+                - columnheader "Shutdown date" [ref=e952]
+                - columnheader "System" [ref=e953]
+                - columnheader "Recommended replacement" [ref=e954]
+            - rowgroup [ref=e955]:
+              - row "2024-01-04 /v1/fine-tunes /v1/fine_tuning/jobs" [ref=e956]:
+                - cell "2024-01-04" [ref=e957]
+                - cell "/v1/fine-tunes" [ref=e958]:
+                  - code [ref=e959]: /v1/fine-tunes
+                - cell "/v1/fine_tuning/jobs" [ref=e960]:
+                  - code [ref=e961]: /v1/fine_tuning/jobs
+          - 'heading "2023-07-06: GPT and embeddings Copy link to 2023 07 06 gpt and embeddings" [level=3] [ref=e962]':
+            - generic [ref=e963]: "2023-07-06: GPT and embeddings"
+            - button "Copy link to 2023 07 06 gpt and embeddings" [ref=e964] [cursor=pointer]:
+              - img [ref=e965]
+          - paragraph [ref=e967]:
+            - text: On July 06, 2023, we
+            - link "announced" [ref=e968] [cursor=pointer]:
+              - /url: https://openai.com/blog/gpt-4-api-general-availability
+            - text: the upcoming retirements of older GPT-3 and GPT-3.5 models served via the completions endpoint. We also announced the upcoming retirement of our first-generation text embedding models. They will be shut down on January 04, 2024.
+          - heading "InstructGPT models Copy link to instructgpt models" [level=4] [ref=e969]:
+            - generic [ref=e970]: InstructGPT models
+            - button "Copy link to instructgpt models" [ref=e971] [cursor=pointer]:
+              - img [ref=e972]
+          - table [ref=e975]:
+            - rowgroup [ref=e976]:
+              - row "Shutdown date Deprecated model Deprecated model price Recommended replacement" [ref=e977]:
+                - columnheader "Shutdown date" [ref=e978]
+                - columnheader "Deprecated model" [ref=e979]
+                - columnheader "Deprecated model price" [ref=e980]
+                - columnheader "Recommended replacement" [ref=e981]
+            - rowgroup [ref=e982]:
+              - row "2024-01-04 text-ada-001 $0.40 / 1M tokens gpt-3.5-turbo-instruct" [ref=e983]:
+                - cell "2024-01-04" [ref=e984]
+                - cell "text-ada-001" [ref=e985]:
+                  - code [ref=e986]: text-ada-001
+                - cell "$0.40 / 1M tokens" [ref=e987]
+                - cell "gpt-3.5-turbo-instruct" [ref=e988]:
+                  - code [ref=e989]: gpt-3.5-turbo-instruct
+              - row "2024-01-04 text-babbage-001 $0.50 / 1M tokens gpt-3.5-turbo-instruct" [ref=e990]:
+                - cell "2024-01-04" [ref=e991]
+                - cell "text-babbage-001" [ref=e992]:
+                  - code [ref=e993]: text-babbage-001
+                - cell "$0.50 / 1M tokens" [ref=e994]
+                - cell "gpt-3.5-turbo-instruct" [ref=e995]:
+                  - code [ref=e996]: gpt-3.5-turbo-instruct
+              - row "2024-01-04 text-curie-001 $2.00 / 1M tokens gpt-3.5-turbo-instruct" [ref=e997]:
+                - cell "2024-01-04" [ref=e998]
+                - cell "text-curie-001" [ref=e999]:
+                  - code [ref=e1000]: text-curie-001
+                - cell "$2.00 / 1M tokens" [ref=e1001]
+                - cell "gpt-3.5-turbo-instruct" [ref=e1002]:
+                  - code [ref=e1003]: gpt-3.5-turbo-instruct
+              - row "2024-01-04 text-davinci-001 $20.00 / 1M tokens gpt-3.5-turbo-instruct" [ref=e1004]:
+                - cell "2024-01-04" [ref=e1005]
+                - cell "text-davinci-001" [ref=e1006]:
+                  - code [ref=e1007]: text-davinci-001
+                - cell "$20.00 / 1M tokens" [ref=e1008]
+                - cell "gpt-3.5-turbo-instruct" [ref=e1009]:
+                  - code [ref=e1010]: gpt-3.5-turbo-instruct
+              - row "2024-01-04 text-davinci-002 $20.00 / 1M tokens gpt-3.5-turbo-instruct" [ref=e1011]:
+                - cell "2024-01-04" [ref=e1012]
+                - cell "text-davinci-002" [ref=e1013]:
+                  - code [ref=e1014]: text-davinci-002
+                - cell "$20.00 / 1M tokens" [ref=e1015]
+                - cell "gpt-3.5-turbo-instruct" [ref=e1016]:
+                  - code [ref=e1017]: gpt-3.5-turbo-instruct
+              - row "2024-01-04 text-davinci-003 $20.00 / 1M tokens gpt-3.5-turbo-instruct" [ref=e1018]:
+                - cell "2024-01-04" [ref=e1019]
+                - cell "text-davinci-003" [ref=e1020]:
+                  - code [ref=e1021]: text-davinci-003
+                - cell "$20.00 / 1M tokens" [ref=e1022]
+                - cell "gpt-3.5-turbo-instruct" [ref=e1023]:
+                  - code [ref=e1024]: gpt-3.5-turbo-instruct
+          - paragraph [ref=e1025]:
+            - text: Pricing for the replacement
+            - code [ref=e1026]: gpt-3.5-turbo-instruct
+            - text: model can be found on the
+            - link "pricing page" [ref=e1027] [cursor=pointer]:
+              - /url: https://openai.com/api/pricing
+            - text: .
+          - heading "Base GPT models Copy link to base gpt models" [level=4] [ref=e1028]:
+            - generic [ref=e1029]: Base GPT models
+            - button "Copy link to base gpt models" [ref=e1030] [cursor=pointer]:
+              - img [ref=e1031]
+          - table [ref=e1034]:
+            - rowgroup [ref=e1035]:
+              - row "Shutdown date Deprecated model Deprecated model price Recommended replacement" [ref=e1036]:
+                - columnheader "Shutdown date" [ref=e1037]
+                - columnheader "Deprecated model" [ref=e1038]
+                - columnheader "Deprecated model price" [ref=e1039]
+                - columnheader "Recommended replacement" [ref=e1040]
+            - rowgroup [ref=e1041]:
+              - row "2024-01-04 ada $0.40 / 1M tokens babbage-002" [ref=e1042]:
+                - cell "2024-01-04" [ref=e1043]
+                - cell "ada" [ref=e1044]:
+                  - code [ref=e1045]: ada
+                - cell "$0.40 / 1M tokens" [ref=e1046]
+                - cell "babbage-002" [ref=e1047]:
+                  - code [ref=e1048]: babbage-002
+              - row "2024-01-04 babbage $0.50 / 1M tokens babbage-002" [ref=e1049]:
+                - cell "2024-01-04" [ref=e1050]
+                - cell "babbage" [ref=e1051]:
+                  - code [ref=e1052]: babbage
+                - cell "$0.50 / 1M tokens" [ref=e1053]
+                - cell "babbage-002" [ref=e1054]:
+                  - code [ref=e1055]: babbage-002
+              - row "2024-01-04 curie $2.00 / 1M tokens davinci-002" [ref=e1056]:
+                - cell "2024-01-04" [ref=e1057]
+                - cell "curie" [ref=e1058]:
+                  - code [ref=e1059]: curie
+                - cell "$2.00 / 1M tokens" [ref=e1060]
+                - cell "davinci-002" [ref=e1061]:
+                  - code [ref=e1062]: davinci-002
+              - row "2024-01-04 davinci $20.00 / 1M tokens davinci-002" [ref=e1063]:
+                - cell "2024-01-04" [ref=e1064]
+                - cell "davinci" [ref=e1065]:
+                  - code [ref=e1066]: davinci
+                - cell "$20.00 / 1M tokens" [ref=e1067]
+                - cell "davinci-002" [ref=e1068]:
+                  - code [ref=e1069]: davinci-002
+              - row "2024-01-04 code-davinci-002 --- gpt-3.5-turbo-instruct" [ref=e1070]:
+                - cell "2024-01-04" [ref=e1071]
+                - cell "code-davinci-002" [ref=e1072]:
+                  - code [ref=e1073]: code-davinci-002
+                - cell "---" [ref=e1074]
+                - cell "gpt-3.5-turbo-instruct" [ref=e1075]:
+                  - code [ref=e1076]: gpt-3.5-turbo-instruct
+          - paragraph [ref=e1077]:
+            - text: Pricing for the replacement
+            - code [ref=e1078]: babbage-002
+            - text: and
+            - code [ref=e1079]: davinci-002
+            - text: models can be found on the
+            - link "pricing page" [ref=e1080] [cursor=pointer]:
+              - /url: https://openai.com/api/pricing
+            - text: .
+          - heading "Edit models & endpoint Copy link to edit models endpoint" [level=4] [ref=e1081]:
+            - generic [ref=e1082]: Edit models & endpoint
+            - button "Copy link to edit models endpoint" [ref=e1083] [cursor=pointer]:
+              - img [ref=e1084]
+          - table [ref=e1087]:
+            - rowgroup [ref=e1088]:
+              - row "Shutdown date Model / system Recommended replacement" [ref=e1089]:
+                - columnheader "Shutdown date" [ref=e1090]
+                - columnheader "Model / system" [ref=e1091]
+                - columnheader "Recommended replacement" [ref=e1092]
+            - rowgroup [ref=e1093]:
+              - row "2024-01-04 text-davinci-edit-001 gpt-4o" [ref=e1094]:
+                - cell "2024-01-04" [ref=e1095]
+                - cell "text-davinci-edit-001" [ref=e1096]:
+                  - code [ref=e1097]: text-davinci-edit-001
+                - cell "gpt-4o" [ref=e1098]:
+                  - code [ref=e1099]: gpt-4o
+              - row "2024-01-04 code-davinci-edit-001 gpt-4o" [ref=e1100]:
+                - cell "2024-01-04" [ref=e1101]
+                - cell "code-davinci-edit-001" [ref=e1102]:
+                  - code [ref=e1103]: code-davinci-edit-001
+                - cell "gpt-4o" [ref=e1104]:
+                  - code [ref=e1105]: gpt-4o
+              - row "2024-01-04 /v1/edits /v1/chat/completions" [ref=e1106]:
+                - cell "2024-01-04" [ref=e1107]
+                - cell "/v1/edits" [ref=e1108]:
+                  - code [ref=e1109]: /v1/edits
+                - cell "/v1/chat/completions" [ref=e1110]:
+                  - code [ref=e1111]: /v1/chat/completions
+          - heading "Fine-tuning GPT models Copy link to fine tuning gpt models" [level=4] [ref=e1112]:
+            - generic [ref=e1113]: Fine-tuning GPT models
+            - button "Copy link to fine tuning gpt models" [ref=e1114] [cursor=pointer]:
+              - img [ref=e1115]
+          - table [ref=e1118]:
+            - rowgroup [ref=e1119]:
+              - row "Shutdown date Deprecated model Training price Usage price Recommended replacement" [ref=e1120]:
+                - columnheader "Shutdown date" [ref=e1121]
+                - columnheader "Deprecated model" [ref=e1122]
+                - columnheader "Training price" [ref=e1123]
+                - columnheader "Usage price" [ref=e1124]
+                - columnheader "Recommended replacement" [ref=e1125]
+            - rowgroup [ref=e1126]:
+              - row "2024-01-04 ada $0.40 / 1M tokens $1.60 / 1M tokens babbage-002" [ref=e1127]:
+                - cell "2024-01-04" [ref=e1128]
+                - cell "ada" [ref=e1129]:
+                  - code [ref=e1130]: ada
+                - cell "$0.40 / 1M tokens" [ref=e1131]
+                - cell "$1.60 / 1M tokens" [ref=e1132]
+                - cell "babbage-002" [ref=e1133]:
+                  - code [ref=e1134]: babbage-002
+              - row "2024-01-04 babbage $0.60 / 1M tokens $2.40 / 1M tokens babbage-002" [ref=e1135]:
+                - cell "2024-01-04" [ref=e1136]
+                - cell "babbage" [ref=e1137]:
+                  - code [ref=e1138]: babbage
+                - cell "$0.60 / 1M tokens" [ref=e1139]
+                - cell "$2.40 / 1M tokens" [ref=e1140]
+                - cell "babbage-002" [ref=e1141]:
+                  - code [ref=e1142]: babbage-002
+              - row "2024-01-04 curie $3.00 / 1M tokens $12.00 / 1M tokens davinci-002" [ref=e1143]:
+                - cell "2024-01-04" [ref=e1144]
+                - cell "curie" [ref=e1145]:
+                  - code [ref=e1146]: curie
+                - cell "$3.00 / 1M tokens" [ref=e1147]
+                - cell "$12.00 / 1M tokens" [ref=e1148]
+                - cell "davinci-002" [ref=e1149]:
+                  - code [ref=e1150]: davinci-002
+              - row "2024-01-04 davinci $30.00 / 1M tokens $120.00 / 1K tokens davinci-002, gpt-3.5-turbo, gpt-4o" [ref=e1151]:
+                - cell "2024-01-04" [ref=e1152]
+                - cell "davinci" [ref=e1153]:
+                  - code [ref=e1154]: davinci
+                - cell "$30.00 / 1M tokens" [ref=e1155]
+                - cell "$120.00 / 1K tokens" [ref=e1156]
+                - cell "davinci-002, gpt-3.5-turbo, gpt-4o" [ref=e1157]:
+                  - code [ref=e1158]: davinci-002
+                  - text: ","
+                  - code [ref=e1159]: gpt-3.5-turbo
+                  - text: ","
+                  - code [ref=e1160]: gpt-4o
+          - heading "First-generation text embedding models Copy link to first generation text embedding models" [level=4] [ref=e1161]:
+            - generic [ref=e1162]: First-generation text embedding models
+            - button "Copy link to first generation text embedding models" [ref=e1163] [cursor=pointer]:
+              - img [ref=e1164]
+          - table [ref=e1167]:
+            - rowgroup [ref=e1168]:
+              - row "Shutdown date Deprecated model Deprecated model price Recommended replacement" [ref=e1169]:
+                - columnheader "Shutdown date" [ref=e1170]
+                - columnheader "Deprecated model" [ref=e1171]
+                - columnheader "Deprecated model price" [ref=e1172]
+                - columnheader "Recommended replacement" [ref=e1173]
+            - rowgroup [ref=e1174]:
+              - row "2024-01-04 text-similarity-ada-001 $4.00 / 1M tokens text-embedding-3-small" [ref=e1175]:
+                - cell "2024-01-04" [ref=e1176]
+                - cell "text-similarity-ada-001" [ref=e1177]:
+                  - code [ref=e1178]: text-similarity-ada-001
+                - cell "$4.00 / 1M tokens" [ref=e1179]
+                - cell "text-embedding-3-small" [ref=e1180]:
+                  - code [ref=e1181]: text-embedding-3-small
+              - row "2024-01-04 text-search-ada-doc-001 $4.00 / 1M tokens text-embedding-3-small" [ref=e1182]:
+                - cell "2024-01-04" [ref=e1183]
+                - cell "text-search-ada-doc-001" [ref=e1184]:
+                  - code [ref=e1185]: text-search-ada-doc-001
+                - cell "$4.00 / 1M tokens" [ref=e1186]
+                - cell "text-embedding-3-small" [ref=e1187]:
+                  - code [ref=e1188]: text-embedding-3-small
+              - row "2024-01-04 text-search-ada-query-001 $4.00 / 1M tokens text-embedding-3-small" [ref=e1189]:
+                - cell "2024-01-04" [ref=e1190]
+                - cell "text-search-ada-query-001" [ref=e1191]:
+                  - code [ref=e1192]: text-search-ada-query-001
+                - cell "$4.00 / 1M tokens" [ref=e1193]
+                - cell "text-embedding-3-small" [ref=e1194]:
+                  - code [ref=e1195]: text-embedding-3-small
+              - row "2024-01-04 code-search-ada-code-001 $4.00 / 1M tokens text-embedding-3-small" [ref=e1196]:
+                - cell "2024-01-04" [ref=e1197]
+                - cell "code-search-ada-code-001" [ref=e1198]:
+                  - code [ref=e1199]: code-search-ada-code-001
+                - cell "$4.00 / 1M tokens" [ref=e1200]
+                - cell "text-embedding-3-small" [ref=e1201]:
+                  - code [ref=e1202]: text-embedding-3-small
+              - row "2024-01-04 code-search-ada-text-001 $4.00 / 1M tokens text-embedding-3-small" [ref=e1203]:
+                - cell "2024-01-04" [ref=e1204]
+                - cell "code-search-ada-text-001" [ref=e1205]:
+                  - code [ref=e1206]: code-search-ada-text-001
+                - cell "$4.00 / 1M tokens" [ref=e1207]
+                - cell "text-embedding-3-small" [ref=e1208]:
+                  - code [ref=e1209]: text-embedding-3-small
+              - row "2024-01-04 text-similarity-babbage-001 $5.00 / 1M tokens text-embedding-3-small" [ref=e1210]:
+                - cell "2024-01-04" [ref=e1211]
+                - cell "text-similarity-babbage-001" [ref=e1212]:
+                  - code [ref=e1213]: text-similarity-babbage-001
+                - cell "$5.00 / 1M tokens" [ref=e1214]
+                - cell "text-embedding-3-small" [ref=e1215]:
+                  - code [ref=e1216]: text-embedding-3-small
+              - row "2024-01-04 text-search-babbage-doc-001 $5.00 / 1M tokens text-embedding-3-small" [ref=e1217]:
+                - cell "2024-01-04" [ref=e1218]
+                - cell "text-search-babbage-doc-001" [ref=e1219]:
+                  - code [ref=e1220]: text-search-babbage-doc-001
+                - cell "$5.00 / 1M tokens" [ref=e1221]
+                - cell "text-embedding-3-small" [ref=e1222]:
+                  - code [ref=e1223]: text-embedding-3-small
+              - row "2024-01-04 text-search-babbage-query-001 $5.00 / 1M tokens text-embedding-3-small" [ref=e1224]:
+                - cell "2024-01-04" [ref=e1225]
+                - cell "text-search-babbage-query-001" [ref=e1226]:
+                  - code [ref=e1227]: text-search-babbage-query-001
+                - cell "$5.00 / 1M tokens" [ref=e1228]
+                - cell "text-embedding-3-small" [ref=e1229]:
+                  - code [ref=e1230]: text-embedding-3-small
+              - row "2024-01-04 code-search-babbage-code-001 $5.00 / 1M tokens text-embedding-3-small" [ref=e1231]:
+                - cell "2024-01-04" [ref=e1232]
+                - cell "code-search-babbage-code-001" [ref=e1233]:
+                  - code [ref=e1234]: code-search-babbage-code-001
+                - cell "$5.00 / 1M tokens" [ref=e1235]
+                - cell "text-embedding-3-small" [ref=e1236]:
+                  - code [ref=e1237]: text-embedding-3-small
+              - row "2024-01-04 code-search-babbage-text-001 $5.00 / 1M tokens text-embedding-3-small" [ref=e1238]:
+                - cell "2024-01-04" [ref=e1239]
+                - cell "code-search-babbage-text-001" [ref=e1240]:
+                  - code [ref=e1241]: code-search-babbage-text-001
+                - cell "$5.00 / 1M tokens" [ref=e1242]
+                - cell "text-embedding-3-small" [ref=e1243]:
+                  - code [ref=e1244]: text-embedding-3-small
+              - row "2024-01-04 text-similarity-curie-001 $20.00 / 1M tokens text-embedding-3-small" [ref=e1245]:
+                - cell "2024-01-04" [ref=e1246]
+                - cell "text-similarity-curie-001" [ref=e1247]:
+                  - code [ref=e1248]: text-similarity-curie-001
+                - cell "$20.00 / 1M tokens" [ref=e1249]
+                - cell "text-embedding-3-small" [ref=e1250]:
+                  - code [ref=e1251]: text-embedding-3-small
+              - row "2024-01-04 text-search-curie-doc-001 $20.00 / 1M tokens text-embedding-3-small" [ref=e1252]:
+                - cell "2024-01-04" [ref=e1253]
+                - cell "text-search-curie-doc-001" [ref=e1254]:
+                  - code [ref=e1255]: text-search-curie-doc-001
+                - cell "$20.00 / 1M tokens" [ref=e1256]
+                - cell "text-embedding-3-small" [ref=e1257]:
+                  - code [ref=e1258]: text-embedding-3-small
+              - row "2024-01-04 text-search-curie-query-001 $20.00 / 1M tokens text-embedding-3-small" [ref=e1259]:
+                - cell "2024-01-04" [ref=e1260]
+                - cell "text-search-curie-query-001" [ref=e1261]:
+                  - code [ref=e1262]: text-search-curie-query-001
+                - cell "$20.00 / 1M tokens" [ref=e1263]
+                - cell "text-embedding-3-small" [ref=e1264]:
+                  - code [ref=e1265]: text-embedding-3-small
+              - row "2024-01-04 text-similarity-davinci-001 $200.00 / 1M tokens text-embedding-3-small" [ref=e1266]:
+                - cell "2024-01-04" [ref=e1267]
+                - cell "text-similarity-davinci-001" [ref=e1268]:
+                  - code [ref=e1269]: text-similarity-davinci-001
+                - cell "$200.00 / 1M tokens" [ref=e1270]
+                - cell "text-embedding-3-small" [ref=e1271]:
+                  - code [ref=e1272]: text-embedding-3-small
+              - row "2024-01-04 text-search-davinci-doc-001 $200.00 / 1M tokens text-embedding-3-small" [ref=e1273]:
+                - cell "2024-01-04" [ref=e1274]
+                - cell "text-search-davinci-doc-001" [ref=e1275]:
+                  - code [ref=e1276]: text-search-davinci-doc-001
+                - cell "$200.00 / 1M tokens" [ref=e1277]
+                - cell "text-embedding-3-small" [ref=e1278]:
+                  - code [ref=e1279]: text-embedding-3-small
+              - row "2024-01-04 text-search-davinci-query-001 $200.00 / 1M tokens text-embedding-3-small" [ref=e1280]:
+                - cell "2024-01-04" [ref=e1281]
+                - cell "text-search-davinci-query-001" [ref=e1282]:
+                  - code [ref=e1283]: text-search-davinci-query-001
+                - cell "$200.00 / 1M tokens" [ref=e1284]
+                - cell "text-embedding-3-small" [ref=e1285]:
+                  - code [ref=e1286]: text-embedding-3-small
+          - 'heading "2023-06-13: Updated chat models Copy link to 2023 06 13 updated chat models" [level=3] [ref=e1287]':
+            - generic [ref=e1288]: "2023-06-13: Updated chat models"
+            - button "Copy link to 2023 06 13 updated chat models" [ref=e1289] [cursor=pointer]:
+              - img [ref=e1290]
+          - paragraph [ref=e1292]:
+            - text: On June 13, 2023, we announced new chat model versions in the
+            - link "Function calling and other API updates" [ref=e1293] [cursor=pointer]:
+              - /url: https://openai.com/blog/function-calling-and-other-api-updates
+            - text: blog post. The three original versions will be retired in June 2024 at the earliest. As of January 10, 2024, only existing users of these models will be able to continue using them.
+          - table [ref=e1295]:
+            - rowgroup [ref=e1296]:
+              - row "Shutdown date Legacy model Legacy model price Recommended replacement" [ref=e1297]:
+                - columnheader "Shutdown date" [ref=e1298]
+                - columnheader "Legacy model" [ref=e1299]
+                - columnheader "Legacy model price" [ref=e1300]
+                - columnheader "Recommended replacement" [ref=e1301]
+            - rowgroup [ref=e1302]:
+              - row "at earliest 2024-06-13 gpt-4-0314 $30.00 / 1M input tokens + $60.00 / 1M output tokens gpt-4o" [ref=e1303]:
+                - cell "at earliest 2024-06-13" [ref=e1304]
+                - cell "gpt-4-0314" [ref=e1305]:
+                  - code [ref=e1306]: gpt-4-0314
+                - cell "$30.00 / 1M input tokens + $60.00 / 1M output tokens" [ref=e1307]
+                - cell "gpt-4o" [ref=e1308]:
+                  - code [ref=e1309]: gpt-4o
+          - table [ref=e1311]:
+            - rowgroup [ref=e1312]:
+              - row "Shutdown date Deprecated model Deprecated model price Recommended replacement" [ref=e1313]:
+                - columnheader "Shutdown date" [ref=e1314]
+                - columnheader "Deprecated model" [ref=e1315]
+                - columnheader "Deprecated model price" [ref=e1316]
+                - columnheader "Recommended replacement" [ref=e1317]
+            - rowgroup [ref=e1318]:
+              - row "2024-09-13 gpt-3.5-turbo-0301 $15.00 / 1M input tokens + $20.00 / 1M output tokens gpt-3.5-turbo" [ref=e1319]:
+                - cell "2024-09-13" [ref=e1320]
+                - cell "gpt-3.5-turbo-0301" [ref=e1321]:
+                  - code [ref=e1322]: gpt-3.5-turbo-0301
+                - cell "$15.00 / 1M input tokens + $20.00 / 1M output tokens" [ref=e1323]
+                - cell "gpt-3.5-turbo" [ref=e1324]:
+                  - code [ref=e1325]: gpt-3.5-turbo
+              - row "2025-06-06 gpt-4-32k-0314 $60.00 / 1M input tokens + $120.00 / 1M output tokens gpt-4o" [ref=e1326]:
+                - cell "2025-06-06" [ref=e1327]
+                - cell "gpt-4-32k-0314" [ref=e1328]:
+                  - code [ref=e1329]: gpt-4-32k-0314
+                - cell "$60.00 / 1M input tokens + $120.00 / 1M output tokens" [ref=e1330]
+                - cell "gpt-4o" [ref=e1331]:
+                  - code [ref=e1332]: gpt-4o
+          - 'heading "2023-03-20: Codex models Copy link to 2023 03 20 codex models" [level=3] [ref=e1333]':
+            - generic [ref=e1334]: "2023-03-20: Codex models"
+            - button "Copy link to 2023 03 20 codex models" [ref=e1335] [cursor=pointer]:
+              - img [ref=e1336]
+          - table [ref=e1339]:
+            - rowgroup [ref=e1340]:
+              - row "Shutdown date Deprecated model Recommended replacement" [ref=e1341]:
+                - columnheader "Shutdown date" [ref=e1342]
+                - columnheader "Deprecated model" [ref=e1343]
+                - columnheader "Recommended replacement" [ref=e1344]
+            - rowgroup [ref=e1345]:
+              - row "2023-03-23 code-davinci-002 gpt-4o" [ref=e1346]:
+                - cell "2023-03-23" [ref=e1347]
+                - cell "code-davinci-002" [ref=e1348]:
+                  - code [ref=e1349]: code-davinci-002
+                - cell "gpt-4o" [ref=e1350]:
+                  - code [ref=e1351]: gpt-4o
+              - row "2023-03-23 code-davinci-001 gpt-4o" [ref=e1352]:
+                - cell "2023-03-23" [ref=e1353]
+                - cell "code-davinci-001" [ref=e1354]:
+                  - code [ref=e1355]: code-davinci-001
+                - cell "gpt-4o" [ref=e1356]:
+                  - code [ref=e1357]: gpt-4o
+              - row "2023-03-23 code-cushman-002 gpt-4o" [ref=e1358]:
+                - cell "2023-03-23" [ref=e1359]
+                - cell "code-cushman-002" [ref=e1360]:
+                  - code [ref=e1361]: code-cushman-002
+                - cell "gpt-4o" [ref=e1362]:
+                  - code [ref=e1363]: gpt-4o
+              - row "2023-03-23 code-cushman-001 gpt-4o" [ref=e1364]:
+                - cell "2023-03-23" [ref=e1365]
+                - cell "code-cushman-001" [ref=e1366]:
+                  - code [ref=e1367]: code-cushman-001
+                - cell "gpt-4o" [ref=e1368]:
+                  - code [ref=e1369]: gpt-4o
+          - 'heading "2022-06-03: Legacy endpoints Copy link to 2022 06 03 legacy endpoints" [level=3] [ref=e1370]':
+            - generic [ref=e1371]: "2022-06-03: Legacy endpoints"
+            - button "Copy link to 2022 06 03 legacy endpoints" [ref=e1372] [cursor=pointer]:
+              - img [ref=e1373]
+          - table [ref=e1376]:
+            - rowgroup [ref=e1377]:
+              - row "Shutdown date System Recommended replacement" [ref=e1378]:
+                - columnheader "Shutdown date" [ref=e1379]
+                - columnheader "System" [ref=e1380]
+                - columnheader "Recommended replacement" [ref=e1381]
+            - rowgroup [ref=e1382]:
+              - row "2022-12-03 /v1/engines /v1/models" [ref=e1383]:
+                - cell "2022-12-03" [ref=e1384]
+                - cell "/v1/engines" [ref=e1385]:
+                  - code [ref=e1386]: /v1/engines
+                - cell "/v1/models" [ref=e1387]:
+                  - link "/v1/models" [ref=e1388] [cursor=pointer]:
+                    - /url: https://platform.openai.com/docs/api-reference/models/list
+              - row "2022-12-03 /v1/search View transition guide" [ref=e1389]:
+                - cell "2022-12-03" [ref=e1390]
+                - cell "/v1/search" [ref=e1391]:
+                  - code [ref=e1392]: /v1/search
+                - cell "View transition guide" [ref=e1393]:
+                  - link "View transition guide" [ref=e1394] [cursor=pointer]:
+                    - /url: https://help.openai.com/en/articles/6272952-search-transition-guide
+              - row "2022-12-03 /v1/classifications View transition guide" [ref=e1395]:
+                - cell "2022-12-03" [ref=e1396]
+                - cell "/v1/classifications" [ref=e1397]:
+                  - code [ref=e1398]: /v1/classifications
+                - cell "View transition guide" [ref=e1399]:
+                  - link "View transition guide" [ref=e1400] [cursor=pointer]:
+                    - /url: https://help.openai.com/en/articles/6272941-classifications-transition-guide
+              - row "2022-12-03 /v1/answers View transition guide" [ref=e1401]:
+                - cell "2022-12-03" [ref=e1402]
+                - cell "/v1/answers" [ref=e1403]:
+                  - code [ref=e1404]: /v1/answers
+                - cell "View transition guide" [ref=e1405]:
+                  - link "View transition guide" [ref=e1406] [cursor=pointer]:
+                    - /url: https://help.openai.com/en/articles/6233728-answers-transition-guide

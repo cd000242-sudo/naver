@@ -1,0 +1,564 @@
+- generic [active] [ref=e1]:
+  - region "Notifications (F8)":
+    - list
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - link "Claude API Docs Home" [ref=e6] [cursor=pointer]:
+          - /url: /docs/en/home
+          - img "Claude API Docs" [ref=e7]
+        - button "Switch product surface" [ref=e11] [cursor=pointer]:
+          - text: Messages
+          - img [ref=e13]
+      - navigation [ref=e15]:
+        - list [ref=e16]:
+          - listitem [ref=e17]:
+            - link "Build" [ref=e18] [cursor=pointer]:
+              - /url: /docs/en/intro
+          - listitem [ref=e19]:
+            - link "Admin" [ref=e20] [cursor=pointer]:
+              - /url: /docs/en/build-with-claude/administration-api
+          - listitem [ref=e21]:
+            - link "Models & pricing" [ref=e22] [cursor=pointer]:
+              - /url: /docs/en/about-claude/models/overview
+          - listitem [ref=e23]:
+            - link "Client SDKs" [ref=e24] [cursor=pointer]:
+              - /url: /docs/en/api/client-sdks
+          - listitem [ref=e25]:
+            - link "API Reference" [ref=e26] [cursor=pointer]:
+              - /url: /docs/en/api/overview
+      - generic [ref=e28]:
+        - button [ref=e29] [cursor=pointer]:
+          - img [ref=e31]
+        - button "English" [ref=e33] [cursor=pointer]:
+          - text: English
+          - img [ref=e35]
+        - link "Log in" [ref=e37] [cursor=pointer]:
+          - /url: /login?returnTo=%2Fdocs%2Fen%2Fabout-claude%2Fmodels%2Foverview
+          - button "Log in" [ref=e38]
+    - generic [ref=e40]:
+      - complementary [ref=e41]:
+        - button "Search documentation" [ref=e43] [cursor=pointer]:
+          - generic:
+            - generic:
+              - img
+          - generic [ref=e44]: Search...
+          - generic:
+            - generic: ⌘K
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]: Models
+            - generic [ref=e50]:
+              - link "Models overview" [ref=e51] [cursor=pointer]:
+                - /url: /docs/en/about-claude/models/overview
+                - generic [ref=e53]: Models overview
+              - link "Choosing a model" [ref=e54] [cursor=pointer]:
+                - /url: /docs/en/about-claude/models/choosing-a-model
+                - generic [ref=e56]: Choosing a model
+              - link "What's new in Claude 4.6" [ref=e57] [cursor=pointer]:
+                - /url: /docs/en/about-claude/models/whats-new-claude-4-6
+                - generic [ref=e59]: What's new in Claude 4.6
+              - link "Migration guide" [ref=e60] [cursor=pointer]:
+                - /url: /docs/en/about-claude/models/migration-guide
+                - generic [ref=e62]: Migration guide
+              - link "Model deprecations" [ref=e63] [cursor=pointer]:
+                - /url: /docs/en/about-claude/model-deprecations
+                - generic [ref=e65]: Model deprecations
+              - link "Model cards" [ref=e66] [cursor=pointer]:
+                - /url: /docs/en/resources/overview
+                - generic [ref=e68]: Model cards
+              - link "System prompts" [ref=e69] [cursor=pointer]:
+                - /url: /docs/en/release-notes/system-prompts
+                - generic [ref=e71]: System prompts
+          - generic [ref=e72]:
+            - generic [ref=e73]: Pricing
+            - link "Pricing" [ref=e75] [cursor=pointer]:
+              - /url: /docs/en/about-claude/pricing
+              - generic [ref=e77]: Pricing
+        - link "Console" [ref=e80] [cursor=pointer]:
+          - /url: /
+          - img [ref=e82]
+          - generic [ref=e85]: Console
+      - main [ref=e87]:
+        - generic [ref=e88]:
+          - article [ref=e90]:
+            - generic [ref=e91]:
+              - generic [ref=e93]: Models
+              - generic [ref=e94]:
+                - heading "Models overview" [level=1] [ref=e95]
+                - generic [ref=e97]:
+                  - button "Copy page" [ref=e98] [cursor=pointer]:
+                    - generic [ref=e99]:
+                      - generic [ref=e100]:
+                        - img
+                        - img [ref=e101]
+                        - img
+                        - img
+                      - generic [ref=e103]: Copy page
+                  - button [ref=e104] [cursor=pointer]:
+                    - img [ref=e106]
+              - generic [ref=e108]: Claude is a family of state-of-the-art large language models developed by Anthropic. This guide introduces the available models and compares their performance.
+            - heading "Copy link to clipboard Choosing a model" [level=2] [ref=e109]:
+              - generic [ref=e110]:
+                - button "Copy link to clipboard" [ref=e112] [cursor=pointer]:
+                  - img [ref=e114]
+                - generic [ref=e116]: Choosing a model
+            - paragraph [ref=e117]:
+              - text: If you're unsure which model to use, consider starting with
+              - strong [ref=e118]: Claude Opus 4.6
+              - text: for the most complex tasks. It is the most intelligent broadly available model with exceptional performance in coding and reasoning.
+            - paragraph [ref=e119]: All current Claude models support text and image input, text output, multilingual capabilities, and vision. Models are available via the Claude API, AWS Bedrock, and Google Vertex AI.
+            - paragraph [ref=e120]:
+              - text: Once you've picked a model,
+              - link "learn how to make your first API call" [ref=e121] [cursor=pointer]:
+                - /url: /docs/en/get-started
+              - text: .
+            - heading "Copy link to clipboard Latest models comparison" [level=3] [ref=e122]:
+              - generic [ref=e123]:
+                - button "Copy link to clipboard" [ref=e125] [cursor=pointer]:
+                  - img [ref=e127]
+                - generic [ref=e129]: Latest models comparison
+            - table [ref=e131]:
+              - rowgroup [ref=e132]:
+                - row "Feature Claude Opus 4.6 Claude Sonnet 4.6 Claude Haiku 4.5" [ref=e133]:
+                  - columnheader "Feature" [ref=e134]
+                  - columnheader "Claude Opus 4.6" [ref=e135]
+                  - columnheader "Claude Sonnet 4.6" [ref=e136]
+                  - columnheader "Claude Haiku 4.5" [ref=e137]
+              - rowgroup [ref=e138]:
+                - row "Description The most intelligent broadly available model for agents and coding The best combination of speed and intelligence The fastest model with near-frontier intelligence" [ref=e139]:
+                  - cell "Description" [ref=e140]:
+                    - strong [ref=e141]: Description
+                  - cell "The most intelligent broadly available model for agents and coding" [ref=e142]
+                  - cell "The best combination of speed and intelligence" [ref=e143]
+                  - cell "The fastest model with near-frontier intelligence" [ref=e144]
+                - row "Claude API ID claude-opus-4-6 claude-sonnet-4-6 claude-haiku-4-5-20251001" [ref=e145]:
+                  - cell "Claude API ID" [ref=e146]:
+                    - strong [ref=e147]: Claude API ID
+                  - cell "claude-opus-4-6" [ref=e148]:
+                    - generic [ref=e149] [cursor=pointer]: claude-opus-4-6
+                  - cell "claude-sonnet-4-6" [ref=e150]:
+                    - generic [ref=e151] [cursor=pointer]: claude-sonnet-4-6
+                  - cell "claude-haiku-4-5-20251001" [ref=e152]:
+                    - generic [ref=e153] [cursor=pointer]: claude-haiku-4-5-20251001
+                - row "Claude API alias claude-opus-4-6 claude-sonnet-4-6 claude-haiku-4-5" [ref=e154]:
+                  - cell "Claude API alias" [ref=e155]:
+                    - strong [ref=e156]: Claude API alias
+                  - cell "claude-opus-4-6" [ref=e157]:
+                    - generic [ref=e158] [cursor=pointer]: claude-opus-4-6
+                  - cell "claude-sonnet-4-6" [ref=e159]:
+                    - generic [ref=e160] [cursor=pointer]: claude-sonnet-4-6
+                  - cell "claude-haiku-4-5" [ref=e161]:
+                    - generic [ref=e162] [cursor=pointer]: claude-haiku-4-5
+                - row "AWS Bedrock ID anthropic.claude-opus-4-6-v1 anthropic.claude-sonnet-4-6 anthropic.claude-haiku-4-5-20251001-v1:0" [ref=e163]:
+                  - cell "AWS Bedrock ID" [ref=e164]:
+                    - strong [ref=e165]: AWS Bedrock ID
+                  - cell "anthropic.claude-opus-4-6-v1" [ref=e166]:
+                    - generic [ref=e167] [cursor=pointer]: anthropic.claude-opus-4-6-v1
+                  - cell "anthropic.claude-sonnet-4-6" [ref=e168]:
+                    - generic [ref=e169] [cursor=pointer]: anthropic.claude-sonnet-4-6
+                  - cell "anthropic.claude-haiku-4-5-20251001-v1:0" [ref=e170]:
+                    - generic [ref=e171] [cursor=pointer]: anthropic.claude-haiku-4-5-20251001-v1:0
+                - row "GCP Vertex AI ID claude-opus-4-6 claude-sonnet-4-6 claude-haiku-4-5@20251001" [ref=e172]:
+                  - cell "GCP Vertex AI ID" [ref=e173]:
+                    - strong [ref=e174]: GCP Vertex AI ID
+                  - cell "claude-opus-4-6" [ref=e175]:
+                    - generic [ref=e176] [cursor=pointer]: claude-opus-4-6
+                  - cell "claude-sonnet-4-6" [ref=e177]:
+                    - generic [ref=e178] [cursor=pointer]: claude-sonnet-4-6
+                  - cell "claude-haiku-4-5@20251001" [ref=e179]:
+                    - generic [ref=e180] [cursor=pointer]: claude-haiku-4-5@20251001
+                - row "Pricing1 $5 / input MTok $25 / output MTok $3 / input MTok $15 / output MTok $1 / input MTok $5 / output MTok" [ref=e181]:
+                  - cell "Pricing1" [ref=e182]:
+                    - strong [ref=e183]: Pricing
+                    - superscript [ref=e184]: "1"
+                  - cell "$5 / input MTok $25 / output MTok" [ref=e185]:
+                    - text: $5 / input MTok
+                    - text: $25 / output MTok
+                  - cell "$3 / input MTok $15 / output MTok" [ref=e186]:
+                    - text: $3 / input MTok
+                    - text: $15 / output MTok
+                  - cell "$1 / input MTok $5 / output MTok" [ref=e187]:
+                    - text: $1 / input MTok
+                    - text: $5 / output MTok
+                - row "Extended thinking Yes Yes Yes" [ref=e188]:
+                  - cell "Extended thinking" [ref=e189]:
+                    - strong [ref=e190]:
+                      - link "Extended thinking" [ref=e191] [cursor=pointer]:
+                        - /url: /docs/en/build-with-claude/extended-thinking
+                  - cell "Yes" [ref=e192]
+                  - cell "Yes" [ref=e193]
+                  - cell "Yes" [ref=e194]
+                - row "Adaptive thinking Yes Yes No" [ref=e195]:
+                  - cell "Adaptive thinking" [ref=e196]:
+                    - strong [ref=e197]:
+                      - link "Adaptive thinking" [ref=e198] [cursor=pointer]:
+                        - /url: /docs/en/build-with-claude/adaptive-thinking
+                  - cell "Yes" [ref=e199]
+                  - cell "Yes" [ref=e200]
+                  - cell "No" [ref=e201]
+                - row "Priority Tier Yes Yes Yes" [ref=e202]:
+                  - cell "Priority Tier" [ref=e203]:
+                    - strong [ref=e204]:
+                      - link "Priority Tier" [ref=e205] [cursor=pointer]:
+                        - /url: /docs/en/api/service-tiers
+                  - cell "Yes" [ref=e206]
+                  - cell "Yes" [ref=e207]
+                  - cell "Yes" [ref=e208]
+                - row "Comparative latency Moderate Fast Fastest" [ref=e209]:
+                  - cell "Comparative latency" [ref=e210]:
+                    - strong [ref=e211]: Comparative latency
+                  - cell "Moderate" [ref=e212]
+                  - cell "Fast" [ref=e213]
+                  - cell "Fastest" [ref=e214]
+                - row "Context window 1M tokens 1M tokens 200k tokens" [ref=e215]:
+                  - cell "Context window" [ref=e216]:
+                    - strong [ref=e217]: Context window
+                  - cell "1M tokens" [ref=e218]
+                  - cell "1M tokens" [ref=e219]
+                  - cell "200k tokens" [ref=e220]
+                - row "Max output 128k tokens 64k tokens 64k tokens" [ref=e221]:
+                  - cell "Max output" [ref=e222]:
+                    - strong [ref=e223]: Max output
+                  - cell "128k tokens" [ref=e224]
+                  - cell "64k tokens" [ref=e225]
+                  - cell "64k tokens" [ref=e226]
+                - row "Reliable knowledge cutoff May 20252 Aug 20252 Feb 2025" [ref=e227]:
+                  - cell "Reliable knowledge cutoff" [ref=e228]:
+                    - strong [ref=e229]: Reliable knowledge cutoff
+                  - cell "May 20252" [ref=e230]:
+                    - text: May 2025
+                    - superscript [ref=e231]: "2"
+                  - cell "Aug 20252" [ref=e232]:
+                    - text: Aug 2025
+                    - superscript [ref=e233]: "2"
+                  - cell "Feb 2025" [ref=e234]
+                - row "Training data cutoff Aug 2025 Jan 2026 Jul 2025" [ref=e235]:
+                  - cell "Training data cutoff" [ref=e236]:
+                    - strong [ref=e237]: Training data cutoff
+                  - cell "Aug 2025" [ref=e238]
+                  - cell "Jan 2026" [ref=e239]
+                  - cell "Jul 2025" [ref=e240]
+            - paragraph [ref=e241]:
+              - emphasis [ref=e242]:
+                - superscript [ref=e243]:
+                  - text: 1 - See the
+                  - link "pricing page" [ref=e244] [cursor=pointer]:
+                    - /url: /docs/en/about-claude/pricing
+                  - text: for complete pricing information including batch API discounts, prompt caching rates, extended thinking costs, and vision processing fees.
+            - paragraph [ref=e245]:
+              - emphasis [ref=e246]:
+                - superscript [ref=e247]:
+                  - text: 2 -
+                  - strong [ref=e248]: Reliable knowledge cutoff
+                  - text: indicates the date through which a model's knowledge is most extensive and reliable.
+                  - strong [ref=e249]: Training data cutoff
+                  - text: is the broader date range of training data used. For more information, see
+                  - link "Anthropic's Transparency Hub" [ref=e250] [cursor=pointer]:
+                    - /url: https://www.anthropic.com/transparency
+                  - text: .
+            - generic [ref=e251]:
+              - img [ref=e254]
+              - paragraph [ref=e257]:
+                - link "Claude Mythos Preview" [ref=e258] [cursor=pointer]:
+                  - /url: https://anthropic.com/glasswing
+                - text: is offered separately as a research preview model for defensive cybersecurity workflows as part of
+                - link "Project Glasswing" [ref=e259] [cursor=pointer]:
+                  - /url: https://anthropic.com/glasswing
+                - text: . Access is invitation-only and there is no self-serve sign-up.
+            - generic [ref=e260]:
+              - img [ref=e263]
+              - generic [ref=e265]: Models with the same snapshot date (e.g., 20240620) are identical across all platforms and do not change. The snapshot date in the model name ensures consistency and allows developers to rely on stable performance across different environments.
+            - generic [ref=e266]:
+              - img [ref=e269]
+              - generic [ref=e271]:
+                - text: Starting with
+                - strong [ref=e272]: Claude Sonnet 4.5 and all subsequent models
+                - text: "(including Claude Sonnet 4.6), AWS Bedrock offers two endpoint types:"
+                - strong [ref=e273]: global endpoints
+                - text: (dynamic routing for maximum availability) and
+                - strong [ref=e274]: regional endpoints
+                - text: "(guaranteed data routing through specific geographic regions). Google Vertex AI offers three endpoint types: global endpoints,"
+                - strong [ref=e275]: multi-region endpoints
+                - text: (dynamic routing within a geographic area), and regional endpoints. For more information, see the
+                - link "third-party platform pricing section" [ref=e276] [cursor=pointer]:
+                  - /url: /docs/en/about-claude/pricing#third-party-platform-pricing
+                - text: .
+            - generic [ref=e277]:
+              - img [ref=e280]
+              - paragraph [ref=e283]:
+                - text: You can query model capabilities and token limits programmatically with the
+                - link "Models API" [ref=e284] [cursor=pointer]:
+                  - /url: /docs/en/api/models/list
+                - text: . The response includes
+                - code [ref=e285]: max_input_tokens
+                - text: ","
+                - code [ref=e286]: max_tokens
+                - text: ", and a"
+                - code [ref=e287]: capabilities
+                - text: object for every available model.
+            - generic [ref=e288]:
+              - img [ref=e291]
+              - paragraph [ref=e294]:
+                - text: The Max output values above apply to the synchronous Messages API. On the
+                - link "Message Batches API" [ref=e295] [cursor=pointer]:
+                  - /url: /docs/en/build-with-claude/batch-processing#extended-output-beta
+                - text: ", Opus 4.6 and Sonnet 4.6 support up to 300k output tokens by using the"
+                - code [ref=e296]: output-300k-2026-03-24
+                - text: beta header.
+            - heading "Legacy models" [level=3] [ref=e299]:
+              - button "Legacy models" [ref=e300] [cursor=pointer]:
+                - img [ref=e301]
+                - generic [ref=e303]: Legacy models
+            - heading "Copy link to clipboard Prompt and output performance" [level=2] [ref=e304]:
+              - generic [ref=e305]:
+                - button "Copy link to clipboard" [ref=e307] [cursor=pointer]:
+                  - img [ref=e309]
+                - generic [ref=e311]: Prompt and output performance
+            - paragraph [ref=e312]: "Claude 4 models excel in:"
+            - list [ref=e313]:
+              - listitem [ref=e314]:
+                - text: •
+                - paragraph [ref=e315]:
+                  - strong [ref=e316]: Performance
+                  - text: ": Top-tier results in reasoning, coding, multilingual tasks, long-context handling, honesty, and image processing. See the"
+                  - link "Claude 4 blog post" [ref=e317] [cursor=pointer]:
+                    - /url: http://www.anthropic.com/news/claude-4
+                  - text: for more information.
+              - listitem [ref=e318]:
+                - text: •
+                - paragraph [ref=e319]:
+                  - strong [ref=e320]: Engaging responses
+                  - text: ": Claude models are ideal for applications that require rich, human-like interactions."
+                - list [ref=e321]:
+                  - listitem [ref=e322]:
+                    - text: • If you prefer more concise responses, you can adjust your prompts to guide the model toward the desired output length. Refer to the
+                    - link "prompt engineering guides" [ref=e323] [cursor=pointer]:
+                      - /url: /docs/en/build-with-claude/prompt-engineering
+                    - text: for details.
+                  - listitem [ref=e324]:
+                    - text: • For prompting best practices, see the
+                    - link "prompting best practices guide" [ref=e325] [cursor=pointer]:
+                      - /url: /docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+                    - text: .
+              - listitem [ref=e326]:
+                - text: •
+                - paragraph [ref=e327]:
+                  - strong [ref=e328]: Output quality
+                  - text: ": When migrating from previous model generations to Claude 4, you may notice larger improvements in overall performance."
+            - heading "Copy link to clipboard Migrating to Claude 4.6" [level=2] [ref=e329]:
+              - generic [ref=e330]:
+                - button "Copy link to clipboard" [ref=e332] [cursor=pointer]:
+                  - img [ref=e334]
+                - generic [ref=e336]: Migrating to Claude 4.6
+            - paragraph [ref=e337]:
+              - text: If you're currently using older Claude models, consider migrating to Claude Opus 4.6 to take advantage of improved intelligence and enhanced capabilities. For detailed migration instructions, see
+              - link "Migrating to Claude 4.6" [ref=e338] [cursor=pointer]:
+                - /url: /docs/en/about-claude/models/migration-guide
+              - text: .
+            - heading "Copy link to clipboard Get started with Claude" [level=2] [ref=e339]:
+              - generic [ref=e340]:
+                - button "Copy link to clipboard" [ref=e342] [cursor=pointer]:
+                  - img [ref=e344]
+                - generic [ref=e346]: Get started with Claude
+            - paragraph [ref=e347]: If you're ready to start exploring what Claude can do for you, dive in! Whether you're a developer looking to integrate Claude into your applications or a user wanting to experience the power of AI firsthand, the following resources can help.
+            - generic [ref=e348]:
+              - img [ref=e351]
+              - generic [ref=e353]:
+                - text: Looking to chat with Claude? Visit
+                - link "claude.ai" [ref=e354] [cursor=pointer]:
+                  - /url: http://www.claude.ai
+                - text: "!"
+            - generic [ref=e355]:
+              - link "Intro to Claude Explore Claude's capabilities and development flow." [ref=e356] [cursor=pointer]:
+                - /url: /docs/en/intro
+                - generic [ref=e357]:
+                  - img [ref=e360]
+                  - generic [ref=e362]:
+                    - generic [ref=e364]: Intro to Claude
+                    - paragraph [ref=e366]: Explore Claude's capabilities and development flow.
+              - link "Quickstart Learn how to make your first API call in minutes." [ref=e367] [cursor=pointer]:
+                - /url: /docs/en/get-started
+                - generic [ref=e368]:
+                  - img [ref=e371]
+                  - generic [ref=e373]:
+                    - generic [ref=e375]: Quickstart
+                    - paragraph [ref=e377]: Learn how to make your first API call in minutes.
+              - link "Claude Console Craft and test powerful prompts directly in your browser." [ref=e378] [cursor=pointer]:
+                - /url: /
+                - generic [ref=e379]:
+                  - img [ref=e382]
+                  - generic [ref=e384]:
+                    - generic [ref=e386]: Claude Console
+                    - paragraph [ref=e388]: Craft and test powerful prompts directly in your browser.
+            - paragraph [ref=e389]:
+              - text: If you have any questions or need assistance, don't hesitate to reach out to the
+              - link "support team" [ref=e390] [cursor=pointer]:
+                - /url: https://support.claude.com/
+              - text: or consult the
+              - link "Discord community" [ref=e391] [cursor=pointer]:
+                - /url: https://www.anthropic.com/discord
+              - text: .
+            - generic [ref=e392]:
+              - paragraph [ref=e393]: Was this page helpful?
+              - generic [ref=e394]:
+                - button "Thumbs up" [ref=e395] [cursor=pointer]:
+                  - img [ref=e397]
+                - button "Thumbs down" [ref=e399] [cursor=pointer]:
+                  - img [ref=e401]
+          - button "Toggle table of contents" [ref=e403] [cursor=pointer]:
+            - img [ref=e404]
+        - generic [ref=e407]:
+          - generic [ref=e408]:
+            - link "Claude API Docs home page" [ref=e410] [cursor=pointer]:
+              - /url: /docs
+              - img "Claude API Docs" [ref=e411]
+            - generic [ref=e414]:
+              - link "X (Twitter)" [ref=e415] [cursor=pointer]:
+                - /url: https://x.com/claudeai
+                - img [ref=e416]
+              - link "LinkedIn" [ref=e418] [cursor=pointer]:
+                - /url: https://www.linkedin.com/showcase/claude
+                - img [ref=e419]
+              - link "Instagram" [ref=e421] [cursor=pointer]:
+                - /url: https://instagram.com/claudeai
+                - img [ref=e422]
+          - generic [ref=e425]:
+            - generic [ref=e426]:
+              - generic [ref=e427]:
+                - heading "Solutions" [level=3] [ref=e428]
+                - list [ref=e429]:
+                  - listitem [ref=e430]:
+                    - link "AI agents" [ref=e431] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/agents
+                  - listitem [ref=e432]:
+                    - link "Code modernization" [ref=e433] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/code-modernization
+                  - listitem [ref=e434]:
+                    - link "Coding" [ref=e435] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/coding
+                  - listitem [ref=e436]:
+                    - link "Customer support" [ref=e437] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/customer-support
+                  - listitem [ref=e438]:
+                    - link "Education" [ref=e439] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/education
+                  - listitem [ref=e440]:
+                    - link "Financial services" [ref=e441] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/financial-services
+                  - listitem [ref=e442]:
+                    - link "Government" [ref=e443] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/government
+                  - listitem [ref=e444]:
+                    - link "Life sciences" [ref=e445] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/life-sciences
+              - generic [ref=e446]:
+                - heading "Partners" [level=3] [ref=e447]
+                - list [ref=e448]:
+                  - listitem [ref=e449]:
+                    - link "Amazon Bedrock" [ref=e450] [cursor=pointer]:
+                      - /url: https://claude.com/partners/amazon-bedrock
+                  - listitem [ref=e451]:
+                    - link "Google Cloud's Vertex AI" [ref=e452] [cursor=pointer]:
+                      - /url: https://claude.com/partners/google-cloud-vertex-ai
+            - generic [ref=e453]:
+              - generic [ref=e454]:
+                - heading "Learn" [level=3] [ref=e455]
+                - list [ref=e456]:
+                  - listitem [ref=e457]:
+                    - link "Blog" [ref=e458] [cursor=pointer]:
+                      - /url: https://claude.com/blog
+                  - listitem [ref=e459]:
+                    - link "Catalog" [ref=e460] [cursor=pointer]:
+                      - /url: https://claude.ai/catalog/artifacts
+                  - listitem [ref=e461]:
+                    - link "Courses" [ref=e462] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/learn
+                  - listitem [ref=e463]:
+                    - link "Use cases" [ref=e464] [cursor=pointer]:
+                      - /url: https://claude.com/resources/use-cases
+                  - listitem [ref=e465]:
+                    - link "Connectors" [ref=e466] [cursor=pointer]:
+                      - /url: https://claude.com/partners/mcp
+                  - listitem [ref=e467]:
+                    - link "Customer stories" [ref=e468] [cursor=pointer]:
+                      - /url: https://claude.com/customers
+                  - listitem [ref=e469]:
+                    - link "Engineering at Anthropic" [ref=e470] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/engineering
+                  - listitem [ref=e471]:
+                    - link "Events" [ref=e472] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/events
+                  - listitem [ref=e473]:
+                    - link "Powered by Claude" [ref=e474] [cursor=pointer]:
+                      - /url: https://claude.com/partners/powered-by-claude
+                  - listitem [ref=e475]:
+                    - link "Service partners" [ref=e476] [cursor=pointer]:
+                      - /url: https://claude.com/partners/services
+                  - listitem [ref=e477]:
+                    - link "Startups program" [ref=e478] [cursor=pointer]:
+                      - /url: https://claude.com/programs/startups
+              - generic [ref=e479]:
+                - heading "Company" [level=3] [ref=e480]
+                - list [ref=e481]:
+                  - listitem [ref=e482]:
+                    - link "Anthropic" [ref=e483] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/company
+                  - listitem [ref=e484]:
+                    - link "Careers" [ref=e485] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/careers
+                  - listitem [ref=e486]:
+                    - link "Economic Futures" [ref=e487] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/economic-futures
+                  - listitem [ref=e488]:
+                    - link "Research" [ref=e489] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/research
+                  - listitem [ref=e490]:
+                    - link "News" [ref=e491] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/news
+                  - listitem [ref=e492]:
+                    - link "Responsible Scaling Policy" [ref=e493] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy
+                  - listitem [ref=e494]:
+                    - link "Security and compliance" [ref=e495] [cursor=pointer]:
+                      - /url: https://trust.anthropic.com
+                  - listitem [ref=e496]:
+                    - link "Transparency" [ref=e497] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/transparency
+            - generic [ref=e498]:
+              - generic [ref=e499]:
+                - heading "Help and security" [level=3] [ref=e500]
+                - list [ref=e501]:
+                  - listitem [ref=e502]:
+                    - link "Availability" [ref=e503] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/supported-countries
+                  - listitem [ref=e504]:
+                    - link "Status" [ref=e505] [cursor=pointer]:
+                      - /url: https://status.claude.com/
+                  - listitem [ref=e506]:
+                    - link "Support" [ref=e507] [cursor=pointer]:
+                      - /url: https://support.claude.com/
+                  - listitem [ref=e508]:
+                    - link "Discord" [ref=e509] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/discord
+              - generic [ref=e510]:
+                - heading "Terms and policies" [level=3] [ref=e511]
+                - list [ref=e512]:
+                  - listitem [ref=e513]:
+                    - link "Privacy policy" [ref=e514] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/legal/privacy
+                  - listitem [ref=e515]:
+                    - link "Responsible disclosure policy" [ref=e516] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/responsible-disclosure-policy
+                  - listitem [ref=e517]:
+                    - 'link "Terms of service: Commercial" [ref=e518] [cursor=pointer]':
+                      - /url: https://www.anthropic.com/legal/commercial-terms
+                  - listitem [ref=e519]:
+                    - 'link "Terms of service: Consumer" [ref=e520] [cursor=pointer]':
+                      - /url: https://www.anthropic.com/legal/consumer-terms
+                  - listitem [ref=e521]:
+                    - link "Usage policy" [ref=e522] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/legal/aup
+  - button "Ask Docs" [ref=e526] [cursor=pointer]:
+    - generic [ref=e527]: Ask Docs
+  - alert [ref=e528]

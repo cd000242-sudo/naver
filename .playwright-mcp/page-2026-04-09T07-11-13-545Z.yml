@@ -1,0 +1,2023 @@
+- generic [active] [ref=e1]:
+  - link "기본 콘텐츠로 건너뛰기" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - region "ai.google.dev 은(는) 서비스 제공 및 서비스 품질 개선과 트래픽 분석을 위해 쿠키를 사용합니다. 동의 시 광고를 게재하고 표시되는 콘텐츠 및 광고를 맞춤설정하는 데도 쿠키가 사용됩니다." [ref=e4]:
+      - paragraph [ref=e5]:
+        - text: ai.google.dev 은(는) 서비스 제공 및 서비스 품질 개선과 트래픽 분석을 위해 쿠키를 사용합니다. 동의 시 광고를 게재하고 표시되는 콘텐츠 및 광고를 맞춤설정하는 데도 쿠키가 사용됩니다.
+        - link "Google에서 쿠키를 사용하는 방법을 자세히 알아보세요. 새 탭에서 열립니다." [ref=e6] [cursor=pointer]:
+          - /url: https://policies.google.com/technologies/cookies?hl=ko
+          - text: 자세히 알아보세요
+      - button "동의함" [ref=e7] [cursor=pointer]
+      - button "나중에" [ref=e8] [cursor=pointer]
+    - banner:
+      - generic:
+        - generic [ref=e11]:
+          - text: menu
+          - generic [ref=e12]:
+            - link "Gemini API" [ref=e13] [cursor=pointer]:
+              - /url: /
+              - img "Gemini API" [ref=e15]
+            - generic:
+              - list:
+                - listitem
+          - generic [ref=e20]:
+            - combobox "검색" [ref=e21]
+            - img [ref=e23]
+            - generic [ref=e26]: /
+          - generic [ref=e27]:
+            - button "테마:" [ref=e28] [cursor=pointer]: light_mode
+            - text: light_mode dark_mode brightness_medium
+          - generic "원하는 언어를 선택하세요." [ref=e29]:
+            - button "Language" [ref=e30] [cursor=pointer]:
+              - img
+              - generic [ref=e31]: Language
+              - img
+          - link "API 키 가져오기" [ref=e32] [cursor=pointer]:
+            - /url: https://aistudio.google.com/apikey?hl=ko
+          - link "설명서" [ref=e33] [cursor=pointer]:
+            - /url: https://github.com/google-gemini/cookbook
+          - link "커뮤니티" [ref=e34] [cursor=pointer]:
+            - /url: https://discuss.ai.google.dev/c/gemini-api/?hl=ko
+        - navigation "하단 탭" [ref=e40]:
+          - link "문서, selected" [ref=e42] [cursor=pointer]:
+            - /url: https://ai.google.dev/gemini-api/docs?hl=ko
+            - text: 문서
+          - link "API 참조 문서" [ref=e44] [cursor=pointer]:
+            - /url: https://ai.google.dev/api?hl=ko
+          - text: arrow_drop_down
+    - generic [ref=e46]:
+      - text: filter_list close
+      - navigation "사이드 메뉴" [ref=e47]:
+        - text: arrow_back
+        - list [ref=e50]:
+          - listitem [ref=e51]:
+            - generic [ref=e53]: 시작하기
+          - listitem [ref=e54]:
+            - link "개요" [ref=e55] [cursor=pointer]:
+              - /url: /gemini-api/docs
+              - generic [ref=e56]: 개요
+          - listitem [ref=e57]:
+            - link "빠른 시작" [ref=e58] [cursor=pointer]:
+              - /url: /gemini-api/docs/quickstart
+              - generic [ref=e59]: 빠른 시작
+          - listitem [ref=e60]:
+            - link "API 키" [ref=e61] [cursor=pointer]:
+              - /url: /gemini-api/docs/api-key
+              - generic [ref=e62]: API 키
+          - listitem [ref=e63]:
+            - link "라이브러리" [ref=e64] [cursor=pointer]:
+              - /url: /gemini-api/docs/libraries
+              - generic [ref=e65]: 라이브러리
+          - listitem [ref=e66]:
+            - link "가격 책정" [ref=e67] [cursor=pointer]:
+              - /url: /gemini-api/docs/pricing
+              - generic [ref=e68]: 가격 책정
+          - listitem [ref=e69]:
+            - link "Interactions API" [ref=e70] [cursor=pointer]:
+              - /url: /gemini-api/docs/interactions
+              - generic [ref=e71]: Interactions API
+          - listitem [ref=e73]:
+            - link "코딩 에이전트 설정" [ref=e74] [cursor=pointer]:
+              - /url: /gemini-api/docs/coding-agents
+              - generic [ref=e75]: 코딩 에이전트 설정
+          - listitem [ref=e76]:
+            - generic [ref=e78]: 모델
+          - listitem [ref=e79]:
+            - link "모든 모델" [ref=e80] [cursor=pointer]:
+              - /url: /gemini-api/docs/models
+              - generic [ref=e81]: 모든 모델
+          - listitem [ref=e82]:
+            - link "Gemini 3" [ref=e83] [cursor=pointer]:
+              - /url: /gemini-api/docs/gemini-3
+              - generic [ref=e84]: Gemini 3
+          - listitem [ref=e86]:
+            - link "Nano Banana" [ref=e87] [cursor=pointer]:
+              - /url: /gemini-api/docs/image-generation
+              - generic [ref=e88]: Nano Banana
+          - listitem [ref=e89]:
+            - link "Veo" [ref=e90] [cursor=pointer]:
+              - /url: /gemini-api/docs/video
+              - generic [ref=e91]: Veo
+          - listitem [ref=e92]:
+            - link "Lyria 3" [ref=e93] [cursor=pointer]:
+              - /url: /gemini-api/docs/music-generation
+              - generic [ref=e94]: Lyria 3
+          - listitem [ref=e96]:
+            - link "Lyria RealTime" [ref=e97] [cursor=pointer]:
+              - /url: /gemini-api/docs/realtime-music-generation
+              - generic [ref=e98]: Lyria RealTime
+          - listitem [ref=e100]:
+            - link "Imagen" [ref=e101] [cursor=pointer]:
+              - /url: /gemini-api/docs/imagen
+              - generic [ref=e102]: Imagen
+          - listitem [ref=e103]:
+            - link "TTS(text-to-speech)" [ref=e104] [cursor=pointer]:
+              - /url: /gemini-api/docs/speech-generation
+              - generic [ref=e105]: TTS(text-to-speech)
+          - listitem [ref=e106]:
+            - link "임베딩" [ref=e107] [cursor=pointer]:
+              - /url: /gemini-api/docs/embeddings
+              - generic [ref=e108]: 임베딩
+          - listitem [ref=e109]:
+            - link "로봇공학" [ref=e110] [cursor=pointer]:
+              - /url: /gemini-api/docs/robotics-overview
+              - generic [ref=e111]: 로봇공학
+          - listitem [ref=e113]:
+            - generic [ref=e115]: 핵심 기능
+          - listitem [ref=e116]:
+            - link "텍스트" [ref=e117] [cursor=pointer]:
+              - /url: /gemini-api/docs/text-generation
+              - generic [ref=e118]: 텍스트
+          - listitem [ref=e119]:
+            - generic [ref=e120]:
+              - text: arrow_drop_down
+              - button "이미지 " [ref=e121] [cursor=pointer]:
+                - generic [ref=e122]: 이미지
+                - text: 
+          - listitem [ref=e123]:
+            - generic [ref=e124]:
+              - text: arrow_drop_down
+              - button "동영상 " [ref=e125] [cursor=pointer]:
+                - generic [ref=e126]: 동영상
+                - text: 
+          - listitem [ref=e127]:
+            - link "문서" [ref=e128] [cursor=pointer]:
+              - /url: /gemini-api/docs/document-processing
+              - generic [ref=e129]: 문서
+          - listitem [ref=e130]:
+            - generic [ref=e131]:
+              - text: arrow_drop_down
+              - button "음성 및 오디오 " [ref=e132] [cursor=pointer]:
+                - generic [ref=e133]: 음성 및 오디오
+                - text: 
+          - listitem [ref=e134]:
+            - generic [ref=e135]:
+              - text: arrow_drop_down
+              - button "사고 " [ref=e136] [cursor=pointer]:
+                - generic [ref=e137]: 사고
+                - text: 
+          - listitem [ref=e138]:
+            - link "구조화된 출력" [ref=e139] [cursor=pointer]:
+              - /url: /gemini-api/docs/structured-output
+              - generic [ref=e140]: 구조화된 출력
+          - listitem [ref=e141]:
+            - link "함수 호출" [ref=e142] [cursor=pointer]:
+              - /url: /gemini-api/docs/function-calling
+              - generic [ref=e143]: 함수 호출
+          - listitem [ref=e144]:
+            - link "긴 컨텍스트" [ref=e145] [cursor=pointer]:
+              - /url: /gemini-api/docs/long-context
+              - generic [ref=e146]: 긴 컨텍스트
+          - listitem [ref=e147]:
+            - generic [ref=e149]: 에이전트
+          - listitem [ref=e150]:
+            - link "개요" [ref=e151] [cursor=pointer]:
+              - /url: /gemini-api/docs/agents
+              - generic [ref=e152]: 개요
+          - listitem [ref=e153]:
+            - link "Deep Research 에이전트" [ref=e154] [cursor=pointer]:
+              - /url: /gemini-api/docs/deep-research
+              - generic [ref=e155]: Deep Research 에이전트
+          - listitem [ref=e157]:
+            - generic [ref=e159]: 도구
+          - listitem [ref=e160]:
+            - link "개요" [ref=e161] [cursor=pointer]:
+              - /url: /gemini-api/docs/tools
+              - generic [ref=e162]: 개요
+          - listitem [ref=e163]:
+            - link "Google Search" [ref=e164] [cursor=pointer]:
+              - /url: /gemini-api/docs/google-search
+              - generic [ref=e165]: Google Search
+          - listitem [ref=e166]:
+            - link "Google Maps" [ref=e167] [cursor=pointer]:
+              - /url: /gemini-api/docs/maps-grounding
+              - generic [ref=e168]: Google Maps
+          - listitem [ref=e169]:
+            - link "코드 실행" [ref=e170] [cursor=pointer]:
+              - /url: /gemini-api/docs/code-execution
+              - generic [ref=e171]: 코드 실행
+          - listitem [ref=e172]:
+            - link "URL 컨텍스트" [ref=e173] [cursor=pointer]:
+              - /url: /gemini-api/docs/url-context
+              - generic [ref=e174]: URL 컨텍스트
+          - listitem [ref=e175]:
+            - link "Computer Use" [ref=e176] [cursor=pointer]:
+              - /url: /gemini-api/docs/computer-use
+              - generic [ref=e177]: Computer Use
+          - listitem [ref=e179]:
+            - link "파일 검색" [ref=e180] [cursor=pointer]:
+              - /url: /gemini-api/docs/file-search
+              - generic [ref=e181]: 파일 검색
+          - listitem [ref=e182]:
+            - link "도구와 함수 호출 결합" [ref=e183] [cursor=pointer]:
+              - /url: /gemini-api/docs/tool-combination
+              - generic [ref=e184]: 도구와 함수 호출 결합
+          - listitem [ref=e186]:
+            - generic [ref=e188]: Live API
+          - listitem [ref=e189]:
+            - link "개요" [ref=e190] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api
+              - generic [ref=e191]: 개요
+          - listitem [ref=e193]:
+            - generic [ref=e194]:
+              - text: arrow_drop_down
+              - button "시작하기 " [ref=e195] [cursor=pointer]:
+                - generic [ref=e196]: 시작하기
+                - text: 
+          - listitem [ref=e197]:
+            - link "기능" [ref=e198] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api/capabilities
+              - generic [ref=e199]: 기능
+          - listitem [ref=e200]:
+            - link "도구 사용" [ref=e201] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api/tools
+              - generic [ref=e202]: 도구 사용
+          - listitem [ref=e203]:
+            - link "세션 관리" [ref=e204] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api/session-management
+              - generic [ref=e205]: 세션 관리
+          - listitem [ref=e206]:
+            - link "임시 토큰" [ref=e207] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api/ephemeral-tokens
+              - generic [ref=e208]: 임시 토큰
+          - listitem [ref=e209]:
+            - link "권장사항" [ref=e210] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api/best-practices
+              - generic [ref=e211]: 권장사항
+          - listitem [ref=e212]:
+            - generic [ref=e214]: 최적화
+          - listitem [ref=e215]:
+            - link "개요" [ref=e216] [cursor=pointer]:
+              - /url: /gemini-api/docs/optimization
+              - generic [ref=e217]: 개요
+          - listitem [ref=e218]:
+            - link "Batch API" [ref=e219] [cursor=pointer]:
+              - /url: /gemini-api/docs/batch-api
+              - generic [ref=e220]: Batch API
+          - listitem [ref=e221]:
+            - link "플렉스 추론" [ref=e222] [cursor=pointer]:
+              - /url: /gemini-api/docs/flex-inference
+              - generic [ref=e223]: 플렉스 추론
+          - listitem [ref=e225]:
+            - link "우선순위 추론" [ref=e226] [cursor=pointer]:
+              - /url: /gemini-api/docs/priority-inference
+              - generic [ref=e227]: 우선순위 추론
+          - listitem [ref=e229]:
+            - link "컨텍스트 캐싱" [ref=e230] [cursor=pointer]:
+              - /url: /gemini-api/docs/caching
+              - generic [ref=e231]: 컨텍스트 캐싱
+          - listitem [ref=e232]:
+            - generic [ref=e234]: 가이드
+          - listitem [ref=e235]:
+            - generic [ref=e236]:
+              - text: arrow_drop_down
+              - button "파일 입력 " [ref=e237] [cursor=pointer]:
+                - generic [ref=e238]: 파일 입력
+                - text: 
+          - listitem [ref=e239]:
+            - link "OpenAI 호환성" [ref=e240] [cursor=pointer]:
+              - /url: /gemini-api/docs/openai
+              - generic [ref=e241]:
+                - text: Open
+                - text: AI 호환성
+          - listitem [ref=e242]:
+            - link "미디어 해상도" [ref=e243] [cursor=pointer]:
+              - /url: /gemini-api/docs/media-resolution
+              - generic [ref=e244]: 미디어 해상도
+          - listitem [ref=e245]:
+            - link "토큰 수 계산" [ref=e246] [cursor=pointer]:
+              - /url: /gemini-api/docs/tokens
+              - generic [ref=e247]: 토큰 수 계산
+          - listitem [ref=e248]:
+            - link "프롬프트 엔지니어링" [ref=e249] [cursor=pointer]:
+              - /url: /gemini-api/docs/prompting-strategies
+              - generic [ref=e250]: 프롬프트 엔지니어링
+          - listitem [ref=e251]:
+            - generic [ref=e252]:
+              - text: arrow_drop_down
+              - button "로그 및 데이터 세트 " [ref=e253] [cursor=pointer]:
+                - generic [ref=e254]: 로그 및 데이터 세트
+                - text: 
+          - listitem [ref=e255]:
+            - generic [ref=e256]:
+              - text: arrow_drop_down
+              - button "안전 " [ref=e257] [cursor=pointer]:
+                - generic [ref=e258]: 안전
+                - text: 
+          - listitem [ref=e259]:
+            - generic [ref=e260]:
+              - text: arrow_drop_down
+              - button "프레임워크 " [ref=e261] [cursor=pointer]:
+                - generic [ref=e262]: 프레임워크
+                - text: 
+          - listitem [ref=e263]:
+            - generic [ref=e265]: 리소스
+          - listitem [ref=e266]:
+            - link "출시 노트" [ref=e267] [cursor=pointer]:
+              - /url: /gemini-api/docs/changelog
+              - generic [ref=e268]: 출시 노트
+          - listitem [ref=e269]:
+            - link "지원 중단" [ref=e270] [cursor=pointer]:
+              - /url: /gemini-api/docs/deprecations
+              - generic [ref=e271]: 지원 중단
+          - listitem [ref=e272]:
+            - link "비율 제한" [ref=e273] [cursor=pointer]:
+              - /url: /gemini-api/docs/rate-limits
+              - generic [ref=e274]: 비율 제한
+          - listitem [ref=e275]:
+            - link "결제 정보" [ref=e276] [cursor=pointer]:
+              - /url: /gemini-api/docs/billing
+              - generic [ref=e277]: 결제 정보
+          - listitem [ref=e278]:
+            - link "Gen AI SDK로 이전" [ref=e279] [cursor=pointer]:
+              - /url: /gemini-api/docs/migrate
+              - generic [ref=e280]: Gen AI SDK로 이전
+          - listitem [ref=e281]:
+            - link "API 문제 해결" [ref=e282] [cursor=pointer]:
+              - /url: /gemini-api/docs/troubleshooting
+              - generic [ref=e283]: API 문제 해결
+          - listitem [ref=e284]:
+            - link "파트너 및 라이브러리 통합" [ref=e285] [cursor=pointer]:
+              - /url: /gemini-api/docs/partner-integration
+              - generic [ref=e286]: 파트너 및 라이브러리 통합
+          - listitem [ref=e287]:
+            - generic [ref=e288]:
+              - text: arrow_drop_down
+              - button "Google AI Studio " [ref=e289] [cursor=pointer]:
+                - generic [ref=e290]: Google AI Studio
+                - text: 
+          - listitem [ref=e291]:
+            - generic [ref=e292]:
+              - text: arrow_drop_down
+              - button "Google Cloud Platform " [ref=e293] [cursor=pointer]:
+                - generic [ref=e294]: Google Cloud Platform
+                - text: 
+          - listitem [ref=e295]:
+            - generic [ref=e297]: 정책
+          - listitem [ref=e298]:
+            - link "서비스 약관" [ref=e299] [cursor=pointer]:
+              - /url: /gemini-api/terms
+              - generic [ref=e300]: 서비스 약관
+          - listitem [ref=e301]:
+            - link "사용 가능한 리전" [ref=e302] [cursor=pointer]:
+              - /url: /gemini-api/docs/available-regions
+              - generic [ref=e303]: 사용 가능한 리전
+          - listitem [ref=e304]:
+            - link "악용 모니터링" [ref=e305] [cursor=pointer]:
+              - /url: /gemini-api/docs/usage-policies
+              - generic [ref=e306]: 악용 모니터링
+          - listitem [ref=e307]:
+            - link "의견 정보" [ref=e308] [cursor=pointer]:
+              - /url: /gemini-api/docs/feedback-policies
+              - generic [ref=e309]: 의견 정보
+    - button "측면 탐색 숨기기" [expanded] [ref=e310] [cursor=pointer]:
+      - generic [ref=e311]: chevron_left
+    - generic [ref=e312]:
+      - main [ref=e313]:
+        - generic [ref=e314]:
+          - article [ref=e315]:
+            - generic [ref=e318]:
+              - text: 새로운 고속의 비용 효율적인
+              - link "Veo 3.1 Lite" [ref=e319] [cursor=pointer]:
+                - /url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=ko
+              - text: 모델을 사용하여 대규모로 동영상을 생성해 보세요.
+            - navigation [ref=e320]:
+              - list "탐색경로" [ref=e321]:
+                - listitem [ref=e322]:
+                  - link "홈" [ref=e323] [cursor=pointer]:
+                    - /url: https://ai.google.dev/?hl=ko
+                - listitem [ref=e324]:
+                  - generic [ref=e325]: chevron_right
+                  - link "Gemini API" [ref=e326] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api?hl=ko
+                - listitem [ref=e327]:
+                  - generic [ref=e328]: chevron_right
+                  - link "문서" [ref=e329] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs?hl=ko
+            - heading "출시 노트 LLM 도구" [level=1] [ref=e330]:
+              - text: 출시 노트
+              - group "LLM 도구" [ref=e333]:
+                - button "페이지를 마크다운으로 복사" [ref=e335] [cursor=pointer]:
+                  - generic [ref=e336]: content_copy
+                - button "LLM 도구 옵션 더보기" [ref=e339] [cursor=pointer]: arrow_drop_down
+            - list [ref=e341]:
+              - listitem [ref=e342]:
+                - heading "이 페이지의 내용" [level=2] [ref=e343]:
+                  - generic [ref=e344]: 이 페이지의 내용
+                - button "expand_more" [ref=e345] [cursor=pointer]
+              - listitem [ref=e346]:
+                - link "2026년 4월 2일" [ref=e347] [cursor=pointer]:
+                  - /url: "#04-02-2026"
+                  - generic [ref=e348]: 2026년 4월 2일
+              - listitem [ref=e349]:
+                - link "2026년 4월 1일" [ref=e350] [cursor=pointer]:
+                  - /url: "#04-01-2026"
+                  - generic [ref=e351]: 2026년 4월 1일
+              - listitem [ref=e352]:
+                - link "2026년 3월 31일" [ref=e353] [cursor=pointer]:
+                  - /url: "#03-31-2026"
+                  - generic [ref=e354]: 2026년 3월 31일
+              - listitem [ref=e355]:
+                - link "2026년 3월 26일" [ref=e356] [cursor=pointer]:
+                  - /url: "#03-26-2026"
+                  - generic [ref=e357]: 2026년 3월 26일
+              - listitem [ref=e358]:
+                - link "2026년 3월 25일" [ref=e359] [cursor=pointer]:
+                  - /url: "#03-25-2026"
+                  - generic [ref=e360]: 2026년 3월 25일
+              - listitem [ref=e361]:
+                - button "more_horiz" [ref=e362] [cursor=pointer]
+            - generic [ref=e363]:
+              - paragraph
+              - paragraph [ref=e364]: 이 페이지에서는 Gemini API 업데이트를 설명합니다.
+              - heading "2026년 4월 2일 이 섹션에 대한 링크 복사. 2026년 4월 2일" [level=2] [ref=e365]:
+                - heading "2026년 4월 2일" [level=2] [ref=e366]
+                - button "이 섹션에 대한 링크 복사. 2026년 4월 2일" [ref=e367] [cursor=pointer]: link
+              - list [ref=e368]:
+                - listitem [ref=e369]:
+                  - link "Gemma 4" [ref=e370] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemma/docs/core?hl=ko
+                  - text: 출시의 일환으로
+                  - code [ref=e371]: gemma-4-26b-a4b-it
+                  - text: 및
+                  - code [ref=e372]: gemma-4-31b-it
+                  - text: 이 출시되었으며,
+                  - link "AI Studio" [ref=e373] [cursor=pointer]:
+                    - /url: https://aistudio.google.com?hl=ko
+                  - text: 및 Gemini API를 통해 사용할 수 있습니다.
+              - heading "2026년 4월 1일 이 섹션에 대한 링크 복사. 2026년 4월 1일" [level=2] [ref=e374]:
+                - heading "2026년 4월 1일" [level=2] [ref=e375]
+                - button "이 섹션에 대한 링크 복사. 2026년 4월 1일" [ref=e376] [cursor=pointer]: link
+              - list [ref=e377]:
+                - listitem [ref=e378]:
+                  - text: 비용 또는 지연 시간 최적화를 위한 더 많은 옵션을 제공하는 새로운
+                  - link "Flex" [ref=e379] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/flex-inference?hl=ko
+                  - text: 및
+                  - link "Priority" [ref=e380] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=ko
+                  - text: 추론 등급이 도입되었습니다.
+              - heading "2026년 3월 31일" [level=2] [ref=e381]
+              - list [ref=e382]:
+                - listitem [ref=e383]:
+                  - paragraph [ref=e384]:
+                    - text: 가장 비용 효율적인
+                    - link "동영상 생성" [ref=e385] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/video?hl=ko
+                    - text: 모델인 Veo 3.1 Lite 프리뷰(
+                    - link "veo-3.1-lite-generate-preview" [ref=e386] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=ko
+                      - code [ref=e387]: veo-3.1-lite-generate-preview
+                    - text: )를 출시했습니다. 이 모델은 빠른 반복과 대량 애플리케이션 구축을 위해 설계되었습니다.
+                - listitem [ref=e388]:
+                  - paragraph [ref=e389]:
+                    - code [ref=e390]: gemini-2.5-flash-lite-preview-09-2025
+                    - text: 모델이 종료되었습니다. 대신
+                    - link "gemini-3.1-flash-lite-preview" [ref=e391] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ko
+                      - code [ref=e392]: gemini-3.1-flash-lite-preview
+                    - text: 를 사용하세요.
+              - heading "2026년 3월 26일" [level=2] [ref=e393]
+              - list [ref=e394]:
+                - listitem [ref=e395]:
+                  - text: 실시간 대화 및 음성 우선 AI 애플리케이션을 위해 설계된 최신 오디오 대 오디오 (A2A) 모델인
+                  - link "gemini-3.1-flash-live-preview" [ref=e396] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ko
+                    - code [ref=e397]: gemini-3.1-flash-live-preview
+                  - text: 가 출시되었습니다.
+                  - link "Live API" [ref=e398] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/live-api?hl=ko
+                  - text: 문서를 읽고 시작하세요.
+              - heading "2026년 3월 25일" [level=2] [ref=e399]
+              - list [ref=e400]:
+                - listitem [ref=e401]:
+                  - link "Lyria 3" [ref=e402] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/music-generation?hl=ko
+                  - text: "음악 생성 모델 출시:"
+                  - link "lyria-3-clip-preview" [ref=e403] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=ko
+                    - code [ref=e404]: lyria-3-clip-preview
+                  - text: (30초 클립) 및
+                  - link "lyria-3-pro-preview" [ref=e405] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=ko
+                    - code [ref=e406]: lyria-3-pro-preview
+                  - text: (전체 길이 노래) 두 모델 모두 텍스트 및 이미지 입력을 허용하고 고품질 48kHz 스테레오 오디오를 생성합니다. 자세한 내용과 코드 샘플은
+                  - link "음악 생성" [ref=e407] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/music-generation?hl=ko
+                  - text: 가이드를 참고하세요.
+              - heading "March 23, 2026" [level=2] [ref=e408]:
+                - text: March 23,
+                - text: "2026"
+              - list [ref=e409]:
+                - listitem [ref=e410]:
+                  - text: AI Studio에
+                  - link "선불 및 후불 요금제" [ref=e411] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/billing?hl=ko
+                  - text: 가 출시되었습니다. 기존 계정이 영향을 받을 수 있습니다. 자세한 내용은
+                  - link "결제" [ref=e412] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/billing?hl=ko
+                  - text: 문서를 참고하세요.
+              - heading "2026년 3월 18일" [level=2] [ref=e413]
+              - list [ref=e414]:
+                - listitem [ref=e415]:
+                  - text: 새로운
+                  - link "내장 도구 및 함수 호출 조합" [ref=e416] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=ko
+                  - text: 기능이 출시되어 단일 API 호출에서 Gemini의 내장 도구를 맞춤 함수 호출 도구와 함께 사용할 수 있습니다.
+                - listitem [ref=e417]:
+                  - text: 이제 Gemini 3 모델에서
+                  - link "Google 지도 기반 그라운딩" [ref=e418] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko#supported_models
+                  - text: 이 지원됩니다.
+              - heading "2026년 3월 16일" [level=2] [ref=e419]
+              - list [ref=e420]:
+                - listitem [ref=e421]:
+                  - text: 사용자 결제 환경을 개선하기 위해 개편된
+                  - link "사용량 등급" [ref=e422] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/billing?hl=ko#about-billing
+                  - text: 및
+                  - link "결제 계정 지출 한도" [ref=e423] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/billing?hl=ko#tier-spend-caps
+                  - text: 가 도입되었습니다.
+              - heading "2026년 3월 12일" [level=2] [ref=e424]
+              - list [ref=e425]:
+                - listitem [ref=e426]:
+                  - text: AI Studio의 결제에
+                  - link "프로젝트 수준 지출 한도" [ref=e427] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/billing?hl=ko#project-spend-caps
+                  - text: 가 도입되었습니다.
+              - heading "2026년 3월 10일" [level=2] [ref=e428]
+              - list [ref=e429]:
+                - listitem [ref=e430]:
+                  - paragraph [ref=e431]:
+                    - text: Google의 첫 번째 멀티모달 임베딩 모델인
+                    - code [ref=e432]: gemini-embedding-2-preview
+                    - text: 가 출시되었습니다. 텍스트, 이미지, 동영상, 오디오, PDF 입력을 지원하며 모든 모달리티를 통합 임베딩 공간에 매핑합니다. 자세한 내용은
+                    - link "임베딩" [ref=e433] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/embeddings?hl=ko
+                    - text: 을 참고하세요.
+                - listitem [ref=e434]:
+                  - paragraph [ref=e435]:
+                    - text: "지원 중단 공지:"
+                    - code [ref=e436]: gemini-2.5-flash-lite-preview-09-2025
+                    - text: 모델은 2026년 3월 31일에
+                    - link "종료" [ref=e437] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
+                    - text: 됩니다.
+              - heading "2026년 3월 9일" [level=2] [ref=e438]
+              - list [ref=e439]:
+                - listitem [ref=e440]:
+                  - text: Gemini 3 Pro 프리뷰 모델이
+                  - link "종료" [ref=e441] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
+                  - text: 되었습니다. 이제
+                  - code [ref=e442]: gemini-3-pro-preview
+                  - text: 가
+                  - link "gemini-3.1-pro-preview" [ref=e443] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ko
+                    - code [ref=e444]: gemini-3.1-pro-preview
+                  - text: 을 가리킵니다.
+              - heading "2026년 3월 3일" [level=2] [ref=e445]
+              - list [ref=e446]:
+                - listitem [ref=e447]:
+                  - text: Gemini 3 시리즈의 첫 번째 Flash-Lite 모델인 Gemini 3.1 Flash-Lite 프리뷰를 출시했습니다. 사양, 구체적인 업데이트, 개발자 안내는
+                  - link "모델 페이지" [ref=e448] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ko
+                  - text: 를 참고하세요.
+              - heading "2026년 2월 26일" [level=2] [ref=e449]
+              - list [ref=e450]:
+                - listitem [ref=e451]:
+                  - paragraph [ref=e452]:
+                    - text: 속도와 대량 사용 사례에 최적화된 고효율 모델인 Nano Banana 2,
+                    - link "Gemini 3.1 Flash Image 프리뷰" [ref=e453] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=ko
+                    - text: 를 출시했습니다.
+                - listitem [ref=e454]:
+                  - paragraph [ref=e455]:
+                    - text: "지원 중단 공지: Gemini 3 Pro 프리뷰 ("
+                    - code [ref=e456]: gemini-3-pro-preview
+                    - text: )가 2026년 3월 9일에
+                    - link "종료" [ref=e457] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
+                    - text: 됩니다.
+              - heading "2026년 2월 19일" [level=2] [ref=e458]
+              - list [ref=e459]:
+                - listitem [ref=e460]:
+                  - text: 새로운 Gemini 3 시리즈 제품군의 최신 버전인
+                  - link "Gemini 3.1 Pro 프리뷰" [ref=e461] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ko
+                  - text: 가 출시되었습니다.
+                - listitem [ref=e462]:
+                  - text: bash와 도구를 혼합하여 빌드하는 사용자를 위해 맞춤 도구의 우선순위를 더 잘 지정하는 별도의 엔드포인트
+                  - code [ref=e463]: gemini-3.1-pro-preview-customtools
+                  - text: 를 출시했습니다.
+              - heading "2026년 2월 18일" [level=2] [ref=e464]
+              - list [ref=e465]:
+                - listitem [ref=e466]:
+                  - paragraph [ref=e467]:
+                    - text: "지원 중단 공지: 다음 모델은 2026년 6월 1일에"
+                    - link "종료" [ref=e468] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
+                    - text: 됩니다.
+                  - list [ref=e469]:
+                    - listitem [ref=e470]:
+                      - code [ref=e471]: gemini-2.0-flash
+                    - listitem [ref=e472]:
+                      - code [ref=e473]: gemini-2.0-flash-001
+                    - listitem [ref=e474]:
+                      - code [ref=e475]: gemini-2.0-flash-lite
+                    - listitem [ref=e476]:
+                      - code [ref=e477]: gemini-2.0-flash-lite-001
+              - heading "2026년 2월 17일" [level=2] [ref=e478]
+              - list [ref=e479]:
+                - listitem [ref=e480]:
+                  - paragraph [ref=e481]:
+                    - text: 다음 모델은
+                    - link "종료" [ref=e482] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
+                    - text: 됩니다.
+                  - list [ref=e483]:
+                    - listitem [ref=e484]:
+                      - code [ref=e485]: gemini-2.5-flash-preview-09-25
+                    - listitem [ref=e486]:
+                      - code [ref=e487]: imagen-4.0-generate-preview-06-06
+                    - listitem [ref=e488]:
+                      - code [ref=e489]: imagen-4.0-ultra-generate-preview-06-06
+              - heading "2026년 1월 29일" [level=2] [ref=e490]
+              - list [ref=e491]:
+                - listitem [ref=e492]:
+                  - code [ref=e493]: gemini-3-pro-preview
+                  - text: 및
+                  - code [ref=e494]: gemini-3-flash-preview
+                  - text: 에서 Computer Use 도구 지원을 시작했습니다.
+              - heading "2026년 1월 21일" [level=2] [ref=e495]
+              - list [ref=e496]:
+                - listitem [ref=e497]:
+                  - paragraph [ref=e498]:
+                    - code [ref=e499]: latest
+                    - text: 별칭이 변경되었습니다.
+                  - list [ref=e500]:
+                    - listitem [ref=e501]:
+                      - code [ref=e502]: gemini-pro-latest
+                      - text: 이(가)
+                      - code [ref=e503]: gemini-3-pro-preview
+                      - text: (으)로 전환됨
+                    - listitem [ref=e504]:
+                      - code [ref=e505]: gemini-flash-latest
+                      - text: 이(가)
+                      - code [ref=e506]: gemini-3-flash-preview
+                      - text: (으)로 전환됨
+              - heading "2026년 1월 15일" [level=2] [ref=e507]
+              - list [ref=e508]:
+                - listitem [ref=e509]:
+                  - paragraph [ref=e510]:
+                    - text: "지원 중단 공지: 다음 모델은 2026년 2월 17일에"
+                    - link "종료" [ref=e511] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
+                    - text: 됩니다.
+                  - list [ref=e512]:
+                    - listitem [ref=e513]:
+                      - code [ref=e514]: gemini-2.5-flash-preview-09-25
+                    - listitem [ref=e515]:
+                      - code [ref=e516]: imagen-4.0-generate-preview-06-06
+                    - listitem [ref=e517]:
+                      - code [ref=e518]: imagen-4.0-ultra-generate-preview-06-06
+                - listitem [ref=e519]:
+                  - paragraph [ref=e520]:
+                    - code [ref=e521]: gemini-2.5-flash-image-preview
+                    - text: 모델이 종료되었습니다.
+              - heading "2026년 1월 14일" [level=2] [ref=e522]
+              - list [ref=e523]:
+                - listitem [ref=e524]:
+                  - code [ref=e525]: text-embedding-004
+                  - text: 모델이
+                  - link "종료" [ref=e526] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
+                  - text: 되었습니다.
+              - heading "2026년 1월 13일" [level=2] [ref=e527]
+              - list [ref=e528]:
+                - listitem [ref=e529]:
+                  - link "Veo" [ref=e530] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/video?hl=ko
+                  - text: 의 4K 출력 해상도를 추가하고 모든 해상도에서 세로 동영상 지원을 확대했습니다.
+              - heading "2026년 1월 12일" [level=2] [ref=e531]
+              - list [ref=e532]:
+                - listitem [ref=e533]:
+                  - paragraph [ref=e534]: 모델 수명 주기 기능이 출시되었습니다. 이제 일부 모델에서 수명 주기 단계와 지원 중단 타임라인을 지정합니다. 자세한 내용은 다음 문서를 참고하세요.
+                  - list [ref=e535]:
+                    - listitem [ref=e536]:
+                      - link "모델 단계" [ref=e537] [cursor=pointer]:
+                        - /url: https://ai.google.dev/api/generate-content?hl=ko#ModelStatus
+              - heading "2026년 1월 8일" [level=2] [ref=e538]
+              - list [ref=e539]:
+                - listitem [ref=e540]:
+                  - text: Cloud Storage 버킷과 모든 공개 및 비공개 DB 사전 서명 URL을 Gemini API의 데이터 입력 소스로 지원합니다. 파일 크기 제한도 20MB에서 100MB로 늘어났습니다. 자세한 내용은
+                  - link "파일 입력 방법 가이드" [ref=e541] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ko
+                  - text: 를 참고하세요.
+              - heading "2025년 12월 19일" [level=2] [ref=e542]
+              - list [ref=e543]:
+                - listitem [ref=e544]:
+                  - text: v1beta에서 Interactions API 공개 미리보기에 브레이킹 체인지가 도입되었습니다.
+                  - code [ref=e545]: total_reasoning_tokens
+                  - text: 필드의 이름이 사고 모델의 '생각' 개념과 더 잘 맞도록
+                  - code [ref=e546]: total_thought_tokens
+                  - text: 로 변경되었습니다.
+              - heading "2025년 12월 17일" [level=2] [ref=e547]
+              - list [ref=e548]:
+                - listitem [ref=e549]:
+                  - paragraph [ref=e550]:
+                    - text: Gemini 3 Flash 프리뷰(
+                    - code [ref=e551]: gemini-3-flash-preview
+                    - text: )가 출시되었습니다. 이 모델은 비용이 훨씬 저렴하면서도 대형 모델에 필적하는 빠른 최첨단 성능을 제공합니다. 시각 및 공간 추론과 에이전트 코딩 기능이 업그레이드되었습니다. 다음과 같은 새로운 기능에 관한 문서를 읽어보세요.
+                  - list [ref=e552]:
+                    - listitem [ref=e553]:
+                      - link "멀티모달 함수 응답" [ref=e554] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/function-calling?hl=ko#multimodal
+                    - listitem [ref=e555]:
+                      - link "이미지를 사용한 코드 실행" [ref=e556] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/code-execution?hl=ko#images
+              - heading "2025년 12월 12일" [level=2] [ref=e557]
+              - list [ref=e558]:
+                - listitem [ref=e559]:
+                  - text: Live API를 위한 새로운 네이티브 오디오 모델인
+                  - code [ref=e560]: gemini-2.5-flash-native-audio-preview-12-2025
+                  - text: 가 출시되었습니다. 이번 업데이트를 통해 복잡한 워크플로를 처리하는 모델의 기능이 개선됩니다. 자세한 내용은
+                  - link "Live API 가이드" [ref=e561] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/live-guide?hl=ko
+                  - text: 및
+                  - link "Gemini 2.5 Flash 네이티브 오디오" [ref=e562] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-live?hl=ko
+                  - text: 를 참고하세요.
+              - heading "2025년 12월 11일" [level=2] [ref=e563]
+              - list [ref=e564]:
+                - listitem [ref=e565]:
+                  - paragraph [ref=e566]:
+                    - text: 상호작용 API가 베타로 출시되었습니다. 이 API는 Gemini 모델 및 에이전트와 상호작용할 수 있는 통합 인터페이스를 제공합니다. 자세한 내용은
+                    - link "Interactions API" [ref=e567] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/interactions?hl=ko
+                    - text: 가이드를 참고하세요.
+                - listitem [ref=e568]:
+                  - paragraph [ref=e569]:
+                    - text: Gemini Deep Research 에이전트가 프리뷰로 출시되었습니다. 다단계 연구 작업의 결과를 자율적으로 계획, 실행, 종합할 수 있습니다. 자세한 내용은
+                    - link "Deep Research" [ref=e570] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/deep-research?hl=ko
+                    - text: 가이드를 참고하세요.
+              - heading "2025년 12월 10일" [level=2] [ref=e571]
+              - list [ref=e572]:
+                - listitem [ref=e573]:
+                  - text: 표현력, 정확한 페이싱, 원활한 대화가 개선된
+                  - link "텍스트 음성 변환 모델" [ref=e574] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko
+                  - text: ", Gemini 2.5 Flash TTS 프리뷰(짧은 지연 시간에 최적화) 및 Gemini 2.5 Pro TTS 프리뷰 (품질에 최적화)가 출시되었습니다."
+              - heading "2025년 12월 9일" [level=2] [ref=e575]
+              - list [ref=e576]:
+                - listitem [ref=e577]:
+                  - text: 다음 Gemini Live API 모델이 종료되었습니다.
+                  - list [ref=e578]:
+                    - listitem [ref=e579]:
+                      - code [ref=e580]: gemini-2.0-flash-live-001
+                    - listitem [ref=e581]:
+                      - code [ref=e582]: gemini-live-2.5-flash-preview
+              - heading "2025년 12월 5일" [level=2] [ref=e583]
+              - list [ref=e584]:
+                - listitem [ref=e585]:
+                  - link "Google 검색을 사용한 그라운딩" [ref=e586] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/google-search?hl=ko
+                  - text: 에 대한 Gemini 3 요금 청구는 2026년 1월 5일에 시작됩니다.
+              - heading "2025년 12월 4일" [level=2] [ref=e587]
+              - list [ref=e588]:
+                - listitem [ref=e589]:
+                  - text: "지원 중단 공지:"
+                  - code [ref=e590]: gemini-2.5-flash-image-preview
+                  - text: 모델은 2026년 1월 15일에 종료됩니다.
+              - heading "2025년 12월 3일" [level=2] [ref=e591]
+              - list [ref=e592]:
+                - listitem [ref=e593]:
+                  - text: "지원 중단 공지:"
+                  - code [ref=e594]: text-embedding-004
+                  - text: 모델이 2026년 1월 14일에 종료됩니다.
+              - heading "2025년 11월 20일" [level=2] [ref=e595]
+              - list [ref=e596]:
+                - listitem [ref=e597]:
+                  - text: Nano Banana 모델의 다음 버전인 Gemini 3 Pro Image Preview(
+                  - code [ref=e598]: gemini-3-pro-image-preview
+                  - text: )가 출시되었습니다. 자세한 내용은
+                  - link "이미지 생성" [ref=e599] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/image-generation?hl=ko
+                  - text: 페이지를 참고하세요.
+              - heading "2025년 11월 18일" [level=2] [ref=e600]
+              - list [ref=e601]:
+                - listitem [ref=e602]:
+                  - paragraph [ref=e603]:
+                    - text: 강력한 에이전트형 및 코딩 기능을 갖춘 최첨단 추론 및 멀티모달 이해 모델인 첫 번째 Gemini 3 시리즈 모델
+                    - code [ref=e604]: gemini-3-pro-preview
+                    - text: 를 출시했습니다.
+                  - paragraph [ref=e605]: Gemini 3 Pro 프리뷰는 지능 및 성능 개선 외에도 다음과 관련된 새로운 동작을 도입합니다.
+                  - list [ref=e606]:
+                    - listitem [ref=e607]:
+                      - link "미디어 해상도" [ref=e608] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko
+                    - listitem [ref=e609]:
+                      - link "생각 서명" [ref=e610] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ko
+                    - listitem [ref=e611]:
+                      - link "사고 수준" [ref=e612] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/thinking?hl=ko#thinking-levels
+                  - paragraph [ref=e613]:
+                    - text: 이전, 새로운 기능, 사양에 관한 내용은
+                    - link "Gemini 3 개발자 가이드" [ref=e614] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/gemini-3?hl=ko
+                    - text: 를 참고하세요.
+              - heading "2025년 11월 11일" [level=2] [ref=e615]
+              - list [ref=e616]:
+                - listitem [ref=e617]:
+                  - paragraph [ref=e618]: "지원 중단 공지: 다음 모델이 종료됩니다."
+                  - list [ref=e619]:
+                    - listitem [ref=e620]:
+                      - paragraph [ref=e621]: "11월 12일:"
+                      - list [ref=e622]:
+                        - listitem [ref=e623]:
+                          - code [ref=e624]: veo-3.0-fast-generate-preview
+                        - listitem [ref=e625]:
+                          - code [ref=e626]: veo-3.0-generate-preview
+                    - listitem [ref=e627]:
+                      - paragraph [ref=e628]: "11월 14일:"
+                      - list [ref=e629]:
+                        - listitem [ref=e630]:
+                          - code [ref=e631]: gemini-2.0-flash-exp-image-generation
+                        - listitem [ref=e632]:
+                          - code [ref=e633]: gemini-2.0-flash-preview-image-generation
+              - heading "2025년 11월 10일" [level=2] [ref=e634]
+              - list [ref=e635]:
+                - listitem [ref=e636]:
+                  - paragraph [ref=e637]: 다음 모델이 종료됩니다.
+                  - list [ref=e638]:
+                    - listitem [ref=e639]:
+                      - code [ref=e640]: imagen-3.0-generate-002
+                  - paragraph [ref=e641]:
+                    - link "Imagen 4" [ref=e642] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/imagen?hl=ko#imagen-4
+                    - text: 를 대신 사용하세요. 자세한 내용은
+                    - link "Gemini 지원 중단 표" [ref=e643] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
+                    - text: 를 참고하세요.
+              - heading "2025년 11월 6일" [level=2] [ref=e644]
+              - list [ref=e645]:
+                - listitem [ref=e646]:
+                  - text: 개발자가 자체 데이터에 응답을 그라운딩할 수 있도록 파일 검색 API를 공개 미리보기로 출시했습니다. 자세한 내용은 새로운
+                  - link "파일 검색" [ref=e647] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/file-search?hl=ko
+                  - text: 페이지를 참고하세요.
+              - heading "2025년 11월 4일" [level=2] [ref=e648]
+              - list [ref=e649]:
+                - listitem [ref=e650]:
+                  - paragraph [ref=e651]:
+                    - link "Gemini 2.5 Flash Image" [ref=e652] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/image-generation?hl=ko
+                    - text: 의 경우 이미지의 입력 토큰 수가 1,290에서 258로 줄어 이미지 편집 비용이 낮아졌습니다.
+                - listitem [ref=e653]:
+                  - paragraph [ref=e654]: "지원 중단 공지: 다음 모델이 종료됩니다."
+                  - list [ref=e655]:
+                    - listitem [ref=e656]:
+                      - paragraph [ref=e657]: "11월 18일:"
+                      - list [ref=e658]:
+                        - listitem [ref=e659]:
+                          - code [ref=e660]: gemini-2.5-flash-lite-preview-06-17
+                        - listitem [ref=e661]:
+                          - code [ref=e662]: gemini-2.5-flash-preview-05-20
+                    - listitem [ref=e663]:
+                      - paragraph [ref=e664]: "12월 2일:"
+                      - list [ref=e665]:
+                        - listitem [ref=e666]:
+                          - code [ref=e667]: gemini-2.0-flash-thinking-exp
+                        - listitem [ref=e668]:
+                          - code [ref=e669]: gemini-2.0-flash-thinking-exp-01-21
+                        - listitem [ref=e670]:
+                          - code [ref=e671]: gemini-2.0-flash-thinking-exp-1219
+                        - listitem [ref=e672]:
+                          - code [ref=e673]: gemini-2.5-pro-preview-03-25
+                        - listitem [ref=e674]:
+                          - code [ref=e675]: gemini-2.5-pro-preview-05-06
+                        - listitem [ref=e676]:
+                          - code [ref=e677]: gemini-2.5-pro-preview-06-05
+                    - listitem [ref=e678]:
+                      - paragraph [ref=e679]: "12월 9일:"
+                      - list [ref=e680]:
+                        - listitem [ref=e681]:
+                          - code [ref=e682]: gemini-2.0-flash-lite-preview
+                        - listitem [ref=e683]:
+                          - code [ref=e684]: gemini-2.0-flash-lite-preview-02-05
+                        - listitem [ref=e685]:
+                          - code [ref=e686]: gemini-2.0-flash-exp
+                        - listitem [ref=e687]:
+                          - code [ref=e688]: gemini-2.0-pro-exp
+                        - listitem [ref=e689]:
+                          - code [ref=e690]: gemini-2.0-pro-exp-02-05
+              - heading "2025년 10월 29일" [level=2] [ref=e691]
+              - list [ref=e692]:
+                - listitem [ref=e693]:
+                  - text: Gemini API용 새로운
+                  - link "로깅 및 데이터 세트" [ref=e694] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ko
+                  - text: 도구가 출시되었습니다.
+              - heading "2025년 10월 20일" [level=2] [ref=e695]
+              - list [ref=e696]:
+                - listitem [ref=e697]:
+                  - paragraph [ref=e698]: 다음 Gemini Live API 모델이 종료되었습니다.
+                  - list [ref=e699]:
+                    - listitem [ref=e700]:
+                      - code [ref=e701]: gemini-2.5-flash-preview-native-audio-dialog
+                    - listitem [ref=e702]:
+                      - code [ref=e703]: gemini-2.5-flash-exp-native-audio-thinking-dialog
+                  - paragraph [ref=e704]:
+                    - text: 대신
+                    - code [ref=e705]: gemini-2.5-flash-native-audio-preview-09-2025
+                    - text: 을 사용할 수 있습니다.
+                - listitem [ref=e706]:
+                  - paragraph [ref=e707]:
+                    - text: "지원 중단 공지: 2025년 12월 9일에"
+                    - code [ref=e708]: gemini-2.0-flash-live-001
+                    - text: 및
+                    - code [ref=e709]: gemini-live-2.5-flash-preview
+                    - text: 이 종료됩니다.
+              - heading "2025년 10월 17일" [level=2] [ref=e710]
+              - list [ref=e711]:
+                - listitem [ref=e712]:
+                  - strong [ref=e713]: Google 지도 기반 그라운딩
+                  - text: 이 이제 정식 버전으로 제공됩니다. 자세한 내용은
+                  - link "Google 지도를 사용한 그라운딩" [ref=e714] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko
+                  - text: 문서를 참고하세요.
+              - heading "2025년 10월 15일" [level=2] [ref=e715]
+              - list [ref=e716]:
+                - listitem [ref=e717]:
+                  - paragraph [ref=e718]:
+                    - link "Veo 3.1 및 3.1 Fast" [ref=e719] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/video?hl=ko#veo-3.1
+                    - text: 모델이 공개 미리보기로 출시되었으며, 다음과 같은 새로운 기능이 포함되어 있습니다.
+                  - list [ref=e720]:
+                    - listitem [ref=e721]: Veo로 만든 동영상을 확장하는 중입니다.
+                    - listitem [ref=e722]: 최대 3개의 이미지를 참조하여 동영상을 생성합니다.
+                    - listitem [ref=e723]: 동영상을 생성할 첫 번째 프레임과 마지막 프레임 이미지를 제공합니다.
+                  - paragraph [ref=e724]: 이번 출시를 통해 Veo 3 출력 동영상 길이(4초, 6초, 8초)에 더 많은 옵션이 추가되었습니다.
+                - listitem [ref=e725]:
+                  - paragraph [ref=e726]:
+                    - text: "지원 중단 공지: 2025년 11월 12일에"
+                    - code [ref=e727]: veo-3.0-generate-preview
+                    - text: 및
+                    - code [ref=e728]: veo-3.0-fast-generate-preview
+                    - text: 이 종료됩니다.
+              - heading "2025년 10월 7일" [level=2] [ref=e729]
+              - list [ref=e730]:
+                - listitem [ref=e731]:
+                  - link "Gemini 2.5 Computer Use 프리뷰" [ref=e732] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/computer-use?hl=ko
+                  - text: 출시
+              - heading "2025년 10월 2일" [level=2] [ref=e733]
+              - list [ref=e734]:
+                - listitem [ref=e735]:
+                  - text: "Gemini 2.5 Flash Image 정식 버전 출시:"
+                  - link "Gemini를 이용한 이미지 생성" [ref=e736] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/image-generation?hl=ko
+              - heading "2025년 9월 29일" [level=2] [ref=e737]
+              - list [ref=e738]:
+                - listitem [ref=e739]:
+                  - text: 다음 Gemini 1.5 모델은 이제 종료됩니다.
+                  - list [ref=e740]:
+                    - listitem [ref=e741]:
+                      - code [ref=e742]: gemini-1.5-pro
+                    - listitem [ref=e743]:
+                      - code [ref=e744]: gemini-1.5-flash-8b
+                    - listitem [ref=e745]:
+                      - code [ref=e746]: gemini-1.5-flash
+              - heading "2025년 9월 25일" [level=2] [ref=e747]
+              - list [ref=e748]:
+                - listitem [ref=e749]:
+                  - paragraph [ref=e750]:
+                    - text: Gemini Robotics-ER 1.5 모델이 프리뷰로 출시되었습니다. 로봇 공학 애플리케이션에 모델을 사용하는 방법은
+                    - link "로봇 공학 개요" [ref=e751] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ko
+                    - text: 를 참고하세요.
+                - listitem [ref=e752]:
+                  - paragraph [ref=e753]: 다음 미리보기 모델이 출시되었습니다.
+                  - list [ref=e754]:
+                    - listitem [ref=e755]:
+                      - code [ref=e756]: gemini-2.5-flash-preview-09-2025
+                    - listitem [ref=e757]:
+                      - code [ref=e758]: gemini-2.5-flash-lite-preview-09-2025
+                  - paragraph [ref=e759]:
+                    - text: 자세한 내용은
+                    - link "모델" [ref=e760] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko
+                    - text: 페이지를 참고하세요.
+              - heading "2025년 9월 23일" [level=2] [ref=e761]
+              - list [ref=e762]:
+                - listitem [ref=e763]:
+                  - text: 함수 호출 및 음성 끊김 처리 기능이 개선된 Live API용 새로운 네이티브 오디오 모델인
+                  - code [ref=e764]: gemini-2.5-flash-native-audio-preview-09-2025
+                  - text: 가 출시되었습니다. 자세한 내용은
+                  - link "Live API 가이드" [ref=e765] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/live-guide?hl=ko
+                  - text: 및
+                  - link "Gemini 2.5 Flash 네이티브 오디오" [ref=e766] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-flash-native-audio
+                  - text: 를 참고하세요.
+              - heading "2025년 9월 16일" [level=2] [ref=e767]
+              - list [ref=e768]:
+                - listitem [ref=e769]:
+                  - paragraph [ref=e770]: "지원 중단 공지: 다음 모델은 2025년 10월에 종료됩니다."
+                  - list [ref=e771]:
+                    - listitem [ref=e772]:
+                      - code [ref=e773]: embedding-001
+                    - listitem [ref=e774]:
+                      - code [ref=e775]: embedding-gecko-001
+                    - listitem [ref=e776]:
+                      - code [ref=e777]: gemini-embedding-exp-03-07
+                      - text: (
+                      - code [ref=e778]: gemini-embedding-exp
+                      - text: )
+                  - paragraph [ref=e779]:
+                    - text: 최신 임베딩 모델에 대한 자세한 내용은
+                    - link "임베딩" [ref=e780] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/embeddings?hl=ko
+                    - text: 페이지를 참고하세요.
+              - heading "2025년 9월 10일" [level=2] [ref=e781]
+              - list [ref=e782]:
+                - listitem [ref=e783]:
+                  - link "Batch API의 삽입 모델" [ref=e784] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/batch-api?hl=ko#batch-embedding
+                  - text: 지원이 출시되었으며, 일괄 쿼리를 더 쉽게 시작할 수 있도록
+                  - link "OpenAI 호환성 라이브러리" [ref=e785] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/openai?hl=ko#batch
+                  - text: 에 Batch API가 추가되었습니다.
+              - heading "2025년 9월 9일" [level=2] [ref=e786]
+              - list [ref=e787]:
+                - listitem [ref=e788]:
+                  - text: Veo 3 및 Veo 3 Fast GA를 출시하여 가격을 낮추고 종횡비, 해상도, 시드에 대한 새로운 옵션을 제공했습니다. 자세한 내용은
+                  - link "Veo 문서" [ref=e789] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/video?hl=ko#model-features
+                  - text: 를 참고하세요.
+              - heading "2025년 8월 26일" [level=2] [ref=e790]
+              - list [ref=e791]:
+                - listitem [ref=e792]:
+                  - text: 최신 네이티브 이미지 생성 모델인
+                  - link "Gemini 2.5 Image Preview" [ref=e793] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-flash-image-preview
+                  - text: 를 출시했습니다.
+              - heading "2025년 8월 18일" [level=2] [ref=e794]
+              - list [ref=e795]:
+                - listitem [ref=e796]:
+                  - text: 프롬프트에 URL을 추가 컨텍스트로 제공하는 도구인
+                  - link "URL 컨텍스트 도구" [ref=e797] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/url-context?hl=ko
+                  - text: 가 정식 출시되었습니다.
+                  - code [ref=e798]: gemini-2.0-flash
+                  - text: 모델과 함께 URL 컨텍스트를 사용하는 기능(실험판 출시 중에 제공)이 1주일 후에 중단됩니다.
+              - heading "2025년 8월 14일" [level=2] [ref=e799]
+              - list [ref=e800]:
+                - listitem [ref=e801]:
+                  - text: Imagen 4 Ultra, Standard, Fast 모델이 정식 버전(GA)으로 출시되었습니다. 자세한 내용은
+                  - link "Imagen" [ref=e802] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/imagen?hl=ko
+                  - text: 페이지를 참고하세요.
+              - heading "2025년 8월 7일" [level=2] [ref=e803]
+              - list [ref=e804]:
+                - listitem [ref=e805]:
+                  - code [ref=e806]: allow_adult
+                  - text: 설정이 이제 제한된 지역에서도 사용할 수 있습니다. 자세한 내용은
+                  - link "Veo" [ref=e807] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=ko#veo-model-parameters
+                  - text: 페이지를 참고하세요.
+              - heading "2025년 7월 31일" [level=2] [ref=e808]
+              - list [ref=e809]:
+                - listitem [ref=e810]: Veo 3 프리뷰 모델의 이미지로 동영상 생성 기능이 출시되었습니다.
+                - listitem [ref=e811]: Veo 3 Fast 프리뷰 모델이 출시되었습니다.
+                - listitem [ref=e812]:
+                  - text: Veo 3에 대해 자세히 알아보려면
+                  - link "Veo" [ref=e813] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/video?hl=ko
+                  - text: 페이지를 참고하세요.
+              - heading "2025년 7월 22일" [level=2] [ref=e814]
+              - list [ref=e815]:
+                - listitem [ref=e816]:
+                  - text: 빠르고 저렴하며 고성능인 Gemini 2.5 모델
+                  - code [ref=e817]: gemini-2.5-flash-lite
+                  - text: 를 출시했습니다. 자세한 내용은
+                  - link "Gemini 2.5 Flash-Lite" [ref=e818] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-flash-lite
+                  - text: 를 참고하세요.
+              - heading "2025년 7월 17일" [level=2] [ref=e819]
+              - list [ref=e820]:
+                - listitem [ref=e821]:
+                  - paragraph [ref=e822]:
+                    - text: 오디오가 포함된 동영상 생성을 도입하는 Veo의 최신 업데이트인
+                    - code [ref=e823]: veo-3.0-generate-preview
+                    - text: 를 출시했습니다. Veo 3에 대해 자세히 알아보려면
+                    - link "Veo" [ref=e824] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/video?hl=ko
+                    - text: 페이지를 참고하세요.
+                - listitem [ref=e825]:
+                  - paragraph [ref=e826]:
+                    - text: Imagen 4 Standard 및 Ultra의 비율 제한이 증가했습니다. 자세한 내용은
+                    - link "요청 빈도 제한" [ref=e827] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=ko
+                    - text: 페이지를 참고하세요.
+              - heading "2025년 7월 14일" [level=2] [ref=e828]
+              - list [ref=e829]:
+                - listitem [ref=e830]:
+                  - text: 텍스트 임베딩 모델의 안정화 버전인
+                  - code [ref=e831]: gemini-embedding-001
+                  - text: 이 출시되었습니다. 자세한 내용은
+                  - link "임베딩" [ref=e832] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/embeddings?hl=ko
+                  - text: 을 참고하세요.
+                  - code [ref=e833]: gemini-embedding-exp-03-07
+                  - text: 모델은 2025년 8월 14일에 지원 중단됩니다.
+              - heading "2025년 7월 7일" [level=2] [ref=e834]
+              - list [ref=e835]:
+                - listitem [ref=e836]:
+                  - text: Gemini API 일괄 모드가 출시되었습니다. 요청을 일괄 처리하고 비동기적으로 처리하도록 전송합니다. 자세한 내용은
+                  - link "일괄 모드" [ref=e837] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/batch-mode?hl=ko
+                  - text: 를 참고하세요.
+              - heading "2025년 6월 26일" [level=2] [ref=e838]
+              - list [ref=e839]:
+                - listitem [ref=e840]:
+                  - paragraph [ref=e841]:
+                    - text: 이제 미리보기 모델
+                    - code [ref=e842]: gemini-2.5-pro-preview-05-06
+                    - text: 및
+                    - code [ref=e843]: gemini-2.5-pro-preview-03-25
+                    - text: 이 최신 안정화 버전
+                    - code [ref=e844]: gemini-2.5-pro
+                    - text: 로 리디렉션됩니다.
+                - listitem [ref=e845]:
+                  - paragraph [ref=e846]:
+                    - code [ref=e847]: gemini-2.5-pro-exp-03-25
+                    - text: 이 종료됩니다.
+              - heading "2025년 6월 24일" [level=2] [ref=e848]
+              - list [ref=e849]:
+                - listitem [ref=e850]:
+                  - text: Imagen 4 Ultra 및 Standard 프리뷰 모델이 출시되었습니다. 자세한 내용은
+                  - link "이미지 생성" [ref=e851] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/image-generation?hl=ko
+                  - text: 페이지를 참고하세요.
+              - heading "2025년 6월 17일" [level=2] [ref=e852]
+              - list [ref=e853]:
+                - listitem [ref=e854]:
+                  - text: 가장 강력한 모델의 안정화 버전인
+                  - code [ref=e855]: gemini-2.5-pro
+                  - text: 가 출시되었습니다. 이제 적응형 사고 기능을 지원합니다. 자세한 내용은
+                  - link "Gemini 2.5 Pro" [ref=e856] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-pro
+                  - text: 및
+                  - link "사고" [ref=e857] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/thinking?hl=ko
+                  - text: 를 참고하세요.
+                  - code [ref=e858]: gemini-2.5-pro-preview-05-06
+                  - text: 은 2025년 6월 26일에
+                  - code [ref=e859]: gemini-2.5-pro
+                  - text: 으로 리디렉션됩니다.
+                - listitem [ref=e860]:
+                  - text: 첫 번째 안정화된 2.5 Flash 모델인
+                  - code [ref=e861]: gemini-2.5-flash
+                  - text: 가 출시되었습니다. 자세한 내용은
+                  - link "Gemini 2.5 Flash" [ref=e862] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-flash
+                  - text: 를 참고하세요.
+                  - code [ref=e863]: gemini-2.5-flash-preview-04-17
+                  - text: 은 2025년 7월 15일에 지원 중단됩니다.
+                - listitem [ref=e864]:
+                  - text: 저렴한 비용으로 높은 성능을 제공하는 Gemini 2.5 모델인
+                  - code [ref=e865]: gemini-2.5-flash-lite-preview-06-17
+                  - text: 를 출시했습니다. 자세한 내용은
+                  - link "Gemini 2.5 Flash-Lite 프리뷰" [ref=e866] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-flash-lite
+                  - text: 를 참고하세요.
+              - heading "2025년 6월 5일" [level=2] [ref=e867]
+              - list [ref=e868]:
+                - listitem [ref=e869]:
+                  - text: 가장 강력한 모델의 새로운 버전인
+                  - code [ref=e870]: gemini-2.5-pro-preview-06-05
+                  - text: 가 출시되었습니다. 이제 적응형 사고를 지원합니다. 자세한 내용은
+                  - link "Gemini 2.5 Pro 미리보기" [ref=e871] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-pro-preview-06-05
+                  - text: 및
+                  - link "사고" [ref=e872] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/thinking?hl=ko
+                  - text: 를 참고하세요.
+                  - code [ref=e873]: gemini-2.5-pro-preview-05-06
+                  - text: 은 2025년 6월 26일에
+                  - code [ref=e874]: gemini-2.5-pro
+                  - text: 으로 리디렉션됩니다.
+              - heading "2025년 5월 27일" [level=2] [ref=e875]
+              - list [ref=e876]:
+                - listitem [ref=e877]:
+                  - text: 사용 가능한 마지막 튜닝 모델인 Gemini 1.5 Flash 001이 종료되었습니다. 더 이상 어떤 모델에서도 튜닝이 지원되지 않습니다.
+                  - link "Gemini API를 사용한 미세 조정" [ref=e878] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/model-tuning?hl=ko
+                  - text: 을 참고하세요.
+              - heading "2025년 5월 20일" [level=2] [ref=e879]
+              - paragraph [ref=e880]:
+                - strong [ref=e881]: "API 업데이트:"
+              - list [ref=e882]:
+                - listitem [ref=e883]:
+                  - text: 클리핑 간격과 구성 가능한 프레임 속도 샘플링을 사용하여
+                  - link "맞춤 동영상 전처리" [ref=e884] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko#customize-video-processing
+                  - text: 를 지원합니다.
+                - listitem [ref=e885]:
+                  - text: 동일한
+                  - code [ref=e886]: generateContent
+                  - text: 요청에서
+                  - link "코드 실행" [ref=e887] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/code-execution?hl=ko
+                  - text: 과
+                  - link "Google 검색을 통한 그라운딩" [ref=e888] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/grounding?hl=ko
+                  - text: 을 구성할 수 있는 멀티 도구 사용이 출시되었습니다.
+                - listitem [ref=e889]:
+                  - text: Live API에서
+                  - link "비동기 함수 호출" [ref=e890] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/live-tools?hl=ko#async-function-calling
+                  - text: 지원이 출시되었습니다.
+                - listitem [ref=e891]:
+                  - text: 프롬프트에 추가 컨텍스트로 URL을 제공하는 실험적인
+                  - link "URL 컨텍스트 도구" [ref=e892] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/url-context?hl=ko
+                  - text: 를 출시했습니다.
+              - paragraph [ref=e893]:
+                - strong [ref=e894]: "모델 업데이트:"
+              - list [ref=e895]:
+                - listitem [ref=e896]:
+                  - text: 가격 대비 성능과 적응형 사고에 최적화된 Gemini
+                  - link "미리보기" [ref=e897] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#model-versions
+                  - text: 모델인
+                  - code [ref=e898]: gemini-2.5-flash-preview-05-20
+                  - text: 가 출시되었습니다. 자세한 내용은
+                  - link "Gemini 2.5 Flash 미리보기" [ref=e899] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-flash-preview
+                  - text: 및
+                  - link "Thinking" [ref=e900] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/thinking?hl=ko
+                  - text: 을 참고하세요.
+                - listitem [ref=e901]:
+                  - text: 하나 또는 두 명의 화자로
+                  - link "음성을 생성" [ref=e902] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko
+                  - text: 할 수 있는
+                  - link "gemini-2.5-pro-preview-tts" [ref=e903] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-pro-preview-tts
+                    - code [ref=e904]: gemini-2.5-pro-preview-tts
+                  - text: 및
+                  - link "gemini-2.5-flash-preview-tts" [ref=e905] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-flash-preview-tts
+                    - code [ref=e906]: gemini-2.5-flash-preview-tts
+                  - text: 모델이 출시되었습니다.
+                - listitem [ref=e907]:
+                  - text: 실시간으로
+                  - link "음악을 생성" [ref=e908] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/music-generation?hl=ko
+                  - text: 하는
+                  - code [ref=e909]: lyria-realtime-exp
+                  - text: 모델이 출시되었습니다.
+                - listitem [ref=e910]:
+                  - text: 네이티브 오디오 출력 기능이 있는 Live API용 새로운 Gemini 모델인
+                  - code [ref=e911]: gemini-2.5-flash-preview-native-audio-dialog
+                  - text: 및
+                  - code [ref=e912]: gemini-2.5-flash-exp-native-audio-thinking-dialog
+                  - text: 가 출시되었습니다. 자세한 내용은
+                  - link "Live API 가이드" [ref=e913] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/live-guide?hl=ko#native-audio-output
+                  - text: 및
+                  - link "Gemini 2.5 Flash 네이티브 오디오" [ref=e914] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-flash-native-audio
+                  - text: 를 참고하세요.
+                - listitem [ref=e915]:
+                  - link "Gemma 3n" [ref=e916] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemma/docs/3n?hl=ko
+                  - text: 출시의 일환으로
+                  - link "AI Studio" [ref=e917] [cursor=pointer]:
+                    - /url: https://aistudio.google.com?hl=ko
+                  - text: 에서 Gemini API를 통해 사용할 수 있는
+                  - code [ref=e918]: gemma-3n-e4b-it
+                  - text: 미리보기가 출시되었습니다.
+              - heading "2025년 5월 7일" [level=2] [ref=e919]
+              - list [ref=e920]:
+                - listitem [ref=e921]:
+                  - text: 이미지 생성 및 편집을 위한 미리보기 모델인
+                  - code [ref=e922]: gemini-2.0-flash-preview-image-generation
+                  - text: 를 출시했습니다. 자세한 내용은
+                  - link "이미지 생성" [ref=e923] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/image-generation?hl=ko
+                  - text: 및
+                  - link "Gemini 2.0 Flash 프리뷰 이미지 생성" [ref=e924] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.0-flash-preview-image-generation
+                  - text: 을 참고하세요.
+              - heading "2025년 5월 6일" [level=2] [ref=e925]
+              - list [ref=e926]:
+                - listitem [ref=e927]:
+                  - text: 가장 강력한 모델의 새로운 버전인
+                  - code [ref=e928]: gemini-2.5-pro-preview-05-06
+                  - text: 가 출시되었습니다. 이 모델은 코드 및 함수 호출이 개선되었습니다.
+                  - code [ref=e929]: gemini-2.5-pro-preview-03-25
+                  - text: 은 모델의 새 버전을 자동으로 가리킵니다.
+              - heading "2025년 4월 17일" [level=2] [ref=e930]
+              - list [ref=e931]:
+                - listitem [ref=e932]:
+                  - text: 가격 대비 성능과 적응형 사고에 최적화된 Gemini
+                  - link "미리보기" [ref=e933] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#model-versions
+                  - text: 모델인
+                  - code [ref=e934]: gemini-2.5-flash-preview-04-17
+                  - text: 가 출시되었습니다. 자세한 내용은
+                  - link "Gemini 2.5 Flash 미리보기" [ref=e935] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-flash-preview
+                  - text: 및
+                  - link "Thinking" [ref=e936] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/thinking?hl=ko
+                  - text: 을 참고하세요.
+              - heading "2025년 4월 16일" [level=2] [ref=e937]
+              - list [ref=e938]:
+                - listitem [ref=e939]:
+                  - link "Gemini 2.0 Flash" [ref=e940] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.0-flash
+                  - text: 의 컨텍스트 캐싱이 출시되었습니다.
+              - heading "2025년 4월 9일" [level=2] [ref=e941]
+              - paragraph [ref=e942]:
+                - strong [ref=e943]: "모델 업데이트:"
+              - list [ref=e944]:
+                - listitem [ref=e945]:
+                  - text: 정식 버전 (GA)으로 제공되는 텍스트 및 이미지-동영상 모델인
+                  - code [ref=e946]: veo-2.0-generate-001
+                  - text: 를 출시했습니다. 이 모델은 세부적이고 예술적인 뉘앙스가 있는 동영상을 생성할 수 있습니다. 자세한 내용은
+                  - link "Veo 문서" [ref=e947] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/video?hl=ko
+                  - text: 를 참고하세요.
+                - listitem [ref=e948]:
+                  - paragraph [ref=e949]:
+                    - text: 결제가 사용 설정된
+                    - link "Live API" [ref=e950] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/live?hl=ko
+                    - text: 모델의 공개 미리보기 버전인
+                    - code [ref=e951]: gemini-2.0-flash-live-001
+                    - text: 가 출시되었습니다.
+                  - list [ref=e952]:
+                    - listitem [ref=e953]:
+                      - paragraph [ref=e954]:
+                        - strong [ref=e955]: 향상된 세션 관리 및 안정성
+                      - list [ref=e956]:
+                        - listitem [ref=e957]:
+                          - strong [ref=e958]: "세션 재개:"
+                          - text: 일시적인 네트워크 중단 시 세션을 유지합니다. 이제 API는 서버 측 세션 상태 저장소 (최대 24시간)를 지원하며 중단된 지점에서 다시 연결하고 재개할 수 있는 핸들 (session_resumption)을 제공합니다.
+                        - listitem [ref=e959]:
+                          - strong [ref=e960]: "컨텍스트 압축을 통한 긴 세션:"
+                          - text: 이전 시간 제한을 초과하는 확장된 상호작용을 지원합니다. 슬라이딩 윈도우 메커니즘으로 컨텍스트 윈도우 압축을 구성하여 컨텍스트 길이를 자동으로 관리하고 컨텍스트 제한으로 인한 갑작스러운 종료를 방지합니다.
+                        - listitem [ref=e961]:
+                          - strong [ref=e962]: "정상적인 연결 해제 알림:"
+                          - text: 연결이 종료되기 직전을 나타내는
+                          - code [ref=e963]: GoAway
+                          - text: 서버 메시지를 수신하여 종료 전에 정상적으로 처리할 수 있습니다.
+                    - listitem [ref=e964]:
+                      - paragraph [ref=e965]:
+                        - strong [ref=e966]: 상호작용 역학에 대한 더 많은 제어
+                    - listitem [ref=e967]:
+                      - paragraph [ref=e968]:
+                        - strong [ref=e969]: "구성 가능한 음성 활동 감지 (VAD):"
+                        - text: 감도 수준을 선택하거나 자동 VAD를 완전히 사용 중지하고 수동 턴 제어를 위해 새 클라이언트 이벤트(
+                        - code [ref=e970]: activityStart
+                        - text: ","
+                        - code [ref=e971]: activityEnd
+                        - text: )를 사용합니다.
+                    - listitem [ref=e972]:
+                      - paragraph [ref=e973]:
+                        - strong [ref=e974]: "구성 가능한 중단 처리:"
+                        - text: 사용자 입력이 모델의 응답을 중단해야 하는지 결정합니다.
+                    - listitem [ref=e975]:
+                      - paragraph [ref=e976]:
+                        - strong [ref=e977]: "구성 가능한 회전 범위:"
+                        - text: API가 모든 오디오 및 동영상 입력을 지속적으로 처리하는지 아니면 최종 사용자가 말하는 것으로 감지될 때만 캡처하는지 선택합니다.
+                    - listitem [ref=e978]:
+                      - paragraph [ref=e979]:
+                        - strong [ref=e980]: "구성 가능한 미디어 해상도:"
+                        - text: 입력 미디어의 해상도를 선택하여 품질 또는 토큰 사용량을 최적화합니다.
+                    - listitem [ref=e981]:
+                      - paragraph [ref=e982]:
+                        - strong [ref=e983]: 더 풍부한 출력 및 기능
+                    - listitem [ref=e984]:
+                      - paragraph [ref=e985]:
+                        - strong [ref=e986]: "확장된 음성 및 언어 옵션:"
+                        - text: 오디오 출력을 위해 2개의 새로운 음성과 30개의 새로운 언어 중에서 선택할 수 있습니다. 이제
+                        - code [ref=e987]: speechConfig
+                        - text: 내에서 출력 언어를 구성할 수 있습니다.
+                    - listitem [ref=e988]:
+                      - paragraph [ref=e989]:
+                        - strong [ref=e990]: "텍스트 스트리밍:"
+                        - text: 텍스트 응답이 생성될 때 점진적으로 수신하여 사용자에게 더 빠르게 표시할 수 있습니다.
+                    - listitem [ref=e991]:
+                      - paragraph [ref=e992]:
+                        - strong [ref=e993]: "토큰 사용량 보고:"
+                        - text: 서버 메시지의
+                        - code [ref=e994]: usageMetadata
+                        - text: 필드에 제공된 자세한 토큰 수를 통해 사용량에 대한 유용한 정보를 얻을 수 있습니다. 토큰 수는 모달리티 및 프롬프트 또는 응답 단계별로 분류됩니다.
+              - heading "2025년 4월 4일" [level=2] [ref=e995]
+              - list [ref=e996]:
+                - listitem [ref=e997]:
+                  - text: 결제가 사용 설정된 공개 프리뷰 Gemini 2.5 Pro 버전인
+                  - code [ref=e998]: gemini-2.5-pro-preview-03-25
+                  - text: 가 출시되었습니다. 무료 등급에서
+                  - code [ref=e999]: gemini-2.5-pro-exp-03-25
+                  - text: 을 계속 사용할 수 있습니다.
+              - heading "2025년 3월 25일" [level=2] [ref=e1000]
+              - list [ref=e1001]:
+                - listitem [ref=e1002]:
+                  - text: 사고 모드가 기본적으로 항상 사용 설정된 공개 실험용 Gemini 모델인
+                  - code [ref=e1003]: gemini-2.5-pro-exp-03-25
+                  - text: 가 출시되었습니다. 자세한 내용은
+                  - link "Gemini 2.5 Pro Experimental" [ref=e1004] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-2.5-pro-preview-03-25
+                  - text: 을 참고하세요.
+              - heading "2025년 3월 12일" [level=2] [ref=e1005]
+              - paragraph [ref=e1006]:
+                - strong [ref=e1007]: "모델 업데이트:"
+              - list [ref=e1008]:
+                - listitem [ref=e1009]:
+                  - text: 이미지 생성 및 편집이 가능한 실험용
+                  - link "Gemini 2.0 Flash" [ref=e1010] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/image-generation?hl=ko#gemini
+                  - text: 모델을 출시했습니다.
+                - listitem [ref=e1011]:
+                  - link "Gemma 3" [ref=e1012] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemma/docs/core?hl=ko
+                  - text: 출시의 일환으로
+                  - code [ref=e1013]: gemma-3-27b-it
+                  - text: 가 출시되었으며
+                  - link "AI Studio" [ref=e1014] [cursor=pointer]:
+                    - /url: https://aistudio.google.com?hl=ko
+                  - text: 및 Gemini API를 통해 사용할 수 있습니다.
+              - paragraph [ref=e1015]:
+                - strong [ref=e1016]: "API 업데이트:"
+              - list [ref=e1017]:
+                - listitem [ref=e1018]:
+                  - link "YouTube URL" [ref=e1019] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/vision?hl=ko#youtube
+                  - text: 을 미디어 소스로 지원하도록 추가했습니다.
+                - listitem [ref=e1020]:
+                  - text: 20MB 미만의
+                  - link "인라인 동영상" [ref=e1021] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/vision?hl=ko#inline-video
+                  - text: 을 포함하는 기능이 추가되었습니다.
+              - heading "2025년 3월 11일" [level=2] [ref=e1022]
+              - paragraph [ref=e1023]:
+                - strong [ref=e1024]: "SDK 업데이트:"
+              - list [ref=e1025]:
+                - listitem [ref=e1026]:
+                  - link "TypeScript 및 JavaScript용 Google Gen AI SDK" [ref=e1027] [cursor=pointer]:
+                    - /url: https://googleapis.github.io/js-genai
+                  - text: 를 공개 미리보기로 출시했습니다.
+              - heading "2025년 3월 7일" [level=2] [ref=e1028]
+              - paragraph [ref=e1029]:
+                - strong [ref=e1030]: "모델 업데이트:"
+              - list [ref=e1031]:
+                - listitem [ref=e1032]:
+                  - text: 공개 프리뷰에서
+                  - link "실험용" [ref=e1033] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=ko
+                  - text: Gemini 기반 임베딩 모델인
+                  - code [ref=e1034]: gemini-embedding-exp-03-07
+                  - text: 를 출시했습니다.
+              - heading "2025년 2월 28일" [level=2] [ref=e1035]
+              - paragraph [ref=e1036]:
+                - strong [ref=e1037]: "API 업데이트:"
+              - list [ref=e1038]:
+                - listitem [ref=e1039]:
+                  - text: Gemini 2.0 Pro를 기반으로 하는 실험적 모델인
+                  - code [ref=e1040]: gemini-2.0-pro-exp-02-05
+                  - text: 에
+                  - link "검색을 도구로 사용" [ref=e1041] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/grounding?hl=ko
+                  - text: 지원이 추가되었습니다.
+              - heading "2025년 2월 25일" [level=2] [ref=e1042]
+              - paragraph [ref=e1043]:
+                - strong [ref=e1044]: "모델 업데이트:"
+              - list [ref=e1045]:
+                - listitem [ref=e1046]:
+                  - text: 속도, 확장성, 비용 효율성에 최적화된
+                  - link "Gemini 2.0 Flash-Lite" [ref=e1047] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#gemini-2.0-flash-lite
+                  - text: 의 정식 버전 (GA)인
+                  - code [ref=e1048]: gemini-2.0-flash-lite
+                  - text: 가 출시되었습니다.
+              - heading "2025년 2월 19일" [level=2] [ref=e1049]
+              - paragraph [ref=e1050]:
+                - strong [ref=e1051]: "AI Studio 업데이트:"
+              - list [ref=e1052]:
+                - listitem [ref=e1053]:
+                  - link "추가 지역" [ref=e1054] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/available-regions?hl=ko
+                  - text: (코소보, 그린란드, 페로 제도) 지원
+              - paragraph [ref=e1055]:
+                - strong [ref=e1056]: "API 업데이트:"
+              - list [ref=e1057]:
+                - listitem [ref=e1058]:
+                  - link "추가 지역" [ref=e1059] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/available-regions?hl=ko
+                  - text: (코소보, 그린란드, 페로 제도) 지원
+              - heading "2025년 2월 18일" [level=2] [ref=e1060]
+              - paragraph [ref=e1061]:
+                - strong [ref=e1062]: "모델 업데이트:"
+              - list [ref=e1063]:
+                - listitem [ref=e1064]:
+                  - text: Gemini 1.0 Pro는 더 이상 지원되지 않습니다. 지원되는 모델 목록은
+                  - link "Gemini 모델" [ref=e1065] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko
+                  - text: 을 참고하세요.
+              - heading "2025년 2월 11일" [level=2] [ref=e1066]
+              - paragraph [ref=e1067]:
+                - strong [ref=e1068]: "API 업데이트:"
+              - list [ref=e1069]:
+                - listitem [ref=e1070]:
+                  - link "OpenAI 라이브러리 호환성" [ref=e1071] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/openai?hl=ko
+                  - text: 에 관한 업데이트
+              - heading "2025년 2월 6일" [level=2] [ref=e1072]
+              - paragraph [ref=e1073]:
+                - strong [ref=e1074]: "모델 업데이트:"
+              - list [ref=e1075]:
+                - listitem [ref=e1076]:
+                  - link "Gemini API의 Imagen 3" [ref=e1077] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/imagen?hl=ko
+                  - text: 의 정식 버전 (GA)인
+                  - code [ref=e1078]: imagen-3.0-generate-002
+                  - text: 가 출시되었습니다.
+              - paragraph [ref=e1079]:
+                - strong [ref=e1080]: "SDK 업데이트:"
+              - list [ref=e1081]:
+                - listitem [ref=e1082]:
+                  - text: 공개 미리보기를 위해
+                  - link "Google Gen AI SDK for Java" [ref=e1083] [cursor=pointer]:
+                    - /url: https://github.com/googleapis/java-genai
+                  - text: 를 출시했습니다.
+              - heading "2025년 2월 5일" [level=2] [ref=e1084]
+              - paragraph [ref=e1085]:
+                - strong [ref=e1086]: "모델 업데이트:"
+              - list [ref=e1087]:
+                - listitem [ref=e1088]:
+                  - text: 텍스트 전용 출력을 지원하는
+                  - link "Gemini 2.0 Flash" [ref=e1089] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#gemini-2.0-flash
+                  - text: 의 정식 버전 (GA)인
+                  - code [ref=e1090]: gemini-2.0-flash-001
+                  - text: 가 출시되었습니다.
+                - listitem [ref=e1091]:
+                  - text: Gemini 2.0 Pro의
+                  - link "실험용" [ref=e1092] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=ko
+                  - text: 공개 미리보기 버전인
+                  - code [ref=e1093]: gemini-2.0-pro-exp-02-05
+                  - text: 를 출시했습니다.
+                - listitem [ref=e1094]:
+                  - text: 비용 효율성을 위해 최적화된 실험적 공개 미리보기
+                  - link "모델" [ref=e1095] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#gemini-2.0-flash-lite
+                  - text: 인
+                  - code [ref=e1096]: gemini-2.0-flash-lite-preview-02-05
+                  - text: 가 출시되었습니다.
+              - paragraph [ref=e1097]:
+                - strong [ref=e1098]: "API 업데이트:"
+              - list [ref=e1099]:
+                - listitem [ref=e1100]:
+                  - text: 코드 실행에
+                  - link "파일 입력 및 그래프 출력" [ref=e1101] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/code-execution?hl=ko#input-output
+                  - text: 지원이 추가되었습니다.
+              - paragraph [ref=e1102]:
+                - strong [ref=e1103]: "SDK 업데이트:"
+              - list [ref=e1104]:
+                - listitem [ref=e1105]:
+                  - link "Python용 Google Gen AI SDK" [ref=e1106] [cursor=pointer]:
+                    - /url: https://googleapis.github.io/python-genai/
+                  - text: 를 정식 버전 (GA)으로 출시했습니다.
+              - heading "2025년 1월 21일" [level=2] [ref=e1107]
+              - paragraph [ref=e1108]:
+                - strong [ref=e1109]: "모델 업데이트:"
+              - list [ref=e1110]:
+                - listitem [ref=e1111]:
+                  - link "Gemini 2.0 Flash Thinking 모델" [ref=e1112] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/thinking?hl=ko
+                  - text: 의 기반이 되는 모델의 최신 미리보기 버전인
+                  - code [ref=e1113]: gemini-2.0-flash-thinking-exp-01-21
+                  - text: 가 출시되었습니다.
+              - heading "2024년 12월 19일" [level=2] [ref=e1114]
+              - paragraph [ref=e1115]:
+                - strong [ref=e1116]: "모델 업데이트:"
+              - list [ref=e1117]:
+                - listitem [ref=e1118]:
+                  - paragraph [ref=e1119]: 공개 프리뷰용 Gemini 2.0 Flash Thinking 모드가 출시되었습니다. 사고 모드는 모델이 대답을 생성하는 동안 모델의 사고 과정을 확인할 수 있으며, 추론 기능이 강화된 대답을 생성하는 테스트 시간 컴퓨팅 모델입니다.
+                  - paragraph [ref=e1120]:
+                    - link "개요 페이지" [ref=e1121] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/thinking-mode?hl=ko
+                    - text: 에서 Gemini 2.0 Flash Thinking 모드에 대해 자세히 알아보세요.
+              - heading "2024년 12월 11일" [level=2] [ref=e1122]
+              - paragraph [ref=e1123]:
+                - strong [ref=e1124]: "모델 업데이트:"
+              - list [ref=e1125]:
+                - listitem [ref=e1126]:
+                  - text: 공개 프리뷰용
+                  - link "Gemini 2.0 Flash 실험 버전" [ref=e1127] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#gemini-2.0-flash
+                  - text: 이 출시되었습니다. Gemini 2.0 Flash 실험 버전의 일부 기능 목록은 다음과 같습니다.
+                  - list [ref=e1128]:
+                    - listitem [ref=e1129]: Gemini 1.5 Pro보다 2배 빠른 속도
+                    - listitem [ref=e1130]: Live API를 사용한 양방향 스트리밍
+                    - listitem [ref=e1131]: 텍스트, 이미지, 음성 형태의 멀티모달 응답 생성
+                    - listitem [ref=e1132]: 코드 실행, 검색, 함수 호출 등의 기능을 사용하기 위한 다중 턴 추론을 통한 기본 제공 도구 사용
+              - paragraph [ref=e1133]:
+                - link "개요 페이지" [ref=e1134] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/models/gemini-v2?hl=ko
+                - text: 에서 Gemini 2.0 Flash에 대해 자세히 알아보세요.
+              - heading "2024년 11월 21일" [level=2] [ref=e1135]
+              - paragraph [ref=e1136]:
+                - strong [ref=e1137]: "모델 업데이트:"
+              - list [ref=e1138]:
+                - listitem [ref=e1139]:
+                  - text: 더욱 강력한 실험용 Gemini API 모델인
+                  - code [ref=e1140]: gemini-exp-1121
+                  - text: 가 출시되었습니다.
+              - paragraph [ref=e1141]:
+                - strong [ref=e1142]: "모델 업데이트:"
+              - list [ref=e1143]:
+                - listitem [ref=e1144]:
+                  - code [ref=e1145]: gemini-1.5-flash-002
+                  - text: 를 사용하도록
+                  - code [ref=e1146]: gemini-1.5-flash-latest
+                  - text: 및
+                  - code [ref=e1147]: gemini-1.5-flash
+                  - text: 모델 별칭을 업데이트했습니다.
+                  - list [ref=e1148]:
+                    - listitem [ref=e1149]:
+                      - code [ref=e1150]: top_k
+                      - text: "매개변수로 변경:"
+                      - code [ref=e1151]: gemini-1.5-flash-002
+                      - text: 모델은 1~41 (포함 안 함) 사이의
+                      - code [ref=e1152]: top_k
+                      - text: 값을 지원합니다. 40보다 큰 값은 40으로 변경됩니다.
+              - heading "2024년 11월 14일" [level=2] [ref=e1153]
+              - paragraph [ref=e1154]:
+                - strong [ref=e1155]: "모델 업데이트:"
+              - list [ref=e1156]:
+                - listitem [ref=e1157]:
+                  - text: 강력한 실험용 Gemini API 모델인
+                  - code [ref=e1158]: gemini-exp-1114
+                  - text: 가 출시되었습니다.
+              - heading "2024년 11월 8일" [level=2] [ref=e1159]
+              - paragraph [ref=e1160]:
+                - strong [ref=e1161]: "API 업데이트:"
+              - list [ref=e1162]:
+                - listitem [ref=e1163]:
+                  - text: OpenAI 라이브러리 / REST API에
+                  - link "Gemini 지원" [ref=e1164] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/openai?hl=ko
+                  - text: 이 추가되었습니다.
+              - heading "2024년 10월 31일" [level=2] [ref=e1165]
+              - paragraph [ref=e1166]:
+                - strong [ref=e1167]: "API 업데이트:"
+              - list [ref=e1168]:
+                - listitem [ref=e1169]:
+                  - link "Google 검색을 사용한 그라운딩 지원" [ref=e1170] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/grounding?hl=ko
+                  - text: 이 추가되었습니다.
+              - heading "2024년 10월 3일" [level=2] [ref=e1171]
+              - paragraph [ref=e1172]:
+                - strong [ref=e1173]: "모델 업데이트:"
+              - list [ref=e1174]:
+                - listitem [ref=e1175]:
+                  - text: Google의 가장 작은 Gemini API 모델의 안정화 버전인
+                  - code [ref=e1176]: gemini-1.5-flash-8b-001
+                  - text: 가 출시되었습니다.
+              - heading "2024년 9월 24일" [level=2] [ref=e1177]
+              - paragraph [ref=e1178]:
+                - strong [ref=e1179]: "모델 업데이트:"
+              - list [ref=e1180]:
+                - listitem [ref=e1181]:
+                  - text: 정식 버전으로 제공되는 Gemini 1.5 Pro 및 1.5 Flash의 새로운 안정화 버전인
+                  - code [ref=e1182]: gemini-1.5-pro-002
+                  - text: 와
+                  - code [ref=e1183]: gemini-1.5-flash-002
+                  - text: 가 출시되었습니다.
+                - listitem [ref=e1184]:
+                  - code [ref=e1185]: gemini-1.5-pro-002
+                  - text: 를 사용하도록
+                  - code [ref=e1186]: gemini-1.5-pro-latest
+                  - text: 모델 코드를 업데이트하고
+                  - code [ref=e1187]: gemini-1.5-flash-002
+                  - text: 를 사용하도록
+                  - code [ref=e1188]: gemini-1.5-flash-latest
+                  - text: 모델 코드를 업데이트했습니다.
+                - listitem [ref=e1189]:
+                  - code [ref=e1190]: gemini-1.5-flash-8b-exp-0827
+                  - text: 을 대체하기 위해
+                  - code [ref=e1191]: gemini-1.5-flash-8b-exp-0924
+                  - text: 를 출시했습니다.
+                - listitem [ref=e1192]:
+                  - text: Gemini API 및 AI Studio용
+                  - link "시민적 무결성 안전 필터" [ref=e1193] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=ko#safety-filters
+                  - text: 가 출시되었습니다.
+                - listitem [ref=e1194]:
+                  - text: Python 및 NodeJS에서 Gemini 1.5 Pro 및 1.5 Flash의 두 가지 새로운 매개변수(
+                  - link "frequencyPenalty" [ref=e1195] [cursor=pointer]:
+                    - /url: https://ai.google.dev/api/generate-content?hl=ko#FIELDS.frequency_penalty
+                    - code [ref=e1196]: frequencyPenalty
+                  - text: 및
+                  - link "presencePenalty" [ref=e1197] [cursor=pointer]:
+                    - /url: https://ai.google.dev/api/generate-content?hl=ko#FIELDS.presence_penalty
+                    - code [ref=e1198]: presencePenalty
+                  - text: ) 지원이 출시되었습니다.
+              - heading "2024년 9월 19일" [level=2] [ref=e1199]
+              - paragraph [ref=e1200]:
+                - strong [ref=e1201]: "AI Studio 업데이트:"
+              - list [ref=e1202]:
+                - listitem [ref=e1203]: 사용자가 대답의 품질에 관한 의견을 제공할 수 있도록 모델 대답에 좋아요 및 싫어요 버튼이 추가되었습니다.
+              - paragraph [ref=e1204]:
+                - strong [ref=e1205]: "API 업데이트:"
+              - list [ref=e1206]:
+                - listitem [ref=e1207]: 이제 Gemini API 사용에 사용할 수 있는 Google Cloud 크레딧이 지원됩니다.
+              - heading "2024년 9월 17일" [level=2] [ref=e1208]
+              - paragraph [ref=e1209]:
+                - strong [ref=e1210]: "AI Studio 업데이트:"
+              - list [ref=e1211]:
+                - listitem [ref=e1212]:
+                  - text: 프롬프트와 이를 실행하는 코드를 Colab 노트북으로 내보내는
+                  - strong [ref=e1213]: Colab에서 열기
+                  - text: 버튼이 추가되었습니다. 이 기능은 아직 도구 (JSON 모드, 함수 호출 또는 코드 실행)를 사용한 프롬프트를 지원하지 않습니다.
+              - heading "2024년 9월 13일" [level=2] [ref=e1214]
+              - paragraph [ref=e1215]:
+                - strong [ref=e1216]: "AI Studio 업데이트:"
+              - list [ref=e1217]:
+                - listitem [ref=e1218]: 모델과 프롬프트 간의 응답을 비교하여 사용 사례에 가장 적합한 모델을 찾을 수 있는 비교 모드 지원이 추가되었습니다.
+              - heading "2024년 8월 30일" [level=2] [ref=e1219]
+              - paragraph [ref=e1220]:
+                - strong [ref=e1221]: "모델 업데이트:"
+              - list [ref=e1222]:
+                - listitem [ref=e1223]:
+                  - text: Gemini 1.5 Flash는
+                  - link "모델 구성을 통해 JSON 스키마를 제공" [ref=e1224] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/json-mode?hl=ko#supply-schema-in-config
+                  - text: 하는 것을 지원합니다.
+              - heading "2024년 8월 27일" [level=2] [ref=e1225]
+              - paragraph [ref=e1226]:
+                - strong [ref=e1227]: "모델 업데이트:"
+              - list [ref=e1228]:
+                - listitem [ref=e1229]:
+                  - text: 다음
+                  - link "실험 모델" [ref=e1230] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=ko
+                  - text: 이 출시되었습니다.
+                  - list [ref=e1231]:
+                    - listitem [ref=e1232]:
+                      - code [ref=e1233]: gemini-1.5-pro-exp-0827
+                    - listitem [ref=e1234]:
+                      - code [ref=e1235]: gemini-1.5-flash-exp-0827
+                    - listitem [ref=e1236]:
+                      - code [ref=e1237]: gemini-1.5-flash-8b-exp-0827
+              - heading "2024년 8월 9일" [level=2] [ref=e1238]
+              - paragraph [ref=e1239]:
+                - strong [ref=e1240]: "API 업데이트:"
+              - list [ref=e1241]:
+                - listitem [ref=e1242]:
+                  - link "PDF 처리" [ref=e1243] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/document-processing?hl=ko
+                  - text: 지원이 추가되었습니다.
+              - heading "2024년 8월 5일" [level=2] [ref=e1244]
+              - paragraph [ref=e1245]:
+                - strong [ref=e1246]: "모델 업데이트:"
+              - list [ref=e1247]:
+                - listitem [ref=e1248]: Gemini 1.5 Flash의 미세 조정 지원이 출시되었습니다.
+              - heading "2024년 8월 1일" [level=2] [ref=e1249]
+              - paragraph [ref=e1250]:
+                - strong [ref=e1251]: "모델 업데이트:"
+              - list [ref=e1252]:
+                - listitem [ref=e1253]:
+                  - link "Gemini 1.5 Pro" [ref=e1254] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#gemini-1.5-pro
+                  - text: 의 새로운 실험 버전인
+                  - code [ref=e1255]: gemini-1.5-pro-exp-0801
+                  - text: 가 출시되었습니다.
+              - heading "2024년 7월 12일" [level=2] [ref=e1256]
+              - paragraph [ref=e1257]:
+                - strong [ref=e1258]: "모델 업데이트:"
+              - list [ref=e1259]:
+                - listitem [ref=e1260]: Google AI 서비스 및 도구에서 Gemini 1.0 Pro Vision 지원이 삭제되었습니다.
+              - heading "2024년 6월 27일" [level=2] [ref=e1261]
+              - paragraph [ref=e1262]:
+                - strong [ref=e1263]: "모델 업데이트:"
+              - list [ref=e1264]:
+                - listitem [ref=e1265]: Gemini 1.5 Pro의 2백만 컨텍스트 윈도우가 정식 버전으로 출시되었습니다.
+              - paragraph [ref=e1266]:
+                - strong [ref=e1267]: "API 업데이트:"
+              - list [ref=e1268]:
+                - listitem [ref=e1269]:
+                  - link "코드 실행" [ref=e1270] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/code-execution?hl=ko
+                  - text: 지원이 추가되었습니다.
+              - heading "2024년 6월 18일" [level=2] [ref=e1271]
+              - paragraph [ref=e1272]:
+                - strong [ref=e1273]: "API 업데이트:"
+              - list [ref=e1274]:
+                - listitem [ref=e1275]:
+                  - link "컨텍스트 캐싱" [ref=e1276] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/caching?hl=ko
+                  - text: 지원을 추가했습니다.
+              - heading "2024년 6월 12일" [level=2] [ref=e1277]
+              - paragraph [ref=e1278]:
+                - strong [ref=e1279]: "모델 업데이트:"
+              - list [ref=e1280]:
+                - listitem [ref=e1281]: Gemini 1.0 Pro Vision이 지원 중단되었습니다.
+              - heading "2024년 5월 23일" [level=2] [ref=e1282]
+              - paragraph [ref=e1283]:
+                - strong [ref=e1284]: "모델 업데이트:"
+              - list [ref=e1285]:
+                - listitem [ref=e1286]:
+                  - link "Gemini 1.5 Pro" [ref=e1287] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#gemini-1.5-pro
+                  - text: (
+                  - code [ref=e1288]: gemini-1.5-pro-001
+                  - text: )가 정식 버전 (GA)으로 제공됩니다.
+                - listitem [ref=e1289]:
+                  - link "Gemini 1.5 Flash" [ref=e1290] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#gemini-1.5-flash
+                  - text: (
+                  - code [ref=e1291]: gemini-1.5-flash-001
+                  - text: )가 정식 버전 (GA)으로 제공됩니다.
+              - heading "2024년 5월 14일" [level=2] [ref=e1292]
+              - paragraph [ref=e1293]:
+                - strong [ref=e1294]: "API 업데이트:"
+              - list [ref=e1295]:
+                - listitem [ref=e1296]: Gemini 1.5 Pro의 2백만 개 컨텍스트 윈도우가 도입되었습니다 (대기자 명단).
+                - listitem [ref=e1297]:
+                  - text: Gemini 1.0 Pro에 사용한 만큼만 지불하는
+                  - link "결제" [ref=e1298] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/billing?hl=ko
+                  - text: 가 도입되었으며, Gemini 1.5 Pro 및 Gemini 1.5 Flash 결제도 곧 도입될 예정입니다.
+                - listitem [ref=e1299]: 출시 예정인 Gemini 1.5 Pro 유료 등급의 비율 제한이 상향되었습니다.
+                - listitem [ref=e1300]:
+                  - link "파일 API" [ref=e1301] [cursor=pointer]:
+                    - /url: https://ai.google.dev/api/rest/v1beta/files?hl=ko
+                  - text: 에 기본 제공 동영상 지원을 추가했습니다.
+                - listitem [ref=e1302]:
+                  - link "파일 API" [ref=e1303] [cursor=pointer]:
+                    - /url: https://ai.google.dev/api/rest/v1beta/files?hl=ko
+                  - text: 에 일반 텍스트 지원이 추가되었습니다.
+                - listitem [ref=e1304]: 한 번에 두 개 이상의 호출을 반환하는 병렬 함수 호출 지원이 추가되었습니다.
+              - heading "2024년 5월 10일" [level=2] [ref=e1305]
+              - paragraph [ref=e1306]:
+                - strong [ref=e1307]: "모델 업데이트:"
+              - list [ref=e1308]:
+                - listitem [ref=e1309]:
+                  - link "Gemini 1.5 Flash" [ref=e1310] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#gemini-1.5-flash
+                  - text: (
+                  - code [ref=e1311]: gemini-1.5-flash-latest
+                  - text: )가 프리뷰로 출시되었습니다.
+              - heading "2024년 4월 9일" [level=2] [ref=e1312]
+              - paragraph [ref=e1313]:
+                - strong [ref=e1314]: "모델 업데이트:"
+              - list [ref=e1315]:
+                - listitem [ref=e1316]:
+                  - link "Gemini 1.5 Pro" [ref=e1317] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#gemini-1.5-pro
+                  - text: (
+                  - code [ref=e1318]: gemini-1.5-pro-latest
+                  - text: )가 미리보기로 출시되었습니다.
+                - listitem [ref=e1319]:
+                  - text: 768 미만의
+                  - link "탄력적 임베딩" [ref=e1320] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/embeddings?hl=ko#elastic-embedding
+                  - text: 크기를 지원하는 새로운 텍스트 임베딩 모델
+                  - code [ref=e1321]: text-embeddings-004
+                  - text: 가 출시되었습니다.
+              - paragraph [ref=e1322]:
+                - strong [ref=e1323]: "API 업데이트:"
+              - list [ref=e1324]:
+                - listitem [ref=e1325]:
+                  - text: 프롬프트에 사용할 미디어 파일을 일시적으로 저장하는
+                  - link "File API" [ref=e1326] [cursor=pointer]:
+                    - /url: https://ai.google.dev/api/rest/v1beta/files?hl=ko
+                  - text: 를 출시했습니다.
+                - listitem [ref=e1327]:
+                  - text: 텍스트, 이미지, 오디오 데이터로 프롬프트를 작성하는 기능(
+                  - emphasis [ref=e1328]: 멀티모달
+                  - text: 프롬프트라고도 함)이 추가되었습니다. 자세한 내용은
+                  - link "미디어를 사용한 프롬프트" [ref=e1329] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=ko
+                  - text: 를 참고하세요.
+                - listitem [ref=e1330]:
+                  - text: 베타로
+                  - link "시스템 안내" [ref=e1331] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/system-instructions?hl=ko
+                  - text: 가 출시되었습니다.
+                - listitem [ref=e1332]:
+                  - text: 함수 호출의 실행 동작을 정의하는
+                  - link "함수 호출 모드" [ref=e1333] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/function-calling?hl=ko#function_calling_mode
+                  - text: 가 추가되었습니다.
+                - listitem [ref=e1334]:
+                  - code [ref=e1335]: response_mime_type
+                  - text: 구성 옵션 지원이 추가되어
+                  - link "JSON 형식" [ref=e1336] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/api-overview?hl=ko#json
+                  - text: 으로 응답을 요청할 수 있습니다.
+              - heading "2024년 3월 19일" [level=2] [ref=e1337]
+              - paragraph [ref=e1338]:
+                - strong [ref=e1339]: "모델 업데이트:"
+              - list [ref=e1340]:
+                - listitem [ref=e1341]:
+                  - text: Google AI Studio 또는 Gemini API에서
+                  - link "Gemini 1.0 Pro 미세 조정" [ref=e1342] [cursor=pointer]:
+                    - /url: https://developers.googleblog.com/en/tune-gemini-pro-in-google-ai-studio-or-with-the-gemini-api/
+                  - text: 지원이 추가되었습니다.
+              - heading "2023년 12월 13일" [level=2] [ref=e1343]
+              - paragraph [ref=e1344]:
+                - strong [ref=e1345]: "모델 업데이트:"
+              - list [ref=e1346]:
+                - listitem [ref=e1347]: "gemini-pro: 다양한 작업을 위한 새로운 텍스트 모델입니다. 기능과 효율성의 균형을 유지합니다."
+                - listitem [ref=e1348]: "gemini-pro-vision: 다양한 작업을 위한 새로운 멀티모달 모델입니다. 기능과 효율성의 균형을 유지합니다."
+                - listitem [ref=e1349]: "embedding-001: 새로운 임베딩 모델입니다."
+                - listitem [ref=e1350]: "aqa: 생성된 답변을 그라운딩하기 위해 텍스트 구절을 사용하여 질문에 답변하도록 학습된 새로운 특별 조정 모델입니다."
+              - paragraph [ref=e1351]:
+                - text: 자세한 내용은
+                - link "Gemini 모델" [ref=e1352] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko
+                - text: 을 참고하세요.
+              - paragraph [ref=e1353]:
+                - strong [ref=e1354]: "API 버전 업데이트:"
+              - list [ref=e1355]:
+                - listitem [ref=e1356]: "v1: 안정적인 API 채널입니다."
+                - listitem [ref=e1357]: "v1beta: 베타 채널입니다. 이 채널에는 개발 중인 기능이 있을 수 있습니다."
+              - paragraph [ref=e1358]:
+                - text: 자세한 내용은
+                - link "API 버전 주제" [ref=e1359] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/api-versions?hl=ko
+                - text: 를 참고하세요.
+              - paragraph [ref=e1360]:
+                - strong [ref=e1361]: "API 업데이트:"
+              - list [ref=e1362]:
+                - listitem [ref=e1363]:
+                  - code [ref=e1364]: GenerateContent
+                  - text: 는 채팅과 텍스트를 위한 단일 통합 엔드포인트입니다.
+                - listitem [ref=e1365]:
+                  - code [ref=e1366]: StreamGenerateContent
+                  - text: 메서드를 통해 스트리밍을 사용할 수 있습니다.
+                - listitem [ref=e1367]: "멀티모달 기능: 이미지가 새로 지원되는 모달리티입니다."
+                - listitem [ref=e1368]:
+                  - text: "새 베타 기능:"
+                  - list [ref=e1369]:
+                    - listitem [ref=e1370]:
+                      - link "함수 호출" [ref=e1371] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/function-calling?hl=ko
+                    - listitem [ref=e1372]:
+                      - link "Semantic Retriever" [ref=e1373] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/semantic_retrieval?hl=ko
+                    - listitem [ref=e1374]: 출처가 표시된 질의 응답 (AQA)
+                - listitem [ref=e1375]: "업데이트된 후보 수: Gemini 모델은 후보를 1개만 반환합니다."
+                - listitem [ref=e1376]:
+                  - text: 다양한 안전 설정 및 SafetyRating 카테고리 자세한 내용은
+                  - link "안전 설정" [ref=e1377] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=ko
+                  - text: 을 참고하세요.
+                - listitem [ref=e1378]: Gemini 모델의 모델 조정은 아직 지원되지 않습니다 (진행 중).
+            - button "의견 보내기" [ref=e1380] [cursor=pointer]
+          - generic [ref=e1381]:
+            - paragraph [ref=e1382]:
+              - text: 달리 명시되지 않는 한 이 페이지의 콘텐츠에는
+              - link "Creative Commons Attribution 4.0 라이선스" [ref=e1383] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/4.0/
+              - text: 에 따라 라이선스가 부여되며, 코드 샘플에는
+              - link "Apache 2.0 라이선스" [ref=e1384] [cursor=pointer]:
+                - /url: https://www.apache.org/licenses/LICENSE-2.0
+              - text: 에 따라 라이선스가 부여됩니다. 자세한 내용은
+              - link "Google Developers 사이트 정책" [ref=e1385] [cursor=pointer]:
+                - /url: https://developers.google.com/site-policies?hl=ko
+              - text: 을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+            - paragraph [ref=e1386]: "최종 업데이트: 2026-04-06(UTC)"
+      - generic:
+        - navigation "바닥글 링크"
+      - navigation "유틸리티 링크" [ref=e1390]:
+        - list [ref=e1391]:
+          - listitem [ref=e1392]:
+            - link "약관" [ref=e1393] [cursor=pointer]:
+              - /url: //policies.google.com/terms?hl=ko
+          - listitem [ref=e1394]:
+            - text: "|"
+            - link "개인정보처리방침" [ref=e1395] [cursor=pointer]:
+              - /url: //policies.google.com/privacy?hl=ko
+          - listitem [ref=e1396] [cursor=pointer]: "| 쿠키 관리"
+        - generic "원하는 언어를 선택하세요." [ref=e1397]:
+          - button "Language" [ref=e1398] [cursor=pointer]:
+            - img
+            - generic [ref=e1399]: Language
+            - img

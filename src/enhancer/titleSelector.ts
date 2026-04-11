@@ -116,9 +116,14 @@ export function scoreTitles(titles: ParsedTitle[]): ParsedTitle[] {
             reasons.push('인용구 사용');
         }
 
-        if (/\d+[년월일주시분초]|\d+살|\d+세|\d+억|\d+만|\d+명/.test(text)) {
+        const hasPeriod = /\d+[년월주일]\s*(차|째|만에|이용|사용|동안|후|전)?/.test(text);
+        const hasNumber = /\d+[만억원%명개세살]|\d+,\d+/.test(text);
+        if (hasNumber) {
             score += SCORE_CONFIG.weights.number;
-            reasons.push('구체적 숫자');
+            reasons.push('구체적 숫자(금액/비율/수치)');
+        } else if (hasPeriod) {
+            score += Math.floor(SCORE_CONFIG.weights.number / 2); // 기간은 절반 가점
+            reasons.push('기간 표현');
         }
 
         if (SCORE_CONFIG.keywords.emotion.some(w => text.includes(w))) {
@@ -200,8 +205,21 @@ export function processAutoPublishContent(aiOutput: string): TitleSelectionResul
         // 2. 점수화
         const scoredTitles = scoreTitles(titles);
 
+        // 2.5 후보 세트 단위 기간 편중 감점
+        const periodPattern = /\d+[년월주일]\s*(차|째|만에|이용|사용|동안|후|전)?/;
+        const periodCount = scoredTitles.filter(t => periodPattern.test(t.text)).length;
+        const adjustedTitles = periodCount <= 1 ? scoredTitles : (() => {
+            const sortedByScore = [...scoredTitles.filter(t => periodPattern.test(t.text))].sort((a, b) => b.score - a.score);
+            const penalizeIds = new Set(sortedByScore.slice(1).map(t => t.id));
+            console.log(`[TitleSelector] ⚠️ 기간 표현 ${periodCount}개 감지 → ${penalizeIds.size}개 감점`);
+            return scoredTitles.map(t => penalizeIds.has(t.id)
+                ? { ...t, score: Math.max(0, t.score - 10), reasons: [...t.reasons, '기간 편중 감점(-10)'] }
+                : t
+            );
+        })();
+
         // 3. 최적 제목 선택 (점수 내림차순)
-        const sortedTitles = [...scoredTitles].sort((a, b) => b.score - a.score);
+        const sortedTitles = [...adjustedTitles].sort((a, b) => b.score - a.score);
         const selectedTitle = sortedTitles[0];
 
         // 로그 출력

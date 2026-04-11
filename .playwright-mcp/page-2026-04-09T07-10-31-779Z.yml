@@ -1,0 +1,424 @@
+- generic [active] [ref=e1]:
+  - region "Notifications (F8)":
+    - list
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - link "Claude API Docs Home" [ref=e6] [cursor=pointer]:
+          - /url: /docs/en/home
+          - img "Claude API Docs" [ref=e7]
+        - button "Switch product surface" [ref=e11] [cursor=pointer]:
+          - text: Messages
+          - img [ref=e13]
+      - navigation [ref=e15]:
+        - list [ref=e16]:
+          - listitem [ref=e17]:
+            - link "Build" [ref=e18] [cursor=pointer]:
+              - /url: /docs/en/intro
+          - listitem [ref=e19]:
+            - link "Admin" [ref=e20] [cursor=pointer]:
+              - /url: /docs/en/build-with-claude/administration-api
+          - listitem [ref=e21]:
+            - link "Models & pricing" [ref=e22] [cursor=pointer]:
+              - /url: /docs/en/about-claude/models/overview
+          - listitem [ref=e23]:
+            - link "Client SDKs" [ref=e24] [cursor=pointer]:
+              - /url: /docs/en/api/client-sdks
+          - listitem [ref=e25]:
+            - link "API Reference" [ref=e26] [cursor=pointer]:
+              - /url: /docs/en/api/overview
+      - generic [ref=e28]:
+        - button [ref=e29] [cursor=pointer]:
+          - img [ref=e31]
+        - button "English" [ref=e33] [cursor=pointer]:
+          - text: English
+          - img [ref=e35]
+        - link "Log in" [ref=e37] [cursor=pointer]:
+          - /url: /login?returnTo=%2Fdocs%2Fen%2Fabout-claude%2Fmodels%2Fdeprecations
+          - button "Log in" [ref=e38]
+    - generic [ref=e40]:
+      - complementary [ref=e41]:
+        - button "Search documentation" [ref=e43] [cursor=pointer]:
+          - generic:
+            - generic:
+              - img
+          - generic [ref=e44]: Search...
+          - generic:
+            - generic: ⌘K
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]: First steps
+            - generic [ref=e50]:
+              - link "Intro to Claude" [ref=e51] [cursor=pointer]:
+                - /url: /docs/en/intro
+                - generic [ref=e53]: Intro to Claude
+              - link "Quickstart" [ref=e54] [cursor=pointer]:
+                - /url: /docs/en/get-started
+                - generic [ref=e56]: Quickstart
+          - generic [ref=e57]:
+            - generic [ref=e58]: Building with Claude
+            - generic [ref=e59]:
+              - link "Features overview" [ref=e60] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/overview
+                - generic [ref=e62]: Features overview
+              - link "Using the Messages API" [ref=e63] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/working-with-messages
+                - generic [ref=e65]: Using the Messages API
+              - link "Handling stop reasons" [ref=e66] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/handling-stop-reasons
+                - generic [ref=e68]: Handling stop reasons
+          - generic [ref=e69]:
+            - generic [ref=e70]: Model capabilities
+            - generic [ref=e71]:
+              - link "Extended thinking" [ref=e72] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/extended-thinking
+                - generic [ref=e74]: Extended thinking
+              - link "Adaptive thinking" [ref=e75] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/adaptive-thinking
+                - generic [ref=e77]: Adaptive thinking
+              - link "Effort" [ref=e78] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/effort
+                - generic [ref=e80]: Effort
+              - 'link "Fast mode (beta: research preview)" [ref=e81] [cursor=pointer]':
+                - /url: /docs/en/build-with-claude/fast-mode
+                - generic [ref=e83]: "Fast mode (beta: research preview)"
+              - link "Structured outputs" [ref=e84] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/structured-outputs
+                - generic [ref=e86]: Structured outputs
+              - link "Citations" [ref=e87] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/citations
+                - generic [ref=e89]: Citations
+              - link "Streaming Messages" [ref=e90] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/streaming
+                - generic [ref=e92]: Streaming Messages
+              - link "Batch processing" [ref=e93] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/batch-processing
+                - generic [ref=e95]: Batch processing
+              - link "Search results" [ref=e96] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/search-results
+                - generic [ref=e98]: Search results
+              - link "Streaming refusals" [ref=e99] [cursor=pointer]:
+                - /url: /docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals
+                - generic [ref=e101]: Streaming refusals
+              - link "Multilingual support" [ref=e102] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/multilingual-support
+                - generic [ref=e104]: Multilingual support
+              - link "Embeddings" [ref=e105] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/embeddings
+                - generic [ref=e107]: Embeddings
+          - generic [ref=e108]:
+            - generic [ref=e109]: Tools
+            - generic [ref=e110]:
+              - link "Overview" [ref=e111] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/overview
+                - generic [ref=e113]: Overview
+              - link "How tool use works" [ref=e114] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/how-tool-use-works
+                - generic [ref=e116]: How tool use works
+              - link "Web search tool" [ref=e117] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/web-search-tool
+                - generic [ref=e119]: Web search tool
+              - link "Web fetch tool" [ref=e120] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/web-fetch-tool
+                - generic [ref=e122]: Web fetch tool
+              - link "Code execution tool" [ref=e123] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/code-execution-tool
+                - generic [ref=e125]: Code execution tool
+              - link "Memory tool" [ref=e126] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/memory-tool
+                - generic [ref=e128]: Memory tool
+              - link "Bash tool" [ref=e129] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/bash-tool
+                - generic [ref=e131]: Bash tool
+              - link "Computer use tool" [ref=e132] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/computer-use-tool
+                - generic [ref=e134]: Computer use tool
+              - link "Text editor tool" [ref=e135] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/text-editor-tool
+                - generic [ref=e137]: Text editor tool
+          - generic [ref=e138]:
+            - generic [ref=e139]: Tool infrastructure
+            - generic [ref=e140]:
+              - link "Tool search" [ref=e141] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/tool-search-tool
+                - generic [ref=e143]: Tool search
+              - link "Programmatic tool calling" [ref=e144] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/programmatic-tool-calling
+                - generic [ref=e146]: Programmatic tool calling
+              - link "Fine-grained tool streaming" [ref=e147] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming
+                - generic [ref=e149]: Fine-grained tool streaming
+          - generic [ref=e150]:
+            - generic [ref=e151]: Context management
+            - generic [ref=e152]:
+              - link "Context windows" [ref=e153] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/context-windows
+                - generic [ref=e155]: Context windows
+              - link "Compaction" [ref=e156] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/compaction
+                - generic [ref=e158]: Compaction
+              - link "Context editing" [ref=e159] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/context-editing
+                - generic [ref=e161]: Context editing
+              - link "Prompt caching" [ref=e162] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/prompt-caching
+                - generic [ref=e164]: Prompt caching
+              - link "Token counting" [ref=e165] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/token-counting
+                - generic [ref=e167]: Token counting
+          - generic [ref=e168]:
+            - generic [ref=e169]: Working with files
+            - generic [ref=e170]:
+              - link "Files API" [ref=e171] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/files
+                - generic [ref=e173]: Files API
+              - link "PDF support" [ref=e174] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/pdf-support
+                - generic [ref=e176]: PDF support
+              - link "Images and vision" [ref=e177] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/vision
+                - generic [ref=e179]: Images and vision
+          - generic [ref=e180]:
+            - generic [ref=e181]: Skills
+            - generic [ref=e182]:
+              - link "Overview" [ref=e183] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/overview
+                - generic [ref=e185]: Overview
+              - link "Quickstart" [ref=e186] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/quickstart
+                - generic [ref=e188]: Quickstart
+              - link "Best practices" [ref=e189] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/best-practices
+                - generic [ref=e191]: Best practices
+              - link "Skills for enterprise" [ref=e192] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/agent-skills/enterprise
+                - generic [ref=e194]: Skills for enterprise
+              - link "Skills in the API" [ref=e195] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/skills-guide
+                - generic [ref=e197]: Skills in the API
+          - generic [ref=e198]:
+            - generic [ref=e199]: MCP
+            - generic [ref=e200]:
+              - link "Remote MCP servers" [ref=e201] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/remote-mcp-servers
+                - generic [ref=e203]: Remote MCP servers
+              - link "MCP connector" [ref=e204] [cursor=pointer]:
+                - /url: /docs/en/agents-and-tools/mcp-connector
+                - generic [ref=e206]: MCP connector
+          - generic [ref=e207]:
+            - generic [ref=e208]: Prompt engineering
+            - generic [ref=e209]:
+              - link "Overview" [ref=e210] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/prompt-engineering/overview
+                - generic [ref=e212]: Overview
+              - link "Prompting best practices" [ref=e213] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+                - generic [ref=e215]: Prompting best practices
+              - link "Console prompting tools" [ref=e216] [cursor=pointer]:
+                - /url: /docs/en/build-with-claude/prompt-engineering/prompting-tools
+                - generic [ref=e218]: Console prompting tools
+          - generic [ref=e219]:
+            - generic [ref=e220]: Test and evaluate
+            - generic [ref=e221]:
+              - link "Define success and build evaluations" [ref=e222] [cursor=pointer]:
+                - /url: /docs/en/test-and-evaluate/develop-tests
+                - generic [ref=e224]: Define success and build evaluations
+              - link "Using the Evaluation Tool in Console" [ref=e225] [cursor=pointer]:
+                - /url: /docs/en/test-and-evaluate/eval-tool
+                - generic [ref=e227]: Using the Evaluation Tool in Console
+              - link "Reducing latency" [ref=e228] [cursor=pointer]:
+                - /url: /docs/en/test-and-evaluate/strengthen-guardrails/reduce-latency
+                - generic [ref=e230]: Reducing latency
+          - generic [ref=e231]:
+            - generic [ref=e232]: Strengthen guardrails
+            - generic [ref=e233]:
+              - link "Reduce hallucinations" [ref=e234] [cursor=pointer]:
+                - /url: /docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations
+                - generic [ref=e236]: Reduce hallucinations
+              - link "Increase output consistency" [ref=e237] [cursor=pointer]:
+                - /url: /docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency
+                - generic [ref=e239]: Increase output consistency
+              - link "Mitigate jailbreaks" [ref=e240] [cursor=pointer]:
+                - /url: /docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks
+                - generic [ref=e242]: Mitigate jailbreaks
+              - link "Reduce prompt leak" [ref=e243] [cursor=pointer]:
+                - /url: /docs/en/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak
+                - generic [ref=e245]: Reduce prompt leak
+          - generic [ref=e246]:
+            - generic [ref=e247]: Resources
+            - generic [ref=e248]:
+              - link "Glossary" [ref=e249] [cursor=pointer]:
+                - /url: /docs/en/about-claude/glossary
+                - generic [ref=e251]: Glossary
+              - button "Use cases" [ref=e253] [cursor=pointer]:
+                - generic [ref=e254]: Use cases
+                - img [ref=e257]
+          - generic [ref=e259]:
+            - generic [ref=e260]: Release notes
+            - link "Claude Platform" [ref=e262] [cursor=pointer]:
+              - /url: /docs/en/release-notes/overview
+              - generic [ref=e264]: Claude Platform
+        - link "Console" [ref=e267] [cursor=pointer]:
+          - /url: /
+          - img [ref=e269]
+          - generic [ref=e272]: Console
+      - main [ref=e274]:
+        - generic [ref=e276]:
+          - img "Claude API Docs" [ref=e278]
+          - heading "Page Not Found" [level=2] [ref=e281]
+          - heading "The requested page could not be found." [level=3] [ref=e282]
+          - button "Go back" [ref=e284] [cursor=pointer]
+        - generic [ref=e286]:
+          - generic [ref=e287]:
+            - link "Claude API Docs home page" [ref=e289] [cursor=pointer]:
+              - /url: /docs
+              - img "Claude API Docs" [ref=e290]
+            - generic [ref=e293]:
+              - link "X (Twitter)" [ref=e294] [cursor=pointer]:
+                - /url: https://x.com/claudeai
+                - img [ref=e295]
+              - link "LinkedIn" [ref=e297] [cursor=pointer]:
+                - /url: https://www.linkedin.com/showcase/claude
+                - img [ref=e298]
+              - link "Instagram" [ref=e300] [cursor=pointer]:
+                - /url: https://instagram.com/claudeai
+                - img [ref=e301]
+          - generic [ref=e304]:
+            - generic [ref=e305]:
+              - generic [ref=e306]:
+                - heading "Solutions" [level=3] [ref=e307]
+                - list [ref=e308]:
+                  - listitem [ref=e309]:
+                    - link "AI agents" [ref=e310] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/agents
+                  - listitem [ref=e311]:
+                    - link "Code modernization" [ref=e312] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/code-modernization
+                  - listitem [ref=e313]:
+                    - link "Coding" [ref=e314] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/coding
+                  - listitem [ref=e315]:
+                    - link "Customer support" [ref=e316] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/customer-support
+                  - listitem [ref=e317]:
+                    - link "Education" [ref=e318] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/education
+                  - listitem [ref=e319]:
+                    - link "Financial services" [ref=e320] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/financial-services
+                  - listitem [ref=e321]:
+                    - link "Government" [ref=e322] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/government
+                  - listitem [ref=e323]:
+                    - link "Life sciences" [ref=e324] [cursor=pointer]:
+                      - /url: https://claude.com/solutions/life-sciences
+              - generic [ref=e325]:
+                - heading "Partners" [level=3] [ref=e326]
+                - list [ref=e327]:
+                  - listitem [ref=e328]:
+                    - link "Amazon Bedrock" [ref=e329] [cursor=pointer]:
+                      - /url: https://claude.com/partners/amazon-bedrock
+                  - listitem [ref=e330]:
+                    - link "Google Cloud's Vertex AI" [ref=e331] [cursor=pointer]:
+                      - /url: https://claude.com/partners/google-cloud-vertex-ai
+            - generic [ref=e332]:
+              - generic [ref=e333]:
+                - heading "Learn" [level=3] [ref=e334]
+                - list [ref=e335]:
+                  - listitem [ref=e336]:
+                    - link "Blog" [ref=e337] [cursor=pointer]:
+                      - /url: https://claude.com/blog
+                  - listitem [ref=e338]:
+                    - link "Catalog" [ref=e339] [cursor=pointer]:
+                      - /url: https://claude.ai/catalog/artifacts
+                  - listitem [ref=e340]:
+                    - link "Courses" [ref=e341] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/learn
+                  - listitem [ref=e342]:
+                    - link "Use cases" [ref=e343] [cursor=pointer]:
+                      - /url: https://claude.com/resources/use-cases
+                  - listitem [ref=e344]:
+                    - link "Connectors" [ref=e345] [cursor=pointer]:
+                      - /url: https://claude.com/partners/mcp
+                  - listitem [ref=e346]:
+                    - link "Customer stories" [ref=e347] [cursor=pointer]:
+                      - /url: https://claude.com/customers
+                  - listitem [ref=e348]:
+                    - link "Engineering at Anthropic" [ref=e349] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/engineering
+                  - listitem [ref=e350]:
+                    - link "Events" [ref=e351] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/events
+                  - listitem [ref=e352]:
+                    - link "Powered by Claude" [ref=e353] [cursor=pointer]:
+                      - /url: https://claude.com/partners/powered-by-claude
+                  - listitem [ref=e354]:
+                    - link "Service partners" [ref=e355] [cursor=pointer]:
+                      - /url: https://claude.com/partners/services
+                  - listitem [ref=e356]:
+                    - link "Startups program" [ref=e357] [cursor=pointer]:
+                      - /url: https://claude.com/programs/startups
+              - generic [ref=e358]:
+                - heading "Company" [level=3] [ref=e359]
+                - list [ref=e360]:
+                  - listitem [ref=e361]:
+                    - link "Anthropic" [ref=e362] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/company
+                  - listitem [ref=e363]:
+                    - link "Careers" [ref=e364] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/careers
+                  - listitem [ref=e365]:
+                    - link "Economic Futures" [ref=e366] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/economic-futures
+                  - listitem [ref=e367]:
+                    - link "Research" [ref=e368] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/research
+                  - listitem [ref=e369]:
+                    - link "News" [ref=e370] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/news
+                  - listitem [ref=e371]:
+                    - link "Responsible Scaling Policy" [ref=e372] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy
+                  - listitem [ref=e373]:
+                    - link "Security and compliance" [ref=e374] [cursor=pointer]:
+                      - /url: https://trust.anthropic.com
+                  - listitem [ref=e375]:
+                    - link "Transparency" [ref=e376] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/transparency
+            - generic [ref=e377]:
+              - generic [ref=e378]:
+                - heading "Help and security" [level=3] [ref=e379]
+                - list [ref=e380]:
+                  - listitem [ref=e381]:
+                    - link "Availability" [ref=e382] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/supported-countries
+                  - listitem [ref=e383]:
+                    - link "Status" [ref=e384] [cursor=pointer]:
+                      - /url: https://status.claude.com/
+                  - listitem [ref=e385]:
+                    - link "Support" [ref=e386] [cursor=pointer]:
+                      - /url: https://support.claude.com/
+                  - listitem [ref=e387]:
+                    - link "Discord" [ref=e388] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/discord
+              - generic [ref=e389]:
+                - heading "Terms and policies" [level=3] [ref=e390]
+                - list [ref=e391]:
+                  - listitem [ref=e392]:
+                    - link "Privacy policy" [ref=e393] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/legal/privacy
+                  - listitem [ref=e394]:
+                    - link "Responsible disclosure policy" [ref=e395] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/responsible-disclosure-policy
+                  - listitem [ref=e396]:
+                    - 'link "Terms of service: Commercial" [ref=e397] [cursor=pointer]':
+                      - /url: https://www.anthropic.com/legal/commercial-terms
+                  - listitem [ref=e398]:
+                    - 'link "Terms of service: Consumer" [ref=e399] [cursor=pointer]':
+                      - /url: https://www.anthropic.com/legal/consumer-terms
+                  - listitem [ref=e400]:
+                    - link "Usage policy" [ref=e401] [cursor=pointer]:
+                      - /url: https://www.anthropic.com/legal/aup
+  - button "Ask Docs" [ref=e405] [cursor=pointer]:
+    - generic [ref=e406]: Ask Docs
+  - alert [ref=e407]

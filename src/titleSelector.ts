@@ -99,10 +99,15 @@ export function scoreTitles(titles: ParsedTitle[]): ParsedTitle[] {
       reasons.push('따옴표 인용');
     }
     
-    // 3. 숫자/기간 포함
-    if (/\d+[년월일주시분초]|\d+살|\d+세|\d+억|\d+만/.test(text)) {
+    // 3. 구체성 포함 (숫자, 금액, 비율 등 — 기간만이 아님)
+    const hasPeriod = /\d+[년월주일]\s*(차|째|만에|이용|사용|동안|후|전)?/.test(text);
+    const hasNumber = /\d+[만억원%명개세살]|\d+,\d+/.test(text);
+    if (hasNumber) {
       score += 10;
-      reasons.push('구체적 숫자/기간');
+      reasons.push('구체적 숫자(금액/비율/수치)');
+    } else if (hasPeriod) {
+      score += 5; // 기간도 구체성이지만 남용 방지를 위해 가점 축소
+      reasons.push('기간 표현');
     }
     
     // 4. 감정 단어 포함
@@ -152,13 +157,44 @@ export function scoreTitles(titles: ParsedTitle[]): ParsedTitle[] {
 }
 
 /**
+ * 후보 세트 단위 기간 편중 감점
+ * 전체 후보 중 기간 표현이 2개 이상이면 초과분에 감점 적용
+ */
+function penalizePeriodOveruse(titles: ParsedTitle[]): ParsedTitle[] {
+  const periodPattern = /\d+[년월주일]\s*(차|째|만에|이용|사용|동안|후|전)?/;
+  const periodTitles = titles.filter(t => periodPattern.test(t.text));
+
+  if (periodTitles.length <= 1) return titles; // 1개 이하면 감점 없음
+
+  // 기간 제목을 점수 낮은 순으로 감점 (가장 높은 1개는 유지)
+  const sortedPeriod = [...periodTitles].sort((a, b) => b.score - a.score);
+  const toPenalize = new Set(sortedPeriod.slice(1).map(t => t.id));
+
+  console.log(`[TitleSelector] ⚠️ 기간 표현 ${periodTitles.length}개 감지 → ${toPenalize.size}개 감점`);
+
+  return titles.map(t => {
+    if (toPenalize.has(t.id)) {
+      return {
+        ...t,
+        score: Math.max(0, t.score - 10),
+        reasons: [...t.reasons, '기간 편중 감점(-10)']
+      };
+    }
+    return t;
+  });
+}
+
+/**
  * 최적 제목 선택
  */
 export function selectBestTitle(titles: ParsedTitle[]): ParsedTitle | null {
   if (titles.length === 0) return null;
-  
+
+  // 후보 세트 단위 기간 편중 감점 적용
+  const adjusted = penalizePeriodOveruse(titles);
+
   // 점수 기준 정렬
-  const sorted = [...titles].sort((a, b) => b.score - a.score);
+  const sorted = [...adjusted].sort((a, b) => b.score - a.score);
   
   console.log('[TitleSelector] 제목 점수화 결과:');
   sorted.forEach((t, i) => {

@@ -1,0 +1,819 @@
+- generic [active] [ref=e1]:
+  - link "기본 콘텐츠로 건너뛰기" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - region "ai.google.dev 은(는) 서비스 제공 및 서비스 품질 개선과 트래픽 분석을 위해 쿠키를 사용합니다. 동의 시 광고를 게재하고 표시되는 콘텐츠 및 광고를 맞춤설정하는 데도 쿠키가 사용됩니다." [ref=e4]:
+      - paragraph [ref=e5]:
+        - text: ai.google.dev 은(는) 서비스 제공 및 서비스 품질 개선과 트래픽 분석을 위해 쿠키를 사용합니다. 동의 시 광고를 게재하고 표시되는 콘텐츠 및 광고를 맞춤설정하는 데도 쿠키가 사용됩니다.
+        - link "Google에서 쿠키를 사용하는 방법을 자세히 알아보세요. 새 탭에서 열립니다." [ref=e6] [cursor=pointer]:
+          - /url: https://policies.google.com/technologies/cookies?hl=ko
+          - text: 자세히 알아보세요
+      - button "동의함" [ref=e7] [cursor=pointer]
+      - button "나중에" [ref=e8] [cursor=pointer]
+    - banner:
+      - generic:
+        - generic [ref=e11]:
+          - text: menu
+          - generic [ref=e12]:
+            - link "Gemini API" [ref=e13] [cursor=pointer]:
+              - /url: /
+              - img "Gemini API" [ref=e15]
+            - generic:
+              - list:
+                - listitem
+          - generic [ref=e20]:
+            - combobox "검색" [ref=e21]
+            - img [ref=e23]
+            - generic [ref=e26]: /
+          - generic [ref=e27]:
+            - button "테마:" [ref=e28] [cursor=pointer]: light_mode
+            - text: light_mode dark_mode brightness_medium
+          - generic "원하는 언어를 선택하세요." [ref=e29]:
+            - button "Language" [ref=e30] [cursor=pointer]:
+              - img
+              - generic [ref=e31]: Language
+              - img
+          - link "API 키 가져오기" [ref=e32] [cursor=pointer]:
+            - /url: https://aistudio.google.com/apikey?hl=ko
+          - link "설명서" [ref=e33] [cursor=pointer]:
+            - /url: https://github.com/google-gemini/cookbook
+          - link "커뮤니티" [ref=e34] [cursor=pointer]:
+            - /url: https://discuss.ai.google.dev/c/gemini-api/?hl=ko
+        - navigation "하단 탭" [ref=e40]:
+          - link "문서, selected" [ref=e42] [cursor=pointer]:
+            - /url: https://ai.google.dev/gemini-api/docs?hl=ko
+            - text: 문서
+          - link "API 참조 문서" [ref=e44] [cursor=pointer]:
+            - /url: https://ai.google.dev/api?hl=ko
+          - text: arrow_drop_down
+    - generic [ref=e46]:
+      - text: filter_list close
+      - navigation "사이드 메뉴" [ref=e47]:
+        - text: arrow_back
+        - list [ref=e50]:
+          - listitem [ref=e51]:
+            - generic [ref=e53]: 시작하기
+          - listitem [ref=e54]:
+            - link "개요" [ref=e55] [cursor=pointer]:
+              - /url: /gemini-api/docs
+              - generic [ref=e56]: 개요
+          - listitem [ref=e57]:
+            - link "빠른 시작" [ref=e58] [cursor=pointer]:
+              - /url: /gemini-api/docs/quickstart
+              - generic [ref=e59]: 빠른 시작
+          - listitem [ref=e60]:
+            - link "API 키" [ref=e61] [cursor=pointer]:
+              - /url: /gemini-api/docs/api-key
+              - generic [ref=e62]: API 키
+          - listitem [ref=e63]:
+            - link "라이브러리" [ref=e64] [cursor=pointer]:
+              - /url: /gemini-api/docs/libraries
+              - generic [ref=e65]: 라이브러리
+          - listitem [ref=e66]:
+            - link "가격 책정" [ref=e67] [cursor=pointer]:
+              - /url: /gemini-api/docs/pricing
+              - generic [ref=e68]: 가격 책정
+          - listitem [ref=e69]:
+            - link "Interactions API" [ref=e70] [cursor=pointer]:
+              - /url: /gemini-api/docs/interactions
+              - generic [ref=e71]: Interactions API
+          - listitem [ref=e73]:
+            - link "코딩 에이전트 설정" [ref=e74] [cursor=pointer]:
+              - /url: /gemini-api/docs/coding-agents
+              - generic [ref=e75]: 코딩 에이전트 설정
+          - listitem [ref=e76]:
+            - generic [ref=e78]: 모델
+          - listitem [ref=e79]:
+            - link "모든 모델" [ref=e80] [cursor=pointer]:
+              - /url: /gemini-api/docs/models
+              - generic [ref=e81]: 모든 모델
+          - listitem [ref=e82]:
+            - link "Gemini 3" [ref=e83] [cursor=pointer]:
+              - /url: /gemini-api/docs/gemini-3
+              - generic [ref=e84]: Gemini 3
+          - listitem [ref=e86]:
+            - link "Nano Banana" [ref=e87] [cursor=pointer]:
+              - /url: /gemini-api/docs/image-generation
+              - generic [ref=e88]: Nano Banana
+          - listitem [ref=e89]:
+            - link "Veo" [ref=e90] [cursor=pointer]:
+              - /url: /gemini-api/docs/video
+              - generic [ref=e91]: Veo
+          - listitem [ref=e92]:
+            - link "Lyria 3" [ref=e93] [cursor=pointer]:
+              - /url: /gemini-api/docs/music-generation
+              - generic [ref=e94]: Lyria 3
+          - listitem [ref=e96]:
+            - link "Lyria RealTime" [ref=e97] [cursor=pointer]:
+              - /url: /gemini-api/docs/realtime-music-generation
+              - generic [ref=e98]:
+                - text: Lyria Real
+                - text: Time
+          - listitem [ref=e100]:
+            - link "Imagen" [ref=e101] [cursor=pointer]:
+              - /url: /gemini-api/docs/imagen
+              - generic [ref=e102]: Imagen
+          - listitem [ref=e103]:
+            - link "TTS(text-to-speech)" [ref=e104] [cursor=pointer]:
+              - /url: /gemini-api/docs/speech-generation
+              - generic [ref=e105]:
+                - text: TTS(
+                - text: text-to-speech)
+          - listitem [ref=e106]:
+            - link "임베딩" [ref=e107] [cursor=pointer]:
+              - /url: /gemini-api/docs/embeddings
+              - generic [ref=e108]: 임베딩
+          - listitem [ref=e109]:
+            - link "로봇공학" [ref=e110] [cursor=pointer]:
+              - /url: /gemini-api/docs/robotics-overview
+              - generic [ref=e111]: 로봇공학
+          - listitem [ref=e113]:
+            - generic [ref=e115]: 핵심 기능
+          - listitem [ref=e116]:
+            - link "텍스트" [ref=e117] [cursor=pointer]:
+              - /url: /gemini-api/docs/text-generation
+              - generic [ref=e118]: 텍스트
+          - listitem [ref=e119]:
+            - generic [ref=e120]:
+              - text: arrow_drop_down
+              - button "이미지 " [ref=e121] [cursor=pointer]:
+                - generic [ref=e122]: 이미지
+                - text: 
+          - listitem [ref=e123]:
+            - generic [ref=e124]:
+              - text: arrow_drop_down
+              - button "동영상 " [ref=e125] [cursor=pointer]:
+                - generic [ref=e126]: 동영상
+                - text: 
+          - listitem [ref=e127]:
+            - link "문서" [ref=e128] [cursor=pointer]:
+              - /url: /gemini-api/docs/document-processing
+              - generic [ref=e129]: 문서
+          - listitem [ref=e130]:
+            - generic [ref=e131]:
+              - text: arrow_drop_down
+              - button "음성 및 오디오 " [ref=e132] [cursor=pointer]:
+                - generic [ref=e133]: 음성 및 오디오
+                - text: 
+          - listitem [ref=e134]:
+            - generic [ref=e135]:
+              - text: arrow_drop_down
+              - button "사고 " [ref=e136] [cursor=pointer]:
+                - generic [ref=e137]: 사고
+                - text: 
+          - listitem [ref=e138]:
+            - link "구조화된 출력" [ref=e139] [cursor=pointer]:
+              - /url: /gemini-api/docs/structured-output
+              - generic [ref=e140]: 구조화된 출력
+          - listitem [ref=e141]:
+            - link "함수 호출" [ref=e142] [cursor=pointer]:
+              - /url: /gemini-api/docs/function-calling
+              - generic [ref=e143]: 함수 호출
+          - listitem [ref=e144]:
+            - link "긴 컨텍스트" [ref=e145] [cursor=pointer]:
+              - /url: /gemini-api/docs/long-context
+              - generic [ref=e146]: 긴 컨텍스트
+          - listitem [ref=e147]:
+            - generic [ref=e149]: 에이전트
+          - listitem [ref=e150]:
+            - link "개요" [ref=e151] [cursor=pointer]:
+              - /url: /gemini-api/docs/agents
+              - generic [ref=e152]: 개요
+          - listitem [ref=e153]:
+            - link "Deep Research 에이전트" [ref=e154] [cursor=pointer]:
+              - /url: /gemini-api/docs/deep-research
+              - generic [ref=e155]: Deep Research 에이전트
+          - listitem [ref=e157]:
+            - generic [ref=e159]: 도구
+          - listitem [ref=e160]:
+            - link "개요" [ref=e161] [cursor=pointer]:
+              - /url: /gemini-api/docs/tools
+              - generic [ref=e162]: 개요
+          - listitem [ref=e163]:
+            - link "Google Search" [ref=e164] [cursor=pointer]:
+              - /url: /gemini-api/docs/google-search
+              - generic [ref=e165]: Google Search
+          - listitem [ref=e166]:
+            - link "Google Maps" [ref=e167] [cursor=pointer]:
+              - /url: /gemini-api/docs/maps-grounding
+              - generic [ref=e168]: Google Maps
+          - listitem [ref=e169]:
+            - link "코드 실행" [ref=e170] [cursor=pointer]:
+              - /url: /gemini-api/docs/code-execution
+              - generic [ref=e171]: 코드 실행
+          - listitem [ref=e172]:
+            - link "URL 컨텍스트" [ref=e173] [cursor=pointer]:
+              - /url: /gemini-api/docs/url-context
+              - generic [ref=e174]: URL 컨텍스트
+          - listitem [ref=e175]:
+            - link "Computer Use" [ref=e176] [cursor=pointer]:
+              - /url: /gemini-api/docs/computer-use
+              - generic [ref=e177]: Computer Use
+          - listitem [ref=e179]:
+            - link "파일 검색" [ref=e180] [cursor=pointer]:
+              - /url: /gemini-api/docs/file-search
+              - generic [ref=e181]: 파일 검색
+          - listitem [ref=e182]:
+            - link "도구와 함수 호출 결합" [ref=e183] [cursor=pointer]:
+              - /url: /gemini-api/docs/tool-combination
+              - generic [ref=e184]: 도구와 함수 호출 결합
+          - listitem [ref=e186]:
+            - generic [ref=e188]: Live API
+          - listitem [ref=e189]:
+            - link "개요" [ref=e190] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api
+              - generic [ref=e191]: 개요
+          - listitem [ref=e193]:
+            - generic [ref=e194]:
+              - text: arrow_drop_down
+              - button "시작하기 " [ref=e195] [cursor=pointer]:
+                - generic [ref=e196]: 시작하기
+                - text: 
+          - listitem [ref=e197]:
+            - link "기능" [ref=e198] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api/capabilities
+              - generic [ref=e199]: 기능
+          - listitem [ref=e200]:
+            - link "도구 사용" [ref=e201] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api/tools
+              - generic [ref=e202]: 도구 사용
+          - listitem [ref=e203]:
+            - link "세션 관리" [ref=e204] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api/session-management
+              - generic [ref=e205]: 세션 관리
+          - listitem [ref=e206]:
+            - link "임시 토큰" [ref=e207] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api/ephemeral-tokens
+              - generic [ref=e208]: 임시 토큰
+          - listitem [ref=e209]:
+            - link "권장사항" [ref=e210] [cursor=pointer]:
+              - /url: /gemini-api/docs/live-api/best-practices
+              - generic [ref=e211]: 권장사항
+          - listitem [ref=e212]:
+            - generic [ref=e214]: 최적화
+          - listitem [ref=e215]:
+            - link "개요" [ref=e216] [cursor=pointer]:
+              - /url: /gemini-api/docs/optimization
+              - generic [ref=e217]: 개요
+          - listitem [ref=e218]:
+            - link "Batch API" [ref=e219] [cursor=pointer]:
+              - /url: /gemini-api/docs/batch-api
+              - generic [ref=e220]: Batch API
+          - listitem [ref=e221]:
+            - link "플렉스 추론" [ref=e222] [cursor=pointer]:
+              - /url: /gemini-api/docs/flex-inference
+              - generic [ref=e223]: 플렉스 추론
+          - listitem [ref=e225]:
+            - link "우선순위 추론" [ref=e226] [cursor=pointer]:
+              - /url: /gemini-api/docs/priority-inference
+              - generic [ref=e227]: 우선순위 추론
+          - listitem [ref=e229]:
+            - link "컨텍스트 캐싱" [ref=e230] [cursor=pointer]:
+              - /url: /gemini-api/docs/caching
+              - generic [ref=e231]: 컨텍스트 캐싱
+          - listitem [ref=e232]:
+            - generic [ref=e234]: 가이드
+          - listitem [ref=e235]:
+            - generic [ref=e236]:
+              - text: arrow_drop_down
+              - button "파일 입력 " [ref=e237] [cursor=pointer]:
+                - generic [ref=e238]: 파일 입력
+                - text: 
+          - listitem [ref=e239]:
+            - link "OpenAI 호환성" [ref=e240] [cursor=pointer]:
+              - /url: /gemini-api/docs/openai
+              - generic [ref=e241]: OpenAI 호환성
+          - listitem [ref=e242]:
+            - link "미디어 해상도" [ref=e243] [cursor=pointer]:
+              - /url: /gemini-api/docs/media-resolution
+              - generic [ref=e244]: 미디어 해상도
+          - listitem [ref=e245]:
+            - link "토큰 수 계산" [ref=e246] [cursor=pointer]:
+              - /url: /gemini-api/docs/tokens
+              - generic [ref=e247]: 토큰 수 계산
+          - listitem [ref=e248]:
+            - link "프롬프트 엔지니어링" [ref=e249] [cursor=pointer]:
+              - /url: /gemini-api/docs/prompting-strategies
+              - generic [ref=e250]: 프롬프트 엔지니어링
+          - listitem [ref=e251]:
+            - generic [ref=e252]:
+              - text: arrow_drop_down
+              - button "로그 및 데이터 세트 " [ref=e253] [cursor=pointer]:
+                - generic [ref=e254]: 로그 및 데이터 세트
+                - text: 
+          - listitem [ref=e255]:
+            - generic [ref=e256]:
+              - text: arrow_drop_down
+              - button "안전 " [ref=e257] [cursor=pointer]:
+                - generic [ref=e258]: 안전
+                - text: 
+          - listitem [ref=e259]:
+            - generic [ref=e260]:
+              - text: arrow_drop_down
+              - button "프레임워크 " [ref=e261] [cursor=pointer]:
+                - generic [ref=e262]: 프레임워크
+                - text: 
+          - listitem [ref=e263]:
+            - generic [ref=e265]: 리소스
+          - listitem [ref=e266]:
+            - link "출시 노트" [ref=e267] [cursor=pointer]:
+              - /url: /gemini-api/docs/changelog
+              - generic [ref=e268]: 출시 노트
+          - listitem [ref=e269]:
+            - link "지원 중단" [ref=e270] [cursor=pointer]:
+              - /url: /gemini-api/docs/deprecations
+              - generic [ref=e271]: 지원 중단
+          - listitem [ref=e272]:
+            - link "비율 제한" [ref=e273] [cursor=pointer]:
+              - /url: /gemini-api/docs/rate-limits
+              - generic [ref=e274]: 비율 제한
+          - listitem [ref=e275]:
+            - link "결제 정보" [ref=e276] [cursor=pointer]:
+              - /url: /gemini-api/docs/billing
+              - generic [ref=e277]: 결제 정보
+          - listitem [ref=e278]:
+            - link "Gen AI SDK로 이전" [ref=e279] [cursor=pointer]:
+              - /url: /gemini-api/docs/migrate
+              - generic [ref=e280]: Gen AI SDK로 이전
+          - listitem [ref=e281]:
+            - link "API 문제 해결" [ref=e282] [cursor=pointer]:
+              - /url: /gemini-api/docs/troubleshooting
+              - generic [ref=e283]: API 문제 해결
+          - listitem [ref=e284]:
+            - link "파트너 및 라이브러리 통합" [ref=e285] [cursor=pointer]:
+              - /url: /gemini-api/docs/partner-integration
+              - generic [ref=e286]: 파트너 및 라이브러리 통합
+          - listitem [ref=e287]:
+            - generic [ref=e288]:
+              - text: arrow_drop_down
+              - button "Google AI Studio " [ref=e289] [cursor=pointer]:
+                - generic [ref=e290]: Google AI Studio
+                - text: 
+          - listitem [ref=e291]:
+            - generic [ref=e292]:
+              - text: arrow_drop_down
+              - button "Google Cloud Platform " [ref=e293] [cursor=pointer]:
+                - generic [ref=e294]: Google Cloud Platform
+                - text: 
+          - listitem [ref=e295]:
+            - generic [ref=e297]: 정책
+          - listitem [ref=e298]:
+            - link "서비스 약관" [ref=e299] [cursor=pointer]:
+              - /url: /gemini-api/terms
+              - generic [ref=e300]: 서비스 약관
+          - listitem [ref=e301]:
+            - link "사용 가능한 리전" [ref=e302] [cursor=pointer]:
+              - /url: /gemini-api/docs/available-regions
+              - generic [ref=e303]: 사용 가능한 리전
+          - listitem [ref=e304]:
+            - link "악용 모니터링" [ref=e305] [cursor=pointer]:
+              - /url: /gemini-api/docs/usage-policies
+              - generic [ref=e306]: 악용 모니터링
+          - listitem [ref=e307]:
+            - link "의견 정보" [ref=e308] [cursor=pointer]:
+              - /url: /gemini-api/docs/feedback-policies
+              - generic [ref=e309]: 의견 정보
+    - button "측면 탐색 숨기기" [expanded] [ref=e310] [cursor=pointer]:
+      - generic [ref=e311]: chevron_left
+    - generic [ref=e312]:
+      - main [ref=e313]:
+        - generic [ref=e314]:
+          - article [ref=e315]:
+            - generic [ref=e318]:
+              - text: 새로운 고속의 비용 효율적인
+              - link "Veo 3.1 Lite" [ref=e319] [cursor=pointer]:
+                - /url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=ko
+              - text: 모델을 사용하여 대규모로 동영상을 생성해 보세요.
+            - navigation [ref=e320]:
+              - list "탐색경로" [ref=e321]:
+                - listitem [ref=e322]:
+                  - link "홈" [ref=e323] [cursor=pointer]:
+                    - /url: https://ai.google.dev/?hl=ko
+                - listitem [ref=e324]:
+                  - generic [ref=e325]: chevron_right
+                  - link "Gemini API" [ref=e326] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api?hl=ko
+                - listitem [ref=e327]:
+                  - generic [ref=e328]: chevron_right
+                  - link "문서" [ref=e329] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/docs?hl=ko
+            - heading "모델 LLM 도구" [level=1] [ref=e330]:
+              - text: 모델
+              - group "LLM 도구" [ref=e333]:
+                - button "페이지를 마크다운으로 복사" [ref=e335] [cursor=pointer]:
+                  - generic [ref=e336]: content_copy
+                - button "LLM 도구 옵션 더보기" [ref=e339] [cursor=pointer]: arrow_drop_down
+            - list [ref=e341]:
+              - listitem [ref=e342]:
+                - heading "이 페이지의 내용" [level=2] [ref=e343]:
+                  - generic [ref=e344]: 이 페이지의 내용
+                - button "expand_more" [ref=e345] [cursor=pointer]
+              - listitem [ref=e346]:
+                - link "Gemini 3" [ref=e347] [cursor=pointer]:
+                  - /url: "#gemini-3"
+                  - generic [ref=e348]: Gemini 3
+              - listitem [ref=e349]:
+                - link "Gemini 2.5 Flash" [ref=e350] [cursor=pointer]:
+                  - /url: "#gemini_25_flash"
+                  - generic [ref=e351]: Gemini 2.5 Flash
+              - listitem [ref=e352]:
+                - link "Gemini 2.5 Flash-Lite" [ref=e353] [cursor=pointer]:
+                  - /url: "#gemini_25_flash-lite"
+                  - generic [ref=e354]: Gemini 2.5 Flash-Lite
+              - listitem [ref=e355]:
+                - link "Gemini 2.5 Pro" [ref=e356] [cursor=pointer]:
+                  - /url: "#gemini_25_pro"
+                  - generic [ref=e357]: Gemini 2.5 Pro
+              - listitem [ref=e358]:
+                - link "오디오 모델" [ref=e359] [cursor=pointer]:
+                  - /url: "#audio_models"
+                  - generic [ref=e360]: 오디오 모델
+              - listitem [ref=e361]:
+                - button "more_horiz" [ref=e362] [cursor=pointer]
+            - generic [ref=e363]:
+              - paragraph
+              - paragraph
+              - complementary [ref=e364]:
+                - paragraph [ref=e365]:
+                  - link "서비스 약관이 업데이트되었습니다." [ref=e366] [cursor=pointer]:
+                    - /url: https://ai.google.dev/gemini-api/terms?hl=ko
+              - separator [ref=e367]
+              - heading "Gemini 3 이 섹션에 대한 링크 복사. Gemini 3" [level=2] [ref=e368]:
+                - heading "Gemini 3" [level=2] [ref=e369]
+                - button "이 섹션에 대한 링크 복사. Gemini 3" [ref=e370] [cursor=pointer]: link
+              - generic [ref=e371]:
+                - link "Gemini 3.1 Pro 이 섹션에 대한 링크 복사. Gemini 3.1 Pro 고급 인텔리전스, 복잡한 문제 해결 기술, 강력한 에이전트형 및 바이브 코딩 기능 새로운 프리뷰" [ref=e372] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ko
+                  - generic [ref=e373]:
+                    - generic [ref=e374]: auto_awesome
+                    - heading "Gemini 3.1 Pro 이 섹션에 대한 링크 복사. Gemini 3.1 Pro" [level=3] [ref=e375]:
+                      - heading "Gemini 3.1 Pro" [level=3] [ref=e376]:
+                        - text: Gemini 3.
+                        - text: 1 Pro
+                      - button "이 섹션에 대한 링크 복사. Gemini 3.1 Pro" [ref=e377]: link
+                  - paragraph [ref=e378]: 고급 인텔리전스, 복잡한 문제 해결 기술, 강력한 에이전트형 및 바이브 코딩 기능
+                  - paragraph [ref=e379]:
+                    - generic [ref=e380]: 새로운
+                    - text: 프리뷰
+                - link "Gemini 3 Flash 이 섹션에 대한 링크 복사. Gemini 3 Flash 비용은 훨씬 적게 들면서 더 큰 모델과 경쟁할 수 있는 최첨단 성능 프리뷰" [ref=e381] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ko
+                  - generic [ref=e382]:
+                    - generic [ref=e383]: spark
+                    - heading "Gemini 3 Flash 이 섹션에 대한 링크 복사. Gemini 3 Flash" [level=3] [ref=e384]:
+                      - heading "Gemini 3 Flash" [level=3] [ref=e385]
+                      - button "이 섹션에 대한 링크 복사. Gemini 3 Flash" [ref=e386]: link
+                  - paragraph [ref=e387]: 비용은 훨씬 적게 들면서 더 큰 모델과 경쟁할 수 있는 최첨단 성능
+                  - paragraph [ref=e388]: 프리뷰
+                - link "Gemini 3.1 Flash-Lite 이 섹션에 대한 링크 복사. Gemini 3.1 Flash-Lite 비용은 훨씬 적게 들면서 더 큰 모델과 경쟁할 수 있는 최첨단 성능 새로운 프리뷰" [ref=e389] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ko
+                  - generic [ref=e390]:
+                    - generic [ref=e391]: bolt
+                    - heading "Gemini 3.1 Flash-Lite 이 섹션에 대한 링크 복사. Gemini 3.1 Flash-Lite" [level=3] [ref=e392]:
+                      - heading "Gemini 3.1 Flash-Lite" [level=3] [ref=e393]:
+                        - text: Gemini 3.
+                        - text: 1 Flash-Lite
+                      - button "이 섹션에 대한 링크 복사. Gemini 3.1 Flash-Lite" [ref=e394]: link
+                  - paragraph [ref=e395]: 비용은 훨씬 적게 들면서 더 큰 모델과 경쟁할 수 있는 최첨단 성능
+                  - paragraph [ref=e396]:
+                    - generic [ref=e397]: 새로운
+                    - text: 프리뷰
+                - link "Nano Banana 2 속도와 대용량 사용 사례에 최적화된 강력하고 효율적인 이미지 생성 및 편집 프리뷰" [ref=e398] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=ko
+                  - generic [ref=e399]:
+                    - generic [ref=e400]: 🍌🍌
+                    - heading "Nano Banana 2" [level=3] [ref=e401]
+                  - paragraph [ref=e402]: 속도와 대용량 사용 사례에 최적화된 강력하고 효율적인 이미지 생성 및 편집
+                  - paragraph [ref=e403]: 프리뷰
+                - link "Nano Banana Pro 상황에 맞는 네이티브 이미지 생성을 위한 최첨단 이미지 생성 및 편집 모델 프리뷰" [ref=e404] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=ko
+                  - generic [ref=e405]:
+                    - generic [ref=e406]: 🍌
+                    - heading "Nano Banana Pro" [level=3] [ref=e407]
+                  - paragraph [ref=e408]: 상황에 맞는 네이티브 이미지 생성을 위한 최첨단 이미지 생성 및 편집 모델
+                  - paragraph [ref=e409]: 프리뷰
+                - link "Gemini 3.1 Flash Live 실시간 대화 및 음성 우선 AI 애플리케이션을 위한 고품질의 지연 시간이 짧은 Live API 모델 새로운 프리뷰" [ref=e410] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ko
+                  - generic [ref=e411]:
+                    - generic [ref=e412]: settings_voice
+                    - heading "Gemini 3.1 Flash Live" [level=3] [ref=e413]:
+                      - text: Gemini 3.
+                      - text: 1 Flash Live
+                  - paragraph [ref=e414]: 실시간 대화 및 음성 우선 AI 애플리케이션을 위한 고품질의 지연 시간이 짧은 Live API 모델
+                  - paragraph [ref=e415]:
+                    - generic [ref=e416]: 새로운
+                    - text: 프리뷰
+              - complementary [ref=e417]:
+                - text: "warning 경고: Gemini 3 Pro 프리뷰는"
+                - link "지원 중단되었으며" [ref=e418] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
+                - text: 2026년 3월 9일에 종료되었습니다. 서비스 중단을 방지하려면
+                - link "Gemini 3.1 Pro 프리뷰" [ref=e419] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ko
+                - text: 로 마이그레이션하세요.
+              - separator [ref=e420]
+              - heading "Gemini 2.5 Flash" [level=2] [ref=e421]:
+                - text: Gemini 2.
+                - text: 5 Flash
+              - generic [ref=e422]:
+                - generic [ref=e423]:
+                  - generic [ref=e425]: bolt
+                  - generic [ref=e426]:
+                    - heading "Gemini 2.5 Flash" [level=3] [ref=e427]:
+                      - link "Gemini 2.5 Flash" [ref=e428] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ko
+                        - text: Gemini 2.
+                        - text: 5 Flash
+                    - paragraph [ref=e429]: 추론이 필요한 지연 시간이 짧은 대용량 작업을 위한 최고의 가격 대비 성능 모델
+                - generic [ref=e430]:
+                  - generic [ref=e432]: image_search
+                  - generic [ref=e433]:
+                    - heading "Nano Banana" [level=3] [ref=e434]:
+                      - link "Nano Banana" [ref=e435] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ko
+                    - paragraph [ref=e436]: 빠른 창작 워크플로를 위해 설계된 최첨단 네이티브 이미지 생성 및 편집
+                - generic [ref=e437]:
+                  - generic [ref=e439]: settings_voice
+                  - generic [ref=e440]:
+                    - heading "Gemini 2.5 Flash Live Preview" [level=3] [ref=e441]:
+                      - link "Gemini 2.5 Flash Live Preview" [ref=e442] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=ko
+                    - paragraph [ref=e443]: 1초 미만의 네이티브 오디오 스트리밍을 지원하는 실시간 대화형 에이전트에 최적화됨
+                - generic [ref=e444]:
+                  - generic [ref=e446]: record_voice_over
+                  - generic [ref=e447]:
+                    - heading "Gemini 2.5 Flash TTS 프리뷰" [level=3] [ref=e448]:
+                      - link "Gemini 2.5 Flash TTS 프리뷰" [ref=e449] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=ko
+                    - paragraph [ref=e450]: 스타일과 속도를 세밀하게 제어할 수 있는 제어 가능한 텍스트 음성 변환 오디오 생성
+              - separator [ref=e451]
+              - heading "Gemini 2.5 Flash-Lite" [level=2] [ref=e452]
+              - generic [ref=e454]:
+                - generic [ref=e456]: speed
+                - generic [ref=e457]:
+                  - heading "Gemini 2.5 Flash-Lite" [level=3] [ref=e458]:
+                    - link "Gemini 2.5 Flash-Lite" [ref=e459] [cursor=pointer]:
+                      - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ko
+                  - paragraph [ref=e460]: 2.5 제품군에서 가장 빠르고 예산 친화적인 멀티모달 모델
+              - separator [ref=e461]
+              - heading "Gemini 2.5 Pro" [level=2] [ref=e462]
+              - generic [ref=e463]:
+                - generic [ref=e464]:
+                  - generic [ref=e466]: psychology
+                  - generic [ref=e467]:
+                    - heading "Gemini 2.5 Pro" [level=3] [ref=e468]:
+                      - link "Gemini 2.5 Pro" [ref=e469] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ko
+                    - paragraph [ref=e470]: 심층 추론 및 코딩 기능을 갖춘 복잡한 작업을 위한 가장 진보된 모델
+                - generic [ref=e471]:
+                  - generic [ref=e473]: record_voice_over
+                  - generic [ref=e474]:
+                    - heading "Gemini 2.5 Pro TTS 프리뷰" [level=3] [ref=e475]:
+                      - link "Gemini 2.5 Pro TTS 프리뷰" [ref=e476] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=ko
+                    - paragraph [ref=e477]: 팟캐스트 및 오디오북과 같은 구조화된 워크플로에서 품질에 최적화된 고품질 음성 합성
+              - separator [ref=e478]
+              - heading "오디오 모델" [level=2] [ref=e479]
+              - paragraph [ref=e480]: 이 섹션에는 다른 섹션에 이미 나열되어 있을 수 있는 모델을 포함한 모든 오디오 모델이 포함되어 있습니다.
+              - generic [ref=e481]:
+                - generic [ref=e482]:
+                  - generic [ref=e484]: settings_input_antenna
+                  - generic [ref=e485]:
+                    - heading "Gemini 3.1 Flash Live Preview" [level=3] [ref=e486]:
+                      - link "Gemini 3.1 Flash Live Preview" [ref=e487] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ko
+                    - paragraph [ref=e488]: 실시간 대화 및 음성 우선 AI 애플리케이션을 위해 설계된 고품질의 지연 시간이 짧은 오디오-오디오 (A2A) 모델
+                - generic [ref=e489]:
+                  - generic [ref=e491]: settings_voice
+                  - generic [ref=e492]:
+                    - heading "Gemini 2.5 Flash Live Preview" [level=3] [ref=e493]:
+                      - link "Gemini 2.5 Flash Live Preview" [ref=e494] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=ko
+                    - paragraph [ref=e495]: 네이티브 오디오 추론을 지원하는 지연 시간이 짧은 양방향 음성 및 동영상 에이전트를 위한 Google의 대표적인 Live API 모델
+                - generic [ref=e496]:
+                  - generic [ref=e498]: bolt
+                  - generic [ref=e499]:
+                    - heading "Gemini 2.5 Flash TTS 프리뷰" [level=3] [ref=e500]:
+                      - link "Gemini 2.5 Flash TTS 프리뷰" [ref=e501] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=ko
+                    - paragraph [ref=e502]: 지연 시간이 짧고 비용 효율적인 애플리케이션과 실시간 어시스턴트를 위한 빠르고 제어 가능한 텍스트 음성 변환
+                - generic [ref=e503]:
+                  - generic [ref=e505]: record_voice_over
+                  - generic [ref=e506]:
+                    - heading "Gemini 2.5 Pro TTS 프리뷰" [level=3] [ref=e507]:
+                      - link "Gemini 2.5 Pro TTS 프리뷰" [ref=e508] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=ko
+                    - paragraph [ref=e509]: 팟캐스트 및 오디오북과 같은 구조화된 워크플로에서 품질에 최적화된 고품질 음성 합성
+              - separator [ref=e510]
+              - heading "생성형 미디어 모델" [level=2] [ref=e511]
+              - paragraph [ref=e512]: 이 섹션에는 다른 섹션에 이미 나열되어 있을 수 있는 모델을 포함한 모든 생성형 미디어 모델이 포함되어 있습니다.
+              - generic [ref=e513]:
+                - generic [ref=e514]:
+                  - generic [ref=e516]: blur_on
+                  - generic [ref=e517]:
+                    - heading "나노 바나나 2 프리뷰" [level=3] [ref=e518]:
+                      - link "나노 바나나 2 프리뷰" [ref=e519] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=ko
+                    - paragraph [ref=e520]: Gemini 3 시리즈의 인텔리전스와 빠른 생성 속도를 결합한 효율적인 프로덕션 규모의 시각적 요소 생성
+                - generic [ref=e521]:
+                  - generic [ref=e523]: movie_filter
+                  - generic [ref=e524]:
+                    - heading "Veo 3.1 프리뷰" [level=3] [ref=e525]:
+                      - link "Veo 3.1 프리뷰" [ref=e526] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=ko
+                    - paragraph [ref=e527]: 고급 창작 컨트롤과 네이티브로 동기화된 오디오를 지원하는 최첨단 시네마틱 동영상 생성
+                - generic [ref=e528]:
+                  - generic [ref=e530]: image_edit
+                  - generic [ref=e531]:
+                    - heading "Nano Banana Pro 프리뷰" [level=3] [ref=e532]:
+                      - link "Nano Banana Pro 프리뷰" [ref=e533] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=ko
+                    - paragraph [ref=e534]: 스튜디오 품질의 4K 시각적 요소, 복잡한 레이아웃, 정밀한 텍스트 렌더링을 위한 추론 코어를 갖춘 전문 디자인 엔진
+                - generic [ref=e535]:
+                  - generic [ref=e537]: movie_edit
+                  - generic [ref=e538]:
+                    - heading "Veo 3.1 Lite 프리뷰" [level=3] [ref=e539]:
+                      - link "Veo 3.1 Lite 프리뷰" [ref=e540] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=ko
+                    - paragraph [ref=e541]: Veo 3.1 제품군의 효율적이고 저렴한 개발자 우선 동영상 생성, 편집, 시네마틱 컨트롤
+                - generic [ref=e542]:
+                  - generic [ref=e544]: image_search
+                  - generic [ref=e545]:
+                    - heading "Nano Banana" [level=3] [ref=e546]:
+                      - link "Nano Banana" [ref=e547] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ko
+                    - paragraph [ref=e548]: 빠른 창작 워크플로를 위해 설계된 최첨단 네이티브 이미지 생성 및 편집
+                - generic [ref=e549]:
+                  - generic [ref=e551]: palette
+                  - generic [ref=e552]:
+                    - heading "Imagen 4" [level=3] [ref=e553]:
+                      - link "Imagen 4" [ref=e554] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=ko
+                    - paragraph [ref=e555]: 빠르고 매우 빠른 생성과 최대 2K 해상도의 탁월한 선명도를 지원하는 텍스트 이미지 변환 모델
+              - separator [ref=e556]
+              - heading "음악 생성 모델" [level=2] [ref=e557]
+              - paragraph [ref=e558]: 이 섹션에는 다른 섹션에 이미 나열되어 있을 수 있는 모델을 포함한 모든 음악 생성 모델이 포함되어 있습니다.
+              - generic [ref=e559]:
+                - generic [ref=e560]:
+                  - generic [ref=e562]: music_note
+                  - generic [ref=e563]:
+                    - heading "Lyria 3 Pro 프리뷰" [level=3] [ref=e564]:
+                      - link "Lyria 3 Pro 프리뷰" [ref=e565] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=ko
+                    - paragraph [ref=e566]: 복잡한 구조적 일관성을 갖춘 전체 길이의 노래에 최적화된 Google의 대표적인 음악 생성 모델
+                - generic [ref=e567]:
+                  - generic [ref=e569]: music_note_2
+                  - generic [ref=e570]:
+                    - heading "Lyria 3 Clip 프리뷰" [level=3] [ref=e571]:
+                      - link "Lyria 3 Clip 프리뷰" [ref=e572] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=ko
+                    - paragraph [ref=e573]: 최대 30초 길이의 짧은 음악 클립, 루프, 프리뷰를 생성하도록 최적화됨
+                - generic [ref=e574]:
+                  - generic [ref=e576]: music_history
+                  - generic [ref=e577]:
+                    - heading "Lyria RealTime 실험용" [level=3] [ref=e578]:
+                      - link "Lyria RealTime 실험용" [ref=e579] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=ko
+                    - paragraph [ref=e580]: 세부적인 창작 컨트롤과 실시간 스트리밍 기능을 제공하는 고품질 음악 생성 모델
+              - separator [ref=e581]
+              - heading "도구 및 에이전트 모델" [level=2] [ref=e582]
+              - generic [ref=e583]:
+                - generic [ref=e584]:
+                  - generic [ref=e586]: desktop_windows
+                  - generic [ref=e587]:
+                    - heading "Computer Use 프리뷰" [level=3] [ref=e588]:
+                      - link "Computer Use 프리뷰" [ref=e589] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=ko
+                    - paragraph [ref=e590]: 디지털 화면을 '볼' 수 있고 클릭, 입력, 탐색과 같은 UI 작업을 실행하여 복잡한 브라우저 작업을 자동화할 수 있는 특화 모델
+                - generic [ref=e591]:
+                  - generic [ref=e593]: travel_explore
+                  - generic [ref=e594]:
+                    - heading "Gemini Deep Research 프리뷰" [level=3] [ref=e595]:
+                      - link "Gemini Deep Research 프리뷰" [ref=e596] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=ko
+                    - paragraph [ref=e597]: 수백 개의 소스에서 다단계 조사를 자율적으로 계획하고 실행하여 인용된 대화형 보고서를 생성하는 에이전트형 모델
+              - separator [ref=e598]
+              - heading "특화 작업 모델" [level=2] [ref=e599]
+              - generic [ref=e600]:
+                - generic [ref=e601]:
+                  - generic [ref=e603]: hub
+                  - generic [ref=e604]:
+                    - heading "Gemini Embedding 2 프리뷰" [level=3] [ref=e605]:
+                      - link "Gemini Embedding 2 프리뷰" [ref=e606] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview?hl=ko
+                    - paragraph [ref=e607]: 고급 시맨틱 검색 및 RAG 시스템을 위해 텍스트, 이미지, 동영상, 오디오, PDF를 통합 임베딩 공간에 매핑하는 Google의 첫 번째 멀티모달 임베딩 모델
+                - generic [ref=e608]:
+                  - generic [ref=e610]: hub
+                  - generic [ref=e611]:
+                    - heading "Gemini Embedding" [level=3] [ref=e612]:
+                      - link "Gemini Embedding" [ref=e613] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=ko
+                    - paragraph [ref=e614]: 고급 시맨틱 검색, 텍스트 분류, RAG 시스템을 위한 고차원 벡터 표현
+                - generic [ref=e615]:
+                  - generic [ref=e617]: precision_manufacturing
+                  - generic [ref=e618]:
+                    - heading "Gemini Robotics 프리뷰" [level=3] [ref=e619]:
+                      - link "Gemini Robotics 프리뷰" [ref=e620] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.5-preview?hl=ko
+                    - paragraph [ref=e621]: 물리적 공간을 이해하고 로봇 에이전트를 위한 다단계 작업을 계획하는 고급 구현 추론 모델
+              - separator [ref=e622]
+              - heading "이전 모델" [level=2] [ref=e623]
+              - complementary [ref=e624]:
+                - text: not_interested 이러한 모델은
+                - link "지원 중단" [ref=e625] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
+                - text: 되었으며 곧 종료됩니다. 서비스 중단을 방지하려면 최신 모델로 마이그레이션하세요.
+              - generic [ref=e626]:
+                - generic [ref=e627]:
+                  - generic [ref=e629]: history
+                  - generic [ref=e630]:
+                    - heading "Gemini 2.0 Flash 지원 중단됨" [level=3] [ref=e631]:
+                      - link "Gemini 2.0 Flash 지원 중단됨" [ref=e632] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=ko
+                    - paragraph [ref=e633]: 빠른 속도, 네이티브 도구 사용, 토큰 컨텍스트 윈도우 100만 개 등 차세대 기능과 향상된 기능을 갖춘 Google의 2세대 워크호스 모델
+                - generic [ref=e634]:
+                  - generic [ref=e636]: restore
+                  - generic [ref=e637]:
+                    - heading "Gemini 2.0 Flash-Lite 지원 중단됨" [level=3] [ref=e638]:
+                      - link "Gemini 2.0 Flash-Lite 지원 중단됨" [ref=e639] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=ko
+                    - paragraph [ref=e640]: 비용 효율성과 짧은 지연 시간에 최적화된 Google의 가장 빠른 2세대 모델
+                - generic [ref=e641]:
+                  - generic [ref=e643]: restore
+                  - generic [ref=e644]:
+                    - heading "Gemini 3 Pro 프리뷰 종료됨" [level=3] [ref=e645]:
+                      - link "Gemini 3 Pro 프리뷰 종료됨" [ref=e646] [cursor=pointer]:
+                        - /url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=ko
+                    - paragraph [ref=e647]: 고급 멀티모달 이해를 지원하는 Google의 최첨단 추론 모델
+              - separator [ref=e648]
+              - heading "모델 버전 이름 패턴" [level=2] [ref=e649]
+              - paragraph [ref=e650]:
+                - text: Gemini 모델은
+                - emphasis [ref=e651]: 정식
+                - text: ","
+                - emphasis [ref=e652]: 프리뷰
+                - text: ","
+                - emphasis [ref=e653]: 최신
+                - text: 또는
+                - emphasis [ref=e654]: 실험용
+                - text: 버전으로 제공됩니다.
+              - complementary [ref=e655]:
+                - strong [ref=e656]: "참고:"
+                - text: 다음 목록은 2025년 9월 기준 모델 문자열 이름 지정 규칙을 나타냅니다. 그 이전에 출시된 모델은 이름 지정 규칙이 다를 수 있습니다. 이전 모델을 사용하는 경우 정확한 모델 문자열을 참조하세요.
+              - heading "정식" [level=3] [ref=e657]
+              - paragraph [ref=e658]: 특정 정식 모델을 가리킵니다. 정식 모델은 일반적으로 변경되지 않습니다. 대부분의 프로덕션 앱은 특정 정식 모델을 사용해야 합니다.
+              - paragraph [ref=e659]:
+                - text: "예:"
+                - code [ref=e660]: gemini-2.5-flash
+              - heading "프리뷰" [level=3] [ref=e661]
+              - paragraph [ref=e662]: 프로덕션에 사용할 수 있는 프리뷰 모델을 가리킵니다. 프리뷰 모델은 일반적으로 결제가 사용 설정되어 있으며, 더 제한적인 비율 제한이 적용될 수 있고, 최소 2주 전에 지원 중단될 수 있습니다.
+              - paragraph [ref=e663]:
+                - text: "예:"
+                - code [ref=e664]: gemini-2.5-flash-preview-09-2025
+              - heading "최신" [level=3] [ref=e665]
+              - paragraph [ref=e666]:
+                - text: 특정 모델 변형의 최신 출시 버전을 가리킵니다. 정식, 프리뷰 또는 실험용 출시 버전일 수 있습니다. 이 별칭은 특정 모델 변형의 새 출시 버전이 나올 때마다 핫 스왑됩니다. 최신 버전의 이전 버전이 변경되기 전에 이메일을 통해
+                - strong [ref=e667]: 2주 전에
+                - text: 알려드립니다.
+              - paragraph [ref=e668]:
+                - text: "예:"
+                - code [ref=e669]: gemini-flash-latest
+              - heading "실험용" [level=3] [ref=e670]
+              - paragraph [ref=e671]: 일반적으로 프로덕션 용도에 적합하지 않으며 더 제한적인 비율 제한이 적용되는 실험용 모델을 가리킵니다. Google은 의견을 수집하고 개발자에게 최신 업데이트를 빠르게 제공하기 위해 실험용 모델을 출시합니다.
+              - paragraph [ref=e672]: 실험용 모델은 안정적이지 않으며 모델 엔드포인트의 가용성은 변경될 수 있습니다.
+              - heading "모델 지원 중단" [level=2] [ref=e673]
+              - paragraph [ref=e674]:
+                - text: 모델 지원 중단에 관한 자세한 내용은
+                - link "Gemini 지원 중단" [ref=e675] [cursor=pointer]:
+                  - /url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
+                - text: 페이지를 참고하세요.
+            - button "의견 보내기" [ref=e677] [cursor=pointer]
+          - generic [ref=e678]:
+            - paragraph [ref=e679]:
+              - text: 달리 명시되지 않는 한 이 페이지의 콘텐츠에는
+              - link "Creative Commons Attribution 4.0 라이선스" [ref=e680] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/4.0/
+              - text: 에 따라 라이선스가 부여되며, 코드 샘플에는
+              - link "Apache 2.0 라이선스" [ref=e681] [cursor=pointer]:
+                - /url: https://www.apache.org/licenses/LICENSE-2.0
+              - text: 에 따라 라이선스가 부여됩니다. 자세한 내용은
+              - link "Google Developers 사이트 정책" [ref=e682] [cursor=pointer]:
+                - /url: https://developers.google.com/site-policies?hl=ko
+              - text: 을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+            - paragraph [ref=e683]: "최종 업데이트: 2026-03-31(UTC)"
+      - generic:
+        - navigation "바닥글 링크"
+      - navigation "유틸리티 링크" [ref=e687]:
+        - list [ref=e688]:
+          - listitem [ref=e689]:
+            - link "약관" [ref=e690] [cursor=pointer]:
+              - /url: //policies.google.com/terms?hl=ko
+          - listitem [ref=e691]:
+            - text: "|"
+            - link "개인정보처리방침" [ref=e692] [cursor=pointer]:
+              - /url: //policies.google.com/privacy?hl=ko
+          - listitem [ref=e693] [cursor=pointer]: "| 쿠키 관리"
+        - generic "원하는 언어를 선택하세요." [ref=e694]:
+          - button "Language" [ref=e695] [cursor=pointer]:
+            - img
+            - generic [ref=e696]: Language
+            - img
