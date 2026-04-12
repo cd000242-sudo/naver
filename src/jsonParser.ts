@@ -462,16 +462,19 @@ export function safeParseJson<T>(text: string): T {
                 try {
                   console.warn('[JSON 파싱] 8차 시도: 부분 JSON 추출');
 
-                  // ✅ [2026-02-24] selectedTitle 우선 추출 (다른 필드가 먼저 오면 제목 손실 방지)
-                  const titlePriorityMatch = cleaned.match(/"selectedTitle"\s*:\s*"([^"]*)"/);
+                  // ✅ [2026-04-11 FIX] selectedTitle 우선 추출 — 개행 안전 regex
+                  // 기존 [^"]*는 개행 포함 시 본문까지 캡처하는 버그 있었음
+                  const titlePriorityMatch = cleaned.match(/"selectedTitle"\s*:\s*"((?:\\.|[^"\\])*)"/);
                   if (titlePriorityMatch) {
-                    const titleJson = `{"selectedTitle": "${titlePriorityMatch[1]}"}`;
+                    // 개행 제거 후 복구
+                    const cleanTitle = titlePriorityMatch[1].replace(/[\r\n]+/g, ' ').trim();
+                    const titleJson = `{"selectedTitle": "${cleanTitle}"}`;
                     console.warn(`[JSON 파싱] 부분 복구 (제목 우선): ${titleJson}`);
                     return JSON.parse(titleJson) as T;
                   }
 
                   // 첫 번째 완전한 키-값 쌍이라도 추출
-                  const partialMatch = cleaned.match(/\{\s*"([^"]+)"\s*:\s*"([^"]*)"/);
+                  const partialMatch = cleaned.match(/\{\s*"([^"]+)"\s*:\s*"((?:\\.|[^"\\])*)"/s);
                   if (partialMatch) {
                     const partialJson = `{"${partialMatch[1]}": "${partialMatch[2]}"}`;
                     console.warn(`[JSON 파싱] 부분 복구: ${partialJson}`);

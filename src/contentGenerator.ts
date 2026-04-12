@@ -16,7 +16,8 @@ import { JSON_SCHEMA_DESCRIPTION } from './contentGenerator/schema';
 import { humanizeContent, humanizeHtmlContent, analyzeAiDetectionRisk, resetHumanizerLog } from './aiHumanizer.js';
 import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog } from './contentOptimizer.js';
 import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, type PromptMode } from './promptLoader.js';
-import { processAutoPublishContent, type TitleSelectionResult } from './titleSelector.js';
+// ✅ [v1.4.48 Stage A.2] require() 혼용 제거 → 정적 import로 통일 (모듈 인스턴스 단일 보장)
+import { processAutoPublishContent, getRecentPeriods, recordSelectedTitle, type TitleSelectionResult } from './titleSelector.js';
 import { trendAnalyzer } from './agents/trendAnalyzer.js';
 import { loadConfig } from './configManager.js';
 import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
@@ -2242,7 +2243,8 @@ const AFFILIATE_TITLE_FORMULAS: TitleFormula[] = [
 const CATEGORY_FORMULA_PRIORITY: Record<string, string[]> = {
   // 🧊 쿨-정보형 카테고리
   '사회': ['hf_simple_summary', 'hf_miss_loss', 'hf_applicability', 'hf_numeric_proof', 'hf_common_worry'],
-  '재테크': ['hf_numeric_proof', 'hf_miss_loss', 'hf_comparison', 'hf_simple_summary', 'loss_aversion'],
+  // ✅ [v1.4.48 Stage A.1] 'loss_aversion' 제거 — 어떤 풀에도 존재하지 않는 유령 ID였음
+  '재테크': ['hf_numeric_proof', 'hf_miss_loss', 'hf_comparison', 'hf_simple_summary', 'hf_applicability'],
   // 🔥 워밍-공감형 카테고리
   '건강': ['hf_direct_exp', 'hf_unexpected', 'hf_confession', 'hf_me_too', 'hf_before_after'],
   'IT': ['hf_comparison', 'hf_before_after', 'hf_final_choice', 'hf_numeric_proof', 'hf_unexpected'],
@@ -2266,19 +2268,20 @@ function selectTitleFormula(mode: PromptMode, attempt: number, usedIds: string[]
   const pool = mode === 'homefeed' ? HOMEFEED_TITLE_FORMULAS
     : mode === 'affiliate' ? AFFILIATE_TITLE_FORMULAS
     : SEO_TITLE_FORMULAS;
-  const allFormulas = [...SEO_TITLE_FORMULAS, ...HOMEFEED_TITLE_FORMULAS, ...AFFILIATE_TITLE_FORMULAS];
+  // ✅ [v1.4.48 Stage A.1] 모드별 풀에서만 검색 — 홈피드 글에 SEO/affiliate 공식 섞임 방지
+  // 기존: allFormulas = [...SEO, ...HOMEFEED, ...AFFILIATE] → 카테고리 우선 ID 오타 시 타 모드 공식 선택됨
+  // 수정: 모드 pool 내에서만 카테고리 우선 ID 검색
+  const allFormulas = pool;
 
   // ✅ [v1.4.46] 최근 기간 표현 2개 이상 사용 시 기간 계열 공식 스킵
   const DURATION_FORMULA_IDS = ['hf_duration_exp', 'af_duration', 'hf_accumulated'];
   let skipDurationFormulas = false;
-  try {
-    const { getRecentPeriods } = require('./titleSelector.js');
-    const recent = getRecentPeriods() || [];
-    if (recent.length >= 2) {
-      skipDurationFormulas = true;
-      console.log(`[TitleGen] 🚫 최근 ${recent.length}개 기간 반복 감지 → 기간 계열 공식 스킵`);
-    }
-  } catch { /* 무시 */ }
+  // ✅ [v1.4.48 Stage A.2] 정적 import 사용 (require 제거)
+  const recent = getRecentPeriods() || [];
+  if (recent.length >= 2) {
+    skipDurationFormulas = true;
+    console.log(`[TitleGen] 🚫 최근 ${recent.length}개 기간 반복 감지 → 기간 계열 공식 스킵`);
+  }
 
   // ✅ [v3] 카테고리 우선 공식이 있으면 먼저 시도
   if (categoryHint && CATEGORY_FORMULA_PRIORITY[categoryHint]) {
@@ -2630,11 +2633,8 @@ JSON:
       // ✅ [v2] 합격 기준 75점
       if (qualityScore >= 75) {
         console.log(`[TitleGen] ✅ 품질 검증 통과 (${qualityScore}점, 공식: ${formula.name})`);
-        // ✅ [v1.4.46] 이력 기록
-        try {
-          const { recordSelectedTitle } = require('./titleSelector.js');
-          recordSelectedTitle(selectedTitle);
-        } catch { /* 무시 */ }
+        // ✅ [v1.4.48 Stage A.2] 정적 import 사용
+        recordSelectedTitle(selectedTitle);
         return {
           selectedTitle,
           titleCandidates,
@@ -2648,11 +2648,8 @@ JSON:
           const candQuality = evaluateTitleQuality(candidate.text, primaryKeyword || '', mode, categoryHint);
           if (candQuality.score > qualityScore && candQuality.score >= 75) {
             console.log(`[TitleGen] ✅ 후보 제목이 더 우수: "${candidate.text}" (${candQuality.score}점 > ${qualityScore}점)`);
-            // ✅ [v1.4.46] 이력 기록
-            try {
-              const { recordSelectedTitle } = require('./titleSelector.js');
-              recordSelectedTitle(candidate.text);
-            } catch { /* 무시 */ }
+            // ✅ [v1.4.48 Stage A.2] 정적 import 사용
+            recordSelectedTitle(candidate.text);
             return {
               selectedTitle: candidate.text,
               titleCandidates,
@@ -2694,12 +2691,9 @@ JSON:
 
   // 최선의 결과 반환
   console.log(`[TitleGen] 최종 결과: "${bestResult.selectedTitle}" (${bestScore}점)`);
-  // ✅ [v1.4.46] 최종 선택 제목을 이력에 기록 (다음 글 생성 시 기간 반복 방지)
+  // ✅ [v1.4.48 Stage A.2] 정적 import 사용 — 모듈 인스턴스 단일 보장
   if (bestResult.selectedTitle) {
-    try {
-      const { recordSelectedTitle } = require('./titleSelector.js');
-      recordSelectedTitle(bestResult.selectedTitle);
-    } catch { /* 무시 */ }
+    recordSelectedTitle(bestResult.selectedTitle);
   }
   return bestResult;
 }
@@ -2761,6 +2755,31 @@ const CATEGORY_BONUSES: Record<string, { pattern: RegExp; points: number; reason
   '패션': [
     { pattern: /(코디|스타일|룩북|착용)/, points: 5, reason: '패션: 스타일 키워드' },
     { pattern: /(트렌드|유행|신상)/, points: 3, reason: '패션: 트렌드 키워드' },
+  ],
+  // ✅ [v1.4.48 Stage A.5] 누락 카테고리 5개 추가 — 카테고리 평가 공정성 확보
+  '사회': [
+    { pattern: /(달라진|바뀌|개정|시행)/, points: 5, reason: '사회: 변화 키워드' },
+    { pattern: /(정책|법|제도|조건|기준)/, points: 3, reason: '사회: 제도 키워드' },
+    { pattern: /(놓치|확인|챙기|혜택)/, points: 3, reason: '사회: 손실회피' },
+  ],
+  '리빙': [
+    { pattern: /(인테리어|꾸미|배치|정리)/, points: 5, reason: '리빙: 공간 키워드' },
+    { pattern: /\d+(평|원|만원)/, points: 3, reason: '리빙: 평수/가격' },
+    { pattern: /(전후|바꾸|달라진|꾸민)/, points: 3, reason: '리빙: 변화 비교' },
+  ],
+  '생활': [
+    { pattern: /(꿀팁|방법|노하우|쉽게)/, points: 3, reason: '생활: 실용 키워드' },
+    { pattern: /\d+(가지|개|단계|분)/, points: 5, reason: '생활: 구체 수치' },
+    { pattern: /(주의|놓치|확인|체크)/, points: 3, reason: '생활: 주의사항' },
+  ],
+  '반려동물': [
+    { pattern: /(강아지|고양이|반려|품종)/, points: 3, reason: '반려동물: 타깃 키워드' },
+    { pattern: /\d+(살|개월|kg)/, points: 3, reason: '반려동물: 나이/체중' },
+    { pattern: /(행동|증상|건강|훈련)/, points: 5, reason: '반려동물: 핵심 토픽' },
+  ],
+  '라이프': [
+    { pattern: /(일상|루틴|습관|하루)/, points: 3, reason: '라이프: 일상 키워드' },
+    { pattern: /(공감|솔직|진심|마음)/, points: 3, reason: '라이프: 공감 키워드' },
   ],
 };
 
@@ -2836,7 +2855,10 @@ function evaluateTitleQuality(title: string, keyword: string, mode: PromptMode, 
     // SEO 모드: 키워드 뒤쪽 배치
     { condition: Boolean(mode === 'seo' && kw && t.toLowerCase().indexOf(kw.split(' ')[0]?.toLowerCase() || '') > 10), points: 25, reason: 'SEO: 키워드가 뒤쪽에 배치' },
     // 홈판 모드: AI티 나는 표현
-    { condition: mode === 'homefeed' && /(충격|경악|눈물바다|진짜 이유|알고보니)/.test(t), points: 40, reason: '홈판: 뻔한 AI티 표현' },
+    // ✅ [v1.4.48 Stage A.4] 홈피드 AI티 패턴 대폭 확장 (5개 → 14개)
+    //   추가: 반전, 소름, 난리, 대박, 공개, 충격적, 경악적, 진실, 폭로
+    //   원인: 기존 5개만으로는 AI 생성 제목의 90%를 못 잡음
+    { condition: mode === 'homefeed' && /(충격|경악|눈물바다|진짜 이유|알고보니|반전|소름|난리|대박 공개|충격적|경악적|폭로|진실 공개|이게 가능|실화)/.test(t), points: 40, reason: '홈판: 뻔한 AI티 표현' },
     // 숫자/구체성 없음 (SEO)
     { condition: mode === 'seo' && !/\d/.test(t) && !/(언제|어떻게|얼마|몇|할까|일까)/.test(t), points: 15, reason: 'SEO: 숫자/구체성 없음' },
     // 대괄호 브랜드 표기
@@ -2870,26 +2892,23 @@ function evaluateTitleQuality(title: string, keyword: string, mode: PromptMode, 
     { condition: /["\u201C\u201D\u300C\u300D\u300E\u300F]/.test(t), points: 20, reason: '제목에 따옴표 포함' },
   ];
 
-  // ✅ [v1.4.46] 최근 세션의 기간 표현 반복 감점 — "2주 3주 6개월 3개월" 차단
-  try {
-    const tsModule = require('./titleSelector.js');
-    const recentPeriods: string[] = tsModule.getRecentPeriods ? tsModule.getRecentPeriods() : [];
-    const hasPeriodInTitle = /\d+\s*[년월주일]\s*(?:차|째|만에|이용|사용|동안|후|전)?/.test(t);
+  // ✅ [v1.4.48 Stage A.2] 정적 import 사용 — require 제거
+  const recentPeriods: string[] = getRecentPeriods() || [];
+  const hasPeriodInTitle = /\d+\s*[년월주일]\s*(?:차|째|만에|이용|사용|동안|후|전)?/.test(t);
 
-    if (hasPeriodInTitle && recentPeriods.length >= 2) {
-      penalties.push({
-        condition: true,
-        points: 40,
-        reason: `최근 ${recentPeriods.length}개 기간 반복: ${recentPeriods.slice(-3).join(', ')}`
-      });
-    } else if (hasPeriodInTitle && recentPeriods.length >= 1) {
-      penalties.push({
-        condition: true,
-        points: 20,
-        reason: `직전 글 기간 사용: ${recentPeriods[recentPeriods.length - 1]}`
-      });
-    }
-  } catch { /* 무시 */ }
+  if (hasPeriodInTitle && recentPeriods.length >= 2) {
+    penalties.push({
+      condition: true,
+      points: 40,
+      reason: `최근 ${recentPeriods.length}개 기간 반복: ${recentPeriods.slice(-3).join(', ')}`
+    });
+  } else if (hasPeriodInTitle && recentPeriods.length >= 1) {
+    penalties.push({
+      condition: true,
+      points: 20,
+      reason: `직전 글 기간 사용: ${recentPeriods[recentPeriods.length - 1]}`
+    });
+  }
 
   for (const p of penalties) {
     if (p.condition) {
@@ -2900,16 +2919,23 @@ function evaluateTitleQuality(title: string, keyword: string, mode: PromptMode, 
   }
 
   // ✅ [2026-02-09 v3] 보너스 가점 (매력도 향상)
+  // ✅ [v1.4.48 Stage A.3] 홈피드에서 "솔직히/사실/실제로/진짜" 가점 제거
+  //   원인: 이 가점이 hf_confession/hf_hidden_truth와 결합 → 모든 글 제목에 "솔직히" 등장 → 반복 패턴
+  //   해결: 홈피드에서는 미적용, SEO/affiliate 모드에서만 약하게 가점
+  // ✅ [v1.4.48 Stage A.3] 홈피드에서 "변화/비포애프터" 가점 제거
+  //   원인: hf_before_after 공식과 결합 → 이중 가점으로 해당 공식 과선택
   const bonuses: { condition: boolean; points: number; reason: string }[] = [
     { condition: /\d/.test(t), points: 5, reason: '숫자 포함 (구체성)' },
     { condition: /(\?|일까|할까|인가요)/.test(t), points: 5, reason: '질문형 종결 (호기심)' },
-    { condition: /(솔직히|사실|실제로|진짜)/.test(t), points: 3, reason: '솔직한 표현 (신뢰)' },
+    // 홈피드 외 모드에서만 솔직 표현 가점
+    { condition: mode !== 'homefeed' && /(솔직히|사실|실제로|진짜)/.test(t), points: 3, reason: '솔직한 표현 (신뢰)' },
     { condition: /(몰랐던|숨겨진|비밀|반전)/.test(t), points: 5, reason: '발견 요소 (클릭 유도)' },
     { condition: mode === 'seo' && t.length >= 20 && t.length <= 35, points: 5, reason: 'SEO 이상적 길이 (20~35자)' },
     // ✅ [v3] 홈피드 전용 보너스
     { condition: mode === 'homefeed' && t.length >= 28 && t.length <= 42, points: 5, reason: '홈피드 이상적 길이 (28~42자)' },
     { condition: /(절대|반드시|꼭|무조건)/.test(t) && /(마세요|하세요|해야|안 됩니다)/.test(t), points: 5, reason: '행동 유도 (강한 지시)' },
-    { condition: /(전|후|변화|달라)/.test(t), points: 3, reason: '변화/비포애프터 요소' },
+    // 홈피드 외 모드에서만 변화/비포애프터 가점
+    { condition: mode !== 'homefeed' && /(전|후|변화|달라)/.test(t), points: 3, reason: '변화/비포애프터 요소' },
   ];
   for (const b of bonuses) {
     if (b.condition) {
