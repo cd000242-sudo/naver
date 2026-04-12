@@ -346,6 +346,33 @@ export async function generateImagesForAutomation(
 
   if (stopCheck && stopCheck()) return [];
 
+  // ✅ [v1.4.45] thumbnailOnly / headingImageMode=none 체크 — 모든 호출자에 대해 일관 적용
+  // 이 함수를 호출하는 경로가 4곳 이상(publishingHandlers, multiAccountManager 등)이고
+  // 각 호출자마다 체크하면 누락이 발생하므로, 여기서 한 번에 처리
+  const _thumbnailOnly = typeof localStorage !== 'undefined' && localStorage.getItem('thumbnailOnly') === 'true';
+  const _headingImageMode = typeof localStorage !== 'undefined' ? (localStorage.getItem('headingImageMode') || 'all') : 'all';
+
+  if (_headingImageMode === 'none') {
+    console.log('[generateImagesForAutomation] 🚫 headingImageMode=none → 이미지 생성 전체 스킵');
+    onProgress?.('🚫 이미지 없이 모드: 이미지 생성을 건너뜁니다.');
+    return [];
+  }
+
+  if (_thumbnailOnly) {
+    // 썸네일(isThumbnail=true)인 heading만 남기거나, 없으면 postTitle 기반 1개만 생성
+    const thumbOnlyHeadings = headings.filter((h: any) => h?.isThumbnail === true);
+    if (thumbOnlyHeadings.length > 0) {
+      console.log(`[generateImagesForAutomation] 📷 thumbnailOnly=true → 썸네일 ${thumbOnlyHeadings.length}개만 생성 (소제목 ${headings.length - thumbOnlyHeadings.length}개 스킵)`);
+      onProgress?.(`📷 썸네일만 생성 모드: 소제목 이미지 생성 건너뜀`);
+      headings = thumbOnlyHeadings;
+    } else {
+      // isThumbnail 플래그가 없는 경우 — postTitle 기반 1개만 생성 (아래 items 구성에서 처리)
+      console.log('[generateImagesForAutomation] 📷 thumbnailOnly=true → postTitle 기반 썸네일 1개만 생성');
+      onProgress?.(`📷 썸네일만 생성 모드: 썸네일 1개만 생성`);
+      headings = []; // 빈 배열 → 아래 로직에서 postTitle 기반 1개 생성
+    }
+  }
+
   // ✅ [2026-02-27 FIX] 썸네일: AI 추론으로 블로그 제목 → 영어 이미지 프롬프트 변환
   // 기존: rawPrompt = postTitle (한국어) → englishPrompt도 한국어 → 제너릭 이미지 생성
   // 수정: generateEnglishPromptForHeading(postTitle) → 콘텐츠에 맞는 영어 프롬프트

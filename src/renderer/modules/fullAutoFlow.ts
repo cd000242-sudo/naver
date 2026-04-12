@@ -2313,6 +2313,24 @@ export async function generateAIImagesForHeadings(headings: any[], formData: any
     return [];
   }
 
+  // ✅ [v1.4.45] thumbnailOnly / headingImageMode=none 체크
+  // 사용자가 "썸네일만" 체크했는데 본문 이미지가 생성되는 문제 해결
+  const _thumbnailOnly = formData.thumbnailOnly === true || localStorage.getItem('thumbnailOnly') === 'true';
+  const _headingImageMode = localStorage.getItem('headingImageMode') || 'all';
+
+  if (_headingImageMode === 'none') {
+    console.log('[AI Images] 🚫 headingImageMode=none → 이미지 생성 전체 스킵');
+    appendLog('🚫 이미지 없이 모드: 소제목 이미지 생성 건너뜁니다.');
+    return [];
+  }
+
+  if (_thumbnailOnly) {
+    console.log(`[AI Images] 📷 thumbnailOnly=true → 소제목 ${headings.length}개 스킵, 전용 썸네일만 생성`);
+    appendLog(`📷 썸네일만 생성 모드: 소제목 이미지 ${headings.length}개 생성을 건너뜁니다.`);
+    // headings를 빈 배열로 교체 → 전용 썸네일만 생성 (아래 로직에서 dedicatedShopThumbnail만 생성)
+    headings = [];
+  }
+
   // ✅ [2026-01-27] 완전자동 이미지 설정에서 기본값 가져오기
   const globalSettings = getGlobalImageSettings();
 
