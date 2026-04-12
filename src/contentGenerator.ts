@@ -2086,9 +2086,9 @@ const SEO_TITLE_FORMULAS: TitleFormula[] = [
 const HOMEFEED_TITLE_FORMULAS: TitleFormula[] = [
   // ────── 체험 계열 (온도 1~2단계) ──────
   {
-    id: 'hf_duration_exp', name: '①기간체험형',
-    instruction: '구체적 사용 기간을 명시하여 체험 신뢰도 높이기. 서브키워드 반드시 포함. 28~42자.',
-    example: '무선 청소기 다이슨 3개월 써보니 생각이 바뀌었어요'
+    id: 'hf_duration_exp', name: '①체험형',
+    instruction: '장기 사용 체험을 기반으로 신뢰도 높이기. 기간 수치(N주/N개월)를 절대 명시하지 말고 "오래 써보니", "꾸준히 써본 결과" 같은 표현 사용. 서브키워드 필수. 28~42자.',
+    example: '무선 청소기 다이슨 꾸준히 써보니 생각이 바뀌었어요'
   },
   {
     id: 'hf_direct_exp', name: '②직접해봄형',
@@ -2102,8 +2102,8 @@ const HOMEFEED_TITLE_FORMULAS: TitleFormula[] = [
   },
   {
     id: 'hf_accumulated', name: '④누적후기형',
-    instruction: '장기간 사용 후기 + 솔직 평가. 서브키워드 포함하여 제품/서비스 토픽 매칭. 28~42자.',
-    example: '공기청정기 위닉스 6개월 후기, 비염에 진짜 효과 있음?'
+    instruction: '누적된 사용 후기 + 솔직 평가. 기간 수치(N주/N개월)를 절대 명시하지 말고 "써본 후기", "오래 써본 결과" 같은 표현 사용. 서브키워드 필수. 28~42자.',
+    example: '공기청정기 위닉스 써본 후기, 비염에 진짜 효과 있음?'
   },
   // ────── 반응 계열 (온도 2~3단계) ──────
   {
@@ -2155,8 +2155,8 @@ const HOMEFEED_TITLE_FORMULAS: TitleFormula[] = [
   },
   {
     id: 'hf_confession', name: '⑭솔직고백형',
-    instruction: '"솔직히 후회한/아쉬운" 구조로 진솔한 감정 전달. 서브키워드 필수. 28~42자.',
-    example: '테슬라 모델3 반년 타보니 솔직히 후회한 점 하나'
+    instruction: '"솔직히 후회한/아쉬운" 구조로 진솔한 감정 전달. 기간 수치 명시 금지. 서브키워드 필수. 28~42자.',
+    example: '테슬라 모델3 타보니 솔직히 후회한 점 하나'
   },
   {
     id: 'hf_common_worry', name: '⑮모두의고민형',
@@ -2182,8 +2182,8 @@ const HOMEFEED_TITLE_FORMULAS: TitleFormula[] = [
   // ────── 결과 계열 (온도 1~2단계) ──────
   {
     id: 'hf_numeric_proof', name: '⑲수치증명형',
-    instruction: '구체적 숫자(금액/기간/비율)로 결과 증명. 서브키워드 필수. 28~42자.',
-    example: '블로그 수익 애드센스 3개월 만에 월 50만원 된 방법'
+    instruction: '구체적 숫자(금액/비율/수량/횟수)로 결과 증명. 기간(N주/N개월) 대신 금액/비율/개수 우선 사용. 서브키워드 필수. 28~42자.',
+    example: '블로그 수익 애드센스로 월 50만원 찍은 방법'
   },
   {
     id: 'hf_final_choice', name: '⑳최종선택형',
@@ -2196,8 +2196,8 @@ const HOMEFEED_TITLE_FORMULAS: TitleFormula[] = [
 const AFFILIATE_TITLE_FORMULAS: TitleFormula[] = [
   {
     id: 'af_comma_link', name: '①쉼표연결형',
-    instruction: '"상품명, 기간/상황 후기표현" 구조. 쉼표로 상품명과 후기를 자연스럽게 연결. 25~45자.',
-    example: '린백 LB221HA, 2주 써본 사무용의자 솔직 후기'
+    instruction: '"상품명, 상황/체험 후기표현" 구조. 쉼표로 상품명과 후기를 자연스럽게 연결. 기간 수치 대신 "써본", "직접 써본" 같은 표현 사용. 25~45자.',
+    example: '린백 LB221HA, 직접 써본 사무용의자 솔직 후기'
   },
   {
     id: 'af_question', name: '②질문형',
@@ -2205,9 +2205,9 @@ const AFFILIATE_TITLE_FORMULAS: TitleFormula[] = [
     example: '9만원대 린백 LB221HA 허리 아픈 직장인 추천할까?'
   },
   {
-    id: 'af_duration', name: '③기간체험형',
-    instruction: '구체적 사용 기간(한 달, 2주, 3개월 등) + 솔직후기. 25~45자.',
-    example: '린백 LB221HA 가성비 의자 6개월 사용기'
+    id: 'af_duration', name: '③체험형',
+    instruction: '사용 체험 + 솔직후기. 기간 수치(N주/N개월)는 절대 사용하지 말고 "직접 써본", "꾸준히 쓴", "오래 써본" 같은 표현 사용. 25~45자.',
+    example: '린백 LB221HA 가성비 의자 직접 써본 솔직 후기'
   },
   {
     id: 'af_switch', name: '④갈아탄형',
@@ -2237,24 +2237,23 @@ const AFFILIATE_TITLE_FORMULAS: TitleFormula[] = [
 ];
 
 // ✅ [v3 → v4] 카테고리별 우선 공식 매핑 — 20개 아키타입 기반 감정 온도별 최적화
-// ✅ [v1.4.46] 기간체험형(hf_duration_exp) 우선순위를 모두 뒤로 밀음 (1~2순위 → 4~5순위)
-// 원인: 거의 모든 카테고리에서 기간체험형이 1순위 → 매 글마다 기간 표현 반복
-// 수정: 다양한 공식(직접체험, 비교, 숫자증명, 발견요소 등)이 먼저 선택되도록 재배치
+// ✅ [v1.4.47] 기간체험형 완전 제거 — 카테고리별 우선순위에서 아예 빠짐
+// 기간체험형은 이제 일반 pool에서만 선택 가능하며, 최근 이력 2개 이상 시 스킵됨
 const CATEGORY_FORMULA_PRIORITY: Record<string, string[]> = {
   // 🧊 쿨-정보형 카테고리
   '사회': ['hf_simple_summary', 'hf_miss_loss', 'hf_applicability', 'hf_numeric_proof', 'hf_common_worry'],
   '재테크': ['hf_numeric_proof', 'hf_miss_loss', 'hf_comparison', 'hf_simple_summary', 'loss_aversion'],
   // 🔥 워밍-공감형 카테고리
-  '건강': ['hf_direct_exp', 'hf_unexpected', 'hf_confession', 'hf_me_too', 'hf_duration_exp'],
-  'IT': ['hf_comparison', 'hf_before_after', 'hf_final_choice', 'hf_numeric_proof', 'hf_duration_exp'],
-  '여행': ['hf_others_reaction', 'hf_before_after', 'hf_hidden_truth', 'hf_me_too', 'hf_duration_exp'],
-  '음식': ['hf_direct_exp', 'hf_others_reaction', 'hf_hidden_truth', 'hf_confession', 'hf_duration_exp'],
-  '맛집': ['hf_direct_exp', 'hf_others_reaction', 'hf_hidden_truth', 'hf_confession', 'hf_duration_exp'],
-  '리빙': ['hf_before_after', 'hf_others_reaction', 'hf_accumulated', 'hf_comparison', 'hf_duration_exp'],
-  '육아': ['hf_me_too', 'hf_confession', 'hf_common_worry', 'hf_accumulated', 'hf_duration_exp'],
-  '패션': ['hf_before_after', 'hf_others_reaction', 'hf_comparison', 'hf_final_choice', 'hf_duration_exp'],
-  '반려동물': ['hf_me_too', 'hf_confession', 'hf_before_after', 'hf_others_reaction', 'hf_duration_exp'],
-  '쇼핑': ['hf_numeric_proof', 'hf_comparison', 'hf_confession', 'hf_final_choice', 'hf_duration_exp'],
+  '건강': ['hf_direct_exp', 'hf_unexpected', 'hf_confession', 'hf_me_too', 'hf_before_after'],
+  'IT': ['hf_comparison', 'hf_before_after', 'hf_final_choice', 'hf_numeric_proof', 'hf_unexpected'],
+  '여행': ['hf_others_reaction', 'hf_before_after', 'hf_hidden_truth', 'hf_me_too', 'hf_unexpected'],
+  '음식': ['hf_direct_exp', 'hf_others_reaction', 'hf_hidden_truth', 'hf_confession', 'hf_unexpected'],
+  '맛집': ['hf_direct_exp', 'hf_others_reaction', 'hf_hidden_truth', 'hf_confession', 'hf_unexpected'],
+  '리빙': ['hf_before_after', 'hf_others_reaction', 'hf_comparison', 'hf_direct_exp', 'hf_unexpected'],
+  '육아': ['hf_me_too', 'hf_confession', 'hf_common_worry', 'hf_direct_exp', 'hf_unexpected'],
+  '패션': ['hf_before_after', 'hf_others_reaction', 'hf_comparison', 'hf_final_choice', 'hf_unexpected'],
+  '반려동물': ['hf_me_too', 'hf_confession', 'hf_before_after', 'hf_others_reaction', 'hf_unexpected'],
+  '쇼핑': ['hf_numeric_proof', 'hf_comparison', 'hf_confession', 'hf_final_choice', 'hf_unexpected'],
   // 🔥🔥 핫-반응형 카테고리
   '연예': ['hf_comments', 'hf_others_reaction', 'hf_after_story', 'hf_reason_tracking', 'hf_spread'],
   '스포츠': ['hf_comments', 'hf_others_reaction', 'hf_after_story', 'hf_numeric_proof', 'hf_reason_tracking'],
@@ -2420,12 +2419,35 @@ async function generateTitleOnlyPatch(source: ContentSource, mode: PromptMode, c
     console.log('[TitleGen] ⚠️ 제목 전용 프롬프트 로드 실패, 기본 규칙 사용');
   }
 
-  // 기본 규칙 (프롬프트 로드 실패 시 폴백)
+  // ✅ [v1.4.47] 프롬프트 내부 하드코딩된 기간 예시 일괄 마스킹
+  // 원인: 프롬프트 파일 16개에 "3개월", "한 달", "2주" 등이 예시 제목에 박혀있어
+  //       AI가 그대로 복사 → 매 글마다 기간 표현 반복
+  // 해결: 프롬프트를 런타임에 마스킹 + 강제 금지 지시 주입
+  if (titlePrompt) {
+    const beforeLen = titlePrompt.length;
+    titlePrompt = titlePrompt
+      // 숫자+기간 단위를 일반화: "3개월" → "장기간", "2주" → "꾸준히", "한 달" → "한동안"
+      .replace(/\d+\s*개월\s*(?:차|째|만에|이용|사용|동안|후|전)?/g, '장기간')
+      .replace(/\d+\s*주\s*(?:차|째|만에|이용|사용|동안|후|전)?/g, '꾸준히')
+      .replace(/\d+\s*년\s*(?:차|째|만에|이용|사용|동안|후|전)?/g, '오랜 기간')
+      .replace(/한\s*달(?:\s*(?:써본|써보니|쓴|복용|사용|후|전))?/g, '한동안 써본')
+      .replace(/반년(?:\s*(?:써본|써보니|쓴|복용|사용|후|전))?/g, '오래 써본');
+    console.log(`[TitleGen] 🔧 프롬프트 기간 예시 마스킹: ${beforeLen}자 → ${titlePrompt.length}자`);
+
+    // 강제 금지 지시 주입
+    titlePrompt += '\n\n🚫🚫🚫 [v1.4.47 강제 규칙 — 위반 시 0점]\n' +
+      '1. 제목에 숫자+기간 단위(N주/N개월/N년/한 달/반년) 절대 사용 금지\n' +
+      '2. 체험 표현은 "직접 써본", "꾸준히 써본", "오래 써본", "써보니", "써본 후기" 사용\n' +
+      '3. 구체성이 필요하면 금액/비율/개수/조건/방법/대상/비교 등을 사용\n' +
+      '4. 위 규칙 위반 시 제목 후보는 0점 처리됩니다.\n';
+  }
+
+  // ✅ [v1.4.47] 기본 규칙 (프롬프트 로드 실패 시 폴백) — 하드코딩된 기간 예시 제거
   const defaultTitleRules = mode === 'homefeed'
-    ? `[필수 공식] {인물/상품명} + {마이크로 디테일} + {감정/공감 트리거}. 예: "손흥민, 경기 후 라커룸에서 보여준 '침묵'의 의미"`
+    ? `[필수 공식] {인물/상품명} + {마이크로 디테일} + {감정/공감 트리거}`
     : mode === 'affiliate'
-      ? `[필수 공식] {상품명(브랜드+모델명만)}, {사용기간} {자연어 후기 표현}. 단어 나열 금지, 자연어 문장형 필수. 예: "캐치웰 CX PRO, 한 달 써본 솔직 후기"`
-      : `[필수 공식] {메인 키워드} + {구체적 숫자/기간} + {클릭 트리거}. 예: "자동차세 연납 1월까지, 4.57% 할인 받은 후기"`;
+      ? `[필수 공식] {상품명(브랜드+모델명만)}, {체험/상황 표현} {자연어 후기}. 단어 나열 금지, 자연어 문장형 필수. 기간 수치(N주/N개월) 사용 금지 — "직접 써본", "꾸준히 쓴" 등 표현 사용.`
+      : `[필수 공식] {메인 키워드} + {구체성(금액/비율/개수/조건/방법/대상 중 택1)} + {클릭 트리거}. 기간 수치는 매 글마다 다양화 필수.`;
 
   const schema = `Output ONLY valid JSON. NO markdown.\n\n{"selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95}, {"text": "string", "score": 90}, {"text": "string", "score": 85}]}`;
 
@@ -2455,8 +2477,8 @@ ${mode === 'homefeed' ? `
 ${mode === 'affiliate' ? `
 ⛔⛔⛔ [쇼핑커넥트 절대 규칙 — 위반 시 0점]
 1. 상품명의 모든 키워드를 넣지 마세요. "브랜드명 + 모델명"만 사용하세요.
-   ❌ "린백 컴퓨터 학생 책상 의자 린백 한 달 후기" (키워드 나열 = 0점)
-   ✅ "린백 LB221HA, 2주 써본 솔직 후기" (자연어 문장 = 100점)
+   ❌ "린백 컴퓨터 학생 책상 의자 린백 후기" (키워드 나열 = 0점)
+   ✅ "린백 LB221HA, 직접 써본 솔직 후기" (자연어 문장 = 100점)
 2. 키워드를 나열하지 마세요. 자연스러운 한 문장으로 쓰세요.
 3. 같은 단어를 제목에 2번 이상 쓰지 마세요. (예: "린백...린백" → 0점)
 4. originalTitle을 그대로 쓰거나 단어를 재배열하면 0점입니다.
@@ -2723,7 +2745,8 @@ const CATEGORY_BONUSES: Record<string, { pattern: RegExp; points: number; reason
   ],
   '육아': [
     { pattern: /(아이|아기|엄마|아빠)/, points: 3, reason: '육아: 타깃 키워드' },
-    { pattern: /\d+(개월|살|세)/, points: 5, reason: '육아: 연령 구체성' },
+    // ✅ [v1.4.47] 연령 가점은 살/세만 유지 (개월은 기간 반복 원인이므로 제거)
+    { pattern: /\d+(살|세)/, points: 5, reason: '육아: 연령 구체성' },
     { pattern: /(솔직|고민|공감)/, points: 3, reason: '육아: 감정 공감' },
   ],
   'IT': [
@@ -4445,7 +4468,7 @@ ${contentMode === 'seo' ? `
 ⚠️ [SEO 모드 제목 필수 조건]
 1. 메인 키워드를 제목 맨 앞 3글자 이내 배치 (검색 매칭률 ↑)
 2. 28~45자 길이
-3. 1인칭 경험 + 구체적 기간 + 변화/결과 키워드 포함 (예: "써본 후기", "한 달 사용", "5kg 감량")
+3. 1인칭 경험 + 구체성(결과/변화/수치) 포함 (예: "써본 후기", "바꿨더니", "월 얼마 절감"). 기간 수치(N주/N개월)는 연속 발행 시 반복되므로 다른 구체성 우선.
 4. AI 표현 절대 금지 ("결론적으로", "정리하면", "알아보겠습니다")` : ''}
 ${contentMode === 'homefeed' ? `
 ⚠️ [홈판 모드 제목 필수 조건]
