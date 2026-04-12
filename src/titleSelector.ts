@@ -161,12 +161,11 @@ export function scoreTitles(titles: ParsedTitle[]): ParsedTitle[] {
  * 전체 후보 중 기간 표현이 2개 이상이면 초과분에 감점 적용
  */
 function penalizePeriodOveruse(titles: ParsedTitle[]): ParsedTitle[] {
-  const periodPattern = /\d+[년월주일]\s*(차|째|만에|이용|사용|동안|후|전)?/;
+  const periodPattern = /\d+\s*[년월주일]\s*(차|째|만에|이용|사용|동안|후|전)?/;
   const periodTitles = titles.filter(t => periodPattern.test(t.text));
 
-  if (periodTitles.length <= 1) return titles; // 1개 이하면 감점 없음
+  if (periodTitles.length <= 1) return titles;
 
-  // 기간 제목을 점수 낮은 순으로 감점 (가장 높은 1개는 유지)
   const sortedPeriod = [...periodTitles].sort((a, b) => b.score - a.score);
   const toPenalize = new Set(sortedPeriod.slice(1).map(t => t.id));
 
@@ -184,25 +183,116 @@ function penalizePeriodOveruse(titles: ParsedTitle[]): ParsedTitle[] {
   });
 }
 
+// ✅ [v1.4.46] 연속 발행 시 기간 표현 반복 방지 — 최근 N개 글의 기간 사용 이력 추적
+// 사용자 불만: "2주 3주 6개월 3개월" 같은 기간 반복이 심함
+// 원인: 세션 메모리 없어 매 글마다 독립적으로 점수 계산 → 기간 제목이 매번 1위
+// 해결: 최근 10개 글의 기간 사용 이력을 저장, 동일 기간 재사용 시 강한 감점
+const RECENT_HISTORY_SIZE = 10;
+let _recentPeriodUsage: { title: string; usedPeriod: boolean; timestamp: number }[] = [];
+
+function extractPeriodFromTitle(text: string): boolean {
+  return /\d+\s*[년월주일]\s*(차|째|만에|이용|사용|동안|후|전)?/.test(text);
+}
+
+function penalizeSessionRepetition(titles: ParsedTitle[]): ParsedTitle[] {
+  // 최근 10개 중 기간 사용률 계산
+  const recent = _recentPeriodUsage.slice(-RECENT_HISTORY_SIZE);
+  if (recent.length === 0) return titles;
+
+  const periodUsageCount = recent.filter(r => r.usedPeriod).length;
+  const periodUsageRatio = periodUsageCount / recent.length;
+
+  // 최근 3개 중 2개 이상이 기간 표현이면 "최근 과다 사용" 상태
+  const last3 = recent.slice(-3);
+  const last3PeriodCount = last3.filter(r => r.usedPeriod).length;
+  const isOveruseRecent = last3.length >= 2 && last3PeriodCount >= 2;
+
+  // 기간 사용률이 50% 이상이거나 최근 과다 사용이면 강한 감점
+  const needsPenalty = periodUsageRatio >= 0.5 || isOveruseRecent;
+  if (!needsPenalty) return titles;
+
+  const penaltyAmount = isOveruseRecent ? -30 : -20;
+  console.log(`[TitleSelector] 🚫 최근 ${recent.length}개 중 ${periodUsageCount}개가 기간 표현 (${Math.round(periodUsageRatio*100)}%) → 기간 후보 ${penaltyAmount}점 감점`);
+
+  return titles.map(t => {
+    if (extractPeriodFromTitle(t.text)) {
+      return {
+        ...t,
+        score: Math.max(0, t.score + penaltyAmount),
+        reasons: [...t.reasons, `최근 기간 남용 방지(${penaltyAmount})`]
+      };
+    }
+    return t;
+  });
+}
+
+/**
+ * 제목 선택 후 기록 (다음 글 생성 시 반복 방지용)
+ */
+export function recordSelectedTitle(title: string): void {
+  _recentPeriodUsage.push({
+    title,
+    usedPeriod: extractPeriodFromTitle(title),
+    timestamp: Date.now(),
+  });
+  // 최근 N개만 유지
+  if (_recentPeriodUsage.length > RECENT_HISTORY_SIZE * 2) {
+    _recentPeriodUsage = _recentPeriodUsage.slice(-RECENT_HISTORY_SIZE);
+  }
+  console.log(`[TitleSelector] 📝 제목 기록: "${title}" (기간 포함: ${extractPeriodFromTitle(title)})`);
+}
+
+/**
+ * 최근 기간 사용 이력 리셋 (새 세션 시작 시)
+ */
+export function resetTitleHistory(): void {
+  _recentPeriodUsage = [];
+  console.log('[TitleSelector] 🔄 제목 이력 초기화');
+}
+
+/**
+ * 현재 기록된 최근 기간 표현들 반환 (프롬프트 주입용)
+ */
+export function getRecentPeriods(): string[] {
+  return _recentPeriodUsage
+    .slice(-RECENT_HISTORY_SIZE)
+    .filter(r => r.usedPeriod)
+    .map(r => {
+      const match = r.title.match(/\d+\s*[년월주일]\s*(?:차|째|만에|이용|사용|동안|후|전)?/);
+      return match ? match[0].trim() : '';
+    })
+    .filter(Boolean);
+}
+
 /**
  * 최적 제목 선택
  */
 export function selectBestTitle(titles: ParsedTitle[]): ParsedTitle | null {
   if (titles.length === 0) return null;
 
-  // 후보 세트 단위 기간 편중 감점 적용
-  const adjusted = penalizePeriodOveruse(titles);
+  // 1. 후보 세트 단위 기간 편중 감점 (한 글 내 3개 후보)
+  let adjusted = penalizePeriodOveruse(titles);
+
+  // ✅ [v1.4.46] 2. 세션 단위 기간 반복 감점 (연속 발행 시 이전 글들의 이력 참조)
+  adjusted = penalizeSessionRepetition(adjusted);
 
   // 점수 기준 정렬
   const sorted = [...adjusted].sort((a, b) => b.score - a.score);
-  
+
   console.log('[TitleSelector] 제목 점수화 결과:');
   sorted.forEach((t, i) => {
     console.log(`  ${i + 1}. [${t.score}점] ${t.text}`);
     console.log(`     이유: ${t.reasons.join(', ')}`);
   });
-  
-  return sorted[0];
+
+  const selected = sorted[0];
+
+  // ✅ [v1.4.46] 선택된 제목 이력 기록 — 다음 글 생성 시 반복 방지
+  if (selected) {
+    recordSelectedTitle(selected.text);
+  }
+
+  return selected;
 }
 
 /**

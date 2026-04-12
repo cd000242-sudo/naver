@@ -2237,21 +2237,24 @@ const AFFILIATE_TITLE_FORMULAS: TitleFormula[] = [
 ];
 
 // ✅ [v3 → v4] 카테고리별 우선 공식 매핑 — 20개 아키타입 기반 감정 온도별 최적화
+// ✅ [v1.4.46] 기간체험형(hf_duration_exp) 우선순위를 모두 뒤로 밀음 (1~2순위 → 4~5순위)
+// 원인: 거의 모든 카테고리에서 기간체험형이 1순위 → 매 글마다 기간 표현 반복
+// 수정: 다양한 공식(직접체험, 비교, 숫자증명, 발견요소 등)이 먼저 선택되도록 재배치
 const CATEGORY_FORMULA_PRIORITY: Record<string, string[]> = {
   // 🧊 쿨-정보형 카테고리
   '사회': ['hf_simple_summary', 'hf_miss_loss', 'hf_applicability', 'hf_numeric_proof', 'hf_common_worry'],
   '재테크': ['hf_numeric_proof', 'hf_miss_loss', 'hf_comparison', 'hf_simple_summary', 'loss_aversion'],
   // 🔥 워밍-공감형 카테고리
-  '건강': ['hf_duration_exp', 'hf_direct_exp', 'hf_unexpected', 'hf_confession', 'hf_me_too'],
-  'IT': ['hf_comparison', 'hf_duration_exp', 'hf_before_after', 'hf_final_choice', 'hf_numeric_proof'],
-  '여행': ['hf_duration_exp', 'hf_others_reaction', 'hf_before_after', 'hf_hidden_truth', 'hf_me_too'],
+  '건강': ['hf_direct_exp', 'hf_unexpected', 'hf_confession', 'hf_me_too', 'hf_duration_exp'],
+  'IT': ['hf_comparison', 'hf_before_after', 'hf_final_choice', 'hf_numeric_proof', 'hf_duration_exp'],
+  '여행': ['hf_others_reaction', 'hf_before_after', 'hf_hidden_truth', 'hf_me_too', 'hf_duration_exp'],
   '음식': ['hf_direct_exp', 'hf_others_reaction', 'hf_hidden_truth', 'hf_confession', 'hf_duration_exp'],
-  '맛집': ['hf_direct_exp', 'hf_others_reaction', 'hf_hidden_truth', 'hf_duration_exp', 'hf_confession'],
-  '리빙': ['hf_before_after', 'hf_duration_exp', 'hf_others_reaction', 'hf_accumulated', 'hf_comparison'],
-  '육아': ['hf_me_too', 'hf_duration_exp', 'hf_confession', 'hf_common_worry', 'hf_accumulated'],
-  '패션': ['hf_before_after', 'hf_others_reaction', 'hf_duration_exp', 'hf_comparison', 'hf_final_choice'],
-  '반려동물': ['hf_me_too', 'hf_duration_exp', 'hf_confession', 'hf_before_after', 'hf_others_reaction'],
-  '쇼핑': ['hf_numeric_proof', 'hf_duration_exp', 'hf_comparison', 'hf_confession', 'hf_final_choice'],
+  '맛집': ['hf_direct_exp', 'hf_others_reaction', 'hf_hidden_truth', 'hf_confession', 'hf_duration_exp'],
+  '리빙': ['hf_before_after', 'hf_others_reaction', 'hf_accumulated', 'hf_comparison', 'hf_duration_exp'],
+  '육아': ['hf_me_too', 'hf_confession', 'hf_common_worry', 'hf_accumulated', 'hf_duration_exp'],
+  '패션': ['hf_before_after', 'hf_others_reaction', 'hf_comparison', 'hf_final_choice', 'hf_duration_exp'],
+  '반려동물': ['hf_me_too', 'hf_confession', 'hf_before_after', 'hf_others_reaction', 'hf_duration_exp'],
+  '쇼핑': ['hf_numeric_proof', 'hf_comparison', 'hf_confession', 'hf_final_choice', 'hf_duration_exp'],
   // 🔥🔥 핫-반응형 카테고리
   '연예': ['hf_comments', 'hf_others_reaction', 'hf_after_story', 'hf_reason_tracking', 'hf_spread'],
   '스포츠': ['hf_comments', 'hf_others_reaction', 'hf_after_story', 'hf_numeric_proof', 'hf_reason_tracking'],
@@ -2266,9 +2269,22 @@ function selectTitleFormula(mode: PromptMode, attempt: number, usedIds: string[]
     : SEO_TITLE_FORMULAS;
   const allFormulas = [...SEO_TITLE_FORMULAS, ...HOMEFEED_TITLE_FORMULAS, ...AFFILIATE_TITLE_FORMULAS];
 
+  // ✅ [v1.4.46] 최근 기간 표현 2개 이상 사용 시 기간 계열 공식 스킵
+  const DURATION_FORMULA_IDS = ['hf_duration_exp', 'af_duration', 'hf_accumulated'];
+  let skipDurationFormulas = false;
+  try {
+    const { getRecentPeriods } = require('./titleSelector.js');
+    const recent = getRecentPeriods() || [];
+    if (recent.length >= 2) {
+      skipDurationFormulas = true;
+      console.log(`[TitleGen] 🚫 최근 ${recent.length}개 기간 반복 감지 → 기간 계열 공식 스킵`);
+    }
+  } catch { /* 무시 */ }
+
   // ✅ [v3] 카테고리 우선 공식이 있으면 먼저 시도
   if (categoryHint && CATEGORY_FORMULA_PRIORITY[categoryHint]) {
-    const priorityIds = CATEGORY_FORMULA_PRIORITY[categoryHint];
+    const priorityIds = CATEGORY_FORMULA_PRIORITY[categoryHint]
+      .filter(id => !skipDurationFormulas || !DURATION_FORMULA_IDS.includes(id));
     const priorityUnused = priorityIds
       .filter(id => !usedIds.includes(id))
       .map(id => allFormulas.find(f => f.id === id))
@@ -2279,13 +2295,16 @@ function selectTitleFormula(mode: PromptMode, attempt: number, usedIds: string[]
     }
   }
 
-  // 아직 사용하지 않은 공식 우선 (해당 모드 풀에서)
-  const unused = pool.filter(p => !usedIds.includes(p.id));
+  // 아직 사용하지 않은 공식 우선 (해당 모드 풀에서, 필요 시 기간 공식 제외)
+  const filteredPool = skipDurationFormulas
+    ? pool.filter(p => !DURATION_FORMULA_IDS.includes(p.id))
+    : pool;
+  const unused = filteredPool.filter(p => !usedIds.includes(p.id));
   if (unused.length > 0) {
     return unused[attempt % unused.length];
   }
   // 전부 사용했으면 랜덤
-  return pool[Math.floor(Math.random() * pool.length)];
+  return filteredPool[Math.floor(Math.random() * filteredPool.length)] || pool[0];
 }
 
 // ✅ [v3] 감점 이유별 구체적 수정 지침
@@ -2474,6 +2493,22 @@ JSON:
     previousTitlesPrompt += `→ 위 제목들과 구조/표현이 겹치면 0점입니다.\n`;
   }
 
+  // ✅ [v1.4.46] 최근 사용한 기간 표현 동적 금지 — 연속 발행 시 "2주 3주 6개월 3개월" 반복 차단
+  try {
+    const { getRecentPeriods } = await import('./titleSelector.js');
+    const recentPeriods = getRecentPeriods();
+    if (recentPeriods.length > 0) {
+      previousTitlesPrompt += `\n\n🚫 [최근 사용한 기간 표현 — 이번 제목에서 절대 사용 금지]\n`;
+      previousTitlesPrompt += recentPeriods.map(p => `- "${p}"`).join('\n') + '\n';
+      previousTitlesPrompt += `→ 위 기간 표현을 반복하면 0점입니다.\n`;
+      previousTitlesPrompt += `→ 이번 제목은 기간(N주/N개월/N년) 표현 대신 다른 구체성을 사용하세요:\n`;
+      previousTitlesPrompt += `   금액(월 3만원), 비율(4.57%), 개수(딱 하나), 조건(자격 기준),\n`;
+      previousTitlesPrompt += `   방법명(이 설정), 대상(알바생), 비교(vs), 장소, 인물, 상황 등\n`;
+    }
+  } catch (e) {
+    console.warn('[TitleGen] getRecentPeriods 로드 실패:', e);
+  }
+
   // ✅ [2026-02-09 v2] 최대 3회 재생성 + 공식 패턴 로테이션 + 피드백
   const MAX_RETRIES = 3;
   let bestResult: { selectedTitle?: string; titleCandidates?: TitleCandidate[]; titleAlternatives?: string[] } = {};
@@ -2573,6 +2608,11 @@ JSON:
       // ✅ [v2] 합격 기준 75점
       if (qualityScore >= 75) {
         console.log(`[TitleGen] ✅ 품질 검증 통과 (${qualityScore}점, 공식: ${formula.name})`);
+        // ✅ [v1.4.46] 이력 기록
+        try {
+          const { recordSelectedTitle } = require('./titleSelector.js');
+          recordSelectedTitle(selectedTitle);
+        } catch { /* 무시 */ }
         return {
           selectedTitle,
           titleCandidates,
@@ -2586,6 +2626,11 @@ JSON:
           const candQuality = evaluateTitleQuality(candidate.text, primaryKeyword || '', mode, categoryHint);
           if (candQuality.score > qualityScore && candQuality.score >= 75) {
             console.log(`[TitleGen] ✅ 후보 제목이 더 우수: "${candidate.text}" (${candQuality.score}점 > ${qualityScore}점)`);
+            // ✅ [v1.4.46] 이력 기록
+            try {
+              const { recordSelectedTitle } = require('./titleSelector.js');
+              recordSelectedTitle(candidate.text);
+            } catch { /* 무시 */ }
             return {
               selectedTitle: candidate.text,
               titleCandidates,
@@ -2627,6 +2672,13 @@ JSON:
 
   // 최선의 결과 반환
   console.log(`[TitleGen] 최종 결과: "${bestResult.selectedTitle}" (${bestScore}점)`);
+  // ✅ [v1.4.46] 최종 선택 제목을 이력에 기록 (다음 글 생성 시 기간 반복 방지)
+  if (bestResult.selectedTitle) {
+    try {
+      const { recordSelectedTitle } = require('./titleSelector.js');
+      recordSelectedTitle(bestResult.selectedTitle);
+    } catch { /* 무시 */ }
+  }
   return bestResult;
 }
 
@@ -2637,7 +2689,9 @@ JSON:
 // ✅ [v3] 카테고리별 추가 보너스 테이블
 const CATEGORY_BONUSES: Record<string, { pattern: RegExp; points: number; reason: string }[]> = {
   '건강': [
-    { pattern: /\d+(개월|주|일|kg|cm)/, points: 5, reason: '건강: 구체적 수치' },
+    // ✅ [v1.4.46] 기간 가점 축소 (+5→+2), kg/cm만 유지 → 기간 반복 방지
+    { pattern: /\d+(kg|cm)/, points: 5, reason: '건강: 신체 수치' },
+    { pattern: /\d+(개월|주|일)/, points: 2, reason: '건강: 기간(약한 가점)' },
     { pattern: /(효과|증상|원인|치료|예방)/, points: 3, reason: '건강: 의료 키워드' },
     { pattern: /(실제|직접|경험)/, points: 3, reason: '건강: 체험 신뢰' },
   ],
@@ -2792,6 +2846,27 @@ function evaluateTitleQuality(title: string, keyword: string, mode: PromptMode, 
     // ✅ [2026-02-10 FIX] 제목에 따옴표 포함 — 블로그 제목에 부적절
     { condition: /["\u201C\u201D\u300C\u300D\u300E\u300F]/.test(t), points: 20, reason: '제목에 따옴표 포함' },
   ];
+
+  // ✅ [v1.4.46] 최근 세션의 기간 표현 반복 감점 — "2주 3주 6개월 3개월" 차단
+  try {
+    const tsModule = require('./titleSelector.js');
+    const recentPeriods: string[] = tsModule.getRecentPeriods ? tsModule.getRecentPeriods() : [];
+    const hasPeriodInTitle = /\d+\s*[년월주일]\s*(?:차|째|만에|이용|사용|동안|후|전)?/.test(t);
+
+    if (hasPeriodInTitle && recentPeriods.length >= 2) {
+      penalties.push({
+        condition: true,
+        points: 40,
+        reason: `최근 ${recentPeriods.length}개 기간 반복: ${recentPeriods.slice(-3).join(', ')}`
+      });
+    } else if (hasPeriodInTitle && recentPeriods.length >= 1) {
+      penalties.push({
+        condition: true,
+        points: 20,
+        reason: `직전 글 기간 사용: ${recentPeriods[recentPeriods.length - 1]}`
+      });
+    }
+  } catch { /* 무시 */ }
 
   for (const p of penalties) {
     if (p.condition) {
