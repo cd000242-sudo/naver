@@ -24,6 +24,19 @@ import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
 import { checkHomefeedCriticalViolations } from './contentQualityChecker.js';
 import { safeParseJson, cleanJsonOutput, tryFixJson, fixJsonAtPosition } from './jsonParser';
 
+// ✅ [v1.4.50] 예산 초과 전용 에러 클래스 — Safety Lock에서 throw
+// catch 블록에서 instanceof로 식별하여 다른 네트워크/API 에러와 명확히 구분
+export class BudgetExceededError extends Error {
+  constructor(
+    message: string,
+    public readonly currentUsageUSD: number,
+    public readonly budgetUSD: number
+  ) {
+    super(message);
+    this.name = 'BudgetExceededError';
+  }
+}
+
 // ✅ 이모지 자동 제거 함수 (AI가 생성한 이모지 제거)
 function removeEmojis(text: string): string {
   if (!text) return text;
@@ -6554,6 +6567,34 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
     console.warn('[ContentGenerator] Config 로드 실패:', e);
   }
 
+  // ✅ [v1.4.50] Safety Lock — 유료 플랜 사용자의 예산 초과 방지
+  // 무료 플랜은 Google이 자동 차단하므로 Safety Lock 불필요 (무료는 한도만 체크)
+  // 유료 플랜은 카드 자동 청구되므로 앱에서 직접 차단해야 함
+  if (config?.geminiPlanType === 'paid') {
+    try {
+      const { flushGeminiUsage, getGeminiUsageSnapshot } = await import('./gemini.js');
+      await flushGeminiUsage();
+      const usage = await getGeminiUsageSnapshot();
+      const budget = Number(config.geminiCreditBudget) || 300;
+      const spent = Number(usage.estimatedCostUSD) || 0;
+      const ratio = spent / budget;
+
+      if (spent >= budget) {
+        // 100% 도달 — 차단 (사용자가 직접 초기화/예산 상향해야 재개)
+        const msg = `🛡️ Safety Lock 발동: 예산 한도 도달 ($${spent.toFixed(2)} / $${budget}). 설정 → Gemini → 예산을 상향하거나 사용량을 초기화하세요.`;
+        console.error(`[Gemini] ${msg}`);
+        throw new BudgetExceededError(msg, spent, budget);
+      }
+      if (ratio >= 0.9) {
+        // 90% 경고 (차단은 아님)
+        console.warn(`[Gemini] ⚠️ 예산 90% 경고: $${spent.toFixed(2)} / $${budget} (${(ratio * 100).toFixed(1)}%)`);
+      }
+    } catch (e) {
+      if (e instanceof BudgetExceededError) throw e;
+      console.warn('[Gemini] Safety Lock 체크 실패(무시하고 진행):', (e as Error).message);
+    }
+  }
+
   // ✅ [2026-03-16] promptSplitter 모듈로 system/user 분리
   // 기존 37줄 하드코딩 systemInstructionText 제거 → .prompt 파일의 규칙이 그대로 system으로 전달
   const { system: geminiSystemText, user: geminiUserText } = splitPromptByMarker(prompt);
@@ -6707,13 +6748,23 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           console.log(`✅ [Gemini] 응답 수신 완료 (모델: ${modelName}, 길이: ${text.length})`);
 
           // ✅ [2026-03-19] 사용량 추적 (스트리밍 완료 후 aggregated response에서 추출)
+          // ✅ [v1.4.50] thinking 토큰 반영 — Gemini 2.5는 thoughtsTokenCount가 별도 집계됨
+          //    이전: promptTokenCount + candidatesTokenCount (실측 대비 ~60% 과소 집계)
+          //    수정: totalTokenCount - promptTokenCount (output + thinking 모두 포함)
+          //    실측: thinking 토큰이 output의 20배까지 나와서 앱 추정이 실제의 40%밖에 안 됐음
           try {
             const aggResponse = await streamResult.response;
             const usageMeta = (aggResponse as any).usageMetadata;
             if (usageMeta) {
+              const promptTokens = usageMeta.promptTokenCount || 0;
+              const totalTokens = usageMeta.totalTokenCount || 0;
+              // output = total - prompt (thinking/reasoning 토큰 포함)
+              const effectiveOutput = totalTokens > promptTokens
+                ? totalTokens - promptTokens
+                : (usageMeta.candidatesTokenCount || 0);
               trackApiUsage('gemini', {
-                inputTokens: usageMeta.promptTokenCount || 0,
-                outputTokens: usageMeta.candidatesTokenCount || 0,
+                inputTokens: promptTokens,
+                outputTokens: effectiveOutput,
                 model: modelName,
               });
             }
@@ -6738,6 +6789,8 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         throw new Error('응답이 비어있습니다.');
 
       } catch (error) {
+        // ✅ [v1.4.50] Safety Lock 에러는 재시도/폴백 금지 — 즉시 상위로 전파
+        if (error instanceof BudgetExceededError) throw error;
         const errMsg = (error as Error).message || String(error);
         lastError = error as Error;
         const isQuota = errMsg.includes('429') || errMsg.includes('quota') || errMsg.includes('Too Many Requests') || errMsg.includes('resource exhausted');

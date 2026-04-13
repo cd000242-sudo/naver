@@ -137,9 +137,18 @@ export async function initPriceInfoModal(): Promise<void> {
           html += `</div>`;
         }
 
+        // ✅ [v1.4.50] Safety Lock 안내 + Google Cloud Budget Alert 링크 (유료만)
+        if (!isFree) {
+          html += `<div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:6px;padding:8px 10px;margin-bottom:8px;font-size:0.72rem;color:#86efac;line-height:1.5;">`;
+          html += `🛡️ <b>Safety Lock 활성화됨</b> — 설정한 예산 도달 시 앱에서 자동 차단합니다.<br>`;
+          html += `90% 도달 시 콘솔에 경고 로그 출력, 100% 도달 시 Gemini 호출이 즉시 중단됩니다.<br>`;
+          html += `<a href="#" id="gcloud-budget-alert-link" style="color:#fbbf24;text-decoration:underline;font-weight:600;">⭐ Google Cloud 공식 예산 알림 설정하기 (권장)</a>`;
+          html += `</div>`;
+        }
+
         // 안내 문구 (추정치 이유 설명 + AI Studio 링크)
         html += `<div style="font-size:0.7rem;color:#64748b;line-height:1.5;">`;
-        html += `⚠️ 앱에서 추적 가능한 호출만 집계된 <b>추정치</b>입니다.<br>`;
+        html += `⚠️ 앱에서 추적 가능한 호출만 집계된 <b>추정치</b>입니다. (Gemini 2.5 thinking 토큰 포함)<br>`;
         html += `정확한 청구 금액은 <a href="#" id="aistudio-billing-link" style="color:#93c5fd;text-decoration:underline;">Google AI Studio</a>에서 확인하세요.`;
         html += `</div>`;
         html += `</div>`; // 다크 배경 래퍼 닫기
@@ -156,6 +165,7 @@ export async function initPriceInfoModal(): Promise<void> {
           try { await (window.api as any).resetGeminiUsageTracker(); toastManager.success('🔄 초기화 완료!'); geminiQuotaCheckBtn.click(); } catch { toastManager.error('초기화 실패'); }
         });
         document.getElementById('aistudio-billing-link')?.addEventListener('click', (e) => { e.preventDefault(); window.api.openExternalUrl('https://aistudio.google.com/apikey'); });
+        document.getElementById('gcloud-budget-alert-link')?.addEventListener('click', (e) => { e.preventDefault(); window.api.openExternalUrl('https://console.cloud.google.com/billing/budgets'); });
 
       } catch (err: any) {
         geminiQuotaResult.innerHTML = `❌ <b>오류:</b> ${err?.message || '알 수 없는 오류'}`;

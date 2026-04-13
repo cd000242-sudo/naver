@@ -341,7 +341,9 @@ export async function generateBlogContent(
           const completionTokens = usage?.candidatesTokenCount || 0;
 
           // ✅ [2026-03-19] 사용량 누적 추적 (동기, 메모리 누적)
-          trackGeminiUsage(modelName, promptTokens, completionTokens);
+          const _total = usage?.totalTokenCount || 0;
+          const _effOut = _total > promptTokens ? _total - promptTokens : completionTokens;
+          trackGeminiUsage(modelName, promptTokens, _effOut);
 
           console.log(`✅ [Gemini Success] ${modelName} (전체 루프 ${retry + 1}, 모델 시도 ${perModelRetryCount + 1})`);
 
@@ -505,7 +507,10 @@ export async function* generateBlogContentStream(
         const aggResponse = await result.response;
         const streamUsage = (aggResponse as any).usageMetadata;
         if (streamUsage) {
-          trackGeminiUsage(modelName, streamUsage.promptTokenCount || 0, streamUsage.candidatesTokenCount || 0);
+          const _p = streamUsage.promptTokenCount || 0;
+          const _t = streamUsage.totalTokenCount || 0;
+          const _o = _t > _p ? _t - _p : (streamUsage.candidatesTokenCount || 0);
+          trackGeminiUsage(modelName, _p, _o);
         }
       } catch { /* usage 추출 실패 무시 */ }
 
@@ -605,7 +610,12 @@ JSON만 출력하세요. 설명 없이.`;
 
     // ✅ [2026-03-19] 사용량 추적
     const _u = (result.response as any).usageMetadata;
-    if (_u) trackGeminiUsage('gemini-2.5-flash', _u.promptTokenCount || 0, _u.candidatesTokenCount || 0);
+    if (_u) {
+      const _p = _u.promptTokenCount || 0;
+      const _t = _u.totalTokenCount || 0;
+      const _o = _t > _p ? _t - _p : (_u.candidatesTokenCount || 0);
+      trackGeminiUsage('gemini-2.5-flash', _p, _o);
+    }
 
     // JSON 파싱
     const jsonMatch = text.match(/\{[\s\S]*\}/);
@@ -690,7 +700,12 @@ export async function extractCoreSubject(
 
     // ✅ [2026-03-19] 사용량 추적
     const _u2 = (result.response as any).usageMetadata;
-    if (_u2) trackGeminiUsage('gemini-2.5-flash', _u2.promptTokenCount || 0, _u2.candidatesTokenCount || 0);
+    if (_u2) {
+      const _p = _u2.promptTokenCount || 0;
+      const _t = _u2.totalTokenCount || 0;
+      const _o = _t > _p ? _t - _p : (_u2.candidatesTokenCount || 0);
+      trackGeminiUsage('gemini-2.5-flash', _p, _o);
+    }
 
     console.log(`[Gemini] 핵심 주제 추출: "${title}" → "${text}"`);
     return text || title.split(' ')[0];
@@ -768,7 +783,12 @@ JSON만 출력하세요. 설명 없이.`;
 
     // ✅ [2026-03-19] 사용량 추적
     const _u3 = (result.response as any).usageMetadata;
-    if (_u3) trackGeminiUsage('gemini-2.5-flash', _u3.promptTokenCount || 0, _u3.candidatesTokenCount || 0);
+    if (_u3) {
+      const _p = _u3.promptTokenCount || 0;
+      const _t = _u3.totalTokenCount || 0;
+      const _o = _t > _p ? _t - _p : (_u3.candidatesTokenCount || 0);
+      trackGeminiUsage('gemini-2.5-flash', _p, _o);
+    }
 
     // JSON 배열 파싱
     const jsonMatch = text.match(/\[[\s\S]*\]/);
