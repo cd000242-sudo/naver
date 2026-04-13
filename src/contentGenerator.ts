@@ -6519,21 +6519,24 @@ function cleanExpiredCaches(): void {
   }
 }
 
-// ✅ [v1.4.44] Gemini 모델 체인 — 반드시 성공 전략
-// 1단계: 사용자 선택 모델로 최대 재시도 (429/503 지수 백오프)
-// 2단계: limit:0(무료 차단)이면 안내 후 Flash→Flash-Lite 자동 폴백
-// 일반 429/503은 같은 모델로 재시도, limit:0만 폴백
-export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string; geminiModel?: string }): {
+// ✅ [v1.4.49] Gemini 모델 체인 — 플랜 타입별 스마트 기본값
+//   무료 플랜: Flash (RPD 250/일, 연속 발행 안정)
+//   유료 플랜: Flash-Lite (Tier1 RPD 30,000, Flash보다 3배 싸고 3배 많음)
+//   사용자가 명시적으로 선택한 모델은 플랜 관계없이 그 선택 존중
+export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string; geminiModel?: string; geminiPlanType?: 'free' | 'paid' }): {
   primaryModel: string;
   uniqueModels: string[];
   isPro: boolean;
 } {
-  let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || 'gemini-2.5-flash';
+  // 플랜에 따라 기본값 결정
+  const isPaidPlan = config?.geminiPlanType === 'paid';
+  const defaultModel = isPaidPlan ? 'gemini-2.5-flash-lite' : 'gemini-2.5-flash';
+
+  let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || defaultModel;
   if (!primaryModel.startsWith('gemini-')) {
-    primaryModel = 'gemini-2.5-flash';
+    primaryModel = defaultModel;
   }
   const isPro = primaryModel.includes('-pro');
-  // 사용자 선택 모델만 — 폴백은 limit:0 감지 시에만 callGemini 내부에서 처리
   const uniqueModels = [primaryModel];
   return { primaryModel, uniqueModels, isPro };
 }
@@ -6754,6 +6757,35 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           break; // 이 모델 종료 → 다음 폴백 모델로
         }
 
+        // ✅ [v1.4.49] 429 RPD 감지 — 일일 한도 소진 시 재시도 무의미
+        //   GenerateRequestsPerDayPerProjectPerModel 또는 retry in N(N > 5분)이면 RPD
+        const isDailyQuotaExhausted = isQuota && (
+          errMsg.includes('GenerateRequestsPerDayPerProjectPerModel') ||
+          errMsg.includes('PerDay') ||
+          // retry in 힌트가 5분(300초) 이상이면 RPD 소진으로 판단
+          (() => {
+            const m = errMsg.match(/retry in ([\d.]+)s/i);
+            return m ? parseFloat(m[1]) >= 300 : false;
+          })()
+        );
+        if (isDailyQuotaExhausted) {
+          console.error(`❌ [Gemini] ${modelName} 일일 무료 할당량 소진 → 재시도 무의미`);
+          // 다른 키가 있으면 키 로테이션 시도
+          const nextKey = getNextKey();
+          if (nextKey) {
+            console.log(`🔑 [Gemini] 일일 한도 소진 → 다음 키로 전환`);
+            trimmedKey = nextKey;
+            continue;
+          }
+          // 키가 없으면 즉시 명확한 에러 throw
+          throw new Error(
+            `[Gemini] ${modelName} 오늘 무료 할당량을 모두 사용했습니다. ` +
+            `해결 방법: 1) 내일 다시 시도 ` +
+            `2) Google AI Studio에서 추가 API 키 발급 후 설정에 등록 ` +
+            `3) 유료 요금제(Pay-as-you-go)로 전환 (설정에서 "유료" 선택)`
+          );
+        }
+
         // ✅ [v1.4.44] 429 RPM 제한 → 키 로테이션 시도 → 지수 백오프 재시도
         if (isQuota) {
           // 다른 키가 있으면 먼저 키 교체 시도 (대기 없이 즉시)
@@ -6789,14 +6821,21 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           break; // 모든 재시도 소진
         }
 
-        // ✅ [v1.4.44] 503/500 서버 에러 → 짧은 대기 후 재시도
+        // ✅ [v1.4.49] 503/500 서버 에러 → 지수 백오프 + 더 오래 재시도 (최대 6회 = 약 2분)
+        //   503은 일반적으로 수십 초 내 회복. 중간에 포기하면 사용자 경험 악화
+        //   perModelMaxRetries(4회) 대신 serverErrorMaxRetries(6회) 별도 운용
         if (isServerError) {
           modelRetryCount++;
-          if (modelRetryCount < perModelMaxRetries) {
-            const waitMs = 3000 + modelRetryCount * 2000; // 5초, 7초, 9초
-            console.warn(`🔧 [Gemini] ${modelName} 서버 에러 → ${Math.round(waitMs/1000)}초 후 재시도 (${modelRetryCount}/${perModelMaxRetries})`);
+          const serverErrorMaxRetries = 6;
+          if (modelRetryCount < serverErrorMaxRetries) {
+            // 지수 백오프: 3초 → 6초 → 12초 → 24초 → 45초 → 60초 (cap)
+            const baseMs = 3000;
+            const expMs = Math.min(baseMs * Math.pow(2, modelRetryCount - 1), 60000);
+            const jitterMs = Math.floor(Math.random() * 1000); // 0~1초 지터
+            const waitMs = expMs + jitterMs;
+            console.warn(`🔧 [Gemini] ${modelName} 503 서버 에러 → ${Math.round(waitMs/1000)}초 후 재시도 (${modelRetryCount}/${serverErrorMaxRetries})`);
             if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
-              (window as any).appendLog(`🔧 구글 서버 일시 장애. ${Math.round(waitMs/1000)}초 후 재시도합니다. (${modelRetryCount}/${perModelMaxRetries})`);
+              (window as any).appendLog(`🔧 구글 서버 일시 장애. ${Math.round(waitMs/1000)}초 후 재시도합니다. (${modelRetryCount}/${serverErrorMaxRetries})`);
             }
             await new Promise(resolve => setTimeout(resolve, waitMs));
             continue;

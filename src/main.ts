@@ -4619,22 +4619,22 @@ ipcMain.handle('aiAssistant:runAutoFix', async () => {
       'gemini-2.5-pro',
     ];
 
-    // ✅ 죽은/Preview 모델명 → Stable 모델로 자동 마이그레이션
+    // ✅ [v1.4.49 revert] 죽은/무료차단 모델 → Flash로 마이그레이션 (Flash-Lite RPD 20/일로 부족)
     const modelMigrationMap: Record<string, string> = {
-      'gemini-3-pro': 'gemini-2.5-pro',
+      'gemini-3-pro': 'gemini-2.5-flash',
       'gemini-3-flash': 'gemini-2.5-flash',
-      'gemini-3-pro-preview': 'gemini-2.5-pro',
+      'gemini-3-pro-preview': 'gemini-2.5-flash',
       'gemini-3-flash-preview': 'gemini-2.5-flash',
-      'gemini-3.1-pro-preview': 'gemini-2.5-pro',
+      'gemini-3.1-pro-preview': 'gemini-2.5-flash',
       'gemini-3.1-flash-preview': 'gemini-2.5-flash',
-      'gemini-2.5-pro-preview': 'gemini-2.5-pro',
+      'gemini-2.5-pro-preview': 'gemini-2.5-flash',
       'gemini-2.0-flash': 'gemini-2.5-flash',
       'gemini-2.0-flash-exp': 'gemini-2.5-flash',
       'gemini-1.5-flash': 'gemini-2.5-flash',
       'gemini-1.5-flash-latest': 'gemini-2.5-flash',
-      'gemini-1.5-pro': 'gemini-2.5-pro',
-      'gemini-1.5-pro-latest': 'gemini-2.5-pro',
-      'gemini-1.5-flash-8b': 'gemini-2.5-flash-lite',
+      'gemini-1.5-pro': 'gemini-2.5-flash',
+      'gemini-1.5-pro-latest': 'gemini-2.5-flash',
+      'gemini-1.5-flash-8b': 'gemini-2.5-flash',
     };
 
     // 저장된 모델이 마이그레이션 대상인 경우 자동 변환
@@ -4654,7 +4654,7 @@ ipcMain.handle('aiAssistant:runAutoFix', async () => {
     if (!config.geminiModel) {
       config.geminiModel = 'gemini-2.5-flash';
       configChanged = true;
-      fixResults.push({ action: 'Gemini 모델 설정', success: true, message: '기본 모델 설정됨' });
+      fixResults.push({ action: 'Gemini 모델 설정', success: true, message: '기본 모델 설정됨 (Flash)' });
     }
 
     // 설정 저장

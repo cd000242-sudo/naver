@@ -494,15 +494,19 @@ export async function initPriceInfoModal(): Promise<void> {
       }
     }
 
-    // ✅ Gemini 이미지 플랜 라디오 버튼 로드
-    const planType = config.geminiPlanType || 'paid'; // 기본값: paid
+    // ✅ [v1.4.49] Gemini 플랜 라디오 버튼 로드 (텍스트+이미지 공통)
+    //   기본값을 'free'로 — 유료 전환 안 한 사용자가 대다수이므로 안전한 기본값
+    //   이 값은 buildGeminiModelChain에서 기본 모델 결정에도 사용됨:
+    //     free → gemini-2.5-flash (RPD 250/일)
+    //     paid → gemini-2.5-flash-lite (Tier1 RPD 30,000 + Flash의 1/3 가격)
+    const planType = config.geminiPlanType || 'free';
     const planRadios = document.getElementsByName('geminiPlanType') as NodeListOf<HTMLInputElement>;
     planRadios.forEach(radio => {
       if (radio.value === planType) {
         radio.checked = true;
       }
     });
-    console.log('[Settings] Gemini 이미지 플랜 로드됨:', planType);
+    console.log('[Settings] Gemini 플랜 로드됨:', planType);
 
     try {
       const unifiedGeminiModel = document.getElementById('unified-gemini-model') as HTMLSelectElement | null;
@@ -746,8 +750,8 @@ export async function initPriceInfoModal(): Promise<void> {
           leonardoaiModel: (document.getElementById('leonardoai-model-select') as HTMLSelectElement)?.value || 'seedream-4.5',
           deepinfraApiKey: (document.getElementById('deepinfra-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-01-26] DeepInfra API
           customImageSavePath: customImageSavePathInput?.value.trim() || undefined,
-          primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-2.5-flash', // ✅ Gemini 텍스트 주력 모델
-          geminiPlanType: (document.querySelector('input[name="geminiPlanType"]:checked') as HTMLInputElement)?.value as 'free' | 'paid' || 'paid', // ✅ Gemini 이미지 플랜
+          primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-2.5-flash', // ✅ [v1.4.49 revert] 기본값 Flash (Flash-Lite RPD 20/일로 부족)
+          geminiPlanType: (document.querySelector('input[name="geminiPlanType"]:checked') as HTMLInputElement)?.value as 'free' | 'paid' || 'free', // ✅ [v1.4.49] 기본값 free (안전한 기본값 + 텍스트 모델 자동 Flash 선택)
           imagePreset: (document.getElementById('image-preset-input') as HTMLInputElement)?.value as 'budget' | 'premium' | 'custom' || 'custom',
           // ✅ [2026-02-22 FIX] primaryGeminiTextModel에서 defaultAiProvider 자동 파생
           openaiApiKey: (document.getElementById('openai-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-02-22] OpenAI API

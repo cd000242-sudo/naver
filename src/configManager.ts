@@ -113,7 +113,7 @@ export interface AppConfig {
     lastUpdated: string; // ISO date
     firstTracked: string; // ISO date - 추적 시작일
   };
-  geminiCreditBudget?: number; // 사용자 설정 예산 (USD, 기본 $300)
+  geminiCreditBudget?: number; // 사용자 설정 예산 (USD, 기본 $300). 직접 결제한 금액 추적용
 
   // ✅ [2026-03-19] 통합 API 사용량 추적 (모든 제공자)
   apiUsageTrackers?: {
@@ -242,10 +242,11 @@ export async function loadConfig(): Promise<AppConfig> {
       'gemini-3.1-pro-preview', 'gemini-3-pro-preview',
       'gemini-2.0-flash', 'gemini-2.0-flash-001',
     ]);
+    // ✅ [v1.4.49 revert] 마이그레이션 기본값을 Flash로 (Flash-Lite 실제 RPD 20/일로 부족)
     let geminiModel = parsed.geminiModel;
     if (geminiModel && DEAD_TEXT_MODELS.has(geminiModel)) {
       const oldModel = geminiModel;
-      geminiModel = geminiModel.includes('-pro') ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
+      geminiModel = 'gemini-2.5-flash';
       console.log(`[Config] ⚠️ geminiModel(${oldModel}) → ${geminiModel}로 자동 마이그레이션`);
     }
 
@@ -255,7 +256,7 @@ export async function loadConfig(): Promise<AppConfig> {
         primaryGeminiTextModel.startsWith('gemini-') &&
         DEAD_TEXT_MODELS.has(primaryGeminiTextModel)) {
       const oldModel = primaryGeminiTextModel;
-      primaryGeminiTextModel = primaryGeminiTextModel.includes('-pro') ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
+      primaryGeminiTextModel = 'gemini-2.5-flash';
       console.log(`[Config] ⚠️ primaryGeminiTextModel(${oldModel}) → ${primaryGeminiTextModel}로 자동 마이그레이션`);
     }
 

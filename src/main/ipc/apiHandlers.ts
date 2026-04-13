@@ -84,42 +84,50 @@ export function registerApiHandlers(_ctx: IpcContext): void {
 
             // 4. 사용자의 현재 플랜 설정 읽기
             const config = await loadConfig();
-            const userPlanType = config.geminiPlanType || 'paid'; // 사용자 설정값
+            // ✅ [v1.4.49] 기본값을 'free'로 (결제 수단 없는 사용자가 대다수)
+            const userPlanType = config.geminiPlanType || 'free';
 
             // ✅ [2026-03-19] flush 후 메모리+디스크 합산 스냅샷 사용 (배치 중 누적분 포함)
             await flushGeminiUsage();
             const usageTracker = await getGeminiUsageSnapshot();
             const creditBudget = (config as any).geminiCreditBudget || 300; // 기본 $300
 
-            // 5. Google 공식 가격표 기반 플랜별 정보 (2026-03 기준)
-            // 출처: https://ai.google.dev/pricing
+            // ✅ [v1.4.49] Google 공식 가격표 + 실측 기반 정확한 한도 (2026-04 기준)
+            // 출처: https://ai.google.dev/gemini-api/docs/rate-limits
             const planInfo = userPlanType === 'free' ? {
                 label: '🆓 무료 (Free tier)',
                 limits: {
-                    rpm: 15,         // 분당 요청 수
-                    rpd: 1500,       // 일일 요청 수
-                    tpm: '1,000,000', // 분당 토큰
+                    // Flash 2.5 기준 (실측)
+                    rpm: 10,         // 분당 요청 수
+                    rpd: 250,        // 일일 요청 수
+                    tpm: '250,000',  // 분당 토큰
+                    note: 'Flash-Lite는 RPD 20건/일로 더 적음. Pro는 차단(limit:0).',
                 },
                 pricing: {
                     flash_input: '$0 (무료)',
                     flash_output: '$0 (무료)',
-                    pro_input: '$0 (무료)',
-                    pro_output: '$0 (무료)',
-                    note: '무료 티어는 속도 제한이 있으며, 상업적 사용이 제한됩니다.',
+                    flash_lite_input: '$0 (무료, RPD 20/일)',
+                    pro_input: '사용 불가 (무료 티어 차단)',
+                    pro_output: '사용 불가',
+                    note: '무료는 하루 250건 한도. 초과 시 다음날까지 대기. 상업적 사용 가능.',
                 },
             } : {
-                label: '💎 유료 (Pay-as-you-go)',
+                label: '💎 유료 (Tier 1 / Pay-as-you-go)',
                 limits: {
-                    rpm: 2000,        // 분당 요청 수
-                    rpd: '무제한',     // 일일 요청 수
-                    tpm: '4,000,000', // 분당 토큰
+                    // Flash 2.5 Tier 1 기준
+                    rpm: 1000,        // 분당 요청 수
+                    rpd: 10000,       // 일일 요청 수 (Flash 기준, Flash-Lite는 30000)
+                    tpm: '1,000,000', // 분당 토큰
+                    note: 'Flash-Lite는 RPD 30,000건/일로 더 많음. Pro는 50건/일.',
                 },
                 pricing: {
                     flash_input: '$0.10 / 1M tokens',
                     flash_output: '$0.40 / 1M tokens',
+                    flash_lite_input: '$0.025 / 1M tokens (Flash의 1/4)',
+                    flash_lite_output: '$0.10 / 1M tokens (Flash의 1/4)',
                     pro_input: '$1.25 / 1M tokens',
                     pro_output: '$5.00 / 1M tokens',
-                    note: '유료 플랜은 높은 속도 제한과 상업적 사용이 가능합니다.',
+                    note: 'Flash-Lite 권장 — 글 1개당 약 ₩1로 가장 저렴. 크레딧 소진 후 카드 자동 청구 시작.',
                 },
             };
 

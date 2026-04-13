@@ -28,15 +28,15 @@ interface GenerateResult {
 
 // ==================== 상수 ====================
 
-// ✅ [2026-04-09] Stable Gemini 모델만 사용 (Preview 제거)
+// ✅ [v1.4.49 revert] 기본 모델을 Flash로 되돌림 (Flash-Lite 실제 무료 RPD는 20/일로 너무 적음)
 const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 
 // ✅ 사용 가능한 모델 목록 (환경설정에서 선택 가능)
-// [v1.4.32] 가격 순서대로 3티어 정렬: 가성비(Lite) → 균형(Flash) → 프리미엄(Pro)
+// [v1.4.49] 실측 기반 정확한 무료 할당량 표시
 export const AVAILABLE_MODELS = [
-  { id: 'gemini-2.5-flash-lite', name: 'Gemini 2.5 Flash-Lite (💰 가성비 ~₩15/글)', tier: 'budget' },
-  { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash (⚖️ 균형 ~₩80/글)', tier: 'standard' },
-  { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro (👑 프리미엄 ~₩300/글)', tier: 'premium' },
+  { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash (⚖️ 무료 250/일 · 기본 추천)', tier: 'standard' },
+  { id: 'gemini-2.5-flash-lite', name: 'Gemini 2.5 Flash-Lite (💰 무료 20/일 · 백업용)', tier: 'budget' },
+  { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro (👑 유료 전용)', tier: 'premium' },
 ];
 
 const BASE_FALLBACK_MODELS = [
@@ -416,12 +416,15 @@ export async function generateBlogContent(
             break;
           }
 
-          // ✅ [v1.4.44] 503/500 서버 에러 → 짧은 대기 후 재시도
+          // ✅ [v1.4.49] 503/500 서버 에러 → 지수 백오프 + 최대 6회 재시도 (약 2분)
           if (isServerError) {
             perModelRetryCount++;
-            if (perModelRetryCount < PER_MODEL_MAX) {
-              const waitMs = 3000 + perModelRetryCount * 2000;
-              console.warn(`🔧 [Gemini] ${modelName} 서버 에러 → ${Math.round(waitMs/1000)}초 후 재시도 (${perModelRetryCount}/${PER_MODEL_MAX})`);
+            const serverErrorMaxRetries = 6;
+            if (perModelRetryCount < serverErrorMaxRetries) {
+              // 지수 백오프: 3→6→12→24→45→60초 (cap) + 지터
+              const expMs = Math.min(3000 * Math.pow(2, perModelRetryCount - 1), 60000);
+              const waitMs = expMs + Math.floor(Math.random() * 1000);
+              console.warn(`🔧 [Gemini] ${modelName} 503 서버 에러 → ${Math.round(waitMs/1000)}초 후 재시도 (${perModelRetryCount}/${serverErrorMaxRetries})`);
               await new Promise(resolve => setTimeout(resolve, waitMs));
               continue;
             }
