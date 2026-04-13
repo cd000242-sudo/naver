@@ -6305,7 +6305,119 @@ export function validateBusinessContent(content: StructuredContent, source: Cont
   return { hasCritical: violations.length > 0, violations, warnings };
 }
 
+/**
+ * ✅ [v1.4.52] 출처 날조 표현 강제 제거 sanitizer (3-Layer 박멸)
+ * 프롬프트로 금지해도 AI가 종종 출력하는 외부 출처 표현을 정규식으로 100% 제거
+ *
+ * Layer 1: 강한 출처 명사 (원문/기사/보도/영상 등) — 모든 조사 변형 + 한정사 prefix
+ * Layer 2: 약한 출처 명사 (본문/자료/뉴스 등) — 출처 조사에만 반응 (오탐 방지)
+ * Layer 3: 일반 출처 표현 (전해진 바/관계자/매체 등)
+ */
+function stripFakeSourcePhrases(text: string): string {
+  if (!text) return text;
+  let out = text;
+
+  // 한정사 prefix: "본 기사", "위 영상", "해당 자료", "공식 자료", "이 기사" 등
+  // ⚠️ leading \s* 를 두면 단어 사이 공백을 흡수해 인접 단어가 붙어버림
+  //    → 한정사 + 공백을 한 그룹으로 묶고, prefix 자체는 leading 공백 흡수 금지
+  const PREFIX = '(?:(?:본|위|해당|공식|이|그|저|한|일부)\\s+)?';
+
+  // ━━━ Layer 1: 강한 출처 명사 (오탐 위험 낮음 — 모든 조사 처리) ━━━
+  const STRONG = '원문|원본|기사|보도|외신|영상|유튜브|동영상|클립|쇼츠|숏츠|논문|취재';
+
+  // 1-A. 캡처 그룹 없는 패턴 → 빈 문자열로 치환
+  // ⚠️ 콜백 형태 사용 금지 — 캡처 그룹 0개일 때 두 번째 인자가 offset(number)이라
+  //    `(_, p1) => p1 ? p1 : ''` 콜백이 두 번째 매칭부터 offset 숫자를 결과에 삽입함
+  const strongPatternsEmpty: RegExp[] = [
+    // ~에서(는|도|선) + 선택적 동사
+    new RegExp(
+      `${PREFIX}(?:${STRONG})\\s*에(?:서[는도]?|선)(?:\\s*(?:확인|보면|나오|소개|다루|언급|등장|말하|전하)\\S*)?\\s*[,，]?\\s*`,
+      'g'
+    ),
+    // ~에 따르면 / ~에 의하면
+    new RegExp(`${PREFIX}(?:${STRONG})\\s*에\\s*(?:따르면|의하면)\\s*[,，]?\\s*`, 'g'),
+    // ~을/를 보(니|면|자|았더니)
+    new RegExp(
+      `${PREFIX}(?:${STRONG})\\s*(?:을|를)\\s*보(?:니|면|자|았\\S*)?\\s*[,，]?\\s*`,
+      'g'
+    ),
+  ];
+  for (const re of strongPatternsEmpty) {
+    out = out.replace(re, '');
+  }
+
+  // 1-B. 문장 시작 ~은/는 — 캡처 그룹 1개($1)로 문장 구분자 보존
+  const strongStartPattern = new RegExp(
+    `(^|[\\.\\?\\!]\\s+)(?:${STRONG})(?:은|는)\\s+`,
+    'g'
+  );
+  out = out.replace(strongStartPattern, '$1');
+
+  // ━━━ Layer 2: 약한 출처 명사 (오탐 위험 있음 — 명확한 출처 조사만) ━━━
+  // "글", "내용" 등은 자기 글 지칭일 수 있어 제외
+  const WEAK = '본문|문서|포스팅|포스트|리뷰|자료|뉴스|방송|매체|발표|보고서';
+
+  const weakPatterns: RegExp[] = [
+    new RegExp(`${PREFIX}(?:${WEAK})\\s*에(?:서[는도]?|선)\\s*[,，]?\\s*`, 'g'),
+    new RegExp(`${PREFIX}(?:${WEAK})\\s*에\\s*(?:따르면|의하면)\\s*[,，]?\\s*`, 'g'),
+    new RegExp(`${PREFIX}(?:${WEAK})\\s*(?:을|를)\\s*보(?:니|면|자|았\\S*)?\\s*[,，]?\\s*`, 'g'),
+  ];
+  for (const re of weakPatterns) {
+    out = out.replace(re, '');
+  }
+
+  // ━━━ Layer 3: 일반 출처 표현 ━━━
+  out = out
+    .replace(/(?:전해진|알려진)\s*바에?\s*(?:따르면|의하면)\s*[,，]?\s*/g, '')
+    .replace(/관계자에?\s*(?:따르면|의하면)\s*[,，]?\s*/g, '')
+    .replace(/(?:한|일부|여러)\s*매체(?:에서|에)?\s*(?:따르면|의하면|보도)?\s*[,，]?\s*/g, '')
+    .replace(/외신\s*(?:보도)?에?\s*(?:따르면|의하면)?\s*[,，]?\s*/g, '')
+    .replace(/공식\s*(?:발표|입장)에?\s*(?:따르면|의하면)\s*[,，]?\s*/g, '');
+
+  // ━━━ 잔여 정리 ━━━
+  out = out
+    .replace(/^\s*[,，\.]\s*/gm, '')      // 줄 시작 쉼표/마침표
+    .replace(/\s{2,}/g, ' ')              // 이중 공백 → 단일
+    .replace(/\.\s*\./g, '.')             // 이중 마침표
+    .replace(/\s+([,，\.\?\!])/g, '$1')   // 부호 앞 공백
+    .trim();
+
+  return out;
+}
+
+/** content 객체 전체에 출처 날조 sanitizer 적용 (mutate) */
+function sanitizeContentFakeSources(content: StructuredContent): number {
+  let count = 0;
+  const tryFix = (s: string | undefined): string | undefined => {
+    if (!s) return s;
+    const fixed = stripFakeSourcePhrases(s);
+    if (fixed !== s) count++;
+    return fixed;
+  };
+
+  // ✅ [v1.4.52] 제목 + 도입부 + 결론 + 모든 소제목/본문 전수 sanitization
+  if (content.selectedTitle) content.selectedTitle = tryFix(content.selectedTitle)!;
+  if ((content as any).title) (content as any).title = tryFix((content as any).title);
+  if (content.introduction) content.introduction = tryFix(content.introduction)!;
+  if (content.conclusion) content.conclusion = tryFix(content.conclusion)!;
+  if (Array.isArray(content.headings)) {
+    for (const h of content.headings as any[]) {
+      if (h.title) h.title = tryFix(h.title);
+      if (h.body) h.body = tryFix(h.body);
+      if (h.content) h.content = tryFix(h.content);
+    }
+  }
+  if (count > 0) {
+    console.warn(`[Sanitizer] 🧹 출처 날조 표현 ${count}개 자동 제거`);
+  }
+  return count;
+}
+
 function validateHomefeedContent(content: StructuredContent, source: ContentSource): { hasCritical: boolean; violations: string[] } {
+  // ✅ [v1.4.52] 모든 모드에서 출처 날조 표현 강제 제거 (early return보다 먼저 실행)
+  // 프롬프트로 금지해도 AI가 종종 출력하므로 정규식 박멸
+  sanitizeContentFakeSources(content);
+
   if (source.contentMode !== 'homefeed') return { hasCritical: false, violations: [] };
 
   console.log('[HomefeedValidator] 🔍 홈판 모드 전용 검증 시작...');
@@ -8818,6 +8930,10 @@ export async function generateStructuredContent(
 
       // ✅ [소제목 본문 동기화] - Stage 1 짧은 소제목을 Stage 2 본문의 전체 소제목으로 업데이트
       syncHeadingsWithBodyPlain(parsed);
+
+      // ✅ [v1.4.52] 출처 날조 sanitizer — 모든 모드에 무조건 적용 (SEO/홈판/비즈니스/리뷰 등)
+      // 모드별 검증 함수 우회 시에도 sanitization 보장
+      sanitizeContentFakeSources(parsed);
 
       // ✅ 모드별 전용 검증 (제목/도입부/톤 등 추가 체크)
       validateSeoContent(parsed, source);      // SEO 모드: 키워드/숫자/트리거 검증
