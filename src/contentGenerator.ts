@@ -37,6 +37,25 @@ export class BudgetExceededError extends Error {
   }
 }
 
+// ✅ [v1.4.51] Gemini 빈 응답 전용 에러 클래스 — finishReason별 대응 위해
+// SAFETY/RECITATION → 재시도 금지, MAX_TOKENS → 설정 조정 후 재시도, OTHER → 일반 재시도
+export class GeminiEmptyResponseError extends Error {
+  constructor(
+    message: string,
+    public readonly finishReason: string,
+    public readonly promptTokens: number = 0,
+    public readonly thinkingTokens: number = 0,
+    public readonly outputTokens: number = 0
+  ) {
+    super(message);
+    this.name = 'GeminiEmptyResponseError';
+  }
+  /** 재시도해도 의미없는 영구 실패인지 (SAFETY/RECITATION) */
+  get isPermanent(): boolean {
+    return this.finishReason === 'SAFETY' || this.finishReason === 'RECITATION';
+  }
+}
+
 // ✅ 이모지 자동 제거 함수 (AI가 생성한 이모지 제거)
 function removeEmojis(text: string): string {
   if (!text) return text;
@@ -6597,7 +6616,12 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
 
   // ✅ [2026-03-16] promptSplitter 모듈로 system/user 분리
   // 기존 37줄 하드코딩 systemInstructionText 제거 → .prompt 파일의 규칙이 그대로 system으로 전달
-  const { system: geminiSystemText, user: geminiUserText } = splitPromptByMarker(prompt);
+  // ✅ [v1.4.51] geminiUserText/temperature를 mutable로 — 빈 응답 회복 시 프롬프트 증강
+  const { system: geminiSystemText, user: geminiUserTextOriginal } = splitPromptByMarker(prompt);
+  let geminiUserText = geminiUserTextOriginal;
+  let activeTemperature = temperature;
+  let promptAugmentationCount = 0;
+  const MAX_PROMPT_AUGMENTATIONS = 2;
 
   // 1. API 키 로드 — 다중 키 로테이션 지원
   const primaryApiKey = (config?.geminiApiKey?.trim() || process.env.GEMINI_API_KEY || '').trim();
@@ -6628,8 +6652,14 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   for (let i = 0; i < modelsToTry.length; i++) {
     const modelName = modelsToTry[i];
     let modelRetryCount = 0;
-    // 폴백 모델은 키 인덱스 리셋
-    if (i > 0) { currentKeyIdx = 0; trimmedKey = allApiKeys[0]; }
+    // 폴백 모델은 키 인덱스 + 프롬프트 증강 상태 리셋
+    if (i > 0) {
+      currentKeyIdx = 0;
+      trimmedKey = allApiKeys[0];
+      promptAugmentationCount = 0;
+      geminiUserText = geminiUserTextOriginal;
+      activeTemperature = temperature;
+    }
 
     while (modelRetryCount < perModelMaxRetries) {
       try {
@@ -6700,11 +6730,26 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             ? { systemInstruction: { role: 'system', parts: [{ text: geminiSystemText }] } }
             : {}),
           generationConfig: {
-            temperature: temperature,
+            temperature: activeTemperature,
             topP: 0.95,
             topK: 40,
-            maxOutputTokens: 16000,
-          },
+            // ✅ [v1.4.51] 빈 응답 박멸 3종 세트
+            // 1) maxOutputTokens 60000 — Flash 2.5 한도(65536) 근접. 블로그 본문이 이를 초과 불가
+            // 2) thinkingBudget 0 — thinking 토큰이 출력 한도 잠식 차단 (Gemini 2.5만)
+            //    콘텐츠 생성엔 thinking 불필요. humanizer/optimizer 후처리로 품질 보강
+            maxOutputTokens: 60000,
+            ...(modelName.includes('2.5') ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
+          } as any,
+          // ✅ [v1.4.51] 3) safetySettings BLOCK_NONE — SAFETY false positive 박멸
+          // 한국어 블로그(의료/금융/법률/관계) 키워드가 기본 BLOCK_MEDIUM_AND_ABOVE에 자주 걸림
+          // BLOCK_NONE으로 설정해도 Google이 강제 차단하는 최상위 콘텐츠는 여전히 막힘 → 안전
+          // 4개 카테고리 모두 명시적으로 비활성화
+          safetySettings: [
+            { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' },
+          ],
         };
         // ✅ [v1.4.34 FIX] URL 모드 손님 PC 호출 실패 우회
         // 기존: URL 모드(grounding OFF)는 responseMimeType: 'application/json' 활성화
@@ -6786,11 +6831,75 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
 
           return cleaned;
         }
-        throw new Error('응답이 비어있습니다.');
+        // ✅ [v1.4.51] 빈 응답을 GeminiEmptyResponseError로 throw — finishReason별 대응
+        let finishReason = 'UNKNOWN';
+        let promptT = 0, thinkingT = 0, candT = 0;
+        try {
+          const aggResp = await streamResult.response;
+          finishReason = aggResp?.candidates?.[0]?.finishReason || 'UNKNOWN';
+          const usage = (aggResp as any).usageMetadata || {};
+          promptT = usage.promptTokenCount || 0;
+          const totalT = usage.totalTokenCount || 0;
+          candT = usage.candidatesTokenCount || 0;
+          thinkingT = Math.max(0, totalT - promptT - candT);
+        } catch { /* 진단 실패는 무시 — finishReason=UNKNOWN으로 진행 */ }
+
+        const emptyMsg = `응답 비어있음 (finishReason=${finishReason}, in=${promptT}, think=${thinkingT}, out=${candT})`;
+        console.error(`[Gemini] ❌ ${emptyMsg}`);
+        throw new GeminiEmptyResponseError(emptyMsg, finishReason, promptT, thinkingT, candT);
 
       } catch (error) {
         // ✅ [v1.4.50] Safety Lock 에러는 재시도/폴백 금지 — 즉시 상위로 전파
         if (error instanceof BudgetExceededError) throw error;
+
+        // ✅ [v1.4.51] 빈 응답 에러 — 프롬프트 증강으로 무조건 회복
+        // BLOCK_NONE + thinkingBudget 0 + 60K maxOutput으로 거의 안 뜨지만,
+        // RECITATION(safetySettings 무시)이나 잔여 SAFETY는 프롬프트 증강으로 회복
+        if (error instanceof GeminiEmptyResponseError) {
+          lastError = error;
+
+          // 프롬프트 증강 시도 (최대 2회 — 1회: 가드 추가, 2회: 더 강한 가드 + temp 상승)
+          if (promptAugmentationCount < MAX_PROMPT_AUGMENTATIONS) {
+            promptAugmentationCount++;
+            // finishReason별 맞춤 가드
+            let guard = '';
+            if (error.finishReason === 'RECITATION') {
+              guard = '\n\n[필수] 외부 문서/저작물을 그대로 옮기지 말고, 100% 새로운 표현과 문장으로 작성하세요. 인용·복사·발췌 금지.';
+            } else if (error.finishReason === 'SAFETY') {
+              guard = '\n\n[필수] 안전하고 일반적인 표현으로 작성하세요. 자극적·민감·논쟁적 단어를 피하고 중립적 어조를 유지하세요.';
+            } else {
+              // MAX_TOKENS / UNKNOWN — 분량 압축 + 가드
+              guard = '\n\n[필수] 핵심만 간결하게 작성하세요. 불필요한 반복을 피하고, 요청된 분량 범위 내에서 마무리하세요.';
+            }
+            // 누적 증강(2회차는 더 강하게)
+            if (promptAugmentationCount === 2) {
+              guard += ' (재요청) 이전 응답이 비어있었습니다. 반드시 응답을 생성해주세요.';
+            }
+            geminiUserText = geminiUserTextOriginal + guard;
+            // temperature 살짝 상승 — 동일 입력 반복 방지 (cap 1.0)
+            activeTemperature = Math.min(1.0, activeTemperature + 0.1);
+            console.warn(`[Gemini] 🔄 빈 응답 회복 #${promptAugmentationCount} (${error.finishReason}) → 프롬프트 증강 + temp ${activeTemperature.toFixed(2)}`);
+            continue; // 같은 modelRetryCount, 다음 attempt
+          }
+
+          // 증강 2회 모두 실패 → 키 로테이션
+          const nextKey = getNextKey();
+          if (nextKey) {
+            console.warn(`[Gemini] 🔑 빈 응답 회복 실패 → 다음 키로 재시도`);
+            trimmedKey = nextKey;
+            promptAugmentationCount = 0; // 새 키엔 처음부터
+            geminiUserText = geminiUserTextOriginal;
+            activeTemperature = temperature;
+            continue;
+          }
+          // 모든 회복 수단 소진 → 폴백 모델로
+          for (const fb of fallbackCandidates) {
+            if (!modelsToTry.includes(fb)) { modelsToTry.push(fb); }
+          }
+          console.error(`[Gemini] ❌ ${modelName} 빈 응답 회복 불가 → 폴백 모델 전환`);
+          break;
+        }
+
         const errMsg = (error as Error).message || String(error);
         lastError = error as Error;
         const isQuota = errMsg.includes('429') || errMsg.includes('quota') || errMsg.includes('Too Many Requests') || errMsg.includes('resource exhausted');
