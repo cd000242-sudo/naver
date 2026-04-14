@@ -536,11 +536,27 @@ export async function cleanup(
         await deps.incrementTodayCount();
     }
 
-    // 브라우저 정리 (keepBrowserOpen이 false인 경우)
+    // ✅ [v1.4.55 CRITICAL FIX] 브라우저 실제 종료 (keepBrowserOpen이 false인 경우)
+    // 이전 버그: AutomationService.delete()는 맵에서만 제거 → 브라우저 프로세스 orphaned
+    //            같은 userDataDir로 두 번째 발행 시 Chrome 실행 실패 → "하나 발행하고 멍때림"
+    // 수정: closeSession()으로 browser.close() + automationMap.delete() 순서 보장
     if (!payload.keepBrowserOpen) {
         const normalizedId = (payload.naverId || '').trim().toLowerCase();
         if (normalizedId) {
-            AutomationService.delete(normalizedId);
+            try {
+                await AutomationService.closeSession(normalizedId);
+            } catch (e) {
+                // closeBrowser 실패해도 맵 정리는 보장 (내부에서 finally로 처리됨)
+            }
+        }
+        // 현재 인스턴스도 명시적으로 닫기 (다른 경로로 주입됐을 수 있음)
+        const curr = AutomationService.getCurrentInstance();
+        if (curr) {
+            try {
+                await curr.closeBrowser();
+            } catch {
+                /* 이미 닫혔을 수 있음 */
+            }
         }
         AutomationService.setCurrentInstance(null);
     }
@@ -650,19 +666,25 @@ export async function runFullPostCycle(
         sendStatus({ success: false, message });
         // ✅ [2026-04-05 FIX] stopRunning을 즉시 호출 — 재실행 시 "이미 실행 중" 에러 방지
         AutomationService.stopRunning();
-        cleanup(payload, accountId).catch(e =>
-            Logger.error('[BlogExecutor] cleanup 오류 (무시됨)', e as Error)
-        );
+        // ✅ [v1.4.55 FIX] cleanup을 await — 브라우저 종료 전에 리턴하면 다음 발행 hang
+        try {
+            await cleanup(payload, accountId);
+        } catch (e) {
+            Logger.error('[BlogExecutor] cleanup 오류 (무시됨)', e as Error);
+        }
         return { success: false, message };
     }
 
-    // ✅ [2026-04-05 FIX] stopRunning을 즉시 호출 후 cleanup은 비동기 분리
-    // 이전: cleanup 안에서만 stopRunning → fire-and-forget으로 변경 후
-    // 재실행 시 isRunning()이 아직 true → "이미 실행 중" 에러 발생
+    // ✅ [2026-04-05 FIX] stopRunning을 즉시 호출 후 cleanup 처리
+    // ✅ [v1.4.55 FIX] cleanup을 await — 브라우저 종료(closeSession) 완료 전에 리턴하면
+    //    다음 발행 IPC가 같은 userDataDir로 Chrome 실행 시도 → hang ("하나 발행하고 멍때림")
+    //    stopRunning()은 이미 호출했으므로 isRunning() 중복 오류는 없음
     AutomationService.stopRunning();
-    cleanup(payload, accountId).catch(e =>
-        Logger.error('[BlogExecutor] cleanup 오류 (무시됨)', e as Error)
-    );
+    try {
+        await cleanup(payload, accountId);
+    } catch (e) {
+        Logger.error('[BlogExecutor] cleanup 오류 (무시됨)', e as Error);
+    }
 
     return finalResult;
 }
