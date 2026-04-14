@@ -1584,7 +1584,8 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
 
 
 // ✅ 갤러리 뷰 전환 상태
-const isGalleryView = false;
+// ✅ [v1.4.59] let 복원 — postListUI.ts에서 재할당
+let isGalleryView = false;
 
 
 

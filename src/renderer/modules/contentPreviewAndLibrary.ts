@@ -332,8 +332,9 @@ if (libraryImageModalForClose) {
 // ============================================
 
 // 썸네일 생성기 전역 상태
-const thumbnailBackgroundImage: string | null = null;
-const thumbnailBackgroundDataUrl: string | null = null;
+// ✅ [v1.4.59] let 복원 — thumbnailPreview.ts / renderer.ts에서 재할당
+let thumbnailBackgroundImage: string | null = null;
+let thumbnailBackgroundDataUrl: string | null = null;
 
 function switchToTab(tabName: string): void {
   // 모든 탭 버튼에서 active 제거
