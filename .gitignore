@@ -38,3 +38,5 @@ sample_validation/
 # vitest coverage output
 coverage/
 scripts/tmp-lint.json
+scripts/test-sanitizer-live.mjs
+scripts/_tmp-*.mjs

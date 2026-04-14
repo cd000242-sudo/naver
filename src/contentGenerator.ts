@@ -6429,6 +6429,16 @@ function stripFakeSourcePhrases(text: string): string {
   );
   out = out.replace(strongStartPattern, '$1');
 
+  // 1-C. ✅ [v1.4.58] 복합 문장 절 중간 제거
+  // 예: "X를 말하고 원본은 Y를 말한다" → 두 번째 "원본은"도 제거
+  // 한국어 접속어미 (~고/~며/~지만/~는데) 뒤의 강한 명사 + 은/는 매칭
+  // 오탐 방지: "한글2자이상+고/며/지만/는데" 패턴으로 제한 (어미인 경우만)
+  const strongMidClausePattern = new RegExp(
+    `([가-힣]{2,}(?:고|며|지만|는데|으며|면서|다가|으나|면|자|니))\\s+(?:${STRONG})(?:은|는)\\s+`,
+    'g'
+  );
+  out = out.replace(strongMidClausePattern, '$1 ');
+
   // ━━━ Layer 2: 약한 출처 명사 (오탐 위험 있음 — 명확한 출처 조사만) ━━━
   // "글", "내용" 등은 자기 글 지칭일 수 있어 제외
   const WEAK = '본문|문서|포스팅|포스트|리뷰|자료|뉴스|방송|매체|발표|보고서';
