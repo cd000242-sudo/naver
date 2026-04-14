@@ -2025,6 +2025,11 @@ export function initContinuousPublishingV2(): void {
       if (isBusinessMode && !(window as any)._businessInfo) {
         setTimeout(() => (window as any).openBusinessGlobalModal?.(), 200);
       }
+      // ✅ [v1.4.56] custom 모드 선택 시 사용자 정의 프롬프트 panel 표시
+      const customPromptPanel = document.getElementById('continuous-modal-custom-prompt-panel');
+      if (customPromptPanel) {
+        customPromptPanel.style.display = mode === 'custom' ? 'block' : 'none';
+      }
     });
 
     // 서비스 범위 라디오 + 의료 키워드 감지 (연속발행 모달)
@@ -2573,6 +2578,16 @@ function addItemToQueueV2(): void {
       // ✅ [2026-02-13] 키워드 제목 옵션
       keywordAsTitle: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-as-title') as HTMLInputElement)?.checked || false) : undefined,
       keywordTitlePrefix: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-title-prefix') as HTMLInputElement)?.checked || false) : undefined,
+      // ✅ [v1.4.56] custom 모드 - 사용자 정의 프롬프트 수집
+      // 우선순위: 1) 연속발행 모달 전용 textarea, 2) 메인 풀오토 탭 textarea
+      customPrompt: contentMode === 'custom' ? (() => {
+        const modalPrompt = (document.getElementById('continuous-modal-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
+        if (modalPrompt) return modalPrompt;
+        const mainPrompt = (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
+        if (mainPrompt) return mainPrompt;
+        alert('✏️ 사용자 정의 모드 필수:\n\n사용자 정의 프롬프트를 입력해주세요.\n입력 안 하면 SEO 모드로 폴백됩니다.');
+        throw new Error('customPrompt 누락 — custom 모드 선택 시 필수');
+      })() : undefined,
       // ✅ [v1.4.28] window._businessInfo 우선
       businessInfo: contentMode === 'business' ? (() => {
         const globalInfo = (window as any)._businessInfo;
@@ -3935,6 +3950,29 @@ async function startContinuousPublishingV2(): Promise<void> {
         const continuousContentModeEl = document.getElementById('continuous-content-mode-select') as HTMLSelectElement;
         if (continuousContentModeEl) continuousContentModeEl.value = item.contentMode || 'seo';
       } catch (e) { /* DOM sync 실패 무시 */ }
+
+      // ✅ [v1.4.56] custom 모드 customPrompt DOM 동기화
+      // contentGeneration.ts가 #unified-custom-prompt에서 읽으므로 항목별 값 주입 필수
+      try {
+        const mainPromptEl = document.getElementById('unified-custom-prompt') as HTMLTextAreaElement | null;
+        if (mainPromptEl) {
+          if (item.contentMode === 'custom' && item.customPrompt) {
+            mainPromptEl.value = item.customPrompt;
+            console.log(`[Continuous] ✏️ customPrompt 동기화 (${item.customPrompt.length}자)`);
+          } else if (item.contentMode !== 'custom') {
+            // 다른 모드면 main form 영향 없게 빈값 (원래 값 복구는 발행 완료 후)
+            mainPromptEl.value = '';
+          }
+        }
+      } catch (e) { /* customPrompt sync 실패 무시 */ }
+
+      // ✅ [v1.4.56] business 모드 window._businessInfo 동기화
+      try {
+        if (item.contentMode === 'business' && item.businessInfo) {
+          (window as any)._businessInfo = item.businessInfo;
+          console.log(`[Continuous] 🏢 businessInfo 동기화: ${item.businessInfo.name || 'unknown'}`);
+        }
+      } catch (e) { /* businessInfo sync 실패 무시 */ }
 
       // 콘텐츠 생성
       // ✅ [2026-04-03 FIX] withStopCheck 래퍼: 중지 버튼 즉시 반응 (AI API 15분 대기 중에도)

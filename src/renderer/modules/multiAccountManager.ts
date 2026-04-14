@@ -886,7 +886,21 @@ export async function initMultiAccountPublishModal() {
     imageSource: string;
     toneStyle: string;
     category?: string;
-    contentMode?: 'seo' | 'homefeed' | 'affiliate'; // ✅ [FIX] 쇼핑커넥트 모드 추가
+    // ✅ [v1.4.56] custom + business 모드 추가 (이전까지 다중계정은 이 두 모드 무력화 상태)
+    contentMode?: 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business';
+    // ✅ [v1.4.56] custom 모드용 사용자 정의 프롬프트
+    customPrompt?: string;
+    // ✅ [v1.4.56] business 모드용 업체 정보
+    businessInfo?: {
+      name?: string;
+      phone?: string;
+      kakao?: string;
+      address?: string;
+      hours?: string;
+      region?: string;
+      serviceArea?: 'nationwide' | 'regional';
+      extra?: string;
+    };
     ctaType: 'none' | 'previous-post' | 'custom';
     ctaUrl: string;
     ctaText: string;
@@ -1681,7 +1695,50 @@ export async function initMultiAccountPublishModal() {
     const realCategoryName = (realCatSelect?.options && realCatSelect.selectedIndex >= 0)
       ? realCatSelect.options[realCatSelect.selectedIndex]?.text || ''
       : '';
-    const contentMode = ((document.getElementById('ma-setting-content-mode') as HTMLSelectElement | null)?.value || 'seo') as 'seo' | 'homefeed' | 'affiliate';
+    const contentMode = ((document.getElementById('ma-setting-content-mode') as HTMLSelectElement | null)?.value || 'seo') as 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business';
+    // ✅ [v1.4.56] custom 모드용 프롬프트 수집 (우선: 다중계정 모달 전용 → 메인 풀오토 탭 fallback)
+    const customPrompt = contentMode === 'custom' ? (() => {
+      const modalPrompt = (document.getElementById('ma-setting-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
+      if (modalPrompt) return modalPrompt;
+      const mainPrompt = (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
+      if (mainPrompt) return mainPrompt;
+      alert('✏️ 사용자 정의 모드 필수:\n\n사용자 정의 프롬프트를 입력해주세요.\n(다중계정 설정 또는 메인 풀오토 탭에 입력 가능)');
+      throw new Error('customPrompt 누락 — custom 모드 선택 시 필수');
+    })() : undefined;
+    // ✅ [v1.4.56] business 모드용 업체 정보 수집
+    const businessInfo = contentMode === 'business' ? (() => {
+      // 우선순위 1: window._businessInfo (글로벌 모달로 이미 입력된 경우)
+      const globalInfo = (window as any)._businessInfo;
+      if (globalInfo && globalInfo.name) return globalInfo;
+      // 우선순위 2: DOM (ma-business-info-* + 메인 탭 fallback)
+      const get = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value?.trim() || undefined;
+      const tryGet = (suffix: string) =>
+        get('ma-business-info-' + suffix) || get('unified-business-info-' + suffix) || get('business-info-' + suffix);
+      const nationwide =
+        (document.getElementById('ma-business-service-nationwide') as HTMLInputElement)?.checked ||
+        (document.getElementById('unified-business-service-nationwide') as HTMLInputElement)?.checked ||
+        (document.getElementById('business-service-nationwide') as HTMLInputElement)?.checked;
+      const serviceArea: 'nationwide' | 'regional' = nationwide ? 'nationwide' : 'regional';
+      const info = {
+        name: tryGet('name'),
+        phone: tryGet('phone'),
+        kakao: tryGet('kakao'),
+        address: tryGet('address'),
+        hours: tryGet('hours'),
+        region: serviceArea === 'nationwide' ? undefined : tryGet('region'),
+        serviceArea,
+        extra: tryGet('extra'),
+      };
+      const missing: string[] = [];
+      if (!info.name) missing.push('업체명');
+      if (!info.phone && !info.kakao) missing.push('전화번호 또는 카카오톡');
+      if (info.serviceArea === 'regional' && !info.region) missing.push('서비스 지역');
+      if (missing.length > 0) {
+        alert(`🏢 업체 홍보 모드 필수 정보 누락:\n\n• ${missing.join('\n• ')}\n\n발행 전 입력해주세요.`);
+        throw new Error(`업체 정보 누락: ${missing.join(', ')}`);
+      }
+      return info;
+    })() : undefined;
     const ctaType = (document.getElementById('ma-setting-cta-type') as HTMLSelectElement)?.value as 'none' | 'previous-post' | 'custom' || 'none';
     const ctaUrl = (document.getElementById('ma-setting-cta-url') as HTMLInputElement)?.value?.trim() || '';
     const ctaText = (document.getElementById('ma-setting-cta-text') as HTMLInputElement)?.value?.trim() || '';
@@ -1751,6 +1808,8 @@ export async function initMultiAccountPublishModal() {
         toneStyle,
         category,
         contentMode,
+        customPrompt,    // ✅ [v1.4.56]
+        businessInfo,    // ✅ [v1.4.56]
         ctaType,
         ctaUrl,
         ctaText,
@@ -1870,6 +1929,15 @@ export async function initMultiAccountPublishModal() {
     const shoppingSettings = document.getElementById('ma-shopping-connect-settings');
     if (shoppingSettings) {
       shoppingSettings.style.display = mode === 'affiliate' ? 'block' : 'none';
+    }
+    // ✅ [v1.4.56] custom 모드 선택 시 사용자 정의 프롬프트 panel 표시
+    const customPromptPanel = document.getElementById('ma-setting-custom-prompt-panel');
+    if (customPromptPanel) {
+      customPromptPanel.style.display = mode === 'custom' ? 'block' : 'none';
+    }
+    // ✅ [v1.4.56] business 모드 선택 시 글로벌 업체 정보 모달 자동 열기
+    if (mode === 'business' && !(window as any)._businessInfo) {
+      setTimeout(() => (window as any).openBusinessGlobalModal?.(), 200);
     }
   });
 
@@ -2977,12 +3045,26 @@ export async function initMultiAccountPublishModal() {
             console.warn('[multiAccountManager] catch ignored:', e);
           }
 
-          // ✅ 콘텐츠 모드 (SEO/홈판) 전달
+          // ✅ 콘텐츠 모드 (SEO/홈판/custom/business 전체 전달 — v1.4.56 확장)
           try {
-            const cm = (queueItem.contentMode || 'seo') as 'seo' | 'homefeed' | 'affiliate';
+            const cm = (queueItem.contentMode || 'seo') as 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business';
             contentPayload.assembly.contentMode = cm;
           } catch (e) {
             console.warn('[multiAccountManager] catch ignored:', e);
+          }
+
+          // ✅ [v1.4.56] custom 모드 — 사용자 정의 프롬프트 전달
+          // 이전까지 다중계정은 customPrompt를 전혀 전달하지 않아 custom 모드가 SEO로 폴백됨
+          if (queueItem.contentMode === 'custom' && queueItem.customPrompt) {
+            contentPayload.assembly.customPrompt = queueItem.customPrompt;
+            console.log(`[multiAccountManager] ✏️ customPrompt 전달 (${queueItem.customPrompt.length}자)`);
+          }
+
+          // ✅ [v1.4.56] business 모드 — 업체 정보 전달
+          // 이전까지 다중계정은 businessInfo 전혀 전달하지 않아 AI가 가짜 번호/주소 생성 위험
+          if (queueItem.contentMode === 'business' && queueItem.businessInfo) {
+            contentPayload.assembly.businessInfo = queueItem.businessInfo;
+            console.log(`[multiAccountManager] 🏢 businessInfo 전달: ${queueItem.businessInfo.name || 'unknown'}`);
           }
 
           // ✅ [2026-04-08 FIX v3] keywords + draftText 이중 설정 (어느 하나라도 비어있으면 안 됨)

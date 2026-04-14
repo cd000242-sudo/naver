@@ -101,6 +101,8 @@ export interface ContinuousQueueItem {
     ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
     category?: string;
     contentMode?: 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business';
+    // ✅ [v1.4.56] custom 모드 - 사용자 정의 프롬프트 (모달에서 수집)
+    customPrompt?: string;
     // ✅ [v1.4.24] business 모드 - 업체 정보
     businessInfo?: {
         name?: string;

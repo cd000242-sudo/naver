@@ -6600,6 +6600,21 @@
                         </select>
                     </div>
 
+                    <!-- ✅ [v1.4.56] 연속발행 모달 - 사용자 정의 프롬프트 입력 (custom 모드 선택 시 표시) -->
+                    <div id="continuous-modal-custom-prompt-panel" style="display: none; margin-bottom: 1rem; padding: 0.85rem; background: rgba(139, 92, 246, 0.08); border: 2px solid rgba(167, 139, 250, 0.4); border-radius: 8px;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+                            <span style="font-size: 1rem;">✏️</span>
+                            <strong style="color: #a78bfa; font-size: 0.85rem;">사용자 정의 프롬프트 (필수)</strong>
+                        </div>
+                        <p style="margin: 0 0 0.6rem 0; font-size: 0.72rem; color: #c4b5fd; line-height: 1.5;">
+                            ⚠️ 입력 안 하면 SEO 모드로 폴백됩니다. AI에게 원하는 글 스타일/규칙을 자유롭게 지시하세요.
+                        </p>
+                        <textarea id="continuous-modal-custom-prompt" rows="5" placeholder="예시: 친근한 반말 톤으로 작성하고, 해시태그는 5개 이상 포함시켜주세요. 도입부는 호기심을 유발하는 질문으로 시작하고, 각 소제목은 구체적 경험담을 포함해야 합니다. 결말은 독자와의 상호작용을 유도하는 질문으로 마무리하세요." style="width: 100%; padding: 0.5rem; background: var(--bg-primary); border: 1px solid rgba(167, 139, 250, 0.3); border-radius: 5px; color: var(--text-strong); font-size: 0.8rem; resize: vertical; font-family: inherit; line-height: 1.5;"></textarea>
+                        <div style="margin-top: 0.4rem; font-size: 0.68rem; color: #8b5cf6;">
+                            💡 품질 가드레일(이모지 금지, 모바일 가독성, 키워드 배치)은 자동 적용됩니다.
+                        </div>
+                    </div>
+
                     <!-- ✅ [v1.4.27] 연속발행 모달 - 업체 홍보 모드 패널 -->
                     <div id="continuous-modal-business-info-panel" style="display: none !important; margin-bottom: 1rem; padding: 0.85rem; background: rgba(245, 158, 11, 0.08); border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 8px;">
                         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
@@ -8633,6 +8648,21 @@
                                 <option value="custom">✏️ 사용자정의</option>
                                 <option value="affiliate">🛒 쇼핑커넥트</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <!-- ✅ [v1.4.56] 다중계정 - 사용자 정의 프롬프트 입력 (custom 모드 선택 시 표시) -->
+                    <div id="ma-setting-custom-prompt-panel" style="display: none; margin-bottom: 0.75rem; padding: 0.85rem; background: rgba(139, 92, 246, 0.08); border: 2px solid rgba(167, 139, 250, 0.4); border-radius: 8px;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+                            <span style="font-size: 1rem;">✏️</span>
+                            <strong style="color: #a78bfa; font-size: 0.85rem;">사용자 정의 프롬프트 (필수)</strong>
+                        </div>
+                        <p style="margin: 0 0 0.6rem 0; font-size: 0.72rem; color: #c4b5fd; line-height: 1.5;">
+                            ⚠️ 입력 안 하면 SEO 모드로 폴백됩니다. AI에게 원하는 글 스타일/규칙을 자유롭게 지시하세요.
+                        </p>
+                        <textarea id="ma-setting-custom-prompt" rows="5" placeholder="예시: 친근한 반말 톤으로 작성하고, 해시태그는 5개 이상 포함시켜주세요. 도입부는 호기심을 유발하는 질문으로 시작하고, 각 소제목은 구체적 경험담을 포함해야 합니다." style="width: 100%; padding: 0.5rem; background: var(--bg-primary); border: 1px solid rgba(167, 139, 250, 0.3); border-radius: 5px; color: var(--text-strong); font-size: 0.78rem; resize: vertical; font-family: inherit; line-height: 1.5;"></textarea>
+                        <div style="margin-top: 0.4rem; font-size: 0.68rem; color: #8b5cf6;">
+                            💡 품질 가드레일(이모지 금지, 모바일 가독성, 키워드 배치)은 자동 적용됩니다.
                         </div>
                     </div>
 
