@@ -2269,6 +2269,52 @@ const AFFILIATE_TITLE_FORMULAS: TitleFormula[] = [
   },
 ];
 
+// ✅ [v1.4.57] 쇼핑커넥트 전문리뷰 전용 제목 공식 풀
+// 버그 수정: shopping_expert_review가 AFFILIATE_TITLE_FORMULAS(전부 후기/체험형)를 쓰던 문제
+// → 전문리뷰는 "솔직후기/내돈내산/직접 써본" 같은 체험 표현 금지, 스펙/가이드/분석 관점 강제
+const SHOPPING_EXPERT_TITLE_FORMULAS: TitleFormula[] = [
+  {
+    id: 'sxp_spec_analysis', name: '①스펙 분석형',
+    instruction: '제품명 + 스펙/기능 분석 관점. "스펙 비교", "스펙 해부", "스펙 파헤치기", "스펙 총정리" 활용. ⛔ 후기 표현(솔직/직접/써본/찐/내돈내산/실사용) 절대 금지. 25~45자.',
+    example: '린백 LB221HA 스펙 비교, 10만원대 사무용의자 기준은?'
+  },
+  {
+    id: 'sxp_buy_guide', name: '②구매 가이드형',
+    instruction: '"구매 전 체크할 N가지", "구매 가이드", "선택 기준", "구매 포인트" 활용. 구매 가이드 문서 관점, 후기 아님. 25~45자.',
+    example: '사무용의자 린백 LB221HA 구매 전 체크할 7가지 포인트'
+  },
+  {
+    id: 'sxp_price_value', name: '③가격 합리성 분석형',
+    instruction: '"이 가격대에서 이만한", "가성비 분석", "가격 합리적일까", "이 가격에 이 스펙" 활용. 객관적 가격 비교 관점. ⛔ 체험 표현 금지. 25~45자.',
+    example: '린백 LB221HA, 9만원대에 이 스펙이면 합리적일까?'
+  },
+  {
+    id: 'sxp_target_recommend', name: '④타겟 추천형',
+    instruction: '"이런 분께 적합", "N에게 추천되는 이유", "적합한 타겟 분석" 활용. 전문가의 타겟 분석 관점. 25~45자.',
+    example: '린백 LB221HA, 재택근무 직장인에게 딱 맞는 이유'
+  },
+  {
+    id: 'sxp_pros_cons_analysis', name: '⑤장단점 분석형',
+    instruction: '"장단점 분석", "강점과 약점", "총평", "N개 장점과 M개 단점" 활용. 균형 있는 전문 분석 관점. ⛔ 체험형 표현 금지. 25~45자.',
+    example: '린백 LB221HA 장단점 분석: 7개 강점과 3개 약점'
+  },
+  {
+    id: 'sxp_vs_comparison', name: '⑥경쟁 비교형',
+    instruction: '"VS 경쟁제품", "A vs B 승자는?", "비교 분석" 활용. 다른 제품과의 비교 관점. 25~45자.',
+    example: '린백 LB221HA VS 시디즈, 10만원대 의자 진짜 승자는?'
+  },
+  {
+    id: 'sxp_total_summary', name: '⑦핵심 총정리형',
+    instruction: '"핵심 총정리", "N분 요약", "한눈에 정리", "핵심만 정리" 활용. 전문가 요약 문서 느낌. ⛔ 체험 표현 금지. 25~45자.',
+    example: '린백 LB221HA 핵심 3분 총정리, 이것만 알면 끝'
+  },
+  {
+    id: 'sxp_numbers', name: '⑧수치 분석형',
+    instruction: '숫자로 보는 스펙. 구체 수치(cm/kg/도/Hz/mAh) 활용. "숫자로 보는", "스펙 숫자", "데이터로 본" 활용. ⛔ 체험 표현 금지. 25~45자.',
+    example: '린백 LB221HA 숫자로 보는 스펙: 48cm 깊이 3단 조절'
+  },
+];
+
 // ✅ [v3 → v4] 카테고리별 우선 공식 매핑 — 20개 아키타입 기반 감정 온도별 최적화
 // ✅ [v1.4.47] 기간체험형 완전 제거 — 카테고리별 우선순위에서 아예 빠짐
 // 기간체험형은 이제 일반 pool에서만 선택 가능하며, 최근 이력 2개 이상 시 스킵됨
@@ -2295,11 +2341,17 @@ const CATEGORY_FORMULA_PRIORITY: Record<string, string[]> = {
   '생활': ['hf_direct_exp', 'hf_unexpected', 'hf_spread', 'hf_numeric_proof', 'hf_hidden_truth'],
 };
 
-function selectTitleFormula(mode: PromptMode, attempt: number, usedIds: string[], categoryHint?: string): TitleFormula {
+function selectTitleFormula(mode: PromptMode, attempt: number, usedIds: string[], categoryHint?: string, articleType?: string): TitleFormula {
   // ✅ [2026-03-13] affiliate 전용 공식 풀 추가 — SEO 공식 대신 제품 후기 최적화 공식 사용
+  // ✅ [v1.4.57] shopping_expert_review는 전문리뷰 전용 풀 사용 (후기형 표현 금지)
+  const isShoppingExpert = mode === 'affiliate' && articleType === 'shopping_expert_review';
   const pool = mode === 'homefeed' ? HOMEFEED_TITLE_FORMULAS
+    : isShoppingExpert ? SHOPPING_EXPERT_TITLE_FORMULAS
     : mode === 'affiliate' ? AFFILIATE_TITLE_FORMULAS
     : SEO_TITLE_FORMULAS;
+  if (isShoppingExpert) {
+    console.log('[TitleGen] 🎯 전문리뷰 전용 공식 풀 사용 (shopping_expert_review) — 후기/체험형 표현 금지');
+  }
   // ✅ [v1.4.48 Stage A.1] 모드별 풀에서만 검색 — 홈피드 글에 SEO/affiliate 공식 섞임 방지
   // 기존: allFormulas = [...SEO, ...HOMEFEED, ...AFFILIATE] → 카테고리 우선 ID 오타 시 타 모드 공식 선택됨
   // 수정: 모드 pool 내에서만 카테고리 우선 ID 검색
@@ -2578,7 +2630,8 @@ JSON:
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
       // ✅ [v2] 매 시도마다 다른 공식 패턴 선택
-      const formula = selectTitleFormula(mode, attempt, usedFormulaIds, categoryHint);
+      // ✅ [v1.4.57] articleType 전달 — shopping_expert_review 전용 풀 분기에 필수
+      const formula = selectTitleFormula(mode, attempt, usedFormulaIds, categoryHint, source.articleType);
       usedFormulaIds.push(formula.id);
       const formulaInstruction = `\n\n🎯 [이번에 사용할 제목 공식: ${formula.name}]\n${formula.instruction}\n예시: "${formula.example}"\n⚠️ 반드시 위 공식 패턴을 적용하세요.`;
 
@@ -2635,7 +2688,8 @@ JSON:
       if (!selectedTitle) continue;
 
       // ✅ [v2] 품질 검증 (정제된 제목으로) — 이제 이슈 목록도 반환
-      const quality = evaluateTitleQuality(selectedTitle, primaryKeyword || '', mode, categoryHint);
+      // ✅ [v1.4.57] articleType 전달 — shopping_expert_review 후기형 표현 감점
+      const quality = evaluateTitleQuality(selectedTitle, primaryKeyword || '', mode, categoryHint, source.articleType);
       let qualityScore = quality.score;
       const qualityIssues = [...quality.issues];
 
@@ -2677,7 +2731,7 @@ JSON:
       // ✅ titleCandidates 중 더 높은 점수의 제목이 있으면 그걸 선택
       if (titleCandidates && titleCandidates.length > 0) {
         for (const candidate of titleCandidates) {
-          const candQuality = evaluateTitleQuality(candidate.text, primaryKeyword || '', mode, categoryHint);
+          const candQuality = evaluateTitleQuality(candidate.text, primaryKeyword || '', mode, categoryHint, source.articleType);
           if (candQuality.score > qualityScore && candQuality.score >= 75) {
             console.log(`[TitleGen] ✅ 후보 제목이 더 우수: "${candidate.text}" (${candQuality.score}점 > ${qualityScore}점)`);
             // ✅ [v1.4.48 Stage A.2] 정적 import 사용
@@ -2815,7 +2869,7 @@ const CATEGORY_BONUSES: Record<string, { pattern: RegExp; points: number; reason
   ],
 };
 
-function evaluateTitleQuality(title: string, keyword: string, mode: PromptMode, categoryHint?: string): { score: number; issues: string[] } {
+function evaluateTitleQuality(title: string, keyword: string, mode: PromptMode, categoryHint?: string, articleType?: string): { score: number; issues: string[] } {
   let score = 100;
   const issues: string[] = [];
   const t = String(title || '').trim();
@@ -2829,6 +2883,27 @@ function evaluateTitleQuality(title: string, keyword: string, mode: PromptMode, 
   if (normalizedKeyword && normalizedTitle === normalizedKeyword) {
     console.log('[TitleQuality] ❌ 키워드 그대로 사용 → 0점');
     return { score: 0, issues: ['키워드 그대로 사용'] };
+  }
+
+  // ✅ [v1.4.57] shopping_expert_review 전용 — 후기/체험 표현 강력 감점
+  // 전문리뷰는 "솔직후기/내돈내산/직접 써본/찐후기/실사용" 같은 체험 표현 금지
+  if (articleType === 'shopping_expert_review') {
+    const reviewBanPatterns = [
+      '솔직후기', '솔직 후기', '솔직리뷰', '솔직 리뷰',
+      '내돈내산', '내 돈 내산',
+      '찐후기', '찐 후기', '찐리뷰',
+      '실사용', '실사용후기', '실사용 후기',
+      '직접 써본', '직접 쓴', '직접 사용한',
+      '써본 후기', '써봤더니', '써보니',
+      '리얼후기', '리얼 후기', '리얼리뷰',
+      '체험 후기', '체험기', '체험담',
+    ];
+    const foundBan = reviewBanPatterns.find(p => t.includes(p));
+    if (foundBan) {
+      score -= 50; // 강한 감점 — 전문리뷰 스타일과 완전히 반대
+      issues.push(`전문리뷰: 후기형 표현 "${foundBan}" 사용 (스펙/가이드 관점 권장)`);
+      console.log(`[TitleQuality] ⛔ 전문리뷰에 후기 표현 감지: "${foundBan}" → -50점`);
+    }
   }
 
   // ✅ [2026-02-09 강화] 중복 단어 감지 — 같은 2자 이상 한글 단어가 2회 이상 등장
@@ -3251,10 +3326,11 @@ function finalizeStructuredContent(content: StructuredContent, source: ContentSo
   // 이전 아키텍처에서는 접두사 적용 전에만 검증 → 최종 제목 무검증 통과
   if (finalContent.selectedTitle) {
     try {
-      const finalMode = source.contentMode === 'affiliate' ? 'affiliate' : source.contentMode === 'homefeed' ? 'homefeed' : 'seo';
+      // ✅ [v1.4.57] finalMode에 custom/business 유지 (이전: seo로 강제 폴백 → 검증 부정확)
+      const finalMode = (source.contentMode || 'seo') as PromptMode;
       const finalCategoryHint = (source as any).categoryHint as string | undefined;
       const finalPK = primaryKeyword || (source.metadata as any)?.keywords?.[0] || '';
-      const finalCheck = evaluateTitleQuality(finalContent.selectedTitle, String(finalPK), finalMode, finalCategoryHint);
+      const finalCheck = evaluateTitleQuality(finalContent.selectedTitle, String(finalPK), finalMode, finalCategoryHint, source.articleType);
       if (finalCheck.score < 50) {
         console.warn(`[FinalQualityGate] ⚠️ 최종 제목 품질 미달 (${finalCheck.score}점): "${finalContent.selectedTitle}"`);
         console.warn(`[FinalQualityGate]   issues: ${finalCheck.issues.join(', ')}`);
@@ -3264,7 +3340,7 @@ function finalizeStructuredContent(content: StructuredContent, source: ContentSo
             cleanupStartingTitleTokens(sanitizeTitleSpecialChars(finalContent.selectedTitle))
           ))
         ).trim();
-        const rescueCheck = evaluateTitleQuality(finalContent.selectedTitle, String(finalPK), finalMode, finalCategoryHint);
+        const rescueCheck = evaluateTitleQuality(finalContent.selectedTitle, String(finalPK), finalMode, finalCategoryHint, source.articleType);
         console.log(`[FinalQualityGate] 복구 후: "${finalContent.selectedTitle}" (${rescueCheck.score}점)`);
       }
     } catch (e) {
