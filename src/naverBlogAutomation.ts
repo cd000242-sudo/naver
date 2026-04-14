@@ -2646,40 +2646,168 @@ export class NaverBlogAutomation {
       await this.delay(1000);
     }
 
-    // ✅ [2026-03-27 FIX] 리스크7: JS evaluate click → Ghost Cursor 클릭으로 교체
-    // 이전: htmlEl.click() → event.isTrusted=false, 마우스 이벤트 미생성 → 봇 감지
-    // 현재: Ghost Cursor로 실제 마우스 이동+클릭 → isTrusted=true
+    // ✅ [v1.4.53] 로그인 버튼 클릭 3단계 폴백 — 계정 리스크 점수 높은 계정 대응
+    // 배경: 네이버가 의심 계정에 오버레이/pointer-events/버튼 지연 enable을 끼워넣어
+    //       Ghost Cursor 클릭이 버튼에 도달하지 못하는 케이스 발생 (5계정 중 2개 실패)
+    // 해결: 1차 Ghost Cursor → 2차 Enter 키 → 3차 form.submit() 순차 시도 + 각 단계 성공 검증
+
     await loginButton.evaluate((el: Element) => {
       (el as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
     await this.humanDelay(300, 600);
 
-    if (this.cursor) {
-      // Ghost Cursor로 버튼 위치 계산 후 클릭
-      const box = await loginButton.boundingBox();
-      if (box) {
-        const targetX = box.x + box.width / 2 + (Math.random() - 0.5) * 6;
-        const targetY = box.y + box.height / 2 + (Math.random() - 0.5) * 4;
-        await this.cursor.moveTo({ x: targetX, y: targetY });
-        await this.humanDelay(100, 300);
-        await page.mouse.down();
-        await this.humanDelay(50, 150);
-        await page.mouse.up();
+    // 버튼 상태 사전 검증 — disabled/pointer-events/overlay 감지
+    const buttonState = await loginButton.evaluate((el: Element) => {
+      const htmlEl = el as HTMLElement;
+      const rect = htmlEl.getBoundingClientRect();
+      const style = window.getComputedStyle(htmlEl);
+      const atPoint = document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+      return {
+        disabled: (el as HTMLButtonElement).disabled,
+        pointerEvents: style.pointerEvents,
+        opacity: parseFloat(style.opacity || '1'),
+        // 버튼 중앙 지점에 버튼 자신 또는 자식이 있어야 정상. 아니면 오버레이 의심
+        blocked: atPoint !== null && atPoint !== el && !htmlEl.contains(atPoint),
+        blockerTag: atPoint && atPoint !== el ? (atPoint as HTMLElement).tagName : null,
+      };
+    }).catch(() => null);
+
+    if (buttonState) {
+      if (buttonState.disabled || buttonState.pointerEvents === 'none' || buttonState.opacity < 0.5) {
+        this.log(`⚠️ 로그인 버튼 비활성 감지 (disabled=${buttonState.disabled}, pointer-events=${buttonState.pointerEvents}, opacity=${buttonState.opacity}) → 2초 대기`);
+        await this.delay(2000);
+      }
+      if (buttonState.blocked) {
+        this.log(`⚠️ 로그인 버튼 위 오버레이 감지 (차단 요소: ${buttonState.blockerTag}) → 제거 시도`);
+        await page.evaluate(() => {
+          // 버튼 위를 덮는 fixed/absolute 오버레이 강제 숨김
+          document.querySelectorAll('div, section, aside').forEach((el) => {
+            const s = window.getComputedStyle(el);
+            const z = parseInt(s.zIndex || '0', 10);
+            if ((s.position === 'fixed' || s.position === 'absolute') && z > 100) {
+              (el as HTMLElement).style.pointerEvents = 'none';
+            }
+          });
+        }).catch(() => {});
+      }
+    }
+
+    // 클릭 성공 판정 헬퍼 — URL 이동 or 에러 메시지 or 챌린지 페이지 감지
+    const checkLoginProgress = async (): Promise<'success' | 'error' | 'challenge' | 'pending'> => {
+      try {
+        const url = page.url();
+        // 로그인 페이지를 벗어나면 성공 (또는 최소한 "다음 단계"로 넘어감)
+        if (!url.includes('nid.naver.com/nidlogin') && !url.includes('nid.naver.com/login')) {
+          return 'success';
+        }
+        // 에러/챌린지 페이지 감지
+        const pageInfo = await page.evaluate(() => {
+          const errEl = document.querySelector('.error_message, .alert_msg, #err_common, .error_on');
+          const errText = errEl ? ((errEl as HTMLElement).innerText || '').trim() : '';
+          const bodyText = (document.body?.innerText || '').substring(0, 500);
+          const hasCaptcha = /보안문자|자동입력|captcha/i.test(bodyText);
+          const hasDeny = /새로운 기기|인증 필요|본인 확인/.test(bodyText);
+          return { errText, hasCaptcha, hasDeny };
+        });
+        if (pageInfo.hasCaptcha || pageInfo.hasDeny) return 'challenge';
+        if (pageInfo.errText) return 'error';
+        return 'pending';
+      } catch {
+        return 'pending';
+      }
+    };
+
+    // 각 시도 후 3초간 반응 감지
+    const waitForClickResponse = async (timeoutMs: number = 3000): Promise<'success' | 'error' | 'challenge' | 'pending'> => {
+      const start = Date.now();
+      while (Date.now() - start < timeoutMs) {
+        const state = await checkLoginProgress();
+        if (state !== 'pending') return state;
+        await this.delay(200);
+      }
+      return 'pending';
+    };
+
+    // ━━━ 1차 시도: Ghost Cursor 클릭 (기존 방식) ━━━
+    this.log('🔄 로그인 1차 시도: Ghost Cursor 클릭');
+    let clickResult: 'success' | 'error' | 'challenge' | 'pending' = 'pending';
+    try {
+      if (this.cursor) {
+        const box = await loginButton.boundingBox();
+        if (box) {
+          const targetX = box.x + box.width / 2 + (Math.random() - 0.5) * 6;
+          const targetY = box.y + box.height / 2 + (Math.random() - 0.5) * 4;
+          await this.cursor.moveTo({ x: targetX, y: targetY });
+          await this.humanDelay(100, 300);
+          await page.mouse.down();
+          await this.humanDelay(50, 150);
+          await page.mouse.up();
+        } else {
+          await loginButton.click();
+        }
       } else {
-        // boundingBox 실패 시 Puppeteer 클릭 fallback
         await loginButton.click();
       }
-    } else {
-      // Ghost Cursor 미초기화 시 Puppeteer 클릭
-      await loginButton.click();
+      clickResult = await waitForClickResponse(3000);
+    } catch (e) {
+      this.log(`⚠️ 1차 클릭 예외: ${(e as Error).message}`);
     }
-    await this.humanDelay(200, 500);
 
+    // ━━━ 2차 시도: Puppeteer.click() + Enter 키 (1차가 pending일 때만) ━━━
+    if (clickResult === 'pending') {
+      this.log('🔁 로그인 2차 시도: Puppeteer click + Enter 키 (1차 응답 없음)');
+      try {
+        await loginButton.click().catch(() => {});
+        await this.humanDelay(100, 200);
+        // 비밀번호 입력창에 Enter 전송 — form submit 트리거
+        await page.focus('#pw').catch(() => {});
+        await page.keyboard.press('Enter');
+        clickResult = await waitForClickResponse(3000);
+      } catch (e) {
+        this.log(`⚠️ 2차 시도 예외: ${(e as Error).message}`);
+      }
+    }
+
+    // ━━━ 3차 시도: form.submit() 직접 호출 (2차도 pending일 때) ━━━
+    if (clickResult === 'pending') {
+      this.log('🔁 로그인 3차 시도: form.submit() 직접 호출 (2차 응답 없음)');
+      try {
+        const submitted = await page.evaluate(() => {
+          const form = (document.querySelector('#frmNIDLogin') as HTMLFormElement)
+                    || (document.querySelector('form[name="frmNIDLogin"]') as HTMLFormElement)
+                    || (document.querySelector('form') as HTMLFormElement);
+          if (form && typeof form.submit === 'function') {
+            form.submit();
+            return true;
+          }
+          return false;
+        });
+        if (!submitted) {
+          this.log('⚠️ 3차 시도 실패: form 요소를 찾지 못함');
+        } else {
+          clickResult = await waitForClickResponse(5000);
+        }
+      } catch (e) {
+        this.log(`⚠️ 3차 시도 예외: ${(e as Error).message}`);
+      }
+    }
+
+    // 결과 로깅 — 사용자에게 정확한 원인 표시
+    if (clickResult === 'pending') {
+      this.log('❌ 로그인 3단계 시도 모두 응답 없음 — 계정 리스크 점수 높음 의심. 해당 계정 수동 로그인 후 쿠키 워밍업 권장');
+    } else if (clickResult === 'challenge') {
+      this.log('🔐 로그인 챌린지(캡차/본인확인) 감지 — 사용자 개입 필요');
+    } else if (clickResult === 'error') {
+      this.log('⚠️ 로그인 에러 메시지 감지 (비번 오류 등)');
+    } else {
+      this.log('✅ 로그인 클릭 성공 — 다음 단계로 진행');
+    }
+
+    // 기존 네비게이션 대기 유지 (도메인 이동 안정화 목적)
     try {
-      // ✅ [2026-03-30 FIX] 타임아웃 10초→20초 (네이버 서버 지연 대응)
       await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 20000 });
     } catch (navError) {
-      // 네비게이션 타임아웃은 캡차/2FA 등으로 인한 것일 수 있으므로 단순 대기 후 루프 진입
+      // 네비게이션 타임아웃은 캡차/2FA로 인한 것일 수 있으므로 루프 진입
       await this.delay(1000);
     }
 
