@@ -1,0 +1,140 @@
+mode: full
+project_name: better-life-naver
+platforms:
+    - claude-code
+stack: typescript
+language:
+    comments: en
+    commits: ko
+    ai_responses: ko
+architecture:
+    auto_generate: true
+    enforce: true
+    layers: []
+lore:
+    enabled: true
+    auto_inject: false
+    required_trailers:
+        - Constraint
+    stale_threshold_days: 90
+spec:
+    id_format: SPEC-{DOMAIN}-{NUMBER}
+    ears_types:
+        - ubiquitous
+        - event-driven
+        - unwanted
+        - optional
+        - complex
+    review_gate:
+        enabled: true
+        strategy: debate
+        providers: [claude, codex]
+        judge: claude
+        max_revisions: 2
+        auto_collect_context: true
+        context_max_lines: 500
+methodology:
+    mode: tdd
+    enforce: true
+    review_gate: true
+router:
+    strategy: balanced
+    tiers:
+        economy: claude-haiku-4-5
+        premium: claude-opus-4-6
+        standard: claude-sonnet-4-6
+    categories:
+        deep: premium
+        git: economy
+        quick: economy
+        ultrabrain: premium
+        visual: standard
+        writing: standard
+    intent_gate: true
+hooks:
+    pre_commit_arch: true
+    pre_commit_lore: true
+    react_ci_failure: true
+    react_review: true
+session:
+    handoff_enabled: true
+    continue_file: .auto-continue.md
+    max_context_tokens: 2000
+orchestra:
+    enabled: true
+    default_strategy: consensus
+    timeout_seconds: 120
+    judge: claude
+    providers:
+        claude:
+            binary: claude
+            args: [--print]
+            pane_args: [--print]
+        codex:
+            binary: codex
+            args: [exec, --full-auto, -m, gpt-5.4]
+            pane_args: [-m, gpt-5.4]
+        gemini:
+            binary: gemini
+            args: [-m, gemini-3.1-pro-preview, -p, ""]
+            pane_args: [-m, gemini-3.1-pro-preview]
+    commands:
+        brainstorm:
+            strategy: debate
+            providers: [claude, codex, gemini]
+        plan:
+            strategy: consensus
+            providers: [claude, codex, gemini]
+        review:
+            strategy: debate
+            providers: [claude, codex, gemini]
+        secure:
+            strategy: consensus
+            providers: [claude, codex, gemini]
+quality:
+    default: balanced
+    presets:
+        balanced:
+            description: 핵심 분석은 Opus, 구현은 Sonnet, 검증은 Haiku. 가성비 최적.
+            agents:
+                architect: opus
+                debugger: sonnet
+                devops: sonnet
+                executor: sonnet
+                explorer: haiku
+                planner: opus
+                reviewer: sonnet
+                security-auditor: opus
+                spec-writer: opus
+                tester: sonnet
+                validator: haiku
+        ultra:
+            description: 모든 에이전트를 Opus로 실행. 최고 품질.
+            agents:
+                architect: opus
+                debugger: opus
+                devops: opus
+                executor: opus
+                explorer: opus
+                planner: opus
+                reviewer: opus
+                security-auditor: opus
+                spec-writer: opus
+                tester: opus
+                validator: opus
+skills:
+    auto_activate: true
+    max_active_skills: 5
+    category_weights:
+        agentic: 15
+        quality: 20
+        security: 30
+        workflow: 10
+verify:
+    enabled: true
+    default_viewport: desktop
+    auto_fix: true
+    max_fix_attempts: 2
+context:
+    signature_map: true
+usage_profile: developer
