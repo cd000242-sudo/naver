@@ -52,6 +52,15 @@ export interface AppConfig {
   userTimezone?: string;
   // 고급 설정
   enableDebugMode?: boolean;
+  // ✅ [v1.4.54] 자동 DOM 덤프 설정 — 실패 시 진단 파일 자동 저장
+  debugDump?: {
+    enabled: boolean;             // 기본 true (사용자 진단 편의)
+    maxDumps: number;             // 기본 20
+    maxAgeDays: number;           // 기본 7
+    includeScreenshot: boolean;   // 기본 true
+    includeHtml: boolean;         // 기본 true
+    includeNetworkLog: boolean;   // 기본 true (스크럽 적용됨)
+  };
   autoSaveDrafts?: boolean;
   backupFrequency?: 'never' | 'daily' | 'weekly' | 'monthly';
   imageSourceNasa?: boolean;

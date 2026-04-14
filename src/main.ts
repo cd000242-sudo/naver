@@ -8738,6 +8738,17 @@ app.whenReady().then(async () => {
   try {
     // ✅ [2026-02-18] setName은 lock 앞에서 이미 호출됨 (single instance lock 충돌 방지)
 
+    // ✅ [v1.4.54] 앱 시작 시 오래된 디버그 덤프 정리 (디스크 과점유 방지)
+    try {
+      const { cleanupOldDumps } = await import('./debug/domDumpManager.js');
+      const result = await cleanupOldDumps();
+      if (result.deleted > 0) {
+        debugLog(`[DumpCleaner] 오래된 덤프 ${result.deleted}개 정리 완료 (남은 ${result.remainingCount}개, ${result.remainingSizeMB}MB)`);
+      }
+    } catch (cleanErr) {
+      debugLog(`[DumpCleaner] 정리 실패 (무시): ${(cleanErr as Error).message}`);
+    }
+
     // ✅ isPackaged 값을 실제 값으로 업데이트 (배포 환경 감지)
 
     // ✅ [2026-03-11] 업데이트를 먼저 확인하고, 결과에 따라 인증창 표시 여부 결정

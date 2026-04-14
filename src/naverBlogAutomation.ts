@@ -1077,6 +1077,43 @@ export class NaverBlogAutomation {
     this.logger?.(message);
   }
 
+  /**
+   * ✅ [v1.4.54] 실패 순간 자동 DOM 덤프
+   * 실패 catch 지점에서 한 줄로 호출 가능. 실패해도 자동화 흐름 방해하지 않음.
+   *
+   * 저장 경로: %APPDATA%/BetterLifeNaver/debug-dumps/
+   * 저장 내용: 스크린샷 + HTML + 콘솔/네트워크 로그 + 메타데이터 (민감정보 자동 스크럽)
+   */
+  private async dumpFailure(
+    action: string,
+    error: Error | unknown,
+    extra?: { errorCode?: string; fallbackStage?: number; context?: Record<string, unknown> }
+  ): Promise<void> {
+    try {
+      if (!this.page) return;
+      const err = error instanceof Error ? error : new Error(String(error));
+      const { dumpFailure: dump } = await import('./debug/domDumpManager.js');
+      const result = await dump(this.page, {
+        action,
+        error: err,
+        errorCode: extra?.errorCode,
+        fallbackStage: extra?.fallbackStage,
+        accountId: (this.options as any)?.naverId || (this.options as any)?.accountId,
+        context: extra?.context,
+      });
+      if (result.success && result.dumpPath) {
+        this.log(`📦 실패 덤프 저장: ${result.dumpPath}`);
+      } else if (!result.success) {
+        this.log(`⚠️ 덤프 저장 실패: ${result.error}`);
+      }
+    } catch (e) {
+      // 덤프 자체가 실패해도 원본 자동화 흐름은 방해하지 않음
+      try {
+        this.log(`⚠️ 덤프 함수 예외: ${(e as Error).message}`);
+      } catch {}
+    }
+  }
+
   // ✅ [2026-04-11 FIX] 대기 중 cancel 체크 — 긴 delay에서도 취소 즉시 반응
   private async delay(ms: number): Promise<void> {
     const start = Date.now();
@@ -2633,6 +2670,11 @@ export class NaverBlogAutomation {
     }
 
     if (!loginButton) {
+      // ✅ [v1.4.54] 로그인 버튼 자체를 못 찾음 → 즉시 덤프 (네이버 UI 변경 가능성)
+      await this.dumpFailure('LOGIN_BUTTON_NOT_FOUND', new Error('로그인 버튼을 찾을 수 없습니다.'), {
+        errorCode: 'LOGIN_E002',
+        context: { triedSelectors: loginButtonSelectors },
+      });
       throw new Error('로그인 버튼을 찾을 수 없습니다.');
     }
 
@@ -2753,38 +2795,98 @@ export class NaverBlogAutomation {
       this.log(`⚠️ 1차 클릭 예외: ${(e as Error).message}`);
     }
 
-    // ━━━ 2차 시도: Puppeteer.click() + Enter 키 (1차가 pending일 때만) ━━━
+    // 비밀번호 입력 셀렉터 (하드코딩 방지 — 폴백 전부 활용)
+    const pwSelectors = ['#pw', 'input.input_pw', 'input[name="pw"]', 'input[type="password"]'];
+    const focusPwInput = async (): Promise<boolean> => {
+      for (const sel of pwSelectors) {
+        const ok = await page.focus(sel).then(() => true).catch(() => false);
+        if (ok) return true;
+      }
+      return false;
+    };
+
+    // 로그인 버튼 재조회 (스테일 핸들 방지)
+    const relocateButton = async (): Promise<ElementHandle<Element> | null> => {
+      for (const selector of loginButtonSelectors) {
+        const btn = await page.waitForSelector(selector, { visible: true, timeout: 2000 }).catch(() => null);
+        if (btn) return btn as ElementHandle<Element>;
+      }
+      // 텍스트 기반 폴백
+      return await page.evaluateHandle(() => {
+        const buttons = Array.from(document.querySelectorAll('button'));
+        return buttons.find(btn => {
+          const text = btn.textContent || '';
+          return text.includes('로그인') && (btn as HTMLElement).offsetParent !== null;
+        }) || null;
+      }).then(h => h as ElementHandle<Element> | null).catch(() => null);
+    };
+
+    // ━━━ 2차 시도: 버튼 재조회 + click + Enter + submit 이벤트 dispatch ━━━
     if (clickResult === 'pending') {
-      this.log('🔁 로그인 2차 시도: Puppeteer click + Enter 키 (1차 응답 없음)');
+      this.log('🔁 로그인 2차 시도: 버튼 재조회 + click + Enter + submit 이벤트 dispatch');
       try {
-        await loginButton.click().catch(() => {});
+        const freshButton = await relocateButton();
+        if (freshButton) {
+          await freshButton.click().catch(() => {});
+        }
         await this.humanDelay(100, 200);
-        // 비밀번호 입력창에 Enter 전송 — form submit 트리거
-        await page.focus('#pw').catch(() => {});
-        await page.keyboard.press('Enter');
+
+        // Enter 키 전송 (셀렉터 폴백 적용)
+        const focused = await focusPwInput();
+        if (focused) {
+          await page.keyboard.press('Enter').catch(() => {});
+        }
+        await this.humanDelay(100, 200);
+
+        // 폼에 직접 submit 이벤트 dispatch — keydown.preventDefault 우회
+        await page.evaluate(() => {
+          const form = (document.querySelector('#frmNIDLogin') as HTMLFormElement)
+                    || (document.querySelector('form[name="frmNIDLogin"]') as HTMLFormElement)
+                    || (document.querySelector('form') as HTMLFormElement);
+          if (form) {
+            form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+          }
+        }).catch(() => {});
+
         clickResult = await waitForClickResponse(3000);
       } catch (e) {
         this.log(`⚠️ 2차 시도 예외: ${(e as Error).message}`);
       }
     }
 
-    // ━━━ 3차 시도: form.submit() 직접 호출 (2차도 pending일 때) ━━━
+    // ━━━ 3차 시도: 네이티브 프로토타입 form.submit() — 오버라이드 우회 ━━━
     if (clickResult === 'pending') {
-      this.log('🔁 로그인 3차 시도: form.submit() 직접 호출 (2차 응답 없음)');
+      this.log('🔁 로그인 3차 시도: 네이티브 HTMLFormElement.prototype.submit 직접 호출');
       try {
         const submitted = await page.evaluate(() => {
           const form = (document.querySelector('#frmNIDLogin') as HTMLFormElement)
                     || (document.querySelector('form[name="frmNIDLogin"]') as HTMLFormElement)
+                    || (document.querySelector('form[action*="nidlogin"]') as HTMLFormElement)
                     || (document.querySelector('form') as HTMLFormElement);
-          if (form && typeof form.submit === 'function') {
-            form.submit();
-            return true;
+          if (!form) return { ok: false, reason: 'no-form' };
+
+          // HTMLFormElement.prototype.submit을 네이티브에서 직접 가져와 호출
+          // → 네이버가 form.submit을 오버라이드했어도 우회
+          try {
+            const nativeSubmit = HTMLFormElement.prototype.submit;
+            nativeSubmit.call(form);
+            return { ok: true, reason: 'native-submit' };
+          } catch (e) {
+            // 그래도 실패하면 requestSubmit 시도 (더 현대 API)
+            try {
+              if (typeof (form as any).requestSubmit === 'function') {
+                (form as any).requestSubmit();
+                return { ok: true, reason: 'requestSubmit' };
+              }
+            } catch {}
+            return { ok: false, reason: `error: ${(e as Error).message}` };
           }
-          return false;
         });
-        if (!submitted) {
-          this.log('⚠️ 3차 시도 실패: form 요소를 찾지 못함');
+
+        if (!submitted.ok) {
+          this.log(`⚠️ 3차 시도 실패: ${submitted.reason}`);
         } else {
+          this.log(`✅ 3차 시도 실행: ${submitted.reason}`);
           clickResult = await waitForClickResponse(5000);
         }
       } catch (e) {
@@ -2792,9 +2894,59 @@ export class NaverBlogAutomation {
       }
     }
 
+    // ━━━ 4차 시도 (최후): XMLHttpRequest로 로그인 POST 직접 전송 ━━━
+    // 모든 DOM 기반 submit이 막혔을 때의 마지막 수단
+    if (clickResult === 'pending') {
+      this.log('🔁 로그인 4차 시도: XHR 직접 전송 (DOM 우회 최후 수단)');
+      try {
+        const xhrResult = await page.evaluate(() => {
+          const form = (document.querySelector('#frmNIDLogin') as HTMLFormElement)
+                    || (document.querySelector('form[name="frmNIDLogin"]') as HTMLFormElement)
+                    || (document.querySelector('form') as HTMLFormElement);
+          if (!form) return { ok: false, reason: 'no-form' };
+
+          const formData = new FormData(form);
+          const body = new URLSearchParams();
+          formData.forEach((value, key) => body.append(key, value.toString()));
+
+          return fetch(form.action || location.href, {
+            method: (form.method || 'POST').toUpperCase(),
+            body: body.toString(),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            credentials: 'include',
+            redirect: 'follow',
+          }).then(async (res) => {
+            // 로그인 성공 시 서버가 redirect 응답을 주므로 최종 URL로 이동
+            if (res.url && res.url !== location.href) {
+              location.href = res.url;
+            } else {
+              // redirect가 자동 처리된 경우 naver.com 홈으로 이동해서 세션 확인
+              location.href = 'https://www.naver.com/';
+            }
+            return { ok: true, reason: `xhr-${res.status}` };
+          }).catch((e) => ({ ok: false, reason: `xhr-error: ${e.message}` }));
+        });
+
+        if (xhrResult && xhrResult.ok) {
+          this.log(`✅ 4차 시도 실행: ${xhrResult.reason}`);
+          clickResult = await waitForClickResponse(8000);
+        } else {
+          this.log(`⚠️ 4차 시도 실패: ${xhrResult?.reason || 'unknown'}`);
+        }
+      } catch (e) {
+        this.log(`⚠️ 4차 시도 예외: ${(e as Error).message}`);
+      }
+    }
+
     // 결과 로깅 — 사용자에게 정확한 원인 표시
     if (clickResult === 'pending') {
-      this.log('❌ 로그인 3단계 시도 모두 응답 없음 — 계정 리스크 점수 높음 의심. 해당 계정 수동 로그인 후 쿠키 워밍업 권장');
+      this.log('❌ 로그인 4단계 시도 모두 응답 없음 — 네이버가 해당 계정에 강한 차단을 걸었을 가능성. 수동 로그인 + 며칠간 정상 사용으로 리스크 점수 회복 권장');
+      // ✅ [v1.4.54] 로그인 4단계 모두 실패 → 자동 덤프
+      await this.dumpFailure('LOGIN_ALL_FALLBACKS_FAILED', new Error('All 4 login click strategies failed'), {
+        errorCode: 'LOGIN_E001',
+        fallbackStage: 4,
+        context: { buttonState },
+      });
     } else if (clickResult === 'challenge') {
       this.log('🔐 로그인 챌린지(캡차/본인확인) 감지 — 사용자 개입 필요');
     } else if (clickResult === 'error') {

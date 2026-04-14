@@ -290,6 +290,14 @@ class BrowserSessionManager {
         const browser = await puppeteer.launch(launchOptions);
         const page = await browser.newPage();
 
+        // ✅ [v1.4.54] 진단 버퍼 연결 — 실패 시 자동 덤프용 console/network 수집
+        try {
+            const { attachDiagnostics } = await import('./debug/diagnosticsBuffer.js');
+            attachDiagnostics(page);
+        } catch (e) {
+            console.warn('[BrowserSessionManager] 진단 버퍼 연결 실패:', (e as Error).message);
+        }
+
         // 기본 탭 정리
         const pages = await browser.pages();
         for (const p of pages) {

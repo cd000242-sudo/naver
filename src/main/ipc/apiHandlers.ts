@@ -215,4 +215,32 @@ export function registerApiHandlers(_ctx: IpcContext): void {
             return { success: false, message: (e as Error).message };
         }
     });
+
+    // ✅ [v1.4.54] 디버그 덤프 폴더 열기
+    ipcMain.handle('debug:openDumpFolder', async () => {
+        try {
+            const { getDumpRoot } = await import('../../debug/domDumpManager.js');
+            const { shell } = await import('electron');
+            const fs = await import('fs/promises');
+            const dumpRoot = getDumpRoot();
+            // 폴더가 없으면 생성
+            await fs.mkdir(dumpRoot, { recursive: true });
+            await shell.openPath(dumpRoot);
+            return { success: true, path: dumpRoot };
+        } catch (e) {
+            console.error('[Debug] 덤프 폴더 열기 실패:', e);
+            return { success: false, message: (e as Error).message };
+        }
+    });
+
+    // ✅ [v1.4.54] 덤프 수동 정리
+    ipcMain.handle('debug:cleanupDumps', async () => {
+        try {
+            const { cleanupOldDumps } = await import('../../debug/domDumpManager.js');
+            const result = await cleanupOldDumps();
+            return { success: true, data: result };
+        } catch (e) {
+            return { success: false, message: (e as Error).message };
+        }
+    });
 }
