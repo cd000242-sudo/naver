@@ -7,6 +7,7 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "build": "tsc && node scripts/copy-static.mjs",
     "build:safe": "node scripts/build.js",
     "start": "npm run build && electron .",
@@ -86,6 +87,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.7.4",
     "@types/node-cron": "^3.0.11",
+    "@vitest/coverage-v8": "^4.1.4",
     "electron": "^31.7.7",
     "electron-builder": "^26.0.12",
     "eslint": "^9.12.0",
@@ -97,6 +99,7 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.20.6",
     "typescript": "^5.5.4",
+    "typescript-eslint": "^8.58.2",
     "vitest": "^4.1.2"
   },
   "build": {

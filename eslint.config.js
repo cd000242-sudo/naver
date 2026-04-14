@@ -1,34 +1,112 @@
+// ESLint v9 flat config — v1.4.56 autopus 전환 시 TypeScript 지원 추가
+// 이전: src/**/*.ts가 all ignored — 린트 전체 무작동 상태
+// 지금: typescript-eslint 파서로 TypeScript 파일 정상 파싱 + 완화된 규칙으로 기존 god-file 수용
 const js = require('@eslint/js');
+const tseslint = require('typescript-eslint');
 const globals = require('globals');
 
-module.exports = [
+module.exports = tseslint.config(
+    // ━━━ 전역 제외 ━━━
     {
-        ignores: ['.opencode/dist/**', '.cursor/**', 'node_modules/**']
+        ignores: [
+            'node_modules/**',
+            'dist/**',
+            'release_final/**',
+            'public/dist/**',
+            '.opencode/dist/**',
+            '.cursor/**',
+            'build/**',
+            '.claude/**',
+            '.autopus/**',
+            'app-update.yml',
+            '**/*.min.js',
+        ],
     },
+
+    // ━━━ JavaScript 기본 규칙 ━━━
     js.configs.recommended,
+
+    // ━━━ TypeScript 기본 규칙 ━━━
+    ...tseslint.configs.recommended,
+
+    // ━━━ 공통 언어 설정 ━━━
     {
         languageOptions: {
             ecmaVersion: 2022,
             sourceType: 'commonjs',
             globals: {
                 ...globals.node,
-                ...globals.es2022
-            }
+                ...globals.es2022,
+                ...globals.browser, // renderer 프로세스
+            },
         },
+    },
+
+    // ━━━ TypeScript 파일 전용 규칙 완화 ━━━
+    // 기존 god-file 4개(contentGenerator/main/naverBlogAutomation/renderer)에
+    // 린트가 갑자기 수천 개 에러 터지는 것을 방지. 점진 강화 전략.
+    {
+        files: ['**/*.ts'],
         rules: {
-            'no-unused-vars': ['error', {
+            // 타입 안전성은 tsc --noEmit가 책임. 린트는 스타일 + 미사용 변수만.
+            '@typescript-eslint/no-explicit-any': 'off', // 전체 코드베이스에 any 다수
+            '@typescript-eslint/no-unused-vars': ['warn', {
                 argsIgnorePattern: '^_',
                 varsIgnorePattern: '^_',
-                caughtErrorsIgnorePattern: '^_'
+                caughtErrorsIgnorePattern: '^_',
             }],
-            'no-undef': 'error',
-            'eqeqeq': 'warn'
-        }
+            '@typescript-eslint/no-empty-object-type': 'off',
+            '@typescript-eslint/no-unused-expressions': 'off',
+            '@typescript-eslint/no-require-imports': 'off', // CommonJS 모듈 혼재
+            '@typescript-eslint/no-this-alias': 'off',
+            '@typescript-eslint/no-namespace': 'off',
+
+            // JS 규칙 완화
+            'no-unused-vars': 'off', // TS 버전이 대체
+            'no-undef': 'off', // tsc가 대체
+            'no-case-declarations': 'off',
+            'no-useless-escape': 'off',
+            'no-irregular-whitespace': 'off',
+            'no-control-regex': 'off',
+            'no-empty': ['warn', { allowEmptyCatch: true }],
+            'no-prototype-builtins': 'off',
+            'no-constant-condition': ['warn', { checkLoops: false }],
+            'no-async-promise-executor': 'off',
+            'no-misleading-character-class': 'off',
+
+            // 장려 규칙
+            'eqeqeq': ['warn', 'always', { null: 'ignore' }],
+            'prefer-const': 'warn',
+
+            // ━━━ 기존 god-file 부채 수용 (warn으로 강등 — 점진 정리 예정) ━━━
+            'no-var': 'warn',                              // 34건 (레거시 var)
+            'no-cond-assign': 'warn',                      // 6건 (while ((x = ...)) 패턴)
+            'no-constant-binary-expression': 'warn',       // 3건
+            'prefer-rest-params': 'warn',                  // 2건
+            '@typescript-eslint/ban-ts-comment': 'warn',   // 9건 (@ts-ignore)
+            '@typescript-eslint/prefer-as-const': 'warn',  // 1건
+            '@typescript-eslint/no-wrapper-object-types': 'warn',
+            '@typescript-eslint/no-unsafe-function-type': 'warn',
+            '@typescript-eslint/triple-slash-reference': 'warn',
+            'no-sparse-arrays': 'warn',
+            'no-fallthrough': 'warn',
+        },
     },
+
+    // ━━━ .mjs 파일 전용 (ES modules) ━━━
     {
         files: ['**/*.mjs'],
         languageOptions: {
-            sourceType: 'module'
-        }
-    }
-];
+            sourceType: 'module',
+        },
+    },
+
+    // ━━━ 테스트 파일 추가 완화 ━━━
+    {
+        files: ['**/__tests__/**/*.ts', '**/tests/**/*.ts', '**/*.test.ts', '**/*.spec.ts'],
+        rules: {
+            '@typescript-eslint/no-non-null-assertion': 'off',
+            '@typescript-eslint/no-explicit-any': 'off',
+        },
+    },
+);
