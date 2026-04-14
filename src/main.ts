@@ -3659,7 +3659,7 @@ ipcMain.handle(
           // URL에서 기본 이미지 식별자 추출 (쿼리 파라미터, 사이즈 변형 제거)
           // 예: image_123.jpg?size=small → image_123
           // 예: product_456_v1.jpg → product_456
-          let baseUrl = url
+          const baseUrl = url
             .replace(/\?.*$/, '')  // 쿼리 파라미터 제거
             .replace(/(_v\d+|_\d{2,}x\d{2,}|_s\d+|_m\d+|_l\d+)(\.[a-z]+)?$/i, '$2')  // 사이즈 변형 제거
             .replace(/[-_](small|medium|large|thumb|full|origin|detail|main|sub)(\.[a-z]+)?$/i, '$2');  // 타입 변형 제거
@@ -4061,7 +4061,7 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
           const models = resp.data?.data || [];
 
           // ✅ [2026-03-20] DeepInfra 잔액 조회 — 다양한 응답 필드 탐색
-          let creditInfo = { remaining: '', total: '' };
+          const creditInfo = { remaining: '', total: '' };
           try {
             const billingResp = await axios.get('https://api.deepinfra.com/v1/api_token/me', {
               headers: { 'Authorization': `Bearer ${key}` },
@@ -5913,7 +5913,7 @@ ipcMain.handle(
       // RSS/URL에서 이미지 추출 여부 확인 (여러 URL 지원)
       // 이미지 수집 기능 제거됨 (DALL-E와 Pexels만 사용)
       // 네이버 블로그 크롤링, RSS 이미지 추출 등은 더 이상 사용하지 않음
-      let imageCount = 0;
+      const imageCount = 0;
 
       // 사용자 지정(minChars) 우선, 없으면 연령대 기본값 사용
       const customMin = (payload.assembly as any).minChars as number | undefined;

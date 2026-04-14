@@ -92,7 +92,7 @@ export async function getAllGeneratedImagesFromFolders(): Promise<Array<{ postId
 
       // ✅ 폴더 목록 읽기 (수정 시간 포함) - 최신순 정렬용
       let folders: string[] = [];
-      let folderStats: Map<string, number> = new Map(); // 폴더명 → mtime
+      const folderStats: Map<string, number> = new Map(); // 폴더명 → mtime
 
       if (window.api.readDirWithStats) {
         // ✅ 수정 시간과 함께 읽기

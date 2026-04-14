@@ -146,7 +146,7 @@ let configPath: string | null = null;
 
 /** ✅ [2026-02-26] 계정별 설정 파일 지원 */
 let _activeUserId: string = '';
-let _userConfigPaths: Map<string, string> = new Map();
+const _userConfigPaths: Map<string, string> = new Map();
 
 /** ✅ [2026-03-27] 마지막 활성 사용자 ID 저장/로드 */
 async function saveLastActiveUserId(userId: string): Promise<void> {

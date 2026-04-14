@@ -1764,7 +1764,7 @@ export async function switchGoogleAccountForImageFx(): Promise<{
       console.log('[ImageFX] 🌐 AdsPower 브라우저 열기 (표시 모드)...');
       sendImageLog('🌐 [ImageFX] AdsPower 브라우저를 표시 모드로 여는 중...');
 
-      let openResult = await adsPowerGet(`/api/v1/browser/start?user_id=${userId}`);
+      const openResult = await adsPowerGet(`/api/v1/browser/start?user_id=${userId}`);
       // ✅ [2026-03-16] AdsPower 일일 한도 초과 시 → Playwright 자체 브라우저로 폴백
       if (openResult.code !== 0) {
         const openMsg = openResult.msg || '';
@@ -1796,11 +1796,11 @@ export async function switchGoogleAccountForImageFx(): Promise<{
         throw new Error(`AdsPower 브라우저 열기 실패: ${openMsg}`);
       }
 
-      let wsUrl = openResult.data.ws?.puppeteer;
+      const wsUrl = openResult.data.ws?.puppeteer;
       if (!wsUrl) throw new Error('AdsPower WebSocket URL 없음');
 
-      let browser = await chromium.connectOverCDP(wsUrl);
-      let context = browser.contexts()[0];
+      const browser = await chromium.connectOverCDP(wsUrl);
+      const context = browser.contexts()[0];
       if (!context) throw new Error('AdsPower 컨텍스트 없음');
 
       let page = context.pages()[0] || await context.newPage();

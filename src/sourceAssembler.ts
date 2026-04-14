@@ -66,7 +66,7 @@ async function decodeResponseWithCharset(response: Response, url?: string): Prom
   }
 
   // 6. UTF-8인 경우 또는 알 수 없는 인코딩
-  let text = buffer.toString('utf-8');
+  const text = buffer.toString('utf-8');
 
   // ✅ [FIX] 네이버 도메인은 무조건 UTF-8 (EUC-KR 재시도 안 함)
   const isNaverDomain = url && url.includes('naver.com');
@@ -240,7 +240,7 @@ async function resolveShortUrl(url: string): Promise<string> {
   console.log(`[단축URL] 📎 ${url.substring(0, 40)}... 최종 목적지 확인 중...`);
 
   // ✅ [1단계] fetch HEAD 시도
-  let fetchSuccess = false;
+  const fetchSuccess = false;
   try {
     const response = await fetch(url, {
       method: 'HEAD',
@@ -1948,7 +1948,7 @@ async function fetchWithPuppeteer(url: string): Promise<{ html: string; finalUrl
         }
 
         // 여러 소스 확인 (고해상도 우선)
-        let src =
+        const src =
           img.getAttribute('data-original') || // 원본 이미지 (Lazy Loading)
           img.getAttribute('data-src-original') || // 원본 이미지
           img.getAttribute('data-lazy-src-original') || // 원본 이미지
@@ -2138,7 +2138,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
               const metaResult = extractUniversalMeta(tlsResult.html);
               if (metaResult && metaResult.title && metaResult.title.length > 3) {
                 // OG 타이틀에서 "공식스토어" 같은 비상품명 제거
-                let ogTitle = metaResult.title
+                const ogTitle = metaResult.title
                   .replace(/\s*:\s*네이버\s*브랜드스토어$/i, '')
                   .replace(/\s*-\s*네이버\s*브랜드스토어$/i, '')
                   .replace(/\s*\|\s*네이버\s*브랜드스토어$/i, '')
@@ -3387,7 +3387,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
                   })();
 
                 // ✅ 여러 소스 확인 (고해상도 우선) - 더 많은 속성 체크
-                let src =
+                const src =
                   imgElement.getAttribute('data-original') || // 원본 이미지 (Lazy Loading)
                   imgElement.getAttribute('data-src-original') || // 원본 이미지
                   imgElement.getAttribute('data-lazy-src-original') || // 원본 이미지
@@ -3532,7 +3532,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
 
                   // ✅ 중복 체크: 고품질 이미지 중복 제거 (개선된 버전)
                   // 1. 쿼리 파라미터 제거
-                  let normalizedUrl = originalSrc
+                  const normalizedUrl = originalSrc
                     .replace(/[?&](type|size|w|h|quality|q|resize)=[^&]*/gi, '') // 크기/품질 파라미터 제거
                     .replace(/\?$/, '') // 빈 쿼리 제거
                     .replace(/&$/, ''); // 빈 앰퍼샌드 제거
@@ -3837,7 +3837,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
               'article',
             ];
 
-            let descriptionParts: string[] = [];
+            const descriptionParts: string[] = [];
 
             for (const selector of brandDescriptionSelectors) {
               const elements = $(selector);
@@ -4023,7 +4023,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
         '.detail_content', // 상세 내용
       ];
 
-      let descriptionParts: string[] = [];
+      const descriptionParts: string[] = [];
       let foundValidContent = false;
 
       for (const selector of descriptionSelectors) {
@@ -4134,7 +4134,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
           'article',
         ];
 
-        let descriptionParts: string[] = [];
+        const descriptionParts: string[] = [];
         let foundValidContent = false;
 
         for (const selector of brandDescriptionSelectors) {
@@ -4207,7 +4207,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
     const seenUrls = new Set<string>();
 
     // ✅ Puppeteer로 추출한 이미지가 있으면 먼저 추가
-    let puppeteerImages: string[] = [];
+    const puppeteerImages: string[] = [];
     if (options.imagesOnly !== false) {
       // extractedData는 Puppeteer 블록 안에서만 접근 가능하므로, 여기서는 빈 배열로 시작
       // HTML 파싱 후에 Puppeteer 이미지와 합칠 예정
@@ -4232,7 +4232,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
           /data-original=["']https?:\/\/shop-phinf\.pstatic\.net[^"']+["']/gi,
         ];
 
-        let shopPhinfMatches: string[] = [];
+        const shopPhinfMatches: string[] = [];
         shopPhinfPatterns.forEach(pattern => {
           const matches = html.match(pattern);
           if (matches) {
@@ -4286,7 +4286,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
           /data-original=["']https?:\/\/[^"']*pstatic\.net[^"']+["']/gi,
         ];
 
-        let pstaticMatches: string[] = [];
+        const pstaticMatches: string[] = [];
         pstaticPatterns.forEach(pattern => {
           const matches = html.match(pattern);
           if (matches) {
@@ -5068,14 +5068,14 @@ ${product.title}에 대한 상세 정보입니다. 이 제품은 ${product.categ
           const $ = cheerio.load(puppeteerResult.html);
 
           // 제목, 본문 추출 (아래 로직 재사용)
-          let title =
+          const title =
             $('meta[property="og:title"]').attr('content')?.trim() ||
             $('meta[name="twitter:title"]').attr('content')?.trim() ||
             $('h1').first().text().trim() ||
             $('title').text().trim();
 
           // 본문 추출 (간단하게)
-          let content = $('body').text().trim();
+          const content = $('body').text().trim();
 
           // ✅ Puppeteer에서 추출한 이미지 반환
           return {
@@ -6264,7 +6264,7 @@ ${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
   let baseTitle = baseText.length < 100 ? baseText : '';  // 짧으면 제목으로 사용
   let baseBody = baseText.length >= 100 ? baseText : '';  // 길면 본문으로 사용
   let published = '';
-  let extractedImages: string[] = [];
+  const extractedImages: string[] = [];
   const allUrls: string[] = [];
 
   // ✅ 네이버 API 결과를 우선 적용 (빠르고 안정적!)

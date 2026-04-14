@@ -368,7 +368,7 @@ async function crawlNaverSmartStore(url: string): Promise<ProductSpec | null> {
 
             // 배송
             const shippingEl = document.querySelector('[class*="delivery"], [class*="shipping"]');
-            let shipping = shippingEl?.textContent?.trim() || '무료 배송';
+            const shipping = shippingEl?.textContent?.trim() || '무료 배송';
 
             // 브랜드/스토어명
             const brandEl = document.querySelector('._2K6vLkc9bM, [class*="brand"], [class*="seller"]');
@@ -2383,7 +2383,7 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
     }
 
     // ✅ [속도 최적화] 2단계: URL에서 스토어명 추출 후 공식 API 먼저 시도
-    let storeMatch = resolvedUrl.match(/(?:smartstore|brand)\.naver\.com\/([^\/\?]+)/);
+    const storeMatch = resolvedUrl.match(/(?:smartstore|brand)\.naver\.com\/([^\/\?]+)/);
     let storeName = storeMatch ? storeMatch[1] : null;
 
     // ✅ [2026-03-22 FIX] brandconnect URL → Playwright로 JS 리다이렉트 따라가서 실제 스토어 도달 + 상품 크롤링

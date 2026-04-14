@@ -538,7 +538,7 @@ export class InternalLinkManager {
       const lowerCategory = originalCategory.toLowerCase().trim();
 
       // 매핑 테이블에서 찾기
-      let normalizedCategory = normMap[lowerCategory] || normMap[originalCategory];
+      const normalizedCategory = normMap[lowerCategory] || normMap[originalCategory];
 
       // 없으면 원본 그대로 유지
       if (!normalizedCategory) {

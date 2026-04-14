@@ -785,7 +785,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       }
 
       // 썸네일 이미지 검색 ('🖼️ 썸네일' 키로 저장됨)
-      let introImages = (resolved.images || []).filter((img: any) =>
+      const introImages = (resolved.images || []).filter((img: any) =>
         img.heading === '🖼️ 썸네일' || img.heading === '썸네일' || img.isThumbnail === true || img.isIntro === true
       );
 
@@ -2567,7 +2567,7 @@ export function extractBodyForHeading(self: any, fullBody: string, headingTitle:
 
       if (extractedContent.length > 30) {
         // 소제목 제목이 본문에 포함되어 있으면 제거
-        let cleanContent = extractedContent
+        const cleanContent = extractedContent
           .replace(new RegExp(`^\\s*${currentTitleEscaped}\\s*:?\\s*`, 'gi'), '')
           .trim();
 
@@ -2827,7 +2827,7 @@ export function extractBodyForHeading(self: any, fullBody: string, headingTitle:
 
   // 2. 패턴을 찾지 못한 경우: 줄 단위로 검색 (더 유연한 매칭)
   const lines = fullBody.split('\n');
-  let extractedContent: string[] = [];
+  const extractedContent: string[] = [];
   let isCollecting = false;
   let foundHeading = false;
 

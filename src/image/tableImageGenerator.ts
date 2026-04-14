@@ -365,7 +365,7 @@ export function extractSpecsFromContent(content: string, productName: string): T
   for (const p of patterns) {
     const match = content.match(p.regex);
     if (match) {
-      let val = match[1].trim();
+      const val = match[1].trim();
 
       // ✅ [핵심] 값이 너무 길거나, 문장처럼 보이면 제외
       const isSentence = val.includes('요') || val.includes('다') || val.includes('~') || val.includes('!');

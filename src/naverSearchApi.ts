@@ -283,7 +283,7 @@ export async function getProductInfoFast(
 
         // 간단한 상품명 추출 (URL 마지막 경로에서)
         const urlParts = decoded.split('/');
-        let searchQuery = urlParts[urlParts.length - 1].split('?')[0];
+        const searchQuery = urlParts[urlParts.length - 1].split('?')[0];
 
         // 숫자만 있으면 상품 ID이므로 검색 어려움
         if (/^\d+$/.test(searchQuery)) {
@@ -639,7 +639,7 @@ export async function generateShoppingConnectTitle(
     const minRequired = Math.max(maxKeywords, 3);
     const selectedKeywords = autocompleteKeywords.slice(0, Math.min(minRequired + 1, 5));
 
-    let titleParts: string[] = [coreProductName, ...selectedKeywords];
+    const titleParts: string[] = [coreProductName, ...selectedKeywords];
 
     // ✅ [2026-03-04 FIX] 제목 길이 체크: 55자로 확대 (크롤링 제품명 짤림 방지)
     let finalTitle = titleParts.join(' ').trim();

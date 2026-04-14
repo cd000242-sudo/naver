@@ -57,7 +57,7 @@ async function decodeResponseWithCharset(response: Response, url?: string): Prom
   }
 
   // 6. UTF-8인 경우 또는 알 수 없는 인코딩
-  let text = buffer.toString('utf-8');
+  const text = buffer.toString('utf-8');
 
   // ✅ [FIX] 네이버 도메인은 무조건 UTF-8 (EUC-KR 재시도 안 함)
   const isNaverDomain = url && url.includes('naver.com');
@@ -849,7 +849,7 @@ export class SmartCrawler {
         }
 
         // ✅ 이미지 추출
-        let images: string[] = [];
+        const images: string[] = [];
         if (shouldExtractImages) {
           const imgElements = document.querySelectorAll('img');
           imgElements.forEach((img) => {
@@ -1407,7 +1407,7 @@ export class SmartCrawler {
         const description =
           document.querySelector('meta[property="og:description"]')?.getAttribute('content') || '';
 
-        let content = document.querySelector('.prod-buy-header, .prod-atf, article, main')?.textContent || document.body.textContent || '';
+        const content = document.querySelector('.prod-buy-header, .prod-atf, article, main')?.textContent || document.body.textContent || '';
 
         let images: string[] = [];
         if (shouldExtractImages) {

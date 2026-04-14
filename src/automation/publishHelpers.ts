@@ -282,7 +282,7 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
         const secondaryCtx = searchContext === 'frame' ? page : frame;
 
         for (const pattern of categoryItemPatterns) {
-          let rawItems = await primaryCtx.$$(pattern).catch(() => []);
+          const rawItems = await primaryCtx.$$(pattern).catch(() => []);
           if (rawItems.length > 1) {
             categoryItems = await filterNonCategoryItems(rawItems, primaryCtx);
             if (categoryItems.length > 1) {
@@ -294,7 +294,7 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
 
         if (categoryItems.length <= 1) {
           for (const pattern of categoryItemPatterns) {
-            let rawItems = await secondaryCtx.$$(pattern).catch(() => []);
+            const rawItems = await secondaryCtx.$$(pattern).catch(() => []);
             if (rawItems.length > 1) {
               categoryItems = await filterNonCategoryItems(rawItems, secondaryCtx);
               if (categoryItems.length > 1) {

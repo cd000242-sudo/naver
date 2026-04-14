@@ -229,7 +229,7 @@ function getUrlsAsString(): string {
 // 로그 DOM 배치 업데이트 시스템
 // ============================================
 let _logUpdatePending = false;
-let _logPendingEntries: { message: string; timestamp: string }[] = [];
+const _logPendingEntries: { message: string; timestamp: string }[] = [];
 
 function _flushLogEntries(logOutputs: HTMLElement[]): void {
   const entries = _logPendingEntries.splice(0);

@@ -536,7 +536,7 @@ function applyKeywordPrefixToTitle(title: string, keyword: string): string {
 
   const clampTitleLength = (s: string, maxLen: number): string => {
     // ✅ [2026-02-24] removeDuplicatePhrases 제거 (3중 실행 방지, 순수 길이 제한만)
-    let t = normalizeWhitespace(String(s || '')).trim();
+    const t = normalizeWhitespace(String(s || '')).trim();
     if (!t) return '';
     if (t.length <= maxLen) return t;
 
@@ -3393,7 +3393,7 @@ function ensureParagraphBreaks(text: string): string {
 
   // \n\n 없이 300자 이상 → 문장 기준으로 문단 분리
   // 숫자+점 패턴(1. 2. 등) 보호를 위해 임시 치환
-  let safe = text.replace(/(\d+)\.\s/g, '$1__NUMDOT__ ');
+  const safe = text.replace(/(\d+)\.\s/g, '$1__NUMDOT__ ');
 
   // 문장 종결 기준으로 분리 (.!? 뒤 공백)
   const sentences = safe
@@ -5875,7 +5875,7 @@ function optimizeHeadingsForMode(content: StructuredContent, source: ContentSour
 
   content.headings = content.headings.map((h, index) => {
     const total = content.headings?.length || 0;
-    let title = String(h.title || '').trim();
+    const title = String(h.title || '').trim();
 
     if (!title) {
       // 완전 빈 소제목은 최소한의 기본값만 채움 (본문은 그대로 유지)
@@ -9484,7 +9484,7 @@ function optimizeForViral(content: StructuredContent, source: ContentSource): St
 
   // ✅ 문맥에 맞는 종결 문구만 삽입 (카테고리와 본문 내용이 일치하는 경우만)
   const articleType = source.articleType ?? 'general';
-  let shouldInsertTriggers = true;
+  const shouldInsertTriggers = true;
 
   // 카테고리와 본문 내용이 일치하지 않으면 종결 문구 삽입 안 함
   // ✅ [User Request] 문맥 검사 제거 (항상 종결 문구 삽입)

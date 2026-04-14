@@ -2587,7 +2587,7 @@ export async function initMultiAccountPublishModal() {
   let currentProgressPercent = 0;
   let currentProgressAccountName = '';
   let currentProgressStep = '';
-  let progressAnimationFrame: number | null = null;
+  const progressAnimationFrame: number | null = null;
 
   function updateMAProgress(current: number, total: number, accountName: string, step: string, subStep?: number, totalSubSteps?: number) {
     const totalSafe = Math.max(1, Number(total || 0));

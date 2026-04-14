@@ -46,7 +46,7 @@ export interface BannerSettings {
 }
 
 // 현재 배너 설정 (전역 상태)
-let currentBannerSettings: BannerSettings = {
+const currentBannerSettings: BannerSettings = {
   text: '지금 바로 구매하기 →',
   colorKey: 'naver-green',
   sizeKey: 'standard',

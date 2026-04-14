@@ -998,7 +998,7 @@ export async function insertImageViaBase64(self: any, filePath: string, frame?: 
   self.log(`   🔄 Base64 변환 방식으로 이미지 삽입 시작...`);
 
   // 이미지를 Base64로 읽기
-  let absolutePath = filePath;
+  const absolutePath = filePath;
   let imageBuffer: Buffer;
 
   try {
@@ -1159,7 +1159,7 @@ export async function insertSingleImage(self: any, image: any): Promise<void> {
       const container = range.commonAncestorContainer;
 
       const titleElement = document.querySelector('.se-section-documentTitle');
-      let currentNode = container.nodeType === Node.TEXT_NODE
+      const currentNode = container.nodeType === Node.TEXT_NODE
         ? container.parentElement
         : container as HTMLElement;
 

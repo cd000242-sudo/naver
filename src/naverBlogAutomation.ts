@@ -3173,13 +3173,13 @@ export class NaverBlogAutomation {
               '[class*="captcha_wrap"]', '[class*="chptcha"]',
               'img[src*="captcha"]', 'img[alt*="자동입력"]', 'img[alt*="보안"]',
             ];
-            var hasCaptchaElement = false;
-            for (var i = 0; i < captchaSelectors.length; i++) {
+            let hasCaptchaElement = false;
+            for (let i = 0; i < captchaSelectors.length; i++) {
               try {
-                var el = document.querySelector(captchaSelectors[i]);
+                const el = document.querySelector(captchaSelectors[i]);
                 if (el) {
-                  var htmlEl = el as HTMLElement;
-                  var style = getComputedStyle(htmlEl);
+                  const htmlEl = el as HTMLElement;
+                  const style = getComputedStyle(htmlEl);
                   if (style.display !== 'none' && style.visibility !== 'hidden' && htmlEl.offsetParent !== null) {
                     hasCaptchaElement = true;
                     break;
@@ -3189,10 +3189,10 @@ export class NaverBlogAutomation {
             }
 
             // 캡차 이미지 감지 (src에 captcha 포함)
-            var hasCaptchaImage = false;
-            var imgs = document.querySelectorAll('img');
-            for (var j = 0; j < imgs.length; j++) {
-              var src = imgs[j].src || '';
+            let hasCaptchaImage = false;
+            const imgs = document.querySelectorAll('img');
+            for (let j = 0; j < imgs.length; j++) {
+              const src = imgs[j].src || '';
               if (src.includes('captcha') || src.includes('Captcha') || src.includes('CAPTCHA')) {
                 hasCaptchaImage = true;
                 break;
@@ -3200,10 +3200,10 @@ export class NaverBlogAutomation {
             }
 
             // iframe 내 CAPTCHA 감지
-            var suspiciousIframeCount = 0;
-            var iframes = document.querySelectorAll('iframe');
-            for (var k = 0; k < iframes.length; k++) {
-              var iframeSrc = iframes[k].src || '';
+            let suspiciousIframeCount = 0;
+            const iframes = document.querySelectorAll('iframe');
+            for (let k = 0; k < iframes.length; k++) {
+              const iframeSrc = iframes[k].src || '';
               if (iframeSrc.includes('captcha') || iframeSrc.includes('challenge') ||
                   iframeSrc.includes('recaptcha') || iframeSrc.includes('hcaptcha') ||
                   iframeSrc.includes('turnstile') || iframeSrc.includes('arkose')) {
@@ -3211,21 +3211,21 @@ export class NaverBlogAutomation {
               }
             }
 
-            var hasCaptcha = !!(ncaptchaSplitActive || hasCaptchaText || hasCaptchaElement || hasCaptchaImage || suspiciousIframeCount > 0);
+            const hasCaptcha = !!(ncaptchaSplitActive || hasCaptchaText || hasCaptchaElement || hasCaptchaImage || suspiciousIframeCount > 0);
 
             // ═══ 2. 로그인 에러 메시지 감지 ═══
             // [Playwright 검증] 네이버 에러 div들 (기본 display:none, 에러 시 visible)
-            var errorMessages: { type: string; text: string }[] = [];
-            var naverErrorDivs = ['#err_common', '#err_empty_id', '#err_empty_pw', '#err_capslock',
+            const errorMessages: { type: string; text: string }[] = [];
+            const naverErrorDivs = ['#err_common', '#err_empty_id', '#err_empty_pw', '#err_capslock',
                                   '#err_passkey_common', '#err_passkey_common2', '#err_passkey_common3', '#err_passkey_common4'];
-            for (var m = 0; m < naverErrorDivs.length; m++) {
+            for (let m = 0; m < naverErrorDivs.length; m++) {
               try {
-                var errDiv = document.querySelector(naverErrorDivs[m]) as HTMLElement | null;
+                const errDiv = document.querySelector(naverErrorDivs[m]) as HTMLElement | null;
                 if (errDiv) {
-                  var errStyle = getComputedStyle(errDiv);
+                  const errStyle = getComputedStyle(errDiv);
                   // [Playwright 검증] 기본은 display:none, 에러 시 display가 변경됨
                   if (errStyle.display !== 'none') {
-                    var errText = errDiv.innerText.trim();
+                    const errText = errDiv.innerText.trim();
                     if (errText) {
                       errorMessages.push({ type: naverErrorDivs[m], text: errText });
                     }
@@ -3235,13 +3235,13 @@ export class NaverBlogAutomation {
             }
 
             // [Playwright 검증] .error_message 클래스 (에러 div 내부 텍스트 컨테이너)
-            var errMsgEls = document.querySelectorAll('.error_message');
-            for (var n = 0; n < errMsgEls.length; n++) {
+            const errMsgEls = document.querySelectorAll('.error_message');
+            for (let n = 0; n < errMsgEls.length; n++) {
               try {
-                var errMsgEl = errMsgEls[n] as HTMLElement;
-                var errMsgStyle = getComputedStyle(errMsgEl);
+                const errMsgEl = errMsgEls[n] as HTMLElement;
+                const errMsgStyle = getComputedStyle(errMsgEl);
                 if (errMsgStyle.display !== 'none' && errMsgEl.offsetParent !== null) {
-                  var msgText = errMsgEl.innerText.trim();
+                  const msgText = errMsgEl.innerText.trim();
                   if (msgText) {
                     errorMessages.push({ type: '.error_message', text: msgText });
                   }
@@ -3252,9 +3252,9 @@ export class NaverBlogAutomation {
             // ✅ [2026-03-30 FIX] 에러 키워드를 visible 에러 div 텍스트에서만 검색
             // 이전: bodyText 전체에서 검색 → footer/약관의 '잠시 후 다시' 같은 일반 텍스트에 오탐
             // 현재: 에러 div에서 추출된 errorMessages 텍스트 + #err_common 내용에서만 검색
-            var visibleErrorText = errorMessages.map(function(e) { return e.text; }).join(' ');
+            const visibleErrorText = errorMessages.map(function(e) { return e.text; }).join(' ');
 
-            var errorKeywords = [
+            const errorKeywords = [
               { keyword: '비밀번호가 일치하지', type: 'wrong_password' },
               { keyword: '비밀번호를 잘못', type: 'wrong_password' },
               { keyword: '비밀번호가 틀', type: 'wrong_password' },
@@ -3272,10 +3272,10 @@ export class NaverBlogAutomation {
               { keyword: '잠시 후 다시', type: 'too_many_attempts' },
               { keyword: '새로운 환경', type: 'new_environment' },
             ];
-            var detectedErrors: { keyword: string; type: string }[] = [];
+            const detectedErrors: { keyword: string; type: string }[] = [];
             // visible 에러 div 텍스트에서만 키워드 검색 (false positive 방지)
             if (visibleErrorText.length > 0) {
-              for (var p = 0; p < errorKeywords.length; p++) {
+              for (let p = 0; p < errorKeywords.length; p++) {
                 if (visibleErrorText.includes(errorKeywords[p].keyword)) {
                   detectedErrors.push(errorKeywords[p]);
                 }
@@ -3283,16 +3283,16 @@ export class NaverBlogAutomation {
             }
 
             // ═══ 3. 페이지 요소 존재 확인 ═══
-            var hasIdField = !!document.querySelector('#id');
-            var hasPwField = !!document.querySelector('#pw');
-            var hasLoginButton = !!(
+            const hasIdField = !!document.querySelector('#id');
+            const hasPwField = !!document.querySelector('#pw');
+            const hasLoginButton = !!(
               document.querySelector('#log\\.login') ||
               document.querySelector('button.btn_login') ||
               document.querySelector('button[type="submit"]')
             );
 
             // 캡차 감지 방식 (디버깅용)
-            var captchaMethod = ncaptchaSplitActive ? 'ncaptchaSplit' :
+            const captchaMethod = ncaptchaSplitActive ? 'ncaptchaSplit' :
               hasCaptchaText ? '텍스트' :
               hasCaptchaElement ? 'DOM요소' :
               hasCaptchaImage ? '이미지' :
@@ -6778,7 +6778,7 @@ export class NaverBlogAutomation {
 
         if (extractedContent.length > 30) {
           // 소제목 제목이 본문에 포함되어 있으면 제거
-          let cleanContent = extractedContent
+          const cleanContent = extractedContent
             .replace(new RegExp(`^\\s*${currentTitleEscaped}\\s*:?\\s*`, 'gi'), '')
             .trim();
 
@@ -7038,7 +7038,7 @@ export class NaverBlogAutomation {
 
     // 2. 패턴을 찾지 못한 경우: 줄 단위로 검색 (더 유연한 매칭)
     const lines = fullBody.split('\n');
-    let extractedContent: string[] = [];
+    const extractedContent: string[] = [];
     let isCollecting = false;
     let foundHeading = false;
 

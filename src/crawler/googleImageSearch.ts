@@ -72,7 +72,7 @@ export async function searchGoogleImages(
                 const alt = img.getAttribute('alt') || '';
 
                 // 실제 이미지 URL 찾기 (data-src 우선)
-                let imgUrl = dataSrc || src;
+                const imgUrl = dataSrc || src;
 
                 // 구글 내부 URL이나 base64, 1x1 투명 픽셀 제외
                 if (!imgUrl || imgUrl.startsWith('data:') || imgUrl.includes('gstatic.com/images')) continue;

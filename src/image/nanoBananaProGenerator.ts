@@ -472,7 +472,7 @@ export async function generateWithNanoBananaPro(
   globalKeyPool = keyPool;
 
   // 키 풀에서 첫 번째 사용 가능한 키 가져오기
-  let apiKey = keyPool.getCurrentKey() || primaryApiKey;
+  const apiKey = keyPool.getCurrentKey() || primaryApiKey;
   console.log(`[NanoBananaPro] 🔑 키 풀: ${keyPool.getTotalCount()}개 키 등록, 현재 키: ${apiKey ? apiKey.substring(0, 10) + '...' : '미설정'}`);
 
   // ✅ [2026-02-03 FIX] 세션 ID 생성 및 AbortController 등록 (경쟁 조건 해결)
@@ -516,7 +516,7 @@ export async function generateWithNanoBananaPro(
       console.log(`[NanoBananaPro] 📅 날짜 변경됨 → 카운트 초기화 (${todayKey})`);
     }
 
-    let planType = config.geminiPlanType || 'paid';
+    const planType = config.geminiPlanType || 'paid';
     console.log(`[NanoBananaPro] 적용된 플랜 정책: ${planType.toUpperCase()}`);
 
     const currentCount = config.geminiImageDailyCount || 0;
@@ -610,7 +610,7 @@ export async function generateWithNanoBananaPro(
 
           // ✅ [수정 2026-01-18] 쇼핑커넥트 썸네일은 HTML 렌더링(generateThumbnailWithTextOverlay)으로 별도 생성
           // 나노바나나프로에서는 1번 소제목 이미지에 텍스트를 강제로 넣지 않음 (텍스트 없이 생성)
-          let modifiedItem = { ...item };
+          const modifiedItem = { ...item };
           // if (isShoppingConnect && isThumbnail) {
           //   (modifiedItem as any).allowText = true;
           //   console.log(`[NanoBananaPro] 🛒 [쇼핑커넥트 썸네일] 제목 텍스트 포함 강제 적용`);
@@ -940,7 +940,7 @@ async function generateSingleImageWithGemini(
 
   let imageRatio = '1:1'; // 기본값 (try 블록에서 재설정) — 루프 밖으로 이동 (안전망 접근용)
   let prompt = '';        // 기본값 (try 블록에서 재설정) — 루프 밖으로 이동
-  let lastApiKey = apiKey; // ✅ [2026-02-21] 마지막 사용 API 키 추적 (안전망용)
+  const lastApiKey = apiKey; // ✅ [2026-02-21] 마지막 사용 API 키 추적 (안전망용)
   let lastSelectedModel = ''; // ✅ [2026-04-06] 마지막 선택 모델 추적 (최종 안전망 로테이션용)
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {

@@ -116,7 +116,7 @@ export function resolveTimeConflict(
   roundingMinutes: number = 10,
   maxAttempts: number = 6
 ): Date {
-  let result = new Date(date);
+  const result = new Date(date);
   let timeKey = result.toISOString();
   let attempts = 0;
 

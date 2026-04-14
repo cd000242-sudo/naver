@@ -60,7 +60,7 @@ const HTML_SIZE_LIMIT_BYTES = 5 * 1024 * 1024; // 5MB per HTML file
 export function getDumpRoot(): string {
   try {
     // Electron 환경 감지
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
+     
     const electron = require('electron');
     const app = electron.app || electron.remote?.app;
     if (app?.getPath) {
@@ -379,7 +379,7 @@ export async function cleanupOldDumps(
     }
 
     // 남은 엔트리만 필터
-    let remaining = entries.filter((e) => e.createdAt >= cutoff);
+    const remaining = entries.filter((e) => e.createdAt >= cutoff);
 
     // Stage 2: count 초과 삭제 (오래된 순)
     while (remaining.length > maxDumps) {

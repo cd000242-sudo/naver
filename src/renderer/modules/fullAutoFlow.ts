@@ -1491,7 +1491,7 @@ export function updateUnifiedImagePreview(headings: any[], generatedImages?: any
     const statusColor = generatedImage ? 'var(--success)' : 'var(--accent)';
 
     // ✅ heading이 문자열인 경우와 객체인 경우 모두 처리
-    let headingTitle = typeof heading === 'string' ? heading : (heading.title || heading);
+    const headingTitle = typeof heading === 'string' ? heading : (heading.title || heading);
 
     // ✅ [2026-01-07 버그 수정] bodyPlain에서 소제목 추출 로직 비활성화
     // 이 로직이 소제목을 본문 일부와 잘못 매칭하여 소제목을 망가뜨리는 버그 발생
@@ -2986,7 +2986,7 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
   const ftcTextareaEl = document.getElementById('unified-ftc-text') as HTMLTextAreaElement;
   const ftcEnabled = ftcCheckboxEl?.checked || localStorage.getItem('ftcDisclosureEnabled') === 'true';
   const ftcText = ftcTextareaEl?.value?.trim() || localStorage.getItem('ftcDisclosureText')?.trim() || '';
-  let finalContent = cleanedContent;
+  const finalContent = cleanedContent;
   if (ftcEnabled && ftcText) {
     structuredContent.ftcDisclosure = ftcText;
     appendLog(`⚖️ 공정위 문구 설정됨: "${ftcText.substring(0, 30)}..." (에디터 삽입 예정)`);

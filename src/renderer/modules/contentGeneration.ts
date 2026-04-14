@@ -1584,7 +1584,7 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
 
 
 // ✅ 갤러리 뷰 전환 상태
-let isGalleryView = false;
+const isGalleryView = false;
 
 
 

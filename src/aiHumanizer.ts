@@ -364,7 +364,7 @@ const FORMAL_ENDING_VARIATIONS: Record<string, string[]> = {
 };
 
 function diversifyConsecutiveEndings(text: string, isFormalTone: boolean = false): string {
-  let result = text;
+  const result = text;
   let changes = 0;
 
   // 문장 단위로 분리

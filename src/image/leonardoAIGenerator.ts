@@ -353,7 +353,7 @@ export async function generateWithLeonardoAI(
                         responseType: 'arraybuffer',
                         timeout: 30000
                     });
-                    let buffer = Buffer.from(imgResponse.data);
+                    const buffer = Buffer.from(imgResponse.data);
 
                     // ✅ [2026-03-12 FIX] 텍스트 오버레이는 imageGenerator.ts의 applyKoreanTextOverlayIfNeeded에서 일괄 처리
                     // 여기서 추가로 적용하면 2중 오버레이가 발생하므로 제거

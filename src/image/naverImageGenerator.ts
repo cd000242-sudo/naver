@@ -253,7 +253,7 @@ export async function generateWithNaver(
 
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
-      let searchQuery = KeywordAnalyzer.extractSearchQuery(item.heading, titlePerson, titleProduct);
+      const searchQuery = KeywordAnalyzer.extractSearchQuery(item.heading, titlePerson, titleProduct);
 
       console.log(`[Naver] [${i + 1}/${items.length}] 검색어: "${searchQuery}"`);
 

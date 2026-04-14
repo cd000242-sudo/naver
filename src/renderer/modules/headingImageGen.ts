@@ -3,7 +3,7 @@
 // modules/headingImageGen.ts
 // ============================================
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 
 // --- Global declarations (exposed by renderer.ts via window) ---
 declare const toastManager: { success: (msg: string) => void; error: (msg: string) => void; warning: (msg: string) => void; info: (msg: string) => void };

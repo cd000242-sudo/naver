@@ -995,7 +995,7 @@ export async function initPriceInfoModal(): Promise<void> {
       networkDiagnosticsBtn.disabled = true;
       networkDiagnosticsBtn.textContent = '🔄 진단 중...';
 
-      let diagnosticResults: string[] = [];
+      const diagnosticResults: string[] = [];
       diagnosticResults.push('===== 네트워크 진단 결과 =====\n');
 
       try {

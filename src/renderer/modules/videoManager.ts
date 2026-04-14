@@ -882,7 +882,7 @@ export async function generateHeadingVideoForPrompt(headingIndex: number, headin
       return entry;
     };
 
-    let imgEntry: any = await resolvePlacedImageForHeading();
+    const imgEntry: any = await resolvePlacedImageForHeading();
     if (!imgEntry) {
       toastManager.warning(`"${title}" 소제목에 배치된 이미지가 없습니다. 먼저 이미지를 생성/배치한 뒤 영상을 생성해주세요.`);
       return;
@@ -1206,7 +1206,7 @@ export async function refreshMp4FilesList(): Promise<void> {
     const rootDir = String(dirPath || '').replace(/\\/g, '/').replace(/\/+$/g, '');
     const getFolderKey = (f: any): { key: string; label: string; baseName: string } => {
       const fullPathNorm = String(f?.fullPath || '').replace(/\\/g, '/');
-      let rel = fullPathNorm.startsWith(`${rootDir}/`) ? fullPathNorm.slice(rootDir.length + 1) : fullPathNorm;
+      const rel = fullPathNorm.startsWith(`${rootDir}/`) ? fullPathNorm.slice(rootDir.length + 1) : fullPathNorm;
       const parts = rel.split('/').filter(Boolean);
       const folder = parts.length > 1 ? parts[0] : '기타';
       const rawName = String(f?.name || 'video.mp4');

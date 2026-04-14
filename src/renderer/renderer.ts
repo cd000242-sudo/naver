@@ -1205,11 +1205,11 @@ function getGlobalState<T>(key: 'content' | 'images' | 'running' | 'postId'): T 
 }
 
 // 연속 발행 관련 전역 변수
-let isContinuousMode = false;
-let continuousCountdown = 0;
-let continuousInterval: NodeJS.Timeout | null = null;
-let continuousQueue: string[] = []; // 연속 발행할 URL/콘텐츠 큐
-let __continuousV2Initialized = false; // V2 초기화 플래그
+const isContinuousMode = false;
+const continuousCountdown = 0;
+const continuousInterval: NodeJS.Timeout | null = null;
+const continuousQueue: string[] = []; // 연속 발행할 URL/콘텐츠 큐
+const __continuousV2Initialized = false; // V2 초기화 플래그
 
 // 위험 지표 업데이트
 function updateRiskIndicators(content: StructuredContent | null): void {

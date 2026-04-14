@@ -78,7 +78,7 @@ let healthHistory: ReadonlyMap<string, ReadonlyArray<HealthCheckResult>> = new M
 
 function getUserDataPath(): string {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
+     
     const { app } = require('electron');
     if (app && typeof app.getPath === 'function') {
       return app.getPath('userData');

@@ -169,7 +169,7 @@ export class ImageAutoPlacement {
   }
 
   insertImages(content: string, imagePaths: string[], thumbnailPath: string | null = null): string {
-    let result = content;
+    const result = content;
     const lines = result.split('\n');
     
     // 1. 썸네일은 맨 위에

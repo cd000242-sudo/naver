@@ -624,7 +624,7 @@ export function scheduleNextPosting(): void {
 // 연속 발행 URL 입력 모달 토글
 export function toggleContinuousModeModal(): void {
   console.log('[Continuous] toggleContinuousModeModal 호출됨');
-  let modal = document.getElementById('continuous-mode-modal') as HTMLDivElement;
+  const modal = document.getElementById('continuous-mode-modal') as HTMLDivElement;
   console.log('[Continuous] 모달 엘리먼트 찾음:', modal ? '있음' : '없음');
 
   if (!modal) {

@@ -386,7 +386,7 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
 }
 
 // ✅ 풀오토 발행 중 플래그 (다른 모달 표시 방지)
-let isFullAutoPublishing = false;
+const isFullAutoPublishing = false;
 
 // ✅ AI 글생성 진행률 모달 관리
 const aiProgressModal = {

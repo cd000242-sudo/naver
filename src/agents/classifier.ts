@@ -170,8 +170,8 @@ export class QuestionClassifier {
     keywords: string[];
     categories: string[];
   } {
-    let totalMatched: string[] = [];
-    let matchedCategories: string[] = [];
+    const totalMatched: string[] = [];
+    const matchedCategories: string[] = [];
     
     for (const [category, keywords] of Object.entries(this.SCOPE_KEYWORDS.inScope)) {
       const matched = keywords.filter(kw => message.includes(kw));

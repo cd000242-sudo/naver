@@ -344,7 +344,7 @@ async function checkAndApply(url: string): Promise<void> {
 function getAppVersion(): string {
   try {
     // Electron 환경에서 앱 버전 가져오기
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
+     
     const { app } = require('electron');
     return app.getVersion();
   } catch {

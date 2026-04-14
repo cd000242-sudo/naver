@@ -381,7 +381,7 @@ export class ExtendedImageLibrary {
 
     const searchPromises = sources.map(async (source) => {
       try {
-        let images: ExtendedImage[] = [];
+        const images: ExtendedImage[] = [];
 
         switch (source) {
           case 'korea_gov':
@@ -548,7 +548,7 @@ function extractKeywordsFromHeading(heading: string): string[] {
   const genericWords = ['영감', '도움', '이유', '방법', '이야기', '내용', '정보', '팁', '노하우'];
 
   // 소제목에서 콜론(:) 앞부분 제거 (예: "마무리: 내용" → "내용")
-  let cleanHeading = heading.replace(/^[^:]*:\s*/, '').trim();
+  const cleanHeading = heading.replace(/^[^:]*:\s*/, '').trim();
 
   // 한글 단어 추출 (2글자 이상)
   const koreanWords = cleanHeading.match(/[가-힣]{2,}/g) || [];

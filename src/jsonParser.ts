@@ -258,9 +258,9 @@ export function fixJsonAtPosition(jsonString: string, position: number): string 
   const end = Math.min(fixed.length, position + 200);
 
   // 1. position 앞에서 가장 가까운 속성 값 찾기
-  let searchStart = Math.max(0, position - 600);
+  const searchStart = Math.max(0, position - 600);
   let beforePos = fixed.substring(searchStart, position);
-  let afterPos = fixed.substring(position, end);
+  const afterPos = fixed.substring(position, end);
 
   // 2. 더 공격적인 쉼표 누락 패턴 수정
   // 패턴 A: "value"다음에 공백 없이 바로 "key" (가장 흔한 오류)

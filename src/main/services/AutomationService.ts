@@ -409,7 +409,7 @@ class AutomationServiceImpl {
         const normalizedId = account.naverId.trim().toLowerCase();
 
         // 기존 인스턴스 확인
-        let automation = this.automationMap.get(normalizedId);
+        const automation = this.automationMap.get(normalizedId);
 
         if (automation) {
             console.log(`[AutomationService] ♻️ 기존 세션 재사용: ${normalizedId}`);

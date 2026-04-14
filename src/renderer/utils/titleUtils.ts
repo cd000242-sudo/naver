@@ -54,7 +54,7 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string): strin
         rest = rest.slice(cleanKeyword.length);
     }
     rest = rest.replace(/^[\s\-–—:|·•.,!?]+/, '').trim();
-    let remaining = tokens.slice();
+    const remaining = tokens.slice();
     let progressed = true;
     while (progressed && remaining.length > 0) {
         progressed = false;
