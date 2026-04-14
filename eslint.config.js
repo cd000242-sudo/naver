@@ -51,9 +51,17 @@ module.exports = tseslint.config(
             // 타입 안전성은 tsc --noEmit가 책임. 린트는 스타일 + 미사용 변수만.
             '@typescript-eslint/no-explicit-any': 'off', // 전체 코드베이스에 any 다수
             '@typescript-eslint/no-unused-vars': ['warn', {
+                // v1.4.56: caughtErrors 'none' — catch(e) 미사용 허용 (140건 → 0)
+                // 이유: 에러 로깅/무시 패턴 흔함. 강제 prefix는 기존 코드 전부 수정 필요
+                caughtErrors: 'none',
+                // args 'after-used' — 사용 arg 이후 unused만 경고 (callback 패턴 수용)
+                args: 'after-used',
                 argsIgnorePattern: '^_',
+                // vars — 미사용 import/local은 여전히 경고 (진짜 dead code)
                 varsIgnorePattern: '^_',
-                caughtErrorsIgnorePattern: '^_',
+                // 구조분해에서 다른 키 꺼낼 때 _로 무시 가능
+                destructuredArrayIgnorePattern: '^_',
+                ignoreRestSiblings: true,
             }],
             '@typescript-eslint/no-empty-object-type': 'off',
             '@typescript-eslint/no-unused-expressions': 'off',
