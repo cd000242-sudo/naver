@@ -26,7 +26,13 @@ sample_validation/
 .opencode/
 .agents/skills/
 .agents/plugins/
-.autopus/
+# .autopus/ 하위는 specs/brainstorms만 버전 관리, 나머지는 제외
+# (git의 부모 ignored 시 자식 negation 제약 회피 — 개별 경로 명시 방식)
+.autopus/project/
+.autopus/context/
+.autopus/learnings/
+.autopus/pipelines/
+.autopus/claude-code-manifest.json
 .mcp.json
 
 # vitest coverage output
