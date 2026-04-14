@@ -3,24 +3,12 @@
 // renderer.ts에서 추출된 undoLastImageChange 함수
 // ═══════════════════════════════════════════════════════════════════
 
-// ✅ renderer.ts의 전역 변수/함수 참조
-declare let currentStructuredContent: any;
-declare let generatedImages: any[];
+// ✅ renderer.ts의 전역 변수/함수 참조 (실제 사용되는 것만)
 declare const ImageManager: any;
 declare const toastManager: any;
-declare const UnifiedDOMCache: any;
 declare function appendLog(msg: string, ...args: any[]): void;
-declare function escapeHtml(str: string): string;
-declare function displayGeneratedImages(images: any[]): void;
-declare function updatePromptItemsWithImages(images: any[]): void;
 declare function syncGlobalImagesFromImageManager(): void;
-declare function updateUnifiedImagePreview(headings: any[], images: any[]): void;
-declare function showImageModal(imageUrl: string, title?: string): void;
-declare function toFileUrlMaybe(path: string): string;
-declare function getHeadingSelectedImageKey(heading: string, ...args: any[]): any;
-declare function getStableImageKey(imageObj: any, heading?: string): string;
 declare const imageHistoryStack: any[];
-declare function normalizeHeadingKeyForVideoCache(key: string): string;
 
 export function undoLastImageChange(): void {
   if (imageHistoryStack.length === 0) {

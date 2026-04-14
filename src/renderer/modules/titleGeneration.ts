@@ -2,45 +2,19 @@
 // [2026-02-26] titleGeneration.ts - 제목 생성/풀오토 미리보기 관련
 // ═══════════════════════════════════════════════════════════════════
 
+// ✅ renderer.ts의 전역 참조 (실제 사용되는 것만 — 나머지는 v1.4.56 린트 정리에서 제거)
 declare let currentStructuredContent: any;
-declare let generatedImages: any[];
-declare const ImageManager: any;
-declare const toastManager: any;
+declare let generatedImages: any[]; // tsc 사용 감지 (38, 174줄)
 declare const UnifiedDOMCache: any;
 declare function appendLog(msg: string, ...args: any[]): void;
-declare function escapeHtml(str: string): string;
-declare function toFileUrlMaybe(path: string): string;
-declare function showImageModal(imageUrl: string, title?: string): void;
-declare function updateUnifiedPreview(content: any): void;
-declare function updatePromptItemsWithImages(images: any[]): void;
-declare function syncGlobalImagesFromImageManager(): void;
-declare function displayGeneratedImages(images: any[]): void;
-declare function collectFormData(): any;
-declare function generateContentFromKeywords(...args: any[]): Promise<void>;
-declare function generateImagesWithCostSafety(options: any): Promise<any>;
-declare function isCostRiskImageProvider(provider: string): boolean;
-declare function isFullAutoStopRequested(...args: any[]): boolean;
-declare function getProgressModal(): any;
-declare function showUnifiedProgress(progress: number, title: string, detail?: string): void;
-declare function hideUnifiedProgress(): void;
-declare function hydrateImageManagerFromImages(images: any, headings?: any): void;
-declare function saveGeneratedPost(...args: any[]): any;
 declare function activatePaywall(...args: any[]): void;
 declare function isPaywallPayload(payload: any): boolean;
 declare const EnhancedApiClient: any;
-declare function handleFullAutoPublish(): Promise<void>;
-declare function updateRiskIndicators(...args: any[]): void;
 declare type StructuredContent = any;
 declare function normalizeReadableBodyText(text: string): string;
 declare function displayStructuredContentPreview(content: any): void;
 declare function generateImagesForContent(...args: any[]): Promise<any>;
 declare function executeBlogPublishing(...args: any[]): Promise<void>;
-declare function initImageManagementTab(): void;
-declare function getHeadingVideoPreviewFromCache(...args: any[]): any;
-declare function normalizeHeadingKeyForVideoCache(key: string): string;
-declare let headingVideoPreviewCache: Map<string, any>;
-declare let headingVideoPreviewInFlight: Map<string, Promise<any>>;
-declare function prefetchHeadingVideoPreview(heading: string): void;
 
 export function initTitleGeneration(): void {
   const generateTitleBtn = document.getElementById('generate-title-btn') as HTMLButtonElement;
