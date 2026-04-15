@@ -18,6 +18,8 @@ declare function collectFormData(): any;
 declare let thumbnailBackgroundDataUrl: string | null;
 declare let thumbnailBackgroundImage: string | null;
 declare function generateImagesWithCostSafety(options: any): Promise<any>;
+declare function shouldBlockEngineForShoppingConnect(engine: string): boolean;
+declare function getShoppingConnectImagePool(): any[];
 declare function ensurePromptCardRemoveButtons(): void;
 declare function ensurePromptCardRemoveHandler(): void;
 declare function updateUnifiedImagePreview(...args: any[]): void;
@@ -206,10 +208,21 @@ export function initThumbnailGenerator(): void {
       try {
         const provider = aiImageProvider.value || 'gemini';
 
+        // Shopping-connect guard: block non-nano-banana-pro engines and
+        // route through the collected-image path. Same rule as the heading
+        // image generator — see shoppingConnectUtils.ts for the rationale.
+        const scBlocked = shouldBlockEngineForShoppingConnect(provider);
+        const scPool = scBlocked ? getShoppingConnectImagePool() : [];
+        if (scBlocked && scPool.length === 0) {
+          alert('🛒 쇼핑커넥트: 수집된 제품 이미지가 없습니다.\n\n먼저 "쇼핑몰 이미지 수집" 버튼으로 제품 이미지를 크롤링하거나, 이미지 엔진을 "나노 바나나 프로"로 변경하세요.');
+          return;
+        }
+
         // ✅ 실제 AI 이미지 생성 호출
         const result = await generateImagesWithCostSafety({
           provider: provider,
-          items: [{ heading: '썸네일 배경', prompt: prompt, isThumbnail: false }]
+          items: [{ heading: '썸네일 배경', prompt: prompt, isThumbnail: false }],
+          ...(scBlocked ? { isShoppingConnect: true, collectedImages: scPool } : {}),
         });
 
         if (result.success && result.images && result.images.length > 0) {

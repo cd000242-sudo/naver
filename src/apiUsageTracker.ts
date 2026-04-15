@@ -31,6 +31,10 @@ export interface TrackingInput {
   images?: number;
   model?: string;
   costOverride?: number; // 고정비용 직접 지정 시
+  // Anthropic prompt caching: cache writes cost 1.25x base input, cache reads
+  // cost 0.1x base input. Passed separately so we do not double-count them.
+  cacheCreationTokens?: number;
+  cacheReadTokens?: number;
 }
 
 // ==================== 가격 테이블 (공식 2026-03 기준) ====================
@@ -137,7 +141,13 @@ function calculateCost(provider: ApiProvider, input: TrackingInput): number {
     case 'claude': {
       const key = matchPricingKey(model, CLAUDE_PRICING);
       const p = CLAUDE_PRICING[key];
-      return (inTok / 1_000_000) * p.input + (outTok / 1_000_000) * p.output;
+      const cacheCreate = input.cacheCreationTokens || 0;
+      const cacheRead = input.cacheReadTokens || 0;
+      // Anthropic multipliers: write = 1.25x input, read = 0.1x input
+      const base = (inTok / 1_000_000) * p.input + (outTok / 1_000_000) * p.output;
+      const cacheCost = (cacheCreate / 1_000_000) * p.input * 1.25
+                      + (cacheRead / 1_000_000) * p.input * 0.10;
+      return base + cacheCost;
     }
 
     case 'perplexity': {
@@ -197,7 +207,11 @@ export function trackApiUsage(provider: ApiProvider, input: TrackingInput): void
   const pending = ensurePending(provider);
 
   pending.calls += 1;
-  pending.inputTokens += input.inputTokens || 0;
+  // Cache read/write tokens also count as model-processed tokens for the
+  // dashboard's "total input" figure, even though they are priced differently.
+  pending.inputTokens += (input.inputTokens || 0)
+                        + (input.cacheCreationTokens || 0)
+                        + (input.cacheReadTokens || 0);
   pending.outputTokens += input.outputTokens || 0;
   pending.images += input.images || 0;
   pending.costUSD += cost;
@@ -206,8 +220,11 @@ export function trackApiUsage(provider: ApiProvider, input: TrackingInput): void
   const tokenInfo = (input.inputTokens || input.outputTokens)
     ? ` ${input.inputTokens || 0}in/${input.outputTokens || 0}out`
     : '';
+  const cacheInfo = (input.cacheCreationTokens || input.cacheReadTokens)
+    ? ` cache:+${input.cacheCreationTokens || 0}w/${input.cacheReadTokens || 0}r`
+    : '';
   const imgInfo = input.images ? ` ${input.images}장` : '';
-  console.log(`[UsageTracker] 📊 ${label}:${tokenInfo}${imgInfo} $${cost.toFixed(6)} | 대기: ${pending.calls}건 $${pending.costUSD.toFixed(4)}`);
+  console.log(`[UsageTracker] 📊 ${label}:${tokenInfo}${cacheInfo}${imgInfo} $${cost.toFixed(6)} | 대기: ${pending.calls}건 $${pending.costUSD.toFixed(4)}`);
 
   // 디바운스 flush
   if (_flushTimer) clearTimeout(_flushTimer);

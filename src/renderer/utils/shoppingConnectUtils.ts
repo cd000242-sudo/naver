@@ -71,9 +71,64 @@ export function resolveAffiliateLink(
     return undefined;
 }
 
+/**
+ * Data-based shopping-connect detection.
+ *
+ * The legacy isShoppingConnectModeActive() inspects DOM state (checked radios,
+ * panel visibility), which can return false when the image tab is active and
+ * the shopping-connect settings panel is collapsed. This helper also checks
+ * data markers on currentStructuredContent so callers get a reliable signal
+ * regardless of which tab is currently visible.
+ */
+export function isShoppingConnectForCurrentPost(): boolean {
+    try {
+        if (isShoppingConnectModeActive()) return true;
+        const sc = (window as any).currentStructuredContent;
+        if (sc?.productInfo || sc?.affiliateLink) return true;
+        if ((window as any).crawledProductInfo) return true;
+        return false;
+    } catch {
+        return false;
+    }
+}
+
+/**
+ * Returns the crawled product image pool attached to the current post, or []
+ * when no images have been collected yet.
+ */
+export function getShoppingConnectImagePool(): any[] {
+    try {
+        const sc = (window as any).currentStructuredContent;
+        return Array.isArray(sc?.images) ? sc.images : [];
+    } catch {
+        return [];
+    }
+}
+
+/**
+ * Shopping-connect engine whitelist. Only nano-banana-pro (Gemini img2img)
+ * can faithfully reproduce the real product — it also hosts "나노바나나2"
+ * (gemini-3-1-flash) as an internal sub-model, so the provider whitelist is
+ * exactly one entry. All other AI engines (ImageFX, DALL-E, Leonardo,
+ * DeepInfra, Stability, Fal.ai, Prodia, Pollinations) are blocked.
+ *
+ * The guard fires even when the collected-image pool is empty: the user's
+ * rule is "무조건 금지" regardless of fallback availability. Callers must
+ * surface an explicit error in that case rather than silently falling back
+ * to a paid engine.
+ */
+export function shouldBlockEngineForShoppingConnect(engine: string): boolean {
+    if (!isShoppingConnectForCurrentPost()) return false;
+    if (engine === 'nano-banana-pro') return false;
+    return true;
+}
+
 // 전역 노출 (기존 코드와의 호환성)
 (window as any).isShoppingConnectModeActive = isShoppingConnectModeActive;
 (window as any).isAffiliateUrl = isAffiliateUrl;
 (window as any).resolveAffiliateLink = resolveAffiliateLink;
+(window as any).isShoppingConnectForCurrentPost = isShoppingConnectForCurrentPost;
+(window as any).getShoppingConnectImagePool = getShoppingConnectImagePool;
+(window as any).shouldBlockEngineForShoppingConnect = shouldBlockEngineForShoppingConnect;
 
 console.log('[ShoppingConnectUtils] 📦 모듈 로드됨!');

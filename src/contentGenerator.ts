@@ -7728,12 +7728,23 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
         // ✅ [2026-03-16] promptSplitter 모듈로 system/user 분리 (인라인 코드 제거)
         // Anthropic API는 system을 top-level 파라미터로 받음
         const { system: claudeSystem, user: claudeUser } = splitPromptByMarker(prompt);
-        
+
+        // Prompt caching: Anthropic charges cache writes at 1.25x input and
+        // cache reads at 0.1x. Mark the large static system prompt as cacheable
+        // so subsequent posts within the 5-minute TTL reuse it at ~90% discount.
+        // Minimum cache size is 1024 tokens (~4000 chars) for Sonnet — below
+        // that the API silently ignores cache_control, so we skip it.
+        const CACHE_MIN_CHARS = 4000;
+        const useSystemCache = !!claudeSystem && claudeSystem.length >= CACHE_MIN_CHARS;
+        const systemParam = useSystemCache
+          ? [{ type: 'text' as const, text: claudeSystem, cache_control: { type: 'ephemeral' as const } }]
+          : claudeSystem;
+
         const createPromise = client.messages.create({
           model: modelName,
           max_tokens: 16000,
           temperature: temperature,
-          ...(claudeSystem ? { system: claudeSystem } : {}),
+          ...(systemParam ? { system: systemParam as any } : {}),
           messages: [{ role: 'user', content: claudeUser }],
         });
 
@@ -7764,9 +7775,25 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
 
         // ✅ [2026-03-19] 사용량 추적
         const claudeUsage = (response as any).usage;
+        const cacheCreate = claudeUsage?.cache_creation_input_tokens || 0;
+        const cacheRead = claudeUsage?.cache_read_input_tokens || 0;
+        if (useSystemCache) {
+          if (cacheRead > 0) {
+            console.log(`[Claude] 💰 캐시 히트: ${cacheRead} 토큰 재사용 (0.1x 단가) — 절감 적용됨`);
+          } else if (cacheCreate > 0) {
+            console.log(`[Claude] 📝 캐시 생성: ${cacheCreate} 토큰 write (1.25x 단가, 이후 5분간 재사용 가능)`);
+          } else {
+            console.log(`[Claude] ⚠️ 캐시 미적용: 시스템 프롬프트가 1024 토큰 미만이거나 서버가 스킵`);
+          }
+        }
+        // Anthropic usage fields are disjoint: input_tokens excludes cached
+        // segments. Pass cache counts separately so the tracker applies the
+        // 1.25x (write) / 0.1x (read) multipliers instead of full input price.
         trackApiUsage('claude', {
           inputTokens: claudeUsage?.input_tokens || 0,
           outputTokens: claudeUsage?.output_tokens || 0,
+          cacheCreationTokens: cacheCreate,
+          cacheReadTokens: cacheRead,
           model: modelName,
         });
 
