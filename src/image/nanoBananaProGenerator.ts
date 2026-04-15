@@ -915,7 +915,11 @@ async function generateSingleImageWithGemini(
   };
 
   // ✅ [2026-03-11 FIX] 재시도 횟수 증가 (2→3회) - 원래 엔진 성공률 극대화
-  const maxRetries = 3;
+  // Image-gen 429 recovery needs more attempts than text: image models have
+  // tighter per-minute quotas (10 RPM on paid tier) and 429s cluster. 3 was
+  // too tight — users hit 429 on image 4/5, exhausted retries, and saw the
+  // whole post fail. 5 gives ~3 minutes of retry coverage.
+  const maxRetries = 5;
 
   // ✅ [2026-01-27 FIX] config를 for 루프 앞에서 미리 로드 (imageStyle/imageRatio 사용 위해)
   const configModulePre = await import('../configManager.js');

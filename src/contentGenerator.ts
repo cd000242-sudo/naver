@@ -6845,7 +6845,11 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   console.log(`[Gemini] 모델: ${primaryModel} (티어: ${isPro ? 'PRO' : 'FLASH'})`);
 
   let lastError: Error | null = null;
-  const perModelMaxRetries = 4;
+  // Rate-limit recovery budget. Google's free-tier 429 retry hints are often
+  // 30~90s; combined with exponential backoff we need 6 attempts to cover
+  // ~4 minutes of sustained rate limiting without giving up prematurely.
+  // Previously 4 which failed when Google's hint exceeded the 60s cap below.
+  const perModelMaxRetries = 6;
 
   for (let i = 0; i < modelsToTry.length; i++) {
     const modelName = modelsToTry[i];
@@ -7157,13 +7161,19 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           }
 
           modelRetryCount++;
-          // Google이 알려주는 대기 시간 사용, 없으면 지수 백오프
-          let waitMs = Math.min(15000 * Math.pow(1.5, modelRetryCount - 1), 60000);
+          // Google이 알려주는 대기 시간 사용, 없으면 지수 백오프.
+          // Default backoff cap lifted from 60s → 120s because Google's 429
+          // hints on heavier rate-limit buckets can reach 90s; capping at 60s
+          // caused the retry to fire before the limit actually reset,
+          // guaranteeing another 429 and wasted retry budget.
+          let waitMs = Math.min(15000 * Math.pow(1.5, modelRetryCount - 1), 120000);
           const retryMatch = errMsg.match(/retry in ([\d.]+)(s|ms)/i);
           if (retryMatch) {
             const val = parseFloat(retryMatch[1]);
             const unit = retryMatch[2].toLowerCase();
-            waitMs = (unit === 's' ? val * 1000 : val) + 1000;
+            // Respect Google's hint verbatim up to 5 minutes; beyond that the
+            // isDailyQuotaExhausted branch above already takes over.
+            waitMs = Math.min((unit === 's' ? val * 1000 : val) + 1000, 300000);
           }
           const waitSec = Math.round(waitMs / 1000);
 
