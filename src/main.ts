@@ -5372,8 +5372,9 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
         // ✅ [2026-03-18 FIX] 다중계정 발행: 전용 썸네일 + 소제목 이미지 생성 (fullAutoFlow.ts L600-703 패턴 이식)
         // 기존 문제: headings 없으면 이미지 전체 스킵, 전용 썸네일 미생성, AI 프롬프트 추론 없음
+        // ✅ [v1.4.63] skipImages 체크 추가 — "이미지 없이 글만 발행" 선택 시 ImageFX 창 뜨는 버그 수정
         let generatedThumbnailPath: string | undefined;
-        if (options?.useAiImage !== false && generatedImages.length === 0) {
+        if (!options?.skipImages && options?.useAiImage !== false && generatedImages.length === 0) {
           try {
             const imageProvider = options?.imageSource || 'nano-banana-pro';
             const headingImageMode = options?.headingImageMode || 'all';
