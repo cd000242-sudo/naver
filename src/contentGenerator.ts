@@ -7742,21 +7742,53 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
         // Prompt caching: Anthropic charges cache writes at 1.25x input and
         // cache reads at 0.1x. Mark the large static system prompt as cacheable
         // so subsequent posts within the 5-minute TTL reuse it at ~90% discount.
-        // Minimum cache size is 1024 tokens (~4000 chars) for Sonnet — below
-        // that the API silently ignores cache_control, so we skip it.
+        //
+        // SDK 0.21.1 safety: this SDK version types `system` as `string` only
+        // (messages.d.ts:348), so we pass the array form via `as any` and guard
+        // against runtime rejection with a try/catch that falls back to the
+        // plain-string system. This keeps the request working even if the
+        // server or SDK ever stops accepting the array form.
+        //
+        // Opt-out: set CLAUDE_PROMPT_CACHE_DISABLED=1 to force the legacy
+        // string-only path without attempting the cached form.
         const CACHE_MIN_CHARS = 4000;
-        const useSystemCache = !!claudeSystem && claudeSystem.length >= CACHE_MIN_CHARS;
-        const systemParam = useSystemCache
-          ? [{ type: 'text' as const, text: claudeSystem, cache_control: { type: 'ephemeral' as const } }]
-          : claudeSystem;
+        const cacheDisabled = process.env.CLAUDE_PROMPT_CACHE_DISABLED === '1';
+        const useSystemCache = !cacheDisabled && !!claudeSystem && claudeSystem.length >= CACHE_MIN_CHARS;
 
-        const createPromise = client.messages.create({
+        const buildRequest = (withCache: boolean): any => ({
           model: modelName,
           max_tokens: 16000,
           temperature: temperature,
-          ...(systemParam ? { system: systemParam as any } : {}),
-          messages: [{ role: 'user', content: claudeUser }],
+          ...(claudeSystem
+            ? {
+                system: withCache
+                  ? [{ type: 'text', text: claudeSystem, cache_control: { type: 'ephemeral' } }]
+                  : claudeSystem,
+              }
+            : {}),
+          messages: [{ role: 'user' as const, content: claudeUser }],
         });
+
+        let createPromise: Promise<any>;
+        if (useSystemCache) {
+          // Attempt cached form; on any failure that looks like an SDK/schema
+          // issue, silently retry with the plain string form.
+          createPromise = (async () => {
+            try {
+              return await (client.messages.create as any)(buildRequest(true));
+            } catch (cacheErr: any) {
+              const msg = String(cacheErr?.message || cacheErr || '');
+              const looksLikeSchemaError = /system|content|cache_control|type|400|invalid/i.test(msg);
+              if (looksLikeSchemaError) {
+                console.warn(`[Claude] ⚠️ 캐시 적용 요청 거부됨 (${msg.substring(0, 120)}) → 레거시 string 형식으로 재시도`);
+                return await (client.messages.create as any)(buildRequest(false));
+              }
+              throw cacheErr;
+            }
+          })();
+        } else {
+          createPromise = (client.messages.create as any)(buildRequest(false));
+        }
 
         const response = await Promise.race([createPromise, timeoutPromise]);
 
@@ -7764,8 +7796,8 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
         console.log(`[Claude] API 응답 수신: ${responseTime}ms`);
 
         // 텍스트 추출
-        let text = response.content
-          .map((block) => ('text' in block ? block.text : ''))
+        let text = (response.content as any[])
+          .map((block: any) => ('text' in block ? block.text : ''))
           .join('');
 
         // ✅ UTF-8 인코딩 문제 해결 (한글 깨짐 방지)
