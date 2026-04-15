@@ -2167,12 +2167,23 @@ export class NaverBlogAutomation {
 
     this.ensureNotCancelled();
 
-    // ✅ [2026-03-26 FIX] BrowserSessionManager 빠른 경로: isLoggedIn 플래그 확인
-    // checkLoginStatus()는 GoBlogWrite.naver로 매번 네비게이션하여 15초 timeout 위험 + 불필요한 페이지 전환 발생
-    // 이전 발행에서 로그인 성공 시 setLoggedIn(true)가 호출되므로, 이를 활용하여 불필요한 세션 체크 생략
+    // BrowserSessionManager의 isLoggedIn 캐시는 30분 TTL이지만, 네이버 서버가
+    // 그보다 먼저 세션을 만료시킬 수 있다. 캐시만 믿고 login을 건너뛰면
+    // → 워밍업 브라우징(10-20초) → 블로그 쓰기 페이지 이동 → 로그인 리다이렉트
+    // → 재시도 루프 → 사용자 체감 "60초 멍때림 후 에러"로 이어진다.
+    //
+    // 수정: 캐시 hit이어도 쿠키(NID_AUT/NID_SES)가 실제로 존재하는지 검증한다.
+    // checkLoginStatus는 네비게이션 없이 쿠키/URL만 보므로 ~100ms로 끝난다.
+    // 이전 주석이 "매번 네비게이션한다"고 했지만 현재 구현은 경량이다(line 2109).
     if (browserSessionManager.isAccountLoggedIn(this.options.naverId)) {
-      this.log('✅ 이미 로그인되어 있습니다! (BrowserSessionManager 캐시 — 세션 체크 생략)');
-      return; // 로그인 스킵 — GoBlogWrite.naver 불필요한 이동 방지
+      const cookieCheck = await this.checkLoginStatus();
+      if (cookieCheck) {
+        this.log('✅ 이미 로그인되어 있습니다! (캐시 + 쿠키 검증 완료)');
+        return;
+      }
+      // 캐시는 true라 했지만 쿠키 검증 실패 → 서버 측 세션 만료 의심
+      this.log('⚠️ 캐시는 로그인됨이지만 쿠키 검증 실패 → 캐시 무효화 후 재로그인');
+      browserSessionManager.setLoggedIn(this.options.naverId, false);
     }
 
     // ✅ 1. 먼저 기존 세션으로 로그인 상태 확인 (캡차 방지)
