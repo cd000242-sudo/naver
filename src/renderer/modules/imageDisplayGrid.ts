@@ -1065,7 +1065,14 @@ async function regenerateSingleImageWithPromptItem(imageIndex: number, prompt: s
 
 // 네이버 이미지 검색
 export async function searchNaverImage(prompt: string, isRegenerate: boolean = false): Promise<string> {
-  const response = await window.api.generateImages({
+  // Route through the central choke point so shopping-connect mode replaces
+  // Naver search with collected product images (user rule: crawled images
+  // only). Direct window.api.generateImages would bypass the auto-injection.
+  const gen = (window as any).generateImagesWithCostSafety;
+  const invoke = typeof gen === 'function'
+    ? gen
+    : (opts: any) => window.api.generateImages(opts);
+  const response = await invoke({
     provider: 'naver',
     items: [{ heading: 'image', prompt: prompt }],
     regenerate: isRegenerate

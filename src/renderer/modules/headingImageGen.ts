@@ -3784,7 +3784,11 @@ async function regenerateSingleImage(headingTitle: string, prompt: string): Prom
       return;
     }
 
-    const result = await (window as any).api.generateImages({
+    // Route through the central choke point so the shopping-connect hard
+    // rule (nano-banana-pro only) is enforced. Direct window.api.generateImages
+    // calls bypass costAndAutoGen's isShoppingConnect auto-injection and let
+    // ImageFX/DALL-E/Leonardo execute in shopping mode.
+    const result = await generateImagesWithCostSafety({
       provider,
       items: [{ heading: resolvedHeadingTitle, prompt: safePrompt }],
       regenerate: true,
