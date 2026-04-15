@@ -290,12 +290,19 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
     console.log(`[Renderer] 🔤 thumbnailTextInclude 자동 주입: ${savedThumbnailText}`);
   }
 
-  // ✅ [핵심 수정] 호출자가 isShoppingConnect를 명시적으로 전달했으면 그 값 사용
-  // 전달되지 않았으면 UI 상태(체크박스) 확인
-  const isShoppingConnect = options.isShoppingConnect === true || isShoppingConnectModeActive();
+  // Authoritative shopping-connect detection: caller-provided flag takes
+  // precedence, then data markers on currentStructuredContent, finally the
+  // legacy UI-state probe. Data-based detection is required because the
+  // image tab collapses the shopping-connect settings panel, which flips
+  // the UI probe to false even when the post was crawled from an affiliate.
+  const sc = currentStructuredContent as any;
+  const dataShoppingActive = !!(sc?.productInfo || sc?.affiliateLink || (window as any)?.crawledProductInfo);
+  const isShoppingConnect = options.isShoppingConnect === true
+    || dataShoppingActive
+    || isShoppingConnectModeActive();
   options.isShoppingConnect = isShoppingConnect; // 메인 프로세스에도 전달
 
-  console.log(`[Renderer] 🛒 isShoppingConnect 결정: ${isShoppingConnect} (전달값: ${options.isShoppingConnect}, UI: ${isShoppingConnectModeActive()})`);
+  console.log(`[Renderer] 🛒 isShoppingConnect 결정: ${isShoppingConnect} (전달값: ${options.isShoppingConnect}, UI: ${isShoppingConnectModeActive()}, 데이터: ${dataShoppingActive})`);
 
   if (isShoppingConnect) {
     // ✅ [FIX] 빈 배열도 체크: collectedImages가 없거나 빈 배열이면 currentStructuredContent.images 사용
@@ -307,10 +314,27 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
       console.log(`[Renderer] 🛒 쇼핑커넥트: ${(currentStructuredContent as any).images.length}개 수집 이미지 자동 주입`);
     } else if (hasCollectedImages) {
       console.log(`[Renderer] 🛒 쇼핑커넥트: ${options.collectedImages.length}개 수집 이미지 전달됨`);
-    } else {
-      // ✅ [2026-02-02 FIX] 수집된 이미지 없어도 AI 이미지 생성으로 정상 진행
-      // 이 로그 이후 AI 이미지 생성이 정상적으로 호출되어야 함
-      console.log(`[Renderer] ⚠️ 쇼핑커넥트: 수집된 이미지 없음 → AI 이미지 생성으로 진행`);
+    }
+
+    // HARD RULE: 쇼핑커넥트 + AI 이미지 = nano-banana-pro 하나만 허용
+    // (나노바나나2는 nano-banana-pro 내부의 gemini-3-1-flash 서브모델로 자동 포함)
+    // 다른 엔진(ImageFX, DALL-E, Leonardo, DeepInfra, Stability, Fal.ai, Prodia, Pollinations)
+    // 은 제품을 가짜로 만들어내므로 절대 실행 금지.
+    if (provider && provider !== 'nano-banana-pro') {
+      const poolSize = Array.isArray(options.collectedImages) ? options.collectedImages.length : 0;
+      console.warn(`[쇼핑커넥트] 🚫 "${provider}" 엔진 차단 — 나노바나나프로/2 외 AI 엔진 사용 금지 (하드 룰)`);
+      if (poolSize === 0) {
+        // 수집 이미지도 없으면 사일런트 폴백 금지 — 명확한 에러 반환
+        const errMsg = '🛒 쇼핑커넥트: 수집된 제품 이미지가 없습니다. "쇼핑몰 이미지 수집" 버튼으로 제품 이미지를 먼저 크롤링하거나, 이미지 엔진을 "나노 바나나 프로"로 변경하세요.';
+        console.error(`[쇼핑커넥트] ❌ ${errMsg}`);
+        return { success: false, message: errMsg };
+      }
+      console.warn(`[쇼핑커넥트] 🛒 수집 이미지 ${poolSize}장으로 자동 대체 (AI 생성 스킵)`);
+      // 플래그는 이미 isShoppingConnect=true이므로 main의 imageGenerator.ts:282 가드가
+      // 수집 이미지 경로로 자동 라우팅하고 텍스트 오버레이까지 적용함.
+    } else if (!hasCollectedImages && !hasStructuredImages && provider === 'nano-banana-pro') {
+      // 나노바나나프로 + 수집 이미지 없음 = text2img 생성은 허용 (사용자 규칙 허용)
+      console.log(`[Renderer] 🛒 쇼핑커넥트: 수집 이미지 없음 → 나노바나나프로로 text2img 생성`);
     }
 
     // ✅ [2026-02-23 FIX] 제품 가격 정보를 options에 주입 → 스펙 표에 정확한 가격 반영
