@@ -2461,6 +2461,20 @@ export class NaverBlogAutomation {
         await this.loginKeyType(page, char);
       }
       await this.humanDelay(400, 700);
+
+      // ✅ [v1.4.66] 2차 확인 — 여전히 실패하면 evaluate로 직접 값 설정
+      const retypedId = await idInput.evaluate((el) => (el as HTMLInputElement).value);
+      if (retypedId !== this.options.naverId) {
+        this.log('⚠️ 키보드 입력 2차 실패 → JavaScript 직접 값 설정');
+        await page.evaluate((naverId: string) => {
+          const el = document.querySelector('#id') as HTMLInputElement;
+          if (el) {
+            el.value = naverId;
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }, this.options.naverId);
+      }
     }
     this.log(`✅ 아이디 입력 완료: ${this.options.naverId.substring(0, 3)}***`);
 
@@ -2567,6 +2581,20 @@ export class NaverBlogAutomation {
         await this.loginKeyType(page, char);
       }
       await this.humanDelay(400, 700);
+
+      // ✅ [v1.4.66] 2차 확인 — 여전히 비어있으면 evaluate로 직접 값 설정
+      const retypedPw = await pwInput.evaluate((el) => (el as HTMLInputElement).value);
+      if (retypedPw.length === 0) {
+        this.log('⚠️ 비밀번호 키보드 입력 2차 실패 → JavaScript 직접 값 설정');
+        await page.evaluate((pw: string) => {
+          const el = document.querySelector('#pw') as HTMLInputElement;
+          if (el) {
+            el.value = pw;
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }, this.options.naverPassword);
+      }
     }
     this.log('✅ 비밀번호 입력 완료');
 
@@ -2651,6 +2679,36 @@ export class NaverBlogAutomation {
     }
 
     this.ensureNotCancelled();
+
+    // ✅ [v1.4.66] 로그인 버튼 off 클래스 강제 해제
+    // 네이버 bvsd가 CDP 기반 키 입력을 유효하지 않은 것으로 판정하면
+    // ID/PW가 입력돼도 off 클래스가 유지되어 버튼 클릭이 무시됨.
+    // input 이벤트를 재발생시키고 off 클래스를 강제 제거하여 클릭 가능 상태로 전환.
+    try {
+      const offRemoved = await page.evaluate(() => {
+        const idEl = document.querySelector('#id') as HTMLInputElement;
+        const pwEl = document.querySelector('#pw') as HTMLInputElement;
+        const btn = document.querySelector('#log\\.login') as HTMLButtonElement;
+        if (!btn) return { removed: false, reason: 'no-button' };
+
+        // ID/PW 필드에 input 이벤트 재발생 (off 클래스 토글 트리거)
+        if (idEl?.value) idEl.dispatchEvent(new Event('input', { bubbles: true }));
+        if (pwEl?.value) pwEl.dispatchEvent(new Event('input', { bubbles: true }));
+
+        // off 클래스가 여전히 남아있으면 강제 제거
+        const hadOff = btn.classList.contains('off');
+        if (hadOff) {
+          btn.classList.remove('off');
+        }
+        return { removed: hadOff, idLen: idEl?.value?.length || 0, pwLen: pwEl?.value?.length || 0 };
+      });
+      if (offRemoved.removed) {
+        this.log(`⚠️ 로그인 버튼 off 클래스 강제 제거 (ID: ${offRemoved.idLen}자, PW: ${offRemoved.pwLen}자 입력됨)`);
+      }
+    } catch (e) {
+      // non-critical
+    }
+
     this.log('🔄 로그인 버튼 클릭 중...');
 
     const loginButtonSelectors = [
@@ -2775,13 +2833,23 @@ export class NaverBlogAutomation {
       return 'pending';
     };
 
-    // ━━━ 1차 시도: Ghost Cursor 클릭 (기존 방식) ━━━
+    // ━━━ 1차 시도: Ghost Cursor 클릭 (뷰포트 보정) ━━━
+    // ✅ [v1.4.66] Ghost Cursor 유지 (isTrusted: true → 캡차 방지)
+    // 버그 수정: scrollIntoView 완료 대기 + boundingBox 뷰포트 내 검증 추가
     this.log('🔄 로그인 1차 시도: Ghost Cursor 클릭');
     let clickResult: 'success' | 'error' | 'challenge' | 'pending' = 'pending';
     try {
       if (this.cursor) {
+        // scrollIntoView를 instant로 변경하고 충분히 대기
+        await loginButton.evaluate((el: Element) => {
+          (el as HTMLElement).scrollIntoView({ behavior: 'instant', block: 'center' });
+        });
+        await this.delay(500);
+
         const box = await loginButton.boundingBox();
-        if (box) {
+        const viewport = page.viewport();
+        if (box && viewport && box.y >= 0 && box.y + box.height <= viewport.height) {
+          // 뷰포트 안에 있음 → Ghost Cursor 클릭
           const targetX = box.x + box.width / 2 + (Math.random() - 0.5) * 6;
           const targetY = box.y + box.height / 2 + (Math.random() - 0.5) * 4;
           await this.cursor.moveTo({ x: targetX, y: targetY });
@@ -2790,6 +2858,8 @@ export class NaverBlogAutomation {
           await this.humanDelay(50, 150);
           await page.mouse.up();
         } else {
+          // 뷰포트 밖 → Puppeteer .click() 폴백 (자체 scrollIntoView 수행)
+          this.log(`⚠️ 버튼이 뷰포트 밖 (y=${box?.y}, vh=${viewport?.height}) → .click() 폴백`);
           await loginButton.click();
         }
       } else {

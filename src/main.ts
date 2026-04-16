@@ -8595,8 +8595,9 @@ async function wipeUserDataPreservingCredentials(lastVersion: string, currentVer
   // ⚠️ 보존: license/, playwright-session*/, puppeteer-session*/,
   //         imagefx-chrome-profile/, blog-accounts.json,
   //         images/, generated-images/, style-previews/, platform-tools/
+  // ⚠️ [v1.4.66] Local Storage 삭제 제거 — 이전 글 목록(naver_blog_generated_posts)이
+  //    localStorage에 저장되므로, 삭제 시 사용자의 발행 이력이 전부 소실됨.
   const dirsToDelete = [
-    'Local Storage',
     'Session Storage',
     'IndexedDB',
     'Network',
