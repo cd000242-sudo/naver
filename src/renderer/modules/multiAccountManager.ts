@@ -3738,6 +3738,7 @@ export async function initMultiAccountPublishModal() {
             contentMode: queueItem.contentMode,      // ✅ [2026-01-20] 쇼핑커넥트 모드 전달
             affiliateLink: queueItem.affiliateLink,  // ✅ [2026-01-20] 제휴 링크 전달
             videoOption: queueItem.videoOption,      // ✅ [2026-01-20] VEO 영상 변환 옵션
+            skipImages: (queueItem.imageSource === 'skip') || false, // ✅ [v1.4.66] 백엔드에 skipImages 명시적 전달
             useAiImage: queueItem.useAiImage ?? true, // ✅ [2026-01-20] AI 이미지 생성 사용 여부
             createProductThumbnail: queueItem.createProductThumbnail ?? false, // ✅ [2026-01-20] 제품 썸네일 합성
             scSubImageSource: localStorage.getItem('scSubImageSource') || 'collected', // ✅ [2026-02-16 FIX] 수집이미지 직접 사용 설정 전달
