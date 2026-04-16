@@ -1541,29 +1541,29 @@ async function createWindow(): Promise<void> {
       confirmWindow.loadFile(confirmHtmlPath);
       confirmWindow.once('ready-to-show', () => confirmWindow.show());
 
-      const handleResponse = (_event: any, shouldQuit: boolean) => {
+      const handleResponse = async (_event: any, shouldQuit: boolean) => {
         ipcMain.removeListener('quit-confirm-response', handleResponse);
-        if (!confirmWindow.isDestroyed()) confirmWindow.destroy();
 
         if (!shouldQuit) {
           console.log('[Main] 사용자가 종료를 취소했습니다');
           isConfirmDialogOpen = false;
+          if (!confirmWindow.isDestroyed()) confirmWindow.destroy();
           return;
         }
 
-        (async () => {
-          (globalThis as any).isQuitting = true;
-          console.log('[Main] 종료 절차 시작...');
-          if (automationRunning || AutomationService.isRunning()) {
-            AutomationService.requestCancel();
-            await AutomationService.closeAllSessions().catch(() => { });
-            automationRunning = false;
-            automation = null;
-          }
-          if (tray) { tray.destroy(); tray = null; }
-          app.quit();
-          setTimeout(() => process.exit(0), 10000);
-        })();
+        (globalThis as any).isQuitting = true;
+        console.log('[Main] 종료 절차 시작...');
+        // Destroy confirm window after setting isQuitting to avoid re-triggering close handler
+        if (!confirmWindow.isDestroyed()) confirmWindow.destroy();
+        if (automationRunning || AutomationService.isRunning()) {
+          AutomationService.requestCancel();
+          await AutomationService.closeAllSessions().catch(() => { });
+          automationRunning = false;
+          automation = null;
+        }
+        if (tray) { tray.destroy(); tray = null; }
+        app.quit();
+        setTimeout(() => process.exit(0), 10000);
       };
 
       ipcMain.on('quit-confirm-response', handleResponse);

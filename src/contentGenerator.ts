@@ -4585,19 +4585,19 @@ ${title ? `📌 원본 제목 참고: "${title}"
       if (processed.isLong) {
         return `🔑 메인 키워드: "${processed.coreKeyword}"
    → 제목 맨 앞 3글자 이내 필수 배치
-   → 본문 전체에 5~8회 자연스럽게 분산 (밀도 1.5~3%)
+   → 본문 전체에 3~5회 자연스럽게 분산 (밀도 1~2%)
    → 주제 문맥(${processed.contextHint})은 참고만, 제목에 그대로 사용 금지`;
       }
       return `🔑 메인 키워드: "${processed.coreKeyword}"
    → 제목 맨 앞 3글자 이내 필수 배치
-   → 본문 전체에 5~8회 자연스럽게 분산 (밀도 1.5~3%)
-   → ⚠️ 모든 소제목에 메인 키워드 또는 그 변형(동의어/관련어) 포함 필수`;
+   → 본문 전체에 3~5회 자연스럽게 분산 (밀도 1~2%)
+   → 소제목 5~7개 중 2~3개에만 메인 키워드 또는 변형을 자연스럽게 포함 (나머지는 키워드 없이 작성)`;
     })()}
 ${subKeywords ? `🔖 서브 키워드: ${subKeywords}
-   → 소제목 5~7개 중 최소 3개의 소제목에 분산 포함
+   → 소제목 5~7개 중 2~3개의 소제목에 분산 포함
    → 도입부·결론부 각 1회 이상 자연스럽게 등장` : ''}
 ${contentMode === 'homefeed' && subKeywords ? `
-⚠️ [홈판 추가] 메인키워드 5~8회(1.5~3%), 서브키워드 최소 3개 소제목 첫 문장에 포함, 도입부·결론부 각 1회. 스크롤 트리거 3개 이상 의무.` : ''}
+⚠️ [홈판 추가] 메인키워드 3~5회(1~2%), 서브키워드 2~3개 소제목에 분산, 도입부·결론부 각 1회. 스크롤 트리거 3개 이상 의무. 키워드를 억지로 넣지 말 것.` : ''}
 ${contentMode === 'seo' ? `
 ⚠️ [SEO 모드 제목 필수 조건]
 1. 메인 키워드를 제목 맨 앞 3글자 이내 배치 (검색 매칭률 ↑)
@@ -4622,7 +4622,7 @@ ${rawText}
 ⚠️ [최종 강제 조건 — 위반 시 0점]
 ══════════════════════════════════════════${minChars && minChars > 0 ? `
 1. 글자수: 최소 ${minChars}자 이상. 각 소제목 5문장 이상. 요약/축약 금지.` : ''}
-2. 메인 키워드를 제목 맨 앞 + 모든 소제목에 필수 포함
+2. 메인 키워드를 제목 맨 앞에 배치. 소제목에는 절반 이하에만 자연스럽게 포함 (과다 삽입 금지)
 3. 위 [필수 키워드 정보]의 모든 규칙을 한 줄도 어기지 말 것
 4. 출력은 오직 JSON 객체 하나만. 마크다운/설명 절대 금지.
 5. JSON은 반드시 { 로 시작하고 } 로 끝나야 함.
@@ -6837,31 +6837,20 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
     console.log(`[Gemini] 🔑 API 키 ${allApiKeys.length}개 로테이션 준비 완료`);
   }
 
-  // 2. 모델 목록 설정 — limit:0 시 폴백 체인 동적 확장
+  // 2. 모델 설정 — 사용자가 선택한 모델만 사용 (다른 모델로 몰래 전환 금지)
   const { primaryModel, isPro } = buildGeminiModelChain(config as any);
   const modelsToTry = [primaryModel];
-  // limit:0 감지 시 폴백할 모델 후보 (사용자 선택 모델 제외)
-  const fallbackCandidates = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'].filter(m => m !== primaryModel);
-  console.log(`[Gemini] 모델: ${primaryModel} (티어: ${isPro ? 'PRO' : 'FLASH'})`);
+  const isPaidPlan = config?.geminiPlanType === 'paid';
+  console.log(`[Gemini] 모델: ${primaryModel} (플랜: ${isPaidPlan ? '유료' : '무료'})`);
 
   let lastError: Error | null = null;
-  // Rate-limit recovery budget. Google's free-tier 429 retry hints are often
-  // 30~90s; combined with exponential backoff we need 6 attempts to cover
-  // ~4 minutes of sustained rate limiting without giving up prematurely.
-  // Previously 4 which failed when Google's hint exceeded the 60s cap below.
-  const perModelMaxRetries = 6;
+  // ✅ [v1.4.64] 재시도 3회로 축소 — 실패 확정까지 4분→1분 이하
+  const perModelMaxRetries = 3;
 
   for (let i = 0; i < modelsToTry.length; i++) {
     const modelName = modelsToTry[i];
     let modelRetryCount = 0;
-    // 폴백 모델은 키 인덱스 + 프롬프트 증강 상태 리셋
-    if (i > 0) {
-      currentKeyIdx = 0;
-      trimmedKey = allApiKeys[0];
-      promptAugmentationCount = 0;
-      geminiUserText = geminiUserTextOriginal;
-      activeTemperature = temperature;
-    }
+    // 사용자가 선택한 모델만 사용 (폴백 전환 없음)
 
     while (modelRetryCount < perModelMaxRetries) {
       try {
@@ -7094,12 +7083,15 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             activeTemperature = temperature;
             continue;
           }
-          // 모든 회복 수단 소진 → 폴백 모델로
-          for (const fb of fallbackCandidates) {
-            if (!modelsToTry.includes(fb)) { modelsToTry.push(fb); }
-          }
-          console.error(`[Gemini] ❌ ${modelName} 빈 응답 회복 불가 → 폴백 모델 전환`);
-          break;
+          // ✅ [v1.4.64] 모든 회복 수단 소진 → 명확한 에러 (다른 모델로 전환 안 함)
+          console.error(`[Gemini] ❌ ${modelName} 빈 응답 회복 불가`);
+          throw new Error(
+            `🚫 [${modelName}] 응답을 생성하지 못했습니다. (빈 응답 반복)\n\n` +
+            `📌 원인: Gemini가 이 주제에 대해 응답을 거부하거나, 안전 필터에 걸렸을 수 있습니다.\n\n` +
+            `💡 해결 방법:\n` +
+            `  1) 프롬프트나 주제를 약간 수정해서 다시 시도하세요.\n` +
+            `  2) 계속 실패하면 설정에서 다른 AI 엔진(Claude/OpenAI)으로 변경하세요.`
+          );
         }
 
         const errMsg = (error as Error).message || String(error);
@@ -7108,17 +7100,20 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         const isLimitZero = errMsg.includes('limit: 0') || errMsg.includes('free_tier');
         const isServerError = errMsg.includes('503') || errMsg.includes('500') || errMsg.includes('internal') || errMsg.includes('unavailable') || errMsg.includes('overloaded');
 
-        // ✅ [v1.4.44] limit:0 = 이 모델은 무료 완전 차단 → 폴백 모델 추가
+        // ✅ [v1.4.64] limit:0 = 이 모델의 무료 사용이 Google에 의해 차단됨
+        //   다른 모델로 몰래 전환하지 않고, 사용자에게 명확히 안내
         if (isQuota && isLimitZero) {
-          console.error(`❌ [Gemini] ${modelName} 무료 할당량 0 → 폴백 모델로 전환`);
-          if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
-            (window as any).appendLog(`🚫 ${modelName} 무료 사용 불가 → 무료 모델(Flash/Flash-Lite)로 자동 전환합니다.`);
-          }
-          // 아직 추가하지 않은 폴백 모델이 있으면 체인에 추가
-          for (const fb of fallbackCandidates) {
-            if (!modelsToTry.includes(fb)) { modelsToTry.push(fb); }
-          }
-          break; // 이 모델 종료 → 다음 폴백 모델로
+          console.error(`❌ [Gemini] ${modelName} 무료 할당량 0 — 사용자 안내 후 중단`);
+          throw new Error(
+            `🚫 [${modelName}] 이 모델은 현재 무료 사용이 차단되었습니다.\n\n` +
+            `📌 원인: Google이 이 모델의 무료 API 호출을 일시적으로 차단했습니다.\n\n` +
+            `💡 해결 방법:\n` +
+            `  1) Google AI Studio(aistudio.google.com) → 요금제에서 신용카드를 등록하고 유료(Pay-as-you-go)로 전환하세요.\n` +
+            `     → 유료 전환 시 분당/일일 한도가 대폭 상향됩니다.\n` +
+            `  2) 다른 무료 모델을 사용하려면 설정 → AI 엔진에서 모델을 변경하세요.\n` +
+            `  3) API 키를 추가 발급받아 설정에 등록하면 키 로테이션으로 한도를 늘릴 수 있습니다.\n\n` +
+            `⚠️ 참고: 유료 전환 시 Flash/Flash-Lite의 기존 무료 할당량도 사라지므로 주의하세요.`
+          );
         }
 
         // ✅ [v1.4.49] 429 RPD 감지 — 일일 한도 소진 시 재시도 무의미
@@ -7141,12 +7136,22 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             trimmedKey = nextKey;
             continue;
           }
-          // 키가 없으면 즉시 명확한 에러 throw
+          // ✅ [v1.4.64] 무료/유료 계정 구분하여 안내
+          const dailyLimit = modelName.includes('flash-lite') ? 20 : modelName.includes('pro') ? 0 : 250;
           throw new Error(
-            `[Gemini] ${modelName} 오늘 무료 할당량을 모두 사용했습니다. ` +
-            `해결 방법: 1) 내일 다시 시도 ` +
-            `2) Google AI Studio에서 추가 API 키 발급 후 설정에 등록 ` +
-            `3) 유료 요금제(Pay-as-you-go)로 전환 (설정에서 "유료" 선택)`
+            `⏳ [${modelName}] 오늘의 무료 할당량(${dailyLimit}회/일)을 모두 사용했습니다.\n\n` +
+            `📌 현재 계정: ${isPaidPlan ? '유료(Pay-as-you-go)' : '무료'}\n\n` +
+            (isPaidPlan
+              ? `💡 유료 계정인데 한도 초과가 발생했다면:\n` +
+                `  → Google AI Studio에서 분당/일일 요청 한도를 확인하세요.\n` +
+                `  → 한도 상향 요청이 필요할 수 있습니다.\n`
+              : `💡 해결 방법:\n` +
+                `  1) 내일 자정(태평양 시간) 이후 자동 초기화됩니다.\n` +
+                `  2) Google AI Studio → 요금제에서 신용카드 등록 후 유료 전환하세요.\n` +
+                `     → 유료 전환 시 한도가 수천 회/일로 대폭 상향됩니다.\n` +
+                `  3) 추가 API 키를 발급받아 설정에 등록하면 한도를 2배로 늘릴 수 있습니다.\n`
+            ) +
+            `\n⚠️ 참고: 무료 한도는 모델별로 다릅니다 — Flash 250회/일, Flash-Lite 20회/일, Pro 유료 전용.`
           );
         }
 
@@ -7178,48 +7183,64 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           const waitSec = Math.round(waitMs / 1000);
 
           if (modelRetryCount < perModelMaxRetries) {
-            const logMsg = `구글 서버가 바쁘네요. ${waitSec}초 후 재시도합니다. (${modelRetryCount}/${perModelMaxRetries})`;
-            console.warn(`⏳ [Gemini] ${logMsg}`);
+            const logMsg = `⏳ 분당 요청 한도 초과 — ${waitSec}초 후 자동 재시도합니다. (${modelRetryCount}/${perModelMaxRetries})`;
+            console.warn(`[Gemini] ${logMsg}`);
             if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
-              (window as any).appendLog(`⏳ ${logMsg}`);
+              (window as any).appendLog(logMsg);
             }
             await new Promise(resolve => setTimeout(resolve, waitMs));
             // 키 인덱스 리셋 (로테이션 재시작)
             currentKeyIdx = 0; trimmedKey = allApiKeys[0];
             continue;
           }
-          break; // 모든 재시도 소진
+          // ✅ [v1.4.64] 재시도 모두 소진 시 구체적 안내
+          throw new Error(
+            `⚡ [${modelName}] 분당 요청 한도(RPM) 초과로 ${perModelMaxRetries}회 재시도했지만 실패했습니다.\n\n` +
+            `📌 원인: ${isPaidPlan ? '유료 플랜의 분당 한도를 초과' : '무료 플랜은 분당 10회로 제한'}되어 있습니다.\n\n` +
+            `💡 해결 방법:\n` +
+            `  1) 1~2분 후 다시 시도하세요 (한도가 자동 초기화됩니다).\n` +
+            `  2) 연속 발행 간격을 늘려주세요 (현재 너무 빠르게 요청 중).\n` +
+            (isPaidPlan
+              ? `  3) Google AI Studio에서 분당 한도 상향을 요청하세요.\n`
+              : `  3) 유료 전환 시 분당 한도가 10회 → 2,000회로 대폭 상향됩니다.\n`
+            )
+          );
         }
 
-        // ✅ [v1.4.49] 503/500 서버 에러 → 지수 백오프 + 더 오래 재시도 (최대 6회 = 약 2분)
-        //   503은 일반적으로 수십 초 내 회복. 중간에 포기하면 사용자 경험 악화
-        //   perModelMaxRetries(4회) 대신 serverErrorMaxRetries(6회) 별도 운용
+        // ✅ [v1.4.64] 503/500 서버 에러 → 지수 백오프 최대 3회 (약 21초)
         if (isServerError) {
           modelRetryCount++;
-          const serverErrorMaxRetries = 6;
-          if (modelRetryCount < serverErrorMaxRetries) {
-            // 지수 백오프: 3초 → 6초 → 12초 → 24초 → 45초 → 60초 (cap)
+          if (modelRetryCount < perModelMaxRetries) {
             const baseMs = 3000;
-            const expMs = Math.min(baseMs * Math.pow(2, modelRetryCount - 1), 60000);
-            const jitterMs = Math.floor(Math.random() * 1000); // 0~1초 지터
+            const expMs = Math.min(baseMs * Math.pow(2, modelRetryCount - 1), 30000);
+            const jitterMs = Math.floor(Math.random() * 1000);
             const waitMs = expMs + jitterMs;
-            console.warn(`🔧 [Gemini] ${modelName} 503 서버 에러 → ${Math.round(waitMs/1000)}초 후 재시도 (${modelRetryCount}/${serverErrorMaxRetries})`);
+            const logMsg = `🔧 구글 서버 일시 장애 — ${Math.round(waitMs/1000)}초 후 재시도합니다. (${modelRetryCount}/${perModelMaxRetries})`;
+            console.warn(`[Gemini] ${logMsg}`);
             if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
-              (window as any).appendLog(`🔧 구글 서버 일시 장애. ${Math.round(waitMs/1000)}초 후 재시도합니다. (${modelRetryCount}/${serverErrorMaxRetries})`);
+              (window as any).appendLog(logMsg);
             }
             await new Promise(resolve => setTimeout(resolve, waitMs));
             continue;
           }
-          break;
+          throw new Error(
+            `🔧 [${modelName}] 구글 서버가 응답하지 않습니다. (503/500 에러)\n\n` +
+            `📌 원인: Google Gemini 서버의 일시적 장애입니다. 내 설정 문제가 아닙니다.\n\n` +
+            `💡 해결 방법:\n` +
+            `  1) 2~3분 후 다시 시도하세요.\n` +
+            `  2) 계속 발생하면 Google AI Studio 상태 페이지를 확인하세요.\n` +
+            `  3) 급하면 설정에서 다른 AI 엔진(Claude/OpenAI)으로 변경하세요.`
+          );
         }
 
-        // 404 모델 없음 → 폴백 모델 추가
+        // ✅ [v1.4.64] 404 모델 없음 → 다른 모델로 전환하지 않고 명확히 안내
         if (errMsg.includes('404') || errMsg.includes('not found')) {
-          console.warn(`[Gemini] ${modelName} 모델 없음 → 폴백 모델 전환`);
-          for (const fb of fallbackCandidates) {
-            if (!modelsToTry.includes(fb)) { modelsToTry.push(fb); }
-          }
-          break;
+          throw new Error(
+            `❌ [${modelName}] 이 모델을 찾을 수 없습니다.\n\n` +
+            `📌 원인: Google이 이 모델을 중단했거나, 모델명이 변경되었습니다.\n\n` +
+            `💡 해결 방법:\n` +
+            `  → 설정 → AI 엔진에서 다른 모델(Flash, Flash-Lite)을 선택하세요.`
+          );
         }
 
         // 기타 오류 → 재시도 1회 후 실패
@@ -7235,8 +7256,13 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
     }
   }
 
-  const finalError = lastError || new Error('모든 모델 시도 실패');
-  throw new Error(translateGeminiError(finalError.message));
+  const finalError = lastError || new Error('알 수 없는 오류');
+  // callGemini 내에서 이미 구체적 에러 메시지로 throw한 경우 그대로 전달
+  const finalMsg = finalError.message;
+  if (finalMsg.includes('📌 원인') || finalMsg.includes('💡 해결')) {
+    throw finalError; // already user-friendly
+  }
+  throw new Error(translateGeminiError(finalMsg));
 }
 
 // ✅ [2026-02-20] Gemini API 에러 → 사용자 친화적 한국어 변환
@@ -7252,14 +7278,16 @@ function translateGeminiError(rawMessage: string): string {
     return '🔑 Gemini API키가 만료됨! Google AI Studio에서 새 키를 발급받으세요.' + detail;
   }
 
-  // 할당량 초과 (429) — limit:0 (무료 완전 차단) vs 일반 RPM 제한 구분
+  // ✅ [v1.4.64] 할당량 관련 에러는 callGemini에서 이미 구체적 메시지로 throw하므로
+  //   여기서는 혹시 빠진 경우만 기본 안내 제공
   if (msg.includes('429') || msg.includes('quota') || msg.includes('rate limit') || msg.includes('too many requests') || msg.includes('resource exhausted')) {
     if (msg.includes('limit: 0') || msg.includes('free_tier')) {
-      return '🚫 이 모델은 Google이 무료 사용을 차단했습니다!\n' +
-        '👉 해결: 모델을 Flash 또는 Flash-Lite로 변경하세요 (무료, 성능 충분).\n' +
-        '💡 참고: 유료 전환(Pay-as-you-go) 시 Flash/Flash-Lite 무료 할당량도 사라지므로 주의!' + detail;
+      return '🚫 이 모델의 무료 사용이 차단되었습니다.\n' +
+        '👉 해결: 설정 → AI 엔진에서 다른 모델로 변경하거나, Google AI Studio에서 유료(Pay-as-you-go)로 전환하세요.\n' +
+        '⚠️ 유료 전환 시 기존 무료 할당량도 사라지므로 주의!' + detail;
     }
-    return '⚡ Gemini 요청 제한(RPM) 초과! 1~2분 후 자동 해제됩니다. 계속 발생하면 Google AI Studio → 요금제에서 분당 요청 한도를 확인하세요.' + detail;
+    return '⚡ 분당 요청 한도 초과! 1~2분 후 자동 해제됩니다.\n' +
+      '💡 계속 발생하면: 유료 전환 시 분당 한도가 10회 → 2,000회로 상향됩니다.' + detail;
   }
 
   // 인증 실패 (401/403)
@@ -7269,7 +7297,8 @@ function translateGeminiError(rawMessage: string): string {
 
   // 서버 오류 (500/503)
   if (msg.includes('500') || msg.includes('503') || msg.includes('internal') || msg.includes('unavailable') || msg.includes('overloaded')) {
-    return '🔧 Gemini 서버 일시 장애! 잠시 후 다시 시도하세요.' + detail;
+    return '🔧 구글 서버 일시 장애입니다. (내 설정 문제가 아닙니다)\n' +
+      '💡 2~3분 후 다시 시도하세요. 급하면 설정에서 다른 AI 엔진으로 변경하세요.' + detail;
   }
 
   // 타임아웃
