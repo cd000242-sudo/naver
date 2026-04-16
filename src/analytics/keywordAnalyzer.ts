@@ -56,6 +56,46 @@ export type NaverSearchApiConfig = {
   clientSecret: string;
 };
 
+// ✅ [v1.4.64] 통합 블루오션 스코어링 — 로그 스케일 기반, if-else 중복 제거
+// searchVolume: monthly search count, blogCount: total blog documents
+// Returns 0~100 score. Higher = better opportunity (high search, low competition)
+//
+// Weight distribution: competition(55) + demand(35) + ratio(10) = 100
+// Breakpoints:
+//   competitionScore=0 at blogCount≈2.5M, max 55 at blogCount≤100
+//   demandScore=0 at searchVolume≤31, max 35 at searchVolume≥100K
+//   ratioBonus continuous via log10, max 10 at ratio≥10
+function calcBlueOceanScore(searchVolume: number, blogCount: number): number {
+  if (searchVolume <= 0) return 0;
+  if (blogCount <= 0) blogCount = 1; // avoid division by zero
+
+  // 1. Competition score (0~55): lower blogCount = higher score
+  //    log10 scale: 100 docs → 55, 1K → 42.5, 10K → 30, 100K → 17.5, 1M → 5
+  const logDocs = Math.log10(Math.max(blogCount, 1));
+  const competitionScore = Math.max(0, Math.min(55, 55 - (logDocs - 2) * 12.5));
+
+  // 2. Demand score (0~35): higher searchVolume = higher score
+  //    log10 scale: 32+ → 0, 100 → 5, 500 → 12, 1K → 20, 10K → 28, 100K+ → 35
+  const logSearch = Math.log10(Math.max(searchVolume, 1));
+  const demandScore = Math.max(0, Math.min(35, (logSearch - 1.5) * 10));
+
+  // 3. Ratio bonus (0~10): continuous log scale — no more step function jumps
+  //    ratio 0.01 → 0, ratio 0.1 → 3.3, ratio 1.0 → 6.7, ratio 10+ → 10
+  const ratio = searchVolume / blogCount;
+  // Guard: if demand is negligible (demandScore 0), ratio bonus is meaningless
+  const ratioBonus = demandScore > 0
+    ? Math.max(0, Math.min(10, (Math.log10(Math.max(ratio, 0.001)) + 2) * 3.33))
+    : 0;
+
+  // 4. Demand floor: if search volume is too low to generate any traffic,
+  //    cap total score at demandScore (prevents dead-zone keywords scoring high)
+  //    searchVolume < 32 → demandScore = 0 → total capped at 0
+  const rawScore = competitionScore + demandScore + ratioBonus;
+  const maxAllowed = demandScore > 0 ? 100 : 0;
+
+  return Math.round(Math.min(maxAllowed, rawScore));
+}
+
 export class KeywordAnalyzer {
   private cache: Map<string, { data: KeywordCompetition; expiry: number }> = new Map();
   private cacheExpiry = 30 * 60 * 1000; // 30분 캐시
@@ -747,49 +787,10 @@ export class KeywordAnalyzer {
           }
           
           const blogCount = analysis.blogCount || 0;
-          
-          // ✅ 황금키워드 점수 계산 (검색량↑ 문서량↓)
-          // 핵심: 검색량은 높을수록, 문서량은 낮을수록 좋음
-          let blueOceanScore = 0;
-          
-          if (monthlySearchVolume > 0) {
-            // 1. 문서량 기반 점수 (낮을수록 높음) - 최대 60점
-            if (blogCount <= 100) {
-              blueOceanScore = 60; // 🔥 초황금: 문서량 100개 이하
-            } else if (blogCount <= 500) {
-              blueOceanScore = 55;
-            } else if (blogCount <= 1000) {
-              blueOceanScore = 50;
-            } else if (blogCount <= 5000) {
-              blueOceanScore = 40;
-            } else if (blogCount <= 10000) {
-              blueOceanScore = 30;
-            } else if (blogCount <= 50000) {
-              blueOceanScore = 20;
-            } else if (blogCount <= 100000) {
-              blueOceanScore = 10;
-            } else {
-              blueOceanScore = 0; // 문서량 10만 이상은 제외
-            }
-            
-            // 2. 검색량 기반 보너스 (높을수록 좋음) - 최대 40점
-            if (monthlySearchVolume >= 100000) {
-              blueOceanScore += 40;
-            } else if (monthlySearchVolume >= 50000) {
-              blueOceanScore += 35;
-            } else if (monthlySearchVolume >= 10000) {
-              blueOceanScore += 30;
-            } else if (monthlySearchVolume >= 5000) {
-              blueOceanScore += 25;
-            } else if (monthlySearchVolume >= 1000) {
-              blueOceanScore += 20;
-            } else if (monthlySearchVolume >= 500) {
-              blueOceanScore += 10;
-            }
-            
-            blueOceanScore = Math.min(100, blueOceanScore);
-          }
-          
+
+          // ✅ [v1.4.64] 통합 스코어링 함수 사용
+          const blueOceanScore = calcBlueOceanScore(monthlySearchVolume, blogCount);
+
           // ✅ 블루오션 필터링 조건 (엄격)
           const hasSearchVolume = monthlySearchVolume >= 500;
           const hasLowCompetition = blogCount <= 100000;
@@ -938,56 +939,13 @@ export class KeywordAnalyzer {
           }
           
           const blogCount = analysis.blogCount || 0;
-          
-          // ✅ 쇼핑커넥트 수익형 점수 계산
-          let score = 0;
-          
-          // 1. 문서량 기반 점수 (경쟁 낮을수록 높음) - 최대 50점
-          if (blogCount <= 100) {
-            score = 50; // 🔥 초황금: 거의 아무도 안 씀
-          } else if (blogCount <= 500) {
-            score = 45;
-          } else if (blogCount <= 1000) {
-            score = 40;
-          } else if (blogCount <= 5000) {
-            score = 35;
-          } else if (blogCount <= 10000) {
-            score = 25;
-          } else if (blogCount <= 50000) {
-            score = 15;
-          } else if (blogCount <= 100000) {
-            score = 5;
-          }
-          
-          // 2. 검색량 기반 보너스 (수요 높을수록 좋음) - 최대 30점
-          if (monthlySearchVolume >= 50000) {
-            score += 30;
-          } else if (monthlySearchVolume >= 10000) {
-            score += 25;
-          } else if (monthlySearchVolume >= 5000) {
-            score += 20;
-          } else if (monthlySearchVolume >= 1000) {
-            score += 15;
-          } else if (monthlySearchVolume >= 500) {
-            score += 10;
-          } else if (monthlySearchVolume >= 100) {
-            score += 5;
-          }
-          
-          // 3. 검색량/문서량 비율 보너스 (수요 대비 경쟁 낮을수록) - 최대 20점
-          if (monthlySearchVolume > 0 && blogCount > 0) {
-            const ratio = monthlySearchVolume / blogCount;
-            if (ratio >= 10) score += 20;       // 검색 10배 > 문서
-            else if (ratio >= 5) score += 15;
-            else if (ratio >= 2) score += 10;
-            else if (ratio >= 1) score += 5;
-          }
-          
-          score = Math.min(100, score);
-          
-          // ✅ 수익형 상품 키워드 조건 (일반 키워드보다 기준 완화)
-          // 쇼핑 상품은 검색량 100+만 되어도 가치 있음 (구매 의도 높음)
-          const isGoodProduct = score >= 30 && (monthlySearchVolume >= 100 || blogCount <= 500);
+
+          // ✅ [v1.4.64] 통합 스코어링 함수 사용
+          const score = calcBlueOceanScore(monthlySearchVolume, blogCount);
+
+          // ✅ 수익형 상품 키워드 조건 — 쇼핑은 구매 의도가 높아 검색량 기준 완화
+          // ✅ [v1.4.64] OR→AND: 검색량 0인 키워드가 통과되는 구멍 차단
+          const isGoodProduct = score >= 30 && monthlySearchVolume >= 50 && (monthlySearchVolume >= 100 || blogCount <= 500);
           
           if (isGoodProduct) {
             if (!results.find(r => r.keyword === keyword)) {
@@ -1544,61 +1502,14 @@ export class KeywordAnalyzer {
             }
             
             const blogCount = analysis.blogCount || 0;
-            
-            // ✅ 황금키워드 점수 계산 (검색량↑ 문서량↓) - 매우 완화된 조건
-            let score = 0;
-            let ratio = 0;
-            
-            if (searchVolume > 0) {
-              ratio = blogCount > 0 ? searchVolume / blogCount : searchVolume;
-              
-              // 문서량 기반 점수 (낮을수록 높음) - 매우 완화
-              if (blogCount <= 100) {
-                score = 70; // 🔥 초황금
-              } else if (blogCount <= 500) {
-                score = 60;
-              } else if (blogCount <= 1000) {
-                score = 55;
-              } else if (blogCount <= 5000) {
-                score = 45;
-              } else if (blogCount <= 10000) {
-                score = 40;
-              } else if (blogCount <= 50000) {
-                score = 35;
-              } else if (blogCount <= 100000) {
-                score = 30;
-              } else if (blogCount <= 500000) {
-                score = 25;
-              } else if (blogCount <= 1000000) {
-                score = 20;
-              } else {
-                score = 15; // 문서량이 아무리 많아도 기본 점수 부여
-              }
-              
-              // 검색량 기반 보너스 (높을수록 좋음)
-              if (searchVolume >= 100000) {
-                score += 30;
-              } else if (searchVolume >= 50000) {
-                score += 25;
-              } else if (searchVolume >= 10000) {
-                score += 20;
-              } else if (searchVolume >= 5000) {
-                score += 15;
-              } else if (searchVolume >= 1000) {
-                score += 10;
-              } else if (searchVolume >= 500) {
-                score += 8;
-              } else if (searchVolume >= 100) {
-                score += 5;
-              } else if (searchVolume >= 10) {
-                score += 3; // 아주 낮은 검색량도 포함
-              }
-              
-              score = Math.min(100, score);
-            }
 
-            // ✅ 조건 매우 완화: 점수 15 이상, 검색량 10 이상
-            if (score >= 15 && searchVolume >= 10) {
+            // ✅ [v1.4.64] 통합 스코어링 함수 사용 — if-else 하드코딩 제거
+            const score = calcBlueOceanScore(searchVolume, blogCount);
+            const ratio = blogCount > 0 ? searchVolume / blogCount : searchVolume;
+
+            // ✅ [v1.4.64] 황금키워드 필터 강화: 점수 40+, 검색량 500+/월
+            //   이전: score >= 15, searchVolume >= 10 (너무 느슨 → 쓸모없는 결과)
+            if (score >= 40 && searchVolume >= 500) {
               // 중복 체크
               if (!keywords.find(k => k.keyword === keyword)) {
                 keywords.push({
@@ -1700,53 +1611,12 @@ export class KeywordAnalyzer {
               }
               
               const blogCount = analysis.blogCount || 0;
-              
-              // ✅ 황금키워드 점수 계산 (검색량↑ 문서량↓)
-              // 핵심: 검색량은 높을수록, 문서량은 낮을수록 좋음
-              let score = 0;
-              let ratio = 0;
-              
-              if (searchVolume > 0) {
-                ratio = blogCount > 0 ? searchVolume / blogCount : searchVolume;
-                
-                // 1. 문서량 기반 점수 (낮을수록 높음) - 최대 60점
-                if (blogCount <= 100) {
-                  score = 60; // 🔥 초황금: 문서량 100개 이하
-                } else if (blogCount <= 500) {
-                  score = 55;
-                } else if (blogCount <= 1000) {
-                  score = 50;
-                } else if (blogCount <= 5000) {
-                  score = 40;
-                } else if (blogCount <= 10000) {
-                  score = 30;
-                } else if (blogCount <= 50000) {
-                  score = 20;
-                } else if (blogCount <= 100000) {
-                  score = 10;
-                } else {
-                  score = 0; // 문서량 10만 이상은 제외
-                }
-                
-                // 2. 검색량 기반 보너스 (높을수록 좋음) - 최대 40점
-                if (searchVolume >= 100000) {
-                  score += 40;
-                } else if (searchVolume >= 50000) {
-                  score += 35;
-                } else if (searchVolume >= 10000) {
-                  score += 30;
-                } else if (searchVolume >= 5000) {
-                  score += 25;
-                } else if (searchVolume >= 1000) {
-                  score += 20;
-                } else if (searchVolume >= 500) {
-                  score += 10;
-                }
-                
-                score = Math.min(100, score);
-              }
 
-              // 점수 50 이상 + 문서량 10만 이하만 추가
+              // ✅ [v1.4.64] 통합 스코어링 함수 사용
+              const score = calcBlueOceanScore(searchVolume, blogCount);
+              const ratio = blogCount > 0 ? searchVolume / blogCount : searchVolume;
+
+              // 점수 50 이상 + 검색량 500+/월 + 문서량 10만 이하
               if (score >= 50 && searchVolume >= 500 && blogCount <= 100000) {
                 // 중복 체크
                 if (!categoryKeywords.find(k => k.keyword === keyword)) {
