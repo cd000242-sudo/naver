@@ -1516,7 +1516,7 @@ export class NaverBlogAutomation {
       scheduleDate: runOptions.scheduleDate,
       scheduleType: runOptions.scheduleType || 'naver-server', // ✅ [2026-02-07 FIX] 기본값: 네이버 서버 예약 (app-schedule은 미구현)
       scheduleMethod: runOptions.scheduleMethod || 'datetime-local', // 기본값: datetime-local
-      skipImages: runOptions.skipImages ?? false,
+      skipImages: runOptions.skipImages || runOptions.imageMode === 'skip' || false, // ✅ [v1.4.66] imageMode:'skip'도 skipImages로 처리
       imageMode: runOptions.imageMode,
       collectedImages: runOptions.collectedImages,
       toneStyle: runOptions.toneStyle ?? 'professional',

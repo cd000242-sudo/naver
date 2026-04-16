@@ -3003,6 +3003,7 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
     structuredContent: structuredContent,
     generatedImages: normalizedImagesForPayload,
     imageMode: formData.skipImages ? 'skip' : 'full-auto',
+    skipImages: formData.skipImages || false, // ✅ [v1.4.66] 백엔드에 skipImages 명시적 전달 (누락으로 ImageFX 팝업 버그)
     autoGenerate: true,
     publishMode: formData.publishMode as 'draft' | 'publish' | 'schedule',
     scheduleDate: formData.publishMode === 'schedule' ? formData.scheduleDate : undefined,
