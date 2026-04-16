@@ -2846,20 +2846,13 @@ export class NaverBlogAutomation {
         });
         await this.delay(500);
 
-        const box = await loginButton.boundingBox();
-        const viewport = page.viewport();
-        if (box && viewport && box.y >= 0 && box.y + box.height <= viewport.height) {
-          // 뷰포트 안에 있음 → Ghost Cursor 클릭
-          const targetX = box.x + box.width / 2 + (Math.random() - 0.5) * 6;
-          const targetY = box.y + box.height / 2 + (Math.random() - 0.5) * 4;
-          await this.cursor.moveTo({ x: targetX, y: targetY });
-          await this.humanDelay(100, 300);
-          await page.mouse.down();
-          await this.humanDelay(50, 150);
-          await page.mouse.up();
-        } else {
-          // 뷰포트 밖 → Puppeteer .click() 폴백 (자체 scrollIntoView 수행)
-          this.log(`⚠️ 버튼이 뷰포트 밖 (y=${box?.y}, vh=${viewport?.height}) → .click() 폴백`);
+        // ✅ [v1.4.66] cursor.click()으로 통합 — moveTo + page.mouse.down/up 분리 버그 수정
+        // 이전: cursor.moveTo() → page.mouse.down/up → 두 시스템 위치 불일치로 클릭 미스
+        // 수정: cursor.click()은 내부적으로 moveTo + 같은 위치에서 click을 보장
+        try {
+          await this.cursor.click('#log\\.login', { paddingPercentage: 10 });
+        } catch (cursorErr) {
+          this.log(`⚠️ Ghost Cursor click 실패: ${(cursorErr as Error).message} → loginButton.click() 폴백`);
           await loginButton.click();
         }
       } else {
