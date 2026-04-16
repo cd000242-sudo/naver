@@ -2896,6 +2896,20 @@ export class NaverBlogAutomation {
       }).then(h => h as ElementHandle<Element> | null).catch(() => null);
     };
 
+    // ━━━ 1.5차 시도: JS element.click() — Playwright 실증 완료 ━━━
+    if (clickResult === 'pending') {
+      this.log('🔁 로그인 1.5차 시도: JS element.click() (Playwright 실증)');
+      try {
+        await page.evaluate(() => {
+          const btn = document.querySelector('#log\\.login') as HTMLElement;
+          if (btn) btn.click();
+        });
+        clickResult = await waitForClickResponse(3000);
+      } catch (e) {
+        this.log(`⚠️ 1.5차 클릭 예외: ${(e as Error).message}`);
+      }
+    }
+
     // ━━━ 2차 시도: 버튼 재조회 + click + Enter + submit 이벤트 dispatch ━━━
     if (clickResult === 'pending') {
       this.log('🔁 로그인 2차 시도: 버튼 재조회 + click + Enter + submit 이벤트 dispatch');
