@@ -3037,7 +3037,28 @@ ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ u
     console.log(`[Main] 이미지 저장 경로: ${imagesPath}`);
 
     // ✅ [100점 개선] 이미지 다운로드 함수 (헤더 + 리다이렉트 + 재시도)
+    // ✅ [2026-04-18 FIX] Referer를 URL의 origin으로 동적 설정 — 쿠팡/스마트스토어
+    //    핫링크 방지는 자기 도메인만 허용하는 경우가 많아 naver.com 고정 Referer로는
+    //    대부분 403/차단됨. URL origin 매칭이 가장 호환성 높음.
+    //    예: coupangcdn 이미지 → Referer: https://www.coupang.com/
+    //        pstatic 이미지    → Referer: https://smartstore.naver.com/
+    const inferRefererFromUrl = (imgUrl: string): string => {
+      try {
+        const u = new URL(imgUrl);
+        const host = u.hostname;
+        // 이미지 CDN 호스트 → 대응하는 쇼핑몰 origin 매핑
+        if (host.includes('coupangcdn') || host.includes('coupang')) return 'https://www.coupang.com/';
+        if (host.includes('pstatic') || host.includes('phinf')) return 'https://smartstore.naver.com/';
+        if (host.includes('shopping-phinf')) return 'https://brand.naver.com/';
+        // 기본: URL 자체 origin
+        return `${u.protocol}//${u.host}/`;
+      } catch {
+        return 'https://search.naver.com/';
+      }
+    };
+
     const downloadImage = async (url: string, maxRetries = 3): Promise<{ buffer: Buffer; contentType: string } | null> => {
+      const referer = inferRefererFromUrl(url);
       for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
           const response = await axios.get(url, {
@@ -3045,9 +3066,9 @@ ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ u
             timeout: 30000,
             maxRedirects: 5, // ✅ 리다이렉트 자동 처리
             headers: {
-              // ✅ [핵심] 핫링크 방지 우회 헤더
+              // ✅ [핵심] 핫링크 방지 우회 헤더 (URL origin 기반)
               'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-              'Referer': 'https://search.naver.com/',
+              'Referer': referer,
               'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
               'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
             },
@@ -3135,12 +3156,16 @@ ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ u
 
     const results = await Promise.all(downloadPromises);
 
-    // ✅ 성공한 이미지만 필터링
-    results.forEach(r => {
-      if (r) savedImages.push(r);
-    });
+    // ✅ [2026-04-18 FIX] 인덱스 정합성 보존 — 실패한 슬롯을 null로 유지
+    //    이전 버그: 실패 슬롯을 filter로 제거 → savedImages[idx]가 원래 idx의
+    //    다운로드 결과가 아닌 뒤 인덱스의 결과가 들어가 소제목-이미지 미스매칭 +
+    //    실패한 idx는 undefined → UI에서 X 마크 표시
+    //    수정: results 그대로 대입 (null 유지). 렌더러는 savedImg?.filePath로 안전 체크.
+    for (const r of results) {
+      savedImages.push(r);
+    }
 
-    const successCount = savedImages.length;
+    const successCount = results.filter(r => r !== null).length;
     const failCount = images.length - successCount;
 
     console.log(`[Main] 📊 다운로드 결과: 성공 ${successCount}개, 실패 ${failCount}개`);
