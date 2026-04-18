@@ -6896,7 +6896,14 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         // 캐시 가능 조건: system 프롬프트가 충분히 큼 (Flash 4096 토큰, Pro 2048 토큰)
         // 1토큰 ≈ 4자 한국어 기준 → Flash 16,384자, Pro 8,192자
         const minCacheChars = modelName.includes('-pro') ? 8192 : 16384;
-        const cacheEnabled = geminiSystemText.length >= minCacheChars;
+        // ✅ [2026-04-18 EMERGENCY] Context Caching 전면 비활성화
+        //    증상: getGenerativeModelFromCachedContent 경로가 `Error fetching`으로 100% 실패
+        //          (gemini-2.5-flash, gemini-2.5-flash-lite 공통 — 사용자 4/18 제보)
+        //    검증: 같은 API 키/모델로 curl 직접 호출은 정상 (+ OpenAI 엔진도 정상)
+        //          → SDK cached-content 경로와 현재 Google 서버 상태 호환 문제로 추정
+        //    조치: 근본 원인(SDK 업그레이드 / 모델별 캐시 지원 여부) 재조사 전까지 캐시 OFF
+        //    영향: 유료 티어는 절감 효과만 없어지고 호출 자체는 정상 복구됨
+        const cacheEnabled = false && geminiSystemText.length >= minCacheChars;
         let cachedContentName: string | undefined;
 
         if (cacheEnabled) {
@@ -7281,11 +7288,12 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         // 기타 오류 → 재시도 1회 후 실패
         modelRetryCount++;
         if (modelRetryCount < 2) {
-          console.warn(`[Gemini] ${modelName} 오류: ${errMsg.substring(0, 100)} → 5초 후 재시도`);
+          // ✅ [2026-04-18] 100자 → 500자 확장 — HTTP 상태코드/사유 가려지는 문제 해소
+          console.warn(`[Gemini] ${modelName} 오류: ${errMsg.substring(0, 500)} → 5초 후 재시도`);
           await new Promise(resolve => setTimeout(resolve, 5000));
           continue;
         }
-        console.warn(`[Gemini] ${modelName} 오류: ${errMsg.substring(0, 100)}`);
+        console.warn(`[Gemini] ${modelName} 오류: ${errMsg.substring(0, 500)}`);
         break;
       }
     }
