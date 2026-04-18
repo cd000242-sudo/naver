@@ -2175,10 +2175,32 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
                     puppeteerExtractedData.spec = metaResult.description.substring(0, 500);
                   }
 
-                  // OG에서 이미지가 1개만 있어도 Stage 1 성공 처리
-                  // (Stage 2에서 추가 이미지 수집 필요하지만, 적어도 상품명은 확보)
-                  stage1Success = true;
-                  console.log(`[Stage 1:BrandStore] ✅ OG 태그로 상품 정보 확보 완료!`);
+                  // ✅ [2026-04-18 FIX] HTML regex로 shop-phinf 이미지 추가 수집
+                  //    증상: 브랜드스토어는 OG 태그에 이미지 1개만 노출 → 사용자는 "1개만 수집" 경험
+                  //    실제 HTML엔 갤러리/상세 이미지가 더 들어있음 (SSR 일부) → regex로 스캔
+                  try {
+                    const brandImageRegex = /https?:\/\/shop-phinf\.pstatic\.net\/[\w\-\/.%]+(?:\?type=[\w_-]+)?/g;
+                    const htmlImages = tlsResult.html.match(brandImageRegex) || [];
+                    const dedupMap = new Map<string, string>();
+                    for (const u of puppeteerExtractedData.images) {
+                      dedupMap.set(u.split('?')[0], u);
+                    }
+                    for (const u of htmlImages) {
+                      const key = u.split('?')[0];
+                      if (!dedupMap.has(key)) dedupMap.set(key, u);
+                    }
+                    puppeteerExtractedData.images = [...dedupMap.values()];
+                    console.log(`[Stage 1:BrandStore] 🖼️ HTML regex 보강 후 총 ${puppeteerExtractedData.images.length}개`);
+                  } catch { /* regex 실패 무시 */ }
+
+                  // ✅ [2026-04-18 FIX] 이미지 7개 미만이면 Stage 2 (Puppeteer 렌더)로 진입
+                  //    기존 버그: OG 1개 + 상품명만으로 stage1Success=true → Stage 2 스킵
+                  //               → CSR로 로드되는 나머지 30+ 이미지 수집 누락 → 사용자 "1개만 수집"
+                  //    수정: 충분한 이미지 확보 못 하면 stage1Success=false 유지해 Stage 2 진입
+                  const MIN_STAGE1_IMAGES = 7;
+                  const hasEnoughImages = puppeteerExtractedData.images.length >= MIN_STAGE1_IMAGES;
+                  stage1Success = hasEnoughImages;
+                  console.log(`[Stage 1:BrandStore] ✅ 상품 정보 확보 (이미지 ${puppeteerExtractedData.images.length}개, Stage 2 ${hasEnoughImages ? '건너뜀' : '진입 필요 — CSR 이미지 보강'})`);
                 } else {
                   console.log(`[Stage 1] ⚠️ OG 제목이 상품명이 아님: "${ogTitle}" → Stage 2 진입`);
                 }
