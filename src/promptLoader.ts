@@ -662,6 +662,13 @@ export function buildFullPrompt(
       productInfo.reviews.forEach((review, idx) => {
         productBlock += `  ${idx + 1}. "${review.substring(0, 200)}${review.length > 200 ? '...' : ''}"\n`;
       });
+    } else {
+      // P0 review guard stub (SPEC-REVIEW-001): when no reviews were collected
+      // we replace the review slot with an explicit absence notice. The full
+      // no-experience guard block is appended later in contentGenerator.ts so
+      // it lands AFTER the shopping archetype prompt (recency effect).
+      productBlock += `⚠️ 실제 구매자 리뷰 데이터가 수집되지 않았습니다 — 스펙/공식 설명 기반 분석 모드로 작성하세요.\n`;
+      productBlock += `(체험 서술, 기간 주장, 수령 시점 묘사는 아래 P0 가드 블록에서 금지됩니다.)\n`;
     }
 
     productBlock += `

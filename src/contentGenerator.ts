@@ -16,6 +16,7 @@ import { JSON_SCHEMA_DESCRIPTION } from './contentGenerator/schema';
 import { humanizeContent, humanizeHtmlContent, analyzeAiDetectionRisk, resetHumanizerLog } from './aiHumanizer.js';
 import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog } from './contentOptimizer.js';
 import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, type PromptMode } from './promptLoader.js';
+import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 // ✅ [v1.4.48 Stage A.2] require() 혼용 제거 → 정적 import로 통일 (모듈 인스턴스 단일 보장)
 import { processAutoPublishContent, getRecentPeriods, recordSelectedTitle, type TitleSelectionResult } from './titleSelector.js';
 import { trendAnalyzer } from './agents/trendAnalyzer.js';
@@ -4408,6 +4409,11 @@ ${source.customPrompt.trim()}
       reviews: source.productReviews,
     };
 
+    // P0 review guard (SPEC-REVIEW-001): detect missing review data before
+    // assembling the prompt so downstream blocks can branch on it.
+    const reviewAvailable = isReviewAvailable(source.productReviews);
+    const reviewGuardOn = isReviewGuardEnabled();
+
     systemPromptResult = buildFullPrompt('seo', source.categoryHint, source.isFullAuto, toneStyle, productInfoForPrompt);
 
     // ✅ .prompt 파일에서 쇼핑 프롬프트 로드 (articleType 기반 분기)
@@ -4423,6 +4429,22 @@ ${source.customPrompt.trim()}
       // dist/prompts/affiliate/{shopping_review,shopping_expert_review}.prompt 보장됨
       console.error(`[PromptBuilder] ❌ 쇼핑 .prompt 파일 로드 실패 — affiliate prompt 누락. shoppingArticleType=${shoppingArticleType}`);
     } // end of shoppingPrompt if/else
+
+    // P0 review guard: append the no-experience block AFTER the shopping prompt
+    // so recency effect keeps the model constrained even when earlier archetype
+    // instructions demand experiential writing.
+    if (!reviewAvailable && reviewGuardOn) {
+      systemPromptResult += `\n\n${buildReviewGuardBlock({
+        reviewCount: 0,
+        hasSpec: Boolean(source.productSpec),
+        hasPrice: Boolean(source.productPrice),
+      })}`;
+      console.log('[PromptBuilder] 🔒 P0 review guard applied: reviews=0 (SPEC-REVIEW-001)');
+    } else if (reviewAvailable) {
+      console.log(`[PromptBuilder] 리뷰 데이터 확인: ${Array.isArray(source.productReviews) ? source.productReviews.length : 0}건 — guard 미적용`);
+    } else if (!reviewGuardOn) {
+      console.warn('[PromptBuilder] ⚠️ REVIEW_GUARD_V1=false — guard 비활성 상태로 발행');
+    }
   } else {
     systemPromptResult = buildFullPrompt(
       contentMode,
