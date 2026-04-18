@@ -75,22 +75,31 @@ async function decodeResponseWithCharset(response: Response, url?: string): Prom
     return text;
   }
 
-  // 7. UTF-8로 읽었는데 깨진 경우 (한글이 없거나 replacement char 있음) EUC-KR로 재시도
-  const hasKorean = /[가-힣]/.test(text);
-  const hasReplacementChar = text.includes('\ufffd') || text.includes('�');
+  // ✅ [FIX 2026-04-17] Content-Type 또는 meta가 명시적으로 UTF-8이면 재시도 금지
+  // (이전: \uFFFD 하나만 있어도 CP949 재시도 → 우연히 매칭된 한글로 mojibake 반환)
+  if (normalizedCharset === 'utf-8') {
+    console.log('[크롤링] ✅ UTF-8 명시 → 재시도 없이 UTF-8 유지');
+    return text;
+  }
 
-  if (!hasKorean || hasReplacementChar) {
-    console.log('[크롤링] ⚠️ UTF-8 인코딩 실패, EUC-KR로 재시도...');
+  // 7. charset 미상 + 한글 없음인 경우에만 EUC-KR/CP949 재시도 (한글 수 비교)
+  const hasKorean = /[가-힣]/.test(text);
+  if (!hasKorean) {
+    console.log('[크롤링] ⚠️ UTF-8로 한글 없음, EUC-KR/CP949 재시도...');
+    const utf8Score = (text.match(/[가-힣]/g) || []).length;
+
     const eucKrText = iconv.decode(buffer, 'euc-kr');
-    if (/[가-힣]/.test(eucKrText)) {
-      console.log('[크롤링] ✅ EUC-KR 인코딩으로 복구 성공!');
+    const eucKrScore = (eucKrText.match(/[가-힣]/g) || []).length;
+
+    const cp949Text = iconv.decode(buffer, 'cp949');
+    const cp949Score = (cp949Text.match(/[가-힣]/g) || []).length;
+
+    if (eucKrScore > utf8Score * 2 && eucKrScore >= cp949Score) {
+      console.log(`[크롤링] ✅ EUC-KR 복구 (한글 ${utf8Score}→${eucKrScore})`);
       return eucKrText;
     }
-
-    // CP949로도 시도
-    const cp949Text = iconv.decode(buffer, 'cp949');
-    if (/[가-힣]/.test(cp949Text)) {
-      console.log('[크롤링] ✅ CP949 인코딩으로 복구 성공!');
+    if (cp949Score > utf8Score * 2) {
+      console.log(`[크롤링] ✅ CP949 복구 (한글 ${utf8Score}→${cp949Score})`);
       return cp949Text;
     }
   }

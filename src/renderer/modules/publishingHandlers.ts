@@ -14,7 +14,7 @@ declare function appendLog(msg: string, ...args: any[]): void;
 declare function escapeHtml(str: string): string;
 declare function collectFormData(): any;
 declare function collectUnifiedFormDataForPublish(): any;
-declare function executeUnifiedAutomation(formData: any): Promise<void>;
+declare function executeUnifiedAutomation(formData: any): Promise<any>;
 declare function saveGeneratedPosts(posts: any[]): void;
 declare function saveGeneratedPost(content: any, isUpdate?: boolean, opts?: any): string;
 declare function loadGeneratedPosts(): any[];
@@ -1287,7 +1287,7 @@ function reSyncHeadingsContent(headings: any[], editedBody: string): any[] {
   });
 }
 
-export async function handleSemiAutoPublish(): Promise<void> {
+export async function handleSemiAutoPublish(): Promise<any> {
   // ✅ 반자동 모드 설정
   (window as any).currentAutomationMode = 'semi-auto';
 
@@ -1459,14 +1459,35 @@ export async function handleSemiAutoPublish(): Promise<void> {
     // ImageManager에도 동기화 (ImageManager가 비어있는 경우에만)
     // ✅ [2026-02-24 FIX] ImageManager가 비어있든 아니든 항상 최신 상태로 동기화
     // 사용자가 이미지를 수정했을 수 있으므로 항상 덮어쓰기
+    //
+    // ✅ [2026-04-18 FIX] 썸네일 누락 버그 수정
+    //    이전 버그: setImage는 index 0만 교체하는 API — 같은 heading에 여러 이미지가 있으면
+    //    두 번째 setImage 호출이 index 0(=썸네일)을 덮어써서 썸네일 소실
+    //    (hydrateImageManager가 썸네일을 첫 소제목으로 remap한 뒤 이 루프가 실행되면 발생)
+    //    예: [남.png(썸네일), 남1.png(heading1)] → setImage(남.png) → setImage(남1.png)
+    //        → imageMap = [남1.png, 남1.png] 썸네일 사라짐
+    //    수정: heading별로 그룹핑 후 list 전체를 atomic하게 교체
     {
+      const byHeading = new Map<string, any[]>();
       imageManagementImages.forEach((img: any) => {
         const heading = img.heading || img.title || '';
-        if (heading) {
-          ImageManager.setImage(heading, img);
-        }
+        if (!heading) return;
+        const list = byHeading.get(heading) || [];
+        list.push(img);
+        byHeading.set(heading, list);
       });
-      appendLog(`🔗 ImageManager에 ${imageManagementImages.length}개 이미지 동기화 완료`);
+      byHeading.forEach((imgs, heading) => {
+        const titleKey = ImageManager.resolveHeadingKey(heading);
+        const normalized = imgs.map((img: any) => ({
+          ...img,
+          heading: titleKey,
+          timestamp: typeof img?.timestamp === 'number' ? img.timestamp : Date.now(),
+        }));
+        ImageManager.imageMap.set(titleKey, normalized);
+        ImageManager.unsetHeadings.delete(titleKey);
+      });
+      try { ImageManager.syncGeneratedImagesArray(); } catch { /* ignore */ }
+      appendLog(`🔗 ImageManager에 ${imageManagementImages.length}개 이미지 동기화 완료 (heading별 atomic 교체)`);
     }
     try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
   } else {
@@ -1475,7 +1496,10 @@ export async function handleSemiAutoPublish(): Promise<void> {
 
   // 발행 데이터 구성
   const imageSource = UnifiedDOMCache.getImageSource();
-  const skipImages = (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked || false;
+  // ✅ [2026-04-18 FIX] SSOT 헬퍼 사용 — DOM 체크박스 + localStorage.textOnlyPublish + headingImageMode=none 통합 체크
+  //    이전 버그: DOM만 읽어서 모달 "텍스트만 발행" 체크만 했을 때 formData.skipImages=false → nano-banana 실행 → 650원 과금
+  const skipImages = (window as any).isImageSkipEnabled?.() === true
+    || (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked || false;
 
   const ctasUi = readUnifiedCtasFromUi();
   const skipCtaCheckbox = document.getElementById('unified-skip-cta') as HTMLInputElement;
@@ -1612,5 +1636,6 @@ export async function handleSemiAutoPublish(): Promise<void> {
   }
 
   // 자동화 실행
-  await executeUnifiedAutomation(formData);
+  // ✅ [2026-04-18 FIX] 결과 반환 (배치 multi-account publish가 await로 결과 받도록)
+  return await executeUnifiedAutomation(formData);
 }

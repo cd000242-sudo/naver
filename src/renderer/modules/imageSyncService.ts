@@ -89,6 +89,10 @@ function hydrateImageManagerFromImages(structuredContent: any, images: any[]): v
     list.push({
       ...img,
       heading,
+      // ✅ [2026-04-18 FIX] 썸네일 마커 명시적 보존 — heading을 첫 번째 소제목으로 덮어쓸 때
+      //    isThumbnail 플래그가 없으면 editorHelpers의 introImages 필터가 매칭 실패 → 썸네일 누락
+      //    원본에 heading='🖼️ 썸네일'만 있고 isThumbnail이 없던 케이스 대응
+      ...(isThumbnailImage ? { isThumbnail: true } : {}),
       timestamp: typeof img?.timestamp === 'number' ? img.timestamp : Date.now(),
     });
     byHeading.set(heading, list);

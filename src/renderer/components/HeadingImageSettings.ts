@@ -1147,7 +1147,11 @@ export function createHeadingImageModal(): void {
     const textOnlyCheck = document.getElementById('text-only-publish') as HTMLInputElement;
     const lifestyleCheck = document.getElementById('lifestyle-image-generate') as HTMLInputElement;
     if (thumbnailTextCheck) localStorage.setItem('thumbnailTextInclude', String(thumbnailTextCheck.checked));
-    if (textOnlyCheck) localStorage.setItem('textOnlyPublish', String(textOnlyCheck.checked));
+    if (textOnlyCheck) {
+      localStorage.setItem('textOnlyPublish', String(textOnlyCheck.checked));
+      // ✅ [2026-04-18 FIX] 양쪽 UI 체크박스 동기화 — 이전: 모달만 체크해도 발행 탭 체크박스는 별개 → 혼란 + 과금 버그
+      try { (window as any).syncImageSkipUI?.(textOnlyCheck.checked); } catch { /* ignore */ }
+    }
     if (lifestyleCheck) localStorage.setItem('lifestyleImageGenerate', String(lifestyleCheck.checked));
 
     // ✅ [2026-03-23] 내 폴더 부족 이미지 처리 옵션 저장

@@ -66,22 +66,36 @@ async function decodeResponseWithCharset(response: Response, url?: string): Prom
     return text;
   }
 
-  // 7. UTF-8로 읽었는데 깨진 경우 (한글이 없거나 replacement char 있음) EUC-KR로 재시도
-  const hasKorean = /[가-힣]/.test(text);
-  const hasReplacementChar = text.includes('\ufffd') || text.includes('');
+  // ✅ [FIX 2026-04-17] Content-Type 또는 meta가 명시적으로 UTF-8이면 재시도 금지
+  // (이전: \uFFFD 하나만 있어도 CP949 재시도 → 우연히 매칭된 한글로 mojibake 반환하는 버그)
+  // 예: Olive Young 상품명 "어노브 실크 헤어 오일 에센스 70ml 벚꽃/더블 기획" UTF-8 바이트가
+  //     CP949로 디코딩되면 "뼱끂釉 떎겕 뿤뼱 삤씪 뿉꽱뒪 70ml 踰싰퐙/뜑釉 湲고쉷" 가 되는데
+  //     여기 우연히 "釉"가 아닌 한글(뼱/끂/떎 등)도 섞여서 /[가-힣]/ 테스트가 통과됨
+  if (normalizedCharset === 'utf-8') {
+    console.log('✅ UTF-8 명시 → 재시도 없이 UTF-8 유지');
+    return text;
+  }
 
-  if (!hasKorean || hasReplacementChar) {
-    console.log('⚠️ UTF-8 인코딩 실패, EUC-KR로 재시도...');
+  // 7. charset 미상 + 한글 없음인 경우에만 EUC-KR/CP949 재시도
+  const hasKorean = /[가-힣]/.test(text);
+  if (!hasKorean) {
+    console.log('⚠️ UTF-8로 한글 없음, EUC-KR/CP949 재시도...');
+    // UTF-8 한글 점수 (현재)
+    const utf8Score = (text.match(/[가-힣]/g) || []).length;
+
     const eucKrText = iconv.decode(buffer, 'euc-kr');
-    if (/[가-힣]/.test(eucKrText)) {
-      console.log('✅ EUC-KR 인코딩으로 복구 성공!');
+    const eucKrScore = (eucKrText.match(/[가-힣]/g) || []).length;
+
+    const cp949Text = iconv.decode(buffer, 'cp949');
+    const cp949Score = (cp949Text.match(/[가-힣]/g) || []).length;
+
+    // 가장 한글이 많은 디코딩 선택 (최소 UTF-8의 2배 이상일 때만 교체)
+    if (eucKrScore > utf8Score * 2 && eucKrScore >= cp949Score) {
+      console.log(`✅ EUC-KR 복구 (한글 ${utf8Score}→${eucKrScore})`);
       return eucKrText;
     }
-
-    // CP949로도 시도
-    const cp949Text = iconv.decode(buffer, 'cp949');
-    if (/[가-힣]/.test(cp949Text)) {
-      console.log('✅ CP949 인코딩으로 복구 성공!');
+    if (cp949Score > utf8Score * 2) {
+      console.log(`✅ CP949 복구 (한글 ${utf8Score}→${cp949Score})`);
       return cp949Text;
     }
   }
@@ -483,6 +497,7 @@ export class SmartCrawler {
       'lotteon.com',
       'kurly.com',
       'shopping.naver.com',
+      'oliveyoung.co.kr', // ✅ [2026-04-17] 올리브영 추가 (Cloudflare 보호 + Next.js SSR)
     ];
     const isProductUrl = shoppingSites.some(site => targetUrl.includes(site));
 
@@ -609,6 +624,7 @@ export class SmartCrawler {
       urlLower.includes('brandconnect.naver') || // ✅ [추가] 브랜드커넥트 (리다이렉트)
       urlLower.includes('naver.me') ||      // ✅ [추가] 네이버 단축 URL (리다이렉트)
       urlLower.includes('coupang.com') ||   // ✅ 쿠팡
+      urlLower.includes('oliveyoung.co.kr') || // ✅ [2026-04-17] 올리브영 (Cloudflare + Next.js SSR)
       urlLower.includes('youtube.com') ||   // ✅ 유튜브
       urlLower.includes('brunch.co.kr')     // ✅ 브런치
     ) {

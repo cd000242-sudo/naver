@@ -11,7 +11,7 @@ declare const UnifiedDOMCache: any;
 declare function appendLog(msg: string, ...args: any[]): void;
 declare function escapeHtml(str: string): string;
 declare function collectUnifiedFormDataForPublish(): any;
-declare function executeUnifiedAutomation(formData: any): Promise<void>;
+declare function executeUnifiedAutomation(formData: any): Promise<any>;
 declare function saveGeneratedPost(...args: any[]): any;
 declare function loadGeneratedPosts(): any[];
 declare function refreshGeneratedPostsList(): void;

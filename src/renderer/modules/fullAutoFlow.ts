@@ -28,7 +28,7 @@ declare function syncHeadingVideoSlotsInUnifiedPreview(): void;
 declare function refreshGeneratedPostsList(): void;
 declare function toFileUrlMaybe(path: string): string;
 declare function generateAIContentFromData(data: any): Promise<any>;
-declare function executeUnifiedAutomation(formData: any): Promise<void>;
+declare function executeUnifiedAutomation(formData: any): Promise<any>;
 declare function showFolderSelectionModal(options?: any): Promise<void>;
 declare function loadImagesFromFolder(postId: string): Promise<any[]>;
 declare function hydrateImageManagerFromImages(images: any, headings?: any): void;
@@ -2310,6 +2310,19 @@ export async function generateAIImagesForHeadings(headings: any[], formData: any
   if (!headings || !Array.isArray(headings)) {
     console.warn('[AI Images] headings is undefined or not an array, returning empty');
     appendLog('⚠️ 소제목 정보가 없어 이미지 생성을 건너뜁니다.');
+    return [];
+  }
+
+  // ✅ [2026-04-18 FIX] skipImages 방어 가드 — 어느 호출 경로에서도 유료 API 차단
+  //    이전: 이 함수 자체에는 skipImages 체크가 없었고, 호출자(generateImagesWithCostSafety 등)가
+  //    책임짐. 하지만 로컬폴더 AI 폴백(L2213)이나 다른 우회 경로에서 skipImages=true여도
+  //    nano-banana-pro가 호출될 가능성 존재. 여기서 방어적으로 한 번 더 차단.
+  //    사용자 제보: "이미지 없음"으로 발행 시에도 나노바나나2 실행 → 글 1개당 650원 과금 발생
+  const _skipImagesFlag = formData?.skipImages === true
+    || localStorage.getItem('textOnlyPublish') === 'true';
+  if (_skipImagesFlag) {
+    console.log('[AI Images] 🚫 skipImages/textOnlyPublish=true → 유료 이미지 API 호출 차단');
+    appendLog('🚫 이미지 없이 발행: generateAIImagesForHeadings 호출 차단 (유료 API 비용 방지)');
     return [];
   }
 

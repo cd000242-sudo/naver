@@ -26,7 +26,7 @@ declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function generateContentFromUrl(url: string, title?: string, tone?: string, suppressModal?: boolean, contentMode?: string, category?: string): Promise<void>;
 declare function generateContentFromKeywords(title: string, keywords?: string, tone?: string, suppressModal?: boolean, contentMode?: string, category?: string): Promise<void>;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
-declare function executeUnifiedAutomation(formData: any): Promise<void>;
+declare function executeUnifiedAutomation(formData: any): Promise<any>;
 declare function updateUnifiedPreview(content: any): void;
 declare function syncGlobalImagesFromImageManager(): void;
 declare function openHeadingImageModal(): void;

@@ -226,6 +226,41 @@ async function reserveExternalApiImageQuota(provider: string, requestCount: numb
 async function generateImagesWithCostSafety(options: any): Promise<any> {
   // ✅ [2026-02-11 FIX] provider 결정 우선순위: 전달값 → fullAutoImageSource → globalImageSource → 'nano-banana-pro'
   console.log(`[generateImagesWithCostSafety] 📥 전달받은 provider: "${String(options?.provider || '').trim()}"`);
+
+  // ✅ [2026-04-18 CRITICAL GUARD] 유료 이미지 API의 최종 방어선
+  //    모든 유료/과금 가능 이미지 생성이 이 함수를 경유하므로 여기서 skipImages 차단하면
+  //    어느 호출 경로에서 skipImages 체크가 누락돼도 API 호출/과금 방지 가능.
+  //    사용자 제보: "이미지 없음" 설정에도 나노바나나2 실행 → 글 1개당 650원 과금 발생.
+  const _skipImagesFlag = options?.skipImages === true
+    || localStorage.getItem('textOnlyPublish') === 'true'
+    || (document.getElementById('unified-skip-images') as HTMLInputElement | null)?.checked === true;
+  if (_skipImagesFlag) {
+    console.warn('[generateImagesWithCostSafety] 🚫 skipImages/textOnlyPublish=true → 유료 이미지 API 호출 전면 차단');
+    return { success: true, images: [], message: '이미지 없이 발행 설정으로 차단됨' };
+  }
+
+  // ✅ [2026-04-18 CRITICAL GUARD #2] thumbnailOnly 단일 초크포인트 가드
+  //    호출자(headingImageGen / fullAutoFlow / multiAccountManager / continuousPublishing 등
+  //    15+ 경로)마다 thumbnailOnly를 개별 체크하던 구조라 누락이 반복 발생.
+  //    사용자 제보: "썸네일만" 설정인데도 본문 소제목 이미지까지 전량 생성됨.
+  //    단일 규칙: thumbnailOnly=true 면 items[] 중 isThumbnail===true 인 항목만 통과시키고
+  //    나머지(본문 소제목)는 전량 차단. 통과할 아이템이 없으면 빈 성공 반환.
+  const _thumbnailOnlyFlag = options?.thumbnailOnly === true
+    || localStorage.getItem('thumbnailOnly') === 'true'
+    || localStorage.getItem('headingImageMode') === 'thumbnail-only';
+  if (_thumbnailOnlyFlag && Array.isArray(options?.items)) {
+    const beforeCount = options.items.length;
+    const thumbOnlyItems = options.items.filter((it: any) => it?.isThumbnail === true);
+    const bodyCount = beforeCount - thumbOnlyItems.length;
+    if (bodyCount > 0) {
+      console.warn(`[generateImagesWithCostSafety] 🚫 thumbnailOnly=true → 본문 소제목 이미지 ${bodyCount}개 차단 (썸네일 ${thumbOnlyItems.length}개만 통과)`);
+    }
+    if (thumbOnlyItems.length === 0) {
+      return { success: true, images: [], message: 'thumbnailOnly로 본문 이미지 생성 차단됨' };
+    }
+    options.items = thumbOnlyItems;
+  }
+
   const provider = String(options?.provider || '').trim();
 
   // ✅ [2026-01-24 FIX] headingImageMode 자동 주입 - 다중계정 발행에서도 홀수/짝수 필터링 적용
