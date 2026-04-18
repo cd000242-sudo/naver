@@ -78,6 +78,53 @@ export const FORBIDDEN_EXPERIENTIAL_PHRASES: readonly string[] = [
   '가성비가 우수',
   '가성비 최상',
   '가성비 압도',
+
+  // Indirect experience phrasing that bypassed the v1 scanner during the
+  // option-A auto-promote regression (2026-04-18 gpt-4o-mini expert_review).
+  '되더라고요',
+  '제 일상에',
+  '내 일상에',
+  '자주 찾게 되',
+  '스며들었',
+  '먹어보니',
+  '발라보니',
+  '만져보니',
+  '아이들이 간식',
+  '아이들이 좋아',
+
+  // Unsubstantiated category-level generalisation (expert_review fabricated
+  // "일반적으로 이 제품들은…", "보통 이 가격대는…" etc.)
+  '일반적으로 이 제품',
+  '일반적으로 이 가격',
+  '일반적으로 이 카테고리',
+  '보통 이 가격대',
+  '보통 이 카테고리',
+  '이 카테고리 제품들은 보통',
+  '대부분의 사용자가',
+  '많은 분들이 선택',
+
+  // Fabricated comparative numbers (no competitor data is actually collected).
+  '비슷한 가격대의 다른',
+  '비슷한 스펙의 제품',
+  '비슷한 성능의 제품',
+  '2배 가격대',
+  '두 배 가격',
+  '2배 이상의 가격',
+  '두 배 이상의 가격',
+  '1/2 가격',
+  '반값에',
+
+  // Fabricated value-translation math ("하루 커피 한 잔 값" etc.)
+  '커피 한 잔 값',
+  '하루 커피',
+  '커피 한 잔',
+
+  // Fabricated sensory/visual descriptions (the model didn't actually see it)
+  '뚜껑 닫히',
+  '뚜껑이 닫히',
+  '마감 품질',
+  '고급스러운 느낌',
+  '플라스틱 느낌',
 ] as const;
 
 export interface ForbiddenScanResult {

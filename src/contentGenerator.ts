@@ -3739,6 +3739,7 @@ export type ArticleType =
   | 'it_review'
   | 'shopping_review'
   | 'shopping_expert_review'
+  | 'shopping_spec_analysis'
   | 'product_review'
   | 'place_review'
   | 'restaurant_review'
@@ -4417,7 +4418,19 @@ ${source.customPrompt.trim()}
     systemPromptResult = buildFullPrompt('seo', source.categoryHint, source.isFullAuto, toneStyle, productInfoForPrompt);
 
     // ✅ .prompt 파일에서 쇼핑 프롬프트 로드 (articleType 기반 분기)
-    const shoppingArticleType = source.articleType || 'shopping_review';
+    // SPEC-REVIEW-001 option C: "사용후기" mode is logically inconsistent with
+    // reviewCount === 0 — you cannot write a testimonial with no testimony.
+    // We tried auto-promoting to shopping_expert_review (option A) but the
+    // expert mode forces "전문성 시그널" and "카테고리 일반론 비교" which in
+    // the no-review state manufactured unsubstantiated generalisations and
+    // comparative numbers. Option C: dedicated shopping_spec_analysis mode —
+    // a neutral curator voice bound strictly to the supplied spec/price.
+    const requestedArticleType = source.articleType || 'shopping_review';
+    let shoppingArticleType = requestedArticleType;
+    if (!reviewAvailable && reviewGuardOn && requestedArticleType === 'shopping_review') {
+      shoppingArticleType = 'shopping_spec_analysis';
+      console.log('[PromptBuilder] 🔄 articleType auto-promoted: shopping_review → shopping_spec_analysis (reviews=0, SPEC-REVIEW-001 option C)');
+    }
     const shoppingPrompt = loadShoppingPrompt(shoppingArticleType, toneStyle);
 
     if (shoppingPrompt) {

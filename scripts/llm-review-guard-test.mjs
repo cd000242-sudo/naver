@@ -49,9 +49,12 @@ const FIXTURES = [
 
 function loadShoppingPromptFile(articleType) {
   const base = path.resolve('./src/prompts/affiliate');
-  const file = articleType === 'shopping_expert_review'
-    ? 'shopping_expert_review.prompt'
-    : 'shopping_review.prompt';
+  const files = {
+    shopping_review: 'shopping_review.prompt',
+    shopping_expert_review: 'shopping_expert_review.prompt',
+    shopping_spec_analysis: 'shopping_spec_analysis.prompt',
+  };
+  const file = files[articleType] || files.shopping_review;
   const full = path.join(base, file);
   return fs.readFileSync(full, 'utf-8');
 }
@@ -66,7 +69,15 @@ function assembleSystemPrompt(fx) {
     '(체험 서술, 기간 주장, 수령 시점 묘사는 아래 P0 가드 블록에서 금지됩니다.)',
   ].join('\n');
 
-  const shoppingPrompt = loadShoppingPromptFile(fx.articleType)
+  // Mirror SPEC-REVIEW-001 option C auto-promotion: shopping_review with zero
+  // reviews is self-contradicting, so escalate to the dedicated curator mode.
+  const effectiveArticleType = (fx.articleType === 'shopping_review')
+    ? 'shopping_spec_analysis'
+    : fx.articleType;
+  if (effectiveArticleType !== fx.articleType) {
+    console.log(`  [auto-promote] ${fx.articleType} → ${effectiveArticleType}`);
+  }
+  const shoppingPrompt = loadShoppingPromptFile(effectiveArticleType)
     .replace(/\{\{TONE_STYLE\}\}/g, 'friendly');
 
   const guard = buildReviewGuardBlock({

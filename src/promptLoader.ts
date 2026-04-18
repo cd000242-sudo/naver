@@ -716,18 +716,25 @@ export function buildFullPrompt(
 
 /**
  * 쇼핑커넥트 전용 프롬프트 로드
- * 
+ *
  * articleType에 따라 다른 .prompt 파일을 로드하고,
  * {{TONE_STYLE}} 플레이스홀더를 실제 toneStyle로 치환합니다.
- * 
- * @param articleType - 'shopping_review' | 'shopping_expert_review'
+ *
+ * @param articleType - 'shopping_review' | 'shopping_expert_review' | 'shopping_spec_analysis'
  * @param toneStyle - 적용할 톤 스타일
  * @returns 로드된 프롬프트 (로드 실패 시 빈 문자열)
  */
 export function loadShoppingPrompt(articleType: string, toneStyle: string): string {
-  const promptFile = articleType === 'shopping_expert_review'
-    ? 'affiliate/shopping_expert_review.prompt'
-    : 'affiliate/shopping_review.prompt';
+  // SPEC-REVIEW-001 option C: shopping_spec_analysis is the dedicated mode
+  // for products with zero reviews — neither a testimonial nor an expert
+  // review, but a curator-style spec-based purchase guide.
+  const SHOPPING_PROMPT_FILES: Record<string, string> = {
+    shopping_review: 'affiliate/shopping_review.prompt',
+    shopping_expert_review: 'affiliate/shopping_expert_review.prompt',
+    shopping_spec_analysis: 'affiliate/shopping_spec_analysis.prompt',
+  };
+
+  const promptFile = SHOPPING_PROMPT_FILES[articleType] || SHOPPING_PROMPT_FILES.shopping_review;
 
   const rawPrompt = loadPromptFile(promptFile);
 
