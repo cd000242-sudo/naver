@@ -3222,8 +3222,17 @@ export async function initMultiAccountPublishModal() {
           try {
             // 이미지 소스 결정
             const imageSource = queueItem.imageSource || getFullAutoImageSource(); // ✅ [2026-02-09 FIX] 풀오토 이미지 설정 반영
-            const skipImages = imageSource === 'skip';
-            console.log('[FullAuto] 이미지 소스:', imageSource, ', 건너뛰기:', skipImages);
+            // ✅ [2026-04-19 FIX] skipImages 결정을 SSOT(isImageSkipEnabled)로 일원화
+            //    이전 버그: imageSource === 'skip'만 체크 → "이미지 없이 글만 발행" 체크박스 +
+            //             textOnlyPublish localStorage + headingImageMode='none' 3개 소스가 무시됨
+            //    증상: 고객이 "이미지 없이 글만 발행" 체크해도 네이버 에디터가 자동 추천 이미지
+            //          삽입하여 야구/부동산 이미지가 라이브러리에 뜨는 제보
+            //    수정: queueItem.skipImages > isImageSkipEnabled() > imageSource==='skip' 순 확인
+            const skipImages = (queueItem as any).skipImages === true
+              || ((window as any).isImageSkipEnabled?.() === true)
+              || imageSource === 'skip';
+            console.log('[FullAuto] 이미지 소스:', imageSource, ', 건너뛰기:', skipImages,
+              `(queueItem=${(queueItem as any).skipImages === true}, SSOT=${(window as any).isImageSkipEnabled?.() === true}, source=skip=${imageSource === 'skip'})`);
 
             // ✅ [2026-02-16 FIX] 쇼핑커넥트 모드: 제휴 링크에서 제품 이미지 자동 수집
             // executeUnifiedAutomation(단건 발행)에는 있지만 다중계정 흐름에서 누락되어 있던 로직
