@@ -21,6 +21,9 @@ import {
   type QualityCheckResult,
 } from '../contentQualityChecker.js';
 import { measureAiFingerprint } from '../authgrDefense.js';
+import { scanDefinitionFirstSentences } from '../validators/seo/definitionFirstSentenceScanner.js';
+import { scanMainKeywordPosition } from '../validators/seo/mainKeywordPositionScanner.js';
+import { scanFaqHeadings } from '../validators/seo/faqHeadingScanner.js';
 
 export type IssueSeverity = 'critical' | 'warning' | 'info';
 
@@ -29,7 +32,11 @@ export type IssueCategory =
   | 'ai_fingerprint'
   | 'verification_loop'
   | 'quma_anchor'
-  | 'price_artifact';
+  | 'price_artifact'
+  // ✅ [2026-04-20 SPEC-SEO-100 W1] SEO-specific categories
+  | 'seo_definition_first'
+  | 'seo_keyword_position'
+  | 'seo_faq_heading';
 
 export interface ValidationIssue {
   severity: IssueSeverity;
@@ -48,6 +55,10 @@ export interface ValidationMetrics {
   verificationLoopTriggersFound: number;
   qumaAnchorMissCount: number;
   priceArtifactFound: boolean;
+  // ✅ [2026-04-20 SPEC-SEO-100 W1] SEO-specific metrics (null when mode !== 'seo')
+  seoDefinitionHitRatio: number | null;
+  seoKeywordDensity: number | null;
+  seoFaqHeadingCount: number | null;
 }
 
 export interface ValidationResult {
@@ -62,6 +73,12 @@ export interface ValidationOptions {
   skipFingerprint?: boolean;
   /** Required only if content claims it includes images. */
   imageCount?: number;
+  /** Validation mode. Defaults to 'homefeed' to preserve legacy behavior. */
+  mode?: 'homefeed' | 'seo';
+  /** Main keyword for SEO mode. Ignored when mode !== 'seo'. */
+  mainKeyword?: string;
+  /** Post title for SEO keyword-position check. */
+  title?: string;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -226,6 +243,58 @@ export function validateContent(
   const qumaIssues = scanQumaAnchors(flat, imageCount);
   issues.push(...qumaIssues);
 
+  // 6. SEO-specific scanners (only when mode === 'seo')
+  let seoDefinitionHitRatio: number | null = null;
+  let seoKeywordDensity: number | null = null;
+  let seoFaqHeadingCount: number | null = null;
+
+  if (options.mode === 'seo') {
+    const defCheck = scanDefinitionFirstSentences(content);
+    seoDefinitionHitRatio = defCheck.hitRatio;
+    if (defCheck.totalHeadings > 0 && defCheck.hitRatio < 0.6) {
+      issues.push({
+        severity: 'warning',
+        category: 'seo_definition_first',
+        message: `H2 정의문 비율 낮음 (${Math.round(defCheck.hitRatio * 100)}%, 60% 이상 권장) — AI 브리핑 인용 확률 저하`,
+        hint: '각 H2 첫 문장을 "A는 B이다" 또는 "핵심은 ~" 형태로',
+      });
+    }
+
+    const kwCheck = scanMainKeywordPosition(
+      { ...content, title: options.title },
+      options.mainKeyword ?? '',
+    );
+    if (!kwCheck.emptyInput) {
+      seoKeywordDensity = kwCheck.keywordDensity;
+      if (!kwCheck.titleHasKeywordInFirst3Chars) {
+        issues.push({
+          severity: 'warning',
+          category: 'seo_keyword_position',
+          message: '제목 앞 3자 이내에 메인 키워드 미배치 — 검색 매칭 손실',
+          hint: '제목 맨 앞에 메인 키워드를 배치하세요',
+        });
+      }
+      if (!kwCheck.introMentionsKeyword) {
+        issues.push({
+          severity: 'warning',
+          category: 'seo_keyword_position',
+          message: '도입부 첫 100자에 메인 키워드 미등장',
+        });
+      }
+    }
+
+    const faqCheck = scanFaqHeadings(content);
+    seoFaqHeadingCount = faqCheck.questionHeadingCount;
+    if (!faqCheck.withinRecommendedRange && faqCheck.totalHeadings >= 3) {
+      issues.push({
+        severity: faqCheck.questionHeadingCount === 0 ? 'warning' : 'info',
+        category: 'seo_faq_heading',
+        message: `질문형 소제목 개수 권장 범위(1~2) 밖 (현재 ${faqCheck.questionHeadingCount}개)`,
+        hint: 'AI 브리핑 인용 확률 2배 상승 구간',
+      });
+    }
+  }
+
   const criticalCount = issues.filter((i) => i.severity === 'critical').length;
 
   const metrics: ValidationMetrics = {
@@ -235,6 +304,9 @@ export function validateContent(
     verificationLoopTriggersFound: 3 - loopIssues.length,
     qumaAnchorMissCount: qumaIssues.length,
     priceArtifactFound: priceIssues.length > 0,
+    seoDefinitionHitRatio,
+    seoKeywordDensity,
+    seoFaqHeadingCount,
   };
 
   return {

@@ -27,7 +27,12 @@ export type FeatureFlag =
   | 'topic_guard'
   | 'feedback_loop'
   | 'first_party_data'
-  | 'price_normalizer_v2';
+  | 'price_normalizer_v2'
+  // ✅ [2026-04-20 SPEC-SEO-100 W1] SEO 모드 스캐너 flags
+  | 'seo_definition_scanner'
+  | 'seo_keyword_position'
+  | 'seo_faq_heading'
+  | 'seo_longtail_depth';
 
 export interface PostFeatureMetadata {
   postId: string;
