@@ -30,12 +30,14 @@
 - [x] 단위 테스트 19개 + Red-Green-Red 검증 완료
 - [x] MaxRetry는 호출자 책임. 파사드는 순수 함수. 차단 게이트 금지.
 
-### W2 — 썸네일 자동 생성 + 1문장 슬롯 (예정)
+### W2 — 썸네일 자동 생성 + 발행 메타 기록 (완료: 2026-04-20)
 
-- [ ] `THUMBNAIL_HINT` 블록 파싱 후 `image/nanoBananaProGenerator.ts` 연동
-- [ ] 카테고리별 썸네일 톤 프리셋 적용
-- [ ] 렌더러 UI: "후킹 1문장 입력 (선택)" 슬롯 추가 (6번 완전 자동 ≠ 사용자 부담 0 절충안)
-- [ ] A/B 테스트: 썸네일 자동 ON/OFF 비교. 기대 CTR +20%
+- [x] `src/image/thumbnailHintParser.ts` — `===THUMBNAIL_HINT===` 블록 파서 + 카테고리 톤 프리셋
+- [x] `src/services/thumbnailAutoGenerator.ts` — 힌트 → nanoBananaProGenerator 어댑터. 실패 시 비차단 (ok=false + 폴백)
+- [x] `src/services/publishMetadataRecorder.ts` — 발행 시 featureFlagTracker 래퍼. 저장 실패 시에도 발행 계속
+- [x] 단위 테스트 16 + 6 + 8 = 30 cases. 388/388 전체 통과. tsc 에러 0.
+- [ ] [후속] 렌더러 UI "후킹 1문장 입력 (선택)" 슬롯 — UX 실물 QA 필요
+- [ ] [후속] 썸네일 ON/OFF A/B 대시보드
 
 ### W3 — 공식 API 기반 성과 수집 (예정)
 
