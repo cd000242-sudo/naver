@@ -13,6 +13,33 @@ import { searchShopping, stripHtmlTags, type ShoppingItem } from '../naverSearch
 // ✅ [2026-04-21] 네이버 스토어 가격 다중 폴백 (난독화 class 변경 대응)
 import { extractNaverStorePrice } from './naverStorePriceExtractor.js';
 
+/**
+ * Apply 5-stage price fallback when the primary extraction yielded 0 or empty.
+ * Shared helper so every evaluate() block in this file can protect against the
+ * "0원" bug the 2026-04-21 user report identified.
+ * Never throws — falls back to the original price on any error so crawling
+ * continues.
+ */
+async function applyPriceFallback(
+  page: any,
+  currentPrice: string,
+  context: string,
+): Promise<string> {
+  const digits = String(currentPrice || '').replace(/[^\d]/g, '');
+  if (digits && parseInt(digits, 10) > 0) return currentPrice;
+  try {
+    const fallback = await page.evaluate(extractNaverStorePrice);
+    if (fallback?.price) {
+      console.log(`[${context}] 🔄 가격 폴백 성공 (stage ${fallback.stage}=${fallback.stageLabel}): ${fallback.price}`);
+      return fallback.price;
+    }
+    console.log(`[${context}] ⚠️ 가격 폴백 5단계 전부 실패 — 가격 미수집으로 진행`);
+  } catch (err) {
+    console.log(`[${context}] ⚠️ 가격 폴백 호출 오류: ${(err as Error).message}`);
+  }
+  return currentPrice;
+}
+
 puppeteer.use(StealthPlugin());
 
 /**
@@ -942,6 +969,9 @@ export async function crawlBrandStoreProduct(
                 return { productName: productName?.trim() || '', price: price?.trim() || '', images, productDetails };
             });
 
+            // ✅ [2026-04-21] 가격 5단 폴백
+            productInfo.price = await applyPriceFallback(page, productInfo.price, 'BrandStore-1');
+
             // ✅ [2026-02-01] 리뷰 탭 클릭하여 리뷰 이미지 수집
             console.log('[BrandStore] 📸 리뷰 탭에서 실사용 이미지 수집 시도...');
             let reviewImages: string[] = [];
@@ -1380,6 +1410,9 @@ export async function crawlBrandStoreProduct(
 
                 return { productName: productName?.trim() || '', price: price?.trim() || '', images, productDetails };
             });
+
+            // ✅ [2026-04-21] 가격 5단 폴백
+            productInfo.price = await applyPriceFallback(page, productInfo.price, 'BrandStore-2');
 
             // ✅ [2026-02-08 v4] 리뷰 이미지 수집 — "전체보기" 모달에서 data-shp-contents-dtl 원본 URL 추출
             console.log('[BrandStore:Puppeteer] 📸 리뷰 이미지 수집 시도...');
@@ -2459,22 +2492,8 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
             return { productName, price, ogImage, ogDesc, specs };
           }, sels);
 
-          // ✅ [2026-04-21] 가격이 비었거나 "0원"으로 잡혔으면 다중 폴백 실행
-          const priceDigits = String(productData.price || '').replace(/[^\d]/g, '');
-          const priceIsInvalid = !priceDigits || parseInt(priceDigits, 10) === 0;
-          if (priceIsInvalid) {
-            try {
-              const fallbackResult = await bcPage.evaluate(extractNaverStorePrice);
-              if (fallbackResult?.price) {
-                console.log(`[AffiliateCrawler] 🔄 가격 폴백 성공 (stage ${fallbackResult.stage}=${fallbackResult.stageLabel}): ${fallbackResult.price}`);
-                productData.price = fallbackResult.price;
-              } else {
-                console.log(`[AffiliateCrawler] ⚠️ 가격 폴백 5단계 전부 실패 — 가격 미수집 상태로 진행`);
-              }
-            } catch (fbErr) {
-              console.log(`[AffiliateCrawler] ⚠️ 가격 폴백 호출 오류: ${(fbErr as Error).message}`);
-            }
-          }
+          // ✅ [2026-04-21] 가격 5단 폴백 (공통 헬퍼 사용)
+          productData.price = await applyPriceFallback(bcPage, productData.price, 'AffiliateCrawler');
 
 
           // 갤러리 이미지 수집 (썸네일 클릭)
@@ -2723,6 +2742,9 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
                     return { ogTitle, ogImage, productName: productName?.trim() || '', price: price?.trim() || '' };
                 });
 
+                // ✅ [2026-04-21] 가격 5단 폴백
+                productInfo.price = await applyPriceFallback(urlResolvePage, productInfo.price, 'URL-Resolve');
+
                 // ✅ 에러 페이지 감지
                 const errorKeywords = ['에러', '오류', 'error', '접근', '차단', '제한', '캡차', '시스템', '찾을 수 없'];
                 const isErrorPage = errorKeywords.some(keyword =>
@@ -2886,6 +2908,9 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
                         productDetails
                     };
                 });
+
+                // ✅ [2026-04-21] 가격 5단 폴백
+                productInfo.price = await applyPriceFallback(page, productInfo.price, 'SmartStore-Puppeteer');
 
                 // ✅ [2026-02-01] 리뷰 탭 클릭하여 리뷰 이미지 수집 (구매 결심에 효과적!)
                 console.log('[AffiliateCrawler] 📸 리뷰 탭에서 실사용 이미지 수집 시도...');
