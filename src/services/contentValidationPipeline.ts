@@ -143,19 +143,53 @@ function scanVerificationLoop(conclusion: string): ValidationIssue[] {
   return issues;
 }
 
-/** Detects the "0원에 판매" artifact even if upstream price normalizer fails. */
+/**
+ * Detects the "0원" artifact in body text even if upstream price normalizer
+ * fails. Body patterns typically contain "판매/가격/팔"; headings do not.
+ */
+const BODY_ZERO_WON_PATTERN = /(?:^|[^\d,])0\s*원\s*(?:에|으로|부터|의)?\s*(?:판매|가격|팔|할인|구매|시작|특가|정가|판매가|할인가|세일|결제|주문)/;
+const MISSING_INFO_PATTERN = /가격\s*정보\s*없음/;
+
+/**
+ * Stricter scanner for heading titles. Headings are short and rarely mention
+ * "판매/가격" explicitly; the mere presence of "0원" in a heading is almost
+ * always a bug (e.g. "0원 할인가", "0원 특가", "특가 0원"). We flag any
+ * standalone "0원" in a heading title, as long as it is not preceded by
+ * another digit (guarding against "15,370원").
+ */
+const HEADING_ZERO_WON_PATTERN = /(?:^|[^\d,])0\s*원/;
+
 function scanPriceArtifact(fullText: string): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
-  // Must NOT match "15,370원" — the leading 0 must not be preceded by another digit.
-  const zeroWonPattern = /(?:^|[^\d,])0\s*원\s*에?\s*(?:판매|가격|팔)/;
-  const missingInfoPattern = /가격\s*정보\s*없음/;
-  if (zeroWonPattern.test(fullText) || missingInfoPattern.test(fullText)) {
+  if (BODY_ZERO_WON_PATTERN.test(fullText) || MISSING_INFO_PATTERN.test(fullText)) {
     issues.push({
       severity: 'critical',
       category: 'price_artifact',
-      message: '"0원에 판매 중" 또는 "가격 정보 없음" 문구가 본문에 주입됨',
+      message: '"0원" 관련 문구(판매/할인/특가/정가 등) 또는 "가격 정보 없음" 이 본문에 주입됨',
       hint: 'priceNormalizer가 우회됐거나 LLM이 프롬프트 지시를 무시함',
     });
+  }
+  return issues;
+}
+
+/**
+ * Heading-specific price artifact scan. Runs separately because the body
+ * scanner's keyword list doesn't cover short heading phrasings.
+ */
+function scanHeadingPriceArtifact(content: CheckableContent): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+  for (const h of content.headings ?? []) {
+    const title = (h.title ?? '').trim();
+    if (!title) continue;
+    if (HEADING_ZERO_WON_PATTERN.test(title) || MISSING_INFO_PATTERN.test(title)) {
+      issues.push({
+        severity: 'critical',
+        category: 'price_artifact',
+        message: `소제목에 "0원" 또는 "가격 정보 없음" 아티팩트 발견: "${title}"`,
+        location: 'heading',
+        hint: 'priceNormalizer 우회 또는 LLM이 프롬프트 가격 언급 금지 지시를 무시',
+      });
+    }
   }
   return issues;
 }
@@ -242,6 +276,9 @@ export function validateContent(
   // 4. Price artifact (2nd line of defense over promptLoader fix)
   const priceIssues = scanPriceArtifact(flat);
   issues.push(...priceIssues);
+  // 4b. Heading-specific price artifact (소제목은 짧아서 별도 스캐너 필요)
+  const headingPriceIssues = scanHeadingPriceArtifact(content);
+  issues.push(...headingPriceIssues);
 
   // 5. QUMA anchors (only when image count is provided)
   const imageCount = options.imageCount ?? 0;
@@ -326,7 +363,7 @@ export function validateContent(
     criticalIssueCount: criticalCount,
     verificationLoopTriggersFound: 3 - loopIssues.length,
     qumaAnchorMissCount: qumaIssues.length,
-    priceArtifactFound: priceIssues.length > 0,
+    priceArtifactFound: priceIssues.length > 0 || headingPriceIssues.length > 0,
     seoDefinitionHitRatio,
     seoKeywordDensity,
     seoFaqHeadingCount,

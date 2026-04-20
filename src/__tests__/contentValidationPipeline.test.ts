@@ -75,7 +75,74 @@ describe('contentValidationPipeline — price artifact scanner (2nd-line defense
   it('does not flag legitimate price mention like "15,370원에 판매 중"', () => {
     const result = validateContent(
       buildContent({
-        headings: [{ title: '가격', body: '현재 15,370원에 판매 중인 제품이에요.' }],
+        headings: [{ title: '가격 정보', body: '현재 15,370원에 판매 중인 제품이에요.' }],
+      }),
+      { skipFingerprint: true },
+    );
+    expect(result.metrics.priceArtifactFound).toBe(false);
+  });
+
+  it('flags extended body patterns (0원 할인/특가/구매/세일)', () => {
+    const patterns = [
+      '현재 0원 할인으로 특가 진행 중입니다.',
+      '지금 0원 특가 세일 중이에요.',
+      '0원 구매 기회를 놓치지 마세요.',
+      '0원으로 판매가 시작됐습니다.',
+    ];
+    for (const body of patterns) {
+      const result = validateContent(
+        buildContent({ headings: [{ title: '안내', body }] }),
+        { skipFingerprint: true },
+      );
+      expect(result.metrics.priceArtifactFound).toBe(true);
+    }
+  });
+
+  it('flags "0원" artifact in heading title (short form bypass guard)', () => {
+    const result = validateContent(
+      buildContent({
+        headings: [
+          { title: '0원 특가 시작', body: '제품이 출시됐습니다.' },
+          { title: '두 번째', body: '계속 설명.' },
+        ],
+      }),
+      { skipFingerprint: true },
+    );
+    expect(result.pass).toBe(false);
+    expect(result.metrics.priceArtifactFound).toBe(true);
+    expect(
+      result.issues.some(
+        (i) =>
+          i.category === 'price_artifact' &&
+          i.location === 'heading' &&
+          i.message.includes('0원 특가 시작'),
+      ),
+    ).toBe(true);
+  });
+
+  it('flags "가격 정보 없음" even if it only appears in a heading', () => {
+    const result = validateContent(
+      buildContent({
+        headings: [
+          { title: '가격 정보 없음', body: '이 제품은 현재 가격 확인이 어렵습니다.' },
+        ],
+      }),
+      { skipFingerprint: true },
+    );
+    expect(result.pass).toBe(false);
+    expect(
+      result.issues.some(
+        (i) => i.category === 'price_artifact' && i.location === 'heading',
+      ),
+    ).toBe(true);
+  });
+
+  it('does NOT flag headings containing legitimate "10,000원" pricing', () => {
+    const result = validateContent(
+      buildContent({
+        headings: [
+          { title: '가격 10,000원 비교', body: '공식가는 15,000원입니다.' },
+        ],
       }),
       { skipFingerprint: true },
     );
