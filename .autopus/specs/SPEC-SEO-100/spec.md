@@ -46,12 +46,27 @@ SEO 모드(통합검색 + AI 브리핑 CUE: + 스마트블록 대응)의 노출/
 - [x] FeatureFlag enum에 `seo_definition_scanner`, `seo_keyword_position`, `seo_faq_heading`, `seo_longtail_depth` 추가.
 - [x] 테스트 16 cases + Red-Green-Red 검증. 전체 458/458 PASS. tsc 0 에러.
 
-### W2 — SEO 프롬프트 SECTION 체계 리팩토링 + CUE 답변블록 규칙 (80→87)
+### W2 — SEO 프롬프트 SECTION 체계 리팩토링 (80→87, 완료: 2026-04-20)
 
-- [ ] `src/prompts/seo/base.prompt` 821줄 → 600줄 이내
-- [ ] 홈판 스타일 SECTION 0~13 체계: R0-x 절대 규칙, H1~Hn 환각 방지, B1~Bn AI 패턴 블랙리스트
-- [ ] SECTION 신설: CUE 답변블록(각 H2 첫 문장 정의문 40~80자), 롱테일 수직 파고들기, 통합랭킹 경쟁 원칙
-- [ ] `recentWinnersBlock` 주입 지점을 SECTION 최상단으로 표준화
+- [x] `src/prompts/seo/base.prompt` **821줄 → 447줄** (46% 감축)
+- [x] 홈판 스타일 SECTION 0~13 체계 도입:
+  - SECTION 0: 절대 규칙 TOP 10 (R0-1~R0-10)
+  - SECTION 1: Anti-Hallucination (H1~H9)
+  - SECTION 2: 2026 알고리즘 3층 구조 (C-Rank/DIA+/QUMA/AuthGR/검증 루프)
+  - SECTION 3: 통합랭킹 전략 (롱테일 수직 파고들기)
+  - SECTION 4: AI 브리핑 CUE: 답변블록 (정의문 패턴 3종 + FAQ 1~2개)
+  - SECTION 5: 도입부 설계 (5대 공식)
+  - SECTION 6: 본문 구조 + 소제목 원칙
+  - SECTION 7: 키워드 배치 + 의미론적 SEO
+  - SECTION 8: 결론부 — 검색 종결 신호 설계
+  - SECTION 9: AI 탐지 회피 (B1~B20 블랙리스트, F1~F15 사람 지문)
+  - SECTION 10: 어미 다양화
+  - SECTION 11: 제목 설계 + 쇼핑커넥트 특화
+  - SECTION 12: 서식 + 모바일 UX + 플레이스홀더
+  - SECTION 13: 자가 점검 체크리스트 (7개 카테고리)
+- [x] 중복된 쇼핑커넥트 상세 가이드 제거 (src/prompts/affiliate/로 위임)
+- [x] 이모지 헤더 유지 + 구분선으로 LLM이 SECTION 경계 인식 쉽게
+- [x] 전체 458/458 PASS. tsc 0 에러. verifyPreviousWork baseline 230K 이내 유지(감축으로 통과).
 
 ### W3 — SEO 2주 검증 루프 지표 수집 (87→90)
 
