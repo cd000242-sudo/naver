@@ -69,6 +69,46 @@ describe('Price-zero bug reproduction — prompt must not render invalid prices'
   }
 });
 
+describe('hookHint — user-provided 1-sentence hook injection (W2)', () => {
+  it('injects the hook block when provided', () => {
+    const prompt = buildFullPrompt(
+      'homefeed',
+      'it',
+      false,
+      'friendly',
+      undefined,
+      '3주 써보니 아이 코막힘이 사라졌어요',
+    );
+    expect(prompt).toContain('[사용자 후킹 1문장');
+    expect(prompt).toContain('3주 써보니 아이 코막힘이 사라졌어요');
+    expect(prompt).toContain('QUMA/DIA+');
+  });
+
+  it('omits the hook block when hookHint is empty string', () => {
+    const prompt = buildFullPrompt('homefeed', 'it', false, 'friendly', undefined, '');
+    expect(prompt).not.toContain('[사용자 후킹 1문장');
+  });
+
+  it('omits the hook block when hookHint is undefined', () => {
+    const prompt = buildFullPrompt('homefeed', 'it', false, 'friendly', undefined, undefined);
+    expect(prompt).not.toContain('[사용자 후킹 1문장');
+  });
+
+  it('trims whitespace and caps the hook at 40 chars', () => {
+    const longHook = '   ' + 'A'.repeat(80) + '   ';
+    const prompt = buildFullPrompt('homefeed', 'it', false, 'friendly', undefined, longHook);
+    expect(prompt).toContain('[사용자 후킹 1문장');
+    // After trim + slice(0, 40), only 40 'A's should appear.
+    expect(prompt).toContain('A'.repeat(40));
+    expect(prompt).not.toContain('A'.repeat(41));
+  });
+
+  it('omits when hookHint is whitespace only', () => {
+    const prompt = buildFullPrompt('homefeed', 'it', false, 'friendly', undefined, '   \n\t  ');
+    expect(prompt).not.toContain('[사용자 후킹 1문장');
+  });
+});
+
 describe('Price-zero bug — valid prices must still render', () => {
   const validPrices: Array<readonly [string, unknown, string]> = [
     ['number 15370', 15370, '15,370원'],

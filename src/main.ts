@@ -5913,6 +5913,13 @@ ipcMain.handle(
         console.log(`[Main] ⚠️ 글톤 스타일 미지정 → 카테고리 기반 자동 매칭`);
       }
 
+      // ✅ [2026-04-20 SPEC-HOMEFEED-100 W2] 사용자 후킹 1문장 전달 (선택)
+      const hookHint = (payload.assembly as any).hookHint as string | undefined;
+      if (hookHint && hookHint.trim()) {
+        (source as any).hookHint = hookHint.trim();
+        console.log(`[Main] ✨ 후킹 1문장 전달: "${hookHint.trim().substring(0, 40)}"`);
+      }
+
       // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 옵션 전달
       const useKeywordAsTitle = (payload.assembly as any).useKeywordAsTitle as boolean | undefined;
       const keywordForTitle = (payload.assembly as any).keywordForTitle as string | undefined;

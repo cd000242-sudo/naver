@@ -36,7 +36,11 @@
 - [x] `src/services/thumbnailAutoGenerator.ts` — 힌트 → nanoBananaProGenerator 어댑터. 실패 시 비차단 (ok=false + 폴백)
 - [x] `src/services/publishMetadataRecorder.ts` — 발행 시 featureFlagTracker 래퍼. 저장 실패 시에도 발행 계속
 - [x] 단위 테스트 16 + 6 + 8 = 30 cases. 388/388 전체 통과. tsc 에러 0.
-- [ ] [후속] 렌더러 UI "후킹 1문장 입력 (선택)" 슬롯 — UX 실물 QA 필요
+- [x] 렌더러 UI "후킹 1문장 입력 (선택)" 슬롯 — public/index.html + contentGeneration.ts + main.ts + promptLoader 관통 (2026-04-20)
+  - 입력: `#unified-hook-sentence` (max 40자)
+  - 전달: payload.assembly.hookHint → source.hookHint → buildFullPrompt hookHint 파라미터
+  - 프롬프트: [사용자 후킹 1문장] 블록으로 주입, QUMA/DIA+ 1차 경험 신호로 명시
+  - ⚠️ UX 실물 QA 미완료: Electron 렌더러 GUI는 `npm run dev`로 수동 확인 필요
 - [ ] [후속] 썸네일 ON/OFF A/B 대시보드
 
 ### W3 — 공식 API 기반 성과 수집 (예정)

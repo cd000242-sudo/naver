@@ -3067,7 +3067,7 @@ function evaluateTitleQuality(title: string, keyword: string, mode: PromptMode, 
 
 async function generateHomefeedIntroOnlyPatch(source: ContentSource, current: StructuredContent, provider?: string): Promise<{ introduction?: string } | null> {
   const categoryHint = source.categoryHint as string | undefined;
-  const systemPrompt = buildFullPrompt('homefeed', categoryHint, false);
+  const systemPrompt = buildFullPrompt('homefeed', categoryHint, false, undefined, undefined, (source as any).hookHint);
   const selectedTitle = String(current?.selectedTitle || '').trim();
 
   const schema = `Output ONLY valid JSON. NO markdown.\n\n{\n  "introduction": "string"\n}`;
@@ -4415,7 +4415,7 @@ ${source.customPrompt.trim()}
     const reviewAvailable = isReviewAvailable(source.productReviews);
     const reviewGuardOn = isReviewGuardEnabled();
 
-    systemPromptResult = buildFullPrompt('seo', source.categoryHint, source.isFullAuto, toneStyle, productInfoForPrompt);
+    systemPromptResult = buildFullPrompt('seo', source.categoryHint, source.isFullAuto, toneStyle, productInfoForPrompt, (source as any).hookHint);
 
     // ✅ .prompt 파일에서 쇼핑 프롬프트 로드 (articleType 기반 분기)
     // SPEC-REVIEW-001 option C: "사용후기" mode is logically inconsistent with
@@ -4463,7 +4463,9 @@ ${source.customPrompt.trim()}
       contentMode,
       source.categoryHint,
       source.isFullAuto,
-      toneStyle
+      toneStyle,
+      undefined,
+      (source as any).hookHint
     );
   }
 

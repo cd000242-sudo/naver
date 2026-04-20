@@ -301,6 +301,10 @@ export async function generateContentFromUrl(
   }
   const keywordList = keywords ? keywords.split(',').map(k => k.trim()).filter(k => k.length > 0) : [];
 
+  // ✅ [2026-04-20 SPEC-HOMEFEED-100 W2] 사용자 후킹 1문장 (선택). 40자 이내.
+  const hookInputEl = document.getElementById('unified-hook-sentence') as HTMLInputElement | null;
+  const hookHint = (hookInputEl?.value || '').trim().slice(0, 40) || undefined;
+
   // ✅ 리뷰형/정보형 선택 확인
   const selectedContentType = (window as any).selectedContentType || 'info';
   const isReviewType = selectedContentType === 'review';
@@ -343,6 +347,7 @@ export async function generateContentFromUrl(
       // ✅ [2026-02-09 v2] 연속발행 시 이전 제목 히스토리 전달 (중복 방지)
       previousTitles: ((window as any)._previousTitles as string[]) || undefined,
       businessInfo: collectBusinessInfo(contentMode), // ✅ [v1.4.24]
+      hookHint, // ✅ [2026-04-20 SPEC-HOMEFEED-100 W2] 사용자 후킹 1문장 (선택)
     }
   };
 
