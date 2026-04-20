@@ -17,6 +17,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { app } from 'electron';
+import { hasValidPrice, formatPrice } from './services/priceNormalizer.js';
 
 // 프롬프트 디렉토리 경로 (개발/프로덕션 환경 모두 지원)
 function getPromptsDir(): string {
@@ -643,16 +644,21 @@ export function buildFullPrompt(
 - **[톤 일관성]** 제목의 어미/문체도 반드시 [STYLE OVERRIDE]에서 지정한 톤을 따르세요. (예: professional이면 ~입니다 체, casual이면 ~인 듯 체)`;
 
   // ✅ [2026-01-30] 쇼핑커넥트 제품 정보 블록 추가
-  if (productInfo && (productInfo.name || productInfo.spec || productInfo.price || productInfo.reviews?.length)) {
-    console.log(`[PromptLoader] 🛒 쇼핑커넥트 제품 정보 프롬프트에 추가`);
+  // ✅ [2026-04-20] 가격 정규화: hasValidPrice로 0원/빈값/"가격 정보 없음" 전부 차단.
+  //    가격이 유효하지 않으면 프롬프트에서 가격 줄 + "현재 XX원에 판매 중" 지시문을 통째로 생략.
+  const priceIsValid = hasValidPrice(productInfo?.price);
+  const priceDisplay = priceIsValid ? formatPrice(productInfo!.price) : null;
+
+  if (productInfo && (productInfo.name || productInfo.spec || priceIsValid || productInfo.reviews?.length)) {
+    console.log(`[PromptLoader] 🛒 쇼핑커넥트 제품 정보 프롬프트에 추가 (가격 ${priceIsValid ? '유효' : '미수집/무효 → 생략'})`);
 
     let productBlock = `\n\n[쇼핑커넥트 제품 정보 - 반드시 활용하세요!]\n`;
 
     if (productInfo.name) {
       productBlock += `📦 제품명: ${productInfo.name}\n`;
     }
-    if (productInfo.price) {
-      productBlock += `💰 가격: ${productInfo.price}\n`;
+    if (priceIsValid && priceDisplay) {
+      productBlock += `💰 가격: ${priceDisplay}\n`;
     }
     if (productInfo.spec) {
       productBlock += `📋 스펙: ${productInfo.spec}\n`;
@@ -671,11 +677,14 @@ export function buildFullPrompt(
       productBlock += `(체험 서술, 기간 주장, 수령 시점 묘사는 아래 P0 가드 블록에서 금지됩니다.)\n`;
     }
 
+    const priceInstruction = priceIsValid
+      ? `- 가격 정보는 "현재 ${priceDisplay}에 판매 중" 형식으로 본문에 자연스럽게 녹여서 언급하세요.\n`
+      : `- ⛔ 가격 정보가 수집되지 않았습니다. 본문에 "원", "가격", "판매가", "얼마" 등 가격 관련 언급을 절대 포함하지 마세요. 구체 금액/할인율 날조 금지.\n`;
+
     productBlock += `
 [제품 정보 활용 지침]
 - 위 제품 정보를 본문에 자연스럽게 녹여서 작성하세요.
-- 가격 정보는 "현재 XX원에 판매 중" 형식으로 언급하세요.
-- 스펙 정보는 장점으로 풀어서 설명하세요 (예: "크기가 445mm로 슬림해서 어디든 배치 가능").
+${priceInstruction}- 스펙 정보는 장점으로 풀어서 설명하세요 (예: "크기가 445mm로 슬림해서 어디든 배치 가능").
 - 리뷰는 "실제 구매하신 분들 반응을 보면~" 형식으로 인용하세요.
 - 정보를 지어내지 말고, 위에 제공된 정보만 활용하세요.
 

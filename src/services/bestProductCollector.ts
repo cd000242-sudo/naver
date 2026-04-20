@@ -18,6 +18,20 @@ import {
   openAdsPowerBrowser,
   closeAdsPowerBrowser
 } from '../main/utils/adsPowerManager.js';
+import { formatPriceOrEmpty } from './priceNormalizer.js';
+
+/**
+ * Normalize price fields on a collected product batch.
+ * Any raw price that cannot be parsed to a positive integer KRW becomes "".
+ * Callers downstream (promptLoader, sourceAssembler) skip empty prices.
+ */
+function normalizeProductPrices(products: BestProduct[]): BestProduct[] {
+  return products.map((p) => ({
+    ...p,
+    price: formatPriceOrEmpty(p.price),
+    originalPrice: p.originalPrice ? formatPriceOrEmpty(p.originalPrice) : undefined,
+  }));
+}
 
 // =============================================
 // 타입 정의
@@ -148,6 +162,11 @@ async function getAdsPowerPlaywright(): Promise<{ browser: Browser; page: Page; 
 
 /** Playwright 페이지에서 상품 추출 (쿠팡) */
 async function extractCoupangProductsFromPage(page: Page, maxCount: number): Promise<BestProduct[]> {
+  const raw = await extractCoupangProductsFromPageRaw(page, maxCount);
+  return normalizeProductPrices(raw);
+}
+
+async function extractCoupangProductsFromPageRaw(page: Page, maxCount: number): Promise<BestProduct[]> {
   // 페이지 로드 대기
   await page.waitForLoadState('domcontentloaded', { timeout: 15000 }).catch(() => {});
   await sleep(2000); // 동적 렌더링 대기
@@ -226,6 +245,11 @@ async function extractCoupangProductsFromPage(page: Page, maxCount: number): Pro
 
 /** ✅ [2026-03-14] Playwright 페이지에서 상품 추출 (네이버 snxbest.naver.com) */
 async function extractNaverProductsFromPage(page: Page, maxCount: number): Promise<BestProduct[]> {
+  const raw = await extractNaverProductsFromPageRaw(page, maxCount);
+  return normalizeProductPrices(raw);
+}
+
+async function extractNaverProductsFromPageRaw(page: Page, maxCount: number): Promise<BestProduct[]> {
   await page.waitForLoadState('load', { timeout: 20000 }).catch(() => {});
   await sleep(5000); // 네이버 SPA 렌더링 대기
 
@@ -868,7 +892,7 @@ export class BestProductCollector {
               products.push({
                 rank: products.length + 1,
                 name: name.substring(0, 100),
-                price: typeof price === 'number' ? price.toLocaleString() + '원' : this.cleanPrice(String(price)),
+                price: formatPriceOrEmpty(price),
                 imageUrl,
                 productUrl: productUrl.startsWith('http') ? productUrl : `https://shopping.naver.com${productUrl}`,
                 reviewCount: typeof reviewCount === 'number' ? reviewCount : parseInt(String(reviewCount)) || 0,
@@ -962,7 +986,7 @@ export class BestProductCollector {
                 products.push({
                   rank: products.length + 1,
                   name: name.substring(0, 100),
-                  price: typeof price === 'number' ? price.toLocaleString() + '원' : this.cleanPrice(String(price)),
+                  price: formatPriceOrEmpty(price),
                   imageUrl,
                   productUrl: productUrl.startsWith('http') ? productUrl : '',
                   reviewCount: item.reviewCount || 0,
@@ -1039,10 +1063,7 @@ export class BestProductCollector {
   // =============================================
 
   private cleanPrice(price: string): string {
-    if (!price) return '';
-    // 숫자와 원 기호만 추출
-    const match = price.match(/[\d,]+원?/);
-    return match ? match[0] : price.replace(/\s+/g, '').substring(0, 20);
+    return formatPriceOrEmpty(price);
   }
 
   private enhanceCoupangImage(url: string): string {

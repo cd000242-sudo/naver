@@ -65,7 +65,9 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     const totalChars = walkPrompts(promptsRoot);
     console.log(`[v1.4.12 검증] 전체 .prompt 파일 합계: ${totalChars.toLocaleString()}자`);
     // v1.4.7: ~216,477자 → v1.4.12+: ~187,500자
-    expect(totalChars).toBeLessThan(216477);
+    // 2026-04-20: 홈판 2026 알고리즘 보강(QUMA, 검증 루프, 썸네일 힌트)으로
+    // homefeed/base.prompt가 456줄 → 623줄로 의도적 증가. baseline을 230K로 상향.
+    expect(totalChars).toBeLessThan(230000);
   });
 });
 
