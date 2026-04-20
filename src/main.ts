@@ -26,6 +26,24 @@ import { generateBlogContent, setGeminiModel, flushGeminiUsage, getGeminiUsageSn
 import { flushAllApiUsage, getApiUsageSnapshot, resetApiUsage, type ApiProvider } from './apiUsageTracker.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
 import { PostPublishBooster } from './publisher/postPublishBooster.js';
+// ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 발행 메타 기록 훅
+import { recordPublishMeta } from './services/publishMetadataRecorder.js';
+import { getEnabledFeatures } from './services/featureFlagConfig.js';
+import type { FeatureFlag } from './analytics/featureFlagTracker.js';
+
+const ALL_TRACKED_FEATURES: FeatureFlag[] = [
+  'validator',
+  'thumbnail_auto',
+  'smart_scheduler',
+  'topic_guard',
+  'feedback_loop',
+  'first_party_data',
+  'price_normalizer_v2',
+  'seo_definition_scanner',
+  'seo_keyword_position',
+  'seo_faq_heading',
+  'seo_longtail_depth',
+];
 import { TrendMonitor, type TrendAlertEvent } from './monitor/trendMonitor.js';
 import { PatternAnalyzer } from './learning/patternAnalyzer.js';
 import { PostAnalytics, type PostPerformance } from './analytics/postAnalytics.js';
@@ -3331,6 +3349,21 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
       //  결과 반환
       if (result.success) {
         console.log('[Main] 발행 성공: 선차감된 쿼터 확정');
+        // ✅ [2026-04-20] A/B 메타로그 기록 (실패해도 발행 계속)
+        try {
+          const validationResult = (result as any).__validationResult
+            || ((result as any).content as any)?.__validationResult
+            || null;
+          const postId = recordPublishMeta({
+            postId: (result as any).postId || (result.url ? String(result.url) : undefined),
+            featuresEnabled: getEnabledFeatures(ALL_TRACKED_FEATURES),
+            validation: validationResult,
+            notes: result.url ? `url:${result.url}` : undefined,
+          });
+          console.log(`[Main] 📊 A/B 메타 기록: postId=${postId}, features=${getEnabledFeatures(ALL_TRACKED_FEATURES).length}개`);
+        } catch (metaErr) {
+          console.error('[Main] A/B 메타 기록 실패(발행 계속):', metaErr);
+        }
         sendStatus({ success: true, url: result.url, message: result.message });
       } else if (result.cancelled) {
         if (preConsumed) {

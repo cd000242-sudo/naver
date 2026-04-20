@@ -17,6 +17,10 @@ import { humanizeContent, humanizeHtmlContent, analyzeAiDetectionRisk, resetHuma
 import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog } from './contentOptimizer.js';
 import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
+// ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 실전 통합 훅
+import { validateContent as runValidationPipeline } from './services/contentValidationPipeline.js';
+import { extractRecentWinners, formatWinnersForPrompt } from './learning/recentWinnersExtractor.js';
+import { isFeatureEnabled } from './services/featureFlagConfig.js';
 // ✅ [v1.4.48 Stage A.2] require() 혼용 제거 → 정적 import로 통일 (모듈 인스턴스 단일 보장)
 import { processAutoPublishContent, getRecentPeriods, recordSelectedTitle, type TitleSelectionResult } from './titleSelector.js';
 import { trendAnalyzer } from './agents/trendAnalyzer.js';
@@ -54,6 +58,74 @@ export class GeminiEmptyResponseError extends Error {
   /** 재시도해도 의미없는 영구 실패인지 (SAFETY/RECITATION) */
   get isPermanent(): boolean {
     return this.finishReason === 'SAFETY' || this.finishReason === 'RECITATION';
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ✅ [2026-04-20 SPEC-HOMEFEED-100 W1 / SEO-100 W1] 실전 통합 훅
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+/**
+ * Post-generation validator log. Non-blocking, analysis only.
+ * Runs after a successful generation to:
+ *   1) emit critical/warning issues to the log
+ *   2) attach validation metrics to the returned content so publishMeta
+ *      can correlate features × issues
+ * Never throws. Never mutates content (validator is pure).
+ */
+function runPostGenValidator(content: any, source: any): void {
+  if (!isFeatureEnabled('validator')) return;
+  try {
+    const mode: 'homefeed' | 'seo' = source?.contentMode === 'seo' ? 'seo' : 'homefeed';
+    const mainKeyword = source?.keywords?.[0] || source?.title || '';
+    const result = runValidationPipeline(content, {
+      skipFingerprint: true, // 속도 우선 — fingerprint는 이미 authgrDefense가 별도 수행
+      mode,
+      mainKeyword,
+      title: content?.selectedTitle || content?.title || '',
+      imageCount: Array.isArray(content?.headings) ? content.headings.length : 0,
+    });
+    // Attach to content for downstream publishMetadataRecorder
+    (content as any).__validationResult = result;
+    if (result.metrics.criticalIssueCount > 0) {
+      console.warn(
+        `[Validator] ⚠️ Critical ${result.metrics.criticalIssueCount}건: ` +
+          result.issues
+            .filter((i) => i.severity === 'critical')
+            .map((i) => i.message)
+            .join(' | '),
+      );
+    } else if (result.metrics.totalIssueCount > 0) {
+      console.log(
+        `[Validator] ℹ️ 이슈 ${result.metrics.totalIssueCount}건 (비차단)`,
+      );
+    } else {
+      console.log('[Validator] ✅ 이슈 없음');
+    }
+  } catch (err) {
+    console.error('[Validator] 파사드 호출 실패, 발행 계속:', err);
+  }
+}
+
+/**
+ * Compute the RECENT_WINNERS few-shot block to inject into buildFullPrompt.
+ * Returns empty string when feature disabled OR insufficient samples (N<5).
+ * Caller's responsibility to resolve postId → title/intro text; for now we
+ * look it up from previousTitles if available.
+ */
+function buildRecentWinnersBlock(source: any): string {
+  if (!isFeatureEnabled('feedback_loop')) return '';
+  try {
+    const previousMap: Record<string, string> = source?.__previousTitleMap || {};
+    const resolver = (postId: string) => {
+      const title = previousMap[postId];
+      if (!title) return null;
+      return { title, intro: '' };
+    };
+    const winners = extractRecentWinners(resolver);
+    return formatWinnersForPrompt(winners);
+  } catch (err) {
+    console.error('[RecentWinners] 추출 실패, 빈 블록 사용:', err);
+    return '';
   }
 }
 
@@ -3067,7 +3139,7 @@ function evaluateTitleQuality(title: string, keyword: string, mode: PromptMode, 
 
 async function generateHomefeedIntroOnlyPatch(source: ContentSource, current: StructuredContent, provider?: string): Promise<{ introduction?: string } | null> {
   const categoryHint = source.categoryHint as string | undefined;
-  const systemPrompt = buildFullPrompt('homefeed', categoryHint, false, undefined, undefined, (source as any).hookHint);
+  const systemPrompt = buildFullPrompt('homefeed', categoryHint, false, undefined, undefined, (source as any).hookHint, buildRecentWinnersBlock(source));
   const selectedTitle = String(current?.selectedTitle || '').trim();
 
   const schema = `Output ONLY valid JSON. NO markdown.\n\n{\n  "introduction": "string"\n}`;
@@ -3249,6 +3321,7 @@ function finalizeStructuredContent(content: StructuredContent, source: ContentSo
     applyHomefeedNarrativeHookBlock(finalContent, source);
     try { applyOrdinalHeadingMarkerFix(finalContent); } catch { /* ignore */ }
 
+    runPostGenValidator(finalContent, source);
     return finalContent;
   }
 
@@ -3349,6 +3422,7 @@ function finalizeStructuredContent(content: StructuredContent, source: ContentSo
     }
   }
 
+  runPostGenValidator(finalContent, source);
   return finalContent;
 }
 
@@ -4415,7 +4489,7 @@ ${source.customPrompt.trim()}
     const reviewAvailable = isReviewAvailable(source.productReviews);
     const reviewGuardOn = isReviewGuardEnabled();
 
-    systemPromptResult = buildFullPrompt('seo', source.categoryHint, source.isFullAuto, toneStyle, productInfoForPrompt, (source as any).hookHint);
+    systemPromptResult = buildFullPrompt('seo', source.categoryHint, source.isFullAuto, toneStyle, productInfoForPrompt, (source as any).hookHint, buildRecentWinnersBlock(source));
 
     // ✅ .prompt 파일에서 쇼핑 프롬프트 로드 (articleType 기반 분기)
     // SPEC-REVIEW-001 option C: "사용후기" mode is logically inconsistent with
@@ -4465,7 +4539,8 @@ ${source.customPrompt.trim()}
       source.isFullAuto,
       toneStyle,
       undefined,
-      (source as any).hookHint
+      (source as any).hookHint,
+      buildRecentWinnersBlock(source)
     );
   }
 
