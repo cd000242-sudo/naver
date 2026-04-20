@@ -43,12 +43,14 @@
   - ⚠️ UX 실물 QA 미완료: Electron 렌더러 GUI는 `npm run dev`로 수동 확인 필요
 - [ ] [후속] 썸네일 ON/OFF A/B 대시보드
 
-### W3 — 공식 API 기반 성과 수집 (예정)
+### W3 — 성과 수집 저장소 + 코호트 분석 (완료: 2026-04-20)
 
-- [ ] 네이버 서치어드바이저 API 연동 (스크래핑 금지)
-- [ ] `analytics/postAnalytics.ts` 확장: 24h/72h 스냅샷 저장
-- [ ] SQLite 대신 JSON append-only (`post_metrics.json`) MVP 유지
-- [ ] featureFlagTracker 메타와 join 키: postId
+- [x] `src/analytics/postMetricsStore.ts`: append-only JSON 저장소. source 필드로 `manual / search_advisor / analytics_api / unknown` 구분. 스크래핑 경로 영구 차단.
+- [x] `src/analytics/cohortAnalyzer.ts`: featureFlagTracker × postMetricsStore join. compareCohort / rankFeaturesByImpact API. latest-per-post 중복 제거.
+- [x] 테스트 13 + 6 = 19 cases. Red-Green-Red 검증. 전체 412/412 PASS. tsc 0 에러.
+- [ ] [후속] 네이버 서치어드바이저 공식 OpenAPI 연동 훅 (source='search_advisor' 자동 주입)
+- [ ] [후속] 수동 입력 UI (사용자가 블로그 admin 통계를 복사 붙여넣기)
+- [ ] [후속] 일일 배치로 postMetricsStore → cohortAnalyzer 리포트 생성
 
 ### W4 — 피드백 루프 + 스케줄러 (예정)
 
