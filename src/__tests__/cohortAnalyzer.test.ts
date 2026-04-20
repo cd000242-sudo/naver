@@ -106,6 +106,118 @@ describe('compareCohort — latest-per-post deduplication', () => {
   });
 });
 
+describe('compareCohort — timeWindow (SEO W3)', () => {
+  function seedWithPublishDate(postId: string, validatorOn: boolean, views: number, publishedAt: string, checkedAt: string, aiBriefingCited?: boolean) {
+    recordPublish({
+      postId,
+      publishedAt,
+      featuresEnabled: validatorOn ? ['validator'] : [],
+      promptVersion: 'test-v1',
+      validationPassed: true,
+      validationIssueCount: 0,
+    });
+    appendMetric({
+      postId,
+      checkedAt,
+      views,
+      likes: 0,
+      comments: 0,
+      source: 'manual',
+      aiBriefingCited,
+    });
+  }
+
+  it('filters snapshots to "early" window (D+0~D+3)', () => {
+    seedWithPublishDate('early-1', true, 100, '2026-04-01T00:00:00Z', '2026-04-02T00:00:00Z');
+    seedWithPublishDate('late-1', true, 500, '2026-04-01T00:00:00Z', '2026-04-15T00:00:00Z');
+    const cmp = compareCohort('validator', 1000, 'early');
+    expect(cmp.enabled.sampleSize).toBe(1);
+    expect(cmp.enabled.avgViews).toBe(100);
+  });
+
+  it('filters snapshots to "validation" window (D+7~D+14)', () => {
+    seedWithPublishDate('early-2', true, 100, '2026-04-01T00:00:00Z', '2026-04-02T00:00:00Z');
+    seedWithPublishDate('val-2', true, 500, '2026-04-01T00:00:00Z', '2026-04-10T00:00:00Z');
+    const cmp = compareCohort('validator', 1000, 'validation');
+    expect(cmp.enabled.sampleSize).toBe(1);
+    expect(cmp.enabled.avgViews).toBe(500);
+  });
+
+  it('"all" window (default) includes everything', () => {
+    seedWithPublishDate('any-1', true, 100, '2026-04-01T00:00:00Z', '2026-04-02T00:00:00Z');
+    seedWithPublishDate('any-2', true, 500, '2026-04-01T00:00:00Z', '2026-04-30T00:00:00Z');
+    const cmp = compareCohort('validator');
+    expect(cmp.enabled.sampleSize).toBe(2);
+  });
+
+  it('respects explicit daysSincePublish when provided', () => {
+    recordPublish({
+      postId: 'explicit',
+      publishedAt: '2026-04-01T00:00:00Z',
+      featuresEnabled: ['validator'],
+      promptVersion: 't',
+      validationPassed: true,
+      validationIssueCount: 0,
+    });
+    appendMetric({
+      postId: 'explicit',
+      checkedAt: '2999-01-01T00:00:00Z', // far future to prove override works
+      views: 999,
+      likes: 0,
+      comments: 0,
+      source: 'manual',
+      daysSincePublish: 10, // explicit override falls in validation window
+    });
+    const cmp = compareCohort('validator', 1000, 'validation');
+    expect(cmp.enabled.sampleSize).toBe(1);
+    expect(cmp.enabled.avgViews).toBe(999);
+  });
+});
+
+describe('compareCohort — AI briefing citation rate (SEO W3)', () => {
+  function seedWithCitation(postId: string, validatorOn: boolean, cited: boolean) {
+    recordPublish({
+      postId,
+      publishedAt: '2026-04-01T00:00:00Z',
+      featuresEnabled: validatorOn ? ['validator'] : [],
+      promptVersion: 'test-v1',
+      validationPassed: true,
+      validationIssueCount: 0,
+    });
+    appendMetric({
+      postId,
+      checkedAt: '2026-04-10T00:00:00Z',
+      views: 100,
+      likes: 0,
+      comments: 0,
+      source: 'manual',
+      aiBriefingCited: cited,
+    });
+  }
+
+  it('computes citation rate when data is present', () => {
+    seedWithCitation('a', true, true);
+    seedWithCitation('b', true, false);
+    seedWithCitation('c', true, true);
+    const cmp = compareCohort('validator');
+    expect(cmp.enabled.aiBriefingCitationRate).toBeCloseTo(2 / 3, 2);
+  });
+
+  it('returns null citation rate when no metric has the flag set', () => {
+    seed('plain-a', true, 100); // no aiBriefingCited
+    seed('plain-b', true, 200);
+    const cmp = compareCohort('validator');
+    expect(cmp.enabled.aiBriefingCitationRate).toBeNull();
+  });
+
+  it('citationRateDelta is null when one side lacks data', () => {
+    seedWithCitation('e-a', true, true);
+    seed('d-a', false, 100);
+    const cmp = compareCohort('validator');
+    expect(cmp.citationRateDelta).toBeNull();
+  });
+});
+
 describe('rankFeaturesByImpact', () => {
   it('sorts features with data first, by delta desc, nulls last', () => {
     seed('v-a', true, 200);

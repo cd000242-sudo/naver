@@ -24,6 +24,7 @@ import { measureAiFingerprint } from '../authgrDefense.js';
 import { scanDefinitionFirstSentences } from '../validators/seo/definitionFirstSentenceScanner.js';
 import { scanMainKeywordPosition } from '../validators/seo/mainKeywordPositionScanner.js';
 import { scanFaqHeadings } from '../validators/seo/faqHeadingScanner.js';
+import { scanLongtailDepth } from '../validators/seo/longtailDepthScanner.js';
 
 export type IssueSeverity = 'critical' | 'warning' | 'info';
 
@@ -36,7 +37,8 @@ export type IssueCategory =
   // ✅ [2026-04-20 SPEC-SEO-100 W1] SEO-specific categories
   | 'seo_definition_first'
   | 'seo_keyword_position'
-  | 'seo_faq_heading';
+  | 'seo_faq_heading'
+  | 'seo_longtail_depth';
 
 export interface ValidationIssue {
   severity: IssueSeverity;
@@ -59,6 +61,9 @@ export interface ValidationMetrics {
   seoDefinitionHitRatio: number | null;
   seoKeywordDensity: number | null;
   seoFaqHeadingCount: number | null;
+  // ✅ [2026-04-20 SPEC-SEO-100 W4] Long-tail depth
+  seoLongtailWordCount: number | null;
+  seoLongtailConcretenessSignals: number | null;
 }
 
 export interface ValidationResult {
@@ -247,6 +252,8 @@ export function validateContent(
   let seoDefinitionHitRatio: number | null = null;
   let seoKeywordDensity: number | null = null;
   let seoFaqHeadingCount: number | null = null;
+  let seoLongtailWordCount: number | null = null;
+  let seoLongtailConcretenessSignals: number | null = null;
 
   if (options.mode === 'seo') {
     const defCheck = scanDefinitionFirstSentences(content);
@@ -293,6 +300,22 @@ export function validateContent(
         hint: 'AI 브리핑 인용 확률 2배 상승 구간',
       });
     }
+
+    // ✅ [SEO W4] Long-tail depth scanner
+    const longtailCheck = scanLongtailDepth(
+      options.title ?? '',
+      options.mainKeyword ?? '',
+      flat,
+    );
+    seoLongtailWordCount = longtailCheck.keywordWordCount;
+    seoLongtailConcretenessSignals = longtailCheck.bodyConcretenessSignals;
+    for (const warning of longtailCheck.warnings) {
+      issues.push({
+        severity: 'warning',
+        category: 'seo_longtail_depth',
+        message: warning,
+      });
+    }
   }
 
   const criticalCount = issues.filter((i) => i.severity === 'critical').length;
@@ -307,6 +330,8 @@ export function validateContent(
     seoDefinitionHitRatio,
     seoKeywordDensity,
     seoFaqHeadingCount,
+    seoLongtailWordCount,
+    seoLongtailConcretenessSignals,
   };
 
   return {

@@ -38,6 +38,18 @@ export interface PostMetricSnapshot {
   homefeedViews?: number;
   /** Search-referred visit count; optional. */
   searchViews?: number;
+  /**
+   * ✅ [2026-04-20 SPEC-SEO-100 W3] AI 브리핑(CUE:) 인용 여부.
+   * 사용자가 네이버 검색 결과에서 자기 글이 AI 요약 상단에 출처로
+   * 언급됐는지 수동 체크. SEO 상위 노출의 강력한 지표.
+   */
+  aiBriefingCited?: boolean;
+  /**
+   * ✅ [2026-04-20 SPEC-SEO-100 W3] 발행 후 며칠째 스냅샷인지.
+   * 2주 검증 루프를 추적하려면 D+1, D+7, D+14 같은 지점에서 비교해야 한다.
+   * 생략 시 analytics 계층이 publishedAt - checkedAt으로 계산.
+   */
+  daysSincePublish?: number;
   /** Where this row came from — callers MUST set this explicitly. */
   source: MetricSource;
   /** Free-form note, never load-bearing. */

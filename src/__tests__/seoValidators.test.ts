@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { scanDefinitionFirstSentences } from '../validators/seo/definitionFirstSentenceScanner';
 import { scanMainKeywordPosition } from '../validators/seo/mainKeywordPositionScanner';
 import { scanFaqHeadings } from '../validators/seo/faqHeadingScanner';
+import { scanLongtailDepth } from '../validators/seo/longtailDepthScanner';
 import { validateContent } from '../services/contentValidationPipeline';
 import type { CheckableContent } from '../contentQualityChecker';
 
@@ -155,6 +156,59 @@ describe('scanFaqHeadings', () => {
     const result = scanFaqHeadings(content);
     expect(result.questionHeadingCount).toBe(0);
     expect(result.withinRecommendedRange).toBe(false);
+  });
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// longtailDepthScanner (W4)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+describe('scanLongtailDepth (W4)', () => {
+  it('warns on 1-word keyword shorter than 6 chars', () => {
+    const result = scanLongtailDepth('짧은 제목', '청년', '본문 텍스트');
+    expect(result.keywordWordCount).toBe(1);
+    expect(result.isLonggetail).toBe(false);
+    expect(result.warnings.some((w) => w.includes('1어절'))).toBe(true);
+  });
+
+  it('does not warn on a 3-word long-tail keyword', () => {
+    const result = scanLongtailDepth(
+      '청년도약계좌 우대형 중소기업 가입 조건 2026',
+      '청년도약계좌 우대형 중소기업',
+      '우대금리 조건은 소득 구간별로 달라집니다. 5년 만기 시 2200만원 수령 가능해요.',
+    );
+    expect(result.keywordWordCount).toBe(3);
+    expect(result.isLonggetail).toBe(true);
+    expect(result.warnings.some((w) => w.includes('1어절'))).toBe(false);
+  });
+
+  it('detects title modifiers (numeric/target/condition)', () => {
+    const result = scanLongtailDepth(
+      '자동차세 연납 1월 마감, 4.57% 할인',
+      '자동차세 연납',
+      'body',
+    );
+    expect(result.modifiersFound.length).toBeGreaterThanOrEqual(2);
+    expect(result.titleHasModifier).toBe(true);
+  });
+
+  it('flags title without any modifier', () => {
+    const result = scanLongtailDepth(
+      '일반 제목',
+      '일반 제목 키워드 조합',
+      'body',
+    );
+    expect(result.titleHasModifier).toBe(false);
+    expect(result.warnings.some((w) => w.includes('구체 한정어'))).toBe(true);
+  });
+
+  it('counts body concreteness signals', () => {
+    const result = scanLongtailDepth(
+      '청년도약계좌 우대형 중소기업 조건',
+      '청년도약계좌 우대형 중소기업',
+      '5년 만에 만기. 30% 할인 적용. 조건 3가지 확인.',
+    );
+    expect(result.bodyConcretenessSignals).toBeGreaterThanOrEqual(2);
   });
 });
 

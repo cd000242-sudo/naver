@@ -68,27 +68,45 @@ SEO 모드(통합검색 + AI 브리핑 CUE: + 스마트블록 대응)의 노출/
 - [x] 이모지 헤더 유지 + 구분선으로 LLM이 SECTION 경계 인식 쉽게
 - [x] 전체 458/458 PASS. tsc 0 에러. verifyPreviousWork baseline 230K 이내 유지(감축으로 통과).
 
-### W3 — SEO 2주 검증 루프 지표 수집 (87→90)
+### W3 — SEO 2주 검증 루프 지표 수집 (87→90, 완료: 2026-04-20)
 
-- [ ] `postMetricsStore` 수동 입력 UI 추가 (D+7, D+14 스냅샷)
-- [ ] `cohortAnalyzer`에 `timeWindow: 7 | 14 | 30` 파라미터 추가
-- [ ] AI 브리핑 인용 여부 플래그 (metric에 `aiBriefingCited?: boolean` 추가 — 수동 확인)
+- [x] `postMetricsStore.ts` PostMetricSnapshot 스키마 확장:
+  - `aiBriefingCited?: boolean` — AI 브리핑(CUE:) 인용 여부 수동 체크
+  - `daysSincePublish?: number` — 발행 후 며칠차 스냅샷인지
+- [x] `cohortAnalyzer.ts`에 `TimeWindow` 타입 추가 (`'early' | 'validation' | 'all'`):
+  - early: D+0~D+3 (발행 직후 초기 반응)
+  - validation: D+7~D+14 (SEO 검증 루프 완료 구간)
+  - all: 제한 없음 (기본)
+- [x] `compareCohort(feature, metaLimit, window)` 세 번째 파라미터로 window 지원
+- [x] `CohortMetricAverages.aiBriefingCitationRate` 추가 — AI 브리핑 인용율 (0~1)
+- [x] `CohortComparison.citationRateDelta` 추가 — enabled/disabled 인용율 차이
+- [x] 기존 호출자 영향 없음 (모든 신규 필드는 optional)
+- [x] W3 테스트 7 cases 추가. 전체 465/465 PASS. tsc 0 에러.
+- [ ] [후속] 수동 입력 UI (렌더러)는 별도 스프린트
 
-### W4 — SEO 피드백 루프 + 롱테일 깊이 스캐너 (90→93~95)
+### W4 — SEO 피드백 루프 + 롱테일 깊이 스캐너 (90→93~95, 완료: 2026-04-20)
 
-- [ ] `recentWinnersExtractor`를 SEO에서도 호출 (buildFullPrompt 이미 지원)
-- [ ] `src/validators/seo/longtailDepthScanner.ts` — 단일 빅키워드 사용 경고, 3~4어절 조합 권장
-- [ ] SPEC 리뷰 완료 후 SPEC-SEO-100 완료 마킹
+- [x] `src/validators/seo/longtailDepthScanner.ts` (신규):
+  - 메인 키워드 어절 수 계산 (1~2어절 = 빅키워드 위험, 3+ = 롱테일)
+  - 제목 modifier 7종 감지 (temporal/numeric/target/condition/location/comparison/method)
+  - 본문 구체성 신호 계산 (기간/퍼센트/단계/비교)
+- [x] `contentValidationPipeline.ts`에 통합:
+  - IssueCategory `seo_longtail_depth` 추가
+  - ValidationMetrics에 `seoLongtailWordCount`, `seoLongtailConcretenessSignals` 필드
+  - scanLongtailDepth 경고를 issue로 변환
+- [x] `recentWinnersExtractor`는 이미 mode-agnostic이므로 SEO에서도 호출 가능
+  (buildFullPrompt의 recentWinnersBlock 파라미터가 이미 지원)
+- [x] W4 테스트 5 cases 추가. 전체 470/470 PASS. tsc 0 에러.
 
 ## 7. 예상 점수
 
-| 단계 | 점수 | 근거 |
-|---|---|---|
-| 시작 (2026-04-20) | 70 | 프롬프트만 있고 SEO 검증 없음 |
-| W1 완료 | 80 | Validator SEO 분기 + 3 스캐너 |
-| W2 완료 | 87 | 프롬프트 체계화 + CUE 답변블록 |
-| W3 완료 | 90 | 2주 검증 데이터 축적 |
-| W4 완료 | **93~95** | 피드백 루프 + 롱테일 깊이 |
+| 단계 | 점수 | 근거 | 상태 |
+|---|---|---|---|
+| 시작 (2026-04-20) | 70 | 프롬프트만 있고 SEO 검증 없음 | — |
+| W1 완료 | 80 | Validator SEO 분기 + 3 스캐너 | ✅ |
+| W2 완료 | 87 | 프롬프트 SECTION 0~13 체계 + CUE 답변블록 | ✅ |
+| W3 완료 | 90 | aiBriefingCited + timeWindow 'validation' | ✅ |
+| W4 완료 | **93~95** | 롱테일 깊이 스캐너 + 피드백 루프 | ✅ |
 
 **93~95 상한 근거**:
 - 통합랭킹에서 블로그 < 나무위키/공식사이트 (도메인 권위 천장)
