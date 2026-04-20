@@ -69,6 +69,53 @@ describe('Price-zero bug reproduction — prompt must not render invalid prices'
   }
 });
 
+describe('recentWinnersBlock — feedback loop few-shot injection (W4)', () => {
+  const sampleWinnersBlock = `[RECENT_WINNERS — 최근 성과 상위 글 패턴 (참조용, 복사 금지)]
+예시 1 (조회 1,500):
+  제목: 이 제품 3주 써보고 든 솔직한 생각
+  도입부: 처음엔 반신반의했는데 2주차부터 확 달라졌어요.`;
+
+  it('injects the winners block when provided', () => {
+    const prompt = buildFullPrompt(
+      'homefeed',
+      'it',
+      false,
+      'friendly',
+      undefined,
+      undefined,
+      sampleWinnersBlock,
+    );
+    expect(prompt).toContain('RECENT_WINNERS');
+    expect(prompt).toContain('이 제품 3주 써보고 든 솔직한 생각');
+    expect(prompt).toContain('복사 금지');
+  });
+
+  it('omits the winners block when undefined', () => {
+    const prompt = buildFullPrompt('homefeed', 'it', false, 'friendly');
+    expect(prompt).not.toContain('RECENT_WINNERS');
+  });
+
+  it('omits the winners block when empty string', () => {
+    const prompt = buildFullPrompt('homefeed', 'it', false, 'friendly', undefined, undefined, '');
+    expect(prompt).not.toContain('RECENT_WINNERS');
+  });
+
+  it('combines with hookHint when both are provided', () => {
+    const prompt = buildFullPrompt(
+      'homefeed',
+      'it',
+      false,
+      'friendly',
+      undefined,
+      '3주 써보니 달라졌어요',
+      sampleWinnersBlock,
+    );
+    expect(prompt).toContain('RECENT_WINNERS');
+    expect(prompt).toContain('[사용자 후킹 1문장');
+    expect(prompt).toContain('3주 써보니 달라졌어요');
+  });
+});
+
 describe('hookHint — user-provided 1-sentence hook injection (W2)', () => {
   it('injects the hook block when provided', () => {
     const prompt = buildFullPrompt(
