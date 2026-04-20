@@ -10,6 +10,8 @@ import { getChromiumExecutablePath } from '../browserUtils.js';
 import type { TableRow } from '../image/tableImageGenerator.js';
 // ✅ [100점 개선] 공식 네이버 쇼핑 API import (429 에러 시 폴백용)
 import { searchShopping, stripHtmlTags, type ShoppingItem } from '../naverSearchApi.js';
+// ✅ [2026-04-21] 네이버 스토어 가격 다중 폴백 (난독화 class 변경 대응)
+import { extractNaverStorePrice } from './naverStorePriceExtractor.js';
 
 puppeteer.use(StealthPlugin());
 
@@ -2456,6 +2458,23 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
 
             return { productName, price, ogImage, ogDesc, specs };
           }, sels);
+
+          // ✅ [2026-04-21] 가격이 비었거나 "0원"으로 잡혔으면 다중 폴백 실행
+          const priceDigits = String(productData.price || '').replace(/[^\d]/g, '');
+          const priceIsInvalid = !priceDigits || parseInt(priceDigits, 10) === 0;
+          if (priceIsInvalid) {
+            try {
+              const fallbackResult = await bcPage.evaluate(extractNaverStorePrice);
+              if (fallbackResult?.price) {
+                console.log(`[AffiliateCrawler] 🔄 가격 폴백 성공 (stage ${fallbackResult.stage}=${fallbackResult.stageLabel}): ${fallbackResult.price}`);
+                productData.price = fallbackResult.price;
+              } else {
+                console.log(`[AffiliateCrawler] ⚠️ 가격 폴백 5단계 전부 실패 — 가격 미수집 상태로 진행`);
+              }
+            } catch (fbErr) {
+              console.log(`[AffiliateCrawler] ⚠️ 가격 폴백 호출 오류: ${(fbErr as Error).message}`);
+            }
+          }
 
 
           // 갤러리 이미지 수집 (썸네일 클릭)
