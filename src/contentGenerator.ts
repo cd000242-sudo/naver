@@ -193,6 +193,18 @@ export function stripAllFormatting(text: string): string {
   // 7. ✅ [2026-03-09] AI 인용 번호 제거: [1], [2, 3] 등
   cleaned = cleaned.replace(/\s*\[\d+(?:\s*,\s*\d+)*\]\s*/g, ' ');
 
+  // 8. ✅ [v1.4.82] <style>...</style> 블록 + CSS 덤프 텍스트 제거
+  //    AI가 HTML을 생성할 때 <style> 태그를 포함하면 네이버 에디터가 태그만 제거하고
+  //    CSS 본문이 일반 텍스트로 붙어버려 "/* 애드센스 승인 전용 CSS */ .post-body { ... }"
+  //    같은 문자열이 본문에 그대로 렌더링되는 버그 차단.
+  cleaned = cleaned.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+  // CSS 주석 블록 + 셀렉터 본문 제거 — /* 주석 */ .selector { ...; } 형태
+  cleaned = cleaned.replace(/\/\*[\s\S]*?\*\//g, '');
+  // 셀렉터 + 속성블록 제거 — ".class, #id { prop: value; }" 같은 순수 CSS 덩어리
+  cleaned = cleaned.replace(/(?:^|\n)\s*[.#]?[a-zA-Z][\w\-]*(?:\s*,\s*[.#]?[a-zA-Z][\w\-]*)*\s*\{[^{}]*\}\s*/g, '\n');
+  // @keyframes / @media 블록 제거
+  cleaned = cleaned.replace(/@(?:keyframes|media|supports|import|charset)[^{]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/gi, '');
+
   return cleaned.trim();
 }
 
@@ -2615,6 +2627,14 @@ async function generateTitleOnlyPatch(source: ContentSource, mode: PromptMode, c
       '2. 체험 표현은 "직접 써본", "꾸준히 써본", "오래 써본", "써보니", "써본 후기" 사용\n' +
       '3. 구체성이 필요하면 금액/비율/개수/조건/방법/대상/비교 등을 사용\n' +
       '4. 위 규칙 위반 시 제목 후보는 0점 처리됩니다.\n';
+
+    // ✅ [v1.4.82] 현재 년도를 컨텍스트로 주입 — "오랜 기간" 마스킹으로 AI가 년도를 모르는 문제 해결
+    // 정부지원금/법규/시즌성 글에서 "2026년 정부 지원금" 같은 년도 표기 필요 시 AI가 실제 년도 사용
+    const __currentYear = new Date().getFullYear();
+    titlePrompt += `\n\n📅 [현재 년도 컨텍스트] 지금은 ${__currentYear}년입니다.\n` +
+      `시즌성/연도 기반 콘텐츠(정부지원금/법규/트렌드/연도별 정보)에서 년도를 표기할 때는\n` +
+      `반드시 "${__currentYear}년" 형태로 정확히 쓰세요. "올해", "최신", "현재" 같은 추상 표현보다\n` +
+      `구체적인 년도 숫자가 SEO/신뢰도 관점에서 유리합니다. (단, 체험 기간은 여전히 금지)\n`;
   }
 
   // ✅ [v1.4.47] 기본 규칙 (프롬프트 로드 실패 시 폴백) — 하드코딩된 기간 예시 제거

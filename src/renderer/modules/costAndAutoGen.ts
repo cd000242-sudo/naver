@@ -330,14 +330,22 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
   // legacy UI-state probe. Data-based detection is required because the
   // image tab collapses the shopping-connect settings panel, which flips
   // the UI probe to false even when the post was crawled from an affiliate.
+  // ✅ [v1.4.82] stale productInfo/crawledProductInfo 때문에 비쇼핑 글에서도
+  //   쇼핑커넥트가 false-triggering되어 사용자가 선택한 이미지 엔진(ImageFX 등)이
+  //   nano-banana-pro로 강제 전환되는 버그 수정:
+  //   - contentMode가 명시적으로 'affiliate'일 때만 data-marker를 신뢰
+  //   - 그 외에는 caller 명시 플래그 또는 UI probe만 사용
   const sc = currentStructuredContent as any;
-  const dataShoppingActive = !!(sc?.productInfo || sc?.affiliateLink || (window as any)?.crawledProductInfo);
+  const explicitAffiliateMode = (options.contentMode === 'affiliate')
+    || ((window as any)?.currentContentMode === 'affiliate');
+  const dataShoppingActive = explicitAffiliateMode
+    && !!(sc?.productInfo || sc?.affiliateLink || (window as any)?.crawledProductInfo);
   const isShoppingConnect = options.isShoppingConnect === true
     || dataShoppingActive
-    || isShoppingConnectModeActive();
+    || (explicitAffiliateMode && isShoppingConnectModeActive());
   options.isShoppingConnect = isShoppingConnect; // 메인 프로세스에도 전달
 
-  console.log(`[Renderer] 🛒 isShoppingConnect 결정: ${isShoppingConnect} (전달값: ${options.isShoppingConnect}, UI: ${isShoppingConnectModeActive()}, 데이터: ${dataShoppingActive})`);
+  console.log(`[Renderer] 🛒 isShoppingConnect 결정: ${isShoppingConnect} (전달값: ${options.isShoppingConnect}, UI: ${isShoppingConnectModeActive()}, 데이터: ${dataShoppingActive}, affiliateMode: ${explicitAffiliateMode})`);
 
   if (isShoppingConnect) {
     // ✅ [FIX] 빈 배열도 체크: collectedImages가 없거나 빈 배열이면 currentStructuredContent.images 사용
