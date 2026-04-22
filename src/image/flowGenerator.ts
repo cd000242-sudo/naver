@@ -1,16 +1,18 @@
 /**
- * ✅ [v1.4.80] Google Labs Flow 이미지 생성기 (Nano Banana Pro)
+ * ✅ [v1.4.88] Google Labs Flow 이미지 생성기 — UI 자동화 방식
  *
- * 아키텍처 (ImageFX와 동일 패턴 — labs.google 세션 공유):
- *   1. AdsPower/Playwright 브라우저로 labs.google/flow 접속
+ * 아키텍처 (ImageFX와 동일 패턴 — DOM 자동화로 완전 재작성):
+ *   1. AdsPower/Playwright 브라우저로 labs.google/fx/tools/flow 접속
  *   2. ImageFX와 동일한 Google OAuth 세션 재사용 (쿠키 공유)
- *   3. aisandbox-pa.googleapis.com 내부 API 직접 호출
- *   4. 첫 실행 시 네트워크 인터셉트로 실제 엔드포인트/페이로드 자동 학습
- *      → 이후 동일 계정/세션에서 재사용 (구글 UI 변경에 강건)
+ *   3. UI 자동화: 프롬프트 입력 → "만들기" 클릭 → 이미지 URL 획득 → 다운로드
  *
- * 모델: Nano Banana Pro (gemini-3-pro-image-preview) — Flow 무료 쿼터 활용
- * 쿼터: Google AI Pro 구독 기준 하루 50~100장+ (실측 필요)
- * 비용: $0 (계정 쿼터 내), 쿼터 초과 시 HTTP 429 → 폴백
+ * 왜 UI 자동화인가:
+ *   - API 직접 호출은 recaptchaContext.token이 페이지 내부에서 동적 생성되어 외부 복제 불가
+ *   - 실제 엔드포인트: POST /v1/projects/{projectId}/flowMedia:batchGenerateImages (tool=PINHOLE, imageModelName=NARWHAL)
+ *   - UI 자동화는 Google이 구조를 바꿔도 셀렉터만 갱신하면 되어 훨씬 견고
+ *
+ * 모델: Nano Banana 2 (Flow 기본, 내부명 NARWHAL)
+ * 비용: $0 (AI Pro 쿼터 내)
  */
 
 import type { ImageRequestItem, GeneratedImage } from './types.js';
@@ -18,9 +20,6 @@ import { writeImageFile } from './imageUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 import type { Browser, Page } from 'playwright';
-import * as fs from 'fs';
-import * as path from 'path';
-import { app } from 'electron';
 
 // ─── 로깅 ────────────────────────────────────────────────
 function sendImageLog(message: string): void {
@@ -35,104 +34,10 @@ function sendImageLog(message: string): void {
 // ─── 캐시 (세션 재사용) ────────────────────────────────────
 let cachedBrowser: Browser | null = null;
 let cachedPage: Page | null = null;
-let cachedToken: string | null = null;
-let cachedTokenExpiry: Date | null = null;
+let cachedProjectUrl: string | null = null;
 let _enabled: boolean = false;
 
-// ✅ [v1.4.87] 자동 학습 재시도 제어 — 영구 잠금 대신 카운터 + 쿨다운으로 완화
-//   이전: _discoveryAttemptedThisSession = true 이후 세션 종료까지 Flow 영구 마비
-//   현재: 최대 3회 실패 시 10분 쿨다운 → 이후 자동 재시도 허용
-const DISCOVERY_MAX_ATTEMPTS = 3;
-const DISCOVERY_COOLDOWN_MS = 10 * 60 * 1000; // 10분
-let _discoveryAttempts = 0;
-let _discoveryCooldownUntil: number = 0;
-
-function canAttemptDiscovery(): boolean {
-    if (Date.now() < _discoveryCooldownUntil) return false;
-    if (_discoveryAttempts >= DISCOVERY_MAX_ATTEMPTS) {
-        _discoveryCooldownUntil = Date.now() + DISCOVERY_COOLDOWN_MS;
-        _discoveryAttempts = 0;
-        console.warn(`[Flow] 🧊 학습 ${DISCOVERY_MAX_ATTEMPTS}회 실패 → 10분 쿨다운 진입`);
-        return false;
-    }
-    return true;
-}
-
-function recordDiscoveryAttempt(success: boolean): void {
-    if (success) {
-        _discoveryAttempts = 0;
-        _discoveryCooldownUntil = 0;
-    } else {
-        _discoveryAttempts += 1;
-    }
-}
-
-// ─── 자동 학습 API 메타데이터 ──────────────────────────────
-interface FlowApiMetadata {
-    endpoint: string;           // 실측 엔드포인트 (예: https://aisandbox-pa.googleapis.com/v1:runImageGeneration)
-    modelNameType: string;      // 실측 모델 이름 (예: IMAGEN_4_PRO, NANO_BANANA_PRO)
-    requestTemplate: any;       // 요청 JSON 템플릿 구조
-    responseImagePath: string;  // 응답에서 base64 찾는 경로 (예: imagePanels.0.generatedImages.0.encodedImage)
-    learnedAt: string;
-    version: number;            // 스키마 버전 (변경 시 재학습)
-}
-
-const FLOW_API_CACHE_FILE = 'flow-api-metadata.json';
-const SCHEMA_VERSION = 1;
-
-function getCachePath(): string {
-    try {
-        return path.join(app.getPath('userData'), FLOW_API_CACHE_FILE);
-    } catch {
-        return path.join(require('os').homedir(), '.naver-blog-automation', FLOW_API_CACHE_FILE);
-    }
-}
-
-function loadApiMetadata(): FlowApiMetadata | null {
-    try {
-        const p = getCachePath();
-        if (!fs.existsSync(p)) return null;
-        const data = JSON.parse(fs.readFileSync(p, 'utf-8')) as FlowApiMetadata;
-        if (data.version !== SCHEMA_VERSION) return null;
-        return data;
-    } catch { return null; }
-}
-
-function saveApiMetadata(meta: FlowApiMetadata): void {
-    try {
-        fs.writeFileSync(getCachePath(), JSON.stringify(meta, null, 2), 'utf-8');
-        console.log(`[Flow] 📘 API 메타데이터 저장: ${meta.endpoint}`);
-    } catch (err) {
-        console.warn(`[Flow] ⚠️ 메타 저장 실패: ${(err as Error).message}`);
-    }
-}
-
-// ─── 비율 매핑 ──────────────────────────────────────────
-const ASPECT_RATIO_MAP: Record<string, string> = {
-    '1:1': 'IMAGE_ASPECT_RATIO_SQUARE',
-    'square': 'IMAGE_ASPECT_RATIO_SQUARE',
-    '9:16': 'IMAGE_ASPECT_RATIO_PORTRAIT',
-    'portrait': 'IMAGE_ASPECT_RATIO_PORTRAIT',
-    '16:9': 'IMAGE_ASPECT_RATIO_LANDSCAPE',
-    'landscape': 'IMAGE_ASPECT_RATIO_LANDSCAPE',
-    '4:3': 'IMAGE_ASPECT_RATIO_LANDSCAPE_FOUR_THREE',
-};
-
-// ─── 알려진 엔드포인트 폴백 풀 (학습 실패 시) ─────────────
-const CANDIDATE_ENDPOINTS = [
-    'https://aisandbox-pa.googleapis.com/v1:runImageGeneration',
-    'https://aisandbox-pa.googleapis.com/v1:runImageFx',
-    'https://aisandbox-pa.googleapis.com/v1:runBananaImage',
-];
-const CANDIDATE_MODEL_NAMES = [
-    'IMAGEN_4_PRO',
-    'IMAGEN_4_ULTRA',
-    'NANO_BANANA_PRO',
-    'GEMINI_IMAGE_3',
-    'IMAGEN_3_5',
-];
-
-// ─── 공개 API ──────────────────────────────────────────
+// ─── 공개 플래그 ─────────────────────────────────────────
 export function setFlowEnabled(enabled: boolean): void {
     _enabled = enabled;
     console.log(`[Flow] 🌐 ${enabled ? '✅ 활성' : '❌ 비활성'}`);
@@ -142,172 +47,136 @@ export function isFlowEnabled(): boolean {
     return _enabled;
 }
 
-/**
- * ✅ 브라우저 + Flow 페이지 확보
- *  - ImageFX와 동일한 AdsPower/Playwright 세션 공유
- *  - 기존 ImageFX 구현의 헬퍼 재사용 (중복 제거)
- */
+// ─── 브라우저 페이지 확보 (ImageFX 세션 공유) ─────────────────
 async function ensureFlowBrowserPage(): Promise<Page> {
-    // ✅ [v1.4.80 P0] ImageFX 브라우저/세션 공유 — export 확인 후 직접 호출
     const { ensureImageFxBrowserPage } = await import('./imageFxGenerator.js');
     if (typeof ensureImageFxBrowserPage !== 'function') {
-        throw new Error('FLOW_IMAGEFX_BRIDGE_MISSING:ImageFX 세션 공유가 비활성 상태입니다. 앱을 최신 버전으로 업데이트해주세요.');
+        throw new Error('FLOW_IMAGEFX_BRIDGE_MISSING:ImageFX 세션 공유가 비활성 상태입니다. 앱 업데이트 필요.');
     }
     const page = await ensureImageFxBrowserPage();
-
-    // Flow 페이지로 이동 (labs.google 세션 공유 — 추가 로그인 불필요)
-    const currentUrl = page.url();
-    if (!currentUrl.includes('labs.google/flow')) {
-        console.log('[Flow] 🌐 labs.google/flow 접속...');
-        sendImageLog('🌐 [Flow] Google Labs Flow 접속 중...');
-        await page.goto('https://labs.google/flow', {
-            waitUntil: 'networkidle',
-            timeout: 60000,
-        });
-        await page.waitForTimeout(2000);
-    }
-
     cachedPage = page;
     return page;
 }
 
-/**
- * ✅ 세션 토큰 획득 (ImageFX와 완전 동일 경로 — /fx/api/auth/session)
- *  labs.google 도메인 Google OAuth 쿠키 공유
- */
-async function getFlowSessionToken(page: Page): Promise<string> {
-    if (cachedToken && cachedTokenExpiry && cachedTokenExpiry > new Date()) {
-        return cachedToken;
+// ─── Flow 프로젝트 확보 ───────────────────────────────────
+async function ensureFlowProject(page: Page): Promise<void> {
+    const currentUrl = page.url();
+
+    // 이미 프로젝트 페이지이면 그대로 사용
+    if (currentUrl.includes('/tools/flow/project/')) {
+        cachedProjectUrl = currentUrl;
+        return;
     }
 
-    console.log('[Flow] 🔑 세션 토큰 획득...');
-    sendImageLog('🔑 [Flow] Google 세션 토큰 확인 중...');
+    // 캐시된 프로젝트 URL이 있으면 그쪽으로 이동
+    if (cachedProjectUrl) {
+        console.log('[Flow] 🔗 캐시된 프로젝트 재사용');
+        await page.goto(cachedProjectUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+        await page.waitForTimeout(1500);
+        // 이동 성공 확인
+        if (page.url().includes('/tools/flow/project/')) return;
+    }
 
-    // ImageFX와 동일 엔드포인트 — labs.google 도메인 내 어디서든 호출 가능
-    const session = await page.evaluate(async () => {
-        const candidates = [
-            '/fx/api/auth/session',   // ImageFX 경로 (가장 안정)
-            '/flow/api/auth/session', // Flow 전용 (존재 시)
-            '/api/auth/session',      // 기본
-        ];
-        for (const path of candidates) {
-            try {
-                const res = await fetch(path, { credentials: 'include' });
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data.access_token) return data;
-                }
-            } catch { /* 다음 후보 시도 */ }
+    // 새 프로젝트 생성
+    console.log('[Flow] 🆕 Flow 새 프로젝트 생성 중...');
+    sendImageLog('🆕 [Flow] 새 프로젝트 생성 중...');
+    await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await page.waitForTimeout(2000);
+
+    // "새 프로젝트" 버튼 클릭 — 다국어 지원 (ko/en/ja)
+    const newProjectBtn = page.locator('button').filter({ hasText: /새 프로젝트|New project|新しいプロジェクト/ }).first();
+    await newProjectBtn.waitFor({ state: 'visible', timeout: 30000 });
+    await newProjectBtn.click();
+
+    // 프로젝트 URL로 리다이렉트 대기
+    await page.waitForURL(/\/tools\/flow\/project\//, { timeout: 30000 });
+    await page.waitForTimeout(1500);
+    cachedProjectUrl = page.url();
+    console.log(`[Flow] ✅ 프로젝트 준비: ${cachedProjectUrl}`);
+}
+
+// ─── 프롬프트 입력 + 생성 클릭 + 이미지 URL 추출 ────────────────
+async function typePromptAndSubmit(page: Page, prompt: string): Promise<void> {
+    // 기존 프롬프트 지우기 (close 버튼 존재 시)
+    try {
+        const clearBtn = page.locator('button').filter({ hasText: /프롬프트 지우기|Clear prompt/ }).first();
+        if (await clearBtn.count() > 0 && await clearBtn.isVisible().catch(() => false)) {
+            await clearBtn.click();
+            await page.waitForTimeout(300);
         }
-        return { error: 'NO_SESSION_ENDPOINT' };
+    } catch { /* 지울 게 없음 */ }
+
+    // 프롬프트 입력창 (role=textbox, contenteditable) 찾기
+    const promptInput = page.locator('[role="textbox"][contenteditable="true"], div[contenteditable="true"]').first();
+    await promptInput.waitFor({ state: 'visible', timeout: 15000 });
+    await promptInput.click();
+    await promptInput.fill(prompt);
+    await page.waitForTimeout(300);
+
+    // 만들기(arrow_forward) 버튼 — 하단 프롬프트 바의 submit 버튼
+    // 상단에도 'add_2 만들기' 버튼이 있지만 그건 뉴 미디어 드롭다운용. 하단 'arrow_forward 만들기'가 전송.
+    const submitBtn = page.locator('button').filter({ hasText: /arrow_forward/ }).first();
+    await submitBtn.waitFor({ state: 'visible', timeout: 10000 });
+    await submitBtn.click();
+}
+
+// ─── 새 이미지 대기 ────────────────────────────────────────
+async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number = 120000): Promise<string> {
+    const start = Date.now();
+    while (Date.now() - start < timeoutMs) {
+        const srcs = await page.evaluate(() => {
+            return Array.from(document.querySelectorAll('img[alt="생성된 이미지"], img[alt="Generated image"]'))
+                .map((img: any) => img.src)
+                .filter((s) => s && !s.includes('=s96-c'));
+        });
+        if (srcs.length > prevCount) {
+            // 가장 최근 = 첫 번째 또는 마지막 (DOM 순서에 따라 다름). 첫 번째가 최신인 경우가 많음.
+            return srcs[0];
+        }
+        await page.waitForTimeout(1000);
+    }
+    throw new Error('FLOW_IMAGE_TIMEOUT:이미지 생성 120초 초과 — 쿼터 초과/안전필터/네트워크 문제 가능성');
+}
+
+async function countExistingImages(page: Page): Promise<number> {
+    return await page.evaluate(() => {
+        return document.querySelectorAll('img[alt="생성된 이미지"], img[alt="Generated image"]').length;
     });
-
-    if (!(session as any).access_token || !(session as any).user) {
-        throw new Error(
-            'Google 로그인이 필요합니다. AdsPower 브라우저에서 Google 계정(ImageFX와 동일)으로 로그인한 후 다시 시도해주세요.'
-        );
-    }
-
-    cachedToken = (session as any).access_token;
-    cachedTokenExpiry = new Date((session as any).expires || Date.now() + 50 * 60 * 1000);
-    const userInfo = (session as any).user;
-    console.log(`[Flow] ✅ 토큰 획득 (${userInfo?.name || userInfo?.email || 'user'}, 만료: ${cachedTokenExpiry.toLocaleTimeString()})`);
-    sendImageLog(`✅ [Flow] ${userInfo?.name || userInfo?.email} 계정 세션 확보`);
-
-    return cachedToken!;
 }
 
-/**
- * ✅ 자동 API 학습 — 알려진 엔드포인트/모델 조합을 순차 시도
- *  성공한 조합을 디스크에 저장 → 다음부터 바로 사용
- */
-async function discoverAndCacheApi(
-    page: Page,
-    token: string,
-    testPrompt: string,
-    aspectRatio: string,
-): Promise<{ endpoint: string; modelNameType: string; encodedImage: string } | null> {
-    console.log('[Flow] 🔍 API 자동 학습 시작...');
-    sendImageLog('🔍 [Flow] 내부 API 엔드포인트 자동 탐색 중 (첫 실행만)...');
+// ─── 이미지 URL → Buffer 다운로드 ────────────────────────────
+async function downloadImageAsBuffer(page: Page, imageUrl: string): Promise<{ buffer: Buffer; mimeType: string }> {
+    const base64 = await page.evaluate(async (url: string) => {
+        const res = await fetch(url, { credentials: 'include' });
+        if (!res.ok) throw new Error(`HTTP_${res.status}`);
+        const blob = await res.blob();
+        return await new Promise<{ b64: string; type: string }>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const result = reader.result as string;
+                const comma = result.indexOf(',');
+                resolve({ b64: comma >= 0 ? result.substring(comma + 1) : '', type: blob.type || 'image/png' });
+            };
+            reader.onerror = () => reject(new Error('blob read error'));
+            reader.readAsDataURL(blob);
+        });
+    }, imageUrl);
 
-    for (const endpoint of CANDIDATE_ENDPOINTS) {
-        for (const modelName of CANDIDATE_MODEL_NAMES) {
-            const result = await page.evaluate(async (params: any) => {
-                try {
-                    const body = JSON.stringify({
-                        userInput: {
-                            candidatesCount: 1,
-                            prompts: [params.prompt],
-                            seed: params.seed,
-                        },
-                        clientContext: {
-                            sessionId: `;${Date.now()}`,
-                            tool: 'FLOW',
-                        },
-                        modelInput: { modelNameType: params.modelName },
-                        aspectRatio: params.ratio,
-                    });
-                    const res = await fetch(params.endpoint, {
-                        method: 'POST',
-                        body,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${params.token}`,
-                        },
-                    });
-                    if (!res.ok) return { ok: false, status: res.status };
-                    const data = await res.json();
-                    const img = data?.imagePanels?.[0]?.generatedImages?.[0]?.encodedImage
-                        || data?.generatedImages?.[0]?.encodedImage
-                        || data?.images?.[0]?.base64
-                        || data?.result?.images?.[0]?.data;
-                    if (img) return { ok: true, encodedImage: img };
-                    return { ok: false, status: 200, reason: 'no_image' };
-                } catch (err: any) {
-                    return { ok: false, error: err.message };
-                }
-            }, { endpoint, modelName, token, prompt: testPrompt, ratio: aspectRatio, seed: Math.floor(Math.random() * 999999) });
-
-            if ((result as any).ok && (result as any).encodedImage) {
-                console.log(`[Flow] ✅ 학습 성공: ${endpoint} / ${modelName}`);
-                sendImageLog(`✅ [Flow] API 학습 완료: ${modelName}`);
-                // 메타 저장
-                saveApiMetadata({
-                    endpoint,
-                    modelNameType: modelName,
-                    requestTemplate: {
-                        userInput: { candidatesCount: 1, prompts: ['<PROMPT>'], seed: 0 },
-                        clientContext: { sessionId: '<SID>', tool: 'FLOW' },
-                        modelInput: { modelNameType: modelName },
-                        aspectRatio: '<RATIO>',
-                    },
-                    responseImagePath: 'imagePanels.0.generatedImages.0.encodedImage',
-                    learnedAt: new Date().toISOString(),
-                    version: SCHEMA_VERSION,
-                });
-                return { endpoint, modelNameType: modelName, encodedImage: (result as any).encodedImage };
-            }
-        }
+    const buffer = Buffer.from(base64.b64, 'base64');
+    if (buffer.length < 1024) {
+        throw new Error(`FLOW_IMAGE_DOWNLOAD_TINY:다운로드된 이미지가 비정상적으로 작음 (${buffer.length} bytes)`);
     }
-
-    console.warn('[Flow] ❌ 자동 학습 실패 — 모든 엔드포인트/모델 조합 시도 무효');
-    return null;
+    return { buffer, mimeType: base64.type || 'image/png' };
 }
 
-/**
- * ✅ Flow로 이미지 1장 생성
- *  1차: 캐시된 메타데이터로 바로 호출 (빠름)
- *  2차: 실패 시 자동 학습 → 성공 조합 캐시
- */
+// ─── 단일 이미지 생성 (UI 자동화) ─────────────────────────────
 export async function generateSingleImageWithFlow(
     prompt: string,
-    aspectRatio: string = '1:1',
+    _aspectRatio: string = '1:1',
     signal?: AbortSignal,
 ): Promise<{ buffer: Buffer; mimeType: string } | null> {
-    const MAX_RETRIES = 3;
+    const MAX_RETRIES = 2;
     let lastError: Error | null = null;
-    const currentPrompt = sanitizeFlowPrompt(prompt);
-    const flowAspectRatio = ASPECT_RATIO_MAP[aspectRatio] || ASPECT_RATIO_MAP['1:1'];
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
         if (signal?.aborted) {
@@ -317,139 +186,32 @@ export async function generateSingleImageWithFlow(
 
         try {
             const page = await ensureFlowBrowserPage();
-            const token = await getFlowSessionToken(page);
+            await ensureFlowProject(page);
 
-            // 캐시된 메타데이터 확인
-            let meta = loadApiMetadata();
+            const prevCount = await countExistingImages(page);
+            console.log(`[Flow] 🖼️ 이미지 생성 시도 ${attempt}/${MAX_RETRIES} (기존 ${prevCount}장)`);
+            sendImageLog(`🖼️ [Flow] 프롬프트 전송 중... (시도 ${attempt}/${MAX_RETRIES})`);
 
-            // 메타 없으면 자동 학습 (카운터 + 쿨다운으로 완화)
-            if (!meta) {
-                if (!canAttemptDiscovery()) {
-                    const remainMs = Math.max(0, _discoveryCooldownUntil - Date.now());
-                    const remainMin = Math.ceil(remainMs / 60000);
-                    throw new Error(`FLOW_API_DISCOVERY_COOLDOWN:Flow API 학습 ${DISCOVERY_MAX_ATTEMPTS}회 실패 → ${remainMin}분 후 자동 재시도. Google AI Pro 구독 + Flow 액세스 권한 확인 필요.`);
-                }
-                const discovered = await discoverAndCacheApi(page, token, currentPrompt, flowAspectRatio);
-                if (discovered) {
-                    recordDiscoveryAttempt(true);
-                    const buffer = Buffer.from(discovered.encodedImage, 'base64');
-                    trackApiUsage('gemini', { images: 1, model: 'flow-nano-banana-pro', costOverride: 0 });
-                    const mimeType = detectImageMime(buffer);
-                    sendImageLog(`✅ [Flow] 이미지 생성 완료 (${Math.round(buffer.length / 1024)}KB, 학습 중 생성)`);
-                    return { buffer, mimeType };
-                }
-                recordDiscoveryAttempt(false);
-                throw new Error(`FLOW_API_DISCOVERY_FAILED:내부 API 엔드포인트를 찾을 수 없습니다 (${_discoveryAttempts}/${DISCOVERY_MAX_ATTEMPTS}회). Google 계정의 Flow 액세스 권한 확인.`);
-            }
+            await typePromptAndSubmit(page, prompt);
 
-            // 학습된 메타로 정규 호출
-            console.log(`[Flow] 🖼️ 이미지 생성 시도 ${attempt}/${MAX_RETRIES} (${meta.modelNameType})`);
-            sendImageLog(`🖼️ [Flow] ${meta.modelNameType} 이미지 생성 중... (${attempt}/${MAX_RETRIES})`);
+            sendImageLog('⏳ [Flow] 이미지 생성 대기 중...');
+            const newImageUrl = await waitForNewImage(page, prevCount, 120000);
+            console.log(`[Flow] ✅ 이미지 URL 획득: ${newImageUrl.substring(0, 120)}`);
 
-            const genResult = await page.evaluate(async (params: any) => {
-                try {
-                    const body = JSON.stringify({
-                        userInput: {
-                            candidatesCount: 1,
-                            prompts: [params.prompt],
-                            seed: params.seed,
-                        },
-                        clientContext: {
-                            sessionId: `;${Date.now()}`,
-                            tool: 'FLOW',
-                        },
-                        modelInput: { modelNameType: params.modelName },
-                        aspectRatio: params.ratio,
-                    });
-                    const res = await fetch(params.endpoint, {
-                        method: 'POST',
-                        body,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${params.token}`,
-                        },
-                    });
-                    if (!res.ok) {
-                        const text = await res.text();
-                        return { error: `HTTP_${res.status}`, detail: text.substring(0, 500) };
-                    }
-                    const data = await res.json();
-                    const img = data?.imagePanels?.[0]?.generatedImages?.[0]?.encodedImage
-                        || data?.generatedImages?.[0]?.encodedImage;
-                    if (img) return { success: true, encodedImage: img };
-                    return { error: 'NO_IMAGES', detail: JSON.stringify(data).substring(0, 500) };
-                } catch (err: any) {
-                    return { error: 'EXCEPTION', detail: err.message };
-                }
-            }, {
-                endpoint: meta.endpoint,
-                modelName: meta.modelNameType,
-                token,
-                prompt: currentPrompt,
-                ratio: flowAspectRatio,
-                seed: Math.floor(Math.random() * 999999),
-            });
+            sendImageLog('📥 [Flow] 이미지 다운로드 중...');
+            const downloaded = await downloadImageAsBuffer(page, newImageUrl);
 
-            if ((genResult as any).success && (genResult as any).encodedImage) {
-                const buffer = Buffer.from((genResult as any).encodedImage, 'base64');
-                console.log(`[Flow] ✅ 성공 (${Math.round(buffer.length / 1024)}KB, 시도 ${attempt})`);
-                sendImageLog(`✅ [Flow] 이미지 생성 완료 (${Math.round(buffer.length / 1024)}KB)`);
-                trackApiUsage('gemini', { images: 1, model: 'flow-nano-banana-pro', costOverride: 0 });
-                return { buffer, mimeType: detectImageMime(buffer) };
-            }
-
-            const errorCode = (genResult as any).error || 'UNKNOWN';
-            const errorDetail = (genResult as any).detail || '';
-
-            // 토큰 만료
-            if (errorCode === 'HTTP_401') {
-                console.warn('[Flow] 🔑 토큰 만료 → 갱신');
-                cachedToken = null;
-                cachedTokenExpiry = null;
-                if (attempt === MAX_RETRIES) {
-                    lastError = new Error('FLOW_AUTH_EXPIRED:Google 세션 만료. AdsPower에서 재로그인 필요.');
-                }
-                continue;
-            }
-
-            // 쿼터 초과
-            if (errorCode === 'HTTP_429') {
-                sendImageLog('🚫 [Flow] 계정 쿼터 초과 — 약 1시간 후 재시도 권장');
-                return null;
-            }
-
-            // 메타데이터 무효 (구글이 API 구조 변경 등) → 캐시 삭제 후 다음 시도에서 자동 재학습
-            if (errorCode === 'HTTP_404' || errorCode === 'NO_IMAGES') {
-                if (!canAttemptDiscovery()) {
-                    const remainMs = Math.max(0, _discoveryCooldownUntil - Date.now());
-                    throw new Error(`FLOW_API_INVALID:저장된 API 메타 무효 + 재학습 쿨다운(${Math.ceil(remainMs / 60000)}분) 중.`);
-                }
-                console.warn(`[Flow] ⚠️ 메타 무효(${errorCode}) — 캐시 삭제 후 재학습 (시도 ${_discoveryAttempts + 1}/${DISCOVERY_MAX_ATTEMPTS})`);
-                try { fs.unlinkSync(getCachePath()); } catch { /* ignore */ }
-                continue;
-            }
-
-            // 안전 필터
-            if (errorDetail.includes('safety') || errorDetail.includes('blocked') || errorDetail.includes('policy')) {
-                sendImageLog('🛡️ [Flow] 안전 필터 차단 — 프롬프트 순화');
-                if (attempt === MAX_RETRIES) {
-                    lastError = new Error('FLOW_SAFETY_BLOCK:Google 안전 필터 차단.');
-                }
-                continue;
-            }
-
-            // 알 수 없는 오류
-            console.warn(`[Flow] ⚠️ ${errorCode}: ${errorDetail.substring(0, 200)}`);
-            lastError = new Error(`FLOW_${errorCode}:${errorDetail.substring(0, 200)}`);
-
-            if (attempt < MAX_RETRIES) {
-                await new Promise((r) => setTimeout(r, 2000 * attempt));
-            }
+            trackApiUsage('gemini', { images: 1, model: 'flow-nano-banana-2', costOverride: 0 });
+            sendImageLog(`✅ [Flow] 생성 완료 (${Math.round(downloaded.buffer.length / 1024)}KB)`);
+            return downloaded;
         } catch (err) {
-            console.warn(`[Flow] 시도 ${attempt} 예외: ${(err as Error).message}`);
+            const msg = (err as Error).message || '';
+            console.warn(`[Flow] 시도 ${attempt}/${MAX_RETRIES} 실패: ${msg}`);
+            sendImageLog(`⚠️ [Flow] 시도 ${attempt} 실패: ${msg.substring(0, 150)}`);
             lastError = err as Error;
+
             if (attempt < MAX_RETRIES) {
-                await new Promise((r) => setTimeout(r, 2000 * attempt));
+                await new Promise((r) => setTimeout(r, 3000 * attempt));
             }
         }
     }
@@ -457,34 +219,22 @@ export async function generateSingleImageWithFlow(
     throw lastError || new Error('FLOW_UNKNOWN_ERROR:이미지 생성 실패');
 }
 
-/**
- * ✅ 일괄 이미지 생성 (ImageFX와 동일 시그니처로 호환성 유지)
- * ✅ [v1.4.87] 실패 투명성 개선 — 첫 실패 에러를 상위로 전달하여 디버깅 가능
- *   - 세션/권한/학습 실패(FLOW_*)는 첫 번째에서 즉시 throw → 나머지 루프 생략
- *   - 쿼터 초과(null 반환)는 로그만 남기고 continue (기존 동작 유지)
- */
+// ─── 일괄 생성 (기존 시그니처 유지) ──────────────────────────
 export async function generateWithFlow(
     items: ImageRequestItem[],
     postTitle?: string,
     postId?: string,
     onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void,
 ): Promise<GeneratedImage[]> {
-    console.log(`[Flow] 🎨 총 ${items.length}개 이미지 생성 시작`);
-    sendImageLog(`🎨 [Flow] Nano Banana Pro로 ${items.length}개 이미지 생성 시작`);
+    console.log(`[Flow] 🎨 총 ${items.length}개 이미지 생성 시작 (UI 자동화)`);
+    sendImageLog(`🎨 [Flow] Nano Banana 2로 ${items.length}개 이미지 생성 시작`);
 
     const results: GeneratedImage[] = [];
     let firstCriticalError: Error | null = null;
-    let quotaExhausted = false;
 
     for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-
-        // 이전 항목에서 쿼터/권한 치명 실패 감지 시 나머지 생략
         if (firstCriticalError) break;
-        if (quotaExhausted) {
-            sendImageLog(`⏭️ [Flow] [${i + 1}/${items.length}] 쿼터 초과 상태 — 건너뜀`);
-            continue;
-        }
+        const item = items[i];
 
         try {
             sendImageLog(`🖼️ [Flow] [${i + 1}/${items.length}] "${item.heading}" 생성 중...`);
@@ -493,27 +243,24 @@ export async function generateWithFlow(
                 category: (item as any).category || '',
             } as any);
             const aspectRatio = (item as any).aspectRatio || '1:1';
+
             const generated = await generateSingleImageWithFlow(prompt, aspectRatio);
             if (!generated) {
-                // null 반환 = 쿼터 초과(HTTP_429) 또는 중지 요청 → 이후 모든 요청도 실패 예상
-                console.warn(`[Flow] [${i + 1}/${items.length}] null 반환 (쿼터/중지) — 나머지 건너뜀`);
-                sendImageLog(`🚫 [Flow] [${i + 1}] 쿼터 초과 또는 중지 감지 — 나머지 건너뜀`);
-                quotaExhausted = true;
-                continue;
+                console.warn(`[Flow] [${i + 1}] null 반환 (중지 감지) — 나머지 건너뜀`);
+                break;
             }
-            const { filePath } = await writeImageFile(
-                generated.buffer,
-                generated.mimeType === 'image/jpeg' ? 'jpg' : generated.mimeType === 'image/webp' ? 'webp' : 'png',
-                item.heading,
-                postTitle,
-                postId,
-            );
+
+            const ext = generated.mimeType === 'image/jpeg' ? 'jpg'
+                : generated.mimeType === 'image/webp' ? 'webp'
+                : 'png';
+            const { filePath } = await writeImageFile(generated.buffer, ext, item.heading, postTitle, postId);
+
             const image: GeneratedImage = {
                 filePath,
                 heading: item.heading,
                 prompt,
                 mimeType: generated.mimeType,
-                provider: 'flow-nano-banana-pro',
+                provider: 'flow-nano-banana-2',
                 cost: 0,
             } as any;
             results.push(image);
@@ -522,60 +269,50 @@ export async function generateWithFlow(
             const msg = (err as Error).message || '';
             console.error(`[Flow] [${i + 1}/${items.length}] 실패: ${msg}`);
             sendImageLog(`❌ [Flow] [${i + 1}] 실패: ${msg.substring(0, 150)}`);
-            // FLOW_* 에러는 치명적 (권한/학습/세션) → 상위로 전달하여 원인 노출
-            if (msg.startsWith('FLOW_')) {
-                firstCriticalError = err as Error;
-            }
+            if (msg.startsWith('FLOW_')) firstCriticalError = err as Error;
         }
     }
 
     console.log(`[Flow] ${results.length > 0 ? '✅' : '❌'} 완료: ${results.length}/${items.length} 성공`);
     sendImageLog(`${results.length > 0 ? '✅' : '❌'} [Flow] 완료: ${results.length}/${items.length} 성공`);
 
-    // 성공이 하나라도 있으면 결과 반환, 없으면 원인 노출
     if (results.length === 0) {
         if (firstCriticalError) throw firstCriticalError;
-        if (quotaExhausted) throw new Error('FLOW_QUOTA_EXHAUSTED:Flow 계정 쿼터 초과 — 약 1시간 후 재시도 권장. Google AI Pro 구독 확인 필요.');
-        throw new Error('FLOW_ALL_FAILED:모든 이미지 생성 실패 (원인 불명). 이전 로그 확인 필요.');
+        throw new Error('FLOW_ALL_FAILED:모든 이미지 생성 실패. 이전 로그 확인 필요.');
     }
     return results;
 }
 
-// ─── 유틸 ──────────────────────────────────────────────
-function sanitizeFlowPrompt(prompt: string): string {
-    let cleaned = prompt.trim();
-    // 마크다운/서식 제거
-    cleaned = cleaned.replace(/```[\s\S]*?```/g, '').replace(/\*\*/g, '').replace(/^#+\s*/gm, '');
-    // 200자 초과 시 트렁케이션
-    if (cleaned.length > 200) cleaned = cleaned.substring(0, 200);
-    return cleaned;
-}
-
-function detectImageMime(buffer: Buffer): string {
-    if (buffer[0] === 0xFF && buffer[1] === 0xD8 && buffer[2] === 0xFF) return 'image/jpeg';
-    if (buffer[0] === 0x52 && buffer[1] === 0x49 && buffer[2] === 0x46) return 'image/webp';
-    return 'image/png';
-}
-
-/**
- * ✅ Flow 연결 테스트 (UI "테스트" 버튼용)
- */
+// ─── 연결 테스트 (UI "테스트" 버튼용) ──────────────────────────
 export async function testFlowConnection(): Promise<{ ok: boolean; message: string; userInfo?: any }> {
     try {
         const page = await ensureFlowBrowserPage();
-        const token = await getFlowSessionToken(page);
-        const userInfo = await page.evaluate(async () => {
+        // labs.google/fx 도메인 세션 확인 (ImageFX와 동일 엔드포인트)
+        const session = await page.evaluate(async () => {
             try {
                 const res = await fetch('/fx/api/auth/session', { credentials: 'include' });
-                return res.ok ? (await res.json()).user : null;
+                return res.ok ? await res.json() : null;
             } catch { return null; }
         });
+        if (!session || !(session as any).user) {
+            return { ok: false, message: '❌ Google 세션 없음 — AdsPower에서 Google 로그인 필요' };
+        }
+        const userInfo = (session as any).user;
+        // Flow 프로젝트 페이지 접근 확인
+        await ensureFlowProject(page);
         return {
-            ok: !!token,
-            message: token ? `✅ Flow 연결 성공 — ${userInfo?.email || userInfo?.name || 'user'}` : '❌ 세션 확보 실패',
+            ok: true,
+            message: `✅ Flow 연결 성공 — ${userInfo?.email || userInfo?.name || 'user'} (프로젝트 준비됨)`,
             userInfo,
         };
     } catch (err) {
         return { ok: false, message: `❌ ${(err as Error).message}` };
     }
+}
+
+// ─── 중지/정리 ──────────────────────────────────────────
+export function resetFlowState(): void {
+    cachedProjectUrl = null;
+    cachedPage = null;
+    cachedBrowser = null;
 }
