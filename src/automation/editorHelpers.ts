@@ -2067,10 +2067,13 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
           // ✅ 마지막 CTA 후: 이전글 삽입
           if (isLastCta && resolved.previousPostUrl) {
-            // ✅ [2026-03-20 FIX] 중복 삽입 방지 — 쇼핑커넥트(affiliateLink)와 이전글 URL이 동일한 경우만 스킵
-            // 일반 모드에서 ctaLink=previousPostUrl은 의도적 동기화이므로 이전글 삽입을 스킵하면 안 됨
-            if (resolved.affiliateLink && resolved.affiliateLink === resolved.previousPostUrl) {
-              self.log(`   ⚠️ [이전글] 제휴 링크와 동일 URL → 중복 삽입 건너뜀`);
+            // ✅ [2026-04-23 FIX] 중복 삽입 방지 — 이전글 URL이 이미 CTA(제휴/일반) 어디에든 쓰였으면 스킵
+            // 기존: affiliateLink 중복만 차단 → ctaType='previous-post' 연속발행 시 CTA 버튼과 이전글 블록에 같은 URL이 2번 노출되는 버그
+            const prevUrlUsedAsCta =
+              (resolved.affiliateLink && resolved.affiliateLink === resolved.previousPostUrl) ||
+              effectiveCtas.some((cc: { link?: string; text?: string }) => cc.link && cc.link === resolved.previousPostUrl);
+            if (prevUrlUsedAsCta) {
+              self.log(`   ⚠️ [이전글] CTA 링크와 동일 URL → 중복 삽입 건너뜀`);
             } else {
               self.log(`   📖 [이전글] 같은 카테고리 이전글 삽입`);
               const page = self.ensurePage();
@@ -2191,9 +2194,12 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
             // ✅ 이전글 삽입
             if (resolved.previousPostUrl) {
-              // ✅ [2026-03-20 FIX] 중복 삽입 방지 — 쇼핑커넥트 제휴 링크와 동일한 경우만 스킵
-              if (resolved.affiliateLink && resolved.affiliateLink === resolved.previousPostUrl) {
-                self.log(`   ⚠️ [이전글] 제휴 링크와 동일 URL → 중복 삽입 건너뜀`);
+              // ✅ [2026-04-23 FIX] 중복 삽입 방지 — 이전글 URL이 이미 CTA(제휴/일반) 어디에든 쓰였으면 스킵
+              const prevUrlUsedAsCta =
+                (resolved.affiliateLink && resolved.affiliateLink === resolved.previousPostUrl) ||
+                effectiveCtas.some((cc: { link?: string; text?: string }) => cc.link && cc.link === resolved.previousPostUrl);
+              if (prevUrlUsedAsCta) {
+                self.log(`   ⚠️ [이전글] CTA 링크와 동일 URL → 중복 삽입 건너뜀`);
               } else {
                 self.log(`   📖 [이전글] 같은 카테고리 이전글 연결`);
 
