@@ -7941,8 +7941,8 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
     claudeModels = ['claude-sonnet-4-6'];
     console.log('[Claude] 📜 UI 선택: Claude Sonnet 4.6 (균형 모드) — 폴백 없음');
   } else if (uiSelectedModel === 'claude-opus') {
-    claudeModels = ['claude-opus-4-6'];
-    console.log('[Claude] 👑 UI 선택: Claude Opus 4.6 (최고 성능 모드) — 폴백 없음');
+    claudeModels = ['claude-opus-4-7'];
+    console.log('[Claude] 👑 UI 선택: Claude Opus 4.7 (최고 성능 모드) — 폴백 없음');
   } else {
     // 기본 (claude provider로 왔지만 specific 모델 미지정)
     claudeModels = ['claude-sonnet-4-6'];
