@@ -70,39 +70,54 @@ export class GeminiEmptyResponseError extends Error {
  *   1) emit critical/warning issues to the log
  *   2) attach validation metrics to the returned content so publishMeta
  *      can correlate features × issues
- * Never throws. Never mutates content (validator is pure).
+ * ✅ [v1.4.77] 0원 아티팩트 감지 시 ZeroPriceArtifactError throw (상위에서 재생성 트리거)
+ * 이외 critical 이슈는 여전히 non-blocking (로그만). Never mutates content.
  */
+export class ZeroPriceArtifactError extends Error {
+  constructor(public readonly detail: string) {
+    super(`0원 아티팩트 감지 — 발행 차단: ${detail}`);
+    this.name = 'ZeroPriceArtifactError';
+  }
+}
+
 function runPostGenValidator(content: any, source: any): void {
   if (!isFeatureEnabled('validator')) return;
+  let result: any;
   try {
     const mode: 'homefeed' | 'seo' = source?.contentMode === 'seo' ? 'seo' : 'homefeed';
     const mainKeyword = source?.keywords?.[0] || source?.title || '';
-    const result = runValidationPipeline(content, {
+    result = runValidationPipeline(content, {
       skipFingerprint: true, // 속도 우선 — fingerprint는 이미 authgrDefense가 별도 수행
       mode,
       mainKeyword,
       title: content?.selectedTitle || content?.title || '',
       imageCount: Array.isArray(content?.headings) ? content.headings.length : 0,
     });
-    // Attach to content for downstream publishMetadataRecorder
     (content as any).__validationResult = result;
     if (result.metrics.criticalIssueCount > 0) {
       console.warn(
         `[Validator] ⚠️ Critical ${result.metrics.criticalIssueCount}건: ` +
           result.issues
-            .filter((i) => i.severity === 'critical')
-            .map((i) => i.message)
+            .filter((i: any) => i.severity === 'critical')
+            .map((i: any) => i.message)
             .join(' | '),
       );
     } else if (result.metrics.totalIssueCount > 0) {
-      console.log(
-        `[Validator] ℹ️ 이슈 ${result.metrics.totalIssueCount}건 (비차단)`,
-      );
+      console.log(`[Validator] ℹ️ 이슈 ${result.metrics.totalIssueCount}건 (비차단)`);
     } else {
       console.log('[Validator] ✅ 이슈 없음');
     }
   } catch (err) {
+    if (err instanceof ZeroPriceArtifactError) throw err; // 내부 throw는 그대로 전파
     console.error('[Validator] 파사드 호출 실패, 발행 계속:', err);
+    return;
+  }
+  // ✅ [v1.4.77] 0원 아티팩트는 blocking 게이트
+  const zeroPriceIssue = result?.issues?.find(
+    (i: any) => i.category === 'price_artifact' && i.severity === 'critical',
+  );
+  if (zeroPriceIssue) {
+    throw new ZeroPriceArtifactError(zeroPriceIssue.message || '본문/소제목에 0원 패턴');
   }
 }
 
@@ -6832,6 +6847,29 @@ const GEMINI_CACHE_TTL = 3600; // 1시간
 const GEMINI_CACHE_MIN_TOKENS = { flash: 4096, pro: 2048 };
 
 /**
+ * ✅ [v1.4.77] API 키별 캐시 지원 자동 감지
+ * - 캐시 생성/사용 실패한 키는 세션 동안 캐시 스킵
+ * - 무료 티어(캐시 미지원)는 한 번 실패 후 영구 일반 호출
+ * - 유료 티어(캐시 지원)는 정상 75% 절감 혜택
+ * - 앱 재시작 시 리셋되어 다시 시도 (플랜 업그레이드 자동 감지)
+ */
+const geminiCacheUnsupportedKeys = new Set<string>();
+function apiKeyFingerprint(key: string): string {
+  const crypto = require('crypto') as typeof import('crypto');
+  return crypto.createHash('sha256').update(key).digest('hex').substring(0, 12);
+}
+function markCacheUnsupported(apiKey: string, reason: string): void {
+  const fp = apiKeyFingerprint(apiKey);
+  if (!geminiCacheUnsupportedKeys.has(fp)) {
+    geminiCacheUnsupportedKeys.add(fp);
+    console.warn(`[GeminiCache] 🔒 API 키 ${fp}는 캐시 미지원으로 기록됨 (이유: ${reason}) — 이후 일반 호출만 사용`);
+  }
+}
+function isCacheSupportedForKey(apiKey: string): boolean {
+  return !geminiCacheUnsupportedKeys.has(apiKeyFingerprint(apiKey));
+}
+
+/**
  * 시스템 프롬프트의 캐시 키 생성 (SHA-256)
  */
 function getCacheKey(systemText: string, modelName: string): string {
@@ -6973,14 +7011,16 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         // 캐시 가능 조건: system 프롬프트가 충분히 큼 (Flash 4096 토큰, Pro 2048 토큰)
         // 1토큰 ≈ 4자 한국어 기준 → Flash 16,384자, Pro 8,192자
         const minCacheChars = modelName.includes('-pro') ? 8192 : 16384;
-        // ✅ [2026-04-18 EMERGENCY] Context Caching 전면 비활성화
-        //    증상: getGenerativeModelFromCachedContent 경로가 `Error fetching`으로 100% 실패
-        //          (gemini-2.5-flash, gemini-2.5-flash-lite 공통 — 사용자 4/18 제보)
-        //    검증: 같은 API 키/모델로 curl 직접 호출은 정상 (+ OpenAI 엔진도 정상)
-        //          → SDK cached-content 경로와 현재 Google 서버 상태 호환 문제로 추정
-        //    조치: 근본 원인(SDK 업그레이드 / 모델별 캐시 지원 여부) 재조사 전까지 캐시 OFF
-        //    영향: 유료 티어는 절감 효과만 없어지고 호출 자체는 정상 복구됨
-        const cacheEnabled = false && geminiSystemText.length >= minCacheChars;
+        // ✅ [v1.4.77] 무료/유료 구분 없이 캐시 시도 + 실패 자동 학습
+        //    1차: 세션 내 해당 API 키가 캐시 지원 여부 기록 확인
+        //    2차: 캐시 생성/사용 실패 시 markCacheUnsupported로 영구 기록
+        //    3차: 실패한 키는 이후 호출에서 즉시 일반 호출로 스킵 (오버헤드 0)
+        //    결과: 유료 사용자 = 75% 절감 / 무료 사용자 = 첫 호출 한 번만 시도 후 일반 호출
+        //    ENV GEMINI_CACHE_DISABLED=1 로 강제 OFF 가능
+        const cacheDisabledEnv = process.env.GEMINI_CACHE_DISABLED === '1';
+        const cacheEnabled = !cacheDisabledEnv
+          && isCacheSupportedForKey(trimmedKey)
+          && geminiSystemText.length >= minCacheChars;
         let cachedContentName: string | undefined;
 
         if (cacheEnabled) {
@@ -7014,8 +7054,15 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
                 console.log(`[GeminiCache] 🆕 생성: ${cachedContentName.substring(0, 30)}... (다음 호출부터 75% 절감)`);
               }
             } catch (cacheErr: any) {
-              console.warn(`[GeminiCache] ⚠️ 캐시 생성 실패 (정상 호출로 폴백): ${cacheErr?.message?.substring(0, 100)}`);
+              const errMsg = cacheErr?.message || '';
+              console.warn(`[GeminiCache] ⚠️ 캐시 생성 실패 (정상 호출로 폴백): ${errMsg.substring(0, 100)}`);
               cachedContentName = undefined;
+              // ✅ [v1.4.77] 무료 티어 / 캐시 미지원 키 자동 학습
+              // 403 Forbidden, 400 Bad Request, "caching is not supported" 등 구조적 실패는 영구 기록
+              const isStructural = /403|forbidden|400|not\s+support|not\s+available|cached.*content/i.test(errMsg);
+              if (isStructural) {
+                markCacheUnsupported(trimmedKey, errMsg.substring(0, 60));
+              }
             }
           }
         }
@@ -7043,11 +7090,8 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             temperature: activeTemperature,
             topP: 0.95,
             topK: 40,
-            // ✅ [v1.4.51] 빈 응답 박멸 3종 세트
-            // 1) maxOutputTokens 60000 — Flash 2.5 한도(65536) 근접. 블로그 본문이 이를 초과 불가
-            // 2) thinkingBudget 0 — thinking 토큰이 출력 한도 잠식 차단 (Gemini 2.5만)
-            //    콘텐츠 생성엔 thinking 불필요. humanizer/optimizer 후처리로 품질 보강
-            maxOutputTokens: 60000,
+            // ✅ [v1.4.77] maxOutputTokens 60000 → 8192 (블로그 본문 실제 3~5K 토큰 / 글당 ~₩45 절감)
+            maxOutputTokens: 8192,
             ...(modelName.includes('2.5') ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
           } as any,
           // ✅ [v1.4.51] 3) safetySettings BLOCK_NONE — SAFETY false positive 박멸
@@ -7076,14 +7120,40 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           // (이전: requestConfig.generationConfig.responseMimeType = 'application/json';)
           requestConfig.tools = [{ googleSearch: {} }];
         }
-        const streamPromise = model.generateContentStream(requestConfig);
+        // ✅ [v1.4.77] 캐시 사용 호출 실패 시 즉시 일반 호출로 투명 폴백
+        //    4/18 장애 원인: getGenerativeModelFromCachedContent 경로가 일부 환경에서 실패
+        //    해결: 캐시 호출 실패 감지 → 해당 API 키를 캐시 미지원으로 기록 → 일반 모델로 즉시 재시도
+        //    효과: 무료/유료 구분 없이 모든 사용자가 안전하게 생성됨
+        let activeModel = model;
+        let effectiveCached = cachedContentName;
+        const invokeStream = async (): Promise<any> => {
+          try {
+            return await activeModel.generateContentStream(requestConfig);
+          } catch (streamErr: any) {
+            if (effectiveCached) {
+              const msg = streamErr?.message || '';
+              console.warn(`[GeminiCache] ⚠️ 캐시 호출 실패 → 일반 호출로 즉시 폴백: ${msg.substring(0, 100)}`);
+              markCacheUnsupported(trimmedKey, `stream: ${msg.substring(0, 60)}`);
+              geminiPromptCache.delete(getCacheKey(geminiSystemText, modelName));
+              activeModel = client.getGenerativeModel({ model: modelName });
+              effectiveCached = undefined;
+              // 캐시 사용 시 systemInstruction 제외했으므로 일반 호출에서 재주입
+              if (geminiSystemText && !requestConfig.systemInstruction) {
+                requestConfig.systemInstruction = { role: 'system', parts: [{ text: geminiSystemText }] };
+              }
+              return await activeModel.generateContentStream(requestConfig);
+            }
+            throw streamErr;
+          }
+        };
+        const streamPromise = invokeStream();
 
         // ✅ [2026-01-28 FIX] 첫 응답 타임아웃 60초로 증가 (유료 API 안정성)
         const timeoutPromise = new Promise<never>((_, reject) => {
           setTimeout(() => reject(new Error('⏱️ 연결 타임아웃')), 60000);
         });
 
-        console.log(`[Gemini] 🚀 ${modelName} 호출 (Search Grounding: ${useGrounding ? 'ON +$0.035' : 'OFF (비용 절감)'})`);
+        console.log(`[Gemini] 🚀 ${modelName} 호출 (Search Grounding: ${useGrounding ? 'ON +$0.035' : 'OFF (비용 절감)'})${cachedContentName ? ' [캐시 시도 ✅]' : ''}`);
         const streamResult = await Promise.race([streamPromise, timeoutPromise]);
         let text = '';
 
@@ -7573,7 +7643,7 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
         model: modelName,
         messages: messages,
         temperature: temperature,
-        max_tokens: 16000,
+        max_tokens: 8192,
         // ✅ Perplexity 전용 옵션: 최신 정보 검색
         ...(modelName.includes('sonar') ? {
           search_recency_filter: 'month',  // 최근 1개월 정보 우선
@@ -7658,18 +7728,21 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   }
   const client = getOpenAIClient(configApiKey);
 
-  // ✅ [v1.4.44] 사용자 선택 모델 강제 — 다른 모델로 자동 폴백 제거
+  // ✅ [v1.4.77] UI 선택 모델 = 실제 호출 모델 1:1. 크로스 모델 폴백 없음.
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
   let openAIModels: string[];
   if (uiSelectedModel === 'openai-gpt4o-mini') {
-    openAIModels = ['gpt-5.4-mini'];
-    console.log('[OpenAI] 🧠 가성비 모드: gpt-5.4-mini — 폴백 없음');
+    openAIModels = ['gpt-4.1-mini'];
+    console.log('[OpenAI] 🧠 GPT-4.1 mini — 폴백 없음');
   } else if (uiSelectedModel === 'openai-gpt41') {
-    openAIModels = ['gpt-5.4'];
-    console.log('[OpenAI] ⚖️ 균형 모드: gpt-5.4 — 폴백 없음');
+    openAIModels = ['gpt-4.1'];
+    console.log('[OpenAI] ⚖️ GPT-4.1 — 폴백 없음');
+  } else if (uiSelectedModel === 'openai-gpt4o') {
+    openAIModels = ['gpt-4o'];
+    console.log('[OpenAI] 🚀 GPT-4o — 폴백 없음');
   } else {
-    openAIModels = ['gpt-5.4'];
-    console.log('[OpenAI] 🚀 기본 모드: gpt-5.4');
+    openAIModels = ['gpt-4.1'];
+    console.log('[OpenAI] ⚖️ GPT-4.1 (기본) — 폴백 없음');
   }
 
   const customModel = process.env.OPENAI_STRUCTURED_MODEL;
@@ -7677,7 +7750,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
 
   let lastError: Error | null = null;
   const timeoutMs = getTimeoutMs(minChars);
-  const maxRetriesPerModel = 3; // ✅ [v1.4.44] 1 → 3 (단일 모델 재시도 강화, 폴백 제거)
+  const maxRetriesPerModel = 2; // ✅ [v1.4.77] 3 → 2 (폴백 없음 + 단일 모델이므로 2회로 충분, 토큰 33% 절감)
 
   for (const modelName of modelsToTry) {
     for (let retry = 0; retry < maxRetriesPerModel; retry++) {
@@ -7699,7 +7772,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           ],
           temperature: temperature,
           top_p: 0.9,
-          max_completion_tokens: 16000,
+          max_completion_tokens: 8192,
           response_format: { type: 'json_object' },  // ✅ [2026-03-23] JSON 출력 보장
         } as any);
 
@@ -7906,7 +7979,7 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
 
         const buildRequest = (withCache: boolean): any => ({
           model: modelName,
-          max_tokens: 16000,
+          max_tokens: 8192,
           temperature: temperature,
           ...(claudeSystem
             ? {

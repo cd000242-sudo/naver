@@ -44,14 +44,20 @@ const SMART_STORE_SELECTORS = {
         '._3nSSmfH-Ro img',
         '[class*="detail"] img',
     ],
+    // ✅ [v1.4.77 P1] 2026-04 현행 난독화 클래스 추가 + 범용 fallback
     productName: [
-        '._3oDjSvLGtw',
-        '._1eddO7u4UC',
+        '._3oDjSvLGtw',           // 구버전 (유지)
+        '._1eddO7u4UC',           // 구버전 (유지)
         'h3[class*="name"]',
+        'h2[class*="title"]',     // 신규 범용
+        '[class*="ProductName"]', // 신규 범용
+        'h1',                     // 최후 폴백
     ],
     price: [
-        '._2DywKu0J_0',
-        '._2pgHN-ntx6',
+        'strong.Xu9MEKUuIo span.e1DMQNBPJ_',  // 2026-04 현행 할인가
+        'del.VaZJPclpdJ span.e1DMQNBPJ_',     // 2026-04 현행 정가
+        '._2DywKu0J_0',                       // 구버전 (유지)
+        '._2pgHN-ntx6',                       // 구버전 (유지)
         '[class*="price"]',
     ],
 };
@@ -491,15 +497,21 @@ export class SmartStoreProvider extends BaseProvider {
             console.log(`  ├ 갤러리: ${galleryImages.length}개`);
             console.log(`  └ 리뷰: ${reviewImages.length}개`);
 
-            // 제품 정보 추출
+            // ✅ [v1.4.77 P1] 현행 2026-04 난독화 클래스 + 구버전 폴백 + og:title
             const productInfo = await page.evaluate(() => {
                 const name =
                     document.querySelector('._3oDjSvLGtw')?.textContent ||
                     document.querySelector('._1eddO7u4UC')?.textContent ||
-                    document.querySelector('meta[property="og:title"]')?.getAttribute('content') || '';
+                    document.querySelector('h2[class*="title"]')?.textContent ||
+                    document.querySelector('[class*="ProductName"]')?.textContent ||
+                    document.querySelector('meta[property="og:title"]')?.getAttribute('content') ||
+                    document.querySelector('h1')?.textContent || '';
                 const price =
-                    document.querySelector('._2DywKu0J_0')?.textContent ||
-                    document.querySelector('._2pgHN-ntx6')?.textContent || '';
+                    document.querySelector('strong.Xu9MEKUuIo span.e1DMQNBPJ_')?.textContent ||  // 2026-04 할인가
+                    document.querySelector('del.VaZJPclpdJ span.e1DMQNBPJ_')?.textContent ||     // 2026-04 정가
+                    document.querySelector('._2DywKu0J_0')?.textContent ||                       // 구버전
+                    document.querySelector('._2pgHN-ntx6')?.textContent ||
+                    document.querySelector('meta[property="og:price:amount"]')?.getAttribute('content') || '';
                 return { name: name.trim(), price: price.trim() };
             }) as ProductInfo;
 

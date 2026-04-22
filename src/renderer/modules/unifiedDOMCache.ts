@@ -75,7 +75,8 @@ const UnifiedDOMCache = {
   getImageSource(): string {
     // ✅ [2026-02-02] 풀오토/연속/다중계정 발행 전용 이미지 소스
     // 이미지 관리 탭의 globalImageSource와 완전히 분리됨
-    const VALID_AI_SOURCES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'local-folder'];
+    // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow 엔진이 풀오토/연속발행에서 nano-banana-pro로 폴백되던 버그 수정
+    const VALID_AI_SOURCES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
 
     // 1순위: fullAutoImageSource (풀오토 전용)
     const fullAutoSource = localStorage.getItem('fullAutoImageSource');
@@ -89,11 +90,13 @@ const UnifiedDOMCache = {
       localStorage.removeItem('fullAutoImageSource');
     }
 
-    // ✅ [2026-02-18 FIX] 2순위: globalImageSource (이미지 관리 탭 설정)
+    // ✅ [v1.4.80 FIX] globalImageSource 읽기만, 쓰기 제거
+    //   이전: globalImageSource 값을 읽고 fullAutoImageSource에 자동 복제
+    //         → 이미지 관리 탭에서 다른 엔진 선택 시 풀오토 설정이 silently 오염됨
+    //   수정: 읽어서 사용만 하고 localStorage 쓰기 제거
     const globalSource = localStorage.getItem('globalImageSource');
     if (globalSource && globalSource !== 'undefined' && globalSource !== 'null' && VALID_AI_SOURCES.includes(globalSource)) {
-      console.log(`[UnifiedDOMCache] 🎨 globalImageSource 폴백 사용: ${globalSource}`);
-      localStorage.setItem('fullAutoImageSource', globalSource);
+      console.log(`[UnifiedDOMCache] 🎨 globalImageSource 폴백 사용 (읽기만): ${globalSource}`);
       return globalSource;
     }
 

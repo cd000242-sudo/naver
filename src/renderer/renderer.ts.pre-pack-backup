@@ -49,6 +49,8 @@ import { escapeHtml, removeMarkdownBold } from './utils/htmlUtils.js';
 import { isCostRiskImageProvider, getCostRiskProviderLabel, getTodayKey } from './utils/imageCostUtils.js';
 // ✅ [2026-01-25 모듈화] 쇼핑커넥트 유틸리티
 import { isShoppingConnectModeActive, isAffiliateUrl, resolveAffiliateLink } from './utils/shoppingConnectUtils.js';
+// ✅ [2026-04-18] 이미지 스킵 여부 단일 진실 공급원 — UI 3개 소스 통합
+import { isImageSkipEnabled, syncImageSkipUI } from './utils/imageSkipCheck.js';
 // ✅ [2026-01-25 모듈화] 스토리지 유틸리티
 import { safeLocalStorageSetItem } from './utils/storageUtils.js';
 // ✅ [2026-01-25 모듈화] Gemini 모델 동기화
@@ -4324,7 +4326,8 @@ URL: ${firstUrl}
       || localStorage.getItem('fullAutoImageSource')
       || localStorage.getItem('globalImageSource')
       || 'nano-banana-pro';
-    const skipImages = (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked || false;
+    // ✅ [2026-04-18 FIX] SSOT 헬퍼 사용 — 배치 큐 저장 시 localStorage 반영 (이전: DOM만 읽어서 모달 설정 무시)
+    const skipImages = isImageSkipEnabled();
     const skipCta = (document.getElementById('unified-skip-cta') as HTMLInputElement)?.checked || false;
     const ctasUi = readUnifiedCtasFromUi();
     const ctaText = ctasUi[0]?.text || (document.getElementById('unified-cta-text') as HTMLInputElement)?.value || '';
@@ -4806,43 +4809,29 @@ URL: ${firstUrl}
           // ✅ 반자동 발행 실행 및 결과 추적
           appendLog(`🌐 브라우저를 열고 발행을 시작합니다... (${item.publishMode === 'schedule' ? `📅 예약: ${item.scheduleDate} ${item.scheduleTime}` : item.publishMode === 'draft' ? '📝 임시저장' : '⚡ 즉시발행'})`);
 
-          // ✅ 발행 결과를 추적하기 위한 Promise
+          // ✅ [2026-04-18 FIX] handleSemiAutoPublish를 직접 await — 타임아웃/리스너/race 전부 제거
+          //    이전 구조(publishPromise + setTimeout 5분 + on('automation:status', ...)):
+          //      - 5분 타임아웃이 실제 발행보다 짧음 → 1번째 계정 타임아웃 → 2번째부터 "이미 실행 중" 폭포
+          //      - 리스너 해제 함수 미사용 → 계정마다 리스너 누적 → race
+          //    새 구조: handleSemiAutoPublish → executeUnifiedAutomation → executeSemiAutoFlow → automationResult
+          //      - 메인 자동화 IPC의 완료를 기다렸다 automationResult를 그대로 반환
+          //      - 완료 후에만 다음 계정으로 진행 → 중복 실행 구조적으로 불가능
           let publishSuccess = false;
-          let publishError: string | null = null;
-          let resultReceived = false; // 중복 방지 플래그
-
-          const publishPromise = new Promise<boolean>((resolve) => {
-            const statusHandler = (status: { success: boolean; message?: string; cancelled?: boolean }) => {
-              if (resultReceived) return; // 이미 처리됨
-              resultReceived = true;
-
-              if (status.cancelled) {
-                publishError = '발행이 사용자에 의해 취소되었습니다.';
-                resolve(false);
-              } else if (status.success) {
-                resolve(true);
-              } else {
-                publishError = status.message || '발행 실패';
-                resolve(false);
-              }
-            };
-            (window.api as any).on('automation:status', statusHandler);
-
-            // 타임아웃: 5분 후에도 응답이 없으면 실패로 처리
-            setTimeout(() => {
-              if (!resultReceived) {
-                resultReceived = true;
-                publishError = '발행 시간 초과';
-                resolve(false);
-              }
-            }, 5 * 60 * 1000);
-          });
-
-          // 발행 시작
-          handleSemiAutoPublish();
-
-          // 발행 결과 대기
-          publishSuccess = await publishPromise;
+          let publishError: string = '';
+          try {
+            const automationResult: any = await handleSemiAutoPublish();
+            // executeSemiAutoFlow → executeBlogPublishing이 반환하는 자동화 결과
+            // withErrorHandling이 에러 삼키고 null 반환 시 automationResult === null
+            if (automationResult && automationResult.success === true) {
+              publishSuccess = true;
+            } else if (automationResult?.cancelled) {
+              publishError = '발행이 사용자에 의해 취소되었습니다.';
+            } else {
+              publishError = automationResult?.message || automationResult?.error || '발행 실패';
+            }
+          } catch (publishErr) {
+            publishError = (publishErr as Error).message || '발행 중 예외 발생';
+          }
 
           if (publishSuccess) {
             appendLog(`✅ [${i + 1}/${publishQueue.length}] ${item.accountName}: 발행 성공!`);
@@ -7395,9 +7384,8 @@ function collectUnifiedFormData(): any {
     || localStorage.getItem('fullAutoImageSource')
     || localStorage.getItem('globalImageSource')
     || 'nano-banana-pro';
-  // ✅ [2026-03-07 FIX] textOnlyPublish localStorage 설정도 반영 — 이미지 관리탭에서 설정한 값이 여기까지 전달되도록
-  const skipImages = (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked
-    || localStorage.getItem('textOnlyPublish') === 'true';
+  // ✅ [2026-04-18 FIX] SSOT 헬퍼 사용 — headingImageMode='none'도 반영 (이전: 2개만 OR)
+  const skipImages = isImageSkipEnabled();
   const publishMode = (document.getElementById('unified-publish-mode') as HTMLInputElement)?.value || 'publish'; // ✅ [2026-03-10 FIX] 기본값을 즉시발행으로 변경
   console.log(`[collectFormData] 📌 발행 모드 읽기: ${publishMode}`);
   const scheduleDate = publishMode === 'schedule' ? (document.getElementById('unified-schedule-date') as HTMLInputElement)?.value : undefined;
@@ -7470,9 +7458,8 @@ function collectUnifiedFormDataForPublish(mode: 'full-auto' | 'semi-auto'): any 
   // ✅ 글 톤 설정 - UI에서 선택한 값 사용
   const toneStyle = (document.getElementById('unified-tone-style') as HTMLInputElement)?.value || 'friendly';
   const imageSource = UnifiedDOMCache.getImageSource();
-  // ✅ [2026-03-07 FIX] textOnlyPublish localStorage 설정도 반영
-  const skipImages = (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked
-    || localStorage.getItem('textOnlyPublish') === 'true';
+  // ✅ [2026-04-18 FIX] SSOT 헬퍼 사용 — headingImageMode='none'도 반영
+  const skipImages = isImageSkipEnabled();
   const publishMode = (document.getElementById('unified-publish-mode') as HTMLInputElement)?.value || 'publish'; // ✅ [2026-03-10 FIX] 기본값을 즉시발행으로 변경
   console.log(`[collectUnifiedFormDataForPublish] 📌 발행 모드 읽기: ${publishMode}`);
   const categoryName = UnifiedDOMCache.getRealCategoryName(); // ✅ [2026-02-13 FIX] 카테고리 이름(text) 전달 — value(번호)가 아닌 name으로 네이버 에디터 카테고리 매칭
@@ -7564,7 +7551,7 @@ function validateUnifiedFormData(data: any): boolean {
 }
 
 // 통합 자동화 실행
-async function executeUnifiedAutomation(formData: any): Promise<void> {
+async function executeUnifiedAutomation(formData: any): Promise<any> {
   const startBtn = document.getElementById('unified-start-btn') as HTMLButtonElement;
 
   // 진행률 표시 초기화
@@ -7662,6 +7649,11 @@ async function executeUnifiedAutomation(formData: any): Promise<void> {
       console.log('[Continuous] V2 방식 - 별도 스케줄링 불필요 (루프가 관리 중)');
     }
   }
+
+  // ✅ [2026-04-18 FIX] 결과 반환 (호출자 await 가능하도록)
+  //    handleSemiAutoPublish → executeUnifiedAutomation → executeSemiAutoFlow 체인의 automationResult
+  //    배치 multi-account publish가 status event 리스너/타임아웃 없이 직접 결과 받도록
+  return result;
 }
 
 // ✅ UI 스레드 양보 헬퍼 (Electron 응답 없음 방지)

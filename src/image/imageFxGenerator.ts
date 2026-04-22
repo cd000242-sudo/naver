@@ -952,6 +952,11 @@ async function connectViaPlaywright(): Promise<Page> {
  * ✅ AdsPower Playwright 브라우저 + labs.google/fx 페이지 확보
  * 이중 모드: AdsPower 우선 → Playwright 자체 브라우저 폴백
  */
+// ✅ [v1.4.80] Flow 엔진이 같은 labs.google 세션을 공유할 수 있도록 export
+export async function ensureImageFxBrowserPage(): Promise<Page> {
+    return ensureBrowserPage();
+}
+
 async function ensureBrowserPage(): Promise<Page> {
   // 1. 기존 페이지가 살아있으면 재사용
   if (cachedPage) {

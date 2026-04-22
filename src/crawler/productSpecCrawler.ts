@@ -208,7 +208,8 @@ async function crawlCoupangProduct(url: string): Promise<ProductSpec | null> {
 
             return {
                 productName,
-                price: price ? `${parseInt(price).toLocaleString()}원` : '',
+                // ✅ [v1.4.77] "0" truthy 통과 → "0원" 생성 방지. parseInt 양수 검증 후에만 원 접미사
+                price: (() => { const n = parseInt(price || '0', 10); return (Number.isFinite(n) && n > 0) ? `${n.toLocaleString()}원` : ''; })(),
                 discount, brand,
                 rating: rating ? `⭐ ${rating}` : '',
                 reviewCount: reviewCount ? `${parseInt(reviewCount).toLocaleString()}개 리뷰` : '',
@@ -426,7 +427,8 @@ async function crawlNaverSmartStore(url: string): Promise<ProductSpec | null> {
 
             return {
                 productName,
-                price: price ? `${parseInt(price.replace(/,/g, '')).toLocaleString()}원` : '',
+                // ✅ [v1.4.77] "0" truthy 통과 → "0원" 생성 방지. parseInt 양수 검증 후에만 원 접미사
+                price: (() => { const n = parseInt((price || '0').replace(/,/g, ''), 10); return (Number.isFinite(n) && n > 0) ? `${n.toLocaleString()}원` : ''; })(),
                 discount,
                 brand,
                 rating: rating ? `⭐ ${rating}` : '',
@@ -495,7 +497,8 @@ async function crawl11St(url: string): Promise<ProductSpec | null> {
 
             return {
                 productName,
-                price: price ? `${parseInt(price.replace(/,/g, '')).toLocaleString()}원` : '',
+                // ✅ [v1.4.77] "0" truthy 통과 → "0원" 생성 방지. parseInt 양수 검증 후에만 원 접미사
+                price: (() => { const n = parseInt((price || '0').replace(/,/g, ''), 10); return (Number.isFinite(n) && n > 0) ? `${n.toLocaleString()}원` : ''; })(),
                 discount: '',
                 brand: '',
                 rating: rating ? `⭐ ${rating}` : '',
@@ -550,7 +553,8 @@ async function crawlGmarket(url: string): Promise<ProductSpec | null> {
 
             return {
                 productName,
-                price: price ? `${parseInt(price.replace(/,/g, '')).toLocaleString()}원` : '',
+                // ✅ [v1.4.77] "0" truthy 통과 → "0원" 생성 방지. parseInt 양수 검증 후에만 원 접미사
+                price: (() => { const n = parseInt((price || '0').replace(/,/g, ''), 10); return (Number.isFinite(n) && n > 0) ? `${n.toLocaleString()}원` : ''; })(),
                 discount: '',
                 brand: '',
                 rating: '',

@@ -1,0 +1,116 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - link "주요 콘텐츠로 이동" [ref=e2] [cursor=pointer]
+      - link "접근성 도움말" [ref=e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=ko
+      - link "접근성 관련 의견 보내기" [ref=e4] [cursor=pointer]
+  - generic [ref=e9]:
+    - search [ref=e10]:
+      - generic [ref=e12]:
+        - link "Google 홈페이지로 이동" [ref=e14] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=ko&sa=X&ved=0ahUKEwjA0t2l7vyTAxXlIEQIHVS_AKwQPAgJ
+          - img [ref=e15]
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - combobox "검색" [ref=e26]: site:smartstore.naver.com LG QNED 65QNED75AEA site:smartstore.naver.com LG QNED 65QNED75AEA
+            - generic [ref=e27]:
+              - button "지우기" [ref=e29] [cursor=pointer]:
+                - img [ref=e31]
+              - generic [ref=e34]:
+                - button "입력 도구" [ref=e35] [cursor=pointer]:
+                  - img [ref=e37]
+                - button "음성 검색" [ref=e39] [cursor=pointer]:
+                  - img [ref=e40]
+                - button "이미지로 검색" [ref=e42] [cursor=pointer]:
+                  - img [ref=e43]
+          - button "검색" [ref=e45] [cursor=pointer]:
+            - img [ref=e48]
+    - generic [ref=e50]:
+      - button "설정" [ref=e52] [cursor=pointer]:
+        - img [ref=e55]
+      - generic [ref=e58]:
+        - button "Google 앱" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+        - link "로그인" [ref=e65] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=ko&passive=true&continue=https://www.google.com/search%3Fq%3Dsite%253Asmartstore.naver.com%2BLG%2BQNED%2B65QNED75AEA%26sei%3D7lXmaZ6pDISqur8P-9eesQE&ec=futura_srp_og_si_72236_p
+  - generic [ref=e67]:
+    - navigation [ref=e73]:
+      - generic [ref=e79]:
+        - list [ref=e80]:
+          - listitem [ref=e81]:
+            - link "AI 모드" [ref=e84] [cursor=pointer]:
+              - /url: /search?q=site:smartstore.naver.com+LG+QNED+65QNED75AEA&sca_esv=208b7340aaa9f1e9&udm=50&fbs=ADc_l-bD_nyrjATWBKup7flJ4reabDXIIhQQUsoZw8B9coVqKEgfu6lcPwoTE2ivC7emLV0AWGBWuQtWjpZSXtcHUqoJtjvqcBSPQ1l5QX8WM6Le7TuEB2rxUDDJ41dmpAR32hLMm_GFjZW4QTN0eMyailYRZkbGGonPLhfQFKD7kKlVh_ZuCSXYjhSOKaENrRNzprwd_yy97DqmoZkM2q3gU_ZIqLWC3VOeJIMlAGCTbk3-dmYwXy8&aep=1&ntc=1&sa=X&ved=2ahUKEwjA0t2l7vyTAxXlIEQIHVS_AKwQ2J8OegQIDRAI
+              - generic [ref=e87]: AI 모드
+          - listitem [ref=e88]:
+            - link "전체" [disabled] [ref=e89]:
+              - generic [ref=e91]: 전체
+          - listitem [ref=e92]:
+            - link "쇼핑" [ref=e93] [cursor=pointer]:
+              - /url: /search?sca_esv=208b7340aaa9f1e9&udm=28&fbs=ADc_l-bD_nyrjATWBKup7flJ4reabDXIIhQQUsoZw8B9coVqKEgfu6lcPwoTE2ivC7emLV0AWGBWuQtWjpZSXtcHUqoJtjvqcBSPQ1l5QX8WM6Le7TuEB2rxUDDJ41dmpAR32hLMm_GFjZW4QTN0eMyailYRZkbGGonPLhfQFKD7kKlVh_ZuCSXYjhSOKaENrRNzprwd_yy97DqmoZkM2q3gU_ZIqLWC3VOeJIMlAGCTbk3-dmYwXy8&q=site:smartstore.naver.com+LG+QNED+65QNED75AEA&ved=1t:220175&ictx=111
+              - generic [ref=e95]: 쇼핑
+          - listitem [ref=e96]:
+            - link "이미지" [ref=e97] [cursor=pointer]:
+              - /url: /search?sca_esv=208b7340aaa9f1e9&udm=2&fbs=ADc_l-bD_nyrjATWBKup7flJ4reabDXIIhQQUsoZw8B9coVqKEgfu6lcPwoTE2ivC7emLV0AWGBWuQtWjpZSXtcHUqoJtjvqcBSPQ1l5QX8WM6Le7TuEB2rxUDDJ41dmpAR32hLMm_GFjZW4QTN0eMyailYRZkbGGonPLhfQFKD7kKlVh_ZuCSXYjhSOKaENrRNzprwd_yy97DqmoZkM2q3gU_ZIqLWC3VOeJIMlAGCTbk3-dmYwXy8&q=site:smartstore.naver.com+LG+QNED+65QNED75AEA&sa=X&ved=2ahUKEwjA0t2l7vyTAxXlIEQIHVS_AKwQtKgLegQIEhAB
+              - generic [ref=e99]: 이미지
+          - listitem [ref=e100]:
+            - link "동영상" [ref=e101] [cursor=pointer]:
+              - /url: /search?sca_esv=208b7340aaa9f1e9&udm=7&fbs=ADc_l-bD_nyrjATWBKup7flJ4reabDXIIhQQUsoZw8B9coVqKEgfu6lcPwoTE2ivC7emLV0AWGBWuQtWjpZSXtcHUqoJtjvqcBSPQ1l5QX8WM6Le7TuEB2rxUDDJ41dmpAR32hLMm_GFjZW4QTN0eMyailYRZkbGGonPLhfQFKD7kKlVh_ZuCSXYjhSOKaENrRNzprwd_yy97DqmoZkM2q3gU_ZIqLWC3VOeJIMlAGCTbk3-dmYwXy8&q=site:smartstore.naver.com+LG+QNED+65QNED75AEA&sa=X&ved=2ahUKEwjA0t2l7vyTAxXlIEQIHVS_AKwQtKgLegQIExAB
+              - generic [ref=e103]: 동영상
+          - listitem [ref=e104]:
+            - link "짧은 동영상" [ref=e105] [cursor=pointer]:
+              - /url: /search?sca_esv=208b7340aaa9f1e9&udm=39&fbs=ADc_l-bD_nyrjATWBKup7flJ4reabDXIIhQQUsoZw8B9coVqKEgfu6lcPwoTE2ivC7emLV0AWGBWuQtWjpZSXtcHUqoJtjvqcBSPQ1l5QX8WM6Le7TuEB2rxUDDJ41dmpAR32hLMm_GFjZW4QTN0eMyailYRZkbGGonPLhfQFKD7kKlVh_ZuCSXYjhSOKaENrRNzprwd_yy97DqmoZkM2q3gU_ZIqLWC3VOeJIMlAGCTbk3-dmYwXy8&q=site:smartstore.naver.com+LG+QNED+65QNED75AEA&sa=X&ved=2ahUKEwjA0t2l7vyTAxXlIEQIHVS_AKwQs6gLegQIERAB
+              - generic [ref=e107]: 짧은 동영상
+          - listitem [ref=e108]:
+            - link "뉴스" [ref=e109] [cursor=pointer]:
+              - /url: /search?sca_esv=208b7340aaa9f1e9&q=site:smartstore.naver.com+LG+QNED+65QNED75AEA&tbm=nws&source=lnms&fbs=ADc_l-bD_nyrjATWBKup7flJ4reabDXIIhQQUsoZw8B9coVqKEgfu6lcPwoTE2ivC7emLV0AWGBWuQtWjpZSXtcHUqoJtjvqcBSPQ1l5QX8WM6Le7TuEB2rxUDDJ41dmpAR32hLMm_GFjZW4QTN0eMyailYRZkbGGonPLhfQFKD7kKlVh_ZuCSXYjhSOKaENrRNzprwd_yy97DqmoZkM2q3gU_ZIqLWC3VOeJIMlAGCTbk3-dmYwXy8&sa=X&ved=2ahUKEwjA0t2l7vyTAxXlIEQIHVS_AKwQ0pQJegQIEBAB
+              - generic [ref=e111]: 뉴스
+          - listitem [ref=e112]:
+            - button "필터 더보기" [ref=e113] [cursor=pointer]:
+              - generic "필터 더보기" [ref=e114]:
+                - generic [ref=e115]:
+                  - generic [ref=e116]: 더보기
+                  - img [ref=e118]
+        - button "도구" [ref=e121] [cursor=pointer]:
+          - generic [ref=e123]:
+            - generic [ref=e124]: 도구
+            - img [ref=e126]
+    - heading "검색결과" [level=1] [ref=e128]
+    - main [ref=e134]:
+      - generic [ref=e136]:
+        - generic [ref=e138]:
+          - heading "site:smartstore.naver.com LG QNED 65QNED75AEA와(과) 일치하는 검색결과가 없습니다." [level=3] [ref=e139]:
+            - emphasis [ref=e141]: site:smartstore.naver.com LG QNED 65QNED75AEA
+            - text: 와(과) 일치하는 검색결과가 없습니다.
+          - paragraph [ref=e142]: "제안:"
+          - list [ref=e143]:
+            - listitem [ref=e144]: 모든 단어의 철자가 정확한지 확인하세요.
+            - listitem [ref=e145]: 다른 검색어를 사용해 보세요.
+            - listitem [ref=e146]: 더 일반적인 검색어를 사용해 보세요.
+            - listitem [ref=e147]: 키워드 수를 줄여보세요.
+          - img "얼음 속에서 무언가를 낚는 설인의 이미지" [ref=e151]:
+            - img [ref=e155]
+        - navigation
+      - navigation
+    - contentinfo [ref=e238]:
+      - heading "바닥글 링크" [level=1] [ref=e239]
+      - generic [ref=e243]:
+        - generic [ref=e245]:
+          - text: 대한민국
+          - generic [ref=e247]:
+            - button "김해시 경상남도 - IP 주소 기반" [ref=e249] [cursor=pointer]:
+              - generic [ref=e250]: 김해시 경상남도
+              - generic [ref=e252]:
+                - text: "-"
+                - generic [ref=e253]: IP 주소 기반
+            - text: "-"
+            - button "위치 업데이트" [ref=e255] [cursor=pointer]: 위치 업데이트
+        - generic [ref=e258]:
+          - link "도움말" [ref=e259] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=ko&fg=1
+          - link "의견 보내기" [ref=e260] [cursor=pointer]:
+            - /url: "#"
+          - link "개인정보처리방침" [ref=e261] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=ko&fg=1
+          - link "약관" [ref=e262] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=ko&fg=1

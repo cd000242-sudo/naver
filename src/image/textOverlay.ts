@@ -46,6 +46,12 @@ export async function addTextOverlay(
             fontFamily = 'Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif',
             padding = 30
         } = options;
+        // ✅ [v1.4.77] 0원 아티팩트가 이미지로 박히는 것을 방지 — 패턴 감지 시 전체 오버레이 skip
+        if (/(?:^|[^\d,])0\s*원/.test(text)) {
+            console.warn(`[TextOverlay] ⚠️ "0원" 패턴 감지 → 오버레이 전체 스킵 (text="${text.substring(0, 60)}")`);
+            const buf = Buffer.isBuffer(inputPath) ? inputPath : await sharp(inputPath).toBuffer();
+            return { success: true, outputBuffer: buf };
+        }
 
         // 이미지 메타데이터 가져오기
         const image = sharp(inputPath);

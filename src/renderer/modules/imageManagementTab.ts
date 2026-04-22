@@ -466,14 +466,12 @@ export function initImageManagementTab(): void {
       }
     }
 
-    // ✅ [2026-03-16 FIX] ImageFX 기본값 — 초기화 시점에 직접 버튼 생성 (change 이벤트 의존 제거)
-    // change 이벤트 디스패치 방식은 formUtilities.ts 등 중복 핸들러 간섭으로 불안정
-    // → 초기화 시점에 직접 ensureImageFxSwitchButton 호출하여 확실하게 버튼 표시
+    // ✅ [v1.4.80 FIX] 과거 "ImageFX만 됐던 버그" 재발 원인 제거
+    // 이전: UI select.value가 imagefx면 이미지 관리 탭 진입마다 풀오토/전역 설정을 imagefx로 강제 덮어씀
+    //       → 사용자가 Flow 선택해도 이미지 관리 탭 한 번 여는 순간 imagefx로 되돌아감
+    // 수정: localStorage 쓰기 완전 제거 — 버튼 표시만 수행 (사용자 선택값 보존)
     const currentSource = imageSourceSelect.value;
     if (currentSource === 'imagefx') {
-      (window as any).globalImageSource = 'imagefx';
-      localStorage.setItem('globalImageSource', 'imagefx');
-      localStorage.setItem('fullAutoImageSource', 'imagefx');
       ensureImageFxSwitchButton(imageSourceSelect, true);
     }
   }

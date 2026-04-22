@@ -139,7 +139,7 @@ Complete image prompt:`;
             const response = await axios.post(
                 'https://api.openai.com/v1/chat/completions',
                 {
-                    model: 'gpt-5.4',
+                    model: 'gpt-4.1',
                     messages: [
                         { role: 'system', content: `You are an expert AI image prompt engineer for ${imageStyle || 'realistic'} style. Output ONLY the English prompt, nothing else.` },
                         { role: 'user', content: promptText }
@@ -265,7 +265,9 @@ function getGenericSceneByCategory(category?: string): string {
 
 // ✅ DeepInfra FLUX API 설정 (참고: https://deepinfra.com/black-forest-labs/FLUX-2-dev)
 const DEEPINFRA_API_URL = 'https://api.deepinfra.com/v1/openai/images/generations';
-const DEFAULT_DEEPINFRA_MODEL = 'black-forest-labs/FLUX-2-dev'; // 기본값
+// ✅ [v1.4.77] 기본 모델을 schnell($0.003/장)로 변경 — dev($0.025/장) 대비 8배 저렴
+// 한국어 블로그 이미지는 schnell + VARIATION_STYLES 프롬프트 강화로 품질 보전
+const DEFAULT_DEEPINFRA_MODEL = 'black-forest-labs/FLUX-1-schnell'; // 기본값 (저가형)
 
 // ✅ [2026-01-28] FLUX Redux (image-to-image) API 설정
 const DEEPINFRA_REDUX_API_URL = 'https://api.deepinfra.com/v1/inference/black-forest-labs/FLUX-1-Redux-dev';

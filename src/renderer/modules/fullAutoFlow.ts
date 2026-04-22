@@ -616,15 +616,26 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
       const IMAGE_GEN_MAX_RETRIES = 6;
       let imageGenSuccess = false;
 
-      // ✅ 프로바이더 폴백 체인: 원래 엔진 3회 → DALL-E → Leonardo AI → DeepInfra
+      // ✅ [v1.4.80] 프로바이더 폴백 체인 — 무료 엔진 우선 + 유료 최소화
+      //   원래 엔진 3회 → 무료/저가 엔진 우선 → 마지막에만 유료 고비용
+      //   Flow/ImageFX 선택 시 같은 Google 세션 내에서 폴백 (AdsPower 재사용)
       const originalProvider = formData.imageSource;
-      const FALLBACK_CHAIN = [
+      // 원본이 Flow/ImageFX(무료)면 상호 폴백, 유료 엔진은 마지막 수단
+      const isOriginFree = originalProvider === 'flow' || originalProvider === 'imagefx';
+      const FALLBACK_CHAIN = isOriginFree ? [
         originalProvider,    // 1회차
         originalProvider,    // 2회차
         originalProvider,    // 3회차
-        'openai-image',      // 4회차: DALL-E
-        'leonardoai',        // 5회차: Leonardo AI
-        'deepinfra',         // 6회차: DeepInfra FLUX-2
+        originalProvider === 'flow' ? 'imagefx' : 'flow',  // 4회차: 다른 무료 엔진
+        'deepinfra',         // 5회차: DeepInfra FLUX schnell ($0.003/장)
+        'deepinfra',         // 6회차: 동일 (저가 유지)
+      ] : [
+        originalProvider,    // 1회차
+        originalProvider,    // 2회차
+        originalProvider,    // 3회차
+        'imagefx',           // 4회차: ImageFX (무료)
+        'deepinfra',         // 5회차: DeepInfra FLUX schnell (저가)
+        'openai-image',      // 6회차: DALL-E (최후 유료)
       ];
       const getProviderForAttempt = (attempt: number): string => {
         return FALLBACK_CHAIN[attempt - 1] || FALLBACK_CHAIN[FALLBACK_CHAIN.length - 1];
@@ -2366,6 +2377,10 @@ export async function generateAIImagesForHeadings(headings: any[], formData: any
     'falai': 'Fal.ai FLUX (과금 가능)',
     'naver-search': '네이버 이미지 검색',
     'naver': '네이버 이미지 검색',
+    'imagefx': 'ImageFX (Google 무료)',
+    'flow': 'Flow (Nano Banana Pro, AI Pro 무료)', // ✅ [v1.4.80]
+    'openai-image': 'OpenAI DALL-E',
+    'leonardoai': 'Leonardo AI',
   };
   appendLog(`🎨 ${sourceNames[imageSource] || imageSource}로 ${headings.length}개 이미지 생성 시작...`);
   // ✅ 비용/과금 위험 provider는 동시 요청을 막기 위해 순차 처리

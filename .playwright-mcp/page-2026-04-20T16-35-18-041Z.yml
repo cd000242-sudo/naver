@@ -1,0 +1,1031 @@
+- generic [ref=e4]:
+  - link "본문으로 바로가기" [ref=e5] [cursor=pointer]:
+    - /url: "#content"
+    - generic [ref=e6]: 본문으로 바로가기
+  - generic [ref=e7]:
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]:
+            - link "네이버" [ref=e15] [cursor=pointer]:
+              - /url: https://www.naver.com
+              - generic [ref=e16]: 네이버
+              - img [ref=e17]
+            - link "네이버플러스 스토어 홈" [ref=e19] [cursor=pointer]:
+              - /url: https://shopping.naver.com/ns/home?
+              - generic [ref=e20]: 네이버플러스 스토어 홈
+              - img [ref=e21]
+          - generic [ref=e27]:
+            - strong [ref=e28]: 사용자 링크
+            - list [ref=e29]:
+              - listitem [ref=e30]:
+                - link "로그인" [ref=e31] [cursor=pointer]:
+                  - /url: https://nid.naver.com/nidlogin.login?url=https%3A%2F%2Fbrand.naver.com%2Flge
+                  - generic [ref=e34]: 로그인
+              - listitem [ref=e35]:
+                - link "서비스 더보기" [ref=e36] [cursor=pointer]:
+                  - /url: javascript:;
+                  - generic [ref=e37]: 서비스 더보기
+        - generic [ref=e39]:
+          - heading "LG전자" [level=1] [ref=e40]:
+            - link "LG전자" [ref=e41] [cursor=pointer]:
+              - /url: /lge
+              - img "LG전자" [ref=e42]
+          - generic [ref=e44]:
+            - textbox "검색어 입력" [ref=e45]:
+              - /placeholder: 검색어를 입력해보세요
+            - button "검색하기" [ref=e46] [cursor=pointer]:
+              - generic [ref=e47]: 검색하기
+              - img [ref=e48]
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - list [ref=e58]:
+            - listitem [ref=e59]:
+              - link "쇼핑라이브" [ref=e60] [cursor=pointer]:
+                - /url: /lge/lives?cp=1
+                - img [ref=e61]
+                - generic [ref=e65]: 쇼핑라이브
+            - listitem [ref=e66]:
+              - link "베스트 BEST" [ref=e67] [cursor=pointer]:
+                - /url: /lge/best?cp=1
+            - listitem [ref=e68]:
+              - link "신상품 NEW 하위 메뉴 있음" [ref=e69] [cursor=pointer]:
+                - /url: /lge/category/3f090d7af8ca42909702ceab13b19327?cp=1
+                - text: 신상품 NEW
+                - generic [ref=e70]: 하위 메뉴 있음
+                - img [ref=e71]
+            - listitem [ref=e73]:
+              - link "에어컨·에어케어 하위 메뉴 있음" [ref=e74] [cursor=pointer]:
+                - /url: /lge/category/0a94233dcb4f4f82bc8fff6ffdf82103?cp=1
+                - text: 에어컨·에어케어
+                - generic [ref=e75]: 하위 메뉴 있음
+                - img [ref=e76]
+            - listitem [ref=e78]:
+              - link "오브제컬렉션 하위 메뉴 있음" [ref=e79] [cursor=pointer]:
+                - /url: /lge/category/8f7b1b5c6c934c91bb520a2384ecb28e?cp=1
+                - text: 오브제컬렉션
+                - generic [ref=e80]: 하위 메뉴 있음
+                - img [ref=e81]
+            - listitem [ref=e83]:
+              - link "AI 하위 메뉴 있음" [ref=e84] [cursor=pointer]:
+                - /url: /lge/category/8085ea6dbe1e42a5bef60f72096877a1?cp=1
+                - text: AI
+                - generic [ref=e85]: 하위 메뉴 있음
+                - img [ref=e86]
+            - listitem [ref=e88]:
+              - link "TV⋅오디오 하위 메뉴 있음" [ref=e89] [cursor=pointer]:
+                - /url: /lge/category/8d9ca886464e424e8b442b9d7fdbfa75?cp=1
+                - text: TV⋅오디오
+                - generic [ref=e90]: 하위 메뉴 있음
+                - img [ref=e91]
+            - listitem [ref=e93]:
+              - link "PC⋅모니터 하위 메뉴 있음" [ref=e94] [cursor=pointer]:
+                - /url: /lge/category/314d43ffb957443a93d9c0065d7deecc?cp=1
+                - text: PC⋅모니터
+                - generic [ref=e95]: 하위 메뉴 있음
+                - img [ref=e96]
+            - listitem [ref=e98]:
+              - link "주방가전 하위 메뉴 있음" [ref=e99] [cursor=pointer]:
+                - /url: /lge/category/431393d73cd84132a19197dd820f5a77?cp=1
+                - text: 주방가전
+                - generic [ref=e100]: 하위 메뉴 있음
+                - img [ref=e101]
+            - listitem [ref=e103]:
+              - link "생활가전 하위 메뉴 있음" [ref=e104] [cursor=pointer]:
+                - /url: /lge/category/6328c8ebbe374861ae49ddb69b2aadf6?cp=1
+                - text: 생활가전
+                - generic [ref=e105]: 하위 메뉴 있음
+                - img [ref=e106]
+            - listitem [ref=e108]:
+              - link "전체상품" [ref=e109] [cursor=pointer]:
+                - /url: /lge/category/4a807869f2eb4deba68159d60a592d32?cp=2
+          - list [ref=e110]:
+            - listitem [ref=e111]:
+              - link "쇼핑스토리" [ref=e112] [cursor=pointer]:
+                - /url: /lge/shoppingstory/list?cp=2
+        - button "더보기" [ref=e113] [cursor=pointer]:
+          - text: 더보기
+          - img [ref=e114]
+    - generic [ref=e116]:
+      - generic [ref=e136]:
+        - link "상품 바로가기" [ref=e140] [cursor=pointer]:
+          - /url: https://brand.naver.com/lge/shoppingstory/detail?id=5002658886&page=1
+          - generic [ref=e141]: 상품 바로가기
+        - link "상품 바로가기" [ref=e145] [cursor=pointer]:
+          - /url: https://brand.naver.com/lge/shoppingstory/detail?id=5002665911&channelUid=2sWDz2GSGFMA1aLI6SOVv
+          - generic [ref=e146]: 상품 바로가기
+        - link "상품 바로가기" [ref=e150] [cursor=pointer]:
+          - /url: https://brand.naver.com/lge/shoppingstory/detail?id=5002607712
+          - generic [ref=e151]: 상품 바로가기
+        - link "상품 바로가기" [ref=e155] [cursor=pointer]:
+          - /url: https://brand.naver.com/lge/shoppingstory/detail?id=5002607795
+          - generic [ref=e156]: 상품 바로가기
+        - link "상품 바로가기" [ref=e160] [cursor=pointer]:
+          - /url: https://brand.naver.com/lge/shoppingstory/detail?id=5002607883
+          - generic [ref=e161]: 상품 바로가기
+        - link "상품 바로가기" [ref=e165] [cursor=pointer]:
+          - /url: https://brand.naver.com/lge/shoppingstory/detail?id=5002658895&page=1
+          - generic [ref=e166]: 상품 바로가기
+        - link "상품 바로가기" [ref=e170] [cursor=pointer]:
+          - /url: https://brand.naver.com/lge/shoppingstory/detail?id=5002658907&page=1
+          - generic [ref=e171]: 상품 바로가기
+        - list [ref=e173]:
+          - listitem [ref=e174]:
+            - button "1" [ref=e1272] [cursor=pointer]:
+              - generic [ref=e176]: "1"
+          - listitem [ref=e178]:
+            - button "2" [ref=e179] [cursor=pointer]:
+              - generic [ref=e180]: "2"
+          - listitem [ref=e181]:
+            - button "3" [ref=e1302] [cursor=pointer]:
+              - generic [ref=e183]: "3"
+          - listitem [ref=e184]:
+            - button "4" [ref=e185] [cursor=pointer]:
+              - generic [ref=e186]: "4"
+          - listitem [ref=e187]:
+            - button "5 현재 페이지" [ref=e1303] [cursor=pointer]:
+              - generic [ref=e189]: "5"
+              - generic [ref=e1304]: 현재 페이지
+          - listitem [ref=e190]:
+            - button "6" [ref=e191] [cursor=pointer]:
+              - generic [ref=e192]: "6"
+          - listitem [ref=e193]:
+            - button "7" [ref=e194] [cursor=pointer]:
+              - generic [ref=e195]: "7"
+        - generic [ref=e196]:
+          - button "이전" [ref=e197] [cursor=pointer]:
+            - generic [ref=e198]: 이전
+          - button "다음" [ref=e199] [cursor=pointer]:
+            - generic [ref=e200]: 다음
+      - generic [ref=e204]:
+        - strong [ref=e207]: 추천 카테고리
+        - list [ref=e208]:
+          - listitem [ref=e209]:
+            - link "오브제컬렉션 오브제컬렉션" [ref=e210] [cursor=pointer]:
+              - /url: /lge/category/8f7b1b5c6c934c91bb520a2384ecb28e
+              - img "오브제컬렉션" [ref=e212]
+              - generic [ref=e213]: 오브제컬렉션
+          - listitem [ref=e215]:
+            - link "AI AI" [ref=e216] [cursor=pointer]:
+              - /url: /lge/category/8085ea6dbe1e42a5bef60f72096877a1
+              - img "AI" [ref=e218]
+              - generic [ref=e219]: AI
+          - listitem [ref=e221]:
+            - link "에어컨 에어컨" [ref=e222] [cursor=pointer]:
+              - /url: /lge/category/0b9c6f23e35f4f7685e2492e0471c65e
+              - img "에어컨" [ref=e224]
+              - generic [ref=e225]: 에어컨
+          - listitem [ref=e227]:
+            - link "제습기 제습기" [ref=e228] [cursor=pointer]:
+              - /url: /lge/category/aeb69242e6f3403a87ee63de3b896c93
+              - img "제습기" [ref=e230]
+              - generic [ref=e231]: 제습기
+          - listitem [ref=e233]:
+            - link "냉장고 냉장고" [ref=e234] [cursor=pointer]:
+              - /url: /lge/category/317e6191e0f84e22866bdce8e998a293
+              - img "냉장고" [ref=e236]
+              - generic [ref=e237]: 냉장고
+          - listitem [ref=e239]:
+            - link "TV TV" [ref=e240] [cursor=pointer]:
+              - /url: /lge/category/a64ca2e5adca4b3893767e77c0fb9143
+              - img "TV" [ref=e242]
+              - generic [ref=e243]: TV
+          - listitem [ref=e245]:
+            - link "스탠바이미 스탠바이미" [ref=e246] [cursor=pointer]:
+              - /url: /lge/category/a66fc96e87504cc9a176f5fe8444d0d7
+              - img "스탠바이미" [ref=e248]
+              - generic [ref=e249]: 스탠바이미
+          - listitem [ref=e251]:
+            - link "워시타워 워시타워" [ref=e252] [cursor=pointer]:
+              - /url: /lge/category/6a82aaa7f80f408aa2b1472f637798c5
+              - img "워시타워" [ref=e254]
+              - generic [ref=e255]: 워시타워
+          - listitem [ref=e257]:
+            - link "공기청정기 공기청정기" [ref=e258] [cursor=pointer]:
+              - /url: /lge/category/b4e56d44cb454885a8fa42a4c90ed5ae
+              - img "공기청정기" [ref=e260]
+              - generic [ref=e261]: 공기청정기
+      - generic [ref=e267]:
+        - strong [ref=e269]: ✨ BEST ✨
+        - list [ref=e272]:
+          - listitem [ref=e273]:
+            - generic [ref=e274]:
+              - img "김치톡톡 김치냉장고 3도어 327L (11)" [ref=e277]
+              - button "찜하기" [ref=e280] [cursor=pointer]:
+                - generic [ref=e281]: 찜하기
+              - link "상품 바로가기" [ref=e282] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002561&frm=PBRSTHM&h=a1b4ec7db08d89f38d760622d1596e882498f747&nv_mid=54257022196&t=MO7F13Z3
+                - generic [ref=e283]: 상품 바로가기
+            - generic [ref=e284]:
+              - generic [ref=e285]:
+                - generic [ref=e287]: 1,408,990원 부터
+                - strong [ref=e288]: 김치톡톡 김치냉장고 3도어 327L (11)
+                - generic [ref=e289]:
+                  - generic [ref=e290]: 평점 4.94
+                  - generic [ref=e291]: 리뷰 2,471
+                - emphasis [ref=e292]: 디오스
+              - link [ref=e293] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002561&frm=PBRSTHM&h=a1b4ec7db08d89f38d760622d1596e882498f747&nv_mid=54257022196&t=MO7F13Z3
+          - listitem [ref=e294]:
+            - generic [ref=e295]:
+              - img "AS305DWWLM V 필터" [ref=e298]
+              - button "찜하기" [ref=e301] [cursor=pointer]:
+                - generic [ref=e302]: 찜하기
+              - link "상품 바로가기" [ref=e303] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002543&frm=PBRSTHM&h=c66522601e2e56de153fd609faa3f1d3406213fc&nv_mid=53207583529&t=MO7F13Z4
+                - generic [ref=e304]: 상품 바로가기
+            - generic [ref=e305]:
+              - generic [ref=e306]:
+                - generic [ref=e308]: 816,000원 부터
+                - strong [ref=e309]: AS305DWWLM V 필터
+                - generic [ref=e310]:
+                  - generic [ref=e311]: 평점 4.98
+                  - generic [ref=e312]: 리뷰 2,531
+                - emphasis [ref=e313]: LG퓨리케어
+              - link [ref=e314] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002543&frm=PBRSTHM&h=c66522601e2e56de153fd609faa3f1d3406213fc&nv_mid=53207583529&t=MO7F13Z4
+          - listitem [ref=e315]:
+            - generic [ref=e316]:
+              - img "AI 오브제컬렉션 냉장고 Fit & Max 4도어 609L (0M1)" [ref=e319]
+              - button "찜하기" [ref=e322] [cursor=pointer]:
+                - generic [ref=e323]: 찜하기
+              - link "상품 바로가기" [ref=e324] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=9d942c51e6ae0186ccfc4fdcbca087b637091b60&nv_mid=55785611464&t=MO7F13Z4
+                - generic [ref=e325]: 상품 바로가기
+            - generic [ref=e326]:
+              - generic [ref=e327]:
+                - generic [ref=e329]: 2,600,000원 부터
+                - strong [ref=e330]: AI 오브제컬렉션 냉장고 Fit & Max 4도어 609L (0M1)
+                - generic [ref=e331]:
+                  - generic [ref=e332]: 평점 4.96
+                  - generic [ref=e333]: 리뷰 1,425
+                - emphasis [ref=e334]: 디오스
+              - link [ref=e335] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=9d942c51e6ae0186ccfc4fdcbca087b637091b60&nv_mid=55785611464&t=MO7F13Z4
+          - listitem [ref=e336]:
+            - generic [ref=e337]:
+              - img "4도어 870L (T873MEE111) 냉장고" [ref=e340]
+              - button "찜하기" [ref=e343] [cursor=pointer]:
+                - generic [ref=e344]: 찜하기
+              - link "상품 바로가기" [ref=e345] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=2e516a8a1405706cf6d108baae909689e800f970&nv_mid=33633987618&t=MO7F13Z4
+                - generic [ref=e346]: 상품 바로가기
+            - generic [ref=e347]:
+              - generic [ref=e348]:
+                - generic [ref=e350]: 1,950,000원 부터
+                - strong [ref=e351]: 4도어 870L (T873MEE111) 냉장고
+                - generic [ref=e352]:
+                  - generic [ref=e353]: 평점 4.92
+                  - generic [ref=e354]: 리뷰 1,372
+                - emphasis [ref=e355]: 디오스
+              - link [ref=e356] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=2e516a8a1405706cf6d108baae909689e800f970&nv_mid=33633987618&t=MO7F13Z4
+          - listitem [ref=e357]:
+            - generic [ref=e358]:
+              - img "SC5GMR80H" [ref=e361]
+              - button "찜하기" [ref=e364] [cursor=pointer]:
+                - generic [ref=e365]: 찜하기
+              - link "상품 바로가기" [ref=e366] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50015681&frm=PBRSTHM&h=69f55ae41f854179381442a59eb802ad8381909b&nv_mid=55561950654&t=MO7F13Z4
+                - generic [ref=e367]: 상품 바로가기
+            - generic [ref=e368]:
+              - generic [ref=e369]:
+                - generic [ref=e371]: 2,050,000원 부터
+                - strong [ref=e372]: SC5GMR80H
+                - generic [ref=e373]:
+                  - generic [ref=e374]: 평점 4.97
+                  - generic [ref=e375]: 리뷰 2,191
+                - emphasis [ref=e376]: 스타일러
+              - link [ref=e377] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50015681&frm=PBRSTHM&h=69f55ae41f854179381442a59eb802ad8381909b&nv_mid=55561950654&t=MO7F13Z4
+          - listitem [ref=e378]:
+            - generic [ref=e379]:
+              - img "MW23FD" [ref=e382]
+              - button "찜하기" [ref=e385] [cursor=pointer]:
+                - generic [ref=e386]: 찜하기
+              - link "상품 바로가기" [ref=e387] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50001856&frm=PBRSTHM&h=1fdaae714da84436cc4b1a943d40c7fb17a8689f&nv_mid=53122848139&t=MO7F13Z4
+                - generic [ref=e388]: 상품 바로가기
+            - generic [ref=e389]:
+              - generic [ref=e390]:
+                - generic [ref=e392]: 154,000원 부터
+                - strong [ref=e393]: MW23FD
+                - generic [ref=e394]:
+                  - generic [ref=e395]: 평점 4.89
+                  - generic [ref=e396]: 리뷰 321
+                - emphasis [ref=e397]: 디오스
+              - link [ref=e398] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50001856&frm=PBRSTHM&h=1fdaae714da84436cc4b1a943d40c7fb17a8689f&nv_mid=53122848139&t=MO7F13Z4
+          - listitem [ref=e399]:
+            - generic [ref=e400]:
+              - img "2024 LED 울트라 HD 4k 247cm(98인치) (98UT9300KNA)" [ref=e403]
+              - button "찜하기" [ref=e406] [cursor=pointer]:
+                - generic [ref=e407]: 찜하기
+              - link "상품 바로가기" [ref=e408] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=dd434f94b755e6b2126789c5f9d52c869097bb8e&nv_mid=54793475777&t=MO7F13Z4
+                - generic [ref=e409]: 상품 바로가기
+            - generic [ref=e410]:
+              - generic [ref=e411]:
+                - generic [ref=e413]: 3,610,000원 부터
+                - strong [ref=e414]: 2024 LED 울트라 HD 4k 247cm(98인치) (98UT9300KNA)
+                - generic [ref=e415]:
+                  - generic [ref=e416]: 평점 4.91
+                  - generic [ref=e417]: 리뷰 204
+                - emphasis [ref=e418]: 울트라HD
+              - link [ref=e419] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=dd434f94b755e6b2126789c5f9d52c869097bb8e&nv_mid=54793475777&t=MO7F13Z4
+          - listitem [ref=e420]:
+            - generic [ref=e421]:
+              - img "27UP850K 68~69cm(27인치)" [ref=e424]
+              - button "찜하기" [ref=e427] [cursor=pointer]:
+                - generic [ref=e428]: 찜하기
+              - link "상품 바로가기" [ref=e429] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000153&frm=PBRSTHM&h=b3d164c0ab431f7531d73b17f559f890589d79fa&nv_mid=52465529429&t=MO7F13Z4
+                - generic [ref=e430]: 상품 바로가기
+            - generic [ref=e431]:
+              - generic [ref=e432]:
+                - generic [ref=e434]: 429,000원 부터
+                - strong [ref=e435]: 27UP850K 68~69cm(27인치)
+                - generic [ref=e436]:
+                  - generic [ref=e437]: 평점 4.9
+                  - generic [ref=e438]: 리뷰 449
+                - emphasis [ref=e439]: LG전자
+              - link [ref=e440] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000153&frm=PBRSTHM&h=b3d164c0ab431f7531d73b17f559f890589d79fa&nv_mid=52465529429&t=MO7F13Z4
+          - listitem [ref=e441]:
+            - generic [ref=e442]:
+              - img "2025 mini LED QNED evo 189cm(75인치) (75QNED85AKA)" [ref=e445]
+              - button "찜하기" [ref=e448] [cursor=pointer]:
+                - generic [ref=e449]: 찜하기
+              - link "상품 바로가기" [ref=e450] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=5bacab6ed99b827aef32b9b95d0b5ad160caf472&nv_mid=57769145694&t=MO7F13Z4
+                - generic [ref=e451]: 상품 바로가기
+            - generic [ref=e452]:
+              - generic [ref=e453]:
+                - generic [ref=e455]: 2,490,000원 부터
+                - strong [ref=e456]: 2025 mini LED QNED evo 189cm(75인치) (75QNED85AKA)
+                - generic [ref=e457]:
+                  - generic [ref=e458]: 평점 4.96
+                  - generic [ref=e459]: 리뷰 142
+                - emphasis [ref=e460]: LG전자
+              - link [ref=e461] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=5bacab6ed99b827aef32b9b95d0b5ad160caf472&nv_mid=57769145694&t=MO7F13Z4
+          - listitem [ref=e462]:
+            - generic [ref=e463]:
+              - img "그램 Pro AI 2026 40.6cm AMD AI 5 16GB" [ref=e466]
+              - button "찜하기" [ref=e469] [cursor=pointer]:
+                - generic [ref=e470]: 찜하기
+              - link "상품 바로가기" [ref=e471] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000151&frm=PBRSTHM&h=0a5e13a0464c8ce7fd6c8f4d2195fae360908d86&nv_mid=58534135169&t=MO7F13Z4
+                - generic [ref=e472]: 상품 바로가기
+            - generic [ref=e473]:
+              - generic [ref=e474]:
+                - generic [ref=e476]: 2,430,000원 부터
+                - strong [ref=e477]: 그램 Pro AI 2026 40.6cm AMD AI 5 16GB
+                - generic [ref=e478]:
+                  - generic [ref=e479]: 평점 4.97
+                  - generic [ref=e480]: 리뷰 401
+                - emphasis [ref=e481]: LG전자
+              - link [ref=e482] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000151&frm=PBRSTHM&h=0a5e13a0464c8ce7fd6c8f4d2195fae360908d86&nv_mid=58534135169&t=MO7F13Z4
+          - listitem [ref=e483]:
+            - generic [ref=e484]:
+              - img "FX23WXNW + RD20WXNW (W20WAN)" [ref=e487]
+              - button "찜하기" [ref=e490] [cursor=pointer]:
+                - generic [ref=e491]: 찜하기
+              - link "상품 바로가기" [ref=e492] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50015901&frm=PBRSTHM&h=a69cac57b43b31d90109d6cbf6c21eb7bd187870&nv_mid=31368381619&t=MO7F13Z4
+                - generic [ref=e493]: 상품 바로가기
+            - generic [ref=e494]:
+              - generic [ref=e495]:
+                - generic [ref=e497]: 2,330,000원 부터
+                - strong [ref=e498]: FX23WXNW + RD20WXNW (W20WAN)
+                - generic [ref=e499]:
+                  - generic [ref=e500]: 평점 4.97
+                  - generic [ref=e501]: 리뷰 463
+                - emphasis [ref=e502]: 워시타워
+              - link [ref=e503] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50015901&frm=PBRSTHM&h=a69cac57b43b31d90109d6cbf6c21eb7bd187870&nv_mid=31368381619&t=MO7F13Z4
+          - listitem [ref=e504]:
+            - generic [ref=e505]:
+              - img "DUE6BGL2E 14인용" [ref=e508]
+              - button "찜하기" [ref=e511] [cursor=pointer]:
+                - generic [ref=e512]: 찜하기
+              - link "상품 바로가기" [ref=e513] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002580&frm=PBRSTHM&h=22fe6d8ac189cddd50b2f82dc671871dc79c7566&nv_mid=53247585314&t=MO7F13Z4
+                - generic [ref=e514]: 상품 바로가기
+            - generic [ref=e515]:
+              - generic [ref=e516]:
+                - generic [ref=e518]: 1,370,000원 부터
+                - strong [ref=e519]: DUE6BGL2E 14인용
+                - generic [ref=e520]:
+                  - generic [ref=e521]: 평점 4.96
+                  - generic [ref=e522]: 리뷰 1,172
+                - emphasis [ref=e523]: 디오스
+              - link [ref=e524] [cursor=pointer]:
+                - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002580&frm=PBRSTHM&h=22fe6d8ac189cddd50b2f82dc671871dc79c7566&nv_mid=53247585314&t=MO7F13Z4
+      - generic [ref=e528]:
+        - strong [ref=e531]: ✨ LG Gram ✨
+        - generic "비디오 플레이어" [ref=e534]:
+          - generic: 0%
+          - button "재생" [ref=e1275] [cursor=pointer]:
+            - img [ref=e1277]
+          - generic "0 분 30 초" [ref=e1283]: 00:30
+      - list [ref=e549]:
+        - listitem [ref=e550]:
+          - generic [ref=e551]:
+            - img "그램 Pro AI 2026 40.6cm AMD AI 5 16GB" [ref=e554]
+            - button "찜하기" [ref=e557] [cursor=pointer]:
+              - generic [ref=e558]: 찜하기
+            - link "상품 바로가기" [ref=e559] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000151&frm=PBRSTHM&h=345bccc350e5031408375ccb871fad2264e802c7&nv_mid=58534135169&t=MO7F13Z0
+              - generic [ref=e560]: 상품 바로가기
+          - generic [ref=e561]:
+            - generic [ref=e562]:
+              - generic [ref=e564]: 2,430,000원 부터
+              - strong [ref=e565]: 그램 Pro AI 2026 40.6cm AMD AI 5 16GB
+              - generic [ref=e566]:
+                - generic [ref=e567]: 평점 4.97
+                - generic [ref=e568]: 리뷰 401
+              - emphasis [ref=e569]: LG전자
+            - link [ref=e570] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000151&frm=PBRSTHM&h=345bccc350e5031408375ccb871fad2264e802c7&nv_mid=58534135169&t=MO7F13Z0
+        - listitem [ref=e571]:
+          - generic [ref=e572]:
+            - img "16Z90U-KU7WK RAM 32GB" [ref=e575]
+            - button "찜하기" [ref=e578] [cursor=pointer]:
+              - generic [ref=e579]: 찜하기
+            - link "상품 바로가기" [ref=e580] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000151&frm=PBRSTHM&h=fe377daa92eff4766496d7115e690095053ccc23&nv_mid=58901806654&t=MO7F13Z0
+              - generic [ref=e581]: 상품 바로가기
+          - generic [ref=e582]:
+            - generic [ref=e583]:
+              - generic [ref=e585]: 3,540,000원 부터
+              - strong [ref=e586]: 16Z90U-KU7WK RAM 32GB
+              - generic [ref=e587]:
+                - generic [ref=e588]: 평점 4.91
+                - generic [ref=e589]: 리뷰 158
+              - emphasis [ref=e590]: 그램 프로
+            - link [ref=e591] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000151&frm=PBRSTHM&h=fe377daa92eff4766496d7115e690095053ccc23&nv_mid=58901806654&t=MO7F13Z0
+        - listitem [ref=e592]:
+          - generic [ref=e593]:
+            - img "16Z95U-GU7WK RAM 32GB" [ref=e596]
+            - button "찜하기" [ref=e599] [cursor=pointer]:
+              - generic [ref=e600]: 찜하기
+            - link "상품 바로가기" [ref=e601] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000151&frm=PBRSTHM&h=3e3b04c35dc6841548af5bd2bad5662a25f8a872&nv_mid=58863394358&t=MO7F13Z0
+              - generic [ref=e602]: 상품 바로가기
+          - generic [ref=e603]:
+            - generic [ref=e604]:
+              - generic [ref=e606]: 3,410,000원 부터
+              - strong [ref=e607]: 16Z95U-GU7WK RAM 32GB
+              - generic [ref=e608]:
+                - generic [ref=e609]: 평점 4.95
+                - generic [ref=e610]: 리뷰 82
+              - emphasis [ref=e611]: 그램 프로
+            - link [ref=e612] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000151&frm=PBRSTHM&h=3e3b04c35dc6841548af5bd2bad5662a25f8a872&nv_mid=58863394358&t=MO7F13Z0
+        - listitem [ref=e613]:
+          - generic [ref=e614]:
+            - img "16Z95U-GU7CK RAM 32GB" [ref=e617]
+            - button "찜하기" [ref=e620] [cursor=pointer]:
+              - generic [ref=e621]: 찜하기
+            - link "상품 바로가기" [ref=e622] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000151&frm=PBRSTHM&h=60c33343e94ee13b15f35b8981d073f508f9af20&nv_mid=58863394330&t=MO7F13Z0
+              - generic [ref=e623]: 상품 바로가기
+          - generic [ref=e624]:
+            - generic [ref=e625]:
+              - generic [ref=e627]: 2,960,000원 부터
+              - strong [ref=e628]: 16Z95U-GU7CK RAM 32GB
+              - generic [ref=e629]:
+                - generic [ref=e630]: 평점 5.0
+                - generic [ref=e631]: 리뷰 40
+              - emphasis [ref=e632]: 그램 프로
+            - link [ref=e633] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50000151&frm=PBRSTHM&h=60c33343e94ee13b15f35b8981d073f508f9af20&nv_mid=58863394330&t=MO7F13Z0
+      - generic [ref=e637]:
+        - strong [ref=e640]: ✨ STEM 냉장고 ✨
+        - generic "비디오 플레이어" [ref=e643]:
+          - generic: 0%
+          - button "재생" [ref=e1284] [cursor=pointer]:
+            - img [ref=e1286]
+          - generic "0 분 30 초" [ref=e1292]: 00:30
+      - list [ref=e658]:
+        - listitem [ref=e659]:
+          - generic [ref=e660]:
+            - img "디오스 AI 냉장고 2도어 832L" [ref=e663]
+            - button "찜하기" [ref=e666] [cursor=pointer]:
+              - generic [ref=e667]: 찜하기
+            - link "상품 바로가기" [ref=e668] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=ca68333e5926a713cbd53db409bc6ca9ab109f5e&nv_mid=55744412196&t=MO7F13Z1
+              - generic [ref=e669]: 상품 바로가기
+          - generic [ref=e670]:
+            - generic [ref=e671]:
+              - generic [ref=e673]: 1,280,000원 부터
+              - strong [ref=e674]: 디오스 AI 냉장고 2도어 832L
+              - generic [ref=e675]:
+                - generic [ref=e676]: 평점 4.92
+                - generic [ref=e677]: 리뷰 784
+              - emphasis [ref=e678]: 오브제컬렉션
+            - link [ref=e679] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=ca68333e5926a713cbd53db409bc6ca9ab109f5e&nv_mid=55744412196&t=MO7F13Z1
+        - listitem [ref=e680]:
+          - generic [ref=e681]:
+            - img "오브제컬렉션 STEM 베이직 냉장고 Fit & Max (노크온) 4도어 601L" [ref=e684]
+            - button "찜하기" [ref=e687] [cursor=pointer]:
+              - generic [ref=e688]: 찜하기
+            - link "상품 바로가기" [ref=e689] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=7c8efaf3f97d461deffddceb3c306d456c837883&nv_mid=54365509435&t=MO7F13Z1
+              - generic [ref=e690]: 상품 바로가기
+          - generic [ref=e691]:
+            - generic [ref=e692]:
+              - generic [ref=e694]: 4,300,000원 부터
+              - strong [ref=e695]: 오브제컬렉션 STEM 베이직 냉장고 Fit & Max (노크온) 4도어 601L
+              - generic [ref=e696]:
+                - generic [ref=e697]: 평점 5.0
+                - generic [ref=e698]: 리뷰 37
+              - emphasis [ref=e699]: 디오스
+            - link [ref=e700] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=7c8efaf3f97d461deffddceb3c306d456c837883&nv_mid=54365509435&t=MO7F13Z1
+        - listitem [ref=e701]:
+          - generic [ref=e702]:
+            - img "AI 오브제컬렉션 STEM 베이직 냉장고 (노크온 더블매직스페이스) 4도어 854L (M876)" [ref=e705]
+            - button "찜하기" [ref=e708] [cursor=pointer]:
+              - generic [ref=e709]: 찜하기
+            - link "상품 바로가기" [ref=e710] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=741ee90df76d4f9467b258a1424153ecff021c94&nv_mid=55916304701&t=MO7F13Z1
+              - generic [ref=e711]: 상품 바로가기
+          - generic [ref=e712]:
+            - generic [ref=e713]:
+              - generic [ref=e715]: 4,750,000원 부터
+              - strong [ref=e716]: AI 오브제컬렉션 STEM 베이직 냉장고 (노크온 더블매직스페이스) 4도어 854L (M876)
+              - generic [ref=e717]:
+                - generic [ref=e718]: 평점 5.0
+                - generic [ref=e719]: 리뷰 16
+              - emphasis [ref=e720]: 디오스
+            - link [ref=e721] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=741ee90df76d4f9467b258a1424153ecff021c94&nv_mid=55916304701&t=MO7F13Z1
+        - listitem [ref=e722]:
+          - generic [ref=e723]:
+            - img "STEM 베이직 냉장고 (매직스페이스) 4도어 860L" [ref=e726]
+            - button "찜하기" [ref=e729] [cursor=pointer]:
+              - generic [ref=e730]: 찜하기
+            - link "상품 바로가기" [ref=e731] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=1d6822eb46ba47550f5420c663f7e8d8bdc03171&nv_mid=50482444621&t=MO7F13Z1
+              - generic [ref=e732]: 상품 바로가기
+          - generic [ref=e733]:
+            - generic [ref=e734]:
+              - generic [ref=e736]: 2,090,000원 부터
+              - strong [ref=e737]: STEM 베이직 냉장고 (매직스페이스) 4도어 860L
+              - generic [ref=e738]:
+                - generic [ref=e739]: 평점 4.94
+                - generic [ref=e740]: 리뷰 262
+              - emphasis [ref=e741]: 디오스
+            - link [ref=e742] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=1d6822eb46ba47550f5420c663f7e8d8bdc03171&nv_mid=50482444621&t=MO7F13Z1
+      - generic [ref=e746]:
+        - strong [ref=e749]: ✨ DIOS 김치톡톡 ✨
+        - generic "비디오 플레이어" [ref=e752]:
+          - generic: 0%
+          - button "재생" [ref=e1293] [cursor=pointer]:
+            - img [ref=e1295]
+          - generic "0 분 30 초" [ref=e1301]: 00:30
+      - list [ref=e767]:
+        - listitem [ref=e768]:
+          - generic [ref=e769]:
+            - img "김치톡톡 김치냉장고 3도어 327L (11)" [ref=e772]
+            - button "찜하기" [ref=e775] [cursor=pointer]:
+              - generic [ref=e776]: 찜하기
+            - link "상품 바로가기" [ref=e777] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002561&frm=PBRSTHM&h=ec43963353d636b6116a32c67b8a79a9ab03a10a&nv_mid=54257022196&t=MO7F159R
+              - generic [ref=e778]: 상품 바로가기
+          - generic [ref=e779]:
+            - generic [ref=e780]:
+              - generic [ref=e782]: 1,408,990원 부터
+              - strong [ref=e783]: 김치톡톡 김치냉장고 3도어 327L (11)
+              - generic [ref=e784]:
+                - generic [ref=e785]: 평점 4.94
+                - generic [ref=e786]: 리뷰 2,471
+              - emphasis [ref=e787]: 디오스
+            - link [ref=e788] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002561&frm=PBRSTHM&h=ec43963353d636b6116a32c67b8a79a9ab03a10a&nv_mid=54257022196&t=MO7F159R
+        - listitem [ref=e789]:
+          - generic [ref=e790]:
+            - img "김치톡톡 김치냉장고 2도어 217L" [ref=e793]
+            - button "찜하기" [ref=e796] [cursor=pointer]:
+              - generic [ref=e797]: 찜하기
+            - link "상품 바로가기" [ref=e798] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002562&frm=PBRSTHM&h=d1e924cb4b5406cd752980d7bc16128bbf8f38c4&nv_mid=57297622065&t=MO7F159R
+              - generic [ref=e799]: 상품 바로가기
+          - generic [ref=e800]:
+            - generic [ref=e801]:
+              - generic [ref=e803]: 789,000원 부터
+              - strong [ref=e804]: 김치톡톡 김치냉장고 2도어 217L
+              - generic [ref=e805]:
+                - generic [ref=e806]: 평점 4.92
+                - generic [ref=e807]: 리뷰 516
+              - emphasis [ref=e808]: 디오스
+            - link [ref=e809] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002562&frm=PBRSTHM&h=d1e924cb4b5406cd752980d7bc16128bbf8f38c4&nv_mid=57297622065&t=MO7F159R
+        - listitem [ref=e810]:
+          - generic [ref=e811]:
+            - img "AI 오브제컬렉션 김치톡톡 4도어 491L (11)" [ref=e814]
+            - button "찜하기" [ref=e817] [cursor=pointer]:
+              - generic [ref=e818]: 찜하기
+            - link "상품 바로가기" [ref=e819] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002561&frm=PBRSTHM&h=98505acf2d9c016f30eb1882b9f825a9e5f0e96b&nv_mid=57812444048&t=MO7F159R
+              - generic [ref=e820]: 상품 바로가기
+          - generic [ref=e821]:
+            - generic [ref=e822]:
+              - generic [ref=e824]: 2,030,000원 부터
+              - strong [ref=e825]: AI 오브제컬렉션 김치톡톡 4도어 491L (11)
+              - generic [ref=e826]:
+                - generic [ref=e827]: 평점 4.96
+                - generic [ref=e828]: 리뷰 591
+              - emphasis [ref=e829]: 디오스
+            - link [ref=e830] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002561&frm=PBRSTHM&h=98505acf2d9c016f30eb1882b9f825a9e5f0e96b&nv_mid=57812444048&t=MO7F159R
+        - listitem [ref=e831]:
+          - generic [ref=e832]:
+            - img "AI 오브제컬렉션 김치톡톡 4도어 491L (261)" [ref=e835]
+            - button "찜하기" [ref=e838] [cursor=pointer]:
+              - generic [ref=e839]: 찜하기
+            - link "상품 바로가기" [ref=e840] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002561&frm=PBRSTHM&h=b0e942d8b2e2ef513798e2003b13d58e4debe50e&nv_mid=57409571108&t=MO7F159R
+              - generic [ref=e841]: 상품 바로가기
+          - generic [ref=e842]:
+            - generic [ref=e843]:
+              - generic [ref=e845]: 2,690,000원 부터
+              - strong [ref=e846]: AI 오브제컬렉션 김치톡톡 4도어 491L (261)
+              - generic [ref=e847]:
+                - generic [ref=e848]: 평점 4.97
+                - generic [ref=e849]: 리뷰 393
+              - emphasis [ref=e850]: 디오스
+            - link [ref=e851] [cursor=pointer]:
+              - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002561&frm=PBRSTHM&h=b0e942d8b2e2ef513798e2003b13d58e4debe50e&nv_mid=57409571108&t=MO7F159R
+      - generic [ref=e854]:
+        - generic [ref=e856]:
+          - strong [ref=e858]: 세탁기
+          - generic [ref=e861]:
+            - list [ref=e864]:
+              - listitem [ref=e865]:
+                - generic [ref=e866]:
+                  - img "LG 통돌이 세탁기 17kg" [ref=e869]
+                  - button "찜하기" [ref=e872] [cursor=pointer]:
+                    - generic [ref=e873]: 찜하기
+                  - link "상품 바로가기" [ref=e874] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002343&frm=PBRSTHM&h=56b4146e91e857d72bba6ce7a3bf0ee28f7f3f13&nv_mid=37102400618&t=MO7F15DY
+                    - generic [ref=e875]: 상품 바로가기
+                - generic [ref=e876]:
+                  - generic [ref=e877]:
+                    - generic [ref=e879]: 455,680원 부터
+                    - strong [ref=e880]: LG 통돌이 세탁기 17kg
+                    - generic [ref=e881]:
+                      - generic [ref=e882]: 평점 4.82
+                      - generic [ref=e883]: 리뷰 5,722
+                    - emphasis [ref=e884]: 통돌이
+                  - link [ref=e885] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002343&frm=PBRSTHM&h=56b4146e91e857d72bba6ce7a3bf0ee28f7f3f13&nv_mid=37102400618&t=MO7F15DY
+              - listitem [ref=e886]:
+                - generic [ref=e887]:
+                  - img "오브제컬렉션 워시콤보 + 미니워시 FH25" [ref=e890]
+                  - button "찜하기" [ref=e893] [cursor=pointer]:
+                    - generic [ref=e894]: 찜하기
+                  - link "상품 바로가기" [ref=e895] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002344&frm=PBRSTHM&h=fdd4987c8f5a8f4d878e7069a411fcd4d10ffc9f&nv_mid=53374084217&t=MO7F15DY
+                    - generic [ref=e896]: 상품 바로가기
+                - generic [ref=e897]:
+                  - generic [ref=e898]:
+                    - strong [ref=e899]: 오브제컬렉션 워시콤보 + 미니워시 FH25
+                    - generic [ref=e900]:
+                      - generic [ref=e901]: 평점 4.87
+                      - generic [ref=e902]: 리뷰 305
+                    - emphasis [ref=e903]: 트롬
+                  - link [ref=e904] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002344&frm=PBRSTHM&h=fdd4987c8f5a8f4d878e7069a411fcd4d10ffc9f&nv_mid=53374084217&t=MO7F15DY
+              - listitem [ref=e905]:
+                - generic [ref=e906]:
+                  - img "T19MX8A" [ref=e909]
+                  - button "찜하기" [ref=e912] [cursor=pointer]:
+                    - generic [ref=e913]: 찜하기
+                  - link "상품 바로가기" [ref=e914] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002343&frm=PBRSTHM&h=a34636f29c0ee9af0194ca79a4f1e20d2f42e9bc&nv_mid=40438529620&t=MO7F15DY
+                    - generic [ref=e915]: 상품 바로가기
+                - generic [ref=e916]:
+                  - generic [ref=e917]:
+                    - generic [ref=e919]: 679,000원 부터
+                    - strong [ref=e920]: T19MX8A
+                    - generic [ref=e921]:
+                      - generic [ref=e922]: 평점 4.87
+                      - generic [ref=e923]: 리뷰 5,367
+                    - emphasis [ref=e924]: 통돌이
+                  - link [ref=e925] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002343&frm=PBRSTHM&h=a34636f29c0ee9af0194ca79a4f1e20d2f42e9bc&nv_mid=40438529620&t=MO7F15DY
+              - listitem [ref=e926]:
+                - generic [ref=e927]:
+                  - img "LG 트롬 21kg" [ref=e930]
+                  - button "찜하기" [ref=e933] [cursor=pointer]:
+                    - generic [ref=e934]: 찜하기
+                  - link "상품 바로가기" [ref=e935] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002344&frm=PBRSTHM&h=893057f114252e0ee6c689cbbe9f44f5ba540f72&nv_mid=38674238618&t=MO7F15DY
+                    - generic [ref=e936]: 상품 바로가기
+                - generic [ref=e937]:
+                  - generic [ref=e938]:
+                    - generic [ref=e940]: 1,185,000원 부터
+                    - strong [ref=e941]: LG 트롬 21kg
+                    - generic [ref=e942]:
+                      - generic [ref=e943]: 평점 4.91
+                      - generic [ref=e944]: 리뷰 1,847
+                    - emphasis [ref=e945]: 트롬
+                  - link [ref=e946] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002344&frm=PBRSTHM&h=893057f114252e0ee6c689cbbe9f44f5ba540f72&nv_mid=38674238618&t=MO7F15DY
+            - list [ref=e947]:
+              - listitem [ref=e948]:
+                - button "1 현재 페이지" [ref=e949] [cursor=pointer]:
+                  - generic [ref=e950]: "1"
+                  - generic [ref=e951]: 현재 페이지
+              - listitem [ref=e952]:
+                - button "2" [ref=e953] [cursor=pointer]:
+                  - generic [ref=e954]: "2"
+              - listitem [ref=e955]:
+                - button "3" [ref=e956] [cursor=pointer]:
+                  - generic [ref=e957]: "3"
+            - generic [ref=e958]:
+              - button "이전" [ref=e959] [cursor=pointer]:
+                - generic [ref=e960]: 이전
+              - button "다음" [ref=e961] [cursor=pointer]:
+                - generic [ref=e962]: 다음
+        - generic [ref=e964]:
+          - strong [ref=e966]: TV
+          - generic [ref=e969]:
+            - list [ref=e972]:
+              - listitem [ref=e973]:
+                - generic [ref=e974]:
+                  - img "2025 LED QNED 4K 189cm(75인치) (75QNED65ABA)" [ref=e977]
+                  - button "찜하기" [ref=e980] [cursor=pointer]:
+                    - generic [ref=e981]: 찜하기
+                  - link "상품 바로가기" [ref=e982] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=a2cec52543bdfa57d8efe3a93f47d75a4668b71c&nv_mid=54812529618&t=MO7F15DY
+                    - generic [ref=e983]: 상품 바로가기
+                - generic [ref=e984]:
+                  - generic [ref=e985]:
+                    - generic [ref=e987]: 1,693,864원 부터
+                    - strong [ref=e988]: 2025 LED QNED 4K 189cm(75인치) (75QNED65ABA)
+                    - generic [ref=e989]:
+                      - generic [ref=e990]: 평점 4.96
+                      - generic [ref=e991]: 리뷰 1,000
+                    - emphasis [ref=e992]: LG전자
+                  - link [ref=e993] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=a2cec52543bdfa57d8efe3a93f47d75a4668b71c&nv_mid=54812529618&t=MO7F15DY
+              - listitem [ref=e994]:
+                - generic [ref=e995]:
+                  - img "2025 LED 나노셀 4K 80AEA 217cm(86인치) (86NANO80AEA)" [ref=e998]
+                  - button "찜하기" [ref=e1001] [cursor=pointer]:
+                    - generic [ref=e1002]: 찜하기
+                  - link "상품 바로가기" [ref=e1003] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=59660f736a85b23b68ee51291d815083656c758f&nv_mid=54968487635&t=MO7F15DZ
+                    - generic [ref=e1004]: 상품 바로가기
+                - generic [ref=e1005]:
+                  - generic [ref=e1006]:
+                    - generic [ref=e1008]: 1,780,000원 부터
+                    - strong [ref=e1009]: 2025 LED 나노셀 4K 80AEA 217cm(86인치) (86NANO80AEA)
+                    - generic [ref=e1010]:
+                      - generic [ref=e1011]: 평점 4.95
+                      - generic [ref=e1012]: 리뷰 700
+                    - emphasis [ref=e1013]: LG전자
+                  - link [ref=e1014] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=59660f736a85b23b68ee51291d815083656c758f&nv_mid=54968487635&t=MO7F15DZ
+              - listitem [ref=e1015]:
+                - generic [ref=e1016]:
+                  - img "2025 LED 울트라 HD 4K UA7500 125cm(50인치) (50UA7500KNA)" [ref=e1019]
+                  - button "찜하기" [ref=e1022] [cursor=pointer]:
+                    - generic [ref=e1023]: 찜하기
+                  - link "상품 바로가기" [ref=e1024] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=7eb44aa8b6a2e812fd727c093e25d18e1c9fd35f&nv_mid=54810499932&t=MO7F15DY
+                    - generic [ref=e1025]: 상품 바로가기
+                - generic [ref=e1026]:
+                  - generic [ref=e1027]:
+                    - generic [ref=e1029]: 700,000원 부터
+                    - strong [ref=e1030]: 2025 LED 울트라 HD 4K UA7500 125cm(50인치) (50UA7500KNA)
+                    - generic [ref=e1031]:
+                      - generic [ref=e1032]: 평점 4.88
+                      - generic [ref=e1033]: 리뷰 430
+                    - emphasis [ref=e1034]: LG전자
+                  - link [ref=e1035] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=7eb44aa8b6a2e812fd727c093e25d18e1c9fd35f&nv_mid=54810499932&t=MO7F15DY
+              - listitem [ref=e1036]:
+                - generic [ref=e1037]:
+                  - img "2025 LED 나노셀 4K 80AEA 189cm(75인치) (75NANO80AEA)" [ref=e1040]
+                  - button "찜하기" [ref=e1043] [cursor=pointer]:
+                    - generic [ref=e1044]: 찜하기
+                  - link "상품 바로가기" [ref=e1045] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=95a8f6592214282bfd2fd00b9173c70ff0f1d471&nv_mid=54968432648&t=MO7F15DZ
+                    - generic [ref=e1046]: 상품 바로가기
+                - generic [ref=e1047]:
+                  - generic [ref=e1048]:
+                    - generic [ref=e1050]: 1,270,000원 부터
+                    - strong [ref=e1051]: 2025 LED 나노셀 4K 80AEA 189cm(75인치) (75NANO80AEA)
+                    - generic [ref=e1052]:
+                      - generic [ref=e1053]: 평점 4.96
+                      - generic [ref=e1054]: 리뷰 852
+                    - emphasis [ref=e1055]: LG전자
+                  - link [ref=e1056] [cursor=pointer]:
+                    - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002114&frm=PBRSTHM&h=95a8f6592214282bfd2fd00b9173c70ff0f1d471&nv_mid=54968432648&t=MO7F15DZ
+            - list [ref=e1057]:
+              - listitem [ref=e1058]:
+                - button "1 현재 페이지" [ref=e1059] [cursor=pointer]:
+                  - generic [ref=e1060]: "1"
+                  - generic [ref=e1061]: 현재 페이지
+              - listitem [ref=e1062]:
+                - button "2" [ref=e1063] [cursor=pointer]:
+                  - generic [ref=e1064]: "2"
+              - listitem [ref=e1065]:
+                - button "3" [ref=e1066] [cursor=pointer]:
+                  - generic [ref=e1067]: "3"
+            - generic [ref=e1068]:
+              - button "이전" [ref=e1069] [cursor=pointer]:
+                - generic [ref=e1070]: 이전
+              - button "다음" [ref=e1071] [cursor=pointer]:
+                - generic [ref=e1072]: 다음
+      - generic [ref=e1076]:
+        - strong [ref=e1079]: LG전자 스토리
+        - list [ref=e1081]:
+          - generic [ref=e1084]:
+            - listitem [ref=e1085]:
+              - generic [ref=e1088]:
+                - strong [ref=e1089]: 요리 해결사 3대 가전 🍽️
+                - list [ref=e1090]:
+                  - listitem [ref=e1091]:
+                    - generic [ref=e1092]:
+                      - img "BEI3QKBLOE 방문설치(무료)" [ref=e1096]
+                      - generic [ref=e1097]:
+                        - strong [ref=e1098]: BEI3QKBLOE 방문설치(무료)
+                        - generic [ref=e1100]:
+                          - generic [ref=e1101]: 953,000
+                          - text: 원 부터
+                        - generic [ref=e1102]:
+                          - generic [ref=e1103]: 평점 4.98
+                          - generic [ref=e1104]: 리뷰 447
+                      - link [ref=e1105] [cursor=pointer]:
+                        - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50001857&frm=PBRSTHM&h=371fce4ff6d0c5810de30b222bcc09fbcab475c4&nv_mid=55797472673&t=MO7F15AF
+                  - listitem [ref=e1106]:
+                    - generic [ref=e1107]:
+                      - img "BEF3ANHLOE 방문설치(무료)" [ref=e1111]
+                      - generic [ref=e1112]:
+                        - strong [ref=e1113]: BEF3ANHLOE 방문설치(무료)
+                        - generic [ref=e1115]:
+                          - generic [ref=e1116]: 1,265,000
+                          - text: 원 부터
+                        - generic [ref=e1117]:
+                          - generic [ref=e1118]: 평점 4.97
+                          - generic [ref=e1119]: 리뷰 147
+                      - link [ref=e1120] [cursor=pointer]:
+                        - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50001857&frm=PBRSTHM&h=88cd8249d1b3e19bb01506a33c6d6b2aa615c1aa&nv_mid=55900277792&t=MO7F15AF
+              - link "쇼핑 스토리 이동" [ref=e1121] [cursor=pointer]:
+                - /url: /lge/shoppingstory/content/5002658886
+                - generic [ref=e1122]: 쇼핑 스토리 이동
+            - listitem [ref=e1123]:
+              - generic [ref=e1126]:
+                - strong [ref=e1127]: LG 디오스 선런칭 ✨
+                - list [ref=e1128]:
+                  - listitem [ref=e1129]:
+                    - generic [ref=e1130]:
+                      - img "AI 오브제컬렉션 베이직 냉장고 4도어 870L" [ref=e1134]
+                      - generic [ref=e1135]:
+                        - strong [ref=e1136]: AI 오브제컬렉션 베이직 냉장고 4도어 870L
+                        - generic [ref=e1138]:
+                          - generic [ref=e1139]: 1,900,000
+                          - text: 원 부터
+                        - generic [ref=e1140]:
+                          - generic [ref=e1141]: 평점 4.94
+                          - generic [ref=e1142]: 리뷰 436
+                      - link [ref=e1143] [cursor=pointer]:
+                        - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=5d4f4120fd145ea2f27e03cb29e939a78733118a&nv_mid=56015759598&t=MO7F15AG
+                  - listitem [ref=e1144]:
+                    - generic [ref=e1145]:
+                      - img "AI 오브제컬렉션 냉장고 (매직스페이스) 2도어 652L" [ref=e1149]
+                      - generic [ref=e1150]:
+                        - strong [ref=e1151]: AI 오브제컬렉션 냉장고 (매직스페이스) 2도어 652L
+                        - generic [ref=e1153]:
+                          - generic [ref=e1154]: 1,710,000
+                          - text: 원 부터
+                        - generic [ref=e1155]:
+                          - generic [ref=e1156]: 평점 4.92
+                          - generic [ref=e1157]: 리뷰 144
+                      - link [ref=e1158] [cursor=pointer]:
+                        - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002558&frm=PBRSTHM&h=333ac90a43b7c91f7a3f75a00626c88d062b5429&nv_mid=57001839828&t=MO7F15AG
+              - link "쇼핑 스토리 이동" [ref=e1159] [cursor=pointer]:
+                - /url: /lge/shoppingstory/content/5002665911
+                - generic [ref=e1160]: 쇼핑 스토리 이동
+            - listitem [ref=e1161]:
+              - generic [ref=e1164]:
+                - strong [ref=e1165]: 환절기 청정 케어 🔆
+                - list [ref=e1166]:
+                  - listitem [ref=e1167]:
+                    - generic [ref=e1168]:
+                      - img "360˚ 공기청정기 플러스 AS305DWWA V 필터" [ref=e1172]
+                      - generic [ref=e1173]:
+                        - strong [ref=e1174]: 360˚ 공기청정기 플러스 AS305DWWA V 필터
+                        - generic [ref=e1176]:
+                          - generic [ref=e1177]: 696,470
+                          - text: 원 부터
+                        - generic [ref=e1178]:
+                          - generic [ref=e1179]: 평점 4.92
+                          - generic [ref=e1180]: 리뷰 782
+                      - link [ref=e1181] [cursor=pointer]:
+                        - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002543&frm=PBRSTHM&h=86588a2e416e92ab1569d5d3cc2d170ffc77f071&nv_mid=53056917576&t=MO7F15AH
+                  - listitem [ref=e1182]:
+                    - generic [ref=e1183]:
+                      - img "AS285DWWC + DQ214MEGA" [ref=e1187]
+                      - generic [ref=e1188]:
+                        - strong [ref=e1189]: AS285DWWC + DQ214MEGA
+                        - generic [ref=e1191]:
+                          - generic [ref=e1192]: 1,108,740
+                          - text: 원 부터
+                        - generic [ref=e1193]:
+                          - generic [ref=e1194]: 평점 5.0
+                          - generic [ref=e1195]: 리뷰 35
+                      - link [ref=e1196] [cursor=pointer]:
+                        - /url: https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50002543&frm=PBRSTHM&h=18b8bd4b3a0f9897c5fe20ce7ae683969ded0071&nv_mid=58524927787&t=MO7F15AH
+              - link "쇼핑 스토리 이동" [ref=e1197] [cursor=pointer]:
+                - /url: /lge/shoppingstory/content/5002607712
+                - generic [ref=e1198]: 쇼핑 스토리 이동
+        - link "쇼핑 스토리 전체보기" [ref=e1199] [cursor=pointer]:
+          - /url: /lge/shoppingstory
+      - generic [ref=e1206]:
+        - img "LG전자" [ref=e1207]
+        - paragraph [ref=e1208]: "\"가전은 역시 LG\" LG전자 브랜드 스토어에 오신 것을 환영합니다"
+        - generic [ref=e1209]:
+          - text: 관심고객수 50,727
+          - button "도움말" [ref=e1210] [cursor=pointer]:
+            - generic [ref=e1211]: 도움말
+        - button "알림받기" [ref=e1214] [cursor=pointer]:
+          - img [ref=e1215]
+          - generic [ref=e1219]: 알림받기
+    - generic [ref=e1220]:
+      - generic [ref=e1224]:
+        - heading "하위영역" [level=2] [ref=e1225]
+        - generic [ref=e1226]:
+          - link "네이버 이용약관" [ref=e1227] [cursor=pointer]:
+            - /url: http://www.naver.com/rules/service.html
+          - link "네이버페이 이용약관" [ref=e1228] [cursor=pointer]:
+            - /url: https://new-m.pay.naver.com/member/terms-policy/npay-usage
+          - link "개인정보처리방침" [ref=e1229] [cursor=pointer]:
+            - /url: http://www.naver.com/rules/privacy.html
+            - strong [ref=e1230]: 개인정보처리방침
+          - link "법적고지 및 주의사항" [ref=e1231] [cursor=pointer]:
+            - /url: https://shopping.naver.com/help/legal-basis
+          - link "입점안내" [ref=e1232] [cursor=pointer]:
+            - /url: http://join.shopping.naver.com/index.nhn
+          - link "쇼핑윈도 노출안내" [ref=e1233] [cursor=pointer]:
+            - /url: https://sell.smartstore.naver.com/#/home/about?tipModal=WINDOW_EXPOSURE&tap=brandstore
+          - link "쇼핑파트너센터" [ref=e1234] [cursor=pointer]:
+            - /url: https://center.shopping.naver.com/
+          - link "스마트스토어센터" [ref=e1235] [cursor=pointer]:
+            - /url: https://sell.storefarm.naver.com/#/home/about
+          - link "안전거래센터" [ref=e1236] [cursor=pointer]:
+            - /url: https://safety.shopping.naver.com
+          - link "전자금융거래약관" [ref=e1237] [cursor=pointer]:
+            - /url: https://new-m.pay.naver.com/member/terms-policy/finance
+          - link "쇼핑&페이 고객센터" [ref=e1238] [cursor=pointer]:
+            - /url: https://help.pay.naver.com/index.nhn
+        - paragraph [ref=e1239]: 네이버㈜는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. 상품, 상품정보, 거래에 관한 의무와 책임은 판매자에게 있습니다.
+        - generic [ref=e1240]:
+          - generic [ref=e1241]:
+            - generic [ref=e1242]: "사업자등록번호 : 220-81-62517"
+            - generic [ref=e1243]: "통신판매업신고번호 : 제2006-경기성남-0692호"
+            - generic [ref=e1244]: "대표이사 : 최수연"
+            - link "사업자등록정보확인" [ref=e1245] [cursor=pointer]:
+              - /url: http://www.ftc.go.kr/bizCommPop.do?wrkr_no=2208162517
+            - generic [ref=e1246]:
+              - text: "이메일 :"
+              - link "helpcustomer@naver.com" [ref=e1247] [cursor=pointer]:
+                - /url: mailto:helpcustomer@naver.com
+          - generic [ref=e1248]:
+            - generic [ref=e1249]: "주소 : 경기도 성남시 분당구 정자일로 95, NAVER 1784, 13561"
+            - link "1:1 문의 바로가기" [ref=e1251] [cursor=pointer]:
+              - /url: https://help.pay.naver.com/mail/form.help
+              - strong [ref=e1252]: 1:1 문의 바로가기
+            - generic [ref=e1253]: "호스팅 서비스 제공 : NAVER Cloud"
+          - generic [ref=e1254]:
+            - generic [ref=e1255]: 쇼핑&페이 구매자 고객센터 1588-3819
+            - generic [ref=e1256]: 네이버 대표전화 1588-3820
+            - generic [ref=e1257]: 네이버플러스 멤버십 전용 고객센터 1599-1399
+        - paragraph [ref=e1258]:
+          - link "NAVER" [ref=e1259] [cursor=pointer]:
+            - /url: http://www.naver.com
+            - generic [ref=e1260]: NAVER
+          - text: Copyright ©
+          - strong [ref=e1261]:
+            - link "NAVER Corp." [ref=e1262] [cursor=pointer]:
+              - /url: http://www.navercorp.com/ko/index.nhn
+          - text: All Rights Reserved.
+      - generic [ref=e1263]:
+        - generic [ref=e1265] [cursor=pointer]:
+          - img [ref=e1267]
+          - generic [ref=e1271]: 공유하기 상세보기
+        - generic:
+          - button "맨위로":
+            - img
+            - generic: 맨위로

@@ -155,7 +155,7 @@ async function generateEnglishPromptWithOpenAI(headingText: string, imageStyle?:
                 'Authorization': `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                model: 'gpt-5.4',
+                model: 'gpt-4.1',
                 messages: [
                     { role: 'system', content: `You are an image prompt generator. Output ONLY the raw English prompt. No greetings, no explanations, no markdown, no "Here is". Just the prompt text.` },
                     { role: 'user', content: getTranslationPrompt(headingText, imageStyle, contentContext) }

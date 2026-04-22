@@ -2664,6 +2664,9 @@ const imageSourceNames: Record<string, string> = {
   'pollinations': '🌸 Pollinations (무료)',
   'leonardoai': '🎨 Leonardo AI',
   'openai-image': '🟣 DALL-E (OpenAI)',
+  'imagefx': '✨ ImageFX (Google 무료)',
+  'flow': '🍌 Flow (Nano Banana Pro)', // ✅ [v1.4.80]
+  'local-folder': '📂 내 폴더',
   'skip': '🚫 없음'
 };
 

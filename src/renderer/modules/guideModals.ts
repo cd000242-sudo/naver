@@ -226,7 +226,7 @@ export function initUserGuideModal(): void {
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>3단계: 이미지 소스 선택</strong><br>
-            <span style="color: var(--text-muted);">"이미지 소스"에서 DALL-E 3 또는 Pexels를 선택하세요. Pexels는 무료입니다.</span>
+            <span style="color: var(--text-muted);">"이미지 소스"에서 ImageFX·Flow(Google 무료) / Nano Banana Pro·Leonardo·DeepInfra(유료) / 내 폴더를 선택하세요. Google 엔진이 가장 가성비 좋습니다.</span>
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>4단계: 이미지 생성</strong><br>
@@ -357,7 +357,7 @@ export function initUserGuideModal(): void {
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>🎨 이미지 소스 선택</strong><br>
-            <span style="color: var(--text-muted);">DALL-E 3(유료) 또는 Pexels(일반적으로 무료)를 선택할 수 있습니다.</span>
+            <span style="color: var(--text-muted);">ImageFX·Flow(Google 무료), Nano Banana Pro·Leonardo·DeepInfra·gpt-image-1(유료), 내 폴더(로컬) 중 선택할 수 있습니다.</span>
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>📤 발행 모드 선택</strong><br>
@@ -402,7 +402,7 @@ export function initUserGuideModal(): void {
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>2단계: 이미지 소스 선택</strong><br>
-            <span style="color: var(--text-muted);">DALL-E 3(유료) 또는 Pexels(일반적으로 무료) 중에서 선택하세요. Pexels는 보통 무료로 사용 가능하여 추천합니다.</span>
+            <span style="color: var(--text-muted);">ImageFX·Flow(Google 무료), Nano Banana Pro·Leonardo·DeepInfra·gpt-image-1(유료) 중 선택하세요. 첫 사용자는 ImageFX(무료)를 추천합니다.</span>
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>3단계: 소제목 분석</strong><br>

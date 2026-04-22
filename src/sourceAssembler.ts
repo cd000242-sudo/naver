@@ -5,6 +5,7 @@ import { smartCrawler } from './crawler/smartCrawler.js';
 import { getProxyUrl, reportProxyFailed, reportProxySuccess } from './crawler/utils/proxyManager.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
 import { formatPriceOrEmpty, hasValidPrice, parsePrice } from './services/priceNormalizer.js';
+import { validateProductInfo } from './schemas/productInfoSchema.js';
 // 이미지 라이브러리 기능 제거됨 - 네이버 블로그 크롤링도 제거
 // import { extractImagesFromHtml, extractImagesFromRss, collectImages } from './imageLibrary.js';
 
@@ -784,8 +785,9 @@ async function searchNaverShopping(
           title: (item.title || '').replace(/<[^>]*>/g, '').trim(),
           link: item.link || '',
           image: item.image || '',
-          lprice: item.lprice || '0',
-          hprice: item.hprice || '0',
+          // ✅ [v1.4.77] '0' 폴백 제거 — 0원 비상구 차단. 빈 문자열로 남겨 하류 parsePrice가 null 처리
+          lprice: item.lprice || '',
+          hprice: item.hprice || '',
           mallName: item.mallName || '',
           productId: item.productId || '',
           productType: item.productType || '',
@@ -6133,13 +6135,13 @@ ${salesLine}
             categoryHint: 'shopping_review',
             metadata: {
               keywords: [productName, brand].filter(Boolean),
-              productInfo: {
+              // ✅ [v1.4.77 P1] Zod 스키마 대체 경량 validator 경유 — 0/NaN/"0원" 원천 차단
+              productInfo: validateProductInfo({
                 name: productName,
-                price: priceNum ?? 0,
+                price: priceNum,
                 brand,
-                // ✅ 제품 설명도 메타데이터에 포함
-                description: productDescription
-              },
+                description: productDescription,
+              }).data,
             },
             generator: input.generator ?? 'gemini',
             articleType: (input as any).articleType || 'shopping_review',

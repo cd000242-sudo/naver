@@ -6,6 +6,7 @@ import { generateWithNaver } from './image/naverImageGenerator.js';
 import { generateWithOpenAIImage } from './image/openaiImageGenerator.js';
 import { generateWithLeonardoAI } from './image/leonardoAIGenerator.js';
 import { generateWithImageFx } from './image/imageFxGenerator.js';
+import { generateWithFlow } from './image/flowGenerator.js';
 
 import { downloadAndSaveImage } from './image/imageUtils.js';
 import { getImageErrorMessage } from './image/imageErrorMessages.js';
@@ -56,8 +57,8 @@ function preserveThumbnailFlags(
  * 엔진이 한글 텍스트를 네이티브로 지원하는지 확인
  */
 function isKoreanTextSupportedEngine(engine: string): boolean {
-  // 나노바나나프로(Gemini)만 한글 텍스트 직접 생성 지원
-  return engine === 'nano-banana-pro';
+  // ✅ [v1.4.80] 'flow' 추가 — Flow는 Nano Banana Pro 기반이라 한글 텍스트 네이티브 지원
+  return engine === 'nano-banana-pro' || engine === 'flow';
 }
 
 /**
@@ -230,7 +231,9 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     'openai-image': 'OpenAI DALL-E (gpt-image-1)',
     'leonardoai': 'Leonardo AI',
     'imagefx': 'ImageFX (Google 무료)',
-    'naver': '네이버 이미지 검색'
+    'flow': 'Flow (Nano Banana Pro, AI Pro 무료)', // ✅ [v1.4.80]
+    'naver': '네이버 이미지 검색',
+    'local-folder': '내 폴더',
   };
   const displayName = providerDisplayNames[normalizedProvider] || normalizedProvider;
 
@@ -366,6 +369,29 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
 
 
 
+  // ✅ [v1.4.80] Google Labs Flow 선택 시 (Nano Banana Pro 무료 쿼터, labs.google 세션 공유)
+  if (normalizedProvider === 'flow') {
+    try {
+      console.log(`[이미지생성] 🍌 Google Labs Flow(Nano Banana Pro)로 ${items.length}개 이미지 생성 시작... (AI Pro 쿼터 무료)`);
+      const flowImages = await generateWithFlow(
+        items,
+        options.postTitle,
+        options.postId,
+        onImageGenerated,
+      );
+      console.log(`[이미지생성] ✅ Flow로 ${flowImages.length}개 이미지 생성 완료!`);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(flowImages, 'flow', options.postTitle, options.thumbnailTextInclude, items), items);
+    } catch (flowError) {
+      const rawMsg = (flowError as Error).message || '';
+      console.warn(`[ImageGenerator] ⚠️ Flow 실패:`, rawMsg);
+      if (rawMsg.startsWith('FLOW_')) {
+        const userMessage = rawMsg.replace(/^FLOW_[A-Z_]+:/, '');
+        throw new Error(`[Flow] ${userMessage}`);
+      }
+      throw new Error(`[Flow] 이미지 생성 실패: ${rawMsg}\n\n💡 가능한 원인:\n1. 계정 쿼터 초과 (1시간 후 재시도)\n2. Google 세션 만료 (AdsPower 재로그인)\n3. 안전 필터 차단\n4. Flow 내부 API 구조 변경 (자동 재학습 시도됨)`);
+    }
+  }
+
   // ✅ DeepInfra 선택 시 (FLUX-2-dev, 고품질 저가)
   // ✅ [2026-01-30 FIX] DeepInfra도 텍스트 오버레이 적용 (한글 텍스트 지원 안함)
   if (normalizedProvider === 'deepinfra') {
@@ -394,6 +420,12 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   // 네이버 선택 시
   if (normalizedProvider === 'naver') {
     return preserveThumbnailFlags(await generateWithNaver(items, options.postTitle, options.postId, options.regenerate, options.sourceUrl, options.articleUrl), items);
+  }
+
+  // ✅ [v1.4.80] 'local-folder'는 renderer에서 별도 처리되어야 하는 값
+  //    이 경로로 도달 시 명확한 에러 throw (nano-banana-pro 폴백으로 오작동하는 것 방지)
+  if (normalizedProvider === 'local-folder') {
+    throw new Error('[local-folder] 내 폴더 이미지는 renderer의 localFolderImageLoader에서 처리해야 합니다. generateImages로 전달되면 안 됩니다.');
   }
 
   // ✅ 나노 바나나 프로 선택 시 (Gemini 기반, 썸네일 제외 NEVER TEXT 적용)

@@ -891,6 +891,29 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('proxy:isEnabled'),
   getProxyStatus: (): Promise<{ enabled: boolean; configured: boolean; provider: string; endpoint: string }> =>
     ipcRenderer.invoke('proxy:getStatus'),
+  // ✅ [v1.4.79] 사용자 수동 프록시 IP 저장/조회
+  setManualProxy: (config: { host: string; port: number; username?: string; password?: string; scheme?: 'http' | 'https' | 'socks4' | 'socks5' } | null): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('proxy:setManual', config),
+  getManualProxy: (): Promise<{ host: string; port: number; username?: string; password?: string } | null> =>
+    ipcRenderer.invoke('proxy:getManual'),
+  // ✅ [v1.4.79] 실전 검증 — 실제 프록시 경유 HTTP로 IP 우회 여부 확인
+  verifyProxy: (config: { host: string; port: number; username?: string; password?: string }): Promise<{
+    ok: boolean;
+    myIp?: string;
+    proxyIp?: string;
+    matchesHost?: boolean;
+    latencyMs?: number;
+    message: string;
+  }> =>
+    ipcRenderer.invoke('proxy:verify', config),
+  // ✅ [v1.4.79 P0-Gate] 발행 전 Chrome 실제 IP 확인 강제 게이트
+  enforceProxyGate: (accountId: string, expectedHost?: string): Promise<{
+    ok: boolean;
+    actualIp?: string;
+    expectedHost?: string;
+    message: string;
+  }> =>
+    ipcRenderer.invoke('proxy:enforceGate', accountId, expectedHost),
   // ✅ [2026-03-27] 계정별 Sticky Session 프록시 자동 생성
   generateStickyProxy: (naverId: string): Promise<{ success: boolean; proxy?: { host: string; port: string; username: string; password: string }; message?: string }> =>
     ipcRenderer.invoke('proxy:generateSticky', naverId),
@@ -901,6 +924,9 @@ contextBridge.exposeInMainWorld('api', {
   // ✅ [2026-03-16] ImageFX Google 로그인 사전 확인 API
   checkImageFxGoogleLogin: (): Promise<{ loggedIn: boolean; userName?: string; message: string }> =>
     ipcRenderer.invoke('imagefx:checkGoogleLogin'),
+  // ✅ [v1.4.80] Flow 연결 테스트 (Nano Banana Pro)
+  testFlowConnection: (): Promise<{ ok: boolean; message: string; userInfo?: { email?: string; name?: string } }> =>
+    ipcRenderer.invoke('flow:testConnection'),
 
   // ✅ [2026-03-16] ImageFX Google 계정 변경 API
   switchImageFxGoogleAccount: (): Promise<{ success: boolean; userName?: string; message: string }> =>

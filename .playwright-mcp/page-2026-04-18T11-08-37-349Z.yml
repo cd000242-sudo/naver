@@ -1,0 +1,11 @@
+- generic [ref=e3]:
+  - generic [ref=e9]: 로딩중
+  - strong [ref=e10]: 페이지를 이동하고 있어요.
+  - paragraph [ref=e11]:
+    - text: 더 이상 이동하지 않을 경우
+    - text: 아래 버튼을 눌러 직접 이동해 주세요.
+  - generic [ref=e12]:
+    - button "이전 페이지" [ref=e13] [cursor=pointer]
+    - generic [ref=e14]: 웹으로 보기
+  - contentinfo [ref=e15]:
+    - img "NAVER" [ref=e16]

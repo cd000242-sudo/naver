@@ -37,66 +37,119 @@ export interface TrackingInput {
   cacheReadTokens?: number;
 }
 
-// ==================== 가격 테이블 (공식 2026-03 기준) ====================
+// ==================== 가격 테이블 (공식 2026-04 기준 — v1.4.77 전면 교정) ====================
 
-/** OpenAI 텍스트 모델 가격 ($/1M tokens) */
-const OPENAI_TEXT_PRICING: Record<string, { input: number; output: number }> = {
-  'gpt-5.4':         { input: 2.50, output: 10.00 },
-  'gpt-4.1':         { input: 2.00, output: 8.00 },
-  'gpt-4.1-mini':    { input: 0.40, output: 1.60 },
-  'gpt-4.1-nano':    { input: 0.10, output: 0.40 },
-  'gpt-4o':          { input: 2.50, output: 10.00 },
-  'gpt-4o-mini':     { input: 0.15, output: 0.60 },
-  'default':         { input: 2.50, output: 10.00 }, // 안전 폴백
+/** OpenAI 텍스트 모델 가격 ($/1M tokens) — source: openai.com/api/pricing 2026-04
+ *  cachedInput은 prompt caching 자동 적용 시 실효 단가 (gpt-5.x: 90% off, gpt-4.1: 75% off, gpt-4o: 50% off)
+ *  Batch API 사용 시 input/output 모두 0.5x 할인 추가 적용 가능 (별도 계산)
+ *  ⚠️ SUNSET 2026-03-31: gpt-4o / gpt-4o-mini (API 제거 예정 — 사용 금지)
+ *  API 유지: gpt-4.1 계열 (ChatGPT 2026-02-13 은퇴했지만 API는 유지)
+ */
+const OPENAI_TEXT_PRICING: Record<string, { input: number; cachedInput: number; output: number }> = {
+  // 현역 플래그십 (gpt-5.x) — 2026-04 기준 공식 권장
+  'gpt-5.4':         { input: 2.50, cachedInput: 0.25,  output: 15.00 },
+  'gpt-5.4-mini':    { input: 0.75, cachedInput: 0.075, output: 4.50 },
+  'gpt-5.4-nano':    { input: 0.20, cachedInput: 0.020, output: 1.25 },
+  // API 유지 (ChatGPT만 2026-02-13 은퇴)
+  'gpt-4.1':         { input: 2.00, cachedInput: 0.50,  output: 8.00 },
+  'gpt-4.1-mini':    { input: 0.40, cachedInput: 0.10,  output: 1.60 },
+  'gpt-4.1-nano':    { input: 0.10, cachedInput: 0.025, output: 0.40 },
+  // ⚠️ 2026-03-31 API 제거 예정 — 호환용으로만 유지 (호출 금지)
+  'gpt-4o':          { input: 2.50, cachedInput: 1.25,  output: 10.00 },
+  'gpt-4o-mini':     { input: 0.15, cachedInput: 0.075, output: 0.60 },
+  'default':         { input: 2.50, cachedInput: 0.25,  output: 15.00 }, // gpt-5.4 기준 안전 폴백
 };
 
-/** OpenAI 이미지 모델 가격 ($/장) */
+/** OpenAI 이미지 모델 가격 ($/장) — 2026-04 공식 기준
+ *  gpt-image-1은 토큰 기반 과금이라 품질/사이즈마다 장당 비용이 15배까지 차이남.
+ *  이전 코드는 DALL-E 3 구가격($0.04/$0.08)을 잘못 적용해 low는 264% 과대, high는 52% 과소 계상이었음.
+ *  source: openai.com/api/pricing (text input $5/1M, image output $32/1M 토큰 기반 환산)
+ */
 const OPENAI_IMAGE_PRICING: Record<string, number> = {
-  'gpt-image-1':     0.04,  // low quality
-  'gpt-image-1-hd':  0.08,  // high quality
+  // gpt-image-1 — 1024x1024 정사각 (현역 기본)
+  'gpt-image-1-low':       0.011,  // low quality
+  'gpt-image-1-medium':    0.042,  // medium quality (네이버 블로그 권장)
+  'gpt-image-1-high':      0.167,  // high quality
+  // gpt-image-1 — 1024x1536 / 1536x1024 세로·가로 확장
+  'gpt-image-1-low-wide':    0.016,
+  'gpt-image-1-medium-wide': 0.063,
+  'gpt-image-1-high-wide':   0.250,
+  // 코드 호환 — quality 미지정 시 medium으로 추정
+  'gpt-image-1':     0.042,  // quality: 'auto' 평균 추정치 (medium 수준)
+  'gpt-image-1-hd':  0.167,  // high quality (이전 -hd suffix 호환)
+  // gpt-image-1.5 — 차세대 (DALL-E 3 대체, 2026-04 이미 가용)
+  'gpt-image-1.5-low':    0.015,
+  'gpt-image-1.5-medium': 0.050,
+  'gpt-image-1.5-high':   0.180,
+  // ✅ [v1.4.80] Flow (Nano Banana Pro) — labs.google/flow 경유 무료 쿼터
+  'flow-nano-banana-pro': 0,
+  'imagen-3.5-imagefx':   0,  // ImageFX (기존, 무료)
+  // ⚠️ DALL-E 3 — 2026-05-12 API 제거 예정. 새 호출 금지, 호환용 가격표만 유지
   'dall-e-3':        0.04,
   'dall-e-3-hd':     0.08,
-  'default':         0.04,
+  'default':         0.042,
 };
 
-/** Claude (Anthropic) 모델 가격 ($/1M tokens) — Active 모델만 */
-// 매칭은 substring 기반(matchPricingKey). 더 구체적인 키를 위에 두어야 정확히 매칭됨.
+/** Claude (Anthropic) 모델 가격 ($/1M tokens) — source: anthropic.com/pricing 2026-04
+ *  매칭은 substring 기반(matchPricingKey). 더 구체적인 키를 위에 두어야 정확히 매칭됨.
+ *  2025-11-24 Opus 4.5 출시와 함께 Opus 전체 67% 가격 인하 ($15/$75 → $5/$25). Opus 4.6/4.7도 동일.
+ *  Opus 4.1 / 4.0은 레거시 단가($15/$75) 유지.
+ */
 const CLAUDE_PRICING: Record<string, { input: number; output: number }> = {
-  'claude-opus-4-6':         { input: 15.00, output: 75.00 },
-  'claude-opus-4-5':         { input: 15.00, output: 75.00 },
-  'claude-opus-4-1':         { input: 15.00, output: 75.00 },
-  'claude-opus-4':           { input: 15.00, output: 75.00 },
-  'claude-sonnet-4-6':       { input: 3.00,  output: 15.00 },
-  'claude-sonnet-4-5':       { input: 3.00,  output: 15.00 },
-  'claude-sonnet-4':         { input: 3.00,  output: 15.00 },
+  // Latest tier (현행 플래그십)
+  'claude-opus-4-7':         { input: 5.00,  output: 25.00 },  // 2026-04-16 출시
+  'claude-sonnet-4-6':       { input: 3.00,  output: 15.00 },  // 2026-02-17 출시
   'claude-haiku-4-5':        { input: 1.00,  output: 5.00 },
+  'claude-haiku-4-5-20251001': { input: 1.00, output: 5.00 },  // snapshot
+  // Legacy tier (여전히 API 가용)
+  'claude-opus-4-6':         { input: 5.00,  output: 25.00 },
+  'claude-opus-4-5':         { input: 5.00,  output: 25.00 },  // 2025-11-24 67% 인하
+  'claude-opus-4-5-20251101': { input: 5.00, output: 25.00 },
+  'claude-opus-4-1':         { input: 15.00, output: 75.00 },
+  'claude-opus-4-1-20250805': { input: 15.00, output: 75.00 },
+  'claude-sonnet-4-5':       { input: 3.00,  output: 15.00 },
+  'claude-sonnet-4-5-20250929': { input: 3.00, output: 15.00 },
+  // Deprecated 2026-06-15 — alias는 '-0' 필수, 무접미사는 존재하지 않음
+  'claude-opus-4-0':         { input: 15.00, output: 75.00 },
+  'claude-opus-4-20250514':  { input: 15.00, output: 75.00 },
+  'claude-sonnet-4-0':       { input: 3.00,  output: 15.00 },
+  'claude-sonnet-4-20250514': { input: 3.00, output: 15.00 },
   'default':                 { input: 3.00,  output: 15.00 },
 };
 
-/** Perplexity 모델 가격 ($/1M tokens) + 검색비용 */
+/** Perplexity 모델 가격 ($/1M tokens) + 검색비용 — source: docs.perplexity.ai/pricing 2026-04
+ *  2026년 기준 sonar/sonar-pro는 citation 토큰 과금 폐지.
+ *  sonar-reasoning-pro(2025-12-15)가 기존 sonar-reasoning을 대체하여 현재 활성 모델은 4종(sonar / sonar-pro / sonar-reasoning-pro / sonar-deep-research).
+ */
 const PERPLEXITY_PRICING: Record<string, { input: number; output: number; searchCostPerReq: number }> = {
-  'sonar':        { input: 1.00, output: 1.00, searchCostPerReq: 0.005 },
-  'sonar-pro':    { input: 3.00, output: 15.00, searchCostPerReq: 0.005 },
-  'sonar-deep-research': { input: 2.00, output: 8.00, searchCostPerReq: 0.005 },
-  'default':      { input: 1.00, output: 1.00, searchCostPerReq: 0.005 },
+  'sonar':                { input: 1.00, output: 1.00,  searchCostPerReq: 0.005 },
+  'sonar-pro':            { input: 3.00, output: 15.00, searchCostPerReq: 0.005 },
+  'sonar-reasoning-pro':  { input: 2.00, output: 8.00,  searchCostPerReq: 0.005 },  // 2025-12-15 sonar-reasoning 대체
+  'sonar-deep-research':  { input: 2.00, output: 8.00,  searchCostPerReq: 0.005 },
+  'default':              { input: 1.00, output: 1.00,  searchCostPerReq: 0.005 },
 };
 
-/** DeepInfra 이미지 모델 가격 ($/장) */
+/** DeepInfra 이미지 모델 가격 ($/장, 1024×1024 = 1MP 기준) — source: deepinfra.com/pricing 2026-04 */
 const DEEPINFRA_PRICING: Record<string, number> = {
   'FLUX-1-schnell':  0.003,
   'FLUX-1-dev':      0.025,
-  'FLUX-2-dev':      0.025,
+  'FLUX-2-dev':      0.012,   // ← 수정: 0.025 → 0.012 (공식 pay-per-MP 기준)
+  'FLUX-2-max':      0.07,    // ← 신규: 첫 MP $0.07 + 추가 $0.03/MP
   'FLUX-1-Redux':    0.025,
   'default':         0.025,
 };
 
-/** Leonardo AI 가격 ($/장, 모델별 크레딧 소비 기반 추정) */
+/** Leonardo AI 가격 ($/장) — source: leonardo.ai/pricing + Google Gemini 3 Pro Image API 2026-04
+ *  Nano Banana Pro는 Google 공식 Gemini 3 Pro Image — 해상도별 차등 (Leonardo 경유 시 플랫폼 마진 추가)
+ */
 const LEONARDOAI_PRICING: Record<string, number> = {
-  'seedream-4.5':     0.04,
-  'phoenix-1.0':      0.02,
-  'ideogram-3.0':     0.06,
-  'nano-banana-pro':  0.02,
-  'default':          0.04,
+  'seedream-4.5':          0.04,
+  'phoenix-1.0':           0.02,
+  'ideogram-3.0':          0.15,   // ← 수정: 0.06 → 0.15 (Balanced 기준, Quality 시 $0.23)
+  'nano-banana-pro':       0.134,  // ← 수정: 0.02 → 0.134 (2K 기준, 6.7배 과소 계상 버그)
+  'nano-banana-pro-1k':    0.039,  // ← 신규: 1024×1024
+  'nano-banana-pro-4k':    0.24,   // ← 신규: 4K
+  'default':               0.04,
 };
 
 // ==================== 가격 계산 헬퍼 ====================
@@ -119,11 +172,33 @@ function calculateCost(provider: ApiProvider, input: TrackingInput): number {
 
   switch (provider) {
     case 'gemini': {
-      // Gemini는 gemini.ts의 기존 GEMINI_PRICING 사용 — 여기서도 호환 처리
+      // ✅ [v1.4.77] 공식 2026-04 단가로 전면 교정 (이전 구 2.0 시절 단가 → Flash output 6.25배 과소 계상 버그)
+      // source: ai.google.dev/gemini-api/docs/pricing
+      // 200K 토큰 초과 시 Pro 계열은 2배 요금 (>200K 분기 적용)
       const lower = model.toLowerCase();
-      let pInput = 0.10, pOutput = 0.40; // Flash 기본
-      if (lower.includes('pro')) { pInput = 1.25; pOutput = 5.00; }
-      else if (lower.includes('flash-lite') || lower.includes('flash_lite')) { pInput = 0.025; pOutput = 0.10; }
+      const totalTokens = inTok + outTok;
+      const isLongContext = totalTokens > 200_000;
+      let pInput: number, pOutput: number;
+      if (lower.includes('gemini-3') || lower.includes('3.1-pro') || lower.includes('3.1-flash')) {
+        // Gemini 3.1 Pro / Flash (2026-02-19 출시, 3-pro-preview는 2026-03-26 shutdown됨)
+        if (lower.includes('flash')) {
+          pInput = isLongContext ? 0.60 : 0.30;
+          pOutput = isLongContext ? 5.00 : 2.50;
+        } else {
+          pInput = isLongContext ? 4.00 : 2.00;
+          pOutput = isLongContext ? 18.00 : 12.00;
+        }
+      } else if (lower.includes('flash-lite') || lower.includes('flash_lite')) {
+        pInput = 0.10;   // ← 수정: 0.025 → 0.10 (4배 과소)
+        pOutput = 0.40;  // ← 수정: 0.10 → 0.40 (4배 과소)
+      } else if (lower.includes('pro')) {
+        pInput = isLongContext ? 2.50 : 1.25;
+        pOutput = isLongContext ? 15.00 : 10.00;  // ← 수정: 5 → 10 (2배 과소)
+      } else {
+        // Flash (기본)
+        pInput = 0.30;   // ← 수정: 0.10 → 0.30 (3배 과소)
+        pOutput = 2.50;  // ← 수정: 0.40 → 2.50 (6.25배 과소)
+      }
       return (inTok / 1_000_000) * pInput + (outTok / 1_000_000) * pOutput;
     }
 

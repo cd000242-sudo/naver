@@ -275,7 +275,8 @@ async function classifyWithOpenAI(
                     'Authorization': `Bearer ${openaiApiKey}`,
                 },
                 body: JSON.stringify({
-                    model: 'gpt-4o-mini',
+                    // ✅ [v1.4.77] gpt-4o-mini → gpt-4.1-mini (2026-03-31 sunset 회피, Vision 지원)
+                    model: 'gpt-4.1-mini',
                     messages: [{
                         role: 'user',
                         content: [

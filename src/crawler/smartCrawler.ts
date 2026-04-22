@@ -1582,13 +1582,17 @@ export class SmartCrawler {
           document.querySelector('meta[property="og:description"]')?.getAttribute('content') ||
           document.querySelector('._3DPGSjcWQn')?.textContent || '';
 
-        // ⭐ 가격 셀렉터 (스마트스토어)
+        // ✅ [v1.4.77 P2] 2026-04 현행 난독화 클래스 우선 + 구버전 폴백 + og:meta
         const price =
-          document.querySelector('._1LY7DqCnwR')?.textContent ||
+          document.querySelector('strong.Xu9MEKUuIo span.e1DMQNBPJ_')?.textContent ||  // 2026-04 할인가
+          document.querySelector('del.VaZJPclpdJ span.e1DMQNBPJ_')?.textContent ||     // 2026-04 정가
+          document.querySelector('._1LY7DqCnwR')?.textContent ||                       // 구버전
           document.querySelector('span._3BuEmd0aIP')?.textContent ||
           document.querySelector('._3_2HPBGP5E')?.textContent ||
           document.querySelector('[class*="finalPrice"]')?.textContent ||
-          document.querySelector('[class*="sale_price"]')?.textContent || '';
+          document.querySelector('[class*="sale_price"]')?.textContent ||
+          document.querySelector('meta[property="og:price:amount"]')?.getAttribute('content') ||
+          document.querySelector('meta[property="product:price:amount"]')?.getAttribute('content') || '';
 
         // 본문 구성
         let content = `상품명: ${title}\n`;

@@ -613,7 +613,7 @@
                             <select id="unified-gemini-model"
                                 style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: var(--radius-sm); font-size: 0.9rem;">
                                 <optgroup label="⭐ Stable (추천)">
-                                    <option value="gemini-2.5-flash" selected>💎 Gemini 2.5 Flash (무료 1500/일, 추천)</option>
+                                    <option value="gemini-2.5-flash" selected>💎 Gemini 2.5 Flash (무료 500/일, 추천)</option>
                                     <option value="gemini-2.5-flash-lite">⚡ Gemini 2.5 Flash-Lite (가장 빠름)</option>
                                     <option value="gemini-2.5-pro">🏆 Gemini 2.5 Pro (무료 25/일, 고품질)</option>
                                 </optgroup>
@@ -3430,6 +3430,8 @@
                             <option value="leonardoai" data-icon="🦁" data-price="Phoenix 1.0 | $0.01~$0.02">🦁 Leonardo
                                 AI ($0.01~$0.02/장)</option>
                             <option value="imagefx" data-icon="✨" data-price="Google 무료 | 1000장/일" selected>✨ ImageFX (Google 무료, 1000장/일)</option>
+                            <!-- ✅ [v1.4.80] Google Labs Flow — Nano Banana Pro 무료 쿼터 활용 -->
+                            <option value="flow" data-icon="🍌" data-price="Google AI Pro 쿼터 | 한글 최강">🍌 Flow (Nano Banana Pro, AI Pro 무료)</option>
 
                             <option value="local-folder" data-icon="📂" data-price="내 폴더에서 자동 매핑">📂 내 폴더 (로컬 이미지 자동 매핑)</option>
                             <option value="saved" data-icon="📁" data-price="폴더에서 불러오기">📁 저장된 이미지 (폴더에서 불러오기)</option>
@@ -4199,6 +4201,74 @@
                                     </div>
                                 </div>
 
+                                <!-- ✅ [v1.4.79] 사용자 수동 프록시 IP 입력 (개인 프록시 서버용) -->
+                                <div style="margin-top: 1.25rem; border-top: 1px solid rgba(168, 85, 247, 0.15); padding-top: 1.25rem;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-strong);">🔧 내 프록시 직접 입력 (선택)</div>
+                                    </div>
+                                    <div style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.9rem;">
+                                        본인 프록시 서버를 사용할 경우 여기에 IP/포트를 입력하세요. 입력 시 SmartProxy 대신 이 값이 우선 적용됩니다. 비우면 SmartProxy로 폴백됩니다.
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0.6rem; margin-bottom: 0.6rem;">
+                                        <div>
+                                            <label style="display: block; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.3rem;">프록시 IP / 호스트</label>
+                                            <input type="text" id="manual-proxy-host" placeholder="예: 123.45.67.89 또는 proxy.example.com"
+                                                style="width: 100%; padding: 0.65rem 0.85rem; background: var(--bg-primary, #0f0f14); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 8px; color: var(--text-strong); font-size: 0.88rem;">
+                                        </div>
+                                        <div>
+                                            <label style="display: block; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.3rem;">포트</label>
+                                            <input type="number" id="manual-proxy-port" placeholder="예: 8080"
+                                                min="1" max="65535"
+                                                style="width: 100%; padding: 0.65rem 0.85rem; background: var(--bg-primary, #0f0f14); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 8px; color: var(--text-strong); font-size: 0.88rem;">
+                                        </div>
+                                        <div>
+                                            <label style="display: block; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.3rem;">타입</label>
+                                            <select id="manual-proxy-scheme"
+                                                style="width: 100%; padding: 0.65rem 0.5rem; background: var(--bg-primary, #0f0f14); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 8px; color: var(--text-strong); font-size: 0.85rem;">
+                                                <option value="http" selected>HTTP (기본)</option>
+                                                <option value="https">HTTPS</option>
+                                                <option value="socks5">SOCKS5</option>
+                                                <option value="socks4">SOCKS4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.6rem;">
+                                        <div>
+                                            <label style="display: block; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.3rem;">사용자명 (선택)</label>
+                                            <input type="text" id="manual-proxy-username" placeholder="인증 필요 시"
+                                                autocomplete="off"
+                                                style="width: 100%; padding: 0.65rem 0.85rem; background: var(--bg-primary, #0f0f14); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 8px; color: var(--text-strong); font-size: 0.88rem;">
+                                        </div>
+                                        <div>
+                                            <label style="display: block; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.3rem;">비밀번호 (선택)</label>
+                                            <input type="password" id="manual-proxy-password" placeholder="인증 필요 시"
+                                                autocomplete="new-password"
+                                                style="width: 100%; padding: 0.65rem 0.85rem; background: var(--bg-primary, #0f0f14); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 8px; color: var(--text-strong); font-size: 0.88rem;">
+                                        </div>
+                                    </div>
+                                    <div id="manual-proxy-status" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;">
+                                        현재: 미설정 (SmartProxy 사용 중)
+                                    </div>
+
+                                    <!-- ✅ [v1.4.79] 실전 검증 버튼 + 결과 배지 -->
+                                    <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+                                        <button type="button" id="manual-proxy-test-btn"
+                                            style="flex: 1; padding: 0.65rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: 2px solid #1a1a1a; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
+                                            🔍 연결 테스트 (실제 IP 확인)
+                                        </button>
+                                    </div>
+
+                                    <!-- 검증 결과 배지 — 초기엔 숨김 -->
+                                    <div id="manual-proxy-verify-result" style="display: none; margin-top: 0.75rem; padding: 0.85rem 1rem; border-radius: 10px; font-size: 0.82rem; line-height: 1.6;">
+                                        <!-- 동적으로 채워짐 -->
+                                    </div>
+
+                                    <!-- 연결 상태 실시간 배지 (상단 고정) -->
+                                    <div id="manual-proxy-live-badge" style="display: none; margin-top: 0.6rem; padding: 0.5rem 0.85rem; border-radius: 8px; font-size: 0.78rem; font-weight: 700; text-align: center;">
+                                        <!-- 동적으로 채워짐 -->
+                                    </div>
+                                </div>
+
                                 <!-- 설정 완료 버튼 -->
                                 <div style="margin-top: 1.25rem; border-top: 1px solid rgba(168, 85, 247, 0.15); padding-top: 1.25rem;">
                                     <button type="button" id="settings-proxy-save-btn"
@@ -4875,7 +4945,6 @@
                                         <div
                                             style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #ccfbf1; border-radius: 50%;">
                                             <input type="radio" name="primaryGeminiTextModel" value="gemini-2.5-flash"
-                                                checked
                                                 style="width: 18px; height: 18px; cursor: pointer; accent-color: #14b8a6;">
                                         </div>
                                         <div style="flex: 1;">
@@ -5012,25 +5081,26 @@
                                     <!-- ═══ 🎭 CLAUDE 엔진 ═══ -->
                                     <div style="font-size: 0.8rem; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.75rem; padding-left: 0.25rem;">🎭 Anthropic Claude</div>
 
-                                    <!-- Claude Haiku 3.5 (가성비) -->
+                                    <!-- Claude Haiku 4.5 (가성비) -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #fdba74; border-radius: 12px; padding: 1.25rem; background: #ffffff; display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
                                         <div
                                             style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #ffedd5; border-radius: 50%;">
                                             <input type="radio" name="primaryGeminiTextModel" value="claude-haiku"
+                                                checked
                                                 style="width: 18px; height: 18px; cursor: pointer; accent-color: #f97316;">
                                         </div>
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 700; color: #c2410c; font-size: 1rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>💜 Claude Haiku 3.5</span>
+                                                <span>💜 Claude Haiku 4.5</span>
                                                 <span
                                                     style="background: #ffedd5; color: #c2410c; font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; font-weight: 600;">가성비</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #9a3412; line-height: 1.4;">
                                                 빠른 응답 · 자연스러운 한국어 · 창의적 문체</div>
                                             <div style="font-size: 0.8rem; color: #c2410c; font-weight: 700; margin-top: 0.3rem;">
-                                                📊 1편당 ₩39 ($0.028)</div>
+                                                📊 1편당 ₩56 ($0.040)</div>
                                         </div>
                                     </label>
 
@@ -5056,7 +5126,7 @@
                                         </div>
                                     </label>
 
-                                    <!-- Claude Opus 4.6 (최고 품질) -->
+                                    <!-- Claude Opus 4.7 (최고 품질) -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #f97316; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #fff7ed, #ffedd5); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);">
                                         <div
@@ -5067,14 +5137,14 @@
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 800; color: #c2410c; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>👑 Claude Opus 4.6</span>
+                                                <span>👑 Claude Opus 4.7</span>
                                                 <span
                                                     style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">최고 품질</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #9a3412; line-height: 1.4;">
                                                 최상급 추론 · 완벽한 글쓰기 · 프리미엄 품질</div>
                                             <div style="font-size: 0.8rem; color: #c2410c; font-weight: 700; margin-top: 0.3rem;">
-                                                📊 1편당 ₩735 ($0.525)</div>
+                                                📊 1편당 ₩210 ($0.150)</div>
                                         </div>
                                     </label>
                                 </div>
@@ -5083,9 +5153,8 @@
                             <p
                                 style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.6;">
                                 ✅ <strong>정책/계정 설정에 따라 무료 티어 또는 과금</strong> | 할당량은 각 AI 정책에 따름<br>
-                                ✅ <strong>글 생성</strong>: Gemini 3.1 Flash/Pro · GPT-4.1/5.4 · Claude Haiku/Opus (선택)<br>
-                                ✅ <strong>이미지 생성</strong>: 나노 바나나 프로 (Gemini 3 Pro 4K) / Fal.ai (FLUX) /
-                                Stability AI (Ultra) / Prodia / 공공자료
+                                ✅ <strong>글 생성</strong>: Gemini 2.5/3.1 Flash·Pro · GPT-4.1/5.4 · Claude Haiku/Sonnet/Opus 4.x (선택)<br>
+                                ✅ <strong>이미지 생성</strong>: Nano Banana Pro (Gemini 3 Pro 4K · 유료) / Flow (AI Pro/Ultra 무료) / ImageFX (Imagen 3.5 · 무료) / Leonardo · DeepInfra (FLUX) / 공공자료
                             </p>
 
                             <!-- ✅ [2026-01-27] AI 텍스트 엔진 저장 버튼 -->
@@ -7652,10 +7721,10 @@
                             이미지 소스는?</summary>
                         <div
                             style="margin-top: 0.75rem; color: var(--text-muted); line-height: 1.6; padding-left: 1rem;">
-                            <strong>Stability AI</strong>는 초고화질 실사 생성을 위한 유료 엔진입니다. <strong>DALL-E 3</strong>는
-                            OpenAI의 엔진을 사용하며, <strong>Prodia</strong>는 가성비 좋은 옵션입니다.
-                            <strong>나노 바나나 프로/Imagen 4</strong>는 Gemini API 키를 사용하며 Google 정책/계정 설정에 따라
-                            과금될 수 있습니다.
+                            <strong>ImageFX (Imagen 3.5)</strong>와 <strong>Flow (Nano Banana Pro)</strong>는 Google 계정 로그인만으로 사용 가능한 <em>완전 무료</em> 엔진입니다.
+                            <strong>ImageFX</strong>는 500~1,000장/일(15 RPM), <strong>Flow</strong>는 무료 50 크레딧/일 또는 AI Pro·Ultra 구독 시 확장됩니다.
+                            <strong>Nano Banana Pro (Gemini 3 Pro Image · 직접 API)</strong>는 유료이며 4K 해상도까지 지원합니다.
+                            <strong>Leonardo AI</strong>·<strong>DeepInfra (FLUX)</strong>·<strong>gpt-image-1 (OpenAI)</strong>은 각 API 정책에 따라 과금됩니다.
                         </div>
                     </details>
                     <details
@@ -11323,7 +11392,7 @@
                 style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1rem;">
                 <h3
                     style="margin: 0; color: var(--text-gold); font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <span>📊</span> Gemini 모델 가격 & 추천 조합
+                    <span>📊</span> 전체 AI 엔진 비용표 (2026-04 공식 기준)
                 </h3>
                 <button type="button" class="modal-close" id="close-price-modal-btn"
                     style="color: var(--text-muted); background: none; border: none; font-size: 2rem; cursor: pointer;">×</button>
@@ -11344,187 +11413,387 @@
                     </p>
                 </div>
 
-                <!-- 1. 글 생성 가격표 (v1.4.14 슬림화 + 캐싱 반영, 2026-04-09 갱신) -->
+                <!-- 1. 글 생성 가격표 (v1.4.80, 2026-04 공식 단가 재계산) -->
                 <h4 style="color: #60a5fa; margin-bottom: 0.5rem; border-left: 4px solid #3b82f6; padding-left: 0.75rem;">
-                    1️⃣
-                    글 생성 비용 (1편 기준, v1.4.14 슬림화 후)</h4>
-                <p style="margin: 0 0 1rem 0; font-size: 0.8rem; color: #9ca3af;">
-                    ※ 시스템 프롬프트 약 15K 토큰 + 출력 약 1.2K 토큰 + 평균 1.3회 시도 기준. 캐시 적중 시 입력 비용 75% 추가 절감.
+                    1️⃣ 글 생성 비용 (1편 기준)
+                </h4>
+                <p style="margin: 0 0 1rem 0; font-size: 0.82rem; color: #b0bec5;">
+                    ※ 입력 10K 토큰 + 출력 4K 토큰 + 환율 1,400원/$ 기준 · 2026-04 공식 단가 · 절약 요금은 시스템 프롬프트 재사용 시 <b>자동 적용</b> (사용자 조작 불필요)
                 </p>
+                <div style="overflow-x: auto; margin-bottom: 1rem; border-radius: 8px; background: rgba(0,0,0,0.2);">
                 <table
-                    style="width: 100%; border-collapse: collapse; margin-bottom: 2.5rem; background: rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden;">
+                    style="width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 620px;">
                     <thead style="background: rgba(59, 130, 246, 0.15);">
                         <tr>
-                            <th style="padding: 0.75rem; text-align: left; color: #93c5fd;">모델</th>
-                            <th style="padding: 0.75rem; text-align: right; color: #4ade80;">무료 한도</th>
-                            <th style="padding: 0.75rem; text-align: right; color: #f87171;">캐시 미적중</th>
-                            <th style="padding: 0.75rem; text-align: right; color: #fbbf24;">캐시 적중</th>
+                            <th style="padding: 0.7rem; text-align: left; color: #93c5fd;">모델</th>
+                            <th style="padding: 0.7rem; text-align: right; color: #4ade80;" title="무료로 사용 가능한 일일 호출 수">무료 쿼터</th>
+                            <th style="padding: 0.7rem; text-align: right; color: #f87171;" title="새 프롬프트 — 캐시가 없어 정가로 과금되는 경우">일반 요금</th>
+                            <th style="padding: 0.7rem; text-align: right; color: #fbbf24;" title="동일 시스템 프롬프트 재사용 시 입력 토큰이 할인되는 자동 요금">절약 요금 (자동)</th>
+                            <th style="padding: 0.7rem; text-align: right; color: #c084fc;" title="한국어 블로그 글 10점 만점 벤치마크 (6축 가중평균: 자연스러움·톤·SEO·환각제어·긴본문·AuthGR)">품질 (?/10)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(34, 197, 94, 0.05);">
-                            <td style="padding: 0.75rem; font-weight: bold; color: #fcd34d;">⚡ Gemini 3 Flash <span style="color: #4ade80; font-size: 0.75rem;">(추천)</span></td>
-                            <td style="padding: 0.75rem; text-align: right; color: #4ade80;">1,500회/일</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fca5a5;">약 4원</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fbbf24;">약 1.5원</td>
+                        <!-- Gemini 무료 계열 (최우선 추천) -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(34, 197, 94, 0.10);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #fcd34d;">💰 Gemini 2.5 Flash-Lite <span style="font-size: 0.7rem; background: rgba(34,197,94,0.25); color: #d7f5dd; padding: 0.1rem 0.4rem; border-radius: 4px;">[무료]</span></td>
+                            <td style="padding: 0.7rem; text-align: right; color: #4ade80;">1,000회/일</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩4</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩3</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">6.0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(34, 197, 94, 0.07);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #fcd34d;">⚖️ Gemini 2.5 Flash <span style="color: #4ade80; font-size: 0.7rem; background: rgba(34,197,94,0.25); padding: 0.1rem 0.4rem; border-radius: 4px;">[★기본 추천]</span></td>
+                            <td style="padding: 0.7rem; text-align: right; color: #4ade80;">500회/일</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩18</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩15</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">7.25</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.75rem; font-weight: bold; color: #d1d5db;">🛡️ Gemini 2.5 Flash</td>
-                            <td style="padding: 0.75rem; text-align: right; color: #4ade80;">1,500회/일</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fca5a5;">약 3원</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fbbf24;">약 1원</td>
+                            <td style="padding: 0.7rem; font-weight: bold; color: var(--text-gold);">👑 Gemini 2.5 Pro</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #4ade80;">100회/일 (유료 권장)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩74</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩60</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">8.30</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.75rem; font-weight: bold; color: var(--text-gold);">👑 Gemini 3.1 Pro</td>
-                            <td style="padding: 0.75rem; text-align: right; color: #4ade80;">50회/일</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fca5a5;">약 50원</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fbbf24;">약 18원</td>
+                            <td style="padding: 0.7rem; font-weight: bold; color: #c084fc;">🆕 Gemini 3.1 Pro Preview</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">유료 전용</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩95</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩74</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">8.5</td>
+                        </tr>
+
+                        <!-- OpenAI 계열 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">🧠 GPT-5.4 nano <span style="font-size: 0.7rem; color: #d1d5db;">(초경량)</span></td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩10</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩7</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">6.0</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.75rem; font-weight: bold; color: #c084fc;">🌐 Perplexity Sonar</td>
-                            <td style="padding: 0.75rem; text-align: right; color: #6b7280;">없음</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fca5a5;">약 30원</td>
-                            <td style="padding: 0.75rem; text-align: right; color: #6b7280;">미지원</td>
+                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">🧠 GPT-5.4 mini</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩36</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩26</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">7.2</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.75rem; font-weight: bold; color: #34d399;">🟢 OpenAI GPT-4.1 mini</td>
-                            <td style="padding: 0.75rem; text-align: right; color: #6b7280;">없음</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fca5a5;">약 16원</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fbbf24;">약 8원</td>
+                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">🧠 GPT-4.1 mini</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩15</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩12</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">6.55</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.75rem; font-weight: bold; color: #34d399;">🟢 OpenAI GPT-4.1</td>
-                            <td style="padding: 0.75rem; text-align: right; color: #6b7280;">없음</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fca5a5;">약 80원</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fbbf24;">약 40원</td>
+                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">⚖️ GPT-4.1</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩73</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩52</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">7.55</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">🚀 GPT-5.4 <span style="font-size: 0.7rem; color: #d1d5db;">(최신)</span></td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩119</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩87</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">8.1</td>
+                        </tr>
+
+                        <!-- Claude 계열 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(244, 114, 182, 0.10);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #f472b6;">💜 Claude Haiku 4.5 <span style="font-size: 0.7rem; background: rgba(244, 114, 182, 0.25); color: #fce4ec; padding: 0.1rem 0.4rem; border-radius: 4px;">[★현재 기본값]</span></td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩42</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩29</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">7.55</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #f472b6;">📜 Claude Sonnet 4.6</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩126</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩88</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">8.75</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #f472b6;">👑 Claude Opus 4.7 <span style="font-size: 0.7rem; color: #c084fc;">(2026-04 최신)</span></td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩210</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩147</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">8.8</td>
+                        </tr>
+
+                        <!-- Perplexity -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #c084fc;">🔮 Perplexity Sonar</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩20 + 검색 ₩7</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">미지원</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">6.45</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #c084fc;">🔮 Perplexity Sonar Pro</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩130 + 검색 ₩7</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">미지원</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">7.2</td>
                         </tr>
                         <tr>
-                            <td style="padding: 0.75rem; font-weight: bold; color: #f472b6;">🟣 Claude Sonnet 4</td>
-                            <td style="padding: 0.75rem; text-align: right; color: #6b7280;">없음</td>
-                            <td style="padding: 0.75rem; text-align: right; font-weight: bold; color: #fca5a5;">약 120원</td>
-                            <td style="padding: 0.75rem; text-align: right; color: #6b7280;">미지원</td>
+                            <td style="padding: 0.7rem; font-weight: bold; color: #c084fc;">🔮 Perplexity Sonar Reasoning Pro <span style="font-size: 0.7rem; color: #d1d5db;">(복잡추론)</span></td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩73 + 검색 ₩7</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">미지원</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">7.8</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+
+                <!-- 💵 $10 충전 시 발행 가능 편수 — 2026-04 공식 단가 기준 단일 통합 블록 -->
+                <div style="margin-bottom: 2rem; padding: 1rem; background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 8px;">
+                    <h5 style="margin: 0 0 0.5rem 0; color: #34d399; font-size: 0.95rem;">💵 $10 (약 ₩14,000) 충전 시 발행 가능 편수 <span style="font-size: 0.75rem; color: #b0bec5;">(일반 요금 기준)</span></h5>
+                    <ul style="margin: 0; padding-left: 1.25rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.75;">
+                        <li><strong style="color: #fcd34d;">Gemini 2.5 Flash-Lite</strong>: 약 <b>3,500편</b> <span style="color: #b0bec5;">(무료 쿼터 1,000/일 활용 시 사실상 ∞)</span></li>
+                        <li><strong style="color: #fcd34d;">Gemini 2.5 Flash</strong>: 약 <b>770편</b> <span style="color: #b0bec5;">(무료 500/일 활용 시 사실상 ∞)</span></li>
+                        <li><strong style="color: #34d399;">GPT-5.4 nano</strong>: 약 <b>1,400편</b></li>
+                        <li><strong style="color: #34d399;">GPT-4.1 mini</strong>: 약 <b>960편</b></li>
+                        <li><strong style="color: #34d399;">GPT-5.4 mini</strong>: 약 <b>390편</b></li>
+                        <li><strong style="color: #f472b6;">Claude Haiku 4.5 <span style="color: #4ade80;">[★현재 기본값]</span></strong>: 약 <b>333편</b></li>
+                        <li><strong style="color: #34d399;">GPT-4.1</strong>: 약 <b>192편</b></li>
+                        <li><strong style="color: var(--text-gold);">Gemini 2.5 Pro</strong>: 약 <b>190편</b></li>
+                        <li><strong style="color: #c084fc;">Gemini 3.1 Pro Preview</strong>: 약 <b>147편</b></li>
+                        <li><strong style="color: #34d399;">GPT-5.4</strong>: 약 <b>118편</b></li>
+                        <li><strong style="color: #f472b6;">Claude Sonnet 4.6</strong>: 약 <b>111편</b></li>
+                        <li><strong style="color: #f472b6;">Claude Opus 4.7</strong>: 약 <b>67편</b></li>
+                    </ul>
+                    <div style="margin-top: 0.75rem; padding: 0.6rem; background: rgba(251, 191, 36, 0.08); border-left: 3px solid #fbbf24; border-radius: 4px; font-size: 0.78rem; color: #fde68a;">
+                        💡 절약 요금 (캐시 자동 적용) 시 <b>약 20~40% 추가 절감</b> — 예: Haiku 기본값 사용 시 $10으로 약 <b>483편</b>까지 가능.
+                    </div>
+                </div>
+
+                <!-- 2. 이미지 생성 가격표 (2026-04 공식 단가) -->
+                <h4 style="color: #f472b6; margin-bottom: 0.5rem; border-left: 4px solid #db2777; padding-left: 0.75rem;">
+                    2️⃣ 이미지 생성 비용 (1장 기준)
+                </h4>
+                <p style="margin: 0 0 1rem 0; font-size: 0.8rem; color: #9ca3af;">
+                    ※ 2026-04 공식 단가 · 환율 1,400원/$ · 한글 렌더링 품질은 썸네일 제목 삽입 시 중요
+                </p>
+                <table
+                    style="width: 100%; border-collapse: collapse; margin-bottom: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; font-size: 0.85rem;">
+                    <thead style="background: rgba(219, 39, 119, 0.15);">
+                        <tr>
+                            <th style="padding: 0.7rem; text-align: left; color: #fbcfe8;">모델</th>
+                            <th style="padding: 0.7rem; text-align: left; color: #fbcfe8;">특징</th>
+                            <th style="padding: 0.7rem; text-align: right; color: #f87171;">장당 가격</th>
+                            <th style="padding: 0.7rem; text-align: right; color: #4ade80;">한글 렌더</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 무료 계열 (최우선 추천) -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(34, 197, 94, 0.08);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #4ade80;">✨ ImageFX <span style="font-size: 0.7rem; color: #fbbf24;">(Google 무료)</span></td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">Imagen 3.5 · 텍스트→이미지 전용</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #4ade80; font-weight: bold;">₩0</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">2.0 (Sharp 오버레이로 대체)</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(251, 191, 36, 0.06);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #fbbf24;">🍌 Flow (Nano Banana Pro) <span style="font-size: 0.7rem; color: #4ade80;">(AI Pro 무료)</span></td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">Gemini 3 Pro Image · <b>한글 렌더 1위</b></td>
+                            <td style="padding: 0.7rem; text-align: right; color: #4ade80; font-weight: bold;">₩0 (쿼터 내)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #4ade80; font-weight: bold;">8.6 ⭐최강</td>
+                        </tr>
+
+                        <!-- DeepInfra FLUX -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #60a5fa;">⚡ DeepInfra FLUX-1-schnell <span style="font-size: 0.7rem; color: #4ade80;">(최저가)</span></td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">1단계 FLUX · 빠르고 저렴</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩4 ($0.003)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">2.0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #60a5fa;">⚡ DeepInfra FLUX-2-dev</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">멀티스텝 FLUX · 한국인 얼굴 정확도↑</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩17 ($0.012)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">5.2</td>
+                        </tr>
+
+                        <!-- Nano Banana Pro API -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #fbbf24;">🍌 Nano Banana Pro (API 직접)</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">Gemini 3 Pro Image · 2K 해상도</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩188 ($0.134)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #4ade80;">8.6</td>
+                        </tr>
+
+                        <!-- OpenAI 이미지 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">🎨 OpenAI gpt-image-1 (low)</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">DALL-E 후속 · 1024x1024</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩15 ($0.011)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">7.3 (짧은 문구)</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">🎨 gpt-image-1 (medium)</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">품질 중급 · 블로그 권장</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩59 ($0.042)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">7.3</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">🎨 gpt-image-1 (high)</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">최고 품질</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩234 ($0.167)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">7.3</td>
+                        </tr>
+
+                        <!-- Leonardo AI -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #a78bfa;">🦁 Leonardo Phoenix 1.0</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">스타일 다양 · 자체 모델</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩28 ($0.02)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">3.8</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.7rem; font-weight: bold; color: #a78bfa;">🦁 Leonardo Ideogram 3.0</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">텍스트 특화</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩210 ($0.15)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">2.8</td>
                         </tr>
                     </tbody>
                 </table>
 
-                <!-- 💵 $10 충전 시 발행 가능 횟수 -->
-                <div style="margin-bottom: 2rem; padding: 1rem; background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 8px;">
-                    <h5 style="margin: 0 0 0.5rem 0; color: #34d399; font-size: 0.95rem;">💵 $10 (약 14,000원) 충전 시 발행 가능 (40글/일 기준)</h5>
-                    <ul style="margin: 0; padding-left: 1.25rem; color: #d1d5db; font-size: 0.85rem; line-height: 1.7;">
-                        <li><strong style="color: #fcd34d;">Gemini 3 Flash</strong>: 약 3,500~9,000글 → <strong>87~225일</strong> (캐시 적중률에 따라)</li>
-                        <li><strong style="color: #d1d5db;">Gemini 2.5 Flash</strong>: 약 4,600~14,000글 → <strong>116~350일</strong></li>
-                        <li><strong style="color: var(--text-gold);">Gemini 3.1 Pro</strong>: 약 280~780글 → <strong>7~19일</strong></li>
-                        <li><strong style="color: #c084fc;">Perplexity Sonar</strong>: 약 460글 → <strong>약 11일</strong></li>
-                        <li><strong style="color: #34d399;">GPT-4.1 mini</strong>: 약 875~1,750글 → <strong>22~44일</strong></li>
-                        <li><strong style="color: #34d399;">GPT-4.1</strong>: 약 175~350글 → <strong>4~9일</strong></li>
-                        <li><strong style="color: #f472b6;">Claude Sonnet 4</strong>: 약 117글 → <strong>약 3일</strong></li>
+                <!-- 3️⃣ ImageFX / Flow 할당량 상세 — 2026-04 공식 Google 정책 -->
+                <h4 style="color: #4ade80; margin-bottom: 0.5rem; border-left: 4px solid #22c55e; padding-left: 0.75rem;">
+                    3️⃣ 무료 이미지 엔진 할당량 상세 (Google Labs, 2026-04)
+                </h4>
+                <p style="margin: 0 0 1rem 0; font-size: 0.8rem; color: #b0bec5;">
+                    ※ Google 공식 정책 기반. 쿼터는 <b>크레딧(Flow)</b>과 <b>일일 한도(ImageFX/Flow 모두)</b> 두 축으로 제한됨.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+                    <!-- ImageFX 카드 -->
+                    <div style="background: rgba(34, 197, 94, 0.08); border: 2px solid rgba(52, 211, 153, 0.4); border-radius: 12px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.75rem 0; color: #4ade80; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                            ✨ ImageFX <span style="font-size: 0.7rem; color: #b0bec5; font-weight: normal;">(labs.google/fx)</span>
+                        </h5>
+                        <ul style="margin: 0 0 0.5rem 0; padding-left: 1.1rem; color: #e5e7eb; font-size: 0.82rem; line-height: 1.8;">
+                            <li><strong style="color: #fbbf24;">일일 쿼터</strong>: <b>500~1,000장</b> (Google 비공개 동적)</li>
+                            <li><strong style="color: #fbbf24;">속도 제한</strong>: 약 15 RPM (분당 15회 추정)</li>
+                            <li><strong style="color: #fbbf24;">모델</strong>: Imagen 3.5 (텍스트→이미지)</li>
+                            <li><strong style="color: #fbbf24;">해상도</strong>: 1024×1024 고정</li>
+                            <li><strong style="color: #fbbf24;">계정 요구</strong>: 일반 Google 계정 (Pro 불필요)</li>
+                            <li><strong style="color: #fbbf24;">한글 렌더</strong>: 불가 → Sharp 오버레이 자동 합성</li>
+                            <li><strong style="color: #fbbf24;">쿼터 초과 시</strong>: HTTP 429 → <b>앱이 자동으로 DeepInfra FLUX schnell로 전환</b> (별도 조작 불필요)</li>
+                        </ul>
+                        <div style="margin-top: 0.5rem; padding: 0.5rem 0.7rem; background: rgba(52, 211, 153, 0.12); border-radius: 6px; font-size: 0.75rem; color: #a7f3d0;">
+                            ⭐ <b>본문 이미지 최적</b> · 일 40글 × 5장 = 200장 여유
+                        </div>
+                    </div>
+
+                    <!-- Flow 카드 -->
+                    <div style="background: rgba(251, 191, 36, 0.08); border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.75rem 0; color: #fbbf24; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                            🍌 Flow <span style="font-size: 0.7rem; color: #b0bec5; font-weight: normal;">(labs.google/flow)</span>
+                        </h5>
+                        <ul style="margin: 0 0 0.5rem 0; padding-left: 1.1rem; color: #e5e7eb; font-size: 0.82rem; line-height: 1.75;">
+                            <li><strong style="color: #4ade80;">무료 Google 계정</strong><br><span style="color: #b0bec5;">・일일 <b>50 크레딧</b> (소멸) + 최초 1회 100 크레딧<br>・Nano Banana 2 이미지 <b>20장/일</b><br>・해상도 표준만</span></li>
+                            <li><strong style="color: #4ade80;">AI Pro ($19.99/월) <span style="color: #fbbf24;">[★권장]</span></strong><br><span style="color: #b0bec5;">・월 <b>1,000 크레딧</b><br>・이미지 <b>100장/일</b><br>・해상도 1K / 2K (4K 불가)</span></li>
+                            <li><strong style="color: #4ade80;">AI Ultra ($249.99/월)</strong><br><span style="color: #b0bec5;">・월 <b>25,000 크레딧</b><br>・이미지 <b>1,000장/일</b><br>・해상도 1K / 2K / <b>4K</b> 전부</span></li>
+                            <li><strong style="color: #4ade80;">모델</strong>: Nano Banana Pro (Gemini 3 Pro Image)</li>
+                            <li><strong style="color: #4ade80;">한글 렌더</strong>: 네이티브 <b>1위 (8.6/10)</b></li>
+                            <li><strong style="color: #4ade80;">세션 공유</strong>: ImageFX 로그인 쿠키 재사용 (추가 로그인 X)</li>
+                            <li><strong style="color: #4ade80;">쿼터 초과 시</strong>: <b>앱이 자동으로 ImageFX로 전환</b> (별도 조작 불필요)</li>
+                        </ul>
+                        <div style="margin-top: 0.5rem; padding: 0.5rem 0.7rem; background: rgba(251, 191, 36, 0.12); border-radius: 6px; font-size: 0.75rem; color: #fde68a;">
+                            ⭐ <b>썸네일(한글 제목 삽입) 전용</b> · AI Pro 이상 권장
+                            <div style="margin-top: 0.3rem;">
+                                <a href="https://one.google.com/about/google-ai-plans/" target="_blank" style="color: #fbbf24; font-weight: bold; text-decoration: underline;">[AI Pro 구독하기 →]</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 쿼터 운용 팁 -->
+                <div style="margin-bottom: 2rem; padding: 1rem; background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(96, 165, 250, 0.25); border-radius: 8px;">
+                    <h5 style="margin: 0 0 0.5rem 0; color: #60a5fa; font-size: 0.92rem;">💡 실전 운용 팁 — 이미지 쿼터 극대화</h5>
+                    <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.82rem; line-height: 1.7;">
+                        <li><strong style="color: #fbbf24;">썸네일 1장</strong> → Flow (한글 제목 삽입, AI Pro 100장/일 쿼터)</li>
+                        <li><strong style="color: #4ade80;">본문 5장</strong> → ImageFX (일 500~1,000장 쿼터)</li>
+                        <li><strong style="color: #fca5a5;">쿼터 소진 시 폴백</strong> → DeepInfra FLUX schnell (₩4/장, 앱 자동 전환)</li>
+                        <li><strong style="color: #c084fc;">계정 3개 로테이션</strong> → ImageFX 1,500~3,000장/일 확보 (다중계정)</li>
+                        <li><strong style="color: #f472b6;">쇼핑커넥트 모드</strong> → 수집 이미지 자동 사용 (AI 엔진 우회)</li>
                     </ul>
                 </div>
 
-                <!-- 2. 이미지 생성 가격표 -->
-                <h4 style="color: #f472b6; margin-bottom: 1rem; border-left: 4px solid #db2777; padding-left: 0.75rem;">
-                    2️⃣
-                    이미지 생성 비용 (1장 기준)</h4>
-                <table
-                    style="width: 100%; border-collapse: collapse; margin-bottom: 2.5rem; background: rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden;">
-                    <thead style="background: rgba(219, 39, 119, 0.15);">
-                        <tr>
-                            <th style="padding: 1rem; text-align: left; color: #fbcfe8;">이미지 모델</th>
-                            <th style="padding: 1rem; text-align: left; color: #fbcfe8;">특징</th>
-                            <th style="padding: 1rem; text-align: right; color: #f87171;">유료 가격</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 1rem; font-weight: bold; color: #fbbf24;">🍌 나노 바나나 프로</td>
-                            <td style="padding: 1rem; color: #e2e8f0;">최고급 화질 (Imagen 3)</td>
-                            <td style="padding: 1rem; text-align: right; font-weight: bold; color: #fca5a5;">약
-                                56원<br><span style="font-size: 0.8rem; color: #9ca3af;">($0.04)</span></td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 1rem; font-weight: bold; color: #60a5fa;">⚡ Prodia (강추)</td>
-                            <td style="padding: 1rem; color: #e2e8f0;">빠르고 가성비 갑 (SD)</td>
-                            <td style="padding: 1rem; text-align: right; font-weight: bold; color: #fca5a5;">약
-                                3.5원<br><span style="font-size: 0.8rem; color: #9ca3af;">($0.0025)</span></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 1rem; font-weight: bold; color: #a78bfa;">🎨 Fal.ai</td>
-                            <td style="padding: 1rem; color: #e2e8f0;">최신 FLUX 모델</td>
-                            <td style="padding: 1rem; text-align: right; font-weight: bold; color: #fca5a5;">약
-                                30~50원
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!-- 3. 추천 조합 -->
+                <!-- 4. 추천 조합 -->
                 <h4 style="color: #34d399; margin-bottom: 1rem; border-left: 4px solid #10b981; padding-left: 0.75rem;">
-                    3️⃣
-                    상황별 추천 조합 (BEST)</h4>
+                    4️⃣ 상황별 추천 조합 (2026-04 최적화)
+                </h4>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-                    <!-- 무료 조합 -->
-                    <div
-                        style="background: rgba(34, 197, 94, 0.12); border: 2px solid rgba(52, 211, 153, 0.5); border-radius: 12px; padding: 1.25rem;">
-                        <h5
-                            style="margin: 0 0 1rem 0; color: #4ade80; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <!-- 완전 무료 조합 -->
+                    <div style="background: rgba(34, 197, 94, 0.12); border: 2px solid rgba(52, 211, 153, 0.5); border-radius: 12px; padding: 1.25rem;">
+                        <h5 style="margin: 0 0 1rem 0; color: #4ade80; font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem;">
                             <span>🆓</span> 완전 무료 조합
                         </h5>
-                        <ul
-                            style="margin: 0; padding-left: 1.25rem; color: #d1d5db; font-size: 0.9rem; line-height: 1.6;">
-                            <li><strong>글:</strong> Gemini 3 Flash (1500회/일 무료)</li>
-                            <li><strong>그림:</strong> ImageFX (구글 무료)</li>
-                            <li
-                                style="margin-top: 0.5rem; color: #4ade80; font-weight: bold; background: rgba(34, 197, 94, 0.15); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
-                                총 비용: 0원 / 편</li>
+                        <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.7;">
+                            <li><strong>글:</strong> Gemini 2.5 Flash (500회/일 무료)</li>
+                            <li><strong>썸네일:</strong> Flow (AI Pro 100장/일)</li>
+                            <li><strong>본문 이미지:</strong> ImageFX (500~1,000장/일)</li>
+                            <li style="margin-top: 0.5rem; color: #4ade80; font-weight: bold; background: rgba(34, 197, 94, 0.15); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
+                                총 비용: ₩0 / 편 (쿼터 내)</li>
                         </ul>
-                        <div
-                            style="margin-top: 1rem; font-size: 0.85rem; color: #a7f3d0; background: rgba(16, 185, 129, 0.1); padding: 0.75rem; border-radius: 6px; line-height: 1.4;">
-                            💡 무료 한도 내에서 사용. 일 1500글 미만이면 평생 무료.
+                        <div style="margin-top: 0.8rem; font-size: 0.8rem; color: #a7f3d0; background: rgba(16, 185, 129, 0.1); padding: 0.6rem; border-radius: 6px; line-height: 1.5;">
+                            💡 일 40글 이하 + AI Pro 구독 시 평생 ₩0
                         </div>
                     </div>
 
-                    <!-- 가성비 조합 -->
-                    <div
-                        style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 12px; padding: 1.25rem;">
-                        <h5
-                            style="margin: 0 0 1rem 0; color: #34d399; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
-                            <span>🚀</span> 가성비 유료 조합
+                    <!-- 현재 기본값 (가성비) -->
+                    <div style="background: rgba(236, 72, 153, 0.1); border: 2px solid rgba(244, 114, 182, 0.4); border-radius: 12px; padding: 1.25rem;">
+                        <h5 style="margin: 0 0 1rem 0; color: #f472b6; font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>⭐</span> 현재 기본값 (가성비)
                         </h5>
-                        <ul
-                            style="margin: 0; padding-left: 1.25rem; color: #d1d5db; font-size: 0.9rem; line-height: 1.6;">
-                            <li><strong>글:</strong> Gemini 3 Flash (1.5~4원)</li>
-                            <li><strong>그림:</strong> ImageFX (무료) 또는 Prodia (3.5원)</li>
-                            <li
-                                style="margin-top: 0.5rem; color: #34d399; font-weight: bold; background: rgba(52, 211, 153, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
-                                총 비용: 약 1.5~25원 / 편 (이미지 5장 기준)</li>
+                        <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.7;">
+                            <li><strong>글:</strong> Claude Haiku 4.5 (₩42)</li>
+                            <li><strong>썸네일:</strong> Flow (AI Pro 무료 쿼터)</li>
+                            <li><strong>본문 이미지:</strong> DeepInfra FLUX schnell (₩4/장)</li>
+                            <li style="margin-top: 0.5rem; color: #f472b6; font-weight: bold; background: rgba(244, 114, 182, 0.15); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
+                                총 비용: ₩62 / 편 (5장 기준)</li>
                         </ul>
-                        <div
-                            style="margin-top: 1rem; font-size: 0.85rem; color: #a7f3d0; background: rgba(16, 185, 129, 0.1); padding: 0.75rem; border-radius: 6px; line-height: 1.4;">
-                            💡 무료 한도 초과 시. $10로 약 87~225일 발행 가능 (40글/일).
+                        <div style="margin-top: 0.8rem; font-size: 0.8rem; color: #fbcfe8; background: rgba(236, 72, 153, 0.08); padding: 0.6rem; border-radius: 6px; line-height: 1.5;">
+                            💡 품질 7.55 + 쿼터 걱정 없음. $10으로 약 225편
                         </div>
                     </div>
 
-                    <!-- 고퀄리티 조합 -->
-                    <div
-                        style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 12px; padding: 1.25rem;">
-                        <h5
-                            style="margin: 0 0 1rem 0; color: #fbbf24; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
-                            <span>👑</span> 압도적 고퀄리티 조합
+                    <!-- 압도적 고퀄리티 -->
+                    <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 12px; padding: 1.25rem;">
+                        <h5 style="margin: 0 0 1rem 0; color: #fbbf24; font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>👑</span> 압도적 고퀄리티
                         </h5>
-                        <ul
-                            style="margin: 0; padding-left: 1.25rem; color: #d1d5db; font-size: 0.9rem; line-height: 1.6;">
-                            <li><strong>글:</strong> Gemini 3.1 Pro (18~50원)</li>
-                            <li><strong>그림:</strong> 나노 바나나 프로 (56원/장)</li>
-                            <li
-                                style="margin-top: 0.5rem; color: #fbbf24; font-weight: bold; background: rgba(245, 158, 11, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
-                                총 비용: 약 300~330원 / 편 (이미지 5장 기준)</li>
+                        <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.7;">
+                            <li><strong>글:</strong> Claude Opus 4.7 (₩210)</li>
+                            <li><strong>썸네일:</strong> Flow (4K — AI Ultra 필수)</li>
+                            <li><strong>본문 이미지:</strong> Nano Banana Pro API (₩188/장)</li>
+                            <li style="margin-top: 0.5rem; color: #fbbf24; font-weight: bold; background: rgba(245, 158, 11, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
+                                총 비용: 약 ₩1,150 / 편</li>
                         </ul>
-                        <div
-                            style="margin-top: 1rem; font-size: 0.85rem; color: #fde68a; background: rgba(245, 158, 11, 0.1); padding: 0.75rem; border-radius: 6px; line-height: 1.4;">
-                            💡 메인 블로그 지수 상승이 목표일 때. $10로 약 7~19일 발행 가능.
+                        <div style="margin-top: 0.8rem; font-size: 0.8rem; color: #fde68a; background: rgba(245, 158, 11, 0.1); padding: 0.6rem; border-radius: 6px; line-height: 1.5;">
+                            💡 중요 브랜드 포스트 · $10으로 약 12편
                         </div>
                     </div>
+                </div>
+
+                <!-- 5. 중요 참고사항 -->
+                <h4 style="color: #a855f7; margin-top: 2rem; margin-bottom: 0.75rem; border-left: 4px solid #8b5cf6; padding-left: 0.75rem;">
+                    5️⃣ 중요 참고사항
+                </h4>
+                <div style="padding: 1rem; background: rgba(168, 85, 247, 0.06); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 8px; font-size: 0.82rem; color: #e5e7eb; line-height: 1.7;">
+                    <ul style="margin: 0; padding-left: 1.2rem;">
+                        <li>모든 가격은 <strong>2026-04 공식 단가</strong> 기준. 환율 <strong>1,400원/$</strong> 기준.</li>
+                        <li>입력 10K 토큰 / 출력 4K 토큰 기준. 실제 블로그 글은 ±30% 편차 가능.</li>
+                        <li><strong>캐시 적중</strong>: 시스템 프롬프트 재사용 시 자동 적용 (Claude 5분 TTL / Gemini 1시간 TTL).</li>
+                        <li><strong>Deprecated 모델</strong>: GPT-4o(2026-03-31 은퇴), DALL-E 3(2026-05-12 제거) — 앱에서 자동 회피.</li>
+                        <li><strong>Flow 쿼터 초과 시</strong>: ImageFX → DeepInfra FLUX schnell 순으로 자동 폴백 (유료 엔진 전환 전 확인 필요).</li>
+                        <li>품질 점수는 한국어 블로그 10점 만점 벤치마크 (6축 가중평균).</li>
+                    </ul>
                 </div>
             </div>
 
@@ -11584,7 +11853,7 @@
                         </label>
                         <select id="settings-gemini-model"
                             style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: 8px; color: var(--text-strong); font-size: 0.9rem; cursor: pointer;">
-                            <option value="gemini-2.5-flash">🛡️ Gemini 2.5 Flash (무료 1500/일, 추천)</option>
+                            <option value="gemini-2.5-flash">🛡️ Gemini 2.5 Flash (무료 500/일, 추천)</option>
                             <option value="gemini-2.5-flash-lite">⚡ Gemini 2.5 Flash-Lite (가장 빠름)</option>
                             <option value="gemini-2.5-pro">👑 Gemini 2.5 Pro (무료 25/일, 고품질)</option>
                         </select>

@@ -11,7 +11,7 @@ import { checkAdbDevice, changeIpViaAirplaneMode, getCurrentIp, downloadAdb } fr
 import { checkAdsPowerStatus, openAdsPowerBrowser, closeAdsPowerBrowser, listAdsPowerProfiles, createAdsPowerProfile, deleteAdsPowerProfile, setAdsPowerApiKey } from '../utils/adsPowerManager';
 import { setAdsPowerEnabled } from '../../crawler/crawlerBrowser.js';
 import { setImageFxAdsPowerEnabled } from '../../image/imageFxGenerator.js';
-import { setProxyEnabled, isProxyEnabled, getPoolStatus, getSmartProxyConfig } from '../../crawler/utils/proxyManager.js';
+import { setProxyEnabled, isProxyEnabled, getPoolStatus, getSmartProxyConfig, setManualProxy, getManualProxy, verifyProxy, type ManualProxyConfig } from '../../crawler/utils/proxyManager.js';
 
 /**
  * ✅ [2026-03-27] FNV-1a 해시 → 8자리 hex (계정별 Sticky Session ID 생성용)
@@ -43,6 +43,54 @@ export function registerSystemHandlers(ctx: IpcContext): void {
 
     ipcMain.handle('proxy:getStatus', async () => {
         return getPoolStatus();
+    });
+
+    // ✅ [v1.4.79] 사용자 수동 프록시 IP 저장/조회
+    ipcMain.handle('proxy:setManual', async (_event, config: ManualProxyConfig | null) => {
+        try {
+            setManualProxy(config);
+            return { success: true };
+        } catch (err) {
+            return { success: false, message: (err as Error).message };
+        }
+    });
+
+    ipcMain.handle('proxy:getManual', async () => {
+        return getManualProxy();
+    });
+
+    // ✅ [v1.4.79] 프록시 실전 검증 — 실제 HTTP 요청으로 IP 우회 여부 확인
+    ipcMain.handle('proxy:verify', async (_event, config: ManualProxyConfig) => {
+        try {
+            return await verifyProxy(config);
+        } catch (err) {
+            return {
+                ok: false,
+                message: `검증 중 예외: ${(err as Error).message}`,
+                diagnostics: [],
+            };
+        }
+    });
+
+    // ✅ [v1.4.79] 활성 Chrome 세션의 실제 공인 IP 확인 (프록시 Chrome 적용 최종 확증)
+    ipcMain.handle('proxy:detectSessionIp', async (_event, accountId: string) => {
+        try {
+            const { browserSessionManager } = await import('../../browserSessionManager.js');
+            const ip = await browserSessionManager.detectSessionPublicIp(accountId);
+            return { ok: !!ip, ip };
+        } catch (err) {
+            return { ok: false, message: (err as Error).message };
+        }
+    });
+
+    // ✅ [v1.4.79 P0-Gate] 발행 전 프록시 적용 강제 게이트
+    ipcMain.handle('proxy:enforceGate', async (_event, accountId: string, expectedHost?: string) => {
+        try {
+            const { browserSessionManager } = await import('../../browserSessionManager.js');
+            return await browserSessionManager.enforceProxyAppliedOrThrow(accountId, expectedHost);
+        } catch (err) {
+            return { ok: false, message: (err as Error).message };
+        }
     });
 
     // ✅ [2026-03-16] AdsPower 토글 설정 → crawlerBrowser + ImageFX 전역 flag 동시 동기화

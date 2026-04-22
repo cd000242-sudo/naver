@@ -48,16 +48,20 @@ const BRAND_STORE_SELECTORS = {
         '._productDetail img',
         '[class*="detail"] img:not([class*="icon"]):not([class*="logo"])',
     ],
-    // 제품명
+    // ✅ [v1.4.77 P2] 2026-04 현행 난독화 클래스 + 구버전 fallback + 범용 셀렉터
     productName: [
-        '._1PF-0vpPXO',
+        '._1PF-0vpPXO',           // 구버전 (유지)
         '.product_title',
         'h1[class*="product"]',
         '._productName',
+        'h2[class*="title"]',     // 신규 범용
+        '[class*="ProductName"]', // 신규 범용
+        'h1',                     // 최후 폴백
     ],
-    // 가격
     price: [
-        '._1LY7DqCnwR',
+        'strong.Xu9MEKUuIo span.e1DMQNBPJ_',  // 2026-04 현행 할인가
+        'del.VaZJPclpdJ span.e1DMQNBPJ_',     // 2026-04 현행 정가
+        '._1LY7DqCnwR',                       // 구버전 (유지)
         '.product_price',
         '[class*="price"]',
     ],

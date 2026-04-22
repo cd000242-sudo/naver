@@ -1,0 +1,17 @@
+- generic [ref=e2]:
+  - generic [ref=e3]: 쇼핑 서비스 접속이 일시적으로 제한되었습니다.
+  - generic [ref=e4]: 네이버는 안정적인 쇼핑 서비스 제공하고자 시스템을 통해 아래와 같은 비정상적인 접근이 감지될 경우 해당 네트워크의 접속을 일시적으로 제한하고 있습니다.
+  - list [ref=e5]:
+    - listitem [ref=e6]: 상품 구매, 탐색과 무관한 외부 이벤트를 통한 접속
+    - listitem [ref=e7]: 짧은 시간 내에 너무 많은 요청이 이루어진 IP
+    - listitem [ref=e8]: VPN을 사용하여 접속한 IP
+    - listitem [ref=e9]: 특정 확장 프로그램 이용 시
+  - generic [ref=e10]:
+    - text: 위와 같은 접근이 아님에도 접속이 제한된 경우,네이버앱을 업데이트 또는
+    - link "원클릭 진단" [ref=e11] [cursor=pointer]:
+      - /url: https://help.naver.com/service/30016/category/5278
+    - text: 을 부탁드립니다.
+    - text: 해당 방법을 통해서도 접속이 불가한 경우
+    - link "네이버쇼핑 고객센터" [ref=e12] [cursor=pointer]:
+      - /url: https://help.pay.naver.com/mail/form.help?alias=shopping_stop
+    - text: 로 문의 부탁드립니다.

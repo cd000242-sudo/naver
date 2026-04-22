@@ -94,7 +94,8 @@ async function tryOpenAI(headingText: string, imageStyle?: string, apiKey?: stri
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        // ✅ [v1.4.77] gpt-4o-mini → gpt-4.1-mini (2026-03-31 sunset 회피, 동급 가성비)
+        model: 'gpt-4.1-mini',
         messages: [
           { role: 'system', content: `You are an expert AI image prompt engineer for ${imageStyle || 'realistic'} style. Output ONLY the English prompt.` },
           { role: 'user', content: getTranslationPrompt(headingText, imageStyle) },

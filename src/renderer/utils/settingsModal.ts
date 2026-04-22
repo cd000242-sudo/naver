@@ -1180,6 +1180,147 @@ function setupProxySettings(): void {
 
     initProxy();
 
+    // ✅ [v1.4.79] 수동 프록시 로드 및 UI 반영
+    const manualStatus = document.getElementById('manual-proxy-status');
+    const manualHostInput = document.getElementById('manual-proxy-host') as HTMLInputElement | null;
+    const manualPortInput = document.getElementById('manual-proxy-port') as HTMLInputElement | null;
+    const manualUserInput = document.getElementById('manual-proxy-username') as HTMLInputElement | null;
+    const manualPassInput = document.getElementById('manual-proxy-password') as HTMLInputElement | null;
+    const manualSchemeSelect = document.getElementById('manual-proxy-scheme') as HTMLSelectElement | null;
+
+    const liveBadge = document.getElementById('manual-proxy-live-badge');
+    const verifyResultEl = document.getElementById('manual-proxy-verify-result');
+    const testBtn = document.getElementById('manual-proxy-test-btn') as HTMLButtonElement | null;
+
+    // ✅ [v1.4.79] 상시 연결 상태 배지 갱신
+    const updateLiveBadge = (state: 'unknown' | 'checking' | 'ok' | 'fail', text: string) => {
+        if (!liveBadge) return;
+        liveBadge.style.display = 'block';
+        if (state === 'ok') {
+            liveBadge.style.background = 'rgba(34, 197, 94, 0.15)';
+            liveBadge.style.border = '1px solid rgba(34, 197, 94, 0.35)';
+            liveBadge.style.color = '#22c55e';
+        } else if (state === 'fail') {
+            liveBadge.style.background = 'rgba(239, 68, 68, 0.15)';
+            liveBadge.style.border = '1px solid rgba(239, 68, 68, 0.35)';
+            liveBadge.style.color = '#ef4444';
+        } else if (state === 'checking') {
+            liveBadge.style.background = 'rgba(59, 130, 246, 0.15)';
+            liveBadge.style.border = '1px solid rgba(59, 130, 246, 0.35)';
+            liveBadge.style.color = '#3b82f6';
+        } else {
+            liveBadge.style.background = 'rgba(113, 113, 122, 0.15)';
+            liveBadge.style.border = '1px solid rgba(113, 113, 122, 0.35)';
+            liveBadge.style.color = '#a1a1aa';
+        }
+        liveBadge.textContent = text;
+    };
+
+    const loadManualProxy = async () => {
+        try {
+            const manual = await (window as any).api?.getManualProxy?.();
+            if (manual && manual.host) {
+                if (manualHostInput) manualHostInput.value = manual.host || '';
+                if (manualPortInput) manualPortInput.value = String(manual.port || '');
+                if (manualUserInput) manualUserInput.value = manual.username || '';
+                if (manualPassInput) manualPassInput.value = manual.password || '';
+                if (manualSchemeSelect) manualSchemeSelect.value = (manual as any).scheme || 'http';
+                if (manualStatus) manualStatus.textContent = `현재: ${(manual as any).scheme || 'http'}://${manual.host}:${manual.port} (사용자 수동 프록시 적용 중)`;
+                updateLiveBadge('unknown', `⚪ 저장된 프록시: ${manual.host}:${manual.port} — 🔍 연결 테스트로 실제 연결 확인하세요`);
+            } else {
+                if (manualStatus) manualStatus.textContent = '현재: 미설정 (SmartProxy 사용 중)';
+                updateLiveBadge('unknown', '⚪ 수동 프록시 미설정');
+            }
+        } catch {
+            if (manualStatus) manualStatus.textContent = '현재: 조회 실패';
+        }
+    };
+    loadManualProxy();
+
+    // ✅ [v1.4.79] "연결 테스트" 버튼 — 실제 HTTP 요청으로 IP 우회 검증
+    testBtn?.addEventListener('click', async () => {
+        const host = manualHostInput?.value.trim() || '';
+        const portStr = manualPortInput?.value.trim() || '';
+        const port = parseInt(portStr, 10);
+
+        if (!host || !portStr || !Number.isFinite(port) || port <= 0 || port > 65535) {
+            if (verifyResultEl) {
+                verifyResultEl.style.display = 'block';
+                verifyResultEl.style.background = 'rgba(239, 68, 68, 0.12)';
+                verifyResultEl.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                verifyResultEl.style.color = '#ef4444';
+                verifyResultEl.textContent = '⚠️ 호스트와 포트를 먼저 입력해주세요 (포트는 1~65535)';
+            }
+            return;
+        }
+
+        // 테스트 중 UI 상태
+        testBtn.disabled = true;
+        testBtn.textContent = '🔄 연결 확인 중... (최대 15초)';
+        updateLiveBadge('checking', '🔄 프록시 연결 확인 중...');
+        if (verifyResultEl) verifyResultEl.style.display = 'none';
+
+        try {
+            const result = await (window as any).api?.verifyProxy?.({
+                host,
+                port,
+                username: manualUserInput?.value.trim() || '',
+                password: manualPassInput?.value.trim() || '',
+                scheme: manualSchemeSelect?.value || 'http',
+            });
+
+            // 결과 배지 표시 (진단 4단계 포함)
+            if (verifyResultEl) {
+                verifyResultEl.style.display = 'block';
+                const diagnosticsHtml = (result?.diagnostics || [])
+                    .map((line: string) => `<div style="font-family: monospace; font-size: 0.72rem; color: var(--text-muted);">${line}</div>`)
+                    .join('');
+
+                if (result?.ok) {
+                    verifyResultEl.style.background = 'rgba(34, 197, 94, 0.12)';
+                    verifyResultEl.style.border = '1px solid rgba(34, 197, 94, 0.3)';
+                    verifyResultEl.style.color = '#22c55e';
+                    verifyResultEl.innerHTML = [
+                        `<div style="font-weight: 800; margin-bottom: 0.5rem; white-space: pre-line;">${result.message}</div>`,
+                        `<div style="color: var(--text-muted); font-size: 0.75rem;">본인 실제 IP: <strong>${result.myIp || '?'}</strong></div>`,
+                        `<div style="color: var(--text-muted); font-size: 0.75rem;">프록시 1차 IP: <strong>${result.proxyIp || '?'}</strong></div>`,
+                        result.proxyIp2 ? `<div style="color: var(--text-muted); font-size: 0.75rem;">프록시 2차 IP: <strong>${result.proxyIp2}</strong> (${result.ipStable ? '안정' : 'rotating'})</div>` : '',
+                        `<div style="color: var(--text-muted); font-size: 0.75rem;">네이버 도달: <strong>${result.naverReachable ? '✅ OK' : '⚠️ 확인 불가'}</strong></div>`,
+                        `<div style="color: var(--text-muted); font-size: 0.75rem;">응답 속도: <strong>${result.latencyMs || '?'}ms</strong></div>`,
+                        `<div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed rgba(34,197,94,0.3);">${diagnosticsHtml}</div>`,
+                    ].join('');
+                    const confidence = result.matchesHost && result.naverReachable && (result.ipStable || !result.proxyIp2)
+                        ? '100% 확정'
+                        : result.naverReachable ? '작동 중' : '부분 확인';
+                    updateLiveBadge('ok', `✅ 연결됨 [${confidence}] — ${result.proxyIp} (${result.latencyMs}ms)`);
+                } else {
+                    verifyResultEl.style.background = 'rgba(239, 68, 68, 0.12)';
+                    verifyResultEl.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                    verifyResultEl.style.color = '#ef4444';
+                    verifyResultEl.innerHTML = [
+                        `<div style="font-weight: 800; margin-bottom: 0.5rem; white-space: pre-line;">${result?.message || '알 수 없는 오류'}</div>`,
+                        result?.myIp ? `<div style="color: var(--text-muted); font-size: 0.75rem;">본인 실제 IP: <strong>${result.myIp}</strong></div>` : '',
+                        result?.proxyIp ? `<div style="color: var(--text-muted); font-size: 0.75rem;">프록시 IP: <strong>${result.proxyIp}</strong></div>` : '',
+                        `<div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed rgba(239,68,68,0.3);">${diagnosticsHtml}</div>`,
+                    ].join('');
+                    updateLiveBadge('fail', `❌ 연결 실패 — ${result?.message?.split('\n')[0] || '오류'}`);
+                }
+            }
+        } catch (err) {
+            if (verifyResultEl) {
+                verifyResultEl.style.display = 'block';
+                verifyResultEl.style.background = 'rgba(239, 68, 68, 0.12)';
+                verifyResultEl.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                verifyResultEl.style.color = '#ef4444';
+                verifyResultEl.textContent = `❌ 검증 실패: ${(err as Error).message}`;
+            }
+            updateLiveBadge('fail', `❌ 검증 예외: ${(err as Error).message}`);
+        } finally {
+            testBtn.disabled = false;
+            testBtn.textContent = '🔍 연결 테스트 (실제 IP 확인)';
+        }
+    });
+
     // 토글 클릭 이벤트
     toggleWrap?.addEventListener('click', async () => {
         if (!toggle) return;
@@ -1210,7 +1351,68 @@ function setupProxySettings(): void {
     });
 
     // 설정 완료 버튼
-    document.getElementById('settings-proxy-save-btn')?.addEventListener('click', () => {
+    document.getElementById('settings-proxy-save-btn')?.addEventListener('click', async () => {
+        // ✅ [v1.4.79] 수동 프록시 IP 저장
+        try {
+            const host = manualHostInput?.value.trim() || '';
+            const portStr = manualPortInput?.value.trim() || '';
+            const port = parseInt(portStr, 10);
+
+            if (host && portStr && Number.isFinite(port) && port > 0 && port <= 65535) {
+                const proxyConfig = {
+                    host,
+                    port,
+                    username: manualUserInput?.value.trim() || '',
+                    password: manualPassInput?.value.trim() || '',
+                    scheme: (manualSchemeSelect?.value || 'http') as 'http' | 'https' | 'socks4' | 'socks5',
+                };
+                // 유효한 값 입력 → 저장
+                await (window as any).api?.setManualProxy?.(proxyConfig);
+                if (manualStatus) manualStatus.textContent = `현재: ${host}:${port} (사용자 수동 프록시 적용 중)`;
+                if ((window as any).toastManager) {
+                    (window as any).toastManager.success(`✅ 수동 프록시 저장: ${host}:${port}`);
+                }
+
+                // ✅ [v1.4.79] 저장 직후 자동 실전 검증 — 사용자가 발행 전에 미리 확인
+                updateLiveBadge('checking', '🔄 저장된 프록시 자동 검증 중... (최대 15초)');
+                try {
+                    const verifyResult = await (window as any).api?.verifyProxy?.(proxyConfig);
+                    if (verifyResult?.ok) {
+                        updateLiveBadge('ok', `✅ 연결됨 — 프록시 경유 IP ${verifyResult.proxyIp} (${verifyResult.latencyMs}ms)`);
+                        if ((window as any).toastManager) {
+                            (window as any).toastManager.success(`✅ 프록시 연동 확인: ${verifyResult.proxyIp}`);
+                        }
+                    } else {
+                        updateLiveBadge('fail', `❌ 검증 실패 — ${verifyResult?.message?.split('\n')[0] || '오류'}`);
+                        if ((window as any).toastManager) {
+                            (window as any).toastManager.error(`⚠️ 프록시 저장되었으나 연결 실패: ${verifyResult?.message?.split('\n')[0]}`);
+                        }
+                    }
+                } catch (verifyErr) {
+                    updateLiveBadge('fail', `❌ 자동 검증 중 예외: ${(verifyErr as Error).message}`);
+                }
+            } else if (!host && !portStr) {
+                // 둘 다 비어있으면 삭제 (SmartProxy 폴백)
+                await (window as any).api?.setManualProxy?.(null);
+                if (manualStatus) manualStatus.textContent = '현재: 미설정 (SmartProxy 사용 중)';
+                if ((window as any).toastManager) {
+                    (window as any).toastManager.info('📡 수동 프록시 삭제 — SmartProxy로 폴백');
+                }
+            } else {
+                // 일부만 채워진 불완전 입력
+                if ((window as any).toastManager) {
+                    (window as any).toastManager.error('⚠️ 수동 프록시는 IP와 포트를 모두 입력해야 합니다');
+                }
+                return;
+            }
+        } catch (err) {
+            console.error('[SettingsModal] 수동 프록시 저장 실패:', err);
+            if ((window as any).toastManager) {
+                (window as any).toastManager.error(`❌ 저장 실패: ${(err as Error).message}`);
+            }
+            return;
+        }
+
         if ((window as any).toastManager) {
             (window as any).toastManager.success('✅ 프록시 설정이 저장되었습니다!');
         }

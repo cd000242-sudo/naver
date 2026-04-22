@@ -56,6 +56,16 @@ export function registerImageHandlers(ctx: IpcContext): void {
         }
     });
 
+    // ✅ [v1.4.80] Flow 연결 테스트 (Nano Banana Pro 엔드포인트 확보 확인)
+    safeHandle('flow:testConnection', async () => {
+        try {
+            const { testFlowConnection } = await import('../../image/flowGenerator.js');
+            return await testFlowConnection();
+        } catch (error: any) {
+            return { ok: false, message: `Flow 연결 테스트 실패: ${error.message}` };
+        }
+    });
+
     // 저장된 이미지 경로 가져오기
     safeHandle('images:getSavedPath', async () => {
         return path.join(os.homedir(), 'naver-blog-automation', 'images');

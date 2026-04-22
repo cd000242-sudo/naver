@@ -7,7 +7,8 @@
 
 export type HeadingImageMode = 'all' | 'thumbnail-only' | 'odd-only' | 'even-only' | 'none';
 // ✅ [2026-02-08 FIX] 이미지 관리 탭 드롭다운 value와 완전 통일
-export type GlobalImageSource = 'nano-banana-pro' | 'falai' | 'prodia' | 'stability' | 'pollinations' | 'deepinfra' | 'openai-image' | 'leonardoai' | 'imagefx' | 'local-folder';
+// ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow (Nano Banana Pro 무료 쿼터)
+export type GlobalImageSource = 'nano-banana-pro' | 'falai' | 'prodia' | 'stability' | 'pollinations' | 'deepinfra' | 'openai-image' | 'leonardoai' | 'imagefx' | 'flow' | 'local-folder';
 
 // ✅ [2026-02-18] 이미지 스타일 타입 (5개)
 export type ImageStyleType =
@@ -40,6 +41,7 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'openai-image': 'OpenAI DALL-E',
   'leonardoai': 'Leonardo AI',
   'imagefx': 'ImageFX (무료)',
+  'flow': '🍌 Flow (Nano Banana Pro)',
   'local-folder': '📂 내 폴더'
 };
 
@@ -223,7 +225,8 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
 // ✅ [2026-02-02] 풀오토 전용 이미지 소스 설정 (이미지 관리 탭과 완전히 분리)
 export function getFullAutoImageSource(): GlobalImageSource {
   // ✅ [2026-02-13 FIX] 유효한 AI 엔진 목록 (이것 외의 값은 모두 무효)
-  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'local-folder'];
+  // ✅ [v1.4.80] 'flow' 추가
+  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
 
   // 우선순위: fullAutoImageSource → globalImageSource → 'nano-banana-pro' (Gemini 기본값)
   const fullAutoSaved = safeLocalStorageGet('fullAutoImageSource');
@@ -587,16 +590,33 @@ export function createHeadingImageModal(): void {
             </button>
           </div>
 
-          <!-- ✅ [2026-03-27] Google 계정 연동 상태 + 변경 버튼 (ImageFX) -->
+          <!-- ✅ [2026-03-27] Google 계정 연동 상태 + 변경 버튼 (ImageFX · Flow 공유) -->
           <div style="margin-bottom: 16px;">
             <button type="button" class="premium-setting-btn" id="switch-google-account-btn">
               <div style="display: flex; align-items: center; gap: 14px;">
                 <div class="btn-icon" id="google-account-icon" style="background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%);">🔗</div>
                 <div>
-                  <div class="btn-text">Google 계정 (ImageFX)</div>
+                  <div class="btn-text">Google 계정 (ImageFX · Flow 공유)</div>
                   <div class="btn-value" id="google-account-status" style="color: #9ca3af; display: flex; align-items: center; gap: 6px;">
                     <span id="google-account-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #6b7280; display: inline-block; flex-shrink: 0;"></span>
                     <span id="google-account-text">확인 중...</span>
+                  </div>
+                </div>
+              </div>
+              <span class="arrow">›</span>
+            </button>
+          </div>
+
+          <!-- ✅ [v1.4.64] Flow (Nano Banana Pro) 연결 테스트 버튼 -->
+          <div style="margin-bottom: 16px;">
+            <button type="button" class="premium-setting-btn" id="test-flow-connection-btn">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <div class="btn-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">🍌</div>
+                <div>
+                  <div class="btn-text">Flow 연결 테스트 (Nano Banana Pro)</div>
+                  <div class="btn-value" id="flow-connection-status" style="color: #9ca3af; display: flex; align-items: center; gap: 6px;">
+                    <span id="flow-connection-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #6b7280; display: inline-block; flex-shrink: 0;"></span>
+                    <span id="flow-connection-text">테스트 필요 (클릭)</span>
                   </div>
                 </div>
               </div>
@@ -794,6 +814,13 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 1.5rem;">✨</div>
             <div style="font-size: 12px; font-weight: 600; color: #047857;">ImageFX</div>
             <div style="font-size: 10px; color: #059669;">Google 무료 | 1000장/일</div>
+          </label>
+          <!-- ✅ [v1.4.64] Flow (Nano Banana Pro) UI 노출 — labs.google 세션 공유, 한글 텍스트 네이티브 -->
+          <label class="source-option" data-value="flow" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #f59e0b; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25); position: relative;">
+            <div style="position: absolute; top: -6px; right: -6px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 8px;">NEW</div>
+            <div style="font-size: 1.5rem;">🍌</div>
+            <div style="font-size: 12px; font-weight: 600; color: #92400e;">Flow</div>
+            <div style="font-size: 10px; color: #a16207;">Nano Banana Pro | AI Pro</div>
           </label>
           <label class="source-option" data-value="local-folder" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); text-align: center; transition: all 0.2s; position: relative;">
             <div style="font-size: 1.5rem;">📂</div>
@@ -1053,6 +1080,8 @@ export function createHeadingImageModal(): void {
               <select id="test-engine-select" style="width: 100%; padding: 10px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; color: #374151; background: white; cursor: pointer; transition: border-color 0.2s;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e5e7eb'">
                 <option value="">📌 현재 저장된 엔진 사용</option>
                 <option value="nano-banana-pro">🍌 나노 바나나 프로 (Gemini)</option>
+                <option value="flow">🍌 Flow (Nano Banana Pro, AI Pro 무료)</option>
+                <option value="imagefx">✨ ImageFX (Google 무료)</option>
                 <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">🎨 OpenAI DALL-E</option>
                 <option value="leonardoai">🦁 Leonardo AI</option>
@@ -1894,6 +1923,38 @@ export function createHeadingImageModal(): void {
       console.error('[HeadingImageSettings] ❌ Google 계정 변경 오류:', err);
       if (dotEl) dotEl.style.background = '#ef4444';
       if (textEl) textEl.textContent = '❌ 오류 발생';
+      if (statusEl) statusEl.style.color = '#ef4444';
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  });
+
+  // ✅ [v1.4.64] Flow (Nano Banana Pro) 연결 테스트 버튼
+  document.getElementById('test-flow-connection-btn')?.addEventListener('click', async () => {
+    console.log('[HeadingImageSettings] 🍌 Flow 연결 테스트 시작');
+    const dotEl = document.getElementById('flow-connection-dot');
+    const textEl = document.getElementById('flow-connection-text');
+    const statusEl = document.getElementById('flow-connection-status');
+    const btn = document.getElementById('test-flow-connection-btn') as HTMLButtonElement | null;
+    if (btn) btn.disabled = true;
+    if (dotEl) dotEl.style.background = '#3b82f6';
+    if (textEl) textEl.textContent = '⏳ 연결 테스트 중...';
+    if (statusEl) statusEl.style.color = '#3b82f6';
+    try {
+      const result = await (window as any).api.testFlowConnection();
+      if (result?.ok) {
+        if (dotEl) dotEl.style.background = '#22c55e';
+        if (textEl) textEl.textContent = `✅ ${result.message || '연결 성공'}`;
+        if (statusEl) statusEl.style.color = '#22c55e';
+      } else {
+        if (dotEl) dotEl.style.background = '#f59e0b';
+        if (textEl) textEl.textContent = `⚠️ ${result?.message || '연결 실패 — Google 로그인 확인 필요'}`;
+        if (statusEl) statusEl.style.color = '#f59e0b';
+      }
+    } catch (err: any) {
+      console.error('[HeadingImageSettings] ❌ Flow 테스트 오류:', err);
+      if (dotEl) dotEl.style.background = '#ef4444';
+      if (textEl) textEl.textContent = `❌ ${err?.message?.substring(0, 60) || '오류 발생'}`;
       if (statusEl) statusEl.style.color = '#ef4444';
     } finally {
       if (btn) btn.disabled = false;

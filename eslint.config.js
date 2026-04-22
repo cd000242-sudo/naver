@@ -117,4 +117,25 @@ module.exports = tseslint.config(
             '@typescript-eslint/no-explicit-any': 'off',
         },
     },
+
+    // ━━━ [v1.4.77 P2] no-raw-price-format — 크롤러/수집기에서 원시 가격 포맷 금지 ━━━
+    // Price.display() 또는 formatPrice()를 통해서만 가격 표시 문자열을 생성하도록 강제.
+    // 원시 `parseInt(x).toLocaleString() + '원'` 패턴이 0원 누출의 근원이었음 (v1.4.77 회고).
+    // 예외: Price.ts 자체는 toLocaleString을 써야 하고, 테스트/렌더러는 UI 표시용 허용.
+    {
+        files: [
+            'src/crawler/**/*.ts',
+            'src/sourceAssembler.ts',
+            'src/services/bestProductCollector.ts',
+        ],
+        rules: {
+            'no-restricted-syntax': ['warn', {
+                selector: "TemplateLiteral TemplateElement[value.raw=/원$/] ~ .expressions CallExpression[callee.property.name='toLocaleString']",
+                message: "원시 가격 포맷 금지. Price.display() 또는 formatPrice() 사용. (0원 누출 회귀 방지)"
+            }, {
+                selector: "BinaryExpression[operator='+'][right.value='원'] CallExpression[callee.property.name='toLocaleString']",
+                message: "원시 가격 포맷 금지. Price.display() 또는 formatPrice() 사용."
+            }],
+        },
+    },
 );

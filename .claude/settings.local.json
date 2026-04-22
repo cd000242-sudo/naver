@@ -42,7 +42,19 @@
       "Bash(find \"C:/Users/박성현/Desktop/리더 네이버 자동화/src/renderer/modules\" -name \"*.ts\" -exec wc -l {} +)",
       "Bash(npx vitest:*)",
       "Bash(bash /tmp/analyze_handlers.sh)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(curl -sI \"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000171422\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 Chrome/120.0.0.0\")",
+      "Bash(curl -sL \"https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000171422\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 Chrome/120.0.0.0\" -o /tmp/olive.html)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_evaluate",
+      "Bash(where python *)",
+      "Bash(where python3 *)",
+      "Bash(py --version)",
+      "Bash(python decode_mojibake.py)",
+      "Bash(python *)",
+      "mcp__playwright__browser_close",
+      "Bash(mv \"Better Life Naver Setup 1.4.81.exe\" \"Better-Life-Naver-Setup-1.4.81.exe\")",
+      "Bash(mv \"Better Life Naver Setup 1.4.81.exe.blockmap\" \"Better-Life-Naver-Setup-1.4.81.exe.blockmap\")"
     ]
   }
 }

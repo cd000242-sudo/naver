@@ -535,6 +535,11 @@ export function initHeadingImageGeneration(): void {
     'pollinations': 'Pollinations',
     'naver': '네이버 이미지 검색',
     'naver-search': '네이버 이미지 검색',
+    'imagefx': 'ImageFX (Google 무료)',
+    'flow': 'Flow (Nano Banana Pro)', // ✅ [v1.4.80]
+    'openai-image': 'OpenAI DALL-E',
+    'leonardoai': 'Leonardo AI',
+    'local-folder': '내 폴더',
   };
 
   // ✅ [2026-02-02] 실시간 이미지 미리보기 패널 (Live Preview)
@@ -1220,7 +1225,7 @@ export function initHeadingImageGeneration(): void {
                 const _m = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
                 _modelLabel = ` | 📦 모델: ${_m}`;
               } else if (imageSource === 'openai-image') {
-                _modelLabel = ' | 📦 모델: DALL-E 3';
+                _modelLabel = ' | 📦 모델: gpt-image-1';
               }
               appendLog(`  🖥️ 엔진: ${_srcLabel}${_modelLabel} | 🎨 스타일: ${_styleNames[_style] || _style} | 📐 ${_ratio}`, 'images-log-output');
               liveImagePreview.addLog(`🖥️ ${_srcLabel}${_modelLabel} | 🎨 ${_styleNames[_style] || _style} | 📐 ${_ratio}`);
@@ -1661,7 +1666,7 @@ export function initHeadingImageGeneration(): void {
               const _m = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
               _modelLabel = ` | 📦 모델: ${_m}`;
             } else if (imageSource === 'openai-image') {
-              _modelLabel = ' | 📦 모델: DALL-E 3';
+              _modelLabel = ' | 📦 모델: gpt-image-1';
             }
             appendLog(`  🖥️ 엔진: ${_srcLabel}${_modelLabel} | 🎨 스타일: ${_styleNames[_style] || _style} | 📐 ${_ratio}`, 'images-log-output');
 
@@ -4419,6 +4424,34 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
         imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
       } else {
         throw new Error(imageResult.message || 'ImageFX 이미지 생성 실패. Google 로그인 상태를 확인해주세요.');
+      }
+    } else if (imageSource === 'flow') {
+      // ✅ [v1.4.80] Flow (Nano Banana Pro) 전용 분기 — Google AI Pro 무료 쿼터
+      console.log(`[ImageGen] 🍌 Flow (Nano Banana Pro, AI Pro 무료) 개별 재생성`);
+      const imageResult = await generateImagesWithCostSafety({
+        provider: 'flow',
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen }],
+        postTitle: blogTitle,
+        isFullAuto: true,
+      });
+      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
+        imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
+      } else {
+        throw new Error(imageResult.message || 'Flow 이미지 생성 실패. Google 로그인 상태를 확인해주세요.');
+      }
+    } else if (imageSource === 'deepinfra') {
+      // ✅ [v1.4.80] DeepInfra (FLUX) 전용 분기
+      console.log(`[ImageGen] ⚡ DeepInfra FLUX 개별 재생성`);
+      const imageResult = await generateImagesWithCostSafety({
+        provider: 'deepinfra',
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen }],
+        postTitle: blogTitle,
+        isFullAuto: true,
+      });
+      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
+        imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
+      } else {
+        throw new Error(imageResult.message || 'DeepInfra 이미지 생성 실패');
       }
     } else if (imageSource === 'naver-search' || imageSource === 'naver') {
       // ✅ 네이버 이미지 검색: 사용자가 명시적으로 선택한 경우에만 사용
