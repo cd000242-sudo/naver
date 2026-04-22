@@ -39,8 +39,33 @@ let cachedToken: string | null = null;
 let cachedTokenExpiry: Date | null = null;
 let _enabled: boolean = false;
 
-// ✅ [v1.4.80 P1] 자동 학습 세션당 1회 제한 — 무한 재학습 루프 방지
-let _discoveryAttemptedThisSession = false;
+// ✅ [v1.4.87] 자동 학습 재시도 제어 — 영구 잠금 대신 카운터 + 쿨다운으로 완화
+//   이전: _discoveryAttemptedThisSession = true 이후 세션 종료까지 Flow 영구 마비
+//   현재: 최대 3회 실패 시 10분 쿨다운 → 이후 자동 재시도 허용
+const DISCOVERY_MAX_ATTEMPTS = 3;
+const DISCOVERY_COOLDOWN_MS = 10 * 60 * 1000; // 10분
+let _discoveryAttempts = 0;
+let _discoveryCooldownUntil: number = 0;
+
+function canAttemptDiscovery(): boolean {
+    if (Date.now() < _discoveryCooldownUntil) return false;
+    if (_discoveryAttempts >= DISCOVERY_MAX_ATTEMPTS) {
+        _discoveryCooldownUntil = Date.now() + DISCOVERY_COOLDOWN_MS;
+        _discoveryAttempts = 0;
+        console.warn(`[Flow] 🧊 학습 ${DISCOVERY_MAX_ATTEMPTS}회 실패 → 10분 쿨다운 진입`);
+        return false;
+    }
+    return true;
+}
+
+function recordDiscoveryAttempt(success: boolean): void {
+    if (success) {
+        _discoveryAttempts = 0;
+        _discoveryCooldownUntil = 0;
+    } else {
+        _discoveryAttempts += 1;
+    }
+}
 
 // ─── 자동 학습 API 메타데이터 ──────────────────────────────
 interface FlowApiMetadata {
@@ -297,21 +322,24 @@ export async function generateSingleImageWithFlow(
             // 캐시된 메타데이터 확인
             let meta = loadApiMetadata();
 
-            // 메타 없으면 자동 학습 (세션당 1회만 허용 — 무한 루프 방지)
+            // 메타 없으면 자동 학습 (카운터 + 쿨다운으로 완화)
             if (!meta) {
-                if (_discoveryAttemptedThisSession) {
-                    throw new Error('FLOW_API_DISCOVERY_FAILED:내부 API 엔드포인트를 찾을 수 없습니다 (이번 세션 1회 시도 완료). Google AI Pro 구독 + Flow 액세스 권한 확인 후 앱 재시작 필요.');
+                if (!canAttemptDiscovery()) {
+                    const remainMs = Math.max(0, _discoveryCooldownUntil - Date.now());
+                    const remainMin = Math.ceil(remainMs / 60000);
+                    throw new Error(`FLOW_API_DISCOVERY_COOLDOWN:Flow API 학습 ${DISCOVERY_MAX_ATTEMPTS}회 실패 → ${remainMin}분 후 자동 재시도. Google AI Pro 구독 + Flow 액세스 권한 확인 필요.`);
                 }
-                _discoveryAttemptedThisSession = true;
                 const discovered = await discoverAndCacheApi(page, token, currentPrompt, flowAspectRatio);
                 if (discovered) {
+                    recordDiscoveryAttempt(true);
                     const buffer = Buffer.from(discovered.encodedImage, 'base64');
                     trackApiUsage('gemini', { images: 1, model: 'flow-nano-banana-pro', costOverride: 0 });
                     const mimeType = detectImageMime(buffer);
                     sendImageLog(`✅ [Flow] 이미지 생성 완료 (${Math.round(buffer.length / 1024)}KB, 학습 중 생성)`);
                     return { buffer, mimeType };
                 }
-                throw new Error('FLOW_API_DISCOVERY_FAILED:내부 API 엔드포인트를 찾을 수 없습니다. Google 계정의 Flow 액세스 권한을 확인해주세요.');
+                recordDiscoveryAttempt(false);
+                throw new Error(`FLOW_API_DISCOVERY_FAILED:내부 API 엔드포인트를 찾을 수 없습니다 (${_discoveryAttempts}/${DISCOVERY_MAX_ATTEMPTS}회). Google 계정의 Flow 액세스 권한 확인.`);
             }
 
             // 학습된 메타로 정규 호출
@@ -390,12 +418,13 @@ export async function generateSingleImageWithFlow(
                 return null;
             }
 
-            // 메타데이터 무효 (구글이 API 구조 변경 등) → 재학습 (세션당 1회만)
+            // 메타데이터 무효 (구글이 API 구조 변경 등) → 캐시 삭제 후 다음 시도에서 자동 재학습
             if (errorCode === 'HTTP_404' || errorCode === 'NO_IMAGES') {
-                if (_discoveryAttemptedThisSession) {
-                    throw new Error(`FLOW_API_INVALID:저장된 API 메타가 무효이고 이번 세션 재학습도 이미 완료. 앱 재시작 필요.`);
+                if (!canAttemptDiscovery()) {
+                    const remainMs = Math.max(0, _discoveryCooldownUntil - Date.now());
+                    throw new Error(`FLOW_API_INVALID:저장된 API 메타 무효 + 재학습 쿨다운(${Math.ceil(remainMs / 60000)}분) 중.`);
                 }
-                console.warn(`[Flow] ⚠️ 메타 무효(${errorCode}) — 재학습 시도 (세션당 1회)`);
+                console.warn(`[Flow] ⚠️ 메타 무효(${errorCode}) — 캐시 삭제 후 재학습 (시도 ${_discoveryAttempts + 1}/${DISCOVERY_MAX_ATTEMPTS})`);
                 try { fs.unlinkSync(getCachePath()); } catch { /* ignore */ }
                 continue;
             }
@@ -430,6 +459,9 @@ export async function generateSingleImageWithFlow(
 
 /**
  * ✅ 일괄 이미지 생성 (ImageFX와 동일 시그니처로 호환성 유지)
+ * ✅ [v1.4.87] 실패 투명성 개선 — 첫 실패 에러를 상위로 전달하여 디버깅 가능
+ *   - 세션/권한/학습 실패(FLOW_*)는 첫 번째에서 즉시 throw → 나머지 루프 생략
+ *   - 쿼터 초과(null 반환)는 로그만 남기고 continue (기존 동작 유지)
  */
 export async function generateWithFlow(
     items: ImageRequestItem[],
@@ -441,9 +473,19 @@ export async function generateWithFlow(
     sendImageLog(`🎨 [Flow] Nano Banana Pro로 ${items.length}개 이미지 생성 시작`);
 
     const results: GeneratedImage[] = [];
+    let firstCriticalError: Error | null = null;
+    let quotaExhausted = false;
 
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
+
+        // 이전 항목에서 쿼터/권한 치명 실패 감지 시 나머지 생략
+        if (firstCriticalError) break;
+        if (quotaExhausted) {
+            sendImageLog(`⏭️ [Flow] [${i + 1}/${items.length}] 쿼터 초과 상태 — 건너뜀`);
+            continue;
+        }
+
         try {
             sendImageLog(`🖼️ [Flow] [${i + 1}/${items.length}] "${item.heading}" 생성 중...`);
             const prompt = item.englishPrompt || PromptBuilder.build(item, {
@@ -453,7 +495,10 @@ export async function generateWithFlow(
             const aspectRatio = (item as any).aspectRatio || '1:1';
             const generated = await generateSingleImageWithFlow(prompt, aspectRatio);
             if (!generated) {
-                console.warn(`[Flow] [${i + 1}/${items.length}] 생성 실패 (null 반환)`);
+                // null 반환 = 쿼터 초과(HTTP_429) 또는 중지 요청 → 이후 모든 요청도 실패 예상
+                console.warn(`[Flow] [${i + 1}/${items.length}] null 반환 (쿼터/중지) — 나머지 건너뜀`);
+                sendImageLog(`🚫 [Flow] [${i + 1}] 쿼터 초과 또는 중지 감지 — 나머지 건너뜀`);
+                quotaExhausted = true;
                 continue;
             }
             const { filePath } = await writeImageFile(
@@ -474,13 +519,25 @@ export async function generateWithFlow(
             results.push(image);
             if (onImageGenerated) onImageGenerated(image, i + 1, items.length);
         } catch (err) {
-            console.error(`[Flow] [${i + 1}/${items.length}] 실패: ${(err as Error).message}`);
-            sendImageLog(`❌ [Flow] [${i + 1}] 실패: ${(err as Error).message.substring(0, 100)}`);
+            const msg = (err as Error).message || '';
+            console.error(`[Flow] [${i + 1}/${items.length}] 실패: ${msg}`);
+            sendImageLog(`❌ [Flow] [${i + 1}] 실패: ${msg.substring(0, 150)}`);
+            // FLOW_* 에러는 치명적 (권한/학습/세션) → 상위로 전달하여 원인 노출
+            if (msg.startsWith('FLOW_')) {
+                firstCriticalError = err as Error;
+            }
         }
     }
 
-    console.log(`[Flow] ✅ 완료: ${results.length}/${items.length} 성공`);
-    sendImageLog(`✅ [Flow] 완료: ${results.length}/${items.length} 성공`);
+    console.log(`[Flow] ${results.length > 0 ? '✅' : '❌'} 완료: ${results.length}/${items.length} 성공`);
+    sendImageLog(`${results.length > 0 ? '✅' : '❌'} [Flow] 완료: ${results.length}/${items.length} 성공`);
+
+    // 성공이 하나라도 있으면 결과 반환, 없으면 원인 노출
+    if (results.length === 0) {
+        if (firstCriticalError) throw firstCriticalError;
+        if (quotaExhausted) throw new Error('FLOW_QUOTA_EXHAUSTED:Flow 계정 쿼터 초과 — 약 1시간 후 재시도 권장. Google AI Pro 구독 확인 필요.');
+        throw new Error('FLOW_ALL_FAILED:모든 이미지 생성 실패 (원인 불명). 이전 로그 확인 필요.');
+    }
     return results;
 }
 

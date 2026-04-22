@@ -379,6 +379,9 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.postId,
         onImageGenerated,
       );
+      if (flowImages.length === 0) {
+        throw new Error('Flow가 0건 반환 — 상세 원인은 이전 로그(sendImageLog) 참고. 쿼터/세션/안전필터/API 구조 변경 가능성.');
+      }
       console.log(`[이미지생성] ✅ Flow로 ${flowImages.length}개 이미지 생성 완료!`);
       return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(flowImages, 'flow', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (flowError) {
