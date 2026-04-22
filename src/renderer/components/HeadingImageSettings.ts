@@ -213,7 +213,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   safeLocalStorageSet('globalImageSource', source);
   // ✅ [2026-02-18 FIX] fullAutoImageSource도 동기화 — 이전에는 globalImageSource만 설정되어
   // getImageSource()가 fullAutoImageSource(="null")를 거부한 후 DOM 폴백으로 nano-banana-pro 반환
-  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'local-folder'];
+  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
   if (VALID_AI_SOURCES.includes(source)) {
     safeLocalStorageSet('fullAutoImageSource', source);
     console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${source}`);
