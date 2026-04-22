@@ -2647,7 +2647,87 @@ function addItemToQueueV2(): void {
     (document.getElementById('continuous-keyword-input') as HTMLInputElement).value = '';
   }
 
-  toastManager.success(`${addedCount}개 항목이 큐에 추가되었습니다. (총 ${continuousQueueV2.length}개)`);
+  // ✅ [v1.4.84] 줄바꿈으로 벌크 추가(2개 이상) 시 미리보기 모달로 확인, 단일이면 토스트 유지
+  if (addedCount >= 2) {
+    showBulkAddPreviewModal(inputValues, addedCount, continuousQueueV2.length, tabType);
+  } else {
+    toastManager.success(`${addedCount}개 항목이 큐에 추가되었습니다. (총 ${continuousQueueV2.length}개)`);
+  }
+}
+
+// ✅ [v1.4.84] 연속발행 벌크 추가 미리보기 모달
+// 사용자가 줄바꿈으로 여러 URL/키워드를 한 번에 추가하면 어떤 항목이 어떤 순서로
+// 큐에 들어갔는지 한눈에 확인할 수 있도록 모달로 표시. 잘못 입력한 경우 즉시
+// 확인해서 큐에서 제거/수정 가능하게 한다.
+function showBulkAddPreviewModal(
+  items: string[],
+  addedCount: number,
+  totalQueue: number,
+  tabType: string,
+): void {
+  const existing = document.getElementById('continuous-bulk-add-modal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'continuous-bulk-add-modal';
+  modal.style.cssText = `
+    position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(6px);
+    z-index: 10050; display: flex; align-items: center; justify-content: center; padding: 20px;
+  `;
+
+  const tabLabel = tabType === 'url' ? 'URL' : tabType === 'keyword' ? '키워드' : '항목';
+  const itemsHtml = items.slice(0, 20).map((v, i) => {
+    const safe = String(v).replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' } as any)[c]);
+    const truncated = safe.length > 80 ? safe.substring(0, 80) + '…' : safe;
+    return `
+      <div style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); margin-bottom: 6px;">
+        <span style="flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #22c55e, #16a34a); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">${i + 1}</span>
+        <span style="color: #e2e8f0; font-size: 13px; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${safe}">${truncated}</span>
+      </div>`;
+  }).join('');
+  const moreHtml = items.length > 20
+    ? `<div style="text-align: center; color: #94a3b8; font-size: 12px; padding: 8px 0;">+ ${items.length - 20}개 더…</div>`
+    : '';
+
+  modal.innerHTML = `
+    <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 18px; max-width: 640px; width: 100%; max-height: 86vh; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 60px rgba(0,0,0,0.55); border: 1px solid rgba(34, 197, 94, 0.35);">
+      <div style="padding: 22px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <h3 style="margin: 0; font-size: 1.2rem; color: #fff; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.4rem;">📋</span> 벌크 추가 완료
+          </h3>
+          <p style="margin: 6px 0 0; font-size: 13px; color: rgba(255,255,255,0.65);">
+            줄바꿈 입력으로 <strong style="color:#22c55e;">${addedCount}개</strong> ${tabLabel}이(가) 큐에 추가됨 · 현재 대기열 <strong style="color:#60a5fa;">${totalQueue}개</strong>
+          </p>
+        </div>
+        <button id="bulk-add-close-btn" style="background: rgba(255,255,255,0.1); border: none; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 18px; color: #fff;">×</button>
+      </div>
+      <div style="padding: 18px 24px; overflow-y: auto; flex: 1;">
+        ${itemsHtml}
+        ${moreHtml}
+      </div>
+      <div style="padding: 14px 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 10px; justify-content: flex-end;">
+        <button id="bulk-add-cancel-btn" style="padding: 10px 18px; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 13px;">↩️ 실행 취소 (마지막 ${addedCount}개 제거)</button>
+        <button id="bulk-add-confirm-btn" style="padding: 10px 22px; background: linear-gradient(135deg, #22c55e, #16a34a); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 13px; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);">✅ 확인</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  const close = () => modal.remove();
+  document.getElementById('bulk-add-close-btn')?.addEventListener('click', close);
+  document.getElementById('bulk-add-confirm-btn')?.addEventListener('click', close);
+  document.getElementById('bulk-add-cancel-btn')?.addEventListener('click', () => {
+    // 마지막 addedCount 항목 제거
+    continuousQueueV2.splice(continuousQueueV2.length - addedCount, addedCount);
+    renderQueueListV2();
+    toastManager.info(`↩️ 방금 추가한 ${addedCount}개 항목을 제거했습니다.`);
+    close();
+  });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) close();
+  });
 }
 
 let currentQueuePageV2 = 0;
