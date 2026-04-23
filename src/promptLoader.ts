@@ -553,6 +553,196 @@ export function getModeVoiceGuide(mode?: PromptMode): string {
   return `\n\n═══════════════════════════════════════════\n${guide}═══════════════════════════════════════════\n`;
 }
 
+// ═══════════════════════════════════════════════════════════════════
+// [v1.8.0 LDF System] Blogger Identity Core — 언어 DNA 기반 페르소나
+// ═══════════════════════════════════════════════════════════════════
+// 철학: 블로거 정체성은 "누구인가"가 아니라 "어떻게 말하는가"에 있다.
+//       MBTI·가족·취미 같은 내용 카드가 아니라, 담화 표지(어미·문두·호흡·
+//       부정 스타일)가 진짜 블로거 지문이다. LLM은 이 시트를 내면화해
+//       자연스럽게 연기하며, 글에 직접 인용하지 않는다.
+// 주입 위치: 프롬프트 최상단 prefix — Anthropic prompt caching 적중을 위해
+//              system 영역 고정부에 배치
+
+export interface BloggerIdentity {
+  // 필수 3필드 (사용자 직접 입력 또는 AI 자동 생성)
+  coreEndings: { ending: string; percent: number }[]; // 예: [{ending:'~거든요', percent:40}, ...]
+  blogPurpose: string; // "내 소비 실수를 공유해 이웃 지갑을 지키는 블로그"
+  expertise: { domain: string; metric: string }; // { domain:'홈카페', metric:'5년/원두 200종 리뷰' }
+
+  // 자동 추출 5필드 (사용자 기존 글에서 또는 기본값)
+  headStarts?: string[]; // ['사실', '근데']
+  bracketStyle?: string; // "(ㅋㅋ 이거 진짜)" 같은 삽입구 템플릿
+  avgSentenceLength?: 'short' | 'medium' | 'long'; // 15-25 / 25-40 / 40-60
+  negationStyle?: 'direct' | 'soft' | 'humorous';
+  forbiddenExpressions?: string[]; // ['대박', '충격', '미쳤어요']
+
+  // 구매자 신뢰 4요소 (별도 레이어)
+  trustPrinciple?: string; // "광고는 항상 [광고] 표기, 단점도 솔직히"
+  comparisonHabit?: boolean; // 리뷰 시 비교 대상 언급 여부 (기본 true)
+}
+
+/**
+ * [v1.8.0] 기본 페르소나 — 사용자 미설정 시 안전한 일반 블로거 프로필
+ * 홈판 친화적 기본값 (friendly + 이웃 관계 + 구매자 신뢰 4요소 켜짐)
+ */
+export const DEFAULT_IDENTITY: BloggerIdentity = {
+  coreEndings: [
+    { ending: '~거든요', percent: 35 },
+    { ending: '~더라구요', percent: 30 },
+    { ending: '~이에요', percent: 25 },
+    { ending: '~더라고요', percent: 10 },
+  ],
+  blogPurpose: '내가 써보고 좋았던 것, 실수한 것을 솔직하게 공유하는 이웃 블로그',
+  expertise: { domain: '일상 리뷰', metric: '실사용 경험 기반 솔직 후기' },
+  headStarts: ['사실', '근데', '오늘은'],
+  bracketStyle: '(ㅋㅋ 이거 진짜)',
+  avgSentenceLength: 'medium',
+  negationStyle: 'soft',
+  forbiddenExpressions: ['대박', '충격', '미쳤어요', '소름', '알아보겠습니다', '살펴보자'],
+  trustPrinciple: '광고는 [광고] 표기, 단점도 솔직히 쓰기',
+  comparisonHabit: true,
+};
+
+/**
+ * [v1.8.0] Blogger Identity를 프롬프트 블록으로 변환
+ * 필수 3필드 + 자동 추출 5필드 + 신뢰 4요소를 LLM이 내면화하도록 구성
+ * 글에 직접 인용 금지 지시 포함 (인용되면 AI티 되므로)
+ */
+export function buildIdentityBlock(identity?: BloggerIdentity): string {
+  const id = identity || DEFAULT_IDENTITY;
+
+  const endingsStr = id.coreEndings
+    .map(e => `${e.ending}(${e.percent}%)`)
+    .join(' / ');
+
+  const headStartsStr = (id.headStarts && id.headStarts.length > 0)
+    ? id.headStarts.join(', ')
+    : '사실, 근데, 오늘은';
+
+  const forbiddenStr = (id.forbiddenExpressions && id.forbiddenExpressions.length > 0)
+    ? id.forbiddenExpressions.join(', ')
+    : '대박, 충격, 미쳤어요';
+
+  const sentenceLengthGuide = {
+    short: '짧은 편 (평균 15~25자)',
+    medium: '보통 (평균 25~40자)',
+    long: '긴 편 (평균 40~60자)',
+  }[id.avgSentenceLength || 'medium'];
+
+  const negationGuide = {
+    direct: '직설적으로 ("아니에요", "그건 아닙니다")',
+    soft: '부드럽게 ("그런 건 아닌데요", "딱히 그렇진 않고요")',
+    humorous: '유머러스하게 ("절대 아님 ㅋㅋ", "그럴 리가요")',
+  }[id.negationStyle || 'soft'];
+
+  return `
+═══════════════════════════════════════════════════════════
+[BLOGGER IDENTITY CORE] — 이 블로거의 언어 DNA (인용 금지, 내면화만)
+═══════════════════════════════════════════════════════════
+
+■ 블로그 존재 이유 (정체성 앵커):
+  "${id.blogPurpose}"
+  → 이 목적을 글 전체의 톤·선택에 반영하되, 직접 서술하지 마세요.
+
+■ 전문 영역 (신뢰 앵커):
+  ${id.expertise.domain} | ${id.expertise.metric}
+  → 리뷰·정보 글일 때 자연스럽게 경력·횟수·기간을 녹여내세요.
+
+■ 말하는 방식 DNA (이 블로거의 지문, 반드시 따르되 "나는 ~를 쓴다"식 자기언급 금지):
+  • 주력 어미 분포: ${endingsStr}
+    → 전체 글의 어미를 이 비율로 분배. 같은 어미 연속 2회 금지.
+  • 문두 습관: "${headStartsStr}" 중에서 자연스럽게 선택
+    → 기계적으로 반복 말고 글의 흐름에 맞게 사용.
+  • 삽입구·괄호 스타일: 한 글에 1~2회 "${id.bracketStyle || '(ㅋㅋ 이거 진짜)'}" 같은 입말 덧붙임
+  • 문장 길이: ${sentenceLengthGuide} — 편차 적게 유지.
+  • 부정 표현: ${negationGuide}
+
+■ 절대 금지 표현 (이 블로거는 이런 말 안 씀):
+  ${forbiddenStr}
+  → 유사 표현도 피하세요. "대박"류 감탄사 전부 배제.
+
+■ 구매자 신뢰 원칙 (리뷰·제휴 글에서 의무):
+  ${id.trustPrinciple || '광고는 [광고] 표기, 단점도 솔직히'}
+  ${id.comparisonHabit !== false ? '- 리뷰 글마다 비교 대상 1개 이상 언급 ("○○랑 비교했을 때")' : ''}
+  - 단점 최소 1개 이상 명시 (무조건 찬양 금지)
+  - 경력·실사용 기간을 본문에 1회 이상 녹임
+
+■ 연기 원칙 (최우선):
+  1. 위 DNA는 "연기의 뿌리"일 뿐. 글에 이 시트를 인용하거나 "저는 ~인 사람이에요"식 자기소개 금지.
+  2. 매 글은 다르게 변주하되 일관된 화자를 유지 — 독자가 글 5개 읽었을 때 "같은 사람이네"라고 느끼게.
+  3. 완벽한 AI 스타일 배제. 사소한 입말(아 그리고, 근데, 보니까), 괄호 덧붙임, 감정 노출을 자연스럽게.
+
+═══════════════════════════════════════════════════════════
+`;
+}
+
+/**
+ * [v1.8.0] 글 생성 후 검증 — 언어 DNA 준수 + 금지 표현 차단
+ * 반환: { ok: boolean, issues: string[], score: number (0-100) }
+ */
+export function validateBloggerIdentity(
+  content: string,
+  identity?: BloggerIdentity,
+): { ok: boolean; issues: string[]; score: number } {
+  const id = identity || DEFAULT_IDENTITY;
+  const issues: string[] = [];
+  let score = 100;
+
+  // 1. 금지 표현 체크
+  const forbidden = id.forbiddenExpressions || DEFAULT_IDENTITY.forbiddenExpressions!;
+  const defaultForbidden = [
+    '알아보겠습니다', '살펴보자', '여러분!', '대박!', '충격!',
+    '소름', '미쳤어요', '결론적으로 말하자면', '많은 분들이',
+    '핵심은 바로', '놀랍게도', '어마어마한',
+  ];
+  const allForbidden = Array.from(new Set([...forbidden, ...defaultForbidden]));
+  const hits: string[] = [];
+  for (const word of allForbidden) {
+    const matches = content.match(new RegExp(word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'));
+    if (matches && matches.length > 0) {
+      hits.push(`"${word}" × ${matches.length}회`);
+      score -= matches.length * 5;
+    }
+  }
+  if (hits.length > 0) {
+    issues.push(`금지 표현 감지: ${hits.join(', ')}`);
+  }
+
+  // 2. 어미 연속 반복 체크 (3회 연속 같은 어미)
+  const endingsInContent = id.coreEndings.map(e => e.ending.replace(/^~/, ''));
+  for (const ending of endingsInContent) {
+    const esc = ending.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pattern = new RegExp(`${esc}[.!?][^.!?]*${esc}[.!?][^.!?]*${esc}[.!?]`, 'g');
+    const repeats = content.match(pattern);
+    if (repeats && repeats.length > 0) {
+      issues.push(`어미 "${ending}" 3회 연속 반복 ${repeats.length}건`);
+      score -= repeats.length * 10;
+    }
+  }
+
+  // 3. 자기소개 인용 감지 (DNA 시트가 글에 직접 나오면 안 됨)
+  const selfRefPatterns = [
+    /저는.*?(?:ESFJ|INFJ|ENTJ|ISFP)/i, // MBTI 직접 언급
+    /제\s*블로그의?\s*(?:목적|정체성)은?/,
+    /제\s*말투는?/,
+    /저는\s*주력\s*어미를?/,
+  ];
+  for (const p of selfRefPatterns) {
+    if (p.test(content)) {
+      issues.push('DNA 시트가 글에 직접 인용됨 (내면화 실패)');
+      score -= 20;
+      break;
+    }
+  }
+
+  score = Math.max(0, score);
+  return {
+    ok: issues.length === 0 && score >= 70,
+    issues,
+    score,
+  };
+}
+
 // ✅ [2026-01-30] 제품 정보 파라미터 타입
 interface ProductInfoForPrompt {
   name?: string;
@@ -744,7 +934,8 @@ export function buildFullPrompt(
   toneStyle?: string,
   productInfo?: ProductInfoForPrompt,  // ✅ [2026-01-30] 제품 정보 파라미터 추가
   hookHint?: string,  // ✅ [2026-04-20 SPEC-HOMEFEED-100 W2] 사용자 후킹 1문장 (선택)
-  recentWinnersBlock?: string  // ✅ [2026-04-20 SPEC-HOMEFEED-100 W4] few-shot 피드백 루프
+  recentWinnersBlock?: string,  // ✅ [2026-04-20 SPEC-HOMEFEED-100 W4] few-shot 피드백 루프
+  bloggerIdentity?: BloggerIdentity,  // ✅ [v1.8.0 LDF] 언어 DNA 페르소나
 ): string {
   // 1. 기본 2축 분리 프롬프트
   const basePrompt = buildSystemPromptFromHint(mode, categoryHint);
@@ -753,17 +944,17 @@ export function buildFullPrompt(
   const tonePrompt = getToneInstruction(toneStyle);
 
   // ✅ [v1.7.0] 노출 모드별 Voice Guide — SEO/홈판/트래픽헌터/제휴/비즈니스 별 글 구조+어미 규칙
-  //   목적: 같은 카테고리·같은 톤이어도 모드에 따라 글이 어색하지 않게 최적 말투 보장
-  //   주입 위치: [STYLE OVERRIDE] 바로 앞에 두어 모드→톤 순서로 적용됨
   const modeVoiceGuide = getModeVoiceGuide(mode);
 
+  // ✅ [v1.8.0 LDF] Blogger Identity Core — 언어 DNA 페르소나
+  //   주입 위치: 프롬프트 최상단 prefix (primacy effect + Anthropic 캐싱 적중 영역)
+  //   bloggerIdentity 미지정 시 DEFAULT_IDENTITY (안전한 홈판 친화 기본값)
+  const identityBlock = buildIdentityBlock(bloggerIdentity);
+
   // ✅ [v1.4.35] 글톤 prompt를 system 시작(prefix)에도 추가 — primacy effect로 강제력 증대
-  // LLM은 prompt 시작 부분의 지시를 가장 강하게 따르는 경향. 톤은 끝에만 박으면 다른 규칙에 묻힘.
-  // 트레이드오프: 캐시 적중률 약간 감소 (톤이 변동 부분이라 캐시 키 다양화)
-  // 우선순위: 품질(사람보다 사람처럼) > 캐시 비용
   const tonePrefix = tonePrompt
-    ? `${modeVoiceGuide}${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [MODE VOICE] + [STYLE OVERRIDE]는 모든 규칙보다 최우선입니다. 100% 준수.\n═══════════════════════════════════════════\n\n`
-    : `${modeVoiceGuide}`;
+    ? `${identityBlock}${modeVoiceGuide}${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [BLOGGER IDENTITY] + [MODE VOICE] + [STYLE OVERRIDE]는 모든 규칙보다 최우선입니다. 100% 준수.\n═══════════════════════════════════════════\n\n`
+    : `${identityBlock}${modeVoiceGuide}`;
   let finalPrompt = `${tonePrefix}${basePrompt}`;
 
   // ✅ [v1.4.18] structureDirective를 system에서 제거 — 매 호출 random 변동 → 캐시 무효화 원인
