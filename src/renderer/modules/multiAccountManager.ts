@@ -2069,6 +2069,27 @@ export async function initMultiAccountPublishModal() {
   // 예약 상태 요약 업데이트
   updateMAScheduleStatusSummary();
 
+  // ✅ [v1.6.3] 다중계정 쇼핑커넥트 AI 엔진 라디오 → localStorage + 전역 sync
+  document.querySelectorAll('input[name="ma-shopping-subimage-source"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      const value = (e.target as HTMLInputElement).value;
+      localStorage.setItem('scSubImageSource', value);
+      if (value === 'nano-banana-pro' || value === 'openai-image') {
+        localStorage.setItem('scAIImageEngine', value);
+        localStorage.setItem('fullAutoImageSource', value);
+        localStorage.setItem('globalImageSource', value);
+        (window as any).globalImageSource = value;
+        const mainSel = document.getElementById('image-source-select') as HTMLSelectElement | null;
+        if (mainSel && mainSel.value !== value) mainSel.value = value;
+        // 연속발행 모달 라디오도 반영 (같이 뜰 수 있음)
+        const contRadio = document.querySelector(`input[name="continuous-modal-shopping-subimage-source"][value="${value}"]`) as HTMLInputElement | null;
+        if (contRadio && !contRadio.checked) contRadio.checked = true;
+        console.log(`[다중계정 쇼핑커넥트] 🍌🦆 AI 엔진 선택 → 전역 sync: ${value}`);
+      }
+      console.log('[다중계정 쇼핑커넥트] 📷 이미지 소스 → localStorage:', value);
+    });
+  });
+
   // ✅ [2026-01-20] 쇼핑커넥트 탭의 썸네일/배너 버튼 (모달 닫기 포함)
   // ✅ [2026-01-27] multi-account-modal도 함께 닫기 추가
   document.getElementById('ma-shopping-goto-thumbnail-btn')?.addEventListener('click', () => {

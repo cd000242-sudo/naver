@@ -10,14 +10,15 @@ export type HeadingImageMode = 'all' | 'thumbnail-only' | 'odd-only' | 'even-onl
 // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow (Nano Banana Pro 무료 쿼터)
 export type GlobalImageSource = 'nano-banana-pro' | 'falai' | 'prodia' | 'stability' | 'pollinations' | 'deepinfra' | 'openai-image' | 'leonardoai' | 'imagefx' | 'flow' | 'local-folder';
 
-// ✅ [2026-02-18] 이미지 스타일 타입 (5개)
+// ✅ [2026-02-18] 이미지 스타일 타입 (v1.6.3: 7개 — infographic 추가)
 export type ImageStyleType =
   | 'realistic'      // 실사 이미지
   | 'vintage'        // 빈티지 이미지
   | 'stickman'       // 졸라맨 이미지
   | 'roundy'         // 뚱글이 이미지 (Molang/카카오프렌즈 계열)
   | '2d'             // 2D 이미지 (한국 웹툰/일러스트)
-  | 'disney';        // 디즈니 3D 애니메이션
+  | 'disney'         // 디즈니 3D 애니메이션
+  | 'infographic';   // [v1.6.3] 인포그래픽 (데이터 시각화, 플랫 벡터, 기업용)
 
 // ✅ [2026-01-26] 이미지 비율 타입
 export type ImageAspectRatio = '1:1' | '16:9' | '9:16' | '4:3' | '3:4';
@@ -52,14 +53,16 @@ export const STYLE_NAMES: Record<ImageStyleType, string> = {
   'roundy': '🫧 뚱글이 이미지',
   '2d': '🎨 2D 이미지',
   'disney': '🏰 디즈니 스타일',
+  'infographic': '📊 인포그래픽',
 };
 
-// ✅ [2026-02-18] 카테고리 그룹핑 (UI용) - 5개
+// ✅ [v1.6.3] 카테고리 그룹핑 (UI용) - 7개 (infographic 추가)
 export const STYLE_CATEGORIES: { label: string; styles: ImageStyleType[] }[] = [
   { label: '📷 실사', styles: ['realistic'] },
   { label: '🎨 아트', styles: ['vintage', '2d'] },
   { label: '✨ 캐릭터', styles: ['stickman', 'roundy'] },
   { label: '🏰 3D', styles: ['disney'] },
+  { label: '📊 정보', styles: ['infographic'] },
 ];
 
 // ✅ [2026-01-29] 이벤트 리스너 정리용 (메모리 누수 방지)
@@ -985,6 +988,34 @@ export function createHeadingImageModal(): void {
                   <div style="font-size: 13px; font-weight: 700; color: #2563eb;">디즈니</div>
                   <div style="font-size: 10px; color: #6b7280;">Disney Pixar</div>
                   <input type="radio" name="sub-image-style" value="disney" style="accent-color: #16a34a; margin-top: 4px;">
+                </label>
+                <!-- 📊 인포그래픽 (v1.6.3 신규) -->
+                <label class="style-option" data-value="infographic" data-icon="📊" data-title="📊 인포그래픽 (Infographic)" data-desc="데이터 시각화 + 플랫 벡터 스타일. 차트/다이어그램/아이콘 기반 미니멀 디자인으로 정보 전달형 블로그(IT, 금융, 의료, 통계, 비교 리뷰)에 최적입니다. 2-3색 절제된 팔레트에 기업형 무드." data-keywords="infographic, data visualization, flat vector, minimalist corporate" data-usage="IT/금융/의료 블로그, 비교 리뷰, 통계 콘텐츠, 단계별 가이드" style="cursor: pointer; padding: 14px 12px; border-radius: 12px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #f0f9ff, #dbeafe); display: flex; flex-direction: column; align-items: center; gap: 6px; transition: all 0.2s; text-align: center;">
+                  <div class="style-card-thumb" data-style="infographic" style="width: 120px; height: 90px; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,0.15); position: relative;">
+                    <img class="style-preview-cached" data-style="infographic" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
+                    <svg class="style-preview-svg" viewBox="0 0 120 90" width="120" height="90" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="120" height="90" fill="#F8FAFC"/>
+                      <!-- 막대 차트 -->
+                      <rect x="12" y="50" width="10" height="28" fill="#3B82F6" rx="1.5"/>
+                      <rect x="26" y="40" width="10" height="38" fill="#60A5FA" rx="1.5"/>
+                      <rect x="40" y="30" width="10" height="48" fill="#2563EB" rx="1.5"/>
+                      <!-- 원형 파이 -->
+                      <circle cx="78" cy="32" r="16" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
+                      <path d="M78 16 A16 16 0 0 1 94 32 L78 32 Z" fill="#2563EB"/>
+                      <!-- 라인 + 포인트 -->
+                      <polyline points="60,70 72,60 88,66 104,52" stroke="#F59E0B" stroke-width="2" fill="none"/>
+                      <circle cx="60" cy="70" r="2.5" fill="#F59E0B"/>
+                      <circle cx="72" cy="60" r="2.5" fill="#F59E0B"/>
+                      <circle cx="88" cy="66" r="2.5" fill="#F59E0B"/>
+                      <circle cx="104" cy="52" r="2.5" fill="#F59E0B"/>
+                      <!-- 상단 라벨 -->
+                      <rect x="8" y="8" width="44" height="12" rx="2" fill="#2563EB" opacity="0.2"/>
+                      <text x="30" y="17" text-anchor="middle" font-size="7" fill="#1E3A8A" font-family="sans-serif" font-weight="700">DATA</text>
+                    </svg>
+                  </div>
+                  <div style="font-size: 13px; font-weight: 700; color: #1e40af;">인포그래픽</div>
+                  <div style="font-size: 10px; color: #6b7280;">Infographic</div>
+                  <input type="radio" name="sub-image-style" value="infographic" style="accent-color: #16a34a; margin-top: 4px;">
                 </label>
               </div>
             </div>

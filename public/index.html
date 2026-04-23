@@ -7038,24 +7038,28 @@
                         <label
                             style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">📷
                             소제목 이미지 소스</label>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
                             <label
-                                style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 8px; cursor: pointer;">
+                                style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 8px; cursor: pointer;">
                                 <input type="radio" name="continuous-modal-shopping-subimage-source"
-                                    value="nano-banana-pro" checked style="accent-color: #8b5cf6;">
-                                <span style="color: var(--text-strong); font-size: 0.8rem; font-weight: 600;">🍌
-                                    나노바나나프로 (AI)</span>
+                                    value="nano-banana-pro" checked style="accent-color: #fbbf24;">
+                                <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🍌 나노바나나2 (AI)</span>
+                            </label>
+                            <label
+                                style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
+                                <input type="radio" name="continuous-modal-shopping-subimage-source" value="openai-image"
+                                    style="accent-color: #8b5cf6;">
+                                <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🦆 덕트테이프 (AI)</span>
                             </label>
                             <label
                                 style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
                                 <input type="radio" name="continuous-modal-shopping-subimage-source" value="collected"
                                     style="accent-color: #10b981;">
-                                <span style="color: var(--text-strong); font-size: 0.8rem; font-weight: 600;">📷
-                                    수집 이미지 사용</span>
+                                <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">📷 수집 이미지</span>
                             </label>
                         </div>
                         <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">
-                            ℹ️ 나노바나나프로: 수집한 이미지를 기반으로 AI가 새 이미지 생성 | 수집 이미지: 크롤링한 원본 이미지 그대로 사용
+                            ℹ️ 🍌 나노바나나2: Gemini img2img, 장당 ₩97 | 🦆 덕트테이프: gpt-image-2 img2img, 장당 ₩77~₩280 (디테일 강함) | 📷 수집: 원본 그대로
                         </p>
                     </div>
 
@@ -9040,24 +9044,28 @@
                             <label
                                 style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">📷
                                 소제목 이미지 소스</label>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
                                 <label
-                                    style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 8px; cursor: pointer;">
+                                    style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 8px; cursor: pointer;">
                                     <input type="radio" name="ma-shopping-subimage-source" value="nano-banana-pro"
-                                        checked style="accent-color: #8b5cf6;">
-                                    <span style="color: var(--text-strong); font-size: 0.8rem; font-weight: 600;">🍌
-                                        나노바나나프로 (AI)</span>
+                                        checked style="accent-color: #fbbf24;">
+                                    <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🍌 나노바나나2 (AI)</span>
+                                </label>
+                                <label
+                                    style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
+                                    <input type="radio" name="ma-shopping-subimage-source" value="openai-image"
+                                        style="accent-color: #8b5cf6;">
+                                    <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🦆 덕트테이프 (AI)</span>
                                 </label>
                                 <label
                                     style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
                                     <input type="radio" name="ma-shopping-subimage-source" value="collected"
                                         style="accent-color: #10b981;">
-                                    <span style="color: var(--text-strong); font-size: 0.8rem; font-weight: 600;">📷
-                                        수집 이미지 사용</span>
+                                    <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">📷 수집 이미지</span>
                                 </label>
                             </div>
                             <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">
-                                ℹ️ 나노바나나프로: 수집한 이미지를 기반으로 AI가 새 이미지 생성 | 수집 이미지: 크롤링한 원본 이미지 그대로 사용
+                                ℹ️ 🍌 나노바나나2: Gemini img2img, ₩97 | 🦆 덕트테이프: gpt-image-2 img2img, ₩77~₩280 (디테일 강함) | 📷 수집: 원본 그대로
                             </p>
                         </div>
 

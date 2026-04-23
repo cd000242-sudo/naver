@@ -56,6 +56,12 @@ export const STYLE_PROMPT_MAP: Record<string, string> = {
 
     // 🏰 디즈니 3D (Disney Pixar) — 부드러운 조명 + 3D 렌더링 + 생동감
     'disney': 'Disney Pixar 3D animation style, vibrant colorful scene, soft diffused studio lighting, smooth plastic-like skin texture, big expressive eyes with detailed reflections, rounded friendly character design, subsurface scattering on skin, beautiful volumetric lighting, dreamy magical atmosphere, Pixar movie quality render, octane render, hyper detailed 3D, adorable character proportions, whimsical fairy tale environment, TEXTLESS',
+
+    // 📊 인포그래픽 (v1.6.3) — 데이터 시각화 + 플랫 벡터 + 한글 타이포 친화
+    //   용도: 블로그 본문 내 개념 설명, 통계/비교, 단계별 절차 설명
+    //   특징: 아이콘, 차트, 다이어그램, 단색~2색 기반 미니멀 팔레트
+    //   TEXTLESS: 한글 텍스트는 overlay 단계에서 주입되도록 빈 캔버스 유지
+    'infographic': 'professional clean infographic style, data visualization with subtle charts bars icons arrows, minimalist flat vector illustration, isometric 3D elements with soft shadows, limited 2-3 color palette with navy and accent color, clear information architecture, rounded rectangle sections, modern corporate aesthetic, geometric shapes and lines, white or light gray background, clean grid layout, abstract concept illustration, process flow diagram vibe, TEXTLESS',
 };
 
 // ═══════════════════════════════════════════════════════════════════
@@ -304,6 +310,7 @@ export function getPresetStyleMapping(imageStyle: string): string {
         '2d': 'ANIME',
         'vintage': 'SKETCH_COLOR',
         'disney': 'RENDER_3D',
+        'infographic': 'ILLUSTRATION', // [v1.6.3] 인포그래픽 — Leonardo 일러스트 프리셋 매핑
     };
     return mapping[imageStyle] || 'DYNAMIC';
 }

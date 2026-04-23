@@ -396,10 +396,20 @@ export function initImageManagementTab(): void {
       if (selectedSource !== 'saved') {
         localStorage.setItem('globalImageSource', selectedSource);
         // ✅ [2026-02-13 FIX] fullAutoImageSource도 항상 동기화
-        // 이전: 미설정일 때만 동기화 → 이전에 deepinfra로 설정된 후 nano-banana-pro로 변경해도 반영 안 됨
-        // 변경: AI 엔진 변경 시 항상 fullAutoImageSource도 함께 업데이트
         localStorage.setItem('fullAutoImageSource', selectedSource);
         console.log(`[Renderer] 🔄 fullAutoImageSource 동기화: "${selectedSource}"`);
+        // [v1.6.3] 쇼핑 커넥트 AI 엔진(nano-banana-pro|openai-image)이면 scAIImageEngine + 라디오도 sync
+        if (selectedSource === 'nano-banana-pro' || selectedSource === 'openai-image') {
+          localStorage.setItem('scAIImageEngine', selectedSource);
+          localStorage.setItem('scSubImageSource', selectedSource);
+          // 연속발행 모달 라디오 반영
+          const contRadio = document.querySelector(`input[name="continuous-modal-shopping-subimage-source"][value="${selectedSource}"]`) as HTMLInputElement | null;
+          if (contRadio && !contRadio.checked) contRadio.checked = true;
+          // 다중계정 모달 라디오 반영
+          const maRadio = document.querySelector(`input[name="ma-shopping-subimage-source"][value="${selectedSource}"]`) as HTMLInputElement | null;
+          if (maRadio && !maRadio.checked) maRadio.checked = true;
+          console.log(`[Renderer] 🛒 쇼핑커넥트 AI 엔진 sync: "${selectedSource}"`);
+        }
       } else {
         // ✅ [2026-03-10 CLEANUP] imageSourceMode dead write 제거 — getItem 없음
         console.log(`[Renderer] 📁 저장된 이미지 모드 활성화 (AI 엔진 설정 유지: "${localStorage.getItem('globalImageSource') || 'imagefx'}")`);

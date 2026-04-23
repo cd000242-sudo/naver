@@ -106,21 +106,58 @@ export function getShoppingConnectImagePool(): any[] {
 }
 
 /**
- * Shopping-connect engine whitelist. Only nano-banana-pro (Gemini img2img)
- * can faithfully reproduce the real product — it also hosts "나노바나나2"
- * (gemini-3-1-flash) as an internal sub-model, so the provider whitelist is
- * exactly one entry. All other AI engines (ImageFX, DALL-E, Leonardo,
- * DeepInfra, Stability, Fal.ai, Prodia, Pollinations) are blocked.
- *
- * The guard fires even when the collected-image pool is empty: the user's
- * rule is "무조건 금지" regardless of fallback availability. Callers must
- * surface an explicit error in that case rather than silently falling back
- * to a paid engine.
+ * Shopping-connect engine whitelist. Both engines can reproduce the real product
+ * via img2img with reference images:
+ *   - nano-banana-pro (Gemini img2img, 기본 gemini-3-1-flash = 나노바나나2)
+ *   - openai-image (gpt-image-2 = 덕트테이프, v1.6.3부터 허용)
+ * 덕트테이프는 OpenAI 공식 img2img API(image 파라미터)로 참조 제품 이미지를 주입하면
+ * 나노바나나2와 동등한 제품 정체성 유지 가능. Leonardo/Flow/ImageFX 등 타 엔진은
+ * 참조 이미지 지원이 불안정하거나 무료 쿼터 이슈로 여전히 차단.
  */
+const SHOPPING_CONNECT_ALLOWED_ENGINES = ['nano-banana-pro', 'openai-image'] as const;
+export type ShoppingConnectAIEngine = typeof SHOPPING_CONNECT_ALLOWED_ENGINES[number];
+
 export function shouldBlockEngineForShoppingConnect(engine: string): boolean {
     if (!isShoppingConnectForCurrentPost()) return false;
-    if (engine === 'nano-banana-pro') return false;
+    if ((SHOPPING_CONNECT_ALLOWED_ENGINES as readonly string[]).includes(engine)) return false;
     return true;
+}
+
+/**
+ * [v1.6.3] 쇼핑 커넥트 전용 AI 이미지 엔진 저장 키.
+ * 반자동 이미지관리 드롭다운(fullAutoImageSource)과는 독립적으로 관리되나,
+ * AI 이미지 엔진 범주(nano-banana-pro | openai-image)에서는 양방향 동기화됨.
+ */
+export const SC_AI_ENGINE_STORAGE_KEY = 'scAIImageEngine';
+
+export function getShoppingConnectAIEngine(): ShoppingConnectAIEngine {
+    try {
+        const stored = localStorage.getItem(SC_AI_ENGINE_STORAGE_KEY);
+        if (stored && (SHOPPING_CONNECT_ALLOWED_ENGINES as readonly string[]).includes(stored)) {
+            return stored as ShoppingConnectAIEngine;
+        }
+        // 초기값: 반자동 드롭다운이 허용 엔진이면 그 값, 아니면 나노바나나2 기본
+        const fullAuto = localStorage.getItem('fullAutoImageSource');
+        if (fullAuto && (SHOPPING_CONNECT_ALLOWED_ENGINES as readonly string[]).includes(fullAuto)) {
+            return fullAuto as ShoppingConnectAIEngine;
+        }
+    } catch { /* noop */ }
+    return 'nano-banana-pro';
+}
+
+export function setShoppingConnectAIEngine(engine: ShoppingConnectAIEngine, syncFullAuto: boolean = true): void {
+    try {
+        localStorage.setItem(SC_AI_ENGINE_STORAGE_KEY, engine);
+        if (syncFullAuto) {
+            // 반자동 드롭다운도 같이 업데이트 (AI 엔진 범주 내 양방향 sync)
+            localStorage.setItem('fullAutoImageSource', engine);
+            localStorage.setItem('globalImageSource', engine);
+            (window as any).globalImageSource = engine;
+            // 드롭다운 UI가 열려 있으면 값도 반영
+            const sel = document.getElementById('image-source-select') as HTMLSelectElement | null;
+            if (sel && sel.value !== engine) sel.value = engine;
+        }
+    } catch { /* noop */ }
 }
 
 // 전역 노출 (기존 코드와의 호환성)
@@ -130,5 +167,7 @@ export function shouldBlockEngineForShoppingConnect(engine: string): boolean {
 (window as any).isShoppingConnectForCurrentPost = isShoppingConnectForCurrentPost;
 (window as any).getShoppingConnectImagePool = getShoppingConnectImagePool;
 (window as any).shouldBlockEngineForShoppingConnect = shouldBlockEngineForShoppingConnect;
+(window as any).getShoppingConnectAIEngine = getShoppingConnectAIEngine;
+(window as any).setShoppingConnectAIEngine = setShoppingConnectAIEngine;
 
 console.log('[ShoppingConnectUtils] 📦 모듈 로드됨!');

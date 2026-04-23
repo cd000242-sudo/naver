@@ -2112,11 +2112,22 @@ export function initContinuousPublishingV2(): void {
   }
 
   // ✅ [2026-02-19] 쇼핑커넥트 서브탭 → localStorage/메인UI 동기화 (Bug 1, 3 수정)
+  // ✅ [v1.6.3] AI 엔진(nano-banana-pro/openai-image) 선택 시 반자동 드롭다운과 양방향 sync
   // (1) 소제목 이미지 소스 라디오 → localStorage
   document.querySelectorAll('input[name="continuous-modal-shopping-subimage-source"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
       const value = (e.target as HTMLInputElement).value;
       localStorage.setItem('scSubImageSource', value);
+      if (value === 'nano-banana-pro' || value === 'openai-image') {
+        // AI 엔진 선택 — 전역 AI 이미지 소스와 sync (반자동 드롭다운도 업데이트)
+        localStorage.setItem('scAIImageEngine', value);
+        localStorage.setItem('fullAutoImageSource', value);
+        localStorage.setItem('globalImageSource', value);
+        (window as any).globalImageSource = value;
+        const mainSel = document.getElementById('image-source-select') as HTMLSelectElement | null;
+        if (mainSel && mainSel.value !== value) mainSel.value = value;
+        console.log(`[쇼핑커넥트 서브탭] 🍌🦆 AI 엔진 선택 → 전역 sync: ${value}`);
+      }
       console.log('[쇼핑커넥트 서브탭] 📷 이미지 소스 → localStorage:', value);
     });
   });
