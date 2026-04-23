@@ -747,9 +747,24 @@ export async function generateWithFlow(
                 cost: 0,
             } as any;
             results.push(image);
-            // ✅ [v1.5.1] index는 0-indexed 전달 — renderer가 `index + 1`로 표시하므로
-            //   다른 엔진(imageFx/deepinfra/leonardoAI) 모두 i(0-indexed). Flow만 i+1 잘못 쓰고 있었음
+            // ✅ [v1.5.1] index는 0-indexed 전달
             if (onImageGenerated) onImageGenerated(image, i, items.length);
+
+            // ✅ [v1.5.2] 콜백 체인이 끊겨도 렌더러에 직접 IPC 전송 — 모달 순차 업데이트 보장
+            //   이전 v1.5.1까지는 onImageGenerated가 main.ts 핸들러 → renderer 경유해야 했는데
+            //   일부 호출 경로에서 main.ts 콜백이 주입되지 않아 모달이 전부 한번에 뜨는 문제
+            try {
+                const { BrowserWindow } = require('electron');
+                const wins = BrowserWindow.getAllWindows();
+                if (wins[0] && !wins[0].isDestroyed()) {
+                    wins[0].webContents.send('automation:imageGenerated', {
+                        image, index: i, total: items.length,
+                    });
+                    flowLog(`[Flow] 📨 IPC 직송: automation:imageGenerated (${i}/${items.length})`);
+                }
+            } catch (ipcErr) {
+                flowWarn(`[Flow] IPC 직송 실패 (무시): ${(ipcErr as Error).message.substring(0, 80)}`);
+            }
 
             // ✅ [v1.4.97] 연속 생성 간 UI 안정화 대기 — Flow 입력창이 재활성화되도록
             if (i < items.length - 1) {
