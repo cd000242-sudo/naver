@@ -111,19 +111,21 @@ async function ensureFlowBrowserPage(forceVisibleForLogin: boolean = false): Pro
         timeout: 60000,
     });
 
-    const page = visibleCtx.pages()[0] || await visibleCtx.newPage();
-    await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 60000 });
+    const visiblePage = visibleCtx.pages()[0] || await visibleCtx.newPage();
+    await visiblePage.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 60000 });
 
     // 로그인 대기 (최대 5분, 5초마다 체크)
     const loginTimeoutMs = 5 * 60 * 1000;
     const start = Date.now();
+    let loginSuccess = false;
     sendImageLog('🔐 [Flow] 브라우저에서 Google 로그인을 완료해주세요. (최대 5분 대기)');
     while (Date.now() - start < loginTimeoutMs) {
-        await page.waitForTimeout(5000);
-        const loggedIn = await isLoggedInToFlow(page).catch(() => false);
+        await visiblePage.waitForTimeout(5000);
+        const loggedIn = await isLoggedInToFlow(visiblePage).catch(() => false);
         if (loggedIn) {
             console.log('[Flow] ✅ 로그인 완료 감지');
-            sendImageLog('✅ [Flow] 로그인 완료! 이미지 생성을 계속합니다.');
+            sendImageLog('✅ [Flow] 로그인 완료! 창을 숨김 모드로 전환합니다.');
+            loginSuccess = true;
             break;
         }
         const elapsedSec = Math.round((Date.now() - start) / 1000);
@@ -132,15 +134,40 @@ async function ensureFlowBrowserPage(forceVisibleForLogin: boolean = false): Pro
         }
     }
 
-    const finalCheck = await isLoggedInToFlow(page).catch(() => false);
-    if (!finalCheck) {
-        await visibleCtx.close().catch(() => {});
+    // ✅ [v1.4.92] 로그인 성공 → visible 창 닫고 headless 재시작 (ImageFX 패턴과 동일)
+    //   세션은 같은 profileDir에 영구 저장되어 있으므로 headless 재시작 시 자동 재사용됨
+    await visibleCtx.close().catch(() => {});
+
+    if (!loginSuccess) {
         throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인 시간 초과 (5분). 브라우저에서 로그인 후 다시 시도해주세요.');
     }
 
-    cachedContext = visibleCtx;
-    cachedPage = page;
-    return page;
+    console.log('[Flow] 🔄 visible 창 닫힘 → headless 재시작');
+    sendImageLog('🔄 [Flow] 숨김 모드로 재시작 중...');
+    await new Promise(r => setTimeout(r, 1000));
+
+    const headlessCtxAfterLogin = await chromium.launchPersistentContext(profileDir, {
+        headless: true,
+        viewport: { width: 1280, height: 800 },
+        timeout: 30000,
+    });
+    const finalPage = headlessCtxAfterLogin.pages()[0] || await headlessCtxAfterLogin.newPage();
+    await finalPage.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await finalPage.waitForTimeout(2000);
+
+    // 세션 유효성 재확인
+    const finalCheck = await isLoggedInToFlow(finalPage).catch(() => false);
+    if (!finalCheck) {
+        await headlessCtxAfterLogin.close().catch(() => {});
+        throw new Error('FLOW_SESSION_LOST:로그인 후 headless 전환 시 세션 유실. 다시 시도해주세요.');
+    }
+
+    console.log('[Flow] ✅ headless 전환 완료 — 브라우저 숨김');
+    sendImageLog('✅ [Flow] 숨김 모드 전환 완료 — 이미지 생성 준비됨');
+
+    cachedContext = headlessCtxAfterLogin;
+    cachedPage = finalPage;
+    return finalPage;
 }
 
 // ─── Flow 로그인 상태 체크 (labs.google 세션 API 활용) ────────────
