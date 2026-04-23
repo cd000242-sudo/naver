@@ -3421,8 +3421,7 @@
                     <div style="display: flex; gap: 0.75rem; align-items: center;">
                         <select id="image-source-select"
                             style="flex: 1; padding: 0.875rem 1rem; background: var(--bg-tertiary); border: 2px solid var(--border-gold); border-radius: 10px; color: var(--text-strong); font-size: 0.95rem; font-weight: 600; cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Cpath fill=%22%23d4af37%22 d=%22M2 4l4 4 4-4%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 1rem center;">
-                            <option value="nano-banana-pro" data-icon="🍌" data-price="Gemini 3 | 텍스트 없음">🍌 나노
-                                바나나 프로 (Gemini 3)</option>
+                            <option value="nano-banana-pro" data-icon="🍌" data-price="기본 나노바나나2 ₩97/장 (Gemini 3.1 Flash)">🍌 나노바나나 (Gemini API, 기본 ₩97)</option>
                             <option value="deepinfra" data-icon="⚡" data-price="$0.01/장 | FLUX-2">⚡ DeepInfra (FLUX-2,
                                 $0.01/장)</option>
                             <option value="openai-image" data-icon="🦆" data-price="gpt-image-2 | $0.02~$0.20 | 한글 최강">🦆 덕트테이프
@@ -5249,14 +5248,14 @@
                                 </div>
                             </div>
 
-                            <!-- 🍌 나노바나나 프로 (Gemini API) -->
+                            <!-- 🍌 나노바나나 (Gemini API) — 기본 나노바나나2 -->
                             <div style="background: rgba(251, 191, 36, 0.1); padding: 0.875rem; border-radius: 10px; border-left: 4px solid #fbbf24;">
-                                <div style="font-weight: 700; color: #d97706; margin-bottom: 0.35rem; font-size: 0.95rem;">🍌 나노바나나 프로 (Gemini API)</div>
+                                <div style="font-weight: 700; color: #d97706; margin-bottom: 0.35rem; font-size: 0.95rem;">🍌 나노바나나 (Gemini API, 기본 나노바나나2)</div>
                                 <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.7;">
+                                    • <strong>나노바나나2 (Gemini 3.1 Flash): ₩97/장</strong> ★ 기본값<br>
                                     • Gemini 2.5 Flash: <strong>₩28/장</strong> (빠름, 가성비)<br>
-                                    • Gemini 3.1 Flash: <strong>₩97/장</strong> (★ 권장)<br>
                                     • Gemini 3 Pro: <strong>₩77/장</strong> (고품질)<br>
-                                    • Gemini 3 Pro 4K: <strong>₩336/장</strong> (초고해상도)<br>
+                                    • Gemini 3 Pro 4K: <strong>₩336/장</strong> (초고해상도, 비쌈)<br>
                                     • Imagen 4 폴백: <strong>₩46/장</strong> (안전망)
                                 </div>
                             </div>
@@ -5344,7 +5343,7 @@
                         <div
                             style="background: rgba(251, 191, 36, 0.05); padding: 1rem; border-radius: 10px; border: 1px solid rgba(251, 191, 36, 0.2);">
                             <div style="font-weight: 600; color: #fbbf24; margin-bottom: 0.75rem; font-size: 0.9rem;">
-                                🍌 나노 바나나 프로 (Gemini) 모델
+                                🍌 나노바나나 (Gemini API) 모델 선택
                             </div>
                             <div style="display: grid; gap: 0.75rem;">
                                 <div>
@@ -5354,14 +5353,13 @@
                                     </label>
                                     <select id="nano-banana-main-model"
                                         style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem; cursor: pointer;">
-                                        <option value="gemini-3-pro">🏆 Gemini 3 Pro - ₩77 (추천)</option>
-                                        <option value="gemini-2.5-flash">⚡ Gemini 2.5 Flash - ₩42 (빠름)
-                                        </option>
-                                        <option value="gemini-3-pro-4k">🎬 Gemini 3 Pro 4K - ₩336 (초고해상도)
-                                        </option>
+                                        <option value="gemini-3-1-flash" selected>🍌 나노바나나2 (Gemini 3.1 Flash) - ₩97 ★ 권장</option>
+                                        <option value="gemini-2.5-flash">⚡ Gemini 2.5 Flash - ₩28 (가성비)</option>
+                                        <option value="gemini-3-pro">🏆 Gemini 3 Pro - ₩77 (고품질)</option>
+                                        <option value="gemini-3-pro-4k">🎬 Gemini 3 Pro 4K - ₩336 (초고해상도, 비싸)</option>
                                     </select>
                                     <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem;">
-                                        ℹ️ 첫 번째 이미지와 블로그 썸네일에 적용됩니다.
+                                        ℹ️ 첫 번째 이미지와 블로그 썸네일에 적용됩니다. 기본값: 나노바나나2.
                                     </p>
                                 </div>
                                 <div>
@@ -5371,11 +5369,10 @@
                                     </label>
                                     <select id="nano-banana-sub-model"
                                         style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem; cursor: pointer;">
-                                        <option value="gemini-2.5-flash">⚡ Gemini 2.5 Flash - ₩42 (추천)
-                                        </option>
+                                        <option value="gemini-3-1-flash" selected>🍌 나노바나나2 (Gemini 3.1 Flash) - ₩97 ★ 권장</option>
+                                        <option value="gemini-2.5-flash">⚡ Gemini 2.5 Flash - ₩28 (가성비)</option>
                                         <option value="gemini-3-pro">🏆 Gemini 3 Pro - ₩77 (고품질)</option>
-                                        <option value="gemini-3-pro-4k">🎬 Gemini 3 Pro 4K - ₩336 (초고해상도)
-                                        </option>
+                                        <option value="gemini-3-pro-4k">🎬 Gemini 3 Pro 4K - ₩336 (초고해상도, 비싸)</option>
                                     </select>
                                 </div>
                             </div>
