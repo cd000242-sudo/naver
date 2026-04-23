@@ -110,26 +110,13 @@ export function registerImageHandlers(ctx: IpcContext): void {
             };
             const prompt = samplePrompts[style] || samplePrompts.realistic;
 
-            // nanoBananaPro로 빠른 1장 생성 (Gemini 2.0 Flash 무료 티어 사용)
-            const { generateWithNanoBananaPro } = await import('../../image/nanoBananaProGenerator.js');
-            const { getConfigSync } = await import('../../configManager.js');
-            const config = getConfigSync();
-            const apiKey = config.geminiApiKey || process.env.GEMINI_API_KEY;
-            if (!apiKey) {
-                return { success: false, error: 'Gemini API 키 미설정 — 환경설정에서 Gemini API 키 입력 필요' };
-            }
-
-            const result = await generateWithNanoBananaPro(
+            // ✅ [v1.4.99] Flow로 무료 생성 (Gemini API 키 불필요)
+            //   Flow가 로그인 안 돼있으면 자동으로 로그인 창 띄움 (ensureFlowBrowserPage)
+            const { generateWithFlow } = await import('../../image/flowGenerator.js');
+            const result = await generateWithFlow(
                 [{ heading: `style-preview-${style}`, englishPrompt: prompt } as any],
                 `style-preview-${style}`,
                 `preview-${Date.now()}`,
-                false,
-                apiKey,
-                false,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
             );
 
             if (!result || result.length === 0 || !result[0].filePath) {
