@@ -747,7 +747,9 @@ export async function generateWithFlow(
                 cost: 0,
             } as any;
             results.push(image);
-            if (onImageGenerated) onImageGenerated(image, i + 1, items.length);
+            // ✅ [v1.5.1] index는 0-indexed 전달 — renderer가 `index + 1`로 표시하므로
+            //   다른 엔진(imageFx/deepinfra/leonardoAI) 모두 i(0-indexed). Flow만 i+1 잘못 쓰고 있었음
+            if (onImageGenerated) onImageGenerated(image, i, items.length);
 
             // ✅ [v1.4.97] 연속 생성 간 UI 안정화 대기 — Flow 입력창이 재활성화되도록
             if (i < items.length - 1) {
