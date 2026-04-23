@@ -19,7 +19,9 @@ import type { ImageRequestItem, GeneratedImage } from './types.js';
 import { writeImageFile } from './imageUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
-import type { Browser, Page } from 'playwright';
+import type { Browser, BrowserContext, Page } from 'playwright';
+import * as path from 'path';
+import { app } from 'electron';
 
 // ─── 로깅 ────────────────────────────────────────────────
 function sendImageLog(message: string): void {
@@ -33,9 +35,19 @@ function sendImageLog(message: string): void {
 
 // ─── 캐시 (세션 재사용) ────────────────────────────────────
 let cachedBrowser: Browser | null = null;
+let cachedContext: BrowserContext | null = null;
 let cachedPage: Page | null = null;
 let cachedProjectUrl: string | null = null;
 let _enabled: boolean = false;
+
+// ─── Flow 전용 세션 디렉터리 (독립 Playwright persistent context) ────
+function getFlowProfileDir(): string {
+    try {
+        return path.join(app.getPath('userData'), 'flow-chromium-profile');
+    } catch {
+        return path.join(require('os').homedir(), '.naver-blog-automation', 'flow-chromium-profile');
+    }
+}
 
 // ─── 공개 플래그 ─────────────────────────────────────────
 export function setFlowEnabled(enabled: boolean): void {
@@ -47,15 +59,104 @@ export function isFlowEnabled(): boolean {
     return _enabled;
 }
 
-// ─── 브라우저 페이지 확보 (ImageFX 세션 공유) ─────────────────
-async function ensureFlowBrowserPage(): Promise<Page> {
-    const { ensureImageFxBrowserPage } = await import('./imageFxGenerator.js');
-    if (typeof ensureImageFxBrowserPage !== 'function') {
-        throw new Error('FLOW_IMAGEFX_BRIDGE_MISSING:ImageFX 세션 공유가 비활성 상태입니다. 앱 업데이트 필요.');
+// ─── Flow 전용 Playwright 브라우저 (ImageFX/AdsPower 독립) ─────────────
+//   ✅ [v1.4.91] ImageFX 세션 공유 제거 — Flow 전용 persistent context 사용
+//     이점: AdsPower 미설치/비활성 환경에서도 동작, 로그인 실패 시 조용한 블록 대신 자동 창 띄우기
+async function ensureFlowBrowserPage(forceVisibleForLogin: boolean = false): Promise<Page> {
+    // 캐시된 페이지 재사용 (닫혀있지 않으면)
+    if (cachedPage && !cachedPage.isClosed() && cachedContext) {
+        return cachedPage;
     }
-    const page = await ensureImageFxBrowserPage();
+
+    const { chromium } = await import('playwright');
+    const profileDir = getFlowProfileDir();
+    console.log(`[Flow] 📁 프로필 디렉터리: ${profileDir}`);
+
+    // 1단계: headless로 접속 → 세션 존재 여부 확인
+    try {
+        console.log('[Flow] 🌐 headless 모드로 세션 체크...');
+        sendImageLog('🌐 [Flow] 세션 확인 중...');
+        const headlessCtx = await chromium.launchPersistentContext(profileDir, {
+            headless: true,
+            viewport: { width: 1280, height: 800 },
+            timeout: 30000,
+        });
+
+        const page = headlessCtx.pages()[0] || await headlessCtx.newPage();
+        await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
+        await page.waitForTimeout(2000);
+
+        const loggedIn = await isLoggedInToFlow(page);
+        if (loggedIn) {
+            console.log('[Flow] ✅ 기존 로그인 세션 확인됨 (headless 유지)');
+            sendImageLog('✅ [Flow] 로그인 세션 확인 — headless 모드 진행');
+            cachedContext = headlessCtx;
+            cachedPage = page;
+            return page;
+        }
+
+        // 로그인 없음 → headless 닫고 visible로 재시작
+        console.log('[Flow] ⚠️ 로그인 필요 — visible 브라우저 창 표시');
+        sendImageLog('⚠️ [Flow] Google 로그인 필요 — 브라우저 창이 열립니다. 로그인해주세요.');
+        await headlessCtx.close().catch(() => {});
+    } catch (err) {
+        console.warn('[Flow] headless 세션 체크 실패:', (err as Error).message);
+    }
+
+    // 2단계: visible로 브라우저 열어서 사용자 로그인 유도
+    const visibleCtx = await chromium.launchPersistentContext(profileDir, {
+        headless: false,
+        viewport: { width: 1280, height: 800 },
+        args: ['--disable-blink-features=AutomationControlled'],
+        timeout: 60000,
+    });
+
+    const page = visibleCtx.pages()[0] || await visibleCtx.newPage();
+    await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 60000 });
+
+    // 로그인 대기 (최대 5분, 5초마다 체크)
+    const loginTimeoutMs = 5 * 60 * 1000;
+    const start = Date.now();
+    sendImageLog('🔐 [Flow] 브라우저에서 Google 로그인을 완료해주세요. (최대 5분 대기)');
+    while (Date.now() - start < loginTimeoutMs) {
+        await page.waitForTimeout(5000);
+        const loggedIn = await isLoggedInToFlow(page).catch(() => false);
+        if (loggedIn) {
+            console.log('[Flow] ✅ 로그인 완료 감지');
+            sendImageLog('✅ [Flow] 로그인 완료! 이미지 생성을 계속합니다.');
+            break;
+        }
+        const elapsedSec = Math.round((Date.now() - start) / 1000);
+        if (elapsedSec % 30 === 0) {
+            sendImageLog(`⏳ [Flow] 로그인 대기 중... (${elapsedSec}초 경과)`);
+        }
+    }
+
+    const finalCheck = await isLoggedInToFlow(page).catch(() => false);
+    if (!finalCheck) {
+        await visibleCtx.close().catch(() => {});
+        throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인 시간 초과 (5분). 브라우저에서 로그인 후 다시 시도해주세요.');
+    }
+
+    cachedContext = visibleCtx;
     cachedPage = page;
     return page;
+}
+
+// ─── Flow 로그인 상태 체크 (labs.google 세션 API 활용) ────────────
+async function isLoggedInToFlow(page: Page): Promise<boolean> {
+    try {
+        const session = await page.evaluate(async () => {
+            try {
+                const res = await fetch('/fx/api/auth/session', { credentials: 'include' });
+                if (!res.ok) return null;
+                return await res.json();
+            } catch { return null; }
+        });
+        return !!(session && (session as any).user);
+    } catch {
+        return false;
+    }
 }
 
 // ─── Flow 프로젝트 확보 ───────────────────────────────────
@@ -284,10 +385,10 @@ export async function generateWithFlow(
 }
 
 // ─── 연결 테스트 (UI "테스트" 버튼용) ──────────────────────────
+//   ✅ [v1.4.91] 로그인 안 돼있으면 visible 브라우저 창 띄워 로그인 유도
 export async function testFlowConnection(): Promise<{ ok: boolean; message: string; userInfo?: any }> {
     try {
         const page = await ensureFlowBrowserPage();
-        // labs.google/fx 도메인 세션 확인 (ImageFX와 동일 엔드포인트)
         const session = await page.evaluate(async () => {
             try {
                 const res = await fetch('/fx/api/auth/session', { credentials: 'include' });
@@ -295,24 +396,28 @@ export async function testFlowConnection(): Promise<{ ok: boolean; message: stri
             } catch { return null; }
         });
         if (!session || !(session as any).user) {
-            return { ok: false, message: '❌ Google 세션 없음 — AdsPower에서 Google 로그인 필요' };
+            return { ok: false, message: '❌ Google 세션 확보 실패 — 로그인 창에서 로그인 완료 후 다시 테스트해주세요' };
         }
         const userInfo = (session as any).user;
-        // Flow 프로젝트 페이지 접근 확인
-        await ensureFlowProject(page);
         return {
             ok: true,
-            message: `✅ Flow 연결 성공 — ${userInfo?.email || userInfo?.name || 'user'} (프로젝트 준비됨)`,
+            message: `✅ Flow 연결 성공 — ${userInfo?.email || userInfo?.name || 'user'}`,
             userInfo,
         };
     } catch (err) {
-        return { ok: false, message: `❌ ${(err as Error).message}` };
+        const msg = (err as Error).message || '';
+        if (msg.startsWith('FLOW_LOGIN_TIMEOUT')) {
+            return { ok: false, message: '❌ Google 로그인 시간 초과 — 다시 테스트해주세요' };
+        }
+        return { ok: false, message: `❌ ${msg}` };
     }
 }
 
 // ─── 중지/정리 ──────────────────────────────────────────
-export function resetFlowState(): void {
+export async function resetFlowState(): Promise<void> {
     cachedProjectUrl = null;
+    try { if (cachedContext) await cachedContext.close(); } catch { /* ignore */ }
+    cachedContext = null;
     cachedPage = null;
     cachedBrowser = null;
 }
