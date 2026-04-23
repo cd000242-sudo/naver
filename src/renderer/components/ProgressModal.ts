@@ -398,6 +398,20 @@ export class ProgressModal {
         setTimeout(() => this.hide(), 4000);
     }
 
+    // ✅ [v1.5.3] 경고(노란색) — 작업은 계속 진행되지만 주의 필요 시 사용
+    //   예: 콘텐츠 생성 2분 초과, 일시적 네트워크 지연 등
+    showWarning(title: string = '⚠️ 지연 감지', subtitle: string = '작업이 지연되고 있지만 계속 진행됩니다.') {
+        if (this.progressHeader) {
+            this.progressHeader.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+        }
+        if (this.progressIcon) {
+            this.progressIcon.textContent = '⚠️';
+        }
+        if (this.progressTitle) this.progressTitle.textContent = title;
+        if (this.progressSubtitle) this.progressSubtitle.textContent = subtitle;
+        // isWorkInProgress 유지 — 작업은 계속 진행 중
+    }
+
     showError(title: string = '작업 중단됨', subtitle: string = '오류가 발생하여 작업이 중단되었습니다.', failedStep?: number) {
         this.isWorkInProgress = false;  // ✅ [2026-03-09] 에러 → FAB 표시 방지
         this.hideRestoreFab();

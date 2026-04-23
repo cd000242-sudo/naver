@@ -91,9 +91,10 @@ export async function handleFullAutoPublish(): Promise<void> {
     const toneStyle = UnifiedDOMCache.getToneStyle();
 
     // ✅ [2026-03-05 FIX] 콘텐츠 생성 실패 시 모달에 에러 즉시 표시 + 2분 타임아웃 워처
+    // ✅ [v1.5.3] 지연은 경고(노란색) — 작업은 계속 진행 중이므로 error(빨간색) 아님
     const contentTimeout = setTimeout(() => {
-      modal.showError('⚠️ 콘텐츠 생성 지연', '콘텐츠 생성이 2분 이상 걸리고 있습니다. 네트워크 또는 AI 엔진 응답 지연일 수 있습니다.');
-      appendLog('⚠️ 콘텐츠 생성 2분 초과 — AI 엔진 또는 네트워크 응답 지연');
+      modal.showWarning('⚠️ 콘텐츠 생성 지연', '콘텐츠 생성이 2분 이상 걸리고 있습니다. 네트워크 또는 AI 엔진 응답 지연 — 계속 대기합니다.');
+      appendLog('⚠️ 콘텐츠 생성 2분 초과 — AI 엔진 또는 네트워크 응답 지연 (계속 진행 중)');
     }, 120_000);
 
     try {
