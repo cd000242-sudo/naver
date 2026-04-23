@@ -78,7 +78,18 @@ const UnifiedDOMCache = {
     // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow 엔진이 풀오토/연속발행에서 nano-banana-pro로 폴백되던 버그 수정
     const VALID_AI_SOURCES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
 
-    // 1순위: fullAutoImageSource (풀오토 전용)
+    // ✅ [v1.4.90 FIX] 레거시 저장값 자동 마이그레이션
+    //   증상: 사용자가 UI에서 'flow' 선택했지만 fullAutoImageSource에는 예전 'nano-banana-pro'가 남아있어 무시됨
+    //   원인: v1.4.85 이전 빌드에서 setGlobalImageSource가 두 키를 동기화하지 않았던 잔재
+    //   해결: globalImageSource가 유효한 AI 엔진이고 fullAutoImageSource와 다르면, UI 선택이 최신이므로 덮어쓰기
+    const rawGlobal = localStorage.getItem('globalImageSource');
+    const rawFullAuto = localStorage.getItem('fullAutoImageSource');
+    if (rawGlobal && VALID_AI_SOURCES.includes(rawGlobal) && rawFullAuto !== rawGlobal) {
+      console.log(`[UnifiedDOMCache] 🔄 UI 선택 우선 동기화: globalImageSource="${rawGlobal}" → fullAutoImageSource 덮어쓰기 (이전: "${rawFullAuto || '없음'}")`);
+      localStorage.setItem('fullAutoImageSource', rawGlobal);
+    }
+
+    // 1순위: fullAutoImageSource (풀오토 전용, 위에서 동기화된 최신값)
     const fullAutoSource = localStorage.getItem('fullAutoImageSource');
     if (fullAutoSource && fullAutoSource !== 'undefined' && fullAutoSource !== 'null' && VALID_AI_SOURCES.includes(fullAutoSource)) {
       console.log(`[UnifiedDOMCache] 🎨 fullAutoImageSource 사용 (풀오토 전용): ${fullAutoSource}`);

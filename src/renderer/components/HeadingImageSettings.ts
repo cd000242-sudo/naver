@@ -223,31 +223,40 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
 }
 
 // ✅ [2026-02-02] 풀오토 전용 이미지 소스 설정 (이미지 관리 탭과 완전히 분리)
+// ✅ [v1.4.90] 사용자의 "최근 명시적 선택"(globalImageSource)을 fullAutoImageSource보다 우선
+//   기존: fullAutoImageSource가 오염된 기본값('nano-banana-pro')이어도 globalImageSource='flow'를 무시
+//   현재: globalImageSource가 유효하면 그걸 최우선으로 사용 + fullAutoImageSource도 덮어써서 동기화
 export function getFullAutoImageSource(): GlobalImageSource {
-  // ✅ [2026-02-13 FIX] 유효한 AI 엔진 목록 (이것 외의 값은 모두 무효)
-  // ✅ [v1.4.80] 'flow' 추가
   const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
 
-  // 우선순위: fullAutoImageSource → globalImageSource → 'nano-banana-pro' (Gemini 기본값)
   const fullAutoSaved = safeLocalStorageGet('fullAutoImageSource');
-  if (fullAutoSaved) {
-    if (VALID_SOURCES.includes(fullAutoSaved as GlobalImageSource)) {
-      return fullAutoSaved as GlobalImageSource;
+  const globalSaved = safeLocalStorageGet('globalImageSource');
+
+  // 1순위: globalImageSource (사용자 최근 명시적 선택)
+  if (globalSaved && VALID_SOURCES.includes(globalSaved as GlobalImageSource)) {
+    // fullAutoImageSource와 다르면 자동 마이그레이션하여 동기화
+    if (fullAutoSaved !== globalSaved) {
+      console.log(`[HeadingImageSettings] 🔄 globalImageSource("${globalSaved}") 우선 → fullAutoImageSource 자동 동기화 (이전: "${fullAutoSaved || '없음'}")`);
+      try { localStorage.setItem('fullAutoImageSource', globalSaved); } catch (_) { /* ignore */ }
     }
-    // ⚠️ 오염된 값 발견 → 정리 (예: 'saved'가 저장되어 있던 경우)
-    console.warn(`[HeadingImageSettings] ⚠️ fullAutoImageSource에 유효하지 않은 값 "${fullAutoSaved}" → 제거`);
+    return globalSaved as GlobalImageSource;
+  }
+
+  // 2순위: fullAutoImageSource (globalImageSource가 없거나 오염된 경우)
+  if (fullAutoSaved && VALID_SOURCES.includes(fullAutoSaved as GlobalImageSource)) {
+    return fullAutoSaved as GlobalImageSource;
+  }
+
+  // 오염된 값 정리
+  if (fullAutoSaved && !VALID_SOURCES.includes(fullAutoSaved as GlobalImageSource)) {
+    console.warn(`[HeadingImageSettings] ⚠️ fullAutoImageSource 유효하지 않음 "${fullAutoSaved}" → 제거`);
     try { localStorage.removeItem('fullAutoImageSource'); } catch (_) { /* ignore */ }
   }
-  const globalSaved = safeLocalStorageGet('globalImageSource');
-  if (globalSaved) {
-    if (VALID_SOURCES.includes(globalSaved as GlobalImageSource)) {
-      console.log(`[HeadingImageSettings] ℹ️ fullAutoImageSource 미설정 → globalImageSource 사용: "${globalSaved}"`);
-      return globalSaved as GlobalImageSource;
-    }
-    // ⚠️ 오염된 값 발견 → 정리
-    console.warn(`[HeadingImageSettings] ⚠️ globalImageSource에 유효하지 않은 값 "${globalSaved}" → 제거`);
+  if (globalSaved && !VALID_SOURCES.includes(globalSaved as GlobalImageSource)) {
+    console.warn(`[HeadingImageSettings] ⚠️ globalImageSource 유효하지 않음 "${globalSaved}" → 제거`);
     try { localStorage.removeItem('globalImageSource'); } catch (_) { /* ignore */ }
   }
+
   return 'nano-banana-pro';
 }
 
