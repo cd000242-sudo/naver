@@ -59,115 +59,128 @@ export function isFlowEnabled(): boolean {
     return _enabled;
 }
 
-// ─── Flow 전용 Playwright 브라우저 (ImageFX/AdsPower 독립) ─────────────
-//   ✅ [v1.4.91] ImageFX 세션 공유 제거 — Flow 전용 persistent context 사용
-//     이점: AdsPower 미설치/비활성 환경에서도 동작, 로그인 실패 시 조용한 블록 대신 자동 창 띄우기
-async function ensureFlowBrowserPage(forceVisibleForLogin: boolean = false): Promise<Page> {
+// ─── 시스템 브라우저 폴백 + stealth args ─────────────────────
+//   ✅ [v1.4.93] ImageFX의 launchWithSystemBrowserFallback 패턴 이식
+//     Google bot 감지 회피: 시스템 Chrome > Edge > Playwright 번들 순
+const STEALTH_ARGS = [
+    '--disable-blink-features=AutomationControlled',
+    '--disable-features=IsolateOrigins,site-per-process',
+    '--disable-site-isolation-trials',
+];
+const STEALTH_IGNORE_DEFAULT_ARGS = ['--enable-automation'];
+
+async function launchWithStealthFallback(profileDir: string, visible: boolean): Promise<BrowserContext> {
+    const { chromium } = await import('playwright');
+    const commonOptions: any = {
+        headless: !visible,
+        viewport: { width: 1280, height: 800 },
+        args: [...STEALTH_ARGS, ...(visible ? [] : ['--window-position=-10000,-10000'])],
+        ignoreDefaultArgs: STEALTH_IGNORE_DEFAULT_ARGS,
+        timeout: 60000,
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+    };
+
+    const attempts = [
+        { label: 'System Chrome', channel: 'chrome' as const },
+        { label: 'System Edge', channel: 'msedge' as const },
+        { label: 'Playwright Chromium', channel: undefined },
+    ];
+
+    let lastErr: Error | null = null;
+    for (const attempt of attempts) {
+        try {
+            console.log(`[Flow] 🚀 브라우저 시도: ${attempt.label}`);
+            const opts: any = { ...commonOptions };
+            if (attempt.channel) opts.channel = attempt.channel;
+            const ctx = await chromium.launchPersistentContext(profileDir, opts);
+
+            // navigator.webdriver 제거 스크립트 주입
+            await ctx.addInitScript(() => {
+                Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+            });
+
+            console.log(`[Flow] ✅ ${attempt.label} 실행 성공`);
+            return ctx;
+        } catch (err) {
+            console.warn(`[Flow] ${attempt.label} 실패: ${(err as Error).message.substring(0, 120)}`);
+            lastErr = err as Error;
+        }
+    }
+    throw new Error(`FLOW_BROWSER_LAUNCH_FAILED:모든 브라우저 실행 실패. 마지막 에러: ${lastErr?.message || 'unknown'}`);
+}
+
+// ─── Flow 전용 Playwright 브라우저 ───────────────────────────
+//   ✅ [v1.4.93] visible→headless 재시작 제거 (SingletonLock 경합 원인)
+//     visible 유지 + off-screen 이동으로 화면 보이지 않게 처리
+async function ensureFlowBrowserPage(): Promise<Page> {
     // 캐시된 페이지 재사용 (닫혀있지 않으면)
-    if (cachedPage && !cachedPage.isClosed() && cachedContext) {
-        return cachedPage;
+    if (cachedPage && cachedContext) {
+        try {
+            if (!cachedPage.isClosed()) return cachedPage;
+        } catch { /* stale reference, 재생성 */ }
     }
 
-    const { chromium } = await import('playwright');
     const profileDir = getFlowProfileDir();
     console.log(`[Flow] 📁 프로필 디렉터리: ${profileDir}`);
 
-    // 1단계: headless로 접속 → 세션 존재 여부 확인
-    try {
-        console.log('[Flow] 🌐 headless 모드로 세션 체크...');
-        sendImageLog('🌐 [Flow] 세션 확인 중...');
-        const headlessCtx = await chromium.launchPersistentContext(profileDir, {
-            headless: true,
-            viewport: { width: 1280, height: 800 },
-            timeout: 30000,
-        });
+    // 1단계: off-screen visible로 접속 → 세션 존재 여부 확인
+    //   headless가 아닌 이유: Google은 headless Chromium을 감지해 Flow UI를 제한/차단
+    //   off-screen 이동(-10000,-10000)으로 UI상 안 보이게 처리
+    sendImageLog('🌐 [Flow] 세션 확인 중...');
+    const ctx = await launchWithStealthFallback(profileDir, false);
+    const page = ctx.pages()[0] || await ctx.newPage();
+    await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.waitForTimeout(2500);
 
-        const page = headlessCtx.pages()[0] || await headlessCtx.newPage();
-        await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
-        await page.waitForTimeout(2000);
-
-        const loggedIn = await isLoggedInToFlow(page);
-        if (loggedIn) {
-            console.log('[Flow] ✅ 기존 로그인 세션 확인됨 (headless 유지)');
-            sendImageLog('✅ [Flow] 로그인 세션 확인 — headless 모드 진행');
-            cachedContext = headlessCtx;
-            cachedPage = page;
-            return page;
-        }
-
-        // 로그인 없음 → headless 닫고 visible로 재시작
-        console.log('[Flow] ⚠️ 로그인 필요 — visible 브라우저 창 표시');
-        sendImageLog('⚠️ [Flow] Google 로그인 필요 — 브라우저 창이 열립니다. 로그인해주세요.');
-        await headlessCtx.close().catch(() => {});
-    } catch (err) {
-        console.warn('[Flow] headless 세션 체크 실패:', (err as Error).message);
+    const loggedIn = await isLoggedInToFlow(page);
+    if (loggedIn) {
+        console.log('[Flow] ✅ 기존 로그인 세션 확인됨 (off-screen 창 유지)');
+        sendImageLog('✅ [Flow] 로그인 세션 확인 — 이미지 생성 준비됨');
+        cachedContext = ctx;
+        cachedPage = page;
+        return page;
     }
 
-    // 2단계: visible로 브라우저 열어서 사용자 로그인 유도
-    const visibleCtx = await chromium.launchPersistentContext(profileDir, {
-        headless: false,
-        viewport: { width: 1280, height: 800 },
-        args: ['--disable-blink-features=AutomationControlled'],
-        timeout: 60000,
-    });
+    // 2단계: 로그인 필요 → visible로 창 이동 (사용자가 로그인할 수 있게)
+    console.log('[Flow] ⚠️ 로그인 필요 — 창을 화면 중앙으로 이동');
+    sendImageLog('⚠️ [Flow] Google 로그인 필요 — 브라우저 창이 화면에 표시됩니다.');
+    // off-screen이었던 창을 화면 중앙(100,100)으로 이동 — persistent context는 새로 만들지 않음
+    await page.evaluate(() => {
+        try { (window as any).moveTo?.(100, 100); } catch { /* ignore */ }
+    }).catch(() => {});
+    await (ctx as any).newPage?.().catch(() => {}); // 새 탭으로 로그인 창 표시 강제
+    try {
+        // Playwright에서 창 위치 이동은 chromium에서 제한적. 페이지 bring-to-front로 대체
+        await page.bringToFront();
+    } catch { /* ignore */ }
 
-    const visiblePage = visibleCtx.pages()[0] || await visibleCtx.newPage();
-    await visiblePage.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 60000 });
-
-    // 로그인 대기 (최대 5분, 5초마다 체크)
     const loginTimeoutMs = 5 * 60 * 1000;
     const start = Date.now();
     let loginSuccess = false;
     sendImageLog('🔐 [Flow] 브라우저에서 Google 로그인을 완료해주세요. (최대 5분 대기)');
     while (Date.now() - start < loginTimeoutMs) {
-        await visiblePage.waitForTimeout(5000);
-        const loggedIn = await isLoggedInToFlow(visiblePage).catch(() => false);
-        if (loggedIn) {
-            console.log('[Flow] ✅ 로그인 완료 감지');
-            sendImageLog('✅ [Flow] 로그인 완료! 창을 숨김 모드로 전환합니다.');
+        await new Promise(r => setTimeout(r, 5000));
+        const ok = await isLoggedInToFlow(page).catch(() => false);
+        if (ok) {
             loginSuccess = true;
             break;
         }
         const elapsedSec = Math.round((Date.now() - start) / 1000);
-        if (elapsedSec % 30 === 0) {
+        if (elapsedSec > 0 && elapsedSec % 30 === 0) {
             sendImageLog(`⏳ [Flow] 로그인 대기 중... (${elapsedSec}초 경과)`);
         }
     }
 
-    // ✅ [v1.4.92] 로그인 성공 → visible 창 닫고 headless 재시작 (ImageFX 패턴과 동일)
-    //   세션은 같은 profileDir에 영구 저장되어 있으므로 headless 재시작 시 자동 재사용됨
-    await visibleCtx.close().catch(() => {});
-
     if (!loginSuccess) {
+        await ctx.close().catch(() => {});
         throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인 시간 초과 (5분). 브라우저에서 로그인 후 다시 시도해주세요.');
     }
 
-    console.log('[Flow] 🔄 visible 창 닫힘 → headless 재시작');
-    sendImageLog('🔄 [Flow] 숨김 모드로 재시작 중...');
-    await new Promise(r => setTimeout(r, 1000));
-
-    const headlessCtxAfterLogin = await chromium.launchPersistentContext(profileDir, {
-        headless: true,
-        viewport: { width: 1280, height: 800 },
-        timeout: 30000,
-    });
-    const finalPage = headlessCtxAfterLogin.pages()[0] || await headlessCtxAfterLogin.newPage();
-    await finalPage.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
-    await finalPage.waitForTimeout(2000);
-
-    // 세션 유효성 재확인
-    const finalCheck = await isLoggedInToFlow(finalPage).catch(() => false);
-    if (!finalCheck) {
-        await headlessCtxAfterLogin.close().catch(() => {});
-        throw new Error('FLOW_SESSION_LOST:로그인 후 headless 전환 시 세션 유실. 다시 시도해주세요.');
-    }
-
-    console.log('[Flow] ✅ headless 전환 완료 — 브라우저 숨김');
-    sendImageLog('✅ [Flow] 숨김 모드 전환 완료 — 이미지 생성 준비됨');
-
-    cachedContext = headlessCtxAfterLogin;
-    cachedPage = finalPage;
-    return finalPage;
+    console.log('[Flow] ✅ 로그인 완료 — 같은 컨텍스트 재사용 (재시작 없음)');
+    sendImageLog('✅ [Flow] 로그인 완료! 이미지 생성 준비됨');
+    cachedContext = ctx;
+    cachedPage = page;
+    return page;
 }
 
 // ─── Flow 로그인 상태 체크 (labs.google 세션 API 활용) ────────────
@@ -186,84 +199,205 @@ async function isLoggedInToFlow(page: Page): Promise<boolean> {
     }
 }
 
+// ─── 디버그 스크린샷 저장 ───────────────────────────────────
+async function saveDebugScreenshot(page: Page, label: string): Promise<string> {
+    try {
+        const fs = await import('fs');
+        const ts = Date.now();
+        const dir = (() => {
+            try { return path.join(app.getPath('userData'), 'flow-debug'); }
+            catch { return path.join(require('os').homedir(), '.naver-blog-automation', 'flow-debug'); }
+        })();
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        const filePath = path.join(dir, `${label}-${ts}.png`);
+        await page.screenshot({ path: filePath, fullPage: false }).catch(() => {});
+        console.log(`[Flow] 📸 디버그 스크린샷: ${filePath}`);
+        sendImageLog(`📸 [Flow] 디버그 스크린샷 저장: ${filePath}`);
+        return filePath;
+    } catch (err) {
+        return '';
+    }
+}
+
 // ─── Flow 프로젝트 확보 ───────────────────────────────────
 async function ensureFlowProject(page: Page): Promise<void> {
     const currentUrl = page.url();
+    console.log(`[Flow][1/3] 프로젝트 확보 시작 — 현재 URL: ${currentUrl}`);
+    sendImageLog(`🔍 [Flow] 현재 URL: ${currentUrl.substring(0, 80)}`);
 
     // 이미 프로젝트 페이지이면 그대로 사용
     if (currentUrl.includes('/tools/flow/project/')) {
         cachedProjectUrl = currentUrl;
+        console.log('[Flow][1/3] ✅ 이미 프로젝트 페이지 — 재사용');
         return;
     }
 
     // 캐시된 프로젝트 URL이 있으면 그쪽으로 이동
     if (cachedProjectUrl) {
-        console.log('[Flow] 🔗 캐시된 프로젝트 재사용');
+        console.log(`[Flow][1/3] 🔗 캐시된 프로젝트 이동 시도: ${cachedProjectUrl}`);
+        sendImageLog(`🔗 [Flow] 캐시 프로젝트 재사용 시도`);
         await page.goto(cachedProjectUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
         await page.waitForTimeout(1500);
-        // 이동 성공 확인
-        if (page.url().includes('/tools/flow/project/')) return;
+        if (page.url().includes('/tools/flow/project/')) {
+            console.log('[Flow][1/3] ✅ 캐시 프로젝트 도착');
+            return;
+        }
+        console.log('[Flow][1/3] ⚠️ 캐시 프로젝트 도착 실패 — 새 프로젝트 생성으로 전환');
     }
 
     // 새 프로젝트 생성
-    console.log('[Flow] 🆕 Flow 새 프로젝트 생성 중...');
-    sendImageLog('🆕 [Flow] 새 프로젝트 생성 중...');
+    console.log('[Flow][1/3] 🆕 /tools/flow 접속 중...');
+    sendImageLog('🆕 [Flow] 프로젝트 목록 페이지 접속 중...');
     await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(2500);
+    console.log(`[Flow][1/3] 접속 완료 — URL: ${page.url()}`);
 
-    // "새 프로젝트" 버튼 클릭 — 다국어 지원 (ko/en/ja)
-    const newProjectBtn = page.locator('button').filter({ hasText: /새 프로젝트|New project|新しいプロジェクト/ }).first();
-    await newProjectBtn.waitFor({ state: 'visible', timeout: 30000 });
+    // "새 프로젝트" 버튼 찾기 — 여러 셀렉터 시도
+    console.log('[Flow][1/3] "새 프로젝트" 버튼 탐색 중...');
+    sendImageLog('🔍 [Flow] "새 프로젝트" 버튼 탐색');
+    const newProjectBtn = page.locator('button').filter({ hasText: /새 프로젝트|New project|New Project|新しいプロジェクト|add_2/ }).first();
+
+    try {
+        await newProjectBtn.waitFor({ state: 'visible', timeout: 30000 });
+        console.log('[Flow][1/3] ✅ "새 프로젝트" 버튼 발견');
+    } catch (err) {
+        await saveDebugScreenshot(page, 'no-new-project-btn');
+        const allButtons = await page.evaluate(() => {
+            return Array.from(document.querySelectorAll('button')).slice(0, 20).map(b => (b.textContent || '').trim().substring(0, 50));
+        }).catch(() => []);
+        console.error(`[Flow][1/3] ❌ "새 프로젝트" 버튼 못 찾음. DOM 버튼 상위 20개:`, allButtons);
+        sendImageLog(`❌ [Flow] "새 프로젝트" 버튼 미발견. 버튼 목록: ${allButtons.slice(0, 5).join(' | ')}`);
+        throw new Error(`FLOW_NEW_PROJECT_BUTTON_NOT_FOUND:labs.google/fx/tools/flow에서 "새 프로젝트" 버튼을 30초 내 찾지 못함. 페이지 구조 변경 또는 계정 권한 문제. 스크린샷 저장됨.`);
+    }
+
     await newProjectBtn.click();
+    console.log('[Flow][1/3] "새 프로젝트" 클릭됨 — URL 리다이렉트 대기');
 
     // 프로젝트 URL로 리다이렉트 대기
-    await page.waitForURL(/\/tools\/flow\/project\//, { timeout: 30000 });
+    try {
+        await page.waitForURL(/\/tools\/flow\/project\//, { timeout: 30000 });
+    } catch (err) {
+        await saveDebugScreenshot(page, 'no-project-redirect');
+        throw new Error(`FLOW_PROJECT_REDIRECT_TIMEOUT:"새 프로젝트" 클릭 후 프로젝트 URL 리다이렉트 30초 초과. 현재 URL: ${page.url()}`);
+    }
     await page.waitForTimeout(1500);
     cachedProjectUrl = page.url();
-    console.log(`[Flow] ✅ 프로젝트 준비: ${cachedProjectUrl}`);
+    console.log(`[Flow][1/3] ✅ 프로젝트 생성 완료: ${cachedProjectUrl}`);
+    sendImageLog(`✅ [Flow] 프로젝트 준비됨`);
 }
 
 // ─── 프롬프트 입력 + 생성 클릭 + 이미지 URL 추출 ────────────────
 async function typePromptAndSubmit(page: Page, prompt: string): Promise<void> {
+    console.log(`[Flow][2/3] 프롬프트 입력 시작 (길이: ${prompt.length})`);
+    sendImageLog(`✏️ [Flow] 프롬프트 입력 시작`);
+
     // 기존 프롬프트 지우기 (close 버튼 존재 시)
     try {
         const clearBtn = page.locator('button').filter({ hasText: /프롬프트 지우기|Clear prompt/ }).first();
         if (await clearBtn.count() > 0 && await clearBtn.isVisible().catch(() => false)) {
             await clearBtn.click();
             await page.waitForTimeout(300);
+            console.log('[Flow][2/3] 기존 프롬프트 지움');
         }
     } catch { /* 지울 게 없음 */ }
 
     // 프롬프트 입력창 (role=textbox, contenteditable) 찾기
+    console.log('[Flow][2/3] 프롬프트 입력창 탐색 중...');
     const promptInput = page.locator('[role="textbox"][contenteditable="true"], div[contenteditable="true"]').first();
-    await promptInput.waitFor({ state: 'visible', timeout: 15000 });
+    try {
+        await promptInput.waitFor({ state: 'visible', timeout: 15000 });
+    } catch (err) {
+        await saveDebugScreenshot(page, 'no-prompt-input');
+        throw new Error('FLOW_PROMPT_INPUT_NOT_FOUND:프롬프트 입력창(contenteditable)을 15초 내 찾지 못함. 스크린샷 저장됨.');
+    }
+    console.log('[Flow][2/3] ✅ 입력창 발견 — 프롬프트 입력');
     await promptInput.click();
-    await promptInput.fill(prompt);
-    await page.waitForTimeout(300);
+    // ✅ [v1.4.93] fill() → pressSequentially() — React/Angular contenteditable 이벤트 확실히 발화
+    await promptInput.pressSequentially(prompt, { delay: 10 });
+    await page.waitForTimeout(500);
 
-    // 만들기(arrow_forward) 버튼 — 하단 프롬프트 바의 submit 버튼
-    // 상단에도 'add_2 만들기' 버튼이 있지만 그건 뉴 미디어 드롭다운용. 하단 'arrow_forward 만들기'가 전송.
+    // 입력 검증 — 실제 값이 반영됐는지 확인
+    const inputActual = await promptInput.textContent().catch(() => '');
+    if (!inputActual || inputActual.trim().length < 5) {
+        await saveDebugScreenshot(page, 'prompt-empty');
+        throw new Error(`FLOW_PROMPT_NOT_ENTERED:프롬프트 입력 실패 (실제 값: "${(inputActual || '').substring(0, 30)}"). React 이벤트 미발화 추정.`);
+    }
+    console.log(`[Flow][2/3] ✅ 입력 확인 (실제 값 ${inputActual.length}자)`);
+
+    // 만들기(arrow_forward) 버튼
+    console.log('[Flow][2/3] 전송 버튼(arrow_forward) 탐색 중...');
     const submitBtn = page.locator('button').filter({ hasText: /arrow_forward/ }).first();
-    await submitBtn.waitFor({ state: 'visible', timeout: 10000 });
+    try {
+        await submitBtn.waitFor({ state: 'visible', timeout: 10000 });
+    } catch (err) {
+        await saveDebugScreenshot(page, 'no-submit-btn');
+        throw new Error('FLOW_SUBMIT_BUTTON_NOT_FOUND:전송 버튼(arrow_forward)을 10초 내 찾지 못함. 스크린샷 저장됨.');
+    }
     await submitBtn.click();
+    console.log('[Flow][2/3] ✅ 전송 버튼 클릭됨');
+    sendImageLog('🚀 [Flow] 전송 완료 — 이미지 생성 대기');
 }
 
 // ─── 새 이미지 대기 ────────────────────────────────────────
-async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number = 120000): Promise<string> {
+//   ✅ [v1.4.93] 견고한 이미지 감지 — alt/aria-label/URL 패턴 모두 지원
+async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number = 180000): Promise<string> {
     const start = Date.now();
+    let lastLoggedSec = 0;
+    console.log(`[Flow][3/3] 이미지 생성 대기 시작 (기존 ${prevCount}장, 타임아웃 ${timeoutMs / 1000}초)`);
+
     while (Date.now() - start < timeoutMs) {
-        const srcs = await page.evaluate(() => {
-            return Array.from(document.querySelectorAll('img[alt="생성된 이미지"], img[alt="Generated image"]'))
-                .map((img: any) => img.src)
-                .filter((s) => s && !s.includes('=s96-c'));
+        const detected = await page.evaluate(() => {
+            // Flow가 생성한 이미지 후보 — 3가지 판별 조건 OR
+            const imgs = Array.from(document.querySelectorAll('img')) as HTMLImageElement[];
+            const matches = imgs.filter(img => {
+                const alt = img.alt || '';
+                const src = img.src || '';
+                const aria = img.getAttribute('aria-label') || '';
+                // 조건 1: alt가 명시적으로 생성 이미지 표기
+                if (/생성된 이미지|Generated image|Generated|생성/i.test(alt + aria)) return true;
+                // 조건 2: Flow 미디어 URL 패턴 (media.getMediaUrlRedirect / lh3.googleusercontent 제외는 프로필)
+                if (/media\.getMediaUrlRedirect|flowMedia|flow-media/i.test(src)) return true;
+                // 조건 3: 큰 이미지(naturalWidth>=512) + 프로필(=s96-c) 아님
+                if (img.naturalWidth >= 512 && !/=s\d+-c$/.test(src) && src.startsWith('http')) return true;
+                return false;
+            });
+            return matches.map(img => ({
+                src: img.src,
+                alt: img.alt,
+                aria: img.getAttribute('aria-label') || '',
+                w: img.naturalWidth,
+                h: img.naturalHeight,
+            }));
         });
-        if (srcs.length > prevCount) {
-            // 가장 최근 = 첫 번째 또는 마지막 (DOM 순서에 따라 다름). 첫 번째가 최신인 경우가 많음.
-            return srcs[0];
+
+        if (detected.length > prevCount) {
+            console.log(`[Flow][3/3] ✅ 새 이미지 감지! 총 ${detected.length}장 (이전 ${prevCount}장) — alt="${detected[0].alt}" (${detected[0].w}x${detected[0].h})`);
+            return detected[0].src;
         }
-        await page.waitForTimeout(1000);
+
+        const elapsedSec = Math.round((Date.now() - start) / 1000);
+        if (elapsedSec - lastLoggedSec >= 15) {
+            console.log(`[Flow][3/3] ⏳ 대기 중 ${elapsedSec}초 경과 (현재 매칭 ${detected.length}장)`);
+            sendImageLog(`⏳ [Flow] 이미지 생성 중... ${elapsedSec}초 경과 (매칭 ${detected.length}/${prevCount + 1})`);
+            lastLoggedSec = elapsedSec;
+        }
+        await page.waitForTimeout(2000);
     }
-    throw new Error('FLOW_IMAGE_TIMEOUT:이미지 생성 120초 초과 — 쿼터 초과/안전필터/네트워크 문제 가능성');
+
+    // 타임아웃 — 디버깅 정보 덤프
+    await saveDebugScreenshot(page, 'image-timeout');
+    const allImgsDump = await page.evaluate(() => {
+        return Array.from(document.querySelectorAll('img')).slice(0, 30).map(img => ({
+            alt: img.alt.substring(0, 50),
+            aria: (img.getAttribute('aria-label') || '').substring(0, 50),
+            src: (img.src || '').substring(0, 150),
+            w: (img as HTMLImageElement).naturalWidth,
+            h: (img as HTMLImageElement).naturalHeight,
+        }));
+    }).catch(() => []);
+    console.error('[Flow][3/3] ❌ 타임아웃 — 현재 DOM img 목록:', JSON.stringify(allImgsDump, null, 2));
+    sendImageLog(`❌ [Flow] 이미지 감지 타임아웃 — DOM img ${allImgsDump.length}개 덤프 (콘솔 확인)`);
+    throw new Error(`FLOW_IMAGE_TIMEOUT:이미지 ${timeoutMs / 1000}초 초과. 스크린샷+img 목록 저장됨. 셀렉터 불일치 가능성 높음.`);
 }
 
 async function countExistingImages(page: Page): Promise<number> {
