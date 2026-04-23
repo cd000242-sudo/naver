@@ -462,26 +462,26 @@ async function typePromptAndSubmit(page: Page, prompt: string): Promise<void> {
     }
     flowLog('[Flow][2/3] ✅ 입력창 발견 — 프롬프트 입력');
     await promptInput.click();
-    // ✅ [v1.4.97] 클릭 후 focus 안정화 대기 (연속 생성 시 입력창 unstable 대응)
-    await page.waitForTimeout(500);
+    // ✅ [v1.5.5] 클릭 후 focus 안정화 대기 단축 500ms → 150ms (속도 개선)
+    await page.waitForTimeout(150);
 
-    // ✅ [v1.4.97] pressSequentially → fill → keyboard.type 3중 폴백
-    //   이전 로그: 4번째 연속 생성에서 pressSequentially: Timeout 30000ms exceeded
-    //   원인: 이전 이미지 렌더링 중 입력창이 일시 비활성화 → element stable 대기 실패
+    // ✅ [v1.5.5] fill() 1순위로 변경 — 속도 10배 빠름 (pressSequentially는 장당 4~20초)
+    //   이전 로그에서 pressSequentially 10ms/char × 391자 = 4초(이론) → 실측 19초
+    //   현재: fill() 일괄 입력 < 0.5초, 실패 시 pressSequentially 폴백(3ms/char)
     let inputSuccess = false;
     try {
-        await promptInput.pressSequentially(prompt, { delay: 10, timeout: 20000 });
+        await promptInput.fill(prompt, { timeout: 10000 });
         inputSuccess = true;
     } catch (err1) {
-        flowWarn(`[Flow][2/3] pressSequentially 실패 → fill() 폴백: ${(err1 as Error).message.substring(0, 100)}`);
+        flowWarn(`[Flow][2/3] fill() 실패 → pressSequentially 폴백: ${(err1 as Error).message.substring(0, 100)}`);
         try {
-            await promptInput.fill(prompt, { timeout: 10000 });
+            await promptInput.pressSequentially(prompt, { delay: 3, timeout: 15000 });
             inputSuccess = true;
         } catch (err2) {
-            flowWarn(`[Flow][2/3] fill() 실패 → focus+keyboard.type 폴백: ${(err2 as Error).message.substring(0, 100)}`);
+            flowWarn(`[Flow][2/3] pressSequentially 실패 → focus+keyboard.type 폴백: ${(err2 as Error).message.substring(0, 100)}`);
             try {
                 await promptInput.focus({ timeout: 5000 });
-                await page.keyboard.type(prompt, { delay: 10 });
+                await page.keyboard.type(prompt, { delay: 3 });
                 inputSuccess = true;
             } catch (err3) {
                 flowWarn(`[Flow][2/3] keyboard.type 폴백도 실패: ${(err3 as Error).message.substring(0, 100)}`);
@@ -490,9 +490,10 @@ async function typePromptAndSubmit(page: Page, prompt: string): Promise<void> {
     }
     if (!inputSuccess) {
         await saveDebugScreenshot(page, 'input-all-methods-failed');
-        throw new Error('FLOW_PROMPT_INPUT_ALL_FAILED:3가지 입력 방식(pressSequentially/fill/keyboard) 모두 실패');
+        throw new Error('FLOW_PROMPT_INPUT_ALL_FAILED:3가지 입력 방식(fill/pressSequentially/keyboard) 모두 실패');
     }
-    await page.waitForTimeout(500);
+    // ✅ [v1.5.5] 입력 후 안정화 대기 500ms → 100ms (React 이벤트 처리 시간만)
+    await page.waitForTimeout(100);
 
     // 입력 검증 — 실제 값이 반영됐는지 확인
     const inputActual = await promptInput.textContent().catch(() => '');
@@ -766,10 +767,10 @@ export async function generateWithFlow(
                 flowWarn(`[Flow] IPC 직송 실패 (무시): ${(ipcErr as Error).message.substring(0, 80)}`);
             }
 
-            // ✅ [v1.4.97] 연속 생성 간 UI 안정화 대기 — Flow 입력창이 재활성화되도록
+            // ✅ [v1.5.5] 연속 생성 간 UI 안정화 대기 2s → 500ms (속도 개선)
+            //   Flow UI가 이미지 렌더 후 입력창 재활성화까지 짧게만 기다리면 충분
             if (i < items.length - 1) {
-                flowLog(`[Flow] ⏸️ 다음 이미지 전 2초 대기 (UI 안정화)`);
-                await new Promise(r => setTimeout(r, 2000));
+                await new Promise(r => setTimeout(r, 500));
             }
         } catch (err) {
             const msg = (err as Error).message || '';

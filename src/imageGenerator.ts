@@ -228,7 +228,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   const providerDisplayNames: Record<string, string> = {
     'nano-banana-pro': '나노 바나나 프로 (Gemini)',
     'deepinfra': '딥인프라 FLUX-2',
-    'openai-image': 'OpenAI DALL-E (gpt-image-1)',
+    'openai-image': 'OpenAI 덕트테이프 (gpt-image-2)',
     'leonardoai': 'Leonardo AI',
     'imagefx': 'ImageFX (Google 무료)',
     'flow': 'Flow (Nano Banana 2, AI Pro 무료)', // ✅ [v1.5.4]

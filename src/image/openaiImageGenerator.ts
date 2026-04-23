@@ -14,7 +14,12 @@ import { addThumbnailTextOverlay } from './textOverlay.js';
 import { AutomationService } from '../main/services/AutomationService.js';
 
 const OPENAI_IMAGES_API_URL = 'https://api.openai.com/v1/images/generations';
-const DEFAULT_MODEL = 'gpt-image-1';
+// ✅ [v1.5.5] gpt-image-1 → gpt-image-2 업그레이드
+//   "덕트테이프(Duct Tape)" 코드명으로 LM Arena에서 검증되던 OpenAI 차세대 이미지 모델
+//   2026-04-21 ChatGPT Images 2.0로 공식 출시 — Nano Banana 저격 포지션
+//   주요 개선: 12단어+ 긴 텍스트 완벽 스펠링, 한글/일본어/중국어 등 다국어 렌더링 급상승,
+//              실사화 수준 대폭 향상 (가격은 gpt-image-1과 동등 가정)
+const DEFAULT_MODEL = 'gpt-image-2';
 
 /**
  * OpenAI Image API로 일괄 이미지 생성
@@ -79,10 +84,10 @@ export async function generateWithOpenAIImage(
             // 프롬프트 구성
             let prompt = item.englishPrompt || sanitizeImagePrompt(item.prompt || item.heading);
 
-            // 한글 제거 (gpt-image-1은 영어 프롬프트 최적)
-            if (/[가-힣]/.test(prompt)) {
-                prompt = prompt.replace(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g, '').replace(/\s+/g, ' ').trim();
-            }
+            // ✅ [v1.5.5] gpt-image-2는 한글 네이티브 지원 — 한글 제거 제거
+            //   이전: gpt-image-1은 영어 프롬프트 최적이라 한글 제거 필요
+            //   현재: gpt-image-2는 한국어/일본어/중국어/힌디어/벵골어 렌더링 완벽
+            //   그래도 프롬프트 자체는 영어 우선(번역 결과)이니 영어 위주이나 한글 혼용도 허용
 
             // 스타일별 프롬프트 분기
             // ✅ [2026-03-03 FIX] DALL-E에도 스타일 프롬프트(STYLE_PROMPT_MAP) 적용 + 한국인 인물 지시

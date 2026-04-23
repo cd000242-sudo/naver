@@ -81,8 +81,17 @@ const OPENAI_IMAGE_PRICING: Record<string, number> = {
   'gpt-image-1.5-low':    0.015,
   'gpt-image-1.5-medium': 0.050,
   'gpt-image-1.5-high':   0.180,
+  // ✅ [v1.5.5] gpt-image-2 — "덕트테이프", ChatGPT Images 2.0 (2026-04-21 출시)
+  //   Nano Banana 저격 포지션. 12단어+ 완벽 텍스트, 다국어 렌더링 최강.
+  //   가격은 초기 공식 발표 확인 전까지 gpt-image-1.5 기준으로 가정 (소폭 상승 추정).
+  'gpt-image-2-low':      0.018,  // low quality
+  'gpt-image-2-medium':   0.055,  // medium (기본 권장)
+  'gpt-image-2-high':     0.200,  // high (고품질 썸네일)
+  'gpt-image-2':          0.055,  // quality 미지정 시 medium
+  'gpt-image-2-hd':       0.200,  // -hd 접미사 호환
   // ✅ [v1.4.80] Flow (Nano Banana Pro) — labs.google/flow 경유 무료 쿼터
   'flow-nano-banana-pro': 0,
+  'flow-nano-banana-2':   0,  // ✅ [v1.5.4] 표기 업데이트
   'imagen-3.5-imagefx':   0,  // ImageFX (기존, 무료)
   // ⚠️ DALL-E 3 — 2026-05-12 API 제거 예정. 새 호출 금지, 호환용 가격표만 유지
   'dall-e-3':        0.04,
