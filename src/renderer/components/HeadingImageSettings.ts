@@ -41,7 +41,7 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'openai-image': 'OpenAI DALL-E',
   'leonardoai': 'Leonardo AI',
   'imagefx': 'ImageFX (무료)',
-  'flow': '🍌 Flow (Nano Banana Pro)',
+  'flow': '🍌 Flow (Nano Banana 2)',
   'local-folder': '📂 내 폴더'
 };
 
@@ -622,7 +622,7 @@ export function createHeadingImageModal(): void {
               <div style="display: flex; align-items: center; gap: 14px;">
                 <div class="btn-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">🍌</div>
                 <div>
-                  <div class="btn-text">Flow 연결 테스트 (Nano Banana Pro)</div>
+                  <div class="btn-text">Flow 연결 테스트 (Nano Banana 2)</div>
                   <div class="btn-value" id="flow-connection-status" style="color: #9ca3af; display: flex; align-items: center; gap: 6px;">
                     <span id="flow-connection-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #6b7280; display: inline-block; flex-shrink: 0;"></span>
                     <span id="flow-connection-text">테스트 필요 (클릭)</span>
@@ -829,7 +829,7 @@ export function createHeadingImageModal(): void {
             <div style="position: absolute; top: -6px; right: -6px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 8px;">NEW</div>
             <div style="font-size: 1.5rem;">🍌</div>
             <div style="font-size: 12px; font-weight: 600; color: #92400e;">Flow</div>
-            <div style="font-size: 10px; color: #a16207;">Nano Banana Pro | AI Pro</div>
+            <div style="font-size: 10px; color: #a16207;">Nano Banana 2 | AI Pro</div>
           </label>
           <label class="source-option" data-value="local-folder" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); text-align: center; transition: all 0.2s; position: relative;">
             <div style="font-size: 1.5rem;">📂</div>
@@ -1089,7 +1089,7 @@ export function createHeadingImageModal(): void {
               <select id="test-engine-select" style="width: 100%; padding: 10px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; color: #374151; background: white; cursor: pointer; transition: border-color 0.2s;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e5e7eb'">
                 <option value="">📌 현재 저장된 엔진 사용</option>
                 <option value="nano-banana-pro">🍌 나노 바나나 프로 (Gemini)</option>
-                <option value="flow">🍌 Flow (Nano Banana Pro, AI Pro 무료)</option>
+                <option value="flow">🍌 Flow (Nano Banana 2, AI Pro 무료)</option>
                 <option value="imagefx">✨ ImageFX (Google 무료)</option>
                 <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">🎨 OpenAI DALL-E</option>

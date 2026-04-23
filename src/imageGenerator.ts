@@ -231,7 +231,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     'openai-image': 'OpenAI DALL-E (gpt-image-1)',
     'leonardoai': 'Leonardo AI',
     'imagefx': 'ImageFX (Google 무료)',
-    'flow': 'Flow (Nano Banana Pro, AI Pro 무료)', // ✅ [v1.4.80]
+    'flow': 'Flow (Nano Banana 2, AI Pro 무료)', // ✅ [v1.5.4]
     'naver': '네이버 이미지 검색',
     'local-folder': '내 폴더',
   };
@@ -372,7 +372,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   // ✅ [v1.4.80] Google Labs Flow 선택 시 (Nano Banana Pro 무료 쿼터, labs.google 세션 공유)
   if (normalizedProvider === 'flow') {
     try {
-      console.log(`[이미지생성] 🍌 Google Labs Flow(Nano Banana Pro)로 ${items.length}개 이미지 생성 시작... (AI Pro 쿼터 무료)`);
+      console.log(`[이미지생성] 🍌 Google Labs Flow(Nano Banana 2)로 ${items.length}개 이미지 생성 시작... (AI Pro 쿼터 무료)`);
       const flowImages = await generateWithFlow(
         items,
         options.postTitle,
