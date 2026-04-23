@@ -438,8 +438,36 @@ async function typePromptAndSubmit(page: Page, prompt: string): Promise<void> {
     }
     flowLog('[Flow][2/3] ✅ 입력창 발견 — 프롬프트 입력');
     await promptInput.click();
-    // ✅ [v1.4.93] fill() → pressSequentially() — React/Angular contenteditable 이벤트 확실히 발화
-    await promptInput.pressSequentially(prompt, { delay: 10 });
+    // ✅ [v1.4.97] 클릭 후 focus 안정화 대기 (연속 생성 시 입력창 unstable 대응)
+    await page.waitForTimeout(500);
+
+    // ✅ [v1.4.97] pressSequentially → fill → keyboard.type 3중 폴백
+    //   이전 로그: 4번째 연속 생성에서 pressSequentially: Timeout 30000ms exceeded
+    //   원인: 이전 이미지 렌더링 중 입력창이 일시 비활성화 → element stable 대기 실패
+    let inputSuccess = false;
+    try {
+        await promptInput.pressSequentially(prompt, { delay: 10, timeout: 20000 });
+        inputSuccess = true;
+    } catch (err1) {
+        flowWarn(`[Flow][2/3] pressSequentially 실패 → fill() 폴백: ${(err1 as Error).message.substring(0, 100)}`);
+        try {
+            await promptInput.fill(prompt, { timeout: 10000 });
+            inputSuccess = true;
+        } catch (err2) {
+            flowWarn(`[Flow][2/3] fill() 실패 → focus+keyboard.type 폴백: ${(err2 as Error).message.substring(0, 100)}`);
+            try {
+                await promptInput.focus({ timeout: 5000 });
+                await page.keyboard.type(prompt, { delay: 10 });
+                inputSuccess = true;
+            } catch (err3) {
+                flowWarn(`[Flow][2/3] keyboard.type 폴백도 실패: ${(err3 as Error).message.substring(0, 100)}`);
+            }
+        }
+    }
+    if (!inputSuccess) {
+        await saveDebugScreenshot(page, 'input-all-methods-failed');
+        throw new Error('FLOW_PROMPT_INPUT_ALL_FAILED:3가지 입력 방식(pressSequentially/fill/keyboard) 모두 실패');
+    }
     await page.waitForTimeout(500);
 
     // 입력 검증 — 실제 값이 반영됐는지 확인
@@ -696,6 +724,12 @@ export async function generateWithFlow(
             } as any;
             results.push(image);
             if (onImageGenerated) onImageGenerated(image, i + 1, items.length);
+
+            // ✅ [v1.4.97] 연속 생성 간 UI 안정화 대기 — Flow 입력창이 재활성화되도록
+            if (i < items.length - 1) {
+                flowLog(`[Flow] ⏸️ 다음 이미지 전 2초 대기 (UI 안정화)`);
+                await new Promise(r => setTimeout(r, 2000));
+            }
         } catch (err) {
             const msg = (err as Error).message || '';
             flowError(`[Flow] [${i + 1}/${items.length}] 실패: ${msg}`);
