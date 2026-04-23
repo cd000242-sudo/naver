@@ -138,12 +138,15 @@ const STEALTH_ARGS = [
 ];
 const STEALTH_IGNORE_DEFAULT_ARGS = ['--enable-automation'];
 
-async function launchWithStealthFallback(profileDir: string, visible: boolean): Promise<BrowserContext> {
+async function launchWithStealthFallback(profileDir: string, offScreen: boolean): Promise<BrowserContext> {
+    // ✅ [v1.5.0] 항상 visible(headless: false) — Google Labs가 headless Chromium을 감지해 이미지 렌더 차단
+    //   Playwright MCP 실측 비교: visible(MCP) = 성공, headless(이전 코드) = 이미지 렌더 실패
+    //   offScreen=true면 창을 -10000,-10000으로 이동해 사용자 화면엔 안 보임
     const { chromium } = await import('playwright');
     const commonOptions: any = {
-        headless: !visible,
+        headless: false,
         viewport: { width: 1280, height: 800 },
-        args: [...STEALTH_ARGS, ...(visible ? [] : ['--window-position=-10000,-10000'])],
+        args: [...STEALTH_ARGS, ...(offScreen ? ['--window-position=-10000,-10000'] : [])],
         ignoreDefaultArgs: STEALTH_IGNORE_DEFAULT_ARGS,
         timeout: 60000,
         userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
@@ -207,7 +210,8 @@ async function ensureFlowBrowserPage(): Promise<Page> {
     //   headless가 아닌 이유: Google은 headless Chromium을 감지해 Flow UI를 제한/차단
     //   off-screen 이동(-10000,-10000)으로 UI상 안 보이게 처리
     sendImageLog('🌐 [Flow] 세션 확인 중...');
-    const ctx = await launchWithStealthFallback(profileDir, false);
+    // ✅ [v1.5.0] 항상 visible + off-screen (headless 감지 회피)
+    const ctx = await launchWithStealthFallback(profileDir, true);
     const page = ctx.pages()[0] || await ctx.newPage();
     await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.waitForTimeout(2500);
@@ -222,18 +226,20 @@ async function ensureFlowBrowserPage(): Promise<Page> {
         return page;
     }
 
-    // 2단계: 로그인 필요 → visible로 창 이동 (사용자가 로그인할 수 있게)
-    flowLog('[Flow] ⚠️ 로그인 필요 — 창을 화면 중앙으로 이동');
-    sendImageLog('⚠️ [Flow] Google 로그인 필요 — 브라우저 창이 화면에 표시됩니다.');
-    // off-screen이었던 창을 화면 중앙(100,100)으로 이동 — persistent context는 새로 만들지 않음
-    await page.evaluate(() => {
-        try { (window as any).moveTo?.(100, 100); } catch { /* ignore */ }
-    }).catch(() => {});
-    await (ctx as any).newPage?.().catch(() => {}); // 새 탭으로 로그인 창 표시 강제
-    try {
-        // Playwright에서 창 위치 이동은 chromium에서 제한적. 페이지 bring-to-front로 대체
-        await page.bringToFront();
-    } catch { /* ignore */ }
+    // 2단계: 로그인 필요 → off-screen 컨텍스트 close 후 on-screen으로 재시작
+    //   ✅ [v1.5.0] --window-position=-10000,-10000으로 시작된 창은 moveTo로 복구 불가
+    //     context close → 1.5초 대기(SingletonLock 해제) → on-screen으로 재시작
+    flowLog('[Flow] ⚠️ 로그인 필요 — off-screen 닫고 on-screen 재시작');
+    sendImageLog('⚠️ [Flow] Google 로그인 필요 — 브라우저 창이 표시됩니다.');
+    await ctx.close().catch(() => {});
+    await new Promise(r => setTimeout(r, 1500));
+
+    const loginCtx = await launchWithStealthFallback(profileDir, false); // offScreen=false → on-screen
+    const loginPage = loginCtx.pages()[0] || await loginCtx.newPage();
+    await loginPage.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await loginPage.waitForTimeout(2000);
+    await dismissCookieBanner(loginPage);
+    try { await loginPage.bringToFront(); } catch { /* ignore */ }
 
     const loginTimeoutMs = 5 * 60 * 1000;
     const start = Date.now();
@@ -241,7 +247,7 @@ async function ensureFlowBrowserPage(): Promise<Page> {
     sendImageLog('🔐 [Flow] 브라우저에서 Google 로그인을 완료해주세요. (최대 5분 대기)');
     while (Date.now() - start < loginTimeoutMs) {
         await new Promise(r => setTimeout(r, 5000));
-        const ok = await isLoggedInToFlow(page).catch(() => false);
+        const ok = await isLoggedInToFlow(loginPage).catch(() => false);
         if (ok) {
             loginSuccess = true;
             break;
@@ -253,15 +259,33 @@ async function ensureFlowBrowserPage(): Promise<Page> {
     }
 
     if (!loginSuccess) {
-        await ctx.close().catch(() => {});
+        await loginCtx.close().catch(() => {});
         throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인 시간 초과 (5분). 브라우저에서 로그인 후 다시 시도해주세요.');
     }
 
-    flowLog('[Flow] ✅ 로그인 완료 — 같은 컨텍스트 재사용 (재시작 없음)');
-    sendImageLog('✅ [Flow] 로그인 완료! 이미지 생성 준비됨');
-    cachedContext = ctx;
-    cachedPage = page;
-    return page;
+    // ✅ [v1.5.0] 로그인 완료 → on-screen 창 닫고 off-screen으로 재시작 (사용자 화면에서 숨김)
+    flowLog('[Flow] ✅ 로그인 완료 — on-screen 닫고 off-screen 재시작');
+    sendImageLog('✅ [Flow] 로그인 완료! 숨김 모드로 전환 중...');
+    await loginCtx.close().catch(() => {});
+    await new Promise(r => setTimeout(r, 1500));
+
+    const finalCtx = await launchWithStealthFallback(profileDir, true); // offScreen=true
+    const finalPage = finalCtx.pages()[0] || await finalCtx.newPage();
+    await finalPage.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await finalPage.waitForTimeout(2000);
+    await dismissCookieBanner(finalPage);
+
+    // 세션 유효성 재확인
+    const finalCheck = await isLoggedInToFlow(finalPage).catch(() => false);
+    if (!finalCheck) {
+        await finalCtx.close().catch(() => {});
+        throw new Error('FLOW_SESSION_LOST:로그인 후 off-screen 전환 시 세션 유실. 다시 시도해주세요.');
+    }
+
+    sendImageLog('✅ [Flow] 숨김 모드 전환 완료 — 이미지 생성 준비됨');
+    cachedContext = finalCtx;
+    cachedPage = finalPage;
+    return finalPage;
 }
 
 // ─── 쿠키 동의 배너 자동 닫기 ────────────────────────────────
