@@ -28,7 +28,7 @@ import { registerContentHandlers, ContentHandlerDeps } from './contentHandlers';
 import { registerAdminHandlers, AdminHandlerDeps } from './adminHandlers';
 import { registerApiHandlers } from './apiHandlers';
 import { registerImageTableHandlers } from './imageTableHandlers';
-import { registerMiscHandlers } from './miscHandlers';
+import { registerMiscHandlers, registerSessionDiagnosticsHandlers } from './miscHandlers';
 
 /**
  * IPC 컨텍스트 생성
@@ -96,6 +96,7 @@ export function registerAllHandlers(): void {
 
     // 기타 (튜토리얼, 이미지 저장, 콘텐츠 수집, SEO)
     registerMiscHandlers();
+    registerSessionDiagnosticsHandlers();
 
     // 관리자 패널 — deps가 필요하므로 main.ts에서 별도 호출
     // registerAdminHandlers(deps);

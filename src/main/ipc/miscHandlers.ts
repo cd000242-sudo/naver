@@ -82,3 +82,32 @@ export function registerMiscHandlers(): void {
         }
     });
 }
+
+// ── Session diagnostics IPC ───────────────────────────────────
+
+/**
+ * Register session health IPC handlers.
+ * Called from the same registerMiscHandlers() or separately from index.ts.
+ */
+export function registerSessionDiagnosticsHandlers(): void {
+    // Returns in-memory metrics report (fast, no file I/O)
+    ipcMain.handle('session:getDiagnosticsReport', async () => {
+        try {
+            const { buildDiagnosticsReport } = await import('../../session/sessionEventLogger.js');
+            return { success: true, report: buildDiagnosticsReport() };
+        } catch (error) {
+            return { success: false, message: (error as Error).message };
+        }
+    });
+
+    // Returns last N NDJSON events from today's log file
+    ipcMain.handle('session:getRecentEvents', async (_event, count: number = 50) => {
+        try {
+            const { readRecentEvents } = await import('../../session/sessionEventLogger.js');
+            const events = await readRecentEvents(count);
+            return { success: true, events };
+        } catch (error) {
+            return { success: false, message: (error as Error).message, events: [] };
+        }
+    });
+}

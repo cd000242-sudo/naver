@@ -540,25 +540,39 @@ export async function cleanup(
     // 이전 버그: AutomationService.delete()는 맵에서만 제거 → 브라우저 프로세스 orphaned
     //            같은 userDataDir로 두 번째 발행 시 Chrome 실행 실패 → "하나 발행하고 멍때림"
     // 수정: closeSession()으로 browser.close() + automationMap.delete() 순서 보장
-    if (!payload.keepBrowserOpen) {
+    // [v1.6.0] 명시적 false인 경우에만 종료 (undefined=미지정은 keep-alive 우선)
+    //   + closeSession 내부에서 locked 세션 보호하지만 이중 가드로 호출 자체 억제
+    if (payload.keepBrowserOpen === false) {
         const normalizedId = (payload.naverId || '').trim().toLowerCase();
         if (normalizedId) {
+            // [v1.6.0] locked 세션은 닫지 않음 (세션 유지가 사용자 의도)
+            let locked = false;
             try {
-                await AutomationService.closeSession(normalizedId);
-            } catch (e) {
-                // closeBrowser 실패해도 맵 정리는 보장 (내부에서 finally로 처리됨)
-            }
-        }
-        // 현재 인스턴스도 명시적으로 닫기 (다른 경로로 주입됐을 수 있음)
-        const curr = AutomationService.getCurrentInstance();
-        if (curr) {
-            try {
-                await curr.closeBrowser();
+                const { browserSessionManager } = await import('../../browserSessionManager.js');
+                locked = browserSessionManager.isSessionLocked(normalizedId);
             } catch {
-                /* 이미 닫혔을 수 있음 */
+                /* 조회 실패 시 안전하게 close 진행 */
+            }
+            if (locked) {
+                console.log(`[BlogExecutor] 🔒 ${normalizedId.substring(0, 3)}*** 잠긴 세션 — keepBrowserOpen=false 무시 (세션 유지)`);
+            } else {
+                try {
+                    await AutomationService.closeSession(normalizedId);
+                } catch (e) {
+                    // closeBrowser 실패해도 맵 정리는 보장 (내부에서 finally로 처리됨)
+                }
+                // 현재 인스턴스도 명시적으로 닫기 (다른 경로로 주입됐을 수 있음)
+                const curr = AutomationService.getCurrentInstance();
+                if (curr) {
+                    try {
+                        await curr.closeBrowser();
+                    } catch {
+                        /* 이미 닫혔을 수 있음 */
+                    }
+                }
+                AutomationService.setCurrentInstance(null);
             }
         }
-        AutomationService.setCurrentInstance(null);
     }
 
     AutomationService.stopRunning();

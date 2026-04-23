@@ -14,6 +14,7 @@ import * as path from 'path';
 import * as os from 'os';
 import { promises as fs } from 'fs';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
+import { emitSessionEvent } from './session/sessionEventLogger.js';
 
 // ✅ [2026-03-27 FIX] Stealth Plugin — 모든 evasion 모듈 명시적 활성화
 // 기본 설정에서 일부 모듈(chrome.csi 등)이 비활성화되어 있을 수 있으므로 명시적으로 설정
@@ -52,6 +53,9 @@ export interface SessionInfo {
     // 앱 종료 전까지 이 계정은 재로그인·재캡차 없이 유지됨
     locked: boolean;
     lockedAt: number; // 잠금 마킹 시각
+    // [v1.6.0] keep-alive 연속 실패 카운터 (locked 세션 단일 실패 로그아웃 차단용)
+    // 3회 연속 리다이렉트/실패 시에만 isLoggedIn=false로 전이
+    consecutiveKeepaliveFails?: number;
 }
 
 /**
@@ -95,6 +99,10 @@ class BrowserSessionManager {
     // ✅ [2026-03-26] isLoggedIn 캐시 TTL
     private readonly LOGIN_CACHE_TTL = 2 * 60 * 60 * 1000; // 2시간
 
+    // Reconnect defense constants
+    private readonly RECONNECT_MAX_RETRIES = 3;
+    private readonly RECONNECT_RETRY_DELAY_MS = 5000;
+
     private constructor() {
         console.log('[BrowserSessionManager] 싱글톤 인스턴스 생성됨');
     }
@@ -106,6 +114,43 @@ class BrowserSessionManager {
     private normalizeProxyUrl(url: string | null | undefined): string | undefined {
         if (!url || url.trim() === '') return undefined;
         return url.trim();
+    }
+
+    /**
+     * Stage 2: Attempt to reconnect a disconnected session.
+     * Retries up to RECONNECT_MAX_RETRIES times with RECONNECT_RETRY_DELAY_MS gap.
+     * Stage 3 functional ping (page.goto about:blank) verifies renderer health after reconnect.
+     * Returns true when the session is confirmed usable, false after all retries fail.
+     */
+    private async attemptReconnect(accountId: string): Promise<boolean> {
+        const session = this.sessions.get(accountId);
+        if (!session) return false;
+
+        for (let attempt = 1; attempt <= this.RECONNECT_MAX_RETRIES; attempt++) {
+            console.log(`[BrowserSessionManager] reconnect attempt ${attempt}/${this.RECONNECT_MAX_RETRIES} for ${accountId.substring(0, 3)}***`);
+
+            // Wait before retrying (skip delay on first attempt)
+            if (attempt > 1) {
+                await new Promise<void>(resolve => setTimeout(resolve, this.RECONNECT_RETRY_DELAY_MS));
+            }
+
+            // Stage 1 re-check: WebSocket gate
+            if (!session.browser.isConnected()) {
+                console.log(`[BrowserSessionManager] WebSocket still disconnected on attempt ${attempt}`);
+                continue;
+            }
+
+            // Stage 3: Page-level functional ping — confirms renderer is alive
+            try {
+                await session.page.goto('about:blank', { timeout: 3000, waitUntil: 'domcontentloaded' });
+                console.log(`[BrowserSessionManager] page ping passed on attempt ${attempt} for ${accountId.substring(0, 3)}***`);
+                return true;
+            } catch {
+                console.log(`[BrowserSessionManager] page ping failed on attempt ${attempt}`);
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -209,35 +254,58 @@ class BrowserSessionManager {
                 const oldProxy = existingSession.proxyUrl ? existingSession.proxyUrl.replace(/:[^:]+@/, ':***@') : '(없음)';
                 const newProxy = currentProxyUrl ? currentProxyUrl.replace(/:[^:]+@/, ':***@') : '(없음)';
                 console.log(`[BrowserSessionManager] 🔄 프록시 변경 감지! ${oldProxy} → ${newProxy}`);
+                emitSessionEvent('proxy_change', accountId, existingSession.createdAt, { oldProxy, newProxy });
                 console.log(`[BrowserSessionManager] 🔄 기존 세션 폐기 후 새 Chrome으로 재시작합니다...`);
                 // ✅ [v1.4.79] Bug 9 — 프록시 변경은 Chrome 재기동 필수이므로 locked라도 force=true
                 await this.closeSession(accountId, true);
                 // fall through → 아래 새 세션 생성으로 진행
             } else {
-                // 브라우저 연결 상태 확인
-                try {
-                    if (existingSession.browser.isConnected()) {
-                        const sessionAge = Date.now() - existingSession.createdAt;
-                        // ✅ [v1.4.78] 잠긴 세션은 수명 체크를 절대 건너뛰고 항상 재사용
-                        if (!existingSession.locked && sessionAge > this.SESSION_MAX_AGE) {
-                            console.log(`[BrowserSessionManager] ⏰ 세션 수명 초과 (${Math.floor(sessionAge / 60000)}분), 재생성...`);
-                            await this.closeSession(accountId, true);
-                        } else {
-                            console.log(`[BrowserSessionManager] ✅ 기존 세션 재사용: ${accountId.substring(0, 3)}*** (수명: ${Math.floor(sessionAge / 60000)}분)`);
-                            existingSession.lastActivity = Date.now();
-                            this.activeAccountId = accountId;
+                // Stage 1: WebSocket gate — fast check
+                const wsConnected = (() => {
+                    try { return existingSession.browser.isConnected(); }
+                    catch { return false; }
+                })();
 
-                            // ✅ [2026-03-26] 발행 후 최소화된 창 자동 복원
-                            await this.restoreWindow(accountId);
+                if (wsConnected) {
+                    const sessionAge = Date.now() - existingSession.createdAt;
+                    // ✅ [v1.4.78] 잠긴 세션은 수명 체크를 절대 건너뛰고 항상 재사용
+                    if (!existingSession.locked && sessionAge > this.SESSION_MAX_AGE) {
+                        console.log(`[BrowserSessionManager] ⏰ 세션 수명 초과 (${Math.floor(sessionAge / 60000)}분), 재생성...`);
+                        await this.closeSession(accountId, true);
+                        this.sessions.delete(accountId);
+                    } else {
+                        console.log(`[BrowserSessionManager] ✅ 기존 세션 재사용: ${accountId.substring(0, 3)}*** (수명: ${Math.floor(sessionAge / 60000)}분)`);
+                        existingSession.lastActivity = Date.now();
+                        this.activeAccountId = accountId;
 
-                            return existingSession;
-                        }
+                        // ✅ [2026-03-26] 발행 후 최소화된 창 자동 복원
+                        await this.restoreWindow(accountId);
+
+                        return existingSession;
                     }
-                } catch {
-                    console.log(`[BrowserSessionManager] ⚠️ 기존 세션 연결 끊김, 재생성...`);
+                } else {
+                    // Stage 2+3: WebSocket disconnected — attempt reconnect before destroying
+                    // Stage 4: locked sessions MUST NOT be deleted without exhausting reconnect
+                    console.log(`[BrowserSessionManager] ⚠️ 세션 연결 끊김, 재연결 시도 중... (locked=${existingSession.locked})`);
+                    const reconnected = await this.attemptReconnect(accountId);
+
+                    if (reconnected) {
+                        console.log(`[BrowserSessionManager] ✅ 재연결 성공: ${accountId.substring(0, 3)}***`);
+                        existingSession.lastActivity = Date.now();
+                        this.activeAccountId = accountId;
+                        await this.restoreWindow(accountId);
+                        return existingSession;
+                    }
+
+                    if (existingSession.locked) {
+                        // Stage 4 guard: locked 재연결 실패 — 강제 삭제 전 경고
+                        console.warn(`[BrowserSessionManager] ⚠️ locked 세션 재연결 실패 — 부득이 재생성 (캡차 재인증 필요)`);
+                    } else {
+                        console.log(`[BrowserSessionManager] ⚠️ 재연결 실패, 세션 재생성...`);
+                    }
+                    // All retries exhausted — drop and recreate
+                    this.sessions.delete(accountId);
                 }
-                // 연결 끊긴/수명 초과 세션 제거
-                this.sessions.delete(accountId);
             }
         }
 
@@ -439,6 +507,17 @@ class BrowserSessionManager {
             const restored = await restoreCookies(page, accountId);
             if (restored) {
                 console.log(`[BrowserSessionManager] 🔄 ${accountId.substring(0, 3)}*** 저장된 쿠키 복원 (앱 재시작 연속성)`);
+                // [v1.6.0] 쿠키 복원 성공 시 isLoggedIn=true 동기화 + auto-lock
+                //   이전: restoreCookies만 호출하고 isLoggedIn=false 유지 → 다음 발행 시 재로그인 강제 유도
+                //   수정: 복원된 쿠키 기준으로 logged-in 상태 가정, ensureServerSession이 실측 검증
+                sessionInfo.isLoggedIn = true;
+                sessionInfo.loginVerifiedAt = Date.now();
+                if (!sessionInfo.locked) {
+                    sessionInfo.locked = true;
+                    sessionInfo.lockedAt = Date.now();
+                    console.log(`[BrowserSessionManager] 🔒 ${accountId.substring(0, 3)}*** 쿠키 복원 기반 auto-lock (앱 종료까지 유지)`);
+                }
+                emitSessionEvent('login', accountId, sessionInfo.createdAt);
             }
         } catch (restoreErr) {
             // 저장된 쿠키 없음 or 복원 실패 — 무시 (loginToNaver에서 수동 로그인 유도)
@@ -447,7 +526,18 @@ class BrowserSessionManager {
         // ✅ [v1.4.78] 첫 세션 생성 시 keep-alive 자동 시작 (싱글톤 타이머)
         this.startKeepalive();
 
+        // Stage 5: Register disconnect event listener for auto-heal
+        browser.on('disconnected', () => {
+            console.log(`[BrowserSessionManager] 🔌 disconnected event for ${accountId.substring(0, 3)}*** — scheduling reconnect`);
+            this.attemptReconnect(accountId).then(ok => {
+                if (!ok) {
+                    console.warn(`[BrowserSessionManager] auto-heal failed for ${accountId.substring(0, 3)}***`);
+                }
+            }).catch(() => {});
+        });
+
         console.log(`[BrowserSessionManager] ✅ 새 세션 생성 완료: ${accountId.substring(0, 3)}***`);
+        emitSessionEvent('create', accountId, sessionInfo.createdAt);
 
         // ✅ [2026-04-01 FIX] 새 세션 생성 직후 CDP로 창 최대화 강제
         // --start-maximized가 모든 환경에서 작동하지 않을 수 있으므로 CDP로 이중 보장
@@ -490,13 +580,14 @@ class BrowserSessionManager {
                 session.lockedAt = Date.now();
                 console.log(`[BrowserSessionManager] 🔒 ${accountId.substring(0, 3)}*** 세션 잠금 (앱 종료까지 유지)`);
             }
-            // ✅ [v1.4.79] Bug 7 — 명시적 로그아웃 시 locked 해제 (좀비 잠금 방지)
+            // [v1.6.0] locked 자동 해제 제거 — isLoggedIn=false는 일시적 신호일 수 있음
+            // (keep-alive 네트워크 일시 장애, ensureServerSession 실패 등)
+            // 잠금은 오직 unlockSession() 명시 호출 또는 앱 종료로만 해제
             if (!isLoggedIn && session.locked) {
-                session.locked = false;
-                session.lockedAt = 0;
-                console.log(`[BrowserSessionManager] 🔓 ${accountId.substring(0, 3)}*** 로그아웃 감지 — 잠금 자동 해제`);
+                console.log(`[BrowserSessionManager] ⏳ ${accountId.substring(0, 3)}*** isLoggedIn=false 감지 — locked 유지 (재로그인 대기)`);
             }
             console.log(`[BrowserSessionManager] 로그인 상태 업데이트: ${accountId.substring(0, 3)}*** → ${isLoggedIn ? '✅ 로그인됨' : '❌ 로그아웃'}`);
+            emitSessionEvent(isLoggedIn ? 'login' : 'logout', accountId, session.createdAt);
         }
     }
 
@@ -644,7 +735,8 @@ class BrowserSessionManager {
                 console.warn(`[BrowserSessionManager] 🚨 ${accountId.substring(0, 3)}*** 발행 직전 서버 검증 실패 — 재로그인 필요`);
                 session.loginVerifiedAt = 0;
                 session.isLoggedIn = false;
-                session.locked = false; // 좀비 상태 방지
+                // [v1.6.0] locked=false 제거 — 잠긴 세션은 앱 종료까지 파괴 금지 계약 유지
+                // 재로그인은 호출부에서 기존 브라우저 그대로 수행해야 함 (새 창/탭 금지)
                 return false;
             }
         } catch (err) {
@@ -724,6 +816,7 @@ class BrowserSessionManager {
         try {
             await session.browser.close();
             console.log(`[BrowserSessionManager] 🔚 세션 종료: ${accountId.substring(0, 3)}***`);
+            emitSessionEvent('close', accountId, session.createdAt);
         } catch (e) {
             console.log(`[BrowserSessionManager] ⚠️ 세션 종료 중 오류: ${(e as Error).message}`);
         }
@@ -862,14 +955,45 @@ class BrowserSessionManager {
             const ageMin = Math.floor((Date.now() - session.createdAt) / 60000);
 
             if (redirected) {
-                // 🚨 서버가 세션 만료시킴 → 잠금이어도 재검증 필요 상태로 마킹
-                console.warn(`[BrowserSessionManager] 🚨 ${accountId.substring(0, 3)}*** 서버 세션 만료 감지 (로그인 페이지 리다이렉트)`);
+                // [v1.6.0] locked 세션은 일시적 네트워크/AuthGR 일시 차단으로 리다이렉트 나올 수 있음
+                //   → 단일 리다이렉트로 isLoggedIn=false 전이 금지, 3회 연속 시에만 전이
+                //   → 쿠키 복원 1회 시도로 서버 TTL 회복을 노려봄
+                const fails = (session.consecutiveKeepaliveFails ?? 0) + 1;
+                session.consecutiveKeepaliveFails = fails;
+                console.warn(`[BrowserSessionManager] 🚨 ${accountId.substring(0, 3)}*** 서버 세션 만료 감지 (로그인 페이지 리다이렉트, ${fails}/3)`);
+                emitSessionEvent('expire', accountId, session.createdAt);
                 session.loginVerifiedAt = 0;
-                session.isLoggedIn = false; // Bug 6 — 명시적 false 동기화
+
+                if (session.locked) {
+                    // locked 세션: 즉시 쿠키 복원 시도로 TTL 회복
+                    try {
+                        const { restoreCookies } = await import('./sessionPersistence.js');
+                        const restored = await restoreCookies(session.page, accountId);
+                        if (restored) {
+                            console.log(`[BrowserSessionManager] ✅ ${accountId.substring(0, 3)}*** 리다이렉트 감지 → 쿠키 복원 성공 (locked 유지)`);
+                            session.loginVerifiedAt = Date.now();
+                            session.isLoggedIn = true;
+                            session.consecutiveKeepaliveFails = 0;
+                            emitSessionEvent('reconnect_ok', accountId, session.createdAt);
+                            return;
+                        }
+                    } catch (restoreErr) {
+                        console.warn(`[BrowserSessionManager] ⚠️ 쿠키 복원 예외 (무시): ${(restoreErr as Error).message}`);
+                    }
+                    if (fails < 3) {
+                        console.log(`[BrowserSessionManager] ⏳ ${accountId.substring(0, 3)}*** locked 세션 — isLoggedIn 유지 (연속 실패 ${fails}/3)`);
+                        return;
+                    }
+                }
+
+                session.isLoggedIn = false; // 3회 연속 실패 또는 unlocked 세션만 로그아웃 전이
                 return;
             }
 
+            // 성공 시 연속 실패 카운터 리셋
+            session.consecutiveKeepaliveFails = 0;
             console.log(`[BrowserSessionManager] 💓 ${accountId.substring(0, 3)}*** keep-alive OK (${elapsed}ms, 수명 ${ageMin}분, ping=${new URL(pingUrl).hostname})`);
+            emitSessionEvent('keepalive_ok', accountId, session.createdAt, { elapsedMs: elapsed, ageMin, pingHost: new URL(pingUrl).hostname });
 
             // ✅ 쿠키 저장 (앱 재시작 복원용)
             try {
@@ -880,6 +1004,7 @@ class BrowserSessionManager {
             }
         } catch (err) {
             console.warn(`[BrowserSessionManager] ⚠️ ${accountId.substring(0, 3)}*** keep-alive 실패: ${(err as Error).message}`);
+            emitSessionEvent('keepalive_fail', accountId, session.createdAt, { error: (err as Error).message });
             // ✅ [v1.4.79] Bug D1 — 잠긴 세션은 절대 closeSession 호출 금지
             //    복원 시도 + 반환값 확인 (Bug 4) + isLoggedIn 동기화 (Bug 6)
             if (session.locked && session.isLoggedIn) {
@@ -891,10 +1016,12 @@ class BrowserSessionManager {
                         session.loginVerifiedAt = Date.now();
                         session.isLoggedIn = true; // ✅ Bug 6 — 동기화
                         console.log(`[BrowserSessionManager] ✅ ${accountId.substring(0, 3)}*** 쿠키 복원 성공`);
+                        emitSessionEvent('reconnect_ok', accountId, session.createdAt);
                     } else {
                         // ✅ Bug 4 — 반환값이 false면 실제로 복원 안 됨 → 재검증 필요
                         session.loginVerifiedAt = 0;
                         console.warn(`[BrowserSessionManager] ⚠️ ${accountId.substring(0, 3)}*** 쿠키 복원 빈 결과 — 재발행 시 재로그인 필요`);
+                        emitSessionEvent('reconnect_fail', accountId, session.createdAt, { reason: 'empty_restore' });
                     }
                 } catch (restoreErr) {
                     console.warn(`[BrowserSessionManager] ⚠️ 쿠키 복원 실패: ${(restoreErr as Error).message}`);
@@ -934,6 +1061,7 @@ class BrowserSessionManager {
         this.activeAccountId = null;
 
         console.log(`[BrowserSessionManager] ✅ 모든 세션 종료 완료`);
+        emitSessionEvent('close_all', 'all', 0);
     }
 
     /**
