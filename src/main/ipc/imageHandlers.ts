@@ -66,6 +66,88 @@ export function registerImageHandlers(ctx: IpcContext): void {
         }
     });
 
+    // ✅ [v1.4.98] 스타일 미리보기 — 캐시 조회
+    safeHandle('style-preview:getCache', async () => {
+        try {
+            const dir = path.join(app.getPath('userData'), 'style-previews');
+            if (!fs.existsSync(dir)) return { success: true, cache: {} };
+            const files = fs.readdirSync(dir);
+            const cache: Record<string, string> = {};
+            for (const file of files) {
+                const match = file.match(/^(.+?)\.(png|jpg|jpeg|webp)$/i);
+                if (match) {
+                    cache[match[1]] = path.join(dir, file);
+                }
+            }
+            return { success: true, cache };
+        } catch (err: any) {
+            return { success: false, cache: {} };
+        }
+    });
+
+    // ✅ [v1.4.98] 스타일 미리보기 — 생성 (캐시 우선, 없으면 Gemini API로 1장 생성 후 저장)
+    safeHandle('style-preview:generate', async (_event, options: { style: string; engine?: string }) => {
+        try {
+            const style = options.style || 'realistic';
+            const dir = path.join(app.getPath('userData'), 'style-previews');
+            await fsp.mkdir(dir, { recursive: true });
+
+            // 캐시 확인
+            const existingFiles = fs.existsSync(dir) ? fs.readdirSync(dir) : [];
+            const existing = existingFiles.find(f => f.startsWith(`${style}.`));
+            if (existing) {
+                return { success: true, path: path.join(dir, existing) };
+            }
+
+            // 스타일별 샘플 프롬프트 (한국 가정 환경 중립)
+            const samplePrompts: Record<string, string> = {
+                realistic: 'Professional photography of a cozy Korean home kitchen with morning sunlight, 8K, cinematic',
+                vintage: 'Vintage retro-style photograph of a Korean home living room, warm sepia tones, film grain, 1970s aesthetic',
+                stickman: 'Simple cute stick figure character in a kitchen, minimal line art, white background, friendly expression',
+                roundy: 'Cute rounded 3D cartoon character in Korean home, soft pastel colors, chubby proportions, Pixar style',
+                '2d': 'Flat 2D illustration of Korean home interior, bold outlines, cel-shaded, minimalist colors, vector art style',
+                disney: 'Disney animation style Korean family home, warm magical lighting, expressive characters, feature film quality',
+            };
+            const prompt = samplePrompts[style] || samplePrompts.realistic;
+
+            // nanoBananaPro로 빠른 1장 생성 (Gemini 2.0 Flash 무료 티어 사용)
+            const { generateWithNanoBananaPro } = await import('../../image/nanoBananaProGenerator.js');
+            const { getConfigSync } = await import('../../configManager.js');
+            const config = getConfigSync();
+            const apiKey = config.geminiApiKey || process.env.GEMINI_API_KEY;
+            if (!apiKey) {
+                return { success: false, error: 'Gemini API 키 미설정 — 환경설정에서 Gemini API 키 입력 필요' };
+            }
+
+            const result = await generateWithNanoBananaPro(
+                [{ heading: `style-preview-${style}`, englishPrompt: prompt } as any],
+                `style-preview-${style}`,
+                `preview-${Date.now()}`,
+                false,
+                apiKey,
+                false,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+            );
+
+            if (!result || result.length === 0 || !result[0].filePath) {
+                return { success: false, error: '이미지 생성 결과 없음' };
+            }
+
+            // 결과를 style-previews 폴더로 복사
+            const srcPath = result[0].filePath;
+            const ext = path.extname(srcPath) || '.png';
+            const destPath = path.join(dir, `${style}${ext}`);
+            await fsp.copyFile(srcPath, destPath);
+            return { success: true, path: destPath };
+        } catch (err: any) {
+            console.error('[style-preview] 생성 실패:', err.message);
+            return { success: false, error: err.message || '알 수 없는 오류' };
+        }
+    });
+
     // 저장된 이미지 경로 가져오기
     safeHandle('images:getSavedPath', async () => {
         return path.join(os.homedir(), 'naver-blog-automation', 'images');

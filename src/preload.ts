@@ -932,6 +932,12 @@ contextBridge.exposeInMainWorld('api', {
   switchImageFxGoogleAccount: (): Promise<{ success: boolean; userName?: string; message: string }> =>
     ipcRenderer.invoke('imagefx:switchGoogleAccount'),
 
+  // ✅ [v1.4.98] 스타일 미리보기 IPC — 모달 스타일 선택 UI용
+  generateStylePreview: (options: { style: string; engine?: string }): Promise<{ success: boolean; path?: string; error?: string }> =>
+    ipcRenderer.invoke('style-preview:generate', options),
+  getStylePreviewCache: (): Promise<{ success: boolean; cache: Record<string, string> }> =>
+    ipcRenderer.invoke('style-preview:getCache'),
+
 });
 
 // ✅ electronAPI로도 동일한 API 노출 (renderer.ts 호환성)
