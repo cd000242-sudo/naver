@@ -279,13 +279,15 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     return [];
   }
 
-  // ✅ [2026-03-03] 쇼핑커넥트 Gemini 전용 가드
-  // 쇼핑커넥트에서는 나노바나나프로/2(Gemini)만 제품 이미지를 정확히 재현 가능
-  // 다른 엔진(DALL-E/Leonardo/DeepInfra)은 제품이 변형되므로 수집 이미지 그대로 사용
-  if (options.isShoppingConnect && normalizedProvider !== 'nano-banana-pro') {
+  // ✅ [v1.6.3] 쇼핑커넥트 AI 엔진 화이트리스트
+  // 쇼핑커넥트에서는 img2img 지원 엔진만 제품 이미지를 정확히 재현 가능:
+  //   - nano-banana-pro (Gemini img2img, 기본 gemini-3-1-flash = 나노바나나2)
+  //   - openai-image (gpt-image-2 = 덕트테이프, image 파라미터로 참조 이미지 주입)
+  // 그 외 엔진(Leonardo/DeepInfra/ImageFX 등)은 제품이 변형되므로 수집 이미지 그대로 사용
+  const SC_IMG2IMG_ENGINES = ['nano-banana-pro', 'openai-image'];
+  if (options.isShoppingConnect && !SC_IMG2IMG_ENGINES.includes(normalizedProvider)) {
     console.log(`[이미지생성] 🛒 쇼핑커넥트 모드: ${displayName}는 제품 재현 불가 → 수집 이미지 직접 사용`);
     const collectedResults = await convertCollectedImagesToResults(options.collectedImages || crawledImages, items, options.postTitle, options.postId);
-    // ✅ [2026-03-16 FIX] 수집 이미지에도 텍스트 오버레이 적용 (쇼핑커넥트 모드)
     return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(collectedResults, 'collected', options.postTitle, options.thumbnailTextInclude, items), items);
   }
 

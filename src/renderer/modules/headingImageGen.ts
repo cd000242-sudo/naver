@@ -51,6 +51,7 @@ declare function isShoppingConnectModeActive(): boolean;
 // behind the data-based detection and the nano-banana-pro whitelist.
 declare function shouldBlockEngineForShoppingConnect(engine: string): boolean;
 declare function getShoppingConnectImagePool(): any[];
+declare function isShoppingConnectForCurrentPost(): boolean;
 declare function searchNaverImage(query: string): Promise<string>;
 declare function showImagesProgress(progress: number, title: string, subtitle: string): void;
 declare function displayGeneratedImages(images: any[]): void;
@@ -1240,14 +1241,20 @@ export function initHeadingImageGeneration(): void {
 
             let imageUrl: string;
 
-            // Shopping-connect guard: crawled posts must reuse collected product
-            // images; non-Gemini engines would fabricate the product and break
-            // the review. Route through generateImagesWithCostSafety with the
-            // isShoppingConnect flag forced so main's imageGenerator.ts guard
-            // fires and applies text overlay / thumbnail flags consistently.
-            if (shouldBlockEngineForShoppingConnect(imageSource)) {
-              appendLog(`  🛒 쇼핑커넥트: 수집 이미지 직접 사용 (${imageSource} 차단, 오버레이 적용)`, 'images-log-output');
-              console.log(`[ImageGen] 🛒 쇼핑커넥트 가드 발동 → ${imageSource} 차단, 메인 프로세스로 위임`);
+            // Shopping-connect guard (v1.6.3 재설계):
+            //   쇼핑 커넥트 모드일 때는 엔진 허용 여부와 무관하게 이 블록으로 일원화.
+            //   - 허용 엔진(nano-banana-pro, openai-image): collectedImages를 img2img 참조로 주입
+            //   - 차단 엔진(imagefx, leonardo, deepinfra 등): provider는 유지하되 main guard에서 수집이미지로 전환
+            //   둘 다 isShoppingConnect: true + collectedImages 주입으로 통일.
+            if (isShoppingConnectForCurrentPost()) {
+              const isBlocked = shouldBlockEngineForShoppingConnect(imageSource);
+              if (isBlocked) {
+                appendLog(`  🛒 쇼핑커넥트: 수집 이미지 직접 사용 (${imageSource} 차단, 오버레이 적용)`, 'images-log-output');
+                console.log(`[ImageGen] 🛒 쇼핑커넥트 가드 발동 → ${imageSource} 차단, 메인 프로세스로 위임`);
+              } else {
+                appendLog(`  🛒 쇼핑커넥트 AI(${imageSource}): 수집 이미지를 img2img 참조로 주입`, 'images-log-output');
+                console.log(`[ImageGen] 🛒 쇼핑커넥트 AI 모드 → ${imageSource} + collectedImages(img2img)`);
+              }
               const scPool = getShoppingConnectImagePool();
               const thumbnailTextInclude = localStorage.getItem('thumbnailTextInclude') === 'true';
               const imageResult = await generateImagesWithCostSafety({
@@ -1268,7 +1275,7 @@ export function initHeadingImageGeneration(): void {
               if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
                 imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
               } else {
-                throw new Error(imageResult.message || '🛒 쇼핑커넥트: 수집된 제품 이미지가 없습니다. 먼저 "쇼핑몰 이미지 수집" 버튼으로 제품 이미지를 크롤링하거나, 이미지 엔진을 "나노 바나나 프로"로 변경하세요.');
+                throw new Error(imageResult.message || '🛒 쇼핑커넥트: 수집된 제품 이미지가 없습니다. 먼저 "쇼핑몰 이미지 수집" 버튼으로 제품 이미지를 크롤링하세요.');
               }
             } else if (imageSource === 'pollinations' || imageSource === 'nano-banana-pro') {
               // ✅ 선택된 소스(Pollinations 또는 Nano Banana Pro) 사용
@@ -4317,12 +4324,16 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
     const thumbnailTextChecked = (document.getElementById('thumbnail-text-option') as HTMLInputElement)?.checked ?? false;
     const allowTextForRegen = headingIndex === 0 && thumbnailTextChecked;
 
-    // Shopping-connect guard (individual regeneration): delegate to main via
-    // generateImagesWithCostSafety with forced flags so overlay/thumbnail
-    // processing runs identically to the batch path.
-    if (shouldBlockEngineForShoppingConnect(imageSource)) {
-      appendLog(`🛒 쇼핑커넥트: "${resolvedHeadingTitle}" → 수집 이미지 재사용 (${imageSource} 차단, 오버레이 적용)`, 'images-log-output');
-      console.log(`[ImageGen] 🛒 쇼핑커넥트 가드 (재생성) 발동 → ${imageSource} 차단`);
+    // Shopping-connect guard (재생성, v1.6.3 재설계):
+    //   쇼핑 커넥트 모드일 때는 엔진 허용 여부와 무관하게 이 블록으로 일원화.
+    //   허용 엔진(nano-banana-pro, openai-image)은 collectedImages를 img2img 참조로 주입.
+    if (isShoppingConnectForCurrentPost()) {
+      const isBlocked = shouldBlockEngineForShoppingConnect(imageSource);
+      if (isBlocked) {
+        appendLog(`🛒 쇼핑커넥트: "${resolvedHeadingTitle}" → 수집 이미지 재사용 (${imageSource} 차단)`, 'images-log-output');
+      } else {
+        appendLog(`🛒 쇼핑커넥트 AI(${imageSource}) 재생성: img2img 참조 주입`, 'images-log-output');
+      }
       const scPool = getShoppingConnectImagePool();
       const thumbnailTextInclude = localStorage.getItem('thumbnailTextInclude') === 'true';
       const imageResult = await generateImagesWithCostSafety({
@@ -4342,7 +4353,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
         imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
       } else {
-        throw new Error(imageResult.message || '🛒 쇼핑커넥트: 수집된 제품 이미지가 없습니다. 먼저 "쇼핑몰 이미지 수집" 버튼으로 제품 이미지를 크롤링하거나, 이미지 엔진을 "나노 바나나 프로"로 변경하세요.');
+        throw new Error(imageResult.message || '🛒 쇼핑커넥트: 수집된 제품 이미지가 없습니다. 먼저 "쇼핑몰 이미지 수집" 버튼으로 제품 이미지를 크롤링하세요.');
       }
     } else if (imageSource === 'pollinations' || imageSource === 'nano-banana-pro') {
       imageUrl = await generateNanoBananaProImage(finalPrompt);
