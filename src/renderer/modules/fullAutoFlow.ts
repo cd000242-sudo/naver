@@ -1911,7 +1911,15 @@ export async function executeFullAutoAutomation(formData: any): Promise<void> {
     appendLog('🚀 풀오토 자동화를 시작합니다!');
 
     // 1단계: 콘텐츠 생성 (structured content)
-    const structuredContent = await generateFullAutoContent(formData);
+    // ✅ [v1.6.5 CRITICAL] handleFullAutoPublish에서 이미 생성한 콘텐츠 재사용 (중복 생성 방지)
+    let structuredContent: any;
+    if (formData._contentAlreadyGenerated && formData.structuredContent && (formData.structuredContent.headings?.length > 0 || formData.structuredContent.bodyPlain)) {
+      appendLog('♻️ 이미 생성된 콘텐츠 재사용 (중복 생성 방지)');
+      console.log('[FullAuto] ♻️ formData.structuredContent 재사용 — generateFullAutoContent 스킵');
+      structuredContent = formData.structuredContent;
+    } else {
+      structuredContent = await generateFullAutoContent(formData);
+    }
     if (!structuredContent) {
       throw new Error('콘텐츠 생성에 실패했습니다.');
     }
@@ -1940,7 +1948,17 @@ export async function executeFullAutoAutomation(formData: any): Promise<void> {
       console.log(`[FullAuto] ✅ 크롤링 시 수집한 이미지 ${structuredContent.collectedImages.length}장을 이미지 생성에 전달`);
     }
 
-    const generatedImages = await generateImagesForContent(structuredContent, formData);
+    // ✅ [v1.6.5 CRITICAL] handleFullAutoPublish에서 이미 생성된 이미지 재사용 (중복 생성 방지)
+    //   기존 버그: publishingHandlers L514-903이 이미지 생성 → executeFullAutoFlow에서 또 생성 → 2회 중복
+    //   수정: formData.imageManagementImages에 있으면 재사용, 없으면 신규 생성
+    let generatedImages: any[] = [];
+    if (Array.isArray(formData.imageManagementImages) && formData.imageManagementImages.length > 0) {
+      appendLog(`♻️ 이미 생성된 이미지 ${formData.imageManagementImages.length}장 재사용 (중복 생성 방지)`);
+      console.log(`[FullAuto] ♻️ formData.imageManagementImages 재사용 — generateImagesForContent 스킵`);
+      generatedImages = [...formData.imageManagementImages];
+    } else {
+      generatedImages = await generateImagesForContent(structuredContent, formData);
+    }
     updateProgress(70, '이미지 생성 완료');
     showUnifiedProgress(70, '이미지 생성 완료', '소제목에 맞는 이미지가 모두 생성되었습니다.');
 

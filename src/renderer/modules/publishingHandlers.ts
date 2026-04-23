@@ -858,6 +858,18 @@ export async function handleFullAutoPublish(): Promise<void> {
         // 전역 변수 설정 (executeUnifiedAutomation에서 사용)
         (window as any).generatedImages = generatedImgs;
 
+        // ✅ [v1.6.5 CRITICAL] formData.imageManagementImages에 주입 → executeFullAutoFlow 재생성 차단
+        //   기존 버그: handleFullAutoPublish가 이미지 생성 후 executeUnifiedAutomation → executeFullAutoFlow 호출
+        //              → executeFullAutoFlow가 L1943 generateImagesForContent 조건 없이 호출 → 이미지 배치 2회 생성
+        //   수정: formData에 주입해두면 executeFullAutoFlow의 재생성 guard가 스킵 판정
+        (formData as any).imageManagementImages = generatedImgs;
+        // 콘텐츠 재생성도 방지 — structuredContent가 이미 있음을 명시
+        if (structuredContent) {
+          (formData as any).structuredContent = structuredContent;
+          (formData as any)._contentAlreadyGenerated = true;
+        }
+        console.log(`[FullAutoPublish] 🔒 formData.imageManagementImages ${generatedImgs.length}장 주입 — executeFullAutoFlow 재생성 차단`);
+
         // ✅ [2026-02-12 P1 FIX #23] ImageManager 동기화 → syncGlobal 호출
         if (typeof ImageManager !== 'undefined') {
           ImageManager.clear();
