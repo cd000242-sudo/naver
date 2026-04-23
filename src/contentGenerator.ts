@@ -3169,6 +3169,27 @@ function evaluateTitleQuality(title: string, keyword: string, mode: PromptMode, 
     }
   }
 
+  // ✅ [v1.8.1 LDF Phase 2] 홈판 모드 전용 CTR 예측 점수 결합 (0-100 → ±20점 가중)
+  //   ctrCombat.scoreTitleForHomefeed는 독립적인 홈판 특화 채점기:
+  //     - 골든존 28~35자, 숫자, 감정어, AI 클리셰 감지, 카테고리 앵커
+  //   기존 감점/보너스 시스템과 보완 관계 (중복 체크 감안 가중치 낮게)
+  if (mode === 'homefeed') {
+    try {
+      const { scoreTitleForHomefeed } = require('./content/ctrCombat.js');
+      const ctrResult = scoreTitleForHomefeed(t, categoryHint);
+      const ctrBonus = Math.round((ctrResult.score - 50) * 0.3); // 50점 기준으로 ±15점 가중
+      score += ctrBonus;
+      if (ctrBonus !== 0) {
+        console.log(`[TitleQuality] 🎯 CTR 예측 ${ctrResult.score}점 → ${ctrBonus > 0 ? '+' : ''}${ctrBonus}점 가중`);
+        if (ctrResult.suggestions.length > 0) {
+          console.log(`[TitleQuality] 💡 CTR 제안: ${ctrResult.suggestions.slice(0, 2).join(' | ')}`);
+        }
+      }
+    } catch (err) {
+      // ctrCombat 로드 실패 시 기존 로직만 사용
+    }
+  }
+
   return { score: Math.max(0, Math.min(100, score)), issues };
 }
 
@@ -4666,7 +4687,9 @@ ${source.customPrompt.trim()}
       toneStyle,
       undefined,
       (source as any).hookHint,
-      buildRecentWinnersBlock(source)
+      buildRecentWinnersBlock(source),
+      undefined, // bloggerIdentity: 호출자에서 주입 가능 (v1.8.0 LDF)
+      (source as any).primaryKeyword || (source as any).keywords?.[0], // v1.8.1 LDF Phase 2: CTR 훅 매개
     );
   }
 

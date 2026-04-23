@@ -936,6 +936,7 @@ export function buildFullPrompt(
   hookHint?: string,  // ✅ [2026-04-20 SPEC-HOMEFEED-100 W2] 사용자 후킹 1문장 (선택)
   recentWinnersBlock?: string,  // ✅ [2026-04-20 SPEC-HOMEFEED-100 W4] few-shot 피드백 루프
   bloggerIdentity?: BloggerIdentity,  // ✅ [v1.8.0 LDF] 언어 DNA 페르소나
+  primaryKeyword?: string,  // ✅ [v1.8.1 LDF Phase 2] CTR 훅 라이브러리 매개
 ): string {
   // 1. 기본 2축 분리 프롬프트
   const basePrompt = buildSystemPromptFromHint(mode, categoryHint);
@@ -947,14 +948,24 @@ export function buildFullPrompt(
   const modeVoiceGuide = getModeVoiceGuide(mode);
 
   // ✅ [v1.8.0 LDF] Blogger Identity Core — 언어 DNA 페르소나
-  //   주입 위치: 프롬프트 최상단 prefix (primacy effect + Anthropic 캐싱 적중 영역)
-  //   bloggerIdentity 미지정 시 DEFAULT_IDENTITY (안전한 홈판 친화 기본값)
   const identityBlock = buildIdentityBlock(bloggerIdentity);
+
+  // ✅ [v1.8.1 LDF Phase 2] CTR Combat Layer — 홈판 모드 전용 훅 라이브러리 + 썸네일 공식
+  //   SEO 모드에는 주입 안 함 (SEO는 정보체 우선, 감정 훅 역효과)
+  let ctrCombatBlock = '';
+  if (mode === 'homefeed') {
+    try {
+      const { buildHomefeedHookGuide, buildThumbnailFormula } = require('./content/ctrCombat.js');
+      ctrCombatBlock = `${buildHomefeedHookGuide(categoryHint, primaryKeyword)}\n${buildThumbnailFormula(categoryHint)}`;
+    } catch {
+      // require 실패 무시 (TS 빌드 이전 경로)
+    }
+  }
 
   // ✅ [v1.4.35] 글톤 prompt를 system 시작(prefix)에도 추가 — primacy effect로 강제력 증대
   const tonePrefix = tonePrompt
-    ? `${identityBlock}${modeVoiceGuide}${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [BLOGGER IDENTITY] + [MODE VOICE] + [STYLE OVERRIDE]는 모든 규칙보다 최우선입니다. 100% 준수.\n═══════════════════════════════════════════\n\n`
-    : `${identityBlock}${modeVoiceGuide}`;
+    ? `${identityBlock}${ctrCombatBlock}${modeVoiceGuide}${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [BLOGGER IDENTITY] + [HOMEFEED HOOK] + [MODE VOICE] + [STYLE OVERRIDE]는 모든 규칙보다 최우선입니다. 100% 준수.\n═══════════════════════════════════════════\n\n`
+    : `${identityBlock}${ctrCombatBlock}${modeVoiceGuide}`;
   let finalPrompt = `${tonePrefix}${basePrompt}`;
 
   // ✅ [v1.4.18] structureDirective를 system에서 제거 — 매 호출 random 변동 → 캐시 무효화 원인
