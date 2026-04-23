@@ -200,6 +200,7 @@ async function ensureFlowBrowserPage(): Promise<Page> {
     const page = ctx.pages()[0] || await ctx.newPage();
     await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.waitForTimeout(2500);
+    await dismissCookieBanner(page); // ✅ [v1.4.95] 쿠키 배너 선제 차단
 
     const loggedIn = await isLoggedInToFlow(page);
     if (loggedIn) {
@@ -250,6 +251,41 @@ async function ensureFlowBrowserPage(): Promise<Page> {
     cachedContext = ctx;
     cachedPage = page;
     return page;
+}
+
+// ─── 쿠키 동의 배너 자동 닫기 ────────────────────────────────
+//   ✅ [v1.4.95] labs.google/fx 첫 진입 시 쿠키 배너가 전송 버튼을 가려서 클릭 차단
+//     Playwright 로그: "glue-cookie-notification-bar subtree intercepts pointer events"
+//     해결: "동의함" 또는 "나중에" 버튼을 능동적으로 클릭해서 배너 제거
+async function dismissCookieBanner(page: Page): Promise<void> {
+    try {
+        // 다국어 + 버튼 텍스트 다양한 변형 대응
+        const patterns = [
+            /^(동의함|동의|Agree|Accept all|Accept|同意する|同意)$/,
+            /^(나중에|No thanks|Reject all|Decline|拒否)$/,
+        ];
+        for (const pat of patterns) {
+            const btn = page.locator('button').filter({ hasText: pat }).first();
+            if (await btn.count() > 0) {
+                const visible = await btn.isVisible().catch(() => false);
+                if (visible) {
+                    await btn.click({ timeout: 3000 });
+                    flowLog(`[Flow] 🍪 쿠키 배너 닫음 (${pat})`);
+                    await page.waitForTimeout(600);
+                    return;
+                }
+            }
+        }
+        // CSS 기반 폴백 — aria-labelledby 힌트
+        const bannerBtn = page.locator('[aria-labelledby*="cookie-notification-bar"] button').first();
+        if (await bannerBtn.count() > 0 && await bannerBtn.isVisible().catch(() => false)) {
+            await bannerBtn.click({ timeout: 3000 });
+            flowLog('[Flow] 🍪 쿠키 배너 닫음 (CSS 폴백)');
+            await page.waitForTimeout(600);
+        }
+    } catch (err) {
+        flowWarn(`[Flow] 쿠키 배너 닫기 실패 (무시): ${(err as Error).message.substring(0, 80)}`);
+    }
 }
 
 // ─── Flow 로그인 상태 체크 (labs.google 세션 API 활용) ────────────
@@ -325,6 +361,7 @@ async function ensureFlowProject(page: Page): Promise<void> {
     sendImageLog('🆕 [Flow] 프로젝트 목록 페이지 접속 중...');
     await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 60000 });
     await page.waitForTimeout(2500);
+    await dismissCookieBanner(page); // ✅ [v1.4.95] 쿠키 배너 선제 차단
     flowLog(`[Flow][1/3] 접속 완료 — URL: ${page.url()}`);
 
     // "새 프로젝트" 버튼 찾기 — 여러 셀렉터 시도
@@ -365,6 +402,9 @@ async function ensureFlowProject(page: Page): Promise<void> {
 async function typePromptAndSubmit(page: Page, prompt: string): Promise<void> {
     flowLog(`[Flow][2/3] 프롬프트 입력 시작 (길이: ${prompt.length})`);
     sendImageLog(`✏️ [Flow] 프롬프트 입력 시작`);
+
+    // ✅ [v1.4.95] 프롬프트 입력 전 쿠키 배너 재확인 — 프로젝트 페이지에도 남을 수 있음
+    await dismissCookieBanner(page);
 
     // 기존 프롬프트 지우기 (close 버튼 존재 시)
     try {
@@ -408,7 +448,23 @@ async function typePromptAndSubmit(page: Page, prompt: string): Promise<void> {
         await saveDebugScreenshot(page, 'no-submit-btn');
         throw new Error('FLOW_SUBMIT_BUTTON_NOT_FOUND:전송 버튼(arrow_forward)을 10초 내 찾지 못함. 스크린샷 저장됨.');
     }
-    await submitBtn.click();
+
+    // ✅ [v1.4.95] 일반 클릭 → 실패 시 force:true + JS 클릭 순차 폴백
+    //   이전 버전 로그: 쿠키 배너가 전송 버튼을 가려 pointer events intercepts로 30초 타임아웃
+    try {
+        await submitBtn.click({ timeout: 10000 });
+    } catch (err) {
+        flowWarn(`[Flow][2/3] 일반 클릭 실패 → force:true 재시도: ${(err as Error).message.substring(0, 80)}`);
+        try {
+            await submitBtn.click({ force: true, timeout: 5000 });
+        } catch (err2) {
+            flowWarn(`[Flow][2/3] force 클릭도 실패 → JS dispatchEvent 폴백`);
+            await submitBtn.evaluate((el: HTMLElement) => {
+                el.click();
+                el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+            });
+        }
+    }
     flowLog('[Flow][2/3] ✅ 전송 버튼 클릭됨');
     sendImageLog('🚀 [Flow] 전송 완료 — 이미지 생성 대기');
 }
