@@ -182,11 +182,22 @@ async function launchWithStealthFallback(profileDir: string, visible: boolean): 
 //   ✅ [v1.4.93] visible→headless 재시작 제거 (SingletonLock 경합 원인)
 //     visible 유지 + off-screen 이동으로 화면 보이지 않게 처리
 async function ensureFlowBrowserPage(): Promise<Page> {
-    // 캐시된 페이지 재사용 (닫혀있지 않으면)
+    // ✅ [v1.4.96] 캐시 유효성 3중 체크: page + context + 실제 동작 여부
     if (cachedPage && cachedContext) {
         try {
-            if (!cachedPage.isClosed()) return cachedPage;
-        } catch { /* stale reference, 재생성 */ }
+            const closed = cachedPage.isClosed();
+            if (!closed) {
+                // 실제 동작 검증: title 가져오기 시도 (컨텍스트 죽으면 throw)
+                await cachedPage.title();
+                return cachedPage;
+            }
+        } catch (err) {
+            flowWarn(`[Flow] 캐시 페이지 stale — 재생성: ${(err as Error).message.substring(0, 80)}`);
+            try { await cachedContext?.close().catch(() => {}); } catch { /* ignore */ }
+            cachedContext = null;
+            cachedPage = null;
+            cachedProjectUrl = null;
+        }
     }
 
     const profileDir = getFlowProfileDir();
@@ -478,17 +489,21 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
 
     while (Date.now() - start < timeoutMs) {
         const detected = await page.evaluate(() => {
-            // Flow가 생성한 이미지 후보 — 3가지 판별 조건 OR
+            // Flow가 생성한 이미지 후보 — 3가지 식별 조건 OR + 완전 로드 필수 AND
+            // ✅ [v1.4.96] naturalWidth/Height >= 200 + complete === true 필수 (0x0 placeholder 제외)
             const imgs = Array.from(document.querySelectorAll('img')) as HTMLImageElement[];
             const matches = imgs.filter(img => {
                 const alt = img.alt || '';
                 const src = img.src || '';
                 const aria = img.getAttribute('aria-label') || '';
-                // 조건 1: alt가 명시적으로 생성 이미지 표기
+
+                // ✅ 필수 전제: 이미지가 완전히 로드된 실제 크기 이미지여야 함
+                const fullyLoaded = img.complete && img.naturalWidth >= 200 && img.naturalHeight >= 200;
+                if (!fullyLoaded) return false;
+
+                // 이하 3가지 식별 조건 OR (완전 로드된 이미지 중에서만 찾음)
                 if (/생성된 이미지|Generated image|Generated|생성/i.test(alt + aria)) return true;
-                // 조건 2: Flow 미디어 URL 패턴 (media.getMediaUrlRedirect / lh3.googleusercontent 제외는 프로필)
                 if (/media\.getMediaUrlRedirect|flowMedia|flow-media/i.test(src)) return true;
-                // 조건 3: 큰 이미지(naturalWidth>=512) + 프로필(=s96-c) 아님
                 if (img.naturalWidth >= 512 && !/=s\d+-c$/.test(src) && src.startsWith('http')) return true;
                 return false;
             });
@@ -538,28 +553,39 @@ async function countExistingImages(page: Page): Promise<number> {
 }
 
 // ─── 이미지 URL → Buffer 다운로드 ────────────────────────────
+//   ✅ [v1.4.96] page.evaluate(fetch) → context.request.get() 교체
+//     이전: page.evaluate 내 fetch가 off-screen/CORS 이슈로 "Failed to fetch"
+//     현재: Playwright 네이티브 HTTP 클라이언트 (쿠키 자동 포함, CORS 없음, 컨텍스트 닫힘 방지)
 async function downloadImageAsBuffer(page: Page, imageUrl: string): Promise<{ buffer: Buffer; mimeType: string }> {
-    const base64 = await page.evaluate(async (url: string) => {
-        const res = await fetch(url, { credentials: 'include' });
-        if (!res.ok) throw new Error(`HTTP_${res.status}`);
-        const blob = await res.blob();
-        return await new Promise<{ b64: string; type: string }>((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const result = reader.result as string;
-                const comma = result.indexOf(',');
-                resolve({ b64: comma >= 0 ? result.substring(comma + 1) : '', type: blob.type || 'image/png' });
-            };
-            reader.onerror = () => reject(new Error('blob read error'));
-            reader.readAsDataURL(blob);
-        });
-    }, imageUrl);
+    const ctx = page.context();
+    const MAX_ATTEMPTS = 3;
+    let lastErr: Error | null = null;
 
-    const buffer = Buffer.from(base64.b64, 'base64');
-    if (buffer.length < 1024) {
-        throw new Error(`FLOW_IMAGE_DOWNLOAD_TINY:다운로드된 이미지가 비정상적으로 작음 (${buffer.length} bytes)`);
+    for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+        try {
+            const response = await ctx.request.get(imageUrl, {
+                timeout: 30000,
+                maxRedirects: 5,
+            });
+            if (!response.ok()) {
+                throw new Error(`HTTP_${response.status()}`);
+            }
+            const buffer = await response.body();
+            if (buffer.length < 1024) {
+                throw new Error(`FLOW_IMAGE_DOWNLOAD_TINY:다운로드된 이미지가 비정상적으로 작음 (${buffer.length} bytes)`);
+            }
+            const mimeType = response.headers()['content-type']?.split(';')[0]?.trim() || 'image/png';
+            flowLog(`[Flow] 📦 다운로드 완료 (${Math.round(buffer.length / 1024)}KB, ${mimeType})`);
+            return { buffer, mimeType };
+        } catch (err) {
+            lastErr = err as Error;
+            flowWarn(`[Flow] 다운로드 시도 ${attempt}/${MAX_ATTEMPTS} 실패: ${(err as Error).message.substring(0, 100)}`);
+            if (attempt < MAX_ATTEMPTS) {
+                await new Promise(r => setTimeout(r, 2000));
+            }
+        }
     }
-    return { buffer, mimeType: base64.type || 'image/png' };
+    throw lastErr || new Error('FLOW_IMAGE_DOWNLOAD_FAILED:이미지 다운로드 3회 모두 실패');
 }
 
 // ─── 단일 이미지 생성 (UI 자동화) ─────────────────────────────
