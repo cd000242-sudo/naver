@@ -38,7 +38,7 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'stability': 'Stability AI',
   'pollinations': 'Pollinations',
   'deepinfra': 'FLUX-2 (DeepInfra)',
-  'openai-image': 'OpenAI DALL-E',
+  'openai-image': 'OpenAI 덕트테이프 (gpt-image-2)',
   'leonardoai': 'Leonardo AI',
   'imagefx': 'ImageFX (무료)',
   'flow': '🍌 Flow (Nano Banana 2)',
@@ -809,9 +809,9 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 10px; color: #059669;">DeepInfra</div>
           </label>
           <label class="source-option" data-value="openai-image" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ede9fe, #c4b5fd); text-align: center; transition: all 0.2s;">
-            <div style="font-size: 1.5rem;">🎨</div>
-            <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">OpenAI DALL-E</div>
-            <div style="font-size: 10px; color: #7c3aed;">API 키 필요</div>
+            <div style="font-size: 1.5rem;">🦆</div>
+            <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">덕트테이프</div>
+            <div style="font-size: 10px; color: #7c3aed;">gpt-image-2 | API 키 필요</div>
           </label>
           <label class="source-option" data-value="leonardoai" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ffedd5, #fdba74); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦁</div>
@@ -1092,7 +1092,7 @@ export function createHeadingImageModal(): void {
                 <option value="flow">🍌 Flow (Nano Banana 2, AI Pro 무료)</option>
                 <option value="imagefx">✨ ImageFX (Google 무료)</option>
                 <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>
-                <option value="openai-image">🎨 OpenAI DALL-E</option>
+                <option value="openai-image">🦆 덕트테이프 (gpt-image-2)</option>
                 <option value="leonardoai">🦁 Leonardo AI</option>
               </select>
             </div>

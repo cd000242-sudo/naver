@@ -290,10 +290,10 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   }
 
 
-  // ✅ [2026-02-22] OpenAI Image (DALL-E / gpt-image-1) 선택 시
+  // ✅ [v1.5.5] OpenAI 덕트테이프 (gpt-image-2) 선택 시
   if (normalizedProvider === 'openai-image') {
     try {
-      console.log(`[이미지생성] 🎨 OpenAI DALL-E로 ${items.length}개 이미지 생성 시작...`);
+      console.log(`[이미지생성] 🦆 OpenAI 덕트테이프(gpt-image-2)로 ${items.length}개 이미지 생성 시작...`);
       const openaiImages = await generateWithOpenAIImage(
         items,
         options.postTitle,
@@ -301,15 +301,15 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.isFullAuto,
         apiKeys?.openaiImageApiKey,
         options.isShoppingConnect || false,
-        onImageGenerated,  // ✅ [2026-02-27] 실시간 콜백 전달
-        options.collectedImages  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
+        onImageGenerated,
+        options.collectedImages
       );
-      console.log(`[이미지생성] ✅ OpenAI DALL-E로 ${openaiImages.length}개 이미지 생성 완료!`);
+      console.log(`[이미지생성] ✅ 덕트테이프(gpt-image-2)로 ${openaiImages.length}개 이미지 생성 완료!`);
       return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(openaiImages, 'openai-image', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (openaiError) {
-      console.warn(`[ImageGenerator] ⚠️ OpenAI Image 실패:`, (openaiError as Error).message);
+      console.warn(`[ImageGenerator] ⚠️ 덕트테이프 실패:`, (openaiError as Error).message);
       const userMsg = getImageErrorMessage(openaiError);
-      throw new Error(`[OpenAI DALL-E] ${userMsg}`);
+      throw new Error(`[덕트테이프] ${userMsg}`);
     }
   }
 
