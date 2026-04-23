@@ -401,21 +401,28 @@ async function saveDebugScreenshot(page: Page, label: string): Promise<string> {
     }
 }
 
+// ✅ [v1.5.9] Flow 프로젝트 이미지 용량 상한
+//   실측(flow-debug-20260423-155422): 한 프로젝트에 10장 쌓이면 11번째부터 영구 타임아웃
+//   Google Labs Flow 서버측 제한 추정
+const FLOW_PROJECT_IMAGE_LIMIT = 9;
+
 // ─── Flow 프로젝트 확보 ───────────────────────────────────
-async function ensureFlowProject(page: Page): Promise<void> {
+async function ensureFlowProject(page: Page, forceNew: boolean = false): Promise<void> {
     const currentUrl = page.url();
     flowLog(`[Flow][1/3] 프로젝트 확보 시작 — 현재 URL: ${currentUrl}`);
     sendImageLog(`🔍 [Flow] 현재 URL: ${currentUrl.substring(0, 80)}`);
 
-    // 이미 프로젝트 페이지이면 그대로 사용
-    if (currentUrl.includes('/tools/flow/project/')) {
+    // ✅ [v1.5.9] forceNew면 캐시 무시하고 새 프로젝트 강제 생성
+    if (forceNew) {
+        flowLog('[Flow][1/3] 🆕 강제 새 프로젝트 생성 (이미지 상한 도달 방지)');
+        cachedProjectUrl = null;
+    } else if (currentUrl.includes('/tools/flow/project/')) {
+        // 이미 프로젝트 페이지이면 그대로 사용
         cachedProjectUrl = currentUrl;
         flowLog('[Flow][1/3] ✅ 이미 프로젝트 페이지 — 재사용');
         return;
-    }
-
-    // 캐시된 프로젝트 URL이 있으면 그쪽으로 이동
-    if (cachedProjectUrl) {
+    } else if (cachedProjectUrl) {
+        // 캐시된 프로젝트 URL이 있으면 그쪽으로 이동
         flowLog(`[Flow][1/3] 🔗 캐시된 프로젝트 이동 시도: ${cachedProjectUrl}`);
         sendImageLog(`🔗 [Flow] 캐시 프로젝트 재사용 시도`);
         await page.goto(cachedProjectUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
@@ -713,7 +720,16 @@ export async function generateSingleImageWithFlow(
             const page = await ensureFlowBrowserPage();
             await ensureFlowProject(page);
 
-            const prevCount = await countExistingImages(page);
+            // ✅ [v1.5.9] 프로젝트 이미지 상한 감지 → 새 프로젝트 강제 생성
+            //   Flow는 프로젝트당 ~10장 상한 (로그 실측) — 넘으면 새 생성이 영구 타임아웃
+            let prevCount = await countExistingImages(page);
+            if (prevCount >= FLOW_PROJECT_IMAGE_LIMIT) {
+                flowLog(`[Flow] ⚠️ 프로젝트 이미지 ${prevCount}장 ≥ ${FLOW_PROJECT_IMAGE_LIMIT}장 상한 — 새 프로젝트로 교체`);
+                sendImageLog(`🆕 [Flow] 프로젝트 상한(${FLOW_PROJECT_IMAGE_LIMIT}장) 도달 — 새 프로젝트 생성`);
+                await ensureFlowProject(page, true); // forceNew
+                prevCount = await countExistingImages(page); // 새 프로젝트는 0장
+                flowLog(`[Flow] 🔄 새 프로젝트 시작 (기존 ${prevCount}장)`);
+            }
             flowLog(`[Flow] 🖼️ 이미지 생성 시도 ${attempt}/${MAX_RETRIES} (기존 ${prevCount}장)`);
             sendImageLog(`🖼️ [Flow] 프롬프트 전송 중... (시도 ${attempt}/${MAX_RETRIES})`);
 

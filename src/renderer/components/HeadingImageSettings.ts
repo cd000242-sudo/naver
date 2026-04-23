@@ -2100,9 +2100,28 @@ export function createHeadingImageModal(): void {
     const deepinfraSelect = subModal.querySelector('#submodal-deepinfra-model') as HTMLSelectElement;
     const leonardoaiSelect = subModal.querySelector('#submodal-leonardoai-model') as HTMLSelectElement;
 
-    // localStorage에서 현재 값 로드
-    if (nanoMainSelect) nanoMainSelect.value = localStorage.getItem('nanoBananaMainModel') || localStorage.getItem('nanoBananaModel') || 'gemini-3-1-flash';
-    if (nanoSubSelect) nanoSubSelect.value = localStorage.getItem('nanoBananaSubModel') || localStorage.getItem('nanoBananaModel') || 'gemini-3-1-flash';
+    // ✅ [v1.5.9] 비싼 모델(3 Pro 4K = ₩336/장) 사용 중이면 자동으로 3.1 Flash로 마이그레이션
+    //   사용자 요청: "나노바나나프로 비싸니까 3.1로" — Gemini 3.1 Flash(₩97)가 품질/가격 최적점
+    const EXPENSIVE_MODELS = ['gemini-3-pro-4k', 'gemini-3-pro'];
+    const migratedMain = (() => {
+        const saved = localStorage.getItem('nanoBananaMainModel') || localStorage.getItem('nanoBananaModel') || 'gemini-3-1-flash';
+        if (EXPENSIVE_MODELS.includes(saved)) {
+            console.log(`[HeadingImageSettings] 💰 비싼 모델 "${saved}" → "gemini-3-1-flash" 자동 마이그레이션 (비용 절감)`);
+            localStorage.setItem('nanoBananaMainModel', 'gemini-3-1-flash');
+            return 'gemini-3-1-flash';
+        }
+        return saved;
+    })();
+    const migratedSub = (() => {
+        const saved = localStorage.getItem('nanoBananaSubModel') || localStorage.getItem('nanoBananaModel') || 'gemini-3-1-flash';
+        if (EXPENSIVE_MODELS.includes(saved)) {
+            localStorage.setItem('nanoBananaSubModel', 'gemini-3-1-flash');
+            return 'gemini-3-1-flash';
+        }
+        return saved;
+    })();
+    if (nanoMainSelect) nanoMainSelect.value = migratedMain;
+    if (nanoSubSelect) nanoSubSelect.value = migratedSub;
     if (deepinfraSelect) deepinfraSelect.value = localStorage.getItem('deepinfraModel') || 'flux-2-dev';
     if (leonardoaiSelect) leonardoaiSelect.value = localStorage.getItem('leonardoaiModel') || 'seedream-4.5';
 
