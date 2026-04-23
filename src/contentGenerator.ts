@@ -4204,13 +4204,102 @@ function extractKeywordsFromContent(content: string): string[] {
 }
 
 // ✅ 네이버 블로그 전체 카테고리별 최적 글톤 자동 매칭
-function getAutoToneByCategory(category: string | undefined): 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info' {
-  if (!category) return 'friendly';
+type AutoTone = 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info';
+
+/**
+ * [v1.7.0] 노출 모드 × 카테고리 2차원 톤 매트릭스
+ *   - SEO: 검색 의도 해결형 → 정보체 위주 (calm_info / expert_review / professional)
+ *   - 홈판: 이웃 피드 공감형 → 친근 구어체 (friendly / mom_cafe / community_fan / humorous)
+ *   - 트래픽헌터: 정보 + 친근 하이브리드 (calm_info / friendly)
+ *   - 제휴/쇼핑: 경험 후기형 (friendly / casual)
+ *   - 비즈니스: 전문 + 친근 5:5 (professional / friendly)
+ *
+ *   ⚠️ 함수명 유지: getAutoToneByCategory (외부 호출자 호환)
+ *   인자 mode를 받아 2차원으로 확장하되 mode 없으면 legacy 1차원으로 폴백
+ */
+function getAutoToneByCategory(category: string | undefined, mode?: string): AutoTone {
+  const m = String(mode || '').toLowerCase();
+
+  if (!category) {
+    // 카테고리 없음 — 모드 기본값
+    if (m === 'seo' || m === 'traffic-hunter') return 'calm_info';
+    if (m === 'homefeed') return 'friendly';
+    if (m === 'affiliate') return 'friendly';
+    if (m === 'business') return 'professional';
+    return 'friendly';
+  }
 
   const cat = category.toLowerCase();
 
   // ═══════════════════════════════════════════════════════════════
-  // 📚 엔터테인먼트·예술 → 캐주얼/친근한 (감성적, 취향 공유)
+  // [v1.7.0] 홈판 모드 전용 오버라이드 (공감·수다 우선)
+  // ═══════════════════════════════════════════════════════════════
+  if (m === 'homefeed') {
+    // 육아·결혼·출산 → mom_cafe (드디어 활성화)
+    if (/육아|결혼|아이|출산|임신|유아|초등|어린이|가족|웨딩|신혼/.test(cat)) return 'mom_cafe';
+    // 스타·연예인·만화·애니 → community_fan (덕후 문화)
+    if (/스타|연예인|연예|아이돌|가수|배우|셀럽|만화|애니|웹툰/.test(cat)) return 'community_fan';
+    // 유머·일상 → humorous
+    if (/유머|개그|웃긴|짤|밈/.test(cat)) return 'humorous';
+    // 여행 → storyteller (서사 유지)
+    if (/국내|세계|해외|여행|제주|부산|강원|경주|속초|유럽|미국|일본|동남아/.test(cat)) return 'storyteller';
+    // 딱딱한 카테고리(건강/IT/비즈니스)는 홈판에서 friendly로 완화 (공감 우선)
+    if (/건강|의학|의료|병원|IT|컴퓨터|노트북|스마트폰|테크|비즈니스|경제|금융|재테크|투자|주식|부동산/.test(cat)) return 'friendly';
+    // 패션·뷰티·인테리어·요리·반려동물 → friendly (이웃 수다)
+    if (/패션|미용|뷰티|화장품|옷|코디|스타일|인테리어|요리|레시피|반려|강아지|고양이|펫/.test(cat)) return 'friendly';
+    // 맛집·카페 → casual (캐주얼 수다)
+    if (/맛집|카페|음식점|레스토랑|디저트|브런치/.test(cat)) return 'casual';
+    // 기본값 → friendly
+    return 'friendly';
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // [v1.7.0] SEO 모드 전용 오버라이드 (정보 전달 우선)
+  // ═══════════════════════════════════════════════════════════════
+  if (m === 'seo' || m === 'traffic-hunter') {
+    // 건강·의학·교육 → calm_info (정확·안정)
+    if (/건강|의학|의료|병원|다이어트|영양|약|치료|증상|교육|학문|학습|공부|시험|자격증/.test(cat)) return 'calm_info';
+    // IT·자동차·가전 → expert_review (체계적 리뷰)
+    if (/IT|컴퓨터|노트북|스마트폰|테크|기술|자동차|차|카|SUV|세단|전기차|가전/.test(cat)) return 'expert_review';
+    // 비즈니스·경제 → professional
+    if (/비즈니스|경제|금융|재테크|투자|주식|부동산|창업|마케팅|사회|정치|시사|뉴스/.test(cat)) return 'professional';
+    // 패션·뷰티·상품 → expert_review (리뷰형 상위 노출)
+    if (/패션|미용|뷰티|화장품|상품|리뷰|후기|언박싱|구매/.test(cat)) return 'expert_review';
+    // 맛집 → calm_info (TOP N 순위형)
+    if (/맛집|카페|음식점|레스토랑|디저트|브런치/.test(cat)) return 'calm_info';
+    // 여행 → calm_info (정보·코스 안내)
+    if (/국내|세계|해외|여행|제주|부산|강원|경주|속초|유럽|미국|일본|동남아/.test(cat)) return 'calm_info';
+    // 요리 → calm_info (레시피 가이드)
+    if (/요리|레시피|음식|밥|반찬|베이킹|쿠킹/.test(cat)) return 'calm_info';
+    // 육아·반려 → calm_info (정보성)
+    if (/육아|결혼|아이|출산|임신|반려|강아지|고양이|펫/.test(cat)) return 'calm_info';
+    // 영화·음악·드라마 → calm_info (리뷰/해설형)
+    if (/영화|시네마|음악|노래|드라마|넷플릭스/.test(cat)) return 'calm_info';
+    // 기본값 → calm_info (SEO 전반)
+    return 'calm_info';
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // [v1.7.0] 제휴 모드 오버라이드 (경험 후기 기반 구매 유도)
+  // ═══════════════════════════════════════════════════════════════
+  if (m === 'affiliate') {
+    if (/IT|컴퓨터|노트북|스마트폰|테크|자동차|가전/.test(cat)) return 'expert_review';
+    if (/육아|결혼|아이|출산|임신|유아|초등|어린이|가족/.test(cat)) return 'mom_cafe';
+    if (/건강|의학|의료|병원|다이어트|영양|약/.test(cat)) return 'calm_info';
+    return 'friendly'; // 대부분 상품 후기 → 친근 경험담
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // [v1.7.0] 비즈니스 모드 (전문 + 친근 5:5)
+  // ═══════════════════════════════════════════════════════════════
+  if (m === 'business') {
+    if (/건강|의학|의료|병원|법률|법무|세무|회계/.test(cat)) return 'calm_info';
+    if (/IT|컴퓨터|노트북|스마트폰|테크|자동차/.test(cat)) return 'expert_review';
+    return 'professional';
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // [LEGACY] mode 미지정 — 기존 1차원 카테고리 매핑 유지
   // ═══════════════════════════════════════════════════════════════
 
   // 문학·책 → 친근한 (독서 후기, 책 추천)
@@ -4406,17 +4495,19 @@ export function buildModeBasedPrompt(
   // ✅ 글톤: 사용자 설정 우선, 없으면 카테고리에 맞게 자동 선택
   // ⚠️ 홈판 모드에서는 friendly/casual만 허용 (professional/formal 금지 - 기자체/설명체 방지)
   const userSelectedTone = source.toneStyle;
-  let toneStyle = userSelectedTone || getAutoToneByCategory(categoryHint);
-  // ⚠️ 홈판 모드: 자동 톤에서 professional/formal이 선택된 경우만 friendly 폴백
-  // → 사용자가 명시적으로 선택한 톤은 STYLE OVERRIDE 원칙에 따라 항상 존중!
-  if (mode === 'homefeed' && !userSelectedTone && (toneStyle === 'professional' || toneStyle === 'formal' || toneStyle === 'expert_review' || toneStyle === 'calm_info')) {
-    console.log(`[PromptBuilder] ⚠️ 홈판 자동 톤 ${toneStyle} → friendly 폴백 (사용자 미선택)`);
+  // ✅ [v1.7.0] 노출 모드 × 카테고리 2차원 매트릭스로 자동 톤 결정
+  //   mode 전달로 SEO/홈판/affiliate 각각 최적 톤 매핑됨
+  let toneStyle = userSelectedTone || getAutoToneByCategory(categoryHint, mode);
+  // ⚠️ [v1.7.0] 홈판 가드: 사용자가 professional/formal/expert_review/calm_info를 고르면
+  //   친근형으로 완화 (홈판 피드에서 격식체는 이질감)
+  if (mode === 'homefeed' && userSelectedTone && (toneStyle === 'professional' || toneStyle === 'formal' || toneStyle === 'expert_review' || toneStyle === 'calm_info')) {
+    console.log(`[PromptBuilder] ⚠️ 홈판 모드에서 격식 톤 ${toneStyle} → friendly 완화 (독자 피드 이질감 방지)`);
     toneStyle = 'friendly';
   }
   if (userSelectedTone) {
-    console.log(`[PromptBuilder] ✅ 사용자 선택 글톤 적용: ${toneStyle}`);
+    console.log(`[PromptBuilder] ✅ 사용자 선택 글톤 적용: ${toneStyle} (mode: ${mode})`);
   } else {
-    console.log(`[PromptBuilder] 글톤 자동 매칭: 카테고리=${categoryHint || 'general'} → 글톤=${toneStyle}`);
+    console.log(`[PromptBuilder] 🎯 자동 톤 매칭: mode=${mode} × 카테고리=${categoryHint || 'general'} → 글톤=${toneStyle}`);
   }
 
   // ✅ 2축 분리 + 완전자동 모드: [노출 목적 base] + [카테고리 보정] + [자동화 보조] + [글톤]
