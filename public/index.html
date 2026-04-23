@@ -3465,7 +3465,7 @@
 
                     <!-- 안내 문구 -->
                     <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">
-                        💡 Leonardo AI 키 하나로 SeeDream, Phoenix, Ideogram, Nano Banana Pro 모든 모델 사용 가능 | OpenAI DALL-E는
+                        💡 Leonardo AI 키 하나로 SeeDream, Phoenix, Ideogram, Nano Banana Pro 모든 모델 사용 가능 | OpenAI 덕트테이프(gpt-image-2)는
                         OpenAI API 키가
                         필요합니다.
                     </p>
@@ -3516,7 +3516,7 @@
                             placeholder="예: https://www.coupang.com/vp/products/123456 또는 https://coupa.ng/abc123"
                             style="width: 100%; padding: 0.875rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: var(--radius-md); color: var(--text-strong); font-size: 0.95rem;">
                         <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">
-                            비워두면 기본 이미지 소스(DALL-E/Pexels)만 사용합니다.
+                            비워두면 기본 이미지 소스(덕트테이프/Pexels)만 사용합니다.
                         </p>
 
                         <button type="button" id="shopping-collect-save-btn"
@@ -4744,9 +4744,9 @@
                                     <span style="font-size: 1.5rem;">🧠</span>
                                     <div>
                                         <h4 style="color: #22c55e; margin: 0; font-size: 1rem; font-weight: 700;">
-                                            OpenAI API 키 (GPT-5.2 + DALL-E)</h4>
+                                            OpenAI API 키 (GPT-5.2 + 🦆 덕트테이프 gpt-image-2)</h4>
                                         <p style="color: var(--text-muted); margin: 0.15rem 0 0 0; font-size: 0.75rem;">
-                                            텍스트 생성(GPT-5.2) + 이미지 생성(DALL-E) 모두 이 키 하나로 사용</p>
+                                            텍스트 생성(GPT-5.2) + 이미지 생성(덕트테이프 gpt-image-2) 모두 이 키 하나로 사용</p>
                                     </div>
                                 </div>
                                 <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
@@ -5212,56 +5212,90 @@
                     <!-- 비용표 패널 (기본 숨김) -->
                     <div id="image-price-table-panel"
                         style="display: none; margin-bottom: 1.5rem; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 1.25rem;">
-                        <h4 style="color: var(--text-gold); margin: 0 0 1rem 0; font-size: 1rem;">📊 이미지 생성
-                            비용표
-                            (원화 기준, $1 = ₩1,400)</h4>
+                        <h4 style="color: var(--text-gold); margin: 0 0 1rem 0; font-size: 1rem;">📊 이미지 생성 엔진 비용표
+                            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 400;">(원화 기준, $1 = ₩1,400)</span></h4>
 
-                        <div style="display: grid; gap: 1rem;">
-                            <!-- Fal.ai -->
-                            <div
-                                style="background: rgba(236, 72, 153, 0.1); padding: 0.75rem; border-radius: 8px; border-left: 3px solid #ec4899;">
-                                <div style="font-weight: 700; color: #ec4899; margin-bottom: 0.5rem;">🎨
-                                    Fal.ai
-                                    (FLUX 계열)</div>
-                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.6;">
-                                    • FLUX Schnell: ₩11/MP (⚡초고속)<br>
-                                    • FLUX Realism: ₩29/초 (📷실사 추천)<br>
-                                    • FLUX 1.1 Pro: ₩77/이미지 (🏆최고품질)
+                        <div style="display: grid; gap: 0.75rem;">
+                            <!-- 🆓 Flow (Nano Banana 2) — 무료 최우선 -->
+                            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(251, 191, 36, 0.1)); padding: 0.875rem; border-radius: 10px; border-left: 4px solid #10b981; position: relative;">
+                                <span style="position: absolute; top: 8px; right: 10px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 10px;">✨ 추천 · 무료</span>
+                                <div style="font-weight: 700; color: #10b981; margin-bottom: 0.35rem; font-size: 0.95rem;">🍌 Flow (Nano Banana 2)</div>
+                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.7;">
+                                    • <strong>₩0/장</strong> (Google AI Pro 쿼터 무료 소진)<br>
+                                    • Google 로그인만 필요, API 키 불필요<br>
+                                    • 한글/일본어/중국어 텍스트 네이티브 렌더링<br>
+                                    • 속도: 장당 약 30~50초 (UI 자동화)
                                 </div>
                             </div>
 
-                            <!-- Stability.AI -->
-                            <div
-                                style="background: rgba(59, 130, 246, 0.1); padding: 0.75rem; border-radius: 8px; border-left: 3px solid #3b82f6;">
-                                <div style="font-weight: 700; color: #3b82f6; margin-bottom: 0.5rem;">🚀
-                                    Stability.AI (SD 계열)</div>
-                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.6;">
-                                    • SDXL 1.0: ₩13/이미지 (💰최저가)<br>
-                                    • SD 3.5 Large Turbo: ₩56/이미지 (🚀고품질+빠름)<br>
-                                    • Stable Image Ultra: ₩112/이미지 (👑최고품질)
+                            <!-- 🆓 ImageFX (Imagen 3.5) — 무료 -->
+                            <div style="background: rgba(16, 185, 129, 0.08); padding: 0.875rem; border-radius: 10px; border-left: 4px solid #34d399;">
+                                <div style="font-weight: 700; color: #059669; margin-bottom: 0.35rem; font-size: 0.95rem;">✨ ImageFX (Imagen 3.5) <span style="font-size: 10px; background: #34d399; color: white; padding: 1px 6px; border-radius: 8px; font-weight: 700;">무료</span></div>
+                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.7;">
+                                    • <strong>₩0/장</strong> (Google 계정 기본 쿼터, 일 1,000장)<br>
+                                    • Google 로그인 + AdsPower 프로필 지원<br>
+                                    • 한글 텍스트는 SVG 오버레이로 보완
                                 </div>
                             </div>
 
-                            <!-- Nano Banana Pro -->
-                            <div
-                                style="background: rgba(251, 191, 36, 0.1); padding: 0.75rem; border-radius: 8px; border-left: 3px solid #fbbf24;">
-                                <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.5rem;">🍌 나노
-                                    바나나
-                                    프로 (Gemini Imagen)</div>
-                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.6;">
-                                    • Gemini 2.5 Flash: ₩42/이미지 (⚡빠름)<br>
-                                    • Gemini 3 Pro: ₩77~140/이미지 (🏆고품질)<br>
-                                    • Gemini 3 Pro 4K: ₩336/이미지 (🎬초고해상도)
+                            <!-- 🦆 덕트테이프 (gpt-image-2) — OpenAI -->
+                            <div style="background: rgba(139, 92, 246, 0.1); padding: 0.875rem; border-radius: 10px; border-left: 4px solid #8b5cf6;">
+                                <div style="font-weight: 700; color: #7c3aed; margin-bottom: 0.35rem; font-size: 0.95rem;">🦆 덕트테이프 (OpenAI gpt-image-2) <span style="font-size: 10px; background: #8b5cf6; color: white; padding: 1px 6px; border-radius: 8px; font-weight: 700;">NEW</span></div>
+                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.7;">
+                                    • Low: <strong>₩25/장</strong> (가성비)<br>
+                                    • Medium: <strong>₩77/장</strong> (권장, ~$0.055)<br>
+                                    • High: <strong>₩280/장</strong> (프리미엄, ~$0.20)<br>
+                                    • 12단어+ 완벽 스펠링, 다국어 최강 (한/일/중/불/스/독)
                                 </div>
                             </div>
 
-                            <!-- Pollinations -->
-                            <div
-                                style="background: rgba(156, 163, 175, 0.1); padding: 0.75rem; border-radius: 8px; border-left: 3px solid #9ca3af;">
-                                <div style="font-weight: 700; color: #9ca3af; margin-bottom: 0.5rem;">🆓
-                                    Pollinations (무료)</div>
-                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.6;">
-                                    • 기본 모델: ₩0 (완전 무료, 테스트용)
+                            <!-- 🍌 나노바나나 프로 (Gemini API) -->
+                            <div style="background: rgba(251, 191, 36, 0.1); padding: 0.875rem; border-radius: 10px; border-left: 4px solid #fbbf24;">
+                                <div style="font-weight: 700; color: #d97706; margin-bottom: 0.35rem; font-size: 0.95rem;">🍌 나노바나나 프로 (Gemini API)</div>
+                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.7;">
+                                    • Gemini 2.5 Flash: <strong>₩28/장</strong> (빠름, 가성비)<br>
+                                    • Gemini 3.1 Flash: <strong>₩97/장</strong> (★ 권장)<br>
+                                    • Gemini 3 Pro: <strong>₩77/장</strong> (고품질)<br>
+                                    • Gemini 3 Pro 4K: <strong>₩336/장</strong> (초고해상도)<br>
+                                    • Imagen 4 폴백: <strong>₩46/장</strong> (안전망)
+                                </div>
+                            </div>
+
+                            <!-- 🔥 DeepInfra (FLUX) -->
+                            <div style="background: rgba(239, 68, 68, 0.08); padding: 0.875rem; border-radius: 10px; border-left: 4px solid #ef4444;">
+                                <div style="font-weight: 700; color: #dc2626; margin-bottom: 0.35rem; font-size: 0.95rem;">🔥 DeepInfra (FLUX 계열)</div>
+                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.7;">
+                                    • FLUX-2 dev: <strong>₩35/장</strong> (최신, 고품질)<br>
+                                    • FLUX-1 dev: <strong>₩35/장</strong> (기본)<br>
+                                    • FLUX Schnell: <strong>₩0/장</strong> (무료, 빠름)
+                                </div>
+                            </div>
+
+                            <!-- 🦁 Leonardo AI -->
+                            <div style="background: rgba(234, 88, 12, 0.08); padding: 0.875rem; border-radius: 10px; border-left: 4px solid #ea580c;">
+                                <div style="font-weight: 700; color: #c2410c; margin-bottom: 0.35rem; font-size: 0.95rem;">🦁 Leonardo AI</div>
+                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.7;">
+                                    • SeeDream 4.5: <strong>₩56/장</strong> (★ 가성비 최강)<br>
+                                    • Phoenix 1.0: <strong>₩84/장</strong> (고품질)<br>
+                                    • Ideogram 3.0: <strong>₩154/장</strong> (텍스트 특화)<br>
+                                    • Nano Banana Pro: <strong>₩294/장</strong> (한글 최강)
+                                </div>
+                            </div>
+
+                            <!-- 💡 7장 한 편당 비용 요약 -->
+                            <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05)); padding: 0.875rem; border-radius: 10px; border: 1px dashed rgba(99, 102, 241, 0.4); margin-top: 0.5rem;">
+                                <div style="font-weight: 700; color: #6366f1; margin-bottom: 0.5rem; font-size: 0.9rem;">💡 한 편(7장) 기준 예상 비용</div>
+                                <div style="font-size: 0.78rem; color: #1f2937; line-height: 1.75; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px;">
+                                    <span>🍌 Flow</span><strong style="color: #10b981;">₩0</strong>
+                                    <span>✨ ImageFX</span><strong style="color: #10b981;">₩0</strong>
+                                    <span>🔥 FLUX Schnell</span><strong style="color: #10b981;">₩0</strong>
+                                    <span>🍌 Gemini 2.5 Flash</span><strong>₩196</strong>
+                                    <span>🔥 FLUX-2 dev</span><strong>₩245</strong>
+                                    <span>🦁 SeeDream 4.5</span><strong>₩392</strong>
+                                    <span>🦆 덕트테이프 (Med)</span><strong>₩539</strong>
+                                    <span>🍌 Gemini 3.1 Flash</span><strong>₩679</strong>
+                                    <span>🦆 덕트테이프 (High)</span><strong style="color: #dc2626;">₩1,960</strong>
+                                    <span>🍌 Gemini 3 Pro 4K</span><strong style="color: #dc2626;">₩2,352</strong>
                                 </div>
                             </div>
                         </div>
@@ -11625,24 +11659,24 @@
                             <td style="padding: 0.7rem; text-align: right; color: #4ade80;">8.6</td>
                         </tr>
 
-                        <!-- OpenAI 이미지 -->
+                        <!-- OpenAI 덕트테이프 (gpt-image-2) -->
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">🎨 OpenAI gpt-image-1 (low)</td>
-                            <td style="padding: 0.7rem; color: #e2e8f0;">DALL-E 후속 · 1024x1024</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩15 ($0.011)</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">7.3 (짧은 문구)</td>
+                            <td style="padding: 0.7rem; font-weight: bold; color: #a78bfa;">🦆 덕트테이프 (low)</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">gpt-image-2 · 1024x1024 · 가성비</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩25 ($0.018)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">9.0 (다국어 완벽)</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">🎨 gpt-image-1 (medium)</td>
-                            <td style="padding: 0.7rem; color: #e2e8f0;">품질 중급 · 블로그 권장</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩59 ($0.042)</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">7.3</td>
+                            <td style="padding: 0.7rem; font-weight: bold; color: #a78bfa;">🦆 덕트테이프 (medium)</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">블로그 권장 · 12단어+ 완벽 스펠링</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩77 ($0.055)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">9.2</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">🎨 gpt-image-1 (high)</td>
-                            <td style="padding: 0.7rem; color: #e2e8f0;">최고 품질</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩234 ($0.167)</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">7.3</td>
+                            <td style="padding: 0.7rem; font-weight: bold; color: #a78bfa;">🦆 덕트테이프 (high)</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">실사화 최고급 · 썸네일 권장</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩280 ($0.200)</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">9.5</td>
                         </tr>
 
                         <!-- Leonardo AI -->
@@ -11790,7 +11824,7 @@
                         <li>모든 가격은 <strong>2026-04 공식 단가</strong> 기준. 환율 <strong>1,400원/$</strong> 기준.</li>
                         <li>입력 10K 토큰 / 출력 4K 토큰 기준. 실제 블로그 글은 ±30% 편차 가능.</li>
                         <li><strong>캐시 적중</strong>: 시스템 프롬프트 재사용 시 자동 적용 (Claude 5분 TTL / Gemini 1시간 TTL).</li>
-                        <li><strong>Deprecated 모델</strong>: GPT-4o(2026-03-31 은퇴), DALL-E 3(2026-05-12 제거) — 앱에서 자동 회피.</li>
+                        <li><strong>Deprecated 모델</strong>: GPT-4o(2026-03-31 은퇴), DALL-E 3(2026-05-12 제거), gpt-image-1(덕트테이프 gpt-image-2로 자동 교체, v1.5.5) — 앱에서 자동 회피.</li>
                         <li><strong>Flow 쿼터 초과 시</strong>: ImageFX → DeepInfra FLUX schnell 순으로 자동 폴백 (유료 엔진 전환 전 확인 필요).</li>
                         <li>품질 점수는 한국어 블로그 10점 만점 벤치마크 (6축 가중평균).</li>
                     </ul>
