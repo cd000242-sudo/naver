@@ -19,16 +19,22 @@ import type { ImageRequestItem, GeneratedImage } from './types.js';
 import { writeImageFile } from './imageUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
-import type { Browser, BrowserContext, Page } from 'playwright';
+import type { BrowserContext, Page } from 'playwright';
 import * as path from 'path';
 import * as fs from 'fs';
 import { app } from 'electron';
 
 // ─── 파일 로거 ─────────────────────────────────────────────
-//   ✅ [v1.4.94] 모든 Flow 디버그 로그를 C:\Users\박성현\Desktop\새 폴더\ 에 자동 저장
-//     앱 실행마다 새 파일 생성 (flow-debug-YYYYMMDD-HHMMSS.log)
-//     사용자가 빠르게 공유 가능하도록 한 곳에 집중
-const FLOW_LOG_DIR = 'C:\\Users\\박성현\\Desktop\\새 폴더';
+//   ✅ [v1.5.7] 하드코딩 절대 경로 제거 — userData/flow-debug 로 이전 (타 PC 배포 안전)
+//     폴백: 사용자가 공유하기 쉬운 Desktop 루트
+function getFlowLogDir(): string {
+    try {
+        return path.join(app.getPath('userData'), 'flow-debug');
+    } catch {
+        return path.join(require('os').homedir(), 'Desktop', 'flow-debug');
+    }
+}
+const FLOW_LOG_DIR = getFlowLogDir();
 let flowLogFilePath: string | null = null;
 
 function initFlowLogFile(): string {
@@ -103,11 +109,16 @@ export function getFlowLogPath(): string | null {
 }
 
 // ─── 캐시 (세션 재사용) ────────────────────────────────────
-let cachedBrowser: Browser | null = null;
+// ✅ [v1.5.7] cachedBrowser dead code 제거 — launchPersistentContext는 context만 반환하고
+//   브라우저 close는 context.close()가 자동 처리. Browser 변수는 실제로 쓰인 적 없었음.
 let cachedContext: BrowserContext | null = null;
 let cachedPage: Page | null = null;
 let cachedProjectUrl: string | null = null;
 let _enabled: boolean = false;
+// ✅ [v1.5.7] 쿠키 배너 해제 여부 세션당 1회 — 매 장마다 dismiss 반복 제거 (1.5초/장 절약)
+let cookieBannerDismissed: boolean = false;
+// ✅ [v1.5.7] ensureFlowBrowserPage 동시 호출 방어 — Promise 싱글톤 패턴
+let _ensurePromise: Promise<Page> | null = null;
 
 // ─── Flow 전용 세션 디렉터리 (독립 Playwright persistent context) ────
 function getFlowProfileDir(): string {
@@ -185,6 +196,18 @@ async function launchWithStealthFallback(profileDir: string, offScreen: boolean)
 //   ✅ [v1.4.93] visible→headless 재시작 제거 (SingletonLock 경합 원인)
 //     visible 유지 + off-screen 이동으로 화면 보이지 않게 처리
 async function ensureFlowBrowserPage(): Promise<Page> {
+    // ✅ [v1.5.7] 동시 호출 방어 — 이미 초기화 진행 중이면 같은 Promise 반환
+    if (_ensurePromise) {
+        flowLog('[Flow] 🔁 ensureFlowBrowserPage 동시 호출 감지 — 기존 Promise 재사용');
+        return _ensurePromise;
+    }
+    _ensurePromise = _ensureFlowBrowserPageInner().finally(() => {
+        _ensurePromise = null;
+    });
+    return _ensurePromise;
+}
+
+async function _ensureFlowBrowserPageInner(): Promise<Page> {
     // ✅ [v1.4.96] 캐시 유효성 3중 체크: page + context + 실제 동작 여부
     if (cachedPage && cachedContext) {
         try {
@@ -247,6 +270,11 @@ async function ensureFlowBrowserPage(): Promise<Page> {
     sendImageLog('🔐 [Flow] 브라우저에서 Google 로그인을 완료해주세요. (최대 5분 대기)');
     while (Date.now() - start < loginTimeoutMs) {
         await new Promise(r => setTimeout(r, 5000));
+        // ✅ [v1.5.7] C4 수정 — 사용자가 로그인 창 닫으면 즉시 break
+        if (loginPage.isClosed()) {
+            flowWarn('[Flow] ⚠️ 로그인 대기 중 사용자가 창을 닫음 — 즉시 중단');
+            break;
+        }
         const ok = await isLoggedInToFlow(loginPage).catch(() => false);
         if (ok) {
             loginSuccess = true;
@@ -260,7 +288,7 @@ async function ensureFlowBrowserPage(): Promise<Page> {
 
     if (!loginSuccess) {
         await loginCtx.close().catch(() => {});
-        throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인 시간 초과 (5분). 브라우저에서 로그인 후 다시 시도해주세요.');
+        throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인이 완료되지 않음 (창 닫힘 또는 5분 초과). 다시 시도해주세요.');
     }
 
     // ✅ [v1.5.0] 로그인 완료 → on-screen 창 닫고 off-screen으로 재시작 (사용자 화면에서 숨김)
@@ -292,7 +320,10 @@ async function ensureFlowBrowserPage(): Promise<Page> {
 //   ✅ [v1.4.95] labs.google/fx 첫 진입 시 쿠키 배너가 전송 버튼을 가려서 클릭 차단
 //     Playwright 로그: "glue-cookie-notification-bar subtree intercepts pointer events"
 //     해결: "동의함" 또는 "나중에" 버튼을 능동적으로 클릭해서 배너 제거
-async function dismissCookieBanner(page: Page): Promise<void> {
+async function dismissCookieBanner(page: Page, force: boolean = false): Promise<void> {
+    // ✅ [v1.5.7] 세션당 1회만 실행 (force=true면 강제 재실행)
+    //   매 이미지 생성마다 호출되던 것을 방지 → 1.5초/장 절약
+    if (cookieBannerDismissed && !force) return;
     try {
         // 다국어 + 버튼 텍스트 다양한 변형 대응
         const patterns = [
@@ -306,6 +337,7 @@ async function dismissCookieBanner(page: Page): Promise<void> {
                 if (visible) {
                     await btn.click({ timeout: 3000 });
                     flowLog(`[Flow] 🍪 쿠키 배너 닫음 (${pat})`);
+                    cookieBannerDismissed = true;
                     await page.waitForTimeout(600);
                     return;
                 }
@@ -316,8 +348,12 @@ async function dismissCookieBanner(page: Page): Promise<void> {
         if (await bannerBtn.count() > 0 && await bannerBtn.isVisible().catch(() => false)) {
             await bannerBtn.click({ timeout: 3000 });
             flowLog('[Flow] 🍪 쿠키 배너 닫음 (CSS 폴백)');
+            cookieBannerDismissed = true;
             await page.waitForTimeout(600);
+            return;
         }
+        // 배너 자체가 없으면 이미 동의된 상태 → 재확인 스킵
+        cookieBannerDismissed = true;
     } catch (err) {
         flowWarn(`[Flow] 쿠키 배너 닫기 실패 (무시): ${(err as Error).message.substring(0, 80)}`);
     }
@@ -555,7 +591,8 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
                 if (!fullyLoaded) return false;
 
                 // 이하 3가지 식별 조건 OR (완전 로드된 이미지 중에서만 찾음)
-                if (/생성된 이미지|Generated image|Generated|생성/i.test(alt + aria)) return true;
+                // ✅ [v1.5.7] 다국어 alt 폴백 확대 — 중국어(간/번체), 일본어, 프랑스어, 스페인어, 독일어
+                if (/생성된 이미지|Generated image|Generated|생성|已生成|生成された|Image générée|Imagen generada|Generiertes Bild/i.test(alt + aria)) return true;
                 if (/media\.getMediaUrlRedirect|flowMedia|flow-media/i.test(src)) return true;
                 if (img.naturalWidth >= 512 && !/=s\d+-c$/.test(src) && src.startsWith('http')) return true;
                 return false;
@@ -580,7 +617,8 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
             sendImageLog(`⏳ [Flow] 이미지 생성 중... ${elapsedSec}초 경과 (매칭 ${detected.length}/${prevCount + 1})`);
             lastLoggedSec = elapsedSec;
         }
-        await page.waitForTimeout(2000);
+        // ✅ [v1.5.7] 폴링 2000ms → 500ms (평균 1초/장 절약, Google 서버 응답 즉시 감지)
+        await page.waitForTimeout(500);
     }
 
     // 타임아웃 — 디버깅 정보 덤프
@@ -599,9 +637,23 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
     throw new Error(`FLOW_IMAGE_TIMEOUT:이미지 ${timeoutMs / 1000}초 초과. 스크린샷+img 목록 저장됨. 셀렉터 불일치 가능성 높음.`);
 }
 
+// ✅ [v1.5.7] C3 치명 버그 수정 — waitForNewImage와 동일한 3중 조건 사용
+//   기존: alt="생성된 이미지" 2개만 카운트 → waitForNewImage(URL 패턴/크기)로 더 많이 매칭 시
+//         prevCount보다 즉시 많아서 이전 이미지를 "새 이미지"로 오탐
 async function countExistingImages(page: Page): Promise<number> {
     return await page.evaluate(() => {
-        return document.querySelectorAll('img[alt="생성된 이미지"], img[alt="Generated image"]').length;
+        const imgs = Array.from(document.querySelectorAll('img')) as HTMLImageElement[];
+        return imgs.filter(img => {
+            const alt = img.alt || '';
+            const src = img.src || '';
+            const aria = img.getAttribute('aria-label') || '';
+            const fullyLoaded = img.complete && img.naturalWidth >= 200 && img.naturalHeight >= 200;
+            if (!fullyLoaded) return false;
+            if (/생성된 이미지|Generated image|Generated|생성|已生成|生成された|Image générée|Imagen generada|Generiertes Bild/i.test(alt + aria)) return true;
+            if (/media\.getMediaUrlRedirect|flowMedia|flow-media/i.test(src)) return true;
+            if (img.naturalWidth >= 512 && !/=s\d+-c$/.test(src) && src.startsWith('http')) return true;
+            return false;
+        }).length;
     });
 }
 
@@ -647,7 +699,8 @@ export async function generateSingleImageWithFlow(
     _aspectRatio: string = '1:1',
     signal?: AbortSignal,
 ): Promise<{ buffer: Buffer; mimeType: string } | null> {
-    const MAX_RETRIES = 2;
+    // ✅ [v1.5.7] 2 → 3으로 증가 — 네트워크/503 일시 실패 복구 강화
+    const MAX_RETRIES = 3;
     let lastError: Error | null = null;
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
@@ -822,8 +875,8 @@ export async function testFlowConnection(): Promise<{ ok: boolean; message: stri
 // ─── 중지/정리 ──────────────────────────────────────────
 export async function resetFlowState(): Promise<void> {
     cachedProjectUrl = null;
+    cookieBannerDismissed = false;
     try { if (cachedContext) await cachedContext.close(); } catch { /* ignore */ }
     cachedContext = null;
     cachedPage = null;
-    cachedBrowser = null;
 }
