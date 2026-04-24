@@ -325,19 +325,38 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
     // ✅ 중지 체크
     checkShouldStop();
 
-    // ✅ [2026-03-29 FIX v2] 이전 세션의 이미지 잔존 방지 — 풀오토 시작 시 무조건 초기화
-    // 원인: ImageManager에 이전 글(쇼핑커넥트 등)의 이미지가 남아있으면
-    //       L427에서 "ImageManager에서 이미지 가져오기"로 그대로 재사용되어
-    //       매번 같은 이미지(가습기 등)가 발행됨
-    // v1: formData.imageManagementImages 조건 → continuousPublishing 흐름에서 맹점 발생
-    // v2: 무조건 초기화 (이미지는 이후 단계에서 새로 생성/수집됨)
-    try {
-      ImageManager.clearAll();
-      generatedImages = [];
-      (window as any).generatedImages = [];
-      console.log('[FullAuto] ✅ ImageManager/generatedImages 초기화 완료 (이전 이미지 잔존 방지)');
-    } catch (clearErr) {
-      console.error('[FullAuto] ImageManager 초기화 실패:', clearErr);
+    // ✅ [2026-03-29 FIX v2 + v2.6.1 HOTFIX] 이전 세션 이미지 잔존 방지 + v1.6.5 가드 우회 수정
+    // 원인 1: ImageManager에 이전 글 이미지가 남아있으면 그대로 재사용되는 버그
+    // 원인 2: (v2.6.1) handleFullAutoPublish가 생성한 이미지를 이 초기화가 지워버려
+    //         v1.6.5 가드(formData.imageManagementImages 체크)가 우회되어 L586 경로에서
+    //         이미지 재생성 발생 → "다시 이미지 생성" 중복 버그 재발
+    // 수정: formData.imageManagementImages가 있으면 초기화 스킵 (이미 생성된 이미지 유지)
+    const hasPreGeneratedImages = Array.isArray((formData as any).imageManagementImages)
+      && (formData as any).imageManagementImages.length > 0;
+    if (hasPreGeneratedImages) {
+      console.log(`[FullAuto] ♻️ formData.imageManagementImages ${(formData as any).imageManagementImages.length}장 감지 → ImageManager 초기화 스킵 (중복 생성 방지)`);
+      // ImageManager에도 주입 유지 (L449에서 finalImages로 읽힐 수 있도록)
+      try {
+        ImageManager.clearAll();
+        (formData as any).imageManagementImages.forEach((img: any) => {
+          const h = img.heading || 'thumbnail';
+          if (h) ImageManager.addImage(h, img);
+        });
+        generatedImages = [...(formData as any).imageManagementImages];
+        (window as any).generatedImages = generatedImages;
+        console.log(`[FullAuto] ♻️ ImageManager 재주입 완료 (${generatedImages.length}장)`);
+      } catch (reuseErr) {
+        console.error('[FullAuto] 이미지 재주입 실패:', reuseErr);
+      }
+    } else {
+      try {
+        ImageManager.clearAll();
+        generatedImages = [];
+        (window as any).generatedImages = [];
+        console.log('[FullAuto] ✅ ImageManager/generatedImages 초기화 완료 (이전 이미지 잔존 방지)');
+      } catch (clearErr) {
+        console.error('[FullAuto] ImageManager 초기화 실패:', clearErr);
+      }
     }
 
     // ✅ [2026-04-04 FIX] 이전 글 제목이 UI 필드에 남아서 발행 시 재사용되는 버그 수정
@@ -462,6 +481,13 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
     if (finalImages.length === 0 && generatedImages && generatedImages.length > 0) {
       finalImages = generatedImages;
       appendLog(`🖼️ 전역 generatedImages에서 ${finalImages.length}개의 이미지를 가져왔습니다.`);
+    }
+
+    // ✅ [v2.6.1 HOTFIX] formData.imageManagementImages 최후 방어선 — handleFullAutoPublish 중복 생성 차단
+    if (finalImages.length === 0 && Array.isArray((formData as any).imageManagementImages) && (formData as any).imageManagementImages.length > 0) {
+      finalImages = [...(formData as any).imageManagementImages];
+      appendLog(`♻️ formData에서 이미 생성된 이미지 ${finalImages.length}개 재사용 (중복 방지)`);
+      console.log('[FullAuto] ♻️ formData.imageManagementImages 경로로 복구');
     }
 
     await yieldToUI();
