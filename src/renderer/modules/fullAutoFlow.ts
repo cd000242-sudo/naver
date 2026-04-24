@@ -335,16 +335,22 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
       && (formData as any).imageManagementImages.length > 0;
     if (hasPreGeneratedImages) {
       console.log(`[FullAuto] ♻️ formData.imageManagementImages ${(formData as any).imageManagementImages.length}장 감지 → ImageManager 초기화 스킵 (중복 생성 방지)`);
-      // ImageManager에도 주입 유지 (L449에서 finalImages로 읽힐 수 있도록)
+      // [v2.6.3] 배치 재주입 — syncAllPreviews 1회만 호출되어 "이미지 하나씩 다시 뜨는" 버그 차단
       try {
         ImageManager.clearAll();
-        (formData as any).imageManagementImages.forEach((img: any) => {
-          const h = img.heading || 'thumbnail';
-          if (h) ImageManager.addImage(h, img);
-        });
+        const batchEntries = (formData as any).imageManagementImages.map((img: any) => ({
+          headingTitle: img.heading || 'thumbnail',
+          image: img,
+        }));
+        if (typeof (ImageManager as any).addImagesBatch === 'function') {
+          (ImageManager as any).addImagesBatch(batchEntries);
+        } else {
+          // v2.6.3 이전 호환 fallback
+          batchEntries.forEach((e: any) => ImageManager.addImage(e.headingTitle, e.image));
+        }
         generatedImages = [...(formData as any).imageManagementImages];
         (window as any).generatedImages = generatedImages;
-        console.log(`[FullAuto] ♻️ ImageManager 재주입 완료 (${generatedImages.length}장)`);
+        console.log(`[FullAuto] ♻️ ImageManager 배치 재주입 완료 (${generatedImages.length}장, sync 1회)`);
       } catch (reuseErr) {
         console.error('[FullAuto] 이미지 재주입 실패:', reuseErr);
       }

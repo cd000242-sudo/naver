@@ -880,17 +880,24 @@ async function generateBatchPipelined(
             trackApiUsage('gemini', { images: 1, model: 'flow-nano-banana-2', costOverride: 0 });
             sendImageLog(`✅ [Flow][${detectedCount}/${totalItems}] "${slot.item.heading}" 완료 (${Math.round(downloaded.buffer.length / 1024)}KB)`);
 
-            if (onImageGenerated) onImageGenerated(image, slot.index, totalItems);
-            try {
-                const { BrowserWindow } = require('electron');
-                const wins = BrowserWindow.getAllWindows();
-                if (wins[0] && !wins[0].isDestroyed()) {
-                    wins[0].webContents.send('automation:imageGenerated', {
-                        image, index: slot.index, total: totalItems,
-                    });
-                    flowLog(`[Flow][Pipeline] 📨 IPC 직송: ${slot.index}/${totalItems}`);
-                }
-            } catch { /* ignore */ }
+            // ✅ [v2.6.3] 중복 이벤트 발사 차단
+            //   이전 버그: onImageGenerated 콜백(→main.ts가 IPC send)와 IPC 직송이 동시 발사 →
+            //              renderer가 같은 automation:imageGenerated를 2번 수신 → 이미지 2번 표시
+            //   수정: 콜백이 있으면 콜백만, 없으면 IPC 직송(fallback)만. 둘 중 하나만 발사.
+            if (onImageGenerated) {
+                onImageGenerated(image, slot.index, totalItems);
+            } else {
+                try {
+                    const { BrowserWindow } = require('electron');
+                    const wins = BrowserWindow.getAllWindows();
+                    if (wins[0] && !wins[0].isDestroyed()) {
+                        wins[0].webContents.send('automation:imageGenerated', {
+                            image, index: slot.index, total: totalItems,
+                        });
+                        flowLog(`[Flow][Pipeline] 📨 IPC 직송 (콜백 미주입 fallback): ${slot.index}/${totalItems}`);
+                    }
+                } catch { /* ignore */ }
+            }
         } catch (err) {
             const msg = (err as Error).message || '';
             flowError(`[Flow][Pipeline] [${slot.index + 1}] 감지 실패: ${msg}`);
@@ -979,19 +986,22 @@ export async function generateWithFlow(
                 cost: 0,
             } as any;
             results.push(image);
-            if (onImageGenerated) onImageGenerated(image, i, items.length);
-
-            try {
-                const { BrowserWindow } = require('electron');
-                const wins = BrowserWindow.getAllWindows();
-                if (wins[0] && !wins[0].isDestroyed()) {
-                    wins[0].webContents.send('automation:imageGenerated', {
-                        image, index: i, total: items.length,
-                    });
-                    flowLog(`[Flow] 📨 IPC 직송: automation:imageGenerated (${i}/${items.length})`);
+            // ✅ [v2.6.3] 중복 이벤트 발사 차단 — 콜백 있으면 콜백만, 없으면 IPC 직송(fallback)
+            if (onImageGenerated) {
+                onImageGenerated(image, i, items.length);
+            } else {
+                try {
+                    const { BrowserWindow } = require('electron');
+                    const wins = BrowserWindow.getAllWindows();
+                    if (wins[0] && !wins[0].isDestroyed()) {
+                        wins[0].webContents.send('automation:imageGenerated', {
+                            image, index: i, total: items.length,
+                        });
+                        flowLog(`[Flow] 📨 IPC 직송 (콜백 미주입 fallback): ${i}/${items.length}`);
+                    }
+                } catch (ipcErr) {
+                    flowWarn(`[Flow] IPC 직송 실패 (무시): ${(ipcErr as Error).message.substring(0, 80)}`);
                 }
-            } catch (ipcErr) {
-                flowWarn(`[Flow] IPC 직송 실패 (무시): ${(ipcErr as Error).message.substring(0, 80)}`);
             }
 
             // [v1.6.1] 이미지간 대기 500→200ms

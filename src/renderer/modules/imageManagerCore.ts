@@ -206,6 +206,34 @@ const ImageManager = {
   },
 
   /**
+   * [v2.6.3] 여러 이미지 일괄 추가 — syncAllPreviews 1회만 호출
+   * 원샷 재주입 시 매 addImage마다 syncAllPreviews가 호출되어
+   * 렌더러가 "이미지가 하나씩 다시 뜨는 것처럼 보이는" 버그 방지.
+   */
+  addImagesBatch(entries: Array<{ headingTitle: string; image: any }>): void {
+    if (!entries || entries.length === 0) return;
+    try {
+      pushImageHistorySnapshot('ImageManager.addImagesBatch');
+    } catch (e) {
+      console.warn('[renderer] catch ignored:', e);
+    }
+    for (const entry of entries) {
+      const titleKey = this.resolveHeadingKey(entry.headingTitle);
+      this.unsetHeadings.delete(titleKey);
+      const images = this.imageMap.get(titleKey) || [];
+      images.push({
+        ...entry.image,
+        heading: titleKey,
+        timestamp: Date.now(),
+      });
+      this.imageMap.set(titleKey, images);
+    }
+    console.log(`[ImageManager] 🎯 배치 추가 완료: ${entries.length}개 (sync 1회)`);
+    this.syncGeneratedImagesArray();
+    this.syncAllPreviews();
+  },
+
+  /**
    * ✅ 이미지 추가 (소제목당 여러 이미지 지원)
    */
   addImage(headingTitle: string, image: any): void {
