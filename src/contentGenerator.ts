@@ -3169,21 +3169,28 @@ function evaluateTitleQuality(title: string, keyword: string, mode: PromptMode, 
     }
   }
 
-  // ✅ [v1.8.1 LDF Phase 2] 홈판 모드 전용 CTR 예측 점수 결합 (0-100 → ±20점 가중)
-  //   ctrCombat.scoreTitleForHomefeed는 독립적인 홈판 특화 채점기:
-  //     - 골든존 28~35자, 숫자, 감정어, AI 클리셰 감지, 카테고리 앵커
-  //   기존 감점/보너스 시스템과 보완 관계 (중복 체크 감안 가중치 낮게)
+  // ✅ [v1.8.1 LDF Phase 2] 홈판 모드 전용 CTR 예측 점수 결합
+  // ✅ [v2.6.0 Neo-Hook] scoreNeoHookTitle로 "신박함" 축 추가 채점
   if (mode === 'homefeed') {
     try {
       const { scoreTitleForHomefeed } = require('./content/ctrCombat.js');
       const ctrResult = scoreTitleForHomefeed(t, categoryHint);
-      const ctrBonus = Math.round((ctrResult.score - 50) * 0.3); // 50점 기준으로 ±15점 가중
-      score += ctrBonus;
-      if (ctrBonus !== 0) {
-        console.log(`[TitleQuality] 🎯 CTR 예측 ${ctrResult.score}점 → ${ctrBonus > 0 ? '+' : ''}${ctrBonus}점 가중`);
-        if (ctrResult.suggestions.length > 0) {
-          console.log(`[TitleQuality] 💡 CTR 제안: ${ctrResult.suggestions.slice(0, 2).join(' | ')}`);
+      // [v2.6.0] Neo-Hook 채점 — 역설·감각·구어체 가산점 + 확장 블랙리스트 감점
+      try {
+        const { scoreNeoHookTitle } = require('./content/neoHookTitles.js');
+        const neo = scoreNeoHookTitle(t, { category: categoryHint, baseCTRScore: ctrResult.score });
+        // Neo-Hook 총점을 최종에 반영 (base CTR은 이미 포함된 상태)
+        const neoBonus = Math.round((neo.totalScore - 50) * 0.4); // 기존 CTR보다 약간 높은 가중
+        score += neoBonus;
+        if (neoBonus !== 0) {
+          console.log(`[TitleQuality] 🎯 Neo-Hook ${neo.totalScore}점 (${neo.verdict}) → ${neoBonus > 0 ? '+' : ''}${neoBonus}점`);
+          if (neo.noveltyMatches.length > 0) console.log(`[TitleQuality] 🌟 신박 매칭: ${neo.noveltyMatches.join(', ')}`);
+          if (neo.clicheHits.length > 0) console.log(`[TitleQuality] ⛔ B급 훅: ${neo.clicheHits.join(', ')}`);
         }
+      } catch {
+        // Neo-Hook 실패 시 기존 CTR만
+        const ctrBonus = Math.round((ctrResult.score - 50) * 0.3);
+        score += ctrBonus;
       }
     } catch (err) {
       // ctrCombat 로드 실패 시 기존 로직만 사용

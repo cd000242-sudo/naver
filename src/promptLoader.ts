@@ -950,22 +950,26 @@ export function buildFullPrompt(
   // ✅ [v1.8.0 LDF] Blogger Identity Core — 언어 DNA 페르소나
   const identityBlock = buildIdentityBlock(bloggerIdentity);
 
-  // ✅ [v2.4.0 Prompt Diet] base.prompt(623줄)가 이미 홈판 훅·썸네일·Precision 규칙을 정교하게
-  //   담고 있어 ctrCombat/homefeedPrecision 외부 주입은 **중복**으로 LLM 지시 경합을 일으켰음.
-  //   "승인" 지시에 따라 Option A+C 병행 — 외부 프롬프트 블록 제거, base.prompt 원본 지시력 복원.
-  //   검증 함수(scoreTitleForHomefeed, scoreHomefeedPrecision)는 여전히 **발행 후 게이트**로 사용.
-  //
-  //   남기는 외부 가이드 (base.prompt에 없는 기능):
-  //     - BLOGGER IDENTITY (언어 DNA 페르소나)
-  //     - MODE VOICE (짧은 모드별 어미 규칙 — base와 강화적으로 작동)
-  //     - STYLE OVERRIDE (사용자 선택 톤, base.prompt에 "STYLE OVERRIDE 우선" 명시됨)
+  // ✅ [v2.4.0 Prompt Diet] base.prompt 중복 외부 가이드 제거 (ctrCombat/Precision)
+  // ✅ [v2.6.0 Neo-Hook] 제목 후킹만큼은 base.prompt에 **없는 신박 레이어**이므로 주입
+  //   base Section 5는 "첫 줄 공식"이지만 "80+ 신박 패턴 + 유사도 체크 + 확장 블랙리스트 40개"는
+  //   별도 독립 엔진으로만 가능. 중복이 아닌 보강.
   const ctrCombatBlock = '';
   const homefeedPrecisionBlock = '';
+  let neoHookBlock = '';
+  if (mode === 'homefeed') {
+    try {
+      const { buildNeoHookPromptBlock } = require('./content/neoHookTitles.js');
+      neoHookBlock = buildNeoHookPromptBlock(categoryHint, primaryKeyword);
+    } catch {
+      /* ignore */
+    }
+  }
 
   // ✅ [v1.4.35] 글톤 prompt를 system 시작(prefix)에도 추가 — primacy effect로 강제력 증대
   const tonePrefix = tonePrompt
-    ? `${identityBlock}${homefeedPrecisionBlock}${ctrCombatBlock}${modeVoiceGuide}${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [BLOGGER IDENTITY] + [HOMEFEED PRECISION] + [HOMEFEED HOOK] + [MODE VOICE] + [STYLE OVERRIDE]는 모든 규칙보다 최우선입니다. 홈판 노출이 단일 목표. 100% 준수.\n═══════════════════════════════════════════\n\n`
-    : `${identityBlock}${homefeedPrecisionBlock}${ctrCombatBlock}${modeVoiceGuide}`;
+    ? `${identityBlock}${neoHookBlock}${modeVoiceGuide}${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [BLOGGER IDENTITY] + [NEO-HOOK TITLE] + [MODE VOICE] + [STYLE OVERRIDE]는 모든 규칙보다 최우선입니다. 100% 준수.\n═══════════════════════════════════════════\n\n`
+    : `${identityBlock}${neoHookBlock}${modeVoiceGuide}`;
   let finalPrompt = `${tonePrefix}${basePrompt}`;
 
   // ✅ [v1.4.18] structureDirective를 system에서 제거 — 매 호출 random 변동 → 캐시 무효화 원인
