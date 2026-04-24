@@ -331,55 +331,88 @@ class GeminiKeyPool {
 }
 
 // ✅ [2026-03-02] 스마트 RPM 쓰로틀러 (분당 요청 횟수 제한 자동 관리)
-// Gemini 이미지 모델은 유료 1등급 기준 10 RPM 제한 → 429 사전 방지
+// ✅ [v2.6.2] 적응형 쓰로틀러 — 429 없으면 점진 상향, 429 발생 시 자동 감속
+// Gemini 이미지 모델 RPM (공식 2026-04):
+//   - gemini-3-pro-image-preview: Tier 1 = 10 RPM
+//   - gemini-3.1-flash-image-preview: Tier 1 = 60 RPM (Flash는 6배 높음)
+//   - gemini-2.5-flash-image: Tier 1 = 10 RPM (이전 세대)
+//   Tier 2+ (결제 >$100): 모두 1,000 RPM
 class GeminiRpmThrottler {
   private callTimestamps: number[] = [];
-  private readonly maxRpm: number;
-  private readonly safetyMargin: number; // RPM 한도 대비 안전 마진
+  private currentMaxRpm: number;       // 동적 상한 (429 감지 시 감소)
+  private readonly ceilingRpm: number;  // 상한 (모델별)
+  private readonly floorRpm: number;    // 하한 (최소 보장)
+  private readonly safetyMargin: number;
+  private consecutiveSuccesses: number = 0;
+  private last429At: number = 0;
 
-  constructor(maxRpm: number = 10, safetyMargin: number = 2) {
-    this.maxRpm = maxRpm;
-    this.safetyMargin = safetyMargin; // 기본값: 10 RPM 중 8개까지만 허용
+  constructor(ceilingRpm: number = 30, floorRpm: number = 8, safetyMargin: number = 2) {
+    this.ceilingRpm = ceilingRpm;
+    this.floorRpm = floorRpm;
+    this.currentMaxRpm = Math.floor((ceilingRpm + floorRpm) / 2); // 중간값 시작
+    this.safetyMargin = safetyMargin;
   }
 
-  /** 현재 1분 윈도우 내 호출 수 */
   private getRecentCallCount(): number {
     const now = Date.now();
     const oneMinuteAgo = now - 60000;
-    // 오래된 타임스탬프 제거
     this.callTimestamps = this.callTimestamps.filter(t => t > oneMinuteAgo);
     return this.callTimestamps.length;
   }
 
-  /** API 호출 전 대기 (RPM 초과 방지) — 비동기 */
   async throttle(): Promise<void> {
-    const safeLimit = this.maxRpm - this.safetyMargin;
+    const safeLimit = this.currentMaxRpm - this.safetyMargin;
     const recentCalls = this.getRecentCallCount();
 
     if (recentCalls >= safeLimit) {
-      // 가장 오래된 호출이 1분 윈도우를 벗어날 때까지 대기
       const oldestInWindow = this.callTimestamps[0];
-      const waitMs = Math.max(0, (oldestInWindow + 60000) - Date.now()) + 1500; // 1.5초 여유
-      console.log(`[RPM Throttler] ⏳ 분당 ${recentCalls}/${this.maxRpm}회 도달 → ${Math.round(waitMs / 1000)}초 대기 (429 방지)`);
-      sendImageLog(`⏳ 분당 요청 한도 ${recentCalls}/${this.maxRpm}회 도달 — ${Math.round(waitMs / 1000)}초 대기 중...`);
+      const waitMs = Math.max(0, (oldestInWindow + 60000) - Date.now()) + 1500;
+      console.log(`[RPM Throttler] ⏳ 분당 ${recentCalls}/${this.currentMaxRpm}회 도달 → ${Math.round(waitMs / 1000)}초 대기`);
+      sendImageLog(`⏳ 분당 요청 한도 ${recentCalls}/${this.currentMaxRpm}회 도달 — ${Math.round(waitMs / 1000)}초 대기 중...`);
       await new Promise(resolve => setTimeout(resolve, waitMs));
     }
   }
 
-  /** API 호출 완료 기록 */
   recordCall(): void {
     this.callTimestamps.push(Date.now());
+    this.consecutiveSuccesses++;
+    // [v2.6.2] 20회 연속 성공 시 RPM 상한 +5 상향 (적응형 가속)
+    if (this.consecutiveSuccesses >= 20 && this.currentMaxRpm < this.ceilingRpm) {
+      const newRpm = Math.min(this.ceilingRpm, this.currentMaxRpm + 5);
+      if (newRpm > this.currentMaxRpm) {
+        console.log(`[RPM Throttler] 🚀 적응형 가속: ${this.currentMaxRpm} → ${newRpm} RPM (20회 연속 성공)`);
+        this.currentMaxRpm = newRpm;
+      }
+      this.consecutiveSuccesses = 0;
+    }
   }
 
-  /** 현재 상태 로그 */
+  /** [v2.6.2] 429 감지 시 호출 — RPM 상한 즉시 절반 감소 */
+  record429(): void {
+    this.last429At = Date.now();
+    this.consecutiveSuccesses = 0;
+    const newRpm = Math.max(this.floorRpm, Math.floor(this.currentMaxRpm / 2));
+    console.warn(`[RPM Throttler] 🔻 429 감지 → RPM 상한 ${this.currentMaxRpm} → ${newRpm} 감소 (보호)`);
+    this.currentMaxRpm = newRpm;
+  }
+
   getStatus(): string {
     const count = this.getRecentCallCount();
-    return `${count}/${this.maxRpm} RPM`;
+    return `${count}/${this.currentMaxRpm} RPM (상한 ${this.ceilingRpm})`;
   }
 }
 
-// 전역 RPM 쓰로틀러 인스턴스 (모든 Gemini API 호출에 공유)
-const geminiRpmThrottler = new GeminiRpmThrottler(10, 2); // 10 RPM, 안전마진 2 → 8회/분 이하 유지
+// [v2.6.2] 전역 RPM 쓰로틀러 — Flash 고속화
+// 기본 상한 30 RPM, 하한 8 RPM, 중간값 19에서 시작해 429 없으면 점진 가속
+// Tier 2+ 사용자는 환경변수 GEMINI_RPM_CEILING으로 상향 가능
+const getCeilingRpm = (): number => {
+  try {
+    const env = typeof process !== 'undefined' ? parseInt(process.env.GEMINI_RPM_CEILING || '', 10) : NaN;
+    if (!isNaN(env) && env > 0) return env;
+  } catch {}
+  return 30; // Flash 모델 Tier 1 기준
+};
+const geminiRpmThrottler = new GeminiRpmThrottler(getCeilingRpm(), 8, 2);
 
 // 전역 키 풀 인스턴스 (세션 간 소진 상태 공유)
 let globalKeyPool: GeminiKeyPool | null = null;
@@ -570,10 +603,20 @@ export async function generateWithNanoBananaPro(
       }
     }
 
-    // ✅ [2026-03-17] ImageFX 우선 로직 제거 — 나노바나나 선택 시 Gemini API만 사용
-    // ImageFX는 사용자가 명시적으로 imagefx를 선택했을 때만 사용
-    const PARALLEL_LIMIT = 2;
-    console.log(`[NanoBananaPro] 📷 2장 병렬 처리 모드 (Gemini API)`);
+    // ✅ [v2.6.2] 병렬 한도 2 → 4 상향 (Flash 모델 고속화)
+    //   이전: 2장 → 8장 처리 시 4 사이클 (장당 20초 × 4 = 80초)
+    //   변경: 4장 → 8장 처리 시 2 사이클 (장당 20초 × 2 = 40초)
+    //   안전: RPM 쓰로틀러가 Rate Limit 보호 (30 RPM 적응형)
+    //   환경변수: GEMINI_PARALLEL_LIMIT로 튜닝 가능 (기본 4, 최대 8)
+    const getParallelLimit = (): number => {
+      try {
+        const env = typeof process !== 'undefined' ? parseInt(process.env.GEMINI_PARALLEL_LIMIT || '', 10) : NaN;
+        if (!isNaN(env) && env >= 1 && env <= 8) return env;
+      } catch {}
+      return 4;
+    };
+    const PARALLEL_LIMIT = getParallelLimit();
+    console.log(`[NanoBananaPro] 📷 ${PARALLEL_LIMIT}장 병렬 처리 모드 (Gemini API, 적응형 RPM ${geminiRpmThrottler.getStatus()})`);
 
     // 병렬 처리를 위한 세마포어 (동시 실행 제한)
     let activeCount = 0;
@@ -1521,6 +1564,10 @@ async function generateSingleImageWithGemini(
 
       // ✅ [2026-01-24 FIX] 에러 코드별 사용자 친화적 메시지
       const isQuotaError = errorMessage.includes('quota') || errorMessage.includes('429') || statusCode === 429;
+      // ✅ [v2.6.2] 429 감지 → 적응형 쓰로틀러에 통보 → RPM 자동 감속
+      if (isQuotaError) {
+        try { geminiRpmThrottler.record429(); } catch {}
+      }
       const isLimitZero = errorMessage.includes('limit: 0') || errorMessage.includes('free_tier');
       const isPaidOnly = errorMessage.includes('paid plan') || errorMessage.includes('paid plans');
       const isServerError = statusCode === 500 || statusCode === 503 || errorMessage.includes('500') || errorMessage.includes('503');
