@@ -953,6 +953,7 @@ export function buildFullPrompt(
   // ✅ [v1.8.1 LDF Phase 2] CTR Combat Layer — 홈판 모드 전용 훅 라이브러리 + 썸네일 공식
   //   SEO 모드에는 주입 안 함 (SEO는 정보체 우선, 감정 훅 역효과)
   let ctrCombatBlock = '';
+  let homefeedPrecisionBlock = '';
   if (mode === 'homefeed') {
     try {
       const { buildHomefeedHookGuide, buildThumbnailFormula } = require('./content/ctrCombat.js');
@@ -960,12 +961,20 @@ export function buildFullPrompt(
     } catch {
       // require 실패 무시 (TS 빌드 이전 경로)
     }
+    // [v2.3.0] Homefeed Precision — 홈판 적중률 단일 목표 집중 가이드
+    //   3대 축(Thumbstop/Stickiness/Safety) 극한 지시 + 최종 자가검토 체크리스트
+    try {
+      const { buildHomefeedPrecisionPromptBlock } = require('./content/homefeedPrecision.js');
+      homefeedPrecisionBlock = buildHomefeedPrecisionPromptBlock();
+    } catch {
+      /* ignore */
+    }
   }
 
   // ✅ [v1.4.35] 글톤 prompt를 system 시작(prefix)에도 추가 — primacy effect로 강제력 증대
   const tonePrefix = tonePrompt
-    ? `${identityBlock}${ctrCombatBlock}${modeVoiceGuide}${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [BLOGGER IDENTITY] + [HOMEFEED HOOK] + [MODE VOICE] + [STYLE OVERRIDE]는 모든 규칙보다 최우선입니다. 100% 준수.\n═══════════════════════════════════════════\n\n`
-    : `${identityBlock}${ctrCombatBlock}${modeVoiceGuide}`;
+    ? `${identityBlock}${homefeedPrecisionBlock}${ctrCombatBlock}${modeVoiceGuide}${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [BLOGGER IDENTITY] + [HOMEFEED PRECISION] + [HOMEFEED HOOK] + [MODE VOICE] + [STYLE OVERRIDE]는 모든 규칙보다 최우선입니다. 홈판 노출이 단일 목표. 100% 준수.\n═══════════════════════════════════════════\n\n`
+    : `${identityBlock}${homefeedPrecisionBlock}${ctrCombatBlock}${modeVoiceGuide}`;
   let finalPrompt = `${tonePrefix}${basePrompt}`;
 
   // ✅ [v1.4.18] structureDirective를 system에서 제거 — 매 호출 random 변동 → 캐시 무효화 원인
