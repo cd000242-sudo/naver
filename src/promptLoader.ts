@@ -950,26 +950,17 @@ export function buildFullPrompt(
   // ✅ [v1.8.0 LDF] Blogger Identity Core — 언어 DNA 페르소나
   const identityBlock = buildIdentityBlock(bloggerIdentity);
 
-  // ✅ [v1.8.1 LDF Phase 2] CTR Combat Layer — 홈판 모드 전용 훅 라이브러리 + 썸네일 공식
-  //   SEO 모드에는 주입 안 함 (SEO는 정보체 우선, 감정 훅 역효과)
-  let ctrCombatBlock = '';
-  let homefeedPrecisionBlock = '';
-  if (mode === 'homefeed') {
-    try {
-      const { buildHomefeedHookGuide, buildThumbnailFormula } = require('./content/ctrCombat.js');
-      ctrCombatBlock = `${buildHomefeedHookGuide(categoryHint, primaryKeyword)}\n${buildThumbnailFormula(categoryHint)}`;
-    } catch {
-      // require 실패 무시 (TS 빌드 이전 경로)
-    }
-    // [v2.3.0] Homefeed Precision — 홈판 적중률 단일 목표 집중 가이드
-    //   3대 축(Thumbstop/Stickiness/Safety) 극한 지시 + 최종 자가검토 체크리스트
-    try {
-      const { buildHomefeedPrecisionPromptBlock } = require('./content/homefeedPrecision.js');
-      homefeedPrecisionBlock = buildHomefeedPrecisionPromptBlock();
-    } catch {
-      /* ignore */
-    }
-  }
+  // ✅ [v2.4.0 Prompt Diet] base.prompt(623줄)가 이미 홈판 훅·썸네일·Precision 규칙을 정교하게
+  //   담고 있어 ctrCombat/homefeedPrecision 외부 주입은 **중복**으로 LLM 지시 경합을 일으켰음.
+  //   "승인" 지시에 따라 Option A+C 병행 — 외부 프롬프트 블록 제거, base.prompt 원본 지시력 복원.
+  //   검증 함수(scoreTitleForHomefeed, scoreHomefeedPrecision)는 여전히 **발행 후 게이트**로 사용.
+  //
+  //   남기는 외부 가이드 (base.prompt에 없는 기능):
+  //     - BLOGGER IDENTITY (언어 DNA 페르소나)
+  //     - MODE VOICE (짧은 모드별 어미 규칙 — base와 강화적으로 작동)
+  //     - STYLE OVERRIDE (사용자 선택 톤, base.prompt에 "STYLE OVERRIDE 우선" 명시됨)
+  const ctrCombatBlock = '';
+  const homefeedPrecisionBlock = '';
 
   // ✅ [v1.4.35] 글톤 prompt를 system 시작(prefix)에도 추가 — primacy effect로 강제력 증대
   const tonePrefix = tonePrompt
