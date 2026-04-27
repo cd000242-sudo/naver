@@ -14,13 +14,19 @@ import { addThumbnailTextOverlay } from './textOverlay.js';
 import { AutomationService } from '../main/services/AutomationService.js';
 
 const OPENAI_IMAGES_API_URL = 'https://api.openai.com/v1/images/generations';
-// ✅ [v1.5.5] gpt-image-1 → gpt-image-2 업그레이드
-//   "덕트테이프(Duct Tape)" 코드명으로 LM Arena에서 검증되던 OpenAI 차세대 이미지 모델
-//   2026-04-21 ChatGPT Images 2.0로 공식 출시 — Nano Banana 저격 포지션
-//   주요 개선: 12단어+ 긴 텍스트 완벽 스펠링, 한글/일본어/중국어 등 다국어 렌더링 급상승,
-//              실사화 수준 대폭 향상 (가격은 gpt-image-1과 동등 가정)
-// v2.7.3: gpt-image-2가 계정/리전에 따라 미사용/empty 반환 시 gpt-image-1로 자동 폴백
-const DEFAULT_MODEL = 'gpt-image-2';
+// v2.7.4: 모델 우선순위 역전. 원인 분석 결과 'gpt-image-2'는 OpenAI 공식
+// 모델 카탈로그에 등재된 적 없는 추측 모델명(v1.5.5 코멘트는 LM Arena
+// 'Duct Tape' 검증과 2026-04-21 출시 가정만 근거). 결과: 대다수 사용자
+// 계정에서 model_not_found 또는 빈 응답 반환 → "이미지가 비워있다" 오류.
+//
+// 안전 정책 변경:
+//   DEFAULT_MODEL = 'gpt-image-1' — 2025-03 OpenAI 공식 출시, 일반 사용 가능
+//   OPTIONAL_MODEL = 'gpt-image-2' — 1회만 시도, 실패 시 즉시 gpt-image-1로 폴백
+//
+// 추후 OpenAI가 gpt-image-2를 정식 출시하면 시도 1에서 성공해 자동 사용됨.
+// 출시 안 됐어도 시도 2부터 gpt-image-1이 잡아줘서 사용자 환경엔 영향 없음.
+const DEFAULT_MODEL = 'gpt-image-1';
+const OPTIONAL_NEW_MODEL = 'gpt-image-2';
 const FALLBACK_MODEL = 'gpt-image-1';
 const MIN_VALID_IMAGE_BYTES = 1024;
 
@@ -69,10 +75,18 @@ export async function generateWithOpenAIImage(
     }
 
     const results: GeneratedImage[] = [];
+    // v2.7.4: 첫 항목에서 401(API 키 무효) 감지 시 즉시 중단 — 나머지 N개도
+    // 같은 키로 같은 에러를 만나므로 재시도 시간 낭비 방지. 마지막 에러는
+    // 함수 throw에 전달돼 dispatcher가 친절한 메시지로 변환한다.
+    let firstFatalError: any = null;
 
     for (let i = 0; i < items.length; i++) {
         if (AutomationService.isCancelRequested()) {
             console.log('[OpenAI-Image] ⛔ 중지 요청 감지 → 이미지 생성 중단');
+            break;
+        }
+        if (firstFatalError) {
+            console.warn(`[OpenAI-Image] ⛔ 치명적 에러 감지 (인증/권한). 나머지 ${items.length - i}개 항목 건너뜀.`);
             break;
         }
 
@@ -128,17 +142,23 @@ export async function generateWithOpenAIImage(
             };
             const size = sizeMap[imageRatio] || '1024x1024';
 
-            // 재시도 로직 — v2.7.3: 모델 폴백 + 빈 버퍼 검증 추가
-            // 시도 1~2: gpt-image-2 (DEFAULT_MODEL)
-            // 시도 3: gpt-image-1 (FALLBACK_MODEL) — 계정/리전 미지원 또는 empty 응답 폴백
+            // 재시도 로직 — v2.7.4: 모델 우선순위 역전 + 빈 버퍼 검증
+            // 시도 1: gpt-image-1 (DEFAULT_MODEL — 2025-03 OpenAI 공식 출시, 일반 사용 가능)
+            // 시도 2: gpt-image-2 (OPTIONAL_NEW_MODEL — 신모델 시범. 실패 시 즉시 폴백 트리거)
+            // 시도 3: gpt-image-1 (FALLBACK_MODEL — 마지막 안전망)
             const maxRetries = 3;
             let lastError: any;
-            let modelSwitchedToFallback = false;
+            let optionalModelDisabled = false;
 
             for (let attempt = 1; attempt <= maxRetries; attempt++) {
-                const currentModel = (attempt >= maxRetries || modelSwitchedToFallback)
-                    ? FALLBACK_MODEL
-                    : DEFAULT_MODEL;
+                let currentModel: string;
+                if (attempt === 1) {
+                    currentModel = DEFAULT_MODEL; // gpt-image-1
+                } else if (attempt === 2 && !optionalModelDisabled) {
+                    currentModel = OPTIONAL_NEW_MODEL; // gpt-image-2 시범 시도
+                } else {
+                    currentModel = FALLBACK_MODEL; // gpt-image-1 안전망
+                }
                 try {
                     // ✅ [2026-03-03] 참조 이미지가 있으면 image 파라미터로 전달 (img2img)
                     const requestBody: any = {
@@ -195,10 +215,10 @@ export async function generateWithOpenAIImage(
                     if (!buffer || buffer.length < MIN_VALID_IMAGE_BYTES) {
                         const sz = buffer ? buffer.length : 0;
                         console.warn(`[OpenAI-Image] ⚠️ 빈/손상 이미지 감지 (${sz} bytes < ${MIN_VALID_IMAGE_BYTES}, model: ${currentModel})`);
-                        // gpt-image-2가 빈 응답이면 다음 시도부터 gpt-image-1로 폴백
-                        if (currentModel === DEFAULT_MODEL && !modelSwitchedToFallback) {
-                            modelSwitchedToFallback = true;
-                            console.warn(`[OpenAI-Image] 🔁 ${DEFAULT_MODEL} → ${FALLBACK_MODEL} 폴백 (빈 응답 반복 차단)`);
+                        // v2.7.4: gpt-image-2가 빈 응답이면 OPTIONAL_NEW_MODEL 비활성화 → 다음부터 안전망 모델
+                        if (currentModel === OPTIONAL_NEW_MODEL && !optionalModelDisabled) {
+                            optionalModelDisabled = true;
+                            console.warn(`[OpenAI-Image] 🔁 ${OPTIONAL_NEW_MODEL} 빈 응답 — 다음 시도부터 ${FALLBACK_MODEL} 고정`);
                         }
                         throw new Error(`OpenAI가 빈 이미지 반환 (${sz} bytes, model: ${currentModel}). 안전필터/모델 미지원/쿼터 의심.`);
                     }
@@ -232,16 +252,28 @@ export async function generateWithOpenAIImage(
 
                 } catch (apiError: any) {
                     lastError = apiError;
+                    const status = apiError.response?.status;
                     const errMsg = apiError.response?.data?.error?.message || apiError.message || 'unknown';
                     const errCode = apiError.response?.data?.error?.code || '';
-                    console.warn(`[OpenAI-Image] ⚠️ 시도 ${attempt}/${maxRetries} 실패 (model: ${currentModel}): ${errMsg}`);
+                    console.warn(`[OpenAI-Image] ⚠️ 시도 ${attempt}/${maxRetries} 실패 (model: ${currentModel}, status: ${status}): ${errMsg}`);
 
-                    // v2.7.3: 모델 미존재/미지원 에러면 즉시 폴백 모델로 전환
+                    // v2.7.4: 401/403(인증/권한) 또는 invalid_api_key는 재시도/폴백 모두 무의미.
+                    // 즉시 firstFatalError 기록 + 루프 탈출. 외부 for(items)에서도 즉시 중단.
+                    const isAuthError = status === 401 || status === 403
+                        || errCode === 'invalid_api_key'
+                        || /invalid api key|incorrect api key|unauthenticated/i.test(errMsg);
+                    if (isAuthError) {
+                        console.error(`[OpenAI-Image] 🚫 인증 에러 (${status} ${errCode}) — 재시도 무의미. 즉시 중단.`);
+                        firstFatalError = apiError;
+                        break;
+                    }
+
+                    // v2.7.3: 모델 미존재/미지원 에러 → OPTIONAL_NEW_MODEL 비활성화
                     const isModelNotFound = errCode === 'model_not_found'
                         || /model.*not.*found|invalid.*model|does not exist/i.test(errMsg);
-                    if (isModelNotFound && currentModel === DEFAULT_MODEL && !modelSwitchedToFallback) {
-                        modelSwitchedToFallback = true;
-                        console.warn(`[OpenAI-Image] 🔁 ${DEFAULT_MODEL} 미지원 → ${FALLBACK_MODEL}로 즉시 폴백`);
+                    if (isModelNotFound && currentModel === OPTIONAL_NEW_MODEL) {
+                        optionalModelDisabled = true;
+                        console.warn(`[OpenAI-Image] 🔁 ${OPTIONAL_NEW_MODEL} 미지원 — 다음 시도부터 ${FALLBACK_MODEL} 고정`);
                     }
 
                     if (attempt < maxRetries) {
@@ -263,6 +295,15 @@ export async function generateWithOpenAIImage(
     }
 
     console.log(`[OpenAI-Image] 📊 최종 결과: ${results.length}/${items.length}개 생성 완료`);
+
+    // v2.7.4: 0개 생성 시 빈 배열을 silently 반환하지 않고 마지막 에러를 throw.
+    // dispatcher(imageGenerator.ts)가 getImageErrorMessage로 사용자 친절 메시지로
+    // 변환할 수 있어야 "이미지가 비어있다" 같은 모호한 다운스트림 에러를 차단.
+    if (results.length === 0) {
+        if (firstFatalError) throw firstFatalError;
+        throw new Error('OpenAI 덕트테이프로 단 1장의 이미지도 생성하지 못했습니다. 콘솔에서 [OpenAI-Image] ⚠️ 로그 확인 필요.');
+    }
+
     return results;
 }
 
