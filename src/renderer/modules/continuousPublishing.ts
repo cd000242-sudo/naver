@@ -2277,10 +2277,14 @@ export function initContinuousPublishingV2(): void {
     modalPrevPostBtn.addEventListener('click', showContinuousPrevPostModal);
   }
 
-  // 큐에 추가 버튼
-  const addBtn = document.getElementById('continuous-add-to-queue-btn');
-  if (addBtn) {
-    addBtn.addEventListener('click', addItemToQueueV2);
+  // 큐에 추가 버튼 — v2.6.9: clone-replace로 중복 리스너 누적 차단
+  // initContinuousPublishingV2 가드를 우회한 재진입에서도 N배 큐잉이 일어나지 않게
+  // 기존 노드를 복제 교체해 모든 prior listener를 제거한 뒤 새로 1회만 부착한다.
+  const oldAddBtn = document.getElementById('continuous-add-to-queue-btn');
+  if (oldAddBtn) {
+    const fresh = oldAddBtn.cloneNode(true) as HTMLElement;
+    oldAddBtn.parentNode?.replaceChild(fresh, oldAddBtn);
+    fresh.addEventListener('click', addItemToQueueV2);
   }
 
   // 전체 삭제 버튼
@@ -2447,8 +2451,27 @@ async function showContinuousPrevPostModal(): Promise<void> {
   }
 }
 
+// v2.6.9: 큐 추가 단일 실행 락 — 더블 클릭/이벤트 리스너 중복 등록으로 인한
+// 큐 항목 N배 폭증을 차단한다. 사용자 제보 "20개 입력 → 40개 이상 배치"는
+// addItemToQueueV2가 한 클릭에 두 번 이상 실행됐을 때만 가능한 패턴.
+let __addToQueueInFlight = false;
+
 // ✅ 큐에 항목 추가
 function addItemToQueueV2(): void {
+  if (__addToQueueInFlight) {
+    console.warn('[연속발행][큐가드] ⚠️ addItemToQueueV2 동시 호출 차단 — 더블 클릭/리스너 중복 의심');
+    return;
+  }
+  __addToQueueInFlight = true;
+  try {
+    addItemToQueueV2Impl();
+  } finally {
+    // 다음 사용자 클릭이 즉시 받아지도록 microtask로 해제
+    queueMicrotask(() => { __addToQueueInFlight = false; });
+  }
+}
+
+function addItemToQueueV2Impl(): void {
   const activeTab = document.querySelector('.continuous-input-tab.active') as HTMLElement;
   const tabType = activeTab?.dataset.tab || 'url';
 
@@ -2692,6 +2715,22 @@ function addItemToQueueV2(): void {
     // 키워드/제목은 대량 등록 시 공유할 수 있으므로 명시적으로 초기화하지 않음 (사용자 편의)
   } else if (tabType === 'keyword') {
     (document.getElementById('continuous-keyword-input') as HTMLInputElement).value = '';
+  }
+
+  // v2.6.9: 입력 vs 적재 비율 진단 — N배 폭증 감지 시 콘솔에 경고
+  console.log('[연속발행][큐가드] 적재 비율:', {
+    rawInputLines: rawCandidates.length,
+    rejectedByGuard: rejected.length,
+    actuallyAdded: addedCount,
+    queueTotal: continuousQueueV2.length,
+  });
+  if (addedCount > rawCandidates.length) {
+    console.error('[연속발행][큐가드] 🚨 비정상 폭증 감지!', {
+      expected: rawCandidates.length,
+      actual: addedCount,
+      ratio: (addedCount / Math.max(1, rawCandidates.length)).toFixed(2),
+      hint: '리스너 중복 또는 N배 확장 경로 의심 — addItemToQueueV2가 한 클릭에 여러 번 실행됨',
+    });
   }
 
   // 입력한 키워드/URL은 비평/검수 없이 입력 순서 그대로 큐에 적재한다.
