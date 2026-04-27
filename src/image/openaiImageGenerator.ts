@@ -14,20 +14,12 @@ import { addThumbnailTextOverlay } from './textOverlay.js';
 import { AutomationService } from '../main/services/AutomationService.js';
 
 const OPENAI_IMAGES_API_URL = 'https://api.openai.com/v1/images/generations';
-// v2.7.4: 모델 우선순위 역전. 원인 분석 결과 'gpt-image-2'는 OpenAI 공식
-// 모델 카탈로그에 등재된 적 없는 추측 모델명(v1.5.5 코멘트는 LM Arena
-// 'Duct Tape' 검증과 2026-04-21 출시 가정만 근거). 결과: 대다수 사용자
-// 계정에서 model_not_found 또는 빈 응답 반환 → "이미지가 비워있다" 오류.
-//
-// 안전 정책 변경:
-//   DEFAULT_MODEL = 'gpt-image-1' — 2025-03 OpenAI 공식 출시, 일반 사용 가능
-//   OPTIONAL_MODEL = 'gpt-image-2' — 1회만 시도, 실패 시 즉시 gpt-image-1로 폴백
-//
-// 추후 OpenAI가 gpt-image-2를 정식 출시하면 시도 1에서 성공해 자동 사용됨.
-// 출시 안 됐어도 시도 2부터 gpt-image-1이 잡아줘서 사용자 환경엔 영향 없음.
-const DEFAULT_MODEL = 'gpt-image-1';
-const OPTIONAL_NEW_MODEL = 'gpt-image-2';
-const FALLBACK_MODEL = 'gpt-image-1';
+// v2.7.5: gpt-image-2 default 복귀 — 사용자가 명확히 신모델(덕트테이프)을
+// 쓰려고 메뉴를 만들었기 때문. 실측에서 gpt-image-2는 OpenAI 서버에 실재하며,
+// 다만 Organization 인증된 계정만 접근 가능(403 반환). 1세대 폴백을 제거하고
+// 미인증 시 OPENAI_ORG_VERIFY_REQUIRED: 태그된 에러를 throw해 렌더러가
+// 친절 모달로 인증 페이지 원클릭 이동을 안내한다.
+const DEFAULT_MODEL = 'gpt-image-2';
 const MIN_VALID_IMAGE_BYTES = 1024;
 
 /**
@@ -142,23 +134,12 @@ export async function generateWithOpenAIImage(
             };
             const size = sizeMap[imageRatio] || '1024x1024';
 
-            // 재시도 로직 — v2.7.4: 모델 우선순위 역전 + 빈 버퍼 검증
-            // 시도 1: gpt-image-1 (DEFAULT_MODEL — 2025-03 OpenAI 공식 출시, 일반 사용 가능)
-            // 시도 2: gpt-image-2 (OPTIONAL_NEW_MODEL — 신모델 시범. 실패 시 즉시 폴백 트리거)
-            // 시도 3: gpt-image-1 (FALLBACK_MODEL — 마지막 안전망)
+            // 재시도 로직 — v2.7.5: gpt-image-2 단일 모델, 1세대 폴백 제거
             const maxRetries = 3;
             let lastError: any;
-            let optionalModelDisabled = false;
 
             for (let attempt = 1; attempt <= maxRetries; attempt++) {
-                let currentModel: string;
-                if (attempt === 1) {
-                    currentModel = DEFAULT_MODEL; // gpt-image-1
-                } else if (attempt === 2 && !optionalModelDisabled) {
-                    currentModel = OPTIONAL_NEW_MODEL; // gpt-image-2 시범 시도
-                } else {
-                    currentModel = FALLBACK_MODEL; // gpt-image-1 안전망
-                }
+                const currentModel = DEFAULT_MODEL; // gpt-image-2 고정
                 try {
                     // ✅ [2026-03-03] 참조 이미지가 있으면 image 파라미터로 전달 (img2img)
                     const requestBody: any = {
@@ -215,12 +196,7 @@ export async function generateWithOpenAIImage(
                     if (!buffer || buffer.length < MIN_VALID_IMAGE_BYTES) {
                         const sz = buffer ? buffer.length : 0;
                         console.warn(`[OpenAI-Image] ⚠️ 빈/손상 이미지 감지 (${sz} bytes < ${MIN_VALID_IMAGE_BYTES}, model: ${currentModel})`);
-                        // v2.7.4: gpt-image-2가 빈 응답이면 OPTIONAL_NEW_MODEL 비활성화 → 다음부터 안전망 모델
-                        if (currentModel === OPTIONAL_NEW_MODEL && !optionalModelDisabled) {
-                            optionalModelDisabled = true;
-                            console.warn(`[OpenAI-Image] 🔁 ${OPTIONAL_NEW_MODEL} 빈 응답 — 다음 시도부터 ${FALLBACK_MODEL} 고정`);
-                        }
-                        throw new Error(`OpenAI가 빈 이미지 반환 (${sz} bytes, model: ${currentModel}). 안전필터/모델 미지원/쿼터 의심.`);
+                        throw new Error(`OpenAI가 빈 이미지 반환 (${sz} bytes, model: ${currentModel}). 안전필터/쿼터 의심.`);
                     }
 
                     // ✅ [2026-03-12 FIX] 텍스트 오버레이는 imageGenerator.ts의 applyKoreanTextOverlayIfNeeded에서 일괄 처리
@@ -257,23 +233,25 @@ export async function generateWithOpenAIImage(
                     const errCode = apiError.response?.data?.error?.code || '';
                     console.warn(`[OpenAI-Image] ⚠️ 시도 ${attempt}/${maxRetries} 실패 (model: ${currentModel}, status: ${status}): ${errMsg}`);
 
-                    // v2.7.4: 401/403(인증/권한) 또는 invalid_api_key는 재시도/폴백 모두 무의미.
-                    // 즉시 firstFatalError 기록 + 루프 탈출. 외부 for(items)에서도 즉시 중단.
+                    // v2.7.5: 403 + "must be verified" 패턴 감지 → Org 인증 미완료 전용 태그
+                    // 렌더러가 OPENAI_ORG_VERIFY_REQUIRED 태그로 감지해 친절 모달 + 인증
+                    // 페이지 원클릭 이동을 보여준다.
+                    const isOrgVerifyRequired = status === 403
+                        && /organization must be verified|verify organization|verified to use the model/i.test(errMsg);
+                    if (isOrgVerifyRequired) {
+                        console.error('[OpenAI-Image] 🔒 Organization 인증 필요 — 즉시 중단.');
+                        firstFatalError = new Error(`OPENAI_ORG_VERIFY_REQUIRED:${errMsg}`);
+                        break;
+                    }
+
+                    // v2.7.4: 401/403(invalid_api_key 등 일반 인증)은 재시도 무의미. 즉시 중단.
                     const isAuthError = status === 401 || status === 403
                         || errCode === 'invalid_api_key'
                         || /invalid api key|incorrect api key|unauthenticated/i.test(errMsg);
                     if (isAuthError) {
-                        console.error(`[OpenAI-Image] 🚫 인증 에러 (${status} ${errCode}) — 재시도 무의미. 즉시 중단.`);
+                        console.error(`[OpenAI-Image] 🚫 인증 에러 (${status} ${errCode}) — 재시도 무의미.`);
                         firstFatalError = apiError;
                         break;
-                    }
-
-                    // v2.7.3: 모델 미존재/미지원 에러 → OPTIONAL_NEW_MODEL 비활성화
-                    const isModelNotFound = errCode === 'model_not_found'
-                        || /model.*not.*found|invalid.*model|does not exist/i.test(errMsg);
-                    if (isModelNotFound && currentModel === OPTIONAL_NEW_MODEL) {
-                        optionalModelDisabled = true;
-                        console.warn(`[OpenAI-Image] 🔁 ${OPTIONAL_NEW_MODEL} 미지원 — 다음 시도부터 ${FALLBACK_MODEL} 고정`);
                     }
 
                     if (attempt < maxRetries) {

@@ -3121,6 +3121,71 @@ function renderQueueListV2(): void {
   });
 }
 
+// v2.7.5: 덕트테이프(gpt-image-2) 사용 시 OpenAI Organization 미인증 안내 모달
+// 단일 인스턴스 가드 — 연속 발행 중 N건 연속 실패해도 모달 1개만 표시
+let __openaiOrgVerifyModalShown = false;
+function showOpenAIOrgVerifyModal(): void {
+  if (__openaiOrgVerifyModalShown) return;
+  __openaiOrgVerifyModalShown = true;
+  document.getElementById('openai-org-verify-modal')?.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'openai-org-verify-modal';
+  overlay.style.cssText = `
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+    z-index: 60000; display: flex; align-items: center; justify-content: center; padding: 20px;
+  `;
+  overlay.innerHTML = `
+    <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 2px solid rgba(168, 85, 247, 0.45); border-radius: 18px; max-width: 560px; width: 100%; padding: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.55);">
+      <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+        <div style="font-size: 2rem;">🔒</div>
+        <div style="flex: 1;">
+          <h2 style="margin: 0 0 4px; font-size: 1.2rem; color: #fff;">덕트테이프 사용 — OpenAI 인증 필요</h2>
+          <p style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.5;">
+            <strong style="color:#a78bfa;">gpt-image-2(덕트테이프)</strong>는 OpenAI가 Organization 인증된 계정에만 풀어주는 신모델입니다. 인증은 5~15분 정도 걸리고, 한 번만 하면 영구입니다.
+          </p>
+        </div>
+      </div>
+
+      <div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 12px; padding: 14px; margin-bottom: 16px;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: #c4b5fd; margin-bottom: 8px;">📋 인증 절차 (한 번만)</div>
+        <ol style="margin: 0; padding-left: 18px; color: rgba(255,255,255,0.78); font-size: 0.82rem; line-height: 1.7;">
+          <li>아래 [OpenAI 인증 페이지 열기] 클릭</li>
+          <li><strong>Verify Organization</strong> 버튼 클릭</li>
+          <li>신분증(여권/운전면허) 사진 + 셀카 업로드</li>
+          <li>거주국 선택 → 제출</li>
+          <li>약 5~15분 자동 검토 → "Verified" 표시되면 완료</li>
+          <li>완료 후 추가 15분 모델 접근 권한 전파 대기</li>
+        </ol>
+      </div>
+
+      <div style="background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 12px; padding: 12px; margin-bottom: 16px;">
+        <div style="font-size: 0.8rem; color: rgba(255,255,255,0.78); line-height: 1.6;">
+          💡 <strong style="color:#86efac;">참고</strong> — 인증 대기 중에는 다른 이미지 엔진(나노바나나/Flow/ImageFX)으로 임시 전환해 발행을 계속할 수 있습니다.
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button type="button" id="openai-verify-modal-close" style="padding: 10px 18px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.78); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">나중에</button>
+        <button type="button" id="openai-verify-modal-open" style="padding: 10px 22px; background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.9rem; box-shadow: 0 6px 18px rgba(168, 85, 247, 0.35);">🚀 OpenAI 인증 페이지 열기</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const close = () => { overlay.remove(); __openaiOrgVerifyModalShown = false; };
+  document.getElementById('openai-verify-modal-close')?.addEventListener('click', close);
+  document.getElementById('openai-verify-modal-open')?.addEventListener('click', () => {
+    try {
+      (window as any).api?.openExternalUrl?.('https://platform.openai.com/settings/organization/general');
+    } catch (e) {
+      console.warn('[Continuous] openExternalUrl 실패:', e);
+    }
+    close();
+  });
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+}
+
 // ✅ [2026-02-07] 개별 큐 아이템 예약 시간 설정 모달
 function showItemScheduleModal(item: any): void {
   // 기존 모달 제거
@@ -4314,7 +4379,12 @@ async function startContinuousPublishingV2(): Promise<void> {
 
           } catch (imgErr) {
             console.error('[Continuous] 이미지 생성 실패:', imgErr);
-            appendLog(`❌ 이미지 생성 실패: ${(imgErr as Error).message}`);
+            // v2.7.5: OPENAI_ORG_VERIFY_REQUIRED 태그 감지 → 친절 안내 모달
+            const errMsgRaw = (imgErr as Error).message || '';
+            if (errMsgRaw.includes('OPENAI_ORG_VERIFY_REQUIRED')) {
+              showOpenAIOrgVerifyModal();
+            }
+            appendLog(`❌ 이미지 생성 실패: ${errMsgRaw}`);
             // ✅ [2026-04-03 FIX] 이미지 실패해도 글은 저장 — AI 글 생성 비용 보존
             try {
               saveGeneratedPostFromData(finalStructuredContent, [], {
