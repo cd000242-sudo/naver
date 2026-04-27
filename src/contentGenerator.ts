@@ -17,6 +17,7 @@ import { humanizeContent, humanizeHtmlContent, analyzeAiDetectionRisk, resetHuma
 import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog } from './contentOptimizer.js';
 import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
+import { META_CRITIQUE_PHRASES } from './content/forbiddenPhrases.js';
 // ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 실전 통합 훅
 import { validateContent as runValidationPipeline } from './services/contentValidationPipeline.js';
 import { extractRecentWinners, formatWinnersForPrompt } from './learning/recentWinnersExtractor.js';
@@ -4618,8 +4619,12 @@ ${source.customPrompt.trim()}
 - 각 소제목별로 서로 다른 고유한 이미지 프롬프트 생성
 
 ═══════════════════════════════════════════════════════════
-🚨 최종 자가검수 체크리스트
+🚨 최종 자가검수 체크리스트 (내부 검증용 — 본문에 절대 출력 금지)
 ═══════════════════════════════════════════════════════════
+⛔ 아래 체크리스트는 너의 머릿속에서만 수행하는 사일런트 검증이다.
+⛔ "솔직하게 자체비평하겠습니다", "자가검수를 진행하면", "체크리스트로
+   확인해보면" 같은 메타 문구를 본문/제목/도입/결론 어디에도 출력하지 마라.
+⛔ JSON 출력에는 검증 결과만 반영하고 검증 과정 자체는 단 한 글자도 쓰지 않는다.
 □ 사용자 요청 프롬프트를 충실히 반영했는가? (가장 중요!)
 □ 이모지/이모티콘이 없는가?
 □ AI가 쓴 것처럼 보이지 않는가?
@@ -6739,6 +6744,49 @@ function stripFakeSourcePhrases(text: string): string {
   return out;
 }
 
+// Strip lines that leak the LLM's self-check meta-language into the article.
+// "솔직하게 자체비평하겠습니다", "자가검수 체크리스트를 진행하면" 등 — these
+// originate from the [SECTION 13 자가 점검 체크리스트] / [최종 자가검수]
+// blocks in the prompt and should never reach the published post.
+function stripMetaCritiqueLines(s: string | undefined): string | undefined {
+  if (!s) return s;
+  // Split on hard line breaks AND sentence terminators so a meta sentence
+  // embedded mid-paragraph is removed without nuking the surrounding prose.
+  const segments = s.split(/(\r?\n|(?<=[.!?。])\s+)/);
+  const kept = segments.filter((seg) => {
+    if (!seg) return true;
+    const probe = seg.trim();
+    if (!probe) return true;
+    return !META_CRITIQUE_PHRASES.some((phrase) => probe.includes(phrase));
+  });
+  return kept.join('').replace(/\n{3,}/g, '\n\n').trim();
+}
+
+function sanitizeContentMetaCritique(content: StructuredContent): number {
+  let count = 0;
+  const tryFix = (s: string | undefined): string | undefined => {
+    if (!s) return s;
+    const fixed = stripMetaCritiqueLines(s);
+    if (fixed !== s) count++;
+    return fixed;
+  };
+  if (content.selectedTitle) content.selectedTitle = tryFix(content.selectedTitle)!;
+  if ((content as any).title) (content as any).title = tryFix((content as any).title);
+  if (content.introduction) content.introduction = tryFix(content.introduction)!;
+  if (content.conclusion) content.conclusion = tryFix(content.conclusion)!;
+  if (Array.isArray(content.headings)) {
+    for (const h of content.headings as any[]) {
+      if (h.title) h.title = tryFix(h.title);
+      if (h.body) h.body = tryFix(h.body);
+      if (h.content) h.content = tryFix(h.content);
+    }
+  }
+  if (count > 0) {
+    console.warn(`[Sanitizer] 🧹 자가검수 메타 표현 ${count}개 자동 제거 (자체비평/체크리스트 등)`);
+  }
+  return count;
+}
+
 /** content 객체 전체에 출처 날조 sanitizer 적용 (mutate) */
 function sanitizeContentFakeSources(content: StructuredContent): number {
   let count = 0;
@@ -6771,6 +6819,9 @@ function validateHomefeedContent(content: StructuredContent, source: ContentSour
   // ✅ [v1.4.52] 모든 모드에서 출처 날조 표현 강제 제거 (early return보다 먼저 실행)
   // 프롬프트로 금지해도 AI가 종종 출력하므로 정규식 박멸
   sanitizeContentFakeSources(content);
+  // v2.6.5: 자가검수 메타 표현 제거 — "솔직하게 자체비평하겠습니다" 등
+  // 자가 점검 체크리스트 블록이 본문으로 새는 환각을 정규식으로 차단
+  sanitizeContentMetaCritique(content);
 
   if (source.contentMode !== 'homefeed') return { hasCritical: false, violations: [] };
 

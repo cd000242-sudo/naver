@@ -127,6 +127,49 @@ export const FORBIDDEN_EXPERIENTIAL_PHRASES: readonly string[] = [
   '플라스틱 느낌',
 ] as const;
 
+// Meta-critique leakage from self-check checklist instructions in the prompt.
+// The model occasionally treats "[자가 점검 체크리스트]" / "[최종 자가검수]"
+// blocks as content rather than silent verification, and writes phrases like
+// "솔직하게 자체비평하겠습니다" or "자가검수를 진행하겠습니다" into the article.
+// These should never appear in the published post — they're the LLM's
+// internal monologue leaking into the output.
+//
+// `stripMetaCritiqueLines` (in contentGenerator.ts) deletes whole lines that
+// contain any of these phrases, since they always introduce a meta paragraph
+// rather than a normal sentence.
+export const META_CRITIQUE_PHRASES: readonly string[] = [
+  '자체비평',
+  '자체 비평',
+  '자기비평',
+  '자기 비평',
+  '자가검수',
+  '자가 검수',
+  '자가점검',
+  '자가 점검',
+  '자체점검',
+  '자체 점검',
+  '자체검수',
+  '자체 검수',
+  '솔직하게 자체',
+  '솔직히 자체',
+  '솔직하게 평가하',
+  '솔직히 평가하',
+  '평가해보겠',
+  '평가해 보겠',
+  '점검해보겠',
+  '점검해 보겠',
+  '검수해보겠',
+  '검수해 보겠',
+  '체크리스트',
+  '체크 리스트',
+  '메타 검수',
+  '메타검수',
+  '자체 평가하',
+  '자체평가하',
+  '자기 평가하',
+  '자기평가하',
+] as const;
+
 export interface ForbiddenScanResult {
   clean: boolean;
   matches: string[];
