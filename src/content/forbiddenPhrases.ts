@@ -137,7 +137,13 @@ export const FORBIDDEN_EXPERIENTIAL_PHRASES: readonly string[] = [
 // `stripMetaCritiqueLines` (in contentGenerator.ts) deletes whole lines that
 // contain any of these phrases, since they always introduce a meta paragraph
 // rather than a normal sentence.
+//
+// IMPORTANT — DO NOT add standalone tokens like '체크리스트' here. The user
+// legitimately writes posts about "여행 준비물 체크리스트", "육아 체크리스트
+// 5가지" etc. and a standalone-token match would delete those lines.
+// Only meta verbs combined with '체크리스트'/'점검'/'평가' qualify.
 export const META_CRITIQUE_PHRASES: readonly string[] = [
+  // 자가 비평 직접 표현 (정상 단어와 겹치지 않음)
   '자체비평',
   '자체 비평',
   '자기비평',
@@ -150,24 +156,38 @@ export const META_CRITIQUE_PHRASES: readonly string[] = [
   '자체 점검',
   '자체검수',
   '자체 검수',
+  '메타 검수',
+  '메타검수',
+
+  // 솔직 + 자가 — "솔직하게/솔직히 자체" 패턴 (메타 시작 패턴)
   '솔직하게 자체',
   '솔직히 자체',
   '솔직하게 평가하',
   '솔직히 평가하',
+
+  // 메타 동사 — "평가해보겠/점검해보겠/검수해보겠"는 본문 화법으론 거의 안 쓰임
   '평가해보겠',
   '평가해 보겠',
   '점검해보겠',
   '점검해 보겠',
   '검수해보겠',
   '검수해 보겠',
-  '체크리스트',
-  '체크 리스트',
-  '메타 검수',
-  '메타검수',
+
+  // 자체/자기 평가 — 단독 '평가하'는 정상 단어이므로 자체/자기 결합형만
   '자체 평가하',
   '자체평가하',
   '자기 평가하',
   '자기평가하',
+
+  // '체크리스트' 결합 패턴 — 단독 토큰은 정상 콘텐츠와 충돌하므로 메타 동사 결합만
+  '체크리스트로 확인',
+  '체크리스트로 점검',
+  '체크리스트로 검수',
+  '체크리스트를 진행',
+  '체크리스트를 통해 검수',
+  '자가검수 체크',
+  '자가점검 체크',
+  '자체비평 체크',
 ] as const;
 
 export interface ForbiddenScanResult {

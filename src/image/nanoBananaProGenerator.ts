@@ -9,8 +9,8 @@ import { getImageErrorMessage } from './imageErrorMessages.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 import { promises as fs } from 'fs';
-import { createHash } from 'crypto';
 import sharp from 'sharp';
+import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 
 // ✅ [2026-03-02] 실시간 이미지 생성 로그 → 렌더러 UI로 IPC 전송
 function sendImageLog(message: string): void {
@@ -206,47 +206,7 @@ function getPersonRule(category?: string): string {
   return 'If people appear in the image, they MUST be Korean (한국인). Authentic Korean facial features. Never Western/Caucasian.';
 }
 
-// ===== 해시 유틸리티 =====
-
-function popcountBigInt(x: bigint): number {
-  let v = x;
-  let count = 0;
-  while (v) {
-    count += Number(v & 1n);
-    v >>= 1n;
-  }
-  return count;
-}
-
-function hammingDistance64(a: bigint, b: bigint): number {
-  return popcountBigInt(a ^ b);
-}
-
-async function computeAHash64(buffer: Buffer): Promise<bigint | null> {
-  try {
-    const pixels = await sharp(buffer)
-      .resize(8, 8, { fit: 'fill' })
-      .grayscale()
-      .raw()
-      .toBuffer();
-
-    if (!pixels || pixels.length < 64) return null;
-
-    let sum = 0;
-    for (let i = 0; i < 64; i++) sum += pixels[i];
-    const avg = sum / 64;
-
-    let bits = 0n;
-    for (let i = 0; i < 64; i++) {
-      if (pixels[i] > avg) {
-        bits |= 1n << BigInt(63 - i);
-      }
-    }
-    return bits;
-  } catch {
-    return null;
-  }
-}
+// 해시 유틸리티는 v2.6.7에서 imageHashUtils.ts로 이동 — Flow와 공유
 
 // ===== API 키 관리 =====
 
@@ -1476,61 +1436,19 @@ async function generateSingleImageWithGemini(
             // 썸네일 크롭
             if (isThumbnail) buffer = await cropThumbnail(buffer, extension);
 
-            // ===== 중복/유사 이미지 검사 =====
-            // ✅ [v2.6.6] 중복/유사 감지 시 다양성 힌트 주입 후 재시도
-            //   2026-01-23 변경: throw → 무조건 허용 (무한 실패 방지)
-            //   2026-04-27 재변경: 사용자가 동일 이미지 3~4장을 받음. 무조건 허용은
-            //   사용자 경험을 망친다. 대신 attempt < maxRetries면 prompt에 diversity
-            //   hint를 추가해 재시도. 마지막 attempt에서만 허용(폴백).
-            let isDuplicate = false;
-            let isSimilar = false;
-            let detectedHash: string | null = null;
-            let detectedAHash: bigint | null = null;
-
-            if (usedImageHashes) {
-              detectedHash = createHash('sha256').update(buffer).digest('hex');
-              if (usedImageHashes.has(detectedHash)) {
-                isDuplicate = true;
-                console.warn(`[NanoBananaPro] ⚠️ 중복 이미지 감지 - ${item.heading}`);
-              }
-            }
-
-            if (usedImageAHashes && !isDuplicate) {
-              detectedAHash = await computeAHash64(buffer);
-              if (detectedAHash !== null) {
-                const foundSimilar = usedImageAHashes.some((prev) => hammingDistance64(prev, detectedAHash!) <= 6);
-                if (foundSimilar) {
-                  isSimilar = true;
-                  console.warn(`[NanoBananaPro] ⚠️ 유사 이미지 감지 - ${item.heading}`);
-                }
-              }
-            }
-
-            if (isDuplicate || isSimilar) {
+            // ===== 중복/유사 이미지 검사 (v2.6.7: 공유 유틸 + 비누적 hint) =====
+            const probe = await probeDuplicate(buffer, usedImageHashes, usedImageAHashes);
+            if (probe.isDuplicate || probe.isSimilar) {
               if (attempt < maxRetries) {
-                // 다양성 힌트 회전 — attempt마다 다른 각도 강제
-                const diversityHints = [
-                  'Use a completely DIFFERENT angle, alternative composition, varied lighting, distinct color palette from any previous output. The visual must be visibly DIFFERENT.',
-                  'Switch the framing, change subject placement, vary background scene entirely. NO REPETITION of prior outputs.',
-                  'Apply a fresh creative interpretation: new perspective, alternative time of day, different mood and atmosphere. MUST look unique.',
-                  'Generate a visually DISTINCT scene: different focal point, alternative environment, varied details. AVOID similarity to past renders.',
-                ];
-                const hint = diversityHints[(attempt - 1) % diversityHints.length];
-                prompt += `\n\nIMPORTANT — DIVERSITY ENFORCEMENT (attempt ${attempt + 1}): ${hint}`;
-                console.warn(`[NanoBananaPro] 🔁 중복/유사 → diversity hint 주입 후 재시도 (${attempt}/${maxRetries})`);
+                const reason = probe.isDuplicate ? '중복(SHA256)' : '유사(aHash)';
+                console.warn(`[NanoBananaPro] 🔁 ${reason} 감지 → diversity hint 적용 후 재시도 (${attempt}/${maxRetries}) - ${item.heading}`);
                 sendImageLog(`🔁 중복 이미지 감지 — 다른 각도로 재생성 시도 (${attempt + 1}/${maxRetries})`);
+                prompt = applyDiversityHint(prompt, attempt);
                 continue attemptLoop;
               }
               console.warn(`[NanoBananaPro] ℹ️ 최종 attempt(${maxRetries})에도 중복/유사 — 허용하고 진행`);
             }
-
-            // 최종 채택 — 해시를 used 집합에 등록
-            if (usedImageHashes && detectedHash && !isDuplicate) {
-              usedImageHashes.add(detectedHash);
-            }
-            if (usedImageAHashes && detectedAHash !== null && !isSimilar) {
-              usedImageAHashes.push(detectedAHash);
-            }
+            commitHashes(probe, usedImageHashes, usedImageAHashes);
 
             // ===== 파일 저장 =====
             const savedResult = await writeImageFile(buffer, extension, item.heading, postTitle, postId);

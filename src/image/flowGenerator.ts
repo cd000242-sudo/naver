@@ -22,6 +22,7 @@ import type { ImageRequestItem, GeneratedImage } from './types.js';
 import { writeImageFile } from './imageUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
+import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 import type { BrowserContext, Page, Locator } from 'playwright';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -773,6 +774,10 @@ export async function generateSingleImageWithFlow(
     throw lastError || new Error('FLOW_UNKNOWN_ERROR:이미지 생성 실패');
 }
 
+// v2.6.7 — 중복 가드 상수: Flow에서 SHA256/aHash 일치 시 diversity hint를
+// 주입한 새 프롬프트로 단발 재생성. 무한 루프 방지를 위해 항당 최대 N회.
+const FLOW_DUPLICATE_MAX_RETRIES = 3;
+
 // ─── [v1.6.1] 파이프라인 배치 생성 ────
 //   queueDepth=2: 제출 #1 → 입력 재활성화 대기 → 제출 #2 → #1 감지 → 제출 #3...
 //   Flow 서버가 동시 생성 처리 시 실질 2x 속도 (서버 bound)
@@ -783,6 +788,8 @@ async function generateBatchPipelined(
     postId: string | undefined,
     onImageGenerated: ((image: GeneratedImage, index: number, total: number) => void) | undefined,
     queueDepth: number = 2,
+    usedImageHashes?: Set<string>,
+    usedImageAHashes?: bigint[],
 ): Promise<{ results: GeneratedImage[]; criticalError: Error | null }> {
     const results: GeneratedImage[] = [];
     let criticalError: Error | null = null;
@@ -862,7 +869,35 @@ async function generateBatchPipelined(
         const prevCount = initialCount + detectedCount; // 이미 감지된 수만큼 증가
         try {
             const imageUrl = await waitForNewImage(page, prevCount, 150000);
-            const downloaded = await downloadImageAsBuffer(page, imageUrl);
+            let downloaded = await downloadImageAsBuffer(page, imageUrl);
+            let acceptedPrompt = slot.prompt;
+
+            // v2.6.7: 중복/유사 감지 시 diversity hint 단발 재생성 (최대 N회)
+            if (usedImageHashes || usedImageAHashes) {
+                let probe = await probeDuplicate(downloaded.buffer, usedImageHashes, usedImageAHashes);
+                let dupRetries = 0;
+                while ((probe.isDuplicate || probe.isSimilar) && dupRetries < FLOW_DUPLICATE_MAX_RETRIES) {
+                    dupRetries++;
+                    const reason = probe.isDuplicate ? '중복(SHA256)' : '유사(aHash)';
+                    flowWarn(`[Flow][Pipeline] 🔁 ${reason} 감지 → diversity hint 재생성 ${dupRetries}/${FLOW_DUPLICATE_MAX_RETRIES} - "${slot.item.heading}"`);
+                    sendImageLog(`🔁 [Flow] 중복 이미지 감지 — 다른 각도로 재생성 ${dupRetries}/${FLOW_DUPLICATE_MAX_RETRIES}`);
+                    acceptedPrompt = applyDiversityHint(acceptedPrompt, dupRetries);
+                    try {
+                        const retried = await generateSingleImageWithFlow(acceptedPrompt, (slot.item as any).aspectRatio || '1:1');
+                        if (!retried) break;
+                        downloaded = retried;
+                        probe = await probeDuplicate(downloaded.buffer, usedImageHashes, usedImageAHashes);
+                    } catch (retryErr) {
+                        flowWarn(`[Flow][Pipeline] diversity 재생성 실패 — 원본 유지: ${(retryErr as Error).message.substring(0, 100)}`);
+                        break;
+                    }
+                }
+                if (probe.isDuplicate || probe.isSimilar) {
+                    flowLog(`[Flow][Pipeline] ℹ️ ${FLOW_DUPLICATE_MAX_RETRIES}회 시도 후에도 중복/유사 — 폴백 허용`);
+                }
+                commitHashes(probe, usedImageHashes, usedImageAHashes);
+            }
+
             const ext = downloaded.mimeType === 'image/jpeg' ? 'jpg'
                 : downloaded.mimeType === 'image/webp' ? 'webp'
                 : 'png';
@@ -870,7 +905,7 @@ async function generateBatchPipelined(
             const image: GeneratedImage = {
                 filePath,
                 heading: slot.item.heading,
-                prompt: slot.prompt,
+                prompt: acceptedPrompt,
                 mimeType: downloaded.mimeType,
                 provider: 'flow-nano-banana-2',
                 cost: 0,
@@ -916,7 +951,13 @@ export async function generateWithFlow(
     postTitle?: string,
     postId?: string,
     onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void,
+    externalUsedImageHashes?: Set<string>,
+    externalUsedImageAHashes?: bigint[],
 ): Promise<GeneratedImage[]> {
+    // v2.6.7: 호출자가 dedup 집합을 주지 않으면 배치 내부에서 자체 추적해
+    // 같은 발행 안에서 같은 이미지가 반복 생성되는 것을 차단한다.
+    const usedImageHashes = externalUsedImageHashes ?? new Set<string>();
+    const usedImageAHashes = externalUsedImageAHashes ?? [];
     initFlowLogFile();
     flowLog(`════════════════════════════════════════════`);
     flowLog(`[Flow] 🎨 총 ${items.length}개 이미지 생성 시작 (v1.6.1 파이프라인)`);
@@ -939,7 +980,7 @@ export async function generateWithFlow(
 
     if (PIPELINE_ENABLED && items.length >= 2) {
         try {
-            const pipelineResult = await generateBatchPipelined(items, postTitle, postId, onImageGenerated, 2);
+            const pipelineResult = await generateBatchPipelined(items, postTitle, postId, onImageGenerated, 2, usedImageHashes, usedImageAHashes);
             results = pipelineResult.results;
             firstCriticalError = pipelineResult.criticalError;
             pipelineDoneCount = results.length;
@@ -960,16 +1001,42 @@ export async function generateWithFlow(
 
         try {
             sendImageLog(`🖼️ [Flow] [${i + 1}/${items.length}] "${item.heading}" 생성 중...`);
-            const prompt = item.englishPrompt || PromptBuilder.build(item, {
+            let prompt = item.englishPrompt || PromptBuilder.build(item, {
                 imageStyle: (item as any).imageStyle || 'realistic',
                 category: (item as any).category || '',
             } as any);
             const aspectRatio = (item as any).aspectRatio || '1:1';
 
-            const generated = await generateSingleImageWithFlow(prompt, aspectRatio);
+            let generated = await generateSingleImageWithFlow(prompt, aspectRatio);
             if (!generated) {
                 flowWarn(`[Flow] [${i + 1}] null 반환 (중지 감지) — 나머지 건너뜀`);
                 break;
+            }
+
+            // v2.6.7: 중복/유사 감지 시 diversity hint 단발 재생성 (최대 N회)
+            if (usedImageHashes || usedImageAHashes) {
+                let probe = await probeDuplicate(generated.buffer, usedImageHashes, usedImageAHashes);
+                let dupRetries = 0;
+                while ((probe.isDuplicate || probe.isSimilar) && dupRetries < FLOW_DUPLICATE_MAX_RETRIES) {
+                    dupRetries++;
+                    const reason = probe.isDuplicate ? '중복(SHA256)' : '유사(aHash)';
+                    flowWarn(`[Flow][Seq] 🔁 ${reason} 감지 → diversity hint 재생성 ${dupRetries}/${FLOW_DUPLICATE_MAX_RETRIES} - "${item.heading}"`);
+                    sendImageLog(`🔁 [Flow] 중복 이미지 감지 — 다른 각도로 재생성 ${dupRetries}/${FLOW_DUPLICATE_MAX_RETRIES}`);
+                    prompt = applyDiversityHint(prompt, dupRetries);
+                    try {
+                        const retried = await generateSingleImageWithFlow(prompt, aspectRatio);
+                        if (!retried) break;
+                        generated = retried;
+                        probe = await probeDuplicate(generated.buffer, usedImageHashes, usedImageAHashes);
+                    } catch (retryErr) {
+                        flowWarn(`[Flow][Seq] diversity 재생성 실패 — 원본 유지: ${(retryErr as Error).message.substring(0, 100)}`);
+                        break;
+                    }
+                }
+                if (probe.isDuplicate || probe.isSimilar) {
+                    flowLog(`[Flow][Seq] ℹ️ ${FLOW_DUPLICATE_MAX_RETRIES}회 시도 후에도 중복/유사 — 폴백 허용`);
+                }
+                commitHashes(probe, usedImageHashes, usedImageAHashes);
             }
 
             const ext = generated.mimeType === 'image/jpeg' ? 'jpg'
