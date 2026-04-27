@@ -19,7 +19,10 @@ const OPENAI_IMAGES_API_URL = 'https://api.openai.com/v1/images/generations';
 //   2026-04-21 ChatGPT Images 2.0로 공식 출시 — Nano Banana 저격 포지션
 //   주요 개선: 12단어+ 긴 텍스트 완벽 스펠링, 한글/일본어/중국어 등 다국어 렌더링 급상승,
 //              실사화 수준 대폭 향상 (가격은 gpt-image-1과 동등 가정)
+// v2.7.3: gpt-image-2가 계정/리전에 따라 미사용/empty 반환 시 gpt-image-1로 자동 폴백
 const DEFAULT_MODEL = 'gpt-image-2';
+const FALLBACK_MODEL = 'gpt-image-1';
+const MIN_VALID_IMAGE_BYTES = 1024;
 
 /**
  * OpenAI Image API로 일괄 이미지 생성
@@ -125,15 +128,21 @@ export async function generateWithOpenAIImage(
             };
             const size = sizeMap[imageRatio] || '1024x1024';
 
-            // 재시도 로직
+            // 재시도 로직 — v2.7.3: 모델 폴백 + 빈 버퍼 검증 추가
+            // 시도 1~2: gpt-image-2 (DEFAULT_MODEL)
+            // 시도 3: gpt-image-1 (FALLBACK_MODEL) — 계정/리전 미지원 또는 empty 응답 폴백
             const maxRetries = 3;
             let lastError: any;
+            let modelSwitchedToFallback = false;
 
             for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                const currentModel = (attempt >= maxRetries || modelSwitchedToFallback)
+                    ? FALLBACK_MODEL
+                    : DEFAULT_MODEL;
                 try {
                     // ✅ [2026-03-03] 참조 이미지가 있으면 image 파라미터로 전달 (img2img)
                     const requestBody: any = {
-                        model: DEFAULT_MODEL,
+                        model: currentModel,
                         prompt: prompt,
                         n: 1,
                         size: size,
@@ -163,12 +172,12 @@ export async function generateWithOpenAIImage(
                     const imageData = response.data?.data?.[0];
 
                     if (!imageData) {
-                        throw new Error('이미지 데이터가 응답에 없습니다.');
+                        throw new Error('이미지 데이터가 응답에 없습니다 (model: ' + currentModel + ').');
                     }
 
                     let buffer: Buffer;
 
-                    if (imageData.b64_json) {
+                    if (imageData.b64_json && imageData.b64_json.length > 0) {
                         // base64 응답
                         buffer = Buffer.from(imageData.b64_json, 'base64');
                     } else if (imageData.url) {
@@ -179,7 +188,19 @@ export async function generateWithOpenAIImage(
                         });
                         buffer = Buffer.from(imgResponse.data);
                     } else {
-                        throw new Error('이미지 데이터 형식이 올바르지 않습니다.');
+                        throw new Error('이미지 데이터 형식이 올바르지 않습니다 (b64_json/url 모두 비어있음, model: ' + currentModel + ').');
+                    }
+
+                    // v2.7.3: 빈/손상 버퍼 검증 — 작은 파일은 OpenAI가 빈 응답 또는 안전필터 차단을 의미
+                    if (!buffer || buffer.length < MIN_VALID_IMAGE_BYTES) {
+                        const sz = buffer ? buffer.length : 0;
+                        console.warn(`[OpenAI-Image] ⚠️ 빈/손상 이미지 감지 (${sz} bytes < ${MIN_VALID_IMAGE_BYTES}, model: ${currentModel})`);
+                        // gpt-image-2가 빈 응답이면 다음 시도부터 gpt-image-1로 폴백
+                        if (currentModel === DEFAULT_MODEL && !modelSwitchedToFallback) {
+                            modelSwitchedToFallback = true;
+                            console.warn(`[OpenAI-Image] 🔁 ${DEFAULT_MODEL} → ${FALLBACK_MODEL} 폴백 (빈 응답 반복 차단)`);
+                        }
+                        throw new Error(`OpenAI가 빈 이미지 반환 (${sz} bytes, model: ${currentModel}). 안전필터/모델 미지원/쿼터 의심.`);
                     }
 
                     // ✅ [2026-03-12 FIX] 텍스트 오버레이는 imageGenerator.ts의 applyKoreanTextOverlayIfNeeded에서 일괄 처리
@@ -212,7 +233,16 @@ export async function generateWithOpenAIImage(
                 } catch (apiError: any) {
                     lastError = apiError;
                     const errMsg = apiError.response?.data?.error?.message || apiError.message || 'unknown';
-                    console.warn(`[OpenAI-Image] ⚠️ 시도 ${attempt}/${maxRetries} 실패: ${errMsg}`);
+                    const errCode = apiError.response?.data?.error?.code || '';
+                    console.warn(`[OpenAI-Image] ⚠️ 시도 ${attempt}/${maxRetries} 실패 (model: ${currentModel}): ${errMsg}`);
+
+                    // v2.7.3: 모델 미존재/미지원 에러면 즉시 폴백 모델로 전환
+                    const isModelNotFound = errCode === 'model_not_found'
+                        || /model.*not.*found|invalid.*model|does not exist/i.test(errMsg);
+                    if (isModelNotFound && currentModel === DEFAULT_MODEL && !modelSwitchedToFallback) {
+                        modelSwitchedToFallback = true;
+                        console.warn(`[OpenAI-Image] 🔁 ${DEFAULT_MODEL} 미지원 → ${FALLBACK_MODEL}로 즉시 폴백`);
+                    }
 
                     if (attempt < maxRetries) {
                         const delay = 2000 * attempt;
