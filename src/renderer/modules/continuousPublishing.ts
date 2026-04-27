@@ -5,6 +5,7 @@
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
 import type { ContinuousQueueItem } from '../types/index';
+import { META_CRITIQUE_PHRASES } from '../../content/forbiddenPhrases';
 
 // ── 렌더러 전역 변수/함수 선언 (renderer.ts에서 정의) ──
 declare const toastManager: { success: (msg: string, duration?: number) => void; error: (msg: string, duration?: number) => void; warning: (msg: string, duration?: number) => void; info: (msg: string, duration?: number) => void };
@@ -2465,10 +2466,45 @@ function addItemToQueueV2(): void {
   }
 
   // ✅ 줄바꿈(\n)으로만 입력값 분리 (벌크 추가 지원) - 콤마는 키워드에 포함될 수 있으므로 제외
-  const inputValues = rawInputValue.split(/\n+/).map((v: string) => v.trim()).filter((v: string) => v.length > 0);
+  const rawCandidates = rawInputValue.split(/\n+/).map((v: string) => v.trim()).filter((v: string) => v.length > 0);
+
+  if (rawCandidates.length === 0) {
+    toastManager.warning('유효한 입력값이 없습니다.');
+    return;
+  }
+
+  // v2.6.8: 큐 추가 시점 메타-비평 방어 가드
+  // 사용자 제보: 큐 카드 키워드 자리에 "비평하겠습니다" 등 메타 문구가 박힘.
+  // addItemToQueueV2 본체엔 LLM 호출이 없는데 그런 텍스트가 들어가는 건 외부 경로
+  // (클립보드 자동 붙여넣기, AI 어시스턴트 자동 입력, 음성 인식 등)에서 유입됐을
+  // 가능성이 높음. 코드 추적만으론 출처 식별이 불가하므로 수신단에서 거부 + 콘솔
+  // 진단 덤프 + 토스트 경고로 사용자에게 가시화한다.
+  const inputValues: string[] = [];
+  const rejected: { value: string; matched: string[] }[] = [];
+  for (const candidate of rawCandidates) {
+    const matches = META_CRITIQUE_PHRASES.filter((p) => candidate.includes(p));
+    if (matches.length > 0) {
+      rejected.push({ value: candidate, matched: matches });
+      console.warn('[연속발행][큐가드] 🚫 메타-비평 입력 거부:', {
+        value: candidate,
+        length: candidate.length,
+        matched: matches,
+        firstCharCodes: Array.from(candidate.slice(0, 20)).map((c) => c.charCodeAt(0)),
+      });
+    } else {
+      inputValues.push(candidate);
+    }
+  }
+
+  if (rejected.length > 0) {
+    const sampleMatch = rejected[0].matched[0];
+    toastManager.warning(
+      `🚫 ${rejected.length}개 입력이 거부됨 — 자가검수/자체비평 같은 메타 문구가 포함됨 (예: "${sampleMatch}"). 클립보드/AI 어시스턴트 자동입력 의심. 콘솔 로그 확인 요망.`,
+    );
+  }
 
   if (inputValues.length === 0) {
-    toastManager.warning('유효한 입력값이 없습니다.');
+    toastManager.warning('유효한 입력값이 없습니다. (모두 메타-비평 가드에 의해 거부됨)');
     return;
   }
 
@@ -4319,7 +4355,13 @@ async function startContinuousPublishingV2(): Promise<void> {
             );
             if (nextPendingIdx >= 0) {
               continuousQueueV2[nextPendingIdx].previousPostUrl = justPublishedUrl;
-              continuousQueueV2[nextPendingIdx].previousPostTitle = finalStructuredContent?.selectedTitle || '이전 글';
+              // v2.6.8: 이전 글 제목에 메타-비평 문구가 들어 있으면 폴백 사용
+              const rawPrevTitle = String(finalStructuredContent?.selectedTitle || '').trim();
+              const hasMetaLeak = rawPrevTitle && META_CRITIQUE_PHRASES.some((p) => rawPrevTitle.includes(p));
+              if (hasMetaLeak) {
+                console.warn('[Continuous] 🚫 이전글 제목에 메타-비평 문구 포함 — 폴백 사용:', rawPrevTitle);
+              }
+              continuousQueueV2[nextPendingIdx].previousPostTitle = (rawPrevTitle && !hasMetaLeak) ? rawPrevTitle : '이전 글';
               console.log(`[Continuous] 🔗 이전글 체이닝: 대기열[${nextPendingIdx}]에 URL 전달 → ${justPublishedUrl}`);
               appendLog(`🔗 이전글 체이닝: 다음 글에 방금 발행한 URL을 전달합니다.`);
             }
