@@ -96,6 +96,9 @@ import { browserSessionManager } from './browserSessionManager.js';
 
 // ✅ [2026-02-04] 자동 업데이트 모듈
 import { initAutoUpdater, initAutoUpdaterEarly, setUpdaterLoginWindow, isUpdating, waitForUpdateCheck } from './updater.js';
+// v2.7.1: 앱 종료 시 Flow/ImageFX persistent context 쿠키 flush — 매번 로그인 강제 방지
+import { resetFlowState } from './image/flowGenerator.js';
+import { cleanupImageFxBrowser } from './image/imageFxGenerator.js';
 
 // ✅ [리팩토링] 새로운 모듈화된 유틸리티 및 서비스
 // ✅ [리팩토링] 새로운 모듈화된 유틸리티 및 서비스
@@ -9446,6 +9449,12 @@ app.on('window-all-closed', async () => {
     automationMap.clear();
     automation = null;
 
+    // v2.7.1: Flow/ImageFX persistent context 명시적 close — 쿠키 flush 보장
+    // launchPersistentContext는 close() 호출 시점에만 메모리 쿠키를 디스크에
+    // 영구 저장한다. 호출 안 하면 다음 실행에서 Google 재로그인 강제됨.
+    await resetFlowState().catch((e) => console.warn('[Main] Flow context close 실패:', e?.message));
+    await cleanupImageFxBrowser().catch((e) => console.warn('[Main] ImageFX cleanup 실패:', e?.message));
+
     trendMonitor.stop();
     app.quit();
 
@@ -9571,5 +9580,20 @@ app.on('before-quit', async () => {
     console.log('[App] ✅ Gemini 사용량 flush 완료');
   } catch (e) {
     console.warn('[App] Gemini flush 실패:', (e as Error).message);
+  }
+
+  // v2.7.1: 마지막 안전망 — window-all-closed가 안 탔을 경우(트레이/Cmd-Q)에도
+  // Flow/ImageFX persistent context를 강제 close해 쿠키 flush 보장.
+  try {
+    await resetFlowState();
+    console.log('[App] ✅ Flow context flush 완료');
+  } catch (e) {
+    console.warn('[App] Flow flush 실패:', (e as Error).message);
+  }
+  try {
+    await cleanupImageFxBrowser();
+    console.log('[App] ✅ ImageFX context flush 완료');
+  } catch (e) {
+    console.warn('[App] ImageFX flush 실패:', (e as Error).message);
   }
 });
