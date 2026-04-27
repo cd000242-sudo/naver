@@ -990,6 +990,7 @@ async function generateSingleImageWithGemini(
   const lastApiKey = apiKey; // ✅ [2026-02-21] 마지막 사용 API 키 추적 (안전망용)
   let lastSelectedModel = ''; // ✅ [2026-04-06] 마지막 선택 모델 추적 (최종 안전망 로테이션용)
 
+  attemptLoop:
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       // ✅ [2026-01-27] 이미지 스타일 및 비율 설정 읽기 (config.json에서 - localStorage는 메인 프로세스에서 접근 불가)
@@ -1476,38 +1477,59 @@ async function generateSingleImageWithGemini(
             if (isThumbnail) buffer = await cropThumbnail(buffer, extension);
 
             // ===== 중복/유사 이미지 검사 =====
-            // ✅ [2026-01-23 FIX] 중복/유사 이미지 감지 시 에러가 아닌 경고로 변경
-            // 이전: throw new Error → 재시도해도 Gemini가 비슷한 이미지 생성 시 무한 실패
-            // 변경: 경고 출력 후 허용 (사용자에게 이미지를 제공하는 것이 실패보다 나음)
+            // ✅ [v2.6.6] 중복/유사 감지 시 다양성 힌트 주입 후 재시도
+            //   2026-01-23 변경: throw → 무조건 허용 (무한 실패 방지)
+            //   2026-04-27 재변경: 사용자가 동일 이미지 3~4장을 받음. 무조건 허용은
+            //   사용자 경험을 망친다. 대신 attempt < maxRetries면 prompt에 diversity
+            //   hint를 추가해 재시도. 마지막 attempt에서만 허용(폴백).
             let isDuplicate = false;
             let isSimilar = false;
+            let detectedHash: string | null = null;
+            let detectedAHash: bigint | null = null;
 
             if (usedImageHashes) {
-              const hash = createHash('sha256').update(buffer).digest('hex');
-              if (usedImageHashes.has(hash)) {
+              detectedHash = createHash('sha256').update(buffer).digest('hex');
+              if (usedImageHashes.has(detectedHash)) {
                 isDuplicate = true;
-                console.warn(`[NanoBananaPro] ⚠️ 중복 이미지 감지됨 (허용하고 진행) - ${item.heading}`);
-              } else {
-                usedImageHashes.add(hash);
+                console.warn(`[NanoBananaPro] ⚠️ 중복 이미지 감지 - ${item.heading}`);
               }
             }
 
             if (usedImageAHashes && !isDuplicate) {
-              const aHash = await computeAHash64(buffer);
-              if (aHash !== null) {
-                const foundSimilar = usedImageAHashes.some((prev) => hammingDistance64(prev, aHash) <= 6);
+              detectedAHash = await computeAHash64(buffer);
+              if (detectedAHash !== null) {
+                const foundSimilar = usedImageAHashes.some((prev) => hammingDistance64(prev, detectedAHash!) <= 6);
                 if (foundSimilar) {
                   isSimilar = true;
-                  console.warn(`[NanoBananaPro] ⚠️ 유사 이미지 감지됨 (허용하고 진행) - ${item.heading}`);
-                } else {
-                  usedImageAHashes.push(aHash);
+                  console.warn(`[NanoBananaPro] ⚠️ 유사 이미지 감지 - ${item.heading}`);
                 }
               }
             }
 
-            // ✅ 중복/유사여도 이미지 반환 (실패보다 나음)
             if (isDuplicate || isSimilar) {
-              console.log(`[NanoBananaPro] ℹ️ 중복/유사 이미지지만 발행에 사용됩니다.`);
+              if (attempt < maxRetries) {
+                // 다양성 힌트 회전 — attempt마다 다른 각도 강제
+                const diversityHints = [
+                  'Use a completely DIFFERENT angle, alternative composition, varied lighting, distinct color palette from any previous output. The visual must be visibly DIFFERENT.',
+                  'Switch the framing, change subject placement, vary background scene entirely. NO REPETITION of prior outputs.',
+                  'Apply a fresh creative interpretation: new perspective, alternative time of day, different mood and atmosphere. MUST look unique.',
+                  'Generate a visually DISTINCT scene: different focal point, alternative environment, varied details. AVOID similarity to past renders.',
+                ];
+                const hint = diversityHints[(attempt - 1) % diversityHints.length];
+                prompt += `\n\nIMPORTANT — DIVERSITY ENFORCEMENT (attempt ${attempt + 1}): ${hint}`;
+                console.warn(`[NanoBananaPro] 🔁 중복/유사 → diversity hint 주입 후 재시도 (${attempt}/${maxRetries})`);
+                sendImageLog(`🔁 중복 이미지 감지 — 다른 각도로 재생성 시도 (${attempt + 1}/${maxRetries})`);
+                continue attemptLoop;
+              }
+              console.warn(`[NanoBananaPro] ℹ️ 최종 attempt(${maxRetries})에도 중복/유사 — 허용하고 진행`);
+            }
+
+            // 최종 채택 — 해시를 used 집합에 등록
+            if (usedImageHashes && detectedHash && !isDuplicate) {
+              usedImageHashes.add(detectedHash);
+            }
+            if (usedImageAHashes && detectedAHash !== null && !isSimilar) {
+              usedImageAHashes.push(detectedAHash);
             }
 
             // ===== 파일 저장 =====
