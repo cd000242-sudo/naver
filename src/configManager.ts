@@ -17,6 +17,11 @@ export interface AppConfig {
   // ✅ [2026-02-22] Leonardo AI API Key
   leonardoaiApiKey?: string;
 
+  // v2.7.18 (Phase 2): "100점 모드" 토글 — 5 Opus 합의
+  // ON 시 제목 검증 루프(최대 3회 재생성) + LLM Judge(별도 모델) 활성화
+  // OFF 기본값 — 회귀 0 보장
+  premiumTitleMode?: boolean;
+
   naverDatalabApiKey?: string;
   naverDatalabClientId?: string;
   naverDatalabClientSecret?: string;

@@ -521,6 +521,42 @@ contextBridge.exposeInMainWorld('api', {
   // 외부 URL 열기
   openExternalUrl: (url: string): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('openExternalUrl', url),
+
+  // v2.7.18 (Phase 4): 100점 모드 토글 + 메트릭 조회
+  getTitleQualityStats: (days?: number): Promise<any> =>
+    ipcRenderer.invoke('title-quality:get-stats', days),
+  setPremiumTitleMode: (enabled: boolean): Promise<{ ok: boolean; premiumTitleMode: boolean }> =>
+    ipcRenderer.invoke('title-quality:set-premium', enabled),
+  getPremiumTitleMode: (): Promise<{ premiumTitleMode: boolean }> =>
+    ipcRenderer.invoke('title-quality:get-premium'),
+
+  // v2.7.6: Flow 마라톤 (F12 콘솔에서 호출)
+  //   await window.api.runFlowMarathon({ posts: 13, perPost: 8 })  // 100장 ≈ 13~15분
+  //   window.api.onFlowMarathonProgress((evt) => console.log(evt))
+  runFlowMarathon: (opts?: { posts?: number; perPost?: number; outputDir?: string; startFrom?: number; skipColdStartCleanup?: boolean; skipForceFreshContext?: boolean }): Promise<any> =>
+    ipcRenderer.invoke('flow:run-marathon', opts || {}),
+  stopFlowMarathon: (): Promise<{ ok: boolean; message: string }> =>
+    ipcRenderer.invoke('flow:stop-marathon'),
+  onFlowMarathonStarted: (cb: (data: any) => void) => {
+    const handler = (_e: any, d: any) => cb(d);
+    ipcRenderer.on('flow-marathon:started', handler);
+    return () => ipcRenderer.removeListener('flow-marathon:started', handler);
+  },
+  onFlowMarathonImageGenerated: (cb: (data: any) => void) => {
+    const handler = (_e: any, d: any) => cb(d);
+    ipcRenderer.on('flow-marathon:image-generated', handler);
+    return () => ipcRenderer.removeListener('flow-marathon:image-generated', handler);
+  },
+  onFlowMarathonPostCompleted: (cb: (data: any) => void) => {
+    const handler = (_e: any, d: any) => cb(d);
+    ipcRenderer.on('flow-marathon:post-completed', handler);
+    return () => ipcRenderer.removeListener('flow-marathon:post-completed', handler);
+  },
+  onFlowMarathonFinished: (cb: (data: any) => void) => {
+    const handler = (_e: any, d: any) => cb(d);
+    ipcRenderer.on('flow-marathon:finished', handler);
+    return () => ipcRenderer.removeListener('flow-marathon:finished', handler);
+  },
   // 창 포커스
   focusWindow: async (): Promise<{ success: boolean; message?: string }> => {
     try {

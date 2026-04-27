@@ -4968,6 +4968,10 @@ registerImageTableHandlers();
 // ✅ miscHandlers: content:collectFromPlatforms 등 — 연속발행에서 크롤링 시 필요
 import { registerMiscHandlers } from './main/ipc/miscHandlers.js';
 registerMiscHandlers();
+import { registerFlowMarathonHandlers } from './main/ipc/flowMarathonHandlers.js';
+registerFlowMarathonHandlers();
+import { registerTitleQualityHandlers } from './main/ipc/titleQualityHandlers.js';
+registerTitleQualityHandlers();
 
 // ✅ 네이버 블로그 카테고리 분석 (크롤링)
 ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: string; blogId?: string }) => {

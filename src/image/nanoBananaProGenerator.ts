@@ -453,8 +453,17 @@ export async function generateWithNanoBananaPro(
   collectedImages?: string[],
   stopCheck?: () => boolean,  // ✅ 중지 여부 확인 콜백
   onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void,  // ✅ [2026-02-13] 이미지 완성 즉시 콜백
-  productData?: { name?: string; price?: string; brand?: string; category?: string }  // ✅ [2026-02-23 FIX] 제품 가격 정보 → 스펙 표 정확도 향상
+  productData?: { name?: string; price?: string; brand?: string; category?: string },  // ✅ [2026-02-23 FIX] 제품 가격 정보 → 스펙 표 정확도 향상
+  forceModelKey?: string,  // v2.7.16: 호출자가 명시적으로 모델 강제 ('gemini-3-1-flash' = 나노바나나2, 'gemini-3-pro' = 나노바나나프로)
 ): Promise<GeneratedImage[]> {
+  // v2.7.16: forceModelKey가 주어지면 config의 nanoBananaMainModel/SubModel을 일시 오버라이드
+  if (forceModelKey) {
+    const cm = await import('../configManager.js');
+    const cfg = await cm.loadConfig();
+    (cfg as any).nanoBananaMainModel = forceModelKey;
+    (cfg as any).nanoBananaSubModel = forceModelKey;
+    console.log(`[NanoBananaPro] 🎯 forceModelKey="${forceModelKey}" — config 일시 오버라이드`);
+  }
   const mode = isFullAuto ? '풀오토' : '일반';
   const primaryApiKey = providedApiKey || storedGeminiApiKey || process.env.GEMINI_API_KEY;
 

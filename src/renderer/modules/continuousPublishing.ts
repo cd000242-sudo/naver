@@ -2138,7 +2138,7 @@ export function initContinuousPublishingV2(): void {
     radio.addEventListener('change', (e) => {
       const value = (e.target as HTMLInputElement).value;
       localStorage.setItem('scSubImageSource', value);
-      if (value === 'nano-banana-pro' || value === 'openai-image') {
+      if (value === 'nano-banana-2' || value === 'nano-banana-pro' || value === 'openai-image' || value === 'dall-e-3') {
         // AI 엔진 선택 — 전역 AI 이미지 소스와 sync (반자동 드롭다운도 업데이트)
         localStorage.setItem('scAIImageEngine', value);
         localStorage.setItem('fullAutoImageSource', value);
@@ -2790,7 +2790,8 @@ let currentQueuePageV2 = 0;
 const QUEUE_PAGE_SIZE = 5;
 
 const imageSourceNames: Record<string, string> = {
-  'nano-banana-pro': '🍌 나노바나나 프로 (Gemini)',
+  'nano-banana-2': '🍌 나노바나나2 (₩97/장)',
+  'nano-banana-pro': '🍌🦍 나노바나나프로 (~₩500/장)',
   'naver': '🔍 네이버 검색',
   'prodia': '⚡ Prodia',
   'stability': '🚀 Stability AI',
@@ -2799,9 +2800,10 @@ const imageSourceNames: Record<string, string> = {
   'falai': '🎨 Fal.ai FLUX',
   'pollinations': '🌸 Pollinations (무료)',
   'leonardoai': '🎨 Leonardo AI',
-  'openai-image': '🟣 DALL-E (OpenAI)',
+  'openai-image': '🦆 덕트테이프 (gpt-image-2)',
+  'dall-e-3': '🎨 DALL-E 3 (OpenAI)',
   'imagefx': '✨ ImageFX (Google 무료)',
-  'flow': '🍌 Flow (Nano Banana Pro)', // ✅ [v1.4.80]
+  'flow': '🍌 Flow (Nano Banana 2)', // ✅ [v1.4.80]
   'local-folder': '📂 내 폴더',
   'skip': '🚫 없음'
 };

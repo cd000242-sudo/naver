@@ -33,7 +33,8 @@ export async function generateWithOpenAIImage(
     providedApiKey?: string,
     isShoppingConnect: boolean = false,
     onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void,  // ✅ [2026-02-27] 실시간 콜백
-    collectedImages?: string[]  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
+    collectedImages?: string[],  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
+    overrideModel?: string,       // v2.7.15: 호출자가 모델 강제 지정 (예: 'dall-e-3')
 ): Promise<GeneratedImage[]> {
     const config = await loadConfig();
     const apiKey = providedApiKey || (config as any).openaiImageApiKey?.trim() || (config as any).openaiApiKey?.trim();
@@ -139,19 +140,28 @@ export async function generateWithOpenAIImage(
             let lastError: any;
 
             for (let attempt = 1; attempt <= maxRetries; attempt++) {
-                const currentModel = DEFAULT_MODEL; // gpt-image-2 고정
+                // v2.7.15: 호출자가 dall-e-3 등 명시 시 그것 사용. 아니면 기본 gpt-image-2.
+                const currentModel = overrideModel || DEFAULT_MODEL;
                 try {
                     // ✅ [2026-03-03] 참조 이미지가 있으면 image 파라미터로 전달 (img2img)
+                    // v2.7.15: dall-e-3는 quality='standard'/'hd', size 1024x1024/1792x1024/1024x1792만 지원
+                    const isDallE3 = currentModel === 'dall-e-3';
+                    const dalle3Size = imageRatio === '16:9' || imageRatio === '4:3'
+                        ? '1792x1024' : (imageRatio === '9:16' || imageRatio === '3:4' ? '1024x1792' : '1024x1024');
                     const requestBody: any = {
                         model: currentModel,
                         prompt: prompt,
                         n: 1,
-                        size: size,
-                        quality: 'auto',
+                        size: isDallE3 ? dalle3Size : size,
+                        quality: isDallE3 ? 'standard' : 'auto',
                     };
+                    if (isDallE3) {
+                        requestBody.response_format = 'b64_json'; // dall-e-3는 명시 필요
+                    }
 
                     // gpt-image-1은 image 파라미터로 참조 이미지 전달 가능
-                    if (cachedReferenceBase64) {
+                    // dall-e-3는 image 파라미터 미지원 (text-to-image only)
+                    if (cachedReferenceBase64 && !isDallE3) {
                         requestBody.image = `data:image/png;base64,${cachedReferenceBase64}`;
                         console.log(`[OpenAI-Image] 🖼️ 참조 이미지를 image 파라미터로 전달 (img2img 모드)`);
                     }

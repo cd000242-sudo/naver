@@ -224,11 +224,15 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     console.log(`[ImageGenerator] 📋 프로바이더 정규화: ${options.provider} → deepinfra`);
     normalizedProvider = 'deepinfra';
   }
+  // v2.7.16: nano-banana-2와 nano-banana-pro를 별개로 dispatch (한 함수 + forceModelKey로 분기)
+  // 정규화 안 함 (각각 다른 모델로 호출되어야 함)
   // ✅ [엔진명 한글 매핑]
   const providerDisplayNames: Record<string, string> = {
-    'nano-banana-pro': '나노 바나나 프로 (Gemini)',
+    'nano-banana-2': '나노바나나2 (Gemini 3.1 Flash, ₩97/장)',
+    'nano-banana-pro': '나노바나나프로 (Gemini 3 Pro, ~₩500/장)',
     'deepinfra': '딥인프라 FLUX-2',
     'openai-image': 'OpenAI 덕트테이프 (gpt-image-2)',
+    'dall-e-3': 'DALL-E 3 (OpenAI, 인증 불필요)',
     'leonardoai': 'Leonardo AI',
     'imagefx': 'ImageFX (Google 무료)',
     'flow': 'Flow (Nano Banana 2, AI Pro 무료)', // ✅ [v1.5.4]
@@ -312,6 +316,30 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       console.warn(`[ImageGenerator] ⚠️ 덕트테이프 실패:`, (openaiError as Error).message);
       const userMsg = getImageErrorMessage(openaiError);
       throw new Error(`[덕트테이프] ${userMsg}`);
+    }
+  }
+
+  // v2.7.15: DALL-E 3 — gpt-image-2 인증 대기 중 임시 우회용 (Org 인증 불필요)
+  if (normalizedProvider === 'dall-e-3') {
+    try {
+      console.log(`[이미지생성] 🎨 DALL-E 3로 ${items.length}개 이미지 생성 시작...`);
+      const dalleImages = await generateWithOpenAIImage(
+        items,
+        options.postTitle,
+        options.postId,
+        options.isFullAuto,
+        apiKeys?.openaiImageApiKey,
+        options.isShoppingConnect || false,
+        onImageGenerated,
+        options.collectedImages,
+        'dall-e-3', // 모델 강제 지정
+      );
+      console.log(`[이미지생성] ✅ DALL-E 3로 ${dalleImages.length}개 이미지 생성 완료!`);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(dalleImages, 'openai-image', options.postTitle, options.thumbnailTextInclude, items), items);
+    } catch (dalleError) {
+      console.warn(`[ImageGenerator] ⚠️ DALL-E 3 실패:`, (dalleError as Error).message);
+      const userMsg = getImageErrorMessage(dalleError);
+      throw new Error(`[DALL-E 3] ${userMsg}`);
     }
   }
 
@@ -433,11 +461,14 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     throw new Error('[local-folder] 내 폴더 이미지는 renderer의 localFolderImageLoader에서 처리해야 합니다. generateImages로 전달되면 안 됩니다.');
   }
 
-  // ✅ 나노 바나나 프로 선택 시 (Gemini 기반, 썸네일 제외 NEVER TEXT 적용)
-  // ✅ [2026-02-13 FIX] 상위 재시도 루프 제거 - 내부에서 이미 충분히 재시도 (2회/이미지 + 1라운드 실패 재시도)
-  if (normalizedProvider === 'nano-banana-pro') {
-    console.log(`[이미지생성] 🍌 나노 바나나 프로(Gemini)로 ${items.length}개 이미지 생성 시작...`);
-    console.log(`[ImageGenerator] ℹ️ 썸네일(1번) 제외 모든 이미지에 NEVER TEXT 적용`);
+  // ✅ 나노 바나나 프로/2 선택 시 (Gemini 기반)
+  // v2.7.16: nano-banana-2(gemini-3.1-flash, ₩97) / nano-banana-pro(gemini-3-pro, ~₩500) 분리
+  if (normalizedProvider === 'nano-banana-2' || normalizedProvider === 'nano-banana-pro') {
+    const forceModelKey = normalizedProvider === 'nano-banana-2' ? 'gemini-3-1-flash' : 'gemini-3-pro';
+    const modelLabel = normalizedProvider === 'nano-banana-2'
+      ? '나노바나나2 (gemini-3.1-flash, ₩97/장)'
+      : '나노바나나프로 (gemini-3-pro, ~₩500/장)';
+    console.log(`[이미지생성] 🍌 ${modelLabel}로 ${items.length}개 이미지 생성 시작...`);
     console.log(`[ImageGenerator] Gemini API 키: ${apiKeys?.geminiApiKey ? apiKeys.geminiApiKey.substring(0, 10) + '...' : '미설정'}`);
 
     try {
@@ -446,24 +477,23 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.postTitle,
         options.postId,
         options.isFullAuto,
-        apiKeys?.geminiApiKey, // ✅ Gemini API 키 전달
-        options.isShoppingConnect, // ✅ 쇼핑커넥트 모드 전달
-        options.collectedImages, // ✅ 수집된 이미지 목록 전달
-        options.stopCheck,  // ✅ [100점 수정] 중지 여부 확인 콜백 전달
-        onImageGenerated,   // ✅ [2026-02-13 SPEED] 이미지 완성 즉시 콜백 전달
-        (options as any).productData  // ✅ [2026-02-23 FIX] 제품 가격 데이터 전달 → 스펙 표 가격 정확도 향상
+        apiKeys?.geminiApiKey,
+        options.isShoppingConnect,
+        options.collectedImages,
+        options.stopCheck,
+        onImageGenerated,
+        (options as any).productData,
+        forceModelKey, // v2.7.16: 모델 강제 지정
       );
-      console.log(`[이미지생성] ✅ 나노 바나나 프로(Gemini)로 ${nanoBananaImages.length}개 이미지 생성 완료!`);
+      console.log(`[이미지생성] ✅ ${modelLabel} ${nanoBananaImages.length}개 이미지 생성 완료!`);
       return preserveThumbnailFlags(nanoBananaImages, items);
     } catch (geminiError: any) {
-      // ✅ [2026-03-03] 쇼핑커넥트에서 Gemini 실패 시 수집 이미지로 폴백
       if (options.isShoppingConnect) {
         console.warn(`[ImageGenerator] ⚠️ Gemini 실패 → 쇼핑커넥트 수집 이미지로 폴백: ${geminiError.message}`);
         const collectedResults = await convertCollectedImagesToResults(options.collectedImages || crawledImages, items, options.postTitle, options.postId);
-        // ✅ [2026-03-16 FIX] 수집 이미지 폴백에도 텍스트 오버레이 적용
         return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(collectedResults, 'collected', options.postTitle, options.thumbnailTextInclude, items), items);
       }
-      throw geminiError; // 일반 모드는 기존 에러 전파
+      throw geminiError;
     }
   }
 

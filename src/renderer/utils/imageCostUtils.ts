@@ -9,7 +9,7 @@
  */
 export function isCostRiskImageProvider(provider: string): boolean {
     const p = String(provider || '').trim();
-    return p === 'nano-banana-pro' || p === 'prodia' || p === 'stability' || p === 'falai' || p === 'leonardoai' || p === 'openai-image';
+    return p === 'nano-banana-2' || p === 'nano-banana-pro' || p === 'prodia' || p === 'stability' || p === 'falai' || p === 'leonardoai' || p === 'openai-image' || p === 'dall-e-3';
 }
 
 /**
@@ -18,12 +18,14 @@ export function isCostRiskImageProvider(provider: string): boolean {
 export function getCostRiskProviderLabel(provider: string): string {
     const p = String(provider || '').trim();
     if (p === 'pollinations') return 'Pollinations';
-    if (p === 'nano-banana-pro') return '나노 바나나 프로';
+    if (p === 'nano-banana-2') return '나노바나나2 (₩97/장)';
+    if (p === 'nano-banana-pro') return '나노바나나프로 (~₩500/장)';
     if (p === 'falai') return 'Fal.ai';
     if (p === 'prodia') return 'Prodia AI';
     if (p === 'stability') return 'Stability AI';
     if (p === 'leonardoai') return 'Leonardo AI';
-    if (p === 'openai-image') return 'OpenAI DALL-E';
+    if (p === 'openai-image') return 'OpenAI 덕트테이프 (gpt-image-2)';
+    if (p === 'dall-e-3') return 'DALL-E 3 (OpenAI)';
     return p || 'AI 이미지';
 }
 

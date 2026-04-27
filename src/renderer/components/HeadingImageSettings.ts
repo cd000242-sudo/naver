@@ -8,7 +8,7 @@
 export type HeadingImageMode = 'all' | 'thumbnail-only' | 'odd-only' | 'even-only' | 'none';
 // ✅ [2026-02-08 FIX] 이미지 관리 탭 드롭다운 value와 완전 통일
 // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow (Nano Banana Pro 무료 쿼터)
-export type GlobalImageSource = 'nano-banana-pro' | 'falai' | 'prodia' | 'stability' | 'pollinations' | 'deepinfra' | 'openai-image' | 'leonardoai' | 'imagefx' | 'flow' | 'local-folder';
+export type GlobalImageSource = 'nano-banana-2' | 'nano-banana-pro' | 'falai' | 'prodia' | 'stability' | 'pollinations' | 'deepinfra' | 'openai-image' | 'dall-e-3' | 'leonardoai' | 'imagefx' | 'flow' | 'local-folder';
 
 // ✅ [2026-02-18] 이미지 스타일 타입 (v1.6.3: 7개 — infographic 추가)
 export type ImageStyleType =
@@ -33,13 +33,15 @@ export const MODE_NAMES: Record<HeadingImageMode, string> = {
 };
 
 export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
-  'nano-banana-pro': '나노 바나나 프로',
+  'nano-banana-2': '나노바나나2 (₩97/장)',
+  'nano-banana-pro': '나노바나나프로 (~₩500/장)',
   'falai': 'Fal.ai',
   'prodia': 'Prodia',
   'stability': 'Stability AI',
   'pollinations': 'Pollinations',
   'deepinfra': 'FLUX-2 (DeepInfra)',
   'openai-image': 'OpenAI 덕트테이프 (gpt-image-2)',
+  'dall-e-3': 'DALL-E 3 (OpenAI)',
   'leonardoai': 'Leonardo AI',
   'imagefx': 'ImageFX (무료)',
   'flow': '🍌 Flow (Nano Banana 2)',
@@ -216,7 +218,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   safeLocalStorageSet('globalImageSource', source);
   // ✅ [2026-02-18 FIX] fullAutoImageSource도 동기화 — 이전에는 globalImageSource만 설정되어
   // getImageSource()가 fullAutoImageSource(="null")를 거부한 후 DOM 폴백으로 nano-banana-pro 반환
-  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
+  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
   if (VALID_AI_SOURCES.includes(source)) {
     safeLocalStorageSet('fullAutoImageSource', source);
     console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${source}`);
@@ -230,7 +232,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
 //   기존: fullAutoImageSource가 오염된 기본값('nano-banana-pro')이어도 globalImageSource='flow'를 무시
 //   현재: globalImageSource가 유효하면 그걸 최우선으로 사용 + fullAutoImageSource도 덮어써서 동기화
 export function getFullAutoImageSource(): GlobalImageSource {
-  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
+  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-2', 'nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
 
   const fullAutoSaved = safeLocalStorageGet('fullAutoImageSource');
   const globalSaved = safeLocalStorageGet('globalImageSource');
@@ -801,10 +803,15 @@ export function createHeadingImageModal(): void {
       <div style="max-width: 360px; width: 90%; padding: 20px; border-radius: 16px; background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
         <h4 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 700; color: #1a1a2e;">🎨 AI 이미지 생성 엔진</h4>
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
-          <label class="source-option" data-value="nano-banana-pro" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s;">
+          <label class="source-option" data-value="nano-banana-2" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🍌</div>
-            <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노 바나나 프로</div>
-            <div style="font-size: 10px; color: #a16207;">Gemini | 추천</div>
+            <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노바나나2</div>
+            <div style="font-size: 10px; color: #a16207;">Gemini 3.1 Flash | ₩97/장</div>
+          </label>
+          <label class="source-option" data-value="nano-banana-pro" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fde68a, #fcd34d); text-align: center; transition: all 0.2s;">
+            <div style="font-size: 1.5rem;">🍌🦍</div>
+            <div style="font-size: 12px; font-weight: 600; color: #78350f;">나노바나나프로</div>
+            <div style="font-size: 10px; color: #b45309;">Gemini 3 Pro | ~₩500/장</div>
           </label>
           <label class="source-option" data-value="deepinfra" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #d1fae5, #6ee7b7); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🚀</div>
@@ -814,7 +821,12 @@ export function createHeadingImageModal(): void {
           <label class="source-option" data-value="openai-image" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ede9fe, #c4b5fd); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦆</div>
             <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">덕트테이프</div>
-            <div style="font-size: 10px; color: #7c3aed;">gpt-image-2 | API 키 필요</div>
+            <div style="font-size: 10px; color: #7c3aed;">gpt-image-2 | Org 인증 필요</div>
+          </label>
+          <label class="source-option" data-value="dall-e-3" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fce7f3, #fbcfe8); text-align: center; transition: all 0.2s;">
+            <div style="font-size: 1.5rem;">🎨</div>
+            <div style="font-size: 12px; font-weight: 600; color: #831843;">DALL-E 3</div>
+            <div style="font-size: 10px; color: #9d174d;">OpenAI | 인증 불필요</div>
           </label>
           <label class="source-option" data-value="leonardoai" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ffedd5, #fdba74); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦁</div>
@@ -1119,7 +1131,9 @@ export function createHeadingImageModal(): void {
               <label style="display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px;">🔧 테스트용 AI 엔진 (저장 안 됨)</label>
               <select id="test-engine-select" style="width: 100%; padding: 10px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; color: #374151; background: white; cursor: pointer; transition: border-color 0.2s;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e5e7eb'">
                 <option value="">📌 현재 저장된 엔진 사용</option>
-                <option value="nano-banana-pro">🍌 나노 바나나 프로 (Gemini)</option>
+                <option value="nano-banana-2">🍌 나노바나나2 (₩97/장)</option>
+                <option value="nano-banana-pro">🍌🦍 나노바나나프로 (~₩500/장)</option>
+                <option value="dall-e-3">🎨 DALL-E 3 (OpenAI, 인증 불필요)</option>
                 <option value="flow">🍌 Flow (Nano Banana 2, AI Pro 무료)</option>
                 <option value="imagefx">✨ ImageFX (Google 무료)</option>
                 <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>

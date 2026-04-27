@@ -3421,11 +3421,15 @@
                     <div style="display: flex; gap: 0.75rem; align-items: center;">
                         <select id="image-source-select"
                             style="flex: 1; padding: 0.875rem 1rem; background: var(--bg-tertiary); border: 2px solid var(--border-gold); border-radius: 10px; color: var(--text-strong); font-size: 0.95rem; font-weight: 600; cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Cpath fill=%22%23d4af37%22 d=%22M2 4l4 4 4-4%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 1rem center;">
-                            <option value="nano-banana-pro" data-icon="🍌" data-price="기본 나노바나나2 ₩97/장 (Gemini 3.1 Flash)">🍌 나노바나나 (Gemini API, 기본 ₩97)</option>
+                            <!-- v2.7.16: 나노바나나2 / 나노바나나프로 옵션 분리 -->
+                            <option value="nano-banana-2" data-icon="🍌" data-price="₩97/장 (Gemini 3.1 Flash) | 빠르고 가성비">🍌 나노바나나2 (₩97/장, 가성비)</option>
+                            <option value="nano-banana-pro" data-icon="🍌🦍" data-price="~₩500/장 (Gemini 3 Pro) | 최고 품질">🍌🦍 나노바나나프로 (~₩500/장, 최고품질)</option>
                             <option value="deepinfra" data-icon="⚡" data-price="$0.01/장 | FLUX-2">⚡ DeepInfra (FLUX-2,
                                 $0.01/장)</option>
                             <option value="openai-image" data-icon="🦆" data-price="gpt-image-2 | $0.02~$0.20 | 한글 최강">🦆 덕트테이프
-                                (gpt-image-2, 다국어 최강)</option>
+                                (gpt-image-2, 다국어 최강 | Org 인증 필요)</option>
+                            <!-- v2.7.15: DALL-E 3 추가 — gpt-image-2 인증 대기 중 사용자 임시 우회용 -->
+                            <option value="dall-e-3" data-icon="🎨" data-price="$0.04~0.08/장 | OpenAI 인증 불필요">🎨 DALL-E 3 (OpenAI, 인증 불필요)</option>
                             <option value="leonardoai" data-icon="🦁" data-price="Phoenix 1.0 | $0.01~$0.02">🦁 Leonardo
                                 AI ($0.01~$0.02/장)</option>
                             <option value="imagefx" data-icon="✨" data-price="Google 무료 | 1000장/일" selected>✨ ImageFX (Google 무료, 1000장/일)</option>

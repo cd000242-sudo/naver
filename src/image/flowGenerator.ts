@@ -218,6 +218,108 @@ function installNetworkImageListener(page: Page): void {
     flowLog('[Flow][Net] ✅ 네트워크 응답 리스너 설치됨');
 }
 
+// v2.7.12 (사용자 요구 + planner 진단 반영): v2.7.10 동작 복귀.
+//   사용자 실측: v2.7.10에서 글 1=4/8, 글 2~3=8/8 → 콜드 스타트만 문제.
+//   v2.7.11의 매 글 storage purge는 정상 동작 글에 회귀 위험.
+//
+// 정책: 매 글마다는 BrowserContext 재생성 + 새 프로젝트만 (v2.7.10 동작).
+//   storage purge는 별도 export `purgeFlowSessionStorage()`로 분리하여
+//   마라톤 시작 직전 1회만 호출 → 콜드 스타트(이전 누적 잔재) 정리.
+export async function recreateFlowContext(): Promise<Page> {
+    flowLog('[Flow] 🔄 BrowserContext 강제 재생성 — 누적 0으로 리셋');
+    sendImageLog('🔄 [Flow] 새 세션 + 새 프로젝트 강제');
+    if (cachedContext) {
+        try { await cachedContext.close(); } catch { /* ignore */ }
+    }
+    cachedContext = null;
+    cachedPage = null;
+    cachedProjectUrl = null;
+    cookieBannerDismissed = false;
+    _networkListenerInstalled = false;
+    _networkImageQueue = [];
+    await new Promise((r) => setTimeout(r, 800));
+    const page = await ensureFlowBrowserPage();
+
+    let attempt = 0;
+    while (attempt < 3) {
+        attempt++;
+        try {
+            await ensureFlowProject(page, true);
+            const cnt = await countExistingImages(page);
+            if (cnt === 0) {
+                flowLog(`[Flow] ✅ 새 프로젝트 확정 (0장): ${page.url()}`);
+                return page;
+            }
+            flowWarn(`[Flow] ⚠️ "새 프로젝트" 클릭 후 ${cnt}장 누적 — 재시도 ${attempt}/3`);
+            cachedProjectUrl = null;
+            await new Promise((r) => setTimeout(r, 1500));
+        } catch (err) {
+            flowWarn(`[Flow] ensureFlowProject(force) 실패 ${attempt}/3: ${(err as Error).message?.substring(0, 100)}`);
+            if (attempt >= 3) throw err;
+            await new Promise((r) => setTimeout(r, 2000));
+        }
+    }
+    return page;
+}
+
+// v2.7.12: 콜드 스타트 전용 storage purge — 마라톤 시작 직전 1회만 호출.
+//   첫 글이 4/8 패턴으로 막히는 원인(이전 누적 프로젝트 잔재)을 외과적으로 제거.
+//   매 글마다 호출하지 않음 (v2.7.11 회귀 방지). 쿠키는 유지해 Google 로그인 보존.
+export async function purgeFlowSessionStorage(): Promise<void> {
+    flowLog('[Flow] 🧹 마라톤 시작 직전 storage purge — 콜드 스타트 정리');
+    sendImageLog('🧹 [Flow] 이전 세션 잔재 정리 중...');
+    if (cachedContext) {
+        try { await cachedContext.close(); } catch { /* ignore */ }
+    }
+    cachedContext = null;
+    cachedPage = null;
+    cachedProjectUrl = null;
+    cookieBannerDismissed = false;
+    _networkListenerInstalled = false;
+    _networkImageQueue = [];
+    await new Promise((r) => setTimeout(r, 1500));
+
+    const page = await ensureFlowBrowserPage();
+    try {
+        if (!page.url().includes('labs.google')) {
+            await page.goto('https://labs.google/fx/tools/flow', {
+                waitUntil: 'domcontentloaded',
+                timeout: 30000,
+            });
+        }
+        await page.evaluate(async () => {
+            try { localStorage.clear(); } catch {}
+            try { sessionStorage.clear(); } catch {}
+            try {
+                const dbs = await ((indexedDB as any).databases?.() || Promise.resolve([]));
+                await Promise.all((dbs as any[]).map((db: any) =>
+                    db?.name ? new Promise<void>((res) => {
+                        const req = indexedDB.deleteDatabase(db.name);
+                        req.onsuccess = req.onerror = req.onblocked = () => res();
+                    }) : Promise.resolve()
+                ));
+            } catch {}
+            try {
+                const regs = await navigator.serviceWorker?.getRegistrations?.() || [];
+                await Promise.all(regs.map((r) => r.unregister().catch(() => false)));
+            } catch {}
+            try {
+                const keys = await caches.keys();
+                await Promise.all(keys.map((k) => caches.delete(k).catch(() => false)));
+            } catch {}
+        });
+        flowLog('[Flow] ✅ storage purge 완료 (cookies 유지)');
+        // SW unregister 적용 + redirect 로직 재시작
+        await page.goto('https://labs.google/fx/tools/flow', {
+            waitUntil: 'domcontentloaded',
+            timeout: 30000,
+        });
+        await page.waitForTimeout(1500);
+    } catch (err) {
+        flowWarn(`[Flow] storage purge 실패 (계속 진행): ${(err as Error).message?.substring(0, 100)}`);
+    }
+}
+
 // ─── Flow 전용 Playwright 브라우저 ───────────────────────────
 async function ensureFlowBrowserPage(): Promise<Page> {
     if (_ensurePromise) {
@@ -432,6 +534,11 @@ async function ensureFlowProject(page: Page, forceNew: boolean = false): Promise
     if (forceNew) {
         flowLog('[Flow][1/3] 🆕 강제 새 프로젝트 생성 (이미지 상한 도달 방지)');
         cachedProjectUrl = null;
+        // v2.7.10: forceNew면 무조건 메인 페이지로 navigate해서 "새 프로젝트" 버튼
+        // 클릭으로 빈 프로젝트 보장. 현재 URL이 project여도 절대 재사용 안 함.
+        // (이전 버그: forceNew=true여도 currentUrl이 project URL이면 아래 "이미
+        // 프로젝트 페이지" 분기를 안 타지만, cachedProjectUrl 분기로 빠지는 등
+        // 의도치 않게 누적 프로젝트로 흘러갈 위험 차단)
     } else if (currentUrl.includes('/tools/flow/project/')) {
         cachedProjectUrl = currentUrl;
         flowLog('[Flow][1/3] ✅ 이미 프로젝트 페이지 — 재사용');
@@ -667,10 +774,10 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
     }
 }
 
-async function countExistingImages(page: Page): Promise<number> {
-    return await page.evaluate(() => {
+async function countExistingImages(page: Page, debug: boolean = false): Promise<number> {
+    const result = await page.evaluate((dbg) => {
         const imgs = Array.from(document.querySelectorAll('img')) as HTMLImageElement[];
-        return imgs.filter(img => {
+        const matched = imgs.filter((img) => {
             const alt = img.alt || '';
             const src = img.src || '';
             const aria = img.getAttribute('aria-label') || '';
@@ -680,8 +787,18 @@ async function countExistingImages(page: Page): Promise<number> {
             if (/media\.getMediaUrlRedirect|flowMedia|flow-media/i.test(src)) return true;
             if (img.naturalWidth >= 512 && !/=s\d+-c$/.test(src) && src.startsWith('http')) return true;
             return false;
-        }).length;
-    });
+        });
+        return {
+            count: matched.length,
+            sample: dbg ? matched.slice(0, 12).map((img) => ({
+                alt: (img.alt || '').substring(0, 30),
+                src: (img.src || '').substring(0, 80),
+                w: img.naturalWidth,
+            })) : [],
+        };
+    }, debug);
+    if (debug) flowLog(`[Flow][Count] ${result.count}장 — 샘플`, result.sample);
+    return result.count;
 }
 
 // ─── 이미지 다운로드 ──
@@ -718,10 +835,14 @@ async function downloadImageAsBuffer(page: Page, imageUrl: string): Promise<{ bu
 }
 
 // ─── 단일 이미지 생성 ─────────────────
+// v2.7.11 (debugger #1 권장): 마라톤 sequential 폴백에서 호출 시 forceNewProjectOnLimit
+// 옵션을 true로 주면 한도 임계치를 LIMIT-2(7장)로 보수화해 매 호출마다 한도 사전 체크 +
+// 누적 위험 차단. 단발 호출(기본값 false)은 기존 동작 유지.
 export async function generateSingleImageWithFlow(
     prompt: string,
     _aspectRatio: string = '1:1',
     signal?: AbortSignal,
+    opts?: { forceNewProjectOnLimit?: boolean },
 ): Promise<{ buffer: Buffer; mimeType: string } | null> {
     const MAX_RETRIES = 3;
     let lastError: Error | null = null;
@@ -737,6 +858,8 @@ export async function generateSingleImageWithFlow(
             await ensureFlowProject(page);
 
             let prevCount = await countExistingImages(page);
+            // v2.7.12: v2.7.10 동작 복귀 — 임계치 LIMIT(9) 그대로. 사용자 실측에서
+            // 글 2~3은 8/8 정상, 첫 글만 4/8 → 보수화는 정상 글에 회귀 위험.
             if (prevCount >= FLOW_PROJECT_IMAGE_LIMIT) {
                 flowLog(`[Flow] ⚠️ 프로젝트 이미지 ${prevCount}장 ≥ ${FLOW_PROJECT_IMAGE_LIMIT}장 상한 — 새 프로젝트로 교체`);
                 sendImageLog(`🆕 [Flow] 프로젝트 상한(${FLOW_PROJECT_IMAGE_LIMIT}장) 도달 — 새 프로젝트 생성`);
@@ -795,20 +918,19 @@ async function generateBatchPipelined(
     let criticalError: Error | null = null;
 
     const page = await ensureFlowBrowserPage();
-    await ensureFlowProject(page);
+    // v2.7.7: 매 generateWithFlow 호출(=글 1편) 시작 시 새 프로젝트 강제.
+    // 이전 누적 이미지가 9장 한도를 미리 깎아먹어 8장 중 4장만 처리되던 버그
+    // (사용자 마라톤 테스트에서 매 글 4/8 패턴 확정) 해결.
+    flowLog(`[Flow][Batch] 🆕 글 시작 — 새 프로젝트 강제 (이전 누적 한도 회피)`);
+    await ensureFlowProject(page, true);
 
     // 제출된 프롬프트 FIFO 큐 (순서 기반 매칭)
     // Flow UI는 제출 순서대로 이미지를 쌓으므로, 제출 순서 = 감지 순서 가정
     const pending: { index: number; prompt: string; item: ImageRequestItem }[] = [];
     const totalItems = items.length;
 
-    // 감지된 이미지 수 (새 프로젝트로 바뀌면 리셋 필요)
     let initialCount = await countExistingImages(page);
-    if (initialCount >= FLOW_PROJECT_IMAGE_LIMIT) {
-        flowLog(`[Flow][Batch] 프로젝트 상한 도달 — 새 프로젝트로 교체`);
-        await ensureFlowProject(page, true);
-        initialCount = await countExistingImages(page);
-    }
+    flowLog(`[Flow][Batch] 새 프로젝트 시작 카운트: ${initialCount}장 (8장 처리 가능 여부 확보)`);
     sendImageLog(`🚀 [Flow][Pipeline] 파이프라인 모드 활성 (동시 큐 ${queueDepth}개)`);
 
     let submittedCount = 0;
@@ -822,9 +944,10 @@ async function generateBatchPipelined(
         ) {
             // 프로젝트 상한 사전 체크
             const currentCount = await countExistingImages(page);
-            if (currentCount >= FLOW_PROJECT_IMAGE_LIMIT) {
-                flowLog(`[Flow][Batch] 프로젝트 ${currentCount}장 도달 — 새 프로젝트 교체 (pending 비운 뒤)`);
-                // pending이 남아있으면 완료 대기 후 새 프로젝트로
+            if (currentCount >= FLOW_PROJECT_IMAGE_LIMIT - 1) {
+                flowLog(`[Flow][Batch] 프로젝트 ${currentCount}장 (한도 ${FLOW_PROJECT_IMAGE_LIMIT}) — pending 비우고 새 프로젝트로`);
+                // v2.7.7: pending 비우고 즉시 새 프로젝트 전환 (이전엔 break 후
+                // 외부 루프에서 새 프로젝트 안 만들어 미완료분 분실)
                 break;
             }
 
@@ -940,6 +1063,22 @@ async function generateBatchPipelined(
             if (msg.startsWith('FLOW_')) criticalError = err as Error;
             // 이 slot은 실패지만 다른 pending은 계속 진행
         }
+
+        // v2.7.7: 프로젝트 한도 도달 + 미완료 잔여분 있으면 새 프로젝트로 전환 후 계속
+        // 이전엔 break 후 외부 루프에서 새 프로젝트 안 만들어 미완료분이 분실됐음
+        if (
+            !criticalError &&
+            submittedCount < totalItems &&
+            pending.length === 0
+        ) {
+            const cur = await countExistingImages(page);
+            if (cur >= FLOW_PROJECT_IMAGE_LIMIT - 1) {
+                flowLog(`[Flow][Batch] 🆕 한도 도달(${cur}/${FLOW_PROJECT_IMAGE_LIMIT}) — 새 프로젝트 전환 후 ${totalItems - submittedCount}장 잔여 처리`);
+                await ensureFlowProject(page, true);
+                initialCount = await countExistingImages(page);
+                detectedCount = 0; // 새 프로젝트는 카운트 리셋, prevCount 계산 위해
+            }
+        }
     }
 
     return { results, criticalError };
@@ -953,11 +1092,18 @@ export async function generateWithFlow(
     onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void,
     externalUsedImageHashes?: Set<string>,
     externalUsedImageAHashes?: bigint[],
+    options?: { forceFreshContext?: boolean },
 ): Promise<GeneratedImage[]> {
     // v2.6.7: 호출자가 dedup 집합을 주지 않으면 배치 내부에서 자체 추적해
     // 같은 발행 안에서 같은 이미지가 반복 생성되는 것을 차단한다.
     const usedImageHashes = externalUsedImageHashes ?? new Set<string>();
     const usedImageAHashes = externalUsedImageAHashes ?? [];
+
+    // v2.7.8: 마라톤 모드 — BrowserContext 자체를 close+재생성해 누적 0 보장.
+    // 평소 단발 호출엔 false (캐시 효율 유지). 마라톤만 true.
+    if (options?.forceFreshContext) {
+        await recreateFlowContext();
+    }
     initFlowLogFile();
     flowLog(`════════════════════════════════════════════`);
     flowLog(`[Flow] 🎨 총 ${items.length}개 이미지 생성 시작 (v1.6.1 파이프라인)`);
@@ -973,7 +1119,9 @@ export async function generateWithFlow(
     sendImageLog(`📄 [Flow] 디버그 로그: ${flowLogFilePath || '초기화 실패'}`);
 
     // [v1.6.1] 파이프라인 시도 (queueDepth=2)
-    const PIPELINE_ENABLED = process.env.FLOW_SEQUENTIAL !== '1';
+    // v2.7.9: 마라톤 모드(forceFreshContext)에서는 파이프라인 비활성 — 한도 도달
+    // 시 sequential 폴백이 같은 페이지에서 누적 막힘으로 무한 타임아웃 발생.
+    const PIPELINE_ENABLED = process.env.FLOW_SEQUENTIAL !== '1' && !options?.forceFreshContext;
     let results: GeneratedImage[] = [];
     let firstCriticalError: Error | null = null;
     let pipelineDoneCount = 0;
@@ -992,6 +1140,8 @@ export async function generateWithFlow(
             results = [];
             pipelineDoneCount = 0;
         }
+    } else if (options?.forceFreshContext) {
+        flowLog(`[Flow] 🏁 마라톤 모드 — 파이프라인 비활성, sequential 단일 경로`);
     }
 
     // Sequential fallback (파이프라인 미완료분 또는 전체)
@@ -1007,7 +1157,13 @@ export async function generateWithFlow(
             } as any);
             const aspectRatio = (item as any).aspectRatio || '1:1';
 
-            let generated = await generateSingleImageWithFlow(prompt, aspectRatio);
+            // v2.7.11: 마라톤 모드 시 한도 임계치 보수화 옵션 전달 (debugger #1)
+            let generated = await generateSingleImageWithFlow(
+                prompt,
+                aspectRatio,
+                undefined,
+                { forceNewProjectOnLimit: !!options?.forceFreshContext },
+            );
             if (!generated) {
                 flowWarn(`[Flow] [${i + 1}] null 반환 (중지 감지) — 나머지 건너뜀`);
                 break;
@@ -1024,7 +1180,12 @@ export async function generateWithFlow(
                     sendImageLog(`🔁 [Flow] 중복 이미지 감지 — 다른 각도로 재생성 ${dupRetries}/${FLOW_DUPLICATE_MAX_RETRIES}`);
                     prompt = applyDiversityHint(prompt, dupRetries);
                     try {
-                        const retried = await generateSingleImageWithFlow(prompt, aspectRatio);
+                        const retried = await generateSingleImageWithFlow(
+                            prompt,
+                            aspectRatio,
+                            undefined,
+                            { forceNewProjectOnLimit: !!options?.forceFreshContext },
+                        );
                         if (!retried) break;
                         generated = retried;
                         probe = await probeDuplicate(generated.buffer, usedImageHashes, usedImageAHashes);
