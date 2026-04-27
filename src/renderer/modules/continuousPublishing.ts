@@ -2491,6 +2491,23 @@ function addItemToQueueV2Impl(): void {
   // ✅ 줄바꿈(\n)으로만 입력값 분리 (벌크 추가 지원) - 콤마는 키워드에 포함될 수 있으므로 제외
   const rawCandidates = rawInputValue.split(/\n+/).map((v: string) => v.trim()).filter((v: string) => v.length > 0);
 
+  // v2.7.0: textarea의 진짜 내용을 push 직전에 통째로 덤프.
+  // 사용자가 "키워드를 넣었는데 비평 문구가 들어간다"라고 보고하는 경우,
+  // 실제 textarea 내용이 critique 텍스트였는지 사용자 본인이 확인할 수 있게 한다.
+  console.group('[연속발행][큐가드] 📋 입력 텍스트 진단');
+  console.log('탭 타입:', tabType);
+  console.log('rawInputValue 길이:', rawInputValue.length);
+  console.log('rawInputValue 전문:', JSON.stringify(rawInputValue));
+  console.table(
+    rawCandidates.map((v, i) => ({
+      idx: i + 1,
+      preview: v.length > 60 ? v.substring(0, 60) + '…' : v,
+      length: v.length,
+      suspicious_long: v.length > 80 ? '⚠️ 키워드치고 길다' : '',
+    })),
+  );
+  console.groupEnd();
+
   if (rawCandidates.length === 0) {
     toastManager.warning('유효한 입력값이 없습니다.');
     return;
@@ -2732,6 +2749,19 @@ function addItemToQueueV2Impl(): void {
       hint: '리스너 중복 또는 N배 확장 경로 의심 — addItemToQueueV2가 한 클릭에 여러 번 실행됨',
     });
   }
+
+  // v2.7.0: 적재 후 큐의 실제 내용 덤프 — UI 표시와 데이터가 일치하는지 사용자가 확인 가능
+  console.group('[연속발행][큐가드] ✅ 큐 적재 결과 (마지막 ' + addedCount + '건)');
+  console.table(
+    continuousQueueV2.slice(-addedCount).map((it, i) => ({
+      idx: continuousQueueV2.length - addedCount + i + 1,
+      type: it.type,
+      value: it.value.length > 60 ? it.value.substring(0, 60) + '…' : it.value,
+      value_length: it.value.length,
+      keywordAsTitle: !!(it as any).keywordAsTitle,
+    })),
+  );
+  console.groupEnd();
 
   // 입력한 키워드/URL은 비평/검수 없이 입력 순서 그대로 큐에 적재한다.
   toastManager.success(`${addedCount}개 항목이 큐에 추가되었습니다. (총 ${continuousQueueV2.length}개)`);
