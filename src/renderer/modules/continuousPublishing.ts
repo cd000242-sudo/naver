@@ -5,7 +5,26 @@
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
 import type { ContinuousQueueItem } from '../types/index';
-import { META_CRITIQUE_PHRASES } from '../../content/forbiddenPhrases';
+
+// v2.7.2: 메인 프로세스 모듈 import 제거 — 렌더러 빌드 스크립트가 require()를
+// 정규식 삭제하므로 import한 심볼이 undefined로 남는 ReferenceError 발생
+// (forbiddenPhrases_1 is not defined). 렌더러 전용 사본을 직접 인라인한다.
+// 원본은 src/content/forbiddenPhrases.ts:META_CRITIQUE_PHRASES — 동기화 필요.
+const META_CRITIQUE_PHRASES: readonly string[] = [
+  '자체비평', '자체 비평', '자기비평', '자기 비평',
+  '자가검수', '자가 검수', '자가점검', '자가 점검',
+  '자체점검', '자체 점검', '자체검수', '자체 검수',
+  '메타 검수', '메타검수',
+  '솔직하게 자체', '솔직히 자체',
+  '솔직하게 평가하', '솔직히 평가하',
+  '평가해보겠', '평가해 보겠',
+  '점검해보겠', '점검해 보겠',
+  '검수해보겠', '검수해 보겠',
+  '자체 평가하', '자체평가하', '자기 평가하', '자기평가하',
+  '체크리스트로 확인', '체크리스트로 점검', '체크리스트로 검수',
+  '체크리스트를 진행', '체크리스트를 통해 검수',
+  '자가검수 체크', '자가점검 체크', '자체비평 체크',
+];
 
 // ── 렌더러 전역 변수/함수 선언 (renderer.ts에서 정의) ──
 declare const toastManager: { success: (msg: string, duration?: number) => void; error: (msg: string, duration?: number) => void; warning: (msg: string, duration?: number) => void; info: (msg: string, duration?: number) => void };
