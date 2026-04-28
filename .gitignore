@@ -7,6 +7,9 @@ release_final/
 *.exe
 *.asar
 *.log
+# 🚨 [v2.7.27 SECURITY] API 키 평문 저장. 빌드/git 둘 다 절대 포함 금지.
+.env
+.env.local
 .env.release
 
 # Selector capture/debug artifacts

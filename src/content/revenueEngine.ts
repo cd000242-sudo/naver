@@ -411,7 +411,7 @@ export function estimateMonthlyCosts(config: {
   // 이미지 비용 (포스팅당 7장 기준)
   const imageCostPerPost: Record<typeof config.imageEngine, number> = {
     'flow': 0,
-    'nano-banana-2': 679,       // ₩97 × 7
+    'nano-banana-2': 378,       // ₩54 × 7 (gemini-2.5-flash-image 정식 단가)
     'duct-tape-med': 539,        // ₩77 × 7
     'duct-tape-high': 1960,      // ₩280 × 7
   };

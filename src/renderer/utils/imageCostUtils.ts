@@ -18,8 +18,8 @@ export function isCostRiskImageProvider(provider: string): boolean {
 export function getCostRiskProviderLabel(provider: string): string {
     const p = String(provider || '').trim();
     if (p === 'pollinations') return 'Pollinations';
-    if (p === 'nano-banana-2') return '나노바나나2 (₩97/장)';
-    if (p === 'nano-banana-pro') return '나노바나나프로 (~₩500/장)';
+    if (p === 'nano-banana-2') return '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)';
+    if (p === 'nano-banana-pro') return '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)';
     if (p === 'falai') return 'Fal.ai';
     if (p === 'prodia') return 'Prodia AI';
     if (p === 'stability') return 'Stability AI';

@@ -8985,6 +8985,10 @@ export class NaverBlogAutomation {
   }
 
   async run(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string }> {
+    // ✅ [v2.7.27] Adaptive Limiter — Puppeteer 부하 시 발행 동시성 자동 다운
+    const { globalLimiter } = await import('./runtime/adaptiveLimiter.js');
+    const release = await globalLimiter.acquire('publish');
+    try {
     this.cancelRequested = false;
     this.publishedUrl = null; // ✅ 초기화
     this.log('🚀 네이버 블로그 자동화를 시작합니다...');
@@ -9208,6 +9212,10 @@ export class NaverBlogAutomation {
           } catch (e) { console.debug('[Browser] 스테일 페이지 정리 실패:', (e as Error).message); }
         }
       }
+    }
+    } finally {
+      // ✅ [v2.7.27] Adaptive Limiter 슬롯 반환
+      release();
     }
   }
 

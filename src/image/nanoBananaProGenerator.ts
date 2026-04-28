@@ -26,9 +26,12 @@ function sendImageLog(message: string): void {
 
 // ✅ [2026-03-02] Gemini 모델별 이미지 1장당 추정 비용 (원화)
 const MODEL_COST_KRW: Record<string, number> = {
-  'gemini-3.1-flash-image-preview': 97,    // 나노바나나 2 (~₩97)
-  'gemini-3-pro-image-preview': 500,       // 나노바나나프로 (~₩500)
-  'gemini-2.5-flash-image': 150,           // 나노바나나 (~₩150)
+  // ✅ [v2.7.25] Google 공식 단가 기준 정확화
+  //   gemini-2.5-flash-image: $0.039/장 (1290 출력 토큰 × $30/1M) ≈ ₩54/장 (환율 ₩1,380)
+  //   가짜 ID(gemini-3.x preview) 항목은 호환성 위해 동일 단가로 매핑
+  'gemini-3.1-flash-image-preview': 54,    // 통합 매핑 (실제 = gemini-2.5-flash-image)
+  'gemini-3-pro-image-preview': 54,        // 통합 매핑 (실제 = gemini-2.5-flash-image)
+  'gemini-2.5-flash-image': 54,            // 나노바나나 정식 GA (~₩54/장)
   'gemini-2.0-flash-exp-image-generation': 0, // 무료
   'imagen-4.0-generate-001': 100,          // 이미지4 (~₩100)
 };
@@ -1198,14 +1201,14 @@ async function generateSingleImageWithGemini(
 
       if (isMainOrThumbnail) {
         // 대표/썸네일 이미지: nanoBananaMainModel 사용 (통합)
-        const configForMain = MODEL_MAP[userMainModel] || { model: 'gemini-3.1-flash-image-preview', resolution: '1K' };
+        const configForMain = MODEL_MAP[userMainModel] || { model: 'gemini-2.5-flash-image', resolution: '1K' };
         selectedModel = configForMain.model;
         selectedResolution = configForMain.resolution;
         const imageType = isThumbnail ? '썸네일' : '대표';
         console.log(`[NanoBananaPro] 🖼️ ${imageType} 이미지: ${userMainModel} (${selectedModel}, ${selectedResolution})`);
       } else {
         // 본문 서브 이미지: nanoBananaSubModel 사용
-        const configForSub = MODEL_MAP[userSubModel] || { model: 'gemini-3.1-flash-image-preview', resolution: '1K' };
+        const configForSub = MODEL_MAP[userSubModel] || { model: 'gemini-2.5-flash-image', resolution: '1K' };
         selectedModel = configForSub.model;
         selectedResolution = configForSub.resolution;
         console.log(`[NanoBananaPro] 📷 서브 이미지: ${userSubModel} (${selectedModel}, ${selectedResolution})`);
@@ -1683,11 +1686,10 @@ async function generateSingleImageWithGemini(
 
   // ===== 🔥 [2026-04-06] 최종 안전망: 나노바나나 계열 전체 로테이션 =====
   // 선택 모델 재시도 실패 후 → 다른 나노바나나 모델을 순차 시도
+  // ✅ [v2.7.24] 검증된 정식 ID만 유지 (gemini-3.x 프리뷰는 미존재)
   const FINAL_ROTATION = [
-    { name: '나노바나나2', model: 'gemini-3.1-flash-image-preview' },
-    { name: '나노바나나프로', model: 'gemini-3-pro-image-preview' },
-    { name: '나노바나나', model: 'gemini-2.5-flash-image' },
-    { name: '나노바나나(무료)', model: 'gemini-2.0-flash-exp-image-generation' },
+    { name: '나노바나나(정식)', model: 'gemini-2.5-flash-image' },
+    { name: '나노바나나(무료)', model: 'gemini-2.0-flash-preview-image-generation' },
   ].filter(m => m.model !== lastSelectedModel); // 이미 실패한 모델 제외
 
   console.log(`[NanoBananaPro] 🛡️ 최종 안전망: ${FINAL_ROTATION.length}개 나노바나나 모델 순차 시도 (실패 모델: ${lastSelectedModel})`);
@@ -1856,7 +1858,7 @@ ABSOLUTE REQUIREMENTS:
   try {
     const axios = (await import('axios')).default;
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:generateContent`,  // ✅ [2026-03-24] API 키 헤더 전환
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent`,  // ✅ [v2.7.24] 정식 GA로 통합 (gemini-3-pro-image-preview는 미존재 ID)
       {
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
@@ -1937,7 +1939,7 @@ ABSOLUTE REQUIREMENTS:
   try {
     const axios = (await import('axios')).default;
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:generateContent`,  // ✅ [2026-03-24] API 키 헤더 전환
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent`,  // ✅ [v2.7.24] 정식 GA로 통합 (gemini-3-pro-image-preview는 미존재 ID)
       {
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {

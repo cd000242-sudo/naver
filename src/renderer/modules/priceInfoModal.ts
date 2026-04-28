@@ -656,8 +656,9 @@ export async function initPriceInfoModal(): Promise<void> {
         presetPremiumBtn.onclick = () => {
           if (falaiModelSelect) falaiModelSelect.value = 'flux-1.1-pro';
           if (stabilityModelSelect) stabilityModelSelect.value = 'stable-image-ultra';
-          if (nanoBananaMainModel) nanoBananaMainModel.value = 'gemini-3-pro-4k';  // ✅ 고퀄리티 = 4K 유지
-          if (nanoBananaSubModel) nanoBananaSubModel.value = 'gemini-3-1-flash';  // ✅ [2026-03-11] 서브는 나노바나나2로 변경
+          // ✅ [v2.7.24] gemini-3.x 프리뷰는 미존재 ID라 'gemini-3-1-flash'(=정식 GA)로 통합
+          if (nanoBananaMainModel) nanoBananaMainModel.value = 'gemini-3-1-flash';
+          if (nanoBananaSubModel) nanoBananaSubModel.value = 'gemini-3-1-flash';
           if (imagePresetInput) imagePresetInput.value = 'premium';
           console.log('[Settings] 🏆 고퀄리티 조합 프리셋 적용됨');
           toastManager.success('🏆 고퀄리티 조합이 적용되었습니다. 저장 버튼을 눌러주세요!');

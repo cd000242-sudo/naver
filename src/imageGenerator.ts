@@ -210,6 +210,10 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   leonardoaiApiKey?: string; // ✅ Leonardo AI 키
 }, onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void  // ✅ [2026-02-13 SPEED] 실시간 콜백
 ): Promise<GeneratedImage[]> {
+  // ✅ [v2.7.27] Adaptive Limiter — 메인 스레드 lag 발생 시 자동으로 동시성 다운
+  const { globalLimiter } = await import('./runtime/adaptiveLimiter.js');
+  const release = await globalLimiter.acquire('image');
+  try {
   // ✅ [2026-02-18 DEBUG] 프로바이더 수신 진단 로그
   console.log(`[ImageGenerator] 🔍🔍🔍 수신된 options.provider = "${options.provider}" (type: ${typeof options.provider})`);
 
@@ -224,12 +228,18 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     console.log(`[ImageGenerator] 📋 프로바이더 정규화: ${options.provider} → deepinfra`);
     normalizedProvider = 'deepinfra';
   }
-  // v2.7.16: nano-banana-2와 nano-banana-pro를 별개로 dispatch (한 함수 + forceModelKey로 분기)
-  // 정규화 안 함 (각각 다른 모델로 호출되어야 함)
+  // ✅ [v2.7.28] nano-banana-2 / nano-banana-pro 완전 통합
+  //   백엔드 MODEL_MAP에서 두 라벨 모두 'gemini-2.5-flash-image'로 매핑된 상태에서
+  //   provider value만 별개로 두면 모든 후속 가드/분기에서 두 케이스를 명시 처리해야 하는
+  //   불일치 발생. 진입부에서 'nano-banana-pro'로 정규화하여 단일 흐름으로 통합.
+  if (normalizedProvider === 'nano-banana-2') {
+    console.log(`[ImageGenerator] 📋 프로바이더 정규화: nano-banana-2 → nano-banana-pro (동일 백엔드 모델)`);
+    normalizedProvider = 'nano-banana-pro';
+  }
   // ✅ [엔진명 한글 매핑]
   const providerDisplayNames: Record<string, string> = {
-    'nano-banana-2': '나노바나나2 (Gemini 3.1 Flash, ₩97/장)',
-    'nano-banana-pro': '나노바나나프로 (Gemini 3 Pro, ~₩500/장)',
+    'nano-banana-2': '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)',
+    'nano-banana-pro': '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)',
     'deepinfra': '딥인프라 FLUX-2',
     'openai-image': 'OpenAI 덕트테이프 (gpt-image-2)',
     'dall-e-3': 'DALL-E 3 (OpenAI, 인증 불필요)',
@@ -461,13 +471,10 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     throw new Error('[local-folder] 내 폴더 이미지는 renderer의 localFolderImageLoader에서 처리해야 합니다. generateImages로 전달되면 안 됩니다.');
   }
 
-  // ✅ 나노 바나나 프로/2 선택 시 (Gemini 기반)
-  // v2.7.16: nano-banana-2(gemini-3.1-flash, ₩97) / nano-banana-pro(gemini-3-pro, ~₩500) 분리
-  if (normalizedProvider === 'nano-banana-2' || normalizedProvider === 'nano-banana-pro') {
-    const forceModelKey = normalizedProvider === 'nano-banana-2' ? 'gemini-3-1-flash' : 'gemini-3-pro';
-    const modelLabel = normalizedProvider === 'nano-banana-2'
-      ? '나노바나나2 (gemini-3.1-flash, ₩97/장)'
-      : '나노바나나프로 (gemini-3-pro, ~₩500/장)';
+  // ✅ 나노바나나 (Gemini 기반) — v2.7.28에서 nano-banana-2도 진입부에서 nano-banana-pro로 정규화됨
+  if (normalizedProvider === 'nano-banana-pro') {
+    const forceModelKey = 'gemini-3-1-flash'; // MODEL_MAP에서 gemini-2.5-flash-image로 매핑됨
+    const modelLabel = '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)';
     console.log(`[이미지생성] 🍌 ${modelLabel}로 ${items.length}개 이미지 생성 시작...`);
     console.log(`[ImageGenerator] Gemini API 키: ${apiKeys?.geminiApiKey ? apiKeys.geminiApiKey.substring(0, 10) + '...' : '미설정'}`);
 
@@ -520,5 +527,9 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     return preserveThumbnailFlags(fallbackImages, items);
   } catch (fallbackError) {
     throw new Error(`이미지 생성 실패: 지원하지 않는 이미지 제공자(${options.provider}) 및 Gemini 폴백 실패 - ${(fallbackError as Error).message}`);
+  }
+  } finally {
+    // ✅ [v2.7.27] Adaptive Limiter 슬롯 반환 (acquire/finally 짝)
+    release();
   }
 }

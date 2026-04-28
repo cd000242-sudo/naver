@@ -27,8 +27,8 @@ async function initImageQualitySettings(): Promise<void> {
 
         const defaults = {
             imageQualityMode: 'balanced',
-            thumbnailImageModel: 'gemini-3-pro',  // ✅ [2026-01-21] 기본값 1K로 변경 (안정성 향상)
-            otherImagesModel: 'gemini-3-pro',  // ✅ [2026-01-21] 본문 이미지도 1K 기본
+            thumbnailImageModel: 'gemini-3-1-flash',  // ✅ [v2.7.24] 정식 GA(gemini-2.5-flash-image) 통합 키로 기본값 교정
+            otherImagesModel: 'gemini-3-1-flash',  // ✅ [v2.7.24] 본문 이미지도 동일 통합 키
             lockThumbnailTo4K: false  // ✅ 4K 고정 해제
         };
 
@@ -41,7 +41,7 @@ async function initImageQualitySettings(): Promise<void> {
         // 상세 설정 드롭다운 값 설정
         const thumbSelect = document.getElementById('thumbnail-model-select') as HTMLSelectElement;
         const bodySelect = document.getElementById('body-image-model-select') as HTMLSelectElement;
-        if (thumbSelect) thumbSelect.value = settings.thumbnailImageModel || 'gemini-3-pro';  // ✅ 기본값 1K
+        if (thumbSelect) thumbSelect.value = settings.thumbnailImageModel || 'gemini-3-1-flash';  // ✅ [v2.7.24] 통합 키
         if (bodySelect) bodySelect.value = settings.otherImagesModel || 'gemini-2.5-flash';
 
         // 썸네일 고정 체크박스

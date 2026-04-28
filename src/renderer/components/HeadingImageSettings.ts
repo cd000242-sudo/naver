@@ -33,8 +33,8 @@ export const MODE_NAMES: Record<HeadingImageMode, string> = {
 };
 
 export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
-  'nano-banana-2': '나노바나나2 (₩97/장)',
-  'nano-banana-pro': '나노바나나프로 (~₩500/장)',
+  'nano-banana-2': '나노바나나 (₩54/장, Gemini 2.5 Flash Image)',
+  'nano-banana-pro': '나노바나나 (₩54/장, Gemini 2.5 Flash Image)',
   'falai': 'Fal.ai',
   'prodia': 'Prodia',
   'stability': 'Stability AI',
@@ -805,13 +805,13 @@ export function createHeadingImageModal(): void {
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
           <label class="source-option" data-value="nano-banana-2" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🍌</div>
-            <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노바나나2</div>
-            <div style="font-size: 10px; color: #a16207;">Gemini 3.1 Flash | ₩97/장</div>
+            <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노바나나 ★</div>
+            <div style="font-size: 10px; color: #a16207;">Gemini 2.5 Flash Image | ₩54/장</div>
           </label>
           <label class="source-option" data-value="nano-banana-pro" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fde68a, #fcd34d); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🍌🦍</div>
-            <div style="font-size: 12px; font-weight: 600; color: #78350f;">나노바나나프로</div>
-            <div style="font-size: 10px; color: #b45309;">Gemini 3 Pro | ~₩500/장</div>
+            <div style="font-size: 12px; font-weight: 600; color: #78350f;">나노바나나(고급 라벨)</div>
+            <div style="font-size: 10px; color: #b45309;">현재 동일 모델 통합 | ₩54/장</div>
           </label>
           <label class="source-option" data-value="deepinfra" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #d1fae5, #6ee7b7); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🚀</div>
@@ -1131,8 +1131,8 @@ export function createHeadingImageModal(): void {
               <label style="display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px;">🔧 테스트용 AI 엔진 (저장 안 됨)</label>
               <select id="test-engine-select" style="width: 100%; padding: 10px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; color: #374151; background: white; cursor: pointer; transition: border-color 0.2s;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e5e7eb'">
                 <option value="">📌 현재 저장된 엔진 사용</option>
-                <option value="nano-banana-2">🍌 나노바나나2 (₩97/장)</option>
-                <option value="nano-banana-pro">🍌🦍 나노바나나프로 (~₩500/장)</option>
+                <option value="nano-banana-2">🍌 나노바나나 (Gemini 2.5 Flash Image, ₩54/장) ★추천</option>
+                <option value="nano-banana-pro">🍌🦍 나노바나나(고급 라벨) (현재 동일 모델, ₩54/장)</option>
                 <option value="dall-e-3">🎨 DALL-E 3 (OpenAI, 인증 불필요)</option>
                 <option value="flow">🍌 Flow (Nano Banana 2, AI Pro 무료)</option>
                 <option value="imagefx">✨ ImageFX (Google 무료)</option>
@@ -2071,21 +2071,20 @@ export function createHeadingImageModal(): void {
             <div>
               <label style="display: block; font-weight: 500; color: #d1d5db; margin-bottom: 6px; font-size: 12px;">🖼️ 썸네일 (대표) 모델</label>
               <select id="submodal-nano-main-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
-                <option value="gemini-3-pro-4k">👑 Gemini 3 Pro 4K - ₩336 (초고해상도, 최고품질)</option>
-                <option value="gemini-3-pro">🏆 Gemini 3 Pro - ₩77 (고품질)</option>
-                <option value="gemini-3-1-flash">⚡ Gemini 3.1 Flash - ₩97 (고품질 + 빠른속도, ★추천)</option>
+                <option value="gemini-3-1-flash">⚡ 나노바나나 (Gemini 2.5 Flash Image) - ₩54/장 ★추천</option>
                 <option value="imagen-4">🌟 Imagen 4 - ₩46 (기본 폴백용)</option>
                 <option value="gemini-2.5-flash">💡 Gemini 2.5 Flash - ₩20 (빠른 속도, 가성비)</option>
                 <option value="gemini-2.0-flash-exp">🆓 Gemini 2.0 Flash Exp - ₩0 (무료, 한글 정확)</option>
               </select>
+              <div style="font-size: 10px; color: #9ca3af; margin-top: 4px; line-height: 1.4;">
+                ℹ️ Google이 차세대 프리뷰(Gemini 3.x)를 정식 공개하기 전까지 모든 나노바나나 옵션은 정식 GA 모델(<code style="color:#fbbf24;">gemini-2.5-flash-image</code>)로 통합 호출됩니다.
+              </div>
             </div>
 
             <div>
               <label style="display: block; font-weight: 500; color: #d1d5db; margin-bottom: 6px; font-size: 12px;">📝 본문 (서브) 모델</label>
               <select id="submodal-nano-sub-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
-                <option value="gemini-3-pro-4k">👑 Gemini 3 Pro 4K - ₩336 (초고해상도, 최고품질)</option>
-                <option value="gemini-3-pro">🏆 Gemini 3 Pro - ₩77 (고품질)</option>
-                <option value="gemini-3-1-flash">⚡ Gemini 3.1 Flash - ₩97 (고품질 + 빠른속도, ★추천)</option>
+                <option value="gemini-3-1-flash">⚡ 나노바나나 (Gemini 2.5 Flash Image) - ₩54/장 ★추천</option>
                 <option value="imagen-4">🌟 Imagen 4 - ₩46 (기본 폴백용)</option>
                 <option value="gemini-2.5-flash">💡 Gemini 2.5 Flash - ₩20 (빠른 속도, 가성비)</option>
                 <option value="gemini-2.0-flash-exp">🆓 Gemini 2.0 Flash Exp - ₩0 (무료, 한글 정확)</option>

@@ -332,10 +332,10 @@ export function initImageManagementTab(): void {
 
       console.log(`[ImageSource] 드롭다운 선택: ${selectedSource}`);
 
-      // [v1.6.2] 라벨 전환: "나노바나나 프로" → "🍌 나노바나나2" (내부 기본 모델: gemini-3-1-flash, ₩97/장)
+      // [v2.7.25] 라벨 통합: 두 ID 모두 정식 GA(gemini-2.5-flash-image, ₩54/장)로 매핑
       // provider ID 'nano-banana-pro'는 기존 저장값 호환을 위해 그대로 유지
       if (selectedSource === 'nano-banana-pro') {
-        appendLog('✅ 🍌 나노바나나2(Gemini 3.1 Flash)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩97');
+        appendLog('✅ 🍌 나노바나나(Gemini 2.5 Flash Image)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩54');
       } else if (selectedSource === 'saved') {
         const confirmed = window.confirm(
           '⚠️ 저작권 경고\n\n' +

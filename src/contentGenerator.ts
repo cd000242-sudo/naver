@@ -8850,6 +8850,10 @@ export async function generateStructuredContent(
   if (!source?.rawText || !source.rawText.trim()) {
     throw new Error('rawText가 필요합니다.');
   }
+  // ✅ [v2.7.27] Adaptive Limiter — 메인 스레드 lag 발생 시 동시성 자동 다운
+  const { globalLimiter } = await import('./runtime/adaptiveLimiter.js');
+  const release = await globalLimiter.acquire('content');
+  try {
 
   // ✅ [핵심 수정] 에러 페이지 크롤링 감지 - 쇼핑커넥트 모드에서만 캡차/에러 페이지 방지
   // ✅ [2026-01-21 FIX] SEO/홈피드 모드에서는 이 로직을 건너뜀 (키워드에 '오류' 포함 시 오작동 방지)
@@ -10016,6 +10020,10 @@ export async function generateStructuredContent(
   // ✅ [2026-04-11] userSelectedProvider 사용 — 사용자가 선택한 엔진명 정확히 표시
   const finalReason = lastFailReason || '루프가 비정상 종료됨 (개발자 콘솔 로그 확인 필요)';
   throw new Error(`콘텐츠 생성 실패 (엔진: ${userSelectedProvider}, ${MAX_ATTEMPTS + 1}회 시도 후 실패): ${finalReason}`);
+  } finally {
+    // ✅ [v2.7.27] Adaptive Limiter 슬롯 반환
+    release();
+  }
 }
 
 function optimizeForViral(content: StructuredContent, source: ContentSource): StructuredContent {

@@ -1,6 +1,12 @@
 import { app, BrowserWindow, dialog, ipcMain, nativeImage, NativeImage, shell, Notification, Tray, Menu } from 'electron';
+// ✅ [v2.7.28] IPC 이중 등록 가드 — 다른 IPC 등록 이전에 반드시 첫 import
+import './main/ipc/registerOnce.js';
 import path from 'path';
 import dotenv from 'dotenv';
+import { startEventLoopWatchdog } from './diagnostics/eventLoopWatchdog.js';
+import { detectLowSpec, logLowSpecStatus } from './diagnostics/lowSpecMode.js';
+import { globalLimiter } from './runtime/adaptiveLimiter.js';
+import { initSessionTracking, shouldDisableGpuFromHistory, getRecentFreezeAvg } from './runtime/runtimeStats.js';
 
 // ✅ [2026-04-03] 앱 시작 디버그 로그 (silent crash 진단용)
 try {
@@ -8,6 +14,39 @@ try {
   const debugPath = path.join(process.env.TEMP || '/tmp', 'bln-startup-debug.log');
   _fs.writeFileSync(debugPath, `[${new Date().toISOString()}] App starting...\napp: ${typeof app}\nipcMain: ${typeof ipcMain}\nisPackaged: ${app?.isPackaged}\nprocess.type: ${process.type}\n`);
 } catch(e) { /* ignore */ }
+
+// ✅ [v2.7.27] 적응형 응답성 시스템 — 사양 토글 없이 모든 환경에서 자동 적응
+//   - 초기 max: 사양 자동 감지 추정값 (CPU 4코어/8GB 이하 → 1, 그 외 → 4)
+//   - Watchdog ↔ AdaptiveLimiter 자동 연동:
+//       lag 5s+ → max 절반, lag 1s+ → max -1, healthy 5s 지속 → max +1
+//   - GPU 가속 결정: 직전 5세션 freeze 평균 ≥ 3회면 자동 해제 (학습형)
+try {
+  initSessionTracking();
+  const lowSpec = detectLowSpec();
+  globalLimiter.setInitialMax(lowSpec.recommendations.publishConcurrency);
+
+  // GPU 결정: 학습 데이터 우선, 데이터 없으면 사양 추정값
+  const learnedDisable = shouldDisableGpuFromHistory();
+  const { avg, samples } = getRecentFreezeAvg();
+  const shouldDisableGpu = learnedDisable || (samples === 0 && lowSpec.recommendations.disableHardwareAcceleration);
+
+  if (shouldDisableGpu) {
+    app.disableHardwareAcceleration();
+    // eslint-disable-next-line no-console
+    console.log(`[Adaptive] 🎬 GPU 가속 해제 (사유: ${learnedDisable ? `직전 ${samples}세션 freeze 평균 ${avg.toFixed(1)}회` : '저사양 자동 추정'})`);
+  } else {
+    // eslint-disable-next-line no-console
+    console.log(`[Adaptive] 🎬 GPU 가속 유지 (학습: ${samples}세션 freeze 평균 ${avg.toFixed(1)}회)`);
+  }
+
+  logLowSpecStatus();
+  startEventLoopWatchdog();
+  // eslint-disable-next-line no-console
+  console.log(`[Adaptive] 🚀 Limiter 시작 max=${globalLimiter.getStats().max} (이후 lag 신호로 자동 조절)`);
+} catch (e) {
+  // eslint-disable-next-line no-console
+  console.warn('[Startup] Adaptive 초기화 실패 (무시):', (e as Error).message);
+}
 import cron from 'node-cron';
 import { NaverBlogAutomation, RunOptions, type PublishMode, type AutomationImage } from './naverBlogAutomation.js';
 import { generateImages, resetAllImageState } from './imageGenerator.js';

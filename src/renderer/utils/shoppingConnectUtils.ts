@@ -106,21 +106,28 @@ export function getShoppingConnectImagePool(): any[] {
 }
 
 /**
- * Shopping-connect engine whitelist. Both engines can reproduce the real product
- * via img2img with reference images:
- *   - nano-banana-pro (Gemini img2img, 기본 gemini-3-1-flash = 나노바나나2)
- *   - openai-image (gpt-image-2 = 덕트테이프, v1.6.3부터 허용)
- * 덕트테이프는 OpenAI 공식 img2img API(image 파라미터)로 참조 제품 이미지를 주입하면
- * 나노바나나2와 동등한 제품 정체성 유지 가능. Leonardo/Flow/ImageFX 등 타 엔진은
- * 참조 이미지 지원이 불안정하거나 무료 쿼터 이슈로 여전히 차단.
+ * Shopping-connect AI engine whitelist (img2img 가능 — 제품 정체성 유지).
+ *   - nano-banana-pro (Gemini img2img, gemini-3-pro 라벨)
+ *   - nano-banana-2   (Gemini img2img, gemini-3-1-flash 라벨)
+ *   - openai-image    (gpt-image-2 = 덕트테이프)
+ * 이 화이트리스트는 "AI 이미지 엔진 선택 드롭다운" 용도로만 쓰임.
  */
-const SHOPPING_CONNECT_ALLOWED_ENGINES = ['nano-banana-pro', 'openai-image'] as const;
+const SHOPPING_CONNECT_ALLOWED_ENGINES = ['nano-banana-pro', 'nano-banana-2', 'openai-image'] as const;
 export type ShoppingConnectAIEngine = typeof SHOPPING_CONNECT_ALLOWED_ENGINES[number];
+
+/**
+ * ✅ [v2.7.28] 차단 대상은 제품을 가짜로 만들어내는 text-only AI 엔진만.
+ * 수집/검색/저장 기반 provider(naver, collected, saved, local-folder, no-images, gallery)는
+ * 제품 정체성을 변형하지 않으므로 모두 통과시킨다.
+ */
+const SHOPPING_CONNECT_BLOCKED_FAKE_AI = [
+    'imagefx', 'dall-e-3', 'leonardoai', 'deepinfra', 'deepinfra-flux',
+    'stability', 'falai', 'prodia', 'pollinations', 'flow',
+];
 
 export function shouldBlockEngineForShoppingConnect(engine: string): boolean {
     if (!isShoppingConnectForCurrentPost()) return false;
-    if ((SHOPPING_CONNECT_ALLOWED_ENGINES as readonly string[]).includes(engine)) return false;
-    return true;
+    return SHOPPING_CONNECT_BLOCKED_FAKE_AI.includes(engine);
 }
 
 /**

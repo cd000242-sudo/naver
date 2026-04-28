@@ -2790,8 +2790,8 @@ let currentQueuePageV2 = 0;
 const QUEUE_PAGE_SIZE = 5;
 
 const imageSourceNames: Record<string, string> = {
-  'nano-banana-2': '🍌 나노바나나2 (₩97/장)',
-  'nano-banana-pro': '🍌🦍 나노바나나프로 (~₩500/장)',
+  'nano-banana-2': '🍌 나노바나나 (Gemini 2.5 Flash Image, ₩54/장) ★',
+  'nano-banana-pro': '🍌🦍 나노바나나(고급 라벨) (현재 동일 모델, ₩54/장)',
   'naver': '🔍 네이버 검색',
   'prodia': '⚡ Prodia',
   'stability': '🚀 Stability AI',
