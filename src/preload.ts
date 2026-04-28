@@ -95,6 +95,9 @@ contextBridge.exposeInMainWorld('api', {
   // ✅ [2026-03-18] Gemini API 할당량 확인
   checkGeminiQuota: (apiKey: string): Promise<{ success: boolean; message?: string; data?: any }> =>
     ipcRenderer.invoke('gemini:checkQuota', apiKey),
+  // ✅ [v2.7.23] Gemini 진단 — 사용자 키로 실제 액세스 가능한 모델 일람
+  diagnoseGemini: (apiKey: string): Promise<{ success: boolean; message?: string; data?: any }> =>
+    ipcRenderer.invoke('gemini:diagnose', apiKey),
   // ✅ [2026-03-18] Gemini 사용량 추적 초기화
   resetGeminiUsageTracker: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('gemini:resetUsageTracker'),

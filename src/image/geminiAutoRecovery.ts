@@ -43,12 +43,21 @@ export async function detectGeminiTierAndModels(apiKey: string): Promise<GeminiT
   }
 
   const baseUrl = 'https://generativelanguage.googleapis.com/v1beta';
+  // ✅ [v2.7.23] 검증된 후보 + 하위 변형까지 포함 (Google 모델 ID 변경 추적)
+  //   사용자 제보: Tier 1인데도 400 → 모델 ID 자체가 존재하지 않을 가능성
+  //   대응: 여러 변형을 후보에 포함해 실제 작동하는 ID 자동 탐지
   const candidates = [
-    'gemini-2.5-flash-image',                      // 정식 GA — 무료 작동 가능
-    'gemini-2.0-flash-exp-image-generation',       // 무료 실험 — 거의 모든 키 작동
-    'gemini-3.1-flash-image-preview',              // preview — Tier 1+
-    'gemini-3-pro-image-preview',                  // preview — Tier 1+
-    'imagen-4.0-generate-001',                     // Imagen — Tier별 다름
+    'gemini-2.5-flash-image',                      // 정식 GA
+    'gemini-2.5-flash-image-preview',              // GA의 preview 변형
+    'gemini-2.0-flash-exp-image-generation',       // 구 실험
+    'gemini-2.0-flash-preview-image-generation',   // 구 preview
+    'gemini-3.1-flash-image-preview',              // 의심: 존재 안 할 가능성
+    'gemini-3-1-flash-image-preview',              // ID 변형 (점 → 하이픈)
+    'gemini-3.1-flash-image',                      // preview 없는 변형
+    'gemini-3-pro-image-preview',                  // 의심: 존재 안 할 가능성
+    'gemini-3-pro-image',                          // preview 없는 변형
+    'imagen-4.0-generate-001',                     // Imagen 정식
+    'imagen-4.0-generate-preview-06-06',           // Imagen preview
   ];
 
   const available: string[] = [];
@@ -242,6 +251,81 @@ export function summarizeTierForUser(info: GeminiTierInfo): {
     shortLabel: `Tier ${info.tier}`,
     detailExplanation: '',
   };
+}
+
+/**
+ * [v2.7.23] 진단 — 사용자 키로 실제 받는 모든 모델 목록 반환
+ *   환경설정 화면에서 "Gemini 진단" 버튼 누르면 이 함수 호출
+ *   "당신의 키는 이 모델들에 액세스 가능합니다" 사용자에게 명시
+ */
+export async function diagnoseGeminiAccess(apiKey: string): Promise<{
+  success: boolean;
+  totalModels: number;
+  imageModels: string[];        // 이미지 생성 가능 모델 ID 목록
+  textModels: string[];          // 텍스트 생성 모델 ID 목록
+  appUsedModels: { id: string; available: boolean }[]; // 앱이 사용하는 후보들의 상태
+  rawListSample: string[];       // 첫 20개 raw ID
+  errorMessage?: string;
+}> {
+  const baseUrl = 'https://generativelanguage.googleapis.com/v1beta';
+  try {
+    const resp = await axios.get(`${baseUrl}/models`, {
+      headers: { 'x-goog-api-key': apiKey.trim() },
+      timeout: 15000,
+    });
+    const models = resp.data?.models || [];
+    const ids: string[] = models.map((m: any) => (m.name || '').replace('models/', ''));
+    const imageGen = models
+      .filter((m: any) => {
+        const methods = m.supportedGenerationMethods || [];
+        const id = (m.name || '').toLowerCase();
+        return methods.includes('generateContent') &&
+               (id.includes('image') || id.includes('imagen'));
+      })
+      .map((m: any) => (m.name || '').replace('models/', ''));
+    const textGen = models
+      .filter((m: any) => {
+        const methods = m.supportedGenerationMethods || [];
+        const id = (m.name || '').toLowerCase();
+        return methods.includes('generateContent') &&
+               !id.includes('image') && !id.includes('imagen') && id.includes('gemini');
+      })
+      .map((m: any) => (m.name || '').replace('models/', ''));
+
+    const appCandidates = [
+      'gemini-2.5-flash-image',
+      'gemini-2.5-flash-image-preview',
+      'gemini-2.0-flash-exp-image-generation',
+      'gemini-3.1-flash-image-preview',
+      'gemini-3-pro-image-preview',
+      'imagen-4.0-generate-001',
+    ];
+    const appUsedModels = appCandidates.map(id => ({
+      id,
+      available: ids.some(actualId => actualId === id || actualId.endsWith(id)),
+    }));
+
+    return {
+      success: true,
+      totalModels: models.length,
+      imageModels: imageGen,
+      textModels: textGen,
+      appUsedModels,
+      rawListSample: ids.slice(0, 20),
+    };
+  } catch (err: any) {
+    const status = err?.response?.status;
+    const msg = err?.response?.data?.error?.message || err?.message || '알 수 없는 오류';
+    return {
+      success: false,
+      totalModels: 0,
+      imageModels: [],
+      textModels: [],
+      appUsedModels: [],
+      rawListSample: [],
+      errorMessage: `HTTP ${status}: ${msg}`,
+    };
+  }
 }
 
 /**

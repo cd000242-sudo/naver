@@ -12,6 +12,38 @@ import { flushAllApiUsage, getApiUsageSnapshot, resetApiUsage, type ApiProvider 
  */
 export function registerApiHandlers(_ctx: IpcContext): void {
 
+    // ✅ [v2.7.23] Gemini 진단 — 사용자 키로 실제 액세스 가능한 모델 일람
+    //   환경설정 화면에서 "Gemini 진단" 버튼 누르면 이 핸들러 호출
+    //   사용자에게 "당신의 키는 이 모델들에 액세스 가능합니다" 명시
+    ipcMain.handle('gemini:diagnose', async (_event, apiKey: string) => {
+        if (!apiKey || !apiKey.trim()) {
+            return { success: false, message: 'API 키를 먼저 입력해주세요.' };
+        }
+        try {
+            const { diagnoseGeminiAccess } = await import('../../image/geminiAutoRecovery.js');
+            const result = await diagnoseGeminiAccess(apiKey);
+            if (!result.success) {
+                return { success: false, message: `진단 실패: ${result.errorMessage}` };
+            }
+            const lines: string[] = [];
+            lines.push(`✅ 키 작동 확인 — 총 ${result.totalModels}개 모델 노출됨`);
+            lines.push('');
+            lines.push(`🖼️ 이미지 생성 가능 모델 (${result.imageModels.length}개):`);
+            result.imageModels.forEach(m => lines.push(`  • ${m}`));
+            lines.push('');
+            lines.push(`📝 텍스트 생성 가능 모델 (${result.textModels.length}개) — 처음 10개:`);
+            result.textModels.slice(0, 10).forEach(m => lines.push(`  • ${m}`));
+            lines.push('');
+            lines.push(`🔍 앱이 시도하는 후보들의 작동 여부:`);
+            result.appUsedModels.forEach(m => {
+                lines.push(`  ${m.available ? '✅' : '❌'} ${m.id}`);
+            });
+            return { success: true, message: lines.join('\n'), data: result };
+        } catch (err: any) {
+            return { success: false, message: `진단 중 오류: ${err?.message || '알 수 없음'}` };
+        }
+    });
+
     // ✅ [2026-03-18] Gemini API 할당량 확인 핸들러 (정확한 공식 데이터 기반)
     ipcMain.handle('gemini:checkQuota', async (_event, apiKey: string) => {
         try {
