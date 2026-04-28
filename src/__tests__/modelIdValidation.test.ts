@@ -89,10 +89,14 @@ describe('v1.4.77 — 실존 모델 ID 매트릭스 (2026-04)', () => {
   });
 
   describe('Gemini: 실존 모델 ID 매핑', () => {
-    it("Nano Banana Pro 매핑의 실제 API ID는 공식 실존 (-image-preview suffix)", () => {
+    it("Nano Banana(Pro/2) 매핑은 정식 GA gemini-2.5-flash-image로 통합됨 (v2.7.24+)", () => {
+      // ✅ [v2.7.24] gemini-3-pro-image-preview / gemini-3.1-flash-image-preview는
+      //   Google API에 미존재 ID로 확인되어 모든 사용자 키에서 정식 GA로 매핑됨.
       const gen = read('image/nanoBananaProGenerator.ts');
-      expect(gen).toMatch(/model:\s*['"]gemini-3-pro-image-preview['"]/);
-      expect(gen).toMatch(/model:\s*['"]gemini-3\.1-flash-image-preview['"]/);
+      expect(gen).toMatch(/model:\s*['"]gemini-2\.5-flash-image['"]/);
+      // 가짜 ID 직접 호출은 절대 없어야 함 (주석/문자열에는 있을 수 있어 model: prefix로 한정)
+      expect(gen).not.toMatch(/model:\s*['"]gemini-3-pro-image-preview['"]/);
+      expect(gen).not.toMatch(/model:\s*['"]gemini-3\.1-flash-image-preview['"]/);
     });
 
     it("Gemini 2.0 Flash Exp은 image-generation suffix 형태로만 호출 (무료 실험 모델, 2026-06-01 shutdown 예정)", () => {
