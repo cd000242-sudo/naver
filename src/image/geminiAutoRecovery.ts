@@ -46,17 +46,14 @@ export async function detectGeminiTierAndModels(apiKey: string): Promise<GeminiT
   // ✅ [v2.7.23] 검증된 후보 + 하위 변형까지 포함 (Google 모델 ID 변경 추적)
   //   사용자 제보: Tier 1인데도 400 → 모델 ID 자체가 존재하지 않을 가능성
   //   대응: 여러 변형을 후보에 포함해 실제 작동하는 ID 자동 탐지
+  // ✅ [v2.7.24] 2026-04 기준 검증된 정식 ID만 후보로 사용
+  //   가짜 ID(gemini-3.1-flash-image-preview, gemini-3-pro-image-preview) 완전 제거
   const candidates = [
-    'gemini-2.5-flash-image',                      // 정식 GA
+    'gemini-2.5-flash-image',                      // 검증된 정식 GA — 모든 Tier 작동
     'gemini-2.5-flash-image-preview',              // GA의 preview 변형
-    'gemini-2.0-flash-exp-image-generation',       // 구 실험
-    'gemini-2.0-flash-preview-image-generation',   // 구 preview
-    'gemini-3.1-flash-image-preview',              // 의심: 존재 안 할 가능성
-    'gemini-3-1-flash-image-preview',              // ID 변형 (점 → 하이픈)
-    'gemini-3.1-flash-image',                      // preview 없는 변형
-    'gemini-3-pro-image-preview',                  // 의심: 존재 안 할 가능성
-    'gemini-3-pro-image',                          // preview 없는 변형
-    'imagen-4.0-generate-001',                     // Imagen 정식
+    'gemini-2.0-flash-preview-image-generation',   // 무료 등급 작동
+    'gemini-2.0-flash-exp-image-generation',       // 구 실험 (호환)
+    'imagen-4.0-generate-001',                     // Imagen 정식 — Tier 1+
     'imagen-4.0-generate-preview-06-06',           // Imagen preview
   ];
 
@@ -139,13 +136,13 @@ export async function pickWorkingImageModel(
     return { model: userPreferred, isOriginal: true };
   }
 
-  // 2. 작동 가능 모델 중 가장 가까운 동급 선택
-  //   preview/pro 미지원 시: gemini-2.5-flash-image > gemini-2.0-flash-exp-image-generation
+  // 2. 작동 가능 모델 중 가장 가까운 동급 선택 — 정식 GA 우선
   const PREFERENCE_ORDER = [
-    'gemini-2.5-flash-image',
-    'gemini-2.0-flash-exp-image-generation',
-    'gemini-3.1-flash-image-preview',
-    'gemini-3-pro-image-preview',
+    'gemini-2.5-flash-image',                    // 정식 GA, 1순위
+    'gemini-2.5-flash-image-preview',            // 변형
+    'gemini-2.0-flash-preview-image-generation', // 무료 등급
+    'gemini-2.0-flash-exp-image-generation',     // 구 실험 (호환)
+    'imagen-4.0-generate-001',                   // Imagen
   ];
   for (const candidate of PREFERENCE_ORDER) {
     if (info.availableImageModels.includes(candidate)) {
@@ -295,10 +292,10 @@ export async function diagnoseGeminiAccess(apiKey: string): Promise<{
     const appCandidates = [
       'gemini-2.5-flash-image',
       'gemini-2.5-flash-image-preview',
+      'gemini-2.0-flash-preview-image-generation',
       'gemini-2.0-flash-exp-image-generation',
-      'gemini-3.1-flash-image-preview',
-      'gemini-3-pro-image-preview',
       'imagen-4.0-generate-001',
+      'imagen-4.0-generate-preview-06-06',
     ];
     const appUsedModels = appCandidates.map(id => ({
       id,

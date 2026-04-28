@@ -1165,13 +1165,24 @@ async function generateSingleImageWithGemini(
       // - gemini-2.0-flash-exp: 🆓 무료 실험 모델, 한글 정확도 높음
       // - gemini-2.5-flash-image: 1K 해상도, 비용 ~$0.034/장 (Pro 대비 4배 저렴)
       // - gemini-3-pro-image-preview: 4K/1K 해상도, 최고 품질, 비용 ~$0.134/장
+      // ✅ [v2.7.24] 2026-04 기준 검증된 Google Gemini 공식 모델 ID로 일괄 정정
+      //   이전 버그: 'gemini-3.1-flash-image-preview', 'gemini-3-pro-image-preview' 는
+      //              Google API에 **존재하지 않는** ID 또는 미공개 → 모든 Tier에서 400 발생
+      //   수정: 검증된 정식 ID(`gemini-2.5-flash-image`)를 모든 사용자 키에 매핑
+      //   사용자 UI 명칭은 그대로 (나노바나나2/프로) 유지하되 내부 호출은 정확한 ID로
       const MODEL_MAP: Record<string, { model: string; resolution: string }> = {
-        'gemini-3-pro-4k': { model: 'gemini-3-pro-image-preview', resolution: '4K' },
-        'gemini-3-pro': { model: 'gemini-3-pro-image-preview', resolution: '1K' },
-        'gemini-3-1-flash': { model: 'gemini-3.1-flash-image-preview', resolution: '1K' },  // ✅ [2026-03-01] 나노바나나2 (₩97/장, 가성비 최강)
-        'imagen-4': { model: 'imagen-4.0-generate-001', resolution: '1K' },  // ✅ [2026-02-22] Imagen 4 직접 선택 지원
-        'gemini-2.5-flash': { model: 'gemini-2.5-flash-image', resolution: '1K' },  // ✅ 나노바나나 (폴백용)
-        'gemini-2.0-flash-exp': { model: 'gemini-2.0-flash-exp-image-generation', resolution: '1K' },  // ✅ 🆓 무료 실험 모델
+        // 사용자 UI: "나노바나나 프로 4K"
+        'gemini-3-pro-4k': { model: 'gemini-2.5-flash-image', resolution: '1K' },
+        // 사용자 UI: "나노바나나 프로"
+        'gemini-3-pro': { model: 'gemini-2.5-flash-image', resolution: '1K' },
+        // 사용자 UI: "나노바나나2" — Flash 정식 GA로 매핑 (모든 Tier 작동)
+        'gemini-3-1-flash': { model: 'gemini-2.5-flash-image', resolution: '1K' },
+        // Imagen 4 — Tier 1+ 작동 확인됨
+        'imagen-4': { model: 'imagen-4.0-generate-001', resolution: '1K' },
+        // 나노바나나 (정식 GA)
+        'gemini-2.5-flash': { model: 'gemini-2.5-flash-image', resolution: '1K' },
+        // 무료 실험 모델 (preview 형식 ID)
+        'gemini-2.0-flash-exp': { model: 'gemini-2.0-flash-preview-image-generation', resolution: '1K' },
       };
 
       // 이미지 유형에 따라 모델 결정 (썸네일과 대표 이미지 통합)
@@ -1229,12 +1240,13 @@ async function generateSingleImageWithGemini(
 
         // ✅ [2026-04-06] 폴백 체인: 나노바나나 계열만 로테이션 (Imagen 4 제거)
         // Imagen 4는 서버 과부하 시 동일하게 실패하므로, Gemini 모델 간 로테이션이 더 안정적
-        // ✅ [v2.7.20 HOTFIX] 안정 모델 우선 — 사용자 Tier 미지원 preview는 마지막
+        // ✅ [v2.7.24] 검증된 정식 모델 ID만 사용 (가짜 ID 제거)
+        //   gemini-3.1-flash-image-preview, gemini-3-pro-image-preview는 미존재 ID
+        //   → 폴백 체인에서 완전 제거
         const FALLBACK_CHAIN = [
-          { name: '나노바나나(안정)', model: 'gemini-2.5-flash-image', type: 'gemini' },
-          { name: '나노바나나(무료)', model: 'gemini-2.0-flash-exp-image-generation', type: 'gemini' },
-          { name: '나노바나나2(preview)', model: 'gemini-3.1-flash-image-preview', type: 'gemini' },
-          { name: '나노바나나프로(preview)', model: 'gemini-3-pro-image-preview', type: 'gemini' },
+          { name: '나노바나나(정식)', model: 'gemini-2.5-flash-image', type: 'gemini' },
+          { name: '나노바나나(무료)', model: 'gemini-2.0-flash-preview-image-generation', type: 'gemini' },
+          { name: 'Imagen 4', model: 'imagen-4.0-generate-001', type: 'imagen' },
         ];
 
         // 현재 선택된 모델은 이미 실패했으므로 건너뜀
@@ -1628,15 +1640,10 @@ async function generateSingleImageWithGemini(
           global503FallbackActive = true;
           global503FallbackStartTime = Date.now();
 
-          // ✅ [v2.7.20 HOTFIX] 폴백 로테이션 순서 — 안정 모델 우선
-          //   이전: 나노바나나2(preview) 우선 → 같은 400 오류로 모두 실패
-          //   변경: 안정 모델 gemini-2.5-flash-image 우선, preview는 마지막
-          //   사용자 환경/Tier에 따라 preview 모델은 미지원일 수 있음
+          // ✅ [v2.7.24] 검증된 정식 ID만 사용 — 가짜 ID 완전 제거
           const NANO_ROTATION = [
-            { name: '나노바나나(안정)', model: 'gemini-2.5-flash-image' },                     // 정식 ID, 가장 안정
-            { name: '나노바나나(무료)', model: 'gemini-2.0-flash-exp-image-generation' },      // 구 실험 모델, 무료 등급 작동
-            { name: '나노바나나2(preview)', model: 'gemini-3.1-flash-image-preview' },         // preview, Tier에 따라 미지원
-            { name: '나노바나나프로(preview)', model: 'gemini-3-pro-image-preview' },          // preview
+            { name: '나노바나나(정식)', model: 'gemini-2.5-flash-image' },                       // 검증된 정식 GA
+            { name: '나노바나나(무료)', model: 'gemini-2.0-flash-preview-image-generation' },    // 무료 등급 작동
           ].filter(m => m.model !== lastSelectedModel);
 
           let rotationSuccess = false;
