@@ -3673,6 +3673,17 @@ ipcMain.handle(
       // ✅ [2026-02-23 FIX] 이미지 생성 전 이전 캐시 완전 초기화
       resetAllImageState();
 
+      // ✅ [v2.6.4 HOTFIX] Stale cancelRequested 자동 리셋
+      //   원인: 이전 발행 중지 → AutomationService.cancelRequested = true
+      //         새 연속발행 시작 → renderer는 stopFullAutoPublish=false로 리셋했지만
+      //         main의 cancelRequested는 startRunning() 거쳐야만 리셋됨
+      //         → 이미지 생성 IPC가 즉시 "취소" 응답 → 사용자 중지 안 했는데 3번 재시도 모두 실패
+      //   수정: 자동화가 실행 중이 아니면 cancel 플래그는 stale이므로 자동 리셋
+      if (AutomationService.isCancelRequested() && !AutomationService.isRunning()) {
+        console.log('[Main] 🔄 stale cancelRequested 감지 (실행 중 아님) → 자동 리셋');
+        AutomationService.resetCancelFlag();
+      }
+
       // ✅ [2026-04-03 FIX] 이미지 생성 전 취소 체크
       if (AutomationService.isCancelRequested()) {
         return { success: false, message: '사용자가 작업을 취소했습니다.' };
@@ -5996,6 +6007,14 @@ ipcMain.handle(
       const minChars = baseMinChars;
 
       console.log('[Main] 최소 글자수 설정:', { customMin, targetAge, minChars });
+
+      // ✅ [v2.6.4 HOTFIX] Stale cancelRequested 자동 리셋
+      //   이미지 생성 IPC와 동일 — 새 발행 시작 시 이전 cancel 잔존 방지
+      if (AutomationService.isCancelRequested() && !AutomationService.isRunning()) {
+        console.log('[Main] 🔄 콘텐츠 생성 IPC: stale cancelRequested 감지 → 자동 리셋');
+        AutomationService.resetCancelFlag();
+        // 이전 abort된 controller 폐기 (다음 줄에서 새로 생성)
+      }
 
       // ✅ [2026-04-03 FIX] 콘텐츠 생성 전 AbortController 생성 — 중지 시 즉시 abort
       const genAbortController = AutomationService.createGeneralAbortController();
