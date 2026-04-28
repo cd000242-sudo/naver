@@ -750,40 +750,26 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     if (structured.introduction && structured.introduction.trim().length > 0) {
       self.log('📖 서론 작성 중...');
 
-      // ✅ [v2.7.30] 공정위 문구는 사용자가 명시적으로 ON 했을 때만 삽입
-      //   사용자 의도: "공정위 넣고 싶을 때만 넣는 거지 왜 자동으로 들어가니"
-      //   default OFF로 변경. resolved.includeFtcDisclosure === true 일 때만 삽입.
-      const userOptedInFtc = (resolved as any).includeFtcDisclosure === true;
+      // ✅ [v2.7.31] 사용자 의도 신호는 structured.ftcDisclosure 텍스트 존재 여부로 판정
+      //   renderer.ts/fullAutoFlow.ts에서 사용자가 UI 토글 ON일 때만 ftcDisclosure를 채움.
+      //   따라서 ftcDisclosure가 비어 있으면 = 사용자 OFF → 절대 삽입 금지 (affiliateLink 폴백 제거).
+      const userOptedInFtc = !!(structured.ftcDisclosure?.trim());
       if (!ftcAlreadyInserted && userOptedInFtc) {
-        const ftcText = structured.ftcDisclosure?.trim();
-        if (ftcText) {
-          self.log(`   ⚖️ 공정위 문구 최상단 삽입 중...`);
-          await page.keyboard.press('Home').catch(() => {});
-          await self.delay(100);
-          await safeKeyboardType(page, ftcText, { delay: 15 });
-          await self.delay(300);
-          await page.keyboard.press('Enter');
-          await page.keyboard.press('Enter');
-          await self.delay(200);
-          ftcAlreadyInserted = true;
-          self.log(`   ✅ 공정위 문구 삽입 완료`);
-        } else if (resolved.affiliateLink) {
-          const affiliateDisclosure = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
-          self.log(`   📋[쇼핑커넥트] 제휴 마케팅 고지 문구 최상단 삽입 중...`);
-          await page.keyboard.press('Home').catch(() => {});
-          await self.delay(100);
-          await safeKeyboardType(page, affiliateDisclosure, { delay: 15 });
-          await self.delay(300);
-          await page.keyboard.press('Enter');
-          await page.keyboard.press('Enter');
-          await self.delay(200);
-          ftcAlreadyInserted = true;
-          self.log(`   ✅ 제휴 마케팅 고지 문구 최상단 삽입 완료`);
-        }
+        const ftcText = structured.ftcDisclosure!.trim();
+        self.log(`   ⚖️ 공정위 문구 최상단 삽입 중 (사용자 ON)...`);
+        await page.keyboard.press('Home').catch(() => {});
+        await self.delay(100);
+        await safeKeyboardType(page, ftcText, { delay: 15 });
+        await self.delay(300);
+        await page.keyboard.press('Enter');
+        await page.keyboard.press('Enter');
+        await self.delay(200);
+        ftcAlreadyInserted = true;
+        self.log(`   ✅ 공정위 문구 삽입 완료`);
       } else if (ftcAlreadyInserted) {
         self.log(`   ⏭️ 공정위 문구 이미 삽입됨 (retry 중복 방지)`);
       } else {
-        self.log(`   ⏭️ 공정위 문구 스킵: 사용자가 명시적으로 ON 안 함 (includeFtcDisclosure !== true)`);
+        self.log(`   ⏭️ 공정위 문구 스킵: 사용자가 UI 토글 OFF (structured.ftcDisclosure 비어있음)`);
       }
 
       // 썸네일 이미지 검색 ('🖼️ 썸네일' 키로 저장됨)
@@ -939,38 +925,24 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     } else {
       self.log('   ⏭️ 서론 텍스트 없음 (서론이 비어있습니다)');
 
-      // ✅ [v2.7.30] 서론 없을 때도 동일: 사용자가 명시적으로 ON 했을 때만 삽입 (default OFF)
-      const userOptedInFtcNoIntro = (resolved as any).includeFtcDisclosure === true;
+      // ✅ [v2.7.31] 서론 없을 때도 동일: structured.ftcDisclosure 존재 여부 = 사용자 ON 신호
+      const userOptedInFtcNoIntro = !!(structured.ftcDisclosure?.trim());
       if (!ftcAlreadyInserted && userOptedInFtcNoIntro) {
-        const ftcTextNoIntro = structured.ftcDisclosure?.trim();
-        if (ftcTextNoIntro) {
-          self.log(`   ⚖️ 공정위 문구 최상단 삽입 중 (서론 없음)...`);
-          await page.keyboard.press('Home').catch(() => {});
-          await self.delay(100);
-          await safeKeyboardType(page, ftcTextNoIntro, { delay: 15 });
-          await self.delay(300);
-          await page.keyboard.press('Enter');
-          await page.keyboard.press('Enter');
-          await self.delay(200);
-          ftcAlreadyInserted = true;
-          self.log(`   ✅ 공정위 문구 삽입 완료`);
-        } else if (resolved.affiliateLink) {
-          const affiliateDisclosure = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
-          self.log(`   📋[쇼핑커넥트] 제휴 마케팅 고지 문구 최상단 삽입 중 (서론 없음)...`);
-          await page.keyboard.press('Home').catch(() => {});
-          await self.delay(100);
-          await safeKeyboardType(page, affiliateDisclosure, { delay: 15 });
-          await self.delay(300);
-          await page.keyboard.press('Enter');
-          await page.keyboard.press('Enter');
-          await self.delay(200);
-          ftcAlreadyInserted = true;
-          self.log(`   ✅ 제휴 마케팅 고지 문구 최상단 삽입 완료`);
-        }
+        const ftcTextNoIntro = structured.ftcDisclosure!.trim();
+        self.log(`   ⚖️ 공정위 문구 최상단 삽입 중 (서론 없음, 사용자 ON)...`);
+        await page.keyboard.press('Home').catch(() => {});
+        await self.delay(100);
+        await safeKeyboardType(page, ftcTextNoIntro, { delay: 15 });
+        await self.delay(300);
+        await page.keyboard.press('Enter');
+        await page.keyboard.press('Enter');
+        await self.delay(200);
+        ftcAlreadyInserted = true;
+        self.log(`   ✅ 공정위 문구 삽입 완료`);
       } else if (ftcAlreadyInserted) {
         self.log(`   ⏭️ 공정위 문구 이미 삽입됨 (retry 중복 방지)`);
       } else {
-        self.log(`   ⏭️ 공정위 문구 스킵 (서론 없음): 사용자가 명시적으로 ON 안 함`);
+        self.log(`   ⏭️ 공정위 문구 스킵 (서론 없음): 사용자 UI 토글 OFF`);
       }
 
       // ✅ [2026-03-26 FIX] Safety Net: 서론이 없어도 썸네일 이미지는 반드시 삽입
