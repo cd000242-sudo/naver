@@ -3068,16 +3068,34 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
     scheduleTime: formData.scheduleTime,
   });
 
-  // ✅ [2026-04-06 FIX v2] 공정위 문구 — structuredContent.ftcDisclosure만 설정
-  // bodyPlain/content에는 삽입하지 않음 (editorHelpers가 에디터에서 직접 타이핑하므로 중복 방지)
+  // ✅ [v2.7.32] 공정위 문구 모드별 기본값
+  //   기본 정책: 쇼핑커넥트(affiliate)만 default ON, 그 외 모드(SEO/홈피드/일반)는 default OFF
+  //   사용자가 UI에서 명시적으로 체크/해제하면(localStorage 저장됨) 그 값을 최우선 사용
   const ftcCheckboxEl = document.getElementById('unified-ftc-disclosure') as HTMLInputElement;
   const ftcTextareaEl = document.getElementById('unified-ftc-text') as HTMLTextAreaElement;
-  const ftcEnabled = ftcCheckboxEl?.checked || localStorage.getItem('ftcDisclosureEnabled') === 'true';
-  const ftcText = ftcTextareaEl?.value?.trim() || localStorage.getItem('ftcDisclosureText')?.trim() || '';
+  const isAffiliateMode = formData.contentMode === 'affiliate';
+  const storedFtc = localStorage.getItem('ftcDisclosureEnabled');
+  let ftcEnabled: boolean;
+  if (ftcCheckboxEl) {
+    // 체크박스가 렌더되어 있으면 사용자 현재 UI 상태 우선
+    ftcEnabled = ftcCheckboxEl.checked;
+  } else if (storedFtc !== null) {
+    // 저장된 사용자 명시 값
+    ftcEnabled = storedFtc === 'true';
+  } else {
+    // 기본값: 쇼핑커넥트만 ON
+    ftcEnabled = isAffiliateMode;
+  }
+  const DEFAULT_FTC_TEXT = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
+  const ftcText = ftcTextareaEl?.value?.trim()
+    || localStorage.getItem('ftcDisclosureText')?.trim()
+    || (isAffiliateMode ? DEFAULT_FTC_TEXT : '');
   const finalContent = cleanedContent;
   if (ftcEnabled && ftcText) {
     structuredContent.ftcDisclosure = ftcText;
-    appendLog(`⚖️ 공정위 문구 설정됨: "${ftcText.substring(0, 30)}..." (에디터 삽입 예정)`);
+    appendLog(`⚖️ 공정위 문구 설정됨 (${isAffiliateMode ? '쇼핑커넥트 기본 ON' : '사용자 ON'}): "${ftcText.substring(0, 30)}..."`);
+  } else {
+    appendLog(`⏭️ 공정위 문구 비활성 (모드='${formData.contentMode || 'normal'}', 사용자=${ftcEnabled ? 'ON' : 'OFF'})`);
   }
 
   // 자동화 페이로드 구성

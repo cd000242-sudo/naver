@@ -3131,14 +3131,20 @@ export async function initMultiAccountPublishModal() {
           structuredContent = contentResult.content;
           console.log('[FullAuto] 구조화된 콘텐츠:', structuredContent);
 
-          // ✅ [2026-04-06] 공정위 문구 주입 — 다중계정 발행에서도 적용
+          // ✅ [v2.7.32] 공정위 문구 모드별 기본값 — 쇼핑커넥트만 default ON
           {
-            const _ftcEnabled = localStorage.getItem('ftcDisclosureEnabled') === 'true';
-            const _ftcText = (localStorage.getItem('ftcDisclosureText') || '').trim();
+            const _isAffiliateMode = queueItem.contentMode === 'affiliate';
+            const _stored = localStorage.getItem('ftcDisclosureEnabled');
+            const _ftcEnabled = _stored !== null ? (_stored === 'true') : _isAffiliateMode;
+            const _DEFAULT_FTC = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
+            const _ftcText = (localStorage.getItem('ftcDisclosureText') || '').trim()
+              || (_isAffiliateMode ? _DEFAULT_FTC : '');
             if (_ftcEnabled && _ftcText && structuredContent) {
               structuredContent.ftcDisclosure = _ftcText;
-              addMALog(`⚖️ 공정위 문구 삽입됨: "${_ftcText.substring(0, 30)}..."`, 'info');
+              addMALog(`⚖️ 공정위 문구 삽입됨 (${_isAffiliateMode ? '쇼커 default' : '사용자 ON'}): "${_ftcText.substring(0, 30)}..."`, 'info');
               console.log(`[FullAuto] ⚖️ 공정위 문구 structuredContent에 주입 완료`);
+            } else {
+              console.log(`[FullAuto] ⏭️ 공정위 문구 비활성 (모드='${queueItem.contentMode || 'seo'}', enabled=${_ftcEnabled})`);
             }
           }
 
