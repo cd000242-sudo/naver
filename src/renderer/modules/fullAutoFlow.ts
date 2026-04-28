@@ -3110,6 +3110,8 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
     generatedImages: normalizedImagesForPayload,
     imageMode: formData.skipImages ? 'skip' : 'full-auto',
     skipImages: formData.skipImages || false, // ✅ [v1.4.66] 백엔드에 skipImages 명시적 전달 (누락으로 ImageFX 팝업 버그)
+    // ✅ [v2.7.35] 공정위 토글 명시 전달 — main 측 editorHelpers 이중 가드 + 디버깅 추적성
+    includeFtcDisclosure: ftcEnabled,
     autoGenerate: true,
     publishMode: formData.publishMode as 'draft' | 'publish' | 'schedule',
     scheduleDate: formData.publishMode === 'schedule' ? formData.scheduleDate : undefined,
