@@ -37,13 +37,28 @@ export async function generateWithOpenAIImage(
     overrideModel?: string,       // v2.7.15: 호출자가 모델 강제 지정 (예: 'dall-e-3')
 ): Promise<GeneratedImage[]> {
     const config = await loadConfig();
-    const apiKey = providedApiKey || (config as any).openaiImageApiKey?.trim() || (config as any).openaiApiKey?.trim();
-
-    if (!apiKey) {
-        throw new Error('OpenAI API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.');
+    // ✅ [v2.7.33] 키 source 명시 — 사용자 진단 시 어느 입력란을 채워야 하는지 즉시 보임
+    let apiKey: string | undefined;
+    let keySource = 'unknown';
+    if (providedApiKey?.trim()) {
+        apiKey = providedApiKey.trim();
+        keySource = 'caller(providedApiKey)';
+    } else if ((config as any).openaiImageApiKey?.trim()) {
+        apiKey = (config as any).openaiImageApiKey.trim();
+        keySource = 'config.openaiImageApiKey (UI: OpenAI 이미지 키)';
+    } else if ((config as any).openaiApiKey?.trim()) {
+        apiKey = (config as any).openaiApiKey.trim();
+        keySource = 'config.openaiApiKey (UI: OpenAI 키 / .env OPENAI_API_KEY)';
+    } else if (process.env.OPENAI_API_KEY?.trim()) {
+        apiKey = process.env.OPENAI_API_KEY.trim();
+        keySource = 'process.env.OPENAI_API_KEY (.env 직접)';
     }
 
-    console.log(`[OpenAI-Image] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${DEFAULT_MODEL})`);
+    if (!apiKey) {
+        throw new Error('OpenAI API 키가 설정되지 않았습니다. 환경설정에서 OpenAI 이미지 API 키 또는 .env의 OPENAI_API_KEY를 입력해주세요.');
+    }
+
+    console.log(`[OpenAI-Image] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${DEFAULT_MODEL}, 키 source: ${keySource}, 키 prefix: ${apiKey.substring(0, 7)}...)`);
 
     // ✅ [2026-03-03] 참조 이미지 사전 캐싱 (쇼핑커넥트 수집 이미지)
     let cachedReferenceBase64: string | null = null;
@@ -238,10 +253,12 @@ export async function generateWithOpenAIImage(
 
                 } catch (apiError: any) {
                     lastError = apiError;
+                    // ✅ [v2.7.33] 마지막 에러를 글로벌에 보존해 0건 throw 시 메시지에 포함
+                    (globalThis as any).__lastOpenAIError = apiError;
                     const status = apiError.response?.status;
                     const errMsg = apiError.response?.data?.error?.message || apiError.message || 'unknown';
                     const errCode = apiError.response?.data?.error?.code || '';
-                    console.warn(`[OpenAI-Image] ⚠️ 시도 ${attempt}/${maxRetries} 실패 (model: ${currentModel}, status: ${status}): ${errMsg}`);
+                    console.warn(`[OpenAI-Image] ⚠️ 시도 ${attempt}/${maxRetries} 실패 (model: ${currentModel}, status: ${status}, code: ${errCode}): ${errMsg}`);
 
                     // v2.7.5: 403 + "must be verified" 패턴 감지 → Org 인증 미완료 전용 태그
                     // 렌더러가 OPENAI_ORG_VERIFY_REQUIRED 태그로 감지해 친절 모달 + 인증
@@ -284,12 +301,20 @@ export async function generateWithOpenAIImage(
 
     console.log(`[OpenAI-Image] 📊 최종 결과: ${results.length}/${items.length}개 생성 완료`);
 
-    // v2.7.4: 0개 생성 시 빈 배열을 silently 반환하지 않고 마지막 에러를 throw.
-    // dispatcher(imageGenerator.ts)가 getImageErrorMessage로 사용자 친절 메시지로
-    // 변환할 수 있어야 "이미지가 비어있다" 같은 모호한 다운스트림 에러를 차단.
+    // ✅ [v2.7.33] 0건 시 마지막 실패 사유(status / API 메시지)를 throw 메시지에 포함 →
+    //   사용자가 콘솔 안 봐도 모달/로그에서 즉시 원인 파악 가능
     if (results.length === 0) {
         if (firstFatalError) throw firstFatalError;
-        throw new Error('OpenAI 덕트테이프로 단 1장의 이미지도 생성하지 못했습니다. 콘솔에서 [OpenAI-Image] ⚠️ 로그 확인 필요.');
+        // 마지막 시도의 axios 에러를 상세 메시지로 변환
+        const lastErrAny: any = (typeof (globalThis as any).__lastOpenAIError !== 'undefined')
+            ? (globalThis as any).__lastOpenAIError
+            : null;
+        const status = lastErrAny?.response?.status;
+        const apiMsg = lastErrAny?.response?.data?.error?.message || lastErrAny?.message;
+        const detail = status || apiMsg
+            ? ` 마지막 실패: status=${status || 'n/a'}, message="${(apiMsg || '').substring(0, 200)}"`
+            : '';
+        throw new Error(`OpenAI 덕트테이프로 단 1장의 이미지도 생성하지 못했습니다. (키 source: ${keySource})${detail}`);
     }
 
     return results;
