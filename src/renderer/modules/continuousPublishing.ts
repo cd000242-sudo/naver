@@ -3997,6 +3997,19 @@ async function startContinuousPublishingV2(): Promise<void> {
     return;
   }
 
+  // ✅ [v2.7.20 HOTFIX] 재시작 시 이전 실패/중단 항목 자동 복구
+  //   사용자 제보: 20개 중 첫 번째 실패 후 재시작하면 19개부터 시작됨
+  //   원인: filter(status='pending')만 처리 → status='failed'/'processing'은 제외
+  //   수정: 재시작 시 실패/중단 항목을 'pending'으로 리셋해 재시도 대상에 포함
+  const recoverableItems = continuousQueueV2.filter(
+    i => i.status === 'failed' || i.status === 'processing'
+  );
+  if (recoverableItems.length > 0) {
+    recoverableItems.forEach(i => { i.status = 'pending'; });
+    console.log(`[Continuous] 🔄 ${recoverableItems.length}개 실패/중단 항목을 pending으로 리셋 (재시도)`);
+    toastManager.info(`이전 실패 ${recoverableItems.length}개 항목을 다시 시도합니다`);
+  }
+
   const pendingItems = continuousQueueV2.filter(i => i.status === 'pending');
   if (pendingItems.length === 0) {
     toastManager.warning('발행 대기 중인 항목이 없습니다.');

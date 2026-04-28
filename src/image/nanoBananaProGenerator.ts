@@ -1214,11 +1214,12 @@ async function generateSingleImageWithGemini(
 
         // ✅ [2026-04-06] 폴백 체인: 나노바나나 계열만 로테이션 (Imagen 4 제거)
         // Imagen 4는 서버 과부하 시 동일하게 실패하므로, Gemini 모델 간 로테이션이 더 안정적
+        // ✅ [v2.7.20 HOTFIX] 안정 모델 우선 — 사용자 Tier 미지원 preview는 마지막
         const FALLBACK_CHAIN = [
-          { name: '나노바나나2', model: 'gemini-3.1-flash-image-preview', type: 'gemini' },
-          { name: '나노바나나프로', model: 'gemini-3-pro-image-preview', type: 'gemini' },
-          { name: '나노바나나', model: 'gemini-2.5-flash-image', type: 'gemini' },
+          { name: '나노바나나(안정)', model: 'gemini-2.5-flash-image', type: 'gemini' },
           { name: '나노바나나(무료)', model: 'gemini-2.0-flash-exp-image-generation', type: 'gemini' },
+          { name: '나노바나나2(preview)', model: 'gemini-3.1-flash-image-preview', type: 'gemini' },
+          { name: '나노바나나프로(preview)', model: 'gemini-3-pro-image-preview', type: 'gemini' },
         ];
 
         // 현재 선택된 모델은 이미 실패했으므로 건너뜀
@@ -1517,6 +1518,28 @@ async function generateSingleImageWithGemini(
       if (isQuotaError) {
         try { geminiRpmThrottler.record429(); } catch {}
       }
+      // ✅ [v2.7.20 HOTFIX] 400 Bad Request — 모델명 잘못/access 차단 진단
+      //   사용자 제보: "제미나이 키는 정확한데 400 오류"
+      //   원인: gemini-3.1-flash-image-preview 등 모델명이 사용자 Tier 또는 지역에서 미지원
+      //   대응: 안정 모델(gemini-2.5-flash-image)로 즉시 전환 + 명확한 안내
+      const isBadModelError = statusCode === 400 && (
+        errorMessage.toLowerCase().includes('model') ||
+        errorMessage.toLowerCase().includes('not found') ||
+        errorMessage.toLowerCase().includes('not supported') ||
+        errorMessage.toLowerCase().includes('invalid') ||
+        errorMessage.toLowerCase().includes('preview')
+      );
+      if (isBadModelError) {
+        const model = lastSelectedModel || 'unknown';
+        console.warn(`[NanoBananaPro] 🚫 400 모델 오류 감지 (${model}) → 안정 모델 폴백 활성화`);
+        sendImageLog(`🚫 모델(${model})이 현재 환경에서 지원 안 됨 → 안정 모델로 전환`);
+        // 다음 시도부터 안정 모델 강제 사용
+        if (model !== 'gemini-2.5-flash-image') {
+          // 폴백 체인 활성화 (503 폴백 로직 재사용)
+          global503FallbackActive = true;
+          global503FallbackStartTime = Date.now();
+        }
+      }
       const isLimitZero = errorMessage.includes('limit: 0') || errorMessage.includes('free_tier');
       const isPaidOnly = errorMessage.includes('paid plan') || errorMessage.includes('paid plans');
       const isServerError = statusCode === 500 || statusCode === 503 || errorMessage.includes('500') || errorMessage.includes('503');
@@ -1590,12 +1613,15 @@ async function generateSingleImageWithGemini(
           global503FallbackActive = true;
           global503FallbackStartTime = Date.now();
 
-          // 나노바나나 계열 모델 로테이션 (현재 모델 제외)
+          // ✅ [v2.7.20 HOTFIX] 폴백 로테이션 순서 — 안정 모델 우선
+          //   이전: 나노바나나2(preview) 우선 → 같은 400 오류로 모두 실패
+          //   변경: 안정 모델 gemini-2.5-flash-image 우선, preview는 마지막
+          //   사용자 환경/Tier에 따라 preview 모델은 미지원일 수 있음
           const NANO_ROTATION = [
-            { name: '나노바나나2', model: 'gemini-3.1-flash-image-preview' },
-            { name: '나노바나나프로', model: 'gemini-3-pro-image-preview' },
-            { name: '나노바나나', model: 'gemini-2.5-flash-image' },
-            { name: '나노바나나(무료)', model: 'gemini-2.0-flash-exp-image-generation' },
+            { name: '나노바나나(안정)', model: 'gemini-2.5-flash-image' },                     // 정식 ID, 가장 안정
+            { name: '나노바나나(무료)', model: 'gemini-2.0-flash-exp-image-generation' },      // 구 실험 모델, 무료 등급 작동
+            { name: '나노바나나2(preview)', model: 'gemini-3.1-flash-image-preview' },         // preview, Tier에 따라 미지원
+            { name: '나노바나나프로(preview)', model: 'gemini-3-pro-image-preview' },          // preview
           ].filter(m => m.model !== lastSelectedModel);
 
           let rotationSuccess = false;
