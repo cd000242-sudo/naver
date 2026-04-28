@@ -39,7 +39,26 @@ export function registerApiHandlers(_ctx: IpcContext): void {
                 const errorDetail = respData?.error?.message || respData?.error?.status || JSON.stringify(respData || {}).substring(0, 200);
                 console.error(`[Gemini] ❌ 모델 목록 조회 실패 - HTTP ${status}, 상세: ${errorDetail}`);
                 console.error(`[Gemini]   API 키 길이: ${key.length}자, 접두사: ${key.substring(0, 6)}...`);
-                if (status === 400 || status === 401 || status === 403) {
+                // ✅ [v2.7.21 HOTFIX] 400 false-positive 수정
+                //   사용자 제보: "키는 정확한데 400 오류뜨면서 키가 정확하지 않다고 뜬다"
+                //   원인: 400은 키 무효가 아닌 다양한 사유 (요청 형식/모델 미지원/지역 제한 등)
+                //   수정: 400은 응답 본문 검사로 진짜 키 문제인지 판별. 401/403만 확정 인증 에러.
+                if (status === 400) {
+                    const detailLower = String(errorDetail || '').toLowerCase();
+                    const respStatus = String(respData?.error?.status || '').toUpperCase();
+                    const isKeyInvalid =
+                        respStatus === 'INVALID_ARGUMENT' && /api[\s_-]*key/i.test(detailLower)
+                        || /api[\s_-]*key[\s_-]*not[\s_-]*valid|api_key_invalid|invalid api key/i.test(detailLower);
+                    if (isKeyInvalid) {
+                        return { success: false, message: `❌ API 키가 유효하지 않습니다 (HTTP 400).\n상세: ${errorDetail}\n\n키 길이: ${key.length}자 | 접두사: ${key.substring(0, 6)}...\n\n💡 Google AI Studio에서 키를 다시 확인해주세요.` };
+                    }
+                    // 키 문제 아닌 400 — 다른 안내
+                    return {
+                        success: false,
+                        message: `⚠️ API 호출 거부 (HTTP 400) — 키 자체는 작동할 수 있습니다.\n상세: ${errorDetail}\n\n가능한 원인:\n• 요청 형식 문제 (앱 자동 수정됨)\n• 일부 모델이 사용자 Tier에서 미지원 (자동 폴백 작동)\n• 지역 제한 (한국에서 일부 preview 모델 차단)\n\n키 길이: ${key.length}자 | 접두사: ${key.substring(0, 6)}...\n💡 키가 맞다고 확신하면 발행을 시도해 보세요. 안정 모델로 자동 폴백됩니다.`,
+                    };
+                }
+                if (status === 401 || status === 403) {
                     return { success: false, message: `❌ API 키가 유효하지 않습니다 (HTTP ${status}).\n상세: ${errorDetail}\n\n키 길이: ${key.length}자 | 접두사: ${key.substring(0, 6)}...\n\n💡 Google AI Studio에서 키를 다시 확인해주세요.` };
                 }
                 if (status === 429) {
