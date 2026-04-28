@@ -1201,6 +1201,21 @@ async function generateSingleImageWithGemini(
       }
       lastSelectedModel = selectedModel; // ✅ [2026-04-06] 최종 안전망용 추적
 
+      // ✅ [v2.7.22] 사용자 환경에서 작동하는 모델로 자동 교체 (사용자 모름)
+      //   목적: Tier별/지역별 차단을 사전에 감지해 발행 시작 전 정상 모델로 전환
+      //   효과: 400 발생 → 폴백 진입 → 시간 낭비를 사전 차단
+      try {
+        const { pickWorkingImageModel } = await import('./geminiAutoRecovery.js');
+        const picked = await pickWorkingImageModel(apiKey || '', selectedModel);
+        if (!picked.isOriginal && picked.model && picked.model !== selectedModel) {
+          console.log(`[NanoBananaPro] 🤖 [Auto-Recovery] ${selectedModel} → ${picked.model} (${picked.reason})`);
+          selectedModel = picked.model;
+          lastSelectedModel = selectedModel;
+        }
+      } catch {
+        // 헬스체크 실패는 무시 — 기존 폴백 체인이 백업
+      }
+
 
 
 
