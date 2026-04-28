@@ -750,14 +750,11 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     if (structured.introduction && structured.introduction.trim().length > 0) {
       self.log('📖 서론 작성 중...');
 
-      // ✅ [v2.7.29] 공정위 문구 자동 삽입 가드 강화
-      //   기존 회귀: affiliateLink만 있어도 contentMode가 'affiliate'가 아닌 경우에도
-      //              공정위 문구가 자동 삽입됨 → 사용자 의도 외 삽입 ("맘대로 올라간다")
-      //   수정 1: contentMode === 'affiliate'일 때만 자동 삽입 (제휴 모드 명시 필요)
-      //   수정 2: formData.disableAutoFtcDisclosure === true이면 스킵 (사용자 토글)
-      const isAffiliateMode = resolved.contentMode === 'affiliate';
-      const userDisabledFtc = (resolved as any).disableAutoFtcDisclosure === true;
-      if (!ftcAlreadyInserted && isAffiliateMode && !userDisabledFtc) {
+      // ✅ [v2.7.30] 공정위 문구는 사용자가 명시적으로 ON 했을 때만 삽입
+      //   사용자 의도: "공정위 넣고 싶을 때만 넣는 거지 왜 자동으로 들어가니"
+      //   default OFF로 변경. resolved.includeFtcDisclosure === true 일 때만 삽입.
+      const userOptedInFtc = (resolved as any).includeFtcDisclosure === true;
+      if (!ftcAlreadyInserted && userOptedInFtc) {
         const ftcText = structured.ftcDisclosure?.trim();
         if (ftcText) {
           self.log(`   ⚖️ 공정위 문구 최상단 삽입 중...`);
@@ -785,10 +782,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         }
       } else if (ftcAlreadyInserted) {
         self.log(`   ⏭️ 공정위 문구 이미 삽입됨 (retry 중복 방지)`);
-      } else if (!isAffiliateMode) {
-        self.log(`   ⏭️ 공정위 문구 스킵: contentMode='${resolved.contentMode}' (제휴 모드 아님)`);
-      } else if (userDisabledFtc) {
-        self.log(`   ⏭️ 공정위 문구 스킵: 사용자 토글 OFF (disableAutoFtcDisclosure)`);
+      } else {
+        self.log(`   ⏭️ 공정위 문구 스킵: 사용자가 명시적으로 ON 안 함 (includeFtcDisclosure !== true)`);
       }
 
       // 썸네일 이미지 검색 ('🖼️ 썸네일' 키로 저장됨)
@@ -944,10 +939,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     } else {
       self.log('   ⏭️ 서론 텍스트 없음 (서론이 비어있습니다)');
 
-      // ✅ [v2.7.29] 서론 없을 때도 동일 가드: contentMode='affiliate' + 사용자 토글 ON일 때만
-      const isAffiliateModeNoIntro = resolved.contentMode === 'affiliate';
-      const userDisabledFtcNoIntro = (resolved as any).disableAutoFtcDisclosure === true;
-      if (!ftcAlreadyInserted && isAffiliateModeNoIntro && !userDisabledFtcNoIntro) {
+      // ✅ [v2.7.30] 서론 없을 때도 동일: 사용자가 명시적으로 ON 했을 때만 삽입 (default OFF)
+      const userOptedInFtcNoIntro = (resolved as any).includeFtcDisclosure === true;
+      if (!ftcAlreadyInserted && userOptedInFtcNoIntro) {
         const ftcTextNoIntro = structured.ftcDisclosure?.trim();
         if (ftcTextNoIntro) {
           self.log(`   ⚖️ 공정위 문구 최상단 삽입 중 (서론 없음)...`);
@@ -975,10 +969,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         }
       } else if (ftcAlreadyInserted) {
         self.log(`   ⏭️ 공정위 문구 이미 삽입됨 (retry 중복 방지)`);
-      } else if (!isAffiliateModeNoIntro) {
-        self.log(`   ⏭️ 공정위 문구 스킵 (서론 없음): contentMode 비-제휴`);
-      } else if (userDisabledFtcNoIntro) {
-        self.log(`   ⏭️ 공정위 문구 스킵 (서론 없음): 사용자 토글 OFF`);
+      } else {
+        self.log(`   ⏭️ 공정위 문구 스킵 (서론 없음): 사용자가 명시적으로 ON 안 함`);
       }
 
       // ✅ [2026-03-26 FIX] Safety Net: 서론이 없어도 썸네일 이미지는 반드시 삽입
