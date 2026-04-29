@@ -157,10 +157,20 @@ const STEALTH_IGNORE_DEFAULT_ARGS = ['--enable-automation'];
 
 async function launchWithStealthFallback(profileDir: string, offScreen: boolean): Promise<BrowserContext> {
     const { chromium } = await import('playwright');
+    // ✅ [v2.7.38] 로그인 후 Chrome 창 숨김 강화
+    //   사용자 보고: "로그인 완료 후에도 크롬창이 보임"
+    //   원인: -10000,-10000 음수 좌표가 일부 환경(멀티 모니터·System Chrome·고DPI)에서 무효화
+    //   해결: ① 더 멀리 음수 좌표(-32000,-32000) ② 창 크기 1×1로 축소
+    //         ③ --start-minimized 추가 ④ launch 후 page.evaluate로 강제 이동·축소
+    const offScreenArgs = offScreen ? [
+        '--window-position=-32000,-32000',
+        '--window-size=1,1',
+        '--start-minimized',
+    ] : [];
     const commonOptions: any = {
         headless: false,
         viewport: { width: 1280, height: 800 },
-        args: [...STEALTH_ARGS, ...(offScreen ? ['--window-position=-10000,-10000'] : [])],
+        args: [...STEALTH_ARGS, ...offScreenArgs],
         ignoreDefaultArgs: STEALTH_IGNORE_DEFAULT_ARGS,
         timeout: 60000,
         userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
@@ -419,9 +429,30 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
     const finalCtx = await launchWithStealthFallback(profileDir, true);
     const finalPage = finalCtx.pages()[0] || await finalCtx.newPage();
     installNetworkImageListener(finalPage); // [v1.6.1]
+
+    // ✅ [v2.7.38] launch 직후 창 위치/크기 강제 — args가 무시되는 환경 대비 이중 가드
+    try {
+        await finalPage.evaluate(() => {
+            try {
+                window.moveTo(-32000, -32000);
+                window.resizeTo(1, 1);
+            } catch { /* 일부 보안 컨텍스트에서 거부 가능 — 무시 */ }
+        });
+    } catch { /* evaluate 실패 무시 — args가 이미 적용됨 */ }
+
     await finalPage.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
     await finalPage.waitForTimeout(2000);
     await dismissCookieBanner(finalPage);
+
+    // ✅ [v2.7.38] goto 후에도 다시 한 번 강제 (페이지 로드 완료 시점에 재이동)
+    try {
+        await finalPage.evaluate(() => {
+            try {
+                window.moveTo(-32000, -32000);
+                window.resizeTo(1, 1);
+            } catch { /* ignore */ }
+        });
+    } catch { /* ignore */ }
 
     const finalCheck = await isLoggedInToFlow(finalPage).catch(() => false);
     if (!finalCheck) {
