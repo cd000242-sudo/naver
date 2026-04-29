@@ -15,6 +15,8 @@ import type { ImageRequestItem, GeneratedImage } from './types.js';
 import { writeImageFile } from './imageUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
+// ✅ [v2.7.53] modelRegistry SSOT
+import { IMAGEN_MODELS } from '../runtime/modelRegistry.js';
 // ✅ [2026-03-17] ImageFX는 Google 서비스라 프록시 불필요 → import 제거
 import type { Browser, Page, BrowserContext } from 'playwright';
 
@@ -1152,7 +1154,7 @@ export async function generateSingleImageWithImageFx(
         const buffer = Buffer.from(genResult.encodedImage, 'base64');
         console.log(`[ImageFX] ✅ 이미지 생성 성공! (${Math.round(buffer.length / 1024)}KB, 시도 ${attempt})`);
         sendImageLog(`✅ [ImageFX] 이미지 생성 완료 (${Math.round(buffer.length / 1024)}KB)`);
-        trackApiUsage('gemini', { images: 1, model: 'imagen-3.5-imagefx', costOverride: 0 });
+        trackApiUsage('gemini', { images: 1, model: IMAGEN_MODELS.V35_FX, costOverride: 0 });
         // ✅ [2026-03-16 FIX] 실제 이미지 포맷을 버퍼에서 감지 (하드코딩 제거)
         const isJPEG = buffer[0] === 0xFF && buffer[1] === 0xD8 && buffer[2] === 0xFF;
         const isWebP = buffer[0] === 0x52 && buffer[1] === 0x49 && buffer[2] === 0x46 && buffer[3] === 0x46;

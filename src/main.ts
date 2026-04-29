@@ -7,6 +7,8 @@ import { startEventLoopWatchdog } from './diagnostics/eventLoopWatchdog.js';
 import { detectLowSpec, logLowSpecStatus } from './diagnostics/lowSpecMode.js';
 import { globalLimiter } from './runtime/adaptiveLimiter.js';
 import { initSessionTracking, shouldDisableGpuFromHistory, getRecentFreezeAvg } from './runtime/runtimeStats.js';
+// ✅ [v2.7.53] modelRegistry SSOT
+import { CLAUDE_MODELS } from './runtime/modelRegistry.js';
 
 // ✅ [2026-04-03] 앱 시작 디버그 로그 (silent crash 진단용)
 try {
@@ -4229,7 +4231,7 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
       case 'claude': {
         try {
           const resp = await axios.post('https://api.anthropic.com/v1/messages', {
-            model: 'claude-haiku-4-5-20251001',
+            model: CLAUDE_MODELS.HAIKU,
             messages: [{ role: 'user', content: 'Hi' }],
             max_tokens: 5,
           }, {

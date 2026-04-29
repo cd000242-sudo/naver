@@ -1,8 +1,10 @@
 /**
  * ✅ [2026-02-27] 2단계 쇼핑 이미지 콘텐츠 분석 필터
  * ✅ [2026-03-12] 3단계 대표 이미지 유사도 필터 + 4단계 Gemini/OpenAI Vision 폴백 추가
- * 
+ *
  * 이미지를 실제 다운로드하여 픽셀 기반 분석으로 비제품 이미지를 필터링합니다.
+ *
+ * ✅ [v2.7.53] modelRegistry SSOT 적용
  * 
  * 분석 항목:
  * 1. 실제 크기 (width/height) — 200x200 미만 제외
@@ -13,6 +15,8 @@
  * 6. [NEW] 대표 이미지 유사도 — 갤러리 대표 이미지와 크게 다른 + 색상 단순 = 로고/배너 제외
  * 7. [NEW] AI Vision 분류 — 의심 이미지를 Gemini/OpenAI Vision으로 최종 판정
  */
+
+import { OPENAI_TEXT_MODELS } from '../runtime/modelRegistry.js';
 
 interface ImageAnalysisResult {
     url: string;
@@ -275,8 +279,8 @@ async function classifyWithOpenAI(
                     'Authorization': `Bearer ${openaiApiKey}`,
                 },
                 body: JSON.stringify({
-                    // ✅ [v1.4.77] gpt-4o-mini → gpt-4.1-mini (2026-03-31 sunset 회피, Vision 지원)
-                    model: 'gpt-4.1-mini',
+                    // ✅ [v2.7.53] modelRegistry SSOT 적용 (이전: gpt-4.1-mini literal)
+                    model: OPENAI_TEXT_MODELS.GPT_41_MINI,
                     messages: [{
                         role: 'user',
                         content: [
