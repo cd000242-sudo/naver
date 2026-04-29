@@ -325,7 +325,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     } catch (openaiError) {
       console.warn(`[ImageGenerator] ⚠️ 덕트테이프 실패:`, (openaiError as Error).message);
       const userMsg = getImageErrorMessage(openaiError);
-      throw new Error(`[덕트테이프] ${userMsg}`);
+      throw new Error(`[OpenAI 이미지] ${userMsg}`);
     }
   }
 

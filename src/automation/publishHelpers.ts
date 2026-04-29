@@ -1901,7 +1901,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
                 self.log(`POST_URL: ${afterUrl}`);
                 self.publishedUrl = afterUrl; // ✅ URL 저장
               } else {
-                throw new Error('발행이 완료되지 않았습니다. 에디터 페이지에 머물러 있습니다.');
+                throw new Error('발행이 끝나지 않았습니다. 네이버 측에서 차단/캡차가 발생했거나 본문 조건(글자수·카테고리·이미지)이 부족할 수 있습니다. 잠시 후 수동 확인하거나 1시간 뒤 다시 시도해주세요.');
               }
             } else {
               // URL이 변경되지 않은 경우 - 발행 실패 가능성
@@ -1952,7 +1952,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
                   self.log(`✅ 재확인 후 URL 변경 확인: ${retryUrl}`);
                   self.log(`POST_URL: ${retryUrl}`);
                 } else {
-                  throw new Error('발행이 완료되지 않았습니다. 발행 버튼을 다시 클릭하거나 수동으로 확인해주세요.');
+                  throw new Error('발행이 끝나지 않았습니다. 네이버 측에서 차단/캡차가 발생했거나 본문 조건(글자수·카테고리·이미지)이 부족할 수 있습니다.');
                 }
               }
             }
@@ -1989,7 +1989,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
                 self.log('✅ 블로그 글이 즉시발행되었습니다.');
                 self.log(`POST_URL: ${afterUrl}`);
               } else {
-                throw new Error('발행이 완료되지 않았습니다. 발행 버튼이 비활성화되어 있거나 네비게이션이 발생하지 않았습니다.');
+                throw new Error('발행 버튼이 활성화되지 않았습니다. 본문 조건(제목·글자수·카테고리·이미지)을 확인해주세요. 잠시 후 다시 시도하시거나 본문을 더 작성해주세요.');
               }
             } else {
               throw new Error('발행 확인 버튼이 계속 비활성화되어 있습니다. 발행 조건을 확인해주세요.');
@@ -2024,7 +2024,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
               await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
               self.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
             } else {
-              throw new Error('임시저장 버튼도 찾을 수 없습니다.');
+              throw new Error('발행과 임시저장 버튼 모두 찾지 못했습니다. 네이버 에디터 UI가 변경되었을 수 있으니 앱 업데이트를 확인하거나 잠시 후 다시 시도해주세요.');
             }
           } catch (fallbackError) {
             self.log(`❌ 임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
@@ -2114,7 +2114,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
                 self.log('✅ 블로그 글이 즉시발행되었습니다.');
                 self.log(`POST_URL: ${finalUrl}`);
               } else {
-                throw new Error('발행이 완료되지 않았습니다. 에디터 페이지에 머물러 있습니다.');
+                throw new Error('발행이 끝나지 않았습니다. 네이버 측에서 차단/캡차가 발생했거나 본문 조건(글자수·카테고리·이미지)이 부족할 수 있습니다. 잠시 후 수동 확인하거나 1시간 뒤 다시 시도해주세요.');
               }
             }
           } else {
@@ -2146,7 +2146,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
                 await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
                 self.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
               } else {
-                throw new Error('임시저장 버튼도 찾을 수 없습니다.');
+                throw new Error('발행과 임시저장 버튼 모두 찾지 못했습니다. 네이버 에디터 UI가 변경되었을 수 있으니 앱 업데이트를 확인하거나 잠시 후 다시 시도해주세요.');
               }
             } catch (fallbackError) {
               self.log(`❌ 임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
@@ -2176,7 +2176,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
               await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
               self.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
             } else {
-              throw new Error('임시저장 버튼도 찾을 수 없습니다.');
+              throw new Error('발행과 임시저장 버튼 모두 찾지 못했습니다. 네이버 에디터 UI가 변경되었을 수 있으니 앱 업데이트를 확인하거나 잠시 후 다시 시도해주세요.');
             }
           } catch (fallbackError) {
             self.log(`❌ 임시저장 폴백도 실패: ${(fallbackError as Error).message}`);

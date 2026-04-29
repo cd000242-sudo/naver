@@ -144,7 +144,7 @@ function resolveModelName(): string {
 export function getGeminiModel(): { model: GenerativeModel; modelName: string } {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    throw new Error('GEMINI_API_KEY 환경변수가 설정되지 않았습니다.');
+    throw new Error('Gemini API 키가 설정되지 않았습니다. 환경설정 → API 키에서 Gemini 키를 입력해주세요.');
   }
 
   const client = getClient(apiKey);

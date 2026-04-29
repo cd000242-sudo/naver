@@ -322,7 +322,7 @@ export async function generateWithOpenAIImage(
         const detail = status || apiMsg
             ? ` 마지막 실패: status=${status || 'n/a'}, message="${(apiMsg || '').substring(0, 200)}"`
             : '';
-        throw new Error(`OpenAI 덕트테이프로 단 1장의 이미지도 생성하지 못했습니다. (키 source: ${keySource})${detail}`);
+        throw new Error(`OpenAI 이미지 엔진에서 한 장도 생성하지 못했습니다. API 키와 사용량 한도를 확인해주세요. (키 source: ${keySource})${detail}`);
     }
 
     return results;

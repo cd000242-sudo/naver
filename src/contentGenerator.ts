@@ -5702,7 +5702,7 @@ function cleanEscapeSequences(text: string): string {
 }
 
 function validateStructuredContent(content: StructuredContent, source?: ContentSource): void {
-  if (!content) throw new Error('구조화된 콘텐츠가 비어 있습니다.');
+  if (!content) throw new Error('AI 응답에 본문이 없습니다. 자동 재시도 중입니다... 계속 실패하면 다른 AI 엔진(Gemini/Claude/OpenAI)으로 전환해주세요.');
 
   // ✅ [2026-04-11 FIX] 제목 개행 제거 — 최종 방어선
   if (content.selectedTitle && typeof content.selectedTitle === 'string') {
@@ -7901,7 +7901,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   function getOpenAIClient(apiKey?: string): OpenAI {
     const key = apiKey ?? process.env.OPENAI_API_KEY;
     if (!key) {
-      throw new Error('OPENAI_API_KEY가 설정되어 있지 않습니다. 환경설정에서 OpenAI API 키를 입력해주세요.');
+      throw new Error('OpenAI API 키가 설정되어 있지 않습니다. 환경설정 → API 키에서 OpenAI 키를 입력해주세요.');
     }
     if (!openAIClients.has(key)) {
       openAIClients.set(key, new OpenAI({ apiKey: key }));
@@ -8067,7 +8067,7 @@ const anthropicClients = new Map<string, Anthropic>();
 function getAnthropicClient(apiKey?: string): Anthropic {
   const key = apiKey ?? process.env.CLAUDE_API_KEY;
   if (!key) {
-    throw new Error('CLAUDE_API_KEY가 설정되어 있지 않습니다. 환경설정에서 Claude API 키를 입력해주세요.');
+    throw new Error('Claude API 키가 설정되어 있지 않습니다. 환경설정 → API 키에서 Claude 키를 입력해주세요.');
   }
   if (!anthropicClients.has(key)) {
     anthropicClients.set(key, new Anthropic({ apiKey: key }));
@@ -8863,7 +8863,7 @@ export async function generateStructuredContent(
   options: GenerateOptions = {},
 ): Promise<StructuredContent> {
   if (!source?.rawText || !source.rawText.trim()) {
-    throw new Error('rawText가 필요합니다.');
+    throw new Error('원본 텍스트가 비어 있습니다. 키워드 또는 URL을 다시 확인해주세요.');
   }
   // ✅ [v2.7.27] Adaptive Limiter — 메인 스레드 lag 발생 시 동시성 자동 다운
   const { globalLimiter } = await import('./runtime/adaptiveLimiter.js');
