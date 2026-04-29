@@ -1483,11 +1483,15 @@ async function createWindow(): Promise<void> {
       resizable: true,
       show: true,
       webPreferences: {
-        backgroundThrottling: false, // ✅ 최소화 시에도 백그라운드 작업 계속 수행
+        // ✅ [v2.7.47 게임 친화] 백그라운드 시 Chromium 자체 throttling 활성화
+        //   사용자 보고: "서든어택 게임 중 시작줄이 깜빡임" 재발
+        //   원인: backgroundThrottling=false → 백그라운드에서도 정상 렌더 → fullscreen 게임과 GPU 컨텍스트 경합
+        //   수정: true로 변경 — 백그라운드에서 Chromium이 자체적으로 timer/animation throttle
+        backgroundThrottling: true,
         preload: preloadPath,
         nodeIntegration: false,
         contextIsolation: true,
-        sandbox: false, // preload 스크립트를 위해 필요할 수 있음
+        sandbox: false,
         webSecurity: true,
         allowRunningInsecureContent: false,
       },
@@ -1664,12 +1668,18 @@ async function createWindow(): Promise<void> {
         const { setWatchdogActive } = require('./diagnostics/eventLoopWatchdog.js');
         setWatchdogActive(false);
       } catch { /* ignore */ }
+      // ✅ [v2.7.47] 게임 친화: minimize 시 작업표시줄에서 완전 격리
+      //   효과: fullscreen 게임이 작업표시줄을 그릴 때 본 앱 항목이 깜빡임 유발 안 함
+      //   복귀: Tray 아이콘 클릭으로 다시 띄우기 가능
+      try { mainWindow?.setSkipTaskbar(true); } catch { /* ignore */ }
     });
     mainWindow.on('restore', () => {
       try {
         const { setWatchdogActive } = require('./diagnostics/eventLoopWatchdog.js');
         setWatchdogActive(true);
       } catch { /* ignore */ }
+      // ✅ [v2.7.47] 복귀 시 작업표시줄 다시 표시
+      try { mainWindow?.setSkipTaskbar(false); } catch { /* ignore */ }
     });
 
     mainWindow.on('closed', () => {
@@ -8694,7 +8704,15 @@ app.on('before-quit', (event) => {
 });
 
 // ffmpeg 경고 무시 (미디어 재생 기능 미사용)
-app.commandLine.appendSwitch('disable-features', 'MediaFoundationVideoCapture');
+// ✅ [v2.7.47 게임 친화] 작업표시줄 깜빡임 차단 — 5중 가드
+//   1. CalculateNativeWinOcclusion: Windows occlusion 계산 비활성 (fullscreen 게임 깜빡임 주범)
+//   2. BackgroundTimerThrottling 강제 (Chromium 백그라운드 timer 자동 감속)
+//   3. RendererBackgrounding: Chromium이 백그라운드 렌더 우선순위 자동 다운
+//   4. MediaFoundationVideoCapture (기존)
+app.commandLine.appendSwitch('disable-features', 'MediaFoundationVideoCapture,CalculateNativeWinOcclusion');
+app.commandLine.appendSwitch('enable-features', 'BackgroundTimerThrottling,RendererBackgrounding');
+// 5. GPU vsync — 게임 렌더 충돌 차단 (백그라운드에서 vsync 안 맞춤)
+app.commandLine.appendSwitch('disable-gpu-vsync');
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // ✅ [v1.4.32] 버전 업그레이드 시 자격증명 백업 → wipe → 복원
