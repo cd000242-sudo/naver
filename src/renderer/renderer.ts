@@ -110,6 +110,7 @@ import {
   showPostSelectionModal,
   migratePostCategories, ensureCategoryMigration,
   migrateAccountPostsToGlobal, migratePostsToPerAccount, backfillNaverIdForLegacyPosts,
+  cleanupStaleImageReferences,
   normalizeGeneratedPostCategoryKey, getGeneratedPostCategoryLabel,
   isGeneratedPostCategoryCollapsed, setGeneratedPostCategoryCollapsed,
 } from './modules/postManager.js';
@@ -2396,6 +2397,11 @@ async function initializeApplication(): Promise<void> {
   setTimeout(() => {
     restoreAutosavedContent();
   }, 1000);
+
+  // ✅ [v2.7.57] 사라진 이미지 참조 정리 (1회) — ERR_FILE_NOT_FOUND 콘솔 노이즈 제거
+  setTimeout(() => {
+    cleanupStaleImageReferences().catch(() => { /* 무시 */ });
+  }, 3000);
 
   console.log('[Init] 애플리케이션 초기화 완료');
 }

@@ -243,6 +243,77 @@ export function migratePostsToPerAccount(): void {
   backfillNaverIdForLegacyPosts(); // ✅ [2026-02-26] naverId 백필도 실행
 }
 
+// ✅ [v2.7.57] 이전 세션의 사라진 이미지 파일 자동 정리 (ERR_FILE_NOT_FOUND 방지)
+//   증상: 글 목록 썸네일이 file:///...generated-images/old.png 가리키는데 디스크에서 파일이 삭제됨
+//        → 브라우저가 ERR_FILE_NOT_FOUND 콘솔 에러 발생 (onerror로 시각은 가려지지만 로그 노출)
+//   조치: 앱 시작 시 1회 실행 — 각 글 이미지의 filePath 존재 검사 후 누락된 항목의 filePath 제거
+//        previewDataUrl 또는 url 폴백이 있는 이미지는 유지 (썸네일 끊기지 않음)
+//        previewDataUrl/url 모두 없으면 해당 이미지 항목 자체 제거
+const STALE_IMAGE_CLEANUP_DONE_KEY = 'naver_blog_posts_stale_image_cleanup_done_v1';
+let staleImageCleanupRunning = false;
+export async function cleanupStaleImageReferences(): Promise<void> {
+  if (staleImageCleanupRunning) return;
+  if (localStorage.getItem(STALE_IMAGE_CLEANUP_DONE_KEY)) return;
+  staleImageCleanupRunning = true;
+  try {
+    const api = (window as any).api;
+    if (!api?.checkFileExists) return;
+
+    const raw = localStorage.getItem(GENERATED_POSTS_KEY);
+    if (!raw) {
+      localStorage.setItem(STALE_IMAGE_CLEANUP_DONE_KEY, 'true');
+      return;
+    }
+
+    const posts: GeneratedPost[] = JSON.parse(raw);
+    let droppedRefs = 0;
+    let droppedImages = 0;
+
+    for (const post of posts) {
+      if (!Array.isArray(post.images) || post.images.length === 0) continue;
+      const cleaned: any[] = [];
+      for (const img of post.images as any[]) {
+        if (!img) continue;
+        const filePath = img.filePath || img.savedToLocal;
+        if (!filePath) {
+          cleaned.push(img);
+          continue;
+        }
+        try {
+          const exists = await api.checkFileExists(filePath);
+          if (exists) {
+            cleaned.push(img);
+          } else {
+            const hasFallback = !!(img.previewDataUrl || img.url);
+            if (hasFallback) {
+              const next = { ...img };
+              delete next.filePath;
+              delete next.savedToLocal;
+              cleaned.push(next);
+              droppedRefs++;
+            } else {
+              droppedImages++;
+            }
+          }
+        } catch {
+          cleaned.push(img); // IPC 실패 시 보수적 유지
+        }
+      }
+      post.images = cleaned;
+    }
+
+    if (droppedRefs > 0 || droppedImages > 0) {
+      safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+      console.log(`[StaleImageCleanup] 🧹 ${droppedRefs}개 stale filePath 제거 + ${droppedImages}개 이미지 항목 삭제`);
+    }
+    localStorage.setItem(STALE_IMAGE_CLEANUP_DONE_KEY, 'true');
+  } catch (err) {
+    console.warn('[StaleImageCleanup] 정리 실패 (무시):', err);
+  } finally {
+    staleImageCleanupRunning = false;
+  }
+}
+
 // ═══════════════════════════════════════════════════════════════════
 // CRUD 함수
 // ═══════════════════════════════════════════════════════════════════

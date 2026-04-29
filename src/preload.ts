@@ -271,6 +271,10 @@ contextBridge.exposeInMainWorld('api', {
       'tray:show-modal',
       // 라이선스 (메인→렌더러 갱신 알림)
       'license:status-changed',
+      // ✅ [v2.7.57] 사용자 검증 로그에서 발견 — 누락 채널 추가
+      'updater-log',          // electron-updater 로그 스트림
+      'session:duplicate',    // 중복 로그인 감지
+      'license:expired',      // 라이선스 만료 알림
     ];
     if (!ALLOWED_CHANNELS.includes(channel)) {
       // eslint-disable-next-line no-console

@@ -690,7 +690,14 @@ export function registerImageHandlers(ctx: IpcContext): void {
 
             const configModule = await import('../../configManager.js');
             const config = await configModule.loadConfig();
-            const imageSource = engine || (config as any).globalImageSource || 'nano-banana-pro';
+            const requestedSource = engine || (config as any).globalImageSource || 'nano-banana-pro';
+            // ✅ [v2.7.57] ImageFX(Flow) 엔진은 Google 로그인 필요 + 120s 타임아웃 위험 → preview는 Pollinations 강제
+            //   - Disney/2D 등 복잡한 스타일에서 FLOW_IMAGE_TIMEOUT 발생
+            //   - preview는 화질보다 속도가 우선 (Pollinations 무료/공개/빠름)
+            const imageSource = requestedSource === 'imagefx' ? 'pollinations' : requestedSource;
+            if (requestedSource !== imageSource) {
+                console.log(`[imageHandlers] 🔁 스타일 미리보기: ${requestedSource} → ${imageSource}로 폴백 (속도 우선)`);
+            }
 
             console.log(`[imageHandlers] 🖼️ 스타일 미리보기 생성: style=${style}, engine=${imageSource}`);
 
