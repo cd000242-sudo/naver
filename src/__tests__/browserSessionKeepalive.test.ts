@@ -59,10 +59,14 @@ describe('v1.4.78 — 브라우저 세션 keep-alive', () => {
   });
 
   describe('자동 시작 / 종료 연결', () => {
-    it.skip("첫 세션 생성 직후 startKeepalive() 자동 호출 [v2.7.34: 패턴 분리됨, 재작성 보류]", () => {
-      // v1.4.79: sessions.set 이후 쿠키 복원 추가됨, startKeepalive는 그 뒤
-      // v2.7.x 이후 두 호출이 1500자 이상 떨어져 정규식 매칭 실패. 신 코드 구조 확정 후 갱신.
-      expect(code).toMatch(/this\.sessions\.set\(accountId[\s\S]{0,1500}?this\.startKeepalive\(\)/);
+    it("첫 세션 생성 + startKeepalive() 호출 둘 다 존재 (v2.7.51 신 구조)", () => {
+      // v2.7.x: 두 호출 사이에 쿠키 복원/세션 검증 코드가 추가되어 정규식 거리 확장 불가
+      // 두 호출이 모두 존재하고 startKeepalive가 sessions.set 이후 라인에 있는지만 검증
+      expect(code).toMatch(/this\.sessions\.set\(accountId/);
+      expect(code).toMatch(/this\.startKeepalive\(\)/);
+      const setIdx = code.indexOf('this.sessions.set(accountId');
+      const keepaliveIdx = code.indexOf('this.startKeepalive()');
+      expect(keepaliveIdx).toBeGreaterThan(setIdx);
     });
 
     it("closeAllSessions에서 stopKeepalive() 먼저 호출", () => {

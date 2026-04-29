@@ -1,12 +1,13 @@
 /**
- * ✅ [v1.4.80] Flow (Nano Banana Pro) 이미지 엔진 회귀 방지
+ * ✅ [v2.7.51] Flow 이미지 엔진 회귀 가드 (v2.7.x 신 구조 반영)
  *
  * 검증:
- *   - flowGenerator.ts가 ImageFX 세션을 공유하는 패턴으로 구현됨
- *   - labs.google/flow 접속 + 자동 API 학습 메커니즘
- *   - imageGenerator 라우팅에 'flow' 분기 추가
- *   - UI 드롭다운에 옵션 추가
- *   - 가격 테이블에 'flow-nano-banana-pro' = 0 등록
+ *   - flowGenerator.ts가 launchWithStealthFallback 패턴으로 구현됨
+ *   - labs.google/flow 접속 + 로그인용 + off-screen 분리
+ *   - cachedContext/cachedPage 세션 캐싱 (재학습 방지)
+ *   - generateWithFlow / prewarmFlow / resetFlowState export
+ *   - v2.7.38 3중 가드 (--window-position=-32000,-32000 + window.moveTo)
+ *   - v2.7.42 FLOW_* 메시지 한국어 친화화 적용 검증
  */
 import { describe, it, expect } from 'vitest';
 import * as fs from 'fs';
@@ -17,115 +18,97 @@ function read(rel: string): string {
   return fs.readFileSync(path.join(ROOT, rel), 'utf-8');
 }
 
-// ✅ [v2.7.34 TODO] flowGenerator.ts v1.4.80 → v2.7.x 대대적 리팩터링됨.
-//   기존 grep style 토큰(labs.google/flow, discoverAndCacheApi, FLOW_SAFETY_BLOCK 등)이
-//   신 구조에서 다른 형태로 분산됨. 신 코드 확정 후 회귀 가드 재작성.
-describe.skip('v1.4.80 — Flow (Nano Banana Pro) 이미지 엔진 (구조 변경으로 보류)', () => {
-  describe('flowGenerator.ts 구현', () => {
+// 신 구조 회귀 가드 — v2.7.51에서 신 구조에 맞게 전체 재작성
+describe('Flow 이미지 엔진 v2.7.x', () => {
+  describe('flowGenerator.ts 핵심 export', () => {
     const code = read('image/flowGenerator.ts');
 
     it('labs.google/flow 접속 경로 존재', () => {
-      expect(code).toMatch(/labs\.google\/flow/);
+      expect(code).toMatch(/labs\.google\/fx\/tools\/flow/);
     });
 
-    it('generateWithFlow export (일괄 생성)', () => {
+    it('generateWithFlow export 함수 존재', () => {
       expect(code).toMatch(/export async function generateWithFlow/);
     });
 
-    it('generateSingleImageWithFlow export (단일 생성)', () => {
-      expect(code).toMatch(/export async function generateSingleImageWithFlow/);
+    it('prewarmFlow export — 앱 시작 백그라운드 브라우저 기동', () => {
+      expect(code).toMatch(/export async function prewarmFlow/);
     });
 
-    it('testFlowConnection export (UI 연결 테스트)', () => {
-      expect(code).toMatch(/export async function testFlowConnection/);
+    it('resetFlowState export — 종료 시 cookies flush', () => {
+      expect(code).toMatch(/export async function resetFlowState/);
     });
 
-    it('자동 API 학습 메커니즘 (discoverAndCacheApi)', () => {
-      expect(code).toMatch(/discoverAndCacheApi/);
-      expect(code).toMatch(/CANDIDATE_ENDPOINTS/);
-      expect(code).toMatch(/CANDIDATE_MODEL_NAMES/);
-    });
-
-    it('메타데이터 파일 저장/로드 (캐시)', () => {
-      expect(code).toMatch(/saveApiMetadata/);
-      expect(code).toMatch(/loadApiMetadata/);
-      expect(code).toMatch(/FLOW_API_CACHE_FILE/);
-    });
-
-    it('세션 엔드포인트 후보 (ImageFX 호환 /fx/api/auth/session)', () => {
-      expect(code).toMatch(/\/fx\/api\/auth\/session/);
-    });
-
-    it('쿼터 초과(429) 처리', () => {
-      expect(code).toMatch(/HTTP_429[\s\S]{0,200}?쿼터 초과/);
-    });
-
-    it('안전 필터(FLOW_SAFETY_BLOCK) 처리', () => {
-      expect(code).toMatch(/FLOW_SAFETY_BLOCK/);
-    });
-
-    it('메타 무효 시 자동 재학습 (세션당 1회 제한)', () => {
-      // ✅ [v1.4.80 P1] 재학습 로직 존재 + 세션당 1회 제한 명시
-      expect(code).toMatch(/unlinkSync\(getCachePath\(\)\)/);
-      expect(code).toMatch(/_discoveryAttemptedThisSession/);
-    });
-
-    it('이미지 비용 0 기록 (무료)', () => {
-      expect(code).toMatch(/costOverride:\s*0/);
+    it('recreateFlowContext export — 세션 재생성', () => {
+      expect(code).toMatch(/export async function recreateFlowContext/);
     });
   });
 
-  describe('imageGenerator 라우팅', () => {
-    const code = read('imageGenerator.ts');
+  describe('Stealth/launch 가드', () => {
+    const code = read('image/flowGenerator.ts');
 
-    it("'flow' 프로바이더 import", () => {
-      expect(code).toMatch(/import\s*\{\s*generateWithFlow\s*\}\s*from\s*['"]\.\/image\/flowGenerator/);
+    it('launchWithStealthFallback 함수 — System Chrome/Edge/Chromium 폴백 체인', () => {
+      expect(code).toMatch(/launchWithStealthFallback/);
+      expect(code).toMatch(/'chrome' as const/);
+      expect(code).toMatch(/'msedge' as const/);
     });
 
-    it("normalizedProvider === 'flow' 분기", () => {
-      expect(code).toMatch(/normalizedProvider\s*===\s*'flow'/);
+    it('STEALTH_ARGS — webdriver 자동화 플래그 위장', () => {
+      expect(code).toMatch(/disable-blink-features=AutomationControlled/);
     });
 
-    it('Flow 에러 FLOW_ 접두사 분류 메시지', () => {
-      expect(code).toMatch(/rawMsg\.startsWith\('FLOW_'\)/);
-    });
-  });
-
-  describe('IPC + Preload 브리지', () => {
-    const ipc = read('main/ipc/imageHandlers.ts');
-    const preload = read('preload.ts');
-
-    it("IPC 'flow:testConnection' 핸들러", () => {
-      expect(ipc).toMatch(/safeHandle\('flow:testConnection'/);
-    });
-
-    it('preload testFlowConnection 노출', () => {
-      expect(preload).toMatch(/testFlowConnection:/);
-      expect(preload).toMatch(/'flow:testConnection'/);
+    it('webdriver getter undefined 위장', () => {
+      expect(code).toMatch(/Object\.defineProperty\(navigator,\s*['"]webdriver['"]/);
     });
   });
 
-  describe('UI — 드롭다운 옵션', () => {
-    const html = fs.readFileSync(path.resolve(ROOT, '../public/index.html'), 'utf-8');
+  describe('v2.7.38 게임 친화 — 창 숨김 3중 가드', () => {
+    const code = read('image/flowGenerator.ts');
 
-    it("option value='flow' 존재 (이미지 엔진 드롭다운)", () => {
-      expect(html).toMatch(/<option value="flow"[^>]*>[\s\S]{0,200}?Flow/);
+    it('off-screen args에 -32000,-32000 좌표', () => {
+      expect(code).toMatch(/--window-position=-32000,-32000/);
     });
 
-    it('Nano Banana Pro 라벨 포함', () => {
-      expect(html).toMatch(/Nano Banana Pro/);
+    it('off-screen args에 --window-size=1,1', () => {
+      expect(code).toMatch(/--window-size=1,1/);
+    });
+
+    it('off-screen args에 --start-minimized', () => {
+      expect(code).toMatch(/--start-minimized/);
+    });
+
+    it('window.moveTo + resizeTo 강제 적용', () => {
+      expect(code).toMatch(/window\.moveTo\(-32000,\s*-32000\)/);
+      expect(code).toMatch(/window\.resizeTo\(1,\s*1\)/);
     });
   });
 
-  describe('가격 테이블 — Flow 무료 엔진', () => {
-    const code = read('apiUsageTracker.ts');
+  describe('v2.7.42 사용자 친화 메시지 (FLOW_* prefix는 유지하되 한국어 본문)', () => {
+    const code = read('image/flowGenerator.ts');
 
-    it("'flow-nano-banana-pro' = 0 (무료)", () => {
-      expect(code).toMatch(/'flow-nano-banana-pro':\s*0/);
+    it('FLOW_LOGIN_TIMEOUT — Google 로그인 + 5분 + [Flow 로그인] 안내', () => {
+      expect(code).toMatch(/FLOW_LOGIN_TIMEOUT.*Google 로그인.*5분/);
     });
 
-    it("'imagen-3.5-imagefx' = 0 (ImageFX도 무료 유지)", () => {
-      expect(code).toMatch(/'imagen-3\.5-imagefx':\s*0/);
+    it('FLOW_NEW_PROJECT_BUTTON_NOT_FOUND — 1시간 + 다른 엔진 안내', () => {
+      expect(code).toMatch(/FLOW_NEW_PROJECT_BUTTON_NOT_FOUND.*Google Flow.*다른 이미지 엔진/);
+    });
+
+    it('FLOW_ALL_FAILED — 시간당 한도 + 다른 엔진 선택 안내', () => {
+      expect(code).toMatch(/FLOW_ALL_FAILED.*시간당 한도.*다른 이미지 엔진/);
+    });
+  });
+
+  describe('세션 캐싱 (v2.7.x)', () => {
+    const code = read('image/flowGenerator.ts');
+
+    it('cachedContext / cachedPage 변수 존재', () => {
+      expect(code).toMatch(/let cachedContext.*BrowserContext.*null/);
+      expect(code).toMatch(/let cachedPage.*Page.*null/);
+    });
+
+    it('cookies flush — close() 명시 호출 (resetFlowState)', () => {
+      expect(code).toMatch(/cachedContext\.close\(\)/);
     });
   });
 });

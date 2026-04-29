@@ -85,23 +85,26 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
     });
   });
 
-  // ✅ [v2.7.34 TODO] flowGenerator.ts가 v1.4.80 → v2.7.x 사이 대대적 리팩터링됨.
-  //   기존 토큰(_discoveryAttemptedThisSession, ensureImageFxBrowserPage 직접 import 등)이
-  //   신 구조에서 다른 형태로 대체됨. 신 패턴 확정 후 회귀 가드 재작성 필요.
-  describe.skip('P1: flowGenerator.ts — 무한 루프 방지 + import 안정성 (구조 변경으로 보류)', () => {
+  // ✅ [v2.7.51] flowGenerator.ts v2.7.x 신 구조 회귀 가드 재작성
+  //   기존 토큰(ImageFX 공유 패턴) → 자체 launchWithStealthFallback로 변경
+  describe('P1: flowGenerator.ts — v2.7.x 신 구조 안정성', () => {
     const code = read('image/flowGenerator.ts');
-    it('_discoveryAttemptedThisSession 플래그 존재', () => {
-      expect(code).toMatch(/_discoveryAttemptedThisSession/);
+
+    it('자체 launchWithStealthFallback (System Chrome/Edge/Chromium 폴백 체인)', () => {
+      expect(code).toMatch(/async function launchWithStealthFallback/);
     });
-    it('ensureImageFxBrowserPage 직접 import (동적 캐스팅 제거)', () => {
-      expect(code).toMatch(/import\('\.\/imageFxGenerator\.js'\)/);
-      expect(code).not.toMatch(/import\('\.\/imageFxGenerator\.js'\)\s*as\s*any/);
+
+    it('cachedContext/cachedPage 세션 캐싱 변수', () => {
+      expect(code).toMatch(/let cachedContext/);
+      expect(code).toMatch(/let cachedPage/);
     });
-    it('폴백 chromium.launch 경로 제거됨 (ImageFX 세션 공유 강제)', () => {
-      expect(code).not.toMatch(/chromium\.launch\(\{ headless:\s*false \}\)/);
+
+    it('헤드리스 false (사용자 로그인 필요)', () => {
+      expect(code).toMatch(/headless:\s*false/);
     });
-    it('세션당 1회 재학습 제한 로직', () => {
-      expect(code).toMatch(/이번 세션 1회 시도 완료|세션당 1회/);
+
+    it('webdriver 자동화 플래그 위장', () => {
+      expect(code).toMatch(/Object\.defineProperty\(navigator,\s*['"]webdriver['"]/);
     });
   });
 
