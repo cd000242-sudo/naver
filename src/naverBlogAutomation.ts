@@ -3814,9 +3814,16 @@ export class NaverBlogAutomation {
         // ✅ [2026-03-24 FIX] 로그인/세션 문제 감지 — 로그인 페이지 + 메인 페이지 리다이렉트 통합 처리
         const isLoginRedirect = finalUrl.includes('nidlogin') || finalUrl.includes('login.naver') ||
                                 (finalUrl.includes('/login') && !finalUrl.includes('blog.naver.com'));
+        // ✅ [v2.7.41] 에디터 URL 화이트리스트 — Redirect 체인 누락 회귀 수정
+        //   사용자 보고: blog.naver.com/{id}?Redirect=Write 페이지에서 "글을 불러오고 있습니다..." 무한로딩
+        //   원인: GoBlogWrite → blog.naver.com/{id}?Redirect=Write → PostWriteForm.naver redirect 체인에서
+        //         중간 URL이 화이트리스트 누락 → fallback 분기로 빠져 #mainFrame 못 찾고 멍때림
+        //   수정: Redirect=Write / PostWriteForm 패턴 추가 + #mainFrame 안착 별도 검증
         const isEditorUrl = finalUrl.includes('blogPostWrite') ||
                             finalUrl.includes('GoBlogWrite') ||
-                            finalUrl.includes('NaverWriteEditor');
+                            finalUrl.includes('NaverWriteEditor') ||
+                            finalUrl.includes('PostWriteForm') ||
+                            /[?&]Redirect=Write\b/i.test(finalUrl);
         const isBlogDomain = finalUrl.includes('blog.naver.com');
 
         // 에디터 URL 패턴이 확인되면 즉시 성공 (가장 빠른 경로)
@@ -4053,20 +4060,50 @@ export class NaverBlogAutomation {
         );
       }
     } else if (isOnBlogDomain && !isOnEditorByUrl) {
-      // blog.naver.com 도메인이지만 에디터 URL 패턴이 없는 경우 → DOM으로 확인
-      const hasEditorFrame = await page.evaluate(() => {
-        return !!document.querySelector('#mainFrame, iframe[name="mainFrame"]');
-      }).catch(() => false);
+      // ✅ [v2.7.41] redirect 체인 + 스피너 안착 폴링 — "글을 불러오고 있습니다..." 무한로딩 차단
+      //   기존: 1회 DOM 검사 → 없으면 GoBlogWrite로 단순 재이동(3초만 대기)
+      //   문제: redirect 체인이 SPA 라우팅으로 늦게 끝나 #mainFrame 안착 전에 검사 통과 못함
+      //   수정: waitForFunction으로 #mainFrame 안착까지 최대 25초 폴링
+      this.log(`   🔍 #mainFrame 안착 폴링 (최대 25초)...`);
+      let hasEditorFrame = false;
+      try {
+        await page.waitForFunction(
+          () => !!document.querySelector('#mainFrame, iframe[name="mainFrame"]'),
+          { timeout: 25000, polling: 500 }
+        );
+        hasEditorFrame = true;
+        this.log(`   ✅ #mainFrame 안착 확인`);
+      } catch {
+        hasEditorFrame = false;
+      }
 
       if (!hasEditorFrame) {
-        this.log(`   ⚠️ 블로그 도메인이지만 에디터 프레임이 없습니다: ${currentUrl}`);
-        this.log(`   🔄 블로그 글쓰기 페이지로 재이동 시도...`);
+        // 추가 진단: "글을 불러오고 있습니다" 스피너 텍스트 감지
+        const isStuckOnSpinner = await page.evaluate(() => {
+          const t = document.body?.innerText || '';
+          return /글을 불러오고 있습니다|불러오는 중/.test(t);
+        }).catch(() => false);
+        this.log(`   ⚠️ 블로그 도메인이지만 에디터 프레임 안착 실패 (스피너 정체: ${isStuckOnSpinner})`);
+        this.log(`   🔄 블로그 글쓰기 페이지로 reload + 재이동...`);
         try {
-          await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
-            waitUntil: 'domcontentloaded',
-            timeout: 30000
-          });
-          await this.delay(3000);
+          // 1차: reload (cookies 유지 + redirect 체인 다시 시작)
+          await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 }).catch(() => {});
+          await this.delay(2000);
+          // 2차: 그래도 #mainFrame 없으면 직접 goto
+          const stillNoFrame = await page.evaluate(() => {
+            return !document.querySelector('#mainFrame, iframe[name="mainFrame"]');
+          }).catch(() => true);
+          if (stillNoFrame) {
+            await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
+              waitUntil: 'domcontentloaded',
+              timeout: 30000
+            });
+            // ✅ delay → waitForFunction으로 명시 안착 대기
+            await page.waitForFunction(
+              () => !!document.querySelector('#mainFrame, iframe[name="mainFrame"]'),
+              { timeout: 20000, polling: 500 }
+            ).catch(() => {});
+          }
           currentUrl = page.url();
           this.log(`   재이동 후 URL: ${currentUrl}`);
         } catch (retryErr) {
