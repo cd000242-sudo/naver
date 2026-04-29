@@ -1866,6 +1866,7 @@ ipcMain.handle('leword:launch', async () => {
     console.log(`[Main] ✅ LEWORD 실행 (개발): ${devExe}`);
     const child = spawn(devExe, [], { detached: true, stdio: 'ignore' });
     child.unref();
+    try { const { trackChild } = require('./runtime/childProcessRegistry.js'); trackChild(child.pid, 'LEWORD(dev)'); } catch { /* ignore */ }
     return { success: true, message: 'LEWORD 앱이 실행되었습니다.' };
   }
 
@@ -1908,6 +1909,7 @@ ipcMain.handle('leword:launch', async () => {
       mainWindow?.webContents.send('log-message', `✅ LEWORD ${localVersion} 실행 중...`);
       const child = spawn(installedExe, [], { detached: true, stdio: 'ignore' });
       child.unref();
+      try { const { trackChild } = require('./runtime/childProcessRegistry.js'); trackChild(child.pid, 'LEWORD(installed)'); } catch { /* ignore */ }
       return { success: true, message: 'LEWORD 앱이 실행되었습니다.' };
     }
     // 버전 파일은 있지만 설치된 exe가 없으면 → 다운로드로 진행
@@ -1946,6 +1948,7 @@ ipcMain.handle('leword:launch', async () => {
       mainWindow?.webContents.send('log-message', `✅ LEWORD 실행 중...`);
       const child = spawn(existingExe, [], { detached: true, stdio: 'ignore' });
       child.unref();
+      try { const { trackChild } = require('./runtime/childProcessRegistry.js'); trackChild(child.pid, 'LEWORD(existing)'); } catch { /* ignore */ }
       return { success: true, message: 'LEWORD 앱이 실행되었습니다.' };
     }
     console.log('[Main] 📦 LEWORD 최초 설치');
@@ -2089,6 +2092,7 @@ ipcMain.handle('leword:launch', async () => {
     // 다운로드 완료 → 자동 실행
     const child = spawn(LEWORD_EXE_PATH, [], { detached: true, stdio: 'ignore' });
     child.unref();
+    try { const { trackChild } = require('./runtime/childProcessRegistry.js'); trackChild(child.pid, 'LEWORD(downloaded)'); } catch { /* ignore */ }
     return { success: true, message: 'LEWORD 다운로드 및 실행 완료!' };
 
   } catch (error: any) {
@@ -9621,6 +9625,17 @@ app.on('window-all-closed', async () => {
     await resetFlowState().catch((e) => console.warn('[Main] Flow context close 실패:', e?.message));
     await cleanupImageFxBrowser().catch((e) => console.warn('[Main] ImageFX cleanup 실패:', e?.message));
 
+    // ✅ [v2.7.48] 자식 프로세스(LEWORD 등) 강제 정리 — 작업표시줄 깜빡임 차단
+    //   사용자 보고: "본 앱 꺼도 작업표시줄이 깜빡임"
+    //   원인: detached:true로 spawn된 LEWORD가 본 앱 종료 후에도 살아남아 자체 GPU 렌더 충돌
+    //   수정: 추적 등록한 모든 자식 프로세스를 taskkill /T /F로 process tree까지 정리
+    try {
+      const { killAllTrackedChildren } = require('./runtime/childProcessRegistry.js');
+      await killAllTrackedChildren();
+    } catch (e) {
+      console.warn('[Main] 자식 프로세스 정리 실패:', (e as Error)?.message);
+    }
+
     trendMonitor.stop();
     app.quit();
 
@@ -9761,5 +9776,13 @@ app.on('before-quit', async () => {
     console.log('[App] ✅ ImageFX context flush 완료');
   } catch (e) {
     console.warn('[App] ImageFX flush 실패:', (e as Error).message);
+  }
+  // ✅ [v2.7.48] before-quit 마지막 안전망 — 자식 프로세스 일괄 종료
+  try {
+    const { killAllTrackedChildren } = require('./runtime/childProcessRegistry.js');
+    await killAllTrackedChildren();
+    console.log('[App] ✅ 자식 프로세스 정리 완료');
+  } catch (e) {
+    console.warn('[App] 자식 프로세스 정리 실패:', (e as Error).message);
   }
 });
