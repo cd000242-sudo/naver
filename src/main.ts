@@ -1840,8 +1840,9 @@ ipcMain.handle('leword:launch', async () => {
   let latestTag = '';
   try {
     mainWindow?.webContents.send('log-message', '🔄 LEWORD 최신 버전 확인 중...');
+    // ✅ [v2.7.39] 타임아웃 5s → 15s 확장 (네트워크 느린 환경 + GitHub API 응답 지연 대응)
     latestTag = await new Promise<string>((resolve) => {
-      const timer = setTimeout(() => resolve(''), 5000);
+      const timer = setTimeout(() => resolve(''), 15000);
       https.get(`https://api.github.com/repos/${LEWORD_GITHUB_REPO}/releases/latest`, {
         headers: { 'User-Agent': 'LEWORD-Launcher', 'Accept': 'application/vnd.github.v3+json' }
       }, (res: any) => {
@@ -1853,10 +1854,17 @@ ipcMain.handle('leword:launch', async () => {
         });
       }).on('error', () => { clearTimeout(timer); resolve(''); });
     });
+    if (latestTag) {
+      console.log(`[Main] LEWORD GitHub 최신 태그: ${latestTag} (로컬: ${localVersion || '없음'})`);
+    } else {
+      console.warn('[Main] ⚠️ LEWORD GitHub 최신 버전 확인 실패 (네트워크/API 응답 없음)');
+    }
   } catch (e) { Logger.logWarn('system', 'LEWORD GitHub 최신 버전 확인 실패', e); }
 
-  // 2) 이미 최신 버전이 설치되어 있으면 → 설치된 경로에서 바로 실행
-  const isUpToDate = localVersion && (!latestTag || latestTag === localVersion);
+  // ✅ [v2.7.39] isUpToDate 로직 강화 — latestTag가 비어있을 땐 비교 불가이므로 false
+  //   기존 회귀: `!latestTag` truthy 체크 때문에 네트워크 실패 시 자동으로 isUpToDate=true → 업데이트 누락
+  //   수정: latestTag와 localVersion 둘 다 명시적으로 존재해야 비교 가능
+  const isUpToDate = !!localVersion && !!latestTag && latestTag === localVersion;
   if (isUpToDate) {
     const installedExe = installedPaths.find((p: string) => { try { return fs.existsSync(p); } catch { return false; } });
     if (installedExe) {
@@ -1868,6 +1876,19 @@ ipcMain.handle('leword:launch', async () => {
     }
     // 버전 파일은 있지만 설치된 exe가 없으면 → 다운로드로 진행
     console.log('[Main] ⚠️ 버전 파일 있으나 설치된 LEWORD 없음 → 재설치 필요');
+  }
+
+  // ✅ [v2.7.39] 네트워크 실패(latestTag='') + 설치된 exe 있음 → 일단 실행, 업데이트 보류
+  //   "업데이트 확인 실패"로 사용자가 LEWORD 못 쓰는 회귀 차단
+  if (!latestTag && localVersion) {
+    const installedExe = installedPaths.find((p: string) => { try { return fs.existsSync(p); } catch { return false; } });
+    if (installedExe) {
+      console.warn(`[Main] ⚠️ GitHub 응답 실패 → 설치된 LEWORD ${localVersion} 그대로 실행 (다음에 자동 업데이트 재시도)`);
+      mainWindow?.webContents.send('log-message', `⚠️ 업데이트 확인 실패 — LEWORD ${localVersion} 실행 (다음에 재시도)`);
+      const child = spawn(installedExe, [], { detached: true, stdio: 'ignore' });
+      child.unref();
+      return { success: true, message: 'LEWORD 앱이 실행되었습니다 (업데이트 확인 실패).' };
+    }
   }
 
   // 3) 업데이트 필요하거나 최초 설치 → 아래 다운로드 로직으로 진행
