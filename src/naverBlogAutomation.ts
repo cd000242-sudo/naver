@@ -1365,6 +1365,23 @@ export class NaverBlogAutomation {
     return this.mainFrame;
   }
 
+  // ✅ [v2.7.54] AutomationContext provider — 헥사고날 점진 마이그레이션 토대
+  //   architect 진단(docs/diagnosis-2026-04-29/automation-summary.md):
+  //     "helpers가 self:any로 부모 인스턴스 통째로 받음 → 가짜 분리"
+  //   본 메서드는 helpers가 필요로 하는 최소 의존성만 노출하는 ports를 제공.
+  //   새 helpers 함수는 self:any 대신 이 context를 받도록 점진 전환.
+  createAutomationContext(): import('./automation/ports.js').AutomationContext {
+    const self = this;
+    return {
+      log: (message: string) => self.log(message),
+      delay: (ms: number) => self.delay(ms),
+      getFrame: () => self.getAttachedFrame(),
+      getPage: () => self.page!,
+      isCancelRequested: () => self.cancelRequested,
+      options: self.options as import('./automation/ports.js').AutomationOptionsView,
+    };
+  }
+
   async cancel(): Promise<void> {
     this.cancelRequested = true;
     this.log('⚠️ 자동화 취소 요청을 받았습니다.');
