@@ -225,6 +225,15 @@ export function registerSystemHandlers(ctx: IpcContext): void {
         return os.homedir();
     });
 
+    // ✅ [v2.7.59] 기본 이미지 저장 경로 (Downloads/naver-blog-images) — 설정 모달 첫 진입 시 자동 노출용
+    ipcMain.handle('path:getDefaultImageSavePath', async () => {
+        try {
+            return path.join(app.getPath('downloads'), 'naver-blog-images');
+        } catch {
+            return path.join(os.homedir(), 'Downloads', 'naver-blog-images');
+        }
+    });
+
     // ✅ LEWORD 실행 핸들러는 main.ts에서 등록 (leword:launch)
     // window:minimize 핸들러 제거됨 → 황금키워드 실행 버튼으로 교체
 

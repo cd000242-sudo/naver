@@ -580,7 +580,28 @@ export async function initPriceInfoModal(): Promise<void> {
     if (freeQuotaPublish) freeQuotaPublish.value = String((config as any).freeQuotaPublish ?? 2);
     if (freeQuotaContent) freeQuotaContent.value = String((config as any).freeQuotaContent ?? 5);
     if (freeQuotaMedia) freeQuotaMedia.value = String((config as any).freeQuotaMedia ?? 30);
-    if (customImageSavePathInput) customImageSavePathInput.value = config.customImageSavePath || '';
+    // ✅ [v2.7.59] 기본 이미지 저장 경로 자동 세팅 — config에 customImageSavePath 미지정 시 Downloads/naver-blog-images로 1회 채워서 저장
+    if (customImageSavePathInput) {
+      if (config.customImageSavePath && config.customImageSavePath.trim() !== '') {
+        customImageSavePathInput.value = config.customImageSavePath;
+      } else {
+        try {
+          const defaultPath = await (window as any).api?.getDefaultImageSavePath?.();
+          if (defaultPath) {
+            customImageSavePathInput.value = defaultPath;
+            // config 자동 영속화 — 이후 설정 모달 진입 시 동일 경로 즉시 표시
+            try {
+              await (window as any).api?.saveConfig?.({ ...config, customImageSavePath: defaultPath });
+              console.log(`[Settings] 📁 이미지 저장 경로 기본값 자동 세팅: ${defaultPath}`);
+            } catch (e) {
+              console.warn('[Settings] 기본 이미지 경로 자동 저장 실패 (무시):', e);
+            }
+          }
+        } catch (e) {
+          console.warn('[Settings] 기본 이미지 경로 IPC 실패 (무시):', e);
+        }
+      }
+    }
 
     try {
       if (externalApiCostConsent) externalApiCostConsent.checked = config.externalApiCostConsent === true;

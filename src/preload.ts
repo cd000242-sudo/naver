@@ -141,6 +141,8 @@ contextBridge.exposeInMainWorld('api', {
   resizeImage: (filePath: string, maxWidth: number, maxHeight: number): Promise<{ success: boolean; filePath?: string; message?: string }> => ipcRenderer.invoke('localFolder:resizeImage', filePath, maxWidth, maxHeight),
   deleteFile: (filePath: string): Promise<{ success: boolean; message?: string }> => ipcRenderer.invoke('file:deleteFile', filePath),
   getUserHomeDir: (): Promise<string> => ipcRenderer.invoke('os:homedir'),
+  // ✅ [v2.7.59] 기본 이미지 저장 경로 (Downloads/naver-blog-images)
+  getDefaultImageSavePath: (): Promise<string> => ipcRenderer.invoke('path:getDefaultImageSavePath'),
   openPath: (path: string): Promise<{ success: boolean; message?: string }> => ipcRenderer.invoke('shell:openPath', path),
 
   generateVeoVideo: (payload: {
