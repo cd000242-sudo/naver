@@ -3068,23 +3068,38 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
     scheduleTime: formData.scheduleTime,
   });
 
-  // ✅ [v2.7.50] FTC 단일 SSOT 함수 사용 (이전 33줄 분기 → 6줄)
-  //   reviewer 권고: "fullAutoFlow.ts/multiAccountManager.ts 양쪽 중복 → 4번째 분기 등장 시 재발 100%"
+  // ✅ [v2.7.55 핫픽스] FTC SSOT 인라인화
+  //   v2.7.50의 await import('../utils/ftcResolver.js')가 renderer 인라인 빌드에서
+  //   require()로 다운컴파일 → "require is not defined" 회귀 발생.
+  //   해결: 동적 import 제거하고 동일 SSOT 로직을 인라인. ftcResolver.ts는 main 측에서만 사용.
   const ftcCheckboxEl = document.getElementById('unified-ftc-disclosure') as HTMLInputElement;
   const ftcTextareaEl = document.getElementById('unified-ftc-text') as HTMLTextAreaElement;
-  const { resolveFtcSetting } = await import('../utils/ftcResolver.js');
-  const ftc = resolveFtcSetting({
-    contentMode: formData.contentMode,
-    uiCheckboxChecked: ftcCheckboxEl ? ftcCheckboxEl.checked : undefined,
-    uiTextValue: ftcTextareaEl?.value,
-  });
-  const ftcEnabled = ftc.enabled;
-  const finalContent = cleanedContent;
-  if (ftc.enabled && ftc.text) {
-    structuredContent.ftcDisclosure = ftc.text;
-    appendLog(`⚖️ 공정위 문구 설정됨 (${ftc.source}): "${ftc.text.substring(0, 30)}..."`);
+  const isAffiliateModeFtc = formData.contentMode === 'affiliate';
+  const storedFtcEnabled = localStorage.getItem('ftcDisclosureEnabled');
+  const DEFAULT_FTC_TEXT = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
+  let ftcEnabled: boolean;
+  let ftcSource: string;
+  if (ftcCheckboxEl) {
+    ftcEnabled = ftcCheckboxEl.checked;
+    ftcSource = 'checkbox';
+  } else if (storedFtcEnabled !== null) {
+    ftcEnabled = storedFtcEnabled === 'true';
+    ftcSource = 'localStorage';
   } else {
-    appendLog(`⏭️ 공정위 문구 비활성 (모드='${formData.contentMode || 'normal'}', 결정근거=${ftc.source})`);
+    ftcEnabled = isAffiliateModeFtc;
+    ftcSource = isAffiliateModeFtc ? 'mode-default-affiliate' : 'mode-default-other';
+  }
+  const ftcText = ftcEnabled
+    ? (ftcTextareaEl?.value?.trim()
+        || (localStorage.getItem('ftcDisclosureText') || '').trim()
+        || (isAffiliateModeFtc ? DEFAULT_FTC_TEXT : ''))
+    : '';
+  const finalContent = cleanedContent;
+  if (ftcEnabled && ftcText) {
+    structuredContent.ftcDisclosure = ftcText;
+    appendLog(`⚖️ 공정위 문구 설정됨 (${ftcSource}): "${ftcText.substring(0, 30)}..."`);
+  } else {
+    appendLog(`⏭️ 공정위 문구 비활성 (모드='${formData.contentMode || 'normal'}', 결정근거=${ftcSource})`);
   }
 
   // 자동화 페이로드 구성

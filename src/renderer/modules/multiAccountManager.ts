@@ -3131,19 +3131,21 @@ export async function initMultiAccountPublishModal() {
           structuredContent = contentResult.content;
           console.log('[FullAuto] 구조화된 콘텐츠:', structuredContent);
 
-          // ✅ [v2.7.50] FTC 단일 SSOT 함수 사용 — fullAutoFlow와 동일 로직 통합
+          // ✅ [v2.7.55 핫픽스] FTC SSOT 인라인화 (require is not defined 회귀 차단)
           {
-            const { resolveFtcSetting } = await import('../utils/ftcResolver.js');
-            const ftc = resolveFtcSetting({
-              contentMode: queueItem.contentMode,
-              // 다중계정은 UI 체크박스 직접 접근 안 함 → localStorage + mode default 흐름
-            });
-            if (ftc.enabled && ftc.text && structuredContent) {
-              structuredContent.ftcDisclosure = ftc.text;
-              addMALog(`⚖️ 공정위 문구 삽입됨 (${ftc.source}): "${ftc.text.substring(0, 30)}..."`, 'info');
-              console.log(`[FullAuto] ⚖️ 공정위 문구 structuredContent에 주입 완료`);
+            const _isAffiliateMode = queueItem.contentMode === 'affiliate';
+            const _stored = localStorage.getItem('ftcDisclosureEnabled');
+            const _ftcEnabled = _stored !== null ? (_stored === 'true') : _isAffiliateMode;
+            const _DEFAULT_FTC = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
+            const _ftcText = _ftcEnabled
+              ? ((localStorage.getItem('ftcDisclosureText') || '').trim() || (_isAffiliateMode ? _DEFAULT_FTC : ''))
+              : '';
+            const _ftcSource = _stored !== null ? 'localStorage' : (_isAffiliateMode ? 'mode-default-affiliate' : 'mode-default-other');
+            if (_ftcEnabled && _ftcText && structuredContent) {
+              structuredContent.ftcDisclosure = _ftcText;
+              addMALog(`⚖️ 공정위 문구 삽입됨 (${_ftcSource}): "${_ftcText.substring(0, 30)}..."`, 'info');
             } else {
-              console.log(`[FullAuto] ⏭️ 공정위 문구 비활성 (모드='${queueItem.contentMode || 'seo'}', 결정근거=${ftc.source})`);
+              console.log(`[FullAuto] ⏭️ 공정위 문구 비활성 (모드='${queueItem.contentMode || 'seo'}', 결정근거=${_ftcSource})`);
             }
           }
 
