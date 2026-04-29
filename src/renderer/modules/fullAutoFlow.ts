@@ -3068,34 +3068,23 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
     scheduleTime: formData.scheduleTime,
   });
 
-  // ✅ [v2.7.32] 공정위 문구 모드별 기본값
-  //   기본 정책: 쇼핑커넥트(affiliate)만 default ON, 그 외 모드(SEO/홈피드/일반)는 default OFF
-  //   사용자가 UI에서 명시적으로 체크/해제하면(localStorage 저장됨) 그 값을 최우선 사용
+  // ✅ [v2.7.50] FTC 단일 SSOT 함수 사용 (이전 33줄 분기 → 6줄)
+  //   reviewer 권고: "fullAutoFlow.ts/multiAccountManager.ts 양쪽 중복 → 4번째 분기 등장 시 재발 100%"
   const ftcCheckboxEl = document.getElementById('unified-ftc-disclosure') as HTMLInputElement;
   const ftcTextareaEl = document.getElementById('unified-ftc-text') as HTMLTextAreaElement;
-  const isAffiliateMode = formData.contentMode === 'affiliate';
-  const storedFtc = localStorage.getItem('ftcDisclosureEnabled');
-  let ftcEnabled: boolean;
-  if (ftcCheckboxEl) {
-    // 체크박스가 렌더되어 있으면 사용자 현재 UI 상태 우선
-    ftcEnabled = ftcCheckboxEl.checked;
-  } else if (storedFtc !== null) {
-    // 저장된 사용자 명시 값
-    ftcEnabled = storedFtc === 'true';
-  } else {
-    // 기본값: 쇼핑커넥트만 ON
-    ftcEnabled = isAffiliateMode;
-  }
-  const DEFAULT_FTC_TEXT = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
-  const ftcText = ftcTextareaEl?.value?.trim()
-    || localStorage.getItem('ftcDisclosureText')?.trim()
-    || (isAffiliateMode ? DEFAULT_FTC_TEXT : '');
+  const { resolveFtcSetting } = await import('../utils/ftcResolver.js');
+  const ftc = resolveFtcSetting({
+    contentMode: formData.contentMode,
+    uiCheckboxChecked: ftcCheckboxEl ? ftcCheckboxEl.checked : undefined,
+    uiTextValue: ftcTextareaEl?.value,
+  });
+  const ftcEnabled = ftc.enabled;
   const finalContent = cleanedContent;
-  if (ftcEnabled && ftcText) {
-    structuredContent.ftcDisclosure = ftcText;
-    appendLog(`⚖️ 공정위 문구 설정됨 (${isAffiliateMode ? '쇼핑커넥트 기본 ON' : '사용자 ON'}): "${ftcText.substring(0, 30)}..."`);
+  if (ftc.enabled && ftc.text) {
+    structuredContent.ftcDisclosure = ftc.text;
+    appendLog(`⚖️ 공정위 문구 설정됨 (${ftc.source}): "${ftc.text.substring(0, 30)}..."`);
   } else {
-    appendLog(`⏭️ 공정위 문구 비활성 (모드='${formData.contentMode || 'normal'}', 사용자=${ftcEnabled ? 'ON' : 'OFF'})`);
+    appendLog(`⏭️ 공정위 문구 비활성 (모드='${formData.contentMode || 'normal'}', 결정근거=${ftc.source})`);
   }
 
   // 자동화 페이로드 구성
