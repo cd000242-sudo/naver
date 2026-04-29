@@ -1599,6 +1599,9 @@ async function createWindow(): Promise<void> {
         webPreferences: {
           nodeIntegration: false,
           contextIsolation: true,
+          // ✅ [v2.7.56 SEC-V2-H1] sandbox 명시 (preload 단순한 IPC라 sandbox:true 안전)
+          sandbox: true,
+          webSecurity: true,
           preload: dialogPreloadPath,
         },
       });
@@ -5099,7 +5102,17 @@ registerLicenseHandlers(_earlyCtx);
 // ✅ app:getVersion — 로그인 창에서 버전 표시용 (systemHandlers는 app.whenReady() 이후에 등록)
 try { ipcMain.handle('app:getVersion', async () => app.getVersion()); } catch { /* 이미 등록됨 */ }
 // ✅ openExternalUrl — 로그인 창 구매문의 버튼용
-try { ipcMain.handle('openExternalUrl', async (_e: any, url: string) => { const { shell } = require('electron'); await shell.openExternal(url); }); } catch { /* 이미 등록됨 */ }
+try { ipcMain.handle('openExternalUrl', async (_e: any, url: string) => {
+  // ✅ [v2.7.56 SEC-V2-H3] file:/javascript: 차단
+  if (typeof url !== 'string' || !url) return;
+  const ALLOWED = ['http:', 'https:', 'mailto:'];
+  try {
+    const u = new URL(url);
+    if (!ALLOWED.includes(u.protocol)) { console.warn(`[SEC] 차단된 프로토콜: ${u.protocol}`); return; }
+  } catch { return; }
+  const { shell } = require('electron');
+  await shell.openExternal(url);
+}); } catch { /* 이미 등록됨 */ }
 // ✅ [2026-04-03] 트레이 아이콘화 — 렌더러에서 버튼 클릭 시 호출
 try { ipcMain.handle('app:minimize-to-tray', async () => {
   if (mainWindow && !mainWindow.isDestroyed()) {
@@ -8271,9 +8284,11 @@ async function createLoginWindow(): Promise<BrowserWindow> {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
+      // ✅ [v2.7.56 SEC-V2-H1] sandbox 명시
+      sandbox: true,
       preload: loginPreloadPath,
       webSecurity: true,
-      devTools: !app.isPackaged, // ✅ 프로덕션에서는 비활성화
+      devTools: !app.isPackaged,
     },
     title: '라이선스 인증',
     icon: resolveIconImage(),
@@ -8530,6 +8545,9 @@ async function showLicenseInputDialog(): Promise<string | null> {
       webPreferences: {
         nodeIntegration: false,
         contextIsolation: true,
+        // ✅ [v2.7.56 SEC-V2-H1] sandbox 명시
+        sandbox: true,
+        webSecurity: true,
         preload: licenseDialogPreloadPath,
       },
     });

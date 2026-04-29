@@ -158,9 +158,25 @@ export function registerSystemHandlers(ctx: IpcContext): void {
         }
     });
 
-    // ✅ [2026-03-13] 외부 URL 열기 (AdsPower 다운로드 등)
+    // ✅ [v2.7.56 SEC-V2-H3] 외부 URL 열기 — file:/javascript: 차단
+    //   security-auditor 진단: openExternalUrl이 임의 URL → shell.openExternal()
+    //   악용: file:///C:/sensitive/ 또는 javascript:alert(1) 호출 가능
+    //   수정: http(s)/mailto만 화이트리스트
     ipcMain.handle('open-external-url', async (_event, url: string) => {
         try {
+            if (typeof url !== 'string' || !url) {
+                return { success: false, message: 'URL이 필요합니다.' };
+            }
+            const ALLOWED_PROTOCOLS = ['http:', 'https:', 'mailto:'];
+            try {
+                const parsed = new URL(url);
+                if (!ALLOWED_PROTOCOLS.includes(parsed.protocol)) {
+                    console.warn(`[SEC] 허용되지 않은 URL 프로토콜 차단: ${parsed.protocol}`);
+                    return { success: false, message: '허용되지 않은 URL 형식입니다.' };
+                }
+            } catch {
+                return { success: false, message: 'URL 형식이 올바르지 않습니다.' };
+            }
             await shell.openExternal(url);
             return { success: true };
         } catch (error) {
