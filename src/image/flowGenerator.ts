@@ -418,7 +418,7 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
 
     if (!loginSuccess) {
         await loginCtx.close().catch(() => {});
-        throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인이 완료되지 않음 (창 닫힘 또는 5분 초과). 다시 시도해주세요.');
+        throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인 시간이 5분을 넘었습니다. 다시 [Flow 로그인] 버튼을 눌러주세요.');
     }
 
     flowLog('[Flow] ✅ 로그인 완료 — on-screen 닫고 off-screen 재시작');
@@ -457,7 +457,7 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
     const finalCheck = await isLoggedInToFlow(finalPage).catch(() => false);
     if (!finalCheck) {
         await finalCtx.close().catch(() => {});
-        throw new Error('FLOW_SESSION_LOST:로그인 후 off-screen 전환 시 세션 유실. 다시 시도해주세요.');
+        throw new Error('FLOW_SESSION_LOST:Google 세션이 끊겼습니다. 다시 [Flow 로그인]을 진행해주세요.');
     }
 
     sendImageLog('✅ [Flow] 숨김 모드 전환 완료 — 이미지 생성 준비됨');
@@ -603,7 +603,7 @@ async function ensureFlowProject(page: Page, forceNew: boolean = false): Promise
             return Array.from(document.querySelectorAll('button')).slice(0, 20).map(b => (b.textContent || '').trim().substring(0, 50));
         }).catch(() => []);
         flowError(`[Flow][1/3] ❌ "새 프로젝트" 버튼 못 찾음. DOM 버튼 상위 20개 ↓`, allButtons);
-        throw new Error(`FLOW_NEW_PROJECT_BUTTON_NOT_FOUND:labs.google/fx/tools/flow에서 "새 프로젝트" 버튼을 30초 내 찾지 못함. 페이지 구조 변경 또는 계정 권한 문제. 스크린샷 저장됨.`);
+        throw new Error(`FLOW_NEW_PROJECT_BUTTON_NOT_FOUND:Google Flow 페이지가 변경되었거나 계정 권한 문제로 보입니다. 1) 인터넷 연결 확인  2) 1시간 후 재시도  3) 계속 실패하면 다른 이미지 엔진을 선택해주세요.`);
     }
 
     await newProjectBtn.click();
@@ -640,7 +640,7 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
         await promptInput.waitFor({ state: 'visible', timeout: 15000 });
     } catch (err) {
         await saveDebugScreenshot(page, 'no-prompt-input');
-        throw new Error('FLOW_PROMPT_INPUT_NOT_FOUND:프롬프트 입력창(contenteditable)을 15초 내 찾지 못함.');
+        throw new Error('FLOW_PROMPT_INPUT_NOT_FOUND:Flow 프롬프트 입력창을 찾지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해주세요.');
     }
     await promptInput.click();
     // [v1.6.1] 포커스 안정화 150→50ms
@@ -799,7 +799,7 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
         }).catch(() => []);
         flowError('[Flow][3/3] ❌ 타임아웃 — 현재 DOM img 목록 ↓', allImgsDump);
         sendImageLog(`❌ [Flow] 이미지 감지 타임아웃 — DOM img ${allImgsDump.length}개 덤프`);
-        throw new Error(`FLOW_IMAGE_TIMEOUT:이미지 ${timeoutMs / 1000}초 초과. 스크린샷+img 목록 저장됨.`);
+        throw new Error(`FLOW_IMAGE_TIMEOUT:Flow 이미지 생성이 ${timeoutMs / 1000}초 안에 끝나지 않았습니다. 프롬프트를 단순화하거나 5분 후 다시 시도해주세요.`);
     } finally {
         clearInterval(logInterval);
     }
@@ -1280,7 +1280,7 @@ export async function generateWithFlow(
 
     if (results.length === 0) {
         if (firstCriticalError) throw firstCriticalError;
-        throw new Error('FLOW_ALL_FAILED:모든 이미지 생성 실패. 이전 로그 확인 필요.');
+        throw new Error('FLOW_ALL_FAILED:Flow 이미지 생성이 모두 실패했습니다. 1) Google 로그인 상태 확인  2) Flow 시간당 한도 확인  3) 다른 이미지 엔진(나노바나나/덕트테이프)을 선택해주세요.');
     }
     return results;
 }
