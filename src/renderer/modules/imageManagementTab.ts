@@ -458,7 +458,15 @@ export function initImageManagementTab(): void {
 
     // 초기화: 저장된 설정 복원 (풀오토 설정 우선)
     // ✅ [2026-03-02 FIX] fullAutoImageSource 우선 읽기 → 풀오토 이미지 설정이 이미지 관리 탭에도 반영
-    const savedSource = localStorage.getItem('fullAutoImageSource') || localStorage.getItem('globalImageSource');
+    let savedSource = localStorage.getItem('fullAutoImageSource') || localStorage.getItem('globalImageSource');
+    // ✅ [v2.7.57] 나노바나나2 → 나노바나나(통합) 마이그레이션
+    //   v2.7.16에 의도적으로 분리됐던 nano-banana-2 옵션이 v2.7.57에서 통합 — 세부 모델은 "이미지 모델 설정"에서 선택
+    if (savedSource === 'nano-banana-2') {
+      savedSource = 'nano-banana-pro';
+      localStorage.setItem('fullAutoImageSource', 'nano-banana-pro');
+      localStorage.setItem('globalImageSource', 'nano-banana-pro');
+      console.log('[ImageSource] 🔄 nano-banana-2 → nano-banana-pro 자동 마이그레이션');
+    }
     if (savedSource && imageSourceSelect.querySelector(`option[value="${savedSource}"]`)) {
       imageSourceSelect.value = savedSource;
       (window as any).globalImageSource = savedSource;
