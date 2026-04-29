@@ -540,6 +540,9 @@ export function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): vo
   const progressModal = document.getElementById('continuous-progress-modal');
   if (progressModal) progressModal.style.display = 'none';
 
+  // ✅ [v2.7.37] 발행 종료 시 floating 버튼도 제거
+  hideProgressFloatingButton();
+
   if (continuousInterval) {
     clearInterval(continuousInterval);
     continuousInterval = null;
@@ -2789,6 +2792,46 @@ function addItemToQueueV2Impl(): void {
 let currentQueuePageV2 = 0;
 const QUEUE_PAGE_SIZE = 5;
 
+// ✅ [v2.7.37] 연속발행 진행 모달이 닫혀도 다시 띄울 수 있는 floating 버튼
+//   사용자 보고: "프로세스 창을 닫기하면 발행은 계속되는데 다시 띄울 수가 없음"
+//   해결: 발행 시작 시 메인 우상단에 항상 보이는 버튼 추가. 클릭 시 모달 재표시.
+const PROGRESS_FLOATING_BTN_ID = 'continuous-progress-reopen-btn';
+
+function showProgressFloatingButton(): void {
+  if (document.getElementById(PROGRESS_FLOATING_BTN_ID)) return;
+  const btn = document.createElement('button');
+  btn.id = PROGRESS_FLOATING_BTN_ID;
+  btn.type = 'button';
+  btn.title = '연속 발행 진행 모달 다시 열기';
+  btn.innerHTML = '🪟 발행 진행 보기';
+  btn.style.cssText = [
+    'position: fixed',
+    'top: 16px',
+    'right: 16px',
+    'z-index: 29999',
+    'padding: 10px 16px',
+    'background: linear-gradient(135deg, #3b82f6, #2563eb)',
+    'color: white',
+    'border: none',
+    'border-radius: 999px',
+    'font-size: 13px',
+    'font-weight: 700',
+    'cursor: pointer',
+    'box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4)',
+    'animation: pulse 2s infinite',
+  ].join(';');
+  btn.addEventListener('click', () => {
+    const modal = document.getElementById('continuous-progress-modal');
+    if (modal) modal.style.display = 'flex';
+  });
+  document.body.appendChild(btn);
+}
+
+function hideProgressFloatingButton(): void {
+  const btn = document.getElementById(PROGRESS_FLOATING_BTN_ID);
+  if (btn) btn.remove();
+}
+
 const imageSourceNames: Record<string, string> = {
   'nano-banana-2': '🍌 나노바나나 (Gemini 2.5 Flash Image, ₩54/장) ★',
   'nano-banana-pro': '🍌🦍 나노바나나(고급 라벨) (현재 동일 모델, ₩54/장)',
@@ -3035,7 +3078,9 @@ function renderQueueListV2(): void {
         ` : ''}
       </div>
       <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">
-        <span style="color: ${item.publishMode === 'schedule' ? 'var(--primary)' : 'inherit'}; font-weight: ${item.publishMode === 'schedule' ? '600' : '400'};">
+        <span style="${item.publishMode === 'schedule'
+          ? 'color: #fbbf24; font-weight: 700; padding: 2px 8px; background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 4px;'
+          : 'color: #f3f4f6; font-weight: 500;'}">
           ${publishModeNames[item.publishMode] || '🚀 즉시'}
           ${item.publishMode === 'schedule' && (item.scheduleDate || item.scheduleTime) ? ` (${item.scheduleTime || (item.scheduleDate?.includes('T') ? item.scheduleDate.split('T')[1]?.substring(0, 5) : '')})` : ''}
         </span>
@@ -4041,6 +4086,11 @@ async function startContinuousPublishingV2(): Promise<void> {
   // ✅ 진행 모달 표시
   const progressModal = document.getElementById('continuous-progress-modal');
   if (progressModal) progressModal.style.display = 'flex';
+
+  // ✅ [v2.7.37] 발행 모달이 닫혀도 다시 띄울 수 있도록 floating 버튼 추가
+  //   사용자 보고: "닫기하면 다시 띄울 수 없음". 발행은 백그라운드 진행되지만 진행 보기 불가.
+  //   해결: 메인 우상단에 항상 보이는 floating 버튼. 발행 종료 시 자동 제거.
+  showProgressFloatingButton();
 
   // 초기화
   let successCount = 0;

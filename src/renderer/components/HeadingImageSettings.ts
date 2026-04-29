@@ -808,11 +808,6 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노바나나 ★</div>
             <div style="font-size: 10px; color: #a16207;">Gemini 2.5 Flash Image | ₩54/장</div>
           </label>
-          <label class="source-option" data-value="nano-banana-pro" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fde68a, #fcd34d); text-align: center; transition: all 0.2s;">
-            <div style="font-size: 1.5rem;">🍌🦍</div>
-            <div style="font-size: 12px; font-weight: 600; color: #78350f;">나노바나나(고급 라벨)</div>
-            <div style="font-size: 10px; color: #b45309;">현재 동일 모델 통합 | ₩54/장</div>
-          </label>
           <label class="source-option" data-value="deepinfra" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #d1fae5, #6ee7b7); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🚀</div>
             <div style="font-size: 12px; font-weight: 600; color: #047857;">FLUX-2</div>
@@ -1132,7 +1127,6 @@ export function createHeadingImageModal(): void {
               <select id="test-engine-select" style="width: 100%; padding: 10px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; color: #374151; background: white; cursor: pointer; transition: border-color 0.2s;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e5e7eb'">
                 <option value="">📌 현재 저장된 엔진 사용</option>
                 <option value="nano-banana-2">🍌 나노바나나 (Gemini 2.5 Flash Image, ₩54/장) ★추천</option>
-                <option value="nano-banana-pro">🍌🦍 나노바나나(고급 라벨) (현재 동일 모델, ₩54/장)</option>
                 <option value="dall-e-3">🎨 DALL-E 3 (OpenAI, 인증 불필요)</option>
                 <option value="flow">🍌 Flow (Nano Banana 2, AI Pro 무료)</option>
                 <option value="imagefx">✨ ImageFX (Google 무료)</option>

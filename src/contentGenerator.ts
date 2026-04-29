@@ -8284,14 +8284,29 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
           );
         }
 
-        // 3) 모델 없음 → 다음 모델로 즉시 이동 (재시도 불필요)
-        // ✅ FIX: 이전에는 errorMessage.includes('model')만으로 매칭 → 너무 광범위
+        // 3) 모델 없음/접근 불가 → 즉시 throw with 친절 안내 (v2.7.37)
         const isModelNotFound = (errorMessage.includes('not_found') && errorMessage.includes('model')) ||
           (errorMessage.includes('404') && (errorMessage.includes('model') || errorStr.includes('not_found'))) ||
-          errorMessage.includes('does not exist');
+          errorMessage.includes('does not exist') ||
+          errorMessage.includes('does not have access');
         if (isModelNotFound) {
+          // ✅ [v2.7.37] sonnet/opus 안 됨 보고 대응 — 친절 진단 메시지
+          const isSonnetOrOpus = modelName.includes('sonnet') || modelName.includes('opus');
+          if (isSonnetOrOpus) {
+            throw new Error(
+              `Claude ${modelName} 모델에 접근할 수 없습니다.\n` +
+              `\n` +
+              `가능한 원인:\n` +
+              `1. Anthropic Console(console.anthropic.com)에 로그인 → Settings → Plan 확인\n` +
+              `2. 무료/체험 등급 키는 Sonnet/Opus 미접근. 유료 결제 필요\n` +
+              `3. 신규 모델은 활성화 신청 필요할 수 있음 (workspace 설정)\n` +
+              `4. Claude Haiku는 작동 확인됨 — 같은 키로 Haiku 사용 또는 Console에서 권한 확인\n` +
+              `\n` +
+              `원본 오류: ${(error as Error).message}`
+            );
+          }
           console.log(`[Claude] ⚠️ 모델 ${modelName} 없음, 다음 모델 시도`);
-          break; // 이 모델의 재시도 루프 탈출 → 다음 모델
+          break;
         }
 
         // 4) 재시도 가능한 에러 → 대기 후 재시도 (같은 모델 또는 다음 모델)
