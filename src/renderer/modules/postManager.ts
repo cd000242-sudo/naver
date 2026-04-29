@@ -413,21 +413,24 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
     const posts = loadGeneratedPosts();
     const title = structuredContent.selectedTitle || '';
 
-    // ✅ [v2.7.40] 중복 가드 완화 — 60초 → 5초 + 본문 hash 비교
-    //   사용자 보고: "글이 자꾸 생성된 글목록에 제대로 안 나옴"
-    //   원인: 연속 발행으로 같은 키워드 글 빠르게 생성 시 60초 이내 같은 제목 → 중복 판정 → 누락
-    //   수정: 빠른 더블클릭만 차단(5초) + 본문 길이 동일 케이스만 중복 처리
+    // ✅ [v2.7.44] reviewer 권고 #2 — Math.abs/Math.max divide-by-zero 가드 강화
+    //   기존(v2.7.40): newBodyLen=0 또는 existingBodyLen=0이면 similarLength=false → 가드 무력화
+    //   수정: 본문 길이 양쪽 모두 30자 이상일 때만 비교, 그 외엔 제목+5초만으로 더블클릭 방지
     if (!isUpdate && title) {
       const now = Date.now();
       const newBodyLen = (structuredContent.bodyPlain || structuredContent.content || '').length;
       const recentPost = posts.find(p => {
         const createdAt = new Date(p.createdAt).getTime();
-        const isVeryRecent = (now - createdAt) < 5000; // ✅ 60초 → 5초 (더블클릭만 방지)
+        const isVeryRecent = (now - createdAt) < 5000;
         const sameTitle = p.title === title;
-        // 본문 길이도 ±5% 이내여야 진짜 중복으로 간주 (다른 글일 가능성 배제)
         const existingBodyLen = (p.content || '').length;
-        const similarLength = newBodyLen > 0 && existingBodyLen > 0
-          && Math.abs(newBodyLen - existingBodyLen) / Math.max(newBodyLen, existingBodyLen) < 0.05;
+        // 본문이 짧으면(< 30자) 길이 비교 대신 제목+5초만으로 중복 판정
+        // 본문이 충분히 길면(양쪽 ≥ 30자) ±5% 이내 길이만 진짜 중복으로 간주
+        const bothBodiesPresent = newBodyLen >= 30 && existingBodyLen >= 30;
+        const denom = Math.max(newBodyLen, existingBodyLen) || 1; // 0 분모 방지
+        const similarLength = bothBodiesPresent
+          ? (Math.abs(newBodyLen - existingBodyLen) / denom < 0.05)
+          : true; // 길이 비교 불가 → 제목 + 5초만으로 판정
         return isVeryRecent && sameTitle && similarLength;
       });
 

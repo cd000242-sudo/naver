@@ -87,6 +87,11 @@ export async function generateWithOpenAIImage(
     // 같은 키로 같은 에러를 만나므로 재시도 시간 낭비 방지. 마지막 에러는
     // 함수 throw에 전달돼 dispatcher가 친절한 메시지로 변환한다.
     let firstFatalError: any = null;
+    // ✅ [v2.7.44] reviewer 권고 #2 — globalThis 안티패턴 제거
+    //   기존: globalThis.__lastOpenAIError에 마지막 axios 에러 저장 → 동시 발행 2개 시
+    //         후속 호출이 앞 호출 에러를 덮어써 잘못된 메시지 표시
+    //   수정: 함수 스코프 클로저 변수로 격리 (각 generateWithOpenAIImage 호출이 자체 보존)
+    let lastApiErrorRef: any = null;
 
     for (let i = 0; i < items.length; i++) {
         if (AutomationService.isCancelRequested()) {
@@ -261,8 +266,8 @@ export async function generateWithOpenAIImage(
 
                 } catch (apiError: any) {
                     lastError = apiError;
-                    // ✅ [v2.7.33] 마지막 에러를 글로벌에 보존해 0건 throw 시 메시지에 포함
-                    (globalThis as any).__lastOpenAIError = apiError;
+                    // ✅ [v2.7.44] 함수 스코프 클로저로 보존 (globalThis 안티패턴 제거)
+                    lastApiErrorRef = apiError;
                     const status = apiError.response?.status;
                     const errMsg = apiError.response?.data?.error?.message || apiError.message || 'unknown';
                     const errCode = apiError.response?.data?.error?.code || '';
@@ -309,16 +314,11 @@ export async function generateWithOpenAIImage(
 
     console.log(`[OpenAI-Image] 📊 최종 결과: ${results.length}/${items.length}개 생성 완료`);
 
-    // ✅ [v2.7.33] 0건 시 마지막 실패 사유(status / API 메시지)를 throw 메시지에 포함 →
-    //   사용자가 콘솔 안 봐도 모달/로그에서 즉시 원인 파악 가능
+    // ✅ [v2.7.44] 함수 스코프 lastApiErrorRef 사용 (멀티 호출 충돌 차단)
     if (results.length === 0) {
         if (firstFatalError) throw firstFatalError;
-        // 마지막 시도의 axios 에러를 상세 메시지로 변환
-        const lastErrAny: any = (typeof (globalThis as any).__lastOpenAIError !== 'undefined')
-            ? (globalThis as any).__lastOpenAIError
-            : null;
-        const status = lastErrAny?.response?.status;
-        const apiMsg = lastErrAny?.response?.data?.error?.message || lastErrAny?.message;
+        const status = lastApiErrorRef?.response?.status;
+        const apiMsg = lastApiErrorRef?.response?.data?.error?.message || lastApiErrorRef?.message;
         const detail = status || apiMsg
             ? ` 마지막 실패: status=${status || 'n/a'}, message="${(apiMsg || '').substring(0, 200)}"`
             : '';

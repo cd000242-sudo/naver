@@ -1,8 +1,30 @@
 /**
  * ✅ [2026-01-25 모듈화] UI 매니저 클래스
- * 
+ *
  * ToastManager, LoadingManager, AnimationHelper
  */
+
+// ✅ [v2.7.44] 사용자 노출 메시지 친화화 (renderer 인라인 — main의 userMessageMapper와 동일 로직)
+//   reviewer 권고 #4: userMessageMapper.ts 신설했으나 적용 0% → 단일 지점 적용
+const FRIENDLY_PREFIX_STRIP = /^(FLOW_[A-Z_]+|NAVER_[A-Z_]+|HTTP_\d+|AdsPower\s+API\s+HTTP\s+\d+):?\s*/;
+const FRIENDLY_KEYWORDS: Array<[RegExp, string]> = [
+    [/Access Denied/gi, '네이버가 봇 차단했습니다 (5~10분 후 재시도 또는 IP 변경)'],
+    [/\bENOENT\b/gi, '파일을 찾을 수 없습니다'],
+    [/\bEACCES\b/gi, '파일 접근 권한이 없습니다'],
+    [/Invalid JSONP response format/gi, '네이버 응답 형식이 변경되었습니다. 패치를 기다려주세요'],
+    [/Invalid state\b/gi, '내부 상태 오류 (앱 재시작 권장)'],
+    [/원인 불명|알 수 없는 오류|unknown error|Unknown error|\bunknown\b/gi, '잠시 후 다시 시도하거나 다른 옵션을 선택해주세요'],
+];
+function toUserFriendlyMessage(input: string): string {
+    let msg = String(input || '').trim();
+    if (!msg) return '잠시 후 다시 시도해주세요.';
+    msg = msg.replace(FRIENDLY_PREFIX_STRIP, '');
+    for (const [pattern, replacement] of FRIENDLY_KEYWORDS) {
+        msg = msg.replace(pattern, replacement);
+    }
+    msg = msg.replace(/\s*[a-zA-Z][a-zA-Z0-9]*\(\)을?를?\s*먼저\s*호출하세요\.?/g, '');
+    return msg;
+}
 
 // 로딩 표시 관리
 export class LoadingManager {
@@ -157,11 +179,15 @@ export class ToastManager {
     }
 
     error(message: string, duration?: number): void {
-        this.show(message, 'error', duration);
+        // ✅ [v2.7.44] reviewer 권고 #4 — userMessageMapper 실제 적용
+        //   디버그 prefix(FLOW_*/HTTP_*/NAVER_*) 자동 strip + 영문 jargon 한국어 변환
+        //   toastManager.error 단일 지점이라 여기에 적용하면 1,644개 메시지 대부분 친화화
+        this.show(toUserFriendlyMessage(message), 'error', duration);
     }
 
     warning(message: string, duration?: number): void {
-        this.show(message, 'warning', duration);
+        // ✅ [v2.7.44] warning도 동일 친화화
+        this.show(toUserFriendlyMessage(message), 'warning', duration);
     }
 
     info(message: string, duration?: number): void {
