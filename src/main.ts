@@ -1640,10 +1640,36 @@ async function createWindow(): Promise<void> {
     });
 
     // ✅ [2026-02-27] 윈도우 포커스 시 webContents에도 포커스 전달
-    // 다이얼로그, 트레이, 알림 등으로 포커스를 잃은 후
-    // 다시 클릭할 때 입력 필드가 즉시 반응하도록 보장
     mainWindow.on('focus', () => {
       mainWindow?.webContents.focus();
+      // ✅ [v2.7.46] 게임 모드 친화: 포커스 복귀 시 watchdog 재개
+      try {
+        const { setWatchdogActive } = require('./diagnostics/eventLoopWatchdog.js');
+        setWatchdogActive(true);
+      } catch { /* ignore */ }
+    });
+
+    // ✅ [v2.7.46] blur/minimize 시 watchdog 일시 중단
+    //   사용자 보고: "서든어택 게임 중 작업표시줄 깜빡임"
+    //   원인 추정: 백그라운드 setInterval + fs sync 쓰기가 fullscreen 게임 충돌
+    //   해결: 사용자가 다른 앱/게임 사용 중이면 watchdog 자동 일시 중단
+    mainWindow.on('blur', () => {
+      try {
+        const { setWatchdogActive } = require('./diagnostics/eventLoopWatchdog.js');
+        setWatchdogActive(false);
+      } catch { /* ignore */ }
+    });
+    mainWindow.on('minimize', () => {
+      try {
+        const { setWatchdogActive } = require('./diagnostics/eventLoopWatchdog.js');
+        setWatchdogActive(false);
+      } catch { /* ignore */ }
+    });
+    mainWindow.on('restore', () => {
+      try {
+        const { setWatchdogActive } = require('./diagnostics/eventLoopWatchdog.js');
+        setWatchdogActive(true);
+      } catch { /* ignore */ }
     });
 
     mainWindow.on('closed', () => {
