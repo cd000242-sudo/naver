@@ -413,20 +413,28 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
     const posts = loadGeneratedPosts();
     const title = structuredContent.selectedTitle || '';
 
-    // ✅ 중복 저장 방지: 같은 제목의 글이 60초 이내에 저장되었으면 해당 postId 재사용
+    // ✅ [v2.7.40] 중복 가드 완화 — 60초 → 5초 + 본문 hash 비교
+    //   사용자 보고: "글이 자꾸 생성된 글목록에 제대로 안 나옴"
+    //   원인: 연속 발행으로 같은 키워드 글 빠르게 생성 시 60초 이내 같은 제목 → 중복 판정 → 누락
+    //   수정: 빠른 더블클릭만 차단(5초) + 본문 길이 동일 케이스만 중복 처리
     if (!isUpdate && title) {
       const now = Date.now();
+      const newBodyLen = (structuredContent.bodyPlain || structuredContent.content || '').length;
       const recentPost = posts.find(p => {
         const createdAt = new Date(p.createdAt).getTime();
-        const isRecent = (now - createdAt) < 60000; // 60초 이내
+        const isVeryRecent = (now - createdAt) < 5000; // ✅ 60초 → 5초 (더블클릭만 방지)
         const sameTitle = p.title === title;
-        return isRecent && sameTitle;
+        // 본문 길이도 ±5% 이내여야 진짜 중복으로 간주 (다른 글일 가능성 배제)
+        const existingBodyLen = (p.content || '').length;
+        const similarLength = newBodyLen > 0 && existingBodyLen > 0
+          && Math.abs(newBodyLen - existingBodyLen) / Math.max(newBodyLen, existingBodyLen) < 0.05;
+        return isVeryRecent && sameTitle && similarLength;
       });
 
       if (recentPost) {
-        console.log(`[saveGeneratedPost] 중복 방지: 같은 제목의 글이 최근에 저장됨 (ID: ${recentPost.id})`);
+        console.log(`[saveGeneratedPost] 중복 방지(5초+본문동일): 기존 ID ${recentPost.id} 재사용`);
         currentPostId = recentPost.id;
-        return recentPost.id; // 기존 postId 반환 (새로 저장하지 않음)
+        return recentPost.id;
       }
     }
 
@@ -544,12 +552,19 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
       posts[existingIndex] = post; // 기존 글 업데이트
     } else {
       posts.unshift(post); // 최신 글을 맨 위에
-      if (posts.length > 100) posts.pop(); // 최대 100개만 저장
+      // ✅ [v2.7.40] 100개 → 300개 (30개/일 × 10일 보존). localStorage 용량 압박 시 quota 핸들러가 처리
+      if (posts.length > 300) posts.pop();
     }
 
     // ✅ [2026-01-24 FIX] 전역 저장소에 저장 (계정별 분리 제거)
-    safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
-    appendLog(`💾 생성된 글이 목록에 저장되었습니다. (ID: ${postId})`);
+    const setOk = safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+    // ✅ [v2.7.40] 저장 실패 시 silent 통과하지 않고 사용자 알림
+    if (setOk === false) {
+      console.warn(`[saveGeneratedPost] ⚠️ localStorage 저장 실패 (quota 초과 가능). postId=${postId}`);
+      appendLog(`⚠️ 글 저장 실패 (저장 공간 부족). 글 목록에서 옛 글 삭제 후 다시 시도해주세요.`);
+    } else {
+      appendLog(`💾 생성된 글이 목록에 저장되었습니다. (ID: ${postId}, 총 ${posts.length}개)`);
+    }
 
     // ✅ [2026-01-23 FIX] 저장 후 UI 갱신 (모든 발행 모드에서 글 목록 반영)
     try {
