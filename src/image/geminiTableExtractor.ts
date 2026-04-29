@@ -3,6 +3,8 @@
  * - 크롤링 데이터 + 본문에서 스펙/장단점 JSON 추출
  * - 표 이미지 생성을 위한 구조화된 데이터 제공
  */
+// ✅ [v2.7.52] modelRegistry SSOT
+import { GEMINI_TEXT_MODELS } from '../runtime/modelRegistry.js';
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
@@ -37,7 +39,7 @@ export async function extractSpecsWithGemini(
 
     try {
         const genAI = new GoogleGenerativeAI(key);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+        const model = genAI.getGenerativeModel({ model: GEMINI_TEXT_MODELS.FLASH });
 
         // ✅ [2026-03-04 FIX] crawledData가 문자열이면 그대로, 객체면 JSON.stringify
         // 기존: 문자열도 JSON.stringify → 이스케이프된 "\\n" 형태로 Gemini에 전달되어 가격 인식 실패
@@ -112,7 +114,7 @@ export async function extractProsConsWithGemini(
 
     try {
         const genAI = new GoogleGenerativeAI(key);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+        const model = genAI.getGenerativeModel({ model: GEMINI_TEXT_MODELS.FLASH });
 
         const prompt = `
 당신은 객관적인 제품 리뷰어입니다.

@@ -2,6 +2,8 @@
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { loadConfig } from '../configManager.js';
+// ✅ [v2.7.52] modelRegistry SSOT
+import { GEMINI_TEXT_MODELS } from '../runtime/modelRegistry.js';
 
 // ==================== 타입 정의 ====================
 
@@ -222,7 +224,7 @@ export class CommentCrawler {
       ].join('\n');
 
       const genAI = new GoogleGenerativeAI(resolvedKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+      const model = genAI.getGenerativeModel({ model: GEMINI_TEXT_MODELS.FLASH });
       const result = await model.generateContent(prompt);
       const text = result.response.text().trim();
 

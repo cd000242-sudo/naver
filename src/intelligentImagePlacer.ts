@@ -3,6 +3,9 @@
 // 풀오토: AI가 소제목 분석 후 최적 이미지 자동 선택
 // 반자동: 사용자 선택 후 원하는 위치에 자동 삽입
 
+// ✅ [v2.7.52] modelRegistry SSOT
+import { GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
+
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // ============================================
@@ -54,7 +57,7 @@ export class IntelligentImagePlacer {
   constructor(geminiApiKey: string) {
     this.genAI = new GoogleGenerativeAI(geminiApiKey);
     this.model = this.genAI.getGenerativeModel({
-      model: 'gemini-2.5-flash',  // ✅ [2026-03-05] 기본 모델을 2.5-flash로 변경 (속도 우선)
+      model: GEMINI_TEXT_MODELS.FLASH,  // ✅ [v2.7.52] modelRegistry SSOT
     });
   }
 

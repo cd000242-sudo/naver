@@ -34,9 +34,12 @@ describe('v1.4.77 — 실존 모델 ID 매트릭스 (2026-04)', () => {
       }
     });
 
-    it("번역·이미지 분석은 gpt-4.1-mini로 교체됨", () => {
-      expect(read('main/utils/mainPromptInference.ts')).toMatch(/model:\s*['"]gpt-4\.1-mini['"]/);
-      expect(read('image/shoppingImageAnalyzer.ts')).toMatch(/model:\s*['"]gpt-4\.1-mini['"]/);
+    it("번역·이미지 분석은 gpt-4.1-mini로 교체됨 (literal 또는 modelRegistry SSOT)", () => {
+      // ✅ [v2.7.52] modelRegistry import도 인정 (OPENAI_TEXT_MODELS.GPT_41_MINI)
+      const promptInference = read('main/utils/mainPromptInference.ts');
+      expect(promptInference).toMatch(/model:\s*(?:['"]gpt-4\.1-mini['"]|OPENAI_TEXT_MODELS\.GPT_41_MINI)/);
+      const shoppingAnalyzer = read('image/shoppingImageAnalyzer.ts');
+      expect(shoppingAnalyzer).toMatch(/model:\s*(?:['"]gpt-4\.1-mini['"]|OPENAI_TEXT_MODELS\.GPT_41_MINI)/);
     });
 
     it("DALL-E 3 직접 호출 없음 (2026-05-12 제거 예정)", () => {

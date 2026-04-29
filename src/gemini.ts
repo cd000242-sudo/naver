@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai';
 import { buildSystemPromptFromHint, type PromptMode } from './promptLoader.js';
 import { loadConfig, saveConfig } from './configManager.js';
+import { GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
 
 // ==================== 타입 정의 ====================
 
@@ -571,7 +572,7 @@ export async function optimizeImageSearchQuery(
   try {
     const client = getClient(apiKey);
     const model = client.getGenerativeModel({
-      model: 'gemini-2.5-flash',  // 빠른 모델 사용
+      model: GEMINI_TEXT_MODELS.FLASH,  // ✅ [v2.7.52] modelRegistry SSOT
       generationConfig: {
         temperature: 0.3,  // 정확성 우선
         maxOutputTokens: 200,
@@ -678,7 +679,7 @@ export async function extractCoreSubject(
   try {
     const client = getClient(apiKey);
     const model = client.getGenerativeModel({
-      model: 'gemini-2.5-flash',
+      model: GEMINI_TEXT_MODELS.FLASH,
       generationConfig: {
         temperature: 0.2,
         maxOutputTokens: 50,
@@ -746,7 +747,7 @@ export async function batchOptimizeImageSearchQueries(
   try {
     const client = getClient(apiKey);
     const model = client.getGenerativeModel({
-      model: 'gemini-2.5-flash',
+      model: GEMINI_TEXT_MODELS.FLASH,
       generationConfig: {
         temperature: 0.3,
         maxOutputTokens: 500,

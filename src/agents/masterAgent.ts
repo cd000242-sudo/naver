@@ -2,6 +2,8 @@
  * 마스터 에이전트 - 모든 에이전트의 오케스트레이터
  * Refactored: Intent 분류를 intentMatcher 모듈로 분리
  */
+// ✅ [v2.7.52] modelRegistry SSOT
+import { GEMINI_TEXT_MODELS } from '../runtime/modelRegistry.js';
 
 import { AgentResult, ClassificationResult } from './types.js';
 import { ChatContext, chatContext } from './chatContext.js';
@@ -1414,7 +1416,7 @@ AI 이미지 생성 엔진을 선택하세요
   ): Promise<{ success: boolean; keywords: { keyword: string; reason?: string }[] }> {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+      const model = genAI.getGenerativeModel({ model: GEMINI_TEXT_MODELS.FLASH });
 
       const now = new Date();
       const dateStr = `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일`;

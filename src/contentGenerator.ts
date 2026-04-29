@@ -2,6 +2,8 @@ import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
 // ✅ [2026-01-25] Perplexity 추가
 import { generatePerplexityContent, translatePerplexityError } from './perplexity.js';
+// ✅ [v2.7.52] modelRegistry SSOT
+import { CLAUDE_MODELS, GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
 
 import JSON5 from 'json5';
 import { getGeminiModel } from './gemini.js';
@@ -8107,17 +8109,17 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
   let claudeModels: string[];
   if (uiSelectedModel === 'claude-haiku') {
-    claudeModels = ['claude-haiku-4-5-20251001'];
+    claudeModels = [CLAUDE_MODELS.HAIKU];
     console.log('[Claude] 💜 UI 선택: Claude Haiku 4.5 (가성비 모드) — 폴백 없음');
   } else if (uiSelectedModel === 'claude-sonnet') {
-    claudeModels = ['claude-sonnet-4-6'];
+    claudeModels = [CLAUDE_MODELS.SONNET];
     console.log('[Claude] 📜 UI 선택: Claude Sonnet 4.6 (균형 모드) — 폴백 없음');
   } else if (uiSelectedModel === 'claude-opus') {
-    claudeModels = ['claude-opus-4-7'];
+    claudeModels = [CLAUDE_MODELS.OPUS];
     console.log('[Claude] 👑 UI 선택: Claude Opus 4.7 (최고 성능 모드) — 폴백 없음');
   } else {
     // 기본 (claude provider로 왔지만 specific 모델 미지정)
-    claudeModels = ['claude-sonnet-4-6'];
+    claudeModels = [CLAUDE_MODELS.SONNET];
     console.log('[Claude] ✨ 기본 모드: Claude Sonnet 4.6');
   }
 
@@ -8430,7 +8432,7 @@ URL: (실제 URL)
 `.trim();
 
     const model = client.getGenerativeModel({
-      model: 'gemini-2.5-flash',
+      model: GEMINI_TEXT_MODELS.FLASH,
       // @ts-ignore
       tools: [{ googleSearch: {} }],
     });

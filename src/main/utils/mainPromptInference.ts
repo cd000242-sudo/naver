@@ -5,6 +5,8 @@
 // ═══════════════════════════════════════════════════════════════════
 
 import { loadConfig } from '../../configManager.js';
+// ✅ [v2.7.52] modelRegistry SSOT
+import { OPENAI_TEXT_MODELS, CLAUDE_MODELS } from '../../runtime/modelRegistry.js';
 
 // ✅ 프롬프트 캐시 (최대 100개)
 const _mainPromptCache = new Map<string, string>();
@@ -95,7 +97,7 @@ async function tryOpenAI(headingText: string, imageStyle?: string, apiKey?: stri
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
       body: JSON.stringify({
         // ✅ [v1.4.77] gpt-4o-mini → gpt-4.1-mini (2026-03-31 sunset 회피, 동급 가성비)
-        model: 'gpt-4.1-mini',
+        model: OPENAI_TEXT_MODELS.GPT_41_MINI,
         messages: [
           { role: 'system', content: `You are an expert AI image prompt engineer for ${imageStyle || 'realistic'} style. Output ONLY the English prompt.` },
           { role: 'user', content: getTranslationPrompt(headingText, imageStyle) },
@@ -124,7 +126,7 @@ async function tryClaude(headingText: string, imageStyle?: string, apiKey?: stri
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001', // ✅ [v1.4.44] 프롬프트 번역은 Haiku로 충분 (비용 1/5)
+        model: CLAUDE_MODELS.HAIKU, // ✅ [v2.7.52] modelRegistry SSOT — Haiku는 Sonnet/Opus 대비 비용 1/5
         max_tokens: 200,
         messages: [{ role: 'user', content: getTranslationPrompt(headingText, imageStyle) }],
       }),
