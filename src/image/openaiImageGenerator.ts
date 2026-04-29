@@ -163,12 +163,20 @@ export async function generateWithOpenAIImage(
                     const isDallE3 = currentModel === 'dall-e-3';
                     const dalle3Size = imageRatio === '16:9' || imageRatio === '4:3'
                         ? '1792x1024' : (imageRatio === '9:16' || imageRatio === '3:4' ? '1024x1792' : '1024x1024');
+                    // ✅ [v2.7.36] quality='auto' → 'medium' 강제
+                    //   사용자 보고: $13에 글 10개 = 장당 $0.186 (high quality와 정확 일치).
+                    //   원인: 'auto'가 신규 키/복잡 프롬프트/img2img 시 high를 자동 선택.
+                    //   수정: 'medium' 명시 강제 → 장당 ~$0.042 (4배 절감)
+                    //   사용자가 (config as any).openaiImageQuality로 'low'/'high' 선택 가능.
+                    const userQuality = (config as any).openaiImageQuality;
+                    const validQualities = ['low', 'medium', 'high', 'auto'];
+                    const finalQuality = validQualities.includes(userQuality) ? userQuality : 'medium';
                     const requestBody: any = {
                         model: currentModel,
                         prompt: prompt,
                         n: 1,
                         size: isDallE3 ? dalle3Size : size,
-                        quality: isDallE3 ? 'standard' : 'auto',
+                        quality: isDallE3 ? 'standard' : finalQuality,
                     };
                     if (isDallE3) {
                         requestBody.response_format = 'b64_json'; // dall-e-3는 명시 필요
@@ -335,7 +343,7 @@ export async function generateSingleOpenAIImage(
                 prompt: options.prompt,
                 n: 1,
                 size: options.size || '1024x1024',
-                quality: 'auto',
+                quality: 'medium', // ✅ [v2.7.36] 단일 이미지 진단 호출도 medium 고정 (비용 4배 절감)
             },
             {
                 headers: {
