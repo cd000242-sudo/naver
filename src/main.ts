@@ -2366,9 +2366,40 @@ ipcMain.handle('file:readDir', async (_event, dirPath: string) => {
 });
 
 ipcMain.handle('file:deleteFolder', async (_event, folderPath: string) => {
+  // ✅ [v2.7.43 SEC-V2-C1 CRITICAL 패치] Command Injection 차단
+  //   기존: execSync(`rmdir /s /q "${folderPath}"`) — 사용자 입력 직접 보간
+  //         경로에 `" && <명령>` 삽입 시 임의 명령 실행 가능
+  //   수정 1: 화이트리스트 디렉토리 검증 (앱 데이터/사용자 임시/사용자 폴더 하위만)
+  //   수정 2: execSync 폴백 → spawn with array args (셸 보간 차단)
   try {
+    if (typeof folderPath !== 'string' || !folderPath || folderPath.length > 500) {
+      console.error('[File] deleteFolder 거부: 경로 형식 오류');
+      return false;
+    }
+    // 위험 문자 차단 (셸 메타·NULL byte)
+    if (/[\x00<>|&;`$"]/.test(folderPath)) {
+      console.error('[File] deleteFolder 거부: 위험 문자 포함');
+      return false;
+    }
+    // 화이트리스트: 앱 데이터·사용자 임시·사용자 홈 하위만 허용
+    const path = await import('path');
+    const os = await import('os');
+    const norm = path.resolve(folderPath);
+    const allowedRoots = [
+      path.resolve(os.tmpdir()),
+      path.resolve(process.env.LOCALAPPDATA || os.homedir()),
+      path.resolve(process.env.APPDATA || os.homedir()),
+      path.resolve(os.homedir(), 'Desktop'),
+      path.resolve(os.homedir(), 'Documents'),
+      path.resolve(os.homedir(), 'Downloads'),
+    ].filter(Boolean);
+    const isAllowed = allowedRoots.some((root) => norm.startsWith(root + path.sep) || norm === root);
+    if (!isAllowed) {
+      console.error('[File] deleteFolder 거부: 허용 경로 외부:', norm);
+      return false;
+    }
+
     const fs = await import('fs/promises');
-    // ✅ [2026-03-14] Windows long path prefix 적용 (260자 초과 경로 삭제 지원)
     let targetPath = folderPath;
     if (process.platform === 'win32' && !folderPath.startsWith('\\\\?\\')) {
       targetPath = '\\\\?\\' + folderPath.replace(/\//g, '\\');
@@ -2376,11 +2407,19 @@ ipcMain.handle('file:deleteFolder', async (_event, folderPath: string) => {
     await fs.rm(targetPath, { recursive: true, force: true, maxRetries: 3, retryDelay: 500 });
     return true;
   } catch (err1) {
-    // ✅ 폴백: Windows rmdir 명령어 사용
+    // ✅ 폴백: spawn (셸 보간 없음, 인자 배열 전달로 인젝션 차단)
     try {
       if (process.platform === 'win32') {
-        const { execSync } = await import('child_process');
-        execSync(`rmdir /s /q "${folderPath}"`, { timeout: 15000, windowsHide: true });
+        const { spawn } = await import('child_process');
+        await new Promise<void>((resolve, reject) => {
+          const child = spawn('cmd.exe', ['/c', 'rmdir', '/s', '/q', folderPath], {
+            timeout: 15000,
+            windowsHide: true,
+            shell: false,
+          });
+          child.on('exit', (code) => code === 0 ? resolve() : reject(new Error(`exit ${code}`)));
+          child.on('error', reject);
+        });
         return true;
       }
     } catch { /* ignore */ }

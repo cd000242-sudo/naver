@@ -247,7 +247,36 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.on('automation:status', listener);
     return () => ipcRenderer.removeListener('automation:status', listener);
   },
+  // ✅ [v2.7.43 SEC-V2-C2 CRITICAL 패치] 임의 채널 청취 차단
+  //   기존: 모든 IPC 채널을 렌더러가 자유 구독 — 라이선스/세션/API 키 이벤트 노출 위험
+  //   수정: 화이트리스트 채널만 허용 (외부 채널 시도 시 console.warn + 무시)
   on: (channel: string, callback: (...args: any[]) => void) => {
+    const ALLOWED_CHANNELS: readonly string[] = [
+      // 자동화 진행 상태
+      'automation:status',
+      'automation:progress',
+      'automation:log',
+      // 발행/콘텐츠
+      'log-message',
+      'progress-update',
+      'content:generated',
+      // 이미지 생성
+      'image:progress',
+      'image:generated',
+      // 시스템
+      'app:update-available',
+      'app:update-downloaded',
+      'window:focus',
+      // 트레이/알림
+      'tray:show-modal',
+      // 라이선스 (메인→렌더러 갱신 알림)
+      'license:status-changed',
+    ];
+    if (!ALLOWED_CHANNELS.includes(channel)) {
+      // eslint-disable-next-line no-console
+      console.warn(`[preload] 차단된 채널 청취 시도: "${channel}". 화이트리스트 등록 필요.`);
+      return () => { /* no-op */ };
+    }
     const listener = (_event: Electron.IpcRendererEvent, ...args: any[]) => {
       callback(...args);
     };
