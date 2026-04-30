@@ -99,10 +99,29 @@ export async function runAutoImageSearch(
     console.log(`${LOG_PREFIX} 🔍 ${headings.length}개 소제목 이미지 검색 (키워드: ${keyword})`);
     appendLog(`🔍 소제목 ${headings.length}개에 대한 이미지 자동 수집 시작...`);
 
+    // ✅ [v2.7.66] URL 모드 글이면 원본 URL을 1순위로 크롤링
+    //   structuredContent.sourceUrl 또는 #unified-source-url에서 추출
+    let sourceUrl = '';
+    try {
+        sourceUrl = String((structuredContent as any)?.sourceUrl || '').trim();
+        if (!sourceUrl) {
+            const urlInput = document.getElementById('unified-source-url') as HTMLInputElement | null;
+            sourceUrl = urlInput?.value?.trim() || '';
+            // 콤마/줄바꿈 분리 시 첫 번째 URL만 사용
+            sourceUrl = sourceUrl.split(/[\n,]/)[0].trim();
+        }
+        if (sourceUrl && !/^https?:\/\//i.test(sourceUrl)) sourceUrl = '';
+    } catch { sourceUrl = ''; }
+    if (sourceUrl) {
+        console.log(`${LOG_PREFIX} 🔗 원본 URL 우선 크롤링: ${sourceUrl.slice(0, 80)}`);
+        appendLog(`🔗 원본 URL의 이미지를 우선 수집 중...`);
+    }
+
     // IPC 호출
     const searchResult = await (window as any).api.searchImagesForHeadings({
         headings,
         mainKeyword: keyword,
+        sourceUrl: sourceUrl || undefined,
     });
 
     if (!searchResult?.success || !searchResult.images) {

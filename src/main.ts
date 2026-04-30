@@ -3474,6 +3474,7 @@ ipcMain.handle('search-images-for-headings', async (_event, payload: unknown) =>
         relevanceThreshold,
         textGenerator,
         apiKeys,
+        sourceUrl: validPayload.sourceUrl, // ✅ [v2.7.66] URL 모드 원본 크롤링
       }
     );
 

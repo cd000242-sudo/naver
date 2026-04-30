@@ -24,12 +24,25 @@ export function isArrStr(v: unknown, maxLen = 200): v is string[] {
 export function validateSearchImagesPayload(payload: unknown): ValidationResult<{
   headings: string[];
   mainKeyword: string;
+  sourceUrl?: string;
 }> {
   if (!payload || typeof payload !== 'object') return { ok: false, error: 'payload는 object여야 합니다' };
   const p = payload as Record<string, unknown>;
   if (!isArrStr(p.headings, 50)) return { ok: false, error: 'headings는 string[] (최대 50)이어야 합니다' };
   if (!isStr(p.mainKeyword, 200)) return { ok: false, error: 'mainKeyword는 200자 이하 string이어야 합니다' };
-  return { ok: true, value: { headings: p.headings as string[], mainKeyword: p.mainKeyword as string } };
+  // ✅ [v2.7.66] sourceUrl 선택적 — URL 모드 글 생성 시 원본 URL 우선 크롤링
+  const sourceUrl = p.sourceUrl;
+  if (sourceUrl !== undefined && sourceUrl !== null && !isStr(sourceUrl, 2048)) {
+    return { ok: false, error: 'sourceUrl은 2048자 이하 string이어야 합니다' };
+  }
+  return {
+    ok: true,
+    value: {
+      headings: p.headings as string[],
+      mainKeyword: p.mainKeyword as string,
+      sourceUrl: sourceUrl as string | undefined,
+    },
+  };
 }
 
 /**

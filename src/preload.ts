@@ -129,7 +129,7 @@ contextBridge.exposeInMainWorld('api', {
     return () => { ipcRenderer.removeListener('automation:imageGenerated', handler); };
   },
   // ✅ [2026-02-12] 소제목별 이미지 자동 검색 (네이버 → 구글 폴백)
-  searchImagesForHeadings: (payload: { headings: string[]; mainKeyword: string }): Promise<{ success: boolean; images: Record<string, string[]>; message?: string }> =>
+  searchImagesForHeadings: (payload: { headings: string[]; mainKeyword: string; sourceUrl?: string }): Promise<{ success: boolean; images: Record<string, string[]>; message?: string }> =>
     ipcRenderer.invoke('search-images-for-headings', payload),
   checkFileExists: (filePath: string): Promise<boolean> => ipcRenderer.invoke('file:checkExists', filePath),
 

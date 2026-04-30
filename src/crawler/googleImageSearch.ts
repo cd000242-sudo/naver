@@ -196,6 +196,8 @@ export async function searchImagesForHeadings(
         // ✅ [v2.7.62] 다중 vendor — 글 생성 AI에 따라 vision 선택
         textGenerator?: string;
         apiKeys?: { gemini?: string; claude?: string; openai?: string };
+        // ✅ [v2.7.66] URL 모드로 글 생성한 경우 원본 URL의 이미지를 1순위로 크롤링
+        sourceUrl?: string;
         // 레거시 호환 (제거 예정)
         relevanceApiKey?: string;
     }
@@ -203,10 +205,53 @@ export async function searchImagesForHeadings(
     const resultMap = new Map<string, string[]>();
     if (!headings || headings.length === 0) return resultMap;
 
-    const aiCheck = options?.relevanceCheckEnabled === true && !!options?.relevanceApiKey;
+    const aiCheck = options?.relevanceCheckEnabled === true && !!options?.apiKeys && (
+        !!options.apiKeys.gemini || !!options.apiKeys.claude || !!options.apiKeys.openai
+    );
     console.log(`[ImageSearch] 📋 ${headings.length}개 소제목에 대한 이미지 검색 시작`);
     console.log(`[ImageSearch] 🔑 메인 키워드: "${mainKeyword}"`);
     if (aiCheck) console.log(`[ImageSearch] 🤖 AI 관련성 검증 활성화 (threshold=${options!.relevanceThreshold ?? 60})`);
+
+    // ✅ [v2.7.66] URL 모드 글 생성: 원본 URL 이미지를 1순위로 크롤링 + AI 매칭
+    //   사용자 보고: "url로 글생성했다면 그 url에 있는 이미지를 전부 긁어와야정상아니니"
+    //   동작: sourceUrl이 있으면 cheerio로 페이지 이미지 전부 추출 후 AI가 소제목별 매칭
+    if (options?.sourceUrl && /^https?:\/\//i.test(options.sourceUrl)) {
+        try {
+            console.log(`[ImageSearch] 🔗 원본 URL 우선 크롤링: ${options.sourceUrl}`);
+            const urlImages = await crawlImagesFromUrl(options.sourceUrl);
+            console.log(`[ImageSearch] 📥 원본 URL에서 ${urlImages.length}개 이미지 수집`);
+
+            if (urlImages.length > 0 && aiCheck) {
+                // AI로 각 소제목에 가장 적합한 이미지 매칭
+                for (const heading of headings) {
+                    const { filterImagesByRelevance } = await import('./imageRelevanceScorer.js');
+                    const { filtered } = await filterImagesByRelevance(urlImages, heading, mainKeyword, {
+                        enabled: true,
+                        textGenerator: options!.textGenerator || 'gemini-2.5-flash',
+                        apiKeys: options!.apiKeys || {},
+                        threshold: options!.relevanceThreshold,
+                    });
+                    if (filtered.length > 0) {
+                        resultMap.set(heading, filtered.slice(0, 2));
+                        console.log(`[ImageSearch] ✅ URL 매칭 → "${heading}" → ${filtered.length}개 (AI 통과)`);
+                    }
+                }
+            } else if (urlImages.length > 0) {
+                // AI 검증 OFF: 첫 N개를 순환 배분
+                headings.forEach((heading, idx) => {
+                    const start = (idx * 2) % urlImages.length;
+                    const slice = [
+                        urlImages[start],
+                        urlImages[(start + 1) % urlImages.length],
+                    ].filter((u, i, arr) => arr.indexOf(u) === i);
+                    if (slice.length > 0) resultMap.set(heading, slice);
+                });
+                console.log(`[ImageSearch] ✅ URL 이미지 순환 배분 완료 (AI 검증 OFF)`);
+            }
+        } catch (e: any) {
+            console.warn(`[ImageSearch] ⚠️ URL 크롤링 실패 → 키워드 검색 폴백: ${e.message}`);
+        }
+    }
 
     // 네이버 이미지 검색 API 시도
     let naverSearchAvailable = false;
@@ -355,4 +400,74 @@ export async function searchImagesForHeadings(
 
     console.log(`[ImageSearch] 📊 최종: ${resultMap.size}/${headings.length}개 소제목에 이미지 매칭 완료`);
     return resultMap;
+}
+
+/**
+ * ✅ [v2.7.66] 단일 URL에서 이미지 전부 추출 (cheerio 기반, 가벼움)
+ *   - <img src>, <picture><source srcset>, OG/Twitter 메타 이미지
+ *   - 1x1/아이콘 자동 제외 (data URL, gif spacer)
+ */
+async function crawlImagesFromUrl(url: string): Promise<string[]> {
+    try {
+        const got = await import('got-scraping');
+        const cheerio = await import('cheerio');
+        const response = await got.gotScraping({
+            url,
+            timeout: { request: 12000 },
+            retry: { limit: 1 },
+        });
+        const html = String(response.body || '');
+        const $ = cheerio.load(html);
+        const baseUrl = new URL(url);
+        const seen = new Set<string>();
+        const out: string[] = [];
+
+        const tryAdd = (rawSrc: string | undefined) => {
+            if (!rawSrc) return;
+            let src = String(rawSrc).trim();
+            if (!src || src.startsWith('data:')) return;
+            // protocol-relative + 상대경로 정규화
+            if (src.startsWith('//')) src = `${baseUrl.protocol}${src}`;
+            else if (src.startsWith('/')) src = `${baseUrl.origin}${src}`;
+            else if (!/^https?:\/\//i.test(src)) {
+                try { src = new URL(src, baseUrl).toString(); } catch { return; }
+            }
+            // 1x1 픽셀, gif 스페이서, 아이콘 차단
+            if (/spacer|pixel|blank|1x1|icon/i.test(src)) return;
+            const base = src.split('?')[0];
+            if (seen.has(base)) return;
+            seen.add(base);
+            out.push(src);
+        };
+
+        // 1) OG/Twitter 메타 이미지 (최우선 — 페이지 대표 이미지)
+        tryAdd($('meta[property="og:image"]').attr('content'));
+        tryAdd($('meta[property="og:image:secure_url"]').attr('content'));
+        tryAdd($('meta[name="twitter:image"]').attr('content'));
+
+        // 2) <article> / <main> 본문 이미지 (뉴스/블로그)
+        $('article img, main img, .article img, .news_view img, .post img').each((_, el) => {
+            const e = $(el);
+            tryAdd(e.attr('src') || e.attr('data-src') || e.attr('data-original'));
+        });
+
+        // 3) 일반 <img> (위에서 못 잡은 것)
+        $('img').each((_, el) => {
+            if (out.length >= 30) return false;
+            const e = $(el);
+            tryAdd(e.attr('src') || e.attr('data-src') || e.attr('data-original'));
+        });
+
+        // 4) <picture><source srcset>
+        $('picture source').each((_, el) => {
+            const srcset = $(el).attr('srcset') || '';
+            const first = srcset.split(',')[0]?.trim().split(/\s+/)[0];
+            if (first) tryAdd(first);
+        });
+
+        return out.slice(0, 20);
+    } catch (e: any) {
+        console.warn(`[ImageSearch][crawlUrl] 실패: ${e.message?.slice(0, 100)}`);
+        return [];
+    }
 }
