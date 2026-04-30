@@ -74,6 +74,9 @@ export interface AppConfig {
   imageSourceNewsAgency?: boolean;
   // 이미지 저장 경로
   customImageSavePath?: string; // 사용자 지정 이미지 저장 경로
+  // ✅ [v2.7.61] AI 이미지 관련성 검증 (Gemini Vision)
+  imageRelevanceCheck?: boolean; // true 시 수집 이미지마다 AI가 관련성 평가
+  imageRelevanceThreshold?: number; // 0~100, 기본 60
 
   externalApiCostConsent?: boolean;
   externalApiCostConsentAt?: string;

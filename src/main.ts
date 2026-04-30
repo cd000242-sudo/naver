@@ -3433,6 +3433,7 @@ ipcMain.handle('automation:closeBrowser', async () => {
 
 
 // ✅ [2026-02-12] 소제목별 이미지 자동 검색 - 네이버 → 구글 폴백
+// ✅ [v2.7.61] AI 관련성 검증 옵션 추가 (config.imageRelevanceCheck)
 ipcMain.handle('search-images-for-headings', async (_event, payload: {
   headings: string[];
   mainKeyword: string;
@@ -3440,10 +3441,22 @@ ipcMain.handle('search-images-for-headings', async (_event, payload: {
   try {
     console.log(`[Main] 🖼️ search-images-for-headings 시작: ${payload.headings.length}개 소제목`);
 
+    // config에서 AI 검증 설정 로드
+    const { loadConfig } = await import('./configManager.js');
+    const cfg = await loadConfig();
+    const relevanceCheckEnabled = (cfg as any).imageRelevanceCheck === true;
+    const relevanceApiKey = (cfg as any).geminiApiKey || '';
+    const relevanceThreshold = Number((cfg as any).imageRelevanceThreshold ?? 60);
+
     const { searchImagesForHeadings } = await import('./crawler/googleImageSearch.js');
     const resultMap = await searchImagesForHeadings(
       payload.headings,
-      payload.mainKeyword
+      payload.mainKeyword,
+      {
+        relevanceCheckEnabled,
+        relevanceApiKey,
+        relevanceThreshold,
+      }
     );
 
     // Map → 일반 객체로 변환 (IPC 전송용)

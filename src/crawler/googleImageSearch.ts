@@ -8,6 +8,7 @@
 import { launchBrowser, createOptimizedPage } from './utils/browserFactory.js';
 import { isUIGarbage, deduplicateImages, normalizeImageUrl } from './utils/imageUtils.js';
 import { isNewsOrWatermarkedImage } from './utils/imageUtils.js';
+import { filterImagesByRelevance } from './imageRelevanceScorer.js';
 
 export interface GoogleImageResult {
     url: string;           // 원본 이미지 URL
@@ -188,13 +189,20 @@ export async function searchGoogleImages(
  */
 export async function searchImagesForHeadings(
     headings: string[],
-    mainKeyword: string
+    mainKeyword: string,
+    options?: {
+        relevanceCheckEnabled?: boolean;
+        relevanceApiKey?: string;
+        relevanceThreshold?: number;
+    }
 ): Promise<Map<string, string[]>> {
     const resultMap = new Map<string, string[]>();
     if (!headings || headings.length === 0) return resultMap;
 
+    const aiCheck = options?.relevanceCheckEnabled === true && !!options?.relevanceApiKey;
     console.log(`[ImageSearch] 📋 ${headings.length}개 소제목에 대한 이미지 검색 시작`);
     console.log(`[ImageSearch] 🔑 메인 키워드: "${mainKeyword}"`);
+    if (aiCheck) console.log(`[ImageSearch] 🤖 AI 관련성 검증 활성화 (threshold=${options!.relevanceThreshold ?? 60})`);
 
     // 네이버 이미지 검색 API 시도
     let naverSearchAvailable = false;
@@ -205,21 +213,37 @@ export async function searchImagesForHeadings(
         for (const heading of headings) {
             const searchQuery = `${mainKeyword} ${heading}`.trim();
             try {
-                const naverResult = await searchImage({ query: searchQuery, display: 3 });
-                const validImages: string[] = [];
+                // ✅ [v2.7.61] AI 검증 시 후보 풀을 더 많이 확보 (3 → 8개) — 차단 후 잔여 보장
+                const fetchCount = aiCheck ? 8 : 3;
+                const keepCount = aiCheck ? 5 : 2;
+                const naverResult = await searchImage({ query: searchQuery, display: fetchCount });
+                const candidates: string[] = [];
 
                 for (const item of naverResult.items) {
-                    if (validImages.length >= 2) break;
+                    if (candidates.length >= keepCount) break;
                     const imgUrl = item.link || item.thumbnail || '';
                     if (!imgUrl) continue;
                     if (isUIGarbage(imgUrl)) continue;
                     if (isNewsOrWatermarkedImage(imgUrl)) continue;
-                    validImages.push(normalizeImageUrl(imgUrl));
+                    candidates.push(normalizeImageUrl(imgUrl));
+                }
+
+                // ✅ [v2.7.61] AI 관련성 검증 (opt-in)
+                let validImages = candidates;
+                if (aiCheck && candidates.length > 0) {
+                    const { filtered } = await filterImagesByRelevance(candidates, heading, mainKeyword, {
+                        enabled: true,
+                        apiKey: options!.relevanceApiKey,
+                        threshold: options!.relevanceThreshold,
+                    });
+                    validImages = filtered.slice(0, 2);
+                } else {
+                    validImages = candidates.slice(0, 2);
                 }
 
                 if (validImages.length > 0) {
                     resultMap.set(heading, validImages);
-                    console.log(`[ImageSearch] ✅ 네이버 → "${heading}" → ${validImages.length}개 이미지`);
+                    console.log(`[ImageSearch] ✅ 네이버 → "${heading}" → ${validImages.length}개 이미지${aiCheck ? ' (AI 통과)' : ''}`);
                 }
             } catch (e) {
                 console.warn(`[ImageSearch] ⚠️ 네이버 이미지 검색 실패 (${heading}): ${(e as Error).message}`);
@@ -276,19 +300,33 @@ export async function searchImagesForHeadings(
                     });
 
                     // 필터링
-                    const validImages: string[] = [];
+                    const candidates: string[] = [];
+                    const candidateCap = aiCheck ? 5 : 2;
                     for (const imgUrl of images) {
-                        if (validImages.length >= 2) break;
+                        if (candidates.length >= candidateCap) break;
                         if (isUIGarbage(imgUrl)) continue;
                         if (isNewsOrWatermarkedImage(imgUrl)) continue;
-                        validImages.push(normalizeImageUrl(imgUrl));
+                        candidates.push(normalizeImageUrl(imgUrl));
+                    }
+
+                    // ✅ [v2.7.61] 구글 폴백에도 AI 검증
+                    let validImages = candidates;
+                    if (aiCheck && candidates.length > 0) {
+                        const { filtered } = await filterImagesByRelevance(candidates, heading, mainKeyword, {
+                            enabled: true,
+                            apiKey: options!.relevanceApiKey,
+                            threshold: options!.relevanceThreshold,
+                        });
+                        validImages = filtered.slice(0, 2);
+                    } else {
+                        validImages = candidates.slice(0, 2);
                     }
 
                     if (validImages.length > 0) {
                         resultMap.set(heading, validImages);
-                        console.log(`[ImageSearch] ✅ 구글 → "${heading}" → ${validImages.length}개 이미지`);
+                        console.log(`[ImageSearch] ✅ 구글 → "${heading}" → ${validImages.length}개 이미지${aiCheck ? ' (AI 통과)' : ''}`);
                     } else {
-                        console.log(`[ImageSearch] ⚠️ 구글에서도 이미지 없음: "${heading}"`);
+                        console.log(`[ImageSearch] ⚠️ 구글에서도 이미지 없음${aiCheck ? ' (AI 차단 후)' : ''}: "${heading}"`);
                     }
 
                     await page.close();

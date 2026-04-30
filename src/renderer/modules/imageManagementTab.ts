@@ -92,7 +92,7 @@ function ensureImageFxSwitchButton(imageSourceSelect: HTMLSelectElement, show: b
   }
 }
 
-export function initImageManagementTab(): void {
+export async function initImageManagementTab(): Promise<void> {
   // ✅ AI 영상 목록 토글 기능
   const toggleHeader = document.getElementById('toggle-mp4-list-header');
   const mp4ListContainer = document.getElementById('mp4-files-list');
@@ -492,6 +492,26 @@ export function initImageManagementTab(): void {
     if (currentSource === 'imagefx') {
       ensureImageFxSwitchButton(imageSourceSelect, true);
     }
+  }
+
+  // ✅ [v2.7.61] AI 이미지 관련성 검증 체크박스 — config 양방향 sync
+  const relevanceCheckbox = document.getElementById('image-relevance-check') as HTMLInputElement | null;
+  if (relevanceCheckbox) {
+    try {
+      const cfg = await (window as any).api?.getConfig?.();
+      relevanceCheckbox.checked = cfg?.imageRelevanceCheck === true;
+    } catch { /* 무시 */ }
+    relevanceCheckbox.addEventListener('change', async () => {
+      try {
+        const cfg = await (window as any).api?.getConfig?.();
+        await (window as any).api?.saveConfig?.({ ...cfg, imageRelevanceCheck: relevanceCheckbox.checked });
+        appendLog(relevanceCheckbox.checked
+          ? '🤖 AI 이미지 관련성 검증 ON — 수집 시 무관한 이미지 자동 차단 (글당 약 ₩1.2 추가)'
+          : '🔕 AI 이미지 관련성 검증 OFF — 키워드 기반 수집만 사용');
+      } catch (e: any) {
+        console.warn('[ImageRelevance] 설정 저장 실패:', e);
+      }
+    });
   }
 
   // ✅ [Fix] 이미지 관리 탭 초기 진입 시 기존 이미지 그리드 즉시 렌더링
