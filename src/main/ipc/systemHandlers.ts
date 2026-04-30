@@ -462,10 +462,18 @@ export function registerDialogHandlers(ctx: IpcContext): void {
     });
 
     // 일반 파일 선택 다이얼로그
+    // ✅ [v2.7.60] modal stacking 회피 — 부모 창에 modal 띄워져 있으면 부모 인자 없이 호출 (always-on-top 보장)
     ipcMain.handle('dialog:showOpenDialog', async (_event, options) => {
         const mainWindow = WindowManager.getMainWindow();
-        if (mainWindow) {
-            return dialog.showOpenDialog(mainWindow, options);
+        try {
+            if (mainWindow && !mainWindow.isDestroyed()) {
+                // 메인 창에 포커스 강제 (다이얼로그가 뒤로 숨는 회귀 방지)
+                if (mainWindow.isMinimized()) mainWindow.restore();
+                mainWindow.focus();
+                return await dialog.showOpenDialog(mainWindow, options);
+            }
+        } catch (e) {
+            console.warn('[dialog:showOpenDialog] 부모 창 핸들 실패, 폴백:', e);
         }
         return dialog.showOpenDialog(options);
     });

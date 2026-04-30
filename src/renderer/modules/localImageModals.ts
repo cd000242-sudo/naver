@@ -1356,8 +1356,13 @@ export async function showLoadImagesFromFoldersModal(): Promise<void> {
     const changeFolderPathBtn = modal.querySelector('#change-folder-path-btn');
     if (changeFolderPathBtn) {
       changeFolderPathBtn.addEventListener('click', async () => {
+        // ✅ [v2.7.60] 사용자 보고 — 변경 클릭 시 다이얼로그 안 뜸
+        //   원인 후보: modal z-index 위에 다이얼로그 가려짐 / mainWindow 포커스 잃음
+        //   조치: 진단 로그 + 메인 dialog handler에 focus() 강제
+        console.log('[ChangeFolderPath] 🖱️ 클릭 감지 — showOpenDialog 호출 직전');
         try {
           if (!window.api.showOpenDialog) {
+            console.error('[ChangeFolderPath] ❌ window.api.showOpenDialog 미정의');
             alert('폴더 선택 기능을 사용할 수 없습니다.');
             return;
           }
@@ -1367,6 +1372,7 @@ export async function showLoadImagesFromFoldersModal(): Promise<void> {
             title: '이미지 저장 폴더 선택',
             buttonLabel: '선택'
           });
+          console.log('[ChangeFolderPath] ✅ 다이얼로그 응답:', result);
 
           if (result && !result.canceled && result.filePaths && result.filePaths.length > 0) {
             const selectedPath = result.filePaths[0].replace(/\\/g, '/');
