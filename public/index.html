@@ -3805,6 +3805,22 @@
                     </div>
                 </div>
 
+                <!-- ✅ [v2.7.67] AI 스마트 이미지 수집 URL 입력 (선택) -->
+                <div id="smart-collect-url-container"
+                    style="margin-bottom: 1rem; padding: 1rem 1.25rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(124, 58, 237, 0.05)); border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.25);">
+                    <label for="smart-collect-source-url"
+                        style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 700; color: var(--text-strong); margin-bottom: 0.5rem;">
+                        <span style="font-size: 1.05rem;">🔗</span>
+                        <span>이미지 수집 URL <span style="color: var(--text-muted); font-weight: 500;">(선택 — 비어있으면 글 생성 시 사용한 URL 자동 사용)</span></span>
+                    </label>
+                    <input type="url" id="smart-collect-source-url"
+                        placeholder="예: https://news.naver.com/article/..."
+                        style="width: 100%; padding: 0.6rem 0.75rem; background: var(--bg-primary); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; color: var(--text-strong); font-size: 0.85rem;" />
+                    <p style="margin: 0.4rem 0 0 0; font-size: 0.7rem; color: var(--text-muted); line-height: 1.4;">
+                        ℹ️ 입력한 URL의 페이지 이미지를 1순위로 크롤링 + AI가 소제목별로 매칭. 비어있으면 글 생성 시 입력한 URL을 자동 사용. 둘 다 없으면 키워드 검색.
+                    </p>
+                </div>
+
                 <!-- 액션 버튼들 -->
                 <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
                     <button type="button" id="analyze-headings-btn" class="secondary"
