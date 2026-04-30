@@ -395,12 +395,23 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
     await dismissCookieBanner(loginPage);
     try { await loginPage.bringToFront(); } catch { /* ignore */ }
 
-    const loginTimeoutMs = 5 * 60 * 1000;
+    // ✅ [v2.7.68] 2FA(폰 승인) + Google 다단계 redirect 대응
+    //   사용자 보고: "2단계 인증까지 했는데도 5분 타임아웃 발생"
+    //   원인: 5초 폴링 + /fx/api/auth/session 단일 시그널만 검사 → redirect 체인 미감지
+    //   조치:
+    //     1) 폴링 간격 5s → 2s (redirect 윈도우 캐치)
+    //     2) 타임아웃 5분 → 10분 (2FA + 이메일 확인 + 푸시 승인 시간 여유)
+    //     3) accounts.google.com에 30초 이상 머물면 자동으로 flow 재방문 (OAuth 완료 후 stuck 회복)
+    //     4) 다중 신호 감지: session API + URL 패턴 + 쿠키
+    const loginTimeoutMs = 10 * 60 * 1000;
     const start = Date.now();
     let loginSuccess = false;
-    sendImageLog('🔐 [Flow] 브라우저에서 Google 로그인을 완료해주세요. (최대 5분 대기)');
+    let lastUrlChange = Date.now();
+    let lastUrl = loginPage.url();
+    let stuckRedirectAttempts = 0;
+    sendImageLog('🔐 [Flow] 브라우저에서 Google 로그인을 완료해주세요 (2단계 인증 포함, 최대 10분 대기).');
     while (Date.now() - start < loginTimeoutMs) {
-        await new Promise(r => setTimeout(r, 5000));
+        await new Promise(r => setTimeout(r, 2000));
         if (loginPage.isClosed()) {
             flowWarn('[Flow] ⚠️ 로그인 대기 중 사용자가 창을 닫음 — 즉시 중단');
             break;
@@ -410,15 +421,35 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
             loginSuccess = true;
             break;
         }
+        const currentUrl = loginPage.url();
+        if (currentUrl !== lastUrl) {
+            lastUrl = currentUrl;
+            lastUrlChange = Date.now();
+            flowLog(`[Flow] 🔄 URL 변경: ${currentUrl.slice(0, 100)}`);
+        }
+        // ✅ Google OAuth 완료 후 accounts.google.com에 stuck — 자동 redirect 트리거
+        const isOnGoogleAccounts = /accounts\.google\.com|myaccount\.google\.com/.test(currentUrl);
+        const stuckMs = Date.now() - lastUrlChange;
+        if (isOnGoogleAccounts && stuckMs > 30_000 && stuckRedirectAttempts < 3) {
+            stuckRedirectAttempts++;
+            flowLog(`[Flow] ⚡ accounts.google.com에 ${Math.round(stuckMs/1000)}s stuck — 자동으로 Flow 재방문 (시도 ${stuckRedirectAttempts}/3)`);
+            sendImageLog(`⚡ [Flow] OAuth 완료 감지 → Flow 페이지로 자동 이동 중... (${stuckRedirectAttempts}/3)`);
+            try {
+                await loginPage.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 15000 });
+                lastUrlChange = Date.now();
+            } catch (e) {
+                flowWarn(`[Flow] 자동 재방문 실패: ${(e as Error).message}`);
+            }
+        }
         const elapsedSec = Math.round((Date.now() - start) / 1000);
         if (elapsedSec > 0 && elapsedSec % 30 === 0) {
-            sendImageLog(`⏳ [Flow] 로그인 대기 중... (${elapsedSec}초 경과)`);
+            sendImageLog(`⏳ [Flow] 로그인 대기 중... (${elapsedSec}s 경과 / 현재 URL: ${currentUrl.slice(0, 60)}...)`);
         }
     }
 
     if (!loginSuccess) {
         await loginCtx.close().catch(() => {});
-        throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인 시간이 5분을 넘었습니다. 다시 [Flow 로그인] 버튼을 눌러주세요.');
+        throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인 시간이 10분을 넘었습니다. 2단계 인증이 완료된 후에도 자동 감지되지 않으면 [Flow 로그인] 버튼을 다시 눌러주세요. 폰에서 푸시 승인 후 노트북 화면이 labs.google/fx/tools/flow 페이지로 자동 이동하지 않으면 주소창에 직접 입력해주세요.');
     }
 
     flowLog('[Flow] ✅ 로그인 완료 — on-screen 닫고 off-screen 재시작');
@@ -515,16 +546,42 @@ async function dismissCookieBanner(page: Page, force: boolean = false): Promise<
 }
 
 // ─── Flow 로그인 상태 체크 ────────────
+// ✅ [v2.7.68] 다중 신호 감지 — 2FA redirect 도중에도 빠르게 감지
 async function isLoggedInToFlow(page: Page): Promise<boolean> {
     try {
-        const session = await page.evaluate(async () => {
+        // 1) URL이 labs.google/fx 도메인이 아니면 일단 false (accounts.google.com 등)
+        const url = page.url();
+        if (!/labs\.google\/fx/.test(url)) return false;
+
+        // 2) /fx/api/auth/session 체크 (정식 신호)
+        const sessionUser = await page.evaluate(async () => {
             try {
                 const res = await fetch('/fx/api/auth/session', { credentials: 'include' });
                 if (!res.ok) return null;
-                return await res.json();
+                const json = await res.json();
+                return json?.user?.email || json?.user?.name || null;
             } catch { return null; }
-        });
-        return !!(session && (session as any).user);
+        }).catch(() => null);
+        if (sessionUser) return true;
+
+        // 3) DOM 신호: 사용자 아바타 또는 "프로젝트" 버튼이 보이면 로그인 완료
+        const domSignal = await page.evaluate(() => {
+            const selectors = [
+                'button[aria-label*="account" i]',
+                'img[alt*="profile" i]',
+                'button[aria-label*="프로필" i]',
+                '[data-testid*="user-menu"]',
+                'button:has-text("새 프로젝트")',
+            ];
+            for (const sel of selectors) {
+                try {
+                    const el = document.querySelector(sel);
+                    if (el && (el as HTMLElement).offsetParent !== null) return true;
+                } catch { /* invalid selector ignore */ }
+            }
+            return false;
+        }).catch(() => false);
+        return !!domSignal;
     } catch {
         return false;
     }

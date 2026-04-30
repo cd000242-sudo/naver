@@ -86,8 +86,8 @@ describe('Flow 이미지 엔진 v2.7.x', () => {
   describe('v2.7.42 사용자 친화 메시지 (FLOW_* prefix는 유지하되 한국어 본문)', () => {
     const code = read('image/flowGenerator.ts');
 
-    it('FLOW_LOGIN_TIMEOUT — Google 로그인 + 5분 + [Flow 로그인] 안내', () => {
-      expect(code).toMatch(/FLOW_LOGIN_TIMEOUT.*Google 로그인.*5분/);
+    it('FLOW_LOGIN_TIMEOUT — Google 로그인 + 10분 + 2FA 안내 (v2.7.68: 5분→10분 확장)', () => {
+      expect(code).toMatch(/FLOW_LOGIN_TIMEOUT.*Google 로그인.*10분/);
     });
 
     it('FLOW_NEW_PROJECT_BUTTON_NOT_FOUND — 1시간 + 다른 엔진 안내', () => {
