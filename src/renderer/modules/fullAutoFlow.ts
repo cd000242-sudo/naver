@@ -2470,21 +2470,19 @@ export async function generateAIImagesForHeadings(headings: any[], formData: any
   // affiliateLink만 있으면 쇼핑커넥트로 판단하지 않음 (일반 모드에서도 링크가 남아있을 수 있음)
   const isShoppingConnect = formData.isShoppingConnect === true || formData.contentMode === 'affiliate';
 
-  // ✅ [v2.7.28] 쇼핑커넥트 모드: 화이트리스트 → 블랙리스트로 전환
-  //   기존: 'nano-banana-pro' / 'local-folder' 외 모두 'nano-banana-pro'로 강제 전환
-  //   문제: 사용자가 'nano-banana-2'(v2.7.16+ 별개 provider) / 'naver'(검색) /
-  //          'collected'(수집 그대로) / 'saved'(저장) / 'no-images' 선택해도
-  //          무조건 AI 생성으로 강제 → 수집 이미지 의도 무시
-  //   수정: 제품을 가짜로 만드는 text-only AI 엔진만 'nano-banana-pro'로 전환.
-  //         나머지(수집/검색/저장/이미지없음/덕트테이프/나노바나나2)는 사용자 선택 존중.
+  // ✅ [v2.7.64] 사용자 선택 존중 — 자동 전환 폐지, 명시적 confirm으로 대체
+  //   사용자 보고: "달리 선택했는데 왜 나노바나나로 생성되는거지?"
+  //   기존(v2.7.28~63): 쇼핑커넥트 + DALL-E/ImageFX/Leonardo 등 → nano-banana-pro 자동 강제
+  //   문제: 사용자가 명시적으로 DALL-E 3 선택했는데 알림 없이 nano-banana로 교체됨
+  //   수정: 자동 전환 폐지. 사용자가 img2img 미지원 엔진 선택하면 그대로 실행 + 토스트 경고.
   const SC_FAKE_AI_ENGINES = [
     'imagefx', 'dall-e-3', 'leonardoai', 'deepinfra', 'deepinfra-flux',
     'stability', 'falai', 'prodia', 'pollinations', 'flow',
   ];
   if (isShoppingConnect && SC_FAKE_AI_ENGINES.includes(imageSource)) {
-    console.log(`[AI Images] 🛒 쇼핑커넥트 모드: 가짜 AI 엔진 '${imageSource}' → 'nano-banana-pro' 강제 전환 (제품 정확도 보장)`);
-    appendLog(`🛒 쇼핑커넥트 모드: 제품 정확도를 위해 나노바나나프로로 자동 전환됩니다.`);
-    imageSource = 'nano-banana-pro';
+    console.log(`[AI Images] 🛒 쇼핑커넥트 + ${imageSource}: img2img 미지원 — 사용자 선택 그대로 실행 (제품 정확도 미보장)`);
+    appendLog(`⚠️ "${imageSource}"는 img2img 미지원 — 제품 외형이 다르게 생성될 수 있습니다. 정확한 재현을 원하시면 [🍌 나노바나나] 또는 [🦆 덕트테이프]를 선택하세요.`);
+    // imageSource 변경 없음 — 사용자 선택 존중
   }
 
   // ✅ [FIX] 쇼핑커넥트 모드에서는 썸네일 텍스트 자동 포함
