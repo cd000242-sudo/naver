@@ -79,6 +79,69 @@ export const OPENAI_TEXT_MODELS = {
 } as const;
 
 /**
+ * ✅ [v2.7.62] Vision-capable 모델 (이미지 분석/관련성 평가용)
+ *   reviewer 권고에 따라 SSOT에 추가 — 직접 문자열 리터럴 금지
+ */
+export const VISION_MODELS = {
+  GEMINI_FLASH: 'gemini-2.5-flash',
+  GEMINI_PRO: 'gemini-2.5-pro',
+  CLAUDE_SONNET: 'claude-sonnet-4-6',
+  OPENAI_41: 'gpt-4.1',
+  OPENAI_41_MINI: 'gpt-4.1-mini',
+} as const;
+
+/**
+ * ✅ [v2.7.62] 글 생성 AI 키 → vision provider 라우팅
+ *   사용자가 글 생성에 고른 AI와 동일 vendor로 이미지 추론 (사용자 요청)
+ *   Perplexity는 vision 미지원 → Gemini Flash 폴백 (사용자 동의 필요)
+ */
+export type TextGeneratorKey =
+  | 'gemini-2.5-flash-lite'
+  | 'gemini-2.5-flash'
+  | 'gemini-2.5-pro'
+  | 'perplexity-sonar'
+  | 'openai-gpt4o-mini'  // 레거시 키 — gpt-4.1-mini로 매핑
+  | 'openai-gpt41'
+  | 'claude-sonnet';
+
+export type VisionProviderKey =
+  | 'gemini-flash'
+  | 'gemini-pro'
+  | 'claude-sonnet'
+  | 'openai-41'
+  | 'openai-41-mini';
+
+export interface VisionRouting {
+  provider: VisionProviderKey;
+  model: string;
+  vendor: 'gemini' | 'claude' | 'openai';
+  /** vision 미지원이라 폴백된 경우 */
+  fellBack: boolean;
+  reason?: string;
+}
+
+export function routeTextToVision(textKey: string): VisionRouting {
+  switch (textKey) {
+    case 'gemini-2.5-flash-lite':
+      return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH, vendor: 'gemini', fellBack: true, reason: 'Lite는 vision 없음 → Flash로 자동' };
+    case 'gemini-2.5-flash':
+      return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH, vendor: 'gemini', fellBack: false };
+    case 'gemini-2.5-pro':
+      return { provider: 'gemini-pro', model: VISION_MODELS.GEMINI_PRO, vendor: 'gemini', fellBack: false };
+    case 'claude-sonnet':
+      return { provider: 'claude-sonnet', model: VISION_MODELS.CLAUDE_SONNET, vendor: 'claude', fellBack: false };
+    case 'openai-gpt41':
+      return { provider: 'openai-41', model: VISION_MODELS.OPENAI_41, vendor: 'openai', fellBack: false };
+    case 'openai-gpt4o-mini':
+      return { provider: 'openai-41-mini', model: VISION_MODELS.OPENAI_41_MINI, vendor: 'openai', fellBack: false };
+    case 'perplexity-sonar':
+      return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH, vendor: 'gemini', fellBack: true, reason: 'Perplexity vision 미지원 → Gemini Flash 폴백' };
+    default:
+      return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH, vendor: 'gemini', fellBack: true, reason: `미지원 키(${textKey}) → Gemini Flash 기본` };
+  }
+}
+
+/**
  * Gemini 사용자 UI 키 → 실제 API ID 매핑
  *   '나노바나나' UI 라벨이 어떤 키로 저장되든 정식 GA로 통합.
  */

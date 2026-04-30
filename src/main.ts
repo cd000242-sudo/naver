@@ -3441,12 +3441,18 @@ ipcMain.handle('search-images-for-headings', async (_event, payload: {
   try {
     console.log(`[Main] 🖼️ search-images-for-headings 시작: ${payload.headings.length}개 소제목`);
 
-    // config에서 AI 검증 설정 로드
+    // ✅ [v2.7.62] config에서 AI 검증 + 글 생성 AI 라우팅 설정 로드
     const { loadConfig } = await import('./configManager.js');
     const cfg = await loadConfig();
     const relevanceCheckEnabled = (cfg as any).imageRelevanceCheck === true;
-    const relevanceApiKey = (cfg as any).geminiApiKey || '';
     const relevanceThreshold = Number((cfg as any).imageRelevanceThreshold ?? 60);
+    // 글 생성 AI 키 (사용자 요청: vision도 동일 모델 사용)
+    const textGenerator = (cfg as any).primaryGeminiTextModel || 'gemini-2.5-flash';
+    const apiKeys = {
+      gemini: (cfg as any).geminiApiKey || '',
+      claude: (cfg as any).claudeApiKey || '',
+      openai: (cfg as any).openaiApiKey || '',
+    };
 
     const { searchImagesForHeadings } = await import('./crawler/googleImageSearch.js');
     const resultMap = await searchImagesForHeadings(
@@ -3454,8 +3460,9 @@ ipcMain.handle('search-images-for-headings', async (_event, payload: {
       payload.mainKeyword,
       {
         relevanceCheckEnabled,
-        relevanceApiKey,
         relevanceThreshold,
+        textGenerator,
+        apiKeys,
       }
     );
 

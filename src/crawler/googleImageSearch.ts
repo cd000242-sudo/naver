@@ -192,8 +192,12 @@ export async function searchImagesForHeadings(
     mainKeyword: string,
     options?: {
         relevanceCheckEnabled?: boolean;
-        relevanceApiKey?: string;
         relevanceThreshold?: number;
+        // ✅ [v2.7.62] 다중 vendor — 글 생성 AI에 따라 vision 선택
+        textGenerator?: string;
+        apiKeys?: { gemini?: string; claude?: string; openai?: string };
+        // 레거시 호환 (제거 예정)
+        relevanceApiKey?: string;
     }
 ): Promise<Map<string, string[]>> {
     const resultMap = new Map<string, string[]>();
@@ -233,7 +237,8 @@ export async function searchImagesForHeadings(
                 if (aiCheck && candidates.length > 0) {
                     const { filtered } = await filterImagesByRelevance(candidates, heading, mainKeyword, {
                         enabled: true,
-                        apiKey: options!.relevanceApiKey,
+                        textGenerator: options!.textGenerator || 'gemini-2.5-flash',
+                        apiKeys: options!.apiKeys || {},
                         threshold: options!.relevanceThreshold,
                     });
                     validImages = filtered.slice(0, 2);
@@ -309,12 +314,13 @@ export async function searchImagesForHeadings(
                         candidates.push(normalizeImageUrl(imgUrl));
                     }
 
-                    // ✅ [v2.7.61] 구글 폴백에도 AI 검증
+                    // ✅ [v2.7.62] 구글 폴백에도 AI 검증 (다중 vendor)
                     let validImages = candidates;
                     if (aiCheck && candidates.length > 0) {
                         const { filtered } = await filterImagesByRelevance(candidates, heading, mainKeyword, {
                             enabled: true,
-                            apiKey: options!.relevanceApiKey,
+                            textGenerator: options!.textGenerator || 'gemini-2.5-flash',
+                            apiKeys: options!.apiKeys || {},
                             threshold: options!.relevanceThreshold,
                         });
                         validImages = filtered.slice(0, 2);
