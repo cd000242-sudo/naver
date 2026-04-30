@@ -99,31 +99,25 @@ export async function runAutoImageSearch(
     console.log(`${LOG_PREFIX} 🔍 ${headings.length}개 소제목 이미지 검색 (키워드: ${keyword})`);
     appendLog(`🔍 소제목 ${headings.length}개에 대한 이미지 자동 수집 시작...`);
 
-    // ✅ [v2.7.74] URL 우선순위 4단계 + 부족분 AI 생성 옵션
+    // ✅ [v2.7.75] URL 우선순위 3단계 (v2.7.67 smart-collect-source-url 폐지 후)
     //   1) 콘텐츠 입력 영역의 #content-url-collect (사용자 직접 입력 — 최우선)
-    //   2) 이미지 관리 탭의 #smart-collect-source-url
-    //   3) structuredContent.sourceUrl (글 생성 시 자동 저장)
-    //   4) 글 생성 탭의 #unified-source-url
+    //   2) structuredContent.sourceUrl (글 생성 시 자동 저장)
+    //   3) 글 생성 탭의 #unified-source-url
     let sourceUrl = '';
     let fillGapWithAI = false;
     try {
-        // 1순위 (v2.7.74): 콘텐츠 입력 영역의 URL
+        // 1순위: 콘텐츠 입력 영역의 URL
         const contentUrlInput = document.getElementById('content-url-collect') as HTMLInputElement | null;
         sourceUrl = contentUrlInput?.value?.trim() || '';
         // 부족분 AI 생성 체크박스
         const fillGapCheckbox = document.getElementById('content-url-fillgap-ai') as HTMLInputElement | null;
         fillGapWithAI = !!fillGapCheckbox?.checked;
         if (!sourceUrl) {
-            // 2순위: 이미지 관리 탭
-            const smartInput = document.getElementById('smart-collect-source-url') as HTMLInputElement | null;
-            sourceUrl = smartInput?.value?.trim() || '';
-        }
-        if (!sourceUrl) {
-            // 3순위: structuredContent
+            // 2순위: structuredContent
             sourceUrl = String((structuredContent as any)?.sourceUrl || '').trim();
         }
         if (!sourceUrl) {
-            // 4순위: 글 생성 탭
+            // 3순위: 글 생성 탭
             const urlInput = document.getElementById('unified-source-url') as HTMLInputElement | null;
             sourceUrl = urlInput?.value?.trim() || '';
         }
