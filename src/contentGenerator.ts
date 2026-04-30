@@ -8171,10 +8171,14 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
         const cacheDisabled = process.env.CLAUDE_PROMPT_CACHE_DISABLED === '1';
         const useSystemCache = !cacheDisabled && !!claudeSystem && claudeSystem.length >= CACHE_MIN_CHARS;
 
+        // ✅ [v2.7.65] Claude Opus 4.7부터 temperature 파라미터 deprecate
+        //   사용자 보고: 400 invalid_request_error "`temperature` is deprecated for this model"
+        //   조치: Opus 4.7+ 모델은 temperature 미전송, Sonnet/Haiku는 기존 유지
+        const isOpusDeprecatedTemp = /^claude-opus-4-[7-9]|^claude-opus-[5-9]/.test(modelName);
         const buildRequest = (withCache: boolean): any => ({
           model: modelName,
           max_tokens: 8192,
-          temperature: temperature,
+          ...(isOpusDeprecatedTemp ? {} : { temperature: temperature }),
           ...(claudeSystem
             ? {
                 system: withCache
