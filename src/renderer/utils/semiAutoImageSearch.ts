@@ -147,6 +147,13 @@ export async function runAutoImageSearch(
         return result;
     }
 
+    // ✅ [v2.7.72] 수집한 URL 이미지를 즉시 디스크에 저장 (Downloads/naver-blog-images/{글제목}/)
+    //   사용자 요청: "스마트 AI 이미지 수집으로 모은 URL 이미지 폴더생성해서 저장되게해줘야지"
+    const postTitle = String((structuredContent as any)?.title || (structuredContent as any)?.postTitle || '').trim() || keyword;
+    const postId = String((structuredContent as any)?.id || (structuredContent as any)?.postId || '').trim() || `post-${Date.now()}`;
+    let savedToDisk = 0;
+    appendLog(`💾 수집 이미지를 디스크에 저장 중... (${postTitle})`);
+
     // ImageManager에 이미지 배치 (기존 이미지가 없는 소제목에만)
     for (const [heading, urls] of Object.entries(imageMap)) {
         if (!urls || urls.length === 0) continue;
@@ -158,21 +165,53 @@ export async function runAutoImageSearch(
             continue;
         }
 
-        const imageEntries = urls.slice(0, 2).map((url: string, idx: number) => ({
-            url,
-            heading,
-            prompt: heading,
-            timestamp: Date.now() + idx,
-            isCollected: true,
-            source: 'auto-search',
-        }));
+        // 각 URL을 디스크에 저장 후 entry에 filePath 포함
+        const imageEntries: any[] = [];
+        for (let idx = 0; idx < Math.min(urls.length, 2); idx++) {
+            const url = urls[idx];
+            let filePath: string | undefined;
+            let previewDataUrl: string | undefined;
+            try {
+                const dl = await (window as any).api?.downloadAndSaveImage?.(
+                    url,
+                    heading,
+                    postTitle,
+                    postId,
+                );
+                if (dl?.success && dl.filePath) {
+                    filePath = dl.filePath;
+                    previewDataUrl = dl.previewDataUrl;
+                    savedToDisk++;
+                    console.log(`${LOG_PREFIX} 💾 저장: ${filePath}`);
+                } else {
+                    console.warn(`${LOG_PREFIX} ⚠️ 저장 실패: ${dl?.message || 'unknown'}`);
+                }
+            } catch (e: any) {
+                console.warn(`${LOG_PREFIX} ⚠️ 다운로드 오류: ${e?.message}`);
+            }
+
+            imageEntries.push({
+                url,
+                filePath,
+                previewDataUrl,
+                heading,
+                prompt: heading,
+                timestamp: Date.now() + idx,
+                isCollected: true,
+                savedToLocal: filePath,
+                source: 'auto-search',
+            });
+        }
 
         imageEntries.forEach((entry: any) => ImageManager.addImage(heading, entry));
         result.added += imageEntries.length;
     }
 
     if (result.added > 0) {
-        appendLog(`✅ 이미지 자동 수집 완료: ${result.added}개 이미지 배치됨`);
+        appendLog(`✅ 이미지 자동 수집 완료: ${result.added}개 배치 / ${savedToDisk}개 디스크 저장됨`);
+        if (savedToDisk > 0) {
+            appendLog(`📁 저장 위치: Downloads/naver-blog-images/${postTitle}/`);
+        }
         try { syncFn(); } catch { /* ignore */ }
     } else {
         appendLog('ℹ️ 모든 소제목에 이미 이미지가 있어 추가 배치 없음');
