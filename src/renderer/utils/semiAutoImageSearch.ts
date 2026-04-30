@@ -99,30 +99,44 @@ export async function runAutoImageSearch(
     console.log(`${LOG_PREFIX} 🔍 ${headings.length}개 소제목 이미지 검색 (키워드: ${keyword})`);
     appendLog(`🔍 소제목 ${headings.length}개에 대한 이미지 자동 수집 시작...`);
 
-    // ✅ [v2.7.67] URL 우선순위: 1) 이미지 관리 탭의 #smart-collect-source-url 입력
-    //                              2) structuredContent.sourceUrl
-    //                              3) 글 생성 시 사용한 #unified-source-url
+    // ✅ [v2.7.74] URL 우선순위 4단계 + 부족분 AI 생성 옵션
+    //   1) 콘텐츠 입력 영역의 #content-url-collect (사용자 직접 입력 — 최우선)
+    //   2) 이미지 관리 탭의 #smart-collect-source-url
+    //   3) structuredContent.sourceUrl (글 생성 시 자동 저장)
+    //   4) 글 생성 탭의 #unified-source-url
     let sourceUrl = '';
+    let fillGapWithAI = false;
     try {
-        // 1순위: 이미지 관리 탭에서 사용자가 직접 입력한 URL (v2.7.67)
-        const smartInput = document.getElementById('smart-collect-source-url') as HTMLInputElement | null;
-        sourceUrl = smartInput?.value?.trim() || '';
+        // 1순위 (v2.7.74): 콘텐츠 입력 영역의 URL
+        const contentUrlInput = document.getElementById('content-url-collect') as HTMLInputElement | null;
+        sourceUrl = contentUrlInput?.value?.trim() || '';
+        // 부족분 AI 생성 체크박스
+        const fillGapCheckbox = document.getElementById('content-url-fillgap-ai') as HTMLInputElement | null;
+        fillGapWithAI = !!fillGapCheckbox?.checked;
         if (!sourceUrl) {
-            // 2순위: structuredContent에 저장된 sourceUrl
+            // 2순위: 이미지 관리 탭
+            const smartInput = document.getElementById('smart-collect-source-url') as HTMLInputElement | null;
+            sourceUrl = smartInput?.value?.trim() || '';
+        }
+        if (!sourceUrl) {
+            // 3순위: structuredContent
             sourceUrl = String((structuredContent as any)?.sourceUrl || '').trim();
         }
         if (!sourceUrl) {
-            // 3순위: 글 생성 탭의 URL 입력 필드
+            // 4순위: 글 생성 탭
             const urlInput = document.getElementById('unified-source-url') as HTMLInputElement | null;
             sourceUrl = urlInput?.value?.trim() || '';
         }
-        // 콤마/줄바꿈 분리 시 첫 URL만
         sourceUrl = sourceUrl.split(/[\n,]/)[0].trim();
         if (sourceUrl && !/^https?:\/\//i.test(sourceUrl)) sourceUrl = '';
     } catch { sourceUrl = ''; }
     if (sourceUrl) {
         console.log(`${LOG_PREFIX} 🔗 원본 URL 우선 크롤링: ${sourceUrl.slice(0, 80)}`);
         appendLog(`🔗 원본 URL의 이미지를 우선 수집 중: ${sourceUrl.slice(0, 60)}...`);
+    }
+    if (fillGapWithAI) {
+        console.log(`${LOG_PREFIX} 🎨 부족분 AI 생성 ON`);
+        appendLog(`🎨 부족분 AI 생성 옵션 ON — URL 이미지 부족 시 빈 소제목에 AI 이미지 생성`);
     }
 
     // IPC 호출
@@ -215,6 +229,29 @@ export async function runAutoImageSearch(
         try { syncFn(); } catch { /* ignore */ }
     } else {
         appendLog('ℹ️ 모든 소제목에 이미 이미지가 있어 추가 배치 없음');
+    }
+
+    // ✅ [v2.7.74] 부족분 처리:
+    //   - 기본(fillGapWithAI=false): 빈 소제목 그대로 유지 — 이미지 안 넣음
+    //   - 체크박스 ON: 빈 소제목 추출 후 generate-images-btn 클릭 트리거 (사용자 의도 명시)
+    const emptyHeadings = headings.filter(h => {
+        const existing = ImageManager.getImages(h);
+        return !existing || existing.length === 0;
+    });
+    if (emptyHeadings.length > 0) {
+        if (fillGapWithAI) {
+            appendLog(`🎨 부족분 AI 생성: ${emptyHeadings.length}개 소제목 (${emptyHeadings.slice(0, 3).join(', ')}${emptyHeadings.length > 3 ? '...' : ''})`);
+            // generate-remaining-images-btn 클릭 트리거 (이미 빈 자리만 채우는 기존 버튼 활용)
+            const remainBtn = document.getElementById('generate-remaining-images-btn') as HTMLButtonElement | null;
+            if (remainBtn && !remainBtn.disabled) {
+                appendLog(`▶️ "비어있는 소제목만 이미지 생성" 자동 클릭`);
+                remainBtn.click();
+            } else {
+                appendLog(`⚠️ AI 생성 버튼을 찾지 못해 자동 트리거 실패 (수동으로 [비어있는 소제목만 이미지 생성] 클릭)`);
+            }
+        } else {
+            appendLog(`ℹ️ 빈 소제목 ${emptyHeadings.length}개 → AI 생성 건너뜀 (부족분 AI 생성 체크박스 OFF)`);
+        }
     }
 
     return result;

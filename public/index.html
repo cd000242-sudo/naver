@@ -3400,6 +3400,30 @@
                         <p class="field-hint">이미지를 생성할 콘텐츠의 제목을 입력하세요.</p>
                     </div>
 
+                    <!-- ✅ [v2.7.74] 콘텐츠 입력 영역 URL 수집 입력란 + 부족분 처리 옵션 -->
+                    <div class="field"
+                        style="margin-top: 1rem; padding: 0.875rem 1rem; background: rgba(139, 92, 246, 0.05); border-radius: 10px; border: 1px solid rgba(139, 92, 246, 0.2);">
+                        <label for="content-url-collect" style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 700; color: var(--text-strong); margin-bottom: 0.4rem;">
+                            <span style="font-size: 1rem;">🔗</span>
+                            <span>이미지 수집 URL <span style="color: var(--text-muted); font-weight: 500;">(선택)</span></span>
+                        </label>
+                        <input type="url" id="content-url-collect"
+                            placeholder="예: https://news.naver.com/article/..."
+                            style="width: 100%; padding: 0.55rem 0.75rem; background: var(--bg-primary); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; color: var(--text-strong); font-size: 0.85rem;" />
+                        <p style="margin: 0.4rem 0 0 0; font-size: 0.7rem; color: var(--text-muted); line-height: 1.4;">
+                            ℹ️ 입력한 URL의 페이지 이미지를 1순위로 수집. 비어있으면 글 생성 시 사용한 URL 자동 사용. 둘 다 없으면 키워드 검색.
+                        </p>
+                        <!-- 부족분 처리 정책 체크박스 -->
+                        <label style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.6rem; padding: 0.5rem 0.7rem; background: rgba(59, 130, 246, 0.08); border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.2); cursor: pointer;">
+                            <input type="checkbox" id="content-url-fillgap-ai"
+                                style="width: 16px; height: 16px; accent-color: #3b82f6;">
+                            <div>
+                                <span style="font-size: 0.8rem; color: var(--text-strong); font-weight: 600;">🎨 부족분 AI 생성</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">URL 이미지 부족 시 빈 소제목에 AI 이미지 자동 생성 (기본 OFF — 빈 자리는 그대로)</span>
+                            </div>
+                        </label>
+                    </div>
+
                     <!-- AI 자동 수집 및 저장하기 버튼 -->
                     <div style="margin-top: 1rem;">
                         <button type="button" id="ai-auto-collect-save-btn"
