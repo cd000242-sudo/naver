@@ -127,6 +127,9 @@ export interface ContinuousQueueItem {
     keywordAsTitle?: boolean;
     keywordTitlePrefix?: boolean;
     scheduleUserModified?: boolean;   // ✅ [2026-03-17] 사용자 수동 예약 설정 보호 플래그
+    // ✅ [v2.7.76] URL 자동 수집 + 부족분 AI 생성
+    urlAutoCollect?: boolean;
+    fillGapWithAI?: boolean;
 }
 
 // ── 생성된 글 ──

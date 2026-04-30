@@ -6636,6 +6636,27 @@
                         <input type="hidden" id="continuous-modal-category-select" value="entertainment">
                     </div>
 
+                    <!-- ✅ [v2.7.76] URL 자동 수집 + 부족분 AI 생성 (연속발행) -->
+                    <div style="margin-bottom: 1rem; padding: 0.75rem; background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 10px;">
+                        <label style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">🔗 URL 이미지 자동 수집</label>
+                        <label style="display: flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0.6rem; background: var(--bg-primary); border-radius: 6px; border: 1px solid rgba(139, 92, 246, 0.2); cursor: pointer; margin-bottom: 0.4rem;">
+                            <input type="checkbox" id="continuous-modal-url-auto-collect"
+                                style="width: 16px; height: 16px; accent-color: #8b5cf6;">
+                            <div>
+                                <span style="font-size: 0.8rem; color: var(--text-strong); font-weight: 600;">🔗 글마다 원본 URL 이미지 자동 수집</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">글 생성 시 사용한 URL의 페이지 이미지를 1순위로 사용</span>
+                            </div>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0.6rem; background: var(--bg-primary); border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.2); cursor: pointer;">
+                            <input type="checkbox" id="continuous-modal-fillgap-ai"
+                                style="width: 16px; height: 16px; accent-color: #3b82f6;">
+                            <div>
+                                <span style="font-size: 0.8rem; color: var(--text-strong); font-weight: 600;">🎨 부족분 AI 생성</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">URL 이미지 부족 시 빈 소제목만 AI 생성 (기본 OFF)</span>
+                            </div>
+                        </label>
+                    </div>
+
                     <!-- 발행 모드 -->
                     <div style="margin-bottom: 1rem;">
                         <label
@@ -8680,6 +8701,27 @@
                         <textarea id="ma-setting-keyword"
                             placeholder="아이폰16 프로 후기&#10;갤럭시 S25 스펙&#10;(줄바꿈으로 여러 개 입력 가능)"
                             style="width: 100%; min-height: 80px; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-medium); background: var(--bg-secondary); color: var(--text-strong); resize: vertical; font-family: inherit;"></textarea>
+                    </div>
+
+                    <!-- ✅ [v2.7.76] URL 자동 수집 + 부족분 AI 생성 (다계정 발행) -->
+                    <div style="margin-bottom: 1rem; padding: 0.75rem; background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 10px;">
+                        <label style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">🔗 URL 이미지 자동 수집</label>
+                        <label style="display: flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0.6rem; background: var(--bg-primary); border-radius: 6px; border: 1px solid rgba(139, 92, 246, 0.2); cursor: pointer; margin-bottom: 0.4rem;">
+                            <input type="checkbox" id="ma-modal-url-auto-collect"
+                                style="width: 16px; height: 16px; accent-color: #8b5cf6;">
+                            <div>
+                                <span style="font-size: 0.8rem; color: var(--text-strong); font-weight: 600;">🔗 글마다 원본 URL 이미지 자동 수집</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">위 URL의 페이지 이미지를 1순위로 사용</span>
+                            </div>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0.6rem; background: var(--bg-primary); border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.2); cursor: pointer;">
+                            <input type="checkbox" id="ma-modal-fillgap-ai"
+                                style="width: 16px; height: 16px; accent-color: #3b82f6;">
+                            <div>
+                                <span style="font-size: 0.8rem; color: var(--text-strong); font-weight: 600;">🎨 부족분 AI 생성</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">URL 이미지 부족 시 빈 소제목만 AI 생성 (기본 OFF)</span>
+                            </div>
+                        </label>
                     </div>
 
                     <div style="display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1rem;">

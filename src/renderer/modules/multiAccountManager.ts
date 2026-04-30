@@ -919,6 +919,9 @@ export async function initMultiAccountPublishModal() {
     keywordAsTitle?: boolean;      // ✅ [2026-02-14] 키워드 그대로 제목 사용
     keywordTitlePrefix?: boolean;  // ✅ [2026-02-14] 키워드 맨 앞 배치
     scheduleUserModified?: boolean; // ✅ [2026-03-17] 사용자가 개별 예약 모달에서 수동 설정한 항목
+    // ✅ [v2.7.76] URL 자동 수집 + 부족분 AI 생성
+    urlAutoCollect?: boolean;
+    fillGapWithAI?: boolean;
   }
 
   // ✅ 발행 대기열
@@ -1678,6 +1681,14 @@ export async function initMultiAccountPublishModal() {
     const accountNameEl = document.getElementById('ma-setting-account-name');
     const accountName = accountNameEl?.textContent?.replace('📌 ', '') || '';
 
+    // ✅ [v2.7.76] URL 자동 수집 + fillgap localStorage 영속화
+    try {
+      const urlAuto = (document.getElementById('ma-modal-url-auto-collect') as HTMLInputElement | null);
+      const fillGap = (document.getElementById('ma-modal-fillgap-ai') as HTMLInputElement | null);
+      if (urlAuto) localStorage.setItem('ma_urlAutoCollect', urlAuto.checked ? '1' : '0');
+      if (fillGap) localStorage.setItem('ma_fillGapAi', fillGap.checked ? '1' : '0');
+    } catch { /* ignore */ }
+
     // ✅ textarea에서 여러 줄 읽기
     const urlText = (document.getElementById('ma-setting-url') as HTMLTextAreaElement)?.value || '';
     const keywordText = (document.getElementById('ma-setting-keyword') as HTMLTextAreaElement)?.value || '';
@@ -1828,6 +1839,11 @@ export async function initMultiAccountPublishModal() {
         realCategoryName,
         keywordAsTitle,
         keywordTitlePrefix,
+        // ✅ [v2.7.76] URL 자동 수집 + 부족분 AI 생성
+        urlAutoCollect: (document.getElementById('ma-modal-url-auto-collect') as HTMLInputElement | null)?.checked
+          || localStorage.getItem('ma_urlAutoCollect') === '1',
+        fillGapWithAI: (document.getElementById('ma-modal-fillgap-ai') as HTMLInputElement | null)?.checked
+          || localStorage.getItem('ma_fillGapAi') === '1',
       };
 
       const idx = publishQueue.findIndex(q => q.id === editingQueueId);
@@ -1872,6 +1888,11 @@ export async function initMultiAccountPublishModal() {
           realCategoryName,
           keywordAsTitle,
           keywordTitlePrefix,
+          // ✅ [v2.7.76] URL 자동 수집 + 부족분 AI 생성
+          urlAutoCollect: (document.getElementById('ma-modal-url-auto-collect') as HTMLInputElement | null)?.checked
+            || localStorage.getItem('ma_urlAutoCollect') === '1',
+          fillGapWithAI: (document.getElementById('ma-modal-fillgap-ai') as HTMLInputElement | null)?.checked
+            || localStorage.getItem('ma_fillGapAi') === '1',
         };
 
         publishQueue.push(queueItem);

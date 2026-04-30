@@ -1722,6 +1722,14 @@ export function initContinuousPublishingV2(): void {
       const includeThumbnailTextCheck = document.getElementById('continuous-modal-include-thumbnail-text') as HTMLInputElement;
       const useAiImageCheck = document.getElementById('continuous-modal-use-ai-image') as HTMLInputElement;
       const createThumbnailCheck = document.getElementById('continuous-modal-create-product-thumbnail') as HTMLInputElement;
+      // ✅ [v2.7.76] URL 자동 수집 + 부족분 AI 생성
+      const urlAutoCollectCheck = document.getElementById('continuous-modal-url-auto-collect') as HTMLInputElement;
+      const fillGapAiCheck = document.getElementById('continuous-modal-fillgap-ai') as HTMLInputElement;
+      // 설정값 즉시 localStorage 영속화 (다음 모달 진입 시 복원)
+      try {
+        if (urlAutoCollectCheck) localStorage.setItem('continuous_urlAutoCollect', urlAutoCollectCheck.checked ? '1' : '0');
+        if (fillGapAiCheck) localStorage.setItem('continuous_fillGapAi', fillGapAiCheck.checked ? '1' : '0');
+      } catch { /* ignore */ }
 
       if (editingIndex >= 0) {
         // ✅ [항목 수정 모드] 큐 항목 업데이트
@@ -2678,6 +2686,11 @@ function addItemToQueueV2Impl(): void {
       realCategory,   // ✅ 실제 블로그 카테고리 추가
       realCategoryName, // ✅ 실제 블로그 카테고리 이름 추가
       includeThumbnailText: (document.getElementById('continuous-modal-include-thumbnail-text') as HTMLInputElement)?.checked || false,
+      // ✅ [v2.7.76] URL 자동 수집 + 부족분 AI 생성
+      urlAutoCollect: (document.getElementById('continuous-modal-url-auto-collect') as HTMLInputElement)?.checked
+        || localStorage.getItem('continuous_urlAutoCollect') === '1',
+      fillGapWithAI: (document.getElementById('continuous-modal-fillgap-ai') as HTMLInputElement)?.checked
+        || localStorage.getItem('continuous_fillGapAi') === '1',
       // ✅ [2026-02-19] 제휴링크 자동 감지: URL 입력이 제휴 URL이면 별도 필드 없이도 자동 적용
       affiliateLink: resolveAffiliateLink(
         contentMode === 'affiliate' ? ((document.getElementById('continuous-affiliate-link') as HTMLInputElement)?.value?.trim() || '') : undefined,
