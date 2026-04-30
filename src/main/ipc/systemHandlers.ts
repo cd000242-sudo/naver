@@ -14,6 +14,36 @@ import { setImageFxAdsPowerEnabled } from '../../image/imageFxGenerator.js';
 import { setProxyEnabled, isProxyEnabled, getPoolStatus, getSmartProxyConfig, setManualProxy, getManualProxy, verifyProxy, type ManualProxyConfig } from '../../crawler/utils/proxyManager.js';
 
 /**
+ * ✅ [v2.7.63 SEC-V2-H2] Path traversal 차단 — 사용자 IPC 입력 경로 화이트리스트 검증
+ *   허용 루트: app.getPath('downloads'), app.getPath('userData'), os.homedir()
+ *   거부: ../, /etc, /root, C:\Windows\, system32, .ssh, .env 등
+ */
+function isPathSafe(targetPath: string): boolean {
+  try {
+    if (!targetPath || typeof targetPath !== 'string') return false;
+    if (targetPath.includes('\0')) return false; // null byte 차단
+    const resolved = path.resolve(targetPath);
+    const lower = resolved.toLowerCase();
+    // 절대 차단 패턴
+    const BANNED = [
+      'system32', '\\windows\\', '/etc/', '/root/', '/proc/',
+      '.ssh', '.env', 'private', 'credentials',
+    ];
+    if (BANNED.some(b => lower.includes(b))) return false;
+    // 허용 루트 화이트리스트
+    const allowedRoots: string[] = [];
+    try { allowedRoots.push(path.resolve(app.getPath('downloads'))); } catch { /* 무시 */ }
+    try { allowedRoots.push(path.resolve(app.getPath('userData'))); } catch { /* 무시 */ }
+    try { allowedRoots.push(path.resolve(app.getPath('pictures'))); } catch { /* 무시 */ }
+    try { allowedRoots.push(path.resolve(app.getPath('documents'))); } catch { /* 무시 */ }
+    try { allowedRoots.push(path.resolve(os.homedir())); } catch { /* 무시 */ }
+    return allowedRoots.some(root => resolved.startsWith(root));
+  } catch {
+    return false;
+  }
+}
+
+/**
  * ✅ [2026-03-27] FNV-1a 해시 → 8자리 hex (계정별 Sticky Session ID 생성용)
  */
 function fnv1aHash(str: string): string {
@@ -374,9 +404,13 @@ export function registerFileHandlers(ctx: IpcContext): void {
         }
     });
 
-    // 디렉토리 읽기
+    // 디렉토리 읽기 — ✅ [v2.7.63 SEC-V2-H2] path traversal 차단
     ipcMain.handle('file:readDir', async (_event, dirPath: string) => {
         try {
+            if (!isPathSafe(dirPath)) {
+                console.warn(`[file:readDir] 🛡️ 차단됨: ${dirPath}`);
+                return [];
+            }
             if (!fs.existsSync(dirPath)) return [];
             return fs.readdirSync(dirPath);
         } catch {
@@ -396,9 +430,13 @@ export function registerFileHandlers(ctx: IpcContext): void {
         }
     });
 
-    // 파일 삭제
+    // 파일 삭제 — ✅ [v2.7.63 SEC-V2-H2] path traversal 차단
     ipcMain.handle('file:deleteFile', async (_event, filePath: string) => {
         try {
+            if (!isPathSafe(filePath)) {
+                console.warn(`[file:deleteFile] 🛡️ 차단됨: ${filePath}`);
+                return { success: false, error: '허용되지 않은 경로입니다.' };
+            }
             if (fs.existsSync(filePath)) {
                 fs.unlinkSync(filePath);
             }

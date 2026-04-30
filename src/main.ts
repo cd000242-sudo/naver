@@ -3434,18 +3434,29 @@ ipcMain.handle('automation:closeBrowser', async () => {
 
 // ✅ [2026-02-12] 소제목별 이미지 자동 검색 - 네이버 → 구글 폴백
 // ✅ [v2.7.61] AI 관련성 검증 옵션 추가 (config.imageRelevanceCheck)
-ipcMain.handle('search-images-for-headings', async (_event, payload: {
-  headings: string[];
-  mainKeyword: string;
-}) => {
+// ✅ [v2.7.63 SEC-V2-H5] IPC payload 화이트리스트 검증
+ipcMain.handle('search-images-for-headings', async (_event, payload: unknown) => {
   try {
-    console.log(`[Main] 🖼️ search-images-for-headings 시작: ${payload.headings.length}개 소제목`);
+    const { validateSearchImagesPayload } = await import('./main/ipc/validators.js');
+    const v = validateSearchImagesPayload(payload);
+    if (!v.ok) {
+      console.error(`[Main] 🛡️ search-images-for-headings payload 검증 실패: ${v.error}`);
+      return { success: false, message: v.error, images: {} };
+    }
+    const validPayload = v.value;
+    console.log(`[Main] 🖼️ search-images-for-headings 시작: ${validPayload.headings.length}개 소제목`);
 
     // ✅ [v2.7.62] config에서 AI 검증 + 글 생성 AI 라우팅 설정 로드
     const { loadConfig } = await import('./configManager.js');
     const cfg = await loadConfig();
     const relevanceCheckEnabled = (cfg as any).imageRelevanceCheck === true;
     const relevanceThreshold = Number((cfg as any).imageRelevanceThreshold ?? 60);
+
+    // ✅ [v2.7.63] 글 1편 단위로 비용 누적 리셋
+    if (relevanceCheckEnabled) {
+      const { resetVisionBudget } = await import('./crawler/visionBudgetGuard.js');
+      resetVisionBudget();
+    }
     // 글 생성 AI 키 (사용자 요청: vision도 동일 모델 사용)
     const textGenerator = (cfg as any).primaryGeminiTextModel || 'gemini-2.5-flash';
     const apiKeys = {
@@ -3456,8 +3467,8 @@ ipcMain.handle('search-images-for-headings', async (_event, payload: {
 
     const { searchImagesForHeadings } = await import('./crawler/googleImageSearch.js');
     const resultMap = await searchImagesForHeadings(
-      payload.headings,
-      payload.mainKeyword,
+      validPayload.headings,
+      validPayload.mainKeyword,
       {
         relevanceCheckEnabled,
         relevanceThreshold,

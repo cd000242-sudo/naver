@@ -11,6 +11,8 @@
 
 import * as https from 'https';
 import { VISION_MODELS, routeTextToVision, type VisionRouting } from '../runtime/modelRegistry.js';
+import { TimeoutPolicy } from '../automation/TimeoutPolicy.js';
+import { chargeAndCheck, resetVisionBudget, getVisionBudget } from './visionBudgetGuard.js';
 
 interface RelevanceScore {
   url: string;
@@ -182,7 +184,10 @@ interface VisionStrategy {
 }
 
 function geminiStrategy(model: string, apiKey: string): VisionStrategy {
-  const timeoutMs = model === VISION_MODELS.GEMINI_PRO ? 25000 : 8000;
+  // ✅ [v2.7.63] TimeoutPolicy SSOT 적용
+  const timeoutMs = model === VISION_MODELS.GEMINI_PRO
+    ? TimeoutPolicy.VL_INFERENCE_SLOW
+    : TimeoutPolicy.VL_INFERENCE_FAST;
   return {
     timeoutMs,
     async score(buf, mime, prompt) {
@@ -200,7 +205,7 @@ function geminiStrategy(model: string, apiKey: string): VisionStrategy {
 
 function claudeStrategy(model: string, apiKey: string): VisionStrategy {
   return {
-    timeoutMs: 12000,
+    timeoutMs: TimeoutPolicy.VL_INFERENCE_STANDARD,
     async score(buf, mime, prompt) {
       const body = {
         model,
@@ -226,7 +231,9 @@ function claudeStrategy(model: string, apiKey: string): VisionStrategy {
 }
 
 function openaiStrategy(model: string, apiKey: string): VisionStrategy {
-  const timeoutMs = model === VISION_MODELS.OPENAI_41_MINI ? 8000 : 10000;
+  const timeoutMs = model === VISION_MODELS.OPENAI_41_MINI
+    ? TimeoutPolicy.VL_INFERENCE_FAST
+    : TimeoutPolicy.VL_INFERENCE_STANDARD;
   return {
     timeoutMs,
     async score(buf, mime, prompt) {
@@ -317,11 +324,19 @@ export async function filterImagesByRelevance(
   console.log(`[ImageRelevance] 🤖 "${heading}" — ${imageUrls.length}개 평가 (provider=${routing.provider}${routing.fellBack ? ', 폴백' : ''}, threshold=${threshold})`);
   if (routing.fellBack && routing.reason) console.log(`[ImageRelevance]   ↳ ${routing.reason}`);
 
+  // ✅ [v2.7.63] 비용 가드 — 누적 ₩500 경고 / ₩1500 차단
   // 병렬 5개 (외부 API RPM 보호)
   const CONCURRENT = 5;
   const scores: RelevanceScore[] = [];
   for (let i = 0; i < imageUrls.length; i += CONCURRENT) {
     const batch = imageUrls.slice(i, i + CONCURRENT);
+    // 배치 시작 전 비용 체크
+    const budget = chargeAndCheck(routing);
+    if (budget.warning) console.warn(`[ImageRelevance][Budget] ⚠️ ${budget.warning}`);
+    if (budget.blocked) {
+      console.error(`[ImageRelevance][Budget] 🛑 한도 초과로 평가 중단 — 누적 ${getVisionBudget().krw}원`);
+      break;
+    }
     const batchResults = await Promise.all(batch.map(url => scoreOne(url, heading, mainKeyword, strategy)));
     scores.push(...batchResults);
   }

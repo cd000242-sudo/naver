@@ -36,6 +36,11 @@ export const TimeoutPolicy = {
   /** 120초 — OpenAI 이미지 생성 1장 */
   IMAGE_GENERATION: 120_000,
 
+  /** ✅ [v2.7.63] Vision/VL 추론 (이미지 1장 분석) — vendor별 차등은 호출자에서 적용 */
+  VL_INFERENCE_FAST: 8_000,    // Gemini Flash, GPT-4.1 mini
+  VL_INFERENCE_STANDARD: 12_000, // Claude Sonnet, GPT-4.1
+  VL_INFERENCE_SLOW: 25_000,   // Gemini Pro
+
   /** 300초 (5분) — 사용자 수동 로그인 대기 */
   MANUAL_LOGIN: 300_000,
 

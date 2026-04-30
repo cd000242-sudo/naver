@@ -504,9 +504,26 @@ export async function initImageManagementTab(): Promise<void> {
     relevanceCheckbox.addEventListener('change', async () => {
       try {
         const cfg = await (window as any).api?.getConfig?.();
+        // ✅ [v2.7.63 B안] Perplexity 사용자에게는 Gemini Flash 폴백 동의 받기
+        if (relevanceCheckbox.checked) {
+          const textModel = cfg?.primaryGeminiTextModel || '';
+          if (textModel === 'perplexity-sonar') {
+            const ok = window.confirm(
+              '⚠️ Perplexity는 Vision(이미지 분석) API를 지원하지 않습니다.\n\n' +
+              '대신 Gemini 2.5 Flash로 자동 폴백되어 이미지 관련성을 평가합니다.\n' +
+              '(Gemini API 키 필요, 무료 쿼터 내 사용 가능)\n\n' +
+              '이대로 진행하시겠습니까?'
+            );
+            if (!ok) {
+              relevanceCheckbox.checked = false;
+              appendLog('🔕 AI 관련성 검증 취소됨 (Perplexity 폴백 미동의)');
+              return;
+            }
+          }
+        }
         await (window as any).api?.saveConfig?.({ ...cfg, imageRelevanceCheck: relevanceCheckbox.checked });
         appendLog(relevanceCheckbox.checked
-          ? '🤖 AI 이미지 관련성 검증 ON — 수집 시 무관한 이미지 자동 차단 (글당 약 ₩1.2 추가)'
+          ? '🤖 AI 이미지 관련성 검증 ON — 글 생성 AI와 동일 vendor로 평가 (글당 약 ₩1.2~₩10)'
           : '🔕 AI 이미지 관련성 검증 OFF — 키워드 기반 수집만 사용');
       } catch (e: any) {
         console.warn('[ImageRelevance] 설정 저장 실패:', e);

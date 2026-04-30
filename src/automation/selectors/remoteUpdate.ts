@@ -100,6 +100,11 @@ function isStringArray(value: unknown): value is readonly string[] {
  */
 export async function fetchRemoteSelectors(url: string): Promise<RemoteSelectorPatch | null> {
   try {
+    // ✅ [v2.7.63 SEC-V2-H4] HTTPS 강제 — 중간자 공격 차단
+    if (!url.startsWith('https://')) {
+      console.error(`[RemoteUpdate] 🛡️ HTTPS 외 프로토콜 차단: ${url}`);
+      return null;
+    }
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
 
@@ -116,7 +121,28 @@ export async function fetchRemoteSelectors(url: string): Promise<RemoteSelectorP
       return null;
     }
 
-    const data: unknown = await response.json();
+    // ✅ [v2.7.63 SEC-V2-H4] HMAC-SHA256 무결성 검증
+    //   서버가 X-Selector-Signature 헤더에 base64(HMAC-SHA256(body, RELEASE_HMAC_KEY)) 포함
+    //   비대칭 키 인프라 부담 회피 + 키는 release 시점에만 회전
+    const bodyText = await response.text();
+    const signature = response.headers.get('x-selector-signature') || '';
+    const hmacKey = process.env.SELECTOR_HMAC_KEY || '';
+    if (signature && hmacKey) {
+      try {
+        const crypto = await import('node:crypto');
+        const expected = crypto.createHmac('sha256', hmacKey).update(bodyText).digest('base64');
+        if (expected !== signature) {
+          console.error('[RemoteUpdate] 🛡️ HMAC 서명 불일치 — 패치 거부 (변조 의심)');
+          return null;
+        }
+      } catch (e) {
+        console.warn('[RemoteUpdate] HMAC 검증 오류, 안전 폴백 → 패치 거부:', e);
+        return null;
+      }
+    }
+    // 서명 헤더가 없는 경우 — HMAC 키 미배포 단계에서도 호환 (기본 동작)
+
+    const data: unknown = JSON.parse(bodyText);
 
     if (!isValidPatch(data)) {
       console.warn('[RemoteUpdate] 스키마 검증 실패 — 패치 무시');
