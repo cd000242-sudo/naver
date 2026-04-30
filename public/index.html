@@ -316,7 +316,16 @@
                             </div>
                             <div class="field">
                                 <label for="naver-password">🔑 비밀번호</label>
-                                <input type="password" id="naver-password" placeholder="비밀번호 입력">
+                                <!-- ✅ [v2.7.69] 눈 버튼으로 비밀번호 표시/숨김 토글 -->
+                                <div style="position: relative;">
+                                    <input type="password" id="naver-password" placeholder="비밀번호 입력"
+                                        style="padding-right: 2.75rem; width: 100%;">
+                                    <button type="button" id="toggle-naver-password" tabindex="-1"
+                                        aria-label="비밀번호 보이기/숨기기"
+                                        style="position: absolute; top: 50%; right: 0.5rem; transform: translateY(-50%); background: transparent; border: none; cursor: pointer; padding: 0.25rem 0.5rem; font-size: 1.1rem; color: var(--text-muted); user-select: none;">
+                                        👁️
+                                    </button>
+                                </div>
                             </div>
                         </div>
 

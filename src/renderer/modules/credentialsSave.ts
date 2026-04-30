@@ -33,6 +33,17 @@ export async function initCredentialsSave(): Promise<void> {
         return;
     }
 
+    // ✅ [v2.7.69] 비밀번호 표시/숨김 토글 (눈 버튼)
+    const togglePwBtn = document.getElementById('toggle-naver-password') as HTMLButtonElement | null;
+    if (togglePwBtn) {
+        togglePwBtn.addEventListener('click', () => {
+            const isHidden = naverPasswordInput.type === 'password';
+            naverPasswordInput.type = isHidden ? 'text' : 'password';
+            togglePwBtn.textContent = isHidden ? '🙈' : '👁️';
+            togglePwBtn.setAttribute('aria-label', isHidden ? '비밀번호 숨기기' : '비밀번호 보이기');
+        });
+    }
+
     // 저장된 자격증명 로드
     try {
         const config = await window.api.getConfig();
