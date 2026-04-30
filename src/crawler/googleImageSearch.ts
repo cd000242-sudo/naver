@@ -447,77 +447,89 @@ async function crawlImagesFromUrl(url: string): Promise<string[]> {
             await new Promise(r => setTimeout(r, 600));
         }).catch(() => { /* 무시 */ });
 
-        // ✅ 모든 이미지 소스 추출 (img, picture, OG, background-image)
-        const collected: string[] = await page.evaluate(() => {
-            const urls: string[] = [];
-            const seen = new Set<string>();
-            const baseHref = document.location.href;
+        // ✅ [v2.7.71] iframe 포함 모든 frame에서 추출 + 강화된 필터
+        //   네이버 블로그 PostView.naver 등 iframe-embedded 콘텐츠 대응
+        const extractFromFrame = async (frame: any): Promise<string[]> => {
+            return await frame.evaluate(() => {
+                const urls: { src: string; w: number; priority: number }[] = [];
+                const seen = new Set<string>();
+                const baseHref = document.location.href;
 
-            const tryAdd = (raw: string | null | undefined) => {
-                if (!raw) return;
-                let src = String(raw).trim();
-                if (!src || src.startsWith('data:')) return;
-                try {
-                    src = new URL(src, baseHref).toString();
-                } catch { return; }
-                if (/spacer|pixel|blank|1x1|icon|\.svg$/i.test(src)) return;
-                const base = src.split('?')[0];
-                if (seen.has(base)) return;
-                seen.add(base);
-                urls.push(src);
-            };
+                // 차단 패턴: site-wide UI / 위젯 / 광고
+                const BANNED = /spacer|pixel|blank|1x1|spc\.gif|ico_n\.gif|ico_|gnb|navbar|footer|widget|profile|avatar|emoticon|sticker|bg_|btn_|\.svg$/i;
+                // 본문 우선 패턴: 네이버 블로그 + 일반 뉴스/블로그 CDN
+                const PRIORITY_HOSTS = /postfiles\.pstatic\.net|mblogthumb-phinf\.pstatic\.net|blogfiles\.pstatic\.net|dthumb-phinf\.pstatic\.net|pup-post-phinf\.pstatic\.net|tistory|naver\.net\/MjAy/i;
 
-            // 1) OG/Twitter 메타 (최우선)
-            const og = document.querySelector('meta[property="og:image"]') as HTMLMetaElement | null;
-            const ogSecure = document.querySelector('meta[property="og:image:secure_url"]') as HTMLMetaElement | null;
-            const twitter = document.querySelector('meta[name="twitter:image"]') as HTMLMetaElement | null;
-            tryAdd(og?.content);
-            tryAdd(ogSecure?.content);
-            tryAdd(twitter?.content);
+                const tryAdd = (raw: string | null | undefined, w: number) => {
+                    if (!raw) return;
+                    let src = String(raw).trim();
+                    if (!src || src.startsWith('data:')) return;
+                    try { src = new URL(src, baseHref).toString(); } catch { return; }
+                    if (BANNED.test(src)) return;
+                    const base = src.split('?')[0];
+                    if (seen.has(base)) return;
+                    seen.add(base);
+                    const priority = PRIORITY_HOSTS.test(src) ? 0 : (w >= 400 ? 1 : 2);
+                    urls.push({ src, w, priority });
+                };
 
-            // 2) <article>, <main> 본문 이미지 (뉴스/블로그 우선)
-            const bodyImgs = document.querySelectorAll('article img, main img, .article img, .news_view img, .post img, [class*="content"] img');
-            bodyImgs.forEach(el => {
-                const img = el as HTMLImageElement;
-                const w = img.naturalWidth || img.width || 0;
-                const h = img.naturalHeight || img.height || 0;
-                if (w > 0 && w < 80 && h > 0 && h < 80) return;
-                tryAdd(img.currentSrc || img.src || img.getAttribute('data-src') || img.getAttribute('data-original'));
-            });
+                // 1) OG/Twitter 메타 (페이지 대표 이미지)
+                const og = document.querySelector('meta[property="og:image"]') as HTMLMetaElement | null;
+                const ogSecure = document.querySelector('meta[property="og:image:secure_url"]') as HTMLMetaElement | null;
+                const twitter = document.querySelector('meta[name="twitter:image"]') as HTMLMetaElement | null;
+                tryAdd(og?.content, 999);
+                tryAdd(ogSecure?.content, 999);
+                tryAdd(twitter?.content, 999);
 
-            // 3) 모든 <img> (남은 것)
-            document.querySelectorAll('img').forEach(el => {
-                if (urls.length >= 50) return;
-                const img = el as HTMLImageElement;
-                const w = img.naturalWidth || img.width || 0;
-                if (w > 0 && w < 80) return;
-                tryAdd(img.currentSrc || img.src || img.getAttribute('data-src') || img.getAttribute('data-original'));
-            });
+                // 2) 모든 <img> — 사이즈 검사
+                document.querySelectorAll('img').forEach(el => {
+                    const img = el as HTMLImageElement;
+                    const w = img.naturalWidth || img.width || 0;
+                    const h = img.naturalHeight || img.height || 0;
+                    // 본문 이미지 임계: 가로 200px 이상 OR 세로 200px 이상 (큰 이미지만)
+                    if ((w > 0 && w < 150) && (h > 0 && h < 150)) return;
+                    tryAdd(img.currentSrc || img.src || img.getAttribute('data-src') || img.getAttribute('data-original') || img.getAttribute('data-lazy-src'), w);
+                });
 
-            // 4) <picture><source srcset>
-            document.querySelectorAll('picture source').forEach(el => {
-                const srcset = el.getAttribute('srcset') || '';
-                const first = srcset.split(',')[0]?.trim().split(/\s+/)[0];
-                if (first) tryAdd(first);
-            });
+                // 3) <picture><source srcset>
+                document.querySelectorAll('picture source').forEach(el => {
+                    const srcset = el.getAttribute('srcset') || '';
+                    const first = srcset.split(',')[0]?.trim().split(/\s+/)[0];
+                    if (first) tryAdd(first, 0);
+                });
 
-            // 5) background-image (CSS) — 최대 20개만 검사 (성능)
-            let bgChecked = 0;
-            document.querySelectorAll('div, section, figure, span').forEach(el => {
-                if (bgChecked >= 50 || urls.length >= 50) return;
-                bgChecked++;
-                const style = window.getComputedStyle(el);
-                const bg = style.backgroundImage;
-                if (bg && bg !== 'none') {
-                    const match = bg.match(/url\(["']?(.+?)["']?\)/);
-                    if (match && match[1]) tryAdd(match[1]);
-                }
-            });
+                // 4) background-image CSS
+                let bgChecked = 0;
+                document.querySelectorAll('div, section, figure, span').forEach(el => {
+                    if (bgChecked >= 50) return;
+                    bgChecked++;
+                    const style = window.getComputedStyle(el);
+                    const bg = style.backgroundImage;
+                    if (bg && bg !== 'none') {
+                        const match = bg.match(/url\(["']?(.+?)["']?\)/);
+                        if (match && match[1]) {
+                            const w = (el as HTMLElement).offsetWidth || 0;
+                            tryAdd(match[1], w);
+                        }
+                    }
+                });
 
-            return urls;
-        }).catch(() => []);
+                // 우선순위 정렬 (priority 0=CDN 본문 → 1=400px+ → 2=나머지)
+                urls.sort((a, b) => a.priority - b.priority || b.w - a.w);
+                return urls.map(u => u.src);
+            }).catch(() => []);
+        };
 
-        console.log(`[ImageSearch][crawlUrl] ✅ Playwright 추출: ${collected.length}개`);
+        // 메인 + 모든 iframe 순회
+        const allFrames = page.frames();
+        const merged = new Set<string>();
+        for (const frame of allFrames) {
+            const fromFrame = await extractFromFrame(frame);
+            fromFrame.forEach(u => merged.add(u));
+        }
+        const collected = Array.from(merged);
+
+        console.log(`[ImageSearch][crawlUrl] ✅ Puppeteer 추출: ${collected.length}개 (frames=${allFrames.length})`);
         return collected.slice(0, 30);
     } catch (e: any) {
         console.warn(`[ImageSearch][crawlUrl] Playwright 실패: ${e.message?.slice(0, 100)}`);
