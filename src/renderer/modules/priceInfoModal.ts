@@ -488,19 +488,36 @@ export async function initPriceInfoModal(): Promise<void> {
       console.log('[Settings] Gemini 텍스트 주력 모델 로드됨:', config.primaryGeminiTextModel);
 
       // ✅ [2026-02-22 FIX] 로드 시 nav-text-engine-status UI 업데이트
+      // ✅ [v2.7.78] deprecate 모델 ID 자동 마이그레이션 + 기본값 보장
       const navStatusEl = document.getElementById('nav-text-engine-status');
       if (navStatusEl) {
         // [v1.4.32] 가격 표시 추가 — 사용자가 어떤 비용을 쓰는지 한눈에
         const modelNames: Record<string, string> = {
           'gemini-2.5-flash-lite': '💰 Gemini 2.5 Flash-Lite (~₩15/글)',
-          'gemini-2.5-flash': '⚖️ Gemini 2.5 Flash (~₩80/글)',
+          'gemini-2.5-flash': '⚖️ Gemini 2.5 Flash (~₩80/글) ★ 기본',
           'gemini-2.5-pro': '👑 Gemini 2.5 Pro (~₩300/글)',
           'perplexity-sonar': '🔮 Perplexity Sonar (~₩15/글)',
           'openai-gpt4o-mini': '🧠 GPT-4.1 mini (~₩16/글)',
           'openai-gpt41': '⚖️ GPT-4.1 (~₩60/글)',
           'claude-sonnet': '📜 Claude Sonnet 4.6 (~₩240/글)',
         };
-        navStatusEl.textContent = `현재: ${modelNames[config.primaryGeminiTextModel] || config.primaryGeminiTextModel}`;
+        // deprecate된 모델 ID 자동 마이그레이션 (gemini-3-*-preview 등)
+        const DEPRECATED_TO_DEFAULT: Record<string, string> = {
+          'gemini-3.1-pro-preview': 'gemini-2.5-flash',
+          'gemini-3-pro-preview': 'gemini-2.5-flash',
+          'gemini-3-pro': 'gemini-2.5-flash',
+          'gemini-3-flash': 'gemini-2.5-flash',
+        };
+        let activeModel = config.primaryGeminiTextModel || 'gemini-2.5-flash';
+        if (DEPRECATED_TO_DEFAULT[activeModel]) {
+          const newModel = DEPRECATED_TO_DEFAULT[activeModel];
+          console.warn(`[Settings] ⚠️ deprecate된 모델 ID '${activeModel}' → '${newModel}' 자동 마이그레이션`);
+          activeModel = newModel;
+          try {
+            await (window as any).api?.saveConfig?.({ ...config, primaryGeminiTextModel: newModel });
+          } catch { /* 무시 */ }
+        }
+        navStatusEl.textContent = `현재: ${modelNames[activeModel] || activeModel}`;
       }
     }
 

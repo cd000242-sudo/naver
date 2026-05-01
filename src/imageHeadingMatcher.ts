@@ -1,5 +1,5 @@
 // src/imageHeadingMatcher.ts
-// ✅ AI 기반 소제목-이미지 의미적 매칭 (Gemini 3.1 Pro / Perplexity 지원)
+// ✅ AI 기반 소제목-이미지 의미적 매칭 (Gemini 2.5 Flash / Perplexity 지원)
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import OpenAI from 'openai';
@@ -42,7 +42,7 @@ export async function matchImagesToHeadings(
 
         // ✅ Gemini 사용
         if (config.geminiApiKey) {
-            console.log('[ImageMatcher] ✨ Gemini 3.1 Pro로 이미지 매칭 중...');
+            console.log('[ImageMatcher] ✨ Gemini 2.5 Flash로 이미지 매칭 중...');
             return await matchWithGemini(prompt, headings.length, images.length, config);
         }
 
@@ -57,7 +57,7 @@ export async function matchImagesToHeadings(
 }
 
 /**
- * Gemini 3.1 Pro로 이미지 매칭
+ * Gemini 2.5 Flash로 이미지 매칭
  */
 async function matchWithGemini(
     prompt: string,
