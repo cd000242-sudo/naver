@@ -221,32 +221,42 @@ export async function searchImagesForHeadings(
             const urlImages = await crawlImagesFromUrl(options.sourceUrl);
             console.log(`[ImageSearch] 📥 원본 URL에서 ${urlImages.length}개 이미지 수집`);
 
+            // ✅ [v2.7.83] 중복 차단 — 같은 URL을 여러 소제목에 배정 안 함, 소제목당 1장
+            const usedUrls = new Set<string>();
             if (urlImages.length > 0 && aiCheck) {
-                // AI로 각 소제목에 가장 적합한 이미지 매칭
+                // AI로 각 소제목에 가장 적합한 이미지 매칭 — 이미 사용된 URL 제외
                 for (const heading of headings) {
+                    const candidatePool = urlImages.filter(u => !usedUrls.has(u));
+                    if (candidatePool.length === 0) {
+                        console.log(`[ImageSearch] ⚠️ "${heading}" — 잔여 URL 없음, 스킵`);
+                        continue;
+                    }
                     const { filterImagesByRelevance } = await import('./imageRelevanceScorer.js');
-                    const { filtered } = await filterImagesByRelevance(urlImages, heading, mainKeyword, {
+                    const { filtered } = await filterImagesByRelevance(candidatePool, heading, mainKeyword, {
                         enabled: true,
                         textGenerator: options!.textGenerator || 'gemini-2.5-flash',
                         apiKeys: options!.apiKeys || {},
                         threshold: options!.relevanceThreshold,
                     });
                     if (filtered.length > 0) {
-                        resultMap.set(heading, filtered.slice(0, 2));
-                        console.log(`[ImageSearch] ✅ URL 매칭 → "${heading}" → ${filtered.length}개 (AI 통과)`);
+                        const picked = filtered[0]; // 1장만
+                        usedUrls.add(picked);
+                        resultMap.set(heading, [picked]);
+                        console.log(`[ImageSearch] ✅ URL 매칭 → "${heading}" → 1개 (AI 통과, 잔여 ${candidatePool.length - 1})`);
                     }
                 }
             } else if (urlImages.length > 0) {
-                // AI 검증 OFF: 첫 N개를 순환 배분
+                // AI 검증 OFF: 페이지 순서대로 1:1 배분 (idx ≥ urlImages.length 시 슬롯 비움)
                 headings.forEach((heading, idx) => {
-                    const start = (idx * 2) % urlImages.length;
-                    const slice = [
-                        urlImages[start],
-                        urlImages[(start + 1) % urlImages.length],
-                    ].filter((u, i, arr) => arr.indexOf(u) === i);
-                    if (slice.length > 0) resultMap.set(heading, slice);
+                    if (idx < urlImages.length) {
+                        const picked = urlImages[idx];
+                        if (!usedUrls.has(picked)) {
+                            usedUrls.add(picked);
+                            resultMap.set(heading, [picked]);
+                        }
+                    }
                 });
-                console.log(`[ImageSearch] ✅ URL 이미지 순환 배분 완료 (AI 검증 OFF)`);
+                console.log(`[ImageSearch] ✅ URL 이미지 1:1 배분 완료 (페이지 순서, ${usedUrls.size}/${headings.length})`);
             }
         } catch (e: any) {
             console.warn(`[ImageSearch] ⚠️ URL 크롤링 실패 → 키워드 검색 폴백: ${e.message}`);

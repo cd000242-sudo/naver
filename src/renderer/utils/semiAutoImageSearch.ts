@@ -179,9 +179,10 @@ export async function runAutoImageSearch(
             continue;
         }
 
+        // ✅ [v2.7.83] 소제목당 1장만 배치 (이전 2장 → 중복 호소)
         // 각 URL을 디스크에 저장 후 entry에 filePath 포함
         const imageEntries: any[] = [];
-        for (let idx = 0; idx < Math.min(urls.length, 2); idx++) {
+        for (let idx = 0; idx < Math.min(urls.length, 1); idx++) {
             const url = urls[idx];
             let filePath: string | undefined;
             let previewDataUrl: string | undefined;
