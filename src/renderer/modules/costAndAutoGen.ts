@@ -37,10 +37,12 @@ declare function toFileUrlMaybe(p: string): string;
 async function autoSearchAndPopulateImages(
   structuredContent: any,
   mainKeyword: string,
-  suppressModal?: boolean
+  suppressModal?: boolean,
+  // ✅ [v2.7.77] 풀오토/연속/다계정에서 명시 주입한 옵션
+  forceOptions?: { sourceUrl?: string; fillGapWithAI?: boolean }
 ): Promise<void> {
-  // 가드: 체크박스 미체크, 풀오토, 쇼핑커넥트 등이면 실행 안 함
-  if (!shouldRunAutoImageSearch(suppressModal)) return;
+  // ✅ [v2.7.77] force 옵션 있으면 가드 우회 (사용자 명시 의도)
+  if (!forceOptions?.sourceUrl && !shouldRunAutoImageSearch(suppressModal)) return;
 
   try {
     await runAutoImageSearch(
@@ -48,7 +50,8 @@ async function autoSearchAndPopulateImages(
       mainKeyword,
       appendLog,
       ImageManager,
-      syncGlobalImagesFromImageManager
+      syncGlobalImagesFromImageManager,
+      forceOptions
     );
   } catch (error) {
     console.error('[AutoImageSearch] ❌ 오류:', error);

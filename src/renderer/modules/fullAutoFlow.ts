@@ -2198,6 +2198,30 @@ export async function generateFullAutoContent(formData: any) {
 
   appendLog('✅ AI 콘텐츠 생성이 완료되었습니다!');
 
+  // ✅ [v2.7.77] 풀오토: 콘텐츠 입력 영역의 URL 수집 옵션 자동 적용
+  try {
+    const contentUrl = (document.getElementById('content-url-collect') as HTMLInputElement | null)?.value?.trim() || '';
+    const fillGap = !!(document.getElementById('content-url-fillgap-ai') as HTMLInputElement | null)?.checked;
+    const sourceUrl = contentUrl || (formData as any)?.sourceUrl || (result.content as any)?.sourceUrl || '';
+    if (sourceUrl && /^https?:\/\//i.test(sourceUrl)) {
+      const { runAutoImageSearch } = await import('../utils/semiAutoImageSearch.js');
+      const ImageManager = (window as any).ImageManager;
+      const syncFn = (window as any).syncGlobalImagesFromImageManager || (() => {});
+      const mainKw = (formData as any)?.keywords || (result.content as any)?.selectedTitle || '';
+      await runAutoImageSearch(
+        result.content,
+        mainKw,
+        appendLog,
+        ImageManager,
+        syncFn,
+        { sourceUrl, fillGapWithAI: fillGap }
+      );
+      appendLog(`🔗 [풀오토] URL 이미지 자동 수집 완료 (fillgap=${fillGap ? 'ON' : 'OFF'})`);
+    }
+  } catch (e: any) {
+    appendLog(`⚠️ [풀오토] URL 이미지 수집 실패: ${e?.message?.slice(0, 80)}`);
+  }
+
   // ✅ [Shopping Connect] 수집된 이미지가 있으면 전역 이미지 배열에 추가 (참조 이미지로 사용)
   if (result.content.collectedImages && result.content.collectedImages.length > 0) {
     console.log(`[FullAuto] 수집된 이미지 ${result.content.collectedImages.length}장을 참조 이미지로 등록합니다.`);

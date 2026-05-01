@@ -4257,6 +4257,19 @@ async function startContinuousPublishingV2(): Promise<void> {
       } catch (e) { /* businessInfo sync 실패 무시 */ }
 
       // 콘텐츠 생성
+      // ✅ [v2.7.77] 글마다 URL 자동 수집 + 부족분 AI 옵션 주입
+      const urlAutoCollect = !!(item as any).urlAutoCollect;
+      const fillGapWithAI = !!(item as any).fillGapWithAI;
+      if (urlAutoCollect && item.type === 'url') {
+        (window as any)._publishForceOptions = {
+          sourceUrl: String(item.value || '').split('\n')[0].trim(),
+          fillGapWithAI,
+        };
+        console.log(`[Continuous] 🔗 URL 자동 수집 ON — sourceUrl=${(window as any)._publishForceOptions.sourceUrl.slice(0,60)}, fillgap=${fillGapWithAI}`);
+      } else {
+        (window as any)._publishForceOptions = null;
+      }
+
       // ✅ [2026-04-03 FIX] withStopCheck 래퍼: 중지 버튼 즉시 반응 (AI API 15분 대기 중에도)
       if (item.type === 'url') {
         const customKeyword = item.customKeyword || '';
@@ -4272,6 +4285,8 @@ async function startContinuousPublishingV2(): Promise<void> {
         setKeywordTitleOptionsFromItem(item.value, item.keywordAsTitle, item.keywordTitlePrefix);
         await withStopCheck(generateContentFromKeywords(item.customTitle || '', item.value, item.toneStyle, true, item.contentMode, item.category));
       }
+      // ✅ [v2.7.77] 다음 항목에 영향 없도록 정리
+      (window as any)._publishForceOptions = null;
 
       if (!isContinuousMode) break;
 

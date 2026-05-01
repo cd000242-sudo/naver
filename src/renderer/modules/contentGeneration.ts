@@ -75,6 +75,28 @@ declare function setKeywordTitleOptionsFromItem(...args: any[]): void;
 declare function getProgressModal(): any;
 declare function isFullAutoStopRequested(...args: any[]): boolean;
 declare function autoSearchAndPopulateImages(...args: any[]): void;
+
+// ✅ [v2.7.77] DOM에서 URL 수집 옵션 읽기 (풀오토 자동 활성화)
+//   - 콘텐츠 입력란 #content-url-collect 또는 글생성 #unified-source-url
+//   - 둘 다 비어있으면 undefined 반환 (force 미주입 → 기존 가드 동작)
+function resolveForceOptionsFromDOM(structuredContent?: any, fallbackUrl?: string): { sourceUrl?: string; fillGapWithAI?: boolean } | undefined {
+    try {
+        const contentUrl = (document.getElementById('content-url-collect') as HTMLInputElement | null)?.value?.trim() || '';
+        const fillGap = !!(document.getElementById('content-url-fillgap-ai') as HTMLInputElement | null)?.checked;
+        let sourceUrl = contentUrl;
+        if (!sourceUrl) sourceUrl = String((structuredContent as any)?.sourceUrl || '').trim();
+        if (!sourceUrl && fallbackUrl) sourceUrl = String(fallbackUrl).trim();
+        if (!sourceUrl) {
+            const unifiedUrl = (document.getElementById('unified-source-url') as HTMLInputElement | null)?.value?.trim() || '';
+            sourceUrl = unifiedUrl.split(/[\n,]/)[0].trim();
+        }
+        if (sourceUrl && !/^https?:\/\//i.test(sourceUrl)) sourceUrl = '';
+        if (!sourceUrl) return undefined;
+        return { sourceUrl, fillGapWithAI: fillGap };
+    } catch {
+        return undefined;
+    }
+}
 declare let aiProgressModal: any;
 declare function normalizeReadableBodyText(text: string): string;
 declare function startAutosave(): void;
@@ -487,11 +509,12 @@ export async function generateContentFromUrl(
       }
 
       // ✅ [2026-02-12] 소제목별 이미지 자동 수집 (체크박스 ON일 때만, 네이버 → 구글 폴백)
+      // ✅ [v2.7.77] 풀오토/연속/다계정에서 force 옵션 주입 (window._publishForceOptions)
       try {
-        // ✅ [2026-03-15 FIX] mainKw가 URL이면 selectedTitle로 대체
         const _rawMainKw = keywords || structuredContent?.selectedTitle || '';
         const mainKw = /^https?:\/\//i.test(_rawMainKw) ? (structuredContent?.selectedTitle || '') : _rawMainKw;
-        await autoSearchAndPopulateImages(structuredContent, mainKw, suppressModal);
+        const forceOpts = (window as any)._publishForceOptions || resolveForceOptionsFromDOM(structuredContent, url);
+        await autoSearchAndPopulateImages(structuredContent, mainKw, suppressModal, forceOpts);
       } catch (imgErr) {
         console.warn('[GenerateContentUrl] 이미지 자동 수집 실패 (무시):', imgErr);
       }
@@ -1007,9 +1030,11 @@ export async function generateContentFromKeywords(
       }
 
       // ✅ [2026-02-12] 소제목별 이미지 자동 수집 (체크박스 ON일 때만, 네이버 → 구글 폴백)
+      // ✅ [v2.7.77] 풀오토/연속/다계정에서 force 옵션 주입
       try {
         const mainKw = keywords || structuredContent?.selectedTitle || '';
-        await autoSearchAndPopulateImages(structuredContent, mainKw, suppressModal);
+        const forceOpts = (window as any)._publishForceOptions || resolveForceOptionsFromDOM(structuredContent);
+        await autoSearchAndPopulateImages(structuredContent, mainKw, suppressModal, forceOpts);
       } catch (imgErr) {
         console.warn('[GenerateContentKeywords] 이미지 자동 수집 실패 (무시):', imgErr);
       }

@@ -75,7 +75,13 @@ export async function runAutoImageSearch(
     mainKeyword: string,
     appendLog: (msg: string) => void,
     ImageManager: any,
-    syncFn: () => void
+    syncFn: () => void,
+    // ✅ [v2.7.77] 풀오토/연속/다계정에서 호출 시 사용자 명시 옵션 주입
+    forceOptions?: {
+        sourceUrl?: string;
+        fillGapWithAI?: boolean;
+        skipGuards?: boolean; // suppressModal 가드 우회
+    }
 ): Promise<{ added: number; total: number }> {
     const result = { added: 0, total: 0 };
 
@@ -99,31 +105,31 @@ export async function runAutoImageSearch(
     console.log(`${LOG_PREFIX} 🔍 ${headings.length}개 소제목 이미지 검색 (키워드: ${keyword})`);
     appendLog(`🔍 소제목 ${headings.length}개에 대한 이미지 자동 수집 시작...`);
 
-    // ✅ [v2.7.75] URL 우선순위 3단계 (v2.7.67 smart-collect-source-url 폐지 후)
-    //   1) 콘텐츠 입력 영역의 #content-url-collect (사용자 직접 입력 — 최우선)
-    //   2) structuredContent.sourceUrl (글 생성 시 자동 저장)
-    //   3) 글 생성 탭의 #unified-source-url
+    // ✅ [v2.7.77] forceOptions 우선 — 풀오토/연속/다계정에서 명시 주입한 값 사용
     let sourceUrl = '';
     let fillGapWithAI = false;
-    try {
-        // 1순위: 콘텐츠 입력 영역의 URL
-        const contentUrlInput = document.getElementById('content-url-collect') as HTMLInputElement | null;
-        sourceUrl = contentUrlInput?.value?.trim() || '';
-        // 부족분 AI 생성 체크박스
-        const fillGapCheckbox = document.getElementById('content-url-fillgap-ai') as HTMLInputElement | null;
-        fillGapWithAI = !!fillGapCheckbox?.checked;
-        if (!sourceUrl) {
-            // 2순위: structuredContent
-            sourceUrl = String((structuredContent as any)?.sourceUrl || '').trim();
-        }
-        if (!sourceUrl) {
-            // 3순위: 글 생성 탭
-            const urlInput = document.getElementById('unified-source-url') as HTMLInputElement | null;
-            sourceUrl = urlInput?.value?.trim() || '';
-        }
-        sourceUrl = sourceUrl.split(/[\n,]/)[0].trim();
-        if (sourceUrl && !/^https?:\/\//i.test(sourceUrl)) sourceUrl = '';
-    } catch { sourceUrl = ''; }
+    if (forceOptions?.sourceUrl !== undefined) {
+        sourceUrl = String(forceOptions.sourceUrl || '').trim();
+        fillGapWithAI = !!forceOptions.fillGapWithAI;
+        console.log(`${LOG_PREFIX} 🎯 force 모드 (풀오토/연속/다계정): sourceUrl="${sourceUrl.slice(0,60)}", fillgap=${fillGapWithAI}`);
+    } else {
+        // 반자동 흐름: DOM 우선순위 3단계
+        try {
+            const contentUrlInput = document.getElementById('content-url-collect') as HTMLInputElement | null;
+            sourceUrl = contentUrlInput?.value?.trim() || '';
+            const fillGapCheckbox = document.getElementById('content-url-fillgap-ai') as HTMLInputElement | null;
+            fillGapWithAI = !!fillGapCheckbox?.checked;
+            if (!sourceUrl) {
+                sourceUrl = String((structuredContent as any)?.sourceUrl || '').trim();
+            }
+            if (!sourceUrl) {
+                const urlInput = document.getElementById('unified-source-url') as HTMLInputElement | null;
+                sourceUrl = urlInput?.value?.trim() || '';
+            }
+            sourceUrl = sourceUrl.split(/[\n,]/)[0].trim();
+            if (sourceUrl && !/^https?:\/\//i.test(sourceUrl)) sourceUrl = '';
+        } catch { sourceUrl = ''; }
+    }
     if (sourceUrl) {
         console.log(`${LOG_PREFIX} 🔗 원본 URL 우선 크롤링: ${sourceUrl.slice(0, 80)}`);
         appendLog(`🔗 원본 URL의 이미지를 우선 수집 중: ${sourceUrl.slice(0, 60)}...`);

@@ -3152,6 +3152,29 @@ export async function initMultiAccountPublishModal() {
           structuredContent = contentResult.content;
           console.log('[FullAuto] 구조화된 콘텐츠:', structuredContent);
 
+          // ✅ [v2.7.77] 다계정: URL 자동 수집 옵션 ON이면 즉시 이미지 수집
+          if ((queueItem as any).urlAutoCollect && queueItem.sourceUrl) {
+            try {
+              const { runAutoImageSearch } = await import('../utils/semiAutoImageSearch.js');
+              const ImageManager = (window as any).ImageManager;
+              const syncFn = (window as any).syncGlobalImagesFromImageManager || (() => {});
+              await runAutoImageSearch(
+                structuredContent,
+                queueItem.sourceKeyword || structuredContent?.selectedTitle || '',
+                (msg: string) => addMALog(msg, 'info'),
+                ImageManager,
+                syncFn,
+                {
+                  sourceUrl: queueItem.sourceUrl,
+                  fillGapWithAI: !!(queueItem as any).fillGapWithAI,
+                }
+              );
+              addMALog(`🔗 [다계정] URL 이미지 자동 수집 완료`, 'success');
+            } catch (e: any) {
+              addMALog(`⚠️ [다계정] URL 이미지 수집 실패 — 키워드 검색으로 폴백: ${e?.message?.slice(0, 60)}`, 'warning');
+            }
+          }
+
           // ✅ [v2.7.55 핫픽스] FTC SSOT 인라인화 (require is not defined 회귀 차단)
           {
             const _isAffiliateMode = queueItem.contentMode === 'affiliate';
