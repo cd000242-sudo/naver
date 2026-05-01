@@ -422,6 +422,10 @@ export async function searchImagesForHeadings(
  *     4) <img>, <picture source>, OG meta, background-image 추출
  *     5) 1x1, spacer, icon 자동 제외
  */
+// ✅ [v2.7.88] 페이지 title을 외부로 공개 (image:crawlFromUrl이 사용)
+let _lastCrawledTitle = '';
+export function getLastCrawledTitle(): string { return _lastCrawledTitle; }
+
 export async function crawlImagesFromUrl(url: string): Promise<string[]> {
     let browser;
     try {
@@ -460,6 +464,18 @@ export async function crawlImagesFromUrl(url: string): Promise<string[]> {
             await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => {});
         });
         await new Promise(r => setTimeout(r, 1500));
+
+        // ✅ [v2.7.88] 페이지 title 캡처 (폴더명용)
+        try {
+            const pageTitle = await page.title();
+            // OG title이 더 정확한 경우 우선 (네이버 블로그 PostView 등)
+            const ogTitle = await page.evaluate(() => {
+                const og = document.querySelector('meta[property="og:title"]') as HTMLMetaElement | null;
+                return og?.content || '';
+            }).catch(() => '');
+            _lastCrawledTitle = (ogTitle || pageTitle || '').trim();
+            console.log(`[ImageSearch][crawlUrl] 📑 페이지 제목: ${_lastCrawledTitle.slice(0, 80)}`);
+        } catch { _lastCrawledTitle = ''; }
 
         // ✅ 자동 스크롤로 lazy-load 이미지 강제 로드
         await page.evaluate(async () => {

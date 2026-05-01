@@ -7159,11 +7159,12 @@ ipcMain.handle('image:crawlFromUrl', async (_event, url: string): Promise<{
       return { success: false, message: 'URL이 비어있습니다.' };
     }
     console.log(`[Main] URL에서 이미지 크롤링 (v2.7.87 강화): ${url}`);
-    const { crawlImagesFromUrl } = await import('./crawler/googleImageSearch.js');
+    const { crawlImagesFromUrl, getLastCrawledTitle } = await import('./crawler/googleImageSearch.js');
     const images = await crawlImagesFromUrl(url);
+    const pageTitle = getLastCrawledTitle();
     if (images.length > 0) {
-      console.log(`[Main] URL에서 ${images.length}개 이미지 추출 완료`);
-      return { success: true, images, title: '' };
+      console.log(`[Main] URL에서 ${images.length}개 이미지 추출 완료, title="${pageTitle.slice(0, 60)}"`);
+      return { success: true, images, title: pageTitle };
     }
     return { success: false, message: '이미지를 찾을 수 없습니다.' };
   } catch (error) {

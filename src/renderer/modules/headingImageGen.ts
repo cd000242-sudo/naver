@@ -2052,10 +2052,15 @@ export function initHeadingImageGeneration(): void {
         return;
       }
       const titleInput = document.getElementById('image-title') as HTMLInputElement | null;
-      const postTitle = (titleInput?.value || '').trim() ||
+      // ✅ [v2.7.88] 폴더명 우선순위:
+      //   1) 사용자가 입력한 #image-title (제목 필드)
+      //   2) 통합 탭 생성된 제목
+      //   3) 페이지 OG/title (crawl 후 결정)
+      //   4) URL 호스트명 + 타임스탬프 (최후 폴백)
+      const userTitle = (titleInput?.value || '').trim() ||
         (document.getElementById('unified-generated-title') as HTMLInputElement | null)?.value?.trim() ||
         (document.getElementById('unified-title') as HTMLInputElement | null)?.value?.trim() ||
-        'url-collect';
+        '';
       const postId = `url-${Date.now()}`;
 
       const originalText = urlOnlyCollectBtn.innerHTML;
@@ -2071,6 +2076,26 @@ export function initHeadingImageGeneration(): void {
         }
         const allImages: string[] = crawlResult.images;
         appendLog(`📥 URL 페이지에서 ${allImages.length}개 이미지 발견`, 'images-log-output');
+
+        // ✅ [v2.7.88] 폴더명 결정 (페이지 title 폴백)
+        let postTitle = userTitle;
+        if (!postTitle) {
+          const pageTitle = String(crawlResult.title || '').trim();
+          if (pageTitle) {
+            // 네이버 블로그 " : 네이버 블로그" 접미사 제거
+            postTitle = pageTitle.replace(/\s*[:|·]\s*네이버\s*블로그\s*$/i, '').trim();
+          }
+        }
+        if (!postTitle) {
+          // 최후 폴백: URL 호스트명 + 타임스탬프
+          try {
+            const u = new URL(sourceUrl);
+            postTitle = `${u.hostname}-${new Date().toISOString().slice(0, 10)}`;
+          } catch {
+            postTitle = `url-collect-${Date.now()}`;
+          }
+        }
+        appendLog(`📁 저장 폴더: ${postTitle}`, 'images-log-output');
 
         // ImageManager + 헤딩 (있으면 매칭, 없으면 가상 헤딩)
         const ImageManager = (window as any).ImageManager;
