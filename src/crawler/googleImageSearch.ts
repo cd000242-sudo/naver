@@ -422,7 +422,7 @@ export async function searchImagesForHeadings(
  *     4) <img>, <picture source>, OG meta, background-image 추출
  *     5) 1x1, spacer, icon 자동 제외
  */
-async function crawlImagesFromUrl(url: string): Promise<string[]> {
+export async function crawlImagesFromUrl(url: string): Promise<string[]> {
     let browser;
     try {
         console.log(`[ImageSearch][crawlUrl] 🌐 Puppeteer 크롬 창 띄우는 중 (사용자 시각 확인용): ${url.slice(0, 80)}`);

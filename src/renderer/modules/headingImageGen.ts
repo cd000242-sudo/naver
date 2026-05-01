@@ -2051,16 +2051,12 @@ export function initHeadingImageGeneration(): void {
         if ((window as any).toastManager) (window as any).toastManager.warning('⚠️ 위 URL 입력란에 http(s):// URL을 먼저 입력하세요.');
         return;
       }
-      const fillGap = !!(document.getElementById('content-url-fillgap-ai') as HTMLInputElement | null)?.checked;
       const titleInput = document.getElementById('image-title') as HTMLInputElement | null;
       const postTitle = (titleInput?.value || '').trim() ||
         (document.getElementById('unified-generated-title') as HTMLInputElement | null)?.value?.trim() ||
         (document.getElementById('unified-title') as HTMLInputElement | null)?.value?.trim() ||
         'url-collect';
-
-      // 소제목 추출 (있으면 매칭, 없으면 단일 슬롯)
-      const headings = getCurrentImageHeadings();
-      const headingTitles = headings.length > 0 ? headings.map(h => String(h?.title || h?.heading || h).trim()).filter(Boolean) : ['🔗 URL 이미지'];
+      const postId = `url-${Date.now()}`;
 
       const originalText = urlOnlyCollectBtn.innerHTML;
       try {
@@ -2068,39 +2064,69 @@ export function initHeadingImageGeneration(): void {
         urlOnlyCollectBtn.innerHTML = '<span>🔄</span><span>URL 이미지 수집 중...</span>';
         appendLog(`🔗 URL 전용 이미지 수집 시작: ${sourceUrl.slice(0, 80)}`, 'images-log-output');
 
-        // ✅ [v2.7.82] runAutoImageSearch + ImageManager + syncFn 모두 window에서 가져오기
-        //   undefined 가드 + 친화적 에러 메시지
-        const runFn = (window as any).runAutoImageSearch;
+        // ✅ [v2.7.87] image:crawlFromUrl IPC 직접 호출 — URL의 모든 이미지 가져오기
+        const crawlResult = await (window as any).api.crawlImagesFromUrl(sourceUrl);
+        if (!crawlResult?.success || !Array.isArray(crawlResult.images) || crawlResult.images.length === 0) {
+          throw new Error(crawlResult?.message || '페이지에서 이미지를 찾지 못했습니다');
+        }
+        const allImages: string[] = crawlResult.images;
+        appendLog(`📥 URL 페이지에서 ${allImages.length}개 이미지 발견`, 'images-log-output');
+
+        // ImageManager + 헤딩 (있으면 매칭, 없으면 가상 헤딩)
         const ImageManager = (window as any).ImageManager;
         const syncFn = (window as any).syncGlobalImagesFromImageManager || (() => {});
-
-        if (typeof runFn !== 'function') {
-          throw new Error('runAutoImageSearch 함수 미로드 — 앱 재시작 필요');
-        }
-        if (!ImageManager || typeof ImageManager.getImages !== 'function') {
+        if (!ImageManager || typeof ImageManager.addImage !== 'function') {
           throw new Error('ImageManager 미초기화 — 앱 재시작 필요');
         }
+        const headings = getCurrentImageHeadings();
+        const headingTitles = headings.length > 0
+          ? headings.map(h => String(h?.title || h?.heading || h).trim()).filter(Boolean)
+          : allImages.map((_, i) => `🔗 URL 이미지 ${i + 1}`); // 이미지 개수만큼 가상 헤딩 생성
 
-        // structuredContent 모킹 (페이지 순서 그대로 유지 — 페이지 작성자의 의도 흐름 따라감)
-        const fakeContent = {
-          title: postTitle,
-          postTitle,
-          id: `url-${Date.now()}`,
-          postId: `url-${Date.now()}`,
-          sourceUrl,
-          headings: headingTitles.map(t => ({ title: t })),
-        };
+        // ✅ 각 URL을 다운로드 + 폴더 저장 + ImageManager 추가
+        let savedCount = 0;
+        for (let i = 0; i < allImages.length; i++) {
+          const imgUrl = allImages[i];
+          const heading = headingTitles[i] || `🔗 URL 이미지 ${i + 1}`;
+          let filePath: string | undefined;
+          let previewDataUrl: string | undefined;
+          try {
+            const dl = await (window as any).api.downloadAndSaveImage(imgUrl, heading, postTitle, postId);
+            if (dl?.success && dl.filePath) {
+              filePath = dl.filePath;
+              previewDataUrl = dl.previewDataUrl;
+              savedCount++;
+              appendLog(`💾 ${i + 1}/${allImages.length}: ${(filePath || '').split(/[\\/]/).pop() || ''}`, 'images-log-output');
+            } else {
+              appendLog(`⚠️ ${i + 1}/${allImages.length} 저장 실패: ${dl?.message || 'unknown'}`, 'images-log-output');
+            }
+          } catch (e: any) {
+            appendLog(`⚠️ ${i + 1}/${allImages.length} 다운로드 오류: ${e?.message?.slice(0, 50)}`, 'images-log-output');
+          }
 
-        const result = await runFn(
-          fakeContent,
-          postTitle,
-          (msg: string) => appendLog(msg, 'images-log-output'),
-          ImageManager,
-          syncFn,
-          { sourceUrl, fillGapWithAI: fillGap }
-        );
-        appendLog(`✅ URL 이미지 수집 완료: ${result?.added ?? 0}개 배치 (페이지 순서 유지)`, 'images-log-output');
-        if ((window as any).toastManager) (window as any).toastManager.success(`✅ URL 이미지 ${result?.added ?? 0}개 수집 완료`);
+          // ImageManager 추가 (헤딩이 실제 헤딩이면 매칭, 아니면 가상 슬롯)
+          try {
+            ImageManager.addImage(heading, {
+              url: imgUrl,
+              filePath,
+              previewDataUrl,
+              heading,
+              prompt: heading,
+              timestamp: Date.now() + i,
+              isCollected: true,
+              savedToLocal: filePath,
+              source: 'url-only-collect',
+            });
+          } catch (e: any) {
+            console.warn(`[URL Collect] ImageManager 추가 실패: ${e?.message}`);
+          }
+        }
+        try { syncFn(); } catch { /* ignore */ }
+        appendLog(`✅ URL 이미지 수집 완료: ${savedCount}/${allImages.length}개 폴더 저장 + 배치`, 'images-log-output');
+        if (savedCount > 0) {
+          appendLog(`📁 저장 위치: Downloads/naver-blog-images/${postTitle}/`, 'images-log-output');
+        }
+        if ((window as any).toastManager) (window as any).toastManager.success(`✅ URL 이미지 ${savedCount}/${allImages.length}개 수집 완료`);
       } catch (e: any) {
         appendLog(`❌ URL 이미지 수집 실패: ${e?.message?.slice(0, 100)}`, 'images-log-output');
         if ((window as any).toastManager) (window as any).toastManager.error(`❌ URL 수집 실패: ${e?.message?.slice(0, 60)}`);

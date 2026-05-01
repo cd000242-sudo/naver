@@ -7147,7 +7147,7 @@ ipcMain.handle('image:batchOptimizeSearchQueries', async (_event, title: string,
   }
 });
 
-// ✅ [100점 개선] URL에서 이미지 크롤링 IPC 핸들러 (뉴스, 블로그 등)
+// ✅ [v2.7.87] 강화된 crawlImagesFromUrl로 교체 — iframe 20개 순회 + visible 모드 + 페이지 모든 이미지
 ipcMain.handle('image:crawlFromUrl', async (_event, url: string): Promise<{
   success: boolean;
   images?: string[];
@@ -7158,87 +7158,14 @@ ipcMain.handle('image:crawlFromUrl', async (_event, url: string): Promise<{
     if (!url || !url.trim()) {
       return { success: false, message: 'URL이 비어있습니다.' };
     }
-
-    console.log(`[Main] URL에서 이미지 크롤링: ${url}`);
-
-    // puppeteer로 페이지 접속 및 이미지 추출
-    const puppeteer = await import('puppeteer');
-    const browser = await puppeteer.default.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
-
-    try {
-      const page = await browser.newPage();
-      await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
-      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 });
-
-      // 페이지 제목 추출
-      const pageTitle = await page.title();
-
-      // 이미지 URL 추출 (OG 이미지, 본문 이미지, 갤러리 이미지)
-      const images = await page.evaluate(() => {
-        const imageUrls: string[] = [];
-        const seenUrls = new Set<string>();
-
-        // 1. OG 이미지 (가장 대표성 높음)
-        const ogImage = document.querySelector('meta[property="og:image"]')?.getAttribute('content');
-        if (ogImage && !seenUrls.has(ogImage)) {
-          imageUrls.push(ogImage);
-          seenUrls.add(ogImage);
-        }
-
-        // 2. 본문 이미지 (article, main, content 영역)
-        const contentSelectors = ['article img', 'main img', '.content img', '.article-body img', '.post-content img', '#content img'];
-        for (const selector of contentSelectors) {
-          const imgs = document.querySelectorAll(selector);
-          imgs.forEach((img: any) => {
-            const src = img.src || img.dataset?.src;
-            if (src && src.startsWith('http') && !seenUrls.has(src)) {
-              // 작은 이미지 필터링
-              const width = parseInt(img.width || img.naturalWidth || '0', 10);
-              const height = parseInt(img.height || img.naturalHeight || '0', 10);
-              if (width < 100 && height < 100) return;
-
-              imageUrls.push(src);
-              seenUrls.add(src);
-            }
-          });
-        }
-
-        // 3. 네이버 뉴스/엔터 전용 셀렉터
-        const naverSelectors = [
-          '.end_photo_org img',  // 네이버 뉴스 본문 이미지
-          '.newsct_body img',   // 네이버 뉴스 본문
-          '.article_img img',   // 기사 이미지
-          '#newsViewArea img',  // 뉴스 뷰 영역
-        ];
-        for (const selector of naverSelectors) {
-          const imgs = document.querySelectorAll(selector);
-          imgs.forEach((img: any) => {
-            const src = img.src || img.dataset?.src;
-            if (src && src.startsWith('http') && !seenUrls.has(src)) {
-              imageUrls.push(src);
-              seenUrls.add(src);
-            }
-          });
-        }
-
-        return imageUrls.slice(0, 10); // 최대 10개
-      });
-
-      await browser.close().catch(() => undefined);
-
-      if (images.length > 0) {
-        console.log(`[Main] URL에서 ${images.length}개 이미지 추출 완료`);
-        return { success: true, images, title: pageTitle };
-      } else {
-        return { success: false, message: '이미지를 찾을 수 없습니다.' };
-      }
-    } catch (pageError) {
-      await browser.close().catch(() => undefined);
-      throw pageError;
+    console.log(`[Main] URL에서 이미지 크롤링 (v2.7.87 강화): ${url}`);
+    const { crawlImagesFromUrl } = await import('./crawler/googleImageSearch.js');
+    const images = await crawlImagesFromUrl(url);
+    if (images.length > 0) {
+      console.log(`[Main] URL에서 ${images.length}개 이미지 추출 완료`);
+      return { success: true, images, title: '' };
     }
+    return { success: false, message: '이미지를 찾을 수 없습니다.' };
   } catch (error) {
     console.error('[Main] URL 이미지 크롤링 실패:', error);
     return { success: false, message: (error as Error).message };
