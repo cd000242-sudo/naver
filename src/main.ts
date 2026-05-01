@@ -8958,6 +8958,22 @@ app.whenReady().then(async () => {
   try {
     // ✅ [2026-02-18] setName은 lock 앞에서 이미 호출됨 (single instance lock 충돌 방지)
 
+    // ✅ [v2.7.89] 첫 실행 시 customImageSavePath 자동 세팅 — Downloads/naver-blog-images
+    //   사용자 보고: "이미지 폴더 선택이 기본적으로 ...naver-blog-images 여기로 되어있어야"
+    //   조치: 앱 시작 시 config 검사 → 비어있으면 default path 자동 영속화
+    try {
+      const { loadConfig, saveConfig } = await import('./configManager.js');
+      const cfg = await loadConfig();
+      const currentPath = String((cfg as any).customImageSavePath || '').trim();
+      if (!currentPath) {
+        const defaultPath = path.join(app.getPath('downloads'), 'naver-blog-images');
+        await saveConfig({ ...cfg, customImageSavePath: defaultPath } as any);
+        debugLog(`[Startup] 📁 이미지 저장 경로 기본값 자동 세팅: ${defaultPath}`);
+      }
+    } catch (e: any) {
+      debugLog(`[Startup] 이미지 경로 기본값 세팅 실패 (무시): ${e?.message}`);
+    }
+
     // ✅ [v1.4.54] 앱 시작 시 오래된 디버그 덤프 정리 (디스크 과점유 방지)
     try {
       const { cleanupOldDumps } = await import('./debug/domDumpManager.js');
