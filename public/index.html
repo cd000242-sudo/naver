@@ -3438,6 +3438,17 @@
                                 <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">URL 이미지 부족 시 빈 소제목에 AI 이미지 자동 생성 (기본 OFF — 빈 자리는 그대로)</span>
                             </div>
                         </label>
+                        <!-- ✅ [v2.7.80] URL 전용 이미지 수집 버튼 (위 [AI 자동 수집 및 저장하기]는 키워드/네이버 검색 기반) -->
+                        <button type="button" id="url-only-collect-btn"
+                            style="width: 100%; margin-top: 0.6rem; padding: 0.7rem 1rem; background: linear-gradient(135deg, #8b5cf6, #6366f1); color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 3px 10px rgba(139, 92, 246, 0.3); transition: all 0.2s;"
+                            onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 5px 14px rgba(139, 92, 246, 0.4)';"
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(139, 92, 246, 0.3)';">
+                            <span>🔗</span>
+                            <span>URL 이미지만 수집하기</span>
+                        </button>
+                        <p style="margin: 0.4rem 0 0 0; font-size: 0.68rem; color: var(--text-muted); line-height: 1.4; text-align: center;">
+                            ℹ️ 위 URL의 페이지 이미지만 추출 + 폴더 자동 저장 (키워드 검색 X)
+                        </p>
                     </div>
 
                     <!-- AI 자동 수집 및 저장하기 버튼 -->

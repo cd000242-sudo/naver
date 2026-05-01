@@ -2041,6 +2041,67 @@ export function initHeadingImageGeneration(): void {
     });
   }
 
+  // ✅ [v2.7.80] URL 이미지만 수집 버튼 — content-url-collect의 URL만 사용 (키워드 검색 X)
+  const urlOnlyCollectBtn = document.getElementById('url-only-collect-btn') as HTMLButtonElement | null;
+  if (urlOnlyCollectBtn) {
+    urlOnlyCollectBtn.addEventListener('click', async () => {
+      const urlInput = document.getElementById('content-url-collect') as HTMLInputElement | null;
+      const sourceUrl = (urlInput?.value || '').trim();
+      if (!sourceUrl || !/^https?:\/\//i.test(sourceUrl)) {
+        if ((window as any).toastManager) (window as any).toastManager.warning('⚠️ 위 URL 입력란에 http(s):// URL을 먼저 입력하세요.');
+        return;
+      }
+      const fillGap = !!(document.getElementById('content-url-fillgap-ai') as HTMLInputElement | null)?.checked;
+      const titleInput = document.getElementById('image-title') as HTMLInputElement | null;
+      const postTitle = (titleInput?.value || '').trim() ||
+        (document.getElementById('unified-generated-title') as HTMLInputElement | null)?.value?.trim() ||
+        (document.getElementById('unified-title') as HTMLInputElement | null)?.value?.trim() ||
+        'url-collect';
+
+      // 소제목 추출 (있으면 매칭, 없으면 단일 슬롯)
+      const headings = getCurrentImageHeadings();
+      const headingTitles = headings.length > 0 ? headings.map(h => String(h?.title || h?.heading || h).trim()).filter(Boolean) : ['🔗 URL 이미지'];
+
+      const originalText = urlOnlyCollectBtn.innerHTML;
+      try {
+        urlOnlyCollectBtn.disabled = true;
+        urlOnlyCollectBtn.innerHTML = '<span>🔄</span><span>URL 이미지 수집 중...</span>';
+        appendLog(`🔗 URL 전용 이미지 수집 시작: ${sourceUrl.slice(0, 80)}`, 'images-log-output');
+
+        const { runAutoImageSearch } = await import('../utils/semiAutoImageSearch.js');
+        const ImageManager = (window as any).ImageManager;
+        const syncFn = (window as any).syncGlobalImagesFromImageManager || (() => {});
+
+        // structuredContent 모킹 (타이틀 + 헤딩만 필요)
+        const fakeContent = {
+          title: postTitle,
+          postTitle,
+          id: `url-${Date.now()}`,
+          postId: `url-${Date.now()}`,
+          sourceUrl,
+          headings: headingTitles.map(t => ({ title: t })),
+        };
+
+        const result = await runAutoImageSearch(
+          fakeContent,
+          postTitle,
+          (msg: string) => appendLog(msg, 'images-log-output'),
+          ImageManager,
+          syncFn,
+          { sourceUrl, fillGapWithAI: fillGap }
+        );
+        appendLog(`✅ URL 이미지 수집 완료: ${result?.added ?? 0}개 배치`, 'images-log-output');
+        if ((window as any).toastManager) (window as any).toastManager.success(`✅ URL 이미지 ${result?.added ?? 0}개 수집 완료`);
+      } catch (e: any) {
+        appendLog(`❌ URL 이미지 수집 실패: ${e?.message?.slice(0, 100)}`, 'images-log-output');
+        if ((window as any).toastManager) (window as any).toastManager.error(`❌ URL 수집 실패: ${e?.message?.slice(0, 60)}`);
+      } finally {
+        urlOnlyCollectBtn.disabled = false;
+        urlOnlyCollectBtn.innerHTML = originalText;
+      }
+    });
+  }
+
   // ✅ AI 자동 수집 및 저장하기 버튼 (네이버 이미지 검색 API 활용)
   const aiAutoCollectBtn = document.getElementById('ai-auto-collect-save-btn') as HTMLButtonElement;
 
