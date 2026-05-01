@@ -6701,6 +6701,32 @@ function restoreAutosavedContent(): void {
       autoGenerateCTA(saved.structuredContent);
     }
 
+    // ✅ [v2.7.92] 자동저장 복원 후 반자동/풀오토 발행 버튼 직접 활성화
+    //   사용자 보고: "그냥 종료하면 자동으로 불러오시겠습니까? 해서 불러오는거"
+    //   원인: v2.7.91이 글 목록 [불러오기]만 처리, autosave 경로는 누락
+    try {
+      const semiAutoBtn = document.getElementById('semi-auto-publish-btn') as HTMLButtonElement | null;
+      if (semiAutoBtn) {
+        semiAutoBtn.disabled = false;
+        semiAutoBtn.style.opacity = '1';
+        semiAutoBtn.style.cursor = 'pointer';
+        semiAutoBtn.title = '';
+      }
+      const fullAutoBtn = document.getElementById('full-auto-publish-btn') as HTMLButtonElement | null;
+      if (fullAutoBtn) {
+        fullAutoBtn.disabled = false;
+        fullAutoBtn.style.opacity = '1';
+        fullAutoBtn.style.cursor = 'pointer';
+      }
+      const markFn = (window as any).markContentGenerated;
+      if (typeof markFn === 'function') markFn();
+      const previewSection = document.getElementById('unified-preview-section');
+      if (previewSection) previewSection.style.display = 'block';
+      appendLog(`▶️ 자동저장 복원 후 발행 버튼 활성화 완료`);
+    } catch (e: any) {
+      console.warn('[restoreAutosaved] 발행 버튼 활성화 실패:', e?.message);
+    }
+
     alert('✅ 작업이 복구되었습니다!');
   } else {
     clearAutosavedContent();
