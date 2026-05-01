@@ -415,10 +415,15 @@ export function saveGeneratedPostFromData(
       savedToLocal: img.savedToLocal || false,
     }));
 
+    // ✅ [v2.7.90] 본문 전체 저장 — 200자 잘림 회귀 차단
+    //   사용자 보고: "글불러오면 글이 짤려서 불러와지네요?"
+    //   원인: 이전 substring(0, 200)이 미리보기용이라 했으나 loadGeneratedPostToFields가 이걸 본문으로 로드
+    //   조치: 전체 본문 저장. localStorage quota는 v2.7.86 cleanup 로직이 보호 (글 50% 정리, 전체 삭제 X)
+    const fullBody = String(structuredContent?.bodyPlain || structuredContent?.content || '');
     const post: GeneratedPost = {
       id: postId,
       title: structuredContent?.selectedTitle || '',
-      content: (structuredContent?.bodyPlain || structuredContent?.content || '').substring(0, 200), // 미리보기용 200자만
+      content: fullBody, // 전체 본문 (잘림 없음)
       hashtags: structuredContent?.hashtags || [],
       headings: lightHeadings,
       structuredContent: lightStructuredContent,
@@ -594,10 +599,12 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
       savedToLocal: img.savedToLocal || false,
     }));
 
+    // ✅ [v2.7.90] 본문 전체 저장 — 200자 잘림 회귀 차단
+    const fullBody2 = String(structuredContent.bodyPlain || structuredContent.content || '');
     const post: GeneratedPost = {
       id: postId,
       title: structuredContent.selectedTitle || '',
-      content: (structuredContent.bodyPlain || structuredContent.content || '').substring(0, 200), // 미리보기용 200자만
+      content: fullBody2, // 전체 본문 (잘림 없음)
       hashtags: structuredContent.hashtags || [],
       headings: lightHeadings2,
       structuredContent: lightStructuredContent2,
