@@ -76,28 +76,12 @@ export function safeLocalStorageSetItem(key: string, value: string, retryCount: 
  * ✅ [2026-03-26] 모든 정리 전략을 한꺼번에 실행
  */
 function _runAllCleanupStrategies(): void {
-    // ✅ [2026-04-04 FIX] accountSettingsManager 프록시가 __acct__xxx__ 접두사를 붙이므로
-    // localStorage.key()가 반환하는 raw 키와 startsWith 매칭이 실패하던 버그 수정.
-    // 또한 getItem 프록시가 마이그레이션(쓰기)을 시도하여 할당량 초과 에러가 연쇄 발생하므로
-    // 1~2단계(읽기+축소 저장)는 skip하고 바로 삭제 전략만 실행.
+    // ✅ [v2.7.86] 글 목록 보존이 최우선 — 백업/캐시 우선 삭제, 글은 오래된 절반만 삭제
+    //   기존 (v2.7.85까지): 1단계에서 모든 naver_blog_generated_posts 삭제 → 사용자 데이터 통째로 손실
+    //   사용자 보고: "왜자꾸 생성된 글목록이랑 기존에 저장된정보가 자꾸 누락되는거니?"
+    //   조치: 백업/임시/오래된 발행 기록 먼저 정리 → 그래도 부족하면 글의 가장 오래된 절반만 삭제
 
-    // 1단계: 글 목록 축소 → 삭제로 전환 (읽기+쓰기가 프록시에서 QuotaExceeded 유발)
-    try {
-        let removed = 0;
-        for (let i = localStorage.length - 1; i >= 0; i--) {
-            const k = localStorage.key(i);
-            if (k && _rawKeyContains(k, 'naver_blog_generated_posts')) {
-                localStorage.removeItem(k);
-                removed++;
-            }
-        }
-        if (removed > 0) {
-            console.log(`[Storage] ✅ 글 목록 ${removed}개 삭제됨`);
-        }
-    } catch { /* ignore */ }
-
-    // 2단계: 임시 데이터 정리 (백업, 에러 로그 등)
-    // ✅ [2026-04-04 FIX] includes로 매칭 — 프록시 접두사 무관하게 동작
+    // 1단계: 임시 데이터 정리 (백업, 에러 로그, 캐시 등) — 글 목록은 절대 건드리지 않음
     try {
         let removed = 0;
         const deletePatterns = [
@@ -113,7 +97,34 @@ function _runAllCleanupStrategies(): void {
                 removed++;
             }
         }
-        console.log(`[Storage] ✅ 임시 데이터 ${removed}개 삭제됨`);
+        console.log(`[Storage] ✅ 임시/백업 데이터 ${removed}개 삭제 (글 목록 보존)`);
+    } catch { /* ignore */ }
+
+    // 2단계: 오래된 글 50% 삭제 (전체 삭제 X — 사용자 데이터 보호)
+    try {
+        const POSTS_KEY = 'naver_blog_generated_posts';
+        const matchedKeys: string[] = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const k = localStorage.key(i);
+            if (k && _rawKeyContains(k, POSTS_KEY)) matchedKeys.push(k);
+        }
+        let trimmed = 0;
+        for (const k of matchedKeys) {
+            try {
+                const raw = localStorage.getItem(k);
+                if (!raw) continue;
+                const posts: any[] = JSON.parse(raw);
+                if (!Array.isArray(posts) || posts.length === 0) continue;
+                // 최근 글이 위쪽 (unshift 방식). 절반만 유지 (가장 최근 절반)
+                const half = Math.max(10, Math.ceil(posts.length / 2));
+                const kept = posts.slice(0, half);
+                trimmed += (posts.length - kept.length);
+                localStorage.setItem(k, JSON.stringify(kept));
+            } catch { /* 개별 키 실패 무시 */ }
+        }
+        if (trimmed > 0) {
+            console.log(`[Storage] ✅ 오래된 글 ${trimmed}개 정리 (최근 글 절반 보존)`);
+        }
     } catch { /* ignore */ }
 
     // 3단계: 오래된 발행 기록 정리 (3일 이상)
@@ -145,13 +156,14 @@ function _runAllCleanupStrategies(): void {
  * ✅ [2026-03-26] 핵 정리 — 최후의 수단
  */
 function _nuclearCleanup(): void {
-    console.error('[Storage] ⚠️ NUCLEAR CLEANUP: localStorage 용량 초과로 모든 글 데이터를 삭제합니다. 이 작업은 되돌릴 수 없습니다.');
-    // ✅ [2026-04-04 FIX] includes/endsWith로 매칭 — __acct__ 프록시 접두사 무관하게 동작
+    // ✅ [v2.7.86] 글 목록 보존 — autosave/backup/error_logs만 삭제
+    //   기존 (v2.7.85까지): naver_blog_generated_posts까지 삭제 → 사용자 글 영구 손실
+    //   사용자 보고: 글 누락 발생 → 글은 마지막 수단으로도 절대 삭제하지 않음
+    console.warn('[Storage] ⚠️ NUCLEAR CLEANUP: localStorage 용량 초과 — autosave/backup/error_logs 전체 삭제 (글 목록은 보존)');
     let removed = 0;
     for (let i = localStorage.length - 1; i >= 0; i--) {
         const k = localStorage.key(i);
         if (k && (
-            _rawKeyContains(k, 'naver_blog_generated_posts') ||
             _rawKeyContains(k, 'naver_blog_autosave') ||
             _rawKeyContains(k, 'naver_blog_backup_') ||
             _rawKeyContains(k, 'naver_blog_error_logs')
@@ -160,7 +172,27 @@ function _nuclearCleanup(): void {
             removed++;
         }
     }
-    console.warn(`[Storage] ⚠️ 핵 정리 완료 — ${removed}개 키 삭제됨`);
+    // 글 목록은 직접 삭제 안 함 — _runAllCleanupStrategies의 50% 정리만 신뢰
+    // 단, 그래도 quota 초과면 가장 오래된 글 1/4 추가 삭제 (전체 삭제 절대 금지)
+    try {
+        const POSTS_KEY = 'naver_blog_generated_posts';
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+            const k = localStorage.key(i);
+            if (k && _rawKeyContains(k, POSTS_KEY)) {
+                const raw = localStorage.getItem(k);
+                if (!raw) continue;
+                try {
+                    const posts: any[] = JSON.parse(raw);
+                    if (!Array.isArray(posts) || posts.length === 0) continue;
+                    const keepCount = Math.max(5, Math.floor(posts.length * 0.75));
+                    const kept = posts.slice(0, keepCount);
+                    localStorage.setItem(k, JSON.stringify(kept));
+                    console.warn(`[Storage] ⚠️ ${posts.length}개 → ${kept.length}개로 추가 정리`);
+                } catch { /* 개별 키 실패 무시 */ }
+            }
+        }
+    } catch { /* ignore */ }
+    console.warn(`[Storage] ⚠️ 핵 정리 완료 — autosave/backup ${removed}개 삭제, 글 목록 보존`);
 }
 
 // 전역 노출 (기존 코드와의 호환성)
