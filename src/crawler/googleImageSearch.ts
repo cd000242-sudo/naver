@@ -428,7 +428,31 @@ async function crawlImagesFromUrl(url: string): Promise<string[]> {
         console.log(`[ImageSearch][crawlUrl] 🌐 Puppeteer 크롬 창 띄우는 중 (사용자 시각 확인용): ${url.slice(0, 80)}`);
         // ✅ [v2.7.84] headless: false — 사용자가 크롤링 진행을 화면에서 직접 볼 수 있음
         browser = await launchBrowser({ headless: false });
-        const page = await createOptimizedPage(browser);
+        // ✅ [v2.7.85] Puppeteer는 launch 시 about:blank 첫 페이지를 자동 생성 → 그것을 재사용
+        //   newPage() 추가 호출하면 about:blank 빈 탭이 남아 사용자가 의아해함
+        const existingPages = await browser.pages();
+        const page = existingPages[0] || await browser.newPage();
+        // createOptimizedPage가 적용하던 stealth/리소스 차단 설정을 직접 적용
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+        await page.evaluateOnNewDocument(() => {
+            Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+            // @ts-ignore
+            window.chrome = { runtime: {} };
+        });
+        await page.setRequestInterception(true);
+        page.on('request', (req) => {
+            const type = req.resourceType();
+            const u = req.url();
+            if (['font', 'media'].includes(type) ||
+                u.includes('google-analytics') ||
+                u.includes('facebook') ||
+                u.includes('tracking')) {
+                req.abort();
+            } else {
+                req.continue();
+            }
+        });
+        await page.setViewport({ width: 1280, height: 800 });
 
         // Puppeteer는 networkidle0/networkidle2를 waitUntil로 받음 (race 불필요)
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 20000 }).catch(async () => {
