@@ -59,6 +59,8 @@ import { initGeminiModelSync } from './utils/geminiModelSync.js';
 import { translateGeminiError } from './utils/errorUtils.js';
 // ✅ [2026-02-12] 반자동 전용 이미지 자동 수집 모듈
 import { shouldRunAutoImageSearch, runAutoImageSearch, injectAutoCollectCheckboxUI } from './utils/semiAutoImageSearch.js';
+// ✅ [v2.7.81] runAutoImageSearch를 window에 등록 — fullAutoFlow/multiAccount/headingImageGen에서 동적 import 없이 호출
+(window as any).runAutoImageSearch = runAutoImageSearch;
 // ✅ [2026-01-25 모듈화] 카테고리 모달 유틸리티
 import { initCategorySelectionListener } from './utils/categoryModalUtils.js';
 // ✅ [2026-01-25 모듈화] 앱 이벤트 핸들러

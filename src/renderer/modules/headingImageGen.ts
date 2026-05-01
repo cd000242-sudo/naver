@@ -2068,7 +2068,8 @@ export function initHeadingImageGeneration(): void {
         urlOnlyCollectBtn.innerHTML = '<span>🔄</span><span>URL 이미지 수집 중...</span>';
         appendLog(`🔗 URL 전용 이미지 수집 시작: ${sourceUrl.slice(0, 80)}`, 'images-log-output');
 
-        const { runAutoImageSearch } = await import('../utils/semiAutoImageSearch.js');
+        // ✅ [v2.7.81] dynamic import → 전역 함수 직접 호출 (renderer 인라인 빌드 호환)
+        const runFn = (window as any).runAutoImageSearch;
         const ImageManager = (window as any).ImageManager;
         const syncFn = (window as any).syncGlobalImagesFromImageManager || (() => {});
 
@@ -2082,7 +2083,10 @@ export function initHeadingImageGeneration(): void {
           headings: headingTitles.map(t => ({ title: t })),
         };
 
-        const result = await runAutoImageSearch(
+        if (typeof runFn !== 'function') {
+          throw new Error('runAutoImageSearch 함수 미로드');
+        }
+        const result = await runFn(
           fakeContent,
           postTitle,
           (msg: string) => appendLog(msg, 'images-log-output'),

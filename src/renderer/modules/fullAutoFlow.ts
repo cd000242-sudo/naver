@@ -2229,19 +2229,24 @@ export async function generateFullAutoContent(formData: any) {
     }
 
     if (sourceUrl && /^https?:\/\//i.test(sourceUrl)) {
-      const { runAutoImageSearch } = await import('../utils/semiAutoImageSearch.js');
+      // ✅ [v2.7.81 핫픽스] dynamic import → 인라인 호출 (renderer 인라인 빌드에서 require 미정의 회귀 차단)
+      const runFn = (window as any).runAutoImageSearch;
       const ImageManager = (window as any).ImageManager;
       const syncFn = (window as any).syncGlobalImagesFromImageManager || (() => {});
       const mainKw = (formData as any)?.keywords || (result.content as any)?.selectedTitle || '';
-      await runAutoImageSearch(
-        result.content,
-        mainKw,
-        appendLog,
-        ImageManager,
-        syncFn,
-        { sourceUrl, fillGapWithAI: fillGap }
-      );
-      appendLog(`🔗 [풀오토] URL 이미지 자동 수집 완료 (fillgap=${fillGap ? 'ON' : 'OFF'})`);
+      if (typeof runFn === 'function') {
+        await runFn(
+          result.content,
+          mainKw,
+          appendLog,
+          ImageManager,
+          syncFn,
+          { sourceUrl, fillGapWithAI: fillGap }
+        );
+        appendLog(`🔗 [풀오토] URL 이미지 자동 수집 완료 (fillgap=${fillGap ? 'ON' : 'OFF'})`);
+      } else {
+        appendLog(`⚠️ [풀오토] runAutoImageSearch 미로드 — 스킵`);
+      }
     }
   } catch (e: any) {
     appendLog(`⚠️ [풀오토] URL 이미지 수집 실패: ${e?.message?.slice(0, 80)}`);

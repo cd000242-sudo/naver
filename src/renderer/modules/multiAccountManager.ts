@@ -3153,23 +3153,28 @@ export async function initMultiAccountPublishModal() {
           console.log('[FullAuto] 구조화된 콘텐츠:', structuredContent);
 
           // ✅ [v2.7.77] 다계정: URL 자동 수집 옵션 ON이면 즉시 이미지 수집
+          // ✅ [v2.7.81] dynamic import → 인라인 호출 (renderer require 미정의 회귀 차단)
           if ((queueItem as any).urlAutoCollect && queueItem.sourceUrl) {
             try {
-              const { runAutoImageSearch } = await import('../utils/semiAutoImageSearch.js');
+              const runFn = (window as any).runAutoImageSearch;
               const ImageManager = (window as any).ImageManager;
               const syncFn = (window as any).syncGlobalImagesFromImageManager || (() => {});
-              await runAutoImageSearch(
-                structuredContent,
-                queueItem.sourceKeyword || structuredContent?.selectedTitle || '',
-                (msg: string) => addMALog(msg, 'info'),
-                ImageManager,
-                syncFn,
-                {
-                  sourceUrl: queueItem.sourceUrl,
-                  fillGapWithAI: !!(queueItem as any).fillGapWithAI,
-                }
-              );
-              addMALog(`🔗 [다계정] URL 이미지 자동 수집 완료`, 'success');
+              if (typeof runFn === 'function') {
+                await runFn(
+                  structuredContent,
+                  queueItem.sourceKeyword || structuredContent?.selectedTitle || '',
+                  (msg: string) => addMALog(msg, 'info'),
+                  ImageManager,
+                  syncFn,
+                  {
+                    sourceUrl: queueItem.sourceUrl,
+                    fillGapWithAI: !!(queueItem as any).fillGapWithAI,
+                  }
+                );
+                addMALog(`🔗 [다계정] URL 이미지 자동 수집 완료`, 'success');
+              } else {
+                addMALog(`⚠️ [다계정] runAutoImageSearch 미로드 — 스킵`, 'warning');
+              }
             } catch (e: any) {
               addMALog(`⚠️ [다계정] URL 이미지 수집 실패 — 키워드 검색으로 폴백: ${e?.message?.slice(0, 60)}`, 'warning');
             }
