@@ -1037,6 +1037,37 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
   appendLog(`🖼️ 이미지: ${generatedImages.length}개`);
   appendLog(`✅ 반자동 모드에서 수정 후 발행할 수 있습니다.`);
 
+  // ✅ [v2.7.91] 글 불러오기 후 반자동 발행 버튼 직접 활성화
+  //   사용자 보고: "글을 불러오면 반자동 발행이가능해야되는거아니니?"
+  //   원인: tailUIUtils.ts의 이벤트 위임이 동적 렌더링/stopPropagation으로 미발화 가능
+  //   조치: 직접 markContentGenerated + enableSemiAutoPublishButton 호출
+  try {
+    const semiAutoBtn = document.getElementById('semi-auto-publish-btn') as HTMLButtonElement | null;
+    if (semiAutoBtn) {
+      semiAutoBtn.disabled = false;
+      semiAutoBtn.style.opacity = '1';
+      semiAutoBtn.style.cursor = 'pointer';
+      semiAutoBtn.title = '';
+    }
+    const fullAutoBtn = document.getElementById('full-auto-publish-btn') as HTMLButtonElement | null;
+    if (fullAutoBtn) {
+      fullAutoBtn.disabled = false;
+      fullAutoBtn.style.opacity = '1';
+      fullAutoBtn.style.cursor = 'pointer';
+    }
+    // hasGeneratedContent 플래그 트리거 (tailUIUtils의 SmartPublish 상태 동기화)
+    const markFn = (window as any).markContentGenerated;
+    if (typeof markFn === 'function') markFn();
+    // 미리보기/반자동 섹션 표시 보장
+    const previewSection = document.getElementById('unified-preview-section');
+    const semiAutoSection = document.getElementById('unified-semi-auto-section');
+    if (previewSection) previewSection.style.display = 'block';
+    if (semiAutoSection) semiAutoSection.style.display = 'block';
+    appendLog(`▶️ 발행 버튼 활성화 완료 — 반자동/풀오토 모두 사용 가능`);
+  } catch (e: any) {
+    console.warn('[postListUI] 발행 버튼 활성화 실패:', e?.message);
+  }
+
   // ✅ [2026-01-22] 카테고리 복원
   if ((post as any).category) {
     const categorySelect = document.getElementById('unified-category-select') as HTMLSelectElement;
