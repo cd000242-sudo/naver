@@ -2068,12 +2068,20 @@ export function initHeadingImageGeneration(): void {
         urlOnlyCollectBtn.innerHTML = '<span>🔄</span><span>URL 이미지 수집 중...</span>';
         appendLog(`🔗 URL 전용 이미지 수집 시작: ${sourceUrl.slice(0, 80)}`, 'images-log-output');
 
-        // ✅ [v2.7.81] dynamic import → 전역 함수 직접 호출 (renderer 인라인 빌드 호환)
+        // ✅ [v2.7.82] runAutoImageSearch + ImageManager + syncFn 모두 window에서 가져오기
+        //   undefined 가드 + 친화적 에러 메시지
         const runFn = (window as any).runAutoImageSearch;
         const ImageManager = (window as any).ImageManager;
         const syncFn = (window as any).syncGlobalImagesFromImageManager || (() => {});
 
-        // structuredContent 모킹 (타이틀 + 헤딩만 필요)
+        if (typeof runFn !== 'function') {
+          throw new Error('runAutoImageSearch 함수 미로드 — 앱 재시작 필요');
+        }
+        if (!ImageManager || typeof ImageManager.getImages !== 'function') {
+          throw new Error('ImageManager 미초기화 — 앱 재시작 필요');
+        }
+
+        // structuredContent 모킹 (페이지 순서 그대로 유지 — 페이지 작성자의 의도 흐름 따라감)
         const fakeContent = {
           title: postTitle,
           postTitle,
@@ -2083,9 +2091,6 @@ export function initHeadingImageGeneration(): void {
           headings: headingTitles.map(t => ({ title: t })),
         };
 
-        if (typeof runFn !== 'function') {
-          throw new Error('runAutoImageSearch 함수 미로드');
-        }
         const result = await runFn(
           fakeContent,
           postTitle,
@@ -2094,7 +2099,7 @@ export function initHeadingImageGeneration(): void {
           syncFn,
           { sourceUrl, fillGapWithAI: fillGap }
         );
-        appendLog(`✅ URL 이미지 수집 완료: ${result?.added ?? 0}개 배치`, 'images-log-output');
+        appendLog(`✅ URL 이미지 수집 완료: ${result?.added ?? 0}개 배치 (페이지 순서 유지)`, 'images-log-output');
         if ((window as any).toastManager) (window as any).toastManager.success(`✅ URL 이미지 ${result?.added ?? 0}개 수집 완료`);
       } catch (e: any) {
         appendLog(`❌ URL 이미지 수집 실패: ${e?.message?.slice(0, 100)}`, 'images-log-output');

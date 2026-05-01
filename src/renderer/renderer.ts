@@ -59,7 +59,9 @@ import { initGeminiModelSync } from './utils/geminiModelSync.js';
 import { translateGeminiError } from './utils/errorUtils.js';
 // ✅ [2026-02-12] 반자동 전용 이미지 자동 수집 모듈
 import { shouldRunAutoImageSearch, runAutoImageSearch, injectAutoCollectCheckboxUI } from './utils/semiAutoImageSearch.js';
-// ✅ [v2.7.81] runAutoImageSearch를 window에 등록 — fullAutoFlow/multiAccount/headingImageGen에서 동적 import 없이 호출
+// ✅ [v2.7.81/82] runAutoImageSearch + ImageManager + syncFn을 window에 등록
+//   - dynamic import 없이 fullAutoFlow/multiAccount/headingImageGen에서 호출
+//   - getImages/addImage 등 ImageManager 메서드 접근 (v2.7.82 핫픽스)
 (window as any).runAutoImageSearch = runAutoImageSearch;
 // ✅ [2026-01-25 모듈화] 카테고리 모달 유틸리티
 import { initCategorySelectionListener } from './utils/categoryModalUtils.js';
@@ -201,6 +203,9 @@ import { registeredEventListeners, registerEventListener, unregisterEventListene
 import { UnifiedDOMCache } from './modules/unifiedDOMCache.js';
 import { ImageManager, imageHistoryStack, pushImageHistorySnapshot } from './modules/imageManagerCore.js';
 import { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImagesFromImageManager, filterImagesForPublish } from './modules/imageSyncService.js';
+// ✅ [v2.7.82] ImageManager + syncFn을 window에 등록 — runAutoImageSearch 의존성
+(window as any).ImageManager = ImageManager;
+(window as any).syncGlobalImagesFromImageManager = syncGlobalImagesFromImageManager;
 import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApiCostConsent, reserveExternalApiImageQuota, generateImagesWithCostSafety, ensurePromptCardRemoveHandler } from './modules/costAndAutoGen.js';
 import { initImageLibrary, loadLibraryImages, useLibraryImage, switchToTab, generateFavoritesContent, generateTemplatesContent, getEnhancedTemplates } from './modules/contentPreviewAndLibrary.js';
 declare let thumbnailBackgroundImage: string | null;
