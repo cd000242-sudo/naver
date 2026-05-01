@@ -2198,11 +2198,36 @@ export async function generateFullAutoContent(formData: any) {
 
   appendLog('✅ AI 콘텐츠 생성이 완료되었습니다!');
 
-  // ✅ [v2.7.77] 풀오토: 콘텐츠 입력 영역의 URL 수집 옵션 자동 적용
+  // ✅ [v2.7.77/79] 풀오토 URL 이미지 수집 — 우선순위
+  //   1) 풀오토 URL 입력 직하 #unified-url-collect-images 체크박스 (v2.7.79 신규, 가장 명시적)
+  //   2) 콘텐츠 입력 영역 #content-url-collect (v2.7.74)
+  //   3) formData/structuredContent.sourceUrl
   try {
+    const unifiedCollectChecked = !!(document.getElementById('unified-url-collect-images') as HTMLInputElement | null)?.checked;
+    const unifiedFillGap = !!(document.getElementById('unified-url-fillgap-ai') as HTMLInputElement | null)?.checked;
     const contentUrl = (document.getElementById('content-url-collect') as HTMLInputElement | null)?.value?.trim() || '';
-    const fillGap = !!(document.getElementById('content-url-fillgap-ai') as HTMLInputElement | null)?.checked;
-    const sourceUrl = contentUrl || (formData as any)?.sourceUrl || (result.content as any)?.sourceUrl || '';
+    const contentFillGap = !!(document.getElementById('content-url-fillgap-ai') as HTMLInputElement | null)?.checked;
+
+    // 풀오토 URL 입력 첫 번째 값 (체크박스가 ON이면 우선)
+    let unifiedFirstUrl = '';
+    if (unifiedCollectChecked) {
+      const firstUrlInput = document.querySelector('.unified-url-input') as HTMLInputElement | null;
+      unifiedFirstUrl = (firstUrlInput?.value || '').trim();
+    }
+
+    let sourceUrl = '';
+    let fillGap = false;
+    if (unifiedCollectChecked && unifiedFirstUrl) {
+      sourceUrl = unifiedFirstUrl;
+      fillGap = unifiedFillGap;
+      appendLog(`🔗 [풀오토] 위 URL로 이미지 수집 옵션 ON — ${sourceUrl.slice(0, 60)}...`);
+    } else if (contentUrl) {
+      sourceUrl = contentUrl;
+      fillGap = contentFillGap;
+    } else {
+      sourceUrl = (formData as any)?.sourceUrl || (result.content as any)?.sourceUrl || '';
+    }
+
     if (sourceUrl && /^https?:\/\//i.test(sourceUrl)) {
       const { runAutoImageSearch } = await import('../utils/semiAutoImageSearch.js');
       const ImageManager = (window as any).ImageManager;
