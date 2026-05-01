@@ -425,8 +425,9 @@ export async function searchImagesForHeadings(
 async function crawlImagesFromUrl(url: string): Promise<string[]> {
     let browser;
     try {
-        console.log(`[ImageSearch][crawlUrl] 🌐 Playwright로 페이지 로드: ${url.slice(0, 80)}`);
-        browser = await launchBrowser();
+        console.log(`[ImageSearch][crawlUrl] 🌐 Puppeteer 크롬 창 띄우는 중 (사용자 시각 확인용): ${url.slice(0, 80)}`);
+        // ✅ [v2.7.84] headless: false — 사용자가 크롤링 진행을 화면에서 직접 볼 수 있음
+        browser = await launchBrowser({ headless: false });
         const page = await createOptimizedPage(browser);
 
         // Puppeteer는 networkidle0/networkidle2를 waitUntil로 받음 (race 불필요)

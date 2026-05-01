@@ -2,7 +2,8 @@ import puppeteer, { Browser, Page } from 'puppeteer';
 import { getChromiumExecutablePath } from '../../browserUtils.js';
 import { getProxyUrl } from './proxyManager.js';
 
-export async function launchBrowser(): Promise<Browser> {
+// ✅ [v2.7.84] headless 옵션 추가 — URL 이미지 수집 시 사용자가 진행 시각 확인 가능
+export async function launchBrowser(opts?: { headless?: boolean }): Promise<Browser> {
     const executablePath = await getChromiumExecutablePath();
 
     // ✅ [2026-03-16] 프록시 자동 적용
@@ -23,7 +24,7 @@ export async function launchBrowser(): Promise<Browser> {
     }
 
     return puppeteer.launch({
-        headless: true,
+        headless: opts?.headless !== undefined ? opts.headless : true,
         executablePath,
         args,
     });
