@@ -249,10 +249,17 @@ export function migratePostsToPerAccount(): void {
 //   조치: 앱 시작 시 1회 실행 — 각 글 이미지의 filePath 존재 검사 후 누락된 항목의 filePath 제거
 //        previewDataUrl 또는 url 폴백이 있는 이미지는 유지 (썸네일 끊기지 않음)
 //        previewDataUrl/url 모두 없으면 해당 이미지 항목 자체 제거
-const STALE_IMAGE_CLEANUP_DONE_KEY = 'naver_blog_posts_stale_image_cleanup_done_v1';
+// ✅ [v2.7.93] cleanup 키 v2로 변경 — 모든 사용자에게 1회 더 강제 실행 (사용자 보고 ERR_FILE_NOT_FOUND 다발)
+const STALE_IMAGE_CLEANUP_DONE_KEY = 'naver_blog_posts_stale_image_cleanup_done_v2';
+const OLD_CLEANUP_KEY_V1 = 'naver_blog_posts_stale_image_cleanup_done_v1';
 let staleImageCleanupRunning = false;
 export async function cleanupStaleImageReferences(): Promise<void> {
   if (staleImageCleanupRunning) return;
+  // v1 플래그 있으면 제거 (재실행 트리거)
+  if (localStorage.getItem(OLD_CLEANUP_KEY_V1)) {
+    localStorage.removeItem(OLD_CLEANUP_KEY_V1);
+    console.log('[StaleImageCleanup] v1 플래그 제거 → v2로 재실행');
+  }
   if (localStorage.getItem(STALE_IMAGE_CLEANUP_DONE_KEY)) return;
   staleImageCleanupRunning = true;
   try {
@@ -277,6 +284,25 @@ export async function cleanupStaleImageReferences(): Promise<void> {
         const filePath = img.filePath || img.savedToLocal;
         if (!filePath) {
           cleaned.push(img);
+          continue;
+        }
+        // ✅ [v2.7.93] 의심 경로 즉시 차단 — 외부 Desktop/임시 경로
+        const lower = String(filePath).toLowerCase();
+        const isExternalPath = lower.includes('\\desktop\\') ||
+                                lower.includes('/desktop/') ||
+                                lower.includes('\\temp\\') ||
+                                lower.includes('/tmp/');
+        if (isExternalPath) {
+          const hasFallback = !!(img.previewDataUrl || img.url);
+          if (hasFallback) {
+            const next = { ...img };
+            delete next.filePath;
+            delete next.savedToLocal;
+            cleaned.push(next);
+            droppedRefs++;
+          } else {
+            droppedImages++;
+          }
           continue;
         }
         try {
