@@ -17,7 +17,8 @@ function read(rel: string): string {
 
 describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
   // 모든 활성 엔진이 반드시 등록되어야 하는 위치 7곳
-  const ENGINES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow'];
+  // ✅ [v2.8.2] 'dall-e-3' 추가 — UI 옵션은 v2.7.15부터 있었으나 화이트리스트에 누락되어 폴백되던 회귀 차단
+  const ENGINES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow'];
 
   describe('P0-1: types.ts — ImageProvider / ALLOWED_PROVIDER', () => {
     const code = read('image/types.ts');

@@ -76,7 +76,10 @@ const UnifiedDOMCache = {
     // ✅ [2026-02-02] 풀오토/연속/다중계정 발행 전용 이미지 소스
     // 이미지 관리 탭의 globalImageSource와 완전히 분리됨
     // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow 엔진이 풀오토/연속발행에서 nano-banana-pro로 폴백되던 버그 수정
-    const VALID_AI_SOURCES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
+    // ✅ [v2.8.2] 'dall-e-3' + 'falai' + 'pollinations' 추가 — 사용자가 달리/덕트테이프 선택해도 nano-banana-pro로 폴백되던 회귀 차단
+    //   사용자 보고: "달리 분명히 달리로 이미지 생성되게 하라했는데 계속 나노바나나뜨는데 어떻게 된거야"
+    //   원인: v2.7.15에 dall-e-3이 옵션으로 추가됐지만 VALID_AI_SOURCES 화이트리스트엔 누락 → fullAutoSource 거부 → 폴백 체인 → nano-banana-pro
+    const VALID_AI_SOURCES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'falai', 'pollinations', 'local-folder'];
 
     // ✅ [v1.4.90 FIX] 레거시 저장값 자동 마이그레이션
     //   증상: 사용자가 UI에서 'flow' 선택했지만 fullAutoImageSource에는 예전 'nano-banana-pro'가 남아있어 무시됨
