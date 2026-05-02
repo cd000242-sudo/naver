@@ -8022,13 +8022,23 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           break; // 이 모델의 재시도 루프 탈출 → 다음 모델
         }
 
-        // 4) 429/quota/rate-limit → 다음 모델 폴백 (재시도보다 빠른 모델 전환 우선)
-        // ✅ [2026-04-09 FIX] 429 quota를 다른 모델로 즉시 폴백하여 빠른 복구
+        // ✅ [v2.7.94] 429/quota/rate-limit → 명확한 안내 후 throw (자동 폴백 금지)
+        //   사용자 지시: "다른걸로 폴백되면 그모델로하지 뭐하러 모델을 선택해서 하겠니"
+        //   기존(v2.7.93까지): break로 다음 모델 자동 전환 → 사용자 선택 무시
+        //   수정: throw로 명확한 원인 + 해결 방법 안내
         const isQuotaOrRateLimit = errorMessage.includes('429') || errorMessage.includes('rate limit') ||
           errorMessage.includes('too many requests') || errorMessage.includes('quota');
         if (isQuotaOrRateLimit) {
-          console.log(`[OpenAI] ⚠️ ${modelName} 할당량/속도 제한, 다음 모델로 즉시 전환: ${(error as Error).message}`);
-          break; // 같은 모델 재시도 대신 다음 모델로 빠른 폴백
+          console.error(`[OpenAI] ❌ ${modelName} 할당량/속도 제한 — 자동 폴백 차단`);
+          throw new Error(
+            `🚫 [OpenAI ${modelName}] API 한도를 초과했습니다.\n\n` +
+            `📌 원인: ${errorMessage.includes('quota') ? '월간 할당량 소진' : '분당 요청 한도(RPM) 초과'}\n\n` +
+            `💡 해결 방법:\n` +
+            `  1) platform.openai.com → Billing 에서 결제 정보 확인 (월 한도 상향)\n` +
+            `  2) 잠시 후 다시 시도 (RPM 한도는 1분 후 복구)\n` +
+            `  3) 다른 모델을 직접 사용하려면 환경 설정 → AI 엔진에서 변경하세요\n\n` +
+            `⚠️ 자동으로 다른 모델로 전환하지 않습니다 (사용자가 선택한 모델 존중).`
+          );
         }
 
         // 5) 서버/네트워크 에러 → 대기 후 재시도
