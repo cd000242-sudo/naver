@@ -20,15 +20,66 @@ import * as path from 'path';
 
 const SIBLING_FOLDER_NAME = 'Better Life Naver';
 const TARGET_FILES = ['settings.json', 'blog-accounts.json', 'scheduled-posts.json', '.last_active_user'];
-const KEY_FIELDS = ['geminiApiKey', 'openaiApiKey', 'claudeApiKey', 'perplexityApiKey', 'pexelsApiKey'];
+// ✅ [v2.8.1] 보존 가치 있는 모든 필드 — API 키 + 계정 + 라이선스 자격증명 + 사용자 프로필
+const PRESERVE_FIELDS = [
+    'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey',
+    'perplexityApiKey', 'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey',
+    'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey',
+    'naverDatalabClientId', 'naverDatalabClientSecret',
+    'naverClientId', 'naverClientSecret',
+    'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
+    'rememberCredentials', 'savedNaverId', 'savedNaverPassword',
+    'rememberLicenseCredentials', 'savedLicenseUserId', 'savedLicensePassword',
+    'userDisplayName', 'userEmail',
+    'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
+    'perplexityModel', 'geminiPlanType',
+    'customImageSavePath',
+];
 
-function configHasAnyKey(cfg: any): boolean {
+function hasPreservedValue(cfg: any): boolean {
     if (!cfg || typeof cfg !== 'object') return false;
-    for (const k of KEY_FIELDS) {
+    for (const k of PRESERVE_FIELDS) {
         const v = cfg[k];
         if (typeof v === 'string' && v.trim().length > 0) return true;
+        if (Array.isArray(v) && v.length > 0) return true;
     }
     return false;
+}
+
+/**
+ * ✅ [v2.8.1] settings.json 필드 머지 — dst 우선, dst에 비어있는 필드만 src에서 보충
+ * API 키만 살아남아도 라이선스 ID/PW/네이버 계정 등 다른 필드가 사라지지 않도록.
+ */
+function mergeSettingsPreserveDst(srcPath: string, dstPath: string): boolean {
+    try {
+        const src = JSON.parse(fs.readFileSync(srcPath, 'utf8'));
+        let dst: any = {};
+        if (fs.existsSync(dstPath)) {
+            try { dst = JSON.parse(fs.readFileSync(dstPath, 'utf8')); } catch { dst = {}; }
+        }
+        let changed = false;
+        for (const k of PRESERVE_FIELDS) {
+            const srcV = src[k];
+            const dstV = dst[k];
+            const srcHas = (typeof srcV === 'string' && srcV.trim().length > 0)
+                || (Array.isArray(srcV) && srcV.length > 0)
+                || (typeof srcV === 'boolean' && srcV !== undefined);
+            const dstHas = (typeof dstV === 'string' && dstV.trim().length > 0)
+                || (Array.isArray(dstV) && dstV.length > 0)
+                || (typeof dstV === 'boolean' && dstV !== undefined);
+            if (srcHas && !dstHas) {
+                dst[k] = srcV;
+                changed = true;
+            }
+        }
+        if (changed) {
+            fs.writeFileSync(dstPath, JSON.stringify(dst, null, 2), 'utf8');
+        }
+        return changed;
+    } catch (e: any) {
+        console.warn(`[UserDataMigration] ⚠️ settings 머지 실패: ${e?.message}`);
+        return false;
+    }
 }
 
 function copyDirRecursive(src: string, dst: string): void {
@@ -57,17 +108,30 @@ export function migrateUserDataFolders(currentUserDataDir: string): { migrated: 
             const dst = path.join(currentUserDataDir, f);
             if (!fs.existsSync(src)) continue;
 
-            let shouldCopy = !fs.existsSync(dst);
-            if (!shouldCopy && f === 'settings.json') {
-                try {
-                    const dstCfg = JSON.parse(fs.readFileSync(dst, 'utf8'));
-                    const srcCfg = JSON.parse(fs.readFileSync(src, 'utf8'));
-                    if (!configHasAnyKey(dstCfg) && configHasAnyKey(srcCfg)) shouldCopy = true;
-                } catch {
-                    shouldCopy = true;
+            // ✅ [v2.8.1] settings.json은 항상 머지 — dst 우선, 비어있는 필드만 src에서 보충
+            //   문제: v2.8.0은 API 키만 비교해 "있으면 OK"로 판단 → savedLicenseUserId 등 다른 필드 누락
+            //   조치: 머지로 라이선스 ID/PW + 네이버 계정 + 사용자 프로필 등 PRESERVE_FIELDS 일괄 보충
+            if (f === 'settings.json') {
+                if (!fs.existsSync(dst)) {
+                    try {
+                        fs.copyFileSync(src, dst);
+                        result.migrated++;
+                        console.log(`[UserDataMigration] ✅ settings.json 신규 이주: ${siblingDir} → ${currentUserDataDir}`);
+                    } catch (e: any) {
+                        console.warn(`[UserDataMigration] ⚠️ settings.json 이주 실패: ${e?.message}`);
+                    }
+                } else {
+                    const merged = mergeSettingsPreserveDst(src, dst);
+                    if (merged) {
+                        result.migrated++;
+                        console.log(`[UserDataMigration] ✅ settings.json 필드 머지 (라이선스/계정/프로필 보충)`);
+                    }
                 }
+                continue;
             }
-            if (shouldCopy) {
+
+            // 그 외 파일: dst 없을 때만 복사 (dst가 우선)
+            if (!fs.existsSync(dst)) {
                 try {
                     fs.copyFileSync(src, dst);
                     result.migrated++;
@@ -92,9 +156,19 @@ export function migrateUserDataFolders(currentUserDataDir: string): { migrated: 
         try {
             const srcLic = path.join(siblingDir, 'license');
             const dstLic = path.join(currentUserDataDir, 'license');
-            if (fs.existsSync(srcLic) && !fs.existsSync(dstLic)) {
-                copyDirRecursive(srcLic, dstLic);
-                result.migrated++;
+            if (fs.existsSync(srcLic)) {
+                // ✅ [v2.8.1] license 폴더는 dst에 없거나 license.json이 비어있을 때 복사
+                let needsCopy = !fs.existsSync(dstLic);
+                if (!needsCopy) {
+                    const srcLicFile = path.join(srcLic, 'license.json');
+                    const dstLicFile = path.join(dstLic, 'license.json');
+                    if (fs.existsSync(srcLicFile) && !fs.existsSync(dstLicFile)) needsCopy = true;
+                }
+                if (needsCopy) {
+                    copyDirRecursive(srcLic, dstLic);
+                    result.migrated++;
+                    console.log(`[UserDataMigration] ✅ license 폴더 이주`);
+                }
             }
         } catch { /* ignore */ }
 
@@ -125,21 +199,20 @@ export function restoreFromMirrorIfEmpty(userDataDir: string, mirrorDir: string)
         const src = path.join(mirrorDir, 'settings.json');
         if (!fs.existsSync(src)) return false;
 
-        let dstHasKey = false;
+        // ✅ [v2.8.1] dst가 있으면 항상 머지 — API 키 외 라이선스/계정/프로필 필드도 보충
         if (fs.existsSync(dst)) {
+            mergeSettingsPreserveDst(src, dst);
+        } else {
             try {
-                const cfg = JSON.parse(fs.readFileSync(dst, 'utf8'));
-                dstHasKey = configHasAnyKey(cfg);
-            } catch { /* 파일 손상 → 복원 가능 */ }
+                const srcCfg = JSON.parse(fs.readFileSync(src, 'utf8'));
+                if (!hasPreservedValue(srcCfg)) return false;
+                if (!fs.existsSync(userDataDir)) fs.mkdirSync(userDataDir, { recursive: true });
+                fs.copyFileSync(src, dst);
+                console.log(`[UserDataMirror] ✅ 미러에서 settings.json 자동 복원`);
+            } catch (e: any) {
+                console.warn(`[UserDataMirror] ⚠️ settings 복원 실패: ${e?.message}`);
+            }
         }
-        if (dstHasKey) return false;
-
-        const srcCfg = JSON.parse(fs.readFileSync(src, 'utf8'));
-        if (!configHasAnyKey(srcCfg)) return false;
-
-        if (!fs.existsSync(userDataDir)) fs.mkdirSync(userDataDir, { recursive: true });
-        fs.copyFileSync(src, dst);
-        console.log(`[UserDataMirror] ✅ 미러에서 settings.json 자동 복원`);
 
         for (const f of TARGET_FILES) {
             if (f === 'settings.json') continue;
