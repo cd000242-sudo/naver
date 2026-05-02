@@ -3186,20 +3186,43 @@ ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ u
     const os = await import('os');
 
     const savedImages: any[] = [];
-    const safeTitle = title.replace(/[<>:"/\\|?*]/g, '_');
+    const safeTitle = (title || 'untitled')
+      .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')
+      .replace(/\s+/g, '_')
+      .replace(/\.+$/, '')
+      .replace(/_+$/, '')
+      .substring(0, 100)
+      .trim() || 'untitled';
 
-    // ✅ 설정된 이미지 저장 경로 사용
-    let basePath = path.join(os.homedir(), 'Downloads', 'naver-blog-images');
+    // ✅ [v2.8.8] 이미지 저장 경로 보장 — customImageSavePath 우선, 실패 시 Downloads 폴백 + 자동 영속화
+    const fallbackPath = path.join(os.homedir(), 'Downloads', 'naver-blog-images');
+    let basePath = fallbackPath;
     try {
       const config = await loadConfig();
-      if (config.customImageSavePath && config.customImageSavePath.trim() !== '') {
-        basePath = config.customImageSavePath;
+      const cfgPath = String((config as any).customImageSavePath || '').trim();
+      if (cfgPath) {
+        basePath = cfgPath;
+      } else {
+        // 기본 경로를 config에 영속화 (이후 동일 경로 안정 사용)
+        const { saveConfig } = await import('./configManager.js');
+        await saveConfig({ ...config, customImageSavePath: fallbackPath } as any);
+        console.log(`[Main] customImageSavePath 미세팅 → ${fallbackPath}로 자동 영속화`);
       }
-    } catch { /* 기본 경로 사용 */ }
+    } catch (cfgErr: any) {
+      console.warn(`[Main] config 로드 실패 — fallback 사용: ${cfgErr?.message}`);
+    }
 
-    const imagesPath = path.join(basePath, safeTitle);
-    await fs.mkdir(imagesPath, { recursive: true });
-    console.log(`[Main] 이미지 저장 경로: ${imagesPath}`);
+    let imagesPath = path.join(basePath, safeTitle);
+    try {
+      await fs.mkdir(imagesPath, { recursive: true });
+      console.log(`[Main] ✅ 이미지 저장 경로 생성: ${imagesPath}`);
+    } catch (mkErr: any) {
+      // ✅ basePath가 잘못된 경로(권한 없음, 존재하지 않는 드라이브 등)면 Downloads로 폴백
+      console.warn(`[Main] ⚠️ basePath mkdir 실패 (${basePath}) → Downloads 폴백: ${mkErr?.message}`);
+      imagesPath = path.join(fallbackPath, safeTitle);
+      await fs.mkdir(imagesPath, { recursive: true });
+      console.log(`[Main] ✅ 폴백 경로 생성: ${imagesPath}`);
+    }
 
     // ✅ [100점 개선] 이미지 다운로드 함수 (헤더 + 리다이렉트 + 재시도)
     // ✅ [2026-04-18 FIX] Referer를 URL의 origin으로 동적 설정 — 쿠팡/스마트스토어
