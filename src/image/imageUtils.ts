@@ -117,56 +117,61 @@ export async function writeImageFile(buffer: Buffer, extension: string, heading?
   await fs.writeFile(filePath, processedBuffer);
 
   // ✅ 사용자 접근 가능한 로컬 위치에도 저장 (글 ID별 폴더 구조)
+  // ✅ [v2.8.9] 폴더 생성 100% 보장 — basePath 잘못된 경로면 Downloads 폴백 후 재시도
   let savedToLocal: string | undefined;
+  const os = await import('os');
+  const fallbackBasePath = path.join(os.homedir(), 'Downloads', 'naver-blog-images');
+
+  const buildSubFolder = (): string => {
+    if (postTitle && postTitle.trim()) {
+      return postTitle
+        .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')
+        .replace(/\s+/g, '_')
+        .replace(/\.+$/, '')
+        .replace(/_+$/, '')
+        .substring(0, 100)
+        .trim() || 'untitled';
+    }
+    if (postId) {
+      return postId
+        .replace(/[<>:"/\\|?*]/g, '_')
+        .replace(/\s+/g, '_')
+        .substring(0, 100)
+        .trim() || 'untitled';
+    }
+    const now = new Date();
+    return `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`;
+  };
+
+  const subFolder = buildSubFolder();
+  const safeHeading = heading
+    ? heading.replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/, '').replace(/_+$/, '').substring(0, 50).trim() || 'image'
+    : 'image';
+  const timestamp = Date.now();
+  const localFileName = `${safeHeading}-${timestamp}.${extension}`;
+
+  const tryWriteToBase = async (basePath: string): Promise<string> => {
+    const blogImagesPath = path.join(basePath, subFolder);
+    await fs.mkdir(blogImagesPath, { recursive: true });
+    const localFilePath = path.join(blogImagesPath, localFileName);
+    await fs.writeFile(localFilePath, processedBuffer);
+    return localFilePath;
+  };
+
   try {
     const basePath = await getImageSaveBasePath();
-
-    // ✅ 제목 폴더로만 저장 (날짜 폴더 없이 바로 제목 폴더)
-    let blogImagesPath: string;
-
-    if (postTitle && postTitle.trim()) {
-      // 제목 폴더만 사용 (날짜 폴더 없음)
-      const safeTitleFolder = postTitle
-        .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')  // 파일명에 사용할 수 없는 문자 + 네이버 업로드 문제 문자 제거
-        .replace(/\s+/g, '_')            // 공백을 언더스코어로 변경
-        .replace(/\.+$/, '')             // ✅ [2026-03-09 FIX] 끝의 마침표 제거 (Windows 폴더명 제한)
-        .replace(/_+$/, '')              // 끝의 불필요한 언더스코어 제거
-        .substring(0, 100)                // 최대 100자로 제한
-        .trim() || 'untitled';
-      blogImagesPath = path.join(basePath, safeTitleFolder);
-    } else if (postId) {
-      // ✅ [2026-01-20] 글ID도 안전한 폴더명으로 변환 (특수문자 제거)
-      const safePostIdFolder = postId
-        .replace(/[<>:"/\\|?*]/g, '_')  // 파일명에 사용할 수 없는 문자 제거
-        .replace(/\s+/g, '_')            // 공백을 언더스코어로 변경
-        .substring(0, 100)               // 최대 100자로 제한
-        .trim() || 'untitled';
-      blogImagesPath = path.join(basePath, safePostIdFolder);
-    } else {
-      // 둘 다 없으면 날짜_시간 폴더 사용
-      const now = new Date();
-      const dateTimeFolder = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`;
-      blogImagesPath = path.join(basePath, dateTimeFolder);
+    try {
+      savedToLocal = await tryWriteToBase(basePath);
+      console.log(`[ImageGenerator] ✅ 이미지 로컬 저장: ${savedToLocal} (글 ID: ${postId || '없음'})`);
+    } catch (primaryErr: any) {
+      // ✅ basePath가 잘못된 경로(권한/드라이브 부재 등) → Downloads 폴백 재시도
+      console.warn(`[ImageGenerator] ⚠️ basePath 저장 실패 (${basePath}) → Downloads 폴백: ${primaryErr?.message}`);
+      savedToLocal = await tryWriteToBase(fallbackBasePath);
+      console.log(`[ImageGenerator] ✅ 폴백 경로 저장: ${savedToLocal}`);
     }
-
-    await fs.mkdir(blogImagesPath, { recursive: true });
-
-    // 파일명을 소제목 기반으로 생성 (안전한 파일명으로 변환)
-    const safeHeading = heading
-      ? heading.replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/, '').replace(/_+$/, '').substring(0, 50).trim() || 'image'
-      : 'image';
-    // ✅ 중복 방지: 타임스탬프 추가
-    const timestamp = Date.now();
-    const localFileName = `${safeHeading}-${timestamp}.${extension}`;
-    const localFilePath = path.join(blogImagesPath, localFileName);
-
-    await fs.writeFile(localFilePath, processedBuffer);
-    savedToLocal = localFilePath;
-
-    console.log(`[ImageGenerator] 이미지 로컬 저장 완료: ${localFilePath} (글 ID: ${postId || '없음'})`);
-  } catch (error) {
-    // 다운로드 폴더 저장 실패는 무시 (기본 저장 위치는 성공)
-    console.warn('[ImageGenerator] 다운로드 폴더 저장 실패:', (error as Error).message);
+  } catch (error: any) {
+    // 두 경로 모두 실패 시 warn (앱 종료는 안 함, 메인 저장 dir는 이미 성공)
+    console.warn('[ImageGenerator] ⚠️ 다운로드 폴더 저장 최종 실패:', error?.message);
   }
 
   const previewDataUrl = `data:image/${extension === 'jpg' ? 'jpeg' : extension};base64,${processedBuffer.toString('base64')}`;
