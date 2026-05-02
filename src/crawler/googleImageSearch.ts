@@ -577,8 +577,9 @@ export async function crawlImagesFromUrl(url: string): Promise<string[]> {
 
                 // 차단 패턴: site-wide UI / 위젯 / 광고 — 본문 이미지 차단되지 않도록 보수적
                 const BANNED = /spacer|pixel|blank|1x1|spc\.gif|ico_n\.gif|gnb|navbar|footer|widget|profile_|avatar|emoticon|sticker|bg_btn|btn_arrow|\.svg(\?|$)/i;
-                // 본문 우선 패턴: 네이버 블로그 본문 CDN + 카카오 + tistory + 일반 큰 CDN
-                const PRIORITY_HOSTS = /postfiles\.pstatic\.net|mblogthumb-phinf\.pstatic\.net|blogfiles\.pstatic\.net|dthumb-phinf\.pstatic\.net|pup-post-phinf\.pstatic\.net|blogpfthumb-phinf\.pstatic\.net|cafeptthumb-phinf\.pstatic\.net|cafeptthumb\.pstatic\.net|search\.pstatic\.net|tistory|t1\.daumcdn\.net|kakaocdn\.net|naver\.net\/MjAy|googleusercontent/i;
+                // 본문 우선 패턴: 네이버 블로그/뉴스/카페 + 카카오 + tistory + 위키 + 일반 큰 CDN
+                // ✅ [v2.8.6] Playwright 실측: imgnews/mimgnews/ssl/phinf 누락 → 뉴스 본문이 priority 1/2로 떨어짐. 보강.
+                const PRIORITY_HOSTS = /postfiles\.pstatic\.net|mblogthumb-phinf\.pstatic\.net|blogfiles\.pstatic\.net|dthumb-phinf\.pstatic\.net|pup-post-phinf\.pstatic\.net|blogpfthumb-phinf\.pstatic\.net|cafeptthumb-phinf\.pstatic\.net|cafeptthumb\.pstatic\.net|search\.pstatic\.net|imgnews\.pstatic\.net|mimgnews\.pstatic\.net|phinf\.pstatic\.net|ssl\.pstatic\.net|tistory|t1\.daumcdn\.net|kakaocdn\.net|naver\.net\/MjAy|googleusercontent|upload\.wikimedia\.org/i;
 
                 const tryAdd = (raw: string | null | undefined, w: number, hint?: 'priority' | 'normal') => {
                     if (!raw) return;
@@ -587,7 +588,7 @@ export async function crawlImagesFromUrl(url: string): Promise<string[]> {
                     try { src = new URL(src, baseHref).toString(); } catch { return; }
                     if (BANNED.test(src)) return;
                     // type/format 필터: 명시적 이미지 확장자 또는 알려진 이미지 CDN만 통과
-                    const isImage = /\.(jpg|jpeg|png|webp|gif|bmp)(\?|$)/i.test(src) || /pstatic\.net|kakaocdn|googleusercontent|naver\.net|daumcdn/i.test(src);
+                    const isImage = /\.(jpg|jpeg|png|webp|gif|bmp)(\?|$)/i.test(src) || /pstatic\.net|kakaocdn|googleusercontent|naver\.net|daumcdn|wikimedia|wikipedia/i.test(src);
                     if (!isImage) return;
                     const base = src.split('?')[0];
                     if (seen.has(base)) return;
