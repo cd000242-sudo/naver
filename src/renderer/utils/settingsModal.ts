@@ -370,6 +370,7 @@ function setupSettingsSectionToggle(): void {
         { btnId: 'nav-adb-ip-btn', sectionId: 'settings-section-adb-ip', title: '📱 테더링 IP 변경', color: '#10b981' },
         { btnId: 'nav-adspower-btn', sectionId: 'settings-section-adspower', title: '🌐 AdsPower 연동', color: '#f97316' },
         { btnId: 'nav-proxy-btn', sectionId: 'settings-section-proxy', title: '🛡️ 프록시 설정', color: '#a855f7' },
+        { btnId: 'nav-backup-btn', sectionId: 'settings-section-backup', title: '📦 데이터 백업/복원', color: '#22c55e' },
         { btnId: 'nav-cache-btn', sectionId: 'settings-section-cache', title: '🗑️ 캐시 관리', color: '#ef4444' },
     ];
 

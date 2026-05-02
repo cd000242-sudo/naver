@@ -8954,9 +8954,162 @@ async function clearCacheOnVersionChange(): Promise<void> {
   }
 }
 
+// ✅ [v2.7.95] 데이터 백업 시스템 — 자동 일일 백업 + 수동 export/import IPC
+//   사용자 보고: "업데이트하면 api키랑 기존에 저장된게 초기화된다는데"
+//   목표: 업데이트/재설치 시에도 API 키 + 글 목록 + 다계정 데이터 100% 보존
+async function performDataBackup(reason: string = 'auto'): Promise<{ success: boolean; backupPath?: string; message?: string }> {
+  try {
+    const userDataDir = app.getPath('userData');
+    const backupRoot = path.join(app.getPath('documents'), 'better-life-naver-backup');
+    if (!fsSync.existsSync(backupRoot)) fsSync.mkdirSync(backupRoot, { recursive: true });
+    const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const backupDir = path.join(backupRoot, `backup-${ts}-${reason}`);
+    fsSync.mkdirSync(backupDir, { recursive: true });
+
+    const targetFiles = [
+      'settings.json',
+      'config.json',
+      'blog-accounts.json',
+      'scheduled-posts.json',
+    ];
+    let copiedCount = 0;
+    for (const f of targetFiles) {
+      const src = path.join(userDataDir, f);
+      if (fsSync.existsSync(src)) {
+        fsSync.copyFileSync(src, path.join(backupDir, f));
+        copiedCount++;
+      }
+    }
+    try {
+      const allFiles = fsSync.readdirSync(userDataDir);
+      for (const f of allFiles) {
+        if (f.startsWith('settings_') && f.endsWith('.json')) {
+          fsSync.copyFileSync(path.join(userDataDir, f), path.join(backupDir, f));
+          copiedCount++;
+        }
+      }
+    } catch { /* ignore */ }
+    try {
+      const lsDir = path.join(userDataDir, 'Local Storage');
+      if (fsSync.existsSync(lsDir)) {
+        const dest = path.join(backupDir, 'Local Storage');
+        fsSync.mkdirSync(dest, { recursive: true });
+        const copyDir = (src: string, dst: string) => {
+          const items = fsSync.readdirSync(src);
+          for (const it of items) {
+            const s = path.join(src, it);
+            const d = path.join(dst, it);
+            const stat = fsSync.statSync(s);
+            if (stat.isDirectory()) {
+              fsSync.mkdirSync(d, { recursive: true });
+              copyDir(s, d);
+            } else {
+              fsSync.copyFileSync(s, d);
+            }
+          }
+        };
+        copyDir(lsDir, dest);
+        copiedCount++;
+      }
+    } catch (e: any) {
+      debugLog(`[Backup] Local Storage 복사 실패 (무시): ${e?.message}`);
+    }
+    try {
+      const all = fsSync.readdirSync(backupRoot);
+      const now = Date.now();
+      for (const dir of all) {
+        if (!dir.startsWith('backup-') || !dir.includes('-auto')) continue;
+        const stat = fsSync.statSync(path.join(backupRoot, dir));
+        if (now - stat.mtimeMs > 14 * 24 * 60 * 60 * 1000) {
+          fsSync.rmSync(path.join(backupRoot, dir), { recursive: true, force: true });
+        }
+      }
+    } catch { /* ignore */ }
+    debugLog(`[Backup] ✅ ${copiedCount}개 파일 백업: ${backupDir}`);
+    return { success: true, backupPath: backupDir };
+  } catch (e: any) {
+    debugLog(`[Backup] ❌ 백업 실패: ${e?.message}`);
+    return { success: false, message: String(e?.message || e) };
+  }
+}
+
+ipcMain.handle('backup:create', async (_e, reason?: string) => performDataBackup(reason || 'manual'));
+ipcMain.handle('backup:list', async () => {
+  try {
+    const backupRoot = path.join(app.getPath('documents'), 'better-life-naver-backup');
+    if (!fsSync.existsSync(backupRoot)) return { success: true, backups: [] };
+    const list = fsSync.readdirSync(backupRoot)
+      .filter((d: string) => d.startsWith('backup-'))
+      .map((d: string) => {
+        const full = path.join(backupRoot, d);
+        const stat = fsSync.statSync(full);
+        return { name: d, path: full, mtime: stat.mtimeMs, size: 0 };
+      })
+      .sort((a: { mtime: number }, b: { mtime: number }) => b.mtime - a.mtime);
+    return { success: true, backups: list };
+  } catch (e: any) {
+    return { success: false, message: String(e?.message || e), backups: [] };
+  }
+});
+ipcMain.handle('backup:restore', async (_e, backupPath: string) => {
+  try {
+    if (!backupPath || !fsSync.existsSync(backupPath)) return { success: false, message: '백업 폴더가 존재하지 않습니다' };
+    await performDataBackup('pre-restore');
+    const userDataDir = app.getPath('userData');
+    const items = fsSync.readdirSync(backupPath);
+    let restored = 0;
+    for (const it of items) {
+      const src = path.join(backupPath, it);
+      const dst = path.join(userDataDir, it);
+      const stat = fsSync.statSync(src);
+      if (stat.isDirectory()) {
+        if (fsSync.existsSync(dst)) fsSync.rmSync(dst, { recursive: true, force: true });
+        const copyDir = (s: string, d: string) => {
+          fsSync.mkdirSync(d, { recursive: true });
+          for (const f of fsSync.readdirSync(s)) {
+            const ss = path.join(s, f);
+            const dd = path.join(d, f);
+            const st = fsSync.statSync(ss);
+            if (st.isDirectory()) copyDir(ss, dd);
+            else fsSync.copyFileSync(ss, dd);
+          }
+        };
+        copyDir(src, dst);
+      } else {
+        fsSync.copyFileSync(src, dst);
+      }
+      restored++;
+    }
+    return { success: true, message: `${restored}개 항목 복원 완료. 앱 재시작 필요.` };
+  } catch (e: any) {
+    return { success: false, message: String(e?.message || e) };
+  }
+});
+
 app.whenReady().then(async () => {
   try {
     // ✅ [2026-02-18] setName은 lock 앞에서 이미 호출됨 (single instance lock 충돌 방지)
+
+    // ✅ [v2.7.95] 앱 시작 시 자동 백업 — 1일 1회 (마지막 자동 백업 24시간 경과 시)
+    try {
+      const backupRoot = path.join(app.getPath('documents'), 'better-life-naver-backup');
+      let needsBackup = true;
+      if (fsSync.existsSync(backupRoot)) {
+        const list = fsSync.readdirSync(backupRoot)
+          .filter((d: string) => d.startsWith('backup-') && d.includes('-auto'));
+        if (list.length > 0) {
+          const newest = list
+            .map((d: string) => fsSync.statSync(path.join(backupRoot, d)).mtimeMs)
+            .sort((a: number, b: number) => b - a)[0];
+          if (Date.now() - newest < 24 * 60 * 60 * 1000) needsBackup = false;
+        }
+      }
+      if (needsBackup) {
+        await performDataBackup('auto');
+      }
+    } catch (e: any) {
+      debugLog(`[Startup] 자동 백업 실패 (무시): ${e?.message}`);
+    }
 
     // ✅ [v2.7.89] 첫 실행 시 customImageSavePath 자동 세팅 — Downloads/naver-blog-images
     //   사용자 보고: "이미지 폴더 선택이 기본적으로 ...naver-blog-images 여기로 되어있어야"

@@ -143,6 +143,13 @@ contextBridge.exposeInMainWorld('api', {
   getUserHomeDir: (): Promise<string> => ipcRenderer.invoke('os:homedir'),
   // ✅ [v2.7.59] 기본 이미지 저장 경로 (Downloads/naver-blog-images)
   getDefaultImageSavePath: (): Promise<string> => ipcRenderer.invoke('path:getDefaultImageSavePath'),
+  // ✅ [v2.7.95] 데이터 백업/복원
+  backupCreate: (reason?: string): Promise<{ success: boolean; backupPath?: string; message?: string }> =>
+    ipcRenderer.invoke('backup:create', reason),
+  backupList: (): Promise<{ success: boolean; backups: Array<{ name: string; path: string; mtime: number }>; message?: string }> =>
+    ipcRenderer.invoke('backup:list'),
+  backupRestore: (backupPath: string): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('backup:restore', backupPath),
   openPath: (path: string): Promise<{ success: boolean; message?: string }> => ipcRenderer.invoke('shell:openPath', path),
 
   generateVeoVideo: (payload: {

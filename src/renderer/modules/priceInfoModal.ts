@@ -317,6 +317,95 @@ export async function initPriceInfoModal(): Promise<void> {
   setupApiKeyValidation('claude', 'claude-api-key', 'claude-validate-btn', 'claude-validate-result', 'Claude');
   setupApiKeyValidation('deepinfra', 'deepinfra-api-key', 'deepinfra-validate-btn', 'deepinfra-validate-result', 'DeepInfra');
 
+  // ✅ [v2.7.95] 데이터 백업/복원 버튼 핸들러
+  const backupCreateBtn = document.getElementById('backup-create-btn') as HTMLButtonElement | null;
+  const backupListBtn = document.getElementById('backup-list-btn') as HTMLButtonElement | null;
+  const backupResult = document.getElementById('backup-result') as HTMLDivElement | null;
+  const backupListContainer = document.getElementById('backup-list-container') as HTMLDivElement | null;
+
+  if (backupCreateBtn) {
+    backupCreateBtn.addEventListener('click', async () => {
+      backupCreateBtn.disabled = true;
+      const orig = backupCreateBtn.innerHTML;
+      backupCreateBtn.innerHTML = '<span>🔄</span><span>백업 생성 중...</span>';
+      try {
+        const r = await (window as any).api.backupCreate('manual');
+        if (backupResult) {
+          backupResult.style.display = 'block';
+          if (r?.success) {
+            backupResult.style.background = 'rgba(34, 197, 94, 0.12)';
+            backupResult.style.color = '#22c55e';
+            backupResult.innerHTML = `✅ 백업 완료: ${(r.backupPath || '').replace(/^.*[\\/]/, '')}`;
+          } else {
+            backupResult.style.background = 'rgba(239, 68, 68, 0.12)';
+            backupResult.style.color = '#ef4444';
+            backupResult.innerHTML = `❌ 백업 실패: ${r?.message || 'unknown'}`;
+          }
+        }
+      } finally {
+        backupCreateBtn.disabled = false;
+        backupCreateBtn.innerHTML = orig;
+      }
+    });
+  }
+
+  if (backupListBtn && backupListContainer) {
+    backupListBtn.addEventListener('click', async () => {
+      try {
+        const r = await (window as any).api.backupList();
+        backupListContainer.style.display = 'block';
+        if (!r?.success || !r.backups || r.backups.length === 0) {
+          backupListContainer.innerHTML = '<div style="padding: 1rem; color: var(--text-muted); text-align: center;">백업이 없습니다. 먼저 [지금 백업하기]를 눌러주세요.</div>';
+          return;
+        }
+        backupListContainer.innerHTML = r.backups.map((b: any) => {
+          const date = new Date(b.mtime).toLocaleString('ko-KR');
+          const isAuto = b.name.includes('-auto');
+          return `<div style="display: flex; gap: 0.5rem; align-items: center; padding: 0.6rem; background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.15); border-radius: 8px; margin-bottom: 0.5rem;">
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-size: 0.8rem; color: var(--text-strong); font-weight: 600; word-break: break-all;">${b.name}</div>
+              <div style="font-size: 0.7rem; color: var(--text-muted);">${date} ${isAuto ? '(자동)' : '(수동)'}</div>
+            </div>
+            <button type="button" class="restore-backup-btn" data-path="${b.path.replace(/"/g, '&quot;')}"
+              style="padding: 0.4rem 0.7rem; background: #22c55e; color: white; border: none; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; white-space: nowrap;">
+              📥 복원
+            </button>
+          </div>`;
+        }).join('');
+
+        backupListContainer.querySelectorAll('.restore-backup-btn').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
+            const target = e.currentTarget as HTMLButtonElement;
+            const backupPath = target.dataset.path || '';
+            if (!confirm(`이 백업으로 복원하시겠습니까?\n\n${backupPath.replace(/^.*[\\/]/, '')}\n\n현재 데이터는 자동으로 별도 백업되며, 복원 후 앱을 재시작해야 합니다.`)) return;
+            target.disabled = true;
+            target.textContent = '복원 중...';
+            try {
+              const rr = await (window as any).api.backupRestore(backupPath);
+              if (rr?.success) {
+                alert(`✅ ${rr.message}\n\n앱을 재시작합니다.`);
+                location.reload();
+              } else {
+                alert(`❌ 복원 실패: ${rr?.message || 'unknown'}`);
+                target.disabled = false;
+                target.textContent = '📥 복원';
+              }
+            } catch (err: any) {
+              alert(`❌ 복원 오류: ${err?.message}`);
+              target.disabled = false;
+              target.textContent = '📥 복원';
+            }
+          });
+        });
+      } catch (e: any) {
+        if (backupListContainer) {
+          backupListContainer.style.display = 'block';
+          backupListContainer.innerHTML = `<div style="padding: 1rem; color: #ef4444;">목록 조회 실패: ${e?.message}</div>`;
+        }
+      }
+    });
+  }
+
   // ✅ 이미지 경로 설정 버튼 이벤트
   const browseImagePathBtn = document.getElementById('browse-image-path-btn') as HTMLButtonElement;
   const resetImagePathBtn = document.getElementById('reset-image-path-btn') as HTMLButtonElement;
