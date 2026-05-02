@@ -253,29 +253,73 @@ export async function searchImagesForHeadings(
     //     - AI 매칭 분기 제거 → 페이지 순서대로 헤딩 1:1 배분 (수동 버튼과 동일).
     //     - URL 모드에서는 _urlMode 플래그를 세워 키워드 검색/구글 폴백 단계가 빈 슬롯을
     //       채우지 못하게 차단 → URL 페이지에 없으면 "이미지 없음"이 정상.
+    // ✅ [v2.8.7] URL 모드 — AI 의미 매칭 + 잔여 이미지 빈 슬롯 채움 (키워드 폴백 여전히 금지)
+    //   사용자 요구: "본문에 딱맞는 이미지로 배치되고나머지 넣어주고"
+    //   정책:
+    //     1단계: aiCheck ON이면 헤딩별 AI 매칭 (filterImagesByRelevance) → "딱맞는" 이미지 1장
+    //     2단계: AI 매칭 실패한 빈 슬롯에 잔여 이미지(매칭에 사용되지 않은 페이지 이미지)를 페이지 순서로 채움
+    //     3단계: 잔여도 떨어지면 빈 슬롯 그대로 (키워드/구글 검색 절대 X)
+    //   효과: 본문 매칭 우선 + 시각적 풍성함 (빈 슬롯 최소화) + 사용자 의도 보호 (키워드 결과 섞임 차단)
     let _urlMode = false;
     if (options?.sourceUrl && /^https?:\/\//i.test(options.sourceUrl)) {
         _urlMode = true;
         try {
-            console.log(`[ImageSearch] 🔗 URL 모드 — 수동 버튼과 동일 동작 (페이지 순서 1:1, 키워드 폴백 차단): ${options.sourceUrl}`);
+            console.log(`[ImageSearch] 🔗 URL 모드 (AI 매칭 + 잔여 채움): ${options.sourceUrl}`);
             const urlImages = await crawlImagesFromUrl(options.sourceUrl);
-            console.log(`[ImageSearch] 📥 원본 URL에서 ${urlImages.length}개 이미지 수집`);
+            console.log(`[ImageSearch] 📥 URL에서 ${urlImages.length}개 이미지 수집`);
 
-            const usedUrls = new Set<string>();
             if (urlImages.length > 0) {
-                headings.forEach((heading, idx) => {
-                    if (idx < urlImages.length) {
-                        const picked = urlImages[idx];
-                        if (!usedUrls.has(picked)) {
-                            usedUrls.add(picked);
-                            resultMap.set(heading, [picked]);
+                const usedUrls = new Set<string>();
+                const matched = new Map<string, string>();
+
+                // 1단계: AI 의미 매칭 (옵션 ON일 때만)
+                if (aiCheck && options?.apiKeys) {
+                    try {
+                        const { filterImagesByRelevance } = await import('./imageRelevanceScorer.js');
+                        for (const heading of headings) {
+                            const pool = urlImages.filter(u => !usedUrls.has(u));
+                            if (pool.length === 0) break;
+                            try {
+                                const { filtered } = await filterImagesByRelevance(pool, heading, mainKeyword, {
+                                    enabled: true,
+                                    textGenerator: options.textGenerator || 'gemini-2.5-flash',
+                                    apiKeys: options.apiKeys,
+                                    threshold: options.relevanceThreshold,
+                                });
+                                if (filtered.length > 0) {
+                                    const picked = filtered[0];
+                                    usedUrls.add(picked);
+                                    matched.set(heading, picked);
+                                    console.log(`[ImageSearch] ✅ AI 매칭 → "${heading}"`);
+                                }
+                            } catch (e: any) {
+                                console.warn(`[ImageSearch] AI 매칭 실패 ("${heading}"): ${e?.message}`);
+                            }
                         }
+                    } catch (e: any) {
+                        console.warn(`[ImageSearch] imageRelevanceScorer 로드 실패: ${e?.message}`);
                     }
-                });
-                console.log(`[ImageSearch] ✅ URL 이미지 1:1 배분 완료 (페이지 순서, ${usedUrls.size}/${headings.length})`);
+                }
+
+                // 2단계: 빈 슬롯에 잔여 이미지 채우기 (페이지 순서 + 미사용)
+                const unused = urlImages.filter(u => !usedUrls.has(u));
+                let unusedIdx = 0;
+                let filled = 0;
+                for (const heading of headings) {
+                    if (matched.has(heading)) {
+                        resultMap.set(heading, [matched.get(heading)!]);
+                    } else if (unusedIdx < unused.length) {
+                        const fillUrl = unused[unusedIdx++];
+                        resultMap.set(heading, [fillUrl]);
+                        filled++;
+                    }
+                    // else: 빈 슬롯 — 키워드 검색으로 채우지 않음 (의도 보호)
+                }
+
+                console.log(`[ImageSearch] ✅ URL 모드 완료: AI 매칭 ${matched.size}개 + 잔여 채움 ${filled}개 = ${resultMap.size}/${headings.length}`);
             }
         } catch (e: any) {
-            console.warn(`[ImageSearch] ⚠️ URL 크롤링 실패 → 키워드 검색 폴백: ${e.message}`);
+            console.warn(`[ImageSearch] ⚠️ URL 모드 처리 실패: ${e?.message}`);
         }
     }
 
