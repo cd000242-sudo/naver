@@ -212,6 +212,36 @@ export async function searchImagesForHeadings(
     console.log(`[ImageSearch] 🔑 메인 키워드: "${mainKeyword}"`);
     if (aiCheck) console.log(`[ImageSearch] 🤖 AI 관련성 검증 활성화 (threshold=${options!.relevanceThreshold ?? 60})`);
 
+    // ✅ [v2.7.97] 이미지 관리 탭의 "AI 자동 수집" 버튼과 동일 품질 — Gemini 배치 검색어 최적화
+    //   사용자 보고: "수집해도 전혀 이상한 이미지를 수집한다 — 이미지 관리에서 수집하는 거랑 똑같아야 정상"
+    //   동작: 메인키워드+소제목 raw 결합 대신, Gemini가 동명이인/동음이의어 구분한 최적 쿼리 사용
+    //   폴백 체인: optimizedQuery → broaderQuery → "${mainKeyword} ${heading}" raw
+    const optimizedMap = new Map<string, { primary: string; broader: string }>();
+    if (options?.apiKeys?.gemini) {
+        try {
+            const { batchOptimizeImageSearchQueries } = await import('../gemini.js');
+            const opt = await batchOptimizeImageSearchQueries(mainKeyword, headings, options.apiKeys.gemini);
+            for (const r of opt) {
+                optimizedMap.set(r.heading, {
+                    primary: (r.optimizedQuery || '').trim(),
+                    broader: (r.broaderQuery || '').trim(),
+                });
+            }
+            console.log(`[ImageSearch] 🧠 Gemini 검색어 최적화 완료: ${optimizedMap.size}/${headings.length}`);
+        } catch (e: any) {
+            console.warn(`[ImageSearch] ⚠️ Gemini 검색어 최적화 실패, raw 결합 사용: ${e?.message}`);
+        }
+    }
+    const buildQueryChain = (heading: string): string[] => {
+        const chain: string[] = [];
+        const opt = optimizedMap.get(heading);
+        if (opt?.primary) chain.push(opt.primary);
+        if (opt?.broader && opt.broader !== opt.primary) chain.push(opt.broader);
+        const raw = `${mainKeyword} ${heading}`.trim();
+        if (raw && !chain.includes(raw)) chain.push(raw);
+        return chain.length > 0 ? chain : [heading];
+    };
+
     // ✅ [v2.7.66] URL 모드 글 생성: 원본 URL 이미지를 1순위로 크롤링 + AI 매칭
     //   사용자 보고: "url로 글생성했다면 그 url에 있는 이미지를 전부 긁어와야정상아니니"
     //   동작: sourceUrl이 있으면 cheerio로 페이지 이미지 전부 추출 후 AI가 소제목별 매칭
@@ -270,43 +300,56 @@ export async function searchImagesForHeadings(
         naverSearchAvailable = true;
 
         for (const heading of headings) {
-            const searchQuery = `${mainKeyword} ${heading}`.trim();
-            try {
-                // ✅ [v2.7.61] AI 검증 시 후보 풀을 더 많이 확보 (3 → 8개) — 차단 후 잔여 보장
-                const fetchCount = aiCheck ? 8 : 3;
-                const keepCount = aiCheck ? 5 : 2;
-                const naverResult = await searchImage({ query: searchQuery, display: fetchCount });
-                const candidates: string[] = [];
+            // ✅ [v2.7.97] 폴백 체인: 최적화 쿼리 → 넓은 쿼리 → raw 결합
+            const queryChain = buildQueryChain(heading);
+            let validImages: string[] = [];
 
-                for (const item of naverResult.items) {
-                    if (candidates.length >= keepCount) break;
-                    const imgUrl = item.link || item.thumbnail || '';
-                    if (!imgUrl) continue;
-                    if (isUIGarbage(imgUrl)) continue;
-                    if (isNewsOrWatermarkedImage(imgUrl)) continue;
-                    candidates.push(normalizeImageUrl(imgUrl));
-                }
+            for (const searchQuery of queryChain) {
+                if (validImages.length >= 1) break;
+                try {
+                    // ✅ [v2.7.61] AI 검증 시 후보 풀을 더 많이 확보 (3 → 8개) — 차단 후 잔여 보장
+                    const fetchCount = aiCheck ? 8 : 3;
+                    const keepCount = aiCheck ? 5 : 2;
+                    const naverResult = await searchImage({ query: searchQuery, display: fetchCount });
+                    const candidates: string[] = [];
 
-                // ✅ [v2.7.61] AI 관련성 검증 (opt-in)
-                let validImages = candidates;
-                if (aiCheck && candidates.length > 0) {
-                    const { filtered } = await filterImagesByRelevance(candidates, heading, mainKeyword, {
-                        enabled: true,
-                        textGenerator: options!.textGenerator || 'gemini-2.5-flash',
-                        apiKeys: options!.apiKeys || {},
-                        threshold: options!.relevanceThreshold,
-                    });
-                    validImages = filtered.slice(0, 2);
-                } else {
-                    validImages = candidates.slice(0, 2);
-                }
+                    for (const item of naverResult.items) {
+                        if (candidates.length >= keepCount) break;
+                        const imgUrl = item.link || item.thumbnail || '';
+                        if (!imgUrl) continue;
+                        if (isUIGarbage(imgUrl)) continue;
+                        if (isNewsOrWatermarkedImage(imgUrl)) continue;
+                        candidates.push(normalizeImageUrl(imgUrl));
+                    }
 
-                if (validImages.length > 0) {
-                    resultMap.set(heading, validImages);
-                    console.log(`[ImageSearch] ✅ 네이버 → "${heading}" → ${validImages.length}개 이미지${aiCheck ? ' (AI 통과)' : ''}`);
+                    // ✅ [v2.7.61] AI 관련성 검증 (opt-in)
+                    let imgs = candidates;
+                    if (aiCheck && candidates.length > 0) {
+                        const { filtered } = await filterImagesByRelevance(candidates, heading, mainKeyword, {
+                            enabled: true,
+                            textGenerator: options!.textGenerator || 'gemini-2.5-flash',
+                            apiKeys: options!.apiKeys || {},
+                            threshold: options!.relevanceThreshold,
+                        });
+                        imgs = filtered.slice(0, 2);
+                    } else {
+                        imgs = candidates.slice(0, 2);
+                    }
+
+                    if (imgs.length > 0) {
+                        validImages = imgs;
+                        console.log(`[ImageSearch] ✅ 네이버 → "${heading}" [${searchQuery}] → ${imgs.length}개${aiCheck ? ' (AI 통과)' : ''}`);
+                        break;
+                    } else {
+                        console.log(`[ImageSearch] ↩️ 네이버 → "${heading}" [${searchQuery}] → 결과 없음, 다음 쿼리 시도`);
+                    }
+                } catch (e) {
+                    console.warn(`[ImageSearch] ⚠️ 네이버 검색 실패 ("${heading}" [${searchQuery}]): ${(e as Error).message}`);
                 }
-            } catch (e) {
-                console.warn(`[ImageSearch] ⚠️ 네이버 이미지 검색 실패 (${heading}): ${(e as Error).message}`);
+            }
+
+            if (validImages.length > 0) {
+                resultMap.set(heading, validImages);
             }
         }
     } catch {
@@ -325,78 +368,84 @@ export async function searchImagesForHeadings(
             browser = await launchBrowser();
 
             for (const heading of missingHeadings) {
-                const searchQuery = `${mainKeyword} ${heading}`.trim();
-                try {
-                    const page = await createOptimizedPage(browser);
+                // ✅ [v2.7.97] 구글 폴백도 동일 폴백 체인 (최적화 → 넓은 → raw)
+                const queryChain = buildQueryChain(heading);
+                let validImages: string[] = [];
 
-                    const encodedQuery = encodeURIComponent(searchQuery);
-                    const searchUrl = `https://www.google.com/search?q=${encodedQuery}&tbm=isch&hl=ko&safe=active&tbs=isz:m`;
+                for (const searchQuery of queryChain) {
+                    if (validImages.length >= 1) break;
+                    try {
+                        const page = await createOptimizedPage(browser);
 
-                    await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
-                    await page.evaluate(async () => {
-                        window.scrollBy(0, 500);
-                        await new Promise(r => setTimeout(r, 600));
-                    });
+                        const encodedQuery = encodeURIComponent(searchQuery);
+                        const searchUrl = `https://www.google.com/search?q=${encodedQuery}&tbm=isch&hl=ko&safe=active&tbs=isz:m`;
 
-                    // 이미지 추출 (간소화)
-                    const images = await page.evaluate(() => {
-                        const urls: string[] = [];
-                        const seen = new Set<string>();
-
-                        document.querySelectorAll('img[data-src], img[src]').forEach(img => {
-                            if (urls.length >= 8) return;
-                            const src = img.getAttribute('data-src') || img.getAttribute('src') || '';
-                            if (!src || src.startsWith('data:') || src.includes('gstatic.com') || src.includes('google.com')) return;
-                            const w = parseInt(img.getAttribute('width') || '0');
-                            if (w > 0 && w < 100) return;
-                            const base = src.split('?')[0];
-                            if (!seen.has(base)) {
-                                seen.add(base);
-                                urls.push(src);
-                            }
+                        await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
+                        await page.evaluate(async () => {
+                            window.scrollBy(0, 500);
+                            await new Promise(r => setTimeout(r, 600));
                         });
 
-                        return urls;
-                    });
-
-                    // 필터링
-                    const candidates: string[] = [];
-                    const candidateCap = aiCheck ? 5 : 2;
-                    for (const imgUrl of images) {
-                        if (candidates.length >= candidateCap) break;
-                        if (isUIGarbage(imgUrl)) continue;
-                        if (isNewsOrWatermarkedImage(imgUrl)) continue;
-                        candidates.push(normalizeImageUrl(imgUrl));
-                    }
-
-                    // ✅ [v2.7.62] 구글 폴백에도 AI 검증 (다중 vendor)
-                    let validImages = candidates;
-                    if (aiCheck && candidates.length > 0) {
-                        const { filtered } = await filterImagesByRelevance(candidates, heading, mainKeyword, {
-                            enabled: true,
-                            textGenerator: options!.textGenerator || 'gemini-2.5-flash',
-                            apiKeys: options!.apiKeys || {},
-                            threshold: options!.relevanceThreshold,
+                        const images = await page.evaluate(() => {
+                            const urls: string[] = [];
+                            const seen = new Set<string>();
+                            document.querySelectorAll('img[data-src], img[src]').forEach(img => {
+                                if (urls.length >= 8) return;
+                                const src = img.getAttribute('data-src') || img.getAttribute('src') || '';
+                                if (!src || src.startsWith('data:') || src.includes('gstatic.com') || src.includes('google.com')) return;
+                                const w = parseInt(img.getAttribute('width') || '0');
+                                if (w > 0 && w < 100) return;
+                                const base = src.split('?')[0];
+                                if (!seen.has(base)) {
+                                    seen.add(base);
+                                    urls.push(src);
+                                }
+                            });
+                            return urls;
                         });
-                        validImages = filtered.slice(0, 2);
-                    } else {
-                        validImages = candidates.slice(0, 2);
+
+                        const candidates: string[] = [];
+                        const candidateCap = aiCheck ? 5 : 2;
+                        for (const imgUrl of images) {
+                            if (candidates.length >= candidateCap) break;
+                            if (isUIGarbage(imgUrl)) continue;
+                            if (isNewsOrWatermarkedImage(imgUrl)) continue;
+                            candidates.push(normalizeImageUrl(imgUrl));
+                        }
+
+                        let imgs = candidates;
+                        if (aiCheck && candidates.length > 0) {
+                            const { filtered } = await filterImagesByRelevance(candidates, heading, mainKeyword, {
+                                enabled: true,
+                                textGenerator: options!.textGenerator || 'gemini-2.5-flash',
+                                apiKeys: options!.apiKeys || {},
+                                threshold: options!.relevanceThreshold,
+                            });
+                            imgs = filtered.slice(0, 2);
+                        } else {
+                            imgs = candidates.slice(0, 2);
+                        }
+
+                        await page.close();
+
+                        if (imgs.length > 0) {
+                            validImages = imgs;
+                            console.log(`[ImageSearch] ✅ 구글 → "${heading}" [${searchQuery}] → ${imgs.length}개${aiCheck ? ' (AI 통과)' : ''}`);
+                            break;
+                        } else {
+                            console.log(`[ImageSearch] ↩️ 구글 → "${heading}" [${searchQuery}] → 결과 없음, 다음 쿼리 시도`);
+                        }
+
+                        await new Promise(r => setTimeout(r, 800 + Math.random() * 500));
+                    } catch (e) {
+                        console.warn(`[ImageSearch] ⚠️ 구글 검색 실패 ("${heading}" [${searchQuery}]): ${(e as Error).message}`);
                     }
+                }
 
-                    if (validImages.length > 0) {
-                        resultMap.set(heading, validImages);
-                        console.log(`[ImageSearch] ✅ 구글 → "${heading}" → ${validImages.length}개 이미지${aiCheck ? ' (AI 통과)' : ''}`);
-                    } else {
-                        console.log(`[ImageSearch] ⚠️ 구글에서도 이미지 없음${aiCheck ? ' (AI 차단 후)' : ''}: "${heading}"`);
-                    }
-
-                    await page.close();
-
-                    // 검색 간 딜레이 (봇 탐지 방지)
-                    await new Promise(r => setTimeout(r, 800 + Math.random() * 500));
-
-                } catch (e) {
-                    console.warn(`[ImageSearch] ⚠️ 구글 이미지 검색 실패 (${heading}): ${(e as Error).message}`);
+                if (validImages.length > 0) {
+                    resultMap.set(heading, validImages);
+                } else {
+                    console.log(`[ImageSearch] ⚠️ 구글 폴백도 이미지 없음: "${heading}"`);
                 }
             }
         } catch (e) {
