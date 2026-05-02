@@ -8623,6 +8623,32 @@ async function showLicenseInputDialog(): Promise<string | null> {
 // ✅ [2026-02-18] setName을 lock 앞에 호출하여 admin-panel과 lock 충돌 방지
 app.setName('better-life-naver');
 
+// ✅ [v2.8.0] userData 폴더 분기 회복 + 미러 복원 — 업데이트 후 API 키 사라짐 회귀 차단
+//   사용자 보고: "업데이트하면 API 키랑 전부 초기화가 되어버린다"
+//   원인: productName "Better Life Naver" 폴더와 setName "better-life-naver" 폴더가
+//         electron 부팅 타이밍에 따라 분기 생성 → 업데이트 후 빈 폴더에서 settings 로드.
+//   조치: setName 직후 sibling 폴더에서 active 폴더로 settings/계정/라이선스 자동 이주.
+//         미러(Documents/_safe/)가 있으면 active가 비어있을 때만 복원.
+try {
+    const { migrateUserDataFolders, restoreFromMirrorIfEmpty, getMirrorDir } = require('./main/userDataMigration.js');
+    const fsForMig = require('fs');
+    const pathForMig = require('path');
+    const userDataDir = pathForMig.join(
+        process.env.APPDATA || (process.platform === 'darwin'
+            ? pathForMig.join(process.env.HOME || '', 'Library', 'Application Support')
+            : pathForMig.join(process.env.HOME || '', '.config')),
+        'better-life-naver'
+    );
+    if (!fsForMig.existsSync(userDataDir)) fsForMig.mkdirSync(userDataDir, { recursive: true });
+    migrateUserDataFolders(userDataDir);
+    const documentsDir = process.env.USERPROFILE
+        ? pathForMig.join(process.env.USERPROFILE, 'Documents')
+        : pathForMig.join(process.env.HOME || '', 'Documents');
+    restoreFromMirrorIfEmpty(userDataDir, getMirrorDir(documentsDir));
+} catch (e: any) {
+    console.warn('[Startup] userData 마이그레이션 실패 (무시):', e?.message);
+}
+
 // ✅ [2026-04-03] 디버그 로그 확장
 try {
   const _fs2 = require('fs');

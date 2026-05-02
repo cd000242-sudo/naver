@@ -556,6 +556,16 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
     }
   }
 
+  // ✅ [v2.8.0] Documents 미러 백업 — 업데이트/재설치 후에도 키 자동 복원 가능하도록
+  try {
+    const { mirrorToSafe, getMirrorDir } = await import('./main/userDataMigration.js');
+    const userDataDir = app.getPath('userData');
+    const documentsDir = app.getPath('documents');
+    mirrorToSafe(userDataDir, getMirrorDir(documentsDir));
+  } catch (mirrorError) {
+    console.warn('[Config] ⚠️ 미러 백업 실패 (비필수):', mirrorError);
+  }
+
   return cachedConfig;
 }
 

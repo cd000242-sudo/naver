@@ -32,18 +32,11 @@ console.log('  - packaged userData dir (wipe):', packagedAppUserDataDir);
 console.log('  - packaged .env (sanitize):', envPath);
 
 try {
-  // ✅ 패키지 앱 userData 완전 초기화 (개발 환경 userData는 건드리지 않음)
-  try {
-    if (fs.existsSync(packagedAppUserDataDir)) {
-      console.log(`\n🧹 패키지 앱 userData 폴더 전체 삭제: ${packagedAppUserDataDir}`);
-      fs.rmSync(packagedAppUserDataDir, { recursive: true, force: true });
-      console.log('  ✅ 패키지 앱 userData 폴더 삭제 완료');
-    } else {
-      console.log(`\n⏭️ 패키지 앱 userData 폴더 없음: ${packagedAppUserDataDir}`);
-    }
-  } catch (wipeError) {
-    console.log('  ⚠️ 패키지 앱 userData 폴더 삭제 실패(계속 진행):', wipeError.message);
-  }
+  // ✅ [v2.8.0] 사용자 userData 폴더 전체 삭제 로직 제거 — 빌드 머신에서도 위험.
+  //   기존 동작: 빌드 시 packagedAppUserDataDir 통째로 rmSync.
+  //   문제: 개발 머신에서 실제 사용자 데이터를 삭제. dist/settings.json + .env만
+  //         초기화하면 충분 (실제 사용자 데이터는 그대로 보존).
+  console.log(`\n⏭️ packagedAppUserDataDir 삭제 단계 스킵 (v2.8.0 안전화): ${packagedAppUserDataDir}`);
 
   // ✅ .env 민감 정보 제거 (배포본에 키가 포함되지 않도록)
   try {
