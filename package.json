@@ -1,6 +1,6 @@
 {
   "name": "better-life-naver",
-  "version": "2.7.95",
+  "version": "2.7.96",
   "description": "Better Life Naver - 네이버 블로그 자동화 앱으로 더 나은 삶을 만들어가세요. Electron, Node.js, TypeScript, and Puppeteer.",
   "author": "Better Life Team",
   "main": "dist/main.js",
@@ -129,18 +129,6 @@
       "target": [
         {
           "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "portable",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "dir",
           "arch": [
             "x64"
           ]
