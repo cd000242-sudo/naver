@@ -2265,11 +2265,39 @@ export function initHeadingImageGeneration(): void {
         // ✅ [100점 최종] 3단계: 병렬 이미지 검색 (Promise.all)
         appendLog(`⚡ 병렬 이미지 검색 시작 (${targetCount}개 동시)...`, 'images-log-output');
 
+        // ✅ [v2.8.4] URL 모드 — sourceUrl이 입력되어 있으면 키워드 검색 폴백 전면 차단
+        //   사용자 보고: "썸네일이미지는 이미지수집이 잘됫는데 나머지이미지는 링크에서
+        //               가져온게아니라 검색수집이 된거같은데 전혀관련없는 이미지가 수집됫습니다"
+        //   문제: urlImages.length=0이거나 부족하면 폴백으로 네이버 키워드 검색이 들어감 →
+        //         "URL로 수집"한다고 했는데 키워드 검색 결과가 섞임.
+        //   조치: _urlMode일 때 페이지 순서대로 1:1 배분, 부족분은 빈 슬롯 (키워드 검색 차단).
+        const _urlMode = !!sourceUrl && /^https?:\/\//i.test(sourceUrl);
         const searchPromises = optimizedQueries.slice(0, targetCount).map(async (q, i) => {
           const heading = q.heading;
 
+          // ✅ [v2.8.4] URL 모드: 페이지 순서 1:1 배분만, 키워드 검색 절대 금지
+          if (_urlMode) {
+            if (i < urlImages.length) {
+              const referenceImageUrl = urlImages[i];
+              appendLog(`🔗 [${i + 1}] "${heading}" → URL 이미지 배분 (페이지 순서 ${i + 1}/${urlImages.length})`, 'images-log-output');
+              return {
+                heading,
+                filePath: referenceImageUrl,
+                url: referenceImageUrl,
+                previewDataUrl: referenceImageUrl,
+                prompt: `URL 페이지 이미지 (${i + 1}/${urlImages.length})`,
+                provider: 'url-only',
+                headingIndex: i,
+                referenceImageUrl,
+                success: true
+              };
+            }
+            appendLog(`⚠️ [${i + 1}] "${heading}" → URL 페이지 이미지 부족 (빈 슬롯, 키워드 검색 차단)`, 'images-log-output');
+            return { heading, headingIndex: i, success: false };
+          }
+
+          // 키워드 모드 (URL 미입력) — 기존 동작
           // ✅ [2026-01-29 FIX] 모든 소제목에 크롤링 이미지 순환 배분 (img2img 참조용)
-          // 크롤링 이미지가 소제목보다 적으면 순환하여 재사용
           const referenceImageUrl = urlImages.length > 0
             ? urlImages[i % urlImages.length]
             : undefined;
@@ -2289,7 +2317,7 @@ export function initHeadingImageGeneration(): void {
             };
           }
 
-          // 네이버 검색 (3단계 폴백)
+          // 네이버 검색 (3단계 폴백) — URL 미입력 시에만 동작
           let searchResult = await window.api.searchNaverImages(q.optimizedQuery);
 
           if (!searchResult.success || !searchResult.images || searchResult.images.length === 0) {
