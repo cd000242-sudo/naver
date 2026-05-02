@@ -242,41 +242,27 @@ export async function searchImagesForHeadings(
         return chain.length > 0 ? chain : [heading];
     };
 
-    // ✅ [v2.7.66] URL 모드 글 생성: 원본 URL 이미지를 1순위로 크롤링 + AI 매칭
-    //   사용자 보고: "url로 글생성했다면 그 url에 있는 이미지를 전부 긁어와야정상아니니"
-    //   동작: sourceUrl이 있으면 cheerio로 페이지 이미지 전부 추출 후 AI가 소제목별 매칭
+    // ✅ [v2.7.99] URL 모드 — 수동 "URL 이미지만 수집하기" 버튼과 100% 동일 동작으로 통일
+    //   사용자 보고: "URL로 이미지 수집하기 — 이미지 관리에서 수집하는 거랑 똑같아야 정상"
+    //   문제 (v2.7.98 이전):
+    //     1) AI 검증 ON 시 페이지 이미지에 filterImagesByRelevance 적용 → AI가 헤딩별 점수 미달
+    //        판정하면 슬롯이 빈 채로 남고, 그 슬롯을 아래 네이버 키워드 검색이 채워서
+    //        "URL로 수집"인데 키워드 결과가 섞여 들어옴.
+    //     2) URL 페이지 이미지가 헤딩보다 적을 때도 빈 슬롯을 키워드 검색이 메움.
+    //   조치:
+    //     - AI 매칭 분기 제거 → 페이지 순서대로 헤딩 1:1 배분 (수동 버튼과 동일).
+    //     - URL 모드에서는 _urlMode 플래그를 세워 키워드 검색/구글 폴백 단계가 빈 슬롯을
+    //       채우지 못하게 차단 → URL 페이지에 없으면 "이미지 없음"이 정상.
+    let _urlMode = false;
     if (options?.sourceUrl && /^https?:\/\//i.test(options.sourceUrl)) {
+        _urlMode = true;
         try {
-            console.log(`[ImageSearch] 🔗 원본 URL 우선 크롤링: ${options.sourceUrl}`);
+            console.log(`[ImageSearch] 🔗 URL 모드 — 수동 버튼과 동일 동작 (페이지 순서 1:1, 키워드 폴백 차단): ${options.sourceUrl}`);
             const urlImages = await crawlImagesFromUrl(options.sourceUrl);
             console.log(`[ImageSearch] 📥 원본 URL에서 ${urlImages.length}개 이미지 수집`);
 
-            // ✅ [v2.7.83] 중복 차단 — 같은 URL을 여러 소제목에 배정 안 함, 소제목당 1장
             const usedUrls = new Set<string>();
-            if (urlImages.length > 0 && aiCheck) {
-                // AI로 각 소제목에 가장 적합한 이미지 매칭 — 이미 사용된 URL 제외
-                for (const heading of headings) {
-                    const candidatePool = urlImages.filter(u => !usedUrls.has(u));
-                    if (candidatePool.length === 0) {
-                        console.log(`[ImageSearch] ⚠️ "${heading}" — 잔여 URL 없음, 스킵`);
-                        continue;
-                    }
-                    const { filterImagesByRelevance } = await import('./imageRelevanceScorer.js');
-                    const { filtered } = await filterImagesByRelevance(candidatePool, heading, mainKeyword, {
-                        enabled: true,
-                        textGenerator: options!.textGenerator || 'gemini-2.5-flash',
-                        apiKeys: options!.apiKeys || {},
-                        threshold: options!.relevanceThreshold,
-                    });
-                    if (filtered.length > 0) {
-                        const picked = filtered[0]; // 1장만
-                        usedUrls.add(picked);
-                        resultMap.set(heading, [picked]);
-                        console.log(`[ImageSearch] ✅ URL 매칭 → "${heading}" → 1개 (AI 통과, 잔여 ${candidatePool.length - 1})`);
-                    }
-                }
-            } else if (urlImages.length > 0) {
-                // AI 검증 OFF: 페이지 순서대로 1:1 배분 (idx ≥ urlImages.length 시 슬롯 비움)
+            if (urlImages.length > 0) {
                 headings.forEach((heading, idx) => {
                     if (idx < urlImages.length) {
                         const picked = urlImages[idx];
@@ -291,6 +277,13 @@ export async function searchImagesForHeadings(
         } catch (e: any) {
             console.warn(`[ImageSearch] ⚠️ URL 크롤링 실패 → 키워드 검색 폴백: ${e.message}`);
         }
+    }
+
+    // ✅ [v2.7.99] URL 모드면 키워드 검색/구글 폴백 전면 차단 — 수동 "URL 이미지만 수집" 버튼과 동등
+    //   URL 페이지에 없는 이미지는 "없는 게 정상". 키워드로 보충하면 사용자가 "이상한 이미지"라 인식.
+    if (_urlMode) {
+        console.log(`[ImageSearch] 📊 URL 모드 최종: ${resultMap.size}/${headings.length} 매칭 (키워드/구글 폴백 차단)`);
+        return resultMap;
     }
 
     // 네이버 이미지 검색 API 시도
