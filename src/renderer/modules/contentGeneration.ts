@@ -76,27 +76,13 @@ declare function getProgressModal(): any;
 declare function isFullAutoStopRequested(...args: any[]): boolean;
 declare function autoSearchAndPopulateImages(...args: any[]): void;
 
-// ✅ [v2.7.77] DOM에서 URL 수집 옵션 읽기 (풀오토 자동 활성화)
-//   - 콘텐츠 입력란 #content-url-collect 또는 글생성 #unified-source-url
-//   - 둘 다 비어있으면 undefined 반환 (force 미주입 → 기존 가드 동작)
-function resolveForceOptionsFromDOM(structuredContent?: any, fallbackUrl?: string): { sourceUrl?: string; fillGapWithAI?: boolean } | undefined {
-    try {
-        const contentUrl = (document.getElementById('content-url-collect') as HTMLInputElement | null)?.value?.trim() || '';
-        const fillGap = !!(document.getElementById('content-url-fillgap-ai') as HTMLInputElement | null)?.checked;
-        let sourceUrl = contentUrl;
-        if (!sourceUrl) sourceUrl = String((structuredContent as any)?.sourceUrl || '').trim();
-        if (!sourceUrl && fallbackUrl) sourceUrl = String(fallbackUrl).trim();
-        if (!sourceUrl) {
-            const unifiedUrl = (document.getElementById('unified-source-url') as HTMLInputElement | null)?.value?.trim() || '';
-            sourceUrl = unifiedUrl.split(/[\n,]/)[0].trim();
-        }
-        if (sourceUrl && !/^https?:\/\//i.test(sourceUrl)) sourceUrl = '';
-        if (!sourceUrl) return undefined;
-        return { sourceUrl, fillGapWithAI: fillGap };
-    } catch {
-        return undefined;
-    }
-}
+// ✅ [v2.7.97] resolveForceOptionsFromDOM 제거 — 반자동 가드 우회 회귀 차단
+//   문제: structuredContent.sourceUrl / fallbackUrl(글생성 URL) / #unified-source-url 등
+//         "글 생성용 URL"을 이미지 수집 옵트인으로 오인 → 반자동 체크박스 OFF 상태에서도
+//         이미지 수집이 무단 실행됨.
+//   해결: 명시적 외부 옵트인(_publishForceOptions, 연속/다계정에서 주입)만 가드 우회 허용.
+//         반자동은 #semi-auto-collect-images-on-generate 체크박스가 단일 권한 게이트.
+//         풀오토/다계정은 자체 파이프라인(fullAutoFlow / multiAccountManager)에서 직접 수집.
 declare let aiProgressModal: any;
 declare function normalizeReadableBodyText(text: string): string;
 declare function startAutosave(): void;
@@ -510,10 +496,11 @@ export async function generateContentFromUrl(
 
       // ✅ [2026-02-12] 소제목별 이미지 자동 수집 (체크박스 ON일 때만, 네이버 → 구글 폴백)
       // ✅ [v2.7.77] 풀오토/연속/다계정에서 force 옵션 주입 (window._publishForceOptions)
+      // ✅ [v2.7.97] DOM 폴백 제거 — 글생성 URL이 옵트인으로 오인되던 회귀 차단
       try {
         const _rawMainKw = keywords || structuredContent?.selectedTitle || '';
         const mainKw = /^https?:\/\//i.test(_rawMainKw) ? (structuredContent?.selectedTitle || '') : _rawMainKw;
-        const forceOpts = (window as any)._publishForceOptions || resolveForceOptionsFromDOM(structuredContent, url);
+        const forceOpts = (window as any)._publishForceOptions;
         await autoSearchAndPopulateImages(structuredContent, mainKw, suppressModal, forceOpts);
       } catch (imgErr) {
         console.warn('[GenerateContentUrl] 이미지 자동 수집 실패 (무시):', imgErr);
@@ -1031,9 +1018,10 @@ export async function generateContentFromKeywords(
 
       // ✅ [2026-02-12] 소제목별 이미지 자동 수집 (체크박스 ON일 때만, 네이버 → 구글 폴백)
       // ✅ [v2.7.77] 풀오토/연속/다계정에서 force 옵션 주입
+      // ✅ [v2.7.97] DOM 폴백 제거 — structuredContent.sourceUrl이 옵트인으로 오인되던 회귀 차단
       try {
         const mainKw = keywords || structuredContent?.selectedTitle || '';
-        const forceOpts = (window as any)._publishForceOptions || resolveForceOptionsFromDOM(structuredContent);
+        const forceOpts = (window as any)._publishForceOptions;
         await autoSearchAndPopulateImages(structuredContent, mainKw, suppressModal, forceOpts);
       } catch (imgErr) {
         console.warn('[GenerateContentKeywords] 이미지 자동 수집 실패 (무시):', imgErr);
