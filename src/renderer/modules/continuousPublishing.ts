@@ -4074,6 +4074,19 @@ async function startContinuousPublishingV2(): Promise<void> {
     return;
   }
 
+  // ✅ [v2.8.3] OpenAI 이미지 엔진 사전 차단 가드 — 연속발행도 동일 정책 (폴백 금지)
+  try {
+    const { runOpenAIImageGuard } = await import('./openaiImageGuard.js');
+    const guardImageSource = UnifiedDOMCache.getImageSource();
+    const passed = await runOpenAIImageGuard(guardImageSource);
+    if (!passed) {
+      appendLog('⛔ OpenAI 이미지 엔진 가드 차단 — 연속발행 중단');
+      return;
+    }
+  } catch (guardErr: any) {
+    console.warn('[Continuous] OpenAI 이미지 가드 실행 실패 (계속 진행):', guardErr?.message);
+  }
+
   isContinuousMode = true;
 
   // ✅ [2026-03-11 FIX] 새 연속발행 시작 시 이전 중지 플래그 초기화

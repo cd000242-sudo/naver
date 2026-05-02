@@ -71,6 +71,21 @@ export async function handleFullAutoPublish(): Promise<void> {
     return;
   }
 
+  // ✅ [v2.8.3] OpenAI 이미지 엔진 사전 차단 가드 — 폴백 금지, 사용자 명시 동의 필요
+  //   - dall-e-3: 2026-05-12 이후 차단, 이전 1회성 D-Day 안내
+  //   - openai-image (덕트테이프): Org Verification 첫 사용 시 가이드 모달
+  try {
+    const { runOpenAIImageGuard } = await import('./openaiImageGuard.js');
+    const guardImageSource = UnifiedDOMCache.getImageSource();
+    const passed = await runOpenAIImageGuard(guardImageSource);
+    if (!passed) {
+      appendLog('⛔ OpenAI 이미지 엔진 가드 차단 — 발행 중단');
+      return;
+    }
+  } catch (guardErr: any) {
+    console.warn('[FullAuto] OpenAI 이미지 가드 실행 실패 (계속 진행):', guardErr?.message);
+  }
+
   // ✅ 진행상황 모달 표시
   const modal = getProgressModal();
   modal.show('🚀 풀오토 발행 진행 중', 'AI가 콘텐츠를 생성하고 있습니다...');
@@ -1000,6 +1015,20 @@ export async function handleMultiAccountPublish(): Promise<void> {
       return;
     }
 
+  }
+
+  // ✅ [v2.8.3] OpenAI 이미지 엔진 사전 차단 가드 — 다계정도 동일 정책 (폴백 금지)
+  if (!maHasPreloadedImages) {
+    try {
+      const { runOpenAIImageGuard } = await import('./openaiImageGuard.js');
+      const passed = await runOpenAIImageGuard(commonImageSource);
+      if (!passed) {
+        appendLog('⛔ OpenAI 이미지 엔진 가드 차단 — 다계정 발행 중단');
+        return;
+      }
+    } catch (guardErr: any) {
+      console.warn('[MultiAccount] OpenAI 이미지 가드 실행 실패 (계속 진행):', guardErr?.message);
+    }
   }
 
   // 진행 상태 표시
