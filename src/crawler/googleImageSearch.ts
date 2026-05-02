@@ -468,17 +468,39 @@ export async function searchImagesForHeadings(
 let _lastCrawledTitle = '';
 export function getLastCrawledTitle(): string { return _lastCrawledTitle; }
 
+/**
+ * ✅ [v2.8.5] 네이버 블로그 URL 정규화
+ *   blog.naver.com/{userid}/{logNo} → PostView.naver?blogId=...&logNo=... 직접 URL.
+ *   배경: 네이버 블로그 일반 URL은 mainFrame iframe으로 본문을 임베드. 그 안의 img가
+ *   cross-origin/lazy-load로 일반 추출에서 누락됨. PostView 직접 URL로 가면
+ *   iframe 없이 본문이 그대로 노출되어 모든 이미지를 그대로 긁어올 수 있음.
+ */
+function normalizeNaverBlogUrl(url: string): string {
+    try {
+        const m = url.match(/(?:m\.)?blog\.naver\.com\/([^\/\?#]+)\/(\d+)/);
+        if (m && !/PostView\.naver/.test(url)) {
+            const blogId = m[1];
+            const logNo = m[2];
+            return `https://blog.naver.com/PostView.naver?blogId=${blogId}&logNo=${logNo}&from=postList`;
+        }
+    } catch { /* ignore */ }
+    return url;
+}
+
 export async function crawlImagesFromUrl(url: string): Promise<string[]> {
     let browser;
     try {
-        console.log(`[ImageSearch][crawlUrl] 🌐 Puppeteer 크롬 창 띄우는 중 (사용자 시각 확인용): ${url.slice(0, 80)}`);
+        // ✅ [v2.8.5] 네이버 블로그 URL → PostView 직접 URL (iframe 우회)
+        const targetUrl = normalizeNaverBlogUrl(url);
+        if (targetUrl !== url) {
+            console.log(`[ImageSearch][crawlUrl] 🔄 네이버 블로그 URL 정규화: ${url.slice(0, 60)} → PostView`);
+        }
+        console.log(`[ImageSearch][crawlUrl] 🌐 Puppeteer 크롬 창 띄우는 중: ${targetUrl.slice(0, 80)}`);
         // ✅ [v2.7.84] headless: false — 사용자가 크롤링 진행을 화면에서 직접 볼 수 있음
         browser = await launchBrowser({ headless: false });
         // ✅ [v2.7.85] Puppeteer는 launch 시 about:blank 첫 페이지를 자동 생성 → 그것을 재사용
-        //   newPage() 추가 호출하면 about:blank 빈 탭이 남아 사용자가 의아해함
         const existingPages = await browser.pages();
         const page = existingPages[0] || await browser.newPage();
-        // createOptimizedPage가 적용하던 stealth/리소스 차단 설정을 직접 적용
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
         await page.evaluateOnNewDocument(() => {
             Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
@@ -501,9 +523,8 @@ export async function crawlImagesFromUrl(url: string): Promise<string[]> {
         await page.setViewport({ width: 1280, height: 800 });
 
         // Puppeteer는 networkidle0/networkidle2를 waitUntil로 받음 (race 불필요)
-        await page.goto(url, { waitUntil: 'networkidle2', timeout: 20000 }).catch(async () => {
-            // networkidle 실패 시 domcontentloaded로 폴백
-            await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => {});
+        await page.goto(targetUrl, { waitUntil: 'networkidle2', timeout: 20000 }).catch(async () => {
+            await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => {});
         });
         await new Promise(r => setTimeout(r, 1500));
 
@@ -540,61 +561,130 @@ export async function crawlImagesFromUrl(url: string): Promise<string[]> {
             await new Promise(r => setTimeout(r, 600));
         }).catch(() => { /* 무시 */ });
 
-        // ✅ [v2.7.71] iframe 포함 모든 frame에서 추출 + 강화된 필터
-        //   네이버 블로그 PostView.naver 등 iframe-embedded 콘텐츠 대응
+        // ✅ [v2.8.5] 추출 강화 — 셀렉터 의존 최소화, lazy/srcset/anchor 모두 후보 + 사이즈 필터 완화
+        //   사용자 요구: "가능하면 모든링크를 셀렉터 상관없이 수집"
+        //   변경:
+        //   1) lazy 속성 매트릭스 확장 (data-lazy-src, data-original, data-original-src, data-src, data-thumb, ...)
+        //   2) srcset 모든 후보 추출 (가장 큰 해상도 선택)
+        //   3) <a href="...jpg|png|webp|gif"> anchor 직접 링크도 추출
+        //   4) naturalWidth=0인 이미지(미로드 lazy)도 BANNED 패턴이 아니면 통과 (이전: 작은 이미지로 오인 차단)
+        //   5) PRIORITY_HOSTS 확장 (모든 *.pstatic.net 본문, kakaocdn, googleusercontent)
         const extractFromFrame = async (frame: any): Promise<string[]> => {
             return await frame.evaluate(() => {
                 const urls: { src: string; w: number; priority: number }[] = [];
                 const seen = new Set<string>();
                 const baseHref = document.location.href;
 
-                // 차단 패턴: site-wide UI / 위젯 / 광고
-                const BANNED = /spacer|pixel|blank|1x1|spc\.gif|ico_n\.gif|ico_|gnb|navbar|footer|widget|profile|avatar|emoticon|sticker|bg_|btn_|\.svg$/i;
-                // 본문 우선 패턴: 네이버 블로그 + 일반 뉴스/블로그 CDN
-                const PRIORITY_HOSTS = /postfiles\.pstatic\.net|mblogthumb-phinf\.pstatic\.net|blogfiles\.pstatic\.net|dthumb-phinf\.pstatic\.net|pup-post-phinf\.pstatic\.net|tistory|naver\.net\/MjAy/i;
+                // 차단 패턴: site-wide UI / 위젯 / 광고 — 본문 이미지 차단되지 않도록 보수적
+                const BANNED = /spacer|pixel|blank|1x1|spc\.gif|ico_n\.gif|gnb|navbar|footer|widget|profile_|avatar|emoticon|sticker|bg_btn|btn_arrow|\.svg(\?|$)/i;
+                // 본문 우선 패턴: 네이버 블로그 본문 CDN + 카카오 + tistory + 일반 큰 CDN
+                const PRIORITY_HOSTS = /postfiles\.pstatic\.net|mblogthumb-phinf\.pstatic\.net|blogfiles\.pstatic\.net|dthumb-phinf\.pstatic\.net|pup-post-phinf\.pstatic\.net|blogpfthumb-phinf\.pstatic\.net|cafeptthumb-phinf\.pstatic\.net|cafeptthumb\.pstatic\.net|search\.pstatic\.net|tistory|t1\.daumcdn\.net|kakaocdn\.net|naver\.net\/MjAy|googleusercontent/i;
 
-                const tryAdd = (raw: string | null | undefined, w: number) => {
+                const tryAdd = (raw: string | null | undefined, w: number, hint?: 'priority' | 'normal') => {
                     if (!raw) return;
                     let src = String(raw).trim();
                     if (!src || src.startsWith('data:')) return;
                     try { src = new URL(src, baseHref).toString(); } catch { return; }
                     if (BANNED.test(src)) return;
+                    // type/format 필터: 명시적 이미지 확장자 또는 알려진 이미지 CDN만 통과
+                    const isImage = /\.(jpg|jpeg|png|webp|gif|bmp)(\?|$)/i.test(src) || /pstatic\.net|kakaocdn|googleusercontent|naver\.net|daumcdn/i.test(src);
+                    if (!isImage) return;
                     const base = src.split('?')[0];
                     if (seen.has(base)) return;
                     seen.add(base);
-                    const priority = PRIORITY_HOSTS.test(src) ? 0 : (w >= 400 ? 1 : 2);
+                    let priority: number;
+                    if (hint === 'priority' || PRIORITY_HOSTS.test(src)) priority = 0;
+                    else if (w >= 400) priority = 1;
+                    else priority = 2;
                     urls.push({ src, w, priority });
                 };
 
                 // 1) OG/Twitter 메타 (페이지 대표 이미지)
-                const og = document.querySelector('meta[property="og:image"]') as HTMLMetaElement | null;
-                const ogSecure = document.querySelector('meta[property="og:image:secure_url"]') as HTMLMetaElement | null;
-                const twitter = document.querySelector('meta[name="twitter:image"]') as HTMLMetaElement | null;
-                tryAdd(og?.content, 999);
-                tryAdd(ogSecure?.content, 999);
-                tryAdd(twitter?.content, 999);
+                document.querySelectorAll('meta[property="og:image"], meta[property="og:image:secure_url"], meta[name="twitter:image"], meta[name="twitter:image:src"]').forEach(el => {
+                    tryAdd((el as HTMLMetaElement).content, 999, 'priority');
+                });
 
-                // 2) 모든 <img> — 사이즈 검사
+                // 2) 모든 <img> — lazy 속성 매트릭스 + 사이즈 필터 완화
+                const LAZY_ATTRS = [
+                    'data-lazy-src', 'data-src', 'data-original', 'data-original-src',
+                    'data-thumb', 'data-srcset', 'data-image', 'data-img-src',
+                    'data-hires', 'data-zoom', 'data-bg',
+                ];
                 document.querySelectorAll('img').forEach(el => {
                     const img = el as HTMLImageElement;
                     const w = img.naturalWidth || img.width || 0;
                     const h = img.naturalHeight || img.height || 0;
-                    // 본문 이미지 임계: 가로 200px 이상 OR 세로 200px 이상 (큰 이미지만)
-                    if ((w > 0 && w < 150) && (h > 0 && h < 150)) return;
-                    tryAdd(img.currentSrc || img.src || img.getAttribute('data-src') || img.getAttribute('data-original') || img.getAttribute('data-lazy-src'), w);
+
+                    // 사이즈 필터 완화: 명시적으로 작은 이미지(< 80px AND 양쪽 다 0이 아님)만 차단
+                    // naturalWidth=0(아직 로드 안 된 lazy)은 통과 (BANNED 필터에서 거름)
+                    if (w > 0 && h > 0 && w < 80 && h < 80) return;
+
+                    // 후보 1: currentSrc/src
+                    tryAdd(img.currentSrc || img.src, w);
+                    // 후보 2~: lazy 속성 전부 (네이버 SmartEditor: data-lazy-src 등)
+                    for (const attr of LAZY_ATTRS) {
+                        const v = img.getAttribute(attr);
+                        if (v) {
+                            // srcset 형식이면 가장 큰 후보 선택
+                            if (v.includes(',') && /\s\d+w/.test(v)) {
+                                const sources = v.split(',').map(s => s.trim());
+                                let bestUrl = '', bestW = 0;
+                                for (const sourceItem of sources) {
+                                    const parts = sourceItem.split(/\s+/);
+                                    const u = parts[0];
+                                    const sizeMatch = parts[1]?.match(/(\d+)w/);
+                                    const sw = sizeMatch ? parseInt(sizeMatch[1]) : 0;
+                                    if (sw > bestW) { bestW = sw; bestUrl = u; }
+                                }
+                                if (bestUrl) tryAdd(bestUrl, Math.max(w, bestW));
+                            } else {
+                                tryAdd(v, w);
+                            }
+                        }
+                    }
+                    // 후보 N+1: srcset (img element)
+                    const srcset = img.getAttribute('srcset');
+                    if (srcset) {
+                        const sources = srcset.split(',').map(s => s.trim());
+                        let bestUrl = '', bestW = 0;
+                        for (const sourceItem of sources) {
+                            const parts = sourceItem.split(/\s+/);
+                            const u = parts[0];
+                            const sizeMatch = parts[1]?.match(/(\d+)w/);
+                            const sw = sizeMatch ? parseInt(sizeMatch[1]) : 0;
+                            if (sw > bestW) { bestW = sw; bestUrl = u; }
+                        }
+                        if (bestUrl) tryAdd(bestUrl, Math.max(w, bestW));
+                    }
                 });
 
-                // 3) <picture><source srcset>
-                document.querySelectorAll('picture source').forEach(el => {
+                // 3) <picture><source srcset> — 모든 후보, 가장 큰 해상도 선택
+                document.querySelectorAll('picture source[srcset]').forEach(el => {
                     const srcset = el.getAttribute('srcset') || '';
-                    const first = srcset.split(',')[0]?.trim().split(/\s+/)[0];
-                    if (first) tryAdd(first, 0);
+                    const sources = srcset.split(',').map(s => s.trim());
+                    let bestUrl = '', bestW = 0;
+                    for (const sourceItem of sources) {
+                        const parts = sourceItem.split(/\s+/);
+                        const u = parts[0];
+                        const sizeMatch = parts[1]?.match(/(\d+)w/);
+                        const sw = sizeMatch ? parseInt(sizeMatch[1]) : 0;
+                        if (sw > bestW) { bestW = sw; bestUrl = u; }
+                    }
+                    if (bestUrl) tryAdd(bestUrl, bestW);
                 });
 
-                // 4) background-image CSS
+                // 4) <a href="...jpg|png|webp"> 본문 anchor 직접 링크 (네이버 블로그 원본 이미지 링크 패턴)
+                document.querySelectorAll('a[href]').forEach(el => {
+                    const href = el.getAttribute('href') || '';
+                    if (/\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(href)) {
+                        tryAdd(href, 0, 'priority');
+                    }
+                });
+
+                // 5) background-image CSS — 본문 이미지로 사용된 경우 (히어로 이미지 등)
                 let bgChecked = 0;
-                document.querySelectorAll('div, section, figure, span').forEach(el => {
-                    if (bgChecked >= 50) return;
+                document.querySelectorAll('div, section, figure, span, header').forEach(el => {
+                    if (bgChecked >= 80) return;
                     bgChecked++;
                     const style = window.getComputedStyle(el);
                     const bg = style.backgroundImage;
@@ -607,7 +697,7 @@ export async function crawlImagesFromUrl(url: string): Promise<string[]> {
                     }
                 });
 
-                // 우선순위 정렬 (priority 0=CDN 본문 → 1=400px+ → 2=나머지)
+                // 우선순위 정렬: priority 0(CDN/anchor) → 1(400px+) → 2(나머지). 같은 priority 내 큰 사이즈 우선
                 urls.sort((a, b) => a.priority - b.priority || b.w - a.w);
                 return urls.map(u => u.src);
             }).catch(() => []);
@@ -615,17 +705,28 @@ export async function crawlImagesFromUrl(url: string): Promise<string[]> {
 
         // 메인 + 모든 iframe 순회
         const allFrames = page.frames();
-        const merged = new Set<string>();
+        const merged: string[] = [];
+        const seenGlobal = new Set<string>();
+        let frameStats = '';
         for (const frame of allFrames) {
             const fromFrame = await extractFromFrame(frame);
-            fromFrame.forEach(u => merged.add(u));
+            let added = 0;
+            for (const u of fromFrame) {
+                const base = u.split('?')[0];
+                if (seenGlobal.has(base)) continue;
+                seenGlobal.add(base);
+                merged.push(u);
+                added++;
+            }
+            const fname = (frame.name?.() || '') || (frame.url?.() || '').slice(0, 60) || 'main';
+            frameStats += `[${fname}:${added}] `;
         }
-        const collected = Array.from(merged);
 
-        console.log(`[ImageSearch][crawlUrl] ✅ Puppeteer 추출: ${collected.length}개 (frames=${allFrames.length})`);
-        return collected.slice(0, 30);
+        console.log(`[ImageSearch][crawlUrl] ✅ 추출: ${merged.length}개 (frames=${allFrames.length}) ${frameStats}`);
+        // ✅ [v2.8.5] 한도 30 → 50 (사용자 요구: 가능한 모든 링크 수집)
+        return merged.slice(0, 50);
     } catch (e: any) {
-        console.warn(`[ImageSearch][crawlUrl] Playwright 실패: ${e.message?.slice(0, 100)}`);
+        console.warn(`[ImageSearch][crawlUrl] Puppeteer 실패: ${e.message?.slice(0, 100)}`);
         return [];
     } finally {
         if (browser) {
