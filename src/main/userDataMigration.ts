@@ -222,6 +222,18 @@ export function restoreFromMirrorIfEmpty(userDataDir: string, mirrorDir: string)
                 try { fs.copyFileSync(ms, md); } catch { /* skip */ }
             }
         }
+
+        // ✅ [v2.9.1] Local Storage 복원 — 생성된 글 목록도 함께 복원 (active에 없을 때만)
+        try {
+            const msLs = path.join(mirrorDir, 'Local Storage');
+            const mdLs = path.join(userDataDir, 'Local Storage');
+            if (fs.existsSync(msLs) && !fs.existsSync(mdLs)) {
+                copyDirRecursive(msLs, mdLs);
+                console.log(`[UserDataMirror] ✅ 미러에서 Local Storage 복원 (생성된 글 목록 등)`);
+            }
+        } catch (lsErr: any) {
+            console.warn(`[UserDataMirror] ⚠️ Local Storage 복원 실패 (무시): ${lsErr?.message}`);
+        }
         try {
             for (const f of fs.readdirSync(mirrorDir)) {
                 if (!f.startsWith('settings_') || !f.endsWith('.json')) continue;
@@ -240,6 +252,7 @@ export function restoreFromMirrorIfEmpty(userDataDir: string, mirrorDir: string)
 
 /**
  * userData → 미러 동기화. saveConfig 직후 또는 startup 후 1회 호출
+ * ✅ [v2.9.1] Local Storage 폴더 미러 추가 — 생성된 글 목록(naver_blog_generated_posts 등)도 보호
  */
 export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
     try {
@@ -258,6 +271,18 @@ export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
                 try { fs.copyFileSync(path.join(userDataDir, f), path.join(mirrorDir, f)); } catch { /* skip */ }
             }
         } catch { /* ignore */ }
+
+        // ✅ [v2.9.1] Local Storage 폴더 미러 — leveldb로 저장된 localStorage 데이터(글 목록 등) 보호
+        try {
+            const srcLs = path.join(userDataDir, 'Local Storage');
+            const dstLs = path.join(mirrorDir, 'Local Storage');
+            if (fs.existsSync(srcLs)) {
+                if (!fs.existsSync(dstLs)) fs.mkdirSync(dstLs, { recursive: true });
+                copyDirRecursive(srcLs, dstLs);
+            }
+        } catch (lsErr: any) {
+            console.warn(`[UserDataMirror] ⚠️ Local Storage 미러 실패 (무시): ${lsErr?.message}`);
+        }
     } catch (e: any) {
         console.warn(`[UserDataMirror] ⚠️ 미러 동기화 실패 (무시): ${e?.message}`);
     }

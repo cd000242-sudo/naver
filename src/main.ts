@@ -3177,9 +3177,15 @@ ipcMain.handle('image:matchToHeadings', async (_event, images: string[], heading
 
 // 다중 이미지 다운로드 및 저장
 ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ url: string; heading: string }>, title: string) => {
-  // ✅ [리팩토링] 통합 검증
+  console.log(`[Main] 🖼️ image:downloadAndSaveMultiple 호출 — 이미지 ${images?.length || 0}개, title="${title}"`);
+  // ✅ [v2.9.1] 라이선스/쿼터 검증 결과 명시적 로깅 — 사용자가 어디서 막히는지 추적 가능
   const check = await validateLicenseAndQuota('media', 1);
-  if (!check.valid) return check.response;
+  if (!check.valid) {
+    console.warn(`[Main] ⛔ image:downloadAndSaveMultiple 차단 — 라이선스/쿼터 검증 실패:`, JSON.stringify(check.response));
+    // 명시적 에러 응답 — 폴더 미생성 원인 사용자에게 표시
+    return { ...check.response, success: false, savedImages: [], error: check.response?.message || '라이선스/쿼터 검증 실패 — 미디어 쿼터 부족 또는 라이선스 만료' };
+  }
+  console.log(`[Main] ✅ 라이선스/쿼터 검증 통과 — 이미지 저장 진행`);
 
   try {
     const axios = (await import('axios')).default;
