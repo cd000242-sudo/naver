@@ -29,7 +29,7 @@ import { processAutoPublishContent, getRecentPeriods, recordSelectedTitle, type 
 import { trendAnalyzer } from './agents/trendAnalyzer.js';
 import { loadConfig } from './configManager.js';
 import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
-import { checkHomefeedCriticalViolations } from './contentQualityChecker.js';
+import { checkHomefeedCriticalViolations, checkPromptCompliance, formatComplianceReport } from './contentQualityChecker.js';
 import { safeParseJson, cleanJsonOutput, tryFixJson, fixJsonAtPosition } from './jsonParser';
 
 // ✅ [v1.4.50] 예산 초과 전용 에러 클래스 — Safety Lock에서 throw
@@ -6973,6 +6973,24 @@ function validateHomefeedContent(content: StructuredContent, source: ContentSour
   // ✅ [2026-03-16] contentQualityChecker 모듈로 critical 위반 감지 (인라인 40줄 코드 제거)
   const criticalResult = checkHomefeedCriticalViolations(content as any);
   const criticalViolations = criticalResult.violations;
+
+  // ✅ [v2.10.2] v2.10.1 6대 의무 패치 충실도 자동 검증 — 추정 없이 실측만
+  try {
+    const compliance = checkPromptCompliance(content as any);
+    const report = formatComplianceReport(compliance);
+    console.log(report);
+    // 충실도 결과를 quality에 첨부 (UI에서 확인 가능)
+    if (!content.quality) {
+      content.quality = { aiDetectionRisk: 'low', legalRisk: 'safe', seoScore: 70, originalityScore: 70, readabilityScore: 70, warnings: [] };
+    }
+    (content.quality as any).promptCompliance = compliance;
+    if (compliance.passRate < 0.6) {
+      const w = `[v2.10.1 충실도 ${Math.round(compliance.passRate * 100)}%] AI가 프롬프트 의무를 충분히 따르지 않음 — 글 품질 검토 필요`;
+      content.quality.warnings = [...(content.quality.warnings || []), w];
+    }
+  } catch (e: any) {
+    console.warn('[Compliance] 검증 실패 (무시):', e?.message);
+  }
 
   // 경고 추가
   if (warnings.length > 0) {

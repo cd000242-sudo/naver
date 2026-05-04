@@ -132,3 +132,142 @@ export function checkHomefeedCriticalViolations(content: CheckableContent): Qual
     violations,
   };
 }
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// v2.10.1 6대 의무 패치 충실도 검증
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * v2.10.1 패치 충실도 결과
+ *   - 사용자 비평: '실제 결과가 저렇게 나오는지가 중요'
+ *   - 측정: 생성된 글이 P-A~P-F 의무를 충족하는지 정적 검사
+ *   - 추정 없음: 충족/미충족만 보고
+ */
+export interface PromptComplianceResult {
+  total: number;        // 검사 항목 수
+  passed: number;       // 충족 항목 수
+  passRate: number;     // 충족률 (0~1)
+  byHeading: Array<{
+    heading: string;
+    pA: boolean;        // 의심+반박 패턴
+    pB: boolean;        // '절대 모를 한 가지' 디테일
+    pC: boolean;        // 단락 갈고리(Hook)
+  }>;
+  pD_failOrLimit: boolean;     // 글 전체 실패담/한계 1회 이상
+  pF_introHasNumber: boolean;  // 도입부 첫 문장 숫자/날짜/금액
+  bodyLength: number;          // 본문 길이
+  bodyLengthOk: boolean;       // 1500~1800자 범위
+  endingDup3plus: number;      // 어미 3연속 위반 건수 (0이어야 합격)
+}
+
+const PA_PATTERNS = [
+  /근데\s*(이거|이게|정말|진짜)\s*[^.]*[?\?]/,
+  /의심[이가]\s*드[는]/,
+  /이게\s*맞[을는]\s*[가까]/,
+  /과연[^.]*[?\?]/,
+];
+const PB_PATTERNS = [
+  /공식\s*(안내|사이트)\s*에는?\s*(안\s*나오|없|빠진)/,
+  /검색\s*해[도서][^.]*안\s*나오/,
+  /실무에서[는만]?\s*(자주|걸리|놓치)/,
+  /잘\s*안\s*알려진|모르는\s*사람\s*많/,
+  /의외로[^.]*디테일|디테일이\s*하나/,
+];
+const PC_PATTERNS = [
+  /다음[에서]*\s*[^.]*인데/,
+  /진짜\s*중요한\s*건/,
+  /절반은\s*끝/,
+  /더\s*까다로운/,
+  /지금부터가\s*핵심|이제부터/,
+  /다음\s*항목/,
+];
+const PD_PATTERNS = [
+  /다만\s*[^.]*[은는]?\s*아[니녀]/,
+  /아쉬운\s*[건점]/,
+  /한계[가는]/,
+  /단점[은이]/,
+  /모든\s*케이스에\s*맞/,
+  /완벽하지는?\s*않/,
+  /이\s*부분[은이]\s*좀\s*[^.]/,
+];
+
+const NUMBER_OR_DATE = /\d+\s*(원|만원|억|%|개월|일|월|년|시간|회|배|kg|cm|m|평|가지)|\d{1,4}년|\d{1,2}월\s*\d{1,2}일|\d+\.\d+/;
+
+const ENDINGS = ['거든요', '더라고요', '잖아요', '인가\s*봐요', '듯해요', '이래요', '한다는데요', '해요', '네요', '예요', '입니다', '습니다', '인데요', '죠'];
+const ENDING_REGEX = new RegExp(`(${ENDINGS.join('|')})\.`, 'g');
+
+export function checkPromptCompliance(content: CheckableContent): PromptComplianceResult {
+  const headings = content.headings || [];
+  const byHeading = headings.map((h) => {
+    const title = String(h.title || '').slice(0, 40);
+    const body = String(h.body || h.content || '');
+    return {
+      heading: title,
+      pA: PA_PATTERNS.some(re => re.test(body)),
+      pB: PB_PATTERNS.some(re => re.test(body)),
+      pC: PC_PATTERNS.some(re => re.test(body.slice(-200))), // 마지막 200자
+    };
+  });
+
+  const fullBody = [
+    content.introduction || '',
+    ...headings.map(h => h.body || h.content || ''),
+    content.conclusion || '',
+  ].join('\n');
+
+  const pD = PD_PATTERNS.some(re => re.test(fullBody));
+
+  const introFirstSentence = String(content.introduction || '').split(/[.\n]/)[0] || '';
+  const pF = NUMBER_OR_DATE.test(introFirstSentence);
+
+  const bodyLength = fullBody.replace(/\s+/g, '').length;
+  const bodyLengthOk = bodyLength >= 1400 && bodyLength <= 1900;
+
+  // 어미 3연속 검출
+  let endingDup3 = 0;
+  for (const h of headings) {
+    const text = String(h.body || h.content || '');
+    const matches = [...text.matchAll(ENDING_REGEX)].map(m => m[1]);
+    for (let i = 0; i + 2 < matches.length; i++) {
+      if (matches[i] === matches[i + 1] && matches[i + 1] === matches[i + 2]) endingDup3++;
+    }
+  }
+
+  const checks = [
+    ...byHeading.flatMap(h => [h.pA, h.pB, h.pC]),
+    pD,
+    pF,
+    bodyLengthOk,
+    endingDup3 === 0,
+  ];
+  const passed = checks.filter(Boolean).length;
+  const total = checks.length;
+
+  return {
+    total,
+    passed,
+    passRate: total > 0 ? passed / total : 0,
+    byHeading,
+    pD_failOrLimit: pD,
+    pF_introHasNumber: pF,
+    bodyLength,
+    bodyLengthOk,
+    endingDup3plus: endingDup3,
+  };
+}
+
+/**
+ * 사람이 읽기 쉬운 형식으로 결과 포맷팅
+ */
+export function formatComplianceReport(result: PromptComplianceResult): string {
+  const lines: string[] = [];
+  lines.push(`[Compliance v2.10.1] ${result.passed}/${result.total} 통과 (${Math.round(result.passRate * 100)}%)`);
+  lines.push(`  본문 길이: ${result.bodyLength}자 ${result.bodyLengthOk ? '✅' : '❌ (1500~1800자 권장)'}`);
+  lines.push(`  P-D 실패담/한계: ${result.pD_failOrLimit ? '✅' : '❌'}`);
+  lines.push(`  P-F 도입부 숫자: ${result.pF_introHasNumber ? '✅' : '❌'}`);
+  lines.push(`  어미 3연속 위반: ${result.endingDup3plus}건 ${result.endingDup3plus === 0 ? '✅' : '❌'}`);
+  result.byHeading.forEach((h, i) => {
+    lines.push(`  H${i + 1} "${h.heading}": A=${h.pA ? '✅' : '❌'} B=${h.pB ? '✅' : '❌'} C=${h.pC ? '✅' : '❌'}`);
+  });
+  return lines.join('\n');
+}
