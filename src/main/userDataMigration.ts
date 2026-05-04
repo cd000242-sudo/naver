@@ -19,7 +19,43 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const SIBLING_FOLDER_NAME = 'Better Life Naver';
-const TARGET_FILES = ['settings.json', 'blog-accounts.json', 'scheduled-posts.json', '.last_active_user'];
+// ✅ [v2.9.2] 전수 보호 — userData 내 모든 사용자 데이터 파일 미러 대상화
+const TARGET_FILES = [
+    'settings.json',           // API 키, 자격증명
+    'blog-accounts.json',      // 블로그 계정
+    'scheduled-posts.json',    // 스케줄
+    '.last_active_user',       // 마지막 활성 사용자
+    '.last-version',           // 마지막 버전 (마이그레이션 추적)
+    'config.json',             // 앱 설정
+    'feature_flag_log.json',   // 학습/통계 데이터
+];
+// ✅ [v2.9.3] 미러 대상 폴더 — 모든 사용자 데이터/세션/학습 (캐시만 제외)
+const TARGET_FOLDERS = [
+    'Local Storage',           // localStorage (생성된 글 목록 등)
+    'WebStorage',              // Web Storage API
+    'Session Storage',         // 세션 storage (일부 영구 데이터)
+    'license',                 // 라이선스 파일
+    // ✅ [v2.9.3] 학습/통계 데이터 (사용자가 누적한 가치)
+    'title-metrics',           // 제목 통계 학습 데이터
+    'style-previews',          // 스타일 미리보기 (학습 자료)
+    'session-events',          // 세션 이벤트 로그
+];
+// ✅ [v2.9.3] 자동화 세션 폴더 — 네이버 로그인 + 캡차 통과 결과 보존
+//   가장 중요: 누락 시 매 업데이트마다 사용자가 캡차 + 재로그인 강제됨
+const SESSION_FOLDER_PREFIXES = [
+    'playwright-session',      // playwright-session, playwright-session-*, etc.
+    'puppeteer-session',       // puppeteer-session-*
+    'flow-chromium-profile',   // Google Labs Flow 엔진 세션
+    'imagefx-chrome-profile',  // ImageFX 엔진 세션
+];
+// ✅ [v2.9.2] Network 폴더 내 Cookies 파일만 미러
+const NETWORK_COOKIES_FILES = ['Cookies', 'Cookies-journal'];
+// ✅ [v2.9.3] 추가 단일 파일 미러 — 헤딩 메타 + Electron 환경
+const TARGET_FILES_EXTRA = [
+    'heading-images.json',     // 헤딩별 이미지 매핑
+    'heading-videos.json',     // 헤딩별 비디오 매핑
+    'Preferences',             // Electron window 위치/크기 등
+];
 // ✅ [v2.8.1] 보존 가치 있는 모든 필드 — API 키 + 계정 + 라이선스 자격증명 + 사용자 프로필
 const PRESERVE_FIELDS = [
     'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey',
@@ -153,24 +189,38 @@ export function migrateUserDataFolders(currentUserDataDir: string): { migrated: 
             }
         } catch { /* ignore */ }
 
-        try {
-            const srcLic = path.join(siblingDir, 'license');
-            const dstLic = path.join(currentUserDataDir, 'license');
-            if (fs.existsSync(srcLic)) {
-                // ✅ [v2.8.1] license 폴더는 dst에 없거나 license.json이 비어있을 때 복사
-                let needsCopy = !fs.existsSync(dstLic);
-                if (!needsCopy) {
-                    const srcLicFile = path.join(srcLic, 'license.json');
-                    const dstLicFile = path.join(dstLic, 'license.json');
-                    if (fs.existsSync(srcLicFile) && !fs.existsSync(dstLicFile)) needsCopy = true;
-                }
-                if (needsCopy) {
-                    copyDirRecursive(srcLic, dstLic);
+        // ✅ [v2.9.2] 모든 사용자 데이터 폴더 sibling → active 이주 (active에 없을 때만 복사, 비파괴)
+        for (const folder of TARGET_FOLDERS) {
+            try {
+                const src = path.join(siblingDir, folder);
+                const dst = path.join(currentUserDataDir, folder);
+                if (fs.existsSync(src) && !fs.existsSync(dst)) {
+                    copyDirRecursive(src, dst);
                     result.migrated++;
-                    console.log(`[UserDataMigration] ✅ license 폴더 이주`);
+                    console.log(`[UserDataMigration] ✅ ${folder} 폴더 이주: ${siblingDir} → ${currentUserDataDir}`);
+                }
+            } catch (folderErr: any) {
+                console.warn(`[UserDataMigration] ⚠️ ${folder} 이주 실패: ${folderErr?.message}`);
+            }
+        }
+
+        // ✅ [v2.9.2] Network/Cookies (네이버 로그인 쿠키)
+        try {
+            const srcNet = path.join(siblingDir, 'Network');
+            const dstNet = path.join(currentUserDataDir, 'Network');
+            if (fs.existsSync(srcNet)) {
+                if (!fs.existsSync(dstNet)) fs.mkdirSync(dstNet, { recursive: true });
+                for (const cf of NETWORK_COOKIES_FILES) {
+                    const src = path.join(srcNet, cf);
+                    const dst = path.join(dstNet, cf);
+                    if (fs.existsSync(src) && !fs.existsSync(dst)) {
+                        try { fs.copyFileSync(src, dst); result.migrated++; } catch { /* skip */ }
+                    }
                 }
             }
-        } catch { /* ignore */ }
+        } catch (netErr: any) {
+            console.warn(`[UserDataMigration] ⚠️ Network/Cookies 이주 실패: ${netErr?.message}`);
+        }
 
         if (result.migrated > 0) {
             console.log(`[UserDataMigration] 🔄 ${result.migrated}개 항목 이주 완료`);
@@ -214,25 +264,75 @@ export function restoreFromMirrorIfEmpty(userDataDir: string, mirrorDir: string)
             }
         }
 
-        for (const f of TARGET_FILES) {
+        // ✅ [v2.9.3] 단일 파일 미러 복원 — 추가 파일(heading-*, Preferences) 포함, active에 없을 때만
+        for (const f of [...TARGET_FILES, ...TARGET_FILES_EXTRA]) {
             if (f === 'settings.json') continue;
             const ms = path.join(mirrorDir, f);
             const md = path.join(userDataDir, f);
             if (fs.existsSync(ms) && !fs.existsSync(md)) {
-                try { fs.copyFileSync(ms, md); } catch { /* skip */ }
+                try { fs.copyFileSync(ms, md); console.log(`[UserDataMirror] ✅ 복원: ${f}`); } catch { /* skip */ }
             }
         }
 
-        // ✅ [v2.9.1] Local Storage 복원 — 생성된 글 목록도 함께 복원 (active에 없을 때만)
+        // ✅ [v2.9.3] 자동화 세션 폴더 복원 (active에 없을 때만)
         try {
-            const msLs = path.join(mirrorDir, 'Local Storage');
-            const mdLs = path.join(userDataDir, 'Local Storage');
-            if (fs.existsSync(msLs) && !fs.existsSync(mdLs)) {
-                copyDirRecursive(msLs, mdLs);
-                console.log(`[UserDataMirror] ✅ 미러에서 Local Storage 복원 (생성된 글 목록 등)`);
+            for (const item of fs.readdirSync(mirrorDir)) {
+                const matches = SESSION_FOLDER_PREFIXES.some(prefix => item === prefix || item.startsWith(prefix + '-'));
+                if (!matches) continue;
+                const ms = path.join(mirrorDir, item);
+                const md = path.join(userDataDir, item);
+                if (fs.existsSync(ms) && !fs.existsSync(md) && fs.statSync(ms).isDirectory()) {
+                    try {
+                        copyDirRecursive(ms, md);
+                        console.log(`[UserDataMirror] ✅ 세션 폴더 복원: ${item}`);
+                    } catch (sessionErr: any) {
+                        console.warn(`[UserDataMirror] ⚠️ ${item} 세션 복원 실패: ${sessionErr?.message}`);
+                    }
+                }
             }
-        } catch (lsErr: any) {
-            console.warn(`[UserDataMirror] ⚠️ Local Storage 복원 실패 (무시): ${lsErr?.message}`);
+        } catch { /* ignore */ }
+
+        // ✅ [v2.9.2] 계정별 settings_*.json 복원
+        try {
+            for (const f of fs.readdirSync(mirrorDir)) {
+                if (!f.startsWith('settings_') || !f.endsWith('.json')) continue;
+                const md = path.join(userDataDir, f);
+                if (!fs.existsSync(md)) {
+                    try { fs.copyFileSync(path.join(mirrorDir, f), md); console.log(`[UserDataMirror] ✅ 복원: ${f}`); } catch { /* skip */ }
+                }
+            }
+        } catch { /* ignore */ }
+
+        // ✅ [v2.9.2] 사용자 데이터 폴더 복원 (Local Storage, WebStorage, Session Storage, license)
+        for (const folder of TARGET_FOLDERS) {
+            try {
+                const ms = path.join(mirrorDir, folder);
+                const md = path.join(userDataDir, folder);
+                if (fs.existsSync(ms) && !fs.existsSync(md)) {
+                    copyDirRecursive(ms, md);
+                    console.log(`[UserDataMirror] ✅ 폴더 복원: ${folder}`);
+                }
+            } catch (folderErr: any) {
+                console.warn(`[UserDataMirror] ⚠️ ${folder} 복원 실패: ${folderErr?.message}`);
+            }
+        }
+
+        // ✅ [v2.9.2] Network/Cookies 복원 (네이버 로그인 쿠키)
+        try {
+            const networkMs = path.join(mirrorDir, 'Network');
+            const networkMd = path.join(userDataDir, 'Network');
+            if (fs.existsSync(networkMs)) {
+                if (!fs.existsSync(networkMd)) fs.mkdirSync(networkMd, { recursive: true });
+                for (const cf of NETWORK_COOKIES_FILES) {
+                    const ms = path.join(networkMs, cf);
+                    const md = path.join(networkMd, cf);
+                    if (fs.existsSync(ms) && !fs.existsSync(md)) {
+                        try { fs.copyFileSync(ms, md); console.log(`[UserDataMirror] ✅ Cookies 복원: ${cf}`); } catch { /* skip */ }
+                    }
+                }
+            }
+        } catch (netErr: any) {
+            console.warn(`[UserDataMirror] ⚠️ Network/Cookies 복원 실패: ${netErr?.message}`);
         }
         try {
             for (const f of fs.readdirSync(mirrorDir)) {
@@ -252,37 +352,85 @@ export function restoreFromMirrorIfEmpty(userDataDir: string, mirrorDir: string)
 
 /**
  * userData → 미러 동기화. saveConfig 직후 또는 startup 후 1회 호출
- * ✅ [v2.9.1] Local Storage 폴더 미러 추가 — 생성된 글 목록(naver_blog_generated_posts 등)도 보호
+ * ✅ [v2.9.2] 전수 미러 — 모든 사용자 데이터 파일/폴더 + 네이버 쿠키 보호
  */
 export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
+    let stats = { files: 0, folders: 0, cookies: 0 };
     try {
         if (!fs.existsSync(userDataDir)) return;
         if (!fs.existsSync(mirrorDir)) fs.mkdirSync(mirrorDir, { recursive: true });
-        for (const f of TARGET_FILES) {
+
+        // 1) 단일 파일 미러 (필수 + 추가)
+        for (const f of [...TARGET_FILES, ...TARGET_FILES_EXTRA]) {
             const src = path.join(userDataDir, f);
             const dst = path.join(mirrorDir, f);
             if (fs.existsSync(src)) {
-                try { fs.copyFileSync(src, dst); } catch { /* skip */ }
+                try { fs.copyFileSync(src, dst); stats.files++; } catch { /* skip */ }
             }
         }
+
+        // 2) 계정별 settings_*.json 글로브
         try {
             for (const f of fs.readdirSync(userDataDir)) {
                 if (!f.startsWith('settings_') || !f.endsWith('.json')) continue;
-                try { fs.copyFileSync(path.join(userDataDir, f), path.join(mirrorDir, f)); } catch { /* skip */ }
+                try { fs.copyFileSync(path.join(userDataDir, f), path.join(mirrorDir, f)); stats.files++; } catch { /* skip */ }
             }
         } catch { /* ignore */ }
 
-        // ✅ [v2.9.1] Local Storage 폴더 미러 — leveldb로 저장된 localStorage 데이터(글 목록 등) 보호
-        try {
-            const srcLs = path.join(userDataDir, 'Local Storage');
-            const dstLs = path.join(mirrorDir, 'Local Storage');
-            if (fs.existsSync(srcLs)) {
-                if (!fs.existsSync(dstLs)) fs.mkdirSync(dstLs, { recursive: true });
-                copyDirRecursive(srcLs, dstLs);
+        // 3) 사용자 데이터 폴더 미러 (Local Storage, WebStorage, Session Storage, license)
+        for (const folder of TARGET_FOLDERS) {
+            try {
+                const src = path.join(userDataDir, folder);
+                const dst = path.join(mirrorDir, folder);
+                if (fs.existsSync(src)) {
+                    if (!fs.existsSync(dst)) fs.mkdirSync(dst, { recursive: true });
+                    copyDirRecursive(src, dst);
+                    stats.folders++;
+                }
+            } catch (folderErr: any) {
+                console.warn(`[UserDataMirror] ⚠️ ${folder} 미러 실패 (무시): ${folderErr?.message}`);
             }
-        } catch (lsErr: any) {
-            console.warn(`[UserDataMirror] ⚠️ Local Storage 미러 실패 (무시): ${lsErr?.message}`);
         }
+
+        // 4) Network/Cookies 파일만 별도 미러 (네이버 로그인 쿠키 보호)
+        try {
+            const networkSrc = path.join(userDataDir, 'Network');
+            const networkDst = path.join(mirrorDir, 'Network');
+            if (fs.existsSync(networkSrc)) {
+                if (!fs.existsSync(networkDst)) fs.mkdirSync(networkDst, { recursive: true });
+                for (const cf of NETWORK_COOKIES_FILES) {
+                    const src = path.join(networkSrc, cf);
+                    const dst = path.join(networkDst, cf);
+                    if (fs.existsSync(src)) {
+                        try { fs.copyFileSync(src, dst); stats.cookies++; } catch { /* skip */ }
+                    }
+                }
+            }
+        } catch (netErr: any) {
+            console.warn(`[UserDataMirror] ⚠️ Network/Cookies 미러 실패 (무시): ${netErr?.message}`);
+        }
+
+        // 5) ✅ [v2.9.3] 자동화 세션 폴더 미러 — 네이버 로그인 + 캡차 통과 결과 보존
+        let sessionFolders = 0;
+        try {
+            for (const item of fs.readdirSync(userDataDir)) {
+                const matches = SESSION_FOLDER_PREFIXES.some(prefix => item === prefix || item.startsWith(prefix + '-'));
+                if (!matches) continue;
+                try {
+                    const src = path.join(userDataDir, item);
+                    const dst = path.join(mirrorDir, item);
+                    if (fs.existsSync(src) && fs.statSync(src).isDirectory()) {
+                        if (!fs.existsSync(dst)) fs.mkdirSync(dst, { recursive: true });
+                        copyDirRecursive(src, dst);
+                        sessionFolders++;
+                    }
+                } catch (sessionErr: any) {
+                    console.warn(`[UserDataMirror] ⚠️ ${item} 세션 미러 실패: ${sessionErr?.message}`);
+                }
+            }
+        } catch { /* ignore */ }
+
+        console.log(`[UserDataMirror] ✅ 미러 완료 — 파일 ${stats.files}, 폴더 ${stats.folders}, 쿠키 ${stats.cookies}, 세션 ${sessionFolders}`);
     } catch (e: any) {
         console.warn(`[UserDataMirror] ⚠️ 미러 동기화 실패 (무시): ${e?.message}`);
     }
