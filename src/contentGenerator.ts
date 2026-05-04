@@ -6974,7 +6974,8 @@ function validateHomefeedContent(content: StructuredContent, source: ContentSour
   const criticalResult = checkHomefeedCriticalViolations(content as any);
   const criticalViolations = criticalResult.violations;
 
-  // ✅ [v2.10.2] v2.10.1 6대 의무 패치 충실도 자동 검증 — 추정 없이 실측만
+  // ✅ [v2.10.4] v2.10.1 6대 의무 패치 충실도 자동 검증 + 누락 항목 명시
+  //   AI가 따르지 않으면 콘솔에 누락 항목을 명확히 표시 → 사용자가 재생성 여부 결정.
   try {
     const compliance = checkPromptCompliance(content as any);
     const report = formatComplianceReport(compliance);
@@ -6984,9 +6985,27 @@ function validateHomefeedContent(content: StructuredContent, source: ContentSour
       content.quality = { aiDetectionRisk: 'low', legalRisk: 'safe', seoScore: 70, originalityScore: 70, readabilityScore: 70, warnings: [] };
     }
     (content.quality as any).promptCompliance = compliance;
-    if (compliance.passRate < 0.6) {
-      const w = `[v2.10.1 충실도 ${Math.round(compliance.passRate * 100)}%] AI가 프롬프트 의무를 충분히 따르지 않음 — 글 품질 검토 필요`;
-      content.quality.warnings = [...(content.quality.warnings || []), w];
+
+    // 누락 항목을 명시적으로 빌드해서 워닝에 포함 → 사용자가 어디가 부족한지 즉시 확인
+    if (compliance.passRate < 0.7) {
+      const missing: string[] = [];
+      compliance.byHeading.forEach((h: any, i: number) => {
+        const tag = `H${i + 1} "${String(h.heading).slice(0, 20)}"`;
+        if (!h.pA) missing.push(`${tag}: P-A 의심+반박 패턴 누락`);
+        if (!h.pB) missing.push(`${tag}: P-B '절대 모를 한 가지' 디테일 누락`);
+        if (!h.pC) missing.push(`${tag}: P-C 다음 섹션 갈고리(Hook) 누락`);
+      });
+      if (!compliance.pD_failOrLimit) missing.push('글 전체: P-D 실패담/한계 1회 누락');
+      if (!compliance.pF_introHasNumber) missing.push('도입부: P-F 첫 문장 숫자/날짜 누락');
+      if (!compliance.bodyLengthOk) missing.push(`본문 길이: ${compliance.bodyLength}자 (1500~1800 권장 벗어남)`);
+      if (compliance.endingDup3plus > 0) missing.push(`어미 3연속 ${compliance.endingDup3plus}건`);
+
+      const summary = `[v2.10.1 충실도 ${Math.round(compliance.passRate * 100)}%] AI 의무 누락 ${missing.length}건 — 재생성 권장`;
+      content.quality.warnings = [...(content.quality.warnings || []), summary, ...missing.map(m => '  · ' + m)];
+      console.warn(`[Compliance] ⛔ ${summary}`);
+      missing.forEach(m => console.warn(`[Compliance]   · ${m}`));
+    } else {
+      console.log(`[Compliance] ✅ 충실도 ${Math.round(compliance.passRate * 100)}% — AI가 의무를 따름`);
     }
   } catch (e: any) {
     console.warn('[Compliance] 검증 실패 (무시):', e?.message);
