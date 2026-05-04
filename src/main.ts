@@ -8668,6 +8668,28 @@ try {
         ? pathForMig.join(process.env.USERPROFILE, 'Documents')
         : pathForMig.join(process.env.HOME || '', 'Documents');
     restoreFromMirrorIfEmpty(userDataDir, getMirrorDir(documentsDir));
+
+    // ✅ [v2.9.0] 마이그레이션 직후 customImageSavePath 동기적 보장 — '추가' 버튼이 즉시 정상 폴더를 보도록
+    //   기존 v2.7.89는 app.whenReady() 이후 비동기 영속화. 그동안 UI가 빈 경로를 받아 회귀 발생 가능.
+    //   여기서 settings.json을 직접 읽어 비어있으면 동기적으로 Downloads/naver-blog-images 영속화.
+    try {
+        const settingsPath = pathForMig.join(userDataDir, 'settings.json');
+        let cfg: any = {};
+        if (fsForMig.existsSync(settingsPath)) {
+            try { cfg = JSON.parse(fsForMig.readFileSync(settingsPath, 'utf8')); } catch { cfg = {}; }
+        }
+        const homeDir = process.env.USERPROFILE || process.env.HOME || '';
+        const defaultImagePath = pathForMig.join(homeDir, 'Downloads', 'naver-blog-images');
+        if (!cfg.customImageSavePath || !String(cfg.customImageSavePath).trim()) {
+            cfg.customImageSavePath = defaultImagePath;
+            fsForMig.writeFileSync(settingsPath, JSON.stringify(cfg, null, 2), 'utf8');
+            console.log(`[Startup] ✅ customImageSavePath 동기 영속화: ${defaultImagePath}`);
+        }
+        // 폴더도 미리 생성 — '추가' 버튼이 빈 폴더 리스트를 만나지 않도록
+        fsForMig.mkdirSync(defaultImagePath, { recursive: true });
+    } catch (cfgErr: any) {
+        console.warn('[Startup] customImageSavePath 동기 영속화 실패 (무시):', cfgErr?.message);
+    }
 } catch (e: any) {
     console.warn('[Startup] userData 마이그레이션 실패 (무시):', e?.message);
 }

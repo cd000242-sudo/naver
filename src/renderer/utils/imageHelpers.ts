@@ -90,7 +90,13 @@ export function getStableImageKey(img: any): string {
 
 /**
  * 이미지 저장 기본 경로 가져오기
- * ✅ [2026-01-30 FIX] customImageSavePath 미설정 시 빈 문자열 반환 (오류 없음)
+ * ✅ [v2.9.0 FIX] '추가' 버튼이 자동 수집된 폴더를 못 찾던 회귀 차단
+ *   문제: customImageSavePath 비어있을 때 폴백이 getSavedImagesPath(=userData/images)였는데
+ *         실제 저장은 main의 getImageSaveBasePath(=Downloads/naver-blog-images)로 가서 경로 분기.
+ *         결과: AI 자동 수집은 Downloads/naver-blog-images/{글제목}/에 저장되지만
+ *               '추가' 버튼은 userData/images에서 폴더 리스트를 찾아 자동 수집 폴더가 안 보임.
+ *   조치: 폴백 IPC를 path:getDefaultImageSavePath(=Downloads/naver-blog-images)로 통일.
+ *         main의 getImageSaveBasePath와 완전 동일 경로 반환 → 저장/조회 일치.
  */
 export async function getRequiredImageBasePath(): Promise<string> {
     if (!window.api?.getConfig) {
@@ -100,13 +106,27 @@ export async function getRequiredImageBasePath(): Promise<string> {
     const config = await window.api.getConfig();
     const raw = String((config as any)?.customImageSavePath || '').trim();
 
-    // ✅ [2026-01-30 FIX] 경로가 없어도 오류 없이 빈 문자열 반환
-    // 메인 프로세스에서 기본 경로 처리
-    if (!raw) {
-        console.log('[ImageHelpers] ⚠️ customImageSavePath 미설정, 빈 경로 반환');
-        return '';
+    if (raw) {
+        return raw.replace(/\\/g, '/').replace(/\/+$/g, '');
     }
-    return raw.replace(/\\/g, '/').replace(/\/+$/g, '');
+
+    // ✅ [v2.9.0] customImageSavePath 비어있으면 main과 동일 폴백 경로 사용
+    //   이전: getSavedImagesPath → userData/images (저장 경로와 불일치)
+    //   현재: getDefaultImageSavePath → Downloads/naver-blog-images (저장 경로와 일치)
+    try {
+        if ((window.api as any).getDefaultImageSavePath) {
+            const defaultPath = await (window.api as any).getDefaultImageSavePath();
+            if (defaultPath) {
+                console.log('[ImageHelpers] ✅ Downloads/naver-blog-images 폴백 경로:', defaultPath);
+                return String(defaultPath).replace(/\\/g, '/').replace(/\/+$/g, '');
+            }
+        }
+    } catch (err) {
+        console.warn('[ImageHelpers] IPC 폴백 실패:', err);
+    }
+
+    console.log('[ImageHelpers] ⚠️ 이미지 경로를 찾을 수 없습니다.');
+    return '';
 }
 
 // 전역 노출 (하위 호환성)
