@@ -475,25 +475,63 @@ export async function registerLicense(
 
       console.log('[LicenseManager] 요청 전송: action=' + requestBody.action + ', userId=' + userId.trim());
 
-      // 타임아웃 추가 (60초 - GAS 배치 쓰기 기반, 10초 이내 응답 기대)
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 60000);
+      // ✅ [v2.10.15] 일시적 GAS 오류 자동 재시도 — 사용자 보고 '일시적으로 뜨는 오류'
+      //   원인: Google Apps Script 동시 실행 제한(30/사용자) 또는 일시 네트워크 끊김
+      //   조치: 5xx/네트워크 에러 시 2초/5초/10초 백오프로 최대 3회 재시도
+      //   4xx (클라이언트 에러)는 재시도 X — 코드/형식 문제는 반복해도 동일
+      let response: Response | undefined;
+      let responseText = '';
+      const RETRY_BACKOFF_MS = [0, 2000, 5000]; // 1차 즉시, 2차 2초, 3차 5초
+      let lastError: Error | null = null;
 
-      const response = await fetch(serverUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
-        },
-        body: JSON.stringify(requestBody),
-        signal: controller.signal,
-      });
+      for (let attempt = 0; attempt < RETRY_BACKOFF_MS.length; attempt++) {
+        if (RETRY_BACKOFF_MS[attempt] > 0) {
+          console.log(`[LicenseManager] ⏳ ${RETRY_BACKOFF_MS[attempt] / 1000}초 대기 후 재시도 (${attempt + 1}/${RETRY_BACKOFF_MS.length})`);
+          await new Promise(r => setTimeout(r, RETRY_BACKOFF_MS[attempt]));
+        }
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 60000);
+        try {
+          response = await fetch(serverUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(requestBody),
+            signal: controller.signal,
+          });
+          clearTimeout(timeoutId);
+          console.log(`[LicenseManager] 서버 응답 (시도 ${attempt + 1}):`, response.status, response.statusText);
+          responseText = await response.text();
 
-      clearTimeout(timeoutId);
+          if (response.ok) {
+            // 200 OK — 정상 응답 (사용 가능 여부는 별도 검증)
+            break;
+          }
+          // 5xx 서버 에러 → 재시도 가치 있음
+          if (response.status >= 500 && attempt < RETRY_BACKOFF_MS.length - 1) {
+            console.warn(`[LicenseManager] 5xx 일시 오류 (${response.status}) — 재시도 예정`);
+            lastError = new Error(`서버 ${response.status} ${response.statusText}`);
+            continue;
+          }
+          // 4xx 또는 마지막 시도 → 재시도 안 함, 그대로 응답
+          break;
+        } catch (fetchErr: any) {
+          clearTimeout(timeoutId);
+          // 네트워크 에러/타임아웃 → 재시도 가치 있음
+          lastError = fetchErr;
+          console.warn(`[LicenseManager] 네트워크 오류 (시도 ${attempt + 1}): ${fetchErr?.message?.slice(0, 100)}`);
+          if (attempt < RETRY_BACKOFF_MS.length - 1) continue;
+          // 마지막 시도 실패 → 그대로 throw
+          throw fetchErr;
+        }
+      }
 
-      console.log('[LicenseManager] 서버 응답:', response.status, response.statusText);
+      if (!response) {
+        return {
+          valid: false,
+          message: translateErrorMessage(`서버 연결 실패 (${RETRY_BACKOFF_MS.length}회 재시도 후): ${lastError?.message || 'unknown'}`),
+        };
+      }
 
-      // 응답 본문을 텍스트로 먼저 확인
-      const responseText = await response.text();
       console.log('[LicenseManager] 서버 응답 본문 (텍스트):', responseText);
 
       if (!response.ok) {
