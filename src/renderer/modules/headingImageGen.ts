@@ -4202,24 +4202,54 @@ async function showFolderSelectionForHeading(
 
   // ✅ [v2.10.18] 새로고침 버튼 — 방금 수집한 폴더가 모달 리스트에 안 뜰 때 즉시 갱신
   const refreshBtn = modal.querySelector('#heading-folder-refresh-btn') as HTMLButtonElement | null;
-  refreshBtn?.addEventListener('click', async () => {
+  const refreshFolders = async (silent: boolean = false): Promise<boolean> => {
     try {
-      refreshBtn.disabled = true;
-      refreshBtn.textContent = '⏳ 갱신 중...';
       const fresh = await (window.api as any).readDirWithStats?.(basePath);
       const freshFolders = (fresh || []).filter((entry: any) => entry.isDirectory);
-      sortedFolders.length = 0;
       const resorted = [...freshFolders].sort((a: any, b: any) => Number(b?.mtime || 0) - Number(a?.mtime || 0));
-      sortedFolders.push(...resorted);
-      applySearch();
-      console.log(`[FolderModal] 🔄 새로고침: ${sortedFolders.length}개 폴더`);
+      // 변동 감지: 개수 또는 최상단 폴더 mtime 비교
+      const countChanged = resorted.length !== sortedFolders.length;
+      const topMtimeChanged = resorted[0]?.mtime !== sortedFolders[0]?.mtime;
+      const changed = countChanged || topMtimeChanged;
+      if (changed) {
+        sortedFolders.length = 0;
+        sortedFolders.push(...resorted);
+        applySearch();
+        if (!silent) console.log(`[FolderModal] 🔄 갱신: ${sortedFolders.length}개 폴더`);
+        else console.log(`[FolderModal] 🔁 자동 감지 → ${sortedFolders.length}개로 갱신`);
+      }
+      return changed;
     } catch (e: any) {
-      console.warn('[FolderModal] 새로고침 실패:', e?.message);
-    } finally {
-      refreshBtn.disabled = false;
-      refreshBtn.textContent = '🔄 새로고침';
+      if (!silent) console.warn('[FolderModal] 새로고침 실패:', e?.message);
+      return false;
     }
+  };
+
+  refreshBtn?.addEventListener('click', async () => {
+    refreshBtn.disabled = true;
+    refreshBtn.textContent = '⏳ 갱신 중...';
+    await refreshFolders(false);
+    refreshBtn.disabled = false;
+    refreshBtn.textContent = '🔄 새로고침';
   });
+
+  // ✅ [v2.10.19] 자동 폴링 — 5초마다 폴더 변동 감지 + 자동 갱신
+  //   사용자 보고: '새로고침 안해도 자동으로 되어야 되지 않냐'
+  //   조치: 모달 열려있는 동안 5초 간격으로 readDirWithStats 호출 → 변동 시 자동 리렌더
+  //   부담 없음 (282개 폴더 stat은 5~10ms)
+  const pollInterval = setInterval(() => {
+    if (!document.body.contains(modal)) {
+      clearInterval(pollInterval);
+      return;
+    }
+    refreshFolders(true).catch(() => { /* skip */ });
+  }, 5000);
+
+  // 모달 닫힘 시 폴링 정리 (DOM 이벤트 + MutationObserver 둘 다)
+  const stopPoll = () => clearInterval(pollInterval);
+  modal.querySelector('#close-folder-modal')?.addEventListener('click', stopPoll);
+  modal.querySelector('#cancel-folder-modal')?.addEventListener('click', stopPoll);
+  modal.addEventListener('click', (e) => { if (e.target === modal) stopPoll(); });
 
   const attachFolderClickEvents = () => {
     listEl?.querySelectorAll('.folder-item').forEach((item) => {
