@@ -157,18 +157,17 @@ const STEALTH_IGNORE_DEFAULT_ARGS = ['--enable-automation'];
 
 async function launchWithStealthFallback(profileDir: string, offScreen: boolean): Promise<BrowserContext> {
     const { chromium } = await import('playwright');
-    // ✅ [v2.7.38] 로그인 후 Chrome 창 숨김 강화
-    //   사용자 보고: "로그인 완료 후에도 크롬창이 보임"
-    //   원인: -10000,-10000 음수 좌표가 일부 환경(멀티 모니터·System Chrome·고DPI)에서 무효화
-    //   해결: ① 더 멀리 음수 좌표(-32000,-32000) ② 창 크기 1×1로 축소
-    //         ③ --start-minimized 추가 ④ launch 후 page.evaluate로 강제 이동·축소
+    // ✅ [v2.10.11] Flow 크롬창 완전 숨김 — 사용자 보고 '신경쓰인다'
+    //   offScreen=true일 때는 headless: true 사용 (창 자체 안 뜸)
+    //   offScreen=false (로그인 단계)는 visible 유지 — 사용자가 직접 로그인해야 함
+    //   기존 음수 좌표/크기 args는 headless=false 폴백 시에만 사용 (호환성 유지)
     const offScreenArgs = offScreen ? [
         '--window-position=-32000,-32000',
         '--window-size=1,1',
         '--start-minimized',
     ] : [];
     const commonOptions: any = {
-        headless: false,
+        headless: offScreen, // ✅ [v2.10.11] offScreen=true → 진짜 headless로 창 숨김
         viewport: { width: 1280, height: 800 },
         args: [...STEALTH_ARGS, ...offScreenArgs],
         ignoreDefaultArgs: STEALTH_IGNORE_DEFAULT_ARGS,
