@@ -4162,6 +4162,7 @@ async function showFolderSelectionForHeading(
           <input type="text" id="heading-folder-search-input" placeholder="폴더명 검색 (예: 바디프랜드, 2025-12-05)" style="width: 100%; padding: 0.6rem 0.75rem 0.6rem 2.25rem; background: var(--bg-tertiary); border: 2px solid var(--border-light); border-radius: 8px; color: var(--text-strong); font-size: 0.9rem;"/>
           <span style="position: absolute; left: 0.6rem; top: 50%; transform: translateY(-50%); font-size: 1rem;">🔍</span>
         </div>
+        <button id="heading-folder-refresh-btn" type="button" title="방금 수집한 폴더가 안 보이면 새로고침" style="padding: 0.5rem 0.85rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 700; white-space: nowrap;">🔄 새로고침</button>
         <span id="heading-folder-count-label" style="color: var(--text-muted); font-size: 0.8rem; white-space: nowrap;">${sortedFolders.length}개</span>
       </div>
 
@@ -4198,6 +4199,27 @@ async function showFolderSelectionForHeading(
     countEl.textContent = `${filtered.length}개`;
     attachFolderClickEvents();
   };
+
+  // ✅ [v2.10.18] 새로고침 버튼 — 방금 수집한 폴더가 모달 리스트에 안 뜰 때 즉시 갱신
+  const refreshBtn = modal.querySelector('#heading-folder-refresh-btn') as HTMLButtonElement | null;
+  refreshBtn?.addEventListener('click', async () => {
+    try {
+      refreshBtn.disabled = true;
+      refreshBtn.textContent = '⏳ 갱신 중...';
+      const fresh = await (window.api as any).readDirWithStats?.(basePath);
+      const freshFolders = (fresh || []).filter((entry: any) => entry.isDirectory);
+      sortedFolders.length = 0;
+      const resorted = [...freshFolders].sort((a: any, b: any) => Number(b?.mtime || 0) - Number(a?.mtime || 0));
+      sortedFolders.push(...resorted);
+      applySearch();
+      console.log(`[FolderModal] 🔄 새로고침: ${sortedFolders.length}개 폴더`);
+    } catch (e: any) {
+      console.warn('[FolderModal] 새로고침 실패:', e?.message);
+    } finally {
+      refreshBtn.disabled = false;
+      refreshBtn.textContent = '🔄 새로고침';
+    }
+  });
 
   const attachFolderClickEvents = () => {
     listEl?.querySelectorAll('.folder-item').forEach((item) => {
