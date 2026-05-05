@@ -3373,6 +3373,9 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
 
   const automationResult = apiResponse.data;
 
+  // ✅ [v2.10.13] 발행 성공 마커 — 후처리 에러로 인한 잘못된 '실패' 토스트 차단
+  (window as any)._lastPublishOutcome = 'success';
+
   // 진행률을 98%로 업데이트
   showUnifiedProgress(98, '발행 완료 확인...', '블로그 발행이 완료되었는지 확인하고 있습니다.');
 

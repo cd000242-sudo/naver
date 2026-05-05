@@ -7617,6 +7617,9 @@ async function executeUnifiedAutomation(formData: any): Promise<any> {
     startBtn.innerHTML = '<span style="font-size: 1.75rem;">⏳</span><span>실행 중...</span>';
   }
 
+  // ✅ [v2.10.13] 발행 결과 마커 reset — 후처리 에러로 인한 잘못된 '실패' 토스트 차단용
+  (window as any)._lastPublishOutcome = null;
+
   const result = await withErrorHandling(async () => {
     if (formData.mode === 'full-auto') {
       // 풀오토 모드 실행 (기존 로직 재사용)
@@ -7639,7 +7642,20 @@ async function executeUnifiedAutomation(formData: any): Promise<any> {
   }, 2000);
 
   if (!result) {
-    toastManager.error('❌ 통합 자동화 실행에 실패했습니다.');
+    // ✅ [v2.10.13] 잘못된 '실패' 토스트 차단
+    //   사용자 보고: '잘 발행됐는데 통합자동화 실패 알림이 뜬다'
+    //   원인: withErrorHandling이 발행 성공 후 후처리(저장/통계 등) 에러를 catch하면
+    //         result === undefined 반환 → 일반 실패 토스트 발동.
+    //   조치: 발행 자체가 성공했는지 마커(_lastPublishOutcome)로 확인. success면
+    //         일반 실패 토스트 생략하고 후처리 경고만 표시. withErrorHandling이
+    //         이미 구체 에러 메시지 토스트를 띄움.
+    const publishOutcome = (window as any)._lastPublishOutcome;
+    if (publishOutcome === 'success') {
+      console.warn('[UnifiedExecution] 발행은 성공했으나 후처리 단계 에러 — 일반 실패 토스트 생략');
+      toastManager.warning('⚠️ 발행은 완료되었으나 일부 후처리에 실패했습니다 (재시도 불필요).');
+    } else {
+      toastManager.error('❌ 통합 자동화 실행에 실패했습니다.');
+    }
 
     // ✅ [2026-03-22 FIX] 실패 시 발행 상태 리셋 (재시도 가능하도록)
     // withErrorHandling이 에러를 삼키고 null 반환 → 여기서 상태 정리 필수
