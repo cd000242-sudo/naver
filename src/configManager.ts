@@ -247,7 +247,63 @@ export async function loadConfig(): Promise<AppConfig> {
 
   try {
     const raw = await fs.readFile(filePath, 'utf-8');
-    const parsed = JSON.parse(raw) as any;
+    let parsed = JSON.parse(raw) as any;
+
+    // ✅ [v2.10.8] 계정별 파일을 로드할 때 마스터 settings.json의 PRESERVE_FIELDS를 메모리에 머지
+    //   문제: settings_xxx.json에 키 누락된 채 saveConfig 호출되면 메모리의 빈 cachedConfig가
+    //         디스크에 다시 저장되어 머지 데이터 무효화. 메모리에 항상 머지본을 두면 saveConfig
+    //         가 머지본을 저장하므로 데이터 보존됨.
+    const masterPath = path.join(app.getPath('userData'), CONFIG_FILE);
+    if (filePath !== masterPath && masterPath !== filePath) {
+      try {
+        const masterRaw = await fs.readFile(masterPath, 'utf-8');
+        const master = JSON.parse(masterRaw);
+        const PRESERVE = [
+          'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey',
+          'perplexityApiKey', 'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey',
+          'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey', 'leonardoaiModel',
+          'naverDatalabClientId', 'naverDatalabClientSecret',
+          'naverClientId', 'naverClientSecret',
+          'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
+          'rememberCredentials', 'savedNaverId', 'savedNaverPassword',
+          'rememberLicenseCredentials', 'savedLicenseUserId', 'savedLicensePassword',
+          'userDisplayName', 'userEmail',
+          'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
+          'perplexityModel', 'geminiPlanType',
+          'customImageSavePath',
+        ];
+        let mergedCount = 0;
+        for (const k of PRESERVE) {
+          const mv = master[k];
+          const av = parsed[k];
+          const mHas = (typeof mv === 'string' && mv.trim().length > 0)
+            || (Array.isArray(mv) && mv.length > 0)
+            || (typeof mv === 'boolean');
+          const aHas = (typeof av === 'string' && av.trim().length > 0)
+            || (Array.isArray(av) && av.length > 0)
+            || (typeof av === 'boolean' && av !== undefined);
+          if (mHas && !aHas) {
+            parsed[k] = mv;
+            mergedCount++;
+          }
+        }
+        // 자격증명 있으면 remember 자동 true
+        if (parsed.savedNaverId && parsed.savedNaverPassword && parsed.rememberCredentials !== true) {
+          parsed.rememberCredentials = true;
+          mergedCount++;
+        }
+        if (parsed.savedLicenseUserId && parsed.savedLicensePassword && parsed.rememberLicenseCredentials !== true) {
+          parsed.rememberLicenseCredentials = true;
+          mergedCount++;
+        }
+        if (mergedCount > 0) {
+          console.log(`[Config] 🔄 마스터 → 계정별 메모리 머지: ${mergedCount}개 필드 보충`);
+        }
+      } catch (mergeErr: any) {
+        // 마스터 파일 없거나 읽기 실패 → 폴백 (계정별 단독 사용)
+        console.warn('[Config] 마스터 머지 스킵:', mergeErr?.message);
+      }
+    }
 
     // ✅ 사용자가 입력한 API 키는 항상 유지됨
     // 초기화는 배포팩 생성 시 scripts/reset-config-for-pack.js에서만 수행
