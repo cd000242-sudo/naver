@@ -3178,14 +3178,10 @@ ipcMain.handle('image:matchToHeadings', async (_event, images: string[], heading
 // 다중 이미지 다운로드 및 저장
 ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ url: string; heading: string }>, title: string) => {
   console.log(`[Main] 🖼️ image:downloadAndSaveMultiple 호출 — 이미지 ${images?.length || 0}개, title="${title}"`);
-  // ✅ [v2.9.1] 라이선스/쿼터 검증 결과 명시적 로깅 — 사용자가 어디서 막히는지 추적 가능
-  const check = await validateLicenseAndQuota('media', 1);
-  if (!check.valid) {
-    console.warn(`[Main] ⛔ image:downloadAndSaveMultiple 차단 — 라이선스/쿼터 검증 실패:`, JSON.stringify(check.response));
-    // 명시적 에러 응답 — 폴더 미생성 원인 사용자에게 표시
-    return { ...check.response, success: false, savedImages: [], error: check.response?.message || '라이선스/쿼터 검증 실패 — 미디어 쿼터 부족 또는 라이선스 만료' };
-  }
-  console.log(`[Main] ✅ 라이선스/쿼터 검증 통과 — 이미지 저장 진행`);
+  // ✅ [v2.10.14] 라이선스/쿼터 가드 제거 — 이미지 수집/저장은 외부 이미지 다운로드 + 디스크 write라 비용 0
+  //   사용자 보고: 'AI 이미지 자동수집/이미지 수집 URL이 폴더에 저장 안 됨'
+  //   원인: validateLicenseAndQuota('media', 1)이 무료 라이선스/쿼터 부족 시 silent 차단
+  //   조치: 가드 제거 → 누구나 이미지 수집 + 폴더 저장 가능. 발행은 별도 검증 유지.
 
   try {
     const axios = (await import('axios')).default;
