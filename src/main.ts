@@ -8652,12 +8652,14 @@ async function showLicenseInputDialog(): Promise<string | null> {
 // ✅ [2026-02-18] setName을 lock 앞에 호출하여 admin-panel과 lock 충돌 방지
 app.setName('better-life-naver');
 
-// ✅ [v2.8.0] userData 폴더 분기 회복 + 미러 복원 — 업데이트 후 API 키 사라짐 회귀 차단
-//   사용자 보고: "업데이트하면 API 키랑 전부 초기화가 되어버린다"
-//   원인: productName "Better Life Naver" 폴더와 setName "better-life-naver" 폴더가
-//         electron 부팅 타이밍에 따라 분기 생성 → 업데이트 후 빈 폴더에서 settings 로드.
-//   조치: setName 직후 sibling 폴더에서 active 폴더로 settings/계정/라이선스 자동 이주.
-//         미러(Documents/_safe/)가 있으면 active가 비어있을 때만 복원.
+// ✅ [v2.10.9] startup 마이그레이션 분리 — 동기 (필수) vs 비동기 (큰 폴더)
+//   사용자 보고: 앱 시작 시 20초간 응답 없음 → 정상 작동
+//   원인: restoreFromMirrorIfEmpty가 자동화 세션/Local Storage 등 큰 폴더를 동기 복사하면서
+//         메인 스레드 블로킹. 부팅 단계에서 사용자 UI 응답 불가.
+//   조치:
+//     1. 동기: 작은 settings 파일 머지만 — 사용자 데이터 안전 보장에 필수 (즉시 완료)
+//     2. 비동기: 큰 폴더 복사(미러 복원, 마이그레이션)를 setImmediate으로 백그라운드 실행
+//     → 메인 윈도우 즉시 표시, 폴더 복사는 뒤에서 진행
 try {
     const { migrateUserDataFolders, restoreFromMirrorIfEmpty, getMirrorDir, syncMasterIntoAccountSettings } = require('./main/userDataMigration.js');
     const fsForMig = require('fs');
@@ -8669,20 +8671,30 @@ try {
         'better-life-naver'
     );
     if (!fsForMig.existsSync(userDataDir)) fsForMig.mkdirSync(userDataDir, { recursive: true });
-    migrateUserDataFolders(userDataDir);
-    const documentsDir = process.env.USERPROFILE
-        ? pathForMig.join(process.env.USERPROFILE, 'Documents')
-        : pathForMig.join(process.env.HOME || '', 'Documents');
-    restoreFromMirrorIfEmpty(userDataDir, getMirrorDir(documentsDir));
 
-    // ✅ [v2.10.6] 마스터 settings.json → 계정별 settings_*.json 자동 보충
-    //   사용자 보고: '이전에 등록한 정보 다 어디갔니' — 활성 계정 모드에서 계정별 파일이
-    //   API 키/자격증명을 누락한 채 로드되어 UI에 빈 값 표시. 비파괴 머지로 자동 복구.
+    // === 동기 (필수, 빠름): settings 머지만 ===
     try {
         syncMasterIntoAccountSettings(userDataDir);
     } catch (syncErr: any) {
         console.warn('[Startup] 계정별 설정 동기화 실패 (무시):', syncErr?.message);
     }
+    const documentsDir = process.env.USERPROFILE
+        ? pathForMig.join(process.env.USERPROFILE, 'Documents')
+        : pathForMig.join(process.env.HOME || '', 'Documents');
+
+    // === 비동기 (큰 폴더 복사): 메인 스레드 블로킹 방지 ===
+    setImmediate(() => {
+        try {
+            console.log('[Startup-Async] 마이그레이션/미러 복원 백그라운드 시작');
+            migrateUserDataFolders(userDataDir);
+            restoreFromMirrorIfEmpty(userDataDir, getMirrorDir(documentsDir));
+            // 마이그레이션 후 settings 머지 한 번 더 (sibling에서 새로 들어온 데이터 반영)
+            try { syncMasterIntoAccountSettings(userDataDir); } catch { /* skip */ }
+            console.log('[Startup-Async] 마이그레이션/미러 복원 완료');
+        } catch (asyncErr: any) {
+            console.warn('[Startup-Async] 비동기 마이그레이션 실패 (무시):', asyncErr?.message);
+        }
+    });
 
     // ✅ [v2.9.0] 마이그레이션 직후 customImageSavePath 동기적 보장 — '추가' 버튼이 즉시 정상 폴더를 보도록
     //   기존 v2.7.89는 app.whenReady() 이후 비동기 영속화. 그동안 UI가 빈 경로를 받아 회귀 발생 가능.

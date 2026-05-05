@@ -576,6 +576,44 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
     };
   }
 
+  // ✅ [v2.10.9] saveConfig 마지막 방어 — 빈 데이터 덮어쓰기 차단
+  //   메모리 cachedConfig가 어떤 이유로 비어있는데 디스크엔 키가 있으면 디스크 값 보존
+  //   비파괴 원칙: cachedConfig에 명시 값(빈 문자열 포함)이 있으면 그대로 진행
+  try {
+    let diskConfig: any = {};
+    try {
+      const diskRaw = await fs.readFile(filePath, 'utf-8');
+      diskConfig = JSON.parse(diskRaw);
+    } catch { /* 파일 없으면 빈 객체 */ }
+    const PRESERVE_KEYS = [
+      'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey', 'perplexityApiKey',
+      'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey', 'deepinfraApiKey',
+      'openaiImageApiKey', 'leonardoaiApiKey', 'leonardoaiModel',
+      'naverDatalabClientId', 'naverDatalabClientSecret',
+      'naverClientId', 'naverClientSecret',
+      'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
+      'savedNaverId', 'savedNaverPassword', 'savedLicenseUserId', 'savedLicensePassword',
+      'userDisplayName', 'userEmail',
+    ];
+    let preserved = 0;
+    for (const k of PRESERVE_KEYS) {
+      const dv = diskConfig[k];
+      const cv = (cachedConfig as any)[k];
+      const dHas = (typeof dv === 'string' && dv.trim().length > 0) || (Array.isArray(dv) && dv.length > 0);
+      const cHas = (typeof cv === 'string' && cv.trim().length > 0) || (Array.isArray(cv) && cv.length > 0);
+      // 디스크에 있는데 메모리는 빈 채(undefined/빈문자열)면 디스크 값 보존
+      if (dHas && !cHas) {
+        (cachedConfig as any)[k] = dv;
+        preserved++;
+      }
+    }
+    if (preserved > 0) {
+      console.log(`[Config] 🛡️ saveConfig 방어: 디스크의 ${preserved}개 필드 보존 (메모리 빈값 → 디스크값)`);
+    }
+  } catch (defendErr: any) {
+    console.warn('[Config] saveConfig 방어 검사 실패 (무시):', defendErr?.message);
+  }
+
   await fs.writeFile(filePath, JSON.stringify(cachedConfig, null, 2), 'utf-8');
 
   // ✅ [2026-03-27 FIX] 계정별 파일에 저장할 때, 기본 settings.json에도 API 키 백싱크
@@ -622,14 +660,17 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
   }
 
   // ✅ [v2.8.0] Documents 미러 백업 — 업데이트/재설치 후에도 키 자동 복원 가능하도록
-  try {
-    const { mirrorToSafe, getMirrorDir } = await import('./main/userDataMigration.js');
-    const userDataDir = app.getPath('userData');
-    const documentsDir = app.getPath('documents');
-    mirrorToSafe(userDataDir, getMirrorDir(documentsDir));
-  } catch (mirrorError) {
-    console.warn('[Config] ⚠️ 미러 백업 실패 (비필수):', mirrorError);
-  }
+  // ✅ [v2.10.9] 비동기로 백그라운드 실행 — saveConfig 호출 시점에 UI 응답 지연 방지
+  setImmediate(async () => {
+    try {
+      const { mirrorToSafe, getMirrorDir } = await import('./main/userDataMigration.js');
+      const userDataDir = app.getPath('userData');
+      const documentsDir = app.getPath('documents');
+      mirrorToSafe(userDataDir, getMirrorDir(documentsDir));
+    } catch (mirrorError) {
+      console.warn('[Config] ⚠️ 미러 백업 실패 (비필수):', mirrorError);
+    }
+  });
 
   return cachedConfig;
 }
