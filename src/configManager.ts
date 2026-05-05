@@ -576,42 +576,41 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
     };
   }
 
-  // ✅ [v2.10.9] saveConfig 마지막 방어 — 빈 데이터 덮어쓰기 차단
-  //   메모리 cachedConfig가 어떤 이유로 비어있는데 디스크엔 키가 있으면 디스크 값 보존
-  //   비파괴 원칙: cachedConfig에 명시 값(빈 문자열 포함)이 있으면 그대로 진행
+  // ✅ [v2.10.10] saveConfig 방어 로직 동기 sync 사용으로 IPC 타임아웃 방지
+  //   v2.10.9 방어가 await fs.readFile로 비동기 I/O 추가 → IPC 응답 지연으로 타임아웃 발생
+  //   조치: fsSync.readFileSync로 즉시 read (수 KB 파일이라 sync도 빠름).
+  //   메모리 cachedConfig가 비어있는데 디스크엔 키가 있으면 디스크 값 보존.
   try {
-    let diskConfig: any = {};
-    try {
-      const diskRaw = await fs.readFile(filePath, 'utf-8');
-      diskConfig = JSON.parse(diskRaw);
-    } catch { /* 파일 없으면 빈 객체 */ }
-    const PRESERVE_KEYS = [
-      'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey', 'perplexityApiKey',
-      'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey', 'deepinfraApiKey',
-      'openaiImageApiKey', 'leonardoaiApiKey', 'leonardoaiModel',
-      'naverDatalabClientId', 'naverDatalabClientSecret',
-      'naverClientId', 'naverClientSecret',
-      'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
-      'savedNaverId', 'savedNaverPassword', 'savedLicenseUserId', 'savedLicensePassword',
-      'userDisplayName', 'userEmail',
-    ];
-    let preserved = 0;
-    for (const k of PRESERVE_KEYS) {
-      const dv = diskConfig[k];
-      const cv = (cachedConfig as any)[k];
-      const dHas = (typeof dv === 'string' && dv.trim().length > 0) || (Array.isArray(dv) && dv.length > 0);
-      const cHas = (typeof cv === 'string' && cv.trim().length > 0) || (Array.isArray(cv) && cv.length > 0);
-      // 디스크에 있는데 메모리는 빈 채(undefined/빈문자열)면 디스크 값 보존
-      if (dHas && !cHas) {
-        (cachedConfig as any)[k] = dv;
-        preserved++;
+    const fsSync = await import('fs');
+    if (fsSync.existsSync(filePath)) {
+      const diskRaw = fsSync.readFileSync(filePath, 'utf-8');
+      const diskConfig = JSON.parse(diskRaw);
+      const PRESERVE_KEYS = [
+        'geminiApiKey', 'openaiApiKey', 'claudeApiKey', 'perplexityApiKey',
+        'pexelsApiKey', 'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey',
+        'naverDatalabClientId', 'naverDatalabClientSecret',
+        'naverClientId', 'naverClientSecret',
+        'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
+        'savedNaverId', 'savedNaverPassword', 'savedLicenseUserId', 'savedLicensePassword',
+      ];
+      let preserved = 0;
+      for (const k of PRESERVE_KEYS) {
+        const dv = diskConfig[k];
+        const cv = (cachedConfig as any)[k];
+        const dHas = typeof dv === 'string' && dv.trim().length > 0;
+        const cHas = typeof cv === 'string' && cv.trim().length > 0;
+        if (dHas && !cHas) {
+          (cachedConfig as any)[k] = dv;
+          preserved++;
+        }
+      }
+      if (preserved > 0) {
+        console.log(`[Config] 🛡️ saveConfig 방어: 디스크의 ${preserved}개 필드 보존`);
       }
     }
-    if (preserved > 0) {
-      console.log(`[Config] 🛡️ saveConfig 방어: 디스크의 ${preserved}개 필드 보존 (메모리 빈값 → 디스크값)`);
-    }
   } catch (defendErr: any) {
-    console.warn('[Config] saveConfig 방어 검사 실패 (무시):', defendErr?.message);
+    // 방어 실패해도 저장 진행 (loadConfig 메모리 머지가 1차 안전망)
+    console.warn('[Config] saveConfig 방어 스킵:', defendErr?.message);
   }
 
   await fs.writeFile(filePath, JSON.stringify(cachedConfig, null, 2), 'utf-8');
