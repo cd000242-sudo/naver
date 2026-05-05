@@ -204,6 +204,15 @@ async function ensureConfigPath(userId?: string): Promise<string> {
       }
     }
 
+    // ✅ [v2.10.6] 계정별 파일이 있어도 PRESERVE_FIELDS가 비어있으면 마스터에서 보충 (runtime 안전망)
+    //   startup 마이그레이션에서 누락된 케이스(파일은 있지만 키 비어있음) 보호
+    try {
+      const { syncMasterIntoAccountSettings } = await import('./main/userDataMigration.js');
+      syncMasterIntoAccountSettings(app.getPath('userData'));
+    } catch (syncErr: any) {
+      console.warn('[Config] 계정별 동기화 실패 (무시):', syncErr?.message);
+    }
+
     console.log(`[Config] 설정 파일 경로 (계정: ${targetUserId}):`, userPath);
     return userPath;
   }

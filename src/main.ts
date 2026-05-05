@@ -8659,7 +8659,7 @@ app.setName('better-life-naver');
 //   조치: setName 직후 sibling 폴더에서 active 폴더로 settings/계정/라이선스 자동 이주.
 //         미러(Documents/_safe/)가 있으면 active가 비어있을 때만 복원.
 try {
-    const { migrateUserDataFolders, restoreFromMirrorIfEmpty, getMirrorDir } = require('./main/userDataMigration.js');
+    const { migrateUserDataFolders, restoreFromMirrorIfEmpty, getMirrorDir, syncMasterIntoAccountSettings } = require('./main/userDataMigration.js');
     const fsForMig = require('fs');
     const pathForMig = require('path');
     const userDataDir = pathForMig.join(
@@ -8674,6 +8674,15 @@ try {
         ? pathForMig.join(process.env.USERPROFILE, 'Documents')
         : pathForMig.join(process.env.HOME || '', 'Documents');
     restoreFromMirrorIfEmpty(userDataDir, getMirrorDir(documentsDir));
+
+    // ✅ [v2.10.6] 마스터 settings.json → 계정별 settings_*.json 자동 보충
+    //   사용자 보고: '이전에 등록한 정보 다 어디갔니' — 활성 계정 모드에서 계정별 파일이
+    //   API 키/자격증명을 누락한 채 로드되어 UI에 빈 값 표시. 비파괴 머지로 자동 복구.
+    try {
+        syncMasterIntoAccountSettings(userDataDir);
+    } catch (syncErr: any) {
+        console.warn('[Startup] 계정별 설정 동기화 실패 (무시):', syncErr?.message);
+    }
 
     // ✅ [v2.9.0] 마이그레이션 직후 customImageSavePath 동기적 보장 — '추가' 버튼이 즉시 정상 폴더를 보도록
     //   기존 v2.7.89는 app.whenReady() 이후 비동기 영속화. 그동안 UI가 빈 경로를 받아 회귀 발생 가능.

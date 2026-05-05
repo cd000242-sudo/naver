@@ -435,3 +435,68 @@ export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
         console.warn(`[UserDataMirror] ⚠️ 미러 동기화 실패 (무시): ${e?.message}`);
     }
 }
+
+/**
+ * ✅ [v2.10.6] 마스터 settings.json → 계정별 settings_*.json 자동 머지
+ *   배경: v2.7.x에 도입된 계정별 분리 모드(_activeUserId)가 settings_xxx.json을
+ *   우선 로드하는데, 그 파일에 API 키/자격증명이 누락되면 사용자 UI에 빈 값 표시.
+ *   사용자 보고: '이전에 등록한 정보 다 어디갔니, 자동로그인 정보랑 API 키랑 전부다'
+ *   원인: 계정별 모드 활성화 후 사용자가 마스터에 키를 입력 / 마이그레이션 / 미러
+ *         복원 등으로 마스터에는 키가 있는데 계정별 파일은 갱신 안 됨.
+ *   조치: startup 시점에 모든 settings_*.json 파일을 검사 → PRESERVE_FIELDS가
+ *         비어있는데 마스터에 있으면 비파괴 머지 (계정별 명시 값은 보존).
+ *
+ *   비파괴 원칙: 계정별 파일에 값이 있으면 절대 덮어쓰지 않음.
+ *               비어있는 필드만 마스터에서 보충.
+ */
+export function syncMasterIntoAccountSettings(userDataDir: string): { merged: number; files: number } {
+    const result = { merged: 0, files: 0 };
+    try {
+        const masterPath = path.join(userDataDir, 'settings.json');
+        if (!fs.existsSync(masterPath)) return result;
+        const master = JSON.parse(fs.readFileSync(masterPath, 'utf8'));
+        if (!master || typeof master !== 'object') return result;
+
+        const items = fs.readdirSync(userDataDir);
+        for (const f of items) {
+            if (!f.startsWith('settings_') || !f.endsWith('.json')) continue;
+            const acctPath = path.join(userDataDir, f);
+            try {
+                const acct = JSON.parse(fs.readFileSync(acctPath, 'utf8'));
+                let mergedHere = 0;
+                for (const k of PRESERVE_FIELDS) {
+                    const mv = master[k];
+                    const av = acct[k];
+                    const mHas = (typeof mv === 'string' && mv.trim().length > 0)
+                        || (Array.isArray(mv) && mv.length > 0)
+                        || (typeof mv === 'boolean');
+                    const aHas = (typeof av === 'string' && av.trim().length > 0)
+                        || (Array.isArray(av) && av.length > 0)
+                        || (typeof av === 'boolean' && av !== undefined);
+                    if (mHas && !aHas) {
+                        acct[k] = mv;
+                        mergedHere++;
+                    }
+                }
+                if (mergedHere > 0) {
+                    // 백업 후 저장
+                    const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+                    const backupPath = `${acctPath}.before-sync-${ts}`;
+                    try { fs.copyFileSync(acctPath, backupPath); } catch { /* skip */ }
+                    fs.writeFileSync(acctPath, JSON.stringify(acct, null, 2), 'utf8');
+                    console.log(`[AccountSync] ✅ ${f}: ${mergedHere}개 필드 마스터에서 보충 (백업: ${path.basename(backupPath)})`);
+                    result.merged += mergedHere;
+                    result.files++;
+                }
+            } catch (e: any) {
+                console.warn(`[AccountSync] ⚠️ ${f} 머지 실패 (무시): ${e?.message}`);
+            }
+        }
+        if (result.files > 0) {
+            console.log(`[AccountSync] 🔄 ${result.files}개 계정별 파일에 ${result.merged}개 필드 보충`);
+        }
+    } catch (e: any) {
+        console.warn(`[AccountSync] ⚠️ 동기화 실패 (무시): ${e?.message}`);
+    }
+    return result;
+}
