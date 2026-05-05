@@ -10,17 +10,12 @@
  * 사용자가 직접 다른 엔진을 선택하게 함. silent 전환 절대 금지.
  */
 
-const DALLE3_DEADLINE_ISO = '2026-05-12T00:00:00Z';
-const DALLE3_NOTICE_KEY = 'openai_dalle3_deadline_notified_v1';
+// ✅ [v2.10.16] DALL-E 3 옵션 제거 — D-Day 상수/함수 미사용
 const OPENAI_IMAGE_VERIFY_ACK_KEY = 'openai_image_verification_acknowledged_v1';
 
 export interface GuardResult {
     block: boolean;
     reason?: string;
-}
-
-function isAfterDeadline(): boolean {
-    return Date.now() >= Date.parse(DALLE3_DEADLINE_ISO);
 }
 
 function showModal(opts: {
@@ -88,45 +83,28 @@ function showModal(opts: {
 export async function checkDallE3Deadline(imageSource: string): Promise<GuardResult> {
     if (imageSource !== 'dall-e-3') return { block: false };
 
-    if (isAfterDeadline()) {
-        await showModal({
-            icon: '🛑',
-            title: 'DALL-E 3 API 폐기됨',
-            bodyHtml: `
-                <p style="margin: 0 0 0.75rem;">OpenAI가 <strong>2026년 5월 12일</strong>부로 DALL-E 3 API를 폐기했습니다.</p>
-                <p style="margin: 0 0 0.75rem; color: #f8b400;">⚠️ 발행을 진행할 수 없습니다. 다른 이미지 엔진을 선택해주세요.</p>
-                <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: #b8b8d4; font-size: 0.88rem;">
-                    <li><strong>덕트테이프(gpt-image-2)</strong> — OpenAI Org 인증 필요, 한글 최강</li>
-                    <li><strong>나노바나나 프로</strong> — Gemini API, 한글 강</li>
-                    <li><strong>Flow</strong> — Google AI Pro 무료 쿼터</li>
-                    <li><strong>DeepInfra FLUX-2</strong> — 가성비 ($0.01/장)</li>
-                    <li><strong>Leonardo AI</strong> — 일러스트 강</li>
-                </ul>
-            `,
-            primary: { label: '확인 (발행 중단)', danger: true },
-        });
-        return { block: true, reason: 'dall-e-3 API 폐기 (2026-05-12)' };
-    }
-
-    // 5/12 이전 — 1회성 D-Day 안내
-    if (localStorage.getItem(DALLE3_NOTICE_KEY) !== '1') {
-        const daysLeft = Math.max(0, Math.ceil((Date.parse(DALLE3_DEADLINE_ISO) - Date.now()) / 86400000));
-        const choice = await showModal({
-            icon: '⏰',
-            title: `DALL-E 3 폐기 D-${daysLeft}`,
-            bodyHtml: `
-                <p style="margin: 0 0 0.75rem;">OpenAI가 <strong>2026년 5월 12일</strong>부로 DALL-E 3 API를 폐기합니다.</p>
-                <p style="margin: 0 0 0.75rem;">남은 기간: <strong style="color: #f8b400;">${daysLeft}일</strong></p>
-                <p style="margin: 0 0 0.5rem; color: #b8b8d4; font-size: 0.88rem;">5/12 이후 달리 선택 시 발행이 중단됩니다. 미리 다른 엔진으로 옮기는 것을 권장합니다.</p>
-                <p style="margin: 0; color: #b8b8d4; font-size: 0.85rem;">이 안내는 1회만 표시됩니다.</p>
-            `,
-            primary: { label: '알겠음 (계속 진행)' },
-            secondary: { label: '발행 중단' },
-        });
-        try { localStorage.setItem(DALLE3_NOTICE_KEY, '1'); } catch { /* ignore */ }
-        if (choice === 'secondary') return { block: true, reason: '사용자가 D-Day 안내 후 발행 중단 선택' };
-    }
-    return { block: false };
+    // ✅ [v2.10.16] DALL-E 3 즉시 제거 — 5/12 D-Day 무관, 사용자 요청 즉시 차단
+    //   배경: OpenAI가 5/12 폐기 예정. 사용자가 미리 정리 요청 → UI 옵션 제거 + 가드 즉시 발효.
+    //   saved settings에 dall-e-3이 남아있는 사용자 환경 보호 — 차단 모달 + 대안 안내.
+    await showModal({
+        icon: '🛑',
+        title: 'DALL-E 3 옵션 제거됨',
+        bodyHtml: `
+            <p style="margin: 0 0 0.75rem;">DALL-E 3는 <strong>2026년 5월 12일</strong> OpenAI API 폐기 예정으로 미리 제거되었습니다.</p>
+            <p style="margin: 0 0 0.75rem; color: #f8b400;">⚠️ 다른 이미지 엔진을 선택해주세요.</p>
+            <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: #b8b8d4; font-size: 0.88rem;">
+                <li><strong>덕트테이프(gpt-image-2)</strong> — OpenAI Org 인증 필요, 한글 최강</li>
+                <li><strong>나노바나나 프로</strong> — Gemini API, 한글 강</li>
+                <li><strong>Flow</strong> — Google AI Pro 무료 쿼터</li>
+                <li><strong>DeepInfra FLUX-2</strong> — 가성비 ($0.01/장)</li>
+                <li><strong>Leonardo AI</strong> — 일러스트 강</li>
+                <li><strong>ImageFX</strong> — Google 무료 (1000장/일)</li>
+            </ul>
+            <p style="margin: 0.75rem 0 0; color: #b8b8d4; font-size: 0.8rem;">참고: 5/12 이후 OpenAI 이미지 라인은 덕트테이프(gpt-image-2)만 남습니다.</p>
+        `,
+        primary: { label: '확인 (다른 엔진 선택)', danger: true },
+    });
+    return { block: true, reason: 'dall-e-3 옵션 제거됨 (v2.10.16)' };
 }
 
 /**
