@@ -49,14 +49,16 @@ let updateCheckResolve: ((hasUpdate: boolean) => void) | null = null;
 export function waitForUpdateCheck(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
         updateCheckResolve = resolve;
-        // 타임아웃: 15초 내 응답 없으면 업데이트 없는 것으로 간주
+        // ✅ [v2.10.12] 타임아웃 15초 → 3초로 단축 — 사용자 보고 '초반에 응답없음 자꾸 뜸'
+        //   업데이트 없거나 네트워크 느릴 때 3초 안에 빠르게 진행. autoDownload=true이므로
+        //   업데이트 응답이 늦게 도착해도 백그라운드에서 자동 다운로드 진행됨.
         setTimeout(() => {
             if (updateCheckResolve === resolve) {
-                console.log('[Updater] 업데이트 체크 타임아웃 (15초) - 업데이트 없음으로 처리');
+                console.log('[Updater] 업데이트 체크 타임아웃 (3초) - 인증창 즉시 표시, 업데이트는 백그라운드 진행');
                 updateCheckResolve = null;
                 resolve(false);
             }
-        }, 15000);
+        }, 3000);
         checkForUpdates();
     });
 }
