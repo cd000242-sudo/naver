@@ -481,7 +481,17 @@ const aiProgressModal = {
       if (document.getElementById('ai-progress-close-x')?.style.display === 'none') {
         if (confirm('작업을 취소하시겠습니까?')) {
           this.hide();
-          cancelAutomation();
+          // ✅ [v2.10.26] 글생성 단계 취소 플래그 설정 — automationRunning=false인 글생성
+          //   단계에서도 후속 단계(이미지 수집/발행)가 차단되도록.
+          (window as any)._contentGenerationCancelled = true;
+          if (automationRunning) {
+            cancelAutomation();
+          } else {
+            // 글생성만 진행 중인 상태 — 메인 프로세스 fetch는 백그라운드에서 종료까지 대기.
+            //   사용자에게 "취소됨" 표시 + 후속 단계 차단으로 즉각 반영.
+            try { (window as any).api?.cancelAutomation?.(); } catch { /* ignore */ }
+            try { appendLog?.('⏹️ 글 생성 취소 요청 — 진행 중인 응답은 백그라운드에서 폐기됩니다.'); } catch { /* ignore */ }
+          }
         }
       } else {
         this.hide();
@@ -494,7 +504,15 @@ const aiProgressModal = {
       if (automationRunning) {
         if (confirm('작업을 취소하시겠습니까?')) {
           this.hide();
+          (window as any)._contentGenerationCancelled = true;
           cancelAutomation();
+        }
+      } else if ((this as any).isWorking) {
+        // ✅ [v2.10.26] 글생성 진행 중에 X로 닫기 시도하면 동일하게 취소 처리.
+        if (confirm('글 생성을 취소하시겠습니까?')) {
+          this.hide();
+          (window as any)._contentGenerationCancelled = true;
+          try { appendLog?.('⏹️ 글 생성 취소 요청 — 진행 중인 응답은 백그라운드에서 폐기됩니다.'); } catch { /* ignore */ }
         }
       } else {
         this.hide();

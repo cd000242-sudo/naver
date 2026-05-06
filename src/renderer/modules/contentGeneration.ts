@@ -253,6 +253,8 @@ export async function generateContentFromUrl(
   (window as any).generatedImages = []; // ✅ [2026-01-21] 연속 발행용 이미지 변수도 초기화
   (window as any).imageManagementGeneratedImages = [];
   ImageManager.clear(); // ✅ ImageManager 초기화 (이전 글의 이미지 매핑 제거)
+  // ✅ [v2.10.26] 글생성 취소 플래그 초기화 (이전 취소 상태 잔존 방지)
+  (window as any)._contentGenerationCancelled = false;
   // ✅ 활성 모달 결정 (suppressModal이면 메인 진행 모달 사용, 아니면 개별 모달)
   const activeModal: any = suppressModal ? getProgressModal() : aiProgressModal;
 
@@ -390,6 +392,13 @@ export async function generateContentFromUrl(
       const errorMsg = apiResponse.data?.message || apiResponse.error || '콘텐츠 생성 실패';
       console.error('[GenerateContent] ❌ 생성 실패:', errorMsg);
       throw new Error(errorMsg);
+    }
+
+    // ✅ [v2.10.26] 글생성 취소 플래그 체크 — 응답 받은 직후 사용자가 취소했으면 후속 단계 차단.
+    if ((window as any)._contentGenerationCancelled === true) {
+      (window as any)._contentGenerationCancelled = false;
+      appendLog('⏹️ 글 생성이 사용자에 의해 취소되었습니다. 응답은 폐기됩니다.');
+      throw new Error('글 생성이 취소되었습니다.');
     }
 
     // ✅ 진행률 업데이트 - 응답 처리
@@ -659,6 +668,8 @@ export async function generateContentFromKeywords(
   (window as any).imageManagementGeneratedImages = [];
   ImageManager.clear(); // ✅ ImageManager 초기화 (이전 글의 이미지 매핑 제거)
   currentPostId = null; // ✅ 새 글이므로 postId 초기화
+  // ✅ [v2.10.26] 글생성 취소 플래그 초기화 (이전 취소 상태 잔존 방지)
+  (window as any)._contentGenerationCancelled = false;
 
   // ✅ 활성 모달 결정 (suppressModal이면 메인 진행 모달 사용, 아니면 개별 모달)
   const activeModal: any = suppressModal ? getProgressModal() : aiProgressModal;
@@ -935,6 +946,13 @@ export async function generateContentFromKeywords(
 
     if (!apiResponse.success || !apiResponse.data?.success) {
       throw new Error(apiResponse.data?.message || apiResponse.error || '콘텐츠 생성 실패');
+    }
+
+    // ✅ [v2.10.26] 글생성 취소 플래그 체크 — 응답 받은 직후 사용자가 취소했으면 후속 단계 차단.
+    if ((window as any)._contentGenerationCancelled === true) {
+      (window as any)._contentGenerationCancelled = false;
+      appendLog('⏹️ 글 생성이 사용자에 의해 취소되었습니다. 응답은 폐기됩니다.');
+      throw new Error('글 생성이 취소되었습니다.');
     }
 
     const result = apiResponse.data;

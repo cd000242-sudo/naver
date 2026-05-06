@@ -693,11 +693,11 @@ export function createHeadingImageModal(): void {
               </div>
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <label style="display: flex; align-items: center; gap: 8px; padding: 12px 14px; background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(139,92,246,0.05)); border: 2px solid #8b5cf6; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
-                  <input type="radio" name="sc-sub-image-source" value="ai" checked style="accent-color: #8b5cf6; width: 16px; height: 16px;">
+                  <input type="radio" name="sc-sub-image-source" value="ai" style="accent-color: #8b5cf6; width: 16px; height: 16px;">
                   <span style="font-size: 13px; font-weight: 600; color: #7c3aed;">✨ AI 이미지 활용하기</span>
                 </label>
                 <label style="display: flex; align-items: center; gap: 8px; padding: 12px 14px; background: linear-gradient(135deg, rgba(75,85,99,0.1), rgba(75,85,99,0.05)); border: 2px solid #6b7280; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
-                  <input type="radio" name="sc-sub-image-source" value="collected" style="accent-color: #6b7280; width: 16px; height: 16px;">
+                  <input type="radio" name="sc-sub-image-source" value="collected" checked style="accent-color: #6b7280; width: 16px; height: 16px;">
                   <span style="font-size: 13px; font-weight: 600; color: #4b5563;">📦 수집 이미지 사용</span>
                 </label>
               </div>
