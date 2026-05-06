@@ -7148,7 +7148,7 @@ export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string
   return { primaryModel, uniqueModels, isPro };
 }
 
-async function callGemini(prompt: string, temperature: number = 0.9, minChars: number = 2000, options: { useGrounding?: boolean } = {}): Promise<string> {
+async function callGemini(prompt: string, temperature: number = 0.9, minChars: number = 2000, options: { useGrounding?: boolean; signal?: AbortSignal } = {}): Promise<string> {
   const timeoutMs = getTimeoutMs(minChars);
 
   // ✅ 설정 로드
@@ -7797,7 +7797,7 @@ function fixUtf8Encoding(text: string): string {
 // 기존 문제: generatePerplexityContent() → buildEnhancedPrompt()가 이미 완성된 시스템 프롬프트를
 // "주제"로 다시 감싸는 이중 래핑 → Perplexity가 자유형식 텍스트 반환 → JSON 파싱 실패
 // 수정: callGemini/callOpenAI와 동일하게 프롬프트를 직접 API에 전달
-async function callPerplexity(prompt: string, temperature: number = 0.7, minChars: number = 2000): Promise<string> {
+async function callPerplexity(prompt: string, temperature: number = 0.7, minChars: number = 2000, signal?: AbortSignal): Promise<string> {
   console.log('[Perplexity] 콘텐츠 생성 시작 (직접 API 호출)');
 
   // 1. API 키 로드 (config 우선, env 폴백)
@@ -7866,6 +7866,7 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
         { role: 'user', content: userMessage },
       ];
 
+      // ✅ [v2.10.28] Perplexity SDK signal 전달 — 사용자 취소 시 fetch 즉시 abort
       const createPromise = client.chat.completions.create({
         model: modelName,
         messages: messages,
@@ -7875,7 +7876,7 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
         ...(modelName.includes('sonar') ? {
           search_recency_filter: 'month',  // 최근 1개월 정보 우선
         } : {}),
-      } as any);
+      } as any, signal ? { signal } as any : undefined);
 
       const response = await Promise.race([createPromise, timeoutPromise]);
       const text = response.choices[0]?.message?.content?.trim() || '';
@@ -7919,7 +7920,7 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
 }
 
 // ✅ [2026-01-25] callOpenAI 함수 - 기존 OpenAI API 호출 로직
-async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: number = 2000): Promise<string> {
+async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: number = 2000, signal?: AbortSignal): Promise<string> {
   console.log('[OpenAI] JSON 형식 준수 요청 - 유니코드 이스케이프 4자리, 쉼표 필수');
 
   // ✅ [2026-02-24 FIX] 방어적 설정 로드 (callGemini/callPerplexity 패턴 통일)
@@ -7991,6 +7992,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         // ✅ [2026-03-16] system/user 분리: AI 규칙 인식률 향상
         const { system: oaiSystem, user: oaiUser } = splitPromptByMarker(prompt);
 
+        // ✅ [v2.10.28] OpenAI SDK signal 전달 — 사용자 취소 시 fetch 즉시 abort
         const createPromise = client.chat.completions.create({
           model: modelName,
           messages: [
@@ -8001,7 +8003,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           top_p: 0.9,
           max_completion_tokens: 8192,
           response_format: { type: 'json_object' },  // ✅ [2026-03-23] JSON 출력 보장
-        } as any);
+        } as any, signal ? { signal } as any : undefined);
 
         const response = await Promise.race([createPromise, timeoutPromise]);
         const text = response.choices[0]?.message?.content?.trim() || '';
@@ -8121,7 +8123,7 @@ function getAnthropicClient(apiKey?: string): Anthropic {
 }
 
 
-async function callClaude(prompt: string, temperature: number = 0.9, minChars: number = 2000): Promise<string> {
+async function callClaude(prompt: string, temperature: number = 0.9, minChars: number = 2000, signal?: AbortSignal): Promise<string> {
   console.log('[Claude] JSON 형식 준수 요청 - 유니코드 이스케이프 4자리, 쉼표 필수');
 
   // ✅ [2026-02-24 FIX] 방어적 설정 로드 (callGemini/callPerplexity 패턴 통일)
@@ -8232,25 +8234,27 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
           messages: [{ role: 'user' as const, content: claudeUser }],
         });
 
+        // ✅ [v2.10.28] Anthropic SDK signal 전달 — 사용자 취소 시 fetch 즉시 abort
+        const claudeOpts = signal ? { signal } as any : undefined;
         let createPromise: Promise<any>;
         if (useSystemCache) {
           // Attempt cached form; on any failure that looks like an SDK/schema
           // issue, silently retry with the plain string form.
           createPromise = (async () => {
             try {
-              return await (client.messages.create as any)(buildRequest(true));
+              return await (client.messages.create as any)(buildRequest(true), claudeOpts);
             } catch (cacheErr: any) {
               const msg = String(cacheErr?.message || cacheErr || '');
               const looksLikeSchemaError = /system|content|cache_control|type|400|invalid/i.test(msg);
               if (looksLikeSchemaError) {
                 console.warn(`[Claude] ⚠️ 캐시 적용 요청 거부됨 (${msg.substring(0, 120)}) → 레거시 string 형식으로 재시도`);
-                return await (client.messages.create as any)(buildRequest(false));
+                return await (client.messages.create as any)(buildRequest(false), claudeOpts);
               }
               throw cacheErr;
             }
           })();
         } else {
-          createPromise = (client.messages.create as any)(buildRequest(false));
+          createPromise = (client.messages.create as any)(buildRequest(false), claudeOpts);
         }
 
         const response = await Promise.race([createPromise, timeoutPromise]);
@@ -9319,16 +9323,17 @@ export async function generateStructuredContent(
           });
         };
 
+        // ✅ [v2.10.28] signal을 callX에 직접 전달 — SDK 레벨 fetch abort
         if (provider === 'openai') {
-          rawResponse = await withAbortRace(callOpenAI(systemPrompt, temperature, adjustedMinChars));
+          rawResponse = await withAbortRace(callOpenAI(systemPrompt, temperature, adjustedMinChars, signal));
         } else if (provider === 'claude') {
-          rawResponse = await withAbortRace(callClaude(systemPrompt, temperature, adjustedMinChars));
+          rawResponse = await withAbortRace(callClaude(systemPrompt, temperature, adjustedMinChars, signal));
         } else if (provider === 'perplexity') {
           // ✅ [2026-01-25] Perplexity AI (Sonar) 실시간 검색 기반 콘텐츠 생성
-          rawResponse = await withAbortRace(callPerplexity(systemPrompt, temperature, adjustedMinChars));
+          rawResponse = await withAbortRace(callPerplexity(systemPrompt, temperature, adjustedMinChars, signal));
         } else {
           // ✅ [v1.4.4] 동적 Grounding 결정 적용
-          rawResponse = await withAbortRace(callGemini(systemPrompt, temperature, adjustedMinChars, { useGrounding: smartGrounding }));
+          rawResponse = await withAbortRace(callGemini(systemPrompt, temperature, adjustedMinChars, { useGrounding: smartGrounding, signal }));
         }
         raw = rawResponse; // Assign rawResponse to raw for subsequent processing
         console.log(`[ContentGenerator] API 완료: ${provider} (${Date.now() - apiStart}ms)`);
