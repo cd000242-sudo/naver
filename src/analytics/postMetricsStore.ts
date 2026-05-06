@@ -99,11 +99,23 @@ function readAll(): PostMetricSnapshot[] {
   }
 }
 
+// ✅ [v2.10.36] 단일 파일 무한 누적 차단 — 5000건 cap (LRU trim)
+//   기존: 매 발행마다 push, 1년 운영 시 수십 MB 파일 매 호출 풀 read+write
+//   수정: writeAll 직전 records 길이 검사, 5000 초과 시 오래된 항목부터 trim
+//   비파괴: 같은 postId의 시계열 보존 의도는 그대로 (오래된 글의 옛 측정만 잘림)
+const POST_METRICS_MAX_RECORDS = 5000;
 function writeAll(records: PostMetricSnapshot[]): void {
   const filePath = activeStorage.getFilePath();
   const dir = path.dirname(filePath);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(filePath, JSON.stringify(records, null, 2), 'utf-8');
+  // LRU trim: checkedAt 오름차순 정렬 후 뒤쪽(=최신) N개만 보존
+  let toWrite = records;
+  if (toWrite.length > POST_METRICS_MAX_RECORDS) {
+    toWrite = [...toWrite]
+      .sort((a, b) => a.checkedAt.localeCompare(b.checkedAt))
+      .slice(toWrite.length - POST_METRICS_MAX_RECORDS);
+  }
+  fs.writeFileSync(filePath, JSON.stringify(toWrite, null, 2), 'utf-8');
 }
 
 function validate(snapshot: PostMetricSnapshot): void {

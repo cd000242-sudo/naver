@@ -100,13 +100,22 @@ function readAll(): PostFeatureMetadata[] {
   }
 }
 
+// ✅ [v2.10.36] 5000건 cap — postId 단위 idempotent라 누적이 느리지만 1년+ 운영 시 차단
+const FEATURE_FLAG_MAX_RECORDS = 5000;
 function writeAll(records: PostFeatureMetadata[]): void {
   const filePath = activeStorage.getFilePath();
   const dir = path.dirname(filePath);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
-  fs.writeFileSync(filePath, JSON.stringify(records, null, 2), 'utf-8');
+  // LRU trim: publishedAt 기준 최신 N개만 보존
+  let toWrite = records;
+  if (toWrite.length > FEATURE_FLAG_MAX_RECORDS) {
+    toWrite = [...toWrite]
+      .sort((a, b) => a.publishedAt.localeCompare(b.publishedAt))
+      .slice(toWrite.length - FEATURE_FLAG_MAX_RECORDS);
+  }
+  fs.writeFileSync(filePath, JSON.stringify(toWrite, null, 2), 'utf-8');
 }
 
 /**

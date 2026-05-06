@@ -90,7 +90,10 @@ import { PatternAnalyzer } from './learning/patternAnalyzer.js';
 import { PostAnalytics, type PostPerformance } from './analytics/postAnalytics.js';
 import { SmartScheduler, type ScheduledPost as SmartScheduledPost } from './scheduler/smartScheduler.js';
 import { KeywordAnalyzer, type KeywordCompetition, type BlueOceanKeyword } from './analytics/keywordAnalyzer.js';
-import { BestProductCollector } from './services/bestProductCollector.js';
+// ✅ [v2.10.36] BestProductCollector main.ts 미사용 — 다른 파일이 자체 인스턴스 생성
+//   기존: 부팅 시 클래스 평가 + new BestProductCollector() 인스턴스 생성 (사용처 0)
+//   수정: import 제거 → cold path 모듈 평가 회피
+//   import { BestProductCollector } from './services/bestProductCollector.js';
 import { InternalLinkManager, type InternalLink } from './content/internalLinkManager.js';
 import { ThumbnailGenerator } from './content/thumbnailGenerator.js';
 import { canConsume as canConsumeQuota, consume as consumeQuota, refund as refundQuota, getStatus as getQuotaStatus, resetAll as resetAllQuota, type QuotaLimits, type QuotaType } from './quotaManager.js';
@@ -1325,7 +1328,7 @@ smartScheduler.setPublishCallback(async (post) => {
   }
 });
 const keywordAnalyzer = new KeywordAnalyzer(); // ✅ 키워드 경쟁도 분석
-const bestProductCollector = new BestProductCollector(); // ✅ 베스트 상품 자동 수집
+// ✅ [v2.10.36] bestProductCollector 인스턴스 제거 (사용처 0)
 const internalLinkManager = new InternalLinkManager(); // ✅ 자동 내부링크 삽입
 const thumbnailGenerator = new ThumbnailGenerator(); // ✅ 썸네일 자동 생성
 const blogAccountManager = new BlogAccountManager(); // ✅ 다중 블로그 관리
