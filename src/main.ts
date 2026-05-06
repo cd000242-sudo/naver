@@ -2657,21 +2657,44 @@ ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading
       }
     }
 
-    const safeTitle = (postTitle || 'image').replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/g, '');
-    const safeHeading = (heading || 'image').replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/g, '');
-    const fileName = `${safeTitle}_${safeHeading}_${Date.now()}${ext}`;
+    // ✅ [v2.10.21] image:downloadAndSave 저장 경로를 다른 IPC와 통일 — 사용자 보고
+    //   '풀오토만 폴더 생성되고 URL 이미지 수집은 안 된다'
+    //   원인: 이 핸들러만 userData/images 폴더에 저장 → 사용자가 Downloads 폴더에서 못 찾음
+    //   조치: customImageSavePath(=Downloads/naver-blog-images) 우선 + Downloads 폴백 + 글제목 서브폴더
+    const osMod = await import('os');
+    const fallbackPath = path.join(osMod.homedir(), 'Downloads', 'naver-blog-images');
+    let basePath = fallbackPath;
+    try {
+      const config = await loadConfig();
+      const cfgPath = String((config as any).customImageSavePath || '').trim();
+      if (cfgPath) basePath = cfgPath;
+    } catch { /* fallback 사용 */ }
 
-    // ✅ [2026-02-02] 카테고리별 폴더에 저장
-    const imagesBasePath = path.join(app.getPath('userData'), 'images');
-    let imagesPath = imagesBasePath;
+    // 폴더명: postTitle 우선 → category → 'images'
+    const safeTitle = (postTitle || category || 'images')
+      .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')
+      .replace(/\s+/g, '_')
+      .replace(/\.+$/, '')
+      .replace(/_+$/, '')
+      .substring(0, 100)
+      .trim() || 'images';
+    const safeHeading = (heading || 'image')
+      .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')
+      .replace(/_+/g, '_')
+      .replace(/\.+$/g, '')
+      .substring(0, 50)
+      .trim() || 'image';
+    const fileName = `${safeHeading}-${Date.now()}${ext}`;
 
-    if (category && category.trim()) {
-      const safeCategory = category.replace(/[<>:"/\\|?*]/g, '_').trim();
-      imagesPath = path.join(imagesBasePath, safeCategory);
-      console.log(`[Main] 📂 카테고리 폴더에 이미지 저장: ${safeCategory}`);
+    let imagesPath = path.join(basePath, safeTitle);
+    try {
+      await fs.mkdir(imagesPath, { recursive: true });
+      console.log(`[Main] ✅ image:downloadAndSave 저장 경로: ${imagesPath}`);
+    } catch (mkErr: any) {
+      console.warn(`[Main] ⚠️ basePath mkdir 실패 (${basePath}) → Downloads 폴백: ${mkErr?.message}`);
+      imagesPath = path.join(fallbackPath, safeTitle);
+      await fs.mkdir(imagesPath, { recursive: true });
     }
-
-    await fs.mkdir(imagesPath, { recursive: true });
     const filePath = path.join(imagesPath, fileName);
 
     await fs.writeFile(filePath, buffer);
