@@ -592,25 +592,29 @@ try {
 `;
   sanitized = fallbackDefinitions + sanitized;
 
-  // ✅ [v2.10.32] production console.log/info/debug 제거 — 저사양 PC IPC 부하 50~80%↓
-  //   console.warn/error는 보존 (실제 디버깅에 필요)
-  //   환경변수 ECC_KEEP_CONSOLE_LOG=1로 디버깅 시 보존 가능
-  if (process.env.ECC_KEEP_CONSOLE_LOG !== '1') {
+  // ✅ [v2.10.38 HOTFIX] console.log drop을 기본 OFF로 변경 (opt-in)
+  //   사용자 보고: 'Uncaught SyntaxError: Unexpected token ;' 발생
+  //   원인 분석: 화살표 함수 단일 표현식 본문의 console.log
+  //     `let fn = (msg) => console.log(msg);` 가 정규식에 매칭되면
+  //     `=> /* console.log dropped */;` 형태가 되어 화살표 함수 본문이 빈 주석 → syntax error
+  //   조치: ECC_DROP_CONSOLE_LOG=1 환경변수 옵트인 시에만 적용 (기본 OFF)
+  //         + 정규식을 'line 시작 + 들여쓰기만 있는 단독 console.log' 형태로 보수화
+  if (process.env.ECC_DROP_CONSOLE_LOG === '1') {
     const beforeLen = sanitized.length;
     let droppedCount = 0;
-    // console.log(...) / console.info(...) / console.debug(...)를 void 0으로 치환
-    //   세미콜론 종결만 안전하게 매칭. 표현식 내부의 console.log는 건드리지 않음.
+    // ✅ 보수 정규식: 라인 시작(^ \s* indent) + console.log/info/debug + 한 줄 종결
+    //   화살표 함수 본문은 보통 같은 줄에 `=> console.log(...)` 형태라 라인 시작이 아님 → 안전
     sanitized = sanitized.replace(
-      /(^|[\s;{}])console\s*\.\s*(log|info|debug)\s*\([^)]*(?:\)[^()]*)*\)\s*;/gm,
-      (match, prefix) => {
+      /^([ \t]*)console\s*\.\s*(log|info|debug)\s*\([^()]*\)\s*;\s*$/gm,
+      (match, indent) => {
         droppedCount++;
-        return `${prefix}/* console.log dropped */;`;
+        return `${indent}/* console.log dropped */`;
       }
     );
     const afterLen = sanitized.length;
-    console.log(`📉 [v2.10.32] console.log/info/debug 제거: ${droppedCount}개 (${(beforeLen - afterLen) / 1024 | 0}KB↓)`);
+    console.log(`📉 [v2.10.38] console.log/info/debug 제거: ${droppedCount}개 (${(beforeLen - afterLen) / 1024 | 0}KB↓)`);
   } else {
-    console.log('📋 ECC_KEEP_CONSOLE_LOG=1 → console.log 보존');
+    console.log('📋 [v2.10.38] console.log drop OFF (기본). ECC_DROP_CONSOLE_LOG=1로 명시 활성화 가능');
   }
 
   await writeFile(
