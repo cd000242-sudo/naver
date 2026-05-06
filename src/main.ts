@@ -9299,53 +9299,63 @@ app.whenReady().then(async () => {
 
     // ✅ [2026-02-18] setName은 lock 앞에서 이미 호출됨 (single instance lock 충돌 방지)
 
-    // ✅ [v2.7.95] 앱 시작 시 자동 백업 — 1일 1회 (마지막 자동 백업 24시간 경과 시)
-    try {
-      const backupRoot = path.join(app.getPath('documents'), 'better-life-naver-backup');
-      let needsBackup = true;
-      if (fsSync.existsSync(backupRoot)) {
-        const list = fsSync.readdirSync(backupRoot)
-          .filter((d: string) => d.startsWith('backup-') && d.includes('-auto'));
-        if (list.length > 0) {
-          const newest = list
-            .map((d: string) => fsSync.statSync(path.join(backupRoot, d)).mtimeMs)
-            .sort((a: number, b: number) => b - a)[0];
-          if (Date.now() - newest < 24 * 60 * 60 * 1000) needsBackup = false;
+    // ✅ [v2.10.37] 부팅 직렬 게이트 → 병렬 (서로 독립인 3개 작업 Promise.allSettled)
+    //   기존: 자동 백업 → customImageSavePath → cleanupOldDumps 순차 → 부팅 시간 누적
+    //   수정: 병렬 실행 → 가장 느린 작업 시간만 소요 (보통 자동 백업이 가장 무거움)
+    //   안전: 모두 try/catch + 실패 무시 패턴이라 의존성 없음. allSettled로 어떤 결과든 진행.
+    await Promise.allSettled([
+      // 자동 백업 (1일 1회)
+      (async () => {
+        try {
+          const backupRoot = path.join(app.getPath('documents'), 'better-life-naver-backup');
+          let needsBackup = true;
+          if (fsSync.existsSync(backupRoot)) {
+            const list = fsSync.readdirSync(backupRoot)
+              .filter((d: string) => d.startsWith('backup-') && d.includes('-auto'));
+            if (list.length > 0) {
+              const newest = list
+                .map((d: string) => fsSync.statSync(path.join(backupRoot, d)).mtimeMs)
+                .sort((a: number, b: number) => b - a)[0];
+              if (Date.now() - newest < 24 * 60 * 60 * 1000) needsBackup = false;
+            }
+          }
+          if (needsBackup) {
+            await performDataBackup('auto');
+          }
+        } catch (e: any) {
+          debugLog(`[Startup] 자동 백업 실패 (무시): ${e?.message}`);
         }
-      }
-      if (needsBackup) {
-        await performDataBackup('auto');
-      }
-    } catch (e: any) {
-      debugLog(`[Startup] 자동 백업 실패 (무시): ${e?.message}`);
-    }
+      })(),
 
-    // ✅ [v2.7.89] 첫 실행 시 customImageSavePath 자동 세팅 — Downloads/naver-blog-images
-    //   사용자 보고: "이미지 폴더 선택이 기본적으로 ...naver-blog-images 여기로 되어있어야"
-    //   조치: 앱 시작 시 config 검사 → 비어있으면 default path 자동 영속화
-    try {
-      const { loadConfig, saveConfig } = await import('./configManager.js');
-      const cfg = await loadConfig();
-      const currentPath = String((cfg as any).customImageSavePath || '').trim();
-      if (!currentPath) {
-        const defaultPath = path.join(app.getPath('downloads'), 'naver-blog-images');
-        await saveConfig({ ...cfg, customImageSavePath: defaultPath } as any);
-        debugLog(`[Startup] 📁 이미지 저장 경로 기본값 자동 세팅: ${defaultPath}`);
-      }
-    } catch (e: any) {
-      debugLog(`[Startup] 이미지 경로 기본값 세팅 실패 (무시): ${e?.message}`);
-    }
+      // customImageSavePath 자동 세팅 (첫 실행)
+      (async () => {
+        try {
+          const { loadConfig, saveConfig } = await import('./configManager.js');
+          const cfg = await loadConfig();
+          const currentPath = String((cfg as any).customImageSavePath || '').trim();
+          if (!currentPath) {
+            const defaultPath = path.join(app.getPath('downloads'), 'naver-blog-images');
+            await saveConfig({ ...cfg, customImageSavePath: defaultPath } as any);
+            debugLog(`[Startup] 📁 이미지 저장 경로 기본값 자동 세팅: ${defaultPath}`);
+          }
+        } catch (e: any) {
+          debugLog(`[Startup] 이미지 경로 기본값 세팅 실패 (무시): ${e?.message}`);
+        }
+      })(),
 
-    // ✅ [v1.4.54] 앱 시작 시 오래된 디버그 덤프 정리 (디스크 과점유 방지)
-    try {
-      const { cleanupOldDumps } = await import('./debug/domDumpManager.js');
-      const result = await cleanupOldDumps();
-      if (result.deleted > 0) {
-        debugLog(`[DumpCleaner] 오래된 덤프 ${result.deleted}개 정리 완료 (남은 ${result.remainingCount}개, ${result.remainingSizeMB}MB)`);
-      }
-    } catch (cleanErr) {
-      debugLog(`[DumpCleaner] 정리 실패 (무시): ${(cleanErr as Error).message}`);
-    }
+      // 오래된 디버그 덤프 정리
+      (async () => {
+        try {
+          const { cleanupOldDumps } = await import('./debug/domDumpManager.js');
+          const result = await cleanupOldDumps();
+          if (result.deleted > 0) {
+            debugLog(`[DumpCleaner] 오래된 덤프 ${result.deleted}개 정리 완료 (남은 ${result.remainingCount}개, ${result.remainingSizeMB}MB)`);
+          }
+        } catch (cleanErr) {
+          debugLog(`[DumpCleaner] 정리 실패 (무시): ${(cleanErr as Error).message}`);
+        }
+      })(),
+    ]);
 
     // ✅ isPackaged 값을 실제 값으로 업데이트 (배포 환경 감지)
 

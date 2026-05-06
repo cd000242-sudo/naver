@@ -50,6 +50,8 @@ export class InternalLinkManager {
   }
 
   // ✅ 로컬 스토리지에 데이터 저장
+  // ✅ [v2.10.37] 5000건 cap — 1년+ 운영 시 단일 JSON 누적 차단
+  //   비파괴: publishedAt 기준 최신 5000건만 보존 (오래된 글의 내부링크 후보 제외)
   private saveToStorage(): void {
     try {
       const fs = require('fs');
@@ -57,8 +59,18 @@ export class InternalLinkManager {
       const { app } = require('electron');
 
       const dataPath = path.join(app.getPath('userData'), 'published-posts-links.json');
+      const INTERNAL_LINK_MAX_RECORDS = 5000;
+      let postsMap = this.publishedPosts;
+      if (postsMap.size > INTERNAL_LINK_MAX_RECORDS) {
+        const sorted = Array.from(postsMap.entries())
+          .sort((a, b) => new Date(b[1].publishedAt).getTime() - new Date(a[1].publishedAt).getTime())
+          .slice(0, INTERNAL_LINK_MAX_RECORDS);
+        postsMap = new Map(sorted);
+        // 메모리도 동기화 (다음 호출 시 cap 재적용 회피)
+        this.publishedPosts = postsMap;
+      }
       const data = {
-        posts: Object.fromEntries(this.publishedPosts),
+        posts: Object.fromEntries(postsMap),
         lastSaved: new Date().toISOString(),
       };
       fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
