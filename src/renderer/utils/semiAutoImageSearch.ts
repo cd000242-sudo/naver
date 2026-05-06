@@ -12,6 +12,12 @@
 
 import { isShoppingConnectModeActive } from './shoppingConnectUtils.js';
 
+// ✅ [v2.10.25] copy-static.mjs가 모든 모듈을 단일 renderer.js에 인라인하므로
+//   글로벌 이름(declare function)으로 직접 호출 가능. window 우회는 const 인라인된 함수에 안 닿음.
+declare function displayGeneratedImages(images: any[]): void;
+declare function updatePromptItemsWithImages(images: any[]): void;
+declare function updateReserveImagesThumbnails(): void;
+
 // ─── 상수 ─────────────────────────────────────────────
 
 const CHECKBOX_ID = 'semi-auto-collect-images-on-generate';
@@ -229,10 +235,9 @@ export async function runAutoImageSearch(
         }
         try { syncFn(); } catch { /* ignore */ }
 
-        // ✅ [v2.10.24] UI 갱신 자동 호출 — runAutoImageSearch가 호출되는 모든 caller(풀오토/반자동/연속/다계정)
-        //   에서 동일하게 UI 반영되도록 보장. 이전엔 caller가 안 호출하면 화면에 표시 안 됨.
+        // ✅ [v2.10.25] UI 갱신을 글로벌 이름으로 직접 호출 (v2.10.24 window 우회는 const 인라인 함수에
+        //   닿지 않아 항상 false였음). copy-static.mjs가 단일 renderer.js로 인라인하므로 직접 호출 가능.
         try {
-            const w = window as any;
             const collectedForUI: any[] = [];
             for (const heading of headings) {
                 const imgs = ImageManager.getImages(heading);
@@ -242,11 +247,11 @@ export async function runAutoImageSearch(
                 }
             }
             if (collectedForUI.length > 0) {
-                w.generatedImages = collectedForUI;
-                w.imageManagementGeneratedImages = collectedForUI;
-                if (typeof w.displayGeneratedImages === 'function') w.displayGeneratedImages(collectedForUI);
-                if (typeof w.updatePromptItemsWithImages === 'function') w.updatePromptItemsWithImages(collectedForUI);
-                if (typeof w.updateReserveImagesThumbnails === 'function') w.updateReserveImagesThumbnails();
+                (window as any).generatedImages = collectedForUI;
+                (window as any).imageManagementGeneratedImages = collectedForUI;
+                try { displayGeneratedImages(collectedForUI); } catch (e: any) { console.warn(`${LOG_PREFIX} displayGeneratedImages 실패: ${e?.message}`); }
+                try { updatePromptItemsWithImages(collectedForUI); } catch (e: any) { console.warn(`${LOG_PREFIX} updatePromptItemsWithImages 실패: ${e?.message}`); }
+                try { updateReserveImagesThumbnails(); } catch (e: any) { console.warn(`${LOG_PREFIX} updateReserveImagesThumbnails 실패: ${e?.message}`); }
                 console.log(`${LOG_PREFIX} ✅ UI 갱신: ${collectedForUI.length}개 이미지 그리드/프롬프트 카드 반영`);
             }
         } catch (uiErr: any) {
