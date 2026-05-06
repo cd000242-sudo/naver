@@ -592,32 +592,35 @@ try {
 `;
   sanitized = fallbackDefinitions + sanitized;
 
-  // ✅ [v2.10.39] console.log drop 효과 복원 — 삭제가 아니라 라인 주석화로 변경
-  //   v2.10.32~37 효과 (1,035개 IPC 부하 차단) 그대로 살리되 syntax error 절대 발생 불가능.
-  //   기본 ON. ECC_KEEP_CONSOLE_LOG=1로만 옵트아웃 가능 (디버깅 시).
+  // ✅ [v2.10.40] console.log drop 효과 100% 복원 — balanced parens 매칭 추가
+  //   v2.10.39 보수 정규식은 833개만 매칭 (인자에 괄호 있는 console.log 누락)
+  //   v2.10.40: 중첩 괄호 1~2 레벨 지원 → v2.10.32 1,035개 수준 복원
+  //   여전히 라인 시작 + 들여쓰기만 매칭이라 화살표 함수 본문은 절대 매칭 안 됨 (syntax 안전)
   //
-  //   원리: 코드를 삭제하지 않고 line 시작에 `// ` prefix만 추가.
-  //     - `console.log('hi');` → `// console.log('hi');`  (실행 0, 코드 보존)
-  //     - 화살표 함수 본문 `=> console.log(msg);` 는 라인 시작이 아니라 절대 매칭 안 됨
-  //     - 매칭된 라인은 라인 전체가 주석화되어 syntax 깨질 가능성 0
-  //   효과: console.log 호출 0 → IPC 부하 50~80%↓ (v2.10.32와 동일)
+  //   기본 ON. ECC_KEEP_CONSOLE_LOG=1로만 옵트아웃 가능.
   if (process.env.ECC_KEEP_CONSOLE_LOG !== '1') {
     let commentedCount = 0;
-    // ✅ 보수 정규식 + 라인 주석화
-    //   ^([ \t]*) — 라인 시작 + 들여쓰기만 (다른 코드 없음)
-    //   (console\.(?:log|info|debug)\s*\([^()]*\)\s*;) — 단독 console.log 호출 라인
-    //   \s*$ — 라인 끝까지 (다른 코드 없음)
-    //   치환: indent + // + 원본
-    sanitized = sanitized.replace(
-      /^([ \t]*)(console\s*\.\s*(?:log|info|debug)\s*\([^()]*\)\s*;\s*)$/gm,
-      (match, indent, body) => {
-        commentedCount++;
-        return `${indent}// ${body}`;
-      }
-    );
-    console.log(`📉 [v2.10.39] console.log/info/debug 라인 주석화: ${commentedCount}개 (실행 0, 코드 보존, syntax 안전)`);
+    // ✅ balanced parens 정규식
+    //   ^([ \t]*) — 라인 시작 + 들여쓰기 (다른 코드 없음, 화살표 본문 회피)
+    //   console\.(log|info|debug)\s*
+    //   \( ... \) — 인자 부분, 1~2 레벨 중첩 괄호 지원
+    //     (?:                     — 비캡처 그룹 반복
+    //       [^()'"`]              — 일반 문자(괄호/따옴표 제외)
+    //       | '(?:[^'\\]|\\.)*'   — 작은따옴표 문자열
+    //       | "(?:[^"\\]|\\.)*"   — 큰따옴표 문자열
+    //       | `(?:[^`\\]|\\.)*`   — 백틱 문자열 (간이; 중첩 ${} 미지원)
+    //       | \([^()]*\)          — 1단계 중첩 괄호 (e.g. err.toString())
+    //     )*
+    //   \s*;\s*(?:\/\/.*)?$       — 세미콜론 + 선택적 라인 코멘트 + 라인 끝
+    const consoleLogRegex = /^([ \t]*)(console\s*\.\s*(?:log|info|debug)\s*\((?:[^()'"`]|'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*`|\([^()]*\))*\)\s*;)\s*(\/\/.*)?$/gm;
+    sanitized = sanitized.replace(consoleLogRegex, (match, indent, body, trailingComment) => {
+      commentedCount++;
+      const tail = trailingComment ? ` ${trailingComment}` : '';
+      return `${indent}// ${body}${tail}`;
+    });
+    console.log(`📉 [v2.10.40] console.log/info/debug 라인 주석화: ${commentedCount}개 (실행 0, 코드 보존, syntax 안전)`);
   } else {
-    console.log('📋 [v2.10.39] ECC_KEEP_CONSOLE_LOG=1 → console.log 보존');
+    console.log('📋 [v2.10.40] ECC_KEEP_CONSOLE_LOG=1 → console.log 보존');
   }
 
   await writeFile(
