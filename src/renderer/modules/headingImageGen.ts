@@ -227,7 +227,10 @@ export function initHeadingImageGeneration(): void {
         const provider = (selectedBtn?.dataset.source || 'nano-banana-pro') as 'nano-banana-pro' | 'prodia' | 'stability' | 'deepinfra' | 'falai' | 'pollinations';
 
         // ✅ [2026-03-03 FIX v2] 옵션 A+B 강화: imagePrompt 영문/한국어/없음 모두 처리
-        const itemsWithPrompts = await Promise.all(headingsToGenerate.map(async (h: any) => {
+        // ✅ [v2.10.33] 무제한 Promise.all → batch=3 (외부 AI 번역 호출 동시성 제한)
+        //   기존: 30개 헤딩 × generateEnglishPromptForHeading 동시 호출 → API rate limit 위험 + 메모리
+        //   수정: 3개씩 동시 + 청크 간 순차 (인덱스/순서 보존)
+        const buildItemForHeading = async (h: any) => {
           const existingImagePrompt = h.imagePrompt?.trim();
           const titleTrimmed = h.title?.trim();
           const isPromptDifferentFromTitle = existingImagePrompt && existingImagePrompt !== titleTrimmed;
@@ -254,7 +257,17 @@ export function initHeadingImageGeneration(): void {
             referenceImagePath: h.referenceImagePath, // ✅ 참조 이미지 경로 전달
             referenceImageUrl: h.referenceImageUrl,   // ✅ 참조 이미지 URL 전달
           };
-        }));
+        };
+        const PROMPT_BATCH = 3;
+        const itemsWithPrompts: any[] = new Array(headingsToGenerate.length);
+        for (let s = 0; s < headingsToGenerate.length; s += PROMPT_BATCH) {
+          const e = Math.min(s + PROMPT_BATCH, headingsToGenerate.length);
+          const tasks: Array<Promise<void>> = [];
+          for (let i = s; i < e; i++) {
+            tasks.push(buildItemForHeading(headingsToGenerate[i]).then((r) => { itemsWithPrompts[i] = r; }));
+          }
+          await Promise.all(tasks);
+        }
 
         const result = await generateImagesWithCostSafety({
           provider,
@@ -340,14 +353,22 @@ export function initHeadingImageGeneration(): void {
         appendLog(`🔄 ${headings.length}개 소제목의 영어 프롬프트를 새로 생성합니다...`, 'images-log-output');
 
         // ✅ [2026-03-03 FIX] AI 기반 프롬프트 재생성 — 본문 맥락 전달로 품질 향상
-        const refreshedHeadings = await Promise.all(headings.map(async (h: any) => {
+        // ✅ [v2.10.33] 무제한 Promise.all → batch=3 (rate limit + 메모리 보호)
+        const refreshOne = async (h: any) => {
           const title = String(h.title || h.text || (typeof h === 'string' ? h : '')).trim();
           const aiPrompt = await generateEnglishPromptForHeading(title || 'Abstract Subject', undefined, undefined, h.content);
-          return {
-            title: title || '소제목',
-            prompt: aiPrompt
-          };
-        }));
+          return { title: title || '소제목', prompt: aiPrompt };
+        };
+        const REFRESH_BATCH = 3;
+        const refreshedHeadings: any[] = new Array(headings.length);
+        for (let s = 0; s < headings.length; s += REFRESH_BATCH) {
+          const e = Math.min(s + REFRESH_BATCH, headings.length);
+          const tasks: Array<Promise<void>> = [];
+          for (let i = s; i < e; i++) {
+            tasks.push(refreshOne(headings[i]).then((r) => { refreshedHeadings[i] = r; }));
+          }
+          await Promise.all(tasks);
+        }
 
         displayImageHeadingsWithPrompts(refreshedHeadings);
 
@@ -4263,20 +4284,36 @@ async function showFolderSelectionForHeading(
     refreshBtn.textContent = '🔄 새로고침';
   });
 
-  // ✅ [v2.10.19] 자동 폴링 — 5초마다 폴더 변동 감지 + 자동 갱신
+  // ✅ [v2.10.19] 자동 폴링 — 폴더 변동 감지 + 자동 갱신
   //   사용자 보고: '새로고침 안해도 자동으로 되어야 되지 않냐'
-  //   조치: 모달 열려있는 동안 5초 간격으로 readDirWithStats 호출 → 변동 시 자동 리렌더
-  //   부담 없음 (282개 폴더 stat은 5~10ms)
+  // ✅ [v2.10.33] 5s → 15s + visibilitychange 백그라운드 정지
+  //   기존: 5초 폴링은 SSD에선 무관하지만 HDD 4GB 노트북에서 282 stat = 100~500ms 메인 스레드 점유
+  //   변경: 15초로 완화 + 윈도우 비활성 시 정지로 백그라운드 부하 0
+  let pollPaused = false;
+  const onVisibilityChange = () => {
+    pollPaused = document.hidden;
+    if (!pollPaused && document.body.contains(modal)) {
+      // 가시화될 때 즉시 1회 갱신 (5초 지연 회피)
+      refreshFolders(true).catch(() => { /* skip */ });
+    }
+  };
+  document.addEventListener('visibilitychange', onVisibilityChange);
+
   const pollInterval = setInterval(() => {
     if (!document.body.contains(modal)) {
       clearInterval(pollInterval);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       return;
     }
+    if (pollPaused) return; // 백그라운드 시 부하 0
     refreshFolders(true).catch(() => { /* skip */ });
-  }, 5000);
+  }, 15000);
 
   // 모달 닫힘 시 폴링 정리 (DOM 이벤트 + MutationObserver 둘 다)
-  const stopPoll = () => clearInterval(pollInterval);
+  const stopPoll = () => {
+    clearInterval(pollInterval);
+    document.removeEventListener('visibilitychange', onVisibilityChange);
+  };
   modal.querySelector('#close-folder-modal')?.addEventListener('click', stopPoll);
   modal.querySelector('#cancel-folder-modal')?.addEventListener('click', stopPoll);
   modal.addEventListener('click', (e) => { if (e.target === modal) stopPoll(); });

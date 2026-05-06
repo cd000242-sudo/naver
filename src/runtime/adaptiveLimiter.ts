@@ -69,11 +69,15 @@ class AdaptiveLimiter {
   }
 
   // Watchdog 콜백 — lag 감지 시 호출
+  // ✅ [v2.10.33] 임계값 보강 — 저사양 PC freeze 조기 차단
+  //   기존: FREEZE 5초, SEVERE 1초 (4GB 노트북에서 freeze 7초 도달해야 트리거 → 사용자 체감 늦음)
+  //   변경: FREEZE 3초, SEVERE 1초 (200ms 더 빠르게 보수적 다운)
   onLagDetected(lagMs: number): void {
     const now = Date.now();
     this.healthySinceMs = now;
 
-    if (lagMs >= 5000) {
+    if (lagMs >= 3000) {
+      // FREEZE: max를 절반으로 즉시 다운 (이전 5000ms → 3000ms)
       const newMax = Math.max(HARD_MIN, Math.floor(this.max / 2));
       if (newMax !== this.max) {
         // eslint-disable-next-line no-console
