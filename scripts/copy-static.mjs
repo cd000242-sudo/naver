@@ -592,35 +592,31 @@ try {
 `;
   sanitized = fallbackDefinitions + sanitized;
 
-  // ✅ [v2.10.40] console.log drop 효과 100% 복원 — balanced parens 매칭 추가
-  //   v2.10.39 보수 정규식은 833개만 매칭 (인자에 괄호 있는 console.log 누락)
-  //   v2.10.40: 중첩 괄호 1~2 레벨 지원 → v2.10.32 1,035개 수준 복원
-  //   여전히 라인 시작 + 들여쓰기만 매칭이라 화살표 함수 본문은 절대 매칭 안 됨 (syntax 안전)
+  // ✅ [v2.10.41] 정규식 기반 console.log drop 폐기 → no-op 교체로 전환
+  //   v2.10.32~40 정규식은 다양한 syntax 케이스를 못 잡음 (사용자 보고: SyntaxError 반복)
+  //   근본 해결: 코드를 한 글자도 안 건드리고, 렌더러 시작 시 console 메서드를 no-op으로 교체
   //
-  //   기본 ON. ECC_KEEP_CONSOLE_LOG=1로만 옵트아웃 가능.
+  //   원리: 빈 함수로 console.log/info/debug 덮어쓰기 (warn/error는 보존)
+  //     - 코드 원본 100% 보존 → syntax error 발생 자체가 불가능
+  //     - 모든 console.log 호출(어디 위치든) 자동으로 no-op 실행 → IPC 부하 0
+  //     - 정규식이 못 잡던 화살표 본문, 중첩 호출, 객체 인자 등도 100% 차단
+  //
+  //   기본 ON. ECC_KEEP_CONSOLE_LOG=1로 옵트아웃 (디버깅 시).
   if (process.env.ECC_KEEP_CONSOLE_LOG !== '1') {
-    let commentedCount = 0;
-    // ✅ balanced parens 정규식
-    //   ^([ \t]*) — 라인 시작 + 들여쓰기 (다른 코드 없음, 화살표 본문 회피)
-    //   console\.(log|info|debug)\s*
-    //   \( ... \) — 인자 부분, 1~2 레벨 중첩 괄호 지원
-    //     (?:                     — 비캡처 그룹 반복
-    //       [^()'"`]              — 일반 문자(괄호/따옴표 제외)
-    //       | '(?:[^'\\]|\\.)*'   — 작은따옴표 문자열
-    //       | "(?:[^"\\]|\\.)*"   — 큰따옴표 문자열
-    //       | `(?:[^`\\]|\\.)*`   — 백틱 문자열 (간이; 중첩 ${} 미지원)
-    //       | \([^()]*\)          — 1단계 중첩 괄호 (e.g. err.toString())
-    //     )*
-    //   \s*;\s*(?:\/\/.*)?$       — 세미콜론 + 선택적 라인 코멘트 + 라인 끝
-    const consoleLogRegex = /^([ \t]*)(console\s*\.\s*(?:log|info|debug)\s*\((?:[^()'"`]|'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*`|\([^()]*\))*\)\s*;)\s*(\/\/.*)?$/gm;
-    sanitized = sanitized.replace(consoleLogRegex, (match, indent, body, trailingComment) => {
-      commentedCount++;
-      const tail = trailingComment ? ` ${trailingComment}` : '';
-      return `${indent}// ${body}${tail}`;
-    });
-    console.log(`📉 [v2.10.40] console.log/info/debug 라인 주석화: ${commentedCount}개 (실행 0, 코드 보존, syntax 안전)`);
+    const noopPrelude = `// ✅ [v2.10.41] console.log/info/debug no-op 교체 — IPC 부하 차단 (warn/error는 보존)
+(function(){
+  if (typeof window !== 'undefined' && !window.__ECC_KEEP_CONSOLE_LOG) {
+    var _noop = function(){};
+    try { console.log = _noop; } catch(e) {}
+    try { console.info = _noop; } catch(e) {}
+    try { console.debug = _noop; } catch(e) {}
+  }
+})();
+`;
+    sanitized = noopPrelude + sanitized;
+    console.log('📉 [v2.10.41] console.log/info/debug no-op 교체 (코드 무수정, syntax 영구 안전)');
   } else {
-    console.log('📋 [v2.10.40] ECC_KEEP_CONSOLE_LOG=1 → console.log 보존');
+    console.log('📋 [v2.10.41] ECC_KEEP_CONSOLE_LOG=1 → console.log 보존');
   }
 
   await writeFile(
