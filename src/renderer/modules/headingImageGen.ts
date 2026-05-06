@@ -2147,6 +2147,36 @@ export function initHeadingImageGeneration(): void {
           }
         }
         try { syncFn(); } catch { /* ignore */ }
+
+        // ✅ [v2.10.23] URL 이미지 수집 후 UI 갱신 추가 — 사용자 보고 '풀오토만 폴더 보이고 URL 수집 안 보임'
+        //   원인: 디스크 저장은 정상이지만 generatedImages 배열 + UI 그리드 + 프롬프트 카드가 갱신 안 됨
+        //   조치: 풀오토/AI 자동 수집과 동일하게 displayGeneratedImages + updatePromptItemsWithImages + 글로벌 배열 갱신
+        try {
+          const collectedForUI: any[] = [];
+          for (let i = 0; i < allImages.length; i++) {
+            const heading = headingTitles[i] || `🔗 URL 이미지 ${i + 1}`;
+            const imgs = ImageManager.getImages(heading);
+            if (imgs && imgs.length > 0) {
+              const last = imgs[imgs.length - 1];
+              collectedForUI.push({
+                ...last,
+                heading,
+                headingIndex: i,
+              });
+            }
+          }
+          if (collectedForUI.length > 0) {
+            (window as any).generatedImages = collectedForUI;
+            (window as any).imageManagementGeneratedImages = collectedForUI;
+            try { displayGeneratedImages(collectedForUI); } catch { /* skip */ }
+            try { updatePromptItemsWithImages(collectedForUI); } catch { /* skip */ }
+            try { updateReserveImagesThumbnails(); } catch { /* skip */ }
+            console.log(`[URL Collect] ✅ UI 갱신: ${collectedForUI.length}개 이미지 그리드/프롬프트 카드 반영`);
+          }
+        } catch (uiErr: any) {
+          console.warn('[URL Collect] UI 갱신 실패 (디스크 저장은 정상):', uiErr?.message);
+        }
+
         appendLog(`✅ URL 이미지 수집 완료: ${savedCount}/${allImages.length}개 폴더 저장 + 배치`, 'images-log-output');
         if (savedCount > 0) {
           appendLog(`📁 저장 위치: Downloads/naver-blog-images/${postTitle}/`, 'images-log-output');
