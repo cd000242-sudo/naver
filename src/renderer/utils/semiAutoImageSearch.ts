@@ -228,6 +228,30 @@ export async function runAutoImageSearch(
             appendLog(`📁 저장 위치: Downloads/naver-blog-images/${postTitle}/`);
         }
         try { syncFn(); } catch { /* ignore */ }
+
+        // ✅ [v2.10.24] UI 갱신 자동 호출 — runAutoImageSearch가 호출되는 모든 caller(풀오토/반자동/연속/다계정)
+        //   에서 동일하게 UI 반영되도록 보장. 이전엔 caller가 안 호출하면 화면에 표시 안 됨.
+        try {
+            const w = window as any;
+            const collectedForUI: any[] = [];
+            for (const heading of headings) {
+                const imgs = ImageManager.getImages(heading);
+                if (imgs && imgs.length > 0) {
+                    const last = imgs[imgs.length - 1];
+                    collectedForUI.push({ ...last, heading });
+                }
+            }
+            if (collectedForUI.length > 0) {
+                w.generatedImages = collectedForUI;
+                w.imageManagementGeneratedImages = collectedForUI;
+                if (typeof w.displayGeneratedImages === 'function') w.displayGeneratedImages(collectedForUI);
+                if (typeof w.updatePromptItemsWithImages === 'function') w.updatePromptItemsWithImages(collectedForUI);
+                if (typeof w.updateReserveImagesThumbnails === 'function') w.updateReserveImagesThumbnails();
+                console.log(`${LOG_PREFIX} ✅ UI 갱신: ${collectedForUI.length}개 이미지 그리드/프롬프트 카드 반영`);
+            }
+        } catch (uiErr: any) {
+            console.warn(`${LOG_PREFIX} ⚠️ UI 갱신 실패 (디스크 저장은 정상): ${uiErr?.message}`);
+        }
     } else {
         appendLog('ℹ️ 모든 소제목에 이미 이미지가 있어 추가 배치 없음');
     }
