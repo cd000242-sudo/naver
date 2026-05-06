@@ -7041,24 +7041,20 @@ function validateHomefeedContent(content: StructuredContent, source: ContentSour
  * - 사양과 무관: AI 처리는 서버에서 수행됨
  */
 function getTimeoutMs(minChars: number, retryAttempt: number = 0): number {
-  // ✅ AI 글 생성은 서버에서 처리되므로 컴퓨터 사양과 무관!
-  // 하지만 네트워크 환경은 사용자마다 다름:
-  // - DNS 해석: 0.5~5초 (첫 연결 시)
-  // - TLS 핸드쉐이크: 0.3~3초
-  // - API 처리: 10~120초 (글 분량에 따라)
-  // - 응답 전송: 1~10초 (글 분량에 따라)
-
-  // ✅ 배포 환경 안정성 강화 (타임아웃 증가 - 저사양/느린 네트워크 대응)
+  // ✅ [v2.10.20] 타임아웃 공격적 단축 — 사용자 보고 '글 생성 10분 hang'
+  //   기존: 1500~1800자 글 = 3분 + 재시도 +60% → 누적 10분 가능
+  //   변경: 1500~1800자 = 90초, 재시도 +10% → 빠르게 다음 모델로 폴백
+  //   네트워크 정상 시 AI 응답은 30~60초. 90초 안에 응답 없으면 비정상 → 즉시 폴백.
   let baseTimeout: number;
-  if (minChars < 1000) baseTimeout = 120000;       // 제목만: 2분
-  else if (minChars < 3000) baseTimeout = 180000;  // 짧은 글: 3분
-  else if (minChars < 5000) baseTimeout = 240000;  // 중간 글: 4분
-  else if (minChars < 10000) baseTimeout = 240000; // 긴 글: 4분
-  else baseTimeout = 300000;                       // 매우 긴 글: 5분
+  if (minChars < 1000) baseTimeout = 60000;        // 제목만: 1분
+  else if (minChars < 3000) baseTimeout = 90000;   // 짧은 글: 90초 (1500~1800자 권장)
+  else if (minChars < 5000) baseTimeout = 120000;  // 중간 글: 2분
+  else if (minChars < 10000) baseTimeout = 150000; // 긴 글: 2.5분
+  else baseTimeout = 180000;                       // 매우 긴 글: 3분
 
-  // ✅ 재시도 시 타임아웃 약간 증가 (빠른 폴백 우선)
-  // 1회 재시도: +20%, 2회: +40%, 3회 이상: +60%
-  const multiplier = 1 + (Math.min(retryAttempt, 3) * 0.2);
+  // ✅ [v2.10.20] 재시도 시 타임아웃 거의 동일 (이전 +20%/+40%/+60% → +5%/+10%)
+  //   재시도 횟수 자체도 호출자가 1회로 축소됨
+  const multiplier = 1 + (Math.min(retryAttempt, 2) * 0.05);
   return Math.floor(baseTimeout * multiplier);
 }
 
