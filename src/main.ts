@@ -3351,8 +3351,10 @@ ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ u
       return '.jpg'; // 기본값
     };
 
-    // ✅ 병렬 다운로드 (Promise.all)
-    const downloadPromises = images.map(async (img, i) => {
+    // ✅ [v2.10.32] 무제한 Promise.all → batch=4 청크 (저사양 PC RSS 스파이크 차단)
+    //   기존: 30개 헤딩 × 5MB = 750MB 동시 다운로드 가능 → 메모리 압박
+    //   수정: 4개씩 순차 batch. 인덱스 정합성 그대로 보존(원래 인덱스로 결과 매핑).
+    const downloadOne = async (img: any, i: number): Promise<{ filePath: string; heading: string } | null> => {
       const result = await downloadImage(img.url);
 
       if (!result) {
@@ -3374,9 +3376,20 @@ ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ u
         console.error(`[Main] ❌ 이미지 ${i + 1} 파일 저장 실패:`, writeError);
         return null;
       }
-    });
+    };
 
-    const results = await Promise.all(downloadPromises);
+    const BATCH = 4; // 4개씩 동시 다운로드 (Sharp 메모리 + 네트워크 부하 균형점)
+    const results: Array<{ filePath: string; heading: string } | null> = new Array(images.length).fill(null);
+    for (let start = 0; start < images.length; start += BATCH) {
+      const end = Math.min(start + BATCH, images.length);
+      const chunkPromises: Array<Promise<void>> = [];
+      for (let i = start; i < end; i++) {
+        chunkPromises.push(
+          downloadOne(images[i], i).then((r) => { results[i] = r; })
+        );
+      }
+      await Promise.all(chunkPromises); // 청크 단위 동시 + 청크 간 순차
+    }
 
     // ✅ [2026-04-18 FIX] 인덱스 정합성 보존 — 실패한 슬롯을 null로 유지
     //    이전 버그: 실패 슬롯을 filter로 제거 → savedImages[idx]가 원래 idx의
