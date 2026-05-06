@@ -96,28 +96,38 @@ export async function waitForElement(
     }
   }
 
-  // 없으면 race로 대기
-  const promises = selectors.map((sel, i) =>
-    context
-      .waitForSelector(sel, { timeout, visible })
-      .then((el) => {
-        if (el && i > 0) {
-          console.log(`[Selector] "${key}" — waitFor fallback #${i} 성공: ${sel}`);
-        }
-        return el;
-      })
-      .catch(() => null),
-  );
-
-  const results = await Promise.allSettled(promises);
-  for (const result of results) {
-    if (result.status === 'fulfilled' && result.value) {
-      return result.value;
+  // ✅ [v2.10.29] Promise.allSettled → race 패턴: 첫 매치 즉시 반환, 미해결 promise GC.
+  //   기존: 모든 셀렉터가 timeout(10s)까지 대기 → CDP 메시지 큐 부하.
+  //   변경: 첫 셀렉터 매치 즉시 resolve, 모두 실패하면 null 반환 (ES2020 호환 — Promise.any 미사용).
+  return await new Promise<any>((resolve) => {
+    let pending = selectors.length;
+    let resolved = false;
+    if (pending === 0) {
+      resolve(null);
+      return;
     }
-  }
-
-  reportFailure(key, selectors, 'waitForElement');
-  return null;
+    selectors.forEach((sel, i) => {
+      context
+        .waitForSelector(sel, { timeout, visible })
+        .then((el) => {
+          if (resolved) return;
+          if (el) {
+            if (i > 0) console.log(`[Selector] "${key}" — waitFor fallback #${i} 성공: ${sel}`);
+            resolved = true;
+            resolve(el);
+          } else if (--pending === 0 && !resolved) {
+            reportFailure(key, selectors, 'waitForElement');
+            resolve(null);
+          }
+        })
+        .catch(() => {
+          if (--pending === 0 && !resolved) {
+            reportFailure(key, selectors, 'waitForElement');
+            resolve(null);
+          }
+        });
+    });
+  });
 }
 
 /**

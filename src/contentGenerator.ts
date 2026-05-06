@@ -7384,16 +7384,25 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         const streamResult = await Promise.race([streamPromise, timeoutPromise]);
         let text = '';
 
-        // ✅ 스트림 전체 수신 타임아웃 (3분) - 무한 대기 방지
+        // ✅ [v2.10.29] 스트림 전체 수신 타임아웃 (3분) + signal abort 시 즉시 break
+        //   Google generative-ai SDK가 signal 미지원이므로 for-await 안에서 직접 체크.
         const recvPromise = (async () => {
           for await (const chunk of streamResult.stream) {
+            if (options.signal?.aborted) break; // 사용자 취소 즉시 루프 종료
             text += chunk.text();
           }
         })();
 
         await Promise.race([
           recvPromise,
-          new Promise((_, reject) => setTimeout(() => reject(new Error('⏱️ 생성 시간 초과(3분)')), 180000))
+          new Promise((_, reject) => setTimeout(() => reject(new Error('⏱️ 생성 시간 초과(3분)')), 180000)),
+          new Promise((_, reject) => {
+            if (options.signal) {
+              const onAbort = () => reject(new Error('사용자가 콘텐츠 생성을 취소했습니다.'));
+              if (options.signal.aborted) onAbort();
+              else options.signal.addEventListener('abort', onAbort, { once: true });
+            }
+          })
         ]);
 
         if (text && text.trim()) {
@@ -7822,7 +7831,7 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
     console.error('[Perplexity] ❌ API 키를 찾을 수 없습니다. config와 env 모두 비어있음.');
     throw new Error('Perplexity API 키가 설정되지 않았습니다. 환경설정(⚙️)에서 Perplexity API 키를 입력해주세요. (Perplexity 웹 구독과 API 키는 별도입니다. https://www.perplexity.ai/settings/api 에서 API 키를 발급받으세요)');
   }
-  console.log(`[Perplexity] ✅ API 키 확인됨: ${apiKey.substring(0, 8)}... (길이: ${apiKey.length})`);
+  console.log(`[Perplexity] ✅ API 키 확인됨: *** (길이: ${apiKey.length})`);
 
 
   // 2. 모델 및 타임아웃 설정

@@ -1,6 +1,6 @@
 {
   "name": "better-life-naver",
-  "version": "2.10.28",
+  "version": "2.10.29",
   "description": "Better Life Naver - 네이버 블로그 자동화 앱으로 더 나은 삶을 만들어가세요. Electron, Node.js, TypeScript, and Puppeteer.",
   "author": "Better Life Team",
   "main": "dist/main.js",
@@ -79,7 +79,6 @@
     "puppeteer-extra-plugin-stealth": "^2.11.2",
     "redis": "^4.6.0",
     "rss-parser": "^3.13.0",
-    "selenium-webdriver": "^4.15.0",
     "sharp": "^0.34.5",
     "xlsx": "^0.18.5"
   },
@@ -111,8 +110,18 @@
     "files": [
       "dist/**/*",
       "!dist/settings.json",
+      "!dist/**/*.tmp.js",
+      "!dist/renderer/_original_*.js",
+      "!dist/**/*.map",
       "package.json",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      "!node_modules/**/*.map",
+      "!node_modules/**/*.d.ts",
+      "!node_modules/**/test/**",
+      "!node_modules/**/tests/**",
+      "!node_modules/**/docs/**",
+      "!node_modules/**/example/**",
+      "!node_modules/**/examples/**"
     ],
     "asarUnpack": [
       "node_modules/puppeteer/**/*",

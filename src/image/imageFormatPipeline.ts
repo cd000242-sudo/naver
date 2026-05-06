@@ -195,8 +195,9 @@ export async function convertToNaverCompatible(
  */
 export async function stripExifMetadata(buffer: Buffer): Promise<Buffer> {
   try {
+    // ✅ [v2.10.29] withMetadata({}) 빈 객체는 sharp 0.33+에서 ICC도 제거. 명시 sRGB 유지.
     const stripped = await sharp(buffer)
-      .withMetadata({}) // ICC 프로필 기본값(sRGB) 유지, EXIF/IPTC/XMP 제거
+      .withMetadata({ icc: 'srgb' }) // ICC sRGB 명시 유지, EXIF/IPTC/XMP 제거
       .toColourspace('srgb')
       .toBuffer();
 
@@ -234,17 +235,16 @@ export async function validateImageDimensions(
 
     // 최대 크기 초과 시 리사이즈
     if (width > maxWidth) {
-      const resized = await sharp(buffer)
+      // ✅ [v2.10.29] toBuffer({ resolveWithObject: true })로 메타데이터 1회 디코드 절감
+      const { data: resized, info: resizedInfo } = await sharp(buffer)
         .resize({ width: maxWidth, withoutEnlargement: true })
-        .toBuffer();
-
-      const resizedMeta = await sharp(resized).metadata();
+        .toBuffer({ resolveWithObject: true });
 
       return {
         buffer: resized,
         dimensions: {
-          width: resizedMeta.width ?? maxWidth,
-          height: resizedMeta.height ?? 0,
+          width: resizedInfo.width ?? maxWidth,
+          height: resizedInfo.height ?? 0,
           wasResized: true,
           meetsMinimum,
         },

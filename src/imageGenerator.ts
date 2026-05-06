@@ -476,7 +476,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     const forceModelKey = 'gemini-3-1-flash'; // MODEL_MAP에서 gemini-2.5-flash-image로 매핑됨
     const modelLabel = '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)';
     console.log(`[이미지생성] 🍌 ${modelLabel}로 ${items.length}개 이미지 생성 시작...`);
-    console.log(`[ImageGenerator] Gemini API 키: ${apiKeys?.geminiApiKey ? apiKeys.geminiApiKey.substring(0, 10) + '...' : '미설정'}`);
+    console.log(`[ImageGenerator] Gemini API 키: ${apiKeys?.geminiApiKey ? `*** (길이: ${apiKeys.geminiApiKey.length})` : '미설정'}`);
 
     try {
       const nanoBananaImages = await generateWithNanoBananaPro(

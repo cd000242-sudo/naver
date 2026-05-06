@@ -410,7 +410,7 @@ let currentSessionId: string | null = null;
 
 export function setGeminiApiKey(apiKey: string): void {
   storedGeminiApiKey = apiKey;
-  console.log(`[NanoBananaPro] Gemini API 키 설정됨: ${apiKey.substring(0, 10)}...`);
+  console.log(`[NanoBananaPro] Gemini API 키 설정됨: *** (길이: ${apiKey.length})`);
 }
 
 /**
@@ -478,7 +478,7 @@ export async function generateWithNanoBananaPro(
 
   // 키 풀에서 첫 번째 사용 가능한 키 가져오기
   const apiKey = keyPool.getCurrentKey() || primaryApiKey;
-  console.log(`[NanoBananaPro] 🔑 키 풀: ${keyPool.getTotalCount()}개 키 등록, 현재 키: ${apiKey ? apiKey.substring(0, 10) + '...' : '미설정'}`);
+  console.log(`[NanoBananaPro] 🔑 키 풀: ${keyPool.getTotalCount()}개 키 등록, 현재 키: ${apiKey ? `*** (길이: ${apiKey.length})` : '미설정'}`);
 
   // ✅ [2026-02-03 FIX] 세션 ID 생성 및 AbortController 등록 (경쟁 조건 해결)
   const sessionId = `session-${Date.now()}-${Math.random().toString(36).substring(7)}`;
@@ -507,7 +507,7 @@ export async function generateWithNanoBananaPro(
     }
 
     console.log(`[NanoBananaPro] 🍌 총 ${items.length}개 이미지 생성 시작 (${mode} 모드)`);
-    console.log(`[NanoBananaPro] Gemini API 키: ${apiKey ? apiKey.substring(0, 10) + '...' : '미설정'}`);
+    console.log(`[NanoBananaPro] Gemini API 키: ${apiKey ? `*** (길이: ${apiKey.length})` : '미설정'}`);
 
     const configModule = await import('../configManager.js');
     const config = await configModule.loadConfig();

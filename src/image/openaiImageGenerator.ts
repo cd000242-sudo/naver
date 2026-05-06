@@ -58,7 +58,7 @@ export async function generateWithOpenAIImage(
         throw new Error('OpenAI API 키가 설정되지 않았습니다. 환경설정에서 OpenAI 이미지 API 키 또는 .env의 OPENAI_API_KEY를 입력해주세요.');
     }
 
-    console.log(`[OpenAI-Image] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${DEFAULT_MODEL}, 키 source: ${keySource}, 키 prefix: ${apiKey.substring(0, 7)}...)`);
+    console.log(`[OpenAI-Image] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${DEFAULT_MODEL}, 키 source: ${keySource}, 키 길이: ${apiKey.length})`);
 
     // ✅ [2026-03-03] 참조 이미지 사전 캐싱 (쇼핑커넥트 수집 이미지)
     let cachedReferenceBase64: string | null = null;
