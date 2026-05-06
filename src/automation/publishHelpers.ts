@@ -14,6 +14,39 @@ import {
 // PublishMode type from naverBlogAutomation
 type PublishMode = 'draft' | 'publish' | 'schedule';
 
+// ✅ [v2.10.31] 셀렉터 race 헬퍼 — 직렬 N×timeout 대신 race 패턴 (첫 매치 즉시 반환)
+//   기존: for-loop으로 N개 셀렉터 직렬 await → 최악 N×timeout 동안 메인 스레드 점유
+//   변경: Promise race 패턴 → 가장 빨리 매치되는 셀렉터 즉시 반환, 미해결은 GC
+async function findFirstMatchingSelector(
+  frame: Frame,
+  selectors: string[],
+  timeout: number,
+  visible: boolean = true,
+  onFound?: (selector: string, idx: number) => void
+): Promise<ElementHandle<Element> | null> {
+  return new Promise((resolve) => {
+    let pending = selectors.length;
+    let resolved = false;
+    if (pending === 0) { resolve(null); return; }
+    selectors.forEach((selector, i) => {
+      frame.waitForSelector(selector, { visible, timeout })
+        .then((btn) => {
+          if (resolved) return;
+          if (btn) {
+            if (onFound) onFound(selector, i);
+            resolved = true;
+            resolve(btn as ElementHandle<Element>);
+          } else if (--pending === 0 && !resolved) {
+            resolve(null);
+          }
+        })
+        .catch(() => {
+          if (--pending === 0 && !resolved) resolve(null);
+        });
+    });
+  });
+}
+
 // ── selectCategoryInPublishModal ──
 
 // ✅ [2026-02-19] 카테고리 자동 선택 — 스톨 방지 최적화 버전
@@ -1627,14 +1660,14 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
         'button[data-click-area="tpb.save"]',
       ];
 
-      let saveButton: ElementHandle<Element> | null = null;
-      for (const selector of saveButtonSelectors) {
-        saveButton = await frame.waitForSelector(selector, { visible: true, timeout: 3000 }).catch((error: any) => {
-          self.log(`⚠️ [저장 버튼 찾기] 실패 (${selector}): ${(error as Error).message}`);
-          return null;
-        });
-        if (saveButton) break;
-      }
+      // ✅ [v2.10.31] 직렬 3초×N → race 패턴 (최악 12초 → 3초)
+      const saveButton: ElementHandle<Element> | null = await findFirstMatchingSelector(
+        frame,
+        saveButtonSelectors,
+        3000,
+        true,
+        (sel, i) => self.log(`   ✅ 저장 버튼 발견: ${sel.substring(0, 60)}${i > 0 ? ` (fallback #${i})` : ''}`)
+      );
 
       if (!saveButton) {
         throw new Error('저장 버튼을 찾을 수 없습니다.');
@@ -1663,14 +1696,14 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
         '[data-testid="publish-button"]',
       ];
 
-      let publishButton: ElementHandle<Element> | null = null;
-      for (const selector of publishButtonSelectors) {
-        publishButton = await frame.waitForSelector(selector, { visible: true, timeout: 3000 }).catch(() => null);
-        if (publishButton) {
-          self.log(`   ✅ 발행 버튼 발견: ${selector.substring(0, 60)}`);
-          break;
-        }
-      }
+      // ✅ [v2.10.31] 직렬 3초×N → race 패턴
+      let publishButton: ElementHandle<Element> | null = await findFirstMatchingSelector(
+        frame,
+        publishButtonSelectors,
+        3000,
+        true,
+        (sel, i) => self.log(`   ✅ 발행 버튼 발견: ${sel.substring(0, 60)}${i > 0 ? ` (fallback #${i})` : ''}`)
+      );
 
       // ✅ [2026-02-17] 모든 셀렉터 실패 시 텍스트 기반 폴백
       if (!publishButton) {
@@ -1806,14 +1839,11 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
           'button.confirm_btn__WEaBq',
         ];
 
-        let confirmPublishButton: ElementHandle<Element> | null = null;
-        for (const selector of confirmPublishSelectors) {
-          confirmPublishButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null);
-          if (confirmPublishButton) {
-            self.log(`   ✅ 확인 버튼 발견: ${selector.substring(0, 60)}`);
-            break;
-          }
-        }
+        // ✅ [v2.10.31] 직렬 5초×6 = 최악 30초 → race 패턴 (첫 매치 즉시 반환, 최대 5초)
+        let confirmPublishButton: ElementHandle<Element> | null = await findFirstMatchingSelector(
+          frame, confirmPublishSelectors, 5000, true,
+          (sel, i) => self.log(`   ✅ 확인 버튼 발견: ${sel.substring(0, 60)}${i > 0 ? ` (fallback #${i})` : ''}`)
+        );
 
         // ✅ [2026-02-17] 모든 셀렉터 실패 시 텍스트 기반 폴백 (모달 내 '발행' 버튼)
         if (!confirmPublishButton) {
@@ -2012,11 +2042,10 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
               'button[data-click-area="tpb.save"]',
             ];
 
-            let saveButton: ElementHandle<Element> | null = null;
-            for (const selector of saveButtonSelectors) {
-              saveButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
-              if (saveButton) break;
-            }
+            // ✅ [v2.10.31] 직렬 5초×N → race 패턴
+            const saveButton: ElementHandle<Element> | null = await findFirstMatchingSelector(
+              frame, saveButtonSelectors, 5000, true
+            );
 
             if (saveButton) {
               await saveButton.click();
@@ -2069,11 +2098,10 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
             'button.confirm_btn__WEaBq',
           ];
 
-          let confirmPublishButton: ElementHandle<Element> | null = null;
-          for (const selector of confirmPublishSelectors) {
-            confirmPublishButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
-            if (confirmPublishButton) break;
-          }
+          // ✅ [v2.10.31] 직렬 5초×N → race 패턴
+          const confirmPublishButton: ElementHandle<Element> | null = await findFirstMatchingSelector(
+            frame, confirmPublishSelectors, 5000, true
+          );
 
           if (confirmPublishButton) {
             // ✅ 발행 전 URL 저장
@@ -2134,11 +2162,10 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
                 'button[data-click-area="tpb.save"]',
               ];
 
-              let saveButton: ElementHandle<Element> | null = null;
-              for (const selector of saveButtonSelectors) {
-                saveButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
-                if (saveButton) break;
-              }
+              // ✅ [v2.10.31] 직렬 5초×N → race 패턴
+              const saveButton: ElementHandle<Element> | null = await findFirstMatchingSelector(
+                frame, saveButtonSelectors, 5000, true
+              );
 
               if (saveButton) {
                 await saveButton.click();
@@ -2164,11 +2191,10 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
               'button[data-click-area="tpb.save"]',
             ];
 
-            let saveButton: ElementHandle<Element> | null = null;
-            for (const selector of saveButtonSelectors) {
-              saveButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
-              if (saveButton) break;
-            }
+            // ✅ [v2.10.31] 직렬 5초×N → race 패턴
+            const saveButton: ElementHandle<Element> | null = await findFirstMatchingSelector(
+              frame, saveButtonSelectors, 5000, true
+            );
 
             if (saveButton) {
               await saveButton.click();
