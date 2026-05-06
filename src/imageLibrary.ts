@@ -303,11 +303,13 @@ export class ImageLibrary {
       });
 
       // 각 뉴스 기사에서 이미지 추출
+      // ✅ [v2.10.30] page.close()를 try 본문 → finally로 이관 (예외 시 page leak 차단)
       for (const newsUrl of newsLinks) {
         if (images.length >= maxImages) break;
 
+        let newsPage: any = null;
         try {
-          const newsPage = await browser.newPage();
+          newsPage = await browser.newPage();
           await newsPage.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
           await newsPage.goto(newsUrl, { waitUntil: 'networkidle2' });
 
@@ -348,10 +350,12 @@ export class ImageLibrary {
 
             images.push(image);
           }
-
-          await newsPage.close();
         } catch (error) {
           console.warn(`뉴스크롤링 실패 ${newsUrl}:`, error);
+        } finally {
+          if (newsPage) {
+            await newsPage.close().catch(() => { /* close 실패는 무시 */ });
+          }
         }
       }
 

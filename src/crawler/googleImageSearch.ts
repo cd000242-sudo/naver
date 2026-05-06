@@ -411,8 +411,10 @@ export async function searchImagesForHeadings(
 
                 for (const searchQuery of queryChain) {
                     if (validImages.length >= 1) break;
+                    // ✅ [v2.10.30] page.close()를 try → finally로 이관 (예외 시 page leak 차단)
+                    let page: any = null;
                     try {
-                        const page = await createOptimizedPage(browser);
+                        page = await createOptimizedPage(browser);
 
                         const encodedQuery = encodeURIComponent(searchQuery);
                         const searchUrl = `https://www.google.com/search?q=${encodedQuery}&tbm=isch&hl=ko&safe=active&tbs=isz:m`;
@@ -463,8 +465,6 @@ export async function searchImagesForHeadings(
                             imgs = candidates.slice(0, 2);
                         }
 
-                        await page.close();
-
                         if (imgs.length > 0) {
                             validImages = imgs;
                             console.log(`[ImageSearch] ✅ 구글 → "${heading}" [${searchQuery}] → ${imgs.length}개${aiCheck ? ' (AI 통과)' : ''}`);
@@ -476,6 +476,10 @@ export async function searchImagesForHeadings(
                         await new Promise(r => setTimeout(r, 800 + Math.random() * 500));
                     } catch (e) {
                         console.warn(`[ImageSearch] ⚠️ 구글 검색 실패 ("${heading}" [${searchQuery}]): ${(e as Error).message}`);
+                    } finally {
+                        if (page) {
+                            await page.close().catch(() => { /* close 실패는 무시 */ });
+                        }
                     }
                 }
 

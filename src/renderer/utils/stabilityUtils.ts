@@ -73,16 +73,21 @@ export class InitializationGuard {
 const uiActionLocks = new Map<string, number>(); // key -> lock 시작 시간
 const UI_LOCK_TIMEOUT = 15 * 60 * 1000; // ✅ [2026-01-22] 15분 타임아웃 (이미지 생성 지연 대응)
 
-// 주기적으로 만료된 락 정리
-setInterval(() => {
-    const now = Date.now();
-    for (const [key, startTime] of uiActionLocks.entries()) {
-        if (now - startTime > UI_LOCK_TIMEOUT) {
-            console.warn(`[Stability] ⚠️ 락 타임아웃 해제: ${key}`);
-            uiActionLocks.delete(key);
+// ✅ [v2.10.30] 모듈 중복 평가 시 setInterval 다중 등록 차단 가드
+//   기존: setInterval 즉시 실행 + ID 미저장 → 모듈 중복 import 시 N개 누적
+//   수정: 글로벌 가드 변수로 1회만 등록
+let _locksGcTimer: ReturnType<typeof setInterval> | null = null;
+if (!_locksGcTimer) {
+    _locksGcTimer = setInterval(() => {
+        const now = Date.now();
+        for (const [key, startTime] of uiActionLocks.entries()) {
+            if (now - startTime > UI_LOCK_TIMEOUT) {
+                console.warn(`[Stability] ⚠️ 락 타임아웃 해제: ${key}`);
+                uiActionLocks.delete(key);
+            }
         }
-    }
-}, 60000); // 1분마다 체크
+    }, 60000); // 1분마다 체크
+}
 
 /**
  * 연속 발행 등에서 이미지 생성 락을 강제 해제하는 함수
