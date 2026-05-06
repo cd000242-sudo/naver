@@ -9,7 +9,7 @@
 
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, statSync } from 'fs';
 import { app } from 'electron';
 import type { VerificationMetric } from './verificationLoop.js';
 
@@ -24,10 +24,28 @@ const STORE_DIR = (() => {
 const METRICS_FILE = path.join(STORE_DIR, 'metrics.jsonl');
 const STATS_FILE = path.join(STORE_DIR, 'stats.json');
 
+// ✅ [v2.10.35] 메트릭 파일 사이즈 cap — 단일 파일 무한 누적 차단
+//   기존: 1년 누적 시 수십 MB 파일 풀 read (집계 시마다)
+//   수정: 10MB 도달 시 .1로 회전, 신규 파일 시작 (보존 7일은 aggregateStats가 메모리 필터링)
+const METRICS_MAX_BYTES = 10 * 1024 * 1024; // 10MB
+
 if (!existsSync(STORE_DIR)) mkdirSync(STORE_DIR, { recursive: true });
+
+function rotateMetricsIfNeeded(): void {
+  try {
+    if (!existsSync(METRICS_FILE)) return;
+    const stat = statSync(METRICS_FILE);
+    if (stat.size < METRICS_MAX_BYTES) return;
+    const { renameSync, unlinkSync, existsSync: ex } = require('fs') as typeof import('fs');
+    const rotated = `${METRICS_FILE}.1`;
+    try { if (ex(rotated)) unlinkSync(rotated); } catch { /* ignore */ }
+    try { renameSync(METRICS_FILE, rotated); } catch { /* ignore */ }
+  } catch { /* stat 실패는 무시 */ }
+}
 
 export async function recordMetric(metric: VerificationMetric): Promise<void> {
   try {
+    rotateMetricsIfNeeded();
     await fs.appendFile(METRICS_FILE, JSON.stringify(metric) + '\n');
   } catch (err) {
     console.warn('[TitleMetrics] 기록 실패:', (err as Error).message);

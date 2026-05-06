@@ -4,6 +4,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
+import { scrubText } from '../../debug/privacyScrubber.js';
 
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 export type LogCategory = 'automation' | 'ipc' | 'content' | 'image' | 'browser' | 'config' | 'license' | 'system' | 'general';
@@ -18,6 +19,10 @@ interface StructuredLogEntry {
 }
 
 const LOG_RETENTION_DAYS = 7;
+// ✅ [v2.10.35] 로그 파일 사이즈 cap — 단일 세션 내 무한 append 방지
+//   기존: writeFileSync로 매 실행 시작 시 truncate. 단일 세션 24h 운영 시 수백 MB 가능.
+//   수정: 50MB 도달 시 .1 회전 (이전 .1 삭제) → 디스크 폭주 차단.
+const LOG_MAX_BYTES = 50 * 1024 * 1024; // 50MB
 
 /**
  * 로거 서비스 싱글톤
@@ -107,11 +112,50 @@ class LoggerServiceImpl {
     }
 
     /**
+     * ✅ [v2.10.35] 로그 파일 사이즈 cap 검사 + 회전
+     *   50MB 도달 시 .1로 rename, 새 파일 시작.
+     *   24h 운영 디스크 폭주 차단.
+     */
+    private rotateIfTooLarge(): void {
+        try {
+            if (!fs.existsSync(this.logFile)) return;
+            const stat = fs.statSync(this.logFile);
+            if (stat.size < LOG_MAX_BYTES) return;
+            const rotatedPath = `${this.logFile}.1`;
+            try {
+                if (fs.existsSync(rotatedPath)) fs.unlinkSync(rotatedPath); // 이전 .1 삭제
+                fs.renameSync(this.logFile, rotatedPath);
+                fs.writeFileSync(this.logFile, `=== Log rotated at ${new Date().toISOString()} (prev → .1) ===\n`, 'utf-8');
+            } catch {
+                // rename 실패 시 truncate fallback
+                try { fs.writeFileSync(this.logFile, `=== Log rotated (truncate fallback) ${new Date().toISOString()} ===\n`, 'utf-8'); } catch { /* ignore */ }
+            }
+        } catch {
+            // stat 실패는 무시
+        }
+    }
+
+    /**
      * 구조화된 JSON 로그 엔트리 생성 및 기록
+     * ✅ [v2.10.35] privacyScrubber 적용 — 디스크 로그에 민감 정보(API 키/이메일/전화 등) 누설 차단
      */
     private writeStructured(entry: StructuredLogEntry): void {
         try {
-            const jsonLine = JSON.stringify(entry) + '\n';
+            this.rotateIfTooLarge();
+            // 민감 정보 스크럽 (message + stack + context.* 문자열)
+            const safeEntry: StructuredLogEntry = {
+                ...entry,
+                message: scrubText(entry.message).text,
+            };
+            if (entry.stack) safeEntry.stack = scrubText(entry.stack).text;
+            if (entry.context) {
+                const safeCtx: Record<string, unknown> = {};
+                for (const [k, v] of Object.entries(entry.context)) {
+                    safeCtx[k] = typeof v === 'string' ? scrubText(v).text : v;
+                }
+                safeEntry.context = safeCtx;
+            }
+            const jsonLine = JSON.stringify(safeEntry) + '\n';
             fs.appendFileSync(this.logFile, jsonLine, 'utf-8');
         } catch {
             // 파일 기록 실패 시 무시
@@ -191,7 +235,10 @@ class LoggerServiceImpl {
 
     private writeToFile(line: string): void {
         try {
-            fs.appendFileSync(this.logFile, line, 'utf-8');
+            this.rotateIfTooLarge();
+            // ✅ [v2.10.35] 민감 정보 스크럽 (debugLog 경로도 차단)
+            const safeLine = scrubText(line).text;
+            fs.appendFileSync(this.logFile, safeLine, 'utf-8');
         } catch {
             // 파일 기록 실패 시 무시
         }
