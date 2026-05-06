@@ -2588,14 +2588,23 @@ ipcMain.handle('dialog:showOpenDialog', async (_event, options) => {
 
 // 이미지 폴더 열기
 ipcMain.handle('openImagesFolder', async () => {
+  // ✅ [v2.10.22] customImageSavePath(=Downloads/naver-blog-images)로 통일
+  //   사용자 보고 '풀오토만 폴더 보이고 반자동 자동수집/URL수집 안 보임'
+  //   원인: 이 핸들러는 userData/images 열었음 → 다른 IPC는 Downloads에 저장 → 빈 폴더 보였음
+  //   조치: customImageSavePath(또는 Downloads 폴백)로 통일
   try {
-    const imagesPath = path.join(app.getPath('userData'), 'images');
+    const osMod = await import('os');
+    const fallback = path.join(osMod.homedir(), 'Downloads', 'naver-blog-images');
+    let imagesPath = fallback;
+    try {
+      const cfg = await loadConfig();
+      const cfgPath = String((cfg as any).customImageSavePath || '').trim();
+      if (cfgPath) imagesPath = cfgPath;
+    } catch { /* fallback */ }
+
     await fs.mkdir(imagesPath, { recursive: true });
-
-    // ✅ [2026-02-02] 카테고리 폴더도 함께 생성
-    await initializeCategoryFolders();
-
     await shell.openPath(imagesPath);
+    console.log(`[Main] 📁 이미지 폴더 열기: ${imagesPath}`);
     return { success: true, path: imagesPath };
   } catch (error) {
     return { success: false, message: (error as Error).message };
