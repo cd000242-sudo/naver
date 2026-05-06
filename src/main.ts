@@ -125,7 +125,9 @@ import {
   type SyncResult,
   type NaverAccountInfo,
 } from './licenseManager.js';
-import * as XLSX from 'xlsx';
+// ✅ [v2.10.34] xlsx top-level import 제거 (main.ts 내부 사용 0건, 다른 파일에서 직접 import)
+//   기존: app 부팅 시 xlsx 모듈 (~1.5MB) 평가됨 → cold start 비용
+//   수정: main.ts에서 미사용이라 제거. 실제 사용처는 자체 require/import 보유.
 import fs from 'fs/promises';
 import { loadScheduledPosts, saveScheduledPost, removeScheduledPost, getAllScheduledPosts, handleRecurringPost, rescheduleScheduledPost, retryScheduledPost as retryScheduledPostFn, type ScheduledPost } from './scheduledPostsManager.js';
 import fsSync from 'fs';
@@ -1128,6 +1130,60 @@ function getIsPackaged(): boolean {
 let mainWindow: BrowserWindow | null = null;
 let tray: Tray | null = null; // ✅ 시스템 트레이
 
+// ✅ [v2.10.34] Splash 화면 — 부팅 체감 시간 단축 (검은 화면 0.1초 이내 splash 표시)
+//   기존: app.whenReady → 백업/서버싱크/라이선스 등 직렬 게이트 → 사용자 화면은 검은색 ~20초
+//   수정: app.whenReady 첫줄에서 splash window 즉시 표시 → 백그라운드에서 게이트 진행 → 로그인/메인 ready 시 splash close
+let splashWindow: BrowserWindow | null = null;
+function showSplash(): void {
+  if (splashWindow && !splashWindow.isDestroyed()) return;
+  try {
+    splashWindow = new BrowserWindow({
+      width: 380,
+      height: 220,
+      frame: false,
+      resizable: false,
+      transparent: true,
+      alwaysOnTop: true,
+      center: true,
+      skipTaskbar: true,
+      webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true,
+        sandbox: true,
+        webSecurity: true,
+      },
+      title: '시작 중...',
+    });
+    const splashHtml = `
+      <html><head><meta charset="utf-8"><style>
+        body { margin: 0; padding: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: linear-gradient(145deg, #1e1e24, #2a2a35); color: #fff; border-radius: 12px; overflow: hidden; }
+        .logo { font-size: 2.5rem; margin-bottom: 0.5rem; animation: pulse 1.5s ease-in-out infinite; }
+        @keyframes pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.08); opacity: 0.85; } }
+        .title { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; letter-spacing: 0.02em; }
+        .sub { font-size: 0.78rem; color: #a1a1aa; margin-bottom: 1.2rem; }
+        .bar { width: 64%; height: 3px; background: rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden; }
+        .bar > div { width: 35%; height: 100%; background: linear-gradient(90deg, #3b82f6, #8b5cf6); border-radius: 2px; animation: slide 1.4s ease-in-out infinite; }
+        @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(280%); } }
+      </style></head><body>
+        <div class="logo">🚀</div>
+        <div class="title">Better Life Naver</div>
+        <div class="sub">시작하는 중...</div>
+        <div class="bar"><div></div></div>
+      </body></html>`;
+    splashWindow.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(splashHtml)}`);
+    splashWindow.on('closed', () => { splashWindow = null; });
+  } catch (e: any) {
+    debugLog(`[Splash] 표시 실패 (무시): ${e?.message}`);
+    splashWindow = null;
+  }
+}
+function closeSplash(): void {
+  if (splashWindow && !splashWindow.isDestroyed()) {
+    try { splashWindow.close(); } catch { /* ignore */ }
+    splashWindow = null;
+  }
+}
+
 // ✅ [v1.4.37/v1.4.38] 메인 프로세스 콘솔 → 렌더러 DevTools + 파일 로깅 (디버깅용)
 // 1) 모든 console.log/warn/error → 렌더러 DevTools에 [MAIN] 프리픽스로 표시
 // 2) 모든 console.log/warn/error → userData/logs/main-YYYY-MM-DD.log 파일에도 기록
@@ -1500,6 +1556,9 @@ async function createWindow(): Promise<void> {
       title: '네이버 블로그 자동화',
       icon: resolveIconImage(),
     });
+
+    // ✅ [v2.10.34] 메인 윈도우 생성 시 splash close (로그인 우회 경로 보호)
+    closeSplash();
 
     // Content Security Policy 설정 (개발 모드에서는 완화된 정책 사용)
     // 참고: 앱이 패키징되면 이 경고는 나타나지 않습니다
@@ -8332,8 +8391,11 @@ async function createLoginWindow(): Promise<BrowserWindow> {
   try {
     await loginWindow.loadFile(loginHtmlPath);
     debugLog('[createLoginWindow] HTML loaded successfully');
+    // ✅ [v2.10.34] 로그인 창 준비 완료 → splash close
+    closeSplash();
   } catch (error) {
     debugLog(`[createLoginWindow] !!! ERROR loading HTML: ${(error as Error).message}`);
+    closeSplash();
     throw error;
   }
 
@@ -9227,6 +9289,11 @@ ipcMain.handle('backup:restore', async (_e, backupPath: string) => {
 
 app.whenReady().then(async () => {
   try {
+    // ✅ [v2.10.34] 체감 부팅 시간 단축 — splash 화면 즉시 표시
+    //   사용자 보고: '앱 부팅 시 20초 응답없음'. 백그라운드 게이트는 그대로 진행하되
+    //   사용자에게는 즉시 splash가 보임. 로그인/메인 윈도우 준비되면 splash close.
+    showSplash();
+
     // ✅ [2026-02-18] setName은 lock 앞에서 이미 호출됨 (single instance lock 충돌 방지)
 
     // ✅ [v2.7.95] 앱 시작 시 자동 백업 — 1일 1회 (마지막 자동 백업 24시간 경과 시)
