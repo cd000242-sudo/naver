@@ -477,18 +477,16 @@ const aiProgressModal = {
     // 취소 버튼
     const cancelBtn = document.getElementById('ai-progress-cancel');
     cancelBtn?.addEventListener('click', () => {
-      // 진행 중일 때만 확인 창 띄우기
-      if (document.getElementById('ai-progress-close-x')?.style.display === 'none') {
+      // ✅ [v2.10.27] 기존 close-X display 게이트는 항상 false였음 (close-X는 항상 'block'으로
+      //   설정되고 'none'으로 바꾸는 코드가 없어 분기가 진입 불가). isWorking으로 정확히 판정.
+      if (this.isWorking) {
         if (confirm('작업을 취소하시겠습니까?')) {
           this.hide();
-          // ✅ [v2.10.26] 글생성 단계 취소 플래그 설정 — automationRunning=false인 글생성
-          //   단계에서도 후속 단계(이미지 수집/발행)가 차단되도록.
           (window as any)._contentGenerationCancelled = true;
+          (window as any).stopFullAutoPublish = true;
           if (automationRunning) {
             cancelAutomation();
           } else {
-            // 글생성만 진행 중인 상태 — 메인 프로세스 fetch는 백그라운드에서 종료까지 대기.
-            //   사용자에게 "취소됨" 표시 + 후속 단계 차단으로 즉각 반영.
             try { (window as any).api?.cancelAutomation?.(); } catch { /* ignore */ }
             try { appendLog?.('⏹️ 글 생성 취소 요청 — 진행 중인 응답은 백그라운드에서 폐기됩니다.'); } catch { /* ignore */ }
           }

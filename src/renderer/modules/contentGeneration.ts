@@ -485,6 +485,13 @@ export async function generateContentFromUrl(
     // 필드 자동 채움
     fillSemiAutoFields(structuredContent);
 
+    // ✅ [v2.10.27] CTA/소제목 분석/이미지 수집 진입 전 취소 재확인.
+    if ((window as any)._contentGenerationCancelled === true) {
+      (window as any)._contentGenerationCancelled = false;
+      appendLog('⏹️ 글 생성이 사용자에 의해 취소되었습니다. 후속 단계를 건너뜁니다.');
+      throw new Error('글 생성이 취소되었습니다.');
+    }
+
     // ✅ CTA 자동 생성
     showUnifiedProgress(85, '🔗 CTA 자동 생성 중...', '관련 링크 생성');
     autoGenerateCTA(structuredContent);
@@ -1013,6 +1020,13 @@ export async function generateContentFromKeywords(
 
     // 필드 자동 채움
     fillSemiAutoFields(structuredContent);
+
+    // ✅ [v2.10.27] CTA/소제목 분석/이미지 수집 진입 전 취소 재확인.
+    if ((window as any)._contentGenerationCancelled === true) {
+      (window as any)._contentGenerationCancelled = false;
+      appendLog('⏹️ 글 생성이 사용자에 의해 취소되었습니다. 후속 단계를 건너뜁니다.');
+      throw new Error('글 생성이 취소되었습니다.');
+    }
 
     // ✅ CTA 자동 생성
     showUnifiedProgress(85, '🔗 CTA 자동 생성 중...', '관련 링크 생성');

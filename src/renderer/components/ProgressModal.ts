@@ -96,8 +96,14 @@ export class ProgressModal {
 
         const requestStop = async () => {
             this.isCancelled = true;
+            // ✅ [v2.10.27] onStopRequest 콜백이 등록되지 않은 경우(풀오토 단순 생성 경로)에도
+            //   글생성/발행 후속 단계가 차단되도록 글로벌 플래그 + cancelAutomation 호출.
+            (window as any)._contentGenerationCancelled = true;
+            (window as any).stopFullAutoPublish = true;
+            (window as any).stopBatchPublish = true;
+            try { (window as any).api?.cancelAutomation?.(); } catch { /* ignore */ }
             if (this.onStopRequest) {
-                await this.onStopRequest();
+                try { await this.onStopRequest(); } catch (e: any) { console.warn('[ProgressModal] onStopRequest 실패:', e?.message); }
             }
             this.hide();
         };
