@@ -1327,41 +1327,64 @@ smartScheduler.setPublishCallback(async (post) => {
     throw error;
   }
 });
-const keywordAnalyzer = new KeywordAnalyzer(); // ✅ 키워드 경쟁도 분석
-// ✅ [v2.10.36] bestProductCollector 인스턴스 제거 (사용처 0)
-const internalLinkManager = new InternalLinkManager(); // ✅ 자동 내부링크 삽입
-const thumbnailGenerator = new ThumbnailGenerator(); // ✅ 썸네일 자동 생성
-const blogAccountManager = new BlogAccountManager(); // ✅ 다중 블로그 관리
-const titleABTester = new TitleABTester(); // ✅ AI 제목 A/B 테스트
-const commentResponder = new CommentResponder(); // ✅ 댓글 자동 답글
-const competitorAnalyzer = new CompetitorAnalyzer(); // ✅ 경쟁 블로그 분석
+// ✅ [v2.10.42] 부팅 freeze 차단 — 7개 module-level 인스턴스 lazy 생성
+//   기존: module load 시 7개 클래스 생성자 즉시 실행 → 부팅 5~10초 freeze
+//   수정: getter 패턴으로 첫 사용 시 생성 (사용 안 하면 영구 미생성)
+//   사용자 보고: "앱 실행하면 20초 정도 응답없음하다가 정상작동"
+//   원인: app.whenReady 첫 줄의 splash 표시 전에 module-level 인스턴스 7개 생성됨
+let _keywordAnalyzer: KeywordAnalyzer | null = null;
+let _internalLinkManager: InternalLinkManager | null = null;
+let _thumbnailGenerator: ThumbnailGenerator | null = null;
+let _blogAccountManager: BlogAccountManager | null = null;
+let _titleABTester: TitleABTester | null = null;
+let _commentResponder: CommentResponder | null = null;
+let _competitorAnalyzer: CompetitorAnalyzer | null = null;
+function getKeywordAnalyzer(): KeywordAnalyzer { return _keywordAnalyzer ??= new KeywordAnalyzer(); }
+function getInternalLinkManager(): InternalLinkManager { return _internalLinkManager ??= new InternalLinkManager(); }
+function getThumbnailGenerator(): ThumbnailGenerator { return _thumbnailGenerator ??= new ThumbnailGenerator(); }
+function getBlogAccountManager(): BlogAccountManager { return _blogAccountManager ??= new BlogAccountManager(); }
+function getTitleABTester(): TitleABTester { return _titleABTester ??= new TitleABTester(); }
+function getCommentResponder(): CommentResponder { return _commentResponder ??= new CommentResponder(); }
+function getCompetitorAnalyzer(): CompetitorAnalyzer { return _competitorAnalyzer ??= new CompetitorAnalyzer(); }
+// 기존 변수명 호환 — Proxy로 첫 접근 시 lazy 생성 위임
+const keywordAnalyzer = new Proxy({} as KeywordAnalyzer, { get: (_, p) => (getKeywordAnalyzer() as any)[p] });
+const internalLinkManager = new Proxy({} as InternalLinkManager, { get: (_, p) => (getInternalLinkManager() as any)[p] });
+const thumbnailGenerator = new Proxy({} as ThumbnailGenerator, { get: (_, p) => (getThumbnailGenerator() as any)[p] });
+const blogAccountManager = new Proxy({} as BlogAccountManager, { get: (_, p) => (getBlogAccountManager() as any)[p] });
+const titleABTester = new Proxy({} as TitleABTester, { get: (_, p) => (getTitleABTester() as any)[p] });
+const commentResponder = new Proxy({} as CommentResponder, { get: (_, p) => (getCommentResponder() as any)[p] });
+const competitorAnalyzer = new Proxy({} as CompetitorAnalyzer, { get: (_, p) => (getCompetitorAnalyzer() as any)[p] });
 let monitorTask: Promise<void> | null = null;
 let analyticsTask: Promise<void> | null = null;
 let trendAlertEnabled = true; // ✅ 트렌드 알림 활성화 상태
 
-// ✅ 트렌드 알림 콜백 설정
-trendMonitor.setAlertCallback((alert: TrendAlertEvent) => {
-  if (!trendAlertEnabled || !mainWindow) return;
+// ✅ [v2.10.42] 트렌드 알림 콜백 설정 — module load 직후 호출 → app.whenReady 안으로 이동
+//   기존: module load 시 trendMonitor.setAlertCallback 호출 (trendMonitor 인스턴스 평가 + 클로저 생성)
+//   수정: app.whenReady 후 setImmediate에서 호출 (부팅 cold path 회피)
+function _registerTrendAlertCallback(): void {
+  trendMonitor.setAlertCallback((alert: TrendAlertEvent) => {
+    if (!trendAlertEnabled || !mainWindow) return;
 
-  // Electron 알림 표시
-  const notification = new Notification({
-    title: `🔥 ${alert.type === 'breaking' ? '급상승' : alert.type === 'rising' ? '상승중' : '신규'} 키워드 감지!`,
-    body: `${alert.keyword}\n${alert.suggestion}`,
-    silent: false,
-  });
+    // Electron 알림 표시
+    const notification = new Notification({
+      title: `🔥 ${alert.type === 'breaking' ? '급상승' : alert.type === 'rising' ? '상승중' : '신규'} 키워드 감지!`,
+      body: `${alert.keyword}\n${alert.suggestion}`,
+      silent: false,
+    });
 
-  notification.on('click', () => {
-    // 알림 클릭 시 앱 포커스 및 키워드 전달
-    mainWindow?.focus();
+    notification.on('click', () => {
+      // 알림 클릭 시 앱 포커스 및 키워드 전달
+      mainWindow?.focus();
+      mainWindow?.webContents.send('trend:alert', alert);
+    });
+
+    notification.show();
+
+    // 렌더러에도 알림 전송
     mainWindow?.webContents.send('trend:alert', alert);
+    sendLog(`🔥 트렌드 알림: ${alert.keyword} (${alert.type})`);
   });
-
-  notification.show();
-
-  // 렌더러에도 알림 전송
-  mainWindow?.webContents.send('trend:alert', alert);
-  sendLog(`🔥 트렌드 알림: ${alert.keyword} (${alert.type})`);
-});
+}
 
 const publicPath = path.join(__dirname, 'public');
 const preloadPath = path.join(__dirname, 'preload.js');
@@ -9296,6 +9319,14 @@ app.whenReady().then(async () => {
     //   사용자 보고: '앱 부팅 시 20초 응답없음'. 백그라운드 게이트는 그대로 진행하되
     //   사용자에게는 즉시 splash가 보임. 로그인/메인 윈도우 준비되면 splash close.
     showSplash();
+
+    // ✅ [v2.10.42] 트렌드 알림 콜백 등록을 app.whenReady 후 setImmediate로 이동
+    //   기존: module load 시 즉시 등록 → 부팅 cold path 부하
+    //   수정: 부팅 게이트 통과 후 idle 시점에 등록 → splash가 먼저 보임
+    setImmediate(() => {
+      try { _registerTrendAlertCallback(); }
+      catch (e: any) { debugLog(`[Startup] trendAlert 콜백 등록 실패 (무시): ${e?.message}`); }
+    });
 
     // ✅ [2026-02-18] setName은 lock 앞에서 이미 호출됨 (single instance lock 충돌 방지)
 
