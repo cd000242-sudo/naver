@@ -4376,12 +4376,40 @@ URL: ${firstUrl}
   async function addToQueue() {
     if (inlineSelectedAccountIds.length === 0) {
       toastManager.warning('발행할 계정을 먼저 선택해주세요.');
+      alert('⚠️ 발행할 계정을 먼저 선택하세요.\n\n위 계정 목록에서 1개 이상 체크해야 합니다.');
+      return;
+    }
+
+    // ✅ [v2.10.43] 사용자 보고 '대기열 추가 안됨' 진단 강화
+    //   기존: collectCurrentSettings null → toast만 잠깐 뜨고 사라져 사용자가 못 봄
+    //   수정: 어느 조건이 실패했는지 구체적으로 alert + console.log
+    const sc = (window as any).currentStructuredContent;
+    const imgsA = (window as any).generatedImages || [];
+    const imgsB = (window as any).imageManagementGeneratedImages || [];
+    console.log('[대기열 추가] 진단:', {
+      structuredContent: !!sc,
+      selectedTitle: sc?.selectedTitle,
+      titleLength: sc?.selectedTitle?.length || 0,
+      generatedImages: imgsA.length,
+      imageManagementGeneratedImages: imgsB.length,
+    });
+
+    if (!sc) {
+      toastManager.warning('글이 생성되지 않았습니다.');
+      alert('⚠️ 글이 아직 생성되지 않았습니다.\n\n먼저 글 생성 버튼을 눌러 글과 제목을 만들고,\n이미지를 세팅한 후 다시 시도하세요.');
+      return;
+    }
+    if (!sc.selectedTitle || !String(sc.selectedTitle).trim()) {
+      toastManager.warning('제목이 비어있습니다.');
+      alert('⚠️ 글 제목이 비어있습니다.\n\n생성된 글의 제목을 확인하고\n빈 칸이 아닌지 확인해주세요.');
       return;
     }
 
     const settings = collectCurrentSettings();
     if (!settings) {
-      toastManager.warning('먼저 글을 생성하고 이미지를 세팅해주세요.');
+      // sc + selectedTitle 모두 OK인데도 null이면 다른 이유 (드물지만 방어)
+      toastManager.warning('대기열 추가 실패 — 콘솔 로그를 확인해주세요.');
+      alert('⚠️ 대기열 추가 실패\n\n글과 이미지가 모두 세팅된 것으로 보이지만\n예상치 못한 문제가 발생했습니다.\n\nF12 → Console 탭의 [대기열 추가] 진단 로그를 확인해주세요.');
       return;
     }
 
