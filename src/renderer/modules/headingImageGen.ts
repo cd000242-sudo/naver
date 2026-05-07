@@ -2542,6 +2542,30 @@ export function initHeadingImageGeneration(): void {
 
           appendLog(`✅ [100점 모드] 스마트 이미지 수집 완료!`, 'images-log-output');
           if ((window as any).toastManager) (window as any).toastManager.success(`✅ ${collectedImages.length}개의 이미지가 소제목별로 배치되었습니다!`);
+
+          // ✅ [v2.10.52] 사용자 보고 '저장된 폴더가 어디인지 모르겠다' — 폴더 경로 + 열기 옵션 명시
+          const finalFolderPath = saveResult?.folderPath;
+          if (finalFolderPath) {
+            const totalSaved = saveResult?.savedImages?.length || 0;
+            const mainCount = collectedImages.length;
+            const backupSaved = Math.max(0, totalSaved - mainCount);
+            const openFolder = confirm(
+              `✅ 이미지 저장 완료!\n\n` +
+              `📁 저장 위치:\n${finalFolderPath}\n\n` +
+              `📊 저장 결과:\n` +
+              `  • 메인 이미지: ${mainCount}개 (소제목별 배치)\n` +
+              `  • 예비 이미지: ${backupSaved}개 (폴더 보관용)\n` +
+              `  • 총 ${totalSaved}개 저장\n\n` +
+              `지금 폴더를 열까요?`
+            );
+            if (openFolder) {
+              try {
+                await (window.api as any).openPath?.(finalFolderPath);
+              } catch (e: any) {
+                alert(`폴더 열기 실패: ${e?.message}\n\n경로를 직접 복사해주세요:\n${finalFolderPath}`);
+              }
+            }
+          }
         } else {
           // ✅ [v2.10.51] 빈 결과 명확한 안내 (기존: result.message 접근 시 undefined 에러)
           //   사용자 보고: 'AI 자동 수집 안 된다' — 검색 결과 0개 시 toast만 잠깐 떠서 못 봄
