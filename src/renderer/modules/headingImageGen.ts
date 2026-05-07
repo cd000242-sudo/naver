@@ -2470,10 +2470,22 @@ export function initHeadingImageGeneration(): void {
           }
 
           appendLog(`💾 ${allImagesToSave.length}개 이미지를 로컬 폴더에 저장 중...`, 'images-log-output');
+          console.warn('[AI 자동수집] downloadAndSaveMultipleImages 호출 — searchKeyword:', searchKeyword, 'images:', allImagesToSave.length);
           const saveResult = await window.api.downloadAndSaveMultipleImages(
             allImagesToSave,
             searchKeyword
           );
+          console.warn('[AI 자동수집] saveResult:', { success: saveResult?.success, count: saveResult?.savedImages?.length, folderPath: saveResult?.folderPath, error: (saveResult as any)?.error });
+
+          // ✅ [v2.10.51] 사용자 보고 '폴더에 저장 안 된다' — saveResult 실패 시 명확한 alert
+          if (!saveResult?.success) {
+            const errMsg = (saveResult as any)?.error || (saveResult as any)?.message || '알 수 없는 이유';
+            appendLog(`❌ 이미지 저장 실패: ${errMsg}`, 'images-log-output');
+            alert(`❌ 이미지 저장 실패\n\n원인: ${errMsg}\n\n환경설정 → 이미지 저장 경로를 확인해주세요.\n또는 F12 → Console 탭의 [AI 자동수집] 로그를 확인해주세요.`);
+          } else if (!saveResult.savedImages || saveResult.savedImages.length === 0) {
+            appendLog(`⚠️ 이미지 0개 저장됨 (다운로드 모두 실패)`, 'images-log-output');
+            alert(`⚠️ 이미지 다운로드 실패\n\n수집한 ${allImagesToSave.length}개 이미지의 다운로드가 모두 실패했습니다.\n네트워크 또는 이미지 URL 차단(핫링크) 가능성.\n\n다른 키워드로 재시도해주세요.`);
+          }
 
           // 저장된 경로로 이미지 업데이트 (heading 기반 매칭)
           if (saveResult.success && saveResult.savedImages) {
@@ -2531,7 +2543,19 @@ export function initHeadingImageGeneration(): void {
           appendLog(`✅ [100점 모드] 스마트 이미지 수집 완료!`, 'images-log-output');
           if ((window as any).toastManager) (window as any).toastManager.success(`✅ ${collectedImages.length}개의 이미지가 소제목별로 배치되었습니다!`);
         } else {
-          throw new Error(result.message || '이미지를 찾을 수 없습니다.');
+          // ✅ [v2.10.51] 빈 결과 명확한 안내 (기존: result.message 접근 시 undefined 에러)
+          //   사용자 보고: 'AI 자동 수집 안 된다' — 검색 결과 0개 시 toast만 잠깐 떠서 못 봄
+          appendLog(`❌ 모든 소제목 이미지 검색 실패 (검색어: "${searchKeyword}")`, 'images-log-output');
+          alert(
+            `❌ 이미지를 찾을 수 없습니다\n\n` +
+            `검색어: "${searchKeyword}"\n` +
+            `소제목 ${currentHeadings.length}개 모두에서 네이버 이미지 검색 결과가 0개입니다.\n\n` +
+            `해결 방법:\n` +
+            `1. 검색어를 더 일반적으로 변경 (너무 specific하면 결과 없음)\n` +
+            `2. 글 제목을 다시 확인 (제목이 곧 검색어가 됨)\n` +
+            `3. 네이버 검색 API 키 확인 (환경설정)\n` +
+            `4. F12 → Console 탭의 [AI 자동수집] 로그 확인 후 보고`
+          );
         }
       } catch (error) {
         const errorMessage = (error as Error).message;
