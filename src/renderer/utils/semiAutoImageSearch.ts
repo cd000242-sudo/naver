@@ -169,7 +169,15 @@ export async function runAutoImageSearch(
 
     // ✅ [v2.7.72] 수집한 URL 이미지를 즉시 디스크에 저장 (Downloads/naver-blog-images/{글제목}/)
     //   사용자 요청: "스마트 AI 이미지 수집으로 모은 URL 이미지 폴더생성해서 저장되게해줘야지"
-    const postTitle = String((structuredContent as any)?.title || (structuredContent as any)?.postTitle || '').trim() || keyword;
+    // ✅ [v2.10.48] selectedTitle 누락 회귀 픽스 — contentGenerator는 글 제목을 selectedTitle에 저장
+    //   기존: title || postTitle || keyword → selectedTitle 빠져서 폴더가 'keyword' 이름으로 생성됨
+    //   수정: selectedTitle 우선 (글생성 후 진짜 제목)
+    const postTitle = String(
+      (structuredContent as any)?.selectedTitle
+      || (structuredContent as any)?.title
+      || (structuredContent as any)?.postTitle
+      || ''
+    ).trim() || keyword;
     const postId = String((structuredContent as any)?.id || (structuredContent as any)?.postId || '').trim() || `post-${Date.now()}`;
     let savedToDisk = 0;
     appendLog(`💾 수집 이미지를 디스크에 저장 중... (${postTitle})`);
