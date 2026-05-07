@@ -2475,7 +2475,19 @@ export function initHeadingImageGeneration(): void {
             allImagesToSave,
             searchKeyword
           );
-          console.warn('[AI 자동수집] saveResult:', { success: saveResult?.success, count: saveResult?.savedImages?.length, folderPath: saveResult?.folderPath, error: (saveResult as any)?.error });
+          // ✅ [v2.10.54] 자세한 로그 — 사용자 진단용 (saveResult Object만으론 부족)
+          const savedOk = (saveResult?.savedImages || []).filter((s: any) => s && s.filePath).length;
+          const savedFail = (saveResult?.savedImages || []).length - savedOk;
+          console.warn('[AI 자동수집] saveResult:', JSON.stringify({
+            success: saveResult?.success,
+            totalRequested: allImagesToSave.length,
+            savedOk,
+            savedFail,
+            folderPath: saveResult?.folderPath,
+            error: (saveResult as any)?.error,
+            firstThree: (saveResult?.savedImages || []).slice(0, 3),
+          }, null, 2));
+          appendLog(`📊 저장 결과 — 요청 ${allImagesToSave.length}개, 성공 ${savedOk}개, 실패 ${savedFail}개`, 'images-log-output');
 
           // ✅ [v2.10.51] 사용자 보고 '폴더에 저장 안 된다' — saveResult 실패 시 명확한 alert
           if (!saveResult?.success) {

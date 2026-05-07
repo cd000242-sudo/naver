@@ -2764,16 +2764,21 @@ ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading
       if (cfgPath) basePath = cfgPath;
     } catch { /* fallback 사용 */ }
 
-    // 폴더명: postTitle 우선 → category → 'images'
+    // ✅ [v2.10.54] 폴더명/파일명 sanitize 강화 (image:downloadAndSave도 통일)
     const safeTitle = (postTitle || category || 'images')
+      .normalize('NFC')
       .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')
+      .replace(/[…·•◦‧⋯⋮⋯]/g, '_')
       .replace(/\s+/g, '_')
       .replace(/\.+$/, '')
+      .replace(/_+/g, '_')
       .replace(/_+$/, '')
-      .substring(0, 100)
+      .substring(0, 80)
       .trim() || 'images';
     const safeHeading = (heading || 'image')
+      .normalize('NFC')
       .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')
+      .replace(/[…·•◦‧⋯⋮⋯]/g, '_')
       .replace(/_+/g, '_')
       .replace(/\.+$/g, '')
       .substring(0, 50)
@@ -3305,12 +3310,19 @@ ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ u
     const os = await import('os');
 
     const savedImages: any[] = [];
+    // ✅ [v2.10.54] safeTitle 정규식 보강 — 줄임표(…) U+2026 + 가운뎃점(·) + 기타 유니코드 특수문자 추가
+    //   사용자 보고: '발베르데-추아메니 주먹다짐 직전까지…레알 라커룸 지금 난리남'
+    //   원인: …(U+2026) 정규식에서 누락 → 폴더명에 그대로 → Windows 일부 API에서 ERR_FILE_NOT_FOUND
+    //   조치: 줄임표/가운뎃점 + 한글 NFC 정규화 + substring 100→80 (MAX_PATH 안전 마진)
     const safeTitle = (title || 'untitled')
+      .normalize('NFC') // 한글 자모 정규화 (NFD 분리형 → NFC 결합형)
       .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')
+      .replace(/[…·•◦‧⋯⋮⋯]/g, '_') // 줄임표/가운뎃점/기타 유니코드 점
       .replace(/\s+/g, '_')
       .replace(/\.+$/, '')
+      .replace(/_+/g, '_') // 연속 _ 압축
       .replace(/_+$/, '')
-      .substring(0, 100)
+      .substring(0, 80) // Windows MAX_PATH 260 안전 마진 (한글 100자=300바이트 위험)
       .trim() || 'untitled';
 
     // ✅ [v2.8.8] 이미지 저장 경로 보장 — customImageSavePath 우선, 실패 시 Downloads 폴백 + 자동 영속화
