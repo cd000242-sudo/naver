@@ -585,6 +585,11 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
     if (fsSync.existsSync(filePath)) {
       const diskRaw = fsSync.readFileSync(filePath, 'utf-8');
       const diskConfig = JSON.parse(diskRaw);
+      // ✅ [v2.10.53] customImageSavePath + 기타 사용자 환경설정 보존 필드 추가
+      //   사용자 보고: '환경설정에 있는 이미지 저장 경로에 저장되는게 아니냐고 원래 그 경로로 저장됐었자나'
+      //   원인: 다른 IPC가 saveConfig({...partial}) 호출 시 customImageSavePath 누락 → 디스크 빈 값 덮어씀
+      //         → 다음 image:downloadAndSaveMultiple에서 Downloads로 fallback
+      //   수정: customImageSavePath + 사용자 환경설정 필드들 PRESERVE에 추가
       const PRESERVE_KEYS = [
         'geminiApiKey', 'openaiApiKey', 'claudeApiKey', 'perplexityApiKey',
         'pexelsApiKey', 'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey',
@@ -592,6 +597,11 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
         'naverClientId', 'naverClientSecret',
         'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
         'savedNaverId', 'savedNaverPassword', 'savedLicenseUserId', 'savedLicensePassword',
+        // ✅ [v2.10.53] 사용자 환경설정 — 부분 saveConfig로 인해 silent 손실 회귀 차단
+        'customImageSavePath',
+        'primaryGeminiTextModel', 'defaultAiProvider', 'geminiPlanType',
+        'perplexityModel', 'geminiModel', 'leonardoaiModel',
+        'userDisplayName', 'userEmail',
       ];
       let preserved = 0;
       for (const k of PRESERVE_KEYS) {
