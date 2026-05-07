@@ -235,6 +235,13 @@ export async function runAutoImageSearch(
         }
         try { syncFn(); } catch { /* ignore */ }
 
+        // ✅ [v2.10.45] 폴더 모달이 열려있으면 즉시 갱신 트리거 (사용자 보고: '수집해도 모달에 안 뜬다')
+        try {
+            window.dispatchEvent(new CustomEvent('image-collection-completed', {
+                detail: { savedToDisk, postTitle }
+            }));
+        } catch { /* ignore */ }
+
         // ✅ [v2.10.25] UI 갱신을 글로벌 이름으로 직접 호출 (v2.10.24 window 우회는 const 인라인 함수에
         //   닿지 않아 항상 false였음). copy-static.mjs가 단일 renderer.js로 인라인하므로 직접 호출 가능.
         try {

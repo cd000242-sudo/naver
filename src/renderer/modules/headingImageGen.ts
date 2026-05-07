@@ -4284,35 +4284,50 @@ async function showFolderSelectionForHeading(
     refreshBtn.textContent = '🔄 새로고침';
   });
 
-  // ✅ [v2.10.19] 자동 폴링 — 폴더 변동 감지 + 자동 갱신
-  //   사용자 보고: '새로고침 안해도 자동으로 되어야 되지 않냐'
-  // ✅ [v2.10.33] 5s → 15s + visibilitychange 백그라운드 정지
-  //   기존: 5초 폴링은 SSD에선 무관하지만 HDD 4GB 노트북에서 282 stat = 100~500ms 메인 스레드 점유
-  //   변경: 15초로 완화 + 윈도우 비활성 시 정지로 백그라운드 부하 0
+  // ✅ [v2.10.45] 사용자 보고 '이미지 수집해도 폴더 모달에 안 뜬다' — 폴링 15s → 2s 즉시 단축
+  //   v2.10.33 15s 변경이 사용자 시나리오 (이미지 수집 직후 폴더 선택)와 충돌
+  //   조치: 2s 폴링 + 모달 열린 직후 추가 강제 갱신 (디스크 동기화 지연 방어)
+  //   부하 비교: 2s × 282 stat ≈ 200ms 메인 스레드 점유 / 매 2초. SSD에선 50ms 미만
   let pollPaused = false;
   const onVisibilityChange = () => {
     pollPaused = document.hidden;
     if (!pollPaused && document.body.contains(modal)) {
-      // 가시화될 때 즉시 1회 갱신 (5초 지연 회피)
       refreshFolders(true).catch(() => { /* skip */ });
     }
   };
   document.addEventListener('visibilitychange', onVisibilityChange);
 
+  // ✅ [v2.10.45] 모달 열린 직후 강제 갱신 (디스크 동기화 지연 방어)
+  //   1초/3초 후 자동 갱신 — 이미지 수집 직후 모달 열어도 새 폴더 즉시 보임
+  setTimeout(() => { if (document.body.contains(modal)) refreshFolders(true).catch(() => { /* skip */ }); }, 1000);
+  setTimeout(() => { if (document.body.contains(modal)) refreshFolders(true).catch(() => { /* skip */ }); }, 3000);
+
+  // ✅ [v2.10.45] 이미지 수집 완료 이벤트 listen → 즉시 갱신
+  //   semiAutoImageSearch에서 'image-collection-completed' dispatch 시 모달이 열려있으면 갱신
+  const onImageCollected = () => {
+    if (!document.body.contains(modal)) return;
+    console.warn('[FolderModal] 🔔 이미지 수집 완료 이벤트 수신 → 즉시 갱신');
+    // 디스크 동기화 약간 후 갱신
+    setTimeout(() => refreshFolders(false).catch(() => { /* skip */ }), 300);
+  };
+  window.addEventListener('image-collection-completed', onImageCollected);
+
   const pollInterval = setInterval(() => {
     if (!document.body.contains(modal)) {
       clearInterval(pollInterval);
       document.removeEventListener('visibilitychange', onVisibilityChange);
+      window.removeEventListener('image-collection-completed', onImageCollected);
       return;
     }
     if (pollPaused) return; // 백그라운드 시 부하 0
     refreshFolders(true).catch(() => { /* skip */ });
-  }, 15000);
+  }, 2000);
 
   // 모달 닫힘 시 폴링 정리 (DOM 이벤트 + MutationObserver 둘 다)
   const stopPoll = () => {
     clearInterval(pollInterval);
     document.removeEventListener('visibilitychange', onVisibilityChange);
+    window.removeEventListener('image-collection-completed', onImageCollected);
   };
   modal.querySelector('#close-folder-modal')?.addEventListener('click', stopPoll);
   modal.querySelector('#cancel-folder-modal')?.addEventListener('click', stopPoll);
