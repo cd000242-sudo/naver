@@ -174,24 +174,20 @@ export async function runAutoImageSearch(
     let savedToDisk = 0;
     appendLog(`💾 수집 이미지를 디스크에 저장 중... (${postTitle})`);
 
-    // ImageManager에 이미지 배치 (기존 이미지가 없는 소제목에만)
+    // ✅ [v2.10.46] 사용자 보고: '수집한 이미지를 전부 저장해야 정상' (이전엔 헤딩당 1장만 저장됨)
+    //   기존: ImageManager existing 체크로 디스크 저장도 skip → 폴더 자체 안 생성
+    //   기존: 헤딩당 1장만 디스크 저장 → 검색 결과 30장이어도 1장만 저장됨
+    //   변경: 디스크 저장은 모든 urls(cap=10) 항상 실행, ImageManager 배치는 1장만 유지
     for (const [heading, urls] of Object.entries(imageMap)) {
         if (!urls || urls.length === 0) continue;
 
-        // ✅ [2026-02-12 P2 FIX #10] resolveHeadingKey 활용 → getImages/addImage
-        const existing = ImageManager.getImages(heading);
-        if (existing && existing.length > 0) {
-            console.log(`${LOG_PREFIX} 소제목 "${heading}" 이미 이미지 있음, 건너뜀`);
-            continue;
-        }
-
-        // ✅ [v2.7.83] 소제목당 1장만 배치 (이전 2장 → 중복 호소)
-        // 각 URL을 디스크에 저장 후 entry에 filePath 포함
-        const imageEntries: any[] = [];
-        for (let idx = 0; idx < Math.min(urls.length, 1); idx++) {
-            const url = urls[idx];
-            let filePath: string | undefined;
-            let previewDataUrl: string | undefined;
+        // ✅ [v2.10.46] 디스크 저장 — 검색된 모든 URL을 헤딩 폴더에 저장 (cap=10)
+        //   첫 1장의 결과는 ImageManager 배치에 사용, 나머지는 폴더 보관용
+        const DISK_SAVE_CAP = 10;
+        const urlsToSave = urls.slice(0, DISK_SAVE_CAP);
+        let firstSaved: { filePath?: string; previewDataUrl?: string } = {};
+        for (let idx = 0; idx < urlsToSave.length; idx++) {
+            const url = urlsToSave[idx];
             try {
                 const dl = await (window as any).api?.downloadAndSaveImage?.(
                     url,
@@ -200,16 +196,30 @@ export async function runAutoImageSearch(
                     postId,
                 );
                 if (dl?.success && dl.filePath) {
-                    filePath = dl.filePath;
-                    previewDataUrl = dl.previewDataUrl;
                     savedToDisk++;
-                    console.log(`${LOG_PREFIX} 💾 저장: ${filePath}`);
+                    if (idx === 0) firstSaved = { filePath: dl.filePath, previewDataUrl: dl.previewDataUrl };
+                    console.log(`${LOG_PREFIX} 💾 저장: ${dl.filePath}`);
                 } else {
                     console.warn(`${LOG_PREFIX} ⚠️ 저장 실패: ${dl?.message || 'unknown'}`);
                 }
             } catch (e: any) {
                 console.warn(`${LOG_PREFIX} ⚠️ 다운로드 오류: ${e?.message}`);
             }
+        }
+
+        // ✅ ImageManager 배치 — 기존 이미지 있으면 skip (UI 중복 방지). 디스크는 위에서 이미 저장됨
+        const existing = ImageManager.getImages(heading);
+        if (existing && existing.length > 0) {
+            console.log(`${LOG_PREFIX} 소제목 "${heading}" 이미 ImageManager 배치됨, UI 배치 skip (디스크는 저장됨)`);
+            continue;
+        }
+
+        // ✅ [v2.7.83] 소제목당 1장만 ImageManager 배치 (이전 2장 → 중복 호소)
+        const imageEntries: any[] = [];
+        for (let idx = 0; idx < Math.min(urls.length, 1); idx++) {
+            const url = urls[idx];
+            const filePath = firstSaved.filePath;
+            const previewDataUrl = firstSaved.previewDataUrl;
 
             imageEntries.push({
                 url,
