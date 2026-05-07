@@ -5808,14 +5808,17 @@ function validateStructuredContent(content: StructuredContent, source?: ContentS
       }).join('\n\n');
       console.warn('[validateStructuredContent] bodyHtml 누락 → headings에서 복구');
     } else {
-      // ✅ [2026-02-23 FIX] throw 대신 최소한의 빈 구조로 복구 (풀오토 안정성)
-      // 이전: throw new Error('필수 필드 누락') → 마지막 시도에서 최종 실패
-      // 변경: 키워드/제목으로 최소 구조 생성하여 발행 가능 상태 유지
+      // ✅ [v2.10.50] 본문 누락 fallback 폐기 — 사용자 보고 '제목과 본문이 똑같이 나옴'
+      //   기존: throw 대신 최소 구조로 복구 (제목=본문 1줄짜리 글 발행) → 네이버 어뷰징 위험
+      //   수정: 명확한 에러 throw → 호출자(generateStructuredContent)가 재시도/사용자 안내
+      //   재시도 체인이 모두 실패하면 사용자가 다시 글생성 버튼 누르도록.
       const fallbackTitle = content.selectedTitle || '콘텐츠';
-      console.error(`[validateStructuredContent] ⚠️ 필수 필드 모두 누락 → 최소 구조로 복구 (제목: "${fallbackTitle}")`);
-      content.headings = [{ title: fallbackTitle, content: fallbackTitle }] as any;
-      content.bodyPlain = fallbackTitle;
-      content.bodyHtml = `<p>${fallbackTitle}</p>`;
+      console.error(`[validateStructuredContent] ❌ 필수 필드 모두 누락 (제목: "${fallbackTitle}") — 본문 생성 실패`);
+      throw new Error(
+        `AI 응답에서 본문(bodyPlain/bodyHtml/headings)이 모두 누락되었습니다.\n\n` +
+        `원인: AI가 빈 응답 또는 안전 필터 차단(SAFETY/RECITATION).\n` +
+        `해결: 다른 키워드로 시도하거나 다른 AI 엔진으로 변경 후 재시도해주세요.`
+      );
     }
   }
 
