@@ -181,10 +181,11 @@ export async function runAutoImageSearch(
     for (const [heading, urls] of Object.entries(imageMap)) {
         if (!urls || urls.length === 0) continue;
 
-        // ✅ [v2.10.46] 디스크 저장 — 검색된 모든 URL을 헤딩 폴더에 저장 (cap=10)
+        // ✅ [v2.10.47] 디스크 저장 — 검색된 모든 URL 저장 (cap 제거, 사용자 요구)
+        //   v2.10.46은 cap=10이었으나 사용자 요구: '수집되는 이미지는 전부 저장되어야지'
+        //   그러므로 검색 결과 N장이면 N장 모두 헤딩 폴더에 저장
         //   첫 1장의 결과는 ImageManager 배치에 사용, 나머지는 폴더 보관용
-        const DISK_SAVE_CAP = 10;
-        const urlsToSave = urls.slice(0, DISK_SAVE_CAP);
+        const urlsToSave = urls;
         let firstSaved: { filePath?: string; previewDataUrl?: string } = {};
         for (let idx = 0; idx < urlsToSave.length; idx++) {
             const url = urlsToSave[idx];

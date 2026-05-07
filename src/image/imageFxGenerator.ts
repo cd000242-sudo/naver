@@ -1231,9 +1231,30 @@ export async function generateSingleImageWithImageFx(
         return null;
       }
 
-      // 기타 에러
-      console.error(`[ImageFX] ❌ 생성 실패 (시도 ${attempt}/${MAX_RETRIES}): ${errorCode} ${errorDetail.substring(0, 100)}`);
-      lastError = new Error(`${errorCode}: ${errorDetail.substring(0, 200)}`);
+      // ✅ [v2.10.47] 기타 에러 — 진짜 원인 진단 강화
+      //   기존: errorCode/errorDetail이 NO_IMAGES/EXCEPTION 등이면 모호 메시지 + 3연속 실패로 잡힘
+      //   사용자가 IMAGEFX_OTHER:NO_IMAGES 같은 명확한 분류 받도록 변경
+      console.error(`[ImageFX] ❌ 생성 실패 (시도 ${attempt}/${MAX_RETRIES}): ${errorCode} ${errorDetail.substring(0, 200)}`);
+      sendImageLog(`❌ [ImageFX] ${errorCode}: ${errorDetail.substring(0, 100)}`);
+      // 마지막 시도에서 명확히 분류
+      if (attempt === MAX_RETRIES) {
+        if (errorCode === 'NO_IMAGES') {
+          lastError = new Error(
+            'IMAGEFX_OTHER:Google이 빈 응답 반환 (NO_IMAGES).\n' +
+            '안전 필터 차단 또는 응답 형식 변경일 수 있습니다.\n' +
+            '환경설정 → ImageFX → "Google 계정 변경" 또는 다른 엔진 시도.'
+          );
+        } else if (errorCode === 'EXCEPTION') {
+          lastError = new Error(
+            `IMAGEFX_OTHER:fetch/JSON 예외 — ${errorDetail.substring(0, 150)}\n` +
+            '네트워크 또는 ImageFX API 응답 형식 변경일 수 있습니다.'
+          );
+        } else {
+          lastError = new Error(`IMAGEFX_OTHER:${errorCode} - ${errorDetail.substring(0, 200)}`);
+        }
+      } else {
+        lastError = new Error(`${errorCode}: ${errorDetail.substring(0, 200)}`);
+      }
 
       if (attempt < MAX_RETRIES) {
         await new Promise(resolve => setTimeout(resolve, 3000));
@@ -2089,11 +2110,20 @@ export async function generateWithImageFx(
     // 연속 실패 시 중단
     if (consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
       console.error(`[ImageFX] ⛔ ${MAX_CONSECUTIVE_FAILURES}연속 실패 → 배치 중단`);
-      // ✅ [v1.4.40] 분류된 에러가 있으면 그걸 사용, 없으면 일반 메시지
+      // ✅ [v2.10.47] 진짜 원인 진단 강화 — '시간당 한도' 모호 메시지 제거
+      //   사용자 보고: '오늘 처음 사용했는데 시간당 한도라고 뜬다'
+      //   원인: 3연속 NO_IMAGES/EXCEPTION 시 fallback 메시지가 모호 → 사용자가 진짜 한도라 오해
+      //   수정: 진짜 errorCode/detail 명시 + 재인증 안내 강화
       if (!lastClassifiedError) {
-        lastClassifiedError = new Error('IMAGEFX_UNKNOWN_FAILURE:Google ImageFX 3연속 실패. Google 세션 상태 또는 시간당 한도를 확인해주세요.');
+        lastClassifiedError = new Error(
+          'IMAGEFX_UNKNOWN_FAILURE:Google ImageFX 3연속 실패.\n\n' +
+          '시간당 한도가 아닐 수 있습니다 (오늘 처음 사용한 경우 특히):\n' +
+          '1. 환경설정 → ImageFX → "Google 계정 변경" 으로 재로그인\n' +
+          '2. 다른 이미지 엔진(Pollinations/DeepInfra)으로 전환\n' +
+          '3. F12 → Console 탭의 [ImageFX] 로그 확인 (HTTP_401/HTTP_429/NO_IMAGES 등)'
+        );
       }
-      sendImageLog(`⛔ [ImageFX] 연속 실패 — ${lastClassifiedError.message.replace(/^IMAGEFX_[A-Z_]+:/, '')}`);
+      sendImageLog(`⛔ [ImageFX] 연속 실패 — ${lastClassifiedError.message.replace(/^IMAGEFX_[A-Z_]+:/, '').split('\n')[0]}`);
       break;
     }
 
