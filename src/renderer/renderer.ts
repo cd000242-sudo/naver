@@ -4374,6 +4374,14 @@ URL: ${firstUrl}
 
   // 대기열에 추가
   async function addToQueue() {
+    // ✅ [v2.10.44] 함수 진입 즉시 console.warn — v2.10.41 console.log no-op이라 warn 사용
+    console.warn('[addToQueue] ▶ 함수 진입', {
+      selectedAccounts: inlineSelectedAccountIds.length,
+      hasContent: !!(window as any).currentStructuredContent,
+      title: (window as any).currentStructuredContent?.selectedTitle,
+      images: ((window as any).generatedImages || []).length,
+    });
+
     if (inlineSelectedAccountIds.length === 0) {
       toastManager.warning('발행할 계정을 먼저 선택해주세요.');
       alert('⚠️ 발행할 계정을 먼저 선택하세요.\n\n위 계정 목록에서 1개 이상 체크해야 합니다.');
@@ -4382,11 +4390,11 @@ URL: ${firstUrl}
 
     // ✅ [v2.10.43] 사용자 보고 '대기열 추가 안됨' 진단 강화
     //   기존: collectCurrentSettings null → toast만 잠깐 뜨고 사라져 사용자가 못 봄
-    //   수정: 어느 조건이 실패했는지 구체적으로 alert + console.log
+    //   수정: 어느 조건이 실패했는지 구체적으로 alert + console.warn
     const sc = (window as any).currentStructuredContent;
     const imgsA = (window as any).generatedImages || [];
     const imgsB = (window as any).imageManagementGeneratedImages || [];
-    console.log('[대기열 추가] 진단:', {
+    console.warn('[대기열 추가] 진단:', {
       structuredContent: !!sc,
       selectedTitle: sc?.selectedTitle,
       titleLength: sc?.selectedTitle?.length || 0,
@@ -4917,10 +4925,40 @@ URL: ${firstUrl}
     hideStopButton();
   }
 
-  // 이벤트 리스너 등록
-  document.getElementById('add-to-queue-btn')?.addEventListener('click', addToQueue);
+  // ✅ [v2.10.44] 사용자 보고 '글생성+이미지 세팅 후에도 대기열 추가 안됨'
+  //   원인 추정: addEventListener 호출 시점에 DOM 미준비, 또는 다른 listener가 가로챔
+  //   방어: ① 직접 등록(타임스탬프 기록) ② document.body 위임 fallback ③ window 전역 노출
+  const _addBtn = document.getElementById('add-to-queue-btn');
+  if (_addBtn) {
+    _addBtn.addEventListener('click', () => {
+      (_addBtn as any).__lastDirectClick = Date.now();
+      console.warn('[add-to-queue-btn] 직접 핸들러 호출');
+      addToQueue();
+    });
+  } else {
+    console.warn('[add-to-queue-btn] DOM에 버튼 없음 — 위임 fallback에 의존');
+  }
   document.getElementById('clear-queue-btn')?.addEventListener('click', clearQueue);
   document.getElementById('batch-publish-btn')?.addEventListener('click', executeBatchPublish);
+
+  // window 전역 노출 (DevTools 디버깅용)
+  (window as any).__addToQueue = addToQueue;
+  (window as any).__clearQueue = clearQueue;
+  (window as any).__executeBatchPublish = executeBatchPublish;
+
+  // 이벤트 위임 fallback — 직접 핸들러 미동작 시(100ms 내 호출 없으면) 위임이 실행
+  document.body.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+    const btn = target.closest('button') as HTMLButtonElement | null;
+    if (!btn) return;
+    if (btn.id === 'add-to-queue-btn') {
+      const lastDirect = (btn as any).__lastDirectClick;
+      if (lastDirect && Date.now() - lastDirect < 100) return; // 직접 핸들러 정상 동작 → skip
+      console.warn('[add-to-queue-btn] ⚠️ 직접 핸들러 미호출 → 위임 fallback 실행');
+      addToQueue();
+    }
+  }, { capture: false });
 
   // 초기 UI 업데이트
   updateQueueUI();
