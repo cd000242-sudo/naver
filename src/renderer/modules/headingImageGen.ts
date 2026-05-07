@@ -3754,7 +3754,7 @@ export function initUnifiedImageEventHandlers(): void {
       return;
     }
 
-    // ✅ 2-1. 빈 소제목 - 저장된 이미지에서 선택 버튼 (📁 폴더)
+    // ✅ 2-1. 빈 소제목 - 저장된 이미지에서 선택 버튼 (📁 폴더 / 🔄 변경)
     if (target.classList.contains('select-local-image-btn') || target.closest('.select-local-image-btn')) {
       e.preventDefault();
       e.stopPropagation();
@@ -3762,8 +3762,26 @@ export function initUnifiedImageEventHandlers(): void {
       const btn = target.classList.contains('select-local-image-btn') ? target : target.closest('.select-local-image-btn') as HTMLElement;
       const headingIndex = parseInt(btn?.dataset.headingIndex || '0');
 
-      // ✅ 저장된 이미지에서 선택하는 모달 표시 (이미지 변경하기)
-      showSavedImagesForReplace(headingIndex);
+      // ✅ [v2.10.49] 사용자 보고 '변경 버튼 누르면 폴더 모달이 안 뜬다' — 진단 + 견고성 강화
+      console.warn('[변경 버튼] 클릭 — headingIndex:', headingIndex);
+      try {
+        // window 폴백 우선 (showSavedImagesForReplace가 module 스코프 미해석 시 대비)
+        const fn = (window as any).showSavedImagesForReplace || showSavedImagesForReplace;
+        if (typeof fn !== 'function') {
+          alert('⚠️ 폴더 선택 모달 함수가 로드되지 않았습니다.\n앱을 재시작해주세요.');
+          return;
+        }
+        const result = fn(headingIndex);
+        if (result && typeof result.catch === 'function') {
+          result.catch((err: any) => {
+            console.warn('[변경 버튼] showSavedImagesForReplace 실패:', err);
+            alert(`⚠️ 폴더 모달 표시 실패: ${err?.message || err}\n환경설정 → 이미지 저장 경로를 먼저 지정해주세요.`);
+          });
+        }
+      } catch (err: any) {
+        console.warn('[변경 버튼] 동기 예외:', err);
+        alert(`⚠️ 폴더 모달 표시 중 오류: ${err?.message || err}`);
+      }
       return;
     }
 
@@ -3849,10 +3867,29 @@ export function initUnifiedImageEventHandlers(): void {
 
       if (!headingTitle) {
         toastManager.warning('소제목 제목을 찾을 수 없습니다. 먼저 소제목 분석/생성을 다시 실행해주세요.');
+        alert('⚠️ 소제목 제목을 찾을 수 없습니다.\n먼저 소제목 분석/생성을 다시 실행해주세요.');
         return;
       }
 
-      addMultipleImagesToHeading(headingIndex, headingTitle);
+      // ✅ [v2.10.49] 사용자 보고 '추가 버튼 누르면 폴더 모달이 안 뜬다' — 진단 + 견고성
+      console.warn('[추가 버튼] 클릭 — headingIndex:', headingIndex, 'headingTitle:', headingTitle);
+      try {
+        const fn = (window as any).addMultipleImagesToHeading || addMultipleImagesToHeading;
+        if (typeof fn !== 'function') {
+          alert('⚠️ 이미지 추가 함수가 로드되지 않았습니다.\n앱을 재시작해주세요.');
+          return;
+        }
+        const result = fn(headingIndex, headingTitle);
+        if (result && typeof result.catch === 'function') {
+          result.catch((err: any) => {
+            console.warn('[추가 버튼] addMultipleImagesToHeading 실패:', err);
+            alert(`⚠️ 이미지 추가 모달 표시 실패: ${err?.message || err}\n환경설정 → 이미지 저장 경로를 먼저 지정해주세요.`);
+          });
+        }
+      } catch (err: any) {
+        console.warn('[추가 버튼] 동기 예외:', err);
+        alert(`⚠️ 이미지 추가 모달 표시 중 오류: ${err?.message || err}`);
+      }
       return;
     }
 

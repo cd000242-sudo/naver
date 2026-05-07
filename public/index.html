@@ -9413,6 +9413,28 @@
                                     <span style="color: var(--text-muted); font-size: 0.8rem; transition: transform 0.2s;">▼</span>
                                 </summary>
                                 <div style="padding: 0 1rem 1rem 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                                    <!-- ✅ [v2.10.49] 외부 개인 프록시 사용 설명서 -->
+                                    <div style="background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 8px; padding: 0.75rem; font-size: 0.78rem; color: var(--text-strong); line-height: 1.5;">
+                                        <div style="font-weight: 700; color: #60a5fa; margin-bottom: 0.5rem; font-size: 0.85rem;">📖 외부 개인 프록시 사용 설명서</div>
+                                        <div style="margin-bottom: 0.4rem;"><strong>1. 어떤 프록시 서비스든 가능</strong> — BrightData, Oxylabs, Smartproxy, Decodo, Webshare, IPRoyal, 자체 호스팅 등 모두 호환</div>
+                                        <div style="margin-bottom: 0.4rem;"><strong>2. 입력 형식</strong> — 외부 서비스에서 받은 4개 정보를 그대로 입력:</div>
+                                        <ul style="margin: 0 0 0.5rem 1.2rem; padding: 0; color: var(--text-muted);">
+                                            <li><strong>호스트</strong>: <code style="background: rgba(0,0,0,0.3); padding: 1px 4px; border-radius: 3px;">gate.smartproxy.com</code> 또는 IP 주소</li>
+                                            <li><strong>포트</strong>: <code style="background: rgba(0,0,0,0.3); padding: 1px 4px; border-radius: 3px;">7000</code>, <code style="background: rgba(0,0,0,0.3); padding: 1px 4px; border-radius: 3px;">8000</code> 등</li>
+                                            <li><strong>사용자명/비밀번호</strong>: 외부 서비스에서 발급받은 인증 정보</li>
+                                        </ul>
+                                        <div style="margin-bottom: 0.4rem;"><strong>3. 🔒 고정 IP 원할 때</strong> — 사용자명에 sticky session 키워드 포함:</div>
+                                        <div style="background: rgba(0,0,0,0.3); padding: 0.4rem; border-radius: 4px; font-family: monospace; font-size: 0.72rem; margin: 0.2rem 0 0.5rem 0; color: #a5f3fc;">user-session-myid-sessionduration-1440</div>
+                                        <div style="margin-bottom: 0.4rem;"><strong>4. 🔄 유동 IP 원할 때</strong> — 사용자명에 session 키워드 없이:</div>
+                                        <div style="background: rgba(0,0,0,0.3); padding: 0.4rem; border-radius: 4px; font-family: monospace; font-size: 0.72rem; margin: 0.2rem 0 0.5rem 0; color: #fde68a;">user-rotate (또는 user 만 입력)</div>
+                                        <div style="margin-bottom: 0.4rem;"><strong>5. 🌍 한국 IP 필요</strong> — 사용자명에 country 옵션 추가 (서비스마다 형식 다름):</div>
+                                        <div style="background: rgba(0,0,0,0.3); padding: 0.4rem; border-radius: 4px; font-family: monospace; font-size: 0.72rem; margin: 0.2rem 0 0.5rem 0; color: #c4b5fd;">user-country-kr 또는 user-cc-kr</div>
+                                        <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid rgba(59, 130, 246, 0.2); color: var(--text-muted); font-size: 0.72rem;">
+                                            💡 <strong>"🔄 자동 세팅" 버튼</strong>은 앱 기본 SmartProxy 전용입니다.<br>
+                                            개인 프록시는 위 4개 필드에 직접 입력하세요. 입력 후 "프록시 검증" 버튼으로 우회 IP 확인 가능.<br>
+                                            미입력 시 본인 직접 연결(집/회사 IP)로 발행됩니다.
+                                        </div>
+                                    </div>
                                     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.75rem;">
                                         <div>
                                             <label style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">🖥️ 호스트</label>
