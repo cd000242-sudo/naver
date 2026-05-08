@@ -4686,7 +4686,7 @@ export class NaverBlogAutomation {
         // 순차 실행: 클릭 먼저, 그 다음 네비게이션 대기
         await saveButton.click();
         await this.delay(this.DELAYS.MEDIUM); // 클릭 후 안정화 대기
-        await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
+        await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
 
         this.log('✅ 블로그 글이 임시저장되었습니다.');
       } else if (mode === 'publish') {
@@ -5206,7 +5206,7 @@ export class NaverBlogAutomation {
               let navigationSuccess = false;
               try {
                 await Promise.race([
-                  frame.waitForNavigation({ waitUntil: 'networkidle0', timeout: 60000 }),
+                  frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }),
                   new Promise(resolve => setTimeout(resolve, 60000)) // ✅ [v2.10.67] 30초 → 60초 (frame.waitForNavigation timeout 매칭)
                 ]);
                 navigationSuccess = true;
@@ -5309,7 +5309,7 @@ export class NaverBlogAutomation {
                 let navigationSuccess = false;
                 try {
                   await Promise.race([
-                    frame.waitForNavigation({ waitUntil: 'networkidle0', timeout: 60000 }),
+                    frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }),
                     new Promise(resolve => setTimeout(resolve, 60000)) // ✅ [v2.10.67] 30초 → 60초
                   ]);
                   navigationSuccess = true;
@@ -5356,7 +5356,7 @@ export class NaverBlogAutomation {
               if (saveButton) {
                 await saveButton.click();
                 await this.delay(this.DELAYS.MEDIUM);
-                await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
+                await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
                 this.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
               } else {
                 throw new Error('임시저장 버튼도 찾을 수 없습니다.');
@@ -5462,7 +5462,7 @@ export class NaverBlogAutomation {
               let navigationSuccess = false;
               try {
                 await Promise.race([
-                  frame.waitForNavigation({ waitUntil: 'networkidle0', timeout: 60000 }),
+                  frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }),
                   new Promise(resolve => setTimeout(resolve, 30000))
                 ]);
                 navigationSuccess = true;
@@ -5518,7 +5518,7 @@ export class NaverBlogAutomation {
                 if (saveButton) {
                   await saveButton.click();
                   await this.delay(this.DELAYS.MEDIUM);
-                  await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
+                  await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
                   this.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
                 } else {
                   throw new Error('임시저장 버튼도 찾을 수 없습니다.');
@@ -5548,7 +5548,7 @@ export class NaverBlogAutomation {
               if (saveButton) {
                 await saveButton.click();
                 await this.delay(this.DELAYS.MEDIUM);
-                await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
+                await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
                 this.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
               } else {
                 throw new Error('임시저장 버튼도 찾을 수 없습니다.');

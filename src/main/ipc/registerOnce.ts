@@ -1,12 +1,22 @@
 // v2.7.28 — IPC ipcMain.handle/on 이중 등록 가드 (Phase 1 P0 #4 첫 단계)
+// ✅ [v2.10.68 ROOT CAUSE FIX] 정책 반전: "마지막 등록 살림" → "첫 등록 살림"
 //
 // 배경: main.ts에 105개 + main/ipc/* 에 161개 핸들러가 공존. 동일 채널이 두 번 등록되면
 //       Electron은 후행 등록을 silently 무시(handle) 또는 listener 누적(on)하여 회귀를 만든다.
 //
-// 동작: ipcMain.handle/on을 monkey-patch해서 동일 채널 두 번째 호출 시
-//       1) handle: 이전 핸들러를 자동 제거 후 신규 등록 (마지막 등록을 살림)
-//       2) on:     중복 등록을 무시 (listener 누적 차단)
-//   두 경우 모두 console.warn으로 알림.
+// v2.10.67까지의 정책 (잘못된 의도):
+//   - handle: 이전 핸들러 제거 후 마지막 등록 살림
+//   - 의도: silent 무시 방지 → 마지막 등록자가 의도된 것일 거라는 가정
+//   - 실제 발생한 문제: main.ts top-level 진짜 구현이 먼저 등록 → app.whenReady() 후
+//     main/ipc/* 의 placeholder/미완성 핸들러가 등록 시 main.ts 진짜 구현을 자동 제거 →
+//     사용자에게 silent 빈 응답 (예: image:downloadAndSaveMultiple → savedOk=0/48)
+//
+// v2.10.68 정책 (수정):
+//   - handle: 첫 등록만 살림. 후속 등록 시도는 console.warn 후 무시
+//   - 이유: main.ts top-level이 먼저 evaluate되어 진짜 구현이 먼저 등록되므로,
+//     첫 등록을 살리면 main.ts의 진짜 구현이 항상 우선됨
+//   - main/ipc/* 의 placeholder가 main.ts 진짜 구현을 덮어쓰는 회귀 영구 차단
+//   - on: 기존과 동일 (중복 등록 무시)
 //
 // 사용: main.ts 최상단에서 단 한 번 import하면 적용. 다른 코드는 수정 불필요.
 //   import './main/ipc/registerOnce.js';
@@ -25,9 +35,10 @@ if (!installed) {
   (ipcMain as unknown as { handle: typeof ipcMain.handle }).handle = ((channel: string, listener: Parameters<typeof ipcMain.handle>[1]) => {
     const key = `handle:${channel}`;
     if (registered.has(key)) {
+      // ✅ [v2.10.68] 첫 등록 살림 정책 — 후속 시도 무시 (main.ts 진짜 구현 보호)
       // eslint-disable-next-line no-console
-      console.warn(`[IPC Guard] 이중 handle 등록 감지 → 이전 핸들러 제거 후 신규 등록: "${channel}"`);
-      try { ipcMain.removeHandler(channel); } catch { /* ignore */ }
+      console.warn(`[IPC Guard] 이중 handle 등록 차단 (첫 등록 살림): "${channel}" — main.ts 진짜 구현이 main/ipc/* placeholder에 덮어써지는 회귀 차단`);
+      return; // 후속 등록 무시
     }
     registered.add(key);
     return originalHandle(channel, listener);
