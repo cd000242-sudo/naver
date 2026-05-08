@@ -207,6 +207,20 @@ export function setHeadingImageMode(mode: HeadingImageMode): void {
   console.log(`[HeadingImageSettings] 이미지 모드 설정: ${mode}`);
 }
 
+// ✅ [v2.10.71] 이미지 소스 별칭 정규화 — write-time에서 적용 (silent migration loop 차단)
+//   사용자 보고: '[UnifiedDOMCache] ⚠️ fullAutoImageSource 오염 값 제거: "nano-banana-2"' 두 번 발생
+//   원인: setter가 'nano-banana-2'를 그대로 저장 → read에서 정규화 → 다시 setter가 저장 → 무한 루프
+//   해결: write-time에서 정식 키로 변환 → localStorage엔 항상 정식 키만 저장됨
+const IMAGE_SOURCE_ALIAS_MAP: Record<string, string> = {
+  'nano-banana-2': 'nano-banana-pro',  // v2.7.28 통합 정책: 동일 백엔드 모델
+};
+
+export function normalizeImageSource(raw: string | null | undefined): GlobalImageSource | null {
+  if (!raw || raw === 'null' || raw === 'undefined') return null;
+  const normalized = IMAGE_SOURCE_ALIAS_MAP[raw] || raw;
+  return normalized as GlobalImageSource;
+}
+
 // ✅ 글로벌 이미지 소스 설정
 export function getGlobalImageSource(): GlobalImageSource {
   const saved = safeLocalStorageGet('globalImageSource') as GlobalImageSource;
@@ -214,16 +228,20 @@ export function getGlobalImageSource(): GlobalImageSource {
 }
 
 export function setGlobalImageSource(source: GlobalImageSource): void {
-  currentGlobalImageSource = source;
-  safeLocalStorageSet('globalImageSource', source);
-  // ✅ [2026-02-18 FIX] fullAutoImageSource도 동기화 — 이전에는 globalImageSource만 설정되어
-  // getImageSource()가 fullAutoImageSource(="null")를 거부한 후 DOM 폴백으로 nano-banana-pro 반환
-  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
-  if (VALID_AI_SOURCES.includes(source)) {
-    safeLocalStorageSet('fullAutoImageSource', source);
-    console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${source}`);
+  // ✅ [v2.10.71] write-time 정규화 (별칭 → 정식 키)
+  const normalized = (normalizeImageSource(source) || source) as GlobalImageSource;
+  if (normalized !== source) {
+    console.log(`[HeadingImageSettings] 🔄 별칭 정규화 (write): "${source}" → "${normalized}"`);
+  }
+  currentGlobalImageSource = normalized;
+  safeLocalStorageSet('globalImageSource', normalized);
+  // fullAutoImageSource도 동기화 — VALID_AI_SOURCES에서 별칭 'nano-banana-2' 제거 (write-time 정규화로 항상 정식 키만 저장됨)
+  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
+  if (VALID_AI_SOURCES.includes(normalized)) {
+    safeLocalStorageSet('fullAutoImageSource', normalized);
+    console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${normalized}`);
   } else {
-    console.log(`[HeadingImageSettings] 글로벌 이미지 소스 설정: ${source} (AI 엔진 아님 → fullAuto 미동기화)`);
+    console.log(`[HeadingImageSettings] 글로벌 이미지 소스 설정: ${normalized} (AI 엔진 아님 → fullAuto 미동기화)`);
   }
 }
 
@@ -232,10 +250,12 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
 //   기존: fullAutoImageSource가 오염된 기본값('nano-banana-pro')이어도 globalImageSource='flow'를 무시
 //   현재: globalImageSource가 유효하면 그걸 최우선으로 사용 + fullAutoImageSource도 덮어써서 동기화
 export function getFullAutoImageSource(): GlobalImageSource {
-  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-2', 'nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
+  // ✅ [v2.10.71] VALID에서 별칭 'nano-banana-2' 제거 (write-time 정규화로 항상 정식 키만 저장됨)
+  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
 
-  const fullAutoSaved = safeLocalStorageGet('fullAutoImageSource');
-  const globalSaved = safeLocalStorageGet('globalImageSource');
+  // 정규화 read (별칭이 저장돼있으면 정식 키로 변환)
+  const fullAutoSaved = normalizeImageSource(safeLocalStorageGet('fullAutoImageSource'));
+  const globalSaved = normalizeImageSource(safeLocalStorageGet('globalImageSource'));
 
   // 1순위: globalImageSource (사용자 최근 명시적 선택)
   if (globalSaved && VALID_SOURCES.includes(globalSaved as GlobalImageSource)) {
@@ -266,8 +286,13 @@ export function getFullAutoImageSource(): GlobalImageSource {
 }
 
 export function setFullAutoImageSource(source: GlobalImageSource): void {
-  safeLocalStorageSet('fullAutoImageSource', source);
-  console.log(`[HeadingImageSettings] 풀오토 전용 이미지 소스 설정: ${source}`);
+  // ✅ [v2.10.71] write-time 정규화
+  const normalized = (normalizeImageSource(source) || source) as GlobalImageSource;
+  if (normalized !== source) {
+    console.log(`[HeadingImageSettings] 🔄 별칭 정규화 (write): "${source}" → "${normalized}"`);
+  }
+  safeLocalStorageSet('fullAutoImageSource', normalized);
+  console.log(`[HeadingImageSettings] 풀오토 전용 이미지 소스 설정: ${normalized}`);
 }
 
 // ✅ [2026-01-26] 이미지 스타일 설정 (확장)

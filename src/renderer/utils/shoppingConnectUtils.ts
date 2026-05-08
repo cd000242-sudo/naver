@@ -154,12 +154,14 @@ export function getShoppingConnectAIEngine(): ShoppingConnectAIEngine {
 
 export function setShoppingConnectAIEngine(engine: ShoppingConnectAIEngine, syncFullAuto: boolean = true): void {
     try {
-        localStorage.setItem(SC_AI_ENGINE_STORAGE_KEY, engine);
+        // ✅ [v2.10.71] 별칭 정규화 (nano-banana-2 → nano-banana-pro)
+        const normalizedEngine = (engine === 'nano-banana-2' ? 'nano-banana-pro' : engine) as ShoppingConnectAIEngine;
+        localStorage.setItem(SC_AI_ENGINE_STORAGE_KEY, normalizedEngine);
         if (syncFullAuto) {
             // 반자동 드롭다운도 같이 업데이트 (AI 엔진 범주 내 양방향 sync)
-            localStorage.setItem('fullAutoImageSource', engine);
-            localStorage.setItem('globalImageSource', engine);
-            (window as any).globalImageSource = engine;
+            localStorage.setItem('fullAutoImageSource', normalizedEngine);
+            localStorage.setItem('globalImageSource', normalizedEngine);
+            (window as any).globalImageSource = normalizedEngine;
             // 드롭다운 UI가 열려 있으면 값도 반영
             const sel = document.getElementById('image-source-select') as HTMLSelectElement | null;
             if (sel && sel.value !== engine) sel.value = engine;

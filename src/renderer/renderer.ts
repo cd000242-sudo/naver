@@ -7173,9 +7173,11 @@ function initUnifiedImageSourceSelection(): void {
       if (check) (check as HTMLElement).style.display = 'flex';
 
       // ✅ [2026-02-16 FIX] 풀오토 전용 이미지 소스 저장 — 'saved'/'collected'는 AI 엔진이 아니므로 제외
+      // ✅ [v2.10.71] 별칭 정규화 (nano-banana-2 → nano-banana-pro)
       if (source && source !== 'saved' && source !== 'collected') {
-        localStorage.setItem('fullAutoImageSource', source);
-        console.log(`[FullAuto] 풀오토 전용 이미지 소스 저장: ${source}`);
+        const normalizedSource = source === 'nano-banana-2' ? 'nano-banana-pro' : source;
+        localStorage.setItem('fullAutoImageSource', normalizedSource);
+        console.log(`[FullAuto] 풀오토 전용 이미지 소스 저장: ${normalizedSource}${normalizedSource !== source ? ` (정규화: "${source}" → "${normalizedSource}")` : ''}`);
       } else if (source === 'saved' || source === 'collected') {
         // 저장된 이미지/수집 이미지 선택 시 fullAutoImageSource 제거 → getImageSource()가 UI 버튼 기반으로 동작
         localStorage.removeItem('fullAutoImageSource');

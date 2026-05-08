@@ -392,12 +392,14 @@ export async function initImageManagementTab(): Promise<void> {
 
       // ✅ [2026-02-13 ROOT CAUSE FIX] globalImageSource/fullAutoImageSource에는 AI 엔진만 저장
       // 'saved'는 AI 엔진이 아님 → 별도 키에 저장하고, AI 엔진 설정은 오염시키지 않음
-      (window as any).globalImageSource = selectedSource;
-      if (selectedSource !== 'saved') {
-        localStorage.setItem('globalImageSource', selectedSource);
+      // ✅ [v2.10.71] 별칭 정규화 (nano-banana-2 → nano-banana-pro)
+      const normalizedSource = selectedSource === 'nano-banana-2' ? 'nano-banana-pro' : selectedSource;
+      (window as any).globalImageSource = normalizedSource;
+      if (normalizedSource !== 'saved') {
+        localStorage.setItem('globalImageSource', normalizedSource);
         // ✅ [2026-02-13 FIX] fullAutoImageSource도 항상 동기화
-        localStorage.setItem('fullAutoImageSource', selectedSource);
-        console.log(`[Renderer] 🔄 fullAutoImageSource 동기화: "${selectedSource}"`);
+        localStorage.setItem('fullAutoImageSource', normalizedSource);
+        console.log(`[Renderer] 🔄 fullAutoImageSource 동기화: "${normalizedSource}"${normalizedSource !== selectedSource ? ` (정규화: "${selectedSource}" → "${normalizedSource}")` : ''}`);
         // [v1.6.3] 쇼핑 커넥트 AI 엔진(nano-banana-pro|openai-image)이면 scAIImageEngine + 라디오도 sync
         if (selectedSource === 'nano-banana-pro' || selectedSource === 'openai-image') {
           localStorage.setItem('scAIImageEngine', selectedSource);

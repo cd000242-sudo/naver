@@ -398,8 +398,10 @@ function processNextInQueue(): void {
       if (!INVALID_AI_SOURCES.includes(item.imageSource)) {
         // ✅ [2026-02-18 FIX] null/undefined 방지 — item.imageSource가 null이면 "null" 문자열이 저장되는 버그
         if (item.imageSource && item.imageSource !== 'null' && item.imageSource !== 'undefined') {
-          localStorage.setItem('fullAutoImageSource', item.imageSource);
-          console.log(`[Continuous] ✅ fullAutoImageSource localStorage 동기화: "${item.imageSource}"`);
+          // ✅ [v2.10.71] 별칭 정규화 (nano-banana-2 → nano-banana-pro) — silent migration loop 차단
+          const normalizedSource = item.imageSource === 'nano-banana-2' ? 'nano-banana-pro' : item.imageSource;
+          localStorage.setItem('fullAutoImageSource', normalizedSource);
+          console.log(`[Continuous] ✅ fullAutoImageSource localStorage 동기화: "${normalizedSource}"${normalizedSource !== item.imageSource ? ` (정규화: "${item.imageSource}" → "${normalizedSource}")` : ''}`);
         } else {
           console.warn(`[Continuous] ⚠️ item.imageSource가 유효하지 않음("${item.imageSource}") → fullAutoImageSource 변경 안 함`);
         }        // ✅ [2026-02-11 FIX] dispatchEvent('change') 제거!
@@ -2148,13 +2150,15 @@ export function initContinuousPublishingV2(): void {
   document.querySelectorAll('input[name="continuous-modal-shopping-subimage-source"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
       const value = (e.target as HTMLInputElement).value;
-      localStorage.setItem('scSubImageSource', value);
-      if (value === 'nano-banana-2' || value === 'nano-banana-pro' || value === 'openai-image' || value === 'dall-e-3') {
+      // ✅ [v2.10.71] 별칭 정규화 (nano-banana-2 → nano-banana-pro)
+      const normalizedValue = value === 'nano-banana-2' ? 'nano-banana-pro' : value;
+      localStorage.setItem('scSubImageSource', normalizedValue);
+      if (normalizedValue === 'nano-banana-pro' || normalizedValue === 'openai-image' || normalizedValue === 'dall-e-3') {
         // AI 엔진 선택 — 전역 AI 이미지 소스와 sync (반자동 드롭다운도 업데이트)
-        localStorage.setItem('scAIImageEngine', value);
-        localStorage.setItem('fullAutoImageSource', value);
-        localStorage.setItem('globalImageSource', value);
-        (window as any).globalImageSource = value;
+        localStorage.setItem('scAIImageEngine', normalizedValue);
+        localStorage.setItem('fullAutoImageSource', normalizedValue);
+        localStorage.setItem('globalImageSource', normalizedValue);
+        (window as any).globalImageSource = normalizedValue;
         const mainSel = document.getElementById('image-source-select') as HTMLSelectElement | null;
         if (mainSel && mainSel.value !== value) mainSel.value = value;
         console.log(`[쇼핑커넥트 서브탭] 🍌🦆 AI 엔진 선택 → 전역 sync: ${value}`);
