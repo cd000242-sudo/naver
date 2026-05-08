@@ -709,13 +709,17 @@ export async function initPriceInfoModal(): Promise<void> {
       }
     }
 
-    // ✅ [v2.10.58] 비용 절감 토글 4종 로드
+    // ✅ [v2.10.59] 비용 절감 토글 4종 로드 — 기본 ON (사용자 명시 요청)
+    //   기존: 기본 OFF (안전 우선)
+    //   변경: 기본 ON (비용 절감 자동 적용). 사용자가 명시 OFF 시에만 비활성
     try {
       const costSaverModeEl = document.getElementById('cost-saver-mode') as HTMLInputElement | null;
       const useCompressedPromptEl = document.getElementById('use-compressed-prompt') as HTMLInputElement | null;
       const useCrawlSummaryEl = document.getElementById('use-crawl-summary') as HTMLInputElement | null;
       const subWorkProviderEl = document.getElementById('sub-work-provider') as HTMLSelectElement | null;
-      if (costSaverModeEl) costSaverModeEl.checked = (config as any).costSaverMode === true;
+      // costSaverMode: undefined일 때 기본 true (자동 ON)
+      if (costSaverModeEl) costSaverModeEl.checked = (config as any).costSaverMode !== false;
+      // useCompressedPrompt/useCrawlSummary: 기본 OFF 유지 (실험적이라 안전)
       if (useCompressedPromptEl) useCompressedPromptEl.checked = (config as any).useCompressedPrompt === true;
       if (useCrawlSummaryEl) useCrawlSummaryEl.checked = (config as any).useCrawlSummary === true;
       if (subWorkProviderEl) subWorkProviderEl.value = (config as any).subWorkProvider || 'same';

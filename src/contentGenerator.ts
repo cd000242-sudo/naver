@@ -2733,13 +2733,14 @@ JSON:
   //   사용자 보고: '한편당 50회 호출' — 제목만 4번(0+1+2+3) 호출되던 것을 2번(0+1)으로
   //   기존: MAX_RETRIES=3 → 4번 호출 (attempt 0,1,2,3)
   //   변경: MAX_RETRIES=1 → 2번 호출 (attempt 0,1) — 1차 실패 시 1회 재시도
-  // ✅ [v2.10.58] 비용 절감 모드 ON 시 MAX_RETRIES=0 (단 1회만 호출)
-  const _cfg: any = (typeof process !== 'undefined' && (process as any).__configCache) || {};
-  let MAX_RETRIES = 1;
+  // ✅ [v2.10.59] 비용 절감 모드 기본 ON — 사용자 명시 OFF가 아니면 단 1회 호출
+  //   사용자 요청: '자동으로 ON 시키라'
+  //   기본 1회 호출 (MAX_RETRIES=0). costSaverMode === false 시에만 1회 재시도(MAX_RETRIES=1)
+  let MAX_RETRIES = 0;
   try {
     const config = await loadConfig();
-    if ((config as any).costSaverMode === true) MAX_RETRIES = 0;
-  } catch { /* 기본값 유지 */ }
+    if ((config as any).costSaverMode === false) MAX_RETRIES = 1;
+  } catch { /* 기본값 유지 (절감 모드) */ }
   let bestResult: { selectedTitle?: string; titleCandidates?: TitleCandidate[]; titleAlternatives?: string[] } = {};
   let bestScore = 0;
   let prevTitle = '';
@@ -9691,8 +9692,11 @@ export async function generateStructuredContent(
           }
         }
 
+        // ✅ [v2.10.59] 비용 절감 모드 기본 ON — 도입부 재작성 비활성화 (사용자 명시 OFF 시에만 동작)
         const introIssues = computeHomefeedIntroCriticalIssues(parsed.introduction);
-        if (introIssues.length > 0 && attempt < MAX_ATTEMPTS) {
+        const _csCfg = await loadConfig().catch(() => ({} as any));
+        const _costSaverOn = (_csCfg as any).costSaverMode !== false; // 기본 true
+        if (introIssues.length > 0 && attempt < MAX_ATTEMPTS && !_costSaverOn) {
           const patch = await generateHomefeedIntroOnlyPatch(source, parsed, provider);
           if (patch?.introduction) {
             parsed.introduction = patch.introduction;
