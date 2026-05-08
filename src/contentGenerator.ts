@@ -2749,18 +2749,25 @@ JSON:
       // ✅ [v2] 재시도 시 이전 실패 피드백
       const retryFeedback = buildTitleRetryFeedback(attempt, prevTitle, prevScore, prevIssues);
 
-      // ✅ [2026-02-23 FIX] 사용자 선택 provider로 제목 생성 (Gemini 하드코딩 제거)
+      // ✅ [v2.10.55] 사용자 보고 '한편당 50회 호출, 천원 이상 청구' — 제목 생성은 무조건 Gemini Flash 무료 사용
+      //   기존: 사용자 선택 provider로 제목 생성 → GPT-4.1 사용 시 1편당 제목만 5~10회 호출 누적
+      //   수정: Gemini 키 있으면 무조건 Gemini Flash (무료 1500요청/일), 없으면 사용자 provider 폴백
+      //   효과: GPT-4.1 사용자도 제목 부수 호출 비용 0
       const titleTemp = 0.7 + (attempt * 0.05);
       const titlePromptFull = prompt + formulaInstruction + previousTitlesPrompt + retryFeedback;
       let raw: string;
-      if (provider === 'perplexity') {
+      const hasGeminiKey = !!(process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.trim());
+      if (hasGeminiKey) {
+        // 비용 절감: 제목은 항상 Gemini Flash (무료/저렴)
+        raw = await callGemini(titlePromptFull, titleTemp, 650, { useGrounding: false });
+      } else if (provider === 'perplexity') {
         raw = await callPerplexity(titlePromptFull, titleTemp, 650);
       } else if (provider === 'openai') {
         raw = await callOpenAI(titlePromptFull, titleTemp, 650);
       } else if (provider === 'claude') {
         raw = await callClaude(titlePromptFull, titleTemp, 650);
       } else {
-        raw = await callGemini(titlePromptFull, titleTemp, 650, { useGrounding: false }); // ✅ [v1.4.3] 제목 패치는 Grounding OFF (비용 절감)
+        raw = await callGemini(titlePromptFull, titleTemp, 650, { useGrounding: false });
       }
       console.log(`[TitleGen] 시도 ${attempt + 1}/${MAX_RETRIES + 1} — 공식: ${formula.name}`);
 
@@ -3238,16 +3245,19 @@ JSON:
 `.trim();
 
   try {
-    // ✅ [2026-02-23 FIX] 사용자 선택 provider로 도입부 재작성
+    // ✅ [v2.10.55] 도입부 재작성도 Gemini Flash 강제 (비용 절감)
     let raw: string;
-    if (provider === 'perplexity') {
+    const hasGeminiKey = !!(process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.trim());
+    if (hasGeminiKey) {
+      raw = await callGemini(prompt, 0.9, 450, { useGrounding: false });
+    } else if (provider === 'perplexity') {
       raw = await callPerplexity(prompt, 0.9, 450);
     } else if (provider === 'openai') {
       raw = await callOpenAI(prompt, 0.9, 450);
     } else if (provider === 'claude') {
       raw = await callClaude(prompt, 0.9, 450);
     } else {
-      raw = await callGemini(prompt, 0.9, 450, { useGrounding: false }); // ✅ [v1.4.3] 도입부 패치는 Grounding OFF (비용 절감)
+      raw = await callGemini(prompt, 0.9, 450, { useGrounding: false });
     }
     const parsed = safeParseJson<any>(raw);
     const introduction = typeof parsed?.introduction === 'string' ? String(parsed.introduction).trim() : '';
