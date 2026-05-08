@@ -986,7 +986,11 @@ export async function generateSingleImageWithFlow(
 
 // v2.6.7 — 중복 가드 상수: Flow에서 SHA256/aHash 일치 시 diversity hint를
 // 주입한 새 프롬프트로 단발 재생성. 무한 루프 방지를 위해 항당 최대 N회.
-const FLOW_DUPLICATE_MAX_RETRIES = 3;
+// ✅ [v2.10.61] 사용자 보고 'FLOW 중복 이미지 가끔 배치됨'
+//   기존: 3회 재시도 후 폴백 허용 → 일부 중복이 통과
+//   변경: 5회 재시도 + similarityThreshold 8 (probeDuplicate 호출 시)
+const FLOW_DUPLICATE_MAX_RETRIES = 5;
+const FLOW_AHASH_THRESHOLD = 8; // 64비트 중 8비트 차이까지 유사로 간주 (이전 6 → 8 강화)
 
 // ─── [v1.6.1] 파이프라인 배치 생성 ────
 //   queueDepth=2: 제출 #1 → 입력 재활성화 대기 → 제출 #2 → #1 감지 → 제출 #3...
@@ -1084,7 +1088,7 @@ async function generateBatchPipelined(
 
             // v2.6.7: 중복/유사 감지 시 diversity hint 단발 재생성 (최대 N회)
             if (usedImageHashes || usedImageAHashes) {
-                let probe = await probeDuplicate(downloaded.buffer, usedImageHashes, usedImageAHashes);
+                let probe = await probeDuplicate(downloaded.buffer, usedImageHashes, usedImageAHashes, FLOW_AHASH_THRESHOLD);
                 let dupRetries = 0;
                 while ((probe.isDuplicate || probe.isSimilar) && dupRetries < FLOW_DUPLICATE_MAX_RETRIES) {
                     dupRetries++;
@@ -1096,14 +1100,15 @@ async function generateBatchPipelined(
                         const retried = await generateSingleImageWithFlow(acceptedPrompt, (slot.item as any).aspectRatio || '1:1');
                         if (!retried) break;
                         downloaded = retried;
-                        probe = await probeDuplicate(downloaded.buffer, usedImageHashes, usedImageAHashes);
+                        probe = await probeDuplicate(downloaded.buffer, usedImageHashes, usedImageAHashes, FLOW_AHASH_THRESHOLD);
                     } catch (retryErr) {
                         flowWarn(`[Flow][Pipeline] diversity 재생성 실패 — 원본 유지: ${(retryErr as Error).message.substring(0, 100)}`);
                         break;
                     }
                 }
                 if (probe.isDuplicate || probe.isSimilar) {
-                    flowLog(`[Flow][Pipeline] ℹ️ ${FLOW_DUPLICATE_MAX_RETRIES}회 시도 후에도 중복/유사 — 폴백 허용`);
+                    flowWarn(`[Flow][Pipeline] ⚠️ ${FLOW_DUPLICATE_MAX_RETRIES}회 시도 후에도 중복/유사 — 사용자에게 알림 + 폴백 허용`);
+                    sendImageLog(`⚠️ [Flow] "${slot.item.heading}" 중복 이미지 ${FLOW_DUPLICATE_MAX_RETRIES}회 재시도 후에도 검출 — 그대로 사용 (필요 시 수동 교체 가능)`);
                 }
                 commitHashes(probe, usedImageHashes, usedImageAHashes);
             }
@@ -1258,7 +1263,7 @@ export async function generateWithFlow(
 
             // v2.6.7: 중복/유사 감지 시 diversity hint 단발 재생성 (최대 N회)
             if (usedImageHashes || usedImageAHashes) {
-                let probe = await probeDuplicate(generated.buffer, usedImageHashes, usedImageAHashes);
+                let probe = await probeDuplicate(generated.buffer, usedImageHashes, usedImageAHashes, FLOW_AHASH_THRESHOLD);
                 let dupRetries = 0;
                 while ((probe.isDuplicate || probe.isSimilar) && dupRetries < FLOW_DUPLICATE_MAX_RETRIES) {
                     dupRetries++;
@@ -1275,14 +1280,15 @@ export async function generateWithFlow(
                         );
                         if (!retried) break;
                         generated = retried;
-                        probe = await probeDuplicate(generated.buffer, usedImageHashes, usedImageAHashes);
+                        probe = await probeDuplicate(generated.buffer, usedImageHashes, usedImageAHashes, FLOW_AHASH_THRESHOLD);
                     } catch (retryErr) {
                         flowWarn(`[Flow][Seq] diversity 재생성 실패 — 원본 유지: ${(retryErr as Error).message.substring(0, 100)}`);
                         break;
                     }
                 }
                 if (probe.isDuplicate || probe.isSimilar) {
-                    flowLog(`[Flow][Seq] ℹ️ ${FLOW_DUPLICATE_MAX_RETRIES}회 시도 후에도 중복/유사 — 폴백 허용`);
+                    flowWarn(`[Flow][Seq] ⚠️ ${FLOW_DUPLICATE_MAX_RETRIES}회 시도 후에도 중복/유사 — 사용자에게 알림 + 폴백 허용`);
+                    sendImageLog(`⚠️ [Flow] "${item.heading}" 중복 이미지 ${FLOW_DUPLICATE_MAX_RETRIES}회 재시도 후에도 검출 — 그대로 사용 (필요 시 수동 교체)`);
                 }
                 commitHashes(probe, usedImageHashes, usedImageAHashes);
             }
