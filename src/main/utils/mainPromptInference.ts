@@ -273,37 +273,60 @@ export async function generateEnglishPromptMain(
   const claudeKey = config?.claudeApiKey || config?.CLAUDE_API_KEY || config?.ANTHROPIC_API_KEY;
   const perplexityKey = config?.perplexityApiKey || config?.PERPLEXITY_API_KEY;
 
-  // 순차 시도: Gemini → OpenAI → Claude → Perplexity
-  const attempts = [
-    { name: 'Gemini', fn: () => tryGemini(headingText, imageStyle, geminiKey, geminiModel) },
-    { name: 'OpenAI', fn: () => tryOpenAI(headingText, imageStyle, openaiKey) },
-    { name: 'Claude', fn: () => tryClaude(headingText, imageStyle, claudeKey) },
-    { name: 'Perplexity', fn: () => tryPerplexity(headingText, imageStyle, perplexityKey) },
-  ];
+  // ✅ [v2.10.57] 사용자 지적 '모델 자동 폴백 금지' — 멀티모델 자동 전환 회귀
+  //   기존: Gemini → OpenAI → Claude → Perplexity 순차 시도 (사용자 모델 무시)
+  //   문제: 사용자가 GPT-4.1 선택했는데 Gemini가 우선 호출되거나, Gemini가 서버 불안정 시 자동 OpenAI 폴백
+  //   수정: 사용자가 환경설정에서 명시 선택한 provider만 사용. 실패 시 같은 모델로 N회 재시도 후 명확한 에러
+  const userProvider = (config?.defaultAiProvider || 'gemini') as 'gemini' | 'openai' | 'claude' | 'perplexity';
 
-  for (const { name, fn } of attempts) {
+  let attemptFn: () => Promise<string | null>;
+  let attemptName: string;
+  if (userProvider === 'openai') {
+    attemptFn = () => tryOpenAI(headingText, imageStyle, openaiKey);
+    attemptName = 'OpenAI';
+  } else if (userProvider === 'claude') {
+    attemptFn = () => tryClaude(headingText, imageStyle, claudeKey);
+    attemptName = 'Claude';
+  } else if (userProvider === 'perplexity') {
+    attemptFn = () => tryPerplexity(headingText, imageStyle, perplexityKey);
+    attemptName = 'Perplexity';
+  } else {
+    attemptFn = () => tryGemini(headingText, imageStyle, geminiKey, geminiModel);
+    attemptName = 'Gemini';
+  }
+
+  // 같은 모델로 최대 3회 재시도 (서버 불안정 대응 — 다른 모델 폴백 없음)
+  const MAX_RETRIES = 3;
+  let lastErr: any = null;
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const result = await fn();
+      const result = await attemptFn();
       if (result) {
-        // ✅ [2026-03-18] AI 응답 정제 — Perplexity 자기 소개, 시스템 프롬프트 누출 차단
         const sanitized = sanitizeAIPromptResponse(result);
-        // ✅ [2026-03-24 FIX] 정제 후 빈 문자열/짧은 결과 검증 — 대화성 응답 폐기 시 빈 문자열 반환됨
-        // 빈 문자열을 캐시하거나 반환하면 이미지 생성이 빈 프롬프트로 실행되는 치명적 버그
         if (!sanitized || sanitized.length < 10) {
-          console.warn(`[MainPromptInference] ⚠️ ${name} 정제 후 무효 (${sanitized.length}자) → 폴백 진행`);
-          continue; // 다음 모델로 폴백
+          console.warn(`[MainPromptInference] ⚠️ ${attemptName} 정제 후 무효 (시도 ${attempt}/${MAX_RETRIES})`);
+          if (attempt < MAX_RETRIES) {
+            await new Promise(r => setTimeout(r, 1500 * attempt));
+            continue;
+          }
+        } else {
+          console.log(`[MainPromptInference] ✅ ${attemptName} 성공 (시도 ${attempt}): "${headingText}" → "${sanitized.substring(0, 60)}..."`);
+          cachePrompt(cacheKey, sanitized);
+          return sanitized;
         }
-        console.log(`[MainPromptInference] ✅ ${name} 성공: "${headingText}" → "${sanitized.substring(0, 60)}..."`);
-        cachePrompt(cacheKey, sanitized);
-        return sanitized;
       }
     } catch (err) {
-      console.warn(`[MainPromptInference] ${name} 실패:`, err);
+      lastErr = err;
+      console.warn(`[MainPromptInference] ${attemptName} 실패 (시도 ${attempt}/${MAX_RETRIES}):`, err);
+      if (attempt < MAX_RETRIES) {
+        await new Promise(r => setTimeout(r, 1500 * attempt));
+      }
     }
   }
 
-  // 모든 AI 실패 → 폴백
-  console.log(`[MainPromptInference] 모든 AI 실패 → 폴백 프롬프트: "${headingText}"`);
+  // ✅ 사용자 선택 모델 N회 모두 실패 → 자동 폴백 0, 안전한 영문 폴백 프롬프트만 반환
+  //   이는 '다른 모델로 폴백'이 아니라 '하드코딩된 영문 템플릿' (외부 API 호출 0)
+  console.warn(`[MainPromptInference] ⛔ ${attemptName} ${MAX_RETRIES}회 모두 실패 → 영문 템플릿 폴백 (다른 AI 모델 자동 호출 안 함)`);
   const fb = fallbackPrompt(headingText);
   cachePrompt(cacheKey, fb);
   return fb;
