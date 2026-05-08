@@ -2729,8 +2729,11 @@ JSON:
     console.warn('[TitleGen] getRecentPeriods 로드 실패:', e);
   }
 
-  // ✅ [2026-02-09 v2] 최대 3회 재생성 + 공식 패턴 로테이션 + 피드백
-  const MAX_RETRIES = 3;
+  // ✅ [v2.10.56] 비용 폭증 회귀 차단 — 제목 재생성 3회 → 1회로 단축
+  //   사용자 보고: '한편당 50회 호출' — 제목만 4번(0+1+2+3) 호출되던 것을 2번(0+1)으로
+  //   기존: MAX_RETRIES=3 → 4번 호출 (attempt 0,1,2,3)
+  //   변경: MAX_RETRIES=1 → 2번 호출 (attempt 0,1) — 1차 실패 시 1회 재시도
+  const MAX_RETRIES = 1;
   let bestResult: { selectedTitle?: string; titleCandidates?: TitleCandidate[]; titleAlternatives?: string[] } = {};
   let bestScore = 0;
   let prevTitle = '';
@@ -2749,18 +2752,13 @@ JSON:
       // ✅ [v2] 재시도 시 이전 실패 피드백
       const retryFeedback = buildTitleRetryFeedback(attempt, prevTitle, prevScore, prevIssues);
 
-      // ✅ [v2.10.55] 사용자 보고 '한편당 50회 호출, 천원 이상 청구' — 제목 생성은 무조건 Gemini Flash 무료 사용
-      //   기존: 사용자 선택 provider로 제목 생성 → GPT-4.1 사용 시 1편당 제목만 5~10회 호출 누적
-      //   수정: Gemini 키 있으면 무조건 Gemini Flash (무료 1500요청/일), 없으면 사용자 provider 폴백
-      //   효과: GPT-4.1 사용자도 제목 부수 호출 비용 0
+      // ✅ [v2.10.56] silent 폴백 회귀 — 사용자 선택 provider 100% 존중 (자동 폴백 금지 원칙)
+      //   v2.10.55의 Gemini Flash 강제는 사용자 선택 무시 → 회귀
+      //   대신: 부수 작업 호출 횟수 자체를 줄여서 비용 절감 (silent 폴백 없이)
       const titleTemp = 0.7 + (attempt * 0.05);
       const titlePromptFull = prompt + formulaInstruction + previousTitlesPrompt + retryFeedback;
       let raw: string;
-      const hasGeminiKey = !!(process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.trim());
-      if (hasGeminiKey) {
-        // 비용 절감: 제목은 항상 Gemini Flash (무료/저렴)
-        raw = await callGemini(titlePromptFull, titleTemp, 650, { useGrounding: false });
-      } else if (provider === 'perplexity') {
+      if (provider === 'perplexity') {
         raw = await callPerplexity(titlePromptFull, titleTemp, 650);
       } else if (provider === 'openai') {
         raw = await callOpenAI(titlePromptFull, titleTemp, 650);
@@ -3245,12 +3243,9 @@ JSON:
 `.trim();
 
   try {
-    // ✅ [v2.10.55] 도입부 재작성도 Gemini Flash 강제 (비용 절감)
+    // ✅ [v2.10.56] silent 폴백 회귀 — 사용자 선택 provider 그대로 (자동 폴백 금지 원칙)
     let raw: string;
-    const hasGeminiKey = !!(process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.trim());
-    if (hasGeminiKey) {
-      raw = await callGemini(prompt, 0.9, 450, { useGrounding: false });
-    } else if (provider === 'perplexity') {
+    if (provider === 'perplexity') {
       raw = await callPerplexity(prompt, 0.9, 450);
     } else if (provider === 'openai') {
       raw = await callOpenAI(prompt, 0.9, 450);
