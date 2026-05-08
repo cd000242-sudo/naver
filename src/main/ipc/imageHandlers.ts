@@ -136,8 +136,9 @@ export function registerImageHandlers(ctx: IpcContext): void {
     });
 
     // 저장된 이미지 경로 가져오기
+    // ✅ [2026-05-04 FIX] userData/images로 통일 — main.ts의 저장 경로와 일치시킴
     safeHandle('images:getSavedPath', async () => {
-        return path.join(os.homedir(), 'naver-blog-automation', 'images');
+        return path.join(app.getPath('userData'), 'images');
     });
 
     // 저장된 이미지 목록 가져오기
@@ -174,29 +175,18 @@ export function registerImageHandlers(ctx: IpcContext): void {
         }
     });
 
-    // URL에서 이미지 수집
-    safeHandle('image:collectFromUrl', async (_event, url: string) => {
-        console.log('[imageHandlers] image:collectFromUrl - placeholder');
-        return { success: false, images: [] };
-    });
-
-    // ✅ [2026-02-27] image:collectFromShopping는 main.ts L2477에서 처리됨 (중복 제거)
-    // main.ts 핸들러가 브랜드스토어/스마트스토어/쿠팡 플랫폼별 분기 로직을 포함하며,
-    // fetchShoppingImages + collectShoppingImages + filterDuplicateAndLowQualityImages를 사용함.
-    // 여기 imageHandlers.ts에 등록하면 Electron이 먼저 등록된 main.ts 핸들러만 사용하므로
-    // 이 핸들러는 실행되지 않아 삭제함.
-
-    // 여러 이미지 다운로드 및 저장
-    safeHandle('image:downloadAndSaveMultiple', async (_event, images: Array<{ url: string; heading: string }>, title: string) => {
-        console.log('[imageHandlers] image:downloadAndSaveMultiple - placeholder');
-        return { success: false, savedPaths: [] };
-    });
-
-    // 비교표 이미지 생성
-    safeHandle('image:generateComparisonTable', async (_event, options: any) => {
-        console.log('[imageHandlers] image:generateComparisonTable - placeholder');
-        return { success: false };
-    });
+    // ✅ [v2.10.67 FIX] placeholder 핸들러 일괄 삭제 — silent fail 차단
+    //   사용자 보고: AI 자동수집 saveResult { success: false, savedOk: 0, savedFail: 0, firstThree: [] }
+    //   원인: imageHandlers.ts의 placeholder가 main.ts:3301 진짜 구현보다 먼저 등록되어, 사용자에게 silent하게 빈 응답 반환
+    //   응답 형식이 main.ts (savedImages) 와 placeholder (savedPaths) 가 달라 renderer가 빈배열로 처리 → 0/48
+    //
+    //   삭제된 placeholder:
+    //   - image:collectFromUrl (main.ts에 진짜 구현 있음 — main.ts:2477 collectFromShopping 참조)
+    //   - image:downloadAndSaveMultiple (main.ts:3301 진짜 구현 사용)
+    //   - image:generateComparisonTable (imageTableHandlers.ts에 진짜 구현)
+    //
+    //   이제 main.ts/imageTableHandlers.ts의 진짜 구현이 무조건 작동.
+    //   진짜 구현이 등록 실패하면 IPC "no handler" 에러로 사용자에게 명확히 표시 (silent fail 차단).
 
     // ✅ [2026-01-19] 장단점 표 이미지 생성
     safeHandle('image:generateProsConsTable', async (_event, options: {
