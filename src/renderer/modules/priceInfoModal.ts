@@ -727,6 +727,14 @@ export async function initPriceInfoModal(): Promise<void> {
       console.warn('[priceInfoModal] 비용 절감 토글 로드 실패:', e);
     }
 
+    // ✅ [v2.10.62] GEO/AEO 최적화 토글 로드 — 기본 OFF (네이버 SEO 회귀 위험 0)
+    try {
+      const geoOptEl = document.getElementById('geo-optimization') as HTMLInputElement | null;
+      if (geoOptEl) geoOptEl.checked = (config as any).geoOptimization === true;
+    } catch (e) {
+      console.warn('[priceInfoModal] GEO 최적화 토글 로드 실패:', e);
+    }
+
     try {
       if (externalApiCostConsent) externalApiCostConsent.checked = config.externalApiCostConsent === true;
       if (externalApiPerRunImageLimit) externalApiPerRunImageLimit.value = String((config as any).externalApiPerRunImageLimit ?? 10);
@@ -911,6 +919,8 @@ export async function initPriceInfoModal(): Promise<void> {
           useCompressedPrompt: (document.getElementById('use-compressed-prompt') as HTMLInputElement | null)?.checked || false,
           useCrawlSummary: (document.getElementById('use-crawl-summary') as HTMLInputElement | null)?.checked || false,
           subWorkProvider: ((document.getElementById('sub-work-provider') as HTMLSelectElement | null)?.value as 'same' | 'gpt-mini' | 'gemini-flash' | 'haiku') || 'same',
+          // ✅ [v2.10.62] GEO/AEO 최적화 토글 저장 (기본 OFF)
+          geoOptimization: (document.getElementById('geo-optimization') as HTMLInputElement | null)?.checked || false,
           primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-2.5-flash', // ✅ [v1.4.49 revert] 기본값 Flash (Flash-Lite RPD 20/일로 부족)
           geminiPlanType: (document.querySelector('input[name="geminiPlanType"]:checked') as HTMLInputElement)?.value as 'free' | 'paid' || 'free', // ✅ [v1.4.49] 기본값 free (안전한 기본값 + 텍스트 모델 자동 Flash 선택)
           imagePreset: (document.getElementById('image-preset-input') as HTMLInputElement)?.value as 'budget' | 'premium' | 'custom' || 'custom',

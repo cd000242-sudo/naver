@@ -5713,6 +5713,21 @@
                         본문은 항상 사용자 선택 모델로 생성. 부수 작업(제목/도입부/이미지 프롬프트 변환)만 다른 모델로 명시 분리.
                     </small>
                 </div>
+
+                <!-- 5. GEO/AEO 최적화 (v2.10.62) -->
+                <div class="field" style="margin-bottom: 0.5rem; padding: 0.8rem; background: rgba(212, 175, 55, 0.05); border: 1px solid var(--border-gold); border-radius: 8px;">
+                    <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
+                        <input type="checkbox" id="geo-optimization" style="margin-top: 0.3rem; cursor: pointer;">
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.2rem;">🌐 GEO/AEO 최적화 모드 (외부 LLM 인용 친화)</div>
+                            <small style="color: var(--text-muted); font-size: 0.75rem; display: block; line-height: 1.4;">
+                                ON 시 ChatGPT / Perplexity / Google AI Overview / Gemini가 본문을 인용하기 좋은 형식으로 추가 가공.
+                                <strong>네이버 SEO 룰과 충돌 없는 패턴만 사용</strong>합니다 (시점 시그널 + 인용 친화 fact-block + 권위 표현 자연 삽입).
+                                기본 OFF — 네이버 SEO 점수 회귀 위험 0.
+                            </small>
+                        </div>
+                    </label>
+                </div>
             </div>
 
         </div><!-- settings-content 닫힘 -->

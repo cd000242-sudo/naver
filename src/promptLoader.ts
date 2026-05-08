@@ -155,14 +155,19 @@ export function resolveCategory(categoryHint?: string): PromptCategory {
 
 /**
  * 2축 분리 구조로 시스템 프롬프트 생성
- * 
+ *
  * @param mode - 노출 목적 (seo | homefeed)
  * @param category - 카테고리 (entertainment | society | health | it | life | general)
+ * @param options - { geoOverlay: boolean } — v2.10.62 GEO/AEO 오버레이 주입 (기본 OFF)
  * @returns 합성된 시스템 프롬프트
- * 
- * 합성 순서: [노출 목적 base] + [카테고리 보정 prompt]
+ *
+ * 합성 순서: [노출 목적 base] + [카테고리 보정 prompt] + [GEO 오버레이 (옵션)]
  */
-export function buildSystemPrompt(mode: PromptMode, category: PromptCategory = 'general'): string {
+export function buildSystemPrompt(
+  mode: PromptMode,
+  category: PromptCategory = 'general',
+  options?: { geoOverlay?: boolean }
+): string {
   // 1. 노출 목적 base 프롬프트 로드
   const basePrompt = loadPromptFile(`${mode}/base.prompt`);
 
@@ -171,29 +176,48 @@ export function buildSystemPrompt(mode: PromptMode, category: PromptCategory = '
     return getFallbackPrompt(mode);
   }
 
-  // 2. 카테고리가 general이면 base만 반환
-  if (category === 'general') {
-    return basePrompt;
+  // 2. 카테고리 보정 프롬프트
+  let composed = basePrompt;
+  if (category !== 'general') {
+    const categoryPrompt = loadPromptFile(`${mode}/${category}.prompt`);
+    if (categoryPrompt) {
+      composed = `${composed}\n\n${categoryPrompt}`;
+    } else {
+      console.warn(`[PromptLoader] 카테고리 프롬프트 없음: ${mode}/${category}.prompt - base만 사용`);
+    }
   }
 
-  // 3. 카테고리 보정 프롬프트 로드
-  const categoryPrompt = loadPromptFile(`${mode}/${category}.prompt`);
-
-  if (!categoryPrompt) {
-    console.warn(`[PromptLoader] 카테고리 프롬프트 없음: ${mode}/${category}.prompt - base만 사용`);
-    return basePrompt;
+  // 3. GEO/AEO 오버레이 — v2.10.62 사용자 명시 ON 시에만 (seo 모드 한정)
+  if (options?.geoOverlay && mode === 'seo') {
+    const geoOverlay = loadPromptFile('seo/geo-overlay.prompt');
+    if (geoOverlay) {
+      composed = `${composed}\n\n${geoOverlay}`;
+    } else {
+      console.warn('[PromptLoader] geo-overlay.prompt 로드 실패 - 오버레이 미적용');
+    }
   }
 
-  // 4. 합성: base + 카테고리 보정
-  return `${basePrompt}\n\n${categoryPrompt}`;
+  return composed;
 }
 
 /**
  * ContentSource의 categoryHint를 사용해 시스템 프롬프트 생성
  */
-export function buildSystemPromptFromHint(mode: PromptMode, categoryHint?: string): string {
+export function buildSystemPromptFromHint(
+  mode: PromptMode,
+  categoryHint?: string,
+  options?: { geoOverlay?: boolean }
+): string {
   const category = resolveCategory(categoryHint);
-  return buildSystemPrompt(mode, category);
+  return buildSystemPrompt(mode, category, options);
+}
+
+/**
+ * GEO/AEO 오버레이 프롬프트 단독 로드 (v2.10.62)
+ * buildFullPrompt 결과에 후행 추가 시 사용. SEO 모드 한정.
+ */
+export function getGeoOverlayPrompt(): string {
+  return loadPromptFile('seo/geo-overlay.prompt');
 }
 
 /**

@@ -92,6 +92,11 @@ export interface AppConfig {
   //   기본 'same': 본문과 동일 모델 (현재 동작 유지, silent 폴백 0)
   //   'gpt-mini' / 'gemini-flash' / 'haiku': 사용자 명시 선택 시에만 부수 분리
   subWorkProvider?: 'same' | 'gpt-mini' | 'gemini-flash' | 'haiku';
+  // ✅ [v2.10.62] GEO/AEO 최적화 모드 — 외부 LLM(ChatGPT, Perplexity, AI Overview) 인용 친화
+  //   기본 OFF: 네이버 SEO 룰 100% 유지 (회귀 위험 0)
+  //   ON 시: 시점 시그널 + 인용 친화 fact-block + 권위 표현 자연 삽입 패치 활성
+  //   네이버 H6(출처 단어 금지) 룰과 충돌 없는 패턴만 사용 — 네이버 SEO 점수 동결
+  geoOptimization?: boolean;
   // ✅ [v2.7.61] AI 이미지 관련성 검증 (Gemini Vision)
   imageRelevanceCheck?: boolean; // true 시 수집 이미지마다 AI가 관련성 평가
   imageRelevanceThreshold?: number; // 0~100, 기본 60
@@ -622,6 +627,8 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
         'userDisplayName', 'userEmail',
         // ✅ [v2.10.58] 비용 절감 토글 4종 보존
         'costSaverMode', 'useCompressedPrompt', 'useCrawlSummary', 'subWorkProvider',
+        // ✅ [v2.10.62] GEO 토글 보존
+        'geoOptimization',
       ];
       let preserved = 0;
       for (const k of PRESERVE_KEYS) {

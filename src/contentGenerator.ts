@@ -17,7 +17,7 @@ import path from 'path';
 import { JSON_SCHEMA_DESCRIPTION } from './contentGenerator/schema';
 import { humanizeContent, humanizeHtmlContent, analyzeAiDetectionRisk, resetHumanizerLog } from './aiHumanizer.js';
 import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog } from './contentOptimizer.js';
-import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, type PromptMode } from './promptLoader.js';
+import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, getGeoOverlayPrompt, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { META_CRITIQUE_PHRASES } from './content/forbiddenPhrases.js';
 // ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 실전 통합 훅
@@ -27,7 +27,7 @@ import { isFeatureEnabled } from './services/featureFlagConfig.js';
 // ✅ [v1.4.48 Stage A.2] require() 혼용 제거 → 정적 import로 통일 (모듈 인스턴스 단일 보장)
 import { processAutoPublishContent, getRecentPeriods, recordSelectedTitle, type TitleSelectionResult } from './titleSelector.js';
 import { trendAnalyzer } from './agents/trendAnalyzer.js';
-import { loadConfig } from './configManager.js';
+import { loadConfig, getConfigSync } from './configManager.js';
 import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
 import { checkHomefeedCriticalViolations, checkPromptCompliance, formatComplianceReport } from './contentQualityChecker.js';
 import { safeParseJson, cleanJsonOutput, tryFixJson, fixJsonAtPosition } from './jsonParser';
@@ -4741,6 +4741,26 @@ ${source.customPrompt.trim()}
       undefined, // bloggerIdentity: 호출자에서 주입 가능 (v1.8.0 LDF)
       (source as any).primaryKeyword || (source as any).keywords?.[0], // v1.8.1 LDF Phase 2: CTR 훅 매개
     );
+  }
+
+  // ✅ [v2.10.62] GEO/AEO 오버레이 — 사용자 명시 ON 시에만 SEO/affiliate 모드 한정 적용
+  //   기본 OFF: 네이버 SEO 룰 100% 유지 (회귀 위험 0)
+  //   ON 시: ChatGPT/Perplexity/AI Overview/Gemini 인용 친화 패치 후행 주입
+  try {
+    const geoCfg = getConfigSync();
+    const geoOn = (geoCfg as any)?.geoOptimization === true;
+    const geoEligibleMode = contentMode === 'seo' || contentMode === 'affiliate';
+    if (geoOn && geoEligibleMode) {
+      const overlay = getGeoOverlayPrompt();
+      if (overlay) {
+        systemPromptResult += `\n\n${overlay}`;
+        console.log(`[PromptBuilder] 🌐 GEO/AEO 오버레이 적용 (mode=${contentMode}, 사용자 명시 ON)`);
+      } else {
+        console.warn('[PromptBuilder] geo-overlay.prompt 로드 실패 — 미적용');
+      }
+    }
+  } catch (e) {
+    console.warn('[PromptBuilder] GEO 오버레이 처리 중 예외 — 미적용:', e);
   }
 
   // ✅ [Traffic Hunter 통합] 모드별 온도(Temperature) 설정
