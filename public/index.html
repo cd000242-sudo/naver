@@ -5714,16 +5714,16 @@
                     </small>
                 </div>
 
-                <!-- 5. GEO/AEO 최적화 (v2.10.62) -->
+                <!-- 5. GEO/AEO 최적화 (v2.10.63 기본 ON) -->
                 <div class="field" style="margin-bottom: 0.5rem; padding: 0.8rem; background: rgba(212, 175, 55, 0.05); border: 1px solid var(--border-gold); border-radius: 8px;">
                     <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
-                        <input type="checkbox" id="geo-optimization" style="margin-top: 0.3rem; cursor: pointer;">
+                        <input type="checkbox" id="geo-optimization" checked style="margin-top: 0.3rem; cursor: pointer;">
                         <div>
-                            <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.2rem;">🌐 GEO/AEO 최적화 모드 (외부 LLM 인용 친화)</div>
+                            <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.2rem;">🌐 GEO/AEO 최적화 모드 (외부 LLM 인용 친화) <span style="color: var(--text-gold); font-size: 0.75rem;">[기본 ON]</span></div>
                             <small style="color: var(--text-muted); font-size: 0.75rem; display: block; line-height: 1.4;">
-                                ON 시 ChatGPT / Perplexity / Google AI Overview / Gemini가 본문을 인용하기 좋은 형식으로 추가 가공.
+                                ChatGPT / Perplexity / Google AI Overview / Gemini가 본문을 인용하기 좋은 형식으로 추가 가공.
                                 <strong>네이버 SEO 룰과 충돌 없는 패턴만 사용</strong>합니다 (시점 시그널 + 인용 친화 fact-block + 권위 표현 자연 삽입).
-                                기본 OFF — 네이버 SEO 점수 회귀 위험 0.
+                                <br>비용: 1편당 ~₩100~200 추가 (캐싱 시 절감). 회귀 우려 시 OFF.
                             </small>
                         </div>
                     </label>

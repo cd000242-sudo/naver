@@ -727,10 +727,12 @@ export async function initPriceInfoModal(): Promise<void> {
       console.warn('[priceInfoModal] 비용 절감 토글 로드 실패:', e);
     }
 
-    // ✅ [v2.10.62] GEO/AEO 최적화 토글 로드 — 기본 OFF (네이버 SEO 회귀 위험 0)
+    // ✅ [v2.10.63] GEO/AEO 최적화 토글 로드 — 기본 ON (수익화 효과 우선)
+    //   v2.10.62 기본 OFF → v2.10.63 기본 ON 전환
+    //   undefined일 때 자동 ON. 사용자가 명시 false 저장 시에만 OFF.
     try {
       const geoOptEl = document.getElementById('geo-optimization') as HTMLInputElement | null;
-      if (geoOptEl) geoOptEl.checked = (config as any).geoOptimization === true;
+      if (geoOptEl) geoOptEl.checked = (config as any).geoOptimization !== false;
     } catch (e) {
       console.warn('[priceInfoModal] GEO 최적화 토글 로드 실패:', e);
     }

@@ -4743,18 +4743,19 @@ ${source.customPrompt.trim()}
     );
   }
 
-  // ✅ [v2.10.62] GEO/AEO 오버레이 — 사용자 명시 ON 시에만 SEO/affiliate 모드 한정 적용
-  //   기본 OFF: 네이버 SEO 룰 100% 유지 (회귀 위험 0)
-  //   ON 시: ChatGPT/Perplexity/AI Overview/Gemini 인용 친화 패치 후행 주입
+  // ✅ [v2.10.63] GEO/AEO 오버레이 — 기본 ON (사용자가 명시 OFF 시에만 비활성)
+  //   v2.10.62 기본 OFF → v2.10.63 기본 ON 전환 (사용자 요청: "수익나는법")
+  //   네이버 SEO 룰 충돌 0 (오버레이 자체가 base.prompt 룰을 어기지 않는 범위에서만 작동)
+  //   비용: 1편당 ~2~3K 토큰 추가 → ~₩100~200/편 (캐싱 시 절감)
   try {
     const geoCfg = getConfigSync();
-    const geoOn = (geoCfg as any)?.geoOptimization === true;
+    const geoOn = (geoCfg as any)?.geoOptimization !== false; // 기본 ON: undefined도 true 취급
     const geoEligibleMode = contentMode === 'seo' || contentMode === 'affiliate';
     if (geoOn && geoEligibleMode) {
       const overlay = getGeoOverlayPrompt();
       if (overlay) {
         systemPromptResult += `\n\n${overlay}`;
-        console.log(`[PromptBuilder] 🌐 GEO/AEO 오버레이 적용 (mode=${contentMode}, 사용자 명시 ON)`);
+        console.log(`[PromptBuilder] 🌐 GEO/AEO 오버레이 적용 (mode=${contentMode}, 기본 ON)`);
       } else {
         console.warn('[PromptBuilder] geo-overlay.prompt 로드 실패 — 미적용');
       }
