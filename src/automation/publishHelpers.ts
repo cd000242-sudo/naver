@@ -1676,7 +1676,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
       // 순차 실행: 클릭 먼저, 그 다음 네비게이션 대기
       await saveButton.click();
       await self.delay(self.DELAYS.MEDIUM); // 클릭 후 안정화 대기
-      await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
+      await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
 
       self.log('✅ 블로그 글이 임시저장되었습니다.');
     } else if (mode === 'publish') {
@@ -1901,8 +1901,8 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
             let navigationSuccess = false;
             try {
               await Promise.race([
-                frame.waitForNavigation({ waitUntil: 'networkidle0', timeout: 30000 }),
-                new Promise(resolve => setTimeout(resolve, 30000)) // 최대 30초 대기
+                frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }), // ✅ [v2.10.69] 30→60초 + networkidle0→networkidle2 (광고 트래커 회피)
+                new Promise(resolve => setTimeout(resolve, 60000)) // 최대 60초 대기
               ]);
               navigationSuccess = true;
             } catch (navError) {
@@ -2004,8 +2004,8 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
               let navigationSuccess = false;
               try {
                 await Promise.race([
-                  frame.waitForNavigation({ waitUntil: 'networkidle0', timeout: 30000 }),
-                  new Promise(resolve => setTimeout(resolve, 30000))
+                  frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }), // ✅ [v2.10.69] 30→60초 + networkidle0→networkidle2
+                  new Promise(resolve => setTimeout(resolve, 60000))
                 ]);
                 navigationSuccess = true;
               } catch (navError) {
@@ -2050,7 +2050,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
             if (saveButton) {
               await saveButton.click();
               await self.delay(self.DELAYS.MEDIUM);
-              await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
+              await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
               self.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
             } else {
               throw new Error('발행과 임시저장 버튼 모두 찾지 못했습니다. 네이버 에디터 UI가 변경되었을 수 있으니 앱 업데이트를 확인하거나 잠시 후 다시 시도해주세요.');
@@ -2115,8 +2115,8 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
             let navigationSuccess = false;
             try {
               await Promise.race([
-                frame.waitForNavigation({ waitUntil: 'networkidle0', timeout: 30000 }),
-                new Promise(resolve => setTimeout(resolve, 30000))
+                frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }), // ✅ [v2.10.69] 30→60초 + networkidle0→networkidle2
+                new Promise(resolve => setTimeout(resolve, 60000))
               ]);
               navigationSuccess = true;
             } catch (navError) {
@@ -2170,7 +2170,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
               if (saveButton) {
                 await saveButton.click();
                 await self.delay(self.DELAYS.MEDIUM);
-                await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
+                await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
                 self.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
               } else {
                 throw new Error('발행과 임시저장 버튼 모두 찾지 못했습니다. 네이버 에디터 UI가 변경되었을 수 있으니 앱 업데이트를 확인하거나 잠시 후 다시 시도해주세요.');
@@ -2199,7 +2199,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
             if (saveButton) {
               await saveButton.click();
               await self.delay(self.DELAYS.MEDIUM);
-              await frame.waitForNavigation({ waitUntil: 'networkidle0' }).catch(() => undefined);
+              await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
               self.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
             } else {
               throw new Error('발행과 임시저장 버튼 모두 찾지 못했습니다. 네이버 에디터 UI가 변경되었을 수 있으니 앱 업데이트를 확인하거나 잠시 후 다시 시도해주세요.');
