@@ -17,6 +17,7 @@ type ResolvedRunOptions = any;
 import type { StructuredContent, ImagePlan } from '../contentGenerator.js';
 import type { GhostCursor } from '../ghostCursorHelper.js';
 import { PREV_POST_HOOKS } from './ctaHelpers.js';
+import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, safeKeyboardType } from './typingUtils.js';
 
@@ -1558,7 +1559,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                       if (['image', 'font', 'media', 'stylesheet'].includes(type)) route.abort();
                       else route.continue();
                     });
-                    await pwPage.goto(resolvedAffiliateUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
+                    // ✅ [v2.10.70] 15초 → 30초 중앙 상수 (쇼핑커넥트 affiliate URL 외부 응답 흡수)
+                    await pwPage.goto(resolvedAffiliateUrl, { waitUntil: 'domcontentloaded', timeout: NAVER_TIMEOUTS.AFFILIATE_URL });
                     // 최종 URL 대기 (최대 5초)
                     let trackedUrl = pwPage.url();
                     for (let i = 0; i < 10; i++) {

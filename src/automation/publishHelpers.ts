@@ -10,6 +10,7 @@ import {
   getAllSelectors,
   getSelectorStrings,
 } from './selectors';
+import { NAVER_TIMEOUTS, NAVER_WAIT_UNTIL } from './timeouts';
 
 // PublishMode type from naverBlogAutomation
 type PublishMode = 'draft' | 'publish' | 'schedule';
@@ -1901,8 +1902,8 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
             let navigationSuccess = false;
             try {
               await Promise.race([
-                frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }), // ✅ [v2.10.69] 30→60초 + networkidle0→networkidle2 (광고 트래커 회피)
-                new Promise(resolve => setTimeout(resolve, 60000)) // 최대 60초 대기
+                frame.waitForNavigation({ waitUntil: NAVER_WAIT_UNTIL.FRAME_NAVIGATION, timeout: NAVER_TIMEOUTS.FRAME_NAVIGATION }), // ✅ [v2.10.69] 30→60초 + networkidle0→networkidle2 (광고 트래커 회피)
+                new Promise(resolve => setTimeout(resolve, NAVER_TIMEOUTS.FRAME_NAVIGATION)) // 최대 60초 대기
               ]);
               navigationSuccess = true;
             } catch (navError) {
@@ -2004,8 +2005,8 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
               let navigationSuccess = false;
               try {
                 await Promise.race([
-                  frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }), // ✅ [v2.10.69] 30→60초 + networkidle0→networkidle2
-                  new Promise(resolve => setTimeout(resolve, 60000))
+                  frame.waitForNavigation({ waitUntil: NAVER_WAIT_UNTIL.FRAME_NAVIGATION, timeout: NAVER_TIMEOUTS.FRAME_NAVIGATION }), // ✅ [v2.10.69] 30→60초 + networkidle0→networkidle2
+                  new Promise(resolve => setTimeout(resolve, NAVER_TIMEOUTS.FRAME_NAVIGATION))
                 ]);
                 navigationSuccess = true;
               } catch (navError) {
@@ -2115,8 +2116,8 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
             let navigationSuccess = false;
             try {
               await Promise.race([
-                frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }), // ✅ [v2.10.69] 30→60초 + networkidle0→networkidle2
-                new Promise(resolve => setTimeout(resolve, 60000))
+                frame.waitForNavigation({ waitUntil: NAVER_WAIT_UNTIL.FRAME_NAVIGATION, timeout: NAVER_TIMEOUTS.FRAME_NAVIGATION }), // ✅ [v2.10.69] 30→60초 + networkidle0→networkidle2
+                new Promise(resolve => setTimeout(resolve, NAVER_TIMEOUTS.FRAME_NAVIGATION))
               ]);
               navigationSuccess = true;
             } catch (navError) {

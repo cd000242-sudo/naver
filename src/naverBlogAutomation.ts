@@ -23,6 +23,7 @@ import { withRetry, findWithFallback, clickWithRetry, navigateWithRetry, isRetry
 import { createGhostCursor, safeClick, safeType, safeClickInFrame, waitRandom, randomMouseMovement, type GhostCursor } from './ghostCursorHelper.js';
 import * as imageHelpers from './automation/imageHelpers';
 import * as publishHelpers from './automation/publishHelpers';
+import { NAVER_TIMEOUTS, NAVER_WAIT_UNTIL } from './automation/timeouts';
 import * as editorHelpers from './automation/editorHelpers';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
 import {
@@ -3800,7 +3801,7 @@ export class NaverBlogAutomation {
         //   원인: 네트워크/세션/네이버 응답 지연 시 30초 부족 (특히 GEO 오버레이 등으로 발행 부하 증가 시점)
         await page.goto(blogWriteUrl, {
           waitUntil: 'domcontentloaded',
-          timeout: 60000
+          timeout: NAVER_TIMEOUTS.PAGE_LOAD
         });
 
         // 페이지 로드 대기
@@ -3897,7 +3898,7 @@ export class NaverBlogAutomation {
             // ✅ [v2.10.67] 30000 → 60000ms (사용자 보고: Navigation timeout of 30000 ms exceeded)
             await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
               waitUntil: 'domcontentloaded',
-              timeout: 60000
+              timeout: NAVER_TIMEOUTS.PAGE_LOAD
             });
             await this.delay(3000);
 
@@ -4032,7 +4033,7 @@ export class NaverBlogAutomation {
       // ✅ [v2.10.67] 30000 → 60000ms (사용자 보고: Navigation timeout)
       await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
         waitUntil: 'domcontentloaded',
-        timeout: 60000
+        timeout: NAVER_TIMEOUTS.PAGE_LOAD
       });
       await this.delay(3000);
 
@@ -4059,7 +4060,7 @@ export class NaverBlogAutomation {
         // ✅ [v2.10.67] 30000 → 60000ms (사용자 보고: Navigation timeout)
         await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
           waitUntil: 'domcontentloaded',
-          timeout: 60000
+          timeout: NAVER_TIMEOUTS.PAGE_LOAD
         });
         await this.delay(3000);
         currentUrl = page.url();
@@ -4111,7 +4112,7 @@ export class NaverBlogAutomation {
         try {
           // 1차: reload (cookies 유지 + redirect 체인 다시 시작)
           // ✅ [v2.10.67] 30000 → 60000ms (사용자 보고: Navigation timeout)
-          await page.reload({ waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {});
+          await page.reload({ waitUntil: 'domcontentloaded', timeout: NAVER_TIMEOUTS.PAGE_RELOAD }).catch(() => {});
           await this.delay(2000);
           // 2차: 그래도 #mainFrame 없으면 직접 goto
           const stillNoFrame = await page.evaluate(() => {
@@ -4120,7 +4121,7 @@ export class NaverBlogAutomation {
           if (stillNoFrame) {
             await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
               waitUntil: 'domcontentloaded',
-              timeout: 60000
+              timeout: NAVER_TIMEOUTS.PAGE_LOAD
             });
             // ✅ delay → waitForFunction으로 명시 안착 대기
             await page.waitForFunction(
@@ -5206,8 +5207,8 @@ export class NaverBlogAutomation {
               let navigationSuccess = false;
               try {
                 await Promise.race([
-                  frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }),
-                  new Promise(resolve => setTimeout(resolve, 60000)) // ✅ [v2.10.67] 30초 → 60초 (frame.waitForNavigation timeout 매칭)
+                  frame.waitForNavigation({ waitUntil: NAVER_WAIT_UNTIL.FRAME_NAVIGATION, timeout: NAVER_TIMEOUTS.FRAME_NAVIGATION }),
+                  new Promise(resolve => setTimeout(resolve, NAVER_TIMEOUTS.FRAME_NAVIGATION)) // ✅ [v2.10.70] 중앙 상수
                 ]);
                 navigationSuccess = true;
               } catch (navError) {
@@ -5309,8 +5310,8 @@ export class NaverBlogAutomation {
                 let navigationSuccess = false;
                 try {
                   await Promise.race([
-                    frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }),
-                    new Promise(resolve => setTimeout(resolve, 60000)) // ✅ [v2.10.67] 30초 → 60초
+                    frame.waitForNavigation({ waitUntil: NAVER_WAIT_UNTIL.FRAME_NAVIGATION, timeout: NAVER_TIMEOUTS.FRAME_NAVIGATION }),
+                    new Promise(resolve => setTimeout(resolve, NAVER_TIMEOUTS.FRAME_NAVIGATION)) // ✅ [v2.10.70] 중앙 상수
                   ]);
                   navigationSuccess = true;
                 } catch (navError) {
@@ -5462,7 +5463,7 @@ export class NaverBlogAutomation {
               let navigationSuccess = false;
               try {
                 await Promise.race([
-                  frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 60000 }),
+                  frame.waitForNavigation({ waitUntil: NAVER_WAIT_UNTIL.FRAME_NAVIGATION, timeout: NAVER_TIMEOUTS.FRAME_NAVIGATION }),
                   new Promise(resolve => setTimeout(resolve, 30000))
                 ]);
                 navigationSuccess = true;

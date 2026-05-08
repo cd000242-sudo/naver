@@ -508,7 +508,7 @@ async function connectViaAdsPower(): Promise<Page> {
 
   // labs.google/fx 접속 + 세션 확인
   await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
-    waitUntil: 'networkidle',
+    waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
     timeout: 60000,
   });
   await cachedPage.waitForTimeout(1500);
@@ -565,7 +565,7 @@ async function connectViaAdsPower(): Promise<Page> {
   browserMode = 'adspower';
 
   await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
-    waitUntil: 'networkidle',
+    waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
     timeout: 60000,
   });
 
@@ -651,7 +651,7 @@ async function connectViaAdsPower(): Promise<Page> {
   browserMode = 'adspower';
 
   await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
-    waitUntil: 'networkidle',
+    waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
     timeout: 60000,
   });
   await new Promise(resolve => setTimeout(resolve, 1500));
@@ -816,7 +816,7 @@ async function connectViaPlaywright(): Promise<Page> {
 
   // labs.google/fx 접속 + 세션 확인
   await page.goto('https://labs.google/fx/tools/image-fx', {
-    waitUntil: 'networkidle',
+    waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
     timeout: 60000,
   });
   await page.waitForTimeout(1500);
@@ -869,7 +869,7 @@ async function connectViaPlaywright(): Promise<Page> {
 
   page = context.pages()[0] || await context.newPage();
   await page.goto('https://labs.google/fx/tools/image-fx', {
-    waitUntil: 'networkidle',
+    waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
     timeout: 60000,
   });
 
@@ -936,7 +936,7 @@ async function connectViaPlaywright(): Promise<Page> {
   const headlessContext = await launchWithSystemBrowserFallback(chromium, profileDir, launchOptions);
   const headlessPage = headlessContext.pages()[0] || await headlessContext.newPage();
   await headlessPage.goto('https://labs.google/fx/tools/image-fx', {
-    waitUntil: 'networkidle',
+    waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
     timeout: 60000,
   });
   await new Promise(resolve => setTimeout(resolve, 1500));
@@ -1017,7 +1017,7 @@ async function ensureBrowserPage(): Promise<Page> {
   if (!currentUrl.includes('labs.google/fx')) {
     console.log('[ImageFX] 🌐 labs.google/fx 접속...');
     await page.goto('https://labs.google/fx/tools/image-fx', {
-      waitUntil: 'networkidle',
+      waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
       timeout: 60000,
     });
     await page.waitForTimeout(2000);
@@ -1316,7 +1316,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
         const currentUrl = cachedPage.url();
         if (!currentUrl.includes('labs.google/fx')) {
           await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
-            waitUntil: 'networkidle',
+            waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
             timeout: 60000,
           });
           await cachedPage.waitForTimeout(1500);
@@ -1379,7 +1379,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
         let page = context.pages()[0] || await context.newPage();
 
         await page.goto('https://labs.google/fx/tools/image-fx', {
-          waitUntil: 'networkidle',
+          waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
           timeout: 60000,
         });
         await page.waitForTimeout(1500);
@@ -1428,7 +1428,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
 
         page = context.pages()[0] || await context.newPage();
         await page.goto('https://labs.google/fx/tools/image-fx', {
-          waitUntil: 'networkidle',
+          waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
           timeout: 60000,
         });
 
@@ -1520,7 +1520,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
     let page = context.pages()[0] || await context.newPage();
 
     await page.goto('https://labs.google/fx/tools/image-fx', {
-      waitUntil: 'networkidle',
+      waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
       timeout: 60000,
     });
     await page.waitForTimeout(1500);
@@ -1570,7 +1570,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
 
     page = context.pages()[0] || await context.newPage();
     await page.goto('https://labs.google/fx/tools/image-fx', {
-      waitUntil: 'networkidle',
+      waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
       timeout: 60000,
     });
 
@@ -1869,7 +1869,7 @@ export async function switchGoogleAccountForImageFx(): Promise<{
 
       try {
         await page.goto('https://labs.google/fx/tools/image-fx', {
-          waitUntil: 'networkidle',
+          waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
           timeout: 60000,
         });
       } catch (navErr: any) {
