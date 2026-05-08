@@ -13,6 +13,7 @@
 
 import type { ImageRequestItem, GeneratedImage } from './types.js';
 import { writeImageFile } from './imageUtils.js';
+import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 // ✅ [v2.7.53] modelRegistry SSOT
@@ -2029,6 +2030,12 @@ export async function generateWithImageFx(
   // ✅ [v1.4.40] 마지막 분류된 에러 보존 — 0개 결과일 때 명확한 사유로 throw
   let lastClassifiedError: Error | null = null;
 
+  // ✅ [v2.10.65] 중복 이미지 검출 — FLOW/나노/Leonardo/DeepInfra와 동기화 (임계값 8)
+  const usedImageHashes = new Set<string>();
+  const usedImageAHashes: bigint[] = [];
+  const IMAGEFX_AHASH_THRESHOLD = 8;
+  const IMAGEFX_DUP_MAX_RETRIES = 3;
+
   for (let i = 0; i < items.length; i++) {
     // 중지 체크
     if (stopCheck && stopCheck()) {
@@ -2045,7 +2052,7 @@ export async function generateWithImageFx(
 
     try {
       // 프롬프트 결정: 영어 프롬프트 우선 (ImageFX는 영어 최적화)
-      const prompt = item.englishPrompt || item.prompt || heading;
+      let prompt = item.englishPrompt || item.prompt || heading;
 
       // config에서 비율 가져오기
       let imageRatio = (item as any).imageRatio || '1:1';
@@ -2055,17 +2062,43 @@ export async function generateWithImageFx(
         imageRatio = (item as any).imageRatio || (config as any).imageRatio || '1:1';
       } catch { /* config 로드 실패 시 기본값 사용 */ }
 
-      // ImageFX로 이미지 1장 생성
-      const fxResult = await generateSingleImageWithImageFx(prompt, imageRatio);
+      // ✅ [v2.10.65] 중복 검출 + 다양성 재생성 루프
+      let fxResult: { buffer: Buffer; mimeType: string } | null = null;
+      let acceptedProbe: { isDuplicate: boolean; isSimilar: boolean; sha256: string | null; aHash: bigint | null } | null = null;
+      for (let dupAttempt = 1; dupAttempt <= IMAGEFX_DUP_MAX_RETRIES; dupAttempt++) {
+        const candidate = await generateSingleImageWithImageFx(prompt, imageRatio);
+        if (!candidate || !candidate.buffer) {
+          fxResult = candidate;
+          break; // 생성 실패 — 외부 분기에서 처리
+        }
+        const probe = await probeDuplicate(candidate.buffer, usedImageHashes, usedImageAHashes, IMAGEFX_AHASH_THRESHOLD);
+        if (probe.isDuplicate || probe.isSimilar) {
+          if (dupAttempt < IMAGEFX_DUP_MAX_RETRIES) {
+            const reason = probe.isDuplicate ? '중복(SHA256)' : '유사(aHash)';
+            console.warn(`[ImageFX] 🔁 ${reason} 감지 → diversity hint 적용 후 재시도 (${dupAttempt}/${IMAGEFX_DUP_MAX_RETRIES}) - ${heading}`);
+            sendImageLog(`🔁 [ImageFX] [${heading}] 중복 이미지 감지 — 다른 각도로 재생성 (${dupAttempt + 1}/${IMAGEFX_DUP_MAX_RETRIES})`);
+            prompt = applyDiversityHint(prompt, dupAttempt);
+            continue;
+          }
+          console.warn(`[ImageFX] ⚠️ 최종 ${IMAGEFX_DUP_MAX_RETRIES}회 재시도에도 중복/유사 — 허용하고 진행: ${heading}`);
+          sendImageLog(`⚠️ [ImageFX] [${heading}] 중복 ${IMAGEFX_DUP_MAX_RETRIES}회 재시도 후에도 검출 — 그대로 진행`);
+        }
+        fxResult = candidate;
+        acceptedProbe = probe;
+        break;
+      }
 
       if (fxResult && fxResult.buffer) {
+        // 중복 통과 후 commit
+        if (acceptedProbe) commitHashes(acceptedProbe, usedImageHashes, usedImageAHashes);
+
         // 파일 저장
         // ✅ [2026-03-16 FIX] mimeType → 확장자 변환 (image/png → png, image/jpeg → jpg)
-        const ext = fxResult.mimeType.includes('/') 
+        const ext = fxResult.mimeType.includes('/')
           ? fxResult.mimeType.split('/')[1].replace('jpeg', 'jpg')
           : fxResult.mimeType;
         const savedInfo = await writeImageFile(fxResult.buffer, ext, heading, postTitle, postId);
-        
+
         const genImage: GeneratedImage = {
           heading,
           filePath: savedInfo.savedToLocal || savedInfo.filePath,

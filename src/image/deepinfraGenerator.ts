@@ -6,6 +6,7 @@ import { loadConfig } from '../configManager.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 import { ImageRequestItem, GeneratedImage } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
+import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 import { STYLE_PROMPT_MAP, getWebtoonStylePrompt, WebtoonGender, WebtoonSubStyle, getImageDiversityHints } from './imageStyles.js';
 import { addThumbnailTextOverlay } from './textOverlay.js'; // ✅ [2026-01-30] 썸네일 텍스트 오버레이
 import { AutomationService } from '../main/services/AutomationService.js'; // ✅ [2026-01-29 FIX] 중지 체크용
@@ -334,6 +335,12 @@ export async function generateWithDeepInfra(
 
     const results: GeneratedImage[] = [];
 
+    // ✅ [v2.10.65] 중복 이미지 검출 — FLOW/나노/Leonardo와 동기화 (임계값 8)
+    const usedImageHashes = new Set<string>();
+    const usedImageAHashes: bigint[] = [];
+    const DEEPINFRA_AHASH_THRESHOLD = 8;
+    const DEEPINFRA_DUP_MAX_RETRIES = 3;
+
     for (let i = 0; i < items.length; i++) {
         // ✅ [2026-01-29 FIX] 각 이미지 생성 전 중지 체크
         if (AutomationService.isCancelRequested()) {
@@ -517,12 +524,14 @@ export async function generateWithDeepInfra(
 
             console.log(`[DeepInfra] 📐 이미지 비율: ${imageRatio} → ${imageSize}`);
 
-            // ✅ [2026-02-12] 재시도 루프 (NanoBananaPro와 동일 전략 — 최대 2회)
-            const maxRetries = 2;
+            // ✅ [2026-02-12] 재시도 루프 (NanoBananaPro와 동일 전략 — 최대 3회)
+            // ✅ [v2.10.65] 2→3회 상향 + 중복 검출 추가 (실패 + 중복 모두 같은 루프에서 재시도)
+            const maxRetries = 3;
             let res: DeepInfraResult | null = null;
+            let attemptPromptForDup = prompt;
 
             for (let attempt = 1; attempt <= maxRetries; attempt++) {
-                let attemptPrompt = prompt;
+                let attemptPrompt = attemptPromptForDup;
 
                 // ✅ 재시도 시 프롬프트 변형 (이미지 다양성 확보)
                 if (attempt > 1) {
@@ -538,7 +547,29 @@ export async function generateWithDeepInfra(
                     model: actualModel
                 }, apiKey);
 
-                if (res.success && res.localPath) break; // 성공하면 루프 탈출
+                if (res.success && res.localPath) {
+                    // ✅ [v2.10.65] 중복 검출 — 통과해야 break, 실패 시 다음 attempt에서 자동 variation
+                    try {
+                        const checkBuffer = fs.readFileSync(res.localPath);
+                        const probe = await probeDuplicate(checkBuffer, usedImageHashes, usedImageAHashes, DEEPINFRA_AHASH_THRESHOLD);
+                        if (probe.isDuplicate || probe.isSimilar) {
+                            if (attempt < maxRetries) {
+                                const reason = probe.isDuplicate ? '중복(SHA256)' : '유사(aHash)';
+                                console.warn(`[DeepInfra] 🔁 ${reason} 감지 → diversity hint 적용 후 재시도 (${attempt}/${maxRetries}) - ${item.heading}`);
+                                attemptPromptForDup = applyDiversityHint(attemptPromptForDup, attempt);
+                                try { fs.unlinkSync(res.localPath); } catch {}
+                                res = null;
+                                await new Promise(resolve => setTimeout(resolve, 500));
+                                continue;
+                            }
+                            console.warn(`[DeepInfra] ⚠️ 최종 ${maxRetries}회 재시도에도 중복/유사 — 허용하고 진행: ${item.heading}`);
+                        }
+                        commitHashes(probe, usedImageHashes, usedImageAHashes);
+                    } catch (dupErr) {
+                        console.warn('[DeepInfra] 중복 검사 중 예외 — 통과 처리:', dupErr);
+                    }
+                    break; // 성공하면 루프 탈출
+                }
 
                 if (attempt < maxRetries) {
                     console.log(`[DeepInfra] ⚠️ 시도 ${attempt} 실패, ${attempt + 1}번째 재시도...`);

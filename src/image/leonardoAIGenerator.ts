@@ -11,6 +11,7 @@ import { loadConfig } from '../configManager.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 import { ImageRequestItem, GeneratedImage } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
+import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 import { STYLE_PROMPT_MAP, isNoPersonCategory, getPresetStyleMapping, getStyleNegativePrompt, getImageDiversityHints } from './imageStyles.js';
 import { addThumbnailTextOverlay } from './textOverlay.js';
 import { AutomationService } from '../main/services/AutomationService.js';
@@ -271,6 +272,13 @@ export async function generateWithLeonardoAI(
 
     const results: GeneratedImage[] = [];
 
+    // ✅ [v2.10.65] 중복 이미지 검출 — 사용자 보고: 다른 H2에 같은 이미지가 들어가는 버그
+    //   FLOW(v2.10.61)/나노바나나(v2.10.64)와 동일 패턴: SHA256 + aHash(임계값 8)
+    //   Leonardo/DeepInfra/ImageFX는 사용자 메인 엔진 아니라 UI 로그 생략, console.warn만.
+    const usedImageHashes = new Set<string>();
+    const usedImageAHashes: bigint[] = [];
+    const LEONARDO_AHASH_THRESHOLD = 8;
+
     for (let i = 0; i < items.length; i++) {
         if (AutomationService.isCancelRequested()) {
             console.log('[LeonardoAI] ⛔ 중지 요청 감지 → 이미지 생성 중단');
@@ -354,6 +362,20 @@ export async function generateWithLeonardoAI(
                         timeout: 30000
                     });
                     const buffer = Buffer.from(imgResponse.data);
+
+                    // ✅ [v2.10.65] 중복/유사 이미지 검사 (임계값 8, FLOW/나노와 동기화)
+                    const probe = await probeDuplicate(buffer, usedImageHashes, usedImageAHashes, LEONARDO_AHASH_THRESHOLD);
+                    if (probe.isDuplicate || probe.isSimilar) {
+                        if (attempt < maxRetries) {
+                            const reason = probe.isDuplicate ? '중복(SHA256)' : '유사(aHash)';
+                            console.warn(`[LeonardoAI] 🔁 ${reason} 감지 → diversity hint 적용 후 재시도 (${attempt}/${maxRetries}) - ${item.heading}`);
+                            prompt = applyDiversityHint(prompt, attempt);
+                            lastError = new Error('duplicate-detected');
+                            continue; // 재시도
+                        }
+                        console.warn(`[LeonardoAI] ⚠️ 최종 ${maxRetries}회 재시도에도 중복/유사 — 허용하고 진행: ${item.heading}`);
+                    }
+                    commitHashes(probe, usedImageHashes, usedImageAHashes);
 
                     // ✅ [2026-03-12 FIX] 텍스트 오버레이는 imageGenerator.ts의 applyKoreanTextOverlayIfNeeded에서 일괄 처리
                     // 여기서 추가로 적용하면 2중 오버레이가 발생하므로 제거
