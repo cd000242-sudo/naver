@@ -79,28 +79,45 @@ const UnifiedDOMCache = {
     // ✅ [v2.8.2] 'dall-e-3' + 'falai' + 'pollinations' 추가 — 사용자가 달리/덕트테이프 선택해도 nano-banana-pro로 폴백되던 회귀 차단
     //   사용자 보고: "달리 분명히 달리로 이미지 생성되게 하라했는데 계속 나노바나나뜨는데 어떻게 된거야"
     //   원인: v2.7.15에 dall-e-3이 옵션으로 추가됐지만 VALID_AI_SOURCES 화이트리스트엔 누락 → fullAutoSource 거부 → 폴백 체인 → nano-banana-pro
+    // ✅ [v2.10.66] 'nano-banana-2' 별칭 정규화 추가 — 사용자 보고: "오염 값 제거" 경고 후 풀오토 폴백
+    //   원인: imageGenerator.ts:235에서 nano-banana-2 → nano-banana-pro로 정규화하지만, unifiedDOMCache가 그 전에 화이트리스트 거부로 localStorage에서 제거 → 풀오토가 빈값/폴백 진행
+    //   해결: 별칭 매핑 테이블 → 화이트리스트 적용 전에 정식 키로 변환 + localStorage 동기화
+    const ALIAS_MAP: Record<string, string> = {
+      'nano-banana-2': 'nano-banana-pro',  // v2.7.28 통합 정책: 동일 백엔드
+    };
     const VALID_AI_SOURCES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'falai', 'pollinations', 'local-folder'];
+
+    const normalizeSource = (raw: string | null): string | null => {
+      if (!raw || raw === 'undefined' || raw === 'null') return null;
+      return ALIAS_MAP[raw] || raw;
+    };
 
     // ✅ [v1.4.90 FIX] 레거시 저장값 자동 마이그레이션
     //   증상: 사용자가 UI에서 'flow' 선택했지만 fullAutoImageSource에는 예전 'nano-banana-pro'가 남아있어 무시됨
     //   원인: v1.4.85 이전 빌드에서 setGlobalImageSource가 두 키를 동기화하지 않았던 잔재
     //   해결: globalImageSource가 유효한 AI 엔진이고 fullAutoImageSource와 다르면, UI 선택이 최신이므로 덮어쓰기
-    const rawGlobal = localStorage.getItem('globalImageSource');
-    const rawFullAuto = localStorage.getItem('fullAutoImageSource');
+    const rawGlobal = normalizeSource(localStorage.getItem('globalImageSource'));
+    const rawFullAuto = normalizeSource(localStorage.getItem('fullAutoImageSource'));
     if (rawGlobal && VALID_AI_SOURCES.includes(rawGlobal) && rawFullAuto !== rawGlobal) {
       console.log(`[UnifiedDOMCache] 🔄 UI 선택 우선 동기화: globalImageSource="${rawGlobal}" → fullAutoImageSource 덮어쓰기 (이전: "${rawFullAuto || '없음'}")`);
       localStorage.setItem('fullAutoImageSource', rawGlobal);
     }
 
-    // 1순위: fullAutoImageSource (풀오토 전용, 위에서 동기화된 최신값)
-    const fullAutoSource = localStorage.getItem('fullAutoImageSource');
-    if (fullAutoSource && fullAutoSource !== 'undefined' && fullAutoSource !== 'null' && VALID_AI_SOURCES.includes(fullAutoSource)) {
+    // 1순위: fullAutoImageSource (풀오토 전용, 위에서 동기화된 최신값) — 별칭 정규화 후 검증
+    const rawStoredFullAuto = localStorage.getItem('fullAutoImageSource');
+    const fullAutoSource = normalizeSource(rawStoredFullAuto);
+    if (fullAutoSource && VALID_AI_SOURCES.includes(fullAutoSource)) {
+      // 별칭 → 정식 키로 저장값도 통일 (다음 로드 시 경고 안 뜸)
+      if (rawStoredFullAuto && rawStoredFullAuto !== fullAutoSource) {
+        console.log(`[UnifiedDOMCache] 🔄 별칭 정규화: "${rawStoredFullAuto}" → "${fullAutoSource}"`);
+        localStorage.setItem('fullAutoImageSource', fullAutoSource);
+      }
       console.log(`[UnifiedDOMCache] 🎨 fullAutoImageSource 사용 (풀오토 전용): ${fullAutoSource}`);
       return fullAutoSource;
     }
-    // ✅ [2026-02-18 FIX] 오염된 값("null", "undefined" 등)이 있으면 정리
-    if (fullAutoSource && (fullAutoSource === 'null' || fullAutoSource === 'undefined' || !VALID_AI_SOURCES.includes(fullAutoSource))) {
-      console.warn(`[UnifiedDOMCache] ⚠️ fullAutoImageSource 오염 값 제거: "${fullAutoSource}"`);
+    // ✅ [2026-02-18 FIX] 오염된 값("null", "undefined" 등)이 있으면 정리 — 별칭 정규화 실패 시에만 발동
+    if (rawStoredFullAuto && (rawStoredFullAuto === 'null' || rawStoredFullAuto === 'undefined' || !fullAutoSource || !VALID_AI_SOURCES.includes(fullAutoSource))) {
+      console.warn(`[UnifiedDOMCache] ⚠️ fullAutoImageSource 오염 값 제거: "${rawStoredFullAuto}"`);
       localStorage.removeItem('fullAutoImageSource');
     }
 
@@ -108,8 +125,9 @@ const UnifiedDOMCache = {
     //   이전: globalImageSource 값을 읽고 fullAutoImageSource에 자동 복제
     //         → 이미지 관리 탭에서 다른 엔진 선택 시 풀오토 설정이 silently 오염됨
     //   수정: 읽어서 사용만 하고 localStorage 쓰기 제거
-    const globalSource = localStorage.getItem('globalImageSource');
-    if (globalSource && globalSource !== 'undefined' && globalSource !== 'null' && VALID_AI_SOURCES.includes(globalSource)) {
+    // ✅ [v2.10.66] 별칭 정규화 적용 (nano-banana-2 → nano-banana-pro)
+    const globalSource = normalizeSource(localStorage.getItem('globalImageSource'));
+    if (globalSource && VALID_AI_SOURCES.includes(globalSource)) {
       console.log(`[UnifiedDOMCache] 🎨 globalImageSource 폴백 사용 (읽기만): ${globalSource}`);
       return globalSource;
     }

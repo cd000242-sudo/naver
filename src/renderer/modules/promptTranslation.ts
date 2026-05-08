@@ -74,8 +74,13 @@ export function cacheTranslation(key: string, value: string): void {
     _promptTranslationCache.set(key, value);
 }
 
-// ✅ [2026-03-22] 공통 fetch 헬퍼 — AbortController 8초 타임아웃 내장
-async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs: number = 8000): Promise<Response> {
+// ✅ [2026-03-22] 공통 fetch 헬퍼 — AbortController 타임아웃 내장
+// ✅ [v2.10.66] 8초 → 15초 완화 — 사용자 보고: "8초 타임아웃 → 다음 모델 시도" 3개 모델 모두 실패
+//   원인: 8초는 정상 응답 시간(평균 5~12초)도 못 받는 짧은 한계. 간헐적 네트워크 지연에서 fail.
+//   영향 범위: 이미지 프롬프트 영문 변환 보조 (메인 콘텐츠 생성과 무관 — 메인은 별도 무한 대기)
+const PROMPT_TRANSLATION_TIMEOUT_MS = 15000;
+
+async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs: number = PROMPT_TRANSLATION_TIMEOUT_MS): Promise<Response> {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
@@ -130,7 +135,7 @@ async function generateEnglishPromptWithGemini(headingText: string, imageStyle?:
         return generatedPrompt;
     } catch (error: any) {
         if (error?.name === 'AbortError') {
-            console.warn(`[GeminiPrompt] ⏱️ 8초 타임아웃 → 다음 모델 시도`);
+            console.warn(`[GeminiPrompt] ⏱️ 15초 타임아웃 → 다음 모델 시도`);
         } else {
             console.warn(`[GeminiPrompt] 오류:`, error);
         }
@@ -182,7 +187,7 @@ async function generateEnglishPromptWithOpenAI(headingText: string, imageStyle?:
         return generatedPrompt;
     } catch (error: any) {
         if (error?.name === 'AbortError') {
-            console.warn(`[OpenAIPrompt] ⏱️ 8초 타임아웃 → 다음 모델 시도`);
+            console.warn(`[OpenAIPrompt] ⏱️ 15초 타임아웃 → 다음 모델 시도`);
         } else {
             console.warn(`[OpenAIPrompt] 오류:`, error);
         }
@@ -234,7 +239,7 @@ async function generateEnglishPromptWithClaude(headingText: string, imageStyle?:
         return generatedPrompt;
     } catch (error: any) {
         if (error?.name === 'AbortError') {
-            console.warn(`[ClaudePrompt] ⏱️ 8초 타임아웃 → 다음 모델 시도`);
+            console.warn(`[ClaudePrompt] ⏱️ 15초 타임아웃 → 다음 모델 시도`);
         } else {
             console.warn(`[ClaudePrompt] 오류:`, error);
         }
@@ -286,7 +291,7 @@ async function generateEnglishPromptWithPerplexity(headingText: string, imageSty
         return generatedPrompt;
     } catch (error: any) {
         if (error?.name === 'AbortError') {
-            console.warn(`[PerplexityPrompt] ⏱️ 8초 타임아웃 → 다음 모델 시도`);
+            console.warn(`[PerplexityPrompt] ⏱️ 15초 타임아웃 → 다음 모델 시도`);
         } else {
             console.warn(`[PerplexityPrompt] 오류:`, error);
         }
