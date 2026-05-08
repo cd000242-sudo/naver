@@ -5648,6 +5648,73 @@
                 <!-- 이미지 경로 섹션 끝 -->
             </div>
 
+            <!-- ✅ [v2.10.58] 비용 절감 토글 4종 (사용자 명시 동의) -->
+            <div class="settings-card" style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px; padding: 1.25rem; margin-top: 1rem;">
+                <h3 style="color: #4ade80; margin: 0 0 1rem 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.3rem;">💰</span> 비용 절감 옵션 (선택)
+                </h3>
+                <div style="background: rgba(0,0,0,0.3); padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">
+                    <strong style="color: #fde68a;">⚠️ 주의:</strong> 모두 기본 OFF입니다. ON 시에만 동작이 변경되며, 사용자 선택 모델은 100% 존중됩니다 (silent 폴백 0).<br>
+                    환경변수 <code style="background: rgba(0,0,0,0.4); padding: 1px 4px; border-radius: 3px;">ECC_DISABLE_OPTION_C=1</code> 으로 모든 옵션 긴급 차단 가능.
+                </div>
+
+                <!-- 1. 비용 절감 모드 -->
+                <div class="field" style="margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
+                        <input type="checkbox" id="cost-saver-mode" style="margin-top: 0.3rem; cursor: pointer;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; color: var(--text-strong);">⚡ 비용 절감 모드 (가장 효과 큼)</div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                verificationLoop / 페러프레이징 / 도입부 재작성 / 다중 제목 후보 비활성<br>
+                                효과: 1편당 호출 50회 → 10회, 비용 -80%
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- 2. 압축 시스템 프롬프트 -->
+                <div class="field" style="margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
+                        <input type="checkbox" id="use-compressed-prompt" style="margin-top: 0.3rem; cursor: pointer;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; color: var(--text-strong);">📝 압축 시스템 프롬프트 (실험적)</div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                기존 30K → 10K 압축 프롬프트 사용 (품질 약간 저하 가능)<br>
+                                효과: 입력 토큰 -66%, 비용 -50%
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- 3. 크롤 결과 자동 요약 -->
+                <div class="field" style="margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
+                        <input type="checkbox" id="use-crawl-summary" style="margin-top: 0.3rem; cursor: pointer;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; color: var(--text-strong);">📰 크롤 결과 자동 요약 (Gemini 키 필요)</div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                Gemini Flash로 1차 요약 후 메인 모델에 전달 (Gemini 키 없으면 자동 OFF)<br>
+                                효과: 크롤 입력 50K → 5K, 비용 -50%
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- 4. 부수 작업 모델 -->
+                <div class="field" style="margin-bottom: 0.5rem;">
+                    <label for="sub-work-provider" style="font-weight: 700; color: var(--text-strong); display: block; margin-bottom: 0.3rem;">🔀 부수 작업 모델</label>
+                    <select id="sub-work-provider" style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: 8px; font-size: 0.9rem;">
+                        <option value="same">본문과 동일 모델 (기본 — silent 폴백 0)</option>
+                        <option value="gpt-mini">GPT-4.1 mini (저렴, $0.40/1M)</option>
+                        <option value="gemini-flash">Gemini 2.5 Flash (가장 저렴, $0.30/1M)</option>
+                        <option value="haiku">Claude Haiku 4.5 ($1/1M)</option>
+                    </select>
+                    <small style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-top: 0.3rem;">
+                        본문은 항상 사용자 선택 모델로 생성. 부수 작업(제목/도입부/이미지 프롬프트 변환)만 다른 모델로 명시 분리.
+                    </small>
+                </div>
+            </div>
+
         </div><!-- settings-content 닫힘 -->
     </div><!-- modal-content 닫힘 -->
     <div class="modal-actions">

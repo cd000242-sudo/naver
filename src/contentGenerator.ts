@@ -2733,7 +2733,13 @@ JSON:
   //   사용자 보고: '한편당 50회 호출' — 제목만 4번(0+1+2+3) 호출되던 것을 2번(0+1)으로
   //   기존: MAX_RETRIES=3 → 4번 호출 (attempt 0,1,2,3)
   //   변경: MAX_RETRIES=1 → 2번 호출 (attempt 0,1) — 1차 실패 시 1회 재시도
-  const MAX_RETRIES = 1;
+  // ✅ [v2.10.58] 비용 절감 모드 ON 시 MAX_RETRIES=0 (단 1회만 호출)
+  const _cfg: any = (typeof process !== 'undefined' && (process as any).__configCache) || {};
+  let MAX_RETRIES = 1;
+  try {
+    const config = await loadConfig();
+    if ((config as any).costSaverMode === true) MAX_RETRIES = 0;
+  } catch { /* 기본값 유지 */ }
   let bestResult: { selectedTitle?: string; titleCandidates?: TitleCandidate[]; titleAlternatives?: string[] } = {};
   let bestScore = 0;
   let prevTitle = '';

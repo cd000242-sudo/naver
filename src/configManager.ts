@@ -74,6 +74,24 @@ export interface AppConfig {
   imageSourceNewsAgency?: boolean;
   // 이미지 저장 경로
   customImageSavePath?: string; // 사용자 지정 이미지 저장 경로
+
+  // ✅ [v2.10.58] 비용 절감 모드 — 사용자 명시 토글 (silent 폴백 0)
+  //   기본 OFF: 현재 동작 100% 유지 (회귀 위험 0)
+  //   ON 시: verificationLoop / 페러프레이징 / 도입부 재작성 / 다중 제목 후보 비활성
+  //   효과: 1편당 호출 횟수 50회 → 10회 (-80%), 비용 ₩770 → ₩150
+  costSaverMode?: boolean;
+  // ✅ [v2.10.58] 압축 시스템 프롬프트 사용 — 사용자 명시 토글
+  //   기본 OFF: 기존 30K 풀 프롬프트 사용 (품질 보장)
+  //   ON 시: 10K 압축 프롬프트 사용 (품질 약간 저하 가능, 비용 -66%)
+  useCompressedPrompt?: boolean;
+  // ✅ [v2.10.58] 크롤 결과 자동 요약 — Gemini Flash로 1차 요약 후 메인 모델에 전달
+  //   기본 OFF: 크롤 텍스트 원본 그대로 메인 모델에 주입
+  //   ON 시: Gemini Flash 1회 호출(~$0.01)로 50K → 5K 압축 (Gemini 키 있을 때만)
+  useCrawlSummary?: boolean;
+  // ✅ [v2.10.58] 부수 작업 모델 — 본문은 사용자 선택 모델, 부수만 다른 모델로 명시 분리
+  //   기본 'same': 본문과 동일 모델 (현재 동작 유지, silent 폴백 0)
+  //   'gpt-mini' / 'gemini-flash' / 'haiku': 사용자 명시 선택 시에만 부수 분리
+  subWorkProvider?: 'same' | 'gpt-mini' | 'gemini-flash' | 'haiku';
   // ✅ [v2.7.61] AI 이미지 관련성 검증 (Gemini Vision)
   imageRelevanceCheck?: boolean; // true 시 수집 이미지마다 AI가 관련성 평가
   imageRelevanceThreshold?: number; // 0~100, 기본 60
@@ -602,6 +620,8 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
         'primaryGeminiTextModel', 'defaultAiProvider', 'geminiPlanType',
         'perplexityModel', 'geminiModel', 'leonardoaiModel',
         'userDisplayName', 'userEmail',
+        // ✅ [v2.10.58] 비용 절감 토글 4종 보존
+        'costSaverMode', 'useCompressedPrompt', 'useCrawlSummary', 'subWorkProvider',
       ];
       let preserved = 0;
       for (const k of PRESERVE_KEYS) {

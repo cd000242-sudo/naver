@@ -709,6 +709,20 @@ export async function initPriceInfoModal(): Promise<void> {
       }
     }
 
+    // ✅ [v2.10.58] 비용 절감 토글 4종 로드
+    try {
+      const costSaverModeEl = document.getElementById('cost-saver-mode') as HTMLInputElement | null;
+      const useCompressedPromptEl = document.getElementById('use-compressed-prompt') as HTMLInputElement | null;
+      const useCrawlSummaryEl = document.getElementById('use-crawl-summary') as HTMLInputElement | null;
+      const subWorkProviderEl = document.getElementById('sub-work-provider') as HTMLSelectElement | null;
+      if (costSaverModeEl) costSaverModeEl.checked = (config as any).costSaverMode === true;
+      if (useCompressedPromptEl) useCompressedPromptEl.checked = (config as any).useCompressedPrompt === true;
+      if (useCrawlSummaryEl) useCrawlSummaryEl.checked = (config as any).useCrawlSummary === true;
+      if (subWorkProviderEl) subWorkProviderEl.value = (config as any).subWorkProvider || 'same';
+    } catch (e) {
+      console.warn('[priceInfoModal] 비용 절감 토글 로드 실패:', e);
+    }
+
     try {
       if (externalApiCostConsent) externalApiCostConsent.checked = config.externalApiCostConsent === true;
       if (externalApiPerRunImageLimit) externalApiPerRunImageLimit.value = String((config as any).externalApiPerRunImageLimit ?? 10);
@@ -888,6 +902,11 @@ export async function initPriceInfoModal(): Promise<void> {
           leonardoaiModel: (document.getElementById('leonardoai-model-select') as HTMLSelectElement)?.value || 'seedream-4.5',
           deepinfraApiKey: (document.getElementById('deepinfra-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-01-26] DeepInfra API
           customImageSavePath: customImageSavePathInput?.value.trim() || undefined,
+          // ✅ [v2.10.58] 비용 절감 토글 4종 저장 (silent 폴백 0, 사용자 명시)
+          costSaverMode: (document.getElementById('cost-saver-mode') as HTMLInputElement | null)?.checked || false,
+          useCompressedPrompt: (document.getElementById('use-compressed-prompt') as HTMLInputElement | null)?.checked || false,
+          useCrawlSummary: (document.getElementById('use-crawl-summary') as HTMLInputElement | null)?.checked || false,
+          subWorkProvider: ((document.getElementById('sub-work-provider') as HTMLSelectElement | null)?.value as 'same' | 'gpt-mini' | 'gemini-flash' | 'haiku') || 'same',
           primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-2.5-flash', // ✅ [v1.4.49 revert] 기본값 Flash (Flash-Lite RPD 20/일로 부족)
           geminiPlanType: (document.querySelector('input[name="geminiPlanType"]:checked') as HTMLInputElement)?.value as 'free' | 'paid' || 'free', // ✅ [v1.4.49] 기본값 free (안전한 기본값 + 텍스트 모델 자동 Flash 선택)
           imagePreset: (document.getElementById('image-preset-input') as HTMLInputElement)?.value as 'budget' | 'premium' | 'custom' || 'custom',
