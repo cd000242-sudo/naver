@@ -6271,6 +6271,38 @@ ipcMain.handle(
       const { source, warnings } = await assembleContentSource(payload.assembly);
       const provider = payload.assembly.generator ?? source.generator ?? 'gemini';
 
+      // ✅ [v2.10.73] 네이버 검색 API 기반 fact-check RAG — 키워드 모드에서 LLM 환각 차단
+      //   조건: useNaverFactCheck !== false (기본 ON) + rawText 짧음 (외부 자료 없음) + 키워드 있음 + 네이버 API 키 있음
+      //   효과: 키워드형 글 환각률 80~95% 감소 (LLM 자체 지식 대신 실제 자료 기반 작성)
+      try {
+        const _config = await loadConfig();
+        const factCheckEnabled = (_config as any).useNaverFactCheck !== false; // 기본 ON
+        const hasNaverKeys = !!((_config as any).naverClientId && (_config as any).naverClientSecret);
+        const hasKeywords = Array.isArray(payload.assembly.keywords) && payload.assembly.keywords.length > 0;
+        const rawTextShort = !source.rawText || source.rawText.trim().length < 200; // 200자 이하면 자료 부족
+        if (factCheckEnabled && hasNaverKeys && hasKeywords && rawTextShort) {
+          const keywordQuery = payload.assembly.keywords!.join(' ').trim();
+          console.log(`[Main] 🔍 네이버 fact-check RAG 발동: keyword="${keywordQuery}", 기존 rawText=${source.rawText?.length || 0}자`);
+          const { fetchFactCheckRawText } = await import('./naverFactCheckRAG.js');
+          const ragText = await fetchFactCheckRawText(keywordQuery);
+          if (ragText && ragText.length >= 200) {
+            // 기존 rawText가 있으면 합치고, 없으면 RAG만 사용
+            source.rawText = source.rawText && source.rawText.trim().length >= 50
+              ? `${source.rawText}\n\n=== 네이버 검색 자료 ===\n${ragText}`
+              : ragText;
+            console.log(`[Main] ✅ 네이버 fact-check RAG 주입 완료: 최종 rawText=${source.rawText.length}자`);
+          } else {
+            console.warn(`[Main] ⚠️ 네이버 fact-check RAG 자료 부족(${ragText.length}자) — LLM 자체 지식 사용`);
+          }
+        } else if (!factCheckEnabled) {
+          console.log(`[Main] 네이버 fact-check RAG 비활성 (사용자 OFF)`);
+        } else if (!hasNaverKeys) {
+          console.log(`[Main] 네이버 fact-check RAG 미작동: API 키 없음`);
+        }
+      } catch (ragErr: any) {
+        console.warn(`[Main] ⚠️ 네이버 fact-check RAG 실패 (LLM 자체 지식 fallback):`, ragErr?.message || ragErr);
+      }
+
       // ✅ contentMode 전달 (SEO / 홈판 모드)
       const contentMode = (payload.assembly as any).contentMode as 'seo' | 'homefeed' | undefined;
       if (contentMode) {

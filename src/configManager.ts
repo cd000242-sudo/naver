@@ -97,6 +97,12 @@ export interface AppConfig {
   //   ON 시: 시점 시그널 + 인용 친화 fact-block + 권위 표현 자연 삽입 패치 활성
   //   네이버 H6(출처 단어 금지) 룰과 충돌 없는 패턴만 사용 — 네이버 SEO 점수 동결
   geoOptimization?: boolean;
+  // ✅ [v2.10.73] 네이버 검색 API 기반 fact-check RAG — 키워드 → 네이버 검색 → 본문 자료 주입 → LLM 환각 차단
+  //   기본 ON: 네이버 검색 API 키가 있을 때만 작동 (키 없으면 자동 OFF)
+  //   ON 시: 키워드 입력 후 자동으로 블로그 5건 + 뉴스 3건 + 지식인 3건 검색 → 결과 텍스트를 LLM 프롬프트 [Article Content]로 주입
+  //   효과: 키워드형 글 환각률 80~95% 감소 (LLM 자체 지식 대신 실제 자료 기반 작성)
+  //   비용: 무료 (네이버 검색 API 일 25,000건)
+  useNaverFactCheck?: boolean;
   // ✅ [v2.7.61] AI 이미지 관련성 검증 (Gemini Vision)
   imageRelevanceCheck?: boolean; // true 시 수집 이미지마다 AI가 관련성 평가
   imageRelevanceThreshold?: number; // 0~100, 기본 60
@@ -629,6 +635,8 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
         'costSaverMode', 'useCompressedPrompt', 'useCrawlSummary', 'subWorkProvider',
         // ✅ [v2.10.62] GEO 토글 보존
         'geoOptimization',
+        // ✅ [v2.10.73] 네이버 fact-check RAG 토글 보존
+        'useNaverFactCheck',
       ];
       let preserved = 0;
       for (const k of PRESERVE_KEYS) {

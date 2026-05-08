@@ -737,6 +737,15 @@ export async function initPriceInfoModal(): Promise<void> {
       console.warn('[priceInfoModal] GEO 최적화 토글 로드 실패:', e);
     }
 
+    // ✅ [v2.10.73] 네이버 fact-check RAG 토글 로드 — 기본 ON (LLM 환각 차단)
+    //   네이버 검색 API 키가 있을 때만 작동 (키 없으면 자동 OFF처럼 동작)
+    try {
+      const factCheckEl = document.getElementById('use-naver-factcheck') as HTMLInputElement | null;
+      if (factCheckEl) factCheckEl.checked = (config as any).useNaverFactCheck !== false;
+    } catch (e) {
+      console.warn('[priceInfoModal] 네이버 fact-check 토글 로드 실패:', e);
+    }
+
     try {
       if (externalApiCostConsent) externalApiCostConsent.checked = config.externalApiCostConsent === true;
       if (externalApiPerRunImageLimit) externalApiPerRunImageLimit.value = String((config as any).externalApiPerRunImageLimit ?? 10);
@@ -923,6 +932,12 @@ export async function initPriceInfoModal(): Promise<void> {
           subWorkProvider: ((document.getElementById('sub-work-provider') as HTMLSelectElement | null)?.value as 'same' | 'gpt-mini' | 'gemini-flash' | 'haiku') || 'same',
           // ✅ [v2.10.62] GEO/AEO 최적화 토글 저장 (기본 OFF)
           geoOptimization: (document.getElementById('geo-optimization') as HTMLInputElement | null)?.checked || false,
+          // ✅ [v2.10.73] 네이버 fact-check RAG 토글 저장 (기본 ON, undefined도 true 취급)
+          useNaverFactCheck: (() => {
+            const el = document.getElementById('use-naver-factcheck') as HTMLInputElement | null;
+            // 토글 자체가 없거나 checked면 true. 명시 unchecked만 false.
+            return el ? el.checked : true;
+          })(),
           primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-2.5-flash', // ✅ [v1.4.49 revert] 기본값 Flash (Flash-Lite RPD 20/일로 부족)
           geminiPlanType: (document.querySelector('input[name="geminiPlanType"]:checked') as HTMLInputElement)?.value as 'free' | 'paid' || 'free', // ✅ [v1.4.49] 기본값 free (안전한 기본값 + 텍스트 모델 자동 Flash 선택)
           imagePreset: (document.getElementById('image-preset-input') as HTMLInputElement)?.value as 'budget' | 'premium' | 'custom' || 'custom',
