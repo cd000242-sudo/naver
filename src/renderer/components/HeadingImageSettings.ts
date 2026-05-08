@@ -828,7 +828,8 @@ export function createHeadingImageModal(): void {
       <div style="max-width: 360px; width: 90%; padding: 20px; border-radius: 16px; background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
         <h4 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 700; color: #1a1a2e;">🎨 AI 이미지 생성 엔진</h4>
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
-          <label class="source-option" data-value="nano-banana-2" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s;">
+          <!-- ✅ [v2.10.72] data-value="nano-banana-2" → "nano-banana-pro" (별칭 → 정식 키, silent migration loop 영구 차단) -->
+          <label class="source-option" data-value="nano-banana-pro" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🍌</div>
             <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노바나나 ★</div>
             <div style="font-size: 10px; color: #a16207;">Gemini 2.5 Flash Image | ₩54/장</div>
@@ -1151,7 +1152,8 @@ export function createHeadingImageModal(): void {
               <label style="display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px;">🔧 테스트용 AI 엔진 (저장 안 됨)</label>
               <select id="test-engine-select" style="width: 100%; padding: 10px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; color: #374151; background: white; cursor: pointer; transition: border-color 0.2s;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e5e7eb'">
                 <option value="">📌 현재 저장된 엔진 사용</option>
-                <option value="nano-banana-2">🍌 나노바나나 (Gemini 2.5 Flash Image, ₩54/장) ★추천</option>
+                <!-- ✅ [v2.10.72] value="nano-banana-2" → "nano-banana-pro" (별칭 → 정식 키) -->
+                <option value="nano-banana-pro">🍌 나노바나나 (Gemini 2.5 Flash Image, ₩54/장) ★추천</option>
                 <option value="dall-e-3">🎨 DALL-E 3 (OpenAI, 인증 불필요)</option>
                 <option value="flow">🍌 Flow (Nano Banana 2, AI Pro 무료)</option>
                 <option value="imagefx">✨ ImageFX (Google 무료)</option>
