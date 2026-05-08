@@ -2760,19 +2760,43 @@ JSON:
       const retryFeedback = buildTitleRetryFeedback(attempt, prevTitle, prevScore, prevIssues);
 
       // ✅ [v2.10.56] silent 폴백 회귀 — 사용자 선택 provider 100% 존중 (자동 폴백 금지 원칙)
-      //   v2.10.55의 Gemini Flash 강제는 사용자 선택 무시 → 회귀
-      //   대신: 부수 작업 호출 횟수 자체를 줄여서 비용 절감 (silent 폴백 없이)
+      // ✅ [v2.10.60] 사용자가 환경설정에서 'subWorkProvider' 명시 선택한 경우 그 모델 사용
+      //   기본 'same': 본문과 동일 (현재 동작 유지, silent 폴백 0)
+      //   'gpt-mini'/'gemini-flash'/'haiku': 사용자 명시 선택 → 부수 작업만 분리
       const titleTemp = 0.7 + (attempt * 0.05);
       const titlePromptFull = prompt + formulaInstruction + previousTitlesPrompt + retryFeedback;
       let raw: string;
-      if (provider === 'perplexity') {
-        raw = await callPerplexity(titlePromptFull, titleTemp, 650);
-      } else if (provider === 'openai') {
+      // 부수 작업 모델 결정 (사용자 명시 선택 — silent 폴백 0)
+      let subProvider: 'same' | 'gpt-mini' | 'gemini-flash' | 'haiku' = 'same';
+      try {
+        const _cfg = await loadConfig();
+        subProvider = ((_cfg as any).subWorkProvider as any) || 'same';
+      } catch { /* 기본 same */ }
+
+      if (subProvider === 'gpt-mini') {
+        // 사용자 명시: 부수만 GPT-4.1 mini (저렴)
+        process.env.OPENAI_STRUCTURED_MODEL = 'gpt-4.1-mini';
         raw = await callOpenAI(titlePromptFull, titleTemp, 650);
-      } else if (provider === 'claude') {
-        raw = await callClaude(titlePromptFull, titleTemp, 650);
-      } else {
+        delete process.env.OPENAI_STRUCTURED_MODEL;
+      } else if (subProvider === 'gemini-flash') {
+        // 사용자 명시: 부수만 Gemini Flash (가장 저렴)
         raw = await callGemini(titlePromptFull, titleTemp, 650, { useGrounding: false });
+      } else if (subProvider === 'haiku') {
+        // 사용자 명시: 부수만 Claude Haiku
+        process.env.CLAUDE_STRUCTURED_MODEL = 'claude-haiku-4-5-20251001';
+        raw = await callClaude(titlePromptFull, titleTemp, 650);
+        delete process.env.CLAUDE_STRUCTURED_MODEL;
+      } else {
+        // 기본 'same': 본문과 동일 모델
+        if (provider === 'perplexity') {
+          raw = await callPerplexity(titlePromptFull, titleTemp, 650);
+        } else if (provider === 'openai') {
+          raw = await callOpenAI(titlePromptFull, titleTemp, 650);
+        } else if (provider === 'claude') {
+          raw = await callClaude(titlePromptFull, titleTemp, 650);
+        } else {
+          raw = await callGemini(titlePromptFull, titleTemp, 650, { useGrounding: false });
+        }
       }
       console.log(`[TitleGen] 시도 ${attempt + 1}/${MAX_RETRIES + 1} — 공식: ${formula.name}`);
 
