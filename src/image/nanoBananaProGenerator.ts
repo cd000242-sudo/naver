@@ -936,6 +936,12 @@ async function generateSingleImageWithGemini(
   // whole post fail. 5 gives ~3 minutes of retry coverage.
   const maxRetries = 5;
 
+  // ✅ [v2.10.64] aHash 임계값 6→8 상향 (FLOW v2.10.61과 동기화)
+  //   기본값 6은 너무 엄격해서 다른 의도의 이미지인데 유사 처리되거나, 반대로
+  //   아주 유사한 이미지를 못 잡는 경우가 있음. 8은 "사실상 같은 구도/색감"만 차단.
+  //   사용자 보고: 발행 시 같은 이미지가 여러 H2에 중복 배치되는 버그.
+  const NANO_AHASH_THRESHOLD = 8;
+
   // ✅ [2026-01-27 FIX] config를 for 루프 앞에서 미리 로드 (imageStyle/imageRatio 사용 위해)
   const configModulePre = await import('../configManager.js');
   const configPre = await configModulePre.loadConfig();
@@ -1476,17 +1482,18 @@ async function generateSingleImageWithGemini(
             // 썸네일 크롭
             if (isThumbnail) buffer = await cropThumbnail(buffer, extension);
 
-            // ===== 중복/유사 이미지 검사 (v2.6.7: 공유 유틸 + 비누적 hint) =====
-            const probe = await probeDuplicate(buffer, usedImageHashes, usedImageAHashes);
+            // ===== 중복/유사 이미지 검사 (v2.10.64: 임계값 6→8 상향 + 헤딩 명시) =====
+            const probe = await probeDuplicate(buffer, usedImageHashes, usedImageAHashes, NANO_AHASH_THRESHOLD);
             if (probe.isDuplicate || probe.isSimilar) {
               if (attempt < maxRetries) {
                 const reason = probe.isDuplicate ? '중복(SHA256)' : '유사(aHash)';
                 console.warn(`[NanoBananaPro] 🔁 ${reason} 감지 → diversity hint 적용 후 재시도 (${attempt}/${maxRetries}) - ${item.heading}`);
-                sendImageLog(`🔁 중복 이미지 감지 — 다른 각도로 재생성 시도 (${attempt + 1}/${maxRetries})`);
+                sendImageLog(`🔁 [${item.heading}] 중복 이미지 감지 — 다른 각도로 재생성 시도 (${attempt + 1}/${maxRetries})`);
                 prompt = applyDiversityHint(prompt, attempt);
                 continue attemptLoop;
               }
-              console.warn(`[NanoBananaPro] ℹ️ 최종 attempt(${maxRetries})에도 중복/유사 — 허용하고 진행`);
+              console.warn(`[NanoBananaPro] ⚠️ 최종 attempt(${maxRetries})에도 중복/유사 — 허용하고 진행: ${item.heading}`);
+              sendImageLog(`⚠️ [${item.heading}] 최종 ${maxRetries}회 재시도에도 중복 감지 — 그대로 진행 (수동 교체 권장)`);
             }
             commitHashes(probe, usedImageHashes, usedImageAHashes);
 
