@@ -6271,35 +6271,48 @@ ipcMain.handle(
       const { source, warnings } = await assembleContentSource(payload.assembly);
       const provider = payload.assembly.generator ?? source.generator ?? 'gemini';
 
-      // ✅ [v2.10.73] 네이버 검색 API 기반 fact-check RAG — 키워드 모드에서 LLM 환각 차단
-      //   조건: useNaverFactCheck !== false (기본 ON) + rawText 짧음 (외부 자료 없음) + 키워드 있음 + 네이버 API 키 있음
-      //   효과: 키워드형 글 환각률 80~95% 감소 (LLM 자체 지식 대신 실제 자료 기반 작성)
+      // ✅ [v2.10.73~74] 네이버 검색 API 기반 fact-check RAG — LLM 환각 강제 차단
+      //   v2.10.74 Phase 1: 자료 부족 / 키워드 무관 시 발행 거부 (사용자에게 alert)
+      //   조건: useNaverFactCheck !== false (기본 ON) + rawText 짧음 + 키워드 있음 + 네이버 API 키 있음
       try {
         const _config = await loadConfig();
         const factCheckEnabled = (_config as any).useNaverFactCheck !== false; // 기본 ON
         const hasNaverKeys = !!((_config as any).naverClientId && (_config as any).naverClientSecret);
         const hasKeywords = Array.isArray(payload.assembly.keywords) && payload.assembly.keywords.length > 0;
         const rawTextShort = !source.rawText || source.rawText.trim().length < 200; // 200자 이하면 자료 부족
+
         if (factCheckEnabled && hasNaverKeys && hasKeywords && rawTextShort) {
           const keywordQuery = payload.assembly.keywords!.join(' ').trim();
           console.log(`[Main] 🔍 네이버 fact-check RAG 발동: keyword="${keywordQuery}", 기존 rawText=${source.rawText?.length || 0}자`);
-          const { fetchFactCheckRawText } = await import('./naverFactCheckRAG.js');
-          const ragText = await fetchFactCheckRawText(keywordQuery);
-          if (ragText && ragText.length >= 200) {
-            // 기존 rawText가 있으면 합치고, 없으면 RAG만 사용
-            source.rawText = source.rawText && source.rawText.trim().length >= 50
-              ? `${source.rawText}\n\n=== 네이버 검색 자료 ===\n${ragText}`
-              : ragText;
-            console.log(`[Main] ✅ 네이버 fact-check RAG 주입 완료: 최종 rawText=${source.rawText.length}자`);
-          } else {
-            console.warn(`[Main] ⚠️ 네이버 fact-check RAG 자료 부족(${ragText.length}자) — LLM 자체 지식 사용`);
+          const { validateFactCheckSource } = await import('./naverFactCheckRAG.js');
+          const validation = await validateFactCheckSource(keywordQuery);
+
+          if (!validation.passed) {
+            // ✅ [v2.10.74 Phase 1] 자료 부족 / 키워드 무관 → 발행 거부
+            // throw하면 IPC 응답으로 에러 전달 → renderer에서 alert 표시
+            const errMsg = `[FACT_CHECK_BLOCKED] ${validation.reason}\n\n수집한 자료: ${validation.totalChars}자, 키워드 매칭률 ${Math.round(validation.keywordCoverage * 100)}%\n\n해결 방법:\n1. 더 구체적이고 명확한 키워드 사용 (5~10자 권장)\n2. 또는 URL을 직접 입력해서 발행\n3. 또는 환경설정에서 '네이버 fact-check RAG' 토글 OFF (환각 위험 ↑)`;
+            console.error(`[Main] ⛔ ${errMsg}`);
+            throw new Error(errMsg);
           }
+
+          // 자료 검증 통과 → rawText 보강
+          source.rawText = source.rawText && source.rawText.trim().length >= 50
+            ? `${source.rawText}\n\n=== 네이버 검색 자료 ===\n${validation.rawText}`
+            : validation.rawText;
+          // ✅ [v2.10.74] hasFactCheckSource 플래그를 source에 표시 — Phase 2 (LLM 충실도 강제 prompt) 활성화 조건
+          (source as any).hasFactCheckSource = true;
+          (source as any).factCheckRawSource = validation.rawText; // Phase 3 검증용
+          console.log(`[Main] ✅ 네이버 fact-check RAG 주입 + 검증 통과: 최종 rawText=${source.rawText.length}자, 매칭률=${Math.round(validation.keywordCoverage * 100)}%`);
         } else if (!factCheckEnabled) {
           console.log(`[Main] 네이버 fact-check RAG 비활성 (사용자 OFF)`);
         } else if (!hasNaverKeys) {
           console.log(`[Main] 네이버 fact-check RAG 미작동: API 키 없음`);
         }
       } catch (ragErr: any) {
+        // FACT_CHECK_BLOCKED 에러는 그대로 propagate (사용자에게 alert)
+        if (ragErr?.message?.includes('[FACT_CHECK_BLOCKED]')) {
+          throw ragErr;
+        }
         console.warn(`[Main] ⚠️ 네이버 fact-check RAG 실패 (LLM 자체 지식 fallback):`, ragErr?.message || ragErr);
       }
 
@@ -6428,6 +6441,38 @@ ipcMain.handle(
 
       if (warnings.length) {
         content.quality.warnings = Array.from(new Set([...(content.quality.warnings ?? []), ...warnings]));
+      }
+
+      // ✅ [v2.10.74 Phase 3] 생성 후 fact 대조 검증 — 자료에 없는 숫자/날짜/금액이 본문에 들어갔는지 검사
+      //   조건: source.factCheckRawSource가 있을 때만 (RAG 자료 + Phase 2 적용된 경우)
+      //   매칭률 < 70% → content.quality.warnings에 경고 추가 + 사용자 알림
+      try {
+        const factCheckRawSource = (source as any).factCheckRawSource as string | undefined;
+        if (factCheckRawSource && factCheckRawSource.length >= 200) {
+          const { validateFactsAgainstSource } = await import('./naverFactCheckRAG.js');
+          // 본문 전체 합치기 (도입부 + 헤딩 본문 + 결론)
+          const fullText = [
+            content.introduction || '',
+            ...(content.headings || []).map((h: any) => h.content || ''),
+            content.conclusion || '',
+          ].join('\n');
+          const validation = validateFactsAgainstSource(fullText, factCheckRawSource, 0.7);
+          (content as any).factCheckReport = {
+            matchRate: validation.matchRate,
+            totalFacts: validation.totalFacts,
+            unmatched: validation.unmatched,
+            passed: validation.passed,
+          };
+          if (!validation.passed && validation.totalFacts > 0) {
+            const reportMsg = `⚠️ 자료 대조 검증: ${validation.totalFacts}개 사실 중 ${validation.matched.length}개만 자료와 일치 (매칭률 ${Math.round(validation.matchRate * 100)}%). 미매칭 사실: ${validation.unmatched.slice(0, 5).join(', ')}${validation.unmatched.length > 5 ? ' ...' : ''}`;
+            console.warn(`[Main] ${reportMsg}`);
+            content.quality.warnings = Array.from(new Set([...(content.quality.warnings ?? []), reportMsg]));
+          } else if (validation.totalFacts > 0) {
+            console.log(`[Main] ✅ Phase 3 fact 검증 통과: ${validation.totalFacts}개 중 ${validation.matched.length}개 매칭 (${Math.round(validation.matchRate * 100)}%)`);
+          }
+        }
+      } catch (validationErr: any) {
+        console.warn('[Main] ⚠️ Phase 3 fact 검증 중 예외 — graceful skip:', validationErr?.message || validationErr);
       }
 
       // ✅ [2026-02-01 FIX] 크롤링 시 수집한 이미지를 content.collectedImages에 저장

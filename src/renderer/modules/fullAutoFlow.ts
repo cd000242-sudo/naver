@@ -2194,11 +2194,43 @@ export async function generateFullAutoContent(formData: any) {
     return;
   }
   if (!result.success) {
+    // ✅ [v2.10.74 Phase 1] FACT_CHECK_BLOCKED 에러 — 자료 부족/키워드 무관 시 친화적 alert
+    const errMsg = result.message || apiResponse.error || '콘텐츠 생성 실패';
+    if (errMsg.includes('[FACT_CHECK_BLOCKED]')) {
+      const userMsg = errMsg.replace('[FACT_CHECK_BLOCKED] ', '').replace('Error: ', '');
+      appendLog(`⛔ ${userMsg.split('\n')[0]}`);
+      try {
+        alert(`🔍 자료 기반 작성 불가\n\n${userMsg}`);
+      } catch { /* alert 실패 시 무시 */ }
+      throw new Error(userMsg);
+    }
     appendLog('❌ 콘텐츠 생성에 실패했습니다.');
-    throw new Error(result.message || '콘텐츠 생성 실패');
+    throw new Error(errMsg);
   }
 
   appendLog('✅ AI 콘텐츠 생성이 완료되었습니다!');
+
+  // ✅ [v2.10.74 Phase 3] fact 검증 결과 사용자에게 알림
+  try {
+    const factReport = (result.content as any)?.factCheckReport;
+    if (factReport && factReport.totalFacts > 0) {
+      const matchPct = Math.round(factReport.matchRate * 100);
+      if (factReport.passed) {
+        appendLog(`🔍 자료 대조 검증 통과: ${factReport.totalFacts}개 사실 중 ${factReport.matchRate * factReport.totalFacts}개 일치 (${matchPct}%)`);
+      } else {
+        const unmatchedSummary = (factReport.unmatched || []).slice(0, 5).join(', ');
+        appendLog(`⚠️ 자료 대조 검증: 매칭률 ${matchPct}% (${factReport.totalFacts}개 사실 중 일부 미매칭). 미매칭: ${unmatchedSummary}${(factReport.unmatched || []).length > 5 ? ' ...' : ''}`);
+        // 매칭률 낮으면 사용자에게 명시적 alert (선택적)
+        if (matchPct < 50) {
+          try {
+            alert(`⚠️ 자료 대조 검증 경고\n\n생성된 본문의 사실 매칭률이 ${matchPct}%로 낮습니다.\n자료에 없는 사실: ${unmatchedSummary}\n\n발행 전 본문을 직접 확인하시는 것을 강력히 권장합니다.`);
+          } catch { /* alert 실패 시 무시 */ }
+        }
+      }
+    }
+  } catch (factCheckUiErr) {
+    console.warn('[FullAuto] fact 검증 결과 표시 중 예외 (무시):', factCheckUiErr);
+  }
 
   // ✅ [v2.7.77/79] 풀오토 URL 이미지 수집 — 우선순위
   //   1) 풀오토 URL 입력 직하 #unified-url-collect-images 체크박스 (v2.7.79 신규, 가장 명시적)

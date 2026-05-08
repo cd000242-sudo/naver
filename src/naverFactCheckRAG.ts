@@ -179,3 +179,161 @@ export async function fetchFactCheckRawText(keyword: string): Promise<string> {
     return '';
   }
 }
+
+// ============================================================================
+// ✅ [v2.10.74] Phase 1 — 자료 부족 시 발행 거부 (입력 단계)
+// ============================================================================
+
+export interface FactCheckValidationResult {
+  passed: boolean;
+  reason?: string;
+  rawText: string;
+  totalChars: number;
+  keywordCoverage: number; // 0~1
+}
+
+/**
+ * 키워드 핵심 단어를 추출 (조사/어미 제거).
+ */
+function extractKeywordTerms(keyword: string): string[] {
+  // 한글 조사/어미 제거 + 길이 2자 이상만
+  const STOP_WORDS = new Set(['이', '가', '을', '를', '의', '에', '에서', '으로', '로', '와', '과', '도', '은', '는', '한', '어', '아']);
+  return keyword
+    .split(/[\s,;]+/)
+    .map((t) => t.replace(/[은는이가을를의에에서으로로와과도]+$/u, '').trim())
+    .filter((t) => t.length >= 2 && !STOP_WORDS.has(t));
+}
+
+/**
+ * 자료 검증 — 자료 부족 또는 키워드 무관 시 passed: false 반환.
+ * caller는 passed=false면 사용자에게 alert 후 발행 차단.
+ */
+export async function validateFactCheckSource(
+  keyword: string,
+  options?: { minChars?: number; minKeywordCoverage?: number },
+): Promise<FactCheckValidationResult> {
+  const minChars = options?.minChars ?? 1000; // 자료 1000자 이상 필수
+  const minCoverage = options?.minKeywordCoverage ?? 0.3; // 키워드 30% 이상 자료에 포함
+
+  if (!keyword || !keyword.trim()) {
+    return { passed: false, reason: '키워드 비어있음', rawText: '', totalChars: 0, keywordCoverage: 0 };
+  }
+
+  const result = await collectFactCheckSourceFromNaver(keyword.trim());
+
+  if (result.totalChars < minChars) {
+    return {
+      passed: false,
+      reason: `자료 부족 (${result.totalChars}자 < 최소 ${minChars}자). 더 구체적/명확한 키워드 또는 URL 입력이 필요합니다.`,
+      rawText: result.rawText,
+      totalChars: result.totalChars,
+      keywordCoverage: 0,
+    };
+  }
+
+  const terms = extractKeywordTerms(keyword);
+  if (terms.length === 0) {
+    return {
+      passed: false,
+      reason: '키워드에서 핵심 단어를 추출할 수 없음 (너무 짧거나 조사뿐)',
+      rawText: result.rawText,
+      totalChars: result.totalChars,
+      keywordCoverage: 0,
+    };
+  }
+
+  const matched = terms.filter((t) => result.rawText.includes(t));
+  const coverage = matched.length / terms.length;
+
+  if (coverage < minCoverage) {
+    return {
+      passed: false,
+      reason: `키워드와 자료 매칭률 ${Math.round(coverage * 100)}% < 최소 ${Math.round(minCoverage * 100)}%. 검색 결과가 키워드와 무관합니다. 키워드를 재검토하거나 URL을 직접 입력해주세요.`,
+      rawText: result.rawText,
+      totalChars: result.totalChars,
+      keywordCoverage: coverage,
+    };
+  }
+
+  return {
+    passed: true,
+    rawText: result.rawText,
+    totalChars: result.totalChars,
+    keywordCoverage: coverage,
+  };
+}
+
+// ============================================================================
+// ✅ [v2.10.74] Phase 3 — 생성 후 자료 대조 검증
+// ============================================================================
+
+/**
+ * 본문에서 검증 가능한 fact (숫자/날짜/금액) 추출.
+ */
+export function extractFactsFromContent(content: string): string[] {
+  if (!content) return [];
+  const facts: string[] = [];
+  const patterns: RegExp[] = [
+    // 퍼센트
+    /\d+(?:\.\d+)?\s*%/g,
+    // 금액 — 만/억/천 + 원/달러
+    /\d+(?:,\d{3})*(?:\.\d+)?\s*(?:만|억|천)?\s*(?:원|달러)/g,
+    // 날짜 — YYYY년 M월 D일 / M월 D일 / YYYY년
+    /\d{4}년\s*\d{1,2}월\s*\d{1,2}일/g,
+    /(?<!\d)\d{4}년/g,
+    /\d{1,2}월\s*\d{1,2}일/g,
+    // 단위 수치 — 배/명/개/시간/분/초
+    /\d+(?:,\d{3})*(?:\.\d+)?\s*(?:배|명|개|시간|분|초)/g,
+  ];
+  for (const p of patterns) {
+    const matches = content.match(p);
+    if (matches) {
+      for (const m of matches) facts.push(m.trim().replace(/\s+/g, ' '));
+    }
+  }
+  return [...new Set(facts)];
+}
+
+export interface FactValidationReport {
+  matchRate: number;        // 0~1
+  totalFacts: number;
+  matched: string[];
+  unmatched: string[];
+  passed: boolean;          // matchRate >= threshold
+}
+
+/**
+ * 본문 fact 가 자료에 있는지 정규식 매칭.
+ * - 매칭률 >= threshold (기본 0.7) → passed
+ * - 미매칭 fact 는 caller에게 반환 (재생성 또는 alert 결정)
+ */
+export function validateFactsAgainstSource(
+  generatedContent: string,
+  sourceText: string,
+  threshold: number = 0.7,
+): FactValidationReport {
+  const facts = extractFactsFromContent(generatedContent);
+  if (facts.length === 0) {
+    return { matchRate: 1, totalFacts: 0, matched: [], unmatched: [], passed: true };
+  }
+  const matched: string[] = [];
+  const unmatched: string[] = [];
+  // 정규화: 공백/콤마 차이 흡수
+  const normalizedSource = sourceText.replace(/[\s,]/g, '');
+  for (const f of facts) {
+    const normalizedFact = f.replace(/[\s,]/g, '');
+    if (normalizedSource.includes(normalizedFact) || sourceText.includes(f)) {
+      matched.push(f);
+    } else {
+      unmatched.push(f);
+    }
+  }
+  const matchRate = matched.length / facts.length;
+  return {
+    matchRate,
+    totalFacts: facts.length,
+    matched,
+    unmatched,
+    passed: matchRate >= threshold,
+  };
+}
