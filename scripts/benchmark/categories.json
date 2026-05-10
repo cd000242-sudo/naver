@@ -1,0 +1,64 @@
+{
+  "version": "2026-05-10",
+  "spec": "SPEC-CONVERSION-001 L2-4.1",
+  "description": "쇼핑커넥트 주요 카테고리 10종 + 카테고리별 벤치마크 검색 시드 키워드. 상위 블로거 50건 수집 시드.",
+  "perCategoryTarget": 5,
+  "totalTarget": 50,
+  "categories": [
+    {
+      "category": "food",
+      "label": "음식·맛집·레시피",
+      "seeds": ["맛집 후기", "레시피 추천", "디저트 카페"]
+    },
+    {
+      "category": "parenting",
+      "label": "육아·교육",
+      "seeds": ["유아 장난감 추천", "이유식 후기", "어린이집 준비물"]
+    },
+    {
+      "category": "beauty",
+      "label": "뷰티·화장품",
+      "seeds": ["스킨케어 추천", "메이크업 신상", "쿠션 발색"]
+    },
+    {
+      "category": "health",
+      "label": "건강·영양제",
+      "seeds": ["영양제 추천", "다이어트 식단", "단백질 보충제"]
+    },
+    {
+      "category": "travel",
+      "label": "여행",
+      "seeds": ["제주 호텔 후기", "도쿄 여행 코스", "부산 맛집 일정"]
+    },
+    {
+      "category": "tech",
+      "label": "IT·가전",
+      "seeds": ["무선청소기 추천", "노트북 후기", "이어폰 비교"]
+    },
+    {
+      "category": "lifestyle",
+      "label": "인테리어·홈데코",
+      "seeds": ["원룸 인테리어", "수납 아이디어", "주방용품 추천"]
+    },
+    {
+      "category": "entertainment",
+      "label": "영화·드라마·게임",
+      "seeds": ["넷플릭스 추천", "아이돌 신곡 후기", "게임 리뷰"]
+    },
+    {
+      "category": "finance",
+      "label": "재테크·투자",
+      "seeds": ["적금 비교", "주식 입문 후기", "보험 가입 팁"]
+    },
+    {
+      "category": "general",
+      "label": "기타",
+      "seeds": ["생활 꿀팁", "쇼핑 후기", "자취 노하우"]
+    }
+  ],
+  "rolloutNotes": [
+    "각 카테고리당 5건 × 10 카테고리 = 50건 목표.",
+    "수집 시 저작권 보호: 원문 TTL 7일 후 자동 만료(L2-4.6).",
+    "분석은 metadata + 구조 + 어휘 통계만 추출, 본문 그대로 재생산 금지."
+  ]
+}

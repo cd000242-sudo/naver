@@ -82,9 +82,16 @@ export async function getUniqueMp4Path(dir: string, heading: string): Promise<{ 
 
 /**
  * 이미지 저장 기본 디렉토리
+ * ✅ [2026-05-04 FIX] userData/images로 통일 — main.ts의 저장 경로와 일치시킴
  */
 export function getDefaultImageDir(): string {
-    return path.join(os.homedir(), 'naver-blog-automation', 'images');
+    try {
+        const { app } = require('electron');
+        return path.join(app.getPath('userData'), 'images');
+    } catch {
+        // Electron app 컨텍스트가 아닌 경우 폴백
+        return path.join(os.homedir(), 'naver-blog-automation', 'images');
+    }
 }
 
 /**

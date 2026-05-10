@@ -3381,6 +3381,139 @@ function mergeSeoWithHomefeedOverlay(seo: StructuredContent, homefeed: Structure
 function finalizeStructuredContent(content: StructuredContent, source: ContentSource): StructuredContent {
   let finalContent = removeEmojisFromContent(content);
 
+  // ✅ [Phase 7] Source Fidelity 측정 — URL 입력 시 LLM 압축·정보 누락 감지
+  // 사용자 진단: "url 넣어서 발행하면 내용들이 많이 압축되고 중요한 내용도 빠짐"
+  // 동작: 측정·경고만, 자동 재시도는 데이터 검증 후 별도 단계.
+  let _resultBodyForGates = '';
+  try {
+    const { checkSourceFidelity, extractResultBody } = require('./content/sourceFidelityCheck');
+    _resultBodyForGates = extractResultBody(finalContent as any);
+    const fidelityInput = {
+      rawText: source.rawText ?? '',
+      resultBody: _resultBodyForGates,
+    };
+    const fidelity = checkSourceFidelity(fidelityInput);
+    if (!fidelity.passed) {
+      const note = `⚠️ Source Fidelity 미달: ${fidelity.reason}`;
+      console.warn(`[Fidelity] ${note} | 누락 샘플: ${fidelity.missingFacts.slice(0, 5).join(' / ')}`);
+      finalContent.quality = finalContent.quality ?? ({ warnings: [], score: 0 } as any);
+      if (Array.isArray((finalContent.quality as any).warnings)) {
+        (finalContent.quality as any).warnings.push(note);
+        if (fidelity.missingFacts.length > 0) {
+          (finalContent.quality as any).warnings.push(
+            `누락된 핵심 정보 (상위 ${Math.min(5, fidelity.missingFacts.length)}건): ${fidelity.missingFacts.slice(0, 5).join(', ')}`,
+          );
+        }
+      }
+    } else if (fidelity.totalFacts > 0) {
+      console.log(`[Fidelity] ✅ 보존율 ${(fidelity.retentionScore * 100).toFixed(0)}% (${fidelity.retainedFacts}/${fidelity.totalFacts}), 압축률 ${(fidelity.compressionRatio * 100).toFixed(0)}%`);
+    }
+  } catch (fidelityErr) {
+    console.warn('[Fidelity] 검사 모듈 로드 실패 (측정 스킵):', (fidelityErr as Error)?.message);
+  }
+
+  // ✅ [Phase B] LDF L5 — qualityGate 통합 (이전엔 dead code, 호출 0건)
+  // 발행 전 품질 위험 신호 측정. 차단은 다음 단계에서 발행 흐름과 연결.
+  try {
+    const { prePublishGate } = require('./content/qualityGate');
+    const inferredCategory = (() => {
+      const hint = (source.categoryHint as string | undefined) ?? '';
+      const valid = ['food','parenting','beauty','health','travel','tech','lifestyle','entertainment','finance','general'];
+      return valid.includes(hint) ? hint : 'general';
+    })();
+    const gateResult = prePublishGate({
+      title: (finalContent as any).selectedTitle ?? (finalContent as any).title ?? '',
+      content: _resultBodyForGates || (finalContent as any).bodyPlain || '',
+      category: inferredCategory as any,
+      strictness: 'moderate',
+    });
+    finalContent.quality = finalContent.quality ?? ({ warnings: [], score: 0 } as any);
+    if (!gateResult.allowed) {
+      console.warn(`[QualityGate] ⛔ 차단 사유: ${gateResult.blockers.join(' / ')} (점수 ${gateResult.score}, 위험도 ${gateResult.estimatedRiskImpact})`);
+      if (Array.isArray((finalContent.quality as any).warnings)) {
+        (finalContent.quality as any).warnings.push(`⛔ 품질 게이트 차단: ${gateResult.blockers.join(' / ')}`);
+      }
+    } else if (gateResult.warnings.length > 0) {
+      console.log(`[QualityGate] ⚠️ ${gateResult.warnings.length}건 경고 (점수 ${gateResult.score})`);
+      if (Array.isArray((finalContent.quality as any).warnings)) {
+        for (const w of gateResult.warnings.slice(0, 5)) {
+          (finalContent.quality as any).warnings.push(`⚠️ [Gate] ${w}`);
+        }
+      }
+    } else {
+      console.log(`[QualityGate] ✅ 통과 (점수 ${gateResult.score}, 위험도 ${gateResult.estimatedRiskImpact})`);
+    }
+  } catch (gateErr) {
+    console.warn('[QualityGate] 모듈 로드 실패 (측정 스킵):', (gateErr as Error)?.message);
+  }
+
+  // ✅ [Phase B] LDF L0/L1 — revenueEngine 카테고리 수익성 메타 추가 (이전엔 dead code)
+  // 글이 어떤 카테고리이고, 그 카테고리 평균 CPC·수수료·월 천장이 무엇인지 메타에 기록.
+  // 사용자가 "이 글은 수익이 될 가능성이 있나"를 보게 함.
+  try {
+    const { CATEGORY_ECONOMICS } = require('./content/revenueEngine');
+    const inferredCategory = (() => {
+      const hint = (source.categoryHint as string | undefined) ?? '';
+      const valid = ['food','parenting','beauty','health','travel','tech','lifestyle','entertainment','finance','general'];
+      return valid.includes(hint) ? hint : 'general';
+    })();
+    const econ = (CATEGORY_ECONOMICS as any)[inferredCategory];
+    if (econ) {
+      finalContent.quality = finalContent.quality ?? ({ warnings: [], score: 0 } as any);
+      (finalContent.quality as any).revenueMeta = {
+        category: inferredCategory,
+        type: econ.type,
+        avgCPC: econ.avgCPC,
+        avgCommission: econ.avgCommission,
+        monthlyCeiling: econ.monthlyCeiling,
+      };
+      console.log(`[RevenueEngine] 📊 ${inferredCategory} (${econ.type}) | CPC ${econ.avgCPC}원, 수수료 ${econ.avgCommission}원, 천장 ${(econ.monthlyCeiling/10000).toFixed(0)}만원/월`);
+    }
+  } catch (revErr) {
+    console.warn('[RevenueEngine] 모듈 로드 실패:', (revErr as Error)?.message);
+  }
+
+  // ✅ [SPEC-CONVERSION-001 L2-1.8 + L2-1.10] Feature flag CHAINED_GEN_V1 게이트 + 메트릭 기록
+  // 본 단계는 *메트릭 수집만* — 실제 stage 3~5 LLM 호출 통합은 후속.
+  // 호출자가 flag ON 켜면 stage 1·2 결정론 결과가 quality.chainedMeta에 기록되고,
+  // chainedGenMetrics에도 누적되어 operationsDashboard.getChainedGenSnapshot으로 노출.
+  try {
+    const { runChainedGenerationSync, summarizeMetrics } = require('./content/chainedGeneration');
+    const { recordChainedGenRun } = require('./monitor/chainedGenMetrics');
+    const chained = runChainedGenerationSync({
+      title: (finalContent as any).selectedTitle ?? (finalContent as any).title ?? '',
+      rawText: source.rawText ?? '',
+      productHint: (source as any).productHint ?? '',
+      existingHint: source.categoryHint as string | undefined,
+    });
+    recordChainedGenRun(chained);
+    if (chained.enabled) {
+      const summary = summarizeMetrics(chained);
+      finalContent.quality = finalContent.quality ?? ({ warnings: [], score: 0 } as any);
+      (finalContent.quality as any).chainedMeta = {
+        category: chained.category,
+        personaName: chained.persona.name,
+        personaTone: chained.persona.tone,
+        totalElapsedMs: summary.totalElapsedMs,
+        successfulStages: summary.successfulStages,
+        totalStages: summary.totalStages,
+      };
+      console.log(`[ChainedGen V1] ${chained.category} / ${chained.persona.name} / ${chained.persona.tone} | stages ${summary.successfulStages}/${summary.totalStages}`);
+    }
+  } catch (chainErr) {
+    console.warn('[ChainedGen V1] 모듈 로드 실패 (메트릭만 스킵):', (chainErr as Error)?.message);
+  }
+
+  // ✅ [SPEC-CONVERSION-001] CHAINED_DRAFT_V1 진입 포인트 — 옵트인.
+  //    flag OFF면 즉시 noop. ON이고 호출자가 LLM provider 주입 가능 시점에만 활성.
+  //    현재 finalize 단계에선 LLM provider 주입 X → 본 진입은 *상위 호출자* 책임.
+  //    (e.g., generateAffiliateContent에서 직접 maybeRunChainedDraft 호출)
+  //
+  //    본 위치는 *진입 가능성 알림* 로그만 출력. 실제 호출 hookup은 후속 작업.
+  if (process.env.CHAINED_DRAFT_V1 === '1' || process.env.CHAINED_DRAFT_V1 === 'true' || process.env.CHAINED_DRAFT_V1 === 'on') {
+    console.log('[ChainedDraft V1] flag ON — 상위 호출자에서 maybeRunChainedDraft 사용 권장');
+  }
+
   // ✅ [2026-03-14] 연속 줄바꿈 정리 (AI가 생성한 \n\n\n → \n\n, 본문 내 이중 빈 줄 방지)
   finalContent = normalizeContentLineBreaks(finalContent);
 
@@ -9194,6 +9327,7 @@ export async function generateStructuredContent(
 
   let extraInstruction = '';
   let lastFailReason = ''; // ✅ [2026-03-23] 실패 원인 추적
+  let _fidelityRetryUsed = false; // ✅ [Phase 7-B] Source Fidelity 자동 재시도 1회 가드
   // ✅ [2026-04-03] signal 추출 — 중지 시 즉시 abort
   const signal = options.signal;
 
@@ -9898,6 +10032,22 @@ export async function generateStructuredContent(
       }
 
       const plainLength = characterCount(optimized.bodyPlain, minChars);
+
+      // ✅ [Phase 7-B] Source Fidelity 자동 재시도 (한 호출에 1회만)
+      // 길이 검증 *전에* — fidelity 미달이면 LLM에 누락 fact 명시해 재요청.
+      if (!_fidelityRetryUsed && (source.url || (source.rawText ?? '').length >= 500) && attempt < MAX_ATTEMPTS) {
+        try {
+          const { checkSourceFidelity, extractResultBody, buildFidelityRetryInstruction } = require('./content/sourceFidelityCheck');
+          const _rb = extractResultBody(optimized as any);
+          const _fid = checkSourceFidelity({ rawText: source.rawText ?? '', resultBody: _rb });
+          if (!_fid.passed) {
+            _fidelityRetryUsed = true;
+            console.warn(`[Fidelity] Phase 7-B 자동 재시도: ${_fid.reason}`);
+            extraInstruction = `${buildFidelityRetryInstruction(_fid)}\n${extraInstruction}`;
+            continue; // for 루프 다음 attempt — 같은 attempt 카운트 보존
+          }
+        } catch (_e) { /* fidelity 모듈 실패 시 정상 흐름 */ }
+      }
 
       // 검증: 질과 길이의 균형
       // 80% 이상이면 완전 통과

@@ -66,6 +66,17 @@ export function registerImageHandlers(ctx: IpcContext): void {
         }
     });
 
+    // ImageFX 연결 테스트 — Flow와 별도 프로필 디렉토리라 명시 트리거 필요.
+    // 세션 없으면 visible 브라우저 자동 표시 → 사용자가 Google 로그인 진행.
+    safeHandle('imagefx:testConnection', async () => {
+        try {
+            const { testImageFxConnection } = await import('../../image/imageFxGenerator.js');
+            return await testImageFxConnection();
+        } catch (error: any) {
+            return { ok: false, message: `ImageFX 연결 테스트 실패: ${error.message}` };
+        }
+    });
+
     // ✅ [v1.4.98] 스타일 미리보기 — 캐시 조회
     safeHandle('style-preview:getCache', async () => {
         try {

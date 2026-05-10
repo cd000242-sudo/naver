@@ -1481,6 +1481,39 @@ function updateProgress(percent: number, status: string): void {
                   : console.log).bind(console);
         fn(`[MAIN] ${data.msg}`);
       });
+
+      // ✅ [SPEC-IMAGE-RECOVERY-001 Phase 6 C1] 차단형 모달 IPC 수신 + 후속 동작 7종 실제 트리거
+      window.api.on('recovery:show-modal', async (payload: { code: string; reason: string; errorCode?: string }) => {
+        try {
+          const [{ recoveryBlockingModal, RECOVERY_MODAL_PRESETS }, followup] = await Promise.all([
+            import('./components/RecoveryBlockingModal'),
+            import('./components/RecoveryFollowupActions'),
+          ]);
+          const code = payload.code as keyof typeof RECOVERY_MODAL_PRESETS;
+          const preset = RECOVERY_MODAL_PRESETS[code];
+          if (!preset) {
+            console.warn('[Renderer] 알 수 없는 recovery 모달 코드:', payload.code);
+            return;
+          }
+          const options = preset(payload.errorCode);
+          const choice = await recoveryBlockingModal.show(code, options);
+          console.log('[Renderer] Recovery 사용자 선택:', choice);
+
+          // C1: 사용자 선택을 메인에 보고 (메트릭)
+          if (window.api?.send) {
+            window.api.send('recovery:user-choice', {
+              code: payload.code,
+              chosenId: choice.chosenId,
+              choiceLabel: choice.choiceLabel,
+            });
+          }
+
+          // C1: 사용자 선택에 따른 실제 후속 동작 트리거
+          await followup.handleRecoveryChoice(code, choice.chosenId, payload);
+        } catch (e) {
+          console.error('[Renderer] Recovery 모달 처리 실패:', e);
+        }
+      });
     }
     // ✅ 예약 발행 완료 후 자동 초기화 리스너
     if (window.api.on) {

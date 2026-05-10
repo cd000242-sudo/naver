@@ -407,6 +407,8 @@ interface AutomationAPI {
   onStatus: (callback: (status: RendererStatus) => void) => () => void;
   onDebugLog: (callback: (message: string) => void) => () => void;
   on?: (channel: string, callback: (...args: any[]) => void) => () => void;
+  // ✅ [SPEC-IMAGE-RECOVERY-001] 화이트리스트된 IPC 채널로 송신
+  send?: (channel: string, payload: unknown) => void;
   // Excel 관련 API 제거됨
   // 소제목 이미지 관리 API
   applyHeadingImage: (heading: string, image: { provider: string; filePath: string; previewDataUrl: string; updatedAt: number; alt?: string; caption?: string }) => Promise<{ success: boolean; message?: string }>;

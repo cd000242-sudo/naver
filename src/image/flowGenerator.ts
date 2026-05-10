@@ -23,10 +23,66 @@ import { writeImageFile } from './imageUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
+import { injectUniqueSalt, injectHeadingVariation } from './flowPromptInjection.js';
 import type { BrowserContext, Page, Locator } from 'playwright';
 import * as path from 'path';
 import * as fs from 'fs';
 import { app } from 'electron';
+// ✅ [SPEC-IMAGE-RECOVERY-001] 자동 복구 코디네이터
+import { getRecoveryCoordinator } from './recovery/index.js';
+
+function extractFlowErrorCode(error: unknown): string | undefined {
+  const msg = error instanceof Error ? error.message : String(error ?? '');
+  const m = msg.match(/^(FLOW_[A-Z_]+)(?::|$)/);
+  if (m) return m[1];
+  return undefined;
+}
+
+function extractFlowHttpStatus(error: unknown): number | undefined {
+  const msg = error instanceof Error ? error.message : String(error ?? '');
+  const m = msg.match(/HTTP_(\d{3})/);
+  if (m) return Number(m[1]);
+  return undefined;
+}
+
+// C6 (SPEC-IMAGE-RECOVERY-001 Phase 6): block 결정 중 배치 즉시 중단할 항목 분류.
+// B1(IP 차단), B3(시간당 한도), B4(브라우저 미설치), B7(회복 불가능)은 다음 헤딩 시도해도 같은 결과.
+function isFlowBlockFatal(decision: { modalCode?: string }): boolean {
+  return decision.modalCode === 'B1'
+      || decision.modalCode === 'B3'
+      || decision.modalCode === 'B4'
+      || decision.modalCode === 'B7';
+}
+
+async function sendFlowBlockingModalRequest(
+  decision: { modalCode: string; reason: string; errorCode?: string },
+): Promise<void> {
+  try {
+    const { broadcastModalRequest } = require('../main/ipc/recoveryHandlers');
+    broadcastModalRequest({
+      code: decision.modalCode,
+      reason: decision.reason,
+      errorCode: decision.errorCode,
+    });
+  } catch (primaryErr) {
+    console.warn('[Flow Recovery] broadcastModalRequest 실패 — direct send 폴백:', (primaryErr as Error)?.message);
+    try {
+      const { BrowserWindow } = require('electron');
+      const wins = BrowserWindow.getAllWindows();
+      if (wins[0] && !wins[0].isDestroyed()) {
+        wins[0].webContents.send('recovery:show-modal', {
+          code: decision.modalCode,
+          reason: decision.reason,
+          errorCode: decision.errorCode,
+        });
+      } else {
+        console.warn('[Flow Recovery] BrowserWindow 없음 — 모달 표시 불가');
+      }
+    } catch (fallbackErr) {
+      console.warn('[Flow Recovery] direct send 폴백도 실패:', (fallbackErr as Error)?.message);
+    }
+  }
+}
 
 // ─── 파일 로거 ─────────────────────────────────────────────
 function getFlowLogDir(): string {
@@ -156,7 +212,20 @@ const STEALTH_ARGS = [
 const STEALTH_IGNORE_DEFAULT_ARGS = ['--enable-automation'];
 
 async function launchWithStealthFallback(profileDir: string, offScreen: boolean): Promise<BrowserContext> {
-    const { chromium } = await import('playwright');
+    // ✅ [SPEC-IMAGE-RECOVERY-001 Phase 7] patchright drop-in swap (Phase B — flowGenerator만 격리 적용)
+    // - Playwright의 runtime.enable CDP 누수 + 기타 7개 fingerprint 패치
+    // - imageFxGenerator는 OAuth 기반이라 4주 메트릭 보고 결정 (격리 유지)
+    // - 호환성 안전망: patchright 실패 시 Playwright로 fallback
+    let chromium: typeof import('playwright').chromium;
+    try {
+        const patchright = await import('patchright');
+        chromium = (patchright as any).chromium ?? (patchright as any).default?.chromium;
+        if (!chromium) throw new Error('patchright.chromium undefined');
+    } catch (err) {
+        console.warn('[Flow] patchright 로드 실패 — Playwright 폴백:', (err as Error)?.message);
+        const playwright = await import('playwright');
+        chromium = playwright.chromium;
+    }
     // ✅ [v2.10.11] Flow 크롬창 완전 숨김 — 사용자 보고 '신경쓰인다'
     //   offScreen=true일 때는 headless: true 사용 (창 자체 안 뜸)
     //   offScreen=false (로그인 단계)는 visible 유지 — 사용자가 직접 로그인해야 함
@@ -193,6 +262,9 @@ async function launchWithStealthFallback(profileDir: string, offScreen: boolean)
                 Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
             });
 
+            // 영구 anti-modal 옵저버 주입 — Google Flow가 띄우는 changelog/whats_new/banner iframe 자동 hide
+            await injectAntiModalObserver(ctx);
+
             flowLog(`[Flow] ✅ ${attempt.label} 실행 성공`);
             return ctx;
         } catch (err) {
@@ -211,9 +283,13 @@ function installNetworkImageListener(page: Page): void {
         try {
             const url = response.url();
             const ct = response.headers()['content-type'] || '';
-            // Flow 이미지 패턴: content-type image/* + URL에 flowMedia/media.getMediaUrlRedirect
+            // Flow 이미지 패턴: content-type image/* + URL에 Google CDN/Flow 패턴
             if (!ct.startsWith('image/')) return;
-            if (!/flowMedia|media\.getMediaUrlRedirect|flow-media/i.test(url)) return;
+            // 확장 매칭 — Google이 새 CDN 도메인으로 변경해도 대응
+            const FLOW_CDN_RE = /flowMedia|flow-media|media\.getMediaUrlRedirect|googleusercontent|aitestkitchen|labs\.google|gstatic\.com\/aitestkitchen/i;
+            if (!FLOW_CDN_RE.test(url)) return;
+            // changelog/banner iframe이 작은 이미지를 응답해도 무시 (overlay URL 패턴)
+            if (/changelogs?|whats[_-]?new|banner|survey|consent|onboarding|promo/i.test(url)) return;
             // 작은 preview/썸네일 제외 — Content-Length 기준 5KB 이상만
             const len = parseInt(response.headers()['content-length'] || '0', 10);
             if (len > 0 && len < 5 * 1024) return;
@@ -402,14 +478,20 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
     //     2) 타임아웃 5분 → 10분 (2FA + 이메일 확인 + 푸시 승인 시간 여유)
     //     3) accounts.google.com에 30초 이상 머물면 자동으로 flow 재방문 (OAuth 완료 후 stuck 회복)
     //     4) 다중 신호 감지: session API + URL 패턴 + 쿠키
-    const loginTimeoutMs = 10 * 60 * 1000;
-    const start = Date.now();
+    // ✅ [SPEC-IMAGE-RECOVERY-001 R5] 로그인 활성도 폴링 — 사용자가 진행 중이면 timeout 자동 연장
+    // base 5분 + URL/DOM 변화 감지 시 재시작, 누적 30분(MAX_TOTAL_MS) 절대 한도
+    // R5 (Phase 6 정합): acceptance.md 명시 30분 절대 상한 (5분 base + 5×5분 연장)
+    const baseTimeoutMs = 5 * 60 * 1000;
+    const MAX_TOTAL_MS = 30 * 60 * 1000; // 페르소나별 옵션은 후속 SPEC에서 (마라톤 90분 등)
+    const overallStart = Date.now();
+    let windowStart = Date.now();
     let loginSuccess = false;
     let lastUrlChange = Date.now();
     let lastUrl = loginPage.url();
     let stuckRedirectAttempts = 0;
-    sendImageLog('🔐 [Flow] 브라우저에서 Google 로그인을 완료해주세요 (2단계 인증 포함, 최대 10분 대기).');
-    while (Date.now() - start < loginTimeoutMs) {
+    let inactivityNotified = false;
+    sendImageLog('🔐 [Flow] 브라우저에서 Google 로그인을 완료해주세요 (2단계 인증 포함, 최대 30분 대기).');
+    while (Date.now() - overallStart < MAX_TOTAL_MS && Date.now() - windowStart < baseTimeoutMs) {
         await new Promise(r => setTimeout(r, 2000));
         if (loginPage.isClosed()) {
             flowWarn('[Flow] ⚠️ 로그인 대기 중 사용자가 창을 닫음 — 즉시 중단');
@@ -424,7 +506,21 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
         if (currentUrl !== lastUrl) {
             lastUrl = currentUrl;
             lastUrlChange = Date.now();
-            flowLog(`[Flow] 🔄 URL 변경: ${currentUrl.slice(0, 100)}`);
+            // ✅ [R5] URL 변화 감지 → window 재시작 (사용자 진행 중)
+            windowStart = Date.now();
+            inactivityNotified = false;
+            flowLog(`[Flow] 🔄 R5 URL 변경 감지 — timeout 5분 추가 연장: ${currentUrl.slice(0, 100)}`);
+        }
+        // ✅ [R5] 60초 무변화 시 1회 토스트
+        if (!inactivityNotified && Date.now() - lastUrlChange > 60_000) {
+            inactivityNotified = true;
+            // debugger 권고: 2FA URL 감지 시 메시지 구체화
+            const is2FA = /\/challenge\/|\/signin\/v2\/challenge\/|\/v3\/signin\/challenge\//.test(currentUrl);
+            if (is2FA) {
+                sendImageLog('⏳ [Flow] R5 — 2단계 인증 화면입니다. 휴대폰에서 Google 알림을 확인하거나 SMS 코드를 입력해주세요.');
+            } else {
+                sendImageLog('⏳ [Flow] R5 — 로그인이 진행 중인지 확인해주세요 (60초간 변화 없음).');
+            }
         }
         // ✅ Google OAuth 완료 후 accounts.google.com에 stuck — 자동 redirect 트리거
         const isOnGoogleAccounts = /accounts\.google\.com|myaccount\.google\.com/.test(currentUrl);
@@ -440,7 +536,7 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
                 flowWarn(`[Flow] 자동 재방문 실패: ${(e as Error).message}`);
             }
         }
-        const elapsedSec = Math.round((Date.now() - start) / 1000);
+        const elapsedSec = Math.round((Date.now() - overallStart) / 1000);
         if (elapsedSec > 0 && elapsedSec % 30 === 0) {
             sendImageLog(`⏳ [Flow] 로그인 대기 중... (${elapsedSec}s 경과 / 현재 URL: ${currentUrl.slice(0, 60)}...)`);
         }
@@ -448,7 +544,7 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
 
     if (!loginSuccess) {
         await loginCtx.close().catch(() => {});
-        throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인 시간이 10분을 넘었습니다. 2단계 인증이 완료된 후에도 자동 감지되지 않으면 [Flow 로그인] 버튼을 다시 눌러주세요. 폰에서 푸시 승인 후 노트북 화면이 labs.google/fx/tools/flow 페이지로 자동 이동하지 않으면 주소창에 직접 입력해주세요.');
+        throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인 시간이 30분을 넘었습니다. 2단계 인증이 완료된 후에도 자동 감지되지 않으면 [Flow 로그인] 버튼을 다시 눌러주세요. 폰에서 푸시 승인 후 노트북 화면이 labs.google/fx/tools/flow 페이지로 자동 이동하지 않으면 주소창에 직접 입력해주세요.');
     }
 
     flowLog('[Flow] ✅ 로그인 완료 — on-screen 닫고 off-screen 재시작');
@@ -510,6 +606,307 @@ export async function prewarmFlow(): Promise<void> {
 }
 
 // ─── 쿠키 동의 배너 자동 닫기 ────────────────────────────────
+/**
+ * 페이지 로드 시점에 MutationObserver를 주입해 *모든 신규 overlay iframe*을 자동 hide.
+ *
+ * 영구 차단 — Google이 changelog/whats_new/banner/survey 어떤 형태로 띄워도 즉시 무력화.
+ * dismissChangelogModal()의 한계 (호출 타이밍 의존)를 보완.
+ *
+ * 적용:
+ *   - context.addInitScript() — 모든 페이지 navigation에 자동 주입
+ *   - 페이지 로드 → DOM 준비 → 초기 스캔 → MutationObserver 부착
+ *   - 신규 iframe 추가 감지 시 즉시 부모 overlay 컨테이너 hide
+ *
+ * 매칭 패턴 (URL 기반, 클래스명에 의존 안 함):
+ *   changelogs | whats_new | whatsnew | banner | survey | consent | onboarding | promo
+ */
+async function injectAntiModalObserver(context: BrowserContext): Promise<void> {
+    try {
+        await context.addInitScript(() => {
+            if ((window as unknown as { __flowAntiModalInstalled?: boolean }).__flowAntiModalInstalled) return;
+            (window as unknown as { __flowAntiModalInstalled?: boolean }).__flowAntiModalInstalled = true;
+
+            // URL 패턴 — iframe.src/srcdoc 검사
+            const OVERLAY_URL_RE = /changelogs?|whats[_-]?new|banner|survey|consent|onboarding|promo/i;
+            // 텍스트 콘텐츠 패턴 — div modal 검사 (영/한 동시)
+            const OVERLAY_TEXT_RE = /What['']?s\s*new|새로운\s*기능|변경\s*사항|tour|guide\s*me|onboarding|시작하기|소개/i;
+            // 화이트리스트 — 정상 dialog는 hide X (입력/login 등)
+            const SAFE_TEXT_RE = /sign\s*in|로그인|email|password|비밀번호|prompt|프롬프트/i;
+
+            const hideElement = (el: HTMLElement): void => {
+                el.style.setProperty('display', 'none', 'important');
+                el.style.setProperty('pointer-events', 'none', 'important');
+                el.setAttribute('data-flow-hidden', '1');
+            };
+
+            const climbAndHide = (start: HTMLElement): void => {
+                let p: HTMLElement | null = start;
+                let levels = 0;
+                while (p && levels < 8) {
+                    try {
+                        const style = window.getComputedStyle(p);
+                        const z = parseInt(style.zIndex || '0', 10) || 0;
+                        const positioned = style.position === 'fixed' || style.position === 'absolute';
+                        const overlay = /overlay|modal|popup|backdrop|dialog|sheet/i.test(p.className || '');
+                        if (positioned && (z >= 100 || overlay)) {
+                            hideElement(p);
+                            return;
+                        }
+                    } catch { /* ignore */ }
+                    p = p.parentElement;
+                    levels++;
+                }
+                hideElement(start);
+            };
+
+            const isOverlayIframe = (iframe: HTMLIFrameElement): boolean => {
+                const src = iframe.src || iframe.getAttribute('src') || '';
+                if (OVERLAY_URL_RE.test(src)) return true;
+                const srcdoc = iframe.getAttribute('srcdoc') || '';
+                if (srcdoc && OVERLAY_TEXT_RE.test(srcdoc)) return true;
+                return false;
+            };
+
+            // div role=dialog / <dialog> / popover — 텍스트 기반 매칭
+            const isOverlayDialog = (el: Element): boolean => {
+                if (el.getAttribute('data-flow-hidden') === '1') return false;
+                const role = el.getAttribute('role') || '';
+                const isDialog = role === 'dialog' || role === 'alertdialog' || el.tagName === 'DIALOG';
+                const hasPopover = (el as HTMLElement).getAttribute?.('popover') !== null;
+                if (!isDialog && !hasPopover) return false;
+                const text = (el.textContent || '').slice(0, 500);
+                if (SAFE_TEXT_RE.test(text)) return false; // 로그인/입력 dialog는 hide X
+                if (OVERLAY_TEXT_RE.test(text)) return true;
+                // 텍스트 매칭 안 돼도 changelog/whats_new 클래스면 hide
+                if (/changelog|whats[_-]?new|onboarding|tour/i.test(el.className || '')) return true;
+                return false;
+            };
+
+            // Shadow DOM 재귀 탐색
+            const deepQueryAll = (root: ParentNode | ShadowRoot, sel: string, out: Element[]): void => {
+                try {
+                    (root.querySelectorAll(sel) as NodeListOf<Element>).forEach((e) => out.push(e));
+                    (root.querySelectorAll('*') as NodeListOf<Element>).forEach((e) => {
+                        const sr = (e as Element & { shadowRoot?: ShadowRoot | null }).shadowRoot;
+                        if (sr) deepQueryAll(sr, sel, out);
+                    });
+                } catch { /* ignore */ }
+            };
+
+            const scanAndHide = (root: ParentNode): void => {
+                const iframes: Element[] = [];
+                const dialogs: Element[] = [];
+                deepQueryAll(root, 'iframe', iframes);
+                deepQueryAll(root, '[role="dialog"], [role="alertdialog"], dialog, [popover]', dialogs);
+                iframes.forEach((i) => {
+                    if (isOverlayIframe(i as HTMLIFrameElement)) climbAndHide(i as HTMLElement);
+                });
+                dialogs.forEach((d) => {
+                    if (isOverlayDialog(d)) climbAndHide(d as HTMLElement);
+                });
+            };
+
+            const start = (): void => {
+                scanAndHide(document);
+                // childList: 신규 노드 / attributes: src 동적 설정 케이스
+                const observer = new MutationObserver((muts) => {
+                    for (const m of muts) {
+                        if (m.type === 'attributes') {
+                            const t = m.target as Element;
+                            if (t.tagName === 'IFRAME' && isOverlayIframe(t as HTMLIFrameElement)) {
+                                climbAndHide(t as HTMLElement);
+                            } else if (
+                                t.matches?.('[role="dialog"], [role="alertdialog"], dialog, [popover]') &&
+                                isOverlayDialog(t)
+                            ) {
+                                climbAndHide(t as HTMLElement);
+                            }
+                            continue;
+                        }
+                        m.addedNodes.forEach((n) => {
+                            if (n.nodeType !== 1) return;
+                            const el = n as Element;
+                            if (el.tagName === 'IFRAME') {
+                                if (isOverlayIframe(el as HTMLIFrameElement)) climbAndHide(el as HTMLElement);
+                            } else if (
+                                el.matches?.('[role="dialog"], [role="alertdialog"], dialog, [popover]')
+                            ) {
+                                if (isOverlayDialog(el)) climbAndHide(el as HTMLElement);
+                            } else {
+                                scanAndHide(el);
+                            }
+                        });
+                    }
+                });
+                observer.observe(document.documentElement, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['src', 'srcdoc', 'role', 'class', 'open', 'style'],
+                });
+                // style 재설정 우회 — Google이 display:'' 또는 pointer-events:auto로 다시 설정 시
+                // 1초 간격으로 marker 가진 element를 재hide (낮은 빈도, 비용 무시 가능)
+                setInterval(() => {
+                    try {
+                        document.querySelectorAll<HTMLElement>('[data-flow-hidden="1"]').forEach((el) => {
+                            const cs = window.getComputedStyle(el);
+                            if (cs.display !== 'none') {
+                                el.style.setProperty('display', 'none', 'important');
+                            }
+                            if (cs.pointerEvents !== 'none') {
+                                el.style.setProperty('pointer-events', 'none', 'important');
+                            }
+                        });
+                    } catch { /* ignore */ }
+                }, 1000);
+            };
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', start, { once: true });
+            } else {
+                start();
+            }
+        });
+    } catch (err) {
+        flowWarn(`[Flow] anti-modal observer 주입 실패 (무시): ${(err as Error).message.substring(0, 80)}`);
+    }
+}
+
+/**
+ * click 직전 가드 — target element의 중앙 좌표에서 elementFromPoint()로 *실제로 위에 있는*
+ * element를 검사. 다른 element가 가리고 있으면 그것을 hide한 후 retry.
+ *
+ * iframe/div modal observer가 race condition으로 놓친 케이스를 click 시점에 최후 방어.
+ */
+async function safeClickWithOverlayGuard(page: Page, locator: Locator, label: string): Promise<void> {
+    // 1차: 일반 click 시도 (5초)
+    try {
+        await locator.click({ timeout: 5000 });
+        return;
+    } catch (firstErr) {
+        flowLog(`[Flow][Click Guard] ${label} 1차 click 실패 — 가린 element 검사: ${(firstErr as Error).message.substring(0, 80)}`);
+    }
+    // 2차: 가린 element를 elementFromPoint로 찾아 hide
+    try {
+        const hidden = await locator.evaluate((el: HTMLElement) => {
+            const rect = el.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const top = document.elementFromPoint(cx, cy);
+            if (!top || top === el || el.contains(top)) return null;
+            // top이 target을 포함하면 정상. 그 외에는 가리는 element.
+            // top이 iframe·dialog·overlay 후보면 hide
+            let cur: Element | null = top;
+            let levels = 0;
+            const hidden: string[] = [];
+            while (cur && levels < 8) {
+                try {
+                    const style = window.getComputedStyle(cur);
+                    const z = parseInt(style.zIndex || '0', 10) || 0;
+                    const positioned = style.position === 'fixed' || style.position === 'absolute';
+                    if (positioned && z >= 100) {
+                        (cur as HTMLElement).style.setProperty('display', 'none', 'important');
+                        (cur as HTMLElement).style.setProperty('pointer-events', 'none', 'important');
+                        hidden.push(`${cur.tagName}.${cur.className || '(no-class)'}`.substring(0, 80));
+                        break;
+                    }
+                } catch { /* ignore */ }
+                cur = cur.parentElement;
+                levels++;
+            }
+            return hidden;
+        });
+        if (hidden && hidden.length > 0) {
+            flowLog(`[Flow][Click Guard] ${label} 가린 element ${hidden.length}개 hide: ${hidden.join(', ')}`);
+            await page.waitForTimeout(150);
+        }
+    } catch (probeErr) {
+        flowWarn(`[Flow][Click Guard] elementFromPoint 검사 실패 (무시): ${(probeErr as Error).message.substring(0, 80)}`);
+    }
+    // 3차: force click
+    try {
+        await locator.click({ force: true, timeout: 5000 });
+        return;
+    } catch (forceErr) {
+        flowLog(`[Flow][Click Guard] ${label} force click도 실패: ${(forceErr as Error).message.substring(0, 80)}`);
+    }
+    // 4차: JS dispatch
+    await locator.evaluate((el: HTMLElement) => {
+        try { el.focus(); } catch { /* ignore */ }
+        try { el.click(); } catch { /* ignore */ }
+        try {
+            el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+        } catch { /* ignore */ }
+    });
+}
+
+/**
+ * Google Flow 2026-04-28 changelog iframe 차단 회피.
+ *
+ * 증상: changelog iframe(`gstatic.com/aitestkitchen/website/flow/changelogs/...html`)이
+ * 자동으로 떠서 프롬프트 textbox 위를 덮음 → click이 iframe에 가로채여 30초 timeout × 3회.
+ *
+ * 진단 근거: flow-debug 로그
+ *   "subtree intercepts pointer events" + iframe.eRXgu (parent: div.hHCoWD)
+ *
+ * 처리 순서:
+ *   1) iframe parent div의 close 버튼(aria-label) 클릭 시도
+ *   2) 못 찾으면 JS로 iframe 부모 div 강제 제거 (DOM hide)
+ *
+ * dismissCookieBanner와 동일 패턴 — silent fail 허용 (없을 때 무한 루프 방지)
+ */
+async function dismissChangelogModal(page: Page): Promise<void> {
+    try {
+        // 1) close 버튼 시도 (다국어 + aria-label + 일반 X 버튼)
+        const closeSelectors = [
+            'button[aria-label*="닫기" i]',
+            'button[aria-label*="close" i]',
+            'button[aria-label*="dismiss" i]',
+            'div.hHCoWD button',
+            'div[class*="hHCoWD"] button',
+        ];
+        for (const sel of closeSelectors) {
+            const btn = page.locator(sel).first();
+            if (await btn.count() > 0 && await btn.isVisible().catch(() => false)) {
+                await btn.click({ timeout: 1500, force: true }).catch(() => {});
+                await page.waitForTimeout(300);
+                flowLog(`[Flow] 📋 changelog 모달 닫음 (${sel})`);
+                return;
+            }
+        }
+        // 2) 강제 제거 — close 버튼 못 찾으면 JS로 DOM에서 iframe 부모 hide
+        const removed = await page.evaluate(() => {
+            let count = 0;
+            document.querySelectorAll('iframe[src*="changelogs"]').forEach((iframe) => {
+                // iframe 부모 div를 통째로 hide (display:none) — DOM 제거 시 재생성될 수 있어 hide만
+                let parent: HTMLElement | null = iframe.parentElement as HTMLElement | null;
+                let levels = 0;
+                while (parent && levels < 5) {
+                    // hHCoWD 같은 컨테이너 도달 시 hide
+                    if (parent.className && /hHCoWD|sc-c7ee1759/.test(parent.className)) {
+                        parent.style.setProperty('display', 'none', 'important');
+                        parent.style.setProperty('pointer-events', 'none', 'important');
+                        count++;
+                        return;
+                    }
+                    parent = parent.parentElement;
+                    levels++;
+                }
+                // 폴백: iframe 자체 hide
+                (iframe as HTMLIFrameElement).style.display = 'none';
+                count++;
+            });
+            return count;
+        }).catch(() => 0);
+        if (removed > 0) {
+            flowLog(`[Flow] 📋 changelog iframe ${removed}개 강제 hide`);
+            await page.waitForTimeout(200);
+        }
+    } catch (err) {
+        flowWarn(`[Flow] changelog 모달 닫기 실패 (무시): ${(err as Error).message.substring(0, 80)}`);
+    }
+}
+
 async function dismissCookieBanner(page: Page, force: boolean = false): Promise<void> {
     if (cookieBannerDismissed && !force) return;
     try {
@@ -647,22 +1044,41 @@ async function ensureFlowProject(page: Page, forceNew: boolean = false): Promise
     await page.waitForTimeout(2500);
     // [v1.6.1] 세션당 1회 원칙 — 이미 dismissed이면 skip
     if (!cookieBannerDismissed) await dismissCookieBanner(page);
+    // 2026-04-28 changelog iframe 자동 dismiss — pointer event 차단 회피
+    await dismissChangelogModal(page);
 
     flowLog('[Flow][1/3] "새 프로젝트" 버튼 탐색 중...');
-    const newProjectBtn = page.locator('button').filter({ hasText: /새 프로젝트|New project|New Project|新しいプロジェクト|add_2/ }).first();
+    // ✅ [SPEC-IMAGE-RECOVERY-001 R4] 다중 셀렉터 폴백 — 우선순위 순회
+    const { iterateFlowSelectors } = await import('../automation/selectors/index.js');
+    const { getRecoveryCoordinator } = await import('./recovery/index.js');
+    const r4Coordinator = getRecoveryCoordinator();
+    const r4Excluded = r4Coordinator.getAttempts().r4SelectorFailed;
 
-    try {
-        await newProjectBtn.waitFor({ state: 'visible', timeout: 30000 });
-    } catch (err) {
+    let newProjectClicked = false;
+    let r4LastError: Error | null = null;
+    for (const { id, selector } of iterateFlowSelectors('newProjectButton', r4Excluded)) {
+        try {
+            const btn = page.locator(selector).first();
+            await btn.waitFor({ state: 'visible', timeout: 8000 });
+            await btn.click();
+            flowLog(`[Flow][1/3] R4 ✅ 셀렉터 ${id} 매칭 + 클릭 성공`);
+            newProjectClicked = true;
+            break;
+        } catch (selErr) {
+            r4LastError = selErr as Error;
+            r4Coordinator.recordSelectorFailure(id);
+            flowLog(`[Flow][1/3] R4 ⚠️ 셀렉터 ${id} 실패 → 다음 시도`);
+        }
+    }
+
+    if (!newProjectClicked) {
         await saveDebugScreenshot(page, 'no-new-project-btn');
         const allButtons = await page.evaluate(() => {
             return Array.from(document.querySelectorAll('button')).slice(0, 20).map(b => (b.textContent || '').trim().substring(0, 50));
         }).catch(() => []);
-        flowError(`[Flow][1/3] ❌ "새 프로젝트" 버튼 못 찾음. DOM 버튼 상위 20개 ↓`, allButtons);
-        throw new Error(`FLOW_NEW_PROJECT_BUTTON_NOT_FOUND:Google Flow 페이지가 변경되었거나 계정 권한 문제로 보입니다. 1) 인터넷 연결 확인  2) 1시간 후 재시도  3) 계속 실패하면 다른 이미지 엔진을 선택해주세요.`);
+        flowError(`[Flow][1/3] ❌ R4 모든 셀렉터 폴백 실패. DOM 버튼 상위 20개 ↓`, allButtons);
+        throw new Error(`FLOW_NEW_PROJECT_BUTTON_NOT_FOUND:Google Flow 페이지가 변경되었거나 계정 권한 문제로 보입니다. 1) 인터넷 연결 확인  2) 1시간 후 재시도  3) 계속 실패하면 다른 이미지 엔진을 선택해주세요. (마지막 오류: ${r4LastError?.message?.substring(0, 80) ?? 'unknown'})`);
     }
-
-    await newProjectBtn.click();
     flowLog('[Flow][1/3] "새 프로젝트" 클릭됨 — URL 리다이렉트 대기');
 
     try {
@@ -672,12 +1088,16 @@ async function ensureFlowProject(page: Page, forceNew: boolean = false): Promise
         throw new Error(`FLOW_PROJECT_REDIRECT_TIMEOUT:"새 프로젝트" 클릭 후 프로젝트 URL 리다이렉트 30초 초과. 현재 URL: ${page.url()}`);
     }
     await page.waitForTimeout(1500);
+    // 새 프로젝트 페이지에서도 changelog/onboarding 팝업 가능 — 즉시 dismiss
+    await dismissChangelogModal(page);
     cachedProjectUrl = page.url();
     flowLog(`[Flow][1/3] ✅ 프로젝트 생성 완료: ${cachedProjectUrl}`);
     sendImageLog(`✅ [Flow] 프로젝트 준비됨`);
 }
 
 // ─── 프롬프트 입력창 / 전송 버튼 로케이터 헬퍼 ────
+// R4 Phase 6 확장: FLOW_SELECTORS 다중 폴백을 사용하지만, 호환성 위해 단일 로케이터 헬퍼는 첫 매칭 셀렉터로 유지.
+// 실제 다중 폴백은 submitPromptOnly의 진입 직후에서 수행.
 function promptInputLocator(page: Page): Locator {
     return page.locator('[role="textbox"][contenteditable="true"], div[contenteditable="true"]').first();
 }
@@ -686,19 +1106,46 @@ function submitButtonLocator(page: Page): Locator {
     return page.locator('button').filter({ hasText: /arrow_forward/ }).first();
 }
 
+// R4 Phase 6: promptInput/submitButton 다중 셀렉터 우선순위 탐색
+async function findFirstMatchingFlowSelector(page: Page, key: 'promptInput' | 'submitButton'): Promise<Locator | null> {
+    const { iterateFlowSelectors } = await import('../automation/selectors/index.js');
+    const { getRecoveryCoordinator } = await import('./recovery/index.js');
+    const coord = getRecoveryCoordinator();
+    const excluded = coord.getAttempts().r4SelectorFailed;
+    for (const { id, selector } of iterateFlowSelectors(key, excluded)) {
+        try {
+            const loc = page.locator(selector).first();
+            await loc.waitFor({ state: 'visible', timeout: 5000 });
+            flowLog(`[Flow] R4 ✅ ${key} 셀렉터 ${id} 매칭`);
+            return loc;
+        } catch {
+            coord.recordSelectorFailure(id);
+        }
+    }
+    return null;
+}
+
 // ─── [v1.6.1] 프롬프트 입력 + 제출 (즉시 반환) ────
 //   기존 typePromptAndSubmit에서 검증/대기 최소화
 async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
     flowLog(`[Flow][2/3] 프롬프트 입력 시작 (길이: ${prompt.length})`);
 
-    const promptInput = promptInputLocator(page);
-    try {
-        await promptInput.waitFor({ state: 'visible', timeout: 15000 });
-    } catch (err) {
-        await saveDebugScreenshot(page, 'no-prompt-input');
-        throw new Error('FLOW_PROMPT_INPUT_NOT_FOUND:Flow 프롬프트 입력창을 찾지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해주세요.');
+    // 2026-04-28 changelog iframe이 매 시도마다 다시 뜰 수 있어 입력 직전 재dismiss
+    await dismissChangelogModal(page);
+
+    // R4 Phase 6: 단일 셀렉터 → 다중 폴백
+    let promptInput = await findFirstMatchingFlowSelector(page, 'promptInput');
+    if (!promptInput) {
+        promptInput = promptInputLocator(page);
+        try {
+            await promptInput.waitFor({ state: 'visible', timeout: 5000 });
+        } catch (err) {
+            await saveDebugScreenshot(page, 'no-prompt-input');
+            throw new Error('FLOW_PROMPT_INPUT_NOT_FOUND:Flow 프롬프트 입력창을 찾지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해주세요.');
+        }
     }
-    await promptInput.click();
+    // changelog/overlay가 가리는 케이스 4단계 폴백 (일반 → elementFromPoint hide → force → JS dispatch)
+    await safeClickWithOverlayGuard(page, promptInput, 'promptInput');
     // [v1.6.1] 포커스 안정화 150→50ms
     await page.waitForTimeout(50);
 
@@ -796,13 +1243,25 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
                 const aria = img.getAttribute('aria-label') || '';
                 const fullyLoaded = img.complete && img.naturalWidth >= 200 && img.naturalHeight >= 200;
                 if (!fullyLoaded) return false;
-                if (/생성된 이미지|Generated image|Generated|생성|已生成|生成された|Image générée|Imagen generada|Generiertes Bild/i.test(alt + aria)) return true;
-                if (/media\.getMediaUrlRedirect|flowMedia|flow-media/i.test(src)) return true;
+                // overlay iframe(changelog 등) 내부 이미지 무시
+                if (/changelogs?|whats[_-]?new|banner|survey|consent|onboarding|promo/i.test(src)) return false;
+                // alt/aria-label 다국어 매칭 확장 — 14개 언어 (KR/EN/CN/JP/FR/ES/DE + 추가)
+                if (/생성된 이미지|이미지 결과|Generated image|Generated|생성|已生成|生成された|生成图像|Image générée|Imagen generada|Generiertes Bild|Immagine generata|Сгенерированное|Gerada|รูปภาพที่สร้าง/i.test(alt + aria)) return true;
+                // URL 매칭 확장 — Google CDN
+                if (/media\.getMediaUrlRedirect|flowMedia|flow-media|googleusercontent|aitestkitchen/i.test(src)) return true;
+                // 큰 이미지 + 외부 HTTP — 마지막 폴백
                 if (img.naturalWidth >= 512 && !/=s\d+-c$/.test(src) && src.startsWith('http')) return true;
                 return false;
             });
             if (matches.length > prev) {
-                return matches[matches.length - 1].src;
+                // Flow가 한 prompt → 4 variants 동시 생성 케이스 대응:
+                // 마지막만 반환하면 매번 같은 variant 선택될 위험 → prev~last 사이 랜덤.
+                // 단일 이미지(matches.length === prev+1)면 그것을 반환, 다중이면 랜덤.
+                const newCount = matches.length - prev;
+                const idx = newCount === 1
+                    ? prev
+                    : prev + Math.floor(Math.random() * newCount);
+                return matches[idx].src;
             }
             return null;
         },
@@ -903,8 +1362,22 @@ async function downloadImageAsBuffer(page: Page, imageUrl: string): Promise<{ bu
             if (!response.ok()) {
                 throw new Error(`HTTP_${response.status()}`);
             }
-            const buffer = await response.body();
+            let buffer = await response.body();
             if (buffer.length < 1024) {
+                // ✅ [SPEC-IMAGE-RECOVERY-001 R6] Flow 썸네일 → 풀해상도 교체 패턴 대응:
+                // 5초 대기 후 같은 URL 1회 재요청. 두 번째도 작으면 reject 유지.
+                flowWarn(`[Flow] R6 — 다운로드 ${buffer.length}bytes < 1KB, 5초 대기 후 1회 재요청`);
+                await new Promise((r) => setTimeout(r, 5000));
+                const retry = await ctx.request.get(imageUrl, { timeout: 30000, maxRedirects: 5 });
+                if (retry.ok()) {
+                    const retryBuffer = await retry.body();
+                    if (retryBuffer.length >= 1024) {
+                        const mt = retry.headers()['content-type']?.split(';')[0]?.trim() || 'image/png';
+                        flowLog(`[Flow] 📦 R6 재요청 성공 (${Math.round(retryBuffer.length / 1024)}KB)`);
+                        return { buffer: retryBuffer, mimeType: mt };
+                    }
+                    buffer = retryBuffer;
+                }
                 throw new Error(`FLOW_IMAGE_DOWNLOAD_TINY:다운로드된 이미지가 비정상적으로 작음 (${buffer.length} bytes)`);
             }
             const mimeType = response.headers()['content-type']?.split(';')[0]?.trim() || 'image/png';
@@ -925,14 +1398,72 @@ async function downloadImageAsBuffer(page: Page, imageUrl: string): Promise<{ bu
 // v2.7.11 (debugger #1 권장): 마라톤 sequential 폴백에서 호출 시 forceNewProjectOnLimit
 // 옵션을 true로 주면 한도 임계치를 LIMIT-2(7장)로 보수화해 매 호출마다 한도 사전 체크 +
 // 누적 위험 차단. 단발 호출(기본값 false)은 기존 동작 유지.
+// Prompt injection helpers (injectUniqueSalt, injectHeadingVariation,
+// sanitizeHeadingForPrompt) live in ./flowPromptInjection.ts so they can be
+// unit-tested without loading electron.
+
+/**
+ * 헤딩간 prompt 유사도 진단 — *상류 회귀* 자동 감지.
+ *
+ * 4 헤딩의 base prompt가 서로 거의 같으면 (같은 prompt template 결과) Flow 결과도 같아질 위험.
+ * Jaccard similarity (단어 set 교집합/합집합)로 측정해 경고 로그 발생.
+ *
+ * 임계 0.8 이상: 거의 동일 → 콘텐츠 생성 단계 회귀 의심
+ * 임계 0.6~0.8: 비슷 — 헤딩 variation hint로 차별화 필요
+ * 임계 0.6 미만: 정상
+ *
+ * 호출 시점: generateWithFlow 진입 시 1회.
+ */
+function diagnoseHeadingPromptSimilarity(items: ImageRequestItem[]): void {
+    if (items.length < 2) return;
+    const tokenize = (s: string): Set<string> => {
+        const tokens = (s.toLowerCase().match(/[a-z가-힣0-9]+/g) ?? []).filter((t) => t.length >= 3);
+        return new Set(tokens);
+    };
+    const tokenSets = items.map((it) => tokenize(String(it.englishPrompt || it.prompt || '')));
+    let highCount = 0;
+    let totalPairs = 0;
+    let maxSim = 0;
+    let maxPair: [number, number] = [-1, -1];
+    for (let i = 0; i < tokenSets.length; i++) {
+        for (let j = i + 1; j < tokenSets.length; j++) {
+            const a = tokenSets[i];
+            const b = tokenSets[j];
+            if (a.size === 0 || b.size === 0) continue;
+            let inter = 0;
+            for (const t of a) if (b.has(t)) inter++;
+            const union = a.size + b.size - inter;
+            const sim = union > 0 ? inter / union : 0;
+            totalPairs++;
+            if (sim >= 0.6) highCount++;
+            if (sim > maxSim) {
+                maxSim = sim;
+                maxPair = [i, j];
+            }
+        }
+    }
+    if (totalPairs === 0) return;
+    const ratio = highCount / totalPairs;
+    if (maxSim >= 0.8) {
+        flowWarn(`[Flow][Diagnose] ⚠️ 헤딩 #${maxPair[0] + 1}↔#${maxPair[1] + 1} prompt 유사도 ${(maxSim * 100).toFixed(0)}% — 같은 이미지 위험. 헤딩 variation hint 적용 중이지만 base prompt 차별화 권장.`);
+        sendImageLog(`⚠️ [Flow] 헤딩간 prompt가 매우 유사 (${(maxSim * 100).toFixed(0)}%) — 같은 이미지 나올 가능성. 콘텐츠 생성 단계 점검 필요.`);
+    } else if (ratio >= 0.5) {
+        flowWarn(`[Flow][Diagnose] 헤딩간 prompt 유사 페어 ${highCount}/${totalPairs} (max ${(maxSim * 100).toFixed(0)}%) — 8가지 시점 hint로 차별화 시도`);
+    } else {
+        flowLog(`[Flow][Diagnose] ✅ 헤딩간 prompt 다양성 OK (max similarity ${(maxSim * 100).toFixed(0)}%)`);
+    }
+}
+
 export async function generateSingleImageWithFlow(
-    prompt: string,
+    rawPrompt: string,
     _aspectRatio: string = '1:1',
     signal?: AbortSignal,
     opts?: { forceNewProjectOnLimit?: boolean },
 ): Promise<{ buffer: Buffer; mimeType: string } | null> {
     const MAX_RETRIES = 3;
     let lastError: Error | null = null;
+    // Flow가 같은 prompt에 같은 이미지 반환하는 회귀 차단 — 호출마다 unique salt 주입
+    const prompt = injectUniqueSalt(rawPrompt);
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
         if (signal?.aborted) {
@@ -975,6 +1506,22 @@ export async function generateSingleImageWithFlow(
             sendImageLog(`⚠️ [Flow] 시도 ${attempt} 실패: ${msg.substring(0, 150)}`);
             lastError = err as Error;
 
+            // 최후 보루 — 시도 2 실패 시 page.reload()로 stuck DOM/iframe overlay 강제 청소.
+            // FLOW_BROWSER_LAUNCH_FAILED · FLOW_LOGIN_TIMEOUT 같은 구조적 오류는 reload로 회복 불가 → skip.
+            const isClickOrInputTimeout = /Timeout.*exceeded|FLOW_PROMPT_INPUT|FLOW_SUBMIT_BUTTON|FLOW_IMAGE_TIMEOUT|intercepts pointer/i.test(msg);
+            if (attempt === 2 && isClickOrInputTimeout) {
+                try {
+                    flowLog('[Flow] 🔄 2차 실패 — page.reload()로 DOM 청소 후 마지막 재시도');
+                    sendImageLog('🔄 [Flow] 페이지 새로고침으로 강제 청소 중...');
+                    const page = await ensureFlowBrowserPage();
+                    await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 }).catch(() => {});
+                    await page.waitForTimeout(2000);
+                    // reload 후 anti-modal observer는 addInitScript로 자동 재주입됨
+                } catch (reloadErr) {
+                    flowWarn(`[Flow] page.reload 실패 (다음 시도로 진행): ${(reloadErr as Error).message.substring(0, 80)}`);
+                }
+            }
+
             if (attempt < MAX_RETRIES) {
                 await new Promise((r) => setTimeout(r, 3000 * attempt));
             }
@@ -990,7 +1537,9 @@ export async function generateSingleImageWithFlow(
 //   기존: 3회 재시도 후 폴백 허용 → 일부 중복이 통과
 //   변경: 5회 재시도 + similarityThreshold 8 (probeDuplicate 호출 시)
 const FLOW_DUPLICATE_MAX_RETRIES = 5;
-const FLOW_AHASH_THRESHOLD = 8; // 64비트 중 8비트 차이까지 유사로 간주 (이전 6 → 8 강화)
+// 사용자 실측: 임계 8은 시각적으로 동일한 이미지도 통과하는 케이스 발생 → 6으로 환원.
+// 64비트 중 6비트 차이까지 유사로 간주 (8 → 6 환원, 사용자 보고 후 강화).
+const FLOW_AHASH_THRESHOLD = 6;
 
 // ─── [v1.6.1] 파이프라인 배치 생성 ────
 //   queueDepth=2: 제출 #1 → 입력 재활성화 대기 → 제출 #2 → #1 감지 → 제출 #3...
@@ -1018,6 +1567,8 @@ async function generateBatchPipelined(
     // 제출된 프롬프트 FIFO 큐 (순서 기반 매칭)
     // Flow UI는 제출 순서대로 이미지를 쌓으므로, 제출 순서 = 감지 순서 가정
     const pending: { index: number; prompt: string; item: ImageRequestItem }[] = [];
+    // FIFO 매칭 회귀 감지 — 이번 배치에서 이미 매칭된 URL 추적
+    const pipelineSeenUrls: Set<string> = new Set();
     const totalItems = items.length;
 
     let initialCount = await countExistingImages(page);
@@ -1043,10 +1594,13 @@ async function generateBatchPipelined(
             }
 
             const item = items[submittedCount];
-            const prompt = item.englishPrompt || PromptBuilder.build(item, {
+            const basePrompt = item.englishPrompt || PromptBuilder.build(item, {
                 imageStyle: (item as any).imageStyle || 'realistic',
                 category: (item as any).category || '',
             } as any);
+            // 헤딩 인덱스 기반 강제 시점/구도 회전 + 헤딩 제목 명시 subject prepend
+            // (LLM이 비슷한 헤딩에 비슷한 base prompt 만드는 상류 회귀 방어)
+            const prompt = injectHeadingVariation(basePrompt, submittedCount, item.heading);
 
             try {
                 // 이전 제출이 있으면 입력 재활성화 대기
@@ -1083,6 +1637,19 @@ async function generateBatchPipelined(
         const prevCount = initialCount + detectedCount; // 이미 감지된 수만큼 증가
         try {
             const imageUrl = await waitForNewImage(page, prevCount, 150000);
+            // Pipeline FIFO 매칭 회귀 진단 — Flow가 *제출 순서와 다른 순서*로 응답하면
+            // submittedCount 기반 매칭이 어긋나 같은 URL이 다른 slot에 분배될 위험.
+            // pipelineSeenUrls로 이번 배치 안에서 *URL 중복*을 즉시 감지.
+            if (pipelineSeenUrls.has(imageUrl)) {
+                flowWarn(`[Flow][Pipeline] ⚠️ FIFO 매칭 회귀 감지 — slot ${slot.index + 1}이 이미 매칭된 URL 재할당. 다음 새 이미지 대기.`);
+                sendImageLog(`⚠️ [Flow] 매칭 회귀 — "${slot.item.heading}" 재대기`);
+                // 재대기 — 진짜 새 이미지가 올 때까지
+                const altUrl = await waitForNewImage(page, prevCount + 1, 60000).catch(() => imageUrl);
+                if (altUrl !== imageUrl) {
+                    flowLog(`[Flow][Pipeline] ✅ 재대기로 다른 URL 확보: ${altUrl.substring(0, 80)}...`);
+                }
+            }
+            pipelineSeenUrls.add(imageUrl);
             let downloaded = await downloadImageAsBuffer(page, imageUrl);
             let acceptedPrompt = slot.prompt;
 
@@ -1106,9 +1673,32 @@ async function generateBatchPipelined(
                         break;
                     }
                 }
+                // 5회 재시도에도 중복이면 마지막 보루 — 새 프로젝트 강제 후 1회 더 시도.
+                // Flow가 같은 컨텍스트(프로젝트)에 deterministic한 것이지, 새 프로젝트면 다른 결과 가능.
                 if (probe.isDuplicate || probe.isSimilar) {
-                    flowWarn(`[Flow][Pipeline] ⚠️ ${FLOW_DUPLICATE_MAX_RETRIES}회 시도 후에도 중복/유사 — 사용자에게 알림 + 폴백 허용`);
-                    sendImageLog(`⚠️ [Flow] "${slot.item.heading}" 중복 이미지 ${FLOW_DUPLICATE_MAX_RETRIES}회 재시도 후에도 검출 — 그대로 사용 (필요 시 수동 교체 가능)`);
+                    try {
+                        flowWarn(`[Flow][Pipeline] 🆕 ${FLOW_DUPLICATE_MAX_RETRIES}회 후 중복 — 새 프로젝트 강제 후 마지막 1회 시도`);
+                        sendImageLog(`🆕 [Flow] "${slot.item.heading}" 새 프로젝트로 컨텍스트 리셋 후 재시도`);
+                        const freshPage = await ensureFlowBrowserPage();
+                        await ensureFlowProject(freshPage, true);  // force new project
+                        const lastShot = await generateSingleImageWithFlow(applyDiversityHint(acceptedPrompt, FLOW_DUPLICATE_MAX_RETRIES + 1), (slot.item as any).aspectRatio || '1:1');
+                        if (lastShot) {
+                            const lastProbe = await probeDuplicate(lastShot.buffer, usedImageHashes, usedImageAHashes, FLOW_AHASH_THRESHOLD);
+                            if (!lastProbe.isDuplicate && !lastProbe.isSimilar) {
+                                downloaded = lastShot;
+                                probe = lastProbe;
+                                flowLog(`[Flow][Pipeline] ✅ 새 프로젝트 보루로 다양성 확보`);
+                            } else {
+                                flowWarn(`[Flow][Pipeline] ⚠️ 새 프로젝트 보루도 중복 — 그대로 사용`);
+                            }
+                        }
+                    } catch (lastErr) {
+                        flowWarn(`[Flow][Pipeline] 새 프로젝트 보루 실패: ${(lastErr as Error).message.substring(0, 100)}`);
+                    }
+                }
+                if (probe.isDuplicate || probe.isSimilar) {
+                    flowWarn(`[Flow][Pipeline] ⚠️ 모든 재시도 후에도 중복/유사 — 사용자에게 알림 + 폴백 허용`);
+                    sendImageLog(`⚠️ [Flow] "${slot.item.heading}" 중복 이미지 모든 재시도 후 검출 — 그대로 사용 (필요 시 수동 교체)`);
                 }
                 commitHashes(probe, usedImageHashes, usedImageAHashes);
             }
@@ -1199,12 +1789,15 @@ export async function generateWithFlow(
     initFlowLogFile();
     flowLog(`════════════════════════════════════════════`);
     flowLog(`[Flow] 🎨 총 ${items.length}개 이미지 생성 시작 (v1.6.1 파이프라인)`);
+    // 헤딩간 prompt 유사도 진단 — 상류 회귀(같은 prompt → 같은 이미지) 자동 감지
+    diagnoseHeadingPromptSimilarity(items);
     flowLog(`[Flow] 📄 디버그 로그 파일: ${flowLogFilePath || '(초기화 실패)'}`);
     flowLog(`[Flow] 📋 요청 목록`, items.map((it, idx) => ({
         idx: idx + 1,
         heading: (it.heading || '').substring(0, 60),
         hasEnglishPrompt: !!it.englishPrompt,
         promptPreview: ((it.englishPrompt || '') as string).substring(0, 100),
+        promptFull: ((it.englishPrompt || '') as string).substring(0, 500), // 헤딩간 유사도 진단용
         aspectRatio: (it as any).aspectRatio || '1:1',
     })));
     sendImageLog(`🎨 [Flow] Nano Banana 2로 ${items.length}개 이미지 생성 시작 (파이프라인)`);
@@ -1236,17 +1829,36 @@ export async function generateWithFlow(
         flowLog(`[Flow] 🏁 마라톤 모드 — 파이프라인 비활성, sequential 단일 경로`);
     }
 
+    // ✅ [SPEC-IMAGE-RECOVERY-001] 자동 복구 코디네이터
+    const coordinator = getRecoveryCoordinator({
+        toastNotifier: { notify: (m) => sendImageLog(m) },
+    });
+
     // Sequential fallback (파이프라인 미완료분 또는 전체)
     for (let i = pipelineDoneCount; i < items.length; i++) {
         if (firstCriticalError) break;
         const item = items[i];
 
+        // 헤딩 단위 자동 복구 카운터 — 재시도 진입 시 startHeading 호출 안 함
+        if (!coordinator.isRetryingSameHeading(i)) {
+            coordinator.startHeading({
+                headingIndex: i,
+                totalHeadings: items.length,
+                heading: item.heading,
+                postTitle: postTitle ?? '',
+                engine: 'flow',
+            });
+        }
+
         try {
             sendImageLog(`🖼️ [Flow] [${i + 1}/${items.length}] "${item.heading}" 생성 중...`);
-            let prompt = item.englishPrompt || PromptBuilder.build(item, {
+            const basePrompt = item.englishPrompt || PromptBuilder.build(item, {
                 imageStyle: (item as any).imageStyle || 'realistic',
                 category: (item as any).category || '',
             } as any);
+            // 헤딩 인덱스 기반 강제 시점/구도 회전 + 헤딩 제목 명시 subject prepend
+            // (LLM이 비슷한 헤딩에 비슷한 base prompt 만드는 상류 회귀 방어)
+            let prompt = injectHeadingVariation(basePrompt, i, item.heading);
             const aspectRatio = (item as any).aspectRatio || '1:1';
 
             // v2.7.11: 마라톤 모드 시 한도 임계치 보수화 옵션 전달 (debugger #1)
@@ -1286,9 +1898,36 @@ export async function generateWithFlow(
                         break;
                     }
                 }
+                // 5회 retry에도 중복이면 마지막 보루 — 새 프로젝트 강제 후 1회 더 (Pipeline mode와 동일).
                 if (probe.isDuplicate || probe.isSimilar) {
-                    flowWarn(`[Flow][Seq] ⚠️ ${FLOW_DUPLICATE_MAX_RETRIES}회 시도 후에도 중복/유사 — 사용자에게 알림 + 폴백 허용`);
-                    sendImageLog(`⚠️ [Flow] "${item.heading}" 중복 이미지 ${FLOW_DUPLICATE_MAX_RETRIES}회 재시도 후에도 검출 — 그대로 사용 (필요 시 수동 교체)`);
+                    try {
+                        flowWarn(`[Flow][Seq] 🆕 ${FLOW_DUPLICATE_MAX_RETRIES}회 후 중복 — 새 프로젝트 강제 후 마지막 1회 시도`);
+                        sendImageLog(`🆕 [Flow] "${item.heading}" 새 프로젝트로 컨텍스트 리셋 후 재시도`);
+                        const freshPage = await ensureFlowBrowserPage();
+                        await ensureFlowProject(freshPage, true);
+                        const lastShot = await generateSingleImageWithFlow(
+                            applyDiversityHint(prompt, FLOW_DUPLICATE_MAX_RETRIES + 1),
+                            aspectRatio,
+                            undefined,
+                            { forceNewProjectOnLimit: !!options?.forceFreshContext },
+                        );
+                        if (lastShot) {
+                            const lastProbe = await probeDuplicate(lastShot.buffer, usedImageHashes, usedImageAHashes, FLOW_AHASH_THRESHOLD);
+                            if (!lastProbe.isDuplicate && !lastProbe.isSimilar) {
+                                generated = lastShot;
+                                probe = lastProbe;
+                                flowLog(`[Flow][Seq] ✅ 새 프로젝트 보루로 다양성 확보`);
+                            } else {
+                                flowWarn(`[Flow][Seq] ⚠️ 새 프로젝트 보루도 중복 — 그대로 사용`);
+                            }
+                        }
+                    } catch (lastErr) {
+                        flowWarn(`[Flow][Seq] 새 프로젝트 보루 실패: ${(lastErr as Error).message.substring(0, 100)}`);
+                    }
+                }
+                if (probe.isDuplicate || probe.isSimilar) {
+                    flowWarn(`[Flow][Seq] ⚠️ 모든 재시도 후에도 중복/유사 — 사용자에게 알림 + 폴백 허용`);
+                    sendImageLog(`⚠️ [Flow] "${item.heading}" 중복 이미지 모든 재시도 후 검출 — 그대로 사용 (필요 시 수동 교체)`);
                 }
                 commitHashes(probe, usedImageHashes, usedImageAHashes);
             }
@@ -1307,6 +1946,7 @@ export async function generateWithFlow(
                 cost: 0,
             } as any;
             results.push(image);
+            coordinator.markHeadingSucceeded(); // C8
             // ✅ [v2.6.3] 중복 이벤트 발사 차단 — 콜백 있으면 콜백만, 없으면 IPC 직송(fallback)
             if (onImageGenerated) {
                 onImageGenerated(image, i, items.length);
@@ -1331,8 +1971,41 @@ export async function generateWithFlow(
             }
         } catch (err) {
             const msg = (err as Error).message || '';
+            // ✅ [SPEC-IMAGE-RECOVERY-001] 자동 복구 결정
+            const errorCode = extractFlowErrorCode(err);
+            const httpStatus = extractFlowHttpStatus(err);
+            if (httpStatus === 503) coordinator.recordServer503(); // C4
+            const decision = coordinator.decide({ errorMessage: msg, errorCode, httpStatus });
+
+            if (decision.action === 'retry') {
+                const backoffMs = coordinator.applyRetry(decision);
+                if (backoffMs > 0) {
+                    flowLog(`[Flow] 🔄 ${decision.tag} 백오프 ${backoffMs}ms — "${item.heading}"`);
+                    await new Promise((r) => setTimeout(r, backoffMs));
+                }
+                coordinator.markRetryingHeading(i);
+                i--;
+                continue;
+            }
+
             flowError(`[Flow] [${i + 1}/${items.length}] 실패: ${msg}`);
             sendImageLog(`❌ [Flow] [${i + 1}] 실패: ${msg.substring(0, 150)}`);
+
+            if (decision.action === 'block') {
+                await sendFlowBlockingModalRequest(decision);
+                // C6: B1/B3/B4/B7 등 회복 불가능 모달은 즉시 배치 중단
+                if (isFlowBlockFatal(decision)) {
+                    flowError(`[Flow] ⛔ 회복 불가능 모달(${decision.modalCode}) — 배치 즉시 중단`);
+                    coordinator.markBatchAborted();
+                    firstCriticalError = err as Error;
+                    break;
+                }
+            }
+
+            if (decision.action === 'skip-heading') {
+                coordinator.markHeadingSkipped(); // C8
+            }
+
             if (msg.startsWith('FLOW_')) firstCriticalError = err as Error;
         }
     }

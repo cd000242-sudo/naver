@@ -24,6 +24,8 @@ export enum ErrorCategory {
   CONTENT = 'CONTENT',
   /** 라이선스 관련 */
   LICENSE = 'LICENSE',
+  /** 자동 복구 시스템 (SPEC-IMAGE-RECOVERY-001) */
+  RECOVERY = 'RECOVERY',
   /** 시스템/기타 */
   SYSTEM = 'SYSTEM',
 }
@@ -92,6 +94,17 @@ export enum ErrorCode {
   LICENSE_EXPIRED = 'LICENSE.EXPIRED',
   LICENSE_QUOTA_EXCEEDED = 'LICENSE.QUOTA_EXCEEDED',
   LICENSE_SERVER_ERROR = 'LICENSE.SERVER_ERROR',
+
+  // --- RECOVERY (SPEC-IMAGE-RECOVERY-001) ---
+  RECOVERY_TRIGGERED = 'RECOVERY.TRIGGERED',
+  RECOVERY_EXHAUSTED = 'RECOVERY.EXHAUSTED',
+  RECOVERY_BLOCKED_BY_QUOTA = 'RECOVERY.BLOCKED_BY_QUOTA',
+  RECOVERY_BLOCKED_BY_FORBIDDEN = 'RECOVERY.BLOCKED_BY_FORBIDDEN',
+  RECOVERY_BLOCKED_BY_UI_CHANGE = 'RECOVERY.BLOCKED_BY_UI_CHANGE',
+  RECOVERY_BLOCKED_BY_SAFETY = 'RECOVERY.BLOCKED_BY_SAFETY',
+  RECOVERY_BLOCKED_BY_NO_BROWSER = 'RECOVERY.BLOCKED_BY_NO_BROWSER',
+  RECOVERY_BLOCKED_BY_LOGIN_TIMEOUT = 'RECOVERY.BLOCKED_BY_LOGIN_TIMEOUT',
+  RECOVERY_BLOCKED_BY_FATAL = 'RECOVERY.BLOCKED_BY_FATAL',
 
   // --- SYSTEM ---
   SYSTEM_UNKNOWN = 'SYSTEM.UNKNOWN',
@@ -170,6 +183,17 @@ const ERROR_PROPERTIES: Readonly<Record<ErrorCode, ErrorProperties>> = {
   [ErrorCode.LICENSE_EXPIRED]: { retryable: false, fatal: true, category: ErrorCategory.LICENSE, userMessage: '라이선스 만료' },
   [ErrorCode.LICENSE_QUOTA_EXCEEDED]: { retryable: false, fatal: false, category: ErrorCategory.LICENSE, userMessage: '무료 티어 사용량 초과' },
   [ErrorCode.LICENSE_SERVER_ERROR]: { retryable: true, fatal: false, category: ErrorCategory.LICENSE, userMessage: '라이선스 서버 오류' },
+
+  // RECOVERY (SPEC-IMAGE-RECOVERY-001)
+  [ErrorCode.RECOVERY_TRIGGERED]: { retryable: true, fatal: false, category: ErrorCategory.RECOVERY, userMessage: '자동 복구 시도 중' },
+  [ErrorCode.RECOVERY_EXHAUSTED]: { retryable: false, fatal: false, category: ErrorCategory.RECOVERY, userMessage: '자동 복구 한도 초과 — 사용자 개입 필요' },
+  [ErrorCode.RECOVERY_BLOCKED_BY_QUOTA]: { retryable: false, fatal: false, category: ErrorCategory.RECOVERY, userMessage: '시간당 한도 초과 — 1시간 후 다시 시도' },
+  [ErrorCode.RECOVERY_BLOCKED_BY_FORBIDDEN]: { retryable: false, fatal: false, category: ErrorCategory.RECOVERY, userMessage: '접근 거부 — 외부 프록시 또는 다른 계정 필요' },
+  [ErrorCode.RECOVERY_BLOCKED_BY_UI_CHANGE]: { retryable: false, fatal: false, category: ErrorCategory.RECOVERY, userMessage: '페이지 UI 변경 감지 — 원격 패치 대기 중' },
+  [ErrorCode.RECOVERY_BLOCKED_BY_SAFETY]: { retryable: false, fatal: false, category: ErrorCategory.RECOVERY, userMessage: '프롬프트가 안전 필터에 차단됨' },
+  [ErrorCode.RECOVERY_BLOCKED_BY_NO_BROWSER]: { retryable: false, fatal: true, category: ErrorCategory.RECOVERY, userMessage: 'Chrome/Edge 브라우저 미설치' },
+  [ErrorCode.RECOVERY_BLOCKED_BY_LOGIN_TIMEOUT]: { retryable: false, fatal: false, category: ErrorCategory.RECOVERY, userMessage: 'Google 로그인 30분 초과' },
+  [ErrorCode.RECOVERY_BLOCKED_BY_FATAL]: { retryable: false, fatal: true, category: ErrorCategory.RECOVERY, userMessage: '회복 불가능한 오류 — 배치 중단' },
 
   // SYSTEM
   [ErrorCode.SYSTEM_UNKNOWN]: { retryable: false, fatal: false, category: ErrorCategory.SYSTEM, userMessage: '알 수 없는 오류' },

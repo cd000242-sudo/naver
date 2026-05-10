@@ -663,6 +663,23 @@ export function createHeadingImageModal(): void {
             </button>
           </div>
 
+          <!-- ImageFX 연결 테스트 버튼 — Flow와 별도 프로필이라 명시 트리거 필요 -->
+          <div style="margin-bottom: 16px;">
+            <button type="button" class="premium-setting-btn" id="test-imagefx-connection-btn">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <div class="btn-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);">✨</div>
+                <div>
+                  <div class="btn-text">ImageFX 연결 테스트 (Google 무료)</div>
+                  <div class="btn-value" id="imagefx-connection-status" style="color: #9ca3af; display: flex; align-items: center; gap: 6px;">
+                    <span id="imagefx-connection-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #6b7280; display: inline-block; flex-shrink: 0;"></span>
+                    <span id="imagefx-connection-text">테스트 필요 (클릭) — 첫 사용 시 브라우저 창이 열립니다</span>
+                  </div>
+                </div>
+              </div>
+              <span class="arrow">›</span>
+            </button>
+          </div>
+
           
           <!-- ✅ 체크박스 옵션 -->
           <div style="margin-bottom: 16px;">
@@ -2028,6 +2045,38 @@ export function createHeadingImageModal(): void {
       }
     } catch (err: any) {
       console.error('[HeadingImageSettings] ❌ Flow 테스트 오류:', err);
+      if (dotEl) dotEl.style.background = '#ef4444';
+      if (textEl) textEl.textContent = `❌ ${err?.message?.substring(0, 60) || '오류 발생'}`;
+      if (statusEl) statusEl.style.color = '#ef4444';
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  });
+
+  // ImageFX 연결 테스트 — Flow와 별도 프로필이라 명시 트리거 필요
+  document.getElementById('test-imagefx-connection-btn')?.addEventListener('click', async () => {
+    console.log('[HeadingImageSettings] ✨ ImageFX 연결 테스트 시작');
+    const dotEl = document.getElementById('imagefx-connection-dot');
+    const textEl = document.getElementById('imagefx-connection-text');
+    const statusEl = document.getElementById('imagefx-connection-status');
+    const btn = document.getElementById('test-imagefx-connection-btn') as HTMLButtonElement | null;
+    if (btn) btn.disabled = true;
+    if (dotEl) dotEl.style.background = '#3b82f6';
+    if (textEl) textEl.textContent = '⏳ 연결 테스트 중... (로그인 필요 시 브라우저 창이 열립니다, 최대 5분)';
+    if (statusEl) statusEl.style.color = '#3b82f6';
+    try {
+      const result = await (window as any).api.testImageFxConnection();
+      if (result?.ok) {
+        if (dotEl) dotEl.style.background = '#22c55e';
+        if (textEl) textEl.textContent = `✅ ${result.message || '연결 성공'}`;
+        if (statusEl) statusEl.style.color = '#22c55e';
+      } else {
+        if (dotEl) dotEl.style.background = '#f59e0b';
+        if (textEl) textEl.textContent = `⚠️ ${result?.message || '연결 실패 — Google 로그인 확인 필요'}`;
+        if (statusEl) statusEl.style.color = '#f59e0b';
+      }
+    } catch (err: any) {
+      console.error('[HeadingImageSettings] ❌ ImageFX 테스트 오류:', err);
       if (dotEl) dotEl.style.background = '#ef4444';
       if (textEl) textEl.textContent = `❌ ${err?.message?.substring(0, 60) || '오류 발생'}`;
       if (statusEl) statusEl.style.color = '#ef4444';

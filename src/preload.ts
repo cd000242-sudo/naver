@@ -284,6 +284,12 @@ contextBridge.exposeInMainWorld('api', {
       'updater-log',          // electron-updater 로그 스트림
       'session:duplicate',    // 중복 로그인 감지
       'license:expired',      // 라이선스 만료 알림
+      // ✅ [v2.10+ 누락 채널 화이트리스트화]
+      'image-generation:log', // 이미지 생성 실시간 로그
+      'main:console',         // 메인 → 렌더러 콘솔 미러링
+      'automation:reset-fields', // 예약 발행 후 자동 초기화
+      // ✅ [SPEC-IMAGE-RECOVERY-001] 자동 복구 시스템
+      'recovery:show-modal',  // 차단형 모달 표시 요청
     ];
     if (!ALLOWED_CHANNELS.includes(channel)) {
       // eslint-disable-next-line no-console
@@ -1009,6 +1015,10 @@ contextBridge.exposeInMainWorld('api', {
   testFlowConnection: (): Promise<{ ok: boolean; message: string; userInfo?: { email?: string; name?: string } }> =>
     ipcRenderer.invoke('flow:testConnection'),
 
+  // ImageFX 연결 테스트 — Flow와 별도 프로필. 세션 없으면 visible 브라우저 자동 표시
+  testImageFxConnection: (): Promise<{ ok: boolean; message: string; userInfo?: { email?: string; name?: string } }> =>
+    ipcRenderer.invoke('imagefx:testConnection'),
+
   // ✅ [2026-03-16] ImageFX Google 계정 변경 API
   switchImageFxGoogleAccount: (): Promise<{ success: boolean; userName?: string; message: string }> =>
     ipcRenderer.invoke('imagefx:switchGoogleAccount'),
@@ -1077,6 +1087,16 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // ✅ [2026-02-08] 테스트 이미지 생성 API - engine, textOverlay 파라미터 추가
   generateTestImage: (options: { style: string; ratio: string; prompt: string; engine?: string; textOverlay?: { enabled: boolean; text: string } }): Promise<{ success: boolean; path?: string; previewDataUrl?: string; error?: string }> =>
     ipcRenderer.invoke('generate-test-image', options),
+
+  // ✅ [SPEC-IMAGE-RECOVERY-001] 차단형 모달 사용자 선택 결과 송신
+  send: (channel: string, payload: unknown) => {
+    const ALLOWED_SEND: readonly string[] = ['recovery:user-choice'];
+    if (!ALLOWED_SEND.includes(channel)) {
+      console.warn(`[preload] 차단된 send 채널: "${channel}"`);
+      return;
+    }
+    ipcRenderer.send(channel, payload);
+  },
 });
 
 type LicenseInfo = {

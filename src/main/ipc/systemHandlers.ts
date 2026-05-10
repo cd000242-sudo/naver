@@ -517,12 +517,18 @@ export function registerDialogHandlers(ctx: IpcContext): void {
     });
 
     // 이미지 폴더 열기
-    ipcMain.handle('openImagesFolder', async () => {
-        const imagesPath = path.join(os.homedir(), 'naver-blog-automation', 'images');
-        if (!fs.existsSync(imagesPath)) {
-            fs.mkdirSync(imagesPath, { recursive: true });
-        }
-        await shell.openPath(imagesPath);
-        return { success: true };
-    });
+    // ✅ [2026-05-04 FIX] userData/images로 통일 — main.ts의 저장 경로와 일치시킴
+    // ✅ try-catch: main.ts에서 이미 등록된 경우 안전하게 건너뜀
+    try {
+        ipcMain.handle('openImagesFolder', async () => {
+            const imagesPath = path.join(app.getPath('userData'), 'images');
+            if (!fs.existsSync(imagesPath)) {
+                fs.mkdirSync(imagesPath, { recursive: true });
+            }
+            await shell.openPath(imagesPath);
+            return { success: true };
+        });
+    } catch {
+        // main.ts에서 이미 등록됨 — skip
+    }
 }

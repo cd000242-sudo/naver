@@ -17,10 +17,16 @@ const DIVERSITY_HINT_TAG = 'IMPORTANT — DIVERSITY ENFORCEMENT';
 const DIVERSITY_HINT_REGEX = new RegExp(`\\n\\n${DIVERSITY_HINT_TAG}[\\s\\S]*$`);
 
 const DIVERSITY_HINTS: readonly string[] = [
-  'Use a completely DIFFERENT angle, alternative composition, varied lighting, distinct color palette from any previous output. The visual must be visibly DIFFERENT.',
-  'Switch the framing, change subject placement, vary background scene entirely. NO REPETITION of prior outputs.',
-  'Apply a fresh creative interpretation: new perspective, alternative time of day, different mood and atmosphere. MUST look unique.',
-  'Generate a visually DISTINCT scene: different focal point, alternative environment, varied details. AVOID similarity to past renders.',
+  // 1: 시점 전환 + 한국어 강조 (영어 hint 무시 회귀 대응)
+  'CRITICAL: Generate a completely different image. Use a different angle (low-angle / bird-eye / over-shoulder), different framing (close-up / wide / medium), different lighting (soft / harsh / golden hour / blue hour). 이전 이미지와 시각적으로 명백히 달라야 한다. 동일/유사 결과 절대 금지.',
+  // 2: 배경/구도 강제 전환
+  'CRITICAL: Change the background entirely (indoor → outdoor, day → night, urban → nature). Reposition main subjects (left → right, center → off-center, foreground → mid-ground). 배경과 구도를 완전히 바꾼다.',
+  // 3: 새로운 창작 해석
+  'CRITICAL: Reinterpret the scene with a fresh creative perspective. New viewpoint, alternative season, different time of day, contrasting mood. 분위기와 시간대를 완전히 다르게 한다.',
+  // 4: 디테일 강제 차별화
+  'CRITICAL: Generate a visually distinct scene. Different focal subject, alternative props, varied color palette (warm → cool, monochrome → vibrant). 주요 피사체와 색상 팔레트를 완전히 바꾼다.',
+  // 5: 마지막 보루 — 무작위 시점/시간 강제
+  'CRITICAL: Pick a totally different season, weather condition, and camera viewpoint than any previous output. The result MUST be unrecognizably different. 계절·날씨·카메라 시점 모두 바꿔서 누가 봐도 다른 이미지를 생성한다.',
 ];
 
 export function popcountBigInt(x: bigint): number {

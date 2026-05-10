@@ -28,6 +28,18 @@ export type { CtaSelectorKey } from './ctaSelectors';
 export { PLACE_SELECTORS } from './placeSelectors';
 export type { PlaceSelectorKey } from './placeSelectors';
 
+// SPEC-IMAGE-RECOVERY-001 R4: Google Flow multi-fallback selectors
+export { FLOW_SELECTORS, iterateFlowSelectors } from './flowSelectors';
+export type { FlowSelectorKey } from './flowSelectors';
+
+// SPEC-CONVERSION-001 L2-2.2: 네이버쇼핑 경쟁 제품 수집
+export { SHOPPING_COMPETITOR_SELECTORS } from './shoppingCompetitorSelectors';
+export type { ShoppingCompetitorSelectorKey } from './shoppingCompetitorSelectors';
+
+// SPEC-CONVERSION-001 L2-4.2: 네이버 블로그 검색 상위 글
+export { TOP_BLOGGER_SELECTORS } from './topBloggerSelectors';
+export type { TopBloggerSelectorKey } from './topBloggerSelectors';
+
 // --- 유틸리티 ---
 export {
   findElement,
@@ -47,6 +59,8 @@ import { PUBLISH_SELECTORS } from './publishSelectors';
 import { IMAGE_SELECTORS } from './imageSelectors';
 import { CTA_SELECTORS } from './ctaSelectors';
 import { PLACE_SELECTORS } from './placeSelectors';
+import { SHOPPING_COMPETITOR_SELECTORS } from './shoppingCompetitorSelectors';
+import { TOP_BLOGGER_SELECTORS } from './topBloggerSelectors';
 
 /**
  * 모든 셀렉터를 카테고리별로 접근할 수 있는 통합 객체
@@ -63,4 +77,6 @@ export const SELECTORS = {
   image: IMAGE_SELECTORS,
   cta: CTA_SELECTORS,
   place: PLACE_SELECTORS,
+  shoppingCompetitor: SHOPPING_COMPETITOR_SELECTORS,
+  topBlogger: TOP_BLOGGER_SELECTORS,
 } as const;

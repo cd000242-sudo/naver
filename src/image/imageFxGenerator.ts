@@ -20,6 +20,9 @@ import { trackApiUsage } from '../apiUsageTracker.js';
 import { IMAGEN_MODELS } from '../runtime/modelRegistry.js';
 // ✅ [2026-03-17] ImageFX는 Google 서비스라 프록시 불필요 → import 제거
 import type { Browser, Page, BrowserContext } from 'playwright';
+// ✅ [SPEC-IMAGE-RECOVERY-001] 자동 복구 코디네이터
+import { getRecoveryCoordinator } from './recovery/index.js';
+import type { RecoveryDecision } from './recovery/index.js';
 
 // ✅ 실시간 로그 → 렌더러 UI 전송
 function sendImageLog(message: string): void {
@@ -41,6 +44,9 @@ let cachedTokenExpiry: Date | null = null;
 let cachedUserId: string | null = null; // AdsPower 프로필 userId
 let browserMode: 'adspower' | 'playwright' | null = null; // 어떤 모드로 연결했는지
 let _adsPowerUserEnabled: boolean = false; // ✅ [2026-03-16] 사용자 AdsPower 활성화 설정
+// ✅ [SPEC-IMAGE-RECOVERY-001 R3] 세션 내 AdsPower 자동 OFF (실패 후 재시도 금지)
+// 사용자 설정값(`_adsPowerUserEnabled`)은 변경하지 않으며, 다음 앱 재시작 시 재시도.
+let _adsPowerSessionDisabled: boolean = false;
 
 /** ✅ [2026-03-16] AdsPower 사용 여부 설정 (렌더러에서 IPC로 호출) */
 export function setImageFxAdsPowerEnabled(enabled: boolean): void {
@@ -51,6 +57,65 @@ export function setImageFxAdsPowerEnabled(enabled: boolean): void {
 /** ✅ [2026-03-16] AdsPower 활성화 상태 조회 */
 export function isImageFxAdsPowerEnabled(): boolean {
   return _adsPowerUserEnabled;
+}
+
+// ✅ [SPEC-IMAGE-RECOVERY-001] 에러 메시지에서 코드/상태 추출
+function extractImageFxErrorCode(error: unknown): string | undefined {
+  const msg = error instanceof Error ? error.message : String(error ?? '');
+  // IMAGEFX_AUTH_EXPIRED:..., IMAGEFX_FORBIDDEN:..., 등
+  const m = msg.match(/^(IMAGEFX_[A-Z_]+)(?::|$)/);
+  if (m) return m[1];
+  if (/HTTP_401/i.test(msg)) return 'IMAGEFX_AUTH_EXPIRED';
+  if (/HTTP_403/i.test(msg)) return 'IMAGEFX_FORBIDDEN';
+  if (/HTTP_429/i.test(msg)) return 'IMAGEFX_QUOTA_EXCEEDED';
+  return undefined;
+}
+
+function extractHttpStatus(error: unknown): number | undefined {
+  const msg = error instanceof Error ? error.message : String(error ?? '');
+  const m = msg.match(/HTTP_(\d{3})/);
+  if (m) return Number(m[1]);
+  return undefined;
+}
+
+function isBlockFatal(decision: { modalCode?: string }): boolean {
+  // C6 (Phase 6): B1(IP 차단), B3(시간당 한도), B4(브라우저 미설치), B7(회복 불가능) 즉시 중단
+  return decision.modalCode === 'B1'
+      || decision.modalCode === 'B3'
+      || decision.modalCode === 'B4'
+      || decision.modalCode === 'B7';
+}
+
+async function sendBlockingModalRequest(
+  decision: { action: 'block'; modalCode: string; reason: string; errorCode?: string },
+  _error: unknown,
+): Promise<void> {
+  // C2: silent-catch 묵살 차단 — 모든 catch에 명시 로그 (review 권고)
+  try {
+    const { broadcastModalRequest } = require('../main/ipc/recoveryHandlers');
+    broadcastModalRequest({
+      code: decision.modalCode,
+      reason: decision.reason,
+      errorCode: decision.errorCode,
+    });
+  } catch (primaryErr) {
+    console.warn('[Recovery] broadcastModalRequest 실패 — direct send 폴백 시도:', (primaryErr as Error)?.message);
+    try {
+      const { BrowserWindow } = require('electron');
+      const wins = BrowserWindow.getAllWindows();
+      if (wins[0]) {
+        wins[0].webContents.send('recovery:show-modal', {
+          code: decision.modalCode,
+          reason: decision.reason,
+          errorCode: decision.errorCode,
+        });
+      } else {
+        console.warn('[Recovery] BrowserWindow 없음 — 모달 표시 불가, 사용자에게 안 보임');
+      }
+    } catch (fallbackErr) {
+      console.warn('[Recovery] direct send 폴백도 실패:', (fallbackErr as Error)?.message);
+    }
+  }
 }
 
 // ✅ 비율 매핑 (기존 시스템 → ImageFX)
@@ -780,6 +845,115 @@ async function launchWithSystemBrowserFallback(
  * ✅ [2026-03-16] 시스템 Chrome → Edge → Playwright Chromium 순서로 시도
  * 패키징된 Electron 앱에서 npx/cli.js 설치가 불가능한 문제 해결
  */
+/**
+ * labs.google overlay iframe(changelog/whats_new/banner/survey) 영구 차단.
+ * Flow와 동일 패턴 — context.addInitScript로 MutationObserver 주입.
+ */
+async function injectImageFxAntiModalObserver(context: any): Promise<void> {
+  try {
+    await context.addInitScript(() => {
+      if ((window as any).__imagefxAntiModalInstalled) return;
+      (window as any).__imagefxAntiModalInstalled = true;
+      const URL_RE = /changelogs?|whats[_-]?new|banner|survey|consent|onboarding|promo/i;
+      const TEXT_RE = /What['']?s\s*new|새로운\s*기능|변경\s*사항|tour|guide\s*me|onboarding|시작하기|소개/i;
+      const SAFE_RE = /sign\s*in|로그인|email|password|비밀번호|prompt|프롬프트/i;
+      const markHide = (el: HTMLElement) => {
+        el.style.setProperty('display', 'none', 'important');
+        el.style.setProperty('pointer-events', 'none', 'important');
+        el.setAttribute('data-imagefx-hidden', '1');
+      };
+      const climbHide = (s: HTMLElement) => {
+        let p: HTMLElement | null = s;
+        let lvl = 0;
+        while (p && lvl < 8) {
+          try {
+            const cs = window.getComputedStyle(p);
+            const z = parseInt(cs.zIndex || '0', 10) || 0;
+            const pos = cs.position === 'fixed' || cs.position === 'absolute';
+            const ov = /overlay|modal|popup|backdrop|dialog|sheet/i.test(p.className || '');
+            if (pos && (z >= 100 || ov)) { markHide(p); return; }
+          } catch { /* ignore */ }
+          p = p.parentElement; lvl++;
+        }
+        markHide(s);
+      };
+      const isOverlayIframe = (i: HTMLIFrameElement) => {
+        const src = i.src || i.getAttribute('src') || '';
+        if (URL_RE.test(src)) return true;
+        const sd = i.getAttribute('srcdoc') || '';
+        return !!(sd && TEXT_RE.test(sd));
+      };
+      const isOverlayDialog = (el: Element) => {
+        if (el.getAttribute('data-imagefx-hidden') === '1') return false;
+        const role = el.getAttribute('role') || '';
+        const isDlg = role === 'dialog' || role === 'alertdialog' || el.tagName === 'DIALOG';
+        const hasPop = (el as HTMLElement).getAttribute?.('popover') !== null;
+        if (!isDlg && !hasPop) return false;
+        const txt = (el.textContent || '').slice(0, 500);
+        if (SAFE_RE.test(txt)) return false;
+        if (TEXT_RE.test(txt)) return true;
+        return /changelog|whats[_-]?new|onboarding|tour/i.test(el.className || '');
+      };
+      const deepQ = (root: ParentNode | ShadowRoot, sel: string, out: Element[]) => {
+        try {
+          (root.querySelectorAll(sel) as NodeListOf<Element>).forEach((e) => out.push(e));
+          (root.querySelectorAll('*') as NodeListOf<Element>).forEach((e) => {
+            const sr = (e as Element & { shadowRoot?: ShadowRoot | null }).shadowRoot;
+            if (sr) deepQ(sr, sel, out);
+          });
+        } catch { /* ignore */ }
+      };
+      const scan = (root: ParentNode) => {
+        const ifr: Element[] = []; const dlg: Element[] = [];
+        deepQ(root, 'iframe', ifr);
+        deepQ(root, '[role="dialog"], [role="alertdialog"], dialog, [popover]', dlg);
+        ifr.forEach((i) => { if (isOverlayIframe(i as HTMLIFrameElement)) climbHide(i as HTMLElement); });
+        dlg.forEach((d) => { if (isOverlayDialog(d)) climbHide(d as HTMLElement); });
+      };
+      const start = () => {
+        scan(document);
+        new MutationObserver((muts) => {
+          for (const m of muts) {
+            if (m.type === 'attributes') {
+              const t = m.target as Element;
+              if (t.tagName === 'IFRAME' && isOverlayIframe(t as HTMLIFrameElement)) climbHide(t as HTMLElement);
+              else if (t.matches?.('[role="dialog"], [role="alertdialog"], dialog, [popover]') && isOverlayDialog(t)) climbHide(t as HTMLElement);
+              continue;
+            }
+            m.addedNodes.forEach((n) => {
+              if (n.nodeType !== 1) return;
+              const el = n as Element;
+              if (el.tagName === 'IFRAME') { if (isOverlayIframe(el as HTMLIFrameElement)) climbHide(el as HTMLElement); }
+              else if (el.matches?.('[role="dialog"], [role="alertdialog"], dialog, [popover]')) { if (isOverlayDialog(el)) climbHide(el as HTMLElement); }
+              else { scan(el); }
+            });
+          }
+        }).observe(document.documentElement, {
+          childList: true, subtree: true, attributes: true,
+          attributeFilter: ['src', 'srcdoc', 'role', 'class', 'open', 'style'],
+        });
+        // style 재설정 우회 — 1초마다 hidden marker 검사
+        setInterval(() => {
+          try {
+            document.querySelectorAll<HTMLElement>('[data-imagefx-hidden="1"]').forEach((el) => {
+              const cs = window.getComputedStyle(el);
+              if (cs.display !== 'none') el.style.setProperty('display', 'none', 'important');
+              if (cs.pointerEvents !== 'none') el.style.setProperty('pointer-events', 'none', 'important');
+            });
+          } catch { /* ignore */ }
+        }, 1000);
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start, { once: true });
+      } else {
+        start();
+      }
+    });
+  } catch (err) {
+    console.warn('[ImageFX] anti-modal observer 주입 실패 (무시):', (err as Error)?.message?.substring(0, 80));
+  }
+}
+
 async function connectViaPlaywright(): Promise<Page> {
   const profileDir = getPlaywrightProfileDir();
   const fs = require('fs');
@@ -811,6 +985,9 @@ async function connectViaPlaywright(): Promise<Page> {
   };
 
   let context = await launchWithSystemBrowserFallback(chromium, profileDir, launchOptions);
+
+  // labs.google overlay iframe 영구 차단 (changelog/whats_new/banner) — Flow와 동일 패턴
+  await injectImageFxAntiModalObserver(context);
 
   let page = context.pages()[0] || await context.newPage();
 
@@ -866,6 +1043,7 @@ async function connectViaPlaywright(): Promise<Page> {
     ignoreDefaultArgs: ['--enable-automation'],
   };
   context = await launchWithSystemBrowserFallback(chromium, profileDir, visibleOptions);
+  await injectImageFxAntiModalObserver(context);
 
   page = context.pages()[0] || await context.newPage();
   await page.goto('https://labs.google/fx/tools/image-fx', {
@@ -934,6 +1112,7 @@ async function connectViaPlaywright(): Promise<Page> {
 
   // headless로 재실행
   const headlessContext = await launchWithSystemBrowserFallback(chromium, profileDir, launchOptions);
+  await injectImageFxAntiModalObserver(headlessContext);
   const headlessPage = headlessContext.pages()[0] || await headlessContext.newPage();
   await headlessPage.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
@@ -976,7 +1155,8 @@ async function ensureBrowserPage(): Promise<Page> {
   }
 
   // 2. AdsPower 사용 여부 확인 (사용자 설정 기반)
-  if (_adsPowerUserEnabled) {
+  // ✅ [SPEC-IMAGE-RECOVERY-001 R3] 본 세션 내 AdsPower 자동 OFF 후 재시도 절대 안 함
+  if (_adsPowerUserEnabled && !_adsPowerSessionDisabled) {
     // ✅ AdsPower 활성화 → AdsPower 사용, 모든 실패 시 Playwright 자동 폴백
     try {
       await connectViaAdsPower();
@@ -987,6 +1167,8 @@ async function ensureBrowserPage(): Promise<Page> {
       // ECONNREFUSED(미실행/포트불일치), Exceeding(일일 한도), 프로필 없음 등 전부 포함
       console.log(`[ImageFX] ⚠️ AdsPower 사용 불가 (${adsPowerErrMsg.substring(0, 80)}) → Playwright 자체 브라우저로 폴백`);
       sendImageLog('⚠️ [ImageFX] AdsPower 연결 실패. 자체 브라우저로 자동 전환합니다...');
+      // ✅ [SPEC-IMAGE-RECOVERY-001 R3] 본 세션에서는 AdsPower 재시도 안 함 (다음 앱 재시작 시 다시 시도)
+      _adsPowerSessionDisabled = true;
       try {
         await connectViaPlaywright();
         console.log('[ImageFX] 🔗 모드: Playwright 자체 브라우저 (AdsPower 폴백)');
@@ -2036,6 +2218,11 @@ export async function generateWithImageFx(
   const IMAGEFX_AHASH_THRESHOLD = 8;
   const IMAGEFX_DUP_MAX_RETRIES = 3;
 
+  // ✅ [SPEC-IMAGE-RECOVERY-001] 자동 복구 코디네이터
+  const coordinator = getRecoveryCoordinator({
+    toastNotifier: { notify: (m) => sendImageLog(m) },
+  });
+
   for (let i = 0; i < items.length; i++) {
     // 중지 체크
     if (stopCheck && stopCheck()) {
@@ -2046,9 +2233,21 @@ export async function generateWithImageFx(
 
     const item = items[i];
     const heading = item.heading || `이미지 ${i + 1}`;
-    
+
     console.log(`[ImageFX] 🖼️ [${i + 1}/${items.length}] "${heading}" 생성 시작...`);
     sendImageLog(`🖼️ [ImageFX] "${heading}" 생성 중... (${i + 1}/${items.length})`);
+
+    // ✅ [SPEC-IMAGE-RECOVERY-001] 헤딩 단위 자동 복구 카운터 리셋
+    // (재시도 진입 시에는 startHeading을 호출하지 않아 카운터 유지)
+    if (!coordinator.isRetryingSameHeading(i)) {
+      coordinator.startHeading({
+        headingIndex: i,
+        totalHeadings: items.length,
+        heading,
+        postTitle: postTitle ?? '',
+        engine: 'imageFx',
+      });
+    }
 
     try {
       // 프롬프트 결정: 영어 프롬프트 우선 (ImageFX는 영어 최적화)
@@ -2110,6 +2309,7 @@ export async function generateWithImageFx(
 
         results.push(genImage);
         consecutiveFailures = 0; // 성공 시 연속 실패 카운터 초기화
+        coordinator.markHeadingSucceeded(); // C8
 
         console.log(`[ImageFX] ✅ [${i + 1}/${items.length}] "${heading}" 생성 완료! (${Math.round(fxResult.buffer.length / 1024)}KB)`);
         sendImageLog(`✅ [ImageFX] "${heading}" 완료! (${i + 1}/${items.length})`);
@@ -2124,19 +2324,54 @@ export async function generateWithImageFx(
         sendImageLog(`⚠️ [ImageFX] "${heading}" 생성 실패 — 건너뜀`);
       }
     } catch (error: any) {
+      // ✅ [SPEC-IMAGE-RECOVERY-001] 자동 복구 결정
+      const errorCode = extractImageFxErrorCode(error);
+      const httpStatus = extractHttpStatus(error);
+      // C4: 503 카운터 — classifier의 storm 가드 입력
+      if (httpStatus === 503) coordinator.recordServer503();
+      const decision = coordinator.decide({
+        errorMessage: String(error?.message ?? error ?? ''),
+        errorCode,
+        httpStatus,
+      });
+
+      if (decision.action === 'retry') {
+        const backoffMs = coordinator.applyRetry(decision);
+        if (decision.tag === 'R1') {
+          // R1: 토큰 캐시 폐기 후 1회 재시도
+          cachedToken = null;
+          cachedTokenExpiry = null;
+        }
+        if (backoffMs > 0) {
+          console.log(`[ImageFX] 🔄 ${decision.tag} 백오프 ${backoffMs}ms — "${heading}"`);
+          await new Promise((r) => setTimeout(r, backoffMs));
+        }
+        // 같은 헤딩 다시 시도 — i를 감소시켜 다음 iteration에서 같은 헤딩 처리
+        coordinator.markRetryingHeading(i);
+        i--;
+        continue;
+      }
+
       consecutiveFailures++;
       console.error(`[ImageFX] ❌ [${i + 1}/${items.length}] "${heading}" 예외: ${error.message}`);
       sendImageLog(`❌ [ImageFX] "${heading}" 오류: ${error.message}`);
-      // ✅ [v1.4.40] 분류된 에러는 보존 (IMAGEFX_QUOTA_EXCEEDED 등)
+      // ✅ [v1.4.40] 분류된 에러는 보존 — break는 coordinator decision에 일임 (legacy 충돌 제거, reviewer #3)
       if (error.message && error.message.startsWith('IMAGEFX_')) {
         lastClassifiedError = error;
-        // 쿼터/접근 거부는 즉시 중단 (재시도 무의미)
-        if (error.message.startsWith('IMAGEFX_QUOTA_EXCEEDED') ||
-            error.message.startsWith('IMAGEFX_FORBIDDEN') ||
-            error.message.startsWith('IMAGEFX_AUTH_EXPIRED')) {
-          console.error('[ImageFX] ⛔ 회복 불가능한 오류 → 즉시 중단');
+      }
+
+      // ✅ [SPEC-IMAGE-RECOVERY-001] block 결정 시 차단형 모달 IPC 송출
+      if (decision.action === 'block') {
+        await sendBlockingModalRequest(decision, error);
+        if (isBlockFatal(decision)) {
+          coordinator.markBatchAborted(); // C8
           break;
         }
+      }
+
+      // C8: skip-heading 카운터
+      if (decision.action === 'skip-heading') {
+        coordinator.markHeadingSkipped();
       }
     }
 
@@ -2176,4 +2411,48 @@ export async function generateWithImageFx(
   }
 
   return results;
+}
+
+/**
+ * ImageFX 연결 테스트 — Flow 패턴과 동일.
+ *
+ * UI에서 "ImageFX 연결 테스트" 버튼을 눌러 호출. 세션 없으면 visible 브라우저를
+ * 강제로 띄워 사용자가 Google 로그인할 수 있게 한다 (자동 발행 중에는 visible 전환이
+ * 백그라운드로 묻힐 수 있어 사용자가 못 알아채는 회귀 차단).
+ *
+ * 정상 흐름:
+ *   1. ensurePage() 호출 → headless 시도 → 세션 없으면 자동 visible 전환 (5분 대기)
+ *   2. 사용자가 visible 브라우저에서 jdy3531@gmail.com 로그인
+ *   3. 쿠키 영구 저장 → headless 자동 전환
+ *   4. ok: true + userInfo 반환
+ */
+export async function testImageFxConnection(): Promise<{
+  ok: boolean;
+  message: string;
+  userInfo?: { email?: string; name?: string };
+}> {
+  try {
+    const page = await ensureBrowserPage();
+    const session = await page.evaluate(async () => {
+      try {
+        const res = await fetch('/fx/api/auth/session', { credentials: 'include' });
+        return res.ok ? await res.json() : null;
+      } catch { return null; }
+    });
+    if (!session || !(session as any).access_token) {
+      return { ok: false, message: '❌ Google 세션 확보 실패 — 로그인 창에서 로그인 완료 후 다시 테스트해주세요' };
+    }
+    const userInfo = (session as any).user;
+    return {
+      ok: true,
+      message: `✅ ImageFX 연결 성공 — ${userInfo?.email || userInfo?.name || 'user'}`,
+      userInfo,
+    };
+  } catch (err) {
+    const msg = (err as Error).message || '';
+    if (msg.includes('Google 로그인 시간 초과')) {
+      return { ok: false, message: '❌ Google 로그인 시간 초과 — 다시 테스트해주세요' };
+    }
+    return { ok: false, message: `❌ ${msg}` };
+  }
 }

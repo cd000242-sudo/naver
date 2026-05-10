@@ -1,9 +1,8 @@
 /**
- * 운영 대시보드 — 셀렉터 실패율, AI 품질, 발행 통계 수집
- *
- * Phase 4-3: 모니터링/옵저빌리티
- * 런타임 메트릭을 수집하여 대시보드 UI에 제공.
+ * 운영 대시보드 — 셀렉터/AI 품질/발행/세션/체인드 파이프라인 통계.
+ * SPEC-CONVERSION-001 L2-1.10: chained 메트릭은 chainedGenMetrics에서 수집 후 합산.
  */
+import { getChainedGenSnapshot, getChainedGenSummary, type ChainedGenSnapshot } from './chainedGenMetrics';
 
 // ── 타입 정의 ──
 
@@ -64,6 +63,7 @@ export interface DashboardSnapshot {
   readonly contentQuality: ContentQualityMetrics;
   readonly publish: PublishMetrics;
   readonly session: SessionMetrics;
+  readonly chainedGen: ChainedGenSnapshot;
   readonly uptime: number;               // ms since app start
 }
 
@@ -253,6 +253,7 @@ export function getDashboardSnapshot(): DashboardSnapshot {
       cookieRestoreSuccesses,
       cookieRestoreFailures,
     },
+    chainedGen: getChainedGenSnapshot(),
     uptime: Date.now() - appStartTime,
   };
 }
@@ -293,5 +294,6 @@ export function getDashboardSummary(): string {
     `콘텐츠: ${snap.contentQuality.totalGenerated}건, 품질 ${snap.contentQuality.avgOverallQuality}점`,
     `발행: ${snap.publish.successes}/${snap.publish.totalAttempts} 성공 (${snap.publish.successRate}%), 오늘 ${snap.publish.todayCount}건`,
     `세션: 로그인 ${snap.session.totalLogins}회, 재로그인 ${snap.session.reloginCount}회`,
+    getChainedGenSummary(),
   ].join(' | ');
 }
