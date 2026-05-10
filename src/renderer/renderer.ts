@@ -294,7 +294,7 @@ import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
       }
     });
     obs.observe({ type: 'longtask', buffered: true });
-    console.log('[PerfDebug] LongTask observer 등록 — 50ms+ 블로킹 작업 자동 감지');
+    console.warn('[PerfDebug] LongTask observer 등록 — 50ms+ 블로킹 작업 자동 감지');
   } catch (e) {
     console.warn('[PerfDebug] LongTask observer 등록 실패:', e);
   }
@@ -2369,13 +2369,15 @@ async function initializeApplication(): Promise<void> {
   const _perfT0 = performance.now();
   let _perfPrev = _perfT0;
   const _perfSteps: Array<{ label: string; ms: number }> = [];
+  // ✅ [v2.10.93] console.warn 사용 — v2.10.41부터 빌드 시 console.log가 no-op으로
+  //   교체되어 [PerfDebug] 로그가 *전혀 안 뜨던* 버그 수정. warn은 no-op 대상 아님.
   const _perfMark = (label: string): void => {
     const now = performance.now();
     const stepMs = now - _perfPrev;
     const totalMs = (now - _perfT0).toFixed(0);
     _perfSteps.push({ label, ms: stepMs });
     const slow = stepMs > 100 ? '🐌 SLOW' : stepMs > 30 ? '⚠️' : '';
-    console.log(`[PerfDebug +${stepMs.toFixed(0)}ms / total ${totalMs}ms] ${label} ${slow}`);
+    console.warn(`[PerfDebug +${stepMs.toFixed(0)}ms / total ${totalMs}ms] ${label} ${slow}`);
     _perfPrev = now;
   };
 
@@ -2458,16 +2460,17 @@ async function initializeApplication(): Promise<void> {
   initShoppingConnectCTA(); _perfMark('initShoppingConnectCTA');
   _perfMark('═══ 모든 동기 init 완료 ═══');
 
-  // ✅ [v2.10.91] 최종 요약 — top 5 느린 단계 콘솔에 강조 출력
+  // ✅ [v2.10.93] 최종 요약 — top 5 느린 단계 console.warn으로 강조 출력
+  //   (v2.10.41 console.log no-op 회피)
   const topSlow = [..._perfSteps].sort((a, b) => b.ms - a.ms).slice(0, 5);
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('[PerfDebug SUMMARY] Top 5 가장 느린 단계:');
+  console.warn('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.warn('[PerfDebug SUMMARY] Top 5 가장 느린 단계:');
   for (const step of topSlow) {
     const icon = step.ms > 500 ? '🚨' : step.ms > 100 ? '🐌' : step.ms > 30 ? '⚠️' : '✓';
-    console.log(`  ${icon} ${step.ms.toFixed(0).padStart(5)}ms  ${step.label}`);
+    console.warn(`  ${icon} ${step.ms.toFixed(0).padStart(5)}ms  ${step.label}`);
   }
-  console.log(`[PerfDebug] 총 초기화 시간: ${(performance.now() - _perfT0).toFixed(0)}ms`);
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.warn(`[PerfDebug] 총 초기화 시간: ${(performance.now() - _perfT0).toFixed(0)}ms`);
+  console.warn('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
 
   // ✅ 임시 저장 데이터 복구 확인
