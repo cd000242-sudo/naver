@@ -1359,6 +1359,10 @@ button:not(:disabled):active,
   z-index: 10000;
   backdrop-filter: blur(4px);
   animation: fadeIn var(--transition-mid);
+  /* v2.10.81 PERF: 모달이 떠있을 때 그 안의 reflow/style invalidation이 *모달 안에 갇힘*.
+     메인 페이지로 전파되는 layout/repaint 비용 차단. paint는 의도적으로 제외 — 일부
+     모달이 viewport 밖으로 살짝 넘어가는 경우 clip 위험. layout+style만으로 충분히 효과. */
+  contain: layout style;
 }
 
 .modal-panel {
