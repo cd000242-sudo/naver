@@ -11333,8 +11333,10 @@
         }
     </style>
 
-    <script src="renderer.js"></script>
-    <script src="floating-scroll.js"></script>
+    <!-- v2.10.80 PERF: defer로 변경 → 11K줄 HTML 파싱이 JS 다운로드/컴파일을 기다리지 않음.
+         저사양 노트북에서 첫 페인트가 즉시 발생 (이전엔 3MB renderer.js 컴파일 후에야 paint). -->
+    <script defer src="renderer.js"></script>
+    <script defer src="floating-scroll.js"></script>
     <!-- 연속 발행 큐 전체 보기 모달 -->
     <!-- Duplicate modal removed -->
 
@@ -12293,7 +12295,8 @@
     </div>
 
     <!-- ✅ AI 추천 후킹문구 모달 로직 (외부 파일) -->
-    <script src="ai-hook-modal.js"></script>
+    <!-- v2.10.80 PERF: defer 추가 (renderer.js 다음 순서 보장) -->
+    <script defer src="ai-hook-modal.js"></script>
 
     <!-- ✅ [v1.4.28] 업체 홍보 모드 — 글로벌 입력 모달 (어디서 선택해도 동일 모달) -->
     <div id="business-global-modal" style="display: none; position: fixed; inset: 0; z-index: 999999; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; padding: 1rem; backdrop-filter: blur(4px);">
