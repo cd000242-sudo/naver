@@ -2368,14 +2368,27 @@ async function initializeApplication(): Promise<void> {
   // ═══════════════════════════════════════════════════════════════════════
   const _perfT0 = performance.now();
   let _perfPrev = _perfT0;
+  const _perfSteps: Array<{ label: string; ms: number }> = [];
   const _perfMark = (label: string): void => {
     const now = performance.now();
-    const stepMs = (now - _perfPrev).toFixed(0);
+    const stepMs = now - _perfPrev;
     const totalMs = (now - _perfT0).toFixed(0);
-    const slow = parseFloat(stepMs) > 100 ? '🐌 SLOW' : parseFloat(stepMs) > 30 ? '⚠️' : '';
-    console.log(`[PerfDebug +${stepMs}ms / total ${totalMs}ms] ${label} ${slow}`);
+    _perfSteps.push({ label, ms: stepMs });
+    const slow = stepMs > 100 ? '🐌 SLOW' : stepMs > 30 ? '⚠️' : '';
+    console.log(`[PerfDebug +${stepMs.toFixed(0)}ms / total ${totalMs}ms] ${label} ${slow}`);
     _perfPrev = now;
   };
+
+  // ✅ [v2.10.91] yield_ — main thread를 paint/event에 양보. 1867ms LongTask 분할.
+  //   매 init 그룹 끝에 호출하면 단일 거대 task가 여러 작은 task로 분할되어
+  //   브라우저가 paint/event 처리 가능 → "응답 없음" 해제.
+  const yield_ = (): Promise<void> => new Promise((resolve) => {
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame(() => resolve());
+    } else {
+      setTimeout(resolve, 0);
+    }
+  });
 
   _perfMark('DOMContentLoaded 진입 → [Init] 시작');
   console.log('[Init] 애플리케이션 초기화 시작');
@@ -2405,18 +2418,28 @@ async function initializeApplication(): Promise<void> {
     _perfMark('getConfig 실패 (무시)');
   }
 
+  // ━━━━━━━━━━━━ 그룹 1: 탭/이미지 라이브러리/썸네일 ━━━━━━━━━━━━
   initUnifiedTab(); _perfMark('initUnifiedTab');
   initImageLibrary(); _perfMark('initImageLibrary');
   initThumbnailGenerator(); _perfMark('initThumbnailGenerator');
+  await yield_(); _perfMark('▶ yield (group 1 끝)');
+
+  // ━━━━━━━━━━━━ 그룹 2: 라이선스/가격/Gemini sync ━━━━━━━━━━━━
   initLicenseModal(); _perfMark('initLicenseModal');
   initPriceInfoModal(); _perfMark('initPriceInfoModal');
   try { initGeminiModelSync(); } catch (e) { console.warn('[renderer] catch ignored:', e); }
   _perfMark('initGeminiModelSync');
+  await yield_(); _perfMark('▶ yield (group 2 끝)');
+
+  // ━━━━━━━━━━━━ 그룹 3: 입력 핸들러 ━━━━━━━━━━━━
   initCredentialsSave(); _perfMark('initCredentialsSave');
   initTitleGeneration(); _perfMark('initTitleGeneration');
   initHeadingImageGeneration(); _perfMark('initHeadingImageGeneration');
   initApiGuideModal(); _perfMark('initApiGuideModal');
   initUserGuideModal(); _perfMark('initUserGuideModal');
+  await yield_(); _perfMark('▶ yield (group 3 끝)');
+
+  // ━━━━━━━━━━━━ 그룹 4: 콘텐츠/이미지 탭/탭 전환 ━━━━━━━━━━━━
   initContentHeadingImageGeneration(); _perfMark('initContentHeadingImageGeneration');
   initCharCountDisplay(); _perfMark('initCharCountDisplay');
   initImageManagementTab(); _perfMark('initImageManagementTab');
@@ -2424,6 +2447,9 @@ async function initializeApplication(): Promise<void> {
   runWhenIdle(() => initDashboard(), { name: 'initDashboard', timeoutMs: 5000 });
   runWhenIdle(() => showGeminiInstabilityNotice(), { name: 'geminiInstabilityNotice', timeoutMs: 5000 });
   initTabSwitching(); _perfMark('initTabSwitching');
+  await yield_(); _perfMark('▶ yield (group 4 끝)');
+
+  // ━━━━━━━━━━━━ 그룹 5: 우측 사이드바 버튼 + 통합 ━━━━━━━━━━━━
   initLicenseBadge(); _perfMark('initLicenseBadge');
   initCustomerServiceButton(); _perfMark('initCustomerServiceButton');
   initPurchaseInquiryButton(); _perfMark('initPurchaseInquiryButton');
@@ -2431,7 +2457,18 @@ async function initializeApplication(): Promise<void> {
   initUnifiedImageEventHandlers(); _perfMark('initUnifiedImageEventHandlers');
   initShoppingConnectObserver(); _perfMark('initShoppingConnectObserver');
   initShoppingConnectCTA(); _perfMark('initShoppingConnectCTA');
-  _perfMark('═══ 모든 동기 init 완료 (idle 2개는 별도) ═══');
+  _perfMark('═══ 모든 동기 init 완료 ═══');
+
+  // ✅ [v2.10.91] 최종 요약 — top 5 느린 단계 콘솔에 강조 출력
+  const topSlow = [..._perfSteps].sort((a, b) => b.ms - a.ms).slice(0, 5);
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('[PerfDebug SUMMARY] Top 5 가장 느린 단계:');
+  for (const step of topSlow) {
+    const icon = step.ms > 500 ? '🚨' : step.ms > 100 ? '🐌' : step.ms > 30 ? '⚠️' : '✓';
+    console.log(`  ${icon} ${step.ms.toFixed(0).padStart(5)}ms  ${step.label}`);
+  }
+  console.log(`[PerfDebug] 총 초기화 시간: ${(performance.now() - _perfT0).toFixed(0)}ms`);
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
 
   // ✅ 임시 저장 데이터 복구 확인
