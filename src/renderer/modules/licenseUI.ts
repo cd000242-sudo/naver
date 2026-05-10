@@ -389,7 +389,7 @@ export function initCustomerServiceButton(): void {
     const customerServiceBtn = document.getElementById('customer-service-btn') as HTMLButtonElement;
 
     if (!customerServiceBtn) {
-        console.warn('[CustomerService] 고객센터 버튼을 찾을 수 없습니다.');
+        // v2.10.90: customer-service-btn은 조건부/lazy 렌더링 element. 부재가 정상.
         return;
     }
 

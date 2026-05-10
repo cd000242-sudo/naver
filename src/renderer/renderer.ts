@@ -277,6 +277,30 @@ import { runWhenIdle } from './utils/idleInit.js';
 import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// ✅ [v2.10.90 PerfDebug] Long Task Observer — 50ms 이상 main thread 블로킹 작업 자동 감지
+//   "응답 없음" 원인을 식별하려면 어떤 코드가 main thread를 얼마나 점유하는지 알아야 함.
+//   PerformanceObserver의 'longtask' 항목은 *50ms 이상의 작업*을 자동 보고.
+//   콘솔(F12)에서 [LongTask] 로그를 보면 그 시간대에 어떤 코드가 동기 실행 중인지 추적 가능.
+// ═══════════════════════════════════════════════════════════════════════════════
+(function setupLongTaskObserver() {
+  try {
+    if (typeof PerformanceObserver === 'undefined') return;
+    const obs = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        const dur = entry.duration;
+        if (dur < 50) continue;
+        const level = dur > 500 ? '🚨 SEVERE' : dur > 200 ? '🐌 HEAVY' : '⚠️';
+        console.warn(`[LongTask] ${level} main thread 블로킹 ${dur.toFixed(0)}ms (start=${entry.startTime.toFixed(0)}ms)`);
+      }
+    });
+    obs.observe({ type: 'longtask', buffered: true });
+    console.log('[PerfDebug] LongTask observer 등록 — 50ms+ 블로킹 작업 자동 감지');
+  } catch (e) {
+    console.warn('[PerfDebug] LongTask observer 등록 실패:', e);
+  }
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // ✅ [2026-02-17] 중복 로그인 감지 시 강제 로그아웃 처리
 // ═══════════════════════════════════════════════════════════════════════════════
 (function setupSessionForceLogoutListener() {
@@ -1994,48 +2018,13 @@ document.addEventListener('click', (e) => {
  * - TLS 세션 캐싱
  * - 첫 콘텐츠 생성 시 연결 시간 대폭 단축
  */
-async function warmupApiConnections(hasGemini: boolean): Promise<void> {
-  console.log('[Warmup] API 연결 사전 준비 시작...');
-
-  const warmupUrls: string[] = [];
-
-  if (hasGemini) {
-    warmupUrls.push('https://generativelanguage.googleapis.com');
-  }
-
-  // 병렬로 모든 API 서버에 연결 테스트
-  const warmupPromises = warmupUrls.map(async (url) => {
-    try {
-      const startTime = Date.now();
-      // HEAD 요청으로 빠르게 연결만 테스트 (응답 본문 없음)
-      await fetch(url, {
-        method: 'HEAD',
-        mode: 'no-cors', // CORS 오류 방지
-        cache: 'no-store'
-      });
-      const elapsed = Date.now() - startTime;
-      console.log(`[Warmup] ✅ ${url} 연결 완료 (${elapsed}ms)`);
-      return { url, success: true, elapsed };
-    } catch (error) {
-      // 오류가 나도 무시 (warm-up은 선택적)
-      console.log(`[Warmup] ⚠️ ${url} 연결 실패 (무시됨):`, (error as Error).message);
-      return { url, success: false, elapsed: 0 };
-    }
-  });
-
-  try {
-    const results = await Promise.allSettled(warmupPromises);
-    const successCount = results.filter(r => r.status === 'fulfilled' && (r.value as any).success).length;
-    console.log(`[Warmup] API 연결 사전 준비 완료: ${successCount}/${warmupUrls.length}개 서버 연결됨`);
-
-    // 연결 성공한 서버가 있으면 사용자에게 알림 (로그만)
-    if (successCount > 0) {
-      console.log('[Warmup] 💡 첫 콘텐츠 생성이 더 빨라집니다!');
-    }
-  } catch (e) {
-    // 전체 실패해도 무시
-    console.log('[Warmup] warm-up 완료 (일부 실패)');
-  }
+async function warmupApiConnections(_hasGemini: boolean): Promise<void> {
+  // v2.10.90: warmup 비활성화.
+  //   이유: generativelanguage.googleapis.com 루트가 HEAD 요청에 404 반환 →
+  //   DevTools Network 탭에 빨간 에러 로그 발생 → 콘솔 노이즈.
+  //   DNS/TLS 캐싱 효과는 첫 진짜 콘텐츠 생성 시 어차피 발생하므로 사전 warm-up
+  //   이득은 미미하고 디버깅 방해 비용이 더 큼.
+  return;
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -2372,74 +2361,77 @@ async function initializeApplication(): Promise<void> {
   }
   (window as any)._appInitialized = true;
 
+  // ═══════════════════════════════════════════════════════════════════════
+  // ✅ [v2.10.90 PerfDebug] 초기화 단계별 시간 측정.
+  //   각 단계의 소요 시간을 콘솔에 출력. >100ms는 🐌 SLOW로 강조.
+  //   사용자가 콘솔(F12) 열고 어디서 멈추는지 즉시 식별 가능.
+  // ═══════════════════════════════════════════════════════════════════════
+  const _perfT0 = performance.now();
+  let _perfPrev = _perfT0;
+  const _perfMark = (label: string): void => {
+    const now = performance.now();
+    const stepMs = (now - _perfPrev).toFixed(0);
+    const totalMs = (now - _perfT0).toFixed(0);
+    const slow = parseFloat(stepMs) > 100 ? '🐌 SLOW' : parseFloat(stepMs) > 30 ? '⚠️' : '';
+    console.log(`[PerfDebug +${stepMs}ms / total ${totalMs}ms] ${label} ${slow}`);
+    _perfPrev = now;
+  };
+
+  _perfMark('DOMContentLoaded 진입 → [Init] 시작');
   console.log('[Init] 애플리케이션 초기화 시작');
 
   await initPaywallSystem();
+  _perfMark('initPaywallSystem 완료');
 
-  // DOM 캐시 초기화
   UnifiedDOMCache.init();
+  _perfMark('UnifiedDOMCache.init 완료');
 
   appendLog('📝 자동화 시스템이 준비되었습니다.');
 
-  // ✅ API 키 자동 로드 및 확인
-  await autoLoadApiKeys(); // API 키 자동 로드 (한 번만 실행)
+  await autoLoadApiKeys();
+  _perfMark('autoLoadApiKeys 완료 (IPC: settings 로드)');
 
-  // ✅ 저장된 설정 확인 로그
   try {
     const currentConfig = await window.api.getConfig();
+    _perfMark('window.api.getConfig 완료 (IPC: config 로드)');
     if (currentConfig) {
-      // ✅ [2026-01-26 FIX] 전역 config 캐시 (getGenerator()에서 perplexity 감지용)
       (window as any).appConfig = currentConfig;
       const hasGemini = !!currentConfig.geminiApiKey;
-
       if (hasGemini) {
         appendLog('✅ 저장된 API 키가 로드되었습니다. 바로 사용 가능합니다!');
-
-        // ✅ API 연결 사전 준비 (warm-up) - 백그라운드에서 DNS 및 TLS 캐싱
-        // 첫 콘텐츠 생성 시 연결 시간을 줄여줌
-        setTimeout(() => {
-          warmupApiConnections(hasGemini);
-        }, 2000); // 앱 로드 2초 후 시작
       }
     }
   } catch (e) {
-    // 무시
+    _perfMark('getConfig 실패 (무시)');
   }
 
-  initUnifiedTab();
-  initImageLibrary();
-  initThumbnailGenerator();
-  initLicenseModal();
-  initPriceInfoModal();  // ✅ [2026-01-27] initSettingsModal과 충돌 방지로 이름 변경
-  try {
-    initGeminiModelSync();
-  } catch (e) {
-    console.warn('[renderer] catch ignored:', e);
-  }
-  initCredentialsSave();
-  initTitleGeneration();
-  initHeadingImageGeneration();
-  initApiGuideModal();
-  initUserGuideModal();
-  initContentHeadingImageGeneration();
-  initCharCountDisplay();
-  initImageManagementTab();
+  initUnifiedTab(); _perfMark('initUnifiedTab');
+  initImageLibrary(); _perfMark('initImageLibrary');
+  initThumbnailGenerator(); _perfMark('initThumbnailGenerator');
+  initLicenseModal(); _perfMark('initLicenseModal');
+  initPriceInfoModal(); _perfMark('initPriceInfoModal');
+  try { initGeminiModelSync(); } catch (e) { console.warn('[renderer] catch ignored:', e); }
+  _perfMark('initGeminiModelSync');
+  initCredentialsSave(); _perfMark('initCredentialsSave');
+  initTitleGeneration(); _perfMark('initTitleGeneration');
+  initHeadingImageGeneration(); _perfMark('initHeadingImageGeneration');
+  initApiGuideModal(); _perfMark('initApiGuideModal');
+  initUserGuideModal(); _perfMark('initUserGuideModal');
+  initContentHeadingImageGeneration(); _perfMark('initContentHeadingImageGeneration');
+  initCharCountDisplay(); _perfMark('initCharCountDisplay');
+  initImageManagementTab(); _perfMark('initImageManagementTab');
   // ✅ [v2.10.82 PERF] 대시보드 통계/배너는 비핵심 — 5초 idle timeout으로 미룸.
-  //   사용자 첫 인터랙션 응답성 ↑. 5초 안에 어쨌든 실행되므로 동작 동일.
   runWhenIdle(() => initDashboard(), { name: 'initDashboard', timeoutMs: 5000 });
   runWhenIdle(() => showGeminiInstabilityNotice(), { name: 'geminiInstabilityNotice', timeoutMs: 5000 });
-  initTabSwitching();
-  // ✅ [v2.10.89 REVERT] v2.10.88에서 idle 처리한 6개는 element 의존 함수라
-  //   idle 시점에 "element 못 찾음" 경고 발생 → 동기 호출로 되돌림.
-  //   진짜 freeze 원인은 idle 외 다른 곳 (다음 batch에서 분석).
-  initLicenseBadge();
-  initCustomerServiceButton();
-  initPurchaseInquiryButton();
-  initGlobalRefreshButton();
-  initUnifiedImageEventHandlers(); // ✅ 통합 이미지 이벤트 핸들러 초기화
-  // v2.10.82 PERF: 5개 MutationObserver → 1개 통합 observer + CustomEvent dispatch
-  initShoppingConnectObserver();
-  initShoppingConnectCTA(); // ✅ 쇼핑커넥트 CTA 자동 설정 초기화
+  initTabSwitching(); _perfMark('initTabSwitching');
+  initLicenseBadge(); _perfMark('initLicenseBadge');
+  initCustomerServiceButton(); _perfMark('initCustomerServiceButton');
+  initPurchaseInquiryButton(); _perfMark('initPurchaseInquiryButton');
+  initGlobalRefreshButton(); _perfMark('initGlobalRefreshButton');
+  initUnifiedImageEventHandlers(); _perfMark('initUnifiedImageEventHandlers');
+  initShoppingConnectObserver(); _perfMark('initShoppingConnectObserver');
+  initShoppingConnectCTA(); _perfMark('initShoppingConnectCTA');
+  _perfMark('═══ 모든 동기 init 완료 (idle 2개는 별도) ═══');
 
 
   // ✅ 임시 저장 데이터 복구 확인

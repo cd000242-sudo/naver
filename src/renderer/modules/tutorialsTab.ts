@@ -195,7 +195,8 @@ export async function loadTutorialVideos(): Promise<void> {
     console.log('[Tutorials] 메시지 요소:', noTutorialsMessage ? '찾음' : '없음');
 
     if (!tutorialsContainer) {
-        console.error('[Tutorials] tutorials-list-container를 찾을 수 없음');
+        // v2.10.90: 사용자가 '사용법' 탭 미접근 시 element가 lazy render → 정상.
+        //   이전 console.error는 콘솔 노이즈만 만들고 실제 문제 아님.
         return;
     }
 
