@@ -2419,28 +2419,27 @@ async function initializeApplication(): Promise<void> {
   initCredentialsSave();
   initTitleGeneration();
   initHeadingImageGeneration();
+  initApiGuideModal();
+  initUserGuideModal();
   initContentHeadingImageGeneration();
   initCharCountDisplay();
   initImageManagementTab();
+  // ✅ [v2.10.82 PERF] 대시보드 통계/배너는 비핵심 — 5초 idle timeout으로 미룸.
+  //   사용자 첫 인터랙션 응답성 ↑. 5초 안에 어쨌든 실행되므로 동작 동일.
+  runWhenIdle(() => initDashboard(), { name: 'initDashboard', timeoutMs: 5000 });
+  runWhenIdle(() => showGeminiInstabilityNotice(), { name: 'geminiInstabilityNotice', timeoutMs: 5000 });
   initTabSwitching();
+  // ✅ [v2.10.89 REVERT] v2.10.88에서 idle 처리한 6개는 element 의존 함수라
+  //   idle 시점에 "element 못 찾음" 경고 발생 → 동기 호출로 되돌림.
+  //   진짜 freeze 원인은 idle 외 다른 곳 (다음 batch에서 분석).
+  initLicenseBadge();
+  initCustomerServiceButton();
+  initPurchaseInquiryButton();
+  initGlobalRefreshButton();
   initUnifiedImageEventHandlers(); // ✅ 통합 이미지 이벤트 핸들러 초기화
   // v2.10.82 PERF: 5개 MutationObserver → 1개 통합 observer + CustomEvent dispatch
   initShoppingConnectObserver();
   initShoppingConnectCTA(); // ✅ 쇼핑커넥트 CTA 자동 설정 초기화
-
-  // ✅ [v2.10.88 PERF] 비핵심 init 일괄 idle 처리 — 첫 페인트/인터랙션 응답성 우선.
-  //   사용자 보고: 앱 시작 시 "응답 없음" Windows alert 발생 → DOMContentLoaded 시점
-  //   18개 동기 init이 한 번에 main thread를 점유하던 게 원인.
-  //   아래 init들은 "버튼 클릭 시점에 실제로 필요"하거나 "주기 인터벌 자체 보정"되므로
-  //   5초 idle timeout fallback으로 안전하게 미룰 수 있음.
-  runWhenIdle(() => initApiGuideModal(), { name: 'initApiGuideModal', timeoutMs: 5000 });
-  runWhenIdle(() => initUserGuideModal(), { name: 'initUserGuideModal', timeoutMs: 5000 });
-  runWhenIdle(() => initLicenseBadge(), { name: 'initLicenseBadge', timeoutMs: 5000 });
-  runWhenIdle(() => initCustomerServiceButton(), { name: 'initCustomerServiceButton', timeoutMs: 5000 });
-  runWhenIdle(() => initPurchaseInquiryButton(), { name: 'initPurchaseInquiryButton', timeoutMs: 5000 });
-  runWhenIdle(() => initGlobalRefreshButton(), { name: 'initGlobalRefreshButton', timeoutMs: 5000 });
-  runWhenIdle(() => initDashboard(), { name: 'initDashboard', timeoutMs: 5000 });
-  runWhenIdle(() => showGeminiInstabilityNotice(), { name: 'geminiInstabilityNotice', timeoutMs: 5000 });
 
 
   // ✅ 임시 저장 데이터 복구 확인
