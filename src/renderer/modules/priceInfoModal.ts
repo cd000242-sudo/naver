@@ -6,6 +6,7 @@
  */
 
 import { toastManager } from '../utils/uiManagers.js';
+import { rememberPlan } from '../utils/geminiPlanMemo.js';
 
 // renderer.ts 전역 함수/변수 참조 (런타임에 존재)
 declare function initMultiAccountManager(): Promise<void>;
@@ -942,9 +943,14 @@ export async function initPriceInfoModal(): Promise<void> {
           // ✅ [v2.10.76] silent 'free' 회귀 차단 — 라디오가 DOM에 없거나 unchecked면
           //   필드를 아예 *생략*해서 saveConfig가 디스크 값을 보존하게 한다.
           //   이전: `?.value || 'free'` → 라디오 미체크 시 'paid' → 'free' 자동 덮어씀.
+          // ✅ [v2.10.77] plan memo cache 동기화 — 사용자 명시 변경을 즉시 캐시에 반영해
+          //   stale 캐시(이전 세션에 'paid' 저장 → 이번에 'free' 선택했는데 캐시에 'paid' 남음)를 막는다.
           ...((): { geminiPlanType?: 'free' | 'paid' } => {
             const checked = (document.querySelector('input[name="geminiPlanType"]:checked') as HTMLInputElement | null)?.value;
-            if (checked === 'free' || checked === 'paid') return { geminiPlanType: checked };
+            if (checked === 'free' || checked === 'paid') {
+              rememberPlan(checked);
+              return { geminiPlanType: checked };
+            }
             return {}; // 미선택 → 디스크 보존
           })(),
           imagePreset: (document.getElementById('image-preset-input') as HTMLInputElement)?.value as 'budget' | 'premium' | 'custom' || 'custom',

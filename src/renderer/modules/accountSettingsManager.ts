@@ -1,14 +1,16 @@
 /**
  * ✅ [2026-02-26] 계정별 세팅 관리자 (Per-Account Settings Manager)
- * 
+ *
  * 라이선스 계정(userId)별로 모든 설정을 분리 저장하는 시스템.
- * 
+ *
  * 핵심 기능:
  * 1. localStorage 프록시 — 기존 코드를 수정하지 않고 모든 키에 userId 접두사 자동 부여
  * 2. configManager 연동 — settings_{userId}.json 파일 분리
  * 3. GAS 서버 네이버 계정 동기화 — 사용자 naverId/PW를 관리자 스프레드시트에 전송
  * 4. 로그인/로그아웃 시 자동 세팅 전환
  */
+
+import { clearPlanMemo } from '../utils/geminiPlanMemo.js';
 
 // ============================================
 // 상수 및 타입
@@ -59,12 +61,19 @@ export function getCurrentUserId(): string {
  * 현재 userId 설정 (로그인 시 호출)
  */
 export function setCurrentUserId(userId: string): void {
+    const prev = _currentUserId;
     _currentUserId = userId;
     // 전역 키이므로 원본 setItem 사용
     if (_originalSetItem) {
         _originalSetItem.call(localStorage, CURRENT_USER_KEY, userId);
     } else {
         localStorage.setItem(CURRENT_USER_KEY, userId);
+    }
+    // ✅ [v2.10.77] 계정 변경 시 plan memo 모듈 메모리 reset.
+    //   localStorage는 프록시가 자동으로 계정별 분리하지만, 모듈 메모(_memo)는 계정 무관 단일.
+    //   계정 A에서 'paid' 캐시 → 계정 B로 전환 시 _memo='paid'가 남아 계정 B에게도 적용되는 회귀 차단.
+    if (prev !== userId) {
+        clearPlanMemo();
     }
     console.log(`[AccountSettings] ✅ 현재 사용자 설정: ${userId}`);
 }
@@ -216,6 +225,9 @@ export async function onAccountLogout(): Promise<void> {
     if (_originalSetItem) {
         _originalSetItem.call(localStorage, CURRENT_USER_KEY, '');
     }
+
+    // ✅ [v2.10.77] 로그아웃 시 plan memo 모듈 메모리 reset (다음 로그인 사용자에게 누수 방지).
+    clearPlanMemo();
 
     console.log('[AccountSettings] ✅ 로그아웃 완료');
 }

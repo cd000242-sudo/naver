@@ -85,6 +85,7 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
   if (provider === 'nano-banana-pro' || provider === 'falai') {
     const memoed = recallPlan();
     if (memoed) {
+      console.log(`[CostConsent] ✅ memo hit (${memoed}) → modal 생략, IPC 우회`);
       return true;
     }
   }
@@ -105,9 +106,11 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
   if (provider === 'nano-banana-pro' || provider === 'falai') {
     // 플랜이 이미 설정되어 있으면 통과 + 세션 메모에도 반영
     if (config.geminiPlanType === 'free' || config.geminiPlanType === 'paid') {
+      console.log(`[CostConsent] ✅ disk hit (${config.geminiPlanType}) → memo 채움, modal 생략`);
       rememberPlan(config.geminiPlanType);
       return true;
     }
+    console.log(`[CostConsent] ⚠️ memo miss + disk miss (geminiPlanType=${config.geminiPlanType}) → modal 진입`);
 
     // ✅ 보안 강화: 라이선스 타입 확인 (IPC로 main process에 요청)
     let isFreeLicense = false;

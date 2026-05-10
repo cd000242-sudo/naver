@@ -130,3 +130,49 @@ describe('실 시나리오 — 연속발행 모달 재출현 차단', () => {
         expect(recallPlan()).toBe('paid'); // localStorage가 막아줌
     });
 });
+
+describe('v2.10.77 — 계정 전환 시 cache 격리', () => {
+    it('clearPlanMemo는 모듈 메모 + localStorage 둘 다 비움', () => {
+        rememberPlan('paid');
+        expect(recallPlan()).toBe('paid');
+        clearPlanMemo();
+        expect(recallPlan()).toBe(null);
+    });
+
+    it('계정 A 로그인 시뮬 → paid 저장 → 로그아웃(clearPlanMemo) → 계정 B 로그인 시 모달 재출현 보장', () => {
+        // 계정 A: paid 선택
+        rememberPlan('paid');
+        expect(recallPlan()).toBe('paid');
+        // 로그아웃 → clearPlanMemo (실제 onAccountLogout이 호출)
+        clearPlanMemo();
+        // 계정 B: cache 비어있어야 함 → 모달 정상 출현
+        expect(recallPlan()).toBe(null);
+    });
+
+    it('동일 계정 재로그인 (clearPlanMemo 후) → 새 답변 받기까지 모달 출현', () => {
+        rememberPlan('free');
+        clearPlanMemo();
+        expect(recallPlan()).toBe(null);
+        rememberPlan('paid'); // 사용자가 재선택
+        expect(recallPlan()).toBe('paid');
+    });
+});
+
+describe('v2.10.77 — priceInfoModal cache 동기화', () => {
+    it('사용자가 settings에서 paid → free 전환 시 cache가 즉시 따라감', () => {
+        // 초기 상태: paid
+        rememberPlan('paid');
+        expect(recallPlan()).toBe('paid');
+        // 사용자가 priceInfoModal에서 free 선택 후 저장
+        // (priceInfoModal 코드가 rememberPlan('free') 호출하는 것 시뮬)
+        rememberPlan('free');
+        expect(recallPlan()).toBe('free');
+    });
+
+    it('settings에서 plan 라디오 미체크로 저장 시 cache는 변화 없음 (디스크 보존과 일관)', () => {
+        rememberPlan('paid');
+        // priceInfoModal이 라디오 unchecked 감지 → rememberPlan 호출 안 함 → cache 유지
+        // (priceInfoModal.ts에서 검증된 라디오 값일 때만 rememberPlan을 호출하도록 보장)
+        expect(recallPlan()).toBe('paid');
+    });
+});
