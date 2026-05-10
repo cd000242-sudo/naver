@@ -4485,26 +4485,25 @@ export function initMainAccountSelector() {
 
 
   // 다중계정 모달에서 계정 추가/삭제 시 목록 새로고침
+  // ✅ [v2.10.79] PERF — callback에서 getComputedStyle 제거 (forced reflow 차단).
+  //   inline style.display만 체크. 모달은 직접 style.display로만 토글되므로
+  //   computed style을 추가로 읽을 필요 없음 (CSS가 같은 element에 display 규칙을
+  //   걸 수 없는 inline 우선 구조).
+  const multiAccountModal = document.getElementById('multi-account-modal');
+  const isModalVisible = (el: HTMLElement): boolean => el.style.display !== 'none' && el.style.display !== '';
   const observer = new MutationObserver(() => {
     if (!multiAccountModal) return;
     const el = multiAccountModal as HTMLElement;
-    const isVisible = el.style.display !== 'none' && getComputedStyle(el).display !== 'none';
-
-    // ✅ 모달이 닫힐 때 1회만 새로고침 (열림/애니메이션 중 잦은 트리거 방지)
+    const isVisible = isModalVisible(el);
+    // 모달이 닫힐 때 1회만 새로고침 (열림/애니메이션 중 잦은 트리거 방지)
     if (lastMultiAccountModalVisible && !isVisible) {
       scheduleAccountListRefresh();
     }
     lastMultiAccountModalVisible = isVisible;
   });
 
-  const multiAccountModal = document.getElementById('multi-account-modal');
   if (multiAccountModal) {
-    try {
-      const el = multiAccountModal as HTMLElement;
-      lastMultiAccountModalVisible = el.style.display !== 'none' && getComputedStyle(el).display !== 'none';
-    } catch {
-      lastMultiAccountModalVisible = false;
-    }
+    lastMultiAccountModalVisible = isModalVisible(multiAccountModal as HTMLElement);
     observer.observe(multiAccountModal, { attributes: true, attributeFilter: ['style'] });
   }
 

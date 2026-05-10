@@ -759,13 +759,18 @@ export function showHeadingImagesModal(encodedHeadingTitle: string, initialImage
   };
   document.addEventListener('keydown', handleKeydown);
 
+  // ✅ [v2.10.79] PERF — modal 닫힘 감지를 body-wide observer 대신 modal 부모만 관찰.
+  //   이전: observe(document.body, {childList:true, subtree:true}) → 모든 DOM 추가/제거에
+  //         fire (toast, log line, queue render, …) → modal 떠있는 동안 main thread 부하.
+  //   수정: modal의 직계 부모(document.body)에서 childList만 감시. subtree 제거.
+  //         removed-from-DOM은 부모의 직계 children 변경으로 충분히 감지.
   const observer = new MutationObserver(() => {
     if (!modal.isConnected) {
       document.removeEventListener('keydown', handleKeydown);
       observer.disconnect();
     }
   });
-  observer.observe(document.body, { childList: true, subtree: true });
+  observer.observe(document.body, { childList: true });
 
   render();
 }
