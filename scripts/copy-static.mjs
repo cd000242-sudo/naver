@@ -136,6 +136,11 @@ try {
     'categoryNormalizeUtils.js',
     'textFormatUtils.js',
     'time24Select.js',  // ✅ [2026-03-24] 예약 시간 선택 UI 컴포넌트 (continuousPublishing, scheduleManager, multiAccountManager에서 사용)
+    // ✅ [v2.10.83 HOTFIX] 의존 없는 pure utils — accountSettingsManager/renderer.ts보다 *먼저* inline 필수.
+    //   누락 시 ReferenceError: clearPlanMemo / runWhenIdle / initShoppingConnectObserver is not defined.
+    'idleInit.js',           // renderer.ts가 runWhenIdle 호출 (v2.10.82)
+    'geminiPlanMemo.js',     // accountSettingsManager가 clearPlanMemo 호출 (v2.10.76)
+    'shoppingConnectEvents.js', // renderer.ts가 initShoppingConnectObserver 호출 (v2.10.82)
     // 중간 유틸리티 (기본에 의존)
     'kenBurnsStyles.js',
     'imageHelpers.js',
