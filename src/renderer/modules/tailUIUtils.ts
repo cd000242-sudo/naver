@@ -979,22 +979,30 @@ export function injectScheduleHelpButton(container: Element): void {
 }
 
 // ✅ MutationObserver로 모달 감지
+// ✅ [v2.10.78] PERF — textContent를 한 번만 추출하고, 모달 클래스 체크 *먼저*
+//   해서 textContent 검사 (reflow 트리거 가능)는 modal 후보 노드에서만 실행.
+const SCHEDULE_TEXT_HINTS = ['순차 예약', '예약 설정', '항목별 발행', '대기열 전체'];
 const scheduleModalObserver = new MutationObserver((mutations) => {
   for (const mutation of mutations) {
     for (const node of mutation.addedNodes) {
-      if (node instanceof HTMLElement) {
-        // 모달이나 다이얼로그 감지
-        if (
-          node.classList.contains('modal') ||
-          node.classList.contains('dialog') ||
-          node.getAttribute('role') === 'dialog' ||
-          node.querySelector('.modal-content') ||
-          node.textContent?.includes('순차 예약') ||
-          node.textContent?.includes('예약 설정') ||
-          node.textContent?.includes('항목별 발행') ||
-          node.textContent?.includes('대기열 전체')
-        ) {
+      if (!(node instanceof HTMLElement)) continue;
+      // 빠른 가드 (속성/클래스 체크)
+      const fastMatch =
+        node.classList.contains('modal') ||
+        node.classList.contains('dialog') ||
+        node.getAttribute('role') === 'dialog' ||
+        !!node.querySelector('.modal-content');
+      if (fastMatch) {
+        setTimeout(() => injectScheduleHelpButton(node), 100);
+        continue;
+      }
+      // textContent 검사는 fastMatch 실패 시에만 — 한 번만 추출
+      const text = node.textContent;
+      if (!text) continue;
+      for (const hint of SCHEDULE_TEXT_HINTS) {
+        if (text.includes(hint)) {
           setTimeout(() => injectScheduleHelpButton(node), 100);
+          break;
         }
       }
     }
@@ -1147,19 +1155,21 @@ setTimeout(() => {
 // ✅ [2026-01-27] 모든 모달을 body 직속으로 자동 이동 (position:fixed 정상 작동을 위해)
 // - 부모 요소에 transform/filter 속성이 있으면 position:fixed가 깨지는 문제 해결
 // - 동적으로 생성되는 모달(풀오토 다중계정, 연속발행 등)도 자동 처리
+// ─────────────────────────────────────────────────────────────────────────
+// ✅ [v2.10.78] PERF FIX — "프리즘 현상" (renderer freeze) 핵심 원인 차단.
+//   이전 옵션: subtree:true + attributes:true + attributeFilter:['style']
+//   → document.body 안의 *모든* 자손 element의 inline style 변경을 감시
+//   → 토스트/툴팁/hover/focus/스크롤 동기화 등 일반 UI 갱신마다 observer fire
+//   → 13K줄 renderer에서 콜백이 누적되어 main thread 블로킹 (클릭/스크롤 멈춤,
+//      "응답 없음" Windows alert)
+//   수정: attributes 감시 *제거*. childList만 유지 → 새 모달이 DOM에 *추가될 때*만 fire.
+//   기존 모달이 style.display='flex'로 toggle되는 시나리오는 거의 없음 (대부분
+//   모달은 사용 시점에 동적 생성되어 addedNodes 경로로 잡힘). 만약 그런 모달이
+//   생기면 그 모달 자체에 별도 observer를 attach하는 식으로 좁히는 게 정답.
 const modalMoveObserver = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
-    if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-      const target = mutation.target as HTMLElement;
-      // modal-backdrop 클래스를 가진 요소가 display:flex로 변경될 때
-      if (target.classList.contains('modal-backdrop') &&
-        target.style.display === 'flex' &&
-        target.parentElement !== document.body) {
-        console.log('[ModalFix] 모달을 body로 이동:', target.id || target.className);
-        document.body.appendChild(target);
-      }
-    }
-    // 새로 추가된 노드 중 modal-backdrop 확인
+  for (const mutation of mutations) {
+    // childList만 처리 (attributes 분기 제거)
+    if (!mutation.addedNodes.length) continue;
     mutation.addedNodes.forEach((node) => {
       if (node instanceof HTMLElement && node.classList.contains('modal-backdrop')) {
         if (node.parentElement !== document.body) {
@@ -1168,16 +1178,14 @@ const modalMoveObserver = new MutationObserver((mutations) => {
         }
       }
     });
-  });
+  }
 });
 
-// 전체 document 관찰
+// childList만 관찰 — 새 노드 추가 시점에만 fire (style 변경 무시)
 modalMoveObserver.observe(document.body, {
   childList: true,
   subtree: true,
-  attributes: true,
-  attributeFilter: ['style']
 });
 
-console.log('[Renderer] ✅ 모달 자동 body 이동 Observer 등록 완료');
+console.log('[Renderer] ✅ 모달 자동 body 이동 Observer 등록 완료 (v2.10.78 perf-tuned)');
 
