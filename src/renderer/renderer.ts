@@ -2447,9 +2447,14 @@ async function initializeApplication(): Promise<void> {
   initContentHeadingImageGeneration(); _perfMark('initContentHeadingImageGeneration'); await _yieldIfNeeded();
   initCharCountDisplay(); _perfMark('initCharCountDisplay'); await _yieldIfNeeded();
   initImageManagementTab(); _perfMark('initImageManagementTab'); await _yieldIfNeeded();
-  // ✅ [v2.10.82 PERF] 대시보드 통계/배너는 비핵심 — 5초 idle timeout으로 미룸.
+  // ✅ [v2.10.82 PERF] 대시보드 통계는 비핵심 — 5초 idle timeout으로 미룸.
   runWhenIdle(() => initDashboard(), { name: 'initDashboard', timeoutMs: 5000 });
-  runWhenIdle(() => showGeminiInstabilityNotice(), { name: 'geminiInstabilityNotice', timeoutMs: 5000 });
+  // ✅ [v2.10.94 REVERT] Gemini 안내 배너는 setTimeout 1500ms로 변경.
+  //   runWhenIdle 사용 시 일부 환경에서 idle 발동 안 되고 fallback도 실패 →
+  //   배너 자체가 안 뜸. setTimeout으로 무조건 1.5초 후 표시.
+  setTimeout(() => {
+    try { showGeminiInstabilityNotice(); } catch (e) { console.warn('[GeminiNotice] 실행 오류:', e); }
+  }, 1500);
   initTabSwitching(); _perfMark('initTabSwitching'); await _yieldIfNeeded();
   initLicenseBadge(); _perfMark('initLicenseBadge'); await _yieldIfNeeded();
   initCustomerServiceButton(); _perfMark('initCustomerServiceButton'); await _yieldIfNeeded();
@@ -2459,6 +2464,18 @@ async function initializeApplication(): Promise<void> {
   initShoppingConnectObserver(); _perfMark('initShoppingConnectObserver'); await _yieldIfNeeded();
   initShoppingConnectCTA(); _perfMark('initShoppingConnectCTA');
   _perfMark('═══ 모든 동기 init 완료 ═══');
+
+  // ✅ [v2.10.94] 글 목록 강제 재로드 — initUnifiedTab의 첫 호출이 _yieldIfNeeded
+  //   사이에서 race condition(account namespacing 등)에 걸려 빈 목록일 가능성 대비.
+  //   1초 후 재호출 → 모든 setup 완료된 후라 정상 데이터 로드됨.
+  setTimeout(() => {
+    try {
+      refreshGeneratedPostsList();
+      console.warn('[Init] 생성된 글 목록 강제 재로드 완료 (v2.10.94)');
+    } catch (e) {
+      console.warn('[Init] 글 목록 재로드 실패 (무시):', e);
+    }
+  }, 1000);
 
   // ✅ [v2.10.93] 최종 요약 — top 5 느린 단계 console.warn으로 강조 출력
   //   (v2.10.41 console.log no-op 회피)
