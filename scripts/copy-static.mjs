@@ -1,4 +1,4 @@
-import { cp, mkdir, access, readFile, writeFile } from 'fs/promises';
+import { cp, mkdir, access, readFile, writeFile, readdir } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -667,6 +667,130 @@ try {
     }
   } else {
     console.log('📋 [v2.10.80] ECC_SKIP_MINIFY=1 → minify 생략');
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ✅ [v2.10.86] 인라인 회귀 자동 검증 (v2.10.83~85 같은 종류 회귀 영구 차단)
+  //
+  // 검사 항목:
+  //   1. src/renderer/{utils,modules,components}/*.ts vs 인라인 리스트 비교
+  //      - 누락된 파일이 *어디서든 import되면* → ERROR (빌드 실패)
+  //      - 누락 + 미사용 → WARN (빌드 통과, 향후 사용 대비 알림만)
+  //   2. dynamic import 'import("./..."")' 사용 검사 → ERROR (인라인 빌드 silent fail 위험)
+  //
+  // 우회: ECC_SKIP_INLINE_VERIFY=1 환경변수
+  // ═══════════════════════════════════════════════════════════════════════════
+  if (process.env.ECC_SKIP_INLINE_VERIFY !== '1') {
+    const rendererRoot = path.join(projectRoot, 'src', 'renderer');
+    const errors = [];
+    const warnings = [];
+
+    // 재귀로 모든 .ts 파일 수집 (.d.ts 제외)
+    async function walkTs(dir) {
+      const entries = await readdir(dir, { withFileTypes: true });
+      const out = [];
+      for (const entry of entries) {
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          out.push(...(await walkTs(full)));
+        } else if (entry.name.endsWith('.ts') && !entry.name.endsWith('.d.ts')) {
+          out.push(full);
+        }
+      }
+      return out;
+    }
+    const allRendererTs = await walkTs(rendererRoot);
+
+    // helper: 코멘트/문서 라인 skip 후 검사 (false positive 차단)
+    const isCommentLine = (line) => {
+      const t = line.trim();
+      return t.startsWith('//') || t.startsWith('*') || t.startsWith('/*');
+    };
+    const hasNonCommentMatch = (content, re) => {
+      for (const line of content.split('\n')) {
+        if (isCommentLine(line)) continue;
+        if (re.test(line)) return true;
+        re.lastIndex = 0; // global 플래그 사용 안 하지만 안전
+      }
+      return false;
+    };
+    const collectNonCommentMatches = (content, re) => {
+      const out = [];
+      for (const line of content.split('\n')) {
+        if (isCommentLine(line)) continue;
+        const matches = [...line.matchAll(re)];
+        for (const m of matches) out.push(m[0]);
+      }
+      return out;
+    };
+
+    // 1) 인라인 리스트 vs 실제 파일 비교
+    const checkedDirs = [
+      { dir: 'utils', listed: utilsModules },
+      { dir: 'modules', listed: modulesFiles },
+      { dir: 'components', listed: componentModules },
+    ];
+    for (const { dir, listed } of checkedDirs) {
+      const srcDir = path.join(rendererRoot, dir);
+      let entries;
+      try {
+        entries = await readdir(srcDir);
+      } catch {
+        continue;
+      }
+      const actualTs = entries.filter((f) => f.endsWith('.ts') && !f.endsWith('.d.ts'));
+      for (const tsName of actualTs) {
+        const jsName = tsName.replace(/\.ts$/, '.js');
+        if (listed.includes(jsName)) continue;
+        // 누락 — import 사용 여부 확인 (코멘트 라인 제외)
+        const baseName = tsName.replace(/\.ts$/, '');
+        const importRe = new RegExp(
+          `(from|import\\()\\s*['"][^'"\\n]*\\/${baseName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}(\\.js)?['"]`,
+        );
+        const usedBy = [];
+        const selfPath = path.join(srcDir, tsName);
+        for (const fullPath of allRendererTs) {
+          if (fullPath === selfPath) continue;
+          const content = await readFile(fullPath, 'utf-8');
+          if (hasNonCommentMatch(content, importRe)) usedBy.push(path.relative(projectRoot, fullPath));
+        }
+        if (usedBy.length > 0) {
+          errors.push(
+            `${dir}/${jsName} — 인라인 리스트에 없는데 import됨:\n      ${usedBy.join('\n      ')}`,
+          );
+        } else {
+          warnings.push(`${dir}/${jsName} — 인라인 리스트에 없음 (현재 사용 안 됨)`);
+        }
+      }
+    }
+
+    // 2) dynamic import 검사 (인라인 빌드에서 silent fail 위험, 코멘트 제외)
+    const dynImportRe = /(?<!\.\w)import\(\s*['"]\.[^'"]+['"]\s*\)/g;
+    for (const fullPath of allRendererTs) {
+      const content = await readFile(fullPath, 'utf-8');
+      const matches = collectNonCommentMatches(content, dynImportRe);
+      if (matches.length === 0) continue;
+      const rel = path.relative(projectRoot, fullPath);
+      errors.push(
+        `Dynamic import (인라인 빌드 silent fail 위험): ${rel}\n      ${matches.join('\n      ')}`,
+      );
+    }
+
+    if (warnings.length > 0) {
+      console.warn('\n⚠️  [v2.10.86 VERIFY] 경고:');
+      for (const w of warnings) console.warn('   - ' + w);
+    }
+    if (errors.length > 0) {
+      console.error('\n❌ [v2.10.86 VERIFY] 인라인 회귀 위험 발견 — 빌드 중단:\n');
+      for (const e of errors) console.error('   - ' + e + '\n');
+      console.error('   해결: scripts/copy-static.mjs의 inline 리스트에 누락 파일 추가');
+      console.error('   또는: dynamic import를 top-level static import로 변경');
+      console.error('   임시 우회 (위험): ECC_SKIP_INLINE_VERIFY=1 npm run build\n');
+      process.exit(1);
+    }
+    console.log('✅ [v2.10.86 VERIFY] 인라인 리스트 + dynamic import 검증 통과');
+  } else {
+    console.log('📋 [v2.10.86 VERIFY] ECC_SKIP_INLINE_VERIFY=1 → 검증 생략');
   }
 
   await writeFile(rendererTarget, toWrite, 'utf-8');
