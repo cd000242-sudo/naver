@@ -573,6 +573,9 @@ export function initHeadingImageGeneration(): void {
     progressText: null as HTMLElement | null,
     items: [] as Array<{ status: 'pending' | 'generating' | 'completed' | 'failed'; url?: string; heading: string }>,
     sourceLabel: '',
+    // v2.10.82 LEAK FIX: ESC keydown handler를 인스턴스에 보관 → hide()에서도 cleanup.
+    //   이전: 닫기 버튼으로 hide() 호출 시 escHandler가 document에 남아 누적.
+    _escHandler: null as ((e: KeyboardEvent) => void) | null,
 
     // 패널 생성 및 표시
     show(headings: any[], sourceLabel: string) {
@@ -692,13 +695,13 @@ export function initHeadingImageGeneration(): void {
         }
       });
 
-      // ESC 키로 닫기
+      // ESC 키로 닫기 — v2.10.82 LEAK FIX: handler를 this._escHandler에 보관해
+      //   hide()가 어떤 경로로 불려도 cleanup 보장. 이전엔 닫기 버튼 → hide() 시
+      //   keydown listener가 document에 남아 누적.
       const escHandler = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          this.hide();
-          document.removeEventListener('keydown', escHandler);
-        }
+        if (e.key === 'Escape') this.hide();
       };
+      this._escHandler = escHandler;
       document.addEventListener('keydown', escHandler);
     },
 
@@ -707,6 +710,11 @@ export function initHeadingImageGeneration(): void {
       const existing = document.getElementById('live-image-preview-panel');
       if (existing) {
         existing.remove();
+      }
+      // v2.10.82 LEAK FIX: escHandler 등록되어 있으면 cleanup
+      if (this._escHandler) {
+        document.removeEventListener('keydown', this._escHandler);
+        this._escHandler = null;
       }
       this.panel = null;
       this.grid = null;

@@ -586,24 +586,28 @@ export function showImageModal(imageUrl: string): void {
 
   document.body.appendChild(modal);
 
+  // v2.10.82 LEAK FIX: 모달 닫힘 경로가 3개(닫기 버튼, 배경 클릭, ESC)인데 ESC만
+  //   document keydown listener를 removeEventListener했음 → 사용자가 X로 N번 닫으면
+  //   handleKeydown이 document에 N개 누적. close() 헬퍼로 *모든 경로*에서 cleanup.
+  const handleKeydown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') close();
+  };
+  const close = (): void => {
+    modal.remove();
+    document.removeEventListener('keydown', handleKeydown);
+  };
+
   const closeBtn = modal.querySelector('.close-image-modal-btn');
   if (closeBtn) {
-    closeBtn.addEventListener('click', () => modal.remove());
+    closeBtn.addEventListener('click', close);
   }
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal || (e.target as HTMLElement).classList.contains('close-image-modal-btn')) {
-      modal.remove();
+      close();
     }
   });
 
-  // ESC 키로 닫기
-  const handleKeydown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      modal.remove();
-      document.removeEventListener('keydown', handleKeydown);
-    }
-  };
   document.addEventListener('keydown', handleKeydown);
 }
 

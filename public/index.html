@@ -10288,6 +10288,8 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             animation: floatBtn 4s ease-in-out infinite;
+            /* v2.10.82 PERF: 영구 floating 버튼 + 4초 주기 transform → GPU layer 승격 */
+            will-change: transform;
         }
 
         .ai-assistant-floating::before {

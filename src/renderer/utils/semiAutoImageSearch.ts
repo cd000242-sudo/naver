@@ -377,12 +377,8 @@ export function injectAutoCollectCheckboxUI(): void {
 
     updateVisibility();
 
-    // 쇼핑커넥트 설정 변경 감지
-    const scSettings = document.getElementById('shopping-connect-settings');
-    if (scSettings) {
-        const observer = new MutationObserver(updateVisibility);
-        observer.observe(scSettings, { attributes: true, attributeFilter: ['style'] });
-    }
+    // 쇼핑커넥트 설정 변경 감지 — v2.10.82 통합 event 구독
+    document.addEventListener('sc-visibility-change', updateVisibility as EventListener);
 
     const contentModeSelect = document.getElementById('unified-content-mode');
     if (contentModeSelect) {

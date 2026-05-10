@@ -269,6 +269,8 @@ import {
 })();
 
 import { onAccountLogout as accountLogout } from './modules/accountSettingsManager.js';
+import { runWhenIdle } from './utils/idleInit.js';
+import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // ✅ [2026-02-17] 중복 로그인 감지 시 강제 로그아웃 처리
@@ -2100,22 +2102,19 @@ function initShoppingConnectCTA(): void {
   });
 
   // 쇼핑커넥트 모드 활성화 시에도 CTA 자동 설정
-  const shoppingConnectSettings = document.getElementById('shopping-connect-settings');
-  if (shoppingConnectSettings) {
-    const observer = new MutationObserver(() => {
-      if (shoppingConnectSettings.style.display !== 'none' && affiliateLinkInput.value.trim()) {
-        // 쇼핑커넥트 모드 활성화 시 CTA 자동 설정
-        if (ctaLinkInput && !ctaLinkInput.value.trim()) {
-          ctaLinkInput.value = affiliateLinkInput.value.trim();
-        }
-        if (ctaTextInput && !ctaTextInput.value.trim()) {
-          const randomHook = hookingTexts[Math.floor(Math.random() * hookingTexts.length)];
-          ctaTextInput.value = randomHook;
-        }
+  // v2.10.82 PERF: 통합 sc-visibility-change event 구독으로 변경 (개별 MutationObserver ↓)
+  document.addEventListener('sc-visibility-change', ((e: Event) => {
+    const detail = (e as CustomEvent<{ visible: boolean }>).detail;
+    if (detail.visible && affiliateLinkInput.value.trim()) {
+      if (ctaLinkInput && !ctaLinkInput.value.trim()) {
+        ctaLinkInput.value = affiliateLinkInput.value.trim();
       }
-    });
-    observer.observe(shoppingConnectSettings, { attributes: true, attributeFilter: ['style'] });
-  }
+      if (ctaTextInput && !ctaTextInput.value.trim()) {
+        const randomHook = hookingTexts[Math.floor(Math.random() * hookingTexts.length)];
+        ctaTextInput.value = randomHook;
+      }
+    }
+  }) as EventListener);
 }
 
 
@@ -2422,14 +2421,18 @@ async function initializeApplication(): Promise<void> {
   initContentHeadingImageGeneration();
   initCharCountDisplay();
   initImageManagementTab();
-  initDashboard();
-  showGeminiInstabilityNotice(); // ✅ [2026-03-21] Gemini 서버 불안정 공지
+  // ✅ [v2.10.82 PERF] 대시보드 통계/배너는 비핵심 — 5초 idle timeout으로 미룸.
+  //   사용자 첫 인터랙션 응답성 ↑. 5초 안에 어쨌든 실행되므로 동작 동일.
+  runWhenIdle(() => initDashboard(), { name: 'initDashboard', timeoutMs: 5000 });
+  runWhenIdle(() => showGeminiInstabilityNotice(), { name: 'geminiInstabilityNotice', timeoutMs: 5000 });
   initTabSwitching();
   initLicenseBadge(); // 라이선스 배지 초기화
   initCustomerServiceButton(); // 고객센터 버튼 초기화
   initPurchaseInquiryButton(); // 구매 문의하기 버튼 초기화
   initGlobalRefreshButton(); // 전체 초기화 버튼 초기화
   initUnifiedImageEventHandlers(); // ✅ 통합 이미지 이벤트 핸들러 초기화
+  // v2.10.82 PERF: 5개 MutationObserver → 1개 통합 observer + CustomEvent dispatch
+  initShoppingConnectObserver();
   initShoppingConnectCTA(); // ✅ 쇼핑커넥트 CTA 자동 설정 초기화
 
 
@@ -7397,12 +7400,8 @@ function addThumbnailTextOptionUI(): void {
       contentModeSelect.addEventListener('change', updateCheckboxVisibility);
     }
 
-    // 쇼핑커넥트 설정 표시 변경 감지 (MutationObserver)
-    const shoppingConnectSettings = document.getElementById('shopping-connect-settings');
-    if (shoppingConnectSettings) {
-      const observer = new MutationObserver(updateCheckboxVisibility);
-      observer.observe(shoppingConnectSettings, { attributes: true, attributeFilter: ['style'] });
-    }
+    // 쇼핑커넥트 설정 표시 변경 감지 — v2.10.82 통합 event 구독
+    document.addEventListener('sc-visibility-change', updateCheckboxVisibility as EventListener);
   }
 
   // ✅ [2026-02-02] 반자동 발행 영역의 중복 체크박스 제거
@@ -7428,12 +7427,8 @@ function addThumbnailTextOptionUI(): void {
       contentModeForUrl.addEventListener('change', updateShoppingUrlVisibility);
     }
 
-    // 쇼핑커넥트 설정 영역 표시 변경 감지 (MutationObserver)
-    const shoppingSettingsForUrl = document.getElementById('shopping-connect-settings');
-    if (shoppingSettingsForUrl) {
-      const observer = new MutationObserver(updateShoppingUrlVisibility);
-      observer.observe(shoppingSettingsForUrl, { attributes: true, attributeFilter: ['style'] });
-    }
+    // 쇼핑커넥트 설정 영역 표시 변경 감지 — v2.10.82 통합 event 구독
+    document.addEventListener('sc-visibility-change', updateShoppingUrlVisibility as EventListener);
   }
 }
 
@@ -7502,12 +7497,8 @@ function addShoppingConnectAiImageOptions(): void {
     contentModeSelect.addEventListener('change', updateVisibility);
   }
 
-  // 쇼핑커넥트 설정 영역 표시 변경 감지
-  const shoppingConnectSettings = document.getElementById('shopping-connect-settings');
-  if (shoppingConnectSettings) {
-    const observer = new MutationObserver(updateVisibility);
-    observer.observe(shoppingConnectSettings, { attributes: true, attributeFilter: ['style'] });
-  }
+  // 쇼핑커넥트 설정 영역 표시 변경 감지 — v2.10.82 통합 event 구독
+  document.addEventListener('sc-visibility-change', updateVisibility as EventListener);
 }
 
 // 통합 폼 데이터 수집
