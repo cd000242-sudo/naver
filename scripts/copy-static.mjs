@@ -217,6 +217,11 @@ try {
     'VeoProgressOverlay.js',
     'PromptEditModal.js',
     'HeadingImageSettings.js',
+    // ✅ [v2.10.85 HOTFIX] SPEC-IMAGE-RECOVERY-001 차단형 모달 — renderer.ts:1490에서
+    //   dynamic import 했지만 인라인 빌드에서 404 silent fail → IP 차단/시간 한도 등
+    //   복구 모달이 안 떠 사용자가 무한 재시도 → 자원 낭비/접근 차단 심화.
+    'RecoveryBlockingModal.js',
+    'RecoveryFollowupActions.js',
   ];
   let componentsSource = '';
   for (const compFile of componentModules) {

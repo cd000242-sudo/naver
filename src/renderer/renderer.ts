@@ -73,6 +73,10 @@ import { isFullAutoStopRequested, requestStopFullAutoPublish, normalizeReviewHea
 import { toFileUrlMaybe, normalizeHeadingKeyForVideoCache } from './utils/headingKeyUtils.js';
 // ✅ [2026-01-25 모듈화] Veo 진행 오버레이
 import { showVeoProgressOverlay, setVeoProgressOverlay, hideVeoProgressOverlay, handleVeoLogForOverlay } from './components/VeoProgressOverlay.js';
+// v2.10.85: SPEC-IMAGE-RECOVERY-001 모달 — 빌드 시 components inline으로 같은 scope에 정의됨.
+//   이전: dynamic import → 인라인 빌드에서 404 silent fail → 복구 모달 안 떠 무한 재시도.
+import { recoveryBlockingModal, RECOVERY_MODAL_PRESETS } from './components/RecoveryBlockingModal.js';
+import { handleRecoveryChoice } from './components/RecoveryFollowupActions.js';
 // ✅ [2026-01-25 모듈화] 영상 제공자 유틸리티
 import {
   VideoProvider, getCurrentVideoProvider, setCurrentVideoProvider,
@@ -1485,12 +1489,11 @@ function updateProgress(percent: number, status: string): void {
       });
 
       // ✅ [SPEC-IMAGE-RECOVERY-001 Phase 6 C1] 차단형 모달 IPC 수신 + 후속 동작 7종 실제 트리거
+      // v2.10.85: dynamic import 제거 — 인라인 빌드에서 .js 파일 404 silent fail 방지.
+      //   recoveryBlockingModal / RECOVERY_MODAL_PRESETS / handleRecoveryChoice는
+      //   componentModules에 inline되어 같은 scope에 정의됨.
       window.api.on('recovery:show-modal', async (payload: { code: string; reason: string; errorCode?: string }) => {
         try {
-          const [{ recoveryBlockingModal, RECOVERY_MODAL_PRESETS }, followup] = await Promise.all([
-            import('./components/RecoveryBlockingModal'),
-            import('./components/RecoveryFollowupActions'),
-          ]);
           const code = payload.code as keyof typeof RECOVERY_MODAL_PRESETS;
           const preset = RECOVERY_MODAL_PRESETS[code];
           if (!preset) {
@@ -1511,7 +1514,7 @@ function updateProgress(percent: number, status: string): void {
           }
 
           // C1: 사용자 선택에 따른 실제 후속 동작 트리거
-          await followup.handleRecoveryChoice(code, choice.chosenId, payload);
+          await handleRecoveryChoice(code, choice.chosenId, payload);
         } catch (e) {
           console.error('[Renderer] Recovery 모달 처리 실패:', e);
         }
