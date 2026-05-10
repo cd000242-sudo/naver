@@ -141,6 +141,9 @@ try {
     'idleInit.js',           // renderer.ts가 runWhenIdle 호출 (v2.10.82)
     'geminiPlanMemo.js',     // accountSettingsManager가 clearPlanMemo 호출 (v2.10.76)
     'shoppingConnectEvents.js', // renderer.ts가 initShoppingConnectObserver 호출 (v2.10.82)
+    // ✅ [v2.10.84 HOTFIX] 과금 안전 SSOT — renderer.ts:53 import { isImageSkipEnabled, syncImageSkipUI }
+    //   누락 시 renderer 발행 흐름에서 ReferenceError → 이미지 스킵 가드 우회 → 유료 API 호출 + 과금.
+    'imageSkipCheck.js',
     // 중간 유틸리티 (기본에 의존)
     'kenBurnsStyles.js',
     'imageHelpers.js',
@@ -285,6 +288,11 @@ try {
     'aiAssistant.js',
     'scheduleDistributor.js',  // ✅ [2026-03-17] 예약 시간 분산 유틸리티 (continuousPublishing보다 먼저 로드 필수)
     'localFolderImageLoader.js', // ✅ [2026-03-23] 로컬 폴더 이미지 로더 (continuousPublishing/publishingHandlers에서 window 전역 호출 필요)
+    // ✅ [v2.10.84 HOTFIX] OpenAI 이미지 가드 — publishingHandlers/continuousPublishing이 호출.
+    //   이전: 3곳에서 await import('./openaiImageGuard.js') dynamic import 사용 →
+    //   renderer 인라인 빌드에서 .js 파일이 없어 404 → catch silent fail → OpenAI 가드 우회 → 과금 위험.
+    //   수정: 정적 inline + 호출지점에서 동적 import 제거 (static import로 변경).
+    'openaiImageGuard.js',
     'continuousPublishing.js',
     'thumbnailGenerator.js',
     'multiAccountManager.js',

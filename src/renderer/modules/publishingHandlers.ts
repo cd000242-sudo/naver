@@ -28,6 +28,8 @@ declare function displayGeneratedImages(images: any[]): void;
 declare function updatePromptItemsWithImages(images: any[]): void;
 declare function executeBatchPublish(formData: any, batchTargets: any[]): Promise<void>;
 declare function generateAIContentFromData(data: any): Promise<any>;
+// ✅ [v2.10.84] openaiImageGuard.js가 빌드 시 같은 스코프에 inline됨 → declare로 호출
+declare function runOpenAIImageGuard(imageSource: string): Promise<boolean>;
 declare function executeFullAutoFlow(formData: any): Promise<void>;
 declare function executeSemiAutoFlow(formData: any): Promise<void>;
 declare function updateUnifiedPreview(content: any): void;
@@ -74,8 +76,9 @@ export async function handleFullAutoPublish(): Promise<void> {
   // ✅ [v2.8.3] OpenAI 이미지 엔진 사전 차단 가드 — 폴백 금지, 사용자 명시 동의 필요
   //   - dall-e-3: 2026-05-12 이후 차단, 이전 1회성 D-Day 안내
   //   - openai-image (덕트테이프): Org Verification 첫 사용 시 가이드 모달
+  // v2.10.84: dynamic import 제거 — 인라인 빌드에서 .js 파일 404 silent fail 방지.
+  // 가드 실패 시 발행을 *중단*해야 silent 우회로 인한 과금 차단됨.
   try {
-    const { runOpenAIImageGuard } = await import('./openaiImageGuard.js');
     const guardImageSource = UnifiedDOMCache.getImageSource();
     const passed = await runOpenAIImageGuard(guardImageSource);
     if (!passed) {
@@ -1018,9 +1021,9 @@ export async function handleMultiAccountPublish(): Promise<void> {
   }
 
   // ✅ [v2.8.3] OpenAI 이미지 엔진 사전 차단 가드 — 다계정도 동일 정책 (폴백 금지)
+  // v2.10.84: dynamic import 제거 — 인라인 빌드에서 silent fail 방지.
   if (!maHasPreloadedImages) {
     try {
-      const { runOpenAIImageGuard } = await import('./openaiImageGuard.js');
       const passed = await runOpenAIImageGuard(commonImageSource);
       if (!passed) {
         appendLog('⛔ OpenAI 이미지 엔진 가드 차단 — 다계정 발행 중단');

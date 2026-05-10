@@ -28,6 +28,8 @@ const META_CRITIQUE_PHRASES: readonly string[] = [
 
 // ── 렌더러 전역 변수/함수 선언 (renderer.ts에서 정의) ──
 declare const toastManager: { success: (msg: string, duration?: number) => void; error: (msg: string, duration?: number) => void; warning: (msg: string, duration?: number) => void; info: (msg: string, duration?: number) => void };
+// ✅ [v2.10.84] openaiImageGuard.js가 빌드 시 같은 스코프에 inline됨 → declare로 호출
+declare function runOpenAIImageGuard(imageSource: string): Promise<boolean>;
 declare const ImageManager: { getAll: () => any[]; getAllImages: () => any[]; setAll: (imgs: any[]) => void; add: (img: any) => void; clear: () => void; clearAll: () => void; count: () => number; headings: any[]; setImage: (key: string | number, img: any) => void; hasImage: (key: string | number) => boolean; imageMap: Map<string, any[]>; setHeadings: (h: any[]) => void; unsetHeadings: Set<string>; getImagesByHeading: (heading: string) => any[]; removeImage: (key: string | number, idx?: number) => void; addImage: (heading: string, img: any) => void };
 declare const UnifiedDOMCache: { getImageSource: () => string; [key: string]: any };
 declare const appendLog: (msg: string, logOutputId?: string) => void;
@@ -4079,8 +4081,8 @@ async function startContinuousPublishingV2(): Promise<void> {
   }
 
   // ✅ [v2.8.3] OpenAI 이미지 엔진 사전 차단 가드 — 연속발행도 동일 정책 (폴백 금지)
+  // v2.10.84: dynamic import 제거 — 인라인 빌드에서 silent fail 방지.
   try {
-    const { runOpenAIImageGuard } = await import('./openaiImageGuard.js');
     const guardImageSource = UnifiedDOMCache.getImageSource();
     const passed = await runOpenAIImageGuard(guardImageSource);
     if (!passed) {
