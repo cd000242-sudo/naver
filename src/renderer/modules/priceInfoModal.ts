@@ -939,7 +939,14 @@ export async function initPriceInfoModal(): Promise<void> {
             return el ? el.checked : true;
           })(),
           primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-2.5-flash', // ✅ [v1.4.49 revert] 기본값 Flash (Flash-Lite RPD 20/일로 부족)
-          geminiPlanType: (document.querySelector('input[name="geminiPlanType"]:checked') as HTMLInputElement)?.value as 'free' | 'paid' || 'free', // ✅ [v1.4.49] 기본값 free (안전한 기본값 + 텍스트 모델 자동 Flash 선택)
+          // ✅ [v2.10.76] silent 'free' 회귀 차단 — 라디오가 DOM에 없거나 unchecked면
+          //   필드를 아예 *생략*해서 saveConfig가 디스크 값을 보존하게 한다.
+          //   이전: `?.value || 'free'` → 라디오 미체크 시 'paid' → 'free' 자동 덮어씀.
+          ...((): { geminiPlanType?: 'free' | 'paid' } => {
+            const checked = (document.querySelector('input[name="geminiPlanType"]:checked') as HTMLInputElement | null)?.value;
+            if (checked === 'free' || checked === 'paid') return { geminiPlanType: checked };
+            return {}; // 미선택 → 디스크 보존
+          })(),
           imagePreset: (document.getElementById('image-preset-input') as HTMLInputElement)?.value as 'budget' | 'premium' | 'custom' || 'custom',
           // ✅ [2026-02-22 FIX] primaryGeminiTextModel에서 defaultAiProvider 자동 파생
           openaiApiKey: (document.getElementById('openai-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-02-22] OpenAI API

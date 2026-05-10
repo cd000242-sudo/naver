@@ -5,6 +5,8 @@
 //             runUiActionLockedCompat, ensurePromptCardRemoveHandler
 // ============================================
 
+import { rememberPlan, recallPlan } from '../utils/geminiPlanMemo.js';
+
 // 전역 스코프 의존성
 declare let generatedImages: any[];
 declare let currentStructuredContent: any;
@@ -76,6 +78,17 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
     return true;
   }
 
+  // ✅ [v2.10.76] 모달 재출현 차단 — IPC getConfig 실패/지연/race 무관하게
+  //   세션 메모(+localStorage)에 직전 답변이 있으면 즉시 통과.
+  //   사용자 보고: 연속발행 중 plan 모달이 반복 출현, '유료' 클릭해도 재출현.
+  //   원인: getConfig 10s timeout이 연속발행 IPC 폭주 중 실제로 발생 → config={} → 모달 재진입.
+  if (provider === 'nano-banana-pro' || provider === 'falai') {
+    const memoed = recallPlan();
+    if (memoed) {
+      return true;
+    }
+  }
+
   // ✅ [2026-02-02 FIX] IPC 호출에 타임아웃 추가 (무한 대기 방지)
   let config: any = {};
   try {
@@ -90,8 +103,9 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
 
   // ✅ 나노 바나나 프로 / Fal.ai (FLUX) 전용 플랜 선택 로직
   if (provider === 'nano-banana-pro' || provider === 'falai') {
-    // 플랜이 이미 설정되어 있으면 통과
-    if (config.geminiPlanType) {
+    // 플랜이 이미 설정되어 있으면 통과 + 세션 메모에도 반영
+    if (config.geminiPlanType === 'free' || config.geminiPlanType === 'paid') {
+      rememberPlan(config.geminiPlanType);
       return true;
     }
 
@@ -107,6 +121,7 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
 
     // 무료 라이선스면 팝업 없이 바로 'free'로 설정
     if (isFreeLicense) {
+      rememberPlan('free');
       await window.api.saveConfig({
         ...config,
         geminiPlanType: 'free',
@@ -172,6 +187,9 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
 
       // 핸들러
       const saveAndClose = async (type: 'free' | 'paid') => {
+        // ✅ [v2.10.76] saveConfig 결과와 무관하게 세션 메모를 *먼저* 채운다.
+        //   saveConfig가 실패하거나 다음 getConfig가 타임아웃돼도 모달 재출현 방지.
+        rememberPlan(type);
         try {
           await window.api.saveConfig({
             ...config,
@@ -184,7 +202,9 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
           resolve(true); // 성공
         } catch (e) {
           console.error(e);
-          resolve(false);
+          // 메모는 채워둔 상태이므로 한 세션 동안 모달 재출현 안 함.
+          // 디스크 저장 실패는 다음 saveConfig 성공 시 자동 회복.
+          resolve(true);
         } finally {
           overlay.remove();
           style.remove();
