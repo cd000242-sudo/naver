@@ -1650,6 +1650,23 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
     }
     refreshGeneratedPostsList();
 
+    // [v2.10.121] 반자동/풀오토 발행 버튼 활성화 — 페러프레이징도 콘텐츠 생성 완료로 마킹.
+    //   tailUIUtils.ts:557~568이 일반 글 생성 버튼 클릭만 listen → 페러프레이징 버튼 누락.
+    //   결과: hasGeneratedContent=false 유지 → 발행 버튼 비활성.
+    try {
+      const markFn = (window as any).markContentGenerated;
+      if (typeof markFn === 'function') {
+        markFn();
+        console.log('[paraphraseContent] ✅ markContentGenerated 호출 — 발행 버튼 활성화');
+      } else {
+        // window 노출 안 됐으면 직접 호출
+        enableSemiAutoPublishButton();
+        enableFullAutoPublishButton();
+      }
+    } catch (markErr) {
+      console.warn('[paraphraseContent] markContentGenerated 실패 (무시):', markErr);
+    }
+
     appendLog('✨ 페러프레이징 완료! 필드를 확인해주세요.');
     toastManager.success('✅ 페러프레이징 완료! 개선된 글이 반영되었습니다.', 5000);
   } catch (error: any) {
