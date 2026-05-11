@@ -350,28 +350,51 @@ async function quitAndInstallWithCleanup(updater: any, isSilent = false, isForce
     // [5] OS 파일 핸들 정리 시간
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    sendLogToRenderer('[Updater] cleanup 완료 → quitAndInstall 호출');
-    try {
-        updater.quitAndInstall(isSilent, isForceRunAfter);
-    } catch (e: any) {
-        sendLogToRenderer(`[Updater] quitAndInstall 호출 실패: ${e?.message || e}`);
-    }
+    sendLogToRenderer('[Updater] cleanup 완료 → installer spawn 후 즉시 exit');
 
-    // ✅ [v2.10.101] 사용자 보고: 자동 업데이트 시 NSIS 인스톨러 GUI가 *안 뜸*.
-    //   수동 다운로드로 같은 인스톨러 더블클릭하면 정상 진행.
-    //   차이: 자동은 electron-updater가 인스톨러 spawn 후 *부모(메인 앱) 종료 대기*.
-    //   before-quit 핸들러들이 추가 cleanup으로 메인 프로세스가 너무 오래 살아있음
-    //   → 인스톨러가 silent timeout으로 *조용히 종료* → GUI 안 뜸.
-    //   해결: quitAndInstall 호출 후 *1초 대기 → app.exit(0)* 강제 종료.
-    //   인스톨러는 그 사이에 spawn됐고 부모 종료 즉시 GUI 진행.
+    // Spawn the installer (detached, unref'd) then hard-exit immediately.
+    //
+    // Why not use updater.quitAndInstall():
+    //   BaseUpdater.quitAndInstall() internally calls setImmediate(app.quit) after spawning
+    //   the installer. app.quit() fires before-quit / will-quit handlers, keeping the parent
+    //   process alive. The NSIS --updated script (allowOnlyOneInstallerInstance.nsh) waits for
+    //   the parent PID to disappear before showing the GUI; if the parent lingers past its
+    //   internal timeout the installer silently exits — GUI never appears.
+    //
+    // Fix: spawn the installer directly with the same args NsisUpdater.doInstall() would use,
+    //   then call app.exit(0) synchronously. The installer is already detached+unref'd so it
+    //   survives the parent exit and shows its GUI immediately.
     try {
         const { app } = require('electron');
-        setTimeout(() => {
-            sendLogToRenderer('[Updater] app.exit(0) 강제 종료 — 인스톨러 GUI 진행 보장');
-            app.exit(0);
-        }, 1000);
+        const { spawn } = require('child_process');
+        const installerPath: string | null = updater.installerPath;
+
+        if (installerPath) {
+            const args = ['--updated'];
+            if (isSilent) args.push('/S');
+            if (isForceRunAfter) args.push('--force-run');
+
+            sendLogToRenderer(`[Updater] spawning installer: ${installerPath} ${args.join(' ')}`);
+            const child = spawn(installerPath, args, {
+                detached: true,
+                stdio: 'ignore',
+            });
+            child.unref();
+        } else {
+            // Fallback: let electron-updater handle spawn, then force-exit
+            sendLogToRenderer('[Updater] installerPath null, falling back to updater.quitAndInstall');
+            updater.quitAndInstall(isSilent, isForceRunAfter);
+        }
+
+        // Hard-exit: bypass all quit handlers so the parent disappears immediately.
+        // The installer is already running detached and does not need the parent alive.
+        sendLogToRenderer('[Updater] app.exit(0) — parent exits, installer GUI proceeds');
+        app.exit(0);
     } catch (e: any) {
-        sendLogToRenderer(`[Updater] app.exit 호출 실패: ${e?.message || e}`);
+        sendLogToRenderer(`[Updater] spawn/exit 실패, updater 폴백: ${e?.message || e}`);
+        try {
+            updater.quitAndInstall(isSilent, isForceRunAfter);
+        } catch (_) { /* ignore */ }
     }
 }
 
