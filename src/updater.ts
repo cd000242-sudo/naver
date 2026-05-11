@@ -272,10 +272,45 @@ export function downloadUpdate(): void {
 
 /**
  * 업데이트 설치 및 재시작
+ * v2.10.96: cleanup 포함 — 자식 프로세스 lock 잔존으로 인한 "cannot be closed" 차단.
  */
-export function quitAndInstall(): void {
+export async function quitAndInstall(): Promise<void> {
     const updater = getAutoUpdater();
-    if (updater) updater.quitAndInstall();
+    if (updater) await quitAndInstallWithCleanup(updater);
+}
+
+/**
+ * ✅ [v2.10.96] quitAndInstall 직전 자식 프로세스 강제 정리.
+ *
+ * 사용자 보고: "Better Life Naver cannot be closed" 모달 발생.
+ * Agent 분석 (sonnet) 결과:
+ *   - updater.quitAndInstall() 직전 cleanup 코드 *전혀 없음*
+ *   - LEWORD spawn은 `detached:true + child.unref()` 조합 → 부모 죽어도 자식 생존
+ *   - killAllTrackedChildren()는 before-quit 핸들러에 있지만 quitAndInstall 경로엔 호출 안 됨
+ *
+ * 이 헬퍼가 quitAndInstall 모든 호출지점 직전에 실행되어:
+ *   1. detached LEWORD 등 추적된 자식 프로세스를 taskkill /F /T로 종료
+ *   2. 500ms 대기 (OS 파일 핸들 정리 시간)
+ *   3. updater.quitAndInstall() 호출
+ *
+ * cleanup 실패해도 quitAndInstall은 진행 — NSIS의 customInit 매크로가 2차 안전망.
+ */
+async function quitAndInstallWithCleanup(updater: any, isSilent = false, isForceRunAfter = true): Promise<void> {
+    try {
+        // 추적된 자식 프로세스 (LEWORD 등) 강제 종료
+        const { killAllTrackedChildren } = require('./runtime/childProcessRegistry.js');
+        await killAllTrackedChildren();
+        sendLogToRenderer('[Updater] killAllTrackedChildren 완료');
+    } catch (e: any) {
+        sendLogToRenderer(`[Updater] cleanup 실패 (계속 진행): ${e?.message || e}`);
+    }
+    // OS 파일 핸들 정리 시간 + main process 종료 시퀀스 안정화
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    try {
+        updater.quitAndInstall(isSilent, isForceRunAfter);
+    } catch (e: any) {
+        sendLogToRenderer(`[Updater] quitAndInstall 호출 실패: ${e?.message || e}`);
+    }
 }
 
 /**
@@ -387,7 +422,7 @@ export function initAutoUpdaterEarly(): void {
                 progressWindow.hide();
             }
 
-            dialog.showMessageBox(targetWindow, dialogOptions).then(() => {
+            dialog.showMessageBox(targetWindow, dialogOptions).then(async () => {
                 sendLogToRenderer('[Updater] 사용자가 업데이트 확인, 재시작 실행');
                 closeProgressWindow();
                 // ✅ [2026-03-07] 인증창이 열려있으면 닫기 (업데이트 재시작 시)
@@ -395,15 +430,15 @@ export function initAutoUpdaterEarly(): void {
                     sendLogToRenderer('[Updater] 인증창 닫기 (업데이트 재시작)');
                     loginWindow.close();
                 }
-                updater.quitAndInstall();
-            }).catch((err) => {
+                // v2.10.96: cleanup 후 quitAndInstall (자식 프로세스 lock 잔존 차단)
+                await quitAndInstallWithCleanup(updater);
+            }).catch(async (err) => {
                 sendLogToRenderer(`[Updater] 다이얼로그 에러: ${err}`);
                 closeProgressWindow();
-                // ✅ [2026-03-07] 인증창이 열려있으면 닫기 (업데이트 재시작 시)
                 if (loginWindow && !loginWindow.isDestroyed()) {
                     loginWindow.close();
                 }
-                updater.quitAndInstall();
+                await quitAndInstallWithCleanup(updater);
             });
         } else {
             sendLogToRenderer('[Updater] targetWindow 없음, 진행률 창에서 완료 표시');
@@ -422,7 +457,8 @@ export function initAutoUpdaterEarly(): void {
                         sendLogToRenderer('[Updater] 인증창 닫기 (업데이트 재시작)');
                         loginWindow.close();
                     }
-                    updater.quitAndInstall();
+                    // v2.10.96: cleanup 후 quitAndInstall
+                    quitAndInstallWithCleanup(updater).catch(() => {});
                 };
 
                 progressWindow.webContents.executeJavaScript(`
@@ -448,12 +484,12 @@ export function initAutoUpdaterEarly(): void {
                 }, 5000);
             } else {
                 // 진행률 창도 없으면 독립 다이얼로그 표시
-                dialog.showMessageBox(dialogOptions).then(() => {
-                    // ✅ [2026-03-07] 인증창이 열려있으면 닫기 (업데이트 재시작 시)
+                dialog.showMessageBox(dialogOptions).then(async () => {
                     if (loginWindow && !loginWindow.isDestroyed()) {
                         loginWindow.close();
                     }
-                    updater.quitAndInstall();
+                    // v2.10.96: cleanup 후 quitAndInstall
+                    await quitAndInstallWithCleanup(updater);
                 });
             }
         }
