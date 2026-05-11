@@ -277,6 +277,51 @@ import { runWhenIdle } from './utils/idleInit.js';
 import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// ✅ [v2.10.109] 메모리/DOM 누수 진단 도구 — 사용자 보고: 작동할수록 점진적 느려짐.
+//   원인 후보: DOM 누수, listener 누수, MutationObserver 누수, 메모리 누수.
+//   진단 방식:
+//     - 매 클릭 후 0.5초에 스냅샷 (어떤 인터랙션이 누수 만드는지 식별)
+//     - 10초마다 주기 스냅샷 (백그라운드 누수 식별)
+//   콘솔에 DOM element 수 + 메모리(MB) + delta 출력.
+//   사용자가 환경설정 열고/닫고/버튼 누르고 → 어느 시점에 +N 큰지 보면 즉시 진단.
+// ═══════════════════════════════════════════════════════════════════════════════
+(function setupMemoryMonitor() {
+  let _lastSnapshot = { elements: 0, mem: 0 };
+  let _snapshotCount = 0;
+  const snapshot = (label: string) => {
+    try {
+      const elements = document.querySelectorAll('*').length;
+      const memInfo = (performance as any).memory;
+      const mem = memInfo ? Math.round(memInfo.usedJSHeapSize / 1024 / 1024) : 0;
+      const deltaEl = elements - _lastSnapshot.elements;
+      const deltaMem = mem - _lastSnapshot.mem;
+      // 첫 스냅샷은 baseline, 그 다음부터 delta 의미 있음
+      if (_snapshotCount > 0) {
+        const elArrow = deltaEl > 100 ? '🚨' : deltaEl > 30 ? '⚠️' : deltaEl > 0 ? '+' : '';
+        const memArrow = deltaMem > 10 ? '🚨' : deltaMem > 3 ? '⚠️' : deltaMem > 0 ? '+' : '';
+        console.warn(
+          `[Monitor ${label}] DOM=${elements} ${elArrow}${deltaEl > 0 ? '+' : ''}${deltaEl}  Mem=${mem}MB ${memArrow}${deltaMem > 0 ? '+' : ''}${deltaMem}`
+        );
+      } else {
+        console.warn(`[Monitor ${label}] baseline DOM=${elements} Mem=${mem}MB`);
+      }
+      _lastSnapshot = { elements, mem };
+      _snapshotCount++;
+    } catch { /* ignore */ }
+  };
+  // 매 클릭 후 0.5초 (모달 렌더링 완료 대기)
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const label = target?.id || target?.className?.toString().slice(0, 30) || target?.tagName || 'click';
+    setTimeout(() => snapshot(`click:${label}`), 500);
+  }, true);
+  // 10초마다 주기 스냅샷
+  setInterval(() => snapshot('periodic-10s'), 10000);
+  // 초기 baseline은 init 완료 후 (DOMContentLoaded + 2s)
+  setTimeout(() => snapshot('initial'), 2000);
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // ✅ [v2.10.106] 글로벌 img error 핸들러 — broken img 자동 숨김.
 //   sonnet agent 분석: 6 파일의 19개 <img> 태그에 onerror 핸들러 없음.
 //   삭제된 파일을 src로 가진 img가 ERR_FILE_NOT_FOUND 콘솔 오염 + 레이아웃 깨짐.
