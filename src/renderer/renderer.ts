@@ -2322,12 +2322,18 @@ async function initializeApplication(): Promise<void> {
     }
   });
 
-  // ✅ [v2.10.110] 강제 yield — 매 init 후 무조건 main thread 양보.
-  //   v2.10.92 _yieldIfNeeded(50ms)로도 1분 freeze 잔존: 한 init이 200ms+ 걸리면 그 init 내부는 양보 못 함.
-  //   해결: 매 init 직후 setTimeout(0)으로 강제 yield → 어떤 init이 무겁든 main thread block 16ms 이내 회복.
-  //   "응답 없음" 영구 차단. 총 init 시간 ~100ms 증가하지만 사용자 응답성이 최우선.
+  // [v2.10.112 REVERT] 조건부 yield 복귀 — v2.10.92 패턴.
+  //   v2.10.110 강제 yield(매 init 후 setTimeout 0)가 multiAccountManager의 main-add-account-btn /
+  //   ma-add-account-btn 클릭 미반응 회귀 원인 의심. setTimeout chain 사이에 DOM/listener race 가능성.
+  //   50ms 임계로 복귀: 무거운 init만 yield, 가벼운 init은 즉시 → 회귀 차단.
+  const YIELD_THRESHOLD_MS = 50;
+  let _yieldLastT = performance.now();
   const _yieldIfNeeded = async (): Promise<void> => {
-    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    const now = performance.now();
+    if (now - _yieldLastT > YIELD_THRESHOLD_MS) {
+      await yield_();
+      _yieldLastT = performance.now();
+    }
   };
 
   _perfMark('DOMContentLoaded 진입 → [Init] 시작');

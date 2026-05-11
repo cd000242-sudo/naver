@@ -660,11 +660,10 @@ try {
         //   - 사용자 측정: SEVERE 2099ms (renderer.js V8 평가) → 예상 1200ms 이하
         minifyIdentifiers: true,
         keepNames: true,
-        // ✅ [v2.10.110] pure: console.log/info/debug 호출을 dead-code elimination 대상으로 표시.
-        //   runtime no-op으로는 인자 평가 비용(JSON.stringify, getComputedStyle, querySelector 등)이
-        //   여전히 실행됨 — pure를 명시하면 인자가 side-effect-free일 때 호출 자체+인자가 제거됨.
-        //   warn/error는 보존 (PerfDebug v2.10.93 호환).
-        pure: ['console.log', 'console.info', 'console.debug'],
+        // [v2.10.112 REVERT] pure 옵션 제거 — 사용자 보고 main-add-account-btn / ma-add-account-btn 클릭 미반응.
+        //   esbuild의 pure가 side-effect 가능 호출을 보수적으로 제거 안 한다지만,
+        //   일부 hot-path 함수 호출이 의도치 않게 제거됐을 가능성. 회귀 차단 위해 원복.
+        //   console.log 인자 평가 비용은 runtime no-op만으로 충분 (v2.10.41).
         target: 'chrome120', // Electron 31의 Chromium
         legalComments: 'none',
       });
