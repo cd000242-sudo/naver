@@ -280,32 +280,61 @@ export async function quitAndInstall(): Promise<void> {
 }
 
 /**
- * ✅ [v2.10.96] quitAndInstall 직전 자식 프로세스 강제 정리.
+ * ✅ [v2.10.97] quitAndInstall 직전 *완전한* cleanup 보장.
  *
- * 사용자 보고: "Better Life Naver cannot be closed" 모달 발생.
- * Agent 분석 (sonnet) 결과:
- *   - updater.quitAndInstall() 직전 cleanup 코드 *전혀 없음*
- *   - LEWORD spawn은 `detached:true + child.unref()` 조합 → 부모 죽어도 자식 생존
- *   - killAllTrackedChildren()는 before-quit 핸들러에 있지만 quitAndInstall 경로엔 호출 안 됨
+ * v2.10.96 부족 진단:
+ *   - before-quit 핸들러가 async지만 Electron이 await 안 함 → cleanup 미완료 상태로 종료
+ *   - v2.10.96에서 추가한 cleanup은 killAllTrackedChildren()만 호출
+ *   - resetFlowState / cleanupImageFxBrowser / flushGeminiUsage 누락 → Puppeteer/Playwright
+ *     browser 자식 프로세스가 파일 핸들 유지 → NSIS 덮어쓰기 실패 → "cannot be closed"
  *
- * 이 헬퍼가 quitAndInstall 모든 호출지점 직전에 실행되어:
- *   1. detached LEWORD 등 추적된 자식 프로세스를 taskkill /F /T로 종료
- *   2. 500ms 대기 (OS 파일 핸들 정리 시간)
- *   3. updater.quitAndInstall() 호출
+ * 수정: before-quit 핸들러의 4개 cleanup을 *모두* 여기서 await 호출.
  *
- * cleanup 실패해도 quitAndInstall은 진행 — NSIS의 customInit 매크로가 2차 안전망.
+ * cleanup 실패해도 quitAndInstall은 진행 — NSIS customInit 매크로가 2차 안전망.
  */
 async function quitAndInstallWithCleanup(updater: any, isSilent = false, isForceRunAfter = true): Promise<void> {
+    sendLogToRenderer('[Updater] cleanup 시작 — browser 자식 프로세스 모두 종료');
+
+    // [1] Gemini 사용량 디스크 flush (락 잔존 위험은 낮지만 데이터 보존)
     try {
-        // 추적된 자식 프로세스 (LEWORD 등) 강제 종료
+        const { flushGeminiUsage } = require('./gemini.js');
+        await flushGeminiUsage();
+        sendLogToRenderer('[Updater] ✅ Gemini flush 완료');
+    } catch (e: any) {
+        sendLogToRenderer(`[Updater] Gemini flush 실패 (무시): ${e?.message || e}`);
+    }
+
+    // [2] Flow persistent context close (Playwright Chromium 자식)
+    try {
+        const { resetFlowState } = require('./image/flowGenerator.js');
+        await resetFlowState();
+        sendLogToRenderer('[Updater] ✅ Flow context close 완료');
+    } catch (e: any) {
+        sendLogToRenderer(`[Updater] Flow close 실패 (무시): ${e?.message || e}`);
+    }
+
+    // [3] ImageFX browser close (Playwright Chromium 자식)
+    try {
+        const { cleanupImageFxBrowser } = require('./image/imageFxGenerator.js');
+        await cleanupImageFxBrowser();
+        sendLogToRenderer('[Updater] ✅ ImageFX close 완료');
+    } catch (e: any) {
+        sendLogToRenderer(`[Updater] ImageFX close 실패 (무시): ${e?.message || e}`);
+    }
+
+    // [4] 추적된 자식 프로세스 (LEWORD 등 detached:true spawn) 강제 종료
+    try {
         const { killAllTrackedChildren } = require('./runtime/childProcessRegistry.js');
         await killAllTrackedChildren();
-        sendLogToRenderer('[Updater] killAllTrackedChildren 완료');
+        sendLogToRenderer('[Updater] ✅ killAllTrackedChildren 완료');
     } catch (e: any) {
-        sendLogToRenderer(`[Updater] cleanup 실패 (계속 진행): ${e?.message || e}`);
+        sendLogToRenderer(`[Updater] killAllTrackedChildren 실패 (무시): ${e?.message || e}`);
     }
-    // OS 파일 핸들 정리 시간 + main process 종료 시퀀스 안정화
-    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    // [5] OS 파일 핸들 정리 시간 — 500ms → 1500ms로 증가 (저사양에서 안정)
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    sendLogToRenderer('[Updater] cleanup 완료 → quitAndInstall 호출');
     try {
         updater.quitAndInstall(isSilent, isForceRunAfter);
     } catch (e: any) {
