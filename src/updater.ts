@@ -352,46 +352,45 @@ async function quitAndInstallWithCleanup(updater: any, isSilent = false, isForce
 
     sendLogToRenderer('[Updater] cleanup 완료 → installer spawn 후 즉시 exit');
 
-    // Spawn the installer (detached, unref'd) then hard-exit immediately.
+    // ✅ [v2.10.103] shell.openPath — OS가 직접 새 프로세스로 인스톨러 실행.
+    //   v2.10.102의 child_process.spawn(detached:true) + app.exit(0)도 실패했다는 보고 →
+    //   spawn된 인스톨러가 *우리 메인 프로세스의 child로 등록되어* parent PID 추적 시 우리가 부모로 잡힘.
+    //   수동 더블클릭은 OS(explorer)가 *직접* 인스톨러 실행 → 부모가 explorer.exe → 우리 앱 무관.
     //
-    // Why not use updater.quitAndInstall():
-    //   BaseUpdater.quitAndInstall() internally calls setImmediate(app.quit) after spawning
-    //   the installer. app.quit() fires before-quit / will-quit handlers, keeping the parent
-    //   process alive. The NSIS --updated script (allowOnlyOneInstallerInstance.nsh) waits for
-    //   the parent PID to disappear before showing the GUI; if the parent lingers past its
-    //   internal timeout the installer silently exits — GUI never appears.
-    //
-    // Fix: spawn the installer directly with the same args NsisUpdater.doInstall() would use,
-    //   then call app.exit(0) synchronously. The installer is already detached+unref'd so it
-    //   survives the parent exit and shows its GUI immediately.
+    //   shell.openPath()는 OS의 *기본 파일 핸들러*로 실행 (Windows: ShellExecute). 즉
+    //   사용자가 파일 더블클릭한 *것과 동일한 OS 흐름*. 인스톨러의 parent는 우리 앱이 아니라
+    //   OS shell → allowOnlyOneInstallerInstance 매크로가 우리 PID 종료 안 기다림 → GUI 즉시.
     try {
-        const { app } = require('electron');
-        const { spawn } = require('child_process');
+        const { app, shell } = require('electron');
         const installerPath: string | null = updater.installerPath;
 
         if (installerPath) {
-            const args = ['--updated'];
-            if (isSilent) args.push('/S');
-            if (isForceRunAfter) args.push('--force-run');
-
-            sendLogToRenderer(`[Updater] spawning installer: ${installerPath} ${args.join(' ')}`);
-            const child = spawn(installerPath, args, {
-                detached: true,
-                stdio: 'ignore',
-            });
-            child.unref();
+            sendLogToRenderer(`[Updater] shell.openPath 시도: ${installerPath}`);
+            // shell.openPath는 Promise<string> 반환 — 빈 string이면 성공, 비면 에러 메시지
+            const openResult = await shell.openPath(installerPath);
+            if (openResult) {
+                sendLogToRenderer(`[Updater] ⚠️ shell.openPath 에러: ${openResult} — spawn fallback`);
+                // Fallback: detached spawn
+                const { spawn } = require('child_process');
+                const args = ['--updated'];
+                if (isSilent) args.push('/S');
+                if (isForceRunAfter) args.push('--force-run');
+                const child = spawn(installerPath, args, { detached: true, stdio: 'ignore' });
+                child.unref();
+            } else {
+                sendLogToRenderer('[Updater] ✅ shell.openPath 성공 — OS가 인스톨러 실행 중');
+            }
         } else {
-            // Fallback: let electron-updater handle spawn, then force-exit
-            sendLogToRenderer('[Updater] installerPath null, falling back to updater.quitAndInstall');
+            sendLogToRenderer('[Updater] installerPath null, updater.quitAndInstall 폴백');
             updater.quitAndInstall(isSilent, isForceRunAfter);
         }
 
-        // Hard-exit: bypass all quit handlers so the parent disappears immediately.
-        // The installer is already running detached and does not need the parent alive.
-        sendLogToRenderer('[Updater] app.exit(0) — parent exits, installer GUI proceeds');
+        // 짧은 대기 후 강제 종료 — 인스톨러가 OS에게 등록될 시간 확보
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        sendLogToRenderer('[Updater] app.exit(0) — 메인 종료, 인스톨러는 OS 독립 실행 중');
         app.exit(0);
     } catch (e: any) {
-        sendLogToRenderer(`[Updater] spawn/exit 실패, updater 폴백: ${e?.message || e}`);
+        sendLogToRenderer(`[Updater] shell.openPath 실패, updater 폴백: ${e?.message || e}`);
         try {
             updater.quitAndInstall(isSilent, isForceRunAfter);
         } catch (_) { /* ignore */ }
