@@ -13,6 +13,9 @@ declare const UnifiedDOMCache: any;
 declare function appendLog(msg: string, ...args: any[]): void;
 declare function escapeHtml(str: string): string;
 declare function updateUnifiedPreview(content: any): void;
+// [v2.10.119] 페러프레이징 후 소제목 분석 + 이미지 관리 동기화용 — headingImageGen.ts:3132 정의됨.
+//   같은 renderer.js 번들 내라 런타임에 접근 가능. 일반 글 생성 흐름은 직접 호출 중.
+declare function autoAnalyzeHeadings(structuredContent: any): Promise<void>;
 declare function displayGeneratedImages(images: any[]): void;
 declare function updatePromptItemsWithImages(images: any[]): void;
 declare function syncGlobalImagesFromImageManager(): void;
@@ -1598,13 +1601,27 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
       console.warn('[paraphraseContent] ⚠️ 저장 실패 (기능에는 영향 없음):', saveErr);
     }
 
-    // [v2.10.118] 이미지 관리 / 다른 모듈 동기화 — input/textarea change 이벤트 dispatch.
-    //   다른 모듈(이미지 관리 등)이 input 이벤트 listen 시 자동 갱신.
+    // [v2.10.119] 소제목 분석 + 이미지 관리 동기화 — 일반 글 생성 흐름은 자동 호출하지만
+    //   페러프레이징 누락이 사용자 보고 원인 (P1/P2/P3 에이전트 분석 일치).
+    //   headings 있으면 autoAnalyzeHeadings 호출 → 이미지 관리 탭 자동 갱신 + 영어 프롬프트 채움.
+    if (Array.isArray(structuredContent.headings) && structuredContent.headings.length > 0) {
+      try {
+        appendLog('🔍 페러프레이징 후 소제목 분석 자동 실행...');
+        await autoAnalyzeHeadings(structuredContent);
+        appendLog('✅ 소제목 분석 완료');
+      } catch (analyzeErr) {
+        console.warn('[paraphraseContent] autoAnalyzeHeadings 실패 (무시):', analyzeErr);
+        appendLog(`⚠️ 소제목 자동 분석 실패: ${(analyzeErr as Error).message}`);
+      }
+    }
+    // [v2.10.118 REMOVE] input/change dispatch 제거 — listener 없어서 무효 (P2/P6 검증).
+    // [v2.10.119] 글 목록 펼치기 강제 — posts-list-content가 접힌 상태(display:none)면
+    //   새 글이 저장돼도 안 보임 (P4 에이전트 발견). 페러프레이징 직후 자동 펼치기.
     try {
-      titleInput?.dispatchEvent(new Event('input', { bubbles: true }));
-      titleInput?.dispatchEvent(new Event('change', { bubbles: true }));
-      contentTextarea?.dispatchEvent(new Event('input', { bubbles: true }));
-      contentTextarea?.dispatchEvent(new Event('change', { bubbles: true }));
+      const postsContent = document.getElementById('posts-list-content');
+      if (postsContent && postsContent.style.display === 'none') {
+        postsContent.style.display = 'block';
+      }
     } catch { /* ignore */ }
 
     // 미리보기 및 목록 업데이트
