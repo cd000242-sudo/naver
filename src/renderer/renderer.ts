@@ -2451,6 +2451,16 @@ async function initializeApplication(): Promise<void> {
   }
 
   // ━━━━━━━━━━━━ v2.10.92: 매 init 후 시간 기준 자동 yield ━━━━━━━━━━━━
+  // ✅ [v2.10.107] 글 목록 렌더 *전*에 stale 이미지 정리 (batch IPC → ~100ms).
+  //   사용자 보고: 콘솔 ERR_FILE_NOT_FOUND 폭주. 이전 setTimeout(3000)는 글 목록 렌더 후에
+  //   실행되어 첫 렌더에 broken img가 DOM에 들어가 ERR 발생. 이제 렌더 전 await로
+  //   stale 데이터를 미리 제거 → DOM에 broken src 자체가 안 들어감 → ERR 0건.
+  //   cleanupStaleImageReferences는 line 121에서 static import됨 (v2.10.86 검증 통과).
+  try {
+    await cleanupStaleImageReferences();
+    _perfMark('cleanupStaleImages (글 목록 렌더 전)');
+  } catch (e) { console.warn('[Init] cleanup 실패 (무시):', e); }
+
   initUnifiedTab(); _perfMark('initUnifiedTab'); await _yieldIfNeeded();
   initImageLibrary(); _perfMark('initImageLibrary'); await _yieldIfNeeded();
   initThumbnailGenerator(); _perfMark('initThumbnailGenerator'); await _yieldIfNeeded();
@@ -2514,10 +2524,7 @@ async function initializeApplication(): Promise<void> {
     restoreAutosavedContent();
   }, 1000);
 
-  // ✅ [v2.7.57] 사라진 이미지 참조 정리 (1회) — ERR_FILE_NOT_FOUND 콘솔 노이즈 제거
-  setTimeout(() => {
-    cleanupStaleImageReferences().catch(() => { /* 무시 */ });
-  }, 3000);
+  // v2.10.107: cleanup을 글 목록 렌더 *전*으로 이동 (위에서 await 호출). setTimeout 제거.
 
   console.log('[Init] 애플리케이션 초기화 완료');
 }

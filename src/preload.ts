@@ -132,6 +132,8 @@ contextBridge.exposeInMainWorld('api', {
   searchImagesForHeadings: (payload: { headings: string[]; mainKeyword: string; sourceUrl?: string }): Promise<{ success: boolean; images: Record<string, string[]>; message?: string }> =>
     ipcRenderer.invoke('search-images-for-headings', payload),
   checkFileExists: (filePath: string): Promise<boolean> => ipcRenderer.invoke('file:checkExists', filePath),
+  // v2.10.107: batch — cleanupStaleImageReferences가 N IPC를 1 IPC로 단축
+  checkFileExistsBatch: (filePaths: string[]): Promise<boolean[]> => ipcRenderer.invoke('file:checkExistsBatch', filePaths),
 
   readDir: (dirPath: string): Promise<string[]> => ipcRenderer.invoke('file:readDir', dirPath),
   readDirWithStats: (dirPath: string): Promise<Array<{ name: string; isFile: boolean; isDirectory: boolean; size: number; mtime: number; birthtime: number; ctime: number }>> => ipcRenderer.invoke('file:readDirWithStats', dirPath),

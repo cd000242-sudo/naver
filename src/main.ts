@@ -2485,6 +2485,18 @@ ipcMain.handle('file:checkExists', async (_event, filePath: string) => {
   }
 });
 
+// ✅ [v2.10.107] batch 버전 — 1 IPC로 N개 경로 검증.
+//   cleanupStaleImageReferences가 글 1000장당 1000 IPC 호출하던 문제 해결.
+//   batch는 fs sync 호출이라 100ms 안에 완료 → cleanup을 글 목록 렌더 전 await 가능.
+ipcMain.handle('file:checkExistsBatch', async (_event, filePaths: string[]) => {
+  if (!Array.isArray(filePaths)) return [];
+  const fsSync = await import('fs');
+  return filePaths.map((p) => {
+    if (typeof p !== 'string' || !p) return false;
+    try { return fsSync.existsSync(p); } catch { return false; }
+  });
+});
+
 ipcMain.handle('file:readDir', async (_event, dirPath: string) => {
   try {
     const fs = await import('fs/promises');

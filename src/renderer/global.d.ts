@@ -306,6 +306,7 @@ interface AutomationAPI {
     message?: string;
   }>;
   checkFileExists?: (filePath: string) => Promise<boolean>; // ✅ 파일 존재 확인
+  checkFileExistsBatch?: (filePaths: string[]) => Promise<boolean[]>; // ✅ [v2.10.107] batch 검증
   readDir?: (dirPath: string) => Promise<string[]>; // ✅ 디렉토리 읽기
   readDirWithStats?: (dirPath: string) => Promise<Array<{ name: string; isFile: boolean; isDirectory: boolean; size: number; mtime: number; birthtime: number; ctime: number }>>; // ✅ 디렉토리 읽기 (파일 정보 포함)
   getFileStats?: (filePath: string) => Promise<{ isFile: boolean; isDirectory: boolean; size: number; mtime: number; birthtime: number; ctime: number } | null>; // ✅ 파일/폴더 정보 가져오기

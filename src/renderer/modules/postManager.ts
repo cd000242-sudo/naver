@@ -268,35 +268,91 @@ export async function cleanupStaleImageReferences(): Promise<void> {
   staleImageCleanupRunning = true;
   try {
     const api = (window as any).api;
-    if (!api?.checkFileExists) return;
+    if (!api?.checkFileExistsBatch && !api?.checkFileExists) return;
 
     const raw = localStorage.getItem(GENERATED_POSTS_KEY);
-    if (!raw) {
-      localStorage.setItem(STALE_IMAGE_CLEANUP_DONE_KEY, 'true');
-      return;
-    }
+    if (!raw) return;
 
     const posts: GeneratedPost[] = JSON.parse(raw);
-    let droppedRefs = 0;
-    let droppedImages = 0;
 
-    for (const post of posts) {
-      if (!Array.isArray(post.images) || post.images.length === 0) continue;
-      const cleaned: any[] = [];
-      for (const img of post.images as any[]) {
+    // ✅ [v2.10.107] batch 검증 — 1 IPC로 *모든* filePath 한 번에 확인.
+    //   이전: 글 1000장 × 10 이미지 = 10,000 IPC → 수 초~수십 초. setTimeout 3초로 미루던 원인.
+    //   batch: 1 IPC + fs.existsSync 일괄 → 100ms 이내. 글 목록 렌더 *전*에 await 가능.
+
+    // 경로 정규화 함수 — file:/// prefix + URL escape + slash 통일
+    const normalize = (p: string): string => {
+      let n = String(p);
+      if (n.startsWith('file:///')) n = n.slice(8);
+      else if (n.startsWith('file://')) n = n.slice(7);
+      try { n = decodeURIComponent(n); } catch { /* keep */ }
+      n = n.replace(/\//g, '\\');
+      return n;
+    };
+
+    // 외부 Desktop/temp 경로 감지 (즉시 차단, IPC 안 함)
+    const isExternalPath = (filePath: string): boolean => {
+      const lower = String(filePath).toLowerCase();
+      return lower.includes('\\desktop\\') || lower.includes('/desktop/') ||
+             lower.includes('\\temp\\') || lower.includes('/tmp/');
+    };
+
+    // 1단계: 검증 필요한 모든 filePath 수집 + 인덱스 매핑
+    const checkRequests: Array<{ postIdx: number; imgIdx: number; normalized: string }> = [];
+    for (let pi = 0; pi < posts.length; pi++) {
+      const post = posts[pi];
+      if (!Array.isArray(post.images)) continue;
+      for (let ii = 0; ii < post.images.length; ii++) {
+        const img = post.images[ii] as any;
         if (!img) continue;
         const filePath = img.filePath || img.savedToLocal;
-        if (!filePath) {
-          cleaned.push(img);
+        if (!filePath) continue;
+        if (isExternalPath(filePath)) {
+          // 외부 경로는 즉시 false 처리 — IPC 안 함
           continue;
         }
-        // ✅ [v2.7.93] 의심 경로 즉시 차단 — 외부 Desktop/임시 경로
-        const lower = String(filePath).toLowerCase();
-        const isExternalPath = lower.includes('\\desktop\\') ||
-                                lower.includes('/desktop/') ||
-                                lower.includes('\\temp\\') ||
-                                lower.includes('/tmp/');
-        if (isExternalPath) {
+        checkRequests.push({ postIdx: pi, imgIdx: ii, normalized: normalize(filePath) });
+      }
+    }
+
+    // 2단계: batch IPC 1회 호출
+    let existsResults: boolean[] = [];
+    if (checkRequests.length > 0) {
+      if (api.checkFileExistsBatch) {
+        existsResults = await api.checkFileExistsBatch(checkRequests.map((r) => r.normalized));
+      } else {
+        // Fallback: 개별 호출 (구버전 호환)
+        for (const req of checkRequests) {
+          try { existsResults.push(await api.checkFileExists(req.normalized)); }
+          catch { existsResults.push(true); /* 보수적 유지 */ }
+        }
+      }
+    }
+
+    // 3단계: 결과 적용 + posts 데이터 재구성
+    let droppedRefs = 0;
+    let droppedImages = 0;
+    const existsMap = new Map<string, boolean>();
+    for (let i = 0; i < checkRequests.length; i++) {
+      const key = `${checkRequests[i].postIdx}:${checkRequests[i].imgIdx}`;
+      existsMap.set(key, !!existsResults[i]);
+    }
+
+    for (let pi = 0; pi < posts.length; pi++) {
+      const post = posts[pi];
+      if (!Array.isArray(post.images) || post.images.length === 0) continue;
+      const cleaned: any[] = [];
+      for (let ii = 0; ii < post.images.length; ii++) {
+        const img = post.images[ii] as any;
+        if (!img) continue;
+        const filePath = img.filePath || img.savedToLocal;
+        if (!filePath) { cleaned.push(img); continue; }
+
+        const external = isExternalPath(filePath);
+        const exists = external ? false : (existsMap.get(`${pi}:${ii}`) ?? true);
+
+        if (exists) {
+          cleaned.push(img);
+        } else {
           const hasFallback = !!(img.previewDataUrl || img.url);
           if (hasFallback) {
             const next = { ...img };
@@ -307,39 +363,6 @@ export async function cleanupStaleImageReferences(): Promise<void> {
           } else {
             droppedImages++;
           }
-          continue;
-        }
-        try {
-          // ✅ [v2.10.106] 경로 정규화 — file:/// prefix 및 URL escape 제거.
-          //   sonnet agent: 'file:///C:/Users/...' 형태로 저장된 경우 fs.existsSync 항상 false →
-          //   cleanup이 실행돼도 *통과시켜* stale 잔존. 정규화 후 IPC 호출.
-          let normalizedPath = String(filePath);
-          if (normalizedPath.startsWith('file:///')) {
-            normalizedPath = normalizedPath.slice(8); // 'file:///' (8자) 제거
-          } else if (normalizedPath.startsWith('file://')) {
-            normalizedPath = normalizedPath.slice(7);
-          }
-          // URL escape 디코딩 (한글 경로의 %EB%B0%95 같은 형태 → 박)
-          try { normalizedPath = decodeURIComponent(normalizedPath); } catch { /* keep */ }
-          // 슬래시 정규화 (Windows 백슬래시 통일)
-          normalizedPath = normalizedPath.replace(/\//g, '\\');
-          const exists = await api.checkFileExists(normalizedPath);
-          if (exists) {
-            cleaned.push(img);
-          } else {
-            const hasFallback = !!(img.previewDataUrl || img.url);
-            if (hasFallback) {
-              const next = { ...img };
-              delete next.filePath;
-              delete next.savedToLocal;
-              cleaned.push(next);
-              droppedRefs++;
-            } else {
-              droppedImages++;
-            }
-          }
-        } catch {
-          cleaned.push(img); // IPC 실패 시 보수적 유지
         }
       }
       post.images = cleaned;
@@ -347,9 +370,8 @@ export async function cleanupStaleImageReferences(): Promise<void> {
 
     if (droppedRefs > 0 || droppedImages > 0) {
       safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
-      console.log(`[StaleImageCleanup] 🧹 ${droppedRefs}개 stale filePath 제거 + ${droppedImages}개 이미지 항목 삭제`);
+      console.log(`[StaleImageCleanup] 🧹 batch: ${droppedRefs}개 stale filePath + ${droppedImages}개 이미지 항목 (1 IPC)`);
     }
-    // v2.10.106: done 플래그 *설정 안 함* — 매 앱 시작 시 자동 cleanup 보장.
   } catch (err) {
     console.warn('[StaleImageCleanup] 정리 실패 (무시):', err);
   } finally {
