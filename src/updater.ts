@@ -356,6 +356,23 @@ async function quitAndInstallWithCleanup(updater: any, isSilent = false, isForce
     } catch (e: any) {
         sendLogToRenderer(`[Updater] quitAndInstall 호출 실패: ${e?.message || e}`);
     }
+
+    // ✅ [v2.10.101] 사용자 보고: 자동 업데이트 시 NSIS 인스톨러 GUI가 *안 뜸*.
+    //   수동 다운로드로 같은 인스톨러 더블클릭하면 정상 진행.
+    //   차이: 자동은 electron-updater가 인스톨러 spawn 후 *부모(메인 앱) 종료 대기*.
+    //   before-quit 핸들러들이 추가 cleanup으로 메인 프로세스가 너무 오래 살아있음
+    //   → 인스톨러가 silent timeout으로 *조용히 종료* → GUI 안 뜸.
+    //   해결: quitAndInstall 호출 후 *1초 대기 → app.exit(0)* 강제 종료.
+    //   인스톨러는 그 사이에 spawn됐고 부모 종료 즉시 GUI 진행.
+    try {
+        const { app } = require('electron');
+        setTimeout(() => {
+            sendLogToRenderer('[Updater] app.exit(0) 강제 종료 — 인스톨러 GUI 진행 보장');
+            app.exit(0);
+        }, 1000);
+    } catch (e: any) {
+        sendLogToRenderer(`[Updater] app.exit 호출 실패: ${e?.message || e}`);
+    }
 }
 
 /**
