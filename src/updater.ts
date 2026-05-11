@@ -300,43 +300,54 @@ export async function quitAndInstall(): Promise<void> {
 async function quitAndInstallWithCleanup(updater: any, isSilent = false, isForceRunAfter = true): Promise<void> {
     sendLogToRenderer('[Updater] cleanup 시작 — browser 자식 프로세스 모두 종료');
 
-    // [1] Gemini 사용량 디스크 flush (락 잔존 위험은 낮지만 데이터 보존)
+    // ✅ [v2.10.100] 각 cleanup에 *3초 timeout* 강제. 사용자 보고: 재시작 버튼 누른 후 hang.
+    //   원인: cleanupImageFxBrowser의 await adsPowerGet (HTTP 30~60s timeout),
+    //         context.close() 자식 프로세스 crash 시 hang 등. timeout 없이 await만 하면 영원히 멈춤.
+    //   수정: Promise.race로 3초 후 강제 진행. cleanup 실패해도 quitAndInstall 도달 보장.
+    const withTimeout = <T>(promise: Promise<T>, ms: number, label: string): Promise<void> =>
+        Promise.race([
+            promise.then(() => { sendLogToRenderer(`[Updater] ✅ ${label} 완료`); }),
+            new Promise<void>((resolve) => setTimeout(() => {
+                sendLogToRenderer(`[Updater] ⏱️ ${label} ${ms}ms timeout — 강제 진행`);
+                resolve();
+            }, ms)),
+        ]).catch((e: any) => {
+            sendLogToRenderer(`[Updater] ${label} 실패 (무시): ${e?.message || e}`);
+        });
+
+    // [1] Gemini 사용량 flush (디스크 IO 짧음 — 2초 충분)
     try {
         const { flushGeminiUsage } = require('./gemini.js');
-        await flushGeminiUsage();
-        sendLogToRenderer('[Updater] ✅ Gemini flush 완료');
+        await withTimeout(flushGeminiUsage(), 2000, 'Gemini flush');
     } catch (e: any) {
-        sendLogToRenderer(`[Updater] Gemini flush 실패 (무시): ${e?.message || e}`);
+        sendLogToRenderer(`[Updater] Gemini flush 동기 오류 (무시): ${e?.message || e}`);
     }
 
-    // [2] Flow persistent context close (Playwright Chromium 자식)
+    // [2] Flow persistent context close — 3초 timeout (Playwright Chromium crash 시 hang 방지)
     try {
         const { resetFlowState } = require('./image/flowGenerator.js');
-        await resetFlowState();
-        sendLogToRenderer('[Updater] ✅ Flow context close 완료');
+        await withTimeout(resetFlowState(), 3000, 'Flow context close');
     } catch (e: any) {
-        sendLogToRenderer(`[Updater] Flow close 실패 (무시): ${e?.message || e}`);
+        sendLogToRenderer(`[Updater] Flow close 동기 오류 (무시): ${e?.message || e}`);
     }
 
-    // [3] ImageFX browser close (Playwright Chromium 자식)
+    // [3] ImageFX browser close — 3초 timeout (AdsPower HTTP 30s timeout 위험)
     try {
         const { cleanupImageFxBrowser } = require('./image/imageFxGenerator.js');
-        await cleanupImageFxBrowser();
-        sendLogToRenderer('[Updater] ✅ ImageFX close 완료');
+        await withTimeout(cleanupImageFxBrowser(), 3000, 'ImageFX close');
     } catch (e: any) {
-        sendLogToRenderer(`[Updater] ImageFX close 실패 (무시): ${e?.message || e}`);
+        sendLogToRenderer(`[Updater] ImageFX close 동기 오류 (무시): ${e?.message || e}`);
     }
 
-    // [4] 추적된 자식 프로세스 (LEWORD 등 detached:true spawn) 강제 종료
+    // [4] 추적된 자식 프로세스 (LEWORD 등 detached spawn) — 2초 timeout (taskkill 빠름)
     try {
         const { killAllTrackedChildren } = require('./runtime/childProcessRegistry.js');
-        await killAllTrackedChildren();
-        sendLogToRenderer('[Updater] ✅ killAllTrackedChildren 완료');
+        await withTimeout(killAllTrackedChildren(), 2000, 'killAllTrackedChildren');
     } catch (e: any) {
-        sendLogToRenderer(`[Updater] killAllTrackedChildren 실패 (무시): ${e?.message || e}`);
+        sendLogToRenderer(`[Updater] killAllTrackedChildren 동기 오류 (무시): ${e?.message || e}`);
     }
 
-    // [5] OS 파일 핸들 정리 시간 — 500ms → 1500ms로 증가 (저사양에서 안정)
+    // [5] OS 파일 핸들 정리 시간
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     sendLogToRenderer('[Updater] cleanup 완료 → quitAndInstall 호출');
