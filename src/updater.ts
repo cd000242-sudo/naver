@@ -298,102 +298,18 @@ export async function quitAndInstall(): Promise<void> {
  * cleanup 실패해도 quitAndInstall은 진행 — NSIS customInit 매크로가 2차 안전망.
  */
 async function quitAndInstallWithCleanup(updater: any, isSilent = false, isForceRunAfter = true): Promise<void> {
-    sendLogToRenderer('[Updater] cleanup 시작 — browser 자식 프로세스 모두 종료');
-
-    // ✅ [v2.10.100] 각 cleanup에 *3초 timeout* 강제. 사용자 보고: 재시작 버튼 누른 후 hang.
-    //   원인: cleanupImageFxBrowser의 await adsPowerGet (HTTP 30~60s timeout),
-    //         context.close() 자식 프로세스 crash 시 hang 등. timeout 없이 await만 하면 영원히 멈춤.
-    //   수정: Promise.race로 3초 후 강제 진행. cleanup 실패해도 quitAndInstall 도달 보장.
-    const withTimeout = <T>(promise: Promise<T>, ms: number, label: string): Promise<void> =>
-        Promise.race([
-            promise.then(() => { sendLogToRenderer(`[Updater] ✅ ${label} 완료`); }),
-            new Promise<void>((resolve) => setTimeout(() => {
-                sendLogToRenderer(`[Updater] ⏱️ ${label} ${ms}ms timeout — 강제 진행`);
-                resolve();
-            }, ms)),
-        ]).catch((e: any) => {
-            sendLogToRenderer(`[Updater] ${label} 실패 (무시): ${e?.message || e}`);
-        });
-
-    // [1] Gemini 사용량 flush (디스크 IO 짧음 — 2초 충분)
+    // ✅ [v2.10.104 REVERT] v2.10.96 이전 단순 흐름으로 되돌림.
+    //   사용자 보고: "기존엔 잘 됐었다, 왜 망가졌냐"
+    //   회귀 원인: v2.10.97~103에서 cleanup 함수들(flushGemini, resetFlow,
+    //     cleanupImageFx, killAllTracked) + spawn/shell.openPath 변형이
+    //     인스톨러의 *부모-자식 관계 추적*과 *cleanup 시점*을 깨뜨림.
+    //   v2.10.95+ NSIS installer.nsh의 customInit이 이미 taskkill /F /T 처리하므로
+    //     앱 측 cleanup이 *불필요*. NSIS 매크로 + 단순 updater.quitAndInstall이 정답.
+    sendLogToRenderer('[Updater] quitAndInstall 호출 (단순 흐름, NSIS 매크로가 자식 프로세스 처리)');
     try {
-        const { flushGeminiUsage } = require('./gemini.js');
-        await withTimeout(flushGeminiUsage(), 2000, 'Gemini flush');
+        updater.quitAndInstall(isSilent, isForceRunAfter);
     } catch (e: any) {
-        sendLogToRenderer(`[Updater] Gemini flush 동기 오류 (무시): ${e?.message || e}`);
-    }
-
-    // [2] Flow persistent context close — 3초 timeout (Playwright Chromium crash 시 hang 방지)
-    try {
-        const { resetFlowState } = require('./image/flowGenerator.js');
-        await withTimeout(resetFlowState(), 3000, 'Flow context close');
-    } catch (e: any) {
-        sendLogToRenderer(`[Updater] Flow close 동기 오류 (무시): ${e?.message || e}`);
-    }
-
-    // [3] ImageFX browser close — 3초 timeout (AdsPower HTTP 30s timeout 위험)
-    try {
-        const { cleanupImageFxBrowser } = require('./image/imageFxGenerator.js');
-        await withTimeout(cleanupImageFxBrowser(), 3000, 'ImageFX close');
-    } catch (e: any) {
-        sendLogToRenderer(`[Updater] ImageFX close 동기 오류 (무시): ${e?.message || e}`);
-    }
-
-    // [4] 추적된 자식 프로세스 (LEWORD 등 detached spawn) — 2초 timeout (taskkill 빠름)
-    try {
-        const { killAllTrackedChildren } = require('./runtime/childProcessRegistry.js');
-        await withTimeout(killAllTrackedChildren(), 2000, 'killAllTrackedChildren');
-    } catch (e: any) {
-        sendLogToRenderer(`[Updater] killAllTrackedChildren 동기 오류 (무시): ${e?.message || e}`);
-    }
-
-    // [5] OS 파일 핸들 정리 시간
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    sendLogToRenderer('[Updater] cleanup 완료 → installer spawn 후 즉시 exit');
-
-    // ✅ [v2.10.103] shell.openPath — OS가 직접 새 프로세스로 인스톨러 실행.
-    //   v2.10.102의 child_process.spawn(detached:true) + app.exit(0)도 실패했다는 보고 →
-    //   spawn된 인스톨러가 *우리 메인 프로세스의 child로 등록되어* parent PID 추적 시 우리가 부모로 잡힘.
-    //   수동 더블클릭은 OS(explorer)가 *직접* 인스톨러 실행 → 부모가 explorer.exe → 우리 앱 무관.
-    //
-    //   shell.openPath()는 OS의 *기본 파일 핸들러*로 실행 (Windows: ShellExecute). 즉
-    //   사용자가 파일 더블클릭한 *것과 동일한 OS 흐름*. 인스톨러의 parent는 우리 앱이 아니라
-    //   OS shell → allowOnlyOneInstallerInstance 매크로가 우리 PID 종료 안 기다림 → GUI 즉시.
-    try {
-        const { app, shell } = require('electron');
-        const installerPath: string | null = updater.installerPath;
-
-        if (installerPath) {
-            sendLogToRenderer(`[Updater] shell.openPath 시도: ${installerPath}`);
-            // shell.openPath는 Promise<string> 반환 — 빈 string이면 성공, 비면 에러 메시지
-            const openResult = await shell.openPath(installerPath);
-            if (openResult) {
-                sendLogToRenderer(`[Updater] ⚠️ shell.openPath 에러: ${openResult} — spawn fallback`);
-                // Fallback: detached spawn
-                const { spawn } = require('child_process');
-                const args = ['--updated'];
-                if (isSilent) args.push('/S');
-                if (isForceRunAfter) args.push('--force-run');
-                const child = spawn(installerPath, args, { detached: true, stdio: 'ignore' });
-                child.unref();
-            } else {
-                sendLogToRenderer('[Updater] ✅ shell.openPath 성공 — OS가 인스톨러 실행 중');
-            }
-        } else {
-            sendLogToRenderer('[Updater] installerPath null, updater.quitAndInstall 폴백');
-            updater.quitAndInstall(isSilent, isForceRunAfter);
-        }
-
-        // 짧은 대기 후 강제 종료 — 인스톨러가 OS에게 등록될 시간 확보
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        sendLogToRenderer('[Updater] app.exit(0) — 메인 종료, 인스톨러는 OS 독립 실행 중');
-        app.exit(0);
-    } catch (e: any) {
-        sendLogToRenderer(`[Updater] shell.openPath 실패, updater 폴백: ${e?.message || e}`);
-        try {
-            updater.quitAndInstall(isSilent, isForceRunAfter);
-        } catch (_) { /* ignore */ }
+        sendLogToRenderer(`[Updater] quitAndInstall 호출 실패: ${e?.message || e}`);
     }
 }
 
