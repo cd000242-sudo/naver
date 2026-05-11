@@ -19,6 +19,8 @@ import {
 } from './image/tableImageGenerator.js';
 import { extractProsConsWithGemini } from './image/geminiTableExtractor.js';
 import { browserSessionManager, type SessionInfo } from './browserSessionManager.js';
+// [v2.10.113] 명시적 쿠키 파일 저장/복원 — userDataDir 보조 안전망 (캡차 반복 차단)
+import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromFile } from './sessionPersistence.js';
 import { withRetry, findWithFallback, clickWithRetry, navigateWithRetry, isRetryableError } from './errorRecovery.js';
 import { createGhostCursor, safeClick, safeType, safeClickInFrame, waitRandom, randomMouseMovement, type GhostCursor } from './ghostCursorHelper.js';
 import * as imageHelpers from './automation/imageHelpers';
@@ -2102,20 +2104,44 @@ export class NaverBlogAutomation {
   }
 
   /**
-   * 쿠키 저장 (userDataDir 사용 시 브라우저가 자동 관리하므로 간소화)
+   * 쿠키 저장 — userDataDir + 명시적 파일 이중 안전망 (v2.10.113)
+   * 사용자 보고: 세션 유지 안 됨, 캡차 자주 뜸 → userDataDir만으로는 불충분.
+   * sessionPersistence.saveCookies로 cookies.json 별도 저장.
    */
   private async saveCookies(): Promise<void> {
-    // userDataDir를 사용하면 브라우저가 자동으로 쿠키를 저장하므로
-    // 별도 파일 저장 불필요 (로그만 남김)
-    this.log('🍪 로그인 쿠키가 브라우저 프로필에 자동 저장되었습니다.');
+    try {
+      const page = this.ensurePage();
+      const naverId = this.options.naverId;
+      if (page && naverId) {
+        await saveCookiesToFile(page, naverId);
+        this.log('🍪 쿠키 저장 완료 (userDataDir + 명시적 파일 이중 안전망)');
+      } else {
+        this.log('🍪 쿠키 저장 스킵 (page 또는 naverId 없음)');
+      }
+    } catch (e) {
+      this.log(`⚠️ 명시적 쿠키 저장 실패 (userDataDir는 유효): ${(e as Error).message}`);
+    }
   }
 
   /**
-   * 쿠키 로드 (userDataDir 사용 시 브라우저가 자동 로드하므로 간소화)
+   * 쿠키 로드 — userDataDir 우선 + 파일 폴백 (v2.10.113)
+   * userDataDir가 쿠키를 로드 못 한 경우 cookies.json에서 복원.
    */
   private async loadCookies(): Promise<boolean> {
-    // userDataDir를 사용하면 브라우저가 자동으로 쿠키를 로드하므로
-    // 별도 파일 로드 불필요 (항상 true 반환)
+    try {
+      const page = this.ensurePage();
+      const naverId = this.options.naverId;
+      if (page && naverId) {
+        const restored = await restoreCookiesFromFile(page, naverId);
+        if (restored) {
+          this.log('🍪 쿠키 파일 복원 성공 (캡차 회피 안전망)');
+          return true;
+        }
+      }
+    } catch (e) {
+      this.log(`⚠️ 쿠키 파일 복원 실패 (userDataDir 폴백): ${(e as Error).message}`);
+    }
+    // userDataDir가 이미 로드했으므로 항상 true
     return true;
   }
 

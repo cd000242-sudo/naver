@@ -5653,10 +5653,16 @@
                 <h3 style="color: #4ade80; margin: 0 0 1rem 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
                     <span style="font-size: 1.3rem;">💰</span> 비용 절감 옵션 (선택)
                 </h3>
-                <div style="background: rgba(0,0,0,0.3); padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">
-                    <strong style="color: #fde68a;">⚠️ 주의:</strong> 모두 기본 OFF입니다. ON 시에만 동작이 변경되며, 사용자 선택 모델은 100% 존중됩니다 (silent 폴백 0).<br>
-                    환경변수 <code style="background: rgba(0,0,0,0.4); padding: 1px 4px; border-radius: 3px;">ECC_DISABLE_OPTION_C=1</code> 으로 모든 옵션 긴급 차단 가능.
-                </div>
+                <!-- [v2.10.113] 주의 박스: 접을 수 있는 + 흰 배경 (가독성 ↑) -->
+                <details style="margin-bottom: 1rem; background: #ffffff; border: 1px solid rgba(0,0,0,0.15); border-radius: 8px; overflow: hidden;">
+                    <summary style="padding: 0.6rem 0.85rem; cursor: pointer; font-size: 0.85rem; font-weight: 700; color: #b45309; user-select: none; list-style: none;">
+                        ⚠️ 주의사항 (클릭하여 펼치기)
+                    </summary>
+                    <div style="padding: 0.75rem 0.9rem; border-top: 1px solid rgba(0,0,0,0.1); font-size: 0.8rem; color: #1f2937; line-height: 1.6;">
+                        모두 기본 <strong>OFF</strong>입니다. ON 시에만 동작이 변경되며, 사용자 선택 모델은 100% 존중됩니다 (silent 폴백 0).<br>
+                        환경변수 <code style="background: #f3f4f6; color: #b91c1c; padding: 1px 6px; border-radius: 3px; font-family: monospace;">ECC_DISABLE_OPTION_C=1</code> 으로 모든 옵션 긴급 차단 가능.
+                    </div>
+                </details>
 
                 <!-- 1. 비용 절감 모드 -->
                 <div class="field" style="margin-bottom: 1rem;">
