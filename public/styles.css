@@ -3362,3 +3362,24 @@ select option {
   opacity: 1 !important;
   z-index: 1000 !important;
 }
+/* ============================================
+   [v2.10.120] 환경설정 모달 텍스트 가독성 강화
+   사용자 보고: "환경설정 ui 어둡다니까?? 텍스트안보여"
+   원인: --text-muted: #C9A961 탁한 골드 + --bg-primary: #0F0F0F 검정 → contrast 부족
+   수정: settings-modal 한정으로 CSS 변수 재정의 → 다른 영역 영향 없음
+   ============================================ */
+#settings-modal {
+  --text-muted: #e5e7eb;      /* 탁한 골드 → 밝은 회색 */
+  --text-strong: #ffffff;      /* 골드 → 흰색 (가독성 최우선) */
+  --text-gold-dark: #fde68a;   /* 어두운 골드 → 밝은 노랑 */
+}
+#settings-modal .settings-content,
+#settings-modal .modal-content {
+  color: #e5e7eb;
+}
+#settings-modal label,
+#settings-modal p,
+#settings-modal span:not([style*="color"]),
+#settings-modal div:not([style*="color"]) {
+  color: inherit;
+}
