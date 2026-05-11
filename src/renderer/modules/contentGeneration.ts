@@ -1439,12 +1439,20 @@ export async function paraphraseContent(): Promise<void> {
 [AI티 제거 필수]
 ❌ 절대 금지: "물론", "확실히", "분명히", "~것입니다", "~하겠습니다"
 ❌ 절대 금지: "살펴보겠습니다", "알아보겠습니다", "정리하자면"
+❌ 절대 금지 (정보형 클리셰 — 사용자 보고 자주 나타남):
+   "알고보니", "실생활에 적용해보니", "확실히 다르다고 느낀 건"
+   "비용 대비 효율을 따지면", "하나하나 뜯어보니", "직접 사용해보니"
+   "꼼꼼히 살펴보면", "자세히 분석해보면", "면밀히 검토하면"
 ✅ 대신 사용: "저도 그랬어요", "솔직히", "근데", "그래서", "아무튼"
 
 [문체 규칙]
 - 사용자가 선택한 글톤(STYLE OVERRIDE)에 맞는 어미를 사용하라
 - 기본값: 자연스러운 구어체 (사용자 설정이 없을 때만)
 - AI 특유의 딱딱한 설명체 금지
+- ⚠️ 원본 글의 *주제/장르*를 반드시 유지하라:
+  · 스타/연예 이슈 글 → 정보형/리뷰형 표현("비용 대비", "실생활 적용") 절대 금지
+  · 정보형 글 → 가십/감정형 표현 절대 금지
+  · 원본의 주제와 맞지 않는 클리셰 삽입 = 글 망침. 절대 추가 금지.
 
 ════════════════════════════════════════
 📌 제목 100점 재작성
@@ -1649,6 +1657,16 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
       console.warn('[paraphraseContent] 통합 미리보기 갱신 실패 (무시):', previewErr);
     }
     refreshGeneratedPostsList();
+
+    // [v2.10.122] 이미지 관리 탭 제목 자동 입력 — AI 자동 수집 바로 사용 가능하게.
+    //   headingImageGen.ts:2234 ai-auto-collect-save-btn이 #image-title을 읽어 검색 키워드로 사용.
+    //   페러프레이징 후 사용자가 이미지 관리 탭에서 즉시 "AI 자동 수집" 클릭 가능.
+    try {
+      const imageTitleInput = document.getElementById('image-title') as HTMLInputElement | null;
+      if (imageTitleInput && structuredContent.selectedTitle) {
+        imageTitleInput.value = structuredContent.selectedTitle;
+      }
+    } catch { /* ignore */ }
 
     // [v2.10.121] 반자동/풀오토 발행 버튼 활성화 — 페러프레이징도 콘텐츠 생성 완료로 마킹.
     //   tailUIUtils.ts:557~568이 일반 글 생성 버튼 클릭만 listen → 페러프레이징 버튼 누락.

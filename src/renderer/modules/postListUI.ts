@@ -15,6 +15,7 @@ declare const GENERATED_POSTS_CATEGORY_COLLAPSE_PREFIX: string;
 declare let isGalleryView: boolean;
 declare let currentPostId: string;
 declare function appendLog(msg: string): void;
+declare function autoAnalyzeHeadings(structuredContent: any): Promise<void>;
 declare function escapeHtml(str: string): string;
 declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function loadGeneratedPosts(): any[];
@@ -1128,6 +1129,28 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
     appendLog(`▶️ 발행 버튼 활성화 완료 — 반자동/풀오토 모두 사용 가능`);
   } catch (e: any) {
     console.warn('[postListUI] 발행 버튼 활성화 실패:', e?.message);
+  }
+
+  // [v2.10.122] 글 불러오기 후 소제목 분석 자동 호출 — 썸네일은 보이지만 소제목 분석 안 됨 사용자 보고.
+  //   일반 글 생성/페러프레이징은 autoAnalyzeHeadings 호출되지만 글 불러오기 흐름은 누락.
+  //   같은 renderer.js 번들 내라 직접 호출 가능 (declare function 적용).
+  try {
+    const sc = (window as any).currentStructuredContent;
+    const headings = sc && Array.isArray(sc.headings) ? sc.headings : (post.headings || []);
+    if (Array.isArray(headings) && headings.length > 0) {
+      const scForAnalyze = sc || { headings, selectedTitle: post.title, bodyPlain: post.content };
+      appendLog('🔍 글 불러오기 후 소제목 분석 자동 실행...');
+      autoAnalyzeHeadings(scForAnalyze).then(() => {
+        appendLog('✅ 소제목 분석 완료');
+      }).catch((err: any) => {
+        console.warn('[postListUI] autoAnalyzeHeadings 실패 (무시):', err);
+      });
+    }
+    // 이미지 관리 탭 제목 자동 입력 (페러프레이징 fix와 동일 패턴)
+    const imageTitleInput = document.getElementById('image-title') as HTMLInputElement | null;
+    if (imageTitleInput && post.title) imageTitleInput.value = post.title;
+  } catch (e: any) {
+    console.warn('[postListUI] 소제목 분석 트리거 실패:', e?.message);
   }
 
   // ✅ [2026-01-22] 카테고리 복원
