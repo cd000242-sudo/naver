@@ -1597,6 +1597,28 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
 
     // 미리보기 및 목록 업데이트
     updateUnifiedPreview(structuredContent);
+    // [v2.10.117] 페러프레이징 결과를 통합 미리보기에 직접 채움.
+    //   updateUnifiedPreview는 섹션 표시만 함. 일반 글 생성은 별도 흐름에서 updateUnifiedImagePreview 호출하지만
+    //   페러프레이징은 호출 안 됐음 → 미리보기 placeholder만 남고 본문 안 보임.
+    //   headings 있으면 일반 미리보기, 없으면 bodyPlain plain 텍스트로 표시.
+    try {
+      const integratedPreview = document.getElementById('unified-integrated-preview');
+      if (integratedPreview) {
+        const headings = Array.isArray(structuredContent.headings) ? structuredContent.headings : [];
+        const body = String(structuredContent.bodyPlain || structuredContent.content || '').trim();
+        if (headings.length > 0) {
+          // window 노출된 updateUnifiedImagePreview 호출 (일반 흐름 재사용)
+          const fn = (window as any).updateUnifiedImagePreview;
+          if (typeof fn === 'function') fn(headings, []);
+        } else if (body) {
+          // 페러프레이징 plain body만 — XSS 방지 escape
+          const safe = body.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          integratedPreview.innerHTML = `<div style="padding: 0.5rem; line-height: 1.7; white-space: pre-wrap; color: var(--text-strong); font-size: 0.95rem;">${safe}</div>`;
+        }
+      }
+    } catch (previewErr) {
+      console.warn('[paraphraseContent] 통합 미리보기 갱신 실패 (무시):', previewErr);
+    }
     refreshGeneratedPostsList();
 
     appendLog('✨ 페러프레이징 완료! 필드를 확인해주세요.');
