@@ -8646,6 +8646,10 @@ async function checkLicense(): Promise<boolean> {
         if (!loginWindow || loginWindow.isDestroyed()) {
           clearInterval(checkInterval);
           debugLog('[checkLicense] Login window closed, checking license validity...');
+          // [v2.10.116] 라이선스 확인 중 splash 재표시 — 검은 화면 / "응답 없음" 차단.
+          //   로그인 창 닫힘 → ensureLicenseValid (X초) → 메인 윈도우 생성. 그 사이 빈 화면.
+          //   splash가 메인 윈도우 ready까지 표시 (line 1610 createMainWindow 시 closeSplash 호출됨).
+          showSplash();
           const isValid = await ensureLicenseValid();
           debugLog(`[checkLicense] ensureLicenseValid result: ${isValid}`);
           if (isValid) {
@@ -8660,6 +8664,7 @@ async function checkLicense(): Promise<boolean> {
               }
               mainWindow.focus();
               mainWindow.show();
+              closeSplash(); // 메인 이미 표시 → splash 즉시 닫기
             } else {
               debugLog('[checkLicense] Main window will be created by login:success handler');
             }
@@ -8667,6 +8672,7 @@ async function checkLicense(): Promise<boolean> {
           } else {
             // 라이선스가 유효하지 않으면 앱 종료
             debugLog('[checkLicense] License not valid after login window closed, quitting app');
+            closeSplash();
             app.quit();
             resolve(false);
           }
@@ -8742,6 +8748,10 @@ async function checkLicense(): Promise<boolean> {
         if (!loginWindow || loginWindow.isDestroyed()) {
           clearInterval(checkInterval);
           debugLog('[checkLicense] Login window closed, checking license validity...');
+          // [v2.10.116] 라이선스 확인 중 splash 재표시 — 검은 화면 / "응답 없음" 차단.
+          //   로그인 창 닫힘 → ensureLicenseValid (X초) → 메인 윈도우 생성. 그 사이 빈 화면.
+          //   splash가 메인 윈도우 ready까지 표시 (line 1610 createMainWindow 시 closeSplash 호출됨).
+          showSplash();
           const isValid = await ensureLicenseValid();
           debugLog(`[checkLicense] ensureLicenseValid result: ${isValid}`);
           if (isValid) {
@@ -8756,6 +8766,7 @@ async function checkLicense(): Promise<boolean> {
               }
               mainWindow.focus();
               mainWindow.show();
+              closeSplash(); // 메인 이미 표시 → splash 즉시 닫기
             } else {
               debugLog('[checkLicense] Main window will be created by login:success handler');
             }
@@ -8763,6 +8774,7 @@ async function checkLicense(): Promise<boolean> {
           } else {
             // 라이선스가 유효하지 않으면 앱 종료
             debugLog('[checkLicense] License not valid after login window closed, quitting app');
+            closeSplash();
             app.quit();
             resolve(false);
           }
