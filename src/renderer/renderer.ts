@@ -3727,7 +3727,9 @@ URL: ${firstUrl}
       } catch (error) {
         console.error('[Unified] URL 기반 글 생성 오류:', error);
         const errorMessage = (error as Error).message || '알 수 없는 오류가 발생했습니다.';
-        alert(`❌ 글 생성 중 오류가 발생했습니다.\n\n오류: ${errorMessage}\n\n콘솔을 확인해주세요.`);
+        // [v2.10.115] alert → toast — native alert이 main thread 8초+ block (PerformanceObserver SEVERE).
+        //   사용자가 "확인" 누르기까지 JS 이벤트 루프 정지. toast는 main thread block 안 함.
+        toastManager.error(`❌ 글 생성 실패: ${errorMessage}`);
         appendLog(`❌ URL 기반 글 생성 실패: ${errorMessage}`);
       } finally {
         // 버튼 상태 복원
@@ -3918,8 +3920,10 @@ URL: ${firstUrl}
 `;
         }
 
-        alert(`❌ 글 생성 중 오류가 발생했습니다.\n\n오류: ${errorMessage}\n${solutionGuide}`);
+        // [v2.10.115] alert → toast (8초 main thread block 차단)
+        toastManager.error(`❌ 글 생성 실패: ${errorMessage}`);
         appendLog(`❌ 키워드 기반 글 생성 실패: ${errorMessage}`);
+        appendLog(solutionGuide);
       } finally {
         // 버튼 상태 복원
         if (generateManualBtn) {
