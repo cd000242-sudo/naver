@@ -8113,6 +8113,12 @@ function initTabSwitching() {
   const internalTabs = ['main', 'unified'];
   const externalTabs = ['image-tools', 'images', 'schedule', 'analytics'];
 
+  // [v2.10.111] 캐시 — 매 클릭마다 querySelectorAll('.tab-panel') + '[id^="unified-only-"]'
+  //   attribute selector 풀스캔 비용을 1회로 줄임. DOM 7579개에서 65~200ms LongTask 원인.
+  const tabPanelsCache = Array.from(document.querySelectorAll('.tab-panel')) as HTMLElement[];
+  const unifiedOnlySectionsCache = Array.from(document.querySelectorAll('[id^="unified-only-"]')) as HTMLElement[];
+  const excludedSections = new Set(['unified-only-progress-container', 'unified-only-preview-section', 'unified-only-semi-auto-section']);
+
   tabButtons.forEach(button => {
     button.addEventListener('click', () => {
       const targetTab = button.getAttribute('data-tab');
@@ -8128,11 +8134,10 @@ function initTabSwitching() {
       button.classList.add('active');
       button.setAttribute('aria-selected', 'true');
 
-      // 모든 탭 패널 숨기기
-      const tabPanels = document.querySelectorAll('.tab-panel');
-      tabPanels.forEach(panel => {
+      // 모든 탭 패널 숨기기 (캐시 사용 — 풀스캔 제거)
+      tabPanelsCache.forEach(panel => {
         panel.classList.remove('active');
-        (panel as HTMLElement).style.display = 'none';
+        panel.style.display = 'none';
       });
 
       // 대상 탭 패널 표시
@@ -8142,14 +8147,11 @@ function initTabSwitching() {
         (targetPanel as HTMLElement).style.display = 'block';
       }
 
-      // ✅ unified 탭 전용 섹션 토글 (조건부 표시 섹션은 제외)
-      const unifiedOnlySections = document.querySelectorAll('[id^="unified-only-"]');
-      const excludedSections = ['unified-only-progress-container', 'unified-only-preview-section', 'unified-only-semi-auto-section'];
-      unifiedOnlySections.forEach(section => {
-        const sectionId = section.id;
-        // 조건부 표시 섹션은 자동으로 표시하지 않음
-        if (excludedSections.includes(sectionId)) return;
-        (section as HTMLElement).style.display = targetTab === 'unified' ? 'block' : 'none';
+      // ✅ unified 탭 전용 섹션 토글 (캐시 사용)
+      const showUnified = targetTab === 'unified';
+      unifiedOnlySectionsCache.forEach(section => {
+        if (excludedSections.has(section.id)) return;
+        section.style.display = showUnified ? 'block' : 'none';
       });
 
       // ✅ app-container의 min-height 조절 (외부 탭 전환 시 빈 공간 제거)
