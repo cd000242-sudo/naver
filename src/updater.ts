@@ -13,7 +13,12 @@ function getAutoUpdater() {
     try {
       const { autoUpdater: au } = require('electron-updater');
       au.autoDownload = true;
-      au.autoInstallOnAppQuit = true;
+      // ✅ [v2.10.98] autoInstallOnAppQuit = false로 변경 (silent 실패 차단)
+      //   이전: true → app.quit() 시 NSIS가 silent 모드로 자동 실행 → cleanup 없이 NSIS 진입 →
+      //         자식 프로세스 lock 잔존 → silent 실패 → 사용자는 *알림조차 못 보고* 영원히 옛 버전.
+      //   수정: false → 사용자가 *명시적*으로 재시작 다이얼로그 클릭해야 quitAndInstall 발동.
+      //         그 경로엔 v2.10.97 quitAndInstallWithCleanup이 적용되어 lock 잔존 차단.
+      au.autoInstallOnAppQuit = false;
       _autoUpdater = au;
     } catch (e) {
       console.warn('[Updater] electron-updater 로드 실패:', (e as Error).message);
@@ -428,8 +433,16 @@ export function initAutoUpdaterEarly(): void {
     updater.on('update-downloaded', (info: UpdateInfo) => {
         sendLogToRenderer(`[Updater] 다운로드 완료: ${info.version}`);
 
-        // ✅ [Premium UI] 세련된 강제 재시작 알림
-        const targetWindow = mainWindow && !mainWindow.isDestroyed() ? mainWindow : BrowserWindow.getFocusedWindow();
+        // ✅ [v2.10.98] mainWindow 누락 케이스 fallback — 어떤 윈도우든 잡아서 dialog 표시.
+        //   이전 버그: targetWindow 없으면 progressWindow click handler에 의존했는데
+        //   progressWindow가 destroyed면 dialog 자체가 안 떠 사용자가 "설치창이 안 뜬다" 인식.
+        //   수정: 모든 윈도우 후보 시도 (mainWindow → focused → 첫 visible → null로 일반 dialog).
+        let targetWindow = mainWindow && !mainWindow.isDestroyed() ? mainWindow : null;
+        if (!targetWindow) targetWindow = BrowserWindow.getFocusedWindow();
+        if (!targetWindow) {
+            const all = BrowserWindow.getAllWindows().filter((w) => !w.isDestroyed() && w.isVisible());
+            if (all.length > 0) targetWindow = all[0];
+        }
 
         // 다이얼로그 옵션 (재사용)
         const dialogOptions = {
