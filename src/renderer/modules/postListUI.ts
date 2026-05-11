@@ -46,6 +46,15 @@ declare function autoGenerateCTA(content?: any): void;
 declare function updateRiskIndicators(content?: any): void;
 
 export function refreshGeneratedPostsList(): void {
+  // 동기 진입점 — 비동기 실제 작업은 _refreshGeneratedPostsListAsync 위임
+  _refreshGeneratedPostsListAsync().catch((e) => console.warn('[postListUI] refresh 실패:', e));
+}
+
+// ✅ [v2.10.108] 렌더 *전* batch 검증 — broken file:// img가 DOM에 들어가기 *전*에 차단.
+//   사용자 보고: v2.10.107 cleanup이 작동 안 함 (localStorage namespace race 가능성).
+//   해결: refresh 시점마다 batch IPC로 모든 filePath 검증 → stale은 src에서 제거 후 렌더.
+//   첫 렌더부터 ERR_FILE_NOT_FOUND 0건 보장.
+async function _refreshGeneratedPostsListAsync(): Promise<void> {
   const listContainer = document.getElementById('generated-posts-list');
   const searchInput = document.getElementById('posts-search-input') as HTMLInputElement;
   const filterSelect = document.getElementById('posts-filter-select') as HTMLSelectElement;
@@ -56,6 +65,44 @@ export function refreshGeneratedPostsList(): void {
 
   // ✅ [2026-01-23 FIX] 모든 계정의 글을 표시 (계정별 분리로 인해 안 보이는 문제 해결)
   let posts = loadAllGeneratedPosts();
+
+  // ✅ [v2.10.108] 렌더 *전* batch 검증 — file:// filePath 모두 존재 여부 확인.
+  //   존재 안 하는 filePath는 메모리 posts 데이터에서 *즉시* 제거 → 렌더 시 broken src 없음.
+  try {
+    const api = (window as any).api;
+    if (api?.checkFileExistsBatch) {
+      const paths: string[] = [];
+      const refs: Array<{ img: any }> = [];
+      const normalize = (p: string): string => {
+        let n = String(p);
+        if (n.startsWith('file:///')) n = n.slice(8);
+        else if (n.startsWith('file://')) n = n.slice(7);
+        try { n = decodeURIComponent(n); } catch { /* keep */ }
+        return n.replace(/\//g, '\\');
+      };
+      for (const post of posts) {
+        for (const img of (post.images || []) as any[]) {
+          const fp = img?.filePath || img?.savedToLocal;
+          if (fp && (String(fp).startsWith('file:') || /^[A-Z]:[/\\]/i.test(String(fp)))) {
+            paths.push(normalize(String(fp)));
+            refs.push({ img });
+          }
+        }
+      }
+      if (paths.length > 0) {
+        const existsArr = await api.checkFileExistsBatch(paths);
+        for (let i = 0; i < refs.length; i++) {
+          if (!existsArr[i]) {
+            // 메모리 데이터에서만 제거 (localStorage는 cleanupStaleImageReferences가 별도 처리)
+            delete refs[i].img.filePath;
+            delete refs[i].img.savedToLocal;
+          }
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('[postListUI] batch validate 실패 (무시):', e);
+  }
   const totalCount = posts.length;
 
   // ✅ 통계 정보 계산
