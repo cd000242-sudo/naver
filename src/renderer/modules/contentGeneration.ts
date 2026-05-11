@@ -1588,12 +1588,24 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
     (window as any).currentStructuredContent = structuredContent;
 
     // ✅ [결함 #2] saveGeneratedPost 호출 — 결과 영구 저장
+    // [v2.10.118] forceNew: true — 5초 중복 방지 우회. 페러프레이징은 사용자 명시 행동.
+    //   원본 글과 제목/길이 비슷해도 *항상 새 글로* 글 목록에 추가.
     try {
-      saveGeneratedPost(structuredContent, false, { source: 'paraphrase' });
-      console.log('[paraphraseContent] ✅ 페러프레이징 결과 저장 완료');
+      const savedId = saveGeneratedPost(structuredContent, false, { forceNew: true } as any);
+      console.log('[paraphraseContent] ✅ 페러프레이징 결과 저장 완료, id=', savedId);
+      appendLog(`📝 페러프레이징 결과가 글 목록에 추가됨 (id: ${String(savedId).slice(-9)})`);
     } catch (saveErr) {
       console.warn('[paraphraseContent] ⚠️ 저장 실패 (기능에는 영향 없음):', saveErr);
     }
+
+    // [v2.10.118] 이미지 관리 / 다른 모듈 동기화 — input/textarea change 이벤트 dispatch.
+    //   다른 모듈(이미지 관리 등)이 input 이벤트 listen 시 자동 갱신.
+    try {
+      titleInput?.dispatchEvent(new Event('input', { bubbles: true }));
+      titleInput?.dispatchEvent(new Event('change', { bubbles: true }));
+      contentTextarea?.dispatchEvent(new Event('input', { bubbles: true }));
+      contentTextarea?.dispatchEvent(new Event('change', { bubbles: true }));
+    } catch { /* ignore */ }
 
     // 미리보기 및 목록 업데이트
     updateUnifiedPreview(structuredContent);

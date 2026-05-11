@@ -568,7 +568,7 @@ export function saveGeneratedPostFromData(
   }
 }
 
-export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = false, overrides?: { category?: string }): string | null {
+export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = false, overrides?: { category?: string; forceNew?: boolean }): string | null {
   try {
     const posts = loadGeneratedPosts();
     const title = structuredContent.selectedTitle || '';
@@ -576,7 +576,8 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
     // ✅ [v2.7.44] reviewer 권고 #2 — Math.abs/Math.max divide-by-zero 가드 강화
     //   기존(v2.7.40): newBodyLen=0 또는 existingBodyLen=0이면 similarLength=false → 가드 무력화
     //   수정: 본문 길이 양쪽 모두 30자 이상일 때만 비교, 그 외엔 제목+5초만으로 더블클릭 방지
-    if (!isUpdate && title) {
+    // [v2.10.118] forceNew: 페러프레이징 등 사용자 명시 행동에서 중복 방지 우회 (글 목록에 항상 새로 추가)
+    if (!isUpdate && title && !overrides?.forceNew) {
       const now = Date.now();
       const newBodyLen = (structuredContent.bodyPlain || structuredContent.content || '').length;
       const recentPost = posts.find(p => {
