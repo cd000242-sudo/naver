@@ -96,6 +96,12 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
             // 메모리 데이터에서만 제거 (localStorage는 cleanupStaleImageReferences가 별도 처리)
             delete refs[i].img.filePath;
             delete refs[i].img.savedToLocal;
+            // [v2.10.114] url 필드도 broken file:// 경로면 제거 — renderer fallback (firstImage.url)
+            //   ERR_FILE_NOT_FOUND 잔존 원인 (A1 회귀 검증 발견)
+            const urlStr = typeof refs[i].img.url === 'string' ? refs[i].img.url : '';
+            if (urlStr.startsWith('file:') || /^[A-Z]:[/\\]/i.test(urlStr)) {
+              delete refs[i].img.url;
+            }
           }
         }
       }
