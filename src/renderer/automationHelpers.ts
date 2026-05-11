@@ -321,7 +321,8 @@ export class ErrorHandler {
       logEntry.className = 'log-entry';
       logEntry.textContent = `[${timestamp}] ${message}`;
       logOutput.appendChild(logEntry);
-      logOutput.scrollTop = logOutput.scrollHeight;
+      // [v2.10.110] rAF 지연 — layout thrash 차단 (Agent I HIGH-2)
+      requestAnimationFrame(() => { logOutput.scrollTop = logOutput.scrollHeight; });
     }
     console.log(message);
   }

@@ -889,25 +889,26 @@ export function initHeadingImageGeneration(): void {
         appendLog('🤖 AI 프롬프트 번역 중... (소제목 → 영어 이미지 프롬프트)', 'images-log-output');
         const imageStyle = localStorage.getItem('imageStyle') || 'realistic';
         try {
-          const upgradeResults = await Promise.all(
-            filteredHeadings.map(async (h: any) => {
-              // 사용자 수동 오버라이드가 있으면 스킵
-              const override = getManualEnglishPromptOverrideForHeading(h.title);
-              if (override) {
-                h.prompt = override;
-                return;
+          // [v2.10.110] batch=3 동시성 제한 — 같은 파일 line 261 패턴과 통일.
+          //   이전: 30개 소제목 동시 AI 호출 → Gemini 429 rate limit. (Agent T HIGH-1)
+          const PROMPT_BATCH = 3;
+          const processOne = async (h: any) => {
+            const override = getManualEnglishPromptOverrideForHeading(h.title);
+            if (override) { h.prompt = override; return; }
+            try {
+              const aiPrompt = await generateEnglishPromptForHeading(h.title || '', undefined, imageStyle, h.content);
+              if (aiPrompt && aiPrompt.trim()) {
+                h.prompt = aiPrompt;
+                console.log(`[PromptUpgrade] ✅ AI 프롬프트 생성: "${String(h.title || '').substring(0, 25)}" → "${aiPrompt.substring(0, 60)}..."`);
               }
-              try {
-                const aiPrompt = await generateEnglishPromptForHeading(h.title || '', undefined, imageStyle, h.content);
-                if (aiPrompt && aiPrompt.trim()) {
-                  h.prompt = aiPrompt;
-                  console.log(`[PromptUpgrade] ✅ AI 프롬프트 생성: "${String(h.title || '').substring(0, 25)}" → "${aiPrompt.substring(0, 60)}..."`);
-                }
-              } catch (e) {
-                console.warn(`[PromptUpgrade] AI 프롬프트 실패, 기존 유지: "${h.title}"`, e);
-              }
-            })
-          );
+            } catch (e) {
+              console.warn(`[PromptUpgrade] AI 프롬프트 실패, 기존 유지: "${h.title}"`, e);
+            }
+          };
+          for (let s = 0; s < filteredHeadings.length; s += PROMPT_BATCH) {
+            const e = Math.min(s + PROMPT_BATCH, filteredHeadings.length);
+            await Promise.all(filteredHeadings.slice(s, e).map(processOne));
+          }
           appendLog(`✅ AI 프롬프트 번역 완료! ${filteredHeadings.length}개 소제목`, 'images-log-output');
           // ✅ [2026-03-09 FIX] aiProgressModal 중복 모달 제거 — liveImagePreview가 동일 역할 수행
         } catch (upgradeError) {
@@ -1539,8 +1540,11 @@ export function initHeadingImageGeneration(): void {
             results.push(await generateOne(filteredHeadings[i], i));
           }
         } else {
+          // [v2.10.110] Promise.all → allSettled — 1개 실패 시 나머지 fail-fast로 결과 버리는 누수 차단.
+          //   결과 null 처리는 line 1551에서 이미 처리됨. (Agent N LEAK-5)
           const imagePromises = filteredHeadings.map(async (heading: any, i: number) => generateOne(heading, i));
-          results.push(...(await Promise.all(imagePromises)));
+          const settled = await Promise.allSettled(imagePromises);
+          results.push(...settled.map(r => r.status === 'fulfilled' ? r.value : null));
         }
 
         // ✅ IMPORTANT: 결과 null(실패) 때문에 인덱스가 당겨지면 소제목 매칭이 깨짐.

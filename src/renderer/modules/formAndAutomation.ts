@@ -724,7 +724,9 @@ const aiProgressModal = {
         this.progressLog.removeChild(this.progressLog.firstElementChild as Element);
       }
 
-      this.progressLog.scrollTop = this.progressLog.scrollHeight;
+      // [v2.10.110] rAF 지연 — layout thrash 차단 (Agent I HIGH-2)
+      const log = this.progressLog;
+      requestAnimationFrame(() => { log.scrollTop = log.scrollHeight; });
     }
   },
 

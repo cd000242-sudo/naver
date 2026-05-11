@@ -660,6 +660,11 @@ try {
         //   - 사용자 측정: SEVERE 2099ms (renderer.js V8 평가) → 예상 1200ms 이하
         minifyIdentifiers: true,
         keepNames: true,
+        // ✅ [v2.10.110] pure: console.log/info/debug 호출을 dead-code elimination 대상으로 표시.
+        //   runtime no-op으로는 인자 평가 비용(JSON.stringify, getComputedStyle, querySelector 등)이
+        //   여전히 실행됨 — pure를 명시하면 인자가 side-effect-free일 때 호출 자체+인자가 제거됨.
+        //   warn/error는 보존 (PerfDebug v2.10.93 호환).
+        pure: ['console.log', 'console.info', 'console.debug'],
         target: 'chrome120', // Electron 31의 Chromium
         legalComments: 'none',
       });

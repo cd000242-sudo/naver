@@ -1045,7 +1045,9 @@ export async function initMultiAccountPublishModal() {
     });
 
     // 닫기
-    const closeModal = () => overlay.remove();
+    // [v2.10.110] handleEsc 누수 차단 — 모든 닫기 경로에서 keydown listener 정리
+    const handleEscRandom = (e: KeyboardEvent) => { if (e.key === 'Escape') closeModal(); };
+    const closeModal = () => { document.removeEventListener('keydown', handleEscRandom); overlay.remove(); };
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
     document.getElementById('ma-rnd-schedule-close')?.addEventListener('click', closeModal);
     document.getElementById('ma-rnd-schedule-cancel')?.addEventListener('click', closeModal);
@@ -1231,7 +1233,9 @@ export async function initMultiAccountPublishModal() {
     });
 
     // 닫기
-    const closeModal = () => overlay.remove();
+    // [v2.10.110] handleEsc 누수 차단 — 모든 닫기 경로에서 keydown listener 정리
+    const handleEscIndv = (e: KeyboardEvent) => { if (e.key === 'Escape') closeModal(); };
+    const closeModal = () => { document.removeEventListener('keydown', handleEscIndv); overlay.remove(); };
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
     document.getElementById('ma-indv-schedule-close')?.addEventListener('click', closeModal);
     document.getElementById('ma-indv-schedule-cancel')?.addEventListener('click', closeModal);
@@ -2778,7 +2782,8 @@ export async function initMultiAccountPublishModal() {
     while (liveLog.childElementCount > 150) {
       liveLog.removeChild(liveLog.firstElementChild as Element);
     }
-    liveLog.scrollTop = liveLog.scrollHeight;
+    // [v2.10.110] scrollTop=scrollHeight를 rAF로 지연 — layout thrash 차단 (Agent I HIGH-2)
+    requestAnimationFrame(() => { liveLog.scrollTop = liveLog.scrollHeight; });
   }
 
   // ✅ [2026-03-09 FIX] addProgressItem 정의 추가 (renderer.ts 모듈화 시 누락됨)
@@ -2816,7 +2821,8 @@ export async function initMultiAccountPublishModal() {
     while (progressList.childElementCount > 100) {
       progressList.removeChild(progressList.firstElementChild as Element);
     }
-    progressList.scrollTop = progressList.scrollHeight;
+    // [v2.10.110] rAF 지연 — layout thrash 차단
+    requestAnimationFrame(() => { progressList.scrollTop = progressList.scrollHeight; });
 
     // 로그에도 기록
     addMALog(message, type);

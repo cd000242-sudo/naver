@@ -1215,10 +1215,33 @@ function _initLogFile(): void {
   }
 }
 
+// [v2.10.110] 50MB cap + 5회 회전 — 이전: 무한 append로 24시간 운영 시 수백 MB 디스크 누적 (Agent O LEAK-2)
+const _LOG_FILE_MAX_BYTES = 50 * 1024 * 1024; // 50MB
+let _logSizeCheckCounter = 0;
+function _rotateLogIfTooLarge(): void {
+  // 매 100회 write마다 크기 검사 (sync stat 비용 절감)
+  if (++_logSizeCheckCounter % 100 !== 0) return;
+  try {
+    if (!_logFilePath) return;
+    const _fs = require('fs');
+    const _path = require('path');
+    const stat = _fs.statSync(_logFilePath);
+    if (stat.size < _LOG_FILE_MAX_BYTES) return;
+    // 회전: main.log → main.log.1 → .2 → ... → .5 (최대 5개 보존)
+    for (let i = 4; i >= 1; i--) {
+      const from = `${_logFilePath}.${i}`;
+      const to = `${_logFilePath}.${i + 1}`;
+      if (_fs.existsSync(from)) { try { _fs.renameSync(from, to); } catch { /* ignore */ } }
+    }
+    try { _fs.renameSync(_logFilePath, `${_logFilePath}.1`); } catch { /* ignore */ }
+  } catch { /* ignore */ }
+}
+
 function _writeToFile(level: string, msg: string): void {
   try {
     if (!_logFilePath) _initLogFile();
     if (!_logFilePath) return;
+    _rotateLogIfTooLarge();
     const _fs = require('fs');
     const ts = new Date().toISOString();
     _fs.appendFileSync(_logFilePath, `[${ts}] [${level.toUpperCase()}] ${msg}\n`);
@@ -2485,16 +2508,16 @@ ipcMain.handle('file:checkExists', async (_event, filePath: string) => {
   }
 });
 
-// ✅ [v2.10.107] batch 버전 — 1 IPC로 N개 경로 검증.
-//   cleanupStaleImageReferences가 글 1000장당 1000 IPC 호출하던 문제 해결.
-//   batch는 fs sync 호출이라 100ms 안에 완료 → cleanup을 글 목록 렌더 전 await 가능.
+// ✅ [v2.10.110] async I/O — 이전 fs.existsSync 순차는 1000개 × 30ms (HDD) = 30초 main process sync block.
+//   사용자 보고: "로그인 후 1분 응답없음". sync I/O가 main thread block → renderer IPC 응답 대기 → "응답 없음".
+//   수정: fs.promises.access를 Promise.all로 동시 stat → libuv threadpool 활용 → 100ms 이내.
 ipcMain.handle('file:checkExistsBatch', async (_event, filePaths: string[]) => {
   if (!Array.isArray(filePaths)) return [];
-  const fsSync = await import('fs');
-  return filePaths.map((p) => {
+  const fsp = (await import('fs')).promises;
+  return Promise.all(filePaths.map(async (p) => {
     if (typeof p !== 'string' || !p) return false;
-    try { return fsSync.existsSync(p); } catch { return false; }
-  });
+    try { await fsp.access(p); return true; } catch { return false; }
+  }));
 });
 
 ipcMain.handle('file:readDir', async (_event, dirPath: string) => {
@@ -10285,4 +10308,13 @@ app.on('before-quit', async () => {
   } catch (e) {
     console.warn('[App] 자식 프로세스 정리 실패:', (e as Error).message);
   }
+  // [v2.10.110] eventLoopWatchdog + selector remoteUpdate setInterval 정리 (Agent O LEAK-1/5)
+  try {
+    const { stopEventLoopWatchdog } = require('./diagnostics/eventLoopWatchdog.js');
+    stopEventLoopWatchdog();
+  } catch { /* ignore */ }
+  try {
+    const { stopPeriodicCheck } = require('./automation/selectors/remoteUpdate.js');
+    stopPeriodicCheck();
+  } catch { /* ignore */ }
 });

@@ -126,7 +126,7 @@ export function migratePostCategories(): number {
     });
 
     if (migrated > 0) {
-      localStorage.setItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+      localStorage.setItem(GENERATED_POSTS_KEY, JSON.stringify(posts)); _invalidatePostsCache();
       console.log(`[Migration] ✅ ${migrated}개 글 카테고리 정규화 완료`);
     }
 
@@ -195,7 +195,7 @@ export function migrateAccountPostsToGlobal(): void {
     }
 
     // 3. 전역 저장소에 통합 저장
-    localStorage.setItem(GENERATED_POSTS_KEY, JSON.stringify(allPosts));
+    localStorage.setItem(GENERATED_POSTS_KEY, JSON.stringify(allPosts)); _invalidatePostsCache();
     console.log(`[Migration] ✅ 전역 저장소에 총 ${allPosts.length}개 글 통합 완료`);
 
     // 마이그레이션 완료 표시
@@ -230,7 +230,7 @@ export function backfillNaverIdForLegacyPosts(): void {
       console.log(`[Migration] ℹ️ 다중 계정 감지 (${existingIds.size}개) - 레거시 글 ${missingNaverId.length}개는 미지정 유지`);
     }
 
-    safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+    safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts)); _invalidatePostsCache();
     localStorage.setItem(NAVERID_BACKFILL_DONE_KEY, 'true');
   } catch (err) {
     console.error('[Migration] 레거시 naverId 백필 실패:', err);
@@ -280,11 +280,16 @@ export async function cleanupStaleImageReferences(): Promise<void> {
     //   batch: 1 IPC + fs.existsSync 일괄 → 100ms 이내. 글 목록 렌더 *전*에 await 가능.
 
     // 경로 정규화 함수 — file:/// prefix + URL escape + slash 통일
+    // [v2.10.110] hot-path try/catch 제거 — %xx 패턴 사전 검사로 decodeURIComponent 호출 자체 회피.
+    //   Agent S ERR-7: hot 루프에서 try/catch는 V8 deopt + 잠재 Error 객체 생성 비용.
+    const hasPercentEscape = /%[0-9a-fA-F]{2}/;
     const normalize = (p: string): string => {
       let n = String(p);
       if (n.startsWith('file:///')) n = n.slice(8);
       else if (n.startsWith('file://')) n = n.slice(7);
-      try { n = decodeURIComponent(n); } catch { /* keep */ }
+      if (hasPercentEscape.test(n)) {
+        try { n = decodeURIComponent(n); } catch { /* keep raw */ }
+      }
       n = n.replace(/\//g, '\\');
       return n;
     };
@@ -369,7 +374,7 @@ export async function cleanupStaleImageReferences(): Promise<void> {
     }
 
     if (droppedRefs > 0 || droppedImages > 0) {
-      safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+      safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts)); _invalidatePostsCache();
       console.log(`[StaleImageCleanup] 🧹 batch: ${droppedRefs}개 stale filePath + ${droppedImages}개 이미지 항목 (1 IPC)`);
     }
   } catch (err) {
@@ -383,19 +388,33 @@ export async function cleanupStaleImageReferences(): Promise<void> {
 // CRUD 함수
 // ═══════════════════════════════════════════════════════════════════
 
+// [v2.10.110] 모듈-scope TTL 캐시 — 발행 루프에서 500KB JSON.parse 매 호출 차단.
+//   100ms TTL: 발행 루프 hot path (수십 ms 사이 N회 호출)는 cache hit.
+//   write 함수 모두가 _invalidatePostsCache()를 호출하므로 stale data 위험 없음.
+//   사용자 인터랙션 (보통 100ms+ 간격)은 새로 parse.
+let _postsCache: GeneratedPost[] | null = null;
+let _postsCacheLoadedAt = 0;
+const POSTS_CACHE_TTL_MS = 100;
+export function _invalidatePostsCache(): void { _postsCache = null; }
+
 // ✅ [2026-01-24 FIX] 계정별 분리 제거 - 전역 저장소에서 모든 글 로드
 export function loadGeneratedPosts(naverId?: string): GeneratedPost[] {
+  const now = Date.now();
+  if (_postsCache && (now - _postsCacheLoadedAt) < POSTS_CACHE_TTL_MS) {
+    return _postsCache;
+  }
   // 기존 계정별 데이터를 전역으로 병합 (한 번만)
   migrateAccountPostsToGlobal();
 
   try {
     const data = localStorage.getItem(GENERATED_POSTS_KEY);
-    if (data) {
-      return JSON.parse(data);
-    }
-    return [];
+    const posts: GeneratedPost[] = data ? JSON.parse(data) : [];
+    _postsCache = posts;
+    _postsCacheLoadedAt = now;
+    return posts;
   } catch (error) {
     console.error('생성된 글 목록 로드 실패:', error);
+    _postsCache = null;
     return [];
   }
 }
@@ -703,7 +722,7 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
     }
 
     // ✅ [2026-01-24 FIX] 전역 저장소에 저장 (계정별 분리 제거)
-    const setOk = safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+    const setOk = safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts)); _invalidatePostsCache();
     // ✅ [v2.7.40] 저장 실패 시 silent 통과하지 않고 사용자 알림
     if (setOk === false) {
       console.warn(`[saveGeneratedPost] ⚠️ localStorage 저장 실패 (quota 초과 가능). postId=${postId}`);
@@ -746,7 +765,7 @@ export function updatePostAfterPublish(postId: string, publishedUrl: string, pub
       const index = posts.findIndex(p => p.id === postId);
       if (index >= 0) {
         posts[index] = post;
-        safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+        safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts)); _invalidatePostsCache();
         // ✅ [2026-03-05] 발행 모드에 따른 상태 메시지
         const modeLabel = publishMode === 'draft' ? '📝 임시발행됨' : publishMode === 'schedule' ? '📅 예약발행됨' : '✅ 발행됨';
         appendLog(`${modeLabel}: "${post.title}"`);
@@ -788,7 +807,7 @@ export function updatePostImages(postId: string, images: any[]): void {
       const index = posts.findIndex(p => p.id === postId);
       if (index >= 0) {
         posts[index] = post;
-        safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+        safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts)); _invalidatePostsCache();
         appendLog(`✅ 이미지 정보가 업데이트되었습니다: ${images.length}개`);
         refreshGeneratedPostsList();
       }
@@ -803,7 +822,7 @@ export function deleteGeneratedPost(postId: string): void {
   try {
     const posts = loadGeneratedPosts();
     const filtered = posts.filter(p => p.id !== postId);
-    safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(filtered));
+    safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(filtered)); _invalidatePostsCache();
 
     // ✅ 이미지 폴더도 삭제
     if (postId) {
@@ -841,7 +860,7 @@ export function copyGeneratedPost(postId: string): void {
     posts.unshift(copiedPost);
     if (posts.length > 100) posts.pop();
 
-    safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+    safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts)); _invalidatePostsCache();
     appendLog(`📋 글이 복사되었습니다. (새 ID: ${newPostId})`);
     refreshGeneratedPostsList();
     alert('✅ 글이 복사되었습니다!');
@@ -1232,7 +1251,7 @@ export async function importSelectedPosts(selectedPosts: GeneratedPost[]): Promi
       unique.splice(100); // 최대 100개만 유지
     }
 
-    localStorage.setItem(GENERATED_POSTS_KEY, JSON.stringify(unique));
+    localStorage.setItem(GENERATED_POSTS_KEY, JSON.stringify(unique)); _invalidatePostsCache();
     appendLog(`📤 ${newPosts.length}개의 글이 가져와졌습니다.`);
     refreshGeneratedPostsList();
     alert(`✅ ${newPosts.length}개의 글이 가져와졌습니다!`);

@@ -268,6 +268,11 @@ export function initBannerCustomizationUI(): void {
     imageUpload.addEventListener('change', () => {
       const file = imageUpload.files?.[0];
       if (file) {
+        // [v2.10.110] 이전 ObjectURL revoke — 교체 시 blob 누수 차단
+        const prev = currentBannerSettings.customImagePath;
+        if (prev && prev.startsWith('blob:')) {
+          try { URL.revokeObjectURL(prev); } catch { /* ignore */ }
+        }
         currentBannerSettings.customImagePath = URL.createObjectURL(file);
         if (imagePreviewName) imagePreviewName.textContent = `✅ ${file.name}`;
         if (imageClearBtn) imageClearBtn.style.display = 'block';
@@ -278,6 +283,11 @@ export function initBannerCustomizationUI(): void {
 
   if (imageClearBtn && imagePreviewName && imageUpload) {
     imageClearBtn.addEventListener('click', () => {
+      // [v2.10.110] clear 시에도 revoke
+      const prev = currentBannerSettings.customImagePath;
+      if (prev && prev.startsWith('blob:')) {
+        try { URL.revokeObjectURL(prev); } catch { /* ignore */ }
+      }
       currentBannerSettings.customImagePath = undefined;
       imageUpload.value = '';
       imagePreviewName.textContent = '';

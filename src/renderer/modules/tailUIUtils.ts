@@ -258,7 +258,8 @@ export function initContentModeHelpAndSmartPublish() {
     const observer = new MutationObserver(() => {
       setTimeout(updateAffiliateModeState, 100);
     });
-    observer.observe(categoryDisplay, { childList: true, subtree: true, characterData: true });
+    // [v2.10.110] characterData/subtree 제거 — 카테고리 표시는 innerHTML 교체로 갱신되므로 childList만으로 충분.
+    observer.observe(categoryDisplay, { childList: true });
   }
 
   // ✅ 쇼핑 커넥트 모드 시 카테고리 드롭다운 필터링
@@ -1009,7 +1010,8 @@ const scheduleModalObserver = new MutationObserver((mutations) => {
   }
 });
 
-// Observer 시작
+// [v2.10.110 REVERT] subtree:true 유지 — 모달이 body 외부 컨테이너에 동적 추가될 수 있음.
+//   subtree:false면 그런 모달의 helpButton 주입이 누락됨. childList만은 fire 빈도 낮으므로 안전.
 scheduleModalObserver.observe(document.body, {
   childList: true,
   subtree: true
@@ -1181,7 +1183,10 @@ const modalMoveObserver = new MutationObserver((mutations) => {
   }
 });
 
-// childList만 관찰 — 새 노드 추가 시점에만 fire (style 변경 무시)
+// [v2.10.110 REVERT] subtree:true 유지 — modal-backdrop이 body 외부 자손에 추가될 수 있음.
+//   이 observer의 본래 목적이 그런 모달을 감지해 body로 옮기는 것이므로 subtree:false면 목적이 깨짐.
+//   childList만은 DOM 추가/제거만 감지 — style/hover/scroll에는 fire하지 않으므로 freeze 위험 없음.
+//   v2.10.78 freeze 원인은 attributes:['style'] (이미 제거됨), subtree:true 자체는 안전.
 modalMoveObserver.observe(document.body, {
   childList: true,
   subtree: true,

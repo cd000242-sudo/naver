@@ -2497,7 +2497,8 @@ document.addEventListener('DOMContentLoaded', () => {
         logItem.style.marginTop = '0.25rem';
         logItem.textContent = logMessage;
         logContainer.appendChild(logItem);
-        logContainer.scrollTop = logContainer.scrollHeight;
+        // [v2.10.110] rAF 지연 — layout thrash 차단 (Agent I HIGH-2)
+        requestAnimationFrame(() => { logContainer.scrollTop = logContainer.scrollHeight; });
       }
     };
 
@@ -2642,7 +2643,8 @@ document.addEventListener('DOMContentLoaded', () => {
         logItem.style.marginTop = '0.25rem';
         logItem.textContent = logMessage;
         logContainer.appendChild(logItem);
-        logContainer.scrollTop = logContainer.scrollHeight;
+        // [v2.10.110] rAF 지연 — layout thrash 차단 (Agent I HIGH-2)
+        requestAnimationFrame(() => { logContainer.scrollTop = logContainer.scrollHeight; });
       }
     };
 

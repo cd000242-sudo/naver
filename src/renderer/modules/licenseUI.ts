@@ -379,7 +379,13 @@ export async function initLicenseBadge(): Promise<void> {
 
     // 1시간마다 업데이트 (만료일이 가까워질 수 있으므로)
     if (licenseBadgeIntervalId) clearInterval(licenseBadgeIntervalId);
-    licenseBadgeIntervalId = setInterval(updateLicenseBadge, 60 * 60 * 1000);
+    // [v2.10.110] setInterval에 async dedup — 이전 IPC가 미응답 상태에서 다음 주기 발사 차단 (Agent N LEAK-4)
+    let _badgeRunning = false;
+    licenseBadgeIntervalId = setInterval(async () => {
+        if (_badgeRunning) return;
+        _badgeRunning = true;
+        try { await updateLicenseBadge(); } finally { _badgeRunning = false; }
+    }, 60 * 60 * 1000);
 }
 
 // ============================================

@@ -286,6 +286,13 @@ import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
 //   사용자가 환경설정 열고/닫고/버튼 누르고 → 어느 시점에 +N 큰지 보면 즉시 진단.
 // ═══════════════════════════════════════════════════════════════════════════════
 (function setupMemoryMonitor() {
+  // [v2.10.110] opt-in으로 전환 — 기본 OFF.
+  //   진단 도구 자체가 매 클릭 querySelectorAll('*') + 30초마다 풀스캔 → DOM 클수록 비용 폭증.
+  //   필요 시: DevTools 콘솔에서 `window.__ECC_MEM_MONITOR = true` 후 reload.
+  if (!(window as any).__ECC_MEM_MONITOR) return;
+  // 진단 도구 자체 누수 방지: reload 시 이전 interval 정리.
+  const prev = (window as any).__memoryMonitorIntervalId;
+  if (prev) { try { clearInterval(prev); } catch { /* ignore */ } }
   let _lastSnapshot = { elements: 0, mem: 0 };
   let _snapshotCount = 0;
   const snapshot = (label: string) => {
@@ -309,14 +316,22 @@ import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
       _snapshotCount++;
     } catch { /* ignore */ }
   };
-  // 매 클릭 후 0.5초 (모달 렌더링 완료 대기)
+  // [v2.10.110] click snapshot throttle — 진단 도구 자체가 progressive slowdown 원인이었음.
+  //   snapshot()은 querySelectorAll('*')로 DOM 전체 스캔(O(N)). 매 클릭 호출 시 N 증가에 따라 비용 폭증.
+  //   해결: 클릭 후 5초 이내 추가 클릭은 무시. 빠른 연타 시 진단 비용을 ~10x 감소.
+  let _lastClickSnapshotAt = 0;
   document.addEventListener('click', (e) => {
+    const now = Date.now();
+    if (now - _lastClickSnapshotAt < 5000) return; // throttle: 5초
+    _lastClickSnapshotAt = now;
     const target = e.target as HTMLElement;
     const label = target?.id || target?.className?.toString().slice(0, 30) || target?.tagName || 'click';
     setTimeout(() => snapshot(`click:${label}`), 500);
   }, true);
-  // 10초마다 주기 스냅샷
-  setInterval(() => snapshot('periodic-10s'), 10000);
+  // 30초마다 주기 스냅샷 — 10s → 30s로 완화 (DOM 풀스캔 비용 ⅓)
+  const intervalId = setInterval(() => snapshot('periodic-30s'), 30000);
+  (window as any).__memoryMonitorIntervalId = intervalId;
+  window.addEventListener('beforeunload', () => { try { clearInterval(intervalId); } catch { /* ignore */ } }, { once: true });
   // 초기 baseline은 init 완료 후 (DOMContentLoaded + 2s)
   setTimeout(() => snapshot('initial'), 2000);
 })();
@@ -675,176 +690,28 @@ function setupHeaderButtons() {
     console.log('  position:', computedStyle.position);
   }
 
-  // 환경설정 버튼
-  if (settingsButton) {
-    settingsButton.onclick = function (e) {
-      console.log('[Button] ===== 환경설정 버튼 클릭 시작 =====');
-      console.log('[Button] 이벤트 객체:', e);
-      console.log('[Button] 이벤트 타입:', e.type);
-      console.log('[Button] 이벤트 타겟:', e.target);
-      console.log('[Button] 이벤트 currentTarget:', e.currentTarget);
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      console.log('[Button] preventDefault와 stopPropagation 완료');
-
-      if (settingsModal) {
-        console.log('[Button] settingsModal 찾음, 표시 시도');
-        console.log('[Button] 설정 전 aria-hidden:', settingsModal.getAttribute('aria-hidden'));
-        console.log('[Button] 설정 전 display:', settingsModal.style.display);
-
-        settingsModal.setAttribute('aria-hidden', 'false');
-        settingsModal.style.display = 'flex';
-
-        console.log('[Button] 설정 후 aria-hidden:', settingsModal.getAttribute('aria-hidden'));
-        console.log('[Button] 설정 후 display:', settingsModal.style.display);
-
-        // 강제로 스타일 적용
-        settingsModal.style.position = 'fixed';
-        settingsModal.style.top = '0';
-        settingsModal.style.left = '0';
-        settingsModal.style.width = '100%';
-        settingsModal.style.height = '100%';
-        settingsModal.style.backgroundColor = 'rgba(0,0,0,0.5)';
-        settingsModal.style.zIndex = '9999';
-
-        console.log('[Button] 강제 스타일 적용 완료');
-        console.log('[Button] 최종 computed style:');
-        const computedStyle = window.getComputedStyle(settingsModal);
-        console.log('  display:', computedStyle.display);
-        console.log('  visibility:', computedStyle.visibility);
-        console.log('  z-index:', computedStyle.zIndex);
-
-        // 모달 내용도 확인
-        const modalContent = settingsModal.querySelector('.modal-content') as HTMLElement;
-        console.log('[Button] modal-content 존재:', !!modalContent);
-        if (modalContent) {
-          modalContent.style.backgroundColor = 'white';
-          modalContent.style.borderRadius = '8px';
-          modalContent.style.padding = '20px';
-          modalContent.style.maxWidth = '500px';
-          modalContent.style.width = '90%';
-          modalContent.style.maxHeight = '80vh';
-          modalContent.style.overflow = 'auto';
-        }
-
-        console.log('[Button] 환경설정 모달 표시 작업 완료');
-      } else {
-        console.error('[Button] settingsModal이 존재하지 않음');
-      }
-    };
-
-    settingsButton.addEventListener('click', function (e) {
-      console.log('[Button] 환경설정 버튼 클릭됨 (addEventListener)');
-      console.log('[Button] addEventListener 이벤트 객체:', e);
-    });
-
-    console.log('[Setup] 환경설정 버튼 이벤트 리스너 연결됨');
-  } else {
+  // [v2.10.110] 환경설정 버튼 핸들러 중복 제거 — settingsModal.ts:289가 단독 처리.
+  // 이전: onclick + addEventListener + 강제 inline style + 15+ console.log + getComputedStyle reflow
+  //       → 클릭마다 3핸들러 실행 + 매번 reflow → 환경설정 후 체감 slowdown 원인
+  // 현재: settingsModal.ts initSettingsModal()의 단일 click listener가 openSettingsModal() 호출.
+  //       openSettingsModal()이 display:flex + 상태 리셋을 자체 수행하므로 강제 style 불필요.
+  if (!settingsButton) {
     console.debug('[Setup] settingsButton이 존재하지 않음 (레거시 - 무시 가능)');
   }
 
-  // 외부유입 버튼
+  // [v2.10.110] 외부유입 버튼 — 디버그 reflow 패턴 제거.
+  // 이전: dev 모드에서 getComputedStyle + 6 inline style write + 15+ console.log + isPackaged() IPC
+  //       → 클릭마다 강제 reflow + IPC round-trip
+  // 현재: production/dev 통합 단일 경로. CSS class로 표시 토글.
   if (externalLinksButton) {
-    externalLinksButton.onclick = async function (e) {
-      console.log('[Button] ===== 외부유입 버튼 클릭 시작 =====');
-      console.log('[Button] 이벤트 객체:', e);
-      console.log('[Button] 이벤트 타입:', e.type);
-      console.log('[Button] 이벤트 타겟:', e.target);
-      console.log('[Button] 이벤트 currentTarget:', e.currentTarget);
-
+    externalLinksButton.onclick = (e) => {
       e.preventDefault();
       e.stopPropagation();
-
-      console.log('[Button] preventDefault와 stopPropagation 완료');
-
-      try {
-        const isPackaged = await window.api.isPackaged();
-        console.log('[Button] isPackaged:', isPackaged);
-
-        if (!isPackaged) {
-          console.log('[Button] 개발 모드로 처리');
-          if (externalLinksModal) {
-            console.log('[Button] externalLinksModal 찾음, 표시 시도');
-            console.log('[Button] 설정 전 aria-hidden:', externalLinksModal.getAttribute('aria-hidden'));
-            console.log('[Button] 설정 전 display:', externalLinksModal.style.display);
-
-            externalLinksModal.setAttribute('aria-hidden', 'false');
-            externalLinksModal.style.display = 'flex';
-
-            console.log('[Button] 설정 후 aria-hidden:', externalLinksModal.getAttribute('aria-hidden'));
-            console.log('[Button] 설정 후 display:', externalLinksModal.style.display);
-
-            // 강제로 스타일 적용
-            externalLinksModal.style.position = 'fixed';
-            externalLinksModal.style.top = '0';
-            externalLinksModal.style.left = '0';
-            externalLinksModal.style.width = '100%';
-            externalLinksModal.style.height = '100%';
-            externalLinksModal.style.backgroundColor = 'rgba(0,0,0,0.5)';
-            externalLinksModal.style.zIndex = '9999';
-
-            console.log('[Button] 강제 스타일 적용 완료');
-            console.log('[Button] 최종 computed style:');
-            const computedStyle = window.getComputedStyle(externalLinksModal);
-            console.log('  display:', computedStyle.display);
-            console.log('  visibility:', computedStyle.visibility);
-            console.log('  z-index:', computedStyle.zIndex);
-
-            // 모달 내용도 확인
-            const modalContent = externalLinksModal.querySelector('.modal-content') as HTMLElement;
-            console.log('[Button] modal-content 존재:', !!modalContent);
-            if (modalContent) {
-              modalContent.style.backgroundColor = 'white';
-              modalContent.style.borderRadius = '8px';
-              modalContent.style.padding = '20px';
-              modalContent.style.maxWidth = '500px';
-              modalContent.style.width = '90%';
-              modalContent.style.maxHeight = '80vh';
-              modalContent.style.overflow = 'auto';
-            }
-
-            console.log('[Button] 외부유입 모달 표시 작업 완료 (개발 모드)');
-          } else {
-            console.error('[Button] externalLinksModal이 존재하지 않음');
-          }
-          return;
-        }
-
-        // ✅ 배포 모드에서도 외부유입 모달 바로 표시 (라이선스 체크 완화)
-        console.log('[Button] 배포 모드 - 외부유입 모달 표시');
-
-        // 라이선스 확인은 로그만 남기고 모달은 항상 열기
-        try {
-          const licenseResult = await window.api.getLicense();
-          console.log('[Button] 라이선스 결과:', licenseResult);
-
-          if (licenseResult.license && licenseResult.license.expiresAt) {
-            const expirationDate = new Date(licenseResult.license.expiresAt);
-            console.log('[Button] 라이선스 만료일:', expirationDate.toLocaleDateString('ko-KR'));
-          } else {
-            console.log('[Button] 라이선스 정보 없음 - 기본 모드로 진행');
-          }
-        } catch (licenseError) {
-          console.warn('[Button] 라이선스 확인 실패, 기본 모드로 진행:', licenseError);
-        }
-
-        // ✅ 외부유입 모달 항상 표시
-        if (externalLinksModal) {
-          externalLinksModal.setAttribute('aria-hidden', 'false');
-          externalLinksModal.style.display = 'flex';
-          console.log('[Button] 외부유입 모달 표시됨');
-        } else {
-          console.error('[Button] externalLinksModal이 존재하지 않음');
-        }
-      } catch (error) {
-        console.error('[Button] 오류 발생:', error);
-        alert('외부유입 모달을 여는 중 오류가 발생했습니다.');
+      if (externalLinksModal) {
+        externalLinksModal.setAttribute('aria-hidden', 'false');
+        externalLinksModal.style.display = 'flex';
       }
     };
-
-    console.log('[Setup] 외부유입 버튼 이벤트 리스너 연결됨');
   } else {
     console.debug('[Setup] externalLinksButton이 존재하지 않음 (레거시 - 무시 가능)');
   }
@@ -1789,7 +1656,8 @@ function updateProgress(percent: number, status: string): void {
   // 모달 닫기 기능 (배경 클릭)
   // ============================================
 
-  [licenseModal, settingsModal, externalLinksModal].forEach(modal => {
+  // [v2.10.110] settingsModal 배경 클릭은 settingsModal.ts:308이 단독 처리 (중복 제거)
+  [licenseModal, externalLinksModal].forEach(modal => {
     if (modal) {
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
@@ -2454,17 +2322,12 @@ async function initializeApplication(): Promise<void> {
     }
   });
 
-  // ✅ [v2.10.92] _yieldIfNeeded — 마지막 yield 후 누적 시간이 50ms 넘으면 양보.
-  //   v2.10.91 그룹 yield (5번)로는 1312ms SEVERE 잔존 → 매 init 사이에
-  //   *시간 기준* yield. 짧은 init은 yield 없이 빠르게, 무거운 init만 양보 → 효율적.
-  const YIELD_THRESHOLD_MS = 50;
-  let _yieldLastT = performance.now();
+  // ✅ [v2.10.110] 강제 yield — 매 init 후 무조건 main thread 양보.
+  //   v2.10.92 _yieldIfNeeded(50ms)로도 1분 freeze 잔존: 한 init이 200ms+ 걸리면 그 init 내부는 양보 못 함.
+  //   해결: 매 init 직후 setTimeout(0)으로 강제 yield → 어떤 init이 무겁든 main thread block 16ms 이내 회복.
+  //   "응답 없음" 영구 차단. 총 init 시간 ~100ms 증가하지만 사용자 응답성이 최우선.
   const _yieldIfNeeded = async (): Promise<void> => {
-    const now = performance.now();
-    if (now - _yieldLastT > YIELD_THRESHOLD_MS) {
-      await yield_();
-      _yieldLastT = performance.now();
-    }
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
   };
 
   _perfMark('DOMContentLoaded 진입 → [Init] 시작');
@@ -2495,16 +2358,15 @@ async function initializeApplication(): Promise<void> {
     _perfMark('getConfig 실패 (무시)');
   }
 
-  // ━━━━━━━━━━━━ v2.10.92: 매 init 후 시간 기준 자동 yield ━━━━━━━━━━━━
-  // ✅ [v2.10.107] 글 목록 렌더 *전*에 stale 이미지 정리 (batch IPC → ~100ms).
-  //   사용자 보고: 콘솔 ERR_FILE_NOT_FOUND 폭주. 이전 setTimeout(3000)는 글 목록 렌더 후에
-  //   실행되어 첫 렌더에 broken img가 DOM에 들어가 ERR 발생. 이제 렌더 전 await로
-  //   stale 데이터를 미리 제거 → DOM에 broken src 자체가 안 들어감 → ERR 0건.
-  //   cleanupStaleImageReferences는 line 121에서 static import됨 (v2.10.86 검증 통과).
-  try {
-    await cleanupStaleImageReferences();
-    _perfMark('cleanupStaleImages (글 목록 렌더 전)');
-  } catch (e) { console.warn('[Init] cleanup 실패 (무시):', e); }
+  // [v2.10.110] cleanupStaleImageReferences를 백그라운드로 — 초반 1분 freeze 핵심 원인 해소.
+  //   원래 await: 글 N개 × 이미지 M개 = N×M fs.existsSync IPC → main process sync block.
+  //   사용자 보고: "로그인 후 1분 응답없음". startup await가 직접 원인.
+  //   대안: postListUI:v2.10.108이 자체 batch 검증 — startup cleanup 없어도 broken img 자동 처리.
+  //   setTimeout(500)으로 init 완료 후 백그라운드 실행 → 사용자 즉시 사용 가능.
+  setTimeout(() => {
+    cleanupStaleImageReferences().catch((e) => console.warn('[Init] background cleanup 실패:', e));
+  }, 500);
+  _perfMark('cleanupStaleImages → background (await 제거)');
 
   initUnifiedTab(); _perfMark('initUnifiedTab'); await _yieldIfNeeded();
   initImageLibrary(); _perfMark('initImageLibrary'); await _yieldIfNeeded();
@@ -3144,18 +3006,11 @@ function initCategoryModal(): void {
   }
 
   // 배경 클릭 시 닫기 - 이벤트가 모달 배경에서 직접 발생한 경우에만
+  // [v2.10.110] 디버그 console.log 제거 — console.log 인자 평가는 빌드 no-op 후에도 실행됨.
+  // (target 객체 직렬화 비용 + 핸들러 자체가 클릭마다 호출).
   modal.addEventListener('click', (e) => {
-    console.log('[CategoryModal] Modal click detected, target:', e.target, 'modal:', modal);
-    console.log('[CategoryModal] e.target === modal:', e.target === modal);
-    console.log('[CategoryModal] justOpened:', justOpened);
-    // ✅ 열린 직후에는 닫기 무시 (이벤트 버블링 방지)
-    if (justOpened) {
-      console.log('[CategoryModal] Ignoring click - modal just opened');
-      return;
-    }
-    if (e.target === modal) {
-      closeModal();
-    }
+    if (justOpened) return;
+    if (e.target === modal) closeModal();
   });
 
   // 라디오 버튼 호버 효과
@@ -4635,9 +4490,10 @@ URL: ${firstUrl}
         accountId,
         accountName: account.name,
         title: settings.title,
-        structuredContent: JSON.parse(JSON.stringify(settings.structuredContent)),
-        generatedImages: JSON.parse(JSON.stringify(settings.generatedImages)),
-        formData: JSON.parse(JSON.stringify(settings.formData)),
+        // [v2.10.110] structuredClone fast path + JSON fallback — non-serializable에도 안전.
+        structuredContent: (() => { try { return structuredClone(settings.structuredContent); } catch { return JSON.parse(JSON.stringify(settings.structuredContent)); } })(),
+        generatedImages: (() => { try { return structuredClone(settings.generatedImages); } catch { return JSON.parse(JSON.stringify(settings.generatedImages)); } })(),
+        formData: (() => { try { return structuredClone(settings.formData); } catch { return JSON.parse(JSON.stringify(settings.formData)); } })(),
         createdAt: new Date().toISOString(),
         publishMode: currentPublishMode as 'publish' | 'draft' | 'schedule',
         scheduleDate: currentScheduleDate,
@@ -9345,26 +9201,29 @@ function showVideoModal(videoUrl: string, title?: string): void {
 
   document.body.appendChild(modal);
 
+  // [v2.10.110] keydown listener 누수 차단 — 닫기 경로 통합
+  const handleKeydown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') closeModal();
+  };
+  const closeModal = () => {
+    document.removeEventListener('keydown', handleKeydown);
+    modal.remove();
+  };
+
   const closeBtn = modal.querySelector('.close-video-modal-btn');
   if (closeBtn) {
     closeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      modal.remove();
+      closeModal();
     });
   }
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal || (e.target as HTMLElement).classList.contains('close-video-modal-btn')) {
-      modal.remove();
+      closeModal();
     }
   });
 
-  const handleKeydown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      modal.remove();
-      document.removeEventListener('keydown', handleKeydown);
-    }
-  };
   document.addEventListener('keydown', handleKeydown);
 }
 

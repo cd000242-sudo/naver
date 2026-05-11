@@ -37,6 +37,9 @@ declare let isContinuousMode: boolean;
 declare let continuousQueue: string[];
 declare let continuousCountdown: number;
 declare let continuousInterval: NodeJS.Timeout | null;
+// [v2.10.110] Enhanced 큐의 setTimeout ID — stopContinuousMode에서 clearTimeout 필요.
+//   미보관 시: 중지 후 7~12분 뒤 processNextInQueueEnhanced 자동 재시작 위험 (Agent K/N 보고).
+let _enhancedQueueTimer: ReturnType<typeof setTimeout> | null = null;
 declare let currentStructuredContent: any;
 declare let currentPostId: string | null;
 declare let __continuousV2Initialized: boolean;
@@ -458,6 +461,12 @@ export function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): vo
 
   // ✅ [2026-01-21] 이미지 생성 락 즉시 해제 - 중단 후 재시작 시 락 충돌 방지
   clearImageGenerationLocks();
+
+  // [v2.10.110] Enhanced 큐 타이머 정리 — 중지 후 자동 재시작 위험 차단 (Agent K/N)
+  if (_enhancedQueueTimer) {
+    clearTimeout(_enhancedQueueTimer);
+    _enhancedQueueTimer = null;
+  }
 
   isContinuousMode = false;
 
@@ -4961,7 +4970,8 @@ async function processNextInQueueEnhanced(): Promise<void> {
     if (isScheduleMode) {
       const quickWait = 10 + Math.floor(Math.random() * 10); // 10~20초
       appendLog(`⏰ 예약 발행 모드 → ${quickWait}초 후 다음 항목 처리...`);
-      setTimeout(() => processNextInQueueEnhanced(), quickWait * 1000);
+      // [v2.10.110] ID 보관 — stopContinuousMode에서 clearTimeout
+      _enhancedQueueTimer = setTimeout(() => { _enhancedQueueTimer = null; processNextInQueueEnhanced(); }, quickWait * 1000);
     } else {
       // 🛡️ [끝판왕] 사용자 가시 로그 + 안전 간격 적용
       // ✅ [2026-04-01 FIX] 존재하지 않는 'continuous-interval-seconds' 대신 실제 UI 요소 참조
@@ -4977,7 +4987,8 @@ async function processNextInQueueEnhanced(): Promise<void> {
       result.logs.forEach(msg => appendLog(msg));
       appendLog(`══════════════════════════════`);
 
-      setTimeout(() => processNextInQueueEnhanced(), result.interval * 1000);
+      // [v2.10.110] ID 보관 — stopContinuousMode에서 clearTimeout
+      _enhancedQueueTimer = setTimeout(() => { _enhancedQueueTimer = null; processNextInQueueEnhanced(); }, result.interval * 1000);
     }
   } else {
     appendLog('✅ 모든 연속 발행 완료!');

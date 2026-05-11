@@ -228,14 +228,16 @@ export async function initImageManagementTab(): Promise<void> {
           appendLog('✅ 나노 바나나 프로가 선택되었습니다. (Gemini API 사용)');
         });
 
-        modal?.addEventListener('click', (e) => {
-          if (e.target === modal) modal.remove();
-        });
-
-        // ESC 키로 닫기
+        // [v2.10.110] 배경 클릭 경로에도 keydown listener 정리 추가 (누수 차단)
         const handleEsc = (e: KeyboardEvent) => {
-          if (e.key === 'Escape') { modal?.remove(); document.removeEventListener('keydown', handleEsc); }
+          if (e.key === 'Escape') { document.removeEventListener('keydown', handleEsc); modal?.remove(); }
         };
+        modal?.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            document.removeEventListener('keydown', handleEsc);
+            modal.remove();
+          }
+        });
         document.addEventListener('keydown', handleEsc);
 
         return;

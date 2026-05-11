@@ -10387,7 +10387,12 @@ export async function generateStructuredContent(
 }
 
 function optimizeForViral(content: StructuredContent, source: ContentSource): StructuredContent {
-  const clone: StructuredContent = JSON.parse(JSON.stringify(content));
+  // [v2.10.110] structuredClone fast path + JSON fallback — function/DOM ref가 있어도 안전.
+  //   structuredClone은 빠르고 type 보존하지만 non-serializable 만나면 throw → 회귀 위험.
+  //   JSON.parse(JSON.stringify())는 silent drop이라 v2.10.109 동작과 동일 (안전망).
+  let clone: StructuredContent;
+  try { clone = structuredClone(content); }
+  catch { clone = JSON.parse(JSON.stringify(content)); }
 
   // quality 객체 초기화 보장
   if (!clone.quality) {
