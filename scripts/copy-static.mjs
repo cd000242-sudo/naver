@@ -653,7 +653,13 @@ try {
         loader: 'js',
         minifyWhitespace: true,
         minifySyntax: true,
-        minifyIdentifiers: false,
+        // ✅ [v2.10.99] minifyIdentifiers: true + keepNames: true 조합
+        //   - local 변수/parameter만 mangling, 함수/클래스 *이름은 유지*
+        //   - (window as any).funcName 동적 lookup은 string property access라 영향 없음
+        //   - 추가 30~40% 크기 감소 → V8 파싱/컴파일 시간 비례 감소
+        //   - 사용자 측정: SEVERE 2099ms (renderer.js V8 평가) → 예상 1200ms 이하
+        minifyIdentifiers: true,
+        keepNames: true,
         target: 'chrome120', // Electron 31의 Chromium
         legalComments: 'none',
       });
