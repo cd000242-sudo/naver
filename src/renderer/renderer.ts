@@ -277,6 +277,25 @@ import { runWhenIdle } from './utils/idleInit.js';
 import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// ✅ [v2.10.106] 글로벌 img error 핸들러 — broken img 자동 숨김.
+//   sonnet agent 분석: 6 파일의 19개 <img> 태그에 onerror 핸들러 없음.
+//   삭제된 파일을 src로 가진 img가 ERR_FILE_NOT_FOUND 콘솔 오염 + 레이아웃 깨짐.
+//   capture phase listener 1개로 모든 미처리 케이스 자동 처리 (인라인 추가 불필요).
+//   Chromium 콘솔 출력 자체는 사용자 코드로 못 막지만 *시각적 broken 표시*는 차단.
+// ═══════════════════════════════════════════════════════════════════════════════
+(function setupGlobalImgErrorHandler() {
+  document.addEventListener('error', (e) => {
+    const t = e.target as HTMLElement | null;
+    if (t && t.tagName === 'IMG') {
+      const img = t as HTMLImageElement;
+      // 이미 inline onerror가 처리한 경우 (display:none 또는 placeholder src) 건너뜀
+      if (img.style.display === 'none') return;
+      img.style.display = 'none';
+    }
+  }, true /* capture phase — img error는 bubble 안 함 */);
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // ✅ [v2.10.90 PerfDebug] Long Task Observer — 50ms 이상 main thread 블로킹 작업 자동 감지
 //   "응답 없음" 원인을 식별하려면 어떤 코드가 main thread를 얼마나 점유하는지 알아야 함.
 //   PerformanceObserver의 'longtask' 항목은 *50ms 이상의 작업*을 자동 보고.

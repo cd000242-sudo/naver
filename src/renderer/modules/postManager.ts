@@ -255,12 +255,16 @@ const OLD_CLEANUP_KEY_V1 = 'naver_blog_posts_stale_image_cleanup_done_v1';
 let staleImageCleanupRunning = false;
 export async function cleanupStaleImageReferences(): Promise<void> {
   if (staleImageCleanupRunning) return;
-  // v1 플래그 있으면 제거 (재실행 트리거)
+  // ✅ [v2.10.106] 1회 실행 락 *제거* — 매 앱 시작마다 cleanup 실행.
+  //   sonnet agent 분석: 이전엔 done 플래그로 영구 skip → 새 글 생성/삭제 시 stale 누적.
+  //   ERR_FILE_NOT_FOUND 콘솔 폭주 원인. 락 제거하면 매 시작 시 자동 정리.
+  // 기존 v1/v2 플래그가 있으면 제거 (legacy cleanup)
   if (localStorage.getItem(OLD_CLEANUP_KEY_V1)) {
     localStorage.removeItem(OLD_CLEANUP_KEY_V1);
-    console.log('[StaleImageCleanup] v1 플래그 제거 → v2로 재실행');
   }
-  if (localStorage.getItem(STALE_IMAGE_CLEANUP_DONE_KEY)) return;
+  if (localStorage.getItem(STALE_IMAGE_CLEANUP_DONE_KEY)) {
+    localStorage.removeItem(STALE_IMAGE_CLEANUP_DONE_KEY);
+  }
   staleImageCleanupRunning = true;
   try {
     const api = (window as any).api;
@@ -306,7 +310,20 @@ export async function cleanupStaleImageReferences(): Promise<void> {
           continue;
         }
         try {
-          const exists = await api.checkFileExists(filePath);
+          // ✅ [v2.10.106] 경로 정규화 — file:/// prefix 및 URL escape 제거.
+          //   sonnet agent: 'file:///C:/Users/...' 형태로 저장된 경우 fs.existsSync 항상 false →
+          //   cleanup이 실행돼도 *통과시켜* stale 잔존. 정규화 후 IPC 호출.
+          let normalizedPath = String(filePath);
+          if (normalizedPath.startsWith('file:///')) {
+            normalizedPath = normalizedPath.slice(8); // 'file:///' (8자) 제거
+          } else if (normalizedPath.startsWith('file://')) {
+            normalizedPath = normalizedPath.slice(7);
+          }
+          // URL escape 디코딩 (한글 경로의 %EB%B0%95 같은 형태 → 박)
+          try { normalizedPath = decodeURIComponent(normalizedPath); } catch { /* keep */ }
+          // 슬래시 정규화 (Windows 백슬래시 통일)
+          normalizedPath = normalizedPath.replace(/\//g, '\\');
+          const exists = await api.checkFileExists(normalizedPath);
           if (exists) {
             cleaned.push(img);
           } else {
@@ -332,7 +349,7 @@ export async function cleanupStaleImageReferences(): Promise<void> {
       safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
       console.log(`[StaleImageCleanup] 🧹 ${droppedRefs}개 stale filePath 제거 + ${droppedImages}개 이미지 항목 삭제`);
     }
-    localStorage.setItem(STALE_IMAGE_CLEANUP_DONE_KEY, 'true');
+    // v2.10.106: done 플래그 *설정 안 함* — 매 앱 시작 시 자동 cleanup 보장.
   } catch (err) {
     console.warn('[StaleImageCleanup] 정리 실패 (무시):', err);
   } finally {
