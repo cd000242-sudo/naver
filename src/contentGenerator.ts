@@ -29,7 +29,12 @@ import { processAutoPublishContent, getRecentPeriods, recordSelectedTitle, type 
 import { trendAnalyzer } from './agents/trendAnalyzer.js';
 import { loadConfig, getConfigSync } from './configManager.js';
 // [Phase 3-1/v2.10.139] god file 분해 1단계 — pure string helper 추출
-import { removeEmojis, stripAllFormatting } from './contentTextHelpers';
+import {
+  removeEmojis,
+  stripAllFormatting,
+  normalizeTitleWhitespace,
+  normalizeBodyWhitespacePreserveNewlines,
+} from './contentTextHelpers';
 // [Phase 3-2/v2.10.140] re-export — naverBlogAutomation.ts / contentGenerator.test.ts 외부 호출자 호환 유지
 export { stripAllFormatting };
 import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
@@ -880,28 +885,8 @@ function isReviewArticleType(articleType?: ArticleType): boolean {
   return articleType === 'shopping_review' || articleType === 'shopping_expert_review' || articleType === 'it_review' || articleType === 'product_review';
 }
 
-function normalizeTitleWhitespace(text: string): string {
-  return String(text || '')
-    .replace(/\s+/g, ' ')
-    // ✅ [2026-02-24] 숫자 사이 쉼표 보호 (1,000원 등 천 단위 구분자 유지)
-    .replace(/(?<!\d)\s*,\s*/g, ', ')
-    .replace(/,\s+(?=\d{3})/g, ',')  // 이미 깨진 "1, 000" 복구
-    .replace(/\s*:\s*/g, ': ')
-    .replace(/\s*\|\s*/g, ' | ')
-    .replace(/\s{2,}/g, ' ')
-    .trim();
-}
-
-function normalizeBodyWhitespacePreserveNewlines(text: string): string {
-  if (!text) return text;
-  const normalized = String(text)
-    .split('\n')
-    .map((line) => line.replace(/[ \t]{2,}/g, ' ').replace(/[ \t]+$/g, '').trimStart())
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
-  return normalized;
-}
+// [Phase 3-3/v2.10.141] normalizeTitleWhitespace, normalizeBodyWhitespacePreserveNewlines
+//   contentTextHelpers.ts로 추출 (god file 분해).
 
 function limitRegexOccurrences(text: string, regex: RegExp, maxCount: number): string {
   if (!text) return text;

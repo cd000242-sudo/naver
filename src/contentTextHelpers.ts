@@ -89,3 +89,43 @@ export function stripAllFormatting(text: string): string {
 
   return cleaned.trim();
 }
+
+/**
+ * 제목 공백 정규화 — 다중 공백 압축 + 쉼표/콜론/파이프 주변 일관된 띄어쓰기 적용.
+ *
+ * 천 단위 구분자(1,000원 등) 보호: 숫자 사이 쉼표는 변형 없음.
+ *
+ * @param text - 정규화 대상 제목 문자열
+ * @returns 정규화된 제목. 입력이 falsy면 빈 문자열.
+ */
+export function normalizeTitleWhitespace(text: string): string {
+  return String(text || '')
+    .replace(/\s+/g, ' ')
+    // 숫자 사이 쉼표 보호 (1,000원 등 천 단위 구분자 유지)
+    .replace(/(?<!\d)\s*,\s*/g, ', ')
+    .replace(/,\s+(?=\d{3})/g, ',')  // 이미 깨진 "1, 000" 복구
+    .replace(/\s*:\s*/g, ': ')
+    .replace(/\s*\|\s*/g, ' | ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+/**
+ * 본문 공백 정규화 (줄바꿈 보존) — 각 라인 내부 다중 공백 압축, 라인 끝 공백 제거,
+ * 라인 시작 trim, 3개 이상 연속 줄바꿈을 2개로 압축.
+ *
+ * normalizeTitleWhitespace와 달리 `\n`을 보존하여 본문 구조 유지.
+ *
+ * @param text - 정규화 대상 본문 문자열
+ * @returns 정규화된 본문. 입력이 falsy면 원본 반환.
+ */
+export function normalizeBodyWhitespacePreserveNewlines(text: string): string {
+  if (!text) return text;
+  const normalized = String(text)
+    .split('\n')
+    .map((line) => line.replace(/[ \t]{2,}/g, ' ').replace(/[ \t]+$/g, '').trimStart())
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+  return normalized;
+}
