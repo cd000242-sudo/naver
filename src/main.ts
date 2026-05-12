@@ -9458,6 +9458,40 @@ app.whenReady().then(async () => {
     //   사용자에게는 즉시 splash가 보임. 로그인/메인 윈도우 준비되면 splash close.
     showSplash();
 
+    // [v2.10.155] Layer 2 — 좀비 회복 시스템 초기화 + 이전 세션 좀비 자동 정리
+    //   부팅 차단 없이 setImmediate(non-blocking)으로 백그라운드 실행.
+    //   사용자 통찰 "사용자들도 다들 그럼 느려지는이유가 이게원인이네" 해결책.
+    try {
+      const zombieRecovery = require('./runtime/zombieRecovery');
+      zombieRecovery.initZombieRecovery({ userDataDir: app.getPath('userData') });
+      setImmediate(async () => {
+        try {
+          const report = await zombieRecovery.recoverZombiesOnStartup({ currentMainPid: process.pid });
+          if (report.killed.length > 0) {
+            console.log(`[ZombieRecovery] ✅ ${report.killed.length}개 좀비 정리 완료 (${report.durationMs}ms)`);
+            // 메인 윈도우 준비되면 toast 알림
+            const sendToastWhenReady = () => {
+              if (mainWindow && !mainWindow.isDestroyed()) {
+                mainWindow.webContents.send('log-message',
+                  `🧹 이전 세션 좀비 프로세스 ${report.killed.length}개 자동 정리 완료 (시스템 정상화)`);
+              } else {
+                setTimeout(sendToastWhenReady, 1000);
+              }
+            };
+            sendToastWhenReady();
+          } else if (report.scanned > 0) {
+            console.log(`[ZombieRecovery] 스캔 ${report.scanned}개, 정리 대상 없음 (${report.skippedReason || 'no-candidates'})`);
+          }
+          // 새 세션 시작 — lock 초기화
+          zombieRecovery.startSession({ mainPid: process.pid, appVersion: app.getVersion() });
+        } catch (e: any) {
+          console.warn('[ZombieRecovery] 시작 시 회복 실패 (무시):', e?.message);
+        }
+      });
+    } catch (e: any) {
+      console.warn('[ZombieRecovery] 모듈 로드 실패 (무시):', e?.message);
+    }
+
     // ✅ [v2.10.42] 트렌드 알림 콜백 등록을 app.whenReady 후 setImmediate로 이동
     //   기존: module load 시 즉시 등록 → 부팅 cold path 부하
     //   수정: 부팅 게이트 통과 후 idle 시점에 등록 → splash가 먼저 보임
@@ -10144,15 +10178,35 @@ app.whenReady().then(async () => {
 //   1주일 후 7~14개 → 1~3GB RAM 점유 → 시스템 전체 느려짐. 재부팅 시 회복.
 //   해결: 정상/비정상 모든 경로에 동일 cleanup 호출 + 다중 호출 방지 가드.
 let _cleanupRan = false;
+
+// [v2.10.155] 종료 모달 IPC — renderer가 cleanup 진행 상황 표시
+function _notifyCleanupModal(payload: { phase: 'start' | 'progress' | 'done'; message: string; count?: number }): void {
+  try {
+    for (const win of BrowserWindow.getAllWindows()) {
+      if (!win.isDestroyed()) {
+        win.webContents.send('cleanup-modal', payload);
+      }
+    }
+  } catch { /* ignore — modal은 best-effort */ }
+}
+
 async function _runFullCleanup(reason: string): Promise<void> {
   if (_cleanupRan) return;
   _cleanupRan = true;
   console.log(`[Main] 🧹 cleanup 시작 (reason: ${reason})`);
 
+  // [v2.10.155] 사용자에게 모달 표시 — 종료 경로일 때만 (uncaughtException 등 비상은 skip)
+  const showModal = reason === 'window-all-closed' || reason === 'SIGTERM' || reason === 'SIGINT' || reason === 'before-quit';
+  if (showModal) {
+    _notifyCleanupModal({ phase: 'start', message: '🧹 좀비 프로세스 정리 중...' });
+  }
+
   // BrowserSessionManager 세션 정리
+  if (showModal) _notifyCleanupModal({ phase: 'progress', message: '브라우저 세션 종료 중...' });
   await browserSessionManager.closeAllSessions().catch((e) => console.warn('[Main] closeAllSessions 실패:', e?.message));
 
   // 진행 중인 automation cancel
+  if (showModal) _notifyCleanupModal({ phase: 'progress', message: '자동화 작업 중단 중...' });
   const closePromises: Promise<void>[] = [];
   if (automation) {
     closePromises.push(automation.cancel().catch(() => undefined));
@@ -10167,19 +10221,37 @@ async function _runFullCleanup(reason: string): Promise<void> {
   automation = null;
 
   // Flow/ImageFX persistent context — 쿠키 flush 보장
+  if (showModal) _notifyCleanupModal({ phase: 'progress', message: 'Flow/ImageFX 컨텍스트 정리 중...' });
   await resetFlowState().catch((e) => console.warn('[Main] Flow context close 실패:', e?.message));
   await cleanupImageFxBrowser().catch((e) => console.warn('[Main] ImageFX cleanup 실패:', e?.message));
 
   // 추적 등록한 모든 자식 프로세스 taskkill /T /F (LEWORD 등)
+  if (showModal) _notifyCleanupModal({ phase: 'progress', message: '자식 프로세스 정리 중...' });
+  let killedCount = 0;
   try {
-    const { killAllTrackedChildren } = require('./runtime/childProcessRegistry.js');
+    const { killAllTrackedChildren, getTrackedChildren } = require('./runtime/childProcessRegistry.js');
+    killedCount = (getTrackedChildren?.() || []).length;
     await killAllTrackedChildren();
   } catch (e) {
     console.warn('[Main] 자식 프로세스 정리 실패:', (e as Error)?.message);
   }
 
+  // [v2.10.155] zombieRecovery lock 정리 (정상 종료) — 다음 시작 시 좀비 없음 처리
+  try {
+    const zombieRecovery = require('./runtime/zombieRecovery');
+    zombieRecovery.clearLockOnNormalExit();
+  } catch { /* ignore */ }
+
   try { trendMonitor.stop(); } catch { /* ignore */ }
-  console.log(`[Main] ✅ cleanup 완료 (reason: ${reason})`);
+
+  if (showModal) {
+    _notifyCleanupModal({
+      phase: 'done',
+      message: killedCount > 0 ? `✅ ${killedCount}개 프로세스 정리 완료` : '✅ 정리 완료',
+      count: killedCount,
+    });
+  }
+  console.log(`[Main] ✅ cleanup 완료 (reason: ${reason}, killed: ${killedCount})`);
 }
 
 app.on('window-all-closed', async () => {

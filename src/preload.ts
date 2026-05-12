@@ -292,6 +292,8 @@ contextBridge.exposeInMainWorld('api', {
       'automation:reset-fields', // 예약 발행 후 자동 초기화
       // ✅ [SPEC-IMAGE-RECOVERY-001] 자동 복구 시스템
       'recovery:show-modal',  // 차단형 모달 표시 요청
+      // [v2.10.155] 좀비 정리 진행 모달 (종료 시)
+      'cleanup-modal',        // main.ts _runFullCleanup 진행 상황
     ];
     if (!ALLOWED_CHANNELS.includes(channel)) {
       // eslint-disable-next-line no-console

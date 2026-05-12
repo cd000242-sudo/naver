@@ -272,6 +272,43 @@ import {
   }
 })();
 
+// [v2.10.155] 종료 시 좀비 정리 모달 IPC handler
+//   main.ts _runFullCleanup이 phase별로 'cleanup-modal' IPC 전송
+//   phase: 'start' | 'progress' | 'done'
+(function setupCleanupModalListener() {
+  if (window.api && typeof window.api.on === 'function') {
+    let progressPercent = 0;
+    window.api.on('cleanup-modal', (payload: { phase: 'start' | 'progress' | 'done'; message: string; count?: number }) => {
+      const modal = document.getElementById('cleanup-modal');
+      const titleEl = document.getElementById('cleanup-modal-title');
+      const msgEl = document.getElementById('cleanup-modal-message');
+      const progEl = document.getElementById('cleanup-modal-progress');
+      if (!modal || !titleEl || !msgEl || !progEl) return;
+
+      if (payload.phase === 'start') {
+        progressPercent = 10;
+        modal.style.display = 'flex';
+        titleEl.textContent = '🧹 기존 좀비 프로세스를 정리하는 중...';
+        msgEl.textContent = payload.message;
+        progEl.style.width = '10%';
+      } else if (payload.phase === 'progress') {
+        progressPercent = Math.min(progressPercent + 18, 85);
+        msgEl.textContent = payload.message;
+        progEl.style.width = `${progressPercent}%`;
+      } else if (payload.phase === 'done') {
+        msgEl.textContent = payload.message;
+        progEl.style.width = '100%';
+        titleEl.textContent = '✅ 정리 완료';
+        // 1.2초 후 모달 자동 사라짐 (앱 종료 직전이라 timing 짧게)
+        setTimeout(() => {
+          modal.style.display = 'none';
+        }, 1200);
+      }
+    });
+    console.log('[CleanupModal] 종료 정리 모달 리스너 등록 완료');
+  }
+})();
+
 import { onAccountLogout as accountLogout } from './modules/accountSettingsManager.js';
 import { runWhenIdle } from './utils/idleInit.js';
 import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';

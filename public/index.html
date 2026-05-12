@@ -12392,6 +12392,24 @@
         </div>
     </div>
 
+    <!-- [v2.10.155] 종료 시 좀비 정리 진행 모달 — main.ts cleanup IPC로 표시 -->
+    <div id="cleanup-modal" style="display: none; position: fixed; inset: 0; z-index: 200000; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); align-items: center; justify-content: center;">
+        <div style="background: linear-gradient(135deg, #1f2937, #111827); border: 2px solid #10b981; border-radius: 16px; padding: 2.5rem 3rem; min-width: 380px; max-width: 500px; box-shadow: 0 20px 60px rgba(16, 185, 129, 0.3); text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 1rem; animation: pulse 1.5s ease-in-out infinite;">🧹</div>
+            <div id="cleanup-modal-title" style="color: #10b981; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">기존 좀비 프로세스를 정리하는 중...</div>
+            <div id="cleanup-modal-message" style="color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 1.5rem; min-height: 1.3rem;">잠시만 기다려주세요</div>
+            <div style="height: 4px; background: rgba(16, 185, 129, 0.2); border-radius: 2px; overflow: hidden;">
+                <div id="cleanup-modal-progress" style="height: 100%; background: linear-gradient(90deg, #10b981, #34d399); width: 0%; transition: width 0.3s ease; box-shadow: 0 0 10px #10b981;"></div>
+            </div>
+        </div>
+    </div>
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.05); }
+        }
+    </style>
+
 </body>
 
 </html>
