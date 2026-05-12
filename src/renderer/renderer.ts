@@ -277,6 +277,96 @@ import { runWhenIdle } from './utils/idleInit.js';
 import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// [Phase 0/v2.10.128] setInterval / setTimeout / MutationObserver monkey-patch.
+//   목적: 모든 자동 콜백에 출처 마커 자동 부착 → LongTask observer가 *어느 콜백*에서 발생했는지 식별.
+//   콜백 실행 *전*에 window.__lastBackgroundTask = '<type>:<source>' 설정.
+//   부작용: setInterval 등록 시 Error().stack 1회 파싱 (콜백마다 아님). 비용 무시.
+// ═══════════════════════════════════════════════════════════════════════════════
+(function setupAutoTaskMarkers() {
+  const w = window as any;
+  // 호출자 위치 추출 — Error stack 2번째 줄 (현재 함수 다음 = 호출자)
+  const getCaller = (): string => {
+    try {
+      const stack = new Error().stack || '';
+      const lines = stack.split('\n').slice(2, 5); // 0=Error, 1=getCaller, 2+=호출자
+      for (const line of lines) {
+        const trimmed = line.trim();
+        // 패턴: "at funcName (file:N:M)" 또는 "at file:N:M"
+        const m = trimmed.match(/at\s+(?:(\S+)\s+)?\(?([^():]+:\d+:\d+)\)?/);
+        if (m) {
+          const name = m[1] && m[1] !== '<anonymous>' ? m[1] : '';
+          const loc = m[2].split('/').pop() || m[2];
+          return name ? `${name}@${loc}` : loc;
+        }
+      }
+      return 'unknown';
+    } catch { return 'unknown'; }
+  };
+  // setInterval 래핑
+  const _setInterval = window.setInterval.bind(window);
+  (window as any).setInterval = function (fn: any, ms?: number, ...args: any[]) {
+    const caller = getCaller().substring(0, 80);
+    const wrapped = typeof fn === 'function'
+      ? function (this: any, ...cbArgs: any[]) {
+          w.__lastBackgroundTask = `interval:${caller}`;
+          return (fn as any).apply(this, cbArgs);
+        }
+      : fn;
+    return _setInterval(wrapped, ms, ...args);
+  };
+  // setTimeout 래핑 (>500ms만 — 짧은 yield/throttle은 노이즈)
+  const _setTimeout = window.setTimeout.bind(window);
+  (window as any).setTimeout = function (fn: any, ms?: number, ...args: any[]) {
+    if (typeof fn !== 'function' || typeof ms !== 'number' || ms < 500) return _setTimeout(fn, ms as any, ...args);
+    const caller = getCaller().substring(0, 80);
+    const wrapped = function (this: any, ...cbArgs: any[]) {
+      w.__lastBackgroundTask = `timeout(${ms}ms):${caller}`;
+      return (fn as any).apply(this, cbArgs);
+    };
+    return _setTimeout(wrapped, ms, ...args);
+  };
+  // MutationObserver 래핑
+  const OrigMO = window.MutationObserver;
+  if (OrigMO) {
+    (window as any).MutationObserver = class WrappedMutationObserver extends OrigMO {
+      constructor(cb: MutationCallback) {
+        const caller = getCaller().substring(0, 80);
+        super((muts: MutationRecord[], obs: MutationObserver) => {
+          w.__lastBackgroundTask = `observer:${caller}`;
+          cb(muts, obs);
+        });
+      }
+    } as any;
+  }
+  // IntersectionObserver / ResizeObserver도 동일 패턴
+  if (typeof (window as any).IntersectionObserver === 'function') {
+    const OrigIO = (window as any).IntersectionObserver;
+    (window as any).IntersectionObserver = class WrappedIO extends OrigIO {
+      constructor(cb: any, opts?: any) {
+        const caller = getCaller().substring(0, 80);
+        super((entries: any, obs: any) => {
+          w.__lastBackgroundTask = `intersect:${caller}`;
+          cb(entries, obs);
+        }, opts);
+      }
+    };
+  }
+  if (typeof (window as any).ResizeObserver === 'function') {
+    const OrigRO = (window as any).ResizeObserver;
+    (window as any).ResizeObserver = class WrappedRO extends OrigRO {
+      constructor(cb: any) {
+        const caller = getCaller().substring(0, 80);
+        super((entries: any, obs: any) => {
+          w.__lastBackgroundTask = `resize:${caller}`;
+          cb(entries, obs);
+        });
+      }
+    };
+  }
+  console.warn('[PerfDebug] Auto task markers 등록 (setInterval/setTimeout>=500/MutationObserver/IntersectionObserver/ResizeObserver)');
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // ✅ [v2.10.109] 메모리/DOM 누수 진단 도구 — 사용자 보고: 작동할수록 점진적 느려짐.
 //   원인 후보: DOM 누수, listener 누수, MutationObserver 누수, 메모리 누수.
 //   진단 방식:
