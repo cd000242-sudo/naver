@@ -207,9 +207,14 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
 
   const renderGalleryItem = (post: any): string => {
     const firstImage = post.images && post.images.length > 0 ? post.images[0] : null;
-    const thumbnailImage = firstImage
+    const rawThumbnail = firstImage
       ? (firstImage.previewDataUrl || firstImage.filePath || firstImage.url)
       : null;
+    // [Phase 1-2/v2.10.135] 깨진 이미지 경로는 <img> 렌더 자체를 스킵 → ERR_FILE_NOT_FOUND 영구 차단.
+    //   onerror에서 한 번 markBrokenImage 등록되면 다음 렌더부터 placeholder만 표시.
+    const isBroken = rawThumbnail && typeof (window as any).isBrokenImage === 'function'
+      ? (window as any).isBrokenImage(rawThumbnail) : false;
+    const thumbnailImage = isBroken ? null : rawThumbnail;
     const highlightedTitle = searchTerm ? highlightText(post.title || '(제목 없음)', searchTerm) : (post.title || '(제목 없음)');
 
     return `
@@ -219,7 +224,7 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
           ${post.publishedUrl ? (() => { const pm = (post as any).publishMode; const badgeBg = pm === 'draft' ? '#3b82f6' : pm === 'schedule' ? '#8b5cf6' : '#10b981'; const badgeText = pm === 'draft' ? '📝 임시발행됨' : pm === 'schedule' ? '📅 예약발행됨' : '✅ 발행됨'; return `<div style="position: absolute; top: 0.5rem; left: 2rem; background: ${badgeBg}; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; z-index: 10; cursor: pointer;" onclick="event.stopPropagation(); window.open('${post.publishedUrl}', '_blank');">${badgeText}</div>`; })() : ''}
           ${thumbnailImage ? `
             <div class="thumbnail-container" style="width: 100%; height: 200px; overflow: hidden; background: var(--bg-tertiary); cursor: pointer;" onclick="event.stopPropagation(); showImageModal('${thumbnailImage}');">
-              <img src="${thumbnailImage}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--text-muted)\\'>🖼️</div>';" />
+              <img src="${thumbnailImage}" style="width: 100%; height: 100%; object-fit: cover;" onerror="window.markBrokenImage&&window.markBrokenImage('${thumbnailImage}'); this.style.display='none'; this.parentElement.innerHTML='<div style=\\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--text-muted)\\'>🖼️</div>';" />
             </div>
           ` : '<div style="width: 100%; height: 200px; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--text-muted);">📄</div>'}
           <div style="padding: 1rem;">
@@ -266,9 +271,13 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
       : safeContent;
 
     const firstImage = post.images && post.images.length > 0 ? post.images[0] : null;
-    const thumbnailImage = firstImage
+    const rawThumbnail = firstImage
       ? (firstImage.previewDataUrl || firstImage.filePath || firstImage.url)
       : null;
+    // [Phase 1-2/v2.10.135] 동일 패턴 — broken 등록된 경로는 <img> 스킵.
+    const isBroken = rawThumbnail && typeof (window as any).isBrokenImage === 'function'
+      ? (window as any).isBrokenImage(rawThumbnail) : false;
+    const thumbnailImage = isBroken ? null : rawThumbnail;
 
     const highlightedTitle = searchTerm ? highlightText(post.title || '(제목 없음)', searchTerm) : (post.title || '(제목 없음)');
     const highlightedPreview = searchTerm ? highlightText(contentPreview, searchTerm) : contentPreview;
@@ -281,7 +290,7 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
         <div style="display: flex; align-items: start; justify-content: space-between; gap: 1rem;">
           ${thumbnailImage ? `
             <div class="thumbnail-container" style="flex-shrink: 0; width: 120px; height: 80px; border-radius: 4px; overflow: hidden; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="event.stopPropagation(); showImageModal('${thumbnailImage}');">
-              <img src="${thumbnailImage}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️';" />
+              <img src="${thumbnailImage}" style="width: 100%; height: 100%; object-fit: cover;" onerror="window.markBrokenImage&&window.markBrokenImage('${thumbnailImage}'); this.style.display='none'; this.parentElement.innerHTML='🖼️';" />
             </div>
           ` : ''}
           <div style="flex: 1; min-width: 0;">

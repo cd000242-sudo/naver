@@ -130,6 +130,7 @@ try {
     'htmlUtils.js',
     'headingKeyUtils.js',
     'storageUtils.js',
+    'brokenImageRegistry.js',  // [Phase 1-2/v2.10.135] ERR_FILE_NOT_FOUND 영구 차단 — window.isBrokenImage/markBrokenImage 노출
     'dateUtils.js',
     'titleUtils.js',
     'errorUtils.js',
