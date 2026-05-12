@@ -2038,6 +2038,8 @@ ipcMain.handle('leword:launch', async () => {
       mainWindow?.webContents.send('log-message', `⚠️ 업데이트 확인 실패 — LEWORD ${localVersion} 실행 (다음에 재시도)`);
       const child = spawn(installedExe, [], { detached: true, stdio: 'ignore' });
       child.unref();
+      // [v2.10.152] trackChild 누락 fix — 다른 4개 spawn 분기는 모두 trackChild 호출하지만 이 분기만 누락 → LEWORD 좀비 발생
+      try { const { trackChild } = require('./runtime/childProcessRegistry.js'); trackChild(child.pid, 'LEWORD(no-network)'); } catch { /* ignore */ }
       return { success: true, message: 'LEWORD 앱이 실행되었습니다 (업데이트 확인 실패).' };
     }
   }

@@ -1545,7 +1545,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                 // 기존 fetch HEAD redirect:manual 방식은 네이버 봇 감지에 의해 실패
                 if (resolvedAffiliateUrl.includes('naver.me')) {
                   self.log(`   🔗 naver.me 단축 URL 감지 → Playwright로 리다이렉트 추적 중...`);
-                  let pwBrowser = null;
+                  // [v2.10.152] try/finally 패턴으로 좀비 chromium 방지 — 모든 경로에서 close 보장.
+                  //   기존: catch에서만 close → throw 시 좀비 발생.
+                  let pwBrowser: import('playwright').Browser | null = null;
                   try {
                     const { chromium } = await import('playwright');
                     pwBrowser = await chromium.launch({ headless: true });
@@ -1568,8 +1570,6 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                       await pwPage.waitForTimeout(500);
                       trackedUrl = pwPage.url();
                     }
-                    await pwBrowser.close();
-                    pwBrowser = null;
                     if (trackedUrl !== resolvedAffiliateUrl && !trackedUrl.includes('naver.me')) {
                       resolvedAffiliateUrl = trackedUrl;
                       self.log(`   ✅ Playwright 최종 스토어 URL: ${trackedUrl.substring(0, 60)}...`);
@@ -1578,7 +1578,12 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                     }
                   } catch (pwError) {
                     self.log(`   ⚠️ Playwright 리다이렉트 추적 실패: ${(pwError as Error).message}`);
-                    if (pwBrowser) { try { await pwBrowser.close(); } catch { } }
+                  } finally {
+                    // [v2.10.152] 정상/예외 모든 경로 close 보장 — chromium 좀비 차단
+                    if (pwBrowser) {
+                      try { await pwBrowser.close(); } catch { /* ignore */ }
+                      pwBrowser = null;
+                    }
                   }
                 }
 
