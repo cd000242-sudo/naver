@@ -284,22 +284,42 @@ import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
 // ═══════════════════════════════════════════════════════════════════════════════
 (function setupAutoTaskMarkers() {
   const w = window as any;
-  // 호출자 위치 추출 — Error stack 2번째 줄 (현재 함수 다음 = 호출자)
+  // [v2.10.129] 호출자 추출 강화 — minified renderer.js + 다양한 stack 형식 대응.
+  //   기존: 정규식 1개로 unknown 반환률 높음.
+  //   강화: stack 깊이 10, 다중 정규식, fallback으로 raw 부분 반환.
   const getCaller = (): string => {
     try {
       const stack = new Error().stack || '';
-      const lines = stack.split('\n').slice(2, 5); // 0=Error, 1=getCaller, 2+=호출자
-      for (const line of lines) {
-        const trimmed = line.trim();
-        // 패턴: "at funcName (file:N:M)" 또는 "at file:N:M"
-        const m = trimmed.match(/at\s+(?:(\S+)\s+)?\(?([^():]+:\d+:\d+)\)?/);
+      const lines = stack.split('\n');
+      // 0=Error, 1=getCaller, 2=래퍼(setInterval/MutationObserver 등), 3+=실제 호출자
+      // 더 깊이 (스트림: 일부 anonymous arrow 통과)
+      for (let i = 3; i < Math.min(lines.length, 12); i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+        // 다양한 형식 매칭:
+        // "at funcName (file:N:M)"
+        // "at funcName (file:N:M:O)" — Chromium :col 포함
+        // "at file:N:M"
+        // "at async funcName (file:N:M)"
+        let m = line.match(/at\s+(?:async\s+)?(\S+)\s+\((.+?):(\d+):(\d+)\)/);
         if (m) {
-          const name = m[1] && m[1] !== '<anonymous>' ? m[1] : '';
-          const loc = m[2].split('/').pop() || m[2];
-          return name ? `${name}@${loc}` : loc;
+          const [, name, file, ln] = m;
+          const shortFile = (file.split('/').pop() || file).split('?')[0];
+          if (name === '<anonymous>' || name === 'Object.<anonymous>') {
+            return `${shortFile}:${ln}`;
+          }
+          return `${name}@${shortFile}:${ln}`;
+        }
+        // "at file:N:M" (이름 없음)
+        m = line.match(/at\s+(.+?):(\d+):(\d+)/);
+        if (m) {
+          const shortFile = (m[1].split('/').pop() || m[1]).split('?')[0];
+          return `${shortFile}:${m[2]}`;
         }
       }
-      return 'unknown';
+      // fallback — raw stack 일부 (디버깅 가능)
+      const raw = lines.slice(2, 5).map(l => l.trim()).filter(l => l).join(' | ');
+      return raw.substring(0, 100) || 'unknown';
     } catch { return 'unknown'; }
   };
   // setInterval 래핑
