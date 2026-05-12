@@ -1,4 +1,4 @@
-import Anthropic from '@anthropic-ai/sdk';
+﻿import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
 // ✅ [2026-01-25] Perplexity 추가
 import { generatePerplexityContent, translatePerplexityError } from './perplexity.js';
@@ -35,10 +35,14 @@ import {
   normalizeTitleWhitespace,
   normalizeBodyWhitespacePreserveNewlines,
 } from './contentTextHelpers';
-// [Phase 3-4/v2.10.142] 제목 cleanup helper — stripOrdinalHeadingPrefix만 별도 도메인 파일로 분리
-//   sanitize/cleanupStarting/cleanupTrailing/cleanupColonQuote는 contentTitleHelpers.ts에 *대기*
-//   contentGenerator.ts 내부 원본 유지 (이전 추출 시도에서 Edit tool unicode escape 충돌 → 다음 phase 신중 진행)
-import { stripOrdinalHeadingPrefix } from './contentTitleHelpers';
+// [Phase 3-5/v2.10.143] 제목 cleanup helper 5개 모두 활성화 — contentGenerator.ts 원본 정의 제거 완료
+import {
+  stripOrdinalHeadingPrefix,
+  sanitizeTitleSpecialChars,
+  cleanupStartingTitleTokens,
+  cleanupTrailingTitleTokens,
+  cleanupColonQuotePattern,
+} from './contentTitleHelpers';
 // [Phase 3-2/v2.10.140] re-export — naverBlogAutomation.ts / contentGenerator.test.ts 외부 호출자 호환 유지
 export { stripAllFormatting };
 import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
@@ -416,120 +420,14 @@ export function removeOrdinalHeadingLabelsFromBody(bodyText: string): string {
   return cleaned.trim();
 }
 
-// ✅ [2026-02-24 FIX] 제목 내 특수문자 정제
-// AI가 중간점(·), 세미콜론(;), 불필요한 따옴표(') 등을 제목에 삽입하는 문제 방지
-function sanitizeTitleSpecialChars(raw: string): string {
-  let t = String(raw || '').trim();
-  if (!t) return '';
+// [Phase 3-5/v2.10.143] sanitizeTitleSpecialChars → contentTitleHelpers.ts
 
-  // ✅ [2026-03-14] [출처] 태그 + 이후 중복 제목 전체 제거
-  // 크롤링된 원문에서 "제목\n[출처] 제목" 패턴이 유입됨
-  t = t.replace(/\[출처\].*$/s, '').trim();
-  t = t.replace(/\(출처[^)]*\)/g, '').trim();
-
-  // ✅ [2026-03-14] 크롤링 아티팩트/낚시성 접미사 제거 (쇼핑 블로그에서 자주 유입)
-  const junkSuffixes = [
-    '내돈내산', '협찬', '제공', '체험단', '서포터즈',
-    '원고료', '광고', '소정의', '대가성',
-    '킹 카', '킹카',
-  ];
-  for (const junk of junkSuffixes) {
-    const rx = new RegExp(`[\\s,·•|:]*${junk.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*$`, 'i');
-    t = t.replace(rx, '').trim();
-  }
-
-  // 1. 가운뎃점(·) 및 bullet(•) → 공백으로 대체 (한국어 제목에는 부적합)
-  t = t.replace(/[·•]/g, ' ');
-
-  // 2. 세미콜론(;) → 쉼표로 대체
-  t = t.replace(/;/g, ',');
-
-  // 3. 불필요한 따옴표/아포스트로피 제거 (한국어 앞뒤에 붙은 경우)
-  // 예: "이전'을" → "이전을"  (한글+따옴표+한글 패턴)
-  t = t.replace(/([가-힣])['`'´'']/g, '$1');
-  t = t.replace(/['`'´'']([가-힣])/g, '$1');
-
-  // 4. 연속된 구두점 정리: ",," → ",", ", ," → ","
-  t = t.replace(/,\s*,/g, ',');
-  // ✅ [2026-02-24] 숫자 사이 쉼표 보호 (1,000원 등 천 단위 구분자 유지)
-  t = t.replace(/(?<!\d)\s*,\s*/g, ', ');
-  t = t.replace(/,\s+(?=\d{3})/g, ',');  // 이미 깨진 "1, 000" 복구
-
-  // 5. 이중 공백 정리
-  t = t.replace(/\s{2,}/g, ' ').trim();
-
-  // 6. 선행/후행 구두점 정리
-  t = t.replace(/^[\s,;·•]+/, '').replace(/[\s,;·•]+$/, '').trim();
-
-  return t;
-}
-
-function cleanupStartingTitleTokens(raw: string): string {
-  let t = String(raw || '').trim();
-  if (!t) return '';
-
-  // 1. [공지], (공지), 【공지】 등 공지 관련 태그 제거
-  t = t.replace(/^\s*[\[\(【]\s*공지\s*[\]\)】]\s*/i, '');
-
-  // 2. 공외:, [NOTICE], (NOTICE) 등 유사 패턴 제거
-  t = t.replace(/^\s*[\[\(【]?\s*(?:NOTICE|공지사항|안내|이슈)\s*[\]\)】]?\s*[:：]?\s*/i, '');
-
-  // ✅ [2026-02-09 FIX] [지역명], [브랜드] 등 대괄호 시작 패턴 제거
-  // AI가 "[김해] 월세 0원 사무실..." 처럼 생성하는 경향 → 네이버 SEO에 불리
-  t = t.replace(/^\s*\[[^\]]{1,10}\]\s*/g, '');
-
-  // 3. 맨 앞의 불필요한 기호 제거
-  t = t.replace(/^[\s\-–—:|·•,]+/, '');
-
-  return t.trim();
-}
+// [Phase 3-5/v2.10.143] cleanupStartingTitleTokens → contentTitleHelpers.ts
 
 
-function cleanupTrailingTitleTokens(raw: string): string {
-  let t = normalizeTitleWhitespace(removeEmojis(String(raw || '').trim()));
-  if (!t) return '';
+// [Phase 3-5/v2.10.143] cleanupTrailingTitleTokens → contentTitleHelpers.ts
 
-  // ✅ [2026-02-09 FIX] 빈 괄호/대괄호 제거 — AI가 프롬프트 예시 패턴을 잘못 학습해 생성
-  // 예: "[김해] 월세 0원 사무실? ... [] 김해, 0원 놓치면 매달 손해 ()"
-  t = t.replace(/\[\s*\]/g, '');   // 빈 대괄호 [] 제거
-  t = t.replace(/\(\s*\)/g, '');   // 빈 소괄호 () 제거
-  t = t.replace(/【\s*】/g, '');    // 빈 이중대괄호 【】 제거
-  t = t.replace(/\s{2,}/g, ' ').trim(); // 정리
-
-  // remove dangling single-word bait tokens often emitted at the end
-  // (keep this conservative to avoid changing legitimate titles)
-  const trailingTokens = ['직접', '진짜', '충격', '대박'];
-  for (const tok of trailingTokens) {
-    const rx = new RegExp(`(?:[\\s,·•|:]+)?${tok}\\s*$`, 'i');
-    if (rx.test(t)) {
-      t = t.replace(rx, '').trim();
-    }
-  }
-
-  // cleanup leftover punctuation at the end
-  t = t.replace(/[\s\-–—:|·•,]+$/g, '').trim();
-  return t;
-}
-
-// ✅ [2026-02-10 FIX] 콜론+따옴표 패턴 정제
-// AI가 프롬프트의 {키워드} + {설명} 구조를 리터럴로 해석해
-// "키워드 : "설명문" 나머지" 형태로 생성하는 문제 방지
-function cleanupColonQuotePattern(raw: string): string {
-  let t = String(raw || '').trim();
-  if (!t) return '';
-
-  // 1) 콜론+따옴표 구분자 제거: "키워드 : "설명"" → "키워드 설명"
-  //    다양한 따옴표 유형 대응 (큰따옴표, 작은따옴표, 한글 따옴표)
-  t = t.replace(/\s*[:：]\s*["'\u201C\u201D\u2018\u2019\u300C\u300D\u300E\u300F]+\s*/g, ' ');
-
-  // 2) 남은 닫는 따옴표 제거
-  t = t.replace(/["'\u201C\u201D\u2018\u2019\u300C\u300D\u300E\u300F]+/g, '');
-
-  // 3) 이중 공백 정리
-  t = t.replace(/\s{2,}/g, ' ').trim();
-
-  return t;
-}
+// [Phase 3-5/v2.10.143] cleanupColonQuotePattern -> contentTitleHelpers.ts
 
 function applyKeywordPrefixToTitle(title: string, keyword: string): string {
   const cleanKeyword = (keyword || '').trim();
