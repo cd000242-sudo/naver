@@ -28,3 +28,64 @@ export function removeEmojis(text: string): string {
 
   return text.replace(emojiPattern, '').replace(/\s{2,}/g, ' ').trim();
 }
+
+/**
+ * 마크다운/HTML 포맷팅 완전 제거 — 제목/소제목/본문 어디서든 사용 가능한 범용 함수.
+ *
+ * 처리 대상:
+ *   - 마크다운: **bold**, __underline__, *italic* (중첩 3회까지)
+ *   - HTML 태그: <u>, <b>, <i>, <strong>, <em>, <mark>, <span>, <font>, <s>, <strike>, <del>, <ins>
+ *   - AI 인용 번호: [1], [2, 3] 등
+ *   - <style> 블록 + CSS 덤프 텍스트 (v1.4.82 — 네이버 에디터 CSS 본문 누출 차단)
+ *
+ * @param text - 포맷팅 제거 대상 문자열
+ * @returns 포맷팅이 제거되고 trim된 문자열. 입력이 falsy면 원본 반환.
+ */
+export function stripAllFormatting(text: string): string {
+  if (!text) return text;
+  let cleaned = String(text);
+
+  // 1. **bold** 마크다운 제거 (3회 반복으로 중첩 케이스도 처리)
+  for (let i = 0; i < 3; i++) {
+    cleaned = cleaned.replace(/\*\*(.*?)\*\*/g, '$1');
+  }
+  cleaned = cleaned.replace(/\*\*/g, ''); // 남은 ** 완전 제거
+
+  // 2. __언더스코어__ 마크다운 제거
+  for (let i = 0; i < 3; i++) {
+    cleaned = cleaned.replace(/__(.*?)__/g, '$1');
+  }
+  cleaned = cleaned.replace(/__/g, '');
+
+  // 3. *이탤릭* 마크다운 제거 (단, 문장 중간의 단독 * 는 보존)
+  cleaned = cleaned.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '$1');
+
+  // 4. <u>underline</u> HTML 태그 제거
+  for (let i = 0; i < 3; i++) {
+    cleaned = cleaned.replace(/<u\s*>(.*?)<\/u\s*>/gi, '$1');
+  }
+  cleaned = cleaned.replace(/<\/?u\s*>/gi, '');
+
+  // 5. <b>, <i>, <strong>, <em>, <mark>, <span> 등 HTML 태그 제거
+  cleaned = cleaned.replace(/<\/?(?:b|i|strong|em|mark|span|font|s|strike|del|ins)[^>]*>/gi, '');
+
+  // 6. 빈 태그 정리
+  cleaned = cleaned.replace(/<[^>]+>\s*<\/[^>]+>/gi, '');
+
+  // 7. AI 인용 번호 제거: [1], [2, 3] 등
+  cleaned = cleaned.replace(/\s*\[\d+(?:\s*,\s*\d+)*\]\s*/g, ' ');
+
+  // 8. <style> 블록 + CSS 덤프 텍스트 제거 (v1.4.82)
+  //    AI가 HTML을 생성할 때 <style> 태그를 포함하면 네이버 에디터가 태그만 제거하고
+  //    CSS 본문이 일반 텍스트로 붙어버려 "/* 애드센스 승인 전용 CSS */ .post-body { ... }"
+  //    같은 문자열이 본문에 그대로 렌더링되는 버그 차단.
+  cleaned = cleaned.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+  // CSS 주석 블록 + 셀렉터 본문 제거 — /* 주석 */ .selector { ...; } 형태
+  cleaned = cleaned.replace(/\/\*[\s\S]*?\*\//g, '');
+  // 셀렉터 + 속성블록 제거 — ".class, #id { prop: value; }" 같은 순수 CSS 덩어리
+  cleaned = cleaned.replace(/(?:^|\n)\s*[.#]?[a-zA-Z][\w\-]*(?:\s*,\s*[.#]?[a-zA-Z][\w\-]*)*\s*\{[^{}]*\}\s*/g, '\n');
+  // @keyframes / @media 블록 제거
+  cleaned = cleaned.replace(/@(?:keyframes|media|supports|import|charset)[^{]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/gi, '');
+
+  return cleaned.trim();
+}

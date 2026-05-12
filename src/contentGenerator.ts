@@ -29,7 +29,9 @@ import { processAutoPublishContent, getRecentPeriods, recordSelectedTitle, type 
 import { trendAnalyzer } from './agents/trendAnalyzer.js';
 import { loadConfig, getConfigSync } from './configManager.js';
 // [Phase 3-1/v2.10.139] god file 분해 1단계 — pure string helper 추출
-import { removeEmojis } from './contentTextHelpers';
+import { removeEmojis, stripAllFormatting } from './contentTextHelpers';
+// [Phase 3-2/v2.10.140] re-export — naverBlogAutomation.ts / contentGenerator.test.ts 외부 호출자 호환 유지
+export { stripAllFormatting };
 import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
 import { checkHomefeedCriticalViolations, checkPromptCompliance, formatComplianceReport } from './contentQualityChecker.js';
 import { safeParseJson, cleanJsonOutput, tryFixJson, fixJsonAtPosition } from './jsonParser';
@@ -151,59 +153,9 @@ function buildRecentWinnersBlock(source: any): string {
 
 // [Phase 3-1/v2.10.139] removeEmojis 함수는 contentTextHelpers.ts로 추출됨 (god file 분해).
 
-/**
- * ✅ [100점 수정] 마크다운/HTML 포맷팅 완전 제거 함수
- * 제목, 소제목, 본문 어디서든 사용 가능한 범용 함수
- * **bold**, <u>underline</u>, <b>, <i>, <strong>, <em> 등 모든 포맷팅 태그 제거
- */
-export function stripAllFormatting(text: string): string {
-  if (!text) return text;
-  let cleaned = String(text);
-
-  // 1. **bold** 마크다운 제거 (3회 반복으로 중첩 케이스도 처리)
-  for (let i = 0; i < 3; i++) {
-    cleaned = cleaned.replace(/\*\*(.*?)\*\*/g, '$1');
-  }
-  cleaned = cleaned.replace(/\*\*/g, ''); // 남은 ** 완전 제거
-
-  // 2. __언더스코어__ 마크다운 제거
-  for (let i = 0; i < 3; i++) {
-    cleaned = cleaned.replace(/__(.*?)__/g, '$1');
-  }
-  cleaned = cleaned.replace(/__/g, '');
-
-  // 3. *이탤릭* 마크다운 제거 (단, 문장 중간의 단독 * 는 보존)
-  cleaned = cleaned.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '$1');
-
-  // 4. <u>underline</u> HTML 태그 제거
-  for (let i = 0; i < 3; i++) {
-    cleaned = cleaned.replace(/<u\s*>(.*?)<\/u\s*>/gi, '$1');
-  }
-  cleaned = cleaned.replace(/<\/?u\s*>/gi, '');
-
-  // 5. <b>, <i>, <strong>, <em>, <mark>, <span> 등 HTML 태그 제거
-  cleaned = cleaned.replace(/<\/?(?:b|i|strong|em|mark|span|font|s|strike|del|ins)[^>]*>/gi, '');
-
-  // 6. 빈 태그 정리
-  cleaned = cleaned.replace(/<[^>]+>\s*<\/[^>]+>/gi, '');
-
-  // 7. ✅ [2026-03-09] AI 인용 번호 제거: [1], [2, 3] 등
-  cleaned = cleaned.replace(/\s*\[\d+(?:\s*,\s*\d+)*\]\s*/g, ' ');
-
-  // 8. ✅ [v1.4.82] <style>...</style> 블록 + CSS 덤프 텍스트 제거
-  //    AI가 HTML을 생성할 때 <style> 태그를 포함하면 네이버 에디터가 태그만 제거하고
-  //    CSS 본문이 일반 텍스트로 붙어버려 "/* 애드센스 승인 전용 CSS */ .post-body { ... }"
-  //    같은 문자열이 본문에 그대로 렌더링되는 버그 차단.
-  cleaned = cleaned.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
-  // CSS 주석 블록 + 셀렉터 본문 제거 — /* 주석 */ .selector { ...; } 형태
-  cleaned = cleaned.replace(/\/\*[\s\S]*?\*\//g, '');
-  // 셀렉터 + 속성블록 제거 — ".class, #id { prop: value; }" 같은 순수 CSS 덩어리
-  cleaned = cleaned.replace(/(?:^|\n)\s*[.#]?[a-zA-Z][\w\-]*(?:\s*,\s*[.#]?[a-zA-Z][\w\-]*)*\s*\{[^{}]*\}\s*/g, '\n');
-  // @keyframes / @media 블록 제거
-  cleaned = cleaned.replace(/@(?:keyframes|media|supports|import|charset)[^{]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/gi, '');
-
-  return cleaned.trim();
-}
+// [Phase 3-2/v2.10.140] stripAllFormatting 함수는 contentTextHelpers.ts로 추출됨 (god file 분해).
+//   외부 호출자 (naverBlogAutomation.ts, contentGenerator.test.ts)는 contentGenerator.ts의
+//   re-export를 통해 변경 없이 작동.
 
 /**
  * ✅ [2026-01-20] 제목에서 연속으로 중복되는 구절 제거
