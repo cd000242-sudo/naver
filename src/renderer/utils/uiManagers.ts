@@ -138,11 +138,16 @@ export class ToastManager {
             toast.style.transform = 'translateX(0)';
         }, 10);
 
-        // ✅ 자동 제거
+        // ✅ 자동 제거 — [v2.10.132] rAF batching (paint와 동기화, 다른 작업과 묶여 LongTask 만들지 않음)
+        //   사용자 보고: 'bg:timeout(4200ms):ToastManager.show 298ms HEAVY'
+        //   원인: toast remove 시점이 다른 작업(이미지 로드, 글 목록 렌더 등)과 동시 → 합산 LongTask
+        //   수정: style 변경 + remove를 rAF로 paint cycle에 묶음 → 합산 최소화
         setTimeout(() => {
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateX(100%)';
-            setTimeout(() => toast.remove(), 300);
+            requestAnimationFrame(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 300);
+            });
         }, duration);
     }
 
