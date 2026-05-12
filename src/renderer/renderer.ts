@@ -361,6 +361,30 @@ import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
 //   PerformanceObserver의 'longtask' 항목은 *50ms 이상의 작업*을 자동 보고.
 //   콘솔(F12)에서 [LongTask] 로그를 보면 그 시간대에 어떤 코드가 동기 실행 중인지 추적 가능.
 // ═══════════════════════════════════════════════════════════════════════════════
+// [Phase 0/v2.10.127] LongTask 진단 강화 — 마지막 사용자 액션 + attribution + 진단 hint.
+//   기존: 시점/길이만. "17초 시점 212ms HEAVY"가 *무엇*인지 불명.
+//   강화:
+//     1. 마지막 click/focus event target/id 추적 (window.__lastUserAction)
+//     2. Performance entry의 attribution 필드 (Chromium 표준 — script/iframe 출처)
+//     3. LongTask 발생 시점과 마지막 액션의 *시간 차이* (즉시 클릭 후 vs 자동 polling 구분)
+//     4. 자동 작업 마커 (window.__lastBackgroundTask — interval/setTimeout 식별용)
+(function setupUserActionTracker() {
+  const tracker = { type: '', target: '', id: '', ts: 0 };
+  (window as any).__lastUserAction = tracker;
+  const update = (e: Event) => {
+    const t = e.target as HTMLElement | null;
+    if (!t) return;
+    tracker.type = e.type;
+    tracker.target = t.tagName?.toLowerCase() || '?';
+    tracker.id = t.id || t.className?.toString().slice(0, 40) || '';
+    tracker.ts = performance.now();
+  };
+  document.addEventListener('click', update, true);
+  document.addEventListener('focusin', update, true);
+  document.addEventListener('change', update, true);
+  document.addEventListener('keydown', update, true);
+})();
+
 (function setupLongTaskObserver() {
   try {
     if (typeof PerformanceObserver === 'undefined') return;
@@ -369,11 +393,32 @@ import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
         const dur = entry.duration;
         if (dur < 50) continue;
         const level = dur > 500 ? '🚨 SEVERE' : dur > 200 ? '🐌 HEAVY' : '⚠️';
-        console.warn(`[LongTask] ${level} main thread 블로킹 ${dur.toFixed(0)}ms (start=${entry.startTime.toFixed(0)}ms)`);
+        const startMs = entry.startTime;
+        // 마지막 사용자 액션 + 시간 차이
+        const ua = (window as any).__lastUserAction as { type: string; target: string; id: string; ts: number };
+        let userCtx = '';
+        if (ua && ua.ts > 0) {
+          const deltaMs = (startMs - ua.ts).toFixed(0);
+          userCtx = ` | 직전 ${ua.type}:${ua.target}#${ua.id || '<none>'} (${deltaMs}ms 전)`;
+        }
+        // attribution (Chromium 표준): script/iframe 출처
+        const attribution = (entry as any).attribution as Array<{ containerType?: string; containerSrc?: string; containerId?: string; containerName?: string; name?: string }> | undefined;
+        let attrCtx = '';
+        if (Array.isArray(attribution) && attribution.length > 0) {
+          const a = attribution[0];
+          attrCtx = ` | attribution:${a.containerType || '?'}/${a.containerName || a.containerId || a.containerSrc || a.name || '?'}`;
+        }
+        // 백그라운드 작업 마커
+        const bgTask = (window as any).__lastBackgroundTask;
+        let bgCtx = '';
+        if (bgTask && typeof bgTask === 'string') bgCtx = ` | bg:${bgTask}`;
+        console.warn(
+          `[LongTask] ${level} main thread 블로킹 ${dur.toFixed(0)}ms (start=${startMs.toFixed(0)}ms)${userCtx}${attrCtx}${bgCtx}`,
+        );
       }
     });
     obs.observe({ type: 'longtask', buffered: true });
-    console.warn('[PerfDebug] LongTask observer 등록 — 50ms+ 블로킹 작업 자동 감지');
+    console.warn('[PerfDebug] LongTask observer 등록 — 50ms+ 블로킹 작업 자동 감지 (v2.10.127 상세 진단)');
   } catch (e) {
     console.warn('[PerfDebug] LongTask observer 등록 실패:', e);
   }
@@ -2310,6 +2355,8 @@ async function initializeApplication(): Promise<void> {
     _perfSteps.push({ label, ms: stepMs });
     const slow = stepMs > 100 ? '🐌 SLOW' : stepMs > 30 ? '⚠️' : '';
     console.warn(`[PerfDebug +${stepMs.toFixed(0)}ms / total ${totalMs}ms] ${label} ${slow}`);
+    // [v2.10.127] LongTask observer가 어떤 init 중인지 식별할 수 있게 마커 업데이트
+    (window as any).__lastBackgroundTask = `init:${label}`;
     _perfPrev = now;
   };
 
@@ -2336,11 +2383,16 @@ async function initializeApplication(): Promise<void> {
     }
   };
 
-  _perfMark('DOMContentLoaded 진입 → [Init] 시작');
+  // [v2.10.127] 모든 init 단계에 백그라운드 마커 — LongTask 발생 시 *어떤 init*인지 즉시 식별.
+  //   _perfMark가 자동으로 window.__lastBackgroundTask 업데이트.
+  const _markBg = (label: string) => { (window as any).__lastBackgroundTask = `init:${label}`; };
+  const _perfMarkWithBg = (label: string) => { _markBg(label); _perfMark(label); };
+
+  _perfMarkWithBg('DOMContentLoaded 진입 → [Init] 시작');
   console.log('[Init] 애플리케이션 초기화 시작');
 
   await initPaywallSystem();
-  _perfMark('initPaywallSystem 완료');
+  _perfMarkWithBg('initPaywallSystem 완료');
 
   UnifiedDOMCache.init();
   _perfMark('UnifiedDOMCache.init 완료');
