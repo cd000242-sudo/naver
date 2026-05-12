@@ -138,17 +138,32 @@ export class ToastManager {
             toast.style.transform = 'translateX(0)';
         }, 10);
 
-        // ✅ 자동 제거 — [v2.10.133] jitter 추가 (timing 분산)
-        //   사용자 보고: v2.10.132 rAF batching 후에도 'ToastManager.show 200ms' 잔존.
-        //   원인: 여러 toast가 *같은 시점*에 생성되면 *같은 duration 후* 동시 발화 → 합산 LongTask
-        //   추가: 0~500ms random jitter로 timing 분산 → 동시 발화 충돌 차단
+        // ✅ 자동 제거 — [v2.10.136] requestIdleCallback으로 main thread 양보
+        //   v2.10.133: jitter로 timing 분산 → 그래도 사용자 보고 110ms LongTask 잔존.
+        //   원인 분석: setTimeout fire 시점이 무거운 click/렌더와 같은 phase에 떨어지면
+        //     rAF + DOM 변경 + GC가 누적되어 LongTask 측정에 포착됨.
+        //   해결: requestIdleCallback으로 위임 → 브라우저가 *유휴* 시간에만 실행 → 차단 불가능.
+        //   timeout: 1000ms — idle이 안 와도 1초 후엔 강제 실행 (무한 대기 방지)
         const jitter = Math.random() * 500;
         setTimeout(() => {
-            requestAnimationFrame(() => {
+            const runRemoveAnim = () => {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateX(100%)';
-                setTimeout(() => toast.remove(), 300);
-            });
+                // 300ms transition 후 DOM 제거 — 같은 idle 채널 사용
+                setTimeout(() => {
+                    const removeNode = () => toast.remove();
+                    if (typeof (window as any).requestIdleCallback === 'function') {
+                        (window as any).requestIdleCallback(removeNode, { timeout: 500 });
+                    } else {
+                        removeNode();
+                    }
+                }, 300);
+            };
+            if (typeof (window as any).requestIdleCallback === 'function') {
+                (window as any).requestIdleCallback(runRemoveAnim, { timeout: 1000 });
+            } else {
+                requestAnimationFrame(runRemoveAnim);
+            }
         }, duration + jitter);
     }
 
