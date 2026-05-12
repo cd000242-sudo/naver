@@ -2574,15 +2574,17 @@ async function initializeApplication(): Promise<void> {
 
   // ✅ [v2.10.94] 글 목록 강제 재로드 — initUnifiedTab의 첫 호출이 _yieldIfNeeded
   //   사이에서 race condition(account namespacing 등)에 걸려 빈 목록일 가능성 대비.
-  //   1초 후 재호출 → 모든 setup 완료된 후라 정상 데이터 로드됨.
-  setTimeout(() => {
+  // [v2.10.138] setTimeout(1000) → runWhenIdle (76ms LongTask 차단).
+  //   원인: refreshGeneratedPostsList가 글 N개 DOM 렌더 + localStorage I/O로 76ms 점유.
+  //   해결: 브라우저 유휴 시간에만 실행, timeoutMs 3000으로 강제 fallback 보장.
+  runWhenIdle(() => {
     try {
       refreshGeneratedPostsList();
       console.warn('[Init] 생성된 글 목록 강제 재로드 완료 (v2.10.94)');
     } catch (e) {
       console.warn('[Init] 글 목록 재로드 실패 (무시):', e);
     }
-  }, 1000);
+  }, { name: 'refresh-posts-list', timeoutMs: 3000 });
 
   // ✅ [v2.10.93] 최종 요약 — top 5 느린 단계 console.warn으로 강조 출력
   //   (v2.10.41 console.log no-op 회피)
@@ -2598,9 +2600,9 @@ async function initializeApplication(): Promise<void> {
 
 
   // ✅ 임시 저장 데이터 복구 확인
-  setTimeout(() => {
-    restoreAutosavedContent();
-  }, 1000);
+  // [v2.10.138] setTimeout(1000) → runWhenIdle — main thread 양보.
+  //   autosave 모달은 사용자 즉시 확인 필요 없음 → idle 시간에 충분.
+  runWhenIdle(() => restoreAutosavedContent(), { name: 'restore-autosave', timeoutMs: 3000 });
 
   // v2.10.107: cleanup을 글 목록 렌더 *전*으로 이동 (위에서 await 호출). setTimeout 제거.
 
