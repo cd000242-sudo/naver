@@ -454,57 +454,16 @@ import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
 //   Chromium 콘솔 출력 자체는 사용자 코드로 못 막지만 *시각적 broken 표시*는 차단.
 // ═══════════════════════════════════════════════════════════════════════════════
 (function setupGlobalImgErrorHandler() {
-  // [v2.10.132] localStorage 영구 정리 — broken file:// src가 다음 시작에도 잔존 안 함.
-  //   기존: 시각만 숨김. localStorage에 그대로 → 매번 새로 렌더 시 또 broken
-  //   추가: src가 file:// 패턴이면 localStorage 글 데이터에서 해당 filePath/url 제거 (debounced)
-  let pendingBrokenSrcs: string[] = [];
-  let cleanupTimer: ReturnType<typeof setTimeout> | null = null;
-  const scheduleCleanup = () => {
-    if (cleanupTimer) clearTimeout(cleanupTimer);
-    cleanupTimer = setTimeout(() => {
-      if (pendingBrokenSrcs.length === 0) return;
-      const srcs = pendingBrokenSrcs.slice();
-      pendingBrokenSrcs = [];
-      try {
-        const raw = localStorage.getItem('naver_blog_generated_posts');
-        if (!raw) return;
-        const posts: any[] = JSON.parse(raw);
-        let modified = 0;
-        for (const post of posts) {
-          if (!Array.isArray(post.images)) continue;
-          for (const img of post.images) {
-            for (const key of ['filePath', 'savedToLocal', 'url']) {
-              const val = String(img?.[key] || '');
-              if (val && srcs.some(s => s.includes(val) || val.includes(s.replace(/^file:\/\/\//, '').replace(/^\//, '')))) {
-                delete img[key];
-                modified++;
-              }
-            }
-          }
-        }
-        if (modified > 0) {
-          localStorage.setItem('naver_blog_generated_posts', JSON.stringify(posts));
-          console.warn(`[BrokenImgCleanup] localStorage에서 ${modified}건 broken src 영구 제거 (${srcs.length}개 src)`);
-        }
-      } catch (err) {
-        console.warn('[BrokenImgCleanup] 정리 실패:', err);
-      }
-    }, 2000); // 2초 debounce — 글 목록 첫 렌더 시 여러 broken이 한꺼번에 발생하므로 묶음 처리
-  };
-
+  // [v2.10.133 REVERT] localStorage 정리 제거 — v2.10.132 fix가 81ms LongTask 만듦 (회귀).
+  //   500KB localStorage + 1000+ iteration이 main thread block.
+  //   진짜 fix는 *근본적 변경* 필요 (chunked + idle callback) — Phase 1 영역.
+  //   현재는 시각만 숨김 (v2.10.106 동작) + 콘솔 ERR는 cosmetic으로 양해.
   document.addEventListener('error', (e) => {
     const t = e.target as HTMLElement | null;
     if (t && t.tagName === 'IMG') {
       const img = t as HTMLImageElement;
-      // 이미 inline onerror가 처리한 경우 (display:none 또는 placeholder src) 건너뜀
       if (img.style.display === 'none') return;
       img.style.display = 'none';
-      // broken file:// src는 localStorage에서 영구 정리 (debounced)
-      const src = String(img.src || '');
-      if (src.startsWith('file://')) {
-        pendingBrokenSrcs.push(src);
-        scheduleCleanup();
-      }
     }
   }, true /* capture phase — img error는 bubble 안 함 */);
 })();

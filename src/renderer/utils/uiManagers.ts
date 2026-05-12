@@ -138,17 +138,18 @@ export class ToastManager {
             toast.style.transform = 'translateX(0)';
         }, 10);
 
-        // ✅ 자동 제거 — [v2.10.132] rAF batching (paint와 동기화, 다른 작업과 묶여 LongTask 만들지 않음)
-        //   사용자 보고: 'bg:timeout(4200ms):ToastManager.show 298ms HEAVY'
-        //   원인: toast remove 시점이 다른 작업(이미지 로드, 글 목록 렌더 등)과 동시 → 합산 LongTask
-        //   수정: style 변경 + remove를 rAF로 paint cycle에 묶음 → 합산 최소화
+        // ✅ 자동 제거 — [v2.10.133] jitter 추가 (timing 분산)
+        //   사용자 보고: v2.10.132 rAF batching 후에도 'ToastManager.show 200ms' 잔존.
+        //   원인: 여러 toast가 *같은 시점*에 생성되면 *같은 duration 후* 동시 발화 → 합산 LongTask
+        //   추가: 0~500ms random jitter로 timing 분산 → 동시 발화 충돌 차단
+        const jitter = Math.random() * 500;
         setTimeout(() => {
             requestAnimationFrame(() => {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateX(100%)';
                 setTimeout(() => toast.remove(), 300);
             });
-        }, duration);
+        }, duration + jitter);
     }
 
     // ✅ [2026-03-13] 웹 오디오 API를 사용한 자체 에러 사운드(Beep) 발생기
