@@ -35,6 +35,10 @@ import {
   normalizeTitleWhitespace,
   normalizeBodyWhitespacePreserveNewlines,
 } from './contentTextHelpers';
+// [Phase 3-4/v2.10.142] 제목 cleanup helper — stripOrdinalHeadingPrefix만 별도 도메인 파일로 분리
+//   sanitize/cleanupStarting/cleanupTrailing/cleanupColonQuote는 contentTitleHelpers.ts에 *대기*
+//   contentGenerator.ts 내부 원본 유지 (이전 추출 시도에서 Edit tool unicode escape 충돌 → 다음 phase 신중 진행)
+import { stripOrdinalHeadingPrefix } from './contentTitleHelpers';
 // [Phase 3-2/v2.10.140] re-export — naverBlogAutomation.ts / contentGenerator.test.ts 외부 호출자 호환 유지
 export { stripAllFormatting };
 import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
@@ -297,14 +301,7 @@ function removeDuplicatePhrases(title: string): string {
 
 
 
-function stripOrdinalHeadingPrefix(text: string): string {
-  let t = String(text || '').trim();
-  if (!t) return '';
-  t = t.replace(/^\s*(?:제\s*)?\d+\s*번째\s*소제목\s*[:：]\s*/i, '');
-  t = t.replace(/^\s*(?:첫|두|세|네|다섯|여섯|일곱|여덟|아홉|열)\s*번째\s*소제목\s*[:：]\s*/i, '');
-  t = t.replace(/^\s*소제목\s*[:：]\s*/i, '');
-  return t.trim();
-}
+// [Phase 3-4/v2.10.142] stripOrdinalHeadingPrefix → contentTitleHelpers.ts
 
 /**
  * ✅ 본문 전체에서 "첫 번째 소제목:", "두 번째 소제목:" 같은 레이블을 제거
