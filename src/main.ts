@@ -10136,49 +10136,90 @@ app.whenReady().then(async () => {
   });
 });
 
+// [v2.10.151] 모든 종료 경로에서 *동일한* cleanup 보장 — Chrome for Testing 좀비 prevention.
+//   기존: window-all-closed에서만 cleanup. SIGTERM/SIGINT/uncaughtException 시 좀비 발생.
+//   배경: 사용자 보고 "버벅거림" 진짜 원인 — 매 비정상 종료마다 puppeteer Chrome 좀비 1~2개 누적.
+//   1주일 후 7~14개 → 1~3GB RAM 점유 → 시스템 전체 느려짐. 재부팅 시 회복.
+//   해결: 정상/비정상 모든 경로에 동일 cleanup 호출 + 다중 호출 방지 가드.
+let _cleanupRan = false;
+async function _runFullCleanup(reason: string): Promise<void> {
+  if (_cleanupRan) return;
+  _cleanupRan = true;
+  console.log(`[Main] 🧹 cleanup 시작 (reason: ${reason})`);
+
+  // BrowserSessionManager 세션 정리
+  await browserSessionManager.closeAllSessions().catch((e) => console.warn('[Main] closeAllSessions 실패:', e?.message));
+
+  // 진행 중인 automation cancel
+  const closePromises: Promise<void>[] = [];
+  if (automation) {
+    closePromises.push(automation.cancel().catch(() => undefined));
+  }
+  for (const instance of automationMap.values()) {
+    if (instance !== automation) {
+      closePromises.push(instance.cancel().catch(() => undefined));
+    }
+  }
+  await Promise.allSettled(closePromises);
+  automationMap.clear();
+  automation = null;
+
+  // Flow/ImageFX persistent context — 쿠키 flush 보장
+  await resetFlowState().catch((e) => console.warn('[Main] Flow context close 실패:', e?.message));
+  await cleanupImageFxBrowser().catch((e) => console.warn('[Main] ImageFX cleanup 실패:', e?.message));
+
+  // 추적 등록한 모든 자식 프로세스 taskkill /T /F (LEWORD 등)
+  try {
+    const { killAllTrackedChildren } = require('./runtime/childProcessRegistry.js');
+    await killAllTrackedChildren();
+  } catch (e) {
+    console.warn('[Main] 자식 프로세스 정리 실패:', (e as Error)?.message);
+  }
+
+  try { trendMonitor.stop(); } catch { /* ignore */ }
+  console.log(`[Main] ✅ cleanup 완료 (reason: ${reason})`);
+}
+
 app.on('window-all-closed', async () => {
   if (process.platform !== 'darwin') {
-    // ✅ BrowserSessionManager 세션 정리
-    await browserSessionManager.closeAllSessions().catch(() => { });
-
-    const closePromises: Promise<void>[] = [];
-    if (automation) {
-      closePromises.push(automation.cancel().catch(() => undefined));
-    }
-    for (const instance of automationMap.values()) {
-      if (instance !== automation) {
-        closePromises.push(instance.cancel().catch(() => undefined));
-      }
-    }
-    await Promise.allSettled(closePromises);
-    automationMap.clear();
-    automation = null;
-
-    // v2.7.1: Flow/ImageFX persistent context 명시적 close — 쿠키 flush 보장
-    // launchPersistentContext는 close() 호출 시점에만 메모리 쿠키를 디스크에
-    // 영구 저장한다. 호출 안 하면 다음 실행에서 Google 재로그인 강제됨.
-    await resetFlowState().catch((e) => console.warn('[Main] Flow context close 실패:', e?.message));
-    await cleanupImageFxBrowser().catch((e) => console.warn('[Main] ImageFX cleanup 실패:', e?.message));
-
-    // ✅ [v2.7.48] 자식 프로세스(LEWORD 등) 강제 정리 — 작업표시줄 깜빡임 차단
-    //   사용자 보고: "본 앱 꺼도 작업표시줄이 깜빡임"
-    //   원인: detached:true로 spawn된 LEWORD가 본 앱 종료 후에도 살아남아 자체 GPU 렌더 충돌
-    //   수정: 추적 등록한 모든 자식 프로세스를 taskkill /T /F로 process tree까지 정리
-    try {
-      const { killAllTrackedChildren } = require('./runtime/childProcessRegistry.js');
-      await killAllTrackedChildren();
-    } catch (e) {
-      console.warn('[Main] 자식 프로세스 정리 실패:', (e as Error)?.message);
-    }
-
-    trendMonitor.stop();
+    await _runFullCleanup('window-all-closed');
     app.quit();
-
-    // ✅ [Fix] cron job 등 백그라운드 작업이 있어도 프로세스가 완전히 종료되도록 강제 종료
+    // cron job 등 백그라운드 작업이 있어도 완전 종료 보장
     setTimeout(() => {
       console.log('[Main] Forcing process exit...');
       process.exit(0);
     }, 1000);
+  }
+});
+
+// [v2.10.151] SIGTERM/SIGINT — 시스템 종료, Ctrl+C, 작업관리자 "프로세스 끝내기" (SIGKILL 제외)
+//   각 핸들러에서 동일 cleanup 호출 → puppeteer Chrome 좀비 prevention.
+process.on('SIGTERM', async () => {
+  console.log('[Main] SIGTERM 수신');
+  await _runFullCleanup('SIGTERM');
+  process.exit(0);
+});
+process.on('SIGINT', async () => {
+  console.log('[Main] SIGINT 수신');
+  await _runFullCleanup('SIGINT');
+  process.exit(0);
+});
+
+// [v2.10.151] uncaughtException emergency cleanup — line 186의 기존 로깅 핸들러와 *별도* 핸들러로 등록.
+//   Node.js는 등록된 모든 핸들러를 순차 실행 (process.exit 호출 전까지).
+//   기존 핸들러는 로깅 + UI 알림 → 이 핸들러는 cleanup + 강제 종료.
+//   5초 timeout fallback으로 cleanup hang 방지.
+process.on('uncaughtException', async (error: Error) => {
+  console.error('[Main] 🚨 uncaughtException emergency cleanup 시작:', error.message);
+  const timeoutId = setTimeout(() => {
+    console.error('[Main] cleanup 5초 timeout — 강제 종료');
+    process.exit(1);
+  }, 5000);
+  try {
+    await _runFullCleanup('uncaughtException');
+  } finally {
+    clearTimeout(timeoutId);
+    process.exit(1);
   }
 });
 
