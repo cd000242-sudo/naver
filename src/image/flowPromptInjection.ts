@@ -18,11 +18,14 @@ const HEADING_VARIATION_HINTS: readonly string[] = [
 export const HEADING_VARIATION_HINT_COUNT = HEADING_VARIATION_HINTS.length;
 
 // Per-call random salt → bypasses Flow's deterministic prompt cache.
-// Visual result unchanged because salt is a comment line.
+// [v2.10.124] '#' 주석 라인 제거 — 사용자 보고: "같은 이미지가 다른 글에 포함".
+//   추정 원인: Flow가 cache hash 계산 *전*에 '#'로 시작하는 라인을 주석으로 strip →
+//   매번 다른 salt를 넣어도 *같은 hash* → 같은 이미지 반환.
+//   수정: 자연어 trailing phrase 사용. prompt hash 다양화 보장 + 시각 영향 미미.
 export function injectUniqueSalt(prompt: string): string {
     const ts = Date.now().toString(36);
     const rand = Math.random().toString(36).slice(2, 10);
-    return `${prompt}\n\n# variation-id: ${ts}-${rand}`;
+    return `${prompt}\n\nGeneration context tag ${ts}-${rand}: ensure a fresh, distinctive composition.`;
 }
 
 // Strip markdown, brackets, and runaway whitespace from a heading title so the
