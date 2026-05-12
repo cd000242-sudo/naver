@@ -8154,10 +8154,11 @@ function showGeminiInstabilityNotice(): void {
 
 // 메인 대시보드 초기화
 function initDashboard() {
-  // 시계 업데이트
+  // [v2.10.131] clock setInterval 제거 — dashboardUI.ts:33이 단일 source.
+  //   기존: renderer.ts:8160 + dashboardUI.ts:33 = 2개 clock interval (1초마다 2회 updateClock)
+  //   사용자 보고: 'bg:interval:initDashboard 245ms HEAVY'.
+  //   수정: 여기서는 1회만 호출, interval은 dashboardUI가 담당.
   updateClock();
-  if (clockIntervalId) clearInterval(clockIntervalId);
-  clockIntervalId = setInterval(updateClock, 1000);
 
   // 대시보드 통계 업데이트
   updateDashboardStats();
@@ -8200,6 +8201,7 @@ function initThumbnailTextSync(): void {
 
 // 시계 업데이트
 function updateClock() {
+  const _t0 = performance.now();
   const now = new Date();
   const timeElement = document.getElementById('current-time');
   const dateElement = document.getElementById('current-date');
@@ -8221,6 +8223,9 @@ function updateClock() {
 
     dateElement.textContent = `${year}년 ${month}월 ${day}일 ${dayOfWeek}요일`;
   }
+  // [v2.10.131] updateClock 자체 시간 측정 — 사용자 보고 245ms HEAVY가 정말 updateClock인지 검증
+  const _dur = performance.now() - _t0;
+  if (_dur > 30) console.warn(`[updateClock] SLOW ${_dur.toFixed(0)}ms`);
 }
 
 // 대시보드 통계 업데이트
