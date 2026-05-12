@@ -1,14 +1,11 @@
-// 시계와 달력 UI 관리
-let clockInterval: NodeJS.Timeout | null = null;
+// [Phase 0/v2.11.0] clock interval 중복 제거 — dashboardUI.ts의 clockIntervalId가
+//   단일 source. scheduleAndUI.ts는 *시작* 안 함. 달력만 갱신.
+// 이전: dashboardUI + scheduleAndUI 둘 다 setInterval(updateClock, 1000) → 초당 2회 실행 + 매 호출마다 누적.
+// 현재: dashboardUI가 clock 담당, scheduleAndUI는 1회 updateClock만 호출.
 
 export function initClockAndCalendar(): void {
-  // 시계 업데이트
+  // 시계 1회 업데이트 (dashboardUI의 interval이 이후 1초마다 갱신)
   updateClock();
-  if (clockInterval) {
-    clearInterval(clockInterval);
-  }
-  clockInterval = setInterval(updateClock, 1000);
-
   // 달력 업데이트
   const calendarWidget = document.getElementById('calendar-widget');
   if (calendarWidget) {

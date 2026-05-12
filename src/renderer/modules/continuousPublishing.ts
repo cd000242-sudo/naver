@@ -636,7 +636,7 @@ export function scheduleNextPosting(): void {
 
   continuousInterval = setInterval(() => {
     continuousCountdown--;
-    console.log('[Continuous] 카운트다운:', continuousCountdown);
+    // [Phase 0/v2.11.0] 초당 console.log 제거 — D6 진단: 발행 중 초당 1회 노이즈 + 미세 lag.
 
     if (countdownElement) {
       countdownElement.textContent = `다음 포스팅까지 ${continuousCountdown}초 남음`;

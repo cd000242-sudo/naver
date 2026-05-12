@@ -100,8 +100,10 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
       expect(code).toMatch(/let cachedPage/);
     });
 
-    it('헤드리스 false (사용자 로그인 필요)', () => {
-      expect(code).toMatch(/headless:\s*false/);
+    it('헤드리스 옵션 (offScreen에 따라 가변, 기본은 사용자 로그인 가능하게)', () => {
+      // v2.10.11: headless: offScreen — offScreen=false면 헤드풀, true면 헤드리스 (창 숨김)
+      // 사용자 로그인 시나리오는 offScreen=false 호출이므로 headless=false로 작동
+      expect(code).toMatch(/headless:\s*(false|offScreen)/);
     });
 
     it('webdriver 자동화 플래그 위장', () => {

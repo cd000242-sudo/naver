@@ -156,7 +156,10 @@ class LoggerServiceImpl {
                 safeEntry.context = safeCtx;
             }
             const jsonLine = JSON.stringify(safeEntry) + '\n';
-            fs.appendFileSync(this.logFile, jsonLine, 'utf-8');
+            // [Phase 0/v2.11.0] async 변환 — main process sync I/O 차단. fire-and-forget.
+            //   기존: appendFileSync (블로킹) — 매 로그마다 main thread I/O block → IPC 응답 지연
+            //   변경: fs.appendFile (callback) — OS가 append 모드 lock 처리, 순서 보장
+            fs.appendFile(this.logFile, jsonLine, 'utf-8', () => { /* fire-and-forget */ });
         } catch {
             // 파일 기록 실패 시 무시
         }
@@ -238,7 +241,8 @@ class LoggerServiceImpl {
             this.rotateIfTooLarge();
             // ✅ [v2.10.35] 민감 정보 스크럽 (debugLog 경로도 차단)
             const safeLine = scrubText(line).text;
-            fs.appendFileSync(this.logFile, safeLine, 'utf-8');
+            // [Phase 0/v2.11.0] async fire-and-forget — main thread I/O block 제거
+            fs.appendFile(this.logFile, safeLine, 'utf-8', () => { /* ignore */ });
         } catch {
             // 파일 기록 실패 시 무시
         }

@@ -49,9 +49,10 @@ describe('sanitizeHeadingForPrompt', () => {
 });
 
 describe('injectUniqueSalt', () => {
-    it('prompt 끝에 variation-id 주석 추가', () => {
+    // v2.10.124: '#' 주석 → 자연어 trailing phrase (Flow cache hash strip 회피)
+    it('prompt 끝에 자연어 trailing phrase 추가', () => {
         const out = injectUniqueSalt('a base prompt');
-        expect(out).toMatch(/^a base prompt\n\n# variation-id: [a-z0-9]+-[a-z0-9]+$/);
+        expect(out).toMatch(/^a base prompt\n\nGeneration context tag [a-z0-9]+-[a-z0-9]+: ensure a fresh, distinctive composition\.$/);
     });
 
     it('호출마다 다른 salt 생성', () => {
