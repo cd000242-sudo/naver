@@ -41,6 +41,8 @@
     "test:full-flow": "node scripts/test-full-flow.mjs",
     "test:image-model-settings": "ts-node src/tests/testImageModelSettings.ts",
     "test:schedule-calendar": "ts-node src/tests/testScheduleCalendar.ts",
+    "e2e": "npm run build && playwright test",
+    "e2e:ui": "playwright test --ui",
     "dist:setup": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --win nsis && node scripts/restore-after-pack.js",
     "release": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --win nsis && node scripts/restore-after-pack.js",
     "release:full": "node scripts/release-all.js"
@@ -84,6 +86,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.48.2",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.7.4",
     "@types/node-cron": "^3.0.11",

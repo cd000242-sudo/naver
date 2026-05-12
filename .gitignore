@@ -43,3 +43,12 @@ coverage/
 scripts/tmp-lint.json
 scripts/test-sanitizer-live.mjs
 scripts/_tmp-*.mjs
+
+# [Phase 2/v2.10.139] Playwright E2E 실행 결과/임시 파일 — 빌드 산출물이므로 git 제외
+playwright-report/
+test-results/
+.playwright-mcp/
+
+# Flow/ImageFX 로컬 디버그 산출물
+flow-*.png
+flow-test-output/
