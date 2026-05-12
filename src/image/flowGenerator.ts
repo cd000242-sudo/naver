@@ -444,7 +444,8 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
     const page = ctx.pages()[0] || await ctx.newPage();
     installNetworkImageListener(page); // [v1.6.1]
     await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
-    await page.waitForTimeout(2500);
+    // [Phase 0/v2.10.126] 2500ms 고정 대기 → networkidle 이벤트 기반 (평균 단축, 안전 timeout 2500ms)
+    await page.waitForLoadState('networkidle', { timeout: 2500 }).catch(() => { /* timeout 시도 진행 */ });
     await dismissCookieBanner(page);
 
     const loggedIn = await isLoggedInToFlow(page);
@@ -1041,7 +1042,8 @@ async function ensureFlowProject(page: Page, forceNew: boolean = false): Promise
     flowLog('[Flow][1/3] 🆕 /tools/flow 접속 중...');
     sendImageLog('🆕 [Flow] 프로젝트 목록 페이지 접속 중...');
     await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await page.waitForTimeout(2500);
+    // [Phase 0/v2.10.126] 2500ms 고정 대기 → networkidle (평균 단축)
+    await page.waitForLoadState('networkidle', { timeout: 2500 }).catch(() => { /* timeout 시도 진행 */ });
     // [v1.6.1] 세션당 1회 원칙 — 이미 dismissed이면 skip
     if (!cookieBannerDismissed) await dismissCookieBanner(page);
     // 2026-04-28 changelog iframe 자동 dismiss — pointer event 차단 회피
