@@ -44,12 +44,25 @@ export async function convertMp4ToGif(mp4Path: string, options: { fps?: number; 
 
         const ffmpeg: any = spawn(ffmpegPath as string, args);
 
+        // [v2.10.154] 60초 timeout — debugger agent 발견: ffmpeg 좀비 prevention
+        //   기존: close 이벤트만 대기 → 상위 throw/timeout 시 ffmpeg 고아
+        //   해결: 60초 후 강제 kill (긴 mp4도 충분, 무한 hang 방지)
+        const timeoutId = setTimeout(() => {
+            try {
+                console.warn(`[GifConverter] ⏱️ 60초 timeout — ffmpeg 강제 종료`);
+                ffmpeg.kill('SIGKILL');
+            } catch { /* ignore */ }
+            reject(new Error('ffmpeg 변환 timeout (60s)'));
+        }, 60000);
+
         ffmpeg.on('error', (err: any) => {
+            clearTimeout(timeoutId);
             console.error('[GifConverter] ffmpeg 오류:', err);
             reject(err);
         });
 
         ffmpeg.on('close', (code: number) => {
+            clearTimeout(timeoutId);
             if (code === 0) {
                 console.log(`[GifConverter] ✅ 변환 완료: ${gifPath}`);
                 resolve(gifPath);

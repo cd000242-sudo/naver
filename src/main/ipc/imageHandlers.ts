@@ -973,12 +973,23 @@ export function registerMediaHandlers(ctx: IpcContext): void {
                 const args = ['-y', '-i', sourcePath, '-vf', filter, gifPath];
                 const ffmpeg = spawn(ffmpegPath as string, args);
 
+                // [v2.10.154] 60초 timeout — ffmpeg 좀비 prevention
+                const timeoutId = setTimeout(() => {
+                    try {
+                        console.warn(`[mediaHandlers] ⏱️ GIF 변환 60초 timeout — ffmpeg 강제 종료`);
+                        ffmpeg.kill('SIGKILL');
+                    } catch { /* ignore */ }
+                    resolve({ success: false, message: 'ffmpeg GIF 변환 timeout (60s)' });
+                }, 60000);
+
                 ffmpeg.on('error', (err) => {
+                    clearTimeout(timeoutId);
                     console.error('[mediaHandlers] ffmpeg 오류:', err);
                     resolve({ success: false, message: err.message });
                 });
 
                 ffmpeg.on('close', (code) => {
+                    clearTimeout(timeoutId);
                     if (code === 0) {
                         console.log(`[mediaHandlers] ✅ GIF 변환 완료: ${gifPath}`);
                         resolve({ success: true, gifPath });
@@ -1034,12 +1045,23 @@ export function registerMediaHandlers(ctx: IpcContext): void {
 
                 const ffmpeg = spawn(ffmpegPath as string, args);
 
+                // [v2.10.154] KenBurns 비디오는 더 오래 걸릴 수 있어 90초 timeout
+                const timeoutId = setTimeout(() => {
+                    try {
+                        console.warn(`[mediaHandlers] ⏱️ KenBurns 90초 timeout — ffmpeg 강제 종료`);
+                        ffmpeg.kill('SIGKILL');
+                    } catch { /* ignore */ }
+                    resolve({ success: false, message: 'KenBurns 비디오 timeout (90s)' });
+                }, 90000);
+
                 ffmpeg.on('error', (err) => {
+                    clearTimeout(timeoutId);
                     console.error('[mediaHandlers] KenBurns ffmpeg 오류:', err);
                     resolve({ success: false, message: err.message });
                 });
 
                 ffmpeg.on('close', (code) => {
+                    clearTimeout(timeoutId);
                     if (code === 0) {
                         console.log(`[mediaHandlers] ✅ KenBurns 영상 생성 완료: ${outputPath}`);
                         resolve({ success: true, filePath: outputPath, fileName });

@@ -419,8 +419,11 @@ export class ImageLibrary {
       for (const blogUrl of blogLinks) {
         if (images.length >= maxImages) break;
 
+        // [v2.10.154] try/finally — catch에서만 close하던 패턴 → 모든 경로 보장
+        // debugger agent 발견: 블로그 URL마다 page 누수 가능. 좀비 chromium 누적 원인.
+        let blogPage: import('puppeteer').Page | null = null;
         try {
-          const blogPage = await browser.newPage();
+          blogPage = await browser.newPage();
           await blogPage.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
           await blogPage.goto(blogUrl, { waitUntil: 'networkidle2' });
 
@@ -465,10 +468,13 @@ export class ImageLibrary {
 
             images.push(image);
           }
-
-          await blogPage.close();
         } catch (error) {
           console.warn(`블로그크롤링 실패 ${blogUrl}:`, error);
+        } finally {
+          // [v2.10.154] 정상/예외 모든 경로에서 page close 보장
+          if (blogPage) {
+            try { await blogPage.close(); } catch { /* ignore */ }
+          }
         }
       }
 
