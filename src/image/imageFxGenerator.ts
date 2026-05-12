@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ✅ [2026-03-15] ImageFX 이미지 생성기 v2.0
  * 
  * AdsPower Playwright 브라우저 내부에서 직접 Google ImageFX API를 호출합니다.
@@ -43,6 +43,28 @@ let cachedToken: string | null = null;
 let cachedTokenExpiry: Date | null = null;
 let cachedUserId: string | null = null; // AdsPower 프로필 userId
 let browserMode: 'adspower' | 'playwright' | null = null; // 어떤 모드로 연결했는지
+
+/**
+ * [v2.10.153] cachedBrowser setter — 재할당 시 이전 인스턴스 close 보장.
+ *
+ * 배경: debugger agent 발견 — 17곳 cachedBrowser 재할당 중 *재시도 루프*에서
+ * 이전 인스턴스가 살아있는 채로 덮어쓰면 chromium 좀비 발생.
+ *
+ * 해결: 모든 재할당을 setCachedBrowser(next)로 통일 → 이전 인스턴스 자동 close.
+ * - next === cachedBrowser (같은 인스턴스): no-op (자기 자신 close 방지)
+ * - next === null: cleanup 의도 — 이전 close 후 null 할당
+ * - next !== cachedBrowser: 이전 close 후 새 할당
+ *
+ * 사용: `await setCachedBrowser(newBrowser);` (직접 할당 대신)
+ */
+async function setCachedBrowser(next: Browser | null): Promise<void> {
+  if (cachedBrowser && cachedBrowser !== next) {
+    try {
+      await cachedBrowser.close();
+    } catch { /* 이미 닫힘 또는 disconnect — 무시 */ }
+  }
+  await setCachedBrowser(next);
+}
 let _adsPowerUserEnabled: boolean = false; // ✅ [2026-03-16] 사용자 AdsPower 활성화 설정
 // ✅ [SPEC-IMAGE-RECOVERY-001 R3] 세션 내 AdsPower 자동 OFF (실패 후 재시도 금지)
 // 사용자 설정값(`_adsPowerUserEnabled`)은 변경하지 않으며, 다음 앱 재시작 시 재시도.
@@ -564,8 +586,8 @@ async function connectViaAdsPower(): Promise<Page> {
 
   // Playwright 연결
   const { chromium } = await import('playwright');
-  cachedBrowser = await chromium.connectOverCDP(wsUrl);
-  let context: BrowserContext = cachedBrowser.contexts()[0];
+  await setCachedBrowser(await chromium.connectOverCDP(wsUrl));
+  let context: BrowserContext = cachedBrowser!.contexts()[0];
   if (!context) throw new Error('AdsPower 컨텍스트 없음');
 
   cachedPage = context.pages()[0] || await context.newPage();
@@ -606,7 +628,7 @@ async function connectViaAdsPower(): Promise<Page> {
   try {
     if (cachedBrowser) await cachedBrowser.close();
   } catch { /* 무시 */ }
-  cachedBrowser = null;
+  await setCachedBrowser(null);
   cachedPage = null;
   await adsPowerGet(`/api/v1/browser/stop?user_id=${userId}`).catch(() => {});
   await new Promise(resolve => setTimeout(resolve, 1000));
@@ -622,8 +644,8 @@ async function connectViaAdsPower(): Promise<Page> {
     throw new Error('AdsPower WebSocket URL 없음');
   }
 
-  cachedBrowser = await chromium.connectOverCDP(wsUrl);
-  context = cachedBrowser.contexts()[0];
+  await setCachedBrowser(await chromium.connectOverCDP(wsUrl));
+  context = cachedBrowser!.contexts()[0];
   if (!context) throw new Error('AdsPower 컨텍스트 없음');
 
   cachedPage = context.pages()[0] || await context.newPage();
@@ -685,7 +707,7 @@ async function connectViaAdsPower(): Promise<Page> {
   if (!loggedIn) {
     // 로그인 실패 → 브라우저 닫기
     try { if (cachedBrowser) await cachedBrowser.close(); } catch { /* 무시 */ }
-    cachedBrowser = null;
+    await setCachedBrowser(null);
     cachedPage = null;
     await adsPowerGet(`/api/v1/browser/stop?user_id=${userId}`).catch(() => {});
     throw new Error('Google 로그인 시간 초과 (5분). AdsPower 브라우저에서 Google 로그인 후 다시 시도해주세요.');
@@ -695,7 +717,7 @@ async function connectViaAdsPower(): Promise<Page> {
   console.log('[ImageFX] 🔄 AdsPower 로그인 완료 → headless 모드로 전환...');
   sendImageLog('🔄 [ImageFX] 로그인 완료! 숨김 모드로 전환 중...');
   try { if (cachedBrowser) await cachedBrowser.close(); } catch { /* 무시 */ }
-  cachedBrowser = null;
+  await setCachedBrowser(null);
   cachedPage = null;
   await adsPowerGet(`/api/v1/browser/stop?user_id=${userId}`).catch(() => {});
   await new Promise(resolve => setTimeout(resolve, 1000));
@@ -709,8 +731,8 @@ async function connectViaAdsPower(): Promise<Page> {
   if (!headlessWsUrl) throw new Error('AdsPower headless WebSocket URL 없음');
 
   const { chromium: chromiumForHeadless } = await import('playwright');
-  cachedBrowser = await chromiumForHeadless.connectOverCDP(headlessWsUrl);
-  const headlessCtx = cachedBrowser.contexts()[0];
+  await setCachedBrowser(await chromiumForHeadless.connectOverCDP(headlessWsUrl));
+  const headlessCtx = cachedBrowser!.contexts()[0];
   if (!headlessCtx) throw new Error('AdsPower headless 컨텍스트 없음');
   cachedPage = headlessCtx.pages()[0] || await headlessCtx.newPage();
   browserMode = 'adspower';
@@ -1012,7 +1034,7 @@ async function connectViaPlaywright(): Promise<Page> {
     console.log(`[ImageFX] ✅ Google 로그인 확인 (${session.user?.name || session.user?.email || 'user'}) — 숨김 모드 유지`);
     sendImageLog('✅ [ImageFX] Google 세션 확인 완료 (숨김 모드)');
 
-    cachedBrowser = context.browser() as any;
+    await setCachedBrowser(context.browser() as any);
     cachedPage = page;
     browserMode = 'playwright';
     (cachedPage as any).__persistentContext = context;
@@ -1120,7 +1142,7 @@ async function connectViaPlaywright(): Promise<Page> {
   });
   await new Promise(resolve => setTimeout(resolve, 1500));
 
-  cachedBrowser = headlessContext.browser() as any;
+  await setCachedBrowser(headlessContext.browser() as any);
   cachedPage = headlessPage;
   browserMode = 'playwright';
   (cachedPage as any).__persistentContext = headlessContext;
@@ -1148,7 +1170,7 @@ async function ensureBrowserPage(): Promise<Page> {
     } catch {
       console.log('[ImageFX] ⚠️ 기존 페이지 연결 끊김 → 재연결');
       cachedPage = null;
-      cachedBrowser = null;
+      await setCachedBrowser(null);
       cachedToken = null;
       browserMode = null;
     }
@@ -1449,7 +1471,7 @@ export async function generateSingleImageWithImageFx(
 
       // AdsPower 연결 문제 → 캐시 초기화
       if (error.message.includes('AdsPower') || error.message.includes('연결') || error.message.includes('WebSocket')) {
-        cachedBrowser = null;
+        await setCachedBrowser(null);
         cachedPage = null;
         cachedToken = null;
       }
@@ -1528,7 +1550,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
       } catch {
         // 페이지 연결 끊김 → 새로 확인
         cachedPage = null;
-        cachedBrowser = null;
+        await setCachedBrowser(null);
         cachedToken = null;
         browserMode = null;
       }
@@ -1576,7 +1598,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
 
         if (session?.access_token && session?.user) {
           const userName = session.user?.name || session.user?.email || 'Google 사용자';
-          cachedBrowser = adsBrowser;
+          await setCachedBrowser(adsBrowser);
           cachedPage = page;
           browserMode = 'adspower';
           cachedUserId = adsUserId; // ✅ [2026-03-16 FIX] cleanup 시 AdsPower stop 호출에 필요
@@ -1635,7 +1657,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
             sendImageLog(`✅ [ImageFX] Google 로그인 완료: ${userName}`);
 
             // ✅ [2026-03-16 최적화] 로그인 성공 → visible 브라우저를 그대로 캐시 (headless 재시작 제거)
-            cachedBrowser = adsBrowser;
+            await setCachedBrowser(adsBrowser);
             cachedPage = page;
             browserMode = 'adspower';
             cachedUserId = adsUserId; // ✅ [2026-03-16 FIX] cleanup 시 AdsPower stop 호출에 필요
@@ -1720,7 +1742,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
       const userName = session.user?.name || session.user?.email || 'Google 사용자';
       
       // ✅ 세션 확인됨 → headless 페이지를 캐시로 보관 (이미지 생성 시 재활용)
-      cachedBrowser = context.browser() as any;
+      await setCachedBrowser(context.browser() as any);
       cachedPage = page;
       browserMode = 'playwright';
       (cachedPage as any).__persistentContext = context;
@@ -1779,7 +1801,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
         sendImageLog(`✅ [ImageFX] Google 로그인 완료: ${userName}`);
 
         // ✅ [2026-03-16 최적화] 로그인 성공 → visible 브라우저를 그대로 캐시 (headless 재시작 제거)
-        cachedBrowser = context.browser() as any;
+        await setCachedBrowser(context.browser() as any);
         cachedPage = page;
         browserMode = 'playwright';
         (cachedPage as any).__persistentContext = context;
@@ -1858,7 +1880,7 @@ export async function cleanupImageFxBrowser(): Promise<void> {
     } catch { /* AdsPower 미실행 시 무시 */ }
   }
 
-  cachedBrowser = null;
+  await setCachedBrowser(null);
   cachedPage = null;
   cachedToken = null;
   cachedTokenExpiry = null;
@@ -2130,7 +2152,7 @@ export async function switchGoogleAccountForImageFx(): Promise<{
 
       // ✅ [2026-03-16 최적화] visible 브라우저를 그대로 캐시 (headless 재시작 제거)
       // AdsPower browser/start 호출 횟수를 최소화 — stop→start 사이클 제거
-      cachedBrowser = browser;
+      await setCachedBrowser(browser);
       cachedPage = page;
       browserMode = 'adspower';
 
