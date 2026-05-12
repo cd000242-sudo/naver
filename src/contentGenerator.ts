@@ -65,6 +65,8 @@ import {
 } from './contentTitleQuality';
 // [Phase 3-9/v2.10.147] evaluateTitleQuality 추출
 import { evaluateTitleQuality } from './contentTitleEvaluator';
+// [Phase 3-10/v2.10.148] review helper 2개 추출
+import { isReviewArticleType, sanitizeReviewHeadingTitle } from './contentReviewHelpers';
 // [Phase 3-2/v2.10.140] re-export — naverBlogAutomation.ts / contentGenerator.test.ts 외부 호출자 호환 유지
 export { stripAllFormatting };
 import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
@@ -798,9 +800,7 @@ function stripSelectedTitlePrefixFromHeadings(content: StructuredContent): void 
   });
 }
 
-function isReviewArticleType(articleType?: ArticleType): boolean {
-  return articleType === 'shopping_review' || articleType === 'shopping_expert_review' || articleType === 'it_review' || articleType === 'product_review';
-}
+// [Phase 3-10/v2.10.148] isReviewArticleType -> contentReviewHelpers.ts
 
 // [Phase 3-3/v2.10.141] normalizeTitleWhitespace, normalizeBodyWhitespacePreserveNewlines
 //   contentTextHelpers.ts로 추출 (god file 분해).
@@ -1160,34 +1160,7 @@ function sanitizeReviewTitle(title: string, productName: string): string {
   return t;
 }
 
-function sanitizeReviewHeadingTitle(title: string, fallback: string, productName?: string): string {
-  let t = String(title || '').trim();
-
-  const prod = normalizeTitleWhitespace(removeEmojis(String(productName || ''))).trim();
-  if (prod) {
-    const normalized = normalizeTitleWhitespace(removeEmojis(t)).trim();
-    if (normalized.startsWith(prod)) {
-      t = normalized.slice(prod.length).trim();
-      t = t.replace(/^[\s\-–—:|·•,]+/, '').trim();
-    } else {
-      t = normalized;
-    }
-  }
-
-  // t = t.replace(/(직접\s*)?써보[고니]\s*/g, '');
-  // t = t.replace(/(삶의\s*질\s*상승)/g, '');
-  // t = t.replace(/(소름|난리|충격|경악|반전|실화|폭발|알고보니|비밀|진짜\s*이유)/g, '');
-  // t = t.replace(/[!?]+/g, '').trim();
-  t = normalizeTitleWhitespace(t);
-
-  if (t.length < 4) return fallback;
-  if (t.length > 50) return fallback;
-  // if (/[,:;·•|]/.test(t)) return fallback;
-  if (/(진심|정말|이렇게|느낌|보고|소름)/.test(t)) return fallback;
-  // if (/(습니다|했어요|되더라고요|할\s*수\s*있|됩니다)\s*$/.test(t)) return fallback;
-  if (t.split(/\s+/).filter(Boolean).length > 6) return fallback;
-  return t;
-}
+// [Phase 3-10/v2.10.148] sanitizeReviewHeadingTitle -> contentReviewHelpers.ts
 
 // [Phase 3-6/v2.10.144] 4개 title quality validator -> contentTitleValidators.ts
 
