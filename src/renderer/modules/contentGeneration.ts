@@ -240,6 +240,111 @@ function sanitizeScrapedContent(content: any): void {
   }
 }
 
+// [Phase 1-1/v2.11.0] 콘텐츠 생성/페러프레이징/글 불러오기 공통 post-processing 파이프라인.
+//   배경: D3 진단 — paraphraseContent가 generateContent의 post-processing 공유 안 함 → 5연속 fix.
+//   v2.10.117~122에서 누락된 단계를 *하나씩* 추가하다가 5번 fix 반복.
+//   해결: 단일 함수 — 모든 호출자가 *동일* 파이프라인 실행 → 누락 영구 차단.
+// 단계:
+//   1. 글로벌 상태 업데이트 (currentStructuredContent + window mirror)
+//   2. saveGeneratedPost (forceNew 옵션으로 중복 방지 우회 가능)
+//   3. updateUnifiedPreview (섹션 표시)
+//   4. updateUnifiedImagePreview (headings 있으면)
+//   5. autoAnalyzeHeadings (headings 있으면 — AI API 호출 비용)
+//   6. image-title input 자동 채움
+//   7. posts-list-content 펼치기 (접힘 상태 해제)
+//   8. markContentGenerated (발행 버튼 활성화)
+//   9. refreshGeneratedPostsList
+// 호출자:
+//   - generateContentFromUrl (선택적 — 기존 분산 코드 유지하면 중복 위험)
+//   - paraphraseContent (✓ v2.11.0에서 통합)
+//   - postListUI 글 불러오기 (✓ v2.11.0에서 통합)
+export async function applyContentPostProcessing(
+  structuredContent: any,
+  opts?: {
+    source?: 'generate' | 'paraphrase' | 'load';
+    forceNew?: boolean;
+    skipAnalyze?: boolean; // load 시 generateContent에서 이미 분석된 경우 중복 방지
+  },
+): Promise<void> {
+  const source = opts?.source || 'generate';
+  const log = (msg: string) => console.log(`[postProcess:${source}] ${msg}`);
+
+  // 1. 글로벌 상태
+  try {
+    currentStructuredContent = structuredContent;
+    (window as any).currentStructuredContent = structuredContent;
+  } catch (e) { console.warn(`[postProcess:${source}] state 실패:`, e); }
+
+  // 2. 글 목록 저장
+  try {
+    const savedId = saveGeneratedPost(structuredContent, false, opts?.forceNew ? ({ forceNew: true } as any) : undefined);
+    log(`saveGeneratedPost id=${savedId}`);
+  } catch (e) { console.warn(`[postProcess:${source}] save 실패:`, e); }
+
+  // 3. 통합 미리보기 섹션 표시
+  try {
+    updateUnifiedPreview(structuredContent);
+  } catch (e) { console.warn(`[postProcess:${source}] preview 실패:`, e); }
+
+  // 4. 통합 이미지 미리보기 (headings 있으면 일반 흐름 재사용)
+  try {
+    const headings = Array.isArray(structuredContent.headings) ? structuredContent.headings : [];
+    if (headings.length > 0) {
+      const fn = (window as any).updateUnifiedImagePreview;
+      if (typeof fn === 'function') fn(headings, []);
+    } else {
+      // headings 없으면 (페러프레이징 plain body) bodyPlain 직접 표시
+      const integratedPreview = document.getElementById('unified-integrated-preview');
+      const body = String(structuredContent.bodyPlain || structuredContent.content || '').trim();
+      if (integratedPreview && body) {
+        const safe = body.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        integratedPreview.innerHTML = `<div style="padding: 0.5rem; line-height: 1.7; white-space: pre-wrap; color: var(--text-strong); font-size: 0.95rem;">${safe}</div>`;
+      }
+    }
+  } catch (e) { console.warn(`[postProcess:${source}] imagePreview 실패:`, e); }
+
+  // 5. 소제목 분석 (headings 있고 skipAnalyze 아닌 경우)
+  if (!opts?.skipAnalyze && Array.isArray(structuredContent.headings) && structuredContent.headings.length > 0) {
+    try {
+      log('autoAnalyzeHeadings 시작');
+      await autoAnalyzeHeadings(structuredContent);
+      log('autoAnalyzeHeadings 완료');
+    } catch (e) { console.warn(`[postProcess:${source}] analyze 실패:`, e); }
+  }
+
+  // 6. 이미지 관리 탭 제목 자동 입력
+  try {
+    const imageTitleInput = document.getElementById('image-title') as HTMLInputElement | null;
+    if (imageTitleInput && structuredContent.selectedTitle) {
+      imageTitleInput.value = structuredContent.selectedTitle;
+    }
+  } catch { /* ignore */ }
+
+  // 7. 글 목록 펼치기
+  try {
+    const postsContent = document.getElementById('posts-list-content');
+    if (postsContent && postsContent.style.display === 'none') {
+      postsContent.style.display = 'block';
+    }
+  } catch { /* ignore */ }
+
+  // 8. 발행 버튼 활성화
+  try {
+    const markFn = (window as any).markContentGenerated;
+    if (typeof markFn === 'function') {
+      markFn();
+    } else {
+      enableSemiAutoPublishButton();
+      enableFullAutoPublishButton();
+    }
+  } catch { /* ignore */ }
+
+  // 9. 글 목록 새로고침
+  try {
+    refreshGeneratedPostsList();
+  } catch (e) { console.warn(`[postProcess:${source}] refresh 실패:`, e); }
+}
+
 export async function generateContentFromUrl(
   url: string,
   keywordsOverride?: string,
@@ -1594,96 +1699,11 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
       hashtagsInput.value = structuredContent.hashtags.join(' ');
     }
 
-    // 글로벌 상태 업데이트
-    currentStructuredContent = structuredContent;
-    (window as any).currentStructuredContent = structuredContent;
-
-    // ✅ [결함 #2] saveGeneratedPost 호출 — 결과 영구 저장
-    // [v2.10.118] forceNew: true — 5초 중복 방지 우회. 페러프레이징은 사용자 명시 행동.
-    //   원본 글과 제목/길이 비슷해도 *항상 새 글로* 글 목록에 추가.
-    try {
-      const savedId = saveGeneratedPost(structuredContent, false, { forceNew: true } as any);
-      console.log('[paraphraseContent] ✅ 페러프레이징 결과 저장 완료, id=', savedId);
-      appendLog(`📝 페러프레이징 결과가 글 목록에 추가됨 (id: ${String(savedId).slice(-9)})`);
-    } catch (saveErr) {
-      console.warn('[paraphraseContent] ⚠️ 저장 실패 (기능에는 영향 없음):', saveErr);
-    }
-
-    // [v2.10.119] 소제목 분석 + 이미지 관리 동기화 — 일반 글 생성 흐름은 자동 호출하지만
-    //   페러프레이징 누락이 사용자 보고 원인 (P1/P2/P3 에이전트 분석 일치).
-    //   headings 있으면 autoAnalyzeHeadings 호출 → 이미지 관리 탭 자동 갱신 + 영어 프롬프트 채움.
-    if (Array.isArray(structuredContent.headings) && structuredContent.headings.length > 0) {
-      try {
-        appendLog('🔍 페러프레이징 후 소제목 분석 자동 실행...');
-        await autoAnalyzeHeadings(structuredContent);
-        appendLog('✅ 소제목 분석 완료');
-      } catch (analyzeErr) {
-        console.warn('[paraphraseContent] autoAnalyzeHeadings 실패 (무시):', analyzeErr);
-        appendLog(`⚠️ 소제목 자동 분석 실패: ${(analyzeErr as Error).message}`);
-      }
-    }
-    // [v2.10.118 REMOVE] input/change dispatch 제거 — listener 없어서 무효 (P2/P6 검증).
-    // [v2.10.119] 글 목록 펼치기 강제 — posts-list-content가 접힌 상태(display:none)면
-    //   새 글이 저장돼도 안 보임 (P4 에이전트 발견). 페러프레이징 직후 자동 펼치기.
-    try {
-      const postsContent = document.getElementById('posts-list-content');
-      if (postsContent && postsContent.style.display === 'none') {
-        postsContent.style.display = 'block';
-      }
-    } catch { /* ignore */ }
-
-    // 미리보기 및 목록 업데이트
-    updateUnifiedPreview(structuredContent);
-    // [v2.10.117] 페러프레이징 결과를 통합 미리보기에 직접 채움.
-    //   updateUnifiedPreview는 섹션 표시만 함. 일반 글 생성은 별도 흐름에서 updateUnifiedImagePreview 호출하지만
-    //   페러프레이징은 호출 안 됐음 → 미리보기 placeholder만 남고 본문 안 보임.
-    //   headings 있으면 일반 미리보기, 없으면 bodyPlain plain 텍스트로 표시.
-    try {
-      const integratedPreview = document.getElementById('unified-integrated-preview');
-      if (integratedPreview) {
-        const headings = Array.isArray(structuredContent.headings) ? structuredContent.headings : [];
-        const body = String(structuredContent.bodyPlain || structuredContent.content || '').trim();
-        if (headings.length > 0) {
-          // window 노출된 updateUnifiedImagePreview 호출 (일반 흐름 재사용)
-          const fn = (window as any).updateUnifiedImagePreview;
-          if (typeof fn === 'function') fn(headings, []);
-        } else if (body) {
-          // 페러프레이징 plain body만 — XSS 방지 escape
-          const safe = body.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-          integratedPreview.innerHTML = `<div style="padding: 0.5rem; line-height: 1.7; white-space: pre-wrap; color: var(--text-strong); font-size: 0.95rem;">${safe}</div>`;
-        }
-      }
-    } catch (previewErr) {
-      console.warn('[paraphraseContent] 통합 미리보기 갱신 실패 (무시):', previewErr);
-    }
-    refreshGeneratedPostsList();
-
-    // [v2.10.122] 이미지 관리 탭 제목 자동 입력 — AI 자동 수집 바로 사용 가능하게.
-    //   headingImageGen.ts:2234 ai-auto-collect-save-btn이 #image-title을 읽어 검색 키워드로 사용.
-    //   페러프레이징 후 사용자가 이미지 관리 탭에서 즉시 "AI 자동 수집" 클릭 가능.
-    try {
-      const imageTitleInput = document.getElementById('image-title') as HTMLInputElement | null;
-      if (imageTitleInput && structuredContent.selectedTitle) {
-        imageTitleInput.value = structuredContent.selectedTitle;
-      }
-    } catch { /* ignore */ }
-
-    // [v2.10.121] 반자동/풀오토 발행 버튼 활성화 — 페러프레이징도 콘텐츠 생성 완료로 마킹.
-    //   tailUIUtils.ts:557~568이 일반 글 생성 버튼 클릭만 listen → 페러프레이징 버튼 누락.
-    //   결과: hasGeneratedContent=false 유지 → 발행 버튼 비활성.
-    try {
-      const markFn = (window as any).markContentGenerated;
-      if (typeof markFn === 'function') {
-        markFn();
-        console.log('[paraphraseContent] ✅ markContentGenerated 호출 — 발행 버튼 활성화');
-      } else {
-        // window 노출 안 됐으면 직접 호출
-        enableSemiAutoPublishButton();
-        enableFullAutoPublishButton();
-      }
-    } catch (markErr) {
-      console.warn('[paraphraseContent] markContentGenerated 실패 (무시):', markErr);
-    }
+    // [Phase 1-1/v2.11.0] 통합 post-processing 파이프라인 호출 — 5회 재발 영구 차단.
+    //   배경: v2.10.117~122에서 paraphraseContent post-processing 단계(저장/분석/펼치기/마킹/이미지타이틀)를
+    //   *하나씩* 추가하다가 5번 fix 반복. D3 진단 결과: generateContent와 분리된 분산 코드가 원인.
+    //   해결: applyContentPostProcessing이 모든 단계를 *동일 순서*로 실행 → 누락 불가능.
+    await applyContentPostProcessing(structuredContent, { source: 'paraphrase', forceNew: true });
 
     appendLog('✨ 페러프레이징 완료! 필드를 확인해주세요.');
     toastManager.success('✅ 페러프레이징 완료! 개선된 글이 반영되었습니다.', 5000);
