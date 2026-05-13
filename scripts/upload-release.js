@@ -46,10 +46,40 @@ const VERSION = pkg.version;
 const TAG = `v${VERSION}`;
 
 const releaseDir = path.join(__dirname, '..', 'release_final');
-const setupFile = path.join(releaseDir, `Better Life Naver Setup ${VERSION}.exe`);
 const latestYml = path.join(releaseDir, 'latest.yml');
 // GitHub 에셋 이름은 하이픈 (electron-updater가 이 이름으로 다운로드)
 const setupUploadName = `Better-Life-Naver-Setup-${VERSION}.exe`;
+const blockmapUploadName = `Better-Life-Naver-Setup-${VERSION}.exe.blockmap`;
+
+/**
+ * Resolve installer path resiliently — accept either spaced or hyphenated
+ * artifact names. electron-builder default and renamed outputs both work.
+ */
+function findArtifact(suffix /* "" | ".blockmap" */) {
+    if (!fs.existsSync(releaseDir)) return null;
+    const files = fs.readdirSync(releaseDir);
+    const candidates = [
+        `Better-Life-Naver-Setup-${VERSION}.exe${suffix}`,
+        `Better Life Naver Setup ${VERSION}.exe${suffix}`,
+    ];
+    for (const name of candidates) {
+        if (files.includes(name)) return path.join(releaseDir, name);
+    }
+    if (suffix === '') {
+        const fallback = files.find(f =>
+            f.toLowerCase().endsWith('.exe') &&
+            /setup/i.test(f) &&
+            f.includes(VERSION) &&
+            !f.includes('uninstall') &&
+            !f.includes('elevate')
+        );
+        return fallback ? path.join(releaseDir, fallback) : null;
+    }
+    return null;
+}
+
+const setupFile = findArtifact('');
+const blockmapFile = findArtifact('.blockmap');
 
 // ─── GitHub API Helper ──────────────────────────────────────
 
@@ -293,6 +323,7 @@ async function verify(release) {
     }
 
     const expectedAssets = ['latest.yml', setupUploadName];
+    if (blockmapFile) expectedAssets.push(blockmapUploadName);
     const foundNames = (updated.assets || []).map(a => a.name);
     for (const expected of expectedAssets) {
         if (!foundNames.includes(expected)) {
@@ -330,14 +361,21 @@ async function main() {
     }
 
     // 파일 존재 확인
-    if (!fs.existsSync(setupFile)) {
-        console.error(`❌ Setup 파일 없음: ${setupFile}`);
+    if (!setupFile || !fs.existsSync(setupFile)) {
+        console.error(`❌ Setup 파일을 찾을 수 없습니다 (${releaseDir})`);
+        console.error('   먼저 npm run release 로 빌드하세요.');
         process.exit(1);
     }
     if (!fs.existsSync(latestYml)) {
         console.error(`❌ latest.yml 없음: ${latestYml}`);
         console.error('   fix-latest-yml.js를 먼저 실행하세요.');
         process.exit(1);
+    }
+    console.log(`   📍 감지된 설치 파일: ${path.basename(setupFile)}`);
+    if (blockmapFile) {
+        console.log(`   📍 감지된 블록맵: ${path.basename(blockmapFile)}`);
+    } else {
+        console.log('   ⚠️ blockmap 파일 없음 — 차분 업데이트 비활성화 (정상 업데이트는 가능)');
     }
 
     try {
@@ -355,6 +393,9 @@ async function main() {
         console.log('─'.repeat(50));
 
         await uploadAsset(release, setupFile, setupUploadName);
+        if (blockmapFile) {
+            await uploadAsset(release, blockmapFile, blockmapUploadName);
+        }
         await uploadAsset(release, latestYml, 'latest.yml');
 
         // Step 5: 검증

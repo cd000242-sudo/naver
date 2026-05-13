@@ -16,6 +16,7 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 
 const ROOT = path.join(__dirname, '..');
 const RELEASE_DIR = path.join(ROOT, 'release_final');
@@ -165,6 +166,47 @@ function saveErrorLog(stepName, command, result) {
   } catch { /* 로그 저장 실패는 무시 */ }
 }
 
+/**
+ * Fresh-fetch the GitHub release and check that auto-update artifacts exist.
+ * Uses anonymous API (no token required for public releases on this repo).
+ * Required: latest.yml (electron-updater entrypoint) + the installer .exe.
+ * Optional but recommended: .exe.blockmap (enables differential download).
+ */
+function verifyReleaseAssets(version) {
+  return new Promise((resolve, reject) => {
+    const req = https.request({
+      hostname: 'api.github.com',
+      path: `/repos/cd000242-sudo/naver/releases/tags/v${version}`,
+      method: 'GET',
+      headers: {
+        'Accept': 'application/vnd.github+json',
+        'User-Agent': 'BetterLifeNaver-ReleaseVerifier',
+      },
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        if (res.statusCode !== 200) {
+          return reject(new Error(`GitHub API ${res.statusCode}: ${data.substring(0, 200)}`));
+        }
+        try {
+          const release = JSON.parse(data);
+          const names = (release.assets || []).map(a => a.name);
+          const exeName = `Better-Life-Naver-Setup-${version}.exe`;
+          const required = ['latest.yml', exeName];
+          const missing = required.filter(r => !names.includes(r));
+          resolve({ ok: missing.length === 0, assets: names, missing });
+        } catch (e) {
+          reject(new Error(`응답 파싱 실패: ${e.message}`));
+        }
+      });
+    });
+    req.on('error', reject);
+    req.setTimeout(15000, () => req.destroy(new Error('timeout (15s)')));
+    req.end();
+  });
+}
+
 // ─── 메인 오케스트레이션 ────────────────────────────────────
 
 async function main() {
@@ -174,7 +216,7 @@ async function main() {
   banner(`Better Life Naver v${VERSION} — 릴리즈 파이프라인`);
   console.log(`  ${DIM}시작: ${new Date().toLocaleString('ko-KR')}${RESET}`);
 
-  const totalSteps = 6;
+  const totalSteps = 7;
   let needsRestore = false; // reset-config-for-pack 이후 true → 실패 시 자동 복구
   let allSuccess = true;
   const startTime = Date.now();
@@ -228,6 +270,25 @@ async function main() {
       fail('GitHub 업로드 실패');
       allSuccess = false;
       return;
+    }
+
+    // ═══ Step 7: GitHub fresh-fetch 검증 (auto-update 안전망) ═══
+    // upload-release.js의 verify가 이미 자체 검증하지만, 별도 fresh-fetch로
+    // 부분 업로드 / 파이프라인 우회 케이스를 한 번 더 차단한다.
+    stepHeader(7, totalSteps, 'GitHub 자산 fresh-fetch 검증');
+    try {
+      const verifyResult = await verifyReleaseAssets(VERSION);
+      if (verifyResult.ok) {
+        success(`자산 검증 통과: ${verifyResult.assets.join(', ')}`);
+      } else {
+        fail(`자산 누락 — auto-update 동작 불가: ${verifyResult.missing.join(', ')}`);
+        info('수동 복구: gh release upload v' + VERSION + ' release_final/latest.yml --repo cd000242-sudo/naver');
+        allSuccess = false;
+      }
+    } catch (e) {
+      fail(`fresh-fetch 검증 실패 (네트워크?): ${e.message}`);
+      warn('GitHub 응답 지연 가능 — 수동으로 release 페이지 확인 필요');
+      // 네트워크 실패는 warning만, allSuccess 유지
     }
 
   } catch (unexpectedErr) {

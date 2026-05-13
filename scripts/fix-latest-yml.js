@@ -15,26 +15,51 @@ const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'
 const VERSION = pkg.version;
 
 const releaseDir = path.join(__dirname, '..', 'release_final');
-// electron-builder는 productName의 공백을 그대로 사용
-const setupFile = path.join(releaseDir, `Better Life Naver Setup ${VERSION}.exe`);
-// latest.yml에서는 하이픈으로 참조
+// latest.yml에 기록될 url은 항상 하이픈 표기 (electron-updater 다운로드 키)
 const setupUrlName = `Better-Life-Naver-Setup-${VERSION}.exe`;
 const latestYmlPath = path.join(releaseDir, 'latest.yml');
+
+/**
+ * Resolve installer path resiliently — electron-builder may produce either
+ * the spaced productName ("Better Life Naver Setup X.exe") or the hyphenated
+ * variant depending on version/locale. Fall back to any *.exe with Setup+version.
+ */
+function findSetupExe() {
+    if (!fs.existsSync(releaseDir)) return null;
+    const files = fs.readdirSync(releaseDir);
+    const candidates = [
+        `Better-Life-Naver-Setup-${VERSION}.exe`,
+        `Better Life Naver Setup ${VERSION}.exe`,
+    ];
+    for (const name of candidates) {
+        if (files.includes(name)) return path.join(releaseDir, name);
+    }
+    const fallback = files.find(f =>
+        f.toLowerCase().endsWith('.exe') &&
+        /setup/i.test(f) &&
+        f.includes(VERSION) &&
+        !f.includes('uninstall') &&
+        !f.includes('elevate')
+    );
+    return fallback ? path.join(releaseDir, fallback) : null;
+}
 
 function main() {
     console.log(`\n🔧 latest.yml 수정 시작 (v${VERSION})`);
     console.log('─'.repeat(50));
 
-    // 1. Setup.exe 존재 확인
-    if (!fs.existsSync(setupFile)) {
-        console.error(`❌ Setup 파일을 찾을 수 없습니다: ${setupFile}`);
+    // 1. Setup.exe 자동 감지
+    const setupFile = findSetupExe();
+    if (!setupFile) {
+        console.error(`❌ Setup 파일을 찾을 수 없습니다 (${releaseDir})`);
         console.error('   먼저 npm run release 로 빌드하세요.');
         process.exit(1);
     }
+    console.log(`📍 감지된 설치 파일: ${path.basename(setupFile)}`);
 
     const stats = fs.statSync(setupFile);
     const fileSize = stats.size;
-    console.log(`📦 파일: Better Life Naver Setup ${VERSION}.exe`);
+    console.log(`📦 파일: ${path.basename(setupFile)}`);
     console.log(`📏 크기: ${(fileSize / 1024 / 1024).toFixed(1)}MB (${fileSize} bytes)`);
 
     // 2. SHA512 계산 (hex → base64, electron-updater 형식)
