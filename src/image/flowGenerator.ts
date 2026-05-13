@@ -454,6 +454,21 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
         sendImageLog('✅ [Flow] 로그인 세션 확인 — 이미지 생성 준비됨');
         cachedContext = ctx;
         cachedPage = page;
+        // [v2.10.158] zombieRecovery hook — Flow chromium 추적
+        try {
+            const browser = ctx.browser();
+            const pid = (browser as any)?.process?.()?.pid;
+            if (pid) {
+                const zr = require('../runtime/zombieRecovery.js');
+                const { app } = require('electron');
+                zr.trackBrowserPid({
+                    pid,
+                    kind: 'playwright-chromium',
+                    cmdlineFingerprint: app.getPath('userData'),
+                    label: 'flow-cached',
+                });
+            }
+        } catch { /* ignore */ }
         return page;
     }
 
@@ -590,6 +605,21 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
     sendImageLog('✅ [Flow] 숨김 모드 전환 완료 — 이미지 생성 준비됨');
     cachedContext = finalCtx;
     cachedPage = finalPage;
+    // [v2.10.158] zombieRecovery hook — Flow chromium 추적 (신규 세션)
+    try {
+        const browser = finalCtx.browser();
+        const pid = (browser as any)?.process?.()?.pid;
+        if (pid) {
+            const zr = require('../runtime/zombieRecovery.js');
+            const { app } = require('electron');
+            zr.trackBrowserPid({
+                pid,
+                kind: 'playwright-chromium',
+                cmdlineFingerprint: app.getPath('userData'),
+                label: 'flow-new',
+            });
+        }
+    } catch { /* ignore */ }
     return finalPage;
 }
 
@@ -2056,7 +2086,18 @@ export async function resetFlowState(): Promise<void> {
     cookieBannerDismissed = false;
     _networkListenerInstalled = false;
     _networkImageQueue = [];
-    try { if (cachedContext) await cachedContext.close(); } catch { /* ignore */ }
+    // [v2.10.158] zombieRecovery untrack — 정상 close 시 lock 해제
+    if (cachedContext) {
+        try {
+            const browser = cachedContext.browser();
+            const pid = (browser as any)?.process?.()?.pid;
+            if (pid) {
+                const zr = require('../runtime/zombieRecovery.js');
+                zr.untrackBrowserPid(pid);
+            }
+        } catch { /* ignore */ }
+        try { await cachedContext.close(); } catch { /* ignore */ }
+    }
     cachedContext = null;
     cachedPage = null;
 }
