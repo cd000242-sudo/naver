@@ -186,3 +186,64 @@ export function ensureContentParagraphBreaks(content: StructuredContent): Struct
 
   return content;
 }
+
+/**
+ * [v2.10.165] 정규식 매칭 횟수 제한 — generic regex helper.
+ *
+ * 첫 N개 매치만 유지, 나머지는 빈 문자열로 치환.
+ */
+export function limitRegexOccurrences(text: string, regex: RegExp, maxCount: number): string {
+  if (!text) return text;
+  let count = 0;
+  return text.replace(regex, (m) => {
+    count += 1;
+    return count <= maxCount ? m : '';
+  });
+}
+
+/**
+ * [v2.10.165] 소제목 길이 제한 (30자 이내로 완화 — 제품명 포함 가능).
+ *
+ * 자연스러운 끊김 위치(공백/쉼표) 찾기 + 끝 부분 조사 정리 + fallback (5자 미만 시 원본 앞부분).
+ */
+export function truncateHeadingTitles(content: StructuredContent, maxLength: number = 30): StructuredContent {
+  if (!content || !content.headings) return content;
+
+  const truncateTitle = (title: string): string => {
+    const cleaned = String(title || '').trim();
+    if (cleaned.length <= maxLength) return cleaned;
+
+    // 30자 이내에서 자연스러운 끊김 찾기
+    let truncated = cleaned.substring(0, maxLength);
+
+    // 마지막 단어가 잘렸을 경우, 마지막 공백 또는 조사 위치에서 자르기
+    const lastSpaceIdx = truncated.lastIndexOf(' ');
+    const lastCommaIdx = truncated.lastIndexOf(',');
+
+    // 공백이나 쉼표가 있으면 그 위치에서 자르기
+    if (lastSpaceIdx > maxLength * 0.5) {
+      truncated = truncated.substring(0, lastSpaceIdx);
+    } else if (lastCommaIdx > maxLength * 0.5) {
+      truncated = truncated.substring(0, lastCommaIdx);
+    }
+
+    // 끝 부분 정리 (조사, 마침표, 쉼표, 불필요한 어미 등 제거)
+    truncated = truncated.replace(/[,\.!\?\s의가를에서으로와]*$/, '').trim();
+
+    // 만약 너무 짧아지면 원본에서 그냥 앞에서부터 자르기
+    if (truncated.length < 5) {
+      truncated = cleaned.substring(0, maxLength).trim();
+    }
+
+    console.log(`[ContentGenerator] 소제목 최적화 절삭: "${cleaned.substring(0, 35)}..." → "${truncated}"`);
+    return truncated;
+  };
+
+  content.headings = content.headings.map(h => ({
+    ...h,
+    title: truncateTitle(h.title)
+  }));
+
+  console.log('[ContentGenerator] ✅ 소제목 길이 제한 (30자 이내) 적용 완료');
+  return content;
+}
