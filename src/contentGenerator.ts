@@ -4993,10 +4993,9 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         if (useGrounding) {
           requestConfig.tools = [{ googleSearch: {} }];
         } else {
-          // [v2.10.170] URL 모드 grounding OFF — 사용자 보고 "비용 최소화" + URL 원본이 이미 fact source
-          //   기존: URL 모드도 grounding ON ($0.035/글 추가) — 손님 PC fetch 회피용
-          //   현재: URL 모드는 원본 텍스트가 이미 *사실 source*이므로 grounding 불필요. JSON 모드도 미사용 유지.
-          //   효과: URL 모드 글 1편당 $0.035 절감 + grounding 결과 무시로 인한 환각 완화 (원본 우선)
+          // [v2.10.172] grounding OFF 경로 — 호출자가 명시적으로 options.useGrounding=false로 지정한 경우만 진입
+          //   (제목 생성 등 짧은 보조 호출). 본문 생성은 callSite에서 항상 useGrounding 미설정(=ON).
+          //   사용자가 environment 설정에서 enableSearchGrounding=false로 끈 경우에도 여기 진입.
           // requestConfig.tools 미설정 (기본 OFF)
         }
         // ✅ [v1.4.77] 캐시 사용 호출 실패 시 즉시 일반 호출로 투명 폴백
@@ -6970,20 +6969,16 @@ export async function generateStructuredContent(
       const mode = (source.contentMode || 'seo') as PromptMode;
       const systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
 
-      // ✅ [v1.4.4] 70점 동적 Grounding 결정 (할루시네이션 방지 + 비용 절감)
+      // ✅ [v2.10.172] 사용자 요청 — Gemini 본문 생성은 *반드시* grounding ON (팩트 보장)
+      //   기존 (v1.4.4 ~ v2.10.171): smartGrounding 동적 결정
+      //     - URL 모드: rawText < 1000 → ON, 그 외 OFF (v2.10.170 비용 절감)
+      //     - 키워드 모드: rawText < 2000 OR !hasKeywordInRawText → ON
+      //   변경: 본문 생성은 항상 grounding ON. 사용자 enableSearchGrounding 토글만 따름.
+      //   사유: "팩트가 꼭 필요" — 환각/추정 차단이 비용 $0.035/글보다 우선
       const rawTextLen = (source.rawText || '').length;
       const isUrlMode = !!source.url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news';
-      let smartGrounding: boolean;
-      if (isUrlMode) {
-        smartGrounding = rawTextLen < 1000;
-      } else {
-        const primaryKw = getPrimaryKeywordFromSource(source);
-        const hasKeywordInRawText = primaryKw && rawTextLen > 0
-          ? (source.rawText || '').toLowerCase().includes(primaryKw.toLowerCase())
-          : false;
-        smartGrounding = rawTextLen < 2000 || !hasKeywordInRawText;
-      }
-      console.log(`[ContentGenerator] 🧠 Grounding: ${smartGrounding ? 'ON' : 'OFF'} | mode=${isUrlMode ? 'URL' : 'KEYWORD'}, rawText=${rawTextLen}자`);
+      const smartGrounding = true;
+      console.log(`[ContentGenerator] 🧠 Grounding: ON (강제) | mode=${isUrlMode ? 'URL' : 'KEYWORD'}, rawText=${rawTextLen}자`);
 
       // ✅ [Traffic Hunter 통합] buildModeBasedPrompt 내에서 계산된 temperature 값을 가져와야 함.
       // 하지만 buildModeBasedPrompt는 string만 반환하므로, 여기서 다시 온도 계산 (중복을 피하려면 리팩토링이 필요하지만 현재 흐름 유지)
