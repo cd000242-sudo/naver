@@ -50,15 +50,8 @@ import {
   computeAffiliateTitleCriticalIssues,
   computeHomefeedIntroCriticalIssues,
 } from './contentTitleValidators';
-// [Phase 3-7/v2.10.145] 제목 공식 패턴 추출 (interface + 4 FORMULAS + CATEGORY_FORMULA_PRIORITY)
-import {
-  type TitleFormula,
-  SEO_TITLE_FORMULAS,
-  HOMEFEED_TITLE_FORMULAS,
-  AFFILIATE_TITLE_FORMULAS,
-  SHOPPING_EXPERT_TITLE_FORMULAS,
-  CATEGORY_FORMULA_PRIORITY,
-} from './contentTitleFormulas';
+// [Phase 3-13/v2.10.159] selectTitleFormula 추출 — 이전 FORMULAS imports는 contentTitleSelector 내부로 이동
+import { selectTitleFormula } from './contentTitleSelector';
 // [Phase 3-8/v2.10.146] 제목 품질 scoring data + retry feedback
 import {
   buildTitleRetryFeedback,
@@ -1454,57 +1447,7 @@ function applySeoQualityHookBlock(content: StructuredContent, source: ContentSou
 }
 
 // [Phase 3-7/v2.10.145] interface TitleFormula + 4 FORMULAS + CATEGORY_FORMULA_PRIORITY -> contentTitleFormulas.ts
-function selectTitleFormula(mode: PromptMode, attempt: number, usedIds: string[], categoryHint?: string, articleType?: string): TitleFormula {
-  // ✅ [2026-03-13] affiliate 전용 공식 풀 추가 — SEO 공식 대신 제품 후기 최적화 공식 사용
-  // ✅ [v1.4.57] shopping_expert_review는 전문리뷰 전용 풀 사용 (후기형 표현 금지)
-  const isShoppingExpert = mode === 'affiliate' && articleType === 'shopping_expert_review';
-  const pool = mode === 'homefeed' ? HOMEFEED_TITLE_FORMULAS
-    : isShoppingExpert ? SHOPPING_EXPERT_TITLE_FORMULAS
-    : mode === 'affiliate' ? AFFILIATE_TITLE_FORMULAS
-    : SEO_TITLE_FORMULAS;
-  if (isShoppingExpert) {
-    console.log('[TitleGen] 🎯 전문리뷰 전용 공식 풀 사용 (shopping_expert_review) — 후기/체험형 표현 금지');
-  }
-  // ✅ [v1.4.48 Stage A.1] 모드별 풀에서만 검색 — 홈피드 글에 SEO/affiliate 공식 섞임 방지
-  // 기존: allFormulas = [...SEO, ...HOMEFEED, ...AFFILIATE] → 카테고리 우선 ID 오타 시 타 모드 공식 선택됨
-  // 수정: 모드 pool 내에서만 카테고리 우선 ID 검색
-  const allFormulas = pool;
-
-  // ✅ [v1.4.46] 최근 기간 표현 2개 이상 사용 시 기간 계열 공식 스킵
-  const DURATION_FORMULA_IDS = ['hf_duration_exp', 'af_duration', 'hf_accumulated'];
-  let skipDurationFormulas = false;
-  // ✅ [v1.4.48 Stage A.2] 정적 import 사용 (require 제거)
-  const recent = getRecentPeriods() || [];
-  if (recent.length >= 2) {
-    skipDurationFormulas = true;
-    console.log(`[TitleGen] 🚫 최근 ${recent.length}개 기간 반복 감지 → 기간 계열 공식 스킵`);
-  }
-
-  // ✅ [v3] 카테고리 우선 공식이 있으면 먼저 시도
-  if (categoryHint && CATEGORY_FORMULA_PRIORITY[categoryHint]) {
-    const priorityIds = CATEGORY_FORMULA_PRIORITY[categoryHint]
-      .filter(id => !skipDurationFormulas || !DURATION_FORMULA_IDS.includes(id));
-    const priorityUnused = priorityIds
-      .filter(id => !usedIds.includes(id))
-      .map(id => allFormulas.find(f => f.id === id))
-      .filter((f): f is TitleFormula => !!f);
-    if (priorityUnused.length > 0) {
-      console.log(`[TitleGen] 🎯 카테고리 우선 공식 (${categoryHint}): ${priorityUnused[0].name}`);
-      return priorityUnused[0];
-    }
-  }
-
-  // 아직 사용하지 않은 공식 우선 (해당 모드 풀에서, 필요 시 기간 공식 제외)
-  const filteredPool = skipDurationFormulas
-    ? pool.filter(p => !DURATION_FORMULA_IDS.includes(p.id))
-    : pool;
-  const unused = filteredPool.filter(p => !usedIds.includes(p.id));
-  if (unused.length > 0) {
-    return unused[attempt % unused.length];
-  }
-  // 전부 사용했으면 랜덤
-  return filteredPool[Math.floor(Math.random() * filteredPool.length)] || pool[0];
-}
+// [Phase 3-13/v2.10.159] selectTitleFormula -> contentTitleSelector.ts
 
 // [Phase 3-8/v2.10.146] ISSUE_ACTION_MAP + buildTitleRetryFeedback -> contentTitleQuality.ts
 
