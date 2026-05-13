@@ -151,23 +151,19 @@ function buildEnhancedPrompt(topic: string, options: PerplexityGenerateOptions =
     }
 
     // SEO 모드
+    // ✅ [v2.10.171] 격식적 "글 구조" 제거 — system 프롬프트의 .prompt 파일이 이미 구조 정의함
+    //   중복 격식 강제가 Sonar의 stiff 보고체 출력을 유발 → 자연스러운 흐름으로 전환
     return {
         systemPrompt: selectedPrompt,
-        userPrompt: `# 글 작성 요구사항
-- **주제**: ${topic}
-- **타겟 독자**: ${targetAudience}
-- **톤**: ${toneGuide[tone] || toneGuide.friendly}
-- **목표 분량**: ${wordCount}자 (±200자)
-${keywords.length > 0 ? `- **필수 키워드**: ${keywords.join(', ')} (자연스럽게 3회 이상 포함)` : ''}
+        userPrompt: `# 작성 주제
+${topic}
 
-# 글 구조
-1. **제목** (30자 이내, SEO 최적화)
-2. **도입부** (100-150자, 독자 관심 유도)
-3. **본문** (3-5개 소제목, 각 300-500자)
-4. **마무리** (100-150자, 핵심 요약 + CTA)
-5. **추천 태그** (5-10개)
+- 타겟 독자: ${targetAudience}
+- 톤: ${toneGuide[tone] || toneGuide.friendly}
+- 목표 분량: ${wordCount}자 내외
+${keywords.length > 0 ? `- 자연스럽게 녹여낼 키워드: ${keywords.join(', ')}` : ''}
 
-지금 바로 작성을 시작하세요.`,
+위 주제를 *직접 경험한 블로거*처럼 작성해주세요. system 메시지의 구조와 톤 가이드를 따르되, 형식적 보고체가 아닌 자연스러운 흐름으로.`,
     };
 }
 
@@ -229,15 +225,25 @@ export async function generatePerplexityContent(
 
             console.log(`[Perplexity Request] Model: ${modelName}, Topic: ${trimmedPrompt.substring(0, 50)}...`);
 
+            // ✅ [v2.10.171] Sonar 톤 보정 — AI 보고체 금지 + 인간적 표현 권장 (stiff 출력 차단)
+            const sonarToneGuide = `[Perplexity 작성 톤 가이드 — 절대 준수]
+1. AI 보고체 절대 금지: "알아보겠습니다", "살펴보겠습니다", "시작하겠습니다", "마치겠습니다" 등 *대화 진행 안내 문장* 일체 금지.
+2. 검색 인용 톤 금지: "~에 따르면", "출처에 의하면" 같은 *기사체 인용 표현* 금지. 본인 경험·관찰처럼 자연스럽게 녹여라.
+3. 인간적 표현 활용: "솔직히", "개인적으로", "의외로", "생각보다", "막상", "처음에는" 같은 *체감 표현*을 본문 2~4회 이상 자연스럽게 배치.
+4. 문장 길이: 평균 30~70자 한 문장. 짧고 부드러운 흐름. 문단당 3~5문장.
+
+`;
+
             const response = await client.chat.completions.create({
                 model: modelName,
                 messages: [
-                    { role: 'system', content: systemPrompt },
+                    { role: 'system', content: sonarToneGuide + systemPrompt },
                     { role: 'user', content: userPrompt },
                 ],
                 max_tokens: 4096,
-                temperature: 0.7,
-            });
+                temperature: 0.85,  // 0.7 → 0.85 (Sonar stiff 톤 완화)
+                top_p: 0.9,         // 어휘 다양성
+            } as any);
 
             const content = response.choices[0]?.message?.content?.trim() || '';
 

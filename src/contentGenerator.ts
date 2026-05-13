@@ -5503,9 +5503,37 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
   // ✅ [2026-03-16] promptSplitter 모듈로 system/user 분리 (인라인 50줄 코드 제거)
   // 키워드/원문 모드 자동 판별은 adjustForPerplexity()에서 처리
   const baseSplit = splitPromptByMarker(prompt);
-  const { system: systemMessage, user: userMessage } = adjustForPerplexity(baseSplit);
+  const { system: systemMessageRaw, user: userMessage } = adjustForPerplexity(baseSplit);
 
-  console.log(`[Perplexity] 메시지 분리: system=${systemMessage.length}자, user=${userMessage.length}자`);
+  // ✅ [v2.10.171] Perplexity Sonar 톤 보정 — 사용자 보고 "점수 낮고 너무 딱딱"
+  //   원인: Sonar는 검색-회상 모델이라 AI 보고체("알아보겠습니다", "살펴보겠습니다") 빈번 사용 →
+  //         analyzeNaverScore originality 페널티 + 인간적 표현 부족
+  //   해결: system 프롬프트 prefix에 AI 보고체 금지 + 인간적 표현 권장 명시
+  const perplexityToneGuide = `[Perplexity 작성 톤 가이드 — 절대 준수]
+1. AI 보고체 절대 금지: "알아보겠습니다", "살펴보겠습니다", "시작하겠습니다", "마치겠습니다", "도움이 되셨으면" 등 *대화 진행 안내 문장* 일체 사용 금지.
+2. 검색 인용 톤 금지: "~에 따르면", "출처에 의하면", "최근 보도에 따르면" 같은 *기사체 인용 표현* 사용 금지. 대신 본인 경험·관찰처럼 자연스럽게 녹여라.
+3. 인간적 표현 활용: "솔직히", "개인적으로", "의외로", "생각보다", "막상", "처음에는", "사실은" 같은 *체감 표현*을 본문 2~4회 이상 자연스럽게 배치.
+4. 문장 길이: 평균 30~70자 한 문장. 한 호흡으로 읽히는 짧고 부드러운 흐름. 문단당 3~5문장.
+5. 검색해서 알게 된 사실이라도 *내가 직접 경험·체크한 것처럼* 말투를 바꿔라. 기사 베껴 적기 금지.
+
+`;
+  const systemMessage = perplexityToneGuide + systemMessageRaw;
+
+  // ✅ [v2.10.171] Sonar 전용 temperature 보정 — Gemini 0.5 동등 결과 위해 +0.25 boost
+  //   이유: Sonar는 검색 인용 모드라 동일 temperature에서 Gemini 대비 stiff
+  //   SEO 0.5 → 0.75, homefeed 0.7 → 0.9 (clamp [0.5, 1.0])
+  const sonarTemperature = modelName.includes('sonar')
+    ? Math.min(1.0, Math.max(0.5, temperature + 0.25))
+    : temperature;
+  if (sonarTemperature !== temperature) {
+    console.log(`[Perplexity] 🔥 Sonar temperature 보정: ${temperature} → ${sonarTemperature}`);
+  }
+
+  // ✅ [v2.10.171] search_recency_filter 조건부 — 원문 모드는 검색 비활성화 (stiff 톤 차단)
+  //   원문 모드(user > 500자): rawText가 fact source → 외부 검색 인용 톤 불필요
+  //   키워드 모드(user <= 500자): 검색 활용 가치 있음 → recency 유지
+  const isKeywordMode = userMessage.length <= 500;
+  console.log(`[Perplexity] 메시지 분리: system=${systemMessage.length}자, user=${userMessage.length}자 (${isKeywordMode ? '키워드' : '원문'} 모드)`);
 
   for (let retry = 0; retry < maxRetries; retry++) {
     try {
@@ -5528,14 +5556,15 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
       ];
 
       // ✅ [v2.10.28] Perplexity SDK signal 전달 — 사용자 취소 시 fetch 즉시 abort
+      // ✅ [v2.10.171] Sonar temperature boost + recency 조건부 + top_p 0.9 추가 (다양성)
       const createPromise = client.chat.completions.create({
         model: modelName,
         messages: messages,
-        temperature: temperature,
+        temperature: sonarTemperature,
         max_tokens: 8192,
-        // ✅ Perplexity 전용 옵션: 최신 정보 검색
         ...(modelName.includes('sonar') ? {
-          search_recency_filter: 'month',  // 최근 1개월 정보 우선
+          top_p: 0.9,  // 다양한 어휘 선택 — stiff 톤 완화
+          ...(isKeywordMode ? { search_recency_filter: 'month' } : {}),  // 키워드 모드만 검색 활용
         } : {}),
       } as any, signal ? { signal } as any : undefined);
 
