@@ -54,8 +54,15 @@ const LOCK_FILENAME = 'zombie-lock.json';
 const RATE_LIMIT = 10; // 부팅당 최대 kill 수 (security agent 권고)
 const TIMEOUT_MS = 5000;
 
-// 우리 앱 고유 fingerprint — cmdline에 이 문자열이 *없으면* 절대 kill 안 함
-const APP_FINGERPRINT = '.naver-blog-automation';
+// [v2.10.157] 우리 앱 fingerprint 패턴 — 다음 2개 중 하나라도 cmdline에 있어야 kill 후보
+//   1. .naver-blog-automation — browserSessionManager/naverBlogAutomation 메인 자동화 (os.homedir 하위)
+//   2. better-life-naver — ImageFX/Flow 등 Electron userData 하위 (productName 기반)
+// 둘 다 우리 앱 고유 경로. 일반 사용자 Chrome cmdline에 절대 안 들어감.
+const APP_FINGERPRINTS = ['.naver-blog-automation', 'better-life-naver'];
+
+function _hasAppFingerprint(cmdline: string): boolean {
+  return APP_FINGERPRINTS.some(fp => cmdline.includes(fp));
+}
 
 // allowlist (executable basename) — security agent 권고
 const ALLOWED_NAMES = new Set(['chrome.exe', 'chromium.exe', 'msedge.exe']);
@@ -103,7 +110,7 @@ export function startSession(opts: { mainPid: number; appVersion: string }): voi
 export function trackBrowserPid(entry: Omit<ZombieLockEntry, 'spawnedAt'>): void {
   if (!_lockPath) return;
   if (!entry.pid || entry.pid < MIN_SAFE_PID) return;
-  if (!entry.cmdlineFingerprint || !entry.cmdlineFingerprint.includes(APP_FINGERPRINT)) {
+  if (!entry.cmdlineFingerprint || !_hasAppFingerprint(entry.cmdlineFingerprint)) {
     // fingerprint가 우리 앱 경로 아니면 추적 안 함 (kill 후보 안 됨)
     return;
   }
@@ -212,8 +219,8 @@ export async function recoverZombiesOnStartup(opts: {
     if (!nameOk) continue;
 
     // 4차: cmdline fingerprint 검증 — PID Recycling 차단의 핵심
-    //   우리 앱 userDataDir 경로가 cmdline에 *반드시* 포함되어야 kill 후보
-    if (!live.cmdline.includes(APP_FINGERPRINT)) continue;
+    //   우리 앱 fingerprint(.naver-blog-automation 또는 better-life-naver) 중 하나라도 포함되어야 kill 후보
+    if (!_hasAppFingerprint(live.cmdline)) continue;
 
     // 5차: 우리 앱의 fingerprint 경로와 정확히 일치
     if (!live.cmdline.includes(entry.cmdlineFingerprint)) continue;

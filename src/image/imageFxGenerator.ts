@@ -58,12 +58,37 @@ let browserMode: 'adspower' | 'playwright' | null = null; // 어떤 모드로 �
  * 사용: `await setCachedBrowser(newBrowser);` (직접 할당 대신)
  */
 async function setCachedBrowser(next: Browser | null): Promise<void> {
+  // [v2.10.157] 이전 인스턴스 untrack
   if (cachedBrowser && cachedBrowser !== next) {
+    try {
+      const prevPid = (cachedBrowser as any)?.process?.()?.pid;
+      if (prevPid) {
+        const zr = require('../runtime/zombieRecovery.js');
+        zr.untrackBrowserPid(prevPid);
+      }
+    } catch { /* ignore */ }
     try {
       await cachedBrowser.close();
     } catch { /* 이미 닫힘 또는 disconnect — 무시 */ }
   }
-  await setCachedBrowser(next);
+  cachedBrowser = next;
+
+  // [v2.10.157] 새 browser zombieRecovery track
+  if (next) {
+    try {
+      const newPid = (next as any)?.process?.()?.pid;
+      if (newPid) {
+        const zr = require('../runtime/zombieRecovery.js');
+        const { app } = require('electron');
+        zr.trackBrowserPid({
+          pid: newPid,
+          kind: 'playwright-chromium',
+          cmdlineFingerprint: app.getPath('userData'),  // better-life-naver fingerprint
+          label: 'imagefx',
+        });
+      }
+    } catch { /* ignore */ }
+  }
 }
 let _adsPowerUserEnabled: boolean = false; // ✅ [2026-03-16] 사용자 AdsPower 활성화 설정
 // ✅ [SPEC-IMAGE-RECOVERY-001 R3] 세션 내 AdsPower 자동 OFF (실패 후 재시도 금지)
