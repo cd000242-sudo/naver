@@ -1013,6 +1013,37 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
     console.warn('[Fidelity] 검사 모듈 로드 실패 (측정 스킵):', (fidelityErr as Error)?.message);
   }
 
+  // [v2.10.169] 환각 표지 탐지 — 원본 vs 결과 sentiment mismatch + 부정 키워드 환각
+  //   사용자 보고 사례: 정준하 "이중생활" → 원본 *기부/선행* 긍정 → 결과 *폭로/논란* 부정
+  //   소제목은 원본 충실, 본문에서 의미 왜곡 환각
+  try {
+    if ((source.rawText ?? '').length >= 200 && _resultBodyForGates) {
+      const { checkHallucination } = require('./content/hallucinationCheck');
+      const hallucination = checkHallucination(source.rawText ?? '', _resultBodyForGates);
+      if (hallucination.warnings.length > 0) {
+        console.warn(`[Hallucination] ⚠️ 환각 의심 신호 ${hallucination.warnings.length}개:`);
+        for (const w of hallucination.warnings) console.warn(`  - ${w}`);
+        finalContent.quality = finalContent.quality ?? ({ warnings: [], score: 0 } as any);
+        if (Array.isArray((finalContent.quality as any).warnings)) {
+          for (const w of hallucination.warnings) {
+            (finalContent.quality as any).warnings.push(`🚨 환각 의심: ${w}`);
+          }
+        }
+      }
+      if (hallucination.isLikelyHallucinated) {
+        console.error(`[Hallucination] 🚨 강한 환각 신호 감지 — 원본 P${hallucination.positiveOriginal}/N${hallucination.negativeOriginal} → 결과 P${hallucination.positiveResult}/N${hallucination.negativeResult}, 의심 부정 키워드: ${hallucination.suspiciousNegativeKeywords.join(', ')}`);
+        finalContent.quality = finalContent.quality ?? ({ warnings: [], score: 0 } as any);
+        if (Array.isArray((finalContent.quality as any).warnings)) {
+          (finalContent.quality as any).warnings.push(
+            `🚨 [CRITICAL] 환각 가능성 높음 — 원본은 ${hallucination.positiveOriginal >= hallucination.negativeOriginal ? '긍정' : '부정'}인데 결과는 ${hallucination.positiveResult >= hallucination.negativeResult ? '긍정' : '부정'}. 발행 전 본문 검토 필수.`,
+          );
+        }
+      }
+    }
+  } catch (hallErr) {
+    console.warn('[Hallucination] 검사 모듈 로드 실패 (측정 스킵):', (hallErr as Error)?.message);
+  }
+
   // ✅ [Phase B] LDF L5 — qualityGate 통합 (이전엔 dead code, 호출 0건)
   // 발행 전 품질 위험 신호 측정. 차단은 다음 단계에서 발행 흐름과 연결.
   try {
@@ -7424,10 +7455,24 @@ export async function generateStructuredContent(
           const { checkSourceFidelity, extractResultBody, buildFidelityRetryInstruction } = require('./content/sourceFidelityCheck');
           const _rb = extractResultBody(optimized as any);
           const _fid = checkSourceFidelity({ rawText: source.rawText ?? '', resultBody: _rb });
-          if (!_fid.passed) {
+
+          // [v2.10.169] 환각 표지 탐지 — sentiment mismatch + 부정 키워드 환각
+          let _hallucinationFail = false;
+          let _hallRetryInstruction = '';
+          try {
+            const { checkHallucination, buildHallucinationRetryInstruction } = require('./content/hallucinationCheck');
+            const _hall = checkHallucination(source.rawText ?? '', _rb);
+            if (_hall.isLikelyHallucinated) {
+              _hallucinationFail = true;
+              _hallRetryInstruction = buildHallucinationRetryInstruction(_hall);
+              console.error(`[Hallucination] 🚨 강한 환각 감지 — 자동 재시도 트리거 (P${_hall.positiveOriginal}/N${_hall.negativeOriginal} → P${_hall.positiveResult}/N${_hall.negativeResult})`);
+            }
+          } catch { /* hallucination 모듈 실패 시 무시 */ }
+
+          if (!_fid.passed || _hallucinationFail) {
             _fidelityRetryUsed = true;
-            console.warn(`[Fidelity] Phase 7-B 자동 재시도: ${_fid.reason}`);
-            extraInstruction = `${buildFidelityRetryInstruction(_fid)}\n${extraInstruction}`;
+            console.warn(`[Fidelity] Phase 7-B 자동 재시도: ${_fid.reason ?? ''}${_hallucinationFail ? ' + 환각 의심' : ''}`);
+            extraInstruction = `${buildFidelityRetryInstruction(_fid)}\n${_hallRetryInstruction}\n${extraInstruction}`;
             continue; // for 루프 다음 attempt — 같은 attempt 카운트 보존
           }
         } catch (_e) { /* fidelity 모듈 실패 시 정상 흐름 */ }
