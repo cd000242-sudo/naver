@@ -62,6 +62,13 @@ import {
   applyHomefeedNarrativeHookBlock,
   applySeoQualityHookBlock,
 } from './contentBodyHooks';
+// [Phase 3-16/v2.10.162] StructuredContent 변환 — 이모지/줄바꿈/문단/소제목 marker
+import {
+  applyOrdinalHeadingMarkerFix,
+  removeEmojisFromContent,
+  normalizeContentLineBreaks,
+  ensureContentParagraphBreaks,
+} from './contentBodyTransforms';
 // [Phase 3-8/v2.10.146] 제목 품질 scoring data + retry feedback
 import {
   buildTitleRetryFeedback,
@@ -1859,184 +1866,7 @@ function finalizeStructuredContent(content: StructuredContent, source: ContentSo
   return finalContent;
 }
 
-function applyOrdinalHeadingMarkerFix(content: StructuredContent): void {
-  const headings = Array.isArray(content?.headings) ? content.headings : [];
-  if (headings.length === 0) return;
-
-  const replace = (input: string): string => {
-    const text = String(input || '');
-    if (!text) return text;
-    const re = /^\s*(?:(?:(?:제\s*)?\d+|(?:첫|두|세|네|다섯|여섯|일곱|여덟|아홉|열))\s*번째\s*)?소제목\s*[:：]\s*/gmi;
-    let i = 0;
-    return text.replace(re, () => {
-      const title = String((headings[i] as any)?.title || '').trim();
-      i += 1;
-      // title이 비어있거나 ? 만 있는 경우 : 을 붙이지 않음
-      if (!title || title === '?' || title === '？') return '';
-      return `${title}: `;
-    });
-  };
-
-  if (content.bodyPlain) content.bodyPlain = replace(content.bodyPlain);
-  if (content.bodyHtml) content.bodyHtml = replace(content.bodyHtml);
-}
-
-// ✅ 생성된 콘텐츠에서 이모지 제거 (StructuredContent 전체)
-function removeEmojisFromContent(content: StructuredContent): StructuredContent {
-  if (!content) return content;
-
-  // 제목에서 이모지 제거
-  if (content.selectedTitle) {
-    content.selectedTitle = removeEmojis(content.selectedTitle);
-  }
-
-  // ✅ [2026-03-14] 본문에서 이모지 제거 (기존 누락 — 본문 이모지 잔존의 근본 원인)
-  if (content.bodyPlain) {
-    content.bodyPlain = removeEmojis(content.bodyPlain);
-  }
-  if (content.bodyHtml) {
-    // HTML 본문에서도 이모지 제거 (태그 밖의 텍스트에서)
-    content.bodyHtml = removeEmojis(content.bodyHtml);
-  }
-  if ((content as any).introduction) {
-    (content as any).introduction = removeEmojis((content as any).introduction);
-  }
-  if ((content as any).conclusion) {
-    (content as any).conclusion = removeEmojis((content as any).conclusion);
-  }
-
-  // 소제목에서 이모지 제거
-  if (content.headings) {
-    content.headings = content.headings.map(h => ({
-      ...h,
-      title: removeEmojis(h.title),
-      content: h.content ? removeEmojis(h.content) : h.content
-    }));
-  }
-
-  // 해시태그에서 이모지 제거
-  if (content.hashtags) {
-    content.hashtags = content.hashtags.map(tag => removeEmojis(tag));
-  }
-
-  console.log('[ContentGenerator] ✅ 이모지 자동 제거 완료 (본문 포함)');
-  return content;
-}
-
-// ✅ [2026-03-14] 본문 연속 줄바꿈 정리 — 부자연스러운 이중/삼중 빈 줄 제거
-function normalizeLineBreaks(text: string): string {
-  if (!text) return text;
-  // 1. 3개 이상 연속 줄바꿈 → 2개로 (문단 구분 유지)
-  let result = text.replace(/\n{3,}/g, '\n\n');
-  // 2. \r\n\r\n\r\n 패턴도 정리
-  result = result.replace(/(\r?\n){3,}/g, '\n\n');
-  // 3. 문단 시작/끝의 불필요한 공백 정리
-  result = result.replace(/\n[ \t]+\n/g, '\n\n');
-  // 4. 시작/끝 빈 줄 제거
-  result = result.trim();
-  return result;
-}
-
-function normalizeContentLineBreaks(content: StructuredContent): StructuredContent {
-  if (!content) return content;
-
-  if (content.bodyPlain) {
-    content.bodyPlain = normalizeLineBreaks(content.bodyPlain);
-  }
-  if (content.bodyHtml) {
-    content.bodyHtml = normalizeLineBreaks(content.bodyHtml);
-  }
-  if ((content as any).introduction) {
-    (content as any).introduction = normalizeLineBreaks((content as any).introduction);
-  }
-  if ((content as any).conclusion) {
-    (content as any).conclusion = normalizeLineBreaks((content as any).conclusion);
-  }
-  if (content.headings) {
-    content.headings = content.headings.map(h => ({
-      ...h,
-      content: h.content ? normalizeLineBreaks(h.content) : h.content
-    }));
-  }
-
-  console.log('[ContentGenerator] ✅ 연속 줄바꿈 정리 완료');
-  return content;
-}
-
-// ✅ [2026-03-16] AI가 \n\n 문단 구분을 빠뜨린 경우 자동 삽입
-// 300자 이상인데 \n\n이 없으면, 문장 종결(.!?) 뒤를 기준으로 2~4문장마다 문단 분리
-function ensureParagraphBreaks(text: string): string {
-  if (!text || text.length < 300) return text;
-
-  // 이미 \n\n이 있으면 각 문단만 개별 검사
-  if (text.includes('\n\n')) {
-    const paragraphs = text.split('\n\n');
-    const fixed = paragraphs.map(p => ensureParagraphBreaks(p.trim()));
-    return fixed.join('\n\n');
-  }
-
-  // \n\n 없이 300자 이상 → 문장 기준으로 문단 분리
-  // 숫자+점 패턴(1. 2. 등) 보호를 위해 임시 치환
-  const safe = text.replace(/(\d+)\.\s/g, '$1__NUMDOT__ ');
-
-  // 문장 종결 기준으로 분리 (.!? 뒤 공백)
-  const sentences = safe
-    .split(/(?<=[.!?。！？])\s+/)
-    .map(s => s.replace(/__NUMDOT__/g, '.').trim())
-    .filter(s => s.length > 0);
-
-  if (sentences.length <= 2) {
-    // 문장이 2개 이하면 그대로 반환 (분리할 필요 없음)
-    return text;
-  }
-
-  // 2~4문장마다 \n\n 삽입 (랜덤화하여 자연스럽게)
-  const result: string[] = [];
-  let current: string[] = [];
-  const breakAfter = () => Math.floor(Math.random() * 3) + 2; // 2~4문장
-  let nextBreak = breakAfter();
-
-  for (let i = 0; i < sentences.length; i++) {
-    current.push(sentences[i]);
-
-    if (current.length >= nextBreak && i < sentences.length - 1) {
-      result.push(current.join(' '));
-      current = [];
-      nextBreak = breakAfter();
-    }
-  }
-  if (current.length > 0) {
-    result.push(current.join(' '));
-  }
-
-  const fixed = result.join('\n\n');
-  if (fixed !== text) {
-    console.log(`[ensureParagraphBreaks] ✅ 문단 구분 자동 삽입: ${sentences.length}문장 → ${result.length}문단`);
-  }
-  return fixed;
-}
-
-function ensureContentParagraphBreaks(content: StructuredContent): StructuredContent {
-  if (!content) return content;
-
-  if (content.bodyPlain) {
-    content.bodyPlain = ensureParagraphBreaks(content.bodyPlain);
-  }
-  if ((content as any).introduction) {
-    (content as any).introduction = ensureParagraphBreaks((content as any).introduction);
-  }
-  if ((content as any).conclusion) {
-    (content as any).conclusion = ensureParagraphBreaks((content as any).conclusion);
-  }
-  if (content.headings) {
-    content.headings = content.headings.map(h => ({
-      ...h,
-      content: h.content ? ensureParagraphBreaks(h.content) : h.content
-    }));
-  }
-
-  return content;
-}
+// [Phase 3-16/v2.10.162] applyOrdinalHeadingMarkerFix + removeEmojisFromContent + normalizeContentLineBreaks + ensureContentParagraphBreaks -> contentBodyTransforms.ts
 
 // ✅ [2026-01-21] 소제목 길이 제한 (30자 이내로 완화 - 제품명 포함 가능)
 function truncateHeadingTitles(content: StructuredContent, maxLength: number = 30): StructuredContent {
