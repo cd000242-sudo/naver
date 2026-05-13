@@ -4993,9 +4993,11 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         if (useGrounding) {
           requestConfig.tools = [{ googleSearch: {} }];
         } else {
-          // ✅ [v1.4.34] JSON 모드 제거 — 손님 PC fetch 거부 우회
-          // (이전: requestConfig.generationConfig.responseMimeType = 'application/json';)
-          requestConfig.tools = [{ googleSearch: {} }];
+          // [v2.10.170] URL 모드 grounding OFF — 사용자 보고 "비용 최소화" + URL 원본이 이미 fact source
+          //   기존: URL 모드도 grounding ON ($0.035/글 추가) — 손님 PC fetch 회피용
+          //   현재: URL 모드는 원본 텍스트가 이미 *사실 source*이므로 grounding 불필요. JSON 모드도 미사용 유지.
+          //   효과: URL 모드 글 1편당 $0.035 절감 + grounding 결과 무시로 인한 환각 완화 (원본 우선)
+          // requestConfig.tools 미설정 (기본 OFF)
         }
         // ✅ [v1.4.77] 캐시 사용 호출 실패 시 즉시 일반 호출로 투명 폴백
         //    4/18 장애 원인: getGenerativeModelFromCachedContent 경로가 일부 환경에서 실패

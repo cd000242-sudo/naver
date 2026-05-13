@@ -1488,6 +1488,9 @@ export async function paraphraseContent(): Promise<void> {
     appendLog('✨ 페러프레이징 모드: 글의 퀄리티를 개선하여 새롭게 작성 중...');
     showUnifiedProgress(10, '페러프레이징 시작...', 'AI가 글을 분석하고 개선 중입니다');
 
+    // [v2.10.170] 페러프레이징 진행 모달 표시 — 사용자 보고 "글생성중 모달이 떠야"
+    showGenerationModal('✨ 페러프레이징 중...', 'AI가 원본 글을 분석하고 자연스럽게 재작성하는 중입니다', 10);
+
     // 기존 콘텐츠 초기화
     if (currentStructuredContent) {
       currentStructuredContent = null;
@@ -1575,14 +1578,17 @@ export async function paraphraseContent(): Promise<void> {
 📌 도입부 후킹 100점 재작성
 ════════════════════════════════════════
 
-[첫 문장 필수 패턴 중 하나]
-- "저도 처음엔 이랬어요."
-- "이거 보고 진짜 놀랐어요."
-- "다들 이거 모르더라고요."
-- "솔직히 말하면요."
+[첫 문장 — *원본 글 주제/톤에 맞춰 자율 작성*]
+⚠️ 하드코딩 금지 — 절대 다음 예시를 *그대로* 사용하지 마라:
+  ❌ "솔직히 말하면요", "저도 처음엔 이랬어요" 같은 *고정 문구* 복붙
+원칙:
+  - 원본 글이 *정보형*이면 → 핵심 결론을 *한 줄로* 던지는 형태
+  - 원본 글이 *감성/이슈*이면 → 원본의 *실제 사건/인물*에 대한 자연스러운 반응
+  - 원본 글이 *제품 리뷰*이면 → 실사용 후 *구체적 인상*
+  → 원본 글 내용 분석 후 *추론*해서 자연스러운 후킹 작성
 
 [도입부 3줄 구성]
-1줄: 공감/충격 (15~25자)
+1줄: 공감/충격 (15~25자) — 원본 내용 기반, 일반 클리셰 금지
 2줄: 상황 설명 (20~30자)
 3줄: 본문 유도 (20~30자)
 
@@ -1593,31 +1599,30 @@ export async function paraphraseContent(): Promise<void> {
 [소제목 재작성]
 - 원본 소제목 의미 유지하되 표현 완전 변경
 - 감정/행동 중심 소제목으로 변환
-❌ "제품 특징 정리" → ✅ "써보니까 이게 달랐어요"
-❌ "장단점 분석" → ✅ "솔직히 좋은 점, 아쉬운 점"
+- 단, *원본 글의 주제/방향성* 보존 — 긍정 글을 부정으로, 정보 글을 가십으로 변형 절대 금지
 
 [문단 재구성]
 - 문단 순서 섞기 (논리적 흐름 유지하면서)
 - 예시/사례 추가 또는 변경
 - 숫자/데이터 표현 방식 변경 (50% → 절반, 2배 → 두 배로)
+- ⚠️ 원본에 *없는* 사실/사건/인물 발언 *절대 추가 금지*
 
-[반응 블록 추가]
-📌 실제 반응:
-- "~라는 댓글이 많았어요"
-- "주변에서도 ~라고 하더라고요"
+[반응 블록 — *원본 글에 있을 때만*]
+- 원본 글에 *실제 댓글/반응/사례*가 있으면 그것을 자연스럽게 인용
+- 원본에 *없으면* 추가하지 마라. 일반적 "~라는 댓글이 많았어요" 같은 클리셰 환각 금지
 
 ════════════════════════════════════════
 📌 AI 인용 최적화 (네이버 AI 대응)
 ════════════════════════════════════════
 
-[인용 가능한 문장 3개 이상 포함]
-- "핵심은 딱 하나예요. ~"
-- "결론부터 말하면, ~"
-- "가장 중요한 건 ~이에요."
+[인용 가능한 팩트 문장 3개 이상]
+- *원본 글에 있는 실제 팩트*를 *자연스러운 형태로* 명료하게 표현
+- 하드코딩된 "핵심은 딱 하나예요" 같은 고정 도입어 *복붙 금지*
+- AI 추론으로 *원본 글의 핵심 인사이트*를 *각 문장마다 다른 표현*으로 작성
 
 [구조화된 정보]
-- 숫자 리스트 1개 이상 (3가지, 5단계 등)
-- 비교/대조 문장 1개 이상
+- 숫자 리스트 1개 이상 (단, 원본에 *없는 숫자* 환각 금지)
+- 비교/대조 문장 1개 이상 (원본 내용 기반)
 
 ════════════════════════════════════════
 📌 원본 해시태그 참고
@@ -1672,6 +1677,8 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
     }
 
     showUnifiedProgress(80, '페러프레이징 완료!', '개선된 글을 필드에 채우는 중');
+    // [v2.10.170] 모달 progress 업데이트
+    showGenerationModal('✨ 페러프레이징 완료!', '개선된 글을 화면에 반영하는 중...', 80);
 
     const result = apiResponse.data;
 
@@ -1727,6 +1734,8 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
     appendLog('🔄 원본 복원됨 — 페러프레이징 전 상태로 돌아갔습니다.');
   } finally {
     hideUnifiedProgress();
+    // [v2.10.170] 모달 hide
+    hideGenerationModal();
 
     // ✅ 실행 잠금 해제
     isParaphrasing = false;
@@ -1736,6 +1745,30 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
       paraphraseBtn.style.cursor = 'pointer';
     }
   }
+}
+
+// [v2.10.170] 페러프레이징/글 생성 진행 모달 helper
+function showGenerationModal(title: string, message: string, percent: number): void {
+  try {
+    const modal = document.getElementById('generation-modal');
+    const titleEl = document.getElementById('generation-modal-title');
+    const msgEl = document.getElementById('generation-modal-message');
+    const progEl = document.getElementById('generation-modal-progress');
+    const pctEl = document.getElementById('generation-modal-percent');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    if (titleEl) titleEl.textContent = title;
+    if (msgEl) msgEl.textContent = message;
+    if (progEl) progEl.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+    if (pctEl) pctEl.textContent = `${Math.round(percent)}%`;
+  } catch { /* ignore */ }
+}
+
+function hideGenerationModal(): void {
+  try {
+    const modal = document.getElementById('generation-modal');
+    if (modal) modal.style.display = 'none';
+  } catch { /* ignore */ }
 }
 
 

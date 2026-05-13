@@ -12403,6 +12403,19 @@
             </div>
         </div>
     </div>
+
+    <!-- [v2.10.170] 페러프레이징/글 생성 진행 모달 -->
+    <div id="generation-modal" style="display: none; position: fixed; inset: 0; z-index: 200001; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); align-items: center; justify-content: center;">
+        <div style="background: linear-gradient(135deg, #1f2937, #111827); border: 2px solid #fbbf24; border-radius: 16px; padding: 2.5rem 3rem; min-width: 420px; max-width: 560px; box-shadow: 0 20px 60px rgba(251, 191, 36, 0.3); text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 1rem; animation: pulse 1.5s ease-in-out infinite;">✨</div>
+            <div id="generation-modal-title" style="color: #fbbf24; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">글 생성 중...</div>
+            <div id="generation-modal-message" style="color: rgba(255,255,255,0.85); font-size: 0.95rem; margin-bottom: 1.5rem; min-height: 2.6rem; line-height: 1.4;">AI가 글을 분석하고 작성하는 중입니다</div>
+            <div style="height: 6px; background: rgba(251, 191, 36, 0.15); border-radius: 3px; overflow: hidden; margin-bottom: 0.8rem;">
+                <div id="generation-modal-progress" style="height: 100%; background: linear-gradient(90deg, #fbbf24, #f59e0b); width: 0%; transition: width 0.4s ease; box-shadow: 0 0 12px #fbbf24;"></div>
+            </div>
+            <div id="generation-modal-percent" style="color: rgba(251, 191, 36, 0.85); font-size: 0.85rem; font-weight: 600;">0%</div>
+        </div>
+    </div>
     <style>
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
