@@ -1390,6 +1390,13 @@ export class NaverBlogAutomation {
     this.log('⚠️ 자동화 취소 요청을 받았습니다.');
 
     if (this.browser) {
+      // [v2.10.156] zombieRecovery 추적 해제 — 정상 close
+      try {
+        const zombieRecovery = require('./runtime/zombieRecovery.js');
+        const browserPid = this.browser.process()?.pid;
+        if (browserPid) zombieRecovery.untrackBrowserPid(browserPid);
+      } catch { /* ignore */ }
+
       await this.browser.close().catch(() => undefined);
       this.browser = null;
       this.page = null;
@@ -1786,6 +1793,22 @@ export class NaverBlogAutomation {
         }
 
         this.browser = await puppeteer.launch(launchOptions);
+
+        // [v2.10.156] zombieRecovery 추적 등록 — 비정상 종료 시 다음 시작 때 정리됨
+        try {
+          const zombieRecovery = require('./runtime/zombieRecovery.js');
+          const browserPid = this.browser.process()?.pid;
+          if (browserPid && this.accountProfileDir) {
+            zombieRecovery.trackBrowserPid({
+              pid: browserPid,
+              kind: 'puppeteer-chrome',
+              cmdlineFingerprint: this.accountProfileDir,  // 계정별 PROFILE_BASE 하위
+              label: 'naver-automation',
+            });
+          }
+        } catch (e: any) {
+          this.log(`⚠️ zombieRecovery 추적 등록 실패 (무시): ${e?.message}`);
+        }
 
         // ✅ 팝업 차단 (리스너 누적 방지: 등록 전 기존 리스너 제거)
         this.browser.removeAllListeners('targetcreated');

@@ -393,6 +393,23 @@ class BrowserSessionManager {
         }
 
         const browser = await puppeteer.launch(launchOptions);
+
+        // [v2.10.156] zombieRecovery 추적 등록 — 비정상 종료 시 다음 시작 때 정리됨
+        try {
+            const zombieRecovery = require('./runtime/zombieRecovery.js');
+            const browserPid = browser.process()?.pid;
+            if (browserPid) {
+                zombieRecovery.trackBrowserPid({
+                    pid: browserPid,
+                    kind: 'puppeteer-chrome',
+                    cmdlineFingerprint: profileDir,  // 우리 앱 PROFILE_BASE 하위 — 고유 식별
+                    label: `naver-blog-${accountId.substring(0, 4)}`,
+                });
+            }
+        } catch (e: any) {
+            console.warn('[BrowserSessionManager] zombieRecovery 추적 등록 실패 (무시):', e?.message);
+        }
+
         const page = await browser.newPage();
 
         // ✅ [v1.4.54] 진단 버퍼 연결 — 실패 시 자동 덤프용 console/network 수집
@@ -813,6 +830,13 @@ class BrowserSessionManager {
             console.log(`[BrowserSessionManager] 🔒 ${accountId.substring(0, 3)}*** 잠긴 세션 — closeSession 보호 (force=true 필요)`);
             return;
         }
+        // [v2.10.156] zombieRecovery 추적 해제 — 정상 close는 lock 제거
+        try {
+            const zombieRecovery = require('./runtime/zombieRecovery.js');
+            const browserPid = session.browser.process()?.pid;
+            if (browserPid) zombieRecovery.untrackBrowserPid(browserPid);
+        } catch { /* ignore */ }
+
         try {
             await session.browser.close();
             console.log(`[BrowserSessionManager] 🔚 세션 종료: ${accountId.substring(0, 3)}***`);
