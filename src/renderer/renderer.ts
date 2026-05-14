@@ -633,6 +633,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 + 모달 wiring
   initSerpBenchmarkUI();
 
+  // ✅ [v2.10.189] LEWORD redirect 버튼 wiring (키워드 분석 deprecation 안내)
+  const lewordRedirectBtn = document.getElementById('leword-redirect-btn');
+  if (lewordRedirectBtn) {
+    lewordRedirectBtn.addEventListener('click', async () => {
+      try {
+        await (window as any).api.launchLeword();
+      } catch (err) {
+        console.error('[LEWORD] 실행 실패:', err);
+        alert('LEWORD 실행 실패: ' + (err as Error).message);
+      }
+    });
+  }
+
   // ✅ [2026-01-25] 환경설정 저장 버튼 이벤트 리스너 (CSP 우회)
   const saveBtn = document.getElementById('save-settings-btn');
   if (saveBtn) {

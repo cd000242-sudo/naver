@@ -1767,14 +1767,11 @@
                 <p style="color: var(--text-muted); margin-bottom: 2rem;">키워드 분석, 경쟁 블로그 분석, 제목 A/B 테스트 등 블로그 최적화 도구</p>
 
                 <!-- 서브 탭 버튼 -->
+                <!-- ✅ [v2.10.189] 키워드 분석 서브탭 숨김 — LEWORD 외부 툴이 더 정확 (중복 제거) -->
                 <div
                     style="display: flex; gap: 0.5rem; margin-bottom: 2rem; background: var(--bg-tertiary); padding: 0.5rem; border-radius: var(--radius-lg); flex-wrap: wrap;">
-                    <button type="button" class="analytics-subtab active" data-subtab="keyword"
-                        style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: var(--accent-primary); color: white; cursor: pointer; font-weight: 600; transition: all 0.2s;">
-                        🔍 키워드 분석
-                    </button>
                     <button type="button" class="analytics-subtab" data-subtab="competitor"
-                        style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: transparent; color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all 0.2s;">
+                        style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: var(--accent-primary); color: white; cursor: pointer; font-weight: 600; transition: all 0.2s;">
                         🏆 경쟁 분석
                     </button>
                     <button type="button" class="analytics-subtab" data-subtab="title-ab"
@@ -1787,8 +1784,22 @@
                     </button>
                 </div>
 
-                <!-- 키워드 분석 서브패널 -->
-                <div id="subtab-keyword" class="analytics-subpanel" style="display: block;">
+                <!-- LEWORD redirect 카드 (기존 키워드 분석 자리) -->
+                <div style="margin-bottom: 1.5rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(184, 134, 11, 0.08)); border: 2px solid #D4AF37; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 1.6rem; margin-bottom: 0.5rem;">🔍</div>
+                    <h3 style="margin: 0 0 0.5rem 0; color: #D4AF37;">키워드 분석은 LEWORD 사용</h3>
+                    <p style="margin: 0 0 1rem 0; color: var(--text-muted); font-size: 0.9rem;">
+                        검색량 / 문서수 / 경쟁도 / 황금 키워드 — <strong>LEWORD</strong>가 압도적으로 정확합니다.<br>
+                        본 앱 내장 분석기는 deprecated되었습니다 (v2.10.189 기준).
+                    </p>
+                    <button type="button" id="leword-redirect-btn"
+                        style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #D4AF37, #B8860B); color: #1a1a1a; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 0.95rem;">
+                        🔍 LEWORD 열기
+                    </button>
+                </div>
+
+                <!-- 키워드 분석 서브패널 (deprecated — HTML 보존, 표시 안 함) -->
+                <div id="subtab-keyword" class="analytics-subpanel" style="display: none;">
                     <div
                         style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.05)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(139, 92, 246, 0.3); margin-bottom: 1.5rem;">
                         <h3
