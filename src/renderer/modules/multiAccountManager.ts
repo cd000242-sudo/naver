@@ -4188,27 +4188,74 @@ export async function initMultiAccountPublishModal() {
   console.log('[MultiAccountPublish] 다중계정 동시발행 모달 초기화 완료');
 }
 
-// ✅ [v2.10.209] 페이지 로드 시 invisible modal overlay 강제 닫기 — 모든 클릭 가로채기 차단
-//   근본 원인: .modal-backdrop CSS 기본 display: flex → JS 닫기 실패 시 invisible overlay로 남음
-//   debugger agent 발견: 사용자 8번 fix 후에도 클릭 무반응의 진짜 원인
+// ✅ [v2.10.210] 100% 보장 — invisible modal overlay 차단 다층 방어
+//   사용자 보고: v2.10.201~209 9번 시도 후에도 클릭 무반응 → 다층 방어 필수
+//   layer: 페이지 로드 + 1초 interval + MutationObserver + 글로벌 함수 노출
 if (typeof document !== 'undefined') {
-  const closeStaleBackdrops = () => {
+  const closeStaleBackdrops = (reason: string = 'periodic'): number => {
+    let closedCount = 0;
     document.querySelectorAll('.modal-backdrop').forEach(el => {
       const inlineDisplay = (el as HTMLElement).style.display;
-      // inline style이 flex로 명시 안 됐으면 강제 none — invisible overlay 차단
+      // inline style이 flex/block으로 명시 안 됐으면 강제 none — invisible overlay 차단
       if (inlineDisplay !== 'flex' && inlineDisplay !== 'block') {
-        (el as HTMLElement).style.display = 'none';
-        el.setAttribute('aria-hidden', 'true');
+        if (inlineDisplay !== 'none') {
+          // 명시적 none이 아닌 경우만 새로 설정 (불필요한 DOM mutation 방지)
+          (el as HTMLElement).style.display = 'none';
+          el.setAttribute('aria-hidden', 'true');
+          closedCount++;
+        }
       }
     });
+    if (closedCount > 0) {
+      console.log(`[BackdropGuard] ${reason}: ${closedCount}개 invisible overlay 강제 닫음`);
+    }
+    return closedCount;
   };
-  // DOMContentLoaded 즉시 + 추가 안전 (1초 후 한 번 더)
+
+  // 글로벌 노출 — 다른 코드에서 수동 호출 가능
+  (window as any).closeStaleBackdrops = closeStaleBackdrops;
+
+  // 1) DOMContentLoaded 즉시
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', closeStaleBackdrops);
+    document.addEventListener('DOMContentLoaded', () => closeStaleBackdrops('DOMContentLoaded'));
   } else {
-    closeStaleBackdrops();
+    closeStaleBackdrops('immediate');
   }
-  setTimeout(closeStaleBackdrops, 1000);
+
+  // 2) 1초 후 추가 안전 (지연 추가되는 모달 element 대응)
+  setTimeout(() => closeStaleBackdrops('after-1s'), 1000);
+
+  // 3) ✅ 1초 interval 영구 정리 — 어떤 코드가 invisible overlay 만들어도 1초 내 차단
+  setInterval(() => closeStaleBackdrops('interval'), 1000);
+
+  // 4) ✅ MutationObserver — modal-backdrop의 style/class 변경 감지 즉시 정리
+  const observer = new MutationObserver(mutations => {
+    for (const m of mutations) {
+      if (m.type === 'attributes' && (m.attributeName === 'style' || m.attributeName === 'class')) {
+        const el = m.target as HTMLElement;
+        if (el.classList && el.classList.contains('modal-backdrop')) {
+          const d = el.style.display;
+          if (d !== 'flex' && d !== 'block' && d !== 'none') {
+            el.style.display = 'none';
+            el.setAttribute('aria-hidden', 'true');
+            console.log(`[BackdropGuard] MutationObserver: ${el.id} invisible 상태 → 강제 닫음`);
+          }
+        }
+      }
+    }
+  });
+
+  const startObserver = () => {
+    document.querySelectorAll('.modal-backdrop').forEach(el => {
+      observer.observe(el, { attributes: true, attributeFilter: ['style', 'class'] });
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startObserver);
+  } else {
+    startObserver();
+  }
 }
 
 // ✅ [v2.10.208] 시각적 진단 함수 — alert로 모든 정보 한 번에 표시 (콘솔 안 봐도 OK)

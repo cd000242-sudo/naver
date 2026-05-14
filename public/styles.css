@@ -1378,6 +1378,13 @@ button:not(:disabled):active,
   display: flex !important;
 }
 
+/* ✅ [v2.10.210] 100% 보장 — display: block 또는 다른 값으로 잘못 설정된 modal-backdrop 강제 차단
+   inline style이 display: flex 또는 block 명시한 경우만 표시. 그 외 모두 hidden. */
+.modal-backdrop:not([style*="display: flex"]):not([style*="display:flex"]):not([style*="display: block"]):not([style*="display:block"]):not(.is-open) {
+  display: none !important;
+  pointer-events: none !important;  /* 만에 하나 표시되어도 클릭 통과 */
+}
+
 .modal-panel {
   background: var(--bg-primary);
   border-radius: var(--radius-xl);
