@@ -1812,6 +1812,33 @@
                     <div id="serp-history-content" style="background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; padding: 1.2rem; min-height: 200px;">
                         <p style="text-align: center; color: var(--text-muted); padding: 2rem 0;">⏳ 로딩 중...</p>
                     </div>
+
+                    <!-- ✅ [v2.10.200 Phase 3.18.5+6] 실측 calibration — 발행 후 노출 확인 + 권장 임계 -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0 0.8rem 0;">
+                        <h3 style="margin: 0; color: var(--text-strong); display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🎯</span> 실측 Calibration (추정 → 검증)
+                        </h3>
+                        <div style="display: flex; gap: 0.4rem;">
+                            <button type="button" id="exposure-check-24h-btn"
+                                style="padding: 0.4rem 0.9rem; background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem;">
+                                🔍 24h 노출 확인
+                            </button>
+                            <button type="button" id="exposure-check-72h-btn"
+                                style="padding: 0.4rem 0.9rem; background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem;">
+                                🔍 72h 노출 확인
+                            </button>
+                            <button type="button" id="published-posts-clear-btn"
+                                style="padding: 0.4rem 0.9rem; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem;">
+                                🗑️ 초기화
+                            </button>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">
+                        발행한 글이 <strong>실제로</strong> 네이버 검색에 노출됐는지 자동 검증 → [노출 글] vs [비노출 글] 신호 비교로 evaluator 임계 실측 보정.
+                    </p>
+                    <div id="calibration-content" style="background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; padding: 1.2rem; min-height: 120px;">
+                        <p style="text-align: center; color: var(--text-muted); padding: 1.5rem 0;">⏳ 로딩 중...</p>
+                    </div>
                 </div>
 
                 <!-- LEWORD redirect 카드 (기존 키워드 분석 자리) -->

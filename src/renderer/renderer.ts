@@ -9579,6 +9579,155 @@ function initSerpHistoryPanel(): void {
   // 분석 탭 처음 진입 시 자동 로드 (서브탭 활성화 시)
   // 첫 진입 시 즉시 로드 — 사용자가 분석 탭 진입하면 자동 표시
   setTimeout(() => loadSerpHistory(content), 500);
+
+  // ✅ [v2.10.200 Phase 3.18.5+6] 실측 calibration UI wiring
+  initCalibrationPanel();
+}
+
+// 실측 calibration 패널 초기화
+function initCalibrationPanel(): void {
+  const check24Btn = document.getElementById('exposure-check-24h-btn') as HTMLButtonElement | null;
+  const check72Btn = document.getElementById('exposure-check-72h-btn') as HTMLButtonElement | null;
+  const clearBtn = document.getElementById('published-posts-clear-btn') as HTMLButtonElement | null;
+  const calibContent = document.getElementById('calibration-content') as HTMLElement | null;
+  if (!calibContent) return;
+
+  const handleExposureCheck = async (hoursAfter: 24 | 48 | 72, btn: HTMLButtonElement | null) => {
+    if (!btn) return;
+    const originalText = btn.textContent || '';
+    btn.disabled = true;
+    btn.textContent = '🔄 분석 중...';
+    try {
+      const result = await (window as any).api.checkPublishedExposure({ hoursAfter });
+      if (result?.ok) {
+        if (result.checked === 0) {
+          calibContent.innerHTML = `<p style="text-align: center; color: rgba(255,255,255,0.7); padding: 1rem;">${hoursAfter}시간 윈도우(±6h)에 해당하는 발행 글이 없습니다.<br><span style="font-size: 0.82em; color: rgba(255,255,255,0.5);">발행 후 ${hoursAfter}시간 정도 지난 글만 검증 대상입니다.</span></p>`;
+        } else {
+          // 자동 calibration 재로드
+          await loadCalibration(calibContent);
+        }
+      } else {
+        calibContent.innerHTML = `<p style="color: #ef4444;">❌ ${result?.error || '실패'}</p>`;
+      }
+    } catch (err) {
+      calibContent.innerHTML = `<p style="color: #ef4444;">❌ ${(err as Error).message}</p>`;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  };
+
+  check24Btn?.addEventListener('click', () => handleExposureCheck(24, check24Btn));
+  check72Btn?.addEventListener('click', () => handleExposureCheck(72, check72Btn));
+
+  clearBtn?.addEventListener('click', async () => {
+    if (!confirm('발행 추적 데이터를 모두 삭제할까요? calibration 통계도 함께 초기화됩니다.')) return;
+    try {
+      const result = await (window as any).api.clearPublishedPosts();
+      if (result?.ok) {
+        await loadCalibration(calibContent);
+      } else {
+        alert('초기화 실패: ' + (result?.error || '알 수 없음'));
+      }
+    } catch (err) {
+      alert('초기화 오류: ' + (err as Error).message);
+    }
+  });
+
+  // 첫 진입 시 자동 로드
+  setTimeout(() => loadCalibration(calibContent), 700);
+}
+
+async function loadCalibration(content: HTMLElement): Promise<void> {
+  try {
+    content.innerHTML = '<p style="text-align: center; color: #888; padding: 1rem;">⏳ 로딩 중...</p>';
+    const result = await (window as any).api.getPublishedCalibration();
+    if (!result?.ok || !result.calibration) {
+      content.innerHTML = `<p style="color: #ef4444;">❌ ${result?.error || '로드 실패'}</p>`;
+      return;
+    }
+    renderCalibration(content, result.calibration, result.totalPosts || 0);
+  } catch (err) {
+    content.innerHTML = `<p style="color: #ef4444;">❌ ${(err as Error).message}</p>`;
+  }
+}
+
+function renderCalibration(content: HTMLElement, calib: any, totalPosts: number): void {
+  if (totalPosts === 0) {
+    content.innerHTML = `
+      <div style="text-align: center; padding: 1.5rem 0;">
+        <div style="font-size: 1.8rem; margin-bottom: 0.4rem;">📭</div>
+        <p style="color: #888; margin: 0;">발행 추적 데이터가 없습니다.</p>
+        <p style="color: #666; font-size: 0.82rem; margin: 0.4rem 0 0 0;">글을 발행하면 자동으로 누적됩니다.</p>
+      </div>
+    `;
+    return;
+  }
+
+  if (!calib.canCalibrate) {
+    content.innerHTML = `
+      <div style="padding: 0.8rem 1rem; background: rgba(255,255,255,0.04); border-radius: 6px;">
+        <div style="font-weight: 600; color: rgba(255,255,255,0.85); margin-bottom: 0.4rem;">📊 누적 ${totalPosts}건</div>
+        <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 0.85rem;">⏳ ${calib.reason || 'calibration 가능 조건 미충족'}</p>
+        <p style="margin: 0.4rem 0 0 0; font-size: 0.78rem; color: rgba(255,255,255,0.45);">
+          확인됨 — 노출: ${calib.exposedCount}건 / 비노출: ${calib.notExposedCount}건 / 미확인: ${calib.unknownCount}건<br>
+          최소 조건: 전체 10건 + 노출 ≥3 + 비노출 ≥3
+        </p>
+        <p style="margin: 0.4rem 0 0 0; font-size: 0.78rem; color: rgba(255,255,255,0.5);">위 "🔍 24h 노출 확인" 버튼으로 검증을 실행하세요.</p>
+      </div>
+    `;
+    return;
+  }
+
+  // 정상 calibration 결과 표시
+  const rec = calib.recommendedThreshold;
+  const gapColor = (g: number) => g >= 5 ? '#4ade80' : g >= 0 ? '#22d3ee' : g >= -5 ? '#fbbf24' : '#ef4444';
+  const gapIcon = (g: number) => g >= 5 ? '⭐' : g >= 0 ? '✓' : '⚠️';
+
+  content.innerHTML = `
+    <!-- 권장 임계 강조 카드 -->
+    <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(212, 175, 55, 0.05)); border: 2px solid #D4AF37; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; text-align: center;">
+      <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0.3rem;">📐 실측 권장 통과 임계 (노출 글 하위 25%)</div>
+      <div style="font-size: 2.2rem; font-weight: 800; color: #D4AF37; line-height: 1;">${rec ?? '-'}</div>
+      <div style="font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 0.4rem;">
+        현재 시스템 추정 통과 임계: 60점 · 최소 노출 점수: ${calib.exposed.minFinalScore}점
+      </div>
+    </div>
+
+    <!-- 노출/비노출 그룹 비교 -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 1rem;">
+      <div style="background: rgba(74, 222, 128, 0.08); border: 1px solid rgba(74, 222, 128, 0.3); border-radius: 6px; padding: 0.7rem;">
+        <div style="font-size: 0.78rem; color: #4ade80; font-weight: 700; margin-bottom: 0.4rem;">✅ 노출 (top10) ${calib.exposedCount}건</div>
+        <div style="font-size: 0.82rem; color: rgba(255,255,255,0.85); line-height: 1.6;">
+          평균 최종 <strong>${calib.exposed.avgFinalScore}</strong> ·
+          모드 ${calib.exposed.avgModeScore} ·
+          안전 ${calib.exposed.avgSafetyScore} ·
+          사람다움 ${calib.exposed.avgHumanlikeScore}
+        </div>
+      </div>
+      <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 6px; padding: 0.7rem;">
+        <div style="font-size: 0.78rem; color: #ef4444; font-weight: 700; margin-bottom: 0.4rem;">❌ 비노출 ${calib.notExposedCount}건</div>
+        <div style="font-size: 0.82rem; color: rgba(255,255,255,0.85); line-height: 1.6;">
+          평균 최종 <strong>${calib.notExposed.avgFinalScore}</strong> ·
+          모드 ${calib.notExposed.avgModeScore} ·
+          안전 ${calib.notExposed.avgSafetyScore} ·
+          사람다움 ${calib.notExposed.avgHumanlikeScore}
+        </div>
+      </div>
+    </div>
+
+    <!-- 신호별 gap -->
+    <div style="background: rgba(0,0,0,0.2); padding: 0.7rem; border-radius: 6px;">
+      <h4 style="margin: 0 0 0.5rem 0; font-size: 0.85rem; color: rgba(255,255,255,0.8);">📊 노출 글이 비노출 글보다 *얼마나 강한가* (실측 gap)</h4>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.82rem;">
+        <div>${gapIcon(calib.signalGap.finalScore)} 최종 점수 <strong style="color: ${gapColor(calib.signalGap.finalScore)};">${calib.signalGap.finalScore >= 0 ? '+' : ''}${calib.signalGap.finalScore}</strong></div>
+        <div>${gapIcon(calib.signalGap.modeScore)} 모드 적합도 <strong style="color: ${gapColor(calib.signalGap.modeScore)};">${calib.signalGap.modeScore >= 0 ? '+' : ''}${calib.signalGap.modeScore}</strong></div>
+        <div>${gapIcon(calib.signalGap.safetyScore)} 안전성 <strong style="color: ${gapColor(calib.signalGap.safetyScore)};">${calib.signalGap.safetyScore >= 0 ? '+' : ''}${calib.signalGap.safetyScore}</strong></div>
+        <div>${gapIcon(calib.signalGap.humanlikeScore)} 사람다움 <strong style="color: ${gapColor(calib.signalGap.humanlikeScore)};">${calib.signalGap.humanlikeScore >= 0 ? '+' : ''}${calib.signalGap.humanlikeScore}</strong></div>
+      </div>
+      <p style="margin: 0.6rem 0 0 0; font-size: 0.72rem; color: rgba(255,255,255,0.5);">미확인: ${calib.unknownCount}건 — 24/72h 노출 확인 버튼으로 검증 가능</p>
+    </div>
+  `;
 }
 
 async function loadSerpHistory(content: HTMLElement): Promise<void> {
