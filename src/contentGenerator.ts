@@ -6788,6 +6788,7 @@ export async function generateStructuredContent(
   let extraInstruction = '';
   let lastFailReason = ''; // ✅ [2026-03-23] 실패 원인 추적
   let _fidelityRetryUsed = false; // ✅ [Phase 7-B] Source Fidelity 자동 재시도 1회 가드
+  let _qualityGateRetryUsed = false; // ✅ [v2.10.178 Phase 2] qualityGate decision='regenerate' 재시도 1회 가드
   // ✅ [2026-04-03] signal 추출 — 중지 시 즉시 abort
   const signal = options.signal;
 
@@ -7708,14 +7709,17 @@ export async function generateStructuredContent(
 
         console.log('[ContentGenerator] ✅ 네이버 최적화 완료');
 
-        // ✅ [v2.10.177 Phase 1 SHADOW MODE] 통합 quality gate 병행 계산 — 결정은 로그만
-        //   기존 점수와 새 게이트 동시 계산하여 차이 관찰 (1주 후 컷오버 결정)
+        // ✅ [v2.10.177 Phase 1 + v2.10.178 Phase 2.1] 통합 quality gate 계산 + 안전성 재시도
+        //   Phase 1: 기존 점수와 동시 계산, decision은 로그+메타로만 보존
+        //   Phase 2.1: safety < 50 (강한 환각·금지패턴 신호) 시 자동 재시도 1회 활성화
+        //   다른 decision('patch' 등)은 다음 릴리즈에서 단계적 확대
+        let _gateResult: any = null;
         try {
           const { evaluate: evaluateQuality } = require('./content/qualityEvaluator');
           const _modeForGate = (source.contentMode === 'homefeed' || source.contentMode === 'affiliate' || source.contentMode === 'business' || source.contentMode === 'custom')
             ? source.contentMode
             : 'seo';
-          const _gateResult = evaluateQuality({
+          _gateResult = evaluateQuality({
             body: optimized.bodyPlain || '',
             title: optimized.selectedTitle || '',
             headings: optimized.headings || [],
@@ -7726,19 +7730,19 @@ export async function generateStructuredContent(
             toneStyle: source.toneStyle,
             categoryHint: source.categoryHint,
           });
-          console.log(`[QualityGate-Shadow] 🎯 finalScore=${_gateResult.finalScore} | mode=${_gateResult.modeScore.score} safety=${_gateResult.safetyScore.score} human=${_gateResult.humanlikeScore.score} | decision=${_gateResult.decision}`);
+          console.log(`[QualityGate] 🎯 finalScore=${_gateResult.finalScore} | mode=${_gateResult.modeScore.score} safety=${_gateResult.safetyScore.score} human=${_gateResult.humanlikeScore.score} | decision=${_gateResult.decision}`);
           if (_gateResult.modeScore.issues.length > 0) {
-            console.log(`[QualityGate-Shadow] mode issues: ${_gateResult.modeScore.issues.slice(0, 2).join(' / ')}`);
+            console.log(`[QualityGate] mode issues: ${_gateResult.modeScore.issues.slice(0, 2).join(' / ')}`);
           }
           if (_gateResult.humanlikeScore.issues.length > 0) {
-            console.log(`[QualityGate-Shadow] humanlike issues: ${_gateResult.humanlikeScore.issues.slice(0, 2).join(' / ')}`);
+            console.log(`[QualityGate] humanlike issues: ${_gateResult.humanlikeScore.issues.slice(0, 2).join(' / ')}`);
           }
           if (_gateResult.safetyScore.issues.length > 0) {
-            console.log(`[QualityGate-Shadow] safety issues: ${_gateResult.safetyScore.issues.slice(0, 2).join(' / ')}`);
+            console.log(`[QualityGate] safety issues: ${_gateResult.safetyScore.issues.slice(0, 2).join(' / ')}`);
           }
-          // quality 객체에 shadow 점수 동봉 (UI 가시화는 다음 릴리즈)
+          // quality 객체에 점수 + decision 동봉 (UI 가시화는 다음 릴리즈)
           if (optimized.quality) {
-            (optimized.quality as any).qualityGateShadow = {
+            (optimized.quality as any).qualityGate = {
               finalScore: _gateResult.finalScore,
               modeScore: _gateResult.modeScore.score,
               safetyScore: _gateResult.safetyScore.score,
@@ -7747,7 +7751,24 @@ export async function generateStructuredContent(
             };
           }
         } catch (gateErr) {
-          console.warn('[QualityGate-Shadow] 평가 실패 (정상 흐름 유지):', (gateErr as Error)?.message);
+          console.warn('[QualityGate] 평가 실패 (정상 흐름 유지):', (gateErr as Error)?.message);
+        }
+
+        // ✅ [v2.10.178 Phase 2.1] qualityGate decision 기반 자동 재시도
+        //   조건: safety < 50 (강한 환각·금지패턴) AND 재시도 미사용 AND attempt 여유
+        //   safety < 50은 환각·AI 보고체 등 *치명적* 신호 — 무조건 재시도 가치 있음
+        //   다른 decision(finalScore<60 regenerate, patch)은 다음 릴리즈에서 단계적 확대
+        if (
+          _gateResult
+          && _gateResult.safetyScore.score < 50
+          && !_qualityGateRetryUsed
+          && attempt < MAX_ATTEMPTS
+        ) {
+          _qualityGateRetryUsed = true;
+          const _gateDirective = _gateResult.retryDirective || '';
+          console.warn(`[QualityGate] 🚨 safety ${_gateResult.safetyScore.score} < 50 — 자동 재시도 트리거 (${_gateResult.decision})`);
+          extraInstruction = `${_gateDirective}\n${extraInstruction}`;
+          continue; // for 루프 다음 attempt
         }
 
         // ✅ [2026 100점] 쇼핑커넥트 모드: 금지 패턴 자동 검증

@@ -140,6 +140,24 @@ describe('qualityEvaluator — Phase 1 통합 평가', () => {
     expect(result.safetyScore.details.fidelity).toBeUndefined();
   });
 
+  it('Phase 2.1 — safety < 50 시 decision regenerate', () => {
+    // 환각 의심 시나리오: 원본은 긍정(기부/선행) → 결과는 부정(폭로/논란/위선)
+    const rawText = `정준하는 매달 1000만원씩 봉사단체에 기부하고 있다. 진심으로 선한 영향력을 행사하는 그의 모습이 감동적이다. 헌신적인 봉사로 많은 이들에게 희망을 주고 있으며, 그 의미는 매우 깊다. 평소 그의 진정성은 잘 알려져 있고, 친구들도 그가 정말 따뜻한 사람이라고 입을 모은다.`.repeat(3);
+    const resultBody = `정준하의 충격적인 폭로가 이어지고 있다. 그의 위선과 거짓이 드러나면서 논란이 커지고 있다. 의혹이 제기되며 비판이 쏟아지고 있다. 이중성과 민낯이 공개되면서 결별을 선언한 사람도 많아 분노하고 있다. 진실은 충격이었다.`.repeat(3);
+    const input: EvaluationInput = {
+      body: resultBody,
+      title: '정준하 충격 폭로',
+      rawText,
+      mode: 'seo',
+      contentMode: 'seo',
+      categoryHint: 'celebrity', // 연예인 카테고리 — 환각 차단 사전 적용
+    };
+    const result = evaluate(input);
+    expect(result.safetyScore.score).toBeLessThan(50);
+    expect(result.decision).toBe('regenerate');
+    expect(result.retryDirective).toBeTruthy();
+  });
+
   it('finalScore는 0~100 범위', () => {
     const modes: Array<EvaluationInput['mode']> = ['seo', 'homefeed', 'affiliate', 'business', 'custom'];
     for (const mode of modes) {
