@@ -39,13 +39,19 @@ import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByI
 export async function initMultiAccountManager() {
   console.log('[MultiAccount] 다계정 관리 기능 초기화 시작');
 
-  const accountListContainer = document.getElementById('account-list');
-  const noAccountsMessage = document.getElementById('no-accounts-message');
+  // ✅ [v2.10.201] HTML ID 불일치 fix — public/index.html은 ar-account-list (ar- 접두사) 사용
+  //   기존: getElementById('account-list') → null → 가드에서 silent return → 클릭 무반응 회귀
+  //   변경: ar-account-list 우선, fallback으로 account-list (하위 호환)
+  const accountListContainer = document.getElementById('ar-account-list') || document.getElementById('account-list');
+  const noAccountsMessage = document.getElementById('ar-no-accounts-message') || document.getElementById('no-accounts-message');
   const accountStatsSummary = document.getElementById('account-stats-summary');
   const addAccountBtn = document.getElementById('add-account-btn');
 
   if (!accountListContainer || !addAccountBtn) {
-    console.log('[MultiAccount] 다계정 관리 UI 요소를 찾을 수 없습니다.');
+    console.log('[MultiAccount] 다계정 관리 UI 요소를 찾을 수 없습니다.', {
+      accountListContainer: !!accountListContainer,
+      addAccountBtn: !!addAccountBtn,
+    });
     return;
   }
 
