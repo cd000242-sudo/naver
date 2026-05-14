@@ -385,6 +385,42 @@ interface AutomationAPI {
   getDatalabTrendSummary: (keyword: string) => Promise<{ success: boolean; data?: { trend: 'up' | 'down' | 'stable'; recentRatio: number; averageRatio: number; suggestion: string }; message?: string }>;
   getDatalabSearchTrend: (keywords: string[], startDate: string, endDate: string, timeUnit?: 'date' | 'week' | 'month') => Promise<{ success: boolean; data?: unknown; message?: string }>;
   getDatalabRelatedKeywords: (keyword: string) => Promise<{ success: boolean; data?: unknown; message?: string }>;
+  // ✅ [v2.10.184 Phase 3.4] SERP 프로브 — 끝판왕 실측 검증
+  probeSerp: (req: { keyword: string; display?: number; mode?: 'seo' | 'homefeed' | 'affiliate' | 'business' | 'custom' }) => Promise<{
+    ok: boolean;
+    report?: unknown;
+    error?: string;
+  }>;
+  benchmarkSerp: (req: {
+    keyword: string;
+    ourBody: string;
+    ourTitle?: string;
+    ourPrimaryKeyword?: string;
+    display?: number;
+    mode?: 'seo' | 'homefeed' | 'affiliate' | 'business' | 'custom';
+  }) => Promise<{
+    ok: boolean;
+    serpReport?: unknown;
+    benchmark?: {
+      keyword: string;
+      ourFinalScore: number;
+      serpAvgFinalScore: number;
+      serpMedianFinalScore: number;
+      ranking: 'above_median' | 'near_median' | 'below_median' | 'below_25th';
+      topPriorityFix: string[];
+      strengths: string[];
+      summary: string;
+      signalGaps: Array<{
+        signal: string;
+        ourValue: number;
+        serpAverage: number;
+        gap: number;
+        recommendation: 'urgent' | 'improve' | 'maintain' | 'lead';
+        message: string;
+      }>;
+    };
+    error?: string;
+  }>;
   collectImagesByTitle: (title: string, sources?: string[]) => Promise<{ success: boolean; count: number; message?: string }>;
   analyzeBlogCategories: (blogId?: string) => Promise<{ success: boolean; categories?: Array<{ id: string; name: string; postCount?: number }>; message?: string; error?: string }>;
   selectFolder: (options?: { title?: string; defaultPath?: string }) => Promise<{ canceled: boolean; filePaths: string[] }>; // ✅ 폴더 선택

@@ -537,6 +537,23 @@ contextBridge.exposeInMainWorld('api', {
       throw new Error(`관련 키워드 조회 중 오류가 발생했습니다: ${(error as Error).message}`);
     }
   },
+  // ✅ [v2.10.184 Phase 3.4] SERP 프로브 — 끝판왕 실측 검증
+  probeSerp: async (req: { keyword: string; display?: number; mode?: string }) => {
+    try {
+      return await ipcRenderer.invoke('serp:probe', req);
+    } catch (error) {
+      console.error('[Preload] SERP probe error:', error);
+      throw new Error(`SERP 프로브 실패: ${(error as Error).message}`);
+    }
+  },
+  benchmarkSerp: async (req: { keyword: string; ourBody: string; ourTitle?: string; ourPrimaryKeyword?: string; display?: number; mode?: string }) => {
+    try {
+      return await ipcRenderer.invoke('serp:benchmark', req);
+    } catch (error) {
+      console.error('[Preload] SERP benchmark error:', error);
+      throw new Error(`SERP benchmark 실패: ${(error as Error).message}`);
+    }
+  },
   // 앱 환경
   getAppInfo: async (): Promise<{ isPackaged: boolean }> => {
     try {

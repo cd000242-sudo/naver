@@ -30,6 +30,7 @@ import { registerApiHandlers } from './apiHandlers';
 import { registerImageTableHandlers } from './imageTableHandlers';
 import { registerMiscHandlers, registerSessionDiagnosticsHandlers } from './miscHandlers';
 import { registerRecoveryHandlers } from './recoveryHandlers';
+import { registerSerpProbeHandlers } from './serpProbeHandlers';
 
 /**
  * IPC 컨텍스트 생성
@@ -101,6 +102,9 @@ export function registerAllHandlers(): void {
 
     // ✅ [SPEC-IMAGE-RECOVERY-001] 자동 복구 모달 IPC 수신
     registerRecoveryHandlers();
+
+    // ✅ [v2.10.184 Phase 3.4] SERP 프로브 — 실측 검증 핸들러
+    registerSerpProbeHandlers();
 
     // 관리자 패널 — deps가 필요하므로 main.ts에서 별도 호출
     // registerAdminHandlers(deps);
