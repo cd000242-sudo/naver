@@ -132,6 +132,11 @@ export interface AppConfig {
   // ✅ [v1.4.3] Google Search Grounding 옵션 (기본 OFF — 호출당 $0.035 추가 비용 방지)
   enableSearchGrounding?: boolean;
 
+  // ✅ [v2.10.186 Phase 3.6] 자동 SERP 벤치마크 — 글 생성 완료 후 상위 노출 글과 자동 비교
+  //   기본 false (사용자 옵트인) — 네이버 검색 API 일 25K 한도 내, +10초 지연
+  //   true 시: 글 생성 → qualityEvaluator → 자동 serp:benchmark → quality.serpBenchmark에 동봉
+  autoSerpBenchmark?: boolean;
+
   // ✅ [v1.4.5] Lite Mode 비활성화 옵션 (기본 false=활성화, true 시 Full 프롬프트 강제 사용)
   disableLiteMode?: boolean;
 

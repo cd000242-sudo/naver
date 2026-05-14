@@ -7803,6 +7803,52 @@ export async function generateStructuredContent(
           }
         }
 
+        // ✅ [v2.10.186 Phase 3.6] 자동 SERP 벤치마크 — 사용자 토글 ON 시 글 생성 완료 후 실측 비교
+        //   조건: config.autoSerpBenchmark === true AND naverSearchClientId/Secret 설정됨
+        //   결과: optimized.quality.serpBenchmark 메타에 동봉 (UI 자동 표시는 다음 단계)
+        //   실패 시: silent (정상 흐름 유지)
+        try {
+          const _autoCfg = await loadConfig();
+          const _autoEnabled = (_autoCfg as any).autoSerpBenchmark === true;
+          const _serpClientId = (_autoCfg as any).naverSearchClientId || (_autoCfg as any).naverDatalabClientId || '';
+          const _serpSecret = (_autoCfg as any).naverSearchClientSecret || (_autoCfg as any).naverDatalabClientSecret || '';
+          if (_autoEnabled && _serpClientId && _serpSecret && optimized.bodyPlain && optimized.bodyPlain.length >= 100) {
+            const _autoKw = getPrimaryKeywordFromSource(source) || (optimized.selectedTitle || '').split(/\s+/).slice(0, 2).join(' ');
+            if (_autoKw && _autoKw.length >= 2) {
+              const { probeSerp } = await import('./analytics/serpProbe.js');
+              const { analyzeBenchmark } = await import('./analytics/benchmarkAnalyzer.js');
+              const _autoMode = (source.contentMode === 'homefeed' || source.contentMode === 'affiliate' || source.contentMode === 'business')
+                ? source.contentMode
+                : 'seo';
+              console.log(`[AutoSerpBenchmark] 🔍 시작: "${_autoKw}" (mode=${_autoMode})`);
+              const _serpReport = await probeSerp(_autoKw, _serpClientId, _serpSecret, { display: 10, mode: _autoMode as any });
+
+              if (_gateResult) {
+                const _ourConcrete = (_gateResult.modeScore.details as Record<string, number>).concreteNumberCount ?? 0;
+                const _ourExp = (_gateResult.humanlikeScore.details as Record<string, number>).directExperience ?? 0;
+                const _bench = analyzeBenchmark(_gateResult, optimized.bodyPlain.length, _ourConcrete, _ourExp, _serpReport);
+                console.log(`[AutoSerpBenchmark] ${_bench.summary}`);
+                console.log(`[AutoSerpBenchmark] 우선순위 보완 ${_bench.topPriorityFix.length}건, 강점 ${_bench.strengths.length}건`);
+                if (optimized.quality) {
+                  (optimized.quality as any).serpBenchmark = {
+                    keyword: _bench.keyword,
+                    ourFinalScore: _bench.ourFinalScore,
+                    serpAvgFinalScore: _bench.serpAvgFinalScore,
+                    serpMedianFinalScore: _bench.serpMedianFinalScore,
+                    ranking: _bench.ranking,
+                    summary: _bench.summary,
+                    topPriorityFix: _bench.topPriorityFix,
+                    strengths: _bench.strengths,
+                    signalGapsCount: _bench.signalGaps.length,
+                  };
+                }
+              }
+            }
+          }
+        } catch (autoErr) {
+          console.warn('[AutoSerpBenchmark] 자동 벤치마크 실패 (정상 흐름 유지):', (autoErr as Error)?.message);
+        }
+
         // ✅ [2026 100점] 쇼핑커넥트 모드: 금지 패턴 자동 검증
         const contentMode = source.contentMode || 'seo';
         if (contentMode === 'affiliate') {

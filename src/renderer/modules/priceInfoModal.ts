@@ -747,6 +747,14 @@ export async function initPriceInfoModal(): Promise<void> {
       console.warn('[priceInfoModal] 네이버 fact-check 토글 로드 실패:', e);
     }
 
+    // ✅ [v2.10.186 Phase 3.6] 자동 SERP 벤치마크 토글 로드 — 기본 OFF (옵트인)
+    try {
+      const serpAutoEl = document.getElementById('auto-serp-benchmark') as HTMLInputElement | null;
+      if (serpAutoEl) serpAutoEl.checked = (config as any).autoSerpBenchmark === true;
+    } catch (e) {
+      console.warn('[priceInfoModal] 자동 SERP 벤치마크 토글 로드 실패:', e);
+    }
+
     try {
       if (externalApiCostConsent) externalApiCostConsent.checked = config.externalApiCostConsent === true;
       if (externalApiPerRunImageLimit) externalApiPerRunImageLimit.value = String((config as any).externalApiPerRunImageLimit ?? 10);
@@ -939,6 +947,8 @@ export async function initPriceInfoModal(): Promise<void> {
             // 토글 자체가 없거나 checked면 true. 명시 unchecked만 false.
             return el ? el.checked : true;
           })(),
+          // ✅ [v2.10.186 Phase 3.6] 자동 SERP 벤치마크 토글 (기본 OFF — 옵트인)
+          autoSerpBenchmark: (document.getElementById('auto-serp-benchmark') as HTMLInputElement | null)?.checked || false,
           primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-2.5-flash', // ✅ [v1.4.49 revert] 기본값 Flash (Flash-Lite RPD 20/일로 부족)
           // ✅ [v2.10.76] silent 'free' 회귀 차단 — 라디오가 DOM에 없거나 unchecked면
           //   필드를 아예 *생략*해서 saveConfig가 디스크 값을 보존하게 한다.
