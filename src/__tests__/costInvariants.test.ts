@@ -20,11 +20,17 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
   describe('출력 토큰 상한 축소 유지', () => {
     const content = read('contentGenerator.ts');
 
-    it('Gemini maxOutputTokens는 8192 이하', () => {
-      const match = content.match(/maxOutputTokens:\s*(\d+),?\s*\n\s*\.\.\.\(modelName\.includes\('2\.5'\)/);
+    it('Gemini Flash maxOutputTokens는 8192 이하 (Pro는 thinking 필요로 16384 허용)', () => {
+      // ✅ [v2.10.207] 모델별 분기 패턴 — Flash=8192, Pro=16384
+      // 정규식 매칭: maxOutputTokens: <조건> ? <PRO값> : <FLASH값>
+      const match = content.match(/maxOutputTokens:\s*\/[^/]+\/i\.test\(modelName\)\s*\?\s*(\d+)\s*:\s*(\d+)/);
       expect(match).toBeTruthy();
-      const value = parseInt(match![1], 10);
-      expect(value).toBeLessThanOrEqual(8192);
+      const proValue = parseInt(match![1], 10);
+      const flashValue = parseInt(match![2], 10);
+      // Flash는 8192 이하 (비용 절감)
+      expect(flashValue).toBeLessThanOrEqual(8192);
+      // Pro는 thinking 토큰 + 응답 토큰 합산이라 16384 허용
+      expect(proValue).toBeLessThanOrEqual(16384);
     });
 
     it('OpenAI max_completion_tokens는 8192 이하', () => {

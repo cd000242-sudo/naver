@@ -4982,9 +4982,13 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             temperature: activeTemperature,
             topP: 0.95,
             topK: 40,
-            // ✅ [v1.4.77] maxOutputTokens 60000 → 8192 (블로그 본문 실제 3~5K 토큰 / 글당 ~₩45 절감)
-            maxOutputTokens: 8192,
-            ...(modelName.includes('2.5') ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
+            // ✅ [v2.10.207] Pro 모델은 thinking 기반 → maxOutputTokens 16384로 증가 (thinking + 응답 합산)
+            //   Flash/Lite는 8192 유지 (비용 절감)
+            maxOutputTokens: /2\.5-pro/i.test(modelName) ? 16384 : 8192,
+            // ✅ [v2.10.207] thinkingBudget=0은 *Flash/Lite만* — Pro는 thinking이 모델 핵심
+            //   기존: modelName.includes('2.5') → Pro까지 thinking 끔 → "루프가 비정상 종료됨" 회귀
+            //   변경: 2.5-flash / 2.5-flash-lite 만 thinking 끔 (Pro는 thinking 정상 사용)
+            ...(/2\.5-flash/i.test(modelName) ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
           } as any,
           // ✅ [v1.4.51] 3) safetySettings BLOCK_NONE — SAFETY false positive 박멸
           // 한국어 블로그(의료/금융/법률/관계) 키워드가 기본 BLOCK_MEDIUM_AND_ABOVE에 자주 걸림
