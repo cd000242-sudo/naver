@@ -4192,6 +4192,32 @@ export async function initMultiAccountPublishModal() {
 document.addEventListener('DOMContentLoaded', () => {
   initMultiAccountPublishModal();
   initMainAccountSelector();
+
+  // ✅ [v2.10.202] 글로벌 이벤트 위임 fallback — initUnifiedTab race condition 회피
+  //   ma-add-account-inline 직접 핸들러(renderer.ts:5306, initUnifiedTab 안)가
+  //   async fire-and-forget 흐름으로 미등록될 가능성 → body 레벨 위임으로 안전망
+  //   main-add-account-btn도 동일하게 보호
+  document.body.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+    const btn = target.closest('button') as HTMLButtonElement | null;
+    if (!btn) return;
+    if (btn.id === 'ma-add-account-inline' || btn.id === 'main-add-account-btn') {
+      // 직접 핸들러가 동작했는지 100ms 윈도우 체크 — 정상 동작 시 fallback skip
+      const lastDirect = (btn as any).__lastDirectClick;
+      if (lastDirect && Date.now() - lastDirect < 100) return;
+      console.warn(`[MultiAccount] ⚠️ ${btn.id} 직접 핸들러 미동작 → 위임 fallback 실행`);
+      if (typeof (window as any).openAccountEditModal === 'function') {
+        (window as any).openAccountEditModal();
+      } else {
+        const multiAccountModal = document.getElementById('multi-account-modal');
+        if (multiAccountModal) {
+          multiAccountModal.style.display = 'flex';
+          multiAccountModal.setAttribute('aria-hidden', 'false');
+        }
+      }
+    }
+  }, { capture: false });
 });
 
 // ✅ 메인 대시보드 계정 선택 및 세션 관리

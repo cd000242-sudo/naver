@@ -5303,7 +5303,9 @@ URL: ${firstUrl}
   });
 
   // 계정 추가 버튼 (풀오토 다중계정 발행과 동일하게 연동)
-  document.getElementById('ma-add-account-inline')?.addEventListener('click', () => {
+  document.getElementById('ma-add-account-inline')?.addEventListener('click', (e) => {
+    // ✅ [v2.10.202] 직접 핸들러 동작 마킹 — body 위임 fallback 중복 실행 방지
+    (e.currentTarget as any).__lastDirectClick = Date.now();
     // ✅ 풀오토 다중계정 발행의 계정 추가와 동일한 함수 호출 (window 통해 접근)
     if (typeof (window as any).openAccountEditModal === 'function') {
       (window as any).openAccountEditModal();
