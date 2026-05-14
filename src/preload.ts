@@ -578,6 +578,46 @@ contextBridge.exposeInMainWorld('api', {
       throw new Error(`SERP 동적 프로브 실패: ${(error as Error).message}`);
     }
   },
+  trackPublishedPost: async (req: {
+    publishedAt?: string;
+    keyword: string;
+    mode: string;
+    publishedUrl: string;
+    title: string;
+    evaluator: any;
+    serpBenchmark?: any;
+  }) => {
+    try {
+      return await ipcRenderer.invoke('publishedPost:track', req);
+    } catch (error) {
+      console.error('[Preload] trackPublishedPost error:', error);
+      throw new Error(`발행 추적 실패: ${(error as Error).message}`);
+    }
+  },
+  checkPublishedExposure: async (req: { hoursAfter?: 24 | 48 | 72; delayMs?: number }) => {
+    try {
+      return await ipcRenderer.invoke('publishedPost:checkExposure', req);
+    } catch (error) {
+      console.error('[Preload] checkPublishedExposure error:', error);
+      throw new Error(`노출 확인 실패: ${(error as Error).message}`);
+    }
+  },
+  getPublishedCalibration: async () => {
+    try {
+      return await ipcRenderer.invoke('publishedPost:calibration');
+    } catch (error) {
+      console.error('[Preload] getPublishedCalibration error:', error);
+      throw new Error(`calibration 조회 실패: ${(error as Error).message}`);
+    }
+  },
+  clearPublishedPosts: async () => {
+    try {
+      return await ipcRenderer.invoke('publishedPost:clear');
+    } catch (error) {
+      console.error('[Preload] clearPublishedPosts error:', error);
+      throw new Error(`발행 데이터 초기화 실패: ${(error as Error).message}`);
+    }
+  },
   // 앱 환경
   getAppInfo: async (): Promise<{ isPackaged: boolean }> => {
     try {

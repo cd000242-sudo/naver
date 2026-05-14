@@ -1120,6 +1120,40 @@ if (typeof window !== 'undefined' && window.api) {
         const publishedUrl = status.url || `https://blog.naver.com/`;
         savePublishedPost(today, title, publishedUrl);
 
+        // ✅ [v2.10.199 Phase 3.18.4] publishedPostTracker 자동 호출 — 실측 calibration 데이터 누적
+        //   evaluator 결과 + publishedUrl 합쳐서 main 프로세스 저장
+        //   blogId/logNo 자동 추출 (URL 형식: blog.naver.com/{blogId}/{logNo})
+        try {
+          const _last = (window as any).__lastGeneratedContent;
+          if (_last && status.url && /blog\.naver\.com\/[^/?]+\/\d+/i.test(status.url)) {
+            const _q = _last.quality || {};
+            const _gate = _q.qualityGate;
+            if (_gate && typeof _gate.finalScore === 'number') {
+              (window as any).api.trackPublishedPost({
+                publishedAt: new Date().toISOString(),
+                keyword: _last.keyword || '',
+                mode: _last.mode || 'seo',
+                publishedUrl: status.url,
+                title: _last.title || title,
+                evaluator: {
+                  finalScore: _gate.finalScore,
+                  modeScore: _gate.modeScore,
+                  safetyScore: _gate.safetyScore,
+                  humanlikeScore: _gate.humanlikeScore,
+                  decision: _gate.decision,
+                  details: _q.qualityGateDetails || {},
+                },
+                serpBenchmark: _q.serpBenchmark,
+              }).then((r: any) => {
+                if (r?.ok) console.log('[PublishedTracker] ✅ 발행 추적 저장 (실측 calibration용):', r.id);
+                else console.warn('[PublishedTracker] 저장 실패:', r?.error);
+              }).catch((err: any) => console.warn('[PublishedTracker] IPC 실패:', err));
+            }
+          }
+        } catch (trackErr) {
+          console.warn('[PublishedTracker] 발행 추적 실패 (정상 흐름 유지):', trackErr);
+        }
+
         // ✅ 현재 글에도 URL 저장
         if (status.url) {
           if (currentPostId) {

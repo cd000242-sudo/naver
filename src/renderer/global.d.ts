@@ -487,6 +487,62 @@ interface AutomationAPI {
     };
     error?: string;
   }>;
+  trackPublishedPost: (req: {
+    publishedAt?: string;
+    keyword: string;
+    mode: string;
+    publishedUrl: string;
+    title: string;
+    evaluator: {
+      finalScore: number;
+      modeScore: number;
+      safetyScore: number;
+      humanlikeScore: number;
+      decision: string;
+      details: Record<string, number>;
+    };
+    serpBenchmark?: any;
+  }) => Promise<{ ok: boolean; id?: string; error?: string }>;
+  checkPublishedExposure: (req: { hoursAfter?: 24 | 48 | 72; delayMs?: number }) => Promise<{
+    ok: boolean;
+    checked: number;
+    updated: number;
+    error?: string;
+  }>;
+  getPublishedCalibration: () => Promise<{
+    ok: boolean;
+    calibration?: {
+      canCalibrate: boolean;
+      exposedCount: number;
+      notExposedCount: number;
+      unknownCount: number;
+      exposed: {
+        avgFinalScore: number;
+        avgModeScore: number;
+        avgSafetyScore: number;
+        avgHumanlikeScore: number;
+        minFinalScore: number;
+        p25FinalScore: number;
+      };
+      notExposed: {
+        avgFinalScore: number;
+        avgModeScore: number;
+        avgSafetyScore: number;
+        avgHumanlikeScore: number;
+      };
+      signalGap: {
+        modeScore: number;
+        safetyScore: number;
+        humanlikeScore: number;
+        finalScore: number;
+      };
+      recommendedThreshold: number | null;
+      reason: string;
+    };
+    totalPosts?: number;
+    error?: string;
+  }>;
+  clearPublishedPosts: () => Promise<{ ok: boolean; error?: string }>;
   collectImagesByTitle: (title: string, sources?: string[]) => Promise<{ success: boolean; count: number; message?: string }>;
   analyzeBlogCategories: (blogId?: string) => Promise<{ success: boolean; categories?: Array<{ id: string; name: string; postCount?: number }>; message?: string; error?: string }>;
   selectFolder: (options?: { title?: string; defaultPath?: string }) => Promise<{ canceled: boolean; filePaths: string[] }>; // ✅ 폴더 선택

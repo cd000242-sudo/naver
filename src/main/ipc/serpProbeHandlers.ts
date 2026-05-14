@@ -14,6 +14,16 @@ import { analyzeBenchmark, type BenchmarkReport } from '../../analytics/benchmar
 import { evaluate as evaluateQuality, type EvaluationInput, type Mode } from '../../content/qualityEvaluator.js';
 import { loadHistory, computeStats, getRecentEntries, clearHistory, computeAdaptiveLearningImpact, type SerpHistoryEntry, type SerpHistoryStats, type AdaptiveLearningImpact } from '../../analytics/serpHistory.js';
 import { probeDynamicSerp, type DynamicSerpReport } from '../../analytics/dynamicSerpProbe.js';
+import {
+  trackPublishedPost,
+  loadPublishedPosts,
+  getPostsNeedingExposureCheck,
+  recordExposureCheck,
+  clearPublishedPosts,
+  type PublishedPost,
+} from '../../analytics/publishedPostTracker.js';
+import { checkPostExposure, checkBatchExposure } from '../../analytics/exposureChecker.js';
+import { computeCalibration, type CalibrationResult } from '../../analytics/calibration.js';
 
 export interface ProbeRequest {
   keyword: string;
@@ -174,5 +184,105 @@ export function registerSerpProbeHandlers(): void {
     }
   });
 
-  console.log('[IPC] SERP Probe handlers registered (serp:probe, serp:benchmark, serp:historyStats, serp:historyClear)');
+  // ✅ [v2.10.199 Phase 3.18.4] 발행 후 자동 trackPublishedPost — renderer가 발행 완료 이벤트 후 호출
+  ipcMain.handle('publishedPost:track', async (_evt, req: {
+    publishedAt?: string;
+    keyword: string;
+    mode: string;
+    publishedUrl: string;
+    title: string;
+    evaluator: PublishedPost['evaluator'];
+    serpBenchmark?: PublishedPost['serpBenchmark'];
+  }): Promise<{ ok: boolean; id?: string; error?: string }> => {
+    try {
+      // URL에서 blogId / logNo 추출 (https://blog.naver.com/{blogId}/{logNo})
+      const m = req.publishedUrl.match(/blog\.naver\.com\/([^/?]+)\/(\d+)/i);
+      if (!m) {
+        return { ok: false, error: `publishedUrl 형식 불일치: ${req.publishedUrl}` };
+      }
+      const [, blogId, logNo] = m;
+      const userDataPath = app.getPath('userData');
+      const result = trackPublishedPost(userDataPath, {
+        publishedAt: req.publishedAt || new Date().toISOString(),
+        keyword: req.keyword,
+        mode: req.mode,
+        blogId,
+        logNo,
+        url: req.publishedUrl,
+        title: req.title,
+        evaluator: req.evaluator,
+        serpBenchmark: req.serpBenchmark,
+      });
+      return result;
+    } catch (err) {
+      return { ok: false, error: err instanceof Error ? err.message : String(err) };
+    }
+  });
+
+  // ✅ [v2.10.199] exposure 폴링 trigger (사용자 수동 또는 백그라운드 호출)
+  ipcMain.handle('publishedPost:checkExposure', async (_evt, req: {
+    hoursAfter?: 24 | 48 | 72;
+    delayMs?: number;
+  }): Promise<{ ok: boolean; checked: number; updated: number; error?: string }> => {
+    try {
+      const userDataPath = app.getPath('userData');
+      const posts = loadPublishedPosts(userDataPath);
+      const hoursAfter = req.hoursAfter ?? 24;
+      const needCheck = getPostsNeedingExposureCheck(posts, hoursAfter);
+      if (needCheck.length === 0) {
+        return { ok: true, checked: 0, updated: 0 };
+      }
+      const targets = needCheck.map(p => ({
+        id: p.id, keyword: p.keyword, blogId: p.blogId, logNo: p.logNo, hoursAfter,
+      }));
+      const results = await checkBatchExposure(targets, { delayMs: req.delayMs ?? 1500 });
+      let updated = 0;
+      for (const r of results) {
+        if (r.result.fetchSuccess) {
+          recordExposureCheck(userDataPath, r.id, {
+            checkedAt: r.result.checkedAt,
+            hoursAfter: r.hoursAfter,
+            searchedKeyword: r.result.searchedKeyword,
+            position: r.result.position,
+            hasSmartblock: r.result.hasSmartblock,
+            notes: r.result.notes,
+          });
+          updated++;
+        }
+      }
+      return { ok: true, checked: needCheck.length, updated };
+    } catch (err) {
+      return { ok: false, checked: 0, updated: 0, error: err instanceof Error ? err.message : String(err) };
+    }
+  });
+
+  // ✅ [v2.10.199] calibration 결과 조회
+  ipcMain.handle('publishedPost:calibration', async (): Promise<{
+    ok: boolean;
+    calibration?: CalibrationResult;
+    totalPosts?: number;
+    error?: string;
+  }> => {
+    try {
+      const userDataPath = app.getPath('userData');
+      const posts = loadPublishedPosts(userDataPath);
+      const calibration = computeCalibration(posts);
+      return { ok: true, calibration, totalPosts: posts.length };
+    } catch (err) {
+      return { ok: false, error: err instanceof Error ? err.message : String(err) };
+    }
+  });
+
+  // ✅ [v2.10.199] published posts 초기화 (사용자 명시 요청 시)
+  ipcMain.handle('publishedPost:clear', async (): Promise<{ ok: boolean; error?: string }> => {
+    try {
+      const userDataPath = app.getPath('userData');
+      const ok = clearPublishedPosts(userDataPath);
+      return { ok };
+    } catch (err) {
+      return { ok: false, error: err instanceof Error ? err.message : String(err) };
+    }
+  });
+
+  console.log('[IPC] SERP Probe handlers registered (serp:probe, serp:benchmark, serp:historyStats, serp:historyClear, serp:dynamicProbe, publishedPost:track/checkExposure/calibration/clear)');
 }
