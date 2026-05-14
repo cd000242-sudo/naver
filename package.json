@@ -1,6 +1,6 @@
 {
   "name": "better-life-naver",
-  "version": "2.10.182",
+  "version": "2.10.183",
   "description": "Better Life Naver - 네이버 블로그 자동화 앱으로 더 나은 삶을 만들어가세요. Electron, Node.js, TypeScript, and Puppeteer.",
   "author": "Better Life Team",
   "main": "dist/main.js",
@@ -45,7 +45,8 @@
     "e2e:ui": "playwright test --ui",
     "dist:setup": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --win nsis && node scripts/restore-after-pack.js",
     "release": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --win nsis && node scripts/restore-after-pack.js",
-    "release:full": "node scripts/release-all.js"
+    "release:full": "node scripts/release-all.js",
+    "probe:serp": "node scripts/probe-serp.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.21.1",
