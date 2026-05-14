@@ -15,6 +15,7 @@ import {
   computeStats,
   getRecentEntries,
   clearHistory,
+  buildAdaptiveLearningDirective,
   type SerpHistoryEntry,
 } from '../analytics/serpHistory';
 
@@ -178,5 +179,58 @@ describe('clearHistory', () => {
 
   it('파일 없어도 OK (true 반환)', () => {
     expect(clearHistory(tmpDir)).toBe(true);
+  });
+});
+
+describe('buildAdaptiveLearningDirective (Phase 3.9)', () => {
+  it('history 5건 미만이면 빈 문자열', () => {
+    for (let i = 0; i < 4; i++) {
+      appendHistory(tmpDir, makeEntry({ keyword: `K${i}` }));
+    }
+    expect(buildAdaptiveLearningDirective(tmpDir)).toBe('');
+  });
+
+  it('count >= 3인 신호만 추출', () => {
+    // 사람다움 미달 5회, 구체 수치 미달 2회 — 사람다움만 추출됨
+    for (let i = 0; i < 5; i++) {
+      appendHistory(tmpDir, makeEntry({
+        keyword: `K${i}`,
+        topPriorityFix: ['사람다움 부족 — A'],
+      }));
+    }
+    for (let i = 0; i < 2; i++) {
+      appendHistory(tmpDir, makeEntry({
+        keyword: `M${i}`,
+        topPriorityFix: ['구체 수치 부족 — B'],
+      }));
+    }
+    const directive = buildAdaptiveLearningDirective(tmpDir);
+    expect(directive).toContain('사람다움');
+    expect(directive).not.toContain('구체 수치');
+  });
+
+  it('topK개 신호 추출 + 보강 가이드 포함', () => {
+    for (let i = 0; i < 10; i++) {
+      appendHistory(tmpDir, makeEntry({
+        keyword: `K${i}`,
+        topPriorityFix: ['사람다움 부족 — A', '직접 경험 부족 — B'],
+      }));
+    }
+    const directive = buildAdaptiveLearningDirective(tmpDir, 30, 2);
+    expect(directive).toContain('사람다움');
+    expect(directive).toContain('직접 경험');
+    expect(directive).toContain('보강 가이드');
+    expect(directive).toContain('어미 변주'); // 사람다움 가이드
+    expect(directive).toContain('직접 가봤'); // 직접 경험 가이드
+  });
+
+  it('자주 미달 신호 없으면 빈 문자열 (모든 글이 통과)', () => {
+    for (let i = 0; i < 10; i++) {
+      appendHistory(tmpDir, makeEntry({
+        keyword: `K${i}`,
+        topPriorityFix: [], // 모든 항목 통과
+      }));
+    }
+    expect(buildAdaptiveLearningDirective(tmpDir)).toBe('');
   });
 });

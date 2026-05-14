@@ -6985,6 +6985,21 @@ export async function generateStructuredContent(
       const mode = (source.contentMode || 'seo') as PromptMode;
       let systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
 
+      // ✅ [v2.10.192 Phase 3.9] 자동 학습 보완 지시 — 누적 SERP history에서 자주 미달하는 신호 자동 추출
+      //   첫 글~4건 글까지는 데이터 부족 → skip (silent)
+      //   5건+ 누적 시 가장 자주 미달한 신호 top 2를 prompt prefix로 주입
+      //   추정 효과 0 — 실측 SERP 비교 결과 기반
+      try {
+        const { buildAdaptiveLearningDirective } = await import('./analytics/serpHistory.js');
+        const { app } = await import('electron');
+        const userDataPath = app.getPath('userData');
+        const adaptiveDirective = buildAdaptiveLearningDirective(userDataPath, 30, 2);
+        if (adaptiveDirective) {
+          systemPrompt = adaptiveDirective + '\n' + systemPrompt;
+          console.log('[AdaptiveLearning] 📚 자동 학습 보완 지시 주입 (누적 history 기반)');
+        }
+      } catch { /* silent — 정상 흐름 유지 */ }
+
       // ✅ [v2.10.173] URL 모드 전용 강화 지시 — 사용자 요청 "원본 100% + 더 좋은 퀄리티"
       //   사용자 보고: "URL로 글생성을 한다면 URL원본보다 훨씬 퀄리티 좋고 잘써줘야되고
       //                원본내용이 100% 다들어있어야되는거아닌가요??"

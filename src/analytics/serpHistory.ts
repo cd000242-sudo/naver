@@ -185,6 +185,84 @@ export function getRecentEntries(entries: SerpHistoryEntry[], n: number = 30): S
 }
 
 /**
+ * 누적 history에서 자주 미달하는 신호 top N → LLM 시스템 프롬프트 prefix 생성.
+ * ✅ [v2.10.192 Phase 3.9] 지속적 학습 — 자기 글들의 실측 약점을 다음 글에 자동 반영
+ *
+ * 안전 조건:
+ *   - history 5건 미만이면 빈 문자열 (데이터 부족)
+ *   - count >= 3인 신호만 (충분히 자주 미달)
+ *   - 추정 없음 — 실측 history 기반
+ *
+ * @param userDataPath - userData 경로
+ * @param recentN - 분석 대상 최근 항목 수 (기본 30)
+ * @param topK - 추출할 미달 신호 개수 (기본 2)
+ * @returns LLM에 주입할 보완 지시문 (없으면 빈 문자열)
+ */
+export function buildAdaptiveLearningDirective(
+  userDataPath: string,
+  recentN: number = 30,
+  topK: number = 2,
+): string {
+  try {
+    const all = loadHistory(userDataPath);
+    if (all.length < 5) return ''; // 데이터 부족 시 skip
+    const recent = getRecentEntries(all, recentN);
+    const stats = computeStats(recent);
+
+    // count >= 3인 미달 신호만 (자주 미달)
+    const significant = stats.topMissingSignals
+      .filter(s => s.count >= 3)
+      .slice(0, topK);
+
+    if (significant.length === 0) return '';
+
+    const totalRecent = recent.length;
+    const lines: string[] = [
+      '',
+      `[자동 학습 보완 지시 — 최근 ${totalRecent}건 글의 실측 미달 신호 기반]`,
+      '본 사용자는 누적 SERP 비교에서 다음 항목이 자주 부족함. 이번 글에서 강화하라:',
+    ];
+
+    for (const sig of significant) {
+      const pct = Math.round((sig.count / Math.max(1, totalRecent)) * 100);
+      lines.push(`  - "${sig.signal}" 부족 (${sig.count}/${totalRecent}건 = ${pct}%) → 본문에 구체적으로 반영`);
+    }
+
+    // 신호별 구체적 가이드
+    const guideLines: string[] = [];
+    for (const sig of significant) {
+      const guide = getSignalGuide(sig.signal);
+      if (guide) guideLines.push(`  • ${sig.signal}: ${guide}`);
+    }
+    if (guideLines.length > 0) {
+      lines.push('');
+      lines.push('[보강 가이드]');
+      lines.push(...guideLines);
+    }
+    lines.push('');
+    return lines.join('\n');
+  } catch {
+    return '';
+  }
+}
+
+/**
+ * 신호별 구체적 보강 가이드 — evaluator 항목과 매칭.
+ */
+function getSignalGuide(signal: string): string {
+  const guides: Record<string, string> = {
+    '사람다움': '문장 길이 분산↑ (짧은 5~15자 + 긴 30~60자 혼합), 어미 변주 (~요/~네요/~답니다), 자기 정정 마커 ("아 근데", "막상", "사실은") 2~3회',
+    '구체 수치': '"10~15분", "300g", "3만원", "12.5%" 같은 *단위 포함 수치* 본문에 3개 이상 배치',
+    '직접 경험': '"직접 가봤어요", "제가 써본 결과", "찍은 사진 보면" 같은 경험 증거 표현 2~3회 자연스럽게 분산',
+    '안전성': 'AI 보고체("알아보겠습니다", "살펴보겠습니다") 제거 + 환각 차단 (원본 fact 100% 보존)',
+    '모드 적합도': '키워드 밀도 1.5~3% 유지, 첫 문단에 메인 키워드 배치, 소제목에 키워드 변형 포함',
+    '본문 길이': '1500자 이상 작성 (충분한 SEO 신호 + 체류시간 확보)',
+    '통합 점수': '본문 길이 / 키워드 밀도 / 직접 경험 / 구체 수치를 동시에 보강',
+  };
+  return guides[signal] || '';
+}
+
+/**
  * History clear — 사용자가 명시적으로 호출 시 (UI 버튼 등).
  */
 export function clearHistory(userDataPath: string): boolean {
