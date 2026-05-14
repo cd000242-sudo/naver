@@ -4188,6 +4188,33 @@ export async function initMultiAccountPublishModal() {
   console.log('[MultiAccountPublish] 다중계정 동시발행 모달 초기화 완료');
 }
 
+// ✅ [v2.10.205] 글로벌 함수 — HTML inline onclick에서 호출 (JS race 완전 회피)
+//   사용 위치: public/index.html main-add-account-btn / ma-add-account-inline의 onclick
+//   동작: ma-account-edit-modal 직접 조회 + 입력 폼 초기화 + 표시
+//   클로저 0, DOMContentLoaded 0, 이벤트 위임 0 — 가장 단순/강력
+(window as any).openAddAccountModalDirect = function() {
+  console.log('[MultiAccount] 🔘 openAddAccountModalDirect 직접 호출');
+  const accountEditModal = document.getElementById('ma-account-edit-modal');
+  if (!accountEditModal) {
+    console.error('[MultiAccount] ❌ ma-account-edit-modal element 없음 — HTML 확인 필요');
+    alert('계정 추가 모달을 찾을 수 없습니다.\n앱을 재시작해주세요.');
+    return;
+  }
+  // 신규 계정 입력 폼 초기화 (편집 모드 X)
+  const titleEl = document.getElementById('ma-edit-title');
+  if (titleEl) titleEl.textContent = '새 계정 추가';
+  const accountIdInput = document.getElementById('ma-edit-account-id') as HTMLInputElement | null;
+  if (accountIdInput) accountIdInput.value = '';
+  for (const id of ['ma-edit-name', 'ma-edit-blog-id', 'ma-edit-naver-id', 'ma-edit-naver-pw']) {
+    const el = document.getElementById(id) as HTMLInputElement | null;
+    if (el) el.value = '';
+  }
+  const deleteBtn = document.getElementById('ma-delete-account-btn');
+  if (deleteBtn) deleteBtn.style.display = 'none';
+  accountEditModal.style.display = 'flex';
+  accountEditModal.setAttribute('aria-hidden', 'false');
+};
+
 // DOM 로드 시 다중계정 모달 초기화
 document.addEventListener('DOMContentLoaded', () => {
   initMultiAccountPublishModal();
