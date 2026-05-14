@@ -4331,8 +4331,13 @@ if (typeof document !== 'undefined') {
 //   동작: ma-account-edit-modal 직접 조회 + 입력 폼 초기화 + 표시
 //   클로저 0, DOMContentLoaded 0, 이벤트 위임 0 — 가장 단순/강력
 (window as any).openAddAccountModalDirect = function() {
+  console.log('[Modal] 🔘 openAddAccountModalDirect v2.10.215 START');
+  // ✅ [v2.10.215] 부모 영향 차단 — 모달을 body로 강제 이동
+  //   v2.10.201~214 14번 fix 실패의 진짜 원인: ma-account-edit-modal이 다른 div 안에 wrap돼
+  //   부모 display/visibility/transform 영향으로 inline style 무효화됨
+  //   해결: body 직접 자식으로 강제 이동 (multi-account-modal과 동일 패턴)
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('[ModalDebug] 🔘 openAddAccountModalDirect v2.10.212 START');
+  console.log('[ModalDebug] 🔘 openAddAccountModalDirect v2.10.215 START');
   console.log('[ModalDebug] 시각:', new Date().toISOString());
 
   // Step 1: modal element 조회
@@ -4370,8 +4375,35 @@ if (typeof document !== 'undefined') {
   const deleteBtn = document.getElementById('ma-delete-account-btn');
   if (deleteBtn) deleteBtn.style.display = 'none';
 
-  // Step 4: display 변경
-  console.log('[ModalDebug] Step 4: style.display = "flex" 설정');
+  // ✅ [v2.10.215] Step 3.5: 모달을 body 직접 자식으로 강제 이동 (부모 영향 차단)
+  if (accountEditModal.parentElement !== document.body) {
+    console.log('[ModalDebug] Step 3.5: 모달을 body로 이동 (이전 부모:', accountEditModal.parentElement?.id || accountEditModal.parentElement?.tagName, ')');
+    document.body.appendChild(accountEditModal);
+  } else {
+    console.log('[ModalDebug] Step 3.5: 이미 body 자식 — 이동 불필요');
+  }
+
+  // ✅ [v2.10.215] Step 3.6: 모달에 모든 가능한 표시 속성을 강제 적용 (CSS 충돌 차단)
+  accountEditModal.style.cssText = `
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    z-index: 99999 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    backdrop-filter: blur(8px) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  `;
+  console.log('[ModalDebug] Step 3.6: cssText로 모든 표시 속성 강제 적용 완료');
+
+  // Step 4: display 변경 (cssText에 이미 포함됐지만 안전망)
+  console.log('[ModalDebug] Step 4: style.display = "flex" 재확인');
   accountEditModal.style.display = 'flex';
   accountEditModal.setAttribute('aria-hidden', 'false');
 
