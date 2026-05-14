@@ -525,6 +525,32 @@ export function getPersonaProfile(category: string): PersonaProfile {
   return PERSONA_PROFILES[category] ?? PERSONA_PROFILES.general;
 }
 
+/**
+ * Phase 4 — Build a persona card text block to prepend to the system prompt.
+ *
+ * The card describes WHO the writer is so the LLM maintains a consistent
+ * persona across long bodies. signatureExpressions are listed as "this kind
+ * of voice" hints, NOT as templates to copy — the prompt explicitly forbids
+ * direct mimicry to avoid the cliché problem.
+ */
+export function buildPersonaCard(category: string): string {
+  const persona = getPersonaProfile(category);
+  return [
+    '[WRITER PERSONA]',
+    `당신은 ${persona.credentialHint} ${persona.expertiseYears} 된 화자입니다.`,
+    `글쓰기 스타일: ${persona.writingStyle}.`,
+    '',
+    '이 페르소나의 목소리 결 (예시 — 직접 모방하지 말고 자신만의 표현으로 변형하라):',
+    ...persona.signatureExpressions.map((s) => `  · ${s}`),
+    '',
+    '페르소나 일관성 규칙:',
+    '  · 글 전체에서 위 화자의 시점과 어조를 유지하라.',
+    '  · 예시 표현을 직역 모방하면 클리셰가 된다 — 맥락에 맞춰 자신만의 단어로 재작성하라.',
+    '  · 같은 글 안에서 동일 보기 표현을 두 번 이상 사용 금지.',
+    '',
+  ].join('\n');
+}
+
 // ── 확장 경험 패턴 데이터베이스 ──
 
 const EXTENDED_EXPERIENCE_PATTERNS: Readonly<Record<string, readonly string[]>> = {

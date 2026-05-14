@@ -636,7 +636,7 @@ function addHumanExpressions(text: string, toneStyle: string = 'professional', s
 /**
  * ✅ [Phase 1-2] 톤스타일 → AuthGR 카테고리 매핑
  */
-function detectCategory(toneStyle: string): string {
+export function detectCategory(toneStyle: string): string {
   const mapping: Record<string, string> = {
     'expert_review': 'tech',
     'calm_info': 'health',

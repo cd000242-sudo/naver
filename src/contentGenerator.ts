@@ -16,8 +16,9 @@ import fsSync from 'fs';
 import path from 'path';
 import { JSON_SCHEMA_DESCRIPTION } from './contentGenerator/schema';
 import { humanizeContent, humanizeHtmlContent, analyzeAiDetectionRisk, resetHumanizerLog } from './aiHumanizer.js';
-import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog } from './contentOptimizer.js';
+import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog, detectCategory } from './contentOptimizer.js';
 import { analyzeContentBySemantic, isLlmRubricEnabled } from './contentSemanticScoring.js';
+import { buildPersonaCard } from './authgrDefense.js';
 import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, getGeoOverlayPrompt, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { META_CRITIQUE_PHRASES } from './content/forbiddenPhrases.js';
@@ -6968,7 +6969,18 @@ export async function generateStructuredContent(
       // ✅ 다양성 극대화를 위해 temperature 높임 (매번 다른 글 생성)
       // ✅ 모드별 프롬프트 및 온도 설정 가져오기
       const mode = (source.contentMode || 'seo') as PromptMode;
-      const systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
+      let systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
+
+      // Phase 4: skipDictInjection 토글 ON 시 페르소나 카드를 시스템 프롬프트 헤더에 prepend.
+      // 후처리 어휘 주입이 꺼진 모드에서 LLM이 글 전체 동안 일관된 화자 페르소나를 유지하도록 보강.
+      const phase4SkipDict =
+        isLlmRubricEnabled({ useLlmRubric: (source as any).useLlmRubric })
+        || (source as any).skipDictInjection === true;
+      if (phase4SkipDict) {
+        const personaCard = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
+        systemPrompt = personaCard + '\n' + systemPrompt;
+        console.log('[ContentGenerator] 🎭 페르소나 카드 prepend (skipDictInjection 모드)');
+      }
 
       // ✅ [v2.10.172] 사용자 요청 — Gemini 본문 생성은 *반드시* grounding ON (팩트 보장)
       //   기존 (v1.4.4 ~ v2.10.171): smartGrounding 동적 결정
