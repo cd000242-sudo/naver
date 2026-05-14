@@ -7833,13 +7833,20 @@ export async function generateStructuredContent(
           if (_autoEnabled && _serpClientId && _serpSecret && optimized.bodyPlain && optimized.bodyPlain.length >= 100) {
             const _autoKw = getPrimaryKeywordFromSource(source) || (optimized.selectedTitle || '').split(/\s+/).slice(0, 2).join(' ');
             if (_autoKw && _autoKw.length >= 2) {
-              const { probeSerp } = await import('./analytics/serpProbe.js');
+              // ✅ [v2.10.196 Phase 3.13] probeSerp → probeUnifiedSerp 업그레이드
+              //   정적(API) + 동적(통합탭 HTML) 통합 분석 — 키워드 진입 난이도까지 산출
+              const { probeUnifiedSerp } = await import('./analytics/unifiedSerpProbe.js');
               const { analyzeBenchmark } = await import('./analytics/benchmarkAnalyzer.js');
               const _autoMode = (source.contentMode === 'homefeed' || source.contentMode === 'affiliate' || source.contentMode === 'business')
                 ? source.contentMode
                 : 'seo';
-              console.log(`[AutoSerpBenchmark] 🔍 시작: "${_autoKw}" (mode=${_autoMode})`);
-              const _serpReport = await probeSerp(_autoKw, _serpClientId, _serpSecret, { display: 10, mode: _autoMode as any });
+              console.log(`[AutoSerpBenchmark] 🔍 통합 분석 시작: "${_autoKw}" (mode=${_autoMode})`);
+              const _unifiedReport = await probeUnifiedSerp(_autoKw, _serpClientId, _serpSecret, {
+                display: 10,
+                mode: _autoMode as any,
+              });
+              const _serpReport = _unifiedReport.staticReport;
+              console.log(`[AutoSerpBenchmark] 🎯 키워드 난이도: ${_unifiedReport.difficulty.tier} — ${_unifiedReport.difficulty.reasoning}`);
 
               if (_gateResult) {
                 const _ourConcrete = (_gateResult.modeScore.details as Record<string, number>).concreteNumberCount ?? 0;
@@ -7858,6 +7865,11 @@ export async function generateStructuredContent(
                     topPriorityFix: _bench.topPriorityFix,
                     strengths: _bench.strengths,
                     signalGapsCount: _bench.signalGaps.length,
+                    // ✅ [v2.10.196] 통합 분석 결과 — 난이도 tier + 스마트블록/인플루언서
+                    difficulty: _unifiedReport.difficulty,
+                    hasSmartblock: _unifiedReport.dynamicReport?.hasSmartblock ?? false,
+                    influencerCount: _unifiedReport.dynamicReport?.influencerCount ?? 0,
+                    totalCards: _unifiedReport.dynamicReport?.totalCards ?? 0,
                   };
                 }
 

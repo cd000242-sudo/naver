@@ -9772,6 +9772,29 @@ function showSerpAlertCard(autoSerp: any, type: 'warn' | 'good' = 'warn'): void 
       </div>`
     : '';
 
+  // ✅ [v2.10.196] 난이도 tier 표시 (있을 때만)
+  const difficultyHtml = autoSerp.difficulty ? (() => {
+    const tierColors: Record<string, string> = {
+      easy: '#4ade80',
+      medium: '#fbbf24',
+      hard: '#f97316',
+      expert: '#ef4444',
+    };
+    const tierLabels: Record<string, string> = {
+      easy: '🟢 진입 쉬움',
+      medium: '🟡 진입 중간',
+      hard: '🟠 진입 어려움',
+      expert: '🔴 인플루언서 영역',
+    };
+    const tier = autoSerp.difficulty.tier;
+    const tColor = tierColors[tier] || '#888';
+    const tLabel = tierLabels[tier] || tier;
+    return `<div style="margin-top: 0.4rem; padding: 0.4rem 0.6rem; background: ${tColor}1a; border-left: 3px solid ${tColor}; border-radius: 4px; font-size: 0.78rem;">
+      <strong style="color: ${tColor};">${tLabel}</strong>
+      <span style="color: rgba(255,255,255,0.7); font-size: 0.92em;"> · 인플루언서 ${Math.round(autoSerp.difficulty.influencerRatio * 100)}%${autoSerp.difficulty.hasSmartblock ? ' · AI 스마트블록 노출' : ''}</span>
+    </div>`;
+  })() : '';
+
   card.innerHTML = `
     <div style="display: flex; justify-content: space-between; align-items: start; gap: 0.5rem;">
       <div style="flex: 1;">
@@ -9779,6 +9802,7 @@ function showSerpAlertCard(autoSerp: any, type: 'warn' | 'good' = 'warn'): void 
         <div style="font-size: 0.78rem; line-height: 1.4; color: rgba(255,255,255,0.92);">
           [<strong>${autoSerp.keyword}</strong>] 우리 <strong>${autoSerp.ourFinalScore}</strong>점 vs 상위 평균 <strong>${autoSerp.serpAvgFinalScore}</strong>점 (중앙값 ${autoSerp.serpMedianFinalScore})
         </div>
+        ${difficultyHtml}
         ${fixListHtml}
         <button type="button" id="serp-alert-detail-btn" style="margin-top: 0.6rem; padding: 0.35rem 0.7rem; background: ${borderColor}; color: #1a1a1a; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.78rem;">📊 상세 보기</button>
       </div>
