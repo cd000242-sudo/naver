@@ -48,6 +48,26 @@
                 </div>
             </div>
             <p class="summary-note" data-risk-warning>구조화 콘텐츠를 생성하면 최신 품질 · 위험 지표가 표시됩니다.</p>
+            <!-- ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 -->
+            <div id="serp-benchmark-bar" style="margin-top: 0.5rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                <button type="button" id="serp-benchmark-btn"
+                    style="background: linear-gradient(135deg, #D4AF37, #B8860B); color: #1a1a1a; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.85rem; display: none; align-items: center; gap: 0.4rem;"
+                    title="네이버 상위 노출 글 10개와 직접 비교 (실측, 추정 없음)">
+                    <span>🔍</span>
+                    <span>SERP 실측 비교</span>
+                </button>
+                <span id="serp-benchmark-status" style="font-size: 0.8rem; color: #888;"></span>
+            </div>
+            <!-- SERP benchmark 결과 모달 -->
+            <div id="serp-benchmark-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 10003; align-items: center; justify-content: center;">
+                <div style="background: #1a1a1a; border: 2px solid #D4AF37; border-radius: 16px; padding: 2rem; max-width: 720px; width: 92%; max-height: 86vh; overflow-y: auto; color: #fff; box-shadow: 0 24px 60px rgba(0,0,0,0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h2 style="margin: 0; font-size: 1.25rem; color: #D4AF37;">📊 SERP 실측 비교 결과</h2>
+                        <button type="button" id="serp-benchmark-close" style="background: transparent; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">×</button>
+                    </div>
+                    <div id="serp-benchmark-content" style="line-height: 1.7; font-size: 0.92rem;"></div>
+                </div>
+            </div>
 
             <!-- 우측 플로팅 버튼들 (스크롤 따라다님) -->
             <div id="right-floating-buttons"

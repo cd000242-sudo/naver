@@ -630,6 +630,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeadingImageButton();
   initSettingsModalFunc(); // ✅ [2026-01-25] 환경설정 모달 초기화
 
+  // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 + 모달 wiring
+  initSerpBenchmarkUI();
+
   // ✅ [2026-01-25] 환경설정 저장 버튼 이벤트 리스너 (CSP 우회)
   const saveBtn = document.getElementById('save-settings-btn');
   if (saveBtn) {
@@ -1409,6 +1412,21 @@ function updateRiskIndicators(content: StructuredContent | null): void {
       riskSeoValue.textContent = `${content.quality.seoScore || 0}/100`;
     }
   }
+
+  // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 활성화 + 데이터 동봉
+  //   글 생성 완료 시 본문/키워드를 글로벌 변수에 저장 → 사용자가 버튼 클릭 시 사용
+  try {
+    const _serpBtn = document.getElementById('serp-benchmark-btn') as HTMLButtonElement | null;
+    if (_serpBtn && content.bodyPlain && content.bodyPlain.length >= 100) {
+      (window as any).__lastGeneratedContent = {
+        body: content.bodyPlain,
+        title: content.selectedTitle || '',
+        keyword: (content as any).primaryKeyword || (content as any).keyword || '',
+        mode: (content as any).contentMode || 'seo',
+      };
+      _serpBtn.style.display = 'inline-flex';
+    }
+  } catch { /* UI 갱신 실패는 무시 */ }
 
   if (riskSummaryElement) {
     riskSummaryElement.style.display = 'grid';
@@ -9466,4 +9484,113 @@ initToolsHubModal();
 initBestProductModal();
 initGeminiSelectionUI();
 initContentModeHelpAndSmartPublish();
+
+// ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 UI 초기화
+function initSerpBenchmarkUI(): void {
+  const btn = document.getElementById('serp-benchmark-btn') as HTMLButtonElement | null;
+  const status = document.getElementById('serp-benchmark-status') as HTMLElement | null;
+  const modal = document.getElementById('serp-benchmark-modal') as HTMLElement | null;
+  const closeBtn = document.getElementById('serp-benchmark-close') as HTMLButtonElement | null;
+  const content = document.getElementById('serp-benchmark-content') as HTMLElement | null;
+  if (!btn || !modal || !closeBtn || !content) return;
+
+  closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+
+  btn.addEventListener('click', async () => {
+    const last = (window as any).__lastGeneratedContent;
+    if (!last || !last.body) {
+      if (status) status.textContent = '⚠️ 먼저 글을 생성해주세요';
+      return;
+    }
+
+    // 키워드 추출: source.keyword > title 단어
+    let keyword = last.keyword || '';
+    if (!keyword && last.title) {
+      const stripped = last.title.replace(/[\[\]【】\(\)（）]/g, ' ').trim();
+      const tokens = stripped.split(/\s+/).filter((t: string) => t.length >= 2);
+      keyword = tokens.slice(0, 3).join(' ');
+    }
+    if (!keyword) {
+      const prompt_ = prompt('비교할 키워드를 입력하세요:');
+      if (!prompt_) return;
+      keyword = prompt_.trim();
+    }
+
+    btn.disabled = true;
+    if (status) status.textContent = `🔍 "${keyword}" SERP 분석 중... (10초 내)`;
+
+    try {
+      const result = await (window as any).api.benchmarkSerp({
+        keyword,
+        ourBody: last.body,
+        ourTitle: last.title || '',
+        ourPrimaryKeyword: keyword,
+        display: 10,
+        mode: last.mode || 'seo',
+      });
+
+      if (!result.ok || !result.benchmark) {
+        if (status) status.textContent = `❌ 실패: ${result.error || '알 수 없는 오류'}`;
+        return;
+      }
+
+      // 모달 콘텐츠 렌더링
+      const b = result.benchmark;
+      const rankingColors: Record<string, string> = {
+        above_median: '#4ade80',
+        near_median: '#22d3ee',
+        below_median: '#fbbf24',
+        below_25th: '#ef4444',
+      };
+      const rankingColor = rankingColors[b.ranking] || '#888';
+
+      const gapRowsHtml = b.signalGaps.map((g: any) => {
+        const icon = g.recommendation === 'urgent' ? '🚨'
+          : g.recommendation === 'improve' ? '⚠️'
+          : g.recommendation === 'lead' ? '⭐'
+          : '✓';
+        const color = g.recommendation === 'urgent' ? '#ef4444'
+          : g.recommendation === 'improve' ? '#fbbf24'
+          : g.recommendation === 'lead' ? '#4ade80'
+          : '#a3a3a3';
+        return `<div style="padding: 0.5rem 0.75rem; margin: 0.35rem 0; background: rgba(255,255,255,0.04); border-left: 3px solid ${color}; border-radius: 4px;">
+          <span style="color: ${color};">${icon}</span>
+          <span style="margin-left: 0.4rem;">${g.message}</span>
+        </div>`;
+      }).join('');
+
+      const priorityHtml = b.topPriorityFix.length > 0
+        ? `<h3 style="margin: 1.2rem 0 0.5rem 0; color: #fbbf24;">🎯 우선순위 보완 항목</h3>
+           <ol style="margin: 0; padding-left: 1.5rem;">${b.topPriorityFix.map((p: string) => `<li style="margin: 0.3rem 0;">${p}</li>`).join('')}</ol>`
+        : '';
+
+      const strengthsHtml = b.strengths.length > 0
+        ? `<h3 style="margin: 1.2rem 0 0.5rem 0; color: #4ade80;">💪 강점 (상위 노출 평균 대비 우위)</h3>
+           <ul style="margin: 0; padding-left: 1.5rem;">${b.strengths.map((s: string) => `<li style="margin: 0.3rem 0;">${s}</li>`).join('')}</ul>`
+        : '';
+
+      content.innerHTML = `
+        <div style="padding: 0.8rem; background: ${rankingColor}22; border: 1px solid ${rankingColor}; border-radius: 8px; margin-bottom: 1rem;">
+          <strong style="color: ${rankingColor}; font-size: 1.05rem;">${b.summary}</strong>
+        </div>
+        <h3 style="margin: 0.5rem 0; color: #D4AF37;">📊 신호별 비교 (우리 vs 상위 노출 평균)</h3>
+        ${gapRowsHtml}
+        ${priorityHtml}
+        ${strengthsHtml}
+        <p style="font-size: 0.78rem; color: #888; margin-top: 1.2rem;">⚙️ 실측 데이터 — 네이버 검색 API + qualityEvaluator 동일 신호로 측정 (추정 없음)</p>
+      `;
+
+      modal.style.display = 'flex';
+      if (status) status.textContent = `✅ 분석 완료 — ${b.ranking === 'above_median' || b.ranking === 'near_median' ? '👍' : '⚠️'}`;
+    } catch (err) {
+      console.error('[SERP Benchmark]', err);
+      if (status) status.textContent = `❌ ${(err as Error).message}`;
+    } finally {
+      btn.disabled = false;
+    }
+  });
+}
 
