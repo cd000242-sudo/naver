@@ -4188,6 +4188,29 @@ export async function initMultiAccountPublishModal() {
   console.log('[MultiAccountPublish] 다중계정 동시발행 모달 초기화 완료');
 }
 
+// ✅ [v2.10.209] 페이지 로드 시 invisible modal overlay 강제 닫기 — 모든 클릭 가로채기 차단
+//   근본 원인: .modal-backdrop CSS 기본 display: flex → JS 닫기 실패 시 invisible overlay로 남음
+//   debugger agent 발견: 사용자 8번 fix 후에도 클릭 무반응의 진짜 원인
+if (typeof document !== 'undefined') {
+  const closeStaleBackdrops = () => {
+    document.querySelectorAll('.modal-backdrop').forEach(el => {
+      const inlineDisplay = (el as HTMLElement).style.display;
+      // inline style이 flex로 명시 안 됐으면 강제 none — invisible overlay 차단
+      if (inlineDisplay !== 'flex' && inlineDisplay !== 'block') {
+        (el as HTMLElement).style.display = 'none';
+        el.setAttribute('aria-hidden', 'true');
+      }
+    });
+  };
+  // DOMContentLoaded 즉시 + 추가 안전 (1초 후 한 번 더)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', closeStaleBackdrops);
+  } else {
+    closeStaleBackdrops();
+  }
+  setTimeout(closeStaleBackdrops, 1000);
+}
+
 // ✅ [v2.10.208] 시각적 진단 함수 — alert로 모든 정보 한 번에 표시 (콘솔 안 봐도 OK)
 (window as any).diagnoseAddAccount = function() {
   const btn = document.getElementById('main-add-account-btn');

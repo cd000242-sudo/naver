@@ -1355,16 +1355,27 @@ button:not(:disabled):active,
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  display: flex;
+  /* ✅ [v2.10.209] 기본 display: none — 모달 닫기 실패 시 *전체 화면 덮어 모든 클릭 가로채는 회귀* 차단
+     기존: display: flex (열림 상태 기본) → JS가 style.display='none' 실패하면 invisible overlay로 남음
+     변경: display: none (닫힘 상태 기본) → JS가 style.display='flex'로 명시 열 때만 표시
+     사용자 보고: main-add-account-btn 클릭 무반응 (8번 fix 실패) → debugger agent가 발견한 근본 원인
+     inline style 우선 원칙 유지 (JS의 style.display='flex'/'none' 모두 정상 작동) */
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 10000;
   backdrop-filter: blur(4px);
   animation: fadeIn var(--transition-mid);
   /* v2.10.81 PERF: 모달이 떠있을 때 그 안의 reflow/style invalidation이 *모달 안에 갇힘*.
-     메인 페이지로 전파되는 layout/repaint 비용 차단. paint는 의도적으로 제외 — 일부
-     모달이 viewport 밖으로 살짝 넘어가는 경우 clip 위험. layout+style만으로 충분히 효과. */
+     메인 페이지로 전파되는 layout/repaint 비용 차단. */
   contain: layout style;
+}
+
+/* ✅ [v2.10.209] 모달 열림 상태 — inline style="display: flex" 이거나 .is-open 클래스 */
+.modal-backdrop[style*="display: flex"],
+.modal-backdrop[style*="display:flex"],
+.modal-backdrop.is-open {
+  display: flex !important;
 }
 
 .modal-panel {
