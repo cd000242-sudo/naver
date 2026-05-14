@@ -4188,6 +4188,35 @@ export async function initMultiAccountPublishModal() {
   console.log('[MultiAccountPublish] 다중계정 동시발행 모달 초기화 완료');
 }
 
+// ✅ [v2.10.206] 진단 코드 — 클릭 이벤트가 어디서 가로채지는지 *capture phase*에서 추적
+//   사용자 콘솔에 클릭 자체 로그도 안 찍힘 → 다른 element가 클릭 가로채는 중 추정
+//   capture phase로 *가장 먼저* 잡아서 진짜 클릭된 element + 부모 chain 출력
+if (typeof document !== 'undefined') {
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+    // main-add-account-btn 또는 ma-add-account-inline 영역 클릭 시만 로그
+    const btn = target.closest('button') as HTMLButtonElement | null;
+    if (!btn) return;
+    if (btn.id !== 'main-add-account-btn' && btn.id !== 'ma-add-account-inline') return;
+
+    const path: string[] = [];
+    let el: HTMLElement | null = target;
+    while (el && el !== document.body) {
+      const idPart = el.id ? `#${el.id}` : '';
+      const classPart = el.className && typeof el.className === 'string' ? `.${el.className.split(' ')[0]}` : '';
+      path.push(`${el.tagName.toLowerCase()}${idPart}${classPart}`);
+      el = el.parentElement;
+    }
+    console.log(`[ClickDebug] 🎯 ${btn.id} 클릭 capture 단계 도달!`);
+    console.log(`[ClickDebug] target chain: ${path.join(' > ')}`);
+    console.log(`[ClickDebug] e.defaultPrevented:`, e.defaultPrevented);
+    console.log(`[ClickDebug] button.disabled:`, btn.disabled);
+    console.log(`[ClickDebug] button.onclick exists:`, !!btn.onclick);
+    console.log(`[ClickDebug] window.openAddAccountModalDirect:`, typeof (window as any).openAddAccountModalDirect);
+  }, { capture: true });
+}
+
 // ✅ [v2.10.205] 글로벌 함수 — HTML inline onclick에서 호출 (JS race 완전 회피)
 //   사용 위치: public/index.html main-add-account-btn / ma-add-account-inline의 onclick
 //   동작: ma-account-edit-modal 직접 조회 + 입력 폼 초기화 + 표시
