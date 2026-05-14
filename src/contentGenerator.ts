@@ -992,9 +992,15 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   try {
     const { checkSourceFidelity, extractResultBody } = require('./content/sourceFidelityCheck');
     _resultBodyForGates = extractResultBody(finalContent as any);
+    // ✅ [v2.10.173] URL 모드는 *원본 100% 보존* — strict 임계 적용
+    //   사용자 요청: "원본 내용이 100% 다 들어있어야 되는 거 아닌가요?"
+    //   기본(키워드): compression 0.5 / retention 0.7
+    //   URL 모드: compression 0.85 / retention 0.92 (사실상 100% 보존 요구)
+    const _isUrlMode = !!source.url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news';
     const fidelityInput = {
       rawText: source.rawText ?? '',
       resultBody: _resultBodyForGates,
+      ...(_isUrlMode ? { minCompressionRatio: 0.85, minRetentionScore: 0.92 } : {}),
     };
     const fidelity = checkSourceFidelity(fidelityInput);
     if (!fidelity.passed) {
@@ -6972,6 +6978,46 @@ export async function generateStructuredContent(
       const mode = (source.contentMode || 'seo') as PromptMode;
       let systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
 
+      // ✅ [v2.10.173] URL 모드 전용 강화 지시 — 사용자 요청 "원본 100% + 더 좋은 퀄리티"
+      //   사용자 보고: "URL로 글생성을 한다면 URL원본보다 훨씬 퀄리티 좋고 잘써줘야되고
+      //                원본내용이 100% 다들어있어야되는거아닌가요??"
+      //   조치: URL 모드일 때 system 프롬프트 앞에 *원본 보존 + 퀄리티 업그레이드* 지시 prepend
+      const _isUrlSourceMode = !!source.url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news';
+      if (_isUrlSourceMode && (source.rawText ?? '').length >= 200) {
+        const urlModeDirective = `[URL 원본 글 재구성 — 절대 준수 규칙]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+당신은 URL 원본 글을 기반으로 *훨씬 좋은 퀄리티의 블로그 글*을 작성한다.
+
+## 1. 원본 100% 보존 (최우선)
+- 원본의 모든 사실(fact), 숫자, 인명, 지명, 제품명, 인용문, 사례를 **빠짐없이** 포함하라.
+- 원본에 등장하는 *모든 핵심 정보*는 결과 본문에 반드시 등장해야 한다.
+- 정보를 *축약·요약·생략·뭉뚱그림* 하지 마라. 자세히 풀어 쓰는 방향으로만 가공하라.
+- 결과 본문 길이는 원본의 85% 이상 (필요하면 *더 길게* 작성하되 부풀리지 말 것).
+
+## 2. 퀄리티 업그레이드 (필수)
+- 원본보다 *더 깊이 있게*: 맥락·배경·왜 그런지 한 단계 더 설명.
+- 원본보다 *더 친절하게*: 어려운 개념은 일상 비유로 풀어줌.
+- 원본보다 *더 읽기 좋게*: 문단 짧게, 한 문장 30~70자, 소제목으로 호흡 분리.
+- 원본보다 *더 자연스럽게*: 기사체/보고체 제거, 블로거 본인이 직접 경험·관찰한 톤으로 변환.
+
+## 3. 환각 절대 금지
+- 원본에 *없는* 부정 키워드(폭로/논란/의혹/비판/위선/이중성 등) 추가 금지.
+- 원본 인물·사건의 감정 방향(긍정/부정)을 *원본 그대로* 유지하라. 왜곡 금지.
+- 원본에 없는 사실·수치·인용을 *지어내지* 마라. grounding 검색 결과도 원본과 충돌하면 원본 우선.
+
+## 4. 자연어 가공 원칙
+- 원본 문장을 그대로 베끼지 말되, 원본의 *모든 사실*은 그대로 보존하라.
+- 본인이 직접 본 듯한 톤("솔직히", "막상", "개인적으로")으로 자연스럽게 풀어라.
+- AI 보고체("알아보겠습니다", "살펴보겠습니다", "마치겠습니다") 절대 금지.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+`;
+        systemPrompt = urlModeDirective + systemPrompt;
+        console.log('[ContentGenerator] 📜 URL 모드 강화 지시 prepend (원본 100% + 퀄리티 업그레이드)');
+      }
+
       // Phase 4: skipDictInjection 토글 ON 시 페르소나 카드를 시스템 프롬프트 헤더에 prepend.
       // 후처리 어휘 주입이 꺼진 모드에서 LLM이 글 전체 동안 일관된 화자 페르소나를 유지하도록 보강.
       const phase4SkipDict =
@@ -7494,7 +7540,13 @@ export async function generateStructuredContent(
         try {
           const { checkSourceFidelity, extractResultBody, buildFidelityRetryInstruction } = require('./content/sourceFidelityCheck');
           const _rb = extractResultBody(optimized as any);
-          const _fid = checkSourceFidelity({ rawText: source.rawText ?? '', resultBody: _rb });
+          // ✅ [v2.10.173] URL 모드 strict 임계 — 원본 100% 보존 강제
+          const _isUrlModeForRetry = !!source.url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news';
+          const _fid = checkSourceFidelity({
+            rawText: source.rawText ?? '',
+            resultBody: _rb,
+            ...(_isUrlModeForRetry ? { minCompressionRatio: 0.85, minRetentionScore: 0.92 } : {}),
+          });
 
           // [v2.10.169] 환각 표지 탐지 — sentiment mismatch + 부정 키워드 환각
           let _hallucinationFail = false;
@@ -7512,7 +7564,9 @@ export async function generateStructuredContent(
           if (!_fid.passed || _hallucinationFail) {
             _fidelityRetryUsed = true;
             console.warn(`[Fidelity] Phase 7-B 자동 재시도: ${_fid.reason ?? ''}${_hallucinationFail ? ' + 환각 의심' : ''}`);
-            extraInstruction = `${buildFidelityRetryInstruction(_fid)}\n${_hallRetryInstruction}\n${extraInstruction}`;
+            // ✅ [v2.10.173] URL 모드 strict 임계를 재시도 지시문에도 반영
+            const _retryThresholds = _isUrlModeForRetry ? { minCompressionRatio: 0.85, minRetentionScore: 0.92 } : undefined;
+            extraInstruction = `${buildFidelityRetryInstruction(_fid, _retryThresholds)}\n${_hallRetryInstruction}\n${extraInstruction}`;
             continue; // for 루프 다음 attempt — 같은 attempt 카운트 보존
           }
         } catch (_e) { /* fidelity 모듈 실패 시 정상 흐름 */ }

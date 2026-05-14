@@ -175,17 +175,25 @@ export function checkSourceFidelity(input: FidelityCheckInput): FidelityCheckRes
  * 검증 실패 시 LLM 재시도용 추가 지시문 생성.
  * 호출자가 generateStructuredContent의 extraInstruction에 합쳐 사용.
  */
-export function buildFidelityRetryInstruction(result: FidelityCheckResult): string {
+export function buildFidelityRetryInstruction(result: FidelityCheckResult, options?: { minCompressionRatio?: number; minRetentionScore?: number }): string {
   if (result.passed) return '';
+
+  // ✅ [v2.10.173] 호출자가 strict 임계 전달 시 그 값을 메시지에 반영 (URL 모드 0.85/0.92)
+  const minCompression = options?.minCompressionRatio ?? DEFAULT_MIN_COMPRESSION_RATIO;
+  const minRetention = options?.minRetentionScore ?? DEFAULT_MIN_RETENTION_SCORE;
 
   const lines: string[] = [
     '',
     '⚠️ [원본 정보 보존 검증 실패 — 다시 작성하라]',
   ];
 
-  if (result.compressionRatio < DEFAULT_MIN_COMPRESSION_RATIO) {
-    lines.push(`- 결과 본문이 원본의 ${(result.compressionRatio * 100).toFixed(0)}%로 너무 압축됐다. 최소 ${DEFAULT_MIN_COMPRESSION_RATIO * 100}% 이상으로 작성하라.`);
+  if (result.compressionRatio < minCompression) {
+    lines.push(`- 결과 본문이 원본의 ${(result.compressionRatio * 100).toFixed(0)}%로 너무 압축됐다. 최소 ${(minCompression * 100).toFixed(0)}% 이상으로 작성하라.`);
     lines.push('- 요약/축약 절대 금지. 원본의 모든 사실·예시·디테일을 보존하라.');
+  }
+
+  if (result.retentionScore < minRetention) {
+    lines.push(`- 핵심 정보 보존율 ${(result.retentionScore * 100).toFixed(0)}% — 임계 ${(minRetention * 100).toFixed(0)}% 미달. 누락된 fact를 모두 포함해 다시 작성하라.`);
   }
 
   if (result.missingFacts.length > 0) {
