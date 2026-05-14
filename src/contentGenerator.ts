@@ -7758,7 +7758,6 @@ export async function generateStructuredContent(
         //   v2.10.178: safety < 50 (환각·금지패턴)만 활성화
         //   v2.10.179: decision='regenerate' 전체 — finalScore < 60도 포함 (근본적 미달)
         //   여전히 1회 한도 (_qualityGateRetryUsed) + attempt 여유 조건
-        //   다음 단계 Phase 2.3: decision='patch'는 selfCritique 활용 예정
         if (
           _gateResult
           && _gateResult.decision === 'regenerate'
@@ -7773,6 +7772,35 @@ export async function generateStructuredContent(
           console.warn(`[QualityGate] 🚨 ${_trigger} — 자동 재시도 트리거 (decision=${_gateResult.decision})`);
           extraInstruction = `${_gateDirective}\n${extraInstruction}`;
           continue; // for 루프 다음 attempt
+        }
+
+        // ✅ [v2.10.180 Phase 2.3] qualityGate decision='patch' 시 selfCritique 자동 호출
+        //   조건: decision='patch' (finalScore 60~79) — *부분 수정으로 충분*한 케이스
+        //   regenerate는 이미 위에서 처리(continue), pass는 그대로 진행, patch만 여기 도달
+        //   사용자 enableSelfCritique 토글 *무시*하고 자동 활성화 (qualityGate 신호가 더 정확)
+        //   retryDirective를 selfCritique에 전달 → 구체적 미달 항목 우선 수정
+        if (_gateResult && _gateResult.decision === 'patch' && optimized.bodyPlain) {
+          try {
+            const _patchPersona = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
+            console.log(`[QualityGate] 📝 patch decision (final=${_gateResult.finalScore}) — selfCritique 자동 활성화`);
+            const _patchResult = await selfCritiqueAndRewrite(
+              optimized.bodyPlain,
+              _patchPersona,
+              (prompt: string) => callGemini(prompt, 0.3, 100, { useGrounding: false }),
+              _gateResult.retryDirective || '',
+            );
+            if (_patchResult.rewrote) {
+              console.log(`[QualityGate] ✅ patch 적용 (${_patchResult.source}) — 본문 부분 재작성됨`);
+              optimized.bodyPlain = _patchResult.body;
+              if (optimized.quality) {
+                (optimized.quality as any).qualityGate.patchApplied = true;
+              }
+            } else {
+              console.log(`[QualityGate] patch no-op (${_patchResult.source})`);
+            }
+          } catch (patchErr) {
+            console.warn('[QualityGate] patch 실패 (정상 흐름 유지):', (patchErr as Error)?.message);
+          }
         }
 
         // ✅ [2026 100점] 쇼핑커넥트 모드: 금지 패턴 자동 검증

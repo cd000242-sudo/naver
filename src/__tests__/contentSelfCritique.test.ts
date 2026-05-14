@@ -100,6 +100,29 @@ describe('selfCritiqueAndRewrite', () => {
     expect(result.source).toBe('fallback');
     expect(result.body).toBe(LONG_BODY);
   });
+
+  it('Phase 2.3 — extraDirective가 LLM 프롬프트에 포함됨', async () => {
+    const captured: string[] = [];
+    const geminiCall = vi.fn().mockImplementation(async (prompt: string) => {
+      captured.push(prompt);
+      return JSON.stringify({ rewrote: false, body: LONG_BODY });
+    });
+    const extraDirective = '[Quality Gate 지시] 어미 다양화 필수, AI 보고체 금지';
+    await selfCritiqueAndRewrite(LONG_BODY, FAKE_PERSONA, geminiCall, extraDirective);
+    expect(captured).toHaveLength(1);
+    expect(captured[0]).toContain('Quality Gate 추가 지시');
+    expect(captured[0]).toContain('어미 다양화 필수');
+  });
+
+  it('Phase 2.3 — extraDirective 없으면 기존 프롬프트 그대로', async () => {
+    const captured: string[] = [];
+    const geminiCall = vi.fn().mockImplementation(async (prompt: string) => {
+      captured.push(prompt);
+      return JSON.stringify({ rewrote: false, body: LONG_BODY });
+    });
+    await selfCritiqueAndRewrite(LONG_BODY, FAKE_PERSONA, geminiCall);
+    expect(captured[0]).not.toContain('Quality Gate 추가 지시');
+  });
 });
 
 describe('isSelfCritiqueEnabled', () => {

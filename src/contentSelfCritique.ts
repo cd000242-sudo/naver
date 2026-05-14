@@ -19,17 +19,23 @@ export type SelfCritiqueResult = {
 const MAX_BODY_CHARS_FOR_CRITIQUE = 4500;
 const MIN_BODY_CHARS_FOR_CRITIQUE = 200;
 
-function buildCritiquePrompt(text: string, personaCard: string): string {
+function buildCritiquePrompt(text: string, personaCard: string, extraDirective?: string): string {
   const trimmedText = text.length > MAX_BODY_CHARS_FOR_CRITIQUE
     ? text.substring(0, MAX_BODY_CHARS_FOR_CRITIQUE) + '\n[...뒷부분 평가 생략]'
     : text;
+
+  // ✅ [v2.10.180 Phase 2.3] qualityGate retryDirective 가이드 주입
+  //   patch decision 시 *구체적 미달 항목*을 selfCritique에 전달 → 정확한 patch
+  const extraBlock = (extraDirective && extraDirective.trim())
+    ? `\n[Quality Gate 추가 지시 — 우선 반영]\n${extraDirective.trim()}\n`
+    : '';
 
   return `당신은 한국어 블로그 글의 편집자입니다.
 아래 본문을 페르소나 일관성과 자연스러움 관점에서 점검하고, 가장 어색한 문장 최대 3개를 같은 의미를 유지하면서 더 자연스럽게 다시 쓰세요.
 
 [페르소나 카드]
 ${personaCard}
-
+${extraBlock}
 [검토 기준]
 1. 글 전체에서 위 페르소나의 시점과 어조가 일관되게 유지되는가?
 2. AI 특유의 균질한 표현이나 정해진 클리셰("솔직히", "직접 해보니", "체감", "개인적으로" 등 단어를 정해진 위치에서 반복)가 있는가?
@@ -78,13 +84,14 @@ export async function selfCritiqueAndRewrite(
   text: string,
   personaCard: string,
   geminiCall: (prompt: string) => Promise<string>,
+  extraDirective?: string,
 ): Promise<SelfCritiqueResult> {
   if (!text || text.trim().length < MIN_BODY_CHARS_FOR_CRITIQUE) {
     return { body: text, rewrote: false, source: 'skipped' };
   }
 
   try {
-    const prompt = buildCritiquePrompt(text, personaCard);
+    const prompt = buildCritiquePrompt(text, personaCard, extraDirective);
     const raw = await geminiCall(prompt);
     const parsed = parseCritiqueResponse(raw);
 
