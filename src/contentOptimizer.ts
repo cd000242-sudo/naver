@@ -657,10 +657,33 @@ export function optimizeHtmlForNaver(html: string): string {
   return html;
 }
 
+// Scoring keyword dictionaries — exposed so callers can override (Phase 2: LLM rubric will inject runtime keywords)
+export type ScoreKeywords = {
+  expertTerms: string[];
+  eeatTerms: string[];
+  aiPatterns: string[];
+  humanTerms: string[];
+  engagementPatterns: string[];
+  interactionTerms: string[];
+};
+
+export const DEFAULT_SCORE_KEYWORDS: ScoreKeywords = {
+  expertTerms: ['분석', '연구', '조사', '전문', '기술', '방법', '원리', '효과', '결과', '데이터', '통계', '수치', '비교', '검증', '평가', '측정', '확인', '기록', '활약', '성과'],
+  eeatTerms: ['직접', '경험', '실제', '현장', '전문가', '공식', '검증', '신뢰', '객관적', '솔직'],
+  aiPatterns: ['알아보겠습니다', '살펴보겠습니다', '시작하겠습니다', '마치겠습니다', '도움이 되셨으면'],
+  humanTerms: ['솔직히', '개인적으로', '의외로', '생각보다', '막상', '처음에는', '나중에'],
+  engagementPatterns: ['팁', '꿀팁', '추천', '후기', '비교', '장단점', '정리', '총정리', '핵심', '포인트', '주목', '확인', '체크'],
+  interactionTerms: ['죠?', '요?', '네요', '군요', '답니다', '습니다'],
+};
+
 /**
  * ✅ 네이버 2025.12 로직 점수 분석 (100점 극대화 버전)
+ *
+ * @param text 평가할 본문 텍스트
+ * @param keywords 점수 산정용 키워드 사전. 미지정 시 DEFAULT_SCORE_KEYWORDS 사용.
+ *                 Phase 2에서 LLM rubric으로 런타임 교체 가능.
  */
-export function analyzeNaverScore(text: string): {
+export function analyzeNaverScore(text: string, keywords: ScoreKeywords = DEFAULT_SCORE_KEYWORDS): {
   score: number;
   details: {
     expertise: number;
@@ -677,23 +700,19 @@ export function analyzeNaverScore(text: string): {
   let engagementScore = 80; // 기본 점수 상향
 
   // 1. 전문성 분석 (강화)
-  const expertTerms = ['분석', '연구', '조사', '전문', '기술', '방법', '원리', '효과', '결과', '데이터', '통계', '수치', '비교', '검증', '평가', '측정', '확인', '기록', '활약', '성과'];
-  const expertCount = expertTerms.filter(term => text.includes(term)).length;
+  const expertCount = keywords.expertTerms.filter(term => text.includes(term)).length;
   expertiseScore += Math.min(20, expertCount * 2); // 최대 +20
 
   // E-E-A-T 표현 체크
-  const eeatTerms = ['직접', '경험', '실제', '현장', '전문가', '공식', '검증', '신뢰', '객관적', '솔직'];
-  const eeatCount = eeatTerms.filter(term => text.includes(term)).length;
+  const eeatCount = keywords.eeatTerms.filter(term => text.includes(term)).length;
   expertiseScore += Math.min(10, eeatCount * 2); // 최대 +10
 
   // 2. 독창성 분석 (AI 패턴 감지 - 최적화 후에는 거의 없음)
-  const aiPatterns = ['알아보겠습니다', '살펴보겠습니다', '시작하겠습니다', '마치겠습니다', '도움이 되셨으면'];
-  const aiCount = aiPatterns.filter(p => text.includes(p)).length;
+  const aiCount = keywords.aiPatterns.filter(p => text.includes(p)).length;
   originalityScore -= aiCount * 3; // 패널티 감소
 
   // 인간적 표현 보너스
-  const humanTerms = ['솔직히', '개인적으로', '의외로', '생각보다', '막상', '처음에는', '나중에'];
-  const humanCount = humanTerms.filter(term => text.includes(term)).length;
+  const humanCount = keywords.humanTerms.filter(term => text.includes(term)).length;
   originalityScore += Math.min(15, humanCount * 3); // 최대 +15
 
   // 3. 가독성 분석
@@ -716,13 +735,11 @@ export function analyzeNaverScore(text: string): {
   }
 
   // 4. 참여 유도 분석 (강화)
-  const engagementPatterns = ['팁', '꿀팁', '추천', '후기', '비교', '장단점', '정리', '총정리', '핵심', '포인트', '주목', '확인', '체크'];
-  const engagementCount = engagementPatterns.filter(p => text.includes(p)).length;
+  const engagementCount = keywords.engagementPatterns.filter(p => text.includes(p)).length;
   engagementScore += Math.min(20, engagementCount * 3); // 최대 +20
 
   // 질문/감탄 표현 보너스
-  const interactionTerms = ['죠?', '요?', '네요', '군요', '답니다', '습니다'];
-  const interactionCount = interactionTerms.filter(term => text.includes(term)).length;
+  const interactionCount = keywords.interactionTerms.filter(term => text.includes(term)).length;
   engagementScore += Math.min(10, interactionCount); // 최대 +10
 
   // 점수 정규화 (0-100)
