@@ -7754,19 +7754,23 @@ export async function generateStructuredContent(
           console.warn('[QualityGate] 평가 실패 (정상 흐름 유지):', (gateErr as Error)?.message);
         }
 
-        // ✅ [v2.10.178 Phase 2.1] qualityGate decision 기반 자동 재시도
-        //   조건: safety < 50 (강한 환각·금지패턴) AND 재시도 미사용 AND attempt 여유
-        //   safety < 50은 환각·AI 보고체 등 *치명적* 신호 — 무조건 재시도 가치 있음
-        //   다른 decision(finalScore<60 regenerate, patch)은 다음 릴리즈에서 단계적 확대
+        // ✅ [v2.10.179 Phase 2.2] qualityGate decision='regenerate' 전체 자동 재시도 활성화
+        //   v2.10.178: safety < 50 (환각·금지패턴)만 활성화
+        //   v2.10.179: decision='regenerate' 전체 — finalScore < 60도 포함 (근본적 미달)
+        //   여전히 1회 한도 (_qualityGateRetryUsed) + attempt 여유 조건
+        //   다음 단계 Phase 2.3: decision='patch'는 selfCritique 활용 예정
         if (
           _gateResult
-          && _gateResult.safetyScore.score < 50
+          && _gateResult.decision === 'regenerate'
           && !_qualityGateRetryUsed
           && attempt < MAX_ATTEMPTS
         ) {
           _qualityGateRetryUsed = true;
           const _gateDirective = _gateResult.retryDirective || '';
-          console.warn(`[QualityGate] 🚨 safety ${_gateResult.safetyScore.score} < 50 — 자동 재시도 트리거 (${_gateResult.decision})`);
+          const _trigger = _gateResult.safetyScore.score < 50
+            ? `safety ${_gateResult.safetyScore.score} < 50`
+            : `finalScore ${_gateResult.finalScore} < 60`;
+          console.warn(`[QualityGate] 🚨 ${_trigger} — 자동 재시도 트리거 (decision=${_gateResult.decision})`);
           extraInstruction = `${_gateDirective}\n${extraInstruction}`;
           continue; // for 루프 다음 attempt
         }
