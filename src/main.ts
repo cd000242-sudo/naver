@@ -162,6 +162,8 @@ import { registerKeywordHandlers } from './main/ipc/keywordHandlers.js';
 import { registerProductHandlers } from './main/ipc/productHandlers.js';
 import { registerEngagementHandlers } from './main/ipc/engagementHandlers.js';
 import { registerImageTableHandlers } from './main/ipc/imageTableHandlers.js';
+// ✅ [v2.10.203] SERP 프로브 + publishedPostTracker handlers — 끝판왕 시스템 IPC 등록 누락 fix
+import { registerSerpProbeHandlers } from './main/ipc/serpProbeHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -5366,6 +5368,10 @@ registerKeywordHandlers();
 registerProductHandlers();
 registerEngagementHandlers();
 registerImageTableHandlers();
+// ✅ [v2.10.203] SERP/publishedPost IPC 등록 — v2.10.184~v2.10.199 누락 fix
+//   사용자 콘솔 에러: "No handler registered for 'serp:historyStats'" / 'publishedPost:calibration'
+//   원인: registerAllHandlers 내부에 있는데 main.ts가 개별 호출 패턴이라 미호출
+registerSerpProbeHandlers();
 // ✅ miscHandlers: content:collectFromPlatforms 등 — 연속발행에서 크롤링 시 필요
 import { registerMiscHandlers } from './main/ipc/miscHandlers.js';
 registerMiscHandlers();
