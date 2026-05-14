@@ -17,6 +17,7 @@ import path from 'path';
 import { JSON_SCHEMA_DESCRIPTION } from './contentGenerator/schema';
 import { humanizeContent, humanizeHtmlContent, analyzeAiDetectionRisk, resetHumanizerLog } from './aiHumanizer.js';
 import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog } from './contentOptimizer.js';
+import { analyzeContentBySemantic, isLlmRubricEnabled } from './contentSemanticScoring.js';
 import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, getGeoOverlayPrompt, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { META_CRITIQUE_PHRASES } from './content/forbiddenPhrases.js';
@@ -7573,9 +7574,18 @@ export async function generateStructuredContent(
           optimized.bodyHtml = optimizeHtmlForNaver(optimized.bodyHtml);
         }
 
-        // 네이버 점수 분석
-        const naverScore = analyzeNaverScore(optimized.bodyPlain || '');
-        console.log(`[ContentGenerator] 네이버 최적화 점수: ${naverScore.score}/100`);
+        // 네이버 점수 분석 — LLM rubric (semantic) vs deterministic keyword counter
+        const useLlmRubric = isLlmRubricEnabled({ useLlmRubric: (source as any).useLlmRubric });
+        const deterministicFallback = () => analyzeNaverScore(optimized.bodyPlain || '');
+        const naverScore = useLlmRubric
+          ? await analyzeContentBySemantic(
+              optimized.bodyPlain || '',
+              (prompt: string) => callGemini(prompt, 0.2, 100, { useGrounding: false }),
+              deterministicFallback,
+            )
+          : deterministicFallback();
+        const scoreSource = (naverScore as any).source ?? 'deterministic';
+        console.log(`[ContentGenerator] 네이버 최적화 점수: ${naverScore.score}/100 (source: ${scoreSource})`);
         console.log(`[ContentGenerator] - 전문성: ${naverScore.details.expertise}, 독창성: ${naverScore.details.originality}`);
         console.log(`[ContentGenerator] - 가독성: ${naverScore.details.readability}, 참여도: ${naverScore.details.engagement}`);
 
