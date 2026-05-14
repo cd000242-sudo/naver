@@ -646,6 +646,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ✅ [v2.10.191 Phase 3.8.3] SERP 추이 서브탭 wiring
+  initSerpHistoryPanel();
+
   // ✅ [2026-01-25] 환경설정 저장 버튼 이벤트 리스너 (CSP 우회)
   const saveBtn = document.getElementById('save-settings-btn');
   if (saveBtn) {
@@ -9510,6 +9513,179 @@ initToolsHubModal();
 initBestProductModal();
 initGeminiSelectionUI();
 initContentModeHelpAndSmartPublish();
+
+// ✅ [v2.10.191 Phase 3.8.3] SERP 추이 패널 초기화 + 데이터 로드
+function initSerpHistoryPanel(): void {
+  const refreshBtn = document.getElementById('serp-history-refresh-btn') as HTMLButtonElement | null;
+  const clearBtn = document.getElementById('serp-history-clear-btn') as HTMLButtonElement | null;
+  const content = document.getElementById('serp-history-content') as HTMLElement | null;
+  if (!content) return;
+
+  // 분석 서브탭 클릭 시 SERP 추이 자동 로드
+  document.querySelectorAll('.analytics-subtab[data-subtab="serp-history"]').forEach(btn => {
+    btn.addEventListener('click', () => { loadSerpHistory(content); });
+  });
+
+  refreshBtn?.addEventListener('click', () => loadSerpHistory(content));
+
+  clearBtn?.addEventListener('click', async () => {
+    if (!confirm('SERP 추이 history를 모두 삭제할까요? 되돌릴 수 없습니다.')) return;
+    try {
+      const result = await (window as any).api.clearSerpHistory();
+      if (result?.ok) {
+        await loadSerpHistory(content);
+      } else {
+        alert('초기화 실패: ' + (result?.error || '알 수 없음'));
+      }
+    } catch (err) {
+      alert('초기화 오류: ' + (err as Error).message);
+    }
+  });
+
+  // 분석 탭 처음 진입 시 자동 로드 (서브탭 활성화 시)
+  // 첫 진입 시 즉시 로드 — 사용자가 분석 탭 진입하면 자동 표시
+  setTimeout(() => loadSerpHistory(content), 500);
+}
+
+async function loadSerpHistory(content: HTMLElement): Promise<void> {
+  try {
+    content.innerHTML = '<p style="text-align: center; color: #888; padding: 1.5rem 0;">⏳ 로딩 중...</p>';
+    const result = await (window as any).api.getSerpHistoryStats();
+    if (!result?.ok || !result.stats) {
+      content.innerHTML = `<p style="color: #ef4444;">❌ ${result?.error || '로드 실패'}</p>`;
+      return;
+    }
+    renderSerpHistoryContent(content, result.stats, result.recentEntries || []);
+  } catch (err) {
+    content.innerHTML = `<p style="color: #ef4444;">❌ ${(err as Error).message}</p>`;
+  }
+}
+
+function renderSerpHistoryContent(content: HTMLElement, stats: any, recent: any[]): void {
+  if (stats.totalEntries === 0) {
+    content.innerHTML = `
+      <div style="text-align: center; padding: 2rem 0;">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📭</div>
+        <p style="color: #888;">아직 누적된 SERP 비교 결과가 없습니다.</p>
+        <p style="color: #666; font-size: 0.85rem; margin-top: 0.5rem;">환경설정에서 <strong>"자동 SERP 비교"</strong>가 ON인지 확인하고<br>글을 생성하면 자동으로 누적됩니다.</p>
+      </div>
+    `;
+    return;
+  }
+
+  // 평균 점수 비교
+  const ourScore = stats.avgFinalScore;
+  const serpScore = stats.avgSerpScore;
+  const gap = stats.avgGap;
+  const gapColor = gap >= 5 ? '#4ade80' : gap >= -3 ? '#22d3ee' : gap >= -15 ? '#fbbf24' : '#ef4444';
+  const gapIcon = gap >= 5 ? '⭐' : gap >= -3 ? '✓' : gap >= -15 ? '⚠️' : '🚨';
+
+  // ranking 분포 막대
+  const rankColors: Record<string, string> = {
+    above_median: '#4ade80',
+    near_median: '#22d3ee',
+    below_median: '#fbbf24',
+    below_25th: '#ef4444',
+  };
+  const rankLabels: Record<string, string> = {
+    above_median: '🟢 상위권',
+    near_median: '🟢 중상위',
+    below_median: '🟡 중하위',
+    below_25th: '🔴 하위',
+  };
+  const totalRanked = Object.values(stats.rankingDistribution).reduce((a: number, b: any) => a + (Number(b) || 0), 0) as number;
+  const rankBarHtml = ['above_median', 'near_median', 'below_median', 'below_25th'].map(rk => {
+    const count = stats.rankingDistribution[rk] || 0;
+    if (count === 0) return '';
+    const pct = Math.round((count / Math.max(1, totalRanked)) * 100);
+    return `<div style="display: flex; align-items: center; gap: 0.6rem; margin: 0.3rem 0; font-size: 0.85rem;">
+      <span style="min-width: 90px; color: ${rankColors[rk]};">${rankLabels[rk]}</span>
+      <div style="flex: 1; background: rgba(255,255,255,0.05); border-radius: 4px; height: 16px; overflow: hidden;">
+        <div style="background: ${rankColors[rk]}; height: 100%; width: ${pct}%; transition: width 0.4s;"></div>
+      </div>
+      <span style="min-width: 60px; text-align: right; color: rgba(255,255,255,0.8);">${count}건 (${pct}%)</span>
+    </div>`;
+  }).join('');
+
+  // 미달 신호 top
+  const missingHtml = (stats.topMissingSignals || []).slice(0, 5).map((s: any) =>
+    `<li style="margin: 0.3rem 0;"><strong style="color: #fbbf24;">${s.signal}</strong> <span style="color: rgba(255,255,255,0.6); font-size: 0.85em;">— ${s.count}회 미달</span></li>`
+  ).join('');
+
+  // 강점 신호 top
+  const strengthHtml = (stats.topStrengths || []).slice(0, 5).map((s: any) =>
+    `<li style="margin: 0.3rem 0;"><strong style="color: #4ade80;">${s.signal}</strong> <span style="color: rgba(255,255,255,0.6); font-size: 0.85em;">— ${s.count}회 우위</span></li>`
+  ).join('');
+
+  // 최근 항목
+  const recentHtml = recent.slice(0, 10).map((e: any) => {
+    const date = new Date(e.timestamp).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    const color = rankColors[e.ranking] || '#888';
+    return `<tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+      <td style="padding: 0.4rem; font-size: 0.78rem; color: rgba(255,255,255,0.7);">${date}</td>
+      <td style="padding: 0.4rem; font-size: 0.82rem;">${e.keyword.slice(0, 20)}${e.keyword.length > 20 ? '…' : ''}</td>
+      <td style="padding: 0.4rem; text-align: right; font-weight: 700; color: ${color};">${e.ourFinalScore}</td>
+      <td style="padding: 0.4rem; text-align: right; color: rgba(255,255,255,0.7);">${e.serpAvgFinalScore}</td>
+      <td style="padding: 0.4rem; text-align: right; font-size: 0.78rem; color: ${e.ourFinalScore - e.serpAvgFinalScore >= 0 ? '#4ade80' : '#fbbf24'};">${e.ourFinalScore - e.serpAvgFinalScore >= 0 ? '+' : ''}${e.ourFinalScore - e.serpAvgFinalScore}</td>
+    </tr>`;
+  }).join('');
+
+  content.innerHTML = `
+    <!-- 평균 점수 비교 -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; margin-bottom: 1.2rem;">
+      <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 0.8rem; text-align: center;">
+        <div style="font-size: 0.78rem; color: rgba(255,255,255,0.6);">내 글 평균</div>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #D4AF37; margin: 0.2rem 0;">${ourScore}</div>
+        <div style="font-size: 0.72rem; color: rgba(255,255,255,0.5);">${stats.totalEntries}건 누적</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.8rem; text-align: center;">
+        <div style="font-size: 0.78rem; color: rgba(255,255,255,0.6);">상위 노출 평균</div>
+        <div style="font-size: 1.8rem; font-weight: 800; color: rgba(255,255,255,0.85); margin: 0.2rem 0;">${serpScore}</div>
+        <div style="font-size: 0.72rem; color: rgba(255,255,255,0.5);">SERP baseline</div>
+      </div>
+      <div style="background: ${gapColor}1a; border: 1px solid ${gapColor}; border-radius: 8px; padding: 0.8rem; text-align: center;">
+        <div style="font-size: 0.78rem; color: rgba(255,255,255,0.6);">평균 격차</div>
+        <div style="font-size: 1.8rem; font-weight: 800; color: ${gapColor}; margin: 0.2rem 0;">${gap >= 0 ? '+' : ''}${gap}</div>
+        <div style="font-size: 0.72rem; color: rgba(255,255,255,0.7);">${gapIcon} ${gap >= 5 ? '강한 우위' : gap >= -3 ? '근접' : gap >= -15 ? '개선 권장' : '시급 보완'}</div>
+      </div>
+    </div>
+
+    <!-- ranking 분포 -->
+    <h4 style="margin: 1rem 0 0.6rem 0; color: #D4AF37; font-size: 0.9rem;">📊 SERP 순위 분포 (전체 ${stats.totalEntries}건)</h4>
+    <div style="background: rgba(0,0,0,0.2); padding: 0.8rem; border-radius: 6px; margin-bottom: 1.2rem;">
+      ${rankBarHtml}
+    </div>
+
+    <!-- 미달 신호 + 강점 신호 (병렬) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+      ${missingHtml ? `<div>
+        <h4 style="margin: 0 0 0.4rem 0; color: #fbbf24; font-size: 0.9rem;">⚠️ 자주 미달하는 신호 top 5</h4>
+        <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.85rem;">${missingHtml}</ul>
+      </div>` : ''}
+      ${strengthHtml ? `<div>
+        <h4 style="margin: 0 0 0.4rem 0; color: #4ade80; font-size: 0.9rem;">💪 자주 우위인 신호 top 5</h4>
+        <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.85rem;">${strengthHtml}</ul>
+      </div>` : ''}
+    </div>
+
+    <!-- 최근 항목 테이블 -->
+    ${recentHtml ? `<h4 style="margin: 1rem 0 0.4rem 0; color: rgba(255,255,255,0.8); font-size: 0.9rem;">🕓 최근 10건</h4>
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+      <thead>
+        <tr style="border-bottom: 2px solid rgba(212,175,55,0.3); color: rgba(255,255,255,0.6); font-size: 0.78rem;">
+          <th style="padding: 0.4rem; text-align: left;">시간</th>
+          <th style="padding: 0.4rem; text-align: left;">키워드</th>
+          <th style="padding: 0.4rem; text-align: right;">내 점수</th>
+          <th style="padding: 0.4rem; text-align: right;">상위 평균</th>
+          <th style="padding: 0.4rem; text-align: right;">격차</th>
+        </tr>
+      </thead>
+      <tbody>${recentHtml}</tbody>
+    </table>` : ''}
+
+    <p style="margin-top: 1rem; font-size: 0.72rem; color: rgba(255,255,255,0.4); text-align: center;">⚙️ 실측 데이터 — 환경설정 "자동 SERP 비교" ON 시 글 생성마다 자동 누적</p>
+  `;
+}
 
 // ✅ [v2.10.188 Phase 3.7.1] 자동 SERP 결과 알림 카드 표시
 //   글 생성 완료 후 자동 비교가 끝났을 때 사용자에게 *즉시* 결과 알림

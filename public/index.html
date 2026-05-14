@@ -1770,8 +1770,13 @@
                 <!-- ✅ [v2.10.189] 키워드 분석 서브탭 숨김 — LEWORD 외부 툴이 더 정확 (중복 제거) -->
                 <div
                     style="display: flex; gap: 0.5rem; margin-bottom: 2rem; background: var(--bg-tertiary); padding: 0.5rem; border-radius: var(--radius-lg); flex-wrap: wrap;">
+                    <!-- ✅ [v2.10.191 Phase 3.8.3] SERP 추이 서브탭 (실측 누적 데이터) -->
+                    <button type="button" class="analytics-subtab active" data-subtab="serp-history"
+                        style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: linear-gradient(135deg, #D4AF37, #B8860B); color: #1a1a1a; cursor: pointer; font-weight: 700; transition: all 0.2s;">
+                        📊 SERP 추이
+                    </button>
                     <button type="button" class="analytics-subtab" data-subtab="competitor"
-                        style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: var(--accent-primary); color: white; cursor: pointer; font-weight: 600; transition: all 0.2s;">
+                        style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: transparent; color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all 0.2s;">
                         🏆 경쟁 분석
                     </button>
                     <button type="button" class="analytics-subtab" data-subtab="title-ab"
@@ -1782,6 +1787,31 @@
                         style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: transparent; color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all 0.2s;">
                         📈 성과 추적
                     </button>
+                </div>
+
+                <!-- ✅ [v2.10.191 Phase 3.8.3] SERP 추이 서브패널 -->
+                <div id="subtab-serp-history" class="analytics-subpanel" style="display: block;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3 style="margin: 0; color: var(--text-strong); display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📊</span> 내 글 SERP 실측 추이
+                        </h3>
+                        <div style="display: flex; gap: 0.4rem;">
+                            <button type="button" id="serp-history-refresh-btn"
+                                style="padding: 0.4rem 0.9rem; background: linear-gradient(135deg, #D4AF37, #B8860B); color: #1a1a1a; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.8rem;">
+                                🔄 새로고침
+                            </button>
+                            <button type="button" id="serp-history-clear-btn"
+                                style="padding: 0.4rem 0.9rem; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem;">
+                                🗑️ 초기화
+                            </button>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">
+                        글 생성 시 자동 SERP 비교 결과가 누적 저장됩니다. 추정 없이 <strong>실측 데이터</strong>로 자기 글들의 추이 확인.
+                    </p>
+                    <div id="serp-history-content" style="background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; padding: 1.2rem; min-height: 200px;">
+                        <p style="text-align: center; color: var(--text-muted); padding: 2rem 0;">⏳ 로딩 중...</p>
+                    </div>
                 </div>
 
                 <!-- LEWORD redirect 카드 (기존 키워드 분석 자리) -->
