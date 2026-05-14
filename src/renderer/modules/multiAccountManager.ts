@@ -4193,10 +4193,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initMultiAccountPublishModal();
   initMainAccountSelector();
 
-  // ✅ [v2.10.202] 글로벌 이벤트 위임 fallback — initUnifiedTab race condition 회피
-  //   ma-add-account-inline 직접 핸들러(renderer.ts:5306, initUnifiedTab 안)가
-  //   async fire-and-forget 흐름으로 미등록될 가능성 → body 레벨 위임으로 안전망
-  //   main-add-account-btn도 동일하게 보호
+  // ✅ [v2.10.204] 글로벌 이벤트 위임 + *직접 element 조회* (클로저 race condition 차단)
+  //   v2.10.202: window.openAccountEditModal 호출 — 클로저로 잡힌 accountEditModal null이면 silent fail
+  //   v2.10.204: ma-account-edit-modal을 *클릭 시점에* 직접 조회 + 표시 — 클로저 의존 0
+  //   사용자 보고: v2.10.203 후에도 main-add-account-btn 클릭 무반응 → 클로저 silent fail 확정
   document.body.addEventListener('click', (e) => {
     const target = e.target as HTMLElement | null;
     if (!target) return;
@@ -4206,7 +4206,30 @@ document.addEventListener('DOMContentLoaded', () => {
       // 직접 핸들러가 동작했는지 100ms 윈도우 체크 — 정상 동작 시 fallback skip
       const lastDirect = (btn as any).__lastDirectClick;
       if (lastDirect && Date.now() - lastDirect < 100) return;
-      console.warn(`[MultiAccount] ⚠️ ${btn.id} 직접 핸들러 미동작 → 위임 fallback 실행`);
+      console.log(`[MultiAccount] 🔘 ${btn.id} 클릭 → 계정 편집 모달 열기`);
+
+      // ✅ 가장 확실한 방법: ma-account-edit-modal 직접 조회 + 표시
+      //   클로저 의존 X, 위임 fallback의 fallback (3중 안전망)
+      const accountEditModal = document.getElementById('ma-account-edit-modal');
+      if (accountEditModal) {
+        // 신규 계정 입력 폼 초기화 (편집 모드 X)
+        const titleEl = document.getElementById('ma-edit-title');
+        if (titleEl) titleEl.textContent = '새 계정 추가';
+        const accountIdInput = document.getElementById('ma-edit-account-id') as HTMLInputElement | null;
+        if (accountIdInput) accountIdInput.value = '';
+        const inputIds = ['ma-edit-name', 'ma-edit-blog-id', 'ma-edit-naver-id', 'ma-edit-naver-pw'];
+        for (const id of inputIds) {
+          const el = document.getElementById(id) as HTMLInputElement | null;
+          if (el) el.value = '';
+        }
+        const deleteBtn = document.getElementById('ma-delete-account-btn');
+        if (deleteBtn) deleteBtn.style.display = 'none';
+        accountEditModal.style.display = 'flex';
+        accountEditModal.setAttribute('aria-hidden', 'false');
+        return;
+      }
+
+      // 모달 element 없으면 마지막 fallback: openAccountEditModal 함수 호출
       if (typeof (window as any).openAccountEditModal === 'function') {
         (window as any).openAccountEditModal();
       } else {
@@ -4214,6 +4237,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (multiAccountModal) {
           multiAccountModal.style.display = 'flex';
           multiAccountModal.setAttribute('aria-hidden', 'false');
+        } else {
+          console.error('[MultiAccount] ❌ 어떤 모달도 찾을 수 없음 (ma-account-edit-modal, multi-account-modal 모두 누락)');
+          alert('계정 추가 모달을 열 수 없습니다. 환경설정에서 다시 시도해주세요.');
         }
       }
     }
