@@ -433,6 +433,9 @@ interface AutomationAPI {
       topStrengths: Array<{ signal: string; count: number }>;
       oldestEntry: string | null;
       newestEntry: string | null;
+      difficultyDistribution: Record<string, number>;
+      smartblockCount: number;
+      difficultyDataPoints: number;
     };
     recentEntries?: Array<{
       timestamp: string;

@@ -145,6 +145,36 @@ describe('computeStats', () => {
     expect(stats.topMissingSignals[0].count).toBe(3);
   });
 
+  it('Phase 3.14 — difficulty 분포 누적 + smartblock 카운트', () => {
+    const entries = [
+      makeEntry({ difficultyTier: 'easy', hasSmartblock: false }),
+      makeEntry({ difficultyTier: 'easy', hasSmartblock: false }),
+      makeEntry({ difficultyTier: 'medium', hasSmartblock: true }),
+      makeEntry({ difficultyTier: 'hard', hasSmartblock: true }),
+      makeEntry({ difficultyTier: 'expert', hasSmartblock: true }),
+      makeEntry({ /* difficulty 없음 */ }),
+    ];
+    const stats = computeStats(entries);
+    expect(stats.difficultyDistribution.easy).toBe(2);
+    expect(stats.difficultyDistribution.medium).toBe(1);
+    expect(stats.difficultyDistribution.hard).toBe(1);
+    expect(stats.difficultyDistribution.expert).toBe(1);
+    expect(stats.difficultyDataPoints).toBe(5); // 6개 중 5개 difficulty 있음
+    expect(stats.smartblockCount).toBe(3);
+  });
+
+  it('difficulty 없는 history는 difficultyDataPoints=0', () => {
+    const entries = [
+      makeEntry(),
+      makeEntry(),
+      makeEntry(),
+    ];
+    const stats = computeStats(entries);
+    expect(stats.difficultyDataPoints).toBe(0);
+    expect(stats.difficultyDistribution).toEqual({});
+    expect(stats.smartblockCount).toBe(0);
+  });
+
   it('topStrengths — 가장 자주 강점인 신호 추출', () => {
     const entries = [
       makeEntry({ strengths: ['안전성 우위 — A'] }),

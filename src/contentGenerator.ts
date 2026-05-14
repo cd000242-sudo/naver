@@ -7890,6 +7890,10 @@ export async function generateStructuredContent(
                     ranking: _bench.ranking,
                     topPriorityFix: _bench.topPriorityFix,
                     strengths: _bench.strengths,
+                    // ✅ [v2.10.197 Phase 3.14] 난이도 정보 동봉 (history 분석용)
+                    difficultyTier: _unifiedReport.difficulty.tier,
+                    hasSmartblock: _unifiedReport.difficulty.hasSmartblock,
+                    influencerRatio: _unifiedReport.difficulty.influencerRatio,
                   });
                 } catch { /* history 저장 실패는 silent (정상 흐름 유지) */ }
               }

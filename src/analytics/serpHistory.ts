@@ -28,6 +28,10 @@ export interface SerpHistoryEntry {
   readonly ranking: string;        // above_median | near_median | below_median | below_25th
   readonly topPriorityFix: readonly string[];
   readonly strengths: readonly string[];
+  // ✅ [v2.10.197 Phase 3.14] 키워드 진입 난이도 (v2.10.195+ unifiedSerpProbe)
+  readonly difficultyTier?: 'easy' | 'medium' | 'hard' | 'expert';
+  readonly hasSmartblock?: boolean;
+  readonly influencerRatio?: number; // 0~1
 }
 
 export interface SerpHistoryStats {
@@ -40,6 +44,10 @@ export interface SerpHistoryStats {
   readonly topStrengths: ReadonlyArray<{ signal: string; count: number }>;
   readonly oldestEntry: string | null;
   readonly newestEntry: string | null;
+  // ✅ [v2.10.197 Phase 3.14] 누적 난이도 분포
+  readonly difficultyDistribution: Readonly<Record<string, number>>; // easy/medium/hard/expert
+  readonly smartblockCount: number;       // 스마트블록 노출 키워드 누적 카운트
+  readonly difficultyDataPoints: number;  // 난이도 데이터 있는 항목 수
 }
 
 const DEFAULT_MAX_ENTRIES = 200;
@@ -125,6 +133,9 @@ export function computeStats(entries: SerpHistoryEntry[]): SerpHistoryStats {
       topStrengths: [],
       oldestEntry: null,
       newestEntry: null,
+      difficultyDistribution: {},
+      smartblockCount: 0,
+      difficultyDataPoints: 0,
     };
   }
 
@@ -133,6 +144,10 @@ export function computeStats(entries: SerpHistoryEntry[]): SerpHistoryStats {
   const rankCount: Record<string, number> = {};
   const missingCount: Record<string, number> = {};
   const strengthCount: Record<string, number> = {};
+  // ✅ [v2.10.197] 난이도 누적
+  const difficultyCount: Record<string, number> = {};
+  let smartblockCount = 0;
+  let difficultyDataPoints = 0;
 
   for (const e of entries) {
     finalSum += e.ourFinalScore;
@@ -146,6 +161,11 @@ export function computeStats(entries: SerpHistoryEntry[]): SerpHistoryStats {
       const sig = extractSignalName(str);
       strengthCount[sig] = (strengthCount[sig] ?? 0) + 1;
     }
+    if (e.difficultyTier) {
+      difficultyCount[e.difficultyTier] = (difficultyCount[e.difficultyTier] ?? 0) + 1;
+      difficultyDataPoints++;
+    }
+    if (e.hasSmartblock) smartblockCount++;
   }
 
   const sortedTimestamps = entries
@@ -172,6 +192,9 @@ export function computeStats(entries: SerpHistoryEntry[]): SerpHistoryStats {
     topStrengths,
     oldestEntry: sortedTimestamps[0] ?? null,
     newestEntry: sortedTimestamps[sortedTimestamps.length - 1] ?? null,
+    difficultyDistribution: difficultyCount,
+    smartblockCount,
+    difficultyDataPoints,
   };
 }
 

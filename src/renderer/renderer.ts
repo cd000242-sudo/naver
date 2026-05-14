@@ -9693,6 +9693,53 @@ function renderSerpHistoryContent(content: HTMLElement, stats: any, recent: any[
       `;
     })()}
 
+    ${(() => {
+      // ✅ [v2.10.197 Phase 3.14] 누적 난이도 분포 카드
+      const diffData = stats.difficultyDataPoints || 0;
+      if (diffData === 0) return '';
+      const diff = stats.difficultyDistribution || {};
+      const diffColors: Record<string, string> = {
+        easy: '#4ade80', medium: '#fbbf24', hard: '#f97316', expert: '#ef4444',
+      };
+      const diffLabels: Record<string, string> = {
+        easy: '🟢 진입 쉬움', medium: '🟡 중간', hard: '🟠 어려움', expert: '🔴 인플루언서 영역',
+      };
+      const tiers = ['easy', 'medium', 'hard', 'expert'];
+      const totalDiff = tiers.reduce((sum, t) => sum + (diff[t] || 0), 0);
+      if (totalDiff === 0) return '';
+      const expertPct = Math.round(((diff.expert || 0) / totalDiff) * 100);
+      const hardPct = Math.round(((diff.hard || 0) / totalDiff) * 100);
+      const warnMsg = expertPct >= 30
+        ? '🔴 expert 키워드 비중 높음 — 일반 블로그 노출 한계'
+        : (hardPct + expertPct) >= 50
+          ? '🟠 어려운 키워드 다수 — 강한 신호 필요'
+          : (diff.easy || 0) >= totalDiff * 0.5
+            ? '🟢 진입 쉬운 키워드 위주 — 안정적'
+            : '🟡 다양한 난이도 분포';
+      const barsHtml = tiers.filter(t => diff[t] > 0).map(t => {
+        const count = diff[t] || 0;
+        const pct = Math.round((count / totalDiff) * 100);
+        return `<div style="display: flex; align-items: center; gap: 0.6rem; margin: 0.25rem 0; font-size: 0.82rem;">
+          <span style="min-width: 130px; color: ${diffColors[t]};">${diffLabels[t]}</span>
+          <div style="flex: 1; background: rgba(255,255,255,0.05); border-radius: 4px; height: 14px; overflow: hidden;">
+            <div style="background: ${diffColors[t]}; height: 100%; width: ${pct}%; transition: width 0.4s;"></div>
+          </div>
+          <span style="min-width: 60px; text-align: right; color: rgba(255,255,255,0.8);">${count}건 (${pct}%)</span>
+        </div>`;
+      }).join('');
+      const smartblockNote = stats.smartblockCount > 0
+        ? `<div style="margin-top: 0.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.6);">⚡ AI 스마트블록 노출 키워드: ${stats.smartblockCount}건</div>`
+        : '';
+      return `
+        <div style="background: rgba(0,0,0,0.2); padding: 0.9rem; border-radius: 6px; margin-bottom: 1.2rem; border: 1px solid rgba(212, 175, 55, 0.3);">
+          <h4 style="margin: 0 0 0.6rem 0; color: #D4AF37; font-size: 0.9rem;">🎯 키워드 진입 난이도 분포 (${diffData}건)</h4>
+          ${barsHtml}
+          <div style="margin-top: 0.6rem; padding: 0.4rem 0.6rem; background: rgba(255,255,255,0.04); border-radius: 4px; font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.85);">${warnMsg}</div>
+          ${smartblockNote}
+        </div>
+      `;
+    })()}
+
     <!-- ranking 분포 -->
     <h4 style="margin: 1rem 0 0.6rem 0; color: #D4AF37; font-size: 0.9rem;">📊 SERP 순위 분포 (전체 ${stats.totalEntries}건)</h4>
     <div style="background: rgba(0,0,0,0.2); padding: 0.8rem; border-radius: 6px; margin-bottom: 1.2rem;">
