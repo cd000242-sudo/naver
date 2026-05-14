@@ -168,18 +168,29 @@ export function evaluateSeo(input: EvaluationInput): SubScore {
   total += metaScore;
 
   // 7. 숫자/리스트 신호 (10점)
+  // ✅ [v2.10.182 Phase 2.5.1] 2026 네이버 알고리즘 대응 — *구체 수치(단위 포함)* 가산점
+  //   AI는 구체 수치를 "검증 가능한 정보"로 분류 (네이버 DIA+ 2026)
+  //   예: "10~15분", "300g", "3만원", "12.5%" — 단순 숫자 보다 *훨씬 강한* SEO 신호
   const numberCount = (body.match(/\d+/g) ?? []).length;
   const listCount = (body.match(/^[\s•·\-*]?\s*\d+[.)]/gm) ?? []).length;
+  // 구체 수치 (단위 포함) — 시간/무게/가격/비율/수량 단위
+  const concreteNumberPattern = /\d+(?:[.,]\d+)?(?:~\d+(?:[.,]\d+)?)?\s*(?:분|초|시간|일|주|개월|년|kg|g|cm|mm|m|km|ml|L|원|만원|천원|%|배|회|개|명|인분|평|위|등)/g;
+  const concreteCount = (body.match(concreteNumberPattern) ?? []).length;
   let listScore = 0;
-  if (numberCount >= 5 && listCount >= 2) listScore = 10;
-  else if (numberCount >= 3) listScore = 7;
-  else if (numberCount >= 1) listScore = 5;
+  // 구체 수치 3개+ + 리스트 1개+ → 10점 만점
+  if (concreteCount >= 3 && listCount >= 1) listScore = 10;
+  else if (concreteCount >= 3) listScore = 9;       // 구체 수치만 강해도 우대
+  else if (numberCount >= 5 && listCount >= 2) listScore = 8;
+  else if (concreteCount >= 1) listScore = 7;
+  else if (numberCount >= 3) listScore = 5;
+  else if (numberCount >= 1) listScore = 3;
   else {
-    listScore = 2;
-    issues.push('숫자/리스트 없음 — SEO 신호 약함');
-    suggestions.push('구체 수치 (예: 3가지/5단계) + 리스트 1~2개 추가');
+    listScore = 1;
+    issues.push('숫자/구체 수치 없음 — 2026 네이버 알고리즘 핵심 SEO 신호 부재');
+    suggestions.push('구체 수치 (단위 포함) 추가: "10~15분", "300g", "3만원", "12.5%" 같은 형태');
   }
   details.numbersLists = listScore;
+  details.concreteNumberCount = concreteCount;
   total += listScore;
 
   return {

@@ -140,6 +140,59 @@ describe('qualityEvaluator — Phase 1 통합 평가', () => {
     expect(result.safetyScore.details.fidelity).toBeUndefined();
   });
 
+  it('Phase 2.5.1 — 구체 수치(단위 포함)는 일반 숫자보다 높은 SEO 점수', () => {
+    const baseInput = {
+      title: '무선 충전기 비교',
+      headings: [{ title: 'A', content: '' }, { title: 'B', content: '' }],
+      primaryKeyword: '무선 충전기',
+      mode: 'seo' as const,
+    };
+    const withConcrete = evaluate({
+      ...baseInput,
+      body: '무선 충전기를 30분 충전했더니 5000mAh 배터리가 80% 찼어요. 가격은 3만원대이고 무게 200g 정도입니다. 한 달 써본 결과 만족도 95%입니다.',
+    });
+    const withRawNumbers = evaluate({
+      ...baseInput,
+      body: '무선 충전기를 충전했더니 30 5000 80 3 200 1 95 같은 숫자가 많이 나옵니다. 어느 정도 충전이 되었습니다.',
+    });
+    // 구체 수치가 일반 숫자보다 높은 점수 (또는 동등)
+    expect(withConcrete.modeScore.details.concreteNumberCount).toBeGreaterThan(0);
+    expect(withConcrete.modeScore.details.numbersLists).toBeGreaterThanOrEqual(withRawNumbers.modeScore.details.numbersLists);
+  });
+
+  it('Phase 2.5.2 — AI 도입부 클리셰는 humanlike 점수 차감', () => {
+    const cleanInput: EvaluationInput = {
+      body: '솔직히 처음엔 의심했어요. 한 달 써보니 진짜 좋더라고요. 막상 받아보니 디자인도 깔끔하고 가벼웠어요. 1500g 정도라 들고다니기 편해요. 의외로 배터리도 오래가서 만족스러워요. 사실은 가격이 좀 부담이었는데 막상 써보니 가성비 좋네요.',
+      title: '한 달 후기',
+      mode: 'homefeed' as const,
+    };
+    const cliche: EvaluationInput = {
+      body: '안녕하세요. 오늘은 무선 충전기에 대해 소개해드리겠습니다. 이번 포스팅에서는 사용 방법을 안내해드리겠습니다. 많은 분들이 궁금해하시는 부분을 살펴보겠습니다. 결론적으로 말하자면 매우 좋은 제품입니다. 도움이 되셨길 바랍니다.',
+      title: '무선 충전기 소개',
+      mode: 'homefeed' as const,
+    };
+    const c1 = evaluate(cleanInput);
+    const c2 = evaluate(cliche);
+    expect(c2.humanlikeScore.score).toBeLessThan(c1.humanlikeScore.score);
+    expect(c2.humanlikeScore.issues.some(i => i.includes('AI 클리셰'))).toBe(true);
+  });
+
+  it('Phase 2.5.3 — 직접 경험 표현은 humanlike 가산점', () => {
+    const baseInput = {
+      title: '제품 후기',
+      mode: 'homefeed' as const,
+    };
+    const noExp = evaluate({
+      ...baseInput,
+      body: '이 제품은 가격이 적당하고 디자인이 좋습니다. 성능도 좋고 사용감이 부드럽습니다. 무게는 적당하고 휴대성도 괜찮습니다.',
+    });
+    const withExp = evaluate({
+      ...baseInput,
+      body: '제가 직접 한 달 써봤는데 실제로 만족스러웠어요. 제가 찍은 사진 보면 디자인이 깔끔하더라고요. 실사용 한 결과 가성비 진짜 좋아요. 직접 가봤더니 매장 직원도 친절했어요.',
+    });
+    expect(withExp.humanlikeScore.details.directExperience).toBeGreaterThan(noExp.humanlikeScore.details.directExperience);
+  });
+
   it('Phase 2.1 — safety < 50 시 decision regenerate', () => {
     // 환각 의심 시나리오: 원본은 긍정(기부/선행) → 결과는 부정(폭로/논란/위선)
     const rawText = `정준하는 매달 1000만원씩 봉사단체에 기부하고 있다. 진심으로 선한 영향력을 행사하는 그의 모습이 감동적이다. 헌신적인 봉사로 많은 이들에게 희망을 주고 있으며, 그 의미는 매우 깊다. 평소 그의 진정성은 잘 알려져 있고, 친구들도 그가 정말 따뜻한 사람이라고 입을 모은다.`.repeat(3);
