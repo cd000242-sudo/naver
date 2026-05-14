@@ -1,0 +1,182 @@
+/**
+ * serpHistory 단위 테스트
+ *
+ * 누적 저장 + 통계 산출 — 실측 데이터 처리.
+ * 네트워크 호출 0, 임시 디렉토리 사용.
+ */
+
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as os from 'os';
+import {
+  loadHistory,
+  appendHistory,
+  computeStats,
+  getRecentEntries,
+  clearHistory,
+  type SerpHistoryEntry,
+} from '../analytics/serpHistory';
+
+let tmpDir: string;
+
+beforeEach(() => {
+  tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'serp-history-test-'));
+});
+
+afterEach(() => {
+  try {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  } catch { /* ignore */ }
+});
+
+function makeEntry(overrides: Partial<SerpHistoryEntry> = {}): SerpHistoryEntry {
+  return {
+    timestamp: '2026-05-15T10:00:00.000Z',
+    keyword: '무선 충전기',
+    mode: 'seo',
+    ourFinalScore: 70,
+    serpAvgFinalScore: 75,
+    serpMedianFinalScore: 74,
+    ranking: 'near_median',
+    topPriorityFix: ['사람다움 부족 — 우리 50 vs 상위 70'],
+    strengths: ['안전성 우위 — 우리 90 vs 상위 80'],
+    ...overrides,
+  };
+}
+
+describe('loadHistory', () => {
+  it('파일 없으면 빈 배열', () => {
+    expect(loadHistory(tmpDir)).toEqual([]);
+  });
+
+  it('잘못된 JSON이면 빈 배열', () => {
+    fs.writeFileSync(path.join(tmpDir, 'serp-benchmark-history.json'), 'invalid json');
+    expect(loadHistory(tmpDir)).toEqual([]);
+  });
+
+  it('JSON 배열이 아니면 빈 배열', () => {
+    fs.writeFileSync(path.join(tmpDir, 'serp-benchmark-history.json'), '{}');
+    expect(loadHistory(tmpDir)).toEqual([]);
+  });
+
+  it('유효한 항목만 필터', () => {
+    const entries = [makeEntry(), { broken: true }];
+    fs.writeFileSync(path.join(tmpDir, 'serp-benchmark-history.json'), JSON.stringify(entries));
+    expect(loadHistory(tmpDir).length).toBe(1);
+  });
+});
+
+describe('appendHistory', () => {
+  it('새 항목 정상 저장', () => {
+    appendHistory(tmpDir, makeEntry());
+    expect(loadHistory(tmpDir).length).toBe(1);
+  });
+
+  it('여러 항목 누적', () => {
+    appendHistory(tmpDir, makeEntry({ keyword: 'A' }));
+    appendHistory(tmpDir, makeEntry({ keyword: 'B' }));
+    appendHistory(tmpDir, makeEntry({ keyword: 'C' }));
+    const entries = loadHistory(tmpDir);
+    expect(entries.length).toBe(3);
+    expect(entries.map(e => e.keyword)).toEqual(['A', 'B', 'C']);
+  });
+
+  it('maxEntries 초과 시 오래된 것 자동 삭제', () => {
+    for (let i = 0; i < 5; i++) {
+      appendHistory(tmpDir, makeEntry({ keyword: `K${i}` }), 3);
+    }
+    const entries = loadHistory(tmpDir);
+    expect(entries.length).toBe(3);
+    expect(entries.map(e => e.keyword)).toEqual(['K2', 'K3', 'K4']); // 최근 3개만
+  });
+
+  it('userDataPath 없으면 자동 생성', () => {
+    const newDir = path.join(tmpDir, 'nested', 'dir');
+    appendHistory(newDir, makeEntry());
+    expect(loadHistory(newDir).length).toBe(1);
+  });
+});
+
+describe('computeStats', () => {
+  it('빈 history는 0 점수', () => {
+    const stats = computeStats([]);
+    expect(stats.totalEntries).toBe(0);
+    expect(stats.avgFinalScore).toBe(0);
+    expect(stats.topMissingSignals).toEqual([]);
+  });
+
+  it('평균 finalScore + serp 점수 정확', () => {
+    const entries = [
+      makeEntry({ ourFinalScore: 60, serpAvgFinalScore: 70 }),
+      makeEntry({ ourFinalScore: 80, serpAvgFinalScore: 70 }),
+      makeEntry({ ourFinalScore: 70, serpAvgFinalScore: 70 }),
+    ];
+    const stats = computeStats(entries);
+    expect(stats.totalEntries).toBe(3);
+    expect(stats.avgFinalScore).toBe(70);
+    expect(stats.avgSerpScore).toBe(70);
+    expect(stats.avgGap).toBe(0);
+  });
+
+  it('ranking 분포 계산', () => {
+    const entries = [
+      makeEntry({ ranking: 'above_median' }),
+      makeEntry({ ranking: 'below_median' }),
+      makeEntry({ ranking: 'below_median' }),
+      makeEntry({ ranking: 'below_25th' }),
+    ];
+    const stats = computeStats(entries);
+    expect(stats.rankingDistribution.above_median).toBe(1);
+    expect(stats.rankingDistribution.below_median).toBe(2);
+    expect(stats.rankingDistribution.below_25th).toBe(1);
+  });
+
+  it('topMissingSignals — 가장 자주 미달하는 신호 추출', () => {
+    const entries = [
+      makeEntry({ topPriorityFix: ['사람다움 부족 — A', '구체 수치 부족 — B'] }),
+      makeEntry({ topPriorityFix: ['사람다움 부족 — C', '안전성 부족 — D'] }),
+      makeEntry({ topPriorityFix: ['사람다움 부족 — E'] }),
+    ];
+    const stats = computeStats(entries);
+    expect(stats.topMissingSignals[0].signal).toBe('사람다움');
+    expect(stats.topMissingSignals[0].count).toBe(3);
+  });
+
+  it('topStrengths — 가장 자주 강점인 신호 추출', () => {
+    const entries = [
+      makeEntry({ strengths: ['안전성 우위 — A'] }),
+      makeEntry({ strengths: ['안전성 우위 — B', '구체 수치 우위 — C'] }),
+    ];
+    const stats = computeStats(entries);
+    expect(stats.topStrengths[0].signal).toBe('안전성');
+    expect(stats.topStrengths[0].count).toBe(2);
+  });
+});
+
+describe('getRecentEntries', () => {
+  it('시간 역순 정렬 + N개 제한', () => {
+    const entries = [
+      makeEntry({ timestamp: '2026-05-15T10:00:00.000Z', keyword: 'A' }),
+      makeEntry({ timestamp: '2026-05-15T12:00:00.000Z', keyword: 'B' }),
+      makeEntry({ timestamp: '2026-05-15T11:00:00.000Z', keyword: 'C' }),
+    ];
+    const recent = getRecentEntries(entries, 2);
+    expect(recent.length).toBe(2);
+    expect(recent[0].keyword).toBe('B'); // 최신
+    expect(recent[1].keyword).toBe('C');
+  });
+});
+
+describe('clearHistory', () => {
+  it('파일 삭제', () => {
+    appendHistory(tmpDir, makeEntry());
+    expect(loadHistory(tmpDir).length).toBe(1);
+    clearHistory(tmpDir);
+    expect(loadHistory(tmpDir).length).toBe(0);
+  });
+
+  it('파일 없어도 OK (true 반환)', () => {
+    expect(clearHistory(tmpDir)).toBe(true);
+  });
+});

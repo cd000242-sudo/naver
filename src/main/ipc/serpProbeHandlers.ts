@@ -7,11 +7,12 @@
 //
 // API 키는 config에서 자동 로드 (사용자 환경설정에 이미 있는 naverSearchClientId/Secret 활용).
 
-import { ipcMain } from 'electron';
+import { ipcMain, app } from 'electron';
 import { loadConfig } from '../../configManager.js';
 import { probeSerp, type SerpProbeReport } from '../../analytics/serpProbe.js';
 import { analyzeBenchmark, type BenchmarkReport } from '../../analytics/benchmarkAnalyzer.js';
 import { evaluate as evaluateQuality, type EvaluationInput, type Mode } from '../../content/qualityEvaluator.js';
+import { loadHistory, computeStats, getRecentEntries, clearHistory, type SerpHistoryEntry, type SerpHistoryStats } from '../../analytics/serpHistory.js';
 
 export interface ProbeRequest {
   keyword: string;
@@ -124,5 +125,34 @@ export function registerSerpProbeHandlers(): void {
     }
   });
 
-  console.log('[IPC] SERP Probe handlers registered (serp:probe, serp:benchmark)');
+  // 3. history:stats — 누적 SERP 통계 (실측 추이 확인용)
+  ipcMain.handle('serp:historyStats', async (): Promise<{
+    ok: boolean;
+    stats?: SerpHistoryStats;
+    recentEntries?: SerpHistoryEntry[];
+    error?: string;
+  }> => {
+    try {
+      const userDataPath = app.getPath('userData');
+      const history = loadHistory(userDataPath);
+      const stats = computeStats(history);
+      const recentEntries = getRecentEntries(history, 30);
+      return { ok: true, stats, recentEntries };
+    } catch (err) {
+      return { ok: false, error: err instanceof Error ? err.message : String(err) };
+    }
+  });
+
+  // 4. history:clear — 누적 history 초기화 (사용자 명시 요청 시)
+  ipcMain.handle('serp:historyClear', async (): Promise<{ ok: boolean; error?: string }> => {
+    try {
+      const userDataPath = app.getPath('userData');
+      const ok = clearHistory(userDataPath);
+      return { ok };
+    } catch (err) {
+      return { ok: false, error: err instanceof Error ? err.message : String(err) };
+    }
+  });
+
+  console.log('[IPC] SERP Probe handlers registered (serp:probe, serp:benchmark, serp:historyStats, serp:historyClear)');
 }

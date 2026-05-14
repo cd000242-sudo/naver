@@ -7845,6 +7845,26 @@ export async function generateStructuredContent(
                     signalGapsCount: _bench.signalGaps.length,
                   };
                 }
+
+                // ✅ [v2.10.190 Phase 3.8.1] SERP 결과 누적 저장 — 실측 통계용
+                //   userData/serp-benchmark-history.json에 append (최근 200개 유지)
+                //   추정 효과 종결 — 사용자 자기 글들의 실측 추이 확인 가능
+                try {
+                  const { appendHistory } = await import('./analytics/serpHistory.js');
+                  const { app } = await import('electron');
+                  const userDataPath = app.getPath('userData');
+                  appendHistory(userDataPath, {
+                    timestamp: new Date().toISOString(),
+                    keyword: _bench.keyword,
+                    mode: _autoMode,
+                    ourFinalScore: _bench.ourFinalScore,
+                    serpAvgFinalScore: _bench.serpAvgFinalScore,
+                    serpMedianFinalScore: _bench.serpMedianFinalScore,
+                    ranking: _bench.ranking,
+                    topPriorityFix: _bench.topPriorityFix,
+                    strengths: _bench.strengths,
+                  });
+                } catch { /* history 저장 실패는 silent (정상 흐름 유지) */ }
               }
             }
           }

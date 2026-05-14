@@ -554,6 +554,22 @@ contextBridge.exposeInMainWorld('api', {
       throw new Error(`SERP benchmark 실패: ${(error as Error).message}`);
     }
   },
+  getSerpHistoryStats: async () => {
+    try {
+      return await ipcRenderer.invoke('serp:historyStats');
+    } catch (error) {
+      console.error('[Preload] SERP history stats error:', error);
+      throw new Error(`SERP history 조회 실패: ${(error as Error).message}`);
+    }
+  },
+  clearSerpHistory: async () => {
+    try {
+      return await ipcRenderer.invoke('serp:historyClear');
+    } catch (error) {
+      console.error('[Preload] SERP history clear error:', error);
+      throw new Error(`SERP history 초기화 실패: ${(error as Error).message}`);
+    }
+  },
   // 앱 환경
   getAppInfo: async (): Promise<{ isPackaged: boolean }> => {
     try {

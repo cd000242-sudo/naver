@@ -421,6 +421,33 @@ interface AutomationAPI {
     };
     error?: string;
   }>;
+  getSerpHistoryStats: () => Promise<{
+    ok: boolean;
+    stats?: {
+      totalEntries: number;
+      avgFinalScore: number;
+      avgSerpScore: number;
+      avgGap: number;
+      rankingDistribution: Record<string, number>;
+      topMissingSignals: Array<{ signal: string; count: number }>;
+      topStrengths: Array<{ signal: string; count: number }>;
+      oldestEntry: string | null;
+      newestEntry: string | null;
+    };
+    recentEntries?: Array<{
+      timestamp: string;
+      keyword: string;
+      mode: string;
+      ourFinalScore: number;
+      serpAvgFinalScore: number;
+      serpMedianFinalScore: number;
+      ranking: string;
+      topPriorityFix: string[];
+      strengths: string[];
+    }>;
+    error?: string;
+  }>;
+  clearSerpHistory: () => Promise<{ ok: boolean; error?: string }>;
   collectImagesByTitle: (title: string, sources?: string[]) => Promise<{ success: boolean; count: number; message?: string }>;
   analyzeBlogCategories: (blogId?: string) => Promise<{ success: boolean; categories?: Array<{ id: string; name: string; postCount?: number }>; message?: string; error?: string }>;
   selectFolder: (options?: { title?: string; defaultPath?: string }) => Promise<{ canceled: boolean; filePaths: string[] }>; // ✅ 폴더 선택
