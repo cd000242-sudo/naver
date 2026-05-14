@@ -13,6 +13,7 @@ import { probeSerp, type SerpProbeReport } from '../../analytics/serpProbe.js';
 import { analyzeBenchmark, type BenchmarkReport } from '../../analytics/benchmarkAnalyzer.js';
 import { evaluate as evaluateQuality, type EvaluationInput, type Mode } from '../../content/qualityEvaluator.js';
 import { loadHistory, computeStats, getRecentEntries, clearHistory, computeAdaptiveLearningImpact, type SerpHistoryEntry, type SerpHistoryStats, type AdaptiveLearningImpact } from '../../analytics/serpHistory.js';
+import { probeDynamicSerp, type DynamicSerpReport } from '../../analytics/dynamicSerpProbe.js';
 
 export interface ProbeRequest {
   keyword: string;
@@ -140,6 +141,23 @@ export function registerSerpProbeHandlers(): void {
       const recentEntries = getRecentEntries(history, 30);
       const learningImpact = computeAdaptiveLearningImpact(history);
       return { ok: true, stats, recentEntries, learningImpact };
+    } catch (err) {
+      return { ok: false, error: err instanceof Error ? err.message : String(err) };
+    }
+  });
+
+  // 5. serp:dynamicProbe — 실제 통합탭 HTML 동적 분석 (스마트블록 + 실제 노출)
+  ipcMain.handle('serp:dynamicProbe', async (_evt, req: { keyword: string; maxCards?: number }): Promise<{
+    ok: boolean;
+    report?: DynamicSerpReport;
+    error?: string;
+  }> => {
+    try {
+      if (!req?.keyword || !req.keyword.trim()) {
+        return { ok: false, error: '키워드가 필요합니다.' };
+      }
+      const report = await probeDynamicSerp(req.keyword.trim(), { maxCards: req.maxCards ?? 10 });
+      return { ok: true, report };
     } catch (err) {
       return { ok: false, error: err instanceof Error ? err.message : String(err) };
     }

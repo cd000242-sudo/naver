@@ -462,6 +462,28 @@ interface AutomationAPI {
     error?: string;
   }>;
   clearSerpHistory: () => Promise<{ ok: boolean; error?: string }>;
+  probeDynamicSerp: (req: { keyword: string; maxCards?: number }) => Promise<{
+    ok: boolean;
+    report?: {
+      keyword: string;
+      probedAt: string;
+      hasSmartblock: boolean;
+      smartblockCount: number;
+      totalCards: number;
+      influencerCount: number;
+      cards: Array<{
+        position: number;
+        title: string;
+        blogger: string;
+        url: string;
+        snippet: string;
+        isInfluencer: boolean;
+      }>;
+      fetchSuccess: boolean;
+      fetchError?: string;
+    };
+    error?: string;
+  }>;
   collectImagesByTitle: (title: string, sources?: string[]) => Promise<{ success: boolean; count: number; message?: string }>;
   analyzeBlogCategories: (blogId?: string) => Promise<{ success: boolean; categories?: Array<{ id: string; name: string; postCount?: number }>; message?: string; error?: string }>;
   selectFolder: (options?: { title?: string; defaultPath?: string }) => Promise<{ canceled: boolean; filePaths: string[] }>; // ✅ 폴더 선택

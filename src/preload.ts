@@ -570,6 +570,14 @@ contextBridge.exposeInMainWorld('api', {
       throw new Error(`SERP history 초기화 실패: ${(error as Error).message}`);
     }
   },
+  probeDynamicSerp: async (req: { keyword: string; maxCards?: number }) => {
+    try {
+      return await ipcRenderer.invoke('serp:dynamicProbe', req);
+    } catch (error) {
+      console.error('[Preload] SERP dynamic probe error:', error);
+      throw new Error(`SERP 동적 프로브 실패: ${(error as Error).message}`);
+    }
+  },
   // 앱 환경
   getAppInfo: async (): Promise<{ isPackaged: boolean }> => {
     try {
