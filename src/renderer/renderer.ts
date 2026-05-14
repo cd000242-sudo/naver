@@ -1396,7 +1396,18 @@ function updateRiskIndicators(content: StructuredContent | null): void {
   }
 
   if (riskSeoValue) {
-    riskSeoValue.textContent = `${content.quality.seoScore || 0}/100`;
+    // ✅ [v2.10.181 Phase 1.7] qualityGate finalScore + decision UI 가시화
+    //   기존: SEO 점수만 표시 (analyzeNaverScore 결과)
+    //   추가: qualityGate 통합 점수 + decision (있으면) 함께 표시
+    const _gate = (content.quality as any)?.qualityGate;
+    if (_gate && typeof _gate.finalScore === 'number') {
+      const _decisionLabel = _gate.decision === 'pass' ? '✓통과'
+        : _gate.decision === 'patch' ? '⚙수정'
+        : '↻재생성';
+      riskSeoValue.textContent = `${content.quality.seoScore || 0}/100 · 게이트 ${_gate.finalScore} (${_decisionLabel})`;
+    } else {
+      riskSeoValue.textContent = `${content.quality.seoScore || 0}/100`;
+    }
   }
 
   if (riskSummaryElement) {
