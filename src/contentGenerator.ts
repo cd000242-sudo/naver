@@ -7708,6 +7708,48 @@ export async function generateStructuredContent(
 
         console.log('[ContentGenerator] ✅ 네이버 최적화 완료');
 
+        // ✅ [v2.10.177 Phase 1 SHADOW MODE] 통합 quality gate 병행 계산 — 결정은 로그만
+        //   기존 점수와 새 게이트 동시 계산하여 차이 관찰 (1주 후 컷오버 결정)
+        try {
+          const { evaluate: evaluateQuality } = require('./content/qualityEvaluator');
+          const _modeForGate = (source.contentMode === 'homefeed' || source.contentMode === 'affiliate' || source.contentMode === 'business' || source.contentMode === 'custom')
+            ? source.contentMode
+            : 'seo';
+          const _gateResult = evaluateQuality({
+            body: optimized.bodyPlain || '',
+            title: optimized.selectedTitle || '',
+            headings: optimized.headings || [],
+            rawText: source.rawText || '',
+            primaryKeyword: getPrimaryKeywordFromSource(source),
+            mode: _modeForGate,
+            contentMode: source.contentMode,
+            toneStyle: source.toneStyle,
+            categoryHint: source.categoryHint,
+          });
+          console.log(`[QualityGate-Shadow] 🎯 finalScore=${_gateResult.finalScore} | mode=${_gateResult.modeScore.score} safety=${_gateResult.safetyScore.score} human=${_gateResult.humanlikeScore.score} | decision=${_gateResult.decision}`);
+          if (_gateResult.modeScore.issues.length > 0) {
+            console.log(`[QualityGate-Shadow] mode issues: ${_gateResult.modeScore.issues.slice(0, 2).join(' / ')}`);
+          }
+          if (_gateResult.humanlikeScore.issues.length > 0) {
+            console.log(`[QualityGate-Shadow] humanlike issues: ${_gateResult.humanlikeScore.issues.slice(0, 2).join(' / ')}`);
+          }
+          if (_gateResult.safetyScore.issues.length > 0) {
+            console.log(`[QualityGate-Shadow] safety issues: ${_gateResult.safetyScore.issues.slice(0, 2).join(' / ')}`);
+          }
+          // quality 객체에 shadow 점수 동봉 (UI 가시화는 다음 릴리즈)
+          if (optimized.quality) {
+            (optimized.quality as any).qualityGateShadow = {
+              finalScore: _gateResult.finalScore,
+              modeScore: _gateResult.modeScore.score,
+              safetyScore: _gateResult.safetyScore.score,
+              humanlikeScore: _gateResult.humanlikeScore.score,
+              decision: _gateResult.decision,
+            };
+          }
+        } catch (gateErr) {
+          console.warn('[QualityGate-Shadow] 평가 실패 (정상 흐름 유지):', (gateErr as Error)?.message);
+        }
+
         // ✅ [2026 100점] 쇼핑커넥트 모드: 금지 패턴 자동 검증
         const contentMode = source.contentMode || 'seo';
         if (contentMode === 'affiliate') {
