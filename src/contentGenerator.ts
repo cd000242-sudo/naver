@@ -19,6 +19,7 @@ import { humanizeContent, humanizeHtmlContent, analyzeAiDetectionRisk, resetHuma
 import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog, detectCategory } from './contentOptimizer.js';
 import { analyzeContentBySemantic, isLlmRubricEnabled } from './contentSemanticScoring.js';
 import { buildPersonaCard } from './authgrDefense.js';
+import { selfCritiqueAndRewrite, isSelfCritiqueEnabled } from './contentSelfCritique.js';
 import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, getGeoOverlayPrompt, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { META_CRITIQUE_PHRASES } from './content/forbiddenPhrases.js';
@@ -7590,6 +7591,22 @@ export async function generateStructuredContent(
             false,
             { skipDictInjection },
           );
+
+          // Phase 5: Self-critique 2-pass — LLM이 자기 글을 페르소나 관점에서 점검 + 부분 재작성
+          if (isSelfCritiqueEnabled({ enableSelfCritique: (source as any).enableSelfCritique })) {
+            const personaCard = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
+            const critiqued = await selfCritiqueAndRewrite(
+              optimized.bodyPlain,
+              personaCard,
+              (prompt: string) => callGemini(prompt, 0.3, 100, { useGrounding: false }),
+            );
+            if (critiqued.rewrote) {
+              console.log(`[ContentGenerator] ✍️ Self-critique 재작성 적용 (${critiqued.source})`);
+              optimized.bodyPlain = critiqued.body;
+            } else {
+              console.log(`[ContentGenerator] ✍️ Self-critique no-op (${critiqued.source})`);
+            }
+          }
         }
         if (optimized.bodyHtml) {
           optimized.bodyHtml = optimizeHtmlForNaver(optimized.bodyHtml);
