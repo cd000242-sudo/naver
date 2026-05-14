@@ -747,10 +747,11 @@ export async function initPriceInfoModal(): Promise<void> {
       console.warn('[priceInfoModal] 네이버 fact-check 토글 로드 실패:', e);
     }
 
-    // ✅ [v2.10.186 Phase 3.6] 자동 SERP 벤치마크 토글 로드 — 기본 OFF (옵트인)
+    // ✅ [v2.10.187 Phase 3.6+] 자동 SERP 벤치마크 토글 로드 — opt-out (기본 ON)
+    //   undefined(미설정)도 ON 처리. 사용자가 명시적으로 OFF 한 경우만 unchecked.
     try {
       const serpAutoEl = document.getElementById('auto-serp-benchmark') as HTMLInputElement | null;
-      if (serpAutoEl) serpAutoEl.checked = (config as any).autoSerpBenchmark === true;
+      if (serpAutoEl) serpAutoEl.checked = (config as any).autoSerpBenchmark !== false;
     } catch (e) {
       console.warn('[priceInfoModal] 자동 SERP 벤치마크 토글 로드 실패:', e);
     }

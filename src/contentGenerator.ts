@@ -7803,13 +7803,16 @@ export async function generateStructuredContent(
           }
         }
 
-        // ✅ [v2.10.186 Phase 3.6] 자동 SERP 벤치마크 — 사용자 토글 ON 시 글 생성 완료 후 실측 비교
-        //   조건: config.autoSerpBenchmark === true AND naverSearchClientId/Secret 설정됨
-        //   결과: optimized.quality.serpBenchmark 메타에 동봉 (UI 자동 표시는 다음 단계)
+        // ✅ [v2.10.187 Phase 3.6+] 자동 SERP 벤치마크 — opt-out 방식
+        //   v2.10.186까지: 기본 OFF (opt-in) → 대부분 사용자가 효과 못 봄 (사용자 지적)
+        //   v2.10.187+: 명시 false가 아니면 ON (undefined도 ON) — API 키 있을 때만 작동
+        //   사용자가 명시적으로 OFF 한 경우만 OFF. 그 외는 자동 활성화.
+        //   결과: optimized.quality.serpBenchmark 메타에 동봉
         //   실패 시: silent (정상 흐름 유지)
         try {
           const _autoCfg = await loadConfig();
-          const _autoEnabled = (_autoCfg as any).autoSerpBenchmark === true;
+          // ✅ 핵심 변경: !== false로 변경 (undefined도 ON 처리, 사용자 명시 OFF만 OFF)
+          const _autoEnabled = (_autoCfg as any).autoSerpBenchmark !== false;
           const _serpClientId = (_autoCfg as any).naverSearchClientId || (_autoCfg as any).naverDatalabClientId || '';
           const _serpSecret = (_autoCfg as any).naverSearchClientSecret || (_autoCfg as any).naverDatalabClientSecret || '';
           if (_autoEnabled && _serpClientId && _serpSecret && optimized.bodyPlain && optimized.bodyPlain.length >= 100) {
