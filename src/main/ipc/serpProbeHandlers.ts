@@ -12,7 +12,7 @@ import { loadConfig } from '../../configManager.js';
 import { probeSerp, type SerpProbeReport } from '../../analytics/serpProbe.js';
 import { analyzeBenchmark, type BenchmarkReport } from '../../analytics/benchmarkAnalyzer.js';
 import { evaluate as evaluateQuality, type EvaluationInput, type Mode } from '../../content/qualityEvaluator.js';
-import { loadHistory, computeStats, getRecentEntries, clearHistory, type SerpHistoryEntry, type SerpHistoryStats } from '../../analytics/serpHistory.js';
+import { loadHistory, computeStats, getRecentEntries, clearHistory, computeAdaptiveLearningImpact, type SerpHistoryEntry, type SerpHistoryStats, type AdaptiveLearningImpact } from '../../analytics/serpHistory.js';
 
 export interface ProbeRequest {
   keyword: string;
@@ -125,11 +125,12 @@ export function registerSerpProbeHandlers(): void {
     }
   });
 
-  // 3. history:stats — 누적 SERP 통계 (실측 추이 확인용)
+  // 3. history:stats — 누적 SERP 통계 (실측 추이 확인용) + 학습 효과
   ipcMain.handle('serp:historyStats', async (): Promise<{
     ok: boolean;
     stats?: SerpHistoryStats;
     recentEntries?: SerpHistoryEntry[];
+    learningImpact?: AdaptiveLearningImpact;
     error?: string;
   }> => {
     try {
@@ -137,7 +138,8 @@ export function registerSerpProbeHandlers(): void {
       const history = loadHistory(userDataPath);
       const stats = computeStats(history);
       const recentEntries = getRecentEntries(history, 30);
-      return { ok: true, stats, recentEntries };
+      const learningImpact = computeAdaptiveLearningImpact(history);
+      return { ok: true, stats, recentEntries, learningImpact };
     } catch (err) {
       return { ok: false, error: err instanceof Error ? err.message : String(err) };
     }

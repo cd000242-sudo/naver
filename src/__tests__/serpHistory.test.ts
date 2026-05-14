@@ -16,6 +16,7 @@ import {
   getRecentEntries,
   clearHistory,
   buildAdaptiveLearningDirective,
+  computeAdaptiveLearningImpact,
   type SerpHistoryEntry,
 } from '../analytics/serpHistory';
 
@@ -179,6 +180,99 @@ describe('clearHistory', () => {
 
   it('파일 없어도 OK (true 반환)', () => {
     expect(clearHistory(tmpDir)).toBe(true);
+  });
+});
+
+describe('computeAdaptiveLearningImpact (Phase 3.10)', () => {
+  function makeEntryAt(timestamp: string, score: number, serp: number = 70, ranking: string = 'near_median'): SerpHistoryEntry {
+    return makeEntry({ timestamp, ourFinalScore: score, serpAvgFinalScore: serp, ranking });
+  }
+
+  it('6건 미만이면 canMeasure=false', () => {
+    const entries = [
+      makeEntryAt('2026-05-15T01:00:00.000Z', 60),
+      makeEntryAt('2026-05-15T02:00:00.000Z', 65),
+      makeEntryAt('2026-05-15T03:00:00.000Z', 70),
+      makeEntryAt('2026-05-15T04:00:00.000Z', 72),
+      makeEntryAt('2026-05-15T05:00:00.000Z', 75),
+    ];
+    const impact = computeAdaptiveLearningImpact(entries);
+    expect(impact.canMeasure).toBe(false);
+    expect(impact.reason).toContain('최소 6건');
+  });
+
+  it('학습 전 평균 < 학습 후 평균 — scoreDelta 양수', () => {
+    const entries = [
+      // 학습 OFF (처음 4건): 평균 60
+      makeEntryAt('2026-05-15T01:00:00.000Z', 55, 70),
+      makeEntryAt('2026-05-15T02:00:00.000Z', 60, 70),
+      makeEntryAt('2026-05-15T03:00:00.000Z', 60, 70),
+      makeEntryAt('2026-05-15T04:00:00.000Z', 65, 70),
+      // 학습 ON (5번째~): 평균 75
+      makeEntryAt('2026-05-15T05:00:00.000Z', 75, 70),
+      makeEntryAt('2026-05-15T06:00:00.000Z', 80, 70),
+      makeEntryAt('2026-05-15T07:00:00.000Z', 70, 70),
+    ];
+    const impact = computeAdaptiveLearningImpact(entries);
+    expect(impact.canMeasure).toBe(true);
+    expect(impact.beforeCount).toBe(4);
+    expect(impact.afterCount).toBe(3);
+    expect(impact.beforeAvgScore).toBe(60);
+    expect(impact.afterAvgScore).toBe(75);
+    expect(impact.scoreDelta).toBe(15);
+  });
+
+  it('gap 개선 측정 — afterGap > beforeGap이면 양수', () => {
+    const entries = [
+      // 학습 전: 우리 60 vs SERP 70 = gap -10
+      makeEntryAt('2026-05-15T01:00:00.000Z', 60, 70),
+      makeEntryAt('2026-05-15T02:00:00.000Z', 60, 70),
+      makeEntryAt('2026-05-15T03:00:00.000Z', 60, 70),
+      makeEntryAt('2026-05-15T04:00:00.000Z', 60, 70),
+      // 학습 후: 우리 75 vs SERP 70 = gap +5
+      makeEntryAt('2026-05-15T05:00:00.000Z', 75, 70),
+      makeEntryAt('2026-05-15T06:00:00.000Z', 75, 70),
+      makeEntryAt('2026-05-15T07:00:00.000Z', 75, 70),
+    ];
+    const impact = computeAdaptiveLearningImpact(entries);
+    expect(impact.beforeAvgGap).toBe(-10);
+    expect(impact.afterAvgGap).toBe(5);
+    expect(impact.gapImprovement).toBe(15);
+  });
+
+  it('시간 역순 입력도 정렬 후 처리', () => {
+    const entries = [
+      makeEntryAt('2026-05-15T07:00:00.000Z', 80, 70),
+      makeEntryAt('2026-05-15T05:00:00.000Z', 70, 70),
+      makeEntryAt('2026-05-15T03:00:00.000Z', 60, 70),
+      makeEntryAt('2026-05-15T06:00:00.000Z', 75, 70),
+      makeEntryAt('2026-05-15T01:00:00.000Z', 50, 70),
+      makeEntryAt('2026-05-15T04:00:00.000Z', 65, 70),
+      makeEntryAt('2026-05-15T02:00:00.000Z', 55, 70),
+    ];
+    const impact = computeAdaptiveLearningImpact(entries);
+    expect(impact.canMeasure).toBe(true);
+    // 첫 4건 정렬: 50, 55, 60, 65 → 평균 57.5 → 58
+    expect(impact.beforeAvgScore).toBe(58);
+    // 5번째~: 70, 75, 80 → 평균 75
+    expect(impact.afterAvgScore).toBe(75);
+  });
+
+  it('학습 전후 ranking 분포 추적', () => {
+    const entries = [
+      makeEntryAt('2026-05-15T01:00:00.000Z', 50, 70, 'below_25th'),
+      makeEntryAt('2026-05-15T02:00:00.000Z', 55, 70, 'below_25th'),
+      makeEntryAt('2026-05-15T03:00:00.000Z', 60, 70, 'below_median'),
+      makeEntryAt('2026-05-15T04:00:00.000Z', 65, 70, 'below_median'),
+      makeEntryAt('2026-05-15T05:00:00.000Z', 75, 70, 'near_median'),
+      makeEntryAt('2026-05-15T06:00:00.000Z', 80, 70, 'above_median'),
+      makeEntryAt('2026-05-15T07:00:00.000Z', 82, 70, 'above_median'),
+    ];
+    const impact = computeAdaptiveLearningImpact(entries);
+    expect(impact.beforeRankingDist['below_25th']).toBe(2);
+    expect(impact.beforeRankingDist['below_median']).toBe(2);
+    expect(impact.afterRankingDist['near_median']).toBe(1);
+    expect(impact.afterRankingDist['above_median']).toBe(2);
   });
 });
 

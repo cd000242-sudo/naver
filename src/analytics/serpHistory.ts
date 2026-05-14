@@ -185,6 +185,98 @@ export function getRecentEntries(entries: SerpHistoryEntry[], n: number = 30): S
 }
 
 /**
+ * 자동 학습 효과 측정 결과 — Phase 3.10
+ *
+ * buildAdaptiveLearningDirective는 history 5건+ 시점부터 활성화된다.
+ * 처음 4건 (학습 OFF) vs 5번째~이후 (학습 ON)의 평균 점수를 비교 →
+ * *실측 학습 효과*를 사용자에게 보고.
+ */
+export interface AdaptiveLearningImpact {
+  readonly canMeasure: boolean;       // 데이터 충분 여부 (각 그룹 ≥ 3건 필요)
+  readonly beforeCount: number;
+  readonly afterCount: number;
+  readonly beforeAvgScore: number;
+  readonly afterAvgScore: number;
+  readonly scoreDelta: number;         // afterAvg - beforeAvg
+  readonly beforeAvgGap: number;       // 우리 - SERP 평균 (학습 전)
+  readonly afterAvgGap: number;        // 우리 - SERP 평균 (학습 후)
+  readonly gapImprovement: number;     // afterGap - beforeGap (양수면 개선)
+  readonly beforeRankingDist: Readonly<Record<string, number>>;
+  readonly afterRankingDist: Readonly<Record<string, number>>;
+  readonly reason: string;             // canMeasure=false 시 사유
+}
+
+/**
+ * 자동 학습 전후 점수 비교 — 실측 효과 측정.
+ *   - 처음 4건 (학습 미적용) vs 5번째~ (학습 적용)
+ *   - 각 그룹 최소 3건 필요 (false-positive 방지)
+ *   - 추정 없음 — 실제 누적 history 평균 비교
+ */
+export function computeAdaptiveLearningImpact(entries: SerpHistoryEntry[]): AdaptiveLearningImpact {
+  const empty = {
+    canMeasure: false,
+    beforeCount: 0,
+    afterCount: 0,
+    beforeAvgScore: 0,
+    afterAvgScore: 0,
+    scoreDelta: 0,
+    beforeAvgGap: 0,
+    afterAvgGap: 0,
+    gapImprovement: 0,
+    beforeRankingDist: {},
+    afterRankingDist: {},
+    reason: '',
+  };
+
+  if (entries.length < 6) {
+    return { ...empty, reason: `누적 글 ${entries.length}건 (학습 전후 비교 위해 최소 6건 필요)` };
+  }
+
+  // 시간 순 정렬 (오래된 것 먼저)
+  const sorted = [...entries].sort((a, b) => a.timestamp.localeCompare(b.timestamp));
+
+  // 처음 4건 = 학습 OFF, 나머지 = 학습 ON
+  const before = sorted.slice(0, 4);
+  const after = sorted.slice(4);
+
+  if (before.length < 3 || after.length < 3) {
+    return { ...empty, reason: `각 그룹 최소 3건 필요 (전 ${before.length}건, 후 ${after.length}건)` };
+  }
+
+  const avgScore = (arr: SerpHistoryEntry[]) => Math.round(
+    arr.reduce((sum, e) => sum + e.ourFinalScore, 0) / arr.length,
+  );
+  const avgGap = (arr: SerpHistoryEntry[]) => Math.round(
+    arr.reduce((sum, e) => sum + (e.ourFinalScore - e.serpAvgFinalScore), 0) / arr.length,
+  );
+  const rankDist = (arr: SerpHistoryEntry[]): Record<string, number> => {
+    const dist: Record<string, number> = {};
+    for (const e of arr) dist[e.ranking] = (dist[e.ranking] ?? 0) + 1;
+    return dist;
+  };
+
+  const beforeAvgScore = avgScore(before);
+  const afterAvgScore = avgScore(after);
+  const beforeAvgGap = avgGap(before);
+  const afterAvgGap = avgGap(after);
+
+  return {
+    canMeasure: true,
+    beforeCount: before.length,
+    afterCount: after.length,
+    beforeAvgScore,
+    afterAvgScore,
+    scoreDelta: afterAvgScore - beforeAvgScore,
+    beforeAvgGap,
+    afterAvgGap,
+    gapImprovement: afterAvgGap - beforeAvgGap,
+    beforeRankingDist: rankDist(before),
+    afterRankingDist: rankDist(after),
+    reason: '',
+  };
+}
+
+/**
  * 누적 history에서 자주 미달하는 신호 top N → LLM 시스템 프롬프트 prefix 생성.
  * ✅ [v2.10.192 Phase 3.9] 지속적 학습 — 자기 글들의 실측 약점을 다음 글에 자동 반영
  *

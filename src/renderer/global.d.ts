@@ -445,6 +445,20 @@ interface AutomationAPI {
       topPriorityFix: string[];
       strengths: string[];
     }>;
+    learningImpact?: {
+      canMeasure: boolean;
+      beforeCount: number;
+      afterCount: number;
+      beforeAvgScore: number;
+      afterAvgScore: number;
+      scoreDelta: number;
+      beforeAvgGap: number;
+      afterAvgGap: number;
+      gapImprovement: number;
+      beforeRankingDist: Record<string, number>;
+      afterRankingDist: Record<string, number>;
+      reason: string;
+    };
     error?: string;
   }>;
   clearSerpHistory: () => Promise<{ ok: boolean; error?: string }>;

@@ -9555,13 +9555,13 @@ async function loadSerpHistory(content: HTMLElement): Promise<void> {
       content.innerHTML = `<p style="color: #ef4444;">❌ ${result?.error || '로드 실패'}</p>`;
       return;
     }
-    renderSerpHistoryContent(content, result.stats, result.recentEntries || []);
+    renderSerpHistoryContent(content, result.stats, result.recentEntries || [], result.learningImpact);
   } catch (err) {
     content.innerHTML = `<p style="color: #ef4444;">❌ ${(err as Error).message}</p>`;
   }
 }
 
-function renderSerpHistoryContent(content: HTMLElement, stats: any, recent: any[]): void {
+function renderSerpHistoryContent(content: HTMLElement, stats: any, recent: any[], learningImpact?: any): void {
   if (stats.totalEntries === 0) {
     content.innerHTML = `
       <div style="text-align: center; padding: 2rem 0;">
@@ -9649,6 +9649,49 @@ function renderSerpHistoryContent(content: HTMLElement, stats: any, recent: any[
         <div style="font-size: 0.72rem; color: rgba(255,255,255,0.7);">${gapIcon} ${gap >= 5 ? '강한 우위' : gap >= -3 ? '근접' : gap >= -15 ? '개선 권장' : '시급 보완'}</div>
       </div>
     </div>
+
+    ${(() => {
+      // ✅ [v2.10.193 Phase 3.10] 자동 학습 효과 측정 카드
+      if (!learningImpact || !learningImpact.canMeasure) {
+        return learningImpact?.reason ? `
+          <div style="background: rgba(255,255,255,0.04); border: 1px dashed rgba(255,255,255,0.15); border-radius: 8px; padding: 0.8rem; margin-bottom: 1.2rem; text-align: center; font-size: 0.82rem; color: rgba(255,255,255,0.6);">
+            📚 자동 학습 효과: ${learningImpact.reason}
+          </div>` : '';
+      }
+      const li = learningImpact;
+      const scoreDeltaColor = li.scoreDelta >= 5 ? '#4ade80' : li.scoreDelta >= 0 ? '#22d3ee' : li.scoreDelta >= -3 ? '#fbbf24' : '#ef4444';
+      const gapDeltaColor = li.gapImprovement >= 3 ? '#4ade80' : li.gapImprovement >= 0 ? '#22d3ee' : li.gapImprovement >= -3 ? '#fbbf24' : '#ef4444';
+      const verdict = li.scoreDelta >= 5
+        ? '✅ 학습 효과 명확 — 점수 큰 폭 상승'
+        : li.scoreDelta >= 0
+          ? '🟢 학습 효과 있음 — 점수 상승 또는 유지'
+          : li.scoreDelta >= -3
+            ? '⚠️ 효과 미미 — 더 많은 누적 데이터 필요'
+            : '🔴 학습 후 점수 하락 — 다른 원인 확인 필요';
+      return `
+        <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.03)); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; padding: 1rem; margin-bottom: 1.2rem;">
+          <h4 style="margin: 0 0 0.6rem 0; color: #D4AF37; font-size: 0.95rem;">📚 자동 학습 효과 (실측)</h4>
+          <p style="margin: 0 0 0.6rem 0; font-size: 0.78rem; color: rgba(255,255,255,0.6);">처음 ${li.beforeCount}건 (학습 OFF) vs 이후 ${li.afterCount}건 (학습 ON) 평균 비교 — 추정 없음</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin: 0.6rem 0;">
+            <div style="background: rgba(0,0,0,0.2); padding: 0.6rem; border-radius: 6px;">
+              <div style="font-size: 0.72rem; color: rgba(255,255,255,0.6);">평균 점수 변화</div>
+              <div style="font-size: 1rem; margin-top: 0.2rem; color: rgba(255,255,255,0.85);">
+                ${li.beforeAvgScore} → ${li.afterAvgScore}
+                <span style="color: ${scoreDeltaColor}; font-weight: 700; margin-left: 0.4rem;">${li.scoreDelta >= 0 ? '+' : ''}${li.scoreDelta}</span>
+              </div>
+            </div>
+            <div style="background: rgba(0,0,0,0.2); padding: 0.6rem; border-radius: 6px;">
+              <div style="font-size: 0.72rem; color: rgba(255,255,255,0.6);">SERP 격차 개선</div>
+              <div style="font-size: 1rem; margin-top: 0.2rem; color: rgba(255,255,255,0.85);">
+                ${li.beforeAvgGap >= 0 ? '+' : ''}${li.beforeAvgGap} → ${li.afterAvgGap >= 0 ? '+' : ''}${li.afterAvgGap}
+                <span style="color: ${gapDeltaColor}; font-weight: 700; margin-left: 0.4rem;">${li.gapImprovement >= 0 ? '+' : ''}${li.gapImprovement}</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 0.6rem; font-size: 0.85rem; font-weight: 600; color: ${scoreDeltaColor};">${verdict}</div>
+        </div>
+      `;
+    })()}
 
     <!-- ranking 분포 -->
     <h4 style="margin: 1rem 0 0.6rem 0; color: #D4AF37; font-size: 0.9rem;">📊 SERP 순위 분포 (전체 ${stats.totalEntries}건)</h4>
