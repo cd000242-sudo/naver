@@ -1423,10 +1423,23 @@ function updateRiskIndicators(content: StructuredContent | null): void {
         title: content.selectedTitle || '',
         keyword: (content as any).primaryKeyword || (content as any).keyword || '',
         mode: (content as any).contentMode || 'seo',
+        autoSerpResult: (content.quality as any)?.serpBenchmark || null,
       };
       _serpBtn.style.display = 'inline-flex';
     }
   } catch { /* UI 갱신 실패는 무시 */ }
+
+  // ✅ [v2.10.188 Phase 3.7.1] 자동 SERP 결과 알림 카드
+  //   조건: quality.serpBenchmark 있고 ranking이 below_median 또는 below_25th면 자동 알림
+  //   사용자가 즉시 "내 글이 상위 노출 글보다 부족한 부분"을 인식하도록
+  try {
+    const _autoSerp = (content.quality as any)?.serpBenchmark;
+    if (_autoSerp && (_autoSerp.ranking === 'below_median' || _autoSerp.ranking === 'below_25th')) {
+      showSerpAlertCard(_autoSerp);
+    } else if (_autoSerp && (_autoSerp.ranking === 'above_median' || _autoSerp.ranking === 'near_median')) {
+      showSerpAlertCard(_autoSerp, 'good');
+    }
+  } catch { /* 알림 실패는 무시 */ }
 
   if (riskSummaryElement) {
     riskSummaryElement.style.display = 'grid';
@@ -9484,6 +9497,129 @@ initToolsHubModal();
 initBestProductModal();
 initGeminiSelectionUI();
 initContentModeHelpAndSmartPublish();
+
+// ✅ [v2.10.188 Phase 3.7.1] 자동 SERP 결과 알림 카드 표시
+//   글 생성 완료 후 자동 비교가 끝났을 때 사용자에게 *즉시* 결과 알림
+//   - 미달 (below_median / below_25th): 빨강/주황 — "보완 필요" 버튼
+//   - 양호 (above_median / near_median): 녹색 — "💪 상위권"
+function showSerpAlertCard(autoSerp: any, type: 'warn' | 'good' = 'warn'): void {
+  // 기존 알림 있으면 제거
+  const existing = document.getElementById('serp-auto-alert-card');
+  if (existing) existing.remove();
+
+  const card = document.createElement('div');
+  card.id = 'serp-auto-alert-card';
+  const isGood = type === 'good';
+  const bgColor = isGood
+    ? 'linear-gradient(135deg, rgba(74, 222, 128, 0.18), rgba(34, 197, 94, 0.10))'
+    : 'linear-gradient(135deg, rgba(239, 68, 68, 0.20), rgba(251, 191, 36, 0.12))';
+  const borderColor = isGood ? '#4ade80' : '#fbbf24';
+  const icon = isGood ? '💪' : '🔍';
+  const titleText = isGood ? 'SERP 실측 비교 — 양호' : 'SERP 실측 비교 — 보완 필요';
+
+  card.style.cssText = `
+    position: fixed; top: 90px; right: 20px; z-index: 10001;
+    background: ${bgColor};
+    border: 2px solid ${borderColor};
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    max-width: 360px;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    animation: serpAlertSlideIn 0.4s ease-out;
+    font-size: 0.85rem;
+  `;
+
+  const fixCount = autoSerp.topPriorityFix?.length || 0;
+  const fixListHtml = !isGood && fixCount > 0
+    ? `<div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.78rem; color: #fbbf24;">
+        🎯 보완 우선순위 ${Math.min(2, fixCount)}건:
+        <ul style="margin: 0.3rem 0 0 1.2rem; padding: 0;">
+          ${(autoSerp.topPriorityFix || []).slice(0, 2).map((p: string) => `<li style="margin: 0.15rem 0;">${p.replace(/^[•·\-]\s*/, '').slice(0, 80)}</li>`).join('')}
+        </ul>
+      </div>`
+    : '';
+
+  card.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: start; gap: 0.5rem;">
+      <div style="flex: 1;">
+        <div style="font-weight: 700; color: ${borderColor}; margin-bottom: 0.3rem;">${icon} ${titleText}</div>
+        <div style="font-size: 0.78rem; line-height: 1.4; color: rgba(255,255,255,0.92);">
+          [<strong>${autoSerp.keyword}</strong>] 우리 <strong>${autoSerp.ourFinalScore}</strong>점 vs 상위 평균 <strong>${autoSerp.serpAvgFinalScore}</strong>점 (중앙값 ${autoSerp.serpMedianFinalScore})
+        </div>
+        ${fixListHtml}
+        <button type="button" id="serp-alert-detail-btn" style="margin-top: 0.6rem; padding: 0.35rem 0.7rem; background: ${borderColor}; color: #1a1a1a; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.78rem;">📊 상세 보기</button>
+      </div>
+      <button type="button" id="serp-alert-close-btn" style="background: transparent; border: none; color: rgba(255,255,255,0.6); font-size: 1.2rem; cursor: pointer; padding: 0; line-height: 1;">×</button>
+    </div>
+  `;
+
+  // 애니메이션 keyframe (1회만 inject)
+  if (!document.getElementById('serp-alert-keyframes')) {
+    const style = document.createElement('style');
+    style.id = 'serp-alert-keyframes';
+    style.textContent = `@keyframes serpAlertSlideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }`;
+    document.head.appendChild(style);
+  }
+
+  document.body.appendChild(card);
+
+  // 닫기 버튼
+  card.querySelector('#serp-alert-close-btn')?.addEventListener('click', () => {
+    card.remove();
+  });
+
+  // 상세 보기 버튼 — 자동 결과 데이터로 모달 표시 (IPC 호출 안 함, 캐시 활용)
+  card.querySelector('#serp-alert-detail-btn')?.addEventListener('click', () => {
+    showSerpDetailModalFromAutoData(autoSerp);
+    card.remove();
+  });
+
+  // 양호인 경우 8초 후 자동 닫기 (미달은 유지 — 사용자 액션 필요)
+  if (isGood) {
+    setTimeout(() => {
+      if (card.parentNode) card.remove();
+    }, 8000);
+  }
+}
+
+// 자동 SERP 결과 데이터로 상세 모달 표시 (IPC 호출 없이 캐시 데이터 사용)
+function showSerpDetailModalFromAutoData(autoSerp: any): void {
+  const modal = document.getElementById('serp-benchmark-modal') as HTMLElement | null;
+  const content = document.getElementById('serp-benchmark-content') as HTMLElement | null;
+  if (!modal || !content) return;
+
+  const rankingColors: Record<string, string> = {
+    above_median: '#4ade80',
+    near_median: '#22d3ee',
+    below_median: '#fbbf24',
+    below_25th: '#ef4444',
+  };
+  const rankingColor = rankingColors[autoSerp.ranking] || '#888';
+
+  const priorityHtml = (autoSerp.topPriorityFix || []).length > 0
+    ? `<h3 style="margin: 1.2rem 0 0.5rem 0; color: #fbbf24;">🎯 우선순위 보완 항목</h3>
+       <ol style="margin: 0; padding-left: 1.5rem;">${(autoSerp.topPriorityFix || []).map((p: string) => `<li style="margin: 0.3rem 0;">${p}</li>`).join('')}</ol>`
+    : '';
+
+  const strengthsHtml = (autoSerp.strengths || []).length > 0
+    ? `<h3 style="margin: 1.2rem 0 0.5rem 0; color: #4ade80;">💪 강점 (상위 노출 평균 대비 우위)</h3>
+       <ul style="margin: 0; padding-left: 1.5rem;">${(autoSerp.strengths || []).map((s: string) => `<li style="margin: 0.3rem 0;">${s}</li>`).join('')}</ul>`
+    : '';
+
+  content.innerHTML = `
+    <div style="padding: 0.8rem; background: ${rankingColor}22; border: 1px solid ${rankingColor}; border-radius: 8px; margin-bottom: 1rem;">
+      <strong style="color: ${rankingColor}; font-size: 1.05rem;">${autoSerp.summary}</strong>
+    </div>
+    <p style="margin: 0.5rem 0; color: #ccc; font-size: 0.88rem;">자동 SERP 비교 결과 (글 생성 직후 ${autoSerp.signalGapsCount || 0}개 신호 측정).</p>
+    ${priorityHtml}
+    ${strengthsHtml}
+    <p style="margin-top: 1rem; padding-top: 0.6rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; color: #888;">
+      ⚙️ 자동 캐시 데이터 — 신호별 상세 비교는 우측 "🔍 SERP 실측 비교" 버튼으로 새로 분석하세요 (10초)
+    </p>
+  `;
+  modal.style.display = 'flex';
+}
 
 // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 UI 초기화
 function initSerpBenchmarkUI(): void {
