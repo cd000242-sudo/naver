@@ -1371,18 +1371,14 @@ button:not(:disabled):active,
   contain: layout style;
 }
 
-/* ✅ [v2.10.209] 모달 열림 상태 — inline style="display: flex" 이거나 .is-open 클래스 */
-.modal-backdrop[style*="display: flex"],
-.modal-backdrop[style*="display:flex"],
+/* ✅ [v2.10.211] v2.10.210 CSS !important 회귀 차단 — :not 체인이 inline display:flex도 잘못 매칭
+   사용자 보고: 클릭은 되는데 모달 안 뜸 = inline style flex 있는데 CSS !important로 강제 hidden
+   해결: CSS는 기본 display:none만 (specificity 0,0,1,0). inline style이 자연 우선 (specificity 1,0,0,0).
+   - inline display:flex → 모달 표시 (inline 우선)
+   - inline display:none → 숨김 (inline 우선)
+   - inline 없음 → CSS 기본 none → 숨김 */
 .modal-backdrop.is-open {
-  display: flex !important;
-}
-
-/* ✅ [v2.10.210] 100% 보장 — display: block 또는 다른 값으로 잘못 설정된 modal-backdrop 강제 차단
-   inline style이 display: flex 또는 block 명시한 경우만 표시. 그 외 모두 hidden. */
-.modal-backdrop:not([style*="display: flex"]):not([style*="display:flex"]):not([style*="display: block"]):not([style*="display:block"]):not(.is-open) {
-  display: none !important;
-  pointer-events: none !important;  /* 만에 하나 표시되어도 클릭 통과 */
+  display: flex;
 }
 
 .modal-panel {
