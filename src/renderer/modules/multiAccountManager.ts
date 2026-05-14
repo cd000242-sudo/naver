@@ -4194,6 +4194,7 @@ export async function initMultiAccountPublishModal() {
 if (typeof document !== 'undefined') {
   const closeStaleBackdrops = (reason: string = 'periodic'): number => {
     let closedCount = 0;
+    const closedIds: string[] = [];
     document.querySelectorAll('.modal-backdrop').forEach(el => {
       const inlineDisplay = (el as HTMLElement).style.display;
       // inline style이 flex/block으로 명시 안 됐으면 강제 none — invisible overlay 차단
@@ -4203,11 +4204,12 @@ if (typeof document !== 'undefined') {
           (el as HTMLElement).style.display = 'none';
           el.setAttribute('aria-hidden', 'true');
           closedCount++;
+          closedIds.push(el.id || '(no-id)');
         }
       }
     });
     if (closedCount > 0) {
-      console.log(`[BackdropGuard] ${reason}: ${closedCount}개 invisible overlay 강제 닫음`);
+      console.log(`[BackdropGuard] ${reason}: ${closedCount}개 닫음 → [${closedIds.join(', ')}]`);
     }
     return closedCount;
   };
@@ -4235,10 +4237,12 @@ if (typeof document !== 'undefined') {
         const el = m.target as HTMLElement;
         if (el.classList && el.classList.contains('modal-backdrop')) {
           const d = el.style.display;
-          if (d !== 'flex' && d !== 'block' && d !== 'none') {
+          // ✅ [v2.10.212] 디버그 — 변경 감지 시 *항상* 로그 (어떤 모달이 어떻게 변경됐는지)
+          console.log(`[Observer] ${el.id || '(no-id)'} 변경 감지 → style.display="${d}"`);
+          if (d !== 'flex' && d !== 'block' && d !== 'none' && d !== '') {
             el.style.display = 'none';
             el.setAttribute('aria-hidden', 'true');
-            console.log(`[BackdropGuard] MutationObserver: ${el.id} invisible 상태 → 강제 닫음`);
+            console.warn(`[Observer] 🚨 ${el.id} invisible 상태("${d}") → 강제 none 설정`);
           }
         }
       }
@@ -4321,26 +4325,78 @@ if (typeof document !== 'undefined') {
 //   동작: ma-account-edit-modal 직접 조회 + 입력 폼 초기화 + 표시
 //   클로저 0, DOMContentLoaded 0, 이벤트 위임 0 — 가장 단순/강력
 (window as any).openAddAccountModalDirect = function() {
-  console.log('[MultiAccount] 🔘 openAddAccountModalDirect 직접 호출');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('[ModalDebug] 🔘 openAddAccountModalDirect v2.10.212 START');
+  console.log('[ModalDebug] 시각:', new Date().toISOString());
+
+  // Step 1: modal element 조회
   const accountEditModal = document.getElementById('ma-account-edit-modal');
+  console.log('[ModalDebug] Step 1: getElementById 결과:', accountEditModal ? '✅ 존재' : '❌ NULL');
   if (!accountEditModal) {
-    console.error('[MultiAccount] ❌ ma-account-edit-modal element 없음 — HTML 확인 필요');
+    console.error('[ModalDebug] ❌ ma-account-edit-modal element 없음 — HTML 누락');
     alert('계정 추가 모달을 찾을 수 없습니다.\n앱을 재시작해주세요.');
     return;
   }
-  // 신규 계정 입력 폼 초기화 (편집 모드 X)
+
+  // Step 2: 현재 모달 상태 측정 (변경 전)
+  const beforeComputed = window.getComputedStyle(accountEditModal);
+  console.log('[ModalDebug] Step 2: 변경 전 상태');
+  console.log('  - inline style.display:', JSON.stringify(accountEditModal.style.display));
+  console.log('  - computed display:', beforeComputed.display);
+  console.log('  - computed visibility:', beforeComputed.visibility);
+  console.log('  - computed opacity:', beforeComputed.opacity);
+  console.log('  - computed z-index:', beforeComputed.zIndex);
+  console.log('  - computed pointer-events:', beforeComputed.pointerEvents);
+  console.log('  - aria-hidden:', accountEditModal.getAttribute('aria-hidden'));
+  console.log('  - class list:', accountEditModal.className);
+  console.log('  - parent element:', accountEditModal.parentElement?.tagName, accountEditModal.parentElement?.id || '(no id)');
+
+  // Step 3: 입력 폼 초기화
+  console.log('[ModalDebug] Step 3: 입력 폼 초기화');
   const titleEl = document.getElementById('ma-edit-title');
+  console.log('  - ma-edit-title:', titleEl ? '✅' : '❌');
   if (titleEl) titleEl.textContent = '새 계정 추가';
-  const accountIdInput = document.getElementById('ma-edit-account-id') as HTMLInputElement | null;
-  if (accountIdInput) accountIdInput.value = '';
-  for (const id of ['ma-edit-name', 'ma-edit-blog-id', 'ma-edit-naver-id', 'ma-edit-naver-pw']) {
+  for (const id of ['ma-edit-account-id', 'ma-edit-name', 'ma-edit-blog-id', 'ma-edit-naver-id', 'ma-edit-naver-pw']) {
     const el = document.getElementById(id) as HTMLInputElement | null;
+    console.log(`  - ${id}:`, el ? '✅' : '❌');
     if (el) el.value = '';
   }
   const deleteBtn = document.getElementById('ma-delete-account-btn');
   if (deleteBtn) deleteBtn.style.display = 'none';
+
+  // Step 4: display 변경
+  console.log('[ModalDebug] Step 4: style.display = "flex" 설정');
   accountEditModal.style.display = 'flex';
   accountEditModal.setAttribute('aria-hidden', 'false');
+
+  // Step 5: 변경 후 상태 측정 (즉시)
+  const afterComputed = window.getComputedStyle(accountEditModal);
+  console.log('[ModalDebug] Step 5: 변경 후 상태 (즉시)');
+  console.log('  - inline style.display:', JSON.stringify(accountEditModal.style.display));
+  console.log('  - computed display:', afterComputed.display);
+  console.log('  - computed visibility:', afterComputed.visibility);
+  console.log('  - computed opacity:', afterComputed.opacity);
+  console.log('  - computed pointer-events:', afterComputed.pointerEvents);
+  const rect = accountEditModal.getBoundingClientRect();
+  console.log('  - getBoundingClientRect:', `${Math.round(rect.x)},${Math.round(rect.y)} ${Math.round(rect.width)}×${Math.round(rect.height)}`);
+  console.log('  - 화면에 보이는가:', rect.width > 0 && rect.height > 0 && afterComputed.display !== 'none' && afterComputed.visibility !== 'hidden' && parseFloat(afterComputed.opacity) > 0 ? '✅ YES' : '❌ NO');
+
+  // Step 6: 100ms 후 재측정 (MutationObserver/setInterval 영향 확인)
+  setTimeout(() => {
+    const lateComputed = window.getComputedStyle(accountEditModal);
+    console.log('[ModalDebug] Step 6: 100ms 후 재측정 (Observer/Interval 영향 확인)');
+    console.log('  - inline style.display:', JSON.stringify(accountEditModal.style.display));
+    console.log('  - computed display:', lateComputed.display);
+    if (accountEditModal.style.display !== 'flex') {
+      console.error('[ModalDebug] 🚨 누군가 100ms 안에 모달을 다시 닫았음! 범인 추적:');
+      console.error('  - 현재 inline display:', accountEditModal.style.display);
+      console.error('  - 추정 범인: setInterval closeStaleBackdrops, MutationObserver, 또는 다른 모듈');
+    } else {
+      console.log('[ModalDebug] ✅ 100ms 후에도 display: flex 유지 — 정상');
+    }
+    console.log('[ModalDebug] 🔘 openAddAccountModalDirect END');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  }, 100);
 };
 
 // DOM 로드 시 다중계정 모달 초기화
