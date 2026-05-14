@@ -4188,6 +4188,9 @@ export async function initMultiAccountPublishModal() {
   console.log('[MultiAccountPublish] 다중계정 동시발행 모달 초기화 완료');
 }
 
+// ✅ [v2.10.213] 모듈 로드 검증 로그 — 눈에 띄게 표시 (사용자가 콘솔 어디서든 확인 가능)
+console.log('%c━━━ multiAccountManager v2.10.213 LOADED ━━━', 'background: #8b5cf6; color: white; font-size: 14px; font-weight: bold; padding: 6px 12px; border-radius: 4px');
+
 // ✅ [v2.10.210] 100% 보장 — invisible modal overlay 차단 다층 방어
 //   사용자 보고: v2.10.201~209 9번 시도 후에도 클릭 무반응 → 다층 방어 필수
 //   layer: 페이지 로드 + 1초 interval + MutationObserver + 글로벌 함수 노출
@@ -4228,6 +4231,7 @@ if (typeof document !== 'undefined') {
   setTimeout(() => closeStaleBackdrops('after-1s'), 1000);
 
   // 3) ✅ 1초 interval 영구 정리 — 어떤 코드가 invisible overlay 만들어도 1초 내 차단
+  console.log('%c[BackdropGuard] 1초 interval 시작 — v2.10.213', 'color: #4ade80; font-weight: bold');
   setInterval(() => closeStaleBackdrops('interval'), 1000);
 
   // 4) ✅ MutationObserver — modal-backdrop의 style/class 변경 감지 즉시 정리
@@ -4250,9 +4254,11 @@ if (typeof document !== 'undefined') {
   });
 
   const startObserver = () => {
-    document.querySelectorAll('.modal-backdrop').forEach(el => {
+    const all = document.querySelectorAll('.modal-backdrop');
+    all.forEach(el => {
       observer.observe(el, { attributes: true, attributeFilter: ['style', 'class'] });
     });
+    console.log(`%c[Observer] MutationObserver 시작 — ${all.length}개 modal-backdrop 감시 중 (v2.10.213)`, 'color: #22d3ee; font-weight: bold');
   };
 
   if (document.readyState === 'loading') {
