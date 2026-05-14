@@ -7567,8 +7567,17 @@ export async function generateStructuredContent(
         resetOptimizerLog(); // 로그 플래그 리셋
 
         // 중복 제거 + 저품질 제거 + 전문성 강화 + 애드포스트 최적화
+        // Phase 3: LLM rubric 활성 또는 source.skipDictInjection=true 시 사전 후처리 OFF
+        const skipDictInjection =
+          isLlmRubricEnabled({ useLlmRubric: (source as any).useLlmRubric })
+          || (source as any).skipDictInjection === true;
         if (optimized.bodyPlain) {
-          optimized.bodyPlain = optimizeContentForNaver(optimized.bodyPlain, source.toneStyle);
+          optimized.bodyPlain = optimizeContentForNaver(
+            optimized.bodyPlain,
+            source.toneStyle,
+            false,
+            { skipDictInjection },
+          );
         }
         if (optimized.bodyHtml) {
           optimized.bodyHtml = optimizeHtmlForNaver(optimized.bodyHtml);

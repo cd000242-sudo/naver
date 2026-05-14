@@ -286,12 +286,27 @@ let _optimizerLogShown = false;
  * ✅ 메인 콘텐츠 최적화 함수 (2025.12 네이버 로직)
  * - 빠른 처리를 위해 로그 최소화
  */
-export function optimizeContentForNaver(content: string, toneStyle: string = 'friendly', silent: boolean = false): string {
+export type OptimizeOptions = {
+  // Phase 3: skip dictionary-based EEAT and human-expression injection.
+  // When enabled, the LLM's natural output is preserved without keyword stuffing.
+  skipDictInjection?: boolean;
+};
+
+export function optimizeContentForNaver(
+  content: string,
+  toneStyle: string = 'friendly',
+  silent: boolean = false,
+  options: OptimizeOptions = {},
+): string {
   if (!content) return content;
+
+  const skipDictInjection =
+    options.skipDictInjection ?? process.env.DISABLE_NAVER_DICT_INJECTION === 'true';
 
   // 로그 한 번만 출력 (silent 모드가 아닐 때)
   if (!silent && !_optimizerLogShown) {
-    console.log(`[ContentOptimizer] 🚀 2025년 12월 네이버 최적화 시작 (톤: ${toneStyle})...`);
+    const mode = skipDictInjection ? '사전 주입 OFF (AI 자율 표현)' : '기본';
+    console.log(`[ContentOptimizer] 🚀 2025년 12월 네이버 최적화 시작 (톤: ${toneStyle}, 모드: ${mode})...`);
     _optimizerLogShown = true;
   }
 
@@ -310,11 +325,19 @@ export function optimizeContentForNaver(content: string, toneStyle: string = 'fr
   // 4. 전문성 표현 강화
   result = enhanceExpertise(result, silent);
 
-  // 5. E-E-A-T 강화 (2025년 핵심)
-  result = enhanceEEAT(result, toneStyle, silent);
+  // 5. E-E-A-T 강화 — Phase 3: skipDictInjection 시 스킵 (LLM rubric 모드 등)
+  if (!skipDictInjection) {
+    result = enhanceEEAT(result, toneStyle, silent);
+  } else if (!silent) {
+    console.log('[ContentOptimizer] ⏭️ E-E-A-T 사전 주입 스킵');
+  }
 
-  // 6. 인간적 표현 강화 (AI 탐지 회피 2025)
-  result = addHumanExpressions(result, toneStyle, silent);
+  // 6. 인간적 표현 강화 — Phase 3: skipDictInjection 시 스킵
+  if (!skipDictInjection) {
+    result = addHumanExpressions(result, toneStyle, silent);
+  } else if (!silent) {
+    console.log('[ContentOptimizer] ⏭️ 인간 표현 사전 주입 스킵');
+  }
 
   // 7. 문단 구조 최적화 (체류시간 + 스크롤 깊이)
   result = optimizeParagraphStructure(result);
@@ -323,15 +346,20 @@ export function optimizeContentForNaver(content: string, toneStyle: string = 'fr
   result = optimizeForAdpost(result);
 
   // 9. ✅ [Phase 1-2] AuthGR 방어 (전문성 신호 + 출처 다양화 + 경험 표현)
-  try {
-    const { applyAuthGRDefense } = require('./authgrDefense');
-    const authgrResult = applyAuthGRDefense(result, detectCategory(toneStyle));
-    result = authgrResult.content;
-    if (!silent && authgrResult.totalModifications > 0) {
-      console.log(`[ContentOptimizer] 🛡️ AuthGR 방어: risk ${authgrResult.fingerprint.overallRisk}, +${authgrResult.totalModifications} 수정`);
+  // Phase 3: skipDictInjection 시 어휘 주입 단계 스킵 (LLM 자연 출력 보존)
+  if (!skipDictInjection) {
+    try {
+      const { applyAuthGRDefense } = require('./authgrDefense');
+      const authgrResult = applyAuthGRDefense(result, detectCategory(toneStyle));
+      result = authgrResult.content;
+      if (!silent && authgrResult.totalModifications > 0) {
+        console.log(`[ContentOptimizer] 🛡️ AuthGR 방어: risk ${authgrResult.fingerprint.overallRisk}, +${authgrResult.totalModifications} 수정`);
+      }
+    } catch (e) {
+      // AuthGR 모듈 로드 실패 시 무시 (기존 동작 유지)
     }
-  } catch (e) {
-    // AuthGR 모듈 로드 실패 시 무시 (기존 동작 유지)
+  } else if (!silent) {
+    console.log('[ContentOptimizer] ⏭️ AuthGR 어휘 주입 스킵');
   }
 
   // 10. 최종 정리
