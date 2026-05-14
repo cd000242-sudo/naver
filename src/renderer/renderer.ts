@@ -1,3 +1,7 @@
+// ✅ [v2.10.214] 최상위 버전 검증 로그 — 사용자 콘솔에 반드시 보여야 함
+//   안 보이면 사용자가 이 버전 *설치 안 함* 확정
+console.log('%c🚀 Better Life Naver v2.10.214 RENDERER STARTED', 'background: gold; color: black; font-size: 18px; font-weight: bold; padding: 8px 16px; border-radius: 6px');
+
 import type { StructuredContent, ImagePlan, HeadingPlan } from '../contentGenerator.js';
 // ✅ [2026-02-26 모듈화] 프롬프트 번역 모듈
 import { generateEnglishPromptForHeading, decomposeKoreanCompound, koreanMorphemes, getTranslationPrompt, cacheTranslation, _promptTranslationCache } from './modules/promptTranslation.js';
@@ -190,6 +194,7 @@ import { ThumbnailGenerator, applyPresetThumbnailIfExists } from './modules/thum
 declare let thumbnailGenerator: ThumbnailGenerator | null;
 // ✅ [2026-02-25 모듈화] 다중계정 관리
 import { initMultiAccountManager, initMultiAccountPublishModal, initMainAccountSelector, generateImagesForAutomation } from './modules/multiAccountManager.js';
+console.log('%c📦 multiAccountManager 모듈 IMPORT 완료 v2.10.214', 'background: #8b5cf6; color: white; font-size: 14px; padding: 4px 10px; border-radius: 4px');
 // ✅ [2026-03-22] 로컬 폴더 이미지 로더 (window 전역 등록 — fullAutoFlow.ts에서 declare로 사용)
 import './modules/localFolderImageLoader.js';
 // ✅ [2026-03-17 모듈화] 예약 시간 분산 유틸리티
