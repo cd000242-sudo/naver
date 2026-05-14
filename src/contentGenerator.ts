@@ -1027,8 +1027,14 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   //   소제목은 원본 충실, 본문에서 의미 왜곡 환각
   try {
     if ((source.rawText ?? '').length >= 200 && _resultBodyForGates) {
-      const { checkHallucination } = require('./content/hallucinationCheck');
-      const hallucination = checkHallucination(source.rawText ?? '', _resultBodyForGates);
+      const { checkHallucination, inferHallucinationCategory } = require('./content/hallucinationCheck');
+      // ✅ [v2.10.176] 카테고리별 사전 분기 — false-positive 차단
+      const _hallCategory = inferHallucinationCategory({
+        contentMode: source.contentMode,
+        toneStyle: source.toneStyle,
+        categoryHint: source.categoryHint,
+      });
+      const hallucination = checkHallucination(source.rawText ?? '', _resultBodyForGates, _hallCategory);
       if (hallucination.warnings.length > 0) {
         console.warn(`[Hallucination] ⚠️ 환각 의심 신호 ${hallucination.warnings.length}개:`);
         for (const w of hallucination.warnings) console.warn(`  - ${w}`);
@@ -7552,12 +7558,18 @@ export async function generateStructuredContent(
           let _hallucinationFail = false;
           let _hallRetryInstruction = '';
           try {
-            const { checkHallucination, buildHallucinationRetryInstruction } = require('./content/hallucinationCheck');
-            const _hall = checkHallucination(source.rawText ?? '', _rb);
+            const { checkHallucination, buildHallucinationRetryInstruction, inferHallucinationCategory } = require('./content/hallucinationCheck');
+            // ✅ [v2.10.176] 카테고리별 사전 분기 — false-positive 차단
+            const _hallCategoryRetry = inferHallucinationCategory({
+              contentMode: source.contentMode,
+              toneStyle: source.toneStyle,
+              categoryHint: source.categoryHint,
+            });
+            const _hall = checkHallucination(source.rawText ?? '', _rb, _hallCategoryRetry);
             if (_hall.isLikelyHallucinated) {
               _hallucinationFail = true;
               _hallRetryInstruction = buildHallucinationRetryInstruction(_hall);
-              console.error(`[Hallucination] 🚨 강한 환각 감지 — 자동 재시도 트리거 (P${_hall.positiveOriginal}/N${_hall.negativeOriginal} → P${_hall.positiveResult}/N${_hall.negativeResult})`);
+              console.error(`[Hallucination] 🚨 강한 환각 감지 — 자동 재시도 트리거 (cat=${_hallCategoryRetry}, P${_hall.positiveOriginal}/N${_hall.negativeOriginal} → P${_hall.positiveResult}/N${_hall.negativeResult})`);
             }
           } catch { /* hallucination 모듈 실패 시 무시 */ }
 

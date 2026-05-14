@@ -722,10 +722,14 @@ export function analyzeNaverScore(text: string, keywords: ScoreKeywords = DEFAUL
   suggestions: string[];
 } {
   const suggestions: string[] = [];
-  let expertiseScore = 80; // 기본 점수 상향
-  let originalityScore = 85; // 기본 점수 상향
-  let readabilityScore = 80; // 기본 점수 상향
-  let engagementScore = 80; // 기본 점수 상향
+  // ✅ [v2.10.176] 점수 인플레이션 정상화 — reviewer 진단 CRITICAL #1
+  //   기존: 80/85/80/80 기본값 → 실제 60점짜리도 80점으로 표시 → 재시도 트리거 작동 안 함
+  //   변경: 50/55/50/50 으로 정상화 → 보너스 합산이 실제 품질을 반영
+  //   100점은 humanize+optimize 후 실제 우수한 글만 도달 (시그널 정상화)
+  let expertiseScore = 50;
+  let originalityScore = 55;
+  let readabilityScore = 50;
+  let engagementScore = 50;
 
   // 1. 전문성 분석 (강화)
   const expertCount = keywords.expertTerms.filter(term => text.includes(term)).length;

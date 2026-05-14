@@ -82,6 +82,8 @@ export function extractCoreFacts(text: string, max: number = DEFAULT_MAX_FACTS):
   }
 
   // 4. 한글 4자 이상 명사구 (간이) — 자주 등장하는 키워드
+  // ✅ [v2.10.176 시도→revert] 3자 한글 확장은 어절 끝부분 noise(가능합/이라고 등) 잡혀 false-positive.
+  //   Phase 1 LLM rubric의 의미적 보존 검증으로 처리 예정.
   if (facts.size < max) {
     const wordCount = new Map<string, number>();
     const koreanPattern = /[가-힣]{4,12}/g;
