@@ -325,9 +325,8 @@
                                 <option value="">직접 입력</option>
                             </select>
                             <button type="button" id="main-add-account-btn"
-                                onclick="if(window.openAddAccountModalDirect){window.openAddAccountModalDirect();}else{console.error('[MultiAccount] openAddAccountModalDirect 함수 미정의 — 새 버전 설치 필요');alert('계정 추가 기능 미설치 — 앱을 재시작해주세요.');}"
-                                style="padding: 0.6rem 1rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; white-space: nowrap;">➕
-                                계정 추가</button>
+                                onclick="(function(btn){try{btn.style.background='linear-gradient(135deg, #22c55e, #16a34a)';btn.textContent='✅ 클릭됨';setTimeout(function(){btn.style.background='linear-gradient(135deg, #8b5cf6, #7c3aed)';btn.textContent='➕ 계정 추가';},800);console.log('[AddAccount] 🔘 onclick 실행됨, v2.10.208');console.log('[AddAccount] window.openAddAccountModalDirect:',typeof window.openAddAccountModalDirect);console.log('[AddAccount] ma-account-edit-modal:',document.getElementById('ma-account-edit-modal'));if(typeof window.openAddAccountModalDirect==='function'){window.openAddAccountModalDirect();}else if(typeof window.diagnoseAddAccount==='function'){window.diagnoseAddAccount();}else{alert('계정 추가 함수가 로드되지 않았습니다.\\n앱을 완전히 종료한 후 재시작해주세요.\\n계속 안 되면 v2.10.208 재설치 필요.');}}catch(e){alert('❌ onclick 실행 중 에러: '+e.message);console.error('[AddAccount] onclick error:',e);}})(this);"
+                                style="padding: 0.6rem 1rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; white-space: nowrap;">➕ 계정 추가</button>
                         </div>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
@@ -392,7 +391,7 @@
                                     style="padding: 0.4rem 0.75rem; background: rgba(107, 114, 128, 0.2); color: #6b7280; border: 1px solid #6b7280; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">전체
                                     해제</button>
                                 <button type="button" id="ma-add-account-inline"
-                                    onclick="if(window.openAddAccountModalDirect){window.openAddAccountModalDirect();}else{console.error('[MultiAccount] openAddAccountModalDirect 함수 미정의 — 새 버전 설치 필요');alert('계정 추가 기능 미설치 — 앱을 재시작해주세요.');}"
+                                    onclick="(function(btn){try{btn.style.background='linear-gradient(135deg, #22c55e, #16a34a)';btn.textContent='✅ 클릭됨';setTimeout(function(){btn.style.background='linear-gradient(135deg, #8b5cf6, #7c3aed)';btn.textContent='➕ 계정 추가';},800);console.log('[AddAccount-Inline] 🔘 onclick 실행됨, v2.10.208');if(typeof window.openAddAccountModalDirect==='function'){window.openAddAccountModalDirect();}else{alert('계정 추가 함수가 로드되지 않았습니다.\\n앱을 완전히 종료한 후 재시작해주세요.');}}catch(e){alert('❌ onclick 에러: '+e.message);}})(this);"
                                     style="padding: 0.4rem 0.75rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; white-space: nowrap;">➕ 계정 추가</button>
                             </div>
                         </div>

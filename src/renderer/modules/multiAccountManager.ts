@@ -4188,6 +4188,35 @@ export async function initMultiAccountPublishModal() {
   console.log('[MultiAccountPublish] 다중계정 동시발행 모달 초기화 완료');
 }
 
+// ✅ [v2.10.208] 시각적 진단 함수 — alert로 모든 정보 한 번에 표시 (콘솔 안 봐도 OK)
+(window as any).diagnoseAddAccount = function() {
+  const btn = document.getElementById('main-add-account-btn');
+  const modal = document.getElementById('ma-account-edit-modal');
+  const funcExists = typeof (window as any).openAddAccountModalDirect === 'function';
+  const lines: string[] = [];
+  lines.push('=== 계정 추가 진단 ===');
+  lines.push('');
+  lines.push(`v2.10.208 빌드`);
+  lines.push(`버튼(main-add-account-btn): ${btn ? '✅ 존재' : '❌ 없음'}`);
+  if (btn) {
+    const r = btn.getBoundingClientRect();
+    lines.push(`  위치: ${Math.round(r.x)}, ${Math.round(r.y)} (크기 ${Math.round(r.width)}×${Math.round(r.height)})`);
+    lines.push(`  disabled: ${(btn as HTMLButtonElement).disabled}`);
+    lines.push(`  visible: ${r.width > 0 && r.height > 0}`);
+    const topElement = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+    lines.push(`  해당 위치 실제 element: ${topElement?.tagName.toLowerCase()}${topElement?.id ? '#' + topElement.id : ''}`);
+    lines.push(`  버튼 == 실제 element: ${topElement === btn ? '✅ 일치' : '❌ 다른 element가 위 덮음!'}`);
+  }
+  lines.push(`모달(ma-account-edit-modal): ${modal ? '✅ 존재' : '❌ 없음'}`);
+  if (modal) {
+    lines.push(`  display: ${(modal as HTMLElement).style.display || 'inherit'}`);
+  }
+  lines.push(`window.openAddAccountModalDirect: ${funcExists ? '✅ 정의됨' : '❌ 미정의'}`);
+  lines.push('');
+  lines.push('이 정보를 캡처해서 개발자에게 전달해주세요.');
+  alert(lines.join('\n'));
+};
+
 // ✅ [v2.10.206] 진단 코드 — 클릭 이벤트가 어디서 가로채지는지 *capture phase*에서 추적
 //   사용자 콘솔에 클릭 자체 로그도 안 찍힘 → 다른 element가 클릭 가로채는 중 추정
 //   capture phase로 *가장 먼저* 잡아서 진짜 클릭된 element + 부모 chain 출력
