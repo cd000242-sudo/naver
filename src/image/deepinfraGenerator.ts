@@ -341,6 +341,9 @@ export async function generateWithDeepInfra(
     const DEEPINFRA_AHASH_THRESHOLD = 8;
     const DEEPINFRA_DUP_MAX_RETRIES = 3;
 
+    // ✅ [v2.10.222] 마지막 실패 원인 추적 — 모든 아이템 실패 시 위로 throw해서 UI에 진짜 원인 노출
+    let lastErrorMessage: string | null = null;
+
     for (let i = 0; i < items.length; i++) {
         // ✅ [2026-01-29 FIX] 각 이미지 생성 전 중지 체크
         if (AutomationService.isCancelRequested()) {
@@ -579,7 +582,13 @@ export async function generateWithDeepInfra(
 
             if (!res) {
                 console.error(`[DeepInfra] ❌ "${item.heading}" 모든 재시도 실패`);
+                lastErrorMessage = lastErrorMessage || `"${item.heading}" 모든 재시도 실패 (3회)`;
                 continue;
+            }
+
+            // ✅ [v2.10.222] res가 있는데 success false면 마지막 에러 추적
+            if (!res.success && res.error) {
+                lastErrorMessage = res.error;
             }
 
 
@@ -644,11 +653,20 @@ export async function generateWithDeepInfra(
                 }
             }
         } catch (error) {
-            console.error(`[DeepInfra] ❌ "${item.heading}" 생성 실패:`, (error as Error).message);
+            const msg = (error as Error).message || '알 수 없는 에러';
+            console.error(`[DeepInfra] ❌ "${item.heading}" 생성 실패:`, msg);
+            lastErrorMessage = msg; // ✅ [v2.10.222] 진짜 에러 추적
         }
     }
 
     console.log(`[DeepInfra] ✅ 완료: ${results.length}/${items.length}개 성공`);
+
+    // ✅ [v2.10.222] 모든 아이템 실패 시 마지막 에러 메시지로 throw — UI에 진짜 원인 노출
+    if (results.length === 0 && items.length > 0) {
+        const reason = lastErrorMessage || '원인 미상 (deepinfraGenerator.ts 로그 확인 필요)';
+        throw new Error(`DeepInfra 전체 실패 (${items.length}/${items.length}): ${reason}`);
+    }
+
     return results;
 }
 
