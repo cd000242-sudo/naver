@@ -5885,7 +5885,8 @@
 
 
     <!-- API 키 발급 가이드 모달 -->
-    <div id="api-guide-modal" class="modal-backdrop" aria-hidden="true" style="display: none; z-index: 10002;">
+    <!-- ✅ [v2.10.225] z-index 10002→20002로 — settings-modal(20000)보다 위에 올라가야 보임 -->
+    <div id="api-guide-modal" class="modal-backdrop" aria-hidden="true" style="display: none; z-index: 20002;">
         <div class="modal-panel"
             style="max-width: 800px; max-height: 90vh; overflow-y: auto; background: var(--bg-primary); border: 3px solid var(--primary);">
             <button type="button" class="modal-close" data-close-api-guide
@@ -5904,7 +5905,8 @@
     </div>
 
     <!-- 사용 가이드 모달 -->
-    <div id="user-guide-modal" class="modal-backdrop" aria-hidden="true" style="display: none; z-index: 10002;">
+    <!-- ✅ [v2.10.225] z-index 10002→20002로 — settings-modal(20000)보다 위에 -->
+    <div id="user-guide-modal" class="modal-backdrop" aria-hidden="true" style="display: none; z-index: 20002;">
         <div class="modal-panel"
             style="max-width: 900px; max-height: 90vh; overflow-y: auto; background: var(--bg-primary); border: 3px solid var(--primary);">
             <button type="button" class="modal-close" data-close-user-guide

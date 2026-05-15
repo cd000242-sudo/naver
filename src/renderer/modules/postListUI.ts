@@ -1002,10 +1002,20 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
     titleInput.value = post.title;
     titleInput.readOnly = false; // 수정 가능하게
   }
+  // ✅ [v2.10.225] 사용자 보고: "본문내용이 싹다날아갓네"
+  //   대응: normalize 후 빈 문자열이면 원본 raw로 fallback + 진단 로그
   if (contentTextarea) {
-    const normalized = normalizeReadableBodyText(post.content);
-    contentTextarea.value = normalized;
-    contentTextarea.readOnly = false; // 수정 가능하게
+    const rawContent = String(post.content || '');
+    const normalized = normalizeReadableBodyText(rawContent);
+    const finalContent = normalized.trim() ? normalized : rawContent;
+    contentTextarea.value = finalContent;
+    contentTextarea.readOnly = false;
+    console.log(`[loadGeneratedPost] 본문 로드: raw=${rawContent.length}자, normalized=${normalized.length}자, final=${finalContent.length}자, postId=${postId}`);
+    if (rawContent.length > 0 && normalized.trim().length === 0) {
+      console.warn(`[loadGeneratedPost] ⚠️ normalize가 본문을 전부 제거함 → 원본 raw로 fallback (postId=${postId})`);
+    }
+  } else {
+    console.warn(`[loadGeneratedPost] ⚠️ unified-generated-content textarea가 DOM에 없음 (postId=${postId})`);
   }
   if (hashtagsInput) {
     hashtagsInput.value = (post.hashtags || []).join(' ');
