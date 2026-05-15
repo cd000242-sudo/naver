@@ -541,29 +541,37 @@ import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
 })();
 
 (function setupLongTaskObserver() {
+  // ✅ [v2.10.223] LongTask 경고를 기본 silent. localStorage.debug_longtask='1' 일 때만 출력
+  //   기존: console.warn으로 50ms+ 모든 작업 보고 → 풀오토/다중계정 발행 시
+  //   sharp 이미지 처리, base64 디코딩 등이 매번 50ms 넘겨서 콘솔 도배 →
+  //   [DeepInfra] 같은 진단 로그가 묻혀버림. 디버그 모드에서만 활성화하도록 변경.
   try {
     if (typeof PerformanceObserver === 'undefined') return;
+    const debugEnabled = (() => {
+      try { return localStorage.getItem('debug_longtask') === '1'; } catch { return false; }
+    })();
+    if (!debugEnabled) {
+      // 평소엔 observer 등록 자체를 안 함 → 콘솔 깨끗
+      return;
+    }
     const obs = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
         const dur = entry.duration;
         if (dur < 50) continue;
         const level = dur > 500 ? '🚨 SEVERE' : dur > 200 ? '🐌 HEAVY' : '⚠️';
         const startMs = entry.startTime;
-        // 마지막 사용자 액션 + 시간 차이
         const ua = (window as any).__lastUserAction as { type: string; target: string; id: string; ts: number };
         let userCtx = '';
         if (ua && ua.ts > 0) {
           const deltaMs = (startMs - ua.ts).toFixed(0);
           userCtx = ` | 직전 ${ua.type}:${ua.target}#${ua.id || '<none>'} (${deltaMs}ms 전)`;
         }
-        // attribution (Chromium 표준): script/iframe 출처
         const attribution = (entry as any).attribution as Array<{ containerType?: string; containerSrc?: string; containerId?: string; containerName?: string; name?: string }> | undefined;
         let attrCtx = '';
         if (Array.isArray(attribution) && attribution.length > 0) {
           const a = attribution[0];
           attrCtx = ` | attribution:${a.containerType || '?'}/${a.containerName || a.containerId || a.containerSrc || a.name || '?'}`;
         }
-        // 백그라운드 작업 마커
         const bgTask = (window as any).__lastBackgroundTask;
         let bgCtx = '';
         if (bgTask && typeof bgTask === 'string') bgCtx = ` | bg:${bgTask}`;
@@ -573,9 +581,9 @@ import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
       }
     });
     obs.observe({ type: 'longtask', buffered: true });
-    console.warn('[PerfDebug] LongTask observer 등록 — 50ms+ 블로킹 작업 자동 감지 (v2.10.127 상세 진단)');
+    console.log('[PerfDebug] LongTask observer 등록 — debug_longtask=1 (활성화됨)');
   } catch (e) {
-    console.warn('[PerfDebug] LongTask observer 등록 실패:', e);
+    // 등록 실패는 silent — 진단 logger 자체가 콘솔 노이즈가 되면 안 됨
   }
 })();
 

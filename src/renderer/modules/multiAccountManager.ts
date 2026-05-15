@@ -545,10 +545,16 @@ export async function generateImagesForAutomation(
         }
       } else if (result.images && result.images.length === 0) {
         // ✅ [v1.4.40] 메인의 분류된 ImageFX 에러(message)가 있으면 그대로 사용
-        const detailMsg = result.message || '이미지 생성 결과가 비어있음';
+        // ✅ [v2.10.223] result.message가 fallback("비어있음")으로만 떨어지면 진단 단서 없음 →
+        //    사용자가 F12 안 봐도 어느 분기로 떨어졌는지 모달 로그에 직접 노출
+        const detailMsg = result.message || '이미지 생성 결과가 비어있음 (success=true, images=[], message=undefined — main 핸들러가 throw 안 함, 엔진 silent fail 의심)';
+        onProgress?.(`🔍 진단: success=${result.success}, images=${result.images?.length ?? 'undefined'}, message="${result.message || '(없음)'}"`);
         throw new Error(detailMsg);
       } else {
-        throw new Error(result.message || '이미지 생성 결과 없음');
+        // ✅ [v2.10.223] success=false 경로 — result.message에 실제 사유가 있어야 함
+        const detailMsg = result.message || '이미지 생성 결과 없음 (success=false, message=undefined)';
+        onProgress?.(`🔍 진단: success=${result.success}, images=${result.images?.length ?? 'undefined'}, message="${result.message || '(없음)'}"`);
+        throw new Error(detailMsg);
       }
 
     } catch (error) {
