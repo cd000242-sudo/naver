@@ -194,6 +194,41 @@ async function loadCurrentSettings(): Promise<void> {
             els.perplexityModelSelect.value = config.perplexityModel;
         }
 
+        // ✅ [v2.10.221] 글 생성 엔진(primaryGeminiTextModel) 라디오 버튼 모달 열릴 때마다 디스크 값으로 복원
+        // 기존: initPriceInfoModal()의 DOMContentLoaded 1회 실행에 의존 → 사용자가 라디오 만지고 저장 안 하면 다음 열 때 변경분 잔존
+        // 수정: 모달 열 때마다 디스크 값으로 강제 동기화 → "왜 기억 못 함?" 해결
+        const savedTextModel = (config as any).primaryGeminiTextModel || 'gemini-2.5-flash';
+        const textModelRadios = document.getElementsByName('primaryGeminiTextModel') as NodeListOf<HTMLInputElement>;
+        if (textModelRadios.length > 0) {
+            textModelRadios.forEach(r => { r.checked = (r.value === savedTextModel); });
+            console.log(`[SettingsModal] ✅ primaryGeminiTextModel 라디오 복원: ${savedTextModel} (${textModelRadios.length}개 라디오)`);
+        }
+
+        // ✅ [v2.10.221] Gemini 플랜(free/paid) 라디오도 매번 디스크 값으로 동기화
+        const savedPlan = (config as any).geminiPlanType || 'free';
+        const planRadios = document.getElementsByName('geminiPlanType') as NodeListOf<HTMLInputElement>;
+        if (planRadios.length > 0) {
+            planRadios.forEach(r => { r.checked = (r.value === savedPlan); });
+            console.log(`[SettingsModal] ✅ geminiPlanType 라디오 복원: ${savedPlan}`);
+        }
+
+        // ✅ [v2.10.221] nav-text-engine-status "현재: ..." 라벨도 매번 디스크 값 반영
+        const navStatusEl = document.getElementById('nav-text-engine-status');
+        if (navStatusEl) {
+            const modelLabels: Record<string, string> = {
+                'gemini-2.5-flash-lite': '💰 Gemini 2.5 Flash-Lite (~₩15/글)',
+                'gemini-2.5-flash': '⚖️ Gemini 2.5 Flash (~₩80/글) ★ 기본',
+                'gemini-2.5-pro': '👑 Gemini 2.5 Pro (~₩300/글)',
+                'perplexity-sonar': '🔮 Perplexity Sonar (~₩15/글)',
+                'openai-gpt4o-mini': '🧠 GPT-4.1 mini (~₩16/글)',
+                'openai-gpt41': '⚖️ GPT-4.1 (~₩60/글)',
+                'claude-haiku': '🎭 Claude Haiku (~₩30/글)',
+                'claude-sonnet': '📜 Claude Sonnet 4.6 (~₩240/글)',
+                'claude-opus': '👑 Claude Opus (~₩900/글)',
+            };
+            navStatusEl.textContent = `현재: ${modelLabels[savedTextModel] || savedTextModel}`;
+        }
+
         console.log('[SettingsModal] 현재 설정 로드 완료');
     } catch (error) {
         console.error('[SettingsModal] 설정 로드 실패:', error);

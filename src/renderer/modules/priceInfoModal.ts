@@ -581,14 +581,14 @@ export async function initPriceInfoModal(): Promise<void> {
     }
 
     // ✅ Gemini 텍스트 주력 모델 라디오 버튼 로드
-    if (config.primaryGeminiTextModel) {
+    // ✅ [v2.10.221] undefined여도 기본값 'gemini-2.5-flash'로 항상 라디오/라벨 복원
+    {
+      const activeTextModel = config.primaryGeminiTextModel || 'gemini-2.5-flash';
       const modelRadios = document.getElementsByName('primaryGeminiTextModel') as NodeListOf<HTMLInputElement>;
       modelRadios.forEach(radio => {
-        if (radio.value === config.primaryGeminiTextModel) {
-          radio.checked = true;
-        }
+        radio.checked = (radio.value === activeTextModel);
       });
-      console.log('[Settings] Gemini 텍스트 주력 모델 로드됨:', config.primaryGeminiTextModel);
+      console.log('[Settings] Gemini 텍스트 주력 모델 로드됨:', activeTextModel, '(원본:', config.primaryGeminiTextModel || 'undefined', ')');
 
       // ✅ [2026-02-22 FIX] 로드 시 nav-text-engine-status UI 업데이트
       // ✅ [v2.7.78] deprecate 모델 ID 자동 마이그레이션 + 기본값 보장
