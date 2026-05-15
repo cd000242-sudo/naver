@@ -659,6 +659,19 @@ export async function generateSingleDeepInfraImage(
     options: DeepInfraGenerateOptions,
     apiKey: string
 ): Promise<DeepInfraResult> {
+    // ✅ [v2.10.219] 알려지지 않은 모델명 → schnell fallback (사용자 설정 오류 차단)
+    const requestedModel = options.model || DEFAULT_DEEPINFRA_MODEL;
+    const knownModels = Object.values(DEEPINFRA_MODEL_MAP);
+    const finalModel = knownModels.includes(requestedModel)
+        ? requestedModel
+        : (DEEPINFRA_MODEL_MAP[requestedModel] || DEFAULT_DEEPINFRA_MODEL);
+
+    if (finalModel !== requestedModel) {
+        console.log(`[DeepInfra] 모델 자동 변환: "${requestedModel}" → "${finalModel}"`);
+    }
+
+    console.log(`[DeepInfra] 🔵 API 호출 시작 — URL: ${DEEPINFRA_API_URL}, model: ${finalModel}, size: ${options.size || '1024x1024'}, key prefix: ${apiKey.slice(0, 6)}***`);
+
     try {
         // OpenAI 호환 API 호출 (공식 문서: https://deepinfra.com/black-forest-labs/FLUX-2-dev/api)
         const response = await axios.post(
@@ -666,7 +679,7 @@ export async function generateSingleDeepInfraImage(
             {
                 prompt: options.prompt,
                 size: options.size || '1024x1024',
-                model: options.model || DEFAULT_DEEPINFRA_MODEL,
+                model: finalModel,
                 n: options.n || 1
                 // ✅ response_format 불필요 - API가 기본으로 b64_json 반환
             },
@@ -679,17 +692,21 @@ export async function generateSingleDeepInfraImage(
             }
         );
 
+        console.log(`[DeepInfra] ✅ 응답 status: ${response.status}, data.length: ${response.data?.data?.length || 0}`);
+
         const data = response.data;
 
         if (!data.data || data.data.length === 0) {
-            return { success: false, error: 'DeepInfra 응답에 이미지가 없습니다.' };
+            console.error('[DeepInfra] ❌ 응답에 data 배열이 없음:', JSON.stringify(data).slice(0, 200));
+            return { success: false, error: `DeepInfra 응답 비어있음. 모델: ${finalModel}` };
         }
 
         // base64 이미지 데이터 추출 (공식 응답 형식: { data: [{ b64_json: "..." }] })
         const imageData = data.data[0].b64_json;
 
         if (!imageData) {
-            return { success: false, error: 'DeepInfra 응답에 b64_json이 없습니다.' };
+            console.error('[DeepInfra] ❌ b64_json 없음. 응답 구조:', JSON.stringify(Object.keys(data.data[0])));
+            return { success: false, error: `DeepInfra 응답에 b64_json 필드 없음. URL 변경됐을 가능성. 응답 키: ${Object.keys(data.data[0]).join(', ')}` };
         }
 
         // Base64 → 파일 저장
@@ -706,12 +723,35 @@ export async function generateSingleDeepInfraImage(
         };
 
     } catch (error: any) {
-        const msg = error.response?.data?.error?.message ||
-            error.response?.data?.detail ||
-            error.message ||
-            'DeepInfra API Error';
-        console.error('[DeepInfra] 오류 발생:', msg);
-        return { success: false, error: msg };
+        // ✅ [v2.10.219] 상세 에러 정보 — 사용자 진단용
+        const statusCode = error.response?.status;
+        const responseBody = error.response?.data;
+        const apiMsg = responseBody?.error?.message
+            || responseBody?.detail
+            || (typeof responseBody === 'string' ? responseBody.slice(0, 200) : null);
+
+        let userMsg = '';
+        if (statusCode === 401 || statusCode === 403) {
+            userMsg = `DeepInfra API 키 인증 실패 (${statusCode}) — 환경설정에서 키 재확인 필요`;
+        } else if (statusCode === 402) {
+            userMsg = `DeepInfra 크레딧 부족 (${statusCode}) — https://deepinfra.com/billing 에서 충전`;
+        } else if (statusCode === 404) {
+            userMsg = `DeepInfra 모델 "${finalModel}" 찾을 수 없음 (${statusCode}) — 모델 deprecated 가능성. 환경설정에서 FLUX-1-schnell 선택`;
+        } else if (statusCode === 429) {
+            userMsg = `DeepInfra 호출 한도 초과 (${statusCode}) — 잠시 후 재시도`;
+        } else if (error.code === 'ECONNABORTED' || /timeout/i.test(error.message || '')) {
+            userMsg = `DeepInfra API 응답 시간 초과 (2분) — 네트워크 또는 서버 지연. 재시도 권장`;
+        } else if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
+            userMsg = `DeepInfra 서버 연결 실패 (${error.code}) — 네트워크/방화벽 확인`;
+        } else {
+            userMsg = apiMsg || error.message || 'DeepInfra API Error';
+        }
+
+        console.error(`[DeepInfra] ❌ 호출 실패 (status: ${statusCode || 'N/A'}, model: ${finalModel}):`, userMsg);
+        if (responseBody) {
+            console.error('[DeepInfra] 응답 body:', JSON.stringify(responseBody).slice(0, 500));
+        }
+        return { success: false, error: userMsg };
     }
 }
 
