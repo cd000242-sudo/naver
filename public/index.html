@@ -5090,8 +5090,27 @@
                                         발급 가이드</button>
                                     <button type="button" id="openai-validate-btn"
                                         style="padding: 0.65rem 0.85rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">✅ 키 확인</button>
+                                    <!-- ✅ [v2.10.218] 덕트테이프(gpt-image-2) Organization 인증 — 환경설정에서 직접 열기 -->
+                                    <button type="button" id="openai-org-verify-btn"
+                                        style="padding: 0.65rem 0.85rem; background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap;"
+                                        title="gpt-image-2(덕트테이프) 사용을 위한 Organization 인증 페이지">🦆 덕테이프 인증</button>
                                 </div>
                                 <div id="openai-validate-result" style="display: none; margin-top: 0.5rem; padding: 0.6rem 0.85rem; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 8px; font-size: 0.78rem; color: var(--text-strong); line-height: 1.5;"></div>
+                                <!-- ✅ [v2.10.218] 덕테이프 인증 안내 (접힌 상태로 시작) -->
+                                <details style="margin-top: 0.5rem; padding: 0.6rem 0.85rem; background: rgba(168, 85, 247, 0.06); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 8px;">
+                                    <summary style="font-size: 0.78rem; color: #a78bfa; cursor: pointer; font-weight: 600;">🦆 덕테이프 인증이란? (1번만 하면 영구)</summary>
+                                    <div style="margin-top: 0.5rem; font-size: 0.78rem; color: var(--text-muted); line-height: 1.6;">
+                                        <strong style="color: #c4b5fd;">gpt-image-2(덕트테이프)</strong>는 OpenAI가 *Organization 인증된 계정에만* 풀어주는 신모델입니다.<br>
+                                        <strong>인증 절차</strong> (5~15분):
+                                        <ol style="margin: 0.3rem 0 0 1.2rem; padding: 0;">
+                                            <li>위 "🦆 덕테이프 인증" 버튼 → OpenAI 페이지 열림</li>
+                                            <li><strong>Verify Organization</strong> 클릭</li>
+                                            <li>신분증(여권/운전면허) + 셀카 업로드</li>
+                                            <li>거주국 선택 → 제출</li>
+                                            <li>"Verified" 표시되면 + 15분 후 모델 접근 가능</li>
+                                        </ol>
+                                    </div>
+                                </details>
                             </div>
 
                             <!-- ═══════════════════════════════════════════════════════════════ -->

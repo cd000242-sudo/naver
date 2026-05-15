@@ -318,6 +318,19 @@ export async function initPriceInfoModal(): Promise<void> {
   setupApiKeyValidation('claude', 'claude-api-key', 'claude-validate-btn', 'claude-validate-result', 'Claude');
   setupApiKeyValidation('deepinfra', 'deepinfra-api-key', 'deepinfra-validate-btn', 'deepinfra-validate-result', 'DeepInfra');
 
+  // ✅ [v2.10.218] 덕테이프 인증 버튼 — OpenAI Organization 인증 페이지 열기
+  const ducttapeVerifyBtn = document.getElementById('openai-org-verify-btn') as HTMLButtonElement | null;
+  if (ducttapeVerifyBtn) {
+    ducttapeVerifyBtn.addEventListener('click', async () => {
+      try {
+        await (window as any).api?.openExternalUrl?.('https://platform.openai.com/settings/organization/general');
+      } catch (e) {
+        console.error('[Settings] 덕테이프 인증 페이지 열기 실패:', e);
+        alert('OpenAI 인증 페이지를 열 수 없습니다.\n수동으로 https://platform.openai.com/settings/organization/general 접속해주세요.');
+      }
+    });
+  }
+
   // ✅ [v2.7.95] 데이터 백업/복원 버튼 핸들러
   const backupCreateBtn = document.getElementById('backup-create-btn') as HTMLButtonElement | null;
   const backupListBtn = document.getElementById('backup-list-btn') as HTMLButtonElement | null;
