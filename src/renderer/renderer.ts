@@ -7037,9 +7037,20 @@ function restoreAutosavedContent(): void {
   if (!saved) return;
 
   const timeSince = Math.floor((Date.now() - saved.timestamp) / 1000 / 60); // 분 단위
-  const message = `${timeSince}분 전에 저장된 작업이 있습니다.\n\n복구하시겠습니까?`;
 
-  if (confirm(message)) {
+  // ✅ [v2.10.224] 동기 confirm() 제거 — 사용자 보고: 앱 켜자마자 main thread 181460ms 블로킹
+  //   원인: Electron의 confirm()은 사용자 응답 전까지 메인 스레드를 동기로 잠금.
+  //   사용자가 다이얼로그를 못 봤거나 무시하면 그 시간 동안 모든 IPC/콜백 정지 →
+  //   "콘솔에 아무것도 안 뜬다" 체감.
+  //   수정: 토스트로만 알림 + 자동 복구 진행. 의도치 않은 복구가 부담스러우면
+  //         clearAutosavedContent() 호출은 토스트 메시지에 안내.
+  try {
+    const tm = (window as any).toastManager;
+    if (tm) tm.info(`💾 ${timeSince}분 전 작업 자동 복구 중...`, 5000);
+  } catch { /* 토스트 실패 무시 */ }
+
+  // confirm() 분기 제거 — 항상 복구 진행
+  if (true) {
     appendLog(`🔄 임시 저장 데이터 복구 중... (${timeSince}분 전)`);
 
     // 모드 전환
@@ -7131,9 +7142,11 @@ function restoreAutosavedContent(): void {
       console.warn('[restoreAutosaved] 발행 버튼 활성화 실패:', e?.message);
     }
 
-    alert('✅ 작업이 복구되었습니다!');
-  } else {
-    clearAutosavedContent();
+    // ✅ [v2.10.224] alert() 제거 — 동기 다이얼로그 → 메인 스레드 블로킹 원인
+    try {
+      const tm = (window as any).toastManager;
+      if (tm) tm.success('✅ 작업이 복구되었습니다!', 4000);
+    } catch { /* 토스트 실패 무시 */ }
   }
 }
 
