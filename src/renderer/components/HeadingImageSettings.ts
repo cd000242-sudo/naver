@@ -861,10 +861,11 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">덕트테이프</div>
             <div style="font-size: 10px; color: #7c3aed;">gpt-image-2 | Org 인증 필요</div>
           </label>
-          <label class="source-option" data-value="dall-e-3" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fce7f3, #fbcfe8); text-align: center; transition: all 0.2s;">
+          <!-- ✅ [v2.10.216] DALL-E 3는 2026-05-12 OpenAI API 제거됨 — 자동으로 gpt-image-1로 마이그레이션 -->
+          <label class="source-option" data-value="dall-e-3" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fce7f3, #fbcfe8); text-align: center; transition: all 0.2s; opacity: 0.5; position: relative;" title="2026-05-12 OpenAI API 제거. 자동으로 gpt-image-1로 마이그레이션됩니다.">
             <div style="font-size: 1.5rem;">🎨</div>
-            <div style="font-size: 12px; font-weight: 600; color: #831843;">DALL-E 3</div>
-            <div style="font-size: 10px; color: #9d174d;">OpenAI | 인증 불필요</div>
+            <div style="font-size: 12px; font-weight: 600; color: #831843; text-decoration: line-through;">DALL-E 3</div>
+            <div style="font-size: 10px; color: #9d174d;">⚠️ 제거됨 → gpt-image-1 자동 대체</div>
           </label>
           <label class="source-option" data-value="leonardoai" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ffedd5, #fdba74); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦁</div>
@@ -1171,7 +1172,7 @@ export function createHeadingImageModal(): void {
                 <option value="">📌 현재 저장된 엔진 사용</option>
                 <!-- ✅ [v2.10.72] value="nano-banana-2" → "nano-banana-pro" (별칭 → 정식 키) -->
                 <option value="nano-banana-pro">🍌 나노바나나 (Gemini 2.5 Flash Image, ₩54/장) ★추천</option>
-                <option value="dall-e-3">🎨 DALL-E 3 (OpenAI, 인증 불필요)</option>
+                <option value="dall-e-3" disabled>🎨 DALL-E 3 (제거됨 — gpt-image-1 자동 대체)</option>
                 <option value="flow">🍌 Flow (Nano Banana 2, AI Pro 무료)</option>
                 <option value="imagefx">✨ ImageFX (Google 무료)</option>
                 <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>

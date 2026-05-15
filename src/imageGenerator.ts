@@ -329,11 +329,14 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     }
   }
 
-  // v2.7.15: DALL-E 3 — gpt-image-2 인증 대기 중 임시 우회용 (Org 인증 불필요)
+  // ✅ [v2.10.216] DALL-E 3 — OpenAI가 2026-05-12 API 제거 (오늘 2026-05-15 기준 사용 불가)
+  //   사용자 보고: "달리 3는 없어지지않았니??"
+  //   조치: 자동으로 gpt-image-1 (openai-image)로 마이그레이션 — 사용자 선택 무효화 안 하고 새 모델로 우회
   if (normalizedProvider === 'dall-e-3') {
+    console.warn(`[이미지생성] ⚠️ DALL-E 3는 2026-05-12 OpenAI API 제거됨 → gpt-image-1 자동 마이그레이션`);
     try {
-      console.log(`[이미지생성] 🎨 DALL-E 3로 ${items.length}개 이미지 생성 시작...`);
-      const dalleImages = await generateWithOpenAIImage(
+      console.log(`[이미지생성] 🎨 gpt-image-1 (DALL-E 3 후속)로 ${items.length}개 이미지 생성...`);
+      const migratedImages = await generateWithOpenAIImage(
         items,
         options.postTitle,
         options.postId,
@@ -342,14 +345,14 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.isShoppingConnect || false,
         onImageGenerated,
         options.collectedImages,
-        'dall-e-3', // 모델 강제 지정
+        // 'dall-e-3' 모델 강제 지정 제거 — 기본 gpt-image-1 사용
       );
-      console.log(`[이미지생성] ✅ DALL-E 3로 ${dalleImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(dalleImages, 'openai-image', options.postTitle, options.thumbnailTextInclude, items), items);
-    } catch (dalleError) {
-      console.warn(`[ImageGenerator] ⚠️ DALL-E 3 실패:`, (dalleError as Error).message);
-      const userMsg = getImageErrorMessage(dalleError);
-      throw new Error(`[DALL-E 3] ${userMsg}`);
+      console.log(`[이미지생성] ✅ gpt-image-1로 ${migratedImages.length}개 생성 완료 (DALL-E 3 자동 마이그레이션)`);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(migratedImages, 'openai-image', options.postTitle, options.thumbnailTextInclude, items), items);
+    } catch (migrationError) {
+      console.error(`[ImageGenerator] ❌ gpt-image-1 자동 마이그레이션 실패:`, (migrationError as Error).message);
+      const userMsg = getImageErrorMessage(migrationError);
+      throw new Error(`DALL-E 3는 2026-05-12 OpenAI에 의해 제거되었습니다.\n환경설정 → 이미지 엔진에서 *gpt-image-1* 또는 *Imagen 4*로 변경해주세요.\n\n원본 오류: ${userMsg}`);
     }
   }
 
