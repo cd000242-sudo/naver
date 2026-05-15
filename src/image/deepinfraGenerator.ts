@@ -680,8 +680,8 @@ export async function generateSingleDeepInfraImage(
                 prompt: options.prompt,
                 size: options.size || '1024x1024',
                 model: finalModel,
-                n: options.n || 1
-                // ✅ response_format 불필요 - API가 기본으로 b64_json 반환
+                n: options.n || 1,
+                response_format: 'b64_json', // ✅ [v2.10.220] 명시 — 일부 환경 기본값 url 회귀 방지
             },
             {
                 headers: {
@@ -697,23 +697,34 @@ export async function generateSingleDeepInfraImage(
         const data = response.data;
 
         if (!data.data || data.data.length === 0) {
-            console.error('[DeepInfra] ❌ 응답에 data 배열이 없음:', JSON.stringify(data).slice(0, 200));
+            console.error('[DeepInfra] ❌ 응답에 data 배열이 없음. 응답 구조:', JSON.stringify(data).slice(0, 300));
             return { success: false, error: `DeepInfra 응답 비어있음. 모델: ${finalModel}` };
         }
 
-        // base64 이미지 데이터 추출 (공식 응답 형식: { data: [{ b64_json: "..." }] })
-        const imageData = data.data[0].b64_json;
+        const first = data.data[0];
+        console.log(`[DeepInfra] 응답 키: ${Object.keys(first).join(', ')}`);
 
-        if (!imageData) {
-            console.error('[DeepInfra] ❌ b64_json 없음. 응답 구조:', JSON.stringify(Object.keys(data.data[0])));
-            return { success: false, error: `DeepInfra 응답에 b64_json 필드 없음. URL 변경됐을 가능성. 응답 키: ${Object.keys(data.data[0]).join(', ')}` };
+        // ✅ [v2.10.220] b64_json 또는 url 모두 처리 — DeepInfra가 환경에 따라 둘 중 하나 반환
+        let imageData: string | undefined = first.b64_json;
+        let buffer: Buffer;
+
+        if (imageData) {
+            buffer = Buffer.from(imageData, 'base64');
+        } else if (first.url) {
+            console.log(`[DeepInfra] b64_json 없음 → url 다운로드: ${String(first.url).slice(0, 80)}...`);
+            const imgResp = await axios.get(first.url, {
+                responseType: 'arraybuffer',
+                timeout: 60000,
+            });
+            buffer = Buffer.from(imgResp.data);
+            imageData = buffer.toString('base64');
+        } else {
+            console.error(`[DeepInfra] ❌ b64_json도 url도 없음. 응답 키: ${Object.keys(first).join(', ')}`);
+            return { success: false, error: `DeepInfra 응답에 b64_json/url 필드 모두 없음. 응답 키: ${Object.keys(first).join(', ')}` };
         }
 
-        // Base64 → 파일 저장
-        const buffer = Buffer.from(imageData, 'base64');
         const filename = `deepinfra_${Date.now()}.png`;
         const localPath = path.join(app.getPath('temp'), filename);
-
         fs.writeFileSync(localPath, buffer);
 
         return {
@@ -729,6 +740,47 @@ export async function generateSingleDeepInfraImage(
         const apiMsg = responseBody?.error?.message
             || responseBody?.detail
             || (typeof responseBody === 'string' ? responseBody.slice(0, 200) : null);
+
+        // ✅ [v2.10.220] 404 (모델 deprecated) 시 schnell로 자동 폴백 1회
+        if (statusCode === 404 && finalModel !== DEFAULT_DEEPINFRA_MODEL) {
+            console.warn(`[DeepInfra] ⚠️ 모델 "${finalModel}" 404 → "${DEFAULT_DEEPINFRA_MODEL}"로 자동 폴백 재시도`);
+            try {
+                const retryResp = await axios.post(
+                    DEEPINFRA_API_URL,
+                    {
+                        prompt: options.prompt,
+                        size: options.size || '1024x1024',
+                        model: DEFAULT_DEEPINFRA_MODEL,
+                        n: options.n || 1,
+                        response_format: 'b64_json',
+                    },
+                    {
+                        headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+                        timeout: 120000,
+                    }
+                );
+                const fb = retryResp.data?.data?.[0];
+                let imageData: string | undefined = fb?.b64_json;
+                let buffer: Buffer;
+                if (imageData) {
+                    buffer = Buffer.from(imageData, 'base64');
+                } else if (fb?.url) {
+                    const imgResp = await axios.get(fb.url, { responseType: 'arraybuffer', timeout: 60000 });
+                    buffer = Buffer.from(imgResp.data);
+                    imageData = buffer.toString('base64');
+                } else {
+                    return { success: false, error: `DeepInfra 폴백 모델 응답에도 b64_json/url 없음` };
+                }
+                const filename = `deepinfra_fb_${Date.now()}.png`;
+                const localPath = path.join(app.getPath('temp'), filename);
+                fs.writeFileSync(localPath, buffer);
+                console.log(`[DeepInfra] ✅ 폴백 성공 (${DEFAULT_DEEPINFRA_MODEL})`);
+                return { success: true, imageData, localPath };
+            } catch (fbErr: any) {
+                console.error(`[DeepInfra] ❌ 폴백도 실패:`, fbErr.response?.status, fbErr.message);
+                // 폴백 실패 시 원본 에러 흐름으로 떨어진다
+            }
+        }
 
         let userMsg = '';
         if (statusCode === 401 || statusCode === 403) {
