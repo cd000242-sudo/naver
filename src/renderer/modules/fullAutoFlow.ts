@@ -2157,6 +2157,29 @@ export async function generateFullAutoContent(formData: any) {
     return info;
   })() : undefined;
 
+  // ✅ [v2.10.217] 풀오토 키워드 제목 옵션 — _keywordTitleOptions 전역에 등록
+  //   사용자 보고: "풀오토 발행에서 키워드를 제목으로 사용하기 체크했는데 맘대로 제목 지어버리네요"
+  //   원인: collectFullAutoFormData는 keywordAsTitle 읽지만 contentGenerator로 *전달 코드 누락*
+  //   수정: payload + window._keywordTitleOptions 둘 다 등록
+  if (formData.keywordAsTitle) {
+    (window as any)._keywordTitleOptions = {
+      useKeywordAsTitle: true,
+      useKeywordTitlePrefix: formData.keywordTitlePrefix || false,
+      keyword: formData.keywords || titleStr || keywordList.join(' '),
+    };
+    appendLog(`📌 키워드를 제목으로 그대로 사용: "${(window as any)._keywordTitleOptions.keyword}"`);
+  } else if (formData.keywordTitlePrefix) {
+    (window as any)._keywordTitleOptions = {
+      useKeywordAsTitle: false,
+      useKeywordTitlePrefix: true,
+      keyword: formData.keywords || titleStr || keywordList.join(' '),
+    };
+    appendLog(`🔝 키워드를 제목 맨 앞에 배치합니다.`);
+  } else {
+    // 토글 OFF면 이전 옵션 정리 (다음 글에 잔재 방지)
+    (window as any)._keywordTitleOptions = undefined;
+  }
+
   const payload = {
     assembly: {
       generator: formData.generator,
@@ -2172,6 +2195,10 @@ export async function generateFullAutoContent(formData: any) {
       articleType: formData.articleType,
       toneStyle: formData.toneStyle || formData.tone,
       businessInfo,  // ✅ [v1.4.20] 업체 홍보 모드 전용
+      // ✅ [v2.10.217] 풀오토 키워드 제목 옵션 직접 전달
+      useKeywordAsTitle: formData.keywordAsTitle || false,
+      keywordForTitle: formData.keywordAsTitle ? (formData.keywords || titleStr || keywordList.join(' ')) : undefined,
+      useKeywordTitlePrefix: formData.keywordTitlePrefix || false,
     }
   };
 
