@@ -3621,36 +3621,76 @@ async function initUnifiedTab(): Promise<void> {
   const semiAutoContent = document.getElementById('unified-generated-content') as HTMLTextAreaElement;
   const semiAutoHashtags = document.getElementById('unified-generated-hashtags') as HTMLInputElement;
 
+  // ✅ [v2.10.278] paste 또는 직접 입력으로 textarea에 글이 들어오면 자동으로
+  //   currentStructuredContent 생성 + 발행 버튼 활성화 + 미리보기 표시.
+  //   기존 동작: sc가 null이면 input/paste 이벤트가 silent skip → 발행 못함.
+  function _ensureSemiAutoStructuredContent(): any {
+    let sc = (window as any).currentStructuredContent;
+    if (sc) return sc;
+    const titleEl = document.getElementById('unified-generated-title') as HTMLInputElement | null;
+    const contentEl = document.getElementById('unified-generated-content') as HTMLTextAreaElement | null;
+    const hashtagsEl = document.getElementById('unified-generated-hashtags') as HTMLInputElement | null;
+    sc = {
+      selectedTitle: titleEl?.value || '',
+      title: titleEl?.value || '',
+      bodyPlain: contentEl?.value || '',
+      content: contentEl?.value || '',
+      hashtags: hashtagsEl?.value || '',
+      headings: [],
+      _bodyManuallyEdited: true,
+      _manualPasted: true,
+    };
+    (window as any).currentStructuredContent = sc;
+    // 발행 버튼 활성화 + 미리보기 표시
+    try { (window as any).markContentGenerated?.(); } catch { /* noop */ }
+    try {
+      const previewSection = document.getElementById('unified-preview-section');
+      if (previewSection) previewSection.style.display = 'block';
+    } catch { /* noop */ }
+    try { (window as any).updateRiskIndicators?.(sc); } catch { /* noop */ }
+    console.log('[SemiAuto] 사용자 paste/직접 입력 감지 → currentStructuredContent 자동 생성');
+    return sc;
+  }
+
   if (semiAutoTitle) {
-    semiAutoTitle.addEventListener('input', () => {
-      const sc = (window as any).currentStructuredContent;
+    const _syncTitle = () => {
+      const v = semiAutoTitle.value;
+      const sc = v.trim().length > 0 ? _ensureSemiAutoStructuredContent() : (window as any).currentStructuredContent;
       if (sc) {
-        sc.title = semiAutoTitle.value;
-        sc.selectedTitle = semiAutoTitle.value;
+        sc.title = v;
+        sc.selectedTitle = v;
       }
-    });
+    };
+    semiAutoTitle.addEventListener('input', _syncTitle);
+    semiAutoTitle.addEventListener('paste', () => setTimeout(_syncTitle, 0));
   }
 
   if (semiAutoContent) {
-    semiAutoContent.addEventListener('input', () => {
-      const sc = (window as any).currentStructuredContent;
+    const _syncContent = () => {
+      const v = semiAutoContent.value;
+      // 의미 있는 내용 있을 때만 sc 생성 (빈 입력 시 자동 생성 안 함)
+      const sc = v.trim().length >= 10 ? _ensureSemiAutoStructuredContent() : (window as any).currentStructuredContent;
       if (sc) {
-        sc.bodyPlain = semiAutoContent.value;
-        sc.content = semiAutoContent.value;
-        // ✅ [2026-02-28 FIX] 사용자 직접 편집 플래그 — applyStructuredContent에서 100% 원문 반영 분기 활성화
+        sc.bodyPlain = v;
+        sc.content = v;
+        // ✅ [2026-02-28] 사용자 직접 편집 플래그 — applyStructuredContent에서 100% 원문 반영 분기 활성화
         sc._bodyManuallyEdited = true;
       }
-    });
+    };
+    semiAutoContent.addEventListener('input', _syncContent);
+    // ✅ [v2.10.278] paste 이벤트 — 브라우저가 textarea.value 갱신한 후 sync
+    semiAutoContent.addEventListener('paste', () => setTimeout(_syncContent, 0));
   }
 
   if (semiAutoHashtags) {
-    semiAutoHashtags.addEventListener('input', () => {
+    const _syncHashtags = () => {
       const sc = (window as any).currentStructuredContent;
       if (sc) {
-        // 입력된 해시태그 문자열을 그대로 저장 (fillSemiAutoFields에서 string도 처리함)
         sc.hashtags = semiAutoHashtags.value;
       }
-    });
+    };
+    semiAutoHashtags.addEventListener('input', _syncHashtags);
+    semiAutoHashtags.addEventListener('paste', () => setTimeout(_syncHashtags, 0));
   }
 
   // ✅ 카테고리 선택 모달 초기화
