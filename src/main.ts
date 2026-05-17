@@ -3709,6 +3709,9 @@ registerPostAnalyticsHandlers({
 // [v2.10.246] aiAssistant:* 4개 IPC 핸들러 분리
 import { registerAiAssistantHandlers } from './main/ipc/aiAssistantHandlers.js';
 registerAiAssistantHandlers();
+// ✅ [v2.10.281] paste:classify — 외부 LLM 결과 paste 시 Gemini Flash-Lite로 자동 분배
+import { registerPasteClassifyHandlers } from './main/ipc/pasteClassifyHandlers.js';
+registerPasteClassifyHandlers();
 // [v2.10.248] gemini:test10x + gemini:generateVeoVideo 분리
 import { registerGeminiHandlers } from './main/ipc/geminiHandlers.js';
 registerGeminiHandlers({ sendLog });

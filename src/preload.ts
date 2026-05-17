@@ -177,6 +177,9 @@ contextBridge.exposeInMainWorld('api', {
   getTutorialVideos: (): Promise<any[]> => ipcRenderer.invoke('tutorials:getVideos'),
   getConfig: (): Promise<AppConfig> => ipcRenderer.invoke('config:get'),
   saveConfig: (config: AppConfig): Promise<AppConfig> => ipcRenderer.invoke('config:set', config),
+  // ✅ [v2.10.281] paste된 자유 형식 글 LLM 분류 (Gemini Flash-Lite)
+  pasteClassify: (rawText: string): Promise<{ success: boolean; title?: string; body?: string; hashtags?: string; headings?: string[]; error?: string }> =>
+    ipcRenderer.invoke('paste:classify', rawText),
   getLibraryImages: (category?: string, titleKeywords?: string[]): Promise<ImageLibraryItem[]> =>
     ipcRenderer.invoke('library:getImages', category, titleKeywords),
   getLibraryCategories: (): Promise<string[]> => ipcRenderer.invoke('library:getCategories'),

@@ -3743,37 +3743,74 @@ async function initUnifiedTab(): Promise<void> {
       }
     };
     semiAutoContent.addEventListener('input', _syncContent);
-    // ✅ [v2.10.280] paste 시 마커/휴리스틱 파싱으로 title/content/hashtags 자동 분배
+
+    // ✅ [v2.10.280] paste 시 마커/휴리스틱 파싱 (1차)
+    // ✅ [v2.10.281] 마커 없으면 LLM 분류 IPC 호출 (2차 fallback) — Gemini Flash-Lite로 95%+ 정확도
+    const _applyParsed = (parsed: { title: string | null; body: string | null; hashtags: string | null; headings: string[] }) => {
+      if (parsed.body !== null) semiAutoContent.value = parsed.body;
+      if (parsed.title && semiAutoTitle) {
+        semiAutoTitle.value = parsed.title;
+        semiAutoTitle.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      if (parsed.hashtags && semiAutoHashtags) {
+        semiAutoHashtags.value = parsed.hashtags;
+        semiAutoHashtags.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      const sc = _ensureSemiAutoStructuredContent();
+      if (sc && parsed.headings.length > 0) {
+        sc.headings = parsed.headings.map((title: string) => ({ title }));
+      }
+      _refreshSemiAutoPreview();
+      try {
+        (window as any).toastManager?.success?.(`📋 자동 분배 완료 (소제목 ${parsed.headings.length}개)`);
+      } catch { /* noop */ }
+    };
+
     semiAutoContent.addEventListener('paste', () => {
-      setTimeout(() => {
+      setTimeout(async () => {
         const pasted = semiAutoContent.value;
         if (!pasted || pasted.trim().length < 20) {
           _syncContent();
           return;
         }
+
+        // 1차: 마커 기반 파싱
         const parsed = _parsePastedContent(pasted);
-        // 분배할 필드가 하나라도 식별됐을 때만 자동 분배 진행
-        if (parsed.title || parsed.hashtags || parsed.body !== pasted.trim()) {
-          if (parsed.body !== null) semiAutoContent.value = parsed.body;
-          if (parsed.title !== null && semiAutoTitle) {
-            semiAutoTitle.value = parsed.title;
-            // 제목 input 이벤트 트리거 → _syncTitle 호출 → sc.title 동기화
-            semiAutoTitle.dispatchEvent(new Event('input', { bubbles: true }));
-          }
-          if (parsed.hashtags !== null && semiAutoHashtags) {
-            semiAutoHashtags.value = parsed.hashtags;
-            semiAutoHashtags.dispatchEvent(new Event('input', { bubbles: true }));
-          }
-          // sc 생성 + headings 주입
-          const sc = _ensureSemiAutoStructuredContent();
-          if (sc && parsed.headings.length > 0) {
-            sc.headings = parsed.headings.map((title: string) => ({ title }));
-          }
-          _refreshSemiAutoPreview();
-          console.log(`[Paste] 자동 분배: title=${!!parsed.title}, hashtags=${!!parsed.hashtags}, headings=${parsed.headings.length}개`);
-          try { (window as any).toastManager?.success?.(`📋 글 자동 분배 완료 (제목/본문/해시태그/소제목 ${parsed.headings.length}개)`); } catch { /* noop */ }
+        const markerHit = !!(parsed.title || parsed.hashtags || (parsed.body !== null && parsed.body !== pasted.trim()));
+
+        if (markerHit) {
+          _applyParsed(parsed);
+          _syncContent();
+          return;
         }
-        _syncContent();
+
+        // 2차: LLM 분류 fallback — 마커 없는 자유 형식
+        try {
+          (window as any).toastManager?.info?.('🤖 글 구조 자동 분석 중... (1~3초)', 3000);
+          const api: any = (window as any).api;
+          if (typeof api?.pasteClassify !== 'function') {
+            console.warn('[Paste] api.pasteClassify 미노출 — 휴리스틱만 적용');
+            _syncContent();
+            return;
+          }
+          const result = await api.pasteClassify(pasted);
+          if (result?.success && (result.title || result.hashtags || result.headings?.length)) {
+            _applyParsed({
+              title: result.title || null,
+              body: result.body || null,
+              hashtags: result.hashtags || null,
+              headings: result.headings || [],
+            });
+            console.log(`[Paste] LLM 분류 성공: title=${!!result.title}, hashtags=${!!result.hashtags}, headings=${result.headings?.length}개`);
+          } else {
+            console.warn('[Paste] LLM 분류 실패:', result?.error);
+            try { (window as any).toastManager?.warning?.('⚠️ 자동 분배 실패 — 본문만 적용됨. 제목/해시태그 수동 입력 필요'); } catch { /* noop */ }
+          }
+        } catch (e) {
+          console.warn('[Paste] LLM 분류 호출 에러:', e);
+        } finally {
+          _syncContent();
+        }
       }, 0);
     });
   }
