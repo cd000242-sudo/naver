@@ -11,6 +11,8 @@ import { IpcContext } from '../types';
 import axios from 'axios';
 import { spawn } from 'child_process';
 import { generateSingleLeonardoAIImage } from '../../image/leonardoAIGenerator.js';
+// [SPEC-FREEZE-GUARD-001-P2 R2 / v2.10.261] Base64 디코딩 워커 분리 — 1MB+ Gemini/Veo inlineData
+import { decodeBase64Async } from '../utils/base64Async.js';
 
 // ffmpeg-static 경로 (GIF 변환용)
 let ffmpegPath: string | null = null;
@@ -411,7 +413,8 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     if (candidates?.[0]?.content?.parts) {
                         for (const part of candidates[0].content.parts) {
                             if (part.inlineData?.data) {
-                                const buffer = Buffer.from(part.inlineData.data, 'base64');
+                                // [SPEC-FREEZE-GUARD-001-P2 R2] 워커 디코딩 (1MB+ inline data 메인 스레드 블로킹 차단)
+                                const buffer = await decodeBase64Async(part.inlineData.data);
                                 const fileName = `test-${style}-gemini-${Date.now()}.png`;
                                 const filePath = path.join(saveDir, fileName);
                                 await fsp.writeFile(filePath, buffer);
@@ -644,7 +647,8 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     if (candidates?.[0]?.content?.parts) {
                         for (const part of candidates[0].content.parts) {
                             if (part.inlineData?.data) {
-                                const buffer = Buffer.from(part.inlineData.data, 'base64');
+                                // [SPEC-FREEZE-GUARD-001-P2 R2] 워커 디코딩 (1MB+ fallback inline data)
+                                const buffer = await decodeBase64Async(part.inlineData.data);
                                 const fileName = `test-${style}-fallback-${Date.now()}.png`;
                                 const filePath = path.join(saveDir, fileName);
                                 await fsp.writeFile(filePath, buffer);
@@ -853,7 +857,9 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     if (candidates?.[0]?.content?.parts) {
                         for (const part of candidates[0].content.parts) {
                             if (part.inlineData?.data) {
-                                await fsp.writeFile(cachePath, Buffer.from(part.inlineData.data, 'base64'));
+                                // [SPEC-FREEZE-GUARD-001-P2 R2] 워커 디코딩 (1MB+ Gemini cache 저장)
+                                const cacheBuffer = await decodeBase64Async(part.inlineData.data);
+                                await fsp.writeFile(cachePath, cacheBuffer);
                                 result = { success: true, path: cachePath };
                                 break;
                             }
@@ -949,7 +955,9 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     if (candidates?.[0]?.content?.parts) {
                         for (const part of candidates[0].content.parts) {
                             if (part.inlineData?.data) {
-                                await fsp.writeFile(cachePath, Buffer.from(part.inlineData.data, 'base64'));
+                                // [SPEC-FREEZE-GUARD-001-P2 R2] 워커 디코딩 (1MB+ Gemini cache 저장)
+                                const cacheBuffer = await decodeBase64Async(part.inlineData.data);
+                                await fsp.writeFile(cachePath, cacheBuffer);
                                 result = { success: true, path: cachePath };
                                 break;
                             }
@@ -1264,7 +1272,8 @@ export function registerMediaHandlers(ctx: IpcContext): void {
             if (candidates && candidates[0]?.content?.parts) {
                 for (const part of candidates[0].content.parts) {
                     if (part.inlineData && part.inlineData.mimeType?.startsWith('video/')) {
-                        const videoData = Buffer.from(part.inlineData.data, 'base64');
+                        // [SPEC-FREEZE-GUARD-001-P2 R2] 워커 디코딩 (수 MB~수십 MB Veo 비디오 — 가장 큰 페이로드)
+                        const videoData = await decodeBase64Async(part.inlineData.data);
 
                         const safeHeading = (heading || 'veo-video').replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/g, '').substring(0, 30);
                         const fileName = `${safeHeading}-${Date.now()}.mp4`;
