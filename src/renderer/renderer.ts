@@ -2628,7 +2628,11 @@ async function initializeApplication(): Promise<void> {
   //   v2.10.110 강제 yield(매 init 후 setTimeout 0)가 multiAccountManager의 main-add-account-btn /
   //   ma-add-account-btn 클릭 미반응 회귀 원인 의심. setTimeout chain 사이에 DOM/listener race 가능성.
   //   50ms 임계로 복귀: 무거운 init만 yield, 가벼운 init은 즉시 → 회귀 차단.
-  const YIELD_THRESHOLD_MS = 50;
+  // [v2.10.266] SPEC-FREEZE-GUARD-001 Phase A2 — renderer 시작 freeze 보수적 완화.
+  //   사용자 보고 "초반 응답없음 여전" + explorer 진단: 50ms 임계에서 30~50ms 짜리 init도
+  //   즉시 실행 → UI 응답 회복 기회 부족. 100ms 임계로 yield 후보 영역 확장.
+  //   무거운 init(>=100ms)만 yield 유지하되, 30~100ms 영역도 누적되면 yield 트리거되어 main thread 분산.
+  const YIELD_THRESHOLD_MS = 100;
   let _yieldLastT = performance.now();
   const _yieldIfNeeded = async (): Promise<void> => {
     const now = performance.now();
@@ -2676,9 +2680,12 @@ async function initializeApplication(): Promise<void> {
   //   사용자 보고: "로그인 후 1분 응답없음". startup await가 직접 원인.
   //   대안: postListUI:v2.10.108이 자체 batch 검증 — startup cleanup 없어도 broken img 자동 처리.
   //   setTimeout(500)으로 init 완료 후 백그라운드 실행 → 사용자 즉시 사용 가능.
+  // [v2.10.266] 500ms → 3000ms — 사용자 첫 동작 시점(3초)까지 cleanup 미루기.
+  //   explorer 진단: 500ms 버퍼링 후 N×M fs.existsSync IPC가 main thread 점유 → 시작 3초 freeze.
+  //   사용자 첫 액션은 보통 3~5초 이후 — cleanup이 그 사이 끝나도 늦지 않음.
   setTimeout(() => {
     cleanupStaleImageReferences().catch((e) => console.warn('[Init] background cleanup 실패:', e));
-  }, 500);
+  }, 3000);
   _perfMark('cleanupStaleImages → background (await 제거)');
 
   initUnifiedTab(); _perfMark('initUnifiedTab'); await _yieldIfNeeded();
