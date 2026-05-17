@@ -11,6 +11,8 @@ import { trackApiUsage } from '../apiUsageTracker.js';
 import { promises as fs } from 'fs';
 import sharp from 'sharp';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
+// [SPEC-FREEZE-GUARD-001-P2 R3 / v2.10.262] Base64 디코딩 워커 분리 — 1MB+ Gemini/Imagen 4 inline data
+import { decodeBase64Async } from '../main/utils/base64Async.js';
 
 // ✅ [2026-03-02] 실시간 이미지 생성 로그 → 렌더러 UI로 IPC 전송
 function sendImageLog(message: string): void {
@@ -132,7 +134,8 @@ async function generateImageWithImagen4(
     if (predictions && predictions.length > 0 && predictions[0].bytesBase64Encoded) {
       const base64Data = predictions[0].bytesBase64Encoded;
       const mimeType = predictions[0].mimeType || 'image/png';
-      const buffer = Buffer.from(base64Data, 'base64');
+      // [SPEC-FREEZE-GUARD-001-P2 R3] 워커 디코딩 (1MB+ Imagen 4 fallback bytesBase64Encoded)
+      const buffer = await decodeBase64Async(base64Data, { signal });
       console.log(`[Imagen4-Fallback] ✅ Imagen 4 생성 성공! (${Math.round(buffer.length / 1024)}KB)`);
       return { buffer, mimeType };
     }
@@ -1331,7 +1334,8 @@ async function generateSingleImageWithGemini(
               if (fallbackCandidates?.[0]?.content?.parts) {
                 for (const fbPart of fallbackCandidates[0].content.parts) {
                   if (fbPart.inlineData?.data) {
-                    let fbBuffer: Buffer = Buffer.from(fbPart.inlineData.data, 'base64') as Buffer;
+                    // [SPEC-FREEZE-GUARD-001-P2 R3] 워커 디코딩 (1MB+ Gemini fallback inline data)
+                    let fbBuffer: Buffer = await decodeBase64Async(fbPart.inlineData.data);
                     const fbExt = (fbPart.inlineData.mimeType || '').includes('jpeg') ? 'jpg' : 'png';
                     if (isThumbnail) fbBuffer = await cropThumbnail(fbBuffer, fbExt);
                     const fbSaved = await writeImageFile(fbBuffer, fbExt, item.heading, postTitle, postId);
@@ -1472,7 +1476,8 @@ async function generateSingleImageWithGemini(
             const mimeType = part.inlineData.mimeType || 'image/png';
             const extension = mimeType.includes('jpeg') || mimeType.includes('jpg') ? 'jpg' : 'png';
 
-            let buffer: Buffer = Buffer.from(imageData, 'base64');
+            // [SPEC-FREEZE-GUARD-001-P2 R3] 워커 디코딩 (1MB+ Gemini 메인 generate 루프 — cropThumbnail/sharp 입력)
+            let buffer: Buffer = await decodeBase64Async(imageData);
 
             // 크기 검증 - 경고만 출력하고 허용
             if (buffer.length < 1000) {
@@ -1741,7 +1746,8 @@ async function generateSingleImageWithGemini(
 
       for (const part of candidates[0].content.parts) {
         if (part.inlineData?.mimeType?.startsWith('image/')) {
-          let finalBuffer: Buffer = Buffer.from(part.inlineData.data, 'base64');
+          // [SPEC-FREEZE-GUARD-001-P2 R3] 워커 디코딩 (1MB+ Gemini 후처리 직전)
+          let finalBuffer: Buffer = await decodeBase64Async(part.inlineData.data);
           const extension = part.inlineData.mimeType.includes('jpeg') ? 'jpg' : 'png';
 
           const metadata = await sharp(finalBuffer).metadata();
@@ -1880,7 +1886,8 @@ ABSOLUTE REQUIREMENTS:
     if (candidates?.[0]?.content?.parts) {
       for (const part of candidates[0].content.parts) {
         if (part.inlineData?.data) {
-          const buffer = Buffer.from(part.inlineData.data, 'base64');
+          // [SPEC-FREEZE-GUARD-001-P2 R3] 워커 디코딩 (1MB+ Gemini edit 경로)
+          const buffer = await decodeBase64Async(part.inlineData.data);
           const { writeImageFile } = await import('./imageUtils.js');
           const result = await writeImageFile(buffer, 'png', `${productName}_장단점`);
           console.log(`[NanoBananaPro] ✅ AI 장단점 표 생성 완료: ${result.savedToLocal}`);
@@ -1961,7 +1968,8 @@ ABSOLUTE REQUIREMENTS:
     if (candidates?.[0]?.content?.parts) {
       for (const part of candidates[0].content.parts) {
         if (part.inlineData?.data) {
-          const buffer = Buffer.from(part.inlineData.data, 'base64');
+          // [SPEC-FREEZE-GUARD-001-P2 R3] 워커 디코딩 (1MB+ Gemini edit 경로)
+          const buffer = await decodeBase64Async(part.inlineData.data);
           const { writeImageFile } = await import('./imageUtils.js');
           const result = await writeImageFile(buffer, 'png', `${productName}_CTA배너`);
           console.log(`[NanoBananaPro] ✅ AI CTA 배너 생성 완료: ${result.savedToLocal}`);
