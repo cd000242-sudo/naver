@@ -1679,31 +1679,26 @@ async function createWindow(): Promise<void> {
     });
 
     const htmlPath = path.join(publicPath, 'index.html');
+    // [v2.10.265 P0 FIX] loadFile → loadURL with pathToFileURL (처음부터).
+    //   증상: 한글 경로(C:\Users\박성현\...)에서 loadFile이 ERR_FAILED (-2) 후 webContents가
+    //         invalidate되어 후속 loadURL fallback이 "Object has been destroyed"로 실패.
+    //   원인: Electron loadFile은 path → file:// 변환 시 backslash + 한글 인코딩이 불완전.
+    //         chromium URL parser가 거부 → 단일 시도에서 webContents 파괴.
+    //   조치: loadFile 단계를 건너뛰고 url.pathToFileURL()로 percent-encoded file:// URL을
+    //         만들어 loadURL을 첫 시도로 사용. 실패 시 진단 로그 보존.
+    const { pathToFileURL } = await import('url');
+    const fileUrl = pathToFileURL(htmlPath).toString();
     console.log('[Main] Loading HTML from:', htmlPath);
-    debugLog(`[Main] Loading HTML from: ${htmlPath}`);
-    // [v2.10.240 BUG FIX] ERR_FAILED (-2) 회피 — 한글 경로 file:// 인코딩 강제
-    //   원인 후보: 한글 경로(C:\Users\박성현\...)가 file:// URL 변환 시 인코딩 누락 → Chromium loadFile 거부.
-    //   조치: loadFile 실패 시 url.pathToFileURL로 percent-encoded URL 만들어 loadURL fallback.
-    //   진단 로그도 강화 — 실패 시 정확한 에러 정보 debug.log에 기록.
+    debugLog(`[Main] Loading HTML via loadURL: ${fileUrl}`);
     try {
-      await mainWindow.loadFile(htmlPath);
+      await mainWindow.loadURL(fileUrl);
       console.log('[Main] HTML loaded successfully');
-      debugLog('[Main] HTML loaded successfully (loadFile)');
+      debugLog('[Main] HTML loaded successfully (loadURL with pathToFileURL)');
     } catch (loadErr: any) {
       const errMsg = (loadErr as Error)?.message || String(loadErr);
-      debugLog(`[Main] loadFile 실패 — fallback 시도. 원인: ${errMsg}`);
-      console.error('[Main] loadFile 실패:', errMsg);
-      try {
-        const { pathToFileURL } = await import('url');
-        const fileUrl = pathToFileURL(htmlPath).toString();
-        debugLog(`[Main] loadURL fallback: ${fileUrl}`);
-        await mainWindow.loadURL(fileUrl);
-        debugLog('[Main] HTML loaded successfully (loadURL fallback)');
-      } catch (fallbackErr: any) {
-        const fbMsg = (fallbackErr as Error)?.message || String(fallbackErr);
-        debugLog(`[Main] loadURL fallback도 실패: ${fbMsg}`);
-        throw new Error(`HTML 로드 실패 (loadFile: ${errMsg} / fallback loadURL: ${fbMsg})`);
-      }
+      debugLog(`[Main] loadURL 실패: ${errMsg}`);
+      console.error('[Main] loadURL 실패:', errMsg);
+      throw new Error(`HTML 로드 실패 (loadURL: ${errMsg})`);
     }
 
     // ✅ [리팩토링] ipcHelpers에 mainWindow 참조 설정
