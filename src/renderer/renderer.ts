@@ -3621,6 +3621,58 @@ async function initUnifiedTab(): Promise<void> {
   const semiAutoContent = document.getElementById('unified-generated-content') as HTMLTextAreaElement;
   const semiAutoHashtags = document.getElementById('unified-generated-hashtags') as HTMLInputElement;
 
+  // ✅ [v2.10.280] 외부 LLM이 [제목]/[본문]/[해시태그] 마커로 출력한 글을 paste하면
+  //   각 필드(title/content/hashtags)로 자동 분배. ## 마크다운 헤더는 headings로 추출.
+  //   마커 없으면 휴리스틱 (첫 줄 40자 이내 = 제목, 끝의 #태그 = 해시태그).
+  function _parsePastedContent(raw: string): {
+    title: string | null;
+    body: string | null;
+    hashtags: string | null;
+    headings: string[];
+  } {
+    const text = raw.trim();
+    if (!text) return { title: null, body: null, hashtags: null, headings: [] };
+
+    // 1. 마커 기반 파싱 우선
+    const titleMatch = text.match(/\[제목\]\s*\n([^\n]+)/);
+    const bodyMatch = text.match(/\[본문\]\s*\n([\s\S]+?)(?=\n\[해시태그\]|\n\[태그\]|$)/);
+    const tagsMatch = text.match(/\[(?:해시태그|태그)\]\s*\n([\s\S]+?)$/);
+
+    if (titleMatch || bodyMatch || tagsMatch) {
+      const body = bodyMatch?.[1]?.trim() || null;
+      const headings = body ? (body.match(/^##\s+(.+)$/gm) || []).map(m => m.replace(/^##\s+/, '').trim()) : [];
+      return {
+        title: titleMatch?.[1]?.trim() || null,
+        body,
+        hashtags: tagsMatch?.[1]?.trim() || null,
+        headings,
+      };
+    }
+
+    // 2. 휴리스틱 fallback — 마커 없이 paste한 경우
+    const lines = text.split('\n');
+    const firstLine = lines[0]?.trim() || '';
+    const lastNonEmpty = [...lines].reverse().find(l => l.trim().length > 0) || '';
+
+    // 첫 줄이 40자 이내 + #으로 시작 안 함 → 제목 후보
+    const likelyTitle = (firstLine.length > 0 && firstLine.length <= 40 && !firstLine.startsWith('#')) ? firstLine : null;
+    // 마지막 비어있지 않은 줄이 #태그로 가득 → 해시태그
+    const likelyTags = /^(#\S+\s*){3,}$/.test(lastNonEmpty) ? lastNonEmpty : null;
+
+    let body = text;
+    if (likelyTitle) body = body.replace(firstLine, '').trim();
+    if (likelyTags) body = body.replace(lastNonEmpty, '').trim();
+
+    const headings = (body.match(/^##\s+(.+)$/gm) || []).map(m => m.replace(/^##\s+/, '').trim());
+
+    return {
+      title: likelyTitle,
+      body: body || null,
+      hashtags: likelyTags,
+      headings,
+    };
+  }
+
   // ✅ [v2.10.278] paste 또는 직접 입력으로 textarea에 글이 들어오면 자동으로
   //   currentStructuredContent 생성 + 발행 버튼 활성화 + 미리보기 표시.
   //   기존 동작: sc가 null이면 input/paste 이벤트가 silent skip → 발행 못함.
@@ -3691,8 +3743,39 @@ async function initUnifiedTab(): Promise<void> {
       }
     };
     semiAutoContent.addEventListener('input', _syncContent);
-    // ✅ [v2.10.278] paste 이벤트 — 브라우저가 textarea.value 갱신한 후 sync
-    semiAutoContent.addEventListener('paste', () => setTimeout(_syncContent, 0));
+    // ✅ [v2.10.280] paste 시 마커/휴리스틱 파싱으로 title/content/hashtags 자동 분배
+    semiAutoContent.addEventListener('paste', () => {
+      setTimeout(() => {
+        const pasted = semiAutoContent.value;
+        if (!pasted || pasted.trim().length < 20) {
+          _syncContent();
+          return;
+        }
+        const parsed = _parsePastedContent(pasted);
+        // 분배할 필드가 하나라도 식별됐을 때만 자동 분배 진행
+        if (parsed.title || parsed.hashtags || parsed.body !== pasted.trim()) {
+          if (parsed.body !== null) semiAutoContent.value = parsed.body;
+          if (parsed.title !== null && semiAutoTitle) {
+            semiAutoTitle.value = parsed.title;
+            // 제목 input 이벤트 트리거 → _syncTitle 호출 → sc.title 동기화
+            semiAutoTitle.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+          if (parsed.hashtags !== null && semiAutoHashtags) {
+            semiAutoHashtags.value = parsed.hashtags;
+            semiAutoHashtags.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+          // sc 생성 + headings 주입
+          const sc = _ensureSemiAutoStructuredContent();
+          if (sc && parsed.headings.length > 0) {
+            sc.headings = parsed.headings.map((title: string) => ({ title }));
+          }
+          _refreshSemiAutoPreview();
+          console.log(`[Paste] 자동 분배: title=${!!parsed.title}, hashtags=${!!parsed.hashtags}, headings=${parsed.headings.length}개`);
+          try { (window as any).toastManager?.success?.(`📋 글 자동 분배 완료 (제목/본문/해시태그/소제목 ${parsed.headings.length}개)`); } catch { /* noop */ }
+        }
+        _syncContent();
+      }, 0);
+    });
   }
 
   if (semiAutoHashtags) {
