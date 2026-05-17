@@ -582,7 +582,18 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         cleanedContent = self.enforceOrdinalLineBreaks(cleanedContent);
 
         // 수정된 내용으로 structuredContent 업데이트
-        structured.selectedTitle = currentContent.title || structured.selectedTitle;
+        // [v2.10.239 BUG FIX] keywordAsTitle lock — verbatim 키워드 모드에서 잔존 UI 값으로 덮어쓰기 차단
+        //   배경: 사용자가 "키워드 그대로 제목 사용" 토글 ON 상태인데 반자동 모드 에디터에 잔존 제목이 있으면 verbatim 키워드가 덮어씌워졌음.
+        //   조치: structured.keywordAsTitleLocked === true이면 currentContent.title이 verbatim 키워드와 같은 경우만 적용 (실제 사용자 수정은 다른 값일 것).
+        const _kwLocked = (structured as any).keywordAsTitleLocked === true;
+        const _kwValue = (structured as any).keywordAsTitleValue as string | undefined;
+        const _candidateTitle = (currentContent.title || '').trim();
+
+        if (_kwLocked && _kwValue && _candidateTitle && _candidateTitle !== _kwValue.trim()) {
+          self.log(`🔒 [keywordAsTitle lock] 에디터 제목 "${_candidateTitle.substring(0, 40)}..." → 키워드 verbatim "${_kwValue.substring(0, 40)}..." 보존`);
+        } else {
+          structured.selectedTitle = currentContent.title || structured.selectedTitle;
+        }
         structured.bodyPlain = cleanedContent || structured.bodyPlain;
         if (currentContent.hashtags.length > 0) {
           structured.hashtags = currentContent.hashtags;
@@ -590,9 +601,16 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
         // ✅ 수정된 제목을 그대로 타이핑
         if (currentContent.title && currentContent.title.length > 0) {
-          structured.selectedTitle = currentContent.title;
-          resolved.title = currentContent.title;
-          self.log('✅ 수정된 제목을 타이핑합니다.');
+          // [v2.10.239] 동일 가드 — lock 활성 + 다른 제목이면 verbatim 보존
+          if (_kwLocked && _kwValue && _candidateTitle !== _kwValue.trim()) {
+            structured.selectedTitle = _kwValue;
+            resolved.title = _kwValue;
+            self.log(`🔒 [keywordAsTitle lock] 타이핑 단계 verbatim 키워드 유지: "${_kwValue.substring(0, 40)}..."`);
+          } else {
+            structured.selectedTitle = currentContent.title;
+            resolved.title = currentContent.title;
+            self.log('✅ 수정된 제목을 타이핑합니다.');
+          }
         }
 
         // 해시태그가 있으면 설정 (나중에 입력)

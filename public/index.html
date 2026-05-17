@@ -4302,6 +4302,53 @@
                         </div>
                     </label>
                 </div>
+
+                <!-- 9. Claude Sonnet abstention 모드 (v2.10.236 기본 OFF - 고비용) -->
+                <div class="field" style="margin-bottom: 0.5rem; padding: 0.8rem; background: rgba(220, 38, 38, 0.06); border: 1px solid rgba(220, 38, 38, 0.4); border-radius: 8px;">
+                    <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
+                        <input type="checkbox" id="claude-abstention-mode" style="margin-top: 0.3rem; cursor: pointer;">
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.2rem;">🛡️ Claude Sonnet abstention 강화 모드 <span style="color: #dc2626; font-size: 0.75rem;">⚠️⚠️ [기본 OFF · 토큰 ×10 비용]</span></div>
+                            <small style="color: var(--text-muted); font-size: 0.75rem; display: block; line-height: 1.4;">
+                                Claude Sonnet 4.6의 abstention 능력(96.7%, LIT-RAGBench 1위)을 극대화 — 모르는 사실은 "모르겠다"고 정직히 답변.
+                                <br>⚠️ <strong style="color: #dc2626;">Gemini Flash 대비 토큰 비용 약 10배 증가</strong> (입력 $3/M, 출력 $15/M). 1편당 $0.05~0.20 추가.
+                                <br>📌 적용 조건: 엔진을 'Claude'로 선택 + 본 토글 ON 동시 필요. 다른 엔진(Gemini/OpenAI) 사용 시 무효.
+                                <br>💡 비용 부담 시: 본 토글 OFF + Gemini Flash + F6 abstention 룰(기본 적용)만으로도 환각 상당 부분 차단.
+                            </small>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- 8. AI 탭 친화 모드 (v2.10.235 기본 OFF) -->
+                <div class="field" style="margin-bottom: 0.5rem; padding: 0.8rem; background: rgba(245, 158, 11, 0.06); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px;">
+                    <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
+                        <input type="checkbox" id="ai-tab-friendly-mode" style="margin-top: 0.3rem; cursor: pointer;">
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.2rem;">🎯 AI 탭 친화 모드 (2026-04 출시 베타 대응) <span style="color: #f59e0b; font-size: 0.75rem;">[기본 OFF · 토큰 비용 ↑]</span></div>
+                            <small style="color: var(--text-muted); font-size: 0.75rem; display: block; line-height: 1.4;">
+                                네이버 AI 탭(2026-04-28 베타)의 발췌 후보화에 최적화된 글을 생성합니다. <strong>본문 6,000~8,000자 + 소제목 2~7개 + bullet/리스트 강제 + 정의문 우선</strong>.
+                                <br>⚠️ 토큰 비용·생성 시간 약 3배 증가. 정보 탐색형 키워드(`~원인`, `~방법`, `~차이`)에서만 효과.
+                                <br>⛔ 상업·추천형 키워드(`노트북 추천`, `보험 비교`)는 AI 탭 비노출이라 본 모드도 효과 없음.
+                                <br>📌 자료 외 사실 채우기는 자동 차단 (자료 부족 영역은 `(자료 부족)` 표기 후 다음 섹션).
+                            </small>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- 7. 자동 관련글 링크 (v2.10.228 → v2.10.229 기본 ON) -->
+                <div class="field" style="margin-bottom: 0.5rem; padding: 0.8rem; background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 8px;">
+                    <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
+                        <input type="checkbox" id="auto-insert-internal-links" checked style="margin-top: 0.3rem; cursor: pointer;">
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.2rem;">🔗 자동 관련글 링크 삽입 <span style="color: #6366f1; font-size: 0.75rem;">[기본 ON]</span></div>
+                            <small style="color: var(--text-muted); font-size: 0.75rem; display: block; line-height: 1.4;">
+                                발행 직전 본문 끝에 <strong>등록된 이전글 중 키워드 유사도 상위 3개</strong>를 카드 형태로 자동 첨부합니다 → 체류시간 ↑ / 회유 ↑.
+                                <br>⚠️ 관련글 매니저(<code>published-posts-links.json</code>)에 등록된 글이 있어야 동작 — 등록된 글 0개면 아무 변화 없음.
+                                <br>📌 발행 후 자동 등록 기능은 다음 릴리즈에서 복원 예정 (현재는 수동 등록만 가능).
+                            </small>
+                        </div>
+                    </label>
+                </div>
                 </div><!-- [v2.10.137] details inner wrapper 닫힘 -->
             </details>
                         <!-- ✅ [2026-01-27] 설정 섹션 버튼 네비게이션 -->

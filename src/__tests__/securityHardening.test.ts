@@ -39,8 +39,10 @@ describe('SEC-V2-H3 — openExternalUrl 프로토콜 화이트리스트', () => 
 });
 
 describe('SEC-V2-C1 — file:deleteFolder Command Injection 차단 (v2.7.43)', () => {
-  it('main.ts file:deleteFolder에 화이트리스트 + spawn 사용', () => {
-    const code = read('main.ts');
+  it('fileHandlers.ts file:deleteFolder에 화이트리스트 + spawn 사용', () => {
+    // [v2.10.242] main.ts → main/ipc/fileHandlers.ts 로 핸들러 이주 (god-file 분리)
+    //   security 가드는 fileHandlers.ts에 동일 유지 — 회귀 0
+    const code = read('main/ipc/fileHandlers.ts');
     // 두 패턴 분리 검증 (정규식 거리 의존 없음)
     expect(code).toMatch(/spawn\(['"]cmd\.exe['"]/);
     expect(code).toMatch(/allowedRoots/);

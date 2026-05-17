@@ -103,6 +103,22 @@ export interface AppConfig {
   //   효과: 키워드형 글 환각률 80~95% 감소 (LLM 자체 지식 대신 실제 자료 기반 작성)
   //   비용: 무료 (네이버 검색 API 일 25,000건)
   useNaverFactCheck?: boolean;
+  // ✅ [v2.10.228 → v2.10.229] 자동 관련글 링크 삽입 — 발행 직전 본문 끝에 관련글 카드 자동 추가
+  //   기본 ON (v2.10.229 사용자 요청): undefined도 ON 처리, 명시 false만 OFF
+  //   ON 시: published-posts-links.json에 등록된 글 중 키워드 유사도 상위 3개를 본문 끝에 추가
+  //   조건: 관련글 매니저에 등록된 글이 있어야 함 (현재는 수동 등록만, 자동 등록은 다음 릴리즈)
+  //   ⚠️ 매니저 비어있으면 silent skip (해 끼치지 않음)
+  autoInsertInternalLinks?: boolean;
+  // [SPEC-PROMPT-2026-REFRESH Phase 3-A / v2.10.235] AI 탭 친화 모드
+  //   2026-04-28 베타 출시 대응: 본문 6,000~8,000자 + 소제목 2~7개 + bullet/리스트 비중 ↑.
+  //   기본 OFF: 비용·생성 시간 ↑이므로 사용자 명시 ON 시에만 활성.
+  //   조건: 정보 탐색형 키워드(`~원인`, `~방법`, `~차이`)에서만 효과 — 상업·추천형은 비노출 차단.
+  aiTabFriendlyMode?: boolean;
+  // [SPEC-PROMPT-2026-REFRESH Phase 3-B / v2.10.236] Claude Sonnet abstention 모드
+  //   provider === 'claude' 일 때만 효과 (abstention 96.7%, LIT-RAGBench 1위 — Vectara FaithJudge).
+  //   기본 OFF: 신뢰성 절대 우선 사용자용 옵션. Claude API 키 + claude provider 동시 충족 시 활성.
+  //   동작: prompt에 강화 abstention 지시 추가 — "자료 없으면 모르겠다고 답하라" 명시.
+  claudeAbstentionMode?: boolean;
   // ✅ [v2.7.61] AI 이미지 관련성 검증 (Gemini Vision)
   imageRelevanceCheck?: boolean; // true 시 수집 이미지마다 AI가 관련성 평가
   imageRelevanceThreshold?: number; // 0~100, 기본 60
@@ -642,6 +658,12 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
         'geoOptimization',
         // ✅ [v2.10.73] 네이버 fact-check RAG 토글 보존
         'useNaverFactCheck',
+        // ✅ [v2.10.228] 자동 관련글 링크 토글 보존
+        'autoInsertInternalLinks',
+        // [v2.10.235] AI 탭 친화 모드 토글 보존
+        'aiTabFriendlyMode',
+        // [v2.10.236] Claude Sonnet abstention 모드 토글 보존
+        'claudeAbstentionMode',
       ];
       let preserved = 0;
       for (const k of PRESERVE_KEYS) {

@@ -760,6 +760,30 @@ export async function initPriceInfoModal(): Promise<void> {
       console.warn('[priceInfoModal] 네이버 fact-check 토글 로드 실패:', e);
     }
 
+    // ✅ [v2.10.229] 자동 관련글 링크 토글 로드 — 기본 ON (사용자 요청, undefined도 true 취급)
+    try {
+      const autoLinkEl = document.getElementById('auto-insert-internal-links') as HTMLInputElement | null;
+      if (autoLinkEl) autoLinkEl.checked = (config as any).autoInsertInternalLinks !== false;
+    } catch (e) {
+      console.warn('[priceInfoModal] 자동 관련글 링크 토글 로드 실패:', e);
+    }
+
+    // [v2.10.235 Phase 3-A] AI 탭 친화 모드 토글 로드 — 기본 OFF (비용·시간 ↑이므로 opt-in)
+    try {
+      const aiTabEl = document.getElementById('ai-tab-friendly-mode') as HTMLInputElement | null;
+      if (aiTabEl) aiTabEl.checked = (config as any).aiTabFriendlyMode === true;
+    } catch (e) {
+      console.warn('[priceInfoModal] AI 탭 친화 모드 토글 로드 실패:', e);
+    }
+
+    // [v2.10.236 Phase 3-B] Claude Sonnet abstention 모드 토글 로드 — 기본 OFF (토큰 ×10 비용)
+    try {
+      const claudeAbstentionEl = document.getElementById('claude-abstention-mode') as HTMLInputElement | null;
+      if (claudeAbstentionEl) claudeAbstentionEl.checked = (config as any).claudeAbstentionMode === true;
+    } catch (e) {
+      console.warn('[priceInfoModal] Claude abstention 모드 토글 로드 실패:', e);
+    }
+
     // ✅ [v2.10.187 Phase 3.6+] 자동 SERP 벤치마크 토글 로드 — opt-out (기본 ON)
     //   undefined(미설정)도 ON 처리. 사용자가 명시적으로 OFF 한 경우만 unchecked.
     try {
@@ -961,6 +985,15 @@ export async function initPriceInfoModal(): Promise<void> {
             // 토글 자체가 없거나 checked면 true. 명시 unchecked만 false.
             return el ? el.checked : true;
           })(),
+          // ✅ [v2.10.229] 자동 관련글 링크 토글 저장 (기본 ON, undefined도 true 취급)
+          autoInsertInternalLinks: (() => {
+            const el = document.getElementById('auto-insert-internal-links') as HTMLInputElement | null;
+            return el ? el.checked : true;
+          })(),
+          // [v2.10.235 Phase 3-A] AI 탭 친화 모드 토글 저장 (기본 OFF, 명시 ON 시에만 true)
+          aiTabFriendlyMode: (document.getElementById('ai-tab-friendly-mode') as HTMLInputElement | null)?.checked || false,
+          // [v2.10.236 Phase 3-B] Claude Sonnet abstention 모드 토글 저장 (기본 OFF, 명시 ON 시에만 true)
+          claudeAbstentionMode: (document.getElementById('claude-abstention-mode') as HTMLInputElement | null)?.checked || false,
           // ✅ [v2.10.186 Phase 3.6] 자동 SERP 벤치마크 토글 (기본 OFF — 옵트인)
           autoSerpBenchmark: (document.getElementById('auto-serp-benchmark') as HTMLInputElement | null)?.checked || false,
           primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-2.5-flash', // ✅ [v1.4.49 revert] 기본값 Flash (Flash-Lite RPD 20/일로 부족)

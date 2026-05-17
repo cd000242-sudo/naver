@@ -1212,6 +1212,10 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
   // 서버 재검증 (선택사항)
   // admin-panel의 Google Apps Script 서버와 연동
   if (serverUrl) {
+    // [v2.10.226] 3s timeout — Apps Script 응답 지연이 15s+ IPC 점유 (사용자 보고: "초반 응답없음").
+    // 재검증은 보조 검증이고 실패 시 로컬 라이선스 유지하므로 timeout 후 false 반환 안전.
+    const _controller = new AbortController();
+    const _timer = setTimeout(() => _controller.abort(), 3000);
     try {
       const response = await fetch(serverUrl, {
         method: 'POST',
@@ -1224,13 +1228,16 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
           code: license.licenseCode,
           deviceId: license.deviceId,
         }),
+        signal: _controller.signal,
       });
 
       if (!response.ok) {
+        clearTimeout(_timer);
         return false;
       }
 
       const result = await response.json();
+      clearTimeout(_timer);
 
       // Apps Script 응답 형식에 맞게 처리
       if (result.ok === false) {
@@ -1257,7 +1264,9 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
       }
       await saveLicense(license);
     } catch {
-      // 서버 연결 실패 시 로컬 라이선스 유지
+      // 서버 연결 실패 또는 timeout 시 로컬 라이선스 유지
+    } finally {
+      clearTimeout(_timer);
     }
   }
 

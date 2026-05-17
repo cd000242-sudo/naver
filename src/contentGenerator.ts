@@ -78,6 +78,8 @@ import {
 import { detectPromptLeakageInTitle } from './contentTitleSafetyChecks';
 // [Phase 3-18/v2.10.164] 키워드 전처리 helper
 import { getPrimaryKeywordFromSource, preprocessLongKeyword } from './contentKeywordHelpers';
+// [SPEC-PROMPT-2026-REFRESH Phase 1/v2.10.231] 일반론 도망 감지 + 인용 토큰 밀도 측정
+import { detectPlatitudes } from './contentPlatitudeDetector';
 // [Phase 3-20/v2.10.166] 키워드 prefix + review title (applyKeywordPrefixToTitle는 내부 helper)
 import {
   applyKeywordPrefixToStructuredContent,
@@ -1176,6 +1178,10 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
     const kwTitle = source.keywordForTitle.trim();
     console.log(`[finalizeStructuredContent] 📌 키워드를 제목으로 그대로 사용: "${kwTitle}"`);
     finalContent.selectedTitle = kwTitle;
+    // [v2.10.239] keywordAsTitle lock 플래그 — IPC 직렬화되어 main process(editorHelpers)까지 전파
+    //   editorHelpers.ts:585/593 (반자동 모드 사용자 수정 제목 적용)이 이 플래그 보고 가드.
+    (finalContent as any).keywordAsTitleLocked = true;
+    (finalContent as any).keywordAsTitleValue = kwTitle;
     // 대안 제목도 키워드로 통일 (제목 선택 UI에서 혼선 방지)
     if (Array.isArray(finalContent.titleAlternatives)) {
       finalContent.titleAlternatives = [kwTitle];
@@ -1554,6 +1560,7 @@ export interface ContentSource {
   previousTitles?: string[]; // ✅ [2026-02-09 v2] 이전 생성 제목 (연속발행 중복 방지)
   useKeywordAsTitle?: boolean; // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 (제목 생성/평가 건너뛰기)
   keywordForTitle?: string; // ✅ [2026-02-24] useKeywordAsTitle=true 일 때 사용할 키워드 원문
+  aiTabFriendly?: boolean; // [v2.10.235 Phase 3-A] AI 탭 친화 모드 — 6,000~8,000자 + bullet/리스트 강제
 }
 export interface TitleCandidate {
   text: string;
@@ -2373,15 +2380,65 @@ ${source.customPrompt.trim()}
   // ✅ [v1.4.35] SEO 0.2 → 0.5 (로봇 회귀 방지, "사람보다 사람처럼" 우선)
   //              0.2는 거의 deterministic이라 학습 데이터의 평균 어조로 회귀.
   //              0.5는 키워드 정확도를 유지하면서 어휘/표현 다양성 확보.
+  // ✅ [v2.10.231 SPEC-PROMPT-2026-REFRESH Phase 1] faithfulness 우선 인하
+  //              SEO 0.5 → 0.3 (1단계 인하 — 0.1까지 가면 학습 데이터 회귀 위험)
+  //              homefeed 0.7 → 0.5 (창의 유지 + 충실도 균형)
+  //              Phase 1 효과 측정 후 추가 인하 결정. F1~F5 prompt rule이 일반론 회귀 차단.
   let temperature = 0.5; // 기본값
-  if (contentMode === 'seo') temperature = 0.5;  // 0.2 → 0.5
-  else if (contentMode === 'homefeed') temperature = 0.7;
+  if (contentMode === 'seo') temperature = 0.3;  // [v2.10.231] 0.5 → 0.3
+  else if (contentMode === 'homefeed') temperature = 0.5;  // [v2.10.231] 0.7 → 0.5
   else if (contentMode === 'traffic-hunter') temperature = 0.9;
   else if (contentMode === 'affiliate') temperature = 0.5;
   else if (contentMode === 'custom') temperature = 0.7;
   else if (contentMode === 'business') temperature = 0.6; // ✅ [v1.4.21] 0.4→0.6 (같은 업체 반복 발행 시 다양성 확보)
 
   let systemPrompt = systemPromptResult;
+
+  // [SPEC-PROMPT-2026-REFRESH Phase 3-B / v2.10.236] Claude Sonnet abstention 강화 prompt
+  //   조건: source.claudeAbstentionStrong === true (config.claudeAbstentionMode === true + provider claude).
+  //   동작: systemPrompt 끝에 강한 abstention 지시 추가 — Sonnet의 96.7% abstention 성능 극대화.
+  //   Gemini Flash 사용자에게는 base.prompt F6 룰만 적용되고 이 강화 inject는 생략 (Sonnet 전용).
+  if ((source as any).claudeAbstentionStrong === true) {
+    systemPrompt = `${systemPrompt}\n\n` +
+      `════════════════════════════════════════\n` +
+      `🛡️ [SECTION -3 STRONG ABSTENTION] (Sonnet 전용 강화)\n` +
+      `════════════════════════════════════════\n` +
+      `★ 자료에 명시되지 않은 사실은 절대 추측 금지.\n` +
+      `★ "확실히 알지 못하는 부분은 솔직히 표시" 우선:\n` +
+      `   - "이 부분은 자료에 명시되어 있지 않습니다"\n` +
+      `   - "정확한 수치는 공식 출처 확인을 권장합니다"\n` +
+      `   - "확인된 정보가 부족하여 단언할 수 없습니다"\n` +
+      `★ 부정확한 자신감보다 정직한 불확실성 표현이 더 가치 있음.\n` +
+      `★ 모든 사실 진술 단락에 [자료N] 인용 토큰 또는 "(자료 부족)" 표기 강제.\n`;
+    console.log('[PromptBuilder] 🛡️ Claude Sonnet STRONG abstention 강화 prompt 추가');
+  }
+
+  // [SPEC-PROMPT-2026-REFRESH Phase 3-A / v2.10.235] AI 탭 친화 모드 prompt 추가
+  //   조건: source.aiTabFriendly === true (configManager.aiTabFriendlyMode === true → contentGenerator에서 source에 플래그 세팅).
+  //   동작: src/prompts/seo/ai-tab-friendly.prompt 로드해서 systemPrompt 끝에 append.
+  //   효과: 6,000~8,000자 + bullet/리스트 + 정의문 + 정보 탐색형 키워드 룰 LLM에 강제.
+  //   실패 시 graceful skip (기본 SEO 룰만 적용).
+  if (source.aiTabFriendly === true && contentMode === 'seo') {
+    try {
+      const aiTabPromptPath = path.join(app.getAppPath(), 'dist', 'prompts', 'seo', 'ai-tab-friendly.prompt');
+      if (fsSync.existsSync(aiTabPromptPath)) {
+        const aiTabPromptContent = fsSync.readFileSync(aiTabPromptPath, 'utf-8');
+        systemPrompt = `${systemPrompt}\n\n${aiTabPromptContent}`;
+        console.log('[PromptBuilder] 🎯 AI 탭 친화 프롬프트 추가 (ai-tab-friendly.prompt)');
+      } else {
+        // dev 환경 (dist 빌드 전): src 경로 폴백
+        const devPath = path.join(__dirname, '..', 'src', 'prompts', 'seo', 'ai-tab-friendly.prompt');
+        if (fsSync.existsSync(devPath)) {
+          systemPrompt = `${systemPrompt}\n\n${fsSync.readFileSync(devPath, 'utf-8')}`;
+          console.log('[PromptBuilder] 🎯 AI 탭 친화 프롬프트 추가 (dev src 폴백)');
+        } else {
+          console.warn('[PromptBuilder] ⚠️ ai-tab-friendly.prompt 파일 없음 — 기본 SEO 룰만 적용');
+        }
+      }
+    } catch (e: any) {
+      console.warn('[PromptBuilder] AI 탭 친화 프롬프트 로드 실패 — graceful skip:', e?.message || e);
+    }
+  }
 
   // ✅ [v1.4.14] 글자수 지침은 user 파트로 이동 (캐시 적중률 향상)
   // 이전: system에 ${minChars} 직접 삽입 → 매 글 캐시 미스
@@ -6726,7 +6783,7 @@ export async function generateStructuredContent(
   let provider = options.provider ?? source.generator ?? 'gemini';
   const userSelectedProvider = provider; // ✅ [2026-04-11] 사용자가 선택한 원래 엔진 보존 (폴백 방지용)
   // ✅ 기본 글자수: 3000자 (풍부한 내용 + 최적 분량, 양보다 질 최극상)
-  const minChars = options.minChars ?? 2500; // ✅ [v1.4.14] 3000→2500 (출력 토큰 -15%, SEO 안전 1500자 이상 유지)
+  let minChars = options.minChars ?? 2500; // ✅ [v1.4.14] 3000→2500 (출력 토큰 -15%, SEO 안전 1500자 이상 유지)
 
   // ✅ [v1.4.5] config 로드 (Lite Mode 설정 확인용)
   let config: any = null;
@@ -6735,6 +6792,29 @@ export async function generateStructuredContent(
     config = await loadConfig();
   } catch (e) {
     // config 로드 실패 시 무시 (기본값 사용)
+  }
+
+  // [SPEC-PROMPT-2026-REFRESH Phase 3-A / v2.10.235] AI 탭 친화 모드 활성 시 minChars 상향
+  //   조건: aiTabFriendlyMode === true (사용자 명시 ON) + mode === 'seo'
+  //   동작: minChars를 6000으로 상향 (AI 탭 채택 평균 6,000~8,000자).
+  //   주의: 자료 외 사실 채우기 금지 — Phase 1 F1~F4 룰이 자동 적용되어 자료 부족 영역은 (자료 부족) 명시.
+  if (config?.aiTabFriendlyMode === true && (source.contentMode === 'seo' || !source.contentMode)) {
+    if (minChars < 6000) {
+      console.log(`[ContentGenerator] 🎯 AI 탭 친화 모드 활성 — minChars ${minChars} → 6000자 상향`);
+      minChars = 6000;
+    }
+    // source 플래그 세팅 — buildModeBasedPrompt에서 ai-tab-friendly.prompt 합쳐서 system prompt 강화.
+    source.aiTabFriendly = true;
+  }
+
+  // [SPEC-PROMPT-2026-REFRESH Phase 3-B / v2.10.236] Claude Sonnet abstention 모드 강화
+  //   조건: claudeAbstentionMode === true + provider === 'claude' (Sonnet) 동시.
+  //   동작: source에 강한 abstention 지시 플래그 세팅 → buildModeBasedPrompt에서 추가 룰 inject.
+  //   비용 경고: Sonnet은 Gemini Flash 대비 토큰 ×10 비용 — 사용자 명시 동의 필수.
+  //   Gemini Flash 사용자도 base.prompt의 F6 abstention 룰이 적용되므로 무료 효과 일부 누림.
+  if (config?.claudeAbstentionMode === true && provider === 'claude') {
+    console.log('[ContentGenerator] 🛡️ Claude Sonnet abstention 모드 활성 — 환각률 ↓, 토큰 ×10 비용');
+    (source as any).claudeAbstentionStrong = true;
   }
 
   // ✅ [2026-01-26 FIX] provider가 명시적으로 전달되지 않으면 gemini 기본값 사용
@@ -7471,18 +7551,39 @@ export async function generateStructuredContent(
       if ((mode === 'seo' || mode === 'homefeed') && Array.isArray(parsed.headings)) {
         const primaryKw = getPrimaryKeywordFromSource(source);
         if (primaryKw) {
-          const kwCore = primaryKw.trim().split(/[\s,/\-]+/).filter((w: string) => w.length >= 2)[0] || primaryKw.trim();
+          // ✅ [v2.10.227] 사용자 보고: 소제목 "5월 5월 25일 이후 잔액 소멸 이유" (5월 중복)
+          //   원인 후보: (a) 따옴표·특수문자 포함된 kwCore가 heading의 평문과 매칭 실패 → 패치 강제 발동,
+          //              이후 sanitizer가 따옴표만 제거해 결과적으로 단어 중복
+          //              (b) LLM이 자체 prefix를 추가했고 HeadingPatch가 한번 더 추가 (이미 dedup pass 통과한 케이스)
+          //   방어: ① kwCore의 선행/후행 punct 제거 ② 패치 후 "kwCore kwCore" 연속 중복 collapse
+          const kwCoreRaw = primaryKw.trim().split(/[\s,/\-]+/).filter((w: string) => w.length >= 2)[0] || primaryKw.trim();
+          const kwCore = kwCoreRaw
+            .replace(/^[^\p{L}\p{N}]+/u, '')  // 선행 punct/quote 제거
+            .replace(/[^\p{L}\p{N}]+$/u, '')  // 후행 punct/quote 제거
+            .trim();
+          if (!kwCore) {
+            console.log(`[HeadingPatch] ⏭️ kwCore가 빈 문자열 (raw="${kwCoreRaw}") — 패치 스킵`);
+          } else {
           let patchedCount = 0;
+          const kwCoreLower = kwCore.toLowerCase();
+          const dupPattern = new RegExp(`^(${kwCore.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\s+\\1(?=\\s|$)`, 'i');
           for (const heading of parsed.headings) {
             if (!heading?.title) continue;
             const titleStr = String(heading.title);
             // 메인 키워드 또는 핵심 단어가 소제목에 포함되어 있는지 체크 (대소문자 무관, 부분 매칭)
-            if (!titleStr.toLowerCase().includes(kwCore.toLowerCase())) {
+            if (!titleStr.toLowerCase().includes(kwCoreLower)) {
               // 키워드 누락 → 자연스럽게 prefix 추가 (조사 무시)
               const original = titleStr;
               heading.title = `${kwCore} ${titleStr}`.trim();
               patchedCount++;
-              console.log(`[HeadingPatch] ⚠️ 소제목 키워드 누락 패치: "${original}" → "${heading.title}"`);
+              console.log(`[HeadingPatch] ⚠️ 소제목 키워드 누락 패치: "${original}" → "${heading.title}" (kwCore="${kwCore}")`);
+            }
+            // ✅ [v2.10.227] 패치 결과/LLM 원본 모두 대상으로 "kwCore kwCore" 선두 중복 collapse
+            //   "5월 5월 25일 …" → "5월 25일 …"
+            const beforeDedup = heading.title;
+            heading.title = String(heading.title).replace(dupPattern, '$1').trim();
+            if (beforeDedup !== heading.title) {
+              console.log(`[HeadingDedup] 🔧 선두 중복 제거: "${beforeDedup}" → "${heading.title}"`);
             }
           }
           if (patchedCount > 0) {
@@ -7503,7 +7604,67 @@ export async function generateStructuredContent(
             // bodyPlain 재동기화
             try { syncHeadingsWithBodyPlain(parsed); } catch { /* ignore */ }
           }
+          }
         }
+      }
+
+      // ✅ [SPEC-PROMPT-2026-REFRESH Phase 1 / v2.10.231] 일반론 도망 + 인용 부족 감지
+      //   배경: LLM이 RAG 자료를 받고도 "고양이는 생선을 좋아합니다" 같은 보편 진술로 도망치는 패턴.
+      //   조치: 일반론 트리거 15개 어휘 + 인용 토큰 [자료N] 밀도 측정 → 임계 초과 시 quality.warnings 추가.
+      //   [v2.10.234 Phase 1b] 첫 시도(attempt === 0)에서 임계 초과 시 재생성 트리거 추가.
+      //   [v2.10.237 PlatitudeDetector v2] ROUGE-L overlap + 사실 단락 인용 배치 비율 추가 검증.
+      //     source.factCheckRawSource 가 있으면(RAG 활성 케이스) overlap 자동 측정.
+      let platitudeReportRef: ReturnType<typeof detectPlatitudes> | null = null;
+      try {
+        const ragSourceForCheck = (source as any).factCheckRawSource as string | undefined;
+        const platitudeReport = detectPlatitudes(parsed, { ragSource: ragSourceForCheck });
+        platitudeReportRef = platitudeReport;
+        if (platitudeReport.exceedsThreshold) {
+          console.warn(`[PlatitudeDetector] ⚠️ ${platitudeReport.reason}`);
+          if (!parsed.quality) {
+            parsed.quality = {
+              aiDetectionRisk: 'low',
+              legalRisk: 'safe',
+              seoScore: 70,
+              originalityScore: 70,
+              readabilityScore: 70,
+              warnings: [],
+            };
+          }
+          parsed.quality.warnings = [
+            ...(parsed.quality.warnings || []),
+            `Faithfulness 경고: ${platitudeReport.reason}`,
+          ];
+          // 원본 보고서 보존 — 추후 재생성 트리거 판단용
+          (parsed as any).platitudeReport = platitudeReport;
+        } else {
+          const overlapInfo = platitudeReport.rougeLOverlap >= 0
+            ? `, RAG overlap ${platitudeReport.rougeLOverlap.toFixed(2)}`
+            : '';
+          const placementInfo = platitudeReport.factualParagraphCount > 0
+            ? `, 사실단락 인용 ${(platitudeReport.citationPlacementRatio * 100).toFixed(0)}%`
+            : '';
+          console.log(
+            `[PlatitudeDetector] ✅ 통과 — 일반론 ${platitudeReport.platitudeHitCount}회, 인용 밀도 ${platitudeReport.citationDensity.toFixed(2)}${overlapInfo}${placementInfo}`,
+          );
+        }
+      } catch (platitudeErr: any) {
+        console.warn('[PlatitudeDetector] 감지 중 예외 — graceful skip:', platitudeErr?.message || platitudeErr);
+      }
+
+      // ✅ [v2.10.234 Phase 1b] 일반론 도망 감지 시 첫 시도(attempt === 0)에서 재생성 트리거
+      //   재생성 시 prompt에 faithfulness 강화 추가 지시 + 일반론 어휘 명시 회피 요청.
+      //   2회 이상 시도부터는 재생성 X (속도 vs 품질 균형 — 기존 검증 실패 재시도 패턴과 동일).
+      if (platitudeReportRef && platitudeReportRef.exceedsThreshold && attempt === 0) {
+        console.warn(`[ContentGenerator] 🔄 Faithfulness 실패 — 첫 재시도: ${platitudeReportRef.reason}`);
+        lastFailReason = `Faithfulness 실패: ${platitudeReportRef.reason}`;
+        const platitudeList = platitudeReportRef.matchedTriggers.slice(0, 5).join(', ');
+        extraInstruction = `\n⚠️ Faithfulness 강화 재생성:\n` +
+          `1. 일반론 어휘 (${platitudeList}) 사용 금지.\n` +
+          `2. 모든 사실 진술 단락 끝에 [자료] 인용 토큰 추가.\n` +
+          `3. [Article Content] 또는 <source>에 없는 수치/날짜/금액 작성 금지.\n` +
+          `4. 자료에 답이 없는 섹션은 "(자료 부족)" 표기 후 다음 섹션으로.\n${extraInstruction}`;
+        continue;
       }
 
       // ✅ [2026-02-01] 쇼핑커넥트(affiliate) 모드 제목 검증 및 패치

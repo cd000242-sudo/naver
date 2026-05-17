@@ -45,7 +45,10 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     const content = fs.readFileSync(baseFile, 'utf-8');
     console.log(`[v1.4.12 검증] homefeed/base.prompt: ${content.length.toLocaleString()}자`);
     // v1.4.7: 27,599자 → v1.4.12+: ~24,800자
-    expect(content.length).toBeLessThan(27599);
+    // 2026-05-16: SPEC-PROMPT-2026-REFRESH Phase 1~3 (v2.10.231~236) — Section -2 F1~F6,
+    //   FIRO AEO 즉답, FAQ 상향, R0-15/16 정정, 스크랩 CTA 강화로 ~3K자 의도적 증가.
+    //   baseline을 28,500자로 재상향.
+    expect(content.length).toBeLessThan(28500);
   });
 
   it('모든 prompt 파일 합계가 v1.4.7 대비 슬림화됨', () => {
@@ -69,7 +72,16 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     // homefeed/base.prompt가 456줄 → 623줄로 의도적 증가. baseline을 230K로 상향.
     // 2026-05-10: SPEC-CONVERSION-001 L2-1.7 — affiliate/chain/stage{1..5}.prompt 5개
     // 신설로 ~6K자 의도적 증가. baseline을 240K로 재상향.
-    expect(totalChars).toBeLessThan(240000);
+    // 2026-05-16: SPEC-PROMPT-2026-REFRESH Phase 0 (v2.10.230) — CUE 종료 안내,
+    // AdPost Section -0.5 자해 가드, 홈판 R0-15/R0-16 사실 정정으로 ~1.1K자 의도적 증가.
+    // baseline을 242K로 재상향.
+    // 2026-05-16: SPEC-PROMPT-2026-REFRESH Phase 1 (v2.10.231) — Section -2 LLM 충실도 강제
+    // (F1~F5 negative constraints) SEO + 홈판 양쪽 추가로 ~2.5K자 추가 증가.
+    // baseline을 245K로 재상향.
+    // 2026-05-16: SPEC-PROMPT-2026-REFRESH Phase 2~3-A (v2.10.232~235) — 토픽 클러스터,
+    // 업데이트 신호, 스크랩 CTA, AEO 즉답, AI 탭 친화 프롬프트 신규 파일로 ~5K자 증가.
+    // baseline을 250K로 재상향.
+    expect(totalChars).toBeLessThan(250000);
   });
 });
 

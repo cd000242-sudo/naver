@@ -495,6 +495,76 @@ export class ProgressModal {
             rawMessage: message
         };
 
+        // ✅ [v2.10.226] ImageFX 전용 분류 prefix 우선 분기 — 5가지 케이스 케이스별 안내
+        //   배경: imageFxGenerator.ts가 이미 IMAGEFX_QUOTA_EXCEEDED/AUTH_EXPIRED/FORBIDDEN/
+        //         SAFETY_BLOCK/UNKNOWN_FAILURE/OTHER 로 분류해 throw하지만, 기존 keyword
+        //         매칭(quota/429)에 묻혀 "🔴 API 할당량 초과" 한 가지로만 표시됨.
+        //   목적: 사용자가 "왜 안 되는지" 명확히 알 수 있도록 케이스별 원인+조치 분기.
+        const imagefxMatch = message.match(/^IMAGEFX_([A-Z_]+):(.*)$/s);
+        if (imagefxMatch) {
+            const tag = imagefxMatch[1];
+            const body = imagefxMatch[2].trim();
+            detail.engine = 'ImageFX';
+            detail.rawMessage = body; // prefix 제거된 본문만 사용자에 표시
+            switch (tag) {
+                case 'QUOTA_EXCEEDED':
+                    detail.errorType = '⏰ Google 시간당 한도';
+                    detail.errorCode = 'HTTP_429 (동적 한도)';
+                    detail.suggestion =
+                        '명시적 일일 한도가 아니라 Google이 사용 패턴을 보고 1시간 단위로 임시 차단합니다. ' +
+                        '약 1시간 후 자동 해제됩니다. 기다리기 싫으면 환경설정 → "Google 계정 변경"으로 ' +
+                        '다른 계정 사용 또는 이미지 엔진을 DeepInfra/Pollinations로 전환하세요.';
+                    break;
+                case 'AUTH_EXPIRED':
+                    detail.errorType = '🔑 Google 세션 만료';
+                    detail.errorCode = 'HTTP_401';
+                    detail.suggestion =
+                        'ImageFX 로그인 토큰이 만료되었습니다(약 50분). 환경설정 → ImageFX → ' +
+                        '"Google 계정 변경" 버튼으로 한 번 재로그인하면 됩니다. 사용량 한도와 무관합니다.';
+                    break;
+                case 'FORBIDDEN':
+                    detail.errorType = '🚫 IP/계정 차단';
+                    detail.errorCode = 'HTTP_403';
+                    detail.suggestion =
+                        '한국 IP 차단, AdsPower 프로필 공유 차단, 또는 해당 Google 계정이 ' +
+                        '"자동화 의심"으로 표시된 상태입니다. 테더링으로 IP를 바꾸거나, 평소 Gmail/검색에 ' +
+                        '쓰는 일상용 Google 계정으로 변경하세요. 새로 만든 계정은 자주 차단됩니다.';
+                    break;
+                case 'SAFETY_BLOCK':
+                    detail.errorType = '🛡️ 안전 필터 차단';
+                    detail.errorCode = 'SAFETY';
+                    detail.suggestion =
+                        'Google 안전 필터가 프롬프트를 차단했습니다. 정부지원/금융/의료/정치 키워드는 ' +
+                        '자주 막힙니다. 본문 키워드를 우회 표현으로 바꾸거나 DeepInfra/Pollinations로 전환하세요.';
+                    break;
+                case 'SERVER_BUSY':
+                case 'SERVER_ERROR':
+                    detail.errorType = '🔧 Google 서버 일시 장애';
+                    detail.errorCode = tag === 'SERVER_BUSY' ? 'HTTP_503' : 'HTTP_5xx';
+                    detail.suggestion =
+                        'Google 측 일시적 과부하/장애입니다. 5~30분 후 다시 시도하거나, 다른 시간대에 ' +
+                        '재시도해주세요. 본인 환경 문제가 아닙니다.';
+                    break;
+                case 'UNKNOWN_FAILURE':
+                case 'OTHER':
+                    detail.errorType = '⚠️ ImageFX 원인 미상 (3연속 실패)';
+                    detail.errorCode = tag;
+                    detail.suggestion =
+                        '시간당 한도가 아닐 수 있습니다. 다음 순서로 확인하세요: ' +
+                        '① 환경설정 → "Google 계정 변경"으로 재로그인(세션 만료 가능성), ' +
+                        '② 다른 이미지 엔진(DeepInfra/Pollinations)으로 전환, ' +
+                        '③ F12 → Console의 [ImageFX] 로그에서 진짜 HTTP 코드 확인.';
+                    break;
+                default:
+                    detail.errorType = '⚠️ ImageFX 오류';
+                    detail.errorCode = tag;
+                    detail.suggestion =
+                        '환경설정 → ImageFX의 안내 카드("이런 경우 ImageFX가 실패합니다")를 확인하거나, ' +
+                        '다른 이미지 엔진으로 전환하세요.';
+            }
+            return detail;
+        }
+
         const msgLower = message.toLowerCase();
 
         // 할당량/Rate Limit 감지 (✅ [2026-02-13] 정밀 조건: 'exceeded' 단독은 오탐 유발하므로 제거)

@@ -417,7 +417,11 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
       }
 
       // UI 제목이 있고, 기존 selectedTitle과 다르면 UI 제목 사용
-      if (currentUITitle && currentUITitle !== existingSelectedTitle) {
+      // [v2.10.238 BUG FIX] keywordAsTitle 토글 ON 시 UI 덮어쓰기 차단
+      const _kwLockEarly = (window as any)._keywordTitleOptions?.useKeywordAsTitle === true;
+      if (_kwLockEarly && existingSelectedTitle) {
+        console.log(`[FullAuto] 🔒 keywordAsTitle lock 활성 — UI 제목 패치 skip. existingSelectedTitle="${existingSelectedTitle.substring(0, 40)}..." 보존`);
+      } else if (currentUITitle && currentUITitle !== existingSelectedTitle) {
         structuredContent.selectedTitle = currentUITitle;
         console.log(`[FullAuto] ✅ 제목 패치: UI 제목 사용 → "${currentUITitle.substring(0, 40)}..."`);
         appendLog(`📝 제목 패치 적용: ${currentUITitle.substring(0, 30)}...`);
@@ -3034,25 +3038,49 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
   }
 
   // ✅ 제목은 UI/사용자 입력을 최우선으로 사용 (풀오토에서 AI 제목으로 바뀌는 문제 방지)
-  const preferredTitle = (() => {
+  // [v2.10.238 BUG FIX] keywordAsTitle 토글 ON 시에는 UI 우선 정책을 비활성
+  //   배경: 사용자 보고("키워드 그대로 제목 사용 체크했는데 변형됨").
+  //   원인: contentGenerator가 verbatim 키워드를 selectedTitle에 박아도, 여기서 UI input의 잔존 값(이전 발행 또는 다른 모듈이 채운 값)으로 덮어씀.
+  //   조치: window._keywordTitleOptions?.useKeywordAsTitle === true 면 UI 덮어쓰기 skip — verbatim 보존.
+  const _kwTitleOptsRef = (window as any)._keywordTitleOptions;
+  const _keywordAsTitleLock = _kwTitleOptsRef?.useKeywordAsTitle === true;
+  const _currentSelectedTitle = String(structuredContent?.selectedTitle || '').trim();
+
+  const preferredTitle: string = (() => {
+    if (_keywordAsTitleLock && _currentSelectedTitle) {
+      console.log(`[fullAutoFlow] 🔒 keywordAsTitle lock 활성 — UI 우선 정책 비활성. selectedTitle="${_currentSelectedTitle}" 보존`);
+      appendLog(`🔒 키워드 제목 잠금: "${_currentSelectedTitle.substring(0, 40)}..." 보존`);
+      return _currentSelectedTitle;
+    }
     try {
       const generatedTitleUi = (document.getElementById('unified-generated-title') as HTMLInputElement | null)?.value?.trim();
-      if (generatedTitleUi) return generatedTitleUi;
+      if (generatedTitleUi) {
+        console.log(`[fullAutoFlow] preferredTitle ← unified-generated-title UI: "${generatedTitleUi.substring(0, 40)}..."`);
+        return generatedTitleUi;
+      }
     } catch (e) {
       console.warn('[fullAutoFlow] catch ignored:', e);
     }
     try {
       const unifiedTitleUi = (document.getElementById('unified-title') as HTMLInputElement | null)?.value?.trim();
-      if (unifiedTitleUi) return unifiedTitleUi;
+      if (unifiedTitleUi) {
+        console.log(`[fullAutoFlow] preferredTitle ← unified-title UI: "${unifiedTitleUi.substring(0, 40)}..."`);
+        return unifiedTitleUi;
+      }
     } catch (e) {
       console.warn('[fullAutoFlow] catch ignored:', e);
     }
     const fromFormData = String(formData?.title || '').trim();
-    if (fromFormData) return fromFormData;
-    return String(structuredContent?.selectedTitle || '').trim();
+    if (fromFormData) {
+      console.log(`[fullAutoFlow] preferredTitle ← formData.title: "${fromFormData.substring(0, 40)}..."`);
+      return fromFormData;
+    }
+    console.log(`[fullAutoFlow] preferredTitle ← structuredContent.selectedTitle: "${_currentSelectedTitle.substring(0, 40)}..."`);
+    return _currentSelectedTitle;
   })();
 
-  if (preferredTitle) {
+  if (preferredTitle && preferredTitle !== _currentSelectedTitle) {
+    console.log(`[fullAutoFlow] selectedTitle 덮어쓰기: "${_currentSelectedTitle.substring(0, 40)}..." → "${preferredTitle.substring(0, 40)}..."`);
     structuredContent.selectedTitle = preferredTitle;
   }
 
