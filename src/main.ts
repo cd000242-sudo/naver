@@ -95,6 +95,10 @@ import { KeywordAnalyzer, type KeywordCompetition, type BlueOceanKeyword } from 
 //   수정: import 제거 → cold path 모듈 평가 회피
 //   import { BestProductCollector } from './services/bestProductCollector.js';
 import { InternalLinkManager, type InternalLink } from './content/internalLinkManager.js';
+// [SPEC-PROMPT-2026-REFRESH Phase 2 / v2.10.233] 발행 시간 골든존 가드
+import { checkGoldenZone } from './publishingStrategy.js';
+// [v2.10.252] 이미지 URL 필터링 헬퍼 — main.ts에서 분리
+import { filterDuplicateAndLowQualityImages } from './main/utils/imageFilters.js';
 import { ThumbnailGenerator } from './content/thumbnailGenerator.js';
 import { canConsume as canConsumeQuota, consume as consumeQuota, refund as refundQuota, getStatus as getQuotaStatus, resetAll as resetAllQuota, type QuotaLimits, type QuotaType } from './quotaManager.js';
 import { BlogAccountManager } from './account/blogAccountManager.js';
@@ -234,19 +238,29 @@ console.log('[Stability] Main 프로세스 전역 에러 핸들러 등록 완료
 // ═══════════════════════════════════════════════════════════════════════════════
 if (ipcMain && typeof ipcMain.handle === 'function') {
   const _originalIpcHandle = ipcMain.handle.bind(ipcMain);
+  // [v2.10.226] IPC handler timing 진단 — 사용자 "버튼 누르면 응답없음" 진단용 (perf-summary #2).
+  // 50ms 이상 응답이 main thread 또는 await chain 누적. 콘솔에 채널/시간 노출.
   (ipcMain as any).handle = (channel: string, handler: (...args: any[]) => any) => {
     _originalIpcHandle(channel, async (event: any, ...args: any[]) => {
+      const _start = performance.now();
       try {
-        return await handler(event, ...args);
+        const result = await handler(event, ...args);
+        const _dur = performance.now() - _start;
+        if (_dur >= 50) {
+          const _level = _dur >= 1000 ? '🚨 SEVERE' : _dur >= 200 ? '🐌 HEAVY' : '⚠️';
+          console.warn(`[IPCTiming] ${_level} "${channel}" ${_dur.toFixed(0)}ms`);
+        }
+        return result;
       } catch (error) {
+        const _dur = performance.now() - _start;
         const msg = (error as Error).message || '알 수 없는 오류';
-        console.error(`[SafeIPC] ❌ "${channel}" 핸들러 에러: ${msg}`);
+        console.error(`[SafeIPC] ❌ "${channel}" 핸들러 에러 (${_dur.toFixed(0)}ms): ${msg}`);
         console.error(`[SafeIPC] Stack:`, (error as Error).stack?.split('\n').slice(0, 3).join('\n'));
         return { success: false, message: `[${channel}] ${msg}`, error: msg };
       }
     });
   };
-  console.log('[Stability] IPC 핸들러 글로벌 안전 래퍼 등록 완료');
+  console.log('[Stability] IPC 핸들러 글로벌 안전 래퍼 등록 완료 (timing 진단 포함)');
 } else {
   console.warn('[Stability] ipcMain 사용 불가 — 안전 래퍼 건너뜀');
 }
@@ -366,7 +380,8 @@ function withAbortCheck<T>(promise: Promise<T>, signal: AbortSignal): Promise<T>
 // 디버그 로그 파일 경로
 let debugLogPath: string | null = null;
 
-// 디버그 로그 함수
+// [v2.10.226] 비동기 fs.appendFile — 매 debugLog 호출마다 동기 IO가 main thread 블로킹 (perf-summary #2).
+// 134+ 호출 × ~1-3ms 누적이 "초반 응답없음" 직접 원인. 콜백 fire-and-forget.
 function debugLog(message: string): void {
   const timestamp = new Date().toISOString();
   const logMessage = `[${timestamp}] ${message}\n`;
@@ -374,13 +389,13 @@ function debugLog(message: string): void {
   // 콘솔에도 출력
   console.log(message);
 
-  // 파일에 기록
+  // 파일에 기록 (비동기)
   try {
     if (!debugLogPath) {
       const tempDir = require('os').tmpdir();
       debugLogPath = path.join(tempDir, 'better-life-naver-debug.log');
     }
-    fsSync.appendFileSync(debugLogPath, logMessage, 'utf-8');
+    fsSync.appendFile(debugLogPath, logMessage, 'utf-8', () => { /* fire and forget */ });
   } catch (error) {
     console.error('[DebugLog] 로그 파일 쓰기 실패:', error);
   }
@@ -1218,27 +1233,35 @@ function _initLogFile(): void {
 }
 
 // [v2.10.110] 50MB cap + 5회 회전 — 이전: 무한 append로 24시간 운영 시 수백 MB 디스크 누적 (Agent O LEAK-2)
+// [v2.10.226] 회전 IO도 비동기화 — main thread 블로킹 제거 (perf-summary #2).
 const _LOG_FILE_MAX_BYTES = 50 * 1024 * 1024; // 50MB
 let _logSizeCheckCounter = 0;
+let _logRotating = false; // re-entry 가드
 function _rotateLogIfTooLarge(): void {
-  // 매 100회 write마다 크기 검사 (sync stat 비용 절감)
+  // 매 100회 write마다 크기 검사
   if (++_logSizeCheckCounter % 100 !== 0) return;
-  try {
-    if (!_logFilePath) return;
-    const _fs = require('fs');
-    const _path = require('path');
-    const stat = _fs.statSync(_logFilePath);
-    if (stat.size < _LOG_FILE_MAX_BYTES) return;
-    // 회전: main.log → main.log.1 → .2 → ... → .5 (최대 5개 보존)
-    for (let i = 4; i >= 1; i--) {
-      const from = `${_logFilePath}.${i}`;
-      const to = `${_logFilePath}.${i + 1}`;
-      if (_fs.existsSync(from)) { try { _fs.renameSync(from, to); } catch { /* ignore */ } }
-    }
-    try { _fs.renameSync(_logFilePath, `${_logFilePath}.1`); } catch { /* ignore */ }
-  } catch { /* ignore */ }
+  if (_logRotating) return;
+  if (!_logFilePath) return;
+  const _fs = require('fs');
+  const fsp = _fs.promises;
+  const logFilePath = _logFilePath;
+  _logRotating = true;
+  (async (): Promise<void> => {
+    try {
+      const stat = await fsp.stat(logFilePath);
+      if (stat.size < _LOG_FILE_MAX_BYTES) return;
+      for (let i = 4; i >= 1; i--) {
+        const from = `${logFilePath}.${i}`;
+        const to = `${logFilePath}.${i + 1}`;
+        try { await fsp.rename(from, to); } catch { /* ignore — file may not exist */ }
+      }
+      try { await fsp.rename(logFilePath, `${logFilePath}.1`); } catch { /* ignore */ }
+    } catch { /* ignore */ } finally { _logRotating = false; }
+  })();
 }
 
+// [v2.10.226] async append — 동기 IO가 main thread freeze 유발 (Agent perf-summary #2).
+// fs.appendFile callback 형태: 즉시 반환, libuv threadpool에서 IO 처리.
 function _writeToFile(level: string, msg: string): void {
   try {
     if (!_logFilePath) _initLogFile();
@@ -1246,7 +1269,7 @@ function _writeToFile(level: string, msg: string): void {
     _rotateLogIfTooLarge();
     const _fs = require('fs');
     const ts = new Date().toISOString();
-    _fs.appendFileSync(_logFilePath, `[${ts}] [${level.toUpperCase()}] ${msg}\n`);
+    _fs.appendFile(_logFilePath, `[${ts}] [${level.toUpperCase()}] ${msg}\n`, () => { /* fire and forget */ });
   } catch { /* 파일 IO 실패는 무시 */ }
 }
 
@@ -1655,8 +1678,31 @@ async function createWindow(): Promise<void> {
 
     const htmlPath = path.join(publicPath, 'index.html');
     console.log('[Main] Loading HTML from:', htmlPath);
-    await mainWindow.loadFile(htmlPath);
-    console.log('[Main] HTML loaded successfully');
+    debugLog(`[Main] Loading HTML from: ${htmlPath}`);
+    // [v2.10.240 BUG FIX] ERR_FAILED (-2) 회피 — 한글 경로 file:// 인코딩 강제
+    //   원인 후보: 한글 경로(C:\Users\박성현\...)가 file:// URL 변환 시 인코딩 누락 → Chromium loadFile 거부.
+    //   조치: loadFile 실패 시 url.pathToFileURL로 percent-encoded URL 만들어 loadURL fallback.
+    //   진단 로그도 강화 — 실패 시 정확한 에러 정보 debug.log에 기록.
+    try {
+      await mainWindow.loadFile(htmlPath);
+      console.log('[Main] HTML loaded successfully');
+      debugLog('[Main] HTML loaded successfully (loadFile)');
+    } catch (loadErr: any) {
+      const errMsg = (loadErr as Error)?.message || String(loadErr);
+      debugLog(`[Main] loadFile 실패 — fallback 시도. 원인: ${errMsg}`);
+      console.error('[Main] loadFile 실패:', errMsg);
+      try {
+        const { pathToFileURL } = await import('url');
+        const fileUrl = pathToFileURL(htmlPath).toString();
+        debugLog(`[Main] loadURL fallback: ${fileUrl}`);
+        await mainWindow.loadURL(fileUrl);
+        debugLog('[Main] HTML loaded successfully (loadURL fallback)');
+      } catch (fallbackErr: any) {
+        const fbMsg = (fallbackErr as Error)?.message || String(fallbackErr);
+        debugLog(`[Main] loadURL fallback도 실패: ${fbMsg}`);
+        throw new Error(`HTML 로드 실패 (loadFile: ${errMsg} / fallback loadURL: ${fbMsg})`);
+      }
+    }
 
     // ✅ [리팩토링] ipcHelpers에 mainWindow 참조 설정
     setMainWindowRef(mainWindow);
@@ -2319,293 +2365,18 @@ ipcMain.handle('free:activate', async (_event, userInfo?: { email: string; nickn
 
 // ✅ [2026-04-03] 소제목 영상 핸들러 → headingHandlers.ts로 추출
 
-ipcMain.handle('media:listMp4Files', async (_event, payload: { dirPath: string }) => {
-  try {
-    const dirPath = payload?.dirPath;
-    if (!dirPath) return { success: false, message: 'dirPath가 필요합니다.' };
+// [v2.10.247] media:listMp4Files — main/ipc/imageHandlers.ts (registerMediaHandlers) 에 동일 채널 이미 등록됨.
+//   safeHandle의 registerOnce 가드로 두 번째 등록 silent 무시. main.ts 본문은 dead code → 제거.
 
-    await fs.mkdir(dirPath, { recursive: true });
+// [v2.10.247] media:convertMp4ToGif — imageHandlers.ts (registerMediaHandlers) 에 이미 등록됨 (중복 제거)
 
-    const items = await fs.readdir(dirPath, { withFileTypes: true });
-    const allFiles: Array<{ name: string; fullPath: string; mtime: number; size: number }> = [];
+// [v2.10.247] media:createKenBurnsVideo — imageHandlers.ts (registerMediaHandlers) 에 이미 등록됨 (중복 제거)
 
-    // 1) 루트 mp4 폴더의 mp4
-    for (const item of items) {
-      if (item.isFile() && item.name.toLowerCase().endsWith('.mp4')) {
-        const fullPath = path.join(dirPath, item.name);
-        const stat = await fs.stat(fullPath);
-        allFiles.push({ name: item.name, fullPath, mtime: stat.mtime.getTime(), size: stat.size });
-      }
-    }
-
-    // 2) mp4/<heading>/ 하위 1단계 폴더의 mp4
-    for (const item of items) {
-      if (!item.isDirectory()) continue;
-      const subDir = path.join(dirPath, item.name);
-      let subItems: import('fs').Dirent[] = [];
-      try {
-        subItems = await fs.readdir(subDir, { withFileTypes: true });
-      } catch {
-        continue;
-      }
-      for (const sub of subItems) {
-        if (sub.isFile() && sub.name.toLowerCase().endsWith('.mp4')) {
-          const fullPath = path.join(subDir, sub.name);
-          const stat = await fs.stat(fullPath);
-          allFiles.push({ name: `${item.name}/${sub.name}`, fullPath, mtime: stat.mtime.getTime(), size: stat.size });
-        }
-      }
-    }
-
-    allFiles.sort((a, b) => b.mtime - a.mtime);
-    return { success: true, files: allFiles };
-  } catch (error) {
-    console.error('[Media] listMp4Files 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-ipcMain.handle('media:convertMp4ToGif', async (_event, payload: { sourcePath: string; aspectRatio?: string }) => {
-  try {
-    const sourcePath = payload?.sourcePath;
-    if (!sourcePath) {
-      return { success: false, message: 'sourcePath가 필요합니다.' };
-    }
-
-    const pathModule = await import('path');
-    const normalizedSource = sourcePath.replace(/\\/g, '/');
-    const dir = pathModule.dirname(normalizedSource);
-    const baseName = pathModule.basename(normalizedSource, pathModule.extname(normalizedSource));
-    const gifPath = pathModule.join(dir, `${baseName}.gif`);
-
-    // 이미 GIF가 존재하면 그대로 사용
-    try {
-      const fs = await import('fs/promises');
-      const stat = await fs.stat(gifPath);
-      if (stat.isFile() && stat.size > 1024) {
-        return { success: true, gifPath };
-      }
-      try { await fs.unlink(gifPath); } catch (e) { Logger.logDebug('image', 'GIF 임시파일 삭제 실패', { error: String(e) }); }
-    } catch (e) { Logger.logDebug('image', 'GIF 파일 stat 확인 실패', { error: String(e) }); }
-
-    // ✅ 헬퍼 함수 사용 (중복 로직 제거 및 1:1 크롭 적용)
-    // 720px 너비 기준
-    const finalGifPath = await convertMp4ToGif(normalizedSource, {
-      width: 720,
-      fps: 20,
-      aspectRatio: payload.aspectRatio
-    });
-
-    return { success: true, gifPath: finalGifPath };
-  } catch (error) {
-    console.error('[Media] convertMp4ToGif 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-ipcMain.handle('media:createKenBurnsVideo', async (_event, payload: { imagePath: string; heading?: string; durationSeconds?: number; aspectRatio?: '16:9' | '9:16' | '1:1' | 'original' }) => {
-  // ✅ [리팩토링] 통합 검증
-  const check = await validateLicenseAndQuota('media', 1);
-  if (!check.valid) return check.response;
-
-  try {
-    const rawPath = String(payload?.imagePath || '').trim();
-    if (!rawPath) {
-      return { success: false, message: 'imagePath가 필요합니다.' };
-    }
-
-    const durationSeconds = payload?.durationSeconds && payload.durationSeconds > 0 ? payload.durationSeconds : 6;
-    const aspectRatio = payload?.aspectRatio || '1:1';
-    const headingForSave = sanitizeFileName(String(payload?.heading || '').trim()) || 'AI-VIDEO';
-
-    const ffmpegModule = await import('ffmpeg-static');
-    const ffmpegPath = (ffmpegModule as any).default || (ffmpegModule as any);
-    if (!ffmpegPath) {
-      return { success: false, message: 'ffmpeg 실행 파일을 찾을 수 없습니다.' };
-    }
-
-    const { spawn } = await import('child_process');
-
-    const isPortrait = aspectRatio === '9:16';
-    const isSquare = aspectRatio === '1:1';
-    const isOriginal = aspectRatio === 'original';
-
-    let outW = 1280;
-    let outH = 720;
-
-    if (isSquare) {
-      outW = 720;
-      outH = 720;
-    } else if (isPortrait) {
-      outW = 720;
-      outH = 1280;
-    }
-
-    const fps = 30;
-    const frames = Math.max(30, Math.round(durationSeconds * fps));
-
-    let filter = '';
-    if (isOriginal) {
-      // 원본 비율 유지 (짝수 크기 보정만 수행)
-      filter = [
-        `scale=trunc(iw/2)*2:trunc(ih/2)*2`,
-        `zoompan=z='if(eq(on,0),1.0,min(zoom+0.0015,1.08))':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=${frames}:s=hd720:fps=${fps}`,
-        'format=yuv420p'
-      ].join(',');
-    } else {
-      filter = [
-        `scale=${outW}:${outH}:force_original_aspect_ratio=increase`,
-        `crop=${outW}:${outH}`,
-        `zoompan=z='if(eq(on,0),1.0,min(zoom+0.0015,1.08))':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=${frames}:s=${outW}x${outH}:fps=${fps}`,
-        'format=yuv420p',
-      ].join(',');
-    }
-
-    const mp4Dir = await ensureHeadingMp4Dir(headingForSave);
-    const { fullPath: outPath, fileName } = await getUniqueMp4Path(mp4Dir, headingForSave);
-
-    await new Promise<void>((resolve, reject) => {
-      const args = [
-        '-y',
-        '-loop',
-        '1',
-        '-t',
-        String(durationSeconds),
-        '-i',
-        rawPath,
-        '-vf',
-        filter,
-        '-an',
-        '-movflags',
-        '+faststart',
-        '-pix_fmt',
-        'yuv420p',
-        outPath,
-      ];
-
-      const proc = spawn(ffmpegPath as string, args, { windowsHide: true });
-      proc.on('error', (err) => reject(err));
-      proc.on('close', (code) => {
-        if (code === 0) resolve();
-        else reject(new Error(`ffmpeg exited with code ${code}`));
-      });
-    });
-
-    if (await isFreeTierUser()) {
-      await consumeQuota('media', 1);
-    }
-
-    return { success: true, filePath: outPath, fileName };
-  } catch (error) {
-    console.error('[Media] createKenBurnsVideo 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-ipcMain.handle('file:checkExists', async (_event, filePath: string) => {
-  try {
-    const fs = await import('fs/promises');
-    await fs.access(filePath);
-    return true;
-  } catch {
-    return false;
-  }
-});
-
-// ✅ [v2.10.110] async I/O — 이전 fs.existsSync 순차는 1000개 × 30ms (HDD) = 30초 main process sync block.
-//   사용자 보고: "로그인 후 1분 응답없음". sync I/O가 main thread block → renderer IPC 응답 대기 → "응답 없음".
-//   수정: fs.promises.access를 Promise.all로 동시 stat → libuv threadpool 활용 → 100ms 이내.
-ipcMain.handle('file:checkExistsBatch', async (_event, filePaths: string[]) => {
-  if (!Array.isArray(filePaths)) return [];
-  const fsp = (await import('fs')).promises;
-  return Promise.all(filePaths.map(async (p) => {
-    if (typeof p !== 'string' || !p) return false;
-    try { await fsp.access(p); return true; } catch { return false; }
-  }));
-});
-
-ipcMain.handle('file:readDir', async (_event, dirPath: string) => {
-  try {
-    const fs = await import('fs/promises');
-    return await fs.readdir(dirPath);
-  } catch (error) {
-    console.error('[File] readDir 실패:', error);
-    return [];
-  }
-});
-
-ipcMain.handle('file:deleteFolder', async (_event, folderPath: string) => {
-  // ✅ [v2.7.43 SEC-V2-C1 CRITICAL 패치] Command Injection 차단
-  //   기존: execSync(`rmdir /s /q "${folderPath}"`) — 사용자 입력 직접 보간
-  //         경로에 `" && <명령>` 삽입 시 임의 명령 실행 가능
-  //   수정 1: 화이트리스트 디렉토리 검증 (앱 데이터/사용자 임시/사용자 폴더 하위만)
-  //   수정 2: execSync 폴백 → spawn with array args (셸 보간 차단)
-  try {
-    if (typeof folderPath !== 'string' || !folderPath || folderPath.length > 500) {
-      console.error('[File] deleteFolder 거부: 경로 형식 오류');
-      return false;
-    }
-    // 위험 문자 차단 (셸 메타·NULL byte)
-    if (/[\x00<>|&;`$"]/.test(folderPath)) {
-      console.error('[File] deleteFolder 거부: 위험 문자 포함');
-      return false;
-    }
-    // 화이트리스트: 앱 데이터·사용자 임시·사용자 홈 하위만 허용
-    const path = await import('path');
-    const os = await import('os');
-    const norm = path.resolve(folderPath);
-    const allowedRoots = [
-      path.resolve(os.tmpdir()),
-      path.resolve(process.env.LOCALAPPDATA || os.homedir()),
-      path.resolve(process.env.APPDATA || os.homedir()),
-      path.resolve(os.homedir(), 'Desktop'),
-      path.resolve(os.homedir(), 'Documents'),
-      path.resolve(os.homedir(), 'Downloads'),
-    ].filter(Boolean);
-    const isAllowed = allowedRoots.some((root) => norm.startsWith(root + path.sep) || norm === root);
-    if (!isAllowed) {
-      console.error('[File] deleteFolder 거부: 허용 경로 외부:', norm);
-      return false;
-    }
-
-    const fs = await import('fs/promises');
-    let targetPath = folderPath;
-    if (process.platform === 'win32' && !folderPath.startsWith('\\\\?\\')) {
-      targetPath = '\\\\?\\' + folderPath.replace(/\//g, '\\');
-    }
-    await fs.rm(targetPath, { recursive: true, force: true, maxRetries: 3, retryDelay: 500 });
-    return true;
-  } catch (err1) {
-    // ✅ 폴백: spawn (셸 보간 없음, 인자 배열 전달로 인젝션 차단)
-    try {
-      if (process.platform === 'win32') {
-        const { spawn } = await import('child_process');
-        await new Promise<void>((resolve, reject) => {
-          const child = spawn('cmd.exe', ['/c', 'rmdir', '/s', '/q', folderPath], {
-            timeout: 15000,
-            windowsHide: true,
-            shell: false,
-          });
-          child.on('exit', (code) => code === 0 ? resolve() : reject(new Error(`exit ${code}`)));
-          child.on('error', reject);
-        });
-        return true;
-      }
-    } catch { /* ignore */ }
-    console.error('[File] deleteFolder 실패:', folderPath, err1);
-    return false;
-  }
-});
-
-ipcMain.handle('file:deleteFile', async (_event, filePath: string) => {
-  try {
-    const fs = await import('fs/promises');
-    await fs.rm(filePath, { force: true });
-    return { success: true };
-  } catch (error) {
-    return { success: false, message: (error as Error).message };
-  }
-});
+// [v2.10.242] file:* 8개 IPC 핸들러 → main/ipc/fileHandlers.ts 로 이주
+//   분리 대상: file:checkExists, file:checkExistsBatch, file:readDir, file:deleteFolder, file:deleteFile,
+//             file:readDirWithStats, file:getStats, file:exists
+//   효과: main.ts 약 200줄 감소, god-file 압축 첫 단계
+//   호출: registerFileHandlers() in app.whenReady (아래)
 
 // ✅ 누락된 핸들러들 추가
 
@@ -2624,58 +2395,7 @@ ipcMain.handle('localFolder:resizeImage', async (_event, filePath: string, maxWi
   }
 });
 
-// 폴더 읽기 (상세 정보 포함)
-ipcMain.handle('file:readDirWithStats', async (_event, dirPath: string) => {
-  try {
-    const items = await fs.readdir(dirPath, { withFileTypes: true });
-    const results = await Promise.all(items.map(async (item) => {
-      const fullPath = path.join(dirPath, item.name);
-      try {
-        const stats = await fs.stat(fullPath);
-        return {
-          name: item.name,
-          isFile: item.isFile(),
-          isDirectory: item.isDirectory(),
-          size: stats.size,
-          mtime: stats.mtime.getTime(),
-          birthtime: stats.birthtime.getTime(),
-          ctime: stats.ctime.getTime(),
-        };
-      } catch {
-        return {
-          name: item.name,
-          isFile: item.isFile(),
-          isDirectory: item.isDirectory(),
-          size: 0,
-          mtime: 0,
-          birthtime: 0,
-          ctime: 0,
-        };
-      }
-    }));
-    return results;
-  } catch (error) {
-    console.error('[File] readDirWithStats 실패:', error);
-    return [];
-  }
-});
-
-// 파일/폴더 정보 가져오기
-ipcMain.handle('file:getStats', async (_event, filePath: string) => {
-  try {
-    const stats = await fs.stat(filePath);
-    return {
-      isFile: stats.isFile(),
-      isDirectory: stats.isDirectory(),
-      size: stats.size,
-      mtime: stats.mtime.getTime(),
-      birthtime: stats.birthtime.getTime(),
-      ctime: stats.ctime.getTime(),
-    };
-  } catch {
-    return null;
-  }
-});
+// [v2.10.242] file:readDirWithStats, file:getStats → main/ipc/fileHandlers.ts 로 이주 (위 블록 참조)
 
 // ✅ [2026-04-03] tutorials:getVideos → src/main/ipc/miscHandlers.ts로 이관
 
@@ -2737,820 +2457,21 @@ ipcMain.handle('openImagesFolder', async () => {
 
 // 이미지 다운로드 및 저장
 // ✅ [2026-02-02] category 파라미터 추가 - 카테고리별 폴더에 저장
-ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string, category?: string) => {
-  try {
-    const https = await import('https');
-    const http = await import('http');
-    const { URL, fileURLToPath } = await import('url');
-
-    let buffer: Buffer;
-    let ext = '.jpg';
-
-    const trimmedUrl = String(imageUrl || '').trim();
-    if (!trimmedUrl) {
-      return { success: false, message: 'imageUrl이 비어있습니다.' };
-    }
-
-    // 1) data: URL 지원 (AI 생성 이미지가 dataURL로 오는 경우)
-    if (/^data:/i.test(trimmedUrl)) {
-      const m = trimmedUrl.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.*)$/);
-      if (!m) {
-        return { success: false, message: '지원하지 않는 data URL 형식입니다.' };
-      }
-      const mime = m[1].toLowerCase();
-      const base64 = m[2];
-      buffer = Buffer.from(base64, 'base64');
-
-      if (mime.includes('png')) ext = '.png';
-      else if (mime.includes('jpeg')) ext = '.jpeg';
-      else if (mime.includes('jpg')) ext = '.jpg';
-      else if (mime.includes('webp')) ext = '.webp';
-      else if (mime.includes('gif')) ext = '.gif';
-      else ext = '.png';
-    } else {
-      const parsedUrl = new URL(trimmedUrl);
-
-      // 2) file: URL 지원
-      if (parsedUrl.protocol === 'file:') {
-        const localFilePath = fileURLToPath(parsedUrl);
-        buffer = await fs.readFile(localFilePath);
-        ext = path.extname(localFilePath) || '.jpg';
-      } else {
-        // 3) http(s) 다운로드
-        const client = parsedUrl.protocol === 'https:' ? https : http;
-        buffer = await new Promise<Buffer>((resolve, reject) => {
-          client.get(trimmedUrl, { timeout: 30000 }, (response: any) => {
-            const chunks: Buffer[] = [];
-            response.on('data', (chunk: Buffer) => chunks.push(chunk));
-            response.on('end', () => resolve(Buffer.concat(chunks)));
-            response.on('error', reject);
-          }).on('error', reject);
-        });
-        ext = path.extname(parsedUrl.pathname) || '.jpg';
-      }
-    }
-
-    // ✅ [v2.10.21] image:downloadAndSave 저장 경로를 다른 IPC와 통일 — 사용자 보고
-    //   '풀오토만 폴더 생성되고 URL 이미지 수집은 안 된다'
-    //   원인: 이 핸들러만 userData/images 폴더에 저장 → 사용자가 Downloads 폴더에서 못 찾음
-    //   조치: customImageSavePath(=Downloads/naver-blog-images) 우선 + Downloads 폴백 + 글제목 서브폴더
-    const osMod = await import('os');
-    const fallbackPath = path.join(osMod.homedir(), 'Downloads', 'naver-blog-images');
-    let basePath = fallbackPath;
-    try {
-      const config = await loadConfig();
-      const cfgPath = String((config as any).customImageSavePath || '').trim();
-      if (cfgPath) basePath = cfgPath;
-    } catch { /* fallback 사용 */ }
-
-    // ✅ [v2.10.54] 폴더명/파일명 sanitize 강화 (image:downloadAndSave도 통일)
-    const safeTitle = (postTitle || category || 'images')
-      .normalize('NFC')
-      .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')
-      .replace(/[…·•◦‧⋯⋮⋯]/g, '_')
-      .replace(/\s+/g, '_')
-      .replace(/\.+$/, '')
-      .replace(/_+/g, '_')
-      .replace(/_+$/, '')
-      .substring(0, 80)
-      .trim() || 'images';
-    const safeHeading = (heading || 'image')
-      .normalize('NFC')
-      .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')
-      .replace(/[…·•◦‧⋯⋮⋯]/g, '_')
-      .replace(/_+/g, '_')
-      .replace(/\.+$/g, '')
-      .substring(0, 50)
-      .trim() || 'image';
-    const fileName = `${safeHeading}-${Date.now()}${ext}`;
-
-    let imagesPath = path.join(basePath, safeTitle);
-    try {
-      await fs.mkdir(imagesPath, { recursive: true });
-      console.log(`[Main] ✅ image:downloadAndSave 저장 경로: ${imagesPath}`);
-    } catch (mkErr: any) {
-      console.warn(`[Main] ⚠️ basePath mkdir 실패 (${basePath}) → Downloads 폴백: ${mkErr?.message}`);
-      imagesPath = path.join(fallbackPath, safeTitle);
-      await fs.mkdir(imagesPath, { recursive: true });
-    }
-    const filePath = path.join(imagesPath, fileName);
-
-    await fs.writeFile(filePath, buffer);
-    const previewDataUrl = `data:image/${ext.slice(1)};base64,${buffer.toString('base64')}`;
-
-    return { success: true, filePath, previewDataUrl, savedToLocal: filePath };
-  } catch (error) {
-    console.error('[Main] 이미지 다운로드 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
+// [v2.10.250] image:downloadAndSave → main/ipc/imageDownloadHandlers.ts 로 이주
 
 // URL에서 이미지 수집
-ipcMain.handle('image:collectFromUrl', async (_event, url: string) => {
-  // ✅ [리팩토링] 통합 검증
-  const check = await validateLicenseAndQuota('media', 1);
-  if (!check.valid) return check.response;
-
-  try {
-    // 간단한 이미지 URL 추출 (Puppeteer 없이)
-    const https = await import('https');
-    const http = await import('http');
-    const { URL } = await import('url');
-
-    const parsedUrl = new URL(url);
-    const client = parsedUrl.protocol === 'https:' ? https : http;
-
-    const html = await new Promise<string>((resolve, reject) => {
-      client.get(url, { timeout: 30000 }, (response: any) => {
-        let data = '';
-        response.on('data', (chunk: string) => data += chunk);
-        response.on('end', () => resolve(data));
-        response.on('error', reject);
-      }).on('error', reject);
-    });
-
-    // 이미지 URL 추출
-    const imgRegex = /<img[^>]+src=["']([^"']+)["']/gi;
-    const images: string[] = [];
-    let match;
-    while ((match = imgRegex.exec(html)) !== null) {
-      const imgUrl = match[1];
-      if (imgUrl.startsWith('http') && /\.(jpg|jpeg|png|gif|webp)/i.test(imgUrl)) {
-        images.push(imgUrl);
-      }
-    }
-
-    const result = { success: true, images: images.slice(0, 20) };
-    if (result.success && (result.images?.length ?? 0) > 0 && (await isFreeTierUser())) {
-      await consumeQuota('media', 1);
-    }
-    return result;
-  } catch (error) {
-    console.error('[Main] URL 이미지 수집 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// ✅ [신규 + 2026-02-01 강화] 중복 및 저품질/비제품 이미지 필터링 함수
-function filterDuplicateAndLowQualityImages(images: string[]): string[] {
-  const seenBaseUrls = new Set<string>();
-  const seenFileNames = new Set<string>();
-  const seenNormalizedUrls = new Set<string>(); // ✅ [2026-02-27] 정규화된 URL 중복 체크
-  const filtered: string[] = [];
-
-  for (const img of images) {
-    if (!img || typeof img !== 'string') continue;
-
-    // 1. 저품질/비제품 이미지 키워드 필터링 (강화됨)
-    const lowerImg = img.toLowerCase();
-    const isLowQualityOrNonProduct =
-      // 크기 관련
-      lowerImg.includes('_thumb') ||
-      lowerImg.includes('_small') ||
-      lowerImg.includes('_s.') ||
-      lowerImg.includes('50x50') ||
-      lowerImg.includes('60x60') ||
-      lowerImg.includes('80x80') ||
-      lowerImg.includes('100x100') ||
-      lowerImg.includes('120x120') ||
-      lowerImg.includes('150x150') ||
-      lowerImg.includes('type=f40') ||
-      lowerImg.includes('type=f60') ||
-      lowerImg.includes('type=f80') ||
-      lowerImg.includes('type=f100') ||
-      // 품질 관련
-      lowerImg.includes('blur') ||
-      lowerImg.includes('placeholder') ||
-      lowerImg.includes('loading') ||
-      lowerImg.includes('lazy') ||
-      // 비제품 이미지 (아이콘, 로고, 배너)
-      lowerImg.includes('/icon/') ||
-      lowerImg.includes('/logo/') ||
-      lowerImg.includes('/banner/') ||
-      lowerImg.includes('/badge/') ||
-      lowerImg.includes('_icon') ||
-      lowerImg.includes('_logo') ||
-      lowerImg.includes('_banner') ||
-      lowerImg.includes('_badge') ||
-      // ✅ [2026-02-01 추가] 배찌/마크/제휴 관련
-      lowerImg.includes('reviewmania') ||
-      lowerImg.includes('review_mania') ||
-      lowerImg.includes('powerlink') ||
-      lowerImg.includes('power_link') ||
-      lowerImg.includes('brandzone') ||
-      lowerImg.includes('brand_zone') ||
-      lowerImg.includes('navershopping') ||
-      lowerImg.includes('naver_shopping') ||
-      lowerImg.includes('affiliate') ||
-      lowerImg.includes('ad_') ||
-      lowerImg.includes('_ad.') ||
-      lowerImg.includes('promo') ||
-      lowerImg.includes('coupon') ||
-      lowerImg.includes('delivery') ||
-      lowerImg.includes('shipping') ||
-      // 결제 관련
-      lowerImg.includes('npay') ||
-      lowerImg.includes('naverpay') ||
-      lowerImg.includes('kakaopay') ||
-      lowerImg.includes('toss') ||
-      lowerImg.includes('payment') ||
-      lowerImg.includes('pay_') ||
-      // 기타 UI 요소
-      lowerImg.includes('arrow') ||
-      lowerImg.includes('button') ||
-      lowerImg.includes('btn_') ||
-      lowerImg.includes('_btn') ||
-      lowerImg.includes('sprite') ||
-      lowerImg.includes('.gif') ||
-      lowerImg.includes('data:image') ||
-      lowerImg.includes('1x1') ||
-      lowerImg.includes('spacer') ||
-      lowerImg.includes('.svg') ||
-      lowerImg.includes('emoji') ||
-      lowerImg.includes('emoticon') ||
-      lowerImg.includes('storefront') ||
-      lowerImg.includes('store_info') ||
-      lowerImg.includes('storelogo') ||
-      lowerImg.includes('brandlogo') ||
-      lowerImg.includes('store_logo') ||
-      lowerImg.includes('brand_logo') ||
-      // ✅ [2026-02-27] 워터마크/저작권 이미지 필터링 강화
-      lowerImg.includes('watermark') ||
-      lowerImg.includes('copyright') ||
-      lowerImg.includes('gettyimages') ||
-      lowerImg.includes('shutterstock') ||
-      lowerImg.includes('istockphoto') ||
-      lowerImg.includes('alamy.com') ||
-      lowerImg.includes('dreamstime') ||
-      lowerImg.includes('press_photo') ||
-      lowerImg.includes('editorial') ||
-      // ✅ [2026-02-27] 뉴스/언론사 이미지 필터링
-      lowerImg.includes('imgnews.pstatic') ||
-      lowerImg.includes('mimgnews.pstatic') ||
-      lowerImg.includes('dispatch.cdnser') ||
-      // ✅ [2026-02-27] 쇼핑몰 비제품 이미지 (인증/안내/정보 텍스트)
-      lowerImg.includes('cert_') ||
-      lowerImg.includes('_cert') ||
-      lowerImg.includes('certificate') ||
-      lowerImg.includes('kc_mark') ||
-      lowerImg.includes('kcmark') ||
-      lowerImg.includes('kc인증') ||
-      lowerImg.includes('warranty') ||
-      lowerImg.includes('guarantee') ||
-      lowerImg.includes('notice_') ||
-      lowerImg.includes('_notice') ||
-      lowerImg.includes('안내') ||
-      lowerImg.includes('info_table') ||
-      lowerImg.includes('info_img') ||
-      lowerImg.includes('seller_info') ||
-      lowerImg.includes('판매자') ||
-      lowerImg.includes('교환') ||
-      lowerImg.includes('환불') ||
-      lowerImg.includes('refund') ||
-      lowerImg.includes('exchange') ||
-      lowerImg.includes('return_') ||
-      lowerImg.includes('_return') ||
-      lowerImg.includes('guide_') ||
-      lowerImg.includes('_guide') ||
-      lowerImg.includes('faq_') ||
-      lowerImg.includes('qna_') ||
-      lowerImg.includes('review_event') ||
-      lowerImg.includes('event_banner') ||
-      lowerImg.includes('popup_') ||
-      lowerImg.includes('_popup') ||
-      lowerImg.includes('stamp') ||
-      lowerImg.includes('seal') ||
-      lowerImg.includes('ribbon') ||
-      lowerImg.includes('label_') ||
-      lowerImg.includes('_label') ||
-      lowerImg.includes('tag_') ||
-      lowerImg.includes('_tag') ||
-      lowerImg.includes('sticker') ||
-      // ✅ [2026-02-27] 쿠팡 특화 비제품 패턴
-      lowerImg.includes('rocket-') ||
-      lowerImg.includes('rocketwow') ||
-      lowerImg.includes('coupang-logo') ||
-      lowerImg.includes('seller-logo') ||
-      lowerImg.includes('/np/') ||
-      lowerImg.includes('/marketing/') ||
-      lowerImg.includes('/event/') ||
-      lowerImg.includes('/static/') ||
-      lowerImg.includes('/assets/') ||
-      // ✅ [2026-02-27] 텍스트/문서 이미지 패턴
-      lowerImg.includes('text_') ||
-      lowerImg.includes('_text') ||
-      lowerImg.includes('table_') ||
-      lowerImg.includes('_table') ||
-      lowerImg.includes('spec_') ||
-      lowerImg.includes('_spec');
-
-    if (isLowQualityOrNonProduct) {
-      console.log(`[ImageFilter] ⏭️ 비제품/저품질 제외: ${img.substring(0, 80)}...`);
-      continue;
-    }
-
-    // ✅ [2026-02-08] 네이버 쇼핑 이미지는 제품 CDN 도메인 확인
-    if (lowerImg.includes('pstatic.net') || lowerImg.includes('naver.')) {
-      const isProductCdn =
-        lowerImg.includes('shop-phinf.pstatic.net') ||
-        lowerImg.includes('shopping-phinf.pstatic.net') ||
-        lowerImg.includes('checkout.phinf') ||  // ✅ [2026-02-08] 리뷰 이미지 CDN
-        lowerImg.includes('image.nmv');          // ✅ [2026-02-08] 비디오 썸네일 CDN
-      // ✅ [2026-02-08] 광고 이미지는 제품 CDN이어도 제외
-      if (lowerImg.includes('searchad-phinf')) {
-        console.log(`[ImageFilter] ⏭️ 광고 이미지 제외: ${img.substring(0, 80)}...`);
-        continue;
-      }
-      // shopping-phinf/main_ 은 다른 상품의 카탈로그 썸네일
-      if (lowerImg.includes('shopping-phinf') && lowerImg.includes('/main_')) {
-        console.log(`[ImageFilter] ⏭️ 카탈로그 썸네일 제외: ${img.substring(0, 80)}...`);
-        continue;
-      }
-      if (!isProductCdn) {
-        console.log(`[ImageFilter] ⏭️ 비제품 네이버 CDN 제외: ${img.substring(0, 80)}...`);
-        continue;
-      }
-    }
-
-    // 2. 기본 URL 중복 체크
-    const baseUrl = img.split('?')[0].split('#')[0];
-    if (seenBaseUrls.has(baseUrl)) {
-      console.log(`[ImageFilter] ⏭️ URL 중복 제외: ${baseUrl.substring(0, 60)}...`);
-      continue;
-    }
-
-    // 3. 파일명 기반 중복 체크 (같은 파일이 다른 크기로 존재하는 경우)
-    const fileName = baseUrl.split('/').pop()?.split('?')[0] || '';
-    // 파일명에서 크기 정보 제거 (예: image_250x250.jpg → image.jpg)
-    const normalizedFileName = fileName.replace(/_\d+x\d+/g, '').replace(/-\d+x\d+/g, '');
-
-    if (normalizedFileName && seenFileNames.has(normalizedFileName)) {
-      console.log(`[ImageFilter] ⏭️ 파일명 중복 제외: ${fileName}`);
-      continue;
-    }
-
-    // ✅ [2026-02-27] 4. 정규화된 URL 중복 제거 (type=f640/f130 등 네이버 CDN 변형)
-    const normalizedUrl = baseUrl
-      .replace(/[?&]type=[a-z]\d+/gi, '')  // 네이버 type 파라미터 제거
-      .replace(/_thumb/gi, '')              // 썸네일 접미사 제거
-      .replace(/_small/gi, '')
-      .replace(/\/thumbnail\//gi, '/')      // 쿠팡 썸네일 경로 정규화
-      .replace(/\/\d+x\d+\//gi, '/')        // 크기 경로 정규화
-      .replace(/\?$/, '');
-    if (seenNormalizedUrls.has(normalizedUrl)) {
-      console.log(`[ImageFilter] ⏭️ 정규화 URL 중복 제외: ${normalizedUrl.substring(0, 60)}...`);
-      continue;
-    }
-
-    seenBaseUrls.add(baseUrl);
-    if (normalizedFileName) seenFileNames.add(normalizedFileName);
-    seenNormalizedUrls.add(normalizedUrl);
-    filtered.push(img);
-  }
-
-  console.log(`[ImageFilter] ✅ 필터링 완료: ${images.length}개 → ${filtered.length}개`);
-  return filtered;
-}
+// [v2.10.255] image:collectFromUrl → main/ipc/imageCollectUrlHandlers.ts
 
 // 쇼핑몰에서 이미지 수집 (플랫폼별 분기)
 // ✅ 브랜드스토어: 기존 방식 (검증됨)
 // ✅ 스마트스토어/쿠팡: 새 모듈화된 크롤러
-ipcMain.handle('image:collectFromShopping', async (_event, url: string) => {
-  // ✅ [리팩토링] 통합 검증
-  const check = await validateLicenseAndQuota('media', 1);
-  if (!check.valid) return check.response;
-
-  try {
-    console.log('[Main] ════════════════════════════════════════');
-    console.log('[Main] 🛒 쇼핑몰 이미지 수집 시작:', url);
-
-    // ✅ 플랫폼 감지
-    const isBrandStore = url.includes('brand.naver.com');
-    const isSmartStore = url.includes('smartstore.naver.com');
-    const isCoupang = url.includes('coupang.com') || url.includes('coupa.ng');
-
-    let images: string[] = [];
-    let title = '';
-    let productInfo: any = {};
-
-    if (isBrandStore) {
-      // ✅ [2026-02-08] 브랜드스토어: fetchShoppingImages + crawlBrandStoreProduct 이중 수집
-      console.log('[Main] 🏪 브랜드스토어 감지 → 강화된 이미지 수집');
-      const { fetchShoppingImages } = await import('./sourceAssembler.js');
-      const result = await fetchShoppingImages(url, { imagesOnly: true });
-
-      images = result.images || [];
-      title = result.title || '';
-      productInfo = {
-        name: title,
-        price: result.price,
-        description: result.description,
-      };
-
-      // ✅ [2026-02-08] 이미지 7장 미만이면 crawlBrandStoreProduct 폴백으로 추가 수집
-      const MIN_BRAND_IMAGES = 7;
-      if (images.length < MIN_BRAND_IMAGES) {
-        console.log(`[Main] ⚠️ 브랜드스토어 이미지 ${images.length}개 < 목표 ${MIN_BRAND_IMAGES}개 → 폴백 크롤러 호출`);
-        try {
-          // URL에서 productId와 brandName 추출
-          const productIdMatch = url.match(/\/products\/(\d+)/) || url.match(/channelProductNo=(\d+)/);
-          const brandMatch = url.match(/(?:m\.)?brand\.naver\.com\/([^\/\?]+)/);
-          const productId = productIdMatch?.[1] || '';
-          const brandName = brandMatch?.[1] || '';
-
-          if (productId && brandName) {
-            const { crawlBrandStoreProduct } = await import('./crawler/productSpecCrawler.js');
-            const fallbackResult = await crawlBrandStoreProduct(productId, brandName, url);
-
-            if (fallbackResult) {
-              // ✅ AffiliateProductInfo에서 이미지 추출 (mainImage + galleryImages + detailImages)
-              const fallbackAllImages: string[] = [];
-              if (fallbackResult.mainImage) fallbackAllImages.push(fallbackResult.mainImage);
-              if (fallbackResult.galleryImages?.length) fallbackAllImages.push(...fallbackResult.galleryImages);
-              if (fallbackResult.detailImages?.length) fallbackAllImages.push(...fallbackResult.detailImages);
-
-              // 폴백에서 얻은 이미지 병합 (중복 제거)
-              const existingNorm = new Set(images.map(u => u.split('?')[0]));
-              const fallbackImages = fallbackAllImages
-                .filter((img: string) => {
-                  const norm = img.split('?')[0];
-                  return !existingNorm.has(norm) && img.startsWith('http');
-                });
-
-              if (fallbackImages.length > 0) {
-                images = [...images, ...fallbackImages];
-                console.log(`[Main] ✅ 폴백 크롤러에서 ${fallbackImages.length}개 추가 이미지 수집 → 총 ${images.length}개`);
-              }
-
-              // 상품명이 없으면 폴백에서 가져오기
-              if (!title && fallbackResult.name && fallbackResult.name !== '상품명을 불러올 수 없습니다') {
-                title = fallbackResult.name;
-                productInfo.name = title;
-                console.log(`[Main] ✅ 폴백 크롤러에서 상품명 추출: "${title}"`);
-              }
-              if (!productInfo.price && fallbackResult.price) {
-                productInfo.price = fallbackResult.price;
-              }
-            }
-          } else {
-            console.log(`[Main] ⚠️ URL에서 productId/brandName 추출 실패 → 폴백 건너뜀`);
-          }
-        } catch (fallbackErr) {
-          console.warn(`[Main] ⚠️ 브랜드스토어 폴백 크롤링 오류:`, (fallbackErr as Error).message);
-        }
-      }
-    } else if (isSmartStore || isCoupang) {
-      // ✅ 스마트스토어/쿠팡: 새 모듈화된 크롤러 사용
-      console.log(`[Main] 🏪 ${isSmartStore ? '스마트스토어' : '쿠팡'} 감지 → 새 크롤러 사용`);
-      const { collectShoppingImages } = await import('./crawler/shopping/index.js');
-
-      // ✅ [2026-02-27] maxImages 30→100 확대 (대량 수집)
-      const result = await collectShoppingImages(url, {
-        timeout: 30000,
-        maxImages: 100,
-        includeDetails: true,
-        useCache: true,
-      });
-
-      if (result.isErrorPage) {
-        console.error('[Main] ❌ 에러 페이지 감지:', result.error);
-        return { success: false, message: result.error || '에러 페이지입니다', isErrorPage: true };
-      }
-
-      if (!result.success) {
-        console.warn('[Main] ⚠️ 이미지 수집 실패:', result.error);
-        return { success: false, message: result.error || '이미지를 수집할 수 없습니다' };
-      }
-
-      images = result.images.map(img => img.url);
-      title = result.productInfo?.name || '';
-      productInfo = result.productInfo || {};
-
-      console.log(`[Main] 📊 사용된 전략: ${result.usedStrategy}`);
-      console.log(`[Main] ⏱️ 소요 시간: ${result.timing}ms`);
-    } else {
-      // ✅ 기타 쇼핑몰: 기존 방식 폴백
-      console.log('[Main] 🏪 기타 쇼핑몰 → 기존 방식 사용');
-      const { fetchShoppingImages } = await import('./sourceAssembler.js');
-      const result = await fetchShoppingImages(url, { imagesOnly: true });
-
-      images = result.images || [];
-      title = result.title || '';
-      productInfo = {
-        name: title,
-        price: result.price,
-        description: result.description,
-      };
-    }
-
-    console.log(`[Main] ✅ 쇼핑몰 이미지 수집 완료: ${images.length}개`);
-
-    // ✅ [2026-02-01 FIX] 1단계: 배너/배찌/마크 등 비제품 이미지 URL 필터링
-    const filteredImages = filterDuplicateAndLowQualityImages(images);
-    console.log(`[Main] 🎯 1단계 URL 필터 후: ${filteredImages.length}개 (제외: ${images.length - filteredImages.length}개)`);
-
-    // ✅ [2026-02-27] 2~4단계: 이미지 콘텐츠 분석 + 유사도 필터 + AI Vision 분류
-    let analyzedImages = filteredImages;
-    if (filteredImages.length > 1) {
-      try {
-        const config = await loadConfig();
-        const { analyzeAndFilterShoppingImages } = await import('./image/shoppingImageAnalyzer.js');
-        analyzedImages = await analyzeAndFilterShoppingImages(filteredImages, {
-          referenceImageUrl: filteredImages[0], // 갤러리 대표 이미지
-          geminiApiKey: config.geminiApiKey || '',
-          openaiApiKey: (config as any).openaiApiKey || '',
-        });
-        console.log(`[Main] 🔬 2~4단계 분석 후: ${analyzedImages.length}개 (추가 제외: ${filteredImages.length - analyzedImages.length}개)`);
-      } catch (analyzeErr) {
-        console.warn(`[Main] ⚠️ 2단계 분석 실패, 1단계 결과 사용:`, (analyzeErr as Error).message);
-        analyzedImages = filteredImages;
-      }
-    }
-
-    console.log('[Main] ════════════════════════════════════════');
-
-    const response = {
-      success: analyzedImages.length > 0,
-      images: analyzedImages,
-      title,
-      productInfo,
-    };
-
-    if ((response.images?.length ?? 0) > 0 && (await isFreeTierUser())) {
-      await consumeQuota('media', 1);
-    }
-    return response;
-
-  } catch (error) {
-    console.error('[Main] ❌ 쇼핑몰 이미지 수집 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
+// [v2.10.253] image:collectFromShopping → main/ipc/imageCollectShoppingHandlers.ts 로 이주
 
 // ✅ [2026-02-01] AI 기반 소제목-이미지 의미적 매칭 (Gemini / Perplexity 지원)
-ipcMain.handle('image:matchToHeadings', async (_event, images: string[], headings: string[]) => {
-  try {
-    console.log(`[Main] 🎯 이미지-소제목 매칭 시작: ${images.length}개 이미지, ${headings.length}개 소제목`);
-
-    const config = await loadConfig();
-
-    // ✅ 사용자 설정에 따른 AI 공급자 결정
-    const provider = config.defaultAiProvider || 'gemini';
-    const geminiApiKey = config.geminiApiKey || process.env.GEMINI_API_KEY;
-    const perplexityApiKey = config.perplexityApiKey || process.env.PERPLEXITY_API_KEY;
-
-    // API 키 확인
-    const hasGemini = !!geminiApiKey;
-    const hasPerplexity = !!perplexityApiKey;
-
-    if (!hasGemini && !hasPerplexity) {
-      console.warn('[Main] ⚠️ AI API 키 없음 → 순차 배치');
-      return { success: true, matches: headings.map((_: string, i: number) => i % images.length) };
-    }
-
-    const { matchImagesToHeadings } = await import('./imageHeadingMatcher.js');
-
-    // ✅ [2026-03-20 FIX] 설정 기반 AI 매칭 실행 — openai/claude는 미지원이므로 Gemini로 안전 폴백
-    const resolvedMatcherProvider = (provider === 'perplexity' && hasPerplexity) ? 'perplexity' as const : 'gemini' as const;
-    if ((provider === 'openai' || provider === 'claude') && hasGemini) {
-      console.log(`[Main] ⚠️ 이미지-소제목 매칭: ${provider}는 미지원 → Gemini로 폴백합니다.`);
-    }
-    const matcherConfig = {
-      provider: resolvedMatcherProvider,
-      geminiApiKey,
-      perplexityApiKey,
-      geminiModel: config.geminiModel || process.env.GEMINI_MODEL,
-      perplexityModel: config.perplexityModel,
-    };
-
-    console.log(`[Main] 🤖 AI 공급자: ${matcherConfig.provider} (설정: ${provider})`);
-    const matches = await matchImagesToHeadings(images, headings, matcherConfig);
-
-    console.log(`[Main] ✅ 이미지-소제목 매칭 완료: ${JSON.stringify(matches)}`);
-    return { success: true, matches };
-
-  } catch (error) {
-    console.error('[Main] ❌ 이미지-소제목 매칭 실패:', error);
-    // 폴백: 순차 배치
-    return { success: true, matches: headings.map((_: string, i: number) => i % images.length) };
-  }
-});
+// [v2.10.249] image:matchToHeadings → main/ipc/imageMatchHandlers.ts 로 이주
 
 // 다중 이미지 다운로드 및 저장
-ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ url: string; heading: string }>, title: string) => {
-  console.log(`[Main] 🖼️ image:downloadAndSaveMultiple 호출 — 이미지 ${images?.length || 0}개, title="${title}"`);
-  // ✅ [v2.10.14] 라이선스/쿼터 가드 제거 — 이미지 수집/저장은 외부 이미지 다운로드 + 디스크 write라 비용 0
-  //   사용자 보고: 'AI 이미지 자동수집/이미지 수집 URL이 폴더에 저장 안 됨'
-  //   원인: validateLicenseAndQuota('media', 1)이 무료 라이선스/쿼터 부족 시 silent 차단
-  //   조치: 가드 제거 → 누구나 이미지 수집 + 폴더 저장 가능. 발행은 별도 검증 유지.
-
-  try {
-    const axios = (await import('axios')).default;
-    const os = await import('os');
-
-    const savedImages: any[] = [];
-    // ✅ [v2.10.54] safeTitle 정규식 보강 — 줄임표(…) U+2026 + 가운뎃점(·) + 기타 유니코드 특수문자 추가
-    //   사용자 보고: '발베르데-추아메니 주먹다짐 직전까지…레알 라커룸 지금 난리남'
-    //   원인: …(U+2026) 정규식에서 누락 → 폴더명에 그대로 → Windows 일부 API에서 ERR_FILE_NOT_FOUND
-    //   조치: 줄임표/가운뎃점 + 한글 NFC 정규화 + substring 100→80 (MAX_PATH 안전 마진)
-    const safeTitle = (title || 'untitled')
-      .normalize('NFC') // 한글 자모 정규화 (NFD 분리형 → NFC 결합형)
-      .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_')
-      .replace(/[…·•◦‧⋯⋮⋯]/g, '_') // 줄임표/가운뎃점/기타 유니코드 점
-      .replace(/\s+/g, '_')
-      .replace(/\.+$/, '')
-      .replace(/_+/g, '_') // 연속 _ 압축
-      .replace(/_+$/, '')
-      .substring(0, 80) // Windows MAX_PATH 260 안전 마진 (한글 100자=300바이트 위험)
-      .trim() || 'untitled';
-
-    // ✅ [v2.8.8] 이미지 저장 경로 보장 — customImageSavePath 우선, 실패 시 Downloads 폴백 + 자동 영속화
-    const fallbackPath = path.join(os.homedir(), 'Downloads', 'naver-blog-images');
-    let basePath = fallbackPath;
-    try {
-      const config = await loadConfig();
-      const cfgPath = String((config as any).customImageSavePath || '').trim();
-      if (cfgPath) {
-        basePath = cfgPath;
-      } else {
-        // 기본 경로를 config에 영속화 (이후 동일 경로 안정 사용)
-        const { saveConfig } = await import('./configManager.js');
-        await saveConfig({ ...config, customImageSavePath: fallbackPath } as any);
-        console.log(`[Main] customImageSavePath 미세팅 → ${fallbackPath}로 자동 영속화`);
-      }
-    } catch (cfgErr: any) {
-      console.warn(`[Main] config 로드 실패 — fallback 사용: ${cfgErr?.message}`);
-    }
-
-    let imagesPath = path.join(basePath, safeTitle);
-    try {
-      await fs.mkdir(imagesPath, { recursive: true });
-      console.log(`[Main] ✅ 이미지 저장 경로 생성: ${imagesPath}`);
-    } catch (mkErr: any) {
-      // ✅ basePath가 잘못된 경로(권한 없음, 존재하지 않는 드라이브 등)면 Downloads로 폴백
-      console.warn(`[Main] ⚠️ basePath mkdir 실패 (${basePath}) → Downloads 폴백: ${mkErr?.message}`);
-      imagesPath = path.join(fallbackPath, safeTitle);
-      await fs.mkdir(imagesPath, { recursive: true });
-      console.log(`[Main] ✅ 폴백 경로 생성: ${imagesPath}`);
-    }
-
-    // ✅ [100점 개선] 이미지 다운로드 함수 (헤더 + 리다이렉트 + 재시도)
-    // ✅ [2026-04-18 FIX] Referer를 URL의 origin으로 동적 설정 — 쿠팡/스마트스토어
-    //    핫링크 방지는 자기 도메인만 허용하는 경우가 많아 naver.com 고정 Referer로는
-    //    대부분 403/차단됨. URL origin 매칭이 가장 호환성 높음.
-    //    예: coupangcdn 이미지 → Referer: https://www.coupang.com/
-    //        pstatic 이미지    → Referer: https://smartstore.naver.com/
-    const inferRefererFromUrl = (imgUrl: string): string => {
-      try {
-        const u = new URL(imgUrl);
-        const host = u.hostname;
-        // 이미지 CDN 호스트 → 대응하는 쇼핑몰 origin 매핑
-        if (host.includes('coupangcdn') || host.includes('coupang')) return 'https://www.coupang.com/';
-        if (host.includes('pstatic') || host.includes('phinf')) return 'https://smartstore.naver.com/';
-        if (host.includes('shopping-phinf')) return 'https://brand.naver.com/';
-        // 기본: URL 자체 origin
-        return `${u.protocol}//${u.host}/`;
-      } catch {
-        return 'https://search.naver.com/';
-      }
-    };
-
-    const downloadImage = async (url: string, maxRetries = 3): Promise<{ buffer: Buffer; contentType: string } | null> => {
-      const referer = inferRefererFromUrl(url);
-      for (let attempt = 1; attempt <= maxRetries; attempt++) {
-        try {
-          const response = await axios.get(url, {
-            responseType: 'arraybuffer',
-            timeout: 30000,
-            maxRedirects: 5, // ✅ 리다이렉트 자동 처리
-            headers: {
-              // ✅ [핵심] 핫링크 방지 우회 헤더 (URL origin 기반)
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-              'Referer': referer,
-              'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
-              'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-            },
-            validateStatus: (status) => status >= 200 && status < 400,
-          });
-
-          const buffer = Buffer.from(response.data);
-          const contentType = response.headers['content-type'] || 'image/jpeg';
-
-          // ✅ 버퍼 크기 검증 (최소 1KB)
-          if (buffer.length < 1024) {
-            console.warn(`[Main] ⚠️ 이미지 크기 너무 작음 (${buffer.length}bytes), 재시도 ${attempt}/${maxRetries}`);
-            if (attempt < maxRetries) {
-              await new Promise(r => setTimeout(r, 500 * attempt)); // exponential backoff
-              continue;
-            }
-            return null;
-          }
-
-          return { buffer, contentType };
-        } catch (error: any) {
-          const errorMsg = error.response?.status
-            ? `HTTP ${error.response.status}`
-            : (error.code || error.message);
-          console.warn(`[Main] ⚠️ 다운로드 시도 ${attempt}/${maxRetries} 실패: ${errorMsg}`);
-
-          if (attempt < maxRetries) {
-            await new Promise(r => setTimeout(r, 1000 * attempt)); // exponential backoff
-          }
-        }
-      }
-      return null;
-    };
-
-    // ✅ Content-Type에서 확장자 추출
-    const getExtensionFromContentType = (contentType: string, url: string): string => {
-      const typeMap: Record<string, string> = {
-        'image/jpeg': '.jpg',
-        'image/jpg': '.jpg',
-        'image/png': '.png',
-        'image/gif': '.gif',
-        'image/webp': '.webp',
-        'image/avif': '.avif',
-        'image/svg+xml': '.svg',
-      };
-
-      for (const [type, ext] of Object.entries(typeMap)) {
-        if (contentType.includes(type)) return ext;
-      }
-
-      // URL에서 확장자 추출 (query string 제거)
-      const urlPath = url.split('?')[0];
-      const urlExt = path.extname(urlPath).toLowerCase();
-      if (['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(urlExt)) {
-        return urlExt === '.jpeg' ? '.jpg' : urlExt;
-      }
-
-      return '.jpg'; // 기본값
-    };
-
-    // ✅ [v2.10.32] 무제한 Promise.all → batch=4 청크 (저사양 PC RSS 스파이크 차단)
-    //   기존: 30개 헤딩 × 5MB = 750MB 동시 다운로드 가능 → 메모리 압박
-    //   수정: 4개씩 순차 batch. 인덱스 정합성 그대로 보존(원래 인덱스로 결과 매핑).
-    const downloadOne = async (img: any, i: number): Promise<{ filePath: string; heading: string } | null> => {
-      const result = await downloadImage(img.url);
-
-      if (!result) {
-        console.error(`[Main] ❌ 이미지 ${i + 1} 다운로드 최종 실패: ${img.heading}`);
-        return null;
-      }
-
-      try {
-        const ext = getExtensionFromContentType(result.contentType, img.url);
-        const safeHeading = img.heading.replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/g, '').substring(0, 50);
-        const fileName = `${i + 1}_${safeHeading}${ext}`;
-        const filePath = path.join(imagesPath, fileName);
-
-        await fs.writeFile(filePath, result.buffer);
-        console.log(`[Main] ✅ 이미지 ${i + 1} 저장 완료: ${fileName} (${Math.round(result.buffer.length / 1024)}KB)`);
-
-        return { filePath, heading: img.heading };
-      } catch (writeError) {
-        console.error(`[Main] ❌ 이미지 ${i + 1} 파일 저장 실패:`, writeError);
-        return null;
-      }
-    };
-
-    const BATCH = 4; // 4개씩 동시 다운로드 (Sharp 메모리 + 네트워크 부하 균형점)
-    const results: Array<{ filePath: string; heading: string } | null> = new Array(images.length).fill(null);
-    for (let start = 0; start < images.length; start += BATCH) {
-      const end = Math.min(start + BATCH, images.length);
-      const chunkPromises: Array<Promise<void>> = [];
-      for (let i = start; i < end; i++) {
-        chunkPromises.push(
-          downloadOne(images[i], i).then((r) => { results[i] = r; })
-        );
-      }
-      await Promise.all(chunkPromises); // 청크 단위 동시 + 청크 간 순차
-    }
-
-    // ✅ [2026-04-18 FIX] 인덱스 정합성 보존 — 실패한 슬롯을 null로 유지
-    //    이전 버그: 실패 슬롯을 filter로 제거 → savedImages[idx]가 원래 idx의
-    //    다운로드 결과가 아닌 뒤 인덱스의 결과가 들어가 소제목-이미지 미스매칭 +
-    //    실패한 idx는 undefined → UI에서 X 마크 표시
-    //    수정: results 그대로 대입 (null 유지). 렌더러는 savedImg?.filePath로 안전 체크.
-    for (const r of results) {
-      savedImages.push(r);
-    }
-
-    const successCount = results.filter(r => r !== null).length;
-    const failCount = images.length - successCount;
-
-    console.log(`[Main] 📊 다운로드 결과: 성공 ${successCount}개, 실패 ${failCount}개`);
-
-    const response = { success: true, savedImages, folderPath: imagesPath };
-    if ((response.savedImages?.length ?? 0) > 0 && (await isFreeTierUser())) {
-      await consumeQuota('media', 1);
-    }
-    return response;
-  } catch (error) {
-    console.error('[Main] 다중 이미지 다운로드 실패:', error);
-    return { success: false, error: (error as Error).message };
-  }
-});
+// [v2.10.254] image:downloadAndSaveMultiple → main/ipc/imageDownloadHandlers.ts (2 handlers)
 
 // ✅ [2026-04-03] image:generateComparisonTable → src/main/ipc/imageTableHandlers.ts로 이관
 
@@ -3705,6 +2626,26 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
   // ============================================
 
   console.log('[Main] automation:run  AutomationService.executePostCycle() 위임');
+
+  // [SPEC-PROMPT-2026-REFRESH Phase 2 / v2.10.233] 발행 시간 골든존 가드
+  //   배경: 00~08시 발행은 초기 3시간 평가창에서 유입 0 → 노출 페널티 -40% (weolbu·adsensefarm 실측).
+  //   동작: 골든존(09~22시) 외 시각이면 console.warn + sendLog로 progress modal에 경고 표시.
+  //   강제 차단은 하지 않음 — 사용자가 일부러 새벽에 발행할 수도 있어 결정 존중.
+  try {
+    const goldenZoneCheck = checkGoldenZone();
+    if (!goldenZoneCheck.isGolden) {
+      const suggested = goldenZoneCheck.suggestedNextGolden
+        ? `${goldenZoneCheck.suggestedNextGolden.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })} 권장`
+        : '';
+      const warnMsg = `⏰ 발행 시간 가드: ${goldenZoneCheck.reason}${suggested ? ` 다음 골든존 ${suggested}` : ''}`;
+      console.warn(`[Main] ${warnMsg}`);
+      sendLog(warnMsg);
+    } else {
+      console.log(`[Main] ✅ 발행 시간 골든존 (${goldenZoneCheck.hour}시)`);
+    }
+  } catch (gzErr: any) {
+    console.warn('[Main] 발행 시간 가드 예외 — graceful skip:', gzErr?.message || gzErr);
+  }
 
   //  라이선스/quota 검증
   const validationResult = await validateAutomationRun();
@@ -4256,16 +3197,7 @@ ipcMain.handle(
   },
 );
 
-// ✅ 파일 존재 확인 IPC 핸들러
-ipcMain.handle('file:exists', async (_event, filePath: string): Promise<boolean> => {
-  try {
-    const fs = await import('fs/promises');
-    await fs.access(filePath);
-    return true;
-  } catch {
-    return false;
-  }
-});
+// [v2.10.242] file:exists → main/ipc/fileHandlers.ts 로 이주 (위 블록 참조)
 
 ipcMain.handle('automation:generateContent', async (_event, prompt: string) => {
   // ✅ [리팩토링] 통합 검증
@@ -4561,659 +3493,27 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
 });
 
 // ✅ Gemini API 연속 테스트 핸들러 (앱 환경)
-ipcMain.handle('gemini:test10x', async (_event, testCount?: number) => {
-  const TEST_COUNT = testCount || 30; // 기본 30회
+// [v2.10.248] gemini:test10x → main/ipc/geminiHandlers.ts 로 이주
 
-  console.log('\n' + '='.repeat(60));
-  console.log(`🧪 Gemini API ${TEST_COUNT}회 연속 테스트 시작 (앱 환경)`);
-  console.log('='.repeat(60) + '\n');
-
-  const results: Array<{ success: boolean; elapsed?: number; retry?: number; error?: string }> = [];
-  let successCount = 0;
-  let totalRetries = 0;
-  const MAX_RETRIES = 8;
-  const RETRY_DELAYS = [3000, 5000, 8000, 10000, 15000, 20000, 25000, 30000];
-
-  for (let i = 1; i <= TEST_COUNT; i++) {
-    console.log(`테스트 ${i}/${TEST_COUNT}: 시작...`);
-
-    let lastError = '';
-    let retryCount = 0;
-
-    for (let retry = 0; retry <= MAX_RETRIES; retry++) {
-      try {
-        const startTime = Date.now();
-        const testPrompt = `다음 주제로 짧은 블로그 글 제목 1개만 생성해주세요: "겨울철 건강 관리"`;
-
-        const content = await generateBlogContent(testPrompt);
-        const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-
-        if (content && content.trim()) {
-          results.push({ success: true, elapsed: parseFloat(elapsed), retry });
-          successCount++;
-          totalRetries += retry;
-          console.log(`테스트 ${i}/${TEST_COUNT}: ✅ 성공 (${elapsed}초${retry > 0 ? `, 재시도 ${retry}회` : ''})`);
-          break;
-        }
-        throw new Error('빈 응답');
-
-      } catch (error) {
-        const errorMsg = (error as Error).message || '';
-        lastError = errorMsg.substring(0, 100);
-
-        const isRetryable =
-          errorMsg.includes('503') ||
-          errorMsg.includes('overloaded') ||
-          errorMsg.includes('500') ||
-          errorMsg.includes('502') ||
-          errorMsg.includes('504') ||
-          errorMsg.includes('rate') ||
-          errorMsg.includes('network') ||
-          errorMsg.includes('timeout');
-
-        if (isRetryable && retry < MAX_RETRIES) {
-          const delay = RETRY_DELAYS[retry];
-          console.log(`  ⏳ 재시도 ${retry + 1}/${MAX_RETRIES} (${delay / 1000}초 대기)`);
-          await new Promise(r => setTimeout(r, delay));
-          retryCount = retry + 1;
-          continue;
-        }
-
-        results.push({ success: false, error: lastError, retry });
-        console.log(`테스트 ${i}/${TEST_COUNT}: ❌ 실패: ${lastError}`);
-        break;
-      }
-    }
-
-    // 테스트 간 간격
-    if (i < TEST_COUNT) {
-      await new Promise(r => setTimeout(r, 2000));
-    }
-  }
-
-  // 결과 요약
-  console.log('\n' + '='.repeat(60));
-  console.log('📊 테스트 결과 요약');
-  console.log('='.repeat(60));
-  console.log(`총 테스트: ${TEST_COUNT}회`);
-  console.log(`성공: ${successCount}회`);
-  console.log(`실패: ${TEST_COUNT - successCount}회`);
-  console.log(`성공률: ${((successCount / TEST_COUNT) * 100).toFixed(1)}%`);
-  console.log(`총 재시도 횟수: ${totalRetries}회`);
-  console.log('='.repeat(60) + '\n');
-
-  if (successCount === TEST_COUNT) {
-    console.log('🎉 100% 성공! Gemini API가 안정적으로 작동합니다.');
-  }
-
-  return {
-    success: successCount === TEST_COUNT,
-    total: TEST_COUNT,
-    successCount,
-    failCount: TEST_COUNT - successCount,
-    successRate: ((successCount / TEST_COUNT) * 100).toFixed(1) + '%',
-    totalRetries,
-    results
-  };
-});
-
-ipcMain.handle('gemini:generateVeoVideo', async (_event, payload: {
-  prompt: string;
-  model?: string;
-  durationSeconds?: number;
-  aspectRatio?: '16:9' | '9:16' | '1:1' | 'original';
-  negativePrompt?: string;
-  imagePath?: string;
-  image?: { imageBytes: string; mimeType: string };
-  heading?: string;
-  videoProvider?: 'veo' | 'stability' | 'prodia' | 'kenburns'; // ✅ 추가
-  convertToGif?: boolean; // ✅ 추가
-}) => {
-  // ✅ [리팩토링] 통합 검증
-  const check = await validateLicenseAndQuota('media', 1);
-  if (!check.valid) return check.response;
-
-  try {
-    const config = await loadConfig();
-    try {
-      applyConfigToEnv(config);
-    } catch (e) {
-      console.warn('[main] catch ignored:', e);
-    }
-
-    const {
-      prompt = '',
-      model = 'veo-3.1-generate-preview',
-      durationSeconds = 6,
-      aspectRatio = '1:1',
-      negativePrompt = '',
-      videoProvider = 'veo',
-      convertToGif = false,
-      heading = 'AI-VIDEO',
-    } = payload;
-
-    const headingForSave = sanitizeFileName(String(heading || '').trim()) || 'AI-VIDEO';
-    const mp4Dir = await ensureHeadingMp4Dir(headingForSave);
-
-    let finalOutPath = '';
-    let finalFileName = '';
-
-    // ✅ 1. Stability AI (SVD) 비디오 생성 — 제거됨 (deprecated provider)
-    if (videoProvider === 'stability') {
-      throw new Error('Stability AI 비디오 생성은 더 이상 지원되지 않습니다. Veo를 사용하세요.');
-    }
-    // ✅ 2. Veo (Gemini) 비디오 생성 (기존 로직 보전)
-    else if (videoProvider === 'veo') {
-      const apiKey = (process.env.GEMINI_API_KEY || '').trim();
-      if (!apiKey) throw new Error('Gemini API 키가 설정되지 않았습니다.');
-      if (!prompt?.trim()) throw new Error('프롬프트가 비어있습니다.');
-
-      const pickMimeType = (filePath: string): string => {
-        const p = String(filePath || '').toLowerCase();
-        if (p.endsWith('.png')) return 'image/png';
-        if (p.endsWith('.webp')) return 'image/webp';
-        if (p.endsWith('.gif')) return 'image/gif';
-        if (p.endsWith('.jpg') || p.endsWith('.jpeg')) return 'image/jpeg';
-        return 'image/png';
-      };
-
-      const normalizeImageInput = async (input: string): Promise<{ imageBytes: string; mimeType: string } | undefined> => {
-        const raw = String(input || '').trim();
-        if (!raw) return undefined;
-        if (/^data:/i.test(raw)) {
-          const m = raw.match(/^data:([^;]+);base64,(.+)$/i);
-          if (!m) return undefined;
-          return { imageBytes: String(m[2] || '').trim(), mimeType: String(m[1] || '').trim() || 'image/png' };
-        }
-        if (/^https?:\/\//i.test(raw)) {
-          const axios = (await import('axios')).default;
-          const resp = await axios.get(raw, { responseType: 'arraybuffer', maxRedirects: 5 });
-          const buf = Buffer.from(resp.data);
-          const ct = String((resp.headers as any)?.['content-type'] || '').split(';')[0].trim();
-          return { imageBytes: buf.toString('base64'), mimeType: ct || pickMimeType(raw) };
-        }
-        const buf = await fs.readFile(raw);
-        return { imageBytes: buf.toString('base64'), mimeType: pickMimeType(raw) };
-      };
-
-      const imagePath = String(payload?.imagePath || '').trim();
-      const imageBytes = String(payload?.image?.imageBytes || '').trim();
-      const imageMimeType = String(payload?.image?.mimeType || '').trim();
-      let instanceImage: { imageBytes: string; mimeType: string } | undefined = undefined;
-
-      if (imageBytes) {
-        instanceImage = { imageBytes, mimeType: imageMimeType || 'image/png' };
-      } else if (imagePath) {
-        instanceImage = await normalizeImageInput(imagePath);
-      }
-
-      sendLog(`🎬 Veo 영상 생성 시작 (모델: ${model}, ${durationSeconds}초)`);
-      const baseUrl = 'https://generativelanguage.googleapis.com/v1beta';
-      const axios = (await import('axios')).default;
-      const headers = { 'x-goog-api-key': apiKey, 'Content-Type': 'application/json' };
-      const instance: any = { prompt: prompt.trim() };
-      if (instanceImage?.imageBytes) {
-        instance.image = { bytesBase64Encoded: instanceImage.imageBytes, mimeType: instanceImage.mimeType };
-      }
-
-      const requestBody: any = { instances: [instance], parameters: { durationSeconds } };
-      if (aspectRatio && aspectRatio !== 'original') {
-        requestBody.parameters.aspectRatio = aspectRatio;
-      }
-      if (negativePrompt) requestBody.parameters.negativePrompt = negativePrompt;
-
-      const startResp = await axios.post(`${baseUrl}/models/${encodeURIComponent(model)}:predictLongRunning`, requestBody, { headers });
-      const operationName = startResp?.data?.name;
-      if (!operationName) throw new Error('Veo 작업 생성 실패');
-
-      const startedAt = Date.now();
-      const timeoutMs = 12 * 60 * 1000;
-      const pollIntervalMs = 10 * 1000;
-
-      while (true) {
-        if (Date.now() - startedAt > timeoutMs) throw new Error('Veo 생성 시간 초과');
-        await new Promise((r) => setTimeout(r, pollIntervalMs));
-        const statusResp = await axios.get(`${baseUrl}/${operationName}`, { headers });
-        const data = statusResp?.data;
-        sendLog(`⏳ Veo 생성 중... ${Math.floor((Date.now() - startedAt) / 1000)}초 경과`);
-
-        if (data?.done === true) {
-          const response = data?.response || {};
-          const errMsg = data?.error?.message || response?.error?.message || response?.generateVideoResponse?.error?.message;
-          if (errMsg) throw new Error(String(errMsg));
-
-          const pickFirstTruthy = (...vals: any[]): any => {
-            for (const v of vals) if (v !== undefined && v !== null && String(v).trim() !== '') return v;
-            return undefined;
-          };
-
-          // ✅ 비디오 데이터 추출 (다양한 응답 포맷 대응)
-          const rawVideo = pickFirstTruthy(
-            response?.generateVideoResponse?.generatedSamples?.[0]?.video,
-            response?.generatedVideos?.[0]?.video,
-            response?.generated_videos?.[0]?.video,
-            response?.video?.[0] || response?.video
-          );
-
-          let downloadUrl: string | undefined = undefined;
-          const rawVideoUri = pickFirstTruthy(
-            rawVideo?.uri,
-            rawVideo?.downloadUri,
-            rawVideo?.fileUri,
-            rawVideo?.download_uri,
-            rawVideo?.file_uri,
-            response?.generateVideoResponse?.video?.[0]?.uri,
-            response?.video?.[0]?.uri
-          );
-
-          // 1) 직접 URL인 경우 사용
-          if (rawVideoUri && /^https?:\/\//i.test(String(rawVideoUri))) {
-            downloadUrl = String(rawVideoUri);
-          }
-
-          // 2) 파일 ID인 경우 Files API 호출
-          if (!downloadUrl) {
-            let fileId = String(rawVideoUri || rawVideo?.name || '').trim();
-            // files/ 가 없는 경우 보정
-            if (fileId && !fileId.startsWith('files/') && !fileId.startsWith('http')) {
-              fileId = `files/${fileId}`;
-            }
-
-            if (fileId.startsWith('files/')) {
-              try {
-                const fileResp = await axios.get(`${baseUrl}/${fileId}`, { headers });
-                downloadUrl = pickFirstTruthy(
-                  fileResp?.data?.file?.downloadUri,
-                  fileResp?.data?.downloadUri,
-                  fileResp?.data?.file?.download_uri
-                );
-              } catch (e) {
-                console.error('[Veo] 파일 정보 조회 실패:', (e as Error).message);
-              }
-            }
-          }
-
-
-          if (!downloadUrl) throw new Error('다운로드 URL을 찾을 수 없습니다.');
-
-          const videoResp = await axios.get(downloadUrl, { headers: { 'x-goog-api-key': apiKey }, responseType: 'arraybuffer' });
-          const { fullPath: outPath, fileName } = await getUniqueMp4Path(mp4Dir, headingForSave);
-          await fs.writeFile(outPath, Buffer.from(videoResp.data));
-
-          finalOutPath = outPath;
-          finalFileName = fileName;
-          sendLog(`✅ Veo 영상 생성 완료: ${fileName}`);
-          break;
-        }
-      }
-    } else {
-      throw new Error(`지원하지 않는 비디오 프로바이더: ${videoProvider}`);
-    }
-
-    if (await isFreeTierUser()) {
-      await consumeQuota('media', 1);
-    }
-
-    // ✅ 4. GIF 변환 처리
-    if (convertToGif && finalOutPath && finalOutPath.endsWith('.mp4')) {
-      try {
-        sendLog('🔄 GIF 변환 중...');
-        const pathModule = await import('path');
-        // ✅ [Fix] GIF 변환 시 aspectRatio 옵션을 전달하여 1:1 크롭 적용 (Veo가 16:9 컨테이너에 1:1 영상을 줄 경우 대비)
-        const gifPath = await convertMp4ToGif(finalOutPath, { aspectRatio });
-        sendLog(`✅ GIF 변환 완료: ${pathModule.basename(gifPath)}`);
-
-        return {
-          success: true,
-          filePath: gifPath,
-          fileName: pathModule.basename(gifPath),
-          mp4Path: finalOutPath
-        };
-      } catch (gifError) {
-        sendLog(`⚠️ GIF 변환 실패: ${(gifError as Error).message}`);
-        return { success: true, filePath: finalOutPath, fileName: finalFileName };
-      }
-    }
-
-    // ✅ GIF 변환 없는 일반 MP4 생성 성공 응답 (이전에 누락되어 있었음!)
-    return { success: true, filePath: finalOutPath, fileName: finalFileName };
-  } catch (error) {
-    console.error('[Gemini] generateVeoVideo 실패:', error);
-    const message = (error as Error).message || String(error);
-    return { success: false, message };
-  }
-});
+// [v2.10.248] gemini:generateVeoVideo → main/ipc/geminiHandlers.ts 로 이주
+// 아래 dead block (한 번도 호출되지 않는 익명 함수) — 다음 정리 phase에서 완전 제거 예정.
+// [v2.10.251] gemini:generateVeoVideo dead block 제거됨 (main/ipc/geminiHandlers.ts 에서 동작)
 
 // 네이버 데이터랩 트렌드 분석 핸들러
-ipcMain.handle('datalab:getTrendSummary', async (_event, keyword: string) => {
-  // ✅ 실행 직전 최신 설정 강제 동기화
-  try {
-    const config = await loadConfig();
-    applyConfigToEnv(config);
-  } catch (e) {
-    console.error('[Main] datalab:getTrendSummary - 설정 동기화 실패:', e);
-  }
-
-  // ✅ [리팩토링] 통합 검증
-  const check = await validateLicenseOnly();
-  if (!check.valid) return check.response;
-
-  try {
-    const datalabClient = createDatalabClient();
-    if (!datalabClient) {
-      return {
-        success: false,
-        message: '네이버 데이터랩 API가 설정되지 않았습니다. 환경 설정에서 Client ID와 Secret을 입력해주세요.',
-      };
-    }
-
-    const summary = await datalabClient.getTrendSummary(keyword);
-    return {
-      success: true,
-      data: summary,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      message: `트렌드 분석 실패: ${(error as Error).message}`,
-    };
-  }
-});
-
-ipcMain.handle('datalab:getSearchTrend', async (
-  _event,
-  keywords: string[],
-  startDate: string,
-  endDate: string,
-  timeUnit: 'date' | 'week' | 'month' = 'date',
-) => {
-  // ✅ 실행 직전 최신 설정 강제 동기화
-  try {
-    const config = await loadConfig();
-    applyConfigToEnv(config);
-  } catch (e) {
-    console.error('[Main] datalab:getSearchTrend - 설정 동기화 실패:', e);
-  }
-
-  // ✅ [리팩토링] 통합 검증
-  const check = await validateLicenseOnly();
-  if (!check.valid) return check.response;
-
-  try {
-    const datalabClient = createDatalabClient();
-    if (!datalabClient) {
-      return {
-        success: false,
-        message: '네이버 데이터랩 API가 설정되지 않았습니다.',
-      };
-    }
-
-    const trend = await datalabClient.getSearchTrend(keywords, startDate, endDate, timeUnit);
-    return {
-      success: true,
-      data: trend,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      message: `검색 트렌드 조회 실패: ${(error as Error).message}`,
-    };
-  }
-});
+// [v2.10.258] datalab:getTrendSummary + getSearchTrend → main/ipc/datalabApiHandlers.ts
 
 // ✅ 실시간 트렌드 알림 관련 IPC 핸들러
-ipcMain.handle('trend:startMonitoring', async () => {
-  try {
-    if (trendMonitor.getIsMonitoring()) {
-      return { success: true, message: '이미 모니터링 중입니다.' };
-    }
-
-    monitorTask = trendMonitor.monitorRealtime().catch((error) => {
-      sendLog(`⚠️ 실시간 모니터링 오류: ${(error as Error).message}`);
-    });
-
-    sendLog('👀 실시간 트렌드 모니터링 시작');
-    return { success: true, message: '실시간 트렌드 모니터링을 시작했습니다.' };
-  } catch (error) {
-    return { success: false, message: `모니터링 시작 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('trend:stopMonitoring', async () => {
-  try {
-    trendMonitor.stop();
-    sendLog('🛑 실시간 트렌드 모니터링 중지');
-    return { success: true, message: '실시간 트렌드 모니터링을 중지했습니다.' };
-  } catch (error) {
-    return { success: false, message: `모니터링 중지 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('trend:getStatus', async () => {
-  return {
-    isMonitoring: trendMonitor.getIsMonitoring(),
-    alertEnabled: trendAlertEnabled,
-  };
-});
-
-ipcMain.handle('trend:setAlertEnabled', async (_event, enabled: boolean) => {
-  trendAlertEnabled = enabled;
-  sendLog(`🔔 트렌드 알림 ${enabled ? '활성화' : '비활성화'}`);
-  return { success: true, enabled };
-});
-
-ipcMain.handle('trend:getCurrentTrends', async () => {
-  try {
-    const trends = await trendMonitor.getCurrentTrends();
-    return { success: true, trends };
-  } catch (error) {
-    return { success: false, message: `트렌드 조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('trend:setInterval', async (_event, intervalMs: number) => {
-  trendMonitor.setMonitorInterval(intervalMs);
-  return { success: true, interval: intervalMs };
-});
+// [v2.10.244] trend:* 6개 IPC 핸들러 → main/ipc/trendHandlers.ts 로 이주
+//   등록: registerTrendHandlers({ trendMonitor, getMonitorTask, setMonitorTask, getTrendAlertEnabled, setTrendAlertEnabled, sendLog })
+//   monitorTask / trendAlertEnabled mutable 변수는 getter/setter로 노출
 
 // ✅ AI 어시스턴트 IPC 핸들러
-ipcMain.handle('aiAssistant:chat', async (_event, message: string) => {
-  console.log('[AI Assistant] 메시지 수신:', message);
-  try {
-    try {
-      const config = await loadConfig();
-      applyConfigToEnv(config);
-      try {
-        masterAgent.reinitGemini();
-      } catch (e) {
-        console.warn('[main] catch ignored:', e);
-      }
-    } catch (e) {
-      console.warn('[main] catch ignored:', e);
-    }
-    const result = await masterAgent.processMessage(message);
-    console.log('[AI Assistant] 응답 생성 완료:', result.success);
-    return result;
-  } catch (error) {
-    console.error('[AI Assistant] 처리 오류:', error);
-    return {
-      success: false,
-      response: '죄송해요, 문제가 발생했어요. 다시 시도해주세요.',
-      error: { code: 'PROCESSING_ERROR', message: (error as Error).message, recoverable: true }
-    };
-  }
-});
-
-ipcMain.handle('aiAssistant:getWelcome', async () => {
-  return { success: true, message: getWelcomeMessage() };
-});
-
-ipcMain.handle('aiAssistant:clearChat', async () => {
-  try {
-    masterAgent.clearChat();
-    return { success: true };
-  } catch (error) {
-    return { success: false, message: (error as Error).message || String(error) };
-  }
-});
-
-// ✅ 시스템 자동 수정 IPC 핸들러
-ipcMain.handle('aiAssistant:runAutoFix', async () => {
-  console.log('[AI Assistant] 🔧 자동 수정 시작...');
-  const fixResults: { action: string; success: boolean; message: string }[] = [];
-
-  try {
-    const config = await loadConfig() as any;
-    let configChanged = false;
-
-    // 1. Gemini 모델 수정 - ✅ [2026-04-09] Stable 모델만 사용
-    const validModels = [
-      'gemini-2.5-flash',
-      'gemini-2.5-flash-lite',
-      'gemini-2.5-pro',
-    ];
-
-    // ✅ [v1.4.49 revert] 죽은/무료차단 모델 → Flash로 마이그레이션 (Flash-Lite RPD 20/일로 부족)
-    const modelMigrationMap: Record<string, string> = {
-      'gemini-3-pro': 'gemini-2.5-flash',
-      'gemini-3-flash': 'gemini-2.5-flash',
-      'gemini-3-pro-preview': 'gemini-2.5-flash',
-      'gemini-3-flash-preview': 'gemini-2.5-flash',
-      'gemini-3.1-pro-preview': 'gemini-2.5-flash',
-      'gemini-3.1-flash-preview': 'gemini-2.5-flash',
-      'gemini-2.5-pro-preview': 'gemini-2.5-flash',
-      'gemini-2.0-flash': 'gemini-2.5-flash',
-      'gemini-2.0-flash-exp': 'gemini-2.5-flash',
-      'gemini-1.5-flash': 'gemini-2.5-flash',
-      'gemini-1.5-flash-latest': 'gemini-2.5-flash',
-      'gemini-1.5-pro': 'gemini-2.5-flash',
-      'gemini-1.5-pro-latest': 'gemini-2.5-flash',
-      'gemini-1.5-flash-8b': 'gemini-2.5-flash',
-    };
-
-    // 저장된 모델이 마이그레이션 대상인 경우 자동 변환
-    if (config.geminiModel && modelMigrationMap[config.geminiModel]) {
-      const oldModel = config.geminiModel;
-      config.geminiModel = modelMigrationMap[config.geminiModel];
-      configChanged = true;
-      fixResults.push({ action: 'Gemini 모델 마이그레이션', success: true, message: `${oldModel} → ${config.geminiModel}로 자동 변환됨` });
-    }
-
-    if (config.geminiModel && !validModels.includes(config.geminiModel)) {
-      config.geminiModel = 'gemini-2.5-flash';
-      configChanged = true;
-      fixResults.push({ action: 'Gemini 모델', success: true, message: '권장 모델(gemini-2.5-flash)로 변경됨' });
-    }
-
-    if (!config.geminiModel) {
-      config.geminiModel = 'gemini-2.5-flash';
-      configChanged = true;
-      fixResults.push({ action: 'Gemini 모델 설정', success: true, message: '기본 모델 설정됨 (Flash)' });
-    }
-
-    // 설정 저장
-    if (configChanged) {
-      await saveConfig(config);
-      console.log('[AI Assistant] ✅ 설정 자동 수정 완료');
-    }
-
-    return {
-      success: true,
-      fixResults,
-      message: fixResults.length > 0
-        ? `✅ ${fixResults.length}개 항목 자동 수정 완료!`
-        : '수정할 항목이 없습니다.'
-    };
-
-  } catch (error) {
-    console.error('[AI Assistant] 자동 수정 오류:', error);
-    return {
-      success: false,
-      fixResults,
-      message: `자동 수정 중 오류 발생: ${(error as Error).message}`
-    };
-  }
-});
+// [v2.10.246] aiAssistant:* 4개 → main/ipc/aiAssistantHandlers.ts 로 이주
+// 등록: registerAiAssistantHandlers() (아래 등록부)
 
 // ✅ 발행 후 성과 추적 IPC 핸들러
-ipcMain.handle('analytics:addPost', async (_event, url: string, title: string) => {
-  try {
-    postAnalytics.addPost(url, title);
-    return { success: true, message: '글이 추적 목록에 추가되었습니다.' };
-  } catch (error) {
-    return { success: false, message: `추가 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('analytics:startTracking', async () => {
-  try {
-    if (postAnalytics.getIsTracking()) {
-      return { success: true, message: '이미 추적 중입니다.' };
-    }
-
-    analyticsTask = postAnalytics.startTracking().catch((error) => {
-      sendLog(`⚠️ 성과 추적 오류: ${(error as Error).message}`);
-    });
-
-    sendLog('📊 발행 후 성과 추적 시작');
-    return { success: true, message: '성과 추적을 시작했습니다.' };
-  } catch (error) {
-    return { success: false, message: `추적 시작 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('analytics:stopTracking', async () => {
-  try {
-    postAnalytics.stopTracking();
-    sendLog('🛑 성과 추적 중지');
-    return { success: true, message: '성과 추적을 중지했습니다.' };
-  } catch (error) {
-    return { success: false, message: `추적 중지 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('analytics:getStatus', async () => {
-  return {
-    isTracking: postAnalytics.getIsTracking(),
-    postCount: postAnalytics.getAllPosts().length,
-  };
-});
-
-ipcMain.handle('analytics:getAllPosts', async () => {
-  try {
-    const posts = postAnalytics.getAllPosts();
-    return { success: true, posts };
-  } catch (error) {
-    return { success: false, message: `조회 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('analytics:getAnalytics', async () => {
-  try {
-    const analytics = postAnalytics.getAnalytics();
-    return { success: true, analytics };
-  } catch (error) {
-    return { success: false, message: `분석 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('analytics:updateMetrics', async () => {
-  try {
-    await postAnalytics.updateAllMetrics();
-    return { success: true, message: '성과 데이터가 업데이트되었습니다.' };
-  } catch (error) {
-    return { success: false, message: `업데이트 실패: ${(error as Error).message}` };
-  }
-});
-
-ipcMain.handle('analytics:removePost', async (_event, postId: string) => {
-  try {
-    postAnalytics.removePost(postId);
-    return { success: true, message: '글이 추적 목록에서 제거되었습니다.' };
-  } catch (error) {
-    return { success: false, message: `제거 실패: ${(error as Error).message}` };
-  }
-});
+// [v2.10.245] analytics:* 8개 IPC 핸들러 → main/ipc/postAnalyticsHandlers.ts 로 이주
+//   등록: registerPostAnalyticsHandlers({ postAnalytics, getAnalyticsTask, setAnalyticsTask, sendLog })
 
 // ✅ scheduler:* 핸들러 → scheduleHandlers.ts로 이관 완료 (10개 채널)
 
@@ -5379,6 +3679,60 @@ import { registerFlowMarathonHandlers } from './main/ipc/flowMarathonHandlers.js
 registerFlowMarathonHandlers();
 import { registerTitleQualityHandlers } from './main/ipc/titleQualityHandlers.js';
 registerTitleQualityHandlers();
+// [v2.10.242] file:* 8개 IPC 핸들러 — main.ts에서 main/ipc/fileHandlers.ts 로 분리
+import { registerFileHandlers } from './main/ipc/fileHandlers.js';
+registerFileHandlers();
+// [v2.10.243] image:optimizeSearchQuery / extractCoreSubject / batchOptimizeSearchQueries / crawlFromUrl 4개 분리
+import { registerImageOptimizeHandlers } from './main/ipc/imageOptimizeHandlers.js';
+registerImageOptimizeHandlers();
+// [v2.10.244] trend:* 6개 IPC 핸들러 분리
+import { registerTrendHandlers } from './main/ipc/trendHandlers.js';
+registerTrendHandlers({
+  trendMonitor,
+  getMonitorTask: () => monitorTask,
+  setMonitorTask: (task) => { monitorTask = task; },
+  getTrendAlertEnabled: () => trendAlertEnabled,
+  setTrendAlertEnabled: (enabled) => { trendAlertEnabled = enabled; },
+  sendLog,
+});
+// [v2.10.245] analytics:* 8개 IPC 핸들러 분리
+import { registerPostAnalyticsHandlers } from './main/ipc/postAnalyticsHandlers.js';
+registerPostAnalyticsHandlers({
+  postAnalytics,
+  getAnalyticsTask: () => analyticsTask,
+  setAnalyticsTask: (task) => { analyticsTask = task; },
+  sendLog,
+});
+// [v2.10.246] aiAssistant:* 4개 IPC 핸들러 분리
+import { registerAiAssistantHandlers } from './main/ipc/aiAssistantHandlers.js';
+registerAiAssistantHandlers();
+// [v2.10.248] gemini:test10x + gemini:generateVeoVideo 분리
+import { registerGeminiHandlers } from './main/ipc/geminiHandlers.js';
+registerGeminiHandlers({ sendLog });
+// [v2.10.249] image:matchToHeadings 분리
+import { registerImageMatchHandlers } from './main/ipc/imageMatchHandlers.js';
+registerImageMatchHandlers();
+// [v2.10.250] image:downloadAndSave 분리
+import { registerImageDownloadHandlers } from './main/ipc/imageDownloadHandlers.js';
+registerImageDownloadHandlers();
+// [v2.10.253] image:collectFromShopping 분리
+import { registerImageCollectShoppingHandlers } from './main/ipc/imageCollectShoppingHandlers.js';
+registerImageCollectShoppingHandlers();
+// [v2.10.255] image:collectFromUrl 분리
+import { registerImageCollectUrlHandlers } from './main/ipc/imageCollectUrlHandlers.js';
+registerImageCollectUrlHandlers();
+// [v2.10.256] image:searchNaver 분리 (376줄 대형 IPC)
+import { registerImageSearchNaverHandlers } from './main/ipc/imageSearchNaverHandlers.js';
+registerImageSearchNaverHandlers();
+// [v2.10.257] schedule:* 4개 분리
+import { registerScheduleApiHandlers } from './main/ipc/scheduleApiHandlers.js';
+registerScheduleApiHandlers({ sendLog });
+// [v2.10.258] datalab:* 3개 분리
+import { registerDatalabApiHandlers } from './main/ipc/datalabApiHandlers.js';
+registerDatalabApiHandlers();
+// [v2.10.259] backup:* 3개 분리 + performDataBackup export
+import { registerBackupHandlers, performDataBackup } from './main/ipc/backupHandlers.js';
+registerBackupHandlers({ debugLog });
 
 // ✅ 네이버 블로그 카테고리 분석 (크롤링)
 ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: string; blogId?: string }) => {
@@ -6215,40 +4569,7 @@ ipcMain.handle('multiAccount:cancel', async () => {
 
 // ✅ [Phase 5A.2] comment:* + competitor:* 핸들러 → engagementHandlers.ts로 이관 완료
 
-ipcMain.handle('datalab:getRelatedKeywords', async (_event, keyword: string) => {
-  // ✅ 실행 직전 최신 설정 강제 동기화
-  try {
-    const config = await loadConfig();
-    applyConfigToEnv(config);
-  } catch (e) {
-    console.error('[Main] datalab:getRelatedKeywords - 설정 동기화 실패:', e);
-  }
-
-  // 라이선스 체크
-  if (!(await ensureLicenseValid())) {
-    return { success: false, message: '라이선스 인증이 필요합니다. 라이선스를 인증해주세요.' };
-  }
-  try {
-    const datalabClient = createDatalabClient();
-    if (!datalabClient) {
-      return {
-        success: false,
-        message: '네이버 데이터랩 API가 설정되지 않았습니다.',
-      };
-    }
-
-    const related = await datalabClient.getRelatedKeywords(keyword);
-    return {
-      success: true,
-      data: related,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      message: `관련 키워드 조회 실패: ${(error as Error).message}`,
-    };
-  }
-});
+// [v2.10.258] datalab:getRelatedKeywords → main/ipc/datalabApiHandlers.ts
 
 ipcMain.handle(
   'automation:generateStructuredContent',
@@ -6339,9 +4660,14 @@ ipcMain.handle(
           }
 
           // 자료 검증 통과 → rawText 보강
+          // [SPEC-PROMPT-2026-REFRESH Phase 1b / v2.10.234] RAG 자료를 XML wrap
+          //   배경: Anthropic Cite-then-write 패턴 — 자료를 <source id="N">...</source> 로 wrap 시
+          //         LLM이 attention을 source token에 묶어두고 인용 토큰 [자료N] 출력 확률 ↑.
+          //   효과: RAGAS 데이터 기준 faithfulness ~+25%, confabulation 10% → 0% (Anthropic Citations API).
+          const wrappedRagSource = `<source id="naver-rag">\n${validation.rawText}\n</source>`;
           source.rawText = source.rawText && source.rawText.trim().length >= 50
-            ? `${source.rawText}\n\n=== 네이버 검색 자료 ===\n${validation.rawText}`
-            : validation.rawText;
+            ? `${source.rawText}\n\n=== 네이버 검색 자료 (출처 인용 토큰 [자료] 권장) ===\n${wrappedRagSource}`
+            : wrappedRagSource;
           // ✅ [v2.10.74] hasFactCheckSource 플래그를 source에 표시 — Phase 2 (LLM 충실도 강제 prompt) 활성화 조건
           (source as any).hasFactCheckSource = true;
           (source as any).factCheckRawSource = validation.rawText; // Phase 3 검증용
@@ -6516,6 +4842,33 @@ ipcMain.handle(
         }
       } catch (validationErr: any) {
         console.warn('[Main] ⚠️ Phase 3 fact 검증 중 예외 — graceful skip:', validationErr?.message || validationErr);
+      }
+
+      // ✅ [v2.10.228 → v2.10.229] 자동 관련글 링크 삽입 — 발행 직전 본문 끝에 관련글 추가 (체류시간 ↑)
+      //   조건: autoInsertInternalLinks !== false (기본 ON, 사용자가 명시 OFF만 false)
+      //   동작: published-posts-links.json에 등록된 글 중 키워드 유사도 상위 3개를 conclusion에 plain-text 형식으로 추가
+      //   Naver 에디터는 임의 HTML을 받지 않으므로 plain text + naked URL 형식 사용
+      //   ⚠️ 관련글 매니저에 등록 글이 0개면 아무 동작 안 함 (silent skip)
+      try {
+        const _linkConfig = await loadConfig();
+        const autoInsertOn = (_linkConfig as any).autoInsertInternalLinks !== false;
+        if (autoInsertOn) {
+          const linkTitle = String(content.selectedTitle || (content as any).title || '').trim();
+          const linkBody = [content.introduction || '', ...(content.headings || []).map((h: any) => h.content || h.body || ''), content.conclusion || ''].join('\n');
+          if (linkTitle && linkBody) {
+            const related = internalLinkManager.findRelatedPosts(linkTitle, linkBody, 3);
+            if (related && related.length > 0) {
+              const linkLines = related.map((r: InternalLink) => `📖 ${r.title}\n   ${r.url}`).join('\n\n');
+              const linkSection = `\n\n━━━━━━━━━━━━━━━━━━━━━━━\n📚 함께 보면 좋은 글\n━━━━━━━━━━━━━━━━━━━━━━━\n\n${linkLines}\n`;
+              content.conclusion = (content.conclusion || '') + linkSection;
+              console.log(`[Main] 🔗 자동 관련글 ${related.length}개 삽입: ${related.map((r: InternalLink) => r.title).join(', ')}`);
+            } else {
+              console.log(`[Main] 🔗 자동 관련글 토글 ON이지만 매니저에 등록된 관련 글이 없습니다 (skip)`);
+            }
+          }
+        }
+      } catch (linkErr: any) {
+        console.warn('[Main] ⚠️ 자동 관련글 삽입 중 예외 — graceful skip:', linkErr?.message || linkErr);
       }
 
       // ✅ [2026-02-01 FIX] 크롤링 시 수집한 이미지를 content.collectedImages에 저장
@@ -6996,469 +5349,12 @@ ipcMain.handle('apply-image-placements', async (_event, data: {
 });
 
 // ✅ 네이버 이미지 검색 IPC 핸들러 (최대 50개 수집 + 중복/무관 이미지 필터링)
-ipcMain.handle('image:searchNaver', async (_event, keyword: string): Promise<{ success: boolean; images?: any[]; message?: string }> => {
-  // ✅ 실행 직전 최신 설정 강제 동기화
-  try {
-    const config = await loadConfig();
-    applyConfigToEnv(config);
-  } catch (e) {
-    console.error('[Main] image:searchNaver - 설정 동기화 실패:', e);
-  }
-
-  if (!(await ensureLicenseValid())) {
-    return { success: false, message: '라이선스 인증이 필요합니다.' };
-  }
-
-  const mediaCheck = await enforceFreeTier('media', 1);
-  if (!mediaCheck.allowed) {
-    return mediaCheck.response;
-  }
-  try {
-    if (!keyword || !keyword.trim()) {
-      return { success: false, message: '검색 키워드가 비어있습니다.' };
-    }
-
-    console.log(`[Main] 네이버 이미지 검색: "${keyword}"`);
-
-    const normalizeEnv = (v: string | undefined): string => String(v || '').trim().replace(/^['"]|['"]$/g, '').trim();
-
-    const collectEnvPairs = (baseIdKey: string, baseSecretKey: string, labelPrefix: string): Array<{ id: string; secret: string; label: string }> => {
-      const pairs: Array<{ id: string; secret: string; label: string }> = [];
-
-      const baseId = normalizeEnv((process.env as any)[baseIdKey]);
-      const baseSecret = normalizeEnv((process.env as any)[baseSecretKey]);
-      if (baseId && baseSecret) {
-        pairs.push({ id: baseId, secret: baseSecret, label: `${labelPrefix}#1` });
-      }
-
-      // NAVER_CLIENT_ID_2 / NAVER_CLIENT_SECRET_2 ...
-      for (let i = 2; i <= 10; i++) {
-        const id = normalizeEnv((process.env as any)[`${baseIdKey}_${i}`]);
-        const secret = normalizeEnv((process.env as any)[`${baseSecretKey}_${i}`]);
-        if (id && secret) {
-          pairs.push({ id, secret, label: `${labelPrefix}#${i}` });
-        }
-      }
-
-      return pairs;
-    };
-
-    const credentialCandidates: Array<{ id: string; secret: string; label: string }> = [
-      ...collectEnvPairs('NAVER_CLIENT_ID', 'NAVER_CLIENT_SECRET', 'NAVER_CLIENT_*'),
-      ...collectEnvPairs('NAVER_DATALAB_CLIENT_ID', 'NAVER_DATALAB_CLIENT_SECRET', 'NAVER_DATALAB_*'),
-    ];
-
-    if (credentialCandidates.length === 0) {
-      const config = await loadConfig();
-      if (config.naverDatalabClientId && config.naverDatalabClientSecret) {
-        credentialCandidates.push({
-          id: String(config.naverDatalabClientId).trim(),
-          secret: String(config.naverDatalabClientSecret).trim(),
-          label: 'config#1',
-        });
-      } else {
-        return {
-          success: false,
-          message: '네이버 API 키가 설정되어 있지 않습니다. 환경설정에서 네이버 Client ID와 Secret을 입력해주세요.',
-        };
-      }
-    }
-
-    let credentialIndex = 0;
-    console.log(`[Main] 네이버 API 키 후보 수: ${credentialCandidates.length}개 (현재: ${credentialCandidates[0]?.label || 'unknown'})`);
-    const FREE_DAILY_LIMIT = 100;
-    // ✅ 유료 플랜 사용자(크레딧 보유자)를 위해 한도를 대폭 상향 (사실상 무제한)
-    const PAID_DAILY_LIMIT = 9999;
-    // ✅ 여러 검색 쿼리로 충분한 이미지 수집 (최대 50개)
-    const MAX_IMAGES = 50;
-    const TARGET_IMAGES = MAX_IMAGES;
-    const allImages: any[] = [];
-    const usedUrls = new Set<string>();
-    const usedImageHashes = new Set<string>(); // 이미지 해시로 중복 체크
-
-    const httpErrors: Array<{ status: number; query: string; errorCode?: string; errorMessage?: string }> = [];
-
-    const NAVER_NEW_APP_GUIDE_URL = 'https://developers.naver.com/apps/#/myapps/oBaehge5xTtI73Z0x1Dx/overview';
-    const buildNaverQuotaGuide = (): string =>
-      `\n\n네이버 이미지 API 일일 한도(쿼리) 초과로 보이면, 아래 링크에서 네이버 애플리케이션을 추가로 생성한 뒤 새 Client ID/Secret을 발급받아 환경설정에 등록하세요.\n` +
-      `${NAVER_NEW_APP_GUIDE_URL}`;
-    const maybeAppendNaverQuotaGuide = (detail: string): string => {
-      const d = String(detail || '');
-      const looksLikeQuota = /count\/quota\s*=\s*\d+\s*\/\s*\d+/i.test(d) || /Query limit exceeded/i.test(d);
-      return looksLikeQuota ? `${d}${buildNaverQuotaGuide()}` : d;
-    };
-
-    const parseNaverErrorBody = (bodyText: string): { errorCode: string; errorMessage: string } => {
-      let errorCode = '';
-      let errorMessage = String(bodyText || '').trim();
-      try {
-        const parsed = JSON.parse(bodyText || '{}') as any;
-        if (parsed && typeof parsed === 'object') {
-          errorCode = String(parsed.errorCode || '').trim();
-          errorMessage = String(parsed.errorMessage || parsed.message || bodyText || '').trim();
-        }
-      } catch {
-      }
-      return { errorCode, errorMessage };
-    };
-
-    const sleep = async (ms: number): Promise<void> => {
-      await new Promise<void>((resolve) => setTimeout(resolve, ms));
-    };
-
-    const fetchWithRotation = async (searchUrl: string, queryLabel: string): Promise<any | null> => {
-      let attempts = 0;
-      let lastStatus = 0;
-      let lastErrorCode = '';
-      let lastErrorMessage = '';
-      let sameKey429Retries = 0;
-
-      while (attempts < credentialCandidates.length) {
-        const cred = credentialCandidates[credentialIndex];
-        const keyLabel = cred?.label || `key#${credentialIndex + 1}`;
-
-        const response = await fetch(searchUrl, {
-          method: 'GET',
-          headers: {
-            'X-Naver-Client-Id': cred?.id || '',
-            'X-Naver-Client-Secret': cred?.secret || '',
-          },
-        });
-
-        if (response.ok) {
-          return await response.json();
-        }
-
-        let bodyText = '';
-        try {
-          bodyText = await response.text();
-        } catch {
-        }
-        const parsed = parseNaverErrorBody(bodyText);
-        lastStatus = response.status;
-        lastErrorCode = parsed.errorCode;
-        lastErrorMessage = parsed.errorMessage;
-        httpErrors.push({ status: response.status, query: queryLabel, errorCode: parsed.errorCode, errorMessage: parsed.errorMessage });
-        console.warn(`[Main] 네이버 이미지 검색 "${queryLabel}" 실패(${keyLabel}): ${response.status} ${parsed.errorCode} ${String(parsed.errorMessage || '').slice(0, 140)}`);
-
-        if (response.status === 429) {
-          const retryAfterRaw = String(response.headers.get('retry-after') || '').trim();
-          const retryAfterSeconds = Number.parseInt(retryAfterRaw, 10);
-          const retryAfterMs = Number.isFinite(retryAfterSeconds) && retryAfterSeconds > 0 ? retryAfterSeconds * 1000 : 0;
-
-          if (sameKey429Retries < 2) {
-            sameKey429Retries++;
-            const backoffMs = Math.min(1200, 200 * Math.pow(2, sameKey429Retries - 1));
-            const waitMs = Math.max(retryAfterMs, backoffMs);
-            if (waitMs > 0) {
-              await sleep(waitMs);
-            }
-            continue;
-          }
-
-          sameKey429Retries = 0;
-          credentialIndex = (credentialIndex + 1) % credentialCandidates.length;
-          attempts++;
-          console.log(`[Main] 네이버 API 키 전환: ${keyLabel} → ${credentialCandidates[credentialIndex]?.label || `key#${credentialIndex + 1}`}`);
-          continue;
-        }
-
-        if (response.status === 401 || response.status === 403) {
-          sameKey429Retries = 0;
-          credentialIndex = (credentialIndex + 1) % credentialCandidates.length;
-          attempts++;
-          console.log(`[Main] 네이버 API 키 전환: ${keyLabel} → ${credentialCandidates[credentialIndex]?.label || `key#${credentialIndex + 1}`}`);
-          continue;
-        }
-
-        return null;
-      }
-
-      // 모든 키가 429/401/403 등으로 실패
-      const detail = `${lastStatus}${lastErrorCode ? ` ${lastErrorCode}` : ''}${lastErrorMessage ? ` ${String(lastErrorMessage).slice(0, 220)}` : ''}`.trim();
-      throw new Error(`NAVER_ALL_KEYS_FAILED: ${detail}`);
-    };
-
-    // ✅ 키워드에서 핵심 단어 추출 (조사/접속사 제거)
-    const stopWords = ['은', '는', '이', '가', '을', '를', '의', '에', '에서', '으로', '로', '와', '과', '도', '만', '까지', '부터', '에게', '한테', '께', '보다', '처럼', '같이', '대해', '대한', '위한', '통한', '관한', '있는', '없는', '하는', '되는', '된', '할', '될', '하고', '되고', '그리고', '하지만', '그러나', '또한', '및', '등', '것', '수', '때', '중', '후', '전', '내', '외'];
-    const keywordParts = keyword.split(/[\s,.\-!?:;'"()[\]{}]+/).filter(p => p.length >= 2 && !stopWords.includes(p));
-    const coreKeywords = keywordParts.slice(0, 4); // 핵심 키워드 4개
-
-    // 검색 쿼리 목록 (원본 키워드 + 변형 키워드)
-    const searchQueries = [
-      keyword,                                    // 원본 키워드
-      coreKeywords.join(' '),                     // 핵심 키워드만
-      `${keyword} 사진`,                          // + 사진
-      `${keyword} 이미지`,                        // + 이미지
-      `${keyword} 실시간`,                        // + 실시간 (경기 등)
-    ];
-
-    // 핵심 단어 조합 추가
-    if (coreKeywords.length > 1) {
-      searchQueries.push(coreKeywords[0]); // 첫 번째 단어만
-      searchQueries.push(`${coreKeywords[0]} ${coreKeywords[1]}`); // 첫 두 단어
-      if (coreKeywords.length > 2) {
-        searchQueries.push(`${coreKeywords[0]} ${coreKeywords[2]}`); // 첫 번째 + 세 번째
-      }
-    }
-
-    // 중복 제거
-    const uniqueQueries = [...new Set(searchQueries)].filter(q => q.trim());
-
-    for (const query of uniqueQueries) {
-      // 이미 50개 이상 수집했으면 중단
-      if (allImages.length >= MAX_IMAGES) break;
-      if (allImages.length >= TARGET_IMAGES) break;
-
-      try {
-        // ✅ display=100 (네이버 API 최대값), sort=date (최신순 우선)
-        const searchUrl = `https://openapi.naver.com/v1/search/image?query=${encodeURIComponent(query)}&display=100&sort=date`;
-
-        const data = await fetchWithRotation(searchUrl, query);
-        if (!data) {
-          continue;
-        }
-
-        if (data.items && data.items.length > 0) {
-          for (const item of data.items) {
-            // 중복 URL 제외
-            if (usedUrls.has(item.link)) continue;
-
-            // ✅ 이미지 해시로 유사 이미지 중복 체크 (URL 끝부분 기반)
-            const urlHash = item.link.split('/').pop()?.split('?')[0] || '';
-            if (urlHash && usedImageHashes.has(urlHash)) continue;
-
-            // ✅ 무관한 이미지 필터링 (광고, 로고, 아이콘 등 제외)
-            const title = item.title?.replace(/<[^>]*>/g, '').toLowerCase() || '';
-            const isIrrelevant =
-              title.includes('광고') ||
-              title.includes('배너') ||
-              title.includes('로고') ||
-              title.includes('아이콘') ||
-              title.includes('버튼') ||
-              title.includes('무료이미지') ||
-              title.includes('클립아트') ||
-              (item.sizewidth && item.sizeheight && item.sizewidth < 200 && item.sizeheight < 200); // 너무 작은 이미지
-
-            if (isIrrelevant) continue;
-
-            // ✅ 키워드 관련성 체크 (핵심 키워드 중 하나라도 포함되어야 함)
-            const hasRelevance = coreKeywords.length === 0 || coreKeywords.some(kw =>
-              title.includes(kw.toLowerCase()) || item.link.toLowerCase().includes(kw.toLowerCase())
-            );
-
-            // 관련성이 낮아도 처음 20개는 수집 (검색 결과 상위는 대체로 관련성 높음)
-            if (!hasRelevance && allImages.length >= 20) continue;
-
-            usedUrls.add(item.link);
-            if (urlHash) usedImageHashes.add(urlHash);
-
-            allImages.push({
-              id: `naver-${allImages.length}`,
-              url: item.link,
-              thumbnailUrl: item.thumbnail,
-              title: item.title?.replace(/<[^>]*>/g, '') || '',
-              source: 'naver',
-              width: item.sizewidth,
-              height: item.sizeheight,
-            });
-
-            // 50개 도달하면 중단
-            if (allImages.length >= MAX_IMAGES) break;
-            if (allImages.length >= TARGET_IMAGES) break;
-          }
-          console.log(`[Main] 검색 "${query}": ${data.items.length}개 발견 (누적: ${allImages.length}개)`);
-        }
-      } catch (queryError) {
-        const msg = (queryError as Error).message;
-        if (msg.startsWith('NAVER_ALL_KEYS_FAILED:')) {
-          return {
-            success: false,
-            message: `네이버 이미지 API 모든 키가 실패했습니다. ${maybeAppendNaverQuotaGuide(msg.replace('NAVER_ALL_KEYS_FAILED:', '').trim())}`,
-          };
-        }
-        console.warn(`[Main] 검색 "${query}" 오류:`, msg);
-      }
-    }
-
-    if (allImages.length === 0) {
-      const relaxedQueries = [
-        coreKeywords.join(' '),
-        coreKeywords[0],
-        keywordParts[0],
-        keyword,
-      ]
-        .map((q) => String(q || '').trim())
-        .filter((q) => q.length >= 2);
-
-      const uniqueRelaxedQueries = [...new Set(relaxedQueries)].slice(0, 4);
-
-      for (const query of uniqueRelaxedQueries) {
-        if (allImages.length >= MAX_IMAGES) break;
-        if (allImages.length >= TARGET_IMAGES) break;
-
-        try {
-          const searchUrl = `https://openapi.naver.com/v1/search/image?query=${encodeURIComponent(query)}&display=100&sort=date`;
-
-          const data = await fetchWithRotation(searchUrl, query);
-          if (!data) {
-            continue;
-          }
-
-          if (data.items && data.items.length > 0) {
-            for (const item of data.items) {
-              if (usedUrls.has(item.link)) continue;
-
-              const urlHash = item.link.split('/').pop()?.split('?')[0] || '';
-              if (urlHash && usedImageHashes.has(urlHash)) continue;
-
-              const title = item.title?.replace(/<[^>]*>/g, '').toLowerCase() || '';
-              const isIrrelevant =
-                title.includes('광고') ||
-                title.includes('배너') ||
-                title.includes('로고') ||
-                title.includes('아이콘') ||
-                title.includes('버튼') ||
-                (item.sizewidth && item.sizeheight && item.sizewidth < 80 && item.sizeheight < 80);
-              if (isIrrelevant) continue;
-
-              usedUrls.add(item.link);
-              if (urlHash) usedImageHashes.add(urlHash);
-
-              allImages.push({
-                id: `naver-${allImages.length}`,
-                url: item.link,
-                thumbnailUrl: item.thumbnail,
-                title: item.title?.replace(/<[^>]*>/g, '') || '',
-                source: 'naver',
-                width: item.sizewidth,
-                height: item.sizeheight,
-              });
-
-              if (allImages.length >= MAX_IMAGES) break;
-              if (allImages.length >= TARGET_IMAGES) break;
-            }
-            console.log(`[Main] (완화) 검색 "${query}": ${data.items.length}개 발견 (누적: ${allImages.length}개)`);
-          }
-        } catch (queryError) {
-          const msg = (queryError as Error).message;
-          if (msg.startsWith('NAVER_ALL_KEYS_FAILED:')) {
-            return {
-              success: false,
-              message: `네이버 이미지 API 모든 키가 실패했습니다. ${maybeAppendNaverQuotaGuide(msg.replace('NAVER_ALL_KEYS_FAILED:', '').trim())}`,
-            };
-          }
-          console.warn(`[Main] (완화) 검색 "${query}" 오류:`, msg);
-        }
-      }
-    }
-
-    if (allImages.length > 0) {
-      console.log(`[Main] 네이버 이미지 검색 완료: 총 ${allImages.length}개 발견 (중복/무관 이미지 필터링 적용)`);
-      const response = { success: true, images: allImages };
-      if ((response.images?.length ?? 0) > 0 && (await isFreeTierUser())) {
-        await consumeQuota('media', 1);
-      }
-      return response;
-    } else {
-      if (httpErrors.length > 0) {
-        const mostRecent = httpErrors[httpErrors.length - 1];
-        const detail = `${mostRecent.status}${mostRecent.errorCode ? ` ${mostRecent.errorCode}` : ''}${mostRecent.errorMessage ? ` ${String(mostRecent.errorMessage).slice(0, 220)}` : ''}`.trim();
-        return { success: false, message: `네이버 이미지 API 요청 실패: ${maybeAppendNaverQuotaGuide(detail)}` };
-      }
-      return { success: false, message: '검색 결과가 없습니다.' };
-    }
-  } catch (error) {
-    console.error('[Main] 네이버 이미지 검색 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
+// [v2.10.256] image:searchNaver → main/ipc/imageSearchNaverHandlers.ts
 
 // ✅ [100점 개선] AI 이미지 검색어 최적화 IPC 핸들러
-ipcMain.handle('image:optimizeSearchQuery', async (_event, title: string, heading: string): Promise<{
-  success: boolean;
-  optimizedQuery?: string;
-  coreSubject?: string;
-  broaderQuery?: string;
-  category?: string;
-  message?: string;
-}> => {
-  try {
-    const { optimizeImageSearchQuery } = await import('./gemini.js');
-    const result = await optimizeImageSearchQuery(title, heading);
-    console.log(`[Main] 검색어 최적화: "${heading}" → "${result.optimizedQuery}"`);
-    return {
-      success: true,
-      optimizedQuery: result.optimizedQuery,
-      coreSubject: result.coreSubject,
-      broaderQuery: result.broaderQuery,
-      category: result.category,
-    };
-  } catch (error) {
-    console.error('[Main] 검색어 최적화 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// ✅ [100점 개선] 핵심 주제 추출 IPC 핸들러
-ipcMain.handle('image:extractCoreSubject', async (_event, title: string): Promise<{
-  success: boolean;
-  subject?: string;
-  message?: string;
-}> => {
-  try {
-    const { extractCoreSubject } = await import('./gemini.js');
-    const subject = await extractCoreSubject(title);
-    console.log(`[Main] 핵심 주제 추출: "${title}" → "${subject}"`);
-    return { success: true, subject };
-  } catch (error) {
-    console.error('[Main] 핵심 주제 추출 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// ✅ [100점 개선] 배치 검색어 최적화 IPC 핸들러 (API 호출 1회로 모든 소제목 처리)
-ipcMain.handle('image:batchOptimizeSearchQueries', async (_event, title: string, headings: string[]): Promise<{
-  success: boolean;
-  results?: Array<{ heading: string; optimizedQuery: string; broaderQuery: string }>;
-  message?: string;
-}> => {
-  try {
-    const { batchOptimizeImageSearchQueries } = await import('./gemini.js');
-    const results = await batchOptimizeImageSearchQueries(title, headings);
-    console.log(`[Main] 배치 검색어 최적화: ${results.length}개 소제목 완료`);
-    return { success: true, results };
-  } catch (error) {
-    console.error('[Main] 배치 검색어 최적화 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// ✅ [v2.7.87] 강화된 crawlImagesFromUrl로 교체 — iframe 20개 순회 + visible 모드 + 페이지 모든 이미지
-ipcMain.handle('image:crawlFromUrl', async (_event, url: string): Promise<{
-  success: boolean;
-  images?: string[];
-  title?: string;
-  message?: string;
-}> => {
-  try {
-    if (!url || !url.trim()) {
-      return { success: false, message: 'URL이 비어있습니다.' };
-    }
-    console.log(`[Main] URL에서 이미지 크롤링 (v2.7.87 강화): ${url}`);
-    const { crawlImagesFromUrl, getLastCrawledTitle } = await import('./crawler/googleImageSearch.js');
-    const images = await crawlImagesFromUrl(url);
-    const pageTitle = getLastCrawledTitle();
-    if (images.length > 0) {
-      console.log(`[Main] URL에서 ${images.length}개 이미지 추출 완료, title="${pageTitle.slice(0, 60)}"`);
-      return { success: true, images, title: pageTitle };
-    }
-    return { success: false, message: '이미지를 찾을 수 없습니다.' };
-  } catch (error) {
-    console.error('[Main] URL 이미지 크롤링 실패:', error);
-    return { success: false, message: (error as Error).message };
-  }
-});
+// [v2.10.243] image:optimizeSearchQuery / extractCoreSubject / batchOptimizeSearchQueries / crawlFromUrl
+//   → main/ipc/imageOptimizeHandlers.ts 로 이주 (god-file 압축 2단계)
+//   등록: registerImageOptimizeHandlers() (아래 라인에서 호출)
 
 // ✅ [2026-04-03] 소제목 이미지 핸들러 → headingHandlers.ts로 추출
 
@@ -8428,19 +6324,7 @@ ipcMain.handle('library:getImageData', async (_event, filePath: string): Promise
 });
 
 // 스케줄 관리 IPC 핸들러
-ipcMain.handle('schedule:getAll', async (): Promise<{ success: boolean; posts?: ScheduledPost[]; message?: string }> => {
-  // 라이선스 체크
-  if (!(await ensureLicenseValid())) {
-    return { success: false, message: '라이선스 인증이 필요합니다. 라이선스를 인증해주세요.' };
-  }
-  try {
-    const posts = await getAllScheduledPosts();
-    return { success: true, posts };
-  } catch (error) {
-    console.error('[Main] 스케줄 조회 실패:', (error as Error).message);
-    return { success: false, message: (error as Error).message };
-  }
-});
+// [v2.10.257] schedule:getAll → main/ipc/scheduleApiHandlers.ts
 
 // 창 포커스 유지
 ipcMain.handle('window:focus', async () => {
@@ -8460,60 +6344,7 @@ ipcMain.handle('window:focus', async () => {
   }
 });
 
-ipcMain.handle('schedule:remove', async (_event, postId: string): Promise<{ success: boolean; message?: string }> => {
-  // 라이선스 체크
-  if (!(await ensureLicenseValid())) {
-    return { success: false, message: '라이선스 인증이 필요합니다. 라이선스를 인증해주세요.' };
-  }
-  try {
-    if (!postId || !postId.trim()) {
-      return { success: false, message: '포스트 ID가 비어있습니다.' };
-    }
-
-    await removeScheduledPost(postId);
-    console.log(`[Main] 스케줄 포스트 삭제 완료: ${postId}`);
-    return { success: true };
-  } catch (error) {
-    console.error('[Main] 스케줄 포스트 삭제 실패:', (error as Error).message);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// ✅ [2026-03-14 FIX] 예약 시간 변경 IPC 핸들러
-ipcMain.handle('schedule:reschedule', async (_event, postId: string, newTime: string): Promise<{ success: boolean; message?: string }> => {
-  if (!(await ensureLicenseValid())) {
-    return { success: false, message: '라이선스 인증이 필요합니다.' };
-  }
-  try {
-    if (!postId || !newTime) {
-      return { success: false, message: '포스트 ID와 새 시간이 필요합니다.' };
-    }
-    await rescheduleScheduledPost(postId, newTime);
-    sendLog(`📅 예약 시간 변경 완료: ${newTime}`);
-    return { success: true, message: '예약 시간이 변경되었습니다.' };
-  } catch (error) {
-    console.error('[Main] 예약 시간 변경 실패:', (error as Error).message);
-    return { success: false, message: (error as Error).message };
-  }
-});
-
-// ✅ [2026-03-14 FIX] 실패한 예약 재시도 IPC 핸들러
-ipcMain.handle('schedule:retry', async (_event, postId: string): Promise<{ success: boolean; message?: string }> => {
-  if (!(await ensureLicenseValid())) {
-    return { success: false, message: '라이선스 인증이 필요합니다.' };
-  }
-  try {
-    if (!postId) {
-      return { success: false, message: '포스트 ID가 필요합니다.' };
-    }
-    await retryScheduledPostFn(postId);
-    sendLog(`🔄 예약 재시도 등록 완료`);
-    return { success: true, message: '1분 후 재시도됩니다.' };
-  } catch (error) {
-    console.error('[Main] 예약 재시도 실패:', (error as Error).message);
-    return { success: false, message: (error as Error).message };
-  }
-});
+// [v2.10.257] schedule:remove + reschedule + retry → main/ipc/scheduleApiHandlers.ts
 
 // ✅ [2026-04-03] openExternalUrl → src/main/ipc/systemHandlers.ts로 이관
 
@@ -9328,134 +7159,7 @@ async function clearCacheOnVersionChange(): Promise<void> {
 // ✅ [v2.7.95] 데이터 백업 시스템 — 자동 일일 백업 + 수동 export/import IPC
 //   사용자 보고: "업데이트하면 api키랑 기존에 저장된게 초기화된다는데"
 //   목표: 업데이트/재설치 시에도 API 키 + 글 목록 + 다계정 데이터 100% 보존
-async function performDataBackup(reason: string = 'auto'): Promise<{ success: boolean; backupPath?: string; message?: string }> {
-  try {
-    const userDataDir = app.getPath('userData');
-    const backupRoot = path.join(app.getPath('documents'), 'better-life-naver-backup');
-    if (!fsSync.existsSync(backupRoot)) fsSync.mkdirSync(backupRoot, { recursive: true });
-    const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-    const backupDir = path.join(backupRoot, `backup-${ts}-${reason}`);
-    fsSync.mkdirSync(backupDir, { recursive: true });
-
-    const targetFiles = [
-      'settings.json',
-      'config.json',
-      'blog-accounts.json',
-      'scheduled-posts.json',
-    ];
-    let copiedCount = 0;
-    for (const f of targetFiles) {
-      const src = path.join(userDataDir, f);
-      if (fsSync.existsSync(src)) {
-        fsSync.copyFileSync(src, path.join(backupDir, f));
-        copiedCount++;
-      }
-    }
-    try {
-      const allFiles = fsSync.readdirSync(userDataDir);
-      for (const f of allFiles) {
-        if (f.startsWith('settings_') && f.endsWith('.json')) {
-          fsSync.copyFileSync(path.join(userDataDir, f), path.join(backupDir, f));
-          copiedCount++;
-        }
-      }
-    } catch { /* ignore */ }
-    try {
-      const lsDir = path.join(userDataDir, 'Local Storage');
-      if (fsSync.existsSync(lsDir)) {
-        const dest = path.join(backupDir, 'Local Storage');
-        fsSync.mkdirSync(dest, { recursive: true });
-        const copyDir = (src: string, dst: string) => {
-          const items = fsSync.readdirSync(src);
-          for (const it of items) {
-            const s = path.join(src, it);
-            const d = path.join(dst, it);
-            const stat = fsSync.statSync(s);
-            if (stat.isDirectory()) {
-              fsSync.mkdirSync(d, { recursive: true });
-              copyDir(s, d);
-            } else {
-              fsSync.copyFileSync(s, d);
-            }
-          }
-        };
-        copyDir(lsDir, dest);
-        copiedCount++;
-      }
-    } catch (e: any) {
-      debugLog(`[Backup] Local Storage 복사 실패 (무시): ${e?.message}`);
-    }
-    try {
-      const all = fsSync.readdirSync(backupRoot);
-      const now = Date.now();
-      for (const dir of all) {
-        if (!dir.startsWith('backup-') || !dir.includes('-auto')) continue;
-        const stat = fsSync.statSync(path.join(backupRoot, dir));
-        if (now - stat.mtimeMs > 14 * 24 * 60 * 60 * 1000) {
-          fsSync.rmSync(path.join(backupRoot, dir), { recursive: true, force: true });
-        }
-      }
-    } catch { /* ignore */ }
-    debugLog(`[Backup] ✅ ${copiedCount}개 파일 백업: ${backupDir}`);
-    return { success: true, backupPath: backupDir };
-  } catch (e: any) {
-    debugLog(`[Backup] ❌ 백업 실패: ${e?.message}`);
-    return { success: false, message: String(e?.message || e) };
-  }
-}
-
-ipcMain.handle('backup:create', async (_e, reason?: string) => performDataBackup(reason || 'manual'));
-ipcMain.handle('backup:list', async () => {
-  try {
-    const backupRoot = path.join(app.getPath('documents'), 'better-life-naver-backup');
-    if (!fsSync.existsSync(backupRoot)) return { success: true, backups: [] };
-    const list = fsSync.readdirSync(backupRoot)
-      .filter((d: string) => d.startsWith('backup-'))
-      .map((d: string) => {
-        const full = path.join(backupRoot, d);
-        const stat = fsSync.statSync(full);
-        return { name: d, path: full, mtime: stat.mtimeMs, size: 0 };
-      })
-      .sort((a: { mtime: number }, b: { mtime: number }) => b.mtime - a.mtime);
-    return { success: true, backups: list };
-  } catch (e: any) {
-    return { success: false, message: String(e?.message || e), backups: [] };
-  }
-});
-ipcMain.handle('backup:restore', async (_e, backupPath: string) => {
-  try {
-    if (!backupPath || !fsSync.existsSync(backupPath)) return { success: false, message: '백업 폴더가 존재하지 않습니다' };
-    await performDataBackup('pre-restore');
-    const userDataDir = app.getPath('userData');
-    const items = fsSync.readdirSync(backupPath);
-    let restored = 0;
-    for (const it of items) {
-      const src = path.join(backupPath, it);
-      const dst = path.join(userDataDir, it);
-      const stat = fsSync.statSync(src);
-      if (stat.isDirectory()) {
-        if (fsSync.existsSync(dst)) fsSync.rmSync(dst, { recursive: true, force: true });
-        const copyDir = (s: string, d: string) => {
-          fsSync.mkdirSync(d, { recursive: true });
-          for (const f of fsSync.readdirSync(s)) {
-            const ss = path.join(s, f);
-            const dd = path.join(d, f);
-            const st = fsSync.statSync(ss);
-            if (st.isDirectory()) copyDir(ss, dd);
-            else fsSync.copyFileSync(ss, dd);
-          }
-        };
-        copyDir(src, dst);
-      } else {
-        fsSync.copyFileSync(src, dst);
-      }
-      restored++;
-    }
-    return { success: true, message: `${restored}개 항목 복원 완료. 앱 재시작 필요.` };
-  } catch (e: any) {
-    return { success: false, message: String(e?.message || e) };
-  }
-});
+// [v2.10.259] performDataBackup + backup:* 3개 IPC → main/ipc/backupHandlers.ts
 
 app.whenReady().then(async () => {
   try {
@@ -9529,7 +7233,7 @@ app.whenReady().then(async () => {
             }
           }
           if (needsBackup) {
-            await performDataBackup('auto');
+            await performDataBackup('auto', debugLog);
           }
         } catch (e: any) {
           debugLog(`[Startup] 자동 백업 실패 (무시): ${e?.message}`);
@@ -9594,22 +7298,25 @@ app.whenReady().then(async () => {
     debugLog(`[Main] isPackaged: ${app.isPackaged}`);
     debugLog(`[Main] Process arguments: ${process.argv.join(' ')}`);
 
-    // ✅ [보안] 앱 시작 전 서버 동기화 (점검 모드, 버전 체크, 기기 차단)
-    // 이 체크가 가장 먼저 실행되어 점검/차단/구버전 시 앱이 실행되지 않도록 함
-    debugLog('[Main] ⚡ Performing pre-launch server sync...');
-    const preLaunchSync = await performServerSync(false);
-
-    if (!preLaunchSync.allowed) {
-      debugLog(`[Main] ⛔ Pre-launch server sync denied: ${preLaunchSync.error}`);
-      // 이미 performServerSync에서 다이얼로그를 표시했으므로 바로 종료
-      debugLog('[Main] Exiting app due to server sync denial...');
-      setTimeout(() => {
-        app.quit();
-        process.exit(0);
-      }, 500);
-      return;
-    }
-    debugLog('[Main] ✅ Pre-launch server sync passed');
+    // [v2.10.226] 보안 게이트 sync 백그라운드 전환 — 부팅 4.2초 freeze 제거 (perf-summary #2).
+    //   기존: await performServerSync로 mainWindow 표시 차단 → 사용자 "초반 응답없음 1분" 체감
+    //   수정: 비차단 promise로 시작, deny 발생 시 background에서 app.quit + 다이얼로그 (이미 표시됨)
+    //   trade-off: deny(점검 모드/차단/구버전)는 드물지만 발생 시 splash/메인 잠깐 보였다가 종료됨
+    //               점검 다이얼로그가 사용자에게 정상 표시되므로 UX 손실 < freeze 제거 가치
+    debugLog('[Main] ⚡ Performing pre-launch server sync (background, non-blocking)...');
+    performServerSync(false).then((res) => {
+      if (!res.allowed) {
+        debugLog(`[Main] ⛔ Pre-launch sync denied (background): ${res.error}`);
+        setTimeout(() => {
+          app.quit();
+          process.exit(0);
+        }, 500);
+      } else {
+        debugLog('[Main] ✅ Pre-launch sync passed (background)');
+      }
+    }).catch((e) => {
+      debugLog(`[Main] Pre-launch sync error (background, 무시): ${(e as Error).message}`);
+    });
 
     debugLog('[Main] App ready, checking license...');
 
@@ -10090,39 +7797,47 @@ app.whenReady().then(async () => {
       }
     });
 
-    // ✅ 서버 동기화 (버전 체크, 차단 체크, 글로벌 스위치)
-    debugLog('[Main] Performing server sync...');
-    const syncResult = await performServerSync();
+    // [v2.10.226] 서버 동기화 백그라운드 실행 — mainWindow 차단 freeze 제거 (perf-summary #2).
+    //   기존: 부팅 path에서 두 번째 await performServerSync()가 ~10초 main thread 블로킹
+    //         (pre-launch sync 7294라인이 이미 점검/차단/버전 게이트 처리 → 여기는 사실상 중복)
+    //   수정: setImmediate로 background 실행, 공지사항은 mainWindow.webContents.send로 후속 전달
+    //   회귀: deny 결과는 background에서 app.quit() 호출 (보안 게이트 유지)
+    debugLog('[Main] Performing server sync (background)...');
+    setImmediate(async () => {
+      try {
+        const syncResult = await performServerSync(true);
 
-    if (!syncResult.allowed) {
-      debugLog(`[Main] Server sync denied access: ${syncResult.error}`);
-      app.quit();
-      return;
-    }
+        if (!syncResult.allowed) {
+          debugLog(`[Main] Server sync denied access (background): ${syncResult.error}`);
+          app.quit();
+          return;
+        }
 
-    // ✅ 공지사항이 있으면 렌더러로 전송 (커스텀 모달 표시)
-    if (syncResult.notice && syncResult.notice.trim()) {
-      // 윈도우 로딩 완료 후 전송하여 유실 방지
-      const sendNotice = () => {
-        if (mainWindow && !mainWindow.isDestroyed()) {
-          // 렌더러 스크립트 실행 대기를 위해 약간의 추가 지연
-          setTimeout(() => {
+        // ✅ 공지사항이 있으면 렌더러로 전송 (커스텀 모달 표시)
+        if (syncResult.notice && syncResult.notice.trim()) {
+          const sendNotice = (): void => {
             if (mainWindow && !mainWindow.isDestroyed()) {
-              mainWindow.webContents.send('app:show-notice', syncResult.notice);
-              debugLog('[Main] Notice sent to renderer');
+              setTimeout(() => {
+                if (mainWindow && !mainWindow.isDestroyed()) {
+                  mainWindow.webContents.send('app:show-notice', syncResult.notice);
+                  debugLog('[Main] Notice sent to renderer');
+                }
+              }, 1000);
             }
-          }, 1000);
-        }
-      };
+          };
 
-      if (mainWindow && !mainWindow.isDestroyed()) {
-        if (mainWindow.webContents.isLoading()) {
-          mainWindow.webContents.once('did-finish-load', sendNotice);
-        } else {
-          sendNotice();
+          if (mainWindow && !mainWindow.isDestroyed()) {
+            if (mainWindow.webContents.isLoading()) {
+              mainWindow.webContents.once('did-finish-load', sendNotice);
+            } else {
+              sendNotice();
+            }
+          }
         }
+      } catch (err) {
+        debugLog(`[Main] Background server sync failed: ${(err as Error).message}`);
       }
-    }
+    });
 
     // ✅ 무료 사용자 핑 및 사용자 활동 기록 (비동기, 백그라운드)
     // 저장된 네이버 계정 정보도 함께 전송

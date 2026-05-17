@@ -293,3 +293,56 @@ function formatDate(date: Date): string {
   const d = String(date.getDate()).padStart(2, '0');
   return `${y}-${m}-${d}`;
 }
+
+// ---------------------------------------------------------------------------
+// [SPEC-PROMPT-2026-REFRESH Phase 2 / v2.10.232] 발행 시간 골든존 가드
+// ---------------------------------------------------------------------------
+// 배경: weolbu·adsensefarm 2026 실측 — 00~08시 발행은 초기 3시간 평가창에서
+//   유입 0 → 노출 순위 고정 불리 (페널티 약 -40%).
+// 정책: 평일 09:00~22:00, 주말 09:00~22:00 외 시간 발행은 경고.
+//   강제 차단은 호출자(즉시 발행 핸들러)에서 결정.
+
+export interface GoldenZoneCheck {
+  readonly isGolden: boolean;
+  readonly hour: number;
+  readonly reason: string;
+  readonly suggestedNextGolden: Date | null;
+}
+
+const GOLDEN_ZONE_START_HOUR = 9;
+const GOLDEN_ZONE_END_HOUR = 22;
+
+/**
+ * 현재(또는 지정) 시각이 발행 골든존인지 판정.
+ * 골든존 외 시각은 노출 페널티 -40% 위험.
+ */
+export function checkGoldenZone(date: Date = new Date()): GoldenZoneCheck {
+  const hour = date.getHours();
+  const isGolden = hour >= GOLDEN_ZONE_START_HOUR && hour < GOLDEN_ZONE_END_HOUR;
+
+  let reason = '';
+  let suggestedNextGolden: Date | null = null;
+
+  if (isGolden) {
+    reason = `골든존 (${GOLDEN_ZONE_START_HOUR}~${GOLDEN_ZONE_END_HOUR}시)`;
+  } else if (hour < GOLDEN_ZONE_START_HOUR) {
+    reason = `새벽~이른아침 (${hour}시) — 초기 3시간 평가창 유입 0 위험. 노출 페널티 -40% 가능.`;
+    suggestedNextGolden = new Date(date);
+    suggestedNextGolden.setHours(GOLDEN_ZONE_START_HOUR, 0, 0, 0);
+  } else {
+    reason = `심야 (${hour}시) — 초기 평가창 유입 부족. 다음 골든존 권장.`;
+    suggestedNextGolden = new Date(date);
+    suggestedNextGolden.setDate(suggestedNextGolden.getDate() + 1);
+    suggestedNextGolden.setHours(GOLDEN_ZONE_START_HOUR, 0, 0, 0);
+  }
+
+  return { isGolden, hour, reason, suggestedNextGolden };
+}
+
+/**
+ * 일일 발행 카운트가 C-Rank 한도(5건)를 초과하는지 판정.
+ * 출처: 블로그연구소 — 하루 5개 초과 발행은 C-Rank 점수 1점만 인정.
+ */
+export function isOverDailyCRankLimit(todayCount: number): boolean {
+  return todayCount >= 5;
+}
