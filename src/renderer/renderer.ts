@@ -3647,9 +3647,20 @@ async function initUnifiedTab(): Promise<void> {
       const previewSection = document.getElementById('unified-preview-section');
       if (previewSection) previewSection.style.display = 'block';
     } catch { /* noop */ }
+    // ✅ [v2.10.279] 미리보기 본문/제목/해시태그 즉시 채우기 — paste 직후 사용자 체감
+    try { syncIntegratedPreviewFromInputs(); } catch { /* noop */ }
     try { (window as any).updateRiskIndicators?.(sc); } catch { /* noop */ }
     console.log('[SemiAuto] 사용자 paste/직접 입력 감지 → currentStructuredContent 자동 생성');
     return sc;
+  }
+
+  // ✅ [v2.10.279] sc가 이미 있을 때도 paste 후 미리보기 동기화
+  function _refreshSemiAutoPreview(): void {
+    try { syncIntegratedPreviewFromInputs(); } catch { /* noop */ }
+    try {
+      const sc = (window as any).currentStructuredContent;
+      if (sc) (window as any).updateRiskIndicators?.(sc);
+    } catch { /* noop */ }
   }
 
   if (semiAutoTitle) {
@@ -3670,6 +3681,8 @@ async function initUnifiedTab(): Promise<void> {
       const v = semiAutoContent.value;
       // 의미 있는 내용 있을 때만 sc 생성 (빈 입력 시 자동 생성 안 함)
       const sc = v.trim().length >= 10 ? _ensureSemiAutoStructuredContent() : (window as any).currentStructuredContent;
+      // ✅ [v2.10.279] sc가 이미 있던 경우(글 불러오기 등)에도 paste 후 미리보기 동기화
+      if (sc) { _refreshSemiAutoPreview(); }
       if (sc) {
         sc.bodyPlain = v;
         sc.content = v;
