@@ -137,18 +137,31 @@ export function normalizeNaverBlogUrl(url: string): string | null {
 export function extractBodyFromHtml(html: string): string {
   if (!html) return '';
   let text = html;
-  // 스크립트 + 스타일 제거
+  // Remove script, style, noscript blocks
   text = text.replace(/<script[\s\S]*?<\/script>/gi, '');
   text = text.replace(/<style[\s\S]*?<\/style>/gi, '');
   text = text.replace(/<noscript[\s\S]*?<\/noscript>/gi, '');
-  // se-text-paragraph (네이버 SmartEditor) — 본문 후보
+
+  // Priority 1: se-text-paragraph (Naver SmartEditor 3)
   const seBlocks = text.match(/<div[^>]*class="[^"]*se-text-paragraph[^"]*"[^>]*>[\s\S]*?<\/div>/gi) ?? [];
   if (seBlocks.length >= 3) {
     text = seBlocks.join('\n');
+  } else {
+    // Priority 2: se-module-text (SmartEditor 2 fallback) -- avoids nav/footer noise
+    const seModules = text.match(/<div[^>]*class="[^"]*se-module-text[^"]*"[^>]*>[\s\S]*?<\/div>/gi) ?? [];
+    if (seModules.length >= 2) {
+      text = seModules.join('\n');
+    } else {
+      // Priority 3: strip obvious noise containers before falling back to full body
+      text = text.replace(/<(header|footer|nav|aside)[^>]*>[\s\S]*?<\/\1>/gi, '');
+      // Strip common sidebar/ad/widget class containers
+      text = text.replace(/<[^>]*class="[^"]*(?:gnb|lnb|snb|sidebar|widget|relate|banner)[^"]*"[^>]*>[\s\S]*?<\/[a-z0-9]+>/gi, '');
+    }
   }
-  // HTML 태그 제거
+
+  // Strip remaining HTML tags
   text = text.replace(/<[^>]+>/g, ' ');
-  // HTML entity 정규화
+  // Normalize HTML entities
   text = text
     .replace(/&nbsp;/g, ' ')
     .replace(/&lt;/g, '<')
@@ -156,8 +169,8 @@ export function extractBodyFromHtml(html: string): string {
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
     .replace(/&amp;/g, '&');
-  // 다중 공백 / 줄바꿈 정리
-  text = text.replace(/[ ​]+/g, ' ').replace(/\s{2,}/g, ' ').trim();
+  // Collapse whitespace
+  text = text.replace(/[ \u200b]+/g, ' ').replace(/\s{2,}/g, ' ').trim();
   return text;
 }
 
@@ -247,7 +260,8 @@ function computeBaseline(posts: ProbedPost[]): SerpProbeReport['baseline'] {
   let bodyLenSum = 0;
   let concreteSum = 0;
   let expSum = 0;
-  let aiClicheSum = 0; // AI 보고체 부재 점수의 *역수* (낮을수록 클리셰 많음)
+  let aiClicheSum = 0; // inverse of noAiCliche score (higher = more cliche)
+  let aiClicheCount = 0; // separate counter to avoid dilution when field is absent
   let count = 0;
 
   for (const p of posts) {
@@ -261,7 +275,10 @@ function computeBaseline(posts: ProbedPost[]): SerpProbeReport['baseline'] {
     const hd = p.evaluation.humanlikeScore.details as Record<string, number>;
     if (typeof md.concreteNumberCount === 'number') concreteSum += md.concreteNumberCount;
     if (typeof hd.directExperience === 'number') expSum += hd.directExperience;
-    if (typeof hd.noAiCliche === 'number') aiClicheSum += (15 - hd.noAiCliche); // 15 - 점수 = 클리셰 강도
+    if (typeof hd.noAiCliche === 'number') {
+      aiClicheSum += Math.max(0, 15 - hd.noAiCliche); // clamp to 0 so negative scores don't distort
+      aiClicheCount++;
+    }
     count++;
   }
 
@@ -276,7 +293,7 @@ function computeBaseline(posts: ProbedPost[]): SerpProbeReport['baseline'] {
     avgBodyLength: Math.round(bodyLenSum / count),
     avgConcreteNumbers: Math.round((concreteSum / count) * 10) / 10,
     avgDirectExperience: Math.round((expSum / count) * 10) / 10,
-    avgAiClicheCount: Math.round((aiClicheSum / count) * 10) / 10,
+    avgAiClicheCount: aiClicheCount > 0 ? Math.round((aiClicheSum / aiClicheCount) * 10) / 10 : 0,
     medianFinalScore: median,
   };
 }

@@ -103,14 +103,17 @@ export function detectSmartblock($: cheerio.CheerioAPI): { has: boolean; count: 
 export function extractCards($: cheerio.CheerioAPI, maxCards: number = 10): DynamicSerpCard[] {
   const cards: DynamicSerpCard[] = [];
 
-  // 블로그/카페 통합탭 카드 셀렉터 (다양한 패턴)
+  // Blog tab card selectors — ordered from most specific to broadest fallback.
+  // Naver blog tab (where=blog) uses .lst_total > li.bx as the primary list container.
   const cardSelectors = [
-    '.total_wrap',
-    '.api_subject_bx',
-    '.total_area',
-    '.blog_area',
-    '.bx',
-    '[class*="total_wrap"]',
+    '.lst_total > li.bx',         // blog tab 2024+ primary
+    '.lst_total .bx',             // blog tab 2024+ fallback
+    '.total_wrap',                // integrated tab legacy
+    '.api_subject_bx',            // integrated tab legacy
+    '.total_area',                // integrated tab legacy
+    '.blog_area',                 // dedicated blog tab legacy
+    'li.bx',                      // broad fallback
+    '[class*="total_wrap"]',      // class-substring fallback
   ];
 
   let cardElems: cheerio.Cheerio<any> | null = null;
@@ -129,16 +132,23 @@ export function extractCards($: cheerio.CheerioAPI, maxCards: number = 10): Dyna
     if (position >= maxCards) return false;
     const $el = $(el);
 
-    // 제목 + URL
-    const titleA = $el.find('a.api_txt_lines, a.title_link, .total_tit a, .api_subject_bx_text a').first();
-    const title = titleA.text().trim() || $el.find('.total_tit, .api_subject_bx_text').first().text().trim();
-    const url = titleA.attr('href') || '';
+    // Title + URL — blog tab 2024 uses .api_txt_lines as the title anchor
+    const titleA = $el.find(
+      'a.api_txt_lines, a.title_link, .total_tit a, .api_subject_bx_text a, .group_blog_sect a.title_link'
+    ).first();
+    const title = titleA.text().trim()
+      || $el.find('.total_tit, .api_subject_bx_text, .title_txt').first().text().trim();
+    const url = titleA.attr('href') || $el.find('a[href*="blog.naver.com"]').first().attr('href') || '';
 
-    // 블로거명
-    const blogger = $el.find('.user_box_inner, .sub_name, .blog_name, [class*="user_info"]').first().text().trim();
+    // Blogger name
+    const blogger = $el.find(
+      '.user_box_inner, .sub_name, .blog_name, .name_area, [class*="user_info"]'
+    ).first().text().trim();
 
-    // 도입부/snippet
-    const snippet = $el.find('.api_txt_lines.dsc_txt, .desc, .total_dsc, [class*="dsc_inner"]').first().text().trim();
+    // Intro snippet
+    const snippet = $el.find(
+      '.api_txt_lines.dsc_txt, .desc, .total_dsc, [class*="dsc_inner"], .dsc_txt_wrap'
+    ).first().text().trim();
 
     // 인플루언서 여부
     const cardHtml = $.html($el as any);
@@ -180,19 +190,23 @@ export async function probeDynamicSerp(
   const probedAt = new Date().toISOString();
 
   try {
+    // Use 'blog' tab to get blog-specific SERP cards reliably.
+    // 'nexearch' returns the integrated tab which may redirect or return
+    // a JS-rendered skeleton with no DOM content in a plain axios fetch.
     const response = await axios.get(NAVER_SEARCH_URL, {
       params: {
-        where: 'nexearch',
+        where: 'blog',
         query: keyword,
-        sm: 'top_hty',
+        sm: 'tab_hty.top',
       },
       headers: {
         'User-Agent': DESKTOP_UA,
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9',
         'Accept-Language': 'ko-KR,ko;q=0.9,en;q=0.8',
+        'Referer': `https://search.naver.com/search.naver?query=${encodeURIComponent(keyword)}`,
       },
       timeout,
-      maxRedirects: 3,
+      maxRedirects: 5,
       responseType: 'text',
     });
 

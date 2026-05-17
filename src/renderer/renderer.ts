@@ -1504,6 +1504,14 @@ function updateRiskIndicators(content: StructuredContent | null): void {
     }
   } catch { /* 알림 실패는 무시 */ }
 
+  if (riskDailyValue) {
+    // Read from cached config (set at init time). Falls back to the HTML default "3회"
+    // if config is not yet loaded, so no async IPC call is needed here.
+    const _cfg = (window as any).appConfig;
+    const _limit: number = _cfg?.dailyPostLimit ?? 3;
+    riskDailyValue.textContent = `${_limit}회`;
+  }
+
   if (riskSummaryElement) {
     riskSummaryElement.style.display = 'grid';
   }
@@ -10015,7 +10023,7 @@ function showSerpAlertCard(autoSerp: any, type: 'warn' | 'good' = 'warn'): void 
   const titleText = isGood ? 'SERP 실측 비교 — 양호' : 'SERP 실측 비교 — 보완 필요';
 
   card.style.cssText = `
-    position: fixed; top: 90px; right: 20px; z-index: 10001;
+    position: fixed; top: 20px; left: 20px; z-index: 10001;
     background: ${bgColor};
     border: 2px solid ${borderColor};
     border-radius: 12px;
@@ -10079,7 +10087,7 @@ function showSerpAlertCard(autoSerp: any, type: 'warn' | 'good' = 'warn'): void 
   if (!document.getElementById('serp-alert-keyframes')) {
     const style = document.createElement('style');
     style.id = 'serp-alert-keyframes';
-    style.textContent = `@keyframes serpAlertSlideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }`;
+    style.textContent = `@keyframes serpAlertSlideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }`;
     document.head.appendChild(style);
   }
 

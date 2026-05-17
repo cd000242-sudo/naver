@@ -343,6 +343,15 @@ export async function applyContentPostProcessing(
   try {
     refreshGeneratedPostsList();
   } catch (e) { console.warn(`[postProcess:${source}] refresh 실패:`, e); }
+
+  // 10. Risk indicators (AI detection, SEO score, legal risk, daily recommendation)
+  //     generateContentFromUrl and generateContentFromKeywords call updateRiskIndicators
+  //     directly. paraphraseContent reaches this function instead, so the call must
+  //     live here to ensure all three entry points update the summary bar.
+  try {
+    updateRiskIndicators(structuredContent);
+    log('updateRiskIndicators 완료');
+  } catch (e) { console.warn(`[postProcess:${source}] riskIndicators 실패:`, e); }
 }
 
 export async function generateContentFromUrl(
