@@ -1447,32 +1447,45 @@ let __continuousV2Initialized = false; // V2 초기화 플래그
 
 // 위험 지표 업데이트
 function updateRiskIndicators(content: StructuredContent | null): void {
-  if (!content?.quality) return;
+  // ✅ [v2.10.277] early return 제거 — quality 없어도 4개 지표 placeholder 표시
+  //   글 불러오기 시 quality 누락된 옛날 글도 일일권장은 표시되어야 함
+  const _quality = content?.quality;
 
   if (riskAiValue) {
-    const risk = content.quality.aiDetectionRisk || 'low';
-    riskAiValue.textContent = risk === 'low' ? '낮음' : risk === 'medium' ? '보통' : '높음';
-    riskAiValue.className = `value risk-${risk}`;
+    const risk = _quality?.aiDetectionRisk;
+    if (risk) {
+      riskAiValue.textContent = risk === 'low' ? '낮음' : risk === 'medium' ? '보통' : '높음';
+      riskAiValue.className = `value risk-${risk}`;
+    } else {
+      riskAiValue.textContent = '-';
+      riskAiValue.className = 'value risk-unknown';
+    }
   }
 
   if (riskLegalValue) {
-    const risk = content.quality.legalRisk || 'safe';
-    riskLegalValue.textContent = risk === 'safe' ? '안전' : risk === 'caution' ? '주의' : '위험';
-    riskLegalValue.className = `value legal-${risk}`;
+    const risk = _quality?.legalRisk;
+    if (risk) {
+      riskLegalValue.textContent = risk === 'safe' ? '안전' : risk === 'caution' ? '주의' : '위험';
+      riskLegalValue.className = `value legal-${risk}`;
+    } else {
+      riskLegalValue.textContent = '-';
+      riskLegalValue.className = 'value legal-unknown';
+    }
   }
 
   if (riskSeoValue) {
-    // ✅ [v2.10.181 Phase 1.7] qualityGate finalScore + decision UI 가시화
-    //   기존: SEO 점수만 표시 (analyzeNaverScore 결과)
-    //   추가: qualityGate 통합 점수 + decision (있으면) 함께 표시
-    const _gate = (content.quality as any)?.qualityGate;
-    if (_gate && typeof _gate.finalScore === 'number') {
-      const _decisionLabel = _gate.decision === 'pass' ? '✓통과'
-        : _gate.decision === 'patch' ? '⚙수정'
-        : '↻재생성';
-      riskSeoValue.textContent = `${content.quality.seoScore || 0}/100 · 게이트 ${_gate.finalScore} (${_decisionLabel})`;
+    if (_quality && typeof _quality.seoScore === 'number') {
+      const _gate = (_quality as any)?.qualityGate;
+      if (_gate && typeof _gate.finalScore === 'number') {
+        const _decisionLabel = _gate.decision === 'pass' ? '✓통과'
+          : _gate.decision === 'patch' ? '⚙수정'
+          : '↻재생성';
+        riskSeoValue.textContent = `${_quality.seoScore || 0}/100 · 게이트 ${_gate.finalScore} (${_decisionLabel})`;
+      } else {
+        riskSeoValue.textContent = `${_quality.seoScore || 0}/100`;
+      }
     } else {
-      riskSeoValue.textContent = `${content.quality.seoScore || 0}/100`;
+      riskSeoValue.textContent = '-/100';
     }
   }
 
@@ -1480,7 +1493,7 @@ function updateRiskIndicators(content: StructuredContent | null): void {
   //   글 생성 완료 시 본문/키워드를 글로벌 변수에 저장 → 사용자가 버튼 클릭 시 사용
   try {
     const _serpBtn = document.getElementById('serp-benchmark-btn') as HTMLButtonElement | null;
-    if (_serpBtn && content.bodyPlain && content.bodyPlain.length >= 100) {
+    if (_serpBtn && content?.bodyPlain && content.bodyPlain.length >= 100) {
       (window as any).__lastGeneratedContent = {
         body: content.bodyPlain,
         title: content.selectedTitle || '',
@@ -1496,7 +1509,7 @@ function updateRiskIndicators(content: StructuredContent | null): void {
   //   조건: quality.serpBenchmark 있고 ranking이 below_median 또는 below_25th면 자동 알림
   //   사용자가 즉시 "내 글이 상위 노출 글보다 부족한 부분"을 인식하도록
   try {
-    const _autoSerp = (content.quality as any)?.serpBenchmark;
+    const _autoSerp = (content?.quality as any)?.serpBenchmark;
     if (_autoSerp && (_autoSerp.ranking === 'below_median' || _autoSerp.ranking === 'below_25th')) {
       showSerpAlertCard(_autoSerp);
     } else if (_autoSerp && (_autoSerp.ranking === 'above_median' || _autoSerp.ranking === 'near_median')) {

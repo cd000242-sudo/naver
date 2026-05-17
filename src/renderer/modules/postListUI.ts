@@ -971,12 +971,14 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
   currentPostId = postId; // ✅ 현재 글 ID 설정
 
   // structuredContent 재구성
-  const structuredContent = {
+  // ✅ [v2.10.277] quality 복원 — 글 불러오기 시 4개 위험 지표(AI/SEO/법적/일일권장) 표시
+  const structuredContent: any = {
     selectedTitle: post.title,
     bodyPlain: post.content,
     content: post.content,
     hashtags: post.hashtags || [],
-    headings: post.headings || []
+    headings: post.headings || [],
+    quality: (post as any).quality || undefined,
   };
 
   currentStructuredContent = structuredContent as any;

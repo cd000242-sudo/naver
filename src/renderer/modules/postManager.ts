@@ -516,6 +516,15 @@ export function saveGeneratedPostFromData(
           })
           .filter((s: string) => s.trim())
           .join('\n\n');
+    // ✅ [v2.10.277] quality 4지표 보존 — 글 불러오기 시 AI탐지/SEO/법적 복원용
+    const _q = (structuredContent as any)?.quality;
+    const lightQuality = _q ? {
+      aiDetectionRisk: _q.aiDetectionRisk,
+      legalRisk: _q.legalRisk,
+      seoScore: _q.seoScore,
+      qualityGate: _q.qualityGate ? { finalScore: _q.qualityGate.finalScore, decision: _q.qualityGate.decision } : undefined,
+      serpBenchmark: _q.serpBenchmark,
+    } : undefined;
     const post: GeneratedPost = {
       id: postId,
       title: structuredContent?.selectedTitle || '',
@@ -536,6 +545,7 @@ export function saveGeneratedPostFromData(
       ctaText: String(overrides?.ctaText || ''),
       ctaLink: String(overrides?.ctaLink || ''),
       naverId: overrides?.naverId || getCurrentNaverId() || undefined,
+      quality: lightQuality,
     };
 
     posts.unshift(post);
@@ -708,6 +718,15 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
           })
           .filter((s: string) => s.trim())
           .join('\n\n');
+    // ✅ [v2.10.277] quality 4지표 보존 — saveGeneratedPost 경로
+    const _q2 = (structuredContent as any)?.quality;
+    const lightQuality2 = _q2 ? {
+      aiDetectionRisk: _q2.aiDetectionRisk,
+      legalRisk: _q2.legalRisk,
+      seoScore: _q2.seoScore,
+      qualityGate: _q2.qualityGate ? { finalScore: _q2.qualityGate.finalScore, decision: _q2.qualityGate.decision } : undefined,
+      serpBenchmark: _q2.serpBenchmark,
+    } : (existingPost as any)?.quality;
     const post: GeneratedPost = {
       id: postId,
       title: structuredContent.selectedTitle || '',
@@ -715,6 +734,7 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
       hashtags: structuredContent.hashtags || [],
       headings: lightHeadings2,
       structuredContent: lightStructuredContent2,
+      quality: lightQuality2,
       createdAt: existingPost?.createdAt || now, // 기존 생성일 유지
       updatedAt: isUpdate ? now : (existingPost?.updatedAt || now), // 업데이트 시에만 수정일 갱신
       // ✅ 새 글에서는 이전 글 이미지 상속 금지 (미리보기 이미지 섞임 방지)

@@ -158,6 +158,13 @@ export interface GeneratedPost {
     naverId?: string;
     affiliateLink?: string;
     contentMode?: string;
+    quality?: {
+        aiDetectionRisk?: 'low' | 'medium' | 'high';
+        legalRisk?: 'safe' | 'caution' | 'danger';
+        seoScore?: number;
+        qualityGate?: { finalScore?: number; decision?: 'pass' | 'patch' | 'regen' };
+        serpBenchmark?: any;
+    };
 }
 
 // ── 이미지 히스토리 ──
