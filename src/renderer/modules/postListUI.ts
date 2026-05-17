@@ -42,6 +42,7 @@ declare function openPostImageFolder(postId: string): void;
 declare function deleteGeneratedPost(postId: string): void;
 declare function toFileUrlMaybe(path: string): string;
 declare function normalizeReadableBodyText(text: string): string;
+declare function syncIntegratedPreviewFromInputs(): void;
 declare function hydrateImageManagerFromImages(images: any, headings?: any): void;
 declare function autoGenerateCTA(content?: any): void;
 declare function updateRiskIndicators(content?: any): void;
@@ -1001,6 +1002,8 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
   if (titleInput) {
     titleInput.value = post.title;
     titleInput.readOnly = false; // 수정 가능하게
+    // Trigger input event so syncIntegratedPreviewFromInputs() reflects the title.
+    titleInput.dispatchEvent(new Event('input', { bubbles: true }));
   }
   // ✅ [v2.10.225] 사용자 보고: "본문내용이 싹다날아갓네"
   //   대응: normalize 후 빈 문자열이면 원본 raw로 fallback + 진단 로그
@@ -1010,6 +1013,10 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
     const finalContent = normalized.trim() ? normalized : rawContent;
     contentTextarea.value = finalContent;
     contentTextarea.readOnly = false;
+    // Dispatch input event so syncIntegratedPreviewFromInputs() updates the preview body.
+    // Setting .value programmatically does not fire the input event, causing the
+    // preview to show only headings/images while the body text remains blank.
+    contentTextarea.dispatchEvent(new Event('input', { bubbles: true }));
     console.log(`[loadGeneratedPost] 본문 로드: raw=${rawContent.length}자, normalized=${normalized.length}자, final=${finalContent.length}자, postId=${postId}`);
     if (rawContent.length > 0 && normalized.trim().length === 0) {
       console.warn(`[loadGeneratedPost] ⚠️ normalize가 본문을 전부 제거함 → 원본 raw로 fallback (postId=${postId})`);
@@ -1325,6 +1332,11 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
   }
   // 2. 미리보기 업데이트 (현재 선택된 발행 모드는 유지)
   try { updateUnifiedPreview(structuredContent); } catch (_e) { /* 무시 */ }
+
+  // Sync body/title/hashtags into the preview DOM nodes (unified-preview-body etc.)
+  // These nodes were previously only updated on textarea input events, causing the
+  // preview body to remain blank after loading a post from the list.
+  try { syncIntegratedPreviewFromInputs(); } catch (_e) { /* 무시 */ }
 
   toastManager.success(`✅ 생성된 글을 불러왔습니다! 반자동 모드에서 수정 후 발행할 수 있습니다.`);
 }
