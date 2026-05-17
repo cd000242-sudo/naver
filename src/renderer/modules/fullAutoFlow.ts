@@ -1955,6 +1955,22 @@ export async function executeFullAutoAutomation(formData: any): Promise<void> {
       appendLog('♻️ 이미 생성된 콘텐츠 재사용 (중복 생성 방지)');
       console.log('[FullAuto] ♻️ formData.structuredContent 재사용 — generateFullAutoContent 스킵');
       structuredContent = formData.structuredContent;
+      // [BUG-FIX v2.10.272] _contentAlreadyGenerated 재사용 경로에서 bodyPlain이 없으면
+      // headings[].content에서 복구 — lightHeadings(title only) 저장 전 복구 보장
+      if (!structuredContent.bodyPlain && !structuredContent.content && Array.isArray(structuredContent.headings) && structuredContent.headings.length > 0) {
+        const recovered = structuredContent.headings
+          .map((h: any) => {
+            const bodyText = (h.content || h.summary || '').trim();
+            return bodyText ? `${h.title || ''}\n\n${bodyText}` : (h.title || '');
+          })
+          .filter((s: string) => s.trim())
+          .join('\n\n');
+        if (recovered) {
+          structuredContent.bodyPlain = recovered;
+          structuredContent.content = recovered;
+          console.warn('[FullAuto] ⚠️ _contentAlreadyGenerated 재사용 경로: bodyPlain 누락 → headings에서 복구');
+        }
+      }
     } else {
       structuredContent = await generateFullAutoContent(formData);
     }

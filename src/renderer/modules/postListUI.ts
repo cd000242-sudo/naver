@@ -46,6 +46,8 @@ declare function syncIntegratedPreviewFromInputs(): void;
 declare function hydrateImageManagerFromImages(images: any, headings?: any): void;
 declare function autoGenerateCTA(content?: any): void;
 declare function updateRiskIndicators(content?: any): void;
+declare function safeLocalStorageSetItem(key: string, value: string): boolean | undefined;
+declare function _invalidatePostsCache(): void;
 
 export function refreshGeneratedPostsList(): void {
   // 동기 진입점 — 비동기 실제 작업은 _refreshGeneratedPostsListAsync 위임
@@ -1070,12 +1072,23 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
 
       // 일부 이미지가 복구된 경우 저장
       if (validImages.length !== post.images.length) {
-        const updatedPost = { ...post, images: validImages };
+        // [BUG-FIX] content가 비어있으면 headings에서 복구 — 이미지 복구 저장이 빈 본문을 덮어쓰는 경로 차단
+        const recoveredContent = post.content || (() => {
+          return (post.headings || [])
+            .map((h: any) => {
+              const bodyText = (h.content || h.summary || '').trim();
+              return bodyText ? `${h.title || ''}\n${bodyText}` : (h.title || '');
+            })
+            .filter((s: string) => s.trim())
+            .join('\n\n');
+        })();
+        const updatedPost = { ...post, images: validImages, content: recoveredContent };
         const posts = loadGeneratedPosts();
         const index = posts.findIndex(p => p.id === postId);
         if (index >= 0) {
           posts[index] = updatedPost;
-          localStorage.setItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+          safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+          _invalidatePostsCache();
         }
       }
     } else {
@@ -1470,7 +1483,8 @@ export function toggleFavoritePost(postId: string): void {
     const index = posts.findIndex(p => p.id === postId);
     if (index >= 0) {
       posts[index] = post;
-      localStorage.setItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+      safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+      _invalidatePostsCache();
       appendLog(`⭐ 즐겨찾기 ${post.isFavorite ? '추가' : '해제'}: "${post.title}"`);
       refreshGeneratedPostsList();
     }
