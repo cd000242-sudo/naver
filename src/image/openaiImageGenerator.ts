@@ -12,6 +12,8 @@ import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { STYLE_PROMPT_MAP, isNoPersonCategory, getImageDiversityHints } from './imageStyles.js';
 import { addThumbnailTextOverlay } from './textOverlay.js';
 import { AutomationService } from '../main/services/AutomationService.js';
+// [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — gpt-image-2 b64_json 1.18MB+
+import { decodeBase64Async } from '../main/utils/base64Async.js';
 
 const OPENAI_IMAGES_API_URL = 'https://api.openai.com/v1/images/generations';
 // v2.7.5: gpt-image-2 default 복귀 — 사용자가 명확히 신모델(덕트테이프)을
@@ -218,7 +220,8 @@ export async function generateWithOpenAIImage(
 
                     if (imageData.b64_json && imageData.b64_json.length > 0) {
                         // base64 응답
-                        buffer = Buffer.from(imageData.b64_json, 'base64');
+                        // [SPEC-FREEZE-GUARD-001-P2 R4] 워커 디코딩 (gpt-image-2 b64_json 1.18MB)
+                        buffer = await decodeBase64Async(imageData.b64_json);
                     } else if (imageData.url) {
                         // URL 응답 → 다운로드
                         const imgResponse = await axios.get(imageData.url, {
@@ -362,7 +365,8 @@ export async function generateSingleOpenAIImage(
 
         let buffer: Buffer;
         if (imageData.b64_json) {
-            buffer = Buffer.from(imageData.b64_json, 'base64');
+            // [SPEC-FREEZE-GUARD-001-P2 R4] 워커 디코딩 (대체 경로 b64_json)
+            buffer = await decodeBase64Async(imageData.b64_json);
         } else if (imageData.url) {
             const imgResponse = await axios.get(imageData.url, { responseType: 'arraybuffer', timeout: 30000 });
             buffer = Buffer.from(imgResponse.data);

@@ -13,6 +13,8 @@
 
 import type { ImageRequestItem, GeneratedImage } from './types.js';
 import { writeImageFile } from './imageUtils.js';
+// [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — ImageFX encodedImage 1MB+
+import { decodeBase64Async } from '../main/utils/base64Async.js';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
@@ -1381,7 +1383,8 @@ export async function generateSingleImageWithImageFx(
 
       // 4. 결과 처리
       if (genResult.success && genResult.encodedImage) {
-        const buffer = Buffer.from(genResult.encodedImage, 'base64');
+        // [SPEC-FREEZE-GUARD-001-P2 R4] 워커 디코딩 (ImageFX encodedImage 1MB+)
+        const buffer = await decodeBase64Async(genResult.encodedImage);
         console.log(`[ImageFX] ✅ 이미지 생성 성공! (${Math.round(buffer.length / 1024)}KB, 시도 ${attempt})`);
         sendImageLog(`✅ [ImageFX] 이미지 생성 완료 (${Math.round(buffer.length / 1024)}KB)`);
         trackApiUsage('gemini', { images: 1, model: IMAGEN_MODELS.V35_FX, costOverride: 0 });

@@ -11,6 +11,8 @@ import { STYLE_PROMPT_MAP, getWebtoonStylePrompt, WebtoonGender, WebtoonSubStyle
 import { addThumbnailTextOverlay } from './textOverlay.js'; // ✅ [2026-01-30] 썸네일 텍스트 오버레이
 import { AutomationService } from '../main/services/AutomationService.js'; // ✅ [2026-01-29 FIX] 중지 체크용
 import sharp from 'sharp'; // ✅ [2026-01-30] 이미지 하단 텍스트 영역 크롭용
+// [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — FLUX/Redux b64_json 1MB+
+import { decodeBase64Async } from '../main/utils/base64Async.js';
 
 // ✅ [2026-03-01] 인물 규칙 함수 — 카테고리별 인물 포함/제외 + 한국인 하드코딩
 // AI 추론 기반: 하드코딩 카테고리 스타일 제거, 인물 규칙만 제공
@@ -727,7 +729,8 @@ export async function generateSingleDeepInfraImage(
         let buffer: Buffer;
 
         if (imageData) {
-            buffer = Buffer.from(imageData, 'base64');
+            // [SPEC-FREEZE-GUARD-001-P2 R4] 워커 디코딩 (FLUX b64_json 1MB+)
+            buffer = await decodeBase64Async(imageData);
         } else if (first.url) {
             console.log(`[DeepInfra] b64_json 없음 → url 다운로드: ${String(first.url).slice(0, 80)}...`);
             const imgResp = await axios.get(first.url, {
@@ -781,7 +784,8 @@ export async function generateSingleDeepInfraImage(
                 let imageData: string | undefined = fb?.b64_json;
                 let buffer: Buffer;
                 if (imageData) {
-                    buffer = Buffer.from(imageData, 'base64');
+                    // [SPEC-FREEZE-GUARD-001-P2 R4] 워커 디코딩 (FLUX b64_json 1MB+)
+            buffer = await decodeBase64Async(imageData);
                 } else if (fb?.url) {
                     const imgResp = await axios.get(fb.url, { responseType: 'arraybuffer', timeout: 60000 });
                     buffer = Buffer.from(imgResp.data);
@@ -944,7 +948,8 @@ export async function generateDeepInfraImg2Img(
         }
 
         // 3. 결과 저장
-        const buffer = Buffer.from(outputImageBase64, 'base64');
+        // [SPEC-FREEZE-GUARD-001-P2 R4] 워커 디코딩 (Redux img2img b64_json 1MB+)
+        const buffer = await decodeBase64Async(outputImageBase64);
         const filename = `deepinfra_redux_${Date.now()}.png`;
         const localPath = path.join(app.getPath('temp'), filename);
         fs.writeFileSync(localPath, buffer);
