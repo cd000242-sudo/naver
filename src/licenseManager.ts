@@ -132,6 +132,10 @@ let licenseDir: string | null = null;
 let licensePath: string | null = null;
 let cachedLicense: LicenseInfo | null = null;
 
+// ✅ [v2.10.274] TTL + write-guard state for revalidateLicense
+let _lastSyncAt = 0;
+const SYNC_CACHE_TTL_MS = 60_000; // 1-minute TTL
+
 // 서버에서 발급한 세션 토큰 (generateSessionId 제거 - 서버가 세션 토큰을 생성)
 
 // 현재 세션 ID
@@ -1212,6 +1216,15 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
   // 서버 재검증 (선택사항)
   // admin-panel의 Google Apps Script 서버와 연동
   if (serverUrl) {
+    // ✅ [v2.10.274] TTL cache: skip server if verified within the last 60 seconds
+    const now = Date.now();
+    if (now - _lastSyncAt < SYNC_CACHE_TTL_MS) {
+      return true;
+    }
+
+    // Record fetch start time for write-guard comparison
+    const fetchStartTime = Date.now();
+
     // [v2.10.226] 3s timeout — Apps Script 응답 지연이 15s+ IPC 점유 (사용자 보고: "초반 응답없음").
     // 재검증은 보조 검증이고 실패 시 로컬 라이선스 유지하므로 timeout 후 false 반환 안전.
     const _controller = new AbortController();
@@ -1247,22 +1260,28 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
         return false;
       }
 
-      // 라이선스 정보 업데이트 (만료일 + 라이선스 유형)
-      license.verifiedAt = new Date().toISOString();
-      if (result.expiresAt || result.expires) {
-        license.expiresAt = result.expiresAt || result.expires;
+      // ✅ [v2.10.274] write-guard: skip stale write if a newer sync completed while waiting
+      if (_lastSyncAt > fetchStartTime) {
+        console.warn('[License] revalidateLicense write-guard: newer sync completed, discarding stale result');
+      } else {
+        // 라이선스 정보 업데이트 (만료일 + 라이선스 유형)
+        license.verifiedAt = new Date().toISOString();
+        if (result.expiresAt || result.expires) {
+          license.expiresAt = result.expiresAt || result.expires;
+        }
+        // 서버에서 반환한 licenseType으로 업데이트 (관리 패널에서 변경된 내용 반영)
+        if (result.licenseType) {
+          const newLicenseType = result.licenseType === 'LIFE' ? 'premium' :
+            result.licenseType?.includes('TRIAL') ? 'trial' :
+              result.licenseType?.includes('PAID365') ? 'premium' :
+                result.licenseType?.includes('PAID90') ? 'standard' :
+                  result.licenseType?.includes('PAID30') ? 'standard' : 'standard';
+          license.licenseType = newLicenseType;
+          console.log('[LicenseManager] 라이선스 유형 업데이트:', result.licenseType, '->', newLicenseType);
+        }
+        _lastSyncAt = Date.now();
+        await saveLicense(license);
       }
-      // 서버에서 반환한 licenseType으로 업데이트 (관리 패널에서 변경된 내용 반영)
-      if (result.licenseType) {
-        const newLicenseType = result.licenseType === 'LIFE' ? 'premium' :
-          result.licenseType?.includes('TRIAL') ? 'trial' :
-            result.licenseType?.includes('PAID365') ? 'premium' :
-              result.licenseType?.includes('PAID90') ? 'standard' :
-                result.licenseType?.includes('PAID30') ? 'standard' : 'standard';
-        license.licenseType = newLicenseType;
-        console.log('[LicenseManager] 라이선스 유형 업데이트:', result.licenseType, '->', newLicenseType);
-      }
-      await saveLicense(license);
     } catch {
       // 서버 연결 실패 또는 timeout 시 로컬 라이선스 유지
     } finally {
@@ -1271,6 +1290,24 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
   }
 
   return true;
+}
+
+/**
+ * Background revalidation (IPC fire-and-forget).
+ * Returns cached value immediately; network sync runs asynchronously.
+ */
+export async function revalidateLicenseBackground(serverUrl?: string): Promise<boolean> {
+  const cached = getCachedLicense();
+  const localResult = !!(cached && !isLicenseExpired(cached));
+
+  // Trigger background sync without awaiting
+  setImmediate(() => {
+    revalidateLicense(serverUrl).catch((e) =>
+      console.warn('[License] bg revalidate error (ignored):', (e as Error)?.message ?? e)
+    );
+  });
+
+  return localResult;
 }
 
 // registerSession 함수 제거됨 — 서버 handleVerifyCredentials에서 로그인 시 자동으로 세션 토큰을 생성·저장하므로 별도 등록 불필요
@@ -1435,7 +1472,9 @@ export async function syncWithServer(serverUrl?: string): Promise<SyncResult> {
     console.log('[LicenseManager] 서버 동기화 시작...');
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    // [v2.10.274+] 8s — syncWithServer result feeds app.quit() gate; 3s caused false-block on slow networks.
+    // revalidateLicense internal fetch stays at 3s (safe: failure falls back to local license).
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     const response = await fetch(url, {
       method: 'POST',
@@ -1539,7 +1578,7 @@ export async function reportNaverAccounts(accounts: NaverAccountInfo[], serverUr
     console.log(`[LicenseManager] 네이버 계정 ${accounts.length}개 전송 중...`);
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    const timeoutId = setTimeout(() => controller.abort(), 3000);  // ✅ [v2.10.274] 15s → 3s
 
     const response = await fetch(url, {
       method: 'POST',

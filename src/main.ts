@@ -127,6 +127,7 @@ import {
   type LicenseInfo,
   clearLicense,
   revalidateLicense,
+  revalidateLicenseBackground,
   syncWithServer,
   sendFreePing,
   reportNaverAccounts,
@@ -7790,13 +7791,9 @@ app.whenReady().then(async () => {
           await createLoginWindow();
         }
       } else {
-        // 서버에서 재검증 (선택사항)
-        try {
-          await revalidateLicense(process.env.LICENSE_SERVER_URL);
-          console.log('[Main] 라이선스 재검증 완료');
-        } catch (error) {
-          console.error('[Main] 라이선스 재검증 중 오류:', (error as Error).message);
-        }
+        // Server revalidation (cron path) — fire-and-forget to avoid blocking main thread
+        revalidateLicenseBackground(process.env.LICENSE_SERVER_URL)
+          .catch((e: unknown) => console.warn('[cron license sync] 무시:', (e as Error)?.message));
       }
     });
 

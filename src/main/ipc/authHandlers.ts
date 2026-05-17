@@ -17,6 +17,9 @@ import {
     testLicenseServer,
     clearLicense,
     revalidateLicense,
+    revalidateLicenseBackground,
+    getCachedLicense,
+    isLicenseExpired,
     type LicenseInfo,
 } from '../../licenseManager.js';
 
@@ -116,11 +119,14 @@ export function registerLicenseHandlers(_ctx: IpcContext): void {
     });
 
     ipcMain.handle('license:revalidate', async (_event, serverUrl?: string): Promise<boolean> => {
+        // ✅ [v2.10.274] fire-and-forget: return cached value immediately, sync in background
         try {
-            return await revalidateLicense(serverUrl || process.env.LICENSE_SERVER_URL);
+            return await revalidateLicenseBackground(serverUrl || process.env.LICENSE_SERVER_URL);
         } catch (error) {
             console.error('[Main] License revalidation error:', (error as Error).message);
-            return false;
+            // Fallback: return local cache value without throwing
+            const cached = getCachedLicense();
+            return !!(cached && !isLicenseExpired(cached));
         }
     });
 
