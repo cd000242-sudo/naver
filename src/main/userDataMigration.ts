@@ -18,6 +18,47 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+// [v2.10.275] Session folder mirror blacklist — prevents 17s freeze from GB-scale session dirs.
+// playwright/puppeteer sessions can be re-created by re-login, so mirroring them is not worth the I/O cost.
+//
+// Pattern groups:
+//   - session prefixes: `xxx-session` / `xxx-session-yyy` style folders (any suffix allowed)
+//   - chromium profiles: imagefx-chrome-profile, flow-chromium-profile (synced with SESSION_FOLDER_PREFIXES below)
+//   - chromium internal GB-scale caches: GPUCache, Cache, Code Cache, Service Worker (explicit names — no greedy .*)
+const SESSION_MIRROR_BLACKLIST_EXACT = new Set([
+    'GPUCache',
+    'Cache',
+    'Code Cache',
+    'Service Worker',
+    'IndexedDB',
+    'Local Storage',
+    'Session Storage',
+    'DawnGraphiteCache',
+    'DawnWebGPUCache',
+    'ShaderCache',
+]);
+const SESSION_MIRROR_BLACKLIST_PREFIX = [
+    'playwright-session',
+    'puppeteer-session',
+    'imagefx-chrome-profile',
+    'flow-chromium-profile',
+];
+
+function isSessionFolder(name: string): boolean {
+    if (SESSION_MIRROR_BLACKLIST_EXACT.has(name)) return true;
+    for (const prefix of SESSION_MIRROR_BLACKLIST_PREFIX) {
+        if (name === prefix || name.startsWith(prefix + '-') || name.startsWith(prefix + '_')) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Deduplication guards — prevent concurrent or rapid-repeat mirror runs.
+let _mirrorInFlight = false;
+let _lastMirrorAt = 0;
+const MIRROR_TTL_MS = 60_000; // suppress repeat calls within 1 minute
+
 const SIBLING_FOLDER_NAME = 'Better Life Naver';
 // ✅ [v2.9.2] 전수 보호 — userData 내 모든 사용자 데이터 파일 미러 대상화
 const TARGET_FILES = [
@@ -121,6 +162,8 @@ function mergeSettingsPreserveDst(srcPath: string, dstPath: string): boolean {
 function copyDirRecursive(src: string, dst: string): void {
     fs.mkdirSync(dst, { recursive: true });
     for (const it of fs.readdirSync(src)) {
+        // Skip session folders at any recursion depth to prevent GB-scale I/O.
+        if (isSessionFolder(it)) continue;
         const ss = path.join(src, it);
         const dd = path.join(dst, it);
         if (fs.statSync(ss).isDirectory()) copyDirRecursive(ss, dd);
@@ -351,16 +394,32 @@ export function restoreFromMirrorIfEmpty(userDataDir: string, mirrorDir: string)
 }
 
 /**
- * userData → 미러 동기화. saveConfig 직후 또는 startup 후 1회 호출
- * ✅ [v2.9.2] 전수 미러 — 모든 사용자 데이터 파일/폴더 + 네이버 쿠키 보호
+ * userData → 미러 동기화. saveConfig 직후 또는 startup 후 1회 호출.
+ * [v2.10.275] Session folders (playwright-session*, puppeteer-session*, etc.) are
+ * intentionally excluded — they are GB-scale and can be recreated by re-login.
+ * Excluding them eliminates the 17-second main-thread freeze on startup.
+ *
+ * Concurrency guard: if a mirror is in-flight or ran within MIRROR_TTL_MS,
+ * subsequent calls are no-ops (prevents N×writes from rapid config saves).
  */
 export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
+    // In-flight deduplication guard (synchronous lock — prevents concurrent writes).
+    const now = Date.now();
+    if (now - _lastMirrorAt < MIRROR_TTL_MS) {
+        console.log('[UserDataMirror] 1분 이내 재호출 → skip');
+        return;
+    }
+    if (_mirrorInFlight) {
+        return;
+    }
+    _mirrorInFlight = true;
+
     let stats = { files: 0, folders: 0, cookies: 0 };
     try {
         if (!fs.existsSync(userDataDir)) return;
         if (!fs.existsSync(mirrorDir)) fs.mkdirSync(mirrorDir, { recursive: true });
 
-        // 1) 단일 파일 미러 (필수 + 추가)
+        // 1) Single-file mirror (critical + extra)
         for (const f of [...TARGET_FILES, ...TARGET_FILES_EXTRA]) {
             const src = path.join(userDataDir, f);
             const dst = path.join(mirrorDir, f);
@@ -369,7 +428,7 @@ export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
             }
         }
 
-        // 2) 계정별 settings_*.json 글로브
+        // 2) Per-account settings_*.json glob
         try {
             for (const f of fs.readdirSync(userDataDir)) {
                 if (!f.startsWith('settings_') || !f.endsWith('.json')) continue;
@@ -377,7 +436,7 @@ export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
             }
         } catch { /* ignore */ }
 
-        // 3) 사용자 데이터 폴더 미러 (Local Storage, WebStorage, Session Storage, license)
+        // 3) User data folder mirror (Local Storage, WebStorage, Session Storage, license)
         for (const folder of TARGET_FOLDERS) {
             try {
                 const src = path.join(userDataDir, folder);
@@ -392,7 +451,7 @@ export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
             }
         }
 
-        // 4) Network/Cookies 파일만 별도 미러 (네이버 로그인 쿠키 보호)
+        // 4) Network/Cookies only (Naver login cookie protection)
         try {
             const networkSrc = path.join(userDataDir, 'Network');
             const networkDst = path.join(mirrorDir, 'Network');
@@ -410,29 +469,15 @@ export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
             console.warn(`[UserDataMirror] ⚠️ Network/Cookies 미러 실패 (무시): ${netErr?.message}`);
         }
 
-        // 5) ✅ [v2.9.3] 자동화 세션 폴더 미러 — 네이버 로그인 + 캡차 통과 결과 보존
-        let sessionFolders = 0;
-        try {
-            for (const item of fs.readdirSync(userDataDir)) {
-                const matches = SESSION_FOLDER_PREFIXES.some(prefix => item === prefix || item.startsWith(prefix + '-'));
-                if (!matches) continue;
-                try {
-                    const src = path.join(userDataDir, item);
-                    const dst = path.join(mirrorDir, item);
-                    if (fs.existsSync(src) && fs.statSync(src).isDirectory()) {
-                        if (!fs.existsSync(dst)) fs.mkdirSync(dst, { recursive: true });
-                        copyDirRecursive(src, dst);
-                        sessionFolders++;
-                    }
-                } catch (sessionErr: any) {
-                    console.warn(`[UserDataMirror] ⚠️ ${item} 세션 미러 실패: ${sessionErr?.message}`);
-                }
-            }
-        } catch { /* ignore */ }
-
-        console.log(`[UserDataMirror] ✅ 미러 완료 — 파일 ${stats.files}, 폴더 ${stats.folders}, 쿠키 ${stats.cookies}, 세션 ${sessionFolders}`);
+        // [v2.10.275] Section 5 (session folder mirror) intentionally removed.
+        // playwright-session*, puppeteer-session*, imagefx-chrome-profile are excluded
+        // to prevent the 17-second I/O freeze. Sessions can be restored by re-login.
+        console.log(`[UserDataMirror] ✅ 미러 완료 — 파일 ${stats.files}, 폴더 ${stats.folders}, 쿠키 ${stats.cookies} (세션 폴더 제외)`);
+        _lastMirrorAt = Date.now();
     } catch (e: any) {
         console.warn(`[UserDataMirror] ⚠️ 미러 동기화 실패 (무시): ${e?.message}`);
+    } finally {
+        _mirrorInFlight = false;
     }
 }
 
