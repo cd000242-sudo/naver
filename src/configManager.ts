@@ -206,6 +206,34 @@ let configPath: string | null = null;
 let _activeUserId: string = '';
 const _userConfigPaths: Map<string, string> = new Map();
 
+// ✅ [v2.10.273] saveConfig serialization mutex — prevents EBUSY lock collisions
+let _saveConfigQueue: Promise<void> = Promise.resolve();
+function _enqueueSaveConfig<T>(fn: () => Promise<T>): Promise<T> {
+  const next = _saveConfigQueue.then(fn, fn);
+  _saveConfigQueue = next.then(() => undefined, () => undefined);
+  return next;
+}
+
+// ✅ [v2.10.273] EBUSY/EPERM retry helper — 3 attempts with 100/300/700ms backoff
+async function _retryOnEBUSY<T>(op: () => Promise<T>, label: string): Promise<T> {
+  const delays = [100, 300, 700];
+  let lastErr: any;
+  for (let i = 0; i <= delays.length; i++) {
+    try {
+      return await op();
+    } catch (e: any) {
+      lastErr = e;
+      if (e.code === 'ENOENT') throw e;
+      if (e.code !== 'EBUSY' && e.code !== 'EPERM') throw e;
+      if (i < delays.length) {
+        await new Promise(r => setTimeout(r, delays[i]));
+        console.warn(`[Config] ${label} EBUSY retry ${i + 1}/${delays.length}`);
+      }
+    }
+  }
+  throw lastErr;
+}
+
 /** ✅ [2026-03-27] 마지막 활성 사용자 ID 저장/로드 */
 async function saveLastActiveUserId(userId: string): Promise<void> {
   try {
@@ -566,25 +594,36 @@ export function getConfigSync(): AppConfig {
 }
 
 export async function saveConfig(update: AppConfig): Promise<AppConfig> {
-  // ✅ [2026-02-26] __userId가 전달되면 계정별 설정 모드 활성화
-  const updateAny = update as any;
-  if (updateAny.__userId && typeof updateAny.__userId === 'string') {
-    _activeUserId = updateAny.__userId;
-    delete updateAny.__userId;
-    // ✅ [2026-03-27] configPath 초기화 — 이전 세션의 기본/다른 계정 경로를 리셋
+  // ✅ [v2.10.273] Apply __userId switch SYNCHRONOUSLY before enqueuing so that
+  //   concurrent loadConfig() calls in Promise.all see the new _activeUserId immediately.
+  // ✅ [v2.10.277] Destructure to avoid mutating the caller's object (immutability fix).
+  const { __userId, ...restUpdate } = update as any;
+  if (__userId && typeof __userId === 'string') {
+    _activeUserId = __userId;
     configPath = null;
-    // 캐시 초기화하여 계정별 파일에서 새로 로드하도록
     cachedConfig = null;
     console.log(`[Config] ✅ 계정별 설정 모드 활성화: ${_activeUserId}`);
-    // ✅ [2026-03-27] 마지막 활성 사용자 ID 저장 (앱 재시작 시 자동 로드용)
+  }
+  return _enqueueSaveConfig(() => _saveConfigImpl(restUpdate as AppConfig));
+}
+
+async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
+  // ✅ [v2.10.277] Destructure to avoid mutating the caller's object.
+  // __userId should already be stripped by saveConfig(), but handle here as a safety net.
+  const { __userId, ...restUpdate } = update as any;
+  if (__userId && typeof __userId === 'string') {
+    // Safety net: __userId normally processed synchronously in saveConfig()
+    _activeUserId = __userId;
+    configPath = null;
+    cachedConfig = null;
+    console.log(`[Config] ✅ 계정별 설정 모드 활성화: ${_activeUserId}`);
     await saveLastActiveUserId(_activeUserId);
-    // 계정별 설정 로드
     const loaded = await loadConfig();
-    cachedConfig = { ...loaded, ...updateAny };
+    cachedConfig = { ...loaded, ...restUpdate };
   } else {
     cachedConfig = {
       ...cachedConfig,
-      ...update,
+      ...restUpdate,
     };
   }
 
@@ -626,15 +665,43 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
     };
   }
 
-  // ✅ [v2.10.10] saveConfig 방어 로직 동기 sync 사용으로 IPC 타임아웃 방지
-  //   v2.10.9 방어가 await fs.readFile로 비동기 I/O 추가 → IPC 응답 지연으로 타임아웃 발생
-  //   조치: fsSync.readFileSync로 즉시 read (수 KB 파일이라 sync도 빠름).
-  //   메모리 cachedConfig가 비어있는데 디스크엔 키가 있으면 디스크 값 보존.
+  // ✅ [v2.10.273] PRESERVE_KEYS defense — async readFile + EBUSY retry (no sync blocking)
+  //   Previous v2.10.10 used readFileSync to avoid IPC timeout, but that causes 19s main-thread
+  //   stalls on slow/locked files. Mutex serialization (above) eliminates the IPC race that
+  //   originally forced the sync path. Now safe to use async I/O with retry backoff.
   try {
-    const fsSync = await import('fs');
-    if (fsSync.existsSync(filePath)) {
-      const diskRaw = fsSync.readFileSync(filePath, 'utf-8');
-      const diskConfig = JSON.parse(diskRaw);
+    let diskConfig: Record<string, any> | null = null;
+    try {
+      const diskRaw = await _retryOnEBUSY(
+        () => fs.readFile(filePath, 'utf-8'),
+        'PRESERVE_KEYS readFile',
+      );
+      diskConfig = JSON.parse(diskRaw);
+    } catch (e: any) {
+      if (e.code === 'ENOENT') {
+        // Primary path does not exist yet — try master settings.json as fallback
+        const masterPath = path.join(app.getPath('userData'), CONFIG_FILE);
+        if (filePath !== masterPath) {
+          try {
+            const masterRaw = await _retryOnEBUSY(
+              () => fs.readFile(masterPath, 'utf-8'),
+              'PRESERVE_KEYS readFile (master fallback)',
+            );
+            diskConfig = JSON.parse(masterRaw);
+          } catch (masterErr: any) {
+            if (masterErr.code === 'EBUSY' || masterErr.code === 'EPERM') throw masterErr;
+            // Master also missing or parse error — skip PRESERVE_KEYS
+          }
+        }
+      } else if (e.code === 'EBUSY' || e.code === 'EPERM') {
+        // All retries exhausted — re-throw so caller knows data may be lost
+        throw e;
+      } else {
+        // JSON parse error or other I/O error — log and skip PRESERVE_KEYS
+        console.warn('[Config] PRESERVE_KEYS read failed, skipping:', e?.message);
+      }
+    }
+    if (diskConfig !== null) {
       // ✅ [v2.10.53] customImageSavePath + 기타 사용자 환경설정 보존 필드 추가
       //   사용자 보고: '환경설정에 있는 이미지 저장 경로에 저장되는게 아니냐고 원래 그 경로로 저장됐었자나'
       //   원인: 다른 IPC가 saveConfig({...partial}) 호출 시 customImageSavePath 누락 → 디스크 빈 값 덮어씀
@@ -669,8 +736,15 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
       for (const k of PRESERVE_KEYS) {
         const dv = diskConfig[k];
         const cv = (cachedConfig as any)[k];
-        const dHas = typeof dv === 'string' && dv.trim().length > 0;
-        const cHas = typeof cv === 'string' && cv.trim().length > 0;
+        // ✅ [v2.10.277] boolean fields (e.g. costSaverMode: false) are also valid — handle alongside strings
+        const dHas =
+          (typeof dv === 'string' && dv.trim().length > 0) ||
+          typeof dv === 'boolean' ||
+          (typeof dv !== 'string' && dv !== undefined && dv !== null);
+        const cHas =
+          (typeof cv === 'string' && cv.trim().length > 0) ||
+          typeof cv === 'boolean' ||
+          (typeof cv !== 'string' && cv !== undefined && cv !== null);
         if (dHas && !cHas) {
           (cachedConfig as any)[k] = dv;
           preserved++;
@@ -681,7 +755,12 @@ export async function saveConfig(update: AppConfig): Promise<AppConfig> {
       }
     }
   } catch (defendErr: any) {
-    // 방어 실패해도 저장 진행 (loadConfig 메모리 머지가 1차 안전망)
+    if (defendErr.code === 'EBUSY' || defendErr.code === 'EPERM') {
+      // Retry exhaustion on a locked file — propagate to signal data-loss risk
+      throw defendErr;
+    }
+    // Other defense errors: skip PRESERVE_KEYS but continue saving
+    // (in-memory cachedConfig is the primary safety net)
     console.warn('[Config] saveConfig 방어 스킵:', defendErr?.message);
   }
 

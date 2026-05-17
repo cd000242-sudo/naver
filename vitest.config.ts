@@ -19,6 +19,7 @@ export default defineConfig({
     },
   },
   resolve: {
+    extensions: ['.ts', '.tsx', '.mts', '.js', '.jsx', '.json'],
     alias: {
       electron: './src/__tests__/mocks/electron.ts',
     },
