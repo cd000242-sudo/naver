@@ -10,6 +10,8 @@
 import { ipcMain } from 'electron';
 import * as path from 'path';
 import * as fsp from 'fs/promises';
+// [SPEC-FREEZE-GUARD-001-P2 R5 / v2.10.264] Base64 디코딩 워커 분리 — 수동 다운로드 data URL 분기
+import { decodeBase64Async } from '../utils/base64Async.js';
 import { loadConfig } from '../../configManager.js';
 import { isFreeTierUser } from '../utils/authUtils.js';
 import { consume as consumeQuota } from '../../quotaManager.js';
@@ -37,7 +39,8 @@ export function registerImageDownloadHandlers(): void {
                 }
                 const mime = m[1].toLowerCase();
                 const base64 = m[2];
-                buffer = Buffer.from(base64, 'base64');
+                // [SPEC-FREEZE-GUARD-001-P2 R5] 워커 디코딩 (수동 다운로드 data URL 분기)
+                buffer = await decodeBase64Async(base64);
 
                 if (mime.includes('png')) ext = '.png';
                 else if (mime.includes('jpeg')) ext = '.jpeg';

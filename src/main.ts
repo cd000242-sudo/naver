@@ -99,6 +99,8 @@ import { InternalLinkManager, type InternalLink } from './content/internalLinkMa
 import { checkGoldenZone } from './publishingStrategy.js';
 // [v2.10.252] 이미지 URL 필터링 헬퍼 — main.ts에서 분리
 import { filterDuplicateAndLowQualityImages } from './main/utils/imageFilters.js';
+// [SPEC-FREEZE-GUARD-001-P2 R5 / v2.10.264] Base64 디코딩 워커 분리 — 사용자 저장 다이얼로그 data URL
+import { decodeBase64Async } from './main/utils/base64Async.js';
 import { ThumbnailGenerator } from './content/thumbnailGenerator.js';
 import { canConsume as canConsumeQuota, consume as consumeQuota, refund as refundQuota, getStatus as getQuotaStatus, resetAll as resetAllQuota, type QuotaLimits, type QuotaType } from './quotaManager.js';
 import { BlogAccountManager } from './account/blogAccountManager.js';
@@ -6236,7 +6238,8 @@ ipcMain.handle('library:saveImageToLocal', async (_event, sourceFilePath: string
     } else if (sourceFilePath.startsWith('data:')) {
       // Base64인 경우
       const base64Data = sourceFilePath.split(',')[1];
-      imageBuffer = Buffer.from(base64Data, 'base64');
+      // [SPEC-FREEZE-GUARD-001-P2 R5] 워커 디코딩 (사용자 저장 다이얼로그 data URL — 사용자 액션 트리거)
+      imageBuffer = await decodeBase64Async(base64Data);
     } else {
       // 로컬 파일인 경우
       imageBuffer = await fs.readFile(sourceFilePath);

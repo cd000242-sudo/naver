@@ -7,6 +7,8 @@
 import path from 'path';
 import { app } from 'electron';
 import fs from 'fs/promises';
+// [SPEC-FREEZE-GUARD-001-P2 R5 / v2.10.264] Base64 디코딩 워커 분리 — 외부 입력 data URL
+import { decodeBase64Async } from '../utils/base64Async.js';
 
 // ✅ [Phase 4B] 순환 의존성 방지를 위한 인터페이스 import
 import type { IExecutionDependencies, IAutomationInstance } from '../../types/automation.js';
@@ -290,7 +292,9 @@ export async function processImages(
                 const destPath = path.join(postsImageDir, filename);
 
                 try {
-                    await fs.writeFile(destPath, Buffer.from(base64Data, 'base64'));
+                    // [SPEC-FREEZE-GUARD-001-P2 R5] 워커 디코딩 (외부 입력 data URL)
+                    const buf = await decodeBase64Async(base64Data);
+                    await fs.writeFile(destPath, buf);
 
                     processedImages.push({
                         heading: image.heading,

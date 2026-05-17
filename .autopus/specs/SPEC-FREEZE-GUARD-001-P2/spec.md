@@ -1,7 +1,8 @@
 # SPEC-FREEZE-GUARD-001-P2: Base64 디코딩 worker_threads 분리
 
-**Status**: draft
+**Status**: completed-pending-baseline (코드 작업 5라운드 종료, freeze-detection.spec.ts 실측 baseline 갱신 잔여)
 **Created**: 2026-05-17
+**Code-completed**: 2026-05-17 (v2.10.260 ~ v2.10.264)
 **Domain**: FREEZE-GUARD
 **Owner**: 박성현 (cd000242@gmail.com)
 **Parent**: SPEC-FREEZE-GUARD-001 (Phase A1 — freeze-detection.spec.ts 인프라 완료, v2.10.240)

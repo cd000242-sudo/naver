@@ -7,6 +7,8 @@
 import { safeKeyboardType } from './typingUtils.js';
 import * as fsPromises from 'fs/promises';
 import * as path from 'path';
+// [SPEC-FREEZE-GUARD-001-P2 R5 / v2.10.264] Base64 디코딩 워커 분리 — data URL 본문
+import { decodeBase64Async } from '../main/utils/base64Async.js';
 import {
   SELECTORS,
   findElement,
@@ -696,7 +698,8 @@ export async function insertBase64ImageAtCursor(self: any, filePath: string): Pr
 
       const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1];
       const base64Data = matches[2];
-      const buffer = Buffer.from(base64Data, 'base64');
+      // [SPEC-FREEZE-GUARD-001-P2 R5] 워커 디코딩 (data URL 본문 — 발행 중 1회/이미지)
+      const buffer = await decodeBase64Async(base64Data);
 
       const tempDir = os.tmpdir();
       const tempFileName = `naver-blog-img-${Date.now()}.${ext}`;
