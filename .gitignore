@@ -52,3 +52,7 @@ test-results/
 # Flow/ImageFX 로컬 디버그 산출물
 flow-*.png
 flow-test-output/
+
+# Apps Script clasp clone working directory (license-backend)
+# Contains pulled GAS source; may include emails/secrets — keep local-only.
+payment-page/.gas-license-backend/
