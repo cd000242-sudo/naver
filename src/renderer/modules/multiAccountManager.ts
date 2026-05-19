@@ -35,6 +35,7 @@ declare function refreshGeneratedPostsList(): void;
 declare function readUnifiedCtasFromUi(): any[];
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
+import { getSubImageMode, setSubImageMode } from '../utils/subImageMode';
 // ✅ 다계정 관리 기능 초기화 함수
 export async function initMultiAccountManager() {
   console.log('[MultiAccount] 다계정 관리 기능 초기화 시작');
@@ -2110,7 +2111,8 @@ export async function initMultiAccountPublishModal() {
   document.querySelectorAll('input[name="ma-shopping-subimage-source"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
       const value = (e.target as HTMLInputElement).value;
-      localStorage.setItem('scSubImageSource', value);
+      // ✅ [2026-05-18] mode 분리: 'collected'만 collected, 그 외 엔진명은 mode='ai'
+      setSubImageMode(value === 'collected' ? 'collected' : 'ai');
       if (value === 'nano-banana-pro' || value === 'openai-image') {
         localStorage.setItem('scAIImageEngine', value);
         localStorage.setItem('fullAutoImageSource', value);
@@ -3369,17 +3371,18 @@ export async function initMultiAccountPublishModal() {
 
             // ✅ [2026-02-16 FIX] 쇼핑커넥트 이미지-소제목 매칭 + 썸네일 오버레이
             // executeUnifiedAutomation에 있지만 다중계정 흐름에서 누락되었던 후처리 로직
-            const scSubImageSourcePre = localStorage.getItem('scSubImageSource') || 'collected';
+            // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화
+            const scSubImageModePre = getSubImageMode();
             if (generatedImages.length > 0 && queueItem.contentMode === 'affiliate') {
               // A. 이미지-소제목 매칭
-              const shouldMatchCollected = scSubImageSourcePre === 'collected';
+              const shouldMatchCollected = scSubImageModePre === 'collected';
               if (shouldMatchCollected && (structuredContent.headings || []).length > 0) {
                 try {
                   addMALog('🤖 수집 이미지를 소제목에 매칭 중...', 'info');
                   const matchResult = await (window as any).api.matchImages({
                     headings: structuredContent.headings || [],
                     collectedImages: generatedImages.map((img: any) => img.url || img.filePath),
-                    scSubImageSource: scSubImageSourcePre
+                    scSubImageSource: scSubImageModePre
                   });
                   if (matchResult?.success && matchResult.assignments) {
                     matchResult.assignments.forEach((assignment: any) => {
@@ -3845,7 +3848,7 @@ export async function initMultiAccountPublishModal() {
             skipImages: (queueItem.imageSource === 'skip') || false, // ✅ [v1.4.66] 백엔드에 skipImages 명시적 전달
             useAiImage: queueItem.useAiImage ?? true, // ✅ [2026-01-20] AI 이미지 생성 사용 여부
             createProductThumbnail: queueItem.createProductThumbnail ?? false, // ✅ [2026-01-20] 제품 썸네일 합성
-            scSubImageSource: localStorage.getItem('scSubImageSource') || 'collected', // ✅ [2026-02-16 FIX] 수집이미지 직접 사용 설정 전달
+            scSubImageSource: getSubImageMode(), // ✅ [2026-05-18] 정규화된 mode만 전송 ('ai'|'collected')
             collectedImages: structuredContent?.collectedImages || [],          // ✅ [2026-02-16 FIX] 수집 이미지 직접 전달
             // ✅ [2026-02-02 FIX] 이전글 엮기 필드 추가 (기존 누락으로 인한 버그 수정)
             previousPostUrl: (queueItem as any)?.previousPostUrl || undefined,
@@ -4447,6 +4450,21 @@ if (typeof document !== 'undefined') {
 document.addEventListener('DOMContentLoaded', () => {
   initMultiAccountPublishModal();
   initMainAccountSelector();
+
+  // ✅ [v2.10.286 HTML 구조 fix] ma-account-edit-modal이 ma-fullauto-setting-modal 안에
+  //   잘못 nested된 HTML 구조를 JS로 교정. v2.10.201~214 14번 fix가 실패한 진짜 원인.
+  //   증상: 편집/계정추가 버튼 클릭해도 모달 안 뜸. 풀오토 세팅 클릭하면 둘 다 같이 뜸
+  //         (부모 ma-fullauto-setting-modal이 display:none이라 자식 ma-account-edit-modal도 숨김)
+  //   조치: DOMContentLoaded 시점에 ma-account-edit-modal을 document.body 직속으로 이동
+  try {
+    const accountEditModal = document.getElementById('ma-account-edit-modal');
+    if (accountEditModal && accountEditModal.parentElement !== document.body) {
+      document.body.appendChild(accountEditModal);
+      console.log('[MultiAccount] ✅ ma-account-edit-modal을 body 직속으로 이동 (nested HTML 구조 교정)');
+    }
+  } catch (err) {
+    console.warn('[MultiAccount] ma-account-edit-modal 이동 실패 (무시):', err);
+  }
 
   // ✅ [v2.10.204] 글로벌 이벤트 위임 + *직접 element 조회* (클로저 race condition 차단)
   //   v2.10.202: window.openAccountEditModal 호출 — 클로저로 잡힌 accountEditModal null이면 silent fail
