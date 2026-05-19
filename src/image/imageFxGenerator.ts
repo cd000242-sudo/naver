@@ -1250,7 +1250,44 @@ async function connectViaPlaywright(): Promise<Page> {
  */
 // ✅ [v1.4.80] Flow 엔진이 같은 labs.google 세션을 공유할 수 있도록 export
 export async function ensureImageFxBrowserPage(): Promise<Page> {
-    return ensureBrowserPage();
+    return ensureBrowserPageWithRetry();
+}
+
+/**
+ * ✅ (G) 자동 재시도 wrapper — 1차 실패 시 5s, 2차 실패 시 10s 대기 후 재시도 (총 3회).
+ * Fatal 에러 (자가 해결 가이드가 붙은 메시지 / 로그인 시간 초과 등)는 즉시 throw.
+ * 일시적 네트워크 hiccup, Google labs 트래커 지연, AdsPower 일시 끊김 등이 대상.
+ */
+async function ensureBrowserPageWithRetry(): Promise<Page> {
+  const delays = [0, 5000, 10000];
+  let lastError: any = null;
+  for (let attempt = 0; attempt < delays.length; attempt++) {
+    if (attempt > 0) {
+      sendImageLog(`🔄 [ImageFX] 일시적 오류 발생. ${delays[attempt] / 1000}초 후 재시도 (${attempt + 1}/3)...`);
+      await new Promise((resolve) => setTimeout(resolve, delays[attempt]));
+      // 캐시 완전 정리 후 재시도
+      cachedPage = null;
+      await setCachedBrowser(null);
+      cachedToken = null;
+      browserMode = null;
+    }
+    try {
+      return await ensureBrowserPage();
+    } catch (err: any) {
+      lastError = err;
+      const msg = (err && err.message) || '';
+      // ⚠️ Fatal — 재시도 의미 없는 에러는 즉시 throw
+      if (
+        msg.includes('Chrome 또는 Edge를 설치') ||
+        msg.includes('해결 방법:') ||
+        msg.includes('Google 로그인 시간 초과')
+      ) {
+        throw err;
+      }
+      console.log(`[ImageFX] ↻ Attempt ${attempt + 1}/3 실패: ${msg.substring(0, 100)}`);
+    }
+  }
+  throw lastError;
 }
 
 async function ensureBrowserPage(): Promise<Page> {
