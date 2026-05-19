@@ -5,6 +5,35 @@
  * - 상수 통합, 에러 핸들링 강화, 메모리 관리 개선
  */
 
+// ✅ [v2.10.288] subImageMode import 제거 — esbuild 회귀(XXX_1 is not defined) 차단.
+//   side-effect import는 renderer.ts:57에 있어 window.getSubImageMode 자동 등록됨.
+export type SubImageMode = 'ai' | 'collected';
+function getSubImageMode(): SubImageMode {
+  try {
+    const w = (typeof window !== 'undefined' ? (window as any) : null);
+    if (w && typeof w.getSubImageMode === 'function') {
+      const v = w.getSubImageMode();
+      if (v === 'ai' || v === 'collected') return v;
+    }
+    const explicit = localStorage.getItem('scSubImageMode');
+    if (explicit === 'ai' || explicit === 'collected') return explicit;
+    const legacy = localStorage.getItem('scSubImageSource');
+    if (legacy === 'ai' || legacy === 'collected') return legacy;
+  } catch { /* ignore */ }
+  return 'collected';
+}
+function setSubImageMode(mode: SubImageMode): void {
+  try {
+    const w = (typeof window !== 'undefined' ? (window as any) : null);
+    if (w && typeof w.setSubImageMode === 'function') {
+      w.setSubImageMode(mode);
+      return;
+    }
+    localStorage.setItem('scSubImageMode', mode);
+    localStorage.setItem('scSubImageSource', mode);
+  } catch { /* ignore */ }
+}
+
 export type HeadingImageMode = 'all' | 'thumbnail-only' | 'odd-only' | 'even-only' | 'none';
 // ✅ [2026-02-08 FIX] 이미지 관리 탭 드롭다운 value와 완전 통일
 // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow (Nano Banana Pro 무료 쿼터)
@@ -1339,8 +1368,10 @@ export function createHeadingImageModal(): void {
     const scSubImageSourceRadio = document.querySelector('input[name="sc-sub-image-source"]:checked') as HTMLInputElement;
     const scAutoThumbnailCheck = document.getElementById('sc-auto-thumbnail-setting') as HTMLInputElement;
     if (scSubImageSourceRadio) {
-      localStorage.setItem('scSubImageSource', scSubImageSourceRadio.value);
-      console.log(`[HeadingImageSettings] 쇼핑커넥트 소제목 이미지 소스: ${scSubImageSourceRadio.value}`);
+      // ✅ [2026-05-18] 라디오 value('ai'|'collected')는 mode 그대로. 헬퍼가 레거시 키도 sync.
+      const mode = (scSubImageSourceRadio.value === 'ai' ? 'ai' : 'collected') as SubImageMode;
+      setSubImageMode(mode);
+      console.log(`[HeadingImageSettings] 쇼핑커넥트 소제목 이미지 소스: ${mode}`);
     }
     if (scAutoThumbnailCheck) {
       localStorage.setItem('scAutoThumbnailSetting', String(scAutoThumbnailCheck.checked));
@@ -2522,8 +2553,9 @@ export function openHeadingImageModal(): void {
 
       // ✅ [2026-01-28] 쇼핑커넥트 전용 필드들 로드
       if (isShoppingConnect) {
-        const scSubImageSource = localStorage.getItem('scSubImageSource') || 'collected';
-        const scSubImageRadio = document.querySelector(`input[name="sc-sub-image-source"][value="${scSubImageSource}"]`) as HTMLInputElement;
+        // ✅ [2026-05-18] getSubImageMode가 엔진명도 'ai'로 정규화 → 라디오 매치 실패 방지
+        const scSubImageMode = getSubImageMode();
+        const scSubImageRadio = document.querySelector(`input[name="sc-sub-image-source"][value="${scSubImageMode}"]`) as HTMLInputElement;
         if (scSubImageRadio) scSubImageRadio.checked = true;
 
         const scAutoThumbnailCheck = document.getElementById('sc-auto-thumbnail-setting') as HTMLInputElement;

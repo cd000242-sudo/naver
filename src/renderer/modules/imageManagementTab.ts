@@ -6,6 +6,19 @@
  */
 
 import { toastManager } from '../utils/uiManagers.js';
+// ✅ [v2.10.288] subImageMode import 제거 — esbuild 회귀 차단. window 통해 호출.
+type SubImageMode = 'ai' | 'collected';
+function setSubImageMode(mode: SubImageMode): void {
+  try {
+    const w = (typeof window !== 'undefined' ? (window as any) : null);
+    if (w && typeof w.setSubImageMode === 'function') {
+      w.setSubImageMode(mode);
+      return;
+    }
+    localStorage.setItem('scSubImageMode', mode);
+    localStorage.setItem('scSubImageSource', mode);
+  } catch { /* ignore */ }
+}
 
 // renderer.ts 전역 함수/변수 참조 (런타임에 존재)
 declare function showLocalImageManagementModal(): Promise<void>;
@@ -405,7 +418,8 @@ export async function initImageManagementTab(): Promise<void> {
         // [v1.6.3] 쇼핑 커넥트 AI 엔진(nano-banana-pro|openai-image)이면 scAIImageEngine + 라디오도 sync
         if (selectedSource === 'nano-banana-pro' || selectedSource === 'openai-image') {
           localStorage.setItem('scAIImageEngine', selectedSource);
-          localStorage.setItem('scSubImageSource', selectedSource);
+          // ✅ [2026-05-18] 엔진 이름을 scSubImageSource에 쓰지 않는다. mode='ai'만 저장.
+          setSubImageMode('ai');
           // 연속발행 모달 라디오 반영
           const contRadio = document.querySelector(`input[name="continuous-modal-shopping-subimage-source"][value="${selectedSource}"]`) as HTMLInputElement | null;
           if (contRadio && !contRadio.checked) contRadio.checked = true;

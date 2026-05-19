@@ -35,7 +35,36 @@ declare function refreshGeneratedPostsList(): void;
 declare function readUnifiedCtasFromUi(): any[];
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
-import { getSubImageMode, setSubImageMode } from '../utils/subImageMode';
+// ✅ [v2.10.288] subImageMode import 제거 — esbuild 번들이 alias만 만들고 정의 누락하는 회귀 차단.
+//   대신 window에 자체 등록된 함수를 호출 (subImageMode.ts line 93-97에서 자동 등록됨).
+//   side-effect import는 renderer.ts:57에서 이미 발생 → window.getSubImageMode 존재 보장.
+type SubImageMode = 'ai' | 'collected';
+function getSubImageMode(): SubImageMode {
+  try {
+    const w = (typeof window !== 'undefined' ? (window as any) : null);
+    if (w && typeof w.getSubImageMode === 'function') {
+      const v = w.getSubImageMode();
+      if (v === 'ai' || v === 'collected') return v;
+    }
+    // Fallback: 직접 localStorage 접근
+    const explicit = localStorage.getItem('scSubImageMode');
+    if (explicit === 'ai' || explicit === 'collected') return explicit;
+    const legacy = localStorage.getItem('scSubImageSource');
+    if (legacy === 'ai' || legacy === 'collected') return legacy;
+  } catch { /* ignore */ }
+  return 'collected';
+}
+function setSubImageMode(mode: SubImageMode): void {
+  try {
+    const w = (typeof window !== 'undefined' ? (window as any) : null);
+    if (w && typeof w.setSubImageMode === 'function') {
+      w.setSubImageMode(mode);
+      return;
+    }
+    localStorage.setItem('scSubImageMode', mode);
+    localStorage.setItem('scSubImageSource', mode);
+  } catch { /* ignore */ }
+}
 // ✅ 다계정 관리 기능 초기화 함수
 export async function initMultiAccountManager() {
   console.log('[MultiAccount] 다계정 관리 기능 초기화 시작');

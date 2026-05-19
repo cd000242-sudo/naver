@@ -5,6 +5,34 @@
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
 import type { ContinuousQueueItem } from '../types/index';
+// ✅ [v2.10.288] subImageMode import 제거 — line 10-12에 명시된 패턴 적용.
+//   렌더러 빌드 스크립트가 require()를 정규식 삭제 → subImageMode_1 is not defined 회귀 차단.
+type SubImageMode = 'ai' | 'collected';
+function getSubImageMode(): SubImageMode {
+  try {
+    const w = (typeof window !== 'undefined' ? (window as any) : null);
+    if (w && typeof w.getSubImageMode === 'function') {
+      const v = w.getSubImageMode();
+      if (v === 'ai' || v === 'collected') return v;
+    }
+    const explicit = localStorage.getItem('scSubImageMode');
+    if (explicit === 'ai' || explicit === 'collected') return explicit;
+    const legacy = localStorage.getItem('scSubImageSource');
+    if (legacy === 'ai' || legacy === 'collected') return legacy;
+  } catch { /* ignore */ }
+  return 'collected';
+}
+function setSubImageMode(mode: SubImageMode): void {
+  try {
+    const w = (typeof window !== 'undefined' ? (window as any) : null);
+    if (w && typeof w.setSubImageMode === 'function') {
+      w.setSubImageMode(mode);
+      return;
+    }
+    localStorage.setItem('scSubImageMode', mode);
+    localStorage.setItem('scSubImageSource', mode);
+  } catch { /* ignore */ }
+}
 
 // v2.7.2: 메인 프로세스 모듈 import 제거 — 렌더러 빌드 스크립트가 require()를
 // 정규식 삭제하므로 import한 심볼이 undefined로 남는 ReferenceError 발생
@@ -1518,9 +1546,13 @@ export function initContinuousPublishingV2(): void {
           }
 
           // ✅ [2026-02-19] localStorage → 서브탭 UI 복원
-          const scSubSrc = localStorage.getItem('scSubImageSource') || 'collected';
+          // ✅ [2026-05-18] mode='ai'면 라디오의 엔진명(저장된 scAIImageEngine)에 매칭, 'collected'면 그대로
+          const scSubMode = getSubImageMode();
+          const restoredRadioValue = scSubMode === 'collected'
+            ? 'collected'
+            : (localStorage.getItem('scAIImageEngine') || 'nano-banana-pro');
           document.querySelectorAll('input[name="continuous-modal-shopping-subimage-source"]').forEach(r => {
-            (r as HTMLInputElement).checked = (r as HTMLInputElement).value === scSubSrc;
+            (r as HTMLInputElement).checked = (r as HTMLInputElement).value === restoredRadioValue;
           });
           const autoThumb = document.getElementById('continuous-modal-shopping-auto-thumbnail') as HTMLInputElement;
           if (autoThumb) autoThumb.checked = localStorage.getItem('scAutoThumbnailSetting') === 'true';
@@ -2163,7 +2195,8 @@ export function initContinuousPublishingV2(): void {
       const value = (e.target as HTMLInputElement).value;
       // ✅ [v2.10.71] 별칭 정규화 (nano-banana-2 → nano-banana-pro)
       const normalizedValue = value === 'nano-banana-2' ? 'nano-banana-pro' : value;
-      localStorage.setItem('scSubImageSource', normalizedValue);
+      // ✅ [2026-05-18] mode 분리: 'collected'만 collected, 그 외는 AI 엔진 선택으로 간주
+      setSubImageMode(normalizedValue === 'collected' ? 'collected' : 'ai');
       if (normalizedValue === 'nano-banana-pro' || normalizedValue === 'openai-image' || normalizedValue === 'dall-e-3') {
         // AI 엔진 선택 — 전역 AI 이미지 소스와 sync (반자동 드롭다운도 업데이트)
         localStorage.setItem('scAIImageEngine', normalizedValue);
@@ -4408,8 +4441,9 @@ async function startContinuousPublishingV2(): Promise<void> {
             clearImageGenerationLocks();
 
             // ✅ [2026-01-28] 이미지 설정 전역 적용 (localStorage에서 읽음)
-            const scSubImageSource = localStorage.getItem('scSubImageSource') || 'collected';
-            const isCollectedMode = item.contentMode === 'affiliate' && scSubImageSource === 'collected';
+            // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화 — 키 충돌 mismatch 해결
+            const scSubImageMode = getSubImageMode();
+            const isCollectedMode = item.contentMode === 'affiliate' && scSubImageMode === 'collected';
 
             // ✅ [2026-03-07 FIX] 쇼핑커넥트 수집 이미지 모드일 때 AI 이미지 생성 완전 스킵
             // executeFullAutoFlow의 isCollectedMode 로직(L332-440)이 수집 이미지를 직접 처리함
