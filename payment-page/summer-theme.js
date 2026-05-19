@@ -57,33 +57,118 @@
     document.body.appendChild(container);
   }
 
+  function buildPalmSvg() {
+    // Detailed palm tree — curved striped trunk + 8 fronds with individual leaflets + coconuts
+    var svg = [
+      '<svg class="summer-palm-svg" viewBox="0 0 240 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">',
+        '<defs>',
+          '<linearGradient id="palmTrunk" x1="0" y1="0" x2="1" y2="0">',
+            '<stop offset="0%" stop-color="#5e3a1a"/>',
+            '<stop offset="45%" stop-color="#9c6a3c"/>',
+            '<stop offset="55%" stop-color="#a87446"/>',
+            '<stop offset="100%" stop-color="#5e3a1a"/>',
+          '</linearGradient>',
+          '<linearGradient id="palmLeafA" x1="0" y1="0" x2="0.3" y2="1">',
+            '<stop offset="0%" stop-color="#76d275"/>',
+            '<stop offset="60%" stop-color="#388e3c"/>',
+            '<stop offset="100%" stop-color="#1b5e20"/>',
+          '</linearGradient>',
+          '<linearGradient id="palmLeafB" x1="0" y1="0" x2="0.3" y2="1">',
+            '<stop offset="0%" stop-color="#81c784"/>',
+            '<stop offset="60%" stop-color="#2e7d32"/>',
+            '<stop offset="100%" stop-color="#1b5e20"/>',
+          '</linearGradient>',
+          '<radialGradient id="palmCoconut" cx="0.35" cy="0.35">',
+            '<stop offset="0%" stop-color="#8d5524"/>',
+            '<stop offset="100%" stop-color="#3e2310"/>',
+          '</radialGradient>',
+        '</defs>',
+        // Curved striped trunk
+        '<path d="M112 400 Q100 320, 115 240 Q128 160, 116 80" stroke="url(#palmTrunk)" stroke-width="20" fill="none" stroke-linecap="round"/>',
+        // Horizontal stripes on trunk
+        '<g stroke="#3e2310" stroke-width="1.6" fill="none" opacity="0.55" stroke-linecap="round">',
+          '<path d="M101 360 Q113 357, 122 362"/>',
+          '<path d="M100 332 Q113 330, 122 334"/>',
+          '<path d="M101 304 Q116 302, 124 307"/>',
+          '<path d="M104 276 Q117 274, 125 278"/>',
+          '<path d="M108 248 Q120 246, 127 250"/>',
+          '<path d="M112 220 Q123 218, 129 222"/>',
+          '<path d="M116 192 Q126 190, 130 194"/>',
+          '<path d="M120 164 Q128 162, 131 166"/>',
+          '<path d="M122 136 Q128 134, 130 138"/>',
+          '<path d="M122 108 Q127 106, 128 110"/>',
+        '</g>',
+        // Coconut cluster (with shadow)
+        '<ellipse cx="115" cy="90" rx="20" ry="11" fill="#000" opacity="0.18"/>',
+        '<circle cx="103" cy="80" r="9" fill="url(#palmCoconut)"/>',
+        '<circle cx="120" cy="78" r="9" fill="url(#palmCoconut)"/>',
+        '<circle cx="111" cy="90" r="9" fill="url(#palmCoconut)"/>',
+        '<circle cx="125" cy="91" r="8" fill="url(#palmCoconut)"/>',
+        // Fronds — 8 directions, each with individual leaflets
+        // Frond 1: hard left
+        '<g>',
+          '<path d="M115 75 Q70 50, 10 30 Q40 55, 110 85 Z" fill="url(#palmLeafA)"/>',
+          '<path d="M40 38 L26 18 L48 42" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M58 46 L48 22 L66 50" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M76 56 L70 30 L82 60" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M94 65 L92 38 L100 70" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M115 75 L10 30" stroke="#1b5e20" stroke-width="1" opacity="0.7"/>',
+        '</g>',
+        // Frond 2: hard right
+        '<g>',
+          '<path d="M115 75 Q160 50, 220 30 Q190 55, 120 85 Z" fill="url(#palmLeafB)"/>',
+          '<path d="M190 38 L204 18 L182 42" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M172 46 L182 22 L164 50" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M154 56 L160 30 L148 60" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M136 65 L138 38 L130 70" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M115 75 L220 30" stroke="#1b5e20" stroke-width="1" opacity="0.7"/>',
+        '</g>',
+        // Frond 3: upper-left diagonal
+        '<g>',
+          '<path d="M115 75 Q78 30, 55 -5 Q92 30, 120 80 Z" fill="url(#palmLeafA)"/>',
+          '<path d="M82 25 L72 8 L92 30" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M96 42 L88 20 L106 48" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M115 75 L55 -5" stroke="#1b5e20" stroke-width="1" opacity="0.7"/>',
+        '</g>',
+        // Frond 4: upper-right diagonal
+        '<g>',
+          '<path d="M115 75 Q152 30, 175 -5 Q138 30, 110 80 Z" fill="url(#palmLeafB)"/>',
+          '<path d="M148 25 L158 8 L138 30" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M134 42 L142 20 L124 48" stroke="#1b5e20" stroke-width="1.4" fill="#2e7d32"/>',
+          '<path d="M115 75 L175 -5" stroke="#1b5e20" stroke-width="1" opacity="0.7"/>',
+        '</g>',
+        // Frond 5: upper-vertical-left
+        '<g>',
+          '<path d="M115 75 Q98 20, 100 -15 Q108 30, 118 80 Z" fill="url(#palmLeafB)"/>',
+          '<path d="M108 25 L100 5 L114 30" stroke="#1b5e20" stroke-width="1.2" fill="#2e7d32"/>',
+        '</g>',
+        // Frond 6: upper-vertical-right
+        '<g>',
+          '<path d="M115 75 Q132 20, 130 -15 Q122 30, 112 80 Z" fill="url(#palmLeafA)"/>',
+          '<path d="M122 25 L130 5 L116 30" stroke="#1b5e20" stroke-width="1.2" fill="#2e7d32"/>',
+        '</g>',
+        // Frond 7: lower-left
+        '<g>',
+          '<path d="M115 80 Q70 95, 30 130 Q85 100, 118 88 Z" fill="url(#palmLeafA)" opacity="0.88"/>',
+          '<path d="M55 110 L40 122 L60 115" stroke="#1b5e20" stroke-width="1.3" fill="#388e3c"/>',
+          '<path d="M75 100 L62 113 L80 102" stroke="#1b5e20" stroke-width="1.3" fill="#388e3c"/>',
+          '<path d="M115 80 L30 130" stroke="#1b5e20" stroke-width="1" opacity="0.6"/>',
+        '</g>',
+        // Frond 8: lower-right
+        '<g>',
+          '<path d="M115 80 Q160 95, 200 130 Q145 100, 112 88 Z" fill="url(#palmLeafB)" opacity="0.88"/>',
+          '<path d="M175 110 L190 122 L170 115" stroke="#1b5e20" stroke-width="1.3" fill="#388e3c"/>',
+          '<path d="M155 100 L168 113 L150 102" stroke="#1b5e20" stroke-width="1.3" fill="#388e3c"/>',
+          '<path d="M115 80 L200 130" stroke="#1b5e20" stroke-width="1" opacity="0.6"/>',
+        '</g>',
+      '</svg>',
+    ];
+    return svg.join('');
+  }
+
   function injectScenery() {
     if (document.querySelector('.summer-scenery')) return;
-    var palmSvg =
-      '<svg class="summer-palm-svg" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">' +
-        // Trunk (curved)
-        '<path d="M96 320 Q88 240, 100 165 Q108 100, 95 55" stroke="#7a4a2a" stroke-width="14" fill="none" stroke-linecap="round"/>' +
-        '<path d="M96 320 Q88 240, 100 165 Q108 100, 95 55" stroke="#5d3315" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.5"/>' +
-        // Coconuts
-        '<circle cx="88" cy="60" r="6" fill="#5d3a1a"/>' +
-        '<circle cx="102" cy="62" r="6" fill="#4a2d12"/>' +
-        '<circle cx="95" cy="68" r="6" fill="#5d3a1a"/>' +
-        // Palm fronds (6 leaves radiating)
-        '<path d="M95 55 Q35 25, 0 45 Q40 38, 95 65 Z" fill="#3cb371" opacity="0.92"/>' +
-        '<path d="M95 55 Q155 25, 195 45 Q160 38, 95 65 Z" fill="#2e8b57" opacity="0.92"/>' +
-        '<path d="M95 55 Q55 0, 60 -25 Q80 25, 95 65 Z" fill="#228b22" opacity="0.92"/>' +
-        '<path d="M95 55 Q135 0, 130 -25 Q110 25, 95 65 Z" fill="#3cb371" opacity="0.92"/>' +
-        '<path d="M95 55 Q30 65, 5 105 Q50 80, 95 65 Z" fill="#2e8b57" opacity="0.9"/>' +
-        '<path d="M95 55 Q160 65, 195 105 Q150 80, 95 65 Z" fill="#228b22" opacity="0.9"/>' +
-        // Leaf veins (lighter green details)
-        '<path d="M95 55 L40 35" stroke="#90ee90" stroke-width="1.5" opacity="0.6"/>' +
-        '<path d="M95 55 L155 35" stroke="#90ee90" stroke-width="1.5" opacity="0.6"/>' +
-        '<path d="M95 55 L65 0" stroke="#90ee90" stroke-width="1.5" opacity="0.6"/>' +
-        '<path d="M95 55 L130 0" stroke="#90ee90" stroke-width="1.5" opacity="0.6"/>' +
-        '<path d="M95 55 L30 95" stroke="#90ee90" stroke-width="1.5" opacity="0.6"/>' +
-        '<path d="M95 55 L160 95" stroke="#90ee90" stroke-width="1.5" opacity="0.6"/>' +
-      '</svg>';
-
+    var palmSvg = buildPalmSvg();
     var wrap = document.createElement('div');
     wrap.className = 'summer-scenery';
     wrap.setAttribute('aria-hidden', 'true');
