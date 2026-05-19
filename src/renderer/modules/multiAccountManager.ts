@@ -356,8 +356,16 @@ export async function generateImagesForAutomation(
   // ✅ [v1.4.45] thumbnailOnly / headingImageMode=none 체크 — 모든 호출자에 대해 일관 적용
   // 이 함수를 호출하는 경로가 4곳 이상(publishingHandlers, multiAccountManager 등)이고
   // 각 호출자마다 체크하면 누락이 발생하므로, 여기서 한 번에 처리
-  const _thumbnailOnly = typeof localStorage !== 'undefined' && localStorage.getItem('thumbnailOnly') === 'true';
+  // ✅ [v2.10.287 BUG-FIX] localStorage 두 키 통합 — thumbnailOnly 별도 키 + headingImageMode='thumbnail-only' 둘 다 체크
+  //   사용자 보고: 썸네일만 생성 설정인데 그 1장이 본문 소제목에 전부 배치됨
+  //   원인: 사용자가 headingImageMode='thumbnail-only' 설정 → 이 라인에선 thumbnailOnly 별도 키만 보고 false → items 필터링 안 됨
+  //         → 5개 생성 요청 → Flow가 1개만 성공 → 그 1장이 본문 폴백으로 모든 소제목에 들어감
+  //   조치: 두 키 OR 통합 — 어느 키든 켜져 있으면 썸네일만 생성
   const _headingImageMode = typeof localStorage !== 'undefined' ? (localStorage.getItem('headingImageMode') || 'all') : 'all';
+  const _thumbnailOnly = (
+    (typeof localStorage !== 'undefined' && localStorage.getItem('thumbnailOnly') === 'true') ||
+    _headingImageMode === 'thumbnail-only'
+  );
 
   if (_headingImageMode === 'none') {
     console.log('[generateImagesForAutomation] 🚫 headingImageMode=none → 이미지 생성 전체 스킵');
