@@ -8,6 +8,12 @@
 .petal-container, .petal,
 .music-toggle, .music-hint { display: none !important; }
 
+/* ── v2 background: real beach photo (replaces SVG scenery) ─ */
+.summer-scenery,
+.summer-palm,
+.summer-sun,
+.summer-waves { display: none !important; }
+
 /* ── Override the dark mode root variables ───────────────── */
 :root {
   --bg-deep:       #fff5dc !important;
@@ -21,31 +27,26 @@
   --border:        rgba(20, 48, 77, 0.10) !important;
 }
 
-/* ── Body: Haeundae sky → sand gradient ──────────────────── */
+/* ── Body: real beach photo background (cinematic) ────────── */
 body {
   background:
-    linear-gradient(180deg,
-      #87ceeb   0%,    /* sky blue */
-      #b3e0ee  18%,    /* horizon haze */
-      #e6f3ff  35%,    /* sea sparkle */
-      #fff8e0  55%,    /* sand line */
-      #ffe4a8  78%,    /* warm sand */
-      #fcd58a 100%     /* deeper sand */
-    ) !important;
+    url('images/hero-beach-bg.png') center top / cover no-repeat fixed,
+    #b3e0ee !important;
   background-attachment: fixed !important;
   color: #14304d !important;
   min-height: 100vh !important;
 }
 
-/* ── body::after: soft sunshine + sea sparkle ────────────── */
+/* ── body::after: soft readability veil + bottom fade ────── */
 body::after {
   content: '' !important;
   position: fixed !important;
   inset: 0 !important;
   background:
-    radial-gradient(ellipse at 50% -5%, rgba(255, 252, 200, 0.55) 0%, transparent 45%),
-    radial-gradient(ellipse at 88% 12%, rgba(255, 240, 170, 0.35) 0%, transparent 38%),
-    radial-gradient(ellipse at 10% 28%, rgba(180, 222, 240, 0.30) 0%, transparent 40%) !important;
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.18) 55%,
+      rgba(255, 255, 255, 0.32) 100%) !important;
   pointer-events: none !important;
   z-index: 0 !important;
   opacity: 1 !important;
