@@ -478,8 +478,13 @@ export function saveGeneratedPostFromData(
     }));
 
     // ✅ [2026-03-29 FIX] localStorage 할당량 초과 방지: structuredContent 경량화
+    // ✅ [v2.10.286 BUG-FIX] 미리보기에서 본문이 안 보이는 회귀 — heading.content를 lightHeadings에서 누락했기 때문.
+    //   사용자 보고: "소제목+본문/소제목+본문 형식으로 보였었는데 지금은 이미지+소제목+도입부만"
+    //   원인: lightHeadings가 title만 저장 → previewGeneratedPost에서 heading.content || '' → 빈 화면
+    //   조치: content/summary 보존 (각 소제목 본문). localStorage quota는 cleanup 로직이 보호.
     const lightHeadings = (structuredContent?.headings || []).map((h: any) => ({
       title: h.title || '',
+      content: h.content || h.summary || '',
     }));
     const lightStructuredContent = {
       selectedTitle: structuredContent?.selectedTitle || '',
@@ -947,12 +952,32 @@ export function previewGeneratedPost(postId: string): void {
       </div>
     ` : '';
 
+    // ✅ [v2.10.286 BUG-FIX] 기존(구 버전) 저장 글은 heading.content가 없음.
+    //   이 경우 post.content 전체를 소제목 개수로 균등 분할해서 fallback 표시.
+    //   (저장 시점에 heading별로 split된 상태가 아니어도 자연스럽게 보임)
+    const _allHeadingsEmpty = (post.headings || []).every(
+      (h: any) => !h.content && !h.summary
+    );
+    let _fallbackChunks: string[] = [];
+    if (_allHeadingsEmpty && post.content && (post.headings || []).length > 0) {
+      const _paragraphs = String(post.content)
+        .split(/\n{2,}|<br\s*\/?>\s*<br\s*\/?>/i)
+        .map((p) => p.trim())
+        .filter((p) => p.length > 0);
+      const _hLen = (post.headings || []).length;
+      const _per = Math.max(1, Math.ceil(_paragraphs.length / _hLen));
+      for (let i = 0; i < _hLen; i++) {
+        _fallbackChunks.push(_paragraphs.slice(i * _per, (i + 1) * _per).join('\n\n'));
+      }
+    }
+
     // 소제목별 콘텐츠 + 이미지
     let contentHtml = '';
     if (headings.length > 0) {
       headings.forEach((heading: any, index: number) => {
         const headingTitle = heading.title || heading;
-        const headingContent = heading.content || '';
+        const headingContent =
+          heading.content || heading.summary || _fallbackChunks[index] || '';
         // 소제목 이미지 (썸네일 제외하고 인덱스+1)
         const headingImage = images[index + 1] || null;
 
