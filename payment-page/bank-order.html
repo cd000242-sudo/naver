@@ -175,16 +175,19 @@
 
         <!-- 주문 완료 화면 -->
         <div class="order-container order-result" id="order-result">
-            <div class="result-icon">✅</div>
-            <div class="result-title">주문이 접수되었습니다!</div>
-            <div class="result-desc">
+            <div class="result-icon" id="result-icon">✅</div>
+            <div class="result-title" id="result-title">주문이 접수되었습니다!</div>
+            <div class="result-desc" id="result-desc">
                 아래 계좌로 입금해주세요.<br>
-                입금 확인 후 <strong>라이선스 코드</strong>가 이메일로 발송됩니다.
+                입금 확인 후 <strong>라이선스 코드</strong>가 이메일로 발송됩니다.<br>
+                <span style="display:inline-block;margin-top:8px;color:#c9a84c;font-size:0.85rem;">📡 이 페이지는 자동으로 상태가 갱신됩니다.</span>
             </div>
             <div class="result-order-id">
                 주문번호: <span id="result-order-id"></span>
             </div>
-            <div class="bank-info">
+
+            <!-- 입금 안내 (pending 상태일 때만 표시) -->
+            <div class="bank-info" id="result-bank-info">
                 <h4>💰 입금 계좌</h4>
                 <div class="bank-row">
                     <span class="bank-label">은행</span>
@@ -202,7 +205,37 @@
                     <span class="bank-label">입금 금액</span>
                     <span class="bank-value" id="result-amount"></span>
                 </div>
+                <div class="bank-row" id="result-status-row" style="border-top:1px solid rgba(201,168,76,0.2);padding-top:14px;margin-top:14px;">
+                    <span class="bank-label">상태</span>
+                    <span class="bank-value" id="result-status-text" style="color:#ffc107;">⏳ 입금 확인 대기 중</span>
+                </div>
             </div>
+
+            <!-- 라이선스 발급 완료 (approved 상태일 때만 표시) -->
+            <div id="license-box" style="display:none;background:linear-gradient(135deg,rgba(68,215,182,0.08),rgba(201,168,76,0.08));border:1px solid rgba(68,215,182,0.4);border-radius:14px;padding:24px;margin-top:18px;">
+                <div style="font-size:36px;text-align:center;margin-bottom:8px;">🎉</div>
+                <div style="text-align:center;color:#44d7b6;font-size:1.1rem;font-weight:800;margin-bottom:16px;">라이선스 발급 완료</div>
+                <div style="color:#8a8686;font-size:12px;margin-bottom:6px;">라이선스 코드</div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <input id="license-code-display" readonly style="flex:1;background:rgba(0,0,0,0.4);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:14px 16px;color:#c9a84c;font-family:monospace;font-size:1rem;font-weight:800;letter-spacing:0.5px;">
+                    <button onclick="copyLicense()" style="background:linear-gradient(135deg,#c9a84c,#e8d48b);color:#0a0a0f;border:none;border-radius:10px;padding:14px 18px;font-weight:800;cursor:pointer;font-size:0.9rem;white-space:nowrap;">📋 복사</button>
+                </div>
+                <div style="color:#8a8686;font-size:12px;margin-top:14px;line-height:1.6;">
+                    이 코드는 입력하신 이메일로도 발송되었습니다.<br>
+                    Better Life Naver 앱에서 라이선스 코드를 입력하면 즉시 사용할 수 있습니다.
+                </div>
+            </div>
+
+            <!-- 거절 안내 (rejected 상태일 때만 표시) -->
+            <div id="rejected-box" style="display:none;background:rgba(233,94,44,0.08);border:1px solid rgba(233,94,44,0.4);border-radius:14px;padding:24px;margin-top:18px;text-align:center;">
+                <div style="font-size:36px;margin-bottom:8px;">❌</div>
+                <div style="color:#e95e2c;font-size:1.1rem;font-weight:800;margin-bottom:8px;">주문이 거절되었습니다</div>
+                <div style="color:#8a8686;font-size:13px;line-height:1.6;">
+                    입금 확인이 되지 않았거나 다른 사유로 거절 처리되었습니다.<br>
+                    문의: <a href="mailto:cd000242@gmail.com" style="color:#c9a84c;">cd000242@gmail.com</a>
+                </div>
+            </div>
+
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 20px;">문의: <a href="mailto:cd000242@gmail.com" style="color: #c9a84c;">cd000242@gmail.com</a> | <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" style="color: #FEE500;">카카오톡 1:1 문의</a></p>
         </div>
     </section>
@@ -359,10 +392,15 @@
                 const result = await res.json();
 
                 if (result.ok) {
-                    document.getElementById('order-form').style.display = 'none';
-                    document.getElementById('order-result').classList.add('show');
-                    document.getElementById('result-order-id').textContent = result.orderId;
-                    document.getElementById('result-amount').textContent = selectedProduct.price.toLocaleString() + '원';
+                    // URL에 orderId 추가 → 새로고침/북마크해도 결과 화면 유지
+                    history.replaceState(null, '', '?orderId=' + encodeURIComponent(result.orderId));
+                    showOrderResultScreen({
+                        orderId: result.orderId,
+                        amount: selectedProduct.price,
+                        product: productLabel,
+                        status: 'pending'
+                    });
+                    startStatusPolling(result.orderId);
                 } else {
                     alert(result.error || '주문 접수에 실패했습니다.');
                     btn.disabled = false;
@@ -372,6 +410,132 @@
                 alert('서버 연결 오류: ' + err.message);
                 btn.disabled = false;
                 btn.textContent = `${selectedProduct.price.toLocaleString()}원 주문 접수하기`;
+            }
+        }
+
+        // ═══════════════════════════════════════════════
+        // Order status polling (auto-refresh after approval)
+        // ═══════════════════════════════════════════════
+
+        let pollingInterval = null;
+
+        function showOrderResultScreen(info) {
+            document.getElementById('order-form').style.display = 'none';
+            document.getElementById('order-result').classList.add('show');
+            document.getElementById('result-order-id').textContent = info.orderId;
+            if (info.amount) {
+                document.getElementById('result-amount').textContent =
+                    Number(info.amount).toLocaleString() + '원';
+            }
+            applyStatusToScreen(info.status, info.code);
+        }
+
+        function applyStatusToScreen(status, code) {
+            const icon = document.getElementById('result-icon');
+            const title = document.getElementById('result-title');
+            const desc = document.getElementById('result-desc');
+            const statusText = document.getElementById('result-status-text');
+            const licenseBox = document.getElementById('license-box');
+            const rejectedBox = document.getElementById('rejected-box');
+            const bankInfo = document.getElementById('result-bank-info');
+
+            if (status === 'approved') {
+                icon.textContent = '🎉';
+                title.textContent = '라이선스가 발급되었습니다!';
+                desc.innerHTML = '아래 라이선스 코드를 사용해주세요.<br>이메일로도 발송되었습니다.';
+                if (statusText) {
+                    statusText.textContent = '✅ 승인 완료';
+                    statusText.style.color = '#44d7b6';
+                }
+                if (code) {
+                    document.getElementById('license-code-display').value = code;
+                    licenseBox.style.display = 'block';
+                }
+                rejectedBox.style.display = 'none';
+                if (bankInfo) bankInfo.style.display = 'none';
+            } else if (status === 'rejected') {
+                icon.textContent = '❌';
+                title.textContent = '주문이 거절되었습니다';
+                desc.innerHTML = '문의 사항이 있으시면 아래 연락처로 연락주세요.';
+                rejectedBox.style.display = 'block';
+                licenseBox.style.display = 'none';
+                if (bankInfo) bankInfo.style.display = 'none';
+            } else {
+                // pending (default)
+                icon.textContent = '✅';
+                title.textContent = '주문이 접수되었습니다!';
+                desc.innerHTML = '아래 계좌로 입금해주세요.<br>입금 확인 후 <strong>라이선스 코드</strong>가 이메일로 발송됩니다.<br><span style="display:inline-block;margin-top:8px;color:#c9a84c;font-size:0.85rem;">📡 이 페이지는 자동으로 상태가 갱신됩니다.</span>';
+                if (statusText) {
+                    statusText.textContent = '⏳ 입금 확인 대기 중';
+                    statusText.style.color = '#ffc107';
+                }
+            }
+        }
+
+        async function fetchOrderStatus(orderId) {
+            const res = await fetch(GAS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({ action: 'check-order', orderId: orderId })
+            });
+            return res.json();
+        }
+
+        function startStatusPolling(orderId) {
+            if (pollingInterval) clearInterval(pollingInterval);
+
+            const tick = async () => {
+                try {
+                    const data = await fetchOrderStatus(orderId);
+                    if (!data.ok) return; // 다음 폴링 시도
+                    applyStatusToScreen(data.status, data.code);
+                    if (data.status === 'approved' || data.status === 'rejected') {
+                        clearInterval(pollingInterval);
+                        pollingInterval = null;
+                    }
+                } catch (err) {
+                    // 네트워크 오류는 무시하고 다음 폴링 시도
+                    console.warn('polling error', err);
+                }
+            };
+
+            tick(); // 즉시 1회
+            pollingInterval = setInterval(tick, 10000); // 이후 10초 간격
+        }
+
+        function copyLicense() {
+            const input = document.getElementById('license-code-display');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            try {
+                navigator.clipboard.writeText(input.value);
+                event.target.textContent = '✅ 복사됨';
+                setTimeout(() => { event.target.textContent = '📋 복사'; }, 1500);
+            } catch (err) {
+                document.execCommand('copy');
+            }
+        }
+
+        async function checkExistingOrder() {
+            const params = new URLSearchParams(window.location.search);
+            const existingOrderId = params.get('orderId');
+            if (!existingOrderId) return;
+
+            try {
+                const data = await fetchOrderStatus(existingOrderId);
+                if (!data.ok) return; // 모르는 orderId면 일반 폼 그대로
+                showOrderResultScreen({
+                    orderId: existingOrderId,
+                    amount: data.amount,
+                    product: data.product,
+                    status: data.status,
+                    code: data.code
+                });
+                if (data.status === 'pending') {
+                    startStatusPolling(existingOrderId);
+                }
+            } catch (err) {
+                console.warn('checkExistingOrder error', err);
             }
         }
 
@@ -392,6 +556,7 @@
             initParticles();
             initNavbar();
             renderProducts();
+            checkExistingOrder();
         });
     </script>
 </body>
