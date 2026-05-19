@@ -553,7 +553,8 @@ async function ensurePlaywrightBrowserInstalled(): Promise<void> {
  */
 async function adsPowerGet(urlPath: string): Promise<any> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 5000); // 5초 타임아웃
+  // ✅ 5s → 8s — 느린 PC에서 AdsPower API 응답 지연 시 false-fail 방지
+  const timer = setTimeout(() => controller.abort(), 8000);
 
   try {
     const res = await fetch(`http://local.adspower.com:50325${urlPath}`, {
@@ -569,7 +570,7 @@ async function adsPowerGet(urlPath: string): Promise<any> {
   } catch (err: any) {
     clearTimeout(timer);
     if (err.name === 'AbortError') {
-      throw new Error('AdsPower API 타임아웃 (5초)');
+      throw new Error('AdsPower API 타임아웃 (8초). AdsPower 앱이 실행 중이지 않거나 응답이 느린 것 같습니다.');
     }
     throw err; // ECONNREFUSED 등 원본 에러 전파
   }
@@ -623,7 +624,7 @@ async function connectViaAdsPower(): Promise<Page> {
   // labs.google/fx 접속 + 세션 확인
   await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-    timeout: 60000,
+    timeout: 90000,
   });
   await cachedPage.waitForTimeout(1500);
 
@@ -642,7 +643,7 @@ async function connectViaAdsPower(): Promise<Page> {
     sendImageLog('✅ [ImageFX] Google 세션 확인 완료 (AdsPower 숨김 모드)');
 
     cachedToken = session.access_token;
-    cachedTokenExpiry = new Date(session.expires || Date.now() + 50 * 60 * 1000);
+    cachedTokenExpiry = new Date(session.expires || Date.now() + 240 * 60 * 1000);
 
     return cachedPage;
   }
@@ -680,14 +681,14 @@ async function connectViaAdsPower(): Promise<Page> {
 
   await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-    timeout: 60000,
+    timeout: 90000,
   });
 
-  sendImageLog('🔐 [ImageFX] AdsPower 브라우저에서 Google 계정으로 로그인해주세요. (최대 5분 대기)');
+  sendImageLog('🔐 [ImageFX] AdsPower 브라우저에서 Google 계정으로 로그인해주세요. (최대 15분 대기) — 2단계 인증·동의 화면도 천천히 진행 가능합니다.');
 
-  // 로그인 대기 (5초 간격으로 60회 = 최대 5분)
+  // 로그인 대기 (5초 간격으로 180회 = 최대 15분)
   let loggedIn = false;
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 180; i++) {
     await new Promise(resolve => setTimeout(resolve, 5000)); // ✅ context 파괴 안전
 
     // ⚠️ 로그인 중 context 파괴 방어
@@ -722,7 +723,7 @@ async function connectViaAdsPower(): Promise<Page> {
       sendImageLog(`✅ [ImageFX] Google 로그인 완료! 다음부터는 자동 로그인됩니다.`);
 
       cachedToken = checkSession.access_token;
-      cachedTokenExpiry = new Date(checkSession.expires || Date.now() + 50 * 60 * 1000);
+      cachedTokenExpiry = new Date(checkSession.expires || Date.now() + 240 * 60 * 1000);
       break;
     }
 
@@ -737,7 +738,7 @@ async function connectViaAdsPower(): Promise<Page> {
     await setCachedBrowser(null);
     cachedPage = null;
     await adsPowerGet(`/api/v1/browser/stop?user_id=${userId}`).catch(() => {});
-    throw new Error('Google 로그인 시간 초과 (5분). AdsPower 브라우저에서 Google 로그인 후 다시 시도해주세요.');
+    throw new Error('Google 로그인 시간 초과 (15분). AdsPower 브라우저에서 Google 계정 로그인을 완료한 후 다시 시도해주세요.');
   }
 
   // ✅ [2026-03-16] 로그인 성공 → visible 닫고 headless로 재시작 (화면에서 숨김)
@@ -766,7 +767,7 @@ async function connectViaAdsPower(): Promise<Page> {
 
   await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-    timeout: 60000,
+    timeout: 90000,
   });
   await new Promise(resolve => setTimeout(resolve, 1500));
 
@@ -1043,7 +1044,7 @@ async function connectViaPlaywright(): Promise<Page> {
   // labs.google/fx 접속 + 세션 확인
   await page.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-    timeout: 60000,
+    timeout: 90000,
   });
   await page.waitForTimeout(1500);
 
@@ -1068,7 +1069,7 @@ async function connectViaPlaywright(): Promise<Page> {
 
     // 토큰도 캐싱
     cachedToken = session.access_token;
-    cachedTokenExpiry = new Date(session.expires || Date.now() + 50 * 60 * 1000);
+    cachedTokenExpiry = new Date(session.expires || Date.now() + 240 * 60 * 1000);
 
     return cachedPage;
   }
@@ -1097,14 +1098,15 @@ async function connectViaPlaywright(): Promise<Page> {
   page = context.pages()[0] || await context.newPage();
   await page.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-    timeout: 60000,
+    timeout: 90000,
   });
 
-  sendImageLog('🔐 [ImageFX] 브라우저에서 Google 계정으로 로그인해주세요. (최대 5분 대기)');
+  sendImageLog('🔐 [ImageFX] 브라우저에서 Google 계정으로 로그인해주세요. (최대 15분 대기) — 2단계 인증·동의 화면도 천천히 진행 가능합니다.');
 
-  // 로그인 대기 (5초 간격으로 60회 = 최대 5분)
+  // 로그인 대기 (5초 간격으로 180회 = 최대 15분)
+  // ✅ 사용자 체감 성공률 ↑ — 2FA / OAuth 동의 / 비밀번호 입력 여유
   let loggedIn = false;
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 180; i++) {
     await new Promise(resolve => setTimeout(resolve, 5000)); // ✅ page.waitForTimeout → setTimeout (context 파괴 안전)
 
     // ⚠️ 로그인 중 네비게이션으로 context 파괴 가능 → try-catch 보호
@@ -1140,7 +1142,7 @@ async function connectViaPlaywright(): Promise<Page> {
 
       // 토큰 캐싱
       cachedToken = checkSession.access_token;
-      cachedTokenExpiry = new Date(checkSession.expires || Date.now() + 50 * 60 * 1000);
+      cachedTokenExpiry = new Date(checkSession.expires || Date.now() + 240 * 60 * 1000);
       break;
     }
 
@@ -1151,7 +1153,7 @@ async function connectViaPlaywright(): Promise<Page> {
 
   if (!loggedIn) {
     await context.close();
-    throw new Error('Google 로그인 시간 초과 (5분). ImageFX 사용 전 Google 계정으로 로그인해주세요.');
+    throw new Error('Google 로그인 시간 초과 (15분). 브라우저에서 Google 계정 로그인을 완료한 후 다시 시도해주세요. (계정 선택 → 비밀번호 → 2단계 인증 → 동의 모두 끝나야 합니다.)');
   }
 
   // ✅ [2026-03-16] 로그인 성공 → visible 브라우저 닫고 headless로 재시작 (화면에서 숨김)
@@ -1165,7 +1167,7 @@ async function connectViaPlaywright(): Promise<Page> {
   const headlessPage = headlessContext.pages()[0] || await headlessContext.newPage();
   await headlessPage.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-    timeout: 60000,
+    timeout: 90000,
   });
   await new Promise(resolve => setTimeout(resolve, 1500));
 
@@ -1249,7 +1251,7 @@ async function ensureBrowserPage(): Promise<Page> {
     console.log('[ImageFX] 🌐 labs.google/fx 접속...');
     await page.goto('https://labs.google/fx/tools/image-fx', {
       waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-      timeout: 60000,
+      timeout: 90000,
     });
     await page.waitForTimeout(2000);
   }
@@ -1286,7 +1288,7 @@ async function getSessionToken(page: Page): Promise<string> {
   }
 
   cachedToken = session.access_token;
-  cachedTokenExpiry = new Date(session.expires || Date.now() + 50 * 60 * 1000); // 기본 50분
+  cachedTokenExpiry = new Date(session.expires || Date.now() + 240 * 60 * 1000); // 기본 50분
   console.log(`[ImageFX] ✅ 토큰 획득 (${session.user?.name || session.user?.email || 'user'}, 만료: ${cachedTokenExpiry.toLocaleTimeString()})`);
 
   return cachedToken!;
@@ -1549,7 +1551,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
         if (!currentUrl.includes('labs.google/fx')) {
           await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
             waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-            timeout: 60000,
+            timeout: 90000,
           });
           await cachedPage.waitForTimeout(1500);
         }
@@ -1565,7 +1567,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
         if (session?.access_token && session?.user) {
           const userName = session.user?.name || session.user?.email || 'Google 사용자';
           cachedToken = session.access_token;
-          cachedTokenExpiry = new Date(session.expires || Date.now() + 50 * 60 * 1000);
+          cachedTokenExpiry = new Date(session.expires || Date.now() + 240 * 60 * 1000);
           console.log(`[ImageFX] ✅ Google 로그인 확인: ${userName} (기존 세션)`);
           sendImageLog(`✅ [ImageFX] Google 로그인 확인: ${userName}`);
           return { loggedIn: true, userName, message: `Google 로그인 완료: ${userName}` };
@@ -1612,7 +1614,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
 
         await page.goto('https://labs.google/fx/tools/image-fx', {
           waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-          timeout: 60000,
+          timeout: 90000,
         });
         await page.waitForTimeout(1500);
         
@@ -1631,7 +1633,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
           browserMode = 'adspower';
           cachedUserId = adsUserId; // ✅ [2026-03-16 FIX] cleanup 시 AdsPower stop 호출에 필요
           cachedToken = session.access_token;
-          cachedTokenExpiry = new Date(session.expires || Date.now() + 50 * 60 * 1000);
+          cachedTokenExpiry = new Date(session.expires || Date.now() + 240 * 60 * 1000);
           console.log(`[ImageFX] ✅ Google 로그인 확인: ${userName} (AdsPower)`);
           sendImageLog(`✅ [ImageFX] Google 로그인 확인: ${userName}`);
           return { loggedIn: true, userName, message: `Google 로그인 완료: ${userName}` };
@@ -1661,7 +1663,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
         page = context.pages()[0] || await context.newPage();
         await page.goto('https://labs.google/fx/tools/image-fx', {
           waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-          timeout: 60000,
+          timeout: 90000,
         });
 
         sendImageLog('🔐 [ImageFX] AdsPower 브라우저에서 Google 계정으로 로그인해주세요. (최대 5분 대기)');
@@ -1690,7 +1692,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
             browserMode = 'adspower';
             cachedUserId = adsUserId; // ✅ [2026-03-16 FIX] cleanup 시 AdsPower stop 호출에 필요
             cachedToken = checkSession.access_token;
-            cachedTokenExpiry = new Date(checkSession.expires || Date.now() + 50 * 60 * 1000);
+            cachedTokenExpiry = new Date(checkSession.expires || Date.now() + 240 * 60 * 1000);
 
             sendImageLog('✅ [ImageFX] 로그인 완료! 이미지 생성 준비됨');
             return { loggedIn: true, userName, message: `Google 로그인 완료: ${userName}` };
@@ -1753,7 +1755,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
 
     await page.goto('https://labs.google/fx/tools/image-fx', {
       waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-      timeout: 60000,
+      timeout: 90000,
     });
     await page.waitForTimeout(1500);
 
@@ -1775,7 +1777,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
       browserMode = 'playwright';
       (cachedPage as any).__persistentContext = context;
       cachedToken = session.access_token;
-      cachedTokenExpiry = new Date(session.expires || Date.now() + 50 * 60 * 1000);
+      cachedTokenExpiry = new Date(session.expires || Date.now() + 240 * 60 * 1000);
 
       console.log(`[ImageFX] ✅ Google 로그인 확인: ${userName} (headless)`);
       sendImageLog(`✅ [ImageFX] Google 로그인 확인: ${userName}`);
@@ -1803,7 +1805,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
     page = context.pages()[0] || await context.newPage();
     await page.goto('https://labs.google/fx/tools/image-fx', {
       waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-      timeout: 60000,
+      timeout: 90000,
     });
 
     sendImageLog('🔐 [ImageFX] 브라우저에서 Google 계정으로 로그인해주세요. (최대 5분 대기)');
@@ -1834,7 +1836,7 @@ export async function checkGoogleLoginForImageFx(): Promise<{
         browserMode = 'playwright';
         (cachedPage as any).__persistentContext = context;
         cachedToken = checkSession.access_token;
-        cachedTokenExpiry = new Date(checkSession.expires || Date.now() + 50 * 60 * 1000);
+        cachedTokenExpiry = new Date(checkSession.expires || Date.now() + 240 * 60 * 1000);
 
         sendImageLog('✅ [ImageFX] 로그인 완료! 이미지 생성 준비됨');
         return { loggedIn: true, userName, message: `Google 로그인 완료: ${userName}` };
@@ -2102,7 +2104,7 @@ export async function switchGoogleAccountForImageFx(): Promise<{
       try {
         await page.goto('https://labs.google/fx/tools/image-fx', {
           waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-          timeout: 60000,
+          timeout: 90000,
         });
       } catch (navErr: any) {
         console.warn(`[ImageFX] ⚠️ ImageFX 네비게이션 경고: ${navErr.message}`);
@@ -2111,7 +2113,7 @@ export async function switchGoogleAccountForImageFx(): Promise<{
           page = await context.newPage();
           await page.goto('https://labs.google/fx/tools/image-fx', {
             waitUntil: 'domcontentloaded', // networkidle 대신 더 빠른 전략
-            timeout: 60000,
+            timeout: 90000,
           });
         } catch (retryErr: any) {
           console.warn(`[ImageFX] ⚠️ ImageFX 2차 네비게이션도 실패: ${retryErr.message}`);
@@ -2152,7 +2154,7 @@ export async function switchGoogleAccountForImageFx(): Promise<{
             loggedIn = true;
             userName = session.user?.name || session.user?.email || 'Google 사용자';
             cachedToken = session.access_token;
-            cachedTokenExpiry = new Date(session.expires || Date.now() + 50 * 60 * 1000);
+            cachedTokenExpiry = new Date(session.expires || Date.now() + 240 * 60 * 1000);
             break;
           }
         } catch (evalErr: any) {
