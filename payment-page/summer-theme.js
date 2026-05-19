@@ -1,0 +1,77 @@
+/* ═══════════════════════════════════════════════════════════
+   Summer Theme runtime — sun particles + ocean wave SVG
+   Auto-injects into <body> on DOMContentLoaded.
+   No external deps. Works on every page that loads this script.
+   ═══════════════════════════════════════════════════════════ */
+
+(function summerTheme() {
+  function injectWaves() {
+    if (document.querySelector('.summer-waves')) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'summer-waves';
+    wrap.innerHTML = [
+      '<svg viewBox="0 0 1440 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">',
+        '<defs>',
+          '<linearGradient id="summerWaveGrad1" x1="0" y1="0" x2="0" y2="1">',
+            '<stop offset="0%" stop-color="#4dd0e1" stop-opacity="0.6"/>',
+            '<stop offset="100%" stop-color="#00838f" stop-opacity="0.85"/>',
+          '</linearGradient>',
+          '<linearGradient id="summerWaveGrad2" x1="0" y1="0" x2="0" y2="1">',
+            '<stop offset="0%" stop-color="#80deea" stop-opacity="0.45"/>',
+            '<stop offset="100%" stop-color="#0097a7" stop-opacity="0.7"/>',
+          '</linearGradient>',
+          '<linearGradient id="summerWaveGrad3" x1="0" y1="0" x2="0" y2="1">',
+            '<stop offset="0%" stop-color="#b2ebf2" stop-opacity="0.35"/>',
+            '<stop offset="100%" stop-color="#26c6da" stop-opacity="0.55"/>',
+          '</linearGradient>',
+        '</defs>',
+        '<path class="wave-shape layer-3" fill="url(#summerWaveGrad3)" d="M0,80 C240,30 480,130 720,80 C960,30 1200,130 1440,80 L1440,140 L0,140 Z"/>',
+        '<path class="wave-shape layer-2" fill="url(#summerWaveGrad2)" d="M0,95 C200,55 400,135 720,95 C1040,55 1240,135 1440,95 L1440,140 L0,140 Z"/>',
+        '<path class="wave-shape" fill="url(#summerWaveGrad1)" d="M0,110 C240,75 480,140 720,110 C960,75 1200,140 1440,110 L1440,140 L0,140 Z"/>',
+      '</svg>'
+    ].join('');
+    document.body.appendChild(wrap);
+  }
+
+  function injectParticles() {
+    if (document.querySelector('.summer-particles')) return;
+    var container = document.createElement('div');
+    container.className = 'summer-particles';
+
+    var w = window.innerWidth;
+    var count = w < 768 ? 14 : 22;
+
+    for (var i = 0; i < count; i++) {
+      var dot = document.createElement('div');
+      dot.className = 'sun-dot' + (Math.random() < 0.45 ? ' small' : '');
+      var startX = Math.random() * 100;
+      var startY = 100 + Math.random() * 20;
+      var duration = 12 + Math.random() * 18; // 12s – 30s
+      var delay = -Math.random() * duration;  // pre-stagger
+      dot.style.left = startX + '%';
+      dot.style.top = startY + 'vh';
+      dot.style.animationDuration = duration + 's';
+      dot.style.animationDelay = delay + 's';
+      container.appendChild(dot);
+    }
+    document.body.appendChild(container);
+  }
+
+  function init() {
+    try {
+      injectWaves();
+      injectParticles();
+      // Stop legacy cherry-blossom petal generation if still running
+      var legacy = document.querySelectorAll('.petal-container, .petal');
+      legacy.forEach(function (el) { el.remove(); });
+    } catch (err) {
+      console.warn('[summer-theme] init failed:', err);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

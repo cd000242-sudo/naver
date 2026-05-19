@@ -85,6 +85,7 @@
         @keyframes bounceAttention { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
         @media (max-width: 768px) { .music-toggle { bottom: 90px; } }
     </style>
+    <link rel="stylesheet" href="summer-theme.css">
 </head>
 
 <body>
@@ -156,15 +157,13 @@
             <!-- ═══ REVIEW WRITE FORM ═══ -->
             <div class="review-write-section" id="review-write">
                 <h3 class="review-write-title">✍️ 후기 작성하기</h3>
-                <p class="review-write-desc">구매 고객이신가요? 주문번호와 이메일로 인증 후 후기를 남겨주세요.</p>
+                <p class="review-write-desc">자유롭게 후기를 남겨주세요. 누구나 작성 가능합니다.</p>
 
-                <div class="review-verify" id="review-verify">
-                    <input type="text" id="review-order-id" placeholder="주문번호 (예: LP-1234567890-ABCDEF)">
-                    <input type="email" id="review-email" placeholder="결제 시 사용한 이메일">
-                    <button class="review-verify-btn" id="review-verify-btn" onclick="verifyPurchase()">인증하기</button>
-                </div>
-
-                <div class="review-form-body" id="review-form-body">
+                <div class="review-form-body active" id="review-form-body">
+                    <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+                        <input type="text" class="review-field" id="review-author" placeholder="닉네임 (예: 블로그생활러)" maxlength="20" style="flex: 1; min-width: 180px;">
+                        <input type="email" class="review-field" id="review-email" placeholder="이메일 (선택 — 공개 안 됨)" style="flex: 1.3; min-width: 200px;">
+                    </div>
                     <div class="review-stars" id="review-stars">
                         <span class="review-star" data-star="1" onclick="setRating(1)">★</span>
                         <span class="review-star" data-star="2" onclick="setRating(2)">★</span>
@@ -246,7 +245,7 @@
                 <a href="refund.html">환불정책</a>
                 <a href="privacy.html">개인정보처리방침</a>
                 <a href="lookup.html">주문 조회</a>
-                <a href="mailto:cd000242@gmail.com">고객 문의</a>
+                <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener">고객 문의</a>
             </div>
             <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
         </div>
@@ -299,11 +298,14 @@
 
         // ===== Submit Review =====
         async function submitReview() {
+            const author = document.getElementById('review-author').value.trim();
+            const email = document.getElementById('review-email').value.trim();
             const summary = document.getElementById('review-summary').value.trim();
             const detail = document.getElementById('review-detail').value.trim();
             const btn = document.getElementById('review-submit-btn');
 
             if (selectedRating === 0) { showMsg('별점을 선택해주세요.', 'error'); return; }
+            if (!author) { showMsg('닉네임을 입력해주세요.', 'error'); return; }
             if (!summary) { showMsg('한줄 요약을 입력해주세요.', 'error'); return; }
 
             btn.disabled = true; btn.textContent = '등록 중...';
@@ -314,8 +316,8 @@
                     headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify({
                         action: 'submit-review',
-                        orderId: verifiedOrderId,
-                        email: verifiedEmail,
+                        author: author,
+                        email: email,
                         rating: selectedRating,
                         summary: summary,
                         detail: detail,
@@ -326,9 +328,15 @@
 
                 if (data.success) {
                     showMsg('🎉 후기가 등록되었습니다! 감사합니다.', 'success');
-                    document.getElementById('review-form-body').classList.remove('active');
+                    // Reset form
+                    document.getElementById('review-author').value = '';
+                    document.getElementById('review-email').value = '';
+                    document.getElementById('review-summary').value = '';
+                    document.getElementById('review-detail').value = '';
+                    selectedRating = 0;
+                    setRating(0);
                     btn.textContent = '✓ 등록 완료';
-                    // Reload reviews
+                    setTimeout(() => { btn.disabled = false; btn.textContent = '후기 등록하기'; }, 2000);
                     loadReviews();
                 } else {
                     showMsg(data.message || '후기 등록에 실패했습니다.', 'error');
@@ -357,10 +365,11 @@
                     data.reviews.forEach(r => {
                         const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
                         const date = new Date(r.timestamp).toLocaleDateString('ko-KR');
+                        const author = r.author || (r.email ? r.email.replace(/(.{2}).*(@.*)/, '$1***$2') : '익명');
                         container.innerHTML += `
                             <div class="dynamic-review-card">
                                 <div class="dynamic-review-header">
-                                    <span class="dynamic-review-author">${r.email.replace(/(.{2}).*(@.*)/, '$1***$2')}</span>
+                                    <span class="dynamic-review-author">${author}</span>
                                     <span class="dynamic-review-date">${date}</span>
                                 </div>
                                 <div class="dynamic-review-stars">${stars}</div>
@@ -477,5 +486,6 @@
     });
 })();
 </script>
+    <script src="summer-theme.js"></script>
 </body>
 </html>
