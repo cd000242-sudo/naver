@@ -114,6 +114,123 @@ p, span, label, li, td, th { color: inherit; }
 .section-tag,
 .product-icon-lg { color: #14304d; }
 
+/* ── Beach scenery: sun + palm trees (added by JS) ───────── */
+.summer-scenery {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* The sun */
+.summer-sun {
+  position: absolute;
+  top: 60px;
+  right: 80px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffacd 0%, #ffe066 35%, #ffc107 70%, #ff9800 100%);
+  box-shadow:
+    0 0 60px rgba(255, 215, 0, 0.55),
+    0 0 120px rgba(255, 215, 0, 0.35),
+    0 0 200px rgba(255, 235, 100, 0.18);
+  animation: sunGlow 5s ease-in-out infinite;
+}
+@keyframes sunGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 60px rgba(255, 215, 0, 0.55),
+      0 0 120px rgba(255, 215, 0, 0.35),
+      0 0 200px rgba(255, 235, 100, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 80px rgba(255, 215, 0, 0.7),
+      0 0 160px rgba(255, 215, 0, 0.45),
+      0 0 240px rgba(255, 235, 100, 0.22);
+  }
+}
+
+/* Sun rays (rotating slowly) */
+.summer-sun::before {
+  content: '';
+  position: absolute;
+  inset: -50px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(255, 235, 100, 0.20) 0deg,
+      transparent 20deg,
+      rgba(255, 235, 100, 0.20) 40deg,
+      transparent 60deg,
+      rgba(255, 235, 100, 0.20) 80deg,
+      transparent 100deg,
+      rgba(255, 235, 100, 0.20) 120deg,
+      transparent 140deg,
+      rgba(255, 235, 100, 0.20) 160deg,
+      transparent 180deg,
+      rgba(255, 235, 100, 0.20) 200deg,
+      transparent 220deg,
+      rgba(255, 235, 100, 0.20) 240deg,
+      transparent 260deg,
+      rgba(255, 235, 100, 0.20) 280deg,
+      transparent 300deg,
+      rgba(255, 235, 100, 0.20) 320deg,
+      transparent 340deg
+    );
+  animation: sunRotate 60s linear infinite;
+  z-index: -1;
+}
+@keyframes sunRotate {
+  to { transform: rotate(360deg); }
+}
+
+/* Palm trees */
+.summer-palm {
+  position: absolute;
+  bottom: 130px;
+  width: 180px;
+  height: 280px;
+}
+.summer-palm.palm-left {
+  left: -25px;
+  transform: rotate(-12deg);
+  animation: palmSway 6s ease-in-out infinite;
+}
+.summer-palm.palm-right {
+  right: -25px;
+  transform: rotate(12deg) scaleX(-1);
+  animation: palmSway 6s ease-in-out infinite reverse;
+  animation-delay: -3s;
+}
+@keyframes palmSway {
+  0%, 100% { transform: rotate(-12deg) translateX(0); }
+  50% { transform: rotate(-9deg) translateX(4px); }
+}
+.summer-palm.palm-right { animation-name: palmSwayRight; }
+.summer-palm-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+@keyframes palmSwayRight {
+  0%, 100% { transform: rotate(12deg) scaleX(-1) translateX(0); }
+  50% { transform: rotate(9deg) scaleX(-1) translateX(4px); }
+}
+
+@media (max-width: 768px) {
+  .summer-sun { top: 40px; right: 30px; width: 75px; height: 75px; }
+  .summer-sun::before { inset: -30px; }
+  .summer-palm { width: 120px; height: 180px; bottom: 100px; }
+  .summer-palm.palm-left { left: -50px; }
+  .summer-palm.palm-right { right: -50px; }
+}
+
 /* ── Bottom ocean wave band (kept; tuned for light bg) ───── */
 .summer-waves {
   position: fixed;
