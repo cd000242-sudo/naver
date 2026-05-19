@@ -18,9 +18,12 @@ import {
   generateTableFromUrl // ✅ [추가] 제휴 링크에서 직접 스펙 크롤링
 } from './image/tableImageGenerator.js';
 import { extractProsConsWithGemini } from './image/geminiTableExtractor.js';
+import { pickBannerHook, pickCtaHook } from './automation/bannerPhrasePool.js';
 import { browserSessionManager, type SessionInfo } from './browserSessionManager.js';
 // [v2.10.113] 명시적 쿠키 파일 저장/복원 — userDataDir 보조 안전망 (캡차 반복 차단)
 import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromFile } from './sessionPersistence.js';
+// [v2.10.285] 봇 감지 backoff + 로그인 자연 대기 (계정별 자동 보호)
+import { recordBotBackoff, getBotBackoff, isAccountBackedOff, computePostLoginHumanDelayMs } from './utils/botBackoff.js';
 import { withRetry, findWithFallback, clickWithRetry, navigateWithRetry, isRetryableError } from './errorRecovery.js';
 import { createGhostCursor, safeClick, safeType, safeClickInFrame, waitRandom, randomMouseMovement, type GhostCursor } from './ghostCursorHelper.js';
 import * as imageHelpers from './automation/imageHelpers';
@@ -199,6 +202,8 @@ export interface RunOptions {
   collectedImages?: Array<{ id: string; url: string; thumbnailUrl: string; title: string; source: string; tags?: string[] }>; // 수집된 이미지 (풀오토 모드용)
   toneStyle?: 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'; // 글 톤 설정 (10개 전체)
   keepBrowserOpen?: boolean; // ✅ 추가
+  /** ✅ [v2.10.285] (A) 계정별 로그인 시작 시차 — multi-account에서 봇 감지 회피용. ms 단위. */
+  loginStaggerMs?: number;
   useIntelligentImagePlacement?: boolean; // ✅ 추가: 지능형 이미지 배치 사용 여부
   onlyImagePlacement?: boolean; // ✅ 추가: 이미지 배치만 수행하고 종료 (이미지 관리 탭 용)
   affiliateLink?: string; // ✅ 추가: 쇼핑커넥트 제휴 링크
@@ -3506,6 +3511,14 @@ export class NaverBlogAutomation {
             if (firstError.type === 'too_many_attempts' || firstError.type === 'new_environment' || firstError.type === 'suspicious_login') {
               challengeDetected = true;
               stuckOnLoginPageSince = stuckOnLoginPageSince || Date.now();
+              // ✅ [v2.10.285] 봇 감지 — 이 계정 backoff 기록 (다음 자동 발행 흐름에서 자동 skip)
+              try {
+                const accountId = (this as any).naverId || (this as any).accountId || 'unknown';
+                if (accountId && accountId !== 'unknown') {
+                  recordBotBackoff(accountId, firstError.type);
+                  this.log(`🛡️ [Backoff] ${accountId}: ${firstError.type} 감지 → 봇 점수 자연 감소 위해 일정 시간 자동 발행 제외됩니다.`);
+                }
+              } catch { /* silent */ }
               continue; // 사용자가 해결할 수 있으므로 대기 계속
             }
 
@@ -3519,6 +3532,14 @@ export class NaverBlogAutomation {
               challengeDetected = true;
               lastSoundTime = Date.now();
               stuckOnLoginPageSince = null; // 캡차 감지되었으므로 stuck 카운터 리셋
+              // ✅ [v2.10.285] 캡차 = 봇 감지 — 이 계정 backoff 기록
+              try {
+                const accountId = (this as any).naverId || (this as any).accountId || 'unknown';
+                if (accountId && accountId !== 'unknown') {
+                  recordBotBackoff(accountId, 'captcha');
+                  this.log(`🛡️ [Backoff] ${accountId}: 캡차 감지 → 봇 점수 자연 감소 위해 일정 시간 자동 발행 제외됩니다.`);
+                }
+              } catch { /* silent */ }
 
               const detectionMethod = pageAnalysis.captchaMethod || 'unknown';
 
@@ -3696,6 +3717,15 @@ export class NaverBlogAutomation {
 
     // ✅ BrowserSessionManager에 로그인 상태 알림
     browserSessionManager.setLoggedIn(this.options.naverId, true);
+
+    // ✅ [v2.10.285] (B) 로그인 후 자연스러운 사람 패턴 대기 — 7~13초 랜덤
+    //    같은 PC에서 즉시 다음 액션으로 가면 봇 감지 점수 ↑.
+    //    실제 사람은 로그인 직후 잠시 페이지를 둘러보거나 멈춤.
+    try {
+      const humanDelay = computePostLoginHumanDelayMs();
+      this.log(`⏱️ 로그인 성공 후 자연 대기 ${Math.round(humanDelay / 1000)}초 (봇 감지 회피)`);
+      await new Promise((resolve) => setTimeout(resolve, humanDelay));
+    } catch { /* ignore */ }
   }
 
   async navigateToBlogWrite(): Promise<void> {
@@ -7977,28 +8007,9 @@ export class NaverBlogAutomation {
       await this.delay(50);
     }
 
-    // ✅ [FIX] 배너용 후킹 문구 (랜덤)
-    const bannerHooks = [
-      '✓ 할인가 확인하기 →',
-      '[공식] 최저가 보러가기 →',
-      '지금 바로 구매하기 →',
-      '▶ 상품 자세히 보기',
-      '할인 혜택 확인 →',
-    ];
-    const bannerHook = bannerHooks[Math.floor(Math.random() * bannerHooks.length)];
-
-    // ✅ [신규] CTA용 후킹 문구 (배너와 다르게, 더 구체적이고 강력한 구매 결심 유도)
-    const ctaHooks = [
-      '🔥 지금 안사면 내일은 품절! 장바구니 담기',
-      '💸 이 가격에 이 퀄리티? 리뷰 4.8점 인증 제품',
-      '⚡ 오늘만 이 가격! 무료배송에 추가 할인까지',
-      '🛒 수만 명이 선택한 인기템, 고민 말고 바로 구매',
-      '💥 이번 달 가장 잘 팔린 베스트셀러, 놓치면 후회',
-      '✨ 가성비 최고! 다른 제품과 비교 불가',
-      '🎁 지금 구매하면 사은품 증정 이벤트 중',
-      '🏃 남은 재고 얼마 없어요! 서두르세요',
-    ];
-    const ctaHook = ctaHooks[Math.floor(Math.random() * ctaHooks.length)];
+    // ✅ [2026-05-18] 공통 풀(20개) + 최근 3개 회피 — bannerPhrasePool.ts 헬퍼로 일원화
+    const bannerHook = pickBannerHook();
+    const ctaHook = pickCtaHook();
 
     const displayProductName = productName || '상품 상세보기';
 
@@ -9103,6 +9114,31 @@ export class NaverBlogAutomation {
     this.cancelRequested = false;
     this.publishedUrl = null; // ✅ 초기화
     this.log('🚀 네이버 블로그 자동화를 시작합니다...');
+
+    // ✅ [v2.10.285] (C) 봇 감지 backoff 체크 — 이 계정이 backoff 중이면 즉시 skip
+    try {
+      const accountId = this.options?.naverId;
+      if (accountId) {
+        const backoff = getBotBackoff(accountId);
+        if (backoff) {
+          const remainMs = backoff.expiresAt - Date.now();
+          const remainMin = Math.round(remainMs / 60000);
+          this.log(`🛡️ [Backoff] ${accountId}: ${backoff.reason} 감지로 자동 발행 일시 제외 중 (남은 시간: ${Math.floor(remainMin / 60)}h ${remainMin % 60}m)`);
+          this.log('   💡 봇 점수 자연 감소를 위해 잠시 쉽니다. 다음 실행 시 자동 회복됩니다.');
+          throw new Error(`이 계정은 봇 감지로 자동 발행이 일시 중단되었습니다 (${backoff.reason}). 약 ${Math.floor(remainMin / 60)}시간 ${remainMin % 60}분 후 자동 회복됩니다.`);
+        }
+      }
+    } catch (backoffErr: any) {
+      if (backoffErr.message?.includes('봇 감지')) throw backoffErr;
+      // 기타 에러는 무시 (정상 흐름 진행)
+    }
+
+    // ✅ [v2.10.285] (A) 계정별 로그인 시차 — multi-account에서 봇 감지 회피
+    if (runOptions.loginStaggerMs && runOptions.loginStaggerMs > 0) {
+      const staggerMs = Math.min(runOptions.loginStaggerMs, 30 * 60 * 1000); // 최대 30분
+      this.log(`⏱️ [Stagger] 다른 계정과 시차를 두기 위해 ${Math.round(staggerMs / 1000)}초 대기합니다 (봇 감지 회피).`);
+      await new Promise((resolve) => setTimeout(resolve, staggerMs));
+    }
 
     const resolvedOptions = this.resolveRunOptions(runOptions);
 
