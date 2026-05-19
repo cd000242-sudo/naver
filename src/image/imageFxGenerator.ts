@@ -97,6 +97,69 @@ let _adsPowerUserEnabled: boolean = false; // ✅ [2026-03-16] 사용자 AdsPowe
 // 사용자 설정값(`_adsPowerUserEnabled`)은 변경하지 않으며, 다음 앱 재시작 시 재시도.
 let _adsPowerSessionDisabled: boolean = false;
 
+// ═══════════════════════════════════════════════════════════
+// ▣ Preflight self-diagnostic + telemetry (D + E + F)
+// ═══════════════════════════════════════════════════════════
+
+let _preflightRanThisSession = false;
+
+/**
+ * (E) Preflight: detect Chrome/Edge before launching so the user gets a
+ * friendly "we found <browser>" message up front. Idempotent per session.
+ */
+function imageFxPreflight(): void {
+  if (_preflightRanThisSession) return;
+  _preflightRanThisSession = true;
+  try {
+    const browser = findSystemBrowserExecutable();
+    if (browser) {
+      const lower = browser.toLowerCase();
+      const name =
+        lower.includes('edge') ? 'Edge' :
+        lower.includes('chrome') ? 'Chrome' :
+        lower.includes('brave') ? 'Brave' : '브라우저';
+      sendImageLog(`✅ [ImageFX] ${name} 감지됨. 안정적 모드로 시작합니다.`);
+    } else {
+      sendImageLog('⚠️ [ImageFX] Chrome/Edge가 감지되지 않아 Playwright Chromium 자동 설치를 시도합니다. (1~2분 소요 가능)');
+    }
+    if (_adsPowerUserEnabled) {
+      sendImageLog('ℹ️ [ImageFX] AdsPower 사용 ON 설정. 실패 시 자동으로 자체 브라우저로 폴백됩니다.');
+    }
+  } catch { /* silent */ }
+}
+
+/**
+ * (F) Telemetry: fire-and-forget POST to the GAS backend on failure.
+ * Never blocks or throws — pure observability.
+ */
+const IMAGEFX_TELEMETRY_URL =
+  'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
+
+function sendImageFxTelemetry(opts: {
+  errorMessage: string;
+  errorCode?: string;
+  mode?: string;
+  stage?: string;
+}): void {
+  try {
+    const body = JSON.stringify({
+      action: 'imagefx-telemetry',
+      timestamp: new Date().toISOString(),
+      errorMessage: opts.errorMessage.slice(0, 500),
+      errorCode: opts.errorCode || '',
+      mode: opts.mode || '',
+      stage: opts.stage || '',
+      platform: process.platform || '',
+      adsPowerEnabled: _adsPowerUserEnabled,
+    });
+    fetch(IMAGEFX_TELEMETRY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body,
+    }).catch(() => { /* silent */ });
+  } catch { /* silent */ }
+}
+
 /** ✅ [2026-03-16] AdsPower 사용 여부 설정 (렌더러에서 IPC로 호출) */
 export function setImageFxAdsPowerEnabled(enabled: boolean): void {
   _adsPowerUserEnabled = enabled;
@@ -1205,6 +1268,9 @@ async function ensureBrowserPage(): Promise<Page> {
     }
   }
 
+  // 1.5 (E) Preflight self-diagnostic — first call per session only
+  imageFxPreflight();
+
   // 2. AdsPower 사용 여부 확인 (사용자 설정 기반)
   // ✅ [SPEC-IMAGE-RECOVERY-001 R3] 본 세션 내 AdsPower 자동 OFF 후 재시도 절대 안 함
   if (_adsPowerUserEnabled && !_adsPowerSessionDisabled) {
@@ -1214,6 +1280,13 @@ async function ensureBrowserPage(): Promise<Page> {
       console.log('[ImageFX] 🔗 모드: AdsPower (사용자 설정 ON)');
     } catch (adsPowerErr: any) {
       const adsPowerErrMsg = adsPowerErr.message || '';
+      // (F) Telemetry — AdsPower 실패 기록
+      sendImageFxTelemetry({
+        errorMessage: adsPowerErrMsg,
+        errorCode: extractImageFxErrorCode(adsPowerErr) || 'adspower-fail',
+        mode: 'adspower',
+        stage: 'connect',
+      });
       // ✅ [2026-03-16] 모든 AdsPower 에러 → Playwright로 자동 폴백
       // ECONNREFUSED(미실행/포트불일치), Exceeding(일일 한도), 프로필 없음 등 전부 포함
       console.log(`[ImageFX] ⚠️ AdsPower 사용 불가 (${adsPowerErrMsg.substring(0, 80)}) → Playwright 자체 브라우저로 폴백`);
@@ -1224,7 +1297,24 @@ async function ensureBrowserPage(): Promise<Page> {
         await connectViaPlaywright();
         console.log('[ImageFX] 🔗 모드: Playwright 자체 브라우저 (AdsPower 폴백)');
       } catch (pwErr: any) {
-        throw new Error(`AdsPower 연결 실패 + Playwright 연결도 실패: ${pwErr.message}`);
+        // (F) Telemetry — final failure
+        sendImageFxTelemetry({
+          errorMessage: pwErr.message || String(pwErr),
+          errorCode: extractImageFxErrorCode(pwErr) || 'playwright-fail',
+          mode: 'playwright-fallback',
+          stage: 'connect',
+        });
+        // (D) Self-help wrapped error
+        throw new Error(
+          `AdsPower와 자체 브라우저 모두 실패했습니다.\n\n` +
+          `${pwErr.message}\n\n` +
+          `해결 방법:\n` +
+          `  1. Chrome 또는 Edge를 설치해주세요:\n` +
+          `     • Chrome: https://www.google.com/chrome/\n` +
+          `     • Edge: https://www.microsoft.com/edge/\n` +
+          `  2. 앱을 재시작한 후 다시 시도해주세요.\n` +
+          `  3. 회사·학교 PC라면 보안 정책으로 브라우저 실행이 막혀있을 수 있습니다.`,
+        );
       }
     }
   } else {
@@ -1235,7 +1325,23 @@ async function ensureBrowserPage(): Promise<Page> {
     } catch (pwErr: any) {
       console.error(`[ImageFX] ❌ Playwright 연결 실패: ${pwErr.message}`);
       sendImageLog(`❌ [ImageFX] 브라우저 연결 실패: ${pwErr.message}`);
-      throw new Error(`Playwright 브라우저 연결 실패: ${pwErr.message}`);
+      // (F) Telemetry
+      sendImageFxTelemetry({
+        errorMessage: pwErr.message || String(pwErr),
+        errorCode: extractImageFxErrorCode(pwErr) || 'playwright-fail',
+        mode: 'playwright',
+        stage: 'connect',
+      });
+      // (D) Self-help wrapped error
+      throw new Error(
+        `브라우저 연결 실패: ${pwErr.message}\n\n` +
+        `해결 방법:\n` +
+        `  1. Chrome 또는 Edge를 설치해주세요:\n` +
+        `     • Chrome: https://www.google.com/chrome/\n` +
+        `     • Edge: https://www.microsoft.com/edge/\n` +
+        `  2. 앱을 재시작한 후 다시 시도해주세요.\n` +
+        `  3. 안티 바이러스가 차단했을 수 있습니다. 일시 해제 후 재시도.`,
+      );
     }
   }
 
