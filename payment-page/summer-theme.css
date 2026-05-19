@@ -1,67 +1,127 @@
 /* ═══════════════════════════════════════════════════════════
-   Summer Theme — bright, breezy, ocean-vibe
-   Overrides spring/cherry-blossom inline styles via specificity.
-   Pair with summer-theme.js for sun-particle animation.
+   Summer Theme — Haeundae bright daylight (light mode override)
+   Overrides the dark-mode :root and inline styles via !important.
+   Pair with summer-theme.js for sun-sparkle + ocean wave SVG.
    ═══════════════════════════════════════════════════════════ */
 
-/* Disable all cherry-blossom artifacts */
-.petal-container,
-.petal,
-.music-toggle,
-.music-hint { display: none !important; }
+/* ── Disable all cherry-blossom/dark artifacts ───────────── */
+.petal-container, .petal,
+.music-toggle, .music-hint { display: none !important; }
 
-/* Body backdrop: cool ocean gradient + soft top sunlight */
+/* ── Override the dark mode root variables ───────────────── */
+:root {
+  --bg-deep:       #fff5dc !important;
+  --bg-primary:    #fef0c8 !important;
+  --bg-secondary:  rgba(255, 255, 255, 0.85) !important;
+  --bg-card:       rgba(255, 255, 255, 0.72) !important;
+  --bg-glass:      rgba(255, 255, 255, 0.55) !important;
+  --text-primary:  #14304d !important;
+  --text-secondary:#3d5876 !important;
+  --text-muted:    #8a9aae !important;
+  --border:        rgba(20, 48, 77, 0.10) !important;
+}
+
+/* ── Body: Haeundae sky → sand gradient ──────────────────── */
+body {
+  background:
+    linear-gradient(180deg,
+      #87ceeb   0%,    /* sky blue */
+      #b3e0ee  18%,    /* horizon haze */
+      #e6f3ff  35%,    /* sea sparkle */
+      #fff8e0  55%,    /* sand line */
+      #ffe4a8  78%,    /* warm sand */
+      #fcd58a 100%     /* deeper sand */
+    ) !important;
+  background-attachment: fixed !important;
+  color: #14304d !important;
+  min-height: 100vh !important;
+}
+
+/* ── body::after: soft sunshine + sea sparkle ────────────── */
 body::after {
   content: '' !important;
   position: fixed !important;
-  top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+  inset: 0 !important;
   background:
-    radial-gradient(ellipse at 12% 6%, rgba(255, 232, 150, 0.10) 0%, transparent 42%),
-    radial-gradient(ellipse at 88% 12%, rgba(141, 226, 255, 0.08) 0%, transparent 38%),
-    radial-gradient(ellipse at 50% 90%, rgba(77, 208, 225, 0.06) 0%, transparent 45%),
-    linear-gradient(180deg, rgba(10, 20, 36, 0) 0%, rgba(0, 70, 110, 0.08) 60%, rgba(0, 90, 130, 0.12) 100%) !important;
+    radial-gradient(ellipse at 50% -5%, rgba(255, 252, 200, 0.55) 0%, transparent 45%),
+    radial-gradient(ellipse at 88% 12%, rgba(255, 240, 170, 0.35) 0%, transparent 38%),
+    radial-gradient(ellipse at 10% 28%, rgba(180, 222, 240, 0.30) 0%, transparent 40%) !important;
   pointer-events: none !important;
   z-index: 0 !important;
   opacity: 1 !important;
 }
 
-/* Sun-particle floating layer (added by summer-theme.js) */
-.summer-particles {
-  position: fixed; inset: 0;
-  pointer-events: none;
-  z-index: 9998;
-  overflow: hidden;
-}
-.summer-particles .sun-dot {
-  position: absolute;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #fff7d4 0%, #ffe98a 55%, rgba(255,233,138,0) 100%);
-  box-shadow: 0 0 10px rgba(255,233,138,0.5), 0 0 20px rgba(255,233,138,0.25);
-  opacity: 0;
-  animation: sunFloat linear infinite;
-}
-.summer-particles .sun-dot.small {
-  width: 4px; height: 4px;
-  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #cdf0ff 55%, rgba(205,240,255,0) 100%);
-  box-shadow: 0 0 8px rgba(205,240,255,0.45);
-}
-@keyframes sunFloat {
-  0% { opacity: 0; transform: translate(0, 0) scale(0.6); }
-  10% { opacity: 0.85; }
-  50% { transform: translate(20px, -40vh) scale(1); }
-  90% { opacity: 0.55; }
-  100% { opacity: 0; transform: translate(60px, -110vh) scale(0.4); }
+/* ── Sections: transparent so the body gradient shows ────── */
+.section, .section-dark, .section-darker,
+section { background: transparent !important; }
+
+/* ── Cards: glassy white with soft shadow ────────────────── */
+.card, .review-card, .tip-card, .dynamic-review-card,
+.download-card, .product-card, .pricing-card, .order-step,
+.faq-item, .bank-info, .notice-card, .income-card,
+.review-write-section, .tip-write-section,
+.community-tab, .order-container, .order-container.order-result,
+.stat-card, .login-card {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border: 1px solid rgba(20, 48, 77, 0.10) !important;
+  box-shadow: 0 6px 22px rgba(20, 48, 77, 0.08) !important;
+  color: #14304d !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
 }
 
-/* Bottom wave SVG band (added by summer-theme.js) */
+/* ── Navigation: glass white ─────────────────────────────── */
+.navbar {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border-bottom: 1px solid rgba(20, 48, 77, 0.06) !important;
+}
+.nav-link, .nav-brand-text { color: #14304d !important; }
+.nav-link.active, .nav-link:hover { color: #C9A84C !important; }
+
+/* ── Inputs / textareas / selects ────────────────────────── */
+input, textarea, select,
+.review-field, .tip-input,
+.download-input, .form-group input,
+.input-group input {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #14304d !important;
+  border: 1px solid rgba(20, 48, 77, 0.15) !important;
+}
+input::placeholder, textarea::placeholder {
+  color: #8a9aae !important;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: #C9A84C !important;
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.18) !important;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.site-footer, .footer-inner {
+  background: rgba(255, 255, 255, 0.75) !important;
+  color: #3d5876 !important;
+}
+.footer-links a, .footer-biz, .footer-copy { color: #3d5876 !important; }
+.footer-links a:hover { color: #C9A84C !important; }
+
+/* ── Typography color override for inline-styled bits ───── */
+h1, h2, h3, h4, h5, h6 { color: #14304d !important; }
+p, span, label, li, td, th { color: inherit; }
+
+/* ── Decorative gold accent stays the same ───────────────── */
+.gold, .accent-gold,
+.section-tag,
+.product-icon-lg { color: #14304d; }
+
+/* ── Bottom ocean wave band (kept; tuned for light bg) ───── */
 .summer-waves {
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  height: 140px;
+  height: 160px;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.55;
+  opacity: 0.85;
 }
 .summer-waves svg { width: 100%; height: 100%; display: block; }
 .summer-waves .wave-shape {
@@ -70,22 +130,46 @@ body::after {
 }
 .summer-waves .wave-shape.layer-2 {
   animation: waveSlide 22s ease-in-out infinite reverse;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 .summer-waves .wave-shape.layer-3 {
   animation: waveSlide 30s ease-in-out infinite;
-  opacity: 0.4;
+  opacity: 0.5;
 }
 @keyframes waveSlide {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(-30px); }
 }
 
-@media (max-width: 768px) {
-  .summer-waves { height: 90px; opacity: 0.45; }
+/* ── Sun-sparkle particles (golden) ──────────────────────── */
+.summer-particles {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  overflow: hidden;
+}
+.summer-particles .sun-dot {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #ffd966 60%, rgba(255,217,102,0) 100%);
+  box-shadow: 0 0 10px rgba(255,217,102,0.55), 0 0 20px rgba(255,217,102,0.3);
+  opacity: 0;
+  animation: sunFloat linear infinite;
+}
+.summer-particles .sun-dot.small {
+  width: 3px; height: 3px;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #fff2cc 60%, rgba(255,242,204,0) 100%);
+  box-shadow: 0 0 6px rgba(255,242,204,0.5);
+}
+@keyframes sunFloat {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.6); }
+  10%  { opacity: 0.85; }
+  50%  { transform: translate(25px, -40vh) scale(1); }
+  90%  { opacity: 0.5; }
+  100% { opacity: 0; transform: translate(60px, -110vh) scale(0.4); }
 }
 
-/* Soft brightness lift on cards/sections to keep "낙천적" feel */
-.section-tag {
-  filter: drop-shadow(0 0 6px rgba(141, 226, 255, 0.2));
+@media (max-width: 768px) {
+  .summer-waves { height: 110px; opacity: 0.75; }
 }

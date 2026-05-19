@@ -17,19 +17,23 @@ const KAKAO_URL = 'https://open.kakao.com/o/sPcaslwh';
 const CSS_TAG = '    <link rel="stylesheet" href="summer-theme.css">';
 const JS_TAG = '    <script src="summer-theme.js"></script>';
 
+// Pages that intentionally keep the dark mode (admin dashboards, etc.)
+const SKIP_THEME = new Set(['admin.html']);
+
 const MAILTO_RE = /href=(["'])mailto:cd000242@gmail\.com(?:\?[^"']*)?\1/g;
 
 async function patch(file) {
   const full = path.join(ROOT, file);
   let src = await readFile(full, 'utf8');
   const changes = [];
+  const skipTheme = SKIP_THEME.has(file);
 
-  if (!src.includes('summer-theme.css') && src.includes('</head>')) {
+  if (!skipTheme && !src.includes('summer-theme.css') && src.includes('</head>')) {
     src = src.replace('</head>', CSS_TAG + '\n</head>');
     changes.push('css');
   }
 
-  if (!src.includes('summer-theme.js') && src.includes('</body>')) {
+  if (!skipTheme && !src.includes('summer-theme.js') && src.includes('</body>')) {
     src = src.replace('</body>', JS_TAG + '\n</body>');
     changes.push('js');
   }
