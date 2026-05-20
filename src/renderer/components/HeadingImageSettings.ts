@@ -2047,7 +2047,7 @@ export function createHeadingImageModal(): void {
   // ✅ [2026-01-27] 이미지 생성 모델 상세 설정 버튼 클릭 → 동적 서브 모달 생성
   // ✅ [2026-03-27] Google 계정 변경 버튼 → ImageFX 계정 전환 + 연동 상태 갱신
   document.getElementById('switch-google-account-btn')?.addEventListener('click', async () => {
-    console.log('[HeadingImageSettings] 🔄 Google 계정 변경 시작');
+    console.log('[HeadingImageSettings] 🔄 Google 통합 연동 시퀀스 시작');
     const dotEl = document.getElementById('google-account-dot');
     const textEl = document.getElementById('google-account-text');
     const statusEl = document.getElementById('google-account-status');
@@ -2055,27 +2055,86 @@ export function createHeadingImageModal(): void {
     const btn = document.getElementById('switch-google-account-btn') as HTMLButtonElement | null;
     if (btn) btn.disabled = true;
     if (dotEl) dotEl.style.background = '#3b82f6';
-    if (textEl) textEl.textContent = '⏳ 계정 변경 중...';
+    if (textEl) textEl.textContent = '⏳ Step 1/3: Google 로그인 중...';
     if (statusEl) statusEl.style.color = '#3b82f6';
+
+    // ✅ [v2.10.292] 진짜 통합 — 클릭 한 번으로 Google 로그인 + ImageFX 테스트 + Flow 테스트 + 통합 상태 표시
+    let userName = '';
+    let imagefxOk = false;
+    let flowOk = false;
+    let imagefxMsg = '';
+    let flowMsg = '';
+
     try {
-      const result = await (window as any).api.switchImageFxGoogleAccount();
-      if (result?.success) {
-        if (dotEl) dotEl.style.background = '#22c55e';
-        if (textEl) textEl.textContent = `✅ ${result.userName || '변경 완료'} (변경 →)`;
-        if (statusEl) statusEl.style.color = '#22c55e';
-        if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'; iconEl.textContent = '✅'; }
-        console.log('[HeadingImageSettings] ✅ Google 계정 변경 완료:', result.userName);
-      } else {
+      // ── Step 1/3: Google 계정 로그인/변경 ─────────────────
+      const loginResult = await (window as any).api.switchImageFxGoogleAccount();
+      if (!loginResult?.success) {
         if (dotEl) dotEl.style.background = '#f59e0b';
-        if (textEl) textEl.textContent = `⚠️ ${result?.message || '변경 실패'}`;
+        if (textEl) textEl.textContent = `⚠️ Google 로그인 실패: ${loginResult?.message || '알 수 없는 오류'}`;
         if (statusEl) statusEl.style.color = '#f59e0b';
         if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'; iconEl.textContent = '⚠️'; }
-        console.warn('[HeadingImageSettings] ⚠️ Google 계정 변경 실패:', result?.message);
+        return;
       }
+      userName = loginResult.userName || 'user';
+      console.log(`[HeadingImageSettings] ✅ Step 1/3: Google 로그인 OK (${userName})`);
+
+      // ── Step 2/3: ImageFX 연결 테스트 ─────────────────────
+      if (textEl) textEl.textContent = `⏳ Step 2/3: ImageFX 연결 확인 중...`;
+      try {
+        const imagefxResult = await (window as any).api.testImageFxConnection();
+        imagefxOk = !!imagefxResult?.success;
+        imagefxMsg = imagefxResult?.message || (imagefxOk ? '정상' : '실패');
+        console.log(`[HeadingImageSettings] ${imagefxOk ? '✅' : '⚠️'} Step 2/3: ImageFX = ${imagefxMsg}`);
+      } catch (e: any) {
+        imagefxOk = false;
+        imagefxMsg = e?.message || '예외';
+      }
+
+      // ── Step 3/3: Flow 연결 테스트 ───────────────────────
+      if (textEl) textEl.textContent = `⏳ Step 3/3: Flow 연결 확인 중...`;
+      try {
+        const flowResult = await (window as any).api.testFlowConnection();
+        flowOk = !!flowResult?.success;
+        flowMsg = flowResult?.message || (flowOk ? '정상' : '실패');
+        console.log(`[HeadingImageSettings] ${flowOk ? '✅' : '⚠️'} Step 3/3: Flow = ${flowMsg}`);
+      } catch (e: any) {
+        flowOk = false;
+        flowMsg = e?.message || '예외';
+      }
+
+      // ── 통합 상태 표시 ────────────────────────────────────
+      const allOk = imagefxOk && flowOk;
+      const someOk = imagefxOk || flowOk;
+      const imagefxIcon = imagefxOk ? '✅' : '⚠️';
+      const flowIcon = flowOk ? '✅' : '⚠️';
+
+      if (allOk) {
+        if (dotEl) dotEl.style.background = '#22c55e';
+        if (statusEl) statusEl.style.color = '#22c55e';
+        if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'; iconEl.textContent = '✅'; }
+      } else if (someOk) {
+        if (dotEl) dotEl.style.background = '#f59e0b';
+        if (statusEl) statusEl.style.color = '#f59e0b';
+        if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'; iconEl.textContent = '⚠️'; }
+      } else {
+        if (dotEl) dotEl.style.background = '#ef4444';
+        if (statusEl) statusEl.style.color = '#ef4444';
+        if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)'; iconEl.textContent = '❌'; }
+      }
+
+      if (textEl) {
+        textEl.innerHTML =
+          `<div style="font-size: 12px; line-height: 1.5;">` +
+          `<div>👤 ${userName}</div>` +
+          `<div>${imagefxIcon} ImageFX: ${imagefxOk ? '정상' : imagefxMsg}</div>` +
+          `<div>${flowIcon} Flow: ${flowOk ? '정상' : flowMsg}</div>` +
+          `</div>`;
+      }
+      console.log('[HeadingImageSettings] 🎯 통합 시퀀스 완료:', { userName, imagefxOk, flowOk });
     } catch (err: any) {
-      console.error('[HeadingImageSettings] ❌ Google 계정 변경 오류:', err);
+      console.error('[HeadingImageSettings] ❌ 통합 시퀀스 오류:', err);
       if (dotEl) dotEl.style.background = '#ef4444';
-      if (textEl) textEl.textContent = '❌ 오류 발생';
+      if (textEl) textEl.textContent = `❌ 오류: ${err?.message || '알 수 없음'}`;
       if (statusEl) statusEl.style.color = '#ef4444';
     } finally {
       if (btn) btn.disabled = false;
