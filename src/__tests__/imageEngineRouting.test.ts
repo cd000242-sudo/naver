@@ -18,7 +18,8 @@ function read(rel: string): string {
 describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
   // 모든 활성 엔진이 반드시 등록되어야 하는 위치 7곳
   // ✅ [v2.8.2] 'dall-e-3' 추가 — UI 옵션은 v2.7.15부터 있었으나 화이트리스트에 누락되어 폴백되던 회귀 차단
-  const ENGINES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow'];
+  // ✅ [v2.10.305] 'dall-e-3' 제거 — UI 폐기(v2.10.302) + VALID_AI_SOURCES 제거됨. ActiveImageSource 7개만.
+  const ENGINES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow'];
 
   describe('P0-1: types.ts — ImageProvider / ALLOWED_PROVIDER', () => {
     const code = read('image/types.ts');
@@ -51,8 +52,11 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
 
     for (const engine of ENGINES) {
       it(`'${engine}' GlobalImageSource 타입 유니온에 포함`, () => {
-        const typeDecl = code.match(/export type GlobalImageSource\s*=[\s\S]{0,500}?;/)?.[0] || '';
-        expect(typeDecl).toMatch(new RegExp(`'${engine.replace(/[-/]/g, '\\$&')}'`));
+        // v2.10.305: GlobalImageSource가 ActiveImageSource + 레거시로 분리됨. 둘 다 합쳐서 검색.
+        const activeDecl = code.match(/export type ActiveImageSource\s*=[\s\S]{0,500}?;/)?.[0] || '';
+        const globalDecl = code.match(/export type GlobalImageSource\s*=[\s\S]{0,500}?;/)?.[0] || '';
+        const combined = activeDecl + globalDecl;
+        expect(combined).toMatch(new RegExp(`'${engine.replace(/[-/]/g, '\\$&')}'`));
       });
       it(`'${engine}' VALID_SOURCES 배열에 포함`, () => {
         const block = code.match(/VALID_SOURCES:\s*GlobalImageSource\[\]\s*=\s*\[[\s\S]{0,500}?\]/)?.[0] || '';

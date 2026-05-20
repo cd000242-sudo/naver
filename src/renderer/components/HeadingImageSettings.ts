@@ -35,9 +35,36 @@ function setSubImageMode(mode: SubImageMode): void {
 }
 
 export type HeadingImageMode = 'all' | 'thumbnail-only' | 'odd-only' | 'even-only' | 'none';
+
+// ✅ [v2.10.305] 활성 이미지 소스 — UI에서 선택 가능하고 백엔드에서 정상 동작하는 7개.
+//   신규 코드는 가능하면 이 타입을 사용해 폐기 값 차단.
+//   10팀 검증 팀6 발견: GlobalImageSource에 폐기 값 6개 잔존하여 잘못된 저장 경로 열림.
+export type ActiveImageSource =
+  | 'nano-banana-pro'
+  | 'deepinfra'
+  | 'openai-image'
+  | 'leonardoai'
+  | 'imagefx'
+  | 'flow'
+  | 'local-folder';
+
+/**
+ * 레거시 이미지 소스 타입 — 폐기 값 호환성을 위해 유지.
+ *
+ * @deprecated 신규 코드는 {@link ActiveImageSource}를 사용하세요.
+ *   - 'nano-banana-2': v2.7.28에서 'nano-banana-pro'로 정규화. localStorage 호환 위해 read 시점에 자동 변환.
+ *   - 'dall-e-3': 2026-05-12 OpenAI API 폐기. v2.10.302에서 UI 클릭 차단 + write VALID_AI_SOURCES 제거.
+ *   - 'falai' / 'prodia' / 'stability' / 'pollinations': UI 옵션 사라짐. localStorage 잔존 호환만 유지.
+ */
 // ✅ [2026-02-08 FIX] 이미지 관리 탭 드롭다운 value와 완전 통일
 // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow (Nano Banana Pro 무료 쿼터)
-export type GlobalImageSource = 'nano-banana-2' | 'nano-banana-pro' | 'falai' | 'prodia' | 'stability' | 'pollinations' | 'deepinfra' | 'openai-image' | 'dall-e-3' | 'leonardoai' | 'imagefx' | 'flow' | 'local-folder';
+export type GlobalImageSource = ActiveImageSource
+  | 'nano-banana-2'  // @deprecated v2.7.28 → 'nano-banana-pro' 정규화
+  | 'falai'          // @deprecated UI 폐기
+  | 'prodia'         // @deprecated UI 폐기
+  | 'stability'      // @deprecated UI 폐기
+  | 'pollinations'   // @deprecated UI 폐기
+  | 'dall-e-3';      // @deprecated 2026-05-12 OpenAI 폐기 — gpt-image-1 자동 마이그레이션
 
 // ✅ [2026-02-18] 이미지 스타일 타입 (v1.6.3: 7개 — infographic 추가)
 export type ImageStyleType =

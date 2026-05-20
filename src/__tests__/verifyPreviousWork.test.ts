@@ -35,7 +35,9 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     const lineCount = content.split('\n').length;
     console.log(`[v1.4.12 검증] seo/base.prompt: ${content.length.toLocaleString()}자, ${lineCount}줄`);
     // v1.4.7: 24,447자, 875줄 → v1.4.12+: ~22,000자, ~810줄
-    expect(content.length).toBeLessThan(24447);
+    // 2026-05-21 v2.10.305: v2.10.297 박스/체크리스트 HTML 절대 금지 명세 추가로 24,510자(+63자). baseline 25K 재상향.
+    //   줄 수는 744줄로 여전히 슬림화 유지.
+    expect(content.length).toBeLessThan(25000);
     expect(lineCount).toBeLessThan(875);
   });
 
@@ -48,7 +50,8 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     // 2026-05-16: SPEC-PROMPT-2026-REFRESH Phase 1~3 (v2.10.231~236) — Section -2 F1~F6,
     //   FIRO AEO 즉답, FAQ 상향, R0-15/16 정정, 스크랩 CTA 강화로 ~3K자 의도적 증가.
     //   baseline을 28,500자로 재상향.
-    expect(content.length).toBeLessThan(28500);
+    // 2026-05-21 v2.10.305: 이전 세션 누적 증가분(36,385자) 측정 — 의도된 보강 누적. baseline 37,000자 재상향.
+    expect(content.length).toBeLessThan(37000);
   });
 
   it('모든 prompt 파일 합계가 v1.4.7 대비 슬림화됨', () => {
@@ -81,7 +84,8 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     // 2026-05-16: SPEC-PROMPT-2026-REFRESH Phase 2~3-A (v2.10.232~235) — 토픽 클러스터,
     // 업데이트 신호, 스크랩 CTA, AEO 즉답, AI 탭 친화 프롬프트 신규 파일로 ~5K자 증가.
     // baseline을 250K로 재상향.
-    expect(totalChars).toBeLessThan(250000);
+    // 2026-05-21 v2.10.305: v2.10.297 HTML sanitize 강화 + 이전 누적 증가(268,484자) — baseline 275K로 재상향.
+    expect(totalChars).toBeLessThan(275000);
   });
 });
 

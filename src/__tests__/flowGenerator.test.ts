@@ -94,8 +94,9 @@ describe('Flow 이미지 엔진 v2.7.x', () => {
       expect(code).toMatch(/FLOW_NEW_PROJECT_BUTTON_NOT_FOUND.*Google Flow.*다른 이미지 엔진/);
     });
 
-    it('FLOW_ALL_FAILED — 시간당 한도 + 다른 엔진 선택 안내', () => {
-      expect(code).toMatch(/FLOW_ALL_FAILED.*시간당 한도.*다른 이미지 엔진/);
+    it('FLOW_ALL_FAILED — 한도 도달 + 다른 엔진 선택 안내 (v2.10.303 메시지 문구 업데이트)', () => {
+      // v2.10.298+: "Flow 쿼터 확인" / "한도 도달 추정"으로 문구 변경. "다른 이미지 엔진" 안내는 유지.
+      expect(code).toMatch(/FLOW_ALL_FAILED.*(한도|쿼터).*다른 이미지 엔진/);
     });
   });
 
