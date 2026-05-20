@@ -104,6 +104,19 @@ export class BrandStoreProvider extends BaseProvider {
             page = await createPage();
             await warmup(page);
 
+            // ✅ [v2.10.312] 사용자 강조: "Playwright 켤 때 80% 페이지 축소해서 작업하라니까"
+            //   page.goto 전에 viewport + Chrome DevTools Protocol setPageScaleFactor 적용
+            //   → 페이지가 처음부터 80% 스케일로 렌더 → lazy-load 결정도 80% viewport 기준
+            //   CSS zoom 0.8(v2.10.309)은 약함 — navigation 시 reset되거나 lazy 결정 후 적용
+            try {
+                await page.setViewportSize({ width: 1536, height: 864 });  // 1920 × 0.8 = 1536
+                const cdp = await page.context().newCDPSession(page);
+                await cdp.send('Emulation.setPageScaleFactor', { pageScaleFactor: 0.8 });
+                console.log('[BrandStore:Playwright] 🔍 viewport 1536x864 + pageScaleFactor 0.8 적용 (사용자 요구)');
+            } catch (zoomErr) {
+                console.warn('[BrandStore:Playwright] ⚠️ CDP zoom 적용 실패, CSS zoom으로 폴백:', (zoomErr as Error).message);
+            }
+
             // 모바일 URL로 변환
             const mobileUrl = url.replace('brand.naver.com', 'm.brand.naver.com');
             console.log(`[BrandStore:Playwright] 🌐 상품 페이지 이동: ${mobileUrl.substring(0, 60)}...`);
@@ -362,11 +375,18 @@ export class BrandStoreProvider extends BaseProvider {
                     const addUrl = (u: string | null | undefined) => {
                         if (u && u.startsWith('http') && !u.startsWith('data:')) results.push(u);
                     };
+                    // ✅ [v2.10.312] 사용자 케이스(homelia/12059215662) MCP 실측에서 발견:
+                    //   alt="review_image" img가 12개 페이지에 직접 로드되어 있는데
+                    //   기존 셀렉터 [class*="review"] img 가 alt 기반 셀렉터 누락으로 못 잡음.
+                    //   조치: alt="review_image" / alt^="리뷰" 직접 셀렉터 추가.
                     const reviewSelectors = [
+                        'img[alt="review_image"]',
+                        'img[alt^="리뷰"]',
                         '[class*="review"] img',
                         '[class*="Review"] img',
                         '[data-testid*="review"] img',
                         '[class*="photo_review"] img',
+                        '[data-shp-area*="review"] img',
                     ];
                     for (const sel of reviewSelectors) {
                         try {
