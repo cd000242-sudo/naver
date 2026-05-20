@@ -11,6 +11,8 @@ release_final/
 .env
 .env.local
 .env.release
+.env.pre-pack-backup
+*.pre-pack-backup
 
 # Selector capture/debug artifacts
 .capture-userdata/
