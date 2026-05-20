@@ -66,10 +66,11 @@ export function registerImageCollectShoppingHandlers(): void {
                 //   조치: SmartStore/Coupang와 동일하게 collectShoppingImages(Provider) 사용.
                 console.log('[Main] 🏪 브랜드스토어 감지 → BrandStoreProvider 사용 (추가이미지 클릭 + 리뷰 수집)');
                 const { collectShoppingImages } = await import('../../crawler/shopping/index.js');
+                // ✅ [v2.10.309] 사용자 요구: 추가이미지 + 리뷰이미지만 필요, 상세페이지 제외
                 const result = await collectShoppingImages(url, {
                     timeout: 30000,
                     maxImages: 100,
-                    includeDetails: true,
+                    includeDetails: false,   // ✅ 상세페이지 이미지 제외 (사용자 요청)
                     includeReviews: true,    // ✅ 리뷰 이미지 수집 활성화 (사용자 요청)
                     useCache: true,
                 });
@@ -100,11 +101,11 @@ export function registerImageCollectShoppingHandlers(): void {
                             const fallbackResult = await crawlBrandStoreProduct(productId, brandName, url);
 
                             if (fallbackResult) {
-                                // ✅ AffiliateProductInfo에서 이미지 추출 (mainImage + galleryImages + detailImages)
+                                // ✅ [v2.10.309] 사용자 요구: 상세페이지(detailImages) 제외 — 추가/리뷰 이미지만
                                 const fallbackAllImages: string[] = [];
                                 if (fallbackResult.mainImage) fallbackAllImages.push(fallbackResult.mainImage);
                                 if (fallbackResult.galleryImages?.length) fallbackAllImages.push(...fallbackResult.galleryImages);
-                                if (fallbackResult.detailImages?.length) fallbackAllImages.push(...fallbackResult.detailImages);
+                                // detailImages는 의도적으로 제외 (사용자 요청 "상세페이지는 필요없음")
 
                                 // 폴백에서 얻은 이미지 병합 (중복 제거)
                                 const existingNorm = new Set(images.map(u => u.split('?')[0]));
@@ -141,11 +142,11 @@ export function registerImageCollectShoppingHandlers(): void {
                 console.log(`[Main] 🏪 ${isSmartStore ? '스마트스토어' : '쿠팡'} 감지 → 새 크롤러 사용`);
                 const { collectShoppingImages } = await import('../../crawler/shopping/index.js');
 
-                // ✅ [v2.10.308] includeReviews: true 활성화 — 사용자 요청 (추가이미지 다 모은 후 리뷰이미지)
+                // ✅ [v2.10.309] 사용자 요구: 추가이미지 + 리뷰이미지만, 상세페이지 제외
                 const result = await collectShoppingImages(url, {
                     timeout: 30000,
                     maxImages: 100,
-                    includeDetails: true,
+                    includeDetails: false,   // ✅ 상세페이지 이미지 제외 (사용자 요청)
                     includeReviews: true,
                     useCache: true,
                 });

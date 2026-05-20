@@ -186,13 +186,25 @@ export class BrandStoreProvider extends BaseProvider {
             console.log('[BrandStore:Playwright] 🖱️ PHASE 0: 갤러리 썸네일 클릭 → 큰 이미지 추출...');
 
             try {
+                // ✅ [v2.10.309] 사용자 제보: "확대 80%로 줄여야 보임" — 데스크톱 1920 viewport에서
+                //   썸네일이 우측/아래로 밀려나 visible 영역 밖 → Puppeteer click() 실패 회귀.
+                //   조치: 페이지 zoom-out 0.8 + 썸네일 scrollIntoView 후 클릭.
+                await page.evaluate(() => {
+                    document.body.style.zoom = '0.8';
+                }).catch(() => undefined);
+                await page.waitForTimeout(300);
+
                 const thumbImgs = await page.$$('img[alt^="추가이미지"]');
 
                 if (thumbImgs.length > 0) {
-                    console.log(`[BrandStore:Playwright] ✅ 추가이미지 ${thumbImgs.length}개 발견`);
+                    console.log(`[BrandStore:Playwright] ✅ 추가이미지 ${thumbImgs.length}개 발견 (zoom 0.8 적용)`);
 
-                    // 대표이미지 먼저 수집
-                    const mainImgEl = await page.$('img[alt="대표이미지"]');
+                    // 대표이미지 먼저 수집 (alt="대표이미지" 모바일/데스크톱 둘 다 시도)
+                    let mainImgEl = await page.$('img[alt="대표이미지"]');
+                    if (!mainImgEl) {
+                        // 데스크톱 페이지 폴백: 첫 번째 추가이미지의 부모 a 클릭한 결과로 잡힌 큰 이미지
+                        mainImgEl = await page.$('[data-shp-area="topi.image"] img, .product-detail__main-image img, [class*="ProductImage_main"] img');
+                    }
                     if (mainImgEl) {
                         const mainSrc = await mainImgEl.evaluate((img: HTMLImageElement) =>
                             img.getAttribute('data-src') || img.src || ''
@@ -203,13 +215,23 @@ export class BrandStoreProvider extends BaseProvider {
                     // 각 추가이미지 썸네일 클릭 → 대표이미지 영역에서 큰 이미지 추출
                     for (let i = 0; i < thumbImgs.length; i++) {
                         try {
+                            // ✅ [v2.10.309] scrollIntoView로 viewport 안에 위치 강제 (zoom 0.8 + scroll 이중 보장)
+                            await thumbImgs[i].evaluate((el: HTMLElement) => {
+                                el.scrollIntoView({ block: 'center', inline: 'center', behavior: 'instant' as ScrollBehavior });
+                            }).catch(() => undefined);
+                            await page.waitForTimeout(200);
+
                             const parent = await thumbImgs[i].evaluateHandle((el: HTMLElement) =>
                                 el.closest('li') || el.closest('a') || el
                             );
                             await (parent || thumbImgs[i]).click();
                             await page.waitForTimeout(500 + Math.random() * 300);
 
-                            const bigImgEl = await page.$('img[alt="대표이미지"]');
+                            // 대표이미지 영역 갱신 후 큰 이미지 src 추출
+                            let bigImgEl = await page.$('img[alt="대표이미지"]');
+                            if (!bigImgEl) {
+                                bigImgEl = await page.$('[data-shp-area="topi.image"] img');
+                            }
                             if (bigImgEl) {
                                 const bigSrc = await bigImgEl.evaluate((img: HTMLImageElement) =>
                                     img.getAttribute('data-src') || img.src || ''
@@ -219,7 +241,19 @@ export class BrandStoreProvider extends BaseProvider {
                                     console.log(`[BrandStore:Playwright] 📸 추가이미지 ${i + 1} 클릭 → 큰 이미지 추출 OK`);
                                 }
                             }
-                        } catch { /* 개별 클릭 실패 무시 */ }
+
+                            // ✅ [v2.10.309] 클릭 안 돼서 큰 이미지 못 가져오면 썸네일 자체 src를 fallback으로 사용
+                            //   썸네일은 type=f40 작은 크기지만, upscaleUrl()이 ?type=f860으로 업스케일 처리.
+                            else {
+                                const thumbSrc = await thumbImgs[i].evaluate((img: HTMLImageElement) =>
+                                    img.getAttribute('data-src') || img.src || ''
+                                );
+                                if (thumbSrc) {
+                                    addImg(thumbSrc, 'gallery-thumb-fallback');
+                                    console.log(`[BrandStore:Playwright] 📷 추가이미지 ${i + 1} 큰 이미지 추출 실패 → 썸네일 fallback (upscale)`);
+                                }
+                            }
+                        } catch (clickErr) { /* 개별 클릭 실패 무시 */ }
                     }
                     console.log(`[BrandStore:Playwright] ✅ PHASE 0 완료: ${allImages.length}개 갤러리 이미지`);
                 } else {
