@@ -405,13 +405,23 @@ export class BrandStoreProvider extends BaseProvider {
                 console.warn('[BrandStore:Playwright] ⚠️ PHASE 2 실패:', (phase2Err as Error).message);
             }
 
-            // 최종 정리: 메인 > 갤러리 > 리뷰 순서
+            // ✅ [v2.10.314] 사용자 명시 요구: "추가이미지 먼저 배치, 그다음 리뷰이미지"
+            //   최종 정리: 메인 → 갤러리(추가이미지) → 갤러리 폴백(thumb-upscale) → 리뷰
+            //   소제목 N개에 배치 시 갤러리 이미지부터 N개 우선 채워지고 부족 시 리뷰로 보완.
             const mainImages = allImages.filter(i => i.type === 'main');
             const galleryImages = allImages.filter(i => i.type === 'gallery');
+            const galleryFallbackImages = allImages.filter(i => i.type === 'gallery-thumb-fallback');
             const reviewImages = allImages.filter(i => i.type === 'review');
 
-            const sortedImages = [...mainImages, ...galleryImages, ...reviewImages].slice(0, 100);
+            const sortedImages = [
+                ...mainImages,
+                ...galleryImages,            // 클릭으로 큰 이미지 추출 성공
+                ...galleryFallbackImages,    // 클릭 실패 → 썸네일 upscale 폴백
+                ...reviewImages,             // 리뷰는 갤러리 다음 (사용자 요구)
+            ].slice(0, 100);
             const images: ProductImage[] = sortedImages as ProductImage[];
+
+            console.log(`[BrandStore:Playwright] 📋 우선순위 정렬: 메인 ${mainImages.length} → 갤러리 ${galleryImages.length} → 갤러리폴백 ${galleryFallbackImages.length} → 리뷰 ${reviewImages.length}`);
 
             // 제품 정보 추출
             const productInfo = await page.evaluate(() => {
