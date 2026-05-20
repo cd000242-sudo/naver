@@ -57,6 +57,8 @@ import { generateEnglishPromptMain } from './main/utils/mainPromptInference.js';
 import { convertMp4ToGif } from './image/gifConverter.js'; // ✅ 추가
 import type { GenerateImagesOptions, GeneratedImage } from './imageGenerator.js';
 import { getDailyLimit, getTodayCount, incrementTodayCount, setDailyLimit } from './postLimitManager.js';
+// ✅ [v2.10.301] 다중계정 봇감지 백오프 + 계정별 로그인 시차 — 10팀 검증에서 botBackoff dead code 발견
+import { isAccountBackedOff, getBotBackoff, computeLoginStaggerDelayMs } from './utils/botBackoff.js';
 import { generateStructuredContent, removeOrdinalHeadingLabelsFromBody } from './contentGenerator.js';
 import { withRetry, isRetryableError } from './errorRecovery.js';
 import { createDatalabClient, NaverDatalabClient } from './naverDatalab.js';
@@ -4093,11 +4095,44 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
     //  순차 발행 (각 계정에 대해 executePostCycle 호출)
     const limitedAccountIds = accountIds.slice(0, 100);  // 최대 100개 제한 (대행사/마케팅 회사 대응)
+
+    // ✅ [v2.10.301] 모든 계정 backoff 사전 검사 — 전부 차단 상태면 조기 종료
+    //   10팀 검증 발견: 전계정 backoff 시 끝까지 루프 돌고 결과만 실패로 집계되는 비효율 차단.
+    const _backedOffAccounts = limitedAccountIds.filter(id => isAccountBackedOff(id));
+    if (_backedOffAccounts.length === limitedAccountIds.length && limitedAccountIds.length > 0) {
+      const earliestExpiry = limitedAccountIds
+        .map(id => getBotBackoff(id))
+        .filter((rec): rec is NonNullable<typeof rec> => rec !== null)
+        .sort((a, b) => a.expiresAt - b.expiresAt)[0];
+      const waitHours = earliestExpiry ? Math.ceil((earliestExpiry.expiresAt - Date.now()) / 3_600_000) : 12;
+      sendLog(`⛔ 전체 ${limitedAccountIds.length}개 계정 모두 봇감지 backoff 상태 — 최단 ${waitHours}시간 후 자동 해제. 다중 발행 조기 종료.`);
+      for (const id of limitedAccountIds) {
+        const rec = getBotBackoff(id);
+        results.push({ accountId: id, success: false, message: `봇감지 backoff (${rec?.reason}) — ${waitHours}시간 후 재시도` });
+      }
+      return { success: false, results, message: `전계정 backoff 상태 — ${waitHours}시간 후 재시도` } as any;
+    }
+
     for (let i = 0; i < limitedAccountIds.length; i++) {
       const accountId = limitedAccountIds[i];
       // 중지 체크
       if (AutomationService.isMultiAccountAborted()) {
         results.push({ accountId, success: false, message: '사용자에 의해 중지됨' });
+        continue;
+      }
+
+      // ✅ [v2.10.301] 봇감지 backoff 사전 체크 — 브라우저 launch 전에 skip
+      //   10팀 검증 발견: 기존 흐름은 브라우저 launch 후 naverBlogAutomation 내부에서 throw로 차단 →
+      //   launch 오버헤드 낭비 + 사용자가 "왜 자꾸 실패하지?" 혼동. 사전 체크로 즉시 skip + 명확한 사유 보고.
+      const backoffRec = getBotBackoff(accountId);
+      if (backoffRec) {
+        const waitHours = Math.ceil((backoffRec.expiresAt - Date.now()) / 3_600_000);
+        sendLog(`⏸️ [${accountId}] 봇감지 backoff 중 (${backoffRec.reason}) — ${waitHours}시간 후 자동 해제. 건너뜀.`);
+        results.push({
+          accountId,
+          success: false,
+          message: `봇감지 backoff (${backoffRec.reason}) — ${waitHours}시간 후 재시도`,
+        });
         continue;
       }
 
@@ -4463,6 +4498,10 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           scAutoThumbnailSetting: options?.scAutoThumbnailSetting || false,  // 자동 썸네일
           // ✅ [2026-03-18 FIX] 전용 썸네일 생성 경로 → thumbnailPath 자동 매핑
           thumbnailPath: options?.thumbnailPath || options?.presetThumbnailPath || generatedThumbnailPath || undefined,
+          // ✅ [v2.10.301] 다중계정 봇감지 회피 — 첫 계정은 즉시(0ms), 2~N 계정은 3~10분 시차 누적
+          //   10팀 검증 발견: computeLoginStaggerDelayMs가 botBackoff.ts에 정의됐는데 dead code였음.
+          //   여러 계정이 같은 PC에서 같은 시각에 연속 로그인 시 네이버가 "자동화 의심"으로 추가 인증 요구.
+          loginStaggerMs: computeLoginStaggerDelayMs(i),
         };
 
         // ✅ [2026-03-01 FIX] 선차감 패턴: 계정별 발행 전 쿼터 차감
