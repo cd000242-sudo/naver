@@ -98,6 +98,57 @@ let _adsPowerUserEnabled: boolean = false; // ✅ [2026-03-16] 사용자 AdsPowe
 let _adsPowerSessionDisabled: boolean = false;
 
 // ═══════════════════════════════════════════════════════════
+// ▣ Human behavior simulation (v2.10.293) — 자동화 감지 회피
+// ═══════════════════════════════════════════════════════════
+
+/**
+ * 사람 행동 시뮬레이션 — 마우스 움직임 + 스크롤 + 자연 대기.
+ * Google labs의 봇 감지 신호 ↓ (즉시 액션은 봇 패턴).
+ * 호출 비용: 약 1-3초.
+ */
+async function simulateHumanBehavior(page: Page): Promise<void> {
+  try {
+    // 1. viewport 크기 가져오기
+    const vp = page.viewportSize?.() || { width: 1280, height: 800 };
+
+    // 2. 마우스 1-3회 무작위 움직임 (베이지어 곡선처럼)
+    const mouseSteps = 1 + Math.floor(Math.random() * 3);
+    for (let s = 0; s < mouseSteps; s++) {
+      const x = Math.floor(Math.random() * (vp.width - 100)) + 50;
+      const y = Math.floor(Math.random() * (vp.height - 100)) + 50;
+      await page.mouse.move(x, y, { steps: 10 + Math.floor(Math.random() * 15) });
+      await new Promise((r) => setTimeout(r, 200 + Math.floor(Math.random() * 600)));
+    }
+
+    // 3. 스크롤 1-2회 (사람이 페이지 살피는 패턴)
+    if (Math.random() > 0.3) {
+      await page.mouse.wheel(0, 100 + Math.floor(Math.random() * 200));
+      await new Promise((r) => setTimeout(r, 400 + Math.floor(Math.random() * 800)));
+      if (Math.random() > 0.5) {
+        await page.mouse.wheel(0, -(50 + Math.floor(Math.random() * 100)));
+        await new Promise((r) => setTimeout(r, 300 + Math.floor(Math.random() * 500)));
+      }
+    }
+  } catch {
+    // 실패해도 흐름 차단 X
+  }
+}
+
+/**
+ * 이미지 생성 요청 간 랜덤 대기 (5-15초).
+ * 같은 분 내 빠른 연속 요청 = 봇 감지 트리거.
+ * 첫 요청은 대기 X.
+ */
+async function humanLikeIntervalDelay(index: number): Promise<void> {
+  if (index === 0) return; // 첫 이미지는 즉시
+  const baseMs = 5000;
+  const jitterMs = Math.floor(Math.random() * 10000); // 0~10s 랜덤
+  const totalMs = baseMs + jitterMs;
+  console.log(`[ImageFX] ⏳ 봇 감지 회피 대기 ${Math.round(totalMs / 1000)}초 (이미지 ${index + 1})`);
+  await new Promise((r) => setTimeout(r, totalMs));
+}
+
+// ═══════════════════════════════════════════════════════════
 // ▣ Preflight self-diagnostic + telemetry (D + E + F)
 // ═══════════════════════════════════════════════════════════
 
@@ -1228,6 +1279,10 @@ async function connectViaPlaywright(): Promise<Page> {
   //   변경: 로그인 후 그대로 visible 컨텍스트 유지 → 사용자가 브라우저 창 보임
   console.log('[ImageFX] ✅ 로그인 완료 → visible 모드 유지 (자동화 감지 회피)');
   sendImageLog('✅ [ImageFX] 로그인 완료! 이미지 생성 준비됨 (브라우저 창 유지 — Google 자동화 감지 회피)');
+
+  // ✅ [v2.10.293] 로그인 직후 사람 행동 시뮬레이션 — 마우스 + 스크롤
+  //   로그인 → 즉시 이미지 생성 = 봇 패턴. 잠시 사람처럼 행동 후 진행.
+  await simulateHumanBehavior(page);
 
   await setCachedBrowser(context.browser() as any);
   cachedPage = page;
@@ -2417,6 +2472,16 @@ export async function generateWithImageFx(
       console.log(`[ImageFX] ⏹️ 중지 요청됨 — ${i + 1}번째부터 건너뜀`);
       sendImageLog(`⏹️ [ImageFX] 중지 요청됨`);
       break;
+    }
+
+    // ✅ [v2.10.293] 요청 간 랜덤 대기 (5-15초) — 봇 감지 회피
+    //   같은 분 내 빠른 연속 요청은 Google 봇 감지 신호. 사람처럼 간격을 둠.
+    await humanLikeIntervalDelay(i);
+
+    // ✅ [v2.10.293] 사람 행동 시뮬레이션 — 마우스 움직임 + 스크롤
+    //   매 이미지 생성 전 잠깐 사람처럼 행동. 봇 점수 ↓
+    if (cachedPage) {
+      await simulateHumanBehavior(cachedPage);
     }
 
     const item = items[i];
