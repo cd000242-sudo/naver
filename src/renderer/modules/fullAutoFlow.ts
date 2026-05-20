@@ -281,7 +281,15 @@ export function isRetryableImageError(error: any): boolean {
 
 // ✅ [2026-03-11] 기술적 에러 → 사용자 친화적 한글 메시지 변환
 export function friendlyErrorMessage(error: any): string {
-  const msg = String(error?.message || error || '').toLowerCase();
+  const rawMessage = String(error?.message || error || '');
+  const msg = rawMessage.toLowerCase();
+  // ✅ [v2.10.299] BOT_DETECTED prefix를 우선 처리 — 봇감지 의심은 한도와 다른 처방 필요.
+  //   raw prefix(IMAGEFX_BOT_DETECTED:⚠️...)가 UI에 노출되지 않도록 매칭 우선순위 최상위.
+  if (/IMAGEFX_BOT_DETECTED|FLOW_BOT_DETECTED|봇감지 의심/i.test(rawMessage)) {
+    // prefix 제거 후 본문만 추출 (이미 사용자 친화적 한글로 작성됨)
+    const body = rawMessage.replace(/^(IMAGEFX_BOT_DETECTED|FLOW_BOT_DETECTED):/, '').trim();
+    return body || '⚠️ Google 봇감지 의심입니다. 한도가 아닐 가능성이 큽니다. 다른 이미지 엔진(나노바나나/DeepInfra)으로 전환하거나 Google 계정을 변경해주세요.';
+  }
   if (/429|too many requests|rate limit/i.test(msg)) {
     return '⚠️ AI 이미지 생성 할당량이 부족합니다. 잠시 후 다시 시도하거나, 설정에서 할당량을 확인해주세요.';
   }

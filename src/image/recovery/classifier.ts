@@ -38,6 +38,12 @@ export function classifyError(input: ClassifyInput): RecoveryDecision {
   if (errorCode === 'IMAGEFX_QUOTA_EXCEEDED') {
     return blockDecision('B3', '시간당 한도 초과 (IMAGEFX_QUOTA_EXCEEDED)', errorCode);
   }
+  // ✅ [v2.10.299] BOT_DETECTED — 봇감지 의심 (오늘 성공 < 100장에서 429 발생).
+  //   B3와 modalCode는 동일하지만 errorCode가 BOT_DETECTED로 보존되어 ProgressModal에서
+  //   "한도 아님 → 다른 엔진 즉시 전환" 메시지로 차별화 표시됨.
+  if (errorCode === 'IMAGEFX_BOT_DETECTED' || errorCode === 'FLOW_BOT_DETECTED') {
+    return blockDecision('B3', `봇감지 의심 (${errorCode}) — 사용자 다른 엔진 전환 유도`, errorCode);
+  }
   // PLAYWRIGHT_INSTALL_FAILED만 B4로 분리.
   if (errorCode === 'PLAYWRIGHT_INSTALL_FAILED') {
     return blockDecision('B4', '브라우저 미설치 또는 설치 실패', errorCode);

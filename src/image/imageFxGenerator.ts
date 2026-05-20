@@ -25,6 +25,8 @@ import type { Browser, Page, BrowserContext } from 'playwright';
 // ✅ [SPEC-IMAGE-RECOVERY-001] 자동 복구 코디네이터
 import { getRecoveryCoordinator } from './recovery/index.js';
 import type { RecoveryDecision } from './recovery/index.js';
+// ✅ [v2.10.298] 일별 카운터 — HTTP 429를 봇감지 vs 진짜 한도로 구분
+import { incrementDailySuccess, classifyQuotaError, getDailySuccess } from '../utils/imageEngineDailyCounter.js';
 
 // ✅ 실시간 로그 → 렌더러 UI 전송
 function sendImageLog(message: string): void {
@@ -1671,13 +1673,39 @@ export async function generateSingleImageWithImageFx(
         continue;
       }
 
-      // ✅ [v1.4.40] 쿼터 초과 (429) — Google ImageFX는 명시적 한도 없이 동적 차단
+      // ✅ [v2.10.298] HTTP 429 분류 — 봇감지 vs 진짜 한도 구분
+      //   기존 문제: 첫 시도 429인데도 "1시간 한도"로만 표시 → 사용자가 진짜 한도로 오인.
+      //   휴리스틱: 오늘 성공 < 10장 = 한도 도달 불가능 → 봇감지 99%.
+      //            10~99장 = 봇감지 가능성 큼. 100장+ = 진짜 한도 가능성.
       if (errorCode === 'HTTP_429') {
-        console.warn(`[ImageFX] 🚫 쿼터 초과 (HTTP 429) — 시도 ${attempt}/${MAX_RETRIES}`);
-        sendImageLog('🚫 [ImageFX] 시간당 한도 초과 — 1시간 후 다시 시도해주세요.');
-        lastError = new Error('IMAGEFX_QUOTA_EXCEEDED:Google ImageFX 시간당 한도를 초과했습니다. 약 1시간 후 다시 시도하거나, 다른 이미지 엔진(Pollinations/DeepInfra)으로 전환해주세요.');
-        // 429는 재시도해도 의미 없음 — 즉시 종료
-        return null;
+        const todayCount = getDailySuccess('imagefx');
+        const classification = classifyQuotaError('imagefx');
+        console.warn(`[ImageFX] 🚫 HTTP 429 — 오늘 성공 ${todayCount}장, 분류: ${classification}`);
+
+        if (classification === 'bot_detected' || classification === 'likely_bot') {
+          const reason = classification === 'bot_detected'
+            ? `오늘 ${todayCount}장만 생성 — 진짜 한도 불가능`
+            : `오늘 ${todayCount}장 — 봇감지 가능성 큼`;
+          sendImageLog(`⚠️ [ImageFX] 봇감지 의심! (${reason}) — 한도 아님. 다른 엔진(나노바나나 ₩54/장 / DeepInfra) 즉시 사용 권장`);
+          lastError = new Error(
+            `IMAGEFX_BOT_DETECTED:⚠️ Google 봇감지 의심 (오늘 ${todayCount}장만 생성). ` +
+            `진짜 시간당 한도가 아닐 가능성 큼. 1시간 기다려도 같은 증상 반복될 수 있음.\n\n` +
+            `즉시 해결:\n` +
+            `1. 다른 이미지 엔진으로 전환 (나노바나나 ₩54/장, DeepInfra $0.01/장)\n` +
+            `2. 환경설정 → ImageFX → "Google 계정 변경" 으로 다른 계정 사용\n` +
+            `3. 잠시 후(10~30분) 재시도 (긴 시간 기다리지 마세요)`
+          );
+        } else {
+          sendImageLog(`🚫 [ImageFX] 진짜 시간당 한도 도달 추정 (오늘 ${todayCount}장+) — 1시간 후 재시도`);
+          lastError = new Error(
+            `IMAGEFX_QUOTA_EXCEEDED:Google ImageFX 시간당 한도를 초과했습니다 (오늘 ${todayCount}장 성공). ` +
+            `약 1시간 후 다시 시도하거나, 다른 이미지 엔진(나노바나나/DeepInfra)으로 전환해주세요.`
+          );
+        }
+        // ✅ [v2.10.299 FIX] return null → throw — 외부 catch가 lastClassifiedError로 저장하도록.
+        //   v2.10.298 버그: return null 시 외부 루프가 else 분기로 처리 → lastError 함수 내부에만 존재 →
+        //   IMAGEFX_BOT_DETECTED/QUOTA_EXCEEDED가 사용자에게 전달되지 않고 IMAGEFX_UNKNOWN_FAILURE로 덮임.
+        throw lastError;
       }
 
       // 안전 필터 차단
@@ -2631,6 +2659,8 @@ export async function generateWithImageFx(
         results.push(genImage);
         consecutiveFailures = 0; // 성공 시 연속 실패 카운터 초기화
         coordinator.markHeadingSucceeded(); // C8
+        // ✅ [v2.10.298] 일별 성공 카운트 증가 — HTTP 429 발생 시 봇감지 vs 진짜 한도 구분에 사용
+        incrementDailySuccess('imagefx');
 
         console.log(`[ImageFX] ✅ [${i + 1}/${items.length}] "${heading}" 생성 완료! (${Math.round(fxResult.buffer.length / 1024)}KB)`);
         sendImageLog(`✅ [ImageFX] "${heading}" 완료! (${i + 1}/${items.length})`);

@@ -515,6 +515,19 @@ export class ProgressModal {
                         '약 1시간 후 자동 해제됩니다. 기다리기 싫으면 환경설정 → "Google 계정 변경"으로 ' +
                         '다른 계정 사용 또는 이미지 엔진을 DeepInfra/Pollinations로 전환하세요.';
                     break;
+                case 'BOT_DETECTED':
+                    // ✅ [v2.10.299] 봇감지 의심 — 오늘 < 100장 성공인데 429 발생.
+                    //   진짜 한도 도달 가능성 ↓, 봇감지로 인한 동적 차단 ↑
+                    detail.errorType = '⚠️ Google 봇감지 의심 (한도 아님)';
+                    detail.errorCode = 'HTTP_429 (의심 분류: BOT)';
+                    detail.suggestion =
+                        '오늘 생성량이 적은데 429가 발생한 케이스입니다. 진짜 시간당 한도일 가능성이 낮고, ' +
+                        'Google이 자동화를 의심해 임시 차단한 것일 가능성이 큽니다. ' +
+                        '1시간 기다려도 같은 증상이 반복될 수 있으니 즉시 다음을 시도하세요: ' +
+                        '① 다른 이미지 엔진(나노바나나 ₩54/장, DeepInfra $0.01/장)으로 전환, ' +
+                        '② 환경설정 → ImageFX → "Google 계정 변경"으로 다른 계정 사용, ' +
+                        '③ 10~30분 후 재시도 (긴 시간 기다리지 마세요).';
+                    break;
                 case 'AUTH_EXPIRED':
                     detail.errorType = '🔑 Google 세션 만료';
                     detail.errorCode = 'HTTP_401';

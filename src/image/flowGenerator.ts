@@ -24,6 +24,9 @@ import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 import { injectUniqueSalt, injectHeadingVariation } from './flowPromptInjection.js';
+// ✅ [v2.10.298] Flow 일별 카운터 — 한도 에러 발생 시 봇감지 vs 진짜 한도 구분
+import { incrementDailySuccess, classifyQuotaError, getDailySuccess } from '../utils/imageEngineDailyCounter.js';
+const incrementFlowDailySuccess = (): number => incrementDailySuccess('flow');
 import type { BrowserContext, Page, Locator } from 'playwright';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -1530,6 +1533,8 @@ export async function generateSingleImageWithFlow(
             const downloaded = await downloadImageAsBuffer(page, newImageUrl);
 
             trackApiUsage('gemini', { images: 1, model: 'flow-nano-banana-2', costOverride: 0 });
+            // ✅ [v2.10.298] 일별 성공 카운트 — HTTP 429/한도성 에러 발생 시 봇감지 vs 진짜 한도 구분
+            incrementFlowDailySuccess();
             sendImageLog(`✅ [Flow] 생성 완료 (${Math.round(downloaded.buffer.length / 1024)}KB)`);
             return downloaded;
         } catch (err) {
@@ -1752,6 +1757,8 @@ async function generateBatchPipelined(
             results.push(image);
             detectedCount++;
             trackApiUsage('gemini', { images: 1, model: 'flow-nano-banana-2', costOverride: 0 });
+            // ✅ [v2.10.298] 일별 성공 카운트 — HTTP 429/한도성 에러 발생 시 봇감지 vs 진짜 한도 구분
+            incrementFlowDailySuccess();
             sendImageLog(`✅ [Flow][${detectedCount}/${totalItems}] "${slot.item.heading}" 완료 (${Math.round(downloaded.buffer.length / 1024)}KB)`);
 
             // ✅ [v2.6.3] 중복 이벤트 발사 차단
@@ -1983,6 +1990,10 @@ export async function generateWithFlow(
             } as any;
             results.push(image);
             coordinator.markHeadingSucceeded(); // C8
+            // ✅ [v2.10.299 FIX] sequential 경로 카운트 누락 — v2.10.298은 병렬/단일 경로에만 추가했음.
+            //   누락 시 sequential 모드 사용자가 100장 생성해도 카운트 0 → 모든 429를 bot_detected로 오분류.
+            trackApiUsage('gemini', { images: 1, model: 'flow-nano-banana-2', costOverride: 0 });
+            incrementFlowDailySuccess();
             // ✅ [v2.6.3] 중복 이벤트 발사 차단 — 콜백 있으면 콜백만, 없으면 IPC 직송(fallback)
             if (onImageGenerated) {
                 onImageGenerated(image, i, items.length);
@@ -2051,7 +2062,26 @@ export async function generateWithFlow(
 
     if (results.length === 0) {
         if (firstCriticalError) throw firstCriticalError;
-        throw new Error('FLOW_ALL_FAILED:Flow 이미지 생성이 모두 실패했습니다. 1) Google 로그인 상태 확인  2) Flow 시간당 한도 확인  3) 다른 이미지 엔진(나노바나나/덕트테이프)을 선택해주세요.');
+        // ✅ [v2.10.298] 봇감지 의심 분류 — 오늘 Flow 성공 카운트로 진짜 한도와 구분
+        //   기존 문제: 첫 시도 0건 성공인데도 "한도 확인하세요"만 표시 → 사용자가 1시간 기다림
+        //   휴리스틱: 오늘 < 10장 = 한도 도달 불가능 → 봇감지 99%
+        const todayCount = getDailySuccess('flow');
+        const classification = classifyQuotaError('flow');
+        if (classification === 'bot_detected' || classification === 'likely_bot') {
+            const reason = classification === 'bot_detected'
+                ? `오늘 ${todayCount}장만 생성 — 진짜 한도 불가능`
+                : `오늘 ${todayCount}장 — 봇감지 가능성 큼`;
+            sendImageLog(`⚠️ [Flow] 봇감지 의심! (${reason}) — 한도 아님. 다른 엔진(나노바나나 ₩54/장 / DeepInfra) 즉시 사용 권장`);
+            throw new Error(
+                `FLOW_BOT_DETECTED:⚠️ Google 봇감지 의심 (오늘 Flow 성공 ${todayCount}장). ` +
+                `진짜 한도가 아닐 가능성 큼.\n\n` +
+                `즉시 해결:\n` +
+                `1. 다른 이미지 엔진으로 전환 (나노바나나 ₩54/장, DeepInfra $0.01/장)\n` +
+                `2. 잠시 후(10~30분) 재시도 (1시간 기다리지 마세요)\n` +
+                `3. 환경설정 → "Google 계정 변경"으로 다른 계정 사용`
+            );
+        }
+        throw new Error(`FLOW_ALL_FAILED:Flow 이미지 생성이 모두 실패했습니다 (오늘 ${todayCount}장 성공 후 한도 도달 추정). 1) Google 로그인 상태 확인  2) Flow 쿼터 확인 (Pro 구독자는 더 많음)  3) 다른 이미지 엔진(나노바나나/덕트테이프) 선택`);
     }
     return results;
 }
