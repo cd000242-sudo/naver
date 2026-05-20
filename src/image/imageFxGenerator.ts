@@ -796,6 +796,11 @@ async function connectViaAdsPower(): Promise<Page> {
   cachedPage = context.pages()[0] || await context.newPage();
   browserMode = 'adspower';
 
+  // ✅ [v2.10.300] AdsPower 헤드리스 분기에도 pre-warm google.com 적용 —
+  //   v2.10.294 회피 메커니즘이 connectViaPlaywright에만 주입된 누락 보완.
+  //   fingerprint inject는 AdsPower 자체 관리와 충돌 가능성으로 SKIP, pre-warm만 추가.
+  await preWarmGoogleSession(cachedPage);
+
   // labs.google/fx 접속 + 세션 확인
   await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
@@ -853,6 +858,9 @@ async function connectViaAdsPower(): Promise<Page> {
 
   cachedPage = context.pages()[0] || await context.newPage();
   browserMode = 'adspower';
+
+  // ✅ [v2.10.300] AdsPower visible 재시작 분기에도 pre-warm google.com 적용
+  await preWarmGoogleSession(cachedPage);
 
   await cachedPage.goto('https://labs.google/fx/tools/image-fx', {
     waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)

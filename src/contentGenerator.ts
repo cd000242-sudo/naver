@@ -7603,6 +7603,12 @@ export async function generateStructuredContent(
         }
       }
 
+      // ✅ [v2.10.300] TitlePatch/IntroPatch 후 HTML sanitize 재적용 —
+      //   patch가 generateTitleOnlyPatch / generateHomefeedIntroOnlyPatch로 새 LLM 호출 →
+      //   반환된 selectedTitle/titleCandidates/introduction에 HTML 태그가 들어올 수 있음.
+      //   라인 7484의 첫 sanitize는 patch 전에만 적용되므로, patch 후 한 번 더 박멸.
+      sanitizeContentHtmlTags(parsed);
+
       // ✅ [v1.4.18] 소제목 키워드 누락 사후 패치 — 재시도 없이 즉시 보정
       // SEO/홈판 모드에서 메인 키워드가 빠진 소제목을 자동으로 키워드 포함 형태로 변환
       if ((mode === 'seo' || mode === 'homefeed') && Array.isArray(parsed.headings)) {
