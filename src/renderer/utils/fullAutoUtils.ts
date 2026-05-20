@@ -174,6 +174,13 @@ export function resetAfterPublish(): void {
         console.log('[FullAutoUtils] 🔄 StabilityManager 리셋 + 메모리 정리 완료');
     }
 
+    // 7. ✅ [2026-05-18] 상단 4지표(AI탐지/법적/SEO/일일권장) placeholder 리셋
+    try {
+        (window as any).resetRiskIndicators?.();
+    } catch (e) {
+        console.warn('[FullAutoUtils] resetRiskIndicators 실패:', e);
+    }
+
     console.log('[FullAutoUtils] ✅ 전체 상태 초기화 완료 → 새 발행 준비 완료');
 }
 

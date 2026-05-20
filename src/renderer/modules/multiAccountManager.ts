@@ -484,7 +484,21 @@ export async function generateImagesForAutomation(
     });
   }
 
-  onProgress?.(`🚀 이미지 생성 시작: ${items.length}개 (Provider: ${provider})`);
+  // ✅ [v2.10.295] 진행 메시지에 표시할 "실제 생성 예정 개수" 계산
+  //   - 썸네일만: 1 (이미 headings 필터링 완료)
+  //   - 홀수/짝수: thumb 1 + Math.ceil(소제목수/2) — main.ts 필터링 후 실제 생성 수와 일치
+  //   - all: items.length 그대로
+  //   이전: items.length(전체)만 표시 → 사용자가 "전부 생성된다"고 오해
+  const _displayCount = (() => {
+    if (_headingImageMode === 'thumbnail-only') return Math.max(items.filter(i => i.isThumbnail).length, 1);
+    if (_headingImageMode === 'odd-only' || _headingImageMode === 'even-only') {
+      const t = items.filter(i => i.isThumbnail).length;
+      const s = items.filter(i => !i.isThumbnail).length;
+      return t + Math.ceil(s / 2);
+    }
+    return items.length;
+  })();
+  onProgress?.(`🚀 이미지 생성 시작: ${_displayCount}개 (Provider: ${provider})`);
 
   // ✅ [2026-03-11 FIX] 전체 배치 타임아웃: 15분 (원래 엔진 재시도 3회 + 충분한 여유)
   const BATCH_TIMEOUT_MS = 15 * 60 * 1000;
@@ -521,7 +535,7 @@ export async function generateImagesForAutomation(
 
       // ✅ [2026-01-26] 생성 중 진행상황 표시
       const elapsedSec = Math.round((Date.now() - batchStartTime) / 1000);
-      onProgress?.(`🎨 ${provider} 엔진으로 이미지 생성 중... (${items.length}개 대기, ${elapsedSec}초 경과)`);
+      onProgress?.(`🎨 ${provider} 엔진으로 이미지 생성 중... (${_displayCount}개 대기, ${elapsedSec}초 경과)`);
 
 
       // 1. 메인 프로세스에 이미지 생성 요청

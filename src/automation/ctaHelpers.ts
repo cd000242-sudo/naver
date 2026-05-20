@@ -8,6 +8,7 @@
 import { Frame, Page } from 'puppeteer';
 import { safeKeyboardType } from './typingUtils.js';
 import { generateCtaBannerImage } from '../image/tableImageGenerator.js';
+import { pickBannerHook, pickCtaHook } from './bannerPhrasePool.js';
 import {
   SELECTORS,
   findElement,
@@ -104,28 +105,9 @@ export async function insertEnhancedCta(
         await self.delay(50);
     }
 
-    // ✅ [FIX] 배너용 후킹 문구 (랜덤)
-    const bannerHooks = [
-        '✓ 할인가 확인하기 →',
-        '[공식] 최저가 보러가기 →',
-        '지금 바로 구매하기 →',
-        '▶ 상품 자세히 보기',
-        '할인 혜택 확인 →',
-    ];
-    const bannerHook = bannerHooks[Math.floor(Math.random() * bannerHooks.length)];
-
-    // ✅ [신규] CTA용 후킹 문구 (배너와 다르게, 더 구체적이고 강력한 구매 결심 유도)
-    const ctaHooks = [
-        '🔥 지금 안사면 내일은 품절! 장바구니 담기',
-        '💸 이 가격에 이 퀄리티? 리뷰 4.8점 인증 제품',
-        '⚡ 오늘만 이 가격! 무료배송에 추가 할인까지',
-        '🛒 수만 명이 선택한 인기템, 고민 말고 바로 구매',
-        '💥 이번 달 가장 잘 팔린 베스트셀러, 놓치면 후회',
-        '✨ 가성비 최고! 다른 제품과 비교 불가',
-        '🎁 지금 구매하면 사은품 증정 이벤트 중',
-        '🏃 남은 재고 얼마 없어요! 서두르세요',
-    ];
-    const ctaHook = ctaHooks[Math.floor(Math.random() * ctaHooks.length)];
+    // ✅ [2026-05-18] 공통 풀(20개) + 최근 3개 회피 — bannerPhrasePool.ts 헬퍼로 일원화
+    const bannerHook = pickBannerHook();
+    const ctaHook = pickCtaHook();
 
     const displayProductName = productName || '상품 상세보기';
 

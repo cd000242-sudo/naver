@@ -546,9 +546,10 @@ export async function handleFullAutoPublish(): Promise<void> {
         // 1. 수집된 이미지와 소제목 매칭 (지능형 매칭)
         // ✅ [2026-02-07 FIX] AI 이미지 생성 모드에서는 수집 이미지 매칭 스킵!
         // → AI 이미지 생성을 선택한 경우 수집 이미지 매칭은 불필요하고 혼란만 줌
-        const scSubImageSourcePre = localStorage.getItem('scSubImageSource') || 'collected';
+        // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화
+        const scSubImageModePre = (window as any).getSubImageMode?.() || 'collected';
         const shouldMatchCollected = !formData.useAiImage ||
-          (formData.contentMode === 'affiliate' && scSubImageSourcePre === 'collected');
+          (formData.contentMode === 'affiliate' && scSubImageModePre === 'collected');
 
         if (shouldMatchCollected && collectedImgs.length > 0 && (structuredContent.headings || []).length > 0) {
           modal.addLog('🤖 수집 이미지를 소제목에 매칭 중...');
@@ -556,8 +557,8 @@ export async function handleFullAutoPublish(): Promise<void> {
             const matchResult = await (window as any).api.matchImages({
               headings: structuredContent.headings || [],
               collectedImages: collectedImgs,
-              // ✅ [2026-01-28] 수집 이미지 직접 사용 설정 전달 (localStorage에서 읽음)
-              scSubImageSource: localStorage.getItem('scSubImageSource') || 'collected'
+              // ✅ [2026-05-18] 정규화된 mode만 main 프로세스로 전송 ('ai'|'collected')
+              scSubImageSource: (window as any).getSubImageMode?.() || 'collected'
             });
             if (matchResult.success && matchResult.assignments) {
               matchResult.assignments.forEach((assignment: any) => {
@@ -586,8 +587,9 @@ export async function handleFullAutoPublish(): Promise<void> {
         let generatedImgs: any[] = [];
 
         // ✅ [2026-01-31 FIX] 쇼핑커넥트 모드에서 "수집 이미지 사용" 설정 확인
-        const scSubImageSource = localStorage.getItem('scSubImageSource') || 'collected';
-        const isShoppingConnectCollected = formData.contentMode === 'affiliate' && scSubImageSource === 'collected';
+        // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화
+        const scSubImageMode = (window as any).getSubImageMode?.() || 'collected';
+        const isShoppingConnectCollected = formData.contentMode === 'affiliate' && scSubImageMode === 'collected';
 
         if (isShoppingConnectCollected) {
           console.log('[FullAutoPublish] 🛒 쇼핑커넥트 수집 이미지 모드 → AI 생성 스킵');
@@ -1073,7 +1075,8 @@ export async function handleMultiAccountPublish(): Promise<void> {
     generatedHashtags: (document.getElementById('unified-generated-hashtags') as HTMLInputElement)?.value || '',
     category: UnifiedDOMCache.getRealCategory() || undefined, // ✅ 카테고리 추가
     // ✅ [2026-01-28] 이미지 설정 전역 적용 (연속발행/다중계정에도 적용)
-    scSubImageSource: localStorage.getItem('scSubImageSource') || 'collected',  // 수집 이미지 직접 사용 여부
+    // ✅ [2026-05-18] 정규화된 mode만 전송 — main 프로세스 분기 조건은 'ai'|'collected'만 처리
+    scSubImageSource: (window as any).getSubImageMode?.() || 'collected',  // 수집 이미지 직접 사용 여부
     thumbnailImageRatio: localStorage.getItem('thumbnailImageRatio') || '1:1',  // 썸네일 비율
     subheadingImageRatio: localStorage.getItem('subheadingImageRatio') || '1:1',  // 소제목 비율
     thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true',  // 썸네일 텍스트

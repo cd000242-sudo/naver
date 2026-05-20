@@ -17,6 +17,7 @@ type ResolvedRunOptions = any;
 import type { StructuredContent, ImagePlan } from '../contentGenerator.js';
 import type { GhostCursor } from '../ghostCursorHelper.js';
 import { PREV_POST_HOOKS } from './ctaHelpers.js';
+import { pickBannerHook } from './bannerPhrasePool.js';
 import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, safeKeyboardType } from './typingUtils.js';
@@ -1815,15 +1816,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
                 // ✅ [2026-01-22] 배너 우선순위: autoBannerGenerate > customBannerPath > 자동생성
                 if (resolved.autoBannerGenerate) {
-                  // 랜덤 배너 자동 생성
-                  const ctaHooks = [
-                    '[공식] 최저가 보러가기 →',
-                    '✓ 할인가 확인하기 →',
-                    '지금 바로 구매하기 →',
-                    '▶ 상품 자세히 보기',
-                    '할인 혜택 확인 →',
-                  ];
-                  const randomHook = ctaHooks[Math.floor(Math.random() * ctaHooks.length)];
+                  // ✅ [2026-05-18] 공통 풀(20개) + 최근 3개 회피
+                  const randomHook = pickBannerHook();
                   ctaBannerPath = await generateCtaBannerImage(randomHook, productName);
                   self.log(`   🎲 [랜덤 배너] 2번 섹션 배너 자동 생성: ${randomHook}`);
                 } else if (resolved.customBannerPath) {
@@ -1831,13 +1825,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                   ctaBannerPath = resolved.customBannerPath;
                   self.log(`   🎨 커스텀 배너 사용: ${ctaBannerPath.split(/[/\\]/).pop()}`);
                 } else {
-                  // 기본 자동 생성 (랜덤 아닌 고정 풀에서)
-                  const ctaHooks = [
-                    '[공식] 최저가 보러가기 →',
-                    '✓ 할인가 확인하기 →',
-                    '지금 바로 구매하기 →',
-                  ];
-                  const randomHook = ctaHooks[Math.floor(Math.random() * ctaHooks.length)];
+                  // ✅ [2026-05-18] 기본 자동 생성도 동일 풀 사용
+                  const randomHook = pickBannerHook();
                   ctaBannerPath = await generateCtaBannerImage(randomHook, productName);
                 }
 
