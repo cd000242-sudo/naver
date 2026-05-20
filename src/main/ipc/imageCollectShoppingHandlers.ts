@@ -57,18 +57,32 @@ export function registerImageCollectShoppingHandlers(): void {
             let productInfo: any = {};
 
             if (isBrandStore) {
-                // ✅ [2026-02-08] 브랜드스토어: fetchShoppingImages + crawlBrandStoreProduct 이중 수집
-                console.log('[Main] 🏪 브랜드스토어 감지 → 강화된 이미지 수집');
-                const { fetchShoppingImages } = await import('../../sourceAssembler.js');
-                const result = await fetchShoppingImages(url, { imagesOnly: true });
+                // ✅ [v2.10.308] 브랜드스토어 회귀 fix: fetchShoppingImages → BrandStoreProvider 전환
+                //   사용자 제보: "추가이미지 셀렉터를 분명 줬는데 또 돌아왔니"
+                //   회귀 원인: crawler/shopping/providers/BrandStoreProvider.ts에 사용자가 알려준
+                //              정확한 메커니즘 (img[alt^="추가이미지"] 클릭 → 큰 이미지 추출 PHASE 0,
+                //              리뷰 이미지 수집 PHASE 2) 존재하나, 본 handler가 fetchShoppingImages
+                //              경로로 빠뜨려서 Provider 우회.
+                //   조치: SmartStore/Coupang와 동일하게 collectShoppingImages(Provider) 사용.
+                console.log('[Main] 🏪 브랜드스토어 감지 → BrandStoreProvider 사용 (추가이미지 클릭 + 리뷰 수집)');
+                const { collectShoppingImages } = await import('../../crawler/shopping/index.js');
+                const result = await collectShoppingImages(url, {
+                    timeout: 30000,
+                    maxImages: 100,
+                    includeDetails: true,
+                    includeReviews: true,    // ✅ 리뷰 이미지 수집 활성화 (사용자 요청)
+                    useCache: true,
+                });
 
-                images = result.images || [];
-                title = result.title || '';
-                productInfo = {
-                    name: title,
-                    price: result.price,
-                    description: result.description,
-                };
+                if (result.isErrorPage) {
+                    console.error('[Main] ❌ 브랜드스토어 에러 페이지:', result.error);
+                    return { success: false, message: result.error || '에러 페이지', isErrorPage: true };
+                }
+
+                images = (result.images || []).map((img: any) => typeof img === 'string' ? img : img.url);
+                title = result.productInfo?.name || '';
+                productInfo = result.productInfo || { name: title };
+                console.log(`[Main] 📊 BrandStoreProvider 결과: ${images.length}개 이미지, 전략=${result.usedStrategy}`);
 
                 // ✅ [2026-02-08] 이미지 7장 미만이면 crawlBrandStoreProduct 폴백으로 추가 수집
                 const MIN_BRAND_IMAGES = 7;
@@ -127,11 +141,12 @@ export function registerImageCollectShoppingHandlers(): void {
                 console.log(`[Main] 🏪 ${isSmartStore ? '스마트스토어' : '쿠팡'} 감지 → 새 크롤러 사용`);
                 const { collectShoppingImages } = await import('../../crawler/shopping/index.js');
 
-                // ✅ [2026-02-27] maxImages 30→100 확대 (대량 수집)
+                // ✅ [v2.10.308] includeReviews: true 활성화 — 사용자 요청 (추가이미지 다 모은 후 리뷰이미지)
                 const result = await collectShoppingImages(url, {
                     timeout: 30000,
                     maxImages: 100,
                     includeDetails: true,
+                    includeReviews: true,
                     useCache: true,
                 });
 
