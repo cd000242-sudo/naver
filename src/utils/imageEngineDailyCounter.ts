@@ -43,8 +43,10 @@ export function incrementDailySuccess(engine: Engine): number {
     counters.set(engine, { date: today, successCount: 1 });
     return 1;
   }
-  current.successCount += 1;
-  return current.successCount;
+  // ✅ [v2.10.303] coding-style.md immutability 규칙 준수 — 직접 mutation 대신 새 객체 set
+  const next = { ...current, successCount: current.successCount + 1 };
+  counters.set(engine, next);
+  return next.successCount;
 }
 
 export function getDailySuccess(engine: Engine): number {

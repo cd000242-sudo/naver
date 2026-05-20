@@ -333,6 +333,20 @@ export async function initMultiAccountManager() {
 
 // ✅ 다중계정 동시발행 모달 초기화 함수
 
+// ✅ [v2.10.303] headingImageMode 기반 실제 생성 예정 이미지 수 계산 헬퍼.
+//   기존 문제: 같은 계산 블록이 3곳(_displayCount IIFE, expectedImageCount, expectedFinal)에 복사 →
+//              한 곳만 수정 시 불일치 위험. 단일 진실 공급원으로 통합.
+function getExpectedImageCount(items: Array<{ isThumbnail?: boolean }>, mode: string): number {
+  if (mode === 'none') return 0;
+  if (mode === 'thumbnail-only') return Math.max(items.filter(i => i.isThumbnail).length, 1);
+  if (mode === 'odd-only' || mode === 'even-only') {
+    const t = items.filter(i => i.isThumbnail).length;
+    const s = items.filter(i => !i.isThumbnail).length;
+    return t + Math.ceil(s / 2);
+  }
+  return items.length;
+}
+
 // ✅ 비용 안전성을 고려한 이미지 생성 래퍼 함수 (자동화용)
 // ✅ [2026-01-20 개선] 재시도 로직 + 부분 성공 처리 + 성공률 로깅
 export async function generateImagesForAutomation(
@@ -484,20 +498,8 @@ export async function generateImagesForAutomation(
     });
   }
 
-  // ✅ [v2.10.295] 진행 메시지에 표시할 "실제 생성 예정 개수" 계산
-  //   - 썸네일만: 1 (이미 headings 필터링 완료)
-  //   - 홀수/짝수: thumb 1 + Math.ceil(소제목수/2) — main.ts 필터링 후 실제 생성 수와 일치
-  //   - all: items.length 그대로
-  //   이전: items.length(전체)만 표시 → 사용자가 "전부 생성된다"고 오해
-  const _displayCount = (() => {
-    if (_headingImageMode === 'thumbnail-only') return Math.max(items.filter(i => i.isThumbnail).length, 1);
-    if (_headingImageMode === 'odd-only' || _headingImageMode === 'even-only') {
-      const t = items.filter(i => i.isThumbnail).length;
-      const s = items.filter(i => !i.isThumbnail).length;
-      return t + Math.ceil(s / 2);
-    }
-    return items.length;
-  })();
+  // ✅ [v2.10.303] 3중 중복 계산 → getExpectedImageCount 헬퍼 단일화
+  const _displayCount = getExpectedImageCount(items, _headingImageMode);
   onProgress?.(`🚀 이미지 생성 시작: ${_displayCount}개 (Provider: ${provider})`);
 
   // ✅ [2026-03-11 FIX] 전체 배치 타임아웃: 15분 (원래 엔진 재시도 3회 + 충분한 여유)
@@ -554,21 +556,8 @@ export async function generateImagesForAutomation(
       if (result.success && result.images && result.images.length > 0) {
         const successCount = result.images.length;
 
-        // ✅ [2026-03-12 FIX] headingImageMode에 따른 실제 기대 이미지 수 계산
-        // main.ts가 headingImageMode에 따라 소제목 이미지를 필터링하므로,
-        // 성공률은 "요청한 전체 items"가 아닌 "실제 생성이 기대되는 items"로 계산해야 함
-        const headingImageMode = localStorage.getItem('headingImageMode') || 'all';
-        let expectedImageCount = items.length;
-        if (headingImageMode === 'thumbnail-only') {
-          expectedImageCount = items.filter(i => i.isThumbnail).length || 1;
-        } else if (headingImageMode === 'none') {
-          expectedImageCount = 0;
-        } else if (headingImageMode === 'odd-only' || headingImageMode === 'even-only') {
-          const thumbs = items.filter(i => i.isThumbnail).length;
-          const nonThumbs = items.filter(i => !i.isThumbnail).length;
-          expectedImageCount = thumbs + Math.ceil(nonThumbs / 2);
-        }
-        const totalRequested = Math.max(expectedImageCount, 1);
+        // ✅ [v2.10.303] 3중 중복 계산 → getExpectedImageCount 헬퍼 단일화
+        const totalRequested = Math.max(getExpectedImageCount(items, _headingImageMode), 1);
         const successRate = Math.round((successCount / totalRequested) * 100);
 
         // ✅ [2026-01-26] 개별 이미지 생성 완료 로그
@@ -639,15 +628,8 @@ export async function generateImagesForAutomation(
   // ✅ [2026-01-24 FIX] 모든 재시도 실패해도 부분 성공 결과가 있으면 반환
   if (bestResult && bestResult.images && bestResult.images.length > 0) {
     const successCount = bestResult.images.length;
-    // ✅ [2026-03-12 FIX] headingImageMode 보정된 기대 수 사용
-    const headingImageMode = localStorage.getItem('headingImageMode') || 'all';
-    let expectedFinal = items.length;
-    if (headingImageMode === 'thumbnail-only') expectedFinal = items.filter(i => i.isThumbnail).length || 1;
-    else if (headingImageMode === 'none') expectedFinal = 0;
-    else if (headingImageMode === 'odd-only' || headingImageMode === 'even-only') {
-      expectedFinal = items.filter(i => i.isThumbnail).length + Math.ceil(items.filter(i => !i.isThumbnail).length / 2);
-    }
-    const totalRequested = Math.max(expectedFinal, 1);
+    // ✅ [v2.10.303] 3중 중복 계산 → getExpectedImageCount 헬퍼 단일화
+    const totalRequested = Math.max(getExpectedImageCount(items, _headingImageMode), 1);
     onProgress?.(`⚠️ 부분 성공: ${successCount}/${totalRequested}개 이미지 생성 (일부만 완료)`);
     console.log(`[Image Stats] 부분 성공 반환: ${successCount}/${totalRequested}개`);
     return bestResult.images;

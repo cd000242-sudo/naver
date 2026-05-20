@@ -2081,7 +2081,8 @@ export async function generateWithFlow(
                 `3. 환경설정 → "Google 계정 변경"으로 다른 계정 사용`
             );
         }
-        throw new Error(`FLOW_ALL_FAILED:Flow 이미지 생성이 모두 실패했습니다 (오늘 ${todayCount}장 성공 후 한도 도달 추정). 1) Google 로그인 상태 확인  2) Flow 쿼터 확인 (Pro 구독자는 더 많음)  3) 다른 이미지 엔진(나노바나나/덕트테이프) 선택`);
+        // ✅ [v2.10.303] "덕트테이프" 내부 코드명 → 공개 명칭 "gpt-image-2" 로 교체
+        throw new Error(`FLOW_ALL_FAILED:Flow 이미지 생성이 모두 실패했습니다 (오늘 ${todayCount}장 성공 후 한도 도달 추정). 1) Google 로그인 상태 확인  2) Flow 쿼터 확인 (Pro 구독자는 더 많음)  3) 다른 이미지 엔진(나노바나나/gpt-image-2/DeepInfra) 선택`);
     }
     return results;
 }
