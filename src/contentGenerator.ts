@@ -4511,6 +4511,57 @@ function sanitizeContentMetaCritique(content: StructuredContent): number {
   return count;
 }
 
+/**
+ * ✅ [v2.10.297] HTML 태그 박멸 sanitizer
+ *
+ * 사용자 제보(2026-05-20): AI가 본문에 `<div style="...">`, `<h4>`, `<ul>`, `<li>` 등
+ * 박스형 HTML 마크업을 출력 → 네이버 에디터는 평문만 받으므로 태그가 그대로 텍스트로 노출.
+ *
+ * 원인: 프롬프트(seo/base.prompt:594-598)에 "HTML/마크다운 서식 금지" 명시되어 있으나
+ *       Gemini/Claude/GPT가 체크리스트·박스 UI를 만들려고 시도하면서 룰 위반.
+ *
+ * 조치: 프롬프트 의존하지 말고 정규식으로 모든 HTML 태그 + 인라인 스타일 박멸.
+ *       강조 마커(**, __ 등 마크다운)는 별도 처리하지 않고 텍스트로 보존.
+ */
+function sanitizeContentHtmlTags(content: StructuredContent): number {
+  let count = 0;
+  const stripHtml = (s: string | undefined): string | undefined => {
+    if (!s) return s;
+    let cleaned = s;
+    // 1. 모든 HTML 태그 제거 (열림/닫힘/self-closing, 속성 포함)
+    cleaned = cleaned.replace(/<\/?[a-zA-Z][a-zA-Z0-9]*\b[^>]*>/g, '');
+    // 2. HTML 엔티티 디코딩
+    cleaned = cleaned
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'");
+    // 3. 태그 제거 후 빈 줄/공백 정리 (3개 이상 줄바꿈 → 2개)
+    cleaned = cleaned.replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n');
+    if (cleaned !== s) count++;
+    return cleaned.trim();
+  };
+  if (content.selectedTitle) content.selectedTitle = stripHtml(content.selectedTitle)!;
+  if ((content as any).title) (content as any).title = stripHtml((content as any).title);
+  if (content.introduction) content.introduction = stripHtml(content.introduction)!;
+  if (content.conclusion) content.conclusion = stripHtml(content.conclusion)!;
+  if ((content as any).bodyPlain) (content as any).bodyPlain = stripHtml((content as any).bodyPlain);
+  if ((content as any).bodyHtml) (content as any).bodyHtml = stripHtml((content as any).bodyHtml);
+  if (Array.isArray(content.headings)) {
+    for (const h of content.headings as any[]) {
+      if (h.title) h.title = stripHtml(h.title);
+      if (h.body) h.body = stripHtml(h.body);
+      if (h.content) h.content = stripHtml(h.content);
+    }
+  }
+  if (count > 0) {
+    console.warn(`[Sanitizer] 🧹 HTML 태그 ${count}개 자동 제거 (네이버 에디터는 평문만 허용)`);
+  }
+  return count;
+}
+
 /** content 객체 전체에 출처 날조 sanitizer 적용 (mutate) */
 function sanitizeContentFakeSources(content: StructuredContent): number {
   let count = 0;
@@ -4540,6 +4591,10 @@ function sanitizeContentFakeSources(content: StructuredContent): number {
 }
 
 function validateHomefeedContent(content: StructuredContent, source: ContentSource): { hasCritical: boolean; violations: string[] } {
+  // ✅ [v2.10.297] HTML 태그 박멸 — 모든 모드에서 최우선 실행
+  // 사용자 제보: AI가 <div style="...">, <h4>, <ul>, <li> 등 박스형 마크업을 본문에 출력 →
+  // 네이버 에디터에 평문으로 박혀 태그가 그대로 노출. 프롬프트로 금지해도 AI가 무시하므로 정규식 박멸.
+  sanitizeContentHtmlTags(content);
   // ✅ [v1.4.52] 모든 모드에서 출처 날조 표현 강제 제거 (early return보다 먼저 실행)
   // 프롬프트로 금지해도 AI가 종종 출력하므로 정규식 박멸
   sanitizeContentFakeSources(content);
@@ -7425,6 +7480,8 @@ export async function generateStructuredContent(
       // ✅ [소제목 본문 동기화] - Stage 1 짧은 소제목을 Stage 2 본문의 전체 소제목으로 업데이트
       syncHeadingsWithBodyPlain(parsed);
 
+      // ✅ [v2.10.297] HTML 태그 박멸 — 모든 모드에 무조건 적용 (모드별 검증 함수 우회 시에도 보장)
+      sanitizeContentHtmlTags(parsed);
       // ✅ [v1.4.52] 출처 날조 sanitizer — 모든 모드에 무조건 적용 (SEO/홈판/비즈니스/리뷰 등)
       // 모드별 검증 함수 우회 시에도 sanitization 보장
       sanitizeContentFakeSources(parsed);

@@ -54,7 +54,9 @@
       "Bash(python *)",
       "mcp__playwright__browser_close",
       "Bash(mv \"Better Life Naver Setup 1.4.81.exe\" \"Better-Life-Naver-Setup-1.4.81.exe\")",
-      "Bash(mv \"Better Life Naver Setup 1.4.81.exe.blockmap\" \"Better-Life-Naver-Setup-1.4.81.exe.blockmap\")"
+      "Bash(mv \"Better Life Naver Setup 1.4.81.exe.blockmap\" \"Better-Life-Naver-Setup-1.4.81.exe.blockmap\")",
+      "Bash(cd \"/c/Users/박성현/Desktop/리더 네이버 자동화\" && cat package.json | grep '\"version\"' && gh release list --limit 5 2>&1 | head -10)",
+      "Read(//c/c/Users/박성현/Desktop/리더 네이버 자동화/**)"
     ]
   }
 }
