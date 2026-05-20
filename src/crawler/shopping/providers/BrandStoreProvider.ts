@@ -104,17 +104,18 @@ export class BrandStoreProvider extends BaseProvider {
             page = await createPage();
             await warmup(page);
 
-            // ✅ [v2.10.312] 사용자 강조: "Playwright 켤 때 80% 페이지 축소해서 작업하라니까"
-            //   page.goto 전에 viewport + Chrome DevTools Protocol setPageScaleFactor 적용
-            //   → 페이지가 처음부터 80% 스케일로 렌더 → lazy-load 결정도 80% viewport 기준
-            //   CSS zoom 0.8(v2.10.309)은 약함 — navigation 시 reset되거나 lazy 결정 후 적용
+            // ✅ [v2.10.313] 사용자 진단: "크롬창 자체를 창모드가 아니라 전체모드로 열면 되잖아"
+            //   더 간단하고 정확한 해법: viewport를 충분히 크게 잡으면 갤러리/리뷰 영역까지
+            //   모두 화면에 들어와 lazy-load 정상 트리거. zoom 축소 + scale factor 트릭 불필요.
+            //   2560×1440 (QHD) — 모니터 크기 무관하게 모든 페이지 영역 visible 보장.
             try {
-                await page.setViewportSize({ width: 1536, height: 864 });  // 1920 × 0.8 = 1536
+                await page.setViewportSize({ width: 2560, height: 1440 });
+                // CDP는 더 이상 필요 없으나 안전망: setPageScaleFactor 1.0 명시 (기본값 reset)
                 const cdp = await page.context().newCDPSession(page);
-                await cdp.send('Emulation.setPageScaleFactor', { pageScaleFactor: 0.8 });
-                console.log('[BrandStore:Playwright] 🔍 viewport 1536x864 + pageScaleFactor 0.8 적용 (사용자 요구)');
+                await cdp.send('Emulation.setPageScaleFactor', { pageScaleFactor: 1.0 }).catch(() => undefined);
+                console.log('[BrandStore:Playwright] 🖥️ viewport 2560x1440 (QHD 전체화면 모드) — 사용자 요구 반영');
             } catch (zoomErr) {
-                console.warn('[BrandStore:Playwright] ⚠️ CDP zoom 적용 실패, CSS zoom으로 폴백:', (zoomErr as Error).message);
+                console.warn('[BrandStore:Playwright] ⚠️ viewport 적용 실패:', (zoomErr as Error).message);
             }
 
             // 모바일 URL로 변환
@@ -133,18 +134,11 @@ export class BrandStoreProvider extends BaseProvider {
                 };
             }
 
-            // ✅ [v2.10.311] 사용자 진단: "확대 80%로 안 줄여서 추가이미지 안 보임"
-            //   lazy-load는 페이지 첫 렌더 시 viewport 기준으로 결정됨. PHASE 0에서 zoom 적용
-            //   해도 이미 결정된 lazy-load는 안 바뀜. 페이지 로드 직후 즉시 zoom 0.8 + 워밍업 스크롤로
-            //   갤러리 영역을 강제로 viewport에 노출 → lazy-load 트리거.
-            await page.evaluate(() => {
-                document.body.style.zoom = '0.8';
-            }).catch(() => undefined);
-            await page.waitForTimeout(500);
-            // 페이지 전체 스크롤(lazy intersection observer 트리거) — 250px 단위로 부드럽게
+            // ✅ [v2.10.313] viewport 2560x1440 적용으로 zoom 축소 불필요 (사용자 "전체화면" 진단).
+            //   다만 lazy intersection observer 트리거 위해 워밍업 스크롤은 유지.
             await page.evaluate(async () => {
-                const step = 250;
-                const max = Math.min(document.body.scrollHeight, 8000);
+                const step = 400;
+                const max = Math.min(document.body.scrollHeight, 12000);
                 for (let y = 0; y <= max; y += step) {
                     window.scrollTo(0, y);
                     await new Promise(r => setTimeout(r, 80));
@@ -219,11 +213,8 @@ export class BrandStoreProvider extends BaseProvider {
             console.log('[BrandStore:Playwright] 🖱️ PHASE 0: 갤러리 썸네일 클릭 → 큰 이미지 추출...');
 
             try {
-                // ✅ [v2.10.309+311] zoom 0.8은 이미 page.goto 직후 적용됨 (v2.10.311 이동).
-                //   PHASE 0 진입 시점엔 lazy-load가 이미 결정된 후라 zoom 적용해도 효과 없음 →
-                //   페이지 로드 직후로 옮겨서 lazy-load가 80% 줌 viewport 기준으로 결정되도록.
-                //   여기서는 idempotent 안전망으로만 한 번 더 적용 (스크롤로 이미 트리거됨).
-
+                // ✅ [v2.10.313] viewport 2560x1440 + 워밍업 스크롤로 lazy-load 이미 트리거됨.
+                //   PHASE 0 진입 시점엔 갤러리 DOM 안정적으로 렌더된 상태.
                 const thumbImgs = await page.$$('img[alt^="추가이미지"]');
 
                 if (thumbImgs.length > 0) {
