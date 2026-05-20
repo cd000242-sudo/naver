@@ -1081,13 +1081,15 @@ async function connectViaPlaywright(): Promise<Page> {
 
   // ── 1단계: headless로 실행 ──
   // ✅ [2026-03-16] 시스템 Chrome → Edge → Playwright Chromium 순서 시도
-  console.log('[ImageFX] 🌐 자체 브라우저 실행 (숨김 모드)...');
-  sendImageLog('🌐 [ImageFX] 자체 브라우저 준비 중...');
+  // ✅ [v2.10.290] headless: true → false — 사용자 보고: 숨김 모드일 때 Google 자동화 감지 ↑.
+  //   수동으로 사이트 띄워놓고 돌리면 정상 작동 → visible 모드가 자동화 감지 신호 ↓.
+  console.log('[ImageFX] 🌐 자체 브라우저 실행 (visible 모드 — 자동화 감지 회피)...');
+  sendImageLog('🌐 [ImageFX] 자체 브라우저 준비 중... (창이 열립니다)');
 
   // ✅ [2026-03-17] ImageFX는 Google 서비스(labs.google)라 프록시 불필요 → 직접 연결
 
   const launchOptions = {
-    headless: true as boolean,
+    headless: false as boolean, // ✅ [v2.10.290] visible 강제 — 자동화 감지 회피
     args: [
       '--no-first-run',
       '--disable-blink-features=AutomationControlled',
@@ -1219,27 +1221,18 @@ async function connectViaPlaywright(): Promise<Page> {
     throw new Error('Google 로그인 시간 초과 (15분). 브라우저에서 Google 계정 로그인을 완료한 후 다시 시도해주세요. (계정 선택 → 비밀번호 → 2단계 인증 → 동의 모두 끝나야 합니다.)');
   }
 
-  // ✅ [2026-03-16] 로그인 성공 → visible 브라우저 닫고 headless로 재시작 (화면에서 숨김)
-  console.log('[ImageFX] 🔄 로그인 완료 → headless 모드로 전환 중...');
-  sendImageLog('🔄 [ImageFX] 로그인 완료! 숨김 모드로 전환 중...');
-  await context.close();
+  // ✅ [v2.10.290] 로그인 후 visible 유지 — headless 재전환 제거.
+  //   사용자 보고: headless 전환 시 Google이 자동화 감지로 차단. 수동으로 사이트 띄워놓고
+  //   돌리면 정상 작동. visible 브라우저는 사람이 보는 패턴 → 자동화 감지 신호 ↓.
+  //   기존: 로그인 → 브라우저 닫고 headless로 재시작 → 자동화 감지 트리거
+  //   변경: 로그인 후 그대로 visible 컨텍스트 유지 → 사용자가 브라우저 창 보임
+  console.log('[ImageFX] ✅ 로그인 완료 → visible 모드 유지 (자동화 감지 회피)');
+  sendImageLog('✅ [ImageFX] 로그인 완료! 이미지 생성 준비됨 (브라우저 창 유지 — Google 자동화 감지 회피)');
 
-  // headless로 재실행
-  const headlessContext = await launchWithSystemBrowserFallback(chromium, profileDir, launchOptions);
-  await injectImageFxAntiModalObserver(headlessContext);
-  const headlessPage = headlessContext.pages()[0] || await headlessContext.newPage();
-  await headlessPage.goto('https://labs.google/fx/tools/image-fx', {
-    waitUntil: 'load', // ✅ [v2.10.70] networkidle → load (Google labs 광고 트래커 회피, 영원히 idle 안 끝나는 위험 차단)
-    timeout: 90000,
-  });
-  await new Promise(resolve => setTimeout(resolve, 1500));
-
-  await setCachedBrowser(headlessContext.browser() as any);
-  cachedPage = headlessPage;
+  await setCachedBrowser(context.browser() as any);
+  cachedPage = page;
   browserMode = 'playwright';
-  (cachedPage as any).__persistentContext = headlessContext;
-  console.log('[ImageFX] ✅ headless 모드 전환 완료 — 브라우저 숨김');
-  sendImageLog('✅ [ImageFX] 로그인 완료! 이미지 생성 준비됨 (숨김 모드)');
+  (cachedPage as any).__persistentContext = context;
 
   return cachedPage;
 }
