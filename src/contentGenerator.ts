@@ -4530,14 +4530,22 @@ function sanitizeContentHtmlTags(content: StructuredContent): number {
     let cleaned = s;
     // 1. 모든 HTML 태그 제거 (열림/닫힘/self-closing, 속성 포함)
     cleaned = cleaned.replace(/<\/?[a-zA-Z][a-zA-Z0-9]*\b[^>]*>/g, '');
-    // 2. HTML 엔티티 디코딩
+    // 2. HTML 엔티티 디코딩 (v2.10.302 — 한국어 블로그에서 자주 등장하는 엔티티 6종 추가)
     cleaned = cleaned
       .replace(/&nbsp;/g, ' ')
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
       .replace(/&amp;/g, '&')
       .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'");
+      .replace(/&#39;/g, "'")
+      .replace(/&apos;/g, "'")
+      .replace(/&#x27;/g, "'")
+      .replace(/&hellip;/g, '…')
+      .replace(/&mdash;/g, '—')
+      .replace(/&ndash;/g, '–')
+      .replace(/&copy;/g, '©')
+      .replace(/&reg;/g, '®')
+      .replace(/&times;/g, '×');
     // 3. 태그 제거 후 빈 줄/공백 정리 (3개 이상 줄바꿈 → 2개)
     cleaned = cleaned.replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n');
     if (cleaned !== s) count++;

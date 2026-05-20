@@ -264,8 +264,10 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   }
   currentGlobalImageSource = normalized;
   safeLocalStorageSet('globalImageSource', normalized);
-  // fullAutoImageSource도 동기화 — VALID_AI_SOURCES에서 별칭 'nano-banana-2' 제거 (write-time 정규화로 항상 정식 키만 저장됨)
-  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
+  // ✅ [v2.10.302] dall-e-3 제거 — UI 완전 폐기 (v2.10.295 UI option 삭제 + v2.10.302 write 차단)
+  //   기존 위험: 사용자가 서브 모달에서 dall-e-3 카드 클릭 시 VALID_AI_SOURCES 통과해 localStorage 저장 →
+  //              imageGenerator.ts:335 마이그레이션 분기 진입. 폐기 표시인데 실질 진입 경로 잔존.
+  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
   if (VALID_AI_SOURCES.includes(normalized)) {
     safeLocalStorageSet('fullAutoImageSource', normalized);
     console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${normalized}`);
@@ -279,8 +281,9 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
 //   기존: fullAutoImageSource가 오염된 기본값('nano-banana-pro')이어도 globalImageSource='flow'를 무시
 //   현재: globalImageSource가 유효하면 그걸 최우선으로 사용 + fullAutoImageSource도 덮어써서 동기화
 export function getFullAutoImageSource(): GlobalImageSource {
-  // ✅ [v2.10.71] VALID에서 별칭 'nano-banana-2' 제거 (write-time 정규화로 항상 정식 키만 저장됨)
-  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
+  // ✅ [v2.10.302] dall-e-3 제거 (UI 완전 폐기) + falai/prodia/stability/pollinations는 UI 미노출이나
+  //   기존 사용자 localStorage 호환성을 위해 read VALID에는 유지 — write VALID_AI_SOURCES만 제거.
+  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
 
   // 정규화 read (별칭이 저장돼있으면 정식 키로 변환)
   const fullAutoSaved = normalizeImageSource(safeLocalStorageGet('fullAutoImageSource'));
@@ -919,11 +922,12 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">덕트테이프</div>
             <div style="font-size: 10px; color: #7c3aed;">gpt-image-2 | Org 인증 필요</div>
           </label>
-          <!-- ✅ [v2.10.216] DALL-E 3는 2026-05-12 OpenAI API 제거됨 — 자동으로 gpt-image-1로 마이그레이션 -->
-          <label class="source-option" data-value="dall-e-3" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fce7f3, #fbcfe8); text-align: center; transition: all 0.2s; opacity: 0.5; position: relative;" title="2026-05-12 OpenAI API 제거. 자동으로 gpt-image-1로 마이그레이션됩니다.">
+          <!-- ✅ [v2.10.302] DALL-E 3 카드 완전 클릭 차단 — opacity 0.5만으로는 클릭 가능했음.
+               pointer-events: none + cursor: not-allowed로 사용자 선택 경로 차단. -->
+          <label class="source-option-disabled" style="padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fce7f3, #fbcfe8); text-align: center; opacity: 0.4; pointer-events: none; cursor: not-allowed; position: relative;" title="2026-05-12 OpenAI API 제거됨. 덕트테이프(gpt-image-2)로 대체하세요.">
             <div style="font-size: 1.5rem;">🎨</div>
             <div style="font-size: 12px; font-weight: 600; color: #831843; text-decoration: line-through;">DALL-E 3</div>
-            <div style="font-size: 10px; color: #9d174d;">⚠️ 제거됨 → gpt-image-1 자동 대체</div>
+            <div style="font-size: 10px; color: #9d174d;">⛔ 폐기됨 (선택 불가)</div>
           </label>
           <label class="source-option" data-value="leonardoai" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ffedd5, #fdba74); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦁</div>
@@ -1230,7 +1234,7 @@ export function createHeadingImageModal(): void {
                 <option value="">📌 현재 저장된 엔진 사용</option>
                 <!-- ✅ [v2.10.72] value="nano-banana-2" → "nano-banana-pro" (별칭 → 정식 키) -->
                 <option value="nano-banana-pro">🍌 나노바나나 (Gemini 2.5 Flash Image, ₩54/장) ★추천</option>
-                <option value="dall-e-3" disabled>🎨 DALL-E 3 (제거됨 — gpt-image-1 자동 대체)</option>
+                <!-- v2.10.302: DALL-E 3 option 완전 삭제 (disabled 만으로는 사용자 혼동) -->
                 <option value="flow">🍌 Flow (Nano Banana 2, AI Pro 무료)</option>
                 <option value="imagefx">✨ ImageFX (Google 무료)</option>
                 <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>
