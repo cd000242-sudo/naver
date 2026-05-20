@@ -170,13 +170,19 @@ export class BrandStoreProvider extends BaseProvider {
 
             const normalizeUrl = (u: string) => u.split('?')[0];
 
-            /** 네이버 이미지 URL을 고해상도로 업스케일 (작은 이미지만) */
+            /**
+             * 네이버 이미지 URL을 고해상도로 업스케일.
+             * ✅ [v2.10.314 BUG FIX] type=f860은 실제 네이버 CDN에서 404 반환하는 무효 type.
+             *   사용자 제보: "추가이미지나 대표이미지는 수집 저장 안 되어있네요" — 시뮬레이션 fetch에서 404.
+             *   실측 검증: ?type=o1000 → 200 OK (49~67KB 정상 이미지)
+             *   조치: f860 → o1000 으로 교체. o1000은 1000px width 원본급 검증된 type.
+             */
             const upscaleUrl = (u: string): string => {
                 const typeMatch = u.match(/\?type=([a-z])(\d+)/);
                 if (typeMatch) {
                     const size = parseInt(typeMatch[2]);
                     if (size < 500) {
-                        return u.replace(/\?type=[a-z]\d+[^&]*/, '?type=f860');
+                        return u.replace(/\?type=[a-z]\d+[^&]*/, '?type=o1000');
                     }
                 }
                 return u;

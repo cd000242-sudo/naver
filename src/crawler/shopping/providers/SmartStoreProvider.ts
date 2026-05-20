@@ -295,14 +295,18 @@ export class SmartStoreProvider extends BaseProvider {
             /** URL 정규화 (쿼리 제거) */
             const normalizeUrl = (u: string) => u.split('?')[0];
 
-            /** 네이버 이미지 URL을 고해상도로 업스케일 (작은 이미지만) */
+            /**
+             * 네이버 이미지 URL을 고해상도로 업스케일 (작은 이미지만).
+             * ✅ [v2.10.314 BUG FIX] type=f860 → type=o1000 (BrandStoreProvider와 동일 회귀)
+             *   f860은 네이버 CDN에서 404 반환. 검증된 o1000(1000px 원본급) 사용.
+             */
             const upscaleUrl = (u: string): string => {
                 const typeMatch = u.match(/\?type=([a-z])(\d+)/);
                 if (typeMatch) {
                     const size = parseInt(typeMatch[2]);
                     // 500px 미만 썸네일만 업스케일, m1000_pd 같은 큰 이미지는 유지
                     if (size < 500) {
-                        return u.replace(/\?type=[a-z]\d+[^&]*/, '?type=f860');
+                        return u.replace(/\?type=[a-z]\d+[^&]*/, '?type=o1000');
                     }
                 }
                 return u;
