@@ -213,6 +213,7 @@ export class BrandStoreProvider extends BaseProvider {
                     }
 
                     // 각 추가이미지 썸네일 클릭 → 대표이미지 영역에서 큰 이미지 추출
+                    let prevBigSrc = '';
                     for (let i = 0; i < thumbImgs.length; i++) {
                         try {
                             // ✅ [v2.10.309] scrollIntoView로 viewport 안에 위치 강제 (zoom 0.8 + scroll 이중 보장)
@@ -225,32 +226,44 @@ export class BrandStoreProvider extends BaseProvider {
                                 el.closest('li') || el.closest('a') || el
                             );
                             await (parent || thumbImgs[i]).click();
-                            await page.waitForTimeout(500 + Math.random() * 300);
 
-                            // 대표이미지 영역 갱신 후 큰 이미지 src 추출
-                            let bigImgEl = await page.$('img[alt="대표이미지"]');
-                            if (!bigImgEl) {
-                                bigImgEl = await page.$('[data-shp-area="topi.image"] img');
-                            }
-                            if (bigImgEl) {
-                                const bigSrc = await bigImgEl.evaluate((img: HTMLImageElement) =>
+                            // ✅ [v2.10.310] blur placeholder 회귀 패치 — Playwright MCP 실측에서
+                            //   13개 클릭이 모두 같은 ?type=blur0_8 placeholder URL 반환 → dedup 후 1장만 남는 회귀.
+                            //   원인: 클릭 직후 큰 이미지가 lazy-load 교체되는데 우리가 너무 빨리 읽음.
+                            //   조치: (1) blur URL 자체를 거부 (2) 새 큰 이미지가 로드될 때까지 최대 2.5초 polling
+                            //         (3) timeout 시 썸네일 fallback (upscale)
+                            const isBlur = (u: string) => /[?&]type=blur/i.test(u);
+                            let bigSrc = '';
+                            const POLL_MAX = 10; // 2.5초 (250ms * 10)
+                            for (let p = 0; p < POLL_MAX; p++) {
+                                await page.waitForTimeout(250);
+                                let bigImgEl = await page.$('img[alt="대표이미지"]');
+                                if (!bigImgEl) {
+                                    bigImgEl = await page.$('[data-shp-area="topi.image"] img');
+                                }
+                                if (!bigImgEl) continue;
+                                const cur = await bigImgEl.evaluate((img: HTMLImageElement) =>
                                     img.getAttribute('data-src') || img.src || ''
                                 );
-                                if (bigSrc) {
-                                    addImg(bigSrc, 'gallery');
-                                    console.log(`[BrandStore:Playwright] 📸 추가이미지 ${i + 1} 클릭 → 큰 이미지 추출 OK`);
-                                }
+                                // blur placeholder는 건너뜀, 이전 클릭의 URL과 같으면 아직 교체 안 됨
+                                if (!cur || isBlur(cur) || cur === prevBigSrc) continue;
+                                bigSrc = cur;
+                                break;
                             }
 
-                            // ✅ [v2.10.309] 클릭 안 돼서 큰 이미지 못 가져오면 썸네일 자체 src를 fallback으로 사용
-                            //   썸네일은 type=f40 작은 크기지만, upscaleUrl()이 ?type=f860으로 업스케일 처리.
-                            else {
+                            if (bigSrc) {
+                                addImg(bigSrc, 'gallery');
+                                prevBigSrc = bigSrc;
+                                console.log(`[BrandStore:Playwright] 📸 추가이미지 ${i + 1} 클릭 → 큰 이미지 추출 OK`);
+                            } else {
+                                // ✅ [v2.10.309+310] 큰 이미지 polling 실패 → 썸네일 자체 src를 fallback으로 사용
+                                //   upscaleUrl()이 ?type=f860으로 업스케일 처리 (작은 type=f40 → 860px).
                                 const thumbSrc = await thumbImgs[i].evaluate((img: HTMLImageElement) =>
                                     img.getAttribute('data-src') || img.src || ''
                                 );
                                 if (thumbSrc) {
                                     addImg(thumbSrc, 'gallery-thumb-fallback');
-                                    console.log(`[BrandStore:Playwright] 📷 추가이미지 ${i + 1} 큰 이미지 추출 실패 → 썸네일 fallback (upscale)`);
+                                    console.log(`[BrandStore:Playwright] 📷 추가이미지 ${i + 1} polling 타임아웃 → 썸네일 fallback (upscale)`);
                                 }
                             }
                         } catch (clickErr) { /* 개별 클릭 실패 무시 */ }
@@ -280,23 +293,37 @@ export class BrandStoreProvider extends BaseProvider {
             console.log('[BrandStore:Playwright] 📝 PHASE 2: 리뷰 이미지 수집...');
 
             try {
-                // ✅ 리뷰 탭 클릭 (탭 없이는 리뷰 DOM이 로드되지 않음!)
+                // ✅ [v2.10.310] 리뷰 탭 회귀 패치 — "리뷰이벤트" 별도 페이지 링크 클릭 시 navigation
+                //   일어나 context 파괴되는 회귀 차단. MCP 실측: "리뷰이벤트" /review-event/list 페이지로 이동.
+                //   조치: navigation 일으키는 <a href="...review-event..."> 제외, 진짜 리뷰 탭만 클릭.
                 try {
                     const reviewTabClicked = await page.evaluate(() => {
-                        const tabs = Array.from(document.querySelectorAll('a, button, [role="tab"]'));
-                        const reviewTab = tabs.find(t => {
+                        const candidates = Array.from(document.querySelectorAll('a, button, [role="tab"]'));
+                        const reviewTab = candidates.find(t => {
                             const text = t.textContent?.trim() || '';
-                            return /^리뷰/.test(text) || /리뷰\s*\(/.test(text) || /리뷰\s*\d/.test(text);
+                            // 정확히 "리뷰" 또는 "리뷰 (N)" 또는 "리뷰 N건" 패턴만. "리뷰이벤트"/"리뷰포인트" 제외.
+                            const isReviewLabel = /^리뷰(\s*\(|\s*\d|$)/.test(text) && !/리뷰이벤트|리뷰포인트|리뷰적립/.test(text);
+                            if (!isReviewLabel) return false;
+                            // navigation 일으키는 <a href="...review-event..."> 류 제외
+                            if (t.tagName === 'A') {
+                                const href = t.getAttribute('href') || '';
+                                if (href.includes('review-event') || href.includes('review-point') || /^https?:\/\//.test(href)) {
+                                    return false;
+                                }
+                            }
+                            return true;
                         });
                         if (reviewTab) {
                             (reviewTab as HTMLElement).click();
-                            return true;
+                            return { clicked: true, label: (reviewTab.textContent || '').trim().substring(0, 30) };
                         }
-                        return false;
+                        return { clicked: false };
                     });
-                    if (reviewTabClicked) {
-                        console.log('[BrandStore:Playwright] 📋 리뷰 탭 클릭 OK');
+                    if (reviewTabClicked.clicked) {
+                        console.log(`[BrandStore:Playwright] 📋 리뷰 탭 클릭 OK ("${reviewTabClicked.label}")`);
                         await page.waitForTimeout(2000);
+                    } else {
+                        console.log('[BrandStore:Playwright] ℹ️ 리뷰 탭 못 찾음 (이미 lazy-load 되어 있거나 페이지 구조 다름)');
                     }
                 } catch {}
 
