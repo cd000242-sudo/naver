@@ -120,6 +120,26 @@ export class BrandStoreProvider extends BaseProvider {
                 };
             }
 
+            // ✅ [v2.10.311] 사용자 진단: "확대 80%로 안 줄여서 추가이미지 안 보임"
+            //   lazy-load는 페이지 첫 렌더 시 viewport 기준으로 결정됨. PHASE 0에서 zoom 적용
+            //   해도 이미 결정된 lazy-load는 안 바뀜. 페이지 로드 직후 즉시 zoom 0.8 + 워밍업 스크롤로
+            //   갤러리 영역을 강제로 viewport에 노출 → lazy-load 트리거.
+            await page.evaluate(() => {
+                document.body.style.zoom = '0.8';
+            }).catch(() => undefined);
+            await page.waitForTimeout(500);
+            // 페이지 전체 스크롤(lazy intersection observer 트리거) — 250px 단위로 부드럽게
+            await page.evaluate(async () => {
+                const step = 250;
+                const max = Math.min(document.body.scrollHeight, 8000);
+                for (let y = 0; y <= max; y += step) {
+                    window.scrollTo(0, y);
+                    await new Promise(r => setTimeout(r, 80));
+                }
+                window.scrollTo(0, 0);
+            }).catch(() => undefined);
+            await page.waitForTimeout(1000);
+
             // 에러 페이지 감지
             const pageContent = await page.content();
             const errorIndicator = ERROR_PAGE_INDICATORS.find(indicator =>
@@ -186,13 +206,10 @@ export class BrandStoreProvider extends BaseProvider {
             console.log('[BrandStore:Playwright] 🖱️ PHASE 0: 갤러리 썸네일 클릭 → 큰 이미지 추출...');
 
             try {
-                // ✅ [v2.10.309] 사용자 제보: "확대 80%로 줄여야 보임" — 데스크톱 1920 viewport에서
-                //   썸네일이 우측/아래로 밀려나 visible 영역 밖 → Puppeteer click() 실패 회귀.
-                //   조치: 페이지 zoom-out 0.8 + 썸네일 scrollIntoView 후 클릭.
-                await page.evaluate(() => {
-                    document.body.style.zoom = '0.8';
-                }).catch(() => undefined);
-                await page.waitForTimeout(300);
+                // ✅ [v2.10.309+311] zoom 0.8은 이미 page.goto 직후 적용됨 (v2.10.311 이동).
+                //   PHASE 0 진입 시점엔 lazy-load가 이미 결정된 후라 zoom 적용해도 효과 없음 →
+                //   페이지 로드 직후로 옮겨서 lazy-load가 80% 줌 viewport 기준으로 결정되도록.
+                //   여기서는 idempotent 안전망으로만 한 번 더 적용 (스크롤로 이미 트리거됨).
 
                 const thumbImgs = await page.$$('img[alt^="추가이미지"]');
 
