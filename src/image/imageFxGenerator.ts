@@ -148,6 +148,65 @@ async function humanLikeIntervalDelay(index: number): Promise<void> {
   await new Promise((r) => setTimeout(r, totalMs));
 }
 
+/**
+ * (v2.10.294) WebGL/Canvas/Audio 핑거프린트 랜덤화.
+ * Google이 가상 PC / 자동화 환경을 fingerprint로 감지하는 것을 우회.
+ * stealth plugin이 잡지 못하는 영역을 보강.
+ */
+async function injectFingerprintRandomization(context: any): Promise<void> {
+  try {
+    await context.addInitScript(() => {
+      // Canvas fingerprint 미세 노이즈
+      const origToDataURL = HTMLCanvasElement.prototype.toDataURL;
+      HTMLCanvasElement.prototype.toDataURL = function (this: HTMLCanvasElement, ...args: any[]) {
+        const ctx = this.getContext('2d');
+        if (ctx) {
+          // 1px 미세 노이즈 추가 (사람 눈엔 안 보임)
+          const noise = Math.random() * 0.0001;
+          ctx.fillStyle = `rgba(0,0,0,${noise})`;
+          ctx.fillRect(0, 0, 1, 1);
+        }
+        return origToDataURL.apply(this, args as any);
+      };
+
+      // WebGL vendor/renderer 약간 변형 (실제 Chrome 값들 중 랜덤)
+      const realVendors = ['Google Inc. (Intel)', 'Google Inc. (NVIDIA)', 'Google Inc. (AMD)'];
+      const realRenderers = [
+        'ANGLE (Intel, Intel(R) UHD Graphics 630 Direct3D11 vs_5_0 ps_5_0, D3D11)',
+        'ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 Direct3D11 vs_5_0 ps_5_0, D3D11)',
+        'ANGLE (AMD, AMD Radeon RX 580 Direct3D11 vs_5_0 ps_5_0, D3D11)',
+      ];
+      const vendor = realVendors[Math.floor(Math.random() * realVendors.length)];
+      const renderer = realRenderers[Math.floor(Math.random() * realRenderers.length)];
+      const origGetParam = WebGLRenderingContext.prototype.getParameter;
+      WebGLRenderingContext.prototype.getParameter = function (this: WebGLRenderingContext, param: number) {
+        // UNMASKED_VENDOR_WEBGL = 37445, UNMASKED_RENDERER_WEBGL = 37446
+        if (param === 37445) return vendor;
+        if (param === 37446) return renderer;
+        return origGetParam.call(this, param);
+      };
+    });
+  } catch { /* silent */ }
+}
+
+/**
+ * (v2.10.294) Pre-warm 세션 — google.com 잠시 방문 후 labs.google.
+ * "방금 막 자동화로 켜서 labs.google 직진" 패턴을 피함.
+ * 실제 사용자는 다른 Google 서비스 쓰다가 labs로 이동하는 패턴.
+ */
+async function preWarmGoogleSession(page: Page): Promise<void> {
+  try {
+    console.log('[ImageFX] 🔥 Pre-warm: google.com 잠시 방문');
+    await page.goto('https://www.google.com/', { waitUntil: 'load', timeout: 15000 });
+    await new Promise((r) => setTimeout(r, 1500 + Math.floor(Math.random() * 2000))); // 1.5-3.5s
+    // 살짝 스크롤로 사람 패턴
+    await page.mouse.wheel(0, 200 + Math.floor(Math.random() * 300));
+    await new Promise((r) => setTimeout(r, 500 + Math.floor(Math.random() * 1000)));
+  } catch {
+    // 실패해도 흐름 차단 X
+  }
+}
+
 // ═══════════════════════════════════════════════════════════
 // ▣ Preflight self-diagnostic + telemetry (D + E + F)
 // ═══════════════════════════════════════════════════════════
@@ -1155,7 +1214,14 @@ async function connectViaPlaywright(): Promise<Page> {
   // labs.google overlay iframe 영구 차단 (changelog/whats_new/banner) — Flow와 동일 패턴
   await injectImageFxAntiModalObserver(context);
 
+  // ✅ [v2.10.294] WebGL/Canvas 핑거프린트 랜덤화 — Google 가상 PC 의심 회피
+  await injectFingerprintRandomization(context);
+
   let page = context.pages()[0] || await context.newPage();
+
+  // ✅ [v2.10.294] Pre-warm: google.com 잠시 방문 후 labs.google 진입
+  //   "방금 자동화로 켜서 labs 직진" 패턴 회피 — 실제 사용자는 다른 Google 서비스 거쳐서 이동
+  await preWarmGoogleSession(page);
 
   // labs.google/fx 접속 + 세션 확인
   await page.goto('https://labs.google/fx/tools/image-fx', {
