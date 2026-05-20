@@ -1746,6 +1746,8 @@ async function generateBatchPipelined(
                 mimeType: downloaded.mimeType,
                 provider: 'flow-nano-banana-2',
                 cost: 0,
+                // ✅ [v2.10.289 FIX] originalIndex 보존 — headingImageMode 필터링(odd/even/thumbnail-only) 시 정확한 소제목 매칭. 누락 시 editorHelpers의 fallback이 발동해 이미지가 안 들어가야 할 소제목에 중복 배치되는 버그 차단.
+                originalIndex: (slot.item as any).originalIndex,
             } as any;
             results.push(image);
             detectedCount++;
@@ -1976,6 +1978,8 @@ export async function generateWithFlow(
                 mimeType: generated.mimeType,
                 provider: 'flow-nano-banana-2',
                 cost: 0,
+                // ✅ [v2.10.289 FIX] originalIndex 보존 (sequential 경로)
+                originalIndex: (item as any).originalIndex,
             } as any;
             results.push(image);
             coordinator.markHeadingSucceeded(); // C8

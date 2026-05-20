@@ -2499,6 +2499,8 @@ export async function generateWithImageFx(
           // ✅ [2026-03-16 FIX] 잘린 base64 제거 → 전체 base64 폴백
           previewDataUrl: savedInfo.previewDataUrl || `data:${fxResult.mimeType};base64,${fxResult.buffer.toString('base64')}`,
           provider: 'imagefx' as any,
+          // ✅ [v2.10.289 FIX] originalIndex 보존 — headingImageMode 필터링(odd/even/thumbnail-only) 시 정확한 소제목 매칭. 누락 시 editorHelpers의 fallback이 발동해 이미지가 안 들어가야 할 소제목에 중복 배치됨.
+          originalIndex: (item as any).originalIndex,
           ...(savedInfo.savedToLocal ? { savedToLocal: savedInfo.savedToLocal } : {}),
         };
 
