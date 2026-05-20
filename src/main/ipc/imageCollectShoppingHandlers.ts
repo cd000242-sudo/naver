@@ -21,24 +21,29 @@ export function registerImageCollectShoppingHandlers(): void {
             console.log('[Main] ════════════════════════════════════════');
             console.log('[Main] 🛒 쇼핑몰 이미지 수집 시작:', url);
 
-            // ✅ [v2.10.306] 단축 URL(naver.me/link.coupang/coupa.ng/bit.ly 등) 사전 resolve
+            // ✅ [v2.10.306+307] 단축 URL + brandconnect 사전 resolve
             //   사용자 제보: naver.me URL 입력 시 이미지 1장만 수집됨.
-            //   원인: 단축 URL이 isBrandStore/isSmartStore/isCoupang 검사 모두 false →
-            //         "기타 쇼핑몰" 폴백 분기 진입 → MIN_BRAND_IMAGES=7 폴백 + crawlBrandStoreProduct 미발동.
-            //   조치: handler 진입부에서 redirect 따라간 후 실제 도메인으로 분기 결정.
-            const SHORT_URL_PATTERNS = /naver\.me\/|link\.coupang\.com\/|coupa\.ng\/|bit\.ly\/|goo\.gl\/|t\.ly\/|tinyurl\.com\//;
-            if (SHORT_URL_PATTERNS.test(url)) {
+            //   v2.10.306: SHORT_URL_PATTERNS만 처리 → brandconnect.naver.com까지만 resolve되고 멈춤.
+            //   v2.10.307: brandconnect.naver.com 패턴 추가. smartCrawler.ts:459의 정확한 셀렉터와 일치.
+            //   조치: brandconnect URL도 한 번 더 resolve해서 최종 brand.naver.com까지 도달.
+            const SHORT_URL_PATTERNS = /naver\.me\/|brandconnect\.naver\.com\/|link\.coupang\.com\/|coupa\.ng\/|bit\.ly\/|goo\.gl\/|t\.ly\/|tinyurl\.com\//;
+            const MAX_RESOLVE_HOPS = 3; // naver.me → brandconnect → brand.naver.com 같은 다단계 redirect 대응
+            let hopCount = 0;
+            while (SHORT_URL_PATTERNS.test(url) && hopCount < MAX_RESOLVE_HOPS) {
                 const { resolveShortUrl } = await import('../../sourceAssembler.js');
                 try {
                     const resolved = await resolveShortUrl(url);
                     if (resolved && resolved !== url) {
-                        console.log(`[Main] 🔗 단축 URL resolve: ${url} → ${resolved.substring(0, 80)}...`);
+                        console.log(`[Main] 🔗 단축 URL resolve hop ${hopCount + 1}: ${url.substring(0, 60)}... → ${resolved.substring(0, 80)}...`);
                         url = resolved;
+                        hopCount++;
                     } else {
-                        console.warn(`[Main] ⚠️ 단축 URL resolve 실패 — 원본 URL 그대로 진행: ${url}`);
+                        console.warn(`[Main] ⚠️ resolve 정체 (hop ${hopCount + 1}) — 원본 URL 그대로 진행: ${url.substring(0, 80)}`);
+                        break;
                     }
                 } catch (resolveErr) {
-                    console.warn(`[Main] ⚠️ 단축 URL resolve 오류: ${(resolveErr as Error).message}`);
+                    console.warn(`[Main] ⚠️ resolve 오류: ${(resolveErr as Error).message}`);
+                    break;
                 }
             }
 

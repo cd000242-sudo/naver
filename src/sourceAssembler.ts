@@ -249,6 +249,10 @@ export async function resolveShortUrl(url: string): Promise<string> {
   if (!isShortUrl) return url;
 
   const isNaverMe = url.includes('naver.me/');
+  // ✅ [v2.10.307] brandconnect.naver.com도 Playwright 폴백 발동 — fetch HEAD가 brandconnect에서
+  //   멈춰서 isErrorRedirect=false && finalUrl !== 원본 URL 조건으로 그대로 return되는 회귀 차단.
+  //   brandconnect는 affiliate 중간 페이지라 실제 brand.naver.com까지 추가 redirect 필요.
+  const isBrandConnect = url.includes('brandconnect.naver.com');
   console.log(`[단축URL] 📎 ${url.substring(0, 40)}... 최종 목적지 확인 중...`);
 
   // ✅ [1단계] fetch HEAD 시도
@@ -281,8 +285,8 @@ export async function resolveShortUrl(url: string): Promise<string> {
     console.warn(`[단축URL] ⚠️ fetch 리다이렉트 실패: ${(error as Error).message}`);
   }
 
-  // ✅ [2단계] naver.me 전용: Playwright 전용세션 폴백
-  if (isNaverMe) {
+  // ✅ [2단계] naver.me / brandconnect 전용: Playwright 전용세션 폴백 (v2.10.307 brandconnect 추가)
+  if (isNaverMe || isBrandConnect) {
     console.log(`[단축URL] 🎭 Playwright 전용세션으로 naver.me 리다이렉트 추적 시작...`);
     let browser = null;
     try {
@@ -317,11 +321,13 @@ export async function resolveShortUrl(url: string): Promise<string> {
       await browser.close().catch(() => undefined);
       browser = null;
 
-      if (finalUrl !== url && !finalUrl.includes('naver.me')) {
+      // ✅ [v2.10.307] brandconnect도 중간 페이지 — Playwright가 brand.naver.com까지 도달했는지 확인
+      const isStillIntermediate = finalUrl.includes('naver.me') || finalUrl.includes('brandconnect.naver.com');
+      if (finalUrl !== url && !isStillIntermediate) {
         console.log(`[단축URL] ✅ Playwright 성공! 최종 URL: ${finalUrl.substring(0, 60)}...`);
         return finalUrl;
       } else {
-        console.warn(`[단축URL] ⚠️ Playwright에서도 최종 URL 추출 실패 (여전히 naver.me)`);
+        console.warn(`[단축URL] ⚠️ Playwright에서도 최종 URL 추출 실패 (여전히 중간 페이지): ${finalUrl.substring(0, 60)}`);
       }
     } catch (playwrightError) {
       console.warn(`[단축URL] ❌ Playwright 폴백 실패: ${(playwrightError as Error).message}`);
