@@ -658,55 +658,32 @@ export function createHeadingImageModal(): void {
             </button>
           </div>
 
-          <!-- ✅ [2026-03-27] Google 계정 연동 상태 + 변경 버튼 (ImageFX · Flow 공유) -->
+          <!-- ✅ [v2.10.291] 3개 카드 → 1개 통합. Google 계정 로그인 + ImageFX·Flow 연결 자동 일괄 처리 -->
           <div style="margin-bottom: 16px;">
             <button type="button" class="premium-setting-btn" id="switch-google-account-btn">
               <div style="display: flex; align-items: center; gap: 14px;">
                 <div class="btn-icon" id="google-account-icon" style="background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%);">🔗</div>
                 <div>
-                  <div class="btn-text">Google 계정 (ImageFX · Flow 공유)</div>
+                  <div class="btn-text">Google 계정 연동 (ImageFX · Flow 통합)</div>
                   <div class="btn-value" id="google-account-status" style="color: #9ca3af; display: flex; align-items: center; gap: 6px;">
                     <span id="google-account-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #6b7280; display: inline-block; flex-shrink: 0;"></span>
-                    <span id="google-account-text">확인 중...</span>
+                    <span id="google-account-text">확인 중... — 클릭하여 로그인 + 연결 테스트</span>
                   </div>
                 </div>
               </div>
               <span class="arrow">›</span>
             </button>
-          </div>
-
-          <!-- ✅ [v1.4.64] Flow (Nano Banana Pro) 연결 테스트 버튼 -->
-          <div style="margin-bottom: 16px;">
-            <button type="button" class="premium-setting-btn" id="test-flow-connection-btn">
-              <div style="display: flex; align-items: center; gap: 14px;">
-                <div class="btn-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">🍌</div>
-                <div>
-                  <div class="btn-text">Flow 연결 테스트 (Nano Banana 2)</div>
-                  <div class="btn-value" id="flow-connection-status" style="color: #9ca3af; display: flex; align-items: center; gap: 6px;">
-                    <span id="flow-connection-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #6b7280; display: inline-block; flex-shrink: 0;"></span>
-                    <span id="flow-connection-text">테스트 필요 (클릭)</span>
-                  </div>
-                </div>
-              </div>
-              <span class="arrow">›</span>
-            </button>
-          </div>
-
-          <!-- ImageFX 연결 테스트 버튼 — Flow와 별도 프로필이라 명시 트리거 필요 -->
-          <div style="margin-bottom: 16px;">
-            <button type="button" class="premium-setting-btn" id="test-imagefx-connection-btn">
-              <div style="display: flex; align-items: center; gap: 14px;">
-                <div class="btn-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);">✨</div>
-                <div>
-                  <div class="btn-text">ImageFX 연결 테스트 (Google 무료)</div>
-                  <div class="btn-value" id="imagefx-connection-status" style="color: #9ca3af; display: flex; align-items: center; gap: 6px;">
-                    <span id="imagefx-connection-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #6b7280; display: inline-block; flex-shrink: 0;"></span>
-                    <span id="imagefx-connection-text">테스트 필요 (클릭) — 첫 사용 시 브라우저 창이 열립니다</span>
-                  </div>
-                </div>
-              </div>
-              <span class="arrow">›</span>
-            </button>
+            <!-- 통합 상태 표시: ImageFX·Flow 둘 다 한 줄로 -->
+            <div id="imagefx-connection-status" style="display: none;">
+              <span id="imagefx-connection-dot"></span>
+              <span id="imagefx-connection-text"></span>
+            </div>
+            <div id="flow-connection-status" style="display: none;">
+              <span id="flow-connection-dot"></span>
+              <span id="flow-connection-text"></span>
+            </div>
+            <button type="button" id="test-flow-connection-btn" style="display: none;"></button>
+            <button type="button" id="test-imagefx-connection-btn" style="display: none;"></button>
           </div>
 
           <!-- ✅ [v2.10.226] ImageFX 실패 케이스 안내 카드 — 사용자가 "왜 실패했는지" 사전 학습 -->
