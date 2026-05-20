@@ -232,7 +232,8 @@ function extractJsonLdFromHtml(html: string): JsonLdProduct | null {
  * ✅ [2026-02-16] naver.me Playwright 전용세션 폴백 추가 (fetch 실패/에러페이지 대응)
  * naver.me, link.coupang 등 단축 URL을 실제 URL로 변환
  */
-async function resolveShortUrl(url: string): Promise<string> {
+// ✅ [v2.10.306] export 추가 — imageCollectShoppingHandlers에서 진입부 redirect 처리에 필요
+export async function resolveShortUrl(url: string): Promise<string> {
   // 단축 URL 패턴 확인
   const shortUrlPatterns = [
     'naver.me/',

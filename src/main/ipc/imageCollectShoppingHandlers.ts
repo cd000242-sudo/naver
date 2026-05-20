@@ -21,7 +21,28 @@ export function registerImageCollectShoppingHandlers(): void {
             console.log('[Main] ════════════════════════════════════════');
             console.log('[Main] 🛒 쇼핑몰 이미지 수집 시작:', url);
 
-            // ✅ 플랫폼 감지
+            // ✅ [v2.10.306] 단축 URL(naver.me/link.coupang/coupa.ng/bit.ly 등) 사전 resolve
+            //   사용자 제보: naver.me URL 입력 시 이미지 1장만 수집됨.
+            //   원인: 단축 URL이 isBrandStore/isSmartStore/isCoupang 검사 모두 false →
+            //         "기타 쇼핑몰" 폴백 분기 진입 → MIN_BRAND_IMAGES=7 폴백 + crawlBrandStoreProduct 미발동.
+            //   조치: handler 진입부에서 redirect 따라간 후 실제 도메인으로 분기 결정.
+            const SHORT_URL_PATTERNS = /naver\.me\/|link\.coupang\.com\/|coupa\.ng\/|bit\.ly\/|goo\.gl\/|t\.ly\/|tinyurl\.com\//;
+            if (SHORT_URL_PATTERNS.test(url)) {
+                const { resolveShortUrl } = await import('../../sourceAssembler.js');
+                try {
+                    const resolved = await resolveShortUrl(url);
+                    if (resolved && resolved !== url) {
+                        console.log(`[Main] 🔗 단축 URL resolve: ${url} → ${resolved.substring(0, 80)}...`);
+                        url = resolved;
+                    } else {
+                        console.warn(`[Main] ⚠️ 단축 URL resolve 실패 — 원본 URL 그대로 진행: ${url}`);
+                    }
+                } catch (resolveErr) {
+                    console.warn(`[Main] ⚠️ 단축 URL resolve 오류: ${(resolveErr as Error).message}`);
+                }
+            }
+
+            // ✅ 플랫폼 감지 (resolve 후 URL 기준)
             const isBrandStore = url.includes('brand.naver.com');
             const isSmartStore = url.includes('smartstore.naver.com');
             const isCoupang = url.includes('coupang.com') || url.includes('coupa.ng');
