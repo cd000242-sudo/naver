@@ -556,7 +556,11 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
         // ✅ [2026-02-13 SPEED] 에러/타임아웃 시에도 리스너 반드시 정리 (좀비 리스너 방지)
         if (cleanupImageListener) { try { cleanupImageListener(); } catch { } }
         await reserve.rollback();
-        console.error('[Renderer] ❌ 이미지 생성 실패/타임아웃:', (e as Error).message);
+        const _emsg = (e as Error).message || '(메시지 없음)';
+        console.error('[Renderer] ❌ 이미지 생성 실패/타임아웃:', _emsg);
+        // ✅ [v2.10.332] 상류(IPC) 실패 진단 — nanoBanana 내부 로그가 못 잡는 사각지대.
+        //   이미지 생성 IPC가 타임아웃되거나 거부되면 여기서만 보임. UI 로그 패널에 표기.
+        appendLog(`🔬 [GEMINI-IMG-DEBUG] 상류 IPC 실패 — ${_emsg.includes('타임아웃') ? 'IPC 타임아웃(이미지 생성기 도달 전/응답 없음)' : 'IPC 오류'} | 메시지: ${_emsg}`);
 
         // ✅ [2026-02-13 FIX] 타임아웃 시 main process에 abort 신호 전달 (orphan 작업 방지)
         if ((e as Error).message?.includes('타임아웃')) {
@@ -576,6 +580,8 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
   );
 
   if (locked === null) {
+    // ✅ [v2.10.332] 스핀락 차단 진단 — 이전 글의 이미지 IPC가 안 끝났을 때 다음 글이 막힘.
+    appendLog('🔬 [GEMINI-IMG-DEBUG] 상류 스핀락 차단 — 이전 이미지 생성이 아직 진행/미정리 상태 (다음 글 차단됨)');
     throw new Error('이미지 생성이 이미 진행 중입니다.');
   }
   return locked;

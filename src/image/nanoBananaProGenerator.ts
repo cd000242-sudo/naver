@@ -1610,6 +1610,13 @@ async function generateSingleImageWithGemini(
       const isTimeoutError = errorMessage.includes('timeout') || errorMessage.includes('ETIMEDOUT') || errorMessage.includes('ECONNRESET');
 
       // ✅ [v2.10.331] 매 실패 시도마다 정밀 진단 기록 (연속발행 N개째 실패 원인 추적)
+      // ✅ [v2.10.332] Gemini API 응답 본문·에러코드·재시도 헤더 추가 캡처 —
+      //   429가 RPM 초과인지 일일 할당량 초과인지 본문(reason/retryInfo)으로 구별 가능하게.
+      let responseBody = '(없음)';
+      try {
+        const data = (error as any)?.response?.data;
+        if (data !== undefined) responseBody = JSON.stringify(data).slice(0, 600);
+      } catch { responseBody = '(직렬화 실패)'; }
       logGeminiImageFailure({
         '시각': new Date().toLocaleString('ko-KR'),
         '소제목': item.heading,
@@ -1619,6 +1626,9 @@ async function generateSingleImageWithGemini(
         '모델': lastSelectedModel || '(기본)',
         '키풀': keyPool ? `${keyPool.getAvailableCount()}/${keyPool.getTotalCount()} 사용가능` : '(단일키)',
         'RPM': geminiRpmThrottler.getStatus(),
+        '에러코드': (error as any)?.code || '(없음)',
+        '재시도헤더': (error as any)?.response?.headers?.['retry-after'] || '(없음)',
+        '응답본문': responseBody,
         '에러메시지': errorMessage,
       });
 
