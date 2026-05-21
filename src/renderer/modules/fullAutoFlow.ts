@@ -256,6 +256,44 @@ export function emitLog(message: string, modal?: any, type: 'info' | 'warn' | 'e
   }
 }
 
+/**
+ * Resolves the correct ImageManager key (heading title) for each generated image.
+ *
+ * Bug context: after odd-only / even-only filtering in main.ts, imageResult.images
+ * contains fewer items than headings[]. Using a sequential loop index (idx) to look
+ * up headings[idx] causes index misalignment — the image belonging to headings[2]
+ * would be registered under headings[1], causing duplicate insertion later.
+ *
+ * Correct resolution priority:
+ *   1. img.heading  — set by the image generator from the original item.heading
+ *   2. headings[img.originalIndex] — fallback when heading string is missing
+ *   3. "이미지 N"  — last resort label
+ *
+ * @param imageResults - images returned from generateImagesWithCostSafety
+ * @param headings     - full (unfiltered) headings array from structuredContent
+ * @returns array of { img, headingKey } tuples in the same order as imageResults
+ */
+export function resolveImageManagerKeys(
+  imageResults: Array<{ heading?: string; originalIndex?: number; [key: string]: any }>,
+  headings: Array<{ title?: string; text?: string } | string>,
+): Array<{ img: any; headingKey: string }> {
+  return imageResults.map((img, idx) => {
+    // Priority 1: use the heading string embedded in the generated image
+    if (img.heading && String(img.heading).trim()) {
+      return { img, headingKey: String(img.heading).trim() };
+    }
+    // Priority 2: use originalIndex to map back to the full headings array
+    const origIdx = img.originalIndex;
+    if (typeof origIdx === 'number' && origIdx >= 0 && origIdx < headings.length) {
+      const h = headings[origIdx];
+      const title = typeof h === 'string' ? h : (h?.title || h?.text || '');
+      if (title.trim()) return { img, headingKey: title.trim() };
+    }
+    // Priority 3: fallback label
+    return { img, headingKey: `이미지 ${idx + 1}` };
+  });
+}
+
 // ✅ [2026-03-11] 치명적 API 에러 판별 (429/500/503 → 즉시 중단)
 // ✅ [2026-03-11 FIX] export 추가 — 다중계정 등 외부 모듈에서도 사용 가능
 export function isFatalApiError(error: any): boolean {
@@ -826,10 +864,15 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
               ...(dedicatedThumbnailImage ? [dedicatedThumbnailImage] : []),
               ...imageResult.images.map((img: any) => ({ ...img, isThumbnail: false })),
             ];
-            // ImageManager에 저장
-            imageResult.images.forEach((img: any, idx: number) => {
-              const heading = headings[idx]?.title || headings[idx] || `이미지 ${idx + 1}`;
-              ImageManager.addImage(heading, {
+            // Register images in ImageManager using the correct heading key.
+            // FIX: use resolveImageManagerKeys instead of sequential idx so that
+            // odd-only / even-only filtered results map to the right headings[].
+            // Before this fix, headings[idx] was used (idx = 0,1,...), which meant
+            // a filtered image for headings[3] was stored under headings[1],
+            // causing filterImagesForPublish to find the same image from both
+            // ImageManager and fallbackFromInput and push it twice.
+            resolveImageManagerKeys(imageResult.images, headings).forEach(({ img, headingKey }) => {
+              ImageManager.addImage(headingKey, {
                 filePath: img.filePath,
                 provider: img.provider || currentProvider,
                 url: img.url || img.filePath
