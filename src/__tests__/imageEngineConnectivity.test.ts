@@ -130,18 +130,18 @@ describe('Stage 4 — nanoBananaProGenerator MODEL_MAP 연동', () => {
 // ⚠️ 이 describe의 UI 일치 테스트는 Stage 5(UI 4표면 개편) 완료 후 .skip을 제거해 활성화한다.
 //    Stage 5의 GREEN 게이트 = 아래 테스트들이 통과하는 것.
 describe('Stage 4 — UI 표면 ↔ 카탈로그 일치 (그리드/드롭다운)', () => {
-  it.skip('[Stage 5 게이트] index.html 이미지 소스 드롭다운에 4개 엔진 value가 모두 존재한다', () => {
+  it('[Stage 5 게이트] index.html 이미지 소스 드롭다운에 4개 엔진 value가 모두 존재한다', () => {
     const html = read('../public/index.html');
     // image-source-select 드롭다운 블록 추출
-    const block = html.match(/id="image-source-select"[\s\S]{0,2000}?<\/select>/)?.[0] || '';
+    const block = html.match(/id="image-source-select"[\s\S]{0,5000}?<\/select>/)?.[0] || '';
     for (const v of ENGINE_VALUES) {
       expect(block, `드롭다운 option value="${v}"`).toContain(`value="${v}"`);
     }
   });
 
-  it.skip('[Stage 5 게이트] HeadingImageSettings 엔진 선택 그리드에 4개 엔진 data-value가 모두 존재한다', () => {
+  it('[Stage 5 게이트] HeadingImageSettings 엔진 선택 그리드에 4개 엔진 data-value가 모두 존재한다', () => {
     const code = read('renderer/components/HeadingImageSettings.ts');
-    const block = code.match(/id="image-source-submodal"[\s\S]{0,3000}?image-source-confirm/)?.[0] || '';
+    const block = code.match(/id="image-source-submodal"[\s\S]{0,8000}?image-source-confirm/)?.[0] || '';
     for (const v of ENGINE_VALUES) {
       expect(block, `그리드 data-value="${v}"`).toContain(`data-value="${v}"`);
     }
@@ -149,7 +149,9 @@ describe('Stage 4 — UI 표면 ↔ 카탈로그 일치 (그리드/드롭다운)
 
   it('그리드/드롭다운에 폐기 엔진(달리3)이 없다', () => {
     const html = read('../public/index.html');
-    const dropdownBlock = html.match(/id="image-source-select"[\s\S]{0,2000}?<\/select>/)?.[0] || '';
+    const dropdownBlock = html.match(/id="image-source-select"[\s\S]{0,5000}?<\/select>/)?.[0] || '';
+    // 블록 추출 실패(빈 문자열) 시 vacuous pass 방지 — 블록이 실제로 잡혔는지 먼저 단언
+    expect(dropdownBlock).toContain('id="image-source-select"');
     expect(dropdownBlock).not.toContain('value="dall-e-3"');
   });
 });

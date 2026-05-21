@@ -8897,9 +8897,9 @@ async function regenerateWithNewAI(index: number, heading: string): Promise<void
             newImageUrl = res.images[0].previewDataUrl || res.images[0].filePath;
             successProvider = 'prodia';
           }
-        } else if (selectedSource === 'nano-banana-pro' || selectedSource === 'pollinations') {
+        } else if (selectedSource === 'nano-banana-2' || selectedSource === 'nano-banana-pro' || selectedSource === 'nano-banana' || selectedSource === 'pollinations') {
           newImageUrl = await generateNanoBananaProImage(englishPrompt, true);
-          successProvider = 'nano-banana-pro';
+          successProvider = selectedSource === 'pollinations' ? 'nano-banana-2' : selectedSource;
         } else if (selectedSource === 'falai') {
           const res = await generateImagesWithCostSafety({
             provider: 'falai',
@@ -8920,16 +8920,16 @@ async function regenerateWithNewAI(index: number, heading: string): Promise<void
       }
     }
 
-    // 1. Nano Banana Pro (Gemini 기반, 무료)
+    // 1. Nano Banana 2 (Gemini 3.1 Flash, recommended default)
     try {
-      appendLog(`[${index + 1}] Nano Banana Pro 시도 중...`);
+      appendLog(`[${index + 1}] Nano Banana 2 시도 중...`);
       newImageUrl = await generateNanoBananaProImage(englishPrompt, true);
       if (newImageUrl) {
-        successProvider = 'nano-banana-pro';
-        appendLog(`✅ [${index + 1}] Nano Banana Pro 성공!`);
+        successProvider = 'nano-banana-2';
+        appendLog(`✅ [${index + 1}] Nano Banana 2 성공!`);
       }
     } catch (e) {
-      console.log('[Image] Nano Banana Pro 실패, 다음 시도...');
+      console.log('[Image] Nano Banana 2 실패, 다음 시도...');
     }
 
     // 2. Pollinations (무료 FLUX 폴백)

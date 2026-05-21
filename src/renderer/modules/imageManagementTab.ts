@@ -347,10 +347,12 @@ export async function initImageManagementTab(): Promise<void> {
 
       console.log(`[ImageSource] 드롭다운 선택: ${selectedSource}`);
 
-      // [v2.7.25] 라벨 통합: 두 ID 모두 정식 GA(gemini-2.5-flash-image, ₩54/장)로 매핑
-      // provider ID 'nano-banana-pro'는 기존 저장값 호환을 위해 그대로 유지
-      if (selectedSource === 'nano-banana-pro') {
-        appendLog('✅ 🍌 나노바나나(Gemini 2.5 Flash Image)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩54');
+      if (selectedSource === 'nano-banana-2') {
+        appendLog('✅ 🍌 나노바나나2(Gemini 3.1 Flash Image)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩97 | 한글 가능');
+      } else if (selectedSource === 'nano-banana-pro') {
+        appendLog('✅ 🍌 나노바나나 프로(Gemini 3 Pro Image)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩185 | 한글 최강');
+      } else if (selectedSource === 'nano-banana') {
+        appendLog('✅ 🍌 나노바나나(Gemini 2.5 Flash Image)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩54 | 한글 텍스트 깨짐 주의');
       } else if (selectedSource === 'saved') {
         const confirmed = window.confirm(
           '⚠️ 저작권 경고\n\n' +
@@ -407,8 +409,7 @@ export async function initImageManagementTab(): Promise<void> {
 
       // ✅ [2026-02-13 ROOT CAUSE FIX] globalImageSource/fullAutoImageSource에는 AI 엔진만 저장
       // 'saved'는 AI 엔진이 아님 → 별도 키에 저장하고, AI 엔진 설정은 오염시키지 않음
-      // ✅ [v2.10.71] 별칭 정규화 (nano-banana-2 → nano-banana-pro)
-      const normalizedSource = selectedSource === 'nano-banana-2' ? 'nano-banana-pro' : selectedSource;
+      const normalizedSource = selectedSource;
       (window as any).globalImageSource = normalizedSource;
       if (normalizedSource !== 'saved') {
         localStorage.setItem('globalImageSource', normalizedSource);
@@ -416,7 +417,7 @@ export async function initImageManagementTab(): Promise<void> {
         localStorage.setItem('fullAutoImageSource', normalizedSource);
         console.log(`[Renderer] 🔄 fullAutoImageSource 동기화: "${normalizedSource}"${normalizedSource !== selectedSource ? ` (정규화: "${selectedSource}" → "${normalizedSource}")` : ''}`);
         // [v1.6.3] 쇼핑 커넥트 AI 엔진(nano-banana-pro|openai-image)이면 scAIImageEngine + 라디오도 sync
-        if (selectedSource === 'nano-banana-pro' || selectedSource === 'openai-image') {
+        if (selectedSource === 'nano-banana-2' || selectedSource === 'nano-banana-pro' || selectedSource === 'nano-banana' || selectedSource === 'openai-image') {
           localStorage.setItem('scAIImageEngine', selectedSource);
           // ✅ [2026-05-18] 엔진 이름을 scSubImageSource에 쓰지 않는다. mode='ai'만 저장.
           setSubImageMode('ai');
@@ -458,7 +459,9 @@ export async function initImageManagementTab(): Promise<void> {
       // 배지 업데이트 - 소스별 색상
       if (imageSourceInfoBadge) {
         const colorMap: Record<string, string> = {
+          'nano-banana-2': 'linear-gradient(135deg, #f59e0b, #d97706)',
           'nano-banana-pro': 'linear-gradient(135deg, #03c75a, #02a94f)',
+          'nano-banana': 'linear-gradient(135deg, #fbbf24, #f59e0b)',
           'deepinfra': 'linear-gradient(135deg, #fb923c, #f97316)',
           'falai': 'linear-gradient(135deg, #ec4899, #db2777)',
           'pollinations': 'linear-gradient(135deg, #f472b6, #ec4899)',
@@ -477,14 +480,7 @@ export async function initImageManagementTab(): Promise<void> {
     // 초기화: 저장된 설정 복원 (풀오토 설정 우선)
     // ✅ [2026-03-02 FIX] fullAutoImageSource 우선 읽기 → 풀오토 이미지 설정이 이미지 관리 탭에도 반영
     let savedSource = localStorage.getItem('fullAutoImageSource') || localStorage.getItem('globalImageSource');
-    // ✅ [v2.7.57] 나노바나나2 → 나노바나나(통합) 마이그레이션
-    //   v2.7.16에 의도적으로 분리됐던 nano-banana-2 옵션이 v2.7.57에서 통합 — 세부 모델은 "이미지 모델 설정"에서 선택
-    if (savedSource === 'nano-banana-2') {
-      savedSource = 'nano-banana-pro';
-      localStorage.setItem('fullAutoImageSource', 'nano-banana-pro');
-      localStorage.setItem('globalImageSource', 'nano-banana-pro');
-      console.log('[ImageSource] 🔄 nano-banana-2 → nano-banana-pro 자동 마이그레이션');
-    }
+    // [Stage 5] nano-banana-2 is now an independent engine — no migration needed
     if (savedSource && imageSourceSelect.querySelector(`option[value="${savedSource}"]`)) {
       imageSourceSelect.value = savedSource;
       (window as any).globalImageSource = savedSource;
