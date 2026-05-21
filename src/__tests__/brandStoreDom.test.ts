@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 import { describe, it, expect, beforeEach } from 'vitest';
-import { collectReviewImageUrls } from '../crawler/shopping/providers/brandStore/brandStoreDom.js';
+import { collectReviewImageUrls, clickReviewTab, extractBrandProductInfo } from '../crawler/shopping/providers/brandStore/brandStoreDom.js';
 
 describe('collectReviewImageUrls', () => {
     beforeEach(() => {
@@ -48,5 +48,65 @@ describe('collectReviewImageUrls', () => {
     it('returns an empty array when no review images exist', () => {
         document.body.innerHTML = '<img src="https://phinf.pstatic.net/unrelated.jpg">';
         expect(collectReviewImageUrls()).toEqual([]);
+    });
+});
+
+describe('clickReviewTab', () => {
+    beforeEach(() => {
+        document.body.innerHTML = '';
+    });
+
+    it('finds and clicks a plain "리뷰" tab', () => {
+        document.body.innerHTML = '<button>리뷰</button>';
+        expect(clickReviewTab()).toEqual({ clicked: true, label: '리뷰' });
+    });
+
+    it('matches "리뷰 (N)" and "리뷰 N건" count patterns', () => {
+        document.body.innerHTML = '<button>리뷰 (123)</button>';
+        expect(clickReviewTab().clicked).toBe(true);
+    });
+
+    it('rejects "리뷰이벤트" — not a real review tab', () => {
+        document.body.innerHTML = '<button>리뷰이벤트</button>';
+        expect(clickReviewTab()).toEqual({ clicked: false });
+    });
+
+    it('rejects anchors navigating to a review-event page', () => {
+        document.body.innerHTML = '<a href="/review-event/list">리뷰</a>';
+        expect(clickReviewTab()).toEqual({ clicked: false });
+    });
+
+    it('rejects anchors with an absolute href (would navigate away)', () => {
+        document.body.innerHTML = '<a href="https://other.example.com">리뷰</a>';
+        expect(clickReviewTab()).toEqual({ clicked: false });
+    });
+
+    it('returns clicked:false when no review tab exists', () => {
+        document.body.innerHTML = '<button>구매하기</button>';
+        expect(clickReviewTab()).toEqual({ clicked: false });
+    });
+});
+
+describe('extractBrandProductInfo', () => {
+    beforeEach(() => {
+        document.body.innerHTML = '';
+    });
+
+    it('extracts name from og:title and price from a price element', () => {
+        document.body.innerHTML =
+            '<meta property="og:title" content="멋진 상품">' +
+            '<div class="product_price">12,900원</div>';
+        expect(extractBrandProductInfo()).toEqual({ name: '멋진 상품', price: '12,900원' });
+    });
+
+    it('returns empty strings when neither element is present', () => {
+        expect(extractBrandProductInfo()).toEqual({ name: '', price: '' });
+    });
+
+    it('trims surrounding whitespace', () => {
+        document.body.innerHTML =
+            '<meta property="og:title" content="  상품명  ">' +
+            '<div class="price">  9,000원  </div>';
+        expect(extractBrandProductInfo()).toEqual({ name: '상품명', price: '9,000원' });
     });
 });

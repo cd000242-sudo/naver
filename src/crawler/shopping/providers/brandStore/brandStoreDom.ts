@@ -46,3 +46,41 @@ export function collectReviewImageUrls(): string[] {
     }
     return results;
 }
+
+/**
+ * PHASE 2 리뷰 탭을 찾아 클릭.
+ * ✅ [v2.10.310] "리뷰이벤트" 별도 페이지 링크 클릭 시 navigation으로 context
+ *   파괴되는 회귀 차단 — navigation 일으키는 a[href*="review-event"] 류 제외,
+ *   진짜 리뷰 탭만 클릭.
+ */
+export function clickReviewTab(): { clicked: boolean; label?: string } {
+    const candidates = Array.from(document.querySelectorAll('a, button, [role="tab"]'));
+    const reviewTab = candidates.find(t => {
+        const text = t.textContent?.trim() || '';
+        // 정확히 "리뷰" 또는 "리뷰 (N)" 또는 "리뷰 N건" 패턴만. "리뷰이벤트"/"리뷰포인트" 제외.
+        const isReviewLabel = /^리뷰(\s*\(|\s*\d|$)/.test(text) && !/리뷰이벤트|리뷰포인트|리뷰적립/.test(text);
+        if (!isReviewLabel) return false;
+        // navigation 일으키는 <a href="...review-event..."> 류 제외
+        if (t.tagName === 'A') {
+            const href = t.getAttribute('href') || '';
+            if (href.includes('review-event') || href.includes('review-point') || /^https?:\/\//.test(href)) {
+                return false;
+            }
+        }
+        return true;
+    });
+    if (reviewTab) {
+        (reviewTab as HTMLElement).click();
+        return { clicked: true, label: (reviewTab.textContent || '').trim().substring(0, 30) };
+    }
+    return { clicked: false };
+}
+
+/** 제품 정보(상품명·가격)를 OG 태그와 가격 요소에서 추출. */
+export function extractBrandProductInfo(): { name: string; price: string } {
+    const name =
+        document.querySelector('meta[property="og:title"]')?.getAttribute('content') || '';
+    const price =
+        document.querySelector('[class*="price"]')?.textContent || '';
+    return { name: name.trim(), price: price.trim() };
+}

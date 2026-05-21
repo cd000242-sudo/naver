@@ -16,7 +16,7 @@ import {
     ERROR_PAGE_INDICATORS,
 } from '../types.js';
 import { upscaleUrl, isJunkUrl, normalizeUrl } from '../utils/imageUrlUtils.js';
-import { collectReviewImageUrls } from './brandStore/brandStoreDom.js';
+import { collectReviewImageUrls, clickReviewTab, extractBrandProductInfo } from './brandStore/brandStoreDom.js';
 
 // Puppeteer는 동적 import로 가져옴 (Electron 환경 호환)
 let puppeteer: typeof import('puppeteer');
@@ -262,28 +262,7 @@ export class BrandStoreProvider extends BaseProvider {
                 //   일어나 context 파괴되는 회귀 차단. MCP 실측: "리뷰이벤트" /review-event/list 페이지로 이동.
                 //   조치: navigation 일으키는 <a href="...review-event..."> 제외, 진짜 리뷰 탭만 클릭.
                 try {
-                    const reviewTabClicked = await page.evaluate(() => {
-                        const candidates = Array.from(document.querySelectorAll('a, button, [role="tab"]'));
-                        const reviewTab = candidates.find(t => {
-                            const text = t.textContent?.trim() || '';
-                            // 정확히 "리뷰" 또는 "리뷰 (N)" 또는 "리뷰 N건" 패턴만. "리뷰이벤트"/"리뷰포인트" 제외.
-                            const isReviewLabel = /^리뷰(\s*\(|\s*\d|$)/.test(text) && !/리뷰이벤트|리뷰포인트|리뷰적립/.test(text);
-                            if (!isReviewLabel) return false;
-                            // navigation 일으키는 <a href="...review-event..."> 류 제외
-                            if (t.tagName === 'A') {
-                                const href = t.getAttribute('href') || '';
-                                if (href.includes('review-event') || href.includes('review-point') || /^https?:\/\//.test(href)) {
-                                    return false;
-                                }
-                            }
-                            return true;
-                        });
-                        if (reviewTab) {
-                            (reviewTab as HTMLElement).click();
-                            return { clicked: true, label: (reviewTab.textContent || '').trim().substring(0, 30) };
-                        }
-                        return { clicked: false };
-                    });
+                    const reviewTabClicked = await page.evaluate(clickReviewTab);
                     if (reviewTabClicked.clicked) {
                         console.log(`[BrandStore:Playwright] 📋 리뷰 탭 클릭 OK ("${reviewTabClicked.label}")`);
                         await page.waitForTimeout(2000);
@@ -334,13 +313,7 @@ export class BrandStoreProvider extends BaseProvider {
             console.log(`[BrandStore:Playwright] 📋 우선순위 정렬: 메인 ${mainImages.length} → 갤러리 ${galleryImages.length} → 갤러리폴백 ${galleryFallbackImages.length} → 리뷰 ${reviewImages.length}`);
 
             // 제품 정보 추출
-            const productInfo = await page.evaluate(() => {
-                const name =
-                    document.querySelector('meta[property="og:title"]')?.getAttribute('content') || '';
-                const price =
-                    document.querySelector('[class*="price"]')?.textContent || '';
-                return { name: name.trim(), price: price.trim() };
-            }) as ProductInfo;
+            const productInfo = await page.evaluate(extractBrandProductInfo) as ProductInfo;
 
             await releasePage(page);
 
