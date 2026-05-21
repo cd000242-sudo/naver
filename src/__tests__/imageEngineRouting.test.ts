@@ -19,7 +19,8 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
   // 모든 활성 엔진이 반드시 등록되어야 하는 위치 7곳
   // ✅ [v2.8.2] 'dall-e-3' 추가 — UI 옵션은 v2.7.15부터 있었으나 화이트리스트에 누락되어 폴백되던 회귀 차단
   // ✅ [v2.10.305] 'dall-e-3' 제거 — UI 폐기(v2.10.302) + VALID_AI_SOURCES 제거됨. ActiveImageSource 7개만.
-  const ENGINES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow'];
+  // ✅ [v2.10.335] 나노바나나 3종 분리 — 'nano-banana'·'nano-banana-2' 추가 (각각 별개 모델)
+  const ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow'];
 
   describe('P0-1: types.ts — ImageProvider / ALLOWED_PROVIDER', () => {
     const code = read('image/types.ts');
