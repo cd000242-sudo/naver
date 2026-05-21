@@ -1768,11 +1768,10 @@ export function initFullAutoImageSourceSelection(): void {
 
       // ✅ [2026-02-11 FIX] 풀오토 전용 이미지 소스 localStorage에 저장
       // 이전에는 CSS만 변경하고 localStorage에 저장하지 않아 연속발행 시 nano-banana-pro로 fallback됨
-      // ✅ [v2.10.71] 별칭 정규화 (nano-banana-2 → nano-banana-pro)
+      // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 정규화 제거 (각각 별개 모델)
       if (source) {
-        const normalizedSource = source === 'nano-banana-2' ? 'nano-banana-pro' : source;
-        localStorage.setItem('fullAutoImageSource', normalizedSource);
-        console.log(`[FullAuto] 풀오토 전용 이미지 소스 localStorage 저장: ${normalizedSource}${normalizedSource !== source ? ` (정규화: "${source}" → "${normalizedSource}")` : ''}`);
+        localStorage.setItem('fullAutoImageSource', source);
+        console.log(`[FullAuto] 풀오토 전용 이미지 소스 localStorage 저장: ${source}`);
       }
     });
   });

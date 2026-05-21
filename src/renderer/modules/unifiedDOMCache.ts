@@ -79,13 +79,10 @@ const UnifiedDOMCache = {
     // ✅ [v2.8.2] 'dall-e-3' + 'falai' + 'pollinations' 추가 — 사용자가 달리/덕트테이프 선택해도 nano-banana-pro로 폴백되던 회귀 차단
     //   사용자 보고: "달리 분명히 달리로 이미지 생성되게 하라했는데 계속 나노바나나뜨는데 어떻게 된거야"
     //   원인: v2.7.15에 dall-e-3이 옵션으로 추가됐지만 VALID_AI_SOURCES 화이트리스트엔 누락 → fullAutoSource 거부 → 폴백 체인 → nano-banana-pro
-    // ✅ [v2.10.66] 'nano-banana-2' 별칭 정규화 추가 — 사용자 보고: "오염 값 제거" 경고 후 풀오토 폴백
-    //   원인: imageGenerator.ts:235에서 nano-banana-2 → nano-banana-pro로 정규화하지만, unifiedDOMCache가 그 전에 화이트리스트 거부로 localStorage에서 제거 → 풀오토가 빈값/폴백 진행
-    //   해결: 별칭 매핑 테이블 → 화이트리스트 적용 전에 정식 키로 변환 + localStorage 동기화
-    const ALIAS_MAP: Record<string, string> = {
-      'nano-banana-2': 'nano-banana-pro',  // v2.7.28 통합 정책: 동일 백엔드
-    };
-    const VALID_AI_SOURCES = ['nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'falai', 'pollinations', 'local-folder'];
+    // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 별칭 제거 (각각 별개 모델).
+    //   3종(nano-banana / nano-banana-2 / nano-banana-pro)을 VALID_AI_SOURCES에 직접 등록.
+    const ALIAS_MAP: Record<string, string> = {};
+    const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'falai', 'pollinations', 'local-folder'];
 
     const normalizeSource = (raw: string | null): string | null => {
       if (!raw || raw === 'undefined' || raw === 'null') return null;

@@ -3,6 +3,8 @@
 console.log('%c🚀 Better Life Naver v2.10.214 RENDERER STARTED', 'background: gold; color: black; font-size: 18px; font-weight: bold; padding: 8px 16px; border-radius: 6px');
 
 import type { StructuredContent, ImagePlan, HeadingPlan } from '../contentGenerator.js';
+// ✅ [v2.10.335] 나노바나나 3종 분리 — provider 저장값 1회성 마이그레이션
+import { migrateImageProviderStorage } from '../runtime/imageProviderMigration.js';
 // ✅ [2026-02-26 모듈화] 프롬프트 번역 모듈
 import { generateEnglishPromptForHeading, decomposeKoreanCompound, koreanMorphemes, getTranslationPrompt, cacheTranslation, _promptTranslationCache } from './modules/promptTranslation.js';
 // ✅ [2026-02-26 모듈화] 페이월 시스템 모듈
@@ -2636,6 +2638,14 @@ async function initializeApplication(): Promise<void> {
     return;
   }
   (window as any)._appInitialized = true;
+
+  // ✅ [v2.10.335] 나노바나나 3종 분리 — 레거시 provider 저장값 1회성 마이그레이션.
+  //   다른 어떤 코드가 이미지 소스 localStorage를 읽기 전에 최우선 실행해야 한다.
+  try {
+    migrateImageProviderStorage();
+  } catch (e) {
+    console.warn('[Init] 이미지 provider 마이그레이션 스킵:', e);
+  }
 
   // ═══════════════════════════════════════════════════════════════════════
   // ✅ [v2.10.90 PerfDebug] 초기화 단계별 시간 측정.
@@ -7751,11 +7761,10 @@ function initUnifiedImageSourceSelection(): void {
       if (check) (check as HTMLElement).style.display = 'flex';
 
       // ✅ [2026-02-16 FIX] 풀오토 전용 이미지 소스 저장 — 'saved'/'collected'는 AI 엔진이 아니므로 제외
-      // ✅ [v2.10.71] 별칭 정규화 (nano-banana-2 → nano-banana-pro)
+      // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 정규화 제거 (각각 별개 모델)
       if (source && source !== 'saved' && source !== 'collected') {
-        const normalizedSource = source === 'nano-banana-2' ? 'nano-banana-pro' : source;
-        localStorage.setItem('fullAutoImageSource', normalizedSource);
-        console.log(`[FullAuto] 풀오토 전용 이미지 소스 저장: ${normalizedSource}${normalizedSource !== source ? ` (정규화: "${source}" → "${normalizedSource}")` : ''}`);
+        localStorage.setItem('fullAutoImageSource', source);
+        console.log(`[FullAuto] 풀오토 전용 이미지 소스 저장: ${source}`);
       } else if (source === 'saved' || source === 'collected') {
         // 저장된 이미지/수집 이미지 선택 시 fullAutoImageSource 제거 → getImageSource()가 UI 버튼 기반으로 동작
         localStorage.removeItem('fullAutoImageSource');

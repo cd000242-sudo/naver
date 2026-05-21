@@ -107,12 +107,13 @@ export function getShoppingConnectImagePool(): any[] {
 
 /**
  * Shopping-connect AI engine whitelist (img2img 가능 — 제품 정체성 유지).
- *   - nano-banana-pro (Gemini img2img, gemini-3-pro 라벨)
- *   - nano-banana-2   (Gemini img2img, gemini-3-1-flash 라벨)
- *   - openai-image    (gpt-image-2 = 덕트테이프)
+ *   - nano-banana     (Gemini img2img, gemini-2.5-flash-image)
+ *   - nano-banana-2   (Gemini img2img, gemini-3.1-flash-image-preview)
+ *   - nano-banana-pro (Gemini img2img, gemini-3-pro-image-preview)
+ *   - openai-image    (gpt-image-2 = 덕테이프)
  * 이 화이트리스트는 "AI 이미지 엔진 선택 드롭다운" 용도로만 쓰임.
  */
-const SHOPPING_CONNECT_ALLOWED_ENGINES = ['nano-banana-pro', 'nano-banana-2', 'openai-image'] as const;
+const SHOPPING_CONNECT_ALLOWED_ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image'] as const;
 export type ShoppingConnectAIEngine = typeof SHOPPING_CONNECT_ALLOWED_ENGINES[number];
 
 /**
@@ -154,8 +155,8 @@ export function getShoppingConnectAIEngine(): ShoppingConnectAIEngine {
 
 export function setShoppingConnectAIEngine(engine: ShoppingConnectAIEngine, syncFullAuto: boolean = true): void {
     try {
-        // ✅ [v2.10.71] 별칭 정규화 (nano-banana-2 → nano-banana-pro)
-        const normalizedEngine = (engine === 'nano-banana-2' ? 'nano-banana-pro' : engine) as ShoppingConnectAIEngine;
+        // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 정규화 제거 (각각 별개 모델)
+        const normalizedEngine = engine;
         localStorage.setItem(SC_AI_ENGINE_STORAGE_KEY, normalizedEngine);
         if (syncFullAuto) {
             // 반자동 드롭다운도 같이 업데이트 (AI 엔진 범주 내 양방향 sync)

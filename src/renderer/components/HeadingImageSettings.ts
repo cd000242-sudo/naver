@@ -36,10 +36,12 @@ function setSubImageMode(mode: SubImageMode): void {
 
 export type HeadingImageMode = 'all' | 'thumbnail-only' | 'odd-only' | 'even-only' | 'none';
 
-// ✅ [v2.10.305] 활성 이미지 소스 — UI에서 선택 가능하고 백엔드에서 정상 동작하는 7개.
+// ✅ [v2.10.305] 활성 이미지 소스 — UI에서 선택 가능하고 백엔드에서 정상 동작.
 //   신규 코드는 가능하면 이 타입을 사용해 폐기 값 차단.
-//   10팀 검증 팀6 발견: GlobalImageSource에 폐기 값 6개 잔존하여 잘못된 저장 경로 열림.
+// ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana(2.5)/nano-banana-2(3.1)/nano-banana-pro(3-pro).
 export type ActiveImageSource =
+  | 'nano-banana'
+  | 'nano-banana-2'
   | 'nano-banana-pro'
   | 'deepinfra'
   | 'openai-image'
@@ -52,14 +54,12 @@ export type ActiveImageSource =
  * 레거시 이미지 소스 타입 — 폐기 값 호환성을 위해 유지.
  *
  * @deprecated 신규 코드는 {@link ActiveImageSource}를 사용하세요.
- *   - 'nano-banana-2': v2.7.28에서 'nano-banana-pro'로 정규화. localStorage 호환 위해 read 시점에 자동 변환.
  *   - 'dall-e-3': 2026-05-12 OpenAI API 폐기. v2.10.302에서 UI 클릭 차단 + write VALID_AI_SOURCES 제거.
  *   - 'falai' / 'prodia' / 'stability' / 'pollinations': UI 옵션 사라짐. localStorage 잔존 호환만 유지.
  */
 // ✅ [2026-02-08 FIX] 이미지 관리 탭 드롭다운 value와 완전 통일
 // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow (Nano Banana Pro 무료 쿼터)
 export type GlobalImageSource = ActiveImageSource
-  | 'nano-banana-2'  // @deprecated v2.7.28 → 'nano-banana-pro' 정규화
   | 'falai'          // @deprecated UI 폐기
   | 'prodia'         // @deprecated UI 폐기
   | 'stability'      // @deprecated UI 폐기
@@ -89,8 +89,9 @@ export const MODE_NAMES: Record<HeadingImageMode, string> = {
 };
 
 export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
-  'nano-banana-2': '나노바나나 (₩54/장, Gemini 2.5 Flash Image)',
-  'nano-banana-pro': '나노바나나 (₩54/장, Gemini 2.5 Flash Image)',
+  'nano-banana': '나노바나나 (₩54/장, Gemini 2.5 Flash Image)',
+  'nano-banana-2': '나노바나나2 (₩97/장, Gemini 3.1 Flash Image)',
+  'nano-banana-pro': '나노바나나 프로 (₩185/장, Gemini 3 Pro Image)',
   'falai': 'Fal.ai',
   'prodia': 'Prodia',
   'stability': 'Stability AI',
@@ -263,13 +264,9 @@ export function setHeadingImageMode(mode: HeadingImageMode): void {
   console.log(`[HeadingImageSettings] 이미지 모드 설정: ${mode}`);
 }
 
-// ✅ [v2.10.71] 이미지 소스 별칭 정규화 — write-time에서 적용 (silent migration loop 차단)
-//   사용자 보고: '[UnifiedDOMCache] ⚠️ fullAutoImageSource 오염 값 제거: "nano-banana-2"' 두 번 발생
-//   원인: setter가 'nano-banana-2'를 그대로 저장 → read에서 정규화 → 다시 setter가 저장 → 무한 루프
-//   해결: write-time에서 정식 키로 변환 → localStorage엔 항상 정식 키만 저장됨
-const IMAGE_SOURCE_ALIAS_MAP: Record<string, string> = {
-  'nano-banana-2': 'nano-banana-pro',  // v2.7.28 통합 정책: 동일 백엔드 모델
-};
+// ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 별칭 제거 (각각 별개 모델).
+//   별칭 맵은 향후 확장 대비 빈 상태로 유지 (normalizeImageSource 시그니처 보존).
+const IMAGE_SOURCE_ALIAS_MAP: Record<string, string> = {};
 
 export function normalizeImageSource(raw: string | null | undefined): GlobalImageSource | null {
   if (!raw || raw === 'null' || raw === 'undefined') return null;
@@ -294,7 +291,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   // ✅ [v2.10.302] dall-e-3 제거 — UI 완전 폐기 (v2.10.295 UI option 삭제 + v2.10.302 write 차단)
   //   기존 위험: 사용자가 서브 모달에서 dall-e-3 카드 클릭 시 VALID_AI_SOURCES 통과해 localStorage 저장 →
   //              imageGenerator.ts:335 마이그레이션 분기 진입. 폐기 표시인데 실질 진입 경로 잔존.
-  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
+  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
   if (VALID_AI_SOURCES.includes(normalized)) {
     safeLocalStorageSet('fullAutoImageSource', normalized);
     console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${normalized}`);
@@ -310,7 +307,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
 export function getFullAutoImageSource(): GlobalImageSource {
   // ✅ [v2.10.302] dall-e-3 제거 (UI 완전 폐기) + falai/prodia/stability/pollinations는 UI 미노출이나
   //   기존 사용자 localStorage 호환성을 위해 read VALID에는 유지 — write VALID_AI_SOURCES만 제거.
-  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
+  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
 
   // 정규화 read (별칭이 저장돼있으면 정식 키로 변환)
   const fullAutoSaved = normalizeImageSource(safeLocalStorageGet('fullAutoImageSource'));
