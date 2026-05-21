@@ -2682,9 +2682,28 @@ export async function generateAIImagesForHeadings(headings: any[], formData: any
             };
           });
 
-          collectedImages = reorderedImages;
-          appendLog(`✅ AI 매칭 완료: 소제목에 맞게 이미지가 재배치되었습니다!`);
-          console.log(`[AI Images] ✅ AI 매칭 결과:`, matchResult.matches);
+          // ✅ [v2.10.318] 사용자 명시 요구: "추가이미지 먼저, 리뷰 다음"
+          //   AI 의미 매칭이 리뷰 이미지를 갤러리보다 앞에 배치할 수 있음 → 10팀 검증 팀6 지적.
+          //   조치: 매칭 후 gallery → review stable sort. 리뷰 이미지는 URL 패턴으로 식별
+          //   (image.nmv / checkout.phinf = 리뷰 사진 CDN, shop-phinf = 공식 갤러리).
+          const isReviewUrl = (img: any): boolean => {
+            const u = String(img?.url || img?.filePath || (typeof img === 'string' ? img : '') || '');
+            return /image\.nmv|checkout\.phinf/i.test(u);
+          };
+          const galleryFirst = [
+            ...reorderedImages.filter((img: any) => !isReviewUrl(img)),
+            ...reorderedImages.filter((img: any) => isReviewUrl(img)),
+          ];
+          // 정렬 후 headingIndex/heading 재부여 (소제목 순서대로)
+          galleryFirst.forEach((img: any, i: number) => {
+            img.headingIndex = i;
+            img.heading = headingTitles[i] ?? img.heading;
+          });
+
+          collectedImages = galleryFirst;
+          const galleryCount = galleryFirst.filter((img: any) => !isReviewUrl(img)).length;
+          appendLog(`✅ AI 매칭 완료: 추가이미지 ${galleryCount}개 우선 배치 + 리뷰 이미지는 뒤로 정렬`);
+          console.log(`[AI Images] ✅ AI 매칭 + gallery 우선 정렬 결과:`, matchResult.matches);
         }
       } catch (matchError) {
         console.warn(`[AI Images] ⚠️ AI 매칭 실패, 순차 배치 유지:`, matchError);

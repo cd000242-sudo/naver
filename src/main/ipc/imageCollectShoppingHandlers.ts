@@ -80,6 +80,14 @@ export function registerImageCollectShoppingHandlers(): void {
                     return { success: false, message: result.error || '에러 페이지', isErrorPage: true };
                 }
 
+                // ✅ [v2.10.318] BrandStore success=false (비-에러 실패) 처리 — 10팀 검증 팀2 지적.
+                //   기존: isErrorPage만 체크 → Provider 전 전략 실패(success:false, isErrorPage:undefined) 시
+                //   images=[]로 진행 → "이미지 0개 성공"처럼 보임. SmartStore 분기처럼 명시 처리.
+                if (!result.success && (!result.images || result.images.length === 0)) {
+                    console.warn('[Main] ⚠️ 브랜드스토어 Provider 수집 실패 → 폴백 크롤러로 진행:', result.error);
+                    // images는 빈 배열로 두고 아래 MIN_BRAND_IMAGES 폴백(crawlBrandStoreProduct)이 처리
+                }
+
                 images = (result.images || []).map((img: any) => typeof img === 'string' ? img : img.url);
                 title = result.productInfo?.name || '';
                 productInfo = result.productInfo || { name: title };
@@ -161,7 +169,8 @@ export function registerImageCollectShoppingHandlers(): void {
                     return { success: false, message: result.error || '이미지를 수집할 수 없습니다' };
                 }
 
-                images = result.images.map(img => img.url);
+                // ✅ [v2.10.318] result.images undefined 방어 (10팀 검증 팀9 지적)
+                images = (result.images || []).map((img: any) => typeof img === 'string' ? img : img.url);
                 title = result.productInfo?.name || '';
                 productInfo = result.productInfo || {};
 
