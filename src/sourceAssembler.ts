@@ -235,8 +235,11 @@ function extractJsonLdFromHtml(html: string): JsonLdProduct | null {
 // ✅ [v2.10.306] export 추가 — imageCollectShoppingHandlers에서 진입부 redirect 처리에 필요
 export async function resolveShortUrl(url: string): Promise<string> {
   // 단축 URL 패턴 확인
+  // ✅ [v2.10.317] brandconnect.naver.com 추가 — handler 정규식(v2.10.307)과 일치시킴.
+  //   누락 시 2회차 resolve에서 isShortUrl=false → Playwright 폴백 미발동 회귀.
   const shortUrlPatterns = [
     'naver.me/',
+    'brandconnect.naver.com/',
     'link.coupang.com/',
     'coupa.ng/',
     'bit.ly/',
@@ -255,8 +258,7 @@ export async function resolveShortUrl(url: string): Promise<string> {
   const isBrandConnect = url.includes('brandconnect.naver.com');
   console.log(`[단축URL] 📎 ${url.substring(0, 40)}... 최종 목적지 확인 중...`);
 
-  // ✅ [1단계] fetch HEAD 시도
-  const fetchSuccess = false;
+  // ✅ [1단계] fetch HEAD 시도 (v2.10.317: 미사용 변수 fetchSuccess 제거)
   try {
     const response = await fetch(url, {
       method: 'HEAD',
@@ -1196,11 +1198,10 @@ async function tryNaverApiFirst(
         .map(url => {
           // ✅ [2026-03-14 FIX] 네이버 쇼핑 API 이미지를 고해상도로 변환
           // API 기본값은 작은 썸네일(type=f300 등)이므로 최대 크기로 변경
+          // ✅ [v2.10.317 BUG FIX] type=f860/w860은 네이버 CDN 404 유발 무효 type.
+          //   curl 실측: o1000 → 200 OK. v2.10.315에서 Provider만 고치고 이 경로를 놓침.
           if (url.includes('pstatic.net') || url.includes('naver.net')) {
-            url = url.replace(/[?&]type=f\d+/gi, '?type=f860');
-            url = url.replace(/[?&]type=w\d+/gi, '?type=w860');
-            url = url.replace(/[?&]type=m\d+/gi, '?type=w860');
-            url = url.replace(/[?&]type=s\d+/gi, '?type=w860');
+            url = url.replace(/[?&]type=[fwms]\d+[^&]*/gi, '?type=o1000');
           }
           // 쿠팡 이미지 고해상도 변환
           if (url.includes('coupang.com') || url.includes('coupangcdn.com')) {

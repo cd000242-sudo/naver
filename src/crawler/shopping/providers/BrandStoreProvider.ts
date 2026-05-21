@@ -224,7 +224,7 @@ export class BrandStoreProvider extends BaseProvider {
                 const thumbImgs = await page.$$('img[alt^="추가이미지"]');
 
                 if (thumbImgs.length > 0) {
-                    console.log(`[BrandStore:Playwright] ✅ 추가이미지 ${thumbImgs.length}개 발견 (zoom 0.8 적용)`);
+                    console.log(`[BrandStore:Playwright] ✅ 추가이미지 ${thumbImgs.length}개 발견 (viewport 2560x1440)`);
 
                     // 대표이미지 먼저 수집 (alt="대표이미지" 모바일/데스크톱 둘 다 시도)
                     let mainImgEl = await page.$('img[alt="대표이미지"]');
@@ -243,7 +243,7 @@ export class BrandStoreProvider extends BaseProvider {
                     let prevBigSrc = '';
                     for (let i = 0; i < thumbImgs.length; i++) {
                         try {
-                            // ✅ [v2.10.309] scrollIntoView로 viewport 안에 위치 강제 (zoom 0.8 + scroll 이중 보장)
+                            // ✅ [v2.10.309+317] scrollIntoView로 viewport 안에 위치 강제 (QHD viewport + scroll 이중 보장)
                             await thumbImgs[i].evaluate((el: HTMLElement) => {
                                 el.scrollIntoView({ block: 'center', inline: 'center', behavior: 'instant' as ScrollBehavior });
                             }).catch(() => undefined);
@@ -283,8 +283,8 @@ export class BrandStoreProvider extends BaseProvider {
                                 prevBigSrc = bigSrc;
                                 console.log(`[BrandStore:Playwright] 📸 추가이미지 ${i + 1} 클릭 → 큰 이미지 추출 OK`);
                             } else {
-                                // ✅ [v2.10.309+310] 큰 이미지 polling 실패 → 썸네일 자체 src를 fallback으로 사용
-                                //   upscaleUrl()이 ?type=f860으로 업스케일 처리 (작은 type=f40 → 860px).
+                                // ✅ [v2.10.309+310+317] 큰 이미지 polling 실패 → 썸네일 자체 src를 fallback으로 사용
+                                //   upscaleUrl()이 ?type=o1000으로 업스케일 처리 (작은 type=f40 → 1000px). v2.10.315 fix.
                                 const thumbSrc = await thumbImgs[i].evaluate((img: HTMLImageElement) =>
                                     img.getAttribute('data-src') || img.src || ''
                                 );
