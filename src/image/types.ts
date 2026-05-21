@@ -1,7 +1,9 @@
 // ✅ [2026-02-22] 이미지 프로바이더 정리: Fal.ai, Pollinations, Prodia, Stability AI 제거 → DALL-E, Leonardo AI 추가
 // ✅ [2026-03-15] ImageFX 프로바이더 추가 (메인 무료 이미지 생성)
 // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow (Nano Banana Pro 무료 쿼터 엔진)
-export type ImageProvider = 'naver' | 'loremflickr' | 'picsum' | 'placeholder' | 'nano-banana-2' | 'nano-banana-pro' | 'nano-banana-pro-fallback' | 'imagen-4-fallback' | 'gemini-2.5-flash-fallback' | 'gemini-3.1-flash-image-preview-fallback' | 'gemini-3-pro-image-preview-fallback' | 'imagen-4.0-generate-001-fallback' | 'gemini-2.5-flash-image-fallback' | 'deepinfra' | 'openai-image' | 'dall-e-3' | 'leonardoai' | 'collected-image' | 'collected-image-with-text' | 'imagefx' | 'flow' | 'local-folder';
+// ✅ [v2.10.335] 나노바나나 3종 분리 — 'nano-banana'(2.5)/'nano-banana-2'(3.1)/'nano-banana-pro'(3-pro)
+//   각각 별개 모델로 라우팅. v2.7.28의 통합 정규화는 제거됨.
+export type ImageProvider = 'naver' | 'loremflickr' | 'picsum' | 'placeholder' | 'nano-banana' | 'nano-banana-2' | 'nano-banana-pro' | 'nano-banana-pro-fallback' | 'imagen-4-fallback' | 'gemini-2.5-flash-fallback' | 'gemini-3.1-flash-image-preview-fallback' | 'gemini-3-pro-image-preview-fallback' | 'imagen-4.0-generate-001-fallback' | 'gemini-2.5-flash-image-fallback' | 'deepinfra' | 'openai-image' | 'dall-e-3' | 'leonardoai' | 'collected-image' | 'collected-image-with-text' | 'imagefx' | 'flow' | 'local-folder';
 
 export interface ImageRequestItem {
   heading: string;
@@ -48,7 +50,8 @@ export interface GeneratedImage {
 
 // ✅ [v1.4.80] 'flow' 추가 — assertProvider 통과 허용 (Google Labs Flow 엔진 활성화)
 // ✅ [v2.8.2] 'dall-e-3' 추가 — UI 옵션은 v2.7.15부터 있었지만 ALLOWED_PROVIDER에서 누락되어 assertProvider 실패 후 폴백되던 회귀 차단
-export const ALLOWED_PROVIDER: ImageProvider[] = ['naver', 'loremflickr', 'picsum', 'placeholder', 'nano-banana-pro', 'nano-banana-pro-fallback', 'imagen-4-fallback', 'gemini-2.5-flash-fallback', 'gemini-3.1-flash-image-preview-fallback', 'gemini-3-pro-image-preview-fallback', 'imagen-4.0-generate-001-fallback', 'gemini-2.5-flash-image-fallback', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'collected-image', 'collected-image-with-text', 'imagefx', 'flow', 'local-folder'];
+// ✅ [v2.10.335] 'nano-banana'·'nano-banana-2' 추가 — 나노바나나 3종 분리 (각각 별개 모델 라우팅)
+export const ALLOWED_PROVIDER: ImageProvider[] = ['naver', 'loremflickr', 'picsum', 'placeholder', 'nano-banana', 'nano-banana-2', 'nano-banana-pro', 'nano-banana-pro-fallback', 'imagen-4-fallback', 'gemini-2.5-flash-fallback', 'gemini-3.1-flash-image-preview-fallback', 'gemini-3-pro-image-preview-fallback', 'imagen-4.0-generate-001-fallback', 'gemini-2.5-flash-image-fallback', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'collected-image', 'collected-image-with-text', 'imagefx', 'flow', 'local-folder'];
 
 export function assertProvider(provider: string): asserts provider is ImageProvider {
   if (!ALLOWED_PROVIDER.includes(provider as ImageProvider)) {
