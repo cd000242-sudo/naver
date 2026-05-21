@@ -24,44 +24,6 @@ const CHROME_UA = MOBILE_UA; // 모바일 API용
 
 let puppeteer: typeof import('puppeteer');
 
-/**
- * 스마트스토어 선택자
- */
-const SMART_STORE_SELECTORS = {
-    mainImage: [
-        '._1oAR8r2aH0 img',
-        '.bd_3Wy0H img',
-        '._3a2lXNd-Qj img',
-        '[class*="ProductImage"] img',
-    ],
-    galleryImages: [
-        '._3bAr_L-hvy img',
-        '._thumbnailList img',
-        '[class*="thumbnail"] img',
-    ],
-    detailImages: [
-        '._3H7HBYx_h5 img',
-        '._3nSSmfH-Ro img',
-        '[class*="detail"] img',
-    ],
-    // ✅ [v1.4.77 P1] 2026-04 현행 난독화 클래스 추가 + 범용 fallback
-    productName: [
-        '._3oDjSvLGtw',           // 구버전 (유지)
-        '._1eddO7u4UC',           // 구버전 (유지)
-        'h3[class*="name"]',
-        'h2[class*="title"]',     // 신규 범용
-        '[class*="ProductName"]', // 신규 범용
-        'h1',                     // 최후 폴백
-    ],
-    price: [
-        'strong.Xu9MEKUuIo span.e1DMQNBPJ_',  // 2026-04 현행 할인가
-        'del.VaZJPclpdJ span.e1DMQNBPJ_',     // 2026-04 현행 정가
-        '._2DywKu0J_0',                       // 구버전 (유지)
-        '._2pgHN-ntx6',                       // 구버전 (유지)
-        '[class*="price"]',
-    ],
-};
-
 export class SmartStoreProvider extends BaseProvider {
     readonly name = 'SmartStoreProvider';
     readonly platform = 'smart-store' as const;
@@ -644,41 +606,6 @@ export class SmartStoreProvider extends BaseProvider {
                 error: (error as Error).message,
             };
         }
-    }
-
-    private async extractImages(page: import('puppeteer').Page): Promise<ProductImage[]> {
-        const images: ProductImage[] = [];
-        const seenUrls = new Set<string>();
-
-        for (const selector of [...SMART_STORE_SELECTORS.mainImage, ...SMART_STORE_SELECTORS.galleryImages]) {
-            try {
-                const imgs = await page.$$eval(selector, (elements) =>
-                    elements.map((img) => (img as HTMLImageElement).src).filter(Boolean)
-                );
-                for (const src of imgs) {
-                    if (!seenUrls.has(src) && this.isValidImageUrl(src)) {
-                        seenUrls.add(src);
-                        images.push({ url: src, type: images.length === 0 ? 'main' : 'gallery' });
-                    }
-                }
-            } catch { /* 무시 */ }
-        }
-
-        return images;
-    }
-
-    private async extractProductInfo(page: import('puppeteer').Page): Promise<ProductInfo | undefined> {
-        try {
-            let name = '';
-            for (const selector of SMART_STORE_SELECTORS.productName) {
-                try {
-                    name = await page.$eval(selector, (el) => el.textContent?.trim() || '');
-                    if (name) break;
-                } catch { /* 무시 */ }
-            }
-            if (name) return { name };
-        } catch { /* 무시 */ }
-        return undefined;
     }
 
     private isValidImageUrl(url: string): boolean {
