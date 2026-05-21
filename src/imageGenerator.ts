@@ -1,5 +1,7 @@
 import type { GenerateImagesOptions, GeneratedImage, ImageProvider } from './image/types.js';
 import { assertProvider as assertProviderFn } from './image/types.js';
+// ✅ [v2.10.335] 나노바나나 3종 → 모델 키 SSOT
+import { NANO_PROVIDER_TO_MODEL_KEY } from './runtime/imageEngineCatalog.js';
 import { generateWithNanoBananaPro, abortImageGeneration, resetAllImageState } from './image/nanoBananaProGenerator.js';
 import { generateWithDeepInfra } from './image/deepinfraGenerator.js';
 import { generateWithNaver } from './image/naverImageGenerator.js';
@@ -58,7 +60,9 @@ function preserveThumbnailFlags(
  */
 function isKoreanTextSupportedEngine(engine: string): boolean {
   // ✅ [v1.4.80] 'flow' 추가 — Flow는 Nano Banana Pro 기반이라 한글 텍스트 네이티브 지원
-  return engine === 'nano-banana-pro' || engine === 'flow';
+  // ✅ [v2.10.335] 나노바나나2(3.1)/프로(3-pro)는 한글 네이티브 지원. 구버전 'nano-banana'(2.5)는
+  //   한글 텍스트가 깨지므로 제외 → 오버레이 폴백 대상.
+  return engine === 'nano-banana-2' || engine === 'nano-banana-pro' || engine === 'flow';
 }
 
 /**
@@ -228,18 +232,14 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     console.log(`[ImageGenerator] 📋 프로바이더 정규화: ${options.provider} → deepinfra`);
     normalizedProvider = 'deepinfra';
   }
-  // ✅ [v2.7.28] nano-banana-2 / nano-banana-pro 완전 통합
-  //   백엔드 MODEL_MAP에서 두 라벨 모두 'gemini-2.5-flash-image'로 매핑된 상태에서
-  //   provider value만 별개로 두면 모든 후속 가드/분기에서 두 케이스를 명시 처리해야 하는
-  //   불일치 발생. 진입부에서 'nano-banana-pro'로 정규화하여 단일 흐름으로 통합.
-  if (normalizedProvider === 'nano-banana-2') {
-    console.log(`[ImageGenerator] 📋 프로바이더 정규화: nano-banana-2 → nano-banana-pro (동일 백엔드 모델)`);
-    normalizedProvider = 'nano-banana-pro';
-  }
+  // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana / nano-banana-2 / nano-banana-pro는
+  //   각각 별개 모델(gemini-2.5-flash-image / 3.1-flash-image-preview / 3-pro-image-preview)로
+  //   라우팅된다. v2.7.28의 통합 정규화는 제거됨.
   // ✅ [엔진명 한글 매핑]
   const providerDisplayNames: Record<string, string> = {
-    'nano-banana-2': '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)',
-    'nano-banana-pro': '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)',
+    'nano-banana': '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)',
+    'nano-banana-2': '나노바나나2 (Gemini 3.1 Flash Image, ₩97/장)',
+    'nano-banana-pro': '나노바나나 프로 (Gemini 3 Pro Image, ₩185/장)',
     'deepinfra': '딥인프라 FLUX-2',
     'openai-image': 'OpenAI 덕트테이프 (gpt-image-2)',
     'dall-e-3': 'DALL-E 3 (OpenAI, 인증 불필요)',
@@ -298,7 +298,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   //   - nano-banana-pro (Gemini img2img, 기본 gemini-3-1-flash = 나노바나나2)
   //   - openai-image (gpt-image-2 = 덕트테이프, image 파라미터로 참조 이미지 주입)
   // 그 외 엔진(Leonardo/DeepInfra/ImageFX 등)은 제품이 변형되므로 수집 이미지 그대로 사용
-  const SC_IMG2IMG_ENGINES = ['nano-banana-pro', 'openai-image'];
+  const SC_IMG2IMG_ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image'];
   if (options.isShoppingConnect && !SC_IMG2IMG_ENGINES.includes(normalizedProvider)) {
     console.log(`[이미지생성] 🛒 쇼핑커넥트 모드: ${displayName}는 제품 재현 불가 → 수집 이미지 직접 사용`);
     const collectedResults = await convertCollectedImagesToResults(options.collectedImages || crawledImages, items, options.postTitle, options.postId);
@@ -474,13 +474,12 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     throw new Error('[local-folder] 내 폴더 이미지는 renderer의 localFolderImageLoader에서 처리해야 합니다. generateImages로 전달되면 안 됩니다.');
   }
 
-  // ✅ 나노바나나 (Gemini 기반) — v2.7.28에서 nano-banana-2도 진입부에서 nano-banana-pro로 정규화됨
-  if (normalizedProvider === 'nano-banana-pro') {
-    // ✅ [v2.10.334] forceModelKey 제거 — 사용자의 UI 모델 선택(nano-banana-main-model
-    //   /sub-model = config.nanoBananaMainModel/SubModel)이 그대로 반영되도록.
-    //   기존엔 'gemini-3-1-flash'로 강제해 나노바나나 프로 등 UI 선택이 무시됐음.
-    const forceModelKey = undefined;
-    const modelLabel = '나노바나나 (Gemini — 사용자 선택 모델)';
+  // ✅ [v2.10.335] 나노바나나 3종 (Gemini 기반) — 엔진 선택이 곧 모델
+  if (normalizedProvider === 'nano-banana' || normalizedProvider === 'nano-banana-2' || normalizedProvider === 'nano-banana-pro') {
+    // provider → nanoBananaProGenerator MODEL_MAP 키. forceModelKey로 config를 오버라이드해
+    //   사용자가 그리드/드롭다운에서 고른 엔진이 정확히 그 모델로 호출되게 한다.
+    const forceModelKey = NANO_PROVIDER_TO_MODEL_KEY[normalizedProvider];
+    const modelLabel = providerDisplayNames[normalizedProvider] || normalizedProvider;
     console.log(`[이미지생성] 🍌 ${modelLabel}로 ${items.length}개 이미지 생성 시작...`);
     console.log(`[ImageGenerator] Gemini API 키: ${apiKeys?.geminiApiKey ? `*** (길이: ${apiKeys.geminiApiKey.length})` : '미설정'}`);
 

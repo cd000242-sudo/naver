@@ -1257,6 +1257,9 @@ async function generateSingleImageWithGemini(
         const { pickWorkingImageModel } = await import('./geminiAutoRecovery.js');
         const picked = await pickWorkingImageModel(apiKey || '', selectedModel);
         if (!picked.isOriginal && picked.model && picked.model !== selectedModel) {
+          // ✅ [v2.10.335] silent 폴백 금지 — 모델 교체를 사용자 이미지 로그 패널에 명시.
+          //   사용자가 고른 엔진의 모델이 현재 API 키 등급에서 접근 불가일 때 발생.
+          sendImageLog(`⚠️ 선택한 이미지 모델(${selectedModel})이 현재 API 키로 접근 불가 → ${picked.model}(으)로 대체합니다. 환경설정에서 다른 나노바나나 엔진을 선택할 수 있습니다.`);
           console.log(`[NanoBananaPro] 🤖 [Auto-Recovery] ${selectedModel} → ${picked.model} (${picked.reason})`);
           selectedModel = picked.model;
           lastSelectedModel = selectedModel;

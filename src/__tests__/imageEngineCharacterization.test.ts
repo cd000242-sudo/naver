@@ -76,9 +76,14 @@ describe('Stage 0 — 마이그레이션 타깃 측정 (레거시 nano-banana-pr
 describe('Stage 0 — imageGenerator 디스패치 현재 동작 고정', () => {
   const dispatchCode = read('imageGenerator.ts');
 
-  it("'nano-banana-2'는 디스패치 진입부에서 'nano-banana-pro'로 정규화된다 (Stage 3에서 해제 예정)", () => {
+  it('[Stage 3 적용됨] nano-banana 3종이 각각 별개로 라우팅된다 (통합 정규화 제거)', () => {
+    // v2.10.335: nano-banana-2 → nano-banana-pro 통합 정규화 코드 제거됨
+    expect(dispatchCode).not.toMatch(
+      /normalizedProvider === 'nano-banana-2'[\s\S]{0,120}?normalizedProvider = 'nano-banana-pro'/,
+    );
+    // 3종 모두 nano 디스패치 분기 조건에 포함
     expect(dispatchCode).toMatch(
-      /normalizedProvider === 'nano-banana-2'[\s\S]{0,200}?normalizedProvider = 'nano-banana-pro'/,
+      /normalizedProvider === 'nano-banana'[\s\S]{0,200}?'nano-banana-2'[\s\S]{0,200}?'nano-banana-pro'/,
     );
   });
 
