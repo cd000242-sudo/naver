@@ -222,9 +222,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   console.log(`[ImageGenerator] 🔍🔍🔍 수신된 options.provider = "${options.provider}" (type: ${typeof options.provider})`);
 
   // ✅ [2026-01-28 FIX] 프로바이더 이름 정규화
-  let normalizedProvider: string = options.provider || 'nano-banana-pro';
+  // ✅ [v2.10.335] 기본값 nano-banana-2 — 구 통합 옵션(nano-banana-pro)이 호출하던
+  //   gemini-3-1-flash와 동일 모델이라 행동 보존. (nano-banana-pro는 이제 고가 3-pro)
+  let normalizedProvider: string = options.provider || 'nano-banana-2';
   if (!options.provider) {
-    console.warn(`[ImageGenerator] ⚠️⚠️⚠️ options.provider가 비어있어 'nano-banana-pro' 기본값 적용! 호출자 확인 필요!`);
+    console.warn(`[ImageGenerator] ⚠️⚠️⚠️ options.provider가 비어있어 'nano-banana-2' 기본값 적용! 호출자 확인 필요!`);
   }
 
   // deepinfra-flux, deepinfra-flux-2 등 → deepinfra

@@ -248,7 +248,8 @@ export function getHeadingImageModeDisplayText(): string {
 }
 
 let currentHeadingImageMode: HeadingImageMode = 'all';
-let currentGlobalImageSource: GlobalImageSource = 'nano-banana-pro';
+// ✅ [v2.10.335] 기본값 nano-banana-2 (적정가·한글 가능 추천) — 신규 사용자 고가 프로 기본화 방지
+let currentGlobalImageSource: GlobalImageSource = 'nano-banana-2';
 let currentImageStyle: ImageStyleType = 'realistic'; // ✅ 기본값: 실사
 let currentImageRatio: ImageAspectRatio = '1:1'; // ✅ 기본값: 정사각형
 
@@ -338,7 +339,8 @@ export function getFullAutoImageSource(): GlobalImageSource {
     try { localStorage.removeItem('globalImageSource'); } catch (_) { /* ignore */ }
   }
 
-  return 'nano-banana-pro';
+  // ✅ [v2.10.335] 최종 폴백 nano-banana-2 — 구 통합 기본값과 동일 모델(gemini-3.1-flash)
+  return 'nano-banana-2';
 }
 
 export function setFullAutoImageSource(source: GlobalImageSource): void {

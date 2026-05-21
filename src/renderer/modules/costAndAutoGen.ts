@@ -82,7 +82,8 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
   //   세션 메모(+localStorage)에 직전 답변이 있으면 즉시 통과.
   //   사용자 보고: 연속발행 중 plan 모달이 반복 출현, '유료' 클릭해도 재출현.
   //   원인: getConfig 10s timeout이 연속발행 IPC 폭주 중 실제로 발생 → config={} → 모달 재진입.
-  if (provider === 'nano-banana-pro' || provider === 'falai') {
+  // ✅ [v2.10.335] 나노바나나 3종 모두 Gemini 플랜 선택 대상
+  if (provider === 'nano-banana' || provider === 'nano-banana-2' || provider === 'nano-banana-pro' || provider === 'falai') {
     const memoed = recallPlan();
     if (memoed) {
       console.log(`[CostConsent] ✅ memo hit (${memoed}) → modal 생략, IPC 우회`);
@@ -102,8 +103,8 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
     config = {};
   }
 
-  // ✅ 나노 바나나 프로 / Fal.ai (FLUX) 전용 플랜 선택 로직
-  if (provider === 'nano-banana-pro' || provider === 'falai') {
+  // ✅ 나노바나나 3종 / Fal.ai (FLUX) 전용 플랜 선택 로직
+  if (provider === 'nano-banana' || provider === 'nano-banana-2' || provider === 'nano-banana-pro' || provider === 'falai') {
     // 플랜이 이미 설정되어 있으면 통과 + 세션 메모에도 반영
     if (config.geminiPlanType === 'free' || config.geminiPlanType === 'paid') {
       console.log(`[CostConsent] ✅ disk hit (${config.geminiPlanType}) → memo 채움, modal 생략`);
@@ -409,8 +410,8 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
       }
       console.warn(`[쇼핑커넥트] 🛒 수집 이미지 ${poolSize}장으로 자동 대체 (AI 생성 스킵)`);
     } else if (!hasCollectedImages && !hasStructuredImages
-        && (provider === 'nano-banana-pro' || provider === 'nano-banana-2' || provider === 'openai-image')) {
-      // 나노바나나/덕트테이프 + 수집 이미지 없음 = text2img/img2img 진입 허용
+        && (provider === 'nano-banana' || provider === 'nano-banana-2' || provider === 'nano-banana-pro' || provider === 'openai-image')) {
+      // 나노바나나 3종/덕테이프 + 수집 이미지 없음 = text2img/img2img 진입 허용
       console.log(`[Renderer] 🛒 쇼핑커넥트: 수집 이미지 없음 → ${provider}로 진행`);
     } else {
       // 그 외 (naver/collected/saved/local-folder/no-images/gallery 등) — 가드 통과

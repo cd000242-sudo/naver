@@ -9,7 +9,8 @@
  */
 export function isCostRiskImageProvider(provider: string): boolean {
     const p = String(provider || '').trim();
-    return p === 'nano-banana-2' || p === 'nano-banana-pro' || p === 'prodia' || p === 'stability' || p === 'falai' || p === 'leonardoai' || p === 'openai-image' || p === 'dall-e-3';
+    // ✅ [v2.10.335] 나노바나나 3종 모두 비용 발생 — nano-banana(plain) 누락 시 동의 모달 미출현 회귀
+    return p === 'nano-banana' || p === 'nano-banana-2' || p === 'nano-banana-pro' || p === 'prodia' || p === 'stability' || p === 'falai' || p === 'leonardoai' || p === 'openai-image' || p === 'dall-e-3';
 }
 
 /**
@@ -18,8 +19,9 @@ export function isCostRiskImageProvider(provider: string): boolean {
 export function getCostRiskProviderLabel(provider: string): string {
     const p = String(provider || '').trim();
     if (p === 'pollinations') return 'Pollinations';
-    if (p === 'nano-banana-2') return '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)';
-    if (p === 'nano-banana-pro') return '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)';
+    if (p === 'nano-banana') return '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)';
+    if (p === 'nano-banana-2') return '나노바나나2 (Gemini 3.1 Flash Image, ₩97/장)';
+    if (p === 'nano-banana-pro') return '나노바나나 프로 (Gemini 3 Pro Image, ₩185/장)';
     if (p === 'falai') return 'Fal.ai';
     if (p === 'prodia') return 'Prodia AI';
     if (p === 'stability') return 'Stability AI';
