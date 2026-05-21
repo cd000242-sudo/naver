@@ -124,8 +124,14 @@ export function registerImageCollectShoppingHandlers(): void {
                                     });
 
                                 if (fallbackImages.length > 0) {
-                                    images = [...images, ...fallbackImages];
-                                    console.log(`[Main] ✅ 폴백 크롤러에서 ${fallbackImages.length}개 추가 이미지 수집 → 총 ${images.length}개`);
+                                    // ✅ [v2.10.319] 폴백 galleryImages를 리뷰 이미지 앞에 삽입 (10팀 팀10 지적).
+                                    //   사용자 요구 "추가이미지 먼저, 리뷰 다음" — 폴백 이미지는 공식 갤러리이므로
+                                    //   기존 images 중 리뷰(image.nmv/checkout.phinf)가 있으면 그 앞에 배치.
+                                    const isReviewUrl = (u: string) => /image\.nmv|checkout\.phinf/i.test(u);
+                                    const existingGallery = images.filter(u => !isReviewUrl(u));
+                                    const existingReview = images.filter(u => isReviewUrl(u));
+                                    images = [...existingGallery, ...fallbackImages, ...existingReview];
+                                    console.log(`[Main] ✅ 폴백 크롤러 ${fallbackImages.length}개 → 갤러리 뒤·리뷰 앞 삽입 → 총 ${images.length}개`);
                                 }
 
                                 // 상품명이 없으면 폴백에서 가져오기

@@ -362,6 +362,8 @@ export class SmartStoreProvider extends BaseProvider {
                         if (mainSrc) addImg(mainSrc, 'main');
                     }
 
+                    // ✅ [v2.10.319] BrandStoreProvider와 동기화 — blur 거부 + 썸네일 fallback (10팀 팀6)
+                    const isBlur = (u: string) => /[?&]type=blur/i.test(u);
                     // 3. 각 추가이미지 썸네일 클릭 → 대표이미지 영역에서 큰 이미지 추출
                     for (let i = 0; i < thumbImgs.length; i++) {
                         try {
@@ -374,17 +376,28 @@ export class SmartStoreProvider extends BaseProvider {
 
                             // 대표이미지 영역에서 변경된 큰 이미지 URL 가져오기
                             const bigImgEl = await page.$('img[alt="대표이미지"]');
+                            let bigSrc = '';
                             if (bigImgEl) {
-                                const bigSrc = await bigImgEl.evaluate((img: HTMLImageElement) =>
+                                const cur = await bigImgEl.evaluate((img: HTMLImageElement) =>
                                     img.getAttribute('data-src') || img.src || ''
                                 );
-                                if (bigSrc) {
-                                    addImg(bigSrc, 'gallery');
-                                    console.log(`[SmartStore:Playwright] 📸 추가이미지 ${i + 1} 클릭 → 큰 이미지 추출 OK`);
+                                if (cur && !isBlur(cur)) bigSrc = cur;
+                            }
+                            if (bigSrc) {
+                                addImg(bigSrc, 'gallery');
+                                console.log(`[SmartStore:Playwright] 📸 추가이미지 ${i + 1} 클릭 → 큰 이미지 추출 OK`);
+                            } else {
+                                // ✅ [v2.10.319] 큰 이미지 추출 실패(blur/없음) → 썸네일 fallback (BrandStore와 동일)
+                                const thumbSrc = await thumbImgs[i].evaluate((img: HTMLImageElement) =>
+                                    img.getAttribute('data-src') || img.src || ''
+                                );
+                                if (thumbSrc) {
+                                    addImg(thumbSrc, 'gallery-thumb-fallback');
+                                    console.log(`[SmartStore:Playwright] 📷 추가이미지 ${i + 1} → 썸네일 fallback`);
                                 }
                             }
-                        } catch {
-                            // 개별 클릭 실패 무시
+                        } catch (clickErr) {
+                            console.warn(`[SmartStore:Playwright] ⚠️ 추가이미지 ${i + 1} 클릭 실패:`, (clickErr as Error).message);
                         }
                     }
                     console.log(`[SmartStore:Playwright] ✅ PHASE 0 완료: ${allImages.length}개 고해상도 갤러리 이미지`);
@@ -488,12 +501,18 @@ export class SmartStoreProvider extends BaseProvider {
                 console.warn('[SmartStore:Playwright] ⚠️ PHASE 2 실패:', (phase2Err as Error).message);
             }
 
-            // 최종 정리: 메인 > 갤러리 > 리뷰 순서
+            // ✅ [v2.10.319] BrandStoreProvider와 동일한 우선순위 정렬 — 메인 → 갤러리 → 갤러리폴백 → 리뷰
             const mainImages = allImages.filter(i => i.type === 'main');
             const galleryImages = allImages.filter(i => i.type === 'gallery');
+            const galleryFallbackImages = allImages.filter(i => i.type === 'gallery-thumb-fallback');
             const reviewImages = allImages.filter(i => i.type === 'review');
 
-            const sortedImages = [...mainImages, ...galleryImages, ...reviewImages].slice(0, 100);
+            const sortedImages = [
+                ...mainImages,
+                ...galleryImages,
+                ...galleryFallbackImages,
+                ...reviewImages,
+            ].slice(0, 100);
             const images: ProductImage[] = sortedImages as ProductImage[];
 
             console.log(`[SmartStore:Playwright] 📊 최종: 총 ${images.length}개`);

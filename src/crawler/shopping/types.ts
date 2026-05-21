@@ -8,7 +8,10 @@
  */
 export interface ProductImage {
     url: string;
-    type: 'main' | 'gallery' | 'detail' | 'review';
+    // ✅ [v2.10.319] 'gallery-thumb-fallback' 추가 — BrandStoreProvider PHASE 0에서
+    //   추가이미지 클릭 polling 실패 시 썸네일 src를 fallback으로 쓰는 타입. 기존 코드가
+    //   리터럴로 사용 중인데 유니온에 없어 `as ProductImage[]` 캐스팅으로 타입 위반 억제하던 것 해소.
+    type: 'main' | 'gallery' | 'gallery-thumb-fallback' | 'detail' | 'review';
     width?: number;
     height?: number;
     alt?: string;

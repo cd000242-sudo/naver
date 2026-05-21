@@ -239,9 +239,29 @@ export class BrandStoreProvider extends BaseProvider {
                         if (mainSrc) addImg(mainSrc, 'main');
                     }
 
+                    // ✅ [v2.10.319] isBlur 함수를 루프 외부로 추출 (매 iteration 재선언 제거 — 10팀 팀4)
+                    //   blur placeholder URL 검출. ?type=blur0_8 등 네이버 CDN 패턴.
+                    const isBlur = (u: string) => /[?&]type=blur/i.test(u);
+
+                    // ✅ [v2.10.319] PHASE 0 전체 deadline — 13장 × 2.5초 = 32초 폭주 방지 (10팀 팀4)
+                    const PHASE0_DEADLINE_MS = 25000;
+                    const phase0Start = Date.now();
+
                     // 각 추가이미지 썸네일 클릭 → 대표이미지 영역에서 큰 이미지 추출
                     let prevBigSrc = '';
                     for (let i = 0; i < thumbImgs.length; i++) {
+                        // ✅ [v2.10.319] deadline 초과 시 남은 썸네일은 fallback src로만 빠르게 수집
+                        if (Date.now() - phase0Start > PHASE0_DEADLINE_MS) {
+                            console.warn(`[BrandStore:Playwright] ⏰ PHASE 0 deadline(${PHASE0_DEADLINE_MS}ms) 초과 — 남은 ${thumbImgs.length - i}장은 썸네일 fallback`);
+                            for (let j = i; j < thumbImgs.length; j++) {
+                                try {
+                                    const ts = await thumbImgs[j].evaluate((img: HTMLImageElement) =>
+                                        img.getAttribute('data-src') || img.src || '');
+                                    if (ts) addImg(ts, 'gallery-thumb-fallback');
+                                } catch { /* skip */ }
+                            }
+                            break;
+                        }
                         try {
                             // ✅ [v2.10.309+317] scrollIntoView로 viewport 안에 위치 강제 (QHD viewport + scroll 이중 보장)
                             await thumbImgs[i].evaluate((el: HTMLElement) => {
@@ -254,12 +274,9 @@ export class BrandStoreProvider extends BaseProvider {
                             );
                             await (parent || thumbImgs[i]).click();
 
-                            // ✅ [v2.10.310] blur placeholder 회귀 패치 — Playwright MCP 실측에서
-                            //   13개 클릭이 모두 같은 ?type=blur0_8 placeholder URL 반환 → dedup 후 1장만 남는 회귀.
-                            //   원인: 클릭 직후 큰 이미지가 lazy-load 교체되는데 우리가 너무 빨리 읽음.
-                            //   조치: (1) blur URL 자체를 거부 (2) 새 큰 이미지가 로드될 때까지 최대 2.5초 polling
-                            //         (3) timeout 시 썸네일 fallback (upscale)
-                            const isBlur = (u: string) => /[?&]type=blur/i.test(u);
+                            // ✅ [v2.10.310] blur placeholder 회귀 패치 — 13개 클릭이 모두 같은
+                            //   ?type=blur0_8 placeholder URL 반환 → dedup 후 1장만 남는 회귀.
+                            //   조치: blur URL 거부 + 새 큰 이미지 로드까지 최대 2.5초 polling + timeout 시 썸네일 fallback
                             let bigSrc = '';
                             const POLL_MAX = 10; // 2.5초 (250ms * 10)
                             for (let p = 0; p < POLL_MAX; p++) {
@@ -293,7 +310,10 @@ export class BrandStoreProvider extends BaseProvider {
                                     console.log(`[BrandStore:Playwright] 📷 추가이미지 ${i + 1} polling 타임아웃 → 썸네일 fallback (upscale)`);
                                 }
                             }
-                        } catch (clickErr) { /* 개별 클릭 실패 무시 */ }
+                        } catch (clickErr) {
+                            // ✅ [v2.10.319] catch 묵음 → console.warn 기록 (10팀 팀4 — 디버깅 가능하게)
+                            console.warn(`[BrandStore:Playwright] ⚠️ 추가이미지 ${i + 1} 클릭 처리 실패:`, (clickErr as Error).message);
+                        }
                     }
                     console.log(`[BrandStore:Playwright] ✅ PHASE 0 완료: ${allImages.length}개 갤러리 이미지`);
                 } else {
