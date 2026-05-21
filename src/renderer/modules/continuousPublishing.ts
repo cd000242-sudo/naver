@@ -5,6 +5,7 @@
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
 import type { ContinuousQueueItem } from '../types/index';
+import { resolvePublishModeAfterScheduleRemoved } from './continuousPublishModeHelpers';
 // ✅ [v2.10.288] subImageMode import 제거 — line 10-12에 명시된 패턴 적용.
 //   렌더러 빌드 스크립트가 require()를 정규식 삭제 → subImageMode_1 is not defined 회귀 차단.
 type SubImageMode = 'ai' | 'collected';
@@ -3366,11 +3367,14 @@ function showItemScheduleModal(item: any): void {
 
   // 예약 해제 버튼
   document.getElementById('item-schedule-clear')?.addEventListener('click', () => {
-    item.publishMode = 'publish';
+    // Keep a user-selected 'draft' mode intact when only the schedule is removed.
+    item.publishMode = resolvePublishModeAfterScheduleRemoved(item.publishMode);
     item.scheduleDate = undefined;
     item.scheduleTime = undefined;
     item.scheduleUserModified = undefined; // ✅ [2026-03-17] 예약 해제 시 수동 플래그 초기화
-    toastManager.info('🚀 즉시 발행으로 변경되었습니다.');
+    toastManager.info(item.publishMode === 'draft'
+      ? '📝 임시저장 모드로 유지됩니다.'
+      : '🚀 즉시 발행으로 변경되었습니다.');
     renderQueueListV2();
     closeModal();
   });
@@ -3783,7 +3787,8 @@ function showIndividualScheduleModal(): void {
         // ✅ [2026-02-08 FIX] item.interval = 600 제거 — 사용자 설정 간격 유지
         savedCount++;
       } else if (!checked) {
-        item.publishMode = 'publish';
+        // Unchecking only removes the schedule — preserve a 'draft' selection.
+        item.publishMode = resolvePublishModeAfterScheduleRemoved(item.publishMode);
         item.scheduleDate = undefined;
         item.scheduleTime = undefined;
       }
