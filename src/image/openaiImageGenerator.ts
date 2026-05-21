@@ -133,17 +133,32 @@ export async function generateWithOpenAIImage(
             // ✅ [2026-03-12 FIX] NO TEXT 지시를 프롬프트 맨 앞에 배치 → AI가 텍스트 렌더링 강력 방지
             const NO_TEXT_PREFIX = 'CRITICAL RULE: This image must contain ZERO text, ZERO letters, ZERO words, ZERO writing of any kind. Generate a COMPLETELY TEXT-FREE image.';
 
+            // ✅ [v2.10.335] 덕테이프(gpt-image-2)는 한글 텍스트 네이티브 렌더링 가능.
+            //   allowText가 명시된 "비-썸네일" 이미지(인포그래픽/상세 등)는 한글 텍스트를
+            //   이미지 안에 직접 렌더링한다. 썸네일(index 0) 제목은 기존 오버레이 경로
+            //   (imageGenerator.applyKoreanTextOverlayIfNeeded)가 처리하므로, 여기서 썸네일을
+            //   제외해 이중 텍스트를 원천 차단한다.
+            const wantsNativeKoreanText =
+                (item as any).allowText === true && (item as any).isThumbnail !== true;
+            const koreanTextToRender = String(item.heading || '').trim();
+            const textDirective = wantsNativeKoreanText && koreanTextToRender
+                ? `TYPOGRAPHY REQUIREMENT: Render this exact Korean text as a bold, large, clearly legible headline integrated into the image design: "${koreanTextToRender}". The Korean characters must be spelled EXACTLY as given, sharp, high-contrast against the background, and fully readable. Keep all text within the safe area (not cropped at edges).`
+                : NO_TEXT_PREFIX;
+            if (wantsNativeKoreanText && koreanTextToRender) {
+                console.log(`[OpenAI-Image] 🔤 덕테이프 한글 텍스트 네이티브 렌더링: "${koreanTextToRender.substring(0, 30)}"`);
+            }
+
             if (isShoppingConnect) {
                 if (cachedReferenceBase64) {
-                    prompt = `${NO_TEXT_PREFIX} Based on the provided product reference image, create a premium lifestyle photograph showing this exact product being used by a Korean person (20-40s). ${dh.angle}, ${dh.framing}, ${prompt}, luxury Korean lifestyle setting, ${dh.lighting}, ${dh.focus}, maintain the product's exact appearance and design from the reference.`;
+                    prompt = `${textDirective} Based on the provided product reference image, create a premium lifestyle photograph showing this exact product being used by a Korean person (20-40s). ${dh.angle}, ${dh.framing}, ${prompt}, luxury Korean lifestyle setting, ${dh.lighting}, ${dh.focus}, maintain the product's exact appearance and design from the reference.`;
                 } else {
-                    prompt = `${NO_TEXT_PREFIX} ${dh.angle}, ${dh.framing}, Premium lifestyle photography with Korean person, ${dh.personAction}, using or enjoying the product, ${prompt}, luxury lifestyle setting, ${dh.lighting}, ${dh.focus}.`;
+                    prompt = `${textDirective} ${dh.angle}, ${dh.framing}, Premium lifestyle photography with Korean person, ${dh.personAction}, using or enjoying the product, ${prompt}, luxury lifestyle setting, ${dh.lighting}, ${dh.focus}.`;
                 }
             } else if (!isRealistic) {
-                prompt = `${NO_TEXT_PREFIX} ${stylePromptText}, ${prompt}.`;
+                prompt = `${textDirective} ${stylePromptText}, ${prompt}.`;
             } else {
                 const koreanPersonDirective = 'If any person appears in this image, they must be Korean with East Asian features. ';
-                prompt = `${NO_TEXT_PREFIX} ${dh.angle}, ${koreanPersonDirective}${prompt}, ${dh.color}.`;
+                prompt = `${textDirective} ${dh.angle}, ${koreanPersonDirective}${prompt}, ${dh.color}.`;
             }
 
             // 이미지 비율 설정

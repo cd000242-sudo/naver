@@ -155,3 +155,23 @@ describe('Stage 4 — UI 표면 ↔ 카탈로그 일치 (그리드/드롭다운)
     expect(dropdownBlock).not.toContain('value="dall-e-3"');
   });
 });
+
+describe('Stage 6 — 덕테이프 한글 네이티브 텍스트 + 이중 텍스트 차단', () => {
+  const openaiCode = read('image/openaiImageGenerator.ts');
+
+  it('네이티브 한글 텍스트는 allowText이면서 썸네일이 아닌 이미지에만 적용된다', () => {
+    expect(openaiCode).toMatch(
+      /wantsNativeKoreanText\s*=[\s\S]{0,120}?allowText === true[\s\S]{0,80}?isThumbnail !== true/,
+    );
+  });
+
+  it('NO_TEXT_PREFIX가 보존된다 (allowText 아닌 본문 이미지는 텍스트 없음 — 회귀 차단)', () => {
+    expect(openaiCode).toContain('NO_TEXT_PREFIX');
+    expect(openaiCode).toMatch(/textDirective\s*=\s*wantsNativeKoreanText[\s\S]{0,400}?:\s*NO_TEXT_PREFIX/);
+  });
+
+  it('프롬프트 3개 분기가 textDirective를 사용한다 (NO_TEXT 직접 사용 제거)', () => {
+    const branchUses = (openaiCode.match(/\$\{textDirective\}/g) || []).length;
+    expect(branchUses).toBeGreaterThanOrEqual(3);
+  });
+});
