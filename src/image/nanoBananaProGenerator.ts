@@ -389,17 +389,20 @@ class GeminiRpmThrottler {
   }
 }
 
-// [v2.6.2] 전역 RPM 쓰로틀러 — Flash 고속화
-// 기본 상한 30 RPM, 하한 8 RPM, 중간값 19에서 시작해 429 없으면 점진 가속
-// Tier 2+ 사용자는 환경변수 GEMINI_RPM_CEILING으로 상향 가능
+// [v2.6.2] 전역 RPM 쓰로틀러
+// ✅ [v2.10.333] 상한 30→10 정정. MODEL_MAP상 실제 호출 모델은 항상
+//   gemini-2.5-flash-image (Tier 1 = 10 RPM, 위 322~325줄 공식 수치).
+//   기존 30은 미존재 모델 gemini-3.1-flash-image-preview(60 RPM) 기준이라
+//   실한도의 3배를 통과시켜 스스로 429를 유발 → 연속발행 4개째 실패.
+//   Tier 2+ 사용자는 환경변수 GEMINI_RPM_CEILING으로 상향 가능.
 const getCeilingRpm = (): number => {
   try {
     const env = typeof process !== 'undefined' ? parseInt(process.env.GEMINI_RPM_CEILING || '', 10) : NaN;
     if (!isNaN(env) && env > 0) return env;
   } catch {}
-  return 30; // Flash 모델 Tier 1 기준
+  return 10; // gemini-2.5-flash-image Tier 1 = 10 RPM (실제 호출 모델)
 };
-const geminiRpmThrottler = new GeminiRpmThrottler(getCeilingRpm(), 8, 2);
+const geminiRpmThrottler = new GeminiRpmThrottler(getCeilingRpm(), 6, 2);
 
 // 전역 키 풀 인스턴스 (세션 간 소진 상태 공유)
 let globalKeyPool: GeminiKeyPool | null = null;
