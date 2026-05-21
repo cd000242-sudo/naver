@@ -77,35 +77,6 @@ export async function humanMouseMove(page: any, targetX: number, targetY: number
 }
 
 /**
- * ✅ Bounding Box 랜덤 좌표 클릭 (정중앙 아닌 가우스 분포)
- */
-export async function humanClick(page: any, selector: string): Promise<boolean> {
-    try {
-        const el = await page.$(selector);
-        if (!el) return false;
-
-        const box = await el.boundingBox();
-        if (!box) return false;
-
-        // 가우스 분포로 클릭 좌표 결정 (중앙 근처에 높은 확률)
-        const clickX = gaussianRandom(box.x + box.width / 2, box.width / 6);
-        const clickY = gaussianRandom(box.y + box.height / 2, box.height / 6);
-
-        // 클릭 범위 보정
-        const safeX = Math.max(box.x + 2, Math.min(box.x + box.width - 2, clickX));
-        const safeY = Math.max(box.y + 2, Math.min(box.y + box.height - 2, clickY));
-
-        await humanMouseMove(page, safeX, safeY);
-        await page.waitForTimeout(50 + Math.random() * 100);
-        await page.mouse.click(safeX, safeY);
-
-        return true;
-    } catch {
-        return false;
-    }
-}
-
-/**
  * ✅ Distraction Logic: 15% 확률로 무의미한 인간 행동 수행
  */
 export async function performDistraction(page: any): Promise<void> {

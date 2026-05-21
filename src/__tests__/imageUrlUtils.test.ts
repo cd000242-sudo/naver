@@ -34,7 +34,8 @@ describe('upscaleUrl', () => {
     });
 
     it('does not match a blur placeholder type', () => {
-        // ?type=blur0_8 has a letter after the prefix, so the digit regex fails to match.
+        // The regex expects digits right after the leading letter; in "blur0_8" the
+        // letter 'b' is followed by 'l', so there is no match and the URL is unchanged.
         expect(upscaleUrl('https://x/a.jpg?type=blur0_8')).toBe('https://x/a.jpg?type=blur0_8');
     });
 
