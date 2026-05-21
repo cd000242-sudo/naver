@@ -26,6 +26,27 @@ function sendImageLog(message: string): void {
   console.log(message); // 터미널에도 출력
 }
 
+// ✅ [v2.10.331] Gemini 이미지 생성 실패 정밀 진단 로그.
+//   목적: 연속발행 N개째 실패의 정확한 원인(HTTP 코드 / Gemini 에러 본문 /
+//   키풀 상태 / 모델 / RPM)을, 사용자가 앱 이미지 로그 패널에서 복사하거나
+//   userData/gemini-image-debug.log 파일로 제공할 수 있게 한다.
+//   동작에는 영향 없음 — 진단 기록 전용.
+function logGeminiImageFailure(detail: Record<string, unknown>): void {
+  const lines = Object.entries(detail).map(([k, v]) => `   ${k}: ${v}`);
+  const block = `[GEMINI-IMG-DEBUG] 이미지 생성 실패 진단\n${lines.join('\n')}`;
+  sendImageLog(`🔬 ${block}`);
+  try {
+    const fsSync = require('fs');
+    const pathMod = require('path');
+    let dir = process.cwd();
+    try { dir = require('electron').app.getPath('userData'); } catch { /* app 미준비 */ }
+    fsSync.appendFileSync(
+      pathMod.join(dir, 'gemini-image-debug.log'),
+      `${new Date().toISOString()}\n${block}\n\n`,
+    );
+  } catch { /* 파일 기록 실패는 무시 */ }
+}
+
 // ✅ [2026-03-02] Gemini 모델별 이미지 1장당 추정 비용 (원화)
 const MODEL_COST_KRW: Record<string, number> = {
   // ✅ [v2.7.25] Google 공식 단가 기준 정확화
@@ -1587,6 +1608,19 @@ async function generateSingleImageWithGemini(
       const isServerError = statusCode === 500 || statusCode === 503 || errorMessage.includes('500') || errorMessage.includes('503');
       const isAuthError = statusCode === 401 || statusCode === 403 || errorMessage.includes('401') || errorMessage.includes('403') || errorMessage.includes('API key');
       const isTimeoutError = errorMessage.includes('timeout') || errorMessage.includes('ETIMEDOUT') || errorMessage.includes('ECONNRESET');
+
+      // ✅ [v2.10.331] 매 실패 시도마다 정밀 진단 기록 (연속발행 N개째 실패 원인 추적)
+      logGeminiImageFailure({
+        '시각': new Date().toLocaleString('ko-KR'),
+        '소제목': item.heading,
+        '시도': `${attempt}/${maxRetries}`,
+        'HTTP상태': statusCode ?? '(없음)',
+        '분류': `quota=${isQuotaError} server=${isServerError} auth=${isAuthError} timeout=${isTimeoutError} limitZero=${isLimitZero} paidOnly=${isPaidOnly} badModel=${isBadModelError}`,
+        '모델': lastSelectedModel || '(기본)',
+        '키풀': keyPool ? `${keyPool.getAvailableCount()}/${keyPool.getTotalCount()} 사용가능` : '(단일키)',
+        'RPM': geminiRpmThrottler.getStatus(),
+        '에러메시지': errorMessage,
+      });
 
       // ✅ [v1.4.44] limit:0 또는 paid plans only → 재시도 무의미, 즉시 안내
       if (isLimitZero || isPaidOnly) {
