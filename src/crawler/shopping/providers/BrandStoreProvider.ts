@@ -16,6 +16,7 @@ import {
     ERROR_PAGE_INDICATORS,
 } from '../types.js';
 import { upscaleUrl, isJunkUrl, normalizeUrl } from '../utils/imageUrlUtils.js';
+import { collectReviewImageUrls } from './brandStore/brandStoreDom.js';
 
 // Puppeteer는 동적 import로 가져옴 (Electron 환경 호환)
 let puppeteer: typeof import('puppeteer');
@@ -304,41 +305,7 @@ export class BrandStoreProvider extends BaseProvider {
                 });
                 await page.waitForTimeout(1500);
 
-                const reviewUrls: string[] = await page.evaluate(() => {
-                    const results: string[] = [];
-                    const addUrl = (u: string | null | undefined) => {
-                        if (u && u.startsWith('http') && !u.startsWith('data:')) results.push(u);
-                    };
-                    // ✅ [v2.10.312] 사용자 케이스(homelia/12059215662) MCP 실측에서 발견:
-                    //   alt="review_image" img가 12개 페이지에 직접 로드되어 있는데
-                    //   기존 셀렉터 [class*="review"] img 가 alt 기반 셀렉터 누락으로 못 잡음.
-                    //   조치: alt="review_image" / alt^="리뷰" 직접 셀렉터 추가.
-                    const reviewSelectors = [
-                        'img[alt="review_image"]',
-                        'img[alt^="리뷰"]',
-                        '[class*="review"] img',
-                        '[class*="Review"] img',
-                        '[data-testid*="review"] img',
-                        '[class*="photo_review"] img',
-                        '[data-shp-area*="review"] img',
-                    ];
-                    for (const sel of reviewSelectors) {
-                        try {
-                            document.querySelectorAll(sel).forEach(img => {
-                                const el = img as HTMLImageElement;
-                                const src = el.getAttribute('data-src') || el.src || '';
-                                if (src.includes('profile') || src.includes('star') ||
-                                    src.includes('icon') || src.includes('logo') ||
-                                    src.includes('badge') || src.includes('emoji') ||
-                                    src.endsWith('.gif') || src.endsWith('.svg')) return;
-                                if (src.includes('phinf.pstatic.net') || /\.(jpg|jpeg|png|webp)/i.test(src)) {
-                                    addUrl(src);
-                                }
-                            });
-                        } catch {}
-                    }
-                    return results;
-                });
+                const reviewUrls: string[] = await page.evaluate(collectReviewImageUrls);
 
                 for (const rawUrl of reviewUrls) {
                     addImg(rawUrl, 'review');
