@@ -49,12 +49,13 @@ function logGeminiImageFailure(detail: Record<string, unknown>): void {
 
 // ✅ [2026-03-02] Gemini 모델별 이미지 1장당 추정 비용 (원화)
 const MODEL_COST_KRW: Record<string, number> = {
-  // ✅ [v2.7.25] Google 공식 단가 기준 정확화
-  //   gemini-2.5-flash-image: $0.039/장 (1290 출력 토큰 × $30/1M) ≈ ₩54/장 (환율 ₩1,380)
-  //   가짜 ID(gemini-3.x preview) 항목은 호환성 위해 동일 단가로 매핑
-  'gemini-3.1-flash-image-preview': 54,    // 통합 매핑 (실제 = gemini-2.5-flash-image)
-  'gemini-3-pro-image-preview': 54,        // 통합 매핑 (실제 = gemini-2.5-flash-image)
-  'gemini-2.5-flash-image': 54,            // 나노바나나 정식 GA (~₩54/장)
+  // ✅ [v2.10.334] 실제 모델별 추정 단가 (Google 공식 단가 기준, 환율 ₩1,380)
+  //   gemini-2.5-flash-image: $0.039/장 ≈ ₩54
+  //   gemini-3.1-flash-image-preview: 나노바나나2 (Flash) — 추정 ₩97
+  //   gemini-3-pro-image-preview: 나노바나나 프로 — $0.134/장 ≈ ₩185
+  'gemini-3.1-flash-image-preview': 97,    // 나노바나나2 (Gemini 3.1 Flash Image)
+  'gemini-3-pro-image-preview': 185,       // 나노바나나 프로 (Gemini 3 Pro Image)
+  'gemini-2.5-flash-image': 54,            // 나노바나나 구버전 (~₩54/장)
   'gemini-2.0-flash-exp-image-generation': 0, // 무료
   'imagen-4.0-generate-001': 100,          // 이미지4 (~₩100)
 };
@@ -1201,21 +1202,22 @@ async function generateSingleImageWithGemini(
       // - gemini-2.0-flash-exp: 🆓 무료 실험 모델, 한글 정확도 높음
       // - gemini-2.5-flash-image: 1K 해상도, 비용 ~$0.034/장 (Pro 대비 4배 저렴)
       // - gemini-3-pro-image-preview: 4K/1K 해상도, 최고 품질, 비용 ~$0.134/장
-      // ✅ [v2.7.24] 2026-04 기준 검증된 Google Gemini 공식 모델 ID로 일괄 정정
-      //   이전 버그: 'gemini-3.1-flash-image-preview', 'gemini-3-pro-image-preview' 는
-      //              Google API에 **존재하지 않는** ID 또는 미공개 → 모든 Tier에서 400 발생
-      //   수정: 검증된 정식 ID(`gemini-2.5-flash-image`)를 모든 사용자 키에 매핑
-      //   사용자 UI 명칭은 그대로 (나노바나나2/프로) 유지하되 내부 호출은 정확한 ID로
+      // ✅ [v2.10.334] 실제 모델 ID 복원 — Google 공식 문서 검증 완료.
+      //   v2.7.24가 gemini-3.1-flash-image-preview / gemini-3-pro-image-preview를
+      //   "미존재 ID"로 잘못 단정해 구형 gemini-2.5-flash-image로 강등했으나,
+      //   둘 다 실재하는 정식 모델(Gemini 3.1 Flash Image / Gemini 3 Pro Image)이고
+      //   한글 텍스트 렌더링이 구형보다 강함 → 복원.
+      //   접근 불가(400) 시 isBadModelError 핸들러가 gemini-2.5-flash-image로 자동 폴백.
       const MODEL_MAP: Record<string, { model: string; resolution: string }> = {
         // 사용자 UI: "나노바나나 프로 4K"
-        'gemini-3-pro-4k': { model: 'gemini-2.5-flash-image', resolution: '1K' },
+        'gemini-3-pro-4k': { model: 'gemini-3-pro-image-preview', resolution: '4K' },
         // 사용자 UI: "나노바나나 프로"
-        'gemini-3-pro': { model: 'gemini-2.5-flash-image', resolution: '1K' },
-        // 사용자 UI: "나노바나나2" — Flash 정식 GA로 매핑 (모든 Tier 작동)
-        'gemini-3-1-flash': { model: 'gemini-2.5-flash-image', resolution: '1K' },
+        'gemini-3-pro': { model: 'gemini-3-pro-image-preview', resolution: '1K' },
+        // 사용자 UI: "나노바나나2" — Gemini 3.1 Flash Image
+        'gemini-3-1-flash': { model: 'gemini-3.1-flash-image-preview', resolution: '1K' },
         // Imagen 4 — Tier 1+ 작동 확인됨
         'imagen-4': { model: 'imagen-4.0-generate-001', resolution: '1K' },
-        // 나노바나나 (정식 GA)
+        // 나노바나나 (구버전 — Gemini 2.5 Flash Image)
         'gemini-2.5-flash': { model: 'gemini-2.5-flash-image', resolution: '1K' },
         // 무료 실험 모델 (preview 형식 ID)
         'gemini-2.0-flash-exp': { model: 'gemini-2.0-flash-preview-image-generation', resolution: '1K' },

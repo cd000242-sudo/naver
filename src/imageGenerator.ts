@@ -476,8 +476,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
 
   // ✅ 나노바나나 (Gemini 기반) — v2.7.28에서 nano-banana-2도 진입부에서 nano-banana-pro로 정규화됨
   if (normalizedProvider === 'nano-banana-pro') {
-    const forceModelKey = 'gemini-3-1-flash'; // MODEL_MAP에서 gemini-2.5-flash-image로 매핑됨
-    const modelLabel = '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)';
+    // ✅ [v2.10.334] forceModelKey 제거 — 사용자의 UI 모델 선택(nano-banana-main-model
+    //   /sub-model = config.nanoBananaMainModel/SubModel)이 그대로 반영되도록.
+    //   기존엔 'gemini-3-1-flash'로 강제해 나노바나나 프로 등 UI 선택이 무시됐음.
+    const forceModelKey = undefined;
+    const modelLabel = '나노바나나 (Gemini — 사용자 선택 모델)';
     console.log(`[이미지생성] 🍌 ${modelLabel}로 ${items.length}개 이미지 생성 시작...`);
     console.log(`[ImageGenerator] Gemini API 키: ${apiKeys?.geminiApiKey ? `*** (길이: ${apiKeys.geminiApiKey.length})` : '미설정'}`);
 
