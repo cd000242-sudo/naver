@@ -16,6 +16,7 @@ import {
     ProductInfo,
     ERROR_PAGE_INDICATORS,
 } from '../types.js';
+import { upscaleUrl, isJunkUrl, normalizeUrl } from '../utils/imageUrlUtils.js';
 
 const MOBILE_API_BASE = 'https://m.smartstore.naver.com/i/v1/products';
 const MOBILE_UA = 'Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36';
@@ -253,44 +254,6 @@ export class SmartStoreProvider extends BaseProvider {
 
             const allImages: { url: string; type: string }[] = [];
             const seenNorms = new Set<string>();
-
-            /** URL 정규화 (쿼리 제거) */
-            const normalizeUrl = (u: string) => u.split('?')[0];
-
-            /**
-             * 네이버 이미지 URL을 고해상도로 업스케일 (작은 이미지만).
-             * ✅ [v2.10.314 BUG FIX] type=f860 → type=o1000 (BrandStoreProvider와 동일 회귀)
-             *   f860은 네이버 CDN에서 404 반환. 검증된 o1000(1000px 원본급) 사용.
-             */
-            const upscaleUrl = (u: string): string => {
-                const typeMatch = u.match(/\?type=([a-z])(\d+)/);
-                if (typeMatch) {
-                    const size = parseInt(typeMatch[2]);
-                    // 500px 미만 썸네일만 업스케일, m1000_pd 같은 큰 이미지는 유지
-                    if (size < 500) {
-                        return u.replace(/\?type=[a-z]\d+[^&]*/, '?type=o1000');
-                    }
-                }
-                return u;
-            };
-
-            /** 비제품 이미지 필터 */
-            const isJunkUrl = (src: string): boolean => {
-                if (!src || !src.startsWith('http')) return true;
-                if (src.startsWith('data:')) return true;
-                const lower = src.toLowerCase();
-                const junkPatterns = [
-                    'logo', 'icon', 'searchad-phinf', 'button', 'emoji',
-                    'storefront', 'sprite', '1x1', 'gnb_', 'favicon',
-                    'video-phinf', 'ssl.pstatic.net/static', 'placeholder',
-                    'ncpt.naver.com', 'nid.naver.com',
-                    'banner', 'member', 'npay', 'npoint', 'badge', 'arrow',
-                ];
-                if (junkPatterns.some(p => lower.includes(p))) return true;
-                // ✅ GIF/SVG는 UI 요소일 가능성 높음
-                if (lower.endsWith('.gif') || lower.endsWith('.svg')) return true;
-                return false;
-            };
 
             /** 중복 체크 후 추가 */
             const addImg = (rawUrl: string, type: string) => {
