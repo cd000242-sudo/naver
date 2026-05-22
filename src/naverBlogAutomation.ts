@@ -40,7 +40,7 @@ import {
   getSelectorStrings,
 } from './automation/selectors';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
-import { extractCoreKeywords } from './automation/typingUtils.js';
+import { extractCoreKeywords, humanKeyboardType } from './automation/typingUtils.js';
 
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
 // ✅ [2026-03-27 FIX] 매번 Escape 전송 → 팝업 존재 시에만 조건부 Escape
@@ -4552,7 +4552,8 @@ export class NaverBlogAutomation {
     // 클릭 완전 제거 - 현재 커서 위치에서 바로 시작
     for (let line = 0; line < lines; line += 1) {
       this.ensureNotCancelled();
-      await safeKeyboardType(page, content, { delay: 20 });
+      // ✅ [2026-05-23 A3] 본문 타이핑 인간화 — 고정 20ms 대신 가우시안 분산
+      await humanKeyboardType(page, content);
       if (line < lines - 1) {
         await page.keyboard.press('Enter');
         await this.delay(this.DELAYS.SHORT);

@@ -47,3 +47,63 @@ export async function safeKeyboardType(
     await page.keyboard.type(text, options);
     await page.keyboard.press('Escape').catch(() => { });
 }
+
+// ✅ [2026-05-23 A3] Human typing profile — "fast-human" preset.
+// Bot detection keys on the *uniformity* of inter-keystroke intervals, not raw
+// speed. A fixed 20ms delay is a robotic signature; a gaussian spread with
+// occasional pauses defeats it while keeping bulk-publish throughput.
+// Effective mean ≈ 40ms (base mean + pause contribution).
+const HUMAN_TYPING_PROFILE = {
+    meanMs: 34,
+    stdDevMs: 22,
+    minMs: 10,
+    maxMs: 120,
+    pauseChance: 0.05,
+    pauseMinMs: 150,
+    pauseMaxMs: 300,
+} as const;
+
+/**
+ * Returns a single human-like inter-keystroke delay (ms).
+ * Box-Muller gaussian around the profile mean, clamped to [min, max],
+ * with a small chance of a longer "thinking" pause.
+ */
+export function humanInterKeyDelay(): number {
+    const p = HUMAN_TYPING_PROFILE;
+    let u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    const normal = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+    let delay = p.meanMs + p.stdDevMs * normal;
+    delay = Math.max(p.minMs, Math.min(p.maxMs, delay));
+    if (Math.random() < p.pauseChance) {
+        delay += p.pauseMinMs + Math.random() * (p.pauseMaxMs - p.pauseMinMs);
+    }
+    return Math.round(delay);
+}
+
+/**
+ * ✅ [2026-05-23 A3] Korean-safe human typing.
+ * Types char-by-char with a gaussian inter-key delay instead of the robotic
+ * fixed-interval `page.keyboard.type(text, { delay })`. Iterating with
+ * `keyboard.type(char)` keeps Hangul composition intact (Puppeteer routes
+ * non-ASCII through `sendCharacter`), unlike `keyboard.down/up` which only
+ * accepts ASCII KeyInput names.
+ */
+export async function humanKeyboardType(
+    page: Page,
+    text: string
+): Promise<void> {
+    if (!text) {
+        return;
+    }
+    const chars = Array.from(text); // surrogate-pair safe
+    for (let i = 0; i < chars.length; i++) {
+        await page.keyboard.type(chars[i]);
+        if (i < chars.length - 1) {
+            await new Promise(r => setTimeout(r, humanInterKeyDelay()));
+        }
+    }
+    // 자동완성 팝업(파파고/내돈내산 스티커) 방지
+    await page.keyboard.press('Escape').catch(() => { });
+}

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { extractCoreKeywords, SHOPPING_HOOKS } from '../automation/typingUtils';
+import { extractCoreKeywords, SHOPPING_HOOKS, humanInterKeyDelay } from '../automation/typingUtils';
 
 describe('extractCoreKeywords', () => {
   it('extracts the most frequent/longest keyword', () => {
@@ -33,6 +33,36 @@ describe('extractCoreKeywords', () => {
     // "긴키워드임" appears 2x (score: 2*2 + 5 = 9)
     const result = extractCoreKeywords('짧은 긴키워드임 긴키워드임');
     expect(result[0]).toBe('긴키워드임');
+  });
+});
+
+describe('humanInterKeyDelay (A3 본문 타이핑 인간화)', () => {
+  const samples = Array.from({ length: 5000 }, () => humanInterKeyDelay());
+
+  it('always returns a positive integer', () => {
+    samples.forEach(d => {
+      expect(Number.isInteger(d)).toBe(true);
+      expect(d).toBeGreaterThan(0);
+    });
+  });
+
+  it('clamps base delays within the profile range (pauses may extend it)', () => {
+    // 최소값은 프로파일 minMs(10) 이상
+    expect(Math.min(...samples)).toBeGreaterThanOrEqual(10);
+    // 최대값은 clamp(120) + 휴식(최대 300) 이내
+    expect(Math.max(...samples)).toBeLessThanOrEqual(420);
+  });
+
+  it('produces a non-uniform distribution (defeats fixed-interval bot signal)', () => {
+    // 고정 간격이 아님을 보장 — 고유값이 충분히 많아야 함
+    const unique = new Set(samples);
+    expect(unique.size).toBeGreaterThan(50);
+  });
+
+  it('keeps the effective mean near the fast-human target (~40ms)', () => {
+    const mean = samples.reduce((a, b) => a + b, 0) / samples.length;
+    expect(mean).toBeGreaterThan(28);
+    expect(mean).toBeLessThan(60);
   });
 });
 

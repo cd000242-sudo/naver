@@ -20,7 +20,7 @@ import { PREV_POST_HOOKS } from './ctaHelpers.js';
 import { pickBannerHook } from './bannerPhrasePool.js';
 import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
-import { extractCoreKeywords, safeKeyboardType } from './typingUtils.js';
+import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
 
 // ── Local utility: smartTypeWithAutoHighlight ──
 async function smartTypeWithAutoHighlight(
@@ -39,7 +39,8 @@ async function smartTypeWithAutoHighlight(
     }
 
     if (!enableHighlight) {
-      await safeKeyboardType(page, text, { delay: baseDelay });
+      // ✅ [2026-05-23 A3] 본문 타이핑 인간화 — 고정 간격 대신 가우시안 분산
+      await humanKeyboardType(page, text);
       return;
     }
 
@@ -48,7 +49,8 @@ async function smartTypeWithAutoHighlight(
 
     if (!keywords || keywords.length === 0) {
       console.log("⚠️ [SmartType] 키워드 없음, 일반 타이핑으로 진행");
-      await safeKeyboardType(page, text, { delay: baseDelay });
+      // ✅ [2026-05-23 A3] 키워드 없음 폴백도 인간화 타이핑 적용
+      await humanKeyboardType(page, text);
       return;
     }
 
