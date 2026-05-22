@@ -38,6 +38,29 @@
         }
     </style>
 
+    <!-- ✅ 가독성 개선: 밝은 하늘 배경 위 텍스트 대비 부족 → 결제 영역에 박스 배경 부여 -->
+    <style>
+      .payment-section {
+        background: rgba(255, 255, 255, 0.95) !important;
+        border-radius: 18px;
+        padding: 26px 30px !important;
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.18);
+      }
+      .payment-section .email-label { color: #1f2d3d !important; }
+      .payment-section .email-input::placeholder { color: #9aa7b3 !important; }
+      .payment-section .email-hint { color: #5b6b7a !important; }
+      .payment-section .payment-notice { color: #3a4a5a !important; }
+      .payment-section .payment-notice a { color: #b8860b !important; font-weight: 600; }
+      .payment-section > p { color: #8a6d1f !important; }
+      .refund-banner {
+        background: rgba(255, 255, 255, 0.95) !important;
+        border-color: rgba(0, 0, 0, 0.08) !important;
+        color: #3a4a5a !important;
+        box-shadow: 0 6px 22px rgba(0, 0, 0, 0.14);
+      }
+      .refund-banner a { color: #b8860b !important; }
+    </style>
+
     <style>
         /* CHERRY BLOSSOM */
         .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
@@ -410,7 +433,7 @@
     <script>
         // ===== CONFIG =====
         const CONFIG = {
-            TOSS_CLIENT_KEY: 'live_gck_nRQoOaPz8LlYo6DbvPNv8y47BMw6',
+            TOSS_CLIENT_KEY: 'live_ck_5OWRapdA8dvKjpXaJLLbVo1zEqZK',
             GAS_URL: 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec',
             SUCCESS_URL: window.location.origin + window.location.pathname.replace('pricing.html', '') + 'success.html',
             FAIL_URL: window.location.origin + window.location.pathname.replace('pricing.html', '') + 'fail.html',
