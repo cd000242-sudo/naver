@@ -2791,7 +2791,9 @@ function removeDuplicateHeadings(bodyPlain: string, headings: HeadingPlan[]): st
     const normalized = paragraph.trim().toLowerCase().replace(/\s+/g, ' ');
 
     // 마무리 문구가 포함된 문단은 한 번만 허용
-    const isClosingParagraph = closingPatterns.some(pattern => pattern.test(paragraph));
+    // ✅ [버그수정] g 플래그 정규식의 .test()는 lastIndex가 누적되어 두 번째 문단에서
+    //   오탐(false)이 난다 → 중복 마무리 문단이 제거되지 않던 회귀. 매 검사 전 lastIndex 리셋.
+    const isClosingParagraph = closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(paragraph); });
     if (isClosingParagraph) {
       if (closingParagraphFound) {
         // 이미 마무리 문구가 나왔으면 제거
@@ -2841,8 +2843,8 @@ function removeDuplicateHeadings(bodyPlain: string, headings: HeadingPlan[]): st
   for (const sentence of sentences) {
     const normalized = sentence.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[^\w\s가-힣]/g, '');
 
-    // 마무리 문구가 포함된 문장은 한 번만 허용
-    const hasClosingPattern = closingPatterns.some(pattern => pattern.test(sentence));
+    // 마무리 문구가 포함된 문장은 한 번만 허용 (g 플래그 lastIndex 리셋 — 중복 미탐 방지)
+    const hasClosingPattern = closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(sentence); });
     if (hasClosingPattern) {
       const patternKey = closingPatterns.find(p => p.test(sentence))?.source || '';
       if (seenSentences.has(`closing_${patternKey} `)) {
