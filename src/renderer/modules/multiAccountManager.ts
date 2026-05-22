@@ -35,6 +35,7 @@ declare function refreshGeneratedPostsList(): void;
 declare function readUnifiedCtasFromUi(): any[];
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
+import { applyIntervalJitter } from './intervalJitter';
 // ✅ [v2.10.288] subImageMode import 제거 — esbuild 번들이 alias만 만들고 정의 누락하는 회귀 차단.
 //   대신 window에 자체 등록된 함수를 호출 (subImageMode.ts line 93-97에서 자동 등록됨).
 //   side-effect import는 renderer.ts:57에서 이미 발생 → window.getSubImageMode 존재 보장.
@@ -3992,11 +3993,13 @@ export async function initMultiAccountPublishModal() {
           }
 
           if (intervalSeconds > 0) {
-            const waitMsg = formatWaitTime(intervalSeconds);
+            // ✅ [2026-05-23 A5] 항목별 ±40% 랜덤 jitter — 고정 간격 패턴화 방지
+            const jitteredSeconds = applyIntervalJitter(intervalSeconds);
+            const waitMsg = formatWaitTime(jitteredSeconds);
             updateMAProgress(i + 1, totalItems, '대기 중...', `⏳ 다음 발행까지 ${waitMsg} 대기`);
             addMALog(`⏳ 다음 발행까지 ${waitMsg} 대기...`, 'info');
             addProgressItem(`⏳ 다음 발행까지 ${waitMsg} 대기...`, 'info');
-            const ok = await waitInterruptible(intervalSeconds, i, totalItems);
+            const ok = await waitInterruptible(jitteredSeconds, i, totalItems);
             if (!ok) {
               break;
             }
