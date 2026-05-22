@@ -306,6 +306,7 @@ try {
     'continuousPublishModeHelpers.js',  // ✅ 연속발행 publishMode 해석 헬퍼 (continuousPublishing보다 먼저 로드)
     'continuousPublishing.js',
     'thumbnailGenerator.js',
+    'intervalJitter.js',  // ✅ [2026-05-23 A5] 발행 간격 jitter 유틸 (multiAccountManager보다 먼저 로드 필수)
     'multiAccountManager.js',
     'headingImageGen.js',
     'imageDisplayGrid.js',
