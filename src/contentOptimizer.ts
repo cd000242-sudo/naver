@@ -556,8 +556,9 @@ function enhanceEEAT(text: string, toneStyle: string = 'professional', silent: b
 
   const expressionsSource = TONE_EEAT_EXPRESSIONS[mappedTone] || TONE_EEAT_EXPRESSIONS.professional;
 
-  // 전체 문단의 30%에 E-E-A-T 표현 삽입 (기존 15% → 30%)
-  const targetCount = Math.max(3, Math.floor(paragraphs.length * 0.30));
+  // ✅ [2026-05-23 B3] 신호 과다 완화 — 주입률 30% → 10%, floor 3 → 1
+  // 과도한 사전 주입은 대량 발행 시 패턴화되어 AI 탐지 신호가 됨.
+  const targetCount = Math.max(1, Math.floor(paragraphs.length * 0.10));
   const categories = ['experience', 'expertise', 'authority', 'trust'] as const;
 
   const indices = new Set<number>();
@@ -604,8 +605,9 @@ function addHumanExpressions(text: string, toneStyle: string = 'professional', s
 
   const expressionsSource = TONE_HUMAN_EXPRESSIONS[mappedTone] || TONE_HUMAN_EXPRESSIONS.professional;
 
-  // 전체 문장의 15%에 인간적 표현 삽입 (기존 8% → 15%)
-  const targetCount = Math.max(3, Math.floor(sentences.length * 0.15));
+  // ✅ [2026-05-23 B3] 신호 과다 완화 — 주입률 15% → 5%, floor 3 → 1
+  // 인간 표현 과다 주입은 대량 발행 시 오히려 기계적 패턴으로 노출됨.
+  const targetCount = Math.max(1, Math.floor(sentences.length * 0.05));
 
   const indices = new Set<number>();
   let attempts = 0;
