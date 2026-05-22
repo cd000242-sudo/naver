@@ -56,12 +56,18 @@
             display: flex; flex-direction: column; align-items: flex-end; gap: 0;
             font-family: 'Pretendard Variable', 'Inter', 'Noto Sans KR', sans-serif;
             transition: all 0.4s cubic-bezier(.4,0,.2,1);
+            /* The wrapper's bbox includes the (invisible-but-laid-out) playlist
+               panel above the FAB. Without pass-through, that empty space
+               (240×~380 on mobile) eats taps on whatever sits behind it
+               (hero CTA, mobile menu links, etc). Children re-enable hits. */
+            pointer-events: none;
         }
 
         /* ===== FAB (Floating Action Button) ===== */
         .lp-music-fab {
             display: flex; align-items: center; gap: 8px;
             height: 46px; padding: 0 16px 0 14px;
+            pointer-events: auto;
             border-radius: 23px;
             background: linear-gradient(135deg, rgba(255,183,197,0.35) 0%, rgba(255,107,138,0.25) 100%);
             border: 1px solid rgba(255,183,197,0.5);
