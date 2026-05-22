@@ -2147,11 +2147,15 @@ body {
   }
 
   .nav-links {
+    /* Fix: .navbar has backdrop-filter (summer-theme.css) which makes it the
+       containing block for this fixed element. inset:0 would clip to the navbar
+       box, so use viewport units to force full-screen coverage. */
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     background: rgba(3, 3, 5, 0.97);
     backdrop-filter: blur(24px);
     flex-direction: column;
