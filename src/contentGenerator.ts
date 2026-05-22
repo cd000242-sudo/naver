@@ -5091,8 +5091,17 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
 
         console.log(`[Gemini] 시도 중: ${modelName} (시도 ${modelRetryCount + 1}/${perModelMaxRetries})${cachedContentName ? ' [캐시 사용 ✅]' : ''}`);
         // ✅ [v1.4.3] Search Grounding 스마트 적용 — 본문 생성만 ON, 패치는 OFF
+        // ✅ [v2.10.336] 원문 모드(크롤링 원문이 프롬프트에 포함, user > 500자)는 그라운딩 OFF.
+        //   Perplexity 경로(v2.10.171, line 5672~)와 동일 정책 — Gemini 경로만 누락돼 있었음.
+        //   원문 모드에서 그라운딩이 켜져 있으면, 프롬프트의 크롤링 원문 + 검색으로 가져온
+        //   같은 기사를 Gemini가 이중으로 받아 거의 그대로 재현 → RECITATION → 빈 응답(0건).
+        //   원문 자체가 fact source이므로 그라운딩을 꺼도 환상(hallucination)이 생기지 않는다.
         const configGrounding = (config as any)?.enableSearchGrounding !== false;
-        const useGrounding = (options.useGrounding !== false) && configGrounding;
+        const isRawTextMode = (geminiUserTextOriginal || '').length > 500;
+        const useGrounding = (options.useGrounding !== false) && configGrounding && !isRawTextMode;
+        if (isRawTextMode) {
+          console.log('[Gemini] 📄 원문 모드 감지 (user > 500자) → 그라운딩 OFF (RECITATION 회피, 원문이 fact source)');
+        }
 
         // 캐시 사용 시 systemInstruction 중복 금지 (캐시에 이미 포함)
         const requestConfig: any = {
