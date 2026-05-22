@@ -7110,7 +7110,7 @@ export class NaverBlogAutomation {
         // 뒤에서부터 검사하여 마지막 마무리 문구만 유지
         for (let i = lines.length - 1; i >= 0; i--) {
           const line = lines[i];
-          const hasClosing = closingPatterns.some(pattern => pattern.test(line));
+          const hasClosing = closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(line); });
 
           if (hasClosing) {
             if (!foundClosing) {
@@ -7178,7 +7178,7 @@ export class NaverBlogAutomation {
       const contentLines = cleanContent.split('\n');
       if (contentLines.length > 0) {
         const lastLine = contentLines[contentLines.length - 1].trim();
-        if (lastLine.length <= 5 && closingPatterns.some(pattern => pattern.test(lastLine))) {
+        if (lastLine.length <= 5 && closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(lastLine); })) {
           contentLines.pop();
           cleanContent = contentLines.join('\n').trim();
         }
@@ -7444,7 +7444,7 @@ export class NaverBlogAutomation {
         // 뒤에서부터 검사하여 마지막 마무리 문구만 유지
         for (let i = resultLines.length - 1; i >= 0; i--) {
           const line = resultLines[i];
-          const hasClosing = closingPatterns.some(pattern => pattern.test(line));
+          const hasClosing = closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(line); });
 
           if (hasClosing) {
             if (!foundClosing) {
@@ -7512,7 +7512,7 @@ export class NaverBlogAutomation {
       const resultLines = result.split('\n');
       if (resultLines.length > 0) {
         const lastLine = resultLines[resultLines.length - 1].trim();
-        if (lastLine.length <= 5 && closingPatterns.some(pattern => pattern.test(lastLine))) {
+        if (lastLine.length <= 5 && closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(lastLine); })) {
           resultLines.pop();
           result = resultLines.join('\n').trim();
         }
