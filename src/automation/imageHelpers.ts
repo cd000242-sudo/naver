@@ -1447,6 +1447,17 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
       continue;
     }
 
+    // ✅ data-img-provider 태깅 — AI 마크 단계가 수집/AI 이미지를 구분
+    if (image.provider) {
+      await frame.evaluate((provider: string) => {
+        const editor = document.querySelector('.se-main-container');
+        if (!editor) return;
+        const imgs = editor.querySelectorAll('img');
+        const target = imgs[imgs.length - 1] as HTMLImageElement | undefined;
+        if (target) target.setAttribute('data-img-provider', provider);
+      }, image.provider).catch(() => undefined);
+    }
+
     // ✅ 문서너비 맞추기 + 링크 삽입
     try {
       if (linkUrl) {
@@ -3339,19 +3350,21 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
         }
       } // if (!uploadSucceeded) 닫기
 
-      // ✅ alt 태그에 출처 정보 자동 추가
+      // ✅ alt 태그에 출처 정보 자동 추가 + data-img-provider 태깅
       const altWithSource = generateAltWithSource(self, image);
-      if (altWithSource) {
+      const imgProvider: string = image.provider || '';
+      if (altWithSource || imgProvider) {
         await frame
-          .evaluate((altText: any) => {
+          .evaluate((args: { altText: string; provider: string }) => {
             const editor = document.querySelector('.se-main-container');
             if (!editor) return;
             const imgs = editor.querySelectorAll('img');
             const target = imgs[imgs.length - 1] as HTMLImageElement | undefined;
             if (target) {
-              target.alt = altText;
+              if (args.altText) target.alt = args.altText;
+              if (args.provider) target.setAttribute('data-img-provider', args.provider);
             }
-          }, altWithSource)
+          }, { altText: altWithSource, provider: imgProvider })
           .catch(() => undefined);
       }
 

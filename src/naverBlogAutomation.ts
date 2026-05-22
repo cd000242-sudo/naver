@@ -4918,13 +4918,23 @@ export class NaverBlogAutomation {
                 }
               }
 
-              // Step 4: AI 활용 마크 일괄 활성화
+              // Step 4: AI 활용 마크 일괄 활성화 (AI 생성 이미지만, 수집 이미지 제외)
               try {
                 this.log('🤖 [AI 마크] AI 생성 이미지 마크 일괄 활성화 중...');
+                const COLLECTED_PROVIDERS = ['naver', 'collected', 'collected-image', 'collected-image-with-text', 'shopping', 'blog', 'local', 'local-folder'];
                 let aiMarkCount = 0;
                 for (let i = 0; i < imageComponents.length; i++) {
                   const compImg = await imageComponents[i].$('img');
                   if (!compImg) continue;
+
+                  // Check provider attribute to skip collected images
+                  const imgProvider = await compImg.evaluate((el: HTMLImageElement) =>
+                    el.getAttribute('data-img-provider') || ''
+                  ).catch(() => '');
+                  if (imgProvider && COLLECTED_PROVIDERS.includes(imgProvider)) {
+                    this.log(`   ⏭️ [AI 마크] 수집 이미지(${imgProvider}) → 마크 스킵`);
+                    continue;
+                  }
 
                   const compCoords = await compImg.evaluate((el: HTMLImageElement) => {
                     el.scrollIntoView({ block: 'center', behavior: 'instant' as any });
@@ -4944,7 +4954,9 @@ export class NaverBlogAutomation {
                   await page.mouse.click(iframeOff.x + compCoords.x, iframeOff.y + compCoords.y);
                   await this.delay(400);
 
-                  const aiBtn = await frame.$('button.se-set-ai-mark-button-toggle').catch(() => null);
+                  // Prefer component-scoped button; fall back to frame-level toolbar
+                  let aiBtn = await imageComponents[i].$('button.se-set-ai-mark-button-toggle').catch(() => null);
+                  if (!aiBtn) aiBtn = await frame.$('button.se-set-ai-mark-button-toggle').catch(() => null);
                   if (aiBtn) {
                     const isAiActive = await aiBtn.evaluate((btn: HTMLButtonElement) =>
                       btn.classList.contains('se-is-selected') ||
