@@ -164,6 +164,11 @@ export interface AppConfig {
 
   // ✅ [2026-02-08] 이미지 엔진 모델 설정 (DeepInfra만 유지)
   deepinfraModel?: string;
+  // ✅ OpenAI 이미지 모델·품질 선택 (gpt-image-1.5 = 저비용 기본, gpt-image-2 = 고품질)
+  openaiImageModel?: 'gpt-image-1.5' | 'gpt-image-2';
+  openaiImageQuality?: 'low' | 'medium' | 'high' | 'auto';
+  // ✅ USD→KRW 환율 (이미지 비용 원화 표시용, 기본 1400)
+  usdToKrwRate?: number;
   // 이미지 설정 프리셋
   imagePreset?: 'budget' | 'premium' | 'custom';
 
@@ -349,6 +354,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'perplexityModel', 'geminiPlanType',
           'customImageSavePath',
+          'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
         ];
         let mergedCount = 0;
         for (const k of PRESERVE) {
@@ -454,6 +460,16 @@ export async function loadConfig(): Promise<AppConfig> {
       deepinfraApiKey: parsed.deepinfraApiKey || parsed['deepinfra-api-key'] || undefined,
       // ✅ [2026-02-08] 이미지 엔진 모델 설정 명시적 파싱
       deepinfraModel: parsed.deepinfraModel || undefined,
+      // ✅ OpenAI 이미지 모델·품질·환율 — 기본값 보장 (저비용 기본: gpt-image-1.5 + medium).
+      //    Anything other than the explicit high-cost model falls back to the cheap default,
+      //    so a missing/corrupt config can never silently select the expensive option.
+      openaiImageModel: parsed.openaiImageModel === 'gpt-image-2' ? 'gpt-image-2' : 'gpt-image-1.5',
+      openaiImageQuality: ['low', 'medium', 'high', 'auto'].includes(parsed.openaiImageQuality)
+        ? parsed.openaiImageQuality
+        : 'medium',
+      usdToKrwRate: (typeof parsed.usdToKrwRate === 'number' && parsed.usdToKrwRate > 0)
+        ? parsed.usdToKrwRate
+        : 1400,
     };
 
     // 빈 문자열 제거 및 undefined 제거
@@ -718,6 +734,8 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         'customImageSavePath',
         'primaryGeminiTextModel', 'defaultAiProvider', 'geminiPlanType',
         'perplexityModel', 'geminiModel', 'leonardoaiModel',
+        // ✅ OpenAI 이미지 모델·품질·환율 — 부분 saveConfig로 인한 silent 손실 차단
+        'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
         'userDisplayName', 'userEmail',
         // ✅ [v2.10.58] 비용 절감 토글 4종 보존
         'costSaverMode', 'useCompressedPrompt', 'useCrawlSummary', 'subWorkProvider',

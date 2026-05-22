@@ -26,7 +26,7 @@ export function getCostRiskProviderLabel(provider: string): string {
     if (p === 'prodia') return 'Prodia AI';
     if (p === 'stability') return 'Stability AI';
     if (p === 'leonardoai') return 'Leonardo AI';
-    if (p === 'openai-image') return 'OpenAI 덕트테이프 (gpt-image-2)';
+    if (p === 'openai-image') return 'OpenAI 덕트테이프 (gpt-image-1.5 / gpt-image-2)';
     if (p === 'dall-e-3') return 'DALL-E 3 (OpenAI)';
     return p || 'AI 이미지';
 }
@@ -42,9 +42,49 @@ export function getTodayKey(): string {
     return `${yyyy}-${mm}-${dd}`;
 }
 
+/**
+ * OpenAI 이미지 모델·품질 조합의 장당 단가 (USD). 1024x1024 기준 공식 단가표.
+ * apiUsageTracker.ts의 OPENAI_IMAGE_PRICING과 동일 값 — 렌더러는 main 모듈을
+ * import할 수 없으므로 표시용 사본을 둔다 (가격 변경 시 두 곳 동시 갱신 필요).
+ */
+const OPENAI_IMAGE_PRICE_USD: Record<string, Record<string, number>> = {
+    'gpt-image-1.5': { low: 0.009, medium: 0.040, high: 0.133 },
+    'gpt-image-2': { low: 0.020, medium: 0.070, high: 0.211 },
+};
+
+/** OpenAI 이미지 한 장당 예상 비용(원). 모델/품질 미지정 시 저비용 기본으로 폴백. */
+export function getOpenAIImageCostKRW(model: string, quality: string, usdToKrwRate: number = 1400): number {
+    const tier = OPENAI_IMAGE_PRICE_USD[model] || OPENAI_IMAGE_PRICE_USD['gpt-image-1.5'];
+    const usd = tier[quality] ?? tier.medium;
+    const rate = (typeof usdToKrwRate === 'number' && usdToKrwRate > 0) ? usdToKrwRate : 1400;
+    return Math.round(usd * rate);
+}
+
+/**
+ * "한 장당 약 ₩56원 (gpt-image-1.5 / Medium)" 형태의 표시 문자열.
+ * imageCount > 1이면 "× N장 = ₩XXX" 총액을 덧붙인다.
+ */
+export function formatOpenAIImageCostLabel(
+    model: string,
+    quality: string,
+    usdToKrwRate: number = 1400,
+    imageCount: number = 1,
+): string {
+    const per = getOpenAIImageCostKRW(model, quality, usdToKrwRate);
+    const qLabel = quality.charAt(0).toUpperCase() + quality.slice(1);
+    const base = `한 장당 약 ₩${per.toLocaleString('ko-KR')}원 (${model} / ${qLabel})`;
+    if (imageCount > 1) {
+        const total = per * imageCount;
+        return `${base} · ₩${per.toLocaleString('ko-KR')} × ${imageCount}장 = ₩${total.toLocaleString('ko-KR')}`;
+    }
+    return base;
+}
+
 // 전역 노출 (기존 코드와의 호환성)
 (window as any).isCostRiskImageProvider = isCostRiskImageProvider;
 (window as any).getCostRiskProviderLabel = getCostRiskProviderLabel;
 (window as any).getTodayKey = getTodayKey;
+(window as any).getOpenAIImageCostKRW = getOpenAIImageCostKRW;
+(window as any).formatOpenAIImageCostLabel = formatOpenAIImageCostLabel;
 
 console.log('[ImageCostUtils] 📦 모듈 로드됨!');

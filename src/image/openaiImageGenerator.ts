@@ -6,7 +6,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { app } from 'electron';
 import { loadConfig } from '../configManager.js';
-import { trackApiUsage } from '../apiUsageTracker.js';
+import { trackApiUsage, estimateImageCostUSD } from '../apiUsageTracker.js';
+import { logImageGeneration } from '../imageUsageLog.js';
 import { ImageRequestItem, GeneratedImage } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { STYLE_PROMPT_MAP, isNoPersonCategory, getImageDiversityHints } from './imageStyles.js';
@@ -16,12 +17,11 @@ import { AutomationService } from '../main/services/AutomationService.js';
 import { decodeBase64Async } from '../main/utils/base64Async.js';
 
 const OPENAI_IMAGES_API_URL = 'https://api.openai.com/v1/images/generations';
-// v2.7.5: gpt-image-2 default 복귀 — 사용자가 명확히 신모델(덕트테이프)을
-// 쓰려고 메뉴를 만들었기 때문. 실측에서 gpt-image-2는 OpenAI 서버에 실재하며,
-// 다만 Organization 인증된 계정만 접근 가능(403 반환). 1세대 폴백을 제거하고
-// 미인증 시 OPENAI_ORG_VERIFY_REQUIRED: 태그된 에러를 throw해 렌더러가
-// 친절 모달로 인증 페이지 원클릭 이동을 안내한다.
-const DEFAULT_MODEL = 'gpt-image-2';
+// ✅ 모델은 사용자 선택(config.openaiImageModel). gpt-image-1.5 = 저비용 기본,
+//    gpt-image-2 = 고품질. config 누락 시 저비용 기본으로 폴백해 비용이 조용히
+//    상승하는 일을 차단한다. 두 모델 모두 Organization 인증 필요(403) 가능 —
+//    미인증 시 OPENAI_ORG_VERIFY_REQUIRED: 태그 에러로 렌더러가 안내 모달 표시.
+const DEFAULT_OPENAI_IMAGE_MODEL = 'gpt-image-1.5';
 const MIN_VALID_IMAGE_BYTES = 1024;
 
 /**
@@ -60,7 +60,9 @@ export async function generateWithOpenAIImage(
         throw new Error('OpenAI API 키가 설정되지 않았습니다. 환경설정에서 OpenAI 이미지 API 키 또는 .env의 OPENAI_API_KEY를 입력해주세요.');
     }
 
-    console.log(`[OpenAI-Image] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${DEFAULT_MODEL}, 키 source: ${keySource}, 키 길이: ${apiKey.length})`);
+    // ✅ 사용자 선택 모델 해석 — overrideModel(호출자 명시) > config > 저비용 기본
+    const resolvedModel = overrideModel || config.openaiImageModel || DEFAULT_OPENAI_IMAGE_MODEL;
+    console.log(`[OpenAI-Image] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${resolvedModel}, 키 source: ${keySource}, 키 길이: ${apiKey.length})`);
 
     // ✅ [2026-03-03] 참조 이미지 사전 캐싱 (쇼핑커넥트 수집 이미지)
     let cachedReferenceBase64: string | null = null;
@@ -177,8 +179,8 @@ export async function generateWithOpenAIImage(
             let lastError: any;
 
             for (let attempt = 1; attempt <= maxRetries; attempt++) {
-                // v2.7.15: 호출자가 dall-e-3 등 명시 시 그것 사용. 아니면 기본 gpt-image-2.
-                const currentModel = overrideModel || DEFAULT_MODEL;
+                // v2.7.15: 호출자가 dall-e-3 등 명시 시 그것. 아니면 사용자 선택(config) → 저비용 기본.
+                const currentModel = resolvedModel;
                 try {
                     // ✅ [2026-03-03] 참조 이미지가 있으면 image 파라미터로 전달 (img2img)
                     // v2.7.15: dall-e-3는 quality='standard'/'hd', size 1024x1024/1792x1024/1024x1792만 지원
@@ -270,8 +272,26 @@ export async function generateWithOpenAIImage(
                         originalIndex: (item as any).originalIndex, // ✅ [2026-03-05 FIX] headingImageMode 필터링 후 정확한 소제목 매칭
                     });
 
-                    // ✅ [2026-03-19] 사용량 추적
-                    trackApiUsage('openai-image', { images: 1, model: DEFAULT_MODEL });
+                    // ✅ 사용량 추적 — 'model-quality(-wide)' 키로 품질·사이즈별 단가 정확 반영 (auto→medium 정규화)
+                    const trackedQuality = finalQuality === 'auto' ? 'medium' : finalQuality;
+                    const isWideSize = size.includes('1536'); // 16:9·9:16 비정사각 → wide 단가
+                    const trackedModel = isDallE3
+                        ? currentModel
+                        : `${currentModel}-${trackedQuality}${isWideSize ? '-wide' : ''}`;
+                    trackApiUsage('openai-image', { images: 1, model: trackedModel });
+                    // ✅ 호출별 사용량 로그 (모델·품질·비용·타임스탬프) — best-effort
+                    try {
+                        const callCostUSD = estimateImageCostUSD('openai-image', trackedModel, 1);
+                        const krwRate = (config.usdToKrwRate && config.usdToKrwRate > 0) ? config.usdToKrwRate : 1400;
+                        logImageGeneration({
+                            provider: 'openai-image',
+                            model: currentModel,
+                            quality: isDallE3 ? 'n/a' : trackedQuality,
+                            images: 1,
+                            costUSD: callCostUSD,
+                            costKRW: Math.round(callCostUSD * krwRate),
+                        });
+                    } catch { /* logging is best-effort */ }
 
                     console.log(`[OpenAI-Image] ✅ [${i + 1}/${items.length}] "${item.heading}" 생성 완료!`);
 
@@ -299,6 +319,27 @@ export async function generateWithOpenAIImage(
                     if (isOrgVerifyRequired) {
                         console.error('[OpenAI-Image] 🔒 Organization 인증 필요 — 즉시 중단.');
                         firstFatalError = new Error(`OPENAI_ORG_VERIFY_REQUIRED:${errMsg}`);
+                        break;
+                    }
+
+                    // ✅ 402 / insufficient_quota — 크레딧 소진. 재시도 무의미, 즉시 중단.
+                    //    (429 + rate_limit_exceeded 단순 rate limit은 아래로 흘려보내 재시도)
+                    const isCreditExhausted = status === 402
+                        || errCode === 'insufficient_quota'
+                        || /insufficient_quota|exceeded your current quota|billing hard limit/i.test(errMsg);
+                    if (isCreditExhausted) {
+                        console.error('[OpenAI-Image] 💳 크레딧 소진/결제 필요 — 즉시 중단.');
+                        firstFatalError = new Error(`OPENAI_CREDIT_REQUIRED:${errMsg}`);
+                        break;
+                    }
+
+                    // ✅ 모델 미존재/미지원 — gpt-image-1.5 등 접근 불가. silent 폴백 금지(사용자 선택 존중), 즉시 중단.
+                    const isModelUnavailable = (status === 400 || status === 404)
+                        && (errCode === 'model_not_found'
+                            || /model.*(not found|does not exist|not supported|unsupported)/i.test(errMsg));
+                    if (isModelUnavailable) {
+                        console.error(`[OpenAI-Image] 🚫 모델 미지원: ${currentModel}`);
+                        firstFatalError = new Error(`OPENAI_MODEL_UNAVAILABLE:${currentModel}`);
                         break;
                     }
 
@@ -343,6 +384,12 @@ export async function generateWithOpenAIImage(
         throw new Error(`OpenAI 이미지 엔진에서 한 장도 생성하지 못했습니다. API 키와 사용량 한도를 확인해주세요. (키 source: ${keySource})${detail}`);
     }
 
+    // ✅ 부분 성공 후 치명적 에러(크레딧 소진·모델 미지원 등)로 중단된 경우 — 무음 누락 방지 경고.
+    //    이미 생성된 results는 비용이 발생했으므로 버리지 않고 반환하되, 사유를 로그로 남긴다.
+    if (firstFatalError && results.length < items.length) {
+        console.warn(`[OpenAI-Image] ⚠️ ${results.length}/${items.length}장 생성 후 치명적 에러로 중단됨: ${firstFatalError.message}`);
+    }
+
     return results;
 }
 
@@ -354,14 +401,19 @@ export async function generateSingleOpenAIImage(
     apiKey: string
 ): Promise<{ success: boolean; localPath?: string; error?: string }> {
     try {
+        // ✅ 테스트 이미지도 사용자 환경설정(모델·품질)을 반영 — config 직접 로드 (호출자 시그니처 변경 불필요)
+        const config = await loadConfig();
+        const userQuality = config.openaiImageQuality;
+        const validQualities = ['low', 'medium', 'high', 'auto'];
+        const singleQuality = validQualities.includes(userQuality as string) ? userQuality : 'medium';
         const response = await axios.post(
             OPENAI_IMAGES_API_URL,
             {
-                model: options.model || DEFAULT_MODEL,
+                model: options.model || config.openaiImageModel || DEFAULT_OPENAI_IMAGE_MODEL,
                 prompt: options.prompt,
                 n: 1,
                 size: options.size || '1024x1024',
-                quality: 'medium', // ✅ [v2.7.36] 단일 이미지 진단 호출도 medium 고정 (비용 4배 절감)
+                quality: singleQuality,
             },
             {
                 headers: {

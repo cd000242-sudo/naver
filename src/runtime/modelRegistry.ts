@@ -61,12 +61,15 @@ export const IMAGEN_MODELS = {
 
 /**
  * OpenAI Image
- *   gpt-image-2: 최신 (덕트테이프). 사용자 메뉴 기본값.
+ *   gpt-image-1.5: 균형형 (저비용). 사용자 메뉴 기본값.
+ *   gpt-image-2: 고품질 (덕트테이프).
  *   dall-e-3: 2026-05-12 deprecation 예정 — 폴백 또는 비상용으로만.
  *   gpt-image-1: 호환용
  */
 export const OPENAI_IMAGE_MODELS = {
-  /** gpt-image-2 (덕트테이프, 기본) */
+  /** gpt-image-1.5 (균형형, 저비용, 사용자 메뉴 기본값) */
+  GPT_IMAGE_1_5: 'gpt-image-1.5',
+  /** gpt-image-2 (덕트테이프, 고품질) */
   GPT_IMAGE_2: 'gpt-image-2',
   /** gpt-image-1 (호환) */
   GPT_IMAGE_1: 'gpt-image-1',
@@ -186,6 +189,7 @@ export const VERIFIED_IMAGE_MODELS = [
   'gemini-3-pro-image-preview',
   'gemini-2.0-flash-preview-image-generation',
   'imagen-4.0-generate-001',
+  'gpt-image-1.5',
   'gpt-image-2',
 ] as const;
 

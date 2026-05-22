@@ -5004,29 +5004,38 @@ async function processNextInQueueEnhanced(): Promise<void> {
   // ✅ [2026-03-20] 안전 발행 간격 적용 (캡차 방지)
   // 예약 발행(네이버 서버)은 봇 감지와 무관 → 빠른 대기만
   if (continuousPublishQueue.length > 0) {
-    const isScheduleMode = item?.publishMode === 'schedule';
-    if (isScheduleMode) {
-      const quickWait = 10 + Math.floor(Math.random() * 10); // 10~20초
-      appendLog(`⏰ 예약 발행 모드 → ${quickWait}초 후 다음 항목 처리...`);
-      // [v2.10.110] ID 보관 — stopContinuousMode에서 clearTimeout
-      _enhancedQueueTimer = setTimeout(() => { _enhancedQueueTimer = null; processNextInQueueEnhanced(); }, quickWait * 1000);
-    } else {
-      // 🛡️ [끝판왕] 사용자 가시 로그 + 안전 간격 적용
-      // ✅ [2026-04-01 FIX] 존재하지 않는 'continuous-interval-seconds' 대신 실제 UI 요소 참조
-      const intervalValEl = document.getElementById('continuous-interval-value') as HTMLInputElement;
-      const intervalUnitEl = document.getElementById('continuous-interval-unit') as HTMLSelectElement;
-      const userInterval = (parseInt(intervalValEl?.value || '7') || 7) * (parseInt(intervalUnitEl?.value || '60') || 60);
-      _continuousPublishCount++;
-      const result = getSafePublishInterval(userInterval, _continuousPublishCount);
+    // ✅ [2026-05-23 FIX C1] 스케줄 블록 예외 시 큐 유실 방지
+    // getSafePublishInterval/DOM 접근이 throw하면 _enhancedQueueTimer가 설정되지 않아
+    // 남은 큐 항목이 영구 정지 → 안전 폴백 간격으로 다음 항목을 반드시 예약한다.
+    try {
+      const isScheduleMode = item?.publishMode === 'schedule';
+      if (isScheduleMode) {
+        const quickWait = 10 + Math.floor(Math.random() * 10); // 10~20초
+        appendLog(`⏰ 예약 발행 모드 → ${quickWait}초 후 다음 항목 처리...`);
+        // [v2.10.110] ID 보관 — stopContinuousMode에서 clearTimeout
+        _enhancedQueueTimer = setTimeout(() => { _enhancedQueueTimer = null; processNextInQueueEnhanced(); }, quickWait * 1000);
+      } else {
+        // 🛡️ [끝판왕] 사용자 가시 로그 + 안전 간격 적용
+        // ✅ [2026-04-01 FIX] 존재하지 않는 'continuous-interval-seconds' 대신 실제 UI 요소 참조
+        const intervalValEl = document.getElementById('continuous-interval-value') as HTMLInputElement;
+        const intervalUnitEl = document.getElementById('continuous-interval-unit') as HTMLSelectElement;
+        const userInterval = (parseInt(intervalValEl?.value || '7') || 7) * (parseInt(intervalUnitEl?.value || '60') || 60);
+        _continuousPublishCount++;
+        const result = getSafePublishInterval(userInterval, _continuousPublishCount);
 
-      // 🛡️ 캡차 방지 레이어 상세 로그 출력 (사용자에게 보임)
-      appendLog(``);
-      appendLog(`═══ 🛡️ 끝판왕 캡차방지 [발행#${_continuousPublishCount}] ═══`);
-      result.logs.forEach(msg => appendLog(msg));
-      appendLog(`══════════════════════════════`);
+        // 🛡️ 캡차 방지 레이어 상세 로그 출력 (사용자에게 보임)
+        appendLog(``);
+        appendLog(`═══ 🛡️ 끝판왕 캡차방지 [발행#${_continuousPublishCount}] ═══`);
+        result.logs.forEach(msg => appendLog(msg));
+        appendLog(`══════════════════════════════`);
 
-      // [v2.10.110] ID 보관 — stopContinuousMode에서 clearTimeout
-      _enhancedQueueTimer = setTimeout(() => { _enhancedQueueTimer = null; processNextInQueueEnhanced(); }, result.interval * 1000);
+        // [v2.10.110] ID 보관 — stopContinuousMode에서 clearTimeout
+        _enhancedQueueTimer = setTimeout(() => { _enhancedQueueTimer = null; processNextInQueueEnhanced(); }, result.interval * 1000);
+      }
+    } catch (scheduleError) {
+      // 스케줄 계산 실패 — 큐를 멈추지 않고 안전 폴백 간격(60초)으로 다음 항목 처리
+      appendLog(`⚠️ 발행 간격 계산 오류 — 안전 폴백(60초) 후 다음 항목 처리: ${(scheduleError as Error).message}`);
+      _enhancedQueueTimer = setTimeout(() => { _enhancedQueueTimer = null; processNextInQueueEnhanced(); }, 60 * 1000);
     }
   } else {
     appendLog('✅ 모든 연속 발행 완료!');
