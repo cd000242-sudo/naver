@@ -175,3 +175,28 @@ describe('Stage 6 — 덕테이프 한글 네이티브 텍스트 + 이중 텍스
     expect(branchUses).toBeGreaterThanOrEqual(3);
   });
 });
+
+describe('Stage 9 — 엔진 정확 연동 (모델 잠금 — 선택 엔진 그대로 작동)', () => {
+  const genCode = read('image/nanoBananaProGenerator.ts');
+
+  it('forceModelKey(사용자 명시 선택) → isModelLocked 잠금 플래그 설정', () => {
+    expect(genCode).toMatch(/const isModelLocked\s*=\s*!!forceModelKey/);
+  });
+
+  it('사전 모델 교체(pickWorkingImageModel)가 isModelLocked로 차단된다', () => {
+    expect(genCode).toMatch(/if \(isModelLocked\)[\s\S]{0,200}?pickWorkingImageModel/);
+  });
+
+  it('503/429 폴백 체인이 isModelLocked일 때 비활성된다 (다른 모델 교체 금지)', () => {
+    expect(genCode).toMatch(/global503FallbackActive && !isModelLocked/);
+  });
+
+  it('400 모델 오류 시 isModelLocked면 silent 대체 없이 명시 안내한다', () => {
+    expect(genCode).toMatch(/isBadModelError[\s\S]{0,200}?if \(isModelLocked\)/);
+  });
+
+  it('imageGenerator가 나노 3종에 forceModelKey를 전달한다 (→ 잠금 활성)', () => {
+    const dispatch = read('imageGenerator.ts');
+    expect(dispatch).toMatch(/forceModelKey = NANO_PROVIDER_TO_MODEL_KEY\[normalizedProvider\]/);
+  });
+});

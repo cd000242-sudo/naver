@@ -495,6 +495,10 @@ export async function generateWithNanoBananaPro(
     (cfg as any).nanoBananaSubModel = forceModelKey;
     console.log(`[NanoBananaPro] 🎯 forceModelKey="${forceModelKey}" — config 일시 오버라이드`);
   }
+  // ✅ [v2.10.335] 사용자가 그리드/드롭다운에서 엔진을 명시 선택하면 forceModelKey가 설정된다.
+  //   이 경우 모델을 잠가서(자동 교체 전면 금지) "나노바나나프로 선택 → gemini-3-pro로만 작동"을
+  //   보장한다. 접근 불가 시엔 silent 대체 없이 명확히 실패·안내한다.
+  const isModelLocked = !!forceModelKey;
   const mode = isFullAuto ? '풀오토' : '일반';
   const primaryApiKey = providedApiKey || storedGeminiApiKey || process.env.GEMINI_API_KEY;
 
@@ -686,7 +690,8 @@ export async function generateWithNanoBananaPro(
                 sessionAbortController?.signal,
                 items.length,
                 cachedReferenceImage,
-                keyPool
+                keyPool,
+                isModelLocked
               );
 
             if (result) {
@@ -772,7 +777,8 @@ export async function generateWithNanoBananaPro(
             sessionAbortController?.signal,
             items.length,
             cachedReferenceImage,  // ✅ [2026-02-13 SPEED] 사전 캐싱된 참조 이미지
-            keyPool  // ✅ [2026-02-13] 키 풀 전달 (429 시 자동 로테이션)
+            keyPool,  // ✅ [2026-02-13] 키 풀 전달 (429 시 자동 로테이션)
+            isModelLocked  // ✅ [v2.10.335] 모델 잠금 전달
           );
 
           if (result) {
@@ -940,7 +946,8 @@ async function generateSingleImageWithGemini(
   signal?: AbortSignal,  // ✅ [100점 수정] 중지 신호
   batchSize?: number,     // ✅ [2026-01-18] 배치 크기 (배치 처리 시 첫 번째 이미지 구분용)
   cachedReferenceImage?: { data: string; mimeType: string } | null,  // ✅ [2026-02-13 SPEED]
-  keyPool?: GeminiKeyPool  // ✅ [2026-02-13] 키 풀 (429 시 자동 로테이션)
+  keyPool?: GeminiKeyPool,  // ✅ [2026-02-13] 키 풀 (429 시 자동 로테이션)
+  isModelLocked?: boolean,  // ✅ [v2.10.335] 사용자 명시 엔진 선택 시 true — 모델 자동 교체 전면 금지
 ): Promise<GeneratedImage | null> {
 
   // 썸네일 크롭 헬퍼
@@ -1253,19 +1260,23 @@ async function generateSingleImageWithGemini(
       // ✅ [v2.7.22] 사용자 환경에서 작동하는 모델로 자동 교체 (사용자 모름)
       //   목적: Tier별/지역별 차단을 사전에 감지해 발행 시작 전 정상 모델로 전환
       //   효과: 400 발생 → 폴백 진입 → 시간 낭비를 사전 차단
-      try {
-        const { pickWorkingImageModel } = await import('./geminiAutoRecovery.js');
-        const picked = await pickWorkingImageModel(apiKey || '', selectedModel);
-        if (!picked.isOriginal && picked.model && picked.model !== selectedModel) {
-          // ✅ [v2.10.335] silent 폴백 금지 — 모델 교체를 사용자 이미지 로그 패널에 명시.
-          //   사용자가 고른 엔진의 모델이 현재 API 키 등급에서 접근 불가일 때 발생.
-          sendImageLog(`⚠️ 선택한 이미지 모델(${selectedModel})이 현재 API 키로 접근 불가 → ${picked.model}(으)로 대체합니다. 환경설정에서 다른 나노바나나 엔진을 선택할 수 있습니다.`);
-          console.log(`[NanoBananaPro] 🤖 [Auto-Recovery] ${selectedModel} → ${picked.model} (${picked.reason})`);
-          selectedModel = picked.model;
-          lastSelectedModel = selectedModel;
+      // ✅ [v2.10.335] 사용자 명시 엔진 선택(isModelLocked) 시 사전 자동 교체를 건너뛴다.
+      //   "나노바나나프로 선택 → gemini-3-pro로만 작동"을 보장. 교체는 곧 다른 엔진 사용이므로 금지.
+      if (isModelLocked) {
+        console.log(`[NanoBananaPro] 🔒 모델 잠금 — 사용자 선택 엔진(${selectedModel}) 사전 교체 검사 스킵`);
+      } else {
+        try {
+          const { pickWorkingImageModel } = await import('./geminiAutoRecovery.js');
+          const picked = await pickWorkingImageModel(apiKey || '', selectedModel);
+          if (!picked.isOriginal && picked.model && picked.model !== selectedModel) {
+            sendImageLog(`⚠️ 선택한 이미지 모델(${selectedModel})이 현재 API 키로 접근 불가 → ${picked.model}(으)로 대체합니다.`);
+            console.log(`[NanoBananaPro] 🤖 [Auto-Recovery] ${selectedModel} → ${picked.model} (${picked.reason})`);
+            selectedModel = picked.model;
+            lastSelectedModel = selectedModel;
+          }
+        } catch {
+          // 헬스체크 실패는 무시 — 기존 폴백 체인이 백업
         }
-      } catch {
-        // 헬스체크 실패는 무시 — 기존 폴백 체인이 백업
       }
 
 
@@ -1276,7 +1287,9 @@ async function generateSingleImageWithGemini(
       // ===== 🔥 [2026-03-01] 4단계 계단식 폴백 체인 =====
       // 나노바나나2 → 나노바나나프로 → 이미진4 → 나노바나나
       // 503/429/500 에러 시 활성화, 현재 선택 모델은 건너뜀
-      if (global503FallbackActive) {
+      // ✅ [v2.10.335] isModelLocked(사용자 명시 선택)면 다른 모델로 교체하지 않는다 —
+      //   잠긴 모델 그대로 재시도 루프가 처리한다.
+      if (global503FallbackActive && !isModelLocked) {
         const effectiveRatio = isShoppingConnect ? '1:1' : imageRatio;
 
         // ✅ [2026-04-06] 폴백 체인: 나노바나나 계열만 로테이션 (Imagen 4 제거)
@@ -1602,13 +1615,19 @@ async function generateSingleImageWithGemini(
       );
       if (isBadModelError) {
         const model = lastSelectedModel || 'unknown';
-        console.warn(`[NanoBananaPro] 🚫 400 모델 오류 감지 (${model}) → 안정 모델 폴백 활성화`);
-        sendImageLog(`🚫 모델(${model})이 현재 환경에서 지원 안 됨 → 안정 모델로 전환`);
-        // 다음 시도부터 안정 모델 강제 사용
-        if (model !== 'gemini-2.5-flash-image') {
-          // 폴백 체인 활성화 (503 폴백 로직 재사용)
-          global503FallbackActive = true;
-          global503FallbackStartTime = Date.now();
+        if (isModelLocked) {
+          // ✅ [v2.10.335] 사용자 명시 선택 엔진 — silent 대체 금지. 명확히 안내하고 그대로 실패시킴.
+          console.warn(`[NanoBananaPro] 🚫 400 모델 오류 (${model}) — 사용자 선택 엔진이라 자동 교체 안 함`);
+          sendImageLog(`🚫 선택한 모델(${model})에 현재 API 키로 접근할 수 없습니다. 자동으로 다른 모델로 대체하지 않습니다 — 환경설정에서 다른 나노바나나 엔진(나노바나나2 / 프로 / 나노바나나)으로 변경하세요.`);
+        } else {
+          console.warn(`[NanoBananaPro] 🚫 400 모델 오류 감지 (${model}) → 안정 모델 폴백 활성화`);
+          sendImageLog(`🚫 모델(${model})이 현재 환경에서 지원 안 됨 → 안정 모델로 전환`);
+          // 다음 시도부터 안정 모델 강제 사용
+          if (model !== 'gemini-2.5-flash-image') {
+            // 폴백 체인 활성화 (503 폴백 로직 재사용)
+            global503FallbackActive = true;
+            global503FallbackStartTime = Date.now();
+          }
         }
       }
       const isLimitZero = errorMessage.includes('limit: 0') || errorMessage.includes('free_tier');
@@ -1701,8 +1720,16 @@ async function generateSingleImageWithGemini(
         global503Count = (global503Count || 0) + 1;
         console.log(`[NanoBananaPro] ⚠️ 서버 오류(${statusCode}) 감지 - 연속 ${consecutive503Count}회 (전체 ${global503Count}회)`);
 
+        // ✅ [v2.10.335] 모델 잠금(사용자 명시 선택) 시 — 서버 과부하라도 다른 모델로 교체하지 않고
+        //   선택한 모델 그대로 재시도한다. "나노바나나프로 선택 → 끝까지 gemini-3-pro" 보장.
+        if (isModelLocked) {
+          console.log(`[NanoBananaPro] 🔒 모델 잠금 — 서버 오류(${statusCode}) 시 ${lastSelectedModel} 그대로 재시도 (모델 교체 안 함)`);
+          sendImageLog(`⚠️ 서버 과부하(${statusCode}) — 선택한 엔진 모델로 재시도합니다 (다른 모델로 교체하지 않음).`);
+          waitTime = 10000 + (Math.random() * 5000);
+          consecutive503Count = 0;
+        }
         // ✅ [2026-04-06] 1회라도 발생 → 즉시 나노바나나 로테이션 폴백 활성화
-        if (consecutive503Count >= 1) {
+        else if (consecutive503Count >= 1) {
           console.log(`[NanoBananaPro] 🔄 에러 ${statusCode} (${consecutive503Count}회 연속) → 나노바나나 로테이션 폴백 활성화`);
           global503FallbackActive = true;
           global503FallbackStartTime = Date.now();
