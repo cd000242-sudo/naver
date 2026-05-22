@@ -146,7 +146,11 @@
                     <div class="pricing-card" data-product="naver-monthly" data-amount="50000" onclick="selectProduct(this)">
                         <div class="pricing-header"><h3 class="pricing-name">1개월</h3><p class="pricing-desc">가볍게 시작하기</p></div>
                         <div class="pricing-price"><span class="price-amount">50,000</span><span class="price-unit">원</span></div>
-                        <div class="pricing-period">/ 월</div>
+                        <div class="pricing-period">/ 월 (공급가)</div>
+                        <div class="pricing-vat" style="font-size:0.72rem; color:var(--text-muted); margin-top:6px; line-height:1.55;">
+                            카드 결제 <strong style="color:var(--text-secondary)">55,000원</strong> <span style="opacity:.7">(VAT 10% 포함)</span><br>
+                            계좌이체 <strong style="color:var(--text-secondary)">50,000원</strong>
+                        </div>
                         <ul class="pricing-features">
                             <li><span class="check">✓</span> 전체 기능 이용</li>
                             <li><span class="check">✓</span> AI 콘텐츠 자동 생성 (7종 AI)</li>
@@ -436,7 +440,9 @@
         };
 
         const PRODUCTS = {
-            'naver-monthly': { name: '네이버 블로그 1개월', amount: 50000 },
+            // amountCard: 카드 결제 시 청구되는 VAT 포함 금액 (공급가 × 1.1).
+            // amount(공급가)는 계좌이체·표시·라벨 유지. 3-B-2에서 다른 상품에 확대.
+            'naver-monthly': { name: '네이버 블로그 1개월', amount: 50000, amountCard: 55000 },
             'naver-quarterly': { name: '네이버 블로그 3개월', amount: 120000 },
             'naver-yearly': { name: '네이버 블로그 1년', amount: 400000 },
             'naver-lifetime': { name: '네이버 블로그 영구제', amount: 2000000 },
@@ -482,7 +488,9 @@
             const btn = document.getElementById('btn-pay');
             const product = PRODUCTS[selectedProduct];
             btn.disabled = false;
-            btn.querySelector('.btn-text').textContent = `${product.amount.toLocaleString()}원 정기구독하기`;
+            const cardAmount = product.amountCard || product.amount;
+            const vatNote = product.amountCard ? ' (VAT 포함)' : '';
+            btn.querySelector('.btn-text').textContent = `${cardAmount.toLocaleString()}원${vatNote} 정기구독하기`;
             document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
@@ -496,11 +504,14 @@
             const btn = document.getElementById('btn-pay');
             btn.classList.add('loading'); btn.disabled = true;
             const product = PRODUCTS[selectedProduct];
+            // method:'CARD' 결제는 VAT 포함 금액(amountCard)이 있으면 그 값을 청구.
+            // success.html로 이 금액이 그대로 전달되어 GAS 백엔드가 실청구에 사용.
+            const chargeAmount = product.amountCard || product.amount;
             const orderId = generateOrderId();
             try {
                 const customerKey = 'LP_' + email.replace(/[^a-zA-Z0-9]/g, '_') + '_' + Date.now();
                 const payment = tossPayments.payment({ customerKey });
-                await payment.requestBillingAuth({ method: 'CARD', successUrl: CONFIG.SUCCESS_URL + '?email=' + encodeURIComponent(email) + '&productId=' + encodeURIComponent(selectedProduct) + '&amount=' + product.amount + '&orderName=' + encodeURIComponent(product.name) + '&customerKey=' + encodeURIComponent(customerKey), failUrl: CONFIG.FAIL_URL });
+                await payment.requestBillingAuth({ method: 'CARD', successUrl: CONFIG.SUCCESS_URL + '?email=' + encodeURIComponent(email) + '&productId=' + encodeURIComponent(selectedProduct) + '&amount=' + chargeAmount + '&orderName=' + encodeURIComponent(product.name) + '&customerKey=' + encodeURIComponent(customerKey), failUrl: CONFIG.FAIL_URL });
             } catch (err) { console.log('결제 취소:', err); btn.classList.remove('loading'); btn.disabled = false; }
         }
 
