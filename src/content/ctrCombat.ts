@@ -54,8 +54,8 @@ export const HOMEFEED_HOOKS: Record<CTRCategory, {
       '{kw} 딱 이것만 알면 됩니다',
     ],
     discovery: [
-      '{kw} 이 집 진짜 대박이에요',
-      '{kw} 이 조합 처음이라 충격',
+      '{kw} 직접 가보고 적는 후기예요',
+      '{kw} 이 조합 의외로 잘 맞더라고요',
       '{kw} 다녀왔는데 여기 진짜…',
     ],
   },
@@ -99,7 +99,7 @@ export const HOMEFEED_HOOKS: Record<CTRCategory, {
     ],
     discovery: [
       '{kw} 이거 진짜 인생템이에요',
-      '{kw} 신상 써봤는데 대박',
+      '{kw} 신상 써본 솔직 후기',
       '{kw} 드디어 찾은 최애템',
     ],
   },
@@ -210,7 +210,7 @@ export const HOMEFEED_HOOKS: Record<CTRCategory, {
     discovery: [
       '{kw} 이거 진짜 명작이에요',
       '{kw} 올해 최고 인생작',
-      '{kw} 몰랐는데 대박',
+      '{kw} 몰랐는데 알고 보니 좋네요',
     ],
   },
   finance: {
@@ -239,7 +239,7 @@ export const HOMEFEED_HOOKS: Record<CTRCategory, {
     empathy: ['{kw} 관련해서 고민 많으시죠?', '{kw} 경험 공유해요', '{kw} 같은 생각이신 분들'],
     reversal: ['{kw} 의외로 이게 정답', '{kw} 생각과 달랐어요', '{kw} 다들 틀렸더라고요'],
     utility: ['{kw} 실전 정리', '{kw} 꿀팁 5가지', '{kw} 이것만 알면 됩니다'],
-    discovery: ['{kw} 진짜 대박이에요', '{kw} 몰랐던 사실', '{kw} 새로 알게 된 것'],
+    discovery: ['{kw} 직접 써보고 공유해요', '{kw} 몰랐던 사실', '{kw} 새로 알게 된 것'],
   },
 };
 
