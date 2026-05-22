@@ -7,6 +7,7 @@
 const HTTP_ERROR_MESSAGES: Record<number, string> = {
     400: '❌ 잘못된 요청입니다. 이미지 프롬프트나 설정을 확인해주세요.',
     401: '🔑 API 키가 유효하지 않습니다. 설정 → API 키에서 키를 확인해주세요.',
+    402: '💳 OpenAI 크레딧을 확인해주세요. platform.openai.com/billing 에서 크레딧·결제 상태를 확인할 수 있습니다.',
     403: '🚫 API 접근이 거부되었습니다. API 키 권한 또는 결제 설정을 확인해주세요.',
     429: '⚠️ API 할당량이 초과되었습니다! 할당량을 확인하거나, 다른 이미지 생성 엔진으로 변경해주세요.',
     500: '🔧 이미지 생성 서버에 내부 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
@@ -43,6 +44,15 @@ export function extractStatusCode(error: any): number | undefined {
 export function getImageErrorMessage(error: any): string {
     const statusCode = extractStatusCode(error);
     const errorMsg = error?.message || String(error || '');
+
+    // 0. 태그된 OpenAI 전용 에러 — 원본 메시지에 4xx 숫자가 섞일 수 있으므로 HTTP 추출보다 우선.
+    if (errorMsg.includes('OPENAI_CREDIT_REQUIRED')) {
+        return '💳 OpenAI 크레딧을 확인해주세요. platform.openai.com/billing 에서 크레딧·결제 상태를 확인할 수 있습니다.';
+    }
+    if (errorMsg.includes('OPENAI_MODEL_UNAVAILABLE')) {
+        const modelName = errorMsg.split('OPENAI_MODEL_UNAVAILABLE:')[1]?.trim() || '선택한 모델';
+        return `🚫 "${modelName}" 모델에 접근할 수 없습니다. 환경설정 → 이미지 모델에서 다른 모델로 변경하거나 OpenAI 계정 권한을 확인해주세요.`;
+    }
 
     // 1. HTTP 상태 코드로 매핑
     if (statusCode && HTTP_ERROR_MESSAGES[statusCode]) {

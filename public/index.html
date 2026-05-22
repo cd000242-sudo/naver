@@ -3625,6 +3625,39 @@
                             이미지당 $0.04로 가성비 최강! Ideogram 3.0은 텍스트 렌더링에 강하고, Nano Banana Pro는 한글 텍스트 정확도 1위입니다.</p>
                     </div>
 
+                    <!-- ✅ OpenAI 덕트테이프 모델·품질 선택 (openai-image 선택 시에만 표시) -->
+                    <div id="openai-image-model-selection-container"
+                        style="display: none; margin-bottom: 1rem; padding: 1rem; background: rgba(139, 92, 246, 0.05); border-radius: 8px; border: 1px solid rgba(139, 92, 246, 0.25);">
+                        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">🦆 OpenAI 이미지 모델</label>
+                        <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.85rem;">
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
+                                <input type="radio" name="openai-image-model" value="gpt-image-1.5" checked style="accent-color: #8b5cf6;">
+                                gpt-image-1.5 (균형 - 추천)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
+                                <input type="radio" name="openai-image-model" value="gpt-image-2" style="accent-color: #8b5cf6;">
+                                gpt-image-2 (고품질)
+                            </label>
+                        </div>
+                        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">🎚️ 이미지 품질</label>
+                        <div style="display: flex; gap: 1.2rem; margin-bottom: 0.75rem;">
+                            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
+                                <input type="radio" name="openai-image-quality" value="low" style="accent-color: #8b5cf6;"> Low (저비용)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
+                                <input type="radio" name="openai-image-quality" value="medium" checked style="accent-color: #8b5cf6;"> Medium (추천)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
+                                <input type="radio" name="openai-image-quality" value="high" style="accent-color: #8b5cf6;"> High (고품질)
+                            </label>
+                        </div>
+                        <div id="openai-image-cost-display"
+                            style="font-size: 0.8rem; font-weight: 700; color: #7c3aed; padding: 0.5rem 0.7rem; background: rgba(139, 92, 246, 0.1); border-radius: 6px;">
+                            한 장당 약 ₩56원 (gpt-image-1.5 / Medium)
+                        </div>
+                        <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem;">💡 gpt-image-1.5 + Medium이 가성비 기본값입니다. High 품질은 약 3배 비쌉니다.</p>
+                    </div>
+
                     <!-- 안내 문구 -->
                     <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">
                         💡 Leonardo AI 키 하나로 SeeDream, Phoenix, Ideogram, Nano Banana Pro 모든 모델 사용 가능 | OpenAI 덕트테이프(gpt-image-2)는

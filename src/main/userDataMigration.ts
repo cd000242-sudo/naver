@@ -111,6 +111,8 @@ const PRESERVE_FIELDS = [
     'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
     'perplexityModel', 'geminiPlanType',
     'customImageSavePath',
+    // ✅ OpenAI 이미지 모델·품질·환율 — 계정 이전·미러 복원 후 사용자 선택 유지
+    'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
 ];
 
 function hasPreservedValue(cfg: any): boolean {

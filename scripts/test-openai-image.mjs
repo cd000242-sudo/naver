@@ -20,7 +20,7 @@ console.log(`🔑 API 키 감지 (length=${apiKey.length}, prefix=${apiKey.slice
 
 const OPENAI_URL = 'https://api.openai.com/v1/images/generations';
 const TEST_PROMPT = 'A simple red apple on a white background, professional product photography';
-const MODELS_TO_TEST = ['gpt-image-1', 'gpt-image-2', 'dall-e-3'];
+const MODELS_TO_TEST = ['gpt-image-1', 'gpt-image-1.5', 'gpt-image-2', 'dall-e-3'];
 
 async function testModel(model) {
   console.log(`\n━━━ ${model} 테스트 ━━━`);

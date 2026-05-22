@@ -298,7 +298,8 @@ export function resolveImageManagerKeys(
 // ✅ [2026-03-11 FIX] export 추가 — 다중계정 등 외부 모듈에서도 사용 가능
 export function isFatalApiError(error: any): boolean {
   const msg = String(error?.message || error || '').toLowerCase();
-  return /\b(429|500|503)\b/.test(msg) ||
+  return /\b(402|429|500|503)\b/.test(msg) ||
+    msg.includes('openai_credit_required') ||  // 크레딧 소진 — 같은 엔진 재시도 무의미
     msg.includes('too many requests') ||
     msg.includes('rate limit') ||
     msg.includes('internal server error') ||
@@ -327,6 +328,14 @@ export function friendlyErrorMessage(error: any): string {
     // prefix 제거 후 본문만 추출 (이미 사용자 친화적 한글로 작성됨)
     const body = rawMessage.replace(/^(IMAGEFX_BOT_DETECTED|FLOW_BOT_DETECTED):/, '').trim();
     return body || '⚠️ Google 봇감지 의심입니다. 한도가 아닐 가능성이 큽니다. 다른 이미지 엔진(나노바나나/DeepInfra)으로 전환하거나 Google 계정을 변경해주세요.';
+  }
+  // ✅ OpenAI 크레딧 소진 / 모델 미지원 — 태그 우선 처리 (한국어 안내)
+  if (/OPENAI_CREDIT_REQUIRED/i.test(rawMessage) || /\b402\b/.test(msg)) {
+    return '💳 OpenAI 크레딧을 확인해주세요. platform.openai.com/billing 에서 크레딧·결제 상태를 확인할 수 있습니다.';
+  }
+  if (/OPENAI_MODEL_UNAVAILABLE/i.test(rawMessage)) {
+    const unavailModel = rawMessage.split('OPENAI_MODEL_UNAVAILABLE:')[1]?.trim() || '선택한 모델';
+    return `🚫 "${unavailModel}" 모델에 접근할 수 없습니다. 환경설정 → 이미지 모델에서 다른 모델로 변경해주세요.`;
   }
   if (/429|too many requests|rate limit/i.test(msg)) {
     return '⚠️ AI 이미지 생성 할당량이 부족합니다. 잠시 후 다시 시도하거나, 설정에서 할당량을 확인해주세요.';

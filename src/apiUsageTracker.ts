@@ -77,18 +77,26 @@ const OPENAI_IMAGE_PRICING: Record<string, number> = {
   // 코드 호환 — quality 미지정 시 medium으로 추정
   'gpt-image-1':     0.042,  // quality: 'auto' 평균 추정치 (medium 수준)
   'gpt-image-1-hd':  0.167,  // high quality (이전 -hd suffix 호환)
-  // gpt-image-1.5 — 차세대 (DALL-E 3 대체, 2026-04 이미 가용)
-  'gpt-image-1.5-low':    0.015,
-  'gpt-image-1.5-medium': 0.050,
-  'gpt-image-1.5-high':   0.180,
-  // ✅ [v1.5.5] gpt-image-2 — "덕트테이프", ChatGPT Images 2.0 (2026-04-21 출시)
-  //   Nano Banana 저격 포지션. 12단어+ 완벽 텍스트, 다국어 렌더링 최강.
-  //   가격은 초기 공식 발표 확인 전까지 gpt-image-1.5 기준으로 가정 (소폭 상승 추정).
-  'gpt-image-2-low':      0.018,  // low quality
-  'gpt-image-2-medium':   0.055,  // medium (기본 권장)
-  'gpt-image-2-high':     0.200,  // high (고품질 썸네일)
-  'gpt-image-2':          0.055,  // quality 미지정 시 medium
-  'gpt-image-2-hd':       0.200,  // -hd 접미사 호환
+  // gpt-image-1.5 — 균형형 (저비용 기본). 공식 단가표 1024x1024 기준 ($/장)
+  'gpt-image-1.5-low':    0.009,  // low quality
+  'gpt-image-1.5-medium': 0.040,  // medium (기본 권장)
+  'gpt-image-1.5-high':   0.133,  // high (고품질)
+  'gpt-image-1.5':        0.040,  // quality 미지정 시 medium
+  'gpt-image-1.5-hd':     0.133,  // -hd 접미사 호환
+  // gpt-image-1.5 비정사각(1536, 16:9·9:16) — 추정값: gpt-image-1 wide 배수(~1.5x) 적용. OpenAI 공식 1536 단가 공개 시 교체할 것
+  'gpt-image-1.5-low-wide':    0.014,
+  'gpt-image-1.5-medium-wide': 0.060,
+  'gpt-image-1.5-high-wide':   0.200,
+  // gpt-image-2 — 고품질 (덕트테이프). 공식 단가표 1024x1024 기준 ($/장)
+  'gpt-image-2-low':      0.020,  // low quality
+  'gpt-image-2-medium':   0.070,  // medium (기본 권장)
+  'gpt-image-2-high':     0.211,  // high (고품질 썸네일)
+  'gpt-image-2':          0.070,  // quality 미지정 시 medium
+  'gpt-image-2-hd':       0.211,  // -hd 접미사 호환
+  // gpt-image-2 비정사각(1536, 16:9·9:16) — 추정값: gpt-image-1 wide 배수(~1.5x) 적용. OpenAI 공식 1536 단가 공개 시 교체할 것
+  'gpt-image-2-low-wide':    0.030,
+  'gpt-image-2-medium-wide': 0.105,
+  'gpt-image-2-high-wide':   0.317,
   // ✅ [v1.4.80] Flow (Nano Banana Pro) — labs.google/flow 경유 무료 쿼터
   'flow-nano-banana-pro': 0,
   'flow-nano-banana-2':   0,  // ✅ [v1.5.4] 표기 업데이트
@@ -165,8 +173,14 @@ const LEONARDOAI_PRICING: Record<string, number> = {
 
 function matchPricingKey(model: string, table: Record<string, any>): string {
   const lower = model.toLowerCase();
-  for (const key of Object.keys(table)) {
-    if (key === 'default') continue;
+  // ✅ Match longer (more specific) keys first. Otherwise a short substring key
+  //    such as 'gpt-image-1' shadows 'gpt-image-1.5-medium', collapsing every
+  //    quality tier onto one wrong price. Sorting by length makes specificity
+  //    independent of object key declaration order.
+  const keys = Object.keys(table)
+    .filter((k) => k !== 'default')
+    .sort((a, b) => b.length - a.length);
+  for (const key of keys) {
     if (lower.includes(key.toLowerCase())) return key;
   }
   return 'default';
@@ -256,6 +270,14 @@ function calculateCost(provider: ApiProvider, input: TrackingInput): number {
     default:
       return 0;
   }
+}
+
+/**
+ * 이미지 호출 1건의 예상 비용(USD)을 반환 — 호출별 로깅·UI 견적용.
+ * calculateCost를 재사용하므로 가격표와 항상 일치한다.
+ */
+export function estimateImageCostUSD(provider: ApiProvider, model: string, images: number = 1): number {
+  return calculateCost(provider, { model, images });
 }
 
 // ==================== 메모리 누적기 ====================

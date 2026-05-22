@@ -456,6 +456,12 @@ export async function initImageManagementTab(): Promise<void> {
         }
       }
 
+      // ✅ OpenAI 이미지 모델·품질 선택 UI 표시/숨김
+      const openaiModelContainer = document.getElementById('openai-image-model-selection-container');
+      if (openaiModelContainer) {
+        openaiModelContainer.style.display = selectedSource === 'openai-image' ? 'block' : 'none';
+      }
+
       // 배지 업데이트 - 소스별 색상
       if (imageSourceInfoBadge) {
         const colorMap: Record<string, string> = {
@@ -495,6 +501,12 @@ export async function initImageManagementTab(): Promise<void> {
       const leonardoModelContainer = document.getElementById('leonardoai-model-selection-container');
       if (leonardoModelContainer) {
         leonardoModelContainer.style.display = savedSource === 'leonardoai' ? 'block' : 'none';
+      }
+
+      // OpenAI 모델 선택 UI 초기 표시 여부
+      const openaiModelContainer = document.getElementById('openai-image-model-selection-container');
+      if (openaiModelContainer) {
+        openaiModelContainer.style.display = savedSource === 'openai-image' ? 'block' : 'none';
       }
     }
 
@@ -543,6 +555,56 @@ export async function initImageManagementTab(): Promise<void> {
         console.warn('[ImageRelevance] 설정 저장 실패:', e);
       }
     });
+  }
+
+  // ✅ OpenAI 이미지 모델·품질 라디오 — config 양방향 sync + 실시간 비용 표시
+  const openaiModelRadios = document.querySelectorAll('input[name="openai-image-model"]');
+  const openaiQualityRadios = document.querySelectorAll('input[name="openai-image-quality"]');
+  const openaiCostDisplay = document.getElementById('openai-image-cost-display');
+  if (openaiModelRadios.length > 0 && openaiQualityRadios.length > 0) {
+    let openaiUsdRate = 1400;
+    const getOpenAISel = (name: string, fallback: string): string =>
+      (document.querySelector(`input[name="${name}"]:checked`) as HTMLInputElement)?.value || fallback;
+    const refreshOpenAICost = () => {
+      if (!openaiCostDisplay) return;
+      const fmt = (window as any).formatOpenAIImageCostLabel;
+      if (typeof fmt === 'function') {
+        openaiCostDisplay.textContent = fmt(
+          getOpenAISel('openai-image-model', 'gpt-image-1.5'),
+          getOpenAISel('openai-image-quality', 'medium'),
+          openaiUsdRate,
+        );
+      }
+    };
+    // 초기 복원: config의 모델/품질/환율 반영 (없으면 HTML 기본값 gpt-image-1.5/medium 유지)
+    try {
+      const cfg = await (window as any).api?.getConfig?.();
+      if (cfg) {
+        openaiUsdRate = (typeof cfg.usdToKrwRate === 'number' && cfg.usdToKrwRate > 0) ? cfg.usdToKrwRate : 1400;
+        const savedModel = cfg.openaiImageModel === 'gpt-image-2' ? 'gpt-image-2' : 'gpt-image-1.5';
+        const savedQuality = ['low', 'medium', 'high'].includes(cfg.openaiImageQuality) ? cfg.openaiImageQuality : 'medium';
+        const mr = document.querySelector(`input[name="openai-image-model"][value="${savedModel}"]`) as HTMLInputElement | null;
+        const qr = document.querySelector(`input[name="openai-image-quality"][value="${savedQuality}"]`) as HTMLInputElement | null;
+        if (mr) mr.checked = true;
+        if (qr) qr.checked = true;
+      }
+    } catch { /* config 미존재 — HTML 기본값 유지 */ }
+    refreshOpenAICost();
+    // 변경 시 config 저장 + 비용 갱신
+    const persistOpenAISelection = async () => {
+      refreshOpenAICost();
+      try {
+        const cfg = await (window as any).api?.getConfig?.();
+        const model = getOpenAISel('openai-image-model', 'gpt-image-1.5');
+        const quality = getOpenAISel('openai-image-quality', 'medium');
+        await (window as any).api?.saveConfig?.({ ...cfg, openaiImageModel: model, openaiImageQuality: quality });
+        appendLog(`🦆 OpenAI 이미지 설정 저장: ${model} / ${quality}`);
+      } catch (e: any) {
+        console.warn('[OpenAIImageSettings] 설정 저장 실패:', e);
+      }
+    };
+    openaiModelRadios.forEach((r) => r.addEventListener('change', persistOpenAISelection));
+    openaiQualityRadios.forEach((r) => r.addEventListener('change', persistOpenAISelection));
   }
 
   // ✅ [Fix] 이미지 관리 탭 초기 진입 시 기존 이미지 그리드 즉시 렌더링
