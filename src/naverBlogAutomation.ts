@@ -21,7 +21,7 @@ import { extractProsConsWithGemini } from './image/geminiTableExtractor.js';
 import { pickBannerHook, pickCtaHook } from './automation/bannerPhrasePool.js';
 import { browserSessionManager, type SessionInfo } from './browserSessionManager.js';
 // [v2.10.113] 명시적 쿠키 파일 저장/복원 — userDataDir 보조 안전망 (캡차 반복 차단)
-import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromFile } from './sessionPersistence.js';
+import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromFile, warmupSession } from './sessionPersistence.js';
 // [v2.10.285] 봇 감지 backoff + 로그인 자연 대기 (계정별 자동 보호)
 import { recordBotBackoff, getBotBackoff, isAccountBackedOff, computePostLoginHumanDelayMs } from './utils/botBackoff.js';
 import { withRetry, findWithFallback, clickWithRetry, navigateWithRetry, isRetryableError } from './errorRecovery.js';
@@ -3726,6 +3726,14 @@ export class NaverBlogAutomation {
       this.log(`⏱️ 로그인 성공 후 자연 대기 ${Math.round(humanDelay / 1000)}초 (봇 감지 회피)`);
       await new Promise((resolve) => setTimeout(resolve, humanDelay));
     } catch { /* ignore */ }
+
+    // ✅ 로그인 직후 세션 워밍업 — 블로그 홈·피드를 둘러보는 사람 패턴으로 봇 감지 회피.
+    //    "로그인 → 즉시 발행"은 네이버 제재 트리거이므로, 발행 전 자연스러운 브라우징을 1회 수행한다.
+    //    warmupSession은 내부에서 예외를 흡수하므로 실패해도 발행 흐름에 영향 없음.
+    try {
+      this.log('🔥 세션 워밍업 중 (블로그 홈·피드 둘러보기)...');
+      await warmupSession(page);
+    } catch { /* 워밍업 실패는 무시 */ }
   }
 
   async navigateToBlogWrite(): Promise<void> {
