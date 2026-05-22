@@ -69,13 +69,18 @@ function hydrateImageManagerFromImages(structuredContent: any, images: any[]): v
   (Array.isArray(images) ? images : []).forEach((img: any, idx: number) => {
     let heading = String(img?.heading || '').trim();
 
-    // ✅ [2026-03-09 FIX] 썸네일 이미지는 첫 번째 소제목에 매핑 (불러오기 시 썸네일 누락 방지)
+    // ✅ [FIX] Register the thumbnail under a dedicated thumbnail key — never a
+    //    body subheading key. The previous logic remapped the thumbnail onto
+    //    headingTitles[0], which made the thumbnail leak into a body subheading
+    //    (thumbnail-only mode body-duplication bug). '🖼️ 썸네일' is the canonical
+    //    key recognized by editorHelpers introImages + filterImagesForPublish,
+    //    so the thumbnail still survives reload but stays a thumbnail only.
     const isThumbnailImage = img?.isThumbnail === true ||
       heading === '썸네일' || heading === '🖼️ 썸네일' ||
       heading.toLowerCase() === 'thumbnail' || heading.toLowerCase() === 'thumbnail-bg';
-    if (isThumbnailImage && headingTitles.length > 0) {
-      heading = headingTitles[0];
-      console.log(`[hydrateImageManager] 썸네일 이미지를 첫 번째 소제목에 매핑: "${heading}"`);
+    if (isThumbnailImage) {
+      heading = '🖼️ 썸네일';
+      console.log('[hydrateImageManager] 썸네일 이미지를 전용 썸네일 키로 등록 (본문 소제목 묶기 금지)');
     }
 
     // ✅ heading이 없으면 인덱스 기반으로 소제목 매핑 (썸네일 등)
