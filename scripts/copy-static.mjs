@@ -163,6 +163,14 @@ try {
     'uiManagers.js',
     'apiClient.js',
     'postStorageUtils.js',
+    // ✅ [SPEC-IMAGE-MODEL-001 Phase 3] localStorage display field absolutepath strip utility.
+    //   postManager.ts:saveGeneratedPostFromData / saveGeneratedPost / updatePostImages에서 import.
+    //   누락 시 postManager.ts ReferenceError → 게시물 저장 흐름 전체 회귀.
+    'imageStorageNormalize.js',
+    // ✅ [SPEC-IMAGE-MODEL-001 Phase 4] Safe thumbnail URL extraction + blob batch validate helper.
+    //   postListUI.ts:extractDisplayUrl / validateBlobReferences에서 import.
+    //   누락 시 postListUI.ts ReferenceError → 게시물 목록 렌더링 전체 회귀.
+    'imageDisplayHelpers.js',
     'errorHandlerUtils.js',
     'stabilityUtils.js',
     'headingVideoPreviewUtils.js',
