@@ -149,34 +149,42 @@
                     <div class="notice-card" onclick="toggleNotice(this)">
                         <div class="notice-card-header">
                             <span class="notice-badge important">중요</span>
-                            <span class="notice-date">2026.03.27</span>
+                            <span class="notice-date">2026.05.23</span>
                         </div>
-                        <h4 class="notice-title">Leaders Pro v1.3.0 업데이트 안내</h4>
-                        <p class="notice-preview">멀티페이지 구조 개편, 후기 시스템 도입, 성능 최적화가 포함된 대규모 업데이트입니다.</p>
+                        <h4 class="notice-title">Better Life Naver v2.10.337 — 안정성 11건 + 봇 우회 강화</h4>
+                        <p class="notice-preview">발행 간격 jitter, 사람형 타이핑, 세션 워밍업 등 안정성 진단 픽스 11건을 통합했습니다.</p>
                         <div class="notice-body">
-                            <p>안녕하세요, Leaders Pro 팀입니다.</p>
-                            <p>v1.3.0 업데이트가 적용되었습니다. 주요 변경 사항:</p>
+                            <p>v2.10.337 릴리즈가 배포되었습니다. 자동 업데이트 또는 다운로드 페이지에서 받으실 수 있습니다.</p>
+                            <p><strong>이번 릴리즈의 주요 변경 사항</strong></p>
                             <ul style="margin: 12px 0; padding-left: 20px;">
-                                <li>웹사이트 멀티페이지 구조 개편 (제품/가격/후기/커뮤니티/다운로드 분리)</li>
-                                <li>구매자 후기 작성 시스템 도입 (주문번호 인증)</li>
-                                <li>커뮤니티 페이지 신설 (공지사항, 수익 인증, 활용 팁)</li>
-                                <li>AI 콘텐츠 생성 품질 향상</li>
-                                <li>봇 감지 우회 엔진 고도화</li>
+                                <li>발행 간격에 항목별 ±40% 랜덤 jitter — 발행 패턴 노출 감소</li>
+                                <li>본문 타이핑을 사람형 가우시안 분산(평균 약 40ms)으로 입력 — 한글 입력 정확도 + 자연스러움 동시 확보</li>
+                                <li>로그인 직후 세션 워밍업 연결 — 봇 감지 회피 보강</li>
+                                <li>연속발행 스케줄 블록 try/catch 보호 — 예외 시 60초 폴백, 큐 유실 방지</li>
+                                <li>콘텐츠 E-E-A-T·인간표현 사전 주입률 완화 (30%→10%, 15%→5%) — 신호 과다 노출 방지</li>
+                                <li>홈판 훅 라이브러리에서 AI 클리셰 금지어(대박·충격 등) 제거</li>
                             </ul>
-                            <p>문의사항은 <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" style="color:var(--gold);">카카오톡 1:1 상담</a>을 이용해주세요.</p>
+                            <p>설치/이용 문의는 <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" style="color:var(--gold);">카카오톡 1:1 상담</a>으로 주시면 됩니다.</p>
                         </div>
                     </div>
 
                     <div class="notice-card" onclick="toggleNotice(this)">
                         <div class="notice-card-header">
                             <span class="notice-badge update">업데이트</span>
-                            <span class="notice-date">2026.03.20</span>
+                            <span class="notice-date">2026.05.22</span>
                         </div>
-                        <h4 class="notice-title">Gemini 2.5 Flash AI 엔진 추가</h4>
-                        <p class="notice-preview">Google의 최신 AI 모델 Gemini 2.5 Flash가 콘텐츠 생성 옵션에 추가되었습니다.</p>
+                        <h4 class="notice-title">이미지 생성 모델 강화 — gpt-image-1.5 + 나노바나나 3종 분리</h4>
+                        <p class="notice-preview">새 이미지 모델과 품질 선택을 추가하고, 한글 텍스트 깨짐 회귀를 잡았습니다.</p>
                         <div class="notice-body">
-                            <p>Gemini 2.5 Flash 모델이 AI 콘텐츠 생성 엔진에 추가되었습니다.</p>
-                            <p>기존 GPT-4o, Claude, DeepSeek에 더해 총 7종의 AI를 활용하실 수 있습니다. 설정 > AI 엔진에서 선택 가능합니다.</p>
+                            <p>이미지 생성 파이프라인이 강화되었습니다.</p>
+                            <ul style="margin: 12px 0; padding-left: 20px;">
+                                <li><strong>gpt-image-1.5 모델 신규 지원</strong> + 품질 선택(low / medium / high)</li>
+                                <li><strong>나노바나나 3종 분리</strong>(Pro / 2 / 기본) — 모델 잠금으로 한글 네이티브 텍스트 깨짐 회귀 수정. 비용 사전 동의 흐름 정비</li>
+                                <li>썸네일만 모드의 본문 중복 배치 버그 수정 — 썸네일을 본문 소제목 키와 분리</li>
+                                <li>AI 활용 마크를 AI 이미지 전체에 일괄 적용 (직접 수집 이미지는 제외)</li>
+                                <li>Gemini 원문 모드 그라운딩 OFF — RECITATION 빈 응답 0건 차단</li>
+                            </ul>
+                            <p>설정 &gt; 이미지 / AI 엔진에서 변경 가능합니다.</p>
                         </div>
                     </div>
 
