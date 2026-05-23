@@ -5903,10 +5903,24 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         const isQuotaOrRateLimit = errorMessage.includes('429') || errorMessage.includes('rate limit') ||
           errorMessage.includes('too many requests') || errorMessage.includes('quota');
         if (isQuotaOrRateLimit) {
-          console.error(`[OpenAI] ❌ ${modelName} 할당량/속도 제한 — 자동 폴백 차단`);
+          // ✅ RPM 한도는 1분 단위로 복구 → 같은 모델 유지 + 60초 backoff 후 1회 자동 retry.
+          //   모델 변경 아니라 [[feedback_no_fallback]] 룰과 충돌 없음.
+          //   maxRetriesPerModel=2이므로 retry=0 첫 시도 실패 시 1회만 backoff retry.
+          const isHardQuota = errorMessage.includes('quota') && !errorMessage.includes('429');
+          if (!isHardQuota && retry < maxRetriesPerModel - 1) {
+            const backoffMs = 60_000;
+            const logMsg = `⏳ [OpenAI ${modelName}] RPM 한도 초과 — ${backoffMs/1000}초 후 자동 재시도 (${retry + 2}/${maxRetriesPerModel})`;
+            console.warn(logMsg);
+            if (typeof (globalThis as any).window !== 'undefined' && typeof (globalThis as any).window.appendLog === 'function') {
+              (globalThis as any).window.appendLog(logMsg);
+            }
+            await new Promise(resolve => setTimeout(resolve, backoffMs));
+            continue; // 같은 모델 재시도
+          }
+          console.error(`[OpenAI] ❌ ${modelName} 할당량/속도 제한 — 재시도 소진, 자동 폴백 차단`);
           throw new Error(
             `🚫 [OpenAI ${modelName}] API 한도를 초과했습니다.\n\n` +
-            `📌 원인: ${errorMessage.includes('quota') ? '월간 할당량 소진' : '분당 요청 한도(RPM) 초과'}\n\n` +
+            `📌 원인: ${isHardQuota ? '월간 할당량 소진' : '분당 요청 한도(RPM) 초과 — 60초 자동 대기 + 재시도 후에도 실패'}\n\n` +
             `💡 해결 방법:\n` +
             `  1) platform.openai.com → Billing 에서 결제 정보 확인 (월 한도 상향)\n` +
             `  2) 잠시 후 다시 시도 (RPM 한도는 1분 후 복구)\n` +
