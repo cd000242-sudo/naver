@@ -103,6 +103,51 @@
                 <p class="section-desc">비밀번호를 입력하면 최신 버전을 다운로드할 수 있습니다.</p>
             </div>
 
+            <!-- CRO-3: 이메일 캡쳐 (다운로드 전 선택 입력) -->
+            <div style="max-width: 640px; margin: 0 auto 32px; padding: 20px 24px; background: rgba(255,255,255,0.95); border-radius: 14px; box-shadow: 0 6px 22px rgba(0,0,0,0.14);">
+                <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 220px;">
+                        <strong style="display: block; color: #14304d; font-size: 0.95rem; margin-bottom: 4px;">📧 신제품·업데이트·꿀팁 받아보기 (선택)</strong>
+                        <span style="font-size: 0.78rem; color: #5b6b7a;">이메일을 남기시면 새 기능 출시·할인 등을 알려드립니다.</span>
+                    </div>
+                    <input type="email" id="lead-email" placeholder="your@email.com" style="flex: 1.2; min-width: 180px; padding: 10px 14px; border: 1px solid rgba(20,48,77,0.15); border-radius: 8px; font-size: 0.9rem;">
+                    <button id="lead-submit-btn" onclick="submitLeadEmail()" style="padding: 10px 20px; background: linear-gradient(135deg, #c9a84c, #d4a012); color: #1a1a2e; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.88rem;">받아보기</button>
+                </div>
+                <div id="lead-msg" style="margin-top: 10px; font-size: 0.82rem; min-height: 1.2em; color: #44d7b6;"></div>
+            </div>
+            <script>
+                // CRO-3: lead-submit GAS 액션 호출
+                const _GAS = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
+                async function submitLeadEmail() {
+                    const email = document.getElementById('lead-email').value.trim();
+                    const msg = document.getElementById('lead-msg');
+                    const btn = document.getElementById('lead-submit-btn');
+                    if (!email || !email.includes('@')) { msg.style.color = '#ff3b5c'; msg.textContent = '올바른 이메일을 입력해주세요.'; return; }
+                    btn.disabled = true; btn.textContent = '등록 중...';
+                    try {
+                        const res = await fetch(_GAS, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'text/plain' },
+                            body: JSON.stringify({ action: 'lead-submit', email, source: 'download', timestamp: new Date().toISOString() })
+                        });
+                        const data = await res.json();
+                        if (data.success) {
+                            msg.style.color = '#44d7b6';
+                            msg.textContent = data.updated ? '✅ 이메일 정보가 갱신되었습니다.' : '✅ 등록되었습니다. 곧 소식 전해드릴게요.';
+                            document.getElementById('lead-email').value = '';
+                            btn.textContent = '✓ 완료';
+                            setTimeout(() => { btn.disabled = false; btn.textContent = '받아보기'; }, 2500);
+                        } else {
+                            msg.style.color = '#ff3b5c'; msg.textContent = data.message || '등록 실패';
+                            btn.disabled = false; btn.textContent = '받아보기';
+                        }
+                    } catch (err) {
+                        msg.style.color = '#ff3b5c'; msg.textContent = '오류: ' + err.message;
+                        btn.disabled = false; btn.textContent = '받아보기';
+                    }
+                }
+            </script>
+
             <div class="download-grid">
                 <div class="download-card" data-product="naver">
                     <div class="download-icon" style="width: 100%; height: auto; background: transparent; box-shadow: none; border-radius: 16px; overflow: hidden; margin-bottom: 18px;">

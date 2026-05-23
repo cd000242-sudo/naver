@@ -802,6 +802,11 @@
                     <span class="nav-icon">💡</span>
                     <span>활용 팁</span>
                 </div>
+                <!-- CRO-3 scaffold: 리드 관리 -->
+                <div class="nav-item" data-tab="leads" onclick="switchTab('leads')">
+                    <span class="nav-icon">📧</span>
+                    <span>리드 관리</span>
+                </div>
             </nav>
             <div class="sidebar-info">
                 <div class="sidebar-info-item"><span>버전</span><span>v1.2.28</span></div>
@@ -1166,6 +1171,22 @@
                 </div>
             </div>
 
+            <!-- TAB: Leads (CRO-3 — 이메일 리드 캡쳐) -->
+            <div class="tab-panel" id="tab-leads">
+                <div class="page-header">
+                    <h1>리드 관리 (이메일 캡쳐)</h1>
+                    <p>다운로드 페이지·기타 form에서 수집된 이메일 목록. CSV로 export 후 메일 발송 도구(Stibee/Mailchimp 등)에 import해 활용하세요.</p>
+                </div>
+                <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+                    <span id="leads-count" style="display: inline-flex; align-items: center; padding: 8px 14px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25); border-radius: 8px; font-size: 0.88rem; color: var(--gold-primary, #c9a84c); font-weight: 600;">총 0건</span>
+                    <button class="btn btn-gold" onclick="exportLeadsCsv()">📥 CSV 다운로드</button>
+                    <button class="btn" onclick="loadLeadsAdmin()" style="margin-left: auto;">🔄 새로고침</button>
+                </div>
+                <div id="leads-table-body">
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 리드 목록 로딩 중...</div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -1277,7 +1298,8 @@
                 reviews: { title: '후기 관리', desc: '구매자 후기 승인·거절 (Phase 6-D에서 활성화).' },
                 notices: { title: '공지사항', desc: '커뮤니티 공지 등록·수정·삭제 (Phase 6-B에서 활성화).' },
                 income: { title: '수익 인증', desc: '커뮤니티 수익 인증 카드 관리 (Phase 6-C에서 활성화).' },
-                tips: { title: '활용 팁', desc: '구매자 활용 팁 승인·거절 (Phase 6-E에서 활성화).' }
+                tips: { title: '활용 팁', desc: '구매자 활용 팁 승인·거절 (Phase 6-E에서 활성화).' },
+                leads: { title: '리드 관리', desc: '이메일 리드 캡쳐 (CRO-3에서 활성화).' }
             };
 
             // Load data for the tab
@@ -1287,6 +1309,7 @@
             if (tabId === 'income') loadIncomeAdmin(currentIncomeFilter);
             if (tabId === 'reviews') loadReviewsAdmin(currentReviewFilter);
             if (tabId === 'tips') loadTipsAdmin(currentTipFilter);
+            if (tabId === 'leads') loadLeadsAdmin();
         }
 
         // ===== PHASE 6-F: SEED DEFAULTS (idempotent — 시트 비어있을 때만 import) =====
@@ -1664,6 +1687,86 @@
             } catch (err) {
                 showToast('❌ 거절 실패: ' + err.message);
             }
+        }
+
+        // ===== CRO-3: LEADS ADMIN (이메일 리스트 + CSV export) =====
+        let _leadsCache = [];
+        async function loadLeadsAdmin() {
+            const container = document.getElementById('leads-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>';
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'get-leads-admin', adminToken: ADMIN_TOKEN }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message || '응답 실패');
+                _leadsCache = res.leads || [];
+                document.getElementById('leads-count').textContent = `총 ${_leadsCache.length}건`;
+                if (_leadsCache.length === 0) {
+                    container.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--text-secondary);">아직 수집된 이메일이 없습니다.<br><small>다운로드 페이지에서 이메일이 등록되면 여기 표시됩니다.</small></div>';
+                    return;
+                }
+                container.innerHTML = `
+                    <div style="overflow-x: auto;">
+                        <table style="width:100%; min-width:600px; border-collapse:collapse; background:var(--bg-card); border:1px solid var(--border-glass); border-radius:10px; overflow:hidden;">
+                            <thead>
+                                <tr style="background:rgba(201,168,76,0.08);">
+                                    <th style="padding:12px; text-align:left; font-size:0.8rem; color:var(--text-secondary);">이메일</th>
+                                    <th style="padding:12px; text-align:left; font-size:0.8rem; color:var(--text-secondary);">출처</th>
+                                    <th style="padding:12px; text-align:left; font-size:0.8rem; color:var(--text-secondary);">관심 제품</th>
+                                    <th style="padding:12px; text-align:left; font-size:0.8rem; color:var(--text-secondary);">등록일시</th>
+                                    <th style="padding:12px; text-align:center; font-size:0.8rem; color:var(--text-secondary); width:80px;">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${_leadsCache.map(l => `
+                                    <tr style="border-top:1px solid var(--border-glass);">
+                                        <td style="padding:10px 12px; font-family:monospace; font-size:0.85rem;">${escapeHtml_(l.email)}</td>
+                                        <td style="padding:10px 12px; font-size:0.82rem; color:var(--text-secondary);">${escapeHtml_(l.source)}</td>
+                                        <td style="padding:10px 12px; font-size:0.82rem; color:var(--text-secondary);">${escapeHtml_(l.productInterest)}</td>
+                                        <td style="padding:10px 12px; font-size:0.78rem; color:var(--text-muted); font-family:monospace;">${escapeHtml_(l.timestamp.slice(0,19))}</td>
+                                        <td style="padding:10px 12px; text-align:center;"><button class="btn" style="padding:6px 10px; font-size:0.75rem;" onclick='deleteLead("${escapeHtml_(l.id)}")'>🗑️</button></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            } catch (err) {
+                container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요.</small></div>`;
+            }
+        }
+        async function deleteLead(id) {
+            if (!confirm('이 리드를 삭제하시겠습니까? (soft delete)')) return;
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'lead-delete', adminToken: ADMIN_TOKEN, id }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 삭제 완료');
+                loadLeadsAdmin();
+            } catch (err) {
+                showToast('❌ 삭제 실패: ' + err.message);
+            }
+        }
+        function exportLeadsCsv() {
+            if (_leadsCache.length === 0) { showToast('❌ 다운로드할 리드가 없습니다'); return; }
+            // CSV header + rows
+            const rows = [['email', 'source', 'productInterest', 'timestamp', 'notes']];
+            _leadsCache.forEach(l => rows.push([l.email, l.source, l.productInterest, l.timestamp, l.notes || '']));
+            const csv = rows.map(r => r.map(c => `"${String(c || '').replace(/"/g, '""')}"`).join(',')).join('\r\n');
+            // UTF-8 BOM for Excel 한글 호환
+            const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `leads-${new Date().toISOString().slice(0,10)}.csv`;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast(`✅ ${_leadsCache.length}건 CSV 다운로드 완료`);
         }
 
         // ===== TRAFFIC TRACKING =====
