@@ -1544,10 +1544,35 @@ export async function initMultiAccountPublishModal() {
     if (categoryBtn) {
       const newCatBtn = categoryBtn.cloneNode(true) as HTMLButtonElement;
       categoryBtn.parentNode?.replaceChild(newCatBtn, categoryBtn);
-      newCatBtn.addEventListener('click', () => {
-        // 기존 카테고리 모달 열기 함수 호출
-        (window as any).openCategoryModalInSettingMode?.();
+      newCatBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('[MA-Category] 📂 콘텐츠 카테고리 버튼 클릭됨');
+
+        // 풀오토 설정 모달 임시 숨김 (z-index 충돌 방지 — 이미지 설정 버튼 동일 패턴)
+        const maModal = document.getElementById('ma-fullauto-setting-modal');
+        if (maModal && maModal.style.display !== 'none') {
+          maModal.setAttribute('data-was-visible', 'true');
+          maModal.style.visibility = 'hidden';
+          console.log('[MA-Category] 임시 숨김: ma-fullauto-setting-modal');
+        }
+
+        // 카테고리 모달 열기 함수 호출 (optional chaining 제거 — 미정의 시 명시 진단)
+        const opener = (window as any).openCategoryModalInSettingMode;
+        if (typeof opener === 'function') {
+          opener();
+          console.log('[MA-Category] ✅ openCategoryModalInSettingMode 호출 완료');
+        } else {
+          console.error('[MA-Category] ❌ openCategoryModalInSettingMode 함수를 찾을 수 없습니다');
+          toastManager.warning('카테고리 선택 모달을 열 수 없습니다. 앱을 새로고침해주세요.');
+          // 미정의 시 숨김 복원
+          if (maModal && maModal.getAttribute('data-was-visible') === 'true') {
+            maModal.style.visibility = 'visible';
+            maModal.removeAttribute('data-was-visible');
+          }
+        }
       });
+      console.log('[MA-Category] ✅ 콘텐츠 카테고리 버튼 이벤트 리스너 추가 완료');
     }
 
     // ✅ 블로그 카테고리 분석 버튼 이벤트

@@ -3352,6 +3352,17 @@ function initCategoryModal(): void {
     console.log('[CategoryModal] closeModal called - closing modal');
     console.trace('[CategoryModal] Close stack trace:');
     modal.style.display = 'none';
+
+    // z-index 충돌 회피로 임시 숨겨진 부모 모달 복원 (HeadingImageSettings.ts:150 패턴)
+    const modalsToRestore = ['ma-fullauto-setting-modal', 'continuous-settings-modal', 'continuous-mode-modal', 'ma-publish-modal', 'multi-account-modal'];
+    modalsToRestore.forEach(modalId => {
+      const m = document.getElementById(modalId);
+      if (m && m.getAttribute('data-was-visible') === 'true') {
+        m.style.visibility = 'visible';
+        m.removeAttribute('data-was-visible');
+        console.log(`[CategoryModal] ✅ ${modalId} 복원됨`);
+      }
+    });
   };
 
   // 닫기 버튼
