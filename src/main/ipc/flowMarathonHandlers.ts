@@ -254,6 +254,7 @@ export function registerFlowMarathonHandlers(): void {
     }
 
     const startedAt = Date.now();
+    let summary: Record<string, unknown> | null = null;
 
     try {
       for (let i = startFrom; i < totalPosts; i++) {
@@ -354,7 +355,7 @@ export function registerFlowMarathonHandlers(): void {
       __marathonRunning = false;
       stats.finishedAt = new Date().toISOString();
       stats.sha256Set = Array.from(sha256Set);
-      const summary = {
+      summary = {
         ...stats,
         totalElapsedSec: ((Date.now() - startedAt) / 1000).toFixed(1),
         averageImageMs: stats.totalImages > 0 ? Math.round(stats.totalMs / stats.totalImages) : 0,
@@ -372,7 +373,7 @@ export function registerFlowMarathonHandlers(): void {
         successRate: summary.successRate,
       }));
       broadcast('flow-marathon:finished', summary);
-      return summary;
     }
+    return summary;
   });
 }
