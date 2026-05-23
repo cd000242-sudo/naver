@@ -1106,14 +1106,30 @@
                 </div>
             </div>
 
-            <!-- TAB: Income (Phase 6-A scaffold — GAS wiring in Phase 6-C) -->
+            <!-- TAB: Income (Phase 6-C) -->
             <div class="tab-panel" id="tab-income">
                 <div class="page-header">
                     <h1>수익 인증</h1>
-                    <p>커뮤니티 수익 인증 카드 관리. Phase 6-C에서 income-list / income-add / income-delete 액션 추가 후 본 패널에 연결됩니다.</p>
+                    <p>구매자 수익 인증 카드 등록·삭제. community.html 수익 인증 탭에 즉시 반영됩니다.</p>
+                </div>
+                <div class="form-card" style="padding: 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; margin-bottom: 24px;">
+                    <h3 style="margin-bottom: 16px; font-size: 1.05rem;">💰 새 수익 인증 등록</h3>
+                    <div style="display: grid; grid-template-columns: 80px 1fr 1fr 120px; gap: 12px; margin-bottom: 10px;">
+                        <input type="text" id="income-emoji" placeholder="💰" maxlength="4" style="padding: 10px; border-radius: 8px; text-align: center; font-size: 1.4rem;">
+                        <input type="text" id="income-amount" placeholder="금액 (예: 월 127만원)" style="padding: 10px; border-radius: 8px;">
+                        <input type="text" id="income-author" placeholder="작성자 (예: 블로그왕 K님)" style="padding: 10px; border-radius: 8px;">
+                        <input type="text" id="income-date" placeholder="2026.05" style="padding: 10px; border-radius: 8px;">
+                    </div>
+                    <textarea id="income-desc" placeholder="설명 (1-2줄, 어떤 제품·어떤 방식으로 수익화)" rows="3" style="width: 100%; padding: 10px; border-radius: 8px; font-family: inherit; margin-bottom: 8px;"></textarea>
+                    <input type="text" id="income-tags" placeholder="태그 (콤마 구분: Better Life Naver,쿠팡파트너스,7개 블로그)" style="width: 100%; padding: 10px; border-radius: 8px; margin-bottom: 12px;">
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-gold" onclick="addIncome()">💾 등록</button>
+                        <button class="btn" onclick="resetIncomeForm()">↩️ 초기화</button>
+                        <button class="btn" onclick="loadIncome()" style="margin-left: auto;">🔄 새로고침</button>
+                    </div>
                 </div>
                 <div id="income-table-body">
-                    <div class="loading-spinner"><div class="spinner-ring"></div> Phase 6-C에서 활성화</div>
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 수익 인증 목록 로딩 중...</div>
                 </div>
             </div>
 
@@ -1246,6 +1262,7 @@
             if (tabId === 'trial') loadTrialUsers();
             if (tabId === 'bank') loadBankOrders();
             if (tabId === 'notices') loadNotices();
+            if (tabId === 'income') loadIncome();
         }
 
         // ===== PHASE 6-B: NOTICES =====
@@ -1340,6 +1357,89 @@
                 if (res.success === false) throw new Error(res.message);
                 showToast('✅ 삭제 완료');
                 loadNotices();
+            } catch (err) {
+                showToast('❌ 삭제 실패: ' + err.message);
+            }
+        }
+
+        // ===== PHASE 6-C: INCOME =====
+        async function loadIncome() {
+            const container = document.getElementById('income-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>';
+            try {
+                const res = await fetch(`${GAS_URL}?action=income-list`).then(r => r.json());
+                if (res.success === false) throw new Error(res.message || '응답 실패');
+                const list = res.income || [];
+                if (list.length === 0) {
+                    container.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--text-secondary);">등록된 수익 인증이 없습니다. 위 폼에서 등록하세요.</div>';
+                    return;
+                }
+                container.innerHTML = list.map(n => `
+                    <div style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; margin-bottom: 10px; display: flex; gap: 16px; align-items: flex-start;">
+                        <div style="font-size: 2.4rem; flex-shrink: 0;">${escapeHtml_(n.emoji)}</div>
+                        <div style="flex: 1; min-width: 0;">
+                            <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 4px; flex-wrap: wrap;">
+                                <strong style="color: var(--gold-primary, #c9a84c);">${escapeHtml_(n.amount)}</strong>
+                                <span style="color: var(--text-secondary); font-size: 0.85rem;">${escapeHtml_(n.author)}</span>
+                                <span style="color: var(--text-muted); font-size: 0.8rem;">${escapeHtml_(n.date)}</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: auto; font-family: monospace;">${escapeHtml_(n.id)}</span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">${escapeHtml_(n.desc)}</div>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">${(n.tags || []).map(t => `<span style="padding: 2px 8px; border-radius: 10px; background: rgba(201,168,76,0.1); font-size: 0.72rem; color: var(--gold-primary, #c9a84c);">${escapeHtml_(t)}</span>`).join('')}</div>
+                            <button class="btn" onclick='deleteIncome("${escapeHtml_(n.id)}")'>🗑️ 삭제</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요.</small></div>`;
+            }
+        }
+        function resetIncomeForm() {
+            document.getElementById('income-emoji').value = '💰';
+            document.getElementById('income-amount').value = '';
+            document.getElementById('income-author').value = '';
+            const now = new Date();
+            document.getElementById('income-date').value = now.getFullYear() + '.' + String(now.getMonth() + 1).padStart(2, '0');
+            document.getElementById('income-desc').value = '';
+            document.getElementById('income-tags').value = '';
+        }
+        async function addIncome() {
+            const body = {
+                action: 'income-add',
+                adminToken: ADMIN_TOKEN,
+                emoji: document.getElementById('income-emoji').value.trim(),
+                amount: document.getElementById('income-amount').value.trim(),
+                author: document.getElementById('income-author').value.trim(),
+                date: document.getElementById('income-date').value.trim(),
+                desc: document.getElementById('income-desc').value.trim(),
+                tags: document.getElementById('income-tags').value.trim(),
+            };
+            if (!body.amount || !body.author) { showToast('❌ 금액과 작성자는 필수입니다'); return; }
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 등록되었습니다');
+                resetIncomeForm();
+                loadIncome();
+            } catch (err) {
+                showToast('❌ 등록 실패: ' + err.message);
+            }
+        }
+        async function deleteIncome(id) {
+            if (!confirm('이 수익 인증을 삭제하시겠습니까?\n(soft delete — 복구 가능)')) return;
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'income-delete', adminToken: ADMIN_TOKEN, id: id }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 삭제 완료');
+                loadIncome();
             } catch (err) {
                 showToast('❌ 삭제 실패: ' + err.message);
             }

@@ -443,6 +443,40 @@
             }
         }
 
+        // Phase 6-C: 수익 인증 GAS 동적 로딩. 성공 + 데이터 있으면 하드코딩 대체.
+        async function loadIncome() {
+            try {
+                const res = await fetch(`${GAS_URL}?action=income-list`);
+                const data = await res.json();
+                const container = document.querySelector('#cpanel-income .income-grid');
+                if (!container) return;
+                if (!data.success) { console.warn('loadIncome: GAS error', data.message); return; }
+                const list = data.income || [];
+                if (list.length === 0) {
+                    container.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--text-secondary); grid-column: 1 / -1;">아직 등록된 수익 인증이 없습니다.</div>';
+                    return;
+                }
+                container.innerHTML = list.map(n => `
+                    <div class="income-card">
+                        <div class="income-card-image">
+                            <div class="income-placeholder">${escapeHtml(n.emoji)}</div>
+                            <span class="income-amount-badge">${escapeHtml(n.amount)}</span>
+                        </div>
+                        <div class="income-card-body">
+                            <div class="income-card-meta">
+                                <span class="income-card-author">${escapeHtml(n.author)}</span>
+                                <span class="income-card-date">${escapeHtml(n.date)}</span>
+                            </div>
+                            <p class="income-card-desc">${escapeHtml(n.desc)}</p>
+                            <div class="income-card-tags">${(n.tags || []).map(t => `<span class="income-tag">${escapeHtml(t)}</span>`).join('')}</div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                console.warn('loadIncome error', err);
+            }
+        }
+
         // Phase 6-B: 공지사항 GAS 동적 로딩. 성공 시 하드코딩 3건을 GAS 데이터로 대체.
         // 실패 시 하드코딩 fallback 유지 (네트워크/배포 지연 안전망).
         // notice.body는 admin이 입력한 HTML로 렌더(p/ul/li/strong/a 허용 — 관리자 신뢰).
@@ -513,6 +547,7 @@
             initScrollAnimations();
             initNavbar();
             loadNotices();
+            loadIncome();
             loadTips();
         });
     </script>
