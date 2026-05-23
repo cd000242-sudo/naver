@@ -785,6 +785,23 @@
                     <span class="nav-icon">🎁</span>
                     <span>체험 관리</span>
                 </div>
+                <!-- Phase 6-A scaffold: GAS actions wired in 6-B~6-E -->
+                <div class="nav-item" data-tab="reviews" onclick="switchTab('reviews')">
+                    <span class="nav-icon">📝</span>
+                    <span>후기 관리</span>
+                </div>
+                <div class="nav-item" data-tab="notices" onclick="switchTab('notices')">
+                    <span class="nav-icon">📢</span>
+                    <span>공지사항</span>
+                </div>
+                <div class="nav-item" data-tab="income" onclick="switchTab('income')">
+                    <span class="nav-icon">💰</span>
+                    <span>수익 인증</span>
+                </div>
+                <div class="nav-item" data-tab="tips" onclick="switchTab('tips')">
+                    <span class="nav-icon">💡</span>
+                    <span>활용 팁</span>
+                </div>
             </nav>
             <div class="sidebar-info">
                 <div class="sidebar-info-item"><span>버전</span><span>v1.2.28</span></div>
@@ -1046,6 +1063,50 @@
                 </div>
             </div>
 
+            <!-- TAB: Reviews (Phase 6-A scaffold — GAS wiring in Phase 6-D) -->
+            <div class="tab-panel" id="tab-reviews">
+                <div class="page-header">
+                    <h1>후기 관리</h1>
+                    <p>구매자 후기 승인·거절. 현재 GAS는 get-reviews/submit-review만 지원 — Phase 6-D에서 review-approve / review-reject 추가 후 본 패널에 연결됩니다.</p>
+                </div>
+                <div id="reviews-table-body">
+                    <div class="loading-spinner"><div class="spinner-ring"></div> Phase 6-D에서 활성화</div>
+                </div>
+            </div>
+
+            <!-- TAB: Notices (Phase 6-A scaffold — GAS wiring in Phase 6-B) -->
+            <div class="tab-panel" id="tab-notices">
+                <div class="page-header">
+                    <h1>공지사항</h1>
+                    <p>커뮤니티 공지 등록·수정·삭제. Phase 6-B에서 get-notices / submit-notice / update-notice / delete-notice 액션 추가 후 본 패널에 연결됩니다.</p>
+                </div>
+                <div id="notices-table-body">
+                    <div class="loading-spinner"><div class="spinner-ring"></div> Phase 6-B에서 활성화</div>
+                </div>
+            </div>
+
+            <!-- TAB: Income (Phase 6-A scaffold — GAS wiring in Phase 6-C) -->
+            <div class="tab-panel" id="tab-income">
+                <div class="page-header">
+                    <h1>수익 인증</h1>
+                    <p>커뮤니티 수익 인증 카드 관리. Phase 6-C에서 income-list / income-add / income-delete 액션 추가 후 본 패널에 연결됩니다.</p>
+                </div>
+                <div id="income-table-body">
+                    <div class="loading-spinner"><div class="spinner-ring"></div> Phase 6-C에서 활성화</div>
+                </div>
+            </div>
+
+            <!-- TAB: Tips (Phase 6-A scaffold — GAS wiring in Phase 6-E) -->
+            <div class="tab-panel" id="tab-tips">
+                <div class="page-header">
+                    <h1>활용 팁</h1>
+                    <p>구매자 활용 팁 승인·거절. Phase 6-E에서 tip-approve / tip-reject 액션 추가 후 본 패널에 연결됩니다.</p>
+                </div>
+                <div id="tips-table-body">
+                    <div class="loading-spinner"><div class="spinner-ring"></div> Phase 6-E에서 활성화</div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -1153,7 +1214,11 @@
                 orders: { title: '주문 내역', desc: '결제 완료된 주문과 활성화된 라이선스 내역입니다.' },
                 editor: { title: '사이트 편집', desc: '메인 결제 페이지의 핵심 콘텐츠를 수정합니다.' },
                 bank: { title: '계좌이체 관리', desc: '계좌이체 주문을 확인하고 승인/거절합니다.' },
-                trial: { title: '체험 관리', desc: '무료 체험 사용자 목록을 조회하고 관리합니다.' }
+                trial: { title: '체험 관리', desc: '무료 체험 사용자 목록을 조회하고 관리합니다.' },
+                reviews: { title: '후기 관리', desc: '구매자 후기 승인·거절 (Phase 6-D에서 활성화).' },
+                notices: { title: '공지사항', desc: '커뮤니티 공지 등록·수정·삭제 (Phase 6-B에서 활성화).' },
+                income: { title: '수익 인증', desc: '커뮤니티 수익 인증 카드 관리 (Phase 6-C에서 활성화).' },
+                tips: { title: '활용 팁', desc: '구매자 활용 팁 승인·거절 (Phase 6-E에서 활성화).' }
             };
 
             // Load data for the tab
