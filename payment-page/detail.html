@@ -11,102 +11,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* ========== SPRING CHERRY BLOSSOM ========== */
-        .petal-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 9999; overflow: hidden;
-        }
-        .petal {
-            position: absolute; top: -60px;
-            width: 18px; height: 18px;
-            background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%);
-            border-radius: 50% 0 50% 50%;
-            opacity: 0;
-            animation: petalFall linear infinite;
-            filter: blur(0.5px);
-            box-shadow: 0 0 6px rgba(255,183,197,0.3);
-        }
-        .petal:nth-child(odd) {
-            background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%);
-            border-radius: 0 50% 50% 50%;
-        }
-        @keyframes petalFall {
-            0%   { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); }
-            10%  { opacity: 0.9; }
-            90%  { opacity: 0.6; }
-            100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); }
-        }
 
-        /* ========== MUSIC TOGGLE ========== */
-        .music-toggle {
-            position: fixed; bottom: 100px; right: 24px; z-index: 10000;
-            width: 52px; height: 52px; border-radius: 50%;
-            background: rgba(255,183,197,0.25); border: 1px solid rgba(255,183,197,0.5);
-            backdrop-filter: blur(12px); cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 22px; transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(255,107,138,0.2);
-        }
-        .music-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(255,183,197,0.4);
-            box-shadow: 0 6px 30px rgba(255,107,138,0.4);
-        }
-        .music-toggle.playing {
-            animation: musicPulse 1.5s ease-in-out infinite;
-        }
-        @keyframes musicPulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(255,107,138,0.2); }
-            50% { box-shadow: 0 4px 30px rgba(255,107,138,0.6), 0 0 60px rgba(255,183,197,0.3); }
-        }
-        /* ========== MUSIC HINT TOOLTIP ========== */
-        .music-hint {
-            position: fixed; bottom: 108px; right: 84px; z-index: 10000;
-            background: rgba(255,183,197,0.92); color: #1a0a10;
-            padding: 10px 16px; border-radius: 12px;
-            font-size: 13px; font-weight: 600; white-space: nowrap;
-            box-shadow: 0 4px 20px rgba(255,107,138,0.3);
-            animation: hintFadeIn 0.5s ease-out both, hintFadeOut 0.5s 6s ease-in both;
-            pointer-events: none;
-        }
-        .music-hint::after {
-            content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%);
-            border: 6px solid transparent; border-left-color: rgba(255,183,197,0.92);
-        }
-        @keyframes hintFadeIn {
-            from { opacity: 0; transform: translateX(10px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes hintFadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; visibility: hidden; }
-        }
-        .music-toggle.attention {
-            animation: bounceAttention 1s ease-in-out 3;
-        }
-        @keyframes bounceAttention {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.2); }
-            50% { transform: scale(0.95); }
-            75% { transform: scale(1.1); }
-        }
-        @media (max-width: 768px) {
-            .music-toggle { bottom: 90px; right: 16px; width: 44px; height: 44px; font-size: 18px; }
-            .music-hint { bottom: 98px; right: 68px; font-size: 11px; padding: 8px 12px; }
-        }
-
-        /* ========== SPRING ACCENT OVERLAY ========== */
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background:
-                radial-gradient(ellipse at 10% 5%, rgba(255,183,197,0.07) 0%, transparent 40%),
-                radial-gradient(ellipse at 90% 10%, rgba(255,218,233,0.05) 0%, transparent 35%),
-                radial-gradient(ellipse at 50% 95%, rgba(255,182,193,0.04) 0%, transparent 40%),
-                radial-gradient(ellipse at 75% 50%, rgba(255,192,203,0.03) 0%, transparent 30%),
-                url('spring-bg.png') center/cover no-repeat fixed;
-            pointer-events: none; z-index: 0;
-            opacity: 0.35;
-        }
         :root {
             --gold: #FFD700;
             --gold-dark: #B8860B;
@@ -2095,13 +2000,6 @@ function closeMobileMenu() {
         <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
     </div>
 </footer>
-
-<!-- CHERRY BLOSSOM PETALS -->
-<div class="petal-container" id="petalContainer"></div>
-
-<!-- MUSIC TOGGLE -->
-<button class="music-toggle attention" id="musicToggle" title="🌸 봄 배경음악 켜기/끄기">🔇</button>
-<div class="music-hint" id="musicHint">🌸 클릭하면 봄 음악이 흘러요</div>
 
 <!-- ========== SCRIPTS ========== -->
 <script>
