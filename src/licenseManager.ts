@@ -1384,6 +1384,7 @@ export async function validateSession(serverUrl?: string): Promise<SessionValida
  * 주기적 세션 검증 시작 (5분마다)
  */
 let sessionCheckInterval: NodeJS.Timeout | null = null;
+let sessionCheckActive = true;
 
 export function startSessionValidation(serverUrl: string, onForceLogout: () => void): void {
   // 기존 인터벌 정리
@@ -1391,16 +1392,23 @@ export function startSessionValidation(serverUrl: string, onForceLogout: () => v
     clearInterval(sessionCheckInterval);
   }
 
-  // 5분마다 세션 검증
+  // 5분마다 세션 검증 — Electron 창 focus 시에만 실제 네트워크 호출.
+  // idle/blur 상태에서는 tick은 발생하나 fetch는 skip → 24h 켜놓아도 무용 네트워크 0.
   sessionCheckInterval = setInterval(async () => {
+    if (!sessionCheckActive) return;
     const result = await validateSession(serverUrl);
     if (result.forceLogout) {
       console.log('[LicenseManager] 강제 로그아웃 실행');
       onForceLogout();
     }
-  }, 5 * 60 * 1000); // 5분
+  }, 5 * 60 * 1000);
+  sessionCheckInterval.unref?.();
 
-  console.log('[LicenseManager] 세션 검증 시작 (5분 간격)');
+  console.log('[LicenseManager] 세션 검증 시작 (5분 간격, focus 게이팅)');
+}
+
+export function setSessionValidationActive(active: boolean): void {
+  sessionCheckActive = active;
 }
 
 export function stopSessionValidation(): void {

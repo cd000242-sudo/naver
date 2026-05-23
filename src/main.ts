@@ -1828,11 +1828,19 @@ async function createWindow(): Promise<void> {
         const { setWatchdogActive } = require('./diagnostics/eventLoopWatchdog.js');
         setWatchdogActive(false);
       } catch { /* ignore */ }
+      try {
+        const { setSessionValidationActive } = require('./licenseManager.js');
+        setSessionValidationActive(false);
+      } catch { /* ignore */ }
     });
     mainWindow.on('minimize', () => {
       try {
         const { setWatchdogActive } = require('./diagnostics/eventLoopWatchdog.js');
         setWatchdogActive(false);
+      } catch { /* ignore */ }
+      try {
+        const { setSessionValidationActive } = require('./licenseManager.js');
+        setSessionValidationActive(false);
       } catch { /* ignore */ }
       // ✅ [v2.7.47] 게임 친화: minimize 시 작업표시줄에서 완전 격리
       //   효과: fullscreen 게임이 작업표시줄을 그릴 때 본 앱 항목이 깜빡임 유발 안 함
@@ -1844,8 +1852,18 @@ async function createWindow(): Promise<void> {
         const { setWatchdogActive } = require('./diagnostics/eventLoopWatchdog.js');
         setWatchdogActive(true);
       } catch { /* ignore */ }
+      try {
+        const { setSessionValidationActive } = require('./licenseManager.js');
+        setSessionValidationActive(true);
+      } catch { /* ignore */ }
       // ✅ [v2.7.47] 복귀 시 작업표시줄 다시 표시
       try { mainWindow?.setSkipTaskbar(false); } catch { /* ignore */ }
+    });
+    mainWindow.on('focus', () => {
+      try {
+        const { setSessionValidationActive } = require('./licenseManager.js');
+        setSessionValidationActive(true);
+      } catch { /* ignore */ }
     });
 
     mainWindow.on('closed', () => {
