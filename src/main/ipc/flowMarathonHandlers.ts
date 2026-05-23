@@ -8,8 +8,9 @@
 import { ipcMain, app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs/promises';
-import { existsSync, mkdirSync, copyFileSync } from 'fs';
+import { existsSync, mkdirSync, copyFileSync, createReadStream } from 'fs';
 import { createHash } from 'crypto';
+import { pipeline } from 'node:stream/promises';
 import { generateWithFlow, purgeFlowSessionStorage, recreateFlowContext } from '../../image/flowGenerator.js';
 import type { ImageRequestItem } from '../../image/types.js';
 
@@ -306,9 +307,13 @@ export function registerFlowMarathonHandlers(): void {
                 stats.failures++;
                 continue;
               }
-              const buf = await fs.readFile(srcPath);
-              if (buf.length < 1024) stats.tinyBuffers++;
-              const sha = createHash('sha256').update(buf).digest('hex');
+              // Stream hash + stat — avoids loading full image buffer into main
+              // thread memory. 1000-queue x 5 images saves heap churn + event loop.
+              const statResult = await fs.stat(srcPath);
+              if (statResult.size < 1024) stats.tinyBuffers++;
+              const hash = createHash('sha256');
+              await pipeline(createReadStream(srcPath), hash);
+              const sha = hash.digest('hex');
               if (sha256Set.has(sha)) { postDup++; stats.duplicates++; }
               sha256Set.add(sha);
 
