@@ -143,6 +143,43 @@ const ImageManager = {
    */
   setHeadings(headings: any[]): void {
     console.log('[ImageManager] 소제목 설정:', headings.length, '개');
+
+    // ✅ 새 글 감지: 이전 imageMap 키와 새 헤딩 정규화 키의 교집합 0이면 새 글로 판단 →
+    //   imageMap clear (사용자 보고: 이미지 관리 탭 공란 슬롯 발행 시 이전 글 이미지 중복)
+    //   동일 글 헤딩 수정(P2 FIX #12 케이스)은 교집합 존재 → 기존 리매핑 로직 그대로 적용
+    try {
+      const newHeadingNorms = new Set<string>();
+      (Array.isArray(headings) ? headings : []).forEach((h: any) => {
+        const title = typeof h === 'string' ? String(h).trim() : String(h?.title || h || '').trim();
+        const n = normalizeHeadingKeyForVideoCache(title);
+        if (n) newHeadingNorms.add(n);
+      });
+
+      const existingKeys = Array.from(this.imageMap.keys()) as string[];
+      const nonThumbKeys = existingKeys.filter((k) => k !== '🖼️ 썸네일' && k !== '썸네일');
+
+      if (nonThumbKeys.length > 0 && newHeadingNorms.size > 0) {
+        let hasOverlap = false;
+        for (const key of nonThumbKeys) {
+          const n = normalizeHeadingKeyForVideoCache(String(key || '').trim());
+          if (n && newHeadingNorms.has(n)) {
+            hasOverlap = true;
+            break;
+          }
+        }
+        if (!hasOverlap) {
+          console.log('[ImageManager] 🆕 새 글 감지 (이전 헤딩과 교집합 0) → imageMap/unsetHeadings clear');
+          // 썸네일 키는 보존 (P2 FIX #12 라인 180-181 패턴과 동일)
+          for (const key of nonThumbKeys) {
+            this.imageMap.delete(key);
+          }
+          this.unsetHeadings.clear();
+        }
+      }
+    } catch (e) {
+      console.warn('[ImageManager] 새 글 감지 catch ignored:', e);
+    }
+
     this.headings = headings;
 
     try {
