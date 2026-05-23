@@ -2731,6 +2731,11 @@ function removeDuplicateHeadings(bodyPlain: string, headings: HeadingPlan[]): st
     /함께\s*응원해요/gi,
     /화이팅/gi,
     /응원합니다/gi,
+    // ✅ 사용자 보고 (v2.10.350): "응원하며 ... 앞날에 좋은 일만 가득하기를 바라겠습니다" 패턴
+    //   기존 /응원합니다/는 "응원하며" 매칭 불가 → closingParagraphFound 미체크 → 두 번째 마무리 통과
+    /응원하[며겠해]/gi,
+    /앞날에\s*[\s\S]{0,40}바라/gi,
+    /좋은\s*일만\s*가득/gi,
     /다음에\s*또\s*만나요/gi,
     /다음에\s*또\s*봬요/gi,
     /글을\s*마무리하겠습니다/gi,
