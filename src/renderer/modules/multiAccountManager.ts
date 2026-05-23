@@ -4279,9 +4279,25 @@ if (typeof document !== 'undefined') {
   // 2) 1초 후 추가 안전 (지연 추가되는 모달 element 대응)
   setTimeout(() => closeStaleBackdrops('after-1s'), 1000);
 
-  // 3) ✅ 1초 interval 영구 정리 — 어떤 코드가 invisible overlay 만들어도 1초 내 차단
-  console.log('%c[BackdropGuard] 1초 interval 시작 — v2.10.213', 'color: #4ade80; font-weight: bold');
-  setInterval(() => closeStaleBackdrops('interval'), 1000);
+  // 3) ✅ 30초 catch-all fallback — MutationObserver가 주력, idle CPU 절감 위해
+  // 1초 → 30초로 완화 + 탭 hidden 시 자동 일시정지. 즉시성은 (4) MutationObserver가 담당.
+  console.log('%c[BackdropGuard] 30초 fallback + visibility 게이팅 — v2.10.349', 'color: #4ade80; font-weight: bold');
+  let backdropFallbackId: ReturnType<typeof setInterval> | null = null;
+  const startBackdropFallback = () => {
+    if (backdropFallbackId) clearInterval(backdropFallbackId);
+    backdropFallbackId = setInterval(() => closeStaleBackdrops('interval-30s'), 30000);
+  };
+  const stopBackdropFallback = () => {
+    if (backdropFallbackId) {
+      clearInterval(backdropFallbackId);
+      backdropFallbackId = null;
+    }
+  };
+  if (document.visibilityState === 'visible') startBackdropFallback();
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') startBackdropFallback();
+    else stopBackdropFallback();
+  });
 
   // 4) ✅ MutationObserver — modal-backdrop의 style/class 변경 감지 즉시 정리
   const observer = new MutationObserver(mutations => {
