@@ -2636,7 +2636,8 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
   if (payload.generatedImages && payload.generatedImages.length > 0) {
     const { materializePublishingImages } = await import('./main/utils/materializePublishingImages.js');
     const { getBlobStoreInstance } = await import('./main/blobStore/singleton.js');
-    payload.generatedImages = await materializePublishingImages(payload.generatedImages, getBlobStoreInstance()) as typeof payload.generatedImages;
+    const materialized = await materializePublishingImages(payload.generatedImages, getBlobStoreInstance());
+    payload = { ...payload, generatedImages: materialized as typeof payload.generatedImages };
   }
 
   // [SPEC-PROMPT-2026-REFRESH Phase 2 / v2.10.233] 발행 시간 골든존 가드
