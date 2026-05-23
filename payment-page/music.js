@@ -20,12 +20,9 @@
 // ========== Premium Mini Music Player ==========
 (function() {
     // === Config ===
+    // Phase 4: 여름 테마 — 단일 곡 무한 루프(YouTube playlist 파라미터로 무중단)
     const PLAYLIST = [
-        { id: 'r4EHi65fa-0', title: '🌸 Spring Breeze' },
-        { id: 'WYp9Eo9T3BA', title: '🌿 Peaceful Garden' },
-        { id: '1fueZCTYkpA', title: '☁️ Cloud Walk' },
-        { id: 'lTRiuFIWV54', title: '🎋 Bamboo Rain' },
-        { id: 'jfKfPfyJRdk', title: '🎵 Lofi Beats' },
+        { id: 'f4jS6yW83MU', title: '☀️ Summer Vibes' },
     ];
     const STORAGE_KEY = 'lp_music_playing';
     const TRACK_KEY = 'lp_music_track';
@@ -468,12 +465,15 @@
             updateUI();
         } catch(e) {}
     }
+    // Phase 4 보강: 데스크탑에서 클릭/스크롤 없이 마우스만 움직여도 자동재생 트리거.
+    // mousemove는 once:true라 첫 1회만 실행되어 성능 영향 없음.
+    const AUTOPLAY_EVENTS = ['click','touchstart','scroll','keydown','mousedown','mousemove','pointerdown'];
     function onFirstInteraction() {
         tryAutoPlay();
-        ['click','touchstart','scroll','keydown'].forEach(ev => document.removeEventListener(ev, onFirstInteraction));
+        AUTOPLAY_EVENTS.forEach(ev => document.removeEventListener(ev, onFirstInteraction));
     }
     if (shouldAutoPlay) {
-        ['click','touchstart','scroll','keydown'].forEach(ev => document.addEventListener(ev, onFirstInteraction, { once: true }));
+        AUTOPLAY_EVENTS.forEach(ev => document.addEventListener(ev, onFirstInteraction, { once: true }));
     }
 
     window.onYouTubeIframeAPIReady = function() {
@@ -483,7 +483,11 @@
             playerVars: {
                 autoplay: shouldAutoPlay ? 1 : 0,
                 start: resumeTime > 0 ? Math.floor(resumeTime) : 0, // ← 이어재생 위치
-                loop: 0, controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0
+                // 단일 곡 무한 루프: loop=1 + playlist=videoId (YouTube 요구사항).
+                // 다중 곡일 땐 onStateChange ENDED 폴백으로 다음 곡 전환.
+                loop: PLAYLIST.length === 1 ? 1 : 0,
+                playlist: PLAYLIST.length === 1 ? PLAYLIST[currentTrack].id : undefined,
+                controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0
             },
             events: {
                 onReady: function() {
