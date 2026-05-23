@@ -72,43 +72,48 @@ describe('extractDisplayUrl', () => {
 });
 
 describe('validateBlobReferences', () => {
-  it('returns 0 when window.electronAPI.blobs absent (no-op)', async () => {
+  it('returns missingCount=0 when window.electronAPI.blobs absent (no-op)', async () => {
     (globalThis as any).window = {};
-    const count = await validateBlobReferences([{ images: [{ blobId: 'x' }] }]);
-    expect(count).toBe(0);
+    const r = await validateBlobReferences([{ images: [{ blobId: 'x' }] }]);
+    expect(r.missingCount).toBe(0);
   });
 
   it('does not validate images without blobId', async () => {
     const hasMany = vi.fn();
     (globalThis as any).window = { electronAPI: { blobs: { hasMany } } };
-    const count = await validateBlobReferences([{ images: [{ filePath: 'C:\\x.png' }] }]);
-    expect(count).toBe(0);
+    const r = await validateBlobReferences([{ images: [{ filePath: 'C:\\x.png' }] }]);
+    expect(r.missingCount).toBe(0);
     expect(hasMany).not.toHaveBeenCalled();
   });
 
-  it('blobId exists + blob present -> blobId preserved', async () => {
+  it('blobId exists + blob present -> blobId preserved on returned posts', async () => {
     const hasMany = vi.fn(async () => [true]);
     (globalThis as any).window = { electronAPI: { blobs: { hasMany } } };
     const img = { blobId: '01HX...' };
     const posts = [{ images: [img] }];
-    const count = await validateBlobReferences(posts);
-    expect(count).toBe(0);
+    const r = await validateBlobReferences(posts);
+    expect(r.missingCount).toBe(0);
+    expect((r.posts[0].images[0] as any).blobId).toBe('01HX...');
+    // Caller's original input is unchanged (immutability).
     expect(img.blobId).toBe('01HX...');
   });
 
-  it('blob missing -> blobId deleted, count incremented', async () => {
+  it('blob missing -> blobId stripped on RETURN, original untouched', async () => {
     const hasMany = vi.fn(async () => [false]);
     (globalThis as any).window = { electronAPI: { blobs: { hasMany } } };
     const img: any = { blobId: '01HX...', previewDataUrl: 'data:image/png;base64,abc' };
     const posts = [{ images: [img] }];
-    const count = await validateBlobReferences(posts);
-    expect(count).toBe(1);
-    expect(img.blobId).toBeUndefined();
-    // previewDataUrl is preserved (independent of blob)
-    expect(img.previewDataUrl).toBe('data:image/png;base64,abc');
+    const r = await validateBlobReferences(posts);
+    expect(r.missingCount).toBe(1);
+    // Returned (cloned) image has blobId removed.
+    expect((r.posts[0].images[0] as any).blobId).toBeUndefined();
+    // previewDataUrl preserved on returned image.
+    expect((r.posts[0].images[0] as any).previewDataUrl).toBe('data:image/png;base64,abc');
+    // Caller's original input is unchanged (immutability).
+    expect(img.blobId).toBe('01HX...');
   });
 
-  it('partial blob missing -> correct split handling', async () => {
+  it('partial blob missing -> correct split handling on returned posts', async () => {
     const hasMany = vi.fn(async () => [true, false, true]);
     (globalThis as any).window = { electronAPI: { blobs: { hasMany } } };
     const posts = [{
@@ -118,25 +123,27 @@ describe('validateBlobReferences', () => {
         { blobId: 'c' },
       ],
     }];
-    const count = await validateBlobReferences(posts);
-    expect(count).toBe(1);
-    expect((posts[0].images[0] as any).blobId).toBe('a');
-    expect((posts[0].images[1] as any).blobId).toBeUndefined();
-    expect((posts[0].images[2] as any).blobId).toBe('c');
+    const r = await validateBlobReferences(posts);
+    expect(r.missingCount).toBe(1);
+    expect((r.posts[0].images[0] as any).blobId).toBe('a');
+    expect((r.posts[0].images[1] as any).blobId).toBeUndefined();
+    expect((r.posts[0].images[2] as any).blobId).toBe('c');
+    // Original unchanged.
+    expect((posts[0].images[1] as any).blobId).toBe('b');
   });
 
-  it('hasMany throws -> returns 0 (graceful degradation)', async () => {
+  it('hasMany throws -> returns posts unchanged, missingCount=0 (graceful degradation)', async () => {
     const hasMany = vi.fn(async () => { throw new Error('IPC fail'); });
     (globalThis as any).window = { electronAPI: { blobs: { hasMany } } };
-    const count = await validateBlobReferences([{ images: [{ blobId: 'x' }] }]);
-    expect(count).toBe(0);
+    const r = await validateBlobReferences([{ images: [{ blobId: 'x' }] }]);
+    expect(r.missingCount).toBe(0);
   });
 
-  it('empty posts array -> returns 0', async () => {
+  it('empty posts array -> returns missingCount=0', async () => {
     const hasMany = vi.fn();
     (globalThis as any).window = { electronAPI: { blobs: { hasMany } } };
-    const count = await validateBlobReferences([]);
-    expect(count).toBe(0);
+    const r = await validateBlobReferences([]);
+    expect(r.missingCount).toBe(0);
     expect(hasMany).not.toHaveBeenCalled();
   });
 
@@ -146,9 +153,12 @@ describe('validateBlobReferences', () => {
     const img1 = { blobId: 'aa' };
     const img2 = { blobId: 'bb' };
     const posts = [{ images: [img1] }, { images: [img2] }];
-    const count = await validateBlobReferences(posts);
-    expect(count).toBe(1);
+    const r = await validateBlobReferences(posts);
+    expect(r.missingCount).toBe(1);
+    expect((r.posts[0].images[0] as any).blobId).toBe('aa');
+    expect((r.posts[1].images[0] as any).blobId).toBeUndefined();
+    // Originals unchanged.
     expect((img1 as any).blobId).toBe('aa');
-    expect((img2 as any).blobId).toBeUndefined();
+    expect((img2 as any).blobId).toBe('bb');
   });
 });

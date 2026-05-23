@@ -76,7 +76,8 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
   // Legacy filePath-based posts: not touched here. They fall through Phase 3 fallback (which already
   // strips absolute paths from display fields) and Phase 6 migration (which converts them to blob-id).
   try {
-    await validateBlobReferences(posts);
+    const validated = await validateBlobReferences(posts);
+    posts = validated.posts;
   } catch (e) {
     console.warn('[postListUI] blob batch validate failed (ignored):', e);
   }
