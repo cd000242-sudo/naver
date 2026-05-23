@@ -1063,14 +1063,21 @@
                 </div>
             </div>
 
-            <!-- TAB: Reviews (Phase 6-A scaffold — GAS wiring in Phase 6-D) -->
+            <!-- TAB: Reviews (Phase 6-D) -->
             <div class="tab-panel" id="tab-reviews">
                 <div class="page-header">
                     <h1>후기 관리</h1>
-                    <p>구매자 후기 승인·거절. 현재 GAS는 get-reviews/submit-review만 지원 — Phase 6-D에서 review-approve / review-reject 추가 후 본 패널에 연결됩니다.</p>
+                    <p>구매자 후기 승인·거절. <strong>pending</strong>은 reviews.html에 노출 안 됨. <strong>approved</strong>만 공개. <strong>rejected</strong>는 영구 차단(soft).</p>
+                </div>
+                <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                    <button class="btn" onclick="loadReviewsAdmin('all')" id="rv-filter-all">전체</button>
+                    <button class="btn" onclick="loadReviewsAdmin('pending')" id="rv-filter-pending">⏳ 대기</button>
+                    <button class="btn" onclick="loadReviewsAdmin('approved')" id="rv-filter-approved">✅ 승인</button>
+                    <button class="btn" onclick="loadReviewsAdmin('rejected')" id="rv-filter-rejected">🚫 거절</button>
+                    <button class="btn" onclick="loadReviewsAdmin(currentReviewFilter)" style="margin-left: auto;">🔄 새로고침</button>
                 </div>
                 <div id="reviews-table-body">
-                    <div class="loading-spinner"><div class="spinner-ring"></div> Phase 6-D에서 활성화</div>
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 후기 목록 로딩 중...</div>
                 </div>
             </div>
 
@@ -1263,6 +1270,7 @@
             if (tabId === 'bank') loadBankOrders();
             if (tabId === 'notices') loadNotices();
             if (tabId === 'income') loadIncome();
+            if (tabId === 'reviews') loadReviewsAdmin(currentReviewFilter);
         }
 
         // ===== PHASE 6-B: NOTICES =====
@@ -1442,6 +1450,83 @@
                 loadIncome();
             } catch (err) {
                 showToast('❌ 삭제 실패: ' + err.message);
+            }
+        }
+
+        // ===== PHASE 6-D: REVIEWS ADMIN (approve / reject workflow) =====
+        let currentReviewFilter = 'pending';
+        const REVIEW_STATUS_LABEL = { pending: '⏳ 대기', approved: '✅ 승인', rejected: '🚫 거절' };
+        const REVIEW_STATUS_COLOR = { pending: '#ffb84a', approved: '#44d7b6', rejected: '#ff3b5c' };
+        async function loadReviewsAdmin(filter) {
+            currentReviewFilter = filter || 'pending';
+            const container = document.getElementById('reviews-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>';
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'get-reviews-admin', adminToken: ADMIN_TOKEN }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message || '응답 실패');
+                const all = res.reviews || [];
+                const list = currentReviewFilter === 'all' ? all : all.filter(r => r.status === currentReviewFilter);
+                // Update filter button styles
+                ['all','pending','approved','rejected'].forEach(k => {
+                    const b = document.getElementById('rv-filter-' + k);
+                    if (b) b.style.background = (k === currentReviewFilter) ? 'rgba(201,168,76,0.2)' : '';
+                });
+                if (list.length === 0) {
+                    container.innerHTML = `<div style="padding: 32px; text-align: center; color: var(--text-secondary);">${currentReviewFilter === 'all' ? '등록된 후기가 없습니다.' : currentReviewFilter + ' 상태의 후기가 없습니다.'}</div>`;
+                    return;
+                }
+                container.innerHTML = list.map(r => `
+                    <div style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; margin-bottom: 10px;">
+                        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 6px; flex-wrap: wrap;">
+                            <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: ${REVIEW_STATUS_COLOR[r.status]}22; color: ${REVIEW_STATUS_COLOR[r.status]};">${REVIEW_STATUS_LABEL[r.status] || r.status}</span>
+                            <span style="color: #f5c842;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                            <strong>${escapeHtml_(r.author)}</strong>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml_(r.email || '')}</span>
+                            <span style="font-size: 0.72rem; color: var(--text-muted); margin-left: auto; font-family: monospace;">${escapeHtml_(r.timestamp.slice(0, 19))}</span>
+                        </div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml_(r.summary)}</div>
+                        ${r.detail ? `<div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; white-space: pre-wrap;">${escapeHtml_(r.detail)}</div>` : ''}
+                        <div style="display: flex; gap: 8px;">
+                            ${r.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveReview("${escapeHtml_(r.timestamp)}")'>✅ 승인</button>` : ''}
+                            ${r.status !== 'rejected' ? `<button class="btn" onclick='rejectReview("${escapeHtml_(r.timestamp)}")'>🚫 거절</button>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요.</small></div>`;
+            }
+        }
+        async function approveReview(ts) {
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'review-approve', adminToken: ADMIN_TOKEN, timestamp: ts }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 승인 완료');
+                loadReviewsAdmin(currentReviewFilter);
+            } catch (err) {
+                showToast('❌ 승인 실패: ' + err.message);
+            }
+        }
+        async function rejectReview(ts) {
+            if (!confirm('이 후기를 거절하시겠습니까?\n(rejected — 영구 차단, 복구는 시트에서 수동)')) return;
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'review-reject', adminToken: ADMIN_TOKEN, timestamp: ts }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 거절 완료');
+                loadReviewsAdmin(currentReviewFilter);
+            } catch (err) {
+                showToast('❌ 거절 실패: ' + err.message);
             }
         }
 
