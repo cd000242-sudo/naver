@@ -2,6 +2,7 @@ import { app } from 'electron';
 import fs from 'fs/promises';
 import path from 'path';
 import { randomUUID } from 'crypto';
+import type { BlobMeta } from '../main/blobStore/index.js';
 
 export async function ensureDirectory(): Promise<string> {
   // 테스트 환경에서는 환경변수를 사용
@@ -48,7 +49,30 @@ export async function getImageSaveBasePath(): Promise<string> {
   return path.join(os.homedir(), 'Downloads', 'naver-blog-images');
 }
 
-export async function writeImageFile(buffer: Buffer, extension: string, heading?: string, postTitle?: string, postId?: string): Promise<{ filePath: string; previewDataUrl: string; savedToLocal?: string }> {
+// Return type extended in SPEC-IMAGE-MODEL-001 Phase 2 — blob fields are optional for
+// non-fatal dual-write (legacy filePath/previewDataUrl remain for backward compatibility).
+export async function writeImageFile(
+  buffer: Buffer,
+  extension: string,
+  heading?: string,
+  postTitle?: string,
+  postId?: string,
+): Promise<{
+  filePath: string;
+  previewDataUrl: string;
+  savedToLocal?: string;
+  blobId?: string;
+  mimeType?: string;
+  width?: number;
+  height?: number;
+  byteSize?: number;
+  sha256?: string;
+  createdAt?: number;
+}> {
+  // Captured from sharp.metadata() for blob store meta — set inside the sharp block below.
+  let imgWidth = 0;
+  let imgHeight = 0;
+
   // ✅ [2026-03-09 FIX] 깨진/빈 이미지 파일 저장 방지 — 버퍼 유효성 검증
   if (!buffer || buffer.length === 0) {
     throw new Error('❌ 이미지 데이터가 비어있습니다. 이미지 생성에 실패했을 수 있습니다.');
@@ -79,6 +103,9 @@ export async function writeImageFile(buffer: Buffer, extension: string, heading?
     const sharp = sharpModule.default || sharpModule;
     const image = sharp(buffer);
     const metadata = await image.metadata();
+    // Capture dimensions for blob store meta (outer scope).
+    imgWidth = metadata.width ?? 0;
+    imgHeight = metadata.height ?? 0;
 
     // 목표 크기: 너비 1200px, 비율 유지
     const targetWidth = 1200;
@@ -175,7 +202,37 @@ export async function writeImageFile(buffer: Buffer, extension: string, heading?
   }
 
   const previewDataUrl = `data:image/${extension === 'jpg' ? 'jpeg' : extension};base64,${processedBuffer.toString('base64')}`;
-  return { filePath, previewDataUrl, savedToLocal };
+
+  // SPEC-IMAGE-MODEL-001 Phase 2 — dual write to blob store.
+  // Failure is non-fatal: legacy filePath/savedToLocal/previewDataUrl remain valid.
+  // Blob fields are returned as undefined if the write fails.
+  let blobFields: Partial<BlobMeta> = {};
+  try {
+    const { getBlobStoreInstance } = await import('../main/blobStore/singleton.js');
+    const mimeType =
+      extension === 'jpg' || extension === 'jpeg' ? 'image/jpeg'
+      : extension === 'png' ? 'image/png'
+      : extension === 'webp' ? 'image/webp'
+      : 'application/octet-stream';
+
+    const blobMeta = await getBlobStoreInstance().write(
+      new Uint8Array(processedBuffer),
+      { mimeType, width: imgWidth, height: imgHeight },
+    );
+    blobFields = {
+      blobId: blobMeta.blobId,
+      mimeType: blobMeta.mimeType,
+      width: blobMeta.width,
+      height: blobMeta.height,
+      byteSize: blobMeta.byteSize,
+      sha256: blobMeta.sha256,
+      createdAt: blobMeta.createdAt,
+    };
+  } catch (blobErr) {
+    console.warn('[writeImageFile] blob store write failed (non-fatal):', (blobErr as Error).message);
+  }
+
+  return { filePath, previewDataUrl, savedToLocal, ...blobFields };
 }
 
 /**

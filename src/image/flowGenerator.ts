@@ -1743,9 +1743,10 @@ async function generateBatchPipelined(
             const ext = downloaded.mimeType === 'image/jpeg' ? 'jpg'
                 : downloaded.mimeType === 'image/webp' ? 'webp'
                 : 'png';
-            const { filePath } = await writeImageFile(downloaded.buffer, ext, slot.item.heading, postTitle, postId);
+            // Spread result so blob fields (blobId, sha256, etc.) are forwarded to GeneratedImage.
+            const writeResult = await writeImageFile(downloaded.buffer, ext, slot.item.heading, postTitle, postId);
             const image: GeneratedImage = {
-                filePath,
+                filePath: writeResult.filePath,
                 heading: slot.item.heading,
                 prompt: acceptedPrompt,
                 mimeType: downloaded.mimeType,
@@ -1753,6 +1754,14 @@ async function generateBatchPipelined(
                 cost: 0,
                 // ✅ [v2.10.289 FIX] originalIndex 보존 — headingImageMode 필터링(odd/even/thumbnail-only) 시 정확한 소제목 매칭. 누락 시 editorHelpers의 fallback이 발동해 이미지가 안 들어가야 할 소제목에 중복 배치되는 버그 차단.
                 originalIndex: (slot.item as any).originalIndex,
+                ...(writeResult.blobId ? {
+                    blobId: writeResult.blobId,
+                    width: writeResult.width,
+                    height: writeResult.height,
+                    byteSize: writeResult.byteSize,
+                    sha256: writeResult.sha256,
+                    createdAt: writeResult.createdAt,
+                } : {}),
             } as any;
             results.push(image);
             detectedCount++;
@@ -1976,10 +1985,11 @@ export async function generateWithFlow(
             const ext = generated.mimeType === 'image/jpeg' ? 'jpg'
                 : generated.mimeType === 'image/webp' ? 'webp'
                 : 'png';
-            const { filePath } = await writeImageFile(generated.buffer, ext, item.heading, postTitle, postId);
+            // Spread result so blob fields (blobId, sha256, etc.) are forwarded to GeneratedImage.
+            const writeResult = await writeImageFile(generated.buffer, ext, item.heading, postTitle, postId);
 
             const image: GeneratedImage = {
-                filePath,
+                filePath: writeResult.filePath,
                 heading: item.heading,
                 prompt,
                 mimeType: generated.mimeType,
@@ -1987,6 +1997,14 @@ export async function generateWithFlow(
                 cost: 0,
                 // ✅ [v2.10.289 FIX] originalIndex 보존 (sequential 경로)
                 originalIndex: (item as any).originalIndex,
+                ...(writeResult.blobId ? {
+                    blobId: writeResult.blobId,
+                    width: writeResult.width,
+                    height: writeResult.height,
+                    byteSize: writeResult.byteSize,
+                    sha256: writeResult.sha256,
+                    createdAt: writeResult.createdAt,
+                } : {}),
             } as any;
             results.push(image);
             coordinator.markHeadingSucceeded(); // C8

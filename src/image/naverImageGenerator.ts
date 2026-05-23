@@ -269,17 +269,27 @@ export async function generateWithNaver(
       if (imageUrl) {
         try {
           const { buffer, ext } = await scraper.downloadImage(imageUrl);
-          const { filePath, previewDataUrl, savedToLocal } = await writeImageFile(
+          // Spread result so blob fields (blobId, sha256, etc.) are forwarded to GeneratedImage.
+          const writeResult = await writeImageFile(
             buffer, ext, item.heading, postTitle, postId
           );
 
           results.push({
             heading: item.heading,
-            filePath,
-            previewDataUrl,
+            filePath: writeResult.filePath,
+            previewDataUrl: writeResult.previewDataUrl,
             provider: 'naver',
-            savedToLocal,
-            sourceUrl: imageUrl
+            savedToLocal: writeResult.savedToLocal,
+            sourceUrl: imageUrl,
+            ...(writeResult.blobId ? {
+              blobId: writeResult.blobId,
+              mimeType: writeResult.mimeType,
+              width: writeResult.width,
+              height: writeResult.height,
+              byteSize: writeResult.byteSize,
+              sha256: writeResult.sha256,
+              createdAt: writeResult.createdAt,
+            } : {}),
           });
           console.log(`[Naver] ✅ 저장 완료: ${item.heading}`);
         } catch (err) {
