@@ -12,6 +12,7 @@ import { toFileUrlMaybe } from '../utils/headingKeyUtils.js';
 import { formatContentForPreview } from '../utils/textFormatUtils.js';
 import { getRequiredImageBasePath } from '../utils/imageHelpers.js';
 import { refreshGeneratedPostsList, loadGeneratedPostToFields } from './postListUI.js';
+import { normalizeImageForStorage } from '../utils/imageStorageNormalize.js';
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
 declare let currentPostId: string | null;
@@ -243,146 +244,6 @@ export function migratePostsToPerAccount(): void {
   backfillNaverIdForLegacyPosts(); // ✅ [2026-02-26] naverId 백필도 실행
 }
 
-// ✅ [v2.7.57] 이전 세션의 사라진 이미지 파일 자동 정리 (ERR_FILE_NOT_FOUND 방지)
-//   증상: 글 목록 썸네일이 file:///...generated-images/old.png 가리키는데 디스크에서 파일이 삭제됨
-//        → 브라우저가 ERR_FILE_NOT_FOUND 콘솔 에러 발생 (onerror로 시각은 가려지지만 로그 노출)
-//   조치: 앱 시작 시 1회 실행 — 각 글 이미지의 filePath 존재 검사 후 누락된 항목의 filePath 제거
-//        previewDataUrl 또는 url 폴백이 있는 이미지는 유지 (썸네일 끊기지 않음)
-//        previewDataUrl/url 모두 없으면 해당 이미지 항목 자체 제거
-// ✅ [v2.7.93] cleanup 키 v2로 변경 — 모든 사용자에게 1회 더 강제 실행 (사용자 보고 ERR_FILE_NOT_FOUND 다발)
-const STALE_IMAGE_CLEANUP_DONE_KEY = 'naver_blog_posts_stale_image_cleanup_done_v2';
-const OLD_CLEANUP_KEY_V1 = 'naver_blog_posts_stale_image_cleanup_done_v1';
-let staleImageCleanupRunning = false;
-export async function cleanupStaleImageReferences(): Promise<void> {
-  if (staleImageCleanupRunning) return;
-  // ✅ [v2.10.106] 1회 실행 락 *제거* — 매 앱 시작마다 cleanup 실행.
-  //   sonnet agent 분석: 이전엔 done 플래그로 영구 skip → 새 글 생성/삭제 시 stale 누적.
-  //   ERR_FILE_NOT_FOUND 콘솔 폭주 원인. 락 제거하면 매 시작 시 자동 정리.
-  // 기존 v1/v2 플래그가 있으면 제거 (legacy cleanup)
-  if (localStorage.getItem(OLD_CLEANUP_KEY_V1)) {
-    localStorage.removeItem(OLD_CLEANUP_KEY_V1);
-  }
-  if (localStorage.getItem(STALE_IMAGE_CLEANUP_DONE_KEY)) {
-    localStorage.removeItem(STALE_IMAGE_CLEANUP_DONE_KEY);
-  }
-  staleImageCleanupRunning = true;
-  try {
-    const api = (window as any).api;
-    if (!api?.checkFileExistsBatch && !api?.checkFileExists) return;
-
-    const raw = localStorage.getItem(GENERATED_POSTS_KEY);
-    if (!raw) return;
-
-    const posts: GeneratedPost[] = JSON.parse(raw);
-
-    // ✅ [v2.10.107] batch 검증 — 1 IPC로 *모든* filePath 한 번에 확인.
-    //   이전: 글 1000장 × 10 이미지 = 10,000 IPC → 수 초~수십 초. setTimeout 3초로 미루던 원인.
-    //   batch: 1 IPC + fs.existsSync 일괄 → 100ms 이내. 글 목록 렌더 *전*에 await 가능.
-
-    // 경로 정규화 함수 — file:/// prefix + URL escape + slash 통일
-    // [v2.10.110] hot-path try/catch 제거 — %xx 패턴 사전 검사로 decodeURIComponent 호출 자체 회피.
-    //   Agent S ERR-7: hot 루프에서 try/catch는 V8 deopt + 잠재 Error 객체 생성 비용.
-    const hasPercentEscape = /%[0-9a-fA-F]{2}/;
-    const normalize = (p: string): string => {
-      let n = String(p);
-      if (n.startsWith('file:///')) n = n.slice(8);
-      else if (n.startsWith('file://')) n = n.slice(7);
-      if (hasPercentEscape.test(n)) {
-        try { n = decodeURIComponent(n); } catch { /* keep raw */ }
-      }
-      n = n.replace(/\//g, '\\');
-      return n;
-    };
-
-    // 외부 Desktop/temp 경로 감지 (즉시 차단, IPC 안 함)
-    const isExternalPath = (filePath: string): boolean => {
-      const lower = String(filePath).toLowerCase();
-      return lower.includes('\\desktop\\') || lower.includes('/desktop/') ||
-             lower.includes('\\temp\\') || lower.includes('/tmp/');
-    };
-
-    // 1단계: 검증 필요한 모든 filePath 수집 + 인덱스 매핑
-    const checkRequests: Array<{ postIdx: number; imgIdx: number; normalized: string }> = [];
-    for (let pi = 0; pi < posts.length; pi++) {
-      const post = posts[pi];
-      if (!Array.isArray(post.images)) continue;
-      for (let ii = 0; ii < post.images.length; ii++) {
-        const img = post.images[ii] as any;
-        if (!img) continue;
-        const filePath = img.filePath || img.savedToLocal;
-        if (!filePath) continue;
-        if (isExternalPath(filePath)) {
-          // 외부 경로는 즉시 false 처리 — IPC 안 함
-          continue;
-        }
-        checkRequests.push({ postIdx: pi, imgIdx: ii, normalized: normalize(filePath) });
-      }
-    }
-
-    // 2단계: batch IPC 1회 호출
-    let existsResults: boolean[] = [];
-    if (checkRequests.length > 0) {
-      if (api.checkFileExistsBatch) {
-        existsResults = await api.checkFileExistsBatch(checkRequests.map((r) => r.normalized));
-      } else {
-        // Fallback: 개별 호출 (구버전 호환)
-        for (const req of checkRequests) {
-          try { existsResults.push(await api.checkFileExists(req.normalized)); }
-          catch { existsResults.push(true); /* 보수적 유지 */ }
-        }
-      }
-    }
-
-    // 3단계: 결과 적용 + posts 데이터 재구성
-    let droppedRefs = 0;
-    let droppedImages = 0;
-    const existsMap = new Map<string, boolean>();
-    for (let i = 0; i < checkRequests.length; i++) {
-      const key = `${checkRequests[i].postIdx}:${checkRequests[i].imgIdx}`;
-      existsMap.set(key, !!existsResults[i]);
-    }
-
-    for (let pi = 0; pi < posts.length; pi++) {
-      const post = posts[pi];
-      if (!Array.isArray(post.images) || post.images.length === 0) continue;
-      const cleaned: any[] = [];
-      for (let ii = 0; ii < post.images.length; ii++) {
-        const img = post.images[ii] as any;
-        if (!img) continue;
-        const filePath = img.filePath || img.savedToLocal;
-        if (!filePath) { cleaned.push(img); continue; }
-
-        const external = isExternalPath(filePath);
-        const exists = external ? false : (existsMap.get(`${pi}:${ii}`) ?? true);
-
-        if (exists) {
-          cleaned.push(img);
-        } else {
-          const hasFallback = !!(img.previewDataUrl || img.url);
-          if (hasFallback) {
-            const next = { ...img };
-            delete next.filePath;
-            delete next.savedToLocal;
-            cleaned.push(next);
-            droppedRefs++;
-          } else {
-            droppedImages++;
-          }
-        }
-      }
-      post.images = cleaned;
-    }
-
-    if (droppedRefs > 0 || droppedImages > 0) {
-      safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts)); _invalidatePostsCache();
-      console.log(`[StaleImageCleanup] 🧹 batch: ${droppedRefs}개 stale filePath + ${droppedImages}개 이미지 항목 (1 IPC)`);
-    }
-  } catch (err) {
-    console.warn('[StaleImageCleanup] 정리 실패 (무시):', err);
-  } finally {
-    staleImageCleanupRunning = false;
-  }
-}
 
 // ═══════════════════════════════════════════════════════════════════
 // CRUD 함수
@@ -466,16 +327,7 @@ export function saveGeneratedPostFromData(
     const rawCategory = String(overrides?.category || categoryFromContent || categoryFromUI || '').trim();
     const resolvedCategory = normalizeGeneratedPostCategoryKey(rawCategory);
 
-    const normalizedImages = (images || []).map((img: any) => ({
-      heading: img.heading || '',
-      provider: img.provider || img.source || img.engine || 'unknown',
-      filePath: img.filePath || '',
-      previewDataUrl: img.previewDataUrl || img.url || img.filePath || '',
-      url: img.url || img.link || img.previewDataUrl || img.filePath || '',
-      thumbnail: img.thumbnail || '',
-      savedToLocal: img.savedToLocal || false,
-      isThumbnail: img.isThumbnail || false, // ✅ [2026-03-09 FIX] 썸네일 플래그 보존
-    }));
+    const normalizedImages = (images || []).map(normalizeImageForStorage);
 
     // ✅ [2026-03-29 FIX] localStorage 할당량 초과 방지: structuredContent 경량화
     // ✅ [v2.10.286 BUG-FIX] 미리보기에서 본문이 안 보이는 회귀 — heading.content를 lightHeadings에서 누락했기 때문.
@@ -671,15 +523,7 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
       return Array.isArray(generatedImages) ? generatedImages : [];
     })();
 
-    const normalizedImagesForSave = (imagesForSave || []).map((img: any) => ({
-      heading: img.heading || '',
-      provider: img.provider || img.source || img.engine || 'unknown',
-      filePath: img.filePath || img.url || img.previewDataUrl || '',
-      previewDataUrl: img.previewDataUrl || img.url || img.filePath || '',
-      url: img.url || img.link || img.previewDataUrl || img.filePath || '',
-      thumbnail: img.thumbnail || '',
-      savedToLocal: img.savedToLocal || false,
-    }));
+    const normalizedImagesForSave = (imagesForSave || []).map(normalizeImageForStorage);
 
     // ✅ [2026-01-22] 현재 계정 ID 가져오기
     const currentNaverId = getCurrentNaverId();
@@ -838,16 +682,7 @@ export function updatePostImages(postId: string, images: any[]): void {
     const post = posts.find(p => p.id === postId);
     if (post) {
       // 이미지 정보 저장 (URL, provider, heading 등)
-      post.images = images.map((img: any) => ({
-        heading: img.heading || '',
-        provider: img.provider || 'unknown',
-        // ✅ 미리보기에서 필요한 필드 보존
-        filePath: img.filePath || '',
-        previewDataUrl: img.previewDataUrl || '',
-        url: img.url || img.link || img.previewDataUrl || img.filePath || '',
-        thumbnail: img.thumbnail || '',
-        savedToLocal: img.savedToLocal || false,
-      }));
+      post.images = images.map(normalizeImageForStorage);
       post.imageCount = images.length;
       post.updatedAt = new Date().toISOString();
 

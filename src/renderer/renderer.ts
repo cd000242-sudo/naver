@@ -1,6 +1,7 @@
-// ✅ [v2.10.214] 최상위 버전 검증 로그 — 사용자 콘솔에 반드시 보여야 함
-//   안 보이면 사용자가 이 버전 *설치 안 함* 확정
-console.log('%c🚀 Better Life Naver v2.10.214 RENDERER STARTED', 'background: gold; color: black; font-size: 18px; font-weight: bold; padding: 8px 16px; border-radius: 6px');
+// [v-auto-sync] Top-level version banner — must appear in user console on every load.
+//   If missing, user has NOT installed this build.
+import { APP_VERSION } from '../runtime/version.generated.js';
+console.log(`%c🚀 Better Life Naver v${APP_VERSION} RENDERER STARTED`, 'background: gold; color: black; font-size: 18px; font-weight: bold; padding: 8px 16px; border-radius: 6px');
 
 import type { StructuredContent, ImagePlan, HeadingPlan } from '../contentGenerator.js';
 // ✅ [v2.10.335] 나노바나나 3종 분리 — provider 저장값 1회성 마이그레이션
@@ -126,7 +127,6 @@ import {
   showPostSelectionModal,
   migratePostCategories, ensureCategoryMigration,
   migrateAccountPostsToGlobal, migratePostsToPerAccount, backfillNaverIdForLegacyPosts,
-  cleanupStaleImageReferences,
   normalizeGeneratedPostCategoryKey, getGeneratedPostCategoryLabel,
   isGeneratedPostCategoryCollapsed, setGeneratedPostCategoryCollapsed,
 } from './modules/postManager.js';
@@ -2729,18 +2729,7 @@ async function initializeApplication(): Promise<void> {
     _perfMark('getConfig 실패 (무시)');
   }
 
-  // [v2.10.110] cleanupStaleImageReferences를 백그라운드로 — 초반 1분 freeze 핵심 원인 해소.
-  //   원래 await: 글 N개 × 이미지 M개 = N×M fs.existsSync IPC → main process sync block.
-  //   사용자 보고: "로그인 후 1분 응답없음". startup await가 직접 원인.
-  //   대안: postListUI:v2.10.108이 자체 batch 검증 — startup cleanup 없어도 broken img 자동 처리.
-  //   setTimeout(500)으로 init 완료 후 백그라운드 실행 → 사용자 즉시 사용 가능.
-  // [v2.10.266] 500ms → 3000ms — 사용자 첫 동작 시점(3초)까지 cleanup 미루기.
-  //   explorer 진단: 500ms 버퍼링 후 N×M fs.existsSync IPC가 main thread 점유 → 시작 3초 freeze.
-  //   사용자 첫 액션은 보통 3~5초 이후 — cleanup이 그 사이 끝나도 늦지 않음.
-  setTimeout(() => {
-    cleanupStaleImageReferences().catch((e) => console.warn('[Init] background cleanup 실패:', e));
-  }, 3000);
-  _perfMark('cleanupStaleImages → background (await 제거)');
+  _perfMark('cleanupStaleImages → removed (SPEC-IMAGE-MODEL-001 Phase 7a)');
 
   initUnifiedTab(); _perfMark('initUnifiedTab'); await _yieldIfNeeded();
   initImageLibrary(); _perfMark('initImageLibrary'); await _yieldIfNeeded();
@@ -2783,7 +2772,7 @@ async function initializeApplication(): Promise<void> {
   runWhenIdle(() => {
     try {
       refreshGeneratedPostsList();
-      console.warn('[Init] 생성된 글 목록 강제 재로드 완료 (v2.10.94)');
+      console.warn(`[Init] 생성된 글 목록 강제 재로드 완료 (v${APP_VERSION})`);
     } catch (e) {
       console.warn('[Init] 글 목록 재로드 실패 (무시):', e);
     }

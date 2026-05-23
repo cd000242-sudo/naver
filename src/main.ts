@@ -2632,6 +2632,13 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
 
   console.log('[Main] automation:run  AutomationService.executePostCycle() 위임');
 
+  // SPEC-IMAGE-MODEL-001 Phase 5 — materialize blob-id images to temp files for automation god file compat.
+  if (payload.generatedImages && payload.generatedImages.length > 0) {
+    const { materializePublishingImages } = await import('./main/utils/materializePublishingImages.js');
+    const { getBlobStoreInstance } = await import('./main/blobStore/singleton.js');
+    payload.generatedImages = await materializePublishingImages(payload.generatedImages, getBlobStoreInstance()) as typeof payload.generatedImages;
+  }
+
   // [SPEC-PROMPT-2026-REFRESH Phase 2 / v2.10.233] 발행 시간 골든존 가드
   //   배경: 00~08시 발행은 초기 3시간 평가창에서 유입 0 → 노출 페널티 -40% (weolbu·adsensefarm 실측).
   //   동작: 골든존(09~22시) 외 시각이면 console.warn + sendLog로 progress modal에 경고 표시.

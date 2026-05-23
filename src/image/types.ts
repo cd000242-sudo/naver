@@ -37,12 +37,48 @@ export interface GenerateImagesOptions {
 }
 
 export interface GeneratedImage {
+  // ---- new fields (SPEC-IMAGE-MODEL-001 Phase 2) ----
+  // NOTE: optional now for safe backward compat with legacy in-memory objects
+  // that did not go through writeImageFile in Phase 2+.
+  // These will become required after Phase 6 migration completes (Phase 7 upgrade).
+  /** ULID — primary key for blob store lookup. Non-optional after Phase 6 migration. */
+  blobId?: string;
+  /** MIME type: image/png | image/jpeg | image/webp. Non-optional after Phase 6 migration. */
+  mimeType?: string;
+  /** Image width in pixels. Non-optional after Phase 6 migration. */
+  width?: number;
+  /** Image height in pixels. Non-optional after Phase 6 migration. */
+  height?: number;
+  /** Byte size for integrity check. Non-optional after Phase 6 migration. */
+  byteSize?: number;
+  /** SHA-256 hex digest — dedup key for migration. Non-optional after Phase 6 migration. */
+  sha256?: string;
+  /** Creation timestamp (epoch ms). Non-optional after Phase 6 migration. */
+  createdAt?: number;
+
+  // ---- existing (legacy, deprecated by SPEC-IMAGE-MODEL-001 Phase 7) ----
   heading: string;
+  /**
+   * @deprecated SPEC-IMAGE-MODEL-001 Phase 7. Use `blobId` for new code.
+   * Absolute fs path — superseded by blob store. Will be removed after migration usage stabilizes.
+   */
   filePath: string;
+  /**
+   * @deprecated SPEC-IMAGE-MODEL-001 Phase 7. Use `blobId` + blob.read() for new code.
+   * Base64 data URL — superseded by blob store. Will be removed after migration usage stabilizes.
+   */
   previewDataUrl: string;
   provider: ImageProvider;
+  /**
+   * @deprecated SPEC-IMAGE-MODEL-001 Phase 7. Use `blobId` for new code.
+   * Documents mirror path — superseded by blob store. Will be removed after migration usage stabilizes.
+   */
   savedToLocal?: string;
-  url?: string; // ✅ 이미지 URL (수집만 할 때 사용)
+  /**
+   * @deprecated SPEC-IMAGE-MODEL-001 Phase 7. Use `blobId` for new code.
+   * http(s)/blob display URL — superseded by blob store. Will be removed after migration usage stabilizes.
+   */
+  url?: string;
   sourceUrl?: string; // ✅ 원본 출처 URL (alt 태그에 출처 표시용)
   originalIndex?: number; // ✅ [2026-01-24] 원래 items 배열의 인덱스 (필터링 후에도 위치 추적)
   isThumbnail?: boolean; // ✅ [2026-03-18 FIX] 썸네일 여부 (서론 위 이미지 배치에 사용)

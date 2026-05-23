@@ -11,7 +11,7 @@ type AutomationPayload = {
   lines?: string[];
   selectedHeadings?: string[];
   structuredContent?: StructuredContent;
-  generatedImages?: Array<{ heading: string; filePath: string; provider: string; alt?: string; caption?: string }>;
+  generatedImages?: Array<{ heading: string; filePath: string; provider: string; alt?: string; caption?: string; blobId?: string }>;
   hashtags?: string[];
   generator?: 'gemini' | 'openai' | 'claude' | 'perplexity';
   keywords?: string[];
@@ -1175,6 +1175,32 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // ✅ [2026-02-08] 테스트 이미지 생성 API - engine, textOverlay 파라미터 추가
   generateTestImage: (options: { style: string; ratio: string; prompt: string; engine?: string; textOverlay?: { enabled: boolean; text: string } }): Promise<{ success: boolean; path?: string; previewDataUrl?: string; error?: string }> =>
     ipcRenderer.invoke('generate-test-image', options),
+
+  // [SPEC-IMAGE-MODEL-001 Phase 1] blob store IPC — main process manages bytes, renderer uses blob-ids only.
+  blobs: {
+    read: (blobId: string) =>
+      ipcRenderer.invoke('blob:read', blobId),
+    has: (blobId: string) =>
+      ipcRenderer.invoke('blob:has', blobId),
+    hasMany: (blobIds: string[]) =>
+      ipcRenderer.invoke('blob:hasMany', blobIds),
+    write: (bytes: Uint8Array, meta: { mimeType: string; width: number; height: number }) =>
+      ipcRenderer.invoke('blob:write', bytes, meta),
+    materializeTempFile: (blobId: string) =>
+      ipcRenderer.invoke('blob:materializeTempFile', blobId),
+  },
+
+  // [SPEC-IMAGE-MODEL-001 Phase 6] migration IPC — dry-run, apply, restore
+  migration: {
+    imageModelV1: {
+      dryRun: (input: { posts: any[] }) =>
+        ipcRenderer.invoke('migration:imageModelV1:dryRun', input),
+      apply: (input: { posts: any[] }) =>
+        ipcRenderer.invoke('migration:imageModelV1:apply', input),
+      restore: (backupPath: string) =>
+        ipcRenderer.invoke('migration:imageModelV1:restore', backupPath),
+    },
+  },
 
   // ✅ [SPEC-IMAGE-RECOVERY-001] 차단형 모달 사용자 선택 결과 송신
   send: (channel: string, payload: unknown) => {

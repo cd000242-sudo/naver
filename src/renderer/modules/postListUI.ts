@@ -3,6 +3,8 @@
 // renderer.ts에서 추출된 글 목록 표시/검색/필터/재사용 기능
 // ═══════════════════════════════════════════════════════════════════
 
+import { extractDisplayUrl, validateBlobReferences } from '../utils/imageDisplayHelpers.js';
+
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -70,48 +72,13 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
   // ✅ [2026-01-23 FIX] 모든 계정의 글을 표시 (계정별 분리로 인해 안 보이는 문제 해결)
   let posts = loadAllGeneratedPosts();
 
-  // ✅ [v2.10.108] 렌더 *전* batch 검증 — file:// filePath 모두 존재 여부 확인.
-  //   존재 안 하는 filePath는 메모리 posts 데이터에서 *즉시* 제거 → 렌더 시 broken src 없음.
+  // SPEC-IMAGE-MODEL-001 Phase 4 — blob existence batch check (replaces fs.existsSync path validation).
+  // Legacy filePath-based posts: not touched here. They fall through Phase 3 fallback (which already
+  // strips absolute paths from display fields) and Phase 6 migration (which converts them to blob-id).
   try {
-    const api = (window as any).api;
-    if (api?.checkFileExistsBatch) {
-      const paths: string[] = [];
-      const refs: Array<{ img: any }> = [];
-      const normalize = (p: string): string => {
-        let n = String(p);
-        if (n.startsWith('file:///')) n = n.slice(8);
-        else if (n.startsWith('file://')) n = n.slice(7);
-        try { n = decodeURIComponent(n); } catch { /* keep */ }
-        return n.replace(/\//g, '\\');
-      };
-      for (const post of posts) {
-        for (const img of (post.images || []) as any[]) {
-          const fp = img?.filePath || img?.savedToLocal;
-          if (fp && (String(fp).startsWith('file:') || /^[A-Z]:[/\\]/i.test(String(fp)))) {
-            paths.push(normalize(String(fp)));
-            refs.push({ img });
-          }
-        }
-      }
-      if (paths.length > 0) {
-        const existsArr = await api.checkFileExistsBatch(paths);
-        for (let i = 0; i < refs.length; i++) {
-          if (!existsArr[i]) {
-            // 메모리 데이터에서만 제거 (localStorage는 cleanupStaleImageReferences가 별도 처리)
-            delete refs[i].img.filePath;
-            delete refs[i].img.savedToLocal;
-            // [v2.10.114] url 필드도 broken file:// 경로면 제거 — renderer fallback (firstImage.url)
-            //   ERR_FILE_NOT_FOUND 잔존 원인 (A1 회귀 검증 발견)
-            const urlStr = typeof refs[i].img.url === 'string' ? refs[i].img.url : '';
-            if (urlStr.startsWith('file:') || /^[A-Z]:[/\\]/i.test(urlStr)) {
-              delete refs[i].img.url;
-            }
-          }
-        }
-      }
-    }
+    await validateBlobReferences(posts);
   } catch (e) {
-    console.warn('[postListUI] batch validate 실패 (무시):', e);
+    console.warn('[postListUI] blob batch validate failed (ignored):', e);
   }
   const totalCount = posts.length;
 
@@ -210,9 +177,7 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
 
   const renderGalleryItem = (post: any): string => {
     const firstImage = post.images && post.images.length > 0 ? post.images[0] : null;
-    const rawThumbnail = firstImage
-      ? (firstImage.previewDataUrl || firstImage.filePath || firstImage.url)
-      : null;
+    const rawThumbnail = extractDisplayUrl(firstImage);
     // [Phase 1-2/v2.10.135] 깨진 이미지 경로는 <img> 렌더 자체를 스킵 → ERR_FILE_NOT_FOUND 영구 차단.
     //   onerror에서 한 번 markBrokenImage 등록되면 다음 렌더부터 placeholder만 표시.
     const isBroken = rawThumbnail && typeof (window as any).isBrokenImage === 'function'
@@ -274,9 +239,7 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
       : safeContent;
 
     const firstImage = post.images && post.images.length > 0 ? post.images[0] : null;
-    const rawThumbnail = firstImage
-      ? (firstImage.previewDataUrl || firstImage.filePath || firstImage.url)
-      : null;
+    const rawThumbnail = extractDisplayUrl(firstImage);
     // [Phase 1-2/v2.10.135] 동일 패턴 — broken 등록된 경로는 <img> 스킵.
     const isBroken = rawThumbnail && typeof (window as any).isBrokenImage === 'function'
       ? (window as any).isBrokenImage(rawThumbnail) : false;

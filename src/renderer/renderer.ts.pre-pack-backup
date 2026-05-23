@@ -1,8 +1,11 @@
-// ✅ [v2.10.214] 최상위 버전 검증 로그 — 사용자 콘솔에 반드시 보여야 함
-//   안 보이면 사용자가 이 버전 *설치 안 함* 확정
-console.log('%c🚀 Better Life Naver v2.10.214 RENDERER STARTED', 'background: gold; color: black; font-size: 18px; font-weight: bold; padding: 8px 16px; border-radius: 6px');
+// [v-auto-sync] Top-level version banner — must appear in user console on every load.
+//   If missing, user has NOT installed this build.
+import { APP_VERSION } from '../runtime/version.generated.js';
+console.log(`%c🚀 Better Life Naver v${APP_VERSION} RENDERER STARTED`, 'background: gold; color: black; font-size: 18px; font-weight: bold; padding: 8px 16px; border-radius: 6px');
 
 import type { StructuredContent, ImagePlan, HeadingPlan } from '../contentGenerator.js';
+// ✅ [v2.10.335] 나노바나나 3종 분리 — provider 저장값 1회성 마이그레이션
+import { migrateImageProviderStorage } from '../runtime/imageProviderMigration.js';
 // ✅ [2026-02-26 모듈화] 프롬프트 번역 모듈
 import { generateEnglishPromptForHeading, decomposeKoreanCompound, koreanMorphemes, getTranslationPrompt, cacheTranslation, _promptTranslationCache } from './modules/promptTranslation.js';
 // ✅ [2026-02-26 모듈화] 페이월 시스템 모듈
@@ -124,7 +127,6 @@ import {
   showPostSelectionModal,
   migratePostCategories, ensureCategoryMigration,
   migrateAccountPostsToGlobal, migratePostsToPerAccount, backfillNaverIdForLegacyPosts,
-  cleanupStaleImageReferences,
   normalizeGeneratedPostCategoryKey, getGeneratedPostCategoryLabel,
   isGeneratedPostCategoryCollapsed, setGeneratedPostCategoryCollapsed,
 } from './modules/postManager.js';
@@ -2637,6 +2639,14 @@ async function initializeApplication(): Promise<void> {
   }
   (window as any)._appInitialized = true;
 
+  // ✅ [v2.10.335] 나노바나나 3종 분리 — 레거시 provider 저장값 1회성 마이그레이션.
+  //   다른 어떤 코드가 이미지 소스 localStorage를 읽기 전에 최우선 실행해야 한다.
+  try {
+    migrateImageProviderStorage();
+  } catch (e) {
+    console.warn('[Init] 이미지 provider 마이그레이션 스킵:', e);
+  }
+
   // ═══════════════════════════════════════════════════════════════════════
   // ✅ [v2.10.90 PerfDebug] 초기화 단계별 시간 측정.
   //   각 단계의 소요 시간을 콘솔에 출력. >100ms는 🐌 SLOW로 강조.
@@ -2719,18 +2729,7 @@ async function initializeApplication(): Promise<void> {
     _perfMark('getConfig 실패 (무시)');
   }
 
-  // [v2.10.110] cleanupStaleImageReferences를 백그라운드로 — 초반 1분 freeze 핵심 원인 해소.
-  //   원래 await: 글 N개 × 이미지 M개 = N×M fs.existsSync IPC → main process sync block.
-  //   사용자 보고: "로그인 후 1분 응답없음". startup await가 직접 원인.
-  //   대안: postListUI:v2.10.108이 자체 batch 검증 — startup cleanup 없어도 broken img 자동 처리.
-  //   setTimeout(500)으로 init 완료 후 백그라운드 실행 → 사용자 즉시 사용 가능.
-  // [v2.10.266] 500ms → 3000ms — 사용자 첫 동작 시점(3초)까지 cleanup 미루기.
-  //   explorer 진단: 500ms 버퍼링 후 N×M fs.existsSync IPC가 main thread 점유 → 시작 3초 freeze.
-  //   사용자 첫 액션은 보통 3~5초 이후 — cleanup이 그 사이 끝나도 늦지 않음.
-  setTimeout(() => {
-    cleanupStaleImageReferences().catch((e) => console.warn('[Init] background cleanup 실패:', e));
-  }, 3000);
-  _perfMark('cleanupStaleImages → background (await 제거)');
+  _perfMark('cleanupStaleImages → removed (SPEC-IMAGE-MODEL-001 Phase 7a)');
 
   initUnifiedTab(); _perfMark('initUnifiedTab'); await _yieldIfNeeded();
   initImageLibrary(); _perfMark('initImageLibrary'); await _yieldIfNeeded();
@@ -2773,7 +2772,7 @@ async function initializeApplication(): Promise<void> {
   runWhenIdle(() => {
     try {
       refreshGeneratedPostsList();
-      console.warn('[Init] 생성된 글 목록 강제 재로드 완료 (v2.10.94)');
+      console.warn(`[Init] 생성된 글 목록 강제 재로드 완료 (v${APP_VERSION})`);
     } catch (e) {
       console.warn('[Init] 글 목록 재로드 실패 (무시):', e);
     }
@@ -7751,11 +7750,10 @@ function initUnifiedImageSourceSelection(): void {
       if (check) (check as HTMLElement).style.display = 'flex';
 
       // ✅ [2026-02-16 FIX] 풀오토 전용 이미지 소스 저장 — 'saved'/'collected'는 AI 엔진이 아니므로 제외
-      // ✅ [v2.10.71] 별칭 정규화 (nano-banana-2 → nano-banana-pro)
+      // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 정규화 제거 (각각 별개 모델)
       if (source && source !== 'saved' && source !== 'collected') {
-        const normalizedSource = source === 'nano-banana-2' ? 'nano-banana-pro' : source;
-        localStorage.setItem('fullAutoImageSource', normalizedSource);
-        console.log(`[FullAuto] 풀오토 전용 이미지 소스 저장: ${normalizedSource}${normalizedSource !== source ? ` (정규화: "${source}" → "${normalizedSource}")` : ''}`);
+        localStorage.setItem('fullAutoImageSource', source);
+        console.log(`[FullAuto] 풀오토 전용 이미지 소스 저장: ${source}`);
       } else if (source === 'saved' || source === 'collected') {
         // 저장된 이미지/수집 이미지 선택 시 fullAutoImageSource 제거 → getImageSource()가 UI 버튼 기반으로 동작
         localStorage.removeItem('fullAutoImageSource');
@@ -8888,9 +8886,9 @@ async function regenerateWithNewAI(index: number, heading: string): Promise<void
             newImageUrl = res.images[0].previewDataUrl || res.images[0].filePath;
             successProvider = 'prodia';
           }
-        } else if (selectedSource === 'nano-banana-pro' || selectedSource === 'pollinations') {
+        } else if (selectedSource === 'nano-banana-2' || selectedSource === 'nano-banana-pro' || selectedSource === 'nano-banana' || selectedSource === 'pollinations') {
           newImageUrl = await generateNanoBananaProImage(englishPrompt, true);
-          successProvider = 'nano-banana-pro';
+          successProvider = selectedSource === 'pollinations' ? 'nano-banana-2' : selectedSource;
         } else if (selectedSource === 'falai') {
           const res = await generateImagesWithCostSafety({
             provider: 'falai',
@@ -8911,16 +8909,16 @@ async function regenerateWithNewAI(index: number, heading: string): Promise<void
       }
     }
 
-    // 1. Nano Banana Pro (Gemini 기반, 무료)
+    // 1. Nano Banana 2 (Gemini 3.1 Flash, recommended default)
     try {
-      appendLog(`[${index + 1}] Nano Banana Pro 시도 중...`);
+      appendLog(`[${index + 1}] Nano Banana 2 시도 중...`);
       newImageUrl = await generateNanoBananaProImage(englishPrompt, true);
       if (newImageUrl) {
-        successProvider = 'nano-banana-pro';
-        appendLog(`✅ [${index + 1}] Nano Banana Pro 성공!`);
+        successProvider = 'nano-banana-2';
+        appendLog(`✅ [${index + 1}] Nano Banana 2 성공!`);
       }
     } catch (e) {
-      console.log('[Image] Nano Banana Pro 실패, 다음 시도...');
+      console.log('[Image] Nano Banana 2 실패, 다음 시도...');
     }
 
     // 2. Pollinations (무료 FLUX 폴백)
