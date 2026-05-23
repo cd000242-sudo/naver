@@ -1113,30 +1113,21 @@
                 </div>
             </div>
 
-            <!-- TAB: Income (Phase 6-C) -->
+            <!-- TAB: Income (Phase 6-C v2) -->
             <div class="tab-panel" id="tab-income">
                 <div class="page-header">
                     <h1>수익 인증</h1>
-                    <p>구매자 수익 인증 카드 등록·삭제. community.html 수익 인증 탭에 즉시 반영됩니다.</p>
+                    <p>구매자가 community.html에서 제출한 수익 인증을 승인·거절·수정·삭제합니다. <strong>pending</strong>은 community에 노출 안 됨.</p>
                 </div>
-                <div class="form-card" style="padding: 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; margin-bottom: 24px;">
-                    <h3 style="margin-bottom: 16px; font-size: 1.05rem;">💰 새 수익 인증 등록</h3>
-                    <div style="display: grid; grid-template-columns: 80px 1fr 1fr 120px; gap: 12px; margin-bottom: 10px;">
-                        <input type="text" id="income-emoji" placeholder="💰" maxlength="4" style="padding: 10px; border-radius: 8px; text-align: center; font-size: 1.4rem;">
-                        <input type="text" id="income-amount" placeholder="금액 (예: 월 127만원)" style="padding: 10px; border-radius: 8px;">
-                        <input type="text" id="income-author" placeholder="작성자 (예: 블로그왕 K님)" style="padding: 10px; border-radius: 8px;">
-                        <input type="text" id="income-date" placeholder="2026.05" style="padding: 10px; border-radius: 8px;">
-                    </div>
-                    <textarea id="income-desc" placeholder="설명 (1-2줄, 어떤 제품·어떤 방식으로 수익화)" rows="3" style="width: 100%; padding: 10px; border-radius: 8px; font-family: inherit; margin-bottom: 8px;"></textarea>
-                    <input type="text" id="income-tags" placeholder="태그 (콤마 구분: Better Life Naver,쿠팡파트너스,7개 블로그)" style="width: 100%; padding: 10px; border-radius: 8px; margin-bottom: 12px;">
-                    <div style="display: flex; gap: 8px;">
-                        <button class="btn btn-gold" onclick="addIncome()">💾 등록</button>
-                        <button class="btn" onclick="resetIncomeForm()">↩️ 초기화</button>
-                        <button class="btn" onclick="loadIncome()" style="margin-left: auto;">🔄 새로고침</button>
-                    </div>
+                <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                    <button class="btn" onclick="loadIncomeAdmin('all')" id="ic-filter-all">전체</button>
+                    <button class="btn" onclick="loadIncomeAdmin('pending')" id="ic-filter-pending">⏳ 대기</button>
+                    <button class="btn" onclick="loadIncomeAdmin('approved')" id="ic-filter-approved">✅ 승인</button>
+                    <button class="btn" onclick="loadIncomeAdmin('rejected')" id="ic-filter-rejected">🚫 거절</button>
+                    <button class="btn" onclick="loadIncomeAdmin(currentIncomeFilter)" style="margin-left: auto;">🔄 새로고침</button>
                 </div>
                 <div id="income-table-body">
-                    <div class="loading-spinner"><div class="spinner-ring"></div> 수익 인증 목록 로딩 중...</div>
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>
                 </div>
             </div>
 
@@ -1276,7 +1267,7 @@
             if (tabId === 'trial') loadTrialUsers();
             if (tabId === 'bank') loadBankOrders();
             if (tabId === 'notices') loadNotices();
-            if (tabId === 'income') loadIncome();
+            if (tabId === 'income') loadIncomeAdmin(currentIncomeFilter);
             if (tabId === 'reviews') loadReviewsAdmin(currentReviewFilter);
             if (tabId === 'tips') loadTipsAdmin(currentTipFilter);
         }
@@ -1378,16 +1369,27 @@
             }
         }
 
-        // ===== PHASE 6-C: INCOME =====
-        async function loadIncome() {
+        // ===== PHASE 6-C v2: INCOME ADMIN (approve/reject/edit/delete) =====
+        let currentIncomeFilter = 'pending';
+        async function loadIncomeAdmin(filter) {
+            currentIncomeFilter = filter || 'pending';
             const container = document.getElementById('income-table-body');
             container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>';
             try {
-                const res = await fetch(`${GAS_URL}?action=income-list`).then(r => r.json());
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'get-income-admin', adminToken: ADMIN_TOKEN }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
                 if (res.success === false) throw new Error(res.message || '응답 실패');
-                const list = res.income || [];
+                const all = res.income || [];
+                const list = currentIncomeFilter === 'all' ? all : all.filter(n => n.status === currentIncomeFilter);
+                ['all','pending','approved','rejected'].forEach(k => {
+                    const b = document.getElementById('ic-filter-' + k);
+                    if (b) b.style.background = (k === currentIncomeFilter) ? 'rgba(201,168,76,0.2)' : '';
+                });
                 if (list.length === 0) {
-                    container.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--text-secondary);">등록된 수익 인증이 없습니다. 위 폼에서 등록하세요.</div>';
+                    container.innerHTML = `<div style="padding: 32px; text-align: center; color: var(--text-secondary);">${currentIncomeFilter === 'all' ? '등록된 수익 인증이 없습니다.' : currentIncomeFilter + ' 상태가 없습니다.'}</div>`;
                     return;
                 }
                 container.innerHTML = list.map(n => `
@@ -1395,14 +1397,21 @@
                         <div style="font-size: 2.4rem; flex-shrink: 0;">${escapeHtml_(n.emoji)}</div>
                         <div style="flex: 1; min-width: 0;">
                             <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 4px; flex-wrap: wrap;">
+                                <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: ${REVIEW_STATUS_COLOR[n.status]}22; color: ${REVIEW_STATUS_COLOR[n.status]};">${REVIEW_STATUS_LABEL[n.status] || n.status}</span>
                                 <strong style="color: var(--gold-primary, #c9a84c);">${escapeHtml_(n.amount)}</strong>
                                 <span style="color: var(--text-secondary); font-size: 0.85rem;">${escapeHtml_(n.author)}</span>
+                                ${n.email ? `<span style="color: var(--text-muted); font-size: 0.78rem;">${escapeHtml_(n.email)}</span>` : ''}
                                 <span style="color: var(--text-muted); font-size: 0.8rem;">${escapeHtml_(n.date)}</span>
                                 <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: auto; font-family: monospace;">${escapeHtml_(n.id)}</span>
                             </div>
-                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">${escapeHtml_(n.desc)}</div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; white-space: pre-wrap;">${escapeHtml_(n.desc)}</div>
                             <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">${(n.tags || []).map(t => `<span style="padding: 2px 8px; border-radius: 10px; background: rgba(201,168,76,0.1); font-size: 0.72rem; color: var(--gold-primary, #c9a84c);">${escapeHtml_(t)}</span>`).join('')}</div>
-                            <button class="btn" onclick='deleteIncome("${escapeHtml_(n.id)}")'>🗑️ 삭제</button>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                ${n.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveIncome("${escapeHtml_(n.id)}")'>✅ 승인</button>` : ''}
+                                ${n.status !== 'rejected' ? `<button class="btn" onclick='rejectIncome("${escapeHtml_(n.id)}")'>🚫 거절</button>` : ''}
+                                <button class="btn" onclick='editIncomeFromBtn(${JSON.stringify(n).replace(/'/g, "&#39;")})'>✏️ 수정</button>
+                                <button class="btn" onclick='deleteIncome("${escapeHtml_(n.id)}")'>🗑️ 삭제</button>
+                            </div>
                         </div>
                     </div>
                 `).join('');
@@ -1410,55 +1419,45 @@
                 container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요.</small></div>`;
             }
         }
-        function resetIncomeForm() {
-            document.getElementById('income-emoji').value = '💰';
-            document.getElementById('income-amount').value = '';
-            document.getElementById('income-author').value = '';
-            const now = new Date();
-            document.getElementById('income-date').value = now.getFullYear() + '.' + String(now.getMonth() + 1).padStart(2, '0');
-            document.getElementById('income-desc').value = '';
-            document.getElementById('income-tags').value = '';
-        }
-        async function addIncome() {
-            const body = {
-                action: 'income-add',
-                adminToken: ADMIN_TOKEN,
-                emoji: document.getElementById('income-emoji').value.trim(),
-                amount: document.getElementById('income-amount').value.trim(),
-                author: document.getElementById('income-author').value.trim(),
-                date: document.getElementById('income-date').value.trim(),
-                desc: document.getElementById('income-desc').value.trim(),
-                tags: document.getElementById('income-tags').value.trim(),
-            };
-            if (!body.amount || !body.author) { showToast('❌ 금액과 작성자는 필수입니다'); return; }
+        async function approveIncome(id) {
             try {
-                const res = await fetch(GAS_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(body),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-                }).then(r => r.json());
+                const res = await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'income-approve', adminToken: ADMIN_TOKEN, id }), headers:{'Content-Type':'text/plain;charset=utf-8'} }).then(r => r.json());
                 if (res.success === false) throw new Error(res.message);
-                showToast('✅ 등록되었습니다');
-                resetIncomeForm();
-                loadIncome();
-            } catch (err) {
-                showToast('❌ 등록 실패: ' + err.message);
-            }
+                showToast('✅ 승인 완료'); loadIncomeAdmin(currentIncomeFilter);
+            } catch (err) { showToast('❌ 승인 실패: ' + err.message); }
+        }
+        async function rejectIncome(id) {
+            if (!confirm('이 수익 인증을 거절하시겠습니까?')) return;
+            try {
+                const res = await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'income-reject', adminToken: ADMIN_TOKEN, id }), headers:{'Content-Type':'text/plain;charset=utf-8'} }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 거절 완료'); loadIncomeAdmin(currentIncomeFilter);
+            } catch (err) { showToast('❌ 거절 실패: ' + err.message); }
         }
         async function deleteIncome(id) {
-            if (!confirm('이 수익 인증을 삭제하시겠습니까?\n(soft delete — 복구 가능)')) return;
+            if (!confirm('이 수익 인증을 영구 삭제(숨김)하시겠습니까?\n(soft delete — 시트에는 hidden=true)')) return;
             try {
-                const res = await fetch(GAS_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({ action: 'income-delete', adminToken: ADMIN_TOKEN, id: id }),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-                }).then(r => r.json());
+                const res = await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'income-delete', adminToken: ADMIN_TOKEN, id }), headers:{'Content-Type':'text/plain;charset=utf-8'} }).then(r => r.json());
                 if (res.success === false) throw new Error(res.message);
-                showToast('✅ 삭제 완료');
-                loadIncome();
-            } catch (err) {
-                showToast('❌ 삭제 실패: ' + err.message);
-            }
+                showToast('✅ 삭제 완료'); loadIncomeAdmin(currentIncomeFilter);
+            } catch (err) { showToast('❌ 삭제 실패: ' + err.message); }
+        }
+        function editIncomeFromBtn(n) {
+            // Inline edit via prompt() — minimal, fast, no extra modal markup
+            const emoji = prompt('이모지', n.emoji); if (emoji === null) return;
+            const amount = prompt('금액 (예: 월 127만원)', n.amount); if (amount === null) return;
+            const author = prompt('작성자', n.author); if (author === null) return;
+            const date = prompt('날짜 (예: 2026.05)', n.date); if (date === null) return;
+            const desc = prompt('설명', n.desc); if (desc === null) return;
+            const tags = prompt('태그 (콤마 구분)', (n.tags || []).join(',')); if (tags === null) return;
+            updateIncome(n.id, { emoji, amount, author, date, desc, tags });
+        }
+        async function updateIncome(id, fields) {
+            try {
+                const res = await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'income-update', adminToken: ADMIN_TOKEN, id, ...fields }), headers:{'Content-Type':'text/plain;charset=utf-8'} }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 수정 완료'); loadIncomeAdmin(currentIncomeFilter);
+            } catch (err) { showToast('❌ 수정 실패: ' + err.message); }
         }
 
         // ===== PHASE 6-D: REVIEWS ADMIN (approve / reject workflow) =====
@@ -1498,9 +1497,10 @@
                         </div>
                         <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml_(r.summary)}</div>
                         ${r.detail ? `<div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; white-space: pre-wrap;">${escapeHtml_(r.detail)}</div>` : ''}
-                        <div style="display: flex; gap: 8px;">
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                             ${r.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveReview("${escapeHtml_(r.timestamp)}")'>✅ 승인</button>` : ''}
                             ${r.status !== 'rejected' ? `<button class="btn" onclick='rejectReview("${escapeHtml_(r.timestamp)}")'>🚫 거절</button>` : ''}
+                            <button class="btn" onclick='editReviewFromBtn(${JSON.stringify(r).replace(/'/g, "&#39;")})'>✏️ 수정</button>
                         </div>
                     </div>
                 `).join('');
@@ -1521,6 +1521,20 @@
             } catch (err) {
                 showToast('❌ 승인 실패: ' + err.message);
             }
+        }
+        function editReviewFromBtn(r) {
+            const author = prompt('작성자', r.author); if (author === null) return;
+            const rating = prompt('별점 (1~5)', String(r.rating)); if (rating === null) return;
+            const summary = prompt('한줄 요약', r.summary); if (summary === null) return;
+            const detail = prompt('본문', r.detail); if (detail === null) return;
+            updateReview(r.timestamp, { author, rating: Number(rating) || r.rating, summary, detail });
+        }
+        async function updateReview(ts, fields) {
+            try {
+                const res = await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'review-update', adminToken: ADMIN_TOKEN, timestamp: ts, ...fields }), headers:{'Content-Type':'text/plain;charset=utf-8'} }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 수정 완료'); loadReviewsAdmin(currentReviewFilter);
+            } catch (err) { showToast('❌ 수정 실패: ' + err.message); }
         }
         async function rejectReview(ts) {
             if (!confirm('이 후기를 거절하시겠습니까?\n(rejected — 영구 차단, 복구는 시트에서 수동)')) return;
