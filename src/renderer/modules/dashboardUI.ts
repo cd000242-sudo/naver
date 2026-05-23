@@ -24,13 +24,38 @@ export function switchToScheduleTab() {
 }
 
 let clockIntervalId: ReturnType<typeof setInterval> | null = null;
+let clockVisibilityHandler: (() => void) | null = null;
+
+function startClockTicker() {
+    if (clockIntervalId) clearInterval(clockIntervalId);
+    clockIntervalId = setInterval(updateClock, 1000);
+}
+
+function stopClockTicker() {
+    if (clockIntervalId) {
+        clearInterval(clockIntervalId);
+        clockIntervalId = null;
+    }
+}
 
 // 메인 대시보드 초기화
 export function initDashboard() {
-    // 시계 업데이트
+    // 시계 업데이트 — 탭 hidden 시 ticker 일시정지로 idle CPU 절감.
     updateClock();
-    if (clockIntervalId) clearInterval(clockIntervalId);
-    clockIntervalId = setInterval(updateClock, 1000);
+    startClockTicker();
+
+    if (clockVisibilityHandler) {
+        document.removeEventListener('visibilitychange', clockVisibilityHandler);
+    }
+    clockVisibilityHandler = () => {
+        if (document.visibilityState === 'visible') {
+            updateClock();
+            startClockTicker();
+        } else {
+            stopClockTicker();
+        }
+    };
+    document.addEventListener('visibilitychange', clockVisibilityHandler);
 
     // 대시보드 통계 업데이트
     updateDashboardStats();
