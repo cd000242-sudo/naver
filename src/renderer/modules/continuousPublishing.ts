@@ -4651,6 +4651,13 @@ async function startContinuousPublishingV2(): Promise<void> {
       }
 
       item.status = 'completed';
+      // Memory hygiene: drop heavy payload references after success.
+      // Queue length is preserved (previous-post chaining uses idx > i lookups),
+      // but the LLM/image/links payload is freed so 1000-queue runs do not retain
+      // hundreds of MB of completed items. Callers only check status afterwards.
+      (item as any).structuredContent = undefined;
+      (item as any).collectedImages = undefined;
+      (item as any).additionalUrls = undefined;
       successCount++;
       _consecutiveFailCount = 0; // ✅ 성공 시 연속 실패 카운터 리셋
       _captchaFailCount = 0;     // ✅ [2026-03-23] 성공 시 캡차 실패 카운터도 리셋
