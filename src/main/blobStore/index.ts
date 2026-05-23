@@ -88,6 +88,9 @@ export function createBlobStore(backend: FsBackend): BlobStore {
 
   // In-memory sha256 → blobId dedup index (populated lazily on write).
   const sha256Index = new Map<string, string>();
+  // Per-blobId verification cache — skip re-hashing on subsequent read() when the
+  // blob bytes have already been integrity-checked in this process lifetime.
+  const verifiedBlobs = new Set<string>();
 
   async function loadMeta(blobId: string): Promise<BlobMeta | null> {
     const metaPath = metaFilePath(baseDir, blobId);
@@ -154,9 +157,14 @@ export function createBlobStore(backend: FsBackend): BlobStore {
     }
 
     // Integrity check: sha256 must match stored meta.
-    const actualHash = sha256Hex(new Uint8Array(buf));
-    if (actualHash !== meta.sha256) {
-      return { ok: false, reason: 'corrupt', placeholder: PLACEHOLDER_B64 };
+    // Skip rehashing when already verified in this process lifetime (1000-queue
+    // hot path saves ~25s of main-thread sha256 work per dry-run).
+    if (!verifiedBlobs.has(blobId)) {
+      const actualHash = sha256Hex(new Uint8Array(buf));
+      if (actualHash !== meta.sha256) {
+        return { ok: false, reason: 'corrupt', placeholder: PLACEHOLDER_B64 };
+      }
+      verifiedBlobs.add(blobId);
     }
 
     return { ok: true, bytes: new Uint8Array(buf), meta };
