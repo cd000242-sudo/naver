@@ -1074,14 +1074,35 @@
                 </div>
             </div>
 
-            <!-- TAB: Notices (Phase 6-A scaffold — GAS wiring in Phase 6-B) -->
+            <!-- TAB: Notices (Phase 6-B) -->
             <div class="tab-panel" id="tab-notices">
                 <div class="page-header">
                     <h1>공지사항</h1>
-                    <p>커뮤니티 공지 등록·수정·삭제. Phase 6-B에서 get-notices / submit-notice / update-notice / delete-notice 액션 추가 후 본 패널에 연결됩니다.</p>
+                    <p>커뮤니티 공지 등록·수정·삭제. 변경사항은 community.html 공지 탭에 즉시 반영됩니다.</p>
+                </div>
+                <div class="form-card" style="padding: 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; margin-bottom: 24px;">
+                    <h3 id="notice-form-title" style="margin-bottom: 16px; font-size: 1.05rem;">📝 새 공지 작성</h3>
+                    <input type="hidden" id="notice-edit-id" value="">
+                    <div style="display: grid; grid-template-columns: 140px 160px 1fr; gap: 12px; margin-bottom: 10px;">
+                        <select id="notice-badge" style="padding: 10px; border-radius: 8px;">
+                            <option value="important">중요</option>
+                            <option value="update" selected>업데이트</option>
+                            <option value="event">이벤트</option>
+                            <option value="tip">안내</option>
+                        </select>
+                        <input type="text" id="notice-date" placeholder="2026.05.23" style="padding: 10px; border-radius: 8px;">
+                        <input type="text" id="notice-title" placeholder="제목 (필수, 200자 이내)" style="padding: 10px; border-radius: 8px;">
+                    </div>
+                    <input type="text" id="notice-preview" placeholder="미리보기 — 한 줄 요약 (300자 이내)" style="width: 100%; padding: 10px; border-radius: 8px; margin-bottom: 8px;">
+                    <textarea id="notice-body" placeholder="본문 (필수, HTML 태그 일부 허용 — <p>, <ul>, <li>, <strong>, <a>)" rows="6" style="width: 100%; padding: 10px; border-radius: 8px; font-family: inherit; margin-bottom: 12px;"></textarea>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-gold" onclick="submitNotice()">💾 저장</button>
+                        <button class="btn" onclick="resetNoticeForm()">↩️ 초기화</button>
+                        <button class="btn" onclick="loadNotices()" style="margin-left: auto;">🔄 새로고침</button>
+                    </div>
                 </div>
                 <div id="notices-table-body">
-                    <div class="loading-spinner"><div class="spinner-ring"></div> Phase 6-B에서 활성화</div>
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록 로딩 중...</div>
                 </div>
             </div>
 
@@ -1224,6 +1245,104 @@
             // Load data for the tab
             if (tabId === 'trial') loadTrialUsers();
             if (tabId === 'bank') loadBankOrders();
+            if (tabId === 'notices') loadNotices();
+        }
+
+        // ===== PHASE 6-B: NOTICES =====
+        const NOTICE_BADGE_LABEL = { important: '중요', update: '업데이트', event: '이벤트', tip: '안내' };
+        function escapeHtml_(s) {
+            return String(s == null ? '' : s).replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
+        }
+        async function loadNotices() {
+            const container = document.getElementById('notices-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록 로딩 중...</div>';
+            try {
+                const res = await fetch(`${GAS_URL}?action=get-notices`).then(r => r.json());
+                if (res.success === false) throw new Error(res.message || '응답 실패');
+                const list = res.notices || [];
+                if (list.length === 0) {
+                    container.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--text-secondary);">등록된 공지가 없습니다. 위 폼에서 새 공지를 작성하세요.</div>';
+                    return;
+                }
+                container.innerHTML = list.map(n => `
+                    <div style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; margin-bottom: 10px;">
+                        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 6px; flex-wrap: wrap;">
+                            <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: rgba(201,168,76,0.15); color: var(--gold-primary, #c9a84c);">${escapeHtml_(NOTICE_BADGE_LABEL[n.badge] || n.badge)}</span>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml_(n.date)}</span>
+                            <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: auto; font-family: monospace;">${escapeHtml_(n.id)}</span>
+                        </div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml_(n.title)}</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">${escapeHtml_(n.preview)}</div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn" onclick='editNoticeFromBtn(${JSON.stringify(n).replace(/'/g, "&#39;")})'>✏️ 수정</button>
+                            <button class="btn" onclick='deleteNotice("${escapeHtml_(n.id)}")'>🗑️ 삭제</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요 시 사용자에게 안내.</small></div>`;
+            }
+        }
+        function resetNoticeForm() {
+            document.getElementById('notice-form-title').textContent = '📝 새 공지 작성';
+            document.getElementById('notice-edit-id').value = '';
+            document.getElementById('notice-badge').value = 'update';
+            document.getElementById('notice-date').value = new Date().toISOString().slice(0, 10).replace(/-/g, '.');
+            document.getElementById('notice-title').value = '';
+            document.getElementById('notice-preview').value = '';
+            document.getElementById('notice-body').value = '';
+        }
+        function editNoticeFromBtn(n) {
+            document.getElementById('notice-form-title').textContent = '✏️ 공지 수정 — ' + n.id;
+            document.getElementById('notice-edit-id').value = n.id;
+            document.getElementById('notice-badge').value = n.badge;
+            document.getElementById('notice-date').value = n.date;
+            document.getElementById('notice-title').value = n.title;
+            document.getElementById('notice-preview').value = n.preview;
+            document.getElementById('notice-body').value = n.body;
+            document.getElementById('tab-notices').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        async function submitNotice() {
+            const id = document.getElementById('notice-edit-id').value;
+            const body = {
+                action: id ? 'update-notice' : 'submit-notice',
+                adminToken: ADMIN_TOKEN,
+                badge: document.getElementById('notice-badge').value,
+                date: document.getElementById('notice-date').value.trim(),
+                title: document.getElementById('notice-title').value.trim(),
+                preview: document.getElementById('notice-preview').value.trim(),
+                body: document.getElementById('notice-body').value.trim(),
+            };
+            if (id) body.id = id;
+            if (!body.title || !body.body) { showToast('❌ 제목과 본문은 필수입니다'); return; }
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast(id ? '✅ 수정되었습니다' : '✅ 공지 등록 완료');
+                resetNoticeForm();
+                loadNotices();
+            } catch (err) {
+                showToast('❌ 저장 실패: ' + err.message);
+            }
+        }
+        async function deleteNotice(id) {
+            if (!confirm('이 공지를 삭제하시겠습니까?\n(soft delete — 시트에는 hidden=true로 표시되어 복구 가능)')) return;
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'delete-notice', adminToken: ADMIN_TOKEN, id: id }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 삭제 완료');
+                loadNotices();
+            } catch (err) {
+                showToast('❌ 삭제 실패: ' + err.message);
+            }
         }
 
         // ===== TRAFFIC TRACKING =====

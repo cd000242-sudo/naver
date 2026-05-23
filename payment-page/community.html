@@ -443,6 +443,41 @@
             }
         }
 
+        // Phase 6-B: 공지사항 GAS 동적 로딩. 성공 시 하드코딩 3건을 GAS 데이터로 대체.
+        // 실패 시 하드코딩 fallback 유지 (네트워크/배포 지연 안전망).
+        // notice.body는 admin이 입력한 HTML로 렌더(p/ul/li/strong/a 허용 — 관리자 신뢰).
+        const NOTICE_BADGE_LABEL = { important: '중요', update: '업데이트', event: '이벤트', tip: '안내' };
+        async function loadNotices() {
+            try {
+                const res = await fetch(`${GAS_URL}?action=get-notices`);
+                const data = await res.json();
+                const container = document.querySelector('#cpanel-notices .notice-list');
+                if (!container) return;
+                if (!data.success) {
+                    console.warn('loadNotices: GAS error', data.message);
+                    return; // fallback to hardcoded
+                }
+                const list = data.notices || [];
+                if (list.length === 0) {
+                    container.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--text-secondary);">아직 등록된 공지가 없습니다.</div>';
+                    return;
+                }
+                container.innerHTML = list.map(n => `
+                    <div class="notice-card" onclick="toggleNotice(this)">
+                        <div class="notice-card-header">
+                            <span class="notice-badge ${escapeHtml(n.badge)}">${escapeHtml(NOTICE_BADGE_LABEL[n.badge] || n.badge)}</span>
+                            <span class="notice-date">${escapeHtml(n.date)}</span>
+                        </div>
+                        <h4 class="notice-title">${escapeHtml(n.title)}</h4>
+                        <p class="notice-preview">${escapeHtml(n.preview)}</p>
+                        <div class="notice-body">${n.body}</div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                console.warn('loadNotices error', err);
+            }
+        }
+
         async function loadTips() {
             try {
                 const res = await fetch(`${GAS_URL}?action=get-tips`);
@@ -477,6 +512,7 @@
             initParticles();
             initScrollAnimations();
             initNavbar();
+            loadNotices();
             loadTips();
         });
     </script>
