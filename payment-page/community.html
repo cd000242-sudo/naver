@@ -428,7 +428,7 @@
                 });
                 const data = await res.json();
                 if (data.success) {
-                    showMsg('🎉 팁이 등록되었습니다!', '#44d7b6');
+                    showMsg('🎉 팁이 접수되었습니다. 검토 후 1~2일 내 공개됩니다.', '#44d7b6');
                     ['tip-author', 'tip-email', 'tip-title', 'tip-detail'].forEach(id => document.getElementById(id).value = '');
                     btn.textContent = '✓ 등록 완료';
                     setTimeout(() => { btn.disabled = false; btn.textContent = '팁 등록하기'; }, 2000);

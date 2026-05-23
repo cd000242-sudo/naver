@@ -1140,14 +1140,21 @@
                 </div>
             </div>
 
-            <!-- TAB: Tips (Phase 6-A scaffold — GAS wiring in Phase 6-E) -->
+            <!-- TAB: Tips (Phase 6-E) -->
             <div class="tab-panel" id="tab-tips">
                 <div class="page-header">
                     <h1>활용 팁</h1>
-                    <p>구매자 활용 팁 승인·거절. Phase 6-E에서 tip-approve / tip-reject 액션 추가 후 본 패널에 연결됩니다.</p>
+                    <p>구매자 활용 팁 승인·거절. <strong>pending</strong>은 community에 노출 안 됨. <strong>approved</strong>만 공개.</p>
+                </div>
+                <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                    <button class="btn" onclick="loadTipsAdmin('all')" id="tp-filter-all">전체</button>
+                    <button class="btn" onclick="loadTipsAdmin('pending')" id="tp-filter-pending">⏳ 대기</button>
+                    <button class="btn" onclick="loadTipsAdmin('approved')" id="tp-filter-approved">✅ 승인</button>
+                    <button class="btn" onclick="loadTipsAdmin('rejected')" id="tp-filter-rejected">🚫 거절</button>
+                    <button class="btn" onclick="loadTipsAdmin(currentTipFilter)" style="margin-left: auto;">🔄 새로고침</button>
                 </div>
                 <div id="tips-table-body">
-                    <div class="loading-spinner"><div class="spinner-ring"></div> Phase 6-E에서 활성화</div>
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 팁 목록 로딩 중...</div>
                 </div>
             </div>
 
@@ -1271,6 +1278,7 @@
             if (tabId === 'notices') loadNotices();
             if (tabId === 'income') loadIncome();
             if (tabId === 'reviews') loadReviewsAdmin(currentReviewFilter);
+            if (tabId === 'tips') loadTipsAdmin(currentTipFilter);
         }
 
         // ===== PHASE 6-B: NOTICES =====
@@ -1525,6 +1533,79 @@
                 if (res.success === false) throw new Error(res.message);
                 showToast('✅ 거절 완료');
                 loadReviewsAdmin(currentReviewFilter);
+            } catch (err) {
+                showToast('❌ 거절 실패: ' + err.message);
+            }
+        }
+
+        // ===== PHASE 6-E: TIPS ADMIN (approve / reject workflow) =====
+        let currentTipFilter = 'pending';
+        async function loadTipsAdmin(filter) {
+            currentTipFilter = filter || 'pending';
+            const container = document.getElementById('tips-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>';
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'get-tips-admin', adminToken: ADMIN_TOKEN }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message || '응답 실패');
+                const all = res.tips || [];
+                const list = currentTipFilter === 'all' ? all : all.filter(t => t.status === currentTipFilter);
+                ['all','pending','approved','rejected'].forEach(k => {
+                    const b = document.getElementById('tp-filter-' + k);
+                    if (b) b.style.background = (k === currentTipFilter) ? 'rgba(201,168,76,0.2)' : '';
+                });
+                if (list.length === 0) {
+                    container.innerHTML = `<div style="padding: 32px; text-align: center; color: var(--text-secondary);">${currentTipFilter === 'all' ? '등록된 팁이 없습니다.' : currentTipFilter + ' 상태의 팁이 없습니다.'}</div>`;
+                    return;
+                }
+                container.innerHTML = list.map(t => `
+                    <div style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; margin-bottom: 10px;">
+                        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 6px; flex-wrap: wrap;">
+                            <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: ${REVIEW_STATUS_COLOR[t.status]}22; color: ${REVIEW_STATUS_COLOR[t.status]};">${REVIEW_STATUS_LABEL[t.status] || t.status}</span>
+                            <strong>${escapeHtml_(t.author)}</strong>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml_(t.email || '')}</span>
+                            <span style="font-size: 0.72rem; color: var(--text-muted); margin-left: auto; font-family: monospace;">${escapeHtml_(t.timestamp.slice(0, 19))}</span>
+                        </div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml_(t.title)}</div>
+                        <div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; white-space: pre-wrap;">${escapeHtml_(t.detail)}</div>
+                        <div style="display: flex; gap: 8px;">
+                            ${t.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveTip("${escapeHtml_(t.timestamp)}")'>✅ 승인</button>` : ''}
+                            ${t.status !== 'rejected' ? `<button class="btn" onclick='rejectTip("${escapeHtml_(t.timestamp)}")'>🚫 거절</button>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요.</small></div>`;
+            }
+        }
+        async function approveTip(ts) {
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'tip-approve', adminToken: ADMIN_TOKEN, timestamp: ts }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 승인 완료');
+                loadTipsAdmin(currentTipFilter);
+            } catch (err) {
+                showToast('❌ 승인 실패: ' + err.message);
+            }
+        }
+        async function rejectTip(ts) {
+            if (!confirm('이 팁을 거절하시겠습니까?')) return;
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'tip-reject', adminToken: ADMIN_TOKEN, timestamp: ts }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 거절 완료');
+                loadTipsAdmin(currentTipFilter);
             } catch (err) {
                 showToast('❌ 거절 실패: ' + err.message);
             }
