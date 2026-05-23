@@ -380,7 +380,7 @@ export async function initImageManagementTab(): Promise<void> {
       } else if (selectedSource === 'stability') {
         appendLog('✅ Stability AI(고품질)가 선택되었습니다.');
       } else if (selectedSource === 'openai-image') {
-        appendLog('✅ 🦆 덕트테이프(OpenAI gpt-image-2)가 선택되었습니다. — OpenAI API 키 필요, 장당 ₩25~₩280');
+        appendLog('✅ 🦆 덕트테이프(OpenAI gpt-image-1.5/2, 기본 1.5)가 선택되었습니다. — OpenAI API 키 필요, 장당 ₩25~₩280');
       } else if (selectedSource === 'leonardoai') {
         appendLog('✅ Leonardo AI가 선택되었습니다. API 키가 필요합니다.');
       } else if (selectedSource === 'imagefx') {

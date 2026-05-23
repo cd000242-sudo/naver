@@ -2904,7 +2904,7 @@ const imageSourceNames: Record<string, string> = {
   'falai': '🎨 Fal.ai FLUX',
   'pollinations': '🌸 Pollinations (무료)',
   'leonardoai': '🎨 Leonardo AI',
-  'openai-image': '🦆 덕트테이프 (gpt-image-2)',
+  'openai-image': '🦆 덕트테이프 (gpt-image-1.5/2)',
   'dall-e-3': '🎨 DALL-E 3 (OpenAI)',
   'imagefx': '✨ ImageFX (Google 무료)',
   'flow': '🍌 Flow (Nano Banana 2)', // ✅ [v1.4.80]
