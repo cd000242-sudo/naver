@@ -1067,7 +1067,11 @@
             <div class="tab-panel" id="tab-reviews">
                 <div class="page-header">
                     <h1>후기 관리</h1>
-                    <p>구매자 후기 승인·거절. <strong>pending</strong>은 reviews.html에 노출 안 됨. <strong>approved</strong>만 공개. <strong>rejected</strong>는 영구 차단(soft).</p>
+                    <p>구매자 후기 승인·거절·수정. <strong>pending</strong>은 reviews.html에 노출 안 됨. <strong>approved</strong>만 공개.</p>
+                </div>
+                <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">하드코딩 sample 후기 3건 가져오기 →</span>
+                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
                 </div>
                 <div style="display: flex; gap: 8px; margin-bottom: 20px;">
                     <button class="btn" onclick="loadReviewsAdmin('all')" id="rv-filter-all">전체</button>
@@ -1086,6 +1090,10 @@
                 <div class="page-header">
                     <h1>공지사항</h1>
                     <p>커뮤니티 공지 등록·수정·삭제. 변경사항은 community.html 공지 탭에 즉시 반영됩니다.</p>
+                </div>
+                <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">처음이라면 기존 하드코딩 데이터(공지·수익·팁·후기 16건)를 시트로 가져오세요 →</span>
+                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
                 </div>
                 <div class="form-card" style="padding: 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; margin-bottom: 24px;">
                     <h3 id="notice-form-title" style="margin-bottom: 16px; font-size: 1.05rem;">📝 새 공지 작성</h3>
@@ -1108,6 +1116,7 @@
                         <button class="btn" onclick="loadNotices()" style="margin-left: auto;">🔄 새로고침</button>
                     </div>
                 </div>
+                <h3 style="margin: 24px 0 12px; font-size: 1rem; color: var(--text-primary); border-bottom: 1px solid var(--border-glass); padding-bottom: 8px;">📋 기존 공지 목록</h3>
                 <div id="notices-table-body">
                     <div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록 로딩 중...</div>
                 </div>
@@ -1118,6 +1127,10 @@
                 <div class="page-header">
                     <h1>수익 인증</h1>
                     <p>구매자가 community.html에서 제출한 수익 인증을 승인·거절·수정·삭제합니다. <strong>pending</strong>은 community에 노출 안 됨.</p>
+                </div>
+                <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">하드코딩 sample 4건 가져오기 →</span>
+                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
                 </div>
                 <div style="display: flex; gap: 8px; margin-bottom: 20px;">
                     <button class="btn" onclick="loadIncomeAdmin('all')" id="ic-filter-all">전체</button>
@@ -1135,7 +1148,11 @@
             <div class="tab-panel" id="tab-tips">
                 <div class="page-header">
                     <h1>활용 팁</h1>
-                    <p>구매자 활용 팁 승인·거절. <strong>pending</strong>은 community에 노출 안 됨. <strong>approved</strong>만 공개.</p>
+                    <p>구매자 활용 팁 승인·거절·수정. <strong>pending</strong>은 community에 노출 안 됨. <strong>approved</strong>만 공개.</p>
+                </div>
+                <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">하드코딩 sample 6건 가져오기 →</span>
+                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
                 </div>
                 <div style="display: flex; gap: 8px; margin-bottom: 20px;">
                     <button class="btn" onclick="loadTipsAdmin('all')" id="tp-filter-all">전체</button>
@@ -1270,6 +1287,30 @@
             if (tabId === 'income') loadIncomeAdmin(currentIncomeFilter);
             if (tabId === 'reviews') loadReviewsAdmin(currentReviewFilter);
             if (tabId === 'tips') loadTipsAdmin(currentTipFilter);
+        }
+
+        // ===== PHASE 6-F: SEED DEFAULTS (idempotent — 시트 비어있을 때만 import) =====
+        async function seedDefaults() {
+            if (!confirm('하드코딩된 기본 데이터(공지 3 + 수익 4 + 팁 6 + 후기 3 = 16건)를 시트로 가져옵니다.\n이미 데이터가 있는 카테고리는 건너뜁니다.\n진행할까요?')) return;
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'seed-defaults', adminToken: ADMIN_TOKEN }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                const r = res.report || {};
+                const skipMsg = (r.skipped && r.skipped.length) ? ` (이미 있음: ${r.skipped.join(', ')})` : '';
+                showToast(`✅ 가져오기 완료 — 공지 ${r.notices||0} / 수익 ${r.income||0} / 팁 ${r.tips||0} / 후기 ${r.reviews||0}${skipMsg}`);
+                // 현재 탭 자동 리로드
+                const activeTab = document.querySelector('.nav-item.active')?.dataset.tab;
+                if (activeTab === 'notices') loadNotices();
+                else if (activeTab === 'income') loadIncomeAdmin(currentIncomeFilter);
+                else if (activeTab === 'tips') loadTipsAdmin(currentTipFilter);
+                else if (activeTab === 'reviews') loadReviewsAdmin(currentReviewFilter);
+            } catch (err) {
+                showToast('❌ 가져오기 실패: ' + err.message);
+            }
         }
 
         // ===== PHASE 6-B: NOTICES =====

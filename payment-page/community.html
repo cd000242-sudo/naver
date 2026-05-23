@@ -328,11 +328,9 @@
                     <div id="tip-msg" style="margin-top: 12px; font-size: 0.85rem; text-align: center; min-height: 1.2em;"></div>
                 </div>
 
-                <!-- 👇 사용자가 등록한 팁 (동적) -->
-                <div class="tips-grid" id="dynamic-tips"></div>
-
-                <!-- 기본 팁 카드 -->
-                <div class="tips-grid">
+                <!-- 모든 팁 (admin 시드 + 사용자 제출 통합 동적 렌더) -->
+                <div class="tips-grid" id="tips-grid">
+                    <!-- Phase 6-F fallback: GAS 실패 시에만 노출. 성공 시 loadTips가 전체 교체 -->
                     <div class="tip-card">
                         <div class="tip-card-icon">🎯</div>
                         <h4 class="tip-card-title">키워드 선정이 수익의 80%</h4>
@@ -509,10 +507,7 @@
                 if (!container) return;
                 if (!data.success) { console.warn('loadIncome: GAS error', data.message); return; }
                 const list = data.income || [];
-                if (list.length === 0) {
-                    container.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--text-secondary); grid-column: 1 / -1;">아직 등록된 수익 인증이 없습니다.</div>';
-                    return;
-                }
+                if (list.length === 0) return; // fallback 유지
                 container.innerHTML = list.map(n => `
                     <div class="income-card">
                         <div class="income-card-image">
@@ -549,10 +544,7 @@
                     return; // fallback to hardcoded
                 }
                 const list = data.notices || [];
-                if (list.length === 0) {
-                    container.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--text-secondary);">아직 등록된 공지가 없습니다.</div>';
-                    return;
-                }
+                if (list.length === 0) return; // GAS 빈 응답 → 하드코딩 fallback 유지 (안전망)
                 container.innerHTML = list.map(n => `
                     <div class="notice-card" onclick="toggleNotice(this)">
                         <div class="notice-card-header">
@@ -569,31 +561,29 @@
             }
         }
 
+        // Phase 6-F: tips-grid 전체 교체 (admin seed + user submit 통합). 실패 시 하드코딩 fallback 유지.
         async function loadTips() {
             try {
                 const res = await fetch(`${GAS_URL}?action=get-tips`);
                 const data = await res.json();
-                const container = document.getElementById('dynamic-tips');
+                const container = document.getElementById('tips-grid');
                 if (!container) return;
-                if (!data.success || !data.tips || data.tips.length === 0) {
-                    container.innerHTML = '';
-                    return;
-                }
-                container.innerHTML = '';
-                data.tips.forEach(t => {
+                if (!data.success) { console.warn('loadTips: GAS error', data.message); return; }
+                const list = data.tips || [];
+                if (list.length === 0) return; // fallback 유지
+                container.innerHTML = list.map(t => {
                     const date = new Date(t.timestamp).toLocaleDateString('ko-KR');
-                    const card = document.createElement('div');
-                    card.className = 'tip-card';
-                    card.innerHTML = `
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                            <span style="color: #6495ed; font-size: 0.78rem; font-weight: 600;">👤 ${escapeHtml(t.author)}</span>
-                            <span style="color: var(--text-secondary); font-size: 0.72rem;">${date}</span>
+                    return `
+                        <div class="tip-card">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                <span style="color: #6495ed; font-size: 0.78rem; font-weight: 600;">👤 ${escapeHtml(t.author)}</span>
+                                <span style="color: var(--text-secondary); font-size: 0.72rem;">${date}</span>
+                            </div>
+                            <h4 class="tip-card-title">${escapeHtml(t.title)}</h4>
+                            <p class="tip-card-desc" style="white-space: pre-wrap;">${escapeHtml(t.detail)}</p>
                         </div>
-                        <h4 class="tip-card-title">${escapeHtml(t.title)}</h4>
-                        <p class="tip-card-desc" style="white-space: pre-wrap;">${escapeHtml(t.detail)}</p>
                     `;
-                    container.appendChild(card);
-                });
+                }).join('');
             } catch (err) {
                 console.warn('loadTips error', err);
             }
