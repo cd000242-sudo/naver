@@ -6950,15 +6950,25 @@ app.on('before-quit', (event) => {
   event.preventDefault();
   isQuittingForLogout = true;
 
-  console.log('[Main] before-quit: 서버 로그아웃 시도...');
+  console.log('[Main] before-quit: 서버 로그아웃 시도 (최대 2초 대기)...');
 
-  import('./licenseManager.js')
+  const logoutPromise = import('./licenseManager.js')
     .then((lm) => lm.logoutFromServer())
-    .catch((err) => console.warn('[Main] before-quit 로그아웃 실패 (무시):', err))
-    .finally(() => {
-      console.log('[Main] before-quit: 로그아웃 완료, 앱 종료');
-      app.quit(); // 로그아웃 완료 후 실제 종료
-    });
+    .catch((err) => console.warn('[Main] before-quit 로그아웃 실패 (무시):', err));
+
+  // ✅ 사용자 보고 (v2.10.350): 종료 버튼 누른 후 종료 너무 느림
+  //   Google Apps Script logout 응답이 cold start 시 5초 이상 걸려 종료 지연
+  //   2초 race timeout 추가 → logout 응답 안 와도 즉시 app.quit() 진행
+  //   logout 자체는 백그라운드로 계속 진행 (best-effort)
+  const timeoutPromise = new Promise<void>((resolve) => setTimeout(() => {
+    console.warn('[Main] before-quit: 로그아웃 응답 2초 초과 — 즉시 종료 진행');
+    resolve();
+  }, 2000));
+
+  Promise.race([logoutPromise, timeoutPromise]).finally(() => {
+    console.log('[Main] before-quit: 종료 진행');
+    app.quit(); // 로그아웃 완료 또는 2초 timeout 후 실제 종료
+  });
 });
 
 // ffmpeg 경고 무시 (미디어 재생 기능 미사용)
