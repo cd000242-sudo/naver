@@ -2952,10 +2952,10 @@ export async function initMultiAccountPublishModal() {
 
     isPublishing = true;
     stopRequested = false;
-    // ✅ [2026-03-11 FIX] 연속발행 모드가 아닐 때만 중지 플래그 리셋
-    if (!(window as any).isContinuousMode) {
-      (window as any).stopFullAutoPublish = false;
-    }
+    // ✅ [2026-05-23 FIX] 다중계정 발행은 연속발행과 독립 — 무조건 stopFullAutoPublish 리셋.
+    //   기존 isContinuousMode 가드는 연속발행 중지 플래그 보존 의도였으나
+    //   다중계정 발행 시작 시 이전 세션 누수된 true가 첫 await 후 break 유발하던 회귀 통로.
+    (window as any).stopFullAutoPublish = false;
 
     const startBtn = document.getElementById('ma-start-publish-btn') as HTMLButtonElement | null;
     const startBtnOriginalHtml = startBtn?.innerHTML || '';
@@ -2997,7 +2997,11 @@ export async function initMultiAccountPublishModal() {
 
     let totalSuccess = 0;
     let totalFail = 0;
-    const totalItems = publishQueue.length;
+    // ✅ [2026-05-23 FIX] publishQueue immutable snapshot — 발행 도중 외부 변경(개별 삭제 버튼,
+    //   전체 삭제, 비동기 콜백 등)으로 인한 루프 조기 종료 차단. nextItem 객체 reference는
+    //   동일 유지되므로 이전글 체이닝(ctaUrl 등) mutation은 그대로 작동.
+    const queueSnapshot: QueueItem[] = [...publishQueue];
+    const totalItems = queueSnapshot.length;
 
     const waitInterruptible = async (seconds: number, currentIdx?: number, totalCount?: number) => {
       const ms = Math.max(0, Math.floor(seconds * 1000));
@@ -3031,7 +3035,7 @@ export async function initMultiAccountPublishModal() {
     //    랜덤 배분(distributeByRandomRange) 후 scheduleUserModified=true로 설정되므로
     //    distributeWithProtection이 해당 항목을 "수동"으로 인식하여 보호함
     {
-      const scheduleItems = publishQueue.filter(item => item.publishMode === 'schedule');
+      const scheduleItems = queueSnapshot.filter(item => item.publishMode === 'schedule');
       if (scheduleItems.length > 1) {
         // ✅ [2026-04-01 BUG-7 FIX] 이미 모든 항목이 예약 시간을 가지고 있으면 재분배 건너뛰기
         // 랜덤 배분이나 개별 예약으로 이미 설정된 경우 distributeWithProtection이 덮어쓰는 것을 방지
@@ -3064,7 +3068,7 @@ export async function initMultiAccountPublishModal() {
 
       // ✅ [2026-03-24 BUG-4 FIX v2] 스케줄 항목에서 날짜 OR 시간 누락 시 자동 생성
       // distributeWithProtection은 auto 항목이 2개 이상일 때만 분배 → 1개 항목은 건너뜀 → scheduleDate/Time=undefined
-      const incompleteScheduleItems = publishQueue.filter(item => item.publishMode === 'schedule' && (!item.scheduleDate || !item.scheduleTime));
+      const incompleteScheduleItems = queueSnapshot.filter(item => item.publishMode === 'schedule' && (!item.scheduleDate || !item.scheduleTime));
       for (const item of incompleteScheduleItems) {
         const autoTime = new Date(Date.now() + 30 * 60 * 1000); // 30분 후
         const ceilMin = Math.ceil(autoTime.getMinutes() / 10) * 10;
@@ -3082,9 +3086,9 @@ export async function initMultiAccountPublishModal() {
     }
 
     try {
-      // ✅ 대기열 순차 처리
-      for (let i = 0; i < publishQueue.length && !stopRequested && !(window as any).stopFullAutoPublish; i++) {
-        const queueItem = publishQueue[i];
+      // ✅ 대기열 순차 처리 (queueSnapshot 사용 — 외부 변경 차단)
+      for (let i = 0; i < queueSnapshot.length && !stopRequested && !(window as any).stopFullAutoPublish; i++) {
+        const queueItem = queueSnapshot[i];
         let generatedPostId: string | null = null;
 
         // 모달 업데이트 (4단계: 콘텐츠→이미지→로그인→발행)
@@ -3938,8 +3942,8 @@ export async function initMultiAccountPublishModal() {
             // ⚠️ 크로스계정 방지: 같은 계정(accountName)의 다음 아이템에만 체이닝
             // (A계정 발행글이 B계정에 엮이는 것을 방지)
             if (queueItem.ctaType === 'previous-post' && publishedUrl) {
-              for (let j = i + 1; j < publishQueue.length; j++) {
-                const nextItem = publishQueue[j];
+              for (let j = i + 1; j < queueSnapshot.length; j++) {
+                const nextItem = queueSnapshot[j];
                 if (nextItem.ctaType === 'previous-post' && nextItem.accountName === queueItem.accountName) {
                   const validChainUrl = publishedUrl.startsWith('http') ? publishedUrl : '';
                   (nextItem as any).ctaUrl = validChainUrl;
@@ -3964,7 +3968,7 @@ export async function initMultiAccountPublishModal() {
         }
 
         // 다음 항목 발행 전 대기 (마지막 항목 제외)
-        if (i < publishQueue.length - 1 && !stopRequested && !(window as any).stopFullAutoPublish) {
+        if (i < queueSnapshot.length - 1 && !stopRequested && !(window as any).stopFullAutoPublish) {
 
           // ✅ [2026-03-11] ADB IP 변경 (N번째 발행마다 실행)
           try {
