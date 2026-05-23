@@ -775,7 +775,9 @@ contextBridge.exposeInMainWorld('api', {
   setTrendInterval: (intervalMs: number): Promise<{ success: boolean; interval: number }> =>
     ipcRenderer.invoke('trend:setInterval', intervalMs),
   onTrendAlert: (callback: (alert: any) => void) => {
-    ipcRenderer.on('trend:alert', (_event, alert) => callback(alert));
+    const listener = (_event: unknown, alert: any) => callback(alert);
+    ipcRenderer.on('trend:alert', listener);
+    return () => ipcRenderer.removeListener('trend:alert', listener);
   },
 
   // ✅ 발행 후 성과 추적 API
