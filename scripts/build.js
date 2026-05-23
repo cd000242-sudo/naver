@@ -25,6 +25,10 @@ const safeFiles = pkg.build.files || [];
 
 async function main() {
     try {
+        // --- Step 0: Sync generated version file ---
+        console.log('\n📦 [0/4] 버전 파일 동기화...');
+        execSync('node scripts/sync-build-define.mjs', { stdio: 'inherit', shell: true });
+
         // --- Step 1: 클린 & 컴파일 ---
         console.log('\n📦 [1/4] TypeScript 컴파일...');
         execSync('npx tsc', { stdio: 'inherit', shell: true });

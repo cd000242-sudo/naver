@@ -40,6 +40,9 @@ sample_validation/
 .autopus/claude-code-manifest.json
 .mcp.json
 
+# Build-time generated files (do not track)
+src/runtime/version.generated.ts
+
 # vitest coverage output
 coverage/
 scripts/tmp-lint.json
