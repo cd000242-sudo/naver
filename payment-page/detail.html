@@ -82,14 +82,16 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255,215,0,0.1);
-            border: 1px solid rgba(255,215,0,0.3);
-            padding: 8px 20px;
+            background: rgba(255,215,0,0.14);
+            border: 1px solid rgba(255,215,0,0.45);
+            padding: 10px 22px;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: 600;
             color: var(--gold);
-            margin-bottom: 30px;
+            margin-bottom: 28px;
             animation: pulse-glow 2s infinite;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
         }
         
         @keyframes pulse-glow {
@@ -98,26 +100,32 @@
         }
         
         .hero h1 {
-            font-size: clamp(32px, 6vw, 64px);
+            font-size: clamp(34px, 6.5vw, 68px);
             font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 20px;
+            line-height: 1.15;
+            margin-bottom: 26px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.65);
         }
-        
+
         .hero h1 .highlight {
             background: var(--gradient-gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            filter: drop-shadow(0 2px 10px rgba(255,215,0,0.25));
         }
-        
+
         .hero-subtitle {
-            font-size: clamp(16px, 2.5vw, 22px);
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-            font-weight: 300;
+            font-size: clamp(17px, 2.2vw, 21px);
+            color: #e8e8ee;
+            margin-bottom: 36px;
+            font-weight: 400;
+            line-height: 1.6;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.55);
         }
-        
+
+        /* hero-pain: 카피 단순화로 HTML에서 제거됨. 룰은 보존 (다른 변형 대비) */
         .hero-pain {
             font-size: clamp(18px, 3vw, 28px);
             font-weight: 700;
@@ -174,30 +182,27 @@
             color: var(--gold);
         }
         
-        .hero-stats {
-            display: flex;
-            gap: 40px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .hero-stat {
-            text-align: center;
-        }
-        
-        .hero-stat .number {
-            font-size: 32px;
-            font-weight: 900;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .hero-stat .label {
+        /* Trust bar — stats를 한 줄로 압축 (단일 시선 흐름 유지) */
+        .hero-trust {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 22px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             font-size: 14px;
-            color: var(--text-secondary);
+            color: rgba(255,255,255,0.88);
+            flex-wrap: wrap;
+            justify-content: center;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
         }
+        .hero-trust strong { color: var(--gold); font-weight: 800; }
+        .hero-trust .dot { opacity: 0.35; }
+
+        /* 기존 hero-stats 룰: 다른 곳에서 참조 안 함 — counter JS는 별도 섹션 사용 */
+        .hero-stats { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
         
         /* ========== PAIN SECTION ========== */
         .pain-section {
@@ -1222,42 +1227,29 @@ function closeMobileMenu() {
     <div class="hero-content">
         <div class="hero-badge">
             <span>🏆</span>
-            <span>2026 네이버 블로그 자동화 도구 1위</span>
+            <span>네이버가 못 잡는 AI 글, Leaders Pro로</span>
         </div>
-        
+
         <h1>
-            키워드 하나면<br>
-            <span class="highlight">블로그 글이 자동으로 완성됩니다</span>
+            AI 글인데<br>
+            <span class="highlight">사람이 쓴 것처럼.</span>
         </h1>
-        
+
         <p class="hero-subtitle">
-            AI가 글 작성부터 이미지 생성, 발행까지 원클릭으로.<br>
-            하루 10편도 거뜬합니다.
+            AuthGR 방어 · 이미지 일관성 검증 · 저품질 회피 알고리즘<br>
+            — 자동인데 노출에 강한 네이버 블로그 자동화 도구.
         </p>
-        
-        <p class="hero-pain">
-            "블로그 하나 운영하는 데 매일 3시간..."<br>
-            이제 그 시간, AI가 대신합니다.
-        </p>
-        
+
         <div class="hero-buttons">
-            <a href="https://www.leaderspro.kr/pricing.html" class="btn-primary">지금 시작하기</a>
-            <a href="#features" class="btn-secondary">기능 자세히 보기 ↓</a>
+            <a href="https://www.leaderspro.kr/pricing.html" class="btn-primary">지금 시작하기 →</a>
         </div>
-        
-        <div class="hero-stats">
-            <div class="stat-item">
-                <div class="stat-number counter" data-count="2847">0</div>
-                <div class="stat-label">활성 사용자</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number counter" data-count="158430">0</div>
-                <div class="stat-label">발행된 글</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">4.9<span style="font-size:0.5em">★</span></div>
-                <div class="stat-label">사용자 만족도</div>
-            </div>
+
+        <div class="hero-trust">
+            <span><strong>2,847명</strong> 사용 중</span>
+            <span class="dot">·</span>
+            <span><strong>158,430편</strong> 발행</span>
+            <span class="dot">·</span>
+            <span><strong>4.9★</strong> 만족도</span>
         </div>
     </div>
 
