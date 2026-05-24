@@ -35,6 +35,8 @@ declare function refreshGeneratedPostsList(): void;
 declare function readUnifiedCtasFromUi(): any[];
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
+// ✅ checkFeatureLockAndShow는 featureLockModal.js가 window 글로벌에 등록 (minify 충돌 회피)
+// import 대신 (window as any).checkFeatureLockAndShow 호출
 // ✅ [2026-05-25 FIX] esbuild minify·inline 처리 시 intervalJitter 모듈의 namespace 변수(intervalJitter_1)
 //   가 정의되지 않아 ReferenceError 발생 → 1번째 발행 후 wait 분기에서 throw → unhandled rejection →
 //   for-loop 다음 iteration 진입 못함 → "1계정 후 멈춤" 진짜 root cause.
@@ -682,6 +684,10 @@ export async function initMultiAccountPublishModal() {
   // 모달 열기
   multiAccountBtn.addEventListener('click', async () => {
     console.log('[MultiAccountPublish] 모달 열기 버튼 클릭');
+
+    // ✅ [2026-05-25] Pro 기능 잠금 — 무료 체험판은 다중계정 관리 자체 차단 (window 글로벌 호출 — minify 충돌 회피)
+    const unlocked = await (window as any).checkFeatureLockAndShow?.('multi-account-manage');
+    if (unlocked === false) return;
 
     // 먼저 모달을 표시
     multiAccountModal.style.display = 'flex';
@@ -3103,6 +3109,10 @@ export async function initMultiAccountPublishModal() {
 
   // ✅ 대기열 기반 풀오토 발행 시작
   document.getElementById('ma-start-publish-btn')?.addEventListener('click', async () => {
+    // ✅ [2026-05-25] Pro 기능 잠금 — 무료 체험판은 다중계정 풀오토 차단 (window 글로벌 호출 — minify 충돌 회피)
+    const unlocked = await (window as any).checkFeatureLockAndShow?.('multi-account-fullauto');
+    if (unlocked === false) return;
+
     // [UX Fix] 수정 중인 상태에서 확인 없이 시작하는 것 방지
     if ((window as any).currentEditingQueueId) {
       toastManager.warning('📢 현재 내용을 수정 중입니다. 먼저 "수정 완료(대기열에 추가)" 버튼을 눌러 저장해주세요!');

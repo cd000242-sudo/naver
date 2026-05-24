@@ -1052,9 +1052,19 @@ function getContinuousUrls(): string[] {
 // 연속 발행 시작
 export function startContinuousPublishing(): void {
   console.log('[Continuous] startContinuousPublishing 시작');
-  startContinuousPublishingV2().catch((error) => {
-    appendLog(`❌ 연속 발행 시작 실패: ${(error as Error).message}`);
-  });
+  // ✅ [2026-05-25] Pro 기능 잠금 — 무료 체험판은 연속 발행 차단 (window 글로벌 호출 — minify 충돌 회피)
+  (async () => {
+    try {
+      const unlocked = await (window as any).checkFeatureLockAndShow?.('continuous');
+      if (unlocked === false) return;
+    } catch (e) {
+      console.warn('[Continuous] feature lock check failed:', e);
+      // 체크 실패 시 안전하게 차단보다 진행 (라이선스 모듈 에러로 합법 사용자가 막히는 것 방지)
+    }
+    startContinuousPublishingV2().catch((error) => {
+      appendLog(`❌ 연속 발행 시작 실패: ${(error as Error).message}`);
+    });
+  })();
 }
 
 // ✅ 연속 발행 키워드 수집 (개별 필드 방식)

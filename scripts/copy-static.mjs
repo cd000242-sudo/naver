@@ -315,6 +315,7 @@ try {
     'continuousPublishing.js',
     'thumbnailGenerator.js',
     'intervalJitter.js',  // ✅ [2026-05-23 A5] 발행 간격 jitter 유틸 (multiAccountManager보다 먼저 로드 필수)
+    'featureLockModal.js',  // ✅ [2026-05-25 v2.10.353] Pro 기능 잠금 모달 (continuousPublishing/multiAccountManager보다 먼저 로드 필수 — window 글로벌 등록)
     'multiAccountManager.js',
     'headingImageGen.js',
     'imageDisplayGrid.js',
