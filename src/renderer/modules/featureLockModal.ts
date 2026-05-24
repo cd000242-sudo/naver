@@ -138,6 +138,34 @@ function ensureLockModalDom(): HTMLElement {
     if (e.target === modal) hideLockModal();
   });
 
+  // ✅ [2026-05-25] CTA → 시스템 기본 브라우저로 열기 (Electron 내부 창 X)
+  //   사용자 명시 요청 — target="_blank" 대신 window.api.openExternalUrl 사용
+  const openInBrowser = (url: string) => {
+    try {
+      const api = (window as any).api;
+      if (api?.openExternalUrl) {
+        api.openExternalUrl(url);
+      } else {
+        window.open(url, '_blank', 'noopener');
+      }
+    } catch (e) {
+      console.warn('[featureLockModal] openExternalUrl 실패:', e);
+      try { window.open(url, '_blank', 'noopener'); } catch { /* ignore */ }
+    }
+  };
+
+  const mainCtaEl = document.getElementById('feature-lock-cta-main') as HTMLAnchorElement | null;
+  mainCtaEl?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openInBrowser(PRICING_URL);
+  });
+
+  const kakaoCtaEl = document.getElementById('feature-lock-cta-kakao') as HTMLAnchorElement | null;
+  kakaoCtaEl?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openInBrowser(KAKAO_URL);
+  });
+
   // hover 효과
   const mainCta = document.getElementById('feature-lock-cta-main');
   mainCta?.addEventListener('mouseenter', () => {
