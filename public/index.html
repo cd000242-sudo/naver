@@ -10147,6 +10147,17 @@
                     </div>
                 </div>
 
+                <!-- 현재 계정 이미지 미리보기 (계정 전환 시 자동 초기화) -->
+                <div id="ma-current-images-section" style="padding: 0 1rem 0.5rem 1rem; display: none;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
+                        <span style="font-size: 0.7rem; font-weight: 600; color: #e2e8f0;">📷 생성된 이미지</span>
+                        <span id="ma-images-count" style="font-size: 0.65rem; color: #94a3b8;"></span>
+                        <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
+                    </div>
+                    <div id="ma-images-grid"
+                        style="display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 4px; max-height: 160px; overflow-y: auto; padding: 2px; background: rgba(0,0,0,0.2); border-radius: 8px;"></div>
+                </div>
+
                 <!-- 실시간 로그 -->
                 <div style="padding: 0 1rem 0.5rem 1rem;">
                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.2rem;">

@@ -4064,6 +4064,16 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
   }
 
   try {
+    // ✅ [2026-05-25 FIX] Stale cancelRequested 자동 리셋 (v2.6.4 HOTFIX 동일 패턴, multiAccount:publish 누락분)
+    //   원인: 이전 발행 중지 → AutomationService.cancelRequested = true 잔류
+    //         multiAccount:publish 시작 시 setMultiAccountAbort(false)만 리셋, cancelRequested는 안 건드림
+    //         → 2번째 계정의 BlogExecutor.executePostCycle 진입 즉시 isCancelRequested() true → {success:false, cancelled:true} 반환
+    //         → renderer for-loop이 "8계정 중 1계정만 발행" 현상으로 인지
+    //   5팀 병렬 심층 분석(2026-05-25) Team 2(main IPC) High 가설 직접 fix
+    if (AutomationService.isCancelRequested() && !AutomationService.isRunning()) {
+      console.log('[Main] 🔄 stale cancelRequested 감지 (multiAccount:publish) → 자동 리셋');
+      AutomationService.resetCancelFlag();
+    }
     //  중지 플래그 초기화
     AutomationService.setMultiAccountAbort(false);
     // ✅ [2026-03-11] 즉시 취소용 AbortController 생성

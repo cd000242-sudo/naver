@@ -35,7 +35,17 @@ declare function refreshGeneratedPostsList(): void;
 declare function readUnifiedCtasFromUi(): any[];
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
-import { applyIntervalJitter } from './intervalJitter';
+// ✅ [2026-05-25 FIX] esbuild minify·inline 처리 시 intervalJitter 모듈의 namespace 변수(intervalJitter_1)
+//   가 정의되지 않아 ReferenceError 발생 → 1번째 발행 후 wait 분기에서 throw → unhandled rejection →
+//   for-loop 다음 iteration 진입 못함 → "1계정 후 멈춤" 진짜 root cause.
+//   사용자 5팀 진단(STOP_TRACE)으로 정확히 확인됨. import 제거 + 함수 inline으로 우회.
+// import { applyIntervalJitter } from './intervalJitter';  // 제거: 빌드 minify 충돌
+function applyIntervalJitter(intervalSeconds: number): number {
+  if (!Number.isFinite(intervalSeconds) || intervalSeconds <= 0) return intervalSeconds;
+  const jitterFactor = 1 + (Math.random() * 2 - 1) * 0.4; // ±40%
+  const jittered = Math.round(intervalSeconds * jitterFactor);
+  return Math.min(86400, Math.max(1, jittered));
+}
 // ✅ [v2.10.288] subImageMode import 제거 — esbuild 번들이 alias만 만들고 정의 누락하는 회귀 차단.
 //   대신 window에 자체 등록된 함수를 호출 (subImageMode.ts line 93-97에서 자동 등록됨).
 //   side-effect import는 renderer.ts:57에서 이미 발생 → window.getSubImageMode 존재 보장.
@@ -666,6 +676,8 @@ export async function initMultiAccountPublishModal() {
   let selectedAccountIds: string[] = [];
   let isPublishing = false;
   let stopRequested = false;
+
+  // STOP_TRACE 진단 로그 제거됨 (2026-05-25 v2.10.352): 진짜 root cause(intervalJitter ReferenceError) 확정 완료
 
   // 모달 열기
   multiAccountBtn.addEventListener('click', async () => {
@@ -1459,6 +1471,33 @@ export async function initMultiAccountPublishModal() {
     });
   }
 
+  // ✅ [2026-05-24] 계정별 풀오토 세팅 자동 저장/복원 — 사용자 요청
+  //   "지원금으로 세팅한 값이 리빙에서도 그대로 → 계정별로 기억하면 좋겠다"
+  //   localStorage['multiAccount.lastSettings'][accountId] 에 마지막 세팅 영속화
+  function saveLastFullAutoSetting(accountId: string, snapshot: Record<string, unknown>): void {
+    if (!accountId) return;
+    try {
+      const raw = localStorage.getItem('multiAccount.lastSettings') || '{}';
+      const all = JSON.parse(raw) || {};
+      all[accountId] = { ...snapshot, savedAt: Date.now() };
+      localStorage.setItem('multiAccount.lastSettings', JSON.stringify(all));
+    } catch (e) {
+      console.warn('[multiAccountManager] saveLastFullAutoSetting failed:', e);
+    }
+  }
+
+  function loadLastFullAutoSetting(accountId: string): Record<string, any> | null {
+    if (!accountId) return null;
+    try {
+      const raw = localStorage.getItem('multiAccount.lastSettings') || '{}';
+      const all = JSON.parse(raw) || {};
+      return all[accountId] || null;
+    } catch (e) {
+      console.warn('[multiAccountManager] loadLastFullAutoSetting failed:', e);
+      return null;
+    }
+  }
+
   // ✅ 풀오토 세팅 모달 열기
   function openFullautoSettingModal(accountId: string, accountName: string) {
     const modal = document.getElementById('ma-fullauto-setting-modal');
@@ -1508,6 +1547,52 @@ export async function initMultiAccountPublishModal() {
     if (ctaTypeSelectInit) ctaTypeSelectInit.value = 'none';
     if (ctaUrlInputInit) ctaUrlInputInit.value = '';
     if (ctaTextInputInit) ctaTextInputInit.value = '';
+
+    // ✅ [2026-05-25] 계정별 마지막 세팅 자동 복원 — 사용자 명시 정책:
+    //   - URL/키워드: 초기화 유지 (매번 새로 입력하는 게 자연스러움)
+    //   - 글톤/키워드 제목 옵션/콘텐츠 카테고리/발행 모드/콘텐츠 모드/실 블로그 카테고리/CTA: 계정별 복원
+    //   수정 모드의 setTimeout prefill은 이후 100ms 뒤 실행되어 덮어쓰므로 충돌 없음
+    try {
+      const last = loadLastFullAutoSetting(accountId);
+      if (last) {
+        // URL/키워드는 복원 안 함 (사용자 정책)
+        if (toneSelect && typeof last.toneStyle === 'string') toneSelect.value = last.toneStyle;
+        if (ctaTypeSelectInit && typeof last.ctaType === 'string') ctaTypeSelectInit.value = last.ctaType;
+        if (ctaUrlInputInit && typeof last.ctaUrl === 'string') ctaUrlInputInit.value = last.ctaUrl;
+        if (ctaTextInputInit && typeof last.ctaText === 'string') ctaTextInputInit.value = last.ctaText;
+        if (imageSourceSelect && typeof last.imageSource === 'string') imageSourceSelect.value = last.imageSource;
+        // 콘텐츠 카테고리 / 콘텐츠 모드
+        const catSel = document.getElementById('ma-setting-category') as HTMLSelectElement | null;
+        if (catSel && typeof last.category === 'string') catSel.value = last.category;
+        const contentModeSel = document.getElementById('ma-setting-content-mode') as HTMLSelectElement | null;
+        if (contentModeSel && typeof last.contentMode === 'string') contentModeSel.value = last.contentMode;
+        // 실 블로그 카테고리 (폴더명 — select value로 복원, 옵션이 동적이라 onChange 이벤트로 다시 채워질 수도 있음)
+        const realCatSel = document.getElementById('ma-setting-real-category') as HTMLSelectElement | null;
+        if (realCatSel && typeof last.realCategoryName === 'string') {
+          // option text가 카테고리명이라 일치 option 찾아서 선택
+          const matchOpt = Array.from(realCatSel.options).find(o => o.text === last.realCategoryName);
+          if (matchOpt) realCatSel.value = matchOpt.value;
+        }
+        // 발행 모드 라디오
+        if (typeof last.publishMode === 'string') {
+          const radio = document.querySelector(`input[name="ma-setting-publish-mode"][value="${last.publishMode}"]`) as HTMLInputElement | null;
+          if (radio) radio.checked = true;
+        }
+        // 체크박스 옵션들
+        const setCheckbox = (id: string, val: unknown) => {
+          const el = document.getElementById(id) as HTMLInputElement | null;
+          if (el && typeof val === 'boolean') el.checked = val;
+        };
+        setCheckbox('ma-setting-include-thumbnail-text', last.includeThumbnailText);
+        setCheckbox('ma-setting-use-ai-image', last.useAiImage);
+        setCheckbox('ma-setting-create-product-thumbnail', last.createProductThumbnail);
+        setCheckbox('ma-setting-keyword-as-title', last.keywordAsTitle);
+        setCheckbox('ma-setting-keyword-title-prefix', last.keywordTitlePrefix);
+        console.log(`[multiAccountManager] 🔄 ${accountId} 계정 마지막 세팅 자동 복원`);
+      }
+    } catch (e) {
+      console.warn('[multiAccountManager] prefill from last failed:', e);
+    }
 
     // ✅ [2026-02-02 FIX] 이미지 설정 버튼 직접 이벤트 리스너 추가 (이벤트 위임 실패 대비)
     const imageSettingsBtn = document.getElementById('ma-open-image-settings-btn');
@@ -1977,6 +2062,27 @@ export async function initMultiAccountPublishModal() {
     }
 
     renderQueue();
+
+    // ✅ [2026-05-25] 계정별 마지막 세팅 자동 저장 — 사용자 정책:
+    //   URL/키워드도 저장은 함 (정책 변경 시 즉시 복원 가능). 복원만 안 함.
+    saveLastFullAutoSetting(accountId, {
+      sourceUrl: urlText,
+      sourceKeyword: keywordText,
+      toneStyle,
+      ctaType,
+      ctaUrl,
+      ctaText,
+      publishMode,
+      contentMode,
+      category,
+      realCategoryName,
+      imageSource,
+      includeThumbnailText,
+      useAiImage,
+      createProductThumbnail,
+      keywordAsTitle,
+      keywordTitlePrefix,
+    });
 
     // 모달 닫기
     const modal = document.getElementById('ma-fullauto-setting-modal');
@@ -2652,6 +2758,56 @@ export async function initMultiAccountPublishModal() {
     return mins > 0 ? `${hours}시간 ${mins}분` : `${hours}시간`;
   };
 
+  // ✅ [2026-05-24] 다중계정 모달: 현재 계정 이미지 미리보기
+  //   - 단일 발행 모달(ProgressModal.showImages)과 동일 컨셉을 MA에 압축 적용
+  //   - 사용자 요청: 옵션 A (현재 계정의 이미지만, 계정 전환 시 자동 초기화)
+  function toFileUrlSafeMA(p: string): string {
+    const raw = String(p || '').trim();
+    if (!raw) return '';
+    if (/^(https?:\/\/|data:|blob:|file:\/\/)/i.test(raw)) return raw;
+    if (typeof (window as any)?.toFileUrlMaybe === 'function') {
+      return (window as any).toFileUrlMaybe(raw);
+    }
+    return `file:///${raw.replace(/\\/g, '/').replace(/^\/+/, '').replace(/#/g, '%23').replace(/\?/g, '%3F')}`;
+  }
+
+  function updateMACurrentImages(images: any[]): void {
+    const section = document.getElementById('ma-current-images-section');
+    const grid = document.getElementById('ma-images-grid');
+    const countEl = document.getElementById('ma-images-count');
+    if (!section || !grid) return;
+    const valid = (images || []).filter((img: any) => img && (img.url || img.filePath));
+    if (valid.length === 0) {
+      section.style.display = 'none';
+      grid.innerHTML = '';
+      return;
+    }
+    section.style.display = 'block';
+    if (countEl) countEl.textContent = `(${valid.length}장)`;
+    grid.innerHTML = '';
+    valid.forEach((img: any, idx: number) => {
+      const src = toFileUrlSafeMA(img.url || img.filePath || '');
+      if (!src) return;
+      const item = document.createElement('div');
+      item.style.cssText = 'position: relative; aspect-ratio: 1; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3);';
+      const headingAttr = String(img.heading || '').replace(/"/g, '&quot;');
+      item.innerHTML = `
+        <img src="${src}" alt="${headingAttr}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
+        <div style="position: absolute; top: 0; right: 0; padding: 1px 4px; background: rgba(0,0,0,0.6); font-size: 0.55rem; color: white; border-bottom-left-radius: 4px;">${idx + 1}</div>
+      `;
+      grid.appendChild(item);
+    });
+  }
+
+  function clearMACurrentImages(): void {
+    const section = document.getElementById('ma-current-images-section');
+    const grid = document.getElementById('ma-images-grid');
+    const countEl = document.getElementById('ma-images-count');
+    if (section) section.style.display = 'none';
+    if (grid) grid.innerHTML = '';
+    if (countEl) countEl.textContent = '';
+  }
+
   // ✅ 풀오토 진행 모달 제어 함수들 (모달 제거됨 - 콘솔 로그만 사용)
   function showMAProgressModal() {
     const modal = document.getElementById('ma-publish-progress-modal');
@@ -3134,6 +3290,8 @@ export async function initMultiAccountPublishModal() {
           }
           (window as any).currentStructuredContent = null;
           (window as any).generatedImages = [];
+          // ✅ [2026-05-24] 다중계정 모달 이미지 그리드도 함께 초기화
+          clearMACurrentImages();
         } catch (clearErr) {
           console.error('[FullAuto] 데이터 초기화 실패:', clearErr);
         }
@@ -3608,6 +3766,8 @@ export async function initMultiAccountPublishModal() {
               // ✅ [수정] 이미지 그리드 UI 업데이트 추가 (작은 그리드 표시)
               const allImagesAfter = ImageManager.getAllImages();
               displayGeneratedImages(allImagesAfter);
+              // ✅ [2026-05-24] 다중계정 모달 미리보기 그리드도 업데이트
+              updateMACurrentImages(allImagesAfter);
             }
           } catch (uiImgErr) {
             console.error('[FullAuto] 이미지 UI 업데이트 실패:', uiImgErr);
