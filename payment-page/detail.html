@@ -64,15 +64,15 @@
             position: relative;
             z-index: 1;
             max-width: 900px;
-            /* ✅ 사용자 보고 (2026-05-23): 비디오 배경(풀빌라)이 너무 밝아 흰색 텍스트 가독성 떨어짐.
-               글래스 카드 효과로 어두운 반투명 배경 추가 → 비디오 분위기는 유지 + 텍스트 또렷 */
-            background: rgba(10, 10, 15, 0.65);
+            /* ✅ 사용자 재보고 (2026-05-24): 0.65 + blur 10px 박스가 시각적으로 거의 안 보임.
+               비디오 밝기에 묻혀 윤곽이 안 살아남 → 0.88로 진하게 + border/shadow 강화 */
+            background: rgba(8, 10, 18, 0.88);
             padding: 56px 40px;
             border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 24px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
         @media (max-width: 768px) {
             .hero-content { padding: 36px 20px; border-radius: 18px; }
