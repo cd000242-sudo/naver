@@ -1133,7 +1133,9 @@
             .sub-feature { padding: 16px; }
         }
     </style>
-    <link rel="stylesheet" href="summer-theme.css">
+    <!-- summer-theme.css 제거됨 (2026-05-24): detail.html은 dark 컨셉(풀빌라 비디오 hero + 검정 섹션)이라
+         summer 테마(body 풀빌라 사진 + 모든 section 강제 transparent)와 충돌. 모든 본문 텍스트가
+         밝은 모래/바다 배경 위에 떠서 가독성 0이 됨. 다른 페이지(pricing/reviews/community 등)는 그대로 유지. -->
 
     <!-- ✨ SEO: canonical / keywords / OG / Twitter (Phase 7 SEO 1단계) -->
     <link rel="canonical" href="https://www.leaderspro.kr/detail.html">
@@ -2134,7 +2136,7 @@ document.addEventListener('keydown', e => {
 </script>
 
     <script src="music.js"></script>
-    <script src="summer-theme.js"></script>
+    <!-- summer-theme.js 제거됨 (2026-05-24): summer-theme.css와 함께 dark 컨셉 detail.html과 충돌 -->
 </body>
 </html>
 < ! - -   d e p l o y e d   - - > 
