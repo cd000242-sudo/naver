@@ -163,10 +163,10 @@ function MusicPlayer() {
             {/* 숨김 YT 플레이어 */}
             <div id="lpm-yt-player" style={{ position: 'fixed', top: -9999, left: -9999, width: 1, height: 1, opacity: 0, pointerEvents: 'none' }} />
 
-            {/* 미니 플레이어 FAB */}
+            {/* 미니 플레이어 FAB — 4개 stack 중 가장 위 (유튜브 위로) */}
             <div
                 style={{
-                    position: 'fixed', bottom: 100, right: 24, zIndex: 10000,
+                    position: 'fixed', bottom: 200, right: 24, zIndex: 10000,
                     display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8,
                     pointerEvents: 'none',
                 }}

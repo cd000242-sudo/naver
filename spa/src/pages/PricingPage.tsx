@@ -9,7 +9,8 @@ import { Link, useSearchParams } from 'react-router-dom';
  */
 
 const TOSS_CLIENT_KEY = 'live_ck_mBZ1gQ4YVX9M4BDM7a0Rrl2KPoqN';
-const TOSS_SDK_URL = 'https://js.tosspayments.com/v1/payment';
+// v2/standard — 원본 pricing.html과 동일 SDK URL. v1 은 API 시그니처가 다름.
+const TOSS_SDK_URL = 'https://js.tosspayments.com/v2/standard';
 
 interface Plan {
     id: string;
@@ -141,8 +142,14 @@ function PricingPage() {
             const failUrl = `${origin}/fail.html`;
             const payment = tossRef.current.payment({ customerKey });
             await payment.requestBillingAuth({ method: 'CARD', successUrl, failUrl });
-        } catch (err) {
-            console.log('결제 취소:', err);
+        } catch (err: any) {
+            // 사용자가 결제창을 닫은 경우(USER_CANCEL)와 실제 SDK 오류 구분
+            const code = err?.code || '';
+            const msg = err?.message || String(err);
+            console.error('[Toss requestBillingAuth] code:', code, 'message:', msg, err);
+            if (code !== 'USER_CANCEL' && !msg.includes('취소')) {
+                alert(`결제창 호출 실패\n\ncode: ${code || '(없음)'}\nmessage: ${msg}\n\n토스 콘솔에 successUrl(${window.location.origin}/success.html) 등록 여부를 확인해주세요.`);
+            }
             setPaying(false);
         }
     };

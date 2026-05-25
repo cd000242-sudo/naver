@@ -21,11 +21,13 @@ function FloatStack() {
 
     return (
         <>
+            {/* 위→아래 순서: 음악(MusicPlayer bottom:200) / 유튜브(140) / 단톡방(80) / 1:1(20)
+                음악이 유튜브보다 위. 전체 stack을 살짝 하단으로 내림. */}
             <a
                 href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener"
                 title="1:1 카카오톡 문의"
                 style={{
-                    ...baseStyle, bottom: 160,
+                    ...baseStyle, bottom: 20,
                     background: 'rgba(60,29,0,0.92)',
                     border: '1px solid rgba(254,229,0,0.45)',
                     boxShadow: '0 6px 24px rgba(0,0,0,0.35)',
@@ -39,7 +41,7 @@ function FloatStack() {
                 href="https://open.kakao.com/o/gQ1jRBwh" target="_blank" rel="noopener"
                 title="단톡방 바로가기"
                 style={{
-                    ...baseStyle, bottom: 220,
+                    ...baseStyle, bottom: 80,
                     background: 'rgba(254,229,0,0.95)',
                     border: '1px solid rgba(60,29,0,0.5)',
                     boxShadow: '0 6px 24px rgba(0,0,0,0.35)',
@@ -53,7 +55,7 @@ function FloatStack() {
                 href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener"
                 title="공식 유튜브 채널"
                 style={{
-                    ...baseStyle, bottom: 280,
+                    ...baseStyle, bottom: 140,
                     background: 'rgba(255,0,0,0.92)',
                     border: '1px solid rgba(255,100,100,0.5)',
                     boxShadow: '0 6px 24px rgba(255,0,0,0.35)',
