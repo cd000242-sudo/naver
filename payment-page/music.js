@@ -479,15 +479,15 @@
 
     window.onYouTubeIframeAPIReady = function() {
         const resumeTime = getResumeTime();
+        // v4: Radio 자동재생 목록 (RDf4jS6yW83MU) — 동일 곡으로 시작 + 비슷한 곡 자동 추가
+        //   원본 URL: youtube.com/watch?v=f4jS6yW83MU&list=RDf4jS6yW83MU&t=16s
+        //   첫 진입은 16초부터, 이어재생 시 저장된 시간으로 복귀
         player = new YT.Player('yt-music-player', {
-            videoId: PLAYLIST[currentTrack].id,
             playerVars: {
-                autoplay: shouldAutoPlay ? 1 : 0,
-                start: resumeTime > 0 ? Math.floor(resumeTime) : 0, // ← 이어재생 위치
-                // 단일 곡 무한 루프: loop=1 + playlist=videoId (YouTube 요구사항).
-                // 다중 곡일 땐 onStateChange ENDED 폴백으로 다음 곡 전환.
-                loop: PLAYLIST.length === 1 ? 1 : 0,
-                playlist: PLAYLIST.length === 1 ? PLAYLIST[currentTrack].id : undefined,
+                autoplay: 1,
+                start: resumeTime > 0 ? Math.floor(resumeTime) : 16,
+                listType: 'playlist',
+                list: 'RDf4jS6yW83MU',
                 controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0
             },
             events: {
