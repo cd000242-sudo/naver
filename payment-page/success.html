@@ -160,6 +160,9 @@
         let buyerEmail = null;
 
         // ===== URL 파라미터 파싱 =====
+        // 토스 콜백 query string:
+        // - 단건/즉시결제: paymentKey + orderId + amount
+        // - 정기결제 인증(7일 무료): customerKey + authKey  (paymentKey 없음)
         function getParams() {
             const params = new URLSearchParams(window.location.search);
             return {
@@ -167,7 +170,36 @@
                 orderId: params.get('orderId'),
                 amount: params.get('amount'),
                 email: params.get('email'),
+                // 정기결제 (trial) 콜백용
+                customerKey: params.get('customerKey'),
+                authKey: params.get('authKey'),
+                productId: params.get('productId'),
             };
+        }
+
+        // ===== Trial 시작 JSONP 호출 =====
+        function callStartTrialJSONP(params) {
+            return new Promise((resolve, reject) => {
+                const timeoutId = setTimeout(() => { cleanup(); reject(new Error('TIMEOUT')); }, CONFIG.TIMEOUT_MS);
+                const callbackName = '__trialCallback_' + Date.now();
+                window[callbackName] = function (data) { clearTimeout(timeoutId); cleanup(); resolve(data); };
+                function cleanup() {
+                    delete window[callbackName];
+                    const script = document.getElementById('jsonp-trial-script');
+                    if (script) script.remove();
+                }
+                const script = document.createElement('script');
+                script.id = 'jsonp-trial-script';
+                script.src = `${CONFIG.GAS_URL}?action=start-trial` +
+                    `&authKey=${encodeURIComponent(params.authKey)}` +
+                    `&customerKey=${encodeURIComponent(params.customerKey)}` +
+                    `&amount=${encodeURIComponent(params.amount || '')}` +
+                    `&product=${encodeURIComponent(params.productId || '')}` +
+                    (params.email ? `&email=${encodeURIComponent(params.email)}` : '') +
+                    `&callback=${callbackName}`;
+                script.onerror = function () { clearTimeout(timeoutId); cleanup(); reject(new Error('NETWORK_ERROR')); };
+                document.head.appendChild(script);
+            });
         }
 
         // ===== JSONP 호출 =====
@@ -475,7 +507,31 @@
         // ===== 메인 실행 =====
         async function main() {
             const params = getParams();
+            buyerEmail = params.email || null;
 
+            // ── 정기결제 trial 분기: customerKey + authKey 있으면 7일 무료 시작 흐름
+            if (params.customerKey && params.authKey) {
+                try {
+                    const result = await callStartTrialJSONP(params);
+                    if (result.ok && result.code) {
+                        // 페이지 타이틀/문구를 trial 시작 형태로 표시
+                        const headline = document.querySelector('h1, .success-title');
+                        if (headline) headline.textContent = '🎁 7일 무료 체험 시작!';
+                        const sub = document.querySelector('.success-subtitle, .subtitle');
+                        if (sub) sub.textContent = result.trialEndDate
+                            ? `${result.trialEndDate} 부터 자동결제됩니다. 그 전에 언제든 해지 가능합니다.`
+                            : '7일간 무료로 사용하실 수 있습니다.';
+                        showCode(result.code, result.product);
+                    } else {
+                        showError(result.error || 'trial 등록 중 오류가 발생했습니다.', 'trial 시작 실패');
+                    }
+                } catch (err) {
+                    showError('서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.', '연결 실패');
+                }
+                return;
+            }
+
+            // ── 기존 단건 결제 흐름
             if (!params.paymentKey || !params.orderId || !params.amount) {
                 showError('결제 정보가 올바르지 않습니다. 처음부터 다시 시도해주세요.', '잘못된 접근');
                 document.getElementById('btn-check-order').style.display = 'none';
@@ -483,7 +539,6 @@
             }
 
             currentOrderId = params.orderId;
-            buyerEmail = params.email || null;
 
             try {
                 const result = await callGASviaJSONP(params);

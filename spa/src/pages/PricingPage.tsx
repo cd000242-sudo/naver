@@ -158,7 +158,7 @@ function PricingPage() {
         if (!selected) return '플랜을 선택해주세요';
         const charge = selected.amountCard || selected.amount;
         const vatNote = selected.amountCard ? ' (VAT 포함)' : '';
-        return `${charge.toLocaleString()}원${vatNote} 정기구독하기`;
+        return `🎁 7일 무료 시작 — 이후 월 ${charge.toLocaleString()}원${vatNote}`;
     })();
 
     return (
@@ -307,7 +307,10 @@ function PricingPage() {
                         {paying && <span style={{ width: 16, height: 16, border: '2px solid currentColor', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spinPay 0.8s linear infinite' }} />}
                         <span>{paying ? '결제 중...' : chargeLabel}</span>
                     </button>
-                    <p style={{ textAlign: 'center', color: '#c9a84c', fontSize: 13, marginTop: 10 }}>📌 정기구독 상품입니다. 선택한 기간마다 자동으로 결제되며, 언제든지 해지할 수 있습니다.</p>
+                    <p style={{ textAlign: 'center', color: '#c9a84c', fontSize: 13, marginTop: 10, lineHeight: 1.7 }}>
+                        🎁 <strong>7일간 무료</strong>로 사용해보세요. 7일 후 선택한 플랜의 정기구독이 시작되며,<br />
+                        <strong>해지하지 않으면 자동결제</strong>됩니다. 무료 기간 내 해지 시 요금이 청구되지 않습니다.
+                    </p>
                     <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: 12, marginTop: 8 }}>
                         결제 진행 시 <Link to="/terms" style={{ color: '#FFD700' }}>이용약관</Link> 및 <Link to="/privacy" style={{ color: '#FFD700' }}>개인정보처리방침</Link>에 동의하는 것으로 간주됩니다.
                     </p>
