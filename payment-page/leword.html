@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leword — 황금키워드 발굴의 단 하나의 기준</title>
+    <meta name="description" content="17개 데이터 소스 교차검증 · MDP v3.0 5차원 스코어링 · SSS 등급. 키워드 하나를 정하기 전에, 데이터가 먼저 답합니다.">
+    <meta property="og:title" content="Leword — 황금키워드 발굴의 단 하나의 기준">
+    <meta property="og:description" content="17개 소스를 교차검증하고, 5차원 가중 기하평균으로 점수를 내고, 4단 게이트를 통과한 키워드만 SSS로 표시합니다.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+
+    <style>
+        /* ========== SPRING CHERRY BLOSSOM ========== */
+        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
+        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
+        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
+
+        /* ========== MUSIC TOGGLE ========== */
+        .music-toggle { position: fixed; bottom: 100px; right: 24px; z-index: 10000; width: 52px; height: 52px; border-radius: 50%; background: rgba(255,183,197,0.25); border: 1px solid rgba(255,183,197,0.5); backdrop-filter: blur(12px); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(255,107,138,0.2); }
+        .music-toggle:hover { transform: scale(1.1); background: rgba(255,183,197,0.4); }
+        .music-toggle.playing { animation: musicPulse 1.5s ease-in-out infinite; }
+        @keyframes musicPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(255,107,138,0.2); } 50% { box-shadow: 0 4px 30px rgba(255,107,138,0.6), 0 0 60px rgba(255,183,197,0.3); } }
+        .music-hint { position: fixed; bottom: 108px; right: 84px; z-index: 10000; background: rgba(255,183,197,0.92); color: #1a0a10; padding: 10px 16px; border-radius: 12px; font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 20px rgba(255,107,138,0.3); animation: hintFadeIn 0.5s ease-out both, hintFadeOut 0.5s 6s ease-in both; pointer-events: none; }
+        .music-hint::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-left-color: rgba(255,183,197,0.92); }
+        @keyframes hintFadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes hintFadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
+        .music-toggle.attention { animation: bounceAttention 1s ease-in-out 3; }
+        @keyframes bounceAttention { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        @media (max-width: 768px) { .music-toggle { bottom: 90px; right: 16px; width: 44px; height: 44px; font-size: 18px; } .music-hint { bottom: 98px; right: 68px; font-size: 11px; padding: 8px 12px; } }
+
+        /* ========== SPRING ACCENT OVERLAY ========== */
+        body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 10% 5%, rgba(124,58,237,0.07) 0%, transparent 40%), radial-gradient(ellipse at 90% 10%, rgba(255,215,0,0.05) 0%, transparent 35%), radial-gradient(ellipse at 50% 95%, rgba(124,58,237,0.04) 0%, transparent 40%); pointer-events: none; z-index: 0; opacity: 0.6; }
+
+        :root {
+            /* LEWORD 브랜드 — 보라 primary + 금색 secondary (SSS 등급 강조용) */
+            --purple: #7C3AED;
+            --purple-light: #A78BFA;
+            --purple-deep: #4C1D95;
+            --gold: #FFD700;
+            --gold-dark: #B8860B;
+            --neon-green: #00FF88;
+            --neon-blue: #00AAFF;
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-section: #0d0d14;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --gradient-purple: linear-gradient(135deg, #4C1D95, #7C3AED, #A78BFA);
+            --gradient-gold: linear-gradient(135deg, #FFD700, #FFA500, #FF6B00);
+            --gradient-premium: linear-gradient(135deg, #4C1D95, #7C3AED 50%, #FFD700);
+            --gradient-fire: linear-gradient(135deg, #f12711, #f5af19);
+            --gradient-ocean: linear-gradient(135deg, #00c6ff, #0072ff);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Pretendard Variable', 'Noto Sans KR', -apple-system, sans-serif; background: var(--bg-dark); color: var(--text-primary); overflow-x: hidden; line-height: 1.7; }
+
+        /* ========== URGENCY BANNER ========== */
+        .urgency-banner { background: var(--gradient-premium); padding: 16px 20px; text-align: center; font-weight: 700; font-size: 16px; position: sticky; top: 0; z-index: 1000; animation: urgency-pulse 3s infinite; }
+        @keyframes urgency-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.92; } }
+        .urgency-banner .timer { font-size: 22px; margin-left: 10px; color: var(--gold); }
+
+        /* ========== HERO ========== */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; background: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.10) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(255,215,0,0.05) 0%, transparent 50%), var(--bg-dark); padding: 40px 20px; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
+        .hero-content { position: relative; z-index: 1; max-width: 900px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.4); padding: 8px 20px; border-radius: 50px; font-size: 14px; color: var(--purple-light); margin-bottom: 30px; animation: pulse-glow 2s infinite; }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 5px rgba(124,58,237,0.2); } 50% { box-shadow: 0 0 24px rgba(124,58,237,0.5); } }
+        .hero h1 { font-size: clamp(32px, 6vw, 64px); font-weight: 900; line-height: 1.2; margin-bottom: 20px; letter-spacing: -2px; }
+        .hero h1 .highlight { background: var(--gradient-premium); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-subtitle { font-size: clamp(16px, 2.5vw, 22px); color: var(--text-secondary); margin-bottom: 15px; font-weight: 300; }
+        .hero-pain { font-size: clamp(18px, 3vw, 28px); font-weight: 700; color: #ff6b6b; margin-bottom: 40px; }
+        .hero-cta-group, .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--gradient-premium); color: #fff; font-size: 18px; font-weight: 700; padding: 18px 40px; border-radius: 12px; text-decoration: none; transition: all 0.3s; border: none; cursor: pointer; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(124,58,237,0.4); }
+        .btn-secondary { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--text-primary); font-size: 18px; font-weight: 500; padding: 18px 40px; border-radius: 12px; text-decoration: none; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s; }
+        .btn-secondary:hover { border-color: var(--purple-light); color: var(--purple-light); }
+        .hero-stats { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
+        .hero-stat, .stat-item { text-align: center; }
+        .hero-stat .number, .stat-number { font-size: 32px; font-weight: 900; background: var(--gradient-premium); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-stat .label, .stat-label { font-size: 14px; color: var(--text-secondary); }
+
+        /* ========== PAIN SECTION ========== */
+        .pain-section { padding: 100px 20px; background: var(--bg-section); text-align: center; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-label { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px; }
+        .section-title { font-size: clamp(28px, 4vw, 48px); font-weight: 900; margin-bottom: 20px; line-height: 1.3; letter-spacing: -1.5px; }
+        .section-desc { font-size: 18px; color: var(--text-secondary); max-width: 700px; margin: 0 auto 60px; }
+        .pain-grid, .pain-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 50px; }
+        .pain-card { background: rgba(255,107,107,0.12); border: 1px solid rgba(255,107,107,0.3); border-radius: 16px; padding: 32px; text-align: left; transition: all 0.3s; }
+        .pain-card:hover { border-color: rgba(255,107,107,0.5); transform: translateY(-4px); }
+        .pain-card .icon { font-size: 40px; margin-bottom: 16px; }
+        .pain-card h3 { font-size: 20px; margin-bottom: 10px; color: #ff6b6b; }
+        .pain-card p { color: var(--text-secondary); font-size: 15px; }
+        .loss-callout { background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.2); border-radius: 12px; padding: 24px; margin-top: 40px; text-align: center; }
+        .loss-callout p { font-size: 18px; font-weight: 700; color: #ff8888; }
+        .loss-callout .big { font-size: 32px; color: #ff6b6b; }
+
+        /* ========== FEATURES ========== */
+        .features-section { padding: 100px 20px; background: var(--bg-section); }
+        .feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 100px; }
+        .feature-row:nth-child(even) { direction: rtl; }
+        .feature-row:nth-child(even) > * { direction: ltr; }
+        .feature-row:last-child { margin-bottom: 0; }
+        .feature-tag { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        .tag-data { background: rgba(124,58,237,0.2); color: var(--purple-light); }
+        .tag-score { background: rgba(0,255,136,0.15); color: #00ff88; }
+        .tag-grade { background: rgba(255,215,0,0.15); color: var(--gold); }
+        .tag-hunter { background: rgba(255,107,107,0.15); color: #ff6b6b; }
+        .tag-profit { background: rgba(0,170,255,0.15); color: var(--neon-blue); }
+        .feature-text h3 { font-size: clamp(24px, 3vw, 36px); font-weight: 900; margin-bottom: 16px; line-height: 1.3; letter-spacing: -1px; }
+        .feature-text p { color: var(--text-secondary); font-size: 16px; margin-bottom: 24px; }
+        .feature-bullets { list-style: none; }
+        .feature-bullets li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; font-size: 15px; color: var(--text-secondary); }
+        .feature-bullets li::before { content: '✓'; color: var(--neon-green); font-weight: 700; flex-shrink: 0; }
+        .feature-visual { position: relative; margin: auto 0; }
+        .feature-screenshot { border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); width: 100%; }
+        .feature-screenshot img { width: 100%; display: block; }
+
+        /* ========== SUB FEATURES ========== */
+        .sub-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 24px; }
+        .sub-feature { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s; }
+        .sub-feature:hover { border-color: rgba(124,58,237,0.4); transform: translateY(-2px); }
+        .sub-feature .sf-icon { font-size: 28px; margin-bottom: 8px; }
+        .sub-feature .sf-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+        .sub-feature .sf-desc { font-size: 12px; color: var(--text-secondary); }
+
+        /* ========== MID CTA ========== */
+        .mid-cta { padding: 60px 20px; text-align: center; background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(255,215,0,0.04) 100%); border-top: 1px solid rgba(124,58,237,0.15); border-bottom: 1px solid rgba(124,58,237,0.15); }
+        .mid-cta p { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+        .mid-cta .btn-primary { font-size: 16px; padding: 16px 36px; }
+
+        /* ========== GRADE SHOWCASE (LEWORD 전용) ========== */
+        .grade-showcase { padding: 100px 20px; background: var(--bg-dark); }
+        .grade-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; max-width: 1100px; margin: 60px auto 0; }
+        .grade-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px 16px; text-align: center; transition: all 0.3s; }
+        .grade-card.sss { background: linear-gradient(180deg, rgba(255,215,0,0.10) 0%, rgba(18,18,26,0.95) 60%); border: 2px solid var(--gold); box-shadow: 0 0 40px rgba(255,215,0,0.15); transform: scale(1.05); }
+        .grade-card.ss { border-color: rgba(167,139,250,0.5); }
+        .grade-card.s { border-color: rgba(124,58,237,0.4); }
+        .grade-card.a { border-color: rgba(0,255,136,0.3); }
+        .grade-card.b { border-color: rgba(255,255,255,0.15); }
+        .grade-label { font-size: 32px; font-weight: 900; margin-bottom: 8px; letter-spacing: -1px; }
+        .grade-card.sss .grade-label { background: var(--gradient-gold); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .grade-card.ss .grade-label { color: var(--purple-light); }
+        .grade-card.s .grade-label { color: var(--purple); }
+        .grade-card.a .grade-label { color: var(--neon-green); }
+        .grade-card.b .grade-label { color: var(--text-secondary); }
+        .grade-gate { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin-top: 12px; }
+        .grade-gate strong { color: var(--gold); }
+        @media (max-width: 768px) {
+            .grade-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .grade-card.sss { grid-column: span 2; transform: none; }
+        }
+
+        /* ========== COMPARISON ========== */
+        .comparison-section { padding: 100px 20px; background: var(--bg-section); }
+        .comparison-table { width: 100%; border-collapse: collapse; max-width: 900px; margin: 50px auto 0; }
+        .comparison-table th, .comparison-table td { padding: 18px 24px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .comparison-table thead th { background: rgba(124,58,237,0.12); font-size: 16px; font-weight: 700; }
+        .comparison-table thead th:last-child { color: var(--purple-light); position: relative; }
+        .comparison-table thead th:last-child::after { content: '추천'; position: absolute; top: -12px; right: 10px; background: var(--gradient-purple); padding: 2px 10px; border-radius: 20px; font-size: 11px; color: white; }
+        .comparison-table td:first-child { text-align: left; font-weight: 500; }
+        .comparison-table td:last-child { background: rgba(124,58,237,0.10); }
+        .comparison-table .check { color: var(--neon-green); font-size: 20px; }
+        .comparison-table .cross { color: #ff4444; font-size: 20px; }
+        .comparison-table .partial { color: #ffaa00; font-size: 14px; }
+
+        /* ========== AUTHORITY ========== */
+        .authority-bar { text-align: center; padding: 30px 20px; background: rgba(124,58,237,0.10); border-top: 1px solid rgba(124,58,237,0.25); border-bottom: 1px solid rgba(124,58,237,0.25); }
+        .authority-bar p { font-size: 16px; color: var(--text-secondary); font-weight: 500; }
+        .authority-bar strong { color: var(--purple-light); }
+
+        /* ========== TESTIMONIALS ========== */
+        .proof-section { padding: 100px 20px; background: var(--bg-section); }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 50px; }
+        .testimonial-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 32px; position: relative; transition: all 0.3s; }
+        .testimonial-card:hover { border-color: rgba(124,58,237,0.35); transform: translateY(-4px); }
+        .testimonial-card::before { content: '"'; position: absolute; top: 16px; right: 24px; font-size: 64px; color: rgba(124,58,237,0.15); font-family: Georgia, serif; line-height: 1; }
+        .testimonial-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .testimonial-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--gradient-premium); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .testimonial-name { font-weight: 700; font-size: 15px; }
+        .testimonial-role { font-size: 13px; color: var(--text-secondary); }
+        .testimonial-text { font-size: 15px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.8; }
+        .testimonial-result { background: rgba(124,58,237,0.10); border: 1px solid rgba(124,58,237,0.2); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--purple-light); font-weight: 600; }
+
+        /* ========== PRICING V2 — PREMIUM ========== */
+        .pricing-section { padding: 100px 20px; background: radial-gradient(ellipse at 30% 0%, rgba(124,58,237,0.08) 0%, transparent 50%), radial-gradient(ellipse at 70% 100%, rgba(255,215,0,0.04) 0%, transparent 50%), var(--bg-dark); text-align: center; position: relative; overflow: hidden; }
+        .pricing-section::before { content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(124,58,237,0.04) 0%, transparent 70%); pointer-events: none; }
+        .pricing-subtitle { color: var(--text-secondary); font-size: 16px; max-width: 600px; margin: 0 auto 20px; }
+        .pricing-savings-bar { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.25); padding: 8px 20px; border-radius: 50px; font-size: 14px; color: var(--neon-green); margin-bottom: 48px; font-weight: 600; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; max-width: 1180px; margin: 0 auto; align-items: stretch; }
+        .pricing-card { background: rgba(18,18,26,0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.06); padding: 40px 22px 36px; position: relative; transition: all 0.4s cubic-bezier(.4,0,.2,1); display: flex; flex-direction: column; }
+        .pricing-card:first-child { border-radius: 24px 0 0 24px; }
+        .pricing-card:last-child { border-radius: 0 24px 24px 0; }
+        .pricing-card:hover { transform: translateY(-8px); z-index: 2; border-color: rgba(124,58,237,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+        .pricing-card.popular { background: linear-gradient(180deg, rgba(124,58,237,0.10) 0%, rgba(18,18,26,0.9) 40%); border: 2px solid rgba(124,58,237,0.5); border-radius: 24px; transform: scale(1.06); z-index: 3; box-shadow: 0 0 60px rgba(124,58,237,0.15), 0 20px 60px rgba(0,0,0,0.3); }
+        .pricing-card.popular:hover { transform: scale(1.06) translateY(-8px); }
+        .popular-badge { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background: var(--gradient-premium); padding: 6px 28px; border-radius: 50px; font-size: 13px; font-weight: 800; color: #fff; white-space: nowrap; box-shadow: 0 4px 20px rgba(124,58,237,0.4); animation: badge-glow 2s infinite; }
+        @keyframes badge-glow { 0%, 100% { box-shadow: 0 4px 20px rgba(124,58,237,0.3); } 50% { box-shadow: 0 4px 30px rgba(124,58,237,0.6); } }
+        .pricing-header { text-align: center; margin-bottom: 28px; }
+        .pricing-header h3 { font-size: 22px; font-weight: 800; margin-bottom: 16px; }
+        .pricing-price { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .original-price { font-size: 16px; color: var(--text-secondary); text-decoration: line-through; opacity: 0.6; }
+        .current-price { font-size: 40px; font-weight: 900; line-height: 1.1; background: var(--gradient-premium); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -2px; }
+        .pricing-per { font-size: 14px; color: var(--neon-green); font-weight: 600; margin-top: 4px; }
+        .pricing-discount-tag { display: inline-block; background: rgba(255,107,0,0.15); color: #ff8c00; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-top: 8px; }
+        .pricing-features { list-style: none; text-align: left; margin-bottom: 28px; flex: 1; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; }
+        .pricing-features li { padding: 7px 0; font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; }
+        .pricing-features li .check-icon { color: var(--neon-green); font-weight: 700; flex-shrink: 0; width: 18px; }
+        .btn-pricing { display: block; width: 100%; padding: 16px; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; border: none; text-decoration: none; text-align: center; color: #fff; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); }
+        .btn-pricing:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        .btn-popular { background: var(--gradient-premium) !important; color: #fff !important; border: none !important; font-size: 17px; box-shadow: 0 4px 20px rgba(124,58,237,0.35); }
+        .btn-popular:hover { box-shadow: 0 8px 40px rgba(124,58,237,0.55) !important; }
+        .guarantee-strip { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.04); }
+        .guarantee-strip-item { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 14px; }
+        .guarantee-strip-item .gs-icon { font-size: 18px; }
+
+        /* ========== GUARANTEE ========== */
+        .guarantee-section { padding: 80px 20px; background: var(--bg-section); text-align: center; }
+        .guarantee-box { max-width: 700px; margin: 0 auto; background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.3); border-radius: 20px; padding: 40px; }
+        .guarantee-box .icon { font-size: 56px; margin-bottom: 16px; }
+        .guarantee-box h3 { font-size: 28px; font-weight: 900; margin-bottom: 12px; }
+        .guarantee-box p { color: var(--text-secondary); font-size: 16px; }
+
+        /* ========== FAQ ========== */
+        .faq-section { padding: 100px 20px; background: var(--bg-dark); }
+        .faq-list { max-width: 800px; margin: 50px auto 0; }
+        .faq-item { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; margin-bottom: 12px; overflow: hidden; transition: all 0.3s; }
+        .faq-item:hover { border-color: rgba(124,58,237,0.3); }
+        .faq-question { padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 700; font-size: 16px; transition: color 0.2s; }
+        .faq-question:hover { color: var(--purple-light); }
+        .faq-question .faq-toggle { font-size: 22px; color: var(--purple-light); transition: transform 0.3s; }
+        .faq-item.active .faq-toggle { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; padding: 0 28px; transition: all 0.4s ease; color: var(--text-secondary); }
+        .faq-item.active .faq-answer { max-height: 800px; padding: 0 28px 24px; }
+        .faq-answer p { font-size: 15px; line-height: 1.8; }
+        .faq-answer strong { color: var(--purple-light); }
+
+        /* ========== FINAL CTA ========== */
+        .final-cta-section { padding: 120px 20px; background: linear-gradient(180deg, rgba(10,10,15,0.85) 0%, rgba(10,10,15,0.6) 60%, rgba(10,10,15,0.92) 100%), url('images/leword/emotional-close.png') center/cover no-repeat fixed, var(--bg-dark); text-align: center; position: relative; }
+        .final-cta-section .highlight { background: var(--gradient-premium); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        @media (max-width: 768px) { .final-cta-section { background: linear-gradient(180deg, rgba(10,10,15,0.85) 0%, rgba(10,10,15,0.6) 60%, rgba(10,10,15,0.92) 100%), url('images/leword/emotional-close.png') center/cover no-repeat, var(--bg-dark); } }
+
+        /* ========== FLOATING CTA ========== */
+        .floating-cta { position: fixed; bottom: 24px; right: 24px; z-index: 999; animation: float-bounce 2s infinite; }
+        @keyframes float-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .floating-cta a { display: flex; align-items: center; gap: 8px; background: var(--gradient-premium); color: #fff; padding: 16px 28px; border-radius: 60px; text-decoration: none; font-weight: 700; font-size: 16px; box-shadow: 0 8px 30px rgba(124,58,237,0.4); transition: all 0.3s; }
+        .floating-cta a:hover { box-shadow: 0 12px 40px rgba(124,58,237,0.6); transform: scale(1.05); }
+
+        /* ========== CAROUSEL ========== */
+        .carousel-wrapper { position: relative; margin-top: 20px; }
+        .feature-gallery { display: flex; gap: 0; overflow: hidden; padding: 8px 0; }
+        .gallery-item { flex: 0 0 100%; min-width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; align-items: center; justify-content: center; background: #0a0a0f; }
+        .gallery-item img { max-width: 100%; max-height: 100%; display: block; object-fit: contain; }
+        .carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(124,58,237,0.18); border: 1px solid rgba(124,58,237,0.45); color: var(--purple-light); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 5; backdrop-filter: blur(8px); }
+        .carousel-arrow:hover { background: rgba(124,58,237,0.35); transform: translateY(-50%) scale(1.1); }
+        .carousel-arrow.prev { left: -16px; }
+        .carousel-arrow.next { right: -16px; }
+        .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+        .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); border: none; cursor: pointer; transition: all 0.3s; }
+        .carousel-dot.active { width: 24px; border-radius: 4px; background: var(--purple-light); }
+
+        /* ========== BONUS GRID ========== */
+        .bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 50px; }
+        .bonus-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; overflow: hidden; transition: all 0.3s; }
+        .bonus-card:hover { border-color: rgba(124,58,237,0.35); transform: translateY(-4px); }
+        .bonus-card .bonus-icon-wrap { height: 120px; display: flex; align-items: center; justify-content: center; font-size: 56px; background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(255,215,0,0.06)); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .bonus-card-body { padding: 20px; }
+        .bonus-card-body h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .bonus-card-body p { font-size: 13px; color: var(--text-secondary); }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ========== KAKAO / YOUTUBE FLOAT (사이트 표준) ========== */
+        .kakao-float { position: fixed; bottom: 30px; left: 24px; z-index: 10001; display: flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 50px; background: rgba(60,29,0,0.85); border: 1px solid rgba(254,229,0,0.4); backdrop-filter: blur(16px); text-decoration: none; box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(254,229,0,0.15); transition: transform 0.2s; font-family: 'Pretendard Variable', 'Inter', sans-serif; }
+        .kakao-float:hover { transform: scale(1.05); }
+        .kakao-float-icon { width: 28px; height: 28px; background: #fee500; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .kakao-float-text { color: #fee500; font-weight: 700; font-size: 14px; white-space: nowrap; letter-spacing: -0.3px; }
+        .kakao-float-pulse { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: #ff3b5c; animation: kakaoPulse 2s ease-in-out infinite; }
+        @keyframes kakaoPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .feature-row { grid-template-columns: 1fr; gap: 30px; }
+            .feature-row:nth-child(even) { direction: ltr; }
+            .comparison-table { font-size: 13px; }
+            .comparison-table th, .comparison-table td { padding: 12px 8px; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; gap: 20px; }
+            .pricing-card { border-radius: 20px !important; }
+            .pricing-card.popular { transform: none; }
+            .pricing-card.popular:hover { transform: translateY(-6px); }
+            .hero-stats { gap: 20px; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+            .pain-cards { gap: 16px; }
+            .pain-card { padding: 24px; }
+            .section-title { font-size: clamp(24px, 5vw, 36px); }
+            .section-desc { font-size: 15px; margin-bottom: 40px; }
+            .features-section, .comparison-section, .proof-section, .pain-section, .pricing-section, .guarantee-section, .grade-showcase, .faq-section { padding: 60px 16px; }
+            .final-cta-section { padding: 80px 16px; }
+            .mid-cta { padding: 40px 16px; }
+            .mid-cta p { font-size: 17px; }
+            .hero { padding: 30px 16px; min-height: 100dvh; }
+            .hero h1 { font-size: clamp(28px, 7vw, 42px); }
+            .hero-subtitle { font-size: 16px; }
+            .hero-pain { font-size: 18px; margin-bottom: 28px; }
+            .hero-buttons { flex-direction: column; align-items: center; gap: 12px; }
+            .hero-buttons .btn-primary, .hero-buttons .btn-secondary { width: 100%; max-width: 320px; text-align: center; justify-content: center; padding: 16px 24px; font-size: 16px; }
+            .floating-cta { bottom: 0; left: 0; right: 0; animation: none; padding: 12px 16px; background: rgba(10,10,15,0.95); backdrop-filter: blur(12px); border-top: 1px solid rgba(124,58,237,0.3); }
+            .floating-cta a { border-radius: 12px; width: 100%; justify-content: center; padding: 14px; font-size: 15px; }
+            body { padding-bottom: 76px; }
+            .kakao-float { bottom: 80px; left: 12px; padding: 10px 16px; }
+            .kakao-float-text { font-size: 12px; }
+        }
+        @media (max-width: 480px) {
+            .urgency-banner { font-size: 13px; padding: 12px 16px; line-height: 1.4; }
+            .urgency-banner .timer { font-size: 17px; display: block; margin-top: 4px; margin-left: 0; }
+            .hero h1 { font-size: 26px; }
+            .hero-badge { font-size: 12px; padding: 6px 14px; }
+            .pain-card .icon { font-size: 32px; }
+            .feature-text h3 { font-size: 22px; }
+            .feature-bullets li { font-size: 13px; }
+            .section-title { font-size: 22px; }
+            .pricing-card { padding: 32px 20px 28px; }
+            .current-price { font-size: 36px; }
+            .testimonial-card { padding: 24px; }
+            .faq-question { font-size: 14px; padding: 16px 20px; }
+            .faq-answer p { font-size: 13px; }
+            .faq-item.active .faq-answer { padding: 0 20px 20px; }
+            .final-cta-section .section-title { font-size: 24px; }
+            .sub-features { grid-template-columns: 1fr; gap: 12px; }
+        }
+
+        /* ========== NAVBAR (사이트 표준 inline) ========== */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 999; background: rgba(10,10,15,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.04); transition: all 0.3s; }
+        .navbar.scrolled { background: rgba(10,10,15,0.96); border-bottom-color: rgba(124,58,237,0.15); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); font-weight: 800; font-size: 18px; }
+        .nav-logo { width: 32px; height: 32px; border-radius: 8px; }
+        .nav-links { display: flex; gap: 8px; align-items: center; }
+        .nav-link { padding: 8px 16px; text-decoration: none; color: var(--text-secondary); font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.2s; }
+        .nav-link:hover, .nav-link.active { color: var(--purple-light); background: rgba(124,58,237,0.1); }
+        .nav-hamburger { display: none; width: 32px; height: 32px; background: transparent; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 6px; }
+        .nav-hamburger span { display: block; width: 100%; height: 2px; background: var(--text-primary); transition: all 0.3s; }
+        @media (max-width: 768px) {
+            .nav-hamburger { display: flex; }
+            .nav-links { position: absolute; top: 100%; right: 16px; flex-direction: column; gap: 4px; background: rgba(10,10,15,0.96); border: 1px solid rgba(124,58,237,0.15); border-radius: 12px; padding: 12px; min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.25s; }
+            .nav-links.mobile-open { opacity: 1; visibility: visible; transform: translateY(0); }
+            .nav-link { width: 100%; }
+        }
+
+        /* ========== FOOTER (사이트 표준 inline) ========== */
+        .site-footer { padding: 60px 24px 40px; background: #06060a; border-top: 1px solid rgba(255,255,255,0.04); }
+        .footer-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+        .footer-brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; margin-bottom: 20px; }
+        .footer-logo { width: 32px; height: 32px; border-radius: 8px; }
+        .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+        .footer-links a { color: var(--text-secondary); font-size: 14px; text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--purple-light); }
+        .footer-biz { color: var(--text-secondary); font-size: 12px; line-height: 1.7; margin-bottom: 20px; }
+        .footer-copy { color: rgba(160,160,176,0.5); font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<!-- URGENCY BANNER -->
+<div class="urgency-banner">
+    💎 SSS 등급 키워드 1개를 못 찾고 보낸 글 1편 = 4시간 손실 | 지금 시작 <span class="timer" id="countdown">--:--:--</span>
+</div>
+
+<!-- ========== NAVIGATION ========== -->
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">
+            <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+            <span>Leaders Pro</span>
+        </a>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
+            <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품정보</a>
+            <a href="pricing.html?tab=leword" class="nav-link active" onclick="closeMobileMenu()">구매</a>
+            <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
+            <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
+            <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span>💎</span>
+            <span>키워드 인텔리전스 · LEWORD</span>
+        </div>
+
+        <h1>
+            왜 같은 주제인데<br>
+            <span class="highlight">누구는 떴을까?</span>
+        </h1>
+
+        <p class="hero-subtitle">
+            17개 데이터 소스를 교차검증하고 5차원으로 점수를 매겨,<br>
+            4단 게이트를 모두 통과한 키워드만 <strong style="color:var(--gold)">SSS</strong>로 표시합니다.
+        </p>
+
+        <p class="hero-pain">
+            "글은 늘어가는데, 왜 방문자는 그대로일까."<br>
+            문제는 글이 아니라, <strong>글이 올라탄 단어</strong>였습니다.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="pricing.html?tab=leword" class="btn-primary">💎 지금 시작하기</a>
+            <a href="#features" class="btn-secondary">기능 자세히 보기 ↓</a>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number">17</div>
+                <div class="stat-label">교차검증 데이터 소스</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5</div>
+                <div class="stat-label">차원 가중 기하평균</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-label">단계 게이트 (SSS)</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PAIN POINTS ========== -->
+<section class="pain-section">
+    <div class="container">
+        <div class="section-label" style="color: #ff6b6b">😩 이런 적 있으신가요?</div>
+        <h2 class="section-title">키워드 발굴, <span style="color: #ff6b6b">이렇게 막막해야 하나요?</span></h2>
+
+        <div class="pain-cards">
+            <div class="pain-card">
+                <div class="icon">📉</div>
+                <h3>검색량만 보고 글 썼는데</h3>
+                <p>광고센터 숫자만 보고 글을 쓰면, 상위 노출은 다 대형 블로그였다.</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">⏰</div>
+                <h3>자동완성 정리하다 2시간</h3>
+                <p>여기저기서 키워드 긁어와 엑셀에 정리하다 보면, 의욕이 먼저 꺾인다.</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">📒</div>
+                <h3>키워드 100개 적어뒀는데</h3>
+                <p>"황금키워드"라고 메모해둔 게 잔뜩인데, 정작 글로 쓸 만한 건 없다.</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">💸</div>
+                <h3>수익 키워드를 모름</h3>
+                <p>트래픽 좀 나온다 싶으면 정작 수익이 안 되는 키워드였다.</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">🌊</div>
+                <h3>블루오션인 줄 알았는데</h3>
+                <p>경쟁 약해 보여서 골랐는데, 사실 검색량이 0에 가까웠다.</p>
+            </div>
+            <div class="pain-card">
+                <div class="icon">🔄</div>
+                <h3>매일 새 키워드가 없음</h3>
+                <p>발굴 시스템이 없어서 일주일에 한 번 몰아서 — 그러다 보니 글감이 떨어진다.</p>
+            </div>
+        </div>
+
+        <div class="loss-callout fade-up">
+            <p>키워드 잘못 잡은 글 1편 = <span class="big">평균 4시간 손실</span></p>
+            <p>월 30편 × 4시간 = <span class="big">120시간</span>을 매달 헛다리에 쓰고 있는 셈입니다.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== MEGA SECTION 1: 17개 소스 교차검증 ========== -->
+<section class="features-section" id="features">
+    <div class="container">
+        <div class="section-label" style="color: var(--purple-light)">🧬 MEGA FEATURE 01</div>
+        <h2 class="section-title" style="text-align:center">17개 데이터 소스를<br><span style="color: var(--purple-light)">동시에 교차검증합니다</span></h2>
+        <p class="section-desc">한 곳의 숫자만 보면 반드시 어긋납니다. 여러 각도가 일관될 때 비로소 후보로 올립니다.</p>
+
+        <div class="feature-row fade-up">
+            <div class="feature-text">
+                <span class="feature-tag tag-data">DATA SOURCES</span>
+                <h3>네이버 광고센터·트렌드·자동완성<br>17개 신호를 한 번에</h3>
+                <p>광고센터 검색량이 높아도, 자동완성에 안 잡히면 실제 의도가 약합니다. LEWORD는 17개 소스를 동시에 끌어와 같은 키워드를 여러 각도로 검증합니다.</p>
+                <ul class="feature-bullets">
+                    <li>네이버 광고센터 원본 검색량 (월간/PC/모바일)</li>
+                    <li>네이버 트렌드 / 자동완성 / 연관검색어</li>
+                    <li>시그널BZ 실시간 트렌드 신호</li>
+                    <li>SERP 노출 패턴 / 카테고리 매칭 / 문서수 비율</li>
+                </ul>
+            </div>
+            <div class="feature-visual" style="margin:auto 0;align-self:center">
+                <div class="feature-screenshot">
+                    <img src="images/leword/17-sources-orbit.png" alt="17개 데이터 소스 교차검증" loading="lazy">
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-features fade-up">
+            <div class="sub-feature"><div class="sf-icon">📊</div><div class="sf-title">실측 검색량</div><div class="sf-desc">네이버 광고센터 원본 직접 조회</div></div>
+            <div class="sub-feature"><div class="sf-icon">📈</div><div class="sf-title">실시간 트렌드</div><div class="sf-desc">시그널BZ + 네이버 트렌드 동기화</div></div>
+            <div class="sub-feature"><div class="sf-icon">🔗</div><div class="sf-title">연관 신호</div><div class="sf-desc">자동완성 + 연관검색어 + SERP 분석</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MID CTA 1 ===== -->
+<div class="mid-cta">
+    <p>🧬 17개 소스를 1개 라이선스로</p>
+    <a href="pricing.html?tab=leword" class="btn-primary">무료로 체험 시작 →</a>
+</div>
+
+<!-- ========== MEGA SECTION 2: MDP 5차원 ========== -->
+<section class="features-section" style="background: var(--bg-dark)">
+    <div class="container">
+        <div class="section-label" style="color: var(--neon-green)">📐 MEGA FEATURE 02</div>
+        <h2 class="section-title" style="text-align:center">MDP v3.0<br><span style="color: var(--neon-green)">5차원 가중 기하평균 스코어링</span></h2>
+        <p class="section-desc">단순 평균은 하나만 튀어도 점수가 부풀려집니다. LEWORD는 "어느 하나라도 약하면 점수가 끌려 내려가는" 보수적 구조로 계산합니다.</p>
+
+        <div class="feature-row fade-up">
+            <div class="feature-text">
+                <span class="feature-tag tag-score">5D SCORING</span>
+                <h3>검색량·문서수·CPC·경쟁도·SERP<br>한 점수로 우선순위가 잡힙니다</h3>
+                <p>다섯 차원을 가중 기하평균으로 결합. 한 축이 약하면 전체 점수가 보수적으로 내려가서, 실제로 쓸 만한 키워드만 위로 올라옵니다.</p>
+                <ul class="feature-bullets">
+                    <li>가중 기하평균 (단순 산술평균이 아닌 보수적 결합)</li>
+                    <li>5축: 검색량 / 문서수 / CPC / 경쟁도 / SERP 반영</li>
+                    <li>Math.random 사용 0% — 결정론적 스코어링</li>
+                    <li>동일 키워드 = 항상 동일한 점수 (재현성 보장)</li>
+                </ul>
+            </div>
+            <div class="feature-visual" style="margin:auto 0;align-self:center">
+                <div class="feature-screenshot">
+                    <img src="images/leword/5d-radar.png" alt="MDP v3.0 5차원 가중 기하평균 스코어링" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== GRADE SHOWCASE ========== -->
+<section class="grade-showcase">
+    <div class="container" style="text-align:center">
+        <div class="section-label" style="color: var(--gold)">🏆 MEGA FEATURE 03</div>
+        <h2 class="section-title">SSS는 <span style="color: var(--gold)">4단 게이트</span>를<br>모두 통과한 키워드뿐입니다</h2>
+        <p class="section-desc">점수만 높다고 SSS가 아닙니다. 검색량·문서수·비율을 모두 통과해야만 최상위 등급입니다.</p>
+
+        <div style="display:flex; justify-content:center; margin: 40px auto 20px; max-width: 360px;">
+            <img src="images/leword/sss-trophy.png" alt="SSS 등급 트로피 — 4단 게이트 통과 키워드의 상징" loading="lazy" style="width:100%; height:auto; border-radius:20px; box-shadow: 0 20px 60px rgba(255,215,0,0.25), 0 0 80px rgba(124,58,237,0.15);">
+        </div>
+
+        <div class="grade-grid">
+            <div class="grade-card sss fade-up">
+                <div class="grade-label">SSS</div>
+                <div class="grade-gate">
+                    점수 <strong>85+</strong><br>
+                    검색량 <strong>1,000+</strong><br>
+                    문서수 <strong>5,000↓</strong><br>
+                    비율 <strong>5+</strong>
+                </div>
+            </div>
+            <div class="grade-card ss fade-up">
+                <div class="grade-label">SS</div>
+                <div class="grade-gate">
+                    점수 75+<br>
+                    검색량 500+<br>
+                    문서수 10,000↓<br>
+                    비율 3+
+                </div>
+            </div>
+            <div class="grade-card s fade-up">
+                <div class="grade-label">S</div>
+                <div class="grade-gate">
+                    점수 65+<br>
+                    검색량 300+<br>
+                    비율 2+
+                </div>
+            </div>
+            <div class="grade-card a fade-up">
+                <div class="grade-label">A</div>
+                <div class="grade-gate">
+                    점수 55+<br>
+                    검색량 100+
+                </div>
+            </div>
+            <div class="grade-card b fade-up">
+                <div class="grade-label">B</div>
+                <div class="grade-gate">
+                    점수 45+<br>
+                    (참고용)
+                </div>
+            </div>
+        </div>
+
+        <div class="loss-callout fade-up" style="background: rgba(124,58,237,0.06); border-color: rgba(124,58,237,0.2); margin-top: 60px;">
+            <p style="color: var(--purple-light)">📍 게이트 한 개라도 미달이면 자동으로 SS·S·A로 떨어집니다</p>
+            <p style="font-size: 15px; color: var(--text-secondary); font-weight: 500; margin-top: 8px;">같은 단어를 보고도 결과가 다른 이유 — 다중 게이트입니다.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MID CTA 2 ===== -->
+<div class="mid-cta">
+    <p>💎 SSS 키워드, 내 분야엔 몇 개일까?</p>
+    <a href="pricing.html?tab=leword" class="btn-primary">1분 안에 확인 →</a>
+</div>
+
+<!-- ========== MEGA SECTION 4: 다양한 헌터 ========== -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-label" style="color: #ff6b6b">🎯 MEGA FEATURE 04</div>
+        <h2 class="section-title" style="text-align:center">상황별 4가지 발굴 엔진<br><span style="color: #ff6b6b">"무엇을 쓸지 모르겠다" 끝</span></h2>
+        <p class="section-desc">시드 키워드 발굴 · 카테고리 롱테일 · Rising 급상승 · PRO 트래픽 헌터. 매일 새 후보가 쌓입니다.</p>
+
+        <div class="feature-row fade-up">
+            <div class="feature-text">
+                <span class="feature-tag tag-hunter">HUNTER ENGINES</span>
+                <h3>4가지 엔진이<br>매일 다른 광맥을 캡니다</h3>
+                <p>황금키워드 발굴은 1차 정렬, 카테고리 롱테일은 글감 채우기, Rising은 선점, PRO는 트래픽 폭발. 4가지를 한 앱에서.</p>
+                <ul class="feature-bullets">
+                    <li><strong>황금키워드 발굴</strong> — MDP 5차원 점수 1차 정렬</li>
+                    <li><strong>카테고리 롱테일</strong> — 카테고리 × 타겟 자동 조합</li>
+                    <li><strong>Rising 키워드</strong> — 검색량 증가 곡선 추적, 선점</li>
+                    <li><strong>PRO 트래픽 헌터</strong> — 트래픽 폭발 가능성 높은 프리미엄</li>
+                </ul>
+            </div>
+            <div class="feature-visual" style="margin:auto 0;align-self:center">
+                <div class="feature-screenshot">
+                    <img src="images/leword/category-longtail.png" alt="카테고리 롱테일 + Rising + PRO" loading="lazy">
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-wrapper fade-up">
+            <button class="carousel-arrow prev" onclick="slideCarousel(this,-1)">❮</button>
+            <div class="feature-gallery">
+                <div class="gallery-item"><img src="images/leword/screen-golden-keywords.png" alt="황금키워드 발굴" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/leword/screen-category-longtail.png" alt="카테고리 롱테일" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/leword/screen-rising.png" alt="Rising 키워드" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/leword/screen-pro-hunter.png" alt="PRO 트래픽 헌터" loading="lazy"></div>
+            </div>
+            <button class="carousel-arrow next" onclick="slideCarousel(this,1)">❯</button>
+            <div class="carousel-dots">
+                <button class="carousel-dot active"></button>
+                <button class="carousel-dot"></button>
+                <button class="carousel-dot"></button>
+                <button class="carousel-dot"></button>
+            </div>
+        </div>
+
+        <div class="sub-features fade-up">
+            <div class="sub-feature"><div class="sf-icon">🌳</div><div class="sf-title">카테고리 트리</div><div class="sf-desc">분야 선택 → 롱테일 자동 생성</div></div>
+            <div class="sub-feature"><div class="sf-icon">⚡</div><div class="sf-title">Rising 알림</div><div class="sf-desc">막 떠오르는 신호 즉시 감지</div></div>
+            <div class="sub-feature"><div class="sf-icon">💎</div><div class="sf-title">PRO 전용</div><div class="sf-desc">트래픽 폭발 키워드만 별도 추출</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== MEGA SECTION 5: Profit Engine ========== -->
+<section class="features-section" style="background: var(--bg-dark)">
+    <div class="container">
+        <div class="section-label" style="color: var(--neon-blue)">💰 MEGA FEATURE 05</div>
+        <h2 class="section-title" style="text-align:center">Profit Engine —<br><span style="color: var(--neon-blue)">CPC × 검색량 × 경쟁, 블루오션 판정</span></h2>
+        <p class="section-desc">CPC 단일소스 DB 기반. 트래픽뿐 아니라 광고 단가까지 보고 블루오션 키워드를 판정합니다.</p>
+
+        <div class="feature-row fade-up">
+            <div class="feature-text">
+                <span class="feature-tag tag-profit">PROFIT ENGINE</span>
+                <h3>CPC DB로<br>블루오션을 데이터로 확인</h3>
+                <p>"이 키워드가 블루오션일까?" 는 추측이 아니라 계산입니다. CPC × 검색량 × 경쟁도 결합으로 결정합니다.</p>
+                <ul class="feature-bullets">
+                    <li>CPC 단일소스 DB — 추정값 충돌 제거</li>
+                    <li>RPM 환산 (광고 단가 기반 고수익 키워드)</li>
+                    <li>블루오션 판정 — 경쟁 약함 + 단가 높음 + 검색량 충분</li>
+                    <li>결정론적 — 같은 입력이면 항상 같은 결과</li>
+                </ul>
+            </div>
+            <div class="feature-visual" style="margin:auto 0;align-self:center">
+                <div class="feature-screenshot">
+                    <img src="images/leword/screen-profit-engine.png" alt="Profit Engine CPC 블루오션 판정" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MID CTA 3 ===== -->
+<div class="mid-cta">
+    <p>💰 트래픽 키워드 vs 수익 키워드, 한 화면에서 확인</p>
+    <a href="pricing.html?tab=leword" class="btn-primary">지금 시작하기 →</a>
+</div>
+
+<!-- ========== MEGA SECTION 6: 보너스 ========== -->
+<section class="features-section" style="background: var(--bg-section)">
+    <div class="container">
+        <div class="section-label" style="color: var(--gold)">🛠️ BONUS</div>
+        <h2 class="section-title" style="text-align:center">이것까지 다 포함?<br><span style="background:var(--gradient-premium); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent">네, 전부 포함입니다.</span></h2>
+        <p class="section-desc">발굴 자동화, RPM 분석, CSV 내보내기, 멀티 시드 모드까지.</p>
+
+        <div class="bonus-grid fade-up">
+            <div class="bonus-card">
+                <div class="bonus-icon-wrap">📅</div>
+                <div class="bonus-card-body">
+                    <h4>자동 발굴 스케줄</h4>
+                    <p>예약된 시간에 자동으로 발굴 — 매일 새 키워드가 쌓입니다.</p>
+                </div>
+            </div>
+            <div class="bonus-card">
+                <div class="bonus-icon-wrap">💹</div>
+                <div class="bonus-card-body">
+                    <h4>RPM 고수익 발굴</h4>
+                    <p>광고 단가 기준 고수익 키워드만 별도 추출.</p>
+                </div>
+            </div>
+            <div class="bonus-card">
+                <div class="bonus-icon-wrap">📤</div>
+                <div class="bonus-card-body">
+                    <h4>CSV 원클릭 내보내기</h4>
+                    <p>발굴 결과를 엑셀/구글시트로 즉시 이관.</p>
+                </div>
+            </div>
+            <div class="bonus-card">
+                <div class="bonus-icon-wrap">🔗</div>
+                <div class="bonus-card-body">
+                    <h4>Leaders Pro 연동</h4>
+                    <p>발굴된 키워드를 자동화 도구로 원클릭 전달.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== COMPARISON ========== -->
+<section class="comparison-section">
+    <div class="container">
+        <div class="section-label" style="color: var(--neon-blue)">📊 비교</div>
+        <h2 class="section-title" style="text-align:center">왜 <span style="color:var(--purple-light)">LEWORD</span>인가?</h2>
+
+        <table class="comparison-table fade-up">
+            <thead>
+                <tr>
+                    <th>기능</th>
+                    <th>네이버 광고센터</th>
+                    <th>일반 키워드 도구</th>
+                    <th>LEWORD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>데이터 소스 수</td>
+                    <td>1개</td>
+                    <td class="partial">2~3개</td>
+                    <td class="check">✓ 17개 교차검증</td>
+                </tr>
+                <tr>
+                    <td>스코어링</td>
+                    <td class="cross">✕ (원본 수치만)</td>
+                    <td class="partial">단순 가중합</td>
+                    <td class="check">✓ 5차원 가중 기하평균</td>
+                </tr>
+                <tr>
+                    <td>등급 시스템</td>
+                    <td class="cross">✕</td>
+                    <td class="partial">단순 점수</td>
+                    <td class="check">✓ SSS~B 다중 게이트</td>
+                </tr>
+                <tr>
+                    <td>블루오션 판정</td>
+                    <td class="cross">✕</td>
+                    <td class="cross">✕</td>
+                    <td class="check">✓ Profit Engine</td>
+                </tr>
+                <tr>
+                    <td>Rising 감지</td>
+                    <td class="cross">✕</td>
+                    <td class="partial">일부</td>
+                    <td class="check">✓ 실시간 곡선 추적</td>
+                </tr>
+                <tr>
+                    <td>카테고리 롱테일</td>
+                    <td class="cross">✕</td>
+                    <td class="cross">✕</td>
+                    <td class="check">✓ 자동 조합</td>
+                </tr>
+                <tr>
+                    <td>결정론적 결과</td>
+                    <td class="check">✓</td>
+                    <td class="partial">랜덤 포함</td>
+                    <td class="check">✓ Math.random 0%</td>
+                </tr>
+                <tr>
+                    <td>자동화 도구 연동</td>
+                    <td class="cross">✕</td>
+                    <td class="cross">✕</td>
+                    <td class="check">✓ Leaders Pro 원클릭</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- AUTHORITY BAR -->
+<div class="authority-bar">
+    <p><strong>키워드 인텔리전스의 새 기준</strong> — 17개 소스 × 5차원 × 4단 게이트</p>
+</div>
+
+<!-- ========== SOCIAL PROOF ========== -->
+<section class="proof-section">
+    <div class="container">
+        <div class="section-label" style="color: var(--gold)">💬 사용자 후기</div>
+        <h2 class="section-title" style="text-align:center">실제 사용자들의 <span style="background:var(--gradient-premium); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent">변화 스토리</span></h2>
+
+        <div class="testimonial-grid">
+            <div class="testimonial-card fade-up">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">👨‍💼</div>
+                    <div>
+                        <div class="testimonial-name">김*수</div>
+                        <div class="testimonial-role">직장인 블로거 · 1년차</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"1년 동안 글 120개를 썼는데 일방문 50명에서 멈춰 있었어요. 첫날 내가 쓰던 키워드를 넣어봤더니 등급 D. 한 시간을 돌려보니 SSS 한 개가 떴습니다. <strong style="color:var(--purple-light)">사람들이 찾지 않는 단어 위에 글을 쌓고 있었구나</strong> 처음 알았어요."</p>
+                <div class="testimonial-result">📊 발굴 후 글 방향이 잡힘 — 쓰는 시간 단축</div>
+            </div>
+
+            <div class="testimonial-card fade-up">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">👩‍👧</div>
+                    <div>
+                        <div class="testimonial-name">박*영</div>
+                        <div class="testimonial-role">워킹맘 티스토리 · 6개월</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"진짜 페인은 '무엇을 써야 할지 모른다는 것'이었어요. 빈 에디터 앞에서 30분 보내는 게 일상. <strong style="color:var(--purple-light)">카테고리 롱테일</strong>이 구원이었습니다. 일요일 밤 30분, 일주일 치 키워드를 뽑아두면 평일 새벽엔 그저 쓰기만 합니다."</p>
+                <div class="testimonial-result">⏱️ 글 한 편 작성 시간 50% 단축</div>
+            </div>
+
+            <div class="testimonial-card fade-up">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">🎮</div>
+                    <div>
+                        <div class="testimonial-name">이*호</div>
+                        <div class="testimonial-role">게임/IT 부업 블로거 · 3개월</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Rising 키워드가 진짜 사기예요. 신작 게임 출시 전날, 떠오르는 단어로 글을 올렸어요. 다음 날 아침, <strong style="color:var(--purple-light)">알림이 평소와 달랐습니다.</strong> 취미였던 손가락이 처음으로 일처럼 보였어요."</p>
+                <div class="testimonial-result">⚡ Rising 선점으로 트래픽 흐름 변화</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MID CTA 4 ===== -->
+<div class="mid-cta" style="background: linear-gradient(135deg, rgba(124,58,237,0.10) 0%, rgba(255,215,0,0.05) 100%);">
+    <p>💎 키워드 한 번 보는 것이, 글 한 편 쓰는 것보다 빠릅니다</p>
+    <a href="pricing.html?tab=leword" class="btn-primary" style="font-size:18px; padding:18px 44px;">요금제 보기 →</a>
+</div>
+
+<!-- ========== PRICING ========== -->
+<section class="pricing-section" id="pricing">
+    <div class="container">
+        <div class="section-label" style="color: var(--purple-light)">💎 PRICING</div>
+        <h2 class="section-title" style="text-align:center">키워드 외주 1건 가격으로<br><span style="background:var(--gradient-premium); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent">한 달을 자동 발굴</span></h2>
+        <p class="pricing-subtitle">키워드 외주 1건 약 50,000원 vs LEWORD 월 30,000원 — 무제한 발굴</p>
+        <div class="pricing-savings-bar">💡 무료 체험 → 마음에 들면 결제. 부담 없이 시작</div>
+
+        <div class="pricing-grid">
+            <!-- 무료 체험 -->
+            <div class="pricing-card fade-up">
+                <div class="pricing-header">
+                    <h3>무료 체험</h3>
+                    <div class="pricing-price">
+                        <span class="current-price">₩0</span>
+                    </div>
+                    <div class="pricing-per">기간 제한 없음</div>
+                    <div class="pricing-discount-tag">🎁 FREE</div>
+                </div>
+                <ul class="pricing-features">
+                    <li><span class="check-icon">✓</span> 키워드 경쟁 분석</li>
+                    <li><span class="check-icon">✓</span> 블루오션 발굴 (제한)</li>
+                    <li><span class="check-icon">✓</span> 매일 5회 검색</li>
+                    <li><span class="check-icon">✓</span> 17개 소스 일부</li>
+                </ul>
+                <a href="download.html" class="btn-pricing">🚀 체험 다운로드</a>
+            </div>
+
+            <!-- 1개월 -->
+            <div class="pricing-card fade-up">
+                <div class="pricing-header">
+                    <h3>1개월</h3>
+                    <div class="pricing-price">
+                        <span class="current-price">₩30,000</span>
+                    </div>
+                    <div class="pricing-per">월 ₩30,000 · 가볍게 시작</div>
+                </div>
+                <ul class="pricing-features">
+                    <li><span class="check-icon">✓</span> 17개 소스 전체 액세스</li>
+                    <li><span class="check-icon">✓</span> MDP 5차원 스코어링 무제한</li>
+                    <li><span class="check-icon">✓</span> SSS~B 등급 전체</li>
+                    <li><span class="check-icon">✓</span> 카테고리 롱테일</li>
+                    <li><span class="check-icon">✓</span> Rising 키워드</li>
+                    <li><span class="check-icon">✓</span> 이메일 지원</li>
+                </ul>
+                <a href="pricing.html?tab=leword" class="btn-pricing">선택하기 →</a>
+            </div>
+
+            <!-- 3개월 — 인기 -->
+            <div class="pricing-card popular fade-up">
+                <div class="popular-badge">🔥 가장 인기</div>
+                <div class="pricing-header">
+                    <h3>3개월</h3>
+                    <div class="pricing-price">
+                        <span class="original-price">₩90,000</span>
+                        <span class="current-price">₩100,000</span>
+                    </div>
+                    <div class="pricing-per">월 ₩33,333 · 안정적 운영</div>
+                    <div class="pricing-discount-tag">11% 절약</div>
+                </div>
+                <ul class="pricing-features">
+                    <li><span class="check-icon">✓</span> 1개월의 모든 기능</li>
+                    <li><span class="check-icon">✓</span> PRO 트래픽 헌터</li>
+                    <li><span class="check-icon">✓</span> Profit Engine 풀 액세스</li>
+                    <li><span class="check-icon">✓</span> CSV 내보내기 무제한</li>
+                    <li><span class="check-icon">✓</span> Leaders Pro 연동</li>
+                    <li><span class="check-icon">✓</span> 우선 고객 지원</li>
+                </ul>
+                <a href="pricing.html?tab=leword" class="btn-pricing btn-popular">가장 인기 있는 플랜 →</a>
+            </div>
+
+            <!-- 1년 — 최고가치 -->
+            <div class="pricing-card fade-up">
+                <div class="pricing-header">
+                    <h3>1년</h3>
+                    <div class="pricing-price">
+                        <span class="original-price">₩360,000</span>
+                        <span class="current-price">₩300,000</span>
+                    </div>
+                    <div class="pricing-per">월 ₩25,000 · 가장 합리적</div>
+                    <div class="pricing-discount-tag">👑 BEST VALUE — 17% 절약</div>
+                </div>
+                <ul class="pricing-features">
+                    <li><span class="check-icon">✓</span> 3개월의 모든 기능</li>
+                    <li><span class="check-icon">✓</span> 자동 발굴 스케줄</li>
+                    <li><span class="check-icon">✓</span> RPM 고수익 분석</li>
+                    <li><span class="check-icon">✓</span> 전용 커뮤니티 입장</li>
+                    <li><span class="check-icon">✓</span> 1:1 우선 지원</li>
+                    <li><span class="check-icon">✓</span> 신기능 얼리 액세스</li>
+                </ul>
+                <a href="pricing.html?tab=leword" class="btn-pricing">선택하기 →</a>
+            </div>
+        </div>
+
+        <!-- 보장 스트립 -->
+        <div class="guarantee-strip">
+            <div class="guarantee-strip-item"><span class="gs-icon">🔒</span> 안전한 결제 (Toss)</div>
+            <div class="guarantee-strip-item"><span class="gs-icon">🔄</span> 48시간 환불 보장</div>
+            <div class="guarantee-strip-item"><span class="gs-icon">💬</span> 카카오 1:1 지원</div>
+            <div class="guarantee-strip-item"><span class="gs-icon">🔑</span> 즉시 라이선스 발급</div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== GUARANTEE ========== -->
+<section class="guarantee-section">
+    <div class="container" style="text-align:center">
+        <div class="guarantee-box">
+            <div class="icon">🛡️</div>
+            <h3>결제 부담은 0</h3>
+            <p>
+                라이선스 코드 발급일로부터 <strong style="color:var(--purple-light)">48시간 이내</strong>,<br>
+                서비스 미사용(미로그인) 시 전액 환불해 드립니다.<br>
+                결제 전 반드시 <strong style="color:var(--purple-light)">무료 체험</strong>으로 먼저 확인해주세요.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="faq-section">
+    <div class="container">
+        <div class="section-label" style="color: var(--neon-blue)">❓ 자주 묻는 질문</div>
+        <h2 class="section-title" style="text-align:center">궁금한 점이 있으신가요?</h2>
+
+        <div class="faq-list">
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>다른 키워드 도구와 정확히 뭐가 다른가요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>대부분의 도구는 데이터를 <strong>"보여줍니다"</strong>. LEWORD는 17개 소스를 교차검증한 뒤, 다중 게이트로 <strong>"걸러서"</strong> SSS·SS·S 등급으로 정리해줍니다.<br><br>
+                    핵심 차이는 세 가지입니다:<br>
+                    ① <strong>17개 소스 교차검증</strong> — 한 곳의 숫자가 다른 곳에서도 일관될 때만 신호로 인정<br>
+                    ② <strong>5차원 가중 기하평균</strong> — 하나라도 약하면 점수가 끌려 내려가는 보수적 계산<br>
+                    ③ <strong>다중 게이트 등급</strong> — 점수+검색량+문서수+비율 4개 게이트 모두 통과해야 SSS</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>네이버 광고센터가 무료인데 왜 LEWORD를 써야 하나요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>광고센터는 <strong>가공되지 않은 단일 소스</strong>입니다. 검색량만 알려주고, 문서수·경쟁도·SERP 분석은 직접 해야 합니다.<br><br>
+                    LEWORD는 그 작업을 자동화합니다:<br>
+                    • 17개 소스를 동시에 끌어와 비교<br>
+                    • 5차원 점수로 우선순위 자동 정렬<br>
+                    • SSS~B 등급으로 한눈에 분류<br>
+                    • 카테고리/Rising/PRO 헌터로 다양한 각도에서 발굴<br><br>
+                    혼자 정리하면 키워드 1개당 평균 10~15분이 걸리는 작업을, LEWORD는 클릭 한 번으로 끝냅니다.</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>결과(트래픽·수익)를 보장하나요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>LEWORD는 <strong>키워드 발굴 도구</strong>입니다. 트래픽이나 수익 자체를 약속하지 않습니다.<br><br>
+                    발굴된 키워드를 어떻게 활용하시는지 — 글의 품질, 카테고리, 발행 빈도 — 에 따라 결과는 달라집니다.<br><br>
+                    LEWORD가 약속하는 것은 <strong>"이 단어가 어떤 데이터 위에 있는지"</strong> 입니다. 그 위에서 글을 쓸지는 사용자 판단입니다.</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>컴퓨터를 잘 못 다루는데 사용할 수 있을까요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>설치 → 키워드 한 단어 입력 → 발굴 버튼.</strong> 끝.<br><br>
+                    • Windows 전용 데스크톱 앱입니다. 별도 서버나 설정 X<br>
+                    • 결제 후 라이선스 코드 입력만 하면 즉시 사용 가능<br>
+                    • <strong>자동 업데이트</strong> — 새 버전은 앱 안에서 클릭 한 번<br>
+                    • 카카오톡 1:1 지원으로 막히면 즉시 도움받을 수 있습니다.</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>SSS 등급의 4단 게이트가 정확히 뭔가요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>SSS는 점수만 높다고 받는 등급이 아닙니다. <strong>4개 조건을 모두 통과</strong>해야 합니다:<br><br>
+                    ① <strong>점수 85+</strong> (MDP 5차원 가중 기하평균)<br>
+                    ② <strong>검색량 1,000+</strong> (네이버 광고센터 실측 월간)<br>
+                    ③ <strong>문서수 5,000 이하</strong> (네이버 통합검색 문서수)<br>
+                    ④ <strong>비율 5+</strong> (검색량 ÷ 문서수)<br><br>
+                    한 게이트라도 미달이면 자동으로 SS·S·A로 떨어집니다. 같은 단어를 보고도 결과가 다른 이유 — 다중 게이트입니다.</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>데이터는 어디에 저장되나요? 개인정보는 안전한가요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>라이선스 정보는 <strong>본인 PC 로컬에만</strong> 저장됩니다 (%APPDATA%/blogger-admin-panel/license/).<br><br>
+                    • <strong>비밀번호는 메모리에만</strong> 유지 — 디스크에 저장하지 않습니다<br>
+                    • 키워드 검색 데이터는 외부 서버로 전송되지 않습니다<br>
+                    • 발굴 결과는 본인 PC에 저장되며, 언제든 CSV로 내보낼 수 있습니다<br>
+                    • Toss 결제 시스템 사용 — PCI-DSS 인증, 카드정보 비저장</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>업데이트는 무료인가요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>라이선스 기간 내 모든 업데이트 무료</strong>입니다.<br><br>
+                    • 새 기능, 데이터 소스 추가, 스코어링 개선 — 추가 비용 없음<br>
+                    • 앱 안에서 자동 업데이트 (클릭 한 번)<br>
+                    • Toss 빌링 정기구독은 언제든 해지 가능 — 해지 시 현재 결제 주기 종료까지 사용 가능</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>모바일에서도 사용 가능한가요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>현재는 <strong>Windows 10/11 데스크톱 전용</strong>입니다.<br><br>
+                    • macOS / 모바일 지원은 로드맵에 있습니다<br>
+                    • 데스크톱 환경에서 17개 소스 동시 크롤링 + 5차원 스코어링의 안정성을 우선시했습니다<br>
+                    • CSV 내보내기로 발굴 결과를 모바일에서도 확인 가능</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>네이버 정책 위반 위험은 없나요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>LEWORD는 <strong>공개된 데이터 소스 분석 도구</strong>입니다.<br><br>
+                    • 자동 글쓰기 / 자동 포스팅 기능 <strong>없음</strong><br>
+                    • 봇처럼 행동하는 동작 없음 — 검색량/문서수 조회 + 키워드 분석만<br>
+                    • 광고센터 API는 정상 인증 절차로 사용<br>
+                    • 사용자 본인 블로그에 영향 주는 동작 일체 없음</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade-up">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    <span>환불 정책은 어떻게 되나요?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>라이선스 발급 후 48시간 이내, 미사용 상태에서 100% 환불</strong>해 드립니다.<br><br>
+                    • <strong>환불 방법</strong> — 카카오톡 채널 'Leaders Pro' 1:1 문의 → 환불 요청 → 24시간 내 처리<br>
+                    • <strong>위약금 없음</strong> — 사유 묻지 않음<br>
+                    • 정기구독 해지 시 다음 결제 주기부터 중단 — 현재 주기 종료까지 사용 가능<br>
+                    • 결제 전 반드시 <strong>무료 체험</strong>으로 먼저 확인해주세요</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FINAL CTA ========== -->
+<section class="final-cta-section">
+    <div class="container" style="text-align:center">
+        <h2 class="section-title" style="font-size:2.5rem">오늘 밤에 쓸 글,<br><span class="highlight">아직도 감으로 정하시겠습니까.</span></h2>
+        <p class="section-desc" style="max-width:600px; margin:0 auto 32px">
+            글을 한 편 더 쓰는 것보다,<br>
+            키워드를 한 번 더 보는 게 빠릅니다.
+        </p>
+        <a href="pricing.html?tab=leword" class="btn-primary" style="font-size:20px; padding:20px 48px;">💎 LEWORD 시작하기 →</a>
+        <p style="margin-top:16px; color:#888; font-size:14px;">🔒 안전한 결제 · 48시간 환불 보장 · 카카오톡 즉시 지원</p>
+    </div>
+</section>
+
+<!-- FLOATING CTA (Mobile sticky bottom) -->
+<div class="floating-cta">
+    <a href="pricing.html?tab=leword">💎 LEWORD 시작하기</a>
+</div>
+
+<!-- CHERRY BLOSSOM PETALS -->
+<div class="petal-container" id="petalContainer"></div>
+
+<!-- MUSIC TOGGLE -->
+<button class="music-toggle attention" id="musicToggle" title="🌸 봄 배경음악 켜기/끄기">🔇</button>
+<div class="music-hint" id="musicHint">🌸 클릭하면 봄 음악이 흘러요</div>
+
+<!-- KAKAO FLOAT -->
+<a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" title="1:1 카카오톡 문의">
+    <div class="kakao-float-pulse"></div>
+    <div class="kakao-float-icon">💬</div>
+    <span class="kakao-float-text">1:1 문의</span>
+</a>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+            <span>Leaders Pro</span>
+        </div>
+        <div class="footer-links">
+            <a href="terms.html">이용약관</a>
+            <a href="refund.html">환불정책</a>
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="lookup.html">주문 조회</a>
+            <a href="mailto:cd000242@gmail.com">고객 문의</a>
+        </div>
+        <div class="footer-biz">
+            <p>상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802</p>
+            <p>주소: 경남 김해시 장유로334번길9 107동 3105호</p>
+            <p>이메일: tjdgus24280@naver.com | 전화: 010-7545-1645</p>
+        </div>
+        <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+// Countdown Timer (자정까지)
+function updateCountdown() {
+    const now = new Date();
+    const endOfDay = new Date(now);
+    endOfDay.setHours(23, 59, 59, 999);
+    const diff = endOfDay - now;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    const el = document.getElementById('countdown');
+    if (el) el.textContent = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Fade-up Animation
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Carousel
+function slideCarousel(btn, dir) {
+    const wrapper = btn.closest('.carousel-wrapper');
+    const items = wrapper.querySelectorAll('.gallery-item');
+    const dots = wrapper.querySelectorAll('.carousel-dot');
+    const total = items.length;
+    let current = parseInt(wrapper.dataset.index || '0');
+    current += dir;
+    if (current < 0) current = total - 1;
+    if (current >= total) current = 0;
+    wrapper.dataset.index = current;
+    items.forEach(item => { item.style.transform = `translateX(-${current * 100}%)`; });
+    dots.forEach((dot, i) => { dot.classList.toggle('active', i === current); });
+}
+document.querySelectorAll('.carousel-dot').forEach(dot => {
+    dot.addEventListener('click', function() {
+        const wrapper = this.closest('.carousel-wrapper');
+        const dots = wrapper.querySelectorAll('.carousel-dot');
+        const items = wrapper.querySelectorAll('.gallery-item');
+        const idx = Array.from(dots).indexOf(this);
+        wrapper.dataset.index = idx;
+        items.forEach(item => { item.style.transform = `translateX(-${idx * 100}%)`; });
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    });
+});
+// Touch swipe
+document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+    let startX = 0;
+    const gallery = wrapper.querySelector('.feature-gallery');
+    gallery.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive: true});
+    gallery.addEventListener('touchend', e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+            const nextBtn = wrapper.querySelector(diff > 0 ? '.carousel-arrow.next' : '.carousel-arrow.prev');
+            if (nextBtn) nextBtn.click();
+        }
+    }, {passive: true});
+});
+
+// Navbar scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
+function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
+function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
+
+// Lightbox
+document.querySelectorAll('.bonus-card img, .gallery-item img, .feature-visual img').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', e => {
+        e.stopPropagation();
+        const overlay = document.getElementById('lightbox-overlay');
+        if (!overlay) return;
+        document.getElementById('lightbox-img').src = img.src;
+        overlay.style.display = 'flex';
+    });
+});
+
+// Cherry blossom petals
+(function() {
+    const container = document.getElementById('petalContainer');
+    if (!container) return;
+    for (let i = 0; i < 30; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        const size = Math.random() * 14 + 8;
+        petal.style.width = size + 'px';
+        petal.style.height = size + 'px';
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.animationDuration = (Math.random() * 8 + 7) + 's';
+        petal.style.animationDelay = (Math.random() * 10) + 's';
+        container.appendChild(petal);
+    }
+})();
+</script>
+
+<!-- LIGHTBOX MODAL -->
+<div id="lightbox-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);cursor:zoom-out;align-items:center;justify-content:center" onclick="this.style.display='none'">
+    <img id="lightbox-img" style="max-width:92vw;max-height:90vh;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.6);object-fit:contain;cursor:default" onclick="event.stopPropagation()">
+    <button onclick="document.getElementById('lightbox-overlay').style.display='none'" style="position:absolute;top:24px;right:32px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:28px;width:44px;height:44px;border-radius:50%;cursor:pointer;backdrop-filter:blur(4px)">&times;</button>
+</div>
+
+<!-- MUSIC PLAYER -->
+<script src="music.js"></script>
+
+</body>
+</html>
