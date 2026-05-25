@@ -7,6 +7,13 @@
 import { safeKeyboardType } from './typingUtils.js';
 import * as fsPromises from 'fs/promises';
 import * as path from 'path';
+
+// ✅ [2026-05-26 v2.10.373 SPEC-NAVER-PROTECTION-2026 P5 행동 패턴]
+//   page.mouse.move(x, y) 텔레포트(steps:1)는 봇 시그니처. 사람은 곡선으로 천천히 이동(10~30 steps).
+//   humanSteps()로 매번 가변 적용 → 균일성 신호 제거.
+function humanSteps(): number {
+  return 10 + Math.floor(Math.random() * 15); // 10~24 가변 steps
+}
 // [SPEC-FREEZE-GUARD-001-P2 R5 / v2.10.264] Base64 디코딩 워커 분리 — data URL 본문
 import { decodeBase64Async } from '../main/utils/base64Async.js';
 import {
@@ -1547,7 +1554,7 @@ export async function setImageSizeAndAttachLink(self: any, linkUrl?: string): Pr
     const clickY = offsetY + imgRect.y;
     self.log(`   🎯 물리적 마우스 클릭: 이미지 정중앙 (${Math.round(clickX)}, ${Math.round(clickY)})`);
 
-    await page.mouse.move(clickX, clickY);
+    await page.mouse.move(clickX, clickY, { steps: humanSteps() });
     await self.delay(100);
 
     // 첫 번째 클릭
@@ -1603,7 +1610,7 @@ export async function setImageSizeAndAttachLink(self: any, linkUrl?: string): Pr
     await self.delay(500);
 
     // 3. 이미지 다시 물리 클릭 (문서너비 후 선택이 해제될 수 있음)
-    await page.mouse.move(clickX, clickY);
+    await page.mouse.move(clickX, clickY, { steps: humanSteps() });
     await self.delay(100);
     await page.mouse.down();
     await self.delay(200);
@@ -1819,7 +1826,7 @@ export async function attachLinkToLastImage(self: any, linkUrl: string): Promise
       self.log(`   🎯 물리적 마우스 클릭: 이미지 정중앙 (${Math.round(clickX)}, ${Math.round(clickY)})`);
 
       // ✅ [강화] 마우스 이동
-      await page.mouse.move(clickX, clickY);
+      await page.mouse.move(clickX, clickY, { steps: humanSteps() });
       await self.delay(100);
 
       // ✅ [강화] 첫 번째 클릭 (꾹 누름)
