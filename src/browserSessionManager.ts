@@ -191,6 +191,8 @@ class BrowserSessionManager {
         userAgent: string | null;
         screen: { width: number; height: number };
         webGL: { vendor: string; renderer: string };
+        hardwareConcurrency: number;
+        deviceMemory: number;
     } {
         const seed = accountId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
@@ -215,7 +217,17 @@ class BrowserSessionManager {
         ];
         const webGL = webGLConfigs[seed % webGLConfigs.length];
 
-        return { userAgent, screen, webGL };
+        // ✅ [2026-05-26 v2.10.363 SPEC-NAVER-PROTECTION-2026 P3 Fingerprint 다양화]
+        //   기존: 전 계정 동일 hardwareConcurrency/deviceMemory (브라우저 default) → 다계정 동시 발행 시 즉시 탐지
+        //   수정: 계정별 hash 기반 일관 값 (안정성 유지) + 풀에서 분산 (격리)
+        //   2번째 hash로 webGL/screen과 독립적으로 선택 (상관관계 차단)
+        const hash2 = Math.imul(seed, 0x9e3779b9) >>> 0; // golden ratio hash (다른 차원 격리)
+        const hwcOptions = [4, 8, 12, 16]; // 일반적인 CPU 코어 수 (2는 너무 적음, 32+ 드뭄)
+        const dmOptions = [4, 8, 16];      // 일반적인 RAM GB (1/2는 봇 시그니처, 32는 게이밍 PC)
+        const hardwareConcurrency = hwcOptions[hash2 % hwcOptions.length];
+        const deviceMemory = dmOptions[(hash2 >>> 4) % dmOptions.length];
+
+        return { userAgent, screen, webGL, hardwareConcurrency, deviceMemory };
     }
 
     /**
@@ -473,8 +485,11 @@ class BrowserSessionManager {
             // 기본 환경 정보 (한국어 환경 일관성)
             Object.defineProperty(navigator, 'languages', { get: () => ['ko-KR', 'ko', 'en-US', 'en'] });
             Object.defineProperty(navigator, 'platform', { get: () => 'Win32' });
-            Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => 8 });
-            Object.defineProperty(navigator, 'deviceMemory', { get: () => 8 });
+            // ✅ [2026-05-26 v2.10.363 SPEC-NAVER-PROTECTION-2026 P3] 계정별 hash 기반 다양화
+            //   기존: 전 계정 8/8 하드코딩 → 다계정 동시 발행 시 동일 신호로 즉시 봇 탐지
+            //   수정: profile.hardwareConcurrency / deviceMemory (계정별 안정·계정간 분산)
+            Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => hw.hardwareConcurrency || 8 });
+            Object.defineProperty(navigator, 'deviceMemory', { get: () => hw.deviceMemory || 8 });
             // ✅ WebGL 스푸핑 유지 (GPU 활성화 상태이므로 모순 없음)
             const webGL = hw.webGL;
             const getParameterOriginal = WebGLRenderingContext.prototype.getParameter;
