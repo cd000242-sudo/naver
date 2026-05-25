@@ -23,6 +23,7 @@ import { pickBannerHook, pickCtaHook } from './automation/bannerPhrasePool.js';
 import { browserSessionManager, type SessionInfo } from './browserSessionManager.js';
 // [v2.10.113] 명시적 쿠키 파일 저장/복원 — userDataDir 보조 안전망 (캡차 반복 차단)
 import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromFile, warmupSession } from './sessionPersistence.js';
+import { performIdleMouseShake } from './automation/humanBehavior.js';
 // [v2.10.285] 봇 감지 backoff + 로그인 자연 대기 (계정별 자동 보호)
 import { recordBotBackoff, getBotBackoff, isAccountBackedOff, computePostLoginHumanDelayMs } from './utils/botBackoff.js';
 import { withRetry, findWithFallback, clickWithRetry, navigateWithRetry, isRetryableError } from './errorRecovery.js';
@@ -3755,6 +3756,11 @@ export class NaverBlogAutomation {
       this.log('🔥 세션 워밍업 중 (블로그 홈·피드 둘러보기)...');
       await warmupSession(page);
     } catch { /* 워밍업 실패는 무시 */ }
+
+    // P5 SPEC-NAVER-PROTECTION-2026 — idle mouse shake post-login
+    // Static cursor immediately after login is a bot signature; emit 1~3
+    // micro-movements (~200~900ms total) to mimic involuntary hand motion.
+    await performIdleMouseShake(page).catch(() => { /* ignore */ });
   }
 
   async navigateToBlogWrite(): Promise<void> {
