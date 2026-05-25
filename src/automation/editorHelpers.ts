@@ -1571,7 +1571,11 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                   let pwBrowser: import('playwright').Browser | null = null;
                   try {
                     const { chromium } = await import('playwright');
-                    pwBrowser = await chromium.launch({ headless: true });
+                    // ✅ [2026-05-26 v2.10.364 SPEC-NAVER-PROTECTION-2026 P3 Fix 3.4 — 1/5]
+                    //   headed 모드로 전환 — naver.me 도메인은 네이버 봇 감지 직접 적용 영역.
+                    //   headless 자체가 가장 강한 봇 시그니처 (짧은 백그라운드 작업이라 UX 영향 최소).
+                    //   다음 사이클: smartCrawler, productSpecCrawler(3곳), imageLibrary 4곳 별도.
+                    pwBrowser = await chromium.launch({ headless: false });
                     const pwContext = await pwBrowser.newContext({
                       userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
                     });
