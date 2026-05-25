@@ -208,7 +208,8 @@ export function registerImageDownloadHandlers(): void {
                         });
 
                         const buffer = Buffer.from(response.data);
-                        const contentType = response.headers['content-type'] || 'image/jpeg';
+                        // ✅ axios 1.x: response.headers['content-type']가 union type 반환 → String() 변환
+                        const contentType = String(response.headers['content-type'] || 'image/jpeg');
 
                         if (buffer.length < 1024) {
                             console.warn(`[Main] ⚠️ 이미지 크기 너무 작음 (${buffer.length}bytes), 재시도 ${attempt}/${maxRetries}`);
