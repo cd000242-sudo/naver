@@ -46,13 +46,22 @@ jobs:
       - name: Prepare deploy directory
         run: |
           mkdir -p _site
-          # 1) Legacy 정적 *.html (호환성 + Toss 콜백용 success.html/fail.html)
+          # 1) Legacy 정적 페이지 복사 (admin + Toss success/fail + 이미지 자산 등)
           cp -r payment-page/* _site/
           cp -r admin _site/admin
-          # 2) Phase 7: SPA를 root로 배포 — index.html 덮어쓰기
+          # 2) SPA dist를 root로 덮어쓰기
           cp -r spa/dist/* _site/
-          # 3) Deep link SPA fallback — /products 등 React Router 라우트
-          #    GitHub Pages 가 파일 미존재 시 404.html 반환 → SPA index 로 처리
+          # 3) GitHub Pages Pretty URL 매칭 차단:
+          #    /products → products.html 자동 매칭이 SPA 라우터를 가림.
+          #    success.html/fail.html (Toss 콜백) 제외하고 모든 root *.html 을
+          #    SPA index 로 교체 → Pretty URL 도 SPA 라우터가 처리.
+          find _site -maxdepth 1 -name '*.html' \
+            ! -name 'index.html' \
+            ! -name '404.html' \
+            ! -name 'success.html' \
+            ! -name 'fail.html' \
+            -exec cp _site/index.html {} \;
+          # 4) Deep link fallback — 존재하지 않는 경로(/foo)도 SPA index 로
           cp _site/index.html _site/404.html
 
       - name: Setup Pages
