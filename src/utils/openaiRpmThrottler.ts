@@ -83,7 +83,9 @@ const getCeilingRpm = (): number => {
   } catch {
     /* ignore */
   }
-  return 100; // gpt-4.1 Tier 1 보수적 값 (실 한도 500, burst 회피)
+  // ✅ [2026-05-25 v2.10.357] 사용자 요청 — 100 → 60 (더 보수적, 안정성 우선)
+  //   글 1편당 12~30회 호출 × 동시 요청 burst 고려 시 60이 안전 margin
+  return 60;
 };
 
 // 전역 단일 인스턴스 (모델 구분 없이 통합 — 한 OpenAI 키는 한 RPM 한도 공유)

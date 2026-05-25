@@ -1,6 +1,7 @@
 // ✅ puppeteer-extra + stealth plugin 적용 (봇 감지 완벽 우회)
 import puppeteer from 'puppeteer-extra';
-import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+// ✅ [2026-05-25 v2.10.357] StealthPlugin import 제거 — browserSessionManager.ts에서 단일 등록
+// import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { Browser, Frame, Page, ElementHandle, KeyInput } from 'puppeteer';
 import type { StructuredContent, ImagePlan } from './contentGenerator.js';
 import { removeOrdinalHeadingLabelsFromBody, stripAllFormatting } from './contentGenerator.js';
@@ -153,8 +154,11 @@ async function smartTypeWithAutoHighlight(
   }
 }
 
-// ✅ Stealth Plugin 적용 (가장 중요! - 봇 감지 우회 핵심)
-puppeteer.use(StealthPlugin());
+// ✅ [2026-05-25 v2.10.357 P1 FIX] Stealth Plugin 이중 등록 제거
+//   Phase A1 진단 발견: browserSessionManager.ts:39에서 이미 등록 완료.
+//   이중 등록 시 두 번째 등록이 새 enabledEvasions 인스턴스로 첫 번째 명시적 add를 무효화 가능 → evasion 비결정적.
+//   해결: 단일 등록 (browserSessionManager.ts)만 유지. import도 정리.
+// puppeteer.use(StealthPlugin());  // 제거: 이중 등록 회피 (browserSessionManager.ts:39에서 단일 등록)
 
 export interface AutomationOptions {
   naverId: string;
@@ -379,13 +383,20 @@ export class NaverBlogAutomation {
     }
     hash = hash >>> 0; // unsigned 32-bit
 
-    // ✅ Chrome 버전 풀 확대 (10개 — 마이너 버전 다양화)
-    const chromeVersions = [
-      '131.0.6778.205', '132.0.6834.160', '133.0.6917.141',
-      '133.0.6943.98', '134.0.6998.89', '134.0.6998.117',
-      '134.0.7025.40', '135.0.7049.42', '135.0.7049.84',
-      '135.0.7049.96',
-    ];
+    // ✅ [2026-05-25 v2.10.357 P0 FIX] Chrome 버전 풀 최신화 (145~149)
+    //   Phase A 5팀 진단 발견: 기존 풀 131~135 vs 사용자 실제 Chrome 148 → 14버전 차이
+    //   → 네이버 서버측 UA 파싱에서 즉시 봇 신호 분류 (95% 멈춤·캡차 root cause)
+    //   해결: 최근 1~2개월 출시된 안정 버전으로 풀 교체. 미래에는 동적 binary 감지로 전환 예정.
+    //   환경 변수 CHROME_VERSION_HINT로 override 가능 (사용자 Chrome 정확한 버전 명시 시)
+    const envHint = (typeof process !== 'undefined' ? process.env.CHROME_VERSION_HINT : '') || '';
+    const chromeVersions = envHint
+      ? [envHint]
+      : [
+          '145.0.7480.66', '145.0.7480.135', '146.0.7530.41',
+          '146.0.7530.123', '147.0.7592.79', '147.0.7592.155',
+          '148.0.7666.50', '148.0.7666.137', '149.0.7710.42',
+          '149.0.7710.124',
+        ];
     const version = chromeVersions[hash % chromeVersions.length];
     const userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${version} Safari/537.36`;
 
@@ -1081,8 +1092,17 @@ export class NaverBlogAutomation {
     throw new Error('수동 로그인 시간이 초과되었습니다. (10분)');
   }
 
+  // ✅ [2026-05-25 v2.10.357 P2] 진단용 시작 시각 — 95% 멈춤 위치 추적
+  private _runStartMs: number = 0;
+
   private log(message: string): void {
-    this.logger?.(message);
+    // ✅ run() 시작 후 경과 시간을 모든 로그에 자동 prepend → main 로그·debug.log에 hang 위치 식별 가능
+    if (this._runStartMs > 0) {
+      const elapsed = ((Date.now() - this._runStartMs) / 1000).toFixed(1);
+      this.logger?.(`[+${elapsed}s] ${message}`);
+    } else {
+      this.logger?.(message);
+    }
   }
 
   /**
@@ -9131,6 +9151,10 @@ export class NaverBlogAutomation {
     // ✅ [v2.7.27] Adaptive Limiter — Puppeteer 부하 시 발행 동시성 자동 다운
     const { globalLimiter } = await import('./runtime/adaptiveLimiter.js');
     const release = await globalLimiter.acquire('publish');
+    // ✅ [2026-05-25 v2.10.357 P2] 95% 멈춤 진단 — 모든 로그에 경과 시간 자동 prepend
+    //   사용자 보고: "글/이미지 다 끝났는데 네이버 로그인에서 95% 멈춤"
+    //   log() 함수가 [+N.Ns] 자동 추가 → main 로그·debug.log에서 hang 위치 즉시 식별 가능
+    this._runStartMs = Date.now();
     try {
     this.cancelRequested = false;
     this.publishedUrl = null; // ✅ 초기화

@@ -322,6 +322,14 @@ class BrowserSessionManager {
 
         const profile = this.getAccountConsistentProfile(accountId);
         const chromeExecutablePath = this.findChromeExecutable();
+        // ✅ [2026-05-25 v2.10.357 P1] Chrome 폴백 명시 로그 — Phase A2 진단 발견
+        //   findChromeExecutable() === null이면 Puppeteer 번들 Chromium 폴백 → stealth UA 버전이
+        //   실제 시스템 Chrome과 달라져 fingerprint 불일치 재발. 그동안 silent fallback이어서 추적 불가.
+        if (!chromeExecutablePath) {
+          console.warn('[BrowserSession] ⚠️ 시스템 Chrome 미발견 → Puppeteer 번들 Chromium 폴백 (봇 감지 위험 ↑)');
+        } else {
+          console.log(`[BrowserSession] ✅ 시스템 Chrome 사용: ${chromeExecutablePath}`);
+        }
 
         // ✅ [2026-03-26] currentProxyUrl은 함수 상단에서 이미 resolve됨 (중복 호출 방지)
         const proxyUrl = currentProxyUrl;
