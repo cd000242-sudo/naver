@@ -1529,7 +1529,7 @@ export async function setImageSizeAndAttachLink(self: any, linkUrl?: string): Pr
       const imgs = document.querySelectorAll('img.se-image-resource');
       if (imgs.length > 0) {
         const lastImg = imgs[imgs.length - 1] as HTMLElement;
-        lastImg.scrollIntoView({ behavior: 'instant', block: 'center' });
+        lastImg.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     });
     await self.delay(800);
@@ -1787,12 +1787,13 @@ export async function attachLinkToLastImage(self: any, linkUrl: string): Promise
     for (let attempt = 1; attempt <= 3; attempt++) {
       self.log(`   🖱️ 이미지 클릭 시도 ${attempt}/3...`);
 
-      // ✅ [핵심 1] 스크롤 - 이미지를 화면 정중앙으로 가져옴 (behavior: 'instant' 필수!)
+      // ✅ [핵심 1] 스크롤 - 이미지를 화면 정중앙으로 가져옴
+      // [v2.10.374 SPEC P5] behavior: 'smooth' — 봇 시그니처 차단 (사람처럼 부드러움). 800ms delay로 완료 대기.
       await frame.evaluate(() => {
         const imgs = document.querySelectorAll('img.se-image-resource');
         if (imgs.length > 0) {
           const lastImg = imgs[imgs.length - 1] as HTMLElement;
-          lastImg.scrollIntoView({ behavior: 'instant', block: 'center' });
+          lastImg.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       });
       await self.delay(800); // 스크롤 안정화 대기 (증가)

@@ -15,6 +15,26 @@ import * as path from 'path';
 const PROJECT_ROOT = path.resolve(__dirname, '../..');
 const readSrc = (p: string) => fs.readFileSync(path.join(PROJECT_ROOT, p), 'utf-8');
 
+describe('P5 scroll behavior 보호 (v2.10.374)', () => {
+  it('imageHelpers.ts scrollIntoView가 instant 사용 안 함 (smooth/auto)', () => {
+    const src = readSrc('src/automation/imageHelpers.ts');
+    const instantMatches = src.match(/scrollIntoView\([^)]*behavior:\s*'instant'/g) || [];
+    expect(instantMatches.length).toBe(0);
+  });
+
+  it('imageHelpers.ts에 smooth scroll 2곳 이상 (line 1532, 1795)', () => {
+    const src = readSrc('src/automation/imageHelpers.ts');
+    const smoothMatches = src.match(/scrollIntoView\([^)]*behavior:\s*'smooth'/g) || [];
+    expect(smoothMatches.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('smooth scroll 후 안정화 delay 유지 (800ms+ — 봇 회피 + 작동성)', () => {
+    const src = readSrc('src/automation/imageHelpers.ts');
+    // scrollIntoView + delay 패턴 보호 (smooth 완료 대기)
+    expect(src).toMatch(/scrollIntoView[\s\S]{0,200}self\.delay\(8/);
+  });
+});
+
 describe('P5 mouse steps 가변 보호', () => {
   it('imageHelpers.ts에 humanSteps() 헬퍼 정의 또는 steps 옵션 사용', () => {
     const src = readSrc('src/automation/imageHelpers.ts');
