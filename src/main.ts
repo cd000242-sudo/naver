@@ -7260,6 +7260,21 @@ app.whenReady().then(async () => {
     //   사용자에게는 즉시 splash가 보임. 로그인/메인 윈도우 준비되면 splash close.
     showSplash();
 
+    // ✅ [2026-05-26 v2.10.375 SPEC-NAVER-PROTECTION-2026 P1 Fix 1.1]
+    //   셀렉터 원격 업데이트 활성화 — 네이버 UI 변경 시 앱 업데이트 없이 자동 패치.
+    //   env var SELECTOR_PATCH_URL 설정 시에만 시작 (URL 미설정 = dead code = 안전).
+    //   기본 간격 6시간. stopPeriodicCheck는 will-quit에서 cleanup (line 8253 기존 wiring).
+    try {
+      const selectorPatchUrl = (process.env.SELECTOR_PATCH_URL || '').trim();
+      if (selectorPatchUrl) {
+        const { schedulePeriodicCheck } = require('./automation/selectors/remoteUpdate.js');
+        schedulePeriodicCheck(selectorPatchUrl);
+        console.log(`[Main] 셀렉터 원격 업데이트 시작: ${selectorPatchUrl}`);
+      }
+    } catch (selectorErr) {
+      console.warn('[Main] 셀렉터 원격 업데이트 시작 실패 (무시):', (selectorErr as Error).message);
+    }
+
     // [v2.10.155] Layer 2 — 좀비 회복 시스템 초기화 + 이전 세션 좀비 자동 정리
     //   부팅 차단 없이 setImmediate(non-blocking)으로 백그라운드 실행.
     //   사용자 통찰 "사용자들도 다들 그럼 느려지는이유가 이게원인이네" 해결책.
