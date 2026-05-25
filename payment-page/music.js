@@ -478,14 +478,15 @@
     }
 
     window.onYouTubeIframeAPIReady = function() {
-        const resumeTime = getResumeTime();
-        // v4: Radio 자동재생 목록 (RDf4jS6yW83MU) — 동일 곡으로 시작 + 비슷한 곡 자동 추가
-        //   원본 URL: youtube.com/watch?v=f4jS6yW83MU&list=RDf4jS6yW83MU&t=16s
-        //   첫 진입은 16초부터, 이어재생 시 저장된 시간으로 복귀
+        // v5: 사용자 지정 URL 그대로 — youtube.com/watch?v=f4jS6yW83MU&list=RDf4jS6yW83MU&start_radio=1&t=16s
+        //   videoId = f4jS6yW83MU (Summer Vibes)
+        //   list = RDf4jS6yW83MU (Radio 자동재생 목록 — 비슷한 곡 자동 추가, start_radio=1 효과)
+        //   start = 16초 (t=16s 반영, resume time 무시 — 사용자 명시 요청)
         player = new YT.Player('yt-music-player', {
+            videoId: 'f4jS6yW83MU',
             playerVars: {
                 autoplay: 1,
-                start: resumeTime > 0 ? Math.floor(resumeTime) : 16,
+                start: 16,
                 listType: 'playlist',
                 list: 'RDf4jS6yW83MU',
                 controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0
