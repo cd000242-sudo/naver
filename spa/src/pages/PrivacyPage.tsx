@@ -1,4 +1,71 @@
-import Placeholder from './_Placeholder';
-export default function PrivacyPage() {
-    return <Placeholder title="개인정보처리방침" emoji="🔒" fromFile="privacy.html" />;
+import { useEffect } from 'react';
+import LegalLayout from '../components/LegalLayout';
+
+const h2: React.CSSProperties = { fontSize: 20, fontWeight: 800, color: '#FFD700', margin: '32px 0 14px' };
+const ul: React.CSSProperties = { paddingLeft: 22, margin: '0 0 16px' };
+const table: React.CSSProperties = { width: '100%', borderCollapse: 'collapse', margin: '12px 0 20px', fontSize: 14 };
+const th: React.CSSProperties = { background: 'rgba(255,215,0,0.08)', color: '#FFD700', padding: '10px 12px', textAlign: 'left', border: '1px solid rgba(255,255,255,0.08)', fontWeight: 700 };
+const td: React.CSSProperties = { padding: '10px 12px', border: '1px solid rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.8)' };
+
+/** 개인정보처리방침 — payment-page/privacy.html 마이그 */
+function PrivacyPage() {
+    useEffect(() => {
+        const prev = document.title;
+        document.title = '개인정보처리방침 — Leaders Pro';
+        return () => { document.title = prev; };
+    }, []);
+
+    return (
+        <LegalLayout title="개인정보처리방침" effective="시행일: 2026년 3월 24일 (최종 수정)">
+            <h2 style={{ ...h2, marginTop: 0 }}>1. 수집하는 개인정보</h2>
+            <table style={table}>
+                <thead>
+                    <tr>
+                        <th style={th}>수집 항목</th>
+                        <th style={th}>수집 목적</th>
+                        <th style={th}>보관 기간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style={td}>이메일 주소 (선택)</td><td style={td}>라이선스 코드 백업 발송</td><td style={td}>발송 후 즉시 파기</td></tr>
+                    <tr><td style={td}>결제 정보</td><td style={td}>결제 처리 (토스페이먼츠 위탁)</td><td style={td}>관련 법령에 따름</td></tr>
+                    <tr><td style={td}>주문번호, 결제일시</td><td style={td}>주문 내역 관리 및 고객 지원</td><td style={td}>5년 (전자상거래법)</td></tr>
+                </tbody>
+            </table>
+
+            <h2 style={h2}>2. 개인정보 처리 위탁</h2>
+            <table style={table}>
+                <thead>
+                    <tr>
+                        <th style={th}>수탁업체</th>
+                        <th style={th}>위탁 업무</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style={td}>토스페이먼츠 주식회사</td><td style={td}>결제 처리</td></tr>
+                </tbody>
+            </table>
+
+            <h2 style={h2}>3. 이용자의 권리</h2>
+            <ul style={ul}>
+                <li>개인정보 열람, 정정, 삭제 요청: cd000242@gmail.com</li>
+                <li>요청 접수 후 10일 이내 처리됩니다.</li>
+            </ul>
+
+            <h2 style={h2}>4. 개인정보의 안전성 확보</h2>
+            <ul style={ul}>
+                <li>결제 정보는 토스페이먼츠의 PCI-DSS 인증 시스템에서 처리됩니다.</li>
+                <li>라이선스 코드는 접근 권한이 제한된 시스템에 저장되며 관리됩니다.</li>
+                <li>이메일 주소는 발송 완료 후 서버에 저장되지 않습니다.</li>
+            </ul>
+
+            <h2 style={h2}>5. 개인정보 보호책임자</h2>
+            <p>이메일: cd000242@gmail.com</p>
+
+            <h2 style={h2}>6. 방침 변경</h2>
+            <p>본 방침은 변경 시 본 페이지를 통해 공지됩니다.</p>
+        </LegalLayout>
+    );
 }
+
+export default PrivacyPage;
