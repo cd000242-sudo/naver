@@ -164,3 +164,34 @@ describe('P1 Fix 1.3: WebRTC leak 차단 launch args', () => {
     expect(src).toMatch(/--enforce-webrtc-ip-permission-check/);
   });
 });
+
+// ═══════════════════════════════════════════════════════════════════
+// 6. P3 Fix: fingerprint completeness — colorDepth/pixelDepth/maxTouchPoints (v2.10.382)
+// ═══════════════════════════════════════════════════════════════════
+describe('P3 fingerprint completeness (v2.10.382)', () => {
+  it('screen.colorDepth = 24 주입 보호 (모던 디스플레이 일반값)', () => {
+    const src = readSrc(BSM_PATH);
+    expect(src).toMatch(/screen[\s\S]{0,80}colorDepth[\s\S]{0,80}24/);
+  });
+
+  it('screen.pixelDepth = 24 주입 보호', () => {
+    const src = readSrc(BSM_PATH);
+    expect(src).toMatch(/screen[\s\S]{0,80}pixelDepth[\s\S]{0,80}24/);
+  });
+
+  it('navigator.maxTouchPoints = 0 주입 보호 (데스크탑 기본값)', () => {
+    const src = readSrc(BSM_PATH);
+    expect(src).toMatch(/maxTouchPoints[\s\S]{0,80}=>\s*0/);
+  });
+
+  it('3 spoof 모두 evaluateOnNewDocument 블록 내부 (page 로드마다 적용)', () => {
+    const src = readSrc(BSM_PATH);
+    // evaluateOnNewDocument 블록 추출 (await page.evaluateOnNewDocument(...))
+    const blockMatch = src.match(/evaluateOnNewDocument\([\s\S]*?\}, profile\);/);
+    expect(blockMatch).not.toBeNull();
+    const block = blockMatch![0];
+    expect(block).toMatch(/colorDepth/);
+    expect(block).toMatch(/pixelDepth/);
+    expect(block).toMatch(/maxTouchPoints/);
+  });
+});

@@ -526,6 +526,13 @@ class BrowserSessionManager {
             //   수정: profile.hardwareConcurrency / deviceMemory (계정별 안정·계정간 분산)
             Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => hw.hardwareConcurrency || 8 });
             Object.defineProperty(navigator, 'deviceMemory', { get: () => hw.deviceMemory || 8 });
+            // ✅ [2026-05-26 v2.10.382 SPEC-NAVER-PROTECTION-2026 P3 fingerprint completeness]
+            //   screen.colorDepth/pixelDepth: 모던 디스플레이 = 24 (Headless Chromium default는 24지만
+            //   일부 환경에서 30/32로 노출되어 fingerprint hash 변화 → 강제 통일로 안정화).
+            //   navigator.maxTouchPoints: 데스크탑 = 0 (puppeteer default가 환경 따라 다름 → 0 고정).
+            Object.defineProperty(screen, 'colorDepth', { get: () => 24, configurable: true });
+            Object.defineProperty(screen, 'pixelDepth', { get: () => 24, configurable: true });
+            Object.defineProperty(navigator, 'maxTouchPoints', { get: () => 0, configurable: true });
             // ✅ WebGL 스푸핑 유지 (GPU 활성화 상태이므로 모순 없음)
             const webGL = hw.webGL;
             const getParameterOriginal = WebGLRenderingContext.prototype.getParameter;
