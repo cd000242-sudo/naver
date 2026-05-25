@@ -985,6 +985,8 @@ export async function initPriceInfoModal(): Promise<void> {
             // 토글 자체가 없거나 checked면 true. 명시 unchecked만 false.
             return el ? el.checked : true;
           })(),
+          // ✅ [v2.10.361] Perplexity 팩트 검증 + 자동 재작성 토글 저장 (기본 OFF, 비용 차감)
+          usePerplexityFactCheck: (document.getElementById('use-perplexity-factcheck') as HTMLInputElement | null)?.checked || false,
           // ✅ [v2.10.229] 자동 관련글 링크 토글 저장 (기본 ON, undefined도 true 취급)
           autoInsertInternalLinks: (() => {
             const el = document.getElementById('auto-insert-internal-links') as HTMLInputElement | null;

@@ -7914,6 +7914,34 @@ export async function generateStructuredContent(
           optimized.bodyHtml = humanizeHtmlContent(optimized.bodyHtml, humanizeIntensity);
         }
 
+        // ✅ [v2.10.361] Perplexity 팩트 검증 + 자동 재작성 (사용자 체크박스 ON 시에만)
+        //   환각/거짓 사실 의심 문장 자동 탐지 + 사실 기반 재작성. 비용 ~₩50~150/편.
+        try {
+          const _config = await loadConfig().catch(() => null);
+          if ((_config as any)?.usePerplexityFactCheck === true && optimized.bodyPlain) {
+            const { factCheckAndRewrite } = await import('./perplexityFactCheck.js');
+            const _topic = String((source as any).title || (source as any).keyword || (source as any).primaryKeyword || '').slice(0, 100);
+            const { corrected, result } = await factCheckAndRewrite(optimized.bodyPlain, _topic);
+            if (result.suspicious.length > 0) {
+              optimized.bodyPlain = corrected;
+              // bodyHtml에도 동일 치환 (간단 string replace — exact match)
+              if (optimized.bodyHtml) {
+                for (const item of result.suspicious) {
+                  if (optimized.bodyHtml.includes(item.original)) {
+                    optimized.bodyHtml = optimized.bodyHtml.replace(item.original, item.replacement);
+                  }
+                }
+              }
+              console.log(`[ContentGenerator] 🌐 Perplexity 팩트검증: ${result.suspicious.length}개 의심 문장 자동 재작성 (${(result.durationMs / 1000).toFixed(1)}s)`);
+            } else {
+              console.log(`[ContentGenerator] 🌐 Perplexity 팩트검증: 의심 문장 없음 (${(result.durationMs / 1000).toFixed(1)}s)`);
+            }
+          }
+        } catch (factCheckErr: any) {
+          // 팩트 검증 실패는 글 생성 자체 실패가 아니므로 swallow + warn
+          console.warn('[ContentGenerator] Perplexity 팩트검증 실패 (글은 그대로 사용):', factCheckErr?.message || factCheckErr);
+        }
+
         // quality에 AI 탐지 정보 추가
         if (!optimized.quality) {
           optimized.quality = {

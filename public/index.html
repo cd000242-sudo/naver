@@ -4355,6 +4355,21 @@
                     </label>
                 </div>
 
+                <!-- 7. Perplexity fact-check (v2.10.361 신규, 기본 OFF - 사용자 환경 비용 차감) -->
+                <div class="field" style="margin-bottom: 0.5rem; padding: 0.8rem; background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 8px;">
+                    <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
+                        <input type="checkbox" id="use-perplexity-factcheck" data-perplexity-factcheck-sync="1" style="margin-top: 0.3rem; cursor: pointer;">
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.2rem;">🌐 Perplexity 팩트 검증 + 자동 재작성 <span style="color: #6366f1; font-size: 0.75rem;">[기본 OFF · 비용 추가]</span></div>
+                            <small style="color: var(--text-muted); font-size: 0.75rem; display: block; line-height: 1.4;">
+                                생성된 글을 Perplexity sonar에 보내 <strong>통계·연도·인물·법령·수치 등 환각 의심 문장</strong>을 자동 탐지하고 사실 기반으로 <strong>자동 재작성</strong>합니다.<br>
+                                <strong style="color: #6366f1;">⚠️ 비용 차감 주의:</strong> 글 1편당 약 <strong>₩50~150 추가</strong> (글 길이·모델 의존). Perplexity API 키 필수.<br>
+                                효과: 환각·거짓 사실 차단 → 네이버 저품질 판정 회피 + 신뢰도 ↑. 모든 모드(글 생성/풀오토/다중계정/반자동)에 적용.
+                            </small>
+                        </div>
+                    </label>
+                </div>
+
                 <!-- 9. Claude Sonnet abstention 모드 (v2.10.236 기본 OFF - 고비용) -->
                 <div class="field" style="margin-bottom: 0.5rem; padding: 0.8rem; background: rgba(220, 38, 38, 0.06); border: 1px solid rgba(220, 38, 38, 0.4); border-radius: 8px;">
                     <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
@@ -9179,6 +9194,14 @@
                                     style="accent-color:#f59e0b; width:16px; height:16px;">
                                 <span style="color:var(--text-strong);">🔝 키워드 맨 앞 배치</span>
                             </label>
+                            <!-- ✅ [v2.10.361] Perplexity 팩트 검증 — 글 옵션 모달과 동기화 (data-perplexity-factcheck-sync) -->
+                            <label
+                                style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-size:0.8rem;"
+                                title="₩50~150/편 차감 · 환각 의심 문장 자동 재작성">
+                                <input type="checkbox" id="ma-setting-perplexity-factcheck" data-perplexity-factcheck-sync="1"
+                                    style="accent-color:#6366f1; width:16px; height:16px;">
+                                <span style="color:var(--text-strong);">🌐 Perplexity 팩트검증 <span style="color:#6366f1; font-size:0.7rem;">(₩50~150/편)</span></span>
+                            </label>
                         </div>
                     </div>
 
@@ -12646,6 +12669,45 @@
             50% { opacity: 0.85; transform: scale(1.05); }
         }
     </style>
+
+    <!-- ✅ [v2.10.361] Perplexity 팩트검증 체크박스 동기화 — 모든 모달의 [data-perplexity-factcheck-sync] 통일 -->
+    <script>
+    (function syncPerplexityFactCheck() {
+      var LS_KEY = 'use-perplexity-factcheck';
+      function getAll() { return document.querySelectorAll('[data-perplexity-factcheck-sync="1"]'); }
+      function load() {
+        try { return localStorage.getItem(LS_KEY) === '1'; } catch (e) { return false; }
+      }
+      function save(v) {
+        try { localStorage.setItem(LS_KEY, v ? '1' : '0'); } catch (e) { /* ignore */ }
+      }
+      function applyToAll(v) {
+        getAll().forEach(function (el) { if (el && el.checked !== v) { el.checked = v; } });
+      }
+      function bind() {
+        var saved = load();
+        applyToAll(saved);
+        getAll().forEach(function (el) {
+          if (el.__pfcBound) return;
+          el.__pfcBound = true;
+          el.addEventListener('change', function () {
+            save(el.checked);
+            applyToAll(el.checked);
+            console.warn('[PerplexityFactCheck UI] 동기화: ' + (el.checked ? 'ON' : 'OFF'));
+          });
+        });
+      }
+      // 초기 로드 + DOM 변경 감지 (다중계정 모달 등 동적 표시 대응)
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bind);
+      } else {
+        bind();
+      }
+      // 모달이 동적 추가될 때마다 재바인딩
+      var mo = new MutationObserver(function () { bind(); });
+      mo.observe(document.body, { childList: true, subtree: true });
+    })();
+    </script>
 
 </body>
 
