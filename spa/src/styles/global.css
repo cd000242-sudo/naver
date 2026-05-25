@@ -21,9 +21,9 @@
 html, body { width: 100%; min-height: 100%; }
 body {
     font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    /* hero-beach-bg.png — 사용자 제공 여름 배경. 가독성용 dark 그라데이션 overlay 위에 깔림. */
+    /* hero-beach-bg.png — 사용자 제공 여름 배경. overlay 를 살짝만 깔아 배경이 잘 보이도록. */
     background:
-        linear-gradient(180deg, rgba(10,10,15,0.55) 0%, rgba(10,10,15,0.72) 40%, rgba(10,10,15,0.88) 100%),
+        linear-gradient(180deg, rgba(10,10,15,0.10) 0%, rgba(10,10,15,0.25) 50%, rgba(10,10,15,0.45) 100%),
         url('/images/hero-beach-bg.png') center top / cover no-repeat fixed,
         var(--bg-dark);
     background-attachment: fixed;
