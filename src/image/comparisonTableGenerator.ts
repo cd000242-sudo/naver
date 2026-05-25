@@ -349,7 +349,9 @@ export async function generateComparisonTableImage(
     await page.setViewport({ width, height: 800 });
 
     // HTML 콘텐츠 로드
-    await page.setContent(html, { waitUntil: 'networkidle0' });
+    // ✅ [Puppeteer 25] setContent에서 'networkidle0' 옵션 제거됨 → 'load'로 대체
+    //   setContent는 외부 리소스 적기 때문에 load만으로 충분 (HTML 인라인 + 이미지 CDN 정도)
+    await page.setContent(html, { waitUntil: 'load' });
 
     // 콘텐츠 높이 측정
     const bodyHandle = await page.$('body');

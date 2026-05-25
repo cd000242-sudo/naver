@@ -83,9 +83,11 @@ describe('Session Reconnect Defense — Stage gates', () => {
     });
   });
 
-  describe('Existing stage 1 — isConnected gate preserved', () => {
-    it('isConnected() check still present as fast gate', () => {
-      expect(code).toMatch(/isConnected\(\)/);
+  describe('Existing stage 1 — connected gate preserved (Puppeteer 25 property)', () => {
+    it('browser.connected check still present as fast gate', () => {
+      // ✅ [Puppeteer 25] isConnected() method → connected property 변경 (v2.10.358)
+      //   API breaking change에 회귀 테스트도 동기화. .connected property로 가드 보호.
+      expect(code).toMatch(/\.connected/);
     });
   });
 

@@ -135,7 +135,7 @@ class BrowserSessionManager {
             }
 
             // Stage 1 re-check: WebSocket gate
-            if (!session.browser.isConnected()) {
+            if (!session.browser.connected) {
                 console.log(`[BrowserSessionManager] WebSocket still disconnected on attempt ${attempt}`);
                 continue;
             }
@@ -262,7 +262,7 @@ class BrowserSessionManager {
             } else {
                 // Stage 1: WebSocket gate — fast check
                 const wsConnected = (() => {
-                    try { return existingSession.browser.isConnected(); }
+                    try { return existingSession.browser.connected; }
                     catch { return false; }
                 })();
 
@@ -658,7 +658,7 @@ class BrowserSessionManager {
      */
     async detectSessionPublicIp(accountId: string): Promise<string | null> {
         const session = this.sessions.get(accountId);
-        if (!session || !session.browser.isConnected()) return null;
+        if (!session || !session.browser.connected) return null;
         const page = session.page;
         if (!page || page.isClosed()) return null;
         try {
@@ -730,7 +730,7 @@ class BrowserSessionManager {
      */
     async ensureServerSession(accountId: string): Promise<boolean> {
         const session = this.sessions.get(accountId);
-        if (!session || !session.browser.isConnected()) return false;
+        if (!session || !session.browser.connected) return false;
 
         const page = session.page;
         if (!page || page.isClosed()) return false;
@@ -937,7 +937,7 @@ class BrowserSessionManager {
                 }
 
                 const session = this.sessions.get(accountId);
-                if (!session || !session.browser.isConnected()) continue;
+                if (!session || !session.browser.connected) continue;
 
                 await this.pingSingleSession(session);
 

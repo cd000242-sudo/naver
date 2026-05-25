@@ -1608,7 +1608,7 @@ export class NaverBlogAutomation {
       this.page = session.page;
 
       // 연결 상태 확인
-      if (this.browser.isConnected()) {
+      if (this.browser.connected) {
         // 페이지가 유효한지 확인
         try {
           await this.page.url();
@@ -1670,8 +1670,9 @@ export class NaverBlogAutomation {
     // ✅ 1. 기존 브라우저 인스턴스 재사용 및 탭 정리 (탭 누적 방지)
     if (this.browser) {
       try {
-        // 브라우저 연결 상태 확인 (Property check first to avoid exception if method undefined)
-        if (this.browser.isConnected && !this.browser.isConnected()) {
+        // ✅ [Puppeteer 25] browser.isConnected() (method) → browser.connected (property) 변경
+        //   property는 항상 정의됨 → 방어 check 불필요
+        if (!this.browser.connected) {
           throw new Error('브라우저 연결 끊김');
         }
 
