@@ -601,60 +601,30 @@
         <div style="width:26px; height:26px; background:#1a0a10; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px;">👥</div>
         <span style="color:#1a0a10; font-weight:800; font-size:13px; white-space:nowrap; letter-spacing:-0.3px;">단톡방 바로가기</span>
     </a>
-    <!-- v3: 우하단 float drawer (서랍 형식) -->
+    <!-- v4: 우하단 float stack (항상 표시, 위→아래: 음악/유튜브/단톡방/1:1) -->
     <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" id="drawerYoutube" title="공식 유튜브 채널">
         <span class="dr-icon" style="background:#fff; color:#ff0000;">▶</span>
         <span class="dr-text">유튜브 채널</span>
     </a>
-    <button id="floatDrawerToggle" onclick="toggleFloatDrawer()" aria-label="메뉴 열기/닫기">
-        <span id="dropIc">💬</span>
-        <span id="closeIc" style="display:none;">✕</span>
-    </button>
     <style>
-        a.kakao-float, #kakaoGroupChat, #drawerYoutube { position: fixed !important; right: 24px !important; left: auto !important; z-index: 10001 !important; display: flex !important; align-items: center !important; gap: 10px !important; padding: 12px 20px !important; border-radius: 50px !important; width: auto !important; min-width: 160px !important; height: auto !important; backdrop-filter: blur(16px); text-decoration: none !important; font-family: 'Pretendard Variable','Inter',sans-serif !important; transition: all .3s cubic-bezier(.4,0,.2,1) !important; }
-        a.kakao-float { background: rgba(60,29,0,0.92) !important; border: 1px solid rgba(254,229,0,0.45) !important; box-shadow: 0 8px 32px rgba(0,0,0,0.35) !important; }
-        #kakaoGroupChat { background: rgba(254,229,0,0.95) !important; border: 1px solid rgba(60,29,0,0.5) !important; box-shadow: 0 8px 32px rgba(0,0,0,0.35) !important; }
-        #drawerYoutube { background: rgba(255,0,0,0.92) !important; border: 1px solid rgba(255,100,100,0.5) !important; box-shadow: 0 8px 32px rgba(255,0,0,0.35) !important; }
+        a.kakao-float, #kakaoGroupChat, #drawerYoutube { position: fixed !important; right: 24px !important; left: auto !important; z-index: 10001 !important; display: flex !important; align-items: center !important; gap: 10px !important; padding: 12px 20px !important; border-radius: 50px !important; width: auto !important; min-width: 160px !important; height: auto !important; backdrop-filter: blur(16px); text-decoration: none !important; font-family: 'Pretendard Variable','Inter',sans-serif !important; opacity: 1 !important; pointer-events: auto !important; transition: transform .2s, box-shadow .2s !important; }
+        a.kakao-float    { background: rgba(60,29,0,0.92) !important; border: 1px solid rgba(254,229,0,0.45) !important; box-shadow: 0 6px 24px rgba(0,0,0,0.35) !important; bottom: 30px !important; }
+        #kakaoGroupChat  { background: rgba(254,229,0,0.95) !important; border: 1px solid rgba(60,29,0,0.5) !important; box-shadow: 0 6px 24px rgba(0,0,0,0.35) !important; bottom: 90px !important; }
+        #drawerYoutube   { background: rgba(255,0,0,0.92) !important; border: 1px solid rgba(255,100,100,0.5) !important; box-shadow: 0 6px 24px rgba(255,0,0,0.35) !important; bottom: 150px !important; }
         #drawerYoutube .dr-icon { width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; }
         #drawerYoutube .dr-text { color: #fff; font-weight: 800; font-size: 13px; white-space: nowrap; letter-spacing: -0.3px; }
         a.youtube-float { display: none !important; }
-        .lp-music-player { position: fixed !important; right: 24px !important; left: auto !important; z-index: 10001 !important; transition: all .3s cubic-bezier(.4,0,.2,1) !important; }
-        #floatDrawerToggle { position: fixed; bottom: 24px; right: 24px; z-index: 10002; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #c9a84c, #d4a012); color: #1a1a2e; font-size: 24px; font-weight: 900; border: none; cursor: pointer; box-shadow: 0 8px 32px rgba(201,168,76,0.5); display: flex; align-items: center; justify-content: center; transition: transform .3s, background .3s, box-shadow .3s; }
-        #floatDrawerToggle.open { transform: rotate(135deg); background: #1a1a2e; color: #fee500; }
-        #floatDrawerToggle:hover { box-shadow: 0 12px 40px rgba(201,168,76,0.7); }
-        body:not(.drawer-open) a.kakao-float, body:not(.drawer-open) #kakaoGroupChat, body:not(.drawer-open) #drawerYoutube, body:not(.drawer-open) .lp-music-player { opacity: 0 !important; pointer-events: none !important; transform: translateY(40px) scale(0.85) !important; }
-        body.drawer-open a.kakao-float, body.drawer-open #kakaoGroupChat, body.drawer-open #drawerYoutube, body.drawer-open .lp-music-player { opacity: 1 !important; pointer-events: auto !important; transform: none !important; }
-        body.drawer-open a.kakao-float    { bottom: 100px !important; transition-delay: 0s !important; }
-        body.drawer-open #kakaoGroupChat  { bottom: 160px !important; transition-delay: .05s !important; }
-        body.drawer-open #drawerYoutube   { bottom: 220px !important; transition-delay: .1s !important; }
-        body.drawer-open .lp-music-player { bottom: 290px !important; transition-delay: .15s !important; }
+        .lp-music-player { position: fixed !important; right: 24px !important; left: auto !important; z-index: 10001 !important; bottom: 210px !important; }
+        a.kakao-float:hover, #kakaoGroupChat:hover, #drawerYoutube:hover { transform: scale(1.05); }
         @media (max-width: 768px) {
-            #floatDrawerToggle { bottom: 20px; right: 16px; width: 54px; height: 54px; font-size: 22px; }
             a.kakao-float, #kakaoGroupChat, #drawerYoutube { right: 16px !important; padding: 10px 16px !important; min-width: 148px !important; }
             #drawerYoutube .dr-text { font-size: 12px !important; }
-            body.drawer-open a.kakao-float    { bottom: 90px !important; }
-            body.drawer-open #kakaoGroupChat  { bottom: 150px !important; }
-            body.drawer-open #drawerYoutube   { bottom: 210px !important; }
-            body.drawer-open .lp-music-player { bottom: 270px !important; }
+            a.kakao-float    { bottom: 24px !important; }
+            #kakaoGroupChat  { bottom: 80px !important; }
+            #drawerYoutube   { bottom: 136px !important; }
+            .lp-music-player { bottom: 192px !important; right: 16px !important; }
         }
     </style>
-    <script>
-        (function() {
-            window.toggleFloatDrawer = function() {
-                const toggle = document.getElementById('floatDrawerToggle');
-                const opened = document.body.classList.toggle('drawer-open');
-                toggle.classList.toggle('open', opened);
-                document.getElementById('dropIc').style.display = opened ? 'none' : '';
-                document.getElementById('closeIc').style.display = opened ? '' : 'none';
-            };
-            document.addEventListener('click', (e) => {
-                if (!document.body.classList.contains('drawer-open')) return;
-                if (e.target.closest('#floatDrawerToggle, a.kakao-float, #kakaoGroupChat, #drawerYoutube, .lp-music-player')) return;
-                window.toggleFloatDrawer();
-            });
-            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.body.classList.contains('drawer-open')) window.toggleFloatDrawer(); });
-        })();
-    </script>
 
 <!-- CHERRY BLOSSOM PETALS -->
 <div class="petal-container" id="petalContainer"></div>

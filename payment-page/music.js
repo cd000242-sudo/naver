@@ -31,8 +31,9 @@
 
     let player = null, isPlaying = false, apiReady = false;
     let currentTrack = parseInt(localStorage.getItem(TRACK_KEY) || '0') % PLAYLIST.length;
-    const userExplicitlyOff = localStorage.getItem(STORAGE_KEY) === 'false';
-    const shouldAutoPlay = !userExplicitlyOff;
+    // v3: 무조건 자동재생 (사용자 끔 상태 무시 — 사이트 정책)
+    const userExplicitlyOff = false;
+    const shouldAutoPlay = true;
     let expanded = false;
     let timeSaveInterval = null; // ← 주기적 시간 저장 인터벌
 
