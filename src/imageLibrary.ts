@@ -385,8 +385,10 @@ export class ImageLibrary {
     let browser: Browser | null = null;
 
     try {
+      // ✅ [2026-05-26 v2.10.370 SPEC-NAVER-PROTECTION-2026 P3 Fix 3.4 — imageLibrary 2/2]
+      //   블로그 이미지 크롤링 (네이버 블로그 직접 노출 영역) — Chrome native headless('new').
       browser = await puppeteer.launch({
-        headless: true,
+        headless: 'new' as any,
         args: [
           '--no-sandbox', 
           '--disable-setuid-sandbox',

@@ -95,11 +95,11 @@ describe('P3 Fix 3.4 (v2.10.368): productSpecCrawler.ts crawlGmarket', () => {
   });
 });
 
-describe('P3 Fix 3.4 (v2.10.369): imageLibrary.ts crawlNewsImages', () => {
-  it('imageLibrary.ts에 headless: \'new\' 1곳 이상 존재 (crawlNewsImages line 274)', () => {
+describe('P3 Fix 3.4 (v2.10.369~370): imageLibrary.ts crawlNews + crawlBlog', () => {
+  it('imageLibrary.ts에 headless: \'new\' 2곳 (crawlNewsImages + crawlBlogImages)', () => {
     const src = readSrc('src/imageLibrary.ts');
     const newMatches = src.match(/headless:\s*'new'/g) || [];
-    expect(newMatches.length).toBeGreaterThanOrEqual(1);
+    expect(newMatches.length).toBeGreaterThanOrEqual(2);
   });
 });
 
@@ -113,10 +113,10 @@ describe('P3 Fix 3.4 (다음 사이클): productSpecCrawler 남은 3곳 + imageL
     expect(matches.length).toBeGreaterThanOrEqual(1);
   });
 
-  it('imageLibrary.ts에 headless:true 1곳 그대로 (line 387, 다음 사이클)', () => {
+  it('imageLibrary.ts에 headless:true 0곳 (모두 \'new\'로 전환 완료)', () => {
     const src = readSrc('src/imageLibrary.ts');
     const matches = src.match(/headless:\s*true/g) || [];
-    expect(matches.length).toBeGreaterThanOrEqual(1);
+    expect(matches.length).toBe(0);
   });
 });
 
