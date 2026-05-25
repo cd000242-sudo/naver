@@ -309,33 +309,44 @@
 
     // Build playlist items
     function renderPlaylist() {
-        listEl.innerHTML = PLAYLIST.map((t, i) =>
-            `<div class="lp-pl-item ${i === currentTrack ? 'active' : ''}" data-idx="${i}">
-                <span class="lp-pl-num">${i === currentTrack ? '♪' : (i + 1)}</span>
-                <span class="lp-pl-name">${t.title}</span>
-            </div>`
-        ).join('');
-        listEl.querySelectorAll('.lp-pl-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const idx = parseInt(item.dataset.idx);
-                if (idx !== currentTrack) { loadTrack(idx); }
-            });
-        });
+        // v5: 현재 재생 중인 Radio 트랙명을 동적으로 가져옴
+        let nowPlayingTitle = PLAYLIST[currentTrack].title;
+        try {
+            if (player && typeof player.getVideoData === 'function') {
+                const vd = player.getVideoData();
+                if (vd && vd.title) nowPlayingTitle = vd.title;
+            }
+        } catch {}
+        // Radio 자동 재생 표시 + 현재 곡
+        const radioLabel = '<div class="lp-pl-item active"><span class="lp-pl-num">♪</span><span class="lp-pl-name">' + nowPlayingTitle + '</span></div>';
+        const radioInfo = '<div style="font-size:10px; color:rgba(255,255,255,0.5); padding:6px 8px; text-align:center; border-top:1px solid rgba(255,255,255,0.06); margin-top:4px;">🔄 Radio 자동재생 — 비슷한 곡 자동 추가</div>';
+        listEl.innerHTML = radioLabel + radioInfo;
     }
     renderPlaylist();
 
     function updateUI() {
-        titleEl.textContent = PLAYLIST[currentTrack].title;
-        artEl.textContent = PLAYLIST[currentTrack].title.split(' ')[0]; // emoji
+        // v5: Radio playlist 동적 현재 곡 — player.getVideoData()
+        //   PLAYLIST 정적 배열은 1개 (시드 곡)이지만 YT가 Radio 자동 진행
+        let currentTitle = PLAYLIST[currentTrack].title;
+        let currentEmoji = currentTitle.split(' ')[0];
+        try {
+            if (player && typeof player.getVideoData === 'function') {
+                const vd = player.getVideoData();
+                if (vd && vd.title) {
+                    currentTitle = '🎵 ' + vd.title;
+                    currentEmoji = '🎵';
+                }
+            }
+        } catch {}
+        titleEl.textContent = currentTitle;
+        artEl.textContent = currentEmoji;
         playBtn.textContent = isPlaying ? '⏸' : '▶';
         fab.classList.toggle('playing', isPlaying);
         eqEl.classList.toggle('active', isPlaying);
-        // Update FAB play icon
         const fabPlayIcon = document.getElementById('lpmFabPlayIcon');
         if (fabPlayIcon) fabPlayIcon.textContent = isPlaying ? '⏸' : '▶';
-        // Update FAB sub-label with current track name
         if (fabTrackEl) {
-            fabTrackEl.textContent = isPlaying ? PLAYLIST[currentTrack].title : '일시정지';
+            fabTrackEl.textContent = isPlaying ? currentTitle : '일시정지';
         }
         renderPlaylist();
     }
@@ -508,8 +519,9 @@
                     updateUI();
                 },
                 onStateChange: function(e) {
-                    if (e.data === YT.PlayerState.ENDED) {
-                        // Auto next track
+                    // v5: Radio playlist 사용 시 ENDED 자동처리 X (YT가 다음 곡 자동 진행)
+                    //   기존 loadTrack 호출은 loadVideoById 로 Radio 컨텍스트를 깨뜨려 멈춤 발생
+                    if (e.data === YT.PlayerState.ENDED && PLAYLIST.length > 1) {
                         loadTrack((currentTrack + 1) % PLAYLIST.length);
                     }
                     // YouTube가 실제로 재생 중인지 상태 동기화
@@ -523,6 +535,12 @@
                         stopTimeSaving();
                         updateUI();
                     }
+                },
+                // v5: Radio 모드 에러 핸들러 (next/prev/loadVideoById 실패 대응)
+                onError: function(e) {
+                    console.warn('[MUSIC] YT Error:', e?.data);
+                    // 영상 비공개/지역 차단 등 → 다음 곡 시도 (Radio가 있으면)
+                    try { if (player && player.nextVideo) player.nextVideo(); } catch {}
                 }
             }
         });
