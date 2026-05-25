@@ -254,8 +254,20 @@ class BrowserSessionManager {
      * 세션 가져오기 또는 생성
      */
     async getOrCreateSession(accountId: string, headless: boolean = false, accountProxyUrl?: string): Promise<SessionInfo> {
+        // ✅ [2026-05-26 v2.10.377 SPEC-NAVER-PROTECTION-2026 P1 Fix 1.4]
+        //   sticky proxy 매핑 — env PROXY_POOL_URLS 설정 시 accountId hash 기반 deterministic 선택.
+        //   같은 계정 = 항상 같은 proxy 회선 (다계정 격리 + lifetime 안정성).
+        //   풀 미설정 시 null → 기존 accountProxyUrl/getProxyUrl로 fallback (회귀 0).
+        let stickyProxy: string | null = null;
+        try {
+            const { getStickyProxyForAccount } = require('./account/proxyMapping.js');
+            stickyProxy = getStickyProxyForAccount(accountId);
+        } catch {
+            // 모듈 로드 실패 시 무시 (graceful)
+        }
         // ✅ [2026-03-26] 현재 프록시 설정 확인 + 정규화 ("", null, undefined → undefined로 통일)
-        const currentProxyUrl = this.normalizeProxyUrl(accountProxyUrl || await getProxyUrl());
+        //   우선순위: sticky > accountProxyUrl > getProxyUrl()
+        const currentProxyUrl = this.normalizeProxyUrl(stickyProxy || accountProxyUrl || await getProxyUrl());
 
         // ✅ [2026-05-26 v2.10.376 SPEC-NAVER-PROTECTION-2026 P1 Fix 1.2]
         //   다계정 동일 IP fall-through 차단 — 이미 다른 세션 활성 + 현재 proxy null이면 위험 신호.
