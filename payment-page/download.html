@@ -344,7 +344,30 @@
         <div style="width:26px; height:26px; background:#1a0a10; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px;">👥</div>
         <span style="color:#1a0a10; font-weight:800; font-size:13px; white-space:nowrap; letter-spacing:-0.3px;">단톡방 바로가기</span>
     </a>
-    <style>@media (max-width: 768px) { #kakaoGroupChat { bottom: 80px !important; right: 16px !important; padding: 10px 16px !important; } #kakaoGroupChat span { font-size: 12px !important; } }</style>
+    <style>
+        a.youtube-float, #youtubeFloat {
+            position: fixed !important; bottom: 150px !important; right: 24px !important; left: auto !important;
+            z-index: 10001 !important; display: flex !important; align-items: center !important; gap: 10px !important;
+            padding: 12px 20px !important; border-radius: 50px !important; width: auto !important; height: auto !important;
+            background: rgba(255,0,0,0.92) !important; border: 1px solid rgba(255,100,100,0.5) !important;
+            backdrop-filter: blur(16px); text-decoration: none !important;
+            box-shadow: 0 8px 32px rgba(255,0,0,0.35) !important;
+            font-family: 'Pretendard Variable','Inter',sans-serif !important;
+            transition: transform .2s, box-shadow .2s !important;
+            color: #fff !important; font-size: 0 !important;
+        }
+        a.youtube-float::before, #youtubeFloat::before { content: '▶'; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: #fff; border-radius: 8px; color: #ff0000; font-weight: 900; font-size: 13px; }
+        a.youtube-float::after, #youtubeFloat::after { content: '유튜브 채널'; color: #fff; font-weight: 800; font-size: 13px; white-space: nowrap; letter-spacing: -0.3px; }
+        a.youtube-float:hover, #youtubeFloat:hover { transform: scale(1.05); box-shadow: 0 12px 40px rgba(255,0,0,0.5) !important; }
+        .music-toggle { bottom: 210px !important; right: 24px !important; left: auto !important; }
+        @media (max-width: 768px) {
+            #kakaoGroupChat { bottom: 80px !important; right: 16px !important; padding: 10px 16px !important; }
+            #kakaoGroupChat span { font-size: 12px !important; }
+            a.youtube-float, #youtubeFloat { bottom: 140px !important; right: 16px !important; padding: 10px 16px !important; }
+            a.youtube-float::after, #youtubeFloat::after { font-size: 12px !important; }
+            .music-toggle { bottom: 200px !important; right: 16px !important; }
+        }
+    </style>
     <script src="music.js"></script>
     <script src="summer-theme.js"></script>
 </body>
