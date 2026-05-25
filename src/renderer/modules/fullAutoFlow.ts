@@ -1145,6 +1145,12 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
 
 // 반자동 모드 실행 플로우
 export async function executeSemiAutoFlow(formData: any): Promise<any> {
+  // ✅ [2026-05-25 v2.10.355] 반자동 모드 플래그 → 백오프 체크 우회 신호
+  //   사용자가 직접 캡차 풀 수 있는 모드이므로 봇 감지 백오프 무시
+  //   (자동 발행 중 captcha 미해결로 인한 백오프가 사용자 즉시 발행 시도까지 차단하던 문제 해결)
+  formData = formData || {};
+  formData._semiAutoMode = true;
+
   // ✅ [2026-03-11 FIX] 반자동 발행에서도 취소 체크 추가
   // 연속발행 모드가 아닐 때만 플래그 리셋 (풀오토와 동일 패턴)
   if (!(window as any).isContinuousMode) {
@@ -3377,6 +3383,8 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
     customBannerPath: formData.customBannerPath || (window as any).customBannerPath || undefined, // ✅ [2026-01-18] 커스텀 배너 경로
     autoBannerGenerate: formData.autoBannerGenerate || false, // ✅ [2026-01-21] 배너 자동 랜덤 생성 옵션
     includeThumbnailText: formData.includeThumbnailText ?? false, // ✅ [2026-02-24 FIX] 썸네일 텍스트 오버레이 옵션 전달
+    // ✅ [2026-05-25 v2.10.355] 반자동 모드 시 봇 감지 백오프 우회 (사용자 직접 캡차 풀 수 있음)
+    skipBotBackoff: formData._semiAutoMode === true,
   };
 
   // ✅ 예약 발행인 경우 postId 확인 및 자동 저장

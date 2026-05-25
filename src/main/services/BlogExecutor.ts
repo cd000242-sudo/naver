@@ -446,6 +446,8 @@ export async function executePublishing(
             images: processedImages,
             collectedImages: payload.collectedImages, // ✅ [2026-01-19] 수집된 제품 이미지 전달 (썸네일용)
             publishMode: payload.publishMode,
+            // ✅ [2026-05-25 v2.10.355] 반자동 모드 시 봇 감지 백오프 우회 (payload.skipBotBackoff → automation.run runOptions)
+            skipBotBackoff: (payload as any).skipBotBackoff === true,
             // ✅ [2026-02-08 FIX] scheduleDate + scheduleTime 합성 (네이버 예약발행 'YYYY-MM-DD HH:mm' 형식 필수)
             scheduleDate: (() => {
                 if (payload.publishMode === 'schedule' && payload.scheduleDate) {

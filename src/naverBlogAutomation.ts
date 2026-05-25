@@ -9137,21 +9137,29 @@ export class NaverBlogAutomation {
     this.log('🚀 네이버 블로그 자동화를 시작합니다...');
 
     // ✅ [v2.10.285] (C) 봇 감지 backoff 체크 — 이 계정이 backoff 중이면 즉시 skip
-    try {
-      const accountId = this.options?.naverId;
-      if (accountId) {
-        const backoff = getBotBackoff(accountId);
-        if (backoff) {
-          const remainMs = backoff.expiresAt - Date.now();
-          const remainMin = Math.round(remainMs / 60000);
-          this.log(`🛡️ [Backoff] ${accountId}: ${backoff.reason} 감지로 자동 발행 일시 제외 중 (남은 시간: ${Math.floor(remainMin / 60)}h ${remainMin % 60}m)`);
-          this.log('   💡 봇 점수 자연 감소를 위해 잠시 쉽니다. 다음 실행 시 자동 회복됩니다.');
-          throw new Error(`이 계정은 봇 감지로 자동 발행이 일시 중단되었습니다 (${backoff.reason}). 약 ${Math.floor(remainMin / 60)}시간 ${remainMin % 60}분 후 자동 회복됩니다.`);
+    // ✅ [2026-05-25 v2.10.355] 반자동 모드(skipBotBackoff=true)는 백오프 우회 — 사용자가 캡차 직접 풀 수 있음
+    //   원인: 자동 발행 중 captcha로 인한 백오프가 사용자 즉시 반자동 발행까지 차단하던 회귀
+    //   수정: skipBotBackoff 옵션 시 백오프 체크 skip (this.options/runOptions 둘 다 확인 — BlogExecutor가 runOptions로 전달)
+    const skipBackoff = (this.options as any)?.skipBotBackoff === true || (runOptions as any)?.skipBotBackoff === true;
+    if (!skipBackoff) {
+      try {
+        const accountId = this.options?.naverId;
+        if (accountId) {
+          const backoff = getBotBackoff(accountId);
+          if (backoff) {
+            const remainMs = backoff.expiresAt - Date.now();
+            const remainMin = Math.round(remainMs / 60000);
+            this.log(`🛡️ [Backoff] ${accountId}: ${backoff.reason} 감지로 자동 발행 일시 제외 중 (남은 시간: ${Math.floor(remainMin / 60)}h ${remainMin % 60}m)`);
+            this.log('   💡 봇 점수 자연 감소를 위해 잠시 쉽니다. 다음 실행 시 자동 회복됩니다.');
+            throw new Error(`이 계정은 봇 감지로 자동 발행이 일시 중단되었습니다 (${backoff.reason}). 약 ${Math.floor(remainMin / 60)}시간 ${remainMin % 60}분 후 자동 회복됩니다.`);
+          }
         }
+      } catch (backoffErr: any) {
+        if (backoffErr.message?.includes('봇 감지')) throw backoffErr;
+        // 기타 에러는 무시 (정상 흐름 진행)
       }
-    } catch (backoffErr: any) {
-      if (backoffErr.message?.includes('봇 감지')) throw backoffErr;
-      // 기타 에러는 무시 (정상 흐름 진행)
+    } else {
+      this.log('🔓 [Backoff] 반자동 모드 (사용자가 캡차 직접 풀 수 있음) → 봇 감지 백오프 우회');
     }
 
     // ✅ [v2.10.285] (A) 계정별 로그인 시차 — multi-account에서 봇 감지 회피
