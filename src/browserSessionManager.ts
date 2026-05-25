@@ -336,6 +336,13 @@ class BrowserSessionManager {
         let proxyAuth: { username: string; password: string } | null = null;
         const launchArgs = [
                 '--disable-blink-features=AutomationControlled',
+                // ✅ [2026-05-26 v2.10.362 SPEC-NAVER-PROTECTION-2026 P1 Fix 1.3] WebRTC IP leak 차단
+                //   STUN/UDP로 실제 IP가 자바스크립트로 노출되는 것을 차단 (proxy 사용해도 누출되는 봇 시그니처).
+                //   browserleaks.com/webrtc 등 fingerprint 사이트가 봇 점수 결정에 활용.
+                //   --force-webrtc-ip-handling-policy: proxy되지 않은 UDP 차단
+                //   --enforce-webrtc-ip-permission-check: WebRTC 권한 강제 (사용자 명시 없이 IP 노출 안 됨)
+                '--force-webrtc-ip-handling-policy=disable_non_proxied_udp',
+                '--enforce-webrtc-ip-permission-check',
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
                 '--disable-infobars',
