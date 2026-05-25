@@ -475,8 +475,10 @@ async function crawl11St(url: string): Promise<ProductSpec | null> {
 
     try {
         const chromePath = await getChromiumExecutablePath();
+        // ✅ [2026-05-26 v2.10.367 SPEC-NAVER-PROTECTION-2026 P3 Fix 3.4 — 4/5]
+        //   11번가 크롤링 — Chrome native headless('new')로 봇 시그니처 감소 (UX 영향 0).
         browser = await puppeteer.launch({
-            headless: true,
+            headless: 'new' as any,
             executablePath: chromePath || undefined,
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
