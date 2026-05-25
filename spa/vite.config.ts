@@ -5,7 +5,9 @@ import react from '@vitejs/plugin-react';
 // 빌드 출력: spa/dist → GitHub Pages workflow가 _site로 복사 후 leaderspro.kr 배포
 export default defineConfig({
   plugins: [react()],
-  base: '/',  // 루트 도메인 배포 (leaderspro.kr/...)
+  // Phase 1b: 점진 마이그레이션 동안 /spa/ 경로에 배포 (leaderspro.kr/spa/).
+  // Phase 6 마이그 완료 후 '/' 로 변경 + 기존 HTML 제거.
+  base: '/spa/',
   build: {
     outDir: 'dist',
     sourcemap: false,

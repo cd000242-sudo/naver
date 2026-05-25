@@ -6,6 +6,7 @@ on:
     paths:
       - 'payment-page/**'
       - 'admin/**'
+      - 'spa/**'
   workflow_dispatch:
 
 permissions:
@@ -26,21 +27,40 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
+      - name: Setup Node.js (for SPA build)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: spa/package-lock.json
+
+      - name: Install SPA dependencies
+        working-directory: spa
+        run: npm ci
+
+      - name: Build SPA (Vite + React)
+        working-directory: spa
+        run: npm run build
+
       - name: Prepare deploy directory
         run: |
           mkdir -p _site
+          # 기존 leaderspro.kr 사이트 (점진 마이그레이션 중)
           cp -r payment-page/* _site/
           cp -r admin _site/admin
-      
+          # SPA — /spa/ path 에 배포 (Phase 6 완료 후 root 로 이전)
+          mkdir -p _site/spa
+          cp -r spa/dist/* _site/spa/
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-      
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
