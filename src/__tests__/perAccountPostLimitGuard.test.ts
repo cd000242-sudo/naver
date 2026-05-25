@@ -93,3 +93,38 @@ describe('P2 perAccount post limit', () => {
     expect(await getTodayCountForAccount('user_b')).toBe(1);
   });
 });
+
+// ═══════════════════════════════════════════════════════════════════
+// P2 §2.2 boundary fix 회귀 가드 (postLimitManager.ts 글로벌 카운터)
+// ═══════════════════════════════════════════════════════════════════
+describe('P2 §2.2 hourly window boundary (postLimitManager)', () => {
+  it('postLimitManager.ts canPublishHourly에 >= 비교 + null 처리 보호', () => {
+    const fs = require('fs');
+    const path = require('path');
+    const src = fs.readFileSync(
+      path.resolve(__dirname, '../../src/postLimitManager.ts'),
+      'utf-8'
+    );
+    // canPublishHourly 함수 블록 추출
+    const fnMatch = src.match(/export async function canPublishHourly[\s\S]*?\n}/);
+    expect(fnMatch).not.toBeNull();
+    const block = fnMatch![0];
+    // boundary: >= (>가 아닌) + lastHourReset null 처리 보호
+    expect(block).toMatch(/lastHourReset === null/);
+    expect(block).toMatch(/>=\s*ONE_HOUR_MS/);
+  });
+
+  it('postLimitManager.ts incrementTodayCount에 동일 boundary 일관성 유지', () => {
+    const fs = require('fs');
+    const path = require('path');
+    const src = fs.readFileSync(
+      path.resolve(__dirname, '../../src/postLimitManager.ts'),
+      'utf-8'
+    );
+    const fnMatch = src.match(/export async function incrementTodayCount[\s\S]*?\n}/);
+    expect(fnMatch).not.toBeNull();
+    const block = fnMatch![0];
+    expect(block).toMatch(/lastHourReset === null/);
+    expect(block).toMatch(/>=\s*ONE_HOUR_MS/);
+  });
+});

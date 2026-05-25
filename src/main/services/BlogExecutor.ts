@@ -413,6 +413,30 @@ export async function executePublishing(
         return { success: false, message: '사용자가 취소했습니다.' };
     }
 
+    // ✅ [2026-05-26 v2.10.379 SPEC-NAVER-PROTECTION-2026 P2 §2.2 wiring]
+    //   계정별 시간당 한도 체크 — 기본 경고만, env STRICT_HOURLY_PER_ACCOUNT=1 시 hard-block.
+    //   v2.10.378 perAccount 카운터 활용. 발행 전 진입점에서 체크 (실제 한도 적용).
+    const _accountId = (payload as any).accountId || (payload as any).naverId;
+    if (_accountId) {
+        try {
+            const { canPublishHourlyForAccount, getTodayCountForAccount } = await import('../../postLimitManagerPerAccount.js');
+            const canPublish = await canPublishHourlyForAccount(_accountId, 2);
+            if (!canPublish) {
+                const todayCount = await getTodayCountForAccount(_accountId);
+                const strictMode = (process.env.STRICT_HOURLY_PER_ACCOUNT || '').trim() === '1';
+                const msg = `⚠️ ${_accountId}: 시간당 발행 한도 도달 (today: ${todayCount}건). 1시간 내 추가 발행 비추천.`;
+                if (strictMode) {
+                    sendLog(`🛡️ ${msg} — STRICT 모드 hard-block`);
+                    return { success: false, message: `STRICT_HOURLY_PER_ACCOUNT=1: ${msg}` };
+                } else {
+                    sendLog(`⚠️ ${msg} (STRICT_HOURLY_PER_ACCOUNT=1로 hard-block 가능)`);
+                }
+            }
+        } catch (hourlyErr) {
+            console.warn('[BlogExecutor] perAccount hourly 체크 실패 (무시):', (hourlyErr as Error).message);
+        }
+    }
+
     sendLog(`📝 발행 모드: ${payload.publishMode || 'publish'}`);
 
     try {
