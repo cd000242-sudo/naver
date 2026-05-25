@@ -423,7 +423,7 @@
                     <input type="email" id="buyer-email" class="email-input" placeholder="example@email.com" required>
                     <p class="email-hint">결제 완료 후 이 이메일로 라이선스 코드가 발송됩니다.</p>
                 </div>
-                <button class="btn-pay" id="btn-pay" disabled onclick="requestPayment()">
+                <button class="btn-pay" id="btn-pay" disabled onclick="requestPayment()" data-turbo="false">
                     <span class="spinner"></span>
                     <span class="btn-text">플랜을 선택해주세요</span>
                 </button>

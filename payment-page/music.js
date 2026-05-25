@@ -259,6 +259,9 @@
     // === Build DOM ===
     const wrapper = document.createElement('div');
     wrapper.className = 'lp-music-player';
+    // v7: Turbo Drive 페이지 이동 시 이 요소 유지 → 음악 끊김 0
+    wrapper.id = 'lp-music-player-root';
+    wrapper.setAttribute('data-turbo-permanent', '');
     wrapper.innerHTML = `
         <div class="lp-music-panel" id="lpmPanel">
             <div class="lp-panel-header">
@@ -545,6 +548,34 @@
         }, { passive: true });
     })();
 
+    // ─────────────────────────────────────────────────
+    // v7: Turbo Drive 동적 로드 — 멀티페이지 → SPA-lite 변환
+    //   페이지 이동 시 fetch + DOM 부분 교체. body의 lp-music-player(data-turbo-permanent)는 유지
+    //   → 음악 끊김 0 (페이지 사이를 이동해도 같은 player 인스턴스 유지)
+    // ─────────────────────────────────────────────────
+    if (!window.__turboLoaded) {
+        window.__turboLoaded = true;
+        const turboScript = document.createElement('script');
+        turboScript.type = 'module';
+        turboScript.src = 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@8/dist/turbo.es2017-esm.min.js';
+        turboScript.onerror = () => console.warn('[MUSIC] Turbo 로드 실패 — 폴백: normal navigation');
+        document.head.appendChild(turboScript);
+        // Turbo 활성화 후 prefetch 강화 (hover prefetch 와 시너지)
+        document.addEventListener('turbo:before-fetch-request', () => {
+            // 페이지 이동 직전 시간 저장 (Turbo는 unload 안 일으키므로 명시 호출)
+            try {
+                const player = window.__lpMusicPlayer;
+                if (player && typeof player.getCurrentTime === 'function') {
+                    const t = player.getCurrentTime();
+                    if (t > 0) {
+                        localStorage.setItem('lp_music_time', String(t));
+                        localStorage.setItem('lp_music_time_ts', String(Date.now()));
+                    }
+                }
+            } catch {}
+        });
+    }
+
     function stopTimeSaving() {
         if (timeSaveInterval) {
             clearInterval(timeSaveInterval);
@@ -621,6 +652,7 @@
             events: {
                 onReady: function() {
                     apiReady = true;
+                    window.__lpMusicPlayer = player;  // v7: Turbo 가 시간 저장에 접근
                     player.setVolume(40);
                     // v6: 팝업 활성 시 메인 음악 시작 안 함
                     if (shouldAutoPlay && !isPopupActive()) {
