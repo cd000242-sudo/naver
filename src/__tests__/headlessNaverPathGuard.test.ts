@@ -85,14 +85,24 @@ describe('P3 Fix 3.4 (v2.10.367): productSpecCrawler.ts crawl11St', () => {
   });
 });
 
+describe('P3 Fix 3.4 (v2.10.368): productSpecCrawler.ts crawlGmarket', () => {
+  it('crawlGmarket 함수의 puppeteer.launch에 \'new\' 적용 보호', () => {
+    const src = readSrc('src/crawler/productSpecCrawler.ts');
+    const fnBlock = src.match(/async function crawlGmarket[\s\S]{0,500}puppeteer\.launch\([\s\S]{0,300}?\}\)/);
+    expect(fnBlock).not.toBeNull();
+    expect(fnBlock![0]).not.toMatch(/headless:\s*true/);
+    expect(fnBlock![0]).toMatch(/headless:\s*'new'/);
+  });
+});
+
 // ═══════════════════════════════════════════════════════════════════
 // 다음 사이클 대상 — 남은 3곳 (변경 후 invariant)
 // ═══════════════════════════════════════════════════════════════════
 describe('P3 Fix 3.4 (다음 사이클): productSpecCrawler 남은 3곳 + imageLibrary', () => {
-  it('productSpecCrawler.ts에 headless:true 2곳 그대로 (line 535/1901)', () => {
+  it('productSpecCrawler.ts에 headless:true 1곳 그대로 (line 1901)', () => {
     const src = readSrc('src/crawler/productSpecCrawler.ts');
     const matches = src.match(/headless:\s*true/g) || [];
-    expect(matches.length).toBeGreaterThanOrEqual(2);
+    expect(matches.length).toBeGreaterThanOrEqual(1);
   });
 
   it('imageLibrary.ts:274 headless:true 그대로', () => {

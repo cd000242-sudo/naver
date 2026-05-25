@@ -535,8 +535,10 @@ async function crawlGmarket(url: string): Promise<ProductSpec | null> {
 
     try {
         const chromePath = await getChromiumExecutablePath();
+        // ✅ [2026-05-26 v2.10.368 SPEC-NAVER-PROTECTION-2026 P3 Fix 3.4 — 5/5]
+        //   G마켓 크롤링 — Chrome native headless('new')로 봇 시그니처 감소 (UX 영향 0).
         browser = await puppeteer.launch({
-            headless: true,
+            headless: 'new' as any,
             ...(chromePath ? { executablePath: chromePath } : {}),
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
