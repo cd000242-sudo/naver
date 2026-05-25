@@ -1,5 +1,7 @@
 ﻿import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
+// ✅ [2026-05-25 v2.10.356] OpenAI RPM preemptive throttler + 누진 backoff
+import { openaiRpmThrottler, getQuotaBackoffMs } from './utils/openaiRpmThrottler.js';
 // ✅ [2026-01-25] Perplexity 추가
 import { generatePerplexityContent, translatePerplexityError } from './perplexity.js';
 // ✅ [v2.7.52] modelRegistry SSOT
@@ -5836,6 +5838,10 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         // ✅ [2026-03-16] system/user 분리: AI 규칙 인식률 향상
         const { system: oaiSystem, user: oaiUser } = splitPromptByMarker(prompt);
 
+        // ✅ [2026-05-25 v2.10.356] preemptive throttling — RPM 한도 도달 직전이면 호출자 측에서 대기
+        //   사용자 보고 "OpenAI 60s backoff 후에도 RPM 초과 자꾸 뜸" 근본 차단
+        await openaiRpmThrottler.throttle();
+
         // ✅ [v2.10.28] OpenAI SDK signal 전달 — 사용자 취소 시 fetch 즉시 abort
         const createPromise = client.chat.completions.create({
           model: modelName,
@@ -5850,6 +5856,8 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         } as any, signal ? { signal } as any : undefined);
 
         const response = await Promise.race([createPromise, timeoutPromise]);
+        // ✅ [2026-05-25 v2.10.356] 호출 성공 기록 — RPM 적응형 가속에 활용
+        openaiRpmThrottler.recordCall();
         const text = response.choices[0]?.message?.content?.trim() || '';
 
         if (!text) throw new Error('빈 응답');
@@ -5908,13 +5916,17 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         const isQuotaOrRateLimit = errorMessage.includes('429') || errorMessage.includes('rate limit') ||
           errorMessage.includes('too many requests') || errorMessage.includes('quota');
         if (isQuotaOrRateLimit) {
-          // ✅ RPM 한도는 1분 단위로 복구 → 같은 모델 유지 + 60초 backoff 후 1회 자동 retry.
+          // ✅ [2026-05-25 v2.10.356] RPM throttler에 429 신호 전달 — 적응형 RPM 상한 즉시 감소 (다음 호출부터 보호)
+          openaiRpmThrottler.record429();
+
+          // ✅ RPM 한도는 1분 단위로 복구 → 같은 모델 유지 + 누진 backoff 3회 retry
+          //   v2.10.355까지: 60s 1회 retry → 사용자 보고 "재시도 후에도 실패"
+          //   v2.10.356: 60s → 90s → 120s 누진 retry (총 최대 ~4.5분) — RPM 자연 회복 시간 충분 확보
           //   모델 변경 아니라 [[feedback_no_fallback]] 룰과 충돌 없음.
-          //   maxRetriesPerModel=2이므로 retry=0 첫 시도 실패 시 1회만 backoff retry.
           const isHardQuota = errorMessage.includes('quota') && !errorMessage.includes('429');
           if (!isHardQuota && retry < maxRetriesPerModel - 1) {
-            const backoffMs = 60_000;
-            const logMsg = `⏳ [OpenAI ${modelName}] RPM 한도 초과 — ${backoffMs/1000}초 후 자동 재시도 (${retry + 2}/${maxRetriesPerModel})`;
+            const backoffMs = getQuotaBackoffMs(retry); // 60s / 90s / 120s 누진
+            const logMsg = `⏳ [OpenAI ${modelName}] RPM 한도 초과 — ${backoffMs/1000}초 후 자동 재시도 (${retry + 2}/${maxRetriesPerModel}) — throttler 적응형 감소 적용됨`;
             console.warn(logMsg);
             if (typeof (globalThis as any).window !== 'undefined' && typeof (globalThis as any).window.appendLog === 'function') {
               (globalThis as any).window.appendLog(logMsg);
