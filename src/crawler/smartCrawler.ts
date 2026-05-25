@@ -742,8 +742,11 @@ export class SmartCrawler {
     }
 
     // Stealth Plugin으로 브라우저 실행 (쿠팡 외)
+    // ✅ [2026-05-26 v2.10.365 SPEC-NAVER-PROTECTION-2026 P3 Fix 3.4 — 2/5]
+    //   headed 모드 'new' — Chrome native headless로 봇 시그니처 일부 제거 (UX 영향 0).
+    //   네이버 외 일반 URL 크롤링이지만 smartstore.naver.com 등 직접 노출 영역.
     const browser = await puppeteer.launch({
-      headless: true,
+      headless: 'new' as any,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',

@@ -41,15 +41,31 @@ describe('P3 Fix 3.4 (v2.10.364): editorHelpers.ts naver.me 리다이렉트', ()
 });
 
 // ═══════════════════════════════════════════════════════════════════
-// 다음 사이클 대상 — 4곳 (이번 변경 X, 부주의 변경 방지 보호)
+// 이번 사이클 추가 fix — smartCrawler.ts:746 (v2.10.365 P3 Fix 3.4 — 2/5)
 // ═══════════════════════════════════════════════════════════════════
-describe('P3 Fix 3.4 (다음 사이클): 4곳 headless:true 그대로 유지', () => {
-  // 다음 사이클에서 변경 예정. 이번 변경에 휩쓸리지 않는지 확인.
-  it('smartCrawler.ts:746 headless:true 그대로 (다음 사이클 fix 대기)', () => {
+describe('P3 Fix 3.4 (v2.10.365): smartCrawler.ts puppeteer headed/new', () => {
+  it('smartCrawler.ts puppeteer.launch에 headless: \'new\' 적용 보호', () => {
     const src = readSrc('src/crawler/smartCrawler.ts');
-    expect(src).toMatch(/headless:\s*true/);
+    // puppeteer.launch는 line 748 1곳뿐. headless: 'new' 직접 검색.
+    expect(src).toMatch(/puppeteer\.launch/);
+    // 'new' 또는 'shell' 또는 false 중 하나 (headless:true 아님)
+    expect(src).toMatch(/headless:\s*'new'/);
   });
 
+  it('smartCrawler.ts에 puppeteer.launch headless:true 없음 (Playwright 쿠팡 false는 별개)', () => {
+    const src = readSrc('src/crawler/smartCrawler.ts');
+    // puppeteer.launch 부근 (앞 100자) 컨텍스트에서 headless:true 없어야
+    const puppeteerBlock = src.match(/puppeteer\.launch[\s\S]{0,200}/);
+    expect(puppeteerBlock).not.toBeNull();
+    expect(puppeteerBlock![0]).not.toMatch(/headless:\s*true/);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════
+// 다음 사이클 대상 — 3곳 (이번 변경 X, 부주의 변경 방지 보호)
+// ═══════════════════════════════════════════════════════════════════
+describe('P3 Fix 3.4 (다음 사이클): 3곳 headless:true 그대로 유지', () => {
+  // 다음 사이클에서 변경 예정. 이번 변경에 휩쓸리지 않는지 확인.
   it('productSpecCrawler.ts에 headless:true 3곳 이상 그대로', () => {
     const src = readSrc('src/crawler/productSpecCrawler.ts');
     const matches = src.match(/headless:\s*true/g) || [];
