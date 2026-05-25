@@ -187,12 +187,15 @@ function DownloadCard({ productKey }: { productKey: ProductKey }) {
         <div style={{ background: 'rgba(18,18,26,0.6)', backdropFilter: 'blur(20px)', border: `1px solid ${product.borderColor}`, borderRadius: 20, padding: 24, transition: 'transform 0.3s' }}>
             <div style={{
                 width: '100%',
-                aspectRatio: '16 / 10',  // 두 카드 동일 비율로 통일
+                aspectRatio: '1 / 1',  // Leword(정사각, 더 큰 쪽) 기준 통일
                 borderRadius: 16,
                 overflow: 'hidden',
                 marginBottom: 18,
                 border: productKey === 'leword' ? `1px solid ${product.borderColor}` : 'none',
                 background: '#0a0a0f',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
             }}>
                 <img
                     src={product.image}
@@ -202,8 +205,8 @@ function DownloadCard({ productKey }: { productKey: ProductKey }) {
                         width: '100%',
                         height: '100%',
                         display: 'block',
-                        objectFit: 'cover',
-                        objectPosition: 'center',  // 핵심 영역(글로브/로고) 중앙 정렬
+                        objectFit: 'contain',  // 자르지 않고 전체 보이게, 큰 쪽 기준 작은 이미지 키움
+                        objectPosition: 'center',
                     }}
                 />
             </div>
