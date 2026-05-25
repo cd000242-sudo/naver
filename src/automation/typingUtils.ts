@@ -39,12 +39,34 @@ export function extractCoreKeywords(text: string): string[] {
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
 // page.keyboard.type()으로 한 글자씩 타이핑하면 네이버 스마트 에디터가
 // 특정 단어 패턴을 감지하여 자동완성 팝업을 표시 → Escape으로 즉시 닫기
+//
+// ✅ [2026-05-26 v2.10.372 SPEC-NAVER-PROTECTION-2026 P5 행동 패턴]
+//   기존: page.keyboard.type(text, { delay: 5 }) → 고정 delay 봇 시그니처
+//   수정: options.delay를 base로 ±50% jitter + 5% pause (mean 유지 → 발행 시간 영향 0)
+//   options.delay 없거나 0이면 기존 즉시 타이핑 그대로 (성능 보존)
 export async function safeKeyboardType(
     page: Page,
     text: string,
     options?: { delay?: number }
 ): Promise<void> {
-    await page.keyboard.type(text, options);
+    const baseDelay = options?.delay ?? 0;
+    if (baseDelay > 0) {
+        // 가변 jitter — base * (0.5 ~ 1.5) + 5% 확률 추가 pause
+        const chars = Array.from(text); // surrogate-pair safe
+        for (let i = 0; i < chars.length; i++) {
+            await page.keyboard.type(chars[i]);
+            if (i < chars.length - 1) {
+                const jittered = Math.max(1, Math.round(baseDelay * (0.5 + Math.random())));
+                const finalDelay = Math.random() < 0.05
+                    ? jittered + Math.round(50 + Math.random() * 150)
+                    : jittered;
+                await new Promise(r => setTimeout(r, finalDelay));
+            }
+        }
+    } else {
+        // 즉시 타이핑 (기존 동작 — delay 명시 없을 때)
+        await page.keyboard.type(text);
+    }
     await page.keyboard.press('Escape').catch(() => { });
 }
 
