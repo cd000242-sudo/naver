@@ -14,6 +14,13 @@ import * as path from 'path';
 function humanSteps(): number {
   return 10 + Math.floor(Math.random() * 15); // 10~24 가변 steps
 }
+
+// ✅ [2026-05-26 v2.10.380 SPEC-NAVER-PROTECTION-2026 P5 dwell 가변화]
+//   고정 delay(100)은 균일성 봇 시그니처 — base ±30% jitter로 가변. mean 변경 없음 → 발행 시간 영향 0.
+//   사람의 hover dwell은 80~140ms 분포 (UX/연구). 가우시안에 가깝지만 단순 uniform으로 근사.
+function humanDwell(baseMs: number): number {
+  return Math.round(baseMs * (0.7 + Math.random() * 0.6)); // base * 0.7~1.3
+}
 // [SPEC-FREEZE-GUARD-001-P2 R5 / v2.10.264] Base64 디코딩 워커 분리 — data URL 본문
 import { decodeBase64Async } from '../main/utils/base64Async.js';
 import {
@@ -1555,14 +1562,14 @@ export async function setImageSizeAndAttachLink(self: any, linkUrl?: string): Pr
     self.log(`   🎯 물리적 마우스 클릭: 이미지 정중앙 (${Math.round(clickX)}, ${Math.round(clickY)})`);
 
     await page.mouse.move(clickX, clickY, { steps: humanSteps() });
-    await self.delay(100);
+    await self.delay(humanDwell(100)); // hover dwell 가변 (70~130ms)
 
     // 첫 번째 클릭
     self.log(`   🖱️ 첫 번째 클릭 (down → 200ms → up)`);
     await page.mouse.down();
-    await self.delay(200);
+    await self.delay(humanDwell(200)); // click hold 가변 (140~260ms)
     await page.mouse.up();
-    await self.delay(300);
+    await self.delay(humanDwell(300)); // inter-click 가변 (210~390ms)
 
     // 두 번째 클릭 (더블 클릭)
     self.log(`   🖱️ 두 번째 클릭 (더블 클릭)`);
@@ -1611,9 +1618,9 @@ export async function setImageSizeAndAttachLink(self: any, linkUrl?: string): Pr
 
     // 3. 이미지 다시 물리 클릭 (문서너비 후 선택이 해제될 수 있음)
     await page.mouse.move(clickX, clickY, { steps: humanSteps() });
-    await self.delay(100);
+    await self.delay(humanDwell(100));
     await page.mouse.down();
-    await self.delay(200);
+    await self.delay(humanDwell(200));
     await page.mouse.up();
     await self.delay(1500); // 툴바 렌더링 충분히 대기
 
@@ -1828,14 +1835,14 @@ export async function attachLinkToLastImage(self: any, linkUrl: string): Promise
 
       // ✅ [강화] 마우스 이동
       await page.mouse.move(clickX, clickY, { steps: humanSteps() });
-      await self.delay(100);
+      await self.delay(humanDwell(100));
 
       // ✅ [강화] 첫 번째 클릭 (꾹 누름)
       self.log(`   🖱️ 첫 번째 클릭 (down → 200ms → up)`);
       await page.mouse.down();
-      await self.delay(200); // 0.2초 꾹 누름
+      await self.delay(humanDwell(200));
       await page.mouse.up();
-      await self.delay(300);
+      await self.delay(humanDwell(300));
 
       // ✅ [강화] 두 번째 클릭 (더블 클릭 효과)
       self.log(`   🖱️ 두 번째 클릭 (더블 클릭)`);

@@ -35,6 +35,19 @@ describe('P5 scroll behavior 보호 (v2.10.374)', () => {
   });
 });
 
+describe('P5 dwell 가변화 보호 (v2.10.380)', () => {
+  it('imageHelpers.ts에 humanDwell() 헬퍼 정의', () => {
+    const src = readSrc('src/automation/imageHelpers.ts');
+    expect(src).toMatch(/function humanDwell|const humanDwell/);
+  });
+
+  it('humanDwell(N) 사용 사례 5건 이상 (hover + click hold + inter-click)', () => {
+    const src = readSrc('src/automation/imageHelpers.ts');
+    const matches = src.match(/humanDwell\(\d+\)/g) || [];
+    expect(matches.length).toBeGreaterThanOrEqual(5);
+  });
+});
+
 describe('P5 mouse steps 가변 보호', () => {
   it('imageHelpers.ts에 humanSteps() 헬퍼 정의 또는 steps 옵션 사용', () => {
     const src = readSrc('src/automation/imageHelpers.ts');
