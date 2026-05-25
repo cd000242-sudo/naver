@@ -1903,8 +1903,10 @@ async function fetchProductByIdDirectly(productId: string, originalUrl: string):
         // ✅ [폴백] Puppeteer로 실제 페이지 크롤링
         try {
             const puppeteer = await import('puppeteer');
+            // ✅ [2026-05-26 v2.10.371 SPEC-NAVER-PROTECTION-2026 P3 Fix 3.4 — Affiliate 폴백]
+            //   AffiliateCrawler 폴백 (네이버 직접 노출 가능) — Chrome native headless('new').
             const browser = await puppeteer.default.launch({
-                headless: true,
+                headless: 'new' as any,
                 args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
             });
 
