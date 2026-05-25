@@ -62,31 +62,33 @@ interface ShowcaseProps {
     benefits: Benefit[];
     cta: { to: string; label: string };
     visual: React.ReactNode;
-    visualLeft?: boolean;
+    accent?: 'green' | 'blue';
 }
 
-function ProductShowcase({ tag, title, subtitle, desc, benefits, cta, visual, visualLeft }: ShowcaseProps) {
+function ProductShowcase({ tag, title, subtitle, desc, benefits, cta, visual, accent = 'green' }: ShowcaseProps) {
+    // 카드 배경: 텍스트 가독성을 위해 색깔이 들어간 카드로 감쌈.
+    const palette = accent === 'blue'
+        ? { bg: 'linear-gradient(135deg, rgba(20,120,255,0.18), rgba(20,120,255,0.06))', border: 'rgba(80,150,255,0.35)' }
+        : { bg: 'linear-gradient(135deg, rgba(20,170,90,0.20), rgba(20,170,90,0.06))', border: 'rgba(50,200,120,0.35)' };
+
     return (
-        <div className="fade-in" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 60, alignItems: 'center', marginBottom: 80 }}>
-            {visualLeft ? (
-                <>
-                    <div>{visual}</div>
-                    <div>
-                        <ProductInfo tag={tag} title={title} subtitle={subtitle} desc={desc} />
-                        <BenefitList items={benefits} />
-                        <Link to={cta.to} style={ctaStyle}>{cta.label}</Link>
-                    </div>
-                </>
-            ) : (
-                <>
-                    <div>
-                        <ProductInfo tag={tag} title={title} subtitle={subtitle} desc={desc} />
-                        <BenefitList items={benefits} />
-                        <Link to={cta.to} style={ctaStyle}>{cta.label}</Link>
-                    </div>
-                    <div>{visual}</div>
-                </>
-            )}
+        <div className="fade-in" style={{
+            padding: 'clamp(28px, 4vw, 48px)',
+            marginBottom: 60,
+            borderRadius: 24,
+            background: palette.bg,
+            border: `1px solid ${palette.border}`,
+            backdropFilter: 'blur(14px)',
+            boxShadow: '0 10px 36px rgba(0,0,0,0.25)',
+        }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 48, alignItems: 'center' }}>
+                <div>
+                    <ProductInfo tag={tag} title={title} subtitle={subtitle} desc={desc} />
+                    <BenefitList items={benefits} />
+                    <Link to={cta.to} style={ctaStyle}>{cta.label}</Link>
+                </div>
+                <div>{visual}</div>
+            </div>
         </div>
     );
 }
@@ -166,6 +168,7 @@ function ProductsPage() {
 
                     {/* Better Life Naver */}
                     <ProductShowcase
+                        accent="green"
                         tag={<>🚀 FLAGSHIP</>}
                         title="Better Life Naver"
                         subtitle="네이버 블로그 자동화"
@@ -183,7 +186,7 @@ function ProductsPage() {
 
                     {/* Leword */}
                     <ProductShowcase
-                        visualLeft
+                        accent="blue"
                         tag={<span style={{ background: 'linear-gradient(135deg, #7C3AED, #A78BFA)', color: '#fff', padding: '4px 12px', borderRadius: 50, fontSize: 11, fontWeight: 800 }}>💎 INTELLIGENCE</span>}
                         title="Leword"
                         subtitle="AI 키워드 인텔리전스 · 실시간 트렌드"

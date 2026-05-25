@@ -33,7 +33,6 @@ const PLANS: Record<string, Plan[]> = {
         { id: 'naver-yearly', name: '1년', desc: '가장 합리적인 선택', amount: 400000, period: '/ 년', monthly: '월 33,333원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['전체 기능 이용', '스마트 스케줄링', '전용 커뮤니티 입장', '1:1 우선 지원'] },
     ],
     leword: [
-        { id: 'free-leword', name: '무료 체험', desc: '키워드 분석 체험', amount: 0, period: '무료', free: true, badge: { text: '🎁 FREE', type: 'trial' }, features: ['키워드 경쟁 분석', '블루오션 발굴', '매일 5회 검색 제한', '기간 제한 없음'] },
         { id: 'leword-monthly', name: '1개월', desc: '키워드 분석 시작', amount: 30000, period: '/ 월', features: ['키워드 경쟁 분석', '블루오션 발굴', '트렌드 모니터링', '이메일 지원'] },
         { id: 'leword-quarterly', name: '3개월', desc: '인기 있는 선택', amount: 100000, period: '/ 3개월', monthly: '월 33,333원', features: ['전체 기능 이용', 'Leaders Pro 연동', '블루오션 키워드 자동 추천', '우선 고객 지원'] },
         { id: 'leword-yearly', name: '1년', desc: '가장 합리적인 선택', amount: 300000, period: '/ 년', monthly: '월 25,000원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['전체 기능 이용', 'Leaders Pro 연동', '커뮤니티 입장', '1:1 우선 지원'] },
