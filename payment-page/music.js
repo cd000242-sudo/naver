@@ -498,6 +498,65 @@
     // 페이지 진입 시 팝업 이미 활성 → 메인 음악 시작 안 함
     if (isPopupActive()) showPopupModeUI();
 
+    // ─────────────────────────────────────────────────
+    // v8: 첫 사용자 클릭/터치에 자동 팝업 (사이트 진입 자동 효과)
+    //   브라우저 정책상 페이지 로드 직후 window.open은 차단 → 첫 인터랙션에 호출해야 합법
+    //   사용자가 한 번 닫으면 그 세션 안에서는 자동 X (sessionStorage)
+    //   결제 페이지(pricing.html) 진입 시는 자동 X (Toss 결제 안전성)
+    // ─────────────────────────────────────────────────
+    (function setupAutoPopup() {
+        try {
+            // 이미 팝업 활성이면 skip
+            if (isPopupActive()) return;
+            // 결제 페이지 자동 X
+            if (location.pathname.toLowerCase().includes('pricing')) return;
+            // 사용자가 명시적으로 닫은 세션이면 자동 X
+            if (sessionStorage.getItem('lp_music_popup_decided') === 'closed') return;
+            // 이미 자동 시도했으면 skip
+            if (sessionStorage.getItem('lp_music_popup_autotry') === '1') return;
+        } catch {}
+
+        let triggered = false;
+        function tryAutoPopup(e) {
+            if (triggered) return;
+            if (!e.isTrusted) return; // 프로그램 클릭 무시 (사용자 명시 인터랙션만 합법)
+            triggered = true;
+            try { sessionStorage.setItem('lp_music_popup_autotry', '1'); } catch {}
+            // 다음 tick에 호출 (브라우저 이벤트 처리 안 막음 — 메뉴 클릭도 진행됨)
+            const w = window.open(
+                'music-popup.html',
+                'leadersProMusic',
+                'width=360,height=620,resizable=yes,scrollbars=no,location=no,menubar=no,toolbar=no'
+            );
+            if (w) {
+                try { localStorage.setItem('lp_music_popup_active', String(Date.now())); } catch {}
+                try { if (player && player.pauseVideo) player.pauseVideo(); } catch {}
+                saveCurrentTime();
+                showPopupModeUI();
+                console.log('[MUSIC] 자동 팝업 열림 (첫 인터랙션 시점)');
+            } else {
+                // 차단됨 — 미니 플레이어 버튼은 그대로 사용 가능
+                console.warn('[MUSIC] 자동 팝업 차단 (브라우저 정책) — 미니 플레이어 버튼 사용 권장');
+            }
+            // 리스너 한 번만 — 이후 정리
+            document.removeEventListener('click', tryAutoPopup, true);
+            document.removeEventListener('touchstart', tryAutoPopup, true);
+            document.removeEventListener('keydown', tryAutoPopup, true);
+        }
+        document.addEventListener('click', tryAutoPopup, { capture: true, passive: true });
+        document.addEventListener('touchstart', tryAutoPopup, { capture: true, passive: true });
+        document.addEventListener('keydown', tryAutoPopup, { capture: true, passive: true });
+    })();
+
+    // 팝업 닫힘 감지 (storage 이벤트) + 세션 결정 저장
+    window.addEventListener('storage', (e) => {
+        if (e.key !== 'lp_music_popup_active') return;
+        if (!e.newValue) {
+            // 사용자가 팝업 닫음 → 이 세션 동안 자동 팝업 X
+            try { sessionStorage.setItem('lp_music_popup_decided', 'closed'); } catch {}
+        }
+    });
+
     // 1.5초마다 폴링 (storage 이벤트는 same-tab에 발화 안 하므로 폴링 필요)
     setInterval(() => {
         const active = isPopupActive();
