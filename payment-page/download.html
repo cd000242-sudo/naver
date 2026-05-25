@@ -194,10 +194,12 @@
                         <p class="download-error" data-error="tistory">비밀번호가 올바르지 않습니다.</p>
                     </div>
                 </div>
-                <div class="download-card" data-product="leword" style="display:none !important">
-                    <div class="download-icon"><span class="product-icon-lg">L</span></div>
-                    <h3 class="download-title">Leword</h3>
-                    <p class="download-version">AI 키워드 인텔리전스 · Windows 64-bit</p>
+                <div class="download-card" data-product="leword" id="leword-download">
+                    <div class="download-icon" style="width: 100%; height: auto; background: transparent; box-shadow: none; border-radius: 16px; overflow: hidden; margin-bottom: 18px; border: 1px solid rgba(124,58,237,0.25);">
+                        <img src="images/leword/realtime-monitor-hero.png" alt="Leword — AI 키워드 인텔리전스 · 실시간 검색어 모니터링" loading="lazy" style="width: 100%; height: auto; display: block; border-radius: 16px;">
+                    </div>
+                    <h3 class="download-title">Leword <span id="leword-latest-ver" style="font-size:0.7em; color:#A78BFA; font-weight:600;"></span></h3>
+                    <p class="download-version">AI 키워드 인텔리전스 · Windows 64-bit · 최신 자동 반영</p>
                     <div class="download-form">
                         <div class="download-input-group">
                             <input type="password" class="download-input" data-pw="leword" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')downloadWithPassword('leword')">
@@ -230,10 +232,15 @@
     <script>
         const PRODUCT_NAMES = { naver: 'Better Life Naver', orbit: 'Leaders Orbit', tistory: 'Leaders Tistory', leword: 'Leword' };
 
+        // GitHub repo 매핑 (latest release API 동적 호출용)
+        const GITHUB_REPOS = {
+            leword: 'cd000242-sudo/leword-app',
+        };
+
         function getDownloadUrl(product) {
             const defaults = {
                 naver: 'https://github.com/cd000242-sudo/naver/releases/download/v2.10.334/Better-Life-Naver-Setup-2.10.334.exe',
-                leword: 'https://github.com/cd000242-sudo/leword-app/releases/download/v1.0.5/LEWORD.Setup.1.0.5.zip',
+                leword: 'https://github.com/cd000242-sudo/leword-app/releases/latest',  // fallback (API 실패 시 latest 페이지)
                 orbit: '', tistory: ''
             };
             const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
@@ -243,22 +250,69 @@
             return saved.downloadUrl || '';
         }
 
-        function downloadWithPassword(product) {
+        // GitHub Releases latest API — 최신 .exe asset URL 동적 fetch
+        // 매 release 자동 반영, 하드코딩 불필요
+        async function getLatestExeFromGitHub(repo) {
+            const res = await fetch(`https://api.github.com/repos/${repo}/releases/latest`, {
+                headers: { 'Accept': 'application/vnd.github+json' },
+            });
+            if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+            const data = await res.json();
+            const exe = (data.assets || []).find(a => /\.exe$/i.test(a.name));
+            if (!exe) throw new Error('No .exe asset found in latest release');
+            return { url: exe.browser_download_url, version: data.tag_name, filename: exe.name };
+        }
+
+        async function downloadWithPassword(product) {
             const input = document.querySelector(`.download-input[data-pw="${product}"]`);
             const errorEl = document.querySelector(`.download-error[data-error="${product}"]`);
             const pw = input.value.trim();
-            if (pw === '1645') {
-                errorEl.classList.remove('visible');
-                const url = getDownloadUrl(product);
-                const name = PRODUCT_NAMES[product] || product;
-                if (!url) { alert(`${name} 다운로드 파일이 아직 준비되지 않았습니다.\n관리자에게 문의해주세요.`); return; }
-                window.open(url, '_blank');
-                input.value = '';
-            } else {
+            const name = PRODUCT_NAMES[product] || product;
+
+            if (pw !== '1645') {
                 errorEl.classList.add('visible');
                 input.classList.add('shake');
                 setTimeout(() => { input.classList.remove('shake'); errorEl.classList.remove('visible'); }, 2000);
+                return;
             }
+            errorEl.classList.remove('visible');
+
+            // GitHub repo 매핑된 제품 → latest API 동적 fetch
+            const repo = GITHUB_REPOS[product];
+            if (repo) {
+                const btn = document.querySelector(`.download-card[data-product="${product}"] .download-btn`);
+                const origBtnHtml = btn ? btn.innerHTML : '';
+                if (btn) { btn.disabled = true; btn.innerHTML = '⏳'; }
+                try {
+                    const { url, version, filename } = await getLatestExeFromGitHub(repo);
+                    console.log(`[DOWNLOAD] ${name} ${version} → ${filename}`);
+                    window.location.href = url;  // 직접 navigation → 브라우저 자동 다운로드
+                    input.value = '';
+                } catch (e) {
+                    console.error('[DOWNLOAD] latest API 실패:', e);
+                    // fallback — releases/latest 페이지 열기 (사용자가 직접 클릭)
+                    window.open(getDownloadUrl(product), '_blank');
+                    input.value = '';
+                } finally {
+                    if (btn) { btn.disabled = false; btn.innerHTML = origBtnHtml; }
+                }
+                return;
+            }
+
+            // 일반(하드코딩) 제품
+            const url = getDownloadUrl(product);
+            if (!url) { alert(`${name} 다운로드 파일이 아직 준비되지 않았습니다.\n관리자에게 문의해주세요.`); return; }
+            window.open(url, '_blank');
+            input.value = '';
+        }
+
+        // 페이지 로드 시 Leword 최신 버전 라벨 표시
+        async function showLatestVersionLabel() {
+            try {
+                const { version } = await getLatestExeFromGitHub('cd000242-sudo/leword-app');
+                const el = document.getElementById('leword-latest-ver');
+                if (el) el.textContent = version;
+            } catch {}
         }
 
         // ===== Common =====
@@ -275,7 +329,7 @@
         function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
         function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
 
-        document.addEventListener('DOMContentLoaded', () => { initParticles(); initScrollAnimations(); initNavbar(); });
+        document.addEventListener('DOMContentLoaded', () => { initParticles(); initScrollAnimations(); initNavbar(); showLatestVersionLabel(); });
     </script>
     <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" title="공식 유튜브 채널">▶</a>
     <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 카카오톡 문의">
