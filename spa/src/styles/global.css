@@ -21,12 +21,20 @@
 html, body { width: 100%; min-height: 100%; }
 body {
     font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg-dark);
+    /* hero-beach-bg.png — 사용자 제공 여름 배경. 가독성용 dark 그라데이션 overlay 위에 깔림. */
+    background:
+        linear-gradient(180deg, rgba(10,10,15,0.55) 0%, rgba(10,10,15,0.72) 40%, rgba(10,10,15,0.88) 100%),
+        url('/images/hero-beach-bg.png') center top / cover no-repeat fixed,
+        var(--bg-dark);
+    background-attachment: fixed;
     color: var(--text-primary);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
 }
 #root { min-height: 100vh; }
+
+/* 페이지 wrapper들이 dark background로 덮어쓰지 않도록 transparent 강제 */
+main, .page-wrapper { background: transparent !important; }
 a { color: inherit; text-decoration: none; }
 button { cursor: pointer; font-family: inherit; }
 
