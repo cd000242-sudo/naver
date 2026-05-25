@@ -257,6 +257,30 @@ class BrowserSessionManager {
         // ✅ [2026-03-26] 현재 프록시 설정 확인 + 정규화 ("", null, undefined → undefined로 통일)
         const currentProxyUrl = this.normalizeProxyUrl(accountProxyUrl || await getProxyUrl());
 
+        // ✅ [2026-05-26 v2.10.376 SPEC-NAVER-PROTECTION-2026 P1 Fix 1.2]
+        //   다계정 동일 IP fall-through 차단 — 이미 다른 세션 활성 + 현재 proxy null이면 위험 신호.
+        //   다계정 발행 시 모든 계정이 동일 IP 사용 → 네이버 즉시 다계정 탐지.
+        //   기본: console.warn (UX 영향 없음, 사용자 인지 보장)
+        //   STRICT_PROXY_FOR_MULTI_ACCOUNT=1 env 설정 시: throw (hard-block)
+        try {
+            if (!currentProxyUrl && this.sessions.size > 0) {
+                const strictMode = (process.env.STRICT_PROXY_FOR_MULTI_ACCOUNT || '').trim() === '1';
+                const otherIds = Array.from(this.sessions.keys()).filter(id => id !== accountId);
+                if (otherIds.length > 0) {
+                    const msg = `⚠️ proxy null + 다계정 활성 (${otherIds.length}개) — ${accountId}가 다른 계정과 동일 IP 사용 위험 (네이버 다계정 탐지 트리거 가능)`;
+                    if (strictMode) {
+                        console.error(`[BrowserSessionManager] ${msg} — STRICT 모드 hard-block`);
+                        throw new Error(`STRICT_PROXY_FOR_MULTI_ACCOUNT=1: ${msg}. proxy 설정 후 재시도하세요.`);
+                    } else {
+                        console.warn(`[BrowserSessionManager] ${msg}. 계정별 proxy 설정 권장. STRICT_PROXY_FOR_MULTI_ACCOUNT=1로 hard-block 가능.`);
+                    }
+                }
+            }
+        } catch (proxyGuardErr) {
+            if ((proxyGuardErr as Error).message?.includes('STRICT_PROXY_FOR_MULTI_ACCOUNT')) throw proxyGuardErr;
+            console.warn('[BrowserSessionManager] proxy null 가드 예외:', (proxyGuardErr as Error).message);
+        }
+
         // 이미 존재하는 세션 반환
         const existingSession = this.sessions.get(accountId);
         if (existingSession) {
