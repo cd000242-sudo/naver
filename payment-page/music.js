@@ -411,14 +411,22 @@
         updateUI();
     }
 
-    // === 재생 시간 저장/복원 (탭 이동 시 이어재생) ===
+    // === 재생 시간 저장/복원 (탭/페이지 이동 시 이어재생) ===
+    // v5: 페이지 전환 시 끊김 최소화 — 저장 빈도 단축 + pagehide/beforeunload 핸들러
     function saveCurrentTime() {
         if (apiReady && player && typeof player.getCurrentTime === 'function') {
             try {
                 const t = player.getCurrentTime();
                 if (t > 0) {
+                    // 비디오 ID도 같이 저장 (Radio 모드에서 곡 바뀌어도 정확한 위치 복귀)
+                    let videoId = '';
+                    try {
+                        const vd = player.getVideoData && player.getVideoData();
+                        if (vd && vd.video_id) videoId = vd.video_id;
+                    } catch {}
                     localStorage.setItem(TIME_KEY, t.toString());
                     localStorage.setItem(TIME_SAVE_KEY, Date.now().toString());
+                    if (videoId) localStorage.setItem(TIME_KEY + '_vid', videoId);
                 }
             } catch(e) {}
         }
@@ -426,8 +434,50 @@
 
     function startTimeSaving() {
         stopTimeSaving();
-        timeSaveInterval = setInterval(saveCurrentTime, 2000); // 2초마다 저장
+        timeSaveInterval = setInterval(saveCurrentTime, 500); // 2초 → 500ms (정밀도 ↑)
     }
+
+    // 페이지 이동 직전 즉시 시간 저장 — 끊김 최소화
+    window.addEventListener('pagehide', saveCurrentTime, { passive: true });
+    window.addEventListener('beforeunload', saveCurrentTime, { passive: true });
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') saveCurrentTime();
+    }, { passive: true });
+
+    // v5: YouTube preconnect + 페이지 hover prefetch — 페이지 로딩 빨라짐 → 음악 끊김 ↓
+    (function injectPerformanceHints() {
+        const hosts = [
+            'https://www.youtube.com',
+            'https://s.ytimg.com',
+            'https://i.ytimg.com',
+            'https://www.youtube-nocookie.com',
+        ];
+        hosts.forEach(host => {
+            if (document.querySelector(`link[rel="preconnect"][href="${host}"]`)) return;
+            const link = document.createElement('link');
+            link.rel = 'preconnect';
+            link.href = host;
+            link.crossOrigin = '';
+            document.head.appendChild(link);
+        });
+        // hover prefetch — 사용자가 링크에 마우스 올리면 다음 페이지 미리 로드
+        document.addEventListener('mouseover', (e) => {
+            const a = e.target.closest && e.target.closest('a[href]');
+            if (!a || a.dataset.prefetched) return;
+            const href = a.href || '';
+            if (!href || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('#')) return;
+            // 외부 도메인 prefetch 안 함 (낭비)
+            try {
+                const url = new URL(href);
+                if (url.origin !== location.origin) return;
+            } catch { return; }
+            a.dataset.prefetched = '1';
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = href;
+            document.head.appendChild(link);
+        }, { passive: true });
+    })();
 
     function stopTimeSaving() {
         if (timeSaveInterval) {
