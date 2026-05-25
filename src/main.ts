@@ -7275,6 +7275,21 @@ app.whenReady().then(async () => {
       console.warn('[Main] 셀렉터 원격 업데이트 시작 실패 (무시):', (selectorErr as Error).message);
     }
 
+    // ✅ [2026-05-26 v2.10.383 SPEC-CONVERSION-001 Tier 1 #1+#4]
+    //   exposurePoller — published-posts.json 자동 폴링 + attribution 페어링
+    //   env EXPOSURE_POLLER_ENABLED=true 설정 시에만 시작 (opt-in = dead code 회귀 0).
+    //   기본 6시간 주기 (EXPOSURE_POLLER_INTERVAL_HOURS override).
+    try {
+      const exposureEnabled = (process.env.EXPOSURE_POLLER_ENABLED || '').trim().toLowerCase() === 'true';
+      if (exposureEnabled) {
+        const { startExposurePolling } = require('./analytics/exposurePoller.js');
+        startExposurePolling(app.getPath('userData'));
+        console.log('[Main] exposurePoller 시작 (env EXPOSURE_POLLER_ENABLED=true)');
+      }
+    } catch (exposureErr) {
+      console.warn('[Main] exposurePoller 시작 실패 (무시):', (exposureErr as Error).message);
+    }
+
     // [v2.10.155] Layer 2 — 좀비 회복 시스템 초기화 + 이전 세션 좀비 자동 정리
     //   부팅 차단 없이 setImmediate(non-blocking)으로 백그라운드 실행.
     //   사용자 통찰 "사용자들도 다들 그럼 느려지는이유가 이게원인이네" 해결책.
