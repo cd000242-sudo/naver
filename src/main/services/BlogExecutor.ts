@@ -542,6 +542,17 @@ export async function cleanup(
         await deps.incrementTodayCount();
     }
 
+    // ✅ [2026-05-26 v2.10.378 SPEC-NAVER-PROTECTION-2026 P2 Fix 2.1]
+    //   계정별 빈도 카운터 증가 (다계정 격리). 기존 글로벌 카운터는 backward compat으로 유지.
+    if (accountId) {
+        try {
+            const { incrementForAccount } = await import('../../postLimitManagerPerAccount.js');
+            await incrementForAccount(accountId);
+        } catch (perAccountErr) {
+            console.warn('[BlogExecutor] perAccount post limit 증가 실패 (무시):', (perAccountErr as Error).message);
+        }
+    }
+
     // ✅ [v1.4.55 CRITICAL FIX] 브라우저 실제 종료 (keepBrowserOpen이 false인 경우)
     // 이전 버그: AutomationService.delete()는 맵에서만 제거 → 브라우저 프로세스 orphaned
     //            같은 userDataDir로 두 번째 발행 시 Chrome 실행 실패 → "하나 발행하고 멍때림"
