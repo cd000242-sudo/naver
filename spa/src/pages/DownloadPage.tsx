@@ -23,7 +23,7 @@ const PRODUCTS = {
     leword: {
         name: 'Leword',
         version: 'AI 키워드 인텔리전스 · Windows 64-bit · 최신 자동 반영',
-        image: '/images/leword/realtime-monitor-hero.png',
+        image: '/images/leword/hero-banner.png',
         defaultUrl: 'https://github.com/cd000242-sudo/leword-app/releases/latest',
         githubRepo: 'cd000242-sudo/leword-app',
         accent: '#A78BFA',
