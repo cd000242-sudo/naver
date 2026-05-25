@@ -360,8 +360,10 @@ async function crawlNaverSmartStore(url: string): Promise<ProductSpec | null> {
 
     try {
         const chromePath = await getChromiumExecutablePath();
+        // ✅ [2026-05-26 v2.10.366 SPEC-NAVER-PROTECTION-2026 P3 Fix 3.4 — 3/5]
+        //   smartstore.naver.com 직접 노출 영역 — Chrome native headless('new')로 봇 시그니처 감소.
         browser = await puppeteer.launch({
-            headless: true,
+            headless: 'new' as any,
             ...(chromePath ? { executablePath: chromePath } : {}),
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
