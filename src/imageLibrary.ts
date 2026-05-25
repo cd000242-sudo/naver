@@ -270,8 +270,10 @@ export class ImageLibrary {
     let browser: Browser | null = null;
 
     try {
+      // ✅ [2026-05-26 v2.10.369 SPEC-NAVER-PROTECTION-2026 P3 Fix 3.4 — imageLibrary 1/2]
+      //   뉴스 이미지 크롤링 — Chrome native headless('new')로 봇 시그니처 감소 (UX 영향 0).
       browser = await puppeteer.launch({
-        headless: true,
+        headless: 'new' as any,
         args: [
           '--no-sandbox', 
           '--disable-setuid-sandbox',

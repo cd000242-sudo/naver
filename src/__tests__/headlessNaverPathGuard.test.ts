@@ -95,6 +95,14 @@ describe('P3 Fix 3.4 (v2.10.368): productSpecCrawler.ts crawlGmarket', () => {
   });
 });
 
+describe('P3 Fix 3.4 (v2.10.369): imageLibrary.ts crawlNewsImages', () => {
+  it('imageLibrary.ts에 headless: \'new\' 1곳 이상 존재 (crawlNewsImages line 274)', () => {
+    const src = readSrc('src/imageLibrary.ts');
+    const newMatches = src.match(/headless:\s*'new'/g) || [];
+    expect(newMatches.length).toBeGreaterThanOrEqual(1);
+  });
+});
+
 // ═══════════════════════════════════════════════════════════════════
 // 다음 사이클 대상 — 남은 3곳 (변경 후 invariant)
 // ═══════════════════════════════════════════════════════════════════
@@ -105,9 +113,10 @@ describe('P3 Fix 3.4 (다음 사이클): productSpecCrawler 남은 3곳 + imageL
     expect(matches.length).toBeGreaterThanOrEqual(1);
   });
 
-  it('imageLibrary.ts:274 headless:true 그대로', () => {
+  it('imageLibrary.ts에 headless:true 1곳 그대로 (line 387, 다음 사이클)', () => {
     const src = readSrc('src/imageLibrary.ts');
-    expect(src).toMatch(/headless:\s*true/);
+    const matches = src.match(/headless:\s*true/g) || [];
+    expect(matches.length).toBeGreaterThanOrEqual(1);
   });
 });
 
