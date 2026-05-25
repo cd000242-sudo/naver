@@ -280,9 +280,6 @@
                 <button class="lp-ctrl-btn lp-ctrl-play" id="lpmPlay" title="재생/일시정지">▶</button>
                 <button class="lp-ctrl-btn" id="lpmNext" title="다음 곡">⏭</button>
             </div>
-            <button id="lpmPopupOpen" title="별도 창에서 끊김 없이 재생" style="margin: 10px auto 6px; display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: linear-gradient(135deg, rgba(201,168,76,0.18), rgba(124,58,237,0.12)); border: 1px solid rgba(201,168,76,0.4); border-radius: 10px; color: #ffd700; font-size: 12px; font-weight: 800; cursor: pointer; transition: all .2s; font-family: inherit;" onmouseover="this.style.background='linear-gradient(135deg, rgba(201,168,76,0.3), rgba(124,58,237,0.2))'" onmouseout="this.style.background='linear-gradient(135deg, rgba(201,168,76,0.18), rgba(124,58,237,0.12))'">
-                🪟 별도 창에서 재생 (페이지 이동에도 끊김 없음)
-            </button>
             <div class="lp-playlist" id="lpmList"></div>
         </div>
         <div class="lp-music-fab entrance" id="lpmFab" title="🌸 음악 플레이어">
@@ -450,128 +447,6 @@
         if (document.visibilityState === 'hidden') saveCurrentTime();
     }, { passive: true });
 
-    // ─────────────────────────────────────────────────
-    // v6: 별도 창(팝업) 미니 플레이어 — 페이지 이동에도 무중단 재생
-    // ─────────────────────────────────────────────────
-    const popupBtn = document.getElementById('lpmPopupOpen');
-    function isPopupActive() {
-        try {
-            const ts = parseInt(localStorage.getItem('lp_music_popup_active') || '0');
-            return ts > 0 && Date.now() - ts < 5000;  // 5초 이내 heartbeat
-        } catch { return false; }
-    }
-    function showPopupModeUI() {
-        try {
-            titleEl.textContent = '🪟 별도 창에서 재생 중';
-            if (fabTrackEl) fabTrackEl.textContent = '🪟 별도 창';
-            [playBtn, prevBtn, nextBtn].forEach(b => { if (b) { b.style.opacity = '0.3'; b.style.pointerEvents = 'none'; }});
-            if (popupBtn) popupBtn.textContent = '✨ 별도 창에서 재생 중';
-        } catch {}
-    }
-    function hidePopupModeUI() {
-        try {
-            [playBtn, prevBtn, nextBtn].forEach(b => { if (b) { b.style.opacity = ''; b.style.pointerEvents = ''; }});
-            if (popupBtn) popupBtn.textContent = '🪟 별도 창에서 재생 (페이지 이동에도 끊김 없음)';
-            updateUI();
-        } catch {}
-    }
-    function openMusicPopup() {
-        // 메인 음악 정지 (팝업이 대신 재생)
-        try { if (player && typeof player.pauseVideo === 'function') player.pauseVideo(); } catch {}
-        saveCurrentTime();  // 정확한 위치 저장 → 팝업이 그 위치부터 시작
-        // 팝업 열기 — 사용자 클릭 안에서 호출 (차단 방지)
-        const w = window.open(
-            'music-popup.html',
-            'leadersProMusic',
-            'width=360,height=620,resizable=yes,scrollbars=no,location=no,menubar=no,toolbar=no'
-        );
-        if (!w) {
-            alert('팝업이 차단되었습니다.\n브라우저 주소창 옆 차단 아이콘을 클릭해 허용 후 다시 시도해주세요.');
-            return;
-        }
-        try { localStorage.setItem('lp_music_popup_active', String(Date.now())); } catch {}
-        showPopupModeUI();
-        w.focus();
-    }
-    if (popupBtn) popupBtn.addEventListener('click', openMusicPopup);
-
-    // 페이지 진입 시 팝업 이미 활성 → 메인 음악 시작 안 함
-    if (isPopupActive()) showPopupModeUI();
-
-    // ─────────────────────────────────────────────────
-    // v8: 첫 사용자 클릭/터치에 자동 팝업 (사이트 진입 자동 효과)
-    //   브라우저 정책상 페이지 로드 직후 window.open은 차단 → 첫 인터랙션에 호출해야 합법
-    //   사용자가 한 번 닫으면 그 세션 안에서는 자동 X (sessionStorage)
-    //   결제 페이지(pricing.html) 진입 시는 자동 X (Toss 결제 안전성)
-    // ─────────────────────────────────────────────────
-    (function setupAutoPopup() {
-        try {
-            // 이미 팝업 활성이면 skip
-            if (isPopupActive()) return;
-            // 결제 페이지 자동 X
-            if (location.pathname.toLowerCase().includes('pricing')) return;
-            // 사용자가 명시적으로 닫은 세션이면 자동 X
-            if (sessionStorage.getItem('lp_music_popup_decided') === 'closed') return;
-            // 이미 자동 시도했으면 skip
-            if (sessionStorage.getItem('lp_music_popup_autotry') === '1') return;
-        } catch {}
-
-        let triggered = false;
-        function tryAutoPopup(e) {
-            if (triggered) return;
-            if (!e.isTrusted) return; // 프로그램 클릭 무시 (사용자 명시 인터랙션만 합법)
-            triggered = true;
-            try { sessionStorage.setItem('lp_music_popup_autotry', '1'); } catch {}
-            // 다음 tick에 호출 (브라우저 이벤트 처리 안 막음 — 메뉴 클릭도 진행됨)
-            const w = window.open(
-                'music-popup.html',
-                'leadersProMusic',
-                'width=360,height=620,resizable=yes,scrollbars=no,location=no,menubar=no,toolbar=no'
-            );
-            if (w) {
-                try { localStorage.setItem('lp_music_popup_active', String(Date.now())); } catch {}
-                try { if (player && player.pauseVideo) player.pauseVideo(); } catch {}
-                saveCurrentTime();
-                showPopupModeUI();
-                console.log('[MUSIC] 자동 팝업 열림 (첫 인터랙션 시점)');
-            } else {
-                // 차단됨 — 미니 플레이어 버튼은 그대로 사용 가능
-                console.warn('[MUSIC] 자동 팝업 차단 (브라우저 정책) — 미니 플레이어 버튼 사용 권장');
-            }
-            // 리스너 한 번만 — 이후 정리
-            document.removeEventListener('click', tryAutoPopup, true);
-            document.removeEventListener('touchstart', tryAutoPopup, true);
-            document.removeEventListener('keydown', tryAutoPopup, true);
-        }
-        document.addEventListener('click', tryAutoPopup, { capture: true, passive: true });
-        document.addEventListener('touchstart', tryAutoPopup, { capture: true, passive: true });
-        document.addEventListener('keydown', tryAutoPopup, { capture: true, passive: true });
-    })();
-
-    // 팝업 닫힘 감지 (storage 이벤트) + 세션 결정 저장
-    window.addEventListener('storage', (e) => {
-        if (e.key !== 'lp_music_popup_active') return;
-        if (!e.newValue) {
-            // 사용자가 팝업 닫음 → 이 세션 동안 자동 팝업 X
-            try { sessionStorage.setItem('lp_music_popup_decided', 'closed'); } catch {}
-        }
-    });
-
-    // 1.5초마다 폴링 (storage 이벤트는 same-tab에 발화 안 하므로 폴링 필요)
-    setInterval(() => {
-        const active = isPopupActive();
-        const inPopupMode = !!document.body.dataset.lpPopupMode;
-        if (active && !inPopupMode) {
-            document.body.dataset.lpPopupMode = '1';
-            showPopupModeUI();
-            try { if (player && player.pauseVideo) player.pauseVideo(); } catch {}
-        } else if (!active && inPopupMode) {
-            delete document.body.dataset.lpPopupMode;
-            hidePopupModeUI();
-            try { if (player && player.playVideo && shouldAutoPlay) player.playVideo(); } catch {}
-        }
-    }, 1500);
-
     // v5: YouTube preconnect + 페이지 hover prefetch — 페이지 로딩 빨라짐 → 음악 끊김 ↓
     (function injectPerformanceHints() {
         const hosts = [
@@ -713,8 +588,7 @@
                     apiReady = true;
                     window.__lpMusicPlayer = player;  // v7: Turbo 가 시간 저장에 접근
                     player.setVolume(40);
-                    // v6: 팝업 활성 시 메인 음악 시작 안 함
-                    if (shouldAutoPlay && !isPopupActive()) {
+                    if (shouldAutoPlay) {
                         if (resumeTime > 0) {
                             player.seekTo(resumeTime, true);
                         }
