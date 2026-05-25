@@ -9,6 +9,16 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW
 const TIMEOUT_MS = 15000;
 
 interface Order { product?: string; code?: string; orderId?: string; date?: string; }
+interface Subscription {
+    productId: string;
+    productName: string;
+    amount: number;
+    nextPaymentDate: string;
+    status: 'active' | 'cancelled' | 'expired' | string;
+    licenseCode: string;
+    createdAt: string;
+    cancelledAt: string;
+}
 
 function callGAS(action: string, params: Record<string, string>): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -60,7 +70,10 @@ function LookupPage() {
     const [orderId, setOrderId] = useState('');
     const [loading, setLoading] = useState(false);
     const [orders, setOrders] = useState<Order[] | null>(null);
+    const [subscriptions, setSubscriptions] = useState<Subscription[] | null>(null);
+    const [cancellingCode, setCancellingCode] = useState<string | null>(null);
     const [error, setError] = useState<{ title: string; message: string } | null>(null);
+    const [notice, setNotice] = useState<string | null>(null);
     const emailInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -69,7 +82,7 @@ function LookupPage() {
         return () => { document.title = prev; };
     }, []);
 
-    const reset = () => { setError(null); setOrders(null); };
+    const reset = () => { setError(null); setOrders(null); setSubscriptions(null); setNotice(null); };
 
     const onTab = (t: 'email' | 'order') => { reset(); setTab(t); };
 
@@ -81,16 +94,51 @@ function LookupPage() {
         }
         reset(); setLoading(true);
         try {
-            const result = await callGAS('lookup-by-email', { email: e });
+            // 주문 + 구독 동시 조회
+            const [orderResult, subResult] = await Promise.all([
+                callGAS('lookup-by-email', { email: e }),
+                callGAS('lookup-subscriptions-by-email', { email: e }),
+            ]);
             setLoading(false);
-            if (result.ok) {
-                setOrders(result.orders || []);
-            } else {
-                setError({ title: '조회 실패', message: result.error || '해당 이메일로 등록된 주문이 없습니다.' });
+            const hasOrders = orderResult?.ok && (orderResult.orders || []).length > 0;
+            const hasSubs = subResult?.ok && (subResult.subscriptions || []).length > 0;
+            if (hasOrders) setOrders(orderResult.orders || []);
+            if (hasSubs) setSubscriptions(subResult.subscriptions || []);
+            if (!hasOrders && !hasSubs) {
+                setError({ title: '조회 실패', message: orderResult?.error || '해당 이메일로 등록된 주문/구독이 없습니다.' });
             }
         } catch {
             setLoading(false);
             setError({ title: '연결 실패', message: '서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.' });
+        }
+    };
+
+    const cancelSubscription = async (sub: Subscription) => {
+        if (sub.status !== 'active') return;
+        const confirmed = window.confirm(
+            `구독을 해지하시겠습니까?\n\n` +
+            `상품: ${sub.productName}\n` +
+            `다음 결제 예정일: ${(sub.nextPaymentDate || '').split('T')[0]}\n\n` +
+            `해지해도 위 결제 예정일까지는 서비스를 계속 이용하실 수 있습니다. 그 이후 자동결제는 발생하지 않습니다.`
+        );
+        if (!confirmed) return;
+
+        setCancellingCode(sub.licenseCode);
+        try {
+            const result = await callGAS('cancel-subscription', { email: email.trim(), licenseCode: sub.licenseCode });
+            setCancellingCode(null);
+            if (result?.ok) {
+                setNotice(`✅ ${result.message || '구독이 해지되었습니다.'}`);
+                // 상태 갱신: 해당 구독 cancelled 로
+                setSubscriptions((prev) => prev ? prev.map((s) =>
+                    s.licenseCode === sub.licenseCode ? { ...s, status: 'cancelled' } : s
+                ) : prev);
+            } else {
+                setError({ title: '해지 실패', message: result?.error || '해지 중 오류가 발생했습니다.' });
+            }
+        } catch {
+            setCancellingCode(null);
+            setError({ title: '연결 실패', message: '서버에 연결할 수 없습니다.' });
         }
     };
 
@@ -186,6 +234,59 @@ function LookupPage() {
                         <ResultRow label="결제일" value={order.date || '—'} dim />
                     </div>
                 ))}
+
+                {/* 정기구독 섹션 — 해지 버튼 포함 */}
+                {subscriptions && subscriptions.length > 0 && (
+                    <div style={{ marginTop: 24 }}>
+                        <div style={{ fontSize: 13, color: '#FFD700', fontWeight: 700, letterSpacing: 0.5, marginBottom: 10 }}>📅 정기구독</div>
+                        {subscriptions.map((sub) => {
+                            const isActive = sub.status === 'active';
+                            const isCancelled = sub.status === 'cancelled';
+                            const isExpired = sub.status === 'expired';
+                            const nextDate = (sub.nextPaymentDate || '').split('T')[0];
+                            const cancelDate = (sub.cancelledAt || '').split('T')[0];
+                            const accent = isActive ? '#44d7b6' : isCancelled ? '#FFA500' : '#ff5c75';
+                            const statusLabel = isActive ? '활성' : isCancelled ? `해지됨 (${nextDate}까지 사용 가능)` : isExpired ? '만료' : sub.status;
+                            return (
+                                <div key={sub.licenseCode} style={{ marginTop: 12, padding: 16, background: 'rgba(255,255,255,0.04)', border: `1px solid ${accent}33`, borderRadius: 12 }}>
+                                    <ResultRow label="상품" value={sub.productName} />
+                                    <ResultRow label="라이선스 코드" value={sub.licenseCode || '—'} mono copy onCopy={() => sub.licenseCode && copyText(sub.licenseCode)} />
+                                    <ResultRow label="결제 금액" value={sub.amount ? `${sub.amount.toLocaleString()}원` : '—'} />
+                                    <ResultRow label={isActive ? '다음 결제일' : isCancelled ? '서비스 종료일' : '결제 예정일'} value={nextDate || '—'} />
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>
+                                        <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>상태</span>
+                                        <span style={{ fontSize: 13, color: accent, fontWeight: 700 }}>● {statusLabel}</span>
+                                    </div>
+                                    {isCancelled && cancelDate && (
+                                        <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', textAlign: 'right' }}>해지일: {cancelDate}</div>
+                                    )}
+                                    {isActive && (
+                                        <button
+                                            onClick={() => cancelSubscription(sub)}
+                                            disabled={cancellingCode === sub.licenseCode}
+                                            style={{
+                                                width: '100%', marginTop: 10, padding: 10,
+                                                background: cancellingCode === sub.licenseCode ? 'rgba(255,255,255,0.06)' : 'rgba(255,92,117,0.12)',
+                                                border: '1px solid rgba(255,92,117,0.35)',
+                                                color: cancellingCode === sub.licenseCode ? 'rgba(255,255,255,0.4)' : '#ff5c75',
+                                                borderRadius: 8, fontSize: 13, fontWeight: 700,
+                                                cursor: cancellingCode === sub.licenseCode ? 'not-allowed' : 'pointer',
+                                            }}
+                                        >
+                                            {cancellingCode === sub.licenseCode ? '해지 처리 중...' : '🛑 정기결제 해지'}
+                                        </button>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
+
+                {notice && (
+                    <div style={{ marginTop: 20, padding: 14, background: 'rgba(68,215,182,0.08)', border: '1px solid rgba(68,215,182,0.3)', borderRadius: 10, textAlign: 'center', fontSize: 13, color: '#44d7b6', fontWeight: 600 }}>
+                        {notice}
+                    </div>
+                )}
 
                 {error && (
                     <div style={{ marginTop: 20, padding: 16, background: 'rgba(255,92,117,0.06)', border: '1px solid rgba(255,92,117,0.15)', borderRadius: 10, textAlign: 'center' }}>
