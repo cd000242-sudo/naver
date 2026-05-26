@@ -13,6 +13,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import { recordCohortEvent, hashAccountId } from '../account/cohortStore.js';
 
 export interface PublishedPost {
   readonly id: string;                    // unique (timestamp + blogId + logNo)
@@ -99,6 +100,20 @@ export function trackPublishedPost(
       ? updated.slice(updated.length - maxPosts)
       : updated;
     fs.writeFileSync(getFilePath(userDataPath), JSON.stringify(trimmed, null, 2), 'utf-8');
+
+    // SPEC-MOAT-2026 Phase 0.3 wiring — cohortStore에 publish 이벤트 기록.
+    // recordCohortEvent는 내부에서 opt-in 게이트(env COHORT_TELEMETRY_ENABLED).
+    // 익명화는 hashAccountId(sha256). 실패해도 발행 흐름 무관 (try/catch 흡수).
+    try {
+      void recordCohortEvent({
+        eventType: 'publish',
+        hashedAccountId: hashAccountId(post.blogId),
+        timestamp: post.publishedAt,
+      });
+    } catch {
+      // ignore — cohort 측정 실패가 발행 흐름 영향 X
+    }
+
     return { ok: true, id };
   } catch {
     return { ok: false };
