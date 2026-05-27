@@ -11,6 +11,7 @@ import { checkAdbDevice, changeIpViaAirplaneMode, getCurrentIp, downloadAdb } fr
 import { checkAdsPowerStatus, openAdsPowerBrowser, closeAdsPowerBrowser, listAdsPowerProfiles, createAdsPowerProfile, deleteAdsPowerProfile, setAdsPowerApiKey } from '../utils/adsPowerManager';
 import { setAdsPowerEnabled } from '../../crawler/crawlerBrowser.js';
 import { setImageFxAdsPowerEnabled } from '../../image/imageFxGenerator.js';
+import { setFlowAdsPowerEnabled } from '../../image/flowGenerator.js';
 import { setProxyEnabled, isProxyEnabled, getPoolStatus, getSmartProxyConfig, setManualProxy, getManualProxy, verifyProxy, type ManualProxyConfig } from '../../crawler/utils/proxyManager.js';
 
 /**
@@ -127,6 +128,7 @@ export function registerSystemHandlers(ctx: IpcContext): void {
     ipcMain.handle('crawler:setAdsPowerEnabled', async (_event, enabled: boolean) => {
         setAdsPowerEnabled(enabled);
         setImageFxAdsPowerEnabled(enabled); // ✅ ImageFX도 동기화
+        setFlowAdsPowerEnabled(enabled); // ✅ Flow도 동기화 (Phase 1)
         return { success: true, enabled };
     });
 

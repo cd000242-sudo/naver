@@ -175,6 +175,13 @@ let _enabled: boolean = false;
 let cookieBannerDismissed: boolean = false;
 let _ensurePromise: Promise<Page> | null = null;
 
+// ─── AdsPower 토글 (사용자 설정) ───
+// _flowAdsPowerEnabled: 사용자가 AdsPower 토글을 ON 했는지 (systemHandlers.ts에서 setter 호출)
+// _flowAdsPowerSessionDisabled: 본 세션 내 AdsPower 1회 실패 후 재시도 차단 플래그
+//   (SPEC-IMAGE-RECOVERY-001 R3 정책 — ImageFX 동일)
+let _flowAdsPowerEnabled: boolean = false;
+let _flowAdsPowerSessionDisabled: boolean = false;
+
 // [v1.6.1] 네트워크 응답 리스너 관리
 // Flow가 생성한 이미지 URL을 page.on('response')로 즉시 감지
 // waitForNewImage는 DOM 폴링과 이 큐를 Promise.race로 결합
@@ -206,6 +213,26 @@ export function isFlowEnabled(): boolean {
     return _enabled;
 }
 
+// ─── AdsPower 토글 setter/getter ───
+export function setFlowAdsPowerEnabled(enabled: boolean): void {
+    _flowAdsPowerEnabled = enabled;
+    if (!enabled) _flowAdsPowerSessionDisabled = false;
+    flowLog(`[Flow] AdsPower ${enabled ? '✅ 활성' : '❌ 비활성'}`);
+}
+
+export function isFlowAdsPowerEnabled(): boolean {
+    return _flowAdsPowerEnabled;
+}
+
+export function isFlowAdsPowerSessionDisabled(): boolean {
+    return _flowAdsPowerSessionDisabled;
+}
+
+export function markFlowAdsPowerSessionDisabled(): void {
+    _flowAdsPowerSessionDisabled = true;
+    flowLog('[Flow] ⚠️ AdsPower 본 세션 비활성화 (다음 앱 재시작 시 재시도)');
+}
+
 // ─── 시스템 브라우저 폴백 + stealth args ─────────────────────
 const STEALTH_ARGS = [
     '--disable-blink-features=AutomationControlled',
@@ -215,6 +242,22 @@ const STEALTH_ARGS = [
 const STEALTH_IGNORE_DEFAULT_ARGS = ['--enable-automation'];
 
 async function launchWithStealthFallback(profileDir: string, offScreen: boolean): Promise<BrowserContext> {
+    // ─── Phase 2: AdsPower 우선 시도 (토글 ON + 본 세션 차단 안 됨) ───
+    // 실패 시 _flowAdsPowerSessionDisabled=true 후 fall-through로 기존 patchright 흐름.
+    // 토글 OFF면 이 블록 진입 안 함 → 기존 코드 경로 동일 (회귀 0).
+    if (_flowAdsPowerEnabled && !_flowAdsPowerSessionDisabled) {
+        try {
+            const { connectFlowViaAdsPower } = await import('./flowAdsPowerConnect.js');
+            return await connectFlowViaAdsPower(profileDir, offScreen);
+        } catch (adsErr) {
+            const msg = (adsErr as Error).message || String(adsErr);
+            flowWarn(`[Flow] ⚠️ AdsPower 사용 불가 (${msg.substring(0, 100)}) → patchright 폴백`);
+            sendImageLog('⚠️ [Flow] AdsPower 연결 실패 — 자체 브라우저로 자동 전환');
+            _flowAdsPowerSessionDisabled = true;
+            // fall through
+        }
+    }
+
     // ✅ [SPEC-IMAGE-RECOVERY-001 Phase 7] patchright drop-in swap (Phase B — flowGenerator만 격리 적용)
     // - Playwright의 runtime.enable CDP 누수 + 기타 7개 fingerprint 패치
     // - imageFxGenerator는 OAuth 기반이라 4주 메트릭 보고 결정 (격리 유지)
@@ -288,14 +331,28 @@ function installNetworkImageListener(page: Page): void {
             const ct = response.headers()['content-type'] || '';
             // Flow 이미지 패턴: content-type image/* + URL에 Google CDN/Flow 패턴
             if (!ct.startsWith('image/')) return;
-            // 확장 매칭 — Google이 새 CDN 도메인으로 변경해도 대응
-            const FLOW_CDN_RE = /flowMedia|flow-media|media\.getMediaUrlRedirect|googleusercontent|aitestkitchen|labs\.google|gstatic\.com\/aitestkitchen/i;
-            if (!FLOW_CDN_RE.test(url)) return;
-            // changelog/banner iframe이 작은 이미지를 응답해도 무시 (overlay URL 패턴)
-            if (/changelogs?|whats[_-]?new|banner|survey|consent|onboarding|promo/i.test(url)) return;
-            // 작은 preview/썸네일 제외 — Content-Length 기준 5KB 이상만
+            // [2026-05-27 작업 25] 모든 image 응답 진단 로그 — 실제 Google Flow CDN 패턴 발견용
             const len = parseInt(response.headers()['content-length'] || '0', 10);
-            if (len > 0 && len < 5 * 1024) return;
+            flowLog(`[Flow][Net][DIAG] 📊 image 응답: ${url.substring(0, 150)} (${len} bytes, ${ct})`);
+            // [2026-05-27 작업 25 — 1순위 fix] CDN 패턴 광범위화 — 2026-05 Google Flow CDN 변경 대응
+            //   기존: flowMedia|aitestkitchen|labs.google 등 특정 도메인
+            //   문제: net queue=0 (사용자 로그) → 실제 응답이 위 패턴에 매칭 안 됨
+            //   수정: Google 계열 도메인 + image 응답 + 일정 크기 이상이면 후보로 추가 (false positive는 5KB 가드 + changelog 가드로 차단)
+            const FLOW_CDN_RE = /flowMedia|flow-media|media\.getMediaUrlRedirect|googleusercontent|aitestkitchen|labs\.google|gstatic\.com|google(?:apis|usercontent|cdn)|cdn\.google|images\.google|google\.com\/.+\/(?:flow|media|image|imagen)/i;
+            if (!FLOW_CDN_RE.test(url)) {
+                flowLog(`[Flow][Net][DIAG] ⏭️ 패턴 미매칭 — skip: ${url.substring(0, 100)}`);
+                return;
+            }
+            // changelog/banner iframe이 작은 이미지를 응답해도 무시 (overlay URL 패턴)
+            if (/changelogs?|whats[_-]?new|banner|survey|consent|onboarding|promo|favicon/i.test(url)) {
+                flowLog(`[Flow][Net][DIAG] ⏭️ UI 자산 — skip: ${url.substring(0, 100)}`);
+                return;
+            }
+            // 작은 preview/썸네일 제외 — Content-Length 기준 5KB 이상만
+            if (len > 0 && len < 5 * 1024) {
+                flowLog(`[Flow][Net][DIAG] ⏭️ 5KB 미만 — skip (${len}b): ${url.substring(0, 100)}`);
+                return;
+            }
             if (!_networkImageQueue.includes(url)) {
                 _networkImageQueue.push(url);
                 flowLog(`[Flow][Net] 📡 이미지 응답 감지: ${url.substring(0, 100)}... (queue=${_networkImageQueue.length})`);
@@ -1209,8 +1266,40 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
         await saveDebugScreenshot(page, 'input-all-methods-failed');
         throw new Error('FLOW_PROMPT_INPUT_ALL_FAILED:3가지 입력 방식(fill/pressSequentially/keyboard) 모두 실패');
     }
-    // [v1.6.1] 입력값 검증 제거 — fill()이 성공 반환했으면 신뢰
-    //         (textContent 호출 100ms * 7장 = 0.7초 절약)
+
+    // [2026-05-27 작업 25 — 2순위 fix] 입력값 검증 복구 (v1.6.1에서 성능상 제거됐던 부분)
+    //   사용자 보고: prompt 전송 후 165초 무응답, [Flow][Net][DIAG] image 응답 0건.
+    //   원인: contenteditable race condition — fill() 성공 반환됐어도 실제 DOM에 텍스트 미반영.
+    //   처방: fill() 직후 textContent로 실제 반영 확인. 미반영 시 pressSequentially로 강제 재입력.
+    //   성능: 100ms 검증 < 165초 무응답. 정합성 우선.
+    try {
+        const expected = prompt.trim();
+        const actualText = await promptInput.evaluate((el: any) =>
+            (el.textContent || el.value || el.innerText || '').trim()
+        );
+        const ratio = expected.length > 0 ? actualText.length / expected.length : 0;
+        if (ratio < 0.5) {
+            flowWarn(`[Flow][2/3] ⚠️ 입력값 미반영 감지 (실제 ${actualText.length}자 / 기대 ${expected.length}자, ratio=${ratio.toFixed(2)}) — pressSequentially 강제 재입력`);
+            await promptInput.fill('').catch(() => undefined);
+            await page.waitForTimeout(100);
+            await promptInput.pressSequentially(prompt, { delay: 5, timeout: 25000 });
+            const reText = await promptInput.evaluate((el: any) =>
+                (el.textContent || el.value || el.innerText || '').trim()
+            );
+            const reRatio = expected.length > 0 ? reText.length / expected.length : 0;
+            if (reRatio < 0.5) {
+                await saveDebugScreenshot(page, 'input-verify-fail');
+                throw new Error(`FLOW_INPUT_VERIFY_FAIL:입력 검증 실패 — fill+pressSequentially 모두 미반영 (실제 ${reText.length}자 / 기대 ${expected.length}자). Flow contenteditable 셀렉터 변경 의심.`);
+            }
+            flowLog(`[Flow][2/3] ✅ pressSequentially 재입력 검증 통과 (${reText.length}자)`);
+        } else {
+            flowLog(`[Flow][2/3] ✅ 입력값 검증 통과 (${actualText.length}/${expected.length}자, ratio=${ratio.toFixed(2)})`);
+        }
+    } catch (verifyErr) {
+        const msg = (verifyErr as Error).message || '';
+        if (msg.startsWith('FLOW_')) throw verifyErr;
+        flowWarn(`[Flow][2/3] 입력 검증 중 예외 (계속 진행): ${msg.substring(0, 100)}`);
+    }
 
     // 전송 버튼
     const submitBtn = submitButtonLocator(page);
@@ -1526,7 +1615,7 @@ export async function generateSingleImageWithFlow(
             await submitPromptOnly(page, prompt);
 
             sendImageLog('⏳ [Flow] 이미지 생성 대기 중...');
-            const newImageUrl = await waitForNewImage(page, prevCount, 120000);
+            const newImageUrl = await waitForNewImage(page, prevCount, 180000);
             flowLog(`[Flow] ✅ 이미지 URL 획득: ${newImageUrl.substring(0, 120)}`);
 
             sendImageLog('📥 [Flow] 이미지 다운로드 중...');
