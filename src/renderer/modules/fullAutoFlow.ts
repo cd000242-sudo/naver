@@ -338,6 +338,11 @@ export function friendlyErrorMessage(error: any): string {
     return `🚫 "${unavailModel}" 모델에 접근할 수 없습니다. 환경설정 → 이미지 모델에서 다른 모델로 변경해주세요.`;
   }
   if (/429|too many requests|rate limit/i.test(msg)) {
+    // [2026-05-27 작업 17] OpenAI 429 감지 시 Tier 안내 모달 자동 표시 (사후 안내)
+    if (/openai|gpt-image|gpt-4|dall-e/i.test(msg)) {
+      try { (window as any).showOpenAiTierWarningModal?.('rate-limit-hit'); } catch { /* ignore */ }
+      return '🚨 OpenAI RPM 한도 도달 (Tier 시스템). 화면 모달의 안내 참고 또는 다른 엔진(Nano Banana 2/ImageFX/DeepInfra)으로 전환하세요.';
+    }
     return '⚠️ AI 이미지 생성 할당량이 부족합니다. 잠시 후 다시 시도하거나, 설정에서 할당량을 확인해주세요.';
   }
   if (/500|internal server error/i.test(msg)) {
@@ -2167,9 +2172,12 @@ export async function generateFullAutoContent(formData: any) {
   }
 
   // ✅ [Alert] 커스텀 프롬프트 사용 시 알림
-  const customPromptEl = document.getElementById('unified-custom-prompt') as HTMLTextAreaElement;
-  if (customPromptEl && customPromptEl.value.trim()) {
-    appendLog('⚠️ [주의] 커스텀 프롬프트가 설정되어 있습니다. 생성 결과에 영향을 줄 수 있습니다.');
+  // [2026-05-27] 통합 #custom-prompt-input 우선 + #unified-custom-prompt fallback (작업 12 통합)
+  const customPromptVal = ((document.getElementById('custom-prompt-input') as HTMLTextAreaElement)?.value?.trim()
+    || (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim()
+    || '');
+  if (customPromptVal) {
+    appendLog('⚠️ [주의] 개인 프롬프트가 설정되어 있습니다. 현재 모드의 기본 프롬프트가 완전 대체됩니다.');
   }
 
   // Determine if URL mode is active (assuming formData.urls is used for URL mode)
@@ -2275,7 +2283,9 @@ export async function generateFullAutoContent(formData: any) {
       draftText,
       targetAge: formData.targetAge,
       minChars: formData.minChars || 2500,
-      customPrompt: (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim() || undefined,
+      // [2026-05-27] 통합 #custom-prompt-input 우선 (작업 12)
+      customPrompt: ((document.getElementById('custom-prompt-input') as HTMLTextAreaElement)?.value?.trim()
+        || (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim()) || undefined,
       categoryHint: formData.category || formData.categoryName || formData.categoryHint,
       contentMode: formData.contentMode || 'seo',
       articleType: formData.articleType,
@@ -3363,7 +3373,7 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
     scheduleDate: formData.publishMode === 'schedule' ? formData.scheduleDate : undefined,
     scheduleTime: formData.publishMode === 'schedule' ? formData.scheduleTime : undefined, // ✅ [2026-03-19 FIX] 예약 시간 명시적 전달
     scheduleType: formData.publishMode === 'schedule' ? (formData.scheduleType as 'app-schedule' | 'naver-server' || 'naver-server') : undefined,
-    toneStyle: formData.toneStyle as 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info' | undefined,
+    toneStyle: formData.toneStyle as 'professional' | 'friendly' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info' | 'sincere_exposure' | 'data_verified' | 'text_hip' | 'mentor' | 'self_interview' | undefined,
     postId: currentPostId || undefined, // ✅ 현재 글 ID 전달
     thumbnailPath: thumbnailPath, // ✅ 대표사진 경로 추가
     categoryName: formData.categoryName || formData.category, // ✅ 발행 카테고리명 추가 (category도 호환성 지원)

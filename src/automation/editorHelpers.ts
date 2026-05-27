@@ -684,6 +684,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     await self.inputTitle(resolved.title);
     await self.delay(200); // 500ms → 200ms
 
+    // 1-0. [2026-05-27] 테블릿 화면 모드 + 가운데 정렬 자동 적용 (사용자 명시 요청)
+    self.log('📱 [1-0단계] 모바일/테블릿 뷰 + 가운데 정렬 설정...');
+    await setupMobileViewAndCenterAlign(self);
+
     // 1-1. 서식 초기화 (제목 입력 후, 본문에서)
     self.log('🔄 에디터 서식 초기화 중...');
     await self.clearAllFormatting();
@@ -2522,6 +2526,53 @@ export async function setFontSize(self: any, size: number, force: boolean = fals
     }
   } catch (error) {
     self.log(`   ⚠️ 폰트 크기 설정 실패: ${(error as Error).message}`);
+  }
+}
+
+// ── setupMobileViewAndCenterAlign ──
+// [2026-05-27] 에디터 진입 직후 테블릿 화면 모드 + 가운데 정렬 자동 적용 (사용자 명시 요청)
+// 셀렉터 실패 시 무시 (본문 작성 흐름 차단 금지)
+export async function setupMobileViewAndCenterAlign(self: any): Promise<void> {
+  const frame = await self.getAttachedFrame();
+  if (!frame) {
+    self.log('⚠️ [모바일뷰+가운데정렬] frame 없음 → skip');
+    return;
+  }
+
+  // 1. 테블릿 화면 모드 클릭 (한 번 클릭으로 토글)
+  try {
+    const tabletBtn = await findElement(frame, SELECTORS.editor.viewModeTablet, 'viewModeTablet');
+    if (tabletBtn) {
+      await tabletBtn.click();
+      self.log('📱 테블릿 화면 모드로 전환');
+      await self.delay(300);
+    } else {
+      self.log('ℹ️ 테블릿 모드 버튼 미발견 (이미 적용됐거나 UI 변경) → skip');
+    }
+  } catch (e) {
+    self.log(`⚠️ 테블릿 모드 전환 실패 (무시): ${(e as Error).message}`);
+  }
+
+  // 2. 정렬 드롭다운 → 가운데 정렬
+  try {
+    const alignBtn = await findElement(frame, SELECTORS.editor.alignDropdownButton, 'alignDropdownButton');
+    if (!alignBtn) {
+      self.log('ℹ️ 정렬 드롭다운 미발견 → skip');
+      return;
+    }
+    await alignBtn.click();
+    await self.delay(200);
+    const centerBtn = await findElement(frame, SELECTORS.editor.alignCenterButton, 'alignCenterButton');
+    if (centerBtn) {
+      await centerBtn.click();
+      self.log('📍 가운데 정렬 활성화');
+      await self.delay(200);
+    } else {
+      self.log('ℹ️ 가운데 정렬 버튼 미발견 → 드롭다운 닫기 시도');
+      try { await alignBtn.click(); } catch { /* ignore */ }
+    }
+  } catch (e) {
+    self.log(`⚠️ 가운데 정렬 설정 실패 (무시): ${(e as Error).message}`);
   }
 }
 

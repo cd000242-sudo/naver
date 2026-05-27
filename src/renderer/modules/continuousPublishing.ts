@@ -2758,16 +2758,22 @@ function addItemToQueueV2Impl(): void {
       // ✅ [2026-02-13] 키워드 제목 옵션
       keywordAsTitle: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-as-title') as HTMLInputElement)?.checked || false) : undefined,
       keywordTitlePrefix: (tabType === 'keyword') ? ((document.getElementById('continuous-keyword-title-prefix') as HTMLInputElement)?.checked || false) : undefined,
-      // ✅ [v1.4.56] custom 모드 - 사용자 정의 프롬프트 수집
-      // 우선순위: 1) 연속발행 모달 전용 textarea, 2) 메인 풀오토 탭 textarea
-      customPrompt: contentMode === 'custom' ? (() => {
+      // [v1.4.56 / 2026-05-27 작업 13-A] 모든 모드에서 개인 프롬프트 수집 — custom 모드 조건 제거.
+      //   우선순위: 1) 연속발행 모달 전용, 2) 통합 #custom-prompt-input (작업 12), 3) 메인 #unified-custom-prompt
+      //   custom 모드일 때만 비어있으면 alert (필수 검증)
+      customPrompt: (() => {
         const modalPrompt = (document.getElementById('continuous-modal-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
         if (modalPrompt) return modalPrompt;
+        const unifiedPrompt = (document.getElementById('custom-prompt-input') as HTMLTextAreaElement | null)?.value?.trim();
+        if (unifiedPrompt) return unifiedPrompt;
         const mainPrompt = (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
         if (mainPrompt) return mainPrompt;
-        alert('✏️ 사용자 정의 모드 필수:\n\n사용자 정의 프롬프트를 입력해주세요.\n입력 안 하면 SEO 모드로 폴백됩니다.');
-        throw new Error('customPrompt 누락 — custom 모드 선택 시 필수');
-      })() : undefined,
+        if (contentMode === 'custom') {
+          alert('✏️ 사용자 정의 모드 필수:\n\n개인 프롬프트를 입력해주세요.');
+          throw new Error('customPrompt 누락 — custom 모드 선택 시 필수');
+        }
+        return undefined;
+      })(),
       // ✅ [v1.4.28] window._businessInfo 우선
       businessInfo: contentMode === 'business' ? (() => {
         const globalInfo = (window as any)._businessInfo;

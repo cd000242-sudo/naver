@@ -1874,15 +1874,21 @@ export async function initMultiAccountPublishModal() {
       ? realCatSelect.options[realCatSelect.selectedIndex]?.text || ''
       : '';
     const contentMode = ((document.getElementById('ma-setting-content-mode') as HTMLSelectElement | null)?.value || 'seo') as 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business';
-    // ✅ [v1.4.56] custom 모드용 프롬프트 수집 (우선: 다중계정 모달 전용 → 메인 풀오토 탭 fallback)
-    const customPrompt = contentMode === 'custom' ? (() => {
+    // [v1.4.56 / 2026-05-27 작업 13-A] 모든 모드에서 개인 프롬프트 수집 — custom 모드 조건 제거.
+    //   우선순위: 1) 다중계정 모달 전용, 2) 통합 #custom-prompt-input (작업 12), 3) 메인 #unified-custom-prompt
+    const customPrompt = (() => {
       const modalPrompt = (document.getElementById('ma-setting-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
       if (modalPrompt) return modalPrompt;
+      const unifiedPrompt = (document.getElementById('custom-prompt-input') as HTMLTextAreaElement | null)?.value?.trim();
+      if (unifiedPrompt) return unifiedPrompt;
       const mainPrompt = (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
       if (mainPrompt) return mainPrompt;
-      alert('✏️ 사용자 정의 모드 필수:\n\n사용자 정의 프롬프트를 입력해주세요.\n(다중계정 설정 또는 메인 풀오토 탭에 입력 가능)');
-      throw new Error('customPrompt 누락 — custom 모드 선택 시 필수');
-    })() : undefined;
+      if (contentMode === 'custom') {
+        alert('✏️ 사용자 정의 모드 필수:\n\n개인 프롬프트를 입력해주세요.');
+        throw new Error('customPrompt 누락 — custom 모드 선택 시 필수');
+      }
+      return undefined;
+    })();
     // ✅ [v1.4.56] business 모드용 업체 정보 수집
     const businessInfo = contentMode === 'business' ? (() => {
       // 우선순위 1: window._businessInfo (글로벌 모달로 이미 입력된 경우)

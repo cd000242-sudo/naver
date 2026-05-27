@@ -6331,6 +6331,125 @@ function initUnifiedModeSelection(): void {
     });
   });
 
+  // [2026-05-27 작업 13-B] 개인 프롬프트 UI 동기화 + 모달 핸들러 (1회 등록)
+  const MODE_LABELS_FOR_PROMPT: Record<string, string> = {
+    seo: '🔍 SEO', homefeed: '🏠 홈판', affiliate: '🛒 쇼핑커넥트', custom: '✏️ 사용자정의', business: '🏢 업체홍보',
+  };
+  function syncCustomPromptUiForMode(mode: string): void {
+    const enableCb = document.getElementById('custom-prompt-enable') as HTMLInputElement | null;
+    const openBtn = document.getElementById('custom-prompt-open-modal') as HTMLButtonElement | null;
+    const statusEl = document.getElementById('custom-prompt-status') as HTMLElement | null;
+    const hiddenInput = document.getElementById('custom-prompt-input') as HTMLTextAreaElement | null;
+    if (!enableCb || !openBtn || !statusEl || !hiddenInput) return;
+    let savedEnabled = false;
+    let savedText = '';
+    try {
+      savedEnabled = localStorage.getItem(`customPromptEnabled_${mode}`) === 'true';
+      savedText = localStorage.getItem(`customPrompt_${mode}`) || '';
+    } catch { /* ignore */ }
+    enableCb.checked = savedEnabled;
+    // 백엔드 파이프라인은 hidden textarea.value를 읽음. 체크 OFF면 빈 값(미적용)
+    hiddenInput.value = savedEnabled ? savedText : '';
+    openBtn.style.display = savedEnabled ? 'inline-block' : 'none';
+    statusEl.style.display = savedEnabled && savedText ? 'inline-block' : 'none';
+    statusEl.textContent = savedText ? `✅ ${savedText.length.toLocaleString()}자 작성됨` : '';
+  }
+  // 체크박스 토글 핸들러
+  const enableCbInit = document.getElementById('custom-prompt-enable') as HTMLInputElement | null;
+  if (enableCbInit && !(enableCbInit as any).__bound) {
+    (enableCbInit as any).__bound = true;
+    enableCbInit.addEventListener('change', () => {
+      const curMode = (document.getElementById('unified-content-mode') as HTMLInputElement)?.value || 'seo';
+      try { localStorage.setItem(`customPromptEnabled_${curMode}`, String(enableCbInit.checked)); } catch { /* ignore */ }
+      syncCustomPromptUiForMode(curMode);
+    });
+  }
+  // 모달 열기
+  const openBtnInit = document.getElementById('custom-prompt-open-modal') as HTMLButtonElement | null;
+  if (openBtnInit && !(openBtnInit as any).__bound) {
+    (openBtnInit as any).__bound = true;
+    openBtnInit.addEventListener('click', () => {
+      const curMode = (document.getElementById('unified-content-mode') as HTMLInputElement)?.value || 'seo';
+      const modal = document.getElementById('custom-prompt-modal');
+      const modalInput = document.getElementById('custom-prompt-modal-input') as HTMLTextAreaElement | null;
+      const modeLabel = document.getElementById('custom-prompt-modal-mode-label');
+      const countEl = document.getElementById('custom-prompt-modal-count');
+      if (!modal || !modalInput) return;
+      let saved = '';
+      try { saved = localStorage.getItem(`customPrompt_${curMode}`) || ''; } catch { /* ignore */ }
+      modalInput.value = saved;
+      if (modeLabel) modeLabel.textContent = MODE_LABELS_FOR_PROMPT[curMode] || curMode;
+      if (countEl) countEl.textContent = `${saved.length.toLocaleString()}자`;
+      modal.style.display = 'flex';
+    });
+  }
+  // 모달 textarea 입력 → 글자수 카운트
+  const modalInputInit = document.getElementById('custom-prompt-modal-input') as HTMLTextAreaElement | null;
+  if (modalInputInit && !(modalInputInit as any).__bound) {
+    (modalInputInit as any).__bound = true;
+    modalInputInit.addEventListener('input', () => {
+      const countEl = document.getElementById('custom-prompt-modal-count');
+      if (countEl) countEl.textContent = `${modalInputInit.value.length.toLocaleString()}자`;
+    });
+  }
+  // 닫기/취소
+  ['custom-prompt-modal-close', 'custom-prompt-modal-cancel'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && !(el as any).__bound) {
+      (el as any).__bound = true;
+      el.addEventListener('click', () => {
+        const modal = document.getElementById('custom-prompt-modal');
+        if (modal) modal.style.display = 'none';
+      });
+    }
+  });
+  // 비우기
+  const clearBtnInit = document.getElementById('custom-prompt-modal-clear');
+  if (clearBtnInit && !(clearBtnInit as any).__bound) {
+    (clearBtnInit as any).__bound = true;
+    clearBtnInit.addEventListener('click', () => {
+      const mi = document.getElementById('custom-prompt-modal-input') as HTMLTextAreaElement | null;
+      if (mi) { mi.value = ''; mi.dispatchEvent(new Event('input')); }
+    });
+  }
+  // 저장 & 적용
+  const saveBtnInit = document.getElementById('custom-prompt-modal-save');
+  if (saveBtnInit && !(saveBtnInit as any).__bound) {
+    (saveBtnInit as any).__bound = true;
+    saveBtnInit.addEventListener('click', () => {
+      const curMode = (document.getElementById('unified-content-mode') as HTMLInputElement)?.value || 'seo';
+      const mi = document.getElementById('custom-prompt-modal-input') as HTMLTextAreaElement | null;
+      const modal = document.getElementById('custom-prompt-modal');
+      if (!mi) return;
+      const val = mi.value.trim();
+      try {
+        localStorage.setItem(`customPrompt_${curMode}`, val);
+        localStorage.setItem(`customPromptEnabled_${curMode}`, val ? 'true' : 'false');
+      } catch { /* ignore */ }
+      syncCustomPromptUiForMode(curMode);
+      if (modal) modal.style.display = 'none';
+      try { (window as any).toastManager?.success?.(`✅ ${MODE_LABELS_FOR_PROMPT[curMode] || curMode} 모드 개인 프롬프트 저장됨`); } catch { /* ignore */ }
+    });
+  }
+  // 모달 배경 클릭 시 닫기
+  const modalRoot = document.getElementById('custom-prompt-modal');
+  if (modalRoot && !(modalRoot as any).__bound) {
+    (modalRoot as any).__bound = true;
+    modalRoot.addEventListener('click', (e) => {
+      if (e.target === modalRoot) modalRoot.style.display = 'none';
+    });
+  }
+
+  // [2026-05-27 작업 20] 페이지 로드 시 개인 프롬프트 영역 자동 표시
+  //   기존: #custom-prompt-area 초기 display:none → 모드 버튼 클릭해야만 표시 → 사용자 "어디 갔어?" 보고
+  //   수정: 페이지 로드 시 즉시 표시 + 현재 모드(기본 seo)로 syncCustomPromptUiForMode 호출
+  const customPromptAreaInit = document.getElementById('custom-prompt-area');
+  if (customPromptAreaInit) {
+    customPromptAreaInit.style.display = 'block';
+    const initialMode = (document.getElementById('unified-content-mode') as HTMLInputElement)?.value || 'seo';
+    syncCustomPromptUiForMode(initialMode);
+  }
+
   // ✅ 콘텐츠 모드 선택 버튼 클릭 이벤트 (SEO / 홈판 / 제휴마케팅 / 사용자정의)
   document.querySelectorAll('.content-mode-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -6383,9 +6502,10 @@ function initUnifiedModeSelection(): void {
       if (customDescEl) customDescEl.style.display = mode === 'custom' ? 'block' : 'none';
       if (businessDescEl) businessDescEl.style.display = mode === 'business' ? 'block' : 'none';
 
-      // 사용자정의 프롬프트 영역: custom 모드에서만 표시
+      // [2026-05-27 작업 13-B] 개인 프롬프트 영역: 모든 모드에서 표시 (체크박스 + 모달 + 모드별 localStorage)
       if (customPromptArea) {
-        customPromptArea.style.display = mode === 'custom' ? 'block' : 'none';
+        customPromptArea.style.display = 'block';
+        syncCustomPromptUiForMode(mode);
       }
 
       // ✅ [v1.4.29] 인라인 패널은 항상 숨김 (글로벌 모달로 통일)

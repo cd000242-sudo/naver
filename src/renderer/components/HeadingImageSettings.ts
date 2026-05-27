@@ -97,7 +97,7 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'stability': 'Stability AI',
   'pollinations': 'Pollinations',
   'deepinfra': 'FLUX-2 (DeepInfra)',
-  'openai-image': 'OpenAI 덕트테이프 (gpt-image-1.5/2)',
+  'openai-image': 'OpenAI Image (gpt-image-1 / 1.5 / 2)',
   'dall-e-3': 'DALL-E 3 (OpenAI)',
   'leonardoai': 'Leonardo AI',
   'imagefx': 'ImageFX (무료)',
@@ -159,8 +159,18 @@ function restoreFullAutoSettingModal(): void {
 }
 
 // ✅ [2026-01-29] 안전한 IPC 호출 (에러 핸들링 강화)
+// [2026-05-27 FIX] preload는 window.api로 노출 (window.electron 미사용) → config:get/set은 api 메서드로 라우팅
 async function safeIpcInvoke<T>(channel: string, ...args: any[]): Promise<T | null> {
   try {
+    const api = (window as any).api;
+    // config 채널은 preload에 등록된 getConfig/saveConfig 직접 호출 (preload.ts:178-179)
+    if (channel === 'config:get' && api?.getConfig) {
+      return await api.getConfig();
+    }
+    if (channel === 'config:set' && api?.saveConfig) {
+      return await api.saveConfig(args[0]);
+    }
+    // 그 외 채널은 기존 electron.ipcRenderer 경로 (현재 미등록 — 향후 호환)
     if ((window as any).electron?.ipcRenderer) {
       return await (window as any).electron.ipcRenderer.invoke(channel, ...args);
     }
@@ -806,8 +816,21 @@ export function createHeadingImageModal(): void {
                 <div style="font-size: 11px; color: #f59e0b; margin-top: 2px;">⚠️ AI 이미지 생성 비용이 발생할 수 있음</div>
               </div>
             </label>
+            <div id="local-folder-fallback-engine-wrap" style="display: none; margin-top: 8px; padding: 10px 12px; border-radius: 8px; background: rgba(99,102,241,0.08); border: 1px dashed rgba(99,102,241,0.3);">
+              <div style="font-size: 11px; color: #a5b4fc; margin-bottom: 6px; font-weight: 600;">🎨 부족분 생성에 사용할 AI 엔진</div>
+              <select id="local-folder-fallback-engine" style="width: 100%; padding: 8px 10px; border-radius: 6px; background: #1e1e2e; color: #e2e8f0; border: 1px solid rgba(99,102,241,0.3); font-size: 12px; cursor: pointer;">
+                <option value="nano-banana">나노바나나 (₩54/장, Gemini 2.5 Flash Image)</option>
+                <option value="nano-banana-2">나노바나나2 (₩97/장, Gemini 3.1 Flash Image)</option>
+                <option value="nano-banana-pro" selected>나노바나나 프로 (₩185/장, Gemini 3 Pro Image)</option>
+                <option value="deepinfra">FLUX-2 (DeepInfra)</option>
+                <option value="openai-image">OpenAI Image (gpt-image-1 / 1.5 / 2) ⚠️ Tier1=5RPM, $50+7일 후 권장</option>
+                <option value="leonardoai">Leonardo AI</option>
+                <option value="imagefx">ImageFX (무료)</option>
+                <option value="flow">🍌 Flow (Nano Banana 2)</option>
+              </select>
+            </div>
           </div>
-          
+
           <!-- ✅ 쇼핑커넥트 전용 옵션 (기본 숨김) - [2026-01-28] 연속발행과 동일한 UI로 업데이트 -->
           <div id="shopping-connect-options" class="shopping-connect-section">
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
@@ -952,10 +975,11 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #047857;">FLUX-2</div>
             <div style="font-size: 10px; color: #059669;">DeepInfra</div>
           </label>
-          <label class="source-option" data-value="openai-image" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ede9fe, #c4b5fd); text-align: center; transition: all 0.2s;">
+          <label class="source-option" data-value="openai-image" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ede9fe, #c4b5fd); text-align: center; transition: all 0.2s; position: relative;">
             <div style="font-size: 1.5rem;">🦆</div>
-            <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">덕트테이프</div>
-            <div style="font-size: 10px; color: #7c3aed;">gpt-image-1.5/2 | Org 인증 필요</div>
+            <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">OpenAI Image</div>
+            <div style="font-size: 10px; color: #7c3aed;">gpt-image-1 / 1.5 / 2 | Org 인증 필요</div>
+            <div style="font-size: 9px; color: #ef4444; margin-top: 3px; font-weight: 700;">⚠️ Tier1=5RPM (초보 비추천)</div>
           </label>
           <label class="source-option" data-value="leonardoai" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ffedd5, #fdba74); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦁</div>
@@ -1266,7 +1290,7 @@ export function createHeadingImageModal(): void {
                 <option value="flow">🍌 Flow (Nano Banana 2, AI Pro 무료)</option>
                 <option value="imagefx">✨ ImageFX (Google 무료)</option>
                 <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>
-                <option value="openai-image">🦆 덕트테이프 (gpt-image-1.5/2)</option>
+                <option value="openai-image">🦆 OpenAI Image (gpt-image-1 / 1.5 / 2)</option>
                 <option value="leonardoai">🦁 Leonardo AI</option>
               </select>
             </div>
@@ -1373,6 +1397,13 @@ export function createHeadingImageModal(): void {
       console.log(`[HeadingImageSettings] 📂 내 폴더 부족 이미지 처리: ${localFolderFallbackRadio.value}`);
     }
 
+    // [2026-05-26] Save fallback AI engine selection (only persisted, applied when localFolderFallback === 'ai-generate')
+    const fallbackEngineSelect = document.getElementById('local-folder-fallback-engine') as HTMLSelectElement | null;
+    if (fallbackEngineSelect && fallbackEngineSelect.value) {
+      localStorage.setItem('localFolderFallbackEngine', fallbackEngineSelect.value);
+      console.log(`[HeadingImageSettings] 📂 폴백 AI 엔진: ${fallbackEngineSelect.value}`);
+    }
+
     // ✅ [2026-01-28] 쇼핑커넥트 전용 필드들 저장
     const scSubImageSourceRadio = document.querySelector('input[name="sc-sub-image-source"]:checked') as HTMLInputElement;
     const scAutoThumbnailCheck = document.getElementById('sc-auto-thumbnail-setting') as HTMLInputElement;
@@ -1476,6 +1507,10 @@ export function createHeadingImageModal(): void {
   sourceOptions.forEach(opt => {
     opt.addEventListener('click', () => {
       const value = opt.getAttribute('data-value') as GlobalImageSource;
+      // [2026-05-27 작업 16] OpenAI 선택 시 Tier 안내 모달 (초보 사용자 보호) — 1회만 표시
+      if (value === 'openai-image' && !localStorage.getItem('openaiTierWarningSeen')) {
+        showOpenAiTierWarningModal();
+      }
       selectedSourceValue = value;
       // 모든 카드 스타일 리셋
       sourceOptions.forEach(o => {
@@ -1541,6 +1576,21 @@ export function createHeadingImageModal(): void {
         const savedFallback = localStorage.getItem('localFolderFallback') || 'skip';
         const radio = document.querySelector(`input[name="local-folder-fallback"][value="${savedFallback}"]`) as HTMLInputElement;
         if (radio) radio.checked = true;
+        // [2026-05-26] Restore fallback engine + bind radio toggle for engine wrap
+        const fallbackEngineSel = document.getElementById('local-folder-fallback-engine') as HTMLSelectElement | null;
+        const savedEngine = localStorage.getItem('localFolderFallbackEngine') || 'nano-banana-pro';
+        if (fallbackEngineSel) fallbackEngineSel.value = savedEngine;
+        const engineWrap = document.getElementById('local-folder-fallback-engine-wrap');
+        if (engineWrap) engineWrap.style.display = savedFallback === 'ai-generate' ? 'block' : 'none';
+        document.querySelectorAll('input[name="local-folder-fallback"]').forEach(el => {
+          if ((el as any).__fallbackBound) return;
+          (el as any).__fallbackBound = true;
+          el.addEventListener('change', () => {
+            const w = document.getElementById('local-folder-fallback-engine-wrap');
+            const checked = document.querySelector('input[name="local-folder-fallback"]:checked') as HTMLInputElement | null;
+            if (w) w.style.display = checked?.value === 'ai-generate' ? 'block' : 'none';
+          });
+        });
       }
     }
   });
@@ -2237,7 +2287,7 @@ export function createHeadingImageModal(): void {
     }
   });
 
-  document.getElementById('open-advanced-image-model-btn')?.addEventListener('click', () => {
+  document.getElementById('open-advanced-image-model-btn')?.addEventListener('click', async () => {
     console.log('[HeadingImageSettings] 🎨 이미지 생성 모델 상세 설정 열기');
 
     // 기존 서브 모달이 있으면 제거
@@ -2322,6 +2372,22 @@ export function createHeadingImageModal(): void {
             <p style="margin: 6px 0 0; font-size: 11px; color: #9ca3af;">ℹ️ DeepInfra 계정 필요</p>
           </div>
 
+          <!-- 🦆 OpenAI Image (gpt-image-1 / 1.5 / 2) -->
+          <div style="background: rgba(124, 58, 237, 0.1); padding: 14px; border-radius: 12px; border: 1px solid rgba(124, 58, 237, 0.3);">
+            <label style="display: block; font-weight: 600; color: #a78bfa; margin-bottom: 8px; font-size: 13px;">🦆 OpenAI Image</label>
+            <select id="submodal-openai-image-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
+              <option value="gpt-image-1">🎨 gpt-image-1 (정식, DALL-E 3 후속)</option>
+              <option value="gpt-image-1.5">⚡ gpt-image-1.5 (저비용 기본, 추천)</option>
+              <option value="gpt-image-2">👑 gpt-image-2 (고품질)</option>
+            </select>
+            <select id="submodal-openai-image-quality" style="width: 100%; padding: 10px; margin-top: 8px; background: #1a1a2e; border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
+              <option value="low">low (저비용)</option>
+              <option value="medium" selected>medium (기본)</option>
+              <option value="high">high (고품질)</option>
+            </select>
+            <p style="margin: 6px 0 0; font-size: 11px; color: #9ca3af;">ℹ️ OpenAI Organization 인증 필요 (403 발생 시 platform.openai.com 인증 확인)</p>
+          </div>
+
           <!-- 🦁 Leonardo AI -->
           <div style="background: rgba(234, 88, 12, 0.1); padding: 14px; border-radius: 12px; border: 1px solid rgba(234, 88, 12, 0.3);">
             <label style="display: block; font-weight: 600; color: #ea580c; margin-bottom: 8px; font-size: 13px;">🦁 Leonardo AI</label>
@@ -2361,6 +2427,9 @@ export function createHeadingImageModal(): void {
     const nanoSubSelect = subModal.querySelector('#submodal-nano-sub-model') as HTMLSelectElement;
     const deepinfraSelect = subModal.querySelector('#submodal-deepinfra-model') as HTMLSelectElement;
     const leonardoaiSelect = subModal.querySelector('#submodal-leonardoai-model') as HTMLSelectElement;
+    // [2026-05-27] OpenAI Image (gpt-image-1 / 1.5 / 2) - 사용자 명시 요청
+    const openaiImageModelSelect = subModal.querySelector('#submodal-openai-image-model') as HTMLSelectElement;
+    const openaiImageQualitySelect = subModal.querySelector('#submodal-openai-image-quality') as HTMLSelectElement;
 
     // ✅ [v1.5.9] 비싼 모델(3 Pro 4K = ₩336/장) 사용 중이면 자동으로 3.1 Flash로 마이그레이션
     //   사용자 요청: "나노바나나프로 비싸니까 3.1로" — Gemini 3.1 Flash(₩97)가 품질/가격 최적점
@@ -2386,6 +2455,17 @@ export function createHeadingImageModal(): void {
     if (nanoSubSelect) nanoSubSelect.value = migratedSub;
     if (deepinfraSelect) deepinfraSelect.value = localStorage.getItem('deepinfraModel') || 'flux-2-dev';
     if (leonardoaiSelect) leonardoaiSelect.value = localStorage.getItem('leonardoaiModel') || 'seedream-4.5';
+    // [2026-05-27] OpenAI Image 모델/품질 복원 (config.json 우선, localStorage 폴백, 둘 다 없으면 1.5/medium)
+    if (openaiImageModelSelect) {
+      const cfg = await safeIpcInvoke<any>('config:get');
+      const savedModel = (cfg?.openaiImageModel as string) || localStorage.getItem('openaiImageModel') || 'gpt-image-1.5';
+      const validModels = ['gpt-image-1', 'gpt-image-1.5', 'gpt-image-2'];
+      openaiImageModelSelect.value = validModels.includes(savedModel) ? savedModel : 'gpt-image-1.5';
+      const savedQuality = (cfg?.openaiImageQuality as string) || localStorage.getItem('openaiImageQuality') || 'medium';
+      if (openaiImageQualitySelect) {
+        openaiImageQualitySelect.value = ['low', 'medium', 'high'].includes(savedQuality) ? savedQuality : 'medium';
+      }
+    }
 
     // 닫기 버튼
     subModal.querySelector('#close-image-model-submodal')?.addEventListener('click', () => subModal.remove());
@@ -2433,6 +2513,9 @@ export function createHeadingImageModal(): void {
       }
       if (deepinfraSelect) localStorage.setItem('deepinfraModel', deepinfraSelect.value);
       if (leonardoaiSelect) localStorage.setItem('leonardoaiModel', leonardoaiSelect.value);
+      // [2026-05-27] OpenAI Image 저장
+      if (openaiImageModelSelect) localStorage.setItem('openaiImageModel', openaiImageModelSelect.value);
+      if (openaiImageQualitySelect) localStorage.setItem('openaiImageQuality', openaiImageQualitySelect.value);
 
       // ✅ [2026-01-27] config.json에도 저장 (메인 프로세스에서 읽을 수 있도록)
       // ✅ [2026-01-29] safeIpcInvoke 사용으로 에러 핸들링 강화
@@ -2448,6 +2531,9 @@ export function createHeadingImageModal(): void {
         }
         if (deepinfraSelect) currentConfig.deepinfraModel = deepinfraSelect.value;
         if (leonardoaiSelect) currentConfig.leonardoaiModel = leonardoaiSelect.value;
+        // [2026-05-27] OpenAI Image 모델/품질 → main 프로세스 (openaiImageGenerator.ts:24 DEFAULT_OPENAI_IMAGE_MODEL 대체)
+        if (openaiImageModelSelect) currentConfig.openaiImageModel = openaiImageModelSelect.value;
+        if (openaiImageQualitySelect) currentConfig.openaiImageQuality = openaiImageQualitySelect.value;
 
         // 저장
         await safeIpcInvoke('config:set', currentConfig);
@@ -2487,6 +2573,84 @@ export function closeHeadingImageModal(): void {
   }
 }
 
+// [2026-05-27 작업 16+17] OpenAI Tier 안내 모달 — 카드 첫 클릭 시(사전) 또는 429 발생 시(사후) 표시
+//   reason='rate-limit-hit'이면 헤더 텍스트를 사후 안내로 변경 + localStorage 무시(매번 표시)
+function showOpenAiTierWarningModal(reason: 'precheck' | 'rate-limit-hit' = 'precheck'): void {
+  // 기존 모달이 있으면 제거
+  const existing = document.getElementById('openai-tier-warning-modal');
+  if (existing) existing.remove();
+  const isHit = reason === 'rate-limit-hit';
+
+  const modal = document.createElement('div');
+  modal.id = 'openai-tier-warning-modal';
+  modal.style.cssText = `
+    position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 10060;
+    display: flex; justify-content: center; align-items: center; backdrop-filter: blur(4px);
+  `;
+  modal.innerHTML = `
+    <div style="max-width: 560px; width: 92%; max-height: 88vh; overflow-y: auto;
+                background: linear-gradient(165deg, #1f1d2e 0%, #16161f 100%);
+                border: 2px solid #ef4444; border-radius: 16px;
+                box-shadow: 0 25px 60px rgba(0,0,0,0.7); padding: 1.5rem 1.75rem;">
+      <h3 style="margin: 0 0 1rem 0; font-size: 1.15rem; font-weight: 800; color: #fca5a5; display: flex; align-items: center; gap: 0.5rem;">
+        ${isHit ? '🚨 OpenAI RPM 한도 도달 — 즉시 조치 필요' : '⚠️ OpenAI Image 선택 — 초보 사용자 주의'}
+      </h3>
+      <p style="margin: 0 0 1rem 0; color: #fde68a; font-size: 0.85rem; line-height: 1.6;">
+        ${isHit
+          ? '방금 발행 시도가 <b>429 Rate Limit</b> 에러로 실패했습니다. OpenAI의 Tier 시스템 한도에 도달한 것입니다. 아래 옵션 중 하나를 선택하세요.'
+          : 'OpenAI Image(gpt-image-1/1.5/2)는 <b>Tier 시스템</b>으로 사용량이 단계별로 제한됩니다. 결제 누적액에 따라 RPM 한도가 달라지며, <b>Tier 1은 분당 5장만</b> 생성 가능합니다.'}
+      </p>
+      <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1rem;">
+        <div style="font-weight: 700; color: #f87171; font-size: 0.85rem; margin-bottom: 0.5rem;">📊 OpenAI Tier 한도 (이미지 모델)</div>
+        <table style="width: 100%; font-size: 0.78rem; color: #fde68a; border-collapse: collapse;">
+          <tr><td style="padding: 3px 0;">$5 충전 → Tier 1</td><td style="text-align: right; color: #fca5a5;">분당 5장 (즉시)</td></tr>
+          <tr><td style="padding: 3px 0;">$50 누적 → Tier 2</td><td style="text-align: right; color: #fde68a;">분당 30장 (+ 7일 대기)</td></tr>
+          <tr><td style="padding: 3px 0;">$100 누적 → Tier 3</td><td style="text-align: right; color: #fde68a;">분당 100장 (+ 7일)</td></tr>
+          <tr><td style="padding: 3px 0;">$250 누적 → Tier 4</td><td style="text-align: right; color: #86efac;">분당 500장 (+ 14일)</td></tr>
+        </table>
+        <div style="margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px dashed rgba(239, 68, 68, 0.3); font-size: 0.72rem; color: #fca5a5;">
+          ⚠️ ChatGPT Plus/Pro 구독($20~$200/월)은 API와 <b>완전 별개</b>입니다. 구독해도 API Tier는 0.
+          gpt-image-1.5/2는 추가로 <b>Organization 인증</b> 필요(403 에러 시).
+        </div>
+      </div>
+      <div style="background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1.25rem;">
+        <div style="font-weight: 700; color: #86efac; font-size: 0.85rem; margin-bottom: 0.5rem;">💡 초보 사용자 추천 엔진</div>
+        <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #d1fae5; line-height: 1.7;">
+          <li><b>Nano Banana 2</b> (Gemini 3.1 Flash) — ₩97/장, Tier 한도 없음, 한글 네이티브</li>
+          <li><b>ImageFX</b> — Google 무료 (Google 로그인만)</li>
+          <li><b>DeepInfra FLUX-2</b> — ₩35/장, 빠름</li>
+        </ul>
+      </div>
+      <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+        <button type="button" id="openai-tier-warning-cancel" style="padding: 0.6rem 1rem; background: linear-gradient(135deg, #22c55e, #16a34a); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.85rem;">🍌 Nano Banana 2로 변경 (추천)</button>
+        <button type="button" id="openai-tier-warning-proceed" style="padding: 0.6rem 1rem; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem;">알겠습니다, OpenAI로 진행</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  modal.querySelector('#openai-tier-warning-proceed')?.addEventListener('click', () => {
+    try { localStorage.setItem('openaiTierWarningSeen', 'true'); } catch { /* ignore */ }
+    modal.remove();
+  });
+  modal.querySelector('#openai-tier-warning-cancel')?.addEventListener('click', () => {
+    // Nano Banana 2로 자동 변경
+    setGlobalImageSource('nano-banana-2');
+    const display = document.getElementById('current-image-source-display');
+    if (display) display.textContent = SOURCE_NAMES['nano-banana-2'];
+    // 카드 선택 상태도 nano-banana-2로 (다시 sub 모달 열렸을 때 반영)
+    document.querySelectorAll('.source-option').forEach(opt => {
+      const v = opt.getAttribute('data-value');
+      (opt as HTMLElement).style.borderColor = v === 'nano-banana-2' ? '#667eea' : '#e5e7eb';
+      (opt as HTMLElement).style.transform = v === 'nano-banana-2' ? 'scale(1.02)' : 'scale(1)';
+    });
+    try { (window as any).toastManager?.success?.('✅ Nano Banana 2로 변경됨 (₩97/장, Tier 제한 없음)'); } catch { /* ignore */ }
+    modal.remove();
+  });
+  // 배경 클릭 시 닫기 (변경 없음)
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+}
+
 export function openHeadingImageModal(): void {
   createHeadingImageModal();
   const modal = document.getElementById('heading-image-modal');
@@ -2518,6 +2682,21 @@ export function openHeadingImageModal(): void {
         const savedFallback = localStorage.getItem('localFolderFallback') || 'skip';
         const radio = document.querySelector(`input[name="local-folder-fallback"][value="${savedFallback}"]`) as HTMLInputElement;
         if (radio) radio.checked = true;
+        // [2026-05-26] Restore fallback engine + bind radio toggle for engine wrap
+        const fallbackEngineSel = document.getElementById('local-folder-fallback-engine') as HTMLSelectElement | null;
+        const savedEngine = localStorage.getItem('localFolderFallbackEngine') || 'nano-banana-pro';
+        if (fallbackEngineSel) fallbackEngineSel.value = savedEngine;
+        const engineWrap = document.getElementById('local-folder-fallback-engine-wrap');
+        if (engineWrap) engineWrap.style.display = savedFallback === 'ai-generate' ? 'block' : 'none';
+        document.querySelectorAll('input[name="local-folder-fallback"]').forEach(el => {
+          if ((el as any).__fallbackBound) return;
+          (el as any).__fallbackBound = true;
+          el.addEventListener('change', () => {
+            const w = document.getElementById('local-folder-fallback-engine-wrap');
+            const checked = document.querySelector('input[name="local-folder-fallback"]:checked') as HTMLInputElement | null;
+            if (w) w.style.display = checked?.value === 'ai-generate' ? 'block' : 'none';
+          });
+        });
       }
     }
 
@@ -2863,6 +3042,8 @@ export function initHeadingImageButton(): void {
 (window as any).getHeadingImageModeDisplayText = getHeadingImageModeDisplayText;
 (window as any).openHeadingImageModal = openHeadingImageModal;
 (window as any).closeHeadingImageModal = closeHeadingImageModal;
+// [2026-05-27 작업 17] 429 RPM 발생 시 다른 모듈에서 호출 가능하도록 export
+(window as any).showOpenAiTierWarningModal = showOpenAiTierWarningModal;
 
 console.log('[HeadingImageSettings] 📦 모듈 로드됨! (100점 버전)');
 

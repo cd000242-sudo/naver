@@ -327,10 +327,13 @@ export async function loadLocalFolderWithFallback(
   return { images: localImages, source: 'local', localCount: localImages.length, aiCount: 0 };
 }
 
-/** AI 폴백 시 안전한 provider 반환 (local-folder 자기참조 방지) */
+/** AI 폴백 시 안전한 provider 반환 (local-folder 자기참조 방지)
+ *  Priority: user-selected fallback engine > main image source > nano-banana-pro */
 function getSafeAiProvider(): string {
-  const aiProvider = localStorage.getItem('fullAutoImageSource') || 'nano-banana-pro';
-  return aiProvider === 'local-folder' ? 'nano-banana-pro' : aiProvider;
+  const explicit = localStorage.getItem('localFolderFallbackEngine');
+  const main = localStorage.getItem('fullAutoImageSource');
+  const picked = explicit || main || 'nano-banana-pro';
+  return picked === 'local-folder' ? 'nano-banana-pro' : picked;
 }
 
 // ═══════════════════════════════════════════════════════════════════

@@ -1028,7 +1028,13 @@ export async function generateContentFromKeywords(
       // ✅ 실시간 정보가 있으면 더 정확한 글 생성 지시
       useRealTimeInfo: !!crawledText,
       sourceInfo: crawledText ? `"${searchQuery}"에 대한 실시간 수집 정보 기반` : undefined,
-      customPrompt: (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim() || undefined,
+      // [2026-05-27] 통합 #custom-prompt-input — 모든 모드 공통, 모드별 localStorage 분리 저장.
+      //   백엔드 contentGenerator.ts L2164: customPrompt 있으면 모드 무관 사용자 프롬프트 분기 진입.
+      //   기존 #unified-custom-prompt도 fallback으로 유지 (호환성).
+      customPrompt: (
+        (document.getElementById('custom-prompt-input') as HTMLTextAreaElement)?.value?.trim()
+        || (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim()
+      ) || undefined,
       // ✅ [2026-02-09 v2] 연속발행 시 이전 제목 히스토리 전달 (제목 다양성 확보)
       previousTitles: ((window as any)._previousTitles as string[]) || undefined,
       // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 옵션 전달 (메인 프로세스에서 제목 조작 건너뛰기)

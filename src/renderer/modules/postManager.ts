@@ -452,6 +452,17 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
     const posts = loadGeneratedPosts();
     const title = structuredContent.selectedTitle || '';
 
+    // [2026-05-27 작업 19] 같은 글 흐름 강제 update — currentPostId가 살아 있고 그 ID로 posts에 존재하면
+    //   isUpdate=true로 변환. 5초 가드는 단계 사이 빈 시간이 길면 무력 (이미지 생성+발행 흐름은 분 단위)
+    //   reset 위치: contentGeneration.ts:794 / continuousPublishing.ts:4279 / renderer.ts:1401, 7235 (새 글 시작 시)
+    if (!isUpdate && !overrides?.forceNew && currentPostId) {
+      const existingByCurrentId = posts.find(p => p.id === currentPostId);
+      if (existingByCurrentId) {
+        console.log(`[saveGeneratedPost] 같은 글 흐름 (currentPostId=${currentPostId}) → 강제 update (중복 저장 방지)`);
+        isUpdate = true;
+      }
+    }
+
     // ✅ [v2.7.44] reviewer 권고 #2 — Math.abs/Math.max divide-by-zero 가드 강화
     //   기존(v2.7.40): newBodyLen=0 또는 existingBodyLen=0이면 similarLength=false → 가드 무력화
     //   수정: 본문 길이 양쪽 모두 30자 이상일 때만 비교, 그 외엔 제목+5초만으로 더블클릭 방지

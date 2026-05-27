@@ -37,7 +37,12 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     // v1.4.7: 24,447자, 875줄 → v1.4.12+: ~22,000자, ~810줄
     // 2026-05-21 v2.10.305: v2.10.297 박스/체크리스트 HTML 절대 금지 명세 추가로 24,510자(+63자). baseline 25K 재상향.
     //   줄 수는 744줄로 여전히 슬림화 유지.
-    expect(content.length).toBeLessThan(25000);
+    // 2026-05-27: 모바일 우선 작성 SECTION (mobile-first writing) 신규 추가 — 보고서 v2.0 Agent C
+    //   "캡션 150-250자 + 단락당 굵은 글씨 1번 + 세로 리스트 변환 등 6개 룰". 사용자 명시 요청.
+    //   현재 25,364자/760줄. baseline 25,500자/875줄 재상향.
+    // 2026-05-27 작업 10: SECTION 10 [STYLE OVERRIDE 우선] 강화 — TONE_PERSONAS 페르소나 어미 풀이
+    //   base 어미 로테이션에 가려지던 회귀 fix. 현재 25,561자. baseline 25,700자 재상향.
+    expect(content.length).toBeLessThan(25700);
     expect(lineCount).toBeLessThan(875);
   });
 
@@ -51,7 +56,12 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     //   FIRO AEO 즉답, FAQ 상향, R0-15/16 정정, 스크랩 CTA 강화로 ~3K자 의도적 증가.
     //   baseline을 28,500자로 재상향.
     // 2026-05-21 v2.10.305: 이전 세션 누적 증가분(36,385자) 측정 — 의도된 보강 누적. baseline 37,000자 재상향.
-    expect(content.length).toBeLessThan(37000);
+    // 2026-05-27: SECTION 4.5 모바일 우선 작성 강제 신규 (보고서 v2.0 Agent C 보강 — 캡션 150-250자,
+    //   단락당 굵은 글씨 1번, 가로 표 → 세로 번호 리스트 변환 등 6개 룰). 사용자 명시 요청.
+    //   현재 37,129자. baseline 37,500자 재상향.
+    // 2026-05-27 작업 10: SECTION 9 [STYLE OVERRIDE 우선] + R0-5b + 체크리스트 강화 —
+    //   페르소나 어미 풀이 base 카탈로그에 가려지던 회귀 fix. 현재 37,499자. baseline 37,700자 재상향.
+    expect(content.length).toBeLessThan(37700);
   });
 
   it('모든 prompt 파일 합계가 v1.4.7 대비 슬림화됨', () => {

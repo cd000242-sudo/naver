@@ -669,8 +669,32 @@ export function initHeadingImageGeneration(): void {
       this.logArea = panel.querySelector('#live-preview-log');
       this.progressText = panel.querySelector('#live-preview-title');
 
+      // [2026-05-27 BUGFIX] 닫기 시 진행 중인 모든 이미지 생성 버튼 즉시 reset
+      //   기존: hide()만 호출 → 메인 버튼 disabled 유지 → 사용자가 다시 못 누름 ("취소 안 됨")
+      //   백그라운드 IPC는 abort 못 하지만 UI는 즉시 풀어줘 사용자가 새 시도 가능
+      const closeAndReset = () => {
+        try {
+          const mainBtn = document.getElementById('generate-images-btn') as HTMLButtonElement | null;
+          if (mainBtn) {
+            mainBtn.disabled = false;
+            mainBtn.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>프롬프트대로 이미지 생성하기</span>';
+          }
+          const fillBtn = document.getElementById('generate-remaining-images-btn') as HTMLButtonElement | null;
+          if (fillBtn) {
+            fillBtn.disabled = false;
+            fillBtn.innerHTML = '<span style="font-size: 1.25rem;">✨</span><span>비어있는 소제목만 이미지 생성</span>';
+          }
+          const collectBtn = document.getElementById('collect-remaining-images-btn') as HTMLButtonElement | null;
+          if (collectBtn) {
+            collectBtn.disabled = false;
+            collectBtn.innerHTML = '<span style="font-size: 1.25rem;">🔍</span><span>비어있는 소제목만 이미지 수집</span>';
+          }
+        } catch { /* ignore button reset errors */ }
+        this.hide();
+      };
+
       // 닫기 버튼 이벤트
-      panel.querySelector('#live-preview-close')?.addEventListener('click', () => this.hide());
+      panel.querySelector('#live-preview-close')?.addEventListener('click', closeAndReset);
 
       // ✅ [2026-02-28] 이미지 폴더 열기 버튼
       panel.querySelector('#btn-open-images-folder')?.addEventListener('click', async () => {
@@ -698,8 +722,9 @@ export function initHeadingImageGeneration(): void {
       // ESC 키로 닫기 — v2.10.82 LEAK FIX: handler를 this._escHandler에 보관해
       //   hide()가 어떤 경로로 불려도 cleanup 보장. 이전엔 닫기 버튼 → hide() 시
       //   keydown listener가 document에 남아 누적.
+      // [2026-05-27 BUGFIX] ESC도 동일하게 버튼 reset + 닫기
       const escHandler = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') this.hide();
+        if (e.key === 'Escape') closeAndReset();
       };
       this._escHandler = escHandler;
       document.addEventListener('keydown', escHandler);
@@ -829,7 +854,12 @@ export function initHeadingImageGeneration(): void {
       const target = (e.target as HTMLElement).closest('#generate-images-btn') as HTMLButtonElement | null;
       if (!target) return;
       const generateImagesBtnMain = target;
+      // [2026-05-27 BUGFIX] 새 시도 시작 - 이전 진행 로그 초기화 + 디버그 헤딩 수 출력
+      const logEl = document.getElementById('images-log-output');
+      if (logEl) logEl.innerHTML = '';
       const headings = getCurrentImageHeadings();
+      console.log(`[ImageGen] 🔍 [디버그] 헤딩 ${headings.length}개 감지 (DOM .prompt-item 중 promptValue 있는 것)`);
+      appendLog(`🔍 [디버그] 헤딩 ${headings.length}개 감지 — 1개로 줄어들었다면 이전 시도가 prompt-text를 비웠음`, 'images-log-output');
       if (headings.length === 0) {
         alert('먼저 소제목을 분석해주세요.');
         return;
@@ -853,15 +883,44 @@ export function initHeadingImageGeneration(): void {
             const loginResult = await (window as any).api.checkImageFxGoogleLogin();
             if (!loginResult.loggedIn) {
               appendLog(`❌ ${loginResult.message}`, 'images-log-output');
-              alert(`❌ ImageFX 사용을 위해 Google 로그인이 필요합니다.\n\n${loginResult.message}`);
+              alert(`❌ ImageFX 사용을 위해 Google 로그인이 필요합니다.\n\n${loginResult.message}\n\n👉 메인 풀오토 이미지 설정 모달 → "🔗 Google 계정 연동" 버튼 클릭 후 로그인하세요.`);
               generateImagesBtnMain.disabled = false;
               generateImagesBtnMain.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>프롬프트대로 이미지 생성하기</span>';
               return;
             }
             appendLog(`✅ Google 로그인 확인 완료: ${loginResult.userName || 'Google 사용자'}`, 'images-log-output');
           } catch (loginErr: any) {
+            // [2026-05-27 작업 18] 로그인 확인 IPC 자체 실패 시 명확히 중단 (이전엔 "계속 시도"로 사용자 혼란)
             console.error('[ImageGen] Google 로그인 확인 실패:', loginErr);
-            appendLog(`⚠️ Google 로그인 확인 실패: ${loginErr.message} — 생성을 계속 시도합니다.`, 'images-log-output');
+            appendLog(`❌ Google 로그인 확인 IPC 실패: ${loginErr.message}`, 'images-log-output');
+            alert(`❌ ImageFX 로그인 상태를 확인할 수 없습니다.\n\n원인: ${loginErr.message}\n\n👉 이미지 설정 모달 → "🔗 Google 계정 연동" 버튼으로 재로그인하거나, 다른 엔진(나노바나나/DeepInfra)을 선택하세요.`);
+            generateImagesBtnMain.disabled = false;
+            generateImagesBtnMain.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>프롬프트대로 이미지 생성하기</span>';
+            return;
+          }
+        }
+
+        // [2026-05-27 작업 18] Flow 사전 연결/로그인 확인 — Google AI Pro 무료 쿼터 사용 시 labs.google 로그인 필요
+        if (imageSource === 'flow') {
+          appendLog('🔍 Flow 연결 확인 중... (Google AI Pro 무료 쿼터 / labs.google 세션)', 'images-log-output');
+          try {
+            const flowResult = await (window as any).api.testFlowConnection();
+            if (!flowResult.ok) {
+              appendLog(`❌ ${flowResult.message}`, 'images-log-output');
+              alert(`❌ Flow 사용을 위해 Google 로그인이 필요합니다.\n\n원인: ${flowResult.message}\n\nFlow는 labs.google의 Google AI Pro 구독자 무료 쿼터를 사용합니다.\n\n👉 이미지 설정 모달 → "🔗 Google 계정 연동" 버튼 클릭 → labs.google.com 로그인 진행하세요.\n\n로그인 안 했다면 다른 엔진(나노바나나 2 / ImageFX / DeepInfra)을 선택하세요.`);
+              generateImagesBtnMain.disabled = false;
+              generateImagesBtnMain.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>프롬프트대로 이미지 생성하기</span>';
+              return;
+            }
+            const userInfoStr = flowResult.userInfo?.email ? `: ${flowResult.userInfo.email}` : '';
+            appendLog(`✅ Flow 연결 확인 완료${userInfoStr}`, 'images-log-output');
+          } catch (flowErr: any) {
+            console.error('[ImageGen] Flow 연결 확인 실패:', flowErr);
+            appendLog(`❌ Flow 연결 확인 IPC 실패: ${flowErr.message}`, 'images-log-output');
+            alert(`❌ Flow 연결 상태를 확인할 수 없습니다.\n\n원인: ${flowErr.message}\n\n👉 이미지 설정 모달 → "🔗 Google 계정 연동" 버튼으로 재로그인하거나, 다른 엔진(나노바나나 2 / DeepInfra)을 선택하세요.`);
+            generateImagesBtnMain.disabled = false;
+            generateImagesBtnMain.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>프롬프트대로 이미지 생성하기</span>';
+            return;
           }
         }
 
@@ -1044,8 +1103,11 @@ export function initHeadingImageGeneration(): void {
         }
 
         // ✅ [2026-01-18] nano-banana-pro/pollinations: 배치 요청으로 내부 병렬 처리 활성화 (속도 2-3배 향상)
-        if (imageSource === 'nano-banana-pro' || imageSource === 'pollinations') {
-          appendLog(`⚡ ${imageSource === 'nano-banana-pro' ? '나노 바나나 프로' : 'Pollinations'} 배치 병렬 처리 시작!`, 'images-log-output');
+        // [2026-05-27 BUGFIX] cost-risk provider 전체로 확장 — provider별 lock(runUiActionLocked) 충돌 회피.
+        //   기존: nano-banana-pro만 batch. nano-banana-2 등은 else로 빠져 개별 호출 → 첫 1개만 lock 획득, 나머지 4개 "이미 진행 중" reject.
+        //   현재: nano-banana(3종)/leonardoai/openai-image/dall-e-3 모두 batch single IPC → lock 1번만 사용.
+        if (isCostRiskImageProvider(imageSource) || imageSource === 'pollinations') {
+          appendLog(`⚡ ${imageSource} 배치 병렬 처리 시작! (cost-risk lock 회피)`, 'images-log-output');
           liveImagePreview.addLog(`⚡ 배치 병렬 처리로 빠른 생성!`);
 
           // ✅ [2026-02-28 FIX] 썸네일 항목도 배치에 포함 (전용 생성 스킵됨 → 배치에서 함께 생성)
@@ -1477,6 +1539,28 @@ export function initHeadingImageGeneration(): void {
               } else {
                 throw new Error(imageResult.message || 'ImageFX 이미지 생성 실패. Google 로그인 상태를 확인해주세요.');
               }
+            } else if (imageSource === 'flow') {
+              // [2026-05-27] Flow (Google Labs Nano Banana 2 무료 쿼터) — 본문 분기 신규
+              console.log(`[ImageGen] 🍌 Flow (Google Labs Nano Banana 2 무료) 이미지 생성 시작`);
+              const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
+              const imageResult = await generateImagesWithCostSafety({
+                provider: 'flow',
+                items: [{
+                  heading: headingForImage,
+                  prompt: promptForImage,
+                  englishPrompt: promptForImage,
+                  isThumbnail: isThumbnailSection,
+                  allowText: allowText,
+                  ...ref,
+                }],
+                postTitle: blogTitle,
+                isFullAuto: true,
+              });
+              if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
+                imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
+              } else {
+                throw new Error(imageResult.message || 'Flow 이미지 생성 실패. Google 로그인 + AI Pro 쿼터 확인 필요.');
+              }
             } else if (imageSource === 'naver-search' || imageSource === 'naver') {
               // ✅ 네이버 이미지 검색: 사용자가 명시적으로 선택한 경우에만 사용
               imageUrl = await searchNaverImage(promptForImage);
@@ -1635,6 +1719,9 @@ export function initHeadingImageGeneration(): void {
   const generateRemainingImagesBtn = document.getElementById('generate-remaining-images-btn') as HTMLButtonElement;
   if (generateRemainingImagesBtn) {
     generateRemainingImagesBtn.addEventListener('click', async () => {
+      // [2026-05-27 BUGFIX] 새 시도 시 진행 로그 초기화
+      const logEl = document.getElementById('images-log-output');
+      if (logEl) logEl.innerHTML = '';
       const headings = getCurrentImageHeadings();
       if (headings.length === 0) {
         alert('먼저 소제목을 분석해주세요.');
@@ -1756,6 +1843,9 @@ export function initHeadingImageGeneration(): void {
   const collectRemainingImagesBtn = document.getElementById('collect-remaining-images-btn') as HTMLButtonElement;
   if (collectRemainingImagesBtn) {
     collectRemainingImagesBtn.addEventListener('click', async () => {
+      // [2026-05-27 BUGFIX] 새 시도 시 진행 로그 초기화
+      const logEl = document.getElementById('images-log-output');
+      if (logEl) logEl.innerHTML = '';
       const headings = getCurrentImageHeadings();
       if (headings.length === 0) {
         if ((window as any).toastManager) (window as any).toastManager.warning('먼저 소제목을 분석해주세요.');

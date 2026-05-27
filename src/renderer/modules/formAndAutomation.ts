@@ -356,9 +356,12 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
   }
 
   // ✅ 사용자 정의 프롬프트 수집
-  const customPromptInput = document.getElementById('unified-custom-prompt') as HTMLTextAreaElement;
-  if (customPromptInput?.value.trim()) {
-    (payload as any).customPrompt = customPromptInput.value.trim();
+  // [2026-05-27] 통합 #custom-prompt-input 우선 + #unified-custom-prompt fallback (작업 12 통합)
+  const customPromptVal = ((document.getElementById('custom-prompt-input') as HTMLTextAreaElement)?.value?.trim()
+    || (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim()
+    || '');
+  if (customPromptVal) {
+    (payload as any).customPrompt = customPromptVal;
   }
 
   // ✅ [Add] 제휴마케팅 링크 및 비디오 옵션 수집

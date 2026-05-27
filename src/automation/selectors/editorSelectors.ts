@@ -23,6 +23,9 @@ export type EditorSelectorKey =
   | 'fontSizeButton'
   | 'quotationButton'
   | 'quotationPopup'
+  | 'viewModeTablet'
+  | 'alignDropdownButton'
+  | 'alignCenterButton'
   | 'popupLayer'
   | 'autocompleteLayer'
   | 'stickerLayer'
@@ -151,6 +154,35 @@ export const EDITOR_SELECTORS: SelectorMap<EditorSelectorKey> = {
     '.se-popup-quotation',
     ['.se-toolbar-layer-quotation', '.se-popup-layer'],
     '인용구 스타일 팝업',
+  ),
+
+  // --- 뷰 모드 / 정렬 (v2.10.x 모바일 친화 자동화) ---
+  viewModeTablet: entry(
+    'button.se-util-button-device-tablet',
+    [
+      'button[data-log="flbbtn.vdesktop"][class*="tablet"]',
+      'button.__mode-button.se-util-button-device-tablet',
+      'button[title*="테블릿"]',
+    ],
+    '테블릿 화면 보기 모드 버튼',
+  ),
+  alignDropdownButton: entry(
+    'button[data-name="align-drop-down-with-justify"]',
+    [
+      'button.se-align-center-toolbar-button',
+      'button[data-log="prt.align"]',
+      'button.se-property-toolbar-drop-down-button[data-name*="align"]',
+    ],
+    '정렬 드롭다운 버튼',
+  ),
+  alignCenterButton: entry(
+    'button.se-toolbar-option-align-center-button',
+    [
+      'button[data-value="center"][data-name="align-drop-down-with-justify"]',
+      'button[data-log="prt.center"]',
+      'button.se-toolbar-option-icon-button[data-value="center"]',
+    ],
+    '가운데 정렬 옵션 (드롭다운 펼친 후)',
   ),
 
   // --- 팝업 / 레이어 ---

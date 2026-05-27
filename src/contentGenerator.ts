@@ -678,6 +678,12 @@ ${mode === 'homefeed' && subKeywords ? `
 → "자연스럽게 녹이세요"가 아니라 "반드시 드러내세요"입니다.
 → 단, 같은 단어를 2번 쓰면 0점! 나열식 금지!
 ` : ''}
+${mode === 'seo' && subKeywords ? `
+💡 [권장] 서브키워드 중 1개를 제목에 자연스럽게 포함하세요.
+→ 검색 의도 명확화 + AI 브리핑 인용 정확도 향상.
+→ 단, 2개 이상 나열은 -30점 (base.prompt 0점 표 "억지 나열" 규칙).
+→ 메인 키워드는 앞 3글자, 서브키워드는 문장 중간/후미 권장.
+` : ''}
 ${source.customPrompt ? `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💡 [사용자 추가 지시사항 - 최우선 반영]
@@ -1536,7 +1542,8 @@ export interface ContentSource {
   personalExperience?: string;
   targetTraffic?: TargetTrafficStrategy;
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
-  toneStyle?: 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'; // ✅ 글 톤/스타일 (10개 전체)
+  toneStyle?: 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'
+    | 'sincere_exposure' | 'data_verified' | 'text_hip' | 'mentor' | 'self_interview'; // ✅ [작업 14] 12개 활성 + 3개 deprecated(casual/formal/humorous, UI 미노출)
   contentMode?: 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'custom' | 'business'; // ✅ [v1.4.20] business 추가
   isFullAuto?: boolean; // ✅ 완전자동 발행 모드 (자동화 보조 프롬프트 적용)
   isReviewType?: boolean; // ✅ 리뷰형 글 (구매전환 유도)
@@ -1843,7 +1850,8 @@ function extractKeywordsFromContent(content: string): string[] {
 }
 
 // ✅ 네이버 블로그 전체 카테고리별 최적 글톤 자동 매칭
-type AutoTone = 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info';
+type AutoTone = 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'
+  | 'sincere_exposure' | 'data_verified' | 'text_hip' | 'mentor' | 'self_interview';
 
 /**
  * [v1.7.0] 노출 모드 × 카테고리 2차원 톤 매트릭스
@@ -1896,20 +1904,23 @@ function getAutoToneByCategory(category: string | undefined, mode?: string): Aut
   // [v1.7.0] SEO 모드 전용 오버라이드 (정보 전달 우선)
   // ═══════════════════════════════════════════════════════════════
   if (m === 'seo' || m === 'traffic-hunter') {
-    // 건강·의학·교육 → calm_info (정확·안정)
-    if (/건강|의학|의료|병원|다이어트|영양|약|치료|증상|교육|학문|학습|공부|시험|자격증/.test(cat)) return 'calm_info';
-    // IT·자동차·가전 → expert_review (체계적 리뷰)
-    if (/IT|컴퓨터|노트북|스마트폰|테크|기술|자동차|차|카|SUV|세단|전기차|가전/.test(cat)) return 'expert_review';
-    // 비즈니스·경제 → professional
-    if (/비즈니스|경제|금융|재테크|투자|주식|부동산|창업|마케팅|사회|정치|시사|뉴스/.test(cat)) return 'professional';
-    // 패션·뷰티·상품 → expert_review (리뷰형 상위 노출)
-    if (/패션|미용|뷰티|화장품|상품|리뷰|후기|언박싱|구매/.test(cat)) return 'expert_review';
-    // 맛집 → calm_info (TOP N 순위형)
+    // [작업 14] 보고서 매핑 — 건강·다이어트·교육 → mentor (단계 가이드 + 동기부여)
+    if (/건강|다이어트|영양|약|치료|증상|운동|헬스|요가/.test(cat)) return 'mentor';
+    if (/교육|학문|학습|공부|시험|자격증|지식|교양/.test(cat)) return 'mentor';
+    // [작업 14] 의학·법률·정책 → calm_info (정확·안정)
+    if (/의학|의료|병원|법률|정책|제도|복지|행정/.test(cat)) return 'calm_info';
+    // [작업 14] 경제·재테크·자동차·테크 → data_verified (수치 광기)
+    if (/경제|금융|재테크|투자|주식|부동산|환율|세금|회계/.test(cat)) return 'data_verified';
+    if (/자동차|차|카|SUV|세단|전기차|IT|컴퓨터|노트북|스마트폰|테크|기술|가전/.test(cat)) return 'data_verified';
+    // 비즈니스·창업·마케팅 → professional (칼럼니스트)
+    if (/비즈니스|창업|마케팅|사회|정치|시사|뉴스/.test(cat)) return 'professional';
+    // [작업 14] 패션·뷰티·상품·리빙 → sincere_exposure (안티 광고 폭로)
+    if (/패션|미용|뷰티|화장품|상품|리뷰|후기|언박싱|구매|리빙|인테리어|가구/.test(cat)) return 'sincere_exposure';
+    // 맛집·여행 → calm_info (정보·코스 안내)
     if (/맛집|카페|음식점|레스토랑|디저트|브런치/.test(cat)) return 'calm_info';
-    // 여행 → calm_info (정보·코스 안내)
     if (/국내|세계|해외|여행|제주|부산|강원|경주|속초|유럽|미국|일본|동남아/.test(cat)) return 'calm_info';
-    // 요리 → calm_info (레시피 가이드)
-    if (/요리|레시피|음식|밥|반찬|베이킹|쿠킹/.test(cat)) return 'calm_info';
+    // 요리 → mentor (레시피 단계 가이드)
+    if (/요리|레시피|음식|밥|반찬|베이킹|쿠킹/.test(cat)) return 'mentor';
     // 육아·반려 → calm_info (정보성)
     if (/육아|결혼|아이|출산|임신|반려|강아지|고양이|펫/.test(cat)) return 'calm_info';
     // 영화·음악·드라마 → calm_info (리뷰/해설형)
@@ -2154,8 +2165,11 @@ export function buildModeBasedPrompt(
   const contentMode = (source.contentMode as PromptMode) || 'seo';
 
   // ✅ [2026-03-16 v2] custom 모드: 사용자 프롬프트 최우선 + 품질 가드레일 동시 적용
+  // [2026-05-27] 모든 모드(SEO/홈판/쇼핑/업체/custom)에서 개인 프롬프트 입력 시 동일 분기 — 사용자 프롬프트 100% 반영,
+  //   기존 모드별 base 프롬프트 완전 대체. productInfo/businessInfo는 user 메시지에 자동 전달되어 보존.
   let systemPromptResult: string;
-  if (contentMode === 'custom' && source.customPrompt && source.customPrompt.trim()) {
+  const isUserPromptMode = !!(source.customPrompt && source.customPrompt.trim());
+  if (isUserPromptMode) {
     // 사용자정의 모드: 사용자 프롬프트를 최우선 지시사항으로, SEO/홈판급 품질 규칙을 가드레일로 적용
     const customTone = toneStyle || 'friendly';
     systemPromptResult = `당신은 네이버 블로그 일방문자 10,000명 이상의 전문 블로거입니다.
@@ -2166,7 +2180,7 @@ export function buildModeBasedPrompt(
 🎯 [최우선] 사용자 요청 프롬프트
 ═══════════════════════════════════════════════════════════
 
-${source.customPrompt.trim()}
+${source.customPrompt!.trim()}
 
 ═══════════════════════════════════════════════════════════
 🛡️ [품질 가드레일] 핵심 규칙 (사용자 요청과 충돌하지 않는 한 준수)
@@ -2241,7 +2255,9 @@ ${source.customPrompt.trim()}
 □ 거짓/지어낸 수치가 없는가?
 □ 모바일에서 읽기 편한 문단 구조인가?
 □ 순수 JSON만 출력했는가?`;
-    console.log(`[PromptBuilder] ✅ 사용자정의 모드 v2: 커스텀 프롬프트 + 품질 가드레일 적용 (${source.customPrompt.length}자)`);
+    const modeLabels: Record<string, string> = { custom: '사용자정의', affiliate: '쇼핑커넥트', seo: 'SEO', homefeed: '홈판', business: '업체홍보' };
+    const modeLabel = modeLabels[contentMode] || contentMode;
+    console.log(`[PromptBuilder] ✅ ${modeLabel} 모드 + 개인 프롬프트: 사용자 프롬프트 100% 반영 + 품질 가드레일 (${source.customPrompt!.length}자)`);
   } else if (contentMode === 'affiliate') {
     // 🛒 [쇼핑커넥트 2026] .prompt 파일 모듈화 + articleType 분기
     // shopping_review → affiliate/shopping_review.prompt (사용후기)
