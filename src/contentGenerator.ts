@@ -72,7 +72,9 @@ import {
   applyOrdinalHeadingMarkerFix,
   removeEmojisFromContent,
   normalizeContentLineBreaks,
-  ensureContentParagraphBreaks,
+  // [v2.10.391] ensureContentParagraphBreaks 사후처리 OFF — AI 프롬프트 모바일 룰에만 의존
+  // 영문 약어(Mr./Dr.)·이니셜·줄임표·소수점에서 어색하게 잘라내는 위험 제거.
+  // 함수 자체는 contentBodyTransforms.ts에 보존 (롤백 대비).
   limitRegexOccurrences,
   truncateHeadingTitles,
 } from './contentBodyTransforms';
@@ -1174,8 +1176,9 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   // ✅ [2026-03-14] 연속 줄바꿈 정리 (AI가 생성한 \n\n\n → \n\n, 본문 내 이중 빈 줄 방지)
   finalContent = normalizeContentLineBreaks(finalContent);
 
-  // ✅ [2026-03-16] AI가 \n\n 문단 구분을 안 넣은 경우 자동 삽입 (타이핑 자연스러움 보장)
-  finalContent = ensureContentParagraphBreaks(finalContent);
+  // [v2.10.391] 사후 문단 분할 OFF — AI 프롬프트 모바일 룰로 일원화.
+  // 영문 약어/이니셜/줄임표/소수점에서 어색하게 잘리는 회귀 차단.
+  // finalContent = ensureContentParagraphBreaks(finalContent);
 
   // ✅ 소제목 길이 제한 (60자 이내로 완화 - 너무 짧으면 정보 전달력 하락)
   finalContent = truncateHeadingTitles(finalContent, 60);
