@@ -42,7 +42,9 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     //   현재 25,364자/760줄. baseline 25,500자/875줄 재상향.
     // 2026-05-27 작업 10: SECTION 10 [STYLE OVERRIDE 우선] 강화 — TONE_PERSONAS 페르소나 어미 풀이
     //   base 어미 로테이션에 가려지던 회귀 fix. 현재 25,561자. baseline 25,700자 재상향.
-    expect(content.length).toBeLessThan(25700);
+    // 2026-05-28 v2.10.392: 의미 응집(semantic cohesion) 블록 신규 추가 — 사용자 명시 요청
+    //   ("말이 되게끔 문맥 맥락에 맞게끔"). 단락 = 의미 단위 5줄 블록. baseline 26,000자 재상향.
+    expect(content.length).toBeLessThan(26000);
     expect(lineCount).toBeLessThan(875);
   });
 
@@ -95,7 +97,9 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     // 업데이트 신호, 스크랩 CTA, AEO 즉답, AI 탭 친화 프롬프트 신규 파일로 ~5K자 증가.
     // baseline을 250K로 재상향.
     // 2026-05-21 v2.10.305: v2.10.297 HTML sanitize 강화 + 이전 누적 증가(268,484자) — baseline 275K로 재상향.
-    expect(totalChars).toBeLessThan(275000);
+    // 2026-05-28 v2.10.392: 의미 응집(semantic cohesion) 블록 4개 prompt 추가 (SEO/homefeed/business/chain).
+    //   사용자 명시 요청. baseline 276K로 재상향.
+    expect(totalChars).toBeLessThan(276000);
   });
 });
 
