@@ -113,9 +113,10 @@ export function normalizeContentLineBreaks(content: StructuredContent): Structur
 }
 
 // ✅ [2026-03-16] AI가 \n\n 문단 구분을 빠뜨린 경우 자동 삽입
-// 300자 이상인데 \n\n이 없으면, 문장 종결(.!?) 뒤를 기준으로 2~4문장마다 문단 분리
+// [v2.10.389] 모바일 친화 강화 — 임계값 300→180자, 문장 묶음 2~4→1~2
+// 모바일 화면 폭(약 360px)에서 한 단락이 답답하지 않도록 짧은 단위로 분리.
 function ensureParagraphBreaks(text: string): string {
-  if (!text || text.length < 300) return text;
+  if (!text || text.length < 180) return text;
 
   // 이미 \n\n이 있으면 각 문단만 개별 검사
   if (text.includes('\n\n')) {
@@ -139,10 +140,10 @@ function ensureParagraphBreaks(text: string): string {
     return text;
   }
 
-  // 2~4문장마다 \n\n 삽입 (랜덤화하여 자연스럽게)
+  // [v2.10.389] 1~2문장마다 \n\n 삽입 (모바일 친화 — 한 단락 짧게)
   const result: string[] = [];
   let current: string[] = [];
-  const breakAfter = () => Math.floor(Math.random() * 3) + 2; // 2~4문장
+  const breakAfter = () => Math.floor(Math.random() * 2) + 1; // 1~2문장
   let nextBreak = breakAfter();
 
   for (let i = 0; i < sentences.length; i++) {
