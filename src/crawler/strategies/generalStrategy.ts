@@ -1,5 +1,5 @@
 // src/crawler/strategies/generalStrategy.ts
-import { launchBrowser, createOptimizedPage } from '../utils/browserFactory.js';
+import { launchAdaptedBrowser, createOptimizedAdaptedPage } from '../../automation/browserAdapter.js';
 import { TEXT_SELECTORS } from '../config/selectors.js';
 
 export interface GeneralCrawlResult {
@@ -17,8 +17,8 @@ export async function crawlGeneralPage(url: string): Promise<GeneralCrawlResult>
     let browser;
     try {
         console.log(`[General Crawler] 브라우저 실행 중... Target: ${url}`);
-        browser = await launchBrowser();
-        const page = await createOptimizedPage(browser);
+        browser = await launchAdaptedBrowser();
+        const page = await createOptimizedAdaptedPage(browser);
 
         // 페이지 이동 (타임아웃 30초)
         await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });

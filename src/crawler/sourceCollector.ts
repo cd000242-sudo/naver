@@ -96,6 +96,7 @@ export { crawlShoppingSite } from './strategies/shoppingStrategy.js';
 export { crawlGeneralPage } from './strategies/generalStrategy.js';
 export { tryNaverApiFirst, searchNaverImages } from './strategies/naverStrategy.js';
 export { normalizeImageUrl, isUIGarbage, deduplicateImages } from './utils/imageUtils.js';
-export { launchBrowser, createOptimizedPage } from './utils/browserFactory.js';
+// SPEC-MIGRATION-2026 M2 P3: launchBrowser/createOptimizedPage (browserFactory) re-export 제거 — Playwright adapter로 통일.
+// 신규 호출자는 `src/automation/browserAdapter.ts` 의 launchAdaptedBrowser / createOptimizedAdaptedPage 를 사용한다.
 export { cleanText, stripHtmlTags, extractContent } from './utils/textUtils.js';
 export { SHOPPING_SELECTORS, TEXT_SELECTORS } from './config/selectors.js';

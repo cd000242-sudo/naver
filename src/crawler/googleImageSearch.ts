@@ -5,7 +5,7 @@
  * - 뉴스/워터마크 이미지 자동 필터링
  */
 
-import { launchBrowser, createOptimizedPage } from './utils/browserFactory.js';
+import { launchAdaptedBrowser, createOptimizedAdaptedPage } from '../automation/browserAdapter.js';
 import { isUIGarbage, deduplicateImages, normalizeImageUrl } from './utils/imageUtils.js';
 import { isNewsOrWatermarkedImage } from './utils/imageUtils.js';
 import { filterImagesByRelevance } from './imageRelevanceScorer.js';
@@ -35,9 +35,9 @@ export async function searchGoogleImages(
     try {
         console.log(`[GoogleImageSearch] 🔍 구글 이미지 검색 시작: "${query}" (최대 ${maxImages}개)`);
 
-        // ✅ 전용 세션 시작 (쇼핑몰 크롤링과 동일한 패턴)
-        browser = await launchBrowser();
-        const page = await createOptimizedPage(browser);
+        // ✅ 전용 세션 시작 (Playwright + stealth — SPEC-MIGRATION-2026 M2 P3)
+        browser = await launchAdaptedBrowser();
+        const page = await createOptimizedAdaptedPage(browser);
 
         // ✅ 구글 이미지 검색 URL 구성
         // hl=ko: 한국어 결과 우선
@@ -402,7 +402,7 @@ export async function searchImagesForHeadings(
         // 구글은 하나의 전용 세션으로 여러 검색 수행 (세션 재사용 최적화)
         let browser;
         try {
-            browser = await launchBrowser();
+            browser = await launchAdaptedBrowser();
 
             for (const heading of missingHeadings) {
                 // ✅ [v2.7.97] 구글 폴백도 동일 폴백 체인 (최적화 → 넓은 → raw)
@@ -414,7 +414,7 @@ export async function searchImagesForHeadings(
                     // ✅ [v2.10.30] page.close()를 try → finally로 이관 (예외 시 page leak 차단)
                     let page: any = null;
                     try {
-                        page = await createOptimizedPage(browser);
+                        page = await createOptimizedAdaptedPage(browser);
 
                         const encodedQuery = encodeURIComponent(searchQuery);
                         const searchUrl = `https://www.google.com/search?q=${encodedQuery}&tbm=isch&hl=ko&safe=active&tbs=isz:m`;
@@ -543,35 +543,16 @@ export async function crawlImagesFromUrl(url: string): Promise<string[]> {
         if (targetUrl !== url) {
             console.log(`[ImageSearch][crawlUrl] 🔄 네이버 블로그 URL 정규화: ${url.slice(0, 60)} → PostView`);
         }
-        console.log(`[ImageSearch][crawlUrl] 🌐 Puppeteer 크롬 창 띄우는 중: ${targetUrl.slice(0, 80)}`);
+        console.log(`[ImageSearch][crawlUrl] 🌐 Playwright 크롬 창 띄우는 중: ${targetUrl.slice(0, 80)}`);
         // ✅ [v2.7.84] headless: false — 사용자가 크롤링 진행을 화면에서 직접 볼 수 있음
-        browser = await launchBrowser({ headless: false });
-        // ✅ [v2.7.85] Puppeteer는 launch 시 about:blank 첫 페이지를 자동 생성 → 그것을 재사용
-        const existingPages = await browser.pages();
-        const page = existingPages[0] || await browser.newPage();
-        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
-        await page.evaluateOnNewDocument(() => {
-            Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
-            // @ts-ignore
-            window.chrome = { runtime: {} };
-        });
-        await page.setRequestInterception(true);
-        page.on('request', (req) => {
-            const type = req.resourceType();
-            const u = req.url();
-            if (['font', 'media'].includes(type) ||
-                u.includes('google-analytics') ||
-                u.includes('facebook') ||
-                u.includes('tracking')) {
-                req.abort();
-            } else {
-                req.continue();
-            }
-        });
-        await page.setViewport({ width: 1280, height: 800 });
+        // SPEC-MIGRATION-2026 M2 P3 — userAgent / webdriver hidden / resource block 은 adapter context 레벨에서 처리됨.
+        browser = await launchAdaptedBrowser({ headless: false });
+        const page = await createOptimizedAdaptedPage(browser);
+        // 크롤링 전용 좁은 viewport (lazy-load 트리거 + 모바일 레이아웃 우선)
+        await page.setViewportSize({ width: 1280, height: 800 });
 
-        // Puppeteer는 networkidle0/networkidle2를 waitUntil로 받음 (race 불필요)
-        await page.goto(targetUrl, { waitUntil: 'networkidle2', timeout: 20000 }).catch(async () => {
+        // Playwright waitUntil은 'networkidle' 단일 옵션 (Puppeteer networkidle2 대응)
+        await page.goto(targetUrl, { waitUntil: 'networkidle', timeout: 20000 }).catch(async () => {
             await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => {});
         });
         await new Promise(r => setTimeout(r, 1500));
