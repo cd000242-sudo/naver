@@ -5486,11 +5486,11 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             const expMs = Math.min(baseMs * Math.pow(2, modelRetryCount - 1), 30000);
             const jitterMs = Math.floor(Math.random() * 1000);
             const waitMs = expMs + jitterMs;
+            // [2026-05-28 사용자 요청] Gemini 서버 일시 장애 UI 안내 비표시.
+            //   재시도는 그대로 진행하되 사용자 UI 로그에는 노출하지 않음 (서버 안정화로 안내 빈도 감소).
+            //   디버그용 console.warn은 유지 — 로그 분석 시 추적 가능.
             const logMsg = `🔧 구글 서버 일시 장애 — ${Math.round(waitMs/1000)}초 후 재시도합니다. (${modelRetryCount}/${perModelMaxRetries})`;
             console.warn(`[Gemini] ${logMsg}`);
-            if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
-              (window as any).appendLog(logMsg);
-            }
             await new Promise(resolve => setTimeout(resolve, waitMs));
             continue;
           }
