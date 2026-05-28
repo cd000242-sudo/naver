@@ -100,6 +100,12 @@
                     <span style="font-size: 1.25rem;">📚</span>
                     <span>가이드/분석 모음</span>
                 </button>
+                <!-- ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Quick Mode entry -->
+                <button type="button" id="quick-mode-photo-link" class="floating-btn"
+                    style="background: linear-gradient(135deg, #059669, #047857); color: white; border: none; padding: 1rem 1.25rem; border-radius: 12px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 16px rgba(5, 150, 105, 0.4); transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; min-width: 160px;">
+                    <span style="font-size: 1.25rem;">📸</span>
+                    <span>사진→글 (Quick)</span>
+                </button>
                 <button type="button" id="global-refresh-btn" class="global-refresh-btn floating-btn"
                     style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 1rem 1.25rem; border-radius: 12px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4); transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; min-width: 160px;">
                     <span style="font-size: 1.25rem;">🔄</span>
@@ -727,6 +733,104 @@
                         <p class="field-hint"
                             style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.875rem;">⚠️ 카테고리를 먼저 선택한 후
                             글 생성을 진행해주세요. 카테고리에 따라 본문 흐름과 문체를 자동 최적화합니다.</p>
+                    </div>
+
+                    <!-- ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] 글 소스 직교 축 토글 -->
+                    <div id="content-source-toggle-section"
+                        style="background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(5,150,105,0.04)); padding: 1rem; border-radius: var(--radius-md); border: 2px solid rgba(16,185,129,0.25); margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.6rem; font-weight: 700; color: var(--text-strong); font-size: 0.92rem;">
+                            📝 글 소스
+                        </label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button
+                                type="button"
+                                id="source-toggle-keyword"
+                                class="source-toggle-btn source-toggle-btn--active"
+                                aria-pressed="true"
+                                style="flex: 1; padding: 0.6rem 1rem; border-radius: var(--radius-md); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
+                                🔑 키워드 시작
+                            </button>
+                            <button
+                                type="button"
+                                id="source-toggle-image"
+                                class="source-toggle-btn"
+                                aria-pressed="false"
+                                style="flex: 1; padding: 0.6rem 1rem; border-radius: var(--radius-md); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
+                                📸 사진 시작 <span style="font-size:0.7rem; background:rgba(16,185,129,0.25); padding:1px 5px; border-radius:4px;">NEW</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] 사진 시작 업로드 영역 (슬라이드 다운) -->
+                    <div id="image-narrative-area" class="image-narrative-area" style="display:none;">
+                        <div class="image-narrative-area__inner">
+                            <!-- Upload zone -->
+                            <div id="image-narrative-drop-zone" class="image-narrative-upload-zone">
+                                <div class="image-narrative-upload-zone__icon">🖼️</div>
+                                <p class="image-narrative-upload-zone__title">이미지를 여기에 드래그하세요</p>
+                                <p class="image-narrative-upload-zone__hint">JPG · PNG · HEIC, 3~30장, 최대 10MB/장</p>
+                            </div>
+
+                            <!-- Upload buttons -->
+                            <div class="image-narrative-upload-btns">
+                                <input type="file" id="image-narrative-file-input" multiple accept="image/*,.heic" style="display:none;" />
+                                <button type="button" id="image-narrative-file-btn" class="btn-secondary btn-sm">
+                                    📂 파일 선택
+                                </button>
+                                <input type="file" id="image-narrative-folder-input" webkitdirectory multiple accept="image/*,.heic" style="display:none;" />
+                                <button type="button" id="image-narrative-folder-btn" class="btn-secondary btn-sm">
+                                    🗂️ 폴더 전체 선택
+                                </button>
+                            </div>
+
+                            <!-- Status / count -->
+                            <div id="image-narrative-upload-count" class="image-narrative-upload-count">
+                                0장 업로드됨 (최소 3장, 최대 30장)
+                            </div>
+                            <div id="image-narrative-upload-status" class="image-narrative-upload-status"></div>
+
+                            <!-- Thumbnail grid -->
+                            <div id="image-narrative-thumbnail-grid" class="image-narrative-thumbnail-grid"></div>
+
+                            <!-- Vision provider selection -->
+                            <div class="image-narrative-provider-section">
+                                <label style="font-weight: 700; font-size: 0.85rem; color: var(--text-strong); display: block; margin-bottom: 0.5rem;">
+                                    🤖 Vision 분석 모델
+                                </label>
+                                <div class="image-narrative-provider-radios">
+                                    <label class="image-narrative-provider-radio">
+                                        <input type="radio" name="vision-provider" value="gemini" checked />
+                                        <span>✨ Gemini Flash <em>(디폴트 · 저비용)</em></span>
+                                    </label>
+                                    <label class="image-narrative-provider-radio">
+                                        <input type="radio" name="vision-provider" value="openai" />
+                                        <span>🧠 GPT-4o <em>(한국어 묘사 우수)</em></span>
+                                    </label>
+                                    <label class="image-narrative-provider-radio">
+                                        <input type="radio" name="vision-provider" value="claude" />
+                                        <span>🎯 Claude Sonnet <em>(고정밀 · 비용 ↑)</em></span>
+                                    </label>
+                                    <label class="image-narrative-provider-radio">
+                                        <input type="radio" name="vision-provider" value="deepinfra" />
+                                        <span>⚡ DeepInfra Llama <em>(최저 비용 · 한국어 미검증)</em></span>
+                                    </label>
+                                </div>
+                                <div id="vision-provider-warning" class="image-narrative-provider-warning" style="display:none;"></div>
+                            </div>
+
+                            <!-- Infer button -->
+                            <button
+                                type="button"
+                                id="image-narrative-infer-btn"
+                                class="btn-primary"
+                                disabled
+                                style="width:100%; margin-top: 0.75rem;">
+                                🔍 추론 시작
+                            </button>
+
+                            <!-- Review panel (rendered by imageNarrativeReview.ts) -->
+                            <div id="image-narrative-review-panel" style="display:none; margin-top: 1rem;"></div>
+                        </div>
                     </div>
 
                     <!-- ✅ 콘텐츠 모드 선택 (SEO / 홈판 / 쇼핑 커넥트 / 사용자정의) - 카테고리 아래 배치 -->
@@ -4365,7 +4469,7 @@
                     <label for="sub-work-provider" style="font-weight: 700; color: var(--text-strong); display: block; margin-bottom: 0.3rem;">🔀 부수 작업 모델</label>
                     <select id="sub-work-provider" style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: 8px; font-size: 0.9rem;">
                         <option value="same">본문과 동일 모델 (기본 — silent 폴백 0)</option>
-                        <option value="gpt-mini">GPT-4.1 mini (저렴, $0.40/1M)</option>
+                        <option value="gpt-mini">GPT-4.1 mini (저렴, $0.40/1M) ⚠️ Tier1=500RPM, $50+7일 후 권장</option>
                         <option value="gemini-flash">Gemini 2.5 Flash (가장 저렴, $0.30/1M)</option>
                         <option value="haiku">Claude Haiku 4.5 ($1/1M)</option>
                     </select>
@@ -6036,12 +6140,7 @@
 
         </div><!-- settings-content 닫힘 -->
     </div><!-- modal-content 닫힘 -->
-    <div class="modal-actions">
-        <button type="button" id="save-settings-btn" class="primary"
-            style="background: linear-gradient(135deg, #D4AF37, #FFD700); color: var(--bg-primary);">저장</button>
-        <button type="button" data-close-settings class="secondary"
-            style="background: var(--bg-tertiary); color: var(--text-gold); border: 1px solid var(--border-gold);">취소</button>
-    </div>
+    <!-- [2026-05-27 작업 22] 저장/취소 버튼 제거 — 모달 닫기(X 버튼) 시 자동 저장 -->
     </div><!-- modal-panel 닫힘 -->
     </div><!-- settings-modal 닫힘 -->
 

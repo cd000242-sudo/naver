@@ -220,6 +220,9 @@ import { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImages
 (window as any).ImageManager = ImageManager;
 (window as any).syncGlobalImagesFromImageManager = syncGlobalImagesFromImageManager;
 import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApiCostConsent, reserveExternalApiImageQuota, generateImagesWithCostSafety, ensurePromptCardRemoveHandler } from './modules/costAndAutoGen.js';
+// ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode modules
+import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
+import { initImageNarrativeQuickMode } from './modules/imageNarrativeQuickMode.js';
 import { initImageLibrary, loadLibraryImages, useLibraryImage, switchToTab, generateFavoritesContent, generateTemplatesContent, getEnhancedTemplates } from './modules/contentPreviewAndLibrary.js';
 declare let thumbnailBackgroundImage: string | null;
 declare let thumbnailBackgroundDataUrl: string | null;
@@ -1332,6 +1335,15 @@ if (openSettingsFromLicense) {
 
 closeSettingsButtons.forEach(btn => {
   btn.addEventListener('click', () => {
+    // [2026-05-27 작업 22] 모달 닫기 시 자동 저장 (저장/취소 버튼 제거 대체)
+    try {
+      if (typeof (window as any).saveSettingsHandler === 'function') {
+        (window as any).saveSettingsHandler();
+        console.log('[Settings] 💾 모달 닫기 → 자동 저장 호출');
+      }
+    } catch (e) {
+      console.warn('[Settings] 자동 저장 실패 (무시):', e);
+    }
     if (settingsModal) {
       settingsModal.setAttribute('aria-hidden', 'true');
       settingsModal.style.display = 'none';
@@ -9931,6 +9943,9 @@ initToolsHubModal();
 initBestProductModal();
 initGeminiSelectionUI();
 initContentModeHelpAndSmartPublish();
+// ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode + Quick Mode
+initImageNarrativeMode();
+initImageNarrativeQuickMode();
 
 // ✅ [v2.10.191 Phase 3.8.3] SERP 추이 패널 초기화 + 데이터 로드
 function initSerpHistoryPanel(): void {
