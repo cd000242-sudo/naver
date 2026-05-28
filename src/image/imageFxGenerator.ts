@@ -1677,6 +1677,10 @@ export async function generateSingleImageWithImageFx(
         // ✅ [v1.4.40] 401이 3회 연속 실패면 명확히 분류
         if (attempt === MAX_RETRIES) {
           lastError = new Error('IMAGEFX_AUTH_EXPIRED:Google 세션이 만료되었습니다. 환경설정 → ImageFX → "Google 계정 변경"으로 다시 로그인해주세요.');
+          // [2026-05-27 작업 23] throw로 변경 — outer catch가 lastClassifiedError로 저장.
+          //   기존: continue → 함수 끝 fallback 진입 → results 빈 배열 + lastClassifiedError null → 사용자가 "Google 로그인 상태를 확인해주세요" fallback 메시지만 봄
+          //   현재: 마지막 retry에서 throw → IMAGEFX_AUTH_EXPIRED:... 메시지 사용자에게 명확히 전달
+          throw lastError;
         }
         continue;
       }
@@ -1745,7 +1749,8 @@ export async function generateSingleImageWithImageFx(
       if (errorCode.startsWith('HTTP_4')) {
         console.error(`[ImageFX] ❌ 접근 거부 (${errorCode}): ${errorDetail.substring(0, 100)}`);
         lastError = new Error(`IMAGEFX_FORBIDDEN:Google ImageFX 접근이 거부되었습니다 (${errorCode}). 한국 IP 차단 또는 계정 제한일 수 있습니다. 테더링 IP 변경 또는 다른 Google 계정을 시도해주세요.`);
-        return null;
+        // [2026-05-27 작업 23] return null → throw — outer catch가 lastClassifiedError로 저장.
+        throw lastError;
       }
 
       // ✅ [v1.4.40] HTTP 5xx (500/502/504 등)

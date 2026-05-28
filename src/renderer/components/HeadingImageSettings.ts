@@ -823,7 +823,7 @@ export function createHeadingImageModal(): void {
                 <option value="nano-banana-2">나노바나나2 (₩97/장, Gemini 3.1 Flash Image)</option>
                 <option value="nano-banana-pro" selected>나노바나나 프로 (₩185/장, Gemini 3 Pro Image)</option>
                 <option value="deepinfra">FLUX-2 (DeepInfra)</option>
-                <option value="openai-image">OpenAI Image (gpt-image-1 / 1.5 / 2) ⚠️ Tier1=5RPM, $50+7일 후 권장</option>
+                <option value="openai-image">OpenAI Image (gpt-image-1 / 1.5 / 2)</option>
                 <option value="leonardoai">Leonardo AI</option>
                 <option value="imagefx">ImageFX (무료)</option>
                 <option value="flow">🍌 Flow (Nano Banana 2)</option>
@@ -975,11 +975,10 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #047857;">FLUX-2</div>
             <div style="font-size: 10px; color: #059669;">DeepInfra</div>
           </label>
-          <label class="source-option" data-value="openai-image" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ede9fe, #c4b5fd); text-align: center; transition: all 0.2s; position: relative;">
+          <label class="source-option" data-value="openai-image" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ede9fe, #c4b5fd); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦆</div>
             <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">OpenAI Image</div>
             <div style="font-size: 10px; color: #7c3aed;">gpt-image-1 / 1.5 / 2 | Org 인증 필요</div>
-            <div style="font-size: 9px; color: #ef4444; margin-top: 3px; font-weight: 700;">⚠️ Tier1=5RPM (초보 비추천)</div>
           </label>
           <label class="source-option" data-value="leonardoai" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ffedd5, #fdba74); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦁</div>
@@ -1507,10 +1506,7 @@ export function createHeadingImageModal(): void {
   sourceOptions.forEach(opt => {
     opt.addEventListener('click', () => {
       const value = opt.getAttribute('data-value') as GlobalImageSource;
-      // [2026-05-27 작업 16] OpenAI 선택 시 Tier 안내 모달 (초보 사용자 보호) — 1회만 표시
-      if (value === 'openai-image' && !localStorage.getItem('openaiTierWarningSeen')) {
-        showOpenAiTierWarningModal();
-      }
+      // [2026-05-27 작업 24] OpenAI Image 카드 자동 모달 제거 — 사용자 의도는 본문 LLM 영역 (이미지 OpenAI는 별도 운영)
       selectedSourceValue = value;
       // 모든 카드 스타일 리셋
       sourceOptions.forEach(o => {
