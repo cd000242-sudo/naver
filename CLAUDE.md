@@ -114,7 +114,7 @@ const btn = await waitForElement(frame, SELECTORS.publish.confirmPublishButton, 
 
 ## Workflows
 
-- **`NAVER_REFRESH.md`** — 격변 대응 통합 워크플로우. 사용자가 "네이버 리프레시", "네이버 업데이트", "API 키/MCP/셀렉터 점검", "/refresh-naver" 등 트리거 시 본 파일 읽고 즉시 Phase 0~5 진단 실행 → 리포트 출력 → 사용자 동의 후 Phase 7~9 (commit/upgrade/release). **빈 버전업 릴리즈 자동 진행 금지**.
+`NAVER_REFRESH.md` — 사용자가 "네이버 리프레시" / "네이버 업데이트" / "API 키 점검" / "/refresh-naver" 등 트리거하면 이 파일 읽고 P0~P3 진단부터 돌릴 것. 범위 좁히는 sub-command ("셀렉터만", "회귀만", "릴리즈까지" 등) 도 파일 안에 매핑되어 있음. 빈 버전업 릴리즈는 사용자 동의 있어도 거부 — P10 진입 조건 만족 안 하면 끝.
 
 ## Key Commands
 
