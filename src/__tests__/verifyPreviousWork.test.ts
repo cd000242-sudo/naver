@@ -101,7 +101,10 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     //   사용자 명시 요청. baseline 276K로 재상향.
     // 2026-05-28 v2.11.0 SPEC-IMAGE-NARRATIVE-2026 Phase 2 (commit ae6bc6b9): imageNarrative
     //   prompts 6개 신설 (base/travel/food/lodging/daily/review) — 약 8K자 추가. baseline 290K로 재상향.
-    expect(totalChars).toBeLessThan(290000);
+    // 2026-05-28 SECTION SH (강한 소제목 10조) 통합 — 4-agent (SEO/EEAT/카피/네이버 D.I.A.+) 종합:
+    //   shared/strong-headings.prompt 신설(~6K자) + automation/seo/homefeed/shopping prompts에
+    //   SECTION SH 인라인 압축본(~1.5K자×4) = 총 ~12K자 추가. baseline 300K로 재상향.
+    expect(totalChars).toBeLessThan(300000);
   });
 });
 
