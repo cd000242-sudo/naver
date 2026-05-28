@@ -99,7 +99,9 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     // 2026-05-21 v2.10.305: v2.10.297 HTML sanitize 강화 + 이전 누적 증가(268,484자) — baseline 275K로 재상향.
     // 2026-05-28 v2.10.392: 의미 응집(semantic cohesion) 블록 4개 prompt 추가 (SEO/homefeed/business/chain).
     //   사용자 명시 요청. baseline 276K로 재상향.
-    expect(totalChars).toBeLessThan(276000);
+    // 2026-05-28 v2.11.0 SPEC-IMAGE-NARRATIVE-2026 Phase 2 (commit ae6bc6b9): imageNarrative
+    //   prompts 6개 신설 (base/travel/food/lodging/daily/review) — 약 8K자 추가. baseline 290K로 재상향.
+    expect(totalChars).toBeLessThan(290000);
   });
 });
 
