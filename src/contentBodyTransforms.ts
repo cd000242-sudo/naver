@@ -118,13 +118,36 @@ export function normalizeContentLineBreaks(content: StructuredContent): Structur
 //   business/base.prompt + affiliate/chain/stage3_draft.prompt에 모바일 룰 추가됨.
 // [v2.10.393] 한국어 종결어미 한정 split — v2.10.391 OFF 이유(영문 약어/소수점)를
 //   정규식 한국어 limit로 해소. "Mr." "3.14" "A.I." 등 split 안 됨.
+
+// [v2.10.393b] paragraph 안 매 문장 줄바꿈 (bullet/list 보존).
+//   사용자 보고: paragraph 사이 \n\n뿐만 아니라 paragraph 안 문장도 \n 줄바꿈 필요.
+//   bullet/numbered list (• ... / 1. ...)는 split 안 함 — "당시 대중 반응 요약" 같은
+//   별개 섹션의 리스트 형식 보존.
+function applyPerSentenceLineBreaks(paragraph: string): string {
+  const trimmed = paragraph.trim();
+  if (!trimmed || trimmed.length < 80) return paragraph; // 짧은 단락 그대로
+  // bullet/numbered list 첫 줄 보존 (split 시 list 깨짐)
+  if (/^\s*[•·▪◦\-\*\d]/.test(trimmed)) return paragraph;
+
+  const sentences = trimmed
+    .split(/(?<=[가-힣][.!?。！？])\s+/)
+    .map(s => s.trim())
+    .filter(s => s.length > 0);
+  if (sentences.length <= 1) return paragraph;
+  return sentences.join('\n');
+}
+
 function ensureParagraphBreaks(text: string): string {
   if (!text || text.length < 200) return text;
 
   // 이미 \n\n이 있으면 각 문단만 개별 검사
   if (text.includes('\n\n')) {
     const paragraphs = text.split('\n\n');
-    const fixed = paragraphs.map(p => ensureParagraphBreaks(p.trim()));
+    const fixed = paragraphs.map(p => {
+      const recursed = ensureParagraphBreaks(p.trim());
+      // [v2.10.393b] 분할 후에도 한 뭉텅이로 남아있으면 매 문장 \n 적용
+      return recursed.includes('\n') ? recursed : applyPerSentenceLineBreaks(recursed);
+    });
     return fixed.join('\n\n');
   }
 
@@ -143,6 +166,7 @@ function ensureParagraphBreaks(text: string): string {
   }
 
   // [v2.10.390] 1~3문장마다 \n\n 삽입 (사후 안전망 — AI 단락 침범 최소화)
+  // [v2.10.393b] paragraph 안 문장도 \n 줄바꿈 (모바일 친화)
   const result: string[] = [];
   let current: string[] = [];
   const breakAfter = () => Math.floor(Math.random() * 3) + 1; // 1~3문장
@@ -152,18 +176,18 @@ function ensureParagraphBreaks(text: string): string {
     current.push(sentences[i]);
 
     if (current.length >= nextBreak && i < sentences.length - 1) {
-      result.push(current.join(' '));
+      result.push(current.join('\n')); // [v2.10.393b] ' ' → '\n' (paragraph 안 문장도 줄바꿈)
       current = [];
       nextBreak = breakAfter();
     }
   }
   if (current.length > 0) {
-    result.push(current.join(' '));
+    result.push(current.join('\n')); // [v2.10.393b] 동상
   }
 
   const fixed = result.join('\n\n');
   if (fixed !== text) {
-    console.log(`[ensureParagraphBreaks] ✅ 문단 구분 자동 삽입: ${sentences.length}문장 → ${result.length}문단`);
+    console.log(`[ensureParagraphBreaks] ✅ 문단 구분 자동 삽입: ${sentences.length}문장 → ${result.length}문단 (매 문장 \\n)`);
   }
   return fixed;
 }
