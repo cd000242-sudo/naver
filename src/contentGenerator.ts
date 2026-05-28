@@ -2173,9 +2173,13 @@ export function buildModeBasedPrompt(
   // ✅ [2026-03-16 v2] custom 모드: 사용자 프롬프트 최우선 + 품질 가드레일 동시 적용
   // [2026-05-27] 모든 모드(SEO/홈판/쇼핑/업체/custom)에서 개인 프롬프트 입력 시 동일 분기 — 사용자 프롬프트 100% 반영,
   //   기존 모드별 base 프롬프트 완전 대체. productInfo/businessInfo는 user 메시지에 자동 전달되어 보존.
+  // [v2.10.394] 사용자 명시 요청: SEO/홈판/쇼핑/업체 모드에서는 base prompt + customPrompt 추가 방식.
+  //   사용자정의 모드(custom)만 완전 대체 유지 (각 모드 baseline 보존하면서 사용자 지시 추가).
+  //   buildFullPrompt 내부에 customPrompt 첨부 흐름(line 689)이 이미 있음.
   let systemPromptResult: string;
   const isUserPromptMode = !!(source.customPrompt && source.customPrompt.trim());
-  if (isUserPromptMode) {
+  const isCustomModeOverride = isUserPromptMode && contentMode === 'custom';
+  if (isCustomModeOverride) {
     // 사용자정의 모드: 사용자 프롬프트를 최우선 지시사항으로, SEO/홈판급 품질 규칙을 가드레일로 적용
     const customTone = toneStyle || 'friendly';
     systemPromptResult = `당신은 네이버 블로그 일방문자 10,000명 이상의 전문 블로거입니다.
