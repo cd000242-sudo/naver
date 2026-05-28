@@ -95,7 +95,7 @@ function _bindDropZone(): void {
     e.preventDefault();
     zone.classList.remove('image-narrative-upload-zone--drag-over');
     const files = Array.from(e.dataTransfer?.files ?? []);
-    await _handleFiles(files);
+    await addFiles(files);
   });
 }
 
@@ -111,7 +111,7 @@ function _bindFileInput(): void {
   btn.addEventListener('click', () => input.click());
   input.addEventListener('change', async () => {
     const files = Array.from(input.files ?? []);
-    await _handleFiles(files);
+    await addFiles(files);
     input.value = '';
   });
 }
@@ -124,7 +124,7 @@ function _bindFolderInput(): void {
   btn.addEventListener('click', () => input.click());
   input.addEventListener('change', async () => {
     const files = Array.from(input.files ?? []);
-    await _handleFiles(files);
+    await addFiles(files);
     input.value = '';
   });
 }
@@ -133,7 +133,15 @@ function _bindFolderInput(): void {
 // Core file processing
 // ---------------------------------------------------------------------------
 
-async function _handleFiles(files: File[]): Promise<void> {
+/**
+ * Processes File[] from any source (file/folder input or drag-and-drop) and
+ * appends valid images to the module's uploaded list. Re-renders thumbnails
+ * and updates the count status afterward.
+ *
+ * Exposed so Quick Mode (which mounts its own file inputs with different IDs)
+ * can forward files into the same pipeline that the standard upload zone uses.
+ */
+export async function addFiles(files: File[]): Promise<void> {
   const imageFiles = files.filter((f) => _isAcceptedImage(f));
 
   if (imageFiles.length === 0) {
@@ -246,7 +254,9 @@ async function _processFile(file: File): Promise<UploadedImage> {
 // ---------------------------------------------------------------------------
 
 function _renderThumbnails(): void {
-  const grid = document.getElementById('image-narrative-thumbnail-grid');
+  // [v2.11.4 FIX] Quick Mode 모달은 별도 grid ID(quick-thumbnail-grid) 사용 — 둘 다 지원.
+  const grid = document.getElementById('image-narrative-thumbnail-grid')
+    || document.getElementById('quick-thumbnail-grid');
   if (!grid) return;
 
   if (_uploadImages.length === 0) {

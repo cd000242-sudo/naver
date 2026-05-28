@@ -13,7 +13,7 @@
  * Phase 3 — SPEC-IMAGE-NARRATIVE-2026
  */
 
-import { initImageNarrativeUpload, getUploadedImages, clearUploadedImages, UPLOAD_MIN } from './imageNarrativeUpload.js';
+import { initImageNarrativeUpload, getUploadedImages, clearUploadedImages, addFiles, UPLOAD_MIN } from './imageNarrativeUpload.js';
 import { showReviewPanel, hideReviewPanel, isReviewComplete } from './imageNarrativeReview.js';
 import type { NarrativePlan } from '../../imageNarrative/types.js';
 
@@ -323,15 +323,27 @@ function _bindQuickUpload(): void {
   const folderInput = document.getElementById('quick-folder-input') as HTMLInputElement | null;
   const folderBtn = document.getElementById('quick-folder-btn');
 
+  // [v2.11.4 FIX] 파일/폴더/드래그 — 실제 file 객체를 imageNarrativeUpload.addFiles에 forward.
+  //   기존: _syncQuickUploadStatus만 호출하고 file 객체를 어디에도 안 넘김 → getUploadedImages 영원히 0건.
+  //   조치: 각 핸들러가 await addFiles(...) 호출 후 count 갱신.
   fileBtn?.addEventListener('click', () => fileInput?.click());
-  fileInput?.addEventListener('change', () => {
-    // Forward to upload module by dispatching to the main drop zone
-    if (fileInput?.files) _syncQuickUploadStatus();
+  fileInput?.addEventListener('change', async () => {
+    const files = Array.from(fileInput?.files ?? []);
+    if (files.length > 0) {
+      await addFiles(files);
+      if (fileInput) fileInput.value = '';
+    }
+    _syncQuickUploadStatus();
   });
 
   folderBtn?.addEventListener('click', () => folderInput?.click());
-  folderInput?.addEventListener('change', () => {
-    if (folderInput?.files) _syncQuickUploadStatus();
+  folderInput?.addEventListener('change', async () => {
+    const files = Array.from(folderInput?.files ?? []);
+    if (files.length > 0) {
+      await addFiles(files);
+      if (folderInput) folderInput.value = '';
+    }
+    _syncQuickUploadStatus();
   });
 
   dropZone?.addEventListener('dragover', (e) => {
@@ -341,9 +353,13 @@ function _bindQuickUpload(): void {
   dropZone?.addEventListener('dragleave', () => {
     dropZone.classList.remove('image-narrative-upload-zone--drag-over');
   });
-  dropZone?.addEventListener('drop', (e) => {
+  dropZone?.addEventListener('drop', async (e) => {
     e.preventDefault();
     dropZone.classList.remove('image-narrative-upload-zone--drag-over');
+    const files = Array.from(e.dataTransfer?.files ?? []);
+    if (files.length > 0) {
+      await addFiles(files);
+    }
     _syncQuickUploadStatus();
   });
 }
