@@ -1550,7 +1550,13 @@ export interface ContentSource {
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
   toneStyle?: 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'
     | 'sincere_exposure' | 'data_verified' | 'text_hip' | 'mentor' | 'self_interview'; // ✅ [작업 14] 12개 활성 + 3개 deprecated(casual/formal/humorous, UI 미노출)
-  contentMode?: 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'custom' | 'business'; // ✅ [v1.4.20] business 추가
+  contentMode?: 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'custom' | 'business' | 'image-narrative'; // ✅ [v1.4.20] business 추가, [Phase 2] image-narrative 추가
+  // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 2] 이미지 내러티브 모드 옵션
+  imageNarrative?: {
+    images: Array<{ buffer: Buffer; mimeType: string }>;
+    mode?: 'travel' | 'food' | 'lodging' | 'daily' | 'review' | 'cafe' | 'auto';
+    provider?: 'gemini' | 'openai' | 'claude';
+  };
   isFullAuto?: boolean; // ✅ 완전자동 발행 모드 (자동화 보조 프롬프트 적용)
   isReviewType?: boolean; // ✅ 리뷰형 글 (구매전환 유도)
   customPrompt?: string; // ✅ 사용자 정의 프롬프트 (추가 지시사항)
@@ -6817,6 +6823,32 @@ export async function generateStructuredContent(
   source: ContentSource,
   options: GenerateOptions = {},
 ): Promise<StructuredContent> {
+  // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 2] image-narrative mode branch
+  if (source.contentMode === 'image-narrative') {
+    const { buildNarrativeContent } = await import('./imageNarrative/narrativeBuilder/builder.js');
+    const { aggregateInferences } = await import('./imageNarrative/inferenceAggregator/aggregator.js');
+
+    const imgOpts = source.imageNarrative;
+    if (!imgOpts?.images?.length) {
+      throw new Error('[image-narrative] imageNarrative.images 배열이 비어 있습니다.');
+    }
+
+    const imageInputs = imgOpts.images.map((img, i) => ({
+      imageId: `img-${i}`,
+      buffer: img.buffer,
+      mimeType: img.mimeType,
+    }));
+
+    const plan = await aggregateInferences(imageInputs, {
+      mode: imgOpts.mode ?? 'auto',
+      provider: imgOpts.provider ?? 'gemini',
+    });
+
+    return buildNarrativeContent(plan, {
+      provider: imgOpts.provider ?? 'gemini',
+    });
+  }
+
   if (!source?.rawText || !source.rawText.trim()) {
     throw new Error('원본 텍스트가 비어 있습니다. 키워드 또는 URL을 다시 확인해주세요.');
   }

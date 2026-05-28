@@ -148,3 +148,45 @@ export interface InferenceResponse {
   /** Round-trip wall-clock time in milliseconds. */
   readonly latencyMs: number;
 }
+
+// ---------------------------------------------------------------------------
+// Aggregator output types (Phase 2)
+// ---------------------------------------------------------------------------
+
+/**
+ * A single section in the narrative plan.
+ * Maps to one blog heading with associated images and story beats.
+ */
+export interface NarrativeSection {
+  /** Korean heading text for this section. */
+  readonly heading: string;
+  /** IDs of images that belong to this section (from InferenceResponse.imageId). */
+  readonly imageRefs: readonly string[];
+  /** One-line story beats to expand into prose (Korean). */
+  readonly beats: readonly string[];
+}
+
+/**
+ * The aggregated plan produced by the Aggregator and consumed by the Builder.
+ */
+export interface NarrativePlan {
+  /** Overall content mode inferred from images (or user override). */
+  readonly mode: InferenceMode;
+  /** Ordered sections from which the Builder generates the full post. */
+  readonly sections: readonly NarrativeSection[];
+  /** True when at least one image needs user review before publishing. */
+  readonly needsUserReview: boolean;
+  /** Human-readable warnings from the hallucination guard. */
+  readonly warnings: readonly string[];
+  /** Full inference responses in resolved order (for downstream use). */
+  readonly orderedResults: readonly InferenceResponse[];
+}
+
+/**
+ * Enriched inference response used internally by the Aggregator.
+ * Adds EXIF metadata alongside the vision result.
+ */
+export interface EnrichedInferenceResponse extends InferenceResponse {
+  /** EXIF data extracted from the source image (may be partial or absent). */
+  readonly exif: ImageExif;
+}
