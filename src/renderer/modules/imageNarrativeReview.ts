@@ -36,7 +36,7 @@ export interface ReviewEdit {
 // ---------------------------------------------------------------------------
 
 let _plan: NarrativePlan | null = null;
-let _images: readonly UploadedImage[] = [];
+let _reviewImages: readonly UploadedImage[] = [];
 let _edits: Map<string, ReviewEdit> = new Map();
 
 /** Returns the user's edits for all images (used by builder in Phase 4). */
@@ -88,7 +88,7 @@ export function showReviewPanel(
   images: readonly UploadedImage[]
 ): void {
   _plan = plan;
-  _images = images;
+  _reviewImages = images;
   _edits = new Map(
     plan.orderedResults.map((res) => [
       res.imageId,
@@ -178,7 +178,7 @@ function _renderReviewPanel(): void {
 
 function _renderCard(res: InferenceResponse): string {
   const edit = _edits.get(res.imageId)!;
-  const img = _images.find((i) => i.id === res.imageId);
+  const img = _reviewImages.find((i) => i.id === res.imageId);
   const lowConfidence = res.result.confidence < 0.6;
   const cardClass = lowConfidence
     ? 'image-narrative-review-card image-narrative-review-card--needs-review'
@@ -346,7 +346,7 @@ function _updateCardReviewState(imageId: string): void {
 // ---------------------------------------------------------------------------
 
 function _findExifTime(imageId: string): string {
-  const img = _images.find((i) => i.id === imageId);
+  const img = _reviewImages.find((i) => i.id === imageId);
   return img?.exif?.takenAt ?? '';
 }
 

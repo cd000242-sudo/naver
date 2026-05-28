@@ -33,14 +33,14 @@ interface QuickModeState {
 // Module state
 // ---------------------------------------------------------------------------
 
-let _state: QuickModeState = {
+let _quickState: QuickModeState = {
   currentPanel: 1,
   isInferring: false,
   plan: null,
 };
 
 function setState(patch: Partial<QuickModeState>): void {
-  _state = { ..._state, ...patch };
+  _quickState = { ..._quickState, ...patch };
 }
 
 // ---------------------------------------------------------------------------
@@ -110,27 +110,27 @@ function _renderPanelState(): void {
   [1, 2, 3].forEach((n) => {
     const step = modal.querySelector<HTMLElement>(`[data-quick-step="${n}"]`);
     if (!step) return;
-    step.classList.toggle('quick-mode-step--active', n === _state.currentPanel);
-    step.classList.toggle('quick-mode-step--done', n < _state.currentPanel);
+    step.classList.toggle('quick-mode-step--active', n === _quickState.currentPanel);
+    step.classList.toggle('quick-mode-step--done', n < _quickState.currentPanel);
   });
 
   // Show/hide panels
   [1, 2, 3].forEach((n) => {
     const panel = modal.querySelector<HTMLElement>(`[data-quick-panel="${n}"]`);
     if (!panel) return;
-    panel.style.display = n === _state.currentPanel ? 'flex' : 'none';
+    panel.style.display = n === _quickState.currentPanel ? 'flex' : 'none';
   });
 
   // Update navigation buttons
   const prevBtn = modal.querySelector<HTMLButtonElement>('#quick-mode-prev-btn');
   const nextBtn = modal.querySelector<HTMLButtonElement>('#quick-mode-next-btn');
 
-  if (prevBtn) prevBtn.style.display = _state.currentPanel > 1 ? 'inline-flex' : 'none';
+  if (prevBtn) prevBtn.style.display = _quickState.currentPanel > 1 ? 'inline-flex' : 'none';
   if (nextBtn) {
-    if (_state.currentPanel === 3) {
+    if (_quickState.currentPanel === 3) {
       nextBtn.textContent = '🚀 발행하기';
     } else {
-      nextBtn.textContent = _state.currentPanel === 1 ? '추론 시작 →' : '발행 설정 →';
+      nextBtn.textContent = _quickState.currentPanel === 1 ? '추론 시작 →' : '발행 설정 →';
     }
   }
 }
@@ -140,7 +140,7 @@ function _renderPanelState(): void {
 // ---------------------------------------------------------------------------
 
 async function _runQuickInference(): Promise<void> {
-  if (_state.isInferring) return;
+  if (_quickState.isInferring) return;
 
   const images = getUploadedImages();
   if (images.length < UPLOAD_MIN) {
@@ -192,12 +192,12 @@ async function _runQuickInference(): Promise<void> {
 
 function _renderPublishPanel(): void {
   const panel = document.querySelector<HTMLElement>('[data-quick-panel="3"]');
-  if (!panel || !_state.plan) return;
+  if (!panel || !_quickState.plan) return;
 
   panel.innerHTML = `
     <div class="quick-mode-publish-summary">
       <h3>발행 설정</h3>
-      <p>추론된 카테고리: <strong>${_state.plan.mode}</strong></p>
+      <p>추론된 카테고리: <strong>${_quickState.plan.mode}</strong></p>
       <p>사진 수: <strong>${getUploadedImages().length}장</strong></p>
       <div class="quick-mode-publish-actions">
         <button id="quick-mode-final-publish-btn" class="btn-primary btn-large">
@@ -211,7 +211,7 @@ function _renderPublishPanel(): void {
   document.getElementById('quick-mode-final-publish-btn')?.addEventListener('click', () => {
     document.dispatchEvent(
       new CustomEvent('imageNarrative:quickPublish', {
-        detail: { plan: _state.plan, images: getUploadedImages() },
+        detail: { plan: _quickState.plan, images: getUploadedImages() },
       })
     );
     closeQuickMode();
@@ -355,23 +355,23 @@ function _syncQuickUploadStatus(): void {
 }
 
 async function _onNextClick(): Promise<void> {
-  if (_state.currentPanel === 1) {
+  if (_quickState.currentPanel === 1) {
     await _runQuickInference();
-  } else if (_state.currentPanel === 2) {
+  } else if (_quickState.currentPanel === 2) {
     if (!isReviewComplete()) {
       _showToast('빨간 항목을 먼저 채워주세요.', 'error');
       return;
     }
     _renderPublishPanel();
     _goToPanel(3);
-  } else if (_state.currentPanel === 3) {
+  } else if (_quickState.currentPanel === 3) {
     document.getElementById('quick-mode-final-publish-btn')?.click();
   }
 }
 
 function _onPrevClick(): void {
-  if (_state.currentPanel > 1) {
-    _goToPanel((_state.currentPanel - 1) as QuickModePanel);
+  if (_quickState.currentPanel > 1) {
+    _goToPanel((_quickState.currentPanel - 1) as QuickModePanel);
   }
 }
 

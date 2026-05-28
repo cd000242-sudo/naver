@@ -50,17 +50,17 @@ const ACCEPTED_MIME_TYPES = new Set([
 // Module state
 // ---------------------------------------------------------------------------
 
-let _images: UploadedImage[] = [];
+let _uploadImages: UploadedImage[] = [];
 
 /** Returns a defensive copy of uploaded images. */
 export function getUploadedImages(): readonly UploadedImage[] {
-  return [..._images];
+  return [..._uploadImages];
 }
 
 /** Clears all uploaded images and resets the thumbnail grid. */
 export function clearUploadedImages(): void {
-  _images.forEach((img) => URL.revokeObjectURL(img.previewUrl));
-  _images = [];
+  _uploadImages.forEach((img) => URL.revokeObjectURL(img.previewUrl));
+  _uploadImages = [];
   _renderThumbnails();
 }
 
@@ -141,8 +141,8 @@ async function _handleFiles(files: File[]): Promise<void> {
     return;
   }
 
-  const combined = [..._images, ...imageFiles.map(() => null)]; // placeholder count
-  const available = UPLOAD_MAX - _images.length;
+  const combined = [..._uploadImages, ...imageFiles.map(() => null)]; // placeholder count
+  const available = UPLOAD_MAX - _uploadImages.length;
 
   if (available <= 0) {
     _showStatus(`최대 ${UPLOAD_MAX}장까지 업로드 가능합니다.`, 'error');
@@ -166,7 +166,7 @@ async function _handleFiles(files: File[]): Promise<void> {
     }
   }
 
-  _images = [..._images, ...processed];
+  _uploadImages = [..._uploadImages, ...processed];
   _renderThumbnails();
   _updateUploadStatus();
 }
@@ -249,12 +249,12 @@ function _renderThumbnails(): void {
   const grid = document.getElementById('image-narrative-thumbnail-grid');
   if (!grid) return;
 
-  if (_images.length === 0) {
+  if (_uploadImages.length === 0) {
     grid.innerHTML = '';
     return;
   }
 
-  grid.innerHTML = _images
+  grid.innerHTML = _uploadImages
     .map(
       (img, idx) => `
       <div class="image-narrative-thumbnail" data-idx="${idx}">
@@ -279,9 +279,9 @@ function _renderThumbnails(): void {
 }
 
 function _removeImage(idx: number): void {
-  const removed = _images[idx];
+  const removed = _uploadImages[idx];
   if (removed) URL.revokeObjectURL(removed.previewUrl);
-  _images = _images.filter((_, i) => i !== idx);
+  _uploadImages = _uploadImages.filter((_, i) => i !== idx);
   _renderThumbnails();
   _updateUploadStatus();
 }
@@ -290,14 +290,14 @@ function _updateUploadStatus(): void {
   _updateInferButtonState();
   const statusEl = document.getElementById('image-narrative-upload-count');
   if (statusEl) {
-    statusEl.textContent = `${_images.length}장 업로드됨 (최소 ${UPLOAD_MIN}장, 최대 ${UPLOAD_MAX}장)`;
+    statusEl.textContent = `${_uploadImages.length}장 업로드됨 (최소 ${UPLOAD_MIN}장, 최대 ${UPLOAD_MAX}장)`;
   }
 }
 
 function _updateInferButtonState(): void {
   const btn = document.getElementById('image-narrative-infer-btn') as HTMLButtonElement | null;
   if (!btn) return;
-  btn.disabled = _images.length < UPLOAD_MIN;
+  btn.disabled = _uploadImages.length < UPLOAD_MIN;
 }
 
 function _showStatus(message: string, type: 'error' | 'info'): void {

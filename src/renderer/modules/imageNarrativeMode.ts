@@ -33,7 +33,7 @@ export interface ImageNarrativeState {
 // Module-level state (single mutable reference, never mutated in place)
 // ---------------------------------------------------------------------------
 
-let _state: ImageNarrativeState = {
+let _modeState: ImageNarrativeState = {
   source: 'keyword',
   provider: 'gemini',
   mode: 'auto',
@@ -43,11 +43,11 @@ let _state: ImageNarrativeState = {
 
 /** Returns a copy of the current module state. */
 export function getImageNarrativeState(): ImageNarrativeState {
-  return { ..._state };
+  return { ..._modeState };
 }
 
 function setState(patch: Partial<ImageNarrativeState>): void {
-  _state = { ..._state, ...patch };
+  _modeState = { ..._modeState, ...patch };
 }
 
 // ---------------------------------------------------------------------------
@@ -117,7 +117,7 @@ export function handleSourceToggle(source: ContentSource): void {
 
 /** Returns the currently selected Vision provider. */
 export function getSelectedProvider(): VisionProvider {
-  return _state.provider;
+  return _modeState.provider;
 }
 
 function _bindProviderRadios(): void {
@@ -161,7 +161,7 @@ function _bindInferButton(): void {
 }
 
 async function _startInference(): Promise<void> {
-  if (_state.isInferring) return;
+  if (_modeState.isInferring) return;
 
   const images = getUploadedImages();
   if (images.length < 3) {
@@ -181,8 +181,8 @@ async function _startInference(): Promise<void> {
         mimeType: img.mimeType,
         exif: img.exif,
       })),
-      provider: _state.provider,
-      mode: _state.mode,
+      provider: _modeState.provider,
+      mode: _modeState.mode,
     });
 
     if (!result || result.error) {
@@ -244,7 +244,7 @@ function _showToast(message: string, type: 'error' | 'info' = 'info'): void {
 
 /** Returns the current NarrativePlan (null if not yet inferred). */
 export function getNarrativePlan(): NarrativePlan | null {
-  return _state.plan;
+  return _modeState.plan;
 }
 
 /** Programmatically sets the inferred plan (used by fullAutoFlow in Phase 4). */
@@ -254,7 +254,7 @@ export function setNarrativePlan(plan: NarrativePlan): void {
 
 /** Returns true when "image" source is active. */
 export function isImageSourceActive(): boolean {
-  return _state.source === 'image';
+  return _modeState.source === 'image';
 }
 
 // ---------------------------------------------------------------------------
@@ -296,8 +296,8 @@ async function _handlePublish(): Promise<void> {
         imageBase64: img.base64,
         mimeType: img.mimeType,
       })),
-      provider: _state.provider,
-      mode: _state.mode,
+      provider: _modeState.provider,
+      mode: _modeState.mode,
     },
     // Carry through any global form settings if available
     category: _readFormField('unified-category'),
