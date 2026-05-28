@@ -602,6 +602,7 @@ export async function initPriceInfoModal(): Promise<void> {
           'perplexity-sonar': '🔮 Perplexity Sonar (~₩15/글)',
           'openai-gpt4o-mini': '🧠 GPT-4.1 mini (~₩16/글)',
           'openai-gpt41': '⚖️ GPT-4.1 (~₩60/글)',
+          'openai-gpt4o-search': '🔎 GPT-4o Search (~₩101 + ₩35/검색)',
           'claude-sonnet': '📜 Claude Sonnet 4.6 (~₩240/글)',
         };
         // deprecate된 모델 ID 자동 마이그레이션 (gemini-3-*-preview 등)
@@ -1017,7 +1018,7 @@ export async function initPriceInfoModal(): Promise<void> {
           openaiApiKey: (document.getElementById('openai-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-02-22] OpenAI API
           claudeApiKey: (document.getElementById('claude-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-02-22] Claude API
           perplexityApiKey: (document.getElementById('perplexity-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-03-30] Perplexity API 키 저장 누락 수정
-          defaultAiProvider: (() => { const m = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value; return m === 'perplexity-sonar' ? 'perplexity' : (m === 'openai-gpt4o' || m === 'openai-gpt4o-mini' || m === 'openai-gpt41') ? 'openai' : (m === 'claude-haiku' || m === 'claude-sonnet' || m === 'claude-opus') ? 'claude' : 'gemini'; })(),
+          defaultAiProvider: (() => { const m = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value; return m === 'perplexity-sonar' ? 'perplexity' : (m === 'openai-gpt4o' || m === 'openai-gpt4o-mini' || m === 'openai-gpt41' || m === 'openai-gpt4o-search') ? 'openai' : (m === 'claude-haiku' || m === 'claude-sonnet' || m === 'claude-opus') ? 'claude' : 'gemini'; })(),
         };
 
 

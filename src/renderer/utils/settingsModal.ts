@@ -222,6 +222,7 @@ async function loadCurrentSettings(): Promise<void> {
                 'perplexity-sonar': '🔮 Perplexity Sonar (~₩15/글)',
                 'openai-gpt4o-mini': '🧠 GPT-4.1 mini (~₩16/글)',
                 'openai-gpt41': '⚖️ GPT-4.1 (~₩60/글)',
+                'openai-gpt4o-search': '🔎 GPT-4o Search (~₩101 + ₩35/검색)',
                 'claude-haiku': '🎭 Claude Haiku (~₩30/글)',
                 'claude-sonnet': '📜 Claude Sonnet 4.6 (~₩240/글)',
                 'claude-opus': '👑 Claude Opus (~₩900/글)',
@@ -384,10 +385,82 @@ export function initSettingsModal(): void {
         // ✅ [2026-03-24] 캐시 관리 이벤트
         setupCacheSettings();
 
+        // SPEC-MIGRATION-2026 M3 P2: GPT-4o Search 선택 시 1회 비용 안내 모달 (opt-in).
+        //   feedback_no_fallback — 사용자가 의도하지 않은 검색 호출 비용을 명시 인지하도록 confirm.
+        setupOpenAISearchCostConsent();
+
         console.log('[SettingsModal] 📦 환경설정 모달 초기화 완료!');
     } catch (error) {
         console.error('[SettingsModal] ❌ 초기화 중 에러:', error);
     }
+}
+
+// SPEC-MIGRATION-2026 M3 P2: GPT-4o Search 선택 1회 비용 동의 모달.
+//   동작: 라디오 change 이벤트에서 'openai-gpt4o-search' 선택 시 confirm 노출.
+//   1회 동의 후 sessionStorage 플래그로 동일 세션 내 재노출 방지.
+//   사용자가 취소하면 이전 모델로 자동 revert.
+function setupOpenAISearchCostConsent(): void {
+    const SEARCH_VALUE = 'openai-gpt4o-search';
+    const CONSENT_KEY = 'm3p2:openai-search-cost-consent';
+    let previousValue: string | null = null;
+
+    // 모달 열릴 때마다 기존 선택값 기억 (revert 용)
+    const radios = document.querySelectorAll<HTMLInputElement>(
+        'input[name="primaryGeminiTextModel"]'
+    );
+    if (radios.length === 0) {
+        console.warn('[SettingsModal][M3P2] primaryGeminiTextModel 라디오 미발견');
+        return;
+    }
+
+    const captureCurrent = (): string | null => {
+        const checked = document.querySelector<HTMLInputElement>(
+            'input[name="primaryGeminiTextModel"]:checked'
+        );
+        return checked?.value || null;
+    };
+
+    radios.forEach((radio) => {
+        radio.addEventListener('focus', () => {
+            previousValue = captureCurrent();
+        });
+        radio.addEventListener('change', (e) => {
+            const el = e.target as HTMLInputElement;
+            if (!el.checked) return;
+            if (el.value !== SEARCH_VALUE) {
+                previousValue = el.value;
+                return;
+            }
+            if (sessionStorage.getItem(CONSENT_KEY) === 'yes') {
+                previousValue = el.value;
+                return;
+            }
+            const ok = window.confirm(
+                'GPT-4o Search Preview는 웹 검색 호출당 추가 비용이 발생합니다.\n\n' +
+                '· 기본 글 생성: 약 ₩101 ($0.072)\n' +
+                '· 검색 호출 1회당: 약 ₩35 ($0.025)\n\n' +
+                '실시간 정보가 필요한 글에서만 권장합니다. 계속하시겠습니까?'
+            );
+            if (ok) {
+                sessionStorage.setItem(CONSENT_KEY, 'yes');
+                previousValue = el.value;
+                console.log('[SettingsModal][M3P2] 사용자 동의: openai-gpt4o-search 선택');
+            } else {
+                // revert
+                const revertTo = previousValue && previousValue !== SEARCH_VALUE
+                    ? previousValue
+                    : 'gemini-2.5-flash';
+                const target = document.querySelector<HTMLInputElement>(
+                    `input[name="primaryGeminiTextModel"][value="${revertTo}"]`
+                );
+                if (target) {
+                    target.checked = true;
+                    console.log(`[SettingsModal][M3P2] 동의 거부 → ${revertTo}로 revert`);
+                }
+            }
+        });
+    });
+    console.log('[SettingsModal][M3P2] GPT-4o Search 비용 동의 리스너 등록 완료');
 }
 
 // ✅ [2026-01-27] 설정 섹션 페이지 전환 기능 (모달 내 서브페이지)
