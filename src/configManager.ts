@@ -1,6 +1,10 @@
 import { app } from 'electron';
 import fs from 'fs/promises';
 import path from 'path';
+import {
+  decryptConfigOnLoad,
+  migrateConfigToEncrypted,
+} from './security/encryptionMigrator.js';
 
 export interface AppConfig {
   geminiApiKey?: string;
@@ -332,6 +336,22 @@ export async function loadConfig(): Promise<AppConfig> {
     const raw = await fs.readFile(filePath, 'utf-8');
     let parsed = JSON.parse(raw) as any;
 
+    // SPEC-MIGRATION-2026 M1 P3: at-rest 암호화 필드 복호화 (enc:v1: 접두사 있는 항목만).
+    //   - decrypt 실패는 silent fallback 금지 (feedback_no_fallback) → console.error + 키 입력 유도.
+    //   - 평문 필드는 그대로 통과 → 다음 saveConfig 시점에 자동 암호화.
+    {
+      const { config: decrypted, report } = decryptConfigOnLoad(parsed);
+      parsed = decrypted as any;
+      if (report.failures.length > 0) {
+        console.error(`[Config] ❌ safeStorage 복호화 실패 ${report.failures.length}건 — 환경설정에서 재입력 필요:`);
+        for (const f of report.failures) {
+          console.error(`  - ${f.field}: ${f.reason}`);
+        }
+      } else if (report.decrypted.length > 0) {
+        console.log(`[Config] 🔓 safeStorage 복호화 완료: ${report.decrypted.length}개 필드`);
+      }
+    }
+
     // ✅ [v2.10.8] 계정별 파일을 로드할 때 마스터 settings.json의 PRESERVE_FIELDS를 메모리에 머지
     //   문제: settings_xxx.json에 키 누락된 채 saveConfig 호출되면 메모리의 빈 cachedConfig가
     //         디스크에 다시 저장되어 머지 데이터 무효화. 메모리에 항상 머지본을 두면 saveConfig
@@ -340,7 +360,9 @@ export async function loadConfig(): Promise<AppConfig> {
     if (filePath !== masterPath && masterPath !== filePath) {
       try {
         const masterRaw = await fs.readFile(masterPath, 'utf-8');
-        const master = JSON.parse(masterRaw);
+        const masterParsed = JSON.parse(masterRaw);
+        // SPEC-MIGRATION-2026 M1 P3: 마스터 파일에서 머지할 때도 복호화 후 평문 비교/주입.
+        const { config: master } = decryptConfigOnLoad(masterParsed);
         const PRESERVE = [
           'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey',
           'perplexityApiKey', 'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey',
@@ -782,7 +804,24 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
     console.warn('[Config] saveConfig 방어 스킵:', defendErr?.message);
   }
 
-  await fs.writeFile(filePath, JSON.stringify(cachedConfig, null, 2), 'utf-8');
+  // SPEC-MIGRATION-2026 M1 P3: 디스크 쓰기 직전 1회 암호화 마이그레이션 (멱등).
+  //   - 메모리 cachedConfig는 평문 유지 → applyConfigToEnv / 다음 saveConfig 안전.
+  //   - 디스크는 항상 enc:v1: 접두사로 at-rest 암호화.
+  //   - failure는 silent fallback 금지 (feedback_no_fallback) → console.error.
+  {
+    const { config: persistedConfig, report } = migrateConfigToEncrypted(
+      cachedConfig as unknown as Record<string, unknown>,
+    );
+    if (report.failures.length > 0) {
+      console.error(`[Config] ❌ safeStorage 암호화 실패 ${report.failures.length}건 (평문 그대로 저장):`);
+      for (const f of report.failures) {
+        console.error(`  - ${f.field}: ${f.reason}`);
+      }
+    } else if (report.migrated.length > 0) {
+      console.log(`[Config] 🔐 safeStorage 신규 암호화: ${report.migrated.length}개 필드`);
+    }
+    await fs.writeFile(filePath, JSON.stringify(persistedConfig, null, 2), 'utf-8');
+  }
 
   // ✅ [2026-03-27 FIX] 계정별 파일에 저장할 때, 기본 settings.json에도 API 키 백싱크
   // 앱 재시작 시 로그인 전에도 API 키가 유지되도록 함
@@ -818,8 +857,12 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           }
         }
         if (changed) {
-          await fs.writeFile(defaultPath, JSON.stringify(defaultConfig, null, 2), 'utf-8');
-          console.log('[Config] ✅ 기본 설정 파일에 API 키 백싱크 완료');
+          // SPEC-MIGRATION-2026 M1 P3: 백싱크 디스크 쓰기도 동일 암호화 통과 (master plain 회귀 차단).
+          const { config: persistedDefault } = migrateConfigToEncrypted(
+            defaultConfig as Record<string, unknown>,
+          );
+          await fs.writeFile(defaultPath, JSON.stringify(persistedDefault, null, 2), 'utf-8');
+          console.log('[Config] ✅ 기본 설정 파일에 API 키 백싱크 완료 (safeStorage 암호화)');
         }
       }
     } catch (syncError) {

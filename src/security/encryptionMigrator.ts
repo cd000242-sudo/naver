@@ -19,6 +19,7 @@
  */
 
 import {
+  decryptString,
   encryptString,
   isEncrypted,
   isEncryptionAvailable,
@@ -199,4 +200,68 @@ export function migrateConfigToEncrypted(
  */
 export function getSensitiveFields(): readonly string[] {
   return SENSITIVE_FIELDS;
+}
+
+export interface DecryptReport {
+  /** Field names that were successfully decrypted in this run. */
+  readonly decrypted: readonly string[];
+  /** Field names whose decryption attempt threw; left as the encrypted payload. */
+  readonly failures: ReadonlyArray<{ field: string; reason: string }>;
+}
+
+/**
+ * Decrypts every previously-encrypted sensitive field in `input` (out-of-place).
+ * Plaintext values pass through unchanged. Decrypt failures leave the encrypted
+ * payload in place so the caller can prompt re-entry (feedback_no_fallback).
+ *
+ * Mirror of `migrateConfigToEncrypted` — used by configManager's loadConfig to
+ * present a fully-plaintext view to the rest of the app while keeping at-rest
+ * data encrypted.
+ */
+export function decryptConfigOnLoad(
+  input: Record<string, unknown>,
+): { config: Record<string, unknown>; report: DecryptReport } {
+  const next = { ...input };
+  const decrypted: string[] = [];
+  const failures: Array<{ field: string; reason: string }> = [];
+
+  for (const field of SENSITIVE_FIELDS) {
+    const value = next[field];
+    if (typeof value !== 'string' || value.length === 0) continue;
+    if (!isEncrypted(value)) continue;
+    try {
+      next[field] = decryptString(value);
+      decrypted.push(field);
+    } catch (err) {
+      failures.push({
+        field,
+        reason: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
+
+  for (const field of ARRAY_FIELDS) {
+    const arr = next[field];
+    if (!Array.isArray(arr) || arr.length === 0) continue;
+    let anyDecrypted = false;
+    const upgraded = arr.map((item, i) => {
+      if (typeof item !== 'string' || item.length === 0) return item;
+      if (!isEncrypted(item)) return item;
+      try {
+        const plain = decryptString(item);
+        anyDecrypted = true;
+        return plain;
+      } catch (err) {
+        failures.push({
+          field: `${field}[${i}]`,
+          reason: err instanceof Error ? err.message : String(err),
+        });
+        return item;
+      }
+    });
+    next[field] = upgraded;
+    if (anyDecrypted) decrypted.push(field);
+  }
+
+  return { config: next, report: { decrypted, failures } };
 }
