@@ -6,7 +6,8 @@ import type { AutomationImage } from './naverBlogAutomation.js';
 // 타입 정의
 // ========================================
 
-export type ImageAssignMode = 'full-auto' | 'semi-auto' | 'manual';
+// 'narrative' mode: skip library search/matching and pass the pre-built imageMap through directly.
+export type ImageAssignMode = 'full-auto' | 'semi-auto' | 'manual' | 'narrative';
 
 export interface ImageAssignment {
   heading: string;
@@ -40,6 +41,10 @@ export class ImageAssigner {
 
   /**
    * 소제목에 이미지 자동 배치
+   *
+   * In 'narrative' mode the caller has already built the imageMap via
+   * inferenceImageMapper; we skip library search/matching and return the
+   * pre-built map unchanged.  Pass the map via options.narrativeImageMap.
    */
   async assignImages(
     content: StructuredContent,
@@ -51,6 +56,30 @@ export class ImageAssigner {
       preferredSources = ['unsplash', 'pexels', 'pixabay'],
       minMatchScore = 0.3,
     } = options;
+
+    // Narrative mode: use the pre-built imageMap directly — no library search.
+    if (mode === 'narrative') {
+      const narrativeMap: Map<string, any[]> = (options as any).narrativeImageMap ?? new Map();
+      const assignments: ImageAssignment[] = (content.headings ?? []).map((h) => ({
+        heading: h.title,
+        selectedImage: null,
+        suggestions: [],
+      }));
+      const automationImages: AutomationImage[] = [];
+      narrativeMap.forEach((imgs, heading) => {
+        imgs.forEach((img) => {
+          automationImages.push({
+            heading,
+            filePath: img.filePath ?? img.url ?? '',
+            provider: 'narrative',
+            alt: `${heading} 이미지`,
+            caption: img.heading ?? heading,
+          });
+        });
+      });
+      this.logger(`🖼️ 이미지 배치 모드: narrative (pre-built map, ${automationImages.length}개)`);
+      return { assignments, automationImages, needsUserSelection: false };
+    }
 
     const headings = content.headings || [];
     const assignments: ImageAssignment[] = [];

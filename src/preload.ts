@@ -1119,6 +1119,17 @@ contextBridge.exposeInMainWorld('api', {
   getStylePreviewCache: (): Promise<{ success: boolean; cache: Record<string, string> }> =>
     ipcRenderer.invoke('style-preview:getCache'),
 
+  // SPEC-IMAGE-NARRATIVE-2026 Phase 4: Vision infer-and-write bridge
+  // Sends base64 image payloads to main process and receives StructuredContent + imageMap.
+  inferAndWrite: (payload: {
+    images: Array<{ imageId: string; imageBase64: string; mimeType: string }>;
+    provider?: string;
+    mode?: string;
+    targetChars?: number;
+    toneStyle?: string;
+  }): Promise<{ success: boolean; content?: any; imageMap?: Record<string, any[]>; message?: string }> =>
+    ipcRenderer.invoke('vision:infer-and-write', payload),
+
 });
 
 // ✅ electronAPI로도 동일한 API 노출 (renderer.ts 호환성)

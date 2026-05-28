@@ -11,17 +11,9 @@
  */
 
 import { readFile } from 'fs/promises';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
 import type { NarrativePlan, InferenceMode, VisionProvider } from '../types.js';
 import type { StructuredContent } from '../../contentGenerator.js';
-
-// ---------------------------------------------------------------------------
-// Constants
-// ---------------------------------------------------------------------------
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 // Resolved at runtime relative to this file: ../../prompts/imageNarrative/
 const PROMPT_DIR = join(__dirname, '..', '..', '..', 'src', 'prompts', 'imageNarrative');

@@ -385,6 +385,16 @@ export async function executeFullAutoFlow(formData: any): Promise<any> {
     // ✅ 중지 체크
     checkShouldStop();
 
+    // ── HUNK 1: image-narrative mode entry point ──────────────────────────
+    // When the user has selected "image source" (Phase 3 toggle), delegate to
+    // publishWithImageNarrative instead of the standard 5-mode pipeline.
+    // This ensures existing SEO/홈판/쇼핑/사용자정의/업체 flows are untouched.
+    if ((formData as any).contentMode === 'image-narrative') {
+      await publishWithImageNarrative(formData);
+      return;
+    }
+    // ─────────────────────────────────────────────────────────────────────
+
     // ✅ [2026-03-29 FIX v2 + v2.6.1 HOTFIX] 이전 세션 이미지 잔존 방지 + v1.6.5 가드 우회 수정
     // 원인 1: ImageManager에 이전 글 이미지가 남아있으면 그대로 재사용되는 버그
     // 원인 2: (v2.6.1) handleFullAutoPublish가 생성한 이미지를 이 초기화가 지워버려
@@ -3589,6 +3599,114 @@ export async function executeBlogPublishing(structuredContent: any, generatedIma
   }, 500);
 
   return automationResult;
+}
+
+// ── HUNK 2 + 3: image-narrative mode — content build + image mapping + publish ──
+/**
+ * Handles the full automation flow when contentMode === 'image-narrative'.
+ *
+ * HUNK 2: Builds NarrativePlan → StructuredContent + imageMap via IPC.
+ * HUNK 3: Delegates to the existing executeBlogPublishing with pre-built imageMap.
+ *
+ * The existing 5 content modes (SEO / 홈판 / affiliate / custom / business) are
+ * NOT touched — they continue through the standard generateFullAutoContent path.
+ */
+async function publishWithImageNarrative(formData: any): Promise<void> {
+  const modal = (window as any).currentProgressModal ?? null;
+  appendLog('📸 이미지 추론 글 모드 시작...');
+  showUnifiedProgress(10, '이미지 추론 중...', 'Vision AI가 사진을 분석하고 있습니다.');
+  modal?.setProgress?.(10, 'Vision 분석 시작...');
+
+  // ── HUNK 2: Prepare narrative plan + imageMap ───────────────────────────
+  let structuredContent: any;
+  let narrativeImageMap: Map<string, any[]> | undefined;
+
+  try {
+    // Call main process IPC handler 'vision:infer-and-write' (added in main.ts hunk).
+    // Renderer passes images as plain objects with base64 payloads.
+    const imagePayloads: Array<{ imageId: string; imageBase64: string; mimeType: string }> =
+      ((formData as any).imageNarrative?.images ?? []).map((img: any) => ({
+        imageId: img.imageId ?? img.id ?? img.name ?? 'img',
+        imageBase64: img.imageBase64 ?? img.base64 ?? '',
+        mimeType: img.mimeType ?? 'image/jpeg',
+      }));
+
+    if (imagePayloads.length < 3) {
+      throw new Error('이미지 추론 글 모드: 최소 3장의 이미지가 필요합니다.');
+    }
+
+    showUnifiedProgress(20, '이미지 분석 요청 중...', `${imagePayloads.length}장을 Vision AI에 전송합니다.`);
+    modal?.setProgress?.(20, 'IPC 요청...');
+
+    const ipcResult: { success: boolean; content?: any; imageMap?: Record<string, any[]>; message?: string } =
+      await (window as any).api.inferAndWrite({
+        images: imagePayloads,
+        provider: (formData as any).imageNarrative?.provider ?? 'gemini',
+        mode: (formData as any).imageNarrative?.mode ?? 'auto',
+        targetChars: (formData as any).targetChars,
+        toneStyle: (formData as any).toneStyle,
+      });
+
+    if (!ipcResult.success || !ipcResult.content) {
+      throw new Error(ipcResult.message ?? 'Vision 추론 또는 글 생성에 실패했습니다.');
+    }
+
+    structuredContent = ipcResult.content;
+
+    // Rebuild Map from the plain-object IPC response
+    narrativeImageMap = new Map<string, any[]>();
+    if (ipcResult.imageMap) {
+      for (const [heading, imgs] of Object.entries(ipcResult.imageMap)) {
+        narrativeImageMap.set(heading, imgs as any[]);
+      }
+    }
+  } catch (err) {
+    appendLog(`❌ 이미지 추론 실패: ${(err as Error).message}`);
+    throw err;
+  }
+
+  showUnifiedProgress(55, '글 생성 완료 — 이미지 배치 중...', '소제목별 이미지를 배치하고 있습니다.');
+  modal?.setProgress?.(55, '이미지 배치 중...');
+
+  // Set up ImageManager with the narrative imageMap
+  if (narrativeImageMap && narrativeImageMap.size > 0) {
+    try {
+      ImageManager.clearAll();
+      narrativeImageMap.forEach((imgs, heading) => {
+        imgs.forEach((img) => ImageManager.addImage(heading, img));
+      });
+      appendLog(`🖼️ ImageManager에 ${narrativeImageMap.size}개 소제목 이미지 배치 완료`);
+    } catch (imErr) {
+      console.warn('[ImageNarrative] ImageManager 배치 실패 (계속 진행):', imErr);
+    }
+  }
+
+  // Save content and update globals
+  currentStructuredContent = structuredContent;
+  (window as any).currentStructuredContent = structuredContent;
+  const postId = saveGeneratedPost(structuredContent, false, {
+    category: formData.category || formData.categoryName,
+    contentMode: 'image-narrative',
+  });
+  if (postId) currentPostId = postId;
+
+  await displayContentInAllTabs(structuredContent);
+
+  const newTitle = structuredContent.selectedTitle || structuredContent.title || '';
+  if (newTitle && !/^https?:\/\//i.test(newTitle.trim())) {
+    const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement;
+    if (titleInput) titleInput.value = newTitle;
+    formData.title = newTitle;
+  }
+
+  // ── HUNK 3: Delegate to existing blog publish flow ──────────────────────
+  showUnifiedProgress(70, '발행 준비 중...', '네이버 블로그에 발행합니다.');
+  modal?.setProgress?.(70, '발행 준비...');
+
+  const finalImages = ImageManager.getAllImages() ?? [];
+  appendLog(`📤 발행 위임: 이미지 ${finalImages.length}개, 글 "${newTitle.substring(0, 30)}..."`);
+
+  await executeBlogPublishing(structuredContent, finalImages, formData);
 }
 
 // 진행률 업데이트

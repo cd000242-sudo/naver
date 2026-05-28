@@ -54,13 +54,13 @@ export interface InferenceContext {
  */
 export interface ImageExif {
   /** ISO 8601 timestamp from DateTimeOriginal. */
-  readonly takenAt?: string;
+  takenAt?: string;
   /** Decimal latitude, e.g., 37.5665. */
-  readonly gpsLat?: number;
+  gpsLat?: number;
   /** Decimal longitude, e.g., 126.9780. */
-  readonly gpsLng?: number;
+  gpsLng?: number;
   /** Camera make/model string (optional). */
-  readonly camera?: string;
+  camera?: string;
 }
 
 // ---------------------------------------------------------------------------

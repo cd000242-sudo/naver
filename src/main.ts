@@ -8225,6 +8225,61 @@ ipcMain.handle('library:collectImagesByTitle', async (_event, title: string, sel
   }
 });
 
+// ── SPEC-IMAGE-NARRATIVE-2026 Phase 4: Vision infer-and-write IPC handler ──
+// Receives base64 image payloads from the renderer, runs aggregateInferences +
+// buildNarrativeContent + mapInferencesToImageMap, and returns StructuredContent
+// + a plain-object imageMap that the renderer injects into ImageManager.
+ipcMain.handle('vision:infer-and-write', async (_event, payload: {
+  images: Array<{ imageId: string; imageBase64: string; mimeType: string }>;
+  provider?: string;
+  mode?: string;
+  targetChars?: number;
+  toneStyle?: string;
+}) => {
+  try {
+    console.log(`[Main] vision:infer-and-write — ${payload.images.length}장 수신`);
+
+    const { aggregateInferences } = await import('./imageNarrative/inferenceAggregator/aggregator.js');
+    const { buildNarrativeContent } = await import('./imageNarrative/narrativeBuilder/builder.js');
+    const { mapInferencesToImageMap } = await import('./imageNarrative/placement/inferenceImageMapper.js');
+
+    // Convert plain base64 objects to ImageInput format
+    const imageInputs = payload.images.map((img) => ({
+      imageId: img.imageId,
+      buffer: Buffer.from(img.imageBase64, 'base64'),
+      mimeType: img.mimeType,
+    }));
+
+    const plan = await aggregateInferences(imageInputs, {
+      provider: (payload.provider ?? 'gemini') as any,
+      mode: (payload.mode ?? 'auto') as any,
+    });
+
+    const content = await buildNarrativeContent(plan, {
+      provider: (payload.provider ?? 'gemini') as any,
+      targetChars: payload.targetChars,
+      toneStyle: payload.toneStyle as any,
+    });
+
+    const imageMap = mapInferencesToImageMap(
+      plan,
+      payload.images.map((img) => img.imageId),
+    );
+
+    // Convert Map to plain object for IPC serialisation
+    const imageMapObj: Record<string, Array<{ filePath?: string; heading?: string }>> = {};
+    imageMap.forEach((imgs, heading) => {
+      imageMapObj[heading] = imgs;
+    });
+
+    console.log(`[Main] vision:infer-and-write — 완료 (섹션 ${plan.sections.length}개, 이미지 ${imageMap.size}개 소제목)`);
+    return { success: true, content, imageMap: imageMapObj };
+  } catch (error) {
+    console.error('[Main] vision:infer-and-write 오류:', error);
+    return { success: false, message: (error as Error).message };
+  }
+});
+
 // ✅ Puppeteer/자동화 오류 메시지 한글화 함수 (Main Process용)
 function translatePuppeteerError(error: Error): string {
   if (!error) return '⚠️ 알 수 없는 오류';

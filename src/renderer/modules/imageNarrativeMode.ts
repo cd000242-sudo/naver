@@ -11,6 +11,7 @@
 import type { NarrativePlan, VisionProvider, InferenceMode } from '../../imageNarrative/types.js';
 import { initImageNarrativeUpload, getUploadedImages, clearUploadedImages } from './imageNarrativeUpload.js';
 import { initImageNarrativeReview, showReviewPanel, hideReviewPanel } from './imageNarrativeReview.js';
+import { executeFullAutoFlow } from './fullAutoFlow.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -254,4 +255,72 @@ export function setNarrativePlan(plan: NarrativePlan): void {
 /** Returns true when "image" source is active. */
 export function isImageSourceActive(): boolean {
   return _state.source === 'image';
+}
+
+// ---------------------------------------------------------------------------
+// Phase 4: publish button wire-up
+// ---------------------------------------------------------------------------
+
+/**
+ * Binds the "publish" button in the image-narrative area.
+ * When clicked, collects uploaded images + current settings and delegates to
+ * executeFullAutoFlow with contentMode === 'image-narrative'.
+ *
+ * Must be called after initImageNarrativeMode().
+ */
+export function bindImageNarrativePublish(): void {
+  const btn = document.getElementById('image-narrative-publish-btn');
+  if (!btn) {
+    console.warn('[ImageNarrativeMode] Publish button not found — skipping bind');
+    return;
+  }
+
+  btn.addEventListener('click', async () => {
+    await _handlePublish();
+  });
+}
+
+async function _handlePublish(): Promise<void> {
+  const images = getUploadedImages();
+  if (images.length < 3) {
+    _showToast('최소 3장 이상의 이미지를 업로드해 주세요.', 'error');
+    return;
+  }
+
+  // Build the formData payload for executeFullAutoFlow
+  const formData: Record<string, unknown> = {
+    contentMode: 'image-narrative',
+    imageNarrative: {
+      images: images.map((img) => ({
+        imageId: img.id,
+        imageBase64: img.base64,
+        mimeType: img.mimeType,
+      })),
+      provider: _state.provider,
+      mode: _state.mode,
+    },
+    // Carry through any global form settings if available
+    category: _readFormField('unified-category'),
+    toneStyle: _readFormField('unified-tone-style'),
+    targetChars: _readTargetChars(),
+  };
+
+  try {
+    await executeFullAutoFlow(formData);
+  } catch (err) {
+    console.error('[ImageNarrativeMode] Publish failed:', err);
+    _showToast(`발행 실패: ${(err as Error).message}`, 'error');
+  }
+}
+
+function _readFormField(id: string): string | undefined {
+  const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null;
+  return el?.value?.trim() || undefined;
+}
+
+function _readTargetChars(): number | undefined {
+  const el = document.getElementById('unified-target-chars') as HTMLSelectElement | null;
+  if (!el) return undefined;
+  const n = parseInt(el.value, 10);
+  return Number.isNaN(n) ? undefined : n;
 }

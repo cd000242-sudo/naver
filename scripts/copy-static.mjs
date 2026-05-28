@@ -333,6 +333,11 @@ try {
     'thumbnailPreview.js',
     'titleGeneration.js',
     'bestProductModal.js',  // ✅ [2026-03-13] 베스트 상품 수집기 모듈 추가
+    // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode modules
+    'imageNarrativeUpload.js',
+    'imageNarrativeReview.js',
+    'imageNarrativeMode.js',
+    'imageNarrativeQuickMode.js',
   ];
   let modulesSource = '';
   for (const modFile of modulesFiles) {
