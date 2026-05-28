@@ -5852,10 +5852,18 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   } else if (uiSelectedModel === 'openai-gpt4o') {
     openAIModels = ['gpt-4o'];
     console.log('[OpenAI] 🚀 GPT-4o — 폴백 없음');
+  } else if (uiSelectedModel === 'openai-gpt4o-search') {
+    // [2026-05-28 M3 P2] SPEC-MIGRATION-2026 — web search grounding for OpenAI.
+    //   gpt-4o-search-preview is the only OpenAI text model that supports
+    //   web_search_options today. Response is plain text (no json_object),
+    //   so downstream parser must accept text fallback.
+    openAIModels = ['gpt-4o-search-preview'];
+    console.log('[OpenAI] 🔎 GPT-4o Search Preview — Web grounding ON');
   } else {
     openAIModels = ['gpt-4.1'];
     console.log('[OpenAI] ⚖️ GPT-4.1 (기본) — 폴백 없음');
   }
+  const useOpenAIGrounding = uiSelectedModel === 'openai-gpt4o-search';
 
   const customModel = process.env.OPENAI_STRUCTURED_MODEL;
   const modelsToTry = customModel ? [customModel] : openAIModels;
@@ -5881,17 +5889,28 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         await openaiRpmThrottler.throttle();
 
         // ✅ [v2.10.28] OpenAI SDK signal 전달 — 사용자 취소 시 fetch 즉시 abort
-        const createPromise = client.chat.completions.create({
+        // [2026-05-28 M3 P2] search-preview 모델 분기: web_search_options ON,
+        //   response_format/json_object/temperature/top_p 미지원 → 평문 + 파서 fallback.
+        const isSearchPreview = modelName.includes('search-preview');
+        const baseParams: any = {
           model: modelName,
           messages: [
             ...(oaiSystem ? [{ role: 'system' as const, content: oaiSystem }] : []),
             { role: 'user' as const, content: oaiUser },
           ],
-          temperature: temperature,
-          top_p: 0.9,
           max_completion_tokens: 8192,
-          response_format: { type: 'json_object' },  // ✅ [2026-03-23] JSON 출력 보장
-        } as any, signal ? { signal } as any : undefined);
+        };
+        if (isSearchPreview) {
+          baseParams.web_search_options = {};
+        } else {
+          baseParams.temperature = temperature;
+          baseParams.top_p = 0.9;
+          baseParams.response_format = { type: 'json_object' };
+        }
+        const createPromise = client.chat.completions.create(
+          baseParams,
+          signal ? { signal } as any : undefined,
+        );
 
         const response = await Promise.race([createPromise, timeoutPromise]);
         // ✅ [2026-05-25 v2.10.356] 호출 성공 기록 — RPM 적응형 가속에 활용
