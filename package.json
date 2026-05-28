@@ -49,11 +49,11 @@
     "probe:serp": "node scripts/probe-serp.mjs"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.21.1",
+    "@anthropic-ai/sdk": "^0.99.0",
     "@google/generative-ai": "^0.24.1",
     "@imgly/background-removal": "^1.7.0",
     "@rohitaryal/imagefx-api": "^3.0.3",
-    "@types/xlsx": "^0.0.35",
+    "@types/xlsx": "^0.0.36",
     "app-builder-bin": "^5.0.0-alpha.12",
     "axios": "^1.6.0",
     "boxen": "^8.0.1",
