@@ -44,7 +44,10 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     //   base 어미 로테이션에 가려지던 회귀 fix. 현재 25,561자. baseline 25,700자 재상향.
     // 2026-05-28 v2.10.392: 의미 응집(semantic cohesion) 블록 신규 추가 — 사용자 명시 요청
     //   ("말이 되게끔 문맥 맥락에 맞게끔"). 단락 = 의미 단위 5줄 블록. baseline 26,000자 재상향.
-    expect(content.length).toBeLessThan(26000);
+    // 2026-05-28 SECTION SH (강한 소제목 10조) 통합: R0-2 30~55자 정의문 + R0-3 정확히 5개 +
+    //   FAQ 2개 + 직답 페어 + H2 본문 180~250자 (모바일 1.5스크롤) + P-C 갈고리 자기모순 해소 +
+    //   1인칭 흔적 의무 5개 중 2개 — 4-agent 종합 비평 합의 반영. 현재 26,831자. baseline 27,500자 재상향.
+    expect(content.length).toBeLessThan(27500);
     expect(lineCount).toBeLessThan(875);
   });
 
@@ -63,7 +66,9 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     //   현재 37,129자. baseline 37,500자 재상향.
     // 2026-05-27 작업 10: SECTION 9 [STYLE OVERRIDE 우선] + R0-5b + 체크리스트 강화 —
     //   페르소나 어미 풀이 base 카탈로그에 가려지던 회귀 fix. 현재 37,499자. baseline 37,700자 재상향.
-    expect(content.length).toBeLessThan(37700);
+    // 2026-05-28 SECTION SH 통합: G2 만능 라벨 차단 + G2-1 1인칭 흔적 7개 중 3개 + G2-2 마이크로
+    //   타겟 강제 — 4-agent 종합 비평 합의 반영. 현재 38,233자. baseline 38,500자 재상향.
+    expect(content.length).toBeLessThan(38500);
   });
 
   it('모든 prompt 파일 합계가 v1.4.7 대비 슬림화됨', () => {
