@@ -116,6 +116,8 @@ export function normalizeContentLineBreaks(content: StructuredContent): Structur
 // [v2.10.390] 본질은 프롬프트 모바일 룰 — 본 함수는 AI 실수 시 안전망.
 //   임계값 180→200 (AI가 잘 만든 단락 침범 최소화).
 //   business/base.prompt + affiliate/chain/stage3_draft.prompt에 모바일 룰 추가됨.
+// [v2.10.393] 한국어 종결어미 한정 split — v2.10.391 OFF 이유(영문 약어/소수점)를
+//   정규식 한국어 limit로 해소. "Mr." "3.14" "A.I." 등 split 안 됨.
 function ensureParagraphBreaks(text: string): string {
   if (!text || text.length < 200) return text;
 
@@ -126,14 +128,13 @@ function ensureParagraphBreaks(text: string): string {
     return fixed.join('\n\n');
   }
 
-  // \n\n 없이 300자 이상 → 문장 기준으로 문단 분리
-  // 숫자+점 패턴(1. 2. 등) 보호를 위해 임시 치환
-  const safe = text.replace(/(\d+)\.\s/g, '$1__NUMDOT__ ');
-
-  // 문장 종결 기준으로 분리 (.!? 뒤 공백)
-  const sentences = safe
-    .split(/(?<=[.!?。！？])\s+/)
-    .map(s => s.replace(/__NUMDOT__/g, '.').trim())
+  // \n\n 없이 200자 이상 → 한국어 종결어미 기준으로 문단 분리
+  // [v2.10.393] (?<=[가-힣][.!?]) — 한글 직후 마침표만 split.
+  //   영문 약어(Mr./Dr.), 이니셜(A.I.), 소수점(3.14)은 한글 직전이 아니므로 split 안 됨.
+  //   숫자목록(1. 2.)도 자동 보호 (숫자가 한글 아님).
+  const sentences = text
+    .split(/(?<=[가-힣][.!?。！？])\s+/)
+    .map(s => s.trim())
     .filter(s => s.length > 0);
 
   if (sentences.length <= 2) {

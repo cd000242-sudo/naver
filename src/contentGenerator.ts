@@ -72,9 +72,9 @@ import {
   applyOrdinalHeadingMarkerFix,
   removeEmojisFromContent,
   normalizeContentLineBreaks,
-  // [v2.10.391] ensureContentParagraphBreaks 사후처리 OFF — AI 프롬프트 모바일 룰에만 의존
-  // 영문 약어(Mr./Dr.)·이니셜·줄임표·소수점에서 어색하게 잘라내는 위험 제거.
-  // 함수 자체는 contentBodyTransforms.ts에 보존 (롤백 대비).
+  // [v2.10.393] ensureContentParagraphBreaks 재활성화 (한국어 종결어미 한정 split).
+  //   contentBodyTransforms.ts의 정규식이 (?<=[가-힣][.!?])로 영문 약어/소수점 회귀 차단.
+  ensureContentParagraphBreaks,
   limitRegexOccurrences,
   truncateHeadingTitles,
 } from './contentBodyTransforms';
@@ -1176,9 +1176,12 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   // ✅ [2026-03-14] 연속 줄바꿈 정리 (AI가 생성한 \n\n\n → \n\n, 본문 내 이중 빈 줄 방지)
   finalContent = normalizeContentLineBreaks(finalContent);
 
-  // [v2.10.391] 사후 문단 분할 OFF — AI 프롬프트 모바일 룰로 일원화.
-  // 영문 약어/이니셜/줄임표/소수점에서 어색하게 잘리는 회귀 차단.
-  // finalContent = ensureContentParagraphBreaks(finalContent);
+  // [v2.10.393] 사후 문단 분할 재활성화 — 한국어 종결어미만 split하는 안전 정규식 적용.
+  //   사용자 보고 (v2.10.392): AI prompt 의미응집 블록 적용했어도 한 뭉텅이로 출력됨.
+  //   AI prompt(v2.10.389-392)만으론 모바일 친화 단락 불완전 → 사후 안전망 필요.
+  //   v2.10.391 OFF 이유(영문 약어/소수점/이니셜 잘림)는 contentBodyTransforms.ts의
+  //   정규식 한국어 limit (?<=[가-힣][.!?])로 해소.
+  finalContent = ensureContentParagraphBreaks(finalContent);
 
   // ✅ 소제목 길이 제한 (60자 이내로 완화 - 너무 짧으면 정보 전달력 하락)
   finalContent = truncateHeadingTitles(finalContent, 60);
