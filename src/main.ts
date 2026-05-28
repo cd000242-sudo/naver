@@ -1696,6 +1696,15 @@ async function createWindow(): Promise<void> {
       const errMsg = (loadErr as Error)?.message || String(loadErr);
       debugLog(`[Main] loadFile 실패 — fallback 시도. 원인: ${errMsg}`);
       console.error('[Main] loadFile 실패:', errMsg);
+      // [v2.11.3 FIX] 라이선스 인증창 X 닫기 race 가드 — mainWindow destroy 후 fallback이
+      //   destroyed object에 호출되어 "Object has been destroyed" 다이얼로그가 뜨는 케이스 차단.
+      //   원인: 한글 경로 ERR_FAILED 발생 후 catch 진입 사이 사용자가 인증창을 닫아 app 종료 절차가
+      //         시작되면 mainWindow가 destroy. fallback loadURL이 destroyed window에 호출되어 throw.
+      //   조치: fallback 직전 + 직후 isDestroyed() 가드. destroy됐으면 사용자 종료 의도로 보고 silent return.
+      if (!mainWindow || mainWindow.isDestroyed()) {
+        debugLog('[Main] mainWindow가 fallback 시점에 destroy됨 — 사용자 종료로 간주, silent return');
+        return;
+      }
       try {
         const { pathToFileURL } = await import('url');
         const fileUrl = pathToFileURL(htmlPath).toString();
@@ -1705,6 +1714,10 @@ async function createWindow(): Promise<void> {
       } catch (fallbackErr: any) {
         const fbMsg = (fallbackErr as Error)?.message || String(fallbackErr);
         debugLog(`[Main] loadURL fallback도 실패: ${fbMsg}`);
+        if (!mainWindow || mainWindow.isDestroyed()) {
+          debugLog('[Main] fallback 중 mainWindow destroy — silent return');
+          return;
+        }
         throw new Error(`HTML 로드 실패 (loadFile: ${errMsg} / fallback loadURL: ${fbMsg})`);
       }
     }
