@@ -1,3 +1,10 @@
+/**
+ * @deprecated SPEC-MIGRATION-2026 M2 P3 — 신규 코드는 `src/automation/browserAdapter.ts`
+ *   (Playwright + stealth + Puppeteer-parity API)를 사용한다. 본 파일은 기존
+ *   호출자(googleImageSearch / sourceCollector) 호환을 위해 단계적 폐기 대상.
+ *   다음 세션에서 호출자 swap 후 본 파일 삭제 예정.
+ */
+
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { getChromiumExecutablePath } from '../../browserUtils.js';
 import { getProxyUrl } from './proxyManager.js';
