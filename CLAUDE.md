@@ -112,6 +112,10 @@ const btn = await waitForElement(frame, SELECTORS.publish.confirmPublishButton, 
 - Korean language content — maintain Korean UI strings
 - 236+ unit tests via vitest (`npx vitest run`)
 
+## Workflows
+
+- **`NAVER_REFRESH.md`** — 격변 대응 통합 워크플로우. 사용자가 "네이버 리프레시", "네이버 업데이트", "API 키/MCP/셀렉터 점검", "/refresh-naver" 등 트리거 시 본 파일 읽고 즉시 Phase 0~5 진단 실행 → 리포트 출력 → 사용자 동의 후 Phase 7~9 (commit/upgrade/release). **빈 버전업 릴리즈 자동 진행 금지**.
+
 ## Key Commands
 
 - `/plan` - Implementation planning
