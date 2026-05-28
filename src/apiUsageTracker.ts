@@ -474,3 +474,19 @@ export async function resetApiUsage(provider?: ApiProvider): Promise<void> {
 
   await saveConfig({ apiUsageTrackers: trackers } as any);
 }
+
+// ==================== imageNarrative 카테고리 (Phase 6) ====================
+
+/**
+ * Records a Vision call made by the image-narrative pipeline. When cacheHit
+ * is true the call cost is zeroed because the response came from the local
+ * cache (no provider request was made). Otherwise the underlying provider's
+ * regular pricing applies.
+ */
+export function trackImageNarrativeUsage(
+  provider: Extract<ApiProvider, 'gemini' | 'openai' | 'claude' | 'deepinfra'>,
+  input: TrackingInput,
+  cacheHit: boolean = false,
+): void {
+  trackApiUsage(provider, cacheHit ? { ...input, costOverride: 0 } : input);
+}

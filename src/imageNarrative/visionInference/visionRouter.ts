@@ -16,12 +16,32 @@
 
 import { runGeminiVision } from './geminiVisionAdapter.js';
 import { runOpenAIVision } from './openaiVisionAdapter.js';
+import {
+  getCachedInference,
+  setCachedInference,
+} from '../cost/imageHashCache.js';
+import { checkBudget, recordVisionCall } from '../cost/budgetGuard.js';
+import { trackImageNarrativeUsage } from '../../apiUsageTracker.js';
 import type {
   InferenceContext,
   InferenceOptions,
   InferenceResponse,
   VisionProvider,
 } from '../types.js';
+
+// ---------------------------------------------------------------------------
+// Default model per provider — used for usage-tracking categorization.
+// The actual model name lives inside each adapter; this map is only a label
+// for the cost dashboard. When adapter changes ship the real model name,
+// switch this to read from InferenceResponse directly.
+// ---------------------------------------------------------------------------
+
+const PROVIDER_DEFAULT_MODEL: Record<VisionProvider, string> = {
+  gemini: 'gemini-2.5-flash',
+  openai: 'gpt-4o',
+  claude: 'claude-sonnet-4-6',
+  deepinfra: 'llama-3.2-vision',
+};
 
 // ---------------------------------------------------------------------------
 // Provider API key resolution
@@ -112,19 +132,49 @@ export async function inferImage(
   options: InferenceOptions = {},
 ): Promise<InferenceResponse> {
   const primaryProvider: VisionProvider = options.provider ?? 'gemini';
+  const mode = options.mode ?? 'auto';
   const startMs = Date.now();
+
+  // --- Cost layer: cache lookup (Phase 6) ---
+  // The same image+provider+mode returns the cached response without billing.
+  // Cache hits are still recorded in usage tracking with cost=0 so the dashboard
+  // shows accurate call counts without inflating spend.
+  const cached = getCachedInference(context.imageBase64, primaryProvider, mode);
+  if (cached) {
+    trackImageNarrativeUsage(
+      primaryProvider as 'gemini' | 'openai' | 'claude' | 'deepinfra',
+      { model: PROVIDER_DEFAULT_MODEL[primaryProvider], images: 1 },
+      true,
+    );
+    return { ...cached, latencyMs: Date.now() - startMs };
+  }
+
+  // --- Cost layer: budget guard (Phase 6) ---
+  // Daily/monthly call limits block over-spend. The caller surfaces the
+  // reason in a blocking modal — never a silent fallback (feedback_no_fallback).
+  const budget = checkBudget();
+  if (!budget.allowed) {
+    throw new Error(`BUDGET_EXCEEDED: ${budget.reason}`);
+  }
 
   // --- Primary attempt ---
   let primaryError: unknown;
   try {
     const apiKey = resolveApiKey(primaryProvider);
     const result = await callAdapter(primaryProvider, context, options, apiKey);
-    return {
+    recordVisionCall();
+    const response: InferenceResponse = {
       imageId: context.imageId,
       result,
       provider: primaryProvider,
       latencyMs: Date.now() - startMs,
     };
+    setCachedInference(context.imageBase64, primaryProvider, mode, response);
+    trackImageNarrativeUsage(
+      primaryProvider as 'gemini' | 'openai' | 'claude' | 'deepinfra',
+      { model: PROVIDER_DEFAULT_MODEL[primaryProvider] ?? PROVIDER_DEFAULT_MODEL.gemini, images: 1 },
+    );
+    return response;
   } catch (err) {
     primaryError = err;
   }
@@ -164,12 +214,19 @@ export async function inferImage(
       fallbackOptions,
       fallbackKey,
     );
-    return {
+    recordVisionCall();
+    const response: InferenceResponse = {
       imageId: context.imageId,
       result,
       provider: fallbackProvider,
       latencyMs: Date.now() - startMs,
     };
+    setCachedInference(context.imageBase64, fallbackProvider, mode, response);
+    trackImageNarrativeUsage(
+      fallbackProvider as 'gemini' | 'openai' | 'claude' | 'deepinfra',
+      { model: PROVIDER_DEFAULT_MODEL[fallbackProvider], images: 1 },
+    );
+    return response;
   } catch (fallbackErr) {
     const fallbackMsg =
       fallbackErr instanceof Error ? fallbackErr.message : String(fallbackErr);
