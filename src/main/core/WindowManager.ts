@@ -32,6 +32,12 @@ class WindowManagerImpl {
             webPreferences: {
                 nodeIntegration: false,
                 contextIsolation: true,
+                // [2026-05-28 M1 P1] 보안 강화 — 렌더러 프로세스 샌드박싱.
+                //   preload.ts는 Electron contextBridge + ipcRenderer만 사용 (Node 모듈 0건)
+                //   이라 sandbox=true 호환. 렌더러에서 시스템 리소스 직접 접근 차단.
+                sandbox: true,
+                // [2026-05-28 M1 P1] 저장소 격리 — 메인 윈도우 전용 partition.
+                partition: 'persist:main',
                 preload: path.join(__dirname, '../../preload.js')
             },
             frame: true,
