@@ -155,13 +155,26 @@ async function _runQuickInference(): Promise<void> {
     // [v2.11.5 FIX] Quick Mode 가 호출하던 electronAPI.inferImages 는 preload에 노출 안 됨 →
     //   항상 undefined 반환 → throw "Vision 추론 실패". 표준 채널 window.api.inferAndWrite 로 통일.
     //   응답 스키마도 main 핸들러와 정합 (success/message/plan/content/imageMap).
+    // [v2.11.6] 환경설정의 글 생성 모델을 읽어 vision provider 매핑. 사용자가 OpenAI/Claude
+    //   선택했으면 같은 vendor로 vision도 호출 (modelRegistry routeTextToVision 의도 재현).
+    //   Perplexity 는 vision 미지원이라 gemini fallback (visionRouter도 동일 정책).
+    let textKey = 'gemini-2.5-flash';
+    try {
+      const cfg = await (window as any).api?.getConfig?.();
+      textKey = cfg?.primaryGeminiTextModel || cfg?.geminiModel || textKey;
+    } catch (cfgErr) {
+      console.warn('[QuickMode] getConfig 실패 — Gemini Flash 기본:', cfgErr);
+    }
+    const provider = _textKeyToVisionProvider(textKey);
+    console.log(`[QuickMode] 글 생성 모델 "${textKey}" → vision provider "${provider}"`);
+
     const result = await (window as any).api?.inferAndWrite?.({
       images: images.map((img) => ({
         imageId: img.id,
         imageBase64: img.base64,
         mimeType: img.mimeType,
       })),
-      provider: 'gemini', // Quick mode defaults to Gemini Flash
+      provider,
       mode: 'auto',
     });
 
@@ -405,6 +418,24 @@ function _setNextBtnLoading(loading: boolean): void {
 
 function _getModal(): HTMLElement | null {
   return document.getElementById('quick-mode-modal');
+}
+
+/**
+ * [v2.11.6] 글 생성 모델 키 → vision provider 매핑.
+ *   modelRegistry.routeTextToVision 의 단순 미러 (renderer에 import 부담 없이 인라인).
+ *   - gemini-2.5-* / gemini-3-* → gemini
+ *   - openai-gpt4* / openai-gpt41 → openai
+ *   - claude-* → claude
+ *   - perplexity-* → gemini (Perplexity vision 미지원)
+ *   - 미지원 키 → gemini (안전 기본)
+ */
+function _textKeyToVisionProvider(textKey: string): 'gemini' | 'openai' | 'claude' | 'deepinfra' {
+  if (!textKey) return 'gemini';
+  if (textKey.startsWith('gemini-')) return 'gemini';
+  if (textKey.startsWith('openai-') || textKey.startsWith('gpt-')) return 'openai';
+  if (textKey.startsWith('claude-')) return 'claude';
+  if (textKey.startsWith('perplexity-')) return 'gemini';
+  return 'gemini';
 }
 
 function _showToast(message: string, type: 'error' | 'info'): void {
