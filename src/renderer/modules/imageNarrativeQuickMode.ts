@@ -152,22 +152,27 @@ async function _runQuickInference(): Promise<void> {
   _setNextBtnLoading(true);
 
   try {
-    const result = await (window as any).electronAPI?.inferImages?.({
+    // [v2.11.5 FIX] Quick Mode 가 호출하던 electronAPI.inferImages 는 preload에 노출 안 됨 →
+    //   항상 undefined 반환 → throw "Vision 추론 실패". 표준 채널 window.api.inferAndWrite 로 통일.
+    //   응답 스키마도 main 핸들러와 정합 (success/message/plan/content/imageMap).
+    const result = await (window as any).api?.inferAndWrite?.({
       images: images.map((img) => ({
         imageId: img.id,
         imageBase64: img.base64,
         mimeType: img.mimeType,
-        exif: img.exif,
       })),
       provider: 'gemini', // Quick mode defaults to Gemini Flash
       mode: 'auto',
     });
 
-    if (!result || result.error) {
-      throw new Error(result?.error ?? 'Vision 추론 실패');
+    if (!result || !result.success) {
+      throw new Error(result?.message ?? 'Vision 추론 실패');
     }
 
     const plan = result.plan as NarrativePlan;
+    if (!plan) {
+      throw new Error('추론 응답에 plan 객체가 누락되었습니다.');
+    }
     setState({ plan, isInferring: false });
 
     // Render review inside panel 2

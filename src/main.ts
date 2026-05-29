@@ -8286,7 +8286,9 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
     });
 
     console.log(`[Main] vision:infer-and-write — 완료 (섹션 ${plan.sections.length}개, 이미지 ${imageMap.size}개 소제목)`);
-    return { success: true, content, imageMap: imageMapObj };
+    // [v2.11.5] Quick Mode Panel 2 review UI 는 plan (NarrativePlan) 객체를 그대로 사용한다.
+    // plan은 모두 plain JSON serialisable — Map/Buffer 없음 (orderedResults는 exif/result/imageId).
+    return { success: true, plan, content, imageMap: imageMapObj };
   } catch (error) {
     console.error('[Main] vision:infer-and-write 오류:', error);
     return { success: false, message: (error as Error).message };

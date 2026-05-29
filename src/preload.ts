@@ -1127,7 +1127,7 @@ contextBridge.exposeInMainWorld('api', {
     mode?: string;
     targetChars?: number;
     toneStyle?: string;
-  }): Promise<{ success: boolean; content?: any; imageMap?: Record<string, any[]>; message?: string }> =>
+  }): Promise<{ success: boolean; plan?: any; content?: any; imageMap?: Record<string, any[]>; message?: string }> =>
     ipcRenderer.invoke('vision:infer-and-write', payload),
 
 });
