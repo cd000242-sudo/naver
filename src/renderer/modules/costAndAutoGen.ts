@@ -490,6 +490,14 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
                   progressPercent.textContent = `${pct}%`;
                 }
 
+                // ✅ [SPEC-DROPSHOT-2026 / 발행 미리보기] 새 배치(index 0) 시작 시 이전 글의
+                //   미리보기 그리드를 초기화한다. updateSingleImage는 existingItems===0일 때만
+                //   플레이스홀더를 재생성하므로, 두 번째 글부터 이전 이미지가 잔존하던 버그를 차단.
+                //   연속발행·다중계정·풀오토 모두 이 리스너를 거치므로 단일 지점에서 처리.
+                if (image && index === 0 && progressModal && typeof progressModal.clearImages === 'function') {
+                  progressModal.clearImages();
+                }
+
                 // ✅ [2026-02-27 NEW] 실시간 이미지 그리드 업데이트 — 플레이스홀더를 실제 이미지로 교체
                 if (image && progressModal && typeof progressModal.updateSingleImage === 'function') {
                   const imgSrc = image.filePath || image.url || image.previewDataUrl || '';
