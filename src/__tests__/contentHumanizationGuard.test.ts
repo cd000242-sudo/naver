@@ -1,0 +1,90 @@
+/**
+ * contentHumanizationGuard.test.ts
+ *
+ * 회귀방지 net — "사람보다 사람처럼" 파이프라인 특성화 테스트.
+ *
+ * 핵심 휴머나이제이션/AI탐지 함수(aiHumanizer·contentPlatitudeDetector·humanlikeEval)는
+ * 그동안 전용 테스트가 없어, 사람다움을 약화시키는 변경(예: 인간표현 주입률 완화)이
+ * 일어나도 자동으로 잡히지 않았다. 이 테스트는 현재의 "사람다움 분별력"을 핀으로 고정해
+ * 이후 변경이 사람다움을 약화시키면 실패하도록 한다. (절대값이 아닌 상대/구조 보장)
+ */
+import { describe, it, expect } from 'vitest';
+import { humanizeContent, analyzeAiDetectionRisk } from '../aiHumanizer';
+import { detectPlatitudes } from '../contentPlatitudeDetector';
+import { evaluateHumanlike } from '../content/evaluators/humanlikeEval';
+
+// AI스러운 글: 모든 문장 '~니다' 종결, AI 특유 표현 4개+, 개인표현 없음, 균일한 길이.
+const AI_LIKE = [
+  '인공지능 기술은 매우 빠르게 발전하고 있습니다.',
+  '다음과 같습니다.',
+  '이 기술의 핵심은 대량의 데이터를 효율적으로 처리하는 것입니다.',
+  '요약하자면 현대 사회에서 매우 중요한 기술이라고 할 수 있습니다.',
+  '중요한 점은 올바른 활용 방법을 정확하게 이해하는 것입니다.',
+  '많은 기업들이 이러한 기술을 적극적으로 도입하고 있습니다.',
+  '결론적으로 미래의 핵심 기술로 자리잡을 것으로 예상됩니다.',
+  '이러한 기술은 앞으로도 계속해서 성장할 것으로 보입니다.',
+  '우리는 이러한 거대한 변화에 능동적으로 적응해야 합니다.',
+  '앞으로 더욱 많은 분야에서 폭넓게 활용될 것으로 전망됩니다.',
+  '따라서 지속적인 관심과 학습이 반드시 필요한 상황입니다.',
+].join(' ');
+
+// 사람스러운 글: 종결어미/길이 다양, 개인 경험 표현, AI 특유 표현 없음.
+const HUMAN_LIKE = [
+  '솔직히 말하면 나도 처음엔 반신반의했어요.',
+  '근데 직접 해보니까 생각이 확 바뀌더라고요.',
+  '제 경험상 이건 진짜 물건이에요.',
+  '한 번은 새벽에 급하게 써야 했는데, 딱 3분 만에 끝났죠.',
+  '어이가 없을 정도로 빨랐어요.',
+  '알고 보니 설정 하나만 바꾸면 되는 거였더라고요.',
+  '찾아보니까 의외로 다들 이걸 모르고 있었어요.',
+  '그래서 까먹기 전에 정리해봤어요.',
+  '별거 아닌 것 같아도 알면 진짜 편해요.',
+].join(' ');
+
+describe('회귀방지 net: 사람다움/AI탐지 분별력', () => {
+  describe('analyzeAiDetectionRisk', () => {
+    it('AI스러운 글이 사람스러운 글보다 AI 탐지 위험 점수가 높다', () => {
+      const ai = analyzeAiDetectionRisk(AI_LIKE);
+      const human = analyzeAiDetectionRisk(HUMAN_LIKE);
+      expect(ai.score).toBeGreaterThan(human.score);
+      // AI 글은 최소 한 가지 이상 위험 신호를 잡아내야 한다.
+      expect(ai.issues.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('humanizeContent (strong)', () => {
+    it('AI스러운 글을 실제로 변형한다(무수정 회귀 방지)', () => {
+      const out = humanizeContent(AI_LIKE, 'strong', true);
+      expect(out).not.toBe(AI_LIKE);
+    });
+
+    it('휴머나이즈 후 AI 탐지 위험이 증가하지 않는다', () => {
+      const before = analyzeAiDetectionRisk(AI_LIKE).score;
+      const after = analyzeAiDetectionRisk(humanizeContent(AI_LIKE, 'strong', true)).score;
+      expect(after).toBeLessThanOrEqual(before);
+    });
+  });
+
+  describe('detectPlatitudes', () => {
+    it('일반론 남발 글을 임계 초과로 감지한다', () => {
+      const result = detectPlatitudes({
+        introduction:
+          '보통 이런 경우에는 일반적으로 다양한 방법이 있습니다. 흔히 대체로 많은 분들이 여러 가지 방법을 시도합니다.',
+        headings: [
+          { title: '방법', body: '일반적으로 중요합니다. 다양한 선택지가 있을 수 있습니다.' },
+        ],
+      });
+      expect(result.platitudeHitCount).toBeGreaterThan(3); // MAX_PLATITUDE_HITS
+      expect(result.matchedTriggers.length).toBeGreaterThan(0);
+      expect(result.exceedsThreshold).toBe(true);
+    });
+  });
+
+  describe('evaluateHumanlike', () => {
+    it('사람스러운 본문이 AI스러운 본문보다 사람다움 점수가 높다', () => {
+      const human = evaluateHumanlike({ body: HUMAN_LIKE, mode: 'seo' });
+      const ai = evaluateHumanlike({ body: AI_LIKE, mode: 'seo' });
+      expect(human.score).toBeGreaterThan(ai.score);
+    });
+  });
+});
