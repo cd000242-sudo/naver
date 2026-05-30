@@ -124,7 +124,7 @@ async function _run(): Promise<void> {
   _previewIndex = -1;
   _clearGrid();
   _clearLog();
-  _appendLog(`${engine.label} · 프롬프트 ${prompts.length}개 × ${count}장 = 총 ${total}장 생성 시작`);
+  _studioLog(`${engine.label} · 프롬프트 ${prompts.length}개 × ${count}장 = 총 ${total}장 생성 시작`);
   _setStatus(`${engine.label} · 총 ${total}장 생성 중…`, 'info');
   _setGenerateDisabled(true);
 
@@ -154,16 +154,16 @@ async function _run(): Promise<void> {
     if (done === 0) {
       const msg = `생성 실패: ${res?.message || '이미지를 받지 못했습니다.'}`;
       _setStatus(msg, 'error');
-      _appendLog(`❌ ${msg}`);
+      _studioLog(`❌ ${msg}`);
     } else {
       _setStatus(`✅ ${done}장 생성 완료. 결과는 저장 폴더에 자동 저장됩니다.`, 'success');
-      _appendLog(`✅ ${done}/${total}장 생성 완료`);
+      _studioLog(`✅ ${done}/${total}장 생성 완료`);
     }
   } catch (err) {
     console.error('[ImageGenStudio] generate failed:', err);
     const msg = `생성 중 오류: ${(err as Error)?.message ?? err}`;
     _setStatus(msg, 'error');
-    _appendLog(`❌ ${msg}`);
+    _studioLog(`❌ ${msg}`);
   } finally {
     cleanup?.();
     _busy = false;
@@ -260,7 +260,7 @@ function _clearLog(): void {
   if (log) log.innerHTML = '';
 }
 
-function _appendLog(message: string): void {
+function _studioLog(message: string): void {
   const log = document.getElementById('imgstudio-log');
   if (!log) return;
   const line = document.createElement('div');
