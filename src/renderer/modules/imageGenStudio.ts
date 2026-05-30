@@ -83,7 +83,20 @@ function _bindControls(): void {
   document.getElementById('imgstudio-preview-img')?.addEventListener('click', () => {
     if (_previewIndex >= 0) openStudioLightbox(_resultSrcs, _previewIndex);
   });
+  // 결과 모달 열기/닫기
+  document.getElementById('imgstudio-open-results-btn')?.addEventListener('click', _openResults);
+  (window as any).imgStudioCloseResults = _closeResults;
   updateCostPreview();
+}
+
+function _openResults(): void {
+  const modal = document.getElementById('imgstudio-results-modal');
+  if (modal) modal.style.display = 'flex';
+}
+
+function _closeResults(): void {
+  const modal = document.getElementById('imgstudio-results-modal');
+  if (modal) modal.style.display = 'none';
 }
 
 // ---------------------------------------------------------------------------
@@ -132,6 +145,10 @@ async function _run(): Promise<void> {
   _previewIndex = -1;
   _clearGrid();
   _clearLog();
+  // 결과 모달 자동 오픈(진행 과정을 실시간으로 보여줌) + 결과 버튼 노출
+  const resultsBtnEl = document.getElementById('imgstudio-open-results-btn');
+  if (resultsBtnEl) resultsBtnEl.style.display = 'block';
+  _openResults();
   _studioLog(`${engine.label} · 프롬프트 ${prompts.length}개 × ${count}장 = 총 ${total}장 생성 시작`);
   _setStatus(`${engine.label} · 총 ${total}장 생성 중…`, 'info');
   _setGenerateDisabled(true);
@@ -166,6 +183,10 @@ async function _run(): Promise<void> {
     } else {
       _setStatus(`✅ ${done}장 생성 완료. 결과는 저장 폴더에 자동 저장됩니다.`, 'success');
       _studioLog(`✅ ${done}/${total}장 생성 완료`);
+      // 생성 결과 버튼 노출 + 모달 자동 오픈
+      const resultsBtn = document.getElementById('imgstudio-open-results-btn');
+      if (resultsBtn) resultsBtn.style.display = 'block';
+      _openResults();
     }
   } catch (err) {
     console.error('[ImageGenStudio] generate failed:', err);
