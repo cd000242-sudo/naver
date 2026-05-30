@@ -222,7 +222,6 @@ import { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImages
 import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApiCostConsent, reserveExternalApiImageQuota, generateImagesWithCostSafety, ensurePromptCardRemoveHandler } from './modules/costAndAutoGen.js';
 // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode modules
 import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
-import { initImageNarrativeQuickMode } from './modules/imageNarrativeQuickMode.js';
 import { initImageLibrary, loadLibraryImages, useLibraryImage, switchToTab, generateFavoritesContent, generateTemplatesContent, getEnhancedTemplates } from './modules/contentPreviewAndLibrary.js';
 declare let thumbnailBackgroundImage: string | null;
 declare let thumbnailBackgroundDataUrl: string | null;
@@ -5939,13 +5938,16 @@ URL: ${firstUrl}
     };
 
     if (ftcCheckbox && ftcTextarea && ftcPreset && ftcPanel) {
-      // localStorage에서 복원
-      const savedEnabled = localStorage.getItem('ftcDisclosureEnabled') === 'true';
+      // ✅ 기본값은 모드 기반: 쇼핑커넥트(affiliate)만 자동 ON, 그 외 모드는 기본 OFF.
+      // (localStorage.ftcDisclosureEnabled가 sticky true로 남아 모든 모드에서 체크되던 버그 수정)
       const savedText = localStorage.getItem('ftcDisclosureText') || '';
       const savedPreset = localStorage.getItem('ftcDisclosurePreset') || 'affiliate';
+      const _initMode = (document.getElementById('unified-content-mode') as HTMLInputElement | null)?.value || 'seo';
+      const ftcDefaultOn = _initMode === 'affiliate';
 
-      ftcCheckbox.checked = savedEnabled;
-      ftcPanel.style.display = savedEnabled ? 'block' : 'none';
+      ftcCheckbox.checked = ftcDefaultOn;
+      ftcPanel.style.display = ftcDefaultOn ? 'block' : 'none';
+      localStorage.setItem('ftcDisclosureEnabled', String(ftcDefaultOn));
       ftcPreset.value = savedPreset;
       ftcTextarea.value = savedText || FTC_PRESETS[savedPreset] || FTC_PRESETS.affiliate;
       // custom이 아니면 textarea readonly
@@ -6014,6 +6016,12 @@ URL: ${firstUrl}
           localStorage.setItem('ftcDisclosurePreset', 'affiliate');
           localStorage.setItem('ftcDisclosureText', FTC_PRESETS.affiliate);
           updateBadge();
+        } else if (contentModeSelect.value !== 'affiliate' && ftcCheckbox.checked) {
+          // ✅ 비-쇼핑커넥트 전환 → 기본 해제 (사용자가 다시 수동 체크는 가능)
+          ftcCheckbox.checked = false;
+          ftcPanel.style.display = 'none';
+          localStorage.setItem('ftcDisclosureEnabled', 'false');
+          updateBadge();
         }
       });
     }
@@ -6039,14 +6047,18 @@ URL: ${firstUrl}
       const enabled = localStorage.getItem('ftcDisclosureEnabled') === 'true';
       const preset = localStorage.getItem('ftcDisclosurePreset') || 'affiliate';
       const text = localStorage.getItem('ftcDisclosureText') || FTC_PRESETS_SYNC[preset] || FTC_PRESETS_SYNC.affiliate;
+      // ✅ unified 폼은 모드 기반(쇼핑커넥트만 ON), continuous/ma는 자체 localStorage 유지
+      const _syncMode = (document.getElementById('unified-content-mode') as HTMLInputElement | null)?.value || 'seo';
+      const unifiedEnabled = _syncMode === 'affiliate';
 
       for (const cfg of ftcConfigs) {
         const cb = document.getElementById(cfg.cb) as HTMLInputElement;
         const panel = document.getElementById(cfg.panel) as HTMLDivElement;
         const presetEl = document.getElementById(cfg.preset) as HTMLSelectElement;
         const textEl = document.getElementById(cfg.text) as HTMLTextAreaElement;
-        if (cb) cb.checked = enabled;
-        if (panel) panel.style.display = enabled ? 'block' : 'none';
+        const cbEnabled = cfg.cb === 'unified-ftc-disclosure' ? unifiedEnabled : enabled;
+        if (cb) cb.checked = cbEnabled;
+        if (panel) panel.style.display = cbEnabled ? 'block' : 'none';
         if (presetEl) presetEl.value = preset;
         if (textEl) {
           textEl.value = text;
@@ -6056,8 +6068,8 @@ URL: ${firstUrl}
       }
       const badge = document.getElementById('ftc-status-badge') as HTMLSpanElement;
       const section = document.getElementById('ftc-disclosure-section') as HTMLDivElement;
-      if (badge) badge.style.display = enabled ? 'inline-block' : 'none';
-      if (section) section.style.borderColor = enabled ? 'rgba(245, 158, 11, 0.6)' : 'rgba(245, 158, 11, 0.4)';
+      if (badge) badge.style.display = unifiedEnabled ? 'inline-block' : 'none';
+      if (section) section.style.borderColor = unifiedEnabled ? 'rgba(245, 158, 11, 0.6)' : 'rgba(245, 158, 11, 0.4)';
     };
 
     setTimeout(syncAllFtc, 300);
@@ -9943,9 +9955,9 @@ initToolsHubModal();
 initBestProductModal();
 initGeminiSelectionUI();
 initContentModeHelpAndSmartPublish();
-// ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode + Quick Mode
+// ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode (사진→글, 글소스 옵션으로 통합)
+// Quick Mode 제거됨 — imageNarrativeMode 단일 경로로 통합.
 initImageNarrativeMode();
-initImageNarrativeQuickMode();
 
 // ✅ [v2.10.191 Phase 3.8.3] SERP 추이 패널 초기화 + 데이터 로드
 function initSerpHistoryPanel(): void {
