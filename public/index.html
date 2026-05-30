@@ -4416,9 +4416,19 @@
                 <!-- 🖼️ 생성 결과 모달 (그리드 + 큰 미리보기 · 생성 시 자동 오픈) -->
                 <div id="imgstudio-results-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9990; align-items:center; justify-content:center; padding:2rem;" onclick="imgStudioCloseResults()">
                     <div style="background:var(--bg-secondary); border:1px solid var(--border-medium); border-radius:var(--radius-lg); max-width:980px; width:100%; max-height:88vh; overflow-y:auto; padding:1.25rem 1.5rem; box-shadow:0 20px 60px rgba(0,0,0,0.5);" onclick="event.stopPropagation()">
-                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; gap:0.5rem;">
                             <h3 style="margin:0; font-size:1.05rem; font-weight:700; color:var(--text-strong);">🖼️ 생성 결과</h3>
-                            <button type="button" onclick="imgStudioCloseResults()" style="background:var(--bg-tertiary); color:var(--text-strong); border:1px solid var(--border-medium); border-radius:8px; padding:0.4rem 0.8rem; font-weight:600; cursor:pointer;">✕ 닫기</button>
+                            <div style="display:flex; gap:0.5rem;">
+                                <button type="button" id="imgstudio-download-all-btn" style="display:none; background:linear-gradient(135deg,#10b981,#059669); color:white; border:none; border-radius:8px; padding:0.4rem 0.8rem; font-weight:700; cursor:pointer;">⬇️ 전체 다운로드</button>
+                                <button type="button" onclick="imgStudioCloseResults()" style="background:var(--bg-tertiary); color:var(--text-strong); border:1px solid var(--border-medium); border-radius:8px; padding:0.4rem 0.8rem; font-weight:600; cursor:pointer;">✕ 닫기</button>
+                            </div>
+                        </div>
+                        <!-- 진행률 -->
+                        <div id="imgstudio-progress" style="display:none; margin-bottom:1rem;">
+                            <div style="height:8px; background:rgba(255,255,255,0.12); border-radius:4px; overflow:hidden;">
+                                <div id="imgstudio-progress-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#8b5cf6,#7c3aed); transition:width 0.3s;"></div>
+                            </div>
+                            <div id="imgstudio-progress-text" style="margin-top:0.4rem; font-size:0.78rem; color:var(--text-muted);"></div>
                         </div>
                         <div id="imgstudio-grid" class="imgstudio-grid"></div>
                         <!-- 큰 이미지 미리보기 -->

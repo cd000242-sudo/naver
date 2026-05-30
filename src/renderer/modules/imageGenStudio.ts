@@ -1,18 +1,18 @@
 /**
  * imageGenStudio.ts
  *
- * "이미지 관리 → 🎨 이미지 생성" 서브탭: 멀티엔진 대량(batch) 이미지 생성 스튜디오.
- *
- * Ports from DROPSHOT_PORTING_KIT.md:
- *  - §12.9 parseBatchPromptList (1줄 vs N줄 자동 감지)
- *  - §12.8 모든 엔진 공통 variation seed (중복 이미지 차단)
- *  - §12.7 결과 lightbox
- *
- * Engine list mirrors src/runtime/imageEngineCatalog.ts (IMAGE_ENGINE_CATALOG).
- * Renderer convention: inline the catalog rather than importing main-side modules.
+ * "이미지 관리 → 🎨 이미지 생성" 서브탭: 멀티엔진 대량(batch) 이미지 생성 스튜디오 오케스트레이션.
+ * 순수 로직/엔진/비용 → imageGenStudioCore, 결과 뷰(lightbox/모달/진행률/다운로드) → imageGenStudioLightbox.
  */
 
-import { openStudioLightbox, initStudioLightbox } from './imageGenStudioLightbox.js';
+import {
+  openStudioLightbox,
+  initStudioLightbox,
+  openResults,
+  setProgress,
+  resetResultsUi,
+  downloadAll,
+} from './imageGenStudioLightbox.js';
 import { wireSelectDropshotRow } from './dropshotLoginUi.js';
 import {
   getSelectedEngine,
@@ -83,20 +83,10 @@ function _bindControls(): void {
   document.getElementById('imgstudio-preview-img')?.addEventListener('click', () => {
     if (_previewIndex >= 0) openStudioLightbox(_resultSrcs, _previewIndex);
   });
-  // 결과 모달 열기/닫기
-  document.getElementById('imgstudio-open-results-btn')?.addEventListener('click', _openResults);
-  (window as any).imgStudioCloseResults = _closeResults;
+  // 결과 모달 열기/닫기 + 전체 다운로드 (helpers in imageGenStudioLightbox)
+  document.getElementById('imgstudio-open-results-btn')?.addEventListener('click', openResults);
+  document.getElementById('imgstudio-download-all-btn')?.addEventListener('click', () => downloadAll(_resultSrcs));
   updateCostPreview();
-}
-
-function _openResults(): void {
-  const modal = document.getElementById('imgstudio-results-modal');
-  if (modal) modal.style.display = 'flex';
-}
-
-function _closeResults(): void {
-  const modal = document.getElementById('imgstudio-results-modal');
-  if (modal) modal.style.display = 'none';
 }
 
 // ---------------------------------------------------------------------------
@@ -145,10 +135,11 @@ async function _run(): Promise<void> {
   _previewIndex = -1;
   _clearGrid();
   _clearLog();
+  resetResultsUi(total); // 이전 결과(그리드/미리보기/진행률) 초기화 후 새로 준비
   // 결과 모달 자동 오픈(진행 과정을 실시간으로 보여줌) + 결과 버튼 노출
   const resultsBtnEl = document.getElementById('imgstudio-open-results-btn');
   if (resultsBtnEl) resultsBtnEl.style.display = 'block';
-  _openResults();
+  openResults();
   _studioLog(`${engine.label} · 프롬프트 ${prompts.length}개 × ${count}장 = 총 ${total}장 생성 시작`);
   _setStatus(`${engine.label} · 총 ${total}장 생성 중…`, 'info');
   _setGenerateDisabled(true);
@@ -162,6 +153,7 @@ async function _run(): Promise<void> {
         _appendImage(src);
         received += 1;
         _setStatus(`${engine.label} · ${received}/${total}장 생성됨…`, 'info');
+        setProgress(received, total);
       }
     });
 
@@ -174,6 +166,7 @@ async function _run(): Promise<void> {
         if (src) _appendImage(src);
       }
     }
+    setProgress(_resultSrcs.length, total);
 
     const done = _resultSrcs.length;
     if (done === 0) {
@@ -183,10 +176,12 @@ async function _run(): Promise<void> {
     } else {
       _setStatus(`✅ ${done}장 생성 완료. 결과는 저장 폴더에 자동 저장됩니다.`, 'success');
       _studioLog(`✅ ${done}/${total}장 생성 완료`);
-      // 생성 결과 버튼 노출 + 모달 자동 오픈
+      // 생성 결과 버튼 + 전체 다운로드 버튼 노출
       const resultsBtn = document.getElementById('imgstudio-open-results-btn');
       if (resultsBtn) resultsBtn.style.display = 'block';
-      _openResults();
+      const dlAllBtn = document.getElementById('imgstudio-download-all-btn');
+      if (dlAllBtn) dlAllBtn.style.display = 'inline-block';
+      openResults();
     }
   } catch (err) {
     console.error('[ImageGenStudio] generate failed:', err);
