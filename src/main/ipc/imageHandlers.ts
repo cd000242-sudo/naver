@@ -87,6 +87,26 @@ export function registerImageHandlers(ctx: IpcContext): void {
         }
     });
 
+    // ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 — 로그인 세션 확인 (headless)
+    safeHandle('dropshot:check-login', async () => {
+        try {
+            const { checkDropshotLogin } = await import('../../image/dropshotCore.js');
+            return await checkDropshotLogin();
+        } catch (error: any) {
+            return { loggedIn: false, message: `세션 확인 실패: ${error.message}` };
+        }
+    });
+
+    // ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 — 로그인(필요 시 visible 브라우저)
+    safeHandle('dropshot:login', async () => {
+        try {
+            const { dropshotLogin } = await import('../../image/dropshotCore.js');
+            return await dropshotLogin();
+        } catch (error: any) {
+            return { loggedIn: false, message: `로그인 실패: ${error.message}` };
+        }
+    });
+
     // ✅ [v1.4.80] Flow 연결 테스트 (Nano Banana Pro 엔드포인트 확보 확인)
     safeHandle('flow:testConnection', async () => {
         try {

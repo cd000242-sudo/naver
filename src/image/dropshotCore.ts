@@ -151,6 +151,67 @@ export async function ensurePage(onLog?: (m: string) => void): Promise<any> {
   }
 }
 
+export interface DropshotLoginStatus {
+  loggedIn: boolean;
+  message: string;
+}
+
+/**
+ * Headless-only login check — fast, no visible window, no 5-minute wait.
+ * Reuses the cached page when present to avoid a second persistent-context
+ * lock on the same profile dir.
+ */
+export async function checkDropshotLogin(
+  onLog?: (m: string) => void,
+): Promise<DropshotLoginStatus> {
+  if (cachedPage) {
+    try {
+      if (await isLoggedIn(cachedPage)) {
+        return { loggedIn: true, message: '로그인 세션 확인됨' };
+      }
+    } catch {
+      // cached page unusable — fall through to a fresh headless check
+    }
+  }
+  const profileDir = getProfileDir();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let ctx: any = null;
+  try {
+    onLog?.('[리더스 나노바나나] 로그인 세션 확인 중...');
+    ctx = await launchBrowser(profileDir, true);
+    const page = ctx.pages()[0] || (await ctx.newPage());
+    await page.goto(BOARD_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    await new Promise((r) => setTimeout(r, 4000));
+    return (await isLoggedIn(page))
+      ? { loggedIn: true, message: '로그인 세션 확인됨' }
+      : { loggedIn: false, message: '로그인이 필요합니다. [로그인] 버튼으로 진행하세요.' };
+  } catch (err) {
+    return { loggedIn: false, message: `세션 확인 실패: ${(err as Error)?.message ?? err}` };
+  } finally {
+    try {
+      if (ctx) await ctx.close();
+    } catch {
+      // best-effort cleanup
+    }
+  }
+}
+
+/**
+ * Triggers the login flow. ensurePage() opens a visible browser when no valid
+ * session exists (max 5-minute wait) and re-caches a headless session on
+ * success; if already logged in it returns immediately without a window.
+ */
+export async function dropshotLogin(
+  onLog?: (m: string) => void,
+): Promise<DropshotLoginStatus> {
+  try {
+    await ensurePage(onLog);
+    return { loggedIn: true, message: '로그인 완료' };
+  } catch (err) {
+    return { loggedIn: false, message: `로그인 실패: ${(err as Error)?.message ?? err}` };
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
   if (cachedPage && cachedContext) {

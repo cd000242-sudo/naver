@@ -305,7 +305,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   // ✅ [v2.10.302] dall-e-3 제거 — UI 완전 폐기 (v2.10.295 UI option 삭제 + v2.10.302 write 차단)
   //   기존 위험: 사용자가 서브 모달에서 dall-e-3 카드 클릭 시 VALID_AI_SOURCES 통과해 localStorage 저장 →
   //              imageGenerator.ts:335 마이그레이션 분기 진입. 폐기 표시인데 실질 진입 경로 잔존.
-  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
+  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'dropshot', 'local-folder'];
   if (VALID_AI_SOURCES.includes(normalized)) {
     safeLocalStorageSet('fullAutoImageSource', normalized);
     console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${normalized}`);
@@ -1001,6 +1001,13 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 1.5rem;">🍌</div>
             <div style="font-size: 12px; font-weight: 600; color: #92400e;">Flow</div>
             <div style="font-size: 10px; color: #a16207;">Nano Banana 2 | AI Pro</div>
+          </label>
+          <!-- ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 (UI 자동화 · 로그인 필요) -->
+          <label class="source-option" data-value="dropshot" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #f59e0b; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25); position: relative;">
+            <div style="position: absolute; top: -6px; right: -6px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 8px;">무제한</div>
+            <div style="font-size: 1.5rem;">🍌</div>
+            <div style="font-size: 12px; font-weight: 600; color: #92400e;">리더스 나노바나나 무제한</div>
+            <div style="font-size: 10px; color: #a16207;">구독자 무제한 · 추가비용 0원 · 로그인 필요</div>
           </label>
           <label class="source-option" data-value="local-folder" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); text-align: center; transition: all 0.2s; position: relative;">
             <div style="font-size: 1.5rem;">📂</div>
