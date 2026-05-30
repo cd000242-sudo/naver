@@ -338,6 +338,10 @@ try {
     'imageNarrativeReview.js',
     'imageNarrativeMode.js',
     'imageNarrativeQuickMode.js',
+    // ✅ [SPEC-DROPSHOT-2026] 이미지 생성 스튜디오 (멀티엔진 대량 생성 서브탭)
+    'imageGenStudio.js',
+    'imageGenStudioCore.js',
+    'imageGenStudioLightbox.js',
   ];
   let modulesSource = '';
   for (const modFile of modulesFiles) {

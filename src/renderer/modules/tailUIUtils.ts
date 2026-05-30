@@ -610,30 +610,25 @@ export function initContentModeHelpAndSmartPublish() {
 // })();
 
 // ✅ URL/키워드 탭 전환 함수
-(window as any).switchGenerationTab = function (tab: 'url' | 'keyword'): void {
-  const urlTab = document.getElementById('tab-url-btn');
-  const keywordTab = document.getElementById('tab-keyword-btn');
-  const urlContent = document.getElementById('tab-content-url');
-  const keywordContent = document.getElementById('tab-content-keyword');
+(window as any).switchGenerationTab = function (tab: 'url' | 'keyword' | 'image'): void {
+  // 3-way source tabs: URL / 키워드 / 사진. Driven by explicit key match
+  // (no else-fallthrough), and tolerant of a missing tab so partial DOM
+  // states never activate the wrong panel.
+  const tabs = [
+    { key: 'url', btn: 'tab-url-btn', content: 'tab-content-url', activeBg: 'linear-gradient(135deg, #3b82f6, #2563eb)' },
+    { key: 'keyword', btn: 'tab-keyword-btn', content: 'tab-content-keyword', activeBg: 'linear-gradient(135deg, #10b981, #059669)' },
+    { key: 'image', btn: 'tab-image-btn', content: 'tab-content-image', activeBg: 'linear-gradient(135deg, #f59e0b, #d97706)' },
+  ];
 
-  if (!urlTab || !keywordTab || !urlContent || !keywordContent) return;
+  for (const t of tabs) {
+    const btn = document.getElementById(t.btn);
+    const content = document.getElementById(t.content);
+    if (!btn || !content) continue;
 
-  if (tab === 'url') {
-    // URL 탭 활성화
-    urlTab.style.background = 'linear-gradient(135deg, #3b82f6, #2563eb)';
-    urlTab.style.color = 'white';
-    keywordTab.style.background = 'transparent';
-    keywordTab.style.color = 'var(--text-muted)';
-    urlContent.style.display = 'block';
-    keywordContent.style.display = 'none';
-  } else {
-    // 키워드 탭 활성화
-    keywordTab.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-    keywordTab.style.color = 'white';
-    urlTab.style.background = 'transparent';
-    urlTab.style.color = 'var(--text-muted)';
-    keywordContent.style.display = 'block';
-    urlContent.style.display = 'none';
+    const isActive = t.key === tab;
+    btn.style.background = isActive ? t.activeBg : 'transparent';
+    btn.style.color = isActive ? 'white' : 'var(--text-muted)';
+    content.style.display = isActive ? 'block' : 'none';
   }
 
   console.log('[TabSwitch] Switched to:', tab);

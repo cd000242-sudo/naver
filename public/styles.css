@@ -3439,6 +3439,41 @@ select option {
   gap: 0.75rem;
 }
 
+/* 🎨 이미지 생성 스튜디오 결과 그리드 (SPEC-DROPSHOT-2026) */
+.imgstudio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+.imgstudio-cell {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+}
+.imgstudio-cell img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  cursor: zoom-in;
+  transition: transform 0.2s;
+}
+.imgstudio-cell img:hover {
+  transform: scale(1.03);
+}
+.imgstudio-dl {
+  position: absolute;
+  bottom: 0.4rem;
+  right: 0.4rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  font-size: 0.7rem;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
 /* Upload zone */
 .image-narrative-upload-zone {
   border: 2px dashed rgba(16, 185, 129, 0.4);

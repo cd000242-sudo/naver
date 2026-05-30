@@ -222,6 +222,8 @@ import { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImages
 import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApiCostConsent, reserveExternalApiImageQuota, generateImagesWithCostSafety, ensurePromptCardRemoveHandler } from './modules/costAndAutoGen.js';
 // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode modules
 import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
+// ✅ [SPEC-DROPSHOT-2026] 이미지 관리 → 🎨 이미지 생성 서브탭 (멀티엔진 대량 생성 스튜디오)
+import { initImageGenStudio } from './modules/imageGenStudio.js';
 import { initImageLibrary, loadLibraryImages, useLibraryImage, switchToTab, generateFavoritesContent, generateTemplatesContent, getEnhancedTemplates } from './modules/contentPreviewAndLibrary.js';
 declare let thumbnailBackgroundImage: string | null;
 declare let thumbnailBackgroundDataUrl: string | null;
@@ -9958,6 +9960,8 @@ initContentModeHelpAndSmartPublish();
 // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode (사진→글, 글소스 옵션으로 통합)
 // Quick Mode 제거됨 — imageNarrativeMode 단일 경로로 통합.
 initImageNarrativeMode();
+// ✅ [SPEC-DROPSHOT-2026] 이미지 생성 스튜디오 서브탭 초기화
+initImageGenStudio();
 
 // ✅ [v2.10.191 Phase 3.8.3] SERP 추이 패널 초기화 + 데이터 로드
 function initSerpHistoryPanel(): void {

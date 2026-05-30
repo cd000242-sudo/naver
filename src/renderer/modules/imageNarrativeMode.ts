@@ -9,8 +9,8 @@
  */
 
 import type { NarrativePlan, VisionProvider, InferenceMode } from '../../imageNarrative/types.js';
-import { initImageNarrativeUpload, getUploadedImages, clearUploadedImages } from './imageNarrativeUpload.js';
-import { initImageNarrativeReview, showReviewPanel, hideReviewPanel } from './imageNarrativeReview.js';
+import { initImageNarrativeUpload, getUploadedImages } from './imageNarrativeUpload.js';
+import { initImageNarrativeReview, showReviewPanel } from './imageNarrativeReview.js';
 import { executeFullAutoFlow } from './fullAutoFlow.js';
 
 // ---------------------------------------------------------------------------
@@ -59,12 +59,13 @@ function setState(patch: Partial<ImageNarrativeState>): void {
  * Must be called inside DOMContentLoaded.
  */
 export function initImageNarrativeMode(): void {
-  const toggleKeyword = document.getElementById('source-toggle-keyword');
-  const toggleImage = document.getElementById('source-toggle-image');
+  // The photo-source UI now lives inside the unified generation-tabs
+  // ("사진으로 생성" tab). The old standalone keyword/image toggle was removed,
+  // so init no longer depends on those buttons existing — only on the upload
+  // area and its sub-modules.
   const narrativeArea = document.getElementById('image-narrative-area');
-
-  if (!toggleKeyword || !toggleImage || !narrativeArea) {
-    console.warn('[ImageNarrativeMode] Toggle elements not found — skipping init');
+  if (!narrativeArea) {
+    console.warn('[ImageNarrativeMode] image-narrative-area not found — skipping init');
     return;
   }
 
@@ -72,43 +73,6 @@ export function initImageNarrativeMode(): void {
   initImageNarrativeReview();
   _bindProviderRadios();
   _bindInferButton();
-  _bindToggleButtons(toggleKeyword, toggleImage, narrativeArea);
-
-  // Apply initial state
-  handleSourceToggle('keyword');
-}
-
-// ---------------------------------------------------------------------------
-// Toggle
-// ---------------------------------------------------------------------------
-
-/**
- * Switches the content source and updates the UI accordingly.
- * "keyword" hides the image-narrative area; "image" slides it down.
- */
-export function handleSourceToggle(source: ContentSource): void {
-  setState({ source, plan: null });
-
-  const narrativeArea = document.getElementById('image-narrative-area');
-  const keywordSection = document.getElementById('keyword-start-section');
-  const toggleKeyword = document.getElementById('source-toggle-keyword');
-  const toggleImage = document.getElementById('source-toggle-image');
-
-  if (!narrativeArea) return;
-
-  if (source === 'image') {
-    narrativeArea.style.display = 'block';
-    narrativeArea.classList.add('image-narrative-area--visible');
-    if (keywordSection) keywordSection.style.opacity = '0.5';
-    _setToggleActive(toggleImage, toggleKeyword);
-  } else {
-    narrativeArea.style.display = 'none';
-    narrativeArea.classList.remove('image-narrative-area--visible');
-    if (keywordSection) keywordSection.style.opacity = '1';
-    _setToggleActive(toggleKeyword, toggleImage);
-    clearUploadedImages();
-    hideReviewPanel();
-  }
 }
 
 // ---------------------------------------------------------------------------
@@ -211,22 +175,6 @@ function _setInferButtonState(loading: boolean): void {
 // Helpers
 // ---------------------------------------------------------------------------
 
-function _bindToggleButtons(
-  toggleKeyword: HTMLElement,
-  toggleImage: HTMLElement,
-  narrativeArea: HTMLElement
-): void {
-  toggleKeyword.addEventListener('click', () => handleSourceToggle('keyword'));
-  toggleImage.addEventListener('click', () => handleSourceToggle('image'));
-}
-
-function _setToggleActive(active: HTMLElement | null, inactive: HTMLElement | null): void {
-  active?.classList.add('source-toggle-btn--active');
-  active?.setAttribute('aria-pressed', 'true');
-  inactive?.classList.remove('source-toggle-btn--active');
-  inactive?.setAttribute('aria-pressed', 'false');
-}
-
 function _showToast(message: string, type: 'error' | 'info' = 'info'): void {
   // Delegates to the global toastManager if available
   const tm = (window as any).toastManager;
@@ -249,11 +197,6 @@ export function getNarrativePlan(): NarrativePlan | null {
 /** Programmatically sets the inferred plan (used by fullAutoFlow in Phase 4). */
 export function setNarrativePlan(plan: NarrativePlan): void {
   setState({ plan });
-}
-
-/** Returns true when "image" source is active. */
-export function isImageSourceActive(): boolean {
-  return _modeState.source === 'image';
 }
 
 // ---------------------------------------------------------------------------

@@ -730,100 +730,6 @@
                             글 생성을 진행해주세요. 카테고리에 따라 본문 흐름과 문체를 자동 최적화합니다.</p>
                     </div>
 
-                    <!-- ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] 글 소스 직교 축 토글 -->
-                    <div id="content-source-toggle-section"
-                        style="background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(5,150,105,0.04)); padding: 1rem; border-radius: var(--radius-md); border: 2px solid rgba(16,185,129,0.25); margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 0.6rem; font-weight: 700; color: var(--text-strong); font-size: 0.92rem;">
-                            📝 글 소스
-                        </label>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <button
-                                type="button"
-                                id="source-toggle-keyword"
-                                class="source-toggle-btn source-toggle-btn--active"
-                                aria-pressed="true"
-                                style="flex: 1; padding: 0.6rem 1rem; border-radius: var(--radius-md); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
-                                🔑 키워드 시작
-                            </button>
-                            <button
-                                type="button"
-                                id="source-toggle-image"
-                                class="source-toggle-btn"
-                                aria-pressed="false"
-                                style="flex: 1; padding: 0.6rem 1rem; border-radius: var(--radius-md); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
-                                📸 사진 시작 <span style="font-size:0.7rem; background:rgba(16,185,129,0.25); padding:1px 5px; border-radius:4px;">NEW</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] 사진 시작 업로드 영역 (슬라이드 다운) -->
-                    <div id="image-narrative-area" class="image-narrative-area" style="display:none;">
-                        <div class="image-narrative-area__inner">
-                            <!-- Upload zone -->
-                            <div id="image-narrative-drop-zone" class="image-narrative-upload-zone">
-                                <div class="image-narrative-upload-zone__icon">🖼️</div>
-                                <p class="image-narrative-upload-zone__title">이미지를 여기에 드래그하세요</p>
-                                <p class="image-narrative-upload-zone__hint">JPG · PNG · HEIC, 3~30장, 최대 10MB/장</p>
-                            </div>
-
-                            <!-- Upload buttons -->
-                            <div class="image-narrative-upload-btns">
-                                <input type="file" id="image-narrative-file-input" multiple accept="image/*,.heic" style="display:none;" />
-                                <button type="button" id="image-narrative-file-btn" class="btn-secondary btn-sm">
-                                    📂 파일 선택
-                                </button>
-                                <input type="file" id="image-narrative-folder-input" webkitdirectory multiple accept="image/*,.heic" style="display:none;" />
-                                <button type="button" id="image-narrative-folder-btn" class="btn-secondary btn-sm">
-                                    🗂️ 폴더 전체 선택
-                                </button>
-                            </div>
-
-                            <!-- Status / count -->
-                            <div id="image-narrative-upload-count" class="image-narrative-upload-count">
-                                0장 업로드됨 (최소 3장, 최대 30장)
-                            </div>
-                            <div id="image-narrative-upload-status" class="image-narrative-upload-status"></div>
-
-                            <!-- Thumbnail grid -->
-                            <div id="image-narrative-thumbnail-grid" class="image-narrative-thumbnail-grid"></div>
-
-                            <!-- Vision provider selection -->
-                            <div class="image-narrative-provider-section">
-                                <label style="font-weight: 700; font-size: 0.85rem; color: var(--text-strong); display: block; margin-bottom: 0.5rem;">
-                                    🤖 Vision 분석 모델
-                                </label>
-                                <div class="image-narrative-provider-radios">
-                                    <label class="image-narrative-provider-radio">
-                                        <input type="radio" name="vision-provider" value="gemini" checked />
-                                        <span>✨ Gemini Flash <em>(디폴트 · 저비용)</em></span>
-                                    </label>
-                                    <label class="image-narrative-provider-radio">
-                                        <input type="radio" name="vision-provider" value="openai" />
-                                        <span>🧠 GPT-4o <em>(한국어 묘사 우수)</em></span>
-                                    </label>
-                                    <label class="image-narrative-provider-radio">
-                                        <input type="radio" name="vision-provider" value="claude" />
-                                        <span>🎯 Claude Sonnet <em>(고정밀 · 비용 ↑)</em></span>
-                                    </label>
-                                </div>
-                                <div id="vision-provider-warning" class="image-narrative-provider-warning" style="display:none;"></div>
-                            </div>
-
-                            <!-- Infer button -->
-                            <button
-                                type="button"
-                                id="image-narrative-infer-btn"
-                                class="btn-primary"
-                                disabled
-                                style="width:100%; margin-top: 0.75rem;">
-                                🔍 추론 시작
-                            </button>
-
-                            <!-- Review panel (rendered by imageNarrativeReview.ts) -->
-                            <div id="image-narrative-review-panel" style="display:none; margin-top: 1rem;"></div>
-                        </div>
-                    </div>
-
                     <!-- ✅ 콘텐츠 모드 선택 (SEO / 홈판 / 쇼핑 커넥트 / 사용자정의) - 카테고리 아래 배치 -->
                     <div
                         style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.05)); padding: 1rem; border-radius: var(--radius-md); border: 2px solid rgba(139, 92, 246, 0.3); margin-bottom: 1rem;">
@@ -1231,6 +1137,12 @@
                             <span style="font-size: 1.1rem;">📝</span>
                             <span>키워드로 생성</span>
                         </button>
+                        <button type="button" id="tab-image-btn" class="generation-tab-btn"
+                            style="flex: 1; padding: 0.75rem 1rem; background: transparent; color: var(--text-muted); border: none; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;"
+                            onclick="switchGenerationTab('image')">
+                            <span style="font-size: 1.1rem;">📸</span>
+                            <span>사진으로 생성</span>
+                        </button>
                     </div>
 
                     <!-- URL 입력 탭 콘텐츠 -->
@@ -1341,6 +1253,77 @@
                                 💡 키워드를 기반으로 AI가 최신 정보를 수집하여 글을 생성합니다.
                             </p>
                         </div>
+                    </div>
+
+                    <!-- 📸 사진으로 생성 탭 콘텐츠 (글 소스 토글에서 통합 이전) -->
+                    <div id="tab-content-image" class="generation-tab-content" style="display: none;">
+                    <!-- ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] 사진 시작 업로드 영역 (슬라이드 다운) -->
+                    <div id="image-narrative-area" class="image-narrative-area image-narrative-area--visible" style="display:block;">
+                        <div class="image-narrative-area__inner">
+                            <!-- Upload zone -->
+                            <div id="image-narrative-drop-zone" class="image-narrative-upload-zone">
+                                <div class="image-narrative-upload-zone__icon">🖼️</div>
+                                <p class="image-narrative-upload-zone__title">이미지를 여기에 드래그하세요</p>
+                                <p class="image-narrative-upload-zone__hint">JPG · PNG · HEIC, 3~30장, 최대 10MB/장</p>
+                            </div>
+
+                            <!-- Upload buttons -->
+                            <div class="image-narrative-upload-btns">
+                                <input type="file" id="image-narrative-file-input" multiple accept="image/*,.heic" style="display:none;" />
+                                <button type="button" id="image-narrative-file-btn" class="btn-secondary btn-sm">
+                                    📂 파일 선택
+                                </button>
+                                <input type="file" id="image-narrative-folder-input" webkitdirectory multiple accept="image/*,.heic" style="display:none;" />
+                                <button type="button" id="image-narrative-folder-btn" class="btn-secondary btn-sm">
+                                    🗂️ 폴더 전체 선택
+                                </button>
+                            </div>
+
+                            <!-- Status / count -->
+                            <div id="image-narrative-upload-count" class="image-narrative-upload-count">
+                                0장 업로드됨 (최소 3장, 최대 30장)
+                            </div>
+                            <div id="image-narrative-upload-status" class="image-narrative-upload-status"></div>
+
+                            <!-- Thumbnail grid -->
+                            <div id="image-narrative-thumbnail-grid" class="image-narrative-thumbnail-grid"></div>
+
+                            <!-- Vision provider selection -->
+                            <div class="image-narrative-provider-section">
+                                <label style="font-weight: 700; font-size: 0.85rem; color: var(--text-strong); display: block; margin-bottom: 0.5rem;">
+                                    🤖 Vision 분석 모델
+                                </label>
+                                <div class="image-narrative-provider-radios">
+                                    <label class="image-narrative-provider-radio">
+                                        <input type="radio" name="vision-provider" value="gemini" checked />
+                                        <span>✨ Gemini Flash <em>(디폴트 · 저비용)</em></span>
+                                    </label>
+                                    <label class="image-narrative-provider-radio">
+                                        <input type="radio" name="vision-provider" value="openai" />
+                                        <span>🧠 GPT-4o <em>(한국어 묘사 우수)</em></span>
+                                    </label>
+                                    <label class="image-narrative-provider-radio">
+                                        <input type="radio" name="vision-provider" value="claude" />
+                                        <span>🎯 Claude Sonnet <em>(고정밀 · 비용 ↑)</em></span>
+                                    </label>
+                                </div>
+                                <div id="vision-provider-warning" class="image-narrative-provider-warning" style="display:none;"></div>
+                            </div>
+
+                            <!-- Infer button -->
+                            <button
+                                type="button"
+                                id="image-narrative-infer-btn"
+                                class="btn-primary"
+                                disabled
+                                style="width:100%; margin-top: 0.75rem;">
+                                🔍 추론 시작
+                            </button>
+
+                            <!-- Review panel (rendered by imageNarrativeReview.ts) -->
+                            <div id="image-narrative-review-panel" style="display:none; margin-top: 1rem;"></div>
+                        </div>
+                    </div>
                     </div>
 
                 </div>
@@ -3552,6 +3535,19 @@
                     <span>이미지 관리</span>
                 </h2>
 
+                <!-- 🎨 이미지 관리 서브탭 바 -->
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; background: var(--bg-tertiary); padding: 0.5rem; border-radius: var(--radius-lg);">
+                    <button type="button" id="images-subtab-manage"
+                        style="flex: 1; padding: 0.75rem 1.5rem; border: none; border-radius: var(--radius-md); background: var(--accent-primary); color: white; cursor: pointer; font-weight: 600; transition: all 0.2s;"
+                        onclick="switchImagesSubtab('manage')">📋 이미지 관리</button>
+                    <button type="button" id="images-subtab-generate"
+                        style="flex: 1; padding: 0.75rem 1.5rem; border: none; border-radius: var(--radius-md); background: transparent; color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all 0.2s;"
+                        onclick="switchImagesSubtab('generate')">🎨 이미지 생성</button>
+                </div>
+
+                <!-- 서브패널 #1: 기존 이미지 관리 -->
+                <div id="images-subpanel-manage" style="display: block;">
+
                 <!-- ✅ 초보자용 사용법 안내 (접을 수 있는 형태) -->
                 <div
                     style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(16, 185, 129, 0.4); margin-bottom: 2rem;">
@@ -4341,7 +4337,69 @@
                     </div>
                     <div id="images-log-output" class="log-output"></div>
                 </section>
-            </section>
+            </div>
+                <!-- 서브패널 #2: 🎨 이미지 생성 스튜디오 (멀티엔진 대량 생성) -->
+                <div id="images-subpanel-generate" style="display: none;">
+                    <div style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(168,85,247,0.05)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(139,92,246,0.3);">
+                        <div style="margin-bottom: 1.25rem;">
+                            <label style="display:block; font-weight:700; color:var(--text-strong); margin-bottom:0.5rem;">🎨 이미지 생성 엔진</label>
+                            <select id="imgstudio-engine" style="width:100%; padding:0.75rem; background:var(--bg-primary); border:2px solid rgba(139,92,246,0.4); border-radius:var(--radius-md); color:var(--text-strong); font-size:0.95rem; font-weight:600; cursor:pointer;"></select>
+                            <p id="imgstudio-engine-note" style="margin:0.4rem 0 0 0; font-size:0.8rem; color:var(--text-muted);"></p>
+                        </div>
+
+                        <div style="margin-bottom: 1.25rem;">
+                            <label style="display:block; font-weight:700; color:var(--text-strong); margin-bottom:0.5rem;">✍️ 프롬프트 <span style="font-weight:400; color:var(--text-muted); font-size:0.8rem;">(자동 감지: 짧은 키워드 줄별 = 각 1장 · 긴 프롬프트 = 합침 · 빈 줄로 여러 프롬프트 구분)</span></label>
+                            <textarea id="imgstudio-prompt" rows="6"
+                                placeholder="예) 짧은 키워드 N개 — 각 줄 = 1장:&#10;가을 단풍 산속&#10;바다 일출 풍경&#10;&#10;예) 긴 프롬프트 1개 — 자동 합침:&#10;A beautiful Korean office worker&#10;sitting at desk with golden hour&#10;&#10;예) 여러 긴 프롬프트 — 빈 줄로 구분"
+                                style="width:100%; padding:1rem; background:var(--bg-primary); border:1px solid var(--border-medium); border-radius:var(--radius-md); color:var(--text-strong); font-size:0.95rem; resize:vertical; font-family:inherit; line-height:1.6;"></textarea>
+                        </div>
+
+                        <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
+                            <label style="display:flex; align-items:center; gap:0.5rem; color:var(--text-strong); font-size:0.9rem;">
+                                프롬프트당 장수
+                                <input type="number" id="imgstudio-count" value="1" min="1" max="20" style="width:70px; padding:0.5rem; background:var(--bg-primary); border:1px solid var(--border-medium); border-radius:6px; color:var(--text-strong);">
+                            </label>
+                            <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer; color:var(--text-strong); font-size:0.9rem;">
+                                <input type="checkbox" id="imgstudio-include-text" style="width:18px; height:18px; accent-color:#8b5cf6; cursor:pointer;">
+                                이미지에 한글 텍스트 포함
+                            </label>
+                        </div>
+
+                        <div id="imgstudio-cost" style="margin-bottom:1rem; padding:0.75rem 1rem; background:rgba(0,0,0,0.2); border-radius:var(--radius-sm); font-size:0.85rem; color:var(--text-muted);">프롬프트를 입력하세요.</div>
+
+                        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom:1rem;">
+                            <button type="button" id="imgstudio-generate-btn" style="flex:1; min-width:200px; padding:1rem; background:linear-gradient(135deg, #8b5cf6, #7c3aed); color:white; border:none; border-radius:10px; font-weight:700; font-size:1rem; cursor:pointer;">🎨 이미지 대량 생성</button>
+                            <button type="button" id="imgstudio-open-folder-btn" style="padding:1rem 1.25rem; background:var(--bg-tertiary); color:var(--text-strong); border:1px solid var(--border-medium); border-radius:10px; font-weight:600; cursor:pointer;">📂 저장 폴더 열기</button>
+                        </div>
+
+                        <div id="imgstudio-status" style="margin-bottom:1rem; font-size:0.85rem; color:var(--text-muted);"></div>
+                        <div id="imgstudio-grid" class="imgstudio-grid"></div>
+
+                        <!-- 큰 이미지 미리보기 -->
+                        <div id="imgstudio-preview" style="display:none; margin-top:1.25rem;">
+                            <label style="display:block; font-weight:700; color:var(--text-strong); margin-bottom:0.5rem;">🔍 미리보기</label>
+                            <div style="background:rgba(0,0,0,0.25); border-radius:var(--radius-md); padding:0.75rem; text-align:center;">
+                                <img id="imgstudio-preview-img" alt="미리보기" style="max-width:100%; max-height:520px; border-radius:8px; cursor:zoom-in;">
+                                <div id="imgstudio-preview-caption" style="margin-top:0.5rem; font-size:0.75rem; color:var(--text-muted);"></div>
+                            </div>
+                        </div>
+
+                        <!-- 생성 로그 -->
+                        <div style="margin-top:1.25rem;">
+                            <label style="display:block; font-weight:700; color:var(--text-strong); margin-bottom:0.5rem;">📜 생성 로그</label>
+                            <div id="imgstudio-log" class="log-output" style="max-height:220px; overflow-y:auto; font-size:0.8rem; line-height:1.6; padding:0.75rem; background:var(--bg-primary); border:1px solid var(--border-medium); border-radius:var(--radius-md); color:var(--text-strong);"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- §12.7 결과 lightbox -->
+                <div id="imgstudio-lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:10000; align-items:center; justify-content:center;" onclick="imgStudioCloseLightbox()">
+                    <button type="button" onclick="event.stopPropagation(); imgStudioNavLightbox(-1)" style="position:absolute; left:2rem; top:50%; transform:translateY(-50%); font-size:2rem; background:rgba(255,255,255,0.15); color:white; border:none; border-radius:50%; width:54px; height:54px; cursor:pointer;">‹</button>
+                    <img id="imgstudio-lightbox-img" style="max-width:90vw; max-height:85vh; border-radius:8px; box-shadow:0 12px 48px rgba(0,0,0,0.6);" onclick="event.stopPropagation()">
+                    <button type="button" onclick="event.stopPropagation(); imgStudioNavLightbox(1)" style="position:absolute; right:2rem; top:50%; transform:translateY(-50%); font-size:2rem; background:rgba(255,255,255,0.15); color:white; border:none; border-radius:50%; width:54px; height:54px; cursor:pointer;">›</button>
+                    <button type="button" onclick="imgStudioCloseLightbox()" style="position:absolute; right:2rem; top:2rem; font-size:1.5rem; background:rgba(255,255,255,0.15); color:white; border:none; border-radius:8px; padding:0.4rem 0.9rem; cursor:pointer;">✕ 닫기 (ESC)</button>
+                </div>
+</section>
         </div>
 
         <!-- 환경설정 모달 -->
