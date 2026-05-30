@@ -109,14 +109,28 @@ async function launchBrowser(profileDir: string, headless: boolean): Promise<unk
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function isLoggedIn(page: any): Promise<boolean> {
   try {
-    // ✅ [SPEC-DROPSHOT-2026 2단계] 정밀화: 마케팅 텍스트('이미지 생성'/'플랜 업그레이드'/
-    //   '워크스페이스')는 로그인 화면에도 나타나 false positive를 냈다("로그인한 적 없는데
-    //   로그인 완료" 버그). 실제 로그인 신호 = 생성용 프롬프트 textarea 존재(인증된 사용자만
-    //   board에서 볼 수 있고, 키트가 실제 생성에 쓰는 셀렉터).
-    const has = await page.evaluate(
-      (sel: string) => !!document.querySelector(sel),
-      PROMPT_SELECTOR,
-    );
+    // ✅ [SPEC-DROPSHOT-2026 2단계 보정] 정확한 로그인 신호 = AWS Cognito 인증 토큰.
+    //   dropshot은 Cognito(키트 §0)를 쓰며 로그인 시 localStorage에
+    //   `CognitoIdentityServiceProvider.<clientId>.<user>.idToken/accessToken` 를 저장한다.
+    //   이전 휴리스틱(마케팅 텍스트 / 프롬프트 textarea)은 미로그인 board에도 존재해
+    //   false positive("로그인한 적 없는데 완료" + 생성 0건)를 냈다.
+    const has = await page.evaluate(() => {
+      try {
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i) || '';
+          if (
+            /CognitoIdentityServiceProvider/i.test(k) &&
+            /\.(idToken|accessToken)$/i.test(k)
+          ) {
+            const v = localStorage.getItem(k);
+            if (v && v.length > 20) return true;
+          }
+        }
+      } catch {
+        // localStorage 접근 불가 시 미로그인 취급
+      }
+      return false;
+    });
     return !!has;
   } catch {
     return false;
@@ -167,7 +181,7 @@ export async function checkDropshotLogin(
   if (cachedPage) {
     try {
       if (await isLoggedIn(cachedPage)) {
-        return { loggedIn: true, message: 'board 접근 가능 (로그인 추정 — 생성 0건이면 🔗 로그인 필요)' };
+        return { loggedIn: true, message: '✅ 로그인됨 (Cognito 세션 확인)' };
       }
     } catch {
       // cached page unusable — fall through to a fresh headless check
@@ -197,10 +211,10 @@ export async function checkDropshotLogin(
 }
 
 /**
- * Opens a visible dropshot browser so the user can log in directly, then waits
- * until the user closes the window (max 10 min) and re-caches a headless
- * session. DOM-based login auto-detection is unreliable (the board shows the
- * prompt textarea even when not logged in), so completion is user-controlled.
+ * Opens a visible dropshot browser so the user can log in directly, polls for
+ * the Cognito auth token (the reliable logged-in signal), and AUTO-CLOSES the
+ * window once login is detected (or when the user closes it manually). Then
+ * re-caches a headless session for generation. Max 10-minute wait.
  */
 export async function dropshotLogin(
   onLog?: (m: string) => void,
@@ -223,38 +237,67 @@ export async function dropshotLogin(
     cachedPage = null;
 
     const profileDir = getProfileDir();
-    onLog?.('[리더스 나노바나나] 로그인 브라우저 표시 — 로그인 후 이 창을 닫아주세요 (최대 10분).');
+    onLog?.('[리더스 나노바나나] 로그인 브라우저 표시 — 로그인하면 자동으로 감지·닫힘 (최대 10분).');
     ctx = await launchBrowser(profileDir, false);
-    const page = ctx.pages()[0] || (await ctx.newPage());
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let page = ctx.pages()[0] || (await ctx.newPage());
     await page.goto('https://aistudio.dropshot.io', {
       waitUntil: 'domcontentloaded',
       timeout: 45000,
     });
 
-    // 사용자가 창을 닫을 때까지 대기(로그인 완료 신호 = 사용자가 창 닫음). 최대 10분.
-    await new Promise<void>((resolve) => {
-      let done = false;
-      const finish = (): void => {
-        if (!done) {
-          done = true;
-          resolve();
-        }
-      };
-      try {
-        ctx.on('close', finish);
-      } catch {
-        // event 미지원 시 타임아웃만 사용
-      }
-      setTimeout(finish, 10 * 60 * 1000);
-    });
-
-    // 세션은 profileDir에 저장됨. 생성용 headless 세션 재캐시.
+    // Cognito 토큰이 보이면 = 로그인 완료. 폴링하다 감지되면 자동으로 창을 닫는다.
+    // 사용자가 직접 창을 닫으면 그것도 종료 신호로 처리한다(fallback).
+    let userClosed = false;
     try {
-      await ctx.close();
+      ctx.on('close', () => {
+        userClosed = true;
+      });
     } catch {
-      // already closed by user
+      // event 미지원
+    }
+    let detected = false;
+    for (let i = 0; i < 200; i++) {
+      await new Promise((r) => setTimeout(r, 3000)); // ~10분
+      if (userClosed) break;
+      try {
+        const pages = ctx.pages();
+        page =
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          pages.find((p: any) => {
+            try {
+              return p.url().includes('dropshot.io');
+            } catch {
+              return false;
+            }
+          }) || pages[pages.length - 1];
+        if (page && (await isLoggedIn(page))) {
+          detected = true;
+          break;
+        }
+      } catch {
+        // 페이지 일시 전환(OAuth 리다이렉트) 중 — 계속 폴링
+      }
+      if (i % 20 === 19) {
+        onLog?.(`[리더스 나노바나나] 로그인 대기 (${Math.round(((i + 1) * 3) / 60)}분 경과)`);
+      }
+    }
+
+    // 감지 시 자동 닫기(사용자가 이미 닫았으면 skip).
+    if (!userClosed) {
+      try {
+        await ctx.close();
+      } catch {
+        // ignore
+      }
     }
     ctx = null;
+
+    if (!detected && !userClosed) {
+      return { loggedIn: false, message: '로그인 시간 초과 — 다시 시도해 주세요.' };
+    }
+
+    // 생성용 headless 세션 재캐시 + 최종 확인.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const hctx: any = await launchBrowser(profileDir, true);
     const hpage = hctx.pages()[0] || (await hctx.newPage());
@@ -262,7 +305,9 @@ export async function dropshotLogin(
     await new Promise((r) => setTimeout(r, 4000));
     cachedContext = hctx;
     cachedPage = hpage;
-    return { loggedIn: true, message: '브라우저를 닫았습니다 — 세션이 저장되었습니다. (실제 로그인 여부는 생성으로 확인)' };
+    return (await isLoggedIn(hpage))
+      ? { loggedIn: true, message: '✅ 로그인 완료 — 세션이 저장되었습니다.' }
+      : { loggedIn: false, message: '⚠️ 로그인이 확인되지 않았습니다(토큰 없음). 다시 로그인해 주세요.' };
   } catch (err) {
     try {
       if (ctx) await ctx.close();
