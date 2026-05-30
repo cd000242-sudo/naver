@@ -199,6 +199,24 @@ export function isHeicFile(file: File): boolean {
   return ext === 'heic' || ext === 'heif';
 }
 
+/**
+ * Convert a Uint8Array to a base64 string in fixed-size chunks.
+ *
+ * `btoa(String.fromCharCode(...bytes))` spreads every byte as a function
+ * argument; for multi-MB images that exceeds the call-stack limit and throws
+ * "Maximum call stack size exceeded". Processing in 32KB chunks keeps the
+ * argument count small and safe for arbitrarily large files.
+ */
+export function uint8ToBase64(bytes: Uint8Array): string {
+  const CHUNK = 0x8000; // 32768 — well below the argument-count limit
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += CHUNK) {
+    const slice = bytes.subarray(i, i + CHUNK);
+    binary += String.fromCharCode.apply(null, slice as unknown as number[]);
+  }
+  return btoa(binary);
+}
+
 async function _processFile(file: File): Promise<UploadedImage> {
   let processedFile: File = file;
   let wasConverted = false;
@@ -207,9 +225,7 @@ async function _processFile(file: File): Promise<UploadedImage> {
   if (isHeicFile(file)) {
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const base64Input = btoa(
-        String.fromCharCode(...new Uint8Array(arrayBuffer))
-      );
+      const base64Input = uint8ToBase64(new Uint8Array(arrayBuffer));
       const converted = await (window as any).electronAPI?.convertHeic?.({ base64: base64Input });
       if (converted?.base64) {
         const bytes = Uint8Array.from(atob(converted.base64), (c) => c.charCodeAt(0));
@@ -225,7 +241,7 @@ async function _processFile(file: File): Promise<UploadedImage> {
 
   const arrayBuffer = await processedFile.arrayBuffer();
   const bytes = new Uint8Array(arrayBuffer);
-  const base64 = btoa(String.fromCharCode(...bytes));
+  const base64 = uint8ToBase64(bytes);
   const previewUrl = URL.createObjectURL(processedFile);
 
   // Extract EXIF via main process (sharp)

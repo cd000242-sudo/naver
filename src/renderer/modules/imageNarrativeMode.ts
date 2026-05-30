@@ -139,7 +139,6 @@ function _updateProviderWarning(provider: VisionProvider): void {
 
   const warnings: Partial<Record<VisionProvider, string>> = {
     claude: '⚠️ Claude Sonnet은 비용이 Gemini 대비 약 8배입니다. 신중하게 사용하세요.',
-    deepinfra: '⚠️ DeepInfra Llama는 한국어 지명/음식 인식이 미검증입니다.',
   };
 
   const msg = warnings[provider];
@@ -173,20 +172,20 @@ async function _startInference(): Promise<void> {
   _setInferButtonState(true);
 
   try {
-    // Delegate to main process via IPC (Phase 4 will wire fullAutoFlow)
-    const result = await (window as any).electronAPI?.inferImages?.({
+    // ✅ [SPEC-IMAGE-NARRATIVE] 표준 IPC 채널로 통일 (Quick Mode와 동일).
+    // 이전: 존재하지 않는 electronAPI.inferImages → 항상 undefined → "Vision 추론 실패".
+    const result = await (window as any).api?.inferAndWrite?.({
       images: images.map((img) => ({
         imageId: img.id,
         imageBase64: img.base64,
         mimeType: img.mimeType,
-        exif: img.exif,
       })),
       provider: _modeState.provider,
       mode: _modeState.mode,
     });
 
-    if (!result || result.error) {
-      throw new Error(result?.error ?? 'Vision 추론 실패');
+    if (!result || !result.success) {
+      throw new Error(result?.message ?? 'Vision 추론 실패');
     }
 
     const plan = result.plan as NarrativePlan;
