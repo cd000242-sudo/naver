@@ -184,7 +184,9 @@ async function callGeminiProvider(
   try {
     const result = await model.generateContent({
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      generationConfig: { temperature: 0.6, maxOutputTokens: 2048 },
+      // 2048 → 8192: 한국어 풀 포스트(제목+도입+소제목 5개+결론) JSON이 2048 토큰에서 잘려
+      // "Failed to parse AI response as JSON" 발생. 8192로 상향해 truncation 방지.
+      generationConfig: { temperature: 0.6, maxOutputTokens: 8192 },
     });
     if (effectiveSignal?.aborted) throw new Error('Aborted');
     return result.response.text();
@@ -208,7 +210,7 @@ async function callOpenAIProvider(
       model: 'gpt-4o-mini',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.6,
-      max_tokens: 2048,
+      max_tokens: 8192, // 2048 → 8192: JSON truncation 방지 (위 Gemini 동일 사유)
       response_format: { type: 'json_object' },
     },
     { signal },
@@ -229,7 +231,7 @@ async function callClaudeProvider(
   const message = await client.messages.create(
     {
       model: 'claude-sonnet-4-6',
-      max_tokens: 2048,
+      max_tokens: 8192, // 2048 → 8192: JSON truncation 방지 (위 Gemini 동일 사유)
       messages: [{ role: 'user', content: prompt }],
     },
     { signal },
