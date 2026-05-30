@@ -2430,8 +2430,11 @@ ${source.customPrompt!.trim()}
   //              homefeed 0.7 → 0.5 (창의 유지 + 충실도 균형)
   //              Phase 1 효과 측정 후 추가 인하 결정. F1~F5 prompt rule이 일반론 회귀 차단.
   let temperature = 0.5; // 기본값
-  if (contentMode === 'seo') temperature = 0.3;  // [v2.10.231] 0.5 → 0.3
-  else if (contentMode === 'homefeed') temperature = 0.5;  // [v2.10.231] 0.7 → 0.5
+  // ✅ [2026-05-31 S1] 회귀 되돌림 — v2.10.231 인하(SEO 0.3, 홈판 0.5)가 문장 변주↓·균질↑로
+  //   "더 AI스러움"을 유발(사용자 회귀 신고). 사람다움 회복 위해 원복(SEO 0.5, 홈판 0.7).
+  //   뜬금없음(저충실도) 부작용은 S4(삽입식 후처리 문맥검사)·F1~F5 prompt rule로 별도 차단.
+  if (contentMode === 'seo') temperature = 0.5;
+  else if (contentMode === 'homefeed') temperature = 0.7;
   else if (contentMode === 'traffic-hunter') temperature = 0.9;
   else if (contentMode === 'affiliate') temperature = 0.5;
   else if (contentMode === 'custom') temperature = 0.7;

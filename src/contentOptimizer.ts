@@ -556,9 +556,10 @@ function enhanceEEAT(text: string, toneStyle: string = 'professional', silent: b
 
   const expressionsSource = TONE_EEAT_EXPRESSIONS[mappedTone] || TONE_EEAT_EXPRESSIONS.professional;
 
-  // ✅ [2026-05-23 B3] 신호 과다 완화 — 주입률 30% → 10%, floor 3 → 1
-  // 과도한 사전 주입은 대량 발행 시 패턴화되어 AI 탐지 신호가 됨.
-  const targetCount = Math.max(1, Math.floor(paragraphs.length * 0.10));
+  // ✅ [2026-05-31 S1] 회귀 되돌림 — 10%는 사람다움 신호가 약해 sterile/AI 느낌.
+  //   풀 랜덤 선택 + 문서 내 중복 스킵(아래)으로 패턴화는 억제되므로 중간값 18%·floor 2로 복원.
+  //   (30% 전체 복원은 소규모 풀 대량발행 시 cross-doc 반복 우려 → 18% 균형)
+  const targetCount = Math.max(2, Math.floor(paragraphs.length * 0.18));
   const categories = ['experience', 'expertise', 'authority', 'trust'] as const;
 
   const indices = new Set<number>();
@@ -605,9 +606,9 @@ function addHumanExpressions(text: string, toneStyle: string = 'professional', s
 
   const expressionsSource = TONE_HUMAN_EXPRESSIONS[mappedTone] || TONE_HUMAN_EXPRESSIONS.professional;
 
-  // ✅ [2026-05-23 B3] 신호 과다 완화 — 주입률 15% → 5%, floor 3 → 1
-  // 인간 표현 과다 주입은 대량 발행 시 오히려 기계적 패턴으로 노출됨.
-  const targetCount = Math.max(1, Math.floor(sentences.length * 0.05));
+  // ✅ [2026-05-31 S1] 회귀 되돌림 — 5%는 인간 표현이 거의 안 들어가 AI 느낌.
+  //   문장 단위 중복 스킵(아래)으로 패턴화 억제 → 중간값 10%·floor 2로 복원(15% 전체 복원은 보류).
+  const targetCount = Math.max(2, Math.floor(sentences.length * 0.10));
 
   const indices = new Set<number>();
   let attempts = 0;
