@@ -167,7 +167,7 @@ export async function checkDropshotLogin(
   if (cachedPage) {
     try {
       if (await isLoggedIn(cachedPage)) {
-        return { loggedIn: true, message: '로그인 세션 확인됨' };
+        return { loggedIn: true, message: 'board 접근 가능 (로그인 추정 — 생성 0건이면 🔗 로그인 필요)' };
       }
     } catch {
       // cached page unusable — fall through to a fresh headless check
@@ -197,17 +197,78 @@ export async function checkDropshotLogin(
 }
 
 /**
- * Triggers the login flow. ensurePage() opens a visible browser when no valid
- * session exists (max 5-minute wait) and re-caches a headless session on
- * success; if already logged in it returns immediately without a window.
+ * Opens a visible dropshot browser so the user can log in directly, then waits
+ * until the user closes the window (max 10 min) and re-caches a headless
+ * session. DOM-based login auto-detection is unreliable (the board shows the
+ * prompt textarea even when not logged in), so completion is user-controlled.
  */
 export async function dropshotLogin(
   onLog?: (m: string) => void,
 ): Promise<DropshotLoginStatus> {
+  // ✅ [SPEC-DROPSHOT-2026 2단계 보정] dropshot은 미로그인에도 board/프롬프트 입력창을
+  //   노출해 DOM만으로 로그인 여부를 신뢰성 있게 판정할 수 없다(textarea 존재 ≠ 로그인,
+  //   실제 생성 시 0건 반환으로 확인됨). 따라서 자동 판정 대신 visible 브라우저를 띄우고
+  //   사용자가 직접 로그인한 뒤 "창을 닫으면" 세션을 저장하는 사용자 제어 방식으로 처리한다.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let ctx: any = null;
   try {
-    await ensurePage(onLog);
-    return { loggedIn: true, message: '로그인 완료' };
+    // 기존 캐시 컨텍스트를 먼저 닫는다(동일 프로필 persistent-context 이중 락 방지).
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (cachedContext) await (cachedContext as any).close();
+    } catch {
+      // ignore
+    }
+    cachedContext = null;
+    cachedPage = null;
+
+    const profileDir = getProfileDir();
+    onLog?.('[리더스 나노바나나] 로그인 브라우저 표시 — 로그인 후 이 창을 닫아주세요 (최대 10분).');
+    ctx = await launchBrowser(profileDir, false);
+    const page = ctx.pages()[0] || (await ctx.newPage());
+    await page.goto('https://aistudio.dropshot.io', {
+      waitUntil: 'domcontentloaded',
+      timeout: 45000,
+    });
+
+    // 사용자가 창을 닫을 때까지 대기(로그인 완료 신호 = 사용자가 창 닫음). 최대 10분.
+    await new Promise<void>((resolve) => {
+      let done = false;
+      const finish = (): void => {
+        if (!done) {
+          done = true;
+          resolve();
+        }
+      };
+      try {
+        ctx.on('close', finish);
+      } catch {
+        // event 미지원 시 타임아웃만 사용
+      }
+      setTimeout(finish, 10 * 60 * 1000);
+    });
+
+    // 세션은 profileDir에 저장됨. 생성용 headless 세션 재캐시.
+    try {
+      await ctx.close();
+    } catch {
+      // already closed by user
+    }
+    ctx = null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const hctx: any = await launchBrowser(profileDir, true);
+    const hpage = hctx.pages()[0] || (await hctx.newPage());
+    await hpage.goto(BOARD_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    await new Promise((r) => setTimeout(r, 4000));
+    cachedContext = hctx;
+    cachedPage = hpage;
+    return { loggedIn: true, message: '브라우저를 닫았습니다 — 세션이 저장되었습니다. (실제 로그인 여부는 생성으로 확인)' };
   } catch (err) {
+    try {
+      if (ctx) await ctx.close();
+    } catch {
+      // ignore
+    }
     return { loggedIn: false, message: `로그인 실패: ${(err as Error)?.message ?? err}` };
   }
 }
