@@ -7920,6 +7920,20 @@ export async function generateStructuredContent(
         optimized.bodyHtml = cleanEscapeSequences(optimized.bodyHtml);
       }
 
+      // ✅ [자료]/[자료N] 인용 토큰 제거 — Faithfulness 측정(detectPlatitudes, 위 7821)용
+      //   내부 마커이므로 발행 본문엔 노출되면 안 됨. 측정이 끝난 뒤 최종 단계에서 strip.
+      //   앞 공백까지 함께 제거해 "한다 [자료]." → "한다." 형태로 깔끔히.
+      const stripCitationTokens = (s: string): string => s.replace(/\s*\[자료\d*\]/g, '');
+      if (optimized.bodyPlain) optimized.bodyPlain = stripCitationTokens(optimized.bodyPlain);
+      if (optimized.bodyHtml) optimized.bodyHtml = stripCitationTokens(optimized.bodyHtml);
+      if (Array.isArray(optimized.headings)) {
+        optimized.headings = optimized.headings.map((h: any) => ({
+          ...h,
+          ...(typeof h.content === 'string' ? { content: stripCitationTokens(h.content) } : {}),
+          ...(typeof h.body === 'string' ? { body: stripCitationTokens(h.body) } : {}),
+        }));
+      }
+
       const plainLength = characterCount(optimized.bodyPlain, minChars);
 
       // ✅ [Phase 7-B] Source Fidelity 자동 재시도 (한 호출에 1회만)
