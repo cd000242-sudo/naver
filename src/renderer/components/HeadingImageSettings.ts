@@ -712,7 +712,8 @@ export function createHeadingImageModal(): void {
           </div>
 
           <!-- ✅ [v2.10.291] 3개 카드 → 1개 통합. Google 계정 로그인 + ImageFX·Flow 연결 자동 일괄 처리 -->
-          <div style="margin-bottom: 16px;">
+          <!-- ✅ [SPEC-DROPSHOT-2026 3단계] imagefx/flow 선택 시에만 노출 -->
+          <div id="google-connect-section" style="margin-bottom: 16px;">
             <button type="button" class="premium-setting-btn" id="switch-google-account-btn">
               <div style="display: flex; align-items: center; gap: 14px;">
                 <div class="btn-icon" id="google-account-icon" style="background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%);">🔗</div>
@@ -1613,6 +1614,11 @@ export function createHeadingImageModal(): void {
     {
       const dsRow = document.getElementById('hsettings-dropshot-login');
       if (dsRow) dsRow.style.display = selectedSourceValue === 'dropshot' ? 'block' : 'none';
+    }
+    // ✅ [SPEC-DROPSHOT-2026 3단계] Google 계정 연동은 imagefx/flow 선택 시에만 노출
+    {
+      const gSection = document.getElementById('google-connect-section');
+      if (gSection) gSection.style.display = (selectedSourceValue === 'imagefx' || selectedSourceValue === 'flow') ? 'block' : 'none';
     }
 
     // ✅ [2026-03-23] local-folder 선택 시 부족 이미지 옵션 표시/숨김
@@ -2725,6 +2731,11 @@ export function openHeadingImageModal(): void {
     {
       const dsRow = document.getElementById('hsettings-dropshot-login');
       if (dsRow) dsRow.style.display = currentSource === 'dropshot' ? 'block' : 'none';
+    }
+    // ✅ [SPEC-DROPSHOT-2026 3단계] Google 계정 연동은 imagefx/flow 선택 시에만 노출
+    {
+      const gSection = document.getElementById('google-connect-section');
+      if (gSection) gSection.style.display = (currentSource === 'imagefx' || currentSource === 'flow') ? 'block' : 'none';
     }
 
     // ✅ [2026-03-23] local-folder 선택 시 부족 이미지 옵션 토글
