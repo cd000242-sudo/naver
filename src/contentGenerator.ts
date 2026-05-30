@@ -27,6 +27,7 @@ import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from '
 import { META_CRITIQUE_PHRASES } from './content/forbiddenPhrases.js';
 // ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 실전 통합 훅
 import { validateContent as runValidationPipeline } from './services/contentValidationPipeline.js';
+import { loadAeoRules } from './aeoRulesManager.js';
 import { extractRecentWinners, formatWinnersForPrompt } from './learning/recentWinnersExtractor.js';
 import { isFeatureEnabled } from './services/featureFlagConfig.js';
 // ✅ [v1.4.48 Stage A.2] require() 혼용 제거 → 정적 import로 통일 (모듈 인스턴스 단일 보장)
@@ -174,12 +175,16 @@ function runPostGenValidator(content: any, source: any): void {
   try {
     const mode: 'homefeed' | 'seo' = source?.contentMode === 'seo' ? 'seo' : 'homefeed';
     const mainKeyword = source?.keywords?.[0] || source?.title || '';
+    // ✅ [SPEC-AEO-EXPOSURE-2026 R2] external rules — file absent → DEFAULT (unchanged behavior).
+    // Read per call so aeo_rules.json edits take effect without a rebuild (beta tuning).
+    const aeoRules = loadAeoRules(path.join(app.getPath('userData'), 'aeo_rules.json'));
     result = runValidationPipeline(content, {
       skipFingerprint: true, // 속도 우선 — fingerprint는 이미 authgrDefense가 별도 수행
       mode,
       mainKeyword,
       title: content?.selectedTitle || content?.title || '',
       imageCount: Array.isArray(content?.headings) ? content.headings.length : 0,
+      aeoRules,
     });
     (content as any).__validationResult = result;
     if (result.metrics.criticalIssueCount > 0) {

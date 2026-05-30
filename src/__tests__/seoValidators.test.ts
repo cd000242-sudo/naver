@@ -274,3 +274,77 @@ describe('validateContent — SEO mode integration', () => {
     expect(result.metrics.seoDefinitionHitRatio).toBeGreaterThan(0.5);
   });
 });
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// SPEC-AEO-EXPOSURE-2026 R1 — advisory scanners wired into the pipeline.
+// Non-blocking (info severity), seo-mode only, metrics null otherwise.
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+describe('contentValidationPipeline — R1 advisory metrics', () => {
+  const richSeo: CheckableContent = {
+    introduction: '청년도약계좌는 정부 지원 5년 만기 적금이에요.',
+    headings: [
+      { title: '가입 조건은?', body: '핵심은 소득 기준입니다.\n\n| 구간 | 금리 |\n| --- | --- |\n| A | 1% |\n\n그런데 예외도 있어요.' },
+      { title: '얼마나 받나요?', body: '하지만 만기까지 유지해야 합니다. 여기서 중요한 건 중도해지예요.' },
+    ],
+    conclusion: '핵심만 정리하면 조건 맞으면 가입이에요. 출처: 금융위원회 보도자료 기준입니다.',
+  };
+
+  it('reports R1 advisory metrics in seo mode (non-blocking)', () => {
+    const r = validateContent(richSeo, {
+      skipFingerprint: true,
+      mode: 'seo',
+      mainKeyword: '청년도약계좌',
+      title: '청년도약계좌 가입 조건 정리',
+      imageCount: 2,
+    });
+    // metrics populated
+    expect(r.metrics.seoComparisonBlockCount).not.toBeNull();
+    expect(r.metrics.seoHasSourceFooter).toBe(true);
+    expect(r.metrics.seoImageRatio).not.toBeNull();
+    expect(r.metrics.seoCuriosityHookCount).not.toBeNull();
+    expect(r.metrics.seoH2QuestionRatio).not.toBeNull();
+    // never blocking: no R1 category is critical
+    const r1Cats = [
+      'seo_comparison_block',
+      'seo_source_footer',
+      'seo_image_ratio',
+      'seo_curiosity_hook',
+      'seo_h2_question_ratio',
+    ];
+    expect(
+      r.issues.some((i) => r1Cats.includes(i.category) && i.severity === 'critical'),
+    ).toBe(false);
+  });
+
+  it('leaves R1 metrics null when mode is not seo', () => {
+    const r = validateContent(richSeo, { skipFingerprint: true });
+    expect(r.metrics.seoComparisonBlockCount).toBeNull();
+    expect(r.metrics.seoHasSourceFooter).toBeNull();
+    expect(r.metrics.seoImageRatio).toBeNull();
+    expect(r.metrics.seoCuriosityHookCount).toBeNull();
+    expect(r.metrics.seoH2QuestionRatio).toBeNull();
+  });
+
+  it('honors externalized aeoRules thresholds (R2 override)', () => {
+    const base = {
+      skipFingerprint: true,
+      mode: 'seo' as const,
+      mainKeyword: '청년도약계좌',
+      title: '청년도약계좌 가입 조건 정리',
+    };
+    // Default: richSeo has 2 question headings / 2 total → ratio 1.0, no h2 warning.
+    // Force an impossible 200% threshold via override → warning must appear.
+    const overridden = validateContent(richSeo, {
+      ...base,
+      aeoRules: {
+        version: 'test',
+        imageRatio: { minRatio: 0.33 },
+        curiosityHook: { minHooks: 2 },
+        h2QuestionRatio: { minRatio: 1.01 },
+      },
+    });
+    expect(
+      overridden.issues.some((i) => i.category === 'seo_h2_question_ratio'),
+    ).toBe(true);
+  });
+});

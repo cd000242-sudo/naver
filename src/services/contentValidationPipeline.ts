@@ -25,6 +25,13 @@ import { scanDefinitionFirstSentences } from '../validators/seo/definitionFirstS
 import { scanMainKeywordPosition } from '../validators/seo/mainKeywordPositionScanner.js';
 import { scanFaqHeadings } from '../validators/seo/faqHeadingScanner.js';
 import { scanLongtailDepth } from '../validators/seo/longtailDepthScanner.js';
+// ✅ [SPEC-AEO-EXPOSURE-2026 R1] advisory scanners (non-blocking, info-level)
+import { scanComparisonBlocks } from '../validators/seo/comparisonBlockScanner.js';
+import { scanSourceFooter } from '../validators/seo/sourceFooterScanner.js';
+import { scanImageRatio } from '../validators/seo/imageRatioScanner.js';
+import { scanCuriosityHooks } from '../validators/seo/curiosityHookScanner.js';
+import { scanH2QuestionRatio } from '../validators/seo/h2QuestionRatioScanner.js';
+import { DEFAULT_AEO_RULES, type AeoRules } from '../aeoRulesManager.js';
 
 export type IssueSeverity = 'critical' | 'warning' | 'info';
 
@@ -38,7 +45,13 @@ export type IssueCategory =
   | 'seo_definition_first'
   | 'seo_keyword_position'
   | 'seo_faq_heading'
-  | 'seo_longtail_depth';
+  | 'seo_longtail_depth'
+  // ✅ [SPEC-AEO-EXPOSURE-2026 R1] advisory categories (info-level, never blocking)
+  | 'seo_comparison_block'
+  | 'seo_source_footer'
+  | 'seo_image_ratio'
+  | 'seo_curiosity_hook'
+  | 'seo_h2_question_ratio';
 
 export interface ValidationIssue {
   severity: IssueSeverity;
@@ -64,6 +77,12 @@ export interface ValidationMetrics {
   // ✅ [2026-04-20 SPEC-SEO-100 W4] Long-tail depth
   seoLongtailWordCount: number | null;
   seoLongtailConcretenessSignals: number | null;
+  // ✅ [SPEC-AEO-EXPOSURE-2026 R1] advisory metrics (null when mode !== 'seo')
+  seoComparisonBlockCount: number | null;
+  seoHasSourceFooter: boolean | null;
+  seoImageRatio: number | null;
+  seoCuriosityHookCount: number | null;
+  seoH2QuestionRatio: number | null;
 }
 
 export interface ValidationResult {
@@ -84,6 +103,12 @@ export interface ValidationOptions {
   mainKeyword?: string;
   /** Post title for SEO keyword-position check. */
   title?: string;
+  /**
+   * ✅ [SPEC-AEO-EXPOSURE-2026 R2] Externalized R1 thresholds. When omitted,
+   * DEFAULT_AEO_RULES is used (byte-equal to the scanners' hardcoded defaults),
+   * so behavior is unchanged. Callers load via aeoRulesManager.loadAeoRules().
+   */
+  aeoRules?: AeoRules;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -237,6 +262,20 @@ function flattenContent(content: CheckableContent): string {
   return parts.join('\n\n');
 }
 
+/**
+ * Push advisory (info-level) issues from an R1 scanner's warnings.
+ * info severity never flips `pass` and is excluded from criticalIssueCount.
+ */
+function pushAdvisory(
+  issues: ValidationIssue[],
+  category: IssueCategory,
+  warnings: string[],
+): void {
+  for (const message of warnings) {
+    issues.push({ severity: 'info', category, message });
+  }
+}
+
 export function validateContent(
   content: CheckableContent,
   options: ValidationOptions = {},
@@ -291,6 +330,12 @@ export function validateContent(
   let seoFaqHeadingCount: number | null = null;
   let seoLongtailWordCount: number | null = null;
   let seoLongtailConcretenessSignals: number | null = null;
+  // ✅ [SPEC-AEO-EXPOSURE-2026 R1] advisory metrics
+  let seoComparisonBlockCount: number | null = null;
+  let seoHasSourceFooter: boolean | null = null;
+  let seoImageRatio: number | null = null;
+  let seoCuriosityHookCount: number | null = null;
+  let seoH2QuestionRatio: number | null = null;
 
   if (options.mode === 'seo') {
     const defCheck = scanDefinitionFirstSentences(content);
@@ -353,6 +398,32 @@ export function validateContent(
         message: warning,
       });
     }
+
+    // ✅ [SPEC-AEO-EXPOSURE-2026 R1] advisory scanners — measure only, never block.
+    // All issues are 'info' (optional, "선택"): they do not flip pass or add warnings noise.
+    // ✅ [R2] thresholds come from external rules (DEFAULT = unchanged behavior).
+    const rules = options.aeoRules ?? DEFAULT_AEO_RULES;
+
+    const comparison = scanComparisonBlocks(flat);
+    seoComparisonBlockCount =
+      comparison.tableCount + comparison.listCount + comparison.checklistCount;
+    pushAdvisory(issues, 'seo_comparison_block', comparison.warnings);
+
+    const sourceFooter = scanSourceFooter(content);
+    seoHasSourceFooter = sourceFooter.hasSourceFooter;
+    pushAdvisory(issues, 'seo_source_footer', sourceFooter.warnings);
+
+    const imageRatio = scanImageRatio(flat, imageCount, rules.imageRatio.minRatio);
+    seoImageRatio = imageRatio.ratio;
+    pushAdvisory(issues, 'seo_image_ratio', imageRatio.warnings);
+
+    const curiosity = scanCuriosityHooks(flat, rules.curiosityHook.minHooks);
+    seoCuriosityHookCount = curiosity.hookCount;
+    pushAdvisory(issues, 'seo_curiosity_hook', curiosity.warnings);
+
+    const h2Ratio = scanH2QuestionRatio(content, rules.h2QuestionRatio.minRatio);
+    seoH2QuestionRatio = h2Ratio.questionRatio;
+    pushAdvisory(issues, 'seo_h2_question_ratio', h2Ratio.warnings);
   }
 
   const criticalCount = issues.filter((i) => i.severity === 'critical').length;
@@ -369,6 +440,11 @@ export function validateContent(
     seoFaqHeadingCount,
     seoLongtailWordCount,
     seoLongtailConcretenessSignals,
+    seoComparisonBlockCount,
+    seoHasSourceFooter,
+    seoImageRatio,
+    seoCuriosityHookCount,
+    seoH2QuestionRatio,
   };
 
   return {
