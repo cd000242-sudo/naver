@@ -675,7 +675,17 @@ export function createHeadingImageModal(): void {
               </div>
               <span class="arrow">›</span>
             </button>
-            
+
+            <!-- ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 선택 시 로그인/확인 (엔진 선택 바로 아래) -->
+            <div id="hsettings-dropshot-login" style="display:none; margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: #fef3c7; border: 1px solid #f59e0b;">
+              <div style="font-size: 12px; color: #92400e; margin-bottom: 6px;">🍌 리더스 나노바나나 무제한은 dropshot 로그인이 필요합니다.</div>
+              <div style="display:flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+                <button type="button" id="hsettings-ds-login-btn" style="padding: 6px 12px; background: linear-gradient(135deg,#f59e0b,#d97706); color: white; border: none; border-radius: 6px; font-weight: 700; font-size: 12px; cursor: pointer;">🔗 로그인</button>
+                <button type="button" id="hsettings-ds-check-btn" style="padding: 6px 12px; background: #ffffff; color: #92400e; border: 1px solid #f59e0b; border-radius: 6px; font-weight: 600; font-size: 12px; cursor: pointer;">✅ 로그인 확인</button>
+                <span id="hsettings-ds-status" style="font-size: 11px; color: #92400e;"></span>
+              </div>
+            </div>
+
             <!-- ✅ [2026-01-26] 이미지 스타일 선택 버튼 (실사/애니메이션) -->
             <button type="button" class="premium-setting-btn" id="open-image-style-btn">
               <div style="display: flex; align-items: center; gap: 14px;">
@@ -1014,15 +1024,6 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #4338ca;">내 폴더</div>
             <div style="font-size: 10px; color: #6366f1;" id="local-folder-path-display">폴더 선택 필요</div>
           </label>
-        </div>
-        <!-- ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 선택 시 로그인/확인 -->
-        <div id="hsettings-dropshot-login" style="display:none; margin-top: 12px; padding: 10px 12px; border-radius: 10px; background: #fef3c7; border: 1px solid #f59e0b;">
-          <div style="font-size: 12px; color: #92400e; margin-bottom: 6px;">🍌 리더스 나노바나나 무제한은 dropshot 로그인이 필요합니다.</div>
-          <div style="display:flex; gap: 6px; align-items: center; flex-wrap: wrap;">
-            <button type="button" id="hsettings-ds-login-btn" style="padding: 6px 12px; background: linear-gradient(135deg,#f59e0b,#d97706); color: white; border: none; border-radius: 6px; font-weight: 700; font-size: 12px; cursor: pointer;">🔗 로그인</button>
-            <button type="button" id="hsettings-ds-check-btn" style="padding: 6px 12px; background: #ffffff; color: #92400e; border: 1px solid #f59e0b; border-radius: 6px; font-weight: 600; font-size: 12px; cursor: pointer;">✅ 로그인 확인</button>
-            <span id="hsettings-ds-status" style="font-size: 11px; color: #92400e;"></span>
-          </div>
         </div>
         <button id="image-source-confirm" style="width: 100%; margin-top: 14px; padding: 12px; background: #667eea; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">확인</button>
       </div>
@@ -1504,9 +1505,6 @@ export function createHeadingImageModal(): void {
         (opt as HTMLElement).style.borderColor = value === currentSource ? '#667eea' : '#e5e7eb';
         (opt as HTMLElement).style.transform = value === currentSource ? 'scale(1.02)' : 'scale(1)';
       });
-      // dropshot이 현재 소스면 로그인 행 노출
-      const dsRow = document.getElementById('hsettings-dropshot-login');
-      if (dsRow) dsRow.style.display = currentSource === 'dropshot' ? 'block' : 'none';
     }
   });
 
@@ -1531,9 +1529,6 @@ export function createHeadingImageModal(): void {
       const value = opt.getAttribute('data-value') as GlobalImageSource;
       // [2026-05-27 작업 24] OpenAI Image 카드 자동 모달 제거 — 사용자 의도는 본문 LLM 영역 (이미지 OpenAI는 별도 운영)
       selectedSourceValue = value;
-      // dropshot 선택 시 로그인 행 노출
-      const _dsRow = document.getElementById('hsettings-dropshot-login');
-      if (_dsRow) _dsRow.style.display = value === 'dropshot' ? 'block' : 'none';
       // 모든 카드 스타일 리셋
       sourceOptions.forEach(o => {
         (o as HTMLElement).style.borderColor = '#e5e7eb';
@@ -1614,6 +1609,11 @@ export function createHeadingImageModal(): void {
     }
     const subModal = document.getElementById('image-source-submodal');
     if (subModal) subModal.style.display = 'none';
+    // ✅ [SPEC-DROPSHOT-2026 2단계] 확정된 엔진이 dropshot이면 메인 모달 로그인 행 노출
+    {
+      const dsRow = document.getElementById('hsettings-dropshot-login');
+      if (dsRow) dsRow.style.display = selectedSourceValue === 'dropshot' ? 'block' : 'none';
+    }
 
     // ✅ [2026-03-23] local-folder 선택 시 부족 이미지 옵션 표시/숨김
     const fallbackSection = document.getElementById('local-folder-fallback-options');
@@ -2720,6 +2720,11 @@ export function openHeadingImageModal(): void {
       } else {
         sourceDisplay.textContent = SOURCE_NAMES[currentSource];
       }
+    }
+    // ✅ [SPEC-DROPSHOT-2026 2단계] dropshot이 현재 엔진이면 로그인 행 노출
+    {
+      const dsRow = document.getElementById('hsettings-dropshot-login');
+      if (dsRow) dsRow.style.display = currentSource === 'dropshot' ? 'block' : 'none';
     }
 
     // ✅ [2026-03-23] local-folder 선택 시 부족 이미지 옵션 토글

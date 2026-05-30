@@ -109,14 +109,14 @@ async function launchBrowser(profileDir: string, headless: boolean): Promise<unk
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function isLoggedIn(page: any): Promise<boolean> {
   try {
-    const has = await page.evaluate(() => {
-      const text = (document.body as HTMLElement).innerText || '';
-      return (
-        text.includes('이미지 생성') ||
-        text.includes('플랜 업그레이드') ||
-        text.includes('워크스페이스')
-      );
-    });
+    // ✅ [SPEC-DROPSHOT-2026 2단계] 정밀화: 마케팅 텍스트('이미지 생성'/'플랜 업그레이드'/
+    //   '워크스페이스')는 로그인 화면에도 나타나 false positive를 냈다("로그인한 적 없는데
+    //   로그인 완료" 버그). 실제 로그인 신호 = 생성용 프롬프트 textarea 존재(인증된 사용자만
+    //   board에서 볼 수 있고, 키트가 실제 생성에 쓰는 셀렉터).
+    const has = await page.evaluate(
+      (sel: string) => !!document.querySelector(sel),
+      PROMPT_SELECTOR,
+    );
     return !!has;
   } catch {
     return false;
