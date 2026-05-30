@@ -342,6 +342,7 @@ try {
     'imageGenStudio.js',
     'imageGenStudioCore.js',
     'imageGenStudioLightbox.js',
+    'dropshotLoginUi.js',
   ];
   let modulesSource = '';
   for (const modFile of modulesFiles) {

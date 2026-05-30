@@ -1015,6 +1015,15 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 10px; color: #6366f1;" id="local-folder-path-display">폴더 선택 필요</div>
           </label>
         </div>
+        <!-- ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 선택 시 로그인/확인 -->
+        <div id="hsettings-dropshot-login" style="display:none; margin-top: 12px; padding: 10px 12px; border-radius: 10px; background: #fef3c7; border: 1px solid #f59e0b;">
+          <div style="font-size: 12px; color: #92400e; margin-bottom: 6px;">🍌 리더스 나노바나나 무제한은 dropshot 로그인이 필요합니다.</div>
+          <div style="display:flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+            <button type="button" id="hsettings-ds-login-btn" style="padding: 6px 12px; background: linear-gradient(135deg,#f59e0b,#d97706); color: white; border: none; border-radius: 6px; font-weight: 700; font-size: 12px; cursor: pointer;">🔗 로그인</button>
+            <button type="button" id="hsettings-ds-check-btn" style="padding: 6px 12px; background: #ffffff; color: #92400e; border: 1px solid #f59e0b; border-radius: 6px; font-weight: 600; font-size: 12px; cursor: pointer;">✅ 로그인 확인</button>
+            <span id="hsettings-ds-status" style="font-size: 11px; color: #92400e;"></span>
+          </div>
+        </div>
         <button id="image-source-confirm" style="width: 100%; margin-top: 14px; padding: 12px; background: #667eea; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">확인</button>
       </div>
     </div>
@@ -1495,6 +1504,9 @@ export function createHeadingImageModal(): void {
         (opt as HTMLElement).style.borderColor = value === currentSource ? '#667eea' : '#e5e7eb';
         (opt as HTMLElement).style.transform = value === currentSource ? 'scale(1.02)' : 'scale(1)';
       });
+      // dropshot이 현재 소스면 로그인 행 노출
+      const dsRow = document.getElementById('hsettings-dropshot-login');
+      if (dsRow) dsRow.style.display = currentSource === 'dropshot' ? 'block' : 'none';
     }
   });
 
@@ -1519,6 +1531,9 @@ export function createHeadingImageModal(): void {
       const value = opt.getAttribute('data-value') as GlobalImageSource;
       // [2026-05-27 작업 24] OpenAI Image 카드 자동 모달 제거 — 사용자 의도는 본문 LLM 영역 (이미지 OpenAI는 별도 운영)
       selectedSourceValue = value;
+      // dropshot 선택 시 로그인 행 노출
+      const _dsRow = document.getElementById('hsettings-dropshot-login');
+      if (_dsRow) _dsRow.style.display = value === 'dropshot' ? 'block' : 'none';
       // 모든 카드 스타일 리셋
       sourceOptions.forEach(o => {
         (o as HTMLElement).style.borderColor = '#e5e7eb';
@@ -1529,6 +1544,32 @@ export function createHeadingImageModal(): void {
       (opt as HTMLElement).style.transform = 'scale(1.02)';
     });
   });
+
+  // ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 로그인/확인 버튼 (이 파일은 import 미사용 관례 → 인라인 배선)
+  {
+    const setDsStatus = (msg: string, color: string): void => {
+      const s = document.getElementById('hsettings-ds-status');
+      if (s) { s.textContent = msg; s.style.color = color; }
+    };
+    document.getElementById('hsettings-ds-login-btn')?.addEventListener('click', async () => {
+      setDsStatus('🔗 로그인 진행 중… 필요 시 브라우저 창이 열립니다 (최대 5분).', '#92400e');
+      try {
+        const r = await (window as any).api?.dropshotLogin?.();
+        setDsStatus(r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? '로그인 실패'}`, r?.loggedIn ? '#059669' : '#b91c1c');
+      } catch (e) {
+        setDsStatus(`⚠️ 로그인 오류: ${(e as Error)?.message ?? e}`, '#b91c1c');
+      }
+    });
+    document.getElementById('hsettings-ds-check-btn')?.addEventListener('click', async () => {
+      setDsStatus('⏳ 로그인 상태 확인 중…', '#92400e');
+      try {
+        const r = await (window as any).api?.checkDropshotLogin?.();
+        setDsStatus(r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? '미로그인'}`, r?.loggedIn ? '#059669' : '#b91c1c');
+      } catch (e) {
+        setDsStatus(`⚠️ 확인 오류: ${(e as Error)?.message ?? e}`, '#b91c1c');
+      }
+    });
+  }
 
   // ✅ AI 엔진 서브 모달 확인 버튼
   document.getElementById('image-source-confirm')?.addEventListener('click', async () => {

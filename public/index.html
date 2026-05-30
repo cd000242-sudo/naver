@@ -3751,6 +3751,16 @@
 
 
 
+                    <!-- ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 선택 시 로그인/확인 -->
+                    <div id="mgmt-dropshot-login" style="display:none; margin-bottom:1rem; padding:0.6rem 0.75rem; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3); border-radius:8px;">
+                        <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.4rem;">🍌 리더스 나노바나나 무제한은 dropshot 로그인이 필요합니다.</div>
+                        <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+                            <button type="button" id="mgmt-ds-login-btn" style="padding:0.45rem 0.9rem; background:linear-gradient(135deg,#f59e0b,#d97706); color:white; border:none; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer;">🔗 로그인</button>
+                            <button type="button" id="mgmt-ds-check-btn" style="padding:0.45rem 0.9rem; background:var(--bg-tertiary); color:var(--text-strong); border:1px solid var(--border-medium); border-radius:6px; font-weight:600; font-size:0.8rem; cursor:pointer;">✅ 로그인 확인</button>
+                            <span id="mgmt-ds-status" style="font-size:0.78rem; color:var(--text-muted);"></span>
+                        </div>
+                    </div>
+
                     <!-- ✅ [2026-02-22] Leonardo AI 상세 모델 선택 (Leonardo AI 선택 시에만 표시) -->
                     <div id="leonardoai-model-selection-container"
                         style="display: none; margin-bottom: 1rem; padding: 1rem; background: rgba(251, 146, 60, 0.05); border-radius: 8px; border: 1px solid rgba(251, 146, 60, 0.2);">
@@ -4347,6 +4357,15 @@
                             <label style="display:block; font-weight:700; color:var(--text-strong); margin-bottom:0.5rem;">🎨 이미지 생성 엔진</label>
                             <select id="imgstudio-engine" style="width:100%; padding:0.75rem; background:var(--bg-primary); border:2px solid rgba(139,92,246,0.4); border-radius:var(--radius-md); color:var(--text-strong); font-size:0.95rem; font-weight:600; cursor:pointer;"></select>
                             <p id="imgstudio-engine-note" style="margin:0.4rem 0 0 0; font-size:0.8rem; color:var(--text-muted);"></p>
+                            <!-- ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 선택 시 로그인/확인 -->
+                            <div id="imgstudio-dropshot-login" style="display:none; margin-top:0.6rem; padding:0.6rem 0.75rem; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3); border-radius:var(--radius-sm);">
+                                <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.4rem;">🍌 리더스 나노바나나 무제한은 dropshot 로그인이 필요합니다.</div>
+                                <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+                                    <button type="button" id="imgstudio-ds-login-btn" style="padding:0.45rem 0.9rem; background:linear-gradient(135deg,#f59e0b,#d97706); color:white; border:none; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer;">🔗 로그인</button>
+                                    <button type="button" id="imgstudio-ds-check-btn" style="padding:0.45rem 0.9rem; background:var(--bg-tertiary); color:var(--text-strong); border:1px solid var(--border-medium); border-radius:6px; font-weight:600; font-size:0.8rem; cursor:pointer;">✅ 로그인 확인</button>
+                                    <span id="imgstudio-ds-status" style="font-size:0.78rem; color:var(--text-muted);"></span>
+                                </div>
+                            </div>
                         </div>
 
                         <div style="margin-bottom: 1.25rem;">

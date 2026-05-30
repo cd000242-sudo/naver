@@ -13,6 +13,7 @@
  */
 
 import { openStudioLightbox, initStudioLightbox } from './imageGenStudioLightbox.js';
+import { wireSelectDropshotRow } from './dropshotLoginUi.js';
 import {
   getSelectedEngine,
   populateEngineSelect,
@@ -43,6 +44,13 @@ export function initImageGenStudio(): void {
   populateEngineSelect();
   _bindControls();
   initStudioLightbox();
+  wireSelectDropshotRow({
+    selectId: 'imgstudio-engine',
+    rowId: 'imgstudio-dropshot-login',
+    loginBtnId: 'imgstudio-ds-login-btn',
+    checkBtnId: 'imgstudio-ds-check-btn',
+    statusId: 'imgstudio-ds-status',
+  });
   (window as any).switchImagesSubtab = _switchSubtab;
 }
 

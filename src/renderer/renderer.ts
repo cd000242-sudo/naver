@@ -224,6 +224,8 @@ import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApi
 import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 // ✅ [SPEC-DROPSHOT-2026] 이미지 관리 → 🎨 이미지 생성 서브탭 (멀티엔진 대량 생성 스튜디오)
 import { initImageGenStudio } from './modules/imageGenStudio.js';
+// ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 로그인/확인 UI (엔진 선택 시 노출)
+import { wireSelectDropshotRow } from './modules/dropshotLoginUi.js';
 import { initImageLibrary, loadLibraryImages, useLibraryImage, switchToTab, generateFavoritesContent, generateTemplatesContent, getEnhancedTemplates } from './modules/contentPreviewAndLibrary.js';
 declare let thumbnailBackgroundImage: string | null;
 declare let thumbnailBackgroundDataUrl: string | null;
@@ -9962,6 +9964,14 @@ initContentModeHelpAndSmartPublish();
 initImageNarrativeMode();
 // ✅ [SPEC-DROPSHOT-2026] 이미지 생성 스튜디오 서브탭 초기화
 initImageGenStudio();
+// ✅ [SPEC-DROPSHOT-2026 2단계] 이미지 관리 탭 엔진 셀렉터 — dropshot 선택 시 로그인/확인 노출
+wireSelectDropshotRow({
+  selectId: 'image-source-select',
+  rowId: 'mgmt-dropshot-login',
+  loginBtnId: 'mgmt-ds-login-btn',
+  checkBtnId: 'mgmt-ds-check-btn',
+  statusId: 'mgmt-ds-status',
+});
 
 // ✅ [v2.10.191 Phase 3.8.3] SERP 추이 패널 초기화 + 데이터 로드
 function initSerpHistoryPanel(): void {
