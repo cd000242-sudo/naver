@@ -83,7 +83,8 @@ const UnifiedDOMCache = {
     // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 별칭 제거 (각각 별개 모델).
     //   3종(nano-banana / nano-banana-2 / nano-banana-pro)을 VALID_AI_SOURCES에 직접 등록.
     const ALIAS_MAP: Record<string, string> = {};
-    const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'falai', 'pollinations', 'local-folder'];
+    // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
+    const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'dall-e-3', 'leonardoai', 'imagefx', 'flow', 'dropshot', 'falai', 'pollinations', 'local-folder'];
 
     const normalizeSource = (raw: string | null): string | null => {
       if (!raw || raw === 'undefined' || raw === 'null') return null;

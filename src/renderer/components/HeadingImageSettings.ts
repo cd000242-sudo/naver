@@ -39,6 +39,7 @@ export type HeadingImageMode = 'all' | 'thumbnail-only' | 'odd-only' | 'even-onl
 // ✅ [v2.10.305] 활성 이미지 소스 — UI에서 선택 가능하고 백엔드에서 정상 동작.
 //   신규 코드는 가능하면 이 타입을 사용해 폐기 값 차단.
 // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana(2.5)/nano-banana-2(3.1)/nano-banana-pro(3-pro).
+// ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
 export type ActiveImageSource =
   | 'nano-banana'
   | 'nano-banana-2'
@@ -48,6 +49,7 @@ export type ActiveImageSource =
   | 'leonardoai'
   | 'imagefx'
   | 'flow'
+  | 'dropshot'
   | 'local-folder';
 
 /**
@@ -102,6 +104,7 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'leonardoai': 'Leonardo AI',
   'imagefx': 'ImageFX (무료)',
   'flow': '🍌 Flow (Nano Banana 2)',
+  'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)',
   'local-folder': '📂 내 폴더'
 };
 
@@ -318,7 +321,8 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
 export function getFullAutoImageSource(): GlobalImageSource {
   // ✅ [v2.10.302] dall-e-3 제거 (UI 완전 폐기) + falai/prodia/stability/pollinations는 UI 미노출이나
   //   기존 사용자 localStorage 호환성을 위해 read VALID에는 유지 — write VALID_AI_SOURCES만 제거.
-  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'local-folder'];
+  // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
+  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'dropshot', 'local-folder'];
 
   // 정규화 read (별칭이 저장돼있으면 정식 키로 변환)
   const fullAutoSaved = normalizeImageSource(safeLocalStorageGet('fullAutoImageSource'));

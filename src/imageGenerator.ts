@@ -9,6 +9,8 @@ import { generateWithOpenAIImage } from './image/openaiImageGenerator.js';
 import { generateWithLeonardoAI } from './image/leonardoAIGenerator.js';
 import { generateWithImageFx } from './image/imageFxGenerator.js';
 import { generateWithFlow } from './image/flowGenerator.js';
+// ✅ [v2.11.7] 리더스 나노바나나 무제한 (dropshot)
+import { generateWithDropshot } from './image/dropshotGenerator.js';
 
 import { downloadAndSaveImage } from './image/imageUtils.js';
 import { getImageErrorMessage } from './image/imageErrorMessages.js';
@@ -62,7 +64,8 @@ function isKoreanTextSupportedEngine(engine: string): boolean {
   // ✅ [v1.4.80] 'flow' 추가 — Flow는 Nano Banana Pro 기반이라 한글 텍스트 네이티브 지원
   // ✅ [v2.10.335] 나노바나나2(3.1)/프로(3-pro)는 한글 네이티브 지원. 구버전 'nano-banana'(2.5)는
   //   한글 텍스트가 깨지므로 제외 → 오버레이 폴백 대상.
-  return engine === 'nano-banana-2' || engine === 'nano-banana-pro' || engine === 'flow';
+  // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한은 한글 텍스트 multilingual OK
+  return engine === 'nano-banana-2' || engine === 'nano-banana-pro' || engine === 'flow' || engine === 'dropshot';
 }
 
 /**
@@ -248,6 +251,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     'leonardoai': 'Leonardo AI',
     'imagefx': 'ImageFX (Google 무료)',
     'flow': 'Flow (Nano Banana 2, AI Pro 무료)', // ✅ [v1.5.4]
+    'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)', // ✅ [v2.11.7]
     'naver': '네이버 이미지 검색',
     'local-folder': '내 폴더',
   };
@@ -437,6 +441,31 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         throw new Error(`[Flow] ${userMessage}`);
       }
       throw new Error(`[Flow] 이미지 생성 실패: ${rawMsg}\n\n💡 가능한 원인:\n1. 계정 쿼터 초과 (1시간 후 재시도)\n2. Google 세션 만료 (AdsPower 재로그인)\n3. 안전 필터 차단\n4. Flow 내부 API 구조 변경 (자동 재학습 시도됨)`);
+    }
+  }
+
+  // ✅ [v2.11.7] 리더스 나노바나나 무제한 (dropshot) — 사용자 명시 선택 시만. auto/폴백 체인 제외.
+  if (normalizedProvider === 'dropshot') {
+    try {
+      console.log(`[이미지생성] 🍌 리더스 나노바나나 무제한으로 ${items.length}개 이미지 생성 시작... (구독자 무제한 · 추가비용 0원)`);
+      const dropshotImages = await generateWithDropshot(
+        items,
+        options.postTitle,
+        options.postId,
+        options.isFullAuto,
+        options.isShoppingConnect || false,
+        options.stopCheck,
+        onImageGenerated,
+      );
+      if (dropshotImages.length === 0) {
+        throw new Error('리더스 나노바나나 무제한 0건 반환 — 로그인/세션/쿼터 확인 필요');
+      }
+      console.log(`[이미지생성] ✅ 리더스 나노바나나 무제한으로 ${dropshotImages.length}개 이미지 생성 완료!`);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(dropshotImages, 'dropshot', options.postTitle, options.thumbnailTextInclude, items), items);
+    } catch (dropshotError) {
+      const rawMsg = (dropshotError as Error).message || '';
+      console.warn(`[ImageGenerator] ⚠️ 리더스 나노바나나 무제한 실패:`, rawMsg);
+      throw new Error(`[리더스 나노바나나 무제한] 이미지 생성 실패: ${rawMsg}\n\n💡 가능한 원인:\n1. Dropshot Pro 구독 미완료 또는 만료\n2. 로그인 세션 만료 (재로그인 필요)\n3. Dropshot UI 구조 변경\n4. 브라우저 실행 실패 (Chrome/Edge 설치 필요)`);
     }
   }
 

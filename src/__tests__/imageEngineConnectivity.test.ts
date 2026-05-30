@@ -29,12 +29,13 @@ const ENGINE_VALUES = ['nano-banana-2', 'nano-banana-pro', 'nano-banana', 'opena
 const NANO_VALUES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro'];
 
 describe('Stage 4 — 카탈로그 무결성', () => {
-  it('카탈로그는 정확히 4개 엔진을 가진다', () => {
-    expect(IMAGE_ENGINE_CATALOG.map((e) => e.value).sort()).toEqual(ENGINE_VALUES.slice().sort());
+  it('카탈로그는 API 엔진 4종 + dropshot(UI 자동화) = 5개 엔진을 가진다', () => {
+    expect(IMAGE_ENGINE_CATALOG.map((e) => e.value).sort()).toEqual([...ENGINE_VALUES, 'dropshot'].sort());
   });
 
   it('모든 엔진의 model ID는 VERIFIED_IMAGE_MODELS에 속한다 (가짜 ID 차단)', () => {
     for (const engine of IMAGE_ENGINE_CATALOG) {
+      if (engine.value === 'dropshot') continue; // UI 자동화 — 실 API 모델 ID 없음(검증 대상 아님)
       expect(isVerifiedImageModel(engine.model), `${engine.value} → ${engine.model}`).toBe(true);
     }
   });
@@ -42,7 +43,8 @@ describe('Stage 4 — 카탈로그 무결성', () => {
   it('각 엔진은 라벨·가격·무료한도 안내를 갖춘다 (UI 노출 필수 필드)', () => {
     for (const engine of IMAGE_ENGINE_CATALOG) {
       expect(engine.label.length, engine.value).toBeGreaterThan(0);
-      expect(engine.costKrw, engine.value).toBeGreaterThan(0);
+      // dropshot=0 (구독자 무제한·한계비용 0원) 처럼 0도 허용
+      expect(engine.costKrw, engine.value).toBeGreaterThanOrEqual(0);
       expect(engine.freeTierNote.length, engine.value).toBeGreaterThan(10);
     }
   });

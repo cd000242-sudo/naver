@@ -95,12 +95,30 @@ export const DUCK_TAPE: ImageEngineSpec = {
     '약 ₩25~₩280), Organization 인증이 필요합니다.',
 };
 
+/**
+ * 리더스 나노바나나 무제한 — Dropshot nano-banana-pro (UI 자동화)
+ * ✅ [v2.11.7] 추가
+ * 비용: Pro 구독자 무제한 · 이미지당 추가비용 0원 (구독료 별도 결제)
+ */
+export const DROPSHOT: ImageEngineSpec = {
+  value: 'dropshot',
+  label: '🍌 리더스 나노바나나 무제한',
+  tagline: 'UI 자동화 · 한글 텍스트 최강 · Pro 구독자 전용',
+  model: 'dropshot/nano-banana-pro',
+  forceModelKey: null,
+  costKrw: 0,
+  koreanText: true,
+  icon: '🍌',
+  freeTierNote: 'Pro 구독자 무제한 · 이미지당 추가비용 0원 (Dropshot Pro 구독료 월 74,000~99,000원은 사이트에서 별도 결제)',
+};
+
 /** AI 생성엔진 카탈로그 — 그리드/드롭다운 노출 순서 */
 export const IMAGE_ENGINE_CATALOG: ImageEngineSpec[] = [
   NANO_BANANA_2,
   NANO_BANANA_PRO,
   NANO_BANANA,
   DUCK_TAPE,
+  DROPSHOT,
 ];
 
 /** provider 값 → 엔진 스펙 조회 */
