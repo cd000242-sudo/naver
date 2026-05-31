@@ -172,6 +172,22 @@ export class ZeroPriceArtifactError extends Error {
   }
 }
 
+/**
+ * 발행 본문에서 내부 프롬프트 마커·인용 토큰을 제거한다.
+ *
+ * [원본 텍스트] / [Article Content]는 promptSplitter가 system/user를 가르는 내부 마커이고,
+ * [자료N]은 Faithfulness 측정용 인용 토큰이다. 이들은 절대 발행물에 노출되면 안 된다
+ * (= "AI로 작성" 광고나 다름없음). 모델이 본문에 마커를 따라 써도 발행 직전 여기서 제거된다.
+ * 앞 공백/개행까지 함께 제거해 "한다 [원본 텍스트]." → "한다." 형태로 깔끔히 정리한다.
+ */
+export function stripInternalMarkers(s: string): string {
+  if (typeof s !== 'string') return s;
+  return s
+    .replace(/\s*\[자료\d*\]/g, '')
+    .replace(/\s*\[원본\s*텍스트\]/g, '')
+    .replace(/\s*\[Article\s*Content\]/gi, '');
+}
+
 function runPostGenValidator(content: any, source: any): void {
   if (!isFeatureEnabled('validator')) return;
   let result: any;
@@ -8024,12 +8040,21 @@ export async function generateStructuredContent(
       // ✅ [자료]/[자료N] 인용 토큰 제거 — Faithfulness 측정(detectPlatitudes, 위 7821)용
       //   내부 마커이므로 발행 본문엔 노출되면 안 됨. 측정이 끝난 뒤 최종 단계에서 strip.
       //   앞 공백까지 함께 제거해 "한다 [자료]." → "한다." 형태로 깔끔히.
-      const stripCitationTokens = (s: string): string => s.replace(/\s*\[자료\d*\]/g, '');
+      // ✅ [발행 안전] 내부 마커([자료N]·[원본 텍스트]·[Article Content]) 일괄 제거 — 발행물 절대 노출 금지.
+      const stripCitationTokens = stripInternalMarkers;
       if (optimized.bodyPlain) optimized.bodyPlain = stripCitationTokens(optimized.bodyPlain);
       if (optimized.bodyHtml) optimized.bodyHtml = stripCitationTokens(optimized.bodyHtml);
+      // 제목 누출이 가장 치명적 — selectedTitle/title + 소제목 title까지 일괄 제거.
+      if (typeof (optimized as any).selectedTitle === 'string') {
+        (optimized as any).selectedTitle = stripCitationTokens((optimized as any).selectedTitle);
+      }
+      if (typeof (optimized as any).title === 'string') {
+        (optimized as any).title = stripCitationTokens((optimized as any).title);
+      }
       if (Array.isArray(optimized.headings)) {
         optimized.headings = optimized.headings.map((h: any) => ({
           ...h,
+          ...(typeof h.title === 'string' ? { title: stripCitationTokens(h.title) } : {}),
           ...(typeof h.content === 'string' ? { content: stripCitationTokens(h.content) } : {}),
           ...(typeof h.body === 'string' ? { body: stripCitationTokens(h.body) } : {}),
         }));
