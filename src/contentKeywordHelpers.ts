@@ -13,6 +13,20 @@ export function getPrimaryKeywordFromSource(source: ContentSource): string {
 }
 
 /**
+ * Secondary keywords = the semantic field around the primary keyword.
+ * source.metadata.keywords[0] is primary; [1..] are related/sub keywords used for
+ * topical-coverage scoring (seoEval #8). Returns [] when only a primary keyword exists.
+ */
+export function getSecondaryKeywordsFromSource(source: ContentSource): string[] {
+  const kws = (source.metadata as any)?.keywords;
+  if (!Array.isArray(kws)) return [];
+  return kws
+    .slice(1)
+    .map((k: unknown) => String(k).trim())
+    .filter((k: string) => k.length > 0);
+}
+
+/**
  * ✅ [2026-02-13] 긴 키워드 전처리
  * - 25자 이상의 키워드는 제목 생성에 그대로 사용하면 반복/의미없는 제목이 생성됨
  * - 콜론(:) 앞부분만 핵심 키워드로 추출하고, 나머지는 주제 문맥으로 분리

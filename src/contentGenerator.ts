@@ -82,7 +82,7 @@ import {
 // [Phase 3-17/v2.10.163] 제목 안전성 검증 (내부 사용은 detectPromptLeakageInTitle만)
 import { detectPromptLeakageInTitle } from './contentTitleSafetyChecks';
 // [Phase 3-18/v2.10.164] 키워드 전처리 helper
-import { getPrimaryKeywordFromSource, preprocessLongKeyword } from './contentKeywordHelpers';
+import { getPrimaryKeywordFromSource, getSecondaryKeywordsFromSource, preprocessLongKeyword } from './contentKeywordHelpers';
 // [SPEC-PROMPT-2026-REFRESH Phase 1/v2.10.231] 일반론 도망 감지 + 인용 토큰 밀도 측정
 import { detectPlatitudes } from './contentPlatitudeDetector';
 // [Phase 3-20/v2.10.166] 키워드 prefix + review title (applyKeywordPrefixToTitle는 내부 helper)
@@ -8154,6 +8154,7 @@ export async function generateStructuredContent(
             headings: optimized.headings || [],
             rawText: source.rawText || '',
             primaryKeyword: getPrimaryKeywordFromSource(source),
+            secondaryKeywords: getSecondaryKeywordsFromSource(source),
             mode: _modeForGate,
             contentMode: source.contentMode,
             toneStyle: source.toneStyle,

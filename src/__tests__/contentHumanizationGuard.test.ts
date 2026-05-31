@@ -12,6 +12,7 @@ import { describe, it, expect } from 'vitest';
 import { humanizeContent, analyzeAiDetectionRisk } from '../aiHumanizer';
 import { detectPlatitudes } from '../contentPlatitudeDetector';
 import { evaluateHumanlike } from '../content/evaluators/humanlikeEval';
+import { getSecondaryKeywordsFromSource } from '../contentKeywordHelpers';
 
 // AI스러운 글: 모든 문장 '~니다' 종결, AI 특유 표현 4개+, 개인표현 없음, 균일한 길이.
 const AI_LIKE = [
@@ -85,6 +86,29 @@ describe('회귀방지 net: 사람다움/AI탐지 분별력', () => {
       const human = evaluateHumanlike({ body: HUMAN_LIKE, mode: 'seo' });
       const ai = evaluateHumanlike({ body: AI_LIKE, mode: 'seo' });
       expect(human.score).toBeGreaterThan(ai.score);
+    });
+  });
+
+  // 토픽 의미장(seoEval #8) wiring 보장 — source.metadata.keywords[1..]가 연관어로 추출되어야
+  // 품질게이트의 토픽 커버리지 평가가 실제로 활성화된다.
+  describe('getSecondaryKeywordsFromSource', () => {
+    it('keywords[1..]를 연관어로 추출한다', () => {
+      const s = { metadata: { keywords: ['캠핑 의자', '경량', '접이식', '내구성'] } } as any;
+      expect(getSecondaryKeywordsFromSource(s)).toEqual(['경량', '접이식', '내구성']);
+    });
+
+    it('primary 키워드 하나뿐이면 빈 배열', () => {
+      expect(getSecondaryKeywordsFromSource({ metadata: { keywords: ['캠핑 의자'] } } as any)).toEqual([]);
+    });
+
+    it('keywords 부재/비배열이면 빈 배열(크래시 없음)', () => {
+      expect(getSecondaryKeywordsFromSource({ metadata: {} } as any)).toEqual([]);
+      expect(getSecondaryKeywordsFromSource({} as any)).toEqual([]);
+    });
+
+    it('공백 항목은 제거하고 trim한다', () => {
+      const s = { metadata: { keywords: ['주', '  접이식  ', '', '   '] } } as any;
+      expect(getSecondaryKeywordsFromSource(s)).toEqual(['접이식']);
     });
   });
 });
