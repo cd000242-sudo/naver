@@ -616,7 +616,11 @@ function addHumanExpressions(text: string, toneStyle: string = 'professional', s
     const idx = Math.floor(Math.random() * sentences.length);
     attempts++;
     // 이미 인간적 표현이 있거나 너무 짧은 문장 제외 (길이 조건 완화)
+    // ✅ [2026-05-31 S4] 문맥-적합 가드 — 수치/통계 문장엔 개인경험 prefix를 붙이지 않는다.
+    //   "제 경험상, 사포닌 함량은 최대 3배 차이가 납니다" 같은 뜬금없는 결합(문맥 불일치=AI 신호) 방지.
+    const looksFactual = /\d+\s*(%|배|원|kg|cm|mm|개|명|년|월|일|시간|분|초|위|회|건|점|도|만|억|천)/.test(sentences[idx]);
     if (sentences[idx].length > 20 &&
+      !looksFactual &&
       !expressionsSource.some(e => sentences[idx].includes(e))) {
       indices.add(idx);
     }
