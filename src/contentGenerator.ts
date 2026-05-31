@@ -86,6 +86,8 @@ import { detectPromptLeakageInTitle } from './contentTitleSafetyChecks';
 import { getPrimaryKeywordFromSource, getSecondaryKeywordsFromSource, preprocessLongKeyword } from './contentKeywordHelpers';
 // [SPEC-PROMPT-2026-REFRESH Phase 1/v2.10.231] 일반론 도망 감지 + 인용 토큰 밀도 측정
 import { detectPlatitudes, isPlatitudeHardBlockEnabled } from './contentPlatitudeDetector';
+// [Gap C 시맨틱 / SPEC-REVIEW-001 확장] 옵트인 섹션 변별 판정 (기본 OFF, ungrounded 1회 호출)
+import { isSemanticDistinctnessJudgeEnabled, judgeSectionDistinctness } from './content/sectionDistinctnessJudge';
 // [Phase 3-20/v2.10.166] 키워드 prefix + review title (applyKeywordPrefixToTitle는 내부 helper)
 import {
   applyKeywordPrefixToStructuredContent,
@@ -7079,6 +7081,7 @@ export async function generateStructuredContent(
   let lastFailReason = ''; // ✅ [2026-03-23] 실패 원인 추적
   let _fidelityRetryUsed = false; // ✅ [Phase 7-B] Source Fidelity 자동 재시도 1회 가드
   let _qualityGateRetryUsed = false; // ✅ [v2.10.178 Phase 2] qualityGate decision='regenerate' 재시도 1회 가드
+  let _distinctnessJudgeUsed = false; // ✅ [Gap C 시맨틱] 섹션 변별 LLM 판정 — 생성당 1회만 호출(비용 가드)
   // ✅ [2026-04-03] signal 추출 — 중지 시 즉시 abort
   const signal = options.signal;
 
@@ -7912,6 +7915,57 @@ export async function generateStructuredContent(
         if (isPlatitudeHardBlockEnabled()) {
           console.error('[ContentGenerator] ⛔ 하드블록(옵트인) 활성 — 발행 차단(생성 실패 처리)');
           throw new Error(`발행 차단(옵트인 하드블록): Faithfulness 임계 초과 — ${platitudeReportRef.reason}`);
+        }
+      }
+
+      // ✅ [Gap C 시맨틱 — SPEC-REVIEW-001 확장] 옵트인 섹션 변별 판정.
+      //   어휘 중복도(C2)는 좋은 글과 텅 빈 글을 분리 못 함(실측). 그래서 선택 엔진(Gemini=무료)에
+      //   "각 H2가 서로 다른 정보 단위인가"를 직접 묻는다. 기본 OFF, ungrounded 키워드 글 한정,
+      //   생성당 1회만 호출(비용 가드), fail-open(판정 실패는 통과 처리).
+      if (
+        isSemanticDistinctnessJudgeEnabled()
+        && !_distinctnessJudgeUsed
+        && mode !== 'affiliate'
+        && !isShoppingConnectMode
+        && !hasGroundingSource(source)
+      ) {
+        _distinctnessJudgeUsed = true; // 호출 여부와 무관하게 1회로 제한
+        const judgeCaller = async (jp: string): Promise<string> => {
+          const jt = 0.2; // 결정적 JSON 유도
+          const jc = 300; // <1000 → 60초 타임아웃 + 짧은 JSON 응답 길이거부 없음 (각 호출 내부 타임아웃+signal로 abort)
+          if (provider === 'openai') return callOpenAI(jp, jt, jc, signal);
+          if (provider === 'claude') return callClaude(jp, jt, jc, signal);
+          if (provider === 'perplexity') return callPerplexity(jp, jt, jc, signal);
+          return callGemini(jp, jt, jc, { signal });
+        };
+        const verdict = await judgeSectionDistinctness(parsed, judgeCaller);
+        if (verdict.judged && !verdict.distinct) {
+          console.warn(`[DistinctnessJudge] 🔁 섹션 중복 감지: ${verdict.reason}`);
+          if (attempt < MAX_ATTEMPTS) {
+            lastFailReason = `섹션 중복(시맨틱): ${verdict.reason}`;
+            extraInstruction = `\n⚠️ 섹션 중복 재생성: 각 H2(소제목)는 서로 다른 정보 단위를 담아야 합니다. `
+              + `같은 내용을 표현만 바꿔 반복하지 말고, 섹션마다 다른 구체 정보(장소·수치·방법·사례·비교 기준)를 넣으세요.\n${extraInstruction}`;
+            continue;
+          }
+          // terminal: 재생성 기회 소진 → 갭 A와 동일하게 high 격상 + 옵트인 차단.
+          if (!parsed.quality) {
+            parsed.quality = {
+              aiDetectionRisk: 'high', legalRisk: 'safe',
+              seoScore: 70, originalityScore: 70, readabilityScore: 70, warnings: [],
+            };
+          }
+          parsed.quality.aiDetectionRisk = 'high';
+          parsed.quality.warnings = [
+            ...(parsed.quality.warnings || []),
+            `섹션 중복 미해결(시맨틱): ${verdict.reason}`,
+          ];
+          console.warn(`[DistinctnessJudge] ⚠️ 섹션 중복 미해결로 발행 — aiDetectionRisk=high 격상`);
+          if (isPlatitudeHardBlockEnabled()) {
+            console.error('[DistinctnessJudge] ⛔ 하드블록(옵트인) 활성 — 발행 차단');
+            throw new Error(`발행 차단(옵트인 하드블록): 섹션 중복 미해결 — ${verdict.reason}`);
+          }
+        } else {
+          console.log(`[DistinctnessJudge] ✅ ${verdict.judged ? '변별 양호' : '판정 생략'} — ${verdict.reason}`);
         }
       }
 
