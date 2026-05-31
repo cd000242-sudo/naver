@@ -371,6 +371,8 @@ export interface AuthGRDefenseResult {
   readonly expertiseInjected: number;
   readonly citationsDiversified: number;
   readonly experienceInserted: number;
+  /** ✅ [2026-05-31 S2] 기간별 확장 경험 주입 수 (injectExtendedExperience). */
+  readonly extendedExperienceInjected: number;
   readonly totalModifications: number;
 }
 
@@ -403,28 +405,36 @@ export function applyAuthGRDefense(
   // 4. 경험 표현 삽입
   const experienceResult = insertExperienceExpressions(citationResult.content, 2);
 
+  // 4-2. ✅ [2026-05-31 S2] 기간별 확장 경험 주입 — 그동안 데드코드였던 injectExtendedExperience 연결.
+  //   "3개월 정도 써보니…" 류 페르소나 경험으로 사람다운 깊이를 더한다.
+  //   과주입(패턴화) 방지를 위해 maxInjections=1로 보수적으로 적용.
+  const extExpResult = injectExtendedExperience(experienceResult.content, category, 1);
+
   // 5. 최종 측정
-  const postFingerprint = measureAiFingerprint(experienceResult.content);
+  const postFingerprint = measureAiFingerprint(extExpResult.content);
 
   const totalModifications =
     expertiseResult.injectedCount +
     citationResult.diversifiedCount +
-    experienceResult.insertedCount;
+    experienceResult.insertedCount +
+    extExpResult.injectedCount;
 
   console.log(
     `[AuthGR] 방어 적용 완료: ` +
     `risk ${preFingerprint.overallRisk}→${postFingerprint.overallRisk}, ` +
     `전문성 +${expertiseResult.injectedCount}, ` +
     `출처 다양화 +${citationResult.diversifiedCount}, ` +
-    `경험 +${experienceResult.insertedCount}`,
+    `경험 +${experienceResult.insertedCount}, ` +
+    `확장경험 +${extExpResult.injectedCount}`,
   );
 
   return {
-    content: experienceResult.content,
+    content: extExpResult.content,
     fingerprint: postFingerprint,
     expertiseInjected: expertiseResult.injectedCount,
     citationsDiversified: citationResult.diversifiedCount,
     experienceInserted: experienceResult.insertedCount,
+    extendedExperienceInjected: extExpResult.injectedCount,
     totalModifications,
   };
 }

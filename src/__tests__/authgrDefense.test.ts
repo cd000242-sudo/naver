@@ -168,8 +168,12 @@ describe('applyAuthGRDefense', () => {
     expect(typeof result.expertiseInjected).toBe('number');
     expect(typeof result.citationsDiversified).toBe('number');
     expect(typeof result.experienceInserted).toBe('number');
+    expect(typeof result.extendedExperienceInjected).toBe('number');
     expect(result.totalModifications).toBe(
-      result.expertiseInjected + result.citationsDiversified + result.experienceInserted,
+      result.expertiseInjected
+        + result.citationsDiversified
+        + result.experienceInserted
+        + result.extendedExperienceInjected,
     );
   });
 

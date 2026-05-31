@@ -7859,8 +7859,11 @@ export async function generateStructuredContent(
       // ✅ [v2.10.234 Phase 1b] 일반론 도망 감지 시 첫 시도(attempt === 0)에서 재생성 트리거
       //   재생성 시 prompt에 faithfulness 강화 추가 지시 + 일반론 어휘 명시 회피 요청.
       //   2회 이상 시도부터는 재생성 X (속도 vs 품질 균형 — 기존 검증 실패 재시도 패턴과 동일).
-      if (platitudeReportRef && platitudeReportRef.exceedsThreshold && attempt === 0) {
-        console.warn(`[ContentGenerator] 🔄 Faithfulness 실패 — 첫 재시도: ${platitudeReportRef.reason}`);
+      // ✅ [2026-05-31 S2] attempt===0 한정 → attempt < MAX_ATTEMPTS 로 확대.
+      //   2회 이상 시도에서도 일반론 도망이 감지되면 재생성(여전히 MAX_ATTEMPTS로 bounded).
+      //   기존엔 첫 시도만 잡아 재시도 중 다시 일반론이 나와도 통과되던 갭(분석 팀3) 차단.
+      if (platitudeReportRef && platitudeReportRef.exceedsThreshold && attempt < MAX_ATTEMPTS) {
+        console.warn(`[ContentGenerator] 🔄 Faithfulness 실패 — 재시도(attempt ${attempt}): ${platitudeReportRef.reason}`);
         lastFailReason = `Faithfulness 실패: ${platitudeReportRef.reason}`;
         const platitudeList = platitudeReportRef.matchedTriggers.slice(0, 5).join(', ');
         extraInstruction = `\n⚠️ Faithfulness 강화 재생성:\n` +
@@ -8205,10 +8208,17 @@ export async function generateStructuredContent(
         //   regenerate는 이미 위에서 처리(continue), pass는 그대로 진행, patch만 여기 도달
         //   사용자 enableSelfCritique 토글 *무시*하고 자동 활성화 (qualityGate 신호가 더 정확)
         //   retryDirective를 selfCritique에 전달 → 구체적 미달 항목 우선 수정
-        if (_gateResult && _gateResult.decision === 'patch' && optimized.bodyPlain) {
+        // ✅ [2026-05-31 S2] humanlike 플로어 — finalScore는 통과(pass)했지만 사람다움 점수만
+        //   낮은 경우(mode/safety가 높여줌)에도 selfCritique로 사람답게 보정. 이전엔 pass면 무조치라
+        //   "AI 티" 글이 그대로 발행되던 갭(분석 팀3 지적) 차단.
+        const _humanFloorMiss =
+          _gateResult
+          && _gateResult.decision === 'pass'
+          && _gateResult.humanlikeScore.score < 55;
+        if (_gateResult && optimized.bodyPlain && (_gateResult.decision === 'patch' || _humanFloorMiss)) {
           try {
             const _patchPersona = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
-            console.log(`[QualityGate] 📝 patch decision (final=${_gateResult.finalScore}) — selfCritique 자동 활성화`);
+            console.log(`[QualityGate] 📝 ${_humanFloorMiss ? `humanlike 플로어 미달(human=${_gateResult.humanlikeScore.score}<55)` : `patch decision (final=${_gateResult.finalScore})`} — selfCritique 자동 활성화`);
             const _patchResult = await selfCritiqueAndRewrite(
               optimized.bodyPlain,
               _patchPersona,
