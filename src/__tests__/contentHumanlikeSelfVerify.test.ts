@@ -12,9 +12,11 @@ import { describe, it, expect } from 'vitest';
 import { humanizeContent, analyzeAiDetectionRisk } from '../aiHumanizer';
 import { detectPlatitudes } from '../contentPlatitudeDetector';
 import { evaluateHumanlike } from '../content/evaluators/humanlikeEval';
+import { evaluateHomefeed } from '../content/evaluators/homefeedEval';
 import { evaluate, type EvaluationInput } from '../content/qualityEvaluator';
 
 const seo = (body: string): EvaluationInput => ({ body, mode: 'seo' });
+const hf = (body: string): EvaluationInput => ({ body, mode: 'homefeed' });
 
 // ─────────────────────────────────────────────────────────────
 // 합성 글: 현실적인 "사람글" vs "AI글" (≥5문장, ≥500자, 7변수 전부 대비)
@@ -148,6 +150,46 @@ describe('자체검증: 엔드투엔드 게이트 — 시스템이 스스로 hum
 
   it('AI글은 humanlike 플로어(55) 미만 → S2 자동 보정(selfCritique) 트리거 대상', () => {
     expect(evaluate(seo(AI_ARTICLE)).humanlikeScore.score).toBeLessThan(55);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────
+// 홈판 모드 자체검증: 감정형 글 우위 보존 + 가혹한 감정 페널티 완화(B)
+// ─────────────────────────────────────────────────────────────
+
+// 감정형 홈판 글: 1인칭 + 감정어 + 짧은 문장. (홈판이 보상해야 하는 글)
+const EMOTIONAL_HOMEFEED = [
+  '저도 처음엔 진짜 반신반의했어요.',
+  '근데 막상 써보니 완전 신기하더라고요.',
+  '솔직히 좀 놀랐어요.',
+  '제가 일주일 내내 들고 다녔는데 만족스러웠어요.',
+  '뿌듯한 기분이 들 정도였죠.',
+  '편하고 가벼워서 좋았어요.',
+].join(' ');
+
+// 무미건조한 글: 1인칭·감정 없음, 균일한 격식체. (홈판이 낮게 줘야 하는 글)
+const DRY_HOMEFEED = AI_ARTICLE;
+
+// 중간 감정형: 감정어 밀도가 1000자당 0.8~1.5 구간(자연스러우나 과하지 않음).
+// 가혹한 페널티(4점)가 아니라 완화된 중간 점수(7점)를 받아야 한다.
+const MODERATE_EMOTION = '오늘 날씨를 기록했다. '.repeat(70) + '정말 신기했다.';
+
+describe('자체검증: 홈판 — 감정형 우위 + 자연스러운 감정 페널티 완화', () => {
+  it('감정형 홈판 글 점수 > 무미건조 글 점수', () => {
+    expect(evaluateHomefeed(hf(EMOTIONAL_HOMEFEED)).score)
+      .toBeGreaterThan(evaluateHomefeed(hf(DRY_HOMEFEED)).score);
+  });
+
+  it('홈판 평가는 7개 세부 항목을 모두 채점한다', () => {
+    const d = evaluateHomefeed(hf(EMOTIONAL_HOMEFEED)).details;
+    for (const k of ['titleHook', 'introStrength', 'burstiness', 'paragraphLength', 'emotionDensity', 'firstPerson', 'shortSentenceRatio']) {
+      expect(d).toHaveProperty(k);
+    }
+  });
+
+  it('중간 감정형(0.8~1.5/1000)은 가혹한 4점이 아닌 완화된 점수(≥7)를 받는다', () => {
+    // 자연스럽게 쓰되 감정어가 과하지 않은 글을 기계적으로 깎지 않는다.
+    expect(evaluateHomefeed(hf(MODERATE_EMOTION)).details.emotionDensity).toBeGreaterThanOrEqual(7);
   });
 });
 

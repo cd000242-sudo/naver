@@ -125,7 +125,11 @@ export function evaluateHomefeed(input: EvaluationInput): SubScore {
   let emoScore = 0;
   if (emotionPer1000 >= 3 && emotionPer1000 <= 10) emoScore = 15;
   else if (emotionPer1000 >= 1.5) emoScore = 10;
-  else {
+  else if (emotionPer1000 >= 0.8) {
+    // Natural copy with restrained emotion — credit it instead of the harsh 4-point cliff.
+    // Forcing emotion words mechanically reads as AI; reward genuine-but-moderate tone.
+    emoScore = 7;
+  } else {
     emoScore = 4;
     issues.push(`감정 단어 빈도 낮음 (1000자당 ${emotionPer1000.toFixed(1)}회) — 홈피드 톤과 어긋남`);
     suggestions.push('감정 표현 ("좋아/신기/놀라/뿌듯") 자연스럽게 분산 배치');
