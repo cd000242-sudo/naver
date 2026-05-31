@@ -85,7 +85,7 @@ import { detectPromptLeakageInTitle } from './contentTitleSafetyChecks';
 // [Phase 3-18/v2.10.164] 키워드 전처리 helper
 import { getPrimaryKeywordFromSource, getSecondaryKeywordsFromSource, preprocessLongKeyword } from './contentKeywordHelpers';
 // [SPEC-PROMPT-2026-REFRESH Phase 1/v2.10.231] 일반론 도망 감지 + 인용 토큰 밀도 측정
-import { detectPlatitudes } from './contentPlatitudeDetector';
+import { detectPlatitudes, isPlatitudeHardBlockEnabled } from './contentPlatitudeDetector';
 // [Phase 3-20/v2.10.166] 키워드 prefix + review title (applyKeywordPrefixToTitle는 내부 helper)
 import {
   applyKeywordPrefixToStructuredContent,
@@ -7882,6 +7882,37 @@ export async function generateStructuredContent(
           `3. [Article Content] 또는 <source>에 없는 수치/날짜/금액 작성 금지.\n` +
           `4. 자료에 답이 없는 섹션은 "(자료 부족)" 표기 후 다음 섹션으로.\n${extraInstruction}`;
         continue;
+      }
+
+      // ✅ [Gap A — SPEC-REVIEW-001 확장] 재시도 소진 후에도 임계 초과(terminal).
+      //   여기 도달했다는 건 위 재시도 조건(attempt < MAX_ATTEMPTS)이 false라는 뜻 →
+      //   더 이상 재생성 기회가 없는데도 Faithfulness가 미해결인 상태다.
+      //   기존엔 quality.warnings 한 줄만 남기고 그대로 발행되던 갭.
+      //   - 항상: aiDetectionRisk='high'로 격상 + 구조적 경고(UI 위험 표시가 정직해짐).
+      //   - 옵트인(CONTENT_HARDBLOCK_ON_PLATITUDE): 발행 차단(throw → 8505 catch에서 생성 실패 전파).
+      if (platitudeReportRef && platitudeReportRef.exceedsThreshold) {
+        if (!parsed.quality) {
+          parsed.quality = {
+            aiDetectionRisk: 'high',
+            legalRisk: 'safe',
+            seoScore: 70,
+            originalityScore: 70,
+            readabilityScore: 70,
+            warnings: [],
+          };
+        }
+        parsed.quality.aiDetectionRisk = 'high';
+        parsed.quality.warnings = [
+          ...(parsed.quality.warnings || []),
+          `Faithfulness 미해결(재시도 ${MAX_ATTEMPTS + 1}회 소진): ${platitudeReportRef.reason}`,
+        ];
+        console.warn(
+          `[ContentGenerator] ⚠️ Faithfulness 미해결로 발행 — aiDetectionRisk=high 격상: ${platitudeReportRef.reason}`,
+        );
+        if (isPlatitudeHardBlockEnabled()) {
+          console.error('[ContentGenerator] ⛔ 하드블록(옵트인) 활성 — 발행 차단(생성 실패 처리)');
+          throw new Error(`발행 차단(옵트인 하드블록): Faithfulness 임계 초과 — ${platitudeReportRef.reason}`);
+        }
       }
 
       // ✅ [2026-02-01] 쇼핑커넥트(affiliate) 모드 제목 검증 및 패치

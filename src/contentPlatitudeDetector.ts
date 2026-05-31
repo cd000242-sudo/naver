@@ -105,6 +105,22 @@ const MAX_PLATITUDE_HITS = 3;
 /** 인용 토큰 단락당 최소 밀도. 미달 시 RAG 자료 미활용 의심. */
 const MIN_CITATION_DENSITY = 0.3;
 
+/**
+ * [Gap A — SPEC-REVIEW-001 확장] 옵트인 하드블록 플래그.
+ *
+ * 마지막 재시도에서도 Faithfulness 임계가 초과로 남으면 기본 동작은 "경고 격상"(발행은 진행)이다.
+ * 이 플래그를 켜면(opt-in) 그런 글의 발행을 아예 차단(생성 실패로 전파)한다.
+ * 기본 OFF — 무인 자동화가 예고 없이 멈추는 것을 막기 위해 사용자가 명시적으로 켜야 한다.
+ *
+ * 켜는 값: '1' | 'true' | 'on' (대소문자/공백 무시). 그 외/미설정은 모두 OFF.
+ */
+export function isPlatitudeHardBlockEnabled(): boolean {
+  const raw = process.env.CONTENT_HARDBLOCK_ON_PLATITUDE;
+  if (raw == null) return false;
+  const normalised = String(raw).trim().toLowerCase();
+  return normalised === '1' || normalised === 'true' || normalised === 'on';
+}
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 핵심 함수
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
