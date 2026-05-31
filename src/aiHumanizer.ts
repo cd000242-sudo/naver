@@ -879,6 +879,23 @@ export function analyzeAiDetectionRisk(text: string): {
     suggestions.push('자연스러운 표현으로 대체 권장');
   }
 
+  // 6. ✅ [2026-05-31 자체검증] 길이 무관 AI 클리셰 — 도입/진행/결론 클리셰는 글 길이와
+  //   무관하게 강한 AI 신호다(기존 1~5번은 긴 글 위주라 짧은 AI글을 0점으로 놓쳤음).
+  const lengthIndependentCliches = [
+    '안녕하세요', '오늘은', '이번 글에서는', '이 글에서는', '이번 포스팅',
+    '알아보겠습니다', '살펴보겠습니다', '소개해드리', '소개해 드리', '안내해드리',
+    '종합적으로', '많은 분들이', '결론적으로 말하자면', '말씀드리겠습니다', '아래와 같이',
+  ];
+  let clicheHit = 0;
+  for (const c of lengthIndependentCliches) {
+    if (text.includes(c)) clicheHit += 1;
+  }
+  if (clicheHit >= 1) {
+    score += Math.min(30, clicheHit * 10);
+    issues.push(`AI 도입/진행/결론 클리셰 ${clicheHit}종 — 길이 무관 AI 신호`);
+    suggestions.push('클리셰 삭제 후 1인칭 경험으로 시작');
+  }
+
   // 점수 정규화 (0-100)
   score = Math.min(100, score);
 
