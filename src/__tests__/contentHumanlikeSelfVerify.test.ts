@@ -13,6 +13,7 @@ import { humanizeContent, analyzeAiDetectionRisk } from '../aiHumanizer';
 import { detectPlatitudes } from '../contentPlatitudeDetector';
 import { evaluateHumanlike } from '../content/evaluators/humanlikeEval';
 import { evaluateHomefeed } from '../content/evaluators/homefeedEval';
+import { evaluateSeo } from '../content/evaluators/seoEval';
 import { evaluate, type EvaluationInput } from '../content/qualityEvaluator';
 
 const seo = (body: string): EvaluationInput => ({ body, mode: 'seo' });
@@ -190,6 +191,39 @@ describe('자체검증: 홈판 — 감정형 우위 + 자연스러운 감정 페
   it('중간 감정형(0.8~1.5/1000)은 가혹한 4점이 아닌 완화된 점수(≥7)를 받는다', () => {
     // 자연스럽게 쓰되 감정어가 과하지 않은 글을 기계적으로 깎지 않는다.
     expect(evaluateHomefeed(hf(MODERATE_EMOTION)).details.emotionDensity).toBeGreaterThanOrEqual(7);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────
+// SEO 모드 자체검증: 토픽 의미장 커버리지(C)가 키워드 스터핑보다 우대됨
+// ─────────────────────────────────────────────────────────────
+
+const SECONDARY = ['경량', '접이식', '내구성', '휴대성'];
+// 토픽 폭이 넓은 글: 연관어를 자연스럽게 모두 다룸.
+const TOPIC_RICH = '캠핑 의자 추천을 정리한다. 경량 알루미늄 프레임에 접이식 구조라 휴대성이 좋고, 내구성도 단단해서 오래 썼다. 캠핑 의자 고를 때 참고하시라.';
+// 키워드 스터핑 글: 메인 키워드만 반복, 연관 토픽 부재.
+const KW_STUFFED = '캠핑 의자 '.repeat(30);
+
+describe('자체검증: SEO 토픽 어휘밀도 — 의미장 커버리지 보상 + 스터핑 억제', () => {
+  it('연관어를 폭넓게 커버하면 토픽 점수 만점(7)', () => {
+    const r = evaluateSeo({ body: TOPIC_RICH, mode: 'seo', primaryKeyword: '캠핑 의자', secondaryKeywords: SECONDARY });
+    expect(r.details.topicVocabulary).toBe(7);
+  });
+
+  it('키워드만 반복하고 토픽 폭이 좁으면 토픽 점수가 낮다(≤3)', () => {
+    const r = evaluateSeo({ body: KW_STUFFED, mode: 'seo', primaryKeyword: '캠핑 의자', secondaryKeywords: SECONDARY });
+    expect(r.details.topicVocabulary).toBeLessThanOrEqual(3);
+  });
+
+  it('스터핑 글보다 토픽 풍부 글의 토픽 점수가 높다', () => {
+    const stuffed = evaluateSeo({ body: KW_STUFFED, mode: 'seo', primaryKeyword: '캠핑 의자', secondaryKeywords: SECONDARY });
+    const rich = evaluateSeo({ body: TOPIC_RICH, mode: 'seo', primaryKeyword: '캠핑 의자', secondaryKeywords: SECONDARY });
+    expect(rich.details.topicVocabulary).toBeGreaterThan(stuffed.details.topicVocabulary);
+  });
+
+  it('연관어 미지정 시 페널티 없이 중립(7)', () => {
+    const r = evaluateSeo({ body: '아무 본문입니다.', mode: 'seo', primaryKeyword: '캠핑 의자' });
+    expect(r.details.topicVocabulary).toBe(7);
   });
 });
 

@@ -2,13 +2,18 @@
  * SEO 모드 평가기 — 끝판왕 Phase 1 (v2.10.177)
  *
  * 평가 항목 (가중치 합 100):
- *   1. 키워드 밀도 1.5~3% (25점)
+ *   1. 키워드 밀도 1.5~3% (18점)
  *   2. 키워드 첫 문단 출현 (15점)
  *   3. 소제목 키워드 변형 (15점)
  *   4. H2/H3 구조 2~4개 (15점)
  *   5. 본문 길이 1500자+ (10점)
  *   6. 메타디스크립션 강도 (첫 120자 키워드+훅) (10점)
  *   7. 숫자/리스트 신호 (10점)
+ *   8. 토픽 어휘 밀도 (연관어 의미장 커버리지) (7점)
+ *
+ * v2.11: primary 키워드 단일 밀도(#1) 비중을 25→18로 낮추고, 토픽 의미장 커버리지(#8, 7점)를
+ *   신설. 현대 네이버(C-Rank/DIA+ 토픽 권위)는 단일 키워드 반복보다 주제 폭(연관어)을 보상하며,
+ *   키워드 스터핑은 AI 탐지·스팸 신호. 연관어 미지정 시 #8은 중립(페널티 없음).
  *
  * reviewer 진단 CRITICAL: 기존 analyzeNaverScore는 boolean includes만 체크 → 실제 밀도/배치 무측정.
  *   본 모듈이 실측 신호로 평가.
@@ -47,32 +52,32 @@ export function evaluateSeo(input: EvaluationInput): SubScore {
   const suggestions: string[] = [];
   let total = 0;
 
-  // 1. 키워드 밀도 1.5~3%  (25점)
+  // 1. 키워드 밀도 1.5~3%  (18점) — v2.11: primary 단일 키워드 과중 완화(25→18), 잔여 7점은 #8 토픽 커버리지로 이전
   if (primaryKw) {
     const density = calcKeywordDensity(body, primaryKw);
     const densityPct = density * 100;
     let densityScore = 0;
     if (densityPct >= 1.5 && densityPct <= 3.0) {
-      densityScore = 25;
-    } else if (densityPct >= 1.0 && densityPct < 1.5) {
       densityScore = 18;
+    } else if (densityPct >= 1.0 && densityPct < 1.5) {
+      densityScore = 13;
       issues.push(`키워드 밀도 ${densityPct.toFixed(1)}% — 1.5% 미만 (under-stuffing)`);
     } else if (densityPct > 3.0 && densityPct <= 5.0) {
-      densityScore = 18;
+      densityScore = 13;
       issues.push(`키워드 밀도 ${densityPct.toFixed(1)}% — 3% 초과 (over-stuffing 위험)`);
     } else if (densityPct > 5.0) {
-      densityScore = 8;
+      densityScore = 6;
       issues.push(`키워드 밀도 ${densityPct.toFixed(1)}% — 5% 초과 (네이버 SEO 스팸 감지 위험)`);
     } else {
-      densityScore = 5;
+      densityScore = 4;
       issues.push(`키워드 "${primaryKw}" 거의 미사용 — 본문에 8~12회 배치 필요`);
     }
     details.keywordDensity = densityScore;
     details.keywordDensityPct = Math.round(densityPct * 100) / 100;
     total += densityScore;
   } else {
-    details.keywordDensity = 15; // 키워드 미지정 시 평균 부여
-    total += 15;
+    details.keywordDensity = 11; // 키워드 미지정 시 평균 부여
+    total += 11;
   }
 
   // 2. 키워드 첫 문단 출현 (15점)
@@ -192,6 +197,31 @@ export function evaluateSeo(input: EvaluationInput): SubScore {
   details.numbersLists = listScore;
   details.concreteNumberCount = concreteCount;
   total += listScore;
+
+  // 8. 토픽 어휘 밀도 — 연관어 의미장 커버리지 (7점)
+  // C-Rank/DIA+ 토픽 권위: 단일 키워드 반복보다 주제 폭(연관어 분산)이 상위노출에 유리하고,
+  // 키워드 스터핑(AI 탐지·스팸 신호)을 억제. 연관어 미지정 시 측정 불가 → 페널티 없이 중립(7).
+  const secondary = (input.secondaryKeywords || []).filter(k => k && k.trim().length > 0);
+  let topicScore = 0;
+  if (secondary.length === 0) {
+    topicScore = 7;
+    details.topicCoverage = 1;
+  } else {
+    const lowerBody = body.toLowerCase();
+    const covered = secondary.filter(k => lowerBody.includes(k.toLowerCase())).length;
+    const coverage = covered / secondary.length;
+    if (coverage >= 0.6) topicScore = 7;
+    else if (coverage >= 0.35) topicScore = 5;
+    else if (coverage >= 0.15) topicScore = 3;
+    else {
+      topicScore = 1;
+      issues.push(`연관 토픽 어휘 커버리지 낮음 (${covered}/${secondary.length}) — 의미장 확장 필요 (C-Rank 토픽 권위)`);
+      suggestions.push('연관 검색어·세부 토픽 어휘를 본문에 자연스럽게 분산하라 (키워드 반복 대신 주제 폭 확장)');
+    }
+    details.topicCoverage = Math.round(coverage * 100) / 100;
+  }
+  details.topicVocabulary = topicScore;
+  total += topicScore;
 
   return {
     score: Math.round(Math.max(0, Math.min(100, total))),
