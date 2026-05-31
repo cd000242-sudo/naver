@@ -275,5 +275,31 @@ export function applySeoQualityHookBlock(content: StructuredContent, source: Con
     console.log(`[SeoBodyQuality] 📊 SEO 본문 품질 점수: ${seoBodyScore}/100`);
   }
 
+  // ✅ [2026-05-31 S5] 감지에 그치지 않고 실제 재작성 — tone-independent AI 전환 상투어를
+  //   자연스러운 표현으로 치환. 종결어미형(하겠습니다/것입니다 등)은 톤 충돌 위험이 있어
+  //   여기서 건드리지 않고 humanizeContent가 톤별로 처리한다.
+  const SEO_CLICHE_REWRITE: ReadonlyArray<readonly [RegExp, string]> = [
+    [/종합적으로/g, '한마디로'],
+    [/정리하자면/g, '요점만 말하면'],
+    [/요약하자면/g, '요점만 말하면'],
+    [/요약하면/g, '짧게 말하면'],
+    [/결론적으로/g, '그래서'],
+  ];
+  if (Array.isArray(content.headings)) {
+    let rewritten = 0;
+    for (const heading of content.headings) {
+      const original = String((heading as any).body ?? (heading as any).content ?? '');
+      if (!original) continue;
+      let body = original;
+      for (const [pat, repl] of SEO_CLICHE_REWRITE) body = body.replace(pat, repl);
+      if (body !== original) {
+        if ((heading as any).body !== undefined) (heading as any).body = body;
+        else (heading as any).content = body;
+        rewritten++;
+      }
+    }
+    if (rewritten > 0) console.log(`[SeoHook] ✏️ AI 전환 상투어 ${rewritten}개 소제목에서 자연스럽게 재작성`);
+  }
+
   return content;
 }
