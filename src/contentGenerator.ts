@@ -24,6 +24,7 @@ import { buildPersonaCard } from './authgrDefense.js';
 import { selfCritiqueAndRewrite, isSelfCritiqueEnabled } from './contentSelfCritique.js';
 import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, getGeoOverlayPrompt, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
+import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 import { META_CRITIQUE_PHRASES } from './content/forbiddenPhrases.js';
 // ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 실전 통합 훅
 import { validateContent as runValidationPipeline } from './services/contentValidationPipeline.js';
@@ -2419,6 +2420,15 @@ ${source.customPrompt!.trim()}
 `;
     systemPromptResult = HARD_CONSTRAINT + '\n' + systemPromptResult;
     console.log('[PromptBuilder] 🚨 HARD_CONSTRAINT (Phase 2) 적용 — 자료 기반 작성 강제');
+  }
+
+  // ✅ [SPEC-REVIEW-001 확장] 범용 근거부재 가드 — 전 카테고리 공통.
+  //   근거 자료(팩트체크/rawText) 없이 키워드만으로 쓰는 비쇼핑 글에서 체험 위장·
+  //   사실 날조·가짜 회상체·빈 마무리 상투구를 차단. 쇼핑(affiliate)은 reviewGuard 담당,
+  //   근거 있는 글은 위 HARD_CONSTRAINT 담당 → 둘 다 해당 안 되는 빈 경로만 커버.
+  if (contentMode !== 'affiliate' && isGeneralContentGuardEnabled() && !hasGroundingSource(source)) {
+    systemPromptResult += `\n\n${buildGeneralContentGuardBlock()}`;
+    console.log(`[PromptBuilder] 🔒 범용 근거부재 가드 적용 — ungrounded, mode=${contentMode}`);
   }
 
   // ✅ [Traffic Hunter 통합] 모드별 온도(Temperature) 설정

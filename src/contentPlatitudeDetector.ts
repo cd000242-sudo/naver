@@ -49,7 +49,7 @@ export interface DetectableContent {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 일반론 트리거 어휘 (한국어, 15개)
+// 일반론 트리거 어휘 (한국어) — v1 일반론 15개 + v3 회상체/빈마무리 10개
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
@@ -74,6 +74,19 @@ const PLATITUDE_PATTERNS: Array<{ pattern: RegExp; label: string }> = [
   { pattern: /\S+인\s*경우가\s*많/g, label: '~인 경우가 많아요' },
   { pattern: /보편적으로/g, label: '보편적으로' },
   { pattern: /자명한\s*사실/g, label: '자명한 사실' },
+  // [v3 — SPEC-REVIEW-001 확장] 가짜 회상체 남발 (체험을 가장하는 과거 회상 시제).
+  //   근거 없는 1인칭 회상으로 경험을 위장하는 신호. 남발(>3 누적) 시 환각 의심.
+  { pattern: /했었다/g, label: '~했었다' },
+  { pattern: /하곤\s*했(?:었)?다/g, label: '~하곤 했다' },
+  { pattern: /들려왔다/g, label: '들려왔다' },
+  { pattern: /떠오른다/g, label: '떠오른다' },
+  { pattern: /던\s*기억/g, label: '~던 기억' },
+  // [v3 — SPEC-REVIEW-001 확장] 빈 마무리 상투구 (내용 없이 감성으로 닫는 클로저).
+  { pattern: /진짜\s*매력/g, label: '진짜 매력' },
+  { pattern: /새삼\s*깨닫/g, label: '새삼 깨닫게' },
+  { pattern: /야말로/g, label: '~야말로' },
+  { pattern: /임을\s*(?:새삼\s*)?(?:알게|깨닫게)\s*되/g, label: '~임을 알게 되는' },
+  { pattern: /오직\s+\S+에만/g, label: '오직 ~에만' },
 ];
 
 /**
