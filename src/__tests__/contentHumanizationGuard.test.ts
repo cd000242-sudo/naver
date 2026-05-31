@@ -110,5 +110,11 @@ describe('회귀방지 net: 사람다움/AI탐지 분별력', () => {
       const s = { metadata: { keywords: ['주', '  접이식  ', '', '   '] } } as any;
       expect(getSecondaryKeywordsFromSource(s)).toEqual(['접이식']);
     });
+
+    it('본문 프롬프트와 동일 필터 — 1글자·순수숫자 연관어는 제외(생성↔평가 정합)', () => {
+      const s = { metadata: { keywords: ['캠핑 의자', '경량', 'A', '2026', '접이식'] } } as any;
+      // 'A'(1글자)·'2026'(순수숫자)는 본문 프롬프트가 주입하지 않으므로 #8 채점에서도 제외.
+      expect(getSecondaryKeywordsFromSource(s)).toEqual(['경량', '접이식']);
+    });
   });
 });

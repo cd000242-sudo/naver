@@ -16,6 +16,10 @@ export function getPrimaryKeywordFromSource(source: ContentSource): string {
  * Secondary keywords = the semantic field around the primary keyword.
  * source.metadata.keywords[0] is primary; [1..] are related/sub keywords used for
  * topical-coverage scoring (seoEval #8). Returns [] when only a primary keyword exists.
+ *
+ * Filter mirrors the body-prompt subKeyword injection (contentGenerator ~2496):
+ * length >= 2 and not purely numeric — so #8 scores exactly the terms the prompt
+ * tells the model to distribute (keeps generation and evaluation aligned).
  */
 export function getSecondaryKeywordsFromSource(source: ContentSource): string[] {
   const kws = (source.metadata as any)?.keywords;
@@ -23,7 +27,7 @@ export function getSecondaryKeywordsFromSource(source: ContentSource): string[] 
   return kws
     .slice(1)
     .map((k: unknown) => String(k).trim())
-    .filter((k: string) => k.length > 0);
+    .filter((k: string) => k.length >= 2 && !/^\d+$/.test(k));
 }
 
 /**
