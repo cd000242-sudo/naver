@@ -12,7 +12,7 @@ import { describe, it, expect } from 'vitest';
 import { humanizeContent, analyzeAiDetectionRisk } from '../aiHumanizer';
 import { detectPlatitudes } from '../contentPlatitudeDetector';
 import { evaluateHumanlike } from '../content/evaluators/humanlikeEval';
-import type { EvaluationInput } from '../content/qualityEvaluator';
+import { evaluate, type EvaluationInput } from '../content/qualityEvaluator';
 
 const seo = (body: string): EvaluationInput => ({ body, mode: 'seo' });
 
@@ -134,6 +134,20 @@ describe('자체검증: analyzeAiDetectionRisk — AI글이 사람글보다 위�
     const human = analyzeAiDetectionRisk(HUMAN_ARTICLE);
     expect(ai.score).toBeGreaterThan(human.score);
     expect(ai.issues.length).toBeGreaterThan(0);
+  });
+});
+
+describe('자체검증: 엔드투엔드 게이트 — 시스템이 스스로 human/AI를 판정', () => {
+  it('게이트 humanlike 하위점수가 사람글 > AI글, finalScore도 사람글 ≥ AI글', () => {
+    const human = evaluate(seo(HUMAN_ARTICLE));
+    const ai = evaluate(seo(AI_ARTICLE));
+    expect(human.humanlikeScore.score).toBeGreaterThan(ai.humanlikeScore.score);
+    expect(human.finalScore).toBeGreaterThanOrEqual(ai.finalScore);
+    expect(['pass', 'patch', 'regenerate']).toContain(human.decision);
+  });
+
+  it('AI글은 humanlike 플로어(55) 미만 → S2 자동 보정(selfCritique) 트리거 대상', () => {
+    expect(evaluate(seo(AI_ARTICLE)).humanlikeScore.score).toBeLessThan(55);
   });
 });
 
