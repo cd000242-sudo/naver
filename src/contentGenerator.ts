@@ -1,7 +1,13 @@
 ﻿import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
 // ✅ [2026-05-25 v2.10.356] OpenAI RPM preemptive throttler + 누진 backoff
-import { openaiRpmThrottler, getQuotaBackoffMs } from './utils/openaiRpmThrottler.js';
+// ✅ [2026-06-02] 호출 간 최소 간격(10s) + 30→60→90→120 누진 backoff
+import {
+  openaiRpmThrottler,
+  getQuotaBackoffMs,
+  getOpenAiMinIntervalMs,
+  QUOTA_BACKOFF_SEQUENCE_MS,
+} from './utils/openaiRpmThrottler.js';
 // ✅ [2026-01-25] Perplexity 추가
 import { generatePerplexityContent, translatePerplexityError } from './perplexity.js';
 // ✅ [v2.7.52] modelRegistry SSOT
@@ -5906,12 +5912,21 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
 
   let lastError: Error | null = null;
   const timeoutMs = getTimeoutMs(minChars);
-  const maxRetriesPerModel = 2; // ✅ [v1.4.77] 3 → 2 (폴백 없음 + 단일 모델이므로 2회로 충분, 토큰 33% 절감)
+  // ✅ [2026-06-02] 429 누진 backoff(30→60→90→120)가 끝까지 발동하도록 시퀀스 길이 + 1로 설정.
+  //   시퀀스 4개 → 첫 시도 + 4회 backoff retry = 5회. (이전 v1.4.77: 2회였으나 60s 1회만 발동되던 버그)
+  //   non-429 재시도(네트워크 등)도 이 횟수를 공유하나, happy path는 즉시 반환이라 토큰 비용 없음.
+  const maxRetriesPerModel = QUOTA_BACKOFF_SEQUENCE_MS.length + 1;
 
   for (const modelName of modelsToTry) {
     for (let retry = 0; retry < maxRetriesPerModel; retry++) {
       try {
         console.log(`[OpenAI] 시도: ${modelName} (${retry + 1}/${maxRetriesPerModel}), 타임아웃: ${timeoutMs / 1000}초`);
+
+        // ✅ [2026-05-25 v2.10.356] preemptive throttling — RPM 한도 도달 직전이면 호출자 측에서 대기
+        //   사용자 보고 "OpenAI 60s backoff 후에도 RPM 초과 자꾸 뜸" 근본 차단
+        // ✅ [2026-06-02] 호출 간 최소 간격(기본 10s) 강제 — 글 1편당 다수 호출 burst를 직렬 분산.
+        //   타임아웃 타이머 생성 전에 대기해야 간격 대기가 API 타임아웃 예산을 깎지 않는다.
+        await openaiRpmThrottler.throttle(getOpenAiMinIntervalMs());
 
         const timeoutPromise = new Promise<never>((_, reject) => {
           setTimeout(() => reject(new Error(`OpenAI API 호출 시간 초과 (${timeoutMs / 1000}초)`)), timeoutMs);
@@ -5919,10 +5934,6 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
 
         // ✅ [2026-03-16] system/user 분리: AI 규칙 인식률 향상
         const { system: oaiSystem, user: oaiUser } = splitPromptByMarker(prompt);
-
-        // ✅ [2026-05-25 v2.10.356] preemptive throttling — RPM 한도 도달 직전이면 호출자 측에서 대기
-        //   사용자 보고 "OpenAI 60s backoff 후에도 RPM 초과 자꾸 뜸" 근본 차단
-        await openaiRpmThrottler.throttle();
 
         // ✅ [v2.10.28] OpenAI SDK signal 전달 — 사용자 취소 시 fetch 즉시 abort
         // [2026-05-28 M3 P2] search-preview 모델 분기: web_search_options ON,
@@ -6012,13 +6023,14 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           // ✅ [2026-05-25 v2.10.356] RPM throttler에 429 신호 전달 — 적응형 RPM 상한 즉시 감소 (다음 호출부터 보호)
           openaiRpmThrottler.record429();
 
-          // ✅ RPM 한도는 1분 단위로 복구 → 같은 모델 유지 + 누진 backoff 3회 retry
+          // ✅ RPM 한도는 1분 단위로 복구 → 같은 모델 유지 + 누진 backoff retry
           //   v2.10.355까지: 60s 1회 retry → 사용자 보고 "재시도 후에도 실패"
-          //   v2.10.356: 60s → 90s → 120s 누진 retry (총 최대 ~4.5분) — RPM 자연 회복 시간 충분 확보
+          //   v2.10.356: 60→90→120 시퀀스 작성했으나 maxRetries=2라 실제론 1회만 발동(버그)
+          //   v2.11.x [2026-06-02]: 30s → 60s → 90s → 120s 누진 4회 실제 발동 (maxRetries 동기화)
           //   모델 변경 아니라 [[feedback_no_fallback]] 룰과 충돌 없음.
           const isHardQuota = errorMessage.includes('quota') && !errorMessage.includes('429');
           if (!isHardQuota && retry < maxRetriesPerModel - 1) {
-            const backoffMs = getQuotaBackoffMs(retry); // 60s / 90s / 120s 누진
+            const backoffMs = getQuotaBackoffMs(retry); // 30s / 60s / 90s / 120s 누진
             const logMsg = `⏳ [OpenAI ${modelName}] RPM 한도 초과 — ${backoffMs/1000}초 후 자동 재시도 (${retry + 2}/${maxRetriesPerModel}) — throttler 적응형 감소 적용됨`;
             console.warn(logMsg);
             if (typeof (globalThis as any).window !== 'undefined' && typeof (globalThis as any).window.appendLog === 'function') {
@@ -6030,7 +6042,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           console.error(`[OpenAI] ❌ ${modelName} 할당량/속도 제한 — 재시도 소진, 자동 폴백 차단`);
           throw new Error(
             `🚫 [OpenAI ${modelName}] API 한도를 초과했습니다.\n\n` +
-            `📌 원인: ${isHardQuota ? '월간 할당량 소진' : '분당 요청 한도(RPM) 초과 — 60초 자동 대기 + 재시도 후에도 실패'}\n\n` +
+            `📌 원인: ${isHardQuota ? '월간 할당량 소진' : '분당 요청 한도(RPM) 초과 — 30·60·90·120초 누진 대기 + 재시도 후에도 실패'}\n\n` +
             `💡 해결 방법:\n` +
             `  1) platform.openai.com → Billing 에서 결제 정보 확인 (월 한도 상향)\n` +
             `  2) 잠시 후 다시 시도 (RPM 한도는 1분 후 복구)\n` +

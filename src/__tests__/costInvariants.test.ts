@@ -125,13 +125,20 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     });
   });
 
-  describe('OpenAI 재시도 — 단일 모델이므로 2회로 충분', () => {
+  describe('OpenAI 재시도 — 429 누진 backoff가 끝까지 발동', () => {
     const content = read('contentGenerator.ts');
 
-    it('maxRetriesPerModel은 2 (이전 3에서 축소)', () => {
-      const match = content.match(/const\s+maxRetriesPerModel\s*=\s*(\d+);/);
-      expect(match).toBeTruthy();
-      expect(parseInt(match![1], 10)).toBeLessThanOrEqual(2);
+    // ✅ [2026-06-02] 사용자 요청 — 30→60→90→120 누진 backoff.
+    //   maxRetriesPerModel은 backoff 시퀀스 길이(4) + 1 = 5 여야 마지막(120s)까지 발동.
+    //   (이전 가정 "비용상 2회"는 60s 1회만 발동시키는 버그였으므로 폐기)
+    it('OpenAI callOpenAI의 maxRetriesPerModel은 backoff 시퀀스 길이 + 1', () => {
+      expect(content).toMatch(
+        /const\s+maxRetriesPerModel\s*=\s*QUOTA_BACKOFF_SEQUENCE_MS\.length\s*\+\s*1;/,
+      );
+    });
+
+    it('호출 간 최소 간격(getOpenAiMinIntervalMs)을 throttle에 전달', () => {
+      expect(content).toMatch(/openaiRpmThrottler\.throttle\(\s*getOpenAiMinIntervalMs\(\)\s*\)/);
     });
   });
 
