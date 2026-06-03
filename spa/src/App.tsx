@@ -4,6 +4,7 @@ import IndexPage from './pages/IndexPage';
 import ProductsPage from './pages/ProductsPage';
 import DetailPage from './pages/DetailPage';
 import LewordPage from './pages/LewordPage';
+import OrbitPage from './pages/OrbitPage';
 import PricingPage from './pages/PricingPage';
 import DownloadPage from './pages/DownloadPage';
 import ReviewsPage from './pages/ReviewsPage';
@@ -27,6 +28,8 @@ function App() {
                 <Route path="/detail.html" element={<DetailPage />} />
                 <Route path="/leword" element={<LewordPage />} />
                 <Route path="/leword.html" element={<LewordPage />} />
+                <Route path="/orbit" element={<OrbitPage />} />
+                <Route path="/orbit.html" element={<OrbitPage />} />
                 <Route path="/pricing" element={<PricingPage />} />
                 <Route path="/pricing.html" element={<PricingPage />} />
                 <Route path="/download" element={<DownloadPage />} />

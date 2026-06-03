@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 /**
- * 요금제 — payment-page/pricing.html 마이그.
+ * 요금제 — 기간제 올인원 이용권.
  * Toss Payments SDK (v1) 동적 로드 후 requestBillingAuth (정기구독).
  * 카드 결제는 amountCard(VAT 10% 포함)가 있으면 그 금액을 청구.
  * success/fail URL은 origin 직접 경로(leaderspro.kr root) 사용.
@@ -27,20 +27,15 @@ interface Plan {
 
 const PLANS: Record<string, Plan[]> = {
     naver: [
-        { id: 'free-naver', name: '무료 체험', desc: '부담 없이 시작', amount: 0, period: '무료', free: true, badge: { text: '🎁 FREE', type: 'trial' }, features: ['전체 기능 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', '기간 제한 없음'] },
-        { id: 'naver-monthly', name: '1개월', desc: '가볍게 시작하기', amount: 50000, amountCard: 55000, period: '/ 월 (공급가)', features: ['전체 기능 이용', 'AI 콘텐츠 자동 생성 (7종 AI)', '다계정 무제한 발행', '이메일 고객 지원'] },
-        { id: 'naver-quarterly', name: '3개월', desc: '인기 있는 선택', amount: 120000, period: '/ 3개월', monthly: '월 40,000원', features: ['전체 기능 이용', 'AI 이미지·영상 생성', '쇼핑 커넥트 (제휴 마케팅)', '우선 고객 지원'] },
-        { id: 'naver-yearly', name: '1년', desc: '가장 합리적인 선택', amount: 400000, period: '/ 년', monthly: '월 33,333원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['전체 기능 이용', '스마트 스케줄링', '전용 커뮤니티 입장', '1:1 우선 지원'] },
-    ],
-    leword: [
-        { id: 'leword-monthly', name: '1개월', desc: '키워드 분석 시작', amount: 30000, period: '/ 월', features: ['키워드 경쟁 분석', '블루오션 발굴', '트렌드 모니터링', '이메일 지원'] },
-        { id: 'leword-quarterly', name: '3개월', desc: '인기 있는 선택', amount: 100000, period: '/ 3개월', monthly: '월 33,333원', features: ['전체 기능 이용', 'Leaders Pro 연동', '블루오션 키워드 자동 추천', '우선 고객 지원'] },
-        { id: 'leword-yearly', name: '1년', desc: '가장 합리적인 선택', amount: 300000, period: '/ 년', monthly: '월 25,000원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['전체 기능 이용', 'Leaders Pro 연동', '커뮤니티 입장', '1:1 우선 지원'] },
+        { id: 'free-naver', name: '무료 체험', desc: '부담 없이 시작', amount: 0, period: '무료', free: true, badge: { text: '🎁 FREE', type: 'trial' }, features: ['Leaders Pro 제품군 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', '기간 제한 없음'] },
+        { id: 'naver-monthly', name: '올인원 1개월', desc: '모든 툴을 가볍게 시작', amount: 50000, amountCard: 55000, period: '/ 월 (공급가)', features: ['네이버 자동화툴 이용', '블로그스팟·워드프레스툴 이용', 'Leword 키워드 분석 이용', '이메일 고객 지원'] },
+        { id: 'naver-quarterly', name: '올인원 3개월', desc: '여러 채널을 안정적으로 운영', amount: 120000, period: '/ 3개월', monthly: '월 40,000원', features: ['네이버 자동화툴 이용', '블로그스팟·워드프레스툴 이용', 'Leword 키워드 분석 이용', '우선 고객 지원'] },
+        { id: 'naver-yearly', name: '올인원 1년', desc: '가장 합리적인 통합 이용권', amount: 400000, period: '/ 년', monthly: '월 33,333원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['네이버 자동화툴 이용', '블로그스팟·워드프레스툴 이용', 'Leword + 전용 커뮤니티', '1:1 우선 지원'] },
     ],
 };
 
-const TAB_LABELS: Record<string, string> = { naver: 'N · Leaders Pro 네이버', leword: 'L · Leword' };
-const TAB_KEYS = ['naver', 'leword'] as const;
+const TAB_LABELS: Record<string, string> = { naver: 'A · Leaders Pro All Access' };
+const TAB_KEYS = ['naver'] as const;
 type TabKey = typeof TAB_KEYS[number];
 
 declare global {
@@ -90,7 +85,7 @@ function PricingPage() {
 
     useEffect(() => {
         const prev = document.title;
-        document.title = '요금제 — Leaders Pro';
+        document.title = '기간제 올인원 이용권 — Leaders Pro';
         return () => { document.title = prev; };
     }, []);
 
@@ -157,7 +152,7 @@ function PricingPage() {
         if (!selected) return '플랜을 선택해주세요';
         const charge = selected.amountCard || selected.amount;
         const vatNote = selected.amountCard ? ' (VAT 포함)' : '';
-        return `🎁 7일 무료 시작 — 이후 월 ${charge.toLocaleString()}원${vatNote}`;
+        return `🎁 7일 무료 시작 — 이후 ${charge.toLocaleString()}원${vatNote}`;
     })();
 
     return (
@@ -165,8 +160,8 @@ function PricingPage() {
             <section style={{ padding: '140px 20px 80px', maxWidth: 1200, margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 40 }}>
                     <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>PRICING</span>
-                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>제품별 요금제</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>각 제품에 맞는 최적의 플랜을 선택하세요.</p>
+                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>기간제 올인원 이용권</h2>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>하나의 기간권으로 네이버 자동화툴, 블로그스팟·워드프레스툴, Leword를 모두 사용할 수 있습니다.</p>
                 </div>
 
                 {/* Product tabs */}

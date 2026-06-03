@@ -13,34 +13,14 @@ interface ProductOption { id: string; name: string; price: number; period: strin
 
 const ALL_PRODUCTS: Record<string, ProductOption[]> = {
     naver: [
-        { id: 'naver-monthly', name: '1개월', price: 50000, period: '/ 월' },
-        { id: 'naver-quarterly', name: '3개월', price: 120000, period: '월 40,000원' },
-        { id: 'naver-yearly', name: '1년', price: 400000, period: '월 33,333원' },
-    ],
-    orbit: [
-        { id: 'orbit-monthly', name: '1개월', price: 60000, period: '/ 월' },
-        { id: 'orbit-quarterly', name: '3개월', price: 150000, period: '월 50,000원' },
-        { id: 'orbit-yearly', name: '1년', price: 600000, period: '월 50,000원' },
-        { id: 'orbit-lifetime', name: '영구제', price: 3000000, period: '일회성' },
-    ],
-    tistory: [
-        { id: 'tistory-monthly', name: '1개월', price: 30000, period: '/ 월' },
-        { id: 'tistory-quarterly', name: '3개월', price: 80000, period: '월 26,667원' },
-        { id: 'tistory-yearly', name: '1년', price: 300000, period: '월 25,000원' },
-        { id: 'tistory-lifetime', name: '영구제', price: 1500000, period: '일회성' },
-    ],
-    leword: [
-        { id: 'leword-monthly', name: '1개월', price: 30000, period: '/ 월' },
-        { id: 'leword-quarterly', name: '3개월', price: 100000, period: '월 33,333원' },
-        { id: 'leword-yearly', name: '1년', price: 300000, period: '월 25,000원' },
+        { id: 'naver-monthly', name: '올인원 1개월', price: 50000, period: '/ 월' },
+        { id: 'naver-quarterly', name: '올인원 3개월', price: 120000, period: '월 40,000원' },
+        { id: 'naver-yearly', name: '올인원 1년', price: 400000, period: '월 33,333원' },
     ],
 };
 
 const PRODUCT_LABELS: Record<string, string> = {
-    naver: 'Better Life Naver',
-    orbit: 'Leaders Orbit',
-    tistory: 'Leaders Tistory',
-    leword: 'Leword',
+    naver: 'Leaders Pro 올인원',
 };
 
 type Status = 'pending' | 'approved' | 'rejected';
@@ -183,11 +163,11 @@ function BankOrderPage() {
             <div style={{ background: 'rgba(18,18,26,0.7)', backdropFilter: 'blur(20px)', border: '1px solid rgba(201,168,76,0.18)', borderRadius: 24, padding: 'clamp(24px, 4vw, 40px)' }}>
                 <div style={{ textAlign: 'center', marginBottom: 32 }}>
                     <h1 style={{ fontSize: 'clamp(24px, 4vw, 32px)', fontWeight: 900, marginBottom: 8, background: 'linear-gradient(135deg, #FFD700, #FFA500)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>💰 계좌이체 결제</h1>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>상품 선택 → 정보 입력 → 입금 → 라이선스 발급</p>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>올인원 기간권 선택 → 정보 입력 → 입금 → 라이선스 발급</p>
                 </div>
 
                 {/* Step 1 */}
-                <Step n={1} label="제품 선택">
+                <Step n={1} label="기간권 선택">
                     <div style={{ display: 'flex', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
                         {Object.keys(PRODUCT_LABELS).filter((k) => k === 'naver').map((k) => (
                             <button
@@ -260,7 +240,7 @@ function BankOrderPage() {
                         <BankRow label="은행" value="토스뱅크" />
                         <BankRow label="계좌번호" value={<>1000-1770-4358 <span onClick={onCopyAccount} style={{ marginLeft: 8, color: '#FFD700', cursor: 'pointer', fontSize: 12, fontWeight: 600 }}>{copyLabel}</span></>} />
                         <BankRow label="예금주" value="박성현" />
-                        <BankRow label="입금 금액" value={selected ? <strong style={{ color: '#FFD700' }}>{fmt(selected.price)}원</strong> : '상품을 선택해주세요'} />
+                        <BankRow label="입금 금액" value={selected ? <strong style={{ color: '#FFD700' }}>{fmt(selected.price)}원</strong> : '기간권을 선택해주세요'} />
                     </div>
                 </Step>
 
@@ -276,7 +256,7 @@ function BankOrderPage() {
                         cursor: selected && !submitting ? 'pointer' : 'not-allowed',
                     }}
                 >
-                    {submitting ? '접수 중...' : selected ? `${fmt(selected.price)}원 주문 접수하기` : '상품을 선택해주세요'}
+                    {submitting ? '접수 중...' : selected ? `${fmt(selected.price)}원 주문 접수하기` : '기간권을 선택해주세요'}
                 </button>
 
                 <div style={{ marginTop: 18, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7 }}>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const NAV_LINKS = [
     { to: '/', label: '홈' },
@@ -14,6 +14,14 @@ const NAV_LINKS = [
 function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const location = useLocation();
+
+    const normalizedPath = (() => {
+        if (location.pathname === '/index.html') return '/';
+        return location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+    })();
+
+    const isActiveLink = (to: string) => to === '/' ? normalizedPath === '/' : normalizedPath === to;
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 50);
@@ -38,7 +46,8 @@ function Navbar() {
                     <span>Leaders Pro</span>
                 </NavLink>
                 <button
-                    aria-label="메뉴 열기"
+                    aria-label={mobileOpen ? '메뉴 닫기' : '메뉴 열기'}
+                    aria-expanded={mobileOpen}
                     onClick={() => setMobileOpen(o => !o)}
                     style={{ display: 'none', background: 'transparent', border: 'none', cursor: 'pointer', flexDirection: 'column', gap: 5, padding: 6 }}
                     className="nav-hamburger"
@@ -48,22 +57,27 @@ function Navbar() {
                     <span style={{ display: 'block', width: 20, height: 2, background: '#fff' }} />
                 </button>
                 <div className={mobileOpen ? 'nav-links mobile-open' : 'nav-links'} style={{ display: 'flex', gap: 8 }}>
-                    {NAV_LINKS.map(link => (
-                        <NavLink
-                            key={link.to}
-                            to={link.to}
-                            onClick={() => setMobileOpen(false)}
-                            style={({ isActive }) => ({
+                    {NAV_LINKS.map(link => {
+                        const active = isActiveLink(link.to);
+                        return (
+                            <NavLink
+                                key={link.to}
+                                to={link.to}
+                                className={active ? 'nav-link-active' : undefined}
+                                aria-current={active ? 'page' : undefined}
+                                onClick={() => setMobileOpen(false)}
+                                style={() => ({
                                 padding: '8px 16px',
-                                color: isActive ? '#A78BFA' : '#a0a0b0',
-                                background: isActive ? 'rgba(124,58,237,0.1)' : 'transparent',
-                                fontSize: 14, fontWeight: 500,
+                                color: mobileOpen ? (active ? '#F4D03F' : 'rgba(255,255,255,0.92)') : (active ? '#A78BFA' : '#a0a0b0'),
+                                background: mobileOpen && active ? 'rgba(244,208,63,0.14)' : active ? 'rgba(124,58,237,0.1)' : 'transparent',
+                                fontSize: 14, fontWeight: mobileOpen ? 800 : 500,
                                 borderRadius: 8, transition: 'all 0.2s',
                             })}
-                        >
-                            {link.label}
-                        </NavLink>
-                    ))}
+                            >
+                                {link.label}
+                            </NavLink>
+                        );
+                    })}
                 </div>
             </div>
         </nav>

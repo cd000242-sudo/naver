@@ -85,3 +85,49 @@ button { cursor: pointer; font-family: inherit; }
     max-width: 600px;
     margin: 0 auto;
 }
+
+@media (max-width: 768px) {
+    .nav-hamburger {
+        display: inline-flex !important;
+    }
+
+    .nav-links {
+        display: none !important;
+    }
+
+    .nav-links.mobile-open {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        z-index: 998;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px !important;
+        padding: 24px 20px 30px;
+        background: rgba(5, 10, 18, 0.96);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.42);
+        backdrop-filter: blur(18px);
+    }
+
+    .nav-links.mobile-open a {
+        width: min(260px, 100%);
+        text-align: center;
+        color: rgba(255, 255, 255, 0.92) !important;
+        font-size: 18px !important;
+        font-weight: 800 !important;
+    }
+
+    .nav-links.mobile-open a[aria-current="page"],
+    .nav-links.mobile-open a.nav-link-active {
+        color: #F4D03F !important;
+        background: rgba(244, 208, 63, 0.14) !important;
+    }
+
+    .product-showcase-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 28px !important;
+    }
+}

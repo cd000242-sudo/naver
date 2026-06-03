@@ -409,7 +409,7 @@ function DetailPage() {
                         ))}
                     </div>
                     <div style={{ marginTop: 36, textAlign: 'center' }}>
-                        <Link to="/pricing" style={{ display: 'inline-flex', alignItems: 'center', gap: 12, background: 'linear-gradient(135deg, rgba(45,27,105,0.6), rgba(26,26,46,0.8))', backdropFilter: 'blur(12px)', border: `1px solid ${C.gold}`, borderRadius: 16, padding: '18px 48px', fontSize: 16, fontWeight: 700, color: C.gold, textDecoration: 'none' }}>🏆 영구제 ₩2,000,000 — 평생 업데이트 · 평생 지원</Link>
+                        <Link to="/pricing" style={{ display: 'inline-flex', alignItems: 'center', gap: 12, background: 'linear-gradient(135deg, rgba(45,27,105,0.6), rgba(26,26,46,0.8))', backdropFilter: 'blur(12px)', border: `1px solid ${C.gold}`, borderRadius: 16, padding: '18px 48px', fontSize: 16, fontWeight: 700, color: C.gold, textDecoration: 'none' }}>🏆 올인원 1년 ₩400,000 — 모든 도구 1년 이용 · 우선 지원</Link>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', gap: 32, flexWrap: 'wrap', marginTop: 40, paddingTop: 32, borderTop: '1px solid rgba(255,255,255,0.04)' }}>
                         {[

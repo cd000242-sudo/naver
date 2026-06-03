@@ -4,8 +4,7 @@ import ParticlesCanvas from '../components/ParticlesCanvas';
 
 /**
  * 제품 페이지 — payment-page/products.html (640줄) 마이그.
- * 가시 컨텐츠: Section header + Better Life Naver showcase + Leword showcase + 비교표.
- * 심사대응 hidden 항목 (Orbit / Compact cards) 은 마이그 제외.
+ * 가시 컨텐츠: Section header + Better Life Naver showcase + Leword showcase + Orbit showcase + 비교표.
  */
 
 type Benefit = { icon: string; title: string; desc: string };
@@ -26,6 +25,13 @@ const LEWORD_BENEFITS: Benefit[] = [
     { icon: '🏆', title: 'SSS~B 등급 (4단 게이트)', desc: '점수 85+ AND 검색량 1,000+ AND 문서수 5,000↓ AND 비율 5+ 모두 통과만 SSS' },
     { icon: '⚡', title: 'Rising · 카테고리 롱테일 · PRO 헌터', desc: '4가지 발굴 엔진이 매일 새 후보를 채워줍니다' },
     { icon: '💰', title: 'Profit Engine — 블루오션 판정', desc: 'CPC 단일소스 DB로 트래픽뿐 아니라 수익 키워드까지' },
+];
+
+const ORBIT_BENEFITS: Benefit[] = [
+    { icon: '🔗', title: '두 플랫폼을 한 화면에서', desc: 'WordPress REST API + Blogger API 기반 발행 흐름' },
+    { icon: '🧠', title: '5개 콘텐츠 모드', desc: 'SEO·애드센스·쇼핑·내부링크·페러프레이징 목적별 글 생성' },
+    { icon: '🎨', title: '썸네일과 H2 이미지 자동화', desc: 'Flow, ImageFX, Nano Banana, GPT Image 계열 이미지 엔진 지원' },
+    { icon: '⚙️', title: '초기 세팅 시간 단축', desc: 'Blogspot 스킨·메타·웹마스터 등록 보조와 WordPress 결과물 지원' },
 ];
 
 const COMPARISON: Array<{ feature: string; manual: string; generic: string; ours: string; manualColor?: string; genericColor?: string }> = [
@@ -62,12 +68,14 @@ interface ShowcaseProps {
     benefits: Benefit[];
     cta: { to: string; label: string };
     visual: React.ReactNode;
-    accent?: 'green' | 'blue';
+    accent?: 'green' | 'blue' | 'orbit';
 }
 
 function ProductShowcase({ tag, title, subtitle, desc, benefits, cta, visual, accent = 'green' }: ShowcaseProps) {
     // 카드 배경: 텍스트 가독성을 위해 색깔이 들어간 카드로 감쌈.
-    const palette = accent === 'blue'
+    const palette = accent === 'orbit'
+        ? { bg: 'linear-gradient(135deg, rgba(14,165,233,0.18), rgba(34,197,94,0.07))', border: 'rgba(125,211,252,0.34)' }
+        : accent === 'blue'
         ? { bg: 'linear-gradient(135deg, rgba(20,120,255,0.18), rgba(20,120,255,0.06))', border: 'rgba(80,150,255,0.35)' }
         : { bg: 'linear-gradient(135deg, rgba(20,170,90,0.20), rgba(20,170,90,0.06))', border: 'rgba(50,200,120,0.35)' };
 
@@ -81,7 +89,7 @@ function ProductShowcase({ tag, title, subtitle, desc, benefits, cta, visual, ac
             backdropFilter: 'blur(14px)',
             boxShadow: '0 10px 36px rgba(0,0,0,0.25)',
         }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 48, alignItems: 'center' }}>
+            <div className="product-showcase-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 48, alignItems: 'center' }}>
                 <div>
                     <ProductInfo tag={tag} title={title} subtitle={subtitle} desc={desc} />
                     <BenefitList items={benefits} />
@@ -113,14 +121,17 @@ function ProductInfo({ tag, title, subtitle, desc }: Pick<ShowcaseProps, 'tag' |
     );
 }
 
-function VisualMockup({ title, children, tint = 'gold' }: { title: string; children: React.ReactNode; tint?: 'gold' | 'purple' }) {
+function VisualMockup({ title, children, tint = 'gold' }: { title: string; children: React.ReactNode; tint?: 'gold' | 'purple' | 'blue' }) {
     return (
         <div style={{
             borderRadius: 16,
             overflow: 'hidden',
-            border: tint === 'purple' ? '1px solid rgba(124,58,237,0.25)' : '1px solid var(--border-glass)',
+            border: tint === 'purple'
+                ? '1px solid rgba(124,58,237,0.25)'
+                : tint === 'blue' ? '1px solid rgba(56,189,248,0.28)' : '1px solid var(--border-glass)',
             background: tint === 'purple'
                 ? 'linear-gradient(135deg, rgba(124,58,237,0.10) 0%, rgba(124,58,237,0.04) 100%)'
+                : tint === 'blue' ? 'linear-gradient(135deg, rgba(14,165,233,0.12) 0%, rgba(34,197,94,0.05) 100%)'
                 : '#1a1a2e',
             boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
         }}>
@@ -196,6 +207,22 @@ function ProductsPage() {
                         visual={
                             <VisualMockup title="Leword — 실시간 검색어 모니터링" tint="purple">
                                 <img src="/images/leword/realtime-monitor-hero.png" alt="Leword 실시간 검색어 모니터링 — 네이버·ZUM·네이트·다음 4매체 통합" loading="lazy" style={{ width: '100%', display: 'block' }} />
+                            </VisualMockup>
+                        }
+                    />
+
+                    {/* Leaders Orbit */}
+                    <ProductShowcase
+                        accent="orbit"
+                        tag={<span style={{ background: 'linear-gradient(135deg, #38bdf8, #34d399)', color: '#06111d', padding: '4px 12px', borderRadius: 50, fontSize: 11, fontWeight: 900 }}>🌐 GLOBAL</span>}
+                        title="Leaders Orbit"
+                        subtitle="블로그스팟 · 워드프레스 자동화"
+                        desc={<>키워드 입력부터 AI 콘텐츠 생성, 이미지, 발행, 원클릭 세팅까지.<br /><strong style={{ color: 'var(--text-primary)' }}>Leaders Pro 올인원 이용권</strong> 안에서 함께 사용하는 글로벌 블로그 자동화입니다.</>}
+                        benefits={ORBIT_BENEFITS}
+                        cta={{ to: '/orbit', label: '자세히 보기 →' }}
+                        visual={
+                            <VisualMockup title="Leaders Orbit — Global Publisher" tint="blue">
+                                <img src="/images/orbit/orbit-ready.png" alt="Leaders Orbit 워드프레스 블로그스팟 자동 발행 화면" loading="lazy" style={{ width: '100%', display: 'block' }} />
                             </VisualMockup>
                         }
                     />

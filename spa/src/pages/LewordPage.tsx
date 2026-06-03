@@ -99,7 +99,7 @@ function MidCTA({ text, btnLabel = '지금 시작하기 →' }: { text: string; 
     return (
         <div style={{ padding: '60px 20px', textAlign: 'center', background: 'linear-gradient(135deg, rgba(124,58,237,0.08), rgba(255,215,0,0.04))', borderTop: '1px solid rgba(124,58,237,0.15)', borderBottom: '1px solid rgba(124,58,237,0.15)' }}>
             <p style={{ fontSize: 20, fontWeight: 700, marginBottom: 20 }}>{text}</p>
-            <Link to="/pricing?tab=leword" style={btnPrimary}>{btnLabel}</Link>
+            <Link to="/pricing" style={btnPrimary}>{btnLabel}</Link>
         </div>
     );
 }
@@ -159,7 +159,7 @@ function LewordPage() {
                         문제는 글이 아니라, <strong>글이 올라탄 단어</strong>였습니다.
                     </p>
                     <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-                        <Link to="/pricing?tab=leword" style={btnPrimary}>💎 지금 시작하기</Link>
+                        <Link to="/pricing" style={btnPrimary}>💎 지금 시작하기</Link>
                         <a href="#features" style={{ ...btnPrimary, background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: C.textPrimary }}>기능 자세히 보기 ↓</a>
                     </div>
                     <div style={{ display: 'flex', gap: 40, justifyContent: 'center', flexWrap: 'wrap', marginTop: 40 }}>
@@ -390,52 +390,50 @@ function LewordPage() {
             <section id="pricing" style={{ padding: '100px 20px', background: C.bgDark, textAlign: 'center', position: 'relative', zIndex: 1 }}>
                 <div style={{ maxWidth: 1200, margin: '0 auto' }}>
                     <SectionLabel color={C.purpleLight}>💎 PRICING</SectionLabel>
-                    <SectionTitle>키워드 외주 1건 가격으로<br /><span style={{ background: C.gradPremium, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>한 달을 자동 발굴</span></SectionTitle>
-                    <p style={{ color: C.textSecondary, fontSize: 16, maxWidth: 600, margin: '0 auto 20px' }}>키워드 외주 1건 약 50,000원 vs LEWORD 월 30,000원 — 무제한 발굴</p>
-                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(0,255,136,0.08)', border: '1px solid rgba(0,255,136,0.25)', padding: '8px 20px', borderRadius: 50, fontSize: 14, color: C.neonGreen, marginBottom: 48, fontWeight: 600 }}>💡 무료 체험 → 마음에 들면 결제. 부담 없이 시작</div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', maxWidth: 1180, margin: '0 auto', gap: 0, alignItems: 'stretch' }}>
+                    <SectionTitle>Leword도 이제<br /><span style={{ background: C.gradPremium, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>올인원 이용권에 포함</span></SectionTitle>
+                    <p style={{ color: C.textSecondary, fontSize: 16, maxWidth: 680, margin: '0 auto 28px', lineHeight: 1.8 }}>
+                        네이버 자동화툴, 블로그스팟·워드프레스툴, Leword를 따로 구매하지 않아도 됩니다.
+                        기간제 올인원 이용권 하나로 키워드 분석까지 함께 사용하세요.
+                    </p>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', maxWidth: 900, margin: '0 auto', gap: 16, alignItems: 'stretch' }}>
                         {[
-                            { name: '무료 체험', price: '₩0', per: '기간 제한 없음', tag: '🎁 FREE', features: ['키워드 경쟁 분석', '블루오션 발굴 (제한)', '매일 5회 검색', '17개 소스 일부'], cta: '🚀 체험 다운로드', to: '/download' },
-                            { name: '1개월', price: '₩30,000', per: '월 ₩30,000 · 가볍게 시작', features: ['17개 소스 전체 액세스', 'MDP 5차원 무제한', 'SSS~B 등급 전체', '카테고리 롱테일', 'Rising 키워드', '이메일 지원'], cta: '선택하기 →', to: '/pricing?tab=leword' },
-                            { name: '3개월', price: '₩100,000', per: '월 ₩33,333 · 안정적 운영', tag: '🔥 가장 인기', tagDiscount: '11% 절약', features: ['1개월의 모든 기능', 'PRO 트래픽 헌터', 'Profit Engine 풀 액세스', 'CSV 내보내기 무제한', 'Leaders Pro 연동', '우선 지원'], cta: '가장 인기 있는 플랜 →', to: '/pricing?tab=leword', popular: true },
-                            { name: '1년', price: '₩300,000', per: '월 ₩25,000 · 가장 합리적', tag: '👑 BEST VALUE', tagDiscount: '17% 절약', features: ['3개월의 모든 기능', '자동 발굴 스케줄', 'RPM 고수익 분석', '전용 커뮤니티 입장', '1:1 우선 지원', '신기능 얼리 액세스'], cta: '선택하기 →', to: '/pricing?tab=leword' },
+                            { name: '올인원 1개월', price: '₩50,000', per: '가볍게 시작', features: ['Leword 키워드 분석 이용', '네이버 자동화툴 이용', '블로그스팟·워드프레스툴 이용'] },
+                            { name: '올인원 3개월', price: '₩120,000', per: '월 40,000원', features: ['Leword 전체 기능 이용', '여러 채널 안정 운영', '우선 고객 지원'], popular: true },
+                            { name: '올인원 1년', price: '₩400,000', per: '월 33,333원', features: ['Leword + 전용 커뮤니티', '모든 자동화툴 기간 내 이용', '1:1 우선 지원'] },
                         ].map((p, i) => (
                             <div key={i} style={{
-                                background: p.popular ? 'linear-gradient(180deg, rgba(124,58,237,0.10), rgba(18,18,26,0.9))' : 'rgba(18,18,26,0.7)',
+                                background: p.popular ? 'linear-gradient(180deg, rgba(124,58,237,0.14), rgba(18,18,26,0.9))' : 'rgba(18,18,26,0.7)',
                                 backdropFilter: 'blur(20px)',
                                 border: p.popular ? `2px solid ${C.purple}` : '1px solid rgba(255,255,255,0.06)',
-                                padding: '40px 22px 36px',
+                                padding: '34px 24px',
                                 position: 'relative',
-                                transform: p.popular ? 'scale(1.06)' : 'none',
-                                zIndex: p.popular ? 3 : 1,
-                                borderRadius: i === 0 ? '24px 0 0 24px' : i === 3 ? '0 24px 24px 0' : 0,
+                                borderRadius: 18,
                                 boxShadow: p.popular ? '0 0 60px rgba(124,58,237,0.15)' : 'none',
                             }}>
-                                {p.popular && <div style={{ position: 'absolute', top: -16, left: '50%', transform: 'translateX(-50%)', background: C.gradPremium, padding: '6px 28px', borderRadius: 50, fontSize: 13, fontWeight: 800, color: '#fff' }}>🔥 가장 인기</div>}
-                                <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 16 }}>{p.name}</h3>
+                                {p.popular && <div style={{ position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)', background: C.gradPremium, padding: '6px 22px', borderRadius: 50, fontSize: 13, fontWeight: 800, color: '#fff' }}>추천</div>}
+                                <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 14 }}>{p.name}</h3>
                                 <div style={{ fontSize: 40, fontWeight: 900, background: C.gradPremium, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: 4 }}>{p.price}</div>
                                 <div style={{ fontSize: 14, color: C.neonGreen, fontWeight: 600, marginBottom: 8 }}>{p.per}</div>
-                                {p.tag && <div style={{ display: 'inline-block', background: 'rgba(255,107,0,0.15)', color: '#ff8c00', fontSize: 12, fontWeight: 700, padding: '3px 10px', borderRadius: 6, marginBottom: 8 }}>{p.tag}{p.tagDiscount ? ` — ${p.tagDiscount}` : ''}</div>}
-                                <ul style={{ listStyle: 'none', textAlign: 'left', marginBottom: 28, marginTop: 20, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                                <ul style={{ listStyle: 'none', textAlign: 'left', marginBottom: 26, marginTop: 20, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                                     {p.features.map((f, j) => (
                                         <li key={j} style={{ padding: '7px 0', fontSize: 14, color: C.textSecondary, display: 'flex', alignItems: 'center', gap: 10 }}>
                                             <span style={{ color: C.neonGreen, fontWeight: 700, width: 18 }}>✓</span>{f}
                                         </li>
                                     ))}
                                 </ul>
-                                <Link to={p.to} style={{
+                                <Link to="/pricing" style={{
                                     display: 'block', width: '100%', padding: 16, borderRadius: 14,
                                     background: p.popular ? C.gradPremium : 'rgba(255,255,255,0.06)',
-                                    color: '#fff', fontWeight: 700, fontSize: p.popular ? 17 : 16,
+                                    color: '#fff', fontWeight: 700, fontSize: 16,
                                     textAlign: 'center', textDecoration: 'none',
                                     border: p.popular ? 'none' : '1px solid rgba(255,255,255,0.12)',
-                                }}>{p.cta}</Link>
+                                }}>올인원 가격표 보기 →</Link>
                             </div>
                         ))}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', gap: 32, flexWrap: 'wrap', marginTop: 40, paddingTop: 32, borderTop: '1px solid rgba(255,255,255,0.04)' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: C.textSecondary, fontSize: 14 }}>🔒 안전한 결제 (Toss)</div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: C.textSecondary, fontSize: 14 }}>🔄 48시간 환불 보장</div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: C.textSecondary, fontSize: 14 }}>🔄 7일 환불 보장</div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: C.textSecondary, fontSize: 14 }}>💬 카카오 1:1 지원</div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: C.textSecondary, fontSize: 14 }}>🔑 즉시 라이선스 발급</div>
                     </div>
@@ -499,8 +497,8 @@ function LewordPage() {
                         글을 한 편 더 쓰는 것보다,<br />
                         키워드를 한 번 더 보는 게 빠릅니다.
                     </p>
-                    <Link to="/pricing?tab=leword" style={{ ...btnPrimary, fontSize: 20, padding: '20px 48px' }}>💎 LEWORD 시작하기 →</Link>
-                    <p style={{ marginTop: 16, color: '#888', fontSize: 14 }}>🔒 안전한 결제 · 48시간 환불 보장 · 카카오톡 즉시 지원</p>
+                    <Link to="/pricing" style={{ ...btnPrimary, fontSize: 20, padding: '20px 48px' }}>💎 올인원으로 LEWORD 시작하기 →</Link>
+                    <p style={{ marginTop: 16, color: '#888', fontSize: 14 }}>🔒 안전한 결제 · 7일 환불 보장 · 카카오톡 즉시 지원</p>
                 </div>
             </section>
         </div>
