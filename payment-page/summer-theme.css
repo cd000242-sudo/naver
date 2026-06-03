@@ -80,6 +80,11 @@ section { background: transparent !important; }
 }
 .nav-link, .nav-brand-text { color: #14304d !important; }
 .nav-link.active, .nav-link:hover { color: #C9A84C !important; }
+@media (max-width: 768px) {
+  .nav-links.mobile-open .nav-link { color: rgba(255, 255, 255, 0.92) !important; }
+  .nav-links.mobile-open .nav-link.active,
+  .nav-links.mobile-open .nav-link:hover { color: #F4D03F !important; }
+}
 
 /* ── Inputs / textareas / selects ────────────────────────── */
 input, textarea, select,

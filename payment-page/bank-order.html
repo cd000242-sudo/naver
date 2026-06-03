@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>계좌이체 결제 — Leaders Pro</title>
-    <meta name="description" content="Leaders Pro 계좌이체 결제 페이지. 상품을 선택하고 입금 후 라이선스를 발급받으세요.">
+    <meta name="description" content="Leaders Pro 올인원 계좌이체 결제 페이지. 기간권 하나로 네이버 자동화, 블로그스팟·워드프레스, Leword를 모두 사용할 수 있습니다.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,7 +78,7 @@
     <link rel="canonical" href="https://www.leaderspro.kr/bank-order.html">
     <meta name="keywords" content="리더스프로, Leaders Pro, 네이버 자동화 툴, 네이버자동화툴, 블로그 자동화, 네이버 블로그 자동화, AI 블로그 자동화, 자동 포스팅 도구, 블로그 AI">
     <meta property="og:title" content="계좌이체 결제 — Leaders Pro">
-    <meta property="og:description" content="Leaders Pro 계좌이체 결제 페이지. 상품을 선택하고 입금 후 라이선스를 발급받으세요.">
+    <meta property="og:description" content="기간권 하나로 네이버 자동화, 블로그스팟·워드프레스, Leword를 모두 사용할 수 있습니다.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.leaderspro.kr/bank-order.html">
     <meta property="og:image" content="https://www.leaderspro.kr/og-image.jpg">
@@ -86,7 +86,7 @@
     <meta property="og:locale" content="ko_KR">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="계좌이체 결제 — Leaders Pro">
-    <meta name="twitter:description" content="Leaders Pro 계좌이체 결제 페이지. 상품을 선택하고 입금 후 라이선스를 발급받으세요.">
+    <meta name="twitter:description" content="기간권 하나로 네이버 자동화, 블로그스팟·워드프레스, Leword를 모두 사용할 수 있습니다.">
     <meta name="twitter:image" content="https://www.leaderspro.kr/og-image.jpg">
 </head>
 
@@ -119,17 +119,17 @@
         <div class="order-container" id="order-form">
             <div class="order-title">
                 <h1>💰 계좌이체 결제</h1>
-                <p>상품 선택 → 정보 입력 → 입금 → 라이선스 발급</p>
+                <p>올인원 기간권 선택 → 정보 입력 → 입금 → 라이선스 발급</p>
             </div>
 
             <!-- Step 1: 제품 선택 -->
             <div class="order-step">
                 <div class="step-header">
                     <div class="step-num">1</div>
-                    <div class="step-label">제품 선택</div>
+                    <div class="step-label">이용권 선택</div>
                 </div>
                 <div class="product-tabs" id="product-tabs">
-                    <button class="product-tab active" onclick="switchTab('naver')">Better Life Naver</button>
+                    <button class="product-tab active" onclick="switchTab('naver')">Leaders Pro 올인원</button>
                     <!-- ★ 심사대응: 미출시 제품 숨김 -->
                     <button class="product-tab" onclick="switchTab('orbit')" style="display:none">Leaders Orbit</button>
                     <button class="product-tab" onclick="switchTab('tistory')" style="display:none">Leaders Tistory</button>
@@ -238,7 +238,7 @@
                 </div>
                 <div style="color:#8a8686;font-size:12px;margin-top:14px;line-height:1.6;">
                     이 코드는 입력하신 이메일로도 발송되었습니다.<br>
-                    Better Life Naver 앱에서 라이선스 코드를 입력하면 즉시 사용할 수 있습니다.
+                    Leaders Pro 제품군 앱에서 라이선스 코드를 입력하면 즉시 사용할 수 있습니다.
                 </div>
             </div>
 
@@ -284,9 +284,9 @@
 
         const ALL_PRODUCTS = {
             naver: [
-                { id: 'naver-monthly', name: '1개월', price: 50000, period: '/ 월' },
-                { id: 'naver-quarterly', name: '3개월', price: 120000, period: '월 40,000원' },
-                { id: 'naver-yearly', name: '1년', price: 400000, period: '월 33,333원' },
+                { id: 'naver-monthly', name: '올인원 1개월', price: 50000, period: '/ 월' },
+                { id: 'naver-quarterly', name: '올인원 3개월', price: 120000, period: '월 40,000원' },
+                { id: 'naver-yearly', name: '올인원 1년', price: 400000, period: '월 33,333원' },
                 // ★ 영구제 제거됨
             ],
             orbit: [
@@ -309,7 +309,7 @@
         };
 
         const PRODUCT_LABELS = {
-            naver: 'Better Life Naver',
+            naver: 'Leaders Pro',
             orbit: 'Leaders Orbit',
             tistory: 'Leaders Tistory',
             leword: 'Leword',

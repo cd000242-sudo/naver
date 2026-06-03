@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaders Orbit — 블로그스팟·워드프레스 자동화 | Leaders Pro</title>
+    <meta name="description" content="Leaders Orbit은 Blogspot과 WordPress를 한 화면에서 운영하는 AI 블로그 자동화 도구입니다. 키워드 입력, 콘텐츠 생성, 이미지, 발행, 원클릭 세팅, 웹마스터 등록까지 지원합니다.">
+    <meta property="og:title" content="Leaders Orbit — 블로그스팟·워드프레스 자동화">
+    <meta property="og:description" content="Blogspot · WordPress · AI 콘텐츠 생성 · 이미지 엔진 · 원클릭 세팅을 Leaders Pro 올인원 이용권으로 함께 사용하세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.leaderspro.kr/orbit.html">
+    <meta property="og:image" content="https://www.leaderspro.kr/images/orbit/orbit-hero.png">
+    <link rel="canonical" href="https://www.leaderspro.kr/orbit.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        :root {
+            --orbit-bg: #05070d;
+            --orbit-panel: #0d1220;
+            --orbit-panel-soft: #111827;
+            --orbit-line: rgba(226, 232, 240, 0.12);
+            --orbit-text: #f8fafc;
+            --orbit-muted: #94a3b8;
+            --orbit-sky: #38bdf8;
+            --orbit-blue: #2563eb;
+            --orbit-amber: #facc15;
+            --orbit-green: #34d399;
+            --orbit-orange: #fb923c;
+            --orbit-gradient: linear-gradient(135deg, #facc15 0%, #38bdf8 52%, #34d399 100%);
+        }
+
+        body.orbit-page {
+            background: var(--orbit-bg);
+            color: var(--orbit-text);
+            font-family: 'Pretendard Variable', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .orbit-page .navbar {
+            background: rgba(5, 7, 13, 0.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--orbit-line);
+        }
+
+        .orbit-hero {
+            min-height: 84vh;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 128px 24px 74px;
+            overflow: hidden;
+            background-image:
+                linear-gradient(90deg, rgba(5, 7, 13, 0.94) 0%, rgba(5, 7, 13, 0.80) 44%, rgba(5, 7, 13, 0.38) 100%),
+                linear-gradient(180deg, rgba(5, 7, 13, 0.15) 0%, rgba(5, 7, 13, 0.92) 100%),
+                url('images/orbit/orbit-hero.png');
+            background-size: cover;
+            background-position: center top;
+        }
+
+        .orbit-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: linear-gradient(180deg, rgba(0,0,0,0.65), transparent 82%);
+            pointer-events: none;
+        }
+
+        .orbit-hero-inner {
+            width: min(1180px, 100%);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .orbit-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            border: 1px solid rgba(56, 189, 248, 0.34);
+            border-radius: 999px;
+            background: rgba(8, 47, 73, 0.42);
+            color: #bae6fd;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .orbit-kicker span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--orbit-green);
+            box-shadow: 0 0 18px rgba(52, 211, 153, 0.8);
+        }
+
+        .orbit-hero h1 {
+            max-width: 840px;
+            font-size: clamp(38px, 7vw, 78px);
+            line-height: 1.05;
+            letter-spacing: 0;
+            font-weight: 900;
+            margin: 0 0 22px;
+        }
+
+        .orbit-hero h1 strong {
+            background: var(--orbit-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .orbit-hero-copy {
+            max-width: 720px;
+            color: #cbd5e1;
+            font-size: clamp(16px, 2vw, 20px);
+            line-height: 1.8;
+            margin: 0 0 34px;
+        }
+
+        .orbit-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 34px;
+        }
+
+        .orbit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 24px;
+            border-radius: 12px;
+            font-weight: 800;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: transform .2s ease, border-color .2s ease, background .2s ease;
+        }
+
+        .orbit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .orbit-btn.primary {
+            color: #07111f;
+            background: var(--orbit-gradient);
+            box-shadow: 0 18px 44px rgba(56, 189, 248, 0.20);
+        }
+
+        .orbit-btn.secondary {
+            color: var(--orbit-text);
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(255,255,255,0.16);
+        }
+
+        .orbit-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            max-width: 720px;
+        }
+
+        .orbit-metric {
+            border: 1px solid var(--orbit-line);
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.62);
+            padding: 16px;
+        }
+
+        .orbit-metric strong {
+            display: block;
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+
+        .orbit-metric span {
+            color: var(--orbit-muted);
+            font-size: 0.86rem;
+        }
+
+        .orbit-band {
+            border-top: 1px solid var(--orbit-line);
+            border-bottom: 1px solid var(--orbit-line);
+            background: #090d16;
+            padding: 18px 24px;
+        }
+
+        .orbit-band-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .orbit-band strong {
+            color: #e2e8f0;
+        }
+
+        .orbit-platforms {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .orbit-chip {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 0 12px;
+            border-radius: 999px;
+            border: 1px solid var(--orbit-line);
+            color: #dbeafe;
+            background: rgba(255,255,255,0.04);
+            font-size: 0.84rem;
+            font-weight: 700;
+        }
+
+        .orbit-section {
+            padding: 92px 24px;
+            background: var(--orbit-bg);
+        }
+
+        .orbit-section.alt {
+            background: #080b12;
+        }
+
+        .orbit-container {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .orbit-section-head {
+            max-width: 760px;
+            margin-bottom: 40px;
+        }
+
+        .orbit-label {
+            display: inline-block;
+            color: var(--orbit-sky);
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .orbit-section h2 {
+            font-size: clamp(28px, 4vw, 48px);
+            line-height: 1.18;
+            letter-spacing: 0;
+            margin: 0 0 14px;
+        }
+
+        .orbit-section-head p {
+            color: var(--orbit-muted);
+            font-size: 1.03rem;
+            line-height: 1.8;
+        }
+
+        .orbit-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .orbit-card {
+            border: 1px solid var(--orbit-line);
+            border-radius: 14px;
+            background: var(--orbit-panel);
+            padding: 24px;
+            min-height: 220px;
+        }
+
+        .orbit-card-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            color: #06111d;
+            font-weight: 900;
+            background: var(--orbit-gradient);
+        }
+
+        .orbit-card h3 {
+            font-size: 1.08rem;
+            margin: 0 0 10px;
+        }
+
+        .orbit-card p {
+            color: var(--orbit-muted);
+            font-size: 0.92rem;
+            line-height: 1.72;
+            margin: 0;
+        }
+
+        .orbit-showcase {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+            gap: 44px;
+            align-items: center;
+            margin-bottom: 74px;
+        }
+
+        .orbit-showcase:last-child {
+            margin-bottom: 0;
+        }
+
+        .orbit-showcase.flip {
+            grid-template-columns: minmax(320px, .95fr) minmax(0, 1.05fr);
+        }
+
+        .orbit-shot {
+            border: 1px solid var(--orbit-line);
+            border-radius: 16px;
+            overflow: hidden;
+            background: #111827;
+            box-shadow: 0 24px 70px rgba(0,0,0,0.34);
+        }
+
+        .orbit-shot-titlebar {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 12px 14px;
+            background: rgba(255,255,255,0.04);
+            border-bottom: 1px solid var(--orbit-line);
+        }
+
+        .orbit-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .orbit-dot.red { background: #fb7185; }
+        .orbit-dot.yellow { background: #facc15; }
+        .orbit-dot.green { background: #34d399; }
+
+        .orbit-window-title {
+            margin-left: auto;
+            color: var(--orbit-muted);
+            font-size: 0.76rem;
+            font-weight: 700;
+        }
+
+        .orbit-shot img {
+            width: 100%;
+            display: block;
+        }
+
+        .orbit-shot.tall {
+            max-height: 560px;
+        }
+
+        .orbit-shot.tall img {
+            height: 520px;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .orbit-output-pair {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .orbit-copy h3 {
+            font-size: clamp(24px, 3vw, 36px);
+            line-height: 1.24;
+            margin: 0 0 16px;
+        }
+
+        .orbit-copy p {
+            color: var(--orbit-muted);
+            line-height: 1.8;
+            margin: 0 0 20px;
+        }
+
+        .orbit-list {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .orbit-list li {
+            display: flex;
+            gap: 10px;
+            color: #d1d5db;
+            font-size: 0.94rem;
+            line-height: 1.6;
+        }
+
+        .orbit-list li::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--orbit-green);
+            margin-top: 10px;
+            flex: 0 0 auto;
+        }
+
+        .orbit-pipeline {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 12px;
+            counter-reset: orbit-step;
+        }
+
+        .orbit-step {
+            counter-increment: orbit-step;
+            border: 1px solid var(--orbit-line);
+            border-radius: 14px;
+            background: var(--orbit-panel-soft);
+            padding: 20px;
+            min-height: 152px;
+        }
+
+        .orbit-step::before {
+            content: '0' counter(orbit-step);
+            display: inline-block;
+            color: var(--orbit-amber);
+            font-weight: 900;
+            margin-bottom: 18px;
+        }
+
+        .orbit-step strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .orbit-step span {
+            display: block;
+            color: var(--orbit-muted);
+            font-size: 0.86rem;
+            line-height: 1.6;
+        }
+
+        .orbit-faq {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .orbit-faq-item {
+            border: 1px solid var(--orbit-line);
+            border-radius: 14px;
+            background: var(--orbit-panel);
+            padding: 22px;
+        }
+
+        .orbit-faq-item h3 {
+            font-size: 1rem;
+            margin: 0 0 10px;
+        }
+
+        .orbit-faq-item p {
+            color: var(--orbit-muted);
+            font-size: 0.92rem;
+            line-height: 1.72;
+            margin: 0;
+        }
+
+        .orbit-final {
+            padding: 86px 24px;
+            background:
+                linear-gradient(135deg, rgba(250, 204, 21, 0.12), rgba(56, 189, 248, 0.10)),
+                #070a12;
+            text-align: center;
+            border-top: 1px solid var(--orbit-line);
+        }
+
+        .orbit-final h2 {
+            font-size: clamp(30px, 5vw, 54px);
+            line-height: 1.18;
+            margin: 0 0 18px;
+        }
+
+        .orbit-final p {
+            color: #cbd5e1;
+            max-width: 700px;
+            margin: 0 auto 28px;
+            line-height: 1.8;
+        }
+
+        .kakao-float {
+            position: fixed;
+            right: 24px;
+            bottom: 30px;
+            z-index: 10001;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 48px;
+            padding: 0 18px;
+            border-radius: 999px;
+            background: rgba(60,29,0,0.92);
+            border: 1px solid rgba(254,229,0,0.45);
+            color: #fee500;
+            text-decoration: none;
+            font-weight: 800;
+            box-shadow: 0 8px 26px rgba(0,0,0,0.34);
+        }
+
+        @media (max-width: 960px) {
+            .orbit-hero {
+                min-height: 76vh;
+                background-position: 56% top;
+            }
+
+            .orbit-metrics,
+            .orbit-feature-grid,
+            .orbit-pipeline,
+            .orbit-faq {
+                grid-template-columns: 1fr;
+            }
+
+            .orbit-showcase,
+            .orbit-showcase.flip {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+
+            .orbit-showcase.flip .orbit-copy {
+                order: -1;
+            }
+
+            .orbit-output-pair {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .orbit-hero {
+                min-height: 68vh;
+                padding: 92px 18px 42px;
+            }
+
+            .orbit-hero h1 {
+                font-size: clamp(30px, 11vw, 44px);
+            }
+
+            .orbit-hero-copy { margin-bottom: 24px; }
+            .orbit-metrics { display: none; }
+
+            .orbit-band-inner {
+                align-items: flex-start;
+            }
+
+            .orbit-section {
+                padding: 70px 18px;
+            }
+
+            .orbit-shot.tall img {
+                height: 420px;
+            }
+
+            .kakao-float {
+                display: none;
+            }
+
+        }
+
+        @media (max-width: 520px) {
+            .orbit-actions .orbit-btn {
+                width: 100%;
+            }
+
+            .orbit-metric {
+                padding: 14px;
+            }
+
+            .orbit-card {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body class="orbit-page">
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
+                <span class="nav-brand-text">Leaders Pro</span>
+            </a>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
+                <a href="products.html" class="nav-link active" onclick="closeMobileMenu()">제품</a>
+                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">구매</a>
+                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
+                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
+                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">다운로드</a>
+                <a href="lookup.html" class="nav-link" onclick="closeMobileMenu()">주문 조회</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="orbit-hero">
+            <div class="orbit-hero-inner">
+                <div class="orbit-kicker"><span></span> Leaders Orbit</div>
+                <h1><strong>블로그스팟·워드프레스</strong>를 한 화면에서 굴리는 글로벌 블로그 자동화</h1>
+                <p class="orbit-hero-copy">
+                    키워드 입력부터 AI 콘텐츠 생성, 이미지, 발행, 원클릭 세팅, 웹마스터 등록까지.
+                    Leaders Pro 올인원 이용권 안에서 Naver 자동화, Leword와 함께 사용할 수 있습니다.
+                </p>
+                <div class="orbit-actions">
+                    <a href="pricing.html" class="orbit-btn primary">올인원 이용권 보기</a>
+                    <a href="#screens" class="orbit-btn secondary">실제 화면 보기</a>
+                </div>
+                <div class="orbit-metrics" aria-label="Leaders Orbit 핵심 지표">
+                    <div class="orbit-metric"><strong>2개 플랫폼</strong><span>WordPress REST API + Blogger API</span></div>
+                    <div class="orbit-metric"><strong>5개 글쓰기 모드</strong><span>SEO, 애드센스, 쇼핑, 내부링크, 페러프레이징</span></div>
+                    <div class="orbit-metric"><strong>8종 이미지 엔진</strong><span>Flow, ImageFX, Nano Banana, GPT Image 등</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="orbit-band" aria-label="지원 범위">
+            <div class="orbit-band-inner">
+                <strong>기간제 올인원 이용권 하나로 함께 열리는 기능</strong>
+                <div class="orbit-platforms">
+                    <span class="orbit-chip">Naver 자동화툴</span>
+                    <span class="orbit-chip">Blogspot · WordPress</span>
+                    <span class="orbit-chip">Leword 키워드 인텔리전스</span>
+                    <span class="orbit-chip">라이선스 기간 내 업데이트</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="orbit-section">
+            <div class="orbit-container">
+                <div class="orbit-section-head">
+                    <span class="orbit-label">Core System</span>
+                    <h2>글을 쓰는 도구가 아니라, 블로그 운영 흐름을 묶는 도구입니다.</h2>
+                    <p>
+                        Orbit은 콘텐츠 생성기, 이미지 생성기, 발행기, 블로그 세팅 자동화, 검색엔진 등록 보조 기능을 한 작업 흐름 안에 연결합니다.
+                    </p>
+                </div>
+                <div class="orbit-feature-grid">
+                    <article class="orbit-card"><div class="orbit-card-icon">AI</div><h3>콘텐츠 생성 파이프라인</h3><p>크롤링, 제목 생성, 본문 구성, FAQ, CTA, Schema.org까지 한 번에 조립합니다. SEO 글, 애드센스 승인 글, 쇼핑 글을 목적별로 분리합니다.</p></article>
+                    <article class="orbit-card"><div class="orbit-card-icon">WP</div><h3>WordPress 자동 발행</h3><p>WordPress REST API로 제목, HTML 본문, 카테고리, 이미지가 포함된 글을 발행합니다. 연결 정보를 저장해 반복 발행을 줄입니다.</p></article>
+                    <article class="orbit-card"><div class="orbit-card-icon">BG</div><h3>Blogspot 자동 발행</h3><p>Google Blogger API를 기반으로 Blogspot 포스팅을 지원합니다. 구글 계정 기반 운영자에게 맞춘 글로벌 블로그 흐름입니다.</p></article>
+                    <article class="orbit-card"><div class="orbit-card-icon">IMG</div><h3>썸네일·H2 이미지</h3><p>Flow, ImageFX, Nano Banana, GPT Image 계열을 목적에 맞게 선택하고, 섹션별 이미지와 썸네일을 본문에 맞춰 넣습니다.</p></article>
+                    <article class="orbit-card"><div class="orbit-card-icon">SET</div><h3>원클릭 블로그 세팅</h3><p>Blogspot 블로그 생성, 스킨 CSS, 파비콘, GA/Ads 메타 설정, Search Console 연결 보조와 WordPress CleanFlow 결과물을 지원합니다.</p></article>
+                    <article class="orbit-card"><div class="orbit-card-icon">SEO</div><h3>검색엔진 등록 보조</h3><p>Google Search Console, Bing, Daum, Naver Search Advisor, ZUM 웹마스터 흐름을 자동화 코드로 묶어 초기 세팅 시간을 줄입니다.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="orbit-section alt" id="screens">
+            <div class="orbit-container">
+                <div class="orbit-showcase">
+                    <div class="orbit-shot">
+                        <div class="orbit-shot-titlebar">
+                            <span class="orbit-dot red"></span>
+                            <span class="orbit-dot yellow"></span>
+                            <span class="orbit-dot green"></span>
+                            <span class="orbit-window-title">AI 블로그 포스팅</span>
+                        </div>
+                        <img src="images/orbit/orbit-keyword.png" alt="Leaders Orbit 키워드 입력 화면" loading="lazy">
+                    </div>
+                    <div class="orbit-copy">
+                        <span class="orbit-label">Keyword To Draft</span>
+                        <h3>키워드를 넣으면 목적에 맞는 글 구조부터 잡습니다.</h3>
+                        <p>
+                            WordPress 또는 Blogspot을 선택한 뒤 키워드를 넣으면, 콘텐츠 모드와 이미지 엔진 설정을 기준으로 글 작성 흐름이 시작됩니다.
+                        </p>
+                        <ul class="orbit-list">
+                            <li>SEO 최적화, 애드센스 승인, 쇼핑 글, 내부링크 글, 페러프레이징 모드 지원</li>
+                            <li>참고 URL 기반 작성과 키워드 기반 작성 흐름을 분리</li>
+                            <li>발행 전 설정을 확인하고 직접 조정할 수 있는 데스크톱 앱 구조</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="orbit-showcase flip">
+                    <div class="orbit-copy">
+                        <span class="orbit-label">One Click Publish</span>
+                        <h3>콘텐츠 생성부터 발행까지 한 번의 흐름으로 이어집니다.</h3>
+                        <p>
+                            생성 버튼을 누르면 크롤링, 제목, 본문, 이미지, 발행 단계가 순서대로 진행됩니다. 진행률과 로그가 남기 때문에 어디까지 처리됐는지 확인하기 쉽습니다.
+                        </p>
+                        <ul class="orbit-list">
+                            <li>단계별 진행률과 발행 로그 표시</li>
+                            <li>WordPress / Blogspot 플랫폼별 발행 분기</li>
+                            <li>예약 발행과 반복 발행 운영에 맞춘 캘린더 중심 화면</li>
+                        </ul>
+                    </div>
+                    <div class="orbit-shot">
+                        <div class="orbit-shot-titlebar">
+                            <span class="orbit-dot red"></span>
+                            <span class="orbit-dot yellow"></span>
+                            <span class="orbit-dot green"></span>
+                            <span class="orbit-window-title">자동 발행 준비</span>
+                        </div>
+                        <img src="images/orbit/orbit-ready.png" alt="Leaders Orbit 자동 발행 시작 화면" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="orbit-showcase">
+                    <div class="orbit-shot">
+                        <div class="orbit-shot-titlebar">
+                            <span class="orbit-dot red"></span>
+                            <span class="orbit-dot yellow"></span>
+                            <span class="orbit-dot green"></span>
+                            <span class="orbit-window-title">진행 로그</span>
+                        </div>
+                        <img src="images/orbit/orbit-progress.png" alt="Leaders Orbit 진행률과 발행 로그 화면" loading="lazy">
+                    </div>
+                    <div class="orbit-copy">
+                        <span class="orbit-label">Live Progress</span>
+                        <h3>긴 작업도 로그와 단계로 쪼개서 확인합니다.</h3>
+                        <p>
+                            AI 본문 생성, 소제목 생성, 구조 조립, 본문 완성, 발행 단계가 화면에 남습니다. 대량 생성 작업에서도 진행 상태를 놓치지 않게 설계했습니다.
+                        </p>
+                        <ul class="orbit-list">
+                            <li>생성 실패 구간을 로그로 확인</li>
+                            <li>이미지 엔진 실패 시 재시도와 폴백 흐름 지원</li>
+                            <li>발행 성공 결과를 기록해 운영 이력 관리</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="orbit-showcase flip">
+                    <div class="orbit-copy">
+                        <span class="orbit-label">Publishing Output</span>
+                        <h3>블로그스팟과 워드프레스 결과물까지 이어집니다.</h3>
+                        <p>
+                            Orbit은 앱 안에서 글을 생성하는 데서 끝나지 않고, 실제 블로그 발행과 스킨/검색엔진 세팅까지 이어지는 운영 도구입니다.
+                        </p>
+                        <ul class="orbit-list">
+                            <li>Blogspot 스킨 및 설정 자동화 흐름</li>
+                            <li>WordPress용 HTML 구조와 CleanFlow 결과물</li>
+                            <li>메타 태그, FAQ, CTA를 포함한 수익화형 글 구조</li>
+                        </ul>
+                    </div>
+                    <div class="orbit-output-pair">
+                        <div class="orbit-shot tall">
+                            <div class="orbit-shot-titlebar">
+                                <span class="orbit-dot red"></span>
+                                <span class="orbit-dot yellow"></span>
+                                <span class="orbit-dot green"></span>
+                                <span class="orbit-window-title">Blogspot 결과</span>
+                            </div>
+                            <img src="images/orbit/orbit-blogspot.png" alt="Leaders Orbit Blogspot 발행 결과 화면" loading="lazy">
+                        </div>
+                        <div class="orbit-shot tall">
+                            <div class="orbit-shot-titlebar">
+                                <span class="orbit-dot red"></span>
+                                <span class="orbit-dot yellow"></span>
+                                <span class="orbit-dot green"></span>
+                                <span class="orbit-window-title">WordPress 결과</span>
+                            </div>
+                            <img src="images/orbit/orbit-wordpress-post.png" alt="Leaders Orbit WordPress 발행 결과 화면" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="orbit-section">
+            <div class="orbit-container">
+                <div class="orbit-section-head">
+                    <span class="orbit-label">Workflow</span>
+                    <h2>초기 세팅부터 반복 발행까지, 한 번에 이어지는 운영 순서</h2>
+                    <p>처음에는 연결과 세팅을 줄이고, 이후에는 키워드와 발행 루틴만 남기는 흐름을 목표로 합니다.</p>
+                </div>
+                <div class="orbit-pipeline">
+                    <div class="orbit-step"><strong>플랫폼 연결</strong><span>WordPress REST API 또는 Blogger OAuth 기반으로 발행 경로를 연결합니다.</span></div>
+                    <div class="orbit-step"><strong>블로그 세팅</strong><span>스킨, 메타, 검색엔진 등록 보조, 기본 설정을 가능한 범위에서 자동화합니다.</span></div>
+                    <div class="orbit-step"><strong>키워드 입력</strong><span>Leword 또는 직접 키워드로 주제를 정하고 콘텐츠 모드를 선택합니다.</span></div>
+                    <div class="orbit-step"><strong>AI 생성</strong><span>본문, FAQ, CTA, 이미지, 썸네일, Schema 구조를 함께 만듭니다.</span></div>
+                    <div class="orbit-step"><strong>발행 기록</strong><span>성공/실패 로그와 발행 이력을 남겨 반복 운영을 관리합니다.</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="orbit-section alt">
+            <div class="orbit-container">
+                <div class="orbit-section-head">
+                    <span class="orbit-label">FAQ</span>
+                    <h2>자주 묻는 질문</h2>
+                </div>
+                <div class="orbit-faq">
+                    <article class="orbit-faq-item"><h3>기존 네이버 자동화툴과 따로 구매해야 하나요?</h3><p>아니요. 현재 사이트 요금제는 기간제 올인원 이용권 기준으로 정리되어 있어, 이용 기간 안에서 Naver 자동화툴, Orbit, Leword를 함께 사용할 수 있는 방향입니다.</p></article>
+                    <article class="orbit-faq-item"><h3>수익이나 애드센스 승인을 보장하나요?</h3><p>보장하지 않습니다. Orbit은 콘텐츠 생성과 발행, 세팅 시간을 줄이는 도구입니다. 결과는 블로그 상태, 주제, 품질, 운영 방식에 따라 달라집니다.</p></article>
+                    <article class="orbit-faq-item"><h3>WordPress와 Blogspot을 모두 써야 하나요?</h3><p>아닙니다. 둘 중 하나만 연결해도 사용할 수 있습니다. 여러 사이트를 운영하는 경우 한 앱에서 플랫폼별 흐름을 나눠 관리할 수 있습니다.</p></article>
+                    <article class="orbit-faq-item"><h3>컴퓨터에 설치해서 쓰는 방식인가요?</h3><p>네. LEADERNAM Orbit은 Windows 데스크톱 앱 기준으로 운영됩니다. 라이선스 인증 후 앱에서 연결 정보와 발행 설정을 관리합니다.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="orbit-final">
+            <div class="orbit-container">
+                <h2>네이버만이 아니라, 구글형 블로그까지 같이 운영하세요.</h2>
+                <p>
+                    한 가지 툴만 따로 사는 구조보다, 기간 안에서 전체 제품군을 같이 쓰는 편이 사용자 부담을 줄입니다.
+                    Orbit은 그 올인원 구성에서 Blogspot과 WordPress 운영을 맡습니다.
+                </p>
+                <div class="orbit-actions" style="justify-content:center; margin-bottom:0">
+                    <a href="pricing.html" class="orbit-btn primary">올인원 구매 가격 보기</a>
+                    <a href="products.html" class="orbit-btn secondary">다른 제품 보기</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" title="1:1 카카오톡 문의">
+        <span>문의</span>
+    </a>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
+                <span>Leaders Pro</span>
+            </div>
+            <div class="footer-links">
+                <a href="terms.html">이용약관</a>
+                <a href="refund.html">환불정책</a>
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="lookup.html">주문 조회</a>
+                <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener">고객 문의</a>
+            </div>
+            <div class="footer-biz">
+                <p>상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802</p>
+                <p>주소: 경남 김해시 장유로334번길9 107동 3105호</p>
+                <p>이메일: tjdgus24280@naver.com | 전화: 010-7545-1645</p>
+            </div>
+            <p class="footer-copy">© 2026 Leaders Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+        function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
+        function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
+    </script>
+</body>
+</html>
