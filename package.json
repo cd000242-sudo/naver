@@ -151,6 +151,7 @@
       "node_modules/patchright-core/**/*",
       "node_modules/ffmpeg-static/**/*",
       "node_modules/sharp/**/*",
+      "node_modules/@img/**/*",
       "node_modules/@imgly/**/*",
       "node_modules/.bin/**/*",
       "dist/prompts/**/*"
@@ -189,6 +190,8 @@
       "darkModeSupport": true,
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
+      "singleArchFiles": "**/node_modules/@img/*darwin*/**/*",
+      "x64ArchFiles": "**/node_modules/@img/*darwin*/**/*",
       "entitlements": "build/entitlements.mac.plist",
       "entitlementsInherit": "build/entitlements.mac.plist",
       "extendInfo": {
