@@ -91,6 +91,8 @@ import { TrendMonitor, type TrendAlertEvent } from './monitor/trendMonitor.js';
 import { PatternAnalyzer } from './learning/patternAnalyzer.js';
 import { PostAnalytics, type PostPerformance } from './analytics/postAnalytics.js';
 import { SmartScheduler, type ScheduledPost as SmartScheduledPost } from './scheduler/smartScheduler.js';
+import { resolvePublishedUrl } from './scheduler/publishedUrlResolver.js';
+import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
 import { KeywordAnalyzer, type KeywordCompetition, type BlueOceanKeyword } from './analytics/keywordAnalyzer.js';
 // ✅ [v2.10.36] BestProductCollector main.ts 미사용 — 다른 파일이 자체 인스턴스 생성
 //   기존: 부팅 시 클래스 평가 + new BestProductCollector() 인스턴스 생성 (사용처 0)
@@ -351,6 +353,10 @@ const BUILD_RELEASE_DATE = new Date('2025-02-16T00:00:00Z');
 let loginWindow: BrowserWindow | null = null;
 let isLicenseValid = false;
 
+function isE2ETestMode(): boolean {
+  return process.env.E2E_TEST === '1';
+}
+
 // ✅ 다중계정 발행 즉시 중지 관련 변수 (AutomationService와 동기화)
 // 레거시 호환을 위해 변수는 유지하되, AutomationService도 함께 업데이트
 let multiAccountAbortFlag = false;
@@ -465,6 +471,11 @@ setTimeout(() => {
 
 // 라이선스 체크 헬퍼 함수
 async function ensureLicenseValid(): Promise<boolean> {
+  if (isE2ETestMode()) {
+    debugLog('[Main] ensureLicenseValid: E2E_TEST mode, skipping license gate');
+    return true;
+  }
+
   // 개발 모드에서도 테스트하려면 FORCE_LICENSE_CHECK=true 환경 변수 설정
   const forceLicenseCheck = process.env.FORCE_LICENSE_CHECK === 'true';
   const currentIsPackaged = app.isPackaged; // isPackaged 전역 변수 대신 실제 값 사용 고려
@@ -1363,7 +1374,7 @@ smartScheduler.setPublishCallback(async (post) => {
       slowMo: 50,
     }, (msg: string) => { console.log(msg); sendLog(msg); });
     
-    await schedulerBot.run({
+    const runResult = await schedulerBot.run({
       title: post.title,
       content: post.keyword || post.title, // SmartScheduler는 키워드 기반이므로 keyword를 content로 전달
       publishMode: 'publish',
@@ -1371,7 +1382,11 @@ smartScheduler.setPublishCallback(async (post) => {
     
     await schedulerBot.closeBrowser().catch(() => undefined);
     
-    const publishedUrl = `https://blog.naver.com/${naverId}`;
+    const publishedUrl = resolvePublishedUrl(
+      runResult,
+      () => schedulerBot.getPublishedUrl(),
+      `https://blog.naver.com/${naverId}`,
+    );
     sendLog(`✅ SmartScheduler 예약 발행 완료: ${post.title}`);
     return publishedUrl;
   } catch (error) {
@@ -1464,7 +1479,13 @@ function sendLog(message: string): void {
   mainWindow?.webContents.send('automation:log', message);
 }
 
-function sendStatus(status: { success: boolean; cancelled?: boolean; message?: string; url?: string }): void {
+function sendStatus(status: {
+  success: boolean;
+  cancelled?: boolean;
+  message?: string;
+  url?: string;
+  failureCode?: string;
+}): void {
   mainWindow?.webContents.send('automation:status', status);
 }
 
@@ -1740,6 +1761,11 @@ async function createWindow(): Promise<void> {
 
     // ✅ [2026-04-03] X 버튼 = 확인 다이얼로그 표시 (실수로 종료 방지)
     mainWindow.on('close', (event) => {
+      if (isE2ETestMode()) {
+        (globalThis as any).isQuitting = true;
+        return;
+      }
+
       console.log('[Main] 창 닫기 이벤트 발생');
 
       if ((globalThis as any).isQuitting) {
@@ -2742,7 +2768,7 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
             console.log(`[Main] 발행 취소: 쿼터 환불 완료 (현재: ${refunded.publish})`);
           } catch (e) { console.error('[Main] 쿼터 환불 오류:', e); }
         }
-        sendStatus({ success: false, cancelled: true, message: result.message });
+        sendStatus({ success: false, cancelled: true, message: result.message, failureCode: 'USER_CANCELLED' });
       } else {
         if (preConsumed) {
           try {
@@ -2750,7 +2776,8 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
             console.log(`[Main] 발행 실패: 쿼터 환불 완료 (현재: ${refunded.publish})`);
           } catch (e) { console.error('[Main] 쿼터 환불 오류:', e); }
         }
-        sendStatus({ success: false, message: result.message });
+        const failureCode = (result as any).failureCode || classifyPublishFailure(result.message).code;
+        sendStatus({ success: false, message: result.message, failureCode });
       }
 
       return result;
@@ -2764,9 +2791,10 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
       }
       const message = (error as Error).message || '자동화 실행 중 오류가 발생했습니다.';
       console.error('[Main] automation:run 오류:', message);
-      sendStatus({ success: false, message });
+      const failureCode = classifyPublishFailure(error).code;
+      sendStatus({ success: false, message, failureCode });
       AutomationService.stopRunning();
-      return { success: false, message };
+      return { success: false, message, failureCode };
     }
   })();
 
@@ -4094,7 +4122,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
     sendLog(`🚀 다중계정 동시발행 시작: ${accountIds.length}개 계정`);
 
-    const results: Array<{ accountId: string; success: boolean; message?: string; url?: string }> = [];
+    const results: Array<{ accountId: string; success: boolean; message?: string; url?: string; failureCode?: string }> = [];
 
     // ✅ [2026-01-20] 순차 예약 시간 계산을 위한 기준값
     let baseScheduleDate = options?.scheduleDate;
@@ -4576,11 +4604,13 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         //  새 엔진 호출
         const result = await AutomationService.executePostCycle(payload as any);
 
+        const failureCode = result.success ? undefined : ((result as any).failureCode || classifyPublishFailure(result.message).code);
         results.push({
           accountId,
           success: result.success,
           message: result.message,
           url: result.url,
+          failureCode,
         });
 
         if (result.success) {
@@ -4599,7 +4629,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
       } catch (error) {
         const errorMsg = (error as Error).message;
-        results.push({ accountId, success: false, message: errorMsg });
+        results.push({ accountId, success: false, message: errorMsg, failureCode: classifyPublishFailure(error).code });
         sendLog(`❌ [${account.name}] 발행 오류: ${errorMsg}`);
       }
     }
@@ -6499,6 +6529,12 @@ async function createLoginWindow(): Promise<BrowserWindow> {
 async function checkLicense(): Promise<boolean> {
   debugLog('[checkLicense] ========== START ==========');
 
+  if (isE2ETestMode()) {
+    debugLog('[checkLicense] E2E_TEST mode: skipping login/license windows');
+    isLicenseValid = true;
+    return true;
+  }
+
   // 개발 모드에서 FORCE_LICENSE_CHECK=true가 아니면 라이선스 체크 스킵
   const forceLicenseCheck = process.env.FORCE_LICENSE_CHECK === 'true';
   debugLog(`[checkLicense] isPackaged: ${app.isPackaged}, forceLicenseCheck: ${forceLicenseCheck}`);
@@ -6969,6 +7005,8 @@ if (!gotTheLock) {
 let isQuittingForLogout = false;
 
 app.on('before-quit', (event) => {
+  if (isE2ETestMode()) return;
+
   if (isQuittingForLogout) return; // 재귀 방지 (logoutFromServer 완료 후 app.quit() 재호출 시)
   event.preventDefault();
   isQuittingForLogout = true;
@@ -7439,7 +7477,8 @@ app.whenReady().then(async () => {
     //   trade-off: deny(점검 모드/차단/구버전)는 드물지만 발생 시 splash/메인 잠깐 보였다가 종료됨
     //               점검 다이얼로그가 사용자에게 정상 표시되므로 UX 손실 < freeze 제거 가치
     debugLog('[Main] ⚡ Performing pre-launch server sync (background, non-blocking)...');
-    performServerSync(false).then((res) => {
+    if (!isE2ETestMode()) {
+      performServerSync(false).then((res) => {
       if (!res.allowed) {
         debugLog(`[Main] ⛔ Pre-launch sync denied (background): ${res.error}`);
         setTimeout(() => {
@@ -7451,7 +7490,10 @@ app.whenReady().then(async () => {
       }
     }).catch((e) => {
       debugLog(`[Main] Pre-launch sync error (background, 무시): ${(e as Error).message}`);
-    });
+      });
+    } else {
+      debugLog('[Main] E2E_TEST mode: skipping pre-launch server sync');
+    }
 
     debugLog('[Main] App ready, checking license...');
 
@@ -7820,7 +7862,7 @@ app.whenReady().then(async () => {
               console.log(`[Scheduler] 자동화 실행 시작: ${postData.title}`);
               sendLog(`🚀 예약 발행 실행 중: ${postData.title}`);
 
-              await schedulerAutomation.run(runOptions);
+              const automationResult = await schedulerAutomation.run(runOptions);
 
               console.log(`[Scheduler] ✅ 예약 발행 성공: ${postData.title}`);
               sendLog(`✅ 예약 발행 완료: ${postData.title}`);
@@ -7830,8 +7872,12 @@ app.whenReady().then(async () => {
               automationMap.delete(normalizedId);
               if (automation === schedulerAutomation) automation = null;
 
-              // ✅ 발행된 글 URL 가져오기 (네이버 블로그 URL 구성)
-              const publishedUrl = `https://blog.naver.com/${accountNaverId}`;
+              // ✅ 발행된 글 URL 가져오기 (실제 발행 URL 우선, 없을 때만 블로그 홈 fallback)
+              const publishedUrl = resolvePublishedUrl(
+                automationResult,
+                () => schedulerAutomation.getPublishedUrl(),
+                `https://blog.naver.com/${accountNaverId}`,
+              );
 
               // ✅ 상태를 published로 변경하고 발행 정보 저장
               post.status = 'published';
@@ -7852,6 +7898,7 @@ app.whenReady().then(async () => {
 
             } catch (publishError) {
               const errorMsg = (publishError as Error).message;
+              const failureCode = classifyPublishFailure(publishError).code;
               console.error(`[Scheduler] ❌ 예약 발행 실패: ${post.title}`, errorMsg);
               sendLog(`❌ 예약 발행 실패: ${post.title} - ${errorMsg}`);
 
@@ -7880,7 +7927,7 @@ app.whenReady().then(async () => {
 
               // ✅ UI에 오류 알림
               mainWindow?.webContents.send('automation:log', `❌ 예약 발행 실패: ${post.title} - ${errorMsg}`);
-              mainWindow?.webContents.send('automation:status', { success: false, message: `예약 발행 실패: ${errorMsg}` });
+              mainWindow?.webContents.send('automation:status', { success: false, message: `예약 발행 실패: ${errorMsg}`, failureCode });
             }
           }
         }

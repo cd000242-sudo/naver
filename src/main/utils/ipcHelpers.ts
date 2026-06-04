@@ -30,7 +30,13 @@ export function sendLog(message: string): void {
 /**
  * 렌더러에 상태 전송
  */
-export function sendStatus(status: { success: boolean; cancelled?: boolean; message?: string; url?: string }): void {
+export function sendStatus(status: {
+    success: boolean;
+    cancelled?: boolean;
+    message?: string;
+    url?: string;
+    failureCode?: string;
+}): void {
     mainWindowRef?.webContents.send('automation:status', status);
 }
 

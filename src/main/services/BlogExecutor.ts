@@ -15,6 +15,7 @@ import type { IExecutionDependencies, IAutomationInstance } from '../../types/au
 import { AutomationService, type PostCyclePayload, type PostCycleContext, type PostCycleResult } from './AutomationService.js';
 import { Logger } from '../utils/logger.js';
 import { sendLog, sendStatus, sendProgress } from '../utils/ipcHelpers.js';
+import { classifyPublishFailure } from '../../automation/publishFailureClassifier.js';
 
 // ✅ [Phase 4B] ExecutionDependencies는 types/automation.ts에서 정의 — 재export
 export type ExecutionDependencies = IExecutionDependencies;
@@ -407,10 +408,10 @@ export async function executePublishing(
     automation: IAutomationInstance,
     payload: PostCyclePayload,
     processedImages: ProcessedImage[]
-): Promise<{ success: boolean; url?: string; message?: string }> {
+): Promise<{ success: boolean; url?: string; message?: string; failureCode?: import('../../automation/publishFailureClassifier.js').PublishFailureCode }> {
     // 취소 체크
     if (AutomationService.isCancelRequested()) {
-        return { success: false, message: '사용자가 취소했습니다.' };
+        return { success: false, message: '사용자가 취소했습니다.', failureCode: 'USER_CANCELLED' };
     }
 
     // ✅ [2026-05-26 v2.10.379 SPEC-NAVER-PROTECTION-2026 P2 §2.2 wiring]
@@ -427,7 +428,7 @@ export async function executePublishing(
                 const msg = `⚠️ ${_accountId}: 시간당 발행 한도 도달 (today: ${todayCount}건). 1시간 내 추가 발행 비추천.`;
                 if (strictMode) {
                     sendLog(`🛡️ ${msg} — STRICT 모드 hard-block`);
-                    return { success: false, message: `STRICT_HOURLY_PER_ACCOUNT=1: ${msg}` };
+                    return { success: false, message: `STRICT_HOURLY_PER_ACCOUNT=1: ${msg}`, failureCode: 'PUBLISH_CONDITION' };
                 } else {
                     sendLog(`⚠️ ${msg} (STRICT_HOURLY_PER_ACCOUNT=1로 hard-block 가능)`);
                 }
@@ -535,15 +536,22 @@ export async function executePublishing(
             sendStatus({ success: true, url: result.url });
         } else {
             sendLog(`❌ 발행 실패: ${result.message}`);
-            sendStatus({ success: false, message: result.message });
+            const failure = classifyPublishFailure(result.message);
+            sendStatus({ success: false, message: result.message, failureCode: failure.code });
+        }
+
+        if (!result.success) {
+            const failure = classifyPublishFailure(result.message);
+            return { ...result, failureCode: failure.code };
         }
 
         return result;
     } catch (error) {
         const message = (error as Error).message || '발행 중 오류가 발생했습니다.';
         sendLog(`❌ 발행 오류: ${message}`);
-        sendStatus({ success: false, message });
-        return { success: false, message };
+        const failure = classifyPublishFailure(error);
+        sendStatus({ success: false, message, failureCode: failure.code });
+        return { success: false, message, failureCode: failure.code };
     }
 }
 
@@ -661,8 +669,9 @@ export async function runFullPostCycle(
         const account = await resolveAccount(payload, context);
         if (!account) {
             const message = '네이버 아이디와 비밀번호를 입력해주세요.';
-            sendStatus({ success: false, message });
-            return { success: false, message };
+            const failure = classifyPublishFailure(message);
+            sendStatus({ success: false, message, failureCode: failure.code });
+            return { success: false, message, failureCode: failure.code };
         }
         accountId = account.accountId;
 
@@ -713,12 +722,14 @@ export async function runFullPostCycle(
             success: result.success,
             url: result.url,
             message: result.message,
+            failureCode: result.failureCode,
         };
 
     } catch (error) {
         const message = (error as Error).message || '알 수 없는 오류가 발생했습니다.';
         Logger.error('[BlogExecutor] 발행 사이클 오류', error as Error);
-        sendStatus({ success: false, message });
+        const failure = classifyPublishFailure(error);
+        sendStatus({ success: false, message, failureCode: failure.code });
         // ✅ [2026-04-05 FIX] stopRunning을 즉시 호출 — 재실행 시 "이미 실행 중" 에러 방지
         AutomationService.stopRunning();
         // ✅ [v1.4.55 FIX] cleanup을 await — 브라우저 종료 전에 리턴하면 다음 발행 hang
@@ -727,7 +738,7 @@ export async function runFullPostCycle(
         } catch (e) {
             Logger.error('[BlogExecutor] cleanup 오류 (무시됨)', e as Error);
         }
-        return { success: false, message };
+        return { success: false, message, failureCode: failure.code };
     }
 
     // ✅ [2026-04-05 FIX] stopRunning을 즉시 호출 후 cleanup 처리

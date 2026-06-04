@@ -43,6 +43,7 @@ import {
 } from './automation/selectors';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, humanKeyboardType } from './automation/typingUtils.js';
+import { resolveImmediatePublishOutcome } from './automation/publishOutcomeResolver';
 
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
 // ✅ [2026-03-27 FIX] 매번 Escape 전송 → 팝업 존재 시에만 조건부 Escape
@@ -3156,6 +3157,8 @@ export class NaverBlogAutomation {
     const SOUND_INTERVAL = 30000; // 30초마다 알림 소리
     let stuckOnLoginPageSince: number | null = null; // 로그인 페이지에 머무른 시점
     const STUCK_THRESHOLD = 15000; // 15초 이상 로그인 페이지에 머물면 사용자 개입 필요로 판단
+    let genericLoginStallDetected = false; // 캡차/2FA가 아닌 로그인 페이지 정체
+    const GENERIC_LOGIN_STALL_TIMEOUT = 90000; // 자동 클릭 무응답은 10분까지 끌지 않는다
 
     // 🔊 [2026-03-30 FIX] 알림 소리 재생 헬퍼 — execFile + timeout/unref로 좀비 프로세스 방지
     const playAlertSound = async (count: number = 3) => {
@@ -3677,8 +3680,20 @@ export class NaverBlogAutomation {
             }
 
             const stuckDuration = Date.now() - stuckOnLoginPageSince;
+            if (genericLoginStallDetected && stuckDuration > GENERIC_LOGIN_STALL_TIMEOUT) {
+              const stalledUrl = page.url();
+              const hint = pageAnalysis.bodyTextSnippet?.substring(0, 180) || '';
+              throw new Error(
+                `자동 로그인 응답 없음: 로그인 버튼 클릭 후에도 ${Math.round(stuckDuration / 1000)}초 동안 로그인 페이지에 머물러 있습니다.\n` +
+                `캡차/2단계 인증은 감지되지 않았습니다.\n` +
+                `현재 URL: ${stalledUrl}\n` +
+                `화면 일부: ${hint}\n` +
+                `브라우저에서 버튼 상태를 확인하거나 반자동 모드로 다시 시도해주세요.`
+              );
+            }
             if (stuckDuration > STUCK_THRESHOLD && !challengeDetected) {
               challengeDetected = true;
+              genericLoginStallDetected = true;
               lastSoundTime = Date.now();
 
               this.log('');
@@ -5414,6 +5429,7 @@ export class NaverBlogAutomation {
                   if (retryUrl !== beforeUrl && /blog\.naver\.com/i.test(retryUrl)) {
                     this.log(`✅ 재확인 후 URL 변경 확인: ${retryUrl}`);
                     this.log(`POST_URL: ${retryUrl}`);
+                    this.publishedUrl = retryUrl; // ✅ URL 저장
                   } else {
                     throw new Error('발행이 완료되지 않았습니다. 발행 버튼을 다시 클릭하거나 수동으로 확인해주세요.');
                   }
@@ -5451,6 +5467,7 @@ export class NaverBlogAutomation {
                 if (beforeUrl !== afterUrl && /blog\.naver\.com/i.test(afterUrl)) {
                   this.log('✅ 블로그 글이 즉시발행되었습니다.');
                   this.log(`POST_URL: ${afterUrl}`);
+                  this.publishedUrl = afterUrl; // ✅ URL 저장
                 } else {
                   throw new Error('발행이 완료되지 않았습니다. 발행 버튼이 비활성화되어 있거나 네비게이션이 발생하지 않았습니다.');
                 }
@@ -5606,9 +5623,11 @@ export class NaverBlogAutomation {
               if (beforeUrl !== afterUrl && /blog\.naver\.com/i.test(afterUrl)) {
                 this.log('✅ 블로그 글이 즉시발행되었습니다.');
                 this.log(`POST_URL: ${afterUrl}`);
+                this.publishedUrl = afterUrl; // ✅ URL 저장
               } else if (!afterUrl.includes('GoBlogWrite') && !afterUrl.includes('blogPostWrite')) {
                 this.log('✅ 블로그 글이 발행되었습니다.');
                 this.log(`POST_URL: ${afterUrl}`);
+                this.publishedUrl = afterUrl; // ✅ URL 저장
               } else {
                 // 추가 확인
                 await this.delay(3000);
@@ -5616,6 +5635,7 @@ export class NaverBlogAutomation {
                 if (finalUrl !== beforeUrl) {
                   this.log('✅ 블로그 글이 즉시발행되었습니다.');
                   this.log(`POST_URL: ${finalUrl}`);
+                  this.publishedUrl = finalUrl; // ✅ URL 저장
                 } else {
                   throw new Error('발행이 완료되지 않았습니다. 에디터 페이지에 머물러 있습니다.');
                 }
@@ -8949,7 +8969,11 @@ export class NaverBlogAutomation {
         await this.applyPlainContent(resolvedOptions);
       }
 
+      const beforePublishUrl = this.page?.url() || '';
       await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
+      if (resolvedOptions.publishMode === 'publish') {
+        this.verifyImmediatePublishOutcome(beforePublishUrl);
+      }
       this.log('🎉 포스팅이 성공적으로 완료되었습니다!');
       const modeText = resolvedOptions.publishMode === 'draft' ? '임시저장' :
         resolvedOptions.publishMode === 'publish' ? '즉시발행' :
@@ -9299,7 +9323,11 @@ export class NaverBlogAutomation {
 
       // ✅ [2026-02-17] 전환점 로깅: 콘텐츠 작성 → 발행 프로세스
       this.log('\n🔄 콘텐츠 작성 완료 → 발행 프로세스 시작...');
+      const beforePublishUrl = this.page?.url() || '';
       await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
+      if (resolvedOptions.publishMode === 'publish') {
+        this.verifyImmediatePublishOutcome(beforePublishUrl);
+      }
 
       // ✅ 자동화 완료 후 에디터를 편집 가능한 상태로 활성화
       await this.activateEditorForEditing();
@@ -9427,8 +9455,28 @@ export class NaverBlogAutomation {
   }
 
   // ✅ 발행된 URL getter
+  private verifyImmediatePublishOutcome(beforeUrl: string): void {
+    const currentUrl = this.page?.url() || '';
+    const outcome = resolveImmediatePublishOutcome({
+      beforeUrl,
+      afterUrl: this.publishedUrl,
+      finalUrl: currentUrl,
+    });
+
+    if (!outcome.success) {
+      throw new Error(`[${outcome.code}] ${outcome.message}`);
+    }
+
+    if (outcome.url) {
+      this.publishedUrl = outcome.url;
+    }
+
+    if (outcome.needsManualUrlCheck) {
+      this.log(`[PublishGuard] outcome=${outcome.reason}, url=${outcome.url || this.publishedUrl || '(none)'}`);
+    }
+  }
+
   getPublishedUrl(): string | null {
     return this.publishedUrl;
   }
 }
-

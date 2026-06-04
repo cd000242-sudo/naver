@@ -14,7 +14,7 @@
  *   if (!ok) return; // 모달 표시됨, 기능 실행 차단
  */
 
-type LockFeatureKey = 'continuous' | 'multi-account-fullauto' | 'multi-account-manage';
+type LockFeatureKey = 'continuous' | 'multi-account-fullauto' | 'multi-account-manage' | 'image-gen';
 
 interface LockCopy {
   title: string;
@@ -49,6 +49,15 @@ const COPY_TABLE: Record<LockFeatureKey, LockCopy> = {
       '키우는 시간이 4배 빨라져요',
     ],
     proof: '2,847명이 다중계정으로 운영 중',
+  },
+  'image-gen': {
+    title: '이미지 생성 스튜디오',
+    valuePoints: [
+      '프롬프트만 입력하면 AI가 고퀄 이미지를 대량 생성',
+      '썸네일·본문 이미지를 클릭 한 번에 일괄 제작',
+      '나노바나나 Pro 엔진 — 저작권 걱정 없는 내 이미지',
+    ],
+    proof: 'Pro 구독 시 이미지 생성 무제한 이용',
   },
 };
 
@@ -240,16 +249,22 @@ function escapeHtml(s: string): string {
  * @returns true = 유료(허용), false = 무료(lock 모달 표시됨, 호출자는 즉시 return해야 함)
  */
 export async function checkFeatureLockAndShow(featureKey: LockFeatureKey): Promise<boolean> {
-  let isFreeLicense = false;
+  let licenseType: string | undefined;
   try {
     const result = await (window as any).api?.getLicense?.();
-    isFreeLicense = result?.license?.licenseType === 'free';
+    licenseType = result?.license?.licenseType;
   } catch {
     // 라이선스 확인 실패 시 안전하게 free로 간주 (paywall 표시)
-    isFreeLicense = true;
+    licenseType = 'free';
   }
 
-  if (!isFreeLicense) return true; // 유료 사용자 → 통과
+  // image-gen은 무료 체험판(free)뿐 아니라 기간제 체험(trial)까지 차단 → 유료 전환 유도.
+  //   그 외 기능(연속발행/다중계정)은 기존 정책 그대로 free만 차단.
+  const blocked = featureKey === 'image-gen'
+    ? (licenseType === 'free' || licenseType === 'trial')
+    : (licenseType === 'free');
+
+  if (!blocked) return true; // 유료 사용자 → 통과
 
   showLockModal(featureKey);
   return false; // 무료 → 차단

@@ -141,12 +141,36 @@ describe('getAccountConsistentProfile 시그니처', () => {
     expect(src).toMatch(/userAgent:\s*string\s*\|\s*null/);
     expect(src).toMatch(/screen:\s*{\s*width:\s*number;\s*height:\s*number\s*}/);
     expect(src).toMatch(/webGL:\s*{\s*vendor:\s*string;\s*renderer:\s*string\s*}/);
+    expect(src).toMatch(/timezoneId:\s*string/);
+    expect(src).toMatch(/locale:\s*string/);
   });
 
   it('userAgent === null (Stealth Plugin 위임) 보호', () => {
     const src = readSrc(BSM_PATH);
     // Stealth Plugin이 실제 Chrome 버전을 자동 동기화 — v2.10.357 이후
     expect(src).toMatch(/userAgent:\s*string\s*\|\s*null\s*=\s*null/);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════
+// 4-B. Locale/timezone consistency — 한국 네이버 계정 fingerprint 일관성
+// ═══════════════════════════════════════════════════════════════════
+describe('P3 fingerprint completeness: locale/timezone consistency', () => {
+  it('Chrome launch args에 --lang=ko-KR가 포함된다', () => {
+    const src = readSrc(BSM_PATH);
+    expect(src).toMatch(/--lang=ko-KR/);
+  });
+
+  it('timezoneId는 Asia/Seoul로 고정되고 page.emulateTimezone에 전달된다', () => {
+    const src = readSrc(BSM_PATH);
+    expect(src).toMatch(/const\s+timezoneId\s*=\s*'Asia\/Seoul'/);
+    expect(src).toMatch(/page\.emulateTimezone\(profile\.timezoneId\)/);
+  });
+
+  it('navigator.language와 navigator.languages가 ko-KR 계열로 맞춰진다', () => {
+    const src = readSrc(BSM_PATH);
+    expect(src).toMatch(/navigator,\s*['"]language['"][\s\S]{0,100}ko-KR/);
+    expect(src).toMatch(/navigator,\s*['"]languages['"][\s\S]{0,140}ko-KR/);
   });
 });
 

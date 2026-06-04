@@ -54,6 +54,7 @@ export interface SurvivalResult {
 
 const FILE_NAME = 'cohort-events.json';
 const DAY_MS = 24 * 60 * 60 * 1000;
+const TIMESTAMP_JITTER_MS = 60 * 1000;
 
 /**
  * Anonymize an accountId via SHA-256. Deterministic — same input → same hash.
@@ -82,7 +83,6 @@ function getFilePath(): string {
   const override = process.env.COHORT_STORE_PATH_OVERRIDE;
   if (override) return override;
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { app } = require('electron');
     return path.join(app.getPath('userData'), FILE_NAME);
   } catch {
@@ -191,7 +191,7 @@ export async function computeSurvivalRate(
     totalCohort++;
     const suspensionsForAcc = suspensions.get(accId) ?? [];
     const suspendedInWindow = suspensionsForAcc.some(
-      (sTs) => sTs - publishTs <= windowMs && sTs >= publishTs,
+      (sTs) => sTs - publishTs <= windowMs + TIMESTAMP_JITTER_MS && sTs >= publishTs,
     );
     if (!suspendedInWindow) survived++;
   }

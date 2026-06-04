@@ -14,6 +14,7 @@
 
 import { test, expect, _electron as electron, ElectronApplication, Page } from '@playwright/test';
 import path from 'path';
+import { closeElectronApp, waitForMainWindow } from './electronTestUtils';
 
 let app: ElectronApplication;
 let mainWindow: Page;
@@ -30,12 +31,11 @@ test.beforeAll(async () => {
       E2E_TEST: '1',
     },
   });
-  mainWindow = await app.firstWindow();
-  await mainWindow.waitForLoadState('domcontentloaded');
+  mainWindow = await waitForMainWindow(app);
 });
 
 test.afterAll(async () => {
-  await app?.close();
+  await closeElectronApp(app);
 });
 
 test('main window 생성됨', async () => {

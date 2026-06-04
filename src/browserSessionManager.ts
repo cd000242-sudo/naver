@@ -99,6 +99,9 @@ class BrowserSessionManager {
     // ✅ [2026-03-26] isLoggedIn 캐시 TTL
     private readonly LOGIN_CACHE_TTL = 2 * 60 * 60 * 1000; // 2시간
 
+    // 발행 직전 서버 세션 실측은 외부 네트워크 경로라 무한 대기하면 전체 발행이 멈춘다.
+    private readonly SERVER_SESSION_CHECK_TIMEOUT_MS = 8 * 1000;
+
     // Reconnect defense constants
     private readonly RECONNECT_MAX_RETRIES = 3;
     private readonly RECONNECT_RETRY_DELAY_MS = 5000;
@@ -193,6 +196,8 @@ class BrowserSessionManager {
         webGL: { vendor: string; renderer: string };
         hardwareConcurrency: number;
         deviceMemory: number;
+        timezoneId: string;
+        locale: string;
     } {
         const seed = accountId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
@@ -226,8 +231,10 @@ class BrowserSessionManager {
         const dmOptions = [4, 8, 16];      // 일반적인 RAM GB (1/2는 봇 시그니처, 32는 게이밍 PC)
         const hardwareConcurrency = hwcOptions[hash2 % hwcOptions.length];
         const deviceMemory = dmOptions[(hash2 >>> 4) % dmOptions.length];
+        const timezoneId = 'Asia/Seoul';
+        const locale = 'ko-KR';
 
-        return { userAgent, screen, webGL, hardwareConcurrency, deviceMemory };
+        return { userAgent, screen, webGL, hardwareConcurrency, deviceMemory, timezoneId, locale };
     }
 
     /**
@@ -414,6 +421,7 @@ class BrowserSessionManager {
                 '--disable-background-timer-throttling',
                 '--disable-renderer-backgrounding',
                 '--disable-backgrounding-occluded-windows',
+                '--lang=ko-KR',
                 // ✅ [v1.4.79 P0-WebRTC] 프록시 사용 시 실제 IP 노출 방지 (WebRTC leak 차단)
                 //   네이버가 JS로 STUN 요청하면 프록시 우회해서 실제 IP가 노출됨 → 반드시 차단
                 //   disable_non_proxied_udp: STUN/ICE가 프록시 거치지 않으면 차단
@@ -506,6 +514,10 @@ class BrowserSessionManager {
             'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
         });
 
+        await page.emulateTimezone(profile.timezoneId).catch((tzErr) => {
+            console.warn('[BrowserSessionManager] ⚠️ timezone 설정 실패 (무시):', (tzErr as Error).message);
+        });
+
         await page.setViewport({
             width: profile.screen.width,
             height: profile.screen.height - 100,
@@ -519,6 +531,7 @@ class BrowserSessionManager {
             // navigator.webdriver 제거 (Stealth Plugin과 함께 이중 방어)
             Object.defineProperty(navigator, 'webdriver', { get: () => undefined, configurable: true });
             // 기본 환경 정보 (한국어 환경 일관성)
+            Object.defineProperty(navigator, 'language', { get: () => hw.locale || 'ko-KR', configurable: true });
             Object.defineProperty(navigator, 'languages', { get: () => ['ko-KR', 'ko', 'en-US', 'en'] });
             Object.defineProperty(navigator, 'platform', { get: () => 'Win32' });
             // ✅ [2026-05-26 v2.10.363 SPEC-NAVER-PROTECTION-2026 P3] 계정별 hash 기반 다양화
@@ -802,27 +815,41 @@ class BrowserSessionManager {
 
         try {
             // 실제 네이버 에디터 접근으로 서버 세션 유효성 확인
-            const stillLoggedIn = await page.evaluate(async () => {
+            const serverCheck = await page.evaluate(async (timeoutMs: number) => {
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), timeoutMs);
                 try {
                     const res = await fetch('https://blog.naver.com/PostWriteForm.naver', {
                         method: 'GET',
                         credentials: 'include',
                         cache: 'no-store',
                         redirect: 'follow',
+                        signal: controller.signal,
                     });
                     // 로그인 페이지로 리다이렉트되지 않았다면 유효
-                    return !/nidlogin\.login|nid\.naver\.com\/nidlogin/.test(res.url);
-                } catch {
-                    return false;
+                    return {
+                        ok: !/nidlogin\.login|nid\.naver\.com\/nidlogin/.test(res.url),
+                        finalUrl: res.url,
+                        status: res.status,
+                    };
+                } catch (err) {
+                    const e = err as Error;
+                    return {
+                        ok: false,
+                        error: e?.name === 'AbortError' ? 'timeout' : (e?.message || 'fetch_failed'),
+                    };
+                } finally {
+                    clearTimeout(timer);
                 }
-            });
+            }, this.SERVER_SESSION_CHECK_TIMEOUT_MS);
 
-            if (stillLoggedIn) {
+            if (serverCheck.ok) {
                 session.loginVerifiedAt = Date.now();
                 session.isLoggedIn = true;
                 return true;
             } else {
-                console.warn(`[BrowserSessionManager] 🚨 ${accountId.substring(0, 3)}*** 발행 직전 서버 검증 실패 — 재로그인 필요`);
+                const reason = serverCheck.error || serverCheck.finalUrl || `HTTP ${serverCheck.status ?? 'unknown'}`;
+                console.warn(`[BrowserSessionManager] 🚨 ${accountId.substring(0, 3)}*** 발행 직전 서버 검증 실패(${reason}) — 재로그인 필요`);
                 session.loginVerifiedAt = 0;
                 session.isLoggedIn = false;
                 // [v1.6.0] locked=false 제거 — 잠긴 세션은 앱 종료까지 파괴 금지 계약 유지

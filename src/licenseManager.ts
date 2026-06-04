@@ -135,6 +135,8 @@ let cachedLicense: LicenseInfo | null = null;
 // ✅ [v2.10.274] TTL + write-guard state for revalidateLicense
 let _lastSyncAt = 0;
 const SYNC_CACHE_TTL_MS = 60_000; // 1-minute TTL
+let _revalidateSyncSequence = 0;
+let _lastAppliedRevalidateSyncSequence = 0;
 
 // 서버에서 발급한 세션 토큰 (generateSessionId 제거 - 서버가 세션 토큰을 생성)
 
@@ -1224,6 +1226,7 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
 
     // Record fetch start time for write-guard comparison
     const fetchStartTime = Date.now();
+    const syncSequence = ++_revalidateSyncSequence;
 
     // [v2.10.226] 3s timeout — Apps Script 응답 지연이 15s+ IPC 점유 (사용자 보고: "초반 응답없음").
     // 재검증은 보조 검증이고 실패 시 로컬 라이선스 유지하므로 timeout 후 false 반환 안전.
@@ -1252,22 +1255,32 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
       const result = await response.json();
       clearTimeout(_timer);
 
+      // ✅ [v2.10.274] write-guard: skip stale write if a newer sync completed while waiting
+      // Date.now() can collide within the same millisecond, so sequence numbers are the primary guard.
+      if (_lastAppliedRevalidateSyncSequence > syncSequence || _lastSyncAt > fetchStartTime) {
+        console.warn('[License] revalidateLicense write-guard: newer sync completed, discarding stale result');
+        return true;
+      }
+
       // Apps Script 응답 형식에 맞게 처리
       if (result.ok === false) {
         console.warn('[LicenseManager] 재검증 실패: 서버에서 라이선스가 유효하지 않다고 응답함');
         // 확실하게 유효하지 않은 경우에만 clear
+        _lastAppliedRevalidateSyncSequence = syncSequence;
+        _lastSyncAt = Date.now();
         await clearLicense();
         return false;
-      }
-
-      // ✅ [v2.10.274] write-guard: skip stale write if a newer sync completed while waiting
-      if (_lastSyncAt > fetchStartTime) {
-        console.warn('[License] revalidateLicense write-guard: newer sync completed, discarding stale result');
       } else {
         // 라이선스 정보 업데이트 (만료일 + 라이선스 유형)
-        license.verifiedAt = new Date().toISOString();
+        let updatedLicense: LicenseInfo = {
+          ...license,
+          verifiedAt: new Date().toISOString(),
+        };
         if (result.expiresAt || result.expires) {
-          license.expiresAt = result.expiresAt || result.expires;
+          updatedLicense = {
+            ...updatedLicense,
+            expiresAt: result.expiresAt || result.expires,
+          };
         }
         // 서버에서 반환한 licenseType으로 업데이트 (관리 패널에서 변경된 내용 반영)
         if (result.licenseType) {
@@ -1276,11 +1289,15 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
               result.licenseType?.includes('PAID365') ? 'premium' :
                 result.licenseType?.includes('PAID90') ? 'standard' :
                   result.licenseType?.includes('PAID30') ? 'standard' : 'standard';
-          license.licenseType = newLicenseType;
+          updatedLicense = {
+            ...updatedLicense,
+            licenseType: newLicenseType,
+          };
           console.log('[LicenseManager] 라이선스 유형 업데이트:', result.licenseType, '->', newLicenseType);
         }
+        _lastAppliedRevalidateSyncSequence = syncSequence;
         _lastSyncAt = Date.now();
-        await saveLicense(license);
+        await saveLicense(updatedLicense);
       }
     } catch {
       // 서버 연결 실패 또는 timeout 시 로컬 라이선스 유지

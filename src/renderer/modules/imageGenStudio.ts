@@ -95,6 +95,9 @@ function _bindControls(): void {
 
 async function _run(): Promise<void> {
   if (_busy) return;
+
+  // 무료 체험판/체험(trial) 차단 → Pro 전환 유도 (window 전역 = minify 충돌 회피).
+  if ((await (window as any).checkFeatureLockAndShow?.('image-gen')) === false) return;
   const api = (window as any).api;
   if (!api?.generateImages) {
     _setStatus('이미지 생성 API를 사용할 수 없습니다.', 'error');

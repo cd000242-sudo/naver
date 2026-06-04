@@ -7,6 +7,11 @@
 import { safeKeyboardType } from './typingUtils.js';
 import * as fsPromises from 'fs/promises';
 import * as path from 'path';
+import {
+  NAVER_SINGLE_IMAGE_MAX_BYTES,
+  NAVER_SINGLE_IMAGE_MAX_MB,
+  resolveNaverSupportedImageExtension,
+} from './naverImagePolicy.js';
 
 // ✅ [2026-05-26 v2.10.373 SPEC-NAVER-PROTECTION-2026 P5 행동 패턴]
 //   page.mouse.move(x, y) 텔레포트(steps:1)는 봇 시그니처. 사람은 곡선으로 천천히 이동(10~30 steps).
@@ -32,11 +37,11 @@ import {
   getSelectorStrings,
 } from './selectors';
 
-// ── 네이버 블로그 이미지 용량 제한 가드 (10MB) ──
-const NAVER_MAX_IMAGE_BYTES = 10 * 1024 * 1024; // 10MB (네이버 블로그 실제 업로드 제한)
+// ── 네이버 블로그 이미지 용량 제한 가드 (공식 단일 이미지 20MB) ──
+const NAVER_MAX_IMAGE_BYTES = NAVER_SINGLE_IMAGE_MAX_BYTES;
 
 /**
- * 이미지 파일이 네이버 블로그 용량 제한(10MB)을 초과하면
+ * 이미지 파일이 네이버 블로그 용량 제한을 초과하면
  * sharp로 자동 압축/리사이즈하여 제한 이내로 줄인다.
  * @returns 원본 또는 압축된 파일 경로
  */
@@ -46,7 +51,7 @@ async function ensureImageUnderSizeLimit(filePath: string, log?: (msg: string) =
     if (stat.size <= NAVER_MAX_IMAGE_BYTES) return filePath; // 제한 이내면 그대로
 
     const sizeMB = (stat.size / (1024 * 1024)).toFixed(1);
-    log?.(`   ⚠️ 이미지 용량 초과 감지: ${sizeMB}MB (제한: 10MB) → 자동 압축 시작...`);
+    log?.(`   ⚠️ 이미지 용량 초과 감지: ${sizeMB}MB (제한: ${NAVER_SINGLE_IMAGE_MAX_MB}MB) → 자동 압축 시작...`);
 
     const sharp = (await import('sharp')).default;
     let buffer: any = await fsPromises.readFile(filePath);
@@ -531,7 +536,7 @@ export async function insertImageViaUploadButton(self: any, filePath: string): P
       const ext = urlWithoutQuery.split('.').pop()?.toLowerCase() || 'jpg';
       // 유효한 확장자만 허용 (보안) - 확장자에 쿼리 파라미터가 포함되지 않도록 추가 검증
       const cleanExt = ext.split('&')[0].split('?')[0].split('#')[0];
-      const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(cleanExt) ? cleanExt : 'jpg';
+      const validExt = resolveNaverSupportedImageExtension(cleanExt, 'jpg');
       const tempFileName = `naver-blog-img-${Date.now()}.${validExt}`;
       absolutePath = pathModule.join(tempDir, tempFileName);
 
@@ -557,7 +562,7 @@ export async function insertImageViaUploadButton(self: any, filePath: string): P
       throw new Error(`이미지 파일을 찾을 수 없습니다: ${absolutePath}`);
     }
 
-    // 2.5 ✅ 네이버 블로그 이미지 용량 제한 가드 (10MB 초과 시 자동 압축)
+    // 2.5 ✅ 네이버 블로그 이미지 용량 제한 가드 (공식 단일 이미지 20MB 초과 시 자동 압축)
     absolutePath = await ensureImageUnderSizeLimit(absolutePath, (msg: string) => self.log(msg));
 
     // 3. 파일 업로드 실행 (이미지 버튼 클릭 + FileChooser만 사용)
@@ -790,7 +795,7 @@ export async function insertBase64ImageAtCursor(self: any, filePath: string): Pr
       const ext = urlWithoutQuery.split('.').pop()?.toLowerCase() || 'jpg';
       // 유효한 확장자만 허용 (보안) - 확장자에 쿼리 파라미터가 포함되지 않도록 추가 검증
       const cleanExt = ext.split('&')[0].split('?')[0].split('#')[0];
-      const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(cleanExt) ? cleanExt : 'jpg';
+      const validExt = resolveNaverSupportedImageExtension(cleanExt, 'jpg');
       const tempFileName = `naver-blog-img-${Date.now()}.${validExt}`;
       absolutePath = pathModule.join(tempDir, tempFileName);
 
@@ -837,7 +842,7 @@ export async function insertBase64ImageAtCursor(self: any, filePath: string): Pr
     }
   }
 
-  // ✅ 네이버 블로그 이미지 용량 제한 가드 (10MB 초과 시 자동 압축)
+  // ✅ 네이버 블로그 이미지 용량 제한 가드 (공식 단일 이미지 20MB 초과 시 자동 압축)
   absolutePath = await ensureImageUnderSizeLimit(absolutePath, (msg: string) => self.log(msg));
 
   // 보안: 파일 경로 마스킹
@@ -1152,7 +1157,7 @@ export async function insertSingleImage(self: any, image: any): Promise<void> {
       // 확장자 및 MimeType 추출
       const urlWithoutQuery = imageDataUrl.split('?')[0].split('#')[0];
       const ext = urlWithoutQuery.split('.').pop()?.toLowerCase() || 'png';
-      const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) ? ext : 'png';
+      const validExt = resolveNaverSupportedImageExtension(ext, 'png');
       const mimeType = validExt === 'jpg' || validExt === 'jpeg' ? 'image/jpeg' :
         validExt === 'png' ? 'image/png' :
           validExt === 'gif' ? 'image/gif' :
@@ -2214,7 +2219,7 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
           const urlWithoutQuery = image.filePath.split('?')[0].split('#')[0];
           const ext = urlWithoutQuery.split('.').pop()?.toLowerCase() || 'png';
           // 유효한 확장자만 허용
-          const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) ? ext : 'png';
+          const validExt = resolveNaverSupportedImageExtension(ext, 'png');
           const mimeType = validExt === 'jpg' || validExt === 'jpeg' ? 'image/jpeg' :
             validExt === 'png' ? 'image/png' :
               validExt === 'gif' ? 'image/gif' :
@@ -2270,7 +2275,7 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
           const urlPath = new URL(image.filePath).pathname;
           const ext = urlPath.split('.').pop()?.toLowerCase() || 'png';
           // 유효한 확장자만 허용
-          const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) ? ext : 'png';
+          const validExt = resolveNaverSupportedImageExtension(ext, 'png');
           const mimeType = validExt === 'jpg' || validExt === 'jpeg' ? 'image/jpeg' :
             validExt === 'png' ? 'image/png' :
               validExt === 'gif' ? 'image/gif' :
@@ -3255,7 +3260,7 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
               // 파일 타입 결정
               const ext = fileName.split('.').pop()?.toLowerCase() || 'png';
               // 유효한 확장자만 허용
-              const validExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) ? ext : 'png';
+              const validExt = resolveNaverSupportedImageExtension(ext, 'png');
               const mimeType = validExt === 'jpg' || validExt === 'jpeg' ? 'image/jpeg' :
                 validExt === 'gif' ? 'image/gif' :
                   validExt === 'webp' ? 'image/webp' : 'image/png';

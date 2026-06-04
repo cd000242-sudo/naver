@@ -517,6 +517,7 @@ export interface PostCycleResult {
     message?: string;
     url?: string;
     cancelled?: boolean;
+    failureCode?: import('../../automation/publishFailureClassifier.js').PublishFailureCode;
     structuredContent?: any;
 }
 

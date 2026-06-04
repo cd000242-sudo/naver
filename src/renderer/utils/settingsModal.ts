@@ -114,6 +114,8 @@ export function openSettingsModal(): void {
     forceResetNavState();
 
     els.modal.style.display = 'flex';
+    els.modal.classList.add('show');
+    els.modal.setAttribute('aria-hidden', 'false');
     console.log('[SettingsModal] 환경설정 모달 열림');
 }
 
@@ -141,6 +143,8 @@ export function closeSettingsModal(): void {
         });
 
         els.modal.style.display = 'none';
+        els.modal.classList.remove('show');
+        els.modal.setAttribute('aria-hidden', 'true');
         console.log('[SettingsModal] 환경설정 모달 닫힘 (상태 리셋 완료)');
     }
 }

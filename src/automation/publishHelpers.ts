@@ -1982,6 +1982,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
                 if (retryUrl !== beforeUrl && /blog\.naver\.com/i.test(retryUrl)) {
                   self.log(`✅ 재확인 후 URL 변경 확인: ${retryUrl}`);
                   self.log(`POST_URL: ${retryUrl}`);
+                  self.publishedUrl = retryUrl; // ✅ URL 저장
                 } else {
                   throw new Error('발행이 끝나지 않았습니다. 네이버 측에서 차단/캡차가 발생했거나 본문 조건(글자수·카테고리·이미지)이 부족할 수 있습니다.');
                 }
@@ -2019,6 +2020,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
               if (beforeUrl !== afterUrl && /blog\.naver\.com/i.test(afterUrl)) {
                 self.log('✅ 블로그 글이 즉시발행되었습니다.');
                 self.log(`POST_URL: ${afterUrl}`);
+                self.publishedUrl = afterUrl; // ✅ URL 저장
               } else {
                 throw new Error('발행 버튼이 활성화되지 않았습니다. 본문 조건(제목·글자수·카테고리·이미지)을 확인해주세요. 잠시 후 다시 시도하시거나 본문을 더 작성해주세요.');
               }
@@ -2132,9 +2134,11 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
             if (beforeUrl !== afterUrl && /blog\.naver\.com/i.test(afterUrl)) {
               self.log('✅ 블로그 글이 즉시발행되었습니다.');
               self.log(`POST_URL: ${afterUrl}`);
+              self.publishedUrl = afterUrl; // ✅ URL 저장
             } else if (!afterUrl.includes('GoBlogWrite') && !afterUrl.includes('blogPostWrite')) {
               self.log('✅ 블로그 글이 발행되었습니다.');
               self.log(`POST_URL: ${afterUrl}`);
+              self.publishedUrl = afterUrl; // ✅ URL 저장
             } else {
               // 추가 확인
               await self.delay(3000);
@@ -2142,6 +2146,7 @@ export async function publishBlogPost(self: any, mode: PublishMode, scheduleDate
               if (finalUrl !== beforeUrl) {
                 self.log('✅ 블로그 글이 즉시발행되었습니다.');
                 self.log(`POST_URL: ${finalUrl}`);
+                self.publishedUrl = finalUrl; // ✅ URL 저장
               } else {
                 throw new Error('발행이 끝나지 않았습니다. 네이버 측에서 차단/캡차가 발생했거나 본문 조건(글자수·카테고리·이미지)이 부족할 수 있습니다. 잠시 후 수동 확인하거나 1시간 뒤 다시 시도해주세요.');
               }
