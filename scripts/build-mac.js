@@ -235,6 +235,12 @@ if (!['arm64', 'x64', 'universal', 'both'].includes(arch)) {
 const env = { ...process.env };
 if (has('--unsigned')) {
   env.CSC_IDENTITY_AUTO_DISCOVERY = 'false';
+  delete env.CSC_LINK;
+  delete env.CSC_KEY_PASSWORD;
+  delete env.CSC_NAME;
+  delete env.APPLE_ID;
+  delete env.APPLE_APP_SPECIFIC_PASSWORD;
+  delete env.APPLE_TEAM_ID;
   console.warn('Building unsigned macOS package. Gatekeeper will warn users on first launch.');
 }
 
