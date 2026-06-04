@@ -18,9 +18,29 @@ const STEPS = [
     ['05', '발행', 'WordPress 또는 Blogspot으로 이어갑니다.'],
 ];
 
-function WindowShot({ title, src, alt, tall = false }: { title: string; src: string; alt: string; tall?: boolean }) {
-    return (
-        <div className={tall ? 'orbit-shot orbit-shot-tall' : 'orbit-shot'}>
+const EXAMPLE_LINKS = {
+    wordpress: 'https://leadernam.com/%ea%b8%88%ec%9c%b5-%eb%b3%b4%ed%97%98/%ec%83%9d%ed%99%9c%c2%b7%ec%a0%95%ec%b1%85/2026%eb%85%84-%ec%84%b8%ea%b8%88-%ec%b6%94%ec%a7%95%ea%b3%bc-%ed%83%88%ec%84%b8%ec%9d%98-%ec%b0%a8%ec%9d%b4%ec%a0%90-%ed%95%b5%ec%8b%ac-3%ea%b0%80%ec%a7%80/',
+    blogspot: 'https://tjdgus24280.blogspot.com/2026/06/2026-5.html',
+} as const;
+
+function WindowShot({
+    title,
+    src,
+    alt,
+    href,
+    ctaLabel,
+    tall = false,
+}: {
+    title: string;
+    src: string;
+    alt: string;
+    href?: string;
+    ctaLabel?: string;
+    tall?: boolean;
+}) {
+    const className = tall ? 'orbit-shot orbit-shot-tall' : 'orbit-shot';
+    const content = (
+        <>
             <div className="orbit-shot-bar">
                 <span className="orbit-dot red" />
                 <span className="orbit-dot yellow" />
@@ -28,6 +48,21 @@ function WindowShot({ title, src, alt, tall = false }: { title: string; src: str
                 <span>{title}</span>
             </div>
             <img src={src} alt={alt} loading="lazy" />
+            {href ? <span className="orbit-shot-cta">{ctaLabel || '예시글 보기'}</span> : null}
+        </>
+    );
+
+    if (href) {
+        return (
+            <a className={`${className} orbit-shot-link`} href={href} target="_blank" rel="noopener noreferrer" aria-label={`${title} 예시글 열기`}>
+                {content}
+            </a>
+        );
+    }
+
+    return (
+        <div className={className}>
+            {content}
         </div>
     );
 }
@@ -116,10 +151,14 @@ function OrbitPage() {
                             <li>Blogspot 발행 준비 화면</li>
                             <li>이미지와 본문 흐름 동시 검토</li>
                         </ul>
+                        <div className="orbit-example-links">
+                            <a href={EXAMPLE_LINKS.wordpress} target="_blank" rel="noopener noreferrer">WordPress 예시글 보기</a>
+                            <a href={EXAMPLE_LINKS.blogspot} target="_blank" rel="noopener noreferrer">Blogspot 예시글 보기</a>
+                        </div>
                     </div>
                     <div className="orbit-output-pair">
-                        <WindowShot title="WordPress Post" src="/images/orbit/orbit-wordpress-post.png" alt="Leaders Orbit 워드프레스 포스트 결과" tall />
-                        <WindowShot title="Blogspot Ready" src="/images/orbit/orbit-blogspot.png" alt="Leaders Orbit 블로그스팟 발행 준비 화면" tall />
+                        <WindowShot title="WordPress Post" src="/images/orbit/orbit-wordpress-post.png" alt="Leaders Orbit 워드프레스 포스트 결과" href={EXAMPLE_LINKS.wordpress} ctaLabel="WordPress 예시글 열기" tall />
+                        <WindowShot title="Blogspot Ready" src="/images/orbit/orbit-blogspot.png" alt="Leaders Orbit 블로그스팟 발행 준비 화면" href={EXAMPLE_LINKS.blogspot} ctaLabel="Blogspot 예시글 열기" tall />
                     </div>
                 </div>
             </section>
@@ -333,6 +372,21 @@ function OrbitPage() {
                     background: #111827;
                     box-shadow: 0 24px 70px rgba(0,0,0,.34);
                 }
+                .orbit-shot-link {
+                    display: block;
+                    color: inherit;
+                    text-decoration: none;
+                    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+                }
+                .orbit-shot-link:hover {
+                    transform: translateY(-4px);
+                    border-color: rgba(56,189,248,.48);
+                    box-shadow: 0 28px 78px rgba(56,189,248,.16);
+                }
+                .orbit-shot-link:focus-visible {
+                    outline: 3px solid rgba(56,189,248,.75);
+                    outline-offset: 4px;
+                }
                 .orbit-shot-bar {
                     display: flex;
                     align-items: center;
@@ -361,10 +415,45 @@ function OrbitPage() {
                     object-fit: cover;
                     object-position: top;
                 }
+                .orbit-shot-cta {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 44px;
+                    padding: 0 14px;
+                    color: #06111d;
+                    background: var(--orbit-gradient);
+                    font-size: 13px;
+                    font-weight: 900;
+                }
                 .orbit-output-pair {
                     display: grid;
                     grid-template-columns: repeat(2, minmax(0, 1fr));
                     gap: 14px;
+                }
+                .orbit-example-links {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    margin-top: 22px;
+                }
+                .orbit-example-links a {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 44px;
+                    padding: 0 16px;
+                    border-radius: 10px;
+                    background: rgba(255,255,255,.08);
+                    border: 1px solid rgba(255,255,255,.16);
+                    color: #e0f2fe;
+                    font-size: 13px;
+                    font-weight: 900;
+                    text-decoration: none;
+                }
+                .orbit-example-links a:hover {
+                    background: rgba(56,189,248,.16);
+                    border-color: rgba(56,189,248,.42);
                 }
                 .orbit-copy ul {
                     list-style: none;

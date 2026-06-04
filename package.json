@@ -21,8 +21,16 @@
     "dist:win": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --win && node scripts/restore-after-pack.js && node scripts/create-archives.js",
     "dist:portable": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --win portable && node scripts/restore-after-pack.js",
     "dist:all": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --win --x64 && node scripts/restore-after-pack.js && node scripts/create-archives.js",
-    "dist:mac": "npm run build && electron-builder --mac",
-    "dist:universal": "npm run build && electron-builder --mac --universal",
+    "dist:mac": "node scripts/build-mac.js --arch universal",
+    "dist:mac:arm64": "node scripts/build-mac.js --arch arm64",
+    "dist:mac:x64": "node scripts/build-mac.js --arch x64",
+    "dist:mac:universal": "node scripts/build-mac.js --arch universal",
+    "dist:mac:unsigned": "node scripts/build-mac.js --arch universal --unsigned",
+    "dist:mac:arm64:unsigned": "node scripts/build-mac.js --arch arm64 --unsigned",
+    "dist:mac:universal:unsigned": "node scripts/build-mac.js --arch universal --unsigned",
+    "dist:universal": "node scripts/build-mac.js --arch universal",
+    "release:mac": "node scripts/build-mac.js --arch universal --publish",
+    "release:mac:unsigned": "node scripts/build-mac.js --arch universal --unsigned --publish",
     "self-test": "npm run build && node dist/tests/automationSmoke.js",
     "start:daily": "npm run build && node dist/scheduler/daily.js",
     "start:monitor": "npm run build && node dist/monitor/realtime.js",
@@ -163,18 +171,34 @@
         {
           "target": "dmg",
           "arch": [
-            "x64",
-            "arm64"
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64",
+            "x64"
           ]
         }
       ],
-      "icon": "assets/LEADERNA_.ico",
+      "icon": "build/icon.icns",
+      "artifactName": "Better-Life-Naver-${version}-${arch}.${ext}",
       "category": "public.app-category.productivity",
       "darkModeSupport": true,
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "build/entitlements.mac.plist",
-      "entitlementsInherit": "build/entitlements.mac.plist"
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extendInfo": {
+        "NSDownloadsFolderUsageDescription": "Better Life Naver saves generated and collected blog images to Downloads.",
+        "NSDocumentsFolderUsageDescription": "Better Life Naver may open or save user-selected automation files."
+      }
+    },
+    "dmg": {
+      "title": "Better Life Naver ${version}",
+      "artifactName": "Better-Life-Naver-${version}-${arch}.${ext}"
     },
     "nsis": {
       "oneClick": false,
