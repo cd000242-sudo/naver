@@ -47,6 +47,23 @@ jobs:
             npm run release:mac
           fi
 
+      - name: Upload macOS assets to GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="v${VERSION}"
+          if ! gh release view "${TAG}" >/dev/null 2>&1; then
+            gh release create "${TAG}" --title "${TAG}" --notes "macOS release artifacts"
+          fi
+          shopt -s nullglob
+          assets=(release_final/*.dmg release_final/*.zip release_final/*.blockmap release_final/latest-mac.yml)
+          if [ ${#assets[@]} -eq 0 ]; then
+            echo "No macOS assets found"
+            exit 1
+          fi
+          gh release upload "${TAG}" "${assets[@]}" --clobber
+
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -55,4 +72,5 @@ jobs:
           path: |
             release_final/*.dmg
             release_final/*.zip
+            release_final/*.blockmap
             release_final/latest-mac.yml
