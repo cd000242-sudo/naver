@@ -2633,8 +2633,9 @@ export async function generateAIImagesForHeadings(headings: any[], formData: any
   let imageSource = formData.imageSource || globalSettings.imageSource;
   const imageStyle = formData.imageStyle || globalSettings.imageStyle;
   const imageRatio = formData.imageRatio || globalSettings.imageRatio;
+  const imageFallbackPolicy = formData.imageFallbackPolicy || globalSettings.imageFallbackPolicy || localStorage.getItem('imageFallbackPolicy') || 'engine-only';
 
-  console.log(`[AI Images] 이미지 생성 시작 - 소스: ${imageSource}, 스타일: ${imageStyle}, 비율: ${imageRatio}, 소제목 개수: ${headings.length}`);
+  console.log(`[AI Images] 이미지 생성 시작 - 소스: ${imageSource}, 스타일: ${imageStyle}, 비율: ${imageRatio}, 폴백정책: ${imageFallbackPolicy}, 소제목 개수: ${headings.length}`);
 
 
   const sourceNames: Record<string, string> = {
@@ -2852,6 +2853,7 @@ export async function generateAIImagesForHeadings(headings: any[], formData: any
         isFullAuto: formData.mode === 'full-auto',
         imageRatio: globalSettings.thumbnailRatio || globalSettings.imageRatio || '1:1', // ✅ [2026-03-07 FIX] 썸네일 전용 비율
         thumbnailTextInclude: includeThumbnailText, // ✅ [2026-03-16] 명시적 전달
+        imageFallbackPolicy,
       });
 
       if (thumbResult?.success && thumbResult.images && thumbResult.images.length > 0) {
@@ -2963,6 +2965,7 @@ export async function generateAIImagesForHeadings(headings: any[], formData: any
         isShoppingConnect: isShoppingConnect,
         collectedImages: collectedImages,
         thumbnailTextInclude: includeThumbnailText, // ✅ [2026-03-16] 명시적 전달
+        imageFallbackPolicy,
       });
 
       // 진행률 업데이트 (완료된 개수 기준)

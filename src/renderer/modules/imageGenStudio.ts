@@ -160,7 +160,8 @@ async function _run(): Promise<void> {
       }
     });
 
-    const res = await api.generateImages({ provider: engine.value, items, isFullAuto: false });
+    const imageFallbackPolicy = localStorage.getItem('imageFallbackPolicy') || 'engine-only';
+    const res = await api.generateImages({ provider: engine.value, items, isFullAuto: false, imageFallbackPolicy });
 
     // onImageGenerated가 없는 엔진 폴백: 최종 결과로 그리드 채움.
     if (received === 0 && res?.images?.length) {

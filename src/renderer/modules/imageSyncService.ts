@@ -34,6 +34,7 @@ function getGlobalImageSettings() {
     thumbnailRatio: w.getThumbnailRatio?.() || localStorage.getItem('thumbnailImageRatio') || '1:1',
     subheadingRatio: w.getSubheadingRatio?.() || localStorage.getItem('subheadingImageRatio') || '1:1',
     headingImageMode: w.getHeadingImageMode?.() || localStorage.getItem('headingImageMode') || 'all',
+    imageFallbackPolicy: w.getImageFallbackPolicy?.() || localStorage.getItem('imageFallbackPolicy') || 'engine-only',
     thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true',
     textOnlyPublish: localStorage.getItem('textOnlyPublish') === 'true',
     lifestyleImageGenerate: localStorage.getItem('lifestyleImageGenerate') === 'true'

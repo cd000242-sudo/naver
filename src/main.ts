@@ -3084,7 +3084,11 @@ ipcMain.handle(
         return { success: false, message: '사용자가 작업을 취소했습니다.' };
       }
 
-      const images = await generateImages(options, apiKeys, onImageGenerated);
+      const imageOptions = {
+        ...options,
+        imageFallbackPolicy: options.imageFallbackPolicy || 'engine-only',
+      };
+      const images = await generateImages(imageOptions, apiKeys, onImageGenerated);
 
       if (await isFreeTierUser()) {
         await consumeQuota('media', 1);
@@ -4371,6 +4375,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                     imageStyle: options?.imageStyle,
                     imageRatio: options?.thumbnailImageRatio || '1:1',
                     collectedImages: options?.collectedImages || structuredContent?.collectedImages || [],
+                    imageFallbackPolicy: options?.imageFallbackPolicy || 'engine-only',
                   } as any, imgApiKeys),
                   abortController.signal
                 );
@@ -4436,6 +4441,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                       imageStyle: options?.imageStyle,
                       imageRatio: options?.subheadingImageRatio || options?.thumbnailImageRatio || '1:1',
                       collectedImages: options?.collectedImages || structuredContent?.collectedImages || [],
+                      imageFallbackPolicy: options?.imageFallbackPolicy || 'engine-only',
                     } as any, imgApiKeys),
                     abortController.signal
                   );

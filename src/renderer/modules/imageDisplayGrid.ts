@@ -1079,7 +1079,10 @@ export async function searchNaverImage(prompt: string, isRegenerate: boolean = f
   const gen = (window as any).generateImagesWithCostSafety;
   const invoke = typeof gen === 'function'
     ? gen
-    : (opts: any) => window.api.generateImages(opts);
+    : (opts: any) => window.api.generateImages({
+      ...opts,
+      imageFallbackPolicy: opts?.imageFallbackPolicy || localStorage.getItem('imageFallbackPolicy') || 'engine-only',
+    });
   const response = await invoke({
     provider: 'naver',
     items: [{ heading: 'image', prompt: prompt }],

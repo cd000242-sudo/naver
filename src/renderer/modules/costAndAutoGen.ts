@@ -36,6 +36,41 @@ declare function getHeadingSelectedImageKey(...args: any[]): string;
 declare function getStableImageKey(heading: any): string;
 declare function toFileUrlMaybe(p: string): string;
 
+type ImageFallbackPolicy = 'engine-only' | 'ask' | 'guarantee';
+
+const FALLBACK_CONFIRM_MARKER = 'FALLBACK_REQUIRES_CONFIRMATION';
+const IMAGE_FALLBACK_POLICIES: ImageFallbackPolicy[] = ['engine-only', 'ask', 'guarantee'];
+
+function normalizeImageFallbackPolicy(value: any): ImageFallbackPolicy {
+  return IMAGE_FALLBACK_POLICIES.includes(value as ImageFallbackPolicy)
+    ? value as ImageFallbackPolicy
+    : 'engine-only';
+}
+
+async function invokeGenerateImagesWithPolicy(options: any): Promise<any> {
+  const result = await window.api.generateImages(options);
+  const policy = normalizeImageFallbackPolicy(options?.imageFallbackPolicy);
+  const message = String(result?.message || '');
+
+  if (result?.success !== false || policy !== 'ask' || !message.includes(FALLBACK_CONFIRM_MARKER)) {
+    return result;
+  }
+
+  const confirmed = window.confirm(
+    `${message.replace(`[${FALLBACK_CONFIRM_MARKER}] `, '')}\n\n대체 결과를 사용하시겠습니까?\n` +
+    '확인: 결과 보장 모드로 한 번만 재시도\n취소: 선택 엔진 실패로 종료'
+  );
+  if (!confirmed) {
+    return result;
+  }
+
+  appendLog('🧭 엔진 우선 모드: 사용자 확인으로 결과 보장 재시도를 실행합니다.');
+  return window.api.generateImages({
+    ...options,
+    imageFallbackPolicy: 'guarantee',
+  });
+}
+
 async function autoSearchAndPopulateImages(
   structuredContent: any,
   mainKeyword: string,
@@ -352,6 +387,14 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
     console.log(`[Renderer] 🔤 thumbnailTextInclude 자동 주입: ${savedThumbnailText}`);
   }
 
+  if (!options.imageFallbackPolicy) {
+    const savedFallbackPolicy = normalizeImageFallbackPolicy(localStorage.getItem('imageFallbackPolicy'));
+    options.imageFallbackPolicy = savedFallbackPolicy;
+    console.log(`[Renderer] 🧭 imageFallbackPolicy 자동 주입: "${savedFallbackPolicy}"`);
+  } else {
+    options.imageFallbackPolicy = normalizeImageFallbackPolicy(options.imageFallbackPolicy);
+  }
+
   // Authoritative shopping-connect detection: caller-provided flag takes
   // precedence, then data markers on currentStructuredContent, finally the
   // legacy UI-state probe. Data-based detection is required because the
@@ -439,7 +482,7 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
   }
 
   if (!isCostRiskImageProvider(provider)) {
-    return window.api.generateImages(options);
+    return invokeGenerateImagesWithPolicy(options);
   }
 
   const locked = await runUiActionLocked(
@@ -553,7 +596,7 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
         }
 
         const result = await Promise.race([
-          window.api.generateImages(options),
+          invokeGenerateImagesWithPolicy(options),
           timeoutPromise
         ]);
 

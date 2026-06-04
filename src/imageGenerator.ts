@@ -1,5 +1,5 @@
-import type { GenerateImagesOptions, GeneratedImage, ImageProvider } from './image/types.js';
-import { assertProvider as assertProviderFn } from './image/types.js';
+import type { GenerateImagesOptions, GeneratedImage, ImageFallbackPolicy, ImageProvider } from './image/types.js';
+import { assertProvider as assertProviderFn, normalizeImageFallbackPolicy } from './image/types.js';
 // ✅ [v2.10.335] 나노바나나 3종 → 모델 키 SSOT
 import { NANO_PROVIDER_TO_MODEL_KEY } from './runtime/imageEngineCatalog.js';
 import { generateWithNanoBananaPro, abortImageGeneration, resetAllImageState } from './image/nanoBananaProGenerator.js';
@@ -31,6 +31,44 @@ export { abortImageGeneration };
 
 // ✅ [2026-02-23 FIX] 이미지 생성 전체 상태 초기화 함수 export
 export { resetAllImageState };
+
+const FALLBACK_CONFIRM_MARKER = 'FALLBACK_REQUIRES_CONFIRMATION';
+
+function annotateEngineTrace(
+  images: GeneratedImage[],
+  trace: {
+    requestedProvider: string;
+    actualProvider: string;
+    policy: ImageFallbackPolicy;
+    fallbackReason?: string;
+  }
+): GeneratedImage[] {
+  const fallbackUsed = trace.requestedProvider !== trace.actualProvider || !!trace.fallbackReason;
+  return images.map((img) => ({
+    ...img,
+    requestedProvider: trace.requestedProvider,
+    actualProvider: trace.actualProvider,
+    fallbackUsed,
+    fallbackReason: trace.fallbackReason,
+    imageFallbackPolicy: trace.policy,
+  }));
+}
+
+function createFallbackPolicyError(
+  requestedProvider: string,
+  fallbackProvider: string,
+  policy: ImageFallbackPolicy,
+  reason: string
+): Error {
+  const prefix = policy === 'ask'
+    ? `[${FALLBACK_CONFIRM_MARKER}] 선택한 엔진(${requestedProvider}) 우선 모드입니다.`
+    : `[엔진 고정 모드] 선택한 엔진(${requestedProvider})만 사용하도록 설정되어 있습니다.`;
+  return new Error(`${prefix}\n대체 후보: ${fallbackProvider}\n사유: ${reason}`);
+}
+
+function shouldUseAutomaticFallback(policy: ImageFallbackPolicy): boolean {
+  return policy === 'guarantee';
+}
 
 /**
  * ✅ [2026-03-18 FIX] 반환 이미지에 isThumbnail 플래그 보존
@@ -231,12 +269,14 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   if (!options.provider) {
     console.warn(`[ImageGenerator] ⚠️⚠️⚠️ options.provider가 비어있어 'nano-banana-2' 기본값 적용! 호출자 확인 필요!`);
   }
-
   // deepinfra-flux, deepinfra-flux-2 등 → deepinfra
   if (normalizedProvider.startsWith('deepinfra')) {
     console.log(`[ImageGenerator] 📋 프로바이더 정규화: ${options.provider} → deepinfra`);
     normalizedProvider = 'deepinfra';
   }
+  const requestedProvider = normalizedProvider;
+  const fallbackPolicy = normalizeImageFallbackPolicy(options.imageFallbackPolicy);
+  console.log(`[이미지생성] 🧭 엔진 실패 시 동작: ${fallbackPolicy}`);
   // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana / nano-banana-2 / nano-banana-pro는
   //   각각 별개 모델(gemini-2.5-flash-image / 3.1-flash-image-preview / 3-pro-image-preview)로
   //   라우팅된다. v2.7.28의 통합 정규화는 제거됨.
@@ -306,9 +346,22 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   // 그 외 엔진(Leonardo/DeepInfra/ImageFX 등)은 제품이 변형되므로 수집 이미지 그대로 사용
   const SC_IMG2IMG_ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image'];
   if (options.isShoppingConnect && !SC_IMG2IMG_ENGINES.includes(normalizedProvider)) {
-    console.log(`[이미지생성] 🛒 쇼핑커넥트 모드: ${displayName}는 제품 재현 불가 → 수집 이미지 직접 사용`);
+    const reason = `쇼핑커넥트 모드에서 ${displayName}는 제품 외형을 정확히 재현할 수 없어 수집 이미지 대체가 필요합니다.`;
+    if (!shouldUseAutomaticFallback(fallbackPolicy)) {
+      throw createFallbackPolicyError(requestedProvider, 'collected-image', fallbackPolicy, reason);
+    }
+    console.log(`[이미지생성] 🛒 쇼핑커넥트 모드: ${displayName}는 제품 재현 불가 → 수집 이미지 직접 사용 (결과 보장 모드)`);
     const collectedResults = await convertCollectedImagesToResults(options.collectedImages || crawledImages, items, options.postTitle, options.postId);
-    return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(collectedResults, 'collected', options.postTitle, options.thumbnailTextInclude, items), items);
+    if (collectedResults.length === 0) {
+      throw new Error(`[${displayName}] ${reason}\n수집 이미지가 없어 대체 결과를 만들 수 없습니다.`);
+    }
+    const traced = annotateEngineTrace(collectedResults, {
+      requestedProvider,
+      actualProvider: 'collected-image',
+      policy: fallbackPolicy,
+      fallbackReason: reason,
+    });
+    return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(traced, 'collected', options.postTitle, options.thumbnailTextInclude, items), items);
   }
 
 
@@ -327,7 +380,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.collectedImages
       );
       console.log(`[이미지생성] ✅ 덕트테이프(gpt-image-2)로 ${openaiImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(openaiImages, 'openai-image', options.postTitle, options.thumbnailTextInclude, items), items);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(openaiImages, {
+        requestedProvider,
+        actualProvider: 'openai-image',
+        policy: fallbackPolicy,
+      }), 'openai-image', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (openaiError) {
       console.warn(`[ImageGenerator] ⚠️ 덕트테이프 실패:`, (openaiError as Error).message);
       const userMsg = getImageErrorMessage(openaiError);
@@ -340,6 +397,10 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   //   조치: 자동으로 gpt-image-1 (openai-image)로 마이그레이션 — 사용자 선택 무효화 안 하고 새 모델로 우회
   if (normalizedProvider === 'dall-e-3') {
     console.warn(`[이미지생성] ⚠️ DALL-E 3는 2026-05-12 OpenAI API 제거됨 → gpt-image-1 자동 마이그레이션`);
+    const reason = 'DALL-E 3 API가 제거되어 openai-image 계열로 대체해야 합니다.';
+    if (!shouldUseAutomaticFallback(fallbackPolicy)) {
+      throw createFallbackPolicyError(requestedProvider, 'openai-image', fallbackPolicy, reason);
+    }
     try {
       console.log(`[이미지생성] 🎨 gpt-image-1 (DALL-E 3 후속)로 ${items.length}개 이미지 생성...`);
       const migratedImages = await generateWithOpenAIImage(
@@ -354,7 +415,12 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         // 'dall-e-3' 모델 강제 지정 제거 — 기본 gpt-image-1 사용
       );
       console.log(`[이미지생성] ✅ gpt-image-1로 ${migratedImages.length}개 생성 완료 (DALL-E 3 자동 마이그레이션)`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(migratedImages, 'openai-image', options.postTitle, options.thumbnailTextInclude, items), items);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(migratedImages, {
+        requestedProvider,
+        actualProvider: 'openai-image',
+        policy: fallbackPolicy,
+        fallbackReason: reason,
+      }), 'openai-image', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (migrationError) {
       console.error(`[ImageGenerator] ❌ gpt-image-1 자동 마이그레이션 실패:`, (migrationError as Error).message);
       const userMsg = getImageErrorMessage(migrationError);
@@ -377,7 +443,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.collectedImages  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
       );
       console.log(`[이미지생성] ✅ Leonardo AI로 ${leonardoImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(leonardoImages, 'leonardoai', options.postTitle, options.thumbnailTextInclude, items), items);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(leonardoImages, {
+        requestedProvider,
+        actualProvider: 'leonardoai',
+        policy: fallbackPolicy,
+      }), 'leonardoai', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (leonardoError) {
       console.warn(`[ImageGenerator] ⚠️ Leonardo AI 실패:`, (leonardoError as Error).message);
       const userMsg = getImageErrorMessage(leonardoError);
@@ -399,7 +469,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         onImageGenerated
       );
       console.log(`[이미지생성] ✅ ImageFX로 ${imageFxImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(imageFxImages, 'imagefx', options.postTitle, options.thumbnailTextInclude, items), items);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(imageFxImages, {
+        requestedProvider,
+        actualProvider: 'imagefx',
+        policy: fallbackPolicy,
+      }), 'imagefx', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (imageFxError) {
       const rawMsg = (imageFxError as Error).message || '';
       console.warn(`[ImageGenerator] ⚠️ ImageFX 실패:`, rawMsg);
@@ -432,7 +506,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         throw new Error('Flow가 0건 반환 — 상세 원인은 이전 로그(sendImageLog) 참고. 쿼터/세션/안전필터/API 구조 변경 가능성.');
       }
       console.log(`[이미지생성] ✅ Flow로 ${flowImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(flowImages, 'flow', options.postTitle, options.thumbnailTextInclude, items), items);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(flowImages, {
+        requestedProvider,
+        actualProvider: 'flow',
+        policy: fallbackPolicy,
+      }), 'flow', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (flowError) {
       const rawMsg = (flowError as Error).message || '';
       console.warn(`[ImageGenerator] ⚠️ Flow 실패:`, rawMsg);
@@ -461,7 +539,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         throw new Error('리더스 나노바나나 무제한 0건 반환 — 로그인/세션/쿼터 확인 필요');
       }
       console.log(`[이미지생성] ✅ 리더스 나노바나나 무제한으로 ${dropshotImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(dropshotImages, 'dropshot', options.postTitle, options.thumbnailTextInclude, items), items);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(dropshotImages, {
+        requestedProvider,
+        actualProvider: 'dropshot',
+        policy: fallbackPolicy,
+      }), 'dropshot', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (dropshotError) {
       const rawMsg = (dropshotError as Error).message || '';
       console.warn(`[ImageGenerator] ⚠️ 리더스 나노바나나 무제한 실패:`, rawMsg);
@@ -486,7 +568,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       );
       console.log(`[이미지생성] ✅ 딥인프라 FLUX-2로 ${deepinfraImages.length}개 이미지 생성 완료!`);
       // ✅ [2026-01-30 FIX] DeepInfra도 텍스트 오버레이 적용 (한글 텍스트 지원 안함)
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(deepinfraImages, 'deepinfra', options.postTitle, options.thumbnailTextInclude, items), items);
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(deepinfraImages, {
+        requestedProvider,
+        actualProvider: 'deepinfra',
+        policy: fallbackPolicy,
+      }), 'deepinfra', options.postTitle, options.thumbnailTextInclude, items), items);
     } catch (deepinfraError) {
       console.warn(`[ImageGenerator] ⚠️ DeepInfra 실패:`, (deepinfraError as Error).message);
       const userMsg = getImageErrorMessage(deepinfraError);
@@ -496,7 +582,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
 
   // 네이버 선택 시
   if (normalizedProvider === 'naver') {
-    return preserveThumbnailFlags(await generateWithNaver(items, options.postTitle, options.postId, options.regenerate, options.sourceUrl, options.articleUrl), items);
+    return preserveThumbnailFlags(annotateEngineTrace(await generateWithNaver(items, options.postTitle, options.postId, options.regenerate, options.sourceUrl, options.articleUrl), {
+      requestedProvider,
+      actualProvider: 'naver',
+      policy: fallbackPolicy,
+    }), items);
   }
 
   // ✅ [v1.4.80] 'local-folder'는 renderer에서 별도 처리되어야 하는 값
@@ -529,19 +619,40 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         forceModelKey, // v2.7.16: 모델 강제 지정
       );
       console.log(`[이미지생성] ✅ ${modelLabel} ${nanoBananaImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(nanoBananaImages, items);
+      return preserveThumbnailFlags(annotateEngineTrace(nanoBananaImages, {
+        requestedProvider,
+        actualProvider: normalizedProvider,
+        policy: fallbackPolicy,
+      }), items);
     } catch (geminiError: any) {
       if (options.isShoppingConnect) {
-        console.warn(`[ImageGenerator] ⚠️ Gemini 실패 → 쇼핑커넥트 수집 이미지로 폴백: ${geminiError.message}`);
+        const reason = `Gemini 계열 엔진 실패 후 쇼핑커넥트 수집 이미지 대체가 필요합니다. 원본 오류: ${geminiError.message}`;
+        if (!shouldUseAutomaticFallback(fallbackPolicy)) {
+          throw createFallbackPolicyError(requestedProvider, 'collected-image', fallbackPolicy, reason);
+        }
+        console.warn(`[ImageGenerator] ⚠️ Gemini 실패 → 쇼핑커넥트 수집 이미지로 폴백 (결과 보장 모드): ${geminiError.message}`);
         const collectedResults = await convertCollectedImagesToResults(options.collectedImages || crawledImages, items, options.postTitle, options.postId);
-        return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(collectedResults, 'collected', options.postTitle, options.thumbnailTextInclude, items), items);
+        if (collectedResults.length === 0) {
+          throw new Error(`[${modelLabel}] ${reason}\n수집 이미지가 없어 대체 결과를 만들 수 없습니다.`);
+        }
+        const traced = annotateEngineTrace(collectedResults, {
+          requestedProvider,
+          actualProvider: 'collected-image',
+          policy: fallbackPolicy,
+          fallbackReason: reason,
+        });
+        return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(traced, 'collected', options.postTitle, options.thumbnailTextInclude, items), items);
       }
       throw geminiError;
     }
   }
 
   // ✅ [2026-03-17 FIX] 'saved', 'skip' 등 유효하지 않은 provider는 nano-banana-pro로 폴백
-  console.warn(`[ImageGenerator] ⚠️ 지원하지 않는 제공자 "${normalizedProvider}" → nano-banana-pro(Gemini)로 폴백`);
+  const unsupportedReason = `지원하지 않는 이미지 제공자입니다: ${normalizedProvider}`;
+  if (!shouldUseAutomaticFallback(fallbackPolicy)) {
+    throw createFallbackPolicyError(requestedProvider, 'nano-banana-pro', fallbackPolicy, unsupportedReason);
+  }
+  console.warn(`[ImageGenerator] ⚠️ 지원하지 않는 제공자 "${normalizedProvider}" → nano-banana-pro(Gemini)로 폴백 (결과 보장 모드)`);
   normalizedProvider = 'nano-banana-pro';
 
   // nano-banana-pro 폴백 실행 (Gemini API)
@@ -560,7 +671,12 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       (options as any).productData
     );
     console.log(`[이미지생성] ✅ 폴백 나노 바나나 프로(Gemini)로 ${fallbackImages.length}개 이미지 생성 완료!`);
-    return preserveThumbnailFlags(fallbackImages, items);
+    return preserveThumbnailFlags(annotateEngineTrace(fallbackImages, {
+      requestedProvider,
+      actualProvider: 'nano-banana-pro',
+      policy: fallbackPolicy,
+      fallbackReason: unsupportedReason,
+    }), items);
   } catch (fallbackError) {
     throw new Error(`이미지 생성 실패: 지원하지 않는 이미지 제공자(${options.provider}) 및 Gemini 폴백 실패 - ${(fallbackError as Error).message}`);
   }

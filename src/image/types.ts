@@ -6,6 +6,16 @@
 // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한 (UI 자동화 엔진)
 export type ImageProvider = 'naver' | 'loremflickr' | 'picsum' | 'placeholder' | 'nano-banana' | 'nano-banana-2' | 'nano-banana-pro' | 'nano-banana-pro-fallback' | 'imagen-4-fallback' | 'gemini-2.5-flash-fallback' | 'gemini-3.1-flash-image-preview-fallback' | 'gemini-3-pro-image-preview-fallback' | 'imagen-4.0-generate-001-fallback' | 'gemini-2.5-flash-image-fallback' | 'deepinfra' | 'openai-image' | 'dall-e-3' | 'leonardoai' | 'collected-image' | 'collected-image-with-text' | 'imagefx' | 'flow' | 'dropshot' | 'local-folder';
 
+export type ImageFallbackPolicy = 'engine-only' | 'ask' | 'guarantee';
+
+export const IMAGE_FALLBACK_POLICIES: ImageFallbackPolicy[] = ['engine-only', 'ask', 'guarantee'];
+
+export function normalizeImageFallbackPolicy(value: unknown): ImageFallbackPolicy {
+  return IMAGE_FALLBACK_POLICIES.includes(value as ImageFallbackPolicy)
+    ? value as ImageFallbackPolicy
+    : 'engine-only';
+}
+
 export interface ImageRequestItem {
   heading: string;
   prompt: string;
@@ -35,6 +45,13 @@ export interface GenerateImagesOptions {
   stopCheck?: () => boolean; // ✅ [100점 수정] 중지 여부 확인 콜백
   thumbnailTextInclude?: boolean; // ✅ [2026-01-28] 1번 이미지에 텍스트 포함 여부
   category?: string; // ✅ [2026-02-12] 전체 배치의 카테고리 (items에 개별 category 없을 때 폴백)
+  /**
+   * 선택 엔진 실패/부적합 시 동작.
+   * - engine-only: 선택 엔진만 사용, 자동 대체 금지
+   * - ask: 선택 엔진 우선, 대체가 필요하면 renderer에서 사용자 확인
+   * - guarantee: 결과 보장 우선, 허용된 대체 경로 자동 사용
+   */
+  imageFallbackPolicy?: ImageFallbackPolicy;
 }
 
 export interface GeneratedImage {
@@ -83,6 +100,11 @@ export interface GeneratedImage {
   sourceUrl?: string; // ✅ 원본 출처 URL (alt 태그에 출처 표시용)
   originalIndex?: number; // ✅ [2026-01-24] 원래 items 배열의 인덱스 (필터링 후에도 위치 추적)
   isThumbnail?: boolean; // ✅ [2026-03-18 FIX] 썸네일 여부 (서론 위 이미지 배치에 사용)
+  requestedProvider?: string; // 사용자가 선택/요청한 엔진
+  actualProvider?: string; // 실제 산출물을 만든 엔진 또는 대체 출처
+  fallbackUsed?: boolean;
+  fallbackReason?: string;
+  imageFallbackPolicy?: ImageFallbackPolicy;
 }
 
 // ✅ [v1.4.80] 'flow' 추가 — assertProvider 통과 허용 (Google Labs Flow 엔진 활성화)

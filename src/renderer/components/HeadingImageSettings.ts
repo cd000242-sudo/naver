@@ -68,6 +68,8 @@ export type GlobalImageSource = ActiveImageSource
   | 'pollinations'   // @deprecated UI 폐기
   | 'dall-e-3';      // @deprecated 2026-05-12 OpenAI 폐기 — gpt-image-1 자동 마이그레이션
 
+export type ImageFallbackPolicy = 'engine-only' | 'ask' | 'guarantee';
+
 // ✅ [2026-02-18] 이미지 스타일 타입 (v1.6.3: 7개 — infographic 추가)
 export type ImageStyleType =
   | 'realistic'      // 실사 이미지
@@ -106,6 +108,12 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'flow': '🍌 Flow (Nano Banana 2)',
   'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)',
   'local-folder': '📂 내 폴더'
+};
+
+export const FALLBACK_POLICY_NAMES: Record<ImageFallbackPolicy, string> = {
+  'engine-only': '선택 엔진만 사용',
+  'ask': '선택 엔진 우선, 실패 시 묻기',
+  'guarantee': '결과 보장 우선, 자동 대체',
 };
 
 export const STYLE_NAMES: Record<ImageStyleType, string> = {
@@ -365,6 +373,17 @@ export function setFullAutoImageSource(source: GlobalImageSource): void {
   }
   safeLocalStorageSet('fullAutoImageSource', normalized);
   console.log(`[HeadingImageSettings] 풀오토 전용 이미지 소스 설정: ${normalized}`);
+}
+
+export function getImageFallbackPolicy(): ImageFallbackPolicy {
+  const saved = safeLocalStorageGet('imageFallbackPolicy') as ImageFallbackPolicy;
+  return FALLBACK_POLICY_NAMES[saved] ? saved : 'engine-only';
+}
+
+export function setImageFallbackPolicy(policy: ImageFallbackPolicy): void {
+  const normalized: ImageFallbackPolicy = FALLBACK_POLICY_NAMES[policy] ? policy : 'engine-only';
+  safeLocalStorageSet('imageFallbackPolicy', normalized);
+  console.log(`[HeadingImageSettings] 이미지 엔진 실패 시 동작: ${normalized}`);
 }
 
 // ✅ [2026-01-26] 이미지 스타일 설정 (확장)
@@ -671,6 +690,17 @@ export function createHeadingImageModal(): void {
                 <div>
                   <div class="btn-text">AI 이미지 생성 엔진</div>
                   <div class="btn-value" id="current-image-source-display">ImageFX (무료)</div>
+                </div>
+              </div>
+              <span class="arrow">›</span>
+            </button>
+
+            <button type="button" class="premium-setting-btn" id="open-image-fallback-policy-btn">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <div class="btn-icon" style="background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);">🧭</div>
+                <div>
+                  <div class="btn-text">엔진 실패 시 동작</div>
+                  <div class="btn-value" id="current-image-fallback-policy-display">선택 엔진만 사용</div>
                 </div>
               </div>
               <span class="arrow">›</span>
@@ -1027,6 +1057,41 @@ export function createHeadingImageModal(): void {
           </label>
         </div>
         <button id="image-source-confirm" style="width: 100%; margin-top: 14px; padding: 12px; background: #667eea; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">확인</button>
+      </div>
+    </div>
+
+    <!-- ✅ 엔진 실패 시 동작 서브 모달 -->
+    <div id="image-fallback-policy-submodal" style="
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      z-index: 10030;
+      justify-content: center;
+      align-items: center;
+    ">
+      <div style="max-width: 420px; width: 92%; padding: 20px; border-radius: 16px; background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+        <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 700; color: #0f172a;">🧭 엔진 실패 시 동작</h4>
+        <div style="font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 12px;">선택한 이미지 엔진의 의미를 보존할지, 결과 생성을 우선할지 정합니다.</div>
+        <div style="display: grid; gap: 8px;">
+          <label class="fallback-policy-option" data-value="engine-only" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #0ea5e9; background: #e0f2fe; transition: all 0.2s;">
+            <div style="font-size: 13px; font-weight: 800; color: #075985;">선택 엔진만 사용</div>
+            <div style="font-size: 11px; color: #0369a1; margin-top: 3px;">ImageFX를 고르면 ImageFX만 시도합니다. 자동 대체 없음.</div>
+          </label>
+          <label class="fallback-policy-option" data-value="ask" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: #f8fafc; transition: all 0.2s;">
+            <div style="font-size: 13px; font-weight: 800; color: #334155;">선택 엔진 우선, 실패 시 묻기</div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 3px;">대체가 필요하면 확인창을 띄운 뒤 한 번만 대체합니다.</div>
+          </label>
+          <label class="fallback-policy-option" data-value="guarantee" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: #f8fafc; transition: all 0.2s;">
+            <div style="font-size: 13px; font-weight: 800; color: #166534;">결과 보장 우선, 자동 대체</div>
+            <div style="font-size: 11px; color: #15803d; margin-top: 3px;">선택 엔진이 부적합하면 수집 이미지/대체 엔진을 자동 사용합니다.</div>
+          </label>
+        </div>
+        <button id="image-fallback-policy-confirm" style="width: 100%; margin-top: 14px; padding: 12px; background: #0ea5e9; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">확인</button>
       </div>
     </div>
     
@@ -1647,6 +1712,43 @@ export function createHeadingImageModal(): void {
         });
       }
     }
+  });
+
+  document.getElementById('open-image-fallback-policy-btn')?.addEventListener('click', () => {
+    const subModal = document.getElementById('image-fallback-policy-submodal');
+    if (subModal) {
+      subModal.style.display = 'flex';
+      const currentPolicy = getImageFallbackPolicy();
+      selectedFallbackPolicyValue = currentPolicy;
+      document.querySelectorAll('.fallback-policy-option').forEach(opt => {
+        const value = opt.getAttribute('data-value');
+        (opt as HTMLElement).style.borderColor = value === currentPolicy ? '#0ea5e9' : '#e5e7eb';
+        (opt as HTMLElement).style.transform = value === currentPolicy ? 'scale(1.02)' : 'scale(1)';
+      });
+    }
+  });
+
+  let selectedFallbackPolicyValue: ImageFallbackPolicy = getImageFallbackPolicy();
+  const fallbackPolicyOptions = document.querySelectorAll('.fallback-policy-option');
+  fallbackPolicyOptions.forEach(opt => {
+    opt.addEventListener('click', () => {
+      const value = opt.getAttribute('data-value') as ImageFallbackPolicy;
+      selectedFallbackPolicyValue = value;
+      fallbackPolicyOptions.forEach(o => {
+        (o as HTMLElement).style.borderColor = '#e5e7eb';
+        (o as HTMLElement).style.transform = 'scale(1)';
+      });
+      (opt as HTMLElement).style.borderColor = '#0ea5e9';
+      (opt as HTMLElement).style.transform = 'scale(1.02)';
+    });
+  });
+
+  document.getElementById('image-fallback-policy-confirm')?.addEventListener('click', () => {
+    setImageFallbackPolicy(selectedFallbackPolicyValue);
+    const display = document.getElementById('current-image-fallback-policy-display');
+    if (display) display.textContent = FALLBACK_POLICY_NAMES[selectedFallbackPolicyValue];
+    const subModal = document.getElementById('image-fallback-policy-submodal');
+    if (subModal) subModal.style.display = 'none';
   });
 
   // ✅ [2026-01-26] 이미지 스타일 버튼 클릭 → 서브 모달 열기
@@ -2727,6 +2829,11 @@ export function openHeadingImageModal(): void {
         sourceDisplay.textContent = SOURCE_NAMES[currentSource];
       }
     }
+
+    const fallbackPolicy = getImageFallbackPolicy();
+    const fallbackPolicyDisplay = document.getElementById('current-image-fallback-policy-display');
+    if (fallbackPolicyDisplay) fallbackPolicyDisplay.textContent = FALLBACK_POLICY_NAMES[fallbackPolicy];
+
     // ✅ [SPEC-DROPSHOT-2026 2단계] dropshot이 현재 엔진이면 로그인 행 노출
     {
       const dsRow = document.getElementById('hsettings-dropshot-login');
@@ -3017,12 +3124,16 @@ export async function openImageQuotaDashboard(): Promise<void> {
 (window as any).setHeadingImageMode = setHeadingImageMode;
 (window as any).getGlobalImageSource = getGlobalImageSource;
 (window as any).setGlobalImageSource = setGlobalImageSource;
+(window as any).getImageFallbackPolicy = getImageFallbackPolicy;
+(window as any).setImageFallbackPolicy = setImageFallbackPolicy;
 
 // ✅ [2026-01-29] 전역 노출 - 모든 유틸 함수 접근 가능
 (window as any).getHeadingImageMode = getHeadingImageMode;
 (window as any).setHeadingImageMode = setHeadingImageMode;
 (window as any).getGlobalImageSource = getGlobalImageSource;
 (window as any).setGlobalImageSource = setGlobalImageSource;
+(window as any).getImageFallbackPolicy = getImageFallbackPolicy;
+(window as any).setImageFallbackPolicy = setImageFallbackPolicy;
 (window as any).getImageStyle = getImageStyle;
 (window as any).setImageStyle = setImageStyle;
 (window as any).getImageRatio = getImageRatio;
