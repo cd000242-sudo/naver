@@ -12,7 +12,7 @@ function IndexPage() {
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
         const prevTitle = document.title;
-        document.title = 'Leaders Pro (리더스프로) | 네이버 자동화 툴 · AI 블로그 자동 발행';
+        document.title = '리더스프로 | Leaders Pro 네이버 자동화 툴 · AI 블로그 자동 발행';
         return () => { document.title = prevTitle; };
     }, []);
 
