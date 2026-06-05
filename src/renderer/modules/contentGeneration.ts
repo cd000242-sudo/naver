@@ -99,6 +99,15 @@ declare function getReviewHeadingSeed(...args: any[]): any;
 declare function applyReviewHeadingPrefix(...args: any[]): void;
 declare function applyKeywordPrefixToTitleContinuous(...args: any[]): any;
 
+const CONTENT_GENERATION_TIMEOUT_MS = 900000;
+const CONTENT_GENERATION_RETRY_COUNT = 1;
+const CONTENT_GENERATION_RETRY_NOTICE = '응답 지연이나 일시 네트워크 오류가 있으면 앱이 자동으로 1회 재시도합니다.';
+
+function appendContentGenerationRetryNotice(activeModal?: any): void {
+  appendLog(`🔁 ${CONTENT_GENERATION_RETRY_NOTICE}`);
+  if (activeModal?.addLog) activeModal.addLog(`🔁 ${CONTENT_GENERATION_RETRY_NOTICE}`);
+}
+
 // ✅ [2026-03-14] 강화된 키워드 중복 제거 공통 함수
 // 키워드와 AI 생성 제목 사이의 중복을 5단계로 제거:
 // 1. 정규화 (따옴표/특수문자 제거) 버전으로 매칭
@@ -489,14 +498,15 @@ export async function generateContentFromUrl(
     showUnifiedProgress(30, '🤖 AI 글 생성 중...', `${generator} 엔진으로 콘텐츠 생성 중`);
     appendLog(`🤖 ${generator} 엔진으로 AI 글 생성 중... (${minChars}자 목표)`);
     if (activeModal.addLog) activeModal.addLog(`🤖 ${generator} 엔진으로 콘텐츠 생성 중...`);
+    appendContentGenerationRetryNotice(activeModal);
 
     const apiResponse = await apiClient.call(
       'generateStructuredContent',
       [payload],
       {
-        retryCount: 2,
+        retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: 900000 // ✅ 15분 타임아웃 (Main 모델 폴백 체인 최대 12분 + 여유)
+        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 15분 타임아웃 (Main 모델 폴백 체인 최대 12분 + 여유)
       }
     );
 
@@ -1055,14 +1065,15 @@ export async function generateContentFromKeywords(
     const crawlStatus = crawledText ? ' (실시간 정보 기반)' : '';
     showUnifiedProgress(35, '🤖 AI 글 생성 중...', `${generator} 엔진으로 콘텐츠 생성 중${crawlStatus}`);
     appendLog(`🤖 ${generator} 엔진으로 AI 글 생성 중... (${minChars}자 목표)${crawlStatus}`);
+    appendContentGenerationRetryNotice(activeModal);
 
     const apiResponse = await apiClient.call(
       'generateStructuredContent',
       [payload],
       {
-        retryCount: 2,
+        retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: 900000 // ✅ 15분 타임아웃 (Main 모델 폴백 체인 최대 12분 + 여유)
+        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 15분 타임아웃 (Main 모델 폴백 체인 최대 12분 + 여유)
       }
     );
 
@@ -1659,6 +1670,7 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
 결과물은 AI가 아닌 사람이 직접 쓴 것처럼 자연스러워야 합니다.`;
 
     showUnifiedProgress(30, 'AI가 글을 개선 중...', '페러프레이징 및 퀄리티 향상 중');
+    appendContentGenerationRetryNotice();
 
     // ✅ [결함 #3] 프롬프트 이중 주입 제거
     // draftText에는 원문만, customPrompt에만 재작성 규칙 전달
@@ -1681,9 +1693,9 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
       'generateStructuredContent',
       [payload],
       {
-        retryCount: 2,
+        retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: 900000 // ✅ 15분 타임아웃
+        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 15분 타임아웃
       }
     );
 

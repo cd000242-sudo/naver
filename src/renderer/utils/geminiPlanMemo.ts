@@ -1,9 +1,8 @@
-// Session-level memo for the Gemini plan modal answer.
+// Session-level memo for the Gemini usage mode.
 //
-// Why this exists: `ensureExternalApiCostConsent` in costAndAutoGen.ts asks
-// the user "free or paid?" once, then writes the answer to disk via IPC
-// saveConfig. Subsequent calls read it back via IPC getConfig and skip the
-// modal. That round-trip is fragile under load:
+// Why this exists: `ensureExternalApiCostConsent` and settings save the Gemini
+// plan mode through IPC. Subsequent calls read it back via IPC getConfig and
+// skip any user-facing prompt. That round-trip is fragile under load:
 //
 //   1. getConfig has a 10s timeout. During continuous publishing, many
 //      concurrent IPC calls (image gen, log streaming, status pings) can
@@ -14,8 +13,8 @@
 //   3. The user's saveConfig may itself fail silently (e.g. file lock). The
 //      old logic has no in-memory fallback, so the modal keeps re-appearing.
 //
-// Fix: cache the user's explicit answer in module memory + localStorage. Once
-// the user has clicked 유료/무료 in this session (or any prior session that
+// Fix: cache the resolved mode in module memory + localStorage. Once the app
+// has resolved automatic mode in this session (or any prior session that
 // reached localStorage), never ask again — even if IPC config is stuck.
 //
 // This is purely a *defensive* layer. The disk config remains the source of
@@ -24,12 +23,12 @@
 
 const LS_KEY = 'geminiPlanType_session_v1';
 
-type PlanType = 'free' | 'paid';
+type PlanType = 'auto' | 'free' | 'paid';
 
 let _memo: PlanType | null = null;
 
 function isPlan(v: unknown): v is PlanType {
-    return v === 'free' || v === 'paid';
+    return v === 'auto' || v === 'free' || v === 'paid';
 }
 
 export function rememberPlan(type: PlanType): void {

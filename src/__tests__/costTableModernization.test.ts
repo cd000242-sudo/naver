@@ -5,7 +5,7 @@
  *  1. 환경설정 라디오 버튼 현행 모델만 노출 (Haiku 4.5 / Opus 4.7 / ₩210)
  *  2. 비용표 모달 이미지 엔진 소개에 Flow/ImageFX 무료 엔진 포함
  *  3. FAQ/가이드 모달에 Deprecated 엔진 이름(DALL-E 3 / Stability AI 단독) 미노출
- *  4. Gemini 2.5 Flash 무료 쿼터 3곳(드롭다운 2개 + 비용표 1개) 숫자 통일 (500/일)
+ *  4. Gemini 2.5 Flash 무료 쿼터 3곳(드롭다운 2개 + 비용표 1개) 숫자 통일 (250/일)
  *  5. 이미지 소스 드롭다운에 Flow 옵션 존재
  */
 import { describe, it, expect } from 'vitest';
@@ -81,17 +81,26 @@ describe('v1.4.81 — 비용표·환경설정 현대화', () => {
   });
 
   describe('Gemini 2.5 Flash 무료 쿼터 3곳 통일', () => {
-    it('선택 드롭다운(option) 2개 모두 500/일 사용', () => {
+    it('선택 드롭다운(option) 2개 모두 250/일 사용', () => {
       const matches = html.match(/Gemini 2\.5 Flash \(무료 \d+\/일/g) || [];
-      // 최소 2개는 반드시 노출되어야 하고 모두 500/일로 통일
+      // 최소 2개는 반드시 노출되어야 하고 모두 250/일로 통일
       expect(matches.length).toBeGreaterThanOrEqual(2);
       matches.forEach((m) => {
-        expect(m).toMatch(/무료 500\/일/);
+        expect(m).toMatch(/무료 250\/일/);
       });
     });
 
-    it('비용표 모달에서 Gemini 2.5 Flash 무료 500/일 쿼터 일관', () => {
-      expect(html).toMatch(/Gemini 2\.5 Flash[\s\S]{0,200}?500/);
+    it('비용표 모달에서 Gemini 2.5 Flash 무료 250/일 쿼터 일관', () => {
+      expect(html).toMatch(/Gemini 2\.5 Flash[\s\S]{0,200}?250/);
+    });
+  });
+
+  describe('Gemini 자동 플랜 UI', () => {
+    it('무료/유료 선택 라디오 대신 자동 모드를 저장한다', () => {
+      expect(html).toMatch(/id="gemini-plan-auto-mode"/);
+      expect(html).toMatch(/name="geminiPlanType"\s+value="auto"|value="auto"\s+name="geminiPlanType"/);
+      expect(html).not.toMatch(/name="geminiPlanType"\s+value="free"|value="free"\s+name="geminiPlanType"/);
+      expect(html).not.toMatch(/name="geminiPlanType"\s+value="paid"|value="paid"\s+name="geminiPlanType"/);
     });
   });
 });

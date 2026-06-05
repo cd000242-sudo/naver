@@ -138,126 +138,44 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
     config = {};
   }
 
-  // ✅ 나노바나나 3종 / Fal.ai (FLUX) 전용 플랜 선택 로직
+  // ✅ 나노바나나 3종 / Fal.ai (FLUX) 전용 플랜 자동 처리
   if (provider === 'nano-banana' || provider === 'nano-banana-2' || provider === 'nano-banana-pro' || provider === 'falai') {
-    // 플랜이 이미 설정되어 있으면 통과 + 세션 메모에도 반영
-    if (config.geminiPlanType === 'free' || config.geminiPlanType === 'paid') {
-      console.log(`[CostConsent] ✅ disk hit (${config.geminiPlanType}) → memo 채움, modal 생략`);
-      rememberPlan(config.geminiPlanType);
-      return true;
-    }
-    console.log(`[CostConsent] ⚠️ memo miss + disk miss (geminiPlanType=${config.geminiPlanType}) → modal 진입`);
+    const diskPlan = config.geminiPlanType;
+    let resolvedPlan: 'auto' | 'free' | 'paid' =
+      diskPlan === 'auto' || diskPlan === 'free' || diskPlan === 'paid'
+        ? diskPlan
+        : 'auto';
 
-    // ✅ 보안 강화: 라이선스 타입 확인 (IPC로 main process에 요청)
+    // ✅ 보안 강화: 무료 앱 라이선스는 사용자 선택 없이 free 정책 적용
     let isFreeLicense = false;
     try {
       const result = await window.api.getLicense();
       isFreeLicense = result?.license?.licenseType === 'free';
     } catch {
-      // 라이선스 확인 실패 시 안전하게 free로 간주
-      isFreeLicense = true;
+      isFreeLicense = false;
     }
 
-    // 무료 라이선스면 팝업 없이 바로 'free'로 설정
     if (isFreeLicense) {
-      rememberPlan('free');
-      await window.api.saveConfig({
-        ...config,
-        geminiPlanType: 'free',
-        geminiImageDailyCount: 0,
-        geminiImageLastReset: new Date().toISOString().split('T')[0]
-      });
-      console.log('[Security] 무료 라이선스 감지 → geminiPlanType을 자동으로 "free"로 설정');
-      return true;
+      resolvedPlan = 'free';
     }
 
-    // 모달 생성 및 사용자 응답 대기 (유료 라이선스 사용자만 여기 도달)
-    return new Promise<boolean>((resolve) => {
-      // 오버레이
-      const overlay = document.createElement('div');
-      overlay.style.cssText = 'position:fixed; inset:0; z-index: 999999; background: rgba(0,0,0,0.65); display:flex; align-items:center; justify-content:center; padding: 1rem; backdrop-filter: blur(4px);';
-
-      const modal = document.createElement('div');
-      modal.style.cssText = 'width: min(500px, 90vw); background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: 16px; box-shadow: 0 25px 50px rgba(0,0,0,0.25); overflow:hidden; animation: modal-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);';
-
-      modal.innerHTML = `
-        <div style="background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%); padding: 1.5rem; text-align: center;">
-          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🍌</div>
-          <h2 style="margin: 0; color: #fff; font-size: 1.5rem; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">나노 바나나 프로<br>사용자 플랜 확인</h2>
-        </div>
-        <div style="padding: 1.5rem;">
-          <p style="margin: 0 0 1.5rem; color: var(--text-strong); font-size: 1.05rem; line-height: 1.6; text-align: center;">
-            <b style="color: #FF9800;">Gemini API</b>를 사용하여 고품질 이미지를 생성합니다.<br>
-            사용 중인 API 키의 <b>요금제(플랜)</b>를 선택해주세요.
-          </p>
-          
-          <div style="background: var(--bg-secondary); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
-            <ul style="margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;">
-              <li><b>무료 사용자:</b> 하루 사용량이 제한됩니다. (약 45장)</li>
-              <li><b>유료 사용자:</b> 제한 없이 계속 사용할 수 있습니다.</li>
-            </ul>
-          </div>
-
-          <div style="display: flex; gap: 0.75rem; flex-direction: column;">
-            <button id="btn-paid-plan" style="padding: 1rem; border: 2px solid #ddd; border-radius: 12px; background: white; color: #333; cursor: pointer; font-weight: 700; font-size: 1rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-              <span>💳</span> 저는 <b>유료 플랜</b> 사용자입니다
-            </button>
-            <button id="btn-free-plan" style="padding: 1rem; border: none; border-radius: 12px; background: #FF9800; color: white; cursor: pointer; font-weight: 700; font-size: 1rem; transition: all 0.2s; box-shadow: 0 4px 6px rgba(255, 152, 0, 0.25);">
-              <span>🆓</span> 저는 <b>무료 사용자</b>입니다
-            </button>
-          </div>
-          <div style="margin-top: 1rem; text-align: center;">
-           <button id="btn-cancel" style="background: none; border: none; color: var(--text-muted); text-decoration: underline; cursor: pointer; font-size: 0.9rem;">취소하고 다른 생성기 사용하기</button>
-          </div>
-        </div>
-      `;
-
-      overlay.appendChild(modal);
-      document.body.appendChild(overlay);
-
-      // 스타일 애니메이션 추가
-      const style = document.createElement('style');
-      style.innerHTML = `
-        @keyframes modal-pop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        #btn-paid-plan:hover { border-color: #4CAF50; color: #4CAF50; background: #f0fdf4; transform: translateY(-2px); }
-        #btn-free-plan:hover { background: #f57c00; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(255, 152, 0, 0.3); }
-      `;
-      document.head.appendChild(style);
-
-      // 핸들러
-      const saveAndClose = async (type: 'free' | 'paid') => {
-        // ✅ [v2.10.76] saveConfig 결과와 무관하게 세션 메모를 *먼저* 채운다.
-        //   saveConfig가 실패하거나 다음 getConfig가 타임아웃돼도 모달 재출현 방지.
-        rememberPlan(type);
-        try {
-          await window.api.saveConfig({
-            ...config,
-            geminiPlanType: type,
-            // 날짜/카운트 초기화
-            geminiImageDailyCount: 0,
-            geminiImageLastReset: new Date().toISOString().split('T')[0]
-          });
-          toastManager.success(`플랜이 [${type === 'free' ? '무료' : '유료'}]로 설정되었습니다.`);
-          resolve(true); // 성공
-        } catch (e) {
-          console.error(e);
-          // 메모는 채워둔 상태이므로 한 세션 동안 모달 재출현 안 함.
-          // 디스크 저장 실패는 다음 saveConfig 성공 시 자동 회복.
-          resolve(true);
-        } finally {
-          overlay.remove();
-          style.remove();
-        }
-      };
-
-      document.getElementById('btn-paid-plan')?.addEventListener('click', () => saveAndClose('paid'));
-      document.getElementById('btn-free-plan')?.addEventListener('click', () => saveAndClose('free'));
-      document.getElementById('btn-cancel')?.addEventListener('click', () => {
-        overlay.remove();
-        style.remove();
-        resolve(false); // 취소
-      });
-    });
+    rememberPlan(resolvedPlan);
+    if (diskPlan !== resolvedPlan) {
+      try {
+        await window.api.saveConfig({
+          ...config,
+          geminiPlanType: resolvedPlan,
+          geminiImageDailyCount: Number(config.geminiImageDailyCount || 0),
+          geminiImageLastReset: config.geminiImageLastReset || new Date().toISOString().split('T')[0]
+        });
+        console.log(`[CostConsent] ✅ Gemini 플랜 자동 저장: ${resolvedPlan}`);
+      } catch (e) {
+        console.warn('[CostConsent] Gemini 자동 플랜 저장 실패(세션 메모로 진행):', e);
+      }
+    } else {
+      console.log(`[CostConsent] ✅ disk hit (${resolvedPlan}) → memo 채움, modal 생략`);
+    }
+    return true;
   }
 
   // ✅ [2026-02-24] 비용/할당량 경고 다이얼로그 제거 - 자동 동의 처리

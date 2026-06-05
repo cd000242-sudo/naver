@@ -2,6 +2,7 @@ import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai';
 import { buildSystemPromptFromHint, type PromptMode } from './promptLoader.js';
 import { loadConfig, saveConfig } from './configManager.js';
 import { GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
+import { GEMINI_TEXT_FREE_TIER_LIMITS } from './geminiQuotaPolicy.js';
 
 // ==================== 타입 정의 ====================
 
@@ -29,15 +30,15 @@ interface GenerateResult {
 
 // ==================== 상수 ====================
 
-// ✅ [v1.4.49 revert] 기본 모델을 Flash로 되돌림 (Flash-Lite 실제 무료 RPD는 20/일로 너무 적음)
+// 기본 모델은 품질·속도 균형이 가장 무난한 Flash.
 const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 
 // ✅ 사용 가능한 모델 목록 (환경설정에서 선택 가능)
 // [v1.4.49] 실측 기반 정확한 무료 할당량 표시
 export const AVAILABLE_MODELS = [
-  { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash (⚖️ 무료 250/일 · 기본 추천)', tier: 'standard' },
-  { id: 'gemini-2.5-flash-lite', name: 'Gemini 2.5 Flash-Lite (💰 무료 20/일 · 백업용)', tier: 'budget' },
-  { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro (👑 유료 전용)', tier: 'premium' },
+  { id: 'gemini-2.5-flash', name: `Gemini 2.5 Flash (무료 ${GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-flash'].rpd}/일 · 기본 추천)`, tier: 'standard' },
+  { id: 'gemini-2.5-flash-lite', name: `Gemini 2.5 Flash-Lite (무료 ${GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-flash-lite'].rpd}/일 · 대량 생성)`, tier: 'budget' },
+  { id: 'gemini-2.5-pro', name: `Gemini 2.5 Pro (무료 ${GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-pro'].rpd}/일 · 고품질)`, tier: 'premium' },
 ];
 
 const BASE_FALLBACK_MODELS = [

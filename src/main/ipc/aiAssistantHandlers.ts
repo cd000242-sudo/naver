@@ -70,7 +70,7 @@ export function registerAiAssistantHandlers(): void {
                 'gemini-2.5-pro',
             ];
 
-            // ✅ [v1.4.49 revert] 죽은/무료차단 모델 → Flash로 마이그레이션 (Flash-Lite RPD 20/일로 부족)
+            // 죽은/차단된 모델은 품질·속도 균형이 가장 무난한 Flash로 마이그레이션
             const modelMigrationMap: Record<string, string> = {
                 'gemini-3-pro': 'gemini-2.5-flash',
                 'gemini-3-flash': 'gemini-2.5-flash',

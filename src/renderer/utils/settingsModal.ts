@@ -208,8 +208,8 @@ async function loadCurrentSettings(): Promise<void> {
             console.log(`[SettingsModal] ✅ primaryGeminiTextModel 라디오 복원: ${savedTextModel} (${textModelRadios.length}개 라디오)`);
         }
 
-        // ✅ [v2.10.221] Gemini 플랜(free/paid) 라디오도 매번 디스크 값으로 동기화
-        const savedPlan = (config as any).geminiPlanType || 'free';
+        // ✅ [2026-06-05] Gemini 자동 플랜 라디오도 매번 디스크 값으로 동기화
+        const savedPlan = (config as any).geminiPlanType || 'auto';
         const planRadios = document.getElementsByName('geminiPlanType') as NodeListOf<HTMLInputElement>;
         if (planRadios.length > 0) {
             planRadios.forEach(r => { r.checked = (r.value === savedPlan); });

@@ -553,21 +553,21 @@ export async function generateWithNanoBananaPro(
       console.log(`[NanoBananaPro] 📅 날짜 변경됨 → 카운트 초기화 (${todayKey})`);
     }
 
-    const planType = config.geminiPlanType || 'paid';
+    const planType = config.geminiPlanType || 'auto';
     console.log(`[NanoBananaPro] 적용된 플랜 정책: ${planType.toUpperCase()}`);
 
     const currentCount = config.geminiImageDailyCount || 0;
     const FREE_DAILY_LIMIT = 100;
     const PAID_DAILY_LIMIT = 9999;
-    const isPaid = planType === 'paid';
-    const limit = isPaid ? PAID_DAILY_LIMIT : FREE_DAILY_LIMIT;
+    const isStrictFreePlan = planType === 'free';
+    const limit = isStrictFreePlan ? FREE_DAILY_LIMIT : PAID_DAILY_LIMIT;
     const estimatedBatchCost = items.length * 0.04;
 
     console.log(`[NanoBananaPro] 현재 플랜: ${planType.toUpperCase()}, 금일 사용량: ${currentCount}/${limit}`);
     console.log(`[NanoBananaPro] 💰 이번 작업 예상 비용: 약 $${estimatedBatchCost.toFixed(2)} (KRW 약 ${(estimatedBatchCost * 1350).toLocaleString()}원)`);
 
     if (currentCount >= limit) {
-      throw new Error(isPaid ? '⛔ 유료 플랜 한도 초과' : '⛔ 무료 플랜 한도 초과');
+      throw new Error(isStrictFreePlan ? '⛔ 무료 플랜 한도 초과' : '⛔ 자동 플랜 한도 초과');
     }
 
     if (!apiKey) {

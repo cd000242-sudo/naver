@@ -6,6 +6,7 @@ import { IpcContext } from '../types';
 import { loadConfig, saveConfig } from '../../configManager.js';
 import { flushGeminiUsage, getGeminiUsageSnapshot } from '../../gemini.js';
 import { flushAllApiUsage, getApiUsageSnapshot, resetApiUsage, type ApiProvider } from '../../apiUsageTracker.js';
+import { GEMINI_TEXT_FREE_TIER_LIMITS, formatGeminiFreeTierSummary } from '../../geminiQuotaPolicy.js';
 
 /**
  * API/Gemini 핸들러 등록
@@ -135,8 +136,12 @@ export function registerApiHandlers(_ctx: IpcContext): void {
 
             // 4. 사용자의 현재 플랜 설정 읽기
             const config = await loadConfig();
-            // ✅ [v1.4.49] 기본값을 'free'로 (결제 수단 없는 사용자가 대다수)
-            const userPlanType = config.geminiPlanType || 'free';
+            // ✅ [2026-06-05] 기본값은 자동 모드 — 사용자가 무료/유료를 직접 고르지 않음
+            const rawPlanType = config.geminiPlanType;
+            const userPlanType: 'auto' | 'free' | 'paid' =
+                rawPlanType === 'auto' || rawPlanType === 'free' || rawPlanType === 'paid'
+                    ? rawPlanType
+                    : 'auto';
 
             // ✅ [2026-03-19] flush 후 메모리+디스크 합산 스냅샷 사용 (배치 중 누적분 포함)
             await flushGeminiUsage();
@@ -145,42 +150,63 @@ export function registerApiHandlers(_ctx: IpcContext): void {
 
             // ✅ [v1.4.49] Google 공식 가격표 + 실측 기반 정확한 한도 (2026-04 기준)
             // 출처: https://ai.google.dev/gemini-api/docs/rate-limits
-            const planInfo = userPlanType === 'free' ? {
+            const flashLimit = GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-flash'];
+            const liteLimit = GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-flash-lite'];
+            const proLimit = GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-pro'];
+
+            const freePlanInfo = {
                 label: '🆓 무료 (Free tier)',
                 limits: {
                     // Flash 2.5 기준 (실측)
-                    rpm: 10,         // 분당 요청 수
-                    rpd: 250,        // 일일 요청 수
-                    tpm: '250,000',  // 분당 토큰
-                    note: 'Flash-Lite는 RPD 20건/일로 더 적음. Pro는 차단(limit:0).',
+                    rpm: flashLimit.rpm,
+                    rpd: flashLimit.rpd,
+                    tpm: flashLimit.tpm.toLocaleString(),
+                    note: formatGeminiFreeTierSummary(),
                 },
                 pricing: {
                     flash_input: '$0 (무료)',
                     flash_output: '$0 (무료)',
-                    flash_lite_input: '$0 (무료, RPD 20/일)',
-                    pro_input: '사용 불가 (무료 티어 차단)',
-                    pro_output: '사용 불가',
-                    note: '무료는 하루 250건 한도. 초과 시 다음날까지 대기. 상업적 사용 가능.',
-                },
-            } : {
-                label: '💎 유료 (Tier 1 / Pay-as-you-go)',
-                limits: {
-                    // Flash 2.5 Tier 1 기준
-                    rpm: 1000,        // 분당 요청 수
-                    rpd: 10000,       // 일일 요청 수 (Flash 기준, Flash-Lite는 30000)
-                    tpm: '1,000,000', // 분당 토큰
-                    note: 'Flash-Lite는 RPD 30,000건/일로 더 많음. Pro는 50건/일.',
-                },
-                pricing: {
-                    flash_input: '$0.10 / 1M tokens',
-                    flash_output: '$0.40 / 1M tokens',
-                    flash_lite_input: '$0.025 / 1M tokens (Flash의 1/4)',
-                    flash_lite_output: '$0.10 / 1M tokens (Flash의 1/4)',
-                    pro_input: '$1.25 / 1M tokens',
-                    pro_output: '$5.00 / 1M tokens',
-                    note: 'Flash-Lite 권장 — 글 1개당 약 ₩1로 가장 저렴. 크레딧 소진 후 카드 자동 청구 시작.',
+                    flash_lite_input: `$0 (무료, ${liteLimit.rpd.toLocaleString()}회/일)`,
+                    pro_input: `$0 (무료, ${proLimit.rpd.toLocaleString()}회/일)`,
+                    pro_output: '$0 (무료)',
+                    note: '무료 한도는 API 키가 아니라 Google AI Studio 프로젝트 단위입니다. 429가 나면 RPM/TPM/RPD 중 하나를 넘은 상태입니다.',
                 },
             };
+            const paidPlanInfo = {
+                label: '💎 유료 (Tier 1 / Pay-as-you-go)',
+                limits: {
+                    rpm: 'AI Studio에서 확인',
+                    rpd: 'AI Studio에서 확인',
+                    tpm: 'AI Studio에서 확인',
+                    note: '유료 한도는 프로젝트 사용량 등급에 따라 달라집니다. 결제 프로젝트와 별도 무료 프로젝트 키를 보조 키 풀에 넣으면 무료 한도를 먼저 사용할 수 있습니다.',
+                },
+                pricing: {
+                    flash_input: '$0.30 / 1M tokens',
+                    flash_output: '$2.50 / 1M tokens',
+                    flash_lite_input: '$0.10 / 1M tokens',
+                    flash_lite_output: '$0.40 / 1M tokens',
+                    pro_input: '$1.25 / 1M tokens',
+                    pro_output: '$10.00 / 1M tokens',
+                    note: '대량 생성은 Flash-Lite가 가장 저렴합니다. 비용 추정은 실제 usageMetadata의 입력/출력/생각 토큰을 기준으로 누적됩니다.',
+                },
+            };
+            const planInfo = userPlanType === 'free'
+                ? freePlanInfo
+                : userPlanType === 'paid'
+                    ? paidPlanInfo
+                    : {
+                        label: '⚙️ 자동 감지',
+                        limits: {
+                            rpm: '키/프로젝트별 자동 확인',
+                            rpd: '키/프로젝트별 자동 확인',
+                            tpm: '키/프로젝트별 자동 확인',
+                            note: '앱이 보조 키 풀을 먼저 사용하고, 한도 초과 시 다음 키로 전환합니다. 한도는 API 키가 아니라 Google AI Studio 프로젝트 단위입니다.',
+                        },
+                        pricing: {
+                            ...paidPlanInfo.pricing,
+                            note: '보조 무료 프로젝트 키의 무료 할당량을 먼저 사용하고, 메인 키 사용분은 실제 usageMetadata 기반으로 비용 추적합니다.',
+                        },
+                    };
 
             // 6. 결과 조합 — 모든 데이터가 실제 API 응답 또는 공식 문서 기반
             return {

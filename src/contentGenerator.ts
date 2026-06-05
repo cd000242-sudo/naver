@@ -12,6 +12,12 @@ import {
 import { generatePerplexityContent, translatePerplexityError } from './perplexity.js';
 // ✅ [v2.7.52] modelRegistry SSOT
 import { CLAUDE_MODELS, GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
+import { getGeminiFreeTierDailyLimit, formatGeminiFreeTierSummary } from './geminiQuotaPolicy.js';
+import {
+  buildGeminiKeyExecutionPlan,
+  resolveContentGenerationCostPolicy,
+  type ContentGenerationCostPolicy,
+} from './geminiCostOptimizer.js';
 
 import JSON5 from 'json5';
 import { getGeminiModel } from './gemini.js';
@@ -4957,6 +4963,15 @@ const geminiPromptCache = new Map<string, GeminiCacheEntry>();
 const GEMINI_CACHE_TTL = 3600; // 1시간
 const GEMINI_CACHE_MIN_TOKENS = { flash: 4096, pro: 2048 };
 
+interface GeminiResultCacheEntry {
+  text: string;
+  createdAt: number;
+}
+
+const geminiResultCache = new Map<string, GeminiResultCacheEntry>();
+const GEMINI_RESULT_CACHE_TTL_MS = 10 * 60 * 1000;
+const GEMINI_RESULT_CACHE_MAX = 50;
+
 /**
  * ✅ [v1.4.77] API 키별 캐시 지원 자동 감지
  * - 캐시 생성/사용 실패한 키는 세션 동안 캐시 스킵
@@ -4990,6 +5005,44 @@ function getCacheKey(systemText: string, modelName: string): string {
   return hash.digest('hex').substring(0, 32);
 }
 
+function getGeminiResultCacheKey(input: {
+  modelName: string;
+  systemText: string;
+  userText: string;
+  temperature: number;
+  useGrounding: boolean;
+}): string {
+  const crypto = require('crypto') as typeof import('crypto');
+  const hash = crypto.createHash('sha256');
+  hash.update(JSON.stringify({
+    modelName: input.modelName,
+    temperature: Number(input.temperature.toFixed(2)),
+    useGrounding: input.useGrounding,
+    systemText: input.systemText,
+    userText: input.userText,
+  }));
+  return hash.digest('hex').substring(0, 32);
+}
+
+function getCachedGeminiResult(cacheKey: string): string | undefined {
+  const entry = geminiResultCache.get(cacheKey);
+  if (!entry) return undefined;
+  if (Date.now() - entry.createdAt > GEMINI_RESULT_CACHE_TTL_MS) {
+    geminiResultCache.delete(cacheKey);
+    return undefined;
+  }
+  return entry.text;
+}
+
+function setCachedGeminiResult(cacheKey: string, text: string): void {
+  if (!text.trim()) return;
+  if (geminiResultCache.size >= GEMINI_RESULT_CACHE_MAX) {
+    const oldest = geminiResultCache.keys().next().value;
+    if (oldest) geminiResultCache.delete(oldest);
+  }
+  geminiResultCache.set(cacheKey, { text, createdAt: Date.now() });
+}
+
 /**
  * 캐시 만료 체크
  */
@@ -5010,11 +5063,11 @@ function cleanExpiredCaches(): void {
   }
 }
 
-// ✅ [v1.4.49] Gemini 모델 체인 — 플랜 타입별 스마트 기본값
-//   무료 플랜: Flash (RPD 250/일, 연속 발행 안정)
-//   유료 플랜: Flash-Lite (Tier1 RPD 30,000, Flash보다 3배 싸고 3배 많음)
+// ✅ Gemini 모델 체인 — 플랜 타입별 스마트 기본값
+//   자동/무료 모드: Flash (품질·속도 균형)
+//   유료 모드: Flash-Lite (저비용 대량 발행)
 //   사용자가 명시적으로 선택한 모델은 플랜 관계없이 그 선택 존중
-export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string; geminiModel?: string; geminiPlanType?: 'free' | 'paid' }): {
+export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string; geminiModel?: string; geminiPlanType?: 'auto' | 'free' | 'paid' }): {
   primaryModel: string;
   uniqueModels: string[];
   isPro: boolean;
@@ -5084,9 +5137,15 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
 
   // 1. API 키 로드 — 다중 키 로테이션 지원
   const primaryApiKey = (config?.geminiApiKey?.trim() || process.env.GEMINI_API_KEY || '').trim();
-  if (!primaryApiKey) throw new Error('Gemini API 키가 설정되지 않았습니다.');
-  const extraKeys: string[] = (config?.geminiApiKeys || []).map((k: string) => k.trim()).filter((k: string) => k && k !== primaryApiKey);
-  const allApiKeys = [primaryApiKey, ...extraKeys];
+  const extraKeys: string[] = (config?.geminiApiKeys || []).map((k: string) => k.trim()).filter(Boolean);
+  const keyPlan = buildGeminiKeyExecutionPlan({
+    primaryApiKey,
+    extraApiKeys: extraKeys,
+    planType: config?.geminiPlanType,
+    useFreeQuotaBeforePaid: config?.geminiUseFreeQuotaBeforePaid,
+  });
+  const allApiKeys = keyPlan.keys;
+  if (allApiKeys.length === 0) throw new Error('Gemini API 키가 설정되지 않았습니다.');
   let currentKeyIdx = 0;
   const getNextKey = (): string | null => {
     currentKeyIdx++;
@@ -5095,14 +5154,19 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   let trimmedKey = allApiKeys[0];
 
   if (allApiKeys.length > 1) {
-    console.log(`[Gemini] 🔑 API 키 ${allApiKeys.length}개 로테이션 준비 완료`);
+    console.log(`[Gemini] 🔑 API 키 ${allApiKeys.length}개 로테이션 준비 완료${keyPlan.freeQuotaFirst ? ' (무료 키 풀 우선)' : ''}`);
   }
 
   // 2. 모델 설정 — 사용자가 선택한 모델만 사용 (다른 모델로 몰래 전환 금지)
   const { primaryModel, isPro } = buildGeminiModelChain(config as any);
   const modelsToTry = [primaryModel];
+  const geminiPlanLabel = config?.geminiPlanType === 'paid'
+    ? '유료'
+    : config?.geminiPlanType === 'free'
+      ? '무료'
+      : '자동';
   const isPaidPlan = config?.geminiPlanType === 'paid';
-  console.log(`[Gemini] 모델: ${primaryModel} (플랜: ${isPaidPlan ? '유료' : '무료'})`);
+  console.log(`[Gemini] 모델: ${primaryModel} (플랜: ${geminiPlanLabel})`);
 
   let lastError: Error | null = null;
   // ✅ [v1.4.64] 재시도 3회로 축소 — 실패 확정까지 4분→1분 이하
@@ -5198,6 +5262,20 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         const useGrounding = (options.useGrounding !== false) && configGrounding && !isRawTextMode;
         if (isRawTextMode) {
           console.log('[Gemini] 📄 원문 모드 감지 (user > 500자) → 그라운딩 OFF (RECITATION 회피, 원문이 fact source)');
+        }
+
+        const resultCacheAllowed = minChars < 1000;
+        const resultCacheKey = resultCacheAllowed ? getGeminiResultCacheKey({
+          modelName,
+          systemText: geminiSystemText,
+          userText: geminiUserText,
+          temperature: activeTemperature,
+          useGrounding,
+        }) : '';
+        const cachedResult = resultCacheAllowed ? getCachedGeminiResult(resultCacheKey) : undefined;
+        if (cachedResult) {
+          console.log(`[GeminiResultCache] ✅ 동일 프롬프트 캐시 히트 (${modelName}, ${useGrounding ? 'grounded' : 'plain'}) — API 호출 생략`);
+          return cachedResult;
         }
 
         // 캐시 사용 시 systemInstruction 중복 금지 (캐시에 이미 포함)
@@ -5343,6 +5421,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             cleaned = cleaned.substring(start, end + 1);
           }
 
+          if (resultCacheAllowed) setCachedGeminiResult(resultCacheKey, cleaned);
           return cleaned;
         }
         // ✅ [v1.4.51] 빈 응답을 GeminiEmptyResponseError로 throw — finishReason별 대응
@@ -5434,8 +5513,9 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             `  1) Google AI Studio(aistudio.google.com) → 요금제에서 신용카드를 등록하고 유료(Pay-as-you-go)로 전환하세요.\n` +
             `     → 유료 전환 시 분당/일일 한도가 대폭 상향됩니다.\n` +
             `  2) 다른 무료 모델을 사용하려면 설정 → AI 엔진에서 모델을 변경하세요.\n` +
-            `  3) API 키를 추가 발급받아 설정에 등록하면 키 로테이션으로 한도를 늘릴 수 있습니다.\n\n` +
-            `⚠️ 참고: 유료 전환 시 Flash/Flash-Lite의 기존 무료 할당량도 사라지므로 주의하세요.`
+            `  3) 다른 Google AI Studio 프로젝트의 무료 키를 보조 키로 등록하면 무료 한도를 먼저 분산 사용할 수 있습니다.\n` +
+            `     단, 같은 프로젝트에서 키만 여러 개 만들면 한도는 늘어나지 않습니다.\n\n` +
+            `⚠️ 참고: ${formatGeminiFreeTierSummary()}`
           );
         }
 
@@ -5460,21 +5540,27 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             continue;
           }
           // ✅ [v1.4.64] 무료/유료 계정 구분하여 안내
-          const dailyLimit = modelName.includes('flash-lite') ? 20 : modelName.includes('pro') ? 0 : 250;
+          const dailyLimit = getGeminiFreeTierDailyLimit(modelName);
           throw new Error(
             `⏳ [${modelName}] 오늘의 무료 할당량(${dailyLimit}회/일)을 모두 사용했습니다.\n\n` +
-            `📌 현재 계정: ${isPaidPlan ? '유료(Pay-as-you-go)' : '무료'}\n\n` +
+            `📌 현재 모드: ${geminiPlanLabel}\n\n` +
             (isPaidPlan
               ? `💡 유료 계정인데 한도 초과가 발생했다면:\n` +
                 `  → Google AI Studio에서 분당/일일 요청 한도를 확인하세요.\n` +
                 `  → 한도 상향 요청이 필요할 수 있습니다.\n`
+              : config?.geminiPlanType === 'auto'
+                ? `💡 해결 방법:\n` +
+                  `  1) 다른 Google AI Studio 프로젝트의 보조 키를 추가하면 프로젝트별 한도를 분산할 수 있습니다.\n` +
+                  `  2) 같은 프로젝트에서 키만 여러 개 만들면 한도는 늘어나지 않습니다.\n` +
+                  `  3) 모든 보조 키가 소진되면 내일 자정(태평양 시간) 이후 자동 초기화됩니다.\n`
               : `💡 해결 방법:\n` +
                 `  1) 내일 자정(태평양 시간) 이후 자동 초기화됩니다.\n` +
                 `  2) Google AI Studio → 요금제에서 신용카드 등록 후 유료 전환하세요.\n` +
                 `     → 유료 전환 시 한도가 수천 회/일로 대폭 상향됩니다.\n` +
-                `  3) 추가 API 키를 발급받아 설정에 등록하면 한도를 2배로 늘릴 수 있습니다.\n`
+                `  3) 다른 Google AI Studio 프로젝트의 키를 추가하면 프로젝트별 한도를 분산할 수 있습니다.\n` +
+                `     단, 같은 프로젝트에서 키만 여러 개 만들면 한도는 늘어나지 않습니다.\n`
             ) +
-            `\n⚠️ 참고: 무료 한도는 모델별로 다릅니다 — Flash 250회/일, Flash-Lite 20회/일, Pro 유료 전용.`
+            `\n⚠️ 참고: ${formatGeminiFreeTierSummary()}`
           );
         }
 
@@ -5519,13 +5605,15 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           // ✅ [v1.4.64] 재시도 모두 소진 시 구체적 안내
           throw new Error(
             `⚡ [${modelName}] 분당 요청 한도(RPM) 초과로 ${perModelMaxRetries}회 재시도했지만 실패했습니다.\n\n` +
-            `📌 원인: ${isPaidPlan ? '유료 플랜의 분당 한도를 초과' : '무료 플랜은 분당 10회로 제한'}되어 있습니다.\n\n` +
+            `📌 원인: ${config?.geminiPlanType === 'auto' ? '자동 모드에서 현재 키/프로젝트의 분당 한도를 초과' : isPaidPlan ? '유료 플랜의 분당 한도를 초과' : '무료 플랜은 분당 10회로 제한'}되어 있습니다.\n\n` +
             `💡 해결 방법:\n` +
             `  1) 1~2분 후 다시 시도하세요 (한도가 자동 초기화됩니다).\n` +
             `  2) 연속 발행 간격을 늘려주세요 (현재 너무 빠르게 요청 중).\n` +
             (isPaidPlan
               ? `  3) Google AI Studio에서 분당 한도 상향을 요청하세요.\n`
-              : `  3) 유료 전환 시 분당 한도가 10회 → 2,000회로 대폭 상향됩니다.\n`
+              : config?.geminiPlanType === 'auto'
+                ? `  3) 보조 키 풀에 다른 프로젝트 키를 추가하면 앱이 다음 키로 자동 전환합니다.\n`
+              : `  3) 유료 전환 시 프로젝트 사용량 등급에 따라 분당/일일 한도가 상향됩니다.\n`
             )
           );
         }
@@ -5611,7 +5699,7 @@ function translateGeminiError(rawMessage: string): string {
         '⚠️ 유료 전환 시 기존 무료 할당량도 사라지므로 주의!' + detail;
     }
     return '⚡ 분당 요청 한도 초과! 1~2분 후 자동 해제됩니다.\n' +
-      '💡 계속 발생하면: 유료 전환 시 분당 한도가 10회 → 2,000회로 상향됩니다.' + detail;
+      '💡 계속 발생하면: AI Studio에서 현재 프로젝트 한도를 확인하고, 유료 전환 또는 한도 상향을 검토하세요.' + detail;
   }
 
   // 인증 실패 (401/403)
@@ -7039,6 +7127,7 @@ export async function generateStructuredContent(
   } catch (e) {
     // config 로드 실패 시 무시 (기본값 사용)
   }
+  const costPolicy: ContentGenerationCostPolicy = resolveContentGenerationCostPolicy(config);
 
   // [SPEC-PROMPT-2026-REFRESH Phase 3-A / v2.10.235] AI 탭 친화 모드 활성 시 minChars 상향
   //   조건: aiTabFriendlyMode === true (사용자 명시 ON) + mode === 'seo'
@@ -7070,8 +7159,9 @@ export async function generateStructuredContent(
   }
   console.log(`[ContentGenerator] 사용 엔진: ${provider} (목표: ${minChars}자)`);
 
-  const MAX_ATTEMPTS = Math.max(1, Number(process.env.CONTENT_MAX_ATTEMPTS ?? 2));  // ✅ [v1.4.3] 3 → 2 (비용 절감)
+  const MAX_ATTEMPTS = costPolicy.maxAttempts;
   const RETRY_DELAYS = [0, 1200, 2000, 3000, 4500, 6000, 8000];
+  console.log(`[ContentGenerator] 비용 정책: costSaver=${costPolicy.costSaverOn ? 'ON' : 'OFF'}, regeneration retries=${MAX_ATTEMPTS}`);
 
   // ✅ Gemini 전용 강화 재시도 시스템
   // 대부분의 사용자가 Gemini만 사용 (무료) → 폴백 없이 Gemini로 더 많이 재시도
@@ -7687,28 +7777,32 @@ export async function generateStructuredContent(
         const seoKeyword = getPrimaryKeywordFromSource(source);
         const issues = computeSeoTitleCriticalIssues(parsed.selectedTitle, seoKeyword);
         if (issues.length > 0 && attempt < MAX_ATTEMPTS) {
-          try {
-            const patch = await generateTitleOnlyPatch(source, 'seo', source.categoryHint, provider);
-            if (patch.selectedTitle) parsed.selectedTitle = patch.selectedTitle;
-            if (patch.titleCandidates && patch.titleCandidates.length > 0) {
-              parsed.titleCandidates = patch.titleCandidates;
-              parsed.titleAlternatives = patch.titleAlternatives || patch.titleCandidates.map(c => c.text);
+          if (costPolicy.allowLlmTitlePatch) {
+            try {
+              const patch = await generateTitleOnlyPatch(source, 'seo', source.categoryHint, provider);
+              if (patch.selectedTitle) parsed.selectedTitle = patch.selectedTitle;
+              if (patch.titleCandidates && patch.titleCandidates.length > 0) {
+                parsed.titleCandidates = patch.titleCandidates;
+                parsed.titleAlternatives = patch.titleAlternatives || patch.titleCandidates.map(c => c.text);
+              }
+              if (!parsed.quality) {
+                parsed.quality = {
+                  aiDetectionRisk: 'low',
+                  legalRisk: 'safe',
+                  seoScore: 70,
+                  originalityScore: 70,
+                  readabilityScore: 70,
+                  warnings: [],
+                };
+              }
+              parsed.quality.warnings = [
+                ...(parsed.quality.warnings || []),
+                `TitlePatch(seo): ${issues.join(', ')}`,
+              ];
+            } catch {
             }
-            if (!parsed.quality) {
-              parsed.quality = {
-                aiDetectionRisk: 'low',
-                legalRisk: 'safe',
-                seoScore: 70,
-                originalityScore: 70,
-                readabilityScore: 70,
-                warnings: [],
-              };
-            }
-            parsed.quality.warnings = [
-              ...(parsed.quality.warnings || []),
-              `TitlePatch(seo): ${issues.join(', ')}`,
-            ];
-          } catch {
+          } else {
+            console.log(`[TitlePatch] costSaver ON — SEO 제목 LLM 패치 생략, 로컬 보정 적용: ${issues.join(', ')}`);
           }
 
           // ✅ [2026-02-09 v2] 패치 후 재검증: 키워드가 앞쪽에 없으면 강제 앞배치 (최후 펴대백)
@@ -7731,28 +7825,32 @@ export async function generateStructuredContent(
         const hfKeyword = getPrimaryKeywordFromSource(source);
         const titleIssues = computeHomefeedTitleCriticalIssues(parsed.selectedTitle, hfKeyword);
         if (titleIssues.length > 0 && attempt < MAX_ATTEMPTS) {
-          try {
-            const patch = await generateTitleOnlyPatch(source, 'homefeed', source.categoryHint, provider);
-            if (patch.selectedTitle) parsed.selectedTitle = patch.selectedTitle;
-            if (patch.titleCandidates && patch.titleCandidates.length > 0) {
-              parsed.titleCandidates = patch.titleCandidates;
-              parsed.titleAlternatives = patch.titleAlternatives || patch.titleCandidates.map(c => c.text);
+          if (costPolicy.allowLlmTitlePatch) {
+            try {
+              const patch = await generateTitleOnlyPatch(source, 'homefeed', source.categoryHint, provider);
+              if (patch.selectedTitle) parsed.selectedTitle = patch.selectedTitle;
+              if (patch.titleCandidates && patch.titleCandidates.length > 0) {
+                parsed.titleCandidates = patch.titleCandidates;
+                parsed.titleAlternatives = patch.titleAlternatives || patch.titleCandidates.map(c => c.text);
+              }
+              if (!parsed.quality) {
+                parsed.quality = {
+                  aiDetectionRisk: 'low',
+                  legalRisk: 'safe',
+                  seoScore: 70,
+                  originalityScore: 70,
+                  readabilityScore: 70,
+                  warnings: [],
+                };
+              }
+              parsed.quality.warnings = [
+                ...(parsed.quality.warnings || []),
+                `TitlePatch(homefeed): ${titleIssues.join(', ')}`,
+              ];
+            } catch {
             }
-            if (!parsed.quality) {
-              parsed.quality = {
-                aiDetectionRisk: 'low',
-                legalRisk: 'safe',
-                seoScore: 70,
-                originalityScore: 70,
-                readabilityScore: 70,
-                warnings: [],
-              };
-            }
-            parsed.quality.warnings = [
-              ...(parsed.quality.warnings || []),
-              `TitlePatch(homefeed): ${titleIssues.join(', ')}`,
-            ];
-          } catch {
+          } else {
+            console.log(`[TitlePatch] costSaver ON — 홈판 제목 LLM 패치 생략, 로컬 보정 적용: ${titleIssues.join(', ')}`);
           }
 
           // ✅ [2026-02-09 v2] 패치 후 재검증: 키워드가 앞쪽에 없으면 강제 앞배치 (최후 펴대백)
@@ -7769,11 +7867,9 @@ export async function generateStructuredContent(
           }
         }
 
-        // ✅ [v2.10.59] 비용 절감 모드 기본 ON — 도입부 재작성 비활성화 (사용자 명시 OFF 시에만 동작)
+        // ✅ 비용 절감 모드 기본 ON — 도입부 재작성 비활성화 (사용자 명시 OFF 시에만 동작)
         const introIssues = computeHomefeedIntroCriticalIssues(parsed.introduction);
-        const _csCfg = await loadConfig().catch(() => ({} as any));
-        const _costSaverOn = (_csCfg as any).costSaverMode !== false; // 기본 true
-        if (introIssues.length > 0 && attempt < MAX_ATTEMPTS && !_costSaverOn) {
+        if (introIssues.length > 0 && attempt < MAX_ATTEMPTS && costPolicy.allowLlmIntroPatch) {
           const patch = await generateHomefeedIntroOnlyPatch(source, parsed, provider);
           if (patch?.introduction) {
             parsed.introduction = patch.introduction;
@@ -8012,7 +8108,7 @@ export async function generateStructuredContent(
       // ✅ [2026-02-04 FIX] isShoppingConnectMode도 체크하여 URL 기반 쇼핑커넥트에서도 제목 패치 작동
       if (isShoppingConnectMode || mode === 'affiliate') {
         const titleIssues = computeAffiliateTitleCriticalIssues(parsed.selectedTitle, source);
-        if (titleIssues.length > 0) {
+        if (titleIssues.length > 0 && costPolicy.allowLlmTitlePatch) {
           try {
             console.log(`[ContentGenerator] 🛒 쇼핑커넥트 제목 이슈 감지: ${titleIssues.join(', ')}`);
             const patch = await generateTitleOnlyPatch(source, 'affiliate', source.categoryHint, provider);
@@ -8040,6 +8136,8 @@ export async function generateStructuredContent(
             ];
           } catch {
           }
+        } else if (titleIssues.length > 0) {
+          console.log(`[TitlePatch] costSaver ON — 쇼핑커넥트 제목 LLM 패치 생략: ${titleIssues.join(', ')}`);
         }
       }
 
@@ -8358,7 +8456,12 @@ export async function generateStructuredContent(
           _gateResult
           && _gateResult.decision === 'pass'
           && _gateResult.humanlikeScore.score < 55;
-        if (_gateResult && optimized.bodyPlain && (_gateResult.decision === 'patch' || _humanFloorMiss)) {
+        if (
+          _gateResult
+          && optimized.bodyPlain
+          && (_gateResult.decision === 'patch' || _humanFloorMiss)
+          && costPolicy.allowQualityGateSelfCritique
+        ) {
           try {
             const _patchPersona = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
             console.log(`[QualityGate] 📝 ${_humanFloorMiss ? `humanlike 플로어 미달(human=${_gateResult.humanlikeScore.score}<55)` : `patch decision (final=${_gateResult.finalScore})`} — selfCritique 자동 활성화`);
@@ -8380,6 +8483,12 @@ export async function generateStructuredContent(
           } catch (patchErr) {
             console.warn('[QualityGate] patch 실패 (정상 흐름 유지):', (patchErr as Error)?.message);
           }
+        } else if (_gateResult && optimized.quality && (_gateResult.decision === 'patch' || _humanFloorMiss)) {
+          optimized.quality.warnings = [
+            ...(optimized.quality.warnings || []),
+            `QualityGate LLM patch skipped by cost saver (${_humanFloorMiss ? `human=${_gateResult.humanlikeScore.score}` : `final=${_gateResult.finalScore}`})`,
+          ];
+          console.log('[QualityGate] costSaver ON — LLM selfCritique 생략, 로컬 휴머나이즈 결과 유지');
         }
 
         // ✅ [v2.10.187 Phase 3.6+] 자동 SERP 벤치마크 — opt-out 방식

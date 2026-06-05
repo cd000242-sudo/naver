@@ -125,6 +125,15 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     });
   });
 
+  describe('Gemini 플랜 선택 — 자동 모드 고정', () => {
+    const costConsent = read('renderer/modules/costAndAutoGen.ts');
+
+    it('나노바나나 비용 동의 흐름에서 무료/유료 수동 선택 버튼을 다시 띄우지 않음', () => {
+      expect(costConsent).not.toMatch(/저는 <b>유료 플랜<\/b> 사용자입니다/);
+      expect(costConsent).not.toMatch(/저는 <b>무료 사용자<\/b>입니다/);
+    });
+  });
+
   describe('OpenAI 재시도 — 429 누진 backoff가 끝까지 발동', () => {
     const content = read('contentGenerator.ts');
 

@@ -86,6 +86,7 @@ export async function initPriceInfoModal(): Promise<void> {
         const budget = d.creditBudget || 300;
         const usedCost = tracker.estimatedCostUSD || 0;
         const isFree = d.userPlanType === 'free';
+        const isAutoPlan = d.userPlanType === 'auto';
         const pct = isFree ? 0 : Math.min(100, (usedCost / budget) * 100);
         const barColor = pct > 90 ? '#ef4444' : pct > 70 ? '#f59e0b' : '#22c55e';
 
@@ -100,6 +101,9 @@ export async function initPriceInfoModal(): Promise<void> {
           // 무료 플랜: 비용 없음 표시
           html += `<div style="font-size:1.5rem;font-weight:700;color:#22c55e;">🆓 무료 플랜</div>`;
           html += `<div style="font-size:0.75rem;color:#94a3b8;">비용이 발생하지 않습니다 (분당 15회 제한)</div>`;
+        } else if (isAutoPlan) {
+          html += `<div style="font-size:1.5rem;font-weight:800;color:#22c55e;">⚙️ 자동 감지</div>`;
+          html += `<div style="font-size:0.75rem;color:#94a3b8;">보조 무료 키 우선 사용 · 메인 키 비용은 사용량 기준 추적</div>`;
         } else {
           // 유료 플랜: "$X / $Y 예산" 단일 라인 (중복 제거)
           html += `<div style="font-size:2rem;font-weight:800;color:${barColor};letter-spacing:-1px;">`;
@@ -108,8 +112,8 @@ export async function initPriceInfoModal(): Promise<void> {
         }
         html += `</div>`;
 
-        // 진행률 바 (유료만)
-        if (!isFree) {
+        // 진행률 바 (명시 paid 모드만)
+        if (!isFree && !isAutoPlan) {
           html += `<div style="background:rgba(255,255,255,0.1);border-radius:6px;height:8px;margin-bottom:10px;overflow:hidden;">`;
           html += `<div style="background:${barColor};height:100%;width:${pct.toFixed(1)}%;border-radius:6px;transition:width 0.5s;"></div></div>`;
         }
@@ -128,8 +132,18 @@ export async function initPriceInfoModal(): Promise<void> {
         if (d.testCallResult?.error) html += `<br>⚠️ ${d.testCallResult.error}`;
         html += `</div>`;
 
-        // 예산 설정 + 초기화 (유료만)
-        if (!isFree) {
+        if (isFree || isAutoPlan) {
+          html += `<div style="background:rgba(59,130,246,0.10);border:1px solid rgba(59,130,246,0.25);border-radius:6px;padding:8px 10px;margin-bottom:8px;font-size:0.72rem;color:#bfdbfe;line-height:1.55;">`;
+          html += `<b>${isAutoPlan ? '자동 모드 한도 안내' : '무료 글 생성 한도'}</b><br>`;
+          html += `Flash: 250회/일 · 10회/분<br>`;
+          html += `Flash-Lite: 1,000회/일 · 15회/분<br>`;
+          html += `Pro: 100회/일 · 5회/분<br>`;
+          html += `429 오류는 RPM(분당), TPM(토큰), RPD(일일) 중 하나를 넘었다는 뜻입니다. 한도는 API 키가 아니라 Google AI Studio 프로젝트 단위이며, 일일 한도는 태평양 시간 자정에 초기화됩니다.`;
+          html += `</div>`;
+        }
+
+        // 예산 설정 + 초기화 (명시 paid 모드만)
+        if (!isFree && !isAutoPlan) {
           html += `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">`;
           html += `<label style="font-size:0.75rem;color:#94a3b8;">예산($):</label>`;
           html += `<input type="number" id="gemini-budget-input" value="${budget}" min="1" max="99999" step="10" style="width:80px;padding:3px 6px;border-radius:4px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#e2e8f0;font-size:0.8rem;">`;
@@ -138,8 +152,8 @@ export async function initPriceInfoModal(): Promise<void> {
           html += `</div>`;
         }
 
-        // ✅ [v1.4.50] Safety Lock 안내 + Google Cloud Budget Alert 링크 (유료만)
-        if (!isFree) {
+        // ✅ [v1.4.50] Safety Lock 안내 + Google Cloud Budget Alert 링크 (명시 paid 모드만)
+        if (!isFree && !isAutoPlan) {
           html += `<div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:6px;padding:8px 10px;margin-bottom:8px;font-size:0.72rem;color:#86efac;line-height:1.5;">`;
           html += `🛡️ <b>Safety Lock 활성화됨</b> — 설정한 예산 도달 시 앱에서 자동 차단합니다.<br>`;
           html += `90% 도달 시 콘솔에 경고 로그 출력, 100% 도달 시 Gemini 호출이 즉시 중단됩니다.<br>`;
@@ -464,6 +478,8 @@ export async function initPriceInfoModal(): Promise<void> {
   }
 
   const geminiApiKey = document.getElementById('gemini-api-key') as HTMLInputElement;
+  const geminiExtraApiKeys = document.getElementById('gemini-extra-api-keys') as HTMLTextAreaElement | null;
+  const geminiFreeQuotaFirst = document.getElementById('gemini-free-quota-first') as HTMLInputElement | null;
   const unsplashApiKey = document.getElementById('unsplash-api-key') as HTMLInputElement;
   const pixabayApiKey = document.getElementById('pixabay-api-key') as HTMLInputElement;
   // (prodiaTokenInput removed - deprecated provider)
@@ -522,6 +538,14 @@ export async function initPriceInfoModal(): Promise<void> {
       if (config.geminiApiKey) {
         console.log('[Settings] Gemini API 키 로드됨:', config.geminiApiKey ? '✅' : '❌');
       }
+    }
+    if (geminiExtraApiKeys) {
+      geminiExtraApiKeys.value = Array.isArray((config as any).geminiApiKeys)
+        ? (config as any).geminiApiKeys.join('\n')
+        : '';
+    }
+    if (geminiFreeQuotaFirst) {
+      geminiFreeQuotaFirst.checked = (config as any).geminiUseFreeQuotaBeforePaid !== false;
     }
 
     // ✅ [2026-02-23] OpenAI Image API 키는 OpenAI API 키와 통합됨 (별도 입력 필드 제거)
@@ -625,12 +649,10 @@ export async function initPriceInfoModal(): Promise<void> {
       }
     }
 
-    // ✅ [v1.4.49] Gemini 플랜 라디오 버튼 로드 (텍스트+이미지 공통)
-    //   기본값을 'free'로 — 유료 전환 안 한 사용자가 대다수이므로 안전한 기본값
-    //   이 값은 buildGeminiModelChain에서 기본 모델 결정에도 사용됨:
-    //     free → gemini-2.5-flash (RPD 250/일)
-    //     paid → gemini-2.5-flash-lite (Tier1 RPD 30,000 + Flash의 1/3 가격)
-    const planType = config.geminiPlanType || 'free';
+    // ✅ [2026-06-05] Gemini 플랜 로드 (텍스트+이미지 공통)
+    //   사용자가 무료/유료를 고르지 않아도 앱이 자동 라우팅한다.
+    //   과거 free/paid 값은 호환용으로 읽되, 신규 기본값은 auto.
+    const planType = config.geminiPlanType || 'auto';
     const planRadios = document.getElementsByName('geminiPlanType') as NodeListOf<HTMLInputElement>;
     planRadios.forEach(radio => {
       if (radio.value === planType) {
@@ -951,12 +973,19 @@ export async function initPriceInfoModal(): Promise<void> {
         const prodiaTokenInput = undefined; // deprecated
         const stabilityApiKeyInput = undefined; // deprecated
 
+        const parsedGeminiExtraKeys = (geminiExtraApiKeys?.value || '')
+          .split(/[\n,]+/)
+          .map((key) => key.trim())
+          .filter(Boolean);
+
         let config: any = {
           dailyPostLimit: parseInt(dailyPostLimit?.value || '3'),
           freeQuotaPublish: parseInt(freeQuotaPublish?.value || '2'),
           freeQuotaContent: parseInt(freeQuotaContent?.value || '5'),
           freeQuotaMedia: parseInt(freeQuotaMedia?.value || '30'),
           geminiApiKey: geminiApiKey?.value.trim() || undefined,
+          geminiApiKeys: parsedGeminiExtraKeys,
+          geminiUseFreeQuotaBeforePaid: geminiFreeQuotaFirst?.checked !== false,
           unsplashApiKey: unsplashApiKey?.value.trim() || undefined,
           pixabayApiKey: pixabayApiKey?.value.trim() || undefined,
           naverClientId: naverClientIdInput?.value.trim() || undefined, // ✅ 네이버 검색 API 호환용
@@ -999,19 +1028,18 @@ export async function initPriceInfoModal(): Promise<void> {
           claudeAbstentionMode: (document.getElementById('claude-abstention-mode') as HTMLInputElement | null)?.checked || false,
           // ✅ [v2.10.186 Phase 3.6] 자동 SERP 벤치마크 토글 (기본 OFF — 옵트인)
           autoSerpBenchmark: (document.getElementById('auto-serp-benchmark') as HTMLInputElement | null)?.checked || false,
-          primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-2.5-flash', // ✅ [v1.4.49 revert] 기본값 Flash (Flash-Lite RPD 20/일로 부족)
-          // ✅ [v2.10.76] silent 'free' 회귀 차단 — 라디오가 DOM에 없거나 unchecked면
-          //   필드를 아예 *생략*해서 saveConfig가 디스크 값을 보존하게 한다.
-          //   이전: `?.value || 'free'` → 라디오 미체크 시 'paid' → 'free' 자동 덮어씀.
-          // ✅ [v2.10.77] plan memo cache 동기화 — 사용자 명시 변경을 즉시 캐시에 반영해
-          //   stale 캐시(이전 세션에 'paid' 저장 → 이번에 'free' 선택했는데 캐시에 'paid' 남음)를 막는다.
-          ...((): { geminiPlanType?: 'free' | 'paid' } => {
+          primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-2.5-flash', // 기본값 Flash (품질·속도 균형)
+          // ✅ [2026-06-05] Gemini 자동 모드 저장
+          //   더 이상 무료/유료를 묻지 않는다. 라디오가 없거나 값이 깨져도 auto로 저장해
+          //   연속발행 중 플랜 모달/수동 선택 회귀를 막는다.
+          ...((): { geminiPlanType: 'auto' | 'free' | 'paid' } => {
             const checked = (document.querySelector('input[name="geminiPlanType"]:checked') as HTMLInputElement | null)?.value;
-            if (checked === 'free' || checked === 'paid') {
+            if (checked === 'auto' || checked === 'free' || checked === 'paid') {
               rememberPlan(checked);
               return { geminiPlanType: checked };
             }
-            return {}; // 미선택 → 디스크 보존
+            rememberPlan('auto');
+            return { geminiPlanType: 'auto' };
           })(),
           imagePreset: (document.getElementById('image-preset-input') as HTMLInputElement)?.value as 'budget' | 'premium' | 'custom' || 'custom',
           // ✅ [2026-02-22 FIX] primaryGeminiTextModel에서 defaultAiProvider 자동 파생

@@ -45,6 +45,11 @@ describe('rememberPlan / recallPlan — 동일 세션 내', () => {
         expect(recallPlan()).toBe('paid');
     });
 
+    it("rememberPlan('auto') 후 recallPlan === 'auto'", () => {
+        rememberPlan('auto');
+        expect(recallPlan()).toBe('auto');
+    });
+
     it("rememberPlan('free') 후 recallPlan === 'free'", () => {
         rememberPlan('free');
         expect(recallPlan()).toBe('free');
@@ -115,6 +120,13 @@ describe('localStorage unavailable 환경 (private mode 시뮬)', () => {
 });
 
 describe('실 시나리오 — 연속발행 모달 재출현 차단', () => {
+    it('자동 모드 저장 후 다음 N번 호출 모두 cache hit', () => {
+        rememberPlan('auto');
+        for (let i = 0; i < 50; i++) {
+            expect(recallPlan()).toBe('auto');
+        }
+    });
+
     it('유료 클릭 → 다음 N번 호출 모두 cache hit', () => {
         rememberPlan('paid');
         for (let i = 0; i < 50; i++) {

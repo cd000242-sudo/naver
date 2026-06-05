@@ -9,6 +9,7 @@ import {
 export interface AppConfig {
   geminiApiKey?: string;
   geminiApiKeys?: string[]; // ✅ [2026-02-13] 다중 Gemini API 키 (429 할당량 자동 로테이션)
+  geminiUseFreeQuotaBeforePaid?: boolean;
   geminiModel?: 'gemini-2.5-flash' | 'gemini-2.5-flash-lite' | 'gemini-2.5-pro' | string; // ✅ Stable 모델만 hint, string으로 확장 허용
   openaiApiKey?: string;
   pexelsApiKey?: string;
@@ -136,7 +137,7 @@ export interface AppConfig {
   enableFreeTrialButton?: boolean;
 
   // ✅ Gemini 이미지 생성 쿼터 관리
-  geminiPlanType?: 'free' | 'paid';
+  geminiPlanType?: 'auto' | 'free' | 'paid';
   geminiImageDailyCount?: number;
   geminiImageLastReset?: string;
 
@@ -374,7 +375,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'rememberLicenseCredentials', 'savedLicenseUserId', 'savedLicensePassword',
           'userDisplayName', 'userEmail',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
-          'perplexityModel', 'geminiPlanType',
+          'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
           'customImageSavePath',
           'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
         ];
@@ -430,7 +431,7 @@ export async function loadConfig(): Promise<AppConfig> {
       'gemini-3.1-pro-preview', 'gemini-3-pro-preview',
       'gemini-2.0-flash', 'gemini-2.0-flash-001',
     ]);
-    // ✅ [v1.4.49 revert] 마이그레이션 기본값을 Flash로 (Flash-Lite 실제 RPD 20/일로 부족)
+    // 마이그레이션 기본값은 품질·속도 균형이 가장 무난한 Flash로 유지
     let geminiModel = parsed.geminiModel;
     if (geminiModel && DEAD_TEXT_MODELS.has(geminiModel)) {
       const oldModel = geminiModel;
@@ -755,6 +756,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         // ✅ [v2.10.53] 사용자 환경설정 — 부분 saveConfig로 인해 silent 손실 회귀 차단
         'customImageSavePath',
         'primaryGeminiTextModel', 'defaultAiProvider', 'geminiPlanType',
+        'geminiApiKeys', 'geminiUseFreeQuotaBeforePaid',
         'perplexityModel', 'geminiModel', 'leonardoaiModel',
         // ✅ OpenAI 이미지 모델·품질·환율 — 부분 saveConfig로 인한 silent 손실 차단
         'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
@@ -845,7 +847,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'naverClientId', 'naverClientSecret',
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
-          'perplexityModel', 'geminiPlanType',
+          'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
         ];
         let changed = false;
         for (const field of API_KEY_FIELDS) {
@@ -1057,6 +1059,8 @@ export async function resetConfigForDistribution(): Promise<void> {
     const defaultConfig: AppConfig = {
       // API 키들은 빈 값으로 초기화 (민감 정보)
       geminiApiKey: '',
+      geminiApiKeys: [],
+      geminiUseFreeQuotaBeforePaid: true,
       unsplashApiKey: '',
       pixabayApiKey: '',
       naverDatalabClientId: '',
