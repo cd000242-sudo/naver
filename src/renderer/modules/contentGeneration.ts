@@ -99,9 +99,9 @@ declare function getReviewHeadingSeed(...args: any[]): any;
 declare function applyReviewHeadingPrefix(...args: any[]): void;
 declare function applyKeywordPrefixToTitleContinuous(...args: any[]): any;
 
-const CONTENT_GENERATION_TIMEOUT_MS = 900000;
+const CONTENT_GENERATION_TIMEOUT_MS = 360000;
 const CONTENT_GENERATION_RETRY_COUNT = 1;
-const CONTENT_GENERATION_RETRY_NOTICE = '응답 지연이나 일시 네트워크 오류가 있으면 앱이 자동으로 1회 재시도합니다.';
+const CONTENT_GENERATION_RETRY_NOTICE = '응답이 6분 이상 지연되면 진행 중인 요청을 중단하고 앱이 자동으로 1회 재시도합니다.';
 
 function appendContentGenerationRetryNotice(activeModal?: any): void {
   appendLog(`🔁 ${CONTENT_GENERATION_RETRY_NOTICE}`);
@@ -506,7 +506,7 @@ export async function generateContentFromUrl(
       {
         retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 15분 타임아웃 (Main 모델 폴백 체인 최대 12분 + 여유)
+        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort 후 1회 재시도
       }
     );
 
@@ -1073,7 +1073,7 @@ export async function generateContentFromKeywords(
       {
         retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 15분 타임아웃 (Main 모델 폴백 체인 최대 12분 + 여유)
+        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort 후 1회 재시도
       }
     );
 
@@ -1695,7 +1695,7 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
       {
         retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 15분 타임아웃
+        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort 후 1회 재시도
       }
     );
 

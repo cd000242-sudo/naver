@@ -102,6 +102,20 @@ export class EnhancedApiClient {
         console.log('[API] 🔄 Circuit Breaker 수동 리셋');
     }
 
+    private async abortStaleContentGeneration(apiMethod: string): Promise<void> {
+        if (apiMethod !== 'generateStructuredContent') return;
+
+        const cancelAutomation = (window as any).api?.cancelAutomation;
+        if (typeof cancelAutomation !== 'function') return;
+
+        try {
+            console.warn('[API] generateStructuredContent timeout — main 생성 작업 abort 요청');
+            await cancelAutomation();
+        } catch (cancelError) {
+            console.warn('[API] generateStructuredContent timeout abort 실패(계속 진행):', cancelError);
+        }
+    }
+
     // ✅ [2026-01-29] 상태 조회
     getCircuitBreakerStatus(): { state: string; failureCount: number } {
         return {
@@ -276,11 +290,12 @@ export class EnhancedApiClient {
                 // ✅ 타임아웃 오류 - 네트워크 환경에 따라 재시도
                 if (isTimeoutError) {
                     console.log(`[API] ${apiMethod} - 응답 대기 중... (네트워크 환경에 따라 시간이 걸릴 수 있습니다)`);
+                    await this.abortStaleContentGeneration(apiMethod);
 
                     // 마지막 시도가 아니면 계속 재시도
                     if (attempt < retryCount) {
                         const waitMsg = attempt === 0
-                            ? '⏳ AI가 콘텐츠를 생성하고 있습니다... 네트워크 환경에 따라 2~5분 정도 소요될 수 있습니다.'
+                            ? '⏳ AI 응답이 지연되어 진행 중 요청을 정리했습니다. 앱이 자동으로 1회 재시도합니다.'
                             : `⏳ 계속 대기 중... (${attempt + 1}/${retryCount + 1}) 네트워크가 느린 경우 더 오래 걸릴 수 있습니다.`;
                         if (typeof appendLog === 'function') {
                             appendLog(waitMsg);
@@ -292,7 +307,7 @@ export class EnhancedApiClient {
                     // 모든 재시도 실패 시
                     return {
                         success: false,
-                        error: '서버 응답 시간 초과\n\n💡 해결 방법:\n1. 네트워크 상태 확인 (Wi-Fi/유선)\n2. 방화벽/백신 프로그램 일시 중지\n3. VPN 사용 시 끄고 다시 시도\n4. 잠시 후 다시 시도',
+                        error: '서버 응답 시간 초과\n\n앱이 진행 중 요청을 정리하고 자동 재시도까지 완료했지만 응답을 받지 못했습니다.\n\n💡 해결 방법:\n1. OpenAI 상태/사용량 한도 확인\n2. 네트워크 상태 확인 (Wi-Fi/유선)\n3. 방화벽/백신 프로그램 일시 중지\n4. VPN 사용 시 끄고 다시 시도\n5. 잠시 후 다시 시도',
                         retryCount: attempt
                     } as any;
                 }
