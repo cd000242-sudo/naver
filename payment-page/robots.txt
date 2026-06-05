@@ -8,7 +8,7 @@ Allow: /
 Disallow: /admin/
 Disallow: /.gas-license-backend/
 
-# 네이버 / 다음 / Google / Bing 명시 허용
+# 네이버 / 다음·네이트 / Google / Bing 명시 허용
 User-agent: Yeti
 Allow: /
 
@@ -16,6 +16,15 @@ User-agent: Daumoa
 Allow: /
 
 User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: Google-InspectionTool
 Allow: /
 
 User-agent: bingbot
