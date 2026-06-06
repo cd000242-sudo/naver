@@ -4,6 +4,7 @@ import Footer from './Footer';
 import MusicPlayer from './MusicPlayer';
 import SummerEffect from './SummerEffect';
 import FloatStack from './FloatStack';
+import ScrollToTop from './ScrollToTop';
 
 /**
  * 모든 페이지 공통 레이아웃.
@@ -13,6 +14,7 @@ import FloatStack from './FloatStack';
 function Layout() {
     return (
         <>
+            <ScrollToTop />
             <Navbar />
             <main style={{ minHeight: '100vh' }}>
                 <Outlet />
