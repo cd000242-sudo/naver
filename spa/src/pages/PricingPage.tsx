@@ -27,7 +27,7 @@ interface Plan {
 
 const PLANS: Record<string, Plan[]> = {
     naver: [
-        { id: 'free-naver', name: '무료 체험', desc: '부담 없이 시작', amount: 0, period: '무료', free: true, badge: { text: '🎁 FREE', type: 'trial' }, features: ['Leaders Pro 제품군 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', '기간 제한 없음'] },
+        { id: 'free-naver', name: 'Better Life Naver 무료 체험', desc: '네이버 자동화 먼저 체험', amount: 0, period: '무료', free: true, badge: { text: '🎁 FREE', type: 'trial' }, features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', 'LEWORD·Orbit은 올인원 결제 후 이용'] },
         { id: 'naver-monthly', name: '올인원 1개월', desc: '모든 툴을 가볍게 시작', amount: 50000, amountCard: 55000, period: '/ 월 (공급가)', features: ['네이버 자동화툴 이용', '블로그스팟·워드프레스툴 이용', 'Leword 키워드 분석 이용', '이메일 고객 지원'] },
         { id: 'naver-quarterly', name: '올인원 3개월', desc: '여러 채널을 안정적으로 운영', amount: 120000, period: '/ 3개월', monthly: '월 40,000원', features: ['네이버 자동화툴 이용', '블로그스팟·워드프레스툴 이용', 'Leword 키워드 분석 이용', '우선 고객 지원'] },
         { id: 'naver-yearly', name: '올인원 1년', desc: '가장 합리적인 통합 이용권', amount: 400000, period: '/ 년', monthly: '월 33,333원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['네이버 자동화툴 이용', '블로그스팟·워드프레스툴 이용', 'Leword + 전용 커뮤니티', '1:1 우선 지원'] },
@@ -108,7 +108,7 @@ function PricingPage() {
 
     const onSelect = (p: Plan) => {
         if (p.free) {
-            // 무료 체험은 다운로드 페이지로
+            // 무료 체험은 Better Life Naver만 제공되며 다운로드 페이지로 이동한다.
             window.location.href = '/download';
             return;
         }
@@ -152,7 +152,7 @@ function PricingPage() {
         if (!selected) return '플랜을 선택해주세요';
         const charge = selected.amountCard || selected.amount;
         const vatNote = selected.amountCard ? ' (VAT 포함)' : '';
-        return `🎁 7일 무료 시작 — 이후 ${charge.toLocaleString()}원${vatNote}`;
+        return `올인원 라이선스 시작 — 7일 후 ${charge.toLocaleString()}원${vatNote}`;
     })();
 
     return (
@@ -161,7 +161,7 @@ function PricingPage() {
                 <div style={{ textAlign: 'center', marginBottom: 40 }}>
                     <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>PRICING</span>
                     <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>기간제 올인원 이용권</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>하나의 기간권으로 네이버 자동화툴, 블로그스팟·워드프레스툴, Leword를 모두 사용할 수 있습니다.</p>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>하나의 올인원 라이선스 코드로 네이버 자동화툴, 블로그스팟·워드프레스툴, Leword를 모두 사용할 수 있습니다.</p>
                 </div>
 
                 {/* Product tabs */}
@@ -284,7 +284,7 @@ function PricingPage() {
                             animation: emailShake ? 'shakePay 0.4s' : 'none',
                         }}
                     />
-                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 6, marginBottom: 14 }}>결제 완료 후 이 이메일로 라이선스 코드가 발송됩니다.</p>
+                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 6, marginBottom: 14 }}>결제 완료 후 이 이메일로 올인원 라이선스 코드 1개가 발송됩니다.</p>
 
                     <button
                         onClick={requestPayment}
@@ -302,8 +302,8 @@ function PricingPage() {
                         <span>{paying ? '결제 중...' : chargeLabel}</span>
                     </button>
                     <p style={{ textAlign: 'center', color: '#c9a84c', fontSize: 13, marginTop: 10, lineHeight: 1.7 }}>
-                        🎁 <strong>7일간 무료</strong>로 사용해보세요. 7일 후 선택한 플랜의 정기구독이 시작되며,<br />
-                        <strong>해지하지 않으면 자동결제</strong>됩니다. 무료 기간 내 해지 시 요금이 청구되지 않습니다.
+                        카드 등록 후 올인원 라이선스 코드 1개가 발급됩니다. 제품별 코드를 따로 3개 발급하는 방식이 아닙니다.<br />
+                        무료 다운로드 체험은 Better Life Naver 기준이며, LEWORD·Orbit은 올인원 라이선스에서 함께 이용합니다.
                     </p>
                     <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: 12, marginTop: 8 }}>
                         결제 진행 시 <Link to="/terms" style={{ color: '#FFD700' }}>이용약관</Link> 및 <Link to="/privacy" style={{ color: '#FFD700' }}>개인정보처리방침</Link>에 동의하는 것으로 간주됩니다.

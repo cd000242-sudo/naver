@@ -327,9 +327,10 @@ function ProductsPage() {
                         <span className="products-kicker">START</span>
                         <h2>고민되면 올인원으로 시작하면 됩니다</h2>
                         <p>네이버 자동화, LEWORD, Orbit을 함께 쓰면 키워드 선정부터 발행 채널 확장까지 한 번에 이어집니다.</p>
+                        <p className="products-note">무료 체험은 Better Life Naver 기준입니다. LEWORD와 Orbit은 올인원 라이선스에서 함께 이용합니다.</p>
                         <div className="products-actions center">
                             <Link className="products-btn primary" to="/pricing">요금제 확인하기</Link>
-                            <Link className="products-btn secondary" to="/download">무료 체험 다운로드</Link>
+                            <Link className="products-btn secondary" to="/download">네이버 무료 체험 다운로드</Link>
                         </div>
                     </div>
                 </section>
@@ -863,6 +864,12 @@ function ProductsPage() {
 
                 .products-final .products-wrap {
                     max-width: 760px;
+                }
+
+                .products-note {
+                    margin-top: 12px;
+                    color: rgba(255,255,255,0.68) !important;
+                    font-size: 14px !important;
                 }
 
                 @media (max-width: 980px) {

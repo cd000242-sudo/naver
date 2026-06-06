@@ -333,7 +333,7 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                         </div>
                         <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginTop: 14, lineHeight: 1.6 }}>
                             이 코드는 입력하신 이메일로도 발송되었습니다.<br />
-                            Better Life Naver 앱에서 라이선스 코드를 입력하면 즉시 사용할 수 있습니다.
+                            올인원 라이선스 코드 1개로 Leaders Pro 제품군을 이용할 수 있습니다.
                         </div>
                     </div>
                 )}

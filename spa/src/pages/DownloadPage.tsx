@@ -22,7 +22,7 @@ const PRODUCTS = {
     },
     leword: {
         name: 'Leword',
-        version: 'AI 키워드 인텔리전스 · Windows 64-bit · 최신 자동 반영',
+        version: 'AI 키워드 인텔리전스 · 올인원 구매자용 · 최신 자동 반영',
         image: '/images/leword/hero-banner.png',
         defaultUrl: 'https://github.com/cd000242-sudo/leword-app/releases/latest',
         githubRepo: 'cd000242-sudo/leword-app',
@@ -32,16 +32,47 @@ const PRODUCTS = {
 };
 
 type ProductKey = keyof typeof PRODUCTS;
+type ClientPlatform = 'mac' | 'windows';
 
-async function fetchLatestExe(repo: string): Promise<{ url: string; version: string; filename: string }> {
+function getClientPlatform(): ClientPlatform {
+    if (typeof navigator !== 'undefined' && /mac/i.test(`${navigator.platform} ${navigator.userAgent}`)) {
+        return 'mac';
+    }
+    return 'windows';
+}
+
+function scoreReleaseAsset(asset: any, platform: ClientPlatform): number {
+    const name = String(asset?.name || '').toLowerCase();
+    if (!asset?.browser_download_url || !name.includes('leword') || name.endsWith('.blockmap')) return 0;
+    if (platform === 'mac') {
+        if (/\.dmg$/i.test(name) && name.includes('universal')) return 110;
+        if (/\.dmg$/i.test(name)) return 100;
+        if (/\.zip$/i.test(name) && /(mac|darwin|universal|arm64|x64)/.test(name)) return name.includes('universal') ? 95 : 90;
+        return 0;
+    }
+    if (/\.exe$/i.test(name) && /setup/.test(name)) return 100;
+    if (/\.exe$/i.test(name) && /portable/.test(name)) return 90;
+    if (/\.exe$/i.test(name)) return 80;
+    if (/\.zip$/i.test(name) && /(setup|portable|win|windows)/.test(name)) return 70;
+    return 0;
+}
+
+function selectReleaseAsset(assets: any[], platform: ClientPlatform): any | null {
+    return (assets || []).reduce((best: { asset: any | null; score: number }, asset: any) => {
+        const score = scoreReleaseAsset(asset, platform);
+        return score > best.score ? { asset, score } : best;
+    }, { asset: null, score: 0 }).asset;
+}
+
+async function fetchLatestDownload(repo: string): Promise<{ url: string; version: string; filename: string }> {
     const res = await fetch(`https://api.github.com/repos/${repo}/releases/latest`, {
         headers: { 'Accept': 'application/vnd.github+json' },
     });
     if (!res.ok) throw new Error(`GitHub API ${res.status}`);
     const data = await res.json();
-    const exe = (data.assets || []).find((a: any) => /\.exe$/i.test(a.name));
-    if (!exe) throw new Error('No .exe asset found');
-    return { url: exe.browser_download_url, version: data.tag_name, filename: exe.name };
+    const asset = selectReleaseAsset(data.assets || [], getClientPlatform());
+    if (!asset) throw new Error('No compatible LEWORD asset found');
+    return { url: asset.browser_download_url, version: data.tag_name, filename: asset.name };
 }
 
 function DownloadPage() {
@@ -58,6 +89,7 @@ function DownloadPage() {
                     <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>DOWNLOAD</span>
                     <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>프로그램 다운로드</h2>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>비밀번호를 입력하면 최신 버전을 다운로드할 수 있습니다.</p>
+                    <p style={{ color: 'rgba(255,255,255,0.52)', fontSize: 13, marginTop: 8 }}>무료 체험은 Better Life Naver만 제공됩니다. LEWORD는 올인원 라이선스 보유자용입니다.</p>
                 </div>
 
                 <LeadCapture />
@@ -142,7 +174,7 @@ function DownloadCard({ productKey }: { productKey: ProductKey }) {
         if (!product.githubRepo) return;
         (async () => {
             try {
-                const { version: v } = await fetchLatestExe(product.githubRepo!);
+                const { version: v } = await fetchLatestDownload(product.githubRepo!);
                 setVersion(v);
             } catch { /* ignore */ }
         })();
@@ -161,7 +193,7 @@ function DownloadCard({ productKey }: { productKey: ProductKey }) {
         if (product.githubRepo) {
             setLoading(true);
             try {
-                const { url, version: v, filename } = await fetchLatestExe(product.githubRepo);
+                const { url, version: v, filename } = await fetchLatestDownload(product.githubRepo);
                 console.log(`[DOWNLOAD] ${product.name} ${v} → ${filename}`);
                 window.location.href = url;
                 setPw('');
