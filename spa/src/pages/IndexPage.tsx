@@ -36,7 +36,7 @@ function IndexPage() {
             <ParticlesCanvas />
 
             {/* ═══ HERO ═══ */}
-            <section style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 40, padding: '120px 24px 60px', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'center' }}>
+            <section className="home-hero" style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 40, padding: '120px 24px 60px', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'center' }}>
                 <div className="hero-content">
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', background: 'rgba(201, 168, 76, 0.1)', border: '1px solid rgba(201, 168, 76, 0.3)', borderRadius: 50, fontSize: 12, fontWeight: 800, letterSpacing: 2, color: 'var(--gold-primary)', marginBottom: 24 }}>
                         <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
@@ -69,8 +69,24 @@ function IndexPage() {
                         </div>
                     </div>
                 </div>
-                <div style={{ position: 'relative', minHeight: 400, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, rgba(201,168,76,0.15) 0%, transparent 60%)', pointerEvents: 'none' }} />
+                <div className="hero-robot-stage">
+                    <div className="robot-ambient robot-ambient-main" />
+                    <div className="robot-ambient robot-ambient-blue" />
+                    <div className="robot-orbit robot-orbit-one" />
+                    <div className="robot-orbit robot-orbit-two" />
+                    <div className="robot-gridline" />
+                    <div className="robot-chip robot-chip-top">
+                        <span />
+                        <b>AUTO PILOT READY</b>
+                    </div>
+                    <div className="robot-chip robot-chip-left">
+                        <b>127K</b>
+                        <span>누적 발행</span>
+                    </div>
+                    <div className="robot-chip robot-chip-right">
+                        <b>AI + CTA</b>
+                        <span>글·이미지·발행</span>
+                    </div>
                     <iframe
                         src="https://my.spline.design/nexbotrobotcharacterconcept-mQLqodza99cchehegYbwsdiu/"
                         title="3D Robot"
@@ -79,8 +95,14 @@ function IndexPage() {
                         height="500"
                         allowFullScreen
                         loading="lazy"
-                        style={{ border: 'none', borderRadius: 16 }}
+                        className="hero-robot-frame"
                     />
+                    <div className="robot-scanline" />
+                    <div className="robot-console">
+                        <span>LIVE OPS</span>
+                        <strong>Keyword → Draft → Image → Publish</strong>
+                        <small>queue stable · multi account · 99% uptime</small>
+                    </div>
                 </div>
             </section>
 
@@ -211,6 +233,301 @@ function IndexPage() {
                     </div>
                 </div>
             </section>
+
+            <style>{`
+                .hero-robot-stage {
+                    position: relative;
+                    min-height: 560px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    isolation: isolate;
+                    overflow: hidden;
+                    border-radius: 8px;
+                }
+
+                .hero-robot-stage::before {
+                    content: '';
+                    position: absolute;
+                    inset: 24px 10px 42px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(201,168,76,0.22);
+                    background:
+                        linear-gradient(180deg, rgba(12,18,28,0.38), rgba(5,8,12,0.16)),
+                        radial-gradient(circle at 50% 28%, rgba(244,201,93,0.12), transparent 48%);
+                    box-shadow: 0 26px 90px rgba(0,0,0,0.30);
+                    pointer-events: none;
+                    z-index: -2;
+                }
+
+                .robot-ambient,
+                .robot-orbit,
+                .robot-gridline,
+                .robot-chip,
+                .robot-console,
+                .robot-scanline {
+                    pointer-events: none;
+                }
+
+                .robot-ambient {
+                    position: absolute;
+                    border-radius: 999px;
+                    filter: blur(4px);
+                    z-index: -3;
+                }
+
+                .robot-ambient-main {
+                    width: 460px;
+                    height: 460px;
+                    background: radial-gradient(circle, rgba(244,201,93,0.22), transparent 62%);
+                    animation: robotPulse 6s ease-in-out infinite;
+                }
+
+                .robot-ambient-blue {
+                    width: 320px;
+                    height: 320px;
+                    right: 22px;
+                    top: 92px;
+                    background: radial-gradient(circle, rgba(68,215,182,0.16), transparent 64%);
+                    animation: robotFloat 8s ease-in-out infinite;
+                }
+
+                .robot-orbit {
+                    position: absolute;
+                    border: 1px solid rgba(244,201,93,0.28);
+                    border-radius: 50%;
+                    transform: rotate(-10deg);
+                    z-index: -1;
+                }
+
+                .robot-orbit-one {
+                    width: 480px;
+                    height: 210px;
+                    top: 146px;
+                }
+
+                .robot-orbit-two {
+                    width: 390px;
+                    height: 170px;
+                    top: 190px;
+                    border-color: rgba(68,215,182,0.24);
+                    transform: rotate(18deg);
+                }
+
+                .robot-gridline {
+                    position: absolute;
+                    width: min(520px, 88%);
+                    height: 290px;
+                    top: 122px;
+                    border-radius: 8px;
+                    background:
+                        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+                    background-size: 36px 36px;
+                    mask-image: radial-gradient(circle at center, #000 0%, transparent 72%);
+                    opacity: 0.55;
+                    z-index: -1;
+                }
+
+                .hero-robot-frame {
+                    width: min(100%, 560px);
+                    height: 520px;
+                    border: 1px solid rgba(255,255,255,0.16);
+                    border-radius: 8px;
+                    background: rgba(255,255,255,0.06);
+                    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 26px 90px rgba(0,0,0,0.34);
+                    position: relative;
+                    z-index: 1;
+                }
+
+                .robot-scanline {
+                    position: absolute;
+                    left: 7%;
+                    right: 7%;
+                    top: 28%;
+                    height: 2px;
+                    border-radius: 999px;
+                    background: linear-gradient(90deg, transparent, rgba(68,215,182,0.88), rgba(244,201,93,0.68), transparent);
+                    box-shadow: 0 0 18px rgba(68,215,182,0.52);
+                    animation: robotScan 4.8s ease-in-out infinite;
+                    z-index: 2;
+                }
+
+                .robot-chip {
+                    position: absolute;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    min-height: 38px;
+                    padding: 8px 12px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.16);
+                    background: rgba(8,13,18,0.76);
+                    color: #f8fafc;
+                    backdrop-filter: blur(12px);
+                    box-shadow: 0 14px 36px rgba(0,0,0,0.24);
+                    z-index: 3;
+                }
+
+                .robot-chip b {
+                    font-size: 12px;
+                    font-weight: 900;
+                    letter-spacing: 0;
+                }
+
+                .robot-chip span {
+                    color: rgba(255,255,255,0.66);
+                    font-size: 12px;
+                }
+
+                .robot-chip-top {
+                    top: 54px;
+                    right: 44px;
+                }
+
+                .robot-chip-top span {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background: #44d7b6;
+                    box-shadow: 0 0 12px rgba(68,215,182,0.9);
+                }
+
+                .robot-chip-left {
+                    left: 0;
+                    bottom: 152px;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 2px;
+                }
+
+                .robot-chip-left b {
+                    color: #f4c95d;
+                    font-size: 22px;
+                }
+
+                .robot-chip-right {
+                    right: 0;
+                    bottom: 118px;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 2px;
+                }
+
+                .robot-chip-right b {
+                    color: #44d7b6;
+                    font-size: 15px;
+                }
+
+                .robot-console {
+                    position: absolute;
+                    left: 42px;
+                    right: 42px;
+                    bottom: 18px;
+                    display: grid;
+                    gap: 4px;
+                    padding: 14px 16px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(244,201,93,0.22);
+                    background: rgba(8,13,18,0.84);
+                    backdrop-filter: blur(16px);
+                    z-index: 4;
+                    box-shadow: 0 18px 50px rgba(0,0,0,0.30);
+                }
+
+                .robot-console span {
+                    color: #f4c95d;
+                    font-size: 11px;
+                    font-weight: 900;
+                }
+
+                .robot-console strong {
+                    color: #ffffff;
+                    font-size: 15px;
+                }
+
+                .robot-console small {
+                    color: rgba(255,255,255,0.54);
+                    font-size: 12px;
+                }
+
+                @keyframes robotPulse {
+                    0%, 100% { transform: scale(0.96); opacity: 0.72; }
+                    50% { transform: scale(1.06); opacity: 1; }
+                }
+
+                @keyframes robotFloat {
+                    0%, 100% { transform: translate3d(0, 0, 0); }
+                    50% { transform: translate3d(-18px, 14px, 0); }
+                }
+
+                @keyframes robotScan {
+                    0%, 100% { transform: translateY(-72px); opacity: 0; }
+                    18%, 76% { opacity: 1; }
+                    50% { transform: translateY(210px); }
+                }
+
+                @media (max-width: 900px) {
+                    .home-hero {
+                        grid-template-columns: 1fr !important;
+                        gap: 28px !important;
+                        min-height: auto !important;
+                        padding: 100px 20px 56px !important;
+                    }
+
+                    .hero-robot-stage {
+                        min-height: 520px;
+                        margin-top: 22px;
+                        width: 100%;
+                    }
+
+                    .hero-robot-frame {
+                        width: 100%;
+                        height: 480px;
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    .home-hero {
+                        padding: 92px 14px 48px !important;
+                    }
+
+                    .hero-robot-stage {
+                        min-height: 455px;
+                        margin-top: 4px;
+                    }
+
+                    .hero-robot-stage::before {
+                        inset: 18px 0 36px;
+                    }
+
+                    .hero-robot-frame {
+                        height: 410px;
+                    }
+
+                    .robot-chip-top {
+                        top: 28px;
+                        right: 18px;
+                    }
+
+                    .robot-chip-left,
+                    .robot-chip-right {
+                        display: none;
+                    }
+
+                    .robot-console {
+                        left: 14px;
+                        right: 14px;
+                        bottom: 12px;
+                    }
+
+                    .robot-console strong {
+                        font-size: 13px;
+                        line-height: 1.35;
+                        overflow-wrap: anywhere;
+                    }
+                }
+            `}</style>
         </>
     );
 }
