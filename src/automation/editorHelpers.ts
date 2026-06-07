@@ -21,6 +21,7 @@ import { pickBannerHook } from './bannerPhrasePool.js';
 import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
+import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes } from './richTextPaste.js';
 
 // ── Local utility: smartTypeWithAutoHighlight ──
 async function smartTypeWithAutoHighlight(
@@ -323,13 +324,46 @@ export async function typeBodyWithRetry(self: any,
     await self.setBold(false);
     await self.delay(self.DELAYS.SHORT);
 
+    const normalizedText = text.replace(/\r\n/g, '\n');
+    const richThemes = self.__richPasteThemes || (self.__richPasteThemes = pickRichArticleThemes());
+    const rich = buildMobileRichHtml(normalizedText, {
+      fontSizePx: fontSize,
+      highlight: true,
+      maxChunkChars: 38,
+      maxHighlights: 6,
+      tableTheme: richThemes.tableTheme,
+      highlightTheme: richThemes.highlightTheme,
+      headingTheme: richThemes.headingTheme,
+    });
+
+    if (rich.html) {
+      self.log(`   ✨ [리치입력] 모바일 단락 ${rich.paragraphCount}개, 하이라이트 ${rich.highlightCount}개, 표 ${rich.tableCount}개`);
+      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText);
+      if (pasteResult.ok) {
+        self.log(`   ✅ [리치입력] HTML 붙여넣기 완료 (표 ${pasteResult.beforeTables}→${pasteResult.afterTables})`);
+
+        const textToVerify = rich.plainText.substring(0, Math.min(30, rich.plainText.length)).trim();
+        if (textToVerify) {
+          const verified = await self.verifyContentInDOM(frame, textToVerify, 'body').catch(() => false);
+          if (!verified) {
+            self.log('   ⚠️ [리치입력] 정확 매칭 검증은 실패했지만 붙여넣기 증가가 확인되어 계속 진행');
+          }
+        }
+
+        await page.keyboard.press('Enter');
+        await self.delay(self.DELAYS.MEDIUM);
+        await page.keyboard.press('Enter');
+        await self.delay(self.DELAYS.MEDIUM);
+        return;
+      }
+
+      self.log(`   ⚠️ [리치입력] 실패 → 기존 타이핑 fallback: ${pasteResult.reason || 'unknown'}`);
+    }
+
     // ✅ [2026-03-16 OVERHAUL] AI가 결정한 문단 구분을 그대로 존중
     // 기존: 3문장마다 기계적으로 끊기 → 부자연스러운 줄바꿈 발생
     // 개선: AI가 보낸 \n\n(문단 구분)과 \n(줄바꿈)을 그대로 따름
     //       타이핑 속도 20ms 유지 (대량발행 성능), Enter 딜레이만 랜덤화
-
-    // 1단계: \r\n → \n 정규화
-    const normalizedText = text.replace(/\r\n/g, '\n');
 
     // 2단계: \n\n 기준으로 문단(paragraph) 분리
     const paragraphs = normalizedText
@@ -530,6 +564,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
   // ✅ [2026-04-06 FIX v3] 공정문구 중복 방지 플래그
   // retry 재실행 시 이미 삽입된 공정문구를 다시 타이핑하지 않도록 함
   let ftcAlreadyInserted = false;
+  self.__richPasteThemes = pickRichArticleThemes();
 
   await self.retry(async () => {
     const structured = resolved.structuredContent;

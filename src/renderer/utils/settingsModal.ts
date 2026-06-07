@@ -14,7 +14,10 @@ interface SettingsModalElements {
     saveBtn: HTMLElement | null;
     // API 키 입력 필드
     geminiApiKeyInput: HTMLInputElement | null;
+    openaiApiKeyInput: HTMLInputElement | null;
+    claudeApiKeyInput: HTMLInputElement | null;
     perplexityApiKeyInput: HTMLInputElement | null;
+    leonardoaiApiKeyInput: HTMLInputElement | null;
     deepinfraApiKeyInput: HTMLInputElement | null; // ✅ [2026-01-26] DeepInfra API 키 추가
     naverClientIdInput: HTMLInputElement | null;
     naverClientSecretInput: HTMLInputElement | null;
@@ -28,6 +31,43 @@ interface SettingsModalElements {
 
 let elements: SettingsModalElements | null = null;
 
+function getInputByIds(...ids: string[]): HTMLInputElement | null {
+    for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el instanceof HTMLInputElement) return el;
+    }
+    return null;
+}
+
+function getSelectByIds(...ids: string[]): HTMLSelectElement | null {
+    for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el instanceof HTMLSelectElement) return el;
+    }
+    return null;
+}
+
+function isMaskedApiValue(value: string | undefined): boolean {
+    if (!value) return false;
+    return value.includes('•') || value.includes('*') || value.includes('…');
+}
+
+function setMaskedApiInput(input: HTMLInputElement | null, value: string | undefined): void {
+    if (!input || !value) return;
+    input.value = maskApiKey(value);
+    input.dataset.realValue = value;
+}
+
+function readApiInput(input: HTMLInputElement | null, currentValue: string | undefined): string {
+    if (!input) return (currentValue || '').trim();
+    const realValue = input.dataset.realValue?.trim();
+    if (realValue) return realValue;
+    const value = input.value.trim();
+    if (!value) return '';
+    if (isMaskedApiValue(value)) return (currentValue || '').trim();
+    return value;
+}
+
 function getElements(): SettingsModalElements {
     if (elements) return elements;
 
@@ -36,15 +76,18 @@ function getElements(): SettingsModalElements {
         closeBtn: document.getElementById('settings-modal-close'),
         saveBtn: document.getElementById('settings-modal-save'),
         // API 키 입력
-        geminiApiKeyInput: document.getElementById('settings-gemini-api-key') as HTMLInputElement,
-        perplexityApiKeyInput: document.getElementById('settings-perplexity-api-key') as HTMLInputElement,
-        deepinfraApiKeyInput: document.getElementById('settings-deepinfra-api-key') as HTMLInputElement, // ✅ [2026-01-26] DeepInfra
-        naverClientIdInput: document.getElementById('settings-naver-client-id') as HTMLInputElement,
-        naverClientSecretInput: document.getElementById('settings-naver-client-secret') as HTMLInputElement,
+        geminiApiKeyInput: getInputByIds('settings-gemini-api-key', 'gemini-api-key'),
+        openaiApiKeyInput: getInputByIds('settings-openai-api-key', 'openai-api-key'),
+        claudeApiKeyInput: getInputByIds('settings-claude-api-key', 'claude-api-key'),
+        perplexityApiKeyInput: getInputByIds('settings-perplexity-api-key', 'perplexity-api-key'),
+        leonardoaiApiKeyInput: getInputByIds('settings-leonardoai-api-key', 'leonardoai-api-key'),
+        deepinfraApiKeyInput: getInputByIds('settings-deepinfra-api-key', 'deepinfra-api-key'),
+        naverClientIdInput: getInputByIds('settings-naver-client-id', 'naver-client-id'),
+        naverClientSecretInput: getInputByIds('settings-naver-client-secret', 'naver-client-secret'),
         // AI 설정
-        defaultAiProviderSelect: document.getElementById('settings-default-ai-provider') as HTMLSelectElement,
-        geminiModelSelect: document.getElementById('settings-gemini-model') as HTMLSelectElement,
-        perplexityModelSelect: document.getElementById('settings-perplexity-model') as HTMLSelectElement,
+        defaultAiProviderSelect: getSelectByIds('settings-default-ai-provider'),
+        geminiModelSelect: getSelectByIds('settings-gemini-model'),
+        perplexityModelSelect: getSelectByIds('settings-perplexity-model'),
     };
 
     return elements;
@@ -157,14 +200,11 @@ async function loadCurrentSettings(): Promise<void> {
         const els = getElements();
 
         // API 키 로드
-        if (els.geminiApiKeyInput && config.geminiApiKey) {
-            els.geminiApiKeyInput.value = maskApiKey(config.geminiApiKey);
-            els.geminiApiKeyInput.dataset.realValue = config.geminiApiKey;
-        }
-        if (els.perplexityApiKeyInput && config.perplexityApiKey) {
-            els.perplexityApiKeyInput.value = maskApiKey(config.perplexityApiKey);
-            els.perplexityApiKeyInput.dataset.realValue = config.perplexityApiKey;
-        }
+        setMaskedApiInput(els.geminiApiKeyInput, config.geminiApiKey);
+        setMaskedApiInput(els.openaiApiKeyInput, config.openaiImageApiKey || config.openaiApiKey);
+        setMaskedApiInput(els.claudeApiKeyInput, config.claudeApiKey);
+        setMaskedApiInput(els.perplexityApiKeyInput, config.perplexityApiKey);
+        setMaskedApiInput(els.leonardoaiApiKeyInput, config.leonardoaiApiKey);
         if (els.naverClientIdInput && config.naverClientId) {
             els.naverClientIdInput.value = config.naverClientId;
         }
@@ -173,10 +213,7 @@ async function loadCurrentSettings(): Promise<void> {
             els.naverClientSecretInput.dataset.realValue = config.naverClientSecret;
         }
         // ✅ [2026-01-26] DeepInfra API 키 로드
-        if (els.deepinfraApiKeyInput && config.deepinfraApiKey) {
-            els.deepinfraApiKeyInput.value = maskApiKey(config.deepinfraApiKey);
-            els.deepinfraApiKeyInput.dataset.realValue = config.deepinfraApiKey;
-        }
+        setMaskedApiInput(els.deepinfraApiKeyInput, config.deepinfraApiKey);
 
         // AI 설정 로드
         if (els.defaultAiProviderSelect && config.defaultAiProvider) {
@@ -248,22 +285,25 @@ async function saveSettings(): Promise<void> {
         const currentConfig = await (window as any).api.getConfig();
 
         // API 키 수집 (마스킹되지 않은 실제 값 사용)
-        const geminiKey = els.geminiApiKeyInput?.dataset.realValue ||
-            (els.geminiApiKeyInput?.value.includes('•') ? currentConfig.geminiApiKey : els.geminiApiKeyInput?.value) || '';
-        const perplexityKey = els.perplexityApiKeyInput?.dataset.realValue ||
-            (els.perplexityApiKeyInput?.value.includes('•') ? currentConfig.perplexityApiKey : els.perplexityApiKeyInput?.value) || '';
+        const geminiKey = readApiInput(els.geminiApiKeyInput, currentConfig.geminiApiKey);
+        const openaiKey = readApiInput(els.openaiApiKeyInput, currentConfig.openaiImageApiKey || currentConfig.openaiApiKey);
+        const claudeKey = readApiInput(els.claudeApiKeyInput, currentConfig.claudeApiKey);
+        const perplexityKey = readApiInput(els.perplexityApiKeyInput, currentConfig.perplexityApiKey);
+        const leonardoaiKey = readApiInput(els.leonardoaiApiKeyInput, currentConfig.leonardoaiApiKey);
         // ✅ [2026-01-26] DeepInfra API 키 수집
-        const deepinfraKey = els.deepinfraApiKeyInput?.dataset.realValue ||
-            (els.deepinfraApiKeyInput?.value.includes('•') ? currentConfig.deepinfraApiKey : els.deepinfraApiKeyInput?.value) || '';
+        const deepinfraKey = readApiInput(els.deepinfraApiKeyInput, currentConfig.deepinfraApiKey);
         const naverClientId = els.naverClientIdInput?.value || '';
-        const naverClientSecret = els.naverClientSecretInput?.dataset.realValue ||
-            (els.naverClientSecretInput?.value.includes('•') ? currentConfig.naverClientSecret : els.naverClientSecretInput?.value) || '';
+        const naverClientSecret = readApiInput(els.naverClientSecretInput, currentConfig.naverClientSecret);
 
         // 업데이트할 설정
         const updatedConfig: Record<string, any> = {
             ...currentConfig,
             geminiApiKey: geminiKey,
+            openaiApiKey: openaiKey,
+            openaiImageApiKey: openaiKey,
+            claudeApiKey: claudeKey,
             perplexityApiKey: perplexityKey,
+            leonardoaiApiKey: leonardoaiKey,
             deepinfraApiKey: deepinfraKey, // ✅ [2026-01-26] DeepInfra 저장
             naverClientId: naverClientId,
             naverClientSecret: naverClientSecret,
@@ -354,7 +394,15 @@ export function initSettingsModal(): void {
         }
 
         // API 키 입력 필드에 포커스 시 마스킹 해제
-        const apiKeyInputs = [els.geminiApiKeyInput, els.perplexityApiKeyInput, els.deepinfraApiKeyInput, els.naverClientSecretInput];
+        const apiKeyInputs = [
+            els.geminiApiKeyInput,
+            els.openaiApiKeyInput,
+            els.claudeApiKeyInput,
+            els.perplexityApiKeyInput,
+            els.leonardoaiApiKeyInput,
+            els.deepinfraApiKeyInput,
+            els.naverClientSecretInput,
+        ];
         apiKeyInputs.forEach(input => {
             if (input) {
                 input.addEventListener('focus', () => {
@@ -363,7 +411,7 @@ export function initSettingsModal(): void {
                     }
                 });
                 input.addEventListener('blur', () => {
-                    if (input.value && !input.value.includes('•')) {
+                    if (input.value && !isMaskedApiValue(input.value)) {
                         input.dataset.realValue = input.value;
                         input.value = maskApiKey(input.value);
                     }

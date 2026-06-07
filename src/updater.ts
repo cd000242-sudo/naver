@@ -4,7 +4,8 @@
  * - 앱 시작 시 자동 체크, 백그라운드 다운로드, 강제 설치 후 재시작
  */
 
-import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog, shell } from 'electron';
+import { spawnSync } from 'child_process';
 
 // ✅ [2026-04-03] electron-updater 지연 로드 (개발 모드 crash 방지)
 let _autoUpdater: any = null;
@@ -44,6 +45,54 @@ export function isUpdating(): boolean {
 }
 
 // ✅ [2026-03-11] 업데이트 체크 결과를 외부에 전달하기 위한 resolve 함수
+const MANUAL_DOWNLOAD_URL = 'https://github.com/cd000242-sudo/naver/releases/latest';
+
+function isMacCodeSignatureValidationError(error: unknown): boolean {
+    const message = error instanceof Error ? error.message : String(error ?? '');
+    return process.platform === 'darwin' &&
+        /code signature|did not pass validation|requirements.*failed|ShipIt/i.test(message);
+}
+
+function getMacCodeSignatureInfo(): { supported: boolean; reason?: string } {
+    if (process.platform !== 'darwin') return { supported: true };
+    if (!app.isPackaged) return { supported: false, reason: 'development build' };
+
+    try {
+        const result = spawnSync('/usr/bin/codesign', ['-dv', '--verbose=4', app.getPath('exe')], {
+            encoding: 'utf8',
+            timeout: 5000,
+        });
+        const output = `${result.stdout || ''}\n${result.stderr || ''}`;
+        if (result.status !== 0) {
+            return { supported: false, reason: 'codesign verification failed' };
+        }
+        if (/Authority=Developer ID Application:/i.test(output)) {
+            return { supported: true };
+        }
+        return { supported: false, reason: 'not signed with Developer ID Application' };
+    } catch (error) {
+        return {
+            supported: false,
+            reason: `codesign check failed: ${(error as Error).message}`,
+        };
+    }
+}
+
+function buildMacSignatureFailureDetail(errorMessage?: string): string {
+    const base = [
+        'macOS 자동 업데이트는 앱 코드 서명이 통과해야 설치까지 완료됩니다.',
+        '',
+        '현재 설치된 BLN 또는 다운로드된 업데이트 파일이 Developer ID 서명 요구사항을 통과하지 못해 자동 교체가 차단되었습니다.',
+        '서명 없이 배포한 mac 버전은 수동 실행은 가능하지만 자동 업데이트는 실패할 수 있습니다.',
+        '',
+        '해결 방법:',
+        '1. 지금은 GitHub Releases에서 최신 mac zip/dmg를 직접 내려받아 교체하세요.',
+        '2. 이후 자동 업데이트까지 쓰려면 Apple Developer ID로 서명한 mac 릴리스를 배포해야 합니다.',
+    ].join('\n');
+
+    return errorMessage ? `${base}\n\n원본 오류: ${errorMessage}` : base;
+}
+
 let updateCheckResolve: ((hasUpdate: boolean) => void) | null = null;
 
 /**
@@ -335,6 +384,17 @@ export function initAutoUpdaterEarly(): void {
     }
 
     // ✅ 업데이트 체크 중
+    const macSignature = getMacCodeSignatureInfo();
+    if (!macSignature.supported) {
+        sendLogToRenderer(`[Updater] macOS auto update disabled: ${macSignature.reason ?? 'unsupported signature'}`);
+        sendStatusToWindow('update-not-available', {
+            reason: 'mac-code-signature-required',
+            manualDownloadUrl: MANUAL_DOWNLOAD_URL,
+        });
+        if (updateCheckResolve) { updateCheckResolve(false); updateCheckResolve = null; }
+        return;
+    }
+
     updater.on('checking-for-update', () => {
         sendLogToRenderer('[Updater] 업데이트 확인 중...');
         sendStatusToWindow('update-checking');
@@ -512,6 +572,11 @@ export function initAutoUpdaterEarly(): void {
         sendLogToRenderer(`[Updater] ❌ 오류: ${error.message}`);
 
         // ✅ [2026-03-11] 업데이트 실패 시 플래그 해제
+        const isMacSignatureError = isMacCodeSignatureValidationError(error);
+        const displayErrorMessage = isMacSignatureError
+            ? buildMacSignatureFailureDetail(error.message)
+            : error.message;
+
         isUpdateInProgress = false;
 
         // ✅ [2026-03-11] Promise resolve: 에러 발생 → 업데이트 없음으로 처리
@@ -527,13 +592,40 @@ export function initAutoUpdaterEarly(): void {
         }
 
         sendStatusToWindow('update-error', {
-            message: error.message
+            message: displayErrorMessage,
+            code: isMacSignatureError ? 'mac-code-signature-required' : undefined,
+            manualDownloadUrl: isMacSignatureError ? MANUAL_DOWNLOAD_URL : undefined,
         });
+
+        if (isMacSignatureError) {
+            closeProgressWindow();
+            const targetWindow = mainWindow && !mainWindow.isDestroyed() ? mainWindow : BrowserWindow.getFocusedWindow();
+            const macDialogOptions = {
+                type: 'warning' as const,
+                title: 'macOS 자동 업데이트 불가',
+                message: '수동 다운로드가 필요합니다.',
+                detail: displayErrorMessage,
+                buttons: ['다운로드 열기', '확인'],
+                defaultId: 0,
+                noLink: true,
+            };
+            const openDownload = ({ response }: { response: number }) => {
+                if (response === 0) {
+                    shell.openExternal(MANUAL_DOWNLOAD_URL).catch(() => {});
+                }
+            };
+            if (targetWindow) {
+                dialog.showMessageBox(targetWindow, macDialogOptions).then(openDownload);
+            } else {
+                dialog.showMessageBox(macDialogOptions).then(openDownload);
+            }
+            return;
+        }
 
         // ✅ [2026-02-05 FIX] 진행률 창이 있으면 에러 메시지로 변경 (닫지 않음)
         if (progressWindow && !progressWindow.isDestroyed()) {
             // 에러 메시지 안전하게 이스케이프 (따옴표, 줄바꿈 등)
-            const safeErrorMsg = error.message
+            const safeErrorMsg = displayErrorMessage
                 .replace(/\\/g, '\\\\')
                 .replace(/'/g, "\\'")
                 .replace(/"/g, '\\"')
@@ -559,6 +651,28 @@ export function initAutoUpdaterEarly(): void {
         } else {
             // 진행률 창이 없으면 다이얼로그로 표시
             const targetWindow = mainWindow && !mainWindow.isDestroyed() ? mainWindow : BrowserWindow.getFocusedWindow();
+            if (isMacSignatureError) {
+                const macDialogOptions = {
+                    type: 'warning' as const,
+                    title: 'macOS 자동 업데이트 불가',
+                    message: '수동 다운로드가 필요합니다.',
+                    detail: displayErrorMessage,
+                    buttons: ['다운로드 열기', '확인'],
+                    defaultId: 0,
+                    noLink: true,
+                };
+                const openDownload = ({ response }: { response: number }) => {
+                    if (response === 0) {
+                        shell.openExternal(MANUAL_DOWNLOAD_URL).catch(() => {});
+                    }
+                };
+                if (targetWindow) {
+                    dialog.showMessageBox(targetWindow, macDialogOptions).then(openDownload);
+                } else {
+                    dialog.showMessageBox(macDialogOptions).then(openDownload);
+                }
+                return;
+            }
             const dialogOptions = {
                 type: 'warning' as const,
                 title: '⚠️ 업데이트 실패',

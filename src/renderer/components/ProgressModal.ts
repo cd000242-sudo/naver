@@ -216,6 +216,21 @@ export class ProgressModal {
         this.imageGridContainer = container;
     }
 
+    private ensureImagePreviewContainer(): void {
+        const grid = document.getElementById('progress-image-grid');
+        const mainPreview = document.getElementById('progress-main-preview');
+        if (grid && mainPreview) return;
+        this.createImageGridContainer();
+    }
+
+    private restoreImagePreviewState(): void {
+        this.ensureImagePreviewContainer();
+        if (this.currentImages.length === 0) return;
+
+        const title = document.getElementById('progress-image-title')?.textContent || 'Generated images';
+        this.showImages([...this.currentImages], title);
+    }
+
 
     setStopRequestHandler(handler: () => Promise<void>) {
         this.onStopRequest = handler;
@@ -735,8 +750,61 @@ export class ProgressModal {
         }
     }
 
+    private openFullImagePreview(src: string, heading?: string): void {
+        const safeSrc = toFileUrlSafe(src);
+        if (!safeSrc) return;
+
+        document.querySelectorAll('.progress-full-image-preview-overlay').forEach((el) => el.remove());
+
+        const modal = document.createElement('div');
+        modal.className = 'progress-full-image-preview-overlay';
+        modal.tabIndex = -1;
+        modal.style.cssText = `
+            position: fixed; inset: 0; z-index: 2147483647;
+            display: flex; align-items: center; justify-content: center;
+            padding: 2rem; background: rgba(0,0,0,0.94); cursor: zoom-out;
+            isolation: isolate; pointer-events: auto;
+        `;
+        const closeButton = document.createElement('button');
+        closeButton.type = 'button';
+        closeButton.setAttribute('aria-label', 'Close preview');
+        closeButton.textContent = 'X';
+        closeButton.style.cssText = 'position:fixed; top:18px; right:18px; z-index:2147483647; width:48px; height:48px; border:1px solid rgba(255,255,255,0.35); border-radius:10px; background:rgba(15,23,42,0.92); color:white; font-size:1.35rem; font-weight:800; line-height:1; cursor:pointer; box-shadow:0 8px 28px rgba(0,0,0,0.45);';
+
+        const imageEl = document.createElement('img');
+        imageEl.src = safeSrc;
+        imageEl.alt = heading || '';
+        imageEl.style.cssText = 'max-width:94vw; max-height:90vh; object-fit:contain; border-radius:8px; box-shadow:0 20px 70px rgba(0,0,0,0.65); cursor:default;';
+
+        function closePreview() {
+            window.removeEventListener('keydown', handleKeydown, true);
+            modal.remove();
+        }
+
+        function handleKeydown(event: KeyboardEvent) {
+            if (event.key === 'Escape') closePreview();
+        }
+
+        modal.appendChild(closeButton);
+        modal.appendChild(imageEl);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal || event.target === closeButton) {
+                closePreview();
+            }
+        });
+        closeButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            closePreview();
+        });
+        imageEl.addEventListener('click', (event) => event.stopPropagation());
+        document.body.appendChild(modal);
+        window.addEventListener('keydown', handleKeydown, true);
+        modal.focus();
+    }
+
     // ✅ [2026-02-13 RENEWAL] 이미지 그리드 표시 + 메인 미리보기 업데이트 (전폭 200px 레이아웃)
     showImages(images: Array<{ url?: string; filePath?: string; heading?: string }>, title: string = '수집된 이미지') {
+        this.ensureImagePreviewContainer();
         const grid = document.getElementById('progress-image-grid');
         const countEl = document.getElementById('progress-image-count');
         const titleEl = document.getElementById('progress-image-title');
@@ -762,6 +830,9 @@ export class ProgressModal {
             if (typeof imgIndex === 'number') this.currentImageIndex = imgIndex;
 
             if (isPlaceholder) {
+                mainPreview.onclick = null;
+                mainPreview.style.cursor = 'default';
+                mainPreview.title = '';
                 mainPreview.innerHTML = `
                     <div style="color: #60a5fa; text-align: center;">
                         <div style="font-size: 2.5rem; animation: pulse 1.5s infinite;">⏳</div>
@@ -790,6 +861,11 @@ export class ProgressModal {
                 `;
                 mainPreview.style.position = 'relative';
                 mainPreview.style.borderColor = '#3b82f6';
+                mainPreview.style.cursor = 'zoom-in';
+                mainPreview.title = '클릭하면 크게 볼 수 있습니다';
+                mainPreview.onclick = () => {
+                    this.openFullImagePreview(src, heading);
+                };
 
                 // ✅ 화살표 이벤트 바인딩
                 const prevBtn = mainPreview.querySelector('.carousel-prev');
@@ -961,6 +1037,7 @@ export class ProgressModal {
 
     // ✅ [2026-02-27 NEW] 실시간 단일 이미지 업데이트 — 플레이스홀더를 실제 이미지로 교체
     updateSingleImage(index: number, image: { url?: string; filePath?: string; heading?: string }, total?: number) {
+        this.ensureImagePreviewContainer();
         const grid = document.getElementById('progress-image-grid');
         const countEl = document.getElementById('progress-image-count');
         const mainPreview = document.getElementById('progress-main-preview');
@@ -1014,6 +1091,9 @@ export class ProgressModal {
                     </div>
                 `;
                 mainPreview.style.borderColor = 'var(--border-light)';
+                mainPreview.style.cursor = 'default';
+                mainPreview.title = '';
+                mainPreview.onclick = null;
             }
         }
 
@@ -1120,6 +1200,7 @@ export class ProgressModal {
 
     // ✅ [2026-02-27 NEW] 메인 미리보기 직접 업데이트 (showImages 내부 헬퍼와 동일)
     private updateMainPreviewDirect(src: string, heading: string, imgIndex: number) {
+        this.ensureImagePreviewContainer();
         const mainPreview = document.getElementById('progress-main-preview');
         if (!mainPreview || !src) return;
 
@@ -1138,6 +1219,11 @@ export class ProgressModal {
         `;
         mainPreview.style.position = 'relative';
         mainPreview.style.borderColor = '#10b981';
+        mainPreview.style.cursor = 'zoom-in';
+        mainPreview.title = '클릭하면 크게 볼 수 있습니다';
+        mainPreview.onclick = () => {
+            this.openFullImagePreview(src, heading);
+        };
 
         // 2초 후 테두리 정상화
         setTimeout(() => {
@@ -1147,9 +1233,13 @@ export class ProgressModal {
 
     // ✅ [2026-02-13] 이미지 그리드 숨기기 + 메인 미리보기 초기화
     clearImages() {
+        this.ensureImagePreviewContainer();
         const grid = document.getElementById('progress-image-grid');
         const mainPreview = document.getElementById('progress-main-preview');
         const imageInfo = document.getElementById('progress-image-info');
+
+        this.currentImages = [];
+        this.currentImageIndex = 0;
 
         if (grid) {
             grid.innerHTML = '';
@@ -1163,6 +1253,9 @@ export class ProgressModal {
                 </div>
             `;
             mainPreview.style.borderColor = 'var(--border-light)';
+            mainPreview.style.cursor = 'default';
+            mainPreview.title = '';
+            mainPreview.onclick = null;
         }
         if (imageInfo) imageInfo.style.display = 'none';
     }
@@ -1232,6 +1325,7 @@ export class ProgressModal {
             if (this.modal) {
                 this.modal.style.display = 'flex';
             }
+            this.restoreImagePreviewState();
             this.hideRestoreFab();
             console.log('[ProgressModal] ✅ FAB 클릭 → 모달 복원');
         });

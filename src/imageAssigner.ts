@@ -70,11 +70,13 @@ export class ImageAssigner {
         imgs.forEach((img) => {
           automationImages.push({
             heading,
-            filePath: img.filePath ?? img.url ?? '',
+            filePath: img.filePath ?? img.url ?? img.previewDataUrl ?? '',
+            ...(img.previewDataUrl ? { previewDataUrl: img.previewDataUrl } : {}),
+            ...(img.url ? { url: img.url } : {}),
             provider: 'narrative',
             alt: `${heading} 이미지`,
             caption: img.heading ?? heading,
-          });
+          } as AutomationImage);
         });
       });
       this.logger(`🖼️ 이미지 배치 모드: narrative (pre-built map, ${automationImages.length}개)`);

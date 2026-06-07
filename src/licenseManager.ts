@@ -131,6 +131,31 @@ const LICENSE_FILE = 'license.json';
 let licenseDir: string | null = null;
 let licensePath: string | null = null;
 let cachedLicense: LicenseInfo | null = null;
+const LICENSE_APP_ID = 'com.betterlife.naver';
+const LICENSE_PLATFORM = 'NAVER';
+
+function getLicenseAppPayload() {
+  return {
+    appId: LICENSE_APP_ID,
+    platform: LICENSE_PLATFORM,
+    appVersion: app.getVersion(),
+  };
+}
+
+function isMaintenanceResponse(result: any): boolean {
+  return !!result && (
+    result.serviceEnabled === false ||
+    result.error === 'SERVICE_DISABLED' ||
+    result.code === 'SERVICE_DISABLED'
+  );
+}
+
+function getServerErrorMessage(result: any, fallback: string): string {
+  if (isMaintenanceResponse(result)) {
+    return result?.message || result?.notice || '현재 서비스 점검 중입니다. 잠시 후 다시 시도해주세요.';
+  }
+  return result?.message || result?.error || fallback;
+}
 
 // ✅ [v2.10.274] TTL + write-guard state for revalidateLicense
 let _lastSyncAt = 0;
@@ -470,7 +495,7 @@ export async function registerLicense(
 
       const requestBody = {
         action: 'register',
-        appId: 'com.ridernam.naver.automation', // 서버에서 요구하는 앱 ID
+        ...getLicenseAppPayload(),
         licenseCode: normalizedCode,
         userId: userId.trim(), // 공백 제거
         userPassword: password.trim(), // 공백 제거
@@ -743,7 +768,7 @@ export async function verifyLicenseWithCredentials(
 
       const requestBody = {
         action: 'verify-credentials',
-        appId: 'com.ridernam.naver.automation', // 서버에서 요구하는 앱 ID
+        ...getLicenseAppPayload(),
         userId: userId.trim(), // 공백 제거
         userPassword: password.trim(), // 공백 제거
         deviceId,
@@ -802,7 +827,7 @@ export async function verifyLicenseWithCredentials(
             message: result.error || '이미 다른 기기에서 로그인 중입니다. 기존 기기에서 로그아웃하거나 10분 후 다시 시도해주세요.',
           };
         }
-        const errorMsg = result.error || result.message || '아이디 또는 비밀번호가 올바르지 않습니다.';
+        const errorMsg = getServerErrorMessage(result, '아이디 또는 비밀번호가 올바르지 않습니다.');
         const translatedMsg = translateErrorMessage(typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg));
         console.error('[LicenseManager] 서버 오류:', errorMsg);
         console.error('[LicenseManager] 서버 응답 전체:', JSON.stringify(result, null, 2));
@@ -1012,7 +1037,7 @@ export async function verifyLicense(
       console.log('[LicenseManager] 라이선스 서버 검증 시도:', serverUrl);
       console.log('[LicenseManager] 요청 데이터:', {
         action: 'verify',
-        appId: 'com.ridernam.naver.automation',
+        ...getLicenseAppPayload(),
         code: normalizedCode,
         deviceId,
         appVersion: app.getVersion(),
@@ -1031,7 +1056,7 @@ export async function verifyLicense(
         },
         body: JSON.stringify({
           action: 'verify', // 또는 'activate'
-          appId: 'com.ridernam.naver.automation', // 서버에서 요구하는 앱 ID
+          ...getLicenseAppPayload(),
           code: normalizedCode,
           deviceId,
           appVersion: app.getVersion(),
@@ -1090,7 +1115,7 @@ export async function verifyLicense(
 
       // Apps Script 응답 형식에 맞게 처리
       if (!result.ok && result.ok !== undefined) {
-        const errorMsg = result.error || result.message || '라이선스 코드가 유효하지 않습니다.';
+        const errorMsg = getServerErrorMessage(result, '라이선스 코드가 유효하지 않습니다.');
         const translatedMsg = translateErrorMessage(typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg));
         return {
           valid: false,
@@ -1240,7 +1265,7 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
         },
         body: JSON.stringify({
           action: 'verify', // 또는 'check'
-          appId: 'com.ridernam.naver.automation', // 서버에서 요구하는 앱 ID
+          ...getLicenseAppPayload(),
           code: license.licenseCode,
           deviceId: license.deviceId,
         }),
@@ -1265,6 +1290,10 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
       // Apps Script 응답 형식에 맞게 처리
       if (result.ok === false) {
         console.warn('[LicenseManager] 재검증 실패: 서버에서 라이선스가 유효하지 않다고 응답함');
+        if (isMaintenanceResponse(result)) {
+          console.warn('[LicenseManager] 서비스 점검 모드 - 로컬 라이선스는 유지합니다.');
+          return false;
+        }
         // 확실하게 유효하지 않은 경우에만 clear
         _lastAppliedRevalidateSyncSequence = syncSequence;
         _lastSyncAt = Date.now();
@@ -1362,7 +1391,7 @@ export async function validateSession(serverUrl?: string): Promise<SessionValida
         },
         body: JSON.stringify({
           action: 'validate-session',
-          appId: 'com.ridernam.naver.automation',
+          ...getLicenseAppPayload(),
           userId: license.userId,
           sessionToken: license.sessionToken,
           deviceId: license.deviceId,
@@ -1378,6 +1407,13 @@ export async function validateSession(serverUrl?: string): Promise<SessionValida
       // 세션이 무효화됨 (다른 기기에서 로그인)
       // 서버 응답: { ok: false, valid: false, code: 'SESSION_EXPIRED_BY_OTHER_LOGIN' }
       if (!result.valid || result.code === 'SESSION_EXPIRED_BY_OTHER_LOGIN' || result.code === 'NO_SESSION') {
+        if (isMaintenanceResponse(result)) {
+          return {
+            valid: false,
+            message: getServerErrorMessage(result, '현재 서비스 점검 중입니다. 잠시 후 다시 시도해주세요.'),
+            forceLogout: true,
+          };
+        }
         console.log('[LicenseManager] 세션 무효화됨 - 코드:', result.code, '메시지:', result.error);
         await clearLicense();
         return {
@@ -1460,7 +1496,7 @@ export async function logoutFromServer(): Promise<void> {
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         action: 'logout',
-        appId: 'com.ridernam.naver.automation',
+        ...getLicenseAppPayload(),
         userId: license.userId,
         sessionToken: license.sessionToken,
       }),
@@ -1506,7 +1542,7 @@ export async function syncWithServer(serverUrl?: string): Promise<SyncResult> {
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         action: 'sync',
-        appId: 'com.ridernam.naver.automation',
+        ...getLicenseAppPayload(),
         deviceId,
         appVersion,
       }),
@@ -1529,7 +1565,7 @@ export async function syncWithServer(serverUrl?: string): Promise<SyncResult> {
       isBlocked: result.isBlocked === true,
       versionCheckEnabled: result.versionCheckEnabled !== false,
       serviceEnabled: result.serviceEnabled !== false,
-      notice: result.notice || '',
+      notice: result.message || result.notice || '',
     };
   } catch (error) {
     console.error('[LicenseManager] 서버 동기화 오류:', error);
@@ -1557,7 +1593,7 @@ export async function sendFreePing(serverUrl?: string): Promise<boolean> {
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         action: 'free-ping',
-        appId: 'com.ridernam.naver.automation',
+        ...getLicenseAppPayload(),
         deviceId,
         appVersion,
         timestamp: new Date().toISOString(),
@@ -1610,7 +1646,7 @@ export async function reportNaverAccounts(accounts: NaverAccountInfo[], serverUr
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         action: 'report-accounts',
-        appId: 'com.ridernam.naver.automation',
+        ...getLicenseAppPayload(),
         deviceId,
         appVersion,
         accounts,

@@ -6,7 +6,7 @@
  * 캐싱, 레이트 리밋, 에러 핸들링 통합
  */
 
-import { CollectionResult, CollectionOptions, ShoppingPlatform } from './types.js';
+import { CollectionResult, CollectionOptions, ShoppingPlatform, ProductImage, ShoppingCollectionDiagnostics } from './types.js';
 import { resolveUrl, detectPlatform } from './utils/UrlResolver.js';
 import { imageCache } from './utils/ImageCache.js';
 import { rateLimiter } from './utils/RateLimiter.js';
@@ -23,6 +23,47 @@ const providers: BaseProvider[] = [
     new SmartStoreProvider(),
     new CoupangProvider(),
 ];
+
+function countByType(images: ProductImage[] = [], type: ProductImage['type']): number {
+    return images.filter(img => img.type === type).length;
+}
+
+function buildDiagnostics(result: CollectionResult): ShoppingCollectionDiagnostics {
+    const imageCount = result.images?.length ?? 0;
+    const warnings: string[] = [];
+
+    if (imageCount === 0) {
+        warnings.push('상품 이미지를 찾지 못했습니다. 링크가 상품 페이지인지, 로그인/품절/차단 페이지로 이동했는지 확인이 필요합니다.');
+    } else if (imageCount < 3) {
+        warnings.push('수집 이미지가 3개 미만입니다. 썸네일만 잡혔거나 상세/리뷰 이미지 로딩이 제한됐을 수 있습니다.');
+    }
+
+    if (!result.productInfo?.name) {
+        warnings.push('상품명이 확인되지 않았습니다. og:title 또는 상품 메타데이터가 비어 있습니다.');
+    }
+
+    return {
+        imageCount,
+        galleryCount: countByType(result.images, 'gallery') + countByType(result.images, 'main') + countByType(result.images, 'gallery-thumb-fallback'),
+        detailCount: countByType(result.images, 'detail'),
+        reviewCount: countByType(result.images, 'review'),
+        quality: imageCount === 0 ? 'failed' : imageCount < 3 ? 'weak' : 'ok',
+        warnings,
+    };
+}
+
+function attachDiagnostics(result: CollectionResult): CollectionResult {
+    const diagnostics = buildDiagnostics(result);
+    if (diagnostics.quality === 'failed' && result.success) {
+        return {
+            ...result,
+            success: false,
+            diagnostics,
+            error: result.error || diagnostics.warnings[0],
+        };
+    }
+    return { ...result, diagnostics };
+}
 
 /**
  * 메인 이미지 수집 함수
@@ -47,7 +88,7 @@ export async function collectShoppingImages(
     const opts = {
         timeout: 30000,
         maxImages: 30,
-        includeDetails: true,
+        includeDetails: false,
         includeReviews: false,
         validateWithAI: false,  // AI 검증은 나중에 추가
         useCache: true,
@@ -63,10 +104,10 @@ export async function collectShoppingImages(
             const cached = imageCache.get(url);
             if (cached) {
                 console.log('[ShoppingCrawlerHub] 📦 캐시에서 반환');
-                return {
+                return attachDiagnostics({
                     ...cached,
                     timing: Date.now() - startTime,
-                };
+                });
             }
         }
 
@@ -121,6 +162,9 @@ export async function collectShoppingImages(
         // 6. 캐시 저장
         if (opts.useCache && result.success) {
             imageCache.set(url, result);
+            if (resolved.finalUrl && resolved.finalUrl !== url) {
+                imageCache.set(resolved.finalUrl, result);
+            }
         }
 
         return result;
@@ -161,10 +205,10 @@ async function collectWithProvider(
 
     console.log('[ShoppingCrawlerHub] ════════════════════════════════════════');
 
-    return {
+    return attachDiagnostics({
         ...result,
         timing: Date.now() - startTime,
-    };
+    });
 }
 
 /**

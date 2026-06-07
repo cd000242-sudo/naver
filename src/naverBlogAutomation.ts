@@ -43,6 +43,7 @@ import {
 } from './automation/selectors';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, humanKeyboardType } from './automation/typingUtils.js';
+import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes } from './automation/richTextPaste.js';
 import { resolveImmediatePublishOutcome } from './automation/publishOutcomeResolver';
 
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
@@ -865,6 +866,9 @@ export class NaverBlogAutomation {
       if (clicked) {
         this.log(`✅ "등록" 클릭 성공! (텍스트 매칭: ${clicked})`);
         await this.delay(2000);
+        await this.removeBareUrlTextAfterLinkCard().catch(error => {
+          this.log(`   ⚠️ 링크카드 URL 원문 정리 실패 (계속 진행): ${(error as Error).message}`);
+        });
         return true;
       }
 
@@ -1224,6 +1228,58 @@ export class NaverBlogAutomation {
     // 타임아웃 - 링크 카드가 생성되지 않음 (네트워크 느림 또는 유효하지 않은 URL)
     this.log(`   ⚠️ 링크 카드 로딩 타임아웃 (${timeoutMs / 1000}초) - 계속 진행합니다`);
     return false;
+  }
+
+  private async removeBareUrlTextAfterLinkCard(): Promise<void> {
+    const frame = await this.getAttachedFrame();
+    const removed = await frame.evaluate(() => {
+      const cardSelectors = [
+        '.se-oglink',
+        '.se-module-oglink',
+        '.se-oembed',
+        '.se-module-oembed',
+        '.se-link-preview',
+        '[data-module="oglink"]',
+        '[class*="oglink"]',
+        '[class*="oembed"]',
+        '.se-section-oglink',
+      ];
+      const hasLinkCard = cardSelectors.some(selector => document.querySelector(selector));
+      if (!hasLinkCard) return 0;
+
+      const urlOnlyPattern = /^(?:\s|👉|▶|→|:|-|｜|\||\(|\)|\[|\]|바로가기|보기|자세히|관련|공식|사이트|이전글|보러가기|더보기)*https?:\/\/\S+(?:\s|👉|▶|→|:|-|｜|\||\(|\)|\[|\]|바로가기|보기|자세히|관련|공식|사이트|이전글|보러가기|더보기)*$/i;
+      const paragraphs = Array.from(document.querySelectorAll('.se-text-paragraph, .se-module-text p, [contenteditable="true"] p')) as HTMLElement[];
+      let removedCount = 0;
+
+      for (const paragraph of paragraphs) {
+        if (cardSelectors.some(selector => paragraph.closest(selector))) continue;
+        const text = (paragraph.innerText || paragraph.textContent || '').replace(/\s+/g, ' ').trim();
+        if (!text || !/https?:\/\//i.test(text)) continue;
+        if (!urlOnlyPattern.test(text)) continue;
+
+        const container = paragraph.closest('.se-component') as HTMLElement | null;
+        const removable = container && !cardSelectors.some(selector => container.matches(selector) || container.closest(selector))
+          ? container
+          : paragraph;
+        removable.remove();
+        removedCount += 1;
+      }
+
+      if (removedCount > 0) {
+        const editorRoot = document.querySelector('.se-main-container, .se-section-text, [contenteditable="true"]') as HTMLElement | null;
+        if (editorRoot) {
+          for (const eventType of ['input', 'change', 'keyup', 'blur']) {
+            editorRoot.dispatchEvent(new Event(eventType, { bubbles: true, cancelable: true }));
+          }
+        }
+      }
+
+      return removedCount;
+    });
+
+    if (removed > 0) {
+      this.log(`   ✅ 링크카드 생성 후 URL 원문 ${removed}개 정리 완료`);
+    }
   }
 
   private ensureNotCancelled(): void {
@@ -4588,21 +4644,46 @@ export class NaverBlogAutomation {
 
   async typePlainContent(content: string, lines: number): Promise<void> {
     const page = this.ensurePage();
+    const frame = (await this.getAttachedFrame());
     this.ensureNotCancelled();
     this.log('🔄 본문 입력 중...');
 
+    const repeatCount = Math.max(1, lines || 1);
+    const richSource = Array.from({ length: repeatCount }, () => content).join('\n\n');
+    const richThemes = (this as any).__richPasteThemes || ((this as any).__richPasteThemes = pickRichArticleThemes());
+    const rich = buildMobileRichHtml(richSource, {
+      fontSizePx: 19,
+      highlight: true,
+      maxChunkChars: 38,
+      maxHighlights: 8,
+      tableTheme: richThemes.tableTheme,
+      highlightTheme: richThemes.highlightTheme,
+      headingTheme: richThemes.headingTheme,
+    });
+
+    if (rich.html) {
+      this.log(`✨ 리치 본문 붙여넣기 시도: ${rich.paragraphCount}개 모바일 단락, ${rich.highlightCount}개 하이라이트, ${rich.tableCount}개 표`);
+      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText);
+      if (pasteResult.ok) {
+        this.log(`✅ 리치 본문 입력 완료 (${pasteResult.afterChars - pasteResult.beforeChars}자 증가, 표 ${pasteResult.beforeTables}→${pasteResult.afterTables})`);
+        return;
+      }
+
+      this.log(`⚠️ 리치 본문 붙여넣기 실패 → 기존 타이핑 fallback: ${pasteResult.reason || 'unknown'}`);
+    }
+
     // 클릭 완전 제거 - 현재 커서 위치에서 바로 시작
-    for (let line = 0; line < lines; line += 1) {
+    for (let line = 0; line < repeatCount; line += 1) {
       this.ensureNotCancelled();
       // ✅ [2026-05-23 A3] 본문 타이핑 인간화 — 고정 20ms 대신 가우시안 분산
       await humanKeyboardType(page, content);
-      if (line < lines - 1) {
+      if (line < repeatCount - 1) {
         await page.keyboard.press('Enter');
         await this.delay(this.DELAYS.SHORT);
       }
     }
 
-    this.log(`✅ 본문을 ${lines}줄 성공적으로 입력했습니다.`);
+    this.log(`✅ 본문을 ${repeatCount}줄 성공적으로 입력했습니다.`);
   }
 
   /**
@@ -5790,7 +5871,11 @@ export class NaverBlogAutomation {
   private async applyPlainContent(resolved: ResolvedRunOptions): Promise<void> {
     this.log('📝 단순 본문을 입력합니다...');
     this.ensureNotCancelled();
+    (this as any).__richPasteThemes = pickRichArticleThemes();
     await this.inputTitle(resolved.title);
+    await editorHelpers.setupMobileViewAndCenterAlign(this).catch((error: Error) => {
+      this.log(`⚠️ 모바일 화면 모드 설정 실패 (계속 진행): ${error.message}`);
+    });
     await this.typePlainContent(resolved.content, resolved.lines);
   }
 
@@ -8146,7 +8231,10 @@ export class NaverBlogAutomation {
 
       // ✅ 4. [신규] 링크 카드 로딩 대기 (polling 방식)
       this.log(`   ⏳ 링크 카드 로딩 대기 중...`);
-      await this.waitForLinkCard(15000, 500);
+      const ctaCardReady = await this.waitForLinkCard(15000, 500);
+      if (ctaCardReady) {
+        await this.removeBareUrlTextAfterLinkCard();
+      }
 
       // ✅ [2026-01-19] 마지막 구분선 제거 - 추가 CTA/이전글에서 각자 구분선 삽입
       // 중복 구분선 방지
@@ -8181,7 +8269,10 @@ export class NaverBlogAutomation {
 
         // ✅ 7. [신규] 이전글 링크 카드 로딩 대기 (polling 방식)
         this.log(`   ⏳ 이전글 카드 로딩 대기 중...`);
-        await this.waitForLinkCard(15000, 500);
+        const previousCardReady = await this.waitForLinkCard(15000, 500);
+        if (previousCardReady) {
+          await this.removeBareUrlTextAfterLinkCard();
+        }
       } else {
         this.log(`   ℹ️ 이전글 정보 없음 - 건너뜀`);
       }
@@ -8278,6 +8369,13 @@ export class NaverBlogAutomation {
         await page.keyboard.press('Enter');
         await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
         await page.keyboard.press('Enter');
+      }
+
+      if (finalUrl && finalUrl !== '#') {
+        const cardReady = await this.waitForLinkCard(12000, 500);
+        if (cardReady) {
+          await this.removeBareUrlTextAfterLinkCard();
+        }
       }
 
       await this.delay(300);

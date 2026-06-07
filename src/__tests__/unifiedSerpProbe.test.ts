@@ -22,6 +22,7 @@ describe('toSerpMode', () => {
     expect(toSerpMode('affiliate')).toBe('affiliate');
     expect(toSerpMode('business')).toBe('business');
     expect(toSerpMode('custom')).toBe('custom');
+    expect(toSerpMode('mate')).toBe('mate');
   });
 
   it('알 수 없는 모드는 seo로 fallback', () => {

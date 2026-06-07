@@ -6,7 +6,11 @@ import {
   openaiRpmThrottler,
   getQuotaBackoffMs,
   getOpenAiMinIntervalMs,
-  QUOTA_BACKOFF_SEQUENCE_MS,
+  getOpenAiMaxCompletionTokens,
+  getOpenAiRateLimitPatienceMs,
+  getOpenAiRateLimitWaitMs,
+  isOpenAiHardQuotaError,
+  isOpenAiRateLimitError,
 } from './utils/openaiRpmThrottler.js';
 // ✅ [2026-01-25] Perplexity 추가
 import { generatePerplexityContent, translatePerplexityError } from './perplexity.js';
@@ -716,7 +720,7 @@ ${mode === 'homefeed' && subKeywords ? `
 → "자연스럽게 녹이세요"가 아니라 "반드시 드러내세요"입니다.
 → 단, 같은 단어를 2번 쓰면 0점! 나열식 금지!
 ` : ''}
-${mode === 'seo' && subKeywords ? `
+${(mode === 'seo' || mode === 'mate') && subKeywords ? `
 💡 [권장] 서브키워드 중 1개를 제목에 자연스럽게 포함하세요.
 → 검색 의도 명확화 + AI 브리핑 인용 정확도 향상.
 → 단, 2개 이상 나열은 -30점 (base.prompt 0점 표 "억지 나열" 규칙).
@@ -1227,6 +1231,7 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   if (source.useKeywordAsTitle && source.keywordForTitle) {
     const kwTitle = source.keywordForTitle.trim();
     console.log(`[finalizeStructuredContent] 📌 키워드를 제목으로 그대로 사용: "${kwTitle}"`);
+    (finalContent as any).title = kwTitle;
     finalContent.selectedTitle = kwTitle;
     // [v2.10.239] keywordAsTitle lock 플래그 — IPC 직렬화되어 main process(editorHelpers)까지 전파
     //   editorHelpers.ts:585/593 (반자동 모드 사용자 수정 제목 적용)이 이 플래그 보고 가드.
@@ -1254,6 +1259,7 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
           body: h.body ? removeOrdinalHeadingLabelsFromBody(String(h.body)) : h.body
         }));
       }
+      sanitizeStructuredContentClaims(finalContent);
     } catch { /* ignore */ }
 
     applyHomefeedNarrativeHookBlock(finalContent, source);
@@ -1294,6 +1300,7 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
         body: h.body ? removeOrdinalHeadingLabelsFromBody(String(h.body)) : h.body
       }));
     }
+    sanitizeStructuredContentClaims(finalContent);
   } catch (e) {
     console.warn('[contentGenerator] catch ignored:', e);
   }
@@ -1329,6 +1336,7 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   } catch (e) {
     console.warn('[contentGenerator] catch ignored:', e);
   }
+  sanitizeStructuredContentClaims(finalContent);
 
   // ✅ [2026-01-19 수정] affiliate 모드 수익 배분 고지는 최상단에 삽입됨
   // 마무리글에 중복 삽입하지 않음 (사용자 요청)
@@ -1586,7 +1594,7 @@ export interface ContentSource {
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
   toneStyle?: 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'
     | 'sincere_exposure' | 'data_verified' | 'text_hip' | 'mentor' | 'self_interview'; // ✅ [작업 14] 12개 활성 + 3개 deprecated(casual/formal/humorous, UI 미노출)
-  contentMode?: 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'custom' | 'business' | 'image-narrative'; // ✅ [v1.4.20] business 추가, [Phase 2] image-narrative 추가
+  contentMode?: 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'custom' | 'business' | 'mate' | 'image-narrative'; // ✅ [v1.4.20] business 추가, [Phase 2] image-narrative 추가
   // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 2] 이미지 내러티브 모드 옵션
   imageNarrative?: {
     images: Array<{ buffer: Buffer; mimeType: string }>;
@@ -1740,7 +1748,7 @@ export interface StructuredContent {
 interface GenerateOptions {
   provider?: ContentGeneratorProvider;
   minChars?: number;
-  contentMode?: 'seo' | 'homefeed'; // ✅ SEO 모드 또는 홈판 노출 최적화 모드
+  contentMode?: 'seo' | 'homefeed' | 'mate'; // ✅ SEO/홈판/네이버 메이트 노출 최적화 모드
   signal?: AbortSignal; // ✅ [2026-04-03] 중지 시 즉시 AI API 호출 abort
 }
 
@@ -1897,6 +1905,285 @@ function extractKeywordsFromContent(content: string): string[] {
   return sortedKeywords.slice(0, 10);
 }
 
+type PromptAdherenceReport = {
+  checked: boolean;
+  passed: boolean;
+  score: number;
+  requiredTerms: string[];
+  missingTerms: string[];
+  forbiddenTerms: string[];
+  foundForbiddenTerms: string[];
+  missingFeatures: string[];
+  issues: string[];
+  retryInstruction: string;
+};
+
+const PROMPT_ADHERENCE_STOPWORDS = new Set([
+  '사용자', '추가', '지시사항', '프롬프트', '작성', '해주세요', '해줘', '합니다',
+  '그리고', '그냥', '이렇게', '저렇게', '내용', '본문', '문장', '문단', '소제목',
+  '제목', '글', '블로그', '정리', '중요', '핵심', '부분', '필수', '반드시',
+  '포함', '강조', '언급', '사용', '금지', '제외', '삭제', '넣어', '빼고',
+  'mobile', 'naver', 'blog', 'content', 'prompt',
+]);
+
+const PROMPT_REQUIRED_SIGNAL = /반드시|꼭|필수|포함|넣어|넣고|강조|언급|다뤄|다루|사용|주제|키워드|비교|정리|FAQ|Q&A|표|체크리스트|단계|절차/i;
+const PROMPT_FORBIDDEN_SIGNAL = /금지|빼|제외|삭제|쓰지|사용하지|넣지|하지\s*말|하지마|없애|말고|제거/i;
+
+function normalizePromptProbe(value: string | undefined): string {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/[\s"'`~!@#$%^&*()[\]{}|\\;:,.<>/?，。！？、·•\-_=+]+/g, '')
+    .trim();
+}
+
+function splitPromptSentences(prompt: string): string[] {
+  return String(prompt || '')
+    .split(/[\r\n]+|(?<=[.!?。！？])\s+/)
+    .map((s) => s.trim())
+    .filter((s) => s.length >= 2);
+}
+
+function extractPromptTokens(text: string): string[] {
+  const matches = String(text || '').match(/[가-힣A-Za-z0-9][가-힣A-Za-z0-9+#._-]{1,}/g) || [];
+  return matches
+    .map((token) => token.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}+#._-]+$/gu, '').trim())
+    .filter((token) => {
+      if (token.length < 2 || token.length > 32) return false;
+      const key = token.toLowerCase();
+      if (PROMPT_ADHERENCE_STOPWORDS.has(key) || PROMPT_ADHERENCE_STOPWORDS.has(token)) return false;
+      if (/^\d+$/.test(token)) return false;
+      return true;
+    });
+}
+
+function uniquePromptTerms(terms: string[], maxCount: number): string[] {
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const term of terms) {
+    const normalized = normalizePromptProbe(term);
+    if (!normalized || seen.has(normalized)) continue;
+    seen.add(normalized);
+    result.push(term.trim());
+    if (result.length >= maxCount) break;
+  }
+  return result;
+}
+
+function extractQuotedPromptTerms(prompt: string): string[] {
+  const terms: string[] = [];
+  const re = /["'“”‘’「」『』`]\s*([^"'“”‘’「」『』`]{2,60}?)\s*["'“”‘’「」『』`]/g;
+  let match: RegExpExecArray | null;
+  while ((match = re.exec(prompt)) !== null) {
+    const value = match[1]?.trim();
+    if (value) terms.push(value);
+  }
+  return terms;
+}
+
+function extractRequiredPromptTerms(prompt: string): string[] {
+  const scored = new Map<string, { term: string; score: number }>();
+  const bump = (term: string, score: number) => {
+    const normalized = normalizePromptProbe(term);
+    if (!normalized) return;
+    const previous = scored.get(normalized);
+    scored.set(normalized, {
+      term: previous?.term || term.trim(),
+      score: (previous?.score || 0) + score,
+    });
+  };
+
+  for (const term of extractQuotedPromptTerms(prompt)) bump(term, 5);
+
+  for (const sentence of splitPromptSentences(prompt)) {
+    if (!PROMPT_REQUIRED_SIGNAL.test(sentence)) continue;
+    const sentenceScore = /반드시|꼭|필수/.test(sentence) ? 3 : 2;
+    for (const token of extractPromptTokens(sentence)) {
+      bump(token, sentenceScore);
+    }
+  }
+
+  return Array.from(scored.values())
+    .sort((a, b) => b.score - a.score || b.term.length - a.term.length)
+    .map((item) => item.term)
+    .slice(0, 14);
+}
+
+function extractForbiddenPromptTerms(prompt: string): string[] {
+  const terms: string[] = [];
+  for (const sentence of splitPromptSentences(prompt)) {
+    if (!PROMPT_FORBIDDEN_SIGNAL.test(sentence)) continue;
+    terms.push(...extractPromptTokens(sentence));
+  }
+  return uniquePromptTerms(terms, 12);
+}
+
+function generatedTextForPromptAdherence(content: StructuredContent): string {
+  return [
+    content.selectedTitle,
+    (content as any).title,
+    content.introduction,
+    ...(content.headings || []).flatMap((heading: any) => [
+      heading?.title,
+      heading?.content,
+      heading?.body,
+      heading?.summary,
+    ]),
+    content.conclusion,
+    content.bodyPlain,
+    content.bodyHtml,
+    ...(content.hashtags || []),
+  ].filter(Boolean).join('\n');
+}
+
+function hasPromptTerm(textProbe: string, term: string): boolean {
+  const termProbe = normalizePromptProbe(term);
+  if (!termProbe) return true;
+  if (textProbe.includes(termProbe)) return true;
+
+  const tokenParts = extractPromptTokens(term);
+  if (tokenParts.length <= 1) return false;
+  const matchedParts = tokenParts.filter((part) => textProbe.includes(normalizePromptProbe(part))).length;
+  return matchedParts / tokenParts.length >= 0.7;
+}
+
+function detectMissingPromptFeatures(prompt: string, generatedText: string): string[] {
+  const promptLower = prompt.toLowerCase();
+  const text = generatedText;
+  const rules: Array<{ name: string; prompt: RegExp; output: RegExp }> = [
+    { name: 'FAQ/Q&A', prompt: /faq|q&a|자주\s*묻|질문\s*답변|문답/i, output: /faq|q\s*[:.]|질문|답변|자주\s*묻/i },
+    { name: '비교표/표', prompt: /비교표|표\s*형식|테이블|항목\s*결과|기준표/i, output: /구분|항목|기준|비교|결과|장점|단점|체크/i },
+    { name: '체크리스트', prompt: /체크리스트|체크\s*포인트|확인\s*목록/i, output: /체크|확인|점검|주의|포인트/i },
+    { name: '단계형 절차', prompt: /단계|순서|절차|방법\s*\d|step/i, output: /1단계|2단계|첫째|둘째|먼저|다음|마지막|순서|절차/i },
+    { name: '주의사항', prompt: /주의|유의|위험|피해야|하지\s*말/i, output: /주의|유의|위험|피해야|확인해야|하지\s*말/i },
+  ];
+
+  return rules
+    .filter((rule) => rule.prompt.test(promptLower) && !rule.output.test(text))
+    .map((rule) => rule.name);
+}
+
+function buildPromptAdherenceRetryInstruction(report: Omit<PromptAdherenceReport, 'retryInstruction'>): string {
+  const lines = [
+    '[PROMPT_ADHERENCE_REPAIR]',
+    '- 이전 응답은 사용자 프롬프트를 충분히 반영하지 못했습니다.',
+    '- 전체 글을 다시 쓰되, 아래 누락/위반 항목을 반드시 수정하세요.',
+  ];
+  if (report.missingTerms.length > 0) {
+    lines.push(`- 반드시 반영할 핵심어/주제: ${report.missingTerms.slice(0, 10).join(', ')}`);
+  }
+  if (report.foundForbiddenTerms.length > 0) {
+    lines.push(`- 본문에서 제거할 금지 요소: ${report.foundForbiddenTerms.slice(0, 8).join(', ')}`);
+  }
+  if (report.missingFeatures.length > 0) {
+    lines.push(`- 반드시 추가할 구조 요소: ${report.missingFeatures.join(', ')}`);
+  }
+  lines.push('- 출력은 순수 JSON 하나만 반환하세요. 설명/마크다운/사과문은 금지입니다.');
+  return `\n${lines.join('\n')}\n`;
+}
+
+function assessCustomPromptAdherence(content: StructuredContent, source: ContentSource): PromptAdherenceReport {
+  const customPrompt = String(source.customPrompt || '').trim();
+  if (!customPrompt) {
+    return {
+      checked: false,
+      passed: true,
+      score: 100,
+      requiredTerms: [],
+      missingTerms: [],
+      forbiddenTerms: [],
+      foundForbiddenTerms: [],
+      missingFeatures: [],
+      issues: [],
+      retryInstruction: '',
+    };
+  }
+
+  const generatedText = generatedTextForPromptAdherence(content);
+  const generatedProbe = normalizePromptProbe(generatedText);
+  const requiredTerms = extractRequiredPromptTerms(customPrompt);
+  const forbiddenTerms = extractForbiddenPromptTerms(customPrompt);
+  const missingTerms = requiredTerms.filter((term) => !hasPromptTerm(generatedProbe, term));
+  const foundForbiddenTerms = forbiddenTerms.filter((term) => hasPromptTerm(generatedProbe, term));
+  const missingFeatures = detectMissingPromptFeatures(customPrompt, generatedText);
+
+  const requiredCoverage = requiredTerms.length === 0
+    ? 1
+    : (requiredTerms.length - missingTerms.length) / requiredTerms.length;
+  const featurePenalty = missingFeatures.length * 15;
+  const forbiddenPenalty = foundForbiddenTerms.length * 20;
+  const score = Math.max(0, Math.round(requiredCoverage * 100 - featurePenalty - forbiddenPenalty));
+  const minCoverage = requiredTerms.length >= 6 ? 0.5 : requiredTerms.length >= 3 ? 0.6 : 0.45;
+  const issues: string[] = [];
+  if (missingTerms.length > 0 && requiredCoverage < minCoverage) {
+    issues.push(`사용자 프롬프트 핵심 반영 부족 (${Math.round(requiredCoverage * 100)}%)`);
+  }
+  if (foundForbiddenTerms.length > 0) {
+    issues.push(`사용자 금지 요소 포함: ${foundForbiddenTerms.slice(0, 5).join(', ')}`);
+  }
+  if (missingFeatures.length > 0) {
+    issues.push(`요청 구조 누락: ${missingFeatures.join(', ')}`);
+  }
+
+  const passed = issues.length === 0;
+  const reportBase = {
+    checked: true,
+    passed,
+    score,
+    requiredTerms,
+    missingTerms,
+    forbiddenTerms,
+    foundForbiddenTerms,
+    missingFeatures,
+    issues,
+  };
+  return {
+    ...reportBase,
+    retryInstruction: passed ? '' : buildPromptAdherenceRetryInstruction(reportBase),
+  };
+}
+
+function readNonNegativeIntegerEnv(name: string, fallback: number): number {
+  const value = Number(process.env[name] ?? '');
+  return Number.isFinite(value) && value >= 0 ? Math.floor(value) : fallback;
+}
+
+function normalizeErrorMessage(error: unknown): string {
+  if (error instanceof Error) return error.message || '';
+  return String(error || '');
+}
+
+function isTerminalContentGenerationError(error: unknown): boolean {
+  const msg = normalizeErrorMessage(error).toLowerCase();
+  if (!msg) return false;
+
+  const terminalPatterns = [
+    // 사용자 취소/입력/원본 문제
+    /사용자가.*취소|aborted|aborterror|원본 텍스트가 비어|크롤링 실패|에러 페이지/,
+    // API 키/권한/모델 접근 문제
+    /api\s*key|api키|401|403|unauthorized|forbidden|invalid[_\s-]?api[_\s-]?key|authentication|permission|권한|인증 실패|키가 유효하지|키가 설정/,
+    /model.*not found|model.*does not exist|does not have access|모델을 찾을 수|모델에 접근|모델 없음/,
+    // 결제/크레딧/하드 할당량
+    /billing|payment|required|credit|balance|budget|insufficient[_\s-]?quota|hard[_\s-]?limit|크레딧|결제|잔액|예산|safety lock/,
+    /limit:\s*0|free_tier|일일 무료|오늘의 무료|무료 할당량|사용량 초과|하드 한도|월간 결제|월간 할당량/,
+    // 제공자 정책상 같은 요청으로 반복해도 회복 어려운 최종 차단
+    /content policy|policy violation|safety filter|콘텐츠 정책|정책 위반|안전 필터/,
+  ];
+
+  return terminalPatterns.some((pattern) => pattern.test(msg));
+}
+
+function buildSameEngineRecoveryInstruction(provider: ContentGeneratorProvider, errorMessage: string): string {
+  const compactError = errorMessage.replace(/\s+/g, ' ').slice(0, 220);
+  return `
+[SAME_ENGINE_RECOVERY]
+- 이전 ${provider} 응답은 복구 가능한 생성 오류로 실패했습니다: ${compactError}
+- 다른 AI 엔진으로 전환하지 않습니다. 반드시 현재 선택된 ${provider} 엔진 기준으로 다시 생성하세요.
+- 사용자 프롬프트, 원본 자료, 제목/소제목/본문/표/FAQ 등 요구 구조를 빠짐없이 반영하세요.
+- 출력은 순수 JSON 객체 하나만 반환하세요. 설명, 사과문, 마크다운 코드블록은 금지입니다.
+`;
+}
+
 // ✅ 네이버 블로그 전체 카테고리별 최적 글톤 자동 매칭
 type AutoTone = 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'
   | 'sincere_exposure' | 'data_verified' | 'text_hip' | 'mentor' | 'self_interview';
@@ -1917,7 +2204,7 @@ function getAutoToneByCategory(category: string | undefined, mode?: string): Aut
 
   if (!category) {
     // 카테고리 없음 — 모드 기본값
-    if (m === 'seo' || m === 'traffic-hunter') return 'calm_info';
+    if (m === 'seo' || m === 'traffic-hunter' || m === 'mate') return 'calm_info';
     if (m === 'homefeed') return 'friendly';
     if (m === 'affiliate') return 'friendly';
     if (m === 'business') return 'professional';
@@ -1951,7 +2238,7 @@ function getAutoToneByCategory(category: string | undefined, mode?: string): Aut
   // ═══════════════════════════════════════════════════════════════
   // [v1.7.0] SEO 모드 전용 오버라이드 (정보 전달 우선)
   // ═══════════════════════════════════════════════════════════════
-  if (m === 'seo' || m === 'traffic-hunter') {
+  if (m === 'seo' || m === 'traffic-hunter' || m === 'mate') {
     // [작업 14] 보고서 매핑 — 건강·다이어트·교육 → mentor (단계 가이드 + 동기부여)
     if (/건강|다이어트|영양|약|치료|증상|운동|헬스|요가/.test(cat)) return 'mentor';
     if (/교육|학문|학습|공부|시험|자격증|지식|교양/.test(cat)) return 'mentor';
@@ -2235,6 +2522,15 @@ export function buildModeBasedPrompt(
 ${source.customPrompt!.trim()}
 
 ═══════════════════════════════════════════════════════════
+🧭 [사용자정의 모드 제어 규칙]
+═══════════════════════════════════════════════════════════
+- 먼저 사용자 요청에서 목적, 대상 독자, 필수 형식, 금지 표현, 반드시 넣을 요소를 추출하고 글 전체의 작성 계약으로 삼기
+- 사용자 요청이 애매하면 네이버 블로그 정보형 글 기준으로 안전하게 보강하되, 사용자가 명시한 방향을 바꾸지 않기
+- 사용자가 특정 구조(표, Q&A, 체크리스트, 후기형, 비교형, 업체홍보형 등)를 요구하면 해당 구조를 본문에 실제로 구현하기
+- 사용자가 금지한 표현/분위기/구성은 품질 가드레일보다 우선해서 제외하기
+- 입력에 없는 수치, 기관, 공식 가이드, 후기, 경험은 만들지 않기
+
+═══════════════════════════════════════════════════════════
 🛡️ [품질 가드레일] 핵심 규칙 (사용자 요청과 충돌하지 않는 한 준수)
 ═══════════════════════════════════════════════════════════
 
@@ -2268,15 +2564,23 @@ ${source.customPrompt!.trim()}
 ③ 새 정보 = 새 단락. 부연·예시 = 같은 단락. 강제 분할/병합 금지.
 
 【키워드 배치】
-- 메인 키워드를 글 전체에 자연스럽게 8~12회 분산 삽입
+- 메인 키워드를 제목/도입/본문/마무리에 자연스럽게 3~6회 분산 삽입
 - 첫 문단에 1회, 마지막 문단에 1회 필수 포함
 - 키워드가 억지스럽게 반복되지 않도록 유의어/동의어 활용
+- 같은 키워드나 업체명을 문단마다 반복해서 스팸처럼 보이게 만들지 않기
 
 【글 구조 (소제목 3~8개)】
 - 도입부(2~3줄) → 소제목 3~8개(각 4~6문장) → 마무리(2~3줄)
 - 소제목은 독자의 궁금증을 유발하는 구체적 표현 사용
 - "포인트 1", "포인트 2" 같은 번호형 소제목 금지
 - "삶의 질이 달라졌어요", "이것 하나로 끝" 같은 뻔한 표현 금지
+
+【표/체크리스트/근거 블록】
+- 비교·비용·시간·절차·기준·안전·스펙·장단점 주제는 본문 중간에 구조화 블록 1개 이상 포함
+- 정보형 글은 최대 2열 마크다운 표를 실제 본문에 작성
+- 표가 어색한 감성/홈판형 글은 짧은 체크리스트 또는 단계 리스트로 대체
+- 출처 없는 "공식 가이드", "최신 가이드에서는" 표현 금지
+- 확인 기준은 "2026년 6월 기준", "제조사 안내 확인 기준"처럼 범위를 좁혀 표현
 
 ═══════════════════════════════════════════════════════════
 📋 [필수] JSON 출력 형식 — 반드시 이 스키마로 응답하세요
@@ -2323,7 +2627,7 @@ ${source.customPrompt!.trim()}
 □ 거짓/지어낸 수치가 없는가?
 □ 모바일에서 읽기 편한 문단 구조인가?
 □ 순수 JSON만 출력했는가?`;
-    const modeLabels: Record<string, string> = { custom: '사용자정의', affiliate: '쇼핑커넥트', seo: 'SEO', homefeed: '홈판', business: '업체홍보' };
+    const modeLabels: Record<string, string> = { custom: '사용자정의', affiliate: '쇼핑커넥트', seo: 'SEO', homefeed: '홈판', business: '업체홍보', mate: '네이버 메이트' };
     const modeLabel = modeLabels[contentMode] || contentMode;
     console.log(`[PromptBuilder] ✅ ${modeLabel} 모드 + 개인 프롬프트: 사용자 프롬프트 100% 반영 + 품질 가드레일 (${source.customPrompt!.length}자)`);
   } else if (contentMode === 'affiliate') {
@@ -2363,6 +2667,12 @@ ${source.customPrompt!.trim()}
     if (shoppingPrompt) {
       // .prompt 파일 로드 성공 → 모듈화된 프롬프트 사용
       systemPromptResult += `\n\n${shoppingPrompt}`;
+      systemPromptResult += `\n\n[쇼핑커넥트 공식 안전 가드 - 반드시 내부 준수]
+- 글 첫 부분에서 제휴/수수료 가능성을 독자가 즉시 알아볼 수 있게 명확히 전제한다. 단, 같은 문구를 반복하지 않는다.
+- 숨겨진 키워드, 숨겨진 링크, 링크 목적을 흐리는 문장, 과장된 최상급 표현을 쓰지 않는다.
+- 상품명/가격/스펙/품절/브랜드 정보는 입력된 productInfo와 원문 데이터에 있는 범위만 사용한다.
+- 직접 구매/체험 리뷰 데이터가 없으면 "직접 써봤다", "며칠 사용했다" 같은 경험 서술을 만들지 않는다.
+- CTA는 글 하단에 1회만 자연스럽게 배치하고, 링크 클릭을 강요하지 않는다.`;
       console.log(`[PromptBuilder] ✅ 쇼핑커넥트 모듈 프롬프트 적용: ${shoppingArticleType}`);
     } else {
       // ✅ [v1.4.12] 인라인 폴백 dead code 제거 — .prompt 파일 정상 로드 시 절대 진입 불가
@@ -2406,7 +2716,7 @@ ${source.customPrompt!.trim()}
   try {
     const geoCfg = getConfigSync();
     const geoOn = (geoCfg as any)?.geoOptimization !== false; // 기본 ON: undefined도 true 취급
-    const geoEligibleMode = contentMode === 'seo' || contentMode === 'affiliate';
+    const geoEligibleMode = contentMode === 'seo' || contentMode === 'affiliate' || contentMode === 'mate';
     if (geoOn && geoEligibleMode) {
       const overlay = getGeoOverlayPrompt();
       if (overlay) {
@@ -2484,6 +2794,7 @@ ${source.customPrompt!.trim()}
   //   "더 AI스러움"을 유발(사용자 회귀 신고). 사람다움 회복 위해 원복(SEO 0.5, 홈판 0.7).
   //   뜬금없음(저충실도) 부작용은 S4(삽입식 후처리 문맥검사)·F1~F5 prompt rule로 별도 차단.
   if (contentMode === 'seo') temperature = 0.5;
+  else if (contentMode === 'mate') temperature = 0.45;
   else if (contentMode === 'homefeed') temperature = 0.7;
   else if (contentMode === 'traffic-hunter') temperature = 0.9;
   else if (contentMode === 'affiliate') temperature = 0.5;
@@ -2516,7 +2827,7 @@ ${source.customPrompt!.trim()}
   //   동작: src/prompts/seo/ai-tab-friendly.prompt 로드해서 systemPrompt 끝에 append.
   //   효과: 6,000~8,000자 + bullet/리스트 + 정의문 + 정보 탐색형 키워드 룰 LLM에 강제.
   //   실패 시 graceful skip (기본 SEO 룰만 적용).
-  if (source.aiTabFriendly === true && contentMode === 'seo') {
+  if (source.aiTabFriendly === true && (contentMode === 'seo' || contentMode === 'mate')) {
     try {
       const aiTabPromptPath = path.join(app.getAppPath(), 'dist', 'prompts', 'seo', 'ai-tab-friendly.prompt');
       if (fsSync.existsSync(aiTabPromptPath)) {
@@ -2573,16 +2884,17 @@ ${source.customPrompt!.trim()}
 
   console.log(`[PromptBuilder] 2축 분리 프롬프트 생성: mode=${mode}, category=${categoryHint || 'general'}, isFullAuto=${isFullAuto}, isReviewType=${isReviewType}`);
 
-  // JSON 출력 형식 지시 (홈판 모드: 소제목 3~8개, SEO 모드: 3~8개)
+  // JSON 출력 형식 지시 (홈판/메이트/SEO 모드: 소제목 3~8개)
   const isHomefeed = mode === 'homefeed';
+  const isMate = mode === 'mate';
   const headingsExample = `"headings": [
     {"title": "소제목 1", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"},
     {"title": "소제목 2", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"},
     {"title": "소제목 3", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"}
   ]`;
 
-  // 홈판 모드 전용 도입부/반응요약 규칙
-  const homefeedStructureRule = isHomefeed ? `
+  // 홈판/메이트 모드 전용 구조 규칙
+  const modeStructureRule = isHomefeed ? `
 ⚠️⚠️⚠️ [홈판 모드 필수 구조 규칙] ⚠️⚠️⚠️
 - introduction: 정확히 3줄, 첫 문장 25자 이내, 상황/발언/반응으로 시작
 - headings: STRUCTURE OVERRIDE에서 지정한 소제목 개수를 따를 것 (3~8개)
@@ -2590,6 +2902,17 @@ ${source.customPrompt!.trim()}
 - (선택) 맥락상 자연스러울 때만 독자 반응을 본문에 1~2문장 녹임. ⛔ "📌 당시 대중 반응 요약" 같은 가짜 댓글 블록 합성 금지(거짓 신호 = AI 티 + 신뢰 저하)
 - conclusion: 결론/정리 금지, 여운형 문장 2줄만
 - 전체 톤: 사용자 설정 글톤 어미 적용, 기자체/설명체 절대 금지
+` : isMate ? `
+⚠️⚠️⚠️ [네이버 메이트 모드 필수 구조 규칙 — 울트라 플랜] ⚠️⚠️⚠️
+- introduction: 첫 300자 안에 핵심 답변 + 판단 기준 2~3개 + 글의 적용 범위를 먼저 작성
+- headings: 5~7개, 각 소제목은 하나의 검색 질문에 답하는 형태
+- [강제] 1번 소제목은 반드시 메인 주제(주어)로 시작하고, 첫 문장에 바로 답을 쓴다
+- [강제] 모든 소제목 본문 첫 2문장 안에 정의/기준/절차/비교/주의 중 1개 이상의 "인용 원자"를 넣는다
+- [강제] 본문 중간에 기준표/비교표/체크리스트/단계형 정리 중 최소 1개를 실제 본문 블록으로 작성
+- [강제] 마지막 소제목 또는 결론 직전에 FAQ 4~6개를 포함
+- [강제] 최신성 또는 확인 기준일이 필요한 주제는 "확인 기준" 또는 "최신 확인 포인트" 문장을 포함하되, 출처 없는 "공식 가이드/최신 가이드" 표현은 절대 금지
+- [강제] 원본에 없는 수치·날짜·비용·경험·정책은 만들지 말고, 부족하면 "자료 기준으로는 확인되지 않습니다"라고 처리
+- 결론: 핵심 요약 2~3줄 + 다음에 확인할 행동 1개, 선정/수익/AI 브리핑 인용 보장 표현 금지
 ` : `
 ⚠️⚠️⚠️ [SEO 모드 필수 규칙] ⚠️⚠️⚠️
 - [강제] 1번 소제목은 반드시 메인 주제(주어)로 시작 (예: "아이폰16 디자인" - O / "의 디자인" - X)
@@ -2601,9 +2924,22 @@ ${source.customPrompt!.trim()}
 - [메인 키워드] + [핵심 혜택/결과] + [궁금증 유발] 구조를 권장합니다.
 `;
 
+  const evidenceBlockRule = `
+📊 [모든 모드 공통: 표/체크리스트/그래프성 블록 규칙]
+- 비교·비용·시간·절차·기준·안전·스펙·장단점·FAQ형 주제는 본문 중간에 반드시 1개 이상의 구조화 블록을 넣는다.
+- 정보형/SEO/메이트/쇼핑/업체홍보: 가능하면 마크다운 표를 실제로 작성한다. 형식은 반드시 최대 2열:
+  | 항목 | 정리 |
+  | --- | --- |
+  | 기준 | 독자가 바로 판단할 수 있는 내용 |
+- 표가 어색한 홈판/감성글은 짧은 체크리스트 또는 단계 리스트로 대체한다.
+- 그래프는 실제 수치 데이터가 있을 때만 표로 표현한다. 수치가 없으면 "흐름 정리" 또는 "체크리스트"로 작성한다.
+- 표/체크리스트는 본문용 콘텐츠이며, 자가검수 체크리스트나 내부 검증 결과를 출력하면 안 된다.
+- 출처 없는 "공식 가이드", "최신 가이드에서는" 같은 표현은 금지한다. 확인 기준은 "2026년 6월 기준", "제조사 안내 확인 기준"처럼 범위를 좁혀 쓴다.
+`;
+
   const jsonOutputFormat = `
 ────────────────────
-[출력 형식 — 반드시 이 순서와 JSON 형식으로]${homefeedStructureRule}
+[출력 형식 — 반드시 이 순서와 JSON 형식으로]${modeStructureRule}${evidenceBlockRule}
 
 {
   "selectedTitle": "제목 1",
@@ -2613,8 +2949,8 @@ ${source.customPrompt!.trim()}
     {"text": "제목 3", "score": 85}
   ],
   ${headingsExample},
-  "introduction": "${isHomefeed ? '도입부 (정확히 3줄, 첫 문장 25자 이내)' : '도입부'}",
-  "conclusion": "${isHomefeed ? '마무리 (여운형 2줄, 결론/정리 금지)' : '마무리'}",
+  "introduction": "${isHomefeed ? '도입부 (정확히 3줄, 첫 문장 25자 이내)' : isMate ? '도입부 (첫 300자 안에 직접 답변)' : '도입부'}",
+  "conclusion": "${isHomefeed ? '마무리 (여운형 2줄, 결론/정리 금지)' : isMate ? '마무리 (핵심 요약 + 다음 행동)' : '마무리'}",
   "hashtags": ["해시태그1", "해시태그2", "해시태그3"],
   "category": "카테고리"
 }
@@ -2629,7 +2965,7 @@ imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [원본 텍스트]
-${contentMode === 'homefeed' ? buildStructureVariationDirective() : ''}${contentMode === 'business' ? buildBusinessAngleDirective() : ''}${source.previousTitles && source.previousTitles.length > 0 && (contentMode === 'business' || contentMode === 'seo' || contentMode === 'homefeed') ? `
+${contentMode === 'homefeed' ? buildStructureVariationDirective() : ''}${contentMode === 'business' ? buildBusinessAngleDirective() : ''}${source.previousTitles && source.previousTitles.length > 0 && (contentMode === 'business' || contentMode === 'seo' || contentMode === 'homefeed' || contentMode === 'mate') ? `
 ══════════════════════════════════════════
 🚫 [이전 작성 제목 — 비슷한 패턴 반복 금지]
 ══════════════════════════════════════════
@@ -2648,18 +2984,21 @@ ${source.businessInfo.address ? `📍 주소: ${source.businessInfo.address}` : 
 ${source.businessInfo.hours ? `🕐 영업시간: ${source.businessInfo.hours}` : ''}
 ${source.businessInfo.serviceArea === 'nationwide' ? `🌏 서비스 범위: 전국 (지역 제한 없음)
    → 제목/본문에 특정 지역명 강제 삽입 금지
-   → "전국 어디든", "전국 ○○ 시공", "지역 무관" 표현 활용
-   → 신뢰 요소로 "전국 ○○개 시공 사례", "전국 거점 ○○개" 등 강조
+   → "전국 상담 가능", "지역 무관 안내", "서비스 가능 범위 확인"처럼 입력 정보 기반 표현 활용
+   → 시공 건수, 거점 수, 방문 가능 시간은 특징/경력에 실제 입력된 경우에만 사용
    → 지역 키워드 대신 업종+차별점으로 검색 노출 (예: "원목 인테리어", "친환경 도배")` : source.businessInfo.region ? `🗺️ 서비스 지역: ${source.businessInfo.region}
    → 제목 맨 앞에 위 지역명 중 1개 필수 배치 (예: "${source.businessInfo.region.split(/[,/\s]+/)[0]} 인테리어")
    → 본문에 위 지역명들을 골고루 분산 등장 (각 지역 최소 1회)
-   → 신뢰 요소로 "${source.businessInfo.region} 시공 ○○건", "${source.businessInfo.region.split(/[,/\s]+/)[0]} 당일 방문 가능" 강조
+   → 시공 건수, 당일 방문, 가격, 경력 수치는 특징/경력 또는 원본 텍스트에 실제 입력된 경우에만 사용
+   → 입력 근거가 없으면 지역별 상담 가능 범위, 문의 전 확인사항, 방문 가능 여부 확인 절차를 설명
    → 다른 지역명(서울/강남 등) 임의 추가 절대 금지` : ''}
 ${source.businessInfo.extra ? `✨ 특징/경력: ${source.businessInfo.extra}` : ''}
 
 ⛔ 위 연락처 정보는 한 글자도 변경하지 말고 그대로 사용하라.
 ⛔ 절대 가짜 전화번호, 가짜 카카오톡 ID, 가짜 주소, 가짜 지역을 만들지 마라.
-⛔ 위 업체명을 본문에 8~12회 자연 반복하라.
+⛔ 입력/원본에 없는 시공 건수·평점·가격·A/S 기간·당일 방문 가능 여부를 만들지 마라.
+⛔ 위 업체명은 제목 1회 + 도입/본문/문의 안내에 총 3~6회만 자연 노출하라.
+⛔ 업체명을 문단마다 반복하지 말고, 서비스 장점·절차·고객 상황·문의 CTA로 전환 설득을 구성하라.
 ` : ''}${source.customPrompt ? `
 ══════════════════════════════════════════
 💡 [사용자 추가 지시사항 — 최우선 반영, 다른 모든 규칙보다 상위]
@@ -2696,6 +3035,14 @@ ${contentMode === 'seo' ? `
 2. 28~45자 길이
 3. 1인칭 경험 + 구체성(결과/변화/수치) 포함 (예: "써본 후기", "바꿨더니", "월 얼마 절감"). 기간 수치(N주/N개월)는 연속 발행 시 반복되므로 다른 구체성 우선.
 4. AI 표현 절대 금지 ("결론적으로", "정리하면", "알아보겠습니다")` : ''}
+${contentMode === 'mate' ? `
+⚠️ [네이버 메이트 모드 제목 필수 조건]
+1. 메인 키워드를 제목 앞쪽에 배치하되 과한 낚시 표현 금지
+2. 28~45자 길이
+3. 질문에 답하는 의도 또는 판단 기준을 제목에 반영
+4. "선정 보장", "수익 보장", "돈쓸어담는" 등 과장 표현 금지
+5. 기준형/방법형/비교형/질문답변형 중 하나로 작성
+6. 제목과 본문 주제가 1:1로 일치해야 하며, 주제 이탈 금지` : ''}
 ${contentMode === 'homefeed' ? `
 ⚠️ [홈판 모드 제목 필수 조건]
 1. 28~35자 길이 (모바일 1.5초 법칙)
@@ -3163,10 +3510,44 @@ function filterExaggeratedContent(text: string): string {
     filtered = filtered.replace(pattern, replacement);
   }
 
+  filtered = sanitizeUnverifiedOfficialGuideClaims(filtered);
+
   // 빈 줄 정리 (연속된 빈 줄을 하나로)
   filtered = filtered.replace(/\n{3,}/g, '\n\n');
 
   return filtered.trim();
+}
+
+function sanitizeUnverifiedOfficialGuideClaims(text: string): string {
+  if (!text) return text;
+
+  return String(text)
+    .replace(/(?:20\d{2}년\s*)?(?:공식|최신)\s*가이드(?:에서는|에 따르면| 기준으로는| 기준|는)?\s*/gi, '')
+    .replace(/(?:20\d{2}년\s*)?공식\s*매뉴얼(?:에서는|에 따르면| 기준으로는| 기준|은)?\s*/gi, '')
+    .replace(/(?:20\d{2}년\s*)?공식\s*지침(?:에서는|에 따르면| 기준으로는| 기준|은)?\s*/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+function sanitizeStructuredContentClaims(content: StructuredContent): void {
+  if (!content) return;
+
+  if (content.bodyPlain) content.bodyPlain = sanitizeUnverifiedOfficialGuideClaims(content.bodyPlain);
+  if (content.bodyHtml) content.bodyHtml = sanitizeUnverifiedOfficialGuideClaims(content.bodyHtml);
+  if (content.content) content.content = sanitizeUnverifiedOfficialGuideClaims(content.content);
+  if (content.introduction) content.introduction = sanitizeUnverifiedOfficialGuideClaims(content.introduction);
+  if (content.conclusion) content.conclusion = sanitizeUnverifiedOfficialGuideClaims(content.conclusion);
+
+  if (Array.isArray(content.headings)) {
+    content.headings = content.headings.map((heading: any) => ({
+      ...heading,
+      content: heading?.content ? sanitizeUnverifiedOfficialGuideClaims(String(heading.content)) : heading?.content,
+      body: heading?.body ? sanitizeUnverifiedOfficialGuideClaims(String(heading.body)) : heading?.body,
+      summary: heading?.summary ? sanitizeUnverifiedOfficialGuideClaims(String(heading.summary)) : heading?.summary,
+    }));
+  }
 }
 
 /**
@@ -3879,6 +4260,60 @@ function validateStructuredContent(content: StructuredContent, source?: ContentS
     );
   }
 
+  const normalizeTag = (tag: string): string => {
+    const cleaned = String(tag || '')
+      .replace(/^#+/, '')
+      .replace(/[^\p{L}\p{N}_가-힣\s-]/gu, ' ')
+      .replace(/\s+/g, '')
+      .trim();
+    return cleaned ? `#${cleaned}` : '';
+  };
+
+  const addHashtag = (tags: string[], raw: string): void => {
+    const tag = normalizeTag(raw);
+    if (!tag) return;
+    if (tag.length < 3 || tag.length > 24) return;
+    if (tags.some(existing => existing.toLowerCase() === tag.toLowerCase())) return;
+    tags.push(tag);
+  };
+
+  const normalizedHashtags: string[] = [];
+  for (const tag of content.hashtags || []) addHashtag(normalizedHashtags, tag);
+
+  if (normalizedHashtags.length < 5) {
+    const seedTexts = [
+      ...(
+        Array.isArray((source?.metadata as any)?.keywords)
+          ? (source!.metadata as any).keywords.map((kw: any) => String(kw || ''))
+          : []
+      ),
+      content.selectedTitle || '',
+      content.metadata?.category || '',
+      source?.categoryHint || '',
+    ];
+
+    for (const seed of seedTexts) {
+      String(seed || '')
+        .replace(/[?!.,\-_"'()[\]{}]/g, ' ')
+        .split(/\s+/)
+        .map(word => word.trim())
+        .filter(word => word.length >= 2 && word.length <= 15)
+        .filter(word => !['하는', '되는', '있는', '없는', '위한', '대한', '그리고', '하지만', '어떻게', '무엇', '어디', '언제', '누가', '왜'].includes(word))
+        .forEach(word => {
+          if (normalizedHashtags.length < 8) addHashtag(normalizedHashtags, word);
+        });
+      if (normalizedHashtags.length >= 5) break;
+    }
+  }
+
+  if (normalizedHashtags.length < 5) {
+    ['정보', '꿀팁', '생활팁', '체크리스트', '비교정리'].forEach(tag => {
+      if (normalizedHashtags.length < 5) addHashtag(normalizedHashtags, tag);
+    });
+  }
+
+  content.hashtags = normalizedHashtags.slice(0, 8);
+
   // metadata 객체 복구
   if (!content.metadata || typeof content.metadata !== 'object') {
     const readTimeMinutes = Math.ceil((content.bodyPlain?.length || 0) / 500);
@@ -4041,7 +4476,7 @@ function optimizeHeadingsForMode(content: StructuredContent, source: ContentSour
   if (!content || !Array.isArray(content.headings) || content.headings.length === 0) return;
 
   const mode = source.contentMode;
-  if (mode !== 'seo' && mode !== 'homefeed') return;
+  if (mode !== 'seo' && mode !== 'homefeed' && mode !== 'mate') return;
 
   const isReview = isReviewArticleType(source.articleType);
   const primaryKeyword = (source.metadata as any)?.keywords?.[0]
@@ -4068,7 +4503,7 @@ function optimizeHeadingsForMode(content: StructuredContent, source: ContentSour
 
     let optimized = title;
 
-    if (mode === 'seo') {
+    if (mode === 'seo' || mode === 'mate') {
       optimized = optimizeSeoHeadingTitle(title, {
         primaryKeyword,
         categoryHint,
@@ -4372,9 +4807,11 @@ export function validateBusinessContent(content: StructuredContent, source: Cont
     if (info.name) {
       const nameCount = (allText.match(new RegExp(info.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
       if (nameCount === 0) {
-        violations.push(`업체명 "${info.name}"이 본문에 한 번도 없음 (필수 8~12회 반복)`);
-      } else if (nameCount < 3) {
-        warnings.push(`업체명 "${info.name}" 등장 ${nameCount}회 (권장 8~12회)`);
+        violations.push(`업체명 "${info.name}"이 본문에 한 번도 없음 (필수 노출 누락)`);
+      } else if (nameCount < 2) {
+        warnings.push(`업체명 "${info.name}" 등장 ${nameCount}회 (권장 3~6회)`);
+      } else if (nameCount > 8) {
+        warnings.push(`업체명 "${info.name}" 등장 ${nameCount}회 (과다 반복 위험, 권장 3~6회)`);
       }
     }
 
@@ -4416,6 +4853,24 @@ export function validateBusinessContent(content: StructuredContent, source: Cont
       if (found.length > 0) {
         warnings.push(`전국구인데 특정 지역명 발견: ${found.join(', ')}`);
       }
+    }
+
+    const trustedBusinessText = [
+      source.rawText || '',
+      info.name || '',
+      info.phone || '',
+      info.kakao || '',
+      info.address || '',
+      info.hours || '',
+      info.region || '',
+      info.extra || '',
+    ].join(' ');
+    const businessStats = allText.match(/\d[\d,]*(?:\.\d+)?\s*(?:건|개|년|개월|평|만원|원|시간|일|회|%|퍼센트|점)/g) || [];
+    const unsupportedStats = Array.from(new Set(businessStats))
+      .filter(stat => !trustedBusinessText.includes(stat.trim()))
+      .slice(0, 5);
+    if (unsupportedStats.length > 0) {
+      warnings.push(`입력 근거 없는 수치 표현 감지: ${unsupportedStats.join(', ')} — 실제 입력값이 아니면 삭제/완화 필요`);
     }
   }
 
@@ -4948,6 +5403,284 @@ function getTimeoutMs(minChars: number, retryAttempt: number = 0): number {
   return Math.floor(baseTimeout * multiplier);
 }
 
+const GEMINI_CACHE_CREATE_TIMEOUT_MS = 10_000;
+const GEMINI_USAGE_METADATA_TIMEOUT_MS = 5_000;
+
+function createContentGenerationAbortError(): Error {
+  return new Error('사용자가 콘텐츠 생성을 취소했습니다.');
+}
+
+function throwIfContentGenerationAborted(signal?: AbortSignal): void {
+  if (signal?.aborted) {
+    throw createContentGenerationAbortError();
+  }
+}
+
+function sleepWithAbort(ms: number, signal?: AbortSignal): Promise<void> {
+  if (ms <= 0) return Promise.resolve();
+  throwIfContentGenerationAborted(signal);
+
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  let onAbort: (() => void) | undefined;
+
+  return new Promise<void>((resolve, reject) => {
+    timer = setTimeout(resolve, ms);
+    if (signal) {
+      onAbort = () => {
+        if (timer) clearTimeout(timer);
+        reject(createContentGenerationAbortError());
+      };
+      signal.addEventListener('abort', onAbort, { once: true });
+    }
+  }).finally(() => {
+    if (timer) clearTimeout(timer);
+    if (signal && onAbort) signal.removeEventListener('abort', onAbort);
+  });
+}
+
+function withProviderTimeout<T>(
+  promise: Promise<T>,
+  timeoutMs: number,
+  label: string,
+  signal?: AbortSignal,
+): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  let onAbort: (() => void) | undefined;
+
+  return new Promise<T>((resolve, reject) => {
+    try {
+      throwIfContentGenerationAborted(signal);
+    } catch (error) {
+      reject(error);
+      return;
+    }
+
+    timer = setTimeout(() => reject(new Error(label)), timeoutMs);
+    if (signal) {
+      onAbort = () => reject(createContentGenerationAbortError());
+      signal.addEventListener('abort', onAbort, { once: true });
+    }
+
+    promise.then(resolve, reject);
+  }).finally(() => {
+    if (timer) clearTimeout(timer);
+    if (signal && onAbort) signal.removeEventListener('abort', onAbort);
+  });
+}
+
+function withGeminiTimeout<T>(promise: Promise<T>, timeoutMs: number, label: string): Promise<T> {
+  return withProviderTimeout(promise, timeoutMs, label);
+}
+
+const geminiRequestGate = new Map<string, { nextAllowedAt: number }>();
+
+function getGeminiMinIntervalMs(config: any): number {
+  const envValue = Number(process.env.GEMINI_MIN_INTERVAL_MS ?? '');
+  if (Number.isFinite(envValue) && envValue >= 0) return Math.floor(envValue);
+  return config?.geminiPlanType === 'paid' ? 8000 : 10_000;
+}
+
+function getGeminiRateLimitPatienceMs(config: any): number {
+  const envValue = Number(process.env.GEMINI_RATE_LIMIT_PATIENCE_MS ?? '');
+  if (Number.isFinite(envValue) && envValue >= 0) return Math.floor(envValue);
+  return config?.geminiPlanType === 'paid' ? 12 * 60 * 1000 : 5 * 60 * 1000;
+}
+
+async function throttleGeminiRequest(modelName: string, config: any, signal?: AbortSignal): Promise<void> {
+  const minIntervalMs = getGeminiMinIntervalMs(config);
+  if (minIntervalMs <= 0) return;
+
+  const key = `${config?.geminiPlanType || 'auto'}:${modelName}`;
+  const now = Date.now();
+  const gate = geminiRequestGate.get(key);
+  const waitMs = Math.max(0, (gate?.nextAllowedAt || 0) - now);
+  if (waitMs > 0) {
+    console.log(`[GeminiThrottle] ${modelName} RPM 보호 — ${Math.round(waitMs / 1000)}초 대기`);
+    await sleepWithAbort(waitMs, signal);
+  }
+
+  geminiRequestGate.set(key, { nextAllowedAt: Date.now() + minIntervalMs });
+}
+
+function recordGeminiRateLimitBackoff(modelName: string, config: any, waitMs: number): void {
+  const key = `${config?.geminiPlanType || 'auto'}:${modelName}`;
+  const previous = geminiRequestGate.get(key);
+  geminiRequestGate.set(key, {
+    nextAllowedAt: Math.max(previous?.nextAllowedAt || 0, Date.now() + waitMs),
+  });
+}
+
+function getGeminiRateLimitWaitMs(error: unknown, fallbackMs: number): number {
+  const raw = `${normalizeErrorMessage(error)}\n${JSON.stringify(error, null, 2)}`;
+  const patterns = [
+    /retry\s+in\s+([\d.]+)\s*(ms|s|m)?/i,
+    /retryDelay["'\s:]+([\d.]+)\s*(ms|s|m)?/i,
+    /"retryDelay"\s*:\s*"([\d.]+)\s*(ms|s|m)?"/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = raw.match(pattern);
+    if (!match) continue;
+    const value = Number(match[1]);
+    if (!Number.isFinite(value) || value < 0) continue;
+    const unit = (match[2] || 's').toLowerCase();
+    const ms = unit === 'm' ? value * 60_000 : unit === 'ms' ? value : value * 1000;
+    return Math.min(Math.max(Math.round(ms + 1000), 1000), 180_000);
+  }
+
+  return Math.min(Math.max(fallbackMs, 1000), 180_000);
+}
+
+const providerRequestGates = new Map<string, { nextAllowedAt: number }>();
+
+function readProviderHeader(error: unknown, name: string): string | undefined {
+  const headers =
+    (error as any)?.headers ||
+    (error as any)?.response?.headers ||
+    (error as any)?.error?.headers;
+  if (!headers) return undefined;
+
+  if (typeof headers.get === 'function') {
+    return headers.get(name) || headers.get(name.toLowerCase()) || undefined;
+  }
+
+  const target = name.toLowerCase();
+  for (const [key, value] of Object.entries(headers)) {
+    if (key.toLowerCase() === target) return String(value);
+  }
+  return undefined;
+}
+
+function parseProviderDelayMs(raw: unknown): number | null {
+  if (raw === undefined || raw === null) return null;
+  const value = String(raw).trim();
+  if (!value) return null;
+
+  if (/^\d+(\.\d+)?$/.test(value)) {
+    return Math.ceil(Number(value) * 1000);
+  }
+
+  const dateMs = Date.parse(value);
+  if (!Number.isNaN(dateMs)) {
+    return Math.max(0, dateMs - Date.now());
+  }
+
+  let totalMs = 0;
+  const unitPattern = /(\d+(?:\.\d+)?)(ms|s|m|h)/gi;
+  let match: RegExpExecArray | null;
+  while ((match = unitPattern.exec(value)) !== null) {
+    const amount = Number(match[1]);
+    const unit = match[2].toLowerCase();
+    if (unit === 'ms') totalMs += amount;
+    if (unit === 's') totalMs += amount * 1000;
+    if (unit === 'm') totalMs += amount * 60_000;
+    if (unit === 'h') totalMs += amount * 3_600_000;
+  }
+  return totalMs > 0 ? Math.ceil(totalMs) : null;
+}
+
+function readNonNegativeMsEnv(name: string, fallbackMs: number, minMs = 0): number {
+  const value = Number(process.env[name] ?? '');
+  if (Number.isFinite(value) && value >= minMs) return Math.floor(value);
+  return fallbackMs;
+}
+
+async function throttleProviderRequest(provider: string, modelName: string, minIntervalMs: number, signal?: AbortSignal): Promise<void> {
+  if (minIntervalMs <= 0) return;
+  const key = `${provider}:${modelName}`;
+  const now = Date.now();
+  const scheduledAt = Math.max(now, providerRequestGates.get(key)?.nextAllowedAt || 0);
+  providerRequestGates.set(key, { nextAllowedAt: scheduledAt + minIntervalMs });
+  const waitMs = scheduledAt - now;
+  if (waitMs > 0) {
+    console.log(`[${provider}Throttle] ${modelName} RPM 보호 — ${Math.round(waitMs / 1000)}초 대기`);
+    await sleepWithAbort(waitMs, signal);
+  }
+}
+
+function recordProviderRateLimitBackoff(provider: string, modelName: string, waitMs: number): void {
+  const key = `${provider}:${modelName}`;
+  const previous = providerRequestGates.get(key);
+  providerRequestGates.set(key, {
+    nextAllowedAt: Math.max(previous?.nextAllowedAt || 0, Date.now() + waitMs),
+  });
+}
+
+function getProviderRateLimitWaitMs(error: unknown, fallbackMs: number, headerNames: string[]): number {
+  const headerWaits = headerNames
+    .map((name) => readProviderHeader(error, name))
+    .map(parseProviderDelayMs)
+    .filter((value): value is number => typeof value === 'number' && value > 0);
+
+  const raw = `${normalizeErrorMessage(error)}\n${JSON.stringify(error, null, 2)}`;
+  const retryHint = raw.match(/retry(?:\s|-)?after["'\s:]+([\d.]+)\s*(ms|s|m|h)?/i)
+    || raw.match(/retryDelay["'\s:]+([\d.]+)\s*(ms|s|m|h)?/i);
+  if (retryHint) {
+    const amount = Number(retryHint[1]);
+    const unit = (retryHint[2] || 's').toLowerCase();
+    if (Number.isFinite(amount) && amount >= 0) {
+      const hintedMs = unit === 'h'
+        ? amount * 3_600_000
+        : unit === 'm'
+          ? amount * 60_000
+          : unit === 'ms'
+            ? amount
+            : amount * 1000;
+      headerWaits.push(Math.ceil(hintedMs));
+    }
+  }
+
+  const waitMs = Math.max(fallbackMs, headerWaits.length ? Math.max(...headerWaits) : 0, 1000);
+  return Math.min(waitMs + 500, 180_000);
+}
+
+function getClaudeMinIntervalMs(modelName: string): number {
+  const lower = modelName.toLowerCase();
+  const fallback = lower.includes('opus') ? 10_000 : lower.includes('sonnet') ? 8_000 : 5_000;
+  return readNonNegativeMsEnv('CLAUDE_MIN_INTERVAL_MS', fallback);
+}
+
+function getClaudeRateLimitPatienceMs(): number {
+  return readNonNegativeMsEnv('CLAUDE_RATE_LIMIT_PATIENCE_MS', 5 * 60_000, 60_000);
+}
+
+function getClaudeRateLimitWaitMs(error: unknown, fallbackMs: number): number {
+  return getProviderRateLimitWaitMs(error, fallbackMs, [
+    'retry-after',
+    'anthropic-ratelimit-requests-reset',
+    'anthropic-ratelimit-tokens-reset',
+    'anthropic-ratelimit-input-tokens-reset',
+    'anthropic-ratelimit-output-tokens-reset',
+  ]);
+}
+
+function getPerplexityMinIntervalMs(modelName: string): number {
+  const lower = modelName.toLowerCase();
+  const fallback = lower.includes('deep-research') ? 12_000 : 2_000;
+  return readNonNegativeMsEnv('PERPLEXITY_MIN_INTERVAL_MS', fallback);
+}
+
+function getPerplexityRateLimitPatienceMs(): number {
+  return readNonNegativeMsEnv('PERPLEXITY_RATE_LIMIT_PATIENCE_MS', 5 * 60_000, 60_000);
+}
+
+function getPerplexityRateLimitWaitMs(error: unknown, fallbackMs: number): number {
+  return getProviderRateLimitWaitMs(error, fallbackMs, ['retry-after', 'x-ratelimit-reset-requests', 'x-ratelimit-reset-tokens']);
+}
+
+async function waitForGeminiUsageMetadata(streamResult: any): Promise<any | null> {
+  try {
+    return await withGeminiTimeout(
+      Promise.resolve(streamResult.response),
+      GEMINI_USAGE_METADATA_TIMEOUT_MS,
+      `Gemini usage metadata timeout (${GEMINI_USAGE_METADATA_TIMEOUT_MS / 1000}s)`,
+    );
+  } catch (error) {
+    console.warn('[Gemini] usage metadata 대기 시간 초과 — 생성 결과는 그대로 사용:', (error as Error).message);
+    return null;
+  }
+}
+
 // ✅ [v1.4.6] Gemini Context Caching — 정적 시스템 프롬프트를 캐시하여 입력 토큰 비용 75% 절감
 // 캐시 키: SHA-256(systemText + modelName) → 동일 system 프롬프트 + 동일 모델이면 재사용
 // 캐시 TTL: 1시간 (Google 권장값)
@@ -5063,9 +5796,9 @@ function cleanExpiredCaches(): void {
   }
 }
 
-// ✅ Gemini 모델 체인 — 플랜 타입별 스마트 기본값
-//   자동/무료 모드: Flash (품질·속도 균형)
-//   유료 모드: Flash-Lite (저비용 대량 발행)
+// ✅ Gemini 모델 체인 — 안정 우선 기본값
+//   자동/무료/유료 기본: Flash (품질·속도·한도 안정 균형)
+//   Flash-Lite는 사용자가 명시 선택한 경우에만 사용
 //   사용자가 명시적으로 선택한 모델은 플랜 관계없이 그 선택 존중
 export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string; geminiModel?: string; geminiPlanType?: 'auto' | 'free' | 'paid' }): {
   primaryModel: string;
@@ -5073,8 +5806,7 @@ export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string
   isPro: boolean;
 } {
   // 플랜에 따라 기본값 결정
-  const isPaidPlan = config?.geminiPlanType === 'paid';
-  const defaultModel = isPaidPlan ? 'gemini-2.5-flash-lite' : 'gemini-2.5-flash';
+  const defaultModel = 'gemini-2.5-flash';
 
   let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || defaultModel;
   if (!primaryModel.startsWith('gemini-')) {
@@ -5171,6 +5903,8 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   let lastError: Error | null = null;
   // ✅ [v1.4.64] 재시도 3회로 축소 — 실패 확정까지 4분→1분 이하
   const perModelMaxRetries = 3;
+  const geminiRateLimitPatienceMs = getGeminiRateLimitPatienceMs(config);
+  let geminiRateLimitWaitedMs = 0;
 
   for (let i = 0; i < modelsToTry.length; i++) {
     const modelName = modelsToTry[i];
@@ -5186,14 +5920,14 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         // 캐시 가능 조건: system 프롬프트가 충분히 큼 (Flash 4096 토큰, Pro 2048 토큰)
         // 1토큰 ≈ 4자 한국어 기준 → Flash 16,384자, Pro 8,192자
         const minCacheChars = modelName.includes('-pro') ? 8192 : 16384;
-        // ✅ [v1.4.77] 무료/유료 구분 없이 캐시 시도 + 실패 자동 학습
-        //    1차: 세션 내 해당 API 키가 캐시 지원 여부 기록 확인
-        //    2차: 캐시 생성/사용 실패 시 markCacheUnsupported로 영구 기록
-        //    3차: 실패한 키는 이후 호출에서 즉시 일반 호출로 스킵 (오버헤드 0)
-        //    결과: 유료 사용자 = 75% 절감 / 무료 사용자 = 첫 호출 한 번만 시도 후 일반 호출
-        //    ENV GEMINI_CACHE_DISABLED=1 로 강제 OFF 가능
+        // ✅ [2026-06-06] 캐시는 기본 OFF.
+        //    cacheManager.create가 본문 생성 전 Gemini API 1회를 추가로 사용하므로
+        //    Tier 1/RPM 낮은 프로젝트에서는 "버튼 1회"가 "API 2회"가 되어 429가 쉽게 난다.
+        //    비용 절감이 필요한 고한도 프로젝트만 ENV GEMINI_CACHE_ENABLED=1로 명시 opt-in.
         const cacheDisabledEnv = process.env.GEMINI_CACHE_DISABLED === '1';
-        const cacheEnabled = !cacheDisabledEnv
+        const cacheOptInEnv = process.env.GEMINI_CACHE_ENABLED === '1';
+        const cacheEnabled = cacheOptInEnv
+          && !cacheDisabledEnv
           && isCacheSupportedForKey(trimmedKey)
           && geminiSystemText.length >= minCacheChars;
         let cachedContentName: string | undefined;
@@ -5212,12 +5946,16 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             try {
               const { GoogleAICacheManager } = await import('@google/generative-ai/server' as any);
               const cacheManager = new GoogleAICacheManager(trimmedKey);
-              const newCache = await cacheManager.create({
-                model: `models/${modelName}`,
-                systemInstruction: { role: 'system', parts: [{ text: geminiSystemText }] },
-                contents: [{ role: 'user', parts: [{ text: '준비 완료' }] }],
-                ttlSeconds: GEMINI_CACHE_TTL,
-              });
+              const newCache = await withGeminiTimeout<any>(
+                cacheManager.create({
+                  model: `models/${modelName}`,
+                  systemInstruction: { role: 'system', parts: [{ text: geminiSystemText }] },
+                  contents: [{ role: 'user', parts: [{ text: '준비 완료' }] }],
+                  ttlSeconds: GEMINI_CACHE_TTL,
+                }),
+                GEMINI_CACHE_CREATE_TIMEOUT_MS,
+                `Gemini cache create timeout (${GEMINI_CACHE_CREATE_TIMEOUT_MS / 1000}s)`,
+              );
               cachedContentName = newCache.name;
               if (cachedContentName) {
                 geminiPromptCache.set(cacheKey, {
@@ -5234,7 +5972,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
               cachedContentName = undefined;
               // ✅ [v1.4.77] 무료 티어 / 캐시 미지원 키 자동 학습
               // 403 Forbidden, 400 Bad Request, "caching is not supported" 등 구조적 실패는 영구 기록
-              const isStructural = /403|forbidden|400|not\s+support|not\s+available|cached.*content/i.test(errMsg);
+              const isStructural = /403|forbidden|400|not\s+support|not\s+available|cached.*content|cache create timeout/i.test(errMsg);
               if (isStructural) {
                 markCacheUnsupported(trimmedKey, errMsg.substring(0, 60));
               }
@@ -5349,15 +6087,18 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             throw streamErr;
           }
         };
-        const streamPromise = invokeStream();
-
         // ✅ [2026-01-28 FIX] 첫 응답 타임아웃 60초로 증가 (유료 API 안정성)
-        const timeoutPromise = new Promise<never>((_, reject) => {
-          setTimeout(() => reject(new Error('⏱️ 연결 타임아웃')), 60000);
-        });
+        const firstResponseTimeoutMs = Math.min(timeoutMs, 60_000);
 
         console.log(`[Gemini] 🚀 ${modelName} 호출 (Search Grounding: ${useGrounding ? 'ON +$0.035' : 'OFF (비용 절감)'})${cachedContentName ? ' [캐시 시도 ✅]' : ''}`);
-        const streamResult = await Promise.race([streamPromise, timeoutPromise]);
+        await throttleGeminiRequest(modelName, config, options.signal);
+        const streamPromise = invokeStream();
+        const streamResult = await withProviderTimeout(
+          streamPromise,
+          firstResponseTimeoutMs,
+          `⏱️ 연결 타임아웃 (${Math.round(firstResponseTimeoutMs / 1000)}초)`,
+          options.signal,
+        );
         let text = '';
 
         // ✅ [v2.10.29] 스트림 전체 수신 타임아웃 (3분) + signal abort 시 즉시 break
@@ -5369,17 +6110,14 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           }
         })();
 
-        await Promise.race([
+        const receiveTimeoutMs = Math.min(Math.max(timeoutMs, 90_000), 180_000);
+        await withProviderTimeout(
           recvPromise,
-          new Promise((_, reject) => setTimeout(() => reject(new Error('⏱️ 생성 시간 초과(3분)')), 180000)),
-          new Promise((_, reject) => {
-            if (options.signal) {
-              const onAbort = () => reject(new Error('사용자가 콘텐츠 생성을 취소했습니다.'));
-              if (options.signal.aborted) onAbort();
-              else options.signal.addEventListener('abort', onAbort, { once: true });
-            }
-          })
-        ]);
+          receiveTimeoutMs,
+          `⏱️ 생성 시간 초과(${Math.round(receiveTimeoutMs / 1000)}초)`,
+          options.signal,
+        );
+        throwIfContentGenerationAborted(options.signal);
 
         if (text && text.trim()) {
           console.log(`✅ [Gemini] 응답 수신 완료 (모델: ${modelName}, 길이: ${text.length})`);
@@ -5390,8 +6128,8 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           //    수정: totalTokenCount - promptTokenCount (output + thinking 모두 포함)
           //    실측: thinking 토큰이 output의 20배까지 나와서 앱 추정이 실제의 40%밖에 안 됐음
           try {
-            const aggResponse = await streamResult.response;
-            const usageMeta = (aggResponse as any).usageMetadata;
+            const aggResponse = await waitForGeminiUsageMetadata(streamResult);
+            const usageMeta = (aggResponse as any)?.usageMetadata;
             if (usageMeta) {
               const promptTokens = usageMeta.promptTokenCount || 0;
               const totalTokens = usageMeta.totalTokenCount || 0;
@@ -5428,7 +6166,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         let finishReason = 'UNKNOWN';
         let promptT = 0, thinkingT = 0, candT = 0;
         try {
-          const aggResp = await streamResult.response;
+          const aggResp = await waitForGeminiUsageMetadata(streamResult);
           finishReason = aggResp?.candidates?.[0]?.finishReason || 'UNKNOWN';
           const usage = (aggResp as any).usageMetadata || {};
           promptT = usage.promptTokenCount || 0;
@@ -5497,10 +6235,11 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         }
 
         const errMsg = (error as Error).message || String(error);
+        const errMsgLower = errMsg.toLowerCase();
         lastError = error as Error;
-        const isQuota = errMsg.includes('429') || errMsg.includes('quota') || errMsg.includes('Too Many Requests') || errMsg.includes('resource exhausted');
-        const isLimitZero = errMsg.includes('limit: 0') || errMsg.includes('free_tier');
-        const isServerError = errMsg.includes('503') || errMsg.includes('500') || errMsg.includes('internal') || errMsg.includes('unavailable') || errMsg.includes('overloaded');
+        const isQuota = errMsgLower.includes('429') || errMsgLower.includes('quota') || errMsgLower.includes('too many requests') || errMsgLower.includes('resource exhausted');
+        const isLimitZero = errMsgLower.includes('limit: 0') || errMsgLower.includes('free_tier');
+        const isServerError = errMsgLower.includes('503') || errMsgLower.includes('500') || errMsgLower.includes('internal') || errMsgLower.includes('unavailable') || errMsgLower.includes('overloaded');
 
         // ✅ [v1.4.64] limit:0 = 이 모델의 무료 사용이 Google에 의해 차단됨
         //   다른 모델로 몰래 전환하지 않고, 사용자에게 명확히 안내
@@ -5575,42 +6314,37 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           }
 
           modelRetryCount++;
-          // Google이 알려주는 대기 시간 사용, 없으면 지수 백오프.
-          // Default backoff cap lifted from 60s → 120s because Google's 429
-          // hints on heavier rate-limit buckets can reach 90s; capping at 60s
-          // caused the retry to fire before the limit actually reset,
-          // guaranteeing another 429 and wasted retry budget.
-          let waitMs = Math.min(15000 * Math.pow(1.5, modelRetryCount - 1), 120000);
-          const retryMatch = errMsg.match(/retry in ([\d.]+)(s|ms)/i);
-          if (retryMatch) {
-            const val = parseFloat(retryMatch[1]);
-            const unit = retryMatch[2].toLowerCase();
-            // Respect Google's hint verbatim up to 5 minutes; beyond that the
-            // isDailyQuotaExhausted branch above already takes over.
-            waitMs = Math.min((unit === 's' ? val * 1000 : val) + 1000, 300000);
-          }
+          // RPM/TPM은 결제 부족이 아니라 시간창 제한이다. Google retry hint를 존중해
+          // 같은 Gemini 모델로 patient wait 한다. 다른 엔진/모델로 전환하지 않는다.
+          const fallbackWaitMs = Math.min(15_000 * Math.pow(1.5, Math.max(0, modelRetryCount - 1)), 180_000);
+          const waitMs = getGeminiRateLimitWaitMs(error, fallbackWaitMs);
           const waitSec = Math.round(waitMs / 1000);
 
-          if (modelRetryCount < perModelMaxRetries) {
-            const logMsg = `⏳ 분당 요청 한도 초과 — ${waitSec}초 후 자동 재시도합니다. (${modelRetryCount}/${perModelMaxRetries})`;
+          if (geminiRateLimitWaitedMs + waitMs <= geminiRateLimitPatienceMs) {
+            geminiRateLimitWaitedMs += waitMs;
+            recordGeminiRateLimitBackoff(modelName, config, waitMs);
+            const logMsg =
+              `⏳ Gemini 분당/토큰 요청 한도 대기 — ${waitSec}초 후 같은 모델로 자동 재시도합니다. ` +
+              `(누적 ${Math.round(geminiRateLimitWaitedMs / 60_000)}분/${Math.round(geminiRateLimitPatienceMs / 60_000)}분, 자동 엔진 전환 없음)`;
             console.warn(`[Gemini] ${logMsg}`);
             if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
               (window as any).appendLog(logMsg);
             }
-            await new Promise(resolve => setTimeout(resolve, waitMs));
+            await sleepWithAbort(waitMs, options.signal);
             // 키 인덱스 리셋 (로테이션 재시작)
             currentKeyIdx = 0; trimmedKey = allApiKeys[0];
             continue;
           }
-          // ✅ [v1.4.64] 재시도 모두 소진 시 구체적 안내
+
+          // patient wait 예산을 다 쓴 경우에만 구체적 안내
           throw new Error(
-            `⚡ [${modelName}] 분당 요청 한도(RPM) 초과로 ${perModelMaxRetries}회 재시도했지만 실패했습니다.\n\n` +
-            `📌 원인: ${config?.geminiPlanType === 'auto' ? '자동 모드에서 현재 키/프로젝트의 분당 한도를 초과' : isPaidPlan ? '유료 플랜의 분당 한도를 초과' : '무료 플랜은 분당 10회로 제한'}되어 있습니다.\n\n` +
+            `⚡ [${modelName}] 분당/토큰 요청 한도(RPM/TPM)가 ${Math.round(geminiRateLimitWaitedMs / 60_000)}분 동안 풀리지 않았습니다.\n\n` +
+            `📌 원인: ${config?.geminiPlanType === 'auto' ? '자동 모드에서 현재 프로젝트의 분당/토큰 한도 초과' : isPaidPlan ? '후불 계정이어도 프로젝트·모델별 RPM/TPM 제한 초과' : '무료 플랜의 낮은 분당 요청 한도 초과'}입니다.\n\n` +
             `💡 해결 방법:\n` +
-            `  1) 1~2분 후 다시 시도하세요 (한도가 자동 초기화됩니다).\n` +
-            `  2) 연속 발행 간격을 늘려주세요 (현재 너무 빠르게 요청 중).\n` +
+            `  1) 앱은 같은 Gemini 모델로 자동 대기했지만 아직 Google 제한이 풀리지 않았습니다.\n` +
+            `  2) 연속 발행 간격을 더 늘리거나 잠시 후 다시 실행하세요.\n` +
             (isPaidPlan
-              ? `  3) Google AI Studio에서 분당 한도 상향을 요청하세요.\n`
+              ? `  3) Google AI Studio의 Rate limits 화면에서 이 프로젝트의 ${modelName} RPM/TPM을 확인하고 상향을 요청하세요.\n`
               : config?.geminiPlanType === 'auto'
                 ? `  3) 보조 키 풀에 다른 프로젝트 키를 추가하면 앱이 다음 키로 자동 전환합니다.\n`
               : `  3) 유료 전환 시 프로젝트 사용량 등급에 따라 분당/일일 한도가 상향됩니다.\n`
@@ -5631,7 +6365,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             //   디버그용 console.warn은 유지 — 로그 분석 시 추적 가능.
             const logMsg = `🔧 구글 서버 일시 장애 — ${Math.round(waitMs/1000)}초 후 재시도합니다. (${modelRetryCount}/${perModelMaxRetries})`;
             console.warn(`[Gemini] ${logMsg}`);
-            await new Promise(resolve => setTimeout(resolve, waitMs));
+            await sleepWithAbort(waitMs, options.signal);
             continue;
           }
           throw new Error(
@@ -5659,7 +6393,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         if (modelRetryCount < 2) {
           // ✅ [2026-04-18] 100자 → 500자 확장 — HTTP 상태코드/사유 가려지는 문제 해소
           console.warn(`[Gemini] ${modelName} 오류: ${errMsg.substring(0, 500)} → 5초 후 재시도`);
-          await new Promise(resolve => setTimeout(resolve, 5000));
+          await sleepWithAbort(5000, options.signal);
           continue;
         }
         console.warn(`[Gemini] ${modelName} 오류: ${errMsg.substring(0, 500)}`);
@@ -5831,7 +6565,12 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
     modelName = process.env.PERPLEXITY_MODEL || 'sonar';
   }
   const timeoutMs = getTimeoutMs(minChars);
-  const maxRetries = 2;
+  const maxAttempts = 99;
+  const maxTransientRetries = 5;
+  const rateLimitPatienceMs = getPerplexityRateLimitPatienceMs();
+  let rateLimitWaitedMs = 0;
+  let rateLimitRetryCount = 0;
+  let transientRetryCount = 0;
   let lastError: Error | null = null;
 
   // ✅ [2026-03-16] promptSplitter 모듈로 system/user 분리 (인라인 50줄 코드 제거)
@@ -5869,9 +6608,9 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
   const isKeywordMode = userMessage.length <= 500;
   console.log(`[Perplexity] 메시지 분리: system=${systemMessage.length}자, user=${userMessage.length}자 (${isKeywordMode ? '키워드' : '원문'} 모드)`);
 
-  for (let retry = 0; retry < maxRetries; retry++) {
+  for (let retry = 0; retry < maxAttempts; retry++) {
     try {
-      console.log(`[Perplexity] 시도 ${retry + 1}/${maxRetries}: 모델 ${modelName}, 타임아웃 ${timeoutMs / 1000}초`);
+      console.log(`[Perplexity] 시도 ${retry + 1}: 모델 ${modelName}, 타임아웃 ${timeoutMs / 1000}초, 한도 대기 누적 ${Math.round(rateLimitWaitedMs / 1000)}초`);
 
       const OpenAI = (await import('openai')).default;
       const client = new OpenAI({
@@ -5879,9 +6618,7 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
         baseURL: 'https://api.perplexity.ai',
       });
 
-      const timeoutPromise = new Promise<never>((_, reject) => {
-        setTimeout(() => reject(new Error(`Perplexity API 호출 시간 초과 (${timeoutMs / 1000}초)`)), timeoutMs);
-      });
+      await throttleProviderRequest('Perplexity', modelName, getPerplexityMinIntervalMs(modelName), signal);
 
       // ✅ [2026-02-23 FIX] system + user 메시지 분리로 Perplexity 거부 방지
       const messages: Array<{ role: 'system' | 'user'; content: string }> = [
@@ -5902,7 +6639,12 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
         } : {}),
       } as any, signal ? { signal } as any : undefined);
 
-      const response = await Promise.race([createPromise, timeoutPromise]);
+      const response = await withProviderTimeout(
+        createPromise,
+        timeoutMs,
+        `Perplexity API 호출 시간 초과 (${timeoutMs / 1000}초)`,
+        signal,
+      );
       const text = response.choices[0]?.message?.content?.trim() || '';
 
       if (!text) {
@@ -5923,6 +6665,8 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
     } catch (error) {
       lastError = error as Error;
       const errorMessage = lastError.message?.toLowerCase() || '';
+      const errorStr = JSON.stringify(error).toLowerCase();
+      const status = (error as any)?.status || (error as any)?.response?.status;
 
       console.error(`[Perplexity] ⚠️ 시도 ${retry + 1} 실패: ${lastError.message}`);
 
@@ -5931,12 +6675,65 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
         throw new Error(translatePerplexityError(lastError));
       }
 
-      // 재시도 대기
-      if (retry < maxRetries - 1) {
-        const delay = Math.min(1000 * Math.pow(2, retry), 5000);
-        console.log(`[Perplexity] 🔄 ${delay}ms 후 재시도...`);
-        await new Promise(resolve => setTimeout(resolve, delay));
+      const isHardBillingError =
+        errorMessage.includes('insufficient') ||
+        errorMessage.includes('credits') ||
+        errorMessage.includes('credit balance') ||
+        errorMessage.includes('payment') ||
+        errorMessage.includes('billing') ||
+        errorStr.includes('insufficient') ||
+        errorStr.includes('credits');
+      if (isHardBillingError && !errorMessage.includes('429')) {
+        throw new Error(translatePerplexityError(lastError));
       }
+
+      const isRateLimit =
+        status === 429 ||
+        errorMessage.includes('429') ||
+        errorMessage.includes('rate limit') ||
+        errorMessage.includes('too many requests');
+      if (isRateLimit) {
+        const fallbackWaitMs = Math.min(10_000 * Math.pow(1.5, rateLimitRetryCount), 90_000);
+        const waitMs = getPerplexityRateLimitWaitMs(error, fallbackWaitMs);
+        const nextWaitedMs = rateLimitWaitedMs + waitMs;
+
+        if (nextWaitedMs <= rateLimitPatienceMs) {
+          rateLimitRetryCount++;
+          rateLimitWaitedMs = nextWaitedMs;
+          recordProviderRateLimitBackoff('Perplexity', modelName, waitMs);
+          const logMsg =
+            `⏳ [Perplexity ${modelName}] 요청 한도 대기 — ${Math.round(waitMs / 1000)}초 후 같은 모델로 자동 재시도 ` +
+            `(누적 ${Math.round(rateLimitWaitedMs / 60_000)}분/${Math.round(rateLimitPatienceMs / 60_000)}분, 자동 폴백 없음)`;
+          console.warn(logMsg);
+          if (typeof (globalThis as any).window !== 'undefined' && typeof (globalThis as any).window.appendLog === 'function') {
+            (globalThis as any).window.appendLog(logMsg);
+          }
+          await sleepWithAbort(waitMs, signal);
+          continue;
+        }
+
+        throw new Error(
+          `Perplexity API 요청 한도(RPM)를 초과했습니다. 앱이 같은 모델로 ${Math.round(rateLimitWaitedMs / 60_000)}분 대기했지만 아직 제한이 풀리지 않았습니다.\n` +
+          `원본 오류: ${lastError.message}`
+        );
+      }
+
+      const isRetryable =
+        errorMessage.includes('500') || errorMessage.includes('502') || errorMessage.includes('503') ||
+        errorMessage.includes('server error') || errorMessage.includes('internal') ||
+        errorMessage.includes('timeout') || errorMessage.includes('시간 초과') ||
+        errorMessage.includes('빈 응답') || errorMessage.includes('empty') ||
+        errorMessage.includes('network') || errorMessage.includes('fetch') ||
+        errorMessage.includes('econnreset') || errorMessage.includes('econnrefused');
+      if (isRetryable && transientRetryCount < maxTransientRetries) {
+        const delay = Math.min(2000 * Math.pow(2, transientRetryCount), 30000) + Math.floor(Math.random() * 1000);
+        transientRetryCount++;
+        console.log(`[Perplexity] 🔄 ${delay}ms 후 재시도...`);
+        await sleepWithAbort(delay, signal);
+        continue;
+      }
+
+      throw new Error(translatePerplexityError(lastError));
     }
   }
 
@@ -6010,25 +6807,25 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
 
   let lastError: Error | null = null;
   const timeoutMs = getTimeoutMs(minChars);
-  // ✅ [2026-06-02] 429 누진 backoff(30→60→90→120)가 끝까지 발동하도록 시퀀스 길이 + 1로 설정.
-  //   시퀀스 4개 → 첫 시도 + 4회 backoff retry = 5회. (이전 v1.4.77: 2회였으나 60s 1회만 발동되던 버그)
-  //   non-429 재시도(네트워크 등)도 이 횟수를 공유하나, happy path는 즉시 반환이라 토큰 비용 없음.
-  const maxRetriesPerModel = QUOTA_BACKOFF_SEQUENCE_MS.length + 1;
+  const maxCompletionTokens = getOpenAiMaxCompletionTokens(minChars);
+  const maxAttemptsPerModel = 99;
+  const maxTransientRetriesPerModel = 2;
+  const openAiRateLimitPatienceMs = getOpenAiRateLimitPatienceMs();
 
   for (const modelName of modelsToTry) {
-    for (let retry = 0; retry < maxRetriesPerModel; retry++) {
+    let rateLimitWaitedMs = 0;
+    let rateLimitRetryCount = 0;
+    let transientRetryCount = 0;
+
+    for (let retry = 0; retry < maxAttemptsPerModel; retry++) {
       try {
-        console.log(`[OpenAI] 시도: ${modelName} (${retry + 1}/${maxRetriesPerModel}), 타임아웃: ${timeoutMs / 1000}초`);
+        console.log(`[OpenAI] 시도: ${modelName} (${retry + 1}), 타임아웃: ${timeoutMs / 1000}초, 한도 대기 누적: ${Math.round(rateLimitWaitedMs / 1000)}초`);
 
         // ✅ [2026-05-25 v2.10.356] preemptive throttling — RPM 한도 도달 직전이면 호출자 측에서 대기
         //   사용자 보고 "OpenAI 60s backoff 후에도 RPM 초과 자꾸 뜸" 근본 차단
         // ✅ [2026-06-02] 호출 간 최소 간격(기본 10s) 강제 — 글 1편당 다수 호출 burst를 직렬 분산.
         //   타임아웃 타이머 생성 전에 대기해야 간격 대기가 API 타임아웃 예산을 깎지 않는다.
-        await openaiRpmThrottler.throttle(getOpenAiMinIntervalMs());
-
-        const timeoutPromise = new Promise<never>((_, reject) => {
-          setTimeout(() => reject(new Error(`OpenAI API 호출 시간 초과 (${timeoutMs / 1000}초)`)), timeoutMs);
-        });
+        await openaiRpmThrottler.throttle(getOpenAiMinIntervalMs(modelName, maxCompletionTokens), signal);
 
         // ✅ [2026-03-16] system/user 분리: AI 규칙 인식률 향상
         const { system: oaiSystem, user: oaiUser } = splitPromptByMarker(prompt);
@@ -6043,7 +6840,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
             ...(oaiSystem ? [{ role: 'system' as const, content: oaiSystem }] : []),
             { role: 'user' as const, content: oaiUser },
           ],
-          max_completion_tokens: 8192,
+          max_completion_tokens: maxCompletionTokens,
         };
         if (isSearchPreview) {
           baseParams.web_search_options = {};
@@ -6057,7 +6854,12 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           signal ? { signal } as any : undefined,
         );
 
-        const response = await Promise.race([createPromise, timeoutPromise]);
+        const response = await withProviderTimeout(
+          createPromise,
+          timeoutMs,
+          `OpenAI API 호출 시간 초과 (${timeoutMs / 1000}초)`,
+          signal,
+        );
         // ✅ [2026-05-25 v2.10.356] 호출 성공 기록 — RPM 적응형 가속에 활용
         openaiRpmThrottler.recordCall();
         const text = response.choices[0]?.message?.content?.trim() || '';
@@ -6115,36 +6917,46 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         //   사용자 지시: "다른걸로 폴백되면 그모델로하지 뭐하러 모델을 선택해서 하겠니"
         //   기존(v2.7.93까지): break로 다음 모델 자동 전환 → 사용자 선택 무시
         //   수정: throw로 명확한 원인 + 해결 방법 안내
-        const isQuotaOrRateLimit = errorMessage.includes('429') || errorMessage.includes('rate limit') ||
-          errorMessage.includes('too many requests') || errorMessage.includes('quota');
+        const isQuotaOrRateLimit = isOpenAiRateLimitError(error, errorMessage);
         if (isQuotaOrRateLimit) {
-          // ✅ [2026-05-25 v2.10.356] RPM throttler에 429 신호 전달 — 적응형 RPM 상한 즉시 감소 (다음 호출부터 보호)
-          openaiRpmThrottler.record429();
-
           // ✅ RPM 한도는 1분 단위로 복구 → 같은 모델 유지 + 누진 backoff retry
           //   v2.10.355까지: 60s 1회 retry → 사용자 보고 "재시도 후에도 실패"
           //   v2.10.356: 60→90→120 시퀀스 작성했으나 maxRetries=2라 실제론 1회만 발동(버그)
           //   v2.11.x [2026-06-02]: 30s → 60s → 90s → 120s 누진 4회 실제 발동 (maxRetries 동기화)
           //   모델 변경 아니라 [[feedback_no_fallback]] 룰과 충돌 없음.
-          const isHardQuota = errorMessage.includes('quota') && !errorMessage.includes('429');
-          if (!isHardQuota && retry < maxRetriesPerModel - 1) {
-            const backoffMs = getQuotaBackoffMs(retry); // 30s / 60s / 90s / 120s 누진
-            const logMsg = `⏳ [OpenAI ${modelName}] RPM 한도 초과 — ${backoffMs/1000}초 후 자동 재시도 (${retry + 2}/${maxRetriesPerModel}) — throttler 적응형 감소 적용됨`;
-            console.warn(logMsg);
-            if (typeof (globalThis as any).window !== 'undefined' && typeof (globalThis as any).window.appendLog === 'function') {
-              (globalThis as any).window.appendLog(logMsg);
+          // ✅ [2026-06-06] OpenAI 선택 존중 + patient mode:
+          //   RPM/TPM은 사용자가 돈으로 올리기보다 기다리길 원하는 경우가 많다.
+          //   4회 고정 retry 후 실패하지 않고, reset/retry-after 힌트를 반영해 12분까지 같은 모델로 대기한다.
+          const isHardQuota = isOpenAiHardQuotaError(error, errorMessage);
+          if (!isHardQuota) {
+            const fallbackBackoffMs = getQuotaBackoffMs(rateLimitRetryCount);
+            const backoffMs = getOpenAiRateLimitWaitMs(error, fallbackBackoffMs);
+            const nextWaitedMs = rateLimitWaitedMs + backoffMs;
+            openaiRpmThrottler.record429(backoffMs);
+
+            if (nextWaitedMs <= openAiRateLimitPatienceMs) {
+              rateLimitRetryCount++;
+              const logMsg =
+                `⏳ [OpenAI ${modelName}] 요청/토큰 한도 대기 — ${Math.round(backoffMs / 1000)}초 후 같은 모델로 자동 재시도 ` +
+                `(누적 ${Math.round(nextWaitedMs / 60_000)}분/${Math.round(openAiRateLimitPatienceMs / 60_000)}분 허용, 자동 폴백 없음)`;
+              console.warn(logMsg);
+              if (typeof (globalThis as any).window !== 'undefined' && typeof (globalThis as any).window.appendLog === 'function') {
+                (globalThis as any).window.appendLog(logMsg);
+              }
+              await sleepWithAbort(backoffMs, signal);
+              rateLimitWaitedMs = nextWaitedMs;
+              continue; // 같은 모델 재시도
             }
-            await new Promise(resolve => setTimeout(resolve, backoffMs));
-            continue; // 같은 모델 재시도
           }
-          console.error(`[OpenAI] ❌ ${modelName} 할당량/속도 제한 — 재시도 소진, 자동 폴백 차단`);
+
+          console.error(`[OpenAI] ❌ ${modelName} 할당량/속도 제한 — patient wait exhausted or hard quota`);
           throw new Error(
             `🚫 [OpenAI ${modelName}] API 한도를 초과했습니다.\n\n` +
-            `📌 원인: ${isHardQuota ? '월간 할당량 소진' : '분당 요청 한도(RPM) 초과 — 30·60·90·120초 누진 대기 + 재시도 후에도 실패'}\n\n` +
+            `📌 원인: ${isHardQuota ? '월간 결제/크레딧 한도 소진' : `요청/토큰 한도(RPM/TPM) 초과 — 앱이 약 ${Math.round(rateLimitWaitedMs / 60_000)}분 대기했지만 아직 풀리지 않음`}\n\n` +
             `💡 해결 방법:\n` +
-            `  1) platform.openai.com → Billing 에서 결제 정보 확인 (월 한도 상향)\n` +
-            `  2) 잠시 후 다시 시도 (RPM 한도는 1분 후 복구)\n` +
-            `  3) 다른 모델을 직접 사용하려면 환경 설정 → AI 엔진에서 변경하세요\n\n` +
+            `  1) 그대로 다시 누르면 앱이 같은 모델로 천천히 대기하며 재시도합니다.\n` +
+            `  2) 한도가 자주 걸리면 환경변수 OPENAI_MIN_INTERVAL_MS를 더 크게 설정하거나 잠시 후 실행하세요.\n` +
+            `  3) 결제/크레딧 문제라면 platform.openai.com → Billing에서 월 한도·잔액을 확인하세요.\n\n` +
             `⚠️ 자동으로 다른 모델로 전환하지 않습니다 (사용자가 선택한 모델 존중).`
           );
         }
@@ -6159,11 +6971,12 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           errorMessage.includes('econnreset') || errorMessage.includes('econnrefused');
 
         if (isRetryable) {
-          console.log(`[OpenAI] ⚠️ ${modelName} 재시도 가능 에러 (${retry + 1}/${maxRetriesPerModel}): ${(error as Error).message}`);
-          if (retry < maxRetriesPerModel - 1) {
-            const delay = Math.min(1000 * Math.pow(2, retry), 5000);
+          console.log(`[OpenAI] ⚠️ ${modelName} 재시도 가능 에러 (${transientRetryCount + 1}/${maxTransientRetriesPerModel + 1}): ${(error as Error).message}`);
+          if (transientRetryCount < maxTransientRetriesPerModel) {
+            const delay = Math.min(1000 * Math.pow(2, transientRetryCount), 5000);
+            transientRetryCount++;
             console.log(`[OpenAI] 🔄 ${delay}ms 후 재시도...`);
-            await new Promise(resolve => setTimeout(resolve, delay));
+            await sleepWithAbort(delay, signal);
             continue; // 같은 모델 재시도
           }
           // 재시도 소진 → 다음 모델로
@@ -6246,32 +7059,33 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
   const modelsToTry = customModel ? [customModel] : claudeModels;
 
   let lastError: Error | null = null;
-  const maxRetriesPerModel = 4; // ✅ [v1.4.44] 2 → 4 (단일 모델 재시도 강화, 폴백 제거)
+  const maxAttemptsPerModel = 99;
+  const maxTransientRetriesPerModel = 5;
+  const claudeRateLimitPatienceMs = getClaudeRateLimitPatienceMs();
 
   // 각 모델을 순차적으로 시도
   for (const modelName of modelsToTry) {
-    for (let retry = 0; retry < maxRetriesPerModel; retry++) {
+    let rateLimitWaitedMs = 0;
+    let rateLimitRetryCount = 0;
+    let transientRetryCount = 0;
+
+    for (let retry = 0; retry < maxAttemptsPerModel; retry++) {
       try {
         console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
         console.log(`[Claude] 콘텐츠 생성 시작`);
-        console.log(`  • 모델: ${modelName} (${retry + 1}/${maxRetriesPerModel})`);
+        console.log(`  • 모델: ${modelName} (${retry + 1})`);
         console.log(`  • 목표 분량: ${minChars}자`);
         console.log(`  • 타임아웃: ${timeoutMs / 1000}초`);
         console.log(`  • Temperature: ${temperature}`);
+        console.log(`  • 한도 대기 누적: ${Math.round(rateLimitWaitedMs / 1000)}초`);
         console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
 
         const startTime = Date.now();
 
-        // 타임아웃 설정 (동적 조정)
-        const timeoutPromise = new Promise<never>((_, reject) => {
-          setTimeout(() => {
-            reject(new Error(`Claude API 호출 시간 초과 (${timeoutMs / 1000}초)`));
-          }, timeoutMs);
-        });
-
         // ✅ [2026-03-16] promptSplitter 모듈로 system/user 분리 (인라인 코드 제거)
         // Anthropic API는 system을 top-level 파라미터로 받음
         const { system: claudeSystem, user: claudeUser } = splitPromptByMarker(prompt);
+        await throttleProviderRequest('Claude', modelName, getClaudeMinIntervalMs(modelName), signal);
 
         // Prompt caching: Anthropic charges cache writes at 1.25x input and
         // cache reads at 0.1x. Mark the large static system prompt as cacheable
@@ -6283,11 +7097,13 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
         // plain-string system. This keeps the request working even if the
         // server or SDK ever stops accepting the array form.
         //
-        // Opt-out: set CLAUDE_PROMPT_CACHE_DISABLED=1 to force the legacy
-        // string-only path without attempting the cached form.
+        // Prompt cache is opt-in. It is a same-request feature when supported,
+        // but older SDK/server combinations may reject the array form and cause
+        // an extra retry. Keep one-click generation to one provider call by default.
         const CACHE_MIN_CHARS = 4000;
         const cacheDisabled = process.env.CLAUDE_PROMPT_CACHE_DISABLED === '1';
-        const useSystemCache = !cacheDisabled && !!claudeSystem && claudeSystem.length >= CACHE_MIN_CHARS;
+        const cacheOptIn = process.env.CLAUDE_PROMPT_CACHE_ENABLED === '1';
+        const useSystemCache = cacheOptIn && !cacheDisabled && !!claudeSystem && claudeSystem.length >= CACHE_MIN_CHARS;
 
         // ✅ [v2.7.65] Claude Opus 4.7부터 temperature 파라미터 deprecate
         //   사용자 보고: 400 invalid_request_error "`temperature` is deprecated for this model"
@@ -6330,7 +7146,12 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
           createPromise = (client.messages.create as any)(buildRequest(false), claudeOpts);
         }
 
-        const response = await Promise.race([createPromise, timeoutPromise]);
+        const response = await withProviderTimeout(
+          createPromise,
+          timeoutMs,
+          `Claude API 호출 시간 초과 (${timeoutMs / 1000}초)`,
+          signal,
+        );
 
         const responseTime = Date.now() - startTime;
         console.log(`[Claude] API 응답 수신: ${responseTime}ms`);
@@ -6387,6 +7208,7 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
         lastError = error as Error;
         const errorMessage = (error as Error).message?.toLowerCase() || '';
         const errorStr = JSON.stringify(error).toLowerCase();
+        const statusText = String((error as any)?.status ?? (error as any)?.response?.status ?? '');
 
         // ✅ [2026-02-24 FIX] 에러 분류: 즉시 실패 vs 재시도 가능 vs 다음 모델
 
@@ -6435,9 +7257,39 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
           break;
         }
 
-        // 4) 재시도 가능한 에러 → 대기 후 재시도 (같은 모델 또는 다음 모델)
-        const isRetryable = errorMessage.includes('429') || errorMessage.includes('rate limit') ||
-          errorMessage.includes('too many requests') || errorMessage.includes('overloaded') ||
+        const isRateLimit = statusText === '429' ||
+          errorMessage.includes('429') ||
+          errorMessage.includes('rate limit') ||
+          errorMessage.includes('too many requests');
+        if (isRateLimit) {
+          const fallbackWaitMs = Math.min(10_000 * Math.pow(1.5, rateLimitRetryCount), 90_000);
+          const waitMs = getClaudeRateLimitWaitMs(error, fallbackWaitMs);
+          const nextWaitedMs = rateLimitWaitedMs + waitMs;
+
+          if (nextWaitedMs <= claudeRateLimitPatienceMs) {
+            rateLimitRetryCount++;
+            rateLimitWaitedMs = nextWaitedMs;
+            recordProviderRateLimitBackoff('Claude', modelName, waitMs);
+            const logMsg =
+              `⏳ [Claude ${modelName}] 요청/토큰 한도 대기 — ${Math.round(waitMs / 1000)}초 후 같은 모델로 자동 재시도 ` +
+              `(누적 ${Math.round(rateLimitWaitedMs / 60_000)}분/${Math.round(claudeRateLimitPatienceMs / 60_000)}분, 자동 폴백 없음)`;
+            console.warn(logMsg);
+            if (typeof (globalThis as any).window !== 'undefined' && typeof (globalThis as any).window.appendLog === 'function') {
+              (globalThis as any).window.appendLog(logMsg);
+            }
+            await sleepWithAbort(waitMs, signal);
+            continue;
+          }
+
+          throw new Error(
+            `Claude API 요청/토큰 한도(RPM/TPM)를 초과했습니다. 앱이 같은 모델로 ${Math.round(rateLimitWaitedMs / 60_000)}분 대기했지만 아직 제한이 풀리지 않았습니다.\n` +
+            `원본 오류: ${(error as Error).message}`
+          );
+        }
+
+        // 4) 재시도 가능한 에러 → 대기 후 재시도 (같은 모델)
+        const isRetryable =
+          errorMessage.includes('overloaded') ||
           errorMessage.includes('529') || // Anthropic overloaded
           errorMessage.includes('500') || errorMessage.includes('502') || errorMessage.includes('503') ||
           errorMessage.includes('server error') || errorMessage.includes('internal error') ||
@@ -6447,21 +7299,19 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
           errorMessage.includes('econnreset') || errorMessage.includes('econnrefused');
 
         if (isRetryable) {
-          console.log(`[Claude] ⚠️ ${modelName} 재시도 가능 에러 (${retry + 1}/${maxRetriesPerModel}): ${(error as Error).message}`);
-          if (retry < maxRetriesPerModel - 1) {
-            const delay = Math.min(1000 * Math.pow(2, retry), 5000);
+          console.log(`[Claude] ⚠️ ${modelName} 재시도 가능 에러 (${transientRetryCount + 1}/${maxTransientRetriesPerModel + 1}): ${(error as Error).message}`);
+          if (transientRetryCount < maxTransientRetriesPerModel) {
+            const delay = Math.min(2000 * Math.pow(2, transientRetryCount), 30000) + Math.floor(Math.random() * 1000);
+            transientRetryCount++;
             console.log(`[Claude] 🔄 ${delay}ms 후 재시도...`);
-            await new Promise(resolve => setTimeout(resolve, delay));
+            await sleepWithAbort(delay, signal);
             continue; // 같은 모델 재시도
           }
-          // 재시도 소진 → 다음 모델로
-          console.log(`[Claude] ⚠️ ${modelName} 재시도 소진, 다음 모델 시도`);
-          break;
+          throw new Error(`Claude API 일시 오류가 반복되어 중단했습니다. 원본 오류: ${(error as Error).message}`);
         }
 
-        // 5) 알 수 없는 에러 → 다음 모델로 이동 (이전: 즉시 throw)
-        console.log(`[Claude] ⚠️ ${modelName} 알 수 없는 오류, 다음 모델 시도: ${(error as Error).message}`);
-        break;
+        // 5) 알 수 없는 에러 → 선택 모델 유지 원칙상 즉시 명확히 실패
+        throw new Error(`Claude API 오류: ${(error as Error).message}`);
       }
     }
   }
@@ -7133,7 +7983,7 @@ export async function generateStructuredContent(
   //   조건: aiTabFriendlyMode === true (사용자 명시 ON) + mode === 'seo'
   //   동작: minChars를 6000으로 상향 (AI 탭 채택 평균 6,000~8,000자).
   //   주의: 자료 외 사실 채우기 금지 — Phase 1 F1~F4 룰이 자동 적용되어 자료 부족 영역은 (자료 부족) 명시.
-  if (config?.aiTabFriendlyMode === true && (source.contentMode === 'seo' || !source.contentMode)) {
+  if (config?.aiTabFriendlyMode === true && (source.contentMode === 'seo' || source.contentMode === 'mate' || !source.contentMode)) {
     if (minChars < 6000) {
       console.log(`[ContentGenerator] 🎯 AI 탭 친화 모드 활성 — minChars ${minChars} → 6000자 상향`);
       minChars = 6000;
@@ -7159,17 +8009,23 @@ export async function generateStructuredContent(
   }
   console.log(`[ContentGenerator] 사용 엔진: ${provider} (목표: ${minChars}자)`);
 
-  const MAX_ATTEMPTS = costPolicy.maxAttempts;
+  const openAiContentMaxAttempts = readNonNegativeIntegerEnv('OPENAI_CONTENT_MAX_ATTEMPTS', 0);
+  const baseMaxAttempts = provider === 'openai' ? openAiContentMaxAttempts : costPolicy.maxAttempts;
+  const sameEngineReliabilityMinAttempts = readNonNegativeIntegerEnv('CONTENT_SAME_ENGINE_MIN_ATTEMPTS', 1);
+  const promptRepairMinAttempts = source.customPrompt?.trim() ? 2 : 0;
+  const MAX_ATTEMPTS = Math.max(baseMaxAttempts, sameEngineReliabilityMinAttempts, promptRepairMinAttempts);
   const RETRY_DELAYS = [0, 1200, 2000, 3000, 4500, 6000, 8000];
-  console.log(`[ContentGenerator] 비용 정책: costSaver=${costPolicy.costSaverOn ? 'ON' : 'OFF'}, regeneration retries=${MAX_ATTEMPTS}`);
+  console.log(`[ContentGenerator] 비용 정책: costSaver=${costPolicy.costSaverOn ? 'ON' : 'OFF'}, same-engine retries=${MAX_ATTEMPTS}, reliability=${sameEngineReliabilityMinAttempts}, promptRepair=${promptRepairMinAttempts}`);
 
   // ✅ Gemini 전용 강화 재시도 시스템
-  // 대부분의 사용자가 Gemini만 사용 (무료) → 폴백 없이 Gemini로 더 많이 재시도
+  // provider 내부 재시도 위에 전체 파이프라인 재실행이 겹치지 않도록 기본 1회만 허용.
   let networkErrorCount = 0;
-  const GEMINI_MAX_RETRIES = Math.max(0, Number(process.env.GEMINI_NETWORK_MAX_RETRIES ?? 3));
+  const GEMINI_MAX_RETRIES = Math.max(0, Number(process.env.GEMINI_NETWORK_MAX_RETRIES ?? 1));
   const GEMINI_RETRY_DELAYS = [1200, 2000, 3000, 4500, 6000, 8000, 10000];
 
-  console.log(`[ContentGenerator] Gemini 전용 강화 재시도 모드: 최대 ${GEMINI_MAX_RETRIES}회 재시도`)
+  if (provider === 'gemini') {
+    console.log(`[ContentGenerator] Gemini 전용 네트워크 재시도: 최대 ${GEMINI_MAX_RETRIES}회`);
+  }
 
   // ✅ 성공률 통계 추적
   const statsFile = path.join(app.getPath('userData'), 'content-generation-stats.json');
@@ -7224,7 +8080,7 @@ export async function generateStructuredContent(
       if (attempt > 0) {
         const delay = RETRY_DELAYS[Math.min(attempt, RETRY_DELAYS.length - 1)];
         console.log(`[ContentGenerator] 재시도 ${attempt}/${MAX_ATTEMPTS}: ${delay / 1000}초 대기 후 재개`);
-        await new Promise(resolve => setTimeout(resolve, delay));
+        await sleepWithAbort(delay, signal);
         // ✅ [2026-04-03] 대기 후에도 abort 체크
         if (signal?.aborted) {
           throw new Error('사용자가 콘텐츠 생성을 취소했습니다.');
@@ -7488,6 +8344,7 @@ export async function generateStructuredContent(
       // ✅ [v1.4.35] SEO 0.2 → 0.5 (로봇 회귀 방지). 4205 라인과 동일 값 유지.
       let temperature = 0.5;
       if (mode === 'seo') temperature = 0.5;  // 0.2 → 0.5
+      else if (mode === 'mate') temperature = 0.45;
       else if (mode === 'homefeed') temperature = 0.7;
 
       console.log(`[ContentGenerator] AI 호출 모드: ${mode}, 온도: ${temperature}`);
@@ -7582,7 +8439,7 @@ export async function generateStructuredContent(
           errorMsg.includes('502') ||
           errorMsg.includes('504');
 
-        if (isNetworkError) {
+        if (isNetworkError && provider === 'gemini') {
           networkErrorCount++;
 
           // ✅ Gemini 전용: 네트워크 에러 시 더 많이 재시도 (폴백 없음)
@@ -7596,7 +8453,7 @@ export async function generateStructuredContent(
             console.log(`${'='.repeat(60)}\n`);
 
             // 점진적 대기 후 재시도
-            await new Promise(resolve => setTimeout(resolve, retryDelay));
+            await sleepWithAbort(retryDelay, signal);
             continue;
           }
 
@@ -7773,7 +8630,7 @@ export async function generateStructuredContent(
       validateHomefeedContent(parsed, source); // 홈판 모드: 소제목/도입부/기자체 검증
       validateBusinessContent(parsed, source); // ✅ [v1.4.24] business 모드: 가짜 번호/광고법/CTA 검증
 
-      if (mode === 'seo') {
+      if (mode === 'seo' || mode === 'mate') {
         const seoKeyword = getPrimaryKeywordFromSource(source);
         const issues = computeSeoTitleCriticalIssues(parsed.selectedTitle, seoKeyword);
         if (issues.length > 0 && attempt < MAX_ATTEMPTS) {
@@ -7899,7 +8756,7 @@ export async function generateStructuredContent(
 
       // ✅ [v1.4.18] 소제목 키워드 누락 사후 패치 — 재시도 없이 즉시 보정
       // SEO/홈판 모드에서 메인 키워드가 빠진 소제목을 자동으로 키워드 포함 형태로 변환
-      if ((mode === 'seo' || mode === 'homefeed') && Array.isArray(parsed.headings)) {
+      if ((mode === 'seo' || mode === 'homefeed' || mode === 'mate') && Array.isArray(parsed.headings)) {
         const primaryKw = getPrimaryKeywordFromSource(source);
         if (primaryKw) {
           // ✅ [v2.10.227] 사용자 보고: 소제목 "5월 5월 25일 이후 잔액 소멸 이유" (5월 중복)
@@ -7956,6 +8813,44 @@ export async function generateStructuredContent(
             try { syncHeadingsWithBodyPlain(parsed); } catch { /* ignore */ }
           }
           }
+        }
+      }
+
+      const customPromptAdherence = assessCustomPromptAdherence(parsed, source);
+      if (customPromptAdherence.checked) {
+        if (!parsed.quality) {
+          parsed.quality = {
+            aiDetectionRisk: 'low',
+            legalRisk: 'safe',
+            seoScore: 70,
+            originalityScore: 70,
+            readabilityScore: 70,
+            warnings: [],
+          };
+        }
+        (parsed.quality as any).customPromptAdherence = {
+          score: customPromptAdherence.score,
+          passed: customPromptAdherence.passed,
+          missingTerms: customPromptAdherence.missingTerms.slice(0, 10),
+          foundForbiddenTerms: customPromptAdherence.foundForbiddenTerms.slice(0, 8),
+          missingFeatures: customPromptAdherence.missingFeatures,
+        };
+
+        if (!customPromptAdherence.passed && attempt < MAX_ATTEMPTS) {
+          lastFailReason = `사용자 프롬프트 미준수: ${customPromptAdherence.issues.join(' / ')}`;
+          console.warn(`[PromptAdherence] 🔁 자동 보정 재시도: ${lastFailReason}`);
+          extraInstruction = `${customPromptAdherence.retryInstruction}\n${extraInstruction}`;
+          continue;
+        }
+
+        if (!customPromptAdherence.passed) {
+          parsed.quality.warnings = [
+            ...(parsed.quality.warnings || []),
+            `사용자 프롬프트 준수 경고(${customPromptAdherence.score}점): ${customPromptAdherence.issues.join(' / ')}`,
+          ];
+          console.warn(`[PromptAdherence] ⚠️ 최종 경고 후 통과: ${customPromptAdherence.issues.join(' / ')}`);
+        } else {
+          console.log(`[PromptAdherence] ✅ 사용자 프롬프트 준수 통과 (${customPromptAdherence.score}점)`);
         }
       }
 
@@ -8746,15 +9641,16 @@ export async function generateStructuredContent(
     } catch (error) {
       // 오류 처리
       const errMsg = (error as Error).message || '알 수 없는 오류';
+      const terminalError = isTerminalContentGenerationError(error);
 
       // ✅ [v1.4.41] 매번 lastFailReason 설정 (마지막 시도 포함) — "알 수 없음" 방지
       lastFailReason = errMsg.substring(0, 300);
 
-      if (attempt === MAX_ATTEMPTS) {
+      if (terminalError || attempt === MAX_ATTEMPTS) {
         // ✅ 실패 통계 업데이트
         stats.failed++;
         const successRate = stats.total > 0 ? Math.round((stats.success / stats.total) * 100) : 0;
-        console.error(`[ContentGenerator] ❌ 실패! (최대 시도 횟수 초과) | 전체 성공률: ${successRate}% (${stats.success}/${stats.total})`);
+        console.error(`[ContentGenerator] ❌ 실패! (${terminalError ? '재시도 불가 오류' : '최대 시도 횟수 초과'}) | 전체 성공률: ${successRate}% (${stats.success}/${stats.total})`);
         console.error(`[ContentGenerator] 마지막 에러: ${errMsg}`);
 
         // 통계 파일 저장
@@ -8769,8 +9665,8 @@ export async function generateStructuredContent(
         throw new Error(`콘텐츠 생성 실패 (엔진: ${userSelectedProvider}, ${attempt + 1}회 시도): ${errMsg}`);
       }
       // 재시도 가능한 오류면 계속
-      console.warn(`[시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}] 오류 발생, 재시도 중:`, errMsg);
-      extraInstruction = `\n\n⚠️ 이전 시도에서 오류가 발생했습니다. JSON 형식을 정확히 지켜주세요.`;
+      console.warn(`[시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}] 같은 엔진 복구 재시도:`, errMsg);
+      extraInstruction = `${buildSameEngineRecoveryInstruction(provider, errMsg)}\n${extraInstruction}`;
     }
   }
 

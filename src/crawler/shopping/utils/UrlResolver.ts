@@ -17,6 +17,7 @@ const CHROME_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 
  */
 const SHORT_URL_PATTERNS = [
     'naver.me/',
+    'brandconnect.naver.com/',
     'link.coupang.com/',
     'coupa.ng/',
     'bit.ly/',
@@ -30,6 +31,7 @@ const SHORT_URL_PATTERNS = [
  * 플랫폼 감지 패턴
  */
 const PLATFORM_PATTERNS: { pattern: RegExp; platform: ShoppingPlatform }[] = [
+    { pattern: /brandconnect\.naver\.com/i, platform: 'smart-store' },
     { pattern: /brand\.naver\.com/i, platform: 'brand-store' },
     { pattern: /smartstore\.naver\.com/i, platform: 'smart-store' },
     { pattern: /m\.smartstore\.naver\.com/i, platform: 'smart-store' },
@@ -39,6 +41,34 @@ const PLATFORM_PATTERNS: { pattern: RegExp; platform: ShoppingPlatform }[] = [
     { pattern: /gmarket\.co\.kr/i, platform: 'gmarket' },
     { pattern: /11st\.co\.kr/i, platform: '11st' },
 ];
+
+function htmlToVisibleText(html: string): string {
+    return String(html || '')
+        .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+        .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+        .replace(/<noscript[\s\S]*?<\/noscript>/gi, ' ')
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function detectErrorIndicatorFromVisibleText(text: string): string | undefined {
+    const visibleText = String(text || '').replace(/\s+/g, ' ').trim();
+    if (!visibleText) return undefined;
+
+    return ERROR_PAGE_INDICATORS.find(indicator => {
+        if (!indicator) return false;
+        if (indicator === '404') {
+            return /\b404\b/i.test(visibleText) && /(not\s*found|page\s*not\s*found|error|에러|찾을 수|존재하지)/i.test(visibleText);
+        }
+        return visibleText.includes(indicator);
+    });
+}
 
 export interface ResolvedUrl {
     originalUrl: string;
@@ -85,9 +115,7 @@ export async function resolveUrl(url: string): Promise<ResolvedUrl> {
 
             // 응답 본문에서 에러 페이지 감지
             const bodyText = await response.text();
-            const errorIndicator = ERROR_PAGE_INDICATORS.find(indicator =>
-                bodyText.includes(indicator)
-            );
+            const errorIndicator = detectErrorIndicatorFromVisibleText(htmlToVisibleText(bodyText));
 
             if (errorIndicator) {
                 isErrorPage = true;
@@ -175,13 +203,12 @@ export function extractProductInfo(url: string): { productId?: string; storeName
  * 페이지 본문에서 에러 페이지인지 확인
  */
 export function isErrorPageContent(htmlContent: string): { isError: boolean; reason?: string } {
-    for (const indicator of ERROR_PAGE_INDICATORS) {
-        if (htmlContent.includes(indicator)) {
-            return {
-                isError: true,
-                reason: `에러 페이지 감지: "${indicator}"`
-            };
-        }
+    const indicator = detectErrorIndicatorFromVisibleText(htmlToVisibleText(htmlContent));
+    if (indicator) {
+        return {
+            isError: true,
+            reason: `에러 페이지 감지: "${indicator}"`
+        };
     }
     return { isError: false };
 }

@@ -61,6 +61,26 @@ export interface CrawlResult {
     title?: string;
     content?: string;
     price?: string;
+    description?: string;
+    productInfo?: {
+        name?: string;
+        price?: string;
+        description?: string;
+        brand?: string;
+        availability?: string;
+        canonicalUrl?: string;
+    };
+    pageQuality?: ProductPageQuality;
+    resolvedUrl?: string;
+}
+
+export interface ProductPageQuality {
+    blocked: boolean;
+    requiresLogin: boolean;
+    isSoldOut: boolean;
+    isErrorPage: boolean;
+    signals: string[];
+    warning?: string;
 }
 
 // ════════════════════════════════════════════════════════════════════
@@ -366,6 +386,105 @@ async function extractTextData(page: Page): Promise<{ title: string; content: st
     }, { txtSelectors: TEXT_SELECTORS });
 }
 
+async function detectProductPageQuality(page: Page): Promise<ProductPageQuality> {
+    return page.evaluate(() => {
+        const text = (document.body?.innerText || '').replace(/\s+/g, ' ');
+        const signalMap: Array<[string, RegExp]> = [
+            ['captcha_or_security', /보안|자동입력|captcha|비정상적인 접근|서비스 접속이 불가/i],
+            ['login_required', /로그인(?:이|을)? 필요|로그인 후 이용|회원 전용/i],
+            ['adult_or_restricted', /성인 인증|청소년 유해|연령 확인/i],
+            ['sold_out', /품절|판매 종료|구매할 수 없는 상품|일시 품절/i],
+            ['not_found', /페이지를 찾을 수 없습니다|존재하지 않는 상품|404|not found/i],
+        ];
+        const signals = signalMap
+            .filter(([, pattern]) => pattern.test(text))
+            .map(([name]) => name);
+        const blocked = signals.some(name => ['captcha_or_security', 'adult_or_restricted'].includes(name));
+        const requiresLogin = signals.includes('login_required');
+        const isSoldOut = signals.includes('sold_out');
+        const isErrorPage = signals.includes('not_found') || blocked;
+        return {
+            blocked,
+            requiresLogin,
+            isSoldOut,
+            isErrorPage,
+            signals,
+            warning: signals.length ? `상품 페이지 상태 확인 필요: ${signals.join(', ')}` : undefined,
+        };
+    });
+}
+
+async function extractProductMetadata(page: Page): Promise<{
+    title: string;
+    price: string;
+    description?: string;
+    brand?: string;
+    availability?: string;
+    canonicalUrl?: string;
+    images: string[];
+}> {
+    return page.evaluate(() => {
+        const clean = (value?: string | null) => (value || '').replace(/\s+/g, ' ').trim();
+        const meta = (selector: string) => clean(document.querySelector(selector)?.getAttribute('content'));
+        const productNodes: any[] = [];
+
+        document.querySelectorAll('script[type="application/ld+json"]').forEach(script => {
+            try {
+                const parsed = JSON.parse(script.textContent || '');
+                const nodes = Array.isArray(parsed) ? parsed : [parsed, ...(parsed?.['@graph'] || [])];
+                nodes.forEach(node => {
+                    const type = Array.isArray(node?.['@type']) ? node['@type'].join(' ') : node?.['@type'];
+                    if (String(type || '').toLowerCase().includes('product')) productNodes.push(node);
+                });
+            } catch {
+                // Ignore malformed structured data.
+            }
+        });
+
+        const product = productNodes[0] || {};
+        const offers = Array.isArray(product.offers) ? product.offers[0] : product.offers || {};
+        const title = clean(
+            meta('meta[property="og:title"]') ||
+            product.name ||
+            document.querySelector('h1')?.textContent ||
+            document.querySelector('[class*="ProductName"]')?.textContent ||
+            document.title
+        );
+        const priceEl = document.querySelector('[class*="price"], .price, ._1LY7DqCnwR, .total_price');
+        const price = clean(
+            meta('meta[property="product:price:amount"]') ||
+            meta('meta[property="og:price:amount"]') ||
+            String(offers.price || '') ||
+            priceEl?.textContent?.replace(/[^0-9,]/g, '')
+        );
+        const description = clean(
+            meta('meta[property="og:description"]') ||
+            meta('meta[name="description"]') ||
+            product.description
+        );
+        const brandValue = typeof product.brand === 'string' ? product.brand : product.brand?.name;
+        const rawImages = [
+            ...(Array.isArray(product.image) ? product.image : product.image ? [product.image] : []),
+            meta('meta[property="og:image"]'),
+        ];
+        const images = rawImages
+            .map((src: string) => {
+                try { return new URL(src, location.href).href; } catch { return ''; }
+            })
+            .filter(Boolean);
+
+        return {
+            title,
+            price,
+            description,
+            brand: clean(brandValue),
+            availability: clean(offers.availability),
+            canonicalUrl: clean((document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null)?.href || location.href),
+            images,
+        };
+    });
+}
+
 // ════════════════════════════════════════════════════════════════════
 // 메인 크롤링 함수
 // ════════════════════════════════════════════════════════════════════
@@ -652,9 +771,28 @@ export async function crawlShoppingSite(url: string): Promise<CrawlResult> {
 
         // ═══ 텍스트 추출 ═══
         const textData = await extractTextData(page);
+        const productMetadata = await extractProductMetadata(page).catch(() => ({
+            title: '',
+            price: '',
+            description: undefined,
+            brand: undefined,
+            availability: undefined,
+            canonicalUrl: undefined,
+            images: [] as string[],
+        }));
+        const pageQuality = await detectProductPageQuality(page).catch(() => ({
+            blocked: false,
+            requiresLogin: false,
+            isSoldOut: false,
+            isErrorPage: false,
+            signals: [] as string[],
+        }));
 
         // ═══ 후처리 ═══
-        const finalImages = deduplicateImages(allImages);
+        const finalImages = deduplicateImages([
+            ...(productMetadata.images || []),
+            ...allImages,
+        ]);
 
         const elapsed = Date.now() - crawlStart;
         console.log(`[Shopping Crawler] ✅ 완료 (${(elapsed / 1000).toFixed(1)}초): 이미지 ${finalImages.length}개, 텍스트 ${textData.content?.length || 0}자`);
@@ -662,9 +800,20 @@ export async function crawlShoppingSite(url: string): Promise<CrawlResult> {
         return {
             images: finalImages,
             categorizedImages: categorized,
-            title: textData.title,
+            title: productMetadata.title || textData.title,
             content: textData.content,
-            price: textData.price
+            price: productMetadata.price || textData.price,
+            description: productMetadata.description,
+            productInfo: {
+                name: productMetadata.title || textData.title,
+                price: productMetadata.price || textData.price,
+                description: productMetadata.description,
+                brand: productMetadata.brand,
+                availability: productMetadata.availability,
+                canonicalUrl: productMetadata.canonicalUrl,
+            },
+            pageQuality,
+            resolvedUrl: currentUrl,
         };
 
     } catch (error: any) {

@@ -20,7 +20,7 @@ interface PerplexityGenerateOptions {
     keywords?: string[];
     includeImages?: boolean;
     blogType?: 'review' | 'informative' | 'storytelling';
-    contentMode?: 'seo' | 'homefeed';
+    contentMode?: 'seo' | 'homefeed' | 'mate';
     categoryHint?: string;
 }
 

@@ -51,9 +51,28 @@ declare function updateRiskIndicators(content?: any): void;
 declare function safeLocalStorageSetItem(key: string, value: string): boolean | undefined;
 declare function _invalidatePostsCache(): void;
 
+let refreshInFlight = false;
+let refreshQueued = false;
+
 export function refreshGeneratedPostsList(): void {
-  // 동기 진입점 — 비동기 실제 작업은 _refreshGeneratedPostsListAsync 위임
-  _refreshGeneratedPostsListAsync().catch((e) => console.warn('[postListUI] refresh 실패:', e));
+  if (refreshInFlight) {
+    refreshQueued = true;
+    return;
+  }
+
+  const run = async (): Promise<void> => {
+    refreshInFlight = true;
+    try {
+      do {
+        refreshQueued = false;
+        await _refreshGeneratedPostsListAsync();
+      } while (refreshQueued);
+    } finally {
+      refreshInFlight = false;
+    }
+  };
+
+  run().catch((e) => console.warn('[postListUI] refresh failed:', e));
 }
 
 // ✅ [v2.10.108] 렌더 *전* batch 검증 — broken file:// img가 DOM에 들어가기 *전*에 차단.
@@ -75,12 +94,6 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
   // SPEC-IMAGE-MODEL-001 Phase 4 — blob existence batch check (replaces fs.existsSync path validation).
   // Legacy filePath-based posts: not touched here. They fall through Phase 3 fallback (which already
   // strips absolute paths from display fields) and Phase 6 migration (which converts them to blob-id).
-  try {
-    const validated = await validateBlobReferences(posts);
-    posts = validated.posts;
-  } catch (e) {
-    console.warn('[postListUI] blob batch validate failed (ignored):', e);
-  }
   const totalCount = posts.length;
 
   // ✅ 통계 정보 계산
@@ -155,9 +168,16 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
   }
 
   // ✅ 개수 및 통계 표시
+  try {
+    const validated = await validateBlobReferences(posts);
+    posts = validated.posts;
+  } catch (e) {
+    console.warn('[postListUI] blob batch validate failed (ignored):', e);
+  }
+
   if (countBadge) {
     const statsText = totalCount > 0
-      ? `${posts.length}/${totalCount} | 🖼️${totalImages} | 📄${avgChars.toLocaleString()}자 평균 | 📤${publishedCount}`
+      ? `${posts.length}/${totalCount} | 이미지 ${totalImages} | 평균 ${avgChars.toLocaleString()}자 | 발행 ${publishedCount}`
       : '0';
     countBadge.textContent = statsText;
     countBadge.style.fontSize = '0.7rem';
@@ -169,11 +189,12 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
     return;
   }
 
-  // ✅ 검색어 하이라이트 함수
+  const escapeRegExp = (value: string): string => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const highlightText = (text: string, term: string): string => {
-    if (!term) return text;
-    const regex = new RegExp(`(${term})`, 'gi');
-    return text.replace(regex, '<mark style="background: #fef08a; padding: 0.1rem 0.2rem; border-radius: 2px;">$1</mark>');
+    const safeText = escapeHtml(String(text ?? ''));
+    if (!term) return safeText;
+    const regex = new RegExp(`(${escapeRegExp(term)})`, 'gi');
+    return safeText.replace(regex, '<mark style="background: #fef08a; padding: 0.1rem 0.2rem; border-radius: 2px;">$1</mark>');
   };
 
   const renderGalleryItem = (post: any): string => {
@@ -184,7 +205,7 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
     const isBroken = rawThumbnail && typeof (window as any).isBrokenImage === 'function'
       ? (window as any).isBrokenImage(rawThumbnail) : false;
     const thumbnailImage = isBroken ? null : rawThumbnail;
-    const highlightedTitle = searchTerm ? highlightText(post.title || '(제목 없음)', searchTerm) : (post.title || '(제목 없음)');
+    const highlightedTitle = highlightText(post.title || '(제목 없음)', searchTerm);
 
     return `
         <div class="post-item-gallery" data-post-id="${post.id}" style="background: var(--bg-secondary); border-radius: 8px; border: 1px solid ${post.isFavorite ? '#fbbf24' : 'var(--border-light)'}; overflow: hidden; cursor: pointer; transition: all 0.2s; position: relative;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
@@ -246,8 +267,8 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
       ? (window as any).isBrokenImage(rawThumbnail) : false;
     const thumbnailImage = isBroken ? null : rawThumbnail;
 
-    const highlightedTitle = searchTerm ? highlightText(post.title || '(제목 없음)', searchTerm) : (post.title || '(제목 없음)');
-    const highlightedPreview = searchTerm ? highlightText(contentPreview, searchTerm) : contentPreview;
+    const highlightedTitle = highlightText(post.title || '(제목 없음)', searchTerm);
+    const highlightedPreview = highlightText(contentPreview, searchTerm);
 
     return `
       <div class="post-item" data-post-id="${post.id}" style="padding: 1rem; margin-bottom: 0.75rem; background: var(--bg-secondary); border-radius: 8px; border: 1px solid ${post.isFavorite ? '#fbbf24' : 'var(--border-light)'}; transition: all 0.2s; cursor: pointer; position: relative;" onmouseover="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 2px 8px rgba(59, 130, 246, 0.2)'" onmouseout="this.style.borderColor='${post.isFavorite ? '#fbbf24' : 'var(--border-light)'}'; this.style.boxShadow='none'">
@@ -335,7 +356,15 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
   const renderCategoryGroupHtml = (g: { key: string; label: string; items: any[]; collapsed: boolean }) => {
     const icon = g.collapsed ? '▶' : '▼';
     const bodyStyle = g.collapsed ? 'display:none;' : 'display:block;';
-    const bodyHtml = isGalleryView
+    const collapsedBodyHtml = `
+      <div class="posts-category-body" style="${bodyStyle}">
+        <div style="padding: 0.75rem 1rem; color: var(--text-muted); font-size: 0.85rem;">
+          접힌 글 ${g.items.length}개
+        </div>
+      </div>`;
+    const bodyHtml = g.collapsed
+      ? collapsedBodyHtml
+      : isGalleryView
       ? `<div class="posts-category-body" style="${bodyStyle}">
            <div class="posts-category-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
              ${g.items.map(renderGalleryItem).join('')}
@@ -386,7 +415,9 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
       const acctIcon = acct.collapsed ? '▶' : '▼';
       const acctBodyStyle = acct.collapsed ? 'display:none;' : 'display:block;';
       const catGroups = buildCategoryGroups(acct.posts);
-      const catHtml = catGroups.map(renderCategoryGroupHtml).join('');
+      const catHtml = acct.collapsed
+        ? `<div style="padding: 0.75rem 1rem; color: var(--text-muted); font-size: 0.85rem;">접힌 계정 글 ${acct.posts.length}개</div>`
+        : catGroups.map(renderCategoryGroupHtml).join('');
       return `
         <div class="posts-account-group" data-account-key="${escapeHtml(acct.key)}" style="margin-bottom: 1.25rem;">
           <div class="posts-account-header" data-account-key="${escapeHtml(acct.key)}" style="display:flex; align-items:center; justify-content:space-between; gap: 0.75rem; padding: 0.85rem 1rem; border-radius: 10px; background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08)); border: 1.5px solid rgba(59,130,246,0.25); cursor: pointer; user-select: none; margin-bottom: 0.5rem;">
@@ -415,9 +446,13 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
         const icon = groupEl.querySelector('.posts-account-toggle-icon') as HTMLElement | null;
         if (!body) return;
         const willCollapse = body.style.display !== 'none';
-        body.style.display = willCollapse ? 'none' : 'block';
-        if (icon) icon.textContent = willCollapse ? '▶' : '▼';
         setAccountCollapsed(acctKey, willCollapse);
+        if (willCollapse) {
+          body.style.display = 'none';
+          if (icon) icon.textContent = '▶';
+        } else {
+          refreshGeneratedPostsList();
+        }
       });
     });
   }
@@ -433,9 +468,13 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
       const icon = groupEl.querySelector('.posts-category-toggle-icon') as HTMLElement | null;
       if (!body) return;
       const willCollapse = body.style.display !== 'none';
-      body.style.display = willCollapse ? 'none' : 'block';
-      if (icon) icon.textContent = willCollapse ? '▶' : '▼';
       setGeneratedPostCategoryCollapsed(key, willCollapse);
+      if (willCollapse) {
+        body.style.display = 'none';
+        if (icon) icon.textContent = '▶';
+      } else {
+        refreshGeneratedPostsList();
+      }
     });
   });
 

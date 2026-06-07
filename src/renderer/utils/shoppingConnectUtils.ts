@@ -1,3 +1,105 @@
+export type ShoppingConnectLinkKind =
+    | 'shopping-connect'
+    | 'naver-short'
+    | 'coupang-partners'
+    | 'marketplace-affiliate'
+    | 'direct-smartstore'
+    | 'direct-brandstore'
+    | 'unknown';
+
+export interface ShoppingConnectLinkClassification {
+    kind: ShoppingConnectLinkKind;
+    supported: boolean;
+    needsResolve: boolean;
+    imageCollectionSupported?: boolean;
+    warning?: string;
+}
+
+const SHOPPING_CONNECT_URL_PATTERNS = [
+    /brandconnect\.naver\.com/i,
+    /cr\.shopping\.naver\.com/i,
+    /shopping\.naver\.com\/external-bridge/i,
+    /shopping\.naver\.com\/affiliate/i,
+];
+
+const NAVER_SHORT_URL_PATTERNS = [
+    /naver\.me\//i,
+    /me2\.do\//i,
+];
+
+const COUPANG_PARTNERS_PATTERNS = [
+    /link\.coupang\.com/i,
+    /coupa\.ng/i,
+];
+
+export function classifyShoppingConnectLink(url: string): ShoppingConnectLinkClassification {
+    if (!url || typeof url !== 'string') {
+        return { kind: 'unknown', supported: false, needsResolve: false };
+    }
+
+    const trimmed = url.trim();
+    if (!trimmed) {
+        return { kind: 'unknown', supported: false, needsResolve: false };
+    }
+
+    if (NAVER_SHORT_URL_PATTERNS.some(p => p.test(trimmed))) {
+        return { kind: 'naver-short', supported: true, needsResolve: true };
+    }
+
+    if (SHOPPING_CONNECT_URL_PATTERNS.some(p => p.test(trimmed))) {
+        return { kind: 'shopping-connect', supported: true, needsResolve: /brandconnect\.naver\.com/i.test(trimmed) };
+    }
+
+    if (COUPANG_PARTNERS_PATTERNS.some(p => p.test(trimmed))) {
+        return {
+            kind: 'coupang-partners',
+            supported: true,
+            needsResolve: true,
+            imageCollectionSupported: false,
+            warning: '쿠팡 파트너스 링크입니다. 제휴 글 작성은 가능하지만 쿠팡 상품 페이지가 Access Denied로 막히는 경우가 많아 제품 이미지 자동수집은 파트너스 API 승인 키가 있을 때만 안정적입니다.',
+        };
+    }
+
+    if (/smartstore\.naver\.com/i.test(trimmed)) {
+        return {
+            kind: 'direct-smartstore',
+            supported: false,
+            needsResolve: false,
+            warning: '스마트스토어 직접 상품 URL입니다. 쇼핑커넥트 수익 추적에는 브랜드커넥트/쇼핑커넥트에서 발급한 링크를 넣어야 합니다.',
+        };
+    }
+
+    if (/brand\.naver\.com/i.test(trimmed)) {
+        return {
+            kind: 'direct-brandstore',
+            supported: false,
+            needsResolve: false,
+            warning: '브랜드스토어 직접 상품 URL입니다. 이미지 수집은 가능하지만 제휴 수익 추적 링크로는 쇼핑커넥트 발급 링크가 필요합니다.',
+        };
+    }
+
+    if (/coupang\.com\/vp\//i.test(trimmed)) {
+        return {
+            kind: 'marketplace-affiliate',
+            supported: true,
+            needsResolve: false,
+            imageCollectionSupported: false,
+            warning: '쿠팡 상품 링크입니다. 제휴 글 작성은 가능하지만 공개 상품 페이지 이미지 수집은 Access Denied로 제한될 수 있어 파트너스 API 승인 키가 있을 때만 안정적입니다.',
+        };
+    }
+
+    if (/11st\.co\.kr/i.test(trimmed)) {
+        return {
+            kind: 'marketplace-affiliate',
+            supported: true,
+            needsResolve: false,
+            warning: '마켓 상품 링크입니다. 수익 추적용 링크인지 발급 출처를 확인하세요.',
+        };
+    }
+
+    return { kind: 'unknown', supported: false, needsResolve: false };
+}
+
 /**
  * ✅ [2026-01-25 모듈화] 쇼핑커넥트 유틸리티
  * - renderer.ts에서 분리됨
@@ -38,17 +140,7 @@ export function isShoppingConnectModeActive(): boolean {
  * 입력된 URL이 쿠팡/11번가 등의 제휴 링크인지 판별
  */
 export function isAffiliateUrl(url: string): boolean {
-    if (!url || typeof url !== 'string') return false;
-    const trimmed = url.trim();
-    if (!trimmed) return false;
-    const AFFILIATE_PATTERNS = [
-        /link\.coupang\.com/i,
-        /coupa\.ng/i,
-        /coupang\.com\/vp\//i,
-        /11st\.co\.kr/i,
-        /cr\.shopping\.naver\.com/i,
-    ];
-    return AFFILIATE_PATTERNS.some(p => p.test(trimmed));
+    return classifyShoppingConnectLink(url).supported;
 }
 
 /**
@@ -61,6 +153,8 @@ export function resolveAffiliateLink(
 ): string | undefined {
     // 1. 명시적 입력이 있으면 그대로 사용
     if (explicitAffiliateLink && explicitAffiliateLink.trim()) {
+        const classified = classifyShoppingConnectLink(explicitAffiliateLink);
+        if (classified.warning) console.warn(`[ShoppingConnect] ${classified.warning}`);
         return explicitAffiliateLink.trim();
     }
     // 2. 소스 URL이 제휴 URL이면 자동 적용
@@ -173,6 +267,7 @@ export function setShoppingConnectAIEngine(engine: ShoppingConnectAIEngine, sync
 // 전역 노출 (기존 코드와의 호환성)
 (window as any).isShoppingConnectModeActive = isShoppingConnectModeActive;
 (window as any).isAffiliateUrl = isAffiliateUrl;
+(window as any).classifyShoppingConnectLink = classifyShoppingConnectLink;
 (window as any).resolveAffiliateLink = resolveAffiliateLink;
 (window as any).isShoppingConnectForCurrentPost = isShoppingConnectForCurrentPost;
 (window as any).getShoppingConnectImagePool = getShoppingConnectImagePool;

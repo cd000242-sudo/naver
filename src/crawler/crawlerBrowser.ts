@@ -350,8 +350,25 @@ export async function createPage(): Promise<Page> {
         await new Promise(r => setTimeout(r, wait));
     }
 
-    const context = await getSharedContext();
-    const page = await context.newPage();
+    let context = await getSharedContext();
+    let page: Page;
+    try {
+        page = await context.newPage();
+    } catch (error) {
+        const message = (error as Error).message || '';
+        if (!/closed|Target page|context|browser/i.test(message)) {
+            throw error;
+        }
+
+        console.warn('[CrawlerBrowser] 공유 컨텍스트가 닫혀 있어 새 컨텍스트로 재생성합니다:', message);
+        if (_context === context) {
+            _context = null;
+            _isAdsPower = false;
+            _adsPowerBrowser = null;
+        }
+        context = await getSharedContext();
+        page = await context.newPage();
+    }
 
     // ✅ [2026-03-21] 새 페이지 생성 후 남아있는 about:blank 탭 정리
     // launchPersistentContext 시 pages.length <= 1이어서 유지했던 about:blank를
@@ -560,6 +577,11 @@ export async function navigateWithRetry(page: Page, url: string, maxRetries = 3)
         // 캡차가 아닌 경우 일반 에러 체크
         const isError = await checkForError(page);
         if (!isError) return true; // 정상!
+    }
+
+    if (maxRetries <= 0) {
+        console.log('[CrawlerBrowser] ⚠️ 자동 리트라이 비활성화 → 현재 페이지 상태로 실패 반환');
+        return false;
     }
 
     // ═══ ③ 리트라이 루프 ═══

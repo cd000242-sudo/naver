@@ -63,7 +63,8 @@ describe('Business 모드 — businessInfo 주입', () => {
     const prompt = buildModeBasedPrompt(source, 'business', undefined, 1800);
     expect(prompt).toContain('한 글자도 변경하지 말고 그대로 사용');
     expect(prompt).toContain('절대 가짜 전화번호');
-    expect(prompt).toContain('업체명을 본문에 8~12회 자연 반복');
+    expect(prompt).toContain('업체명은 제목 1회 + 도입/본문/문의 안내에 총 3~6회');
+    expect(prompt).toContain('입력/원본에 없는 시공 건수');
   });
 
   it('지역구: 첫 지역명을 제목 맨 앞에 배치하라는 지시 포함', () => {
@@ -78,7 +79,7 @@ describe('Business 모드 — businessInfo 주입', () => {
     const prompt = buildModeBasedPrompt(source, 'business', undefined, 1800);
     expect(prompt).toContain('전국 (지역 제한 없음)');
     expect(prompt).toContain('특정 지역명 강제 삽입 금지');
-    expect(prompt).toContain('전국 어디든');
+    expect(prompt).toContain('전국 상담 가능');
     expect(prompt).toContain('한국인테리어');
     expect(prompt).toContain('1588-1234');
   });
@@ -103,14 +104,14 @@ describe('Business 모드 — businessInfo 주입', () => {
 
 describe('Business 모드 — 다양성 엔진 (Angle)', () => {
   it('buildBusinessAngleDirective는 8가지 각도 중 하나 반환', () => {
-    const expected = ['가격 투명성', '시공 사례', 'A/S 보장', '빠른 견적', '무료 상담', '전문성', '친절', '최신 트렌드'];
+    const expected = ['가격 투명성', '사례 근거', 'A/S 안내', '상담 응답', '상담 장벽', '전문성 근거', '문의 전 체크', '트렌드 해석'];
     const results = new Set<string>();
     for (let i = 0; i < 100; i++) {
       const directive = buildBusinessAngleDirective();
       const matched = expected.some(e => directive.includes(e));
       expect(matched).toBe(true);
-      // 강조 포인트 라인 추출
-      const m = directive.match(/■ 강조 포인트: ([^\n]+)/);
+      // 강조 사인 라인 추출
+      const m = directive.match(/■ 강조 사인: ([^\n]+)/);
       if (m) results.add(m[1]);
     }
     // 100번 시도 시 최소 4가지 이상 다른 각도가 나와야 정상 (랜덤성 확인)
@@ -119,10 +120,11 @@ describe('Business 모드 — 다양성 엔진 (Angle)', () => {
 
   it('directive에 후킹 스타일과 PASTOR 변형 모두 포함', () => {
     const directive = buildBusinessAngleDirective();
-    expect(directive).toContain('강조 포인트');
+    expect(directive).toContain('강조 사인');
     expect(directive).toContain('본문 초점');
     expect(directive).toContain('도입부 후킹 스타일');
-    expect(directive).toContain('PASTOR 변형');
+    expect(directive).toContain('PASTOR 변주');
+    expect(directive).toContain('허위 수치');
   });
 
   it('Business 모드 프롬프트에 angle directive 포함', () => {
@@ -276,6 +278,31 @@ describe('validateBusinessContent — 가짜 번호 + 광고법 검증', () => {
     const source = makeSource({ businessInfo: REGIONAL_INFO });
     const result = validateBusinessContent(content, source);
     expect(result.hasCritical).toBe(false);
+  });
+
+  it('업체명 과다 반복은 스팸 위험 warning', () => {
+    const content = makeContent({
+      bodyPlain: `${Array(10).fill('ABC인테리어').join(' ')} 부산 문의 051-123-4567`,
+    });
+    const source = makeSource({ businessInfo: REGIONAL_INFO });
+    const result = validateBusinessContent(content, source);
+    expect(result.hasCritical).toBe(false);
+    expect(result.warnings.some(w => w.includes('과다 반복'))).toBe(true);
+  });
+
+  it('입력 근거 없는 수치 표현은 warning', () => {
+    const content = makeContent({
+      bodyPlain: 'ABC인테리어는 부산 시공 999건을 처리했습니다. 전화 051-123-4567로 문의하세요. ABC인테리어가 안내합니다.',
+    });
+    const source = makeSource({
+      businessInfo: {
+        ...REGIONAL_INFO,
+        extra: '시공 15년차, A/S 1년 보장',
+      },
+    });
+    const result = validateBusinessContent(content, source);
+    expect(result.hasCritical).toBe(false);
+    expect(result.warnings.some(w => w.includes('입력 근거 없는 수치'))).toBe(true);
   });
 
   it('업체명 누락 → critical violation', () => {

@@ -67,4 +67,22 @@ describe('image fallback policy contract', () => {
     expect(main).toMatch(/imageFallbackPolicy:\s*options\?\.imageFallbackPolicy \|\| 'engine-only'/);
     expect(imageDisplayGrid).toMatch(/imageFallbackPolicy:\s*opts\?\.imageFallbackPolicy \|\| localStorage\.getItem\('imageFallbackPolicy'\) \|\| 'engine-only'/);
   });
+
+  it('empty successful image responses are converted into failures before publishing', () => {
+    const costAndAutoGen = read('renderer/modules/costAndAutoGen.ts');
+    const main = read('main.ts');
+    const multiAccount = read('renderer/modules/multiAccountManager.ts');
+    const publishingHandlers = read('renderer/modules/publishingHandlers.ts');
+
+    expect(costAndAutoGen).toMatch(/function\s+normalizeEmptyImageSuccess/);
+    expect(costAndAutoGen).toMatch(/imageCount === 0/);
+    expect(costAndAutoGen).toMatch(/success:\s*false/);
+    expect(main).toMatch(/const shouldRequireImages/);
+    expect(main).toMatch(/generatedImageCount === 0/);
+    expect(main).toMatch(/success:\s*false,\s*images:\s*\[\]/);
+    expect(multiAccount).toMatch(/imageFallbackPolicy:\s*'engine-only'/);
+    expect(multiAccount).toMatch(/image generation returned no images/);
+    expect(publishingHandlers).toMatch(/발행을 중단하고 다음 실행 때 이미지 단계부터 다시 시도/);
+    expect(publishingHandlers).not.toMatch(/이미지 없이 발행 계속/);
+  });
 });

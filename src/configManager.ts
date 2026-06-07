@@ -473,8 +473,8 @@ export async function loadConfig(): Promise<AppConfig> {
       naverAdSecretKey: parsed.naverAdSecretKey || undefined,
       naverAdCustomerId: parsed.naverAdCustomerId || undefined,
       // ✅ [2026-02-22] 새 이미지 프로바이더 API 키
-      openaiImageApiKey: parsed.openaiImageApiKey || undefined,
-      leonardoaiApiKey: parsed.leonardoaiApiKey || undefined,
+      openaiImageApiKey: parsed.openaiImageApiKey || parsed['openai-image-api-key'] || parsed.openaiApiKey || parsed['openai-api-key'] || undefined,
+      leonardoaiApiKey: parsed.leonardoaiApiKey || parsed.leonardoApiKey || parsed['leonardoai-api-key'] || parsed['leonardo-api-key'] || undefined,
 
       leonardoaiModel: parsed.leonardoaiModel || undefined,
       // ✅ [2026-01-25] Perplexity API 키 추가
@@ -505,7 +505,7 @@ export async function loadConfig(): Promise<AppConfig> {
     });
 
     // 하이픈 형식 키가 있었고 카멜케이스로 변환했다면, 설정 파일을 업데이트 (한 번만)
-    const hasHyphenKeys = parsed['gemini-api-key'] || parsed['openai-api-key'] || parsed['claude-api-key'] || parsed['pexels-api-key'];
+    const hasHyphenKeys = parsed['gemini-api-key'] || parsed['openai-api-key'] || parsed['openai-image-api-key'] || parsed['claude-api-key'] || parsed['pexels-api-key'] || parsed['leonardoai-api-key'] || parsed['leonardo-api-key'];
     if (hasHyphenKeys && !isPackaged) {
       // 개발 모드에서만 자동 마이그레이션 (한 번만)
       try {
@@ -513,10 +513,13 @@ export async function loadConfig(): Promise<AppConfig> {
         const migratedConfig: any = { ...normalizedConfig };
         delete migratedConfig['gemini-api-key'];
         delete migratedConfig['openai-api-key'];
+        delete migratedConfig['openai-image-api-key'];
         delete migratedConfig['claude-api-key'];
         delete migratedConfig['pexels-api-key'];
         delete migratedConfig['unsplash-api-key'];
         delete migratedConfig['pixabay-api-key'];
+        delete migratedConfig['leonardoai-api-key'];
+        delete migratedConfig['leonardo-api-key'];
         delete migratedConfig['naver-datalab-client-id'];
         delete migratedConfig['naver-datalab-client-secret'];
 
@@ -535,6 +538,7 @@ export async function loadConfig(): Promise<AppConfig> {
       // 카멜케이스와 하이픈 형식 모두 제공
       'gemini-api-key': normalizedConfig.geminiApiKey,
       'openai-api-key': normalizedConfig.openaiApiKey,
+      'openai-image-api-key': normalizedConfig.openaiImageApiKey,
       'claude-api-key': normalizedConfig.claudeApiKey,
       'pexels-api-key': normalizedConfig.pexelsApiKey,
       // (deprecated keys removed: stability, prodia, falai)
@@ -550,6 +554,7 @@ export async function loadConfig(): Promise<AppConfig> {
       'naver-ad-customer-id': normalizedConfig.naverAdCustomerId,
       // ✅ [2026-01-26] DeepInfra API 키 호환성
       'deepinfra-api-key': (normalizedConfig as any).deepinfraApiKey,
+      'leonardoai-api-key': (normalizedConfig as any).leonardoaiApiKey,
     };
 
     cachedConfig = compatibleConfig;
@@ -1007,8 +1012,9 @@ export function applyConfigToEnv(config: AppConfig): void {
   }
 
   // ✅ [2026-02-22] OpenAI Image API 키 설정
-  if ((config as any).openaiImageApiKey && (config as any).openaiImageApiKey.trim()) {
-    process.env.OPENAI_IMAGE_API_KEY = (config as any).openaiImageApiKey.trim();
+  const openaiImageKey = (config as any).openaiImageApiKey?.trim() || (config as any).openaiApiKey?.trim();
+  if (openaiImageKey) {
+    process.env.OPENAI_IMAGE_API_KEY = openaiImageKey;
     console.log('[Config] OPENAI_IMAGE_API_KEY 설정됨: ✅');
   }
 

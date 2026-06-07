@@ -10,6 +10,14 @@ describe('classifyPublishFailure', () => {
     });
   });
 
+  it('keeps detached Naver login frames retryable instead of requiring user login action', () => {
+    expect(classifyPublishFailure('Execution context is not available in detached frame or worker https://nid.naver.com/nidlogin.login')).toEqual({
+      code: 'BROWSER_CLOSED',
+      retryable: true,
+      userActionRequired: false,
+    });
+  });
+
   it('classifies Naver challenge/login cases as user-action required', () => {
     expect(classifyPublishFailure('Naver login captcha security verification is required')).toMatchObject({
       code: 'LOGIN_CHALLENGE',

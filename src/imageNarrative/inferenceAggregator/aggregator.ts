@@ -13,6 +13,7 @@
 import { extractExifFromBuffer } from './exifEnricher.js';
 import { applyOrdering } from './ordering.js';
 import { guardInferenceResults } from './hallucinationGuard.js';
+import { buildNarrativeSections } from './sectionBuilder.js';
 import { inferImage } from '../visionInference/visionRouter.js';
 import type {
   EnrichedInferenceResponse,
@@ -234,7 +235,7 @@ export async function aggregateInferences(
     mode === 'auto' ? detectDominantMode(guardResult.results) : mode;
 
   // Step 6: Build sections
-  const sections = buildSections(guardResult.results);
+  const sections = buildNarrativeSections(guardResult.results);
 
   return {
     mode: resolvedMode,

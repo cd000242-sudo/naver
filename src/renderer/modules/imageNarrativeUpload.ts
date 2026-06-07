@@ -149,7 +149,6 @@ export async function addFiles(files: File[]): Promise<void> {
     return;
   }
 
-  const combined = [..._uploadImages, ...imageFiles.map(() => null)]; // placeholder count
   const available = UPLOAD_MAX - _uploadImages.length;
 
   if (available <= 0) {
@@ -282,16 +281,20 @@ function _renderThumbnails(): void {
 
   grid.innerHTML = _uploadImages
     .map(
-      (img, idx) => `
+      (img, idx) => {
+        const safePreviewUrl = escapeHtmlAttr(img.previewUrl);
+        const safeFileName = escapeHtmlAttr(img.fileName);
+        return `
       <div class="image-narrative-thumbnail" data-idx="${idx}">
-        <img src="${img.previewUrl}" alt="${img.fileName}" loading="lazy" />
+        <img src="${safePreviewUrl}" alt="${safeFileName}" loading="lazy" />
         <button
           class="image-narrative-thumbnail__remove"
           aria-label="이미지 제거"
           data-remove-idx="${idx}"
         >×</button>
         ${img.wasConverted ? '<span class="image-narrative-thumbnail__badge">HEIC→JPG</span>' : ''}
-      </div>`
+      </div>`;
+      }
     )
     .join('');
 
@@ -301,6 +304,19 @@ function _renderThumbnails(): void {
       const idx = Number(btn.dataset.removeIdx);
       _removeImage(idx);
     });
+  });
+}
+
+function escapeHtmlAttr(value: string): string {
+  return value.replace(/[&<>"']/g, (ch) => {
+    switch (ch) {
+      case '&': return '&amp;';
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '"': return '&quot;';
+      case "'": return '&#039;';
+      default: return ch;
+    }
   });
 }
 

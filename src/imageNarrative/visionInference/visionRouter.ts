@@ -74,6 +74,7 @@ function resolveApiKey(provider: VisionProvider): string {
  */
 const FALLBACK_CHAIN: Partial<Record<VisionProvider, VisionProvider>> = {
   gemini: 'openai',
+  openai: 'gemini',
   // openai has no automatic fallback — callers must handle the error
   // claude / deepinfra fall back to openai so the pipeline isn't stranded
   claude: 'openai',

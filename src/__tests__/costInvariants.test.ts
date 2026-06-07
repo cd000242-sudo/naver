@@ -34,9 +34,9 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     });
 
     it('OpenAI max_completion_tokens는 8192 이하', () => {
-      const match = content.match(/max_completion_tokens:\s*(\d+),/);
-      expect(match).toBeTruthy();
-      expect(parseInt(match![1], 10)).toBeLessThanOrEqual(8192);
+      expect(content).toMatch(/getOpenAiMaxCompletionTokens/);
+      expect(content).toMatch(/max_completion_tokens:\s*maxCompletionTokens/);
+      expect(content).not.toMatch(/max_completion_tokens:\s*8192,/);
     });
 
     it('Claude max_tokens는 8192 이하', () => {
@@ -123,6 +123,11 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     it('GEMINI_CACHE_DISABLED ENV 비상 탈출구 유지', () => {
       expect(content).toMatch(/GEMINI_CACHE_DISABLED/);
     });
+
+    it('Gemini cache is opt-in to avoid a hidden extra API request before content generation', () => {
+      expect(content).toMatch(/GEMINI_CACHE_ENABLED/);
+      expect(content).toMatch(/cacheOptInEnv\s*\n?\s*&&\s*!cacheDisabledEnv/);
+    });
   });
 
   describe('Gemini 플랜 선택 — 자동 모드 고정', () => {
@@ -137,17 +142,23 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
   describe('OpenAI 재시도 — 429 누진 backoff가 끝까지 발동', () => {
     const content = read('contentGenerator.ts');
 
-    // ✅ [2026-06-02] 사용자 요청 — 30→60→90→120 누진 backoff.
-    //   maxRetriesPerModel은 backoff 시퀀스 길이(4) + 1 = 5 여야 마지막(120s)까지 발동.
-    //   (이전 가정 "비용상 2회"는 60s 1회만 발동시키는 버그였으므로 폐기)
-    it('OpenAI callOpenAI의 maxRetriesPerModel은 backoff 시퀀스 길이 + 1', () => {
-      expect(content).toMatch(
-        /const\s+maxRetriesPerModel\s*=\s*QUOTA_BACKOFF_SEQUENCE_MS\.length\s*\+\s*1;/,
-      );
+    // ✅ [2026-06-06] 사용자 요청 — RPM이 풀릴 때까지 같은 모델로 천천히 대기.
+    //   고정 5회 retry 후 실패하지 않고 patient wait budget 안에서 reset/retry-after를 존중한다.
+    it('OpenAI callOpenAI는 rate-limit patient wait budget을 사용', () => {
+      expect(content).toMatch(/const\s+openAiRateLimitPatienceMs\s*=\s*getOpenAiRateLimitPatienceMs\(\);/);
+      expect(content).toMatch(/getOpenAiRateLimitWaitMs\(error,\s*fallbackBackoffMs\)/);
     });
 
-    it('호출 간 최소 간격(getOpenAiMinIntervalMs)을 throttle에 전달', () => {
-      expect(content).toMatch(/openaiRpmThrottler\.throttle\(\s*getOpenAiMinIntervalMs\(\)\s*\)/);
+    it('호출 간 최소 간격(getOpenAiMinIntervalMs)에 모델명을 전달', () => {
+      expect(content).toMatch(/openaiRpmThrottler\.throttle\(\s*getOpenAiMinIntervalMs\(modelName,\s*maxCompletionTokens\),\s*signal\s*\)/);
+    });
+
+    it('OpenAI content generation gets a bounded same-engine repair budget without cross-engine fallback', () => {
+      expect(content).toMatch(/const\s+baseMaxAttempts\s*=\s*provider\s*===\s*'openai'\s*\?\s*openAiContentMaxAttempts\s*:\s*costPolicy\.maxAttempts/);
+      expect(content).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
+      expect(content).toMatch(/const\s+promptRepairMinAttempts\s*=\s*source\.customPrompt\?\.trim\(\)\s*\?\s*2\s*:\s*0/);
+      expect(content).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*Math\.max\(baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts\)/);
+      expect(content).toMatch(/SAME_ENGINE_RECOVERY/);
     });
   });
 

@@ -33,6 +33,64 @@ export { abortImageGeneration };
 export { resetAllImageState };
 
 const FALLBACK_CONFIRM_MARKER = 'FALLBACK_REQUIRES_CONFIRMATION';
+const HTTP_URL_RE = /^https?:\/\//i;
+
+type ReferenceImageLike = string | {
+  url?: string;
+  thumbnailUrl?: string;
+  filePath?: string;
+  savedToLocal?: string;
+  referenceImageUrl?: string;
+  referenceImagePath?: string;
+  src?: string;
+};
+type ReferenceImageObject = Exclude<ReferenceImageLike, string>;
+
+export function normalizeReferenceImageUrl(value: unknown): string {
+  if (!value) return '';
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    return HTTP_URL_RE.test(trimmed) ? trimmed : '';
+  }
+  if (typeof value !== 'object') return '';
+
+  const image = value as ReferenceImageObject;
+  const candidates = [
+    image.referenceImageUrl,
+    image.url,
+    image.filePath,
+    image.thumbnailUrl,
+    image.savedToLocal,
+    image.referenceImagePath,
+    image.src,
+  ];
+
+  for (const candidate of candidates) {
+    const normalized = normalizeReferenceImageUrl(candidate);
+    if (normalized) return normalized;
+  }
+  return '';
+}
+
+function collectReferenceImageUrls(...sources: unknown[]): string[] {
+  const urls: string[] = [];
+  const seen = new Set<string>();
+
+  const add = (value: unknown): void => {
+    if (Array.isArray(value)) {
+      for (const item of value) add(item);
+      return;
+    }
+    const url = normalizeReferenceImageUrl(value);
+    if (url && !seen.has(url)) {
+      seen.add(url);
+      urls.push(url);
+    }
+  };
+
+  for (const source of sources) add(source);
+  return urls;
+}
 
 function annotateEngineTrace(
   images: GeneratedImage[],
@@ -98,12 +156,25 @@ function preserveThumbnailFlags(
 /**
  * 엔진이 한글 텍스트를 네이티브로 지원하는지 확인
  */
+function shouldAllowTextForImageItem(item: any, options: GenerateImagesOptions): boolean {
+  if (item?.allowText !== true) return false;
+
+  const thumbnailOnlyContext =
+    options.thumbnailTextInclude === true ||
+    options.isFullAuto === true ||
+    (options as any).isContinuousMode === true ||
+    (options as any).isMultiAccount === true;
+
+  if (!thumbnailOnlyContext) return true;
+  return item?.isThumbnail === true;
+}
+
 function isKoreanTextSupportedEngine(engine: string): boolean {
   // ✅ [v1.4.80] 'flow' 추가 — Flow는 Nano Banana Pro 기반이라 한글 텍스트 네이티브 지원
   // ✅ [v2.10.335] 나노바나나2(3.1)/프로(3-pro)는 한글 네이티브 지원. 구버전 'nano-banana'(2.5)는
   //   한글 텍스트가 깨지므로 제외 → 오버레이 폴백 대상.
-  // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한은 한글 텍스트 multilingual OK
-  return engine === 'nano-banana-2' || engine === 'nano-banana-pro' || engine === 'flow' || engine === 'dropshot';
+  // dropshot can generate Korean, but thumbnail copy needs deterministic app-side line breaks.
+  return engine === 'nano-banana-2' || engine === 'nano-banana-pro' || engine === 'flow';
 }
 
 /**
@@ -192,7 +263,7 @@ async function applyKoreanTextOverlayIfNeeded(
  * 쇼핑커넥트에서 비-Gemini 엔진 또는 Gemini 실패 시 수집 이미지를 그대로 사용
  */
 async function convertCollectedImagesToResults(
-  collectedImages: string[] | undefined,
+  collectedImages: unknown[] | undefined,
   items: { heading: string }[],
   postTitle?: string,
   postId?: string
@@ -208,8 +279,8 @@ async function convertCollectedImagesToResults(
   const results: GeneratedImage[] = [];
 
   for (let i = 0; i < Math.min(items.length, images.length); i++) {
-    const imageUrl = images[i];
-    if (!imageUrl || typeof imageUrl !== 'string') continue;
+    const imageUrl = normalizeReferenceImageUrl(images[i]);
+    if (!imageUrl) continue;
 
     try {
       // 이미지 다운로드
@@ -249,6 +320,7 @@ async function convertCollectedImagesToResults(
 }
 
 export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
+  openaiApiKey?: string;
   geminiApiKey?: string; // ✅ Gemini 키
   deepinfraApiKey?: string; // ✅ DeepInfra 키
   openaiImageApiKey?: string; // ✅ OpenAI Image (DALL-E) 키
@@ -287,15 +359,20 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     'nano-banana-pro': '나노바나나 프로 (Gemini 3 Pro Image, ₩185/장)',
     'deepinfra': '딥인프라 FLUX-2',
     'openai-image': 'OpenAI 덕트테이프 (gpt-image-2)',
-    'dall-e-3': 'DALL-E 3 (OpenAI, 인증 불필요)',
+    'dall-e-3': 'GPT 이미지 시리즈 (OpenAI, 기존 DALL-E 설정 자동 전환)',
     'leonardoai': 'Leonardo AI',
-    'imagefx': 'ImageFX (Google 무료)',
+    'imagefx': 'ImageFX (Google Labs, 계정/IP 제한 가능)',
     'flow': 'Flow (Nano Banana 2, AI Pro 무료)', // ✅ [v1.5.4]
     'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)', // ✅ [v2.11.7]
     'naver': '네이버 이미지 검색',
     'local-folder': '내 폴더',
   };
   const displayName = providerDisplayNames[normalizedProvider] || normalizedProvider;
+  const shouldForceSequentialImages =
+    options.isFullAuto === true ||
+    options.isContinuousMode === true ||
+    options.isMultiAccount === true ||
+    options.forceSequential === true;
 
   // ✅ [2026-02-04] 선택된 엔진 명확히 표시 (한글 로그)
   console.log(`[이미지생성] 🎨 선택된 AI 이미지 생성 엔진: ${displayName}`);
@@ -303,9 +380,13 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   assertProviderFn(normalizedProvider as ImageProvider);
 
   // ✅ [2026-01-28] 크롤링 이미지가 있으면 각 item에 분배 (img2img 활성화)
-  const crawledImages = options.crawledImages || [];
+  const crawledImages = collectReferenceImageUrls(
+    options.crawledImages || [],
+    options.collectedImages || [],
+    options.referenceImagePath,
+  );
   if (crawledImages.length > 0) {
-    console.log(`[이미지생성] 🖼️ 크롤링 이미지 ${crawledImages.length}개 감지 → img2img 모드 활성화`);
+    console.log(`[이미지생성] 🖼️ 대표/수집 이미지 ${crawledImages.length}개 감지 → img2img reference 활성화`);
   }
 
   const items = options.items
@@ -313,12 +394,22 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       heading: item.heading,
       prompt: String(item.prompt || '').trim(),
       isThumbnail: item.isThumbnail || false, // ✅ isThumbnail 플래그 전달
-      allowText: (item as any).allowText || false, // ✅ 상세페이지/인포그래픽 텍스트 허용
+      allowText: shouldAllowTextForImageItem(item, options), // text is thumbnail-only in auto publish contexts
       englishPrompt: item.englishPrompt,
       category: item.category || options.category || '', // ✅ [2026-02-12] options.category 폴백 → DeepInfra 카테고리별 스타일 적용
       referenceImagePath: item.referenceImagePath || options.referenceImagePath, // ✅ 전역 참조 이미지 적용
       // ✅ [2026-01-28] 크롤링 이미지를 referenceImageUrl에 할당 (img2img 활성화)
-      referenceImageUrl: item.referenceImageUrl || crawledImages[idx] || crawledImages[0],
+      referenceImageUrl: normalizeReferenceImageUrl(item.referenceImageUrl)
+        || normalizeReferenceImageUrl(item.referenceImagePath)
+        || crawledImages[idx]
+        || crawledImages[0],
+      referenceImageList: collectReferenceImageUrls(
+        (item as any).referenceImageList,
+        item.referenceImageUrl,
+        item.referenceImagePath,
+        crawledImages[idx],
+        crawledImages[0],
+      ).slice(0, 4),
       originalIndex: (item as any).originalIndex, // ✅ [2026-01-24] 원래 인덱스 보존
       // ✅ [2026-02-08] 이미지 스타일/비율 전달 (모든 엔진에서 사용)
       imageStyle: (item as any).imageStyle || (options as any).imageStyle, // ✅ [2026-02-18 FIX] options.imageStyle 폴백 추가 (full-auto에서 per-item에 없음)
@@ -377,7 +468,9 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         apiKeys?.openaiImageApiKey,
         options.isShoppingConnect || false,
         onImageGenerated,
-        options.collectedImages
+        options.collectedImages,
+        undefined,
+        apiKeys?.openaiApiKey
       );
       console.log(`[이미지생성] ✅ 덕트테이프(gpt-image-2)로 ${openaiImages.length}개 이미지 생성 완료!`);
       return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(openaiImages, {
@@ -392,17 +485,17 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     }
   }
 
-  // ✅ [v2.10.216] DALL-E 3 — OpenAI가 2026-05-12 API 제거 (오늘 2026-05-15 기준 사용 불가)
+  // ✅ [v2.10.216] 레거시 dall-e-3 — OpenAI 이미지 시리즈로 자동 전환
   //   사용자 보고: "달리 3는 없어지지않았니??"
   //   조치: 자동으로 gpt-image-1 (openai-image)로 마이그레이션 — 사용자 선택 무효화 안 하고 새 모델로 우회
   if (normalizedProvider === 'dall-e-3') {
-    console.warn(`[이미지생성] ⚠️ DALL-E 3는 2026-05-12 OpenAI API 제거됨 → gpt-image-1 자동 마이그레이션`);
-    const reason = 'DALL-E 3 API가 제거되어 openai-image 계열로 대체해야 합니다.';
+    console.warn(`[이미지생성] ⚠️ 기존 DALL-E 설정 감지 → GPT 이미지 시리즈로 자동 전환`);
+    const reason = '기존 DALL-E 설정은 OpenAI GPT 이미지 시리즈로 자동 전환됩니다.';
     if (!shouldUseAutomaticFallback(fallbackPolicy)) {
       throw createFallbackPolicyError(requestedProvider, 'openai-image', fallbackPolicy, reason);
     }
     try {
-      console.log(`[이미지생성] 🎨 gpt-image-1 (DALL-E 3 후속)로 ${items.length}개 이미지 생성...`);
+      console.log(`[이미지생성] 🎨 GPT 이미지 시리즈로 ${items.length}개 이미지 생성...`);
       const migratedImages = await generateWithOpenAIImage(
         items,
         options.postTitle,
@@ -413,8 +506,10 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         onImageGenerated,
         options.collectedImages,
         // 'dall-e-3' 모델 강제 지정 제거 — 기본 gpt-image-1 사용
+        undefined,
+        apiKeys?.openaiApiKey
       );
-      console.log(`[이미지생성] ✅ gpt-image-1로 ${migratedImages.length}개 생성 완료 (DALL-E 3 자동 마이그레이션)`);
+      console.log(`[이미지생성] ✅ GPT 이미지 시리즈로 ${migratedImages.length}개 생성 완료 (레거시 설정 자동 전환)`);
       return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(migratedImages, {
         requestedProvider,
         actualProvider: 'openai-image',
@@ -424,7 +519,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     } catch (migrationError) {
       console.error(`[ImageGenerator] ❌ gpt-image-1 자동 마이그레이션 실패:`, (migrationError as Error).message);
       const userMsg = getImageErrorMessage(migrationError);
-      throw new Error(`DALL-E 3는 2026-05-12 OpenAI에 의해 제거되었습니다.\n환경설정 → 이미지 엔진에서 *gpt-image-1* 또는 *Imagen 4*로 변경해주세요.\n\n원본 오류: ${userMsg}`);
+      throw new Error(`기존 DALL-E 설정은 사용할 수 없어 GPT 이미지 시리즈로 전환해야 합니다.\n환경설정 → 이미지 엔진에서 OpenAI Image (gpt-image-1 / 1.5 / 2)를 선택해주세요.\n\n원본 오류: ${userMsg}`);
     }
   }
 
@@ -455,10 +550,10 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     }
   }
 
-  // ✅ [2026-03-15] ImageFX 선택 시 (Google 무료 — Gemini API 키 불필요!)
+  // ✅ [2026-03-15] ImageFX 선택 시 (Google Labs — Gemini API 키 불필요, 단 계정/IP 접근 제한 가능)
   if (normalizedProvider === 'imagefx') {
     try {
-      console.log(`[이미지생성] ✨ ImageFX로 ${items.length}개 이미지 생성 시작... (Gemini 불필요, 완전 무료)`);
+      console.log(`[이미지생성] ✨ ImageFX로 ${items.length}개 이미지 생성 시작... (Google Labs 계정/IP 접근 제한 가능)`);
       const imageFxImages = await generateWithImageFx(
         items,
         options.postTitle,
@@ -480,6 +575,16 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
 
       // ✅ [v1.4.40] 분류된 에러는 IMAGEFX_TYPE: 접두사 제거하고 그대로 전달
       // 사용자가 정확한 사유(쿼터 초과/안전 필터/세션 만료)를 알 수 있도록
+      if (rawMsg.startsWith('IMAGEFX_FORBIDDEN')) {
+        throw new Error(
+          '[ImageFX] Google ImageFX가 현재 계정/IP/지역에서 생성 API 접근을 거부했습니다.\n\n' +
+          '이 문제는 API 키나 앱 오류가 아니라 Google Labs 접근 정책 문제입니다. 로그인은 성공해도 생성 API에서 403으로 막힐 수 있습니다.\n\n' +
+          '해결 방법:\n' +
+          '1. 환경설정 → ImageFX → Google 계정 변경으로 다른 Google 계정을 시도하세요.\n' +
+          '2. 테더링, 다른 네트워크, VPN 등으로 IP를 바꾼 뒤 다시 시도하세요.\n' +
+          '3. 대량 발행은 Flow, 리더스 나노바나나프로, OpenAI Image, DeepInfra처럼 접근성이 확인된 엔진을 권장합니다.'
+        );
+      }
       if (rawMsg.startsWith('IMAGEFX_')) {
         const userMessage = rawMsg.replace(/^IMAGEFX_[A-Z_]+:/, '');
         throw new Error(`[ImageFX] ${userMessage}`);
@@ -501,6 +606,9 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.postTitle,
         options.postId,
         onImageGenerated,
+        undefined,
+        undefined,
+        { sequential: shouldForceSequentialImages },
       );
       if (flowImages.length === 0) {
         throw new Error('Flow가 0건 반환 — 상세 원인은 이전 로그(sendImageLog) 참고. 쿼터/세션/안전필터/API 구조 변경 가능성.');
@@ -617,6 +725,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         onImageGenerated,
         (options as any).productData,
         forceModelKey, // v2.7.16: 모델 강제 지정
+        shouldForceSequentialImages,
       );
       console.log(`[이미지생성] ✅ ${modelLabel} ${nanoBananaImages.length}개 이미지 생성 완료!`);
       return preserveThumbnailFlags(annotateEngineTrace(nanoBananaImages, {
@@ -668,7 +777,9 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       options.collectedImages,
       options.stopCheck,
       onImageGenerated,
-      (options as any).productData
+      (options as any).productData,
+      undefined,
+      shouldForceSequentialImages
     );
     console.log(`[이미지생성] ✅ 폴백 나노 바나나 프로(Gemini)로 ${fallbackImages.length}개 이미지 생성 완료!`);
     return preserveThumbnailFlags(annotateEngineTrace(fallbackImages, {

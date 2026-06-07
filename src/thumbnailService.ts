@@ -1,6 +1,7 @@
 import sharp from 'sharp';
 import path from 'path';
 import fs from 'fs';
+import { wrapKoreanTitleForThumbnail } from './image/koreanTitleWrap.js';
 
 export interface ThumbnailOptions {
     width?: number;
@@ -97,32 +98,12 @@ export class ThumbnailService {
         const { textColor = '#ffffff', fontFamily = 'Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, sans-serif', position = 'bottom' } = options;
 
         // ✅ [2026-02-08] 폰트 크기 자동 계산 (textOverlay.ts와 동일 로직)
-        const cleanText = text.trim();
         const maxLines = 3;
         const charsPerLine = Math.floor((width * 0.8) / 30);
-
-        // 텍스트 줄바꿈 처리
-        const lines: string[] = [];
-        if (cleanText.length <= 15) {
-            lines.push(cleanText);
-        } else {
-            const segments = cleanText.split(/([,，.。!?·…\s]+)/);
-            let currentLine = '';
-            for (const segment of segments) {
-                if (currentLine.length + segment.length <= charsPerLine) {
-                    currentLine += segment;
-                } else {
-                    if (currentLine.trim()) lines.push(currentLine.trim());
-                    currentLine = segment.trim();
-                    if (lines.length >= maxLines - 1 && currentLine) {
-                        const remaining = segments.slice(segments.indexOf(segment)).join('').trim();
-                        lines.push(remaining.length > charsPerLine ? remaining.substring(0, charsPerLine - 3) + '...' : remaining);
-                        break;
-                    }
-                }
-            }
-            if (currentLine.trim() && lines.length < maxLines) lines.push(currentLine.trim());
-        }
+        const lines = wrapKoreanTitleForThumbnail(text, {
+            maxLines,
+            maxCharsPerLine: Math.max(16, charsPerLine - 3),
+        });
 
         // ✅ [2026-02-08] 폰트 크기 자동 계산 (textOverlay.ts 동일)
         const baseSize = Math.floor(width * 0.08);

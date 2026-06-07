@@ -48,6 +48,111 @@ declare function getUnifiedUrls(): string[];
 declare function generateContentFromUrl(url: string, title?: string, tone?: string, suppressModal?: boolean): Promise<void>;
 declare function generateContentFromKeywords(title?: string, keywords?: string, tone?: string, suppressModal?: boolean): Promise<void>;
 declare function setKeywordTitleOptionsFromItem(keyword: string, asTitle: boolean, prefix: boolean): void;
+declare function saveCollectedShoppingImagesToLocal(images: any[], title: string, options?: any): Promise<{ images: any[]; savedCount: number; folderPath?: string }>;
+
+const PUBLISH_HANDLER_FULL_AUTO_CONTENT_RETRY_CACHE_KEY = '__leaderFullAutoContentRetryCache';
+const PUBLISH_HANDLER_FULL_AUTO_CONTENT_RETRY_MAX_AGE_MS = 6 * 60 * 60 * 1000;
+
+function normalizePublishReuseString(value: any): string {
+  return String(value ?? '').trim();
+}
+
+function normalizePublishReuseStringList(value: any): string[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((item) => normalizePublishReuseString(item))
+    .filter(Boolean)
+    .sort();
+}
+
+function clonePublishRetryContent(content: any): any {
+  try {
+    return JSON.parse(JSON.stringify(content));
+  } catch {
+    return content;
+  }
+}
+
+function hasPublishReusableContent(content: any): boolean {
+  return !!content && (
+    (Array.isArray(content.headings) && content.headings.length > 0) ||
+    !!normalizePublishReuseString(content.bodyPlain || content.content || content.introduction)
+  );
+}
+
+function buildPublishContentReuseKey(formData: any): string {
+  return JSON.stringify({
+    urls: normalizePublishReuseStringList(formData?.urls),
+    keywords: normalizePublishReuseString(formData?.keywords),
+    generator: normalizePublishReuseString(formData?.generator),
+    toneStyle: normalizePublishReuseString(formData?.toneStyle),
+    contentMode: normalizePublishReuseString(formData?.contentMode || formData?.styleOptions?.contentMode || ''),
+    keywordAsTitle: formData?.keywordAsTitle === true,
+    keywordTitlePrefix: formData?.keywordTitlePrefix === true,
+    ctaType: normalizePublishReuseString(formData?.ctaType),
+    category: normalizePublishReuseString(formData?.category || formData?.categoryName),
+  });
+}
+
+function getPublishContentRetryCache(formData: any): any | null {
+  try {
+    const cache = (window as any)[PUBLISH_HANDLER_FULL_AUTO_CONTENT_RETRY_CACHE_KEY];
+    if (!cache || !cache.imageRetryPending) return null;
+    if (Date.now() - Number(cache.createdAt || 0) > PUBLISH_HANDLER_FULL_AUTO_CONTENT_RETRY_MAX_AGE_MS) {
+      delete (window as any)[PUBLISH_HANDLER_FULL_AUTO_CONTENT_RETRY_CACHE_KEY];
+      return null;
+    }
+    if (cache.key !== buildPublishContentReuseKey(formData)) return null;
+    if (!hasPublishReusableContent(cache.structuredContent)) return null;
+    return clonePublishRetryContent(cache.structuredContent);
+  } catch {
+    return null;
+  }
+}
+
+function savePublishContentRetryCache(formData: any, structuredContent: any): void {
+  if (!hasPublishReusableContent(structuredContent)) return;
+  try {
+    (window as any)[PUBLISH_HANDLER_FULL_AUTO_CONTENT_RETRY_CACHE_KEY] = {
+      key: buildPublishContentReuseKey(formData),
+      structuredContent: clonePublishRetryContent(structuredContent),
+      createdAt: Date.now(),
+      imageRetryPending: true,
+    };
+  } catch (error) {
+    console.warn('[FullAutoPublish] content retry cache save failed:', error);
+  }
+}
+
+function clearPublishContentRetryCache(): void {
+  try {
+    delete (window as any)[PUBLISH_HANDLER_FULL_AUTO_CONTENT_RETRY_CACHE_KEY];
+  } catch {
+    // ignore
+  }
+}
+
+async function generateImagesForAutomationSafely(
+  imageSource: string,
+  headings: any[],
+  title: string,
+  options?: any,
+): Promise<any[]> {
+  try {
+    const images = await generateImagesForAutomation(imageSource, headings, title, options);
+    return Array.isArray(images) ? images : [];
+  } catch (error) {
+    const message = (error as Error)?.message || '알 수 없는 이미지 생성 오류';
+    console.warn('[FullAutoPublish] image generation failed:', message);
+    appendLog(`⚠️ 이미지 생성 실패: ${message} — 발행을 중단하고 다음 실행 때 이미지 단계부터 다시 시도합니다.`);
+    try {
+      options?.onProgress?.(`⚠️ 이미지 생성 실패 — 발행 중단: ${message}`);
+    } catch {
+      // ignore progress callback errors
+    }
+    throw error;
+  }
+}
 
 export async function handleFullAutoPublish(): Promise<void> {
   // ✅ 완전 자동 모드 설정
@@ -73,20 +178,25 @@ export async function handleFullAutoPublish(): Promise<void> {
     return;
   }
 
-  // ✅ [v2.8.3] OpenAI 이미지 엔진 사전 차단 가드 — 폴백 금지, 사용자 명시 동의 필요
+  // ✅ [v2.8.3] 이미지 엔진 사전 차단 가드 — 폴백 금지, 사용자 명시 동의 필요
   //   - dall-e-3: 2026-05-12 이후 차단, 이전 1회성 D-Day 안내
   //   - openai-image (덕트테이프): Org Verification 첫 사용 시 가이드 모달
+  //   - imagefx: 로그인만 확인하지 않고 실제 1장 생성 프리플라이트로 403 접근 거부 차단
   // v2.10.84: dynamic import 제거 — 인라인 빌드에서 .js 파일 404 silent fail 방지.
   // 가드 실패 시 발행을 *중단*해야 silent 우회로 인한 과금 차단됨.
   try {
     const guardImageSource = UnifiedDOMCache.getImageSource();
-    const passed = await runOpenAIImageGuard(guardImageSource);
-    if (!passed) {
-      appendLog('⛔ OpenAI 이미지 엔진 가드 차단 — 발행 중단');
-      return;
+    const skipImagesForGuard = localStorage.getItem('textOnlyPublish') === 'true'
+      || ((document.getElementById('unified-skip-images') as HTMLInputElement | null)?.checked === true);
+    if (!skipImagesForGuard) {
+      const passed = await runOpenAIImageGuard(guardImageSource);
+      if (!passed) {
+        appendLog('⛔ 이미지 엔진 사전 가드 차단 — 발행 중단');
+        return;
+      }
     }
   } catch (guardErr: any) {
-    console.warn('[FullAuto] OpenAI 이미지 가드 실행 실패 (계속 진행):', guardErr?.message);
+    console.warn('[FullAuto] 이미지 엔진 가드 실행 실패 (계속 진행):', guardErr?.message);
   }
 
   // ✅ 진행상황 모달 표시
@@ -107,36 +217,68 @@ export async function handleFullAutoPublish(): Promise<void> {
     // 콘텐츠 생성
     modal.setProgress(10, '콘텐츠 생성 중...');
     const toneStyle = UnifiedDOMCache.getToneStyle();
+    const faKeywordAsTitle = (document.getElementById('fullauto-keyword-as-title') as HTMLInputElement)?.checked || false;
+    const faKeywordTitlePrefix = (document.getElementById('fullauto-keyword-title-prefix') as HTMLInputElement)?.checked || false;
+    const earlyAffiliateLink = resolveAffiliateLink(
+      (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || (document.getElementById('batch-link-input') as HTMLInputElement)?.value?.trim() || undefined,
+      (document.querySelector('.unified-url-input') as HTMLInputElement)?.value?.trim()
+    );
+    const contentReuseSeed = {
+      urls,
+      title,
+      keywords,
+      generator: UnifiedDOMCache.getGenerator(),
+      toneStyle,
+      contentMode: (earlyAffiliateLink || isShoppingConnectModeActive()) ? 'affiliate' : 'seo',
+      categoryName: UnifiedDOMCache.getRealCategoryName?.(),
+      keywordAsTitle: faKeywordAsTitle,
+      keywordTitlePrefix: faKeywordTitlePrefix,
+    };
 
-    // ✅ [2026-03-05 FIX] 콘텐츠 생성 실패 시 모달에 에러 즉시 표시 + 2분 타임아웃 워처
-    // ✅ [v1.5.3] 지연은 경고(노란색) — 작업은 계속 진행 중이므로 error(빨간색) 아님
-    const contentTimeout = setTimeout(() => {
-      modal.showWarning('⚠️ 콘텐츠 생성 지연', '콘텐츠 생성이 2분 이상 걸리고 있습니다. 네트워크 또는 AI 엔진 응답 지연 — 계속 대기합니다.');
-      appendLog('⚠️ 콘텐츠 생성 2분 초과 — AI 엔진 또는 네트워크 응답 지연 (계속 진행 중)');
-    }, 120_000);
+    let structuredContent: any =
+      (window as any).getFullAutoContentRetryCache?.(contentReuseSeed) ||
+      getPublishContentRetryCache(contentReuseSeed) ||
+      null;
+    if (structuredContent) {
+      currentStructuredContent = structuredContent;
+      (window as any).currentStructuredContent = structuredContent;
+      appendLog('♻️ 이전 글 생성 결과를 재사용하고 이미지 생성만 다시 진행합니다.');
+      modal.addLog('♻️ 글 생성 결과 재사용 — 이미지 생성만 다시 진행');
+    } else {
+      // ✅ [2026-03-05 FIX] 콘텐츠 생성 실패 시 모달에 에러 즉시 표시 + 2분 타임아웃 워처
+      // ✅ [v1.5.3] 지연은 경고(노란색) — 작업은 계속 진행 중이므로 error(빨간색) 아님
+      const contentTimeout = setTimeout(() => {
+        modal.showWarning('⚠️ 콘텐츠 생성 지연', '콘텐츠 생성이 2분 이상 걸리고 있습니다. 네트워크 또는 AI 엔진 응답 지연 — 계속 대기합니다.');
+        appendLog('⚠️ 콘텐츠 생성 2분 초과 — AI 엔진 또는 네트워크 응답 지연 (계속 진행 중)');
+      }, 120_000);
 
-    try {
-      if (urls.length > 0) {
-        appendLog(`🔄 ${urls.length}개 URL 기반 콘텐츠 생성 (첫 번째 URL 사용)`);
-        modal.addLog(`📎 URL: ${urls[0].substring(0, 50)}...`);
-        await generateContentFromUrl(urls[0], undefined, toneStyle, true);
-      } else {
-        appendLog('✏️ 키워드/제목 기반 콘텐츠 생성');
-        modal.addLog(`📝 키워드: ${keywords || title}`);
-        // ✅ [2026-02-13] 풀오토: 키워드 제목 옵션 적용
-        const faKeywordAsTitle = (document.getElementById('fullauto-keyword-as-title') as HTMLInputElement)?.checked || false;
-        const faKeywordTitlePrefix = (document.getElementById('fullauto-keyword-title-prefix') as HTMLInputElement)?.checked || false;
-        setKeywordTitleOptionsFromItem(keywords || title, faKeywordAsTitle, faKeywordTitlePrefix);
-        await generateContentFromKeywords(title, keywords, toneStyle, true); // suppressModal: true
+      try {
+        if (urls.length > 0) {
+          appendLog(`🔄 ${urls.length}개 URL 기반 콘텐츠 생성 (첫 번째 URL 사용)`);
+          modal.addLog(`📎 URL: ${urls[0].substring(0, 50)}...`);
+          await generateContentFromUrl(urls[0], undefined, toneStyle, true);
+        } else {
+          appendLog('✏️ 키워드/제목 기반 콘텐츠 생성');
+          modal.addLog(`📝 키워드: ${keywords || title}`);
+          // ✅ [2026-02-13] 풀오토: 키워드 제목 옵션 적용
+          setKeywordTitleOptionsFromItem(keywords || title, faKeywordAsTitle, faKeywordTitlePrefix);
+          await generateContentFromKeywords(title, keywords, toneStyle, true); // suppressModal: true
+        }
+      } catch (contentError) {
+        clearTimeout(contentTimeout);
+        const errMsg = (contentError as Error).message || '알 수 없는 오류';
+        appendLog(`❌ 콘텐츠 생성 실패: ${errMsg}`);
+        modal.showError('❌ 콘텐츠 생성 실패', `AI 콘텐츠 생성 중 오류가 발생했습니다.\n\n원인: ${errMsg}`);
+        return; // ✅ throw 대신 return으로 에러 모달 유지
       }
-    } catch (contentError) {
       clearTimeout(contentTimeout);
-      const errMsg = (contentError as Error).message || '알 수 없는 오류';
-      appendLog(`❌ 콘텐츠 생성 실패: ${errMsg}`);
-      modal.showError('❌ 콘텐츠 생성 실패', `AI 콘텐츠 생성 중 오류가 발생했습니다.\n\n원인: ${errMsg}`);
-      return; // ✅ throw 대신 return으로 에러 모달 유지
+      structuredContent = (window as any).currentStructuredContent;
+      if (typeof (window as any).saveFullAutoContentRetryCache === 'function') {
+        (window as any).saveFullAutoContentRetryCache(contentReuseSeed, structuredContent);
+      } else {
+        savePublishContentRetryCache(contentReuseSeed, structuredContent);
+      }
     }
-    clearTimeout(contentTimeout);
 
     // 취소 확인
     if (isFullAutoStopRequested(modal)) {
@@ -145,7 +287,7 @@ export async function handleFullAutoPublish(): Promise<void> {
     }
 
     // 생성된 콘텐츠 가져오기
-    const structuredContent = (window as any).currentStructuredContent;
+    structuredContent = structuredContent || (window as any).currentStructuredContent;
     if (!structuredContent) {
       throw new Error('콘텐츠 생성에 실패했습니다.');
     }
@@ -308,6 +450,8 @@ export async function handleFullAutoPublish(): Promise<void> {
       urls: urls, // URL 배열 추가
       title: title,
       keywords: keywords,
+      keywordAsTitle: faKeywordAsTitle,
+      keywordTitlePrefix: faKeywordTitlePrefix,
       // ✅ CTA 설정
       ctaText: finalCtaText,
       ctaLink: finalCtaLink,
@@ -416,6 +560,19 @@ export async function handleFullAutoPublish(): Promise<void> {
           }));
 
           // 기존 이미지와 병합
+          const localSaveResult = await saveCollectedShoppingImagesToLocal(
+            collectedImages,
+            collectResult.productInfo?.name || structuredContent?.selectedTitle || (formData as any).postTitle || formData.title || 'shopping-connect-images',
+            { headingPrefix: '상품 이미지' }
+          );
+          if (localSaveResult.images.length > 0) {
+            collectedImages.splice(0, collectedImages.length, ...localSaveResult.images);
+          }
+          if (localSaveResult.folderPath) {
+            modal.addLog(`📁 수집 이미지 저장 위치: ${localSaveResult.folderPath}`);
+            appendLog(`📁 수집 이미지 저장 위치: ${localSaveResult.folderPath}`);
+          }
+
           const existing = (window as any).imageManagementGeneratedImages || [];
           (window as any).imageManagementGeneratedImages = [...collectedImages, ...existing];
           console.log('[FullAutoPublish] 제품 이미지 수집 완료:', collectedImages.length);
@@ -501,6 +658,18 @@ export async function handleFullAutoPublish(): Promise<void> {
                 heading: `소스 이미지 ${idx + 1}`,
                 provider: 'collected'
               }));
+
+            const localSourceSaveResult = await saveCollectedShoppingImagesToLocal(
+              newImages,
+              structuredContent?.selectedTitle || (formData as any).postTitle || formData.title || 'shopping-connect-source-images',
+              { headingPrefix: 'source image' }
+            );
+            if (localSourceSaveResult.images.length > 0) {
+              newImages.splice(0, newImages.length, ...localSourceSaveResult.images);
+            }
+            if (localSourceSaveResult.folderPath) {
+              modal.addLog(`📁 추가 수집 이미지 저장 위치: ${localSourceSaveResult.folderPath}`);
+            }
 
             (window as any).imageManagementGeneratedImages = [...existing, ...newImages];
             console.log(`[FullAutoPublish] 소스 URL 이미지 ${newImages.length}개 추가 (총 ${(window as any).imageManagementGeneratedImages.length}개)`);
@@ -677,7 +846,7 @@ export async function handleFullAutoPublish(): Promise<void> {
             const headingsForAI = structuredContent.headings || [];
             if (headingsForAI.length > 0) {
               modal.addLog(`🎨 ${headingsForAI.length}개 소제목 AI 이미지 생성 시작...`);
-              const aiImgs = await generateImagesForAutomation(
+              const aiImgs = await generateImagesForAutomationSafely(
                 imageSource,
                 headingsForAI,
                 structuredContent.selectedTitle || title,
@@ -685,6 +854,7 @@ export async function handleFullAutoPublish(): Promise<void> {
                   stopCheck: () => isFullAutoStopRequested(modal),
                   onProgress: (msg: any) => modal.addLog(msg),
                   allowThumbnailText: false, // 소제목에는 텍스트 합성 안 함
+                  thumbnailTextInclude: false,
                   // ✅ [2026-02-02 FIX] 문자열 URL도 처리
                   referenceImagePath: typeof collectedImgs[1] === 'string'
                     ? collectedImgs[1]
@@ -713,17 +883,18 @@ export async function handleFullAutoPublish(): Promise<void> {
                   modal.addLog(msg);
                   appendLog(msg);
                 },
-                aiFallbackFn: generateImagesForAutomation,
+                aiFallbackFn: generateImagesForAutomationSafely,
                 aiOptions: {
                   stopCheck: () => isFullAutoStopRequested(modal),
                   onProgress: (msg: any) => modal.addLog(msg),
                   allowThumbnailText: formData.includeThumbnailText,
+                  thumbnailTextInclude: formData.includeThumbnailText,
                 },
               });
               generatedImgs = lfResult.images;
             } else {
               // ✅ 기존 AI 생성 로직
-              generatedImgs = await generateImagesForAutomation(
+              generatedImgs = await generateImagesForAutomationSafely(
                 imageSource,
                 seoHeadings,
                 structuredContent.selectedTitle || title,
@@ -731,6 +902,7 @@ export async function handleFullAutoPublish(): Promise<void> {
                   stopCheck: () => isFullAutoStopRequested(modal),
                   onProgress: (msg: any) => modal.addLog(msg),
                   allowThumbnailText: formData.includeThumbnailText,
+                  thumbnailTextInclude: formData.includeThumbnailText,
                   referenceImagePath,
                   collectedImages: collectedImgs
                 }
@@ -910,25 +1082,37 @@ export async function handleFullAutoPublish(): Promise<void> {
           saveGeneratedPost(structuredContent, true); // isUpdate=true로 업데이트
           modal.addLog(`💾 이미지 포함하여 글 목록에 저장 완료`);
         } else {
+          modal.addLog('⚠️ 이미지 생성 결과가 비어 있어 발행을 중단합니다.');
+          modal.addLog('♻️ 글 생성 결과는 저장되어 있어, 이미지 엔진 변경 후 다시 실행하면 글 재생성 없이 이미지부터 재시도합니다.');
+          appendLog('⚠️ 이미지 생성 결과가 비어 있어 발행을 중단합니다.');
+          appendLog('♻️ 글 생성 결과 재사용 가능 — 이미지 엔진 변경 후 재실행하면 이미지 단계부터 복구합니다.');
+          throw new Error('이미지 생성 결과가 비어있습니다. 이미지 없이 발행하지 않고 중단합니다.');
           // ✅ [2026-03-23 FIX] local-folder + skip 모드: 이미지 없이 발행 가능
-          const isLocalFolderSkip = imageSource === 'local-folder' && (localStorage.getItem('localFolderFallback') || 'skip') === 'skip';
-          if (isLocalFolderSkip) {
-            modal.addLog('📂 로컬 폴더 이미지 없음 → 이미지 없이 발행 진행');
-            appendLog('📂 로컬 폴더에 이미지가 없어 이미지 없이 발행합니다.');
+          const legacyLocalFolderSkip = false;
+          if (legacyLocalFolderSkip) {
+            modal.addLog('📂 로컬 폴더 이미지 없음');
+            appendLog('📂 로컬 폴더에 이미지가 없습니다.');
           } else {
-            // ✅ [2026-03-09 FIX] 이미지 생성이 전부 실패하면 발행 중단
-            modal.addLog('❌ 이미지 생성에 실패했습니다. 발행을 중단합니다.');
-            appendLog('❌ 이미지 생성 실패: 성공적으로 생성된 이미지가 없습니다.');
-            throw new Error('이미지 생성에 실패했습니다. 모든 이미지가 생성되지 않아 발행을 중단합니다.\n\n해결 방법:\n1. 이미지 생성 엔진 설정을 확인해주세요\n2. API 키가 올바른지 확인해주세요\n3. 네트워크 연결을 확인해주세요\n4. "이미지 없이 발행" 옵션을 사용할 수도 있습니다');
+            modal.addLog('⚠️ 이미지가 생성되지 않았습니다.');
+            modal.addLog('♻️ 글 생성 결과는 저장되어 있어, 이미지 엔진 변경 후 다시 실행하면 글 재생성 없이 이미지부터 재시도합니다.');
+            appendLog('⚠️ 이미지 생성 결과가 비어 있습니다.');
+            appendLog('♻️ 글 생성 결과 재사용 가능 — 이미지 엔진 변경 후 재실행 시 이미지 단계부터 복구합니다.');
+            // Do not mark skipImages here. Image failure must stop publishing.
+            (formData as any).imageManagementImages = [];
           }
         }
 
       } catch (imgErr) {
-        console.error('이미지 처리 실패:', imgErr);
-        modal.addLog(`❌ 이미지 처리 오류: ${(imgErr as Error).message}`);
-        // ✅ [2026-03-09 FIX] 이미지 처리 실패 시 발행 중단 (기존: catch에서 에러 삼키고 발행 계속 진행)
-        appendLog(`❌ 이미지 처리 실패로 발행을 중단합니다: ${(imgErr as Error).message}`);
+        const errMsg = (imgErr as Error).message || '알 수 없는 이미지 처리 오류';
+        console.warn('이미지 처리 실패 — 발행 중단:', errMsg);
+        modal.addLog(`⚠️ 이미지 처리 오류: ${errMsg}`);
+        modal.addLog('♻️ 글 생성 결과는 유지됩니다. 이미지 엔진을 바꿔 다시 실행하면 이미지 단계부터 재시도합니다.');
+        appendLog(`⚠️ 이미지 처리 실패 — 발행 중단: ${errMsg}`);
+        appendLog('♻️ 글 생성 결과 재사용 가능 — 이미지 엔진 변경 후 재실행하면 이미지 단계부터 복구합니다.');
         throw imgErr;
+        (window as any).generatedImages = [];
+        // Do not mark skipImages here. Image failure must stop publishing.
+        (formData as any).imageManagementImages = [];
       }
     } else {
       modal.addLog('⏭️ 이미지 삽입 건너뛰기 (설정)');
@@ -970,6 +1154,8 @@ export async function handleFullAutoPublish(): Promise<void> {
 
     // ✅ 발행 성공
     modal.showSuccess('🎉 발행 완료!', '블로그 글이 성공적으로 발행되었습니다.');
+    (window as any).clearFullAutoContentRetryCache?.();
+    clearPublishContentRetryCache();
 
   } catch (error) {
     appendLog(`❌ 풀오토 발행 실패: ${(error as Error).message}`);
@@ -988,10 +1174,74 @@ export async function handleFullAutoPublish(): Promise<void> {
   }
 }
 
+const SEQUENTIAL_MULTI_ACCOUNT_SAFE_MIN_INTERVAL_SEC = 300;
+const SEQUENTIAL_MULTI_ACCOUNT_SAFE_10_PLUS_INTERVAL_SEC = 420;
+const SEQUENTIAL_MULTI_ACCOUNT_SAFE_50_PLUS_INTERVAL_SEC = 600;
+const SEQUENTIAL_MULTI_ACCOUNT_UI_IMAGE_MIN_INTERVAL_SEC = 480;
+const SEQUENTIAL_MULTI_ACCOUNT_SLOW_IMAGE_MIN_INTERVAL_SEC = 420;
+const SEQUENTIAL_MULTI_ACCOUNT_UI_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx']);
+const SEQUENTIAL_MULTI_ACCOUNT_SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai']);
+
+function formatPublishInterval(seconds: number): string {
+  const safe = Math.max(0, Math.floor(Number(seconds) || 0));
+  if (safe >= 3600) {
+    const hours = Math.floor(safe / 3600);
+    const minutes = Math.floor((safe % 3600) / 60);
+    return `${hours}시간${minutes > 0 ? ` ${minutes}분` : ''}`;
+  }
+  if (safe >= 60) {
+    const minutes = Math.floor(safe / 60);
+    const rest = safe % 60;
+    return `${minutes}분${rest > 0 ? ` ${rest}초` : ''}`;
+  }
+  return `${safe}초`;
+}
+
+function getSafeSequentialMultiAccountInterval(
+  requestedSeconds: number,
+  totalAccounts: number,
+  imageSource?: string,
+): { requested: number; safe: number; adjusted: boolean; reason: string } {
+  const requested = Number.isFinite(requestedSeconds) ? Math.max(0, Math.floor(requestedSeconds)) : 0;
+  let minimum = SEQUENTIAL_MULTI_ACCOUNT_SAFE_MIN_INTERVAL_SEC;
+
+  if (totalAccounts >= 50) {
+    minimum = SEQUENTIAL_MULTI_ACCOUNT_SAFE_50_PLUS_INTERVAL_SEC;
+  } else if (totalAccounts >= 10) {
+    minimum = SEQUENTIAL_MULTI_ACCOUNT_SAFE_10_PLUS_INTERVAL_SEC;
+  }
+  const normalizedImageSource = String(imageSource || '').trim();
+  if (SEQUENTIAL_MULTI_ACCOUNT_UI_IMAGE_SOURCES.has(normalizedImageSource)) {
+    minimum = Math.max(minimum, SEQUENTIAL_MULTI_ACCOUNT_UI_IMAGE_MIN_INTERVAL_SEC);
+  } else if (SEQUENTIAL_MULTI_ACCOUNT_SLOW_IMAGE_SOURCES.has(normalizedImageSource)) {
+    minimum = Math.max(minimum, SEQUENTIAL_MULTI_ACCOUNT_SLOW_IMAGE_MIN_INTERVAL_SEC);
+  }
+
+  const safe = Math.min(86400, Math.max(requested, minimum));
+  const reason = SEQUENTIAL_MULTI_ACCOUNT_UI_IMAGE_SOURCES.has(normalizedImageSource)
+    ? '브라우저 이미지 엔진 안정화 보호'
+    : SEQUENTIAL_MULTI_ACCOUNT_SLOW_IMAGE_SOURCES.has(normalizedImageSource)
+      ? '이미지 생성 엔진 안정화 보호'
+      : totalAccounts >= 50
+        ? '50개 이상 대량 발행 보호'
+        : totalAccounts >= 10
+          ? '10개 이상 장기 발행 보호'
+          : '다중계정 기본 보호';
+
+  return { requested, safe, adjusted: safe !== requested, reason };
+}
+
+function applySequentialMultiAccountJitter(intervalSeconds: number, floorSeconds: number): number {
+  if (!Number.isFinite(intervalSeconds) || intervalSeconds <= 0) return intervalSeconds;
+  const jitterFactor = 1 + (Math.random() * 2 - 1) * 0.25;
+  const jittered = Math.round(intervalSeconds * jitterFactor);
+  return Math.min(86400, Math.max(floorSeconds, jittered));
+}
+
 // 다중계정 순차 발행 처리
 export async function handleMultiAccountPublish(): Promise<void> {
   const selectedAccountIds = (window as any).getInlineSelectedAccounts?.() || [];
-  const intervalSeconds = (window as any).getInlineInterval?.() || 30;
+  const requestedIntervalSeconds = (window as any).getInlineInterval?.() || 30;
 
   // ✅ [2026-03-11 FIX] 연속발행 모드가 아닐 때만 중지 플래그 리셋
   // 연속발행 중에는 중지 버튼이 무효화되지 않도록 보호
@@ -1006,12 +1256,13 @@ export async function handleMultiAccountPublish(): Promise<void> {
   // ✅ [2026-02-16 FIX] 다중계정 발행 전 API 키 체크 — 이미 로드된 이미지가 있으면 건너뛰기
   const firstSelectedBtn = (document.querySelector('.image-source-btn.selected') || document.querySelector('.unified-img-source-btn.selected')) as HTMLButtonElement;
   const commonImageSource = firstSelectedBtn?.dataset.source || 'nano-banana-pro';
+  const intervalPolicy = getSafeSequentialMultiAccountInterval(requestedIntervalSeconds, selectedAccountIds.length, commonImageSource);
   const maPreloadedImages = ImageManager.getAllImages();
   const maHasPreloadedImages = maPreloadedImages && maPreloadedImages.length > 0;
 
   if (!maHasPreloadedImages && (commonImageSource === 'openai-image' || commonImageSource === 'leonardoai')) {
     const config = await window.api.getConfig();
-    if (commonImageSource === 'openai-image' && !(config as any)?.openaiImageApiKey) {
+    if (commonImageSource === 'openai-image' && !((config as any)?.openaiImageApiKey || (config as any)?.openaiApiKey)) {
       alert('OpenAI Image API 키가 설정되지 않았습니다. 환경설정에서 API 키를 입력해주세요.');
       return;
     }
@@ -1022,17 +1273,17 @@ export async function handleMultiAccountPublish(): Promise<void> {
 
   }
 
-  // ✅ [v2.8.3] OpenAI 이미지 엔진 사전 차단 가드 — 다계정도 동일 정책 (폴백 금지)
+  // ✅ [v2.8.3] 이미지 엔진 사전 차단 가드 — 다계정도 동일 정책 (폴백 금지)
   // v2.10.84: dynamic import 제거 — 인라인 빌드에서 silent fail 방지.
   if (!maHasPreloadedImages) {
     try {
       const passed = await runOpenAIImageGuard(commonImageSource);
       if (!passed) {
-        appendLog('⛔ OpenAI 이미지 엔진 가드 차단 — 다계정 발행 중단');
+        appendLog('⛔ 이미지 엔진 사전 가드 차단 — 다계정 발행 중단');
         return;
       }
     } catch (guardErr: any) {
-      console.warn('[MultiAccount] OpenAI 이미지 가드 실행 실패 (계속 진행):', guardErr?.message);
+      console.warn('[MultiAccount] 이미지 엔진 가드 실행 실패 (계속 진행):', guardErr?.message);
     }
   }
 
@@ -1041,6 +1292,9 @@ export async function handleMultiAccountPublish(): Promise<void> {
   modal.show('다중 계정 순차 발행 중...', `총 ${selectedAccountIds.length}개 계정 진행`);
 
   appendLog(`🚀 다중계정 순차 발행 시작: ${selectedAccountIds.length}개 계정`);
+  if (intervalPolicy.adjusted) {
+    appendLog(`🛡️ 안전 발행 간격 자동 조정: ${formatPublishInterval(intervalPolicy.requested)} → ${formatPublishInterval(intervalPolicy.safe)} (${intervalPolicy.reason})`);
+  }
 
   // ✅ [2026-01-20] 다중계정 발행 프리셋 썸네일 적용
   const maPreset = applyPresetThumbnailIfExists('ma-semi-auto') || applyPresetThumbnailIfExists('ma-full-auto');
@@ -1251,8 +1505,9 @@ export async function handleMultiAccountPublish(): Promise<void> {
 
       // 다음 계정 발행 전 대기 (마지막 계정 제외)
       if (i < selectedAccountIds.length - 1) {
-        appendLog(`⏳ ${intervalSeconds}초 대기 중...`);
-        const ok = await waitInterruptible(intervalSeconds);
+        const waitSeconds = applySequentialMultiAccountJitter(intervalPolicy.safe, intervalPolicy.safe);
+        appendLog(`⏳ 다음 계정까지 ${formatPublishInterval(waitSeconds)} 대기 중...`);
+        const ok = await waitInterruptible(waitSeconds);
         if (!ok) {
           appendLog('⏹️ 사용자가 다중계정 발행을 중지했습니다.');
           return;
@@ -1652,7 +1907,7 @@ export async function handleSemiAutoPublish(): Promise<any> {
   if (!hasPreloadedImages && currentImageSource !== 'saved' && currentImageSource !== 'collected') {
     if (currentImageSource === 'openai-image') {
       const config = await window.api.getConfig();
-      if (!(config as any)?.openaiImageApiKey) {
+      if (!((config as any)?.openaiImageApiKey || (config as any)?.openaiApiKey)) {
         alert('OpenAI Image API 키가 설정되지 않았습니다. 환경설정에서 API 키를 입력해주세요.');
         return;
       }

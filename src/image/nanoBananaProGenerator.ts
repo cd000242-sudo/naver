@@ -48,6 +48,22 @@ function logGeminiImageFailure(detail: Record<string, unknown>): void {
 }
 
 // ✅ [2026-03-02] Gemini 모델별 이미지 1장당 추정 비용 (원화)
+const GEMINI_IMAGE_BILLING_REQUIRED_MARKER = 'GEMINI_IMAGE_BILLING_REQUIRED';
+
+function isGeminiImageBillingRequiredMessage(message: string): boolean {
+  return /prepayment credits are depleted|manage your project and billing|billing#prepay|insufficient credits|credits are depleted/i.test(message);
+}
+
+function isGeminiImageBillingRequiredError(error: any): boolean {
+  const message = `${error?.message || ''}\n${JSON.stringify(error?.response?.data || {})}`;
+  return message.includes(GEMINI_IMAGE_BILLING_REQUIRED_MARKER)
+    || isGeminiImageBillingRequiredMessage(message);
+}
+
+function createGeminiImageBillingRequiredError(message: string): Error {
+  return new Error(`${GEMINI_IMAGE_BILLING_REQUIRED_MARKER}: Gemini image generation prepaid credits are depleted. Please add credits or change the image engine. ${message}`);
+}
+
 const MODEL_COST_KRW: Record<string, number> = {
   // ✅ [v2.10.334] 실제 모델별 추정 단가 (Google 공식 단가 기준, 환율 ₩1,380)
   //   gemini-2.5-flash-image: $0.039/장 ≈ ₩54
@@ -486,6 +502,7 @@ export async function generateWithNanoBananaPro(
   onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void,  // ✅ [2026-02-13] 이미지 완성 즉시 콜백
   productData?: { name?: string; price?: string; brand?: string; category?: string },  // ✅ [2026-02-23 FIX] 제품 가격 정보 → 스펙 표 정확도 향상
   forceModelKey?: string,  // v2.7.16: 호출자가 명시적으로 모델 강제 ('gemini-3-1-flash' = 나노바나나2, 'gemini-3-pro' = 나노바나나프로)
+  forceSequential?: boolean,
 ): Promise<GeneratedImage[]> {
   // v2.7.16: forceModelKey가 주어지면 config의 nanoBananaMainModel/SubModel을 일시 오버라이드
   if (forceModelKey) {
@@ -613,6 +630,9 @@ export async function generateWithNanoBananaPro(
     //   안전: RPM 쓰로틀러가 Rate Limit 보호 (30 RPM 적응형)
     //   환경변수: GEMINI_PARALLEL_LIMIT로 튜닝 가능 (기본 4, 최대 8)
     const getParallelLimit = (): number => {
+      if (forceSequential || isFullAuto) {
+        return 1;
+      }
       try {
         const env = typeof process !== 'undefined' ? parseInt(process.env.GEMINI_PARALLEL_LIMIT || '', 10) : NaN;
         if (!isNaN(env) && env >= 1 && env <= 8) return env;
@@ -641,7 +661,7 @@ export async function generateWithNanoBananaPro(
 
     // 각 이미지 생성 작업을 Promise로 래핑
     const generatePromises = items.map((item, i) => {
-      return new Promise<GeneratedImage | null>((resolve) => {
+      return new Promise<GeneratedImage | null>((resolve, reject) => {
         const task = async () => {
           // 중지 여부 확인
           if (stopCheck && stopCheck()) {
@@ -706,6 +726,10 @@ export async function generateWithNanoBananaPro(
               resolve(null);
             }
           } catch (error: any) {
+            if (isGeminiImageBillingRequiredError(error)) {
+              reject(error);
+              return;
+            }
             if (error.name === 'CanceledError' || error.name === 'AbortError') {
               console.log('[NanoBananaPro] ⏹️ 요청이 취소되었습니다.');
             } else {
@@ -728,6 +752,10 @@ export async function generateWithNanoBananaPro(
     const rejectedResults = settledResults.filter(r => r.status === 'rejected');
     if (rejectedResults.length > 0) {
       console.warn(`[NanoBananaPro] ${rejectedResults.length}/${settledResults.length} image generations failed`);
+    }
+    const billingFailure = rejectedResults.find((r) => isGeminiImageBillingRequiredError((r as PromiseRejectedResult).reason));
+    if (billingFailure) {
+      throw (billingFailure as PromiseRejectedResult).reason;
     }
 
     // ✅ [2026-03-11 FIX] 실패 재시도 2라운드로 증가 - 원래 엔진 성공률 극대화
@@ -1660,6 +1688,12 @@ async function generateSingleImageWithGemini(
       });
 
       // ✅ [v1.4.44] limit:0 또는 paid plans only → 재시도 무의미, 즉시 안내
+      if (isGeminiImageBillingRequiredMessage(`${errorMessage}\n${responseBody}`)) {
+        console.error('[NanoBananaPro] Gemini prepaid image credits are depleted; stopping retries.');
+        sendImageLog('Gemini image prepaid credits are depleted. Please add credits in Google AI Studio or choose another image engine.');
+        throw createGeminiImageBillingRequiredError(errorMessage);
+      }
+
       if (isLimitZero || isPaidOnly) {
         console.error(`[NanoBananaPro] 🚫 무료 할당량 0 또는 유료 전용 — 재시도 불가`);
         sendImageLog(`🚫 나노바나나/Imagen은 Google이 무료 사용을 차단했습니다. 이미지 엔진을 ImageFX로 변경하세요 (무료). 참고: 유료 전환(Pay-as-you-go) 시 Flash/Flash-Lite 텍스트 무료 할당량도 사라지므로 주의!`);

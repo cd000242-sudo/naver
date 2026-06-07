@@ -222,10 +222,17 @@ export class EnhancedApiClient {
                 // ✅ [FIX-2b] timeout=0이면 무한 대기 (IPC 완료까지)
                 let result: any;
                 if (timeout > 0) {
+                    let timeoutId: ReturnType<typeof setTimeout> | undefined;
                     const timeoutPromise = new Promise<never>((_, reject) => {
-                        setTimeout(() => reject(new Error('API 호출 타임아웃 - 네트워크 속도가 느리거나 서버 응답이 없습니다.')), timeout);
+                        timeoutId = setTimeout(() => reject(new Error('API 호출 타임아웃 - 네트워크 속도가 느리거나 서버 응답이 없습니다.')), timeout);
                     });
-                    result = await Promise.race([apiCallPromise, timeoutPromise]);
+                    try {
+                        result = await Promise.race([apiCallPromise, timeoutPromise]);
+                    } finally {
+                        if (timeoutId) {
+                            clearTimeout(timeoutId);
+                        }
+                    }
                 } else {
                     // timeout=0: 타임아웃 없이 무한 대기 (자동화 IPC 등 장시간 작업)
                     result = await apiCallPromise;
@@ -293,7 +300,7 @@ export class EnhancedApiClient {
                     await this.abortStaleContentGeneration(apiMethod);
 
                     // 마지막 시도가 아니면 계속 재시도
-                    if (attempt < retryCount) {
+                    if (attempt < retryCount && apiMethod !== 'generateStructuredContent') {
                         const waitMsg = attempt === 0
                             ? '⏳ AI 응답이 지연되어 진행 중 요청을 정리했습니다. 앱이 자동으로 1회 재시도합니다.'
                             : `⏳ 계속 대기 중... (${attempt + 1}/${retryCount + 1}) 네트워크가 느린 경우 더 오래 걸릴 수 있습니다.`;

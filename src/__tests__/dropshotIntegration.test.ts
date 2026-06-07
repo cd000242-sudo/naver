@@ -90,10 +90,10 @@ describe('Dropshot SSOT registration', () => {
       expect(code).toMatch(/generateWithDropshot/);
     });
 
-    it("isKoreanTextSupportedEngine includes 'dropshot'", () => {
+    it("isKoreanTextSupportedEngine excludes 'dropshot' so thumbnail text uses controlled overlay", () => {
       const fnBlock =
         code.match(/isKoreanTextSupportedEngine[\s\S]{0,500}?return[\s\S]{0,200}?;/)?.[0] || '';
-      expect(fnBlock).toMatch(/engine\s*===\s*'dropshot'/);
+      expect(fnBlock).not.toMatch(/engine\s*===\s*'dropshot'/);
     });
 
     it("'dropshot' branch exists in generateImages", () => {
@@ -192,6 +192,25 @@ describe('Dropshot dropshotCore — buildDropshotPrompt', () => {
     const { buildDropshotPrompt } = await import('../image/dropshotCore');
     const result = buildDropshotPrompt('a cute puppy');
     expect(result).not.toMatch(/시네마틱|사실적|한국적/);
+  });
+});
+
+describe('Dropshot capture result detection', () => {
+  const code = read('image/dropshotCapture.ts');
+
+  it('detects Dropshot results beyond plain img src URLs', () => {
+    expect(code).toMatch(/collectDropshotCandidateKeys/);
+    expect(code).toMatch(/readFirstNewDropshotImageDataUrl/);
+    expect(code).toMatch(/currentSrc/);
+    expect(code).toMatch(/srcset/);
+    expect(code).toMatch(/backgroundImage/);
+    expect(code).toMatch(/canvas/);
+    expect(code).toMatch(/blob:/);
+  });
+
+  it('uses broad result detection before the legacy img-only fallback', () => {
+    expect(code).toMatch(/const beforeKeys = await collectDropshotCandidateKeys\(page\)/);
+    expect(code).toMatch(/readFirstNewDropshotImageDataUrl\(page,\s*beforeKeys\)/);
   });
 });
 

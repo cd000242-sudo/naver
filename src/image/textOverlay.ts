@@ -10,6 +10,7 @@
 import sharp from 'sharp';
 import * as fs from 'fs';
 import * as path from 'path';
+import { wrapKoreanTitleForThumbnail } from './koreanTitleWrap.js';
 
 export interface TextOverlayOptions {
     text: string;                    // 오버레이할 텍스트 (타이틀)
@@ -170,6 +171,11 @@ export async function addTextOverlayToBase64(
  * 텍스트를 지정된 줄 수로 자동 줄바꿈
  */
 function wrapText(text: string, maxLines: number, maxWidth: number): string[] {
+    return wrapKoreanTitleForThumbnail(text, {
+        maxLines,
+        maxCharsPerLine: Math.max(16, Math.floor(maxWidth / 30) - 3),
+    });
+
     const cleanText = text.trim();
 
     // 텍스트가 매우 짧으면 그대로 반환

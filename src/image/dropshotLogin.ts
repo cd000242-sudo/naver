@@ -9,6 +9,7 @@ import {
   BOARD_URL,
   launchBrowser,
   isLoggedIn,
+  openDropshotImageWorkspace,
   getProfileDir,
   type DropshotLoginStatus,
 } from './dropshotBrowser.js';
@@ -86,7 +87,7 @@ export async function dropshotLogin(
     ctx = await launchBrowser(profileDir, false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let page = ctx.pages()[0] || (await ctx.newPage());
-    await page.goto('https://aistudio.dropshot.io', {
+    await page.goto(BOARD_URL, {
       waitUntil: 'domcontentloaded',
       timeout: 45000,
     });
@@ -117,6 +118,7 @@ export async function dropshotLogin(
             }
           }) || pages[pages.length - 1];
         if (page && (await isLoggedIn(page))) {
+          await openDropshotImageWorkspace(page, onLog);
           detected = true;
           break;
         }
@@ -148,6 +150,7 @@ export async function dropshotLogin(
     const hpage = hctx.pages()[0] || (await hctx.newPage());
     await hpage.goto(BOARD_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await new Promise((r) => setTimeout(r, 4000));
+    await openDropshotImageWorkspace(hpage, onLog);
     setCached(hctx, hpage);
     return (await isLoggedIn(hpage))
       ? { loggedIn: true, message: '✅ 로그인 완료 — 세션이 저장되었습니다.' }

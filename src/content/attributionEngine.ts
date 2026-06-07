@@ -29,7 +29,7 @@ export interface PostAttribution {
   category: CTRCategory;
   primaryKeyword: string;
   title: string;
-  contentMode: 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'business' | 'custom';
+  contentMode: 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'business' | 'custom' | 'mate';
   toneStyle: string;
   imageEngine: string;
   thumbnailScore?: number;       // CTR Combat 채점

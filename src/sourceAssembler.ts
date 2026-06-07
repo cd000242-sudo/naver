@@ -160,6 +160,23 @@ interface CrawlResult {
   price?: string;
   mallName?: string;
   brand?: string;
+  productInfo?: {
+    name?: string;
+    price?: string;
+    description?: string;
+    brand?: string;
+    availability?: string;
+    canonicalUrl?: string;
+  };
+  pageQuality?: {
+    blocked: boolean;
+    requiresLogin: boolean;
+    isSoldOut: boolean;
+    isErrorPage: boolean;
+    signals: string[];
+    warning?: string;
+  };
+  resolvedUrl?: string;
   // ✅ [2026-01-30] 추가 필드
   spec?: string;           // 제품 스펙 (크기, 무게, 소재 등)
   category?: string;       // 카테고리 정보
@@ -4807,6 +4824,15 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
       price: puppeteerExtractedData?.price || undefined,
       reviews: puppeteerExtractedData?.reviewTexts || [],
       reviewImages: puppeteerExtractedData?.reviewImageUrls || [],
+      productInfo: {
+        name: finalTitle,
+        price: puppeteerExtractedData?.price || undefined,
+        description: productDescription || puppeteerExtractedData?.spec || undefined,
+        brand: undefined,
+        availability: undefined,
+        canonicalUrl: url,
+      },
+      resolvedUrl: url,
     };
 
     // ✅ 추출 결과 로그
@@ -4831,6 +4857,15 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
     const isErrorPage = !result.title ||
       result.title.length < 5 ||
       errorPagePatterns.some(pattern => titleLower.includes(pattern.toLowerCase()));
+
+    result.pageQuality = {
+      blocked: errorPagePatterns.some(pattern => ['security', 'verification', 'denied', 'blocked', 'captcha'].includes(pattern.toLowerCase()) && titleLower.includes(pattern.toLowerCase())),
+      requiresLogin: titleLower.includes('login') || titleLower.includes('signin') || titleLower.includes('로그인'),
+      isSoldOut: titleLower.includes('sold out') || titleLower.includes('품절') || titleLower.includes('판매종료'),
+      isErrorPage,
+      signals: isErrorPage ? ['error-page-title'] : [],
+      warning: isErrorPage ? '상품 페이지가 정상 상품 화면이 아니거나 접근 제한/품절/오류 화면일 수 있습니다.' : undefined,
+    };
 
     if (isErrorPage) {
       console.error(`[쇼핑몰 크롤링] ⚠️ 에러 페이지 감지! 제목: "${result.title}"`);

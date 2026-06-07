@@ -67,7 +67,10 @@ export function resolveContentGenerationCostPolicy(
 ): ContentGenerationCostPolicy {
   const costSaverOn = config?.costSaverMode !== false;
   const maxAttempts = parseAttemptOverride(env.CONTENT_MAX_ATTEMPTS) ?? (costSaverOn ? 1 : 2);
-  const allowExpensiveLlmPatch = !costSaverOn;
+  // Extra LLM patches run after the main article call. They can improve a
+  // title/intro edge case, but they also turn one user action into multiple
+  // provider requests and can burn low-tier RPM. Keep them explicit opt-in.
+  const allowExpensiveLlmPatch = !costSaverOn && env.CONTENT_ALLOW_EXTRA_LLM_PATCHES === '1';
 
   return {
     costSaverOn,

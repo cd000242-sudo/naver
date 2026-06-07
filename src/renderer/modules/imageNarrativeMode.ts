@@ -10,7 +10,12 @@
 
 import type { NarrativePlan, VisionProvider, InferenceMode } from '../../imageNarrative/types.js';
 import { initImageNarrativeUpload, getUploadedImages } from './imageNarrativeUpload.js';
-import { initImageNarrativeReview, showReviewPanel } from './imageNarrativeReview.js';
+import {
+  getReviewEdits,
+  initImageNarrativeReview,
+  isReviewComplete,
+  showReviewPanel,
+} from './imageNarrativeReview.js';
 import { executeFullAutoFlow } from './fullAutoFlow.js';
 
 // ---------------------------------------------------------------------------
@@ -73,6 +78,7 @@ export function initImageNarrativeMode(): void {
   initImageNarrativeReview();
   _bindProviderRadios();
   _bindInferButton();
+  _bindReviewGenerateEvent();
 }
 
 // ---------------------------------------------------------------------------
@@ -102,12 +108,27 @@ function _updateProviderWarning(provider: VisionProvider): void {
   if (!warningEl) return;
 
   const warnings: Partial<Record<VisionProvider, string>> = {
-    claude: '⚠️ Claude Sonnet은 비용이 Gemini 대비 약 8배입니다. 신중하게 사용하세요.',
+    claude: 'Claude Vision is not available in this build. Use Gemini or OpenAI.',
   };
 
   const msg = warnings[provider];
   warningEl.textContent = msg ?? '';
   warningEl.style.display = msg ? 'block' : 'none';
+}
+
+let _reviewGenerateBound = false;
+
+function _bindReviewGenerateEvent(): void {
+  if (_reviewGenerateBound) return;
+  _reviewGenerateBound = true;
+
+  document.addEventListener('imageNarrative:generate', async (event) => {
+    const detail = (event as CustomEvent).detail ?? {};
+    if (detail.plan) {
+      setState({ plan: detail.plan as NarrativePlan });
+    }
+    await _handlePublish(detail.edits);
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -222,12 +243,18 @@ export function bindImageNarrativePublish(): void {
   });
 }
 
-async function _handlePublish(): Promise<void> {
+async function _handlePublish(reviewEdits?: unknown): Promise<void> {
   const images = getUploadedImages();
   if (images.length < 3) {
     _showToast('최소 3장 이상의 이미지를 업로드해 주세요.', 'error');
     return;
   }
+  if (_modeState.plan && !isReviewComplete()) {
+    _showToast('Please complete the photo review fields before publishing.', 'error');
+    return;
+  }
+
+  const edits = reviewEdits ?? Object.fromEntries(getReviewEdits());
 
   // Build the formData payload for executeFullAutoFlow
   const formData: Record<string, unknown> = {
@@ -240,6 +267,8 @@ async function _handlePublish(): Promise<void> {
       })),
       provider: _modeState.provider,
       mode: _modeState.mode,
+      plan: _modeState.plan ?? undefined,
+      reviewEdits: edits,
     },
     // Carry through any global form settings if available
     category: _readFormField('unified-category'),

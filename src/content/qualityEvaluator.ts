@@ -26,7 +26,7 @@ import { evaluateAffiliate } from './evaluators/affiliateEval';
 import { evaluateHumanlike } from './evaluators/humanlikeEval';
 import { evaluateSafety } from './evaluators/safetyEval';
 
-export type Mode = 'seo' | 'homefeed' | 'affiliate' | 'business' | 'custom';
+export type Mode = 'seo' | 'homefeed' | 'affiliate' | 'business' | 'custom' | 'mate';
 export type Decision = 'pass' | 'patch' | 'regenerate';
 
 export interface SubScore {
@@ -72,6 +72,7 @@ const WEIGHTS: Readonly<Record<Mode, Weights>> = {
   affiliate: { mode: 0.50, safety: 0.20, humanlike: 0.30 },
   business:  { mode: 0.50, safety: 0.30, humanlike: 0.20 },
   custom:    { mode: 0.50, safety: 0.30, humanlike: 0.20 },
+  mate:      { mode: 0.55, safety: 0.35, humanlike: 0.10 },
 };
 
 function decide(final: number, safety: number): Decision {

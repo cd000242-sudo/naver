@@ -27,7 +27,7 @@ export function getCostRiskProviderLabel(provider: string): string {
     if (p === 'stability') return 'Stability AI';
     if (p === 'leonardoai') return 'Leonardo AI';
     if (p === 'openai-image') return 'OpenAI 덕트테이프 (gpt-image-1.5 / gpt-image-2)';
-    if (p === 'dall-e-3') return 'DALL-E 3 (OpenAI)';
+    if (p === 'dall-e-3') return 'OpenAI GPT 이미지 시리즈 (레거시 설정)';
     return p || 'AI 이미지';
 }
 

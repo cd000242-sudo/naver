@@ -2133,7 +2133,7 @@ async function autoGenerateFromUrl(urls: string): Promise<void> {
 
       // ✅ contentMode 수집 (custom 모드 지원)
       const contentModeSelect = document.getElementById('unified-content-mode') as HTMLSelectElement;
-      const contentMode = (contentModeSelect?.value || 'seo') as 'seo' | 'homefeed' | 'affiliate' | 'custom';
+      const contentMode = (contentModeSelect?.value || 'seo') as 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business' | 'mate';
 
       console.log(`[URL 생성] contentMode: ${contentMode}, customPrompt: ${customPrompt ? `${customPrompt.substring(0, 50)}...` : '없음'}`);
 
@@ -5324,11 +5324,50 @@ URL: ${firstUrl}
       accountSettingsMap = {};
     }
 
-    const intervalSeconds = parseInt((document.getElementById('ma-interval-inline') as HTMLInputElement)?.value || '30');
+    const formatBatchInterval = (seconds: number): string => {
+      const safe = Math.max(0, Math.floor(Number(seconds) || 0));
+      if (safe >= 3600) {
+        const hours = Math.floor(safe / 3600);
+        const minutes = Math.floor((safe % 3600) / 60);
+        return `${hours}시간${minutes > 0 ? ` ${minutes}분` : ''}`;
+      }
+      if (safe >= 60) {
+        const minutes = Math.floor(safe / 60);
+        const rest = safe % 60;
+        return `${minutes}분${rest > 0 ? ` ${rest}초` : ''}`;
+      }
+      return `${safe}초`;
+    };
+    const getSafeBatchInterval = (requestedSeconds: number, totalItems: number) => {
+      const requested = Number.isFinite(requestedSeconds) ? Math.max(0, Math.floor(requestedSeconds)) : 0;
+      const minimum = totalItems >= 50 ? 600 : totalItems >= 10 ? 420 : 300;
+      const safe = Math.min(86400, Math.max(requested, minimum));
+      const reason = totalItems >= 50 ? '50개 이상 대량 발행 보호' : totalItems >= 10 ? '10개 이상 장기 발행 보호' : '다중계정 기본 보호';
+      return { requested, safe, adjusted: safe !== requested, reason };
+    };
+    const applyBatchIntervalJitter = (intervalSeconds: number, floorSeconds: number): number => {
+      const jitterFactor = 1 + (Math.random() * 2 - 1) * 0.25;
+      return Math.min(86400, Math.max(floorSeconds, Math.round(intervalSeconds * jitterFactor)));
+    };
+    const waitBatchInterval = async (seconds: number): Promise<boolean> => {
+      const ms = Math.max(0, Math.floor(seconds * 1000));
+      const start = Date.now();
+      while (Date.now() - start < ms) {
+        if ((window as any).stopBatchPublish || (window as any).stopFullAutoPublish) return false;
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+      return true;
+    };
+    const requestedIntervalSeconds = parseInt((document.getElementById('ma-interval-inline') as HTMLInputElement)?.value || '30');
+    const intervalPolicy = getSafeBatchInterval(requestedIntervalSeconds, publishQueue.length);
+    const intervalSeconds = intervalPolicy.safe;
 
     if (!confirm(`${publishQueue.length}개 계정에 순차적으로 발행합니다. 계속하시겠습니까?`)) return;
 
     appendLog(`🚀 일괄 발행 시작: ${publishQueue.length}개 계정`);
+    if (intervalPolicy.adjusted) {
+      appendLog(`🛡️ 안전 발행 간격 자동 조정: ${formatBatchInterval(intervalPolicy.requested)} → ${formatBatchInterval(intervalPolicy.safe)} (${intervalPolicy.reason})`);
+    }
 
     // ✅ [2026-03-17] 예약 모드 항목들에 scheduleDistributor 시간 분산 적용
     // ✅ [2026-04-01 BUG-7/BUG-8 FIX] 이미 설정된 항목 보호 + 기본 간격 30분
@@ -5478,8 +5517,13 @@ URL: ${firstUrl}
 
           // 다음 계정 발행 전 대기 (마지막 계정 제외)
           if (i < publishQueue.length - 1 && publishSuccess) {
-            appendLog(`⏳ ${intervalSeconds}초 대기 중... (다음 발행까지)`);
-            await new Promise(resolve => setTimeout(resolve, intervalSeconds * 1000));
+            const waitSeconds = applyBatchIntervalJitter(intervalSeconds, intervalPolicy.safe);
+            appendLog(`⏳ ${formatBatchInterval(waitSeconds)} 대기 중... (다음 발행까지)`);
+            const waitOk = await waitBatchInterval(waitSeconds);
+            if (!waitOk) {
+              appendLog('⏹️ 일괄 발행이 사용자에 의해 중지되었습니다.');
+              break;
+            }
           }
 
         } catch (error) {
@@ -6492,6 +6536,7 @@ function initUnifiedModeSelection(): void {
 
       const descriptionEl = document.getElementById('content-mode-description');
       const homefeedDescEl = document.getElementById('content-mode-description-homefeed');
+      const mateDescEl = document.getElementById('content-mode-description-mate');
       const affiliateDescEl = document.getElementById('content-mode-description-affiliate');
       const customDescEl = document.getElementById('content-mode-description-custom');
       const businessDescEl = document.getElementById('content-mode-description-business');
@@ -6512,6 +6557,8 @@ function initUnifiedModeSelection(): void {
         (btn as HTMLElement).style.background = 'linear-gradient(135deg, #10b981, #059669)';
       } else if (mode === 'homefeed') {
         (btn as HTMLElement).style.background = 'linear-gradient(135deg, #8b5cf6, #7c3aed)';
+      } else if (mode === 'mate') {
+        (btn as HTMLElement).style.background = 'linear-gradient(135deg, #14b8a6, #0f766e)';
       } else if (mode === 'affiliate') {
         (btn as HTMLElement).style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
       } else if (mode === 'custom') {
@@ -6526,6 +6573,7 @@ function initUnifiedModeSelection(): void {
       // 설명 토글
       if (descriptionEl) descriptionEl.style.display = mode === 'seo' ? 'block' : 'none';
       if (homefeedDescEl) homefeedDescEl.style.display = mode === 'homefeed' ? 'block' : 'none';
+      if (mateDescEl) mateDescEl.style.display = mode === 'mate' ? 'block' : 'none';
       if (affiliateDescEl) affiliateDescEl.style.display = mode === 'affiliate' ? 'block' : 'none';
       if (customDescEl) customDescEl.style.display = mode === 'custom' ? 'block' : 'none';
       if (businessDescEl) businessDescEl.style.display = mode === 'business' ? 'block' : 'none';

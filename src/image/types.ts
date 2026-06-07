@@ -25,6 +25,7 @@ export interface ImageRequestItem {
   category?: string; // ✅ 카테고리 (이미지 스타일 결정용)
   referenceImagePath?: string; // 로컬 참조 이미지 경로
   referenceImageUrl?: string; // 원격 참조 이미지 URL
+  referenceImageList?: string[]; // URL reference list for UI-based img2img engines
   visualQueries?: string[]; // ✅ AI가 생성한 시각적 검색 키워드 (사람 같은 수집용)
 }
 
@@ -45,6 +46,9 @@ export interface GenerateImagesOptions {
   stopCheck?: () => boolean; // ✅ [100점 수정] 중지 여부 확인 콜백
   thumbnailTextInclude?: boolean; // ✅ [2026-01-28] 1번 이미지에 텍스트 포함 여부
   category?: string; // ✅ [2026-02-12] 전체 배치의 카테고리 (items에 개별 category 없을 때 폴백)
+  isContinuousMode?: boolean;
+  isMultiAccount?: boolean;
+  forceSequential?: boolean;
   /**
    * 선택 엔진 실패/부적합 시 동작.
    * - engine-only: 선택 엔진만 사용, 자동 대체 금지

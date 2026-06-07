@@ -730,14 +730,14 @@
                             글 생성을 진행해주세요. 카테고리에 따라 본문 흐름과 문체를 자동 최적화합니다.</p>
                     </div>
 
-                    <!-- ✅ 콘텐츠 모드 선택 (SEO / 홈판 / 쇼핑 커넥트 / 사용자정의) - 카테고리 아래 배치 -->
+                    <!-- ✅ 콘텐츠 모드 선택 (SEO / 홈판 / 네이버 메이트 / 쇼핑 커넥트 / 사용자정의 / 업체 홍보) - 카테고리 아래 배치 -->
                     <div
                         style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.05)); padding: 1rem; border-radius: var(--radius-md); border: 2px solid rgba(139, 92, 246, 0.3); margin-bottom: 1rem;">
                         <label
                             style="display: block; margin-bottom: 0.75rem; font-weight: 700; color: var(--text-strong); font-size: 0.95rem;">
                             🎯 콘텐츠 모드 선택
                         </label>
-                        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem;">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
                             <div style="position: relative;">
                                 <button type="button" class="content-mode-btn selected" data-mode="seo"
                                     style="width: 100%; padding: 0.7rem 0.5rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: var(--radius-md); cursor: pointer; font-weight: 700; font-size: 0.8rem; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.2rem;">
@@ -757,6 +757,16 @@
                                 </button>
                                 <button type="button" class="content-mode-help-btn" data-help-mode="homefeed"
                                     style="position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; background: rgba(59, 130, 246, 0.9); color: white; border: 2px solid white; border-radius: 50%; font-size: 0.7rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">?</button>
+                            </div>
+                            <div style="position: relative;">
+                                <button type="button" class="content-mode-btn" data-mode="mate"
+                                    style="width: 100%; padding: 0.7rem 0.5rem; background: var(--bg-tertiary); color: var(--text-muted); border: 2px solid var(--border-medium); border-radius: var(--radius-md); cursor: pointer; font-weight: 700; font-size: 0.8rem; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.2rem;">
+                                    <span style="font-size: 1.3rem;">🏅</span>
+                                    <span>네이버 메이트</span>
+                                    <span style="font-size: 0.65rem; opacity: 0.9;">AI 브리핑 인용</span>
+                                </button>
+                                <button type="button" class="content-mode-help-btn" data-help-mode="mate"
+                                    style="position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; background: rgba(20, 184, 166, 0.9); color: white; border: 2px solid white; border-radius: 50%; font-size: 0.7rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">?</button>
                             </div>
                             <div style="position: relative;">
                                 <button type="button" class="content-mode-btn" data-mode="affiliate"
@@ -800,6 +810,9 @@
                             </div>
                             <div id="content-mode-description-homefeed" style="display: none;">
                                 <strong>🏠 홈판 모드:</strong> 네이버 홈 메인 및 추천 영역 노출을 목표로 하는 클릭 유도형 콘텐츠를 생성합니다.
+                            </div>
+                            <div id="content-mode-description-mate" style="display: none;">
+                                <strong>🏅 네이버 메이트 모드:</strong> AI 브리핑 인용과 주제 전문성 신호를 목표로 하는 답변형 콘텐츠를 생성합니다. 한 주제 집중, 근거 중심, 정책 위험 최소화 구조를 적용합니다.
                             </div>
                             <div id="content-mode-description-affiliate" style="display: none;">
                                 <strong>🛏️ 쇼핑 커넥트 모드:</strong> 네이버 쇼핑 커넥트 활동을 위한 구매 전환 글을 생성합니다. 모든 이미지에 제휴 링크가 삽입됩니다.
@@ -1303,8 +1316,8 @@
                                         <span>🧠 GPT-4o <em>(한국어 묘사 우수)</em></span>
                                     </label>
                                     <label class="image-narrative-provider-radio">
-                                        <input type="radio" name="vision-provider" value="claude" />
-                                        <span>🎯 Claude Sonnet <em>(고정밀 · 비용 ↑)</em></span>
+                                        <input type="radio" name="vision-provider" value="claude" disabled />
+                                        <span>🎯 Claude Sonnet <em>(준비중)</em></span>
                                     </label>
                                 </div>
                                 <div id="vision-provider-warning" class="image-narrative-provider-warning" style="display:none;"></div>
@@ -4560,7 +4573,7 @@
                     <label for="sub-work-provider" style="font-weight: 700; color: var(--text-strong); display: block; margin-bottom: 0.3rem;">🔀 부수 작업 모델</label>
                     <select id="sub-work-provider" style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: 8px; font-size: 0.9rem;">
                         <option value="same">본문과 동일 모델 (기본 — silent 폴백 0)</option>
-                        <option value="gpt-mini">GPT-4.1 mini (저렴, $0.40/1M) ⚠️ Tier1=500RPM, $50+7일 후 권장</option>
+                        <option value="gpt-mini">GPT-4.1 mini (저렴, $0.40/1M, 낮은 한도 사용자 권장)</option>
                         <option value="gemini-flash">Gemini 2.5 Flash (가장 저렴, $0.30/1M)</option>
                         <option value="haiku">Claude Haiku 4.5 ($1/1M)</option>
                     </select>
@@ -6846,6 +6859,7 @@
                                     style="width: 100%; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); padding: 0.5rem; font-size: 0.9rem;">
                                     <option value="seo" selected>🔍 SEO 모드 (검색 상위노출)</option>
                                     <option value="homefeed">🏠 홈판 모드 (메인·추천 노출)</option>
+                                    <option value="mate">🏅 네이버 메이트 모드 (AI 브리핑 인용)</option>
                                     <option value="affiliate">🛒 쇼핑커넥트 모드 (리뷰형)</option>
                                     <option value="business">🏢 업체 홍보 모드 (시공/철거/인테리어/전문서비스, 견적 문의 유도)</option>
                                     <option value="custom">✏️ 사용자정의 모드</option>
@@ -7465,6 +7479,7 @@
                             style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: 8px; color: var(--text-strong); padding: 0.6rem; font-size: 0.9rem;">
                             <option value="seo" selected>🔍 SEO 모드 (검색 상위노출)</option>
                             <option value="homefeed">🏠 홈판 모드 (메인·추천 노출)</option>
+                            <option value="mate">🏅 네이버 메이트 모드 (AI 브리핑 인용)</option>
                             <option value="business">🏢 업체 홍보 (시공/철거/인테리어/전문서비스)</option>
                             <option value="custom">✏️ 사용자정의 모드</option>
                             <option value="affiliate" id="continuous-modal-affiliate-option" style="display: none;">
@@ -9563,6 +9578,7 @@
                                 style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--border-medium); background: var(--bg-secondary); color: var(--text-strong); font-size: 0.85rem;">
                                 <option value="seo" selected>🔍 SEO 모드</option>
                                 <option value="homefeed">🏠 홈판 모드</option>
+                                <option value="mate">🏅 네이버 메이트</option>
                                 <option value="business">🏢 업체 홍보</option>
                                 <option value="custom">✏️ 사용자정의</option>
                                 <option value="affiliate">🛒 쇼핑커넥트</option>
@@ -11949,6 +11965,33 @@
                         <div
                             style="padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; font-size: 0.85rem; color: var(--text-muted);">
                             💡 <strong>추천:</strong> 일상 공유, 후기, 감성글 등 소셜 확산을 원할 때
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 네이버 메이트 모드 설명 -->
+                <div id="help-content-mate" class="help-content-section" style="display: none;">
+                    <div
+                        style="padding: 1.5rem; background: rgba(20, 184, 166, 0.1); border-radius: 12px; border: 1px solid rgba(20, 184, 166, 0.3); margin-bottom: 1rem;">
+                        <h3 style="color: #14b8a6; margin: 0 0 1rem 0; font-size: 1.1rem;">🏅 네이버 메이트 모드란?</h3>
+                        <p style="color: var(--text-strong); margin: 0 0 1rem 0; line-height: 1.7;">
+                            <strong>AI 브리핑 인용과 주제 전문성</strong>을 목표로 하는 답변형 글을 생성합니다.<br>
+                            검색 노출뿐 아니라 한 주제에 대한 신뢰도, 최신성, 이용자 반응까지 고려합니다.
+                        </p>
+                        <div
+                            style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem;">
+                            <div style="font-weight: 700; color: var(--text-gold); margin-bottom: 0.5rem;">✨ 특징
+                            </div>
+                            <ul style="margin: 0; padding-left: 1.25rem; color: var(--text-muted); line-height: 1.8;">
+                                <li>첫 문단에 검색 의도에 대한 직접 답변 배치</li>
+                                <li>주제 전문성 강화를 위한 기둥글·하위 질문 구조</li>
+                                <li>표, 단계, FAQ, 최신 확인일을 포함한 AI 브리핑 친화 구성</li>
+                                <li>허위 경험, 근거 없는 수치, 광고성 과장 표현 차단</li>
+                            </ul>
+                        </div>
+                        <div
+                            style="padding: 0.75rem; background: rgba(20, 184, 166, 0.1); border-radius: 6px; font-size: 0.85rem; color: var(--text-muted);">
+                            💡 <strong>추천:</strong> 네이버 메이트 선정, AI 브리핑 인용, 전문 주제 블로그 육성을 목표로 할 때
                         </div>
                     </div>
                 </div>

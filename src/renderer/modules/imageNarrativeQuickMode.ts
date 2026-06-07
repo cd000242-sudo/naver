@@ -14,8 +14,9 @@
  */
 
 import { initImageNarrativeUpload, getUploadedImages, clearUploadedImages, addFiles, UPLOAD_MIN } from './imageNarrativeUpload.js';
-import { showReviewPanel, hideReviewPanel, isReviewComplete } from './imageNarrativeReview.js';
-import type { NarrativePlan } from '../../imageNarrative/types.js';
+import { showReviewPanel, hideReviewPanel, isReviewComplete, getReviewEdits } from './imageNarrativeReview.js';
+import { executeFullAutoFlow } from './fullAutoFlow.js';
+import type { NarrativePlan, VisionProvider } from '../../imageNarrative/types.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -27,6 +28,7 @@ interface QuickModeState {
   readonly currentPanel: QuickModePanel;
   readonly isInferring: boolean;
   readonly plan: NarrativePlan | null;
+  readonly provider: VisionProvider;
 }
 
 // ---------------------------------------------------------------------------
@@ -37,6 +39,7 @@ let _quickState: QuickModeState = {
   currentPanel: 1,
   isInferring: false,
   plan: null,
+  provider: 'gemini',
 };
 
 function setState(patch: Partial<QuickModeState>): void {
@@ -76,7 +79,7 @@ export function openQuickMode(): void {
 
   clearUploadedImages();
   hideReviewPanel();
-  setState({ currentPanel: 1, isInferring: false, plan: null });
+  setState({ currentPanel: 1, isInferring: false, plan: null, provider: 'gemini' });
 
   _renderModal();
   modal.style.display = 'flex';
@@ -166,6 +169,7 @@ async function _runQuickInference(): Promise<void> {
       console.warn('[QuickMode] getConfig 실패 — Gemini Flash 기본:', cfgErr);
     }
     const provider = _textKeyToVisionProvider(textKey);
+    setState({ provider });
     console.log(`[QuickMode] 글 생성 모델 "${textKey}" → vision provider "${provider}"`);
 
     const result = await (window as any).api?.inferAndWrite?.({
@@ -226,13 +230,30 @@ function _renderPublishPanel(): void {
     </div>
   `;
 
-  document.getElementById('quick-mode-final-publish-btn')?.addEventListener('click', () => {
-    document.dispatchEvent(
-      new CustomEvent('imageNarrative:quickPublish', {
-        detail: { plan: _quickState.plan, images: getUploadedImages() },
-      })
-    );
-    closeQuickMode();
+  document.getElementById('quick-mode-final-publish-btn')?.addEventListener('click', async () => {
+    try {
+      const images = getUploadedImages();
+      await executeFullAutoFlow({
+        contentMode: 'image-narrative',
+        imageNarrative: {
+          images: images.map((img) => ({
+            imageId: img.id,
+            imageBase64: img.base64,
+            mimeType: img.mimeType,
+          })),
+          provider: _quickState.provider,
+          mode: _quickState.plan?.mode ?? 'auto',
+          plan: _quickState.plan ?? undefined,
+          reviewEdits: Object.fromEntries(getReviewEdits()),
+        },
+        targetChars: 1500,
+        toneStyle: 'friendly',
+      });
+      closeQuickMode();
+    } catch (err) {
+      console.error('[QuickMode] Publish failed:', err);
+      _showToast(`Publish failed: ${(err as Error).message}`, 'error');
+    }
   });
 }
 
@@ -429,11 +450,11 @@ function _getModal(): HTMLElement | null {
  *   - perplexity-* → gemini (Perplexity vision 미지원)
  *   - 미지원 키 → gemini (안전 기본)
  */
-function _textKeyToVisionProvider(textKey: string): 'gemini' | 'openai' | 'claude' | 'deepinfra' {
+function _textKeyToVisionProvider(textKey: string): VisionProvider {
   if (!textKey) return 'gemini';
   if (textKey.startsWith('gemini-')) return 'gemini';
   if (textKey.startsWith('openai-') || textKey.startsWith('gpt-')) return 'openai';
-  if (textKey.startsWith('claude-')) return 'claude';
+  if (textKey.startsWith('claude-')) return 'gemini';
   if (textKey.startsWith('perplexity-')) return 'gemini';
   return 'gemini';
 }

@@ -212,7 +212,7 @@ describe('qualityEvaluator — Phase 1 통합 평가', () => {
   });
 
   it('finalScore는 0~100 범위', () => {
-    const modes: Array<EvaluationInput['mode']> = ['seo', 'homefeed', 'affiliate', 'business', 'custom'];
+    const modes: Array<EvaluationInput['mode']> = ['seo', 'homefeed', 'affiliate', 'business', 'custom', 'mate'];
     for (const mode of modes) {
       const result = evaluate({ body: sampleBodyGood, title: '테스트', mode });
       expect(result.finalScore).toBeGreaterThanOrEqual(0);

@@ -12,6 +12,12 @@ import {
   getQuotaBackoffMs,
   QUOTA_BACKOFF_SEQUENCE_MS,
   getOpenAiMinIntervalMs,
+  getOpenAiMaxCompletionTokens,
+  getOpenAiRateLimitPatienceMs,
+  getOpenAiRateLimitWaitMs,
+  isOpenAiHardQuotaError,
+  isOpenAiRateLimitError,
+  parseOpenAiRateLimitDelayMs,
 } from '../utils/openaiRpmThrottler.js';
 
 describe('getQuotaBackoffMs — 누진 backoff 시퀀스', () => {
@@ -44,6 +50,11 @@ describe('getOpenAiMinIntervalMs — 호출 간 최소 간격', () => {
     expect(getOpenAiMinIntervalMs()).toBe(10_000);
   });
 
+  it('mini 모델은 12초 간격을 사용', () => {
+    delete process.env.OPENAI_MIN_INTERVAL_MS;
+    expect(getOpenAiMinIntervalMs('gpt-4.1-mini')).toBe(6_000);
+  });
+
   it('환경 변수로 override 가능', () => {
     process.env.OPENAI_MIN_INTERVAL_MS = '5000';
     expect(getOpenAiMinIntervalMs()).toBe(5_000);
@@ -52,6 +63,68 @@ describe('getOpenAiMinIntervalMs — 호출 간 최소 간격', () => {
   it('0(간격 없음)도 허용', () => {
     process.env.OPENAI_MIN_INTERVAL_MS = '0';
     expect(getOpenAiMinIntervalMs()).toBe(0);
+  });
+});
+
+describe('OpenAI low-tier token budget helpers', () => {
+  afterEach(() => {
+    delete process.env.OPENAI_MIN_INTERVAL_MS;
+  });
+
+  it('sizes max completion tokens to the requested job instead of always reserving 8192', () => {
+    expect(getOpenAiMaxCompletionTokens(450)).toBeLessThanOrEqual(1200);
+    expect(getOpenAiMaxCompletionTokens(650)).toBeLessThanOrEqual(1400);
+    expect(getOpenAiMaxCompletionTokens(2500)).toBeLessThan(8192);
+    expect(getOpenAiMaxCompletionTokens(6000)).toBe(8192);
+  });
+
+  it('uses a more conservative interval for large standard GPT-4.1 calls', () => {
+    expect(getOpenAiMinIntervalMs('gpt-4.1', 4500)).toBeGreaterThanOrEqual(15_000);
+    expect(getOpenAiMinIntervalMs('gpt-4.1-mini', 4500)).toBeLessThan(
+      getOpenAiMinIntervalMs('gpt-4.1', 4500),
+    );
+  });
+});
+
+describe('OpenAI rate-limit patient wait helpers', () => {
+  const originalPatience = process.env.OPENAI_RATE_LIMIT_PATIENCE_MS;
+  afterEach(() => {
+    if (originalPatience === undefined) delete process.env.OPENAI_RATE_LIMIT_PATIENCE_MS;
+    else process.env.OPENAI_RATE_LIMIT_PATIENCE_MS = originalPatience;
+  });
+
+  it('parses OpenAI reset delay formats', () => {
+    expect(parseOpenAiRateLimitDelayMs('6m0s')).toBe(360_000);
+    expect(parseOpenAiRateLimitDelayMs('1.5s')).toBe(1_500);
+    expect(parseOpenAiRateLimitDelayMs('250ms')).toBe(250);
+    expect(parseOpenAiRateLimitDelayMs('2')).toBe(2_000);
+  });
+
+  it('uses retry-after and reset headers above fallback backoff', () => {
+    const error = {
+      status: 429,
+      headers: {
+        'retry-after': '45',
+        'x-ratelimit-reset-requests': '20s',
+        'x-ratelimit-reset-tokens': '1m30s',
+      },
+    };
+    expect(getOpenAiRateLimitWaitMs(error, 30_000)).toBe(90_000);
+  });
+
+  it('defaults to a 5 minute patience window and allows env override', () => {
+    delete process.env.OPENAI_RATE_LIMIT_PATIENCE_MS;
+    expect(getOpenAiRateLimitPatienceMs()).toBe(300_000);
+
+    process.env.OPENAI_RATE_LIMIT_PATIENCE_MS = '240000';
+    expect(getOpenAiRateLimitPatienceMs()).toBe(240_000);
+  });
+
+  it('separates transient 429 rate limits from hard billing quota errors', () => {
+    expect(isOpenAiRateLimitError({ status: 429, code: 'rate_limit_exceeded' })).toBe(true);
+    expect(isOpenAiHardQuotaError({ status: 429, code: 'rate_limit_exceeded' })).toBe(false);
+    expect(isOpenAiHardQuotaError({ status: 429, code: 'insufficient_quota' })).toBe(true);
+    expect(isOpenAiHardQuotaError({ status: 429 }, 'please check your plan and billing details')).toBe(false);
   });
 });
 
@@ -122,5 +195,15 @@ describe('OpenAIRpmThrottler.throttle — 최소 간격 직렬 예약', () => {
 
     await vi.advanceTimersByTimeAsync(0);
     expect(done).toEqual([true, true]); // 둘 다 즉시 통과
+  });
+
+  it('abort signal cancels a reserved wait immediately', async () => {
+    const controller = new AbortController();
+    await throttler.throttle(10_000);
+
+    const pending = throttler.throttle(10_000, controller.signal);
+    controller.abort();
+
+    await expect(pending).rejects.toThrow(/취소/);
   });
 });

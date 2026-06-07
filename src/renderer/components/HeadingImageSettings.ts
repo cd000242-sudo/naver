@@ -102,9 +102,9 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'pollinations': 'Pollinations',
   'deepinfra': 'FLUX-2 (DeepInfra)',
   'openai-image': 'OpenAI Image (gpt-image-1 / 1.5 / 2)',
-  'dall-e-3': 'DALL-E 3 (OpenAI)',
+  'dall-e-3': 'GPT 이미지 시리즈 (레거시 설정)',
   'leonardoai': 'Leonardo AI',
-  'imagefx': 'ImageFX (무료)',
+  'imagefx': 'ImageFX (Google Labs, 제한 가능)',
   'flow': '🍌 Flow (Nano Banana 2)',
   'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)',
   'local-folder': '📂 내 폴더'
@@ -689,7 +689,7 @@ export function createHeadingImageModal(): void {
                 <div class="btn-icon">🎨</div>
                 <div>
                   <div class="btn-text">AI 이미지 생성 엔진</div>
-                  <div class="btn-value" id="current-image-source-display">ImageFX (무료)</div>
+                  <div class="btn-value" id="current-image-source-display">ImageFX (Labs, 제한 가능)</div>
                 </div>
               </div>
               <span class="arrow">›</span>
@@ -870,7 +870,7 @@ export function createHeadingImageModal(): void {
                 <option value="deepinfra">FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">OpenAI Image (gpt-image-1 / 1.5 / 2)</option>
                 <option value="leonardoai">Leonardo AI</option>
-                <option value="imagefx">ImageFX (무료)</option>
+                <option value="imagefx">ImageFX (Google Labs, 제한 가능)</option>
                 <option value="flow">🍌 Flow (Nano Banana 2)</option>
               </select>
             </div>
@@ -1034,7 +1034,7 @@ export function createHeadingImageModal(): void {
             <div style="position: absolute; top: -6px; right: -6px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 8px;">무료</div>
             <div style="font-size: 1.5rem;">✨</div>
             <div style="font-size: 12px; font-weight: 600; color: #047857;">ImageFX</div>
-            <div style="font-size: 10px; color: #059669;">Google 무료 | 1000장/일</div>
+            <div style="font-size: 10px; color: #059669;">Google Labs | 계정/IP 제한 가능</div>
           </label>
           <!-- ✅ [v1.4.64] Flow (Nano Banana Pro) UI 노출 — labs.google 세션 공유, 한글 텍스트 네이티브 -->
           <label class="source-option" data-value="flow" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #f59e0b; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25); position: relative;">
@@ -1374,7 +1374,7 @@ export function createHeadingImageModal(): void {
                 <option value="nano-banana-pro">🍌 나노바나나 프로 (Gemini 3 Pro, ₩185/장, 한글 최강)</option>
                 <option value="nano-banana">🍌 나노바나나 (Gemini 2.5 Flash, ₩54/장, 한글 텍스트 깨짐)</option>
                 <option value="flow">🍌 Flow (Nano Banana 2, AI Pro 무료)</option>
-                <option value="imagefx">✨ ImageFX (Google 무료)</option>
+                <option value="imagefx">✨ ImageFX (Google Labs, 제한 가능)</option>
                 <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">🦆 OpenAI Image (gpt-image-1 / 1.5 / 2)</option>
                 <option value="leonardoai">🦁 Leonardo AI</option>
@@ -2316,11 +2316,11 @@ export function createHeadingImageModal(): void {
       userName = loginResult.userName || 'user';
       console.log(`[HeadingImageSettings] ✅ Step 1/3: Google 로그인 OK (${userName})`);
 
-      // ── Step 2/3: ImageFX 연결 테스트 ─────────────────────
-      if (textEl) textEl.textContent = `⏳ Step 2/3: ImageFX 연결 확인 중...`;
+      // ── Step 2/3: ImageFX 실제 생성 테스트 ─────────────────────
+      if (textEl) textEl.textContent = `⏳ Step 2/3: ImageFX 실제 1장 생성 테스트 중...`;
       try {
         const imagefxResult = await (window as any).api.testImageFxConnection();
-        imagefxOk = !!imagefxResult?.success;
+        imagefxOk = Boolean(imagefxResult?.ok ?? imagefxResult?.success);
         imagefxMsg = imagefxResult?.message || (imagefxOk ? '정상' : '실패');
         console.log(`[HeadingImageSettings] ${imagefxOk ? '✅' : '⚠️'} Step 2/3: ImageFX = ${imagefxMsg}`);
       } catch (e: any) {
@@ -2332,7 +2332,7 @@ export function createHeadingImageModal(): void {
       if (textEl) textEl.textContent = `⏳ Step 3/3: Flow 연결 확인 중...`;
       try {
         const flowResult = await (window as any).api.testFlowConnection();
-        flowOk = !!flowResult?.success;
+        flowOk = Boolean(flowResult?.ok ?? flowResult?.success);
         flowMsg = flowResult?.message || (flowOk ? '정상' : '실패');
         console.log(`[HeadingImageSettings] ${flowOk ? '✅' : '⚠️'} Step 3/3: Flow = ${flowMsg}`);
       } catch (e: any) {
@@ -2411,16 +2411,16 @@ export function createHeadingImageModal(): void {
     }
   });
 
-  // ImageFX 연결 테스트 — Flow와 별도 프로필이라 명시 트리거 필요
+  // ImageFX 실제 생성 테스트 — Flow와 별도 프로필이라 명시 트리거 필요
   document.getElementById('test-imagefx-connection-btn')?.addEventListener('click', async () => {
-    console.log('[HeadingImageSettings] ✨ ImageFX 연결 테스트 시작');
+    console.log('[HeadingImageSettings] ✨ ImageFX 실제 생성 테스트 시작');
     const dotEl = document.getElementById('imagefx-connection-dot');
     const textEl = document.getElementById('imagefx-connection-text');
     const statusEl = document.getElementById('imagefx-connection-status');
     const btn = document.getElementById('test-imagefx-connection-btn') as HTMLButtonElement | null;
     if (btn) btn.disabled = true;
     if (dotEl) dotEl.style.background = '#3b82f6';
-    if (textEl) textEl.textContent = '⏳ 연결 테스트 중... (로그인 필요 시 브라우저 창이 열립니다, 최대 5분)';
+    if (textEl) textEl.textContent = '⏳ ImageFX 실제 생성 테스트 중... Google 로그인 후 테스트 이미지 1장을 생성합니다.';
     if (statusEl) statusEl.style.color = '#3b82f6';
     try {
       const result = await (window as any).api.testImageFxConnection();
@@ -2532,7 +2532,7 @@ export function createHeadingImageModal(): void {
           <div style="background: rgba(124, 58, 237, 0.1); padding: 14px; border-radius: 12px; border: 1px solid rgba(124, 58, 237, 0.3);">
             <label style="display: block; font-weight: 600; color: #a78bfa; margin-bottom: 8px; font-size: 13px;">🦆 OpenAI Image</label>
             <select id="submodal-openai-image-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
-              <option value="gpt-image-1">🎨 gpt-image-1 (정식, DALL-E 3 후속)</option>
+              <option value="gpt-image-1">🎨 gpt-image-1 (GPT 이미지 시리즈)</option>
               <option value="gpt-image-1.5">⚡ gpt-image-1.5 (저비용 기본, 추천)</option>
               <option value="gpt-image-2">👑 gpt-image-2 (고품질)</option>
             </select>
@@ -2773,7 +2773,7 @@ function showOpenAiTierWarningModal(reason: 'precheck' | 'rate-limit-hit' = 'pre
         <div style="font-weight: 700; color: #86efac; font-size: 0.85rem; margin-bottom: 0.5rem;">💡 초보 사용자 추천 엔진</div>
         <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #d1fae5; line-height: 1.7;">
           <li><b>Nano Banana 2</b> (Gemini 3.1 Flash) — ₩97/장, Tier 한도 없음, 한글 네이티브</li>
-          <li><b>ImageFX</b> — Google 무료 (Google 로그인만)</li>
+          <li><b>ImageFX</b> — Google Labs 실험 엔진 (계정/IP 제한 가능)</li>
           <li><b>DeepInfra FLUX-2</b> — ₩35/장, 빠름</li>
         </ul>
       </div>

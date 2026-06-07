@@ -14,7 +14,6 @@ import {
     CollectionOptions,
     ProductImage,
     ProductInfo,
-    ERROR_PAGE_INDICATORS,
 } from '../types.js';
 import { upscaleUrl, isJunkUrl, normalizeUrl } from '../utils/imageUrlUtils.js';
 
@@ -25,10 +24,17 @@ const CHROME_UA = MOBILE_UA; // 모바일 API용
 
 let puppeteer: typeof import('puppeteer');
 
+interface SmartStoreUrlParts {
+    productId?: string;
+    storeName?: string;
+    affiliateId?: string;
+}
+
 export class SmartStoreProvider extends BaseProvider {
     readonly name = 'SmartStoreProvider';
     readonly platform = 'smart-store' as const;
     readonly urlPatterns = [
+        /brandconnect\.naver\.com/i,
         /smartstore\.naver\.com/i,
         /m\.smartstore\.naver\.com/i,
         /shopping\.naver\.com/i,
@@ -37,23 +43,275 @@ export class SmartStoreProvider extends BaseProvider {
     readonly strategies: CollectionStrategy[] = [
         {
             // ✅ [2026-02-27 FIX] 1순위: Playwright + Stealth (사용자가 CAPTCHA 풀어줌, 가장 확실)
-            name: 'playwright-stealth',
+            name: 'mobile-api',
             priority: 1,
-            execute: (url, options) => this.puppeteerStrategy(url, options),
+            execute: (url, options) => this.mobileApiDeepStrategy(url, options),
         },
         {
             // [2순위] 모바일 API (Playwright 실패 시 폴백)
-            name: 'mobile-api',
-            priority: 2,
-            execute: (url, options) => this.mobileApiStrategy(url, options),
+            name: 'playwright-stealth',
+            priority: 3,
+            execute: (url, options) => this.puppeteerStrategy(url, options),
         },
         {
             // [3순위] OG 메타 태그 (최후의 수단)
+            name: 'affiliate-product-crawler',
+            priority: 2,
+            execute: (url, options) => this.affiliateCrawlerStrategy(url, options),
+        },
+        {
+            name: 'naver-shopping-search-api',
+            priority: 4,
+            execute: (url, options) => this.naverShoppingSearchStrategy(url, options),
+        },
+        {
             name: 'og-meta-tags',
-            priority: 3,
+            priority: 5,
             execute: (url, options) => this.ogMetaStrategy(url, options),
         },
     ];
+
+    private extractUrlParts(url: string): SmartStoreUrlParts {
+        const decodedUrl = (() => {
+            try {
+                return decodeURIComponent(url);
+            } catch {
+                return url;
+            }
+        })();
+        const productId =
+            url.match(/products\/(\d+)/)?.[1] ||
+            url.match(/[?&]channelProductNo=(\d+)/)?.[1] ||
+            decodedUrl.match(/[?&|]channelProductNo=(\d+)/)?.[1] ||
+            url.match(/[?&]productNo=(\d+)/)?.[1] ||
+            url.match(/[?&]nvMid=(\d+)/)?.[1];
+        const storeName = url.match(/(?:m\.)?(?:smartstore|brand)\.naver\.com\/([^\/\?]+)/)?.[1];
+        const affiliateId =
+            url.match(/brandconnect\.naver\.com\/affiliates\/([^\/\?#]+)/)?.[1] ||
+            url.match(/[?&](?:trx|affiliateId|affiliateNo)=([^&]+)/)?.[1] ||
+            decodedUrl.match(/[?&|](?:trx|affiliateId|affiliateNo)=([^&|]+)/)?.[1];
+        return { productId, storeName, affiliateId };
+    }
+
+    private buildAffiliateCrawlerCandidates(url: string): string[] {
+        const { productId, affiliateId } = this.extractUrlParts(url);
+        const candidates: string[] = [];
+        if (productId && affiliateId && !url.includes('brandconnect.naver.com')) {
+            candidates.push(`https://brandconnect.naver.com/affiliates/${encodeURIComponent(affiliateId)}?channelProductNo=${productId}`);
+        }
+        candidates.push(url);
+        return Array.from(new Set(candidates));
+    }
+
+    private buildMobileApiCandidates(productId: string, storeName?: string): string[] {
+        const candidates = [
+            storeName ? `https://m.smartstore.naver.com/${storeName}/i/v1/products/${productId}` : '',
+            `${MOBILE_API_BASE}/${productId}`,
+            storeName ? `https://smartstore.naver.com/${storeName}/i/v1/products/${productId}` : '',
+            storeName ? `https://m.brand.naver.com/${storeName}/i/v1/products/${productId}` : '',
+        ];
+        return Array.from(new Set(candidates.filter(Boolean)));
+    }
+
+    private pushImage(
+        images: ProductImage[],
+        seen: Set<string>,
+        rawUrl: unknown,
+        type: ProductImage['type'],
+    ): void {
+        if (typeof rawUrl !== 'string') return;
+        const cleaned = rawUrl.trim().replace(/&amp;/g, '&');
+        if (!/^https?:\/\//i.test(cleaned)) return;
+        if (/[?&]type=blur/i.test(cleaned)) return;
+        if (!/(pstatic|phinf|smartstore|shopping|\.jpe?g|\.png|\.webp)/i.test(cleaned)) return;
+        if (isJunkUrl(cleaned) || !this.isValidImageUrl(cleaned)) return;
+
+        const finalUrl = upscaleUrl(cleaned);
+        const norm = normalizeUrl(finalUrl);
+        if (seen.has(norm)) return;
+        seen.add(norm);
+        images.push({ url: finalUrl, type });
+    }
+
+    private collectImagesDeep(
+        value: unknown,
+        images: ProductImage[],
+        seen: Set<string>,
+        type: ProductImage['type'] = 'gallery',
+        depth = 0,
+    ): void {
+        if (depth > 8 || value == null) return;
+
+        if (typeof value === 'string') {
+            const htmlImgRegex = /(?:src|data-src|data-original|content)=["'](https?:\/\/[^"']+)["']/gi;
+            let match: RegExpExecArray | null;
+            while ((match = htmlImgRegex.exec(value)) !== null) {
+                this.pushImage(images, seen, match[1], type);
+            }
+            this.pushImage(images, seen, value, type);
+            return;
+        }
+
+        if (Array.isArray(value)) {
+            for (const item of value) {
+                this.collectImagesDeep(item, images, seen, type, depth + 1);
+            }
+            return;
+        }
+
+        if (typeof value !== 'object') return;
+
+        for (const [key, nested] of Object.entries(value as Record<string, unknown>)) {
+            const keyType: ProductImage['type'] =
+                /detail|content|html|description/i.test(key) ? 'detail' :
+                /represent|rep|main|thumb/i.test(key) ? 'main' :
+                type;
+            this.collectImagesDeep(nested, images, seen, keyType, depth + 1);
+        }
+    }
+
+    private extractProductPayload(data: any): any {
+        return data?.product || data?.productInfo || data?.channelProduct || data?.data?.product || data?.data || data;
+    }
+
+    private productInfoFromPayload(product: any): ProductInfo {
+        const price = product?.salePrice ?? product?.discountedSalePrice ?? product?.mobileDiscountedSalePrice ?? product?.price;
+        const originalPrice = product?.regularPrice ?? product?.basePrice ?? product?.originPrice;
+        return {
+            name: String(product?.name || product?.productName || product?.dispName || product?.title || '').trim(),
+            price: price != null ? String(price) : '',
+            originalPrice: originalPrice != null ? String(originalPrice) : '',
+            description: String(
+                product?.description ||
+                product?.content ||
+                product?.productInfoProvidedNotice?.productInfoFromSeller ||
+                '',
+            ).trim(),
+            brand: product?.brand || product?.brandName || product?.manufacturerName,
+            availability: product?.statusType || product?.saleStatusType,
+        };
+    }
+
+    private stripHtml(value: unknown): string {
+        return String(value || '')
+            .replace(/<[^>]*>/g, '')
+            .replace(/&quot;/g, '"')
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .trim();
+    }
+
+    private async mobileApiDeepStrategy(url: string, options?: CollectionOptions): Promise<CollectionResult> {
+        const startTime = Date.now();
+        const { productId, storeName } = this.extractUrlParts(url);
+
+        if (!productId) {
+            return {
+                success: false,
+                images: [],
+                usedStrategy: 'mobile-api',
+                timing: Date.now() - startTime,
+                error: 'Product id not found in SmartStore URL',
+            };
+        }
+
+        const referer = storeName
+            ? `https://m.smartstore.naver.com/${storeName}/products/${productId}`
+            : `https://m.smartstore.naver.com/products/${productId}`;
+        const candidates = this.buildMobileApiCandidates(productId, storeName);
+        let lastError = '';
+        let bestProductInfo: ProductInfo | undefined;
+
+        for (const apiUrl of candidates) {
+            try {
+                console.log(`[SmartStore:API] trying ${apiUrl}`);
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        'User-Agent': MOBILE_UA,
+                        'Accept': 'application/json, text/plain, */*',
+                        'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+                        'Referer': referer,
+                        'Origin': 'https://m.smartstore.naver.com',
+                    },
+                });
+
+                const body = await response.text();
+                if (!response.ok) {
+                    lastError = `API ${response.status} at ${apiUrl}`;
+                    continue;
+                }
+
+                if (this.detectErrorPage({ html: body })) {
+                    lastError = `Naver error page at ${apiUrl}`;
+                    continue;
+                }
+
+                let data: any;
+                try {
+                    data = JSON.parse(body);
+                } catch {
+                    lastError = `API response was not JSON at ${apiUrl}`;
+                    continue;
+                }
+
+                if (data?.error || data?.code === 'NOT_FOUND') {
+                    lastError = `API returned product error at ${apiUrl}`;
+                    continue;
+                }
+
+                const product = this.extractProductPayload(data);
+                const images: ProductImage[] = [];
+                const seen = new Set<string>();
+
+                this.collectImagesDeep(product, images, seen, 'gallery');
+                this.collectImagesDeep(data, images, seen, 'gallery');
+
+                const detailContentUrl = product?.detailContentUrl || product?.detailInfoUrl || product?.productDetailContentUrl;
+                if (options?.includeDetails !== false && typeof detailContentUrl === 'string' && images.filter(i => i.type === 'detail').length < 5) {
+                    try {
+                        const detailResponse = await fetch(detailContentUrl, {
+                            headers: {
+                                'User-Agent': MOBILE_UA,
+                                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                                'Referer': referer,
+                            },
+                        });
+                        const detailBody = await detailResponse.text();
+                        this.collectImagesDeep(detailBody, images, seen, 'detail');
+                    } catch (detailError) {
+                        console.warn(`[SmartStore:API] detail html failed: ${(detailError as Error).message}`);
+                    }
+                }
+
+                const productInfo = this.productInfoFromPayload(product);
+                if (productInfo.name || productInfo.price) bestProductInfo = productInfo;
+
+                if (images.length > 0) {
+                    return {
+                        success: true,
+                        images: images.slice(0, options?.maxImages || 100),
+                        productInfo,
+                        usedStrategy: 'mobile-api',
+                        timing: Date.now() - startTime,
+                    };
+                }
+
+                lastError = `API returned product data but no images at ${apiUrl}`;
+            } catch (error) {
+                lastError = (error as Error).message;
+            }
+        }
+
+        return {
+            success: false,
+            images: [],
+            productInfo: bestProductInfo,
+            usedStrategy: 'mobile-api',
+            timing: Date.now() - startTime,
+            error: lastError || 'No SmartStore mobile API candidate returned images',
+        };
+    }
 
     /**
      * 모바일 API 전략 (가장 정확)
@@ -63,8 +321,11 @@ export class SmartStoreProvider extends BaseProvider {
 
         try {
             // 상품 ID 추출
-            const productIdMatch = url.match(/products\/(\d+)/);
-            const storeMatch = url.match(/smartstore\.naver\.com\/([^\/\?]+)/);
+            const productIdMatch =
+                url.match(/products\/(\d+)/) ||
+                url.match(/[?&]channelProductNo=(\d+)/) ||
+                url.match(/[?&]productNo=(\d+)/);
+            const storeMatch = url.match(/(?:smartstore|brand)\.naver\.com\/([^\/\?]+)/);
 
             if (!productIdMatch) {
                 return {
@@ -222,30 +483,50 @@ export class SmartStoreProvider extends BaseProvider {
             await warmup(page);
 
             // 모바일 URL로 변환 + 자동 리트라이 (CAPTCHA/에러 → 워밍업 → 재시도)
-            const mobileUrl = url.replace('smartstore.naver.com', 'm.smartstore.naver.com');
+            const mobileUrl = url
+                .replace('smartstore.naver.com', 'm.smartstore.naver.com')
+                .replace('brand.naver.com', 'm.brand.naver.com');
             console.log(`[SmartStore:Playwright] 🌐 상품 페이지 이동: ${mobileUrl.substring(0, 60)}...`);
 
-            const navSuccess = await navigateWithRetry(page, mobileUrl);
+            const navSuccess = await navigateWithRetry(page, mobileUrl, 0);
             if (!navSuccess) {
                 console.log('[SmartStore:Playwright] ❌ 모든 리트라이 실패');
+                const finalProbe = await page.evaluate(() => ({
+                    title: document.title || '',
+                    bodyText: document.body?.innerText?.slice(0, 5000) || '',
+                })).catch(() => ({ title: '', bodyText: '' }));
+                const errorIndicator = this.detectErrorPage(finalProbe);
                 await releasePage(page);
                 return {
                     success: false,
                     images: [],
                     usedStrategy: 'playwright-stealth',
                     timing: Date.now() - startTime,
-                    error: '페이지 로드 실패 (CAPTCHA/에러)',
+                    error: errorIndicator
+                        ? `에러 페이지 감지: "${errorIndicator}"`
+                        : '페이지 로드 실패 (CAPTCHA/에러)',
+                    isErrorPage: Boolean(errorIndicator),
                 };
             }
 
             // 에러 페이지 최종 감지
-            const finalPageContent = await page.content();
-            const errorIndicator = ERROR_PAGE_INDICATORS.find(indicator =>
-                finalPageContent.includes(indicator)
-            );
+            const finalProbe = await page.evaluate(() => ({
+                title: document.title || '',
+                bodyText: document.body?.innerText?.slice(0, 5000) || '',
+            })).catch(() => ({ title: '', bodyText: '' }));
+            const errorIndicator = this.detectErrorPage(finalProbe);
 
             if (errorIndicator) {
                 console.log(`[SmartStore:Playwright] ⚠️ 최종 에러 페이지 감지: ${errorIndicator}`);
+                await releasePage(page);
+                return {
+                    success: false,
+                    images: [],
+                    usedStrategy: 'playwright-stealth',
+                    timing: Date.now() - startTime,
+                    error: `에러 페이지 감지: "${errorIndicator}"`,
+                    isErrorPage: true,
+                };
             }
 
             // ═══════════════════════════════════════════════════════════════
@@ -257,6 +538,7 @@ export class SmartStoreProvider extends BaseProvider {
 
             /** 중복 체크 후 추가 */
             const addImg = (rawUrl: string, type: string) => {
+                if (/[?&]type=blur/i.test(rawUrl)) return;
                 if (isJunkUrl(rawUrl)) return;
                 const url = upscaleUrl(rawUrl);
                 const norm = normalizeUrl(url);
@@ -347,9 +629,9 @@ export class SmartStoreProvider extends BaseProvider {
             // ───────────────────────────────────────────────
             // ✅ [2026-03-14] PHASE 2: 리뷰 이미지 수집
             // ───────────────────────────────────────────────
-            console.log('[SmartStore:Playwright] 📝 PHASE 2: 리뷰 이미지 수집...');
-
-            try {
+            if (options?.includeReviews === true) {
+                console.log('[SmartStore:Playwright] 📝 PHASE 2: 리뷰 이미지 수집...');
+                try {
                 // ✅ 리뷰 탭 클릭 (탭 없이는 리뷰 DOM이 로드되지 않음!)
                 try {
                     const reviewTabClicked = await page.evaluate(() => {
@@ -422,15 +704,20 @@ export class SmartStoreProvider extends BaseProvider {
                     addImg(rawUrl, 'review');
                 }
                 console.log(`[SmartStore:Playwright] ✅ PHASE 2 완료: 리뷰 이미지 ${reviewUrls.length}개`);
-            } catch (phase2Err) {
-                console.warn('[SmartStore:Playwright] ⚠️ PHASE 2 실패:', (phase2Err as Error).message);
+                } catch (phase2Err) {
+                    console.warn('[SmartStore:Playwright] ⚠️ PHASE 2 실패:', (phase2Err as Error).message);
+                }
+            } else {
+                console.log('[SmartStore:Playwright] 🛡️ 리뷰 이미지는 저작권 안전 기본값으로 수집하지 않습니다.');
             }
 
             // ✅ [v2.10.319] BrandStoreProvider와 동일한 우선순위 정렬 — 메인 → 갤러리 → 갤러리폴백 → 리뷰
             const mainImages = allImages.filter(i => i.type === 'main');
             const galleryImages = allImages.filter(i => i.type === 'gallery');
             const galleryFallbackImages = allImages.filter(i => i.type === 'gallery-thumb-fallback');
-            const reviewImages = allImages.filter(i => i.type === 'review');
+            const reviewImages = options?.includeReviews === true
+                ? allImages.filter(i => i.type === 'review')
+                : [];
 
             const sortedImages = [
                 ...mainImages,
@@ -498,6 +785,168 @@ export class SmartStoreProvider extends BaseProvider {
     /**
      * OG 메타 태그 최종 폴백
      */
+    private async affiliateCrawlerStrategy(url: string, options?: CollectionOptions): Promise<CollectionResult> {
+        const startTime = Date.now();
+
+        try {
+            const { crawlFromAffiliateLink } = await import('../../productSpecCrawler.js');
+            const timeoutMs = Math.min(Math.max(options?.timeout ?? 30000, 15000), 45000);
+            let lastError = 'Affiliate crawler returned no product data';
+
+            for (const candidateUrl of this.buildAffiliateCrawlerCandidates(url)) {
+                const product = await Promise.race([
+                    crawlFromAffiliateLink(candidateUrl),
+                    new Promise<null>(resolve => setTimeout(() => resolve(null), timeoutMs)),
+                ]);
+
+                if (!product) {
+                    lastError = `Affiliate crawler returned no product data for ${candidateUrl}`;
+                    continue;
+                }
+
+                const images: ProductImage[] = [];
+                const seen = new Set<string>();
+                this.pushImage(images, seen, product.mainImage, 'main');
+                for (const imageUrl of product.galleryImages || []) {
+                    this.pushImage(images, seen, imageUrl, 'gallery');
+                }
+                if (options?.includeDetails !== false) {
+                    for (const imageUrl of product.detailImages || []) {
+                        this.pushImage(images, seen, imageUrl, 'detail');
+                    }
+                }
+
+                if (images.length === 0) {
+                    lastError = `Affiliate crawler found product but no images for ${candidateUrl}`;
+                    continue;
+                }
+
+                return {
+                    success: true,
+                    images: images.slice(0, options?.maxImages || 100),
+                    productInfo: {
+                        name: product.name || '',
+                        price: product.price ? String(product.price) : '',
+                        description: product.description || '',
+                    },
+                    usedStrategy: 'affiliate-product-crawler',
+                    timing: Date.now() - startTime,
+                };
+            }
+
+            return {
+                success: false,
+                images: [],
+                usedStrategy: 'affiliate-product-crawler',
+                timing: Date.now() - startTime,
+                error: lastError,
+            };
+        } catch (error) {
+            return {
+                success: false,
+                images: [],
+                usedStrategy: 'affiliate-product-crawler',
+                timing: Date.now() - startTime,
+                error: (error as Error).message,
+            };
+        }
+    }
+
+    private async naverShoppingSearchStrategy(url: string, options?: CollectionOptions): Promise<CollectionResult> {
+        const startTime = Date.now();
+        const { productId, storeName } = this.extractUrlParts(url);
+
+        if (!productId) {
+            return {
+                success: false,
+                images: [],
+                usedStrategy: 'naver-shopping-search-api',
+                timing: Date.now() - startTime,
+                error: 'Product id not found for Naver Shopping API fallback',
+            };
+        }
+
+        try {
+            const { loadConfig } = await import('../../../configManager.js');
+            const config = await loadConfig();
+            const clientId = config.naverClientId || config.naverDatalabClientId;
+            const clientSecret = config.naverClientSecret || config.naverDatalabClientSecret;
+
+            if (!clientId || !clientSecret) {
+                return {
+                    success: false,
+                    images: [],
+                    usedStrategy: 'naver-shopping-search-api',
+                    timing: Date.now() - startTime,
+                    error: 'Naver Shopping API key is not configured',
+                };
+            }
+
+            const query = storeName ? `${storeName} ${productId}` : productId;
+            const apiUrl = `https://openapi.naver.com/v1/search/shop.json?query=${encodeURIComponent(query)}&display=20`;
+            const response = await fetch(apiUrl, {
+                headers: {
+                    'X-Naver-Client-Id': clientId,
+                    'X-Naver-Client-Secret': clientSecret,
+                    'Accept': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                return {
+                    success: false,
+                    images: [],
+                    usedStrategy: 'naver-shopping-search-api',
+                    timing: Date.now() - startTime,
+                    error: `Naver Shopping API ${response.status}`,
+                };
+            }
+
+            const data: any = await response.json();
+            const items = Array.isArray(data?.items) ? data.items : [];
+            const exact = items.find((item: any) =>
+                String(item?.productId || '') === productId ||
+                String(item?.link || '').includes(productId)
+            );
+
+            if (!exact) {
+                return {
+                    success: false,
+                    images: [],
+                    usedStrategy: 'naver-shopping-search-api',
+                    timing: Date.now() - startTime,
+                    error: 'Naver Shopping API returned no exact productId match',
+                };
+            }
+
+            const images: ProductImage[] = [];
+            const seen = new Set<string>();
+            this.pushImage(images, seen, exact.image, 'main');
+
+            return {
+                success: images.length > 0,
+                images: images.slice(0, options?.maxImages || 100),
+                productInfo: {
+                    name: this.stripHtml(exact.title),
+                    price: exact.lprice ? String(exact.lprice) : '',
+                    brand: exact.brand || exact.mallName || '',
+                    canonicalUrl: exact.link || '',
+                },
+                usedStrategy: 'naver-shopping-search-api',
+                timing: Date.now() - startTime,
+                error: images.length > 0 ? undefined : 'Exact product found but no image URL',
+            };
+        } catch (error) {
+            return {
+                success: false,
+                images: [],
+                usedStrategy: 'naver-shopping-search-api',
+                timing: Date.now() - startTime,
+                error: (error as Error).message,
+            };
+        }
+    }
+
     private async ogMetaStrategy(url: string, options?: CollectionOptions): Promise<CollectionResult> {
         const startTime = Date.now();
 
@@ -511,9 +960,7 @@ export class SmartStoreProvider extends BaseProvider {
             const html = await response.text();
 
             // 에러 페이지 감지
-            const errorIndicator = ERROR_PAGE_INDICATORS.find(indicator =>
-                html.includes(indicator)
-            );
+            const errorIndicator = this.detectErrorPage({ html });
 
             if (errorIndicator) {
                 return {

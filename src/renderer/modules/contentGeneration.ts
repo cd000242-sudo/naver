@@ -100,8 +100,8 @@ declare function applyReviewHeadingPrefix(...args: any[]): void;
 declare function applyKeywordPrefixToTitleContinuous(...args: any[]): any;
 
 const CONTENT_GENERATION_TIMEOUT_MS = 360000;
-const CONTENT_GENERATION_RETRY_COUNT = 1;
-const CONTENT_GENERATION_RETRY_NOTICE = '응답이 6분 이상 지연되면 진행 중인 요청을 중단하고 앱이 자동으로 1회 재시도합니다.';
+const CONTENT_GENERATION_RETRY_COUNT = 0;
+const CONTENT_GENERATION_RETRY_NOTICE = '응답이 6분 이상 지연되면 진행 중인 요청을 중단합니다. Gemini 내부 재시도는 이미 적용되어 있어 중복 생성 요청을 다시 보내지 않습니다.';
 
 function appendContentGenerationRetryNotice(activeModal?: any): void {
   appendLog(`🔁 ${CONTENT_GENERATION_RETRY_NOTICE}`);
@@ -477,7 +477,7 @@ export async function generateContentFromUrl(
       minChars,
       articleType,
       toneStyle,
-      contentMode: contentMode as 'seo' | 'homefeed' | 'affiliate', // ✅ [FIX] 쇼핑커넥트(affiliate) 모드 타입 추가
+      contentMode: contentMode as 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business' | 'mate', // ✅ [FIX] 쇼핑커넥트(affiliate) 모드 타입 추가
       categoryHint, // ✅ 카테고리 힌트 전달 (2축 분리 프롬프트)
       isReviewType, // ✅ 리뷰형 여부 전달
       // ✅ [2026-02-09 v2] 연속발행 시 이전 제목 히스토리 전달 (중복 방지)
@@ -506,7 +506,7 @@ export async function generateContentFromUrl(
       {
         retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort 후 1회 재시도
+        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort
       }
     );
 
@@ -1024,7 +1024,7 @@ export async function generateContentFromKeywords(
       minChars,
       articleType,
       toneStyle,
-      contentMode: contentMode as 'seo' | 'homefeed' | 'affiliate', // ✅ [FIX] 쇼핑커넥트(affiliate) 모드 타입 추가
+      contentMode: contentMode as 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business' | 'mate', // ✅ [FIX] 쇼핑커넥트(affiliate) 모드 타입 추가
       categoryHint, // ✅ 카테고리 힌트 전달 (2축 분리 프롬프트)
       isReviewType, // ✅ [FIX] 리뷰형 여부 전달 (키워드 생성에서도 반영)
       title: title || undefined,
@@ -1073,7 +1073,7 @@ export async function generateContentFromKeywords(
       {
         retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort 후 1회 재시도
+        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort
       }
     );
 
@@ -1105,7 +1105,13 @@ export async function generateContentFromKeywords(
       if (keywordTitleOpts.useKeywordAsTitle) {
         // 📌 키워드를 그대로 제목으로 사용
         const originalTitle = structuredContent.selectedTitle;
-        structuredContent.selectedTitle = keywordTitleOpts.keyword;
+        const exactTitle = String(keywordTitleOpts.keyword || '').trim();
+        structuredContent.title = exactTitle;
+        structuredContent.selectedTitle = exactTitle;
+        structuredContent.keywordAsTitleLocked = true;
+        structuredContent.keywordAsTitleValue = exactTitle;
+        structuredContent.titleAlternatives = [exactTitle];
+        structuredContent.titleCandidates = [{ text: exactTitle, score: 100, reasoning: '사용자 지정 키워드 제목' }];
         appendLog(`📌 제목 교체: "${originalTitle}" → "${structuredContent.selectedTitle}"`);
       } else if (keywordTitleOpts.useKeywordTitlePrefix) {
         // 🔝 키워드를 제목 맨 앞에 배치
@@ -1695,7 +1701,7 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
       {
         retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort 후 1회 재시도
+        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort
       }
     );
 

@@ -20,7 +20,6 @@ const AI_ENGINE_WHITELIST = new Set([
     'nano-banana-pro',
     'nano-banana-2',
     'openai-image',
-    'dall-e-3',
     'imagefx',
     'leonardoai',
     'deepinfra',

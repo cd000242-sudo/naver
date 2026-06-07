@@ -28,6 +28,17 @@ describe('콘텐츠 모드 프롬프트 계약', () => {
     expect(prompt).toContain('키워드 반복');
   });
 
+  it('네이버 메이트는 AI 브리핑 인용·주제 전문성·정책 위험 회피를 포함한다', () => {
+    const prompt = read('prompts/mate/base.prompt');
+    expect(prompt).toContain('AI 브리핑');
+    expect(prompt).toContain('울트라 스코어카드');
+    expect(prompt).toContain('인용 원자');
+    expect(prompt).toContain('첫 300자');
+    expect(prompt).toContain('주제 전문성');
+    expect(prompt).toContain('허위 리뷰');
+    expect(prompt).toContain('선정 보장');
+  });
+
   it('쇼핑커넥트는 리뷰 데이터 부재 시 체험 위장을 막는다', () => {
     const prompt = read('prompts/affiliate/shopping_review.prompt');
     expect(prompt).toContain('리뷰 데이터 부재');
@@ -40,11 +51,17 @@ describe('콘텐츠 모드 프롬프트 계약', () => {
     expect(prompt).toContain('입력된 값만 사용');
     expect(prompt).toContain('의료광고법');
     expect(prompt).toContain('문의/견적/상담 안내');
+    expect(prompt).toContain('입력/원본에 없는 숫자 근거는 절대 만들지 않는다');
+    expect(prompt).toContain('총 3~6회만 자연 노출');
+    expect(prompt).not.toContain('8~12회');
+    expect(prompt).not.toContain('시공 1,200건');
   });
 
   it('사용자정의 모드도 자료 외 사실·거짓 경험·모바일 호흡 가드레일을 가진다', () => {
     const src = read('contentGenerator.ts');
     expect(src).toContain('사용자정의 모드');
+    expect(src).toContain('사용자정의 모드 제어 규칙');
+    expect(src).toContain('사용자 요청에서 목적, 대상 독자, 필수 형식, 금지 표현');
     expect(src).toContain('자료 외 사실 작성 금지');
     expect(src).toContain('거짓 경험 금지');
     expect(src).toContain('모바일 가독성');

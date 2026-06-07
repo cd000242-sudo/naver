@@ -13,7 +13,7 @@ interface GenerateOptions {
   keywords?: string[];
   includeImages?: boolean;
   blogType?: 'review' | 'informative' | 'storytelling';
-  contentMode?: 'seo' | 'homefeed'; // ✅ SEO 모드 또는 홈판 노출 최적화 모드
+  contentMode?: 'seo' | 'homefeed' | 'mate'; // ✅ SEO/홈판/네이버 메이트 노출 최적화 모드
   categoryHint?: string; // ✅ 2축 분리: 카테고리 힌트 (연예, 시사, 건강, IT 등)
 }
 

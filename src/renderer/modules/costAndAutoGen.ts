@@ -40,6 +40,24 @@ type ImageFallbackPolicy = 'engine-only' | 'ask' | 'guarantee';
 
 const FALLBACK_CONFIRM_MARKER = 'FALLBACK_REQUIRES_CONFIRMATION';
 const IMAGE_FALLBACK_POLICIES: ImageFallbackPolicy[] = ['engine-only', 'ask', 'guarantee'];
+const DEFAULT_IMAGE_GENERATION_TIMEOUT_MS = 6 * 60 * 1000;
+const LONG_RUN_IMAGE_MAX_TIMEOUT_MS = 45 * 60 * 1000;
+const MIN_IMAGE_GENERATION_TIMEOUT_MS = 30_000;
+const DEFAULT_IMAGE_STABILIZE_MS = 3_000;
+const LONG_RUN_IMAGE_STABILIZE_MS = 8_000;
+const UI_AUTOMATION_IMAGE_STABILIZE_MS = 15_000;
+const UI_AUTOMATION_IMAGE_PROVIDERS = new Set(['dropshot', 'flow', 'imagefx']);
+const SLOW_IMAGE_PROVIDERS = new Set([
+  'dropshot',
+  'flow',
+  'imagefx',
+  'nano-banana-pro',
+  'nano-banana-2',
+  'openai-image',
+  'leonardoai',
+]);
+let imageGenerationQueue: Promise<void> = Promise.resolve();
+let lastImageGenerationFinishedAt = 0;
 
 function normalizeImageFallbackPolicy(value: any): ImageFallbackPolicy {
   return IMAGE_FALLBACK_POLICIES.includes(value as ImageFallbackPolicy)
@@ -47,8 +65,246 @@ function normalizeImageFallbackPolicy(value: any): ImageFallbackPolicy {
     : 'engine-only';
 }
 
+function normalizeImageProvider(value: any): string {
+  return String(value || '').trim();
+}
+
+function getImageItemCount(options: any): number {
+  return Math.max(1, Array.isArray(options?.items) ? options.items.length : 1);
+}
+
+function isLongRunImageGeneration(options: any): boolean {
+  const provider = normalizeImageProvider(options?.provider);
+  return options?.isFullAuto === true
+    || options?.isContinuousMode === true
+    || options?.isMultiAccount === true
+    || options?.longRunImageGeneration === true
+    || UI_AUTOMATION_IMAGE_PROVIDERS.has(provider);
+}
+
+function estimateImageGenerationTimeoutMs(options: any): number {
+  const provider = normalizeImageProvider(options?.provider);
+  const count = getImageItemCount(options);
+  const startupMs = UI_AUTOMATION_IMAGE_PROVIDERS.has(provider) ? 180_000 : 90_000;
+  const perItemMs = provider === 'dropshot'
+    ? 150_000
+    : UI_AUTOMATION_IMAGE_PROVIDERS.has(provider)
+      ? 135_000
+      : SLOW_IMAGE_PROVIDERS.has(provider)
+        ? 90_000
+        : 60_000;
+  return startupMs + (count * perItemMs);
+}
+
+function getImageStabilizeDelayMs(options: any): number {
+  const provider = normalizeImageProvider(options?.provider);
+  if (UI_AUTOMATION_IMAGE_PROVIDERS.has(provider)) return UI_AUTOMATION_IMAGE_STABILIZE_MS;
+  if (isLongRunImageGeneration(options) || SLOW_IMAGE_PROVIDERS.has(provider)) return LONG_RUN_IMAGE_STABILIZE_MS;
+  return DEFAULT_IMAGE_STABILIZE_MS;
+}
+
+function logImageQueueMessage(message: string): void {
+  try {
+    appendLog(message);
+  } catch {
+    // appendLog is unavailable in a few isolated test/import contexts.
+  }
+}
+
+function resolveImageGenerationTimeoutMs(options: any): number {
+  const rawTimeoutValue = options?.imageGenerationTimeoutMs
+    ?? options?.timeoutMs
+    ?? options?.timeout;
+  const explicitTimeout = Number(rawTimeoutValue);
+  const estimatedTimeout = estimateImageGenerationTimeoutMs(options);
+  const isLongRun = isLongRunImageGeneration(options);
+  const rawTimeout = Number(
+    options?.imageGenerationTimeoutMs
+      ?? options?.timeoutMs
+      ?? options?.timeout
+      ?? (isLongRun ? estimatedTimeout : DEFAULT_IMAGE_GENERATION_TIMEOUT_MS)
+  );
+
+  if (!Number.isFinite(rawTimeout) || rawTimeout <= 0) {
+    return isLongRun
+      ? Math.min(Math.max(estimatedTimeout, DEFAULT_IMAGE_GENERATION_TIMEOUT_MS), LONG_RUN_IMAGE_MAX_TIMEOUT_MS)
+      : DEFAULT_IMAGE_GENERATION_TIMEOUT_MS;
+  }
+
+  const minimum = isLongRun
+    ? Math.max(MIN_IMAGE_GENERATION_TIMEOUT_MS, estimatedTimeout)
+    : MIN_IMAGE_GENERATION_TIMEOUT_MS;
+  const maximum = isLongRun ? LONG_RUN_IMAGE_MAX_TIMEOUT_MS : DEFAULT_IMAGE_GENERATION_TIMEOUT_MS;
+  const requested = Number.isFinite(explicitTimeout) && explicitTimeout > 0 && isLongRun
+    ? Math.max(rawTimeout, estimatedTimeout)
+    : rawTimeout;
+
+  return Math.min(
+    Math.max(requested, minimum),
+    maximum
+  );
+}
+
+async function runQueuedImageGeneration<T>(options: any, task: () => Promise<T>): Promise<T> {
+  let releaseCurrentTurn: () => void = () => undefined;
+  const previousTurn = imageGenerationQueue;
+  const currentTurn = new Promise<void>((resolve) => {
+    releaseCurrentTurn = resolve;
+  });
+  imageGenerationQueue = previousTurn.then(() => currentTurn, () => currentTurn);
+
+  await previousTurn.catch(() => undefined);
+
+  const stabilizeMs = getImageStabilizeDelayMs(options);
+  if (lastImageGenerationFinishedAt > 0 && stabilizeMs > 0) {
+    const elapsedSinceLast = Date.now() - lastImageGenerationFinishedAt;
+    if (elapsedSinceLast < stabilizeMs) {
+      const waitMs = stabilizeMs - elapsedSinceLast;
+      logImageQueueMessage(`[Image Queue] Waiting ${Math.ceil(waitMs / 1000)}s before next image job (${normalizeImageProvider(options?.provider) || 'unknown'}).`);
+      await new Promise((resolve) => setTimeout(resolve, waitMs));
+    }
+  }
+
+  try {
+    return await task();
+  } finally {
+    lastImageGenerationFinishedAt = Date.now();
+    releaseCurrentTurn();
+  }
+}
+
+async function abortImageGenerationIfAvailable(): Promise<void> {
+  try {
+    if (window.api && typeof (window.api as any).abortImageGeneration === 'function') {
+      await (window.api as any).abortImageGeneration();
+    }
+  } catch (abortErr) {
+    console.warn('[Renderer] 이미지 생성 중단 신호 전달 실패:', abortErr);
+  }
+}
+
+function getProgressModalForImagePreview(): any {
+  try {
+    return progressModal
+      || (window as any).currentProgressModal
+      || ((window as any).progressModal ?? null);
+  } catch {
+    return null;
+  }
+}
+
+function updateGeneratedImagePreview(data: { image: any; index: number; total: number }): void {
+  const { index, total, image } = data;
+  if (!image) return;
+
+  try {
+    const progressStepText = document.getElementById('progress-step-text');
+    if (progressStepText) {
+      progressStepText.textContent = `이미지 생성 중... (${index + 1}/${total} 완료)`;
+    }
+
+    const progressBar = document.getElementById('progress-bar');
+    const progressPercent = document.getElementById('progress-percent');
+    if (progressBar && progressPercent && total > 0) {
+      const pct = Math.round(40 + (25 * (index + 1) / total));
+      progressBar.style.width = `${pct}%`;
+      progressPercent.textContent = `${pct}%`;
+    }
+
+    const modal = getProgressModalForImagePreview();
+    if (index === 0 && modal && typeof modal.clearImages === 'function') {
+      modal.clearImages();
+    }
+
+    if (modal && typeof modal.updateSingleImage === 'function') {
+      const imgSrc = image.filePath || image.url || image.previewDataUrl || '';
+      if (imgSrc) {
+        modal.updateSingleImage(index, {
+          url: imgSrc,
+          filePath: image.filePath || '',
+          heading: image.heading || `이미지 ${index + 1}`,
+        }, total);
+      }
+    }
+  } catch (previewErr) {
+    console.warn('[Renderer] image preview update failed:', previewErr);
+  }
+}
+
+function registerImageGeneratedPreviewBridge(): (() => void) | null {
+  try {
+    if (!window.api || typeof (window.api as any).onImageGenerated !== 'function') return null;
+    return (window.api as any).onImageGenerated((data: { image: any; index: number; total: number }) => {
+      updateGeneratedImagePreview(data);
+    });
+  } catch (listenerErr) {
+    console.warn('[Renderer] onImageGenerated preview bridge registration failed:', listenerErr);
+    return null;
+  }
+}
+
+async function invokeGenerateImagesIpc(options: any): Promise<any> {
+  const timeoutMs = resolveImageGenerationTimeoutMs(options);
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+  let cleanupPreviewListener: (() => void) | null = null;
+
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error(`이미지 생성 타임아웃 (${Math.round(timeoutMs / 1000)}초)`));
+    }, timeoutMs);
+  });
+
+  try {
+    cleanupPreviewListener = registerImageGeneratedPreviewBridge();
+    return await Promise.race([
+      window.api.generateImages(options),
+      timeoutPromise
+    ]);
+  } catch (error) {
+    const message = (error as Error)?.message || '';
+    if (message.includes('타임아웃') || message.toLowerCase().includes('timeout')) {
+      await abortImageGenerationIfAvailable();
+    }
+    throw error;
+  } finally {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    if (cleanupPreviewListener) {
+      try { cleanupPreviewListener(); } catch { /* ignore */ }
+    }
+  }
+}
+
+function isEmptyImageSuccessAllowed(options: any, result: any): boolean {
+  const message = String(result?.message || '');
+  let provider = String(options?.provider || '').trim();
+  return options?.skipImages === true ||
+    options?.headingImageMode === 'none' ||
+    provider === 'skip' ||
+    provider === 'local-folder' ||
+    message.includes('thumbnailOnly') ||
+    message.includes('이미지 없이') ||
+    message.includes('textOnlyPublish');
+}
+
+function normalizeEmptyImageSuccess(options: any, result: any): any {
+  const requestedCount = Array.isArray(options?.items) ? options.items.length : 0;
+  const imageCount = Array.isArray(result?.images) ? result.images.length : 0;
+  if (result?.success !== false && requestedCount > 0 && imageCount === 0 && !isEmptyImageSuccessAllowed(options, result)) {
+    const provider = String(options?.provider || 'unknown').trim() || 'unknown';
+    return {
+      ...result,
+      success: false,
+      images: [],
+      message: result?.message || `[${provider}] 이미지 생성 결과가 비어있습니다. 화면 결과 감지, 로그인 세션, 구독/쿼터, 또는 엔진 UI 변경을 확인해야 합니다.`,
+    };
+  }
+  return result;
+}
+
 async function invokeGenerateImagesWithPolicy(options: any): Promise<any> {
-  const result = await window.api.generateImages(options);
+  const result = normalizeEmptyImageSuccess(options, await invokeGenerateImagesIpc(options));
   const policy = normalizeImageFallbackPolicy(options?.imageFallbackPolicy);
   const message = String(result?.message || '');
 
@@ -65,10 +321,11 @@ async function invokeGenerateImagesWithPolicy(options: any): Promise<any> {
   }
 
   appendLog('🧭 엔진 우선 모드: 사용자 확인으로 결과 보장 재시도를 실행합니다.');
-  return window.api.generateImages({
+  const guaranteeOptions = {
     ...options,
     imageFallbackPolicy: 'guarantee',
-  });
+  };
+  return normalizeEmptyImageSuccess(guaranteeOptions, await invokeGenerateImagesIpc(guaranteeOptions));
 }
 
 async function autoSearchAndPopulateImages(
@@ -204,6 +461,10 @@ async function reserveExternalApiImageQuota(provider: string, requestCount: numb
 
 
 async function generateImagesWithCostSafety(options: any): Promise<any> {
+  return runQueuedImageGeneration(options, () => generateImagesWithCostSafetyInternal(options));
+}
+
+async function generateImagesWithCostSafetyInternal(options: any): Promise<any> {
   // ✅ [2026-02-11 FIX] provider 결정 우선순위: 전달값 → fullAutoImageSource → globalImageSource → 'nano-banana-pro'
   console.log(`[generateImagesWithCostSafety] 📥 전달받은 provider: "${String(options?.provider || '').trim()}"`);
 
@@ -241,7 +502,7 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
     options.items = thumbOnlyItems;
   }
 
-  const provider = String(options?.provider || '').trim();
+  let provider = String(options?.provider || '').trim();
 
   // ✅ [2026-01-24 FIX] headingImageMode 자동 주입 - 다중계정 발행에서도 홀수/짝수 필터링 적용
   if (!options.headingImageMode) {
@@ -262,6 +523,7 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
       console.log(`[Renderer] 🎨 이미지 소스 자동 주입: "${resolvedSource}" (fullAuto: ${fullAutoSource || 'null'}, global: ${globalSource || 'null'})`);
     }
   }
+  provider = String(options?.provider || provider || '').trim();
   if (!options.imageStyle) {
     const savedStyle = localStorage.getItem('imageStyle');
     if (savedStyle) {
@@ -299,6 +561,11 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
   }
 
   // ✅ [2026-03-16] thumbnailTextInclude 자동 주입 — 풀오토 등 모든 발행 모드에서 텍스트 오버레이 적용
+  // ✅ [2026-06-06] 이전 호출부의 allowThumbnailText 별칭도 동일 옵션으로 정규화
+  if (options.thumbnailTextInclude === undefined && options.allowThumbnailText !== undefined) {
+    options.thumbnailTextInclude = !!options.allowThumbnailText;
+    console.log(`[Renderer] 🔤 thumbnailTextInclude 별칭 정규화: ${options.thumbnailTextInclude}`);
+  }
   if (options.thumbnailTextInclude === undefined) {
     const savedThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true';
     options.thumbnailTextInclude = savedThumbnailText;
@@ -420,13 +687,13 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
 
       // ✅ [2026-02-13 SPEED] 리스너를 try 밖에 선언 (catch에서도 접근 가능)
       let cleanupImageListener: (() => void) | null = null;
+      let imageApiTimeoutId: ReturnType<typeof setTimeout> | undefined;
 
       try {
-        // ✅ [2026-03-11 FIX] 이미지 생성 API 타임아웃 8분→12분 (원래 엔진 재시도 3회 + 폴백 엔진 여유)
-        // 개별 API 90초 × 이미지 5개 / 병렬 2개 = ~225초 + 재시도 3회 여유 = ~12분
-        const IMAGE_API_TIMEOUT = 12 * 60 * 1000; // 12분
+        // 이미지 생성 IPC는 무한 대기하지 않고 호출자별 제한 시간 안에서 정리한다.
+        const IMAGE_API_TIMEOUT = resolveImageGenerationTimeoutMs(options);
         const timeoutPromise = new Promise((_, reject) => {
-          setTimeout(() => {
+          imageApiTimeoutId = setTimeout(() => {
             reject(new Error(`이미지 생성 타임아웃 (${IMAGE_API_TIMEOUT / 1000}초)`));
           }, IMAGE_API_TIMEOUT);
         });
@@ -518,12 +785,15 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
           timeoutPromise
         ]);
 
+        if (imageApiTimeoutId) { clearTimeout(imageApiTimeoutId); }
+
         // ✅ [2026-02-13 SPEED] 리스너 정리
         if (cleanupImageListener) { try { cleanupImageListener(); } catch { } }
 
         return result;
       } catch (e) {
         // ✅ [2026-02-13 SPEED] 에러/타임아웃 시에도 리스너 반드시 정리 (좀비 리스너 방지)
+        if (imageApiTimeoutId) { clearTimeout(imageApiTimeoutId); }
         if (cleanupImageListener) { try { cleanupImageListener(); } catch { } }
         await reserve.rollback();
         const _emsg = (e as Error).message || '(메시지 없음)';

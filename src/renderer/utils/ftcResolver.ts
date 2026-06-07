@@ -1,38 +1,38 @@
-// v2.7.50 — 공정위(FTC) 토글 결정 단일 함수 (SSOT)
+﻿// v2.7.50 ??怨듭젙??FTC) ?좉? 寃곗젙 ?⑥씪 ?⑥닔 (SSOT)
 //
-// reviewer 진단(docs/diagnosis-2026-04-29/reviewer-summary.md):
-//   "FTC 결정 우선순위 분기 3중. fullAutoFlow.ts/multiAccountManager.ts 양쪽 중복.
-//    4번째 분기점 또 등장하면 재발 100%."
+// reviewer 吏꾨떒(docs/diagnosis-2026-04-29/reviewer-summary.md):
+//   "FTC 寃곗젙 ?곗꽑?쒖쐞 遺꾧린 3以? fullAutoFlow.ts/multiAccountManager.ts ?묒そ 以묐났.
+//    4踰덉㎏ 遺꾧린?????깆옣?섎㈃ ?щ컻 100%."
 //
-// 본 모듈은 FTC 활성 여부 + 텍스트를 결정하는 단일 SSOT 함수를 제공한다.
+// 蹂?紐⑤뱢? FTC ?쒖꽦 ?щ? + ?띿뒪?몃? 寃곗젙?섎뒗 ?⑥씪 SSOT ?⑥닔瑜??쒓났?쒕떎.
 
-const DEFAULT_FTC_TEXT = '※ 이 포스팅은 제휴 마케팅의 일환으로, 구매 시 소정의 수수료를 제공받을 수 있습니다.';
+const DEFAULT_FTC_TEXT = '이 포스팅은 쇼핑커넥트/제휴마케팅 활동의 일환으로, 링크를 통한 구매 시 작성자에게 일정 수수료가 지급될 수 있습니다.';
 
 interface FtcResolverOptions {
-  /** 사용자 발행 모드 */
+  /** ?ъ슜??諛쒗뻾 紐⑤뱶 */
   contentMode?: string;
-  /** 메인 발행 흐름의 체크박스 상태 (없으면 무시) */
+  /** 硫붿씤 諛쒗뻾 ?먮쫫??泥댄겕諛뺤뒪 ?곹깭 (?놁쑝硫?臾댁떆) */
   uiCheckboxChecked?: boolean;
-  /** 사용자가 입력한 textarea 값 (없으면 localStorage / 기본값 사용) */
+  /** ?ъ슜?먭? ?낅젰??textarea 媛?(?놁쑝硫?localStorage / 湲곕낯媛??ъ슜) */
   uiTextValue?: string;
 }
 
 interface FtcResolution {
-  /** 최종 활성화 여부 */
+  /** 理쒖쥌 ?쒖꽦???щ? */
   enabled: boolean;
-  /** 삽입할 텍스트 (활성화일 때만 의미 있음) */
+  /** ?쎌엯???띿뒪??(?쒖꽦?붿씪 ?뚮쭔 ?섎? ?덉쓬) */
   text: string;
-  /** 결정 근거 (디버그용) */
+  /** 寃곗젙 洹쇨굅 (?붾쾭洹몄슜) */
   source: 'checkbox' | 'localStorage' | 'mode-default-affiliate' | 'mode-default-other';
 }
 
 /**
- * 공정위 문구 활성/비활성 결정 — 모든 발행 흐름의 단일 진입점.
+ * 怨듭젙??臾멸뎄 ?쒖꽦/鍮꾪솢??寃곗젙 ??紐⑤뱺 諛쒗뻾 ?먮쫫???⑥씪 吏꾩엯??
  *
- * 우선순위:
- *   1. UI 체크박스 현재 상태 (사용자 즉시 의도)
- *   2. localStorage 명시 저장값 (이전 의도)
- *   3. 모드별 기본값 (affiliate=ON, 그 외=OFF)
+ * ?곗꽑?쒖쐞:
+ *   1. UI 泥댄겕諛뺤뒪 ?꾩옱 ?곹깭 (?ъ슜??利됱떆 ?섎룄)
+ *   2. localStorage 紐낆떆 ??κ컪 (?댁쟾 ?섎룄)
+ *   3. 紐⑤뱶蹂?湲곕낯媛?(affiliate=ON, 洹???OFF)
  *
  * @example
  *   const ftc = resolveFtcSetting({
@@ -47,20 +47,20 @@ interface FtcResolution {
 export function resolveFtcSetting(options: FtcResolverOptions = {}): FtcResolution {
   const isAffiliateMode = options.contentMode === 'affiliate';
 
-  // 1순위: UI 체크박스 (현재 사용자 의도, 가장 권위 있음)
+  // 1?쒖쐞: UI 泥댄겕諛뺤뒪 (?꾩옱 ?ъ슜???섎룄, 媛??沅뚯쐞 ?덉쓬)
   let enabled: boolean;
   let source: FtcResolution['source'];
   if (options.uiCheckboxChecked !== undefined) {
     enabled = options.uiCheckboxChecked;
     source = 'checkbox';
   } else {
-    // 2순위: localStorage 저장값 (사용자가 이전에 명시 설정한 값)
+    // 2?쒖쐞: localStorage ??κ컪 (?ъ슜?먭? ?댁쟾??紐낆떆 ?ㅼ젙??媛?
     let stored: string | null = null;
     try {
       if (typeof localStorage !== 'undefined') {
         stored = localStorage.getItem('ftcDisclosureEnabled');
       }
-    } catch { /* renderer 외부 호출 또는 localStorage 미지원 */ }
+    } catch { /* renderer ?몃? ?몄텧 ?먮뒗 localStorage 誘몄???*/ }
 
     if (stored !== null) {
       enabled = stored === 'true';
@@ -72,7 +72,7 @@ export function resolveFtcSetting(options: FtcResolverOptions = {}): FtcResoluti
     }
   }
 
-  // 텍스트 결정: UI 입력 > localStorage > 기본 텍스트(쇼핑커넥트만)
+  // ?띿뒪??寃곗젙: UI ?낅젰 > localStorage > 湲곕낯 ?띿뒪???쇳븨而ㅻ꽖?몃쭔)
   let text = '';
   if (enabled) {
     if (options.uiTextValue && options.uiTextValue.trim()) {

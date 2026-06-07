@@ -44,3 +44,13 @@ export function invalidateBrowserCache(): void {
   cachedPage = null;
   cachedContext = null;
 }
+
+/** Close and clear the cached browser context. Useful for tests and shutdown. */
+export async function closeBrowserCache(): Promise<void> {
+  const context = cachedContext;
+  cachedPage = null;
+  cachedContext = null;
+  if (context && typeof (context as { close?: unknown }).close === 'function') {
+    await (context as { close: () => Promise<void> }).close();
+  }
+}

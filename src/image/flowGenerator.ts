@@ -338,13 +338,13 @@ function installNetworkImageListener(page: Page): void {
             //   기존: flowMedia|aitestkitchen|labs.google 등 특정 도메인
             //   문제: net queue=0 (사용자 로그) → 실제 응답이 위 패턴에 매칭 안 됨
             //   수정: Google 계열 도메인 + image 응답 + 일정 크기 이상이면 후보로 추가 (false positive는 5KB 가드 + changelog 가드로 차단)
-            const FLOW_CDN_RE = /flowMedia|flow-media|media\.getMediaUrlRedirect|googleusercontent|aitestkitchen|labs\.google|gstatic\.com|google(?:apis|usercontent|cdn)|cdn\.google|images\.google|google\.com\/.+\/(?:flow|media|image|imagen)/i;
+            const FLOW_CDN_RE = /flow-content\.google\/image|flowMedia|flow-media|media\.getMediaUrlRedirect|googleusercontent|aitestkitchen|gstatic\.com|google(?:apis|usercontent|cdn)|cdn\.google|images\.google|google\.com\/.+\/(?:flow|media|image|imagen)/i;
             if (!FLOW_CDN_RE.test(url)) {
                 flowLog(`[Flow][Net][DIAG] ⏭️ 패턴 미매칭 — skip: ${url.substring(0, 100)}`);
                 return;
             }
             // changelog/banner iframe이 작은 이미지를 응답해도 무시 (overlay URL 패턴)
-            if (/changelogs?|whats[_-]?new|banner|survey|consent|onboarding|promo|favicon/i.test(url)) {
+            if (/changelogs?|whats[_-]?new|banner|survey|consent|onboarding|promo|favicon|perlin\.png|flower-placeholder|\/icons\/|logo/i.test(url)) {
                 flowLog(`[Flow][Net][DIAG] ⏭️ UI 자산 — skip: ${url.substring(0, 100)}`);
                 return;
             }
@@ -1398,7 +1398,8 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
         const start = Date.now();
         const tick = () => {
             if (_networkImageQueue.length > queueStartSize) {
-                const url = _networkImageQueue[queueStartSize];
+                const newUrls = _networkImageQueue.slice(queueStartSize);
+                const url = newUrls[newUrls.length - 1];
                 flowLog(`[Flow][Net] ⚡ 네트워크 리스너가 먼저 감지: ${url.substring(0, 80)}...`);
                 resolve(url);
                 return;
@@ -1421,7 +1422,17 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
     }, 15000);
 
     try {
-        const imageUrl = await Promise.race([domPromise, netPromise]);
+        const delayedDomPromise = new Promise<string>((resolve, reject) => {
+            setTimeout(() => {
+                domPromise.then(resolve, reject);
+            }, 2500);
+        });
+        const racedUrl = await Promise.race([netPromise, delayedDomPromise]);
+        const queuedUrls = _networkImageQueue.slice(queueStartSize);
+        const imageUrl = queuedUrls.length > 0 ? queuedUrls[queuedUrls.length - 1] : racedUrl;
+        if (imageUrl !== racedUrl) {
+            flowLog(`[Flow][3/3] 네트워크 최신 URL 우선 적용: ${imageUrl.substring(0, 120)}`);
+        }
         flowLog(`[Flow][3/3] ✅ 새 이미지 감지! URL: ${imageUrl.substring(0, 120)}`);
         return imageUrl;
     } catch (err) {
@@ -1659,10 +1670,10 @@ export async function generateSingleImageWithFlow(
 
 // v2.6.7 — 중복 가드 상수: Flow에서 SHA256/aHash 일치 시 diversity hint를
 // 주입한 새 프롬프트로 단발 재생성. 무한 루프 방지를 위해 항당 최대 N회.
-// ✅ [v2.10.61] 사용자 보고 'FLOW 중복 이미지 가끔 배치됨'
-//   기존: 3회 재시도 후 폴백 허용 → 일부 중복이 통과
-//   변경: 5회 재시도 + similarityThreshold 8 (probeDuplicate 호출 시)
-const FLOW_DUPLICATE_MAX_RETRIES = 5;
+// Google Flow is web-automation based. Keep duplicate regeneration bounded so a single
+// heading cannot stretch into several extra minutes unless strict diversity is explicitly enabled.
+const FLOW_DUPLICATE_MAX_RETRIES = 2;
+const FLOW_FORCE_FRESH_PROJECT_ON_DUPLICATE = process.env.FLOW_STRICT_DIVERSITY === '1';
 // 사용자 실측: 임계 8은 시각적으로 동일한 이미지도 통과하는 케이스 발생 → 6으로 환원.
 // 64비트 중 6비트 차이까지 유사로 간주 (8 → 6 환원, 사용자 보고 후 강화).
 const FLOW_AHASH_THRESHOLD = 6;
@@ -1799,9 +1810,9 @@ async function generateBatchPipelined(
                         break;
                     }
                 }
-                // 5회 재시도에도 중복이면 마지막 보루 — 새 프로젝트 강제 후 1회 더 시도.
+                // Strict diversity only: force a fresh project as the last resort.
                 // Flow가 같은 컨텍스트(프로젝트)에 deterministic한 것이지, 새 프로젝트면 다른 결과 가능.
-                if (probe.isDuplicate || probe.isSimilar) {
+                if ((probe.isDuplicate || probe.isSimilar) && FLOW_FORCE_FRESH_PROJECT_ON_DUPLICATE) {
                     try {
                         flowWarn(`[Flow][Pipeline] 🆕 ${FLOW_DUPLICATE_MAX_RETRIES}회 후 중복 — 새 프로젝트 강제 후 마지막 1회 시도`);
                         sendImageLog(`🆕 [Flow] "${slot.item.heading}" 새 프로젝트로 컨텍스트 리셋 후 재시도`);
@@ -1913,7 +1924,7 @@ export async function generateWithFlow(
     onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void,
     externalUsedImageHashes?: Set<string>,
     externalUsedImageAHashes?: bigint[],
-    options?: { forceFreshContext?: boolean },
+    options?: { forceFreshContext?: boolean; sequential?: boolean },
 ): Promise<GeneratedImage[]> {
     // v2.6.7: 호출자가 dedup 집합을 주지 않으면 배치 내부에서 자체 추적해
     // 같은 발행 안에서 같은 이미지가 반복 생성되는 것을 차단한다.
@@ -1940,12 +1951,13 @@ export async function generateWithFlow(
         aspectRatio: (it as any).aspectRatio || '1:1',
     })));
     sendImageLog(`🎨 [Flow] Nano Banana 2로 ${items.length}개 이미지 생성 시작 (파이프라인)`);
+    sendImageLog(`⏱️ [Flow] Google 웹앱 자동화라 1장당 60~180초 걸릴 수 있습니다. 중복 재생성은 기본 최대 ${FLOW_DUPLICATE_MAX_RETRIES}회입니다.`);
     sendImageLog(`📄 [Flow] 디버그 로그: ${flowLogFilePath || '초기화 실패'}`);
 
     // [v1.6.1] 파이프라인 시도 (queueDepth=2)
     // v2.7.9: 마라톤 모드(forceFreshContext)에서는 파이프라인 비활성 — 한도 도달
     // 시 sequential 폴백이 같은 페이지에서 누적 막힘으로 무한 타임아웃 발생.
-    const PIPELINE_ENABLED = process.env.FLOW_SEQUENTIAL !== '1' && !options?.forceFreshContext;
+    const PIPELINE_ENABLED = process.env.FLOW_SEQUENTIAL !== '1' && !options?.forceFreshContext && !options?.sequential;
     let results: GeneratedImage[] = [];
     let firstCriticalError: Error | null = null;
     let pipelineDoneCount = 0;
@@ -1964,6 +1976,8 @@ export async function generateWithFlow(
             results = [];
             pipelineDoneCount = 0;
         }
+    } else if (options?.sequential) {
+        flowLog(`[Flow] 순차 생성 옵션 — 파이프라인 비활성, 1장씩 단일 경로`);
     } else if (options?.forceFreshContext) {
         flowLog(`[Flow] 🏁 마라톤 모드 — 파이프라인 비활성, sequential 단일 경로`);
     }
@@ -2037,8 +2051,8 @@ export async function generateWithFlow(
                         break;
                     }
                 }
-                // 5회 retry에도 중복이면 마지막 보루 — 새 프로젝트 강제 후 1회 더 (Pipeline mode와 동일).
-                if (probe.isDuplicate || probe.isSimilar) {
+                // Strict diversity only: force a fresh project as the last resort.
+                if ((probe.isDuplicate || probe.isSimilar) && FLOW_FORCE_FRESH_PROJECT_ON_DUPLICATE) {
                     try {
                         flowWarn(`[Flow][Seq] 🆕 ${FLOW_DUPLICATE_MAX_RETRIES}회 후 중복 — 새 프로젝트 강제 후 마지막 1회 시도`);
                         sendImageLog(`🆕 [Flow] "${item.heading}" 새 프로젝트로 컨텍스트 리셋 후 재시도`);

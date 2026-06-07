@@ -82,6 +82,71 @@ const MOCK_AI_RESPONSE = JSON.stringify({
   seoKeyword: '홍대 여행',
 });
 
+describe('buildNarrativeContent hardening', () => {
+  beforeEach(() => {
+    vi.resetModules();
+    process.env['GEMINI_API_KEY'] = 'test-key';
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    delete process.env['GEMINI_API_KEY'];
+  });
+
+  it('parses a JSON object even when the model wraps it with prose', async () => {
+    vi.doMock('../gemini', () => ({
+      getGeminiModel: vi.fn().mockReturnValue({
+        model: {
+          generateContent: vi.fn().mockResolvedValue({
+            response: { text: () => `Here is the post:\n${MOCK_AI_RESPONSE}\nDone.` },
+          }),
+        },
+        modelName: 'gemini-test',
+      }),
+    }));
+
+    const { buildNarrativeContent } = await import('../imageNarrative/narrativeBuilder/builder');
+    const content = await buildNarrativeContent(makePlan('travel'));
+
+    expect(content.status).toBe('success');
+    expect(content.bodyHtml.length).toBeGreaterThan(0);
+  });
+
+  it('does not pass model-returned script tags into bodyHtml', async () => {
+    vi.doMock('../gemini', () => ({
+      getGeminiModel: vi.fn().mockReturnValue({
+        model: {
+          generateContent: vi.fn().mockResolvedValue({
+            response: {
+              text: () => JSON.stringify({
+                title: '<script>alert(1)</script>safe title',
+                introduction: '<img src=x onerror=alert(1)>intro',
+                sections: [
+                  {
+                    heading: '<script>alert(2)</script>heading',
+                    content: 'content <script>alert(3)</script>',
+                  },
+                ],
+                conclusion: 'done',
+                tags: ['<b>tag</b>'],
+              }),
+            },
+          }),
+        },
+        modelName: 'gemini-test',
+      }),
+    }));
+
+    const { buildNarrativeContent } = await import('../imageNarrative/narrativeBuilder/builder');
+    const content = await buildNarrativeContent(makePlan('travel'));
+
+    expect(content.bodyHtml).not.toContain('<script');
+    expect(content.bodyHtml).not.toContain('onerror');
+    expect(content.selectedTitle).toBe('safe title');
+    expect(content.hashtags).toEqual(['tag']);
+  });
+});
+
 // ---------------------------------------------------------------------------
 // Builder tests
 // ---------------------------------------------------------------------------

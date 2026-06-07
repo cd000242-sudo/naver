@@ -150,6 +150,7 @@ try {
     'imageHelpers.js',
     'imageCostUtils.js',
     'shoppingConnectUtils.js',
+    'shoppingImageLocalSave.js',
     // ✅ [2026-05-18] scSubImageSource 키 충돌 분리: mode/engine 정규화 헬퍼
     //   HeadingImageSettings/continuousPublishing/imageManagementTab/multiAccountManager에서 import.
     //   누락 시 renderer ReferenceError → 메인 풀오토 "수집 이미지 사용" 분기 회귀.

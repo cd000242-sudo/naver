@@ -146,7 +146,7 @@ export async function probeUnifiedSerp(
  * mode를 SerpProbeOptions['mode']로 안전하게 변환.
  */
 export function toSerpMode(mode: string | undefined): Mode {
-  if (mode === 'homefeed' || mode === 'affiliate' || mode === 'business' || mode === 'custom') {
+  if (mode === 'homefeed' || mode === 'affiliate' || mode === 'business' || mode === 'custom' || mode === 'mate') {
     return mode;
   }
   return 'seo';

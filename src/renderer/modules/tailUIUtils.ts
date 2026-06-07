@@ -179,8 +179,8 @@ export function initContentModeHelpAndSmartPublish() {
     }
 
     // 타이틀 업데이트
-    const icons: Record<string, string> = { seo: '🔍', homefeed: '🏠', affiliate: '🛒', custom: '✏️' };
-    const names: Record<string, string> = { seo: 'SEO 모드 가이드', homefeed: '홈판 모드 가이드', affiliate: '쇼핑커넥트 모드 가이드', custom: '사용자정의 모드 가이드' };
+    const icons: Record<string, string> = { seo: '🔍', homefeed: '🏠', mate: '🏅', affiliate: '🛒', custom: '✏️', business: '🏢' };
+    const names: Record<string, string> = { seo: 'SEO 모드 가이드', homefeed: '홈판 모드 가이드', mate: '네이버 메이트 모드 가이드', affiliate: '쇼핑커넥트 모드 가이드', custom: '사용자정의 모드 가이드', business: '업체 홍보 모드 가이드' };
 
     const iconEl = document.getElementById('content-mode-help-icon');
     const nameEl = document.getElementById('content-mode-help-mode-name');

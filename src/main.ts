@@ -9,6 +9,7 @@ import { globalLimiter } from './runtime/adaptiveLimiter.js';
 import { initSessionTracking, shouldDisableGpuFromHistory, getRecentFreezeAvg } from './runtime/runtimeStats.js';
 // ✅ [v2.7.53] modelRegistry SSOT
 import { CLAUDE_MODELS } from './runtime/modelRegistry.js';
+import { isDirectLaunchLewordAsset, selectLewordReleaseAsset } from './utils/lewordReleaseAssets.js';
 
 // ✅ [2026-04-03] 앱 시작 디버그 로그 (silent crash 진단용)
 try {
@@ -51,7 +52,7 @@ try {
 }
 import cron from 'node-cron';
 import { NaverBlogAutomation, RunOptions, type PublishMode, type AutomationImage } from './naverBlogAutomation.js';
-import { generateImages, resetAllImageState } from './imageGenerator.js';
+import { generateImages, resetAllImageState, abortImageGeneration } from './imageGenerator.js';
 import { generateEnglishPromptMain } from './main/utils/mainPromptInference.js';
 // (stabilityGenerator removed - deprecated provider)
 import { convertMp4ToGif } from './image/gifConverter.js'; // ✅ 추가
@@ -1148,7 +1149,7 @@ type AutomationRequest = {
   includeThumbnailText?: boolean; // ✅ 1번 이미지 텍스트 포함 여부
   // ✅✅ [신규] 쇼핑커넥트 관련 필드
   affiliateLink?: string; // 제휴 링크
-  contentMode?: 'seo' | 'affiliate'; // 콘텐츠 모드
+  contentMode?: 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business' | 'mate'; // 콘텐츠 모드
   isFullAuto?: boolean; // ✅ 풀오토 모드 여부 (인덱스 기반 이미지 매칭용)
   previousPostTitle?: string; // ✅ [신규] 같은 카테고리 이전글 제목
   previousPostUrl?: string; // ✅ [신규] 같은 카테고리 이전글 URL
@@ -2047,14 +2048,57 @@ ipcMain.handle('leword:launch', async () => {
   const http = require('http');
 
   const LEWORD_GITHUB_REPO = 'cd000242-sudo/leword-app';
-  const LEWORD_DOWNLOAD_DIR = path.join(process.env.LOCALAPPDATA || '', 'LEWORD');
+  const isWindows = process.platform === 'win32';
+  const isMacOS = process.platform === 'darwin';
+  const LEWORD_DOWNLOAD_DIR = isWindows
+    ? path.join(process.env.LOCALAPPDATA || app.getPath('userData'), 'LEWORD')
+    : path.join(app.getPath('userData'), 'LEWORD');
   const LEWORD_EXE_NAME = 'LEWORD-Setup.exe';  // ✅ [2026-02-21] Portable → Setup exe로 변경
   const LEWORD_EXE_PATH = path.join(LEWORD_DOWNLOAD_DIR, LEWORD_EXE_NAME);
   const LEWORD_VERSION_FILE = path.join(LEWORD_DOWNLOAD_DIR, '.leword-version');
 
+  const reportLewordVersion = async (version: string, source: string) => {
+    const cleanVersion = String(version || '').trim().replace(/^v/i, '');
+    if (!cleanVersion) return;
+
+    try {
+      await fetch(process.env.LICENSE_SERVER_URL || DEFAULT_LICENSE_SERVER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: 'free-ping',
+          appId: 'com.leword.keyword.master',
+          platform: 'LEWORD',
+          appVersion: cleanVersion,
+          deviceId: `leword-launcher-${app.getVersion()}`,
+          source,
+          timestamp: new Date().toISOString()
+        })
+      });
+      console.log(`[Main] LEWORD version reported: ${cleanVersion} (${source})`);
+    } catch (error) {
+      console.warn('[Main] LEWORD version report failed:', error);
+    }
+  };
+
+  const launchLocalLeword = async (targetPath: string, label: string) => {
+    if (isMacOS && targetPath.endsWith('.app')) {
+      const openError = await shell.openPath(targetPath);
+      if (openError) throw new Error(openError);
+      return;
+    }
+
+    const child = spawn(targetPath, [], { detached: true, stdio: 'ignore' });
+    child.unref();
+    try {
+      const { trackChild } = require('./runtime/childProcessRegistry.js');
+      trackChild(child.pid, `LEWORD(${label})`);
+    } catch { /* ignore */ }
+  };
+
   // ✅ [2026-02-21] 기존 Portable.exe → Setup.exe 마이그레이션
   const oldPortablePath = path.join(LEWORD_DOWNLOAD_DIR, 'LEWORD-Portable.exe');
-  if (!fs.existsSync(LEWORD_EXE_PATH) && fs.existsSync(oldPortablePath)) {
+  if (isWindows && !fs.existsSync(LEWORD_EXE_PATH) && fs.existsSync(oldPortablePath)) {
     try {
       fs.renameSync(oldPortablePath, LEWORD_EXE_PATH);
       console.log('[Main] 🔄 LEWORD Portable → Setup 파일명 마이그레이션 완료');
@@ -2062,23 +2106,40 @@ ipcMain.handle('leword:launch', async () => {
   }
 
   // ===== 설치된 LEWORD 경로 목록 (인스톨러가 설치하는 위치) =====
-  const installedPaths = [
-    path.join(process.env.LOCALAPPDATA || '', 'Programs', 'leword', 'LEWORD.exe'),
-    'C:\\Program Files\\LEWORD\\LEWORD.exe',
-    'C:\\Program Files (x86)\\LEWORD\\LEWORD.exe'
-  ];
+  const installedPaths = isMacOS
+    ? [
+      '/Applications/LEWORD.app',
+      '/Applications/Leword.app',
+      path.join(app.getPath('home'), 'Applications', 'LEWORD.app'),
+      path.join(app.getPath('home'), 'Applications', 'Leword.app')
+    ]
+    : [
+      path.join(process.env.LOCALAPPDATA || '', 'Programs', 'leword', 'LEWORD.exe'),
+      'C:\\Program Files\\LEWORD\\LEWORD.exe',
+      'C:\\Program Files (x86)\\LEWORD\\LEWORD.exe'
+    ];
 
   // ===== 개발 환경 경로 (win-unpacked 등) =====
   const releaseDir = path.resolve(__dirname, '../../leword-app/release');
   const devPaths: string[] = [];
   try {
-    const winUnpackedExe = path.join(releaseDir, 'win-unpacked', 'LEWORD.exe');
-    if (fs.existsSync(winUnpackedExe)) devPaths.push(winUnpackedExe);
+    if (isMacOS) {
+      const macDevCandidates = [
+        path.join(releaseDir, 'mac-universal', 'LEWORD.app'),
+        path.join(releaseDir, 'mac-arm64', 'LEWORD.app'),
+        path.join(releaseDir, 'mac', 'LEWORD.app'),
+        path.join(releaseDir, 'LEWORD.app')
+      ];
+      devPaths.push(...macDevCandidates.filter((candidate: string) => fs.existsSync(candidate)));
+    } else {
+      const winUnpackedExe = path.join(releaseDir, 'win-unpacked', 'LEWORD.exe');
+      if (fs.existsSync(winUnpackedExe)) devPaths.push(winUnpackedExe);
+    }
   } catch (e) { Logger.logDebug('system', 'LEWORD exe 탐색 실패 (win-unpacked)', { error: String(e) }); }
   try {
-    if (fs.existsSync(releaseDir)) {
+    if (isWindows && fs.existsSync(releaseDir)) {
       const files = fs.readdirSync(releaseDir) as string[];
-      const setupExe = files.find((f: string) => (f.startsWith('LEWORD-Setup-') || f.startsWith('LEWORD-Portable-')) && f.endsWith('.exe'));
+      const setupExe = files.find((f: string) => /^LEWORD[- .](Setup|Portable)/i.test(f) && f.endsWith('.exe'));
       if (setupExe) devPaths.push(path.join(releaseDir, setupExe));
     }
   } catch (e) { Logger.logDebug('system', 'LEWORD setup exe 탐색 실패', { error: String(e) }); }
@@ -2087,9 +2148,7 @@ ipcMain.handle('leword:launch', async () => {
   const devExe = devPaths.find((p: string) => { try { return fs.existsSync(p); } catch { return false; } });
   if (devExe) {
     console.log(`[Main] ✅ LEWORD 실행 (개발): ${devExe}`);
-    const child = spawn(devExe, [], { detached: true, stdio: 'ignore' });
-    child.unref();
-    try { const { trackChild } = require('./runtime/childProcessRegistry.js'); trackChild(child.pid, 'LEWORD(dev)'); } catch { /* ignore */ }
+    await launchLocalLeword(devExe, 'dev');
     return { success: true, message: 'LEWORD 앱이 실행되었습니다.' };
   }
 
@@ -2130,9 +2189,8 @@ ipcMain.handle('leword:launch', async () => {
     if (installedExe) {
       console.log(`[Main] ✅ LEWORD 최신 (${localVersion}), 설치 경로에서 실행: ${installedExe}`);
       mainWindow?.webContents.send('log-message', `✅ LEWORD ${localVersion} 실행 중...`);
-      const child = spawn(installedExe, [], { detached: true, stdio: 'ignore' });
-      child.unref();
-      try { const { trackChild } = require('./runtime/childProcessRegistry.js'); trackChild(child.pid, 'LEWORD(installed)'); } catch { /* ignore */ }
+      await reportLewordVersion(localVersion, 'installed');
+      await launchLocalLeword(installedExe, 'installed');
       return { success: true, message: 'LEWORD 앱이 실행되었습니다.' };
     }
     // 버전 파일은 있지만 설치된 exe가 없으면 → 다운로드로 진행
@@ -2146,10 +2204,8 @@ ipcMain.handle('leword:launch', async () => {
     if (installedExe) {
       console.warn(`[Main] ⚠️ GitHub 응답 실패 → 설치된 LEWORD ${localVersion} 그대로 실행 (다음에 자동 업데이트 재시도)`);
       mainWindow?.webContents.send('log-message', `⚠️ 업데이트 확인 실패 — LEWORD ${localVersion} 실행 (다음에 재시도)`);
-      const child = spawn(installedExe, [], { detached: true, stdio: 'ignore' });
-      child.unref();
-      // [v2.10.152] trackChild 누락 fix — 다른 4개 spawn 분기는 모두 trackChild 호출하지만 이 분기만 누락 → LEWORD 좀비 발생
-      try { const { trackChild } = require('./runtime/childProcessRegistry.js'); trackChild(child.pid, 'LEWORD(no-network)'); } catch { /* ignore */ }
+      await reportLewordVersion(localVersion, 'no-network');
+      await launchLocalLeword(installedExe, 'no-network');
       return { success: true, message: 'LEWORD 앱이 실행되었습니다 (업데이트 확인 실패).' };
     }
   }
@@ -2171,16 +2227,15 @@ ipcMain.handle('leword:launch', async () => {
         console.log(`[Main] ✅ 버전 저장: ${latestTag}`);
       } catch (e) { Logger.logWarn('system', 'LEWORD 버전 파일 저장 실패', e); }
       mainWindow?.webContents.send('log-message', `✅ LEWORD 실행 중...`);
-      const child = spawn(existingExe, [], { detached: true, stdio: 'ignore' });
-      child.unref();
-      try { const { trackChild } = require('./runtime/childProcessRegistry.js'); trackChild(child.pid, 'LEWORD(existing)'); } catch { /* ignore */ }
+      await reportLewordVersion(latestTag, 'existing');
+      await launchLocalLeword(existingExe, 'existing');
       return { success: true, message: 'LEWORD 앱이 실행되었습니다.' };
     }
     console.log('[Main] 📦 LEWORD 최초 설치');
   }
 
   // ===== 로컬에 없으면 → GitHub Releases에서 자동 다운로드 =====
-  const isAutoUpdate = fs.existsSync(LEWORD_DOWNLOAD_DIR) && !fs.existsSync(LEWORD_EXE_PATH);
+  const isAutoUpdate = isWindows && fs.existsSync(LEWORD_DOWNLOAD_DIR) && !fs.existsSync(LEWORD_EXE_PATH);
   console.log(`[Main] LEWORD ${isAutoUpdate ? '업데이트' : '미설치'} → GitHub Releases에서 자동 다운로드 시도`);
 
   // 신규 설치만 확인 다이얼로그 표시 (업데이트는 자동 진행)
@@ -2214,16 +2269,11 @@ ipcMain.handle('leword:launch', async () => {
       }).on('error', reject);
     });
 
-    // Portable exe 에셋 찾기
-    // ✅ [2026-02-21] Setup exe 우선, Portable exe 폴백
-    const asset = releaseInfo.assets?.find((a: any) =>
-      a.name.startsWith('LEWORD-Setup') && a.name.endsWith('.exe')
-    ) || releaseInfo.assets?.find((a: any) =>
-      a.name.startsWith('LEWORD-Portable') && a.name.endsWith('.exe')
-    );
+    // 현재 OS에 맞는 LEWORD 릴리스 에셋 찾기
+    const asset = selectLewordReleaseAsset(releaseInfo.assets || [], process.platform);
 
     if (!asset) {
-      console.error('[Main] ❌ GitHub Release에서 LEWORD exe를 찾을 수 없음');
+      console.error('[Main] ❌ GitHub Release에서 현재 OS용 LEWORD 다운로드 파일을 찾을 수 없음');
       dialog.showMessageBox(mainWindow!, {
         type: 'error',
         title: 'LEWORD 다운로드 실패',
@@ -2237,6 +2287,12 @@ ipcMain.handle('leword:launch', async () => {
     }
 
     // 다운로드 디렉토리 생성
+    if (!isDirectLaunchLewordAsset(asset, process.platform)) {
+      console.log(`[Main] LEWORD ${process.platform} download opened: ${asset.name}`);
+      await shell.openExternal(asset.browser_download_url);
+      return { success: true, message: `LEWORD ${asset.name} 다운로드를 열었습니다.` };
+    }
+
     if (!fs.existsSync(LEWORD_DOWNLOAD_DIR)) {
       fs.mkdirSync(LEWORD_DOWNLOAD_DIR, { recursive: true });
     }
@@ -2315,9 +2371,8 @@ ipcMain.handle('leword:launch', async () => {
     mainWindow?.webContents.send('log-message', '✅ LEWORD 다운로드 완료! 실행 중...');
 
     // 다운로드 완료 → 자동 실행
-    const child = spawn(LEWORD_EXE_PATH, [], { detached: true, stdio: 'ignore' });
-    child.unref();
-    try { const { trackChild } = require('./runtime/childProcessRegistry.js'); trackChild(child.pid, 'LEWORD(downloaded)'); } catch { /* ignore */ }
+    await reportLewordVersion(releaseInfo.tag_name || '', 'downloaded');
+    await launchLocalLeword(LEWORD_EXE_PATH, 'downloaded');
     return { success: true, message: 'LEWORD 다운로드 및 실행 완료!' };
 
   } catch (error: any) {
@@ -2843,6 +2898,16 @@ ipcMain.handle('automation:resetImageState', async () => {
   }
 });
 
+ipcMain.handle('automation:abortImageGeneration', async () => {
+  try {
+    abortImageGeneration();
+    return { success: true };
+  } catch (error) {
+    console.error('[Main] 이미지 생성 중단 실패:', error);
+    return { success: false, message: (error as Error).message };
+  }
+});
+
 ipcMain.handle(
   'automation:generateImages',
   async (_event, options: GenerateImagesOptions): Promise<{ success: boolean; images?: GeneratedImage[]; message?: string }> => {
@@ -2878,8 +2943,11 @@ ipcMain.handle(
           // 각 소제목에 수집 이미지를 순환 할당 (이미지 개수보다 소제목이 많을 수 있음)
           const refImg = collectedImages[idx % collectedImages.length];
           if (refImg && !item.referenceImagePath && !item.referenceImageUrl) {
-            const refUrl = typeof refImg === 'string' ? refImg : (refImg.url || refImg.filePath || refImg.thumbnailUrl);
+            const refUrl = typeof refImg === 'string' ? refImg : (refImg.referenceImageUrl || refImg.url || refImg.filePath || refImg.thumbnailUrl || refImg.referenceImagePath);
             if (refUrl) {
+              if (/^https?:\/\//i.test(String(refUrl))) {
+                (item as any).referenceImageUrl = refUrl;
+              }
               (item as any).referenceImagePath = refUrl;
               console.log(`[Main]   📎 소제목 ${idx + 1} (${item.heading?.substring(0, 20) || ''}) → 참조: ${String(refUrl).substring(0, 60)}...`);
             }
@@ -2935,6 +3003,7 @@ ipcMain.handle(
       // ✅ [2026-01-24] headingImageMode에 따른 items 필터링
       const headingImageMode = (options as any).headingImageMode || 'all';
       const isShoppingConnectMode = (options as any).isShoppingConnect === true;
+      const originalRequestedImageCount = Array.isArray(options.items) ? options.items.length : 0;
 
       console.log(`[Main] 🖼️ headingImageMode="${headingImageMode}", isShoppingConnect=${isShoppingConnectMode}`);
 
@@ -3042,8 +3111,8 @@ ipcMain.handle(
       // ✅ [2026-01-29 FIX] collectedImages를 crawledImages로 전달 (img2img 활성화)
       if (collectedImages && collectedImages.length > 0) {
         (options as any).crawledImages = collectedImages.map((img: any) =>
-          typeof img === 'string' ? img : (img.url || img.filePath || img.thumbnailUrl)
-        ).filter(Boolean);
+          typeof img === 'string' ? img : (img.referenceImageUrl || img.url || img.filePath || img.thumbnailUrl || img.referenceImagePath)
+        ).filter((url: string) => /^https?:\/\//i.test(String(url || '')));
         console.log(`[Main] 🖼️ img2img 활성화: ${(options as any).crawledImages.length}개 크롤링 이미지 전달`);
       }
 
@@ -3089,6 +3158,19 @@ ipcMain.handle(
         imageFallbackPolicy: options.imageFallbackPolicy || 'engine-only',
       };
       const images = await generateImages(imageOptions, apiKeys, onImageGenerated);
+      const generatedImageCount = Array.isArray(images) ? images.length : 0;
+      const providerForEmptyCheck = String(options.provider || imageOptions.provider || '');
+      const shouldRequireImages =
+        originalRequestedImageCount > 0 &&
+        headingImageMode !== 'none' &&
+        providerForEmptyCheck !== 'skip' &&
+        providerForEmptyCheck !== 'local-folder';
+      if (shouldRequireImages && generatedImageCount === 0) {
+        const providerLabel = String(options.provider || imageOptions.provider || 'unknown');
+        const message = `[${providerLabel}] 이미지 생성 결과가 비어있습니다. 화면 결과 감지, 로그인 세션, 구독/쿼터, 또는 엔진 UI 변경을 확인해야 합니다.`;
+        console.warn(`[Main] ${message}`);
+        return { success: false, images: [], message };
+      }
 
       if (await isFreeTierUser()) {
         await consumeQuota('media', 1);
@@ -4327,6 +4409,18 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
             const imageProvider = options?.imageSource || 'nano-banana-pro';
             const headingImageMode = options?.headingImageMode || 'all';
             const isThumbnailOnly = options?.thumbnailOnly === true;
+            const normalizedImageProvider = String(imageProvider || '').trim();
+            const isUiAutomationImageProvider = ['dropshot', 'flow', 'imagefx'].includes(normalizedImageProvider);
+            const isSlowImageProvider = ['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai'].includes(normalizedImageProvider);
+            const imageEngineStabilizeDelayMs = isUiAutomationImageProvider ? 15_000 : isSlowImageProvider ? 8_000 : 3_000;
+            const waitForImageEngineStabilization = async (phase: string) => {
+              if (imageEngineStabilizeDelayMs <= 0) return;
+              sendLog(`   ⏳ 이미지 엔진 안정화 대기 중... (${phase}, ${Math.ceil(imageEngineStabilizeDelayMs / 1000)}초)`);
+              await withAbortCheck(
+                new Promise<void>((resolve) => setTimeout(resolve, imageEngineStabilizeDelayMs)),
+                abortController.signal
+              );
+            };
 
             // ✅ headingImageMode === 'none'이면 모든 이미지 생성 건너뛰기
             if (headingImageMode === 'none') {
@@ -4336,6 +4430,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
               const imgApiKeys = {
                 geminiApiKey: imgConfig.geminiApiKey,
                 deepinfraApiKey: (imgConfig as any).deepinfraApiKey,
+                openaiApiKey: (imgConfig as any).openaiApiKey,
                 openaiImageApiKey: (imgConfig as any).openaiImageApiKey,
                 leonardoaiApiKey: (imgConfig as any).leonardoaiApiKey,
               };
@@ -4358,6 +4453,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
                 sendLog(`   🖼️ 전용 썸네일 별도 생성 중... (엔진: ${imageProvider})`);
 
+                await waitForImageEngineStabilization('thumbnail');
                 const thumbResult = await withAbortCheck(
                   generateImages({
                     provider: imageProvider,
@@ -4431,6 +4527,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                     });
                   }
 
+                  await waitForImageEngineStabilization('body-images');
                   const imgResult = await withAbortCheck(
                     generateImages({
                       provider: imageProvider,
@@ -4451,12 +4548,14 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                     sendLog(`   ✅ 소제목 이미지 ${subheadingImages.length}개 생성 완료!`);
                   } else {
                     sendLog(`   ⚠️ 소제목 이미지 생성 결과 없음`);
+                    throw new Error('소제목 이미지 생성 결과가 비어있습니다.');
                   }
                 } catch (subErr) {
                   if ((subErr as Error).name === 'AbortError' || (subErr as Error).message === 'PUBLISH_CANCELLED') {
                     throw subErr; // abort는 상위로 전파
                   }
                   sendLog(`   ⚠️ 소제목 이미지 생성 실패: ${(subErr as Error).message}`);
+                  throw subErr;
                 }
               }
 
@@ -4469,7 +4568,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
               if (generatedImages.length > 0) {
                 sendLog(`   ✅ AI 이미지 총 ${generatedImages.length}개 준비 완료! (썸네일 ${dedicatedThumbnail ? '포함' : '미포함'})`);
               } else {
-                sendLog(`   ⚠️ AI 이미지 생성 결과 없음 (이미지 없이 발행)`);
+                sendLog(`   ⚠️ AI 이미지 생성 결과 없음 (발행 중단)`);
+                throw new Error('AI 이미지 생성 결과가 비어있습니다.');
               }
             }
           } catch (imgError) {
@@ -4479,8 +4579,10 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
               results.push({ accountId, success: false, message: '사용자에 의해 즉시 중지됨' });
               break; // for 루프 탈출
             }
-            sendLog(`   ⚠️ AI 이미지 생성 실패 (글만 발행): ${(imgError as Error).message}`);
+            sendLog(`   ⚠️ AI 이미지 생성 실패 (발행 중단): ${(imgError as Error).message}`);
             console.error(`[다중계정] 이미지 생성 오류:`, imgError);
+            results.push({ accountId, success: false, message: `이미지 생성 실패: ${(imgError as Error).message}` });
+            continue;
           }
         }
 
@@ -4701,6 +4803,10 @@ ipcMain.handle('multiAccount:cancel', async () => {
 
 // [v2.10.258] datalab:getRelatedKeywords → main/ipc/datalabApiHandlers.ts
 
+// Gemini/OpenAI/Claude 호출부가 자체 재시도와 타임아웃을 갖고 있으므로
+// IPC 레벨에서 전체 글생성 파이프라인을 다시 돌리지 않는다.
+const GENERATE_STRUCTURED_CONTENT_RETRIES = 0;
+
 ipcMain.handle(
   'automation:generateStructuredContent',
   async (
@@ -4816,7 +4922,7 @@ ipcMain.handle(
       }
 
       // ✅ contentMode 전달 (SEO / 홈판 모드)
-      const contentMode = (payload.assembly as any).contentMode as 'seo' | 'homefeed' | undefined;
+      const contentMode = (payload.assembly as any).contentMode as 'seo' | 'homefeed' | 'mate' | undefined;
       if (contentMode) {
         source.contentMode = contentMode;
       }
@@ -4925,7 +5031,7 @@ ipcMain.handle(
           return generateStructuredContent(source, { provider, minChars, signal: genSignal } as any);
         },
         {
-          maxRetries: 2,
+          maxRetries: GENERATE_STRUCTURED_CONTENT_RETRIES,
           baseDelayMs: 3000,
           shouldRetry: (error) => {
             // ✅ [2026-04-03] abort 에러는 재시도하지 않음
@@ -4933,7 +5039,7 @@ ipcMain.handle(
             return isRetryableError(error);
           },
           onRetry: (error, attempt) => {
-            console.log(`[Main] ⚠️ 콘텐츠 생성 재시도 (${attempt}/2): ${error.message}`);
+            console.log(`[Main] ⚠️ 콘텐츠 생성 재시도 (${attempt}/${GENERATE_STRUCTURED_CONTENT_RETRIES}): ${error.message}`);
           },
         }
       );
@@ -8301,39 +8407,52 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
   mode?: string;
   targetChars?: number;
   toneStyle?: string;
+  plan?: unknown;
+  reviewEdits?: unknown;
 }) => {
   try {
-    console.log(`[Main] vision:infer-and-write — ${payload.images.length}장 수신`);
-
+    const { normalizeInferAndWritePayload } = await import('./imageNarrative/inferAndWriteInput.js');
     const { aggregateInferences } = await import('./imageNarrative/inferenceAggregator/aggregator.js');
     const { buildNarrativeContent } = await import('./imageNarrative/narrativeBuilder/builder.js');
     const { mapInferencesToImageMap } = await import('./imageNarrative/placement/inferenceImageMapper.js');
+    const { applyReviewEditsToPlan } = await import('./imageNarrative/reviewEdits.js');
+
+    const normalized = normalizeInferAndWritePayload(payload);
+    console.log(`[Main] vision:infer-and-write images=${normalized.images.length}`);
+
+    try {
+      const currentConfig = await loadConfig();
+      applyConfigToEnv(currentConfig);
+    } catch (configError) {
+      console.warn('[Main] vision:infer-and-write config load skipped:', configError);
+    }
 
     // Convert plain base64 objects to ImageInput format
-    const imageInputs = payload.images.map((img) => ({
+    const imageInputs = normalized.images.map((img) => ({
       imageId: img.imageId,
       buffer: Buffer.from(img.imageBase64, 'base64'),
       mimeType: img.mimeType,
     }));
 
-    const plan = await aggregateInferences(imageInputs, {
-      provider: (payload.provider ?? 'gemini') as any,
-      mode: (payload.mode ?? 'auto') as any,
+    const inferredPlan = normalized.plan ?? await aggregateInferences(imageInputs, {
+      provider: normalized.provider,
+      mode: normalized.mode,
     });
+    const plan = applyReviewEditsToPlan(inferredPlan, normalized.reviewEdits);
 
     const content = await buildNarrativeContent(plan, {
-      provider: (payload.provider ?? 'gemini') as any,
-      targetChars: payload.targetChars,
-      toneStyle: payload.toneStyle as any,
+      provider: normalized.provider,
+      targetChars: normalized.targetChars,
+      toneStyle: normalized.toneStyle,
     });
 
     const imageMap = mapInferencesToImageMap(
       plan,
-      payload.images.map((img) => img.imageId),
+      normalized.images.map((img) => img.imageId),
     );
 
     // Convert Map to plain object for IPC serialisation
-    const imageMapObj: Record<string, Array<{ filePath?: string; heading?: string }>> = {};
+    const imageMapObj: Record<string, Array<{ blobId?: string; filePath?: string; previewDataUrl?: string; heading?: string }>> = {};
     imageMap.forEach((imgs, heading) => {
       imageMapObj[heading] = imgs;
     });

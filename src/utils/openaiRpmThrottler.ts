@@ -51,7 +51,10 @@ export class OpenAIRpmThrottler {
   /**
    * @param minIntervalMs 직전 호출과의 최소 간격(ms). 0이면 간격 강제 없음(RPM 상한 보호만 적용).
    */
-  async throttle(minIntervalMs = 0): Promise<void> {
+  async throttle(minIntervalMs = 0, signal?: AbortSignal): Promise<void> {
+    if (signal?.aborted) {
+      throw new Error('OpenAI API 호출이 취소되었습니다.');
+    }
     const now = Date.now();
 
     // (1) Minimum-interval reservation — serialize spacing for concurrent callers.
@@ -75,7 +78,7 @@ export class OpenAIRpmThrottler {
         `[OpenAI RPM] ⏳ ${recent}/${this.currentMaxRpm} RPM · ${Math.round(waitMs / 1000)}초 대기` +
           (minIntervalMs > 0 ? ` (간격 ${Math.round(minIntervalMs / 1000)}s 직렬화)` : ''),
       );
-      await new Promise((r) => setTimeout(r, waitMs));
+      await sleepWithAbort(waitMs, signal);
     }
   }
 
@@ -93,17 +96,46 @@ export class OpenAIRpmThrottler {
     }
   }
 
-  record429(): void {
+  record429(cooldownMs = 0): void {
     this.last429At = Date.now();
     this.consecutiveSuccesses = 0;
     const next = Math.max(this.floorRpm, Math.floor(this.currentMaxRpm / 2));
     console.warn(`[OpenAI RPM] 🔻 429 감지 → RPM 상한 ${this.currentMaxRpm} → ${next} 감소 (보호)`);
     this.currentMaxRpm = next;
+
+    if (cooldownMs > 0) {
+      this.nextScheduledAt = Math.max(this.nextScheduledAt, Date.now() + cooldownMs);
+      console.warn(`[OpenAI RPM] cooldown reserved for ${Math.round(cooldownMs / 1000)}s after 429`);
+    }
   }
 
   getStatus(): string {
     return `${this.getRecentCallCount()}/${this.currentMaxRpm} RPM (상한 ${this.ceilingRpm})`;
   }
+}
+
+function sleepWithAbort(ms: number, signal?: AbortSignal): Promise<void> {
+  if (ms <= 0) return Promise.resolve();
+  if (signal?.aborted) {
+    return Promise.reject(new Error('OpenAI API 호출이 취소되었습니다.'));
+  }
+
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  let onAbort: (() => void) | undefined;
+
+  return new Promise<void>((resolve, reject) => {
+    timer = setTimeout(resolve, ms);
+    if (signal) {
+      onAbort = () => {
+        if (timer) clearTimeout(timer);
+        reject(new Error('OpenAI API 호출이 취소되었습니다.'));
+      };
+      signal.addEventListener('abort', onAbort, { once: true });
+    }
+  }).finally(() => {
+    if (timer) clearTimeout(timer);
+    if (signal && onAbort) signal.removeEventListener('abort', onAbort);
+  });
 }
 
 const getCeilingRpm = (): number => {
@@ -125,16 +157,47 @@ export const openaiRpmThrottler = new OpenAIRpmThrottler(getCeilingRpm(), 20, 3)
  * 텍스트 생성(callOpenAI)의 호출 간 최소 간격 (ms).
  *
  * ✅ [2026-06-02] 사용자 요청 — 글 1편당 12~30회 호출 burst가 RPM 한도를 치는 것 차단.
- *   기본 10초. 환경 변수 OPENAI_MIN_INTERVAL_MS로 override 가능.
+ *   기본 20초(일반 OpenAI 텍스트), mini 12초. 환경 변수 OPENAI_MIN_INTERVAL_MS로 override 가능.
  */
-export function getOpenAiMinIntervalMs(): number {
+export function getOpenAiMaxCompletionTokens(minChars = 2000): number {
+  const safeMinChars = Number.isFinite(minChars) ? Math.max(0, Math.floor(minChars)) : 2000;
+
+  if (safeMinChars <= 800) {
+    return Math.min(1200, Math.max(700, Math.ceil(safeMinChars * 1.8)));
+  }
+  if (safeMinChars <= 1200) {
+    return 1800;
+  }
+
+  return Math.min(8192, Math.max(2048, Math.ceil(safeMinChars * 1.7)));
+}
+
+export function getOpenAiMinIntervalMs(modelName = '', maxCompletionTokens = 0): number {
   try {
     const env = typeof process !== 'undefined' ? parseInt(process.env.OPENAI_MIN_INTERVAL_MS || '', 10) : NaN;
     if (!isNaN(env) && env >= 0) return env;
   } catch {
     /* ignore */
   }
-  return 10_000; // 고정 10초 (사용자 선택)
+
+  // Text generation makes several OpenAI calls per post. Keep a light default
+  // spacing so low-tier accounts avoid bursts without making one post feel stuck.
+  const isMini = modelName.toLowerCase().includes('mini');
+  if (maxCompletionTokens > 0) {
+    if (isMini) {
+      if (maxCompletionTokens >= 6000) return 10_000;
+      if (maxCompletionTokens >= 4000) return 8_000;
+      if (maxCompletionTokens >= 1800) return 6_000;
+      return 4_000;
+    }
+    if (maxCompletionTokens >= 6000) return 20_000;
+    if (maxCompletionTokens >= 4000) return 15_000;
+    if (maxCompletionTokens >= 1800) return 12_000;
+    return 8_000;
+  }
+
+  if (isMini) return 6_000;
+  return 10_000;
 }
 
 /**
@@ -144,6 +207,101 @@ export function getOpenAiMinIntervalMs(): number {
  *   호출부(callOpenAI)의 maxRetriesPerModel을 이 시퀀스 길이에 맞춰야 끝까지 발동한다.
  */
 export const QUOTA_BACKOFF_SEQUENCE_MS = [30_000, 60_000, 90_000, 120_000];
+
+const DEFAULT_OPENAI_RATE_LIMIT_PATIENCE_MS = 5 * 60_000;
+
+function readHeader(error: unknown, name: string): string | undefined {
+  const headers =
+    (error as any)?.headers ||
+    (error as any)?.response?.headers ||
+    (error as any)?.error?.headers;
+  if (!headers) return undefined;
+
+  if (typeof headers.get === 'function') {
+    return headers.get(name) || headers.get(name.toLowerCase()) || undefined;
+  }
+
+  const target = name.toLowerCase();
+  for (const [key, value] of Object.entries(headers)) {
+    if (key.toLowerCase() === target) return String(value);
+  }
+  return undefined;
+}
+
+export function parseOpenAiRateLimitDelayMs(raw: unknown): number | null {
+  if (raw === undefined || raw === null) return null;
+  const value = String(raw).trim();
+  if (!value) return null;
+
+  if (/^\d+(\.\d+)?$/.test(value)) {
+    return Math.ceil(Number(value) * 1000);
+  }
+
+  const dateMs = Date.parse(value);
+  if (!Number.isNaN(dateMs)) {
+    return Math.max(0, dateMs - Date.now());
+  }
+
+  let totalMs = 0;
+  const unitPattern = /(\d+(?:\.\d+)?)(ms|s|m|h)/gi;
+  let match: RegExpExecArray | null;
+  while ((match = unitPattern.exec(value)) !== null) {
+    const amount = Number(match[1]);
+    const unit = match[2].toLowerCase();
+    if (unit === 'ms') totalMs += amount;
+    if (unit === 's') totalMs += amount * 1000;
+    if (unit === 'm') totalMs += amount * 60_000;
+    if (unit === 'h') totalMs += amount * 3_600_000;
+  }
+
+  return totalMs > 0 ? Math.ceil(totalMs) : null;
+}
+
+export function getOpenAiRateLimitPatienceMs(): number {
+  try {
+    const env = typeof process !== 'undefined' ? parseInt(process.env.OPENAI_RATE_LIMIT_PATIENCE_MS || '', 10) : NaN;
+    if (!Number.isNaN(env) && env >= 60_000) return env;
+  } catch {
+    /* ignore */
+  }
+  return DEFAULT_OPENAI_RATE_LIMIT_PATIENCE_MS;
+}
+
+export function getOpenAiRateLimitWaitMs(error: unknown, fallbackMs: number): number {
+  const headerWaits = [
+    readHeader(error, 'retry-after'),
+    readHeader(error, 'x-ratelimit-reset-requests'),
+    readHeader(error, 'x-ratelimit-reset-tokens'),
+  ]
+    .map(parseOpenAiRateLimitDelayMs)
+    .filter((value): value is number => typeof value === 'number' && value > 0);
+
+  const headerWaitMs = headerWaits.length > 0 ? Math.max(...headerWaits) : 0;
+  const waitMs = Math.max(fallbackMs, headerWaitMs, 30_000);
+  return Math.min(waitMs, getOpenAiRateLimitPatienceMs());
+}
+
+export function isOpenAiRateLimitError(error: unknown, message = ''): boolean {
+  const status = (error as any)?.status || (error as any)?.response?.status;
+  const normalized = `${message} ${(error as any)?.code || ''} ${(error as any)?.type || ''}`.toLowerCase();
+  return status === 429 ||
+    normalized.includes('429') ||
+    normalized.includes('rate limit') ||
+    normalized.includes('too many requests') ||
+    normalized.includes('rate_limit_exceeded') ||
+    normalized.includes('quota');
+}
+
+export function isOpenAiHardQuotaError(error: unknown, message = ''): boolean {
+  const status = (error as any)?.status || (error as any)?.response?.status;
+  const normalized = `${message} ${(error as any)?.code || ''} ${(error as any)?.type || ''}`.toLowerCase();
+  if (status === 429 && normalized.includes('rate_limit_exceeded')) return false;
+  return normalized.includes('insufficient_quota') ||
+    normalized.includes('billing_hard_limit_reached') ||
+    normalized.includes('credit balance') ||
+    normalized.includes('monthly usage limit') ||
+    (normalized.includes('payment') && normalized.includes('required'));
+}
 
 /**
  * 누진 backoff 시간 계산 (429 retry 전용)

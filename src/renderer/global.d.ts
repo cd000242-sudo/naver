@@ -386,7 +386,7 @@ interface AutomationAPI {
   getDatalabSearchTrend: (keywords: string[], startDate: string, endDate: string, timeUnit?: 'date' | 'week' | 'month') => Promise<{ success: boolean; data?: unknown; message?: string }>;
   getDatalabRelatedKeywords: (keyword: string) => Promise<{ success: boolean; data?: unknown; message?: string }>;
   // ✅ [v2.10.184 Phase 3.4] SERP 프로브 — 끝판왕 실측 검증
-  probeSerp: (req: { keyword: string; display?: number; mode?: 'seo' | 'homefeed' | 'affiliate' | 'business' | 'custom' }) => Promise<{
+  probeSerp: (req: { keyword: string; display?: number; mode?: 'seo' | 'homefeed' | 'affiliate' | 'business' | 'custom' | 'mate' }) => Promise<{
     ok: boolean;
     report?: unknown;
     error?: string;
@@ -397,7 +397,7 @@ interface AutomationAPI {
     ourTitle?: string;
     ourPrimaryKeyword?: string;
     display?: number;
-    mode?: 'seo' | 'homefeed' | 'affiliate' | 'business' | 'custom';
+    mode?: 'seo' | 'homefeed' | 'affiliate' | 'business' | 'custom' | 'mate';
   }) => Promise<{
     ok: boolean;
     serpReport?: unknown;
@@ -599,7 +599,7 @@ interface AutomationAPI {
     category?: string
   ) => Promise<{ success: boolean; filePath?: string; previewDataUrl?: string; savedToLocal?: string; message?: string }>;
   collectImagesFromUrl: (url: string) => Promise<{ success: boolean; images?: string[]; message?: string }>;
-  collectImagesFromShopping: (url: string) => Promise<{ success: boolean; images?: string[]; title?: string; message?: string }>;
+  collectImagesFromShopping: (url: string) => Promise<{ success: boolean; images?: string[]; title?: string; message?: string; productInfo?: any; diagnostics?: any; resolvedUrl?: string }>;
   // ✅ [2026-02-01] Gemini 3 기반 소제목-이미지 의미적 매칭
   matchImagesToHeadings: (images: string[], headings: string[]) => Promise<{ success: boolean; matches?: number[]; message?: string }>;
   searchNaverImages: (keyword: string) => Promise<{ success: boolean; images?: any[]; message?: string }>; // ✅ 네이버 이미지 검색 API

@@ -161,4 +161,15 @@ describe('validateBlobReferences', () => {
     expect((img1 as any).blobId).toBe('aa');
     expect((img2 as any).blobId).toBe('bb');
   });
+
+  it('caches repeated blob existence checks briefly to keep generated post list refresh light', async () => {
+    const hasMany = vi.fn(async () => [true]);
+    (globalThis as any).window = { electronAPI: { blobs: { hasMany } } };
+    const posts = [{ images: [{ blobId: 'cache-test-blob-id' }] }];
+
+    await validateBlobReferences(posts);
+    await validateBlobReferences(posts);
+
+    expect(hasMany).toHaveBeenCalledTimes(1);
+  });
 });

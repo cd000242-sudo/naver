@@ -50,11 +50,14 @@ export function registerImageCollectShoppingHandlers(): void {
             // ✅ 플랫폼 감지 (resolve 후 URL 기준)
             const isBrandStore = url.includes('brand.naver.com');
             const isSmartStore = url.includes('smartstore.naver.com');
+            const isBrandConnect = url.includes('brandconnect.naver.com');
             const isCoupang = url.includes('coupang.com') || url.includes('coupa.ng');
 
             let images: string[] = [];
             let title = '';
             let productInfo: any = {};
+            let collectionDiagnostics: any = undefined;
+            let resolvedUrl = url;
 
             if (isBrandStore) {
                 // ✅ [v2.10.308] 브랜드스토어 회귀 fix: fetchShoppingImages → BrandStoreProvider 전환
@@ -71,7 +74,7 @@ export function registerImageCollectShoppingHandlers(): void {
                     timeout: 30000,
                     maxImages: 100,
                     includeDetails: false,   // ✅ 상세페이지 이미지 제외 (사용자 요청)
-                    includeReviews: true,    // ✅ 리뷰 이미지 수집 활성화 (사용자 요청)
+                    includeReviews: false,   // 저작권 안전 기본값: 구매자 리뷰 이미지는 발행용 수집에서 제외
                     useCache: true,
                 });
 
@@ -91,6 +94,8 @@ export function registerImageCollectShoppingHandlers(): void {
                 images = (result.images || []).map((img: any) => typeof img === 'string' ? img : img.url);
                 title = result.productInfo?.name || '';
                 productInfo = result.productInfo || { name: title };
+                collectionDiagnostics = result.diagnostics;
+                resolvedUrl = result.resolvedUrl || url;
                 console.log(`[Main] 📊 BrandStoreProvider 결과: ${images.length}개 이미지, 전략=${result.usedStrategy}`);
 
                 // ✅ [2026-02-08] 이미지 7장 미만이면 crawlBrandStoreProduct 폴백으로 추가 수집
@@ -151,9 +156,9 @@ export function registerImageCollectShoppingHandlers(): void {
                         console.warn(`[Main] ⚠️ 브랜드스토어 폴백 크롤링 오류:`, (fallbackErr as Error).message);
                     }
                 }
-            } else if (isSmartStore || isCoupang) {
+            } else if (isSmartStore || isCoupang || isBrandConnect) {
                 // ✅ 스마트스토어/쿠팡: 새 모듈화된 크롤러 사용
-                console.log(`[Main] 🏪 ${isSmartStore ? '스마트스토어' : '쿠팡'} 감지 → 새 크롤러 사용`);
+                console.log(`[Main] 🏪 ${isSmartStore || isBrandConnect ? '스마트스토어' : '쿠팡'} 감지 → 새 크롤러 사용`);
                 const { collectShoppingImages } = await import('../../crawler/shopping/index.js');
 
                 // ✅ [v2.10.309] 사용자 요구: 추가이미지 + 리뷰이미지만, 상세페이지 제외
@@ -161,9 +166,26 @@ export function registerImageCollectShoppingHandlers(): void {
                     timeout: 30000,
                     maxImages: 100,
                     includeDetails: false,   // ✅ 상세페이지 이미지 제외 (사용자 요청)
-                    includeReviews: true,
+                    includeReviews: false,
                     useCache: true,
                 });
+
+                const isCoupangBlocked = isCoupang && (
+                    result.isErrorPage ||
+                    /Access Denied|You don't have permission|403/i.test(String(result.error || ''))
+                );
+                if (isCoupangBlocked) {
+                    const message = '쿠팡은 현재 공개 상품 페이지가 Access Denied로 차단되어 이미지 자동수집이 안정적으로 동작하지 않습니다. 쿠팡 파트너스 API 승인 키가 있거나, 네이버 쇼핑/브랜드스토어처럼 공식 갤러리를 제공하는 링크를 사용해야 안정적으로 수집할 수 있습니다.';
+                    console.error('[Main] 쿠팡 이미지 수집 제한:', result.error || message);
+                    return {
+                        success: false,
+                        message,
+                        isErrorPage: true,
+                        requiresCoupangApi: true,
+                        diagnostics: result.diagnostics,
+                        resolvedUrl: result.resolvedUrl || url,
+                    };
+                }
 
                 if (result.isErrorPage) {
                     console.error('[Main] ❌ 에러 페이지 감지:', result.error);
@@ -179,6 +201,8 @@ export function registerImageCollectShoppingHandlers(): void {
                 images = (result.images || []).map((img: any) => typeof img === 'string' ? img : img.url);
                 title = result.productInfo?.name || '';
                 productInfo = result.productInfo || {};
+                collectionDiagnostics = result.diagnostics;
+                resolvedUrl = result.resolvedUrl || url;
 
                 console.log(`[Main] 📊 사용된 전략: ${result.usedStrategy}`);
                 console.log(`[Main] ⏱️ 소요 시간: ${result.timing}ms`);
@@ -194,7 +218,16 @@ export function registerImageCollectShoppingHandlers(): void {
                     name: title,
                     price: result.price,
                     description: result.description,
+                    brand: result.productInfo?.brand,
+                    availability: result.productInfo?.availability,
+                    canonicalUrl: result.productInfo?.canonicalUrl,
                 };
+                resolvedUrl = result.resolvedUrl || url;
+                collectionDiagnostics = result.pageQuality ? {
+                    imageCount: images.length,
+                    quality: images.length === 0 ? 'failed' : images.length < 3 ? 'weak' : 'ok',
+                    warnings: result.pageQuality.warning ? [result.pageQuality.warning] : [],
+                } : undefined;
             }
 
             console.log(`[Main] ✅ 쇼핑몰 이미지 수집 완료: ${images.length}개`);
@@ -228,6 +261,13 @@ export function registerImageCollectShoppingHandlers(): void {
                 images: analyzedImages,
                 title,
                 productInfo,
+                diagnostics: {
+                    ...(collectionDiagnostics || {}),
+                    finalImageCount: analyzedImages.length,
+                    filteredImageCount: filteredImages.length,
+                    rawImageCount: images.length,
+                },
+                resolvedUrl,
             };
 
             if ((response.images?.length ?? 0) > 0 && (await isFreeTierUser())) {

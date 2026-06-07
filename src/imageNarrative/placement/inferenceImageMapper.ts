@@ -25,6 +25,8 @@ export interface ImageMetadata {
   readonly blobId?: string;
   /** Remote URL, if the image originated from a URL upload. */
   readonly url?: string;
+  /** Base64/data URL preview kept for renderer-side uploaded images. */
+  readonly previewDataUrl?: string;
   /** Heading title this image is associated with. */
   readonly heading?: string;
 }
@@ -123,11 +125,13 @@ function buildOrderedImageIds(
 
 /**
  * Constructs an ImageMetadata object for a given imageId and heading.
- * Uses the imageId as filePath so downstream automation can locate the file.
+ * The raw imageId is a renderer-side upload identifier, not a disk path.
+ * Keep it in blobId/source fields so the renderer can hydrate it with the
+ * original base64 data URL before publishing.
  */
 function buildImageMetadata(imageId: string, heading: string): ImageMetadata {
   return {
-    filePath: imageId,
+    blobId: imageId,
     heading,
   };
 }

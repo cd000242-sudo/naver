@@ -137,16 +137,16 @@ async function simulateHumanBehavior(page: Page): Promise<void> {
 }
 
 /**
- * 이미지 생성 요청 간 랜덤 대기 (5-15초).
+ * 이미지 생성 요청 간 랜덤 대기 (3-7초).
  * 같은 분 내 빠른 연속 요청 = 봇 감지 트리거.
  * 첫 요청은 대기 X.
  */
 async function humanLikeIntervalDelay(index: number): Promise<void> {
   if (index === 0) return; // 첫 이미지는 즉시
-  const baseMs = 5000;
-  const jitterMs = Math.floor(Math.random() * 10000); // 0~10s 랜덤
+  const baseMs = 3000;
+  const jitterMs = Math.floor(Math.random() * 4000); // 0~4s 랜덤
   const totalMs = baseMs + jitterMs;
-  console.log(`[ImageFX] ⏳ 봇 감지 회피 대기 ${Math.round(totalMs / 1000)}초 (이미지 ${index + 1})`);
+  console.log(`[ImageFX] ⏳ Google 봇 감지 회피용 짧은 대기 ${Math.round(totalMs / 1000)}초 (이미지 ${index + 1})`);
   await new Promise((r) => setTimeout(r, totalMs));
 }
 
@@ -300,6 +300,14 @@ function extractHttpStatus(error: unknown): number | undefined {
   const m = msg.match(/HTTP_(\d{3})/);
   if (m) return Number(m[1]);
   return undefined;
+}
+
+function isFatalImageFxSingleError(error: unknown): boolean {
+  const code = extractImageFxErrorCode(error);
+  return code === 'IMAGEFX_FORBIDDEN'
+    || code === 'IMAGEFX_AUTH_EXPIRED'
+    || code === 'IMAGEFX_BOT_DETECTED'
+    || code === 'IMAGEFX_QUOTA_EXCEEDED';
 }
 
 function isBlockFatal(decision: { modalCode?: string }): boolean {
@@ -1748,7 +1756,12 @@ export async function generateSingleImageWithImageFx(
       // ✅ [v1.4.40] HTTP 4xx 일반 (403 등) — 차단/접근 거부
       if (errorCode.startsWith('HTTP_4')) {
         console.error(`[ImageFX] ❌ 접근 거부 (${errorCode}): ${errorDetail.substring(0, 100)}`);
-        lastError = new Error(`IMAGEFX_FORBIDDEN:Google ImageFX 접근이 거부되었습니다 (${errorCode}). 한국 IP 차단 또는 계정 제한일 수 있습니다. 테더링 IP 변경 또는 다른 Google 계정을 시도해주세요.`);
+        sendImageLog('⛔ [ImageFX] Google Labs가 현재 계정/IP/지역에서 생성 API 접근을 거부했습니다. 앱 오류가 아니며, 다른 Google 계정/네트워크 또는 다른 이미지 엔진을 사용해야 합니다.');
+        lastError = new Error(
+          `IMAGEFX_FORBIDDEN:Google ImageFX 접근이 거부되었습니다 (${errorCode}). ` +
+          'Google Labs가 현재 계정/IP/지역 조합에서 생성 API를 허용하지 않는 상태입니다. ' +
+          '로그인은 성공해도 403으로 막힐 수 있습니다. 다른 Google 계정, 테더링/VPN/다른 네트워크, 또는 Flow/리더스 나노바나나프로/OpenAI Image/DeepInfra를 사용해주세요.'
+        );
         // [2026-05-27 작업 23] return null → throw — outer catch가 lastClassifiedError로 저장.
         throw lastError;
       }
@@ -1796,6 +1809,10 @@ export async function generateSingleImageWithImageFx(
     } catch (error: any) {
       lastError = error;
       console.error(`[ImageFX] ❌ 예외 (시도 ${attempt}/${MAX_RETRIES}): ${error.message}`);
+
+      if (isFatalImageFxSingleError(error)) {
+        throw error;
+      }
 
       // AdsPower 연결 문제 → 캐시 초기화
       if (error.message.includes('AdsPower') || error.message.includes('연결') || error.message.includes('WebSocket')) {
@@ -2555,6 +2572,7 @@ export async function generateWithImageFx(
   const mode = isFullAuto ? '풀오토' : '일반';
   console.log(`[ImageFX] ✨ 배치 이미지 생성 시작: ${items.length}개 (${mode} 모드)`);
   sendImageLog(`✨ [ImageFX] ${items.length}개 이미지 생성 시작 (Gemini 불필요, 완전 무료)`);
+  sendImageLog(`⏱️ [ImageFX] Google 웹앱 자동화라 1장당 30~120초 걸릴 수 있습니다. 중복 재생성은 최대 2회로 제한합니다.`);
 
   const results: GeneratedImage[] = [];
   let consecutiveFailures = 0;
@@ -2566,7 +2584,7 @@ export async function generateWithImageFx(
   const usedImageHashes = new Set<string>();
   const usedImageAHashes: bigint[] = [];
   const IMAGEFX_AHASH_THRESHOLD = 8;
-  const IMAGEFX_DUP_MAX_RETRIES = 3;
+  const IMAGEFX_DUP_MAX_RETRIES = 2;
 
   // ✅ [SPEC-IMAGE-RECOVERY-001] 자동 복구 코디네이터
   const coordinator = getRecoveryCoordinator({
@@ -2581,7 +2599,7 @@ export async function generateWithImageFx(
       break;
     }
 
-    // ✅ [v2.10.293] 요청 간 랜덤 대기 (5-15초) — 봇 감지 회피
+    // 요청 간 짧은 랜덤 대기 (3-7초) — 봇 감지 회피
     //   같은 분 내 빠른 연속 요청은 Google 봇 감지 신호. 사람처럼 간격을 둠.
     await humanLikeIntervalDelay(i);
 
@@ -2778,16 +2796,17 @@ export async function generateWithImageFx(
 }
 
 /**
- * ImageFX 연결 테스트 — Flow 패턴과 동일.
+ * ImageFX 실제 생성 테스트.
  *
- * UI에서 "ImageFX 연결 테스트" 버튼을 눌러 호출. 세션 없으면 visible 브라우저를
- * 강제로 띄워 사용자가 Google 로그인할 수 있게 한다 (자동 발행 중에는 visible 전환이
- * 백그라운드로 묻힐 수 있어 사용자가 못 알아채는 회귀 차단).
+ * UI에서 "ImageFX 실제 생성 테스트" 버튼을 눌러 호출. 세션 없으면 visible
+ * 브라우저를 강제로 띄워 사용자가 Google 로그인할 수 있게 한다. 로그인 세션만
+ * 확인하면 403 접근 거부를 놓치므로, 안전한 프롬프트로 1장을 실제 생성해
+ * 현재 계정/IP/지역 조합이 생성 API까지 통과하는지 확인한다.
  *
  * 정상 흐름:
  *   1. ensurePage() 호출 → headless 시도 → 세션 없으면 자동 visible 전환 (5분 대기)
- *   2. 사용자가 visible 브라우저에서 jdy3531@gmail.com 로그인
- *   3. 쿠키 영구 저장 → headless 자동 전환
+ *   2. 사용자가 visible 브라우저에서 Google 로그인
+ *   3. 실제 1장 생성 프리플라이트 실행
  *   4. ok: true + userInfo 반환
  */
 export async function testImageFxConnection(): Promise<{
@@ -2807,15 +2826,49 @@ export async function testImageFxConnection(): Promise<{
       return { ok: false, message: '❌ Google 세션 확보 실패 — 로그인 창에서 로그인 완료 후 다시 테스트해주세요' };
     }
     const userInfo = (session as any).user;
+    const userLabel = userInfo?.email || userInfo?.name || 'user';
+
+    sendImageLog('🧪 [ImageFX] 실제 생성 접근 테스트 중... (테스트 이미지 1장 생성)');
+    const probe = await generateSingleImageWithImageFx(
+      'simple clean realistic photo of a white ceramic mug on a wooden desk, soft daylight, no text, no logo',
+      '1:1'
+    );
+
+    if (!probe?.buffer || probe.buffer.length < 1024) {
+      return {
+        ok: false,
+        message: '❌ ImageFX 실제 생성 테스트 실패 — 생성 응답이 비어 있습니다. 잠시 후 다시 시도하거나 다른 이미지 엔진을 사용해주세요.',
+        userInfo,
+      };
+    }
+
     return {
       ok: true,
-      message: `✅ ImageFX 연결 성공 — ${userInfo?.email || userInfo?.name || 'user'}`,
+      message: `✅ ImageFX 실제 생성 테스트 성공 — ${userLabel} / 현재 계정·네트워크에서 생성 가능 확인`,
       userInfo,
     };
   } catch (err) {
     const msg = (err as Error).message || '';
     if (msg.includes('Google 로그인 시간 초과')) {
       return { ok: false, message: '❌ Google 로그인 시간 초과 — 다시 테스트해주세요' };
+    }
+    if (msg.includes('IMAGEFX_FORBIDDEN') || msg.includes('HTTP_403') || msg.includes('HTTP_4')) {
+      return {
+        ok: false,
+        message: '⛔ ImageFX 실제 생성 테스트 실패 — Google Labs가 현재 계정/IP/지역에서 생성 API 접근을 거부했습니다. 앱 오류나 API 키 문제가 아니므로 다른 Google 계정, 다른 네트워크/IP, 또는 Flow/리더스 나노바나나프로/OpenAI Image/DeepInfra를 사용해주세요.',
+      };
+    }
+    if (msg.includes('IMAGEFX_QUOTA_EXCEEDED')) {
+      return {
+        ok: false,
+        message: '⚠️ ImageFX 실제 생성 테스트 실패 — 현재 Google Labs 생성 한도 또는 일시 제한에 걸렸습니다. 시간을 두고 재시도하거나 다른 이미지 엔진을 사용해주세요.',
+      };
+    }
+    if (msg.includes('IMAGEFX_AUTH_EXPIRED')) {
+      return {
+        ok: false,
+        message: '🔐 ImageFX 실제 생성 테스트 실패 — Google 로그인 세션이 만료되었습니다. Google 계정 변경/로그인 후 다시 테스트해주세요.',
+      };
     }
     return { ok: false, message: `❌ ${msg}` };
   }

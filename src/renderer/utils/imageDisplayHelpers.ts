@@ -45,9 +45,28 @@ export interface ValidateBlobReferencesResult {
   missingCount: number;
 }
 
+const BLOB_EXISTS_CACHE_TTL_MS = 30_000;
+const blobExistsCache = new Map<string, { exists: boolean; checkedAt: number }>();
+let lastBlobHasManyRef: unknown = null;
+
+function getCachedBlobExists(blobId: string, now: number): boolean | undefined {
+  const cached = blobExistsCache.get(blobId);
+  if (!cached) return undefined;
+  if (now - cached.checkedAt > BLOB_EXISTS_CACHE_TTL_MS) {
+    blobExistsCache.delete(blobId);
+    return undefined;
+  }
+  return cached.exists;
+}
+
 export async function validateBlobReferences(posts: any[]): Promise<ValidateBlobReferencesResult> {
   const api = (window as any).electronAPI;
   if (!api?.blobs?.hasMany) return { posts, missingCount: 0 };
+  const hasMany = api.blobs.hasMany;
+  if (lastBlobHasManyRef !== hasMany) {
+    blobExistsCache.clear();
+    lastBlobHasManyRef = hasMany;
+  }
 
   const blobIds: string[] = [];
   for (const post of posts) {
@@ -59,23 +78,42 @@ export async function validateBlobReferences(posts: any[]): Promise<ValidateBlob
 
   if (blobIds.length === 0) return { posts, missingCount: 0 };
 
-  let existsArr: boolean[];
-  try {
-    existsArr = await api.blobs.hasMany(blobIds);
-  } catch (e) {
-    console.warn('[postListUI] blob hasMany failed (ignored):', e);
-    return { posts, missingCount: 0 };
+  const now = Date.now();
+  const uniqueBlobIds = Array.from(new Set(blobIds));
+  const existsById = new Map<string, boolean>();
+  const idsToQuery: string[] = [];
+
+  for (const blobId of uniqueBlobIds) {
+    const cached = getCachedBlobExists(blobId, now);
+    if (cached === undefined) {
+      idsToQuery.push(blobId);
+    } else {
+      existsById.set(blobId, cached);
+    }
   }
 
-  // Build set of missing blobIds for O(1) lookup during clone walk.
+  if (idsToQuery.length > 0) {
+    let existsArr: boolean[];
+    try {
+      existsArr = await hasMany(idsToQuery);
+    } catch (e) {
+      console.warn('[postListUI] blob hasMany failed (ignored):', e);
+      return { posts, missingCount: 0 };
+    }
+
+    idsToQuery.forEach((blobId, index) => {
+      const exists = existsArr[index] !== false;
+      existsById.set(blobId, exists);
+      blobExistsCache.set(blobId, { exists, checkedAt: now });
+    });
+  }
+
   const missingBlobIds = new Set<string>();
-  let cursor = 0;
   for (const post of posts) {
     for (const img of (post.images || []) as any[]) {
       const blobId = typeof img?.blobId === 'string' ? img.blobId : '';
       if (blobId) {
-        if (!existsArr[cursor]) missingBlobIds.add(blobId);
-        cursor++;
+        if (existsById.get(blobId) === false) missingBlobIds.add(blobId);
       }
     }
   }

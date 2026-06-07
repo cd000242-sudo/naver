@@ -53,6 +53,9 @@ export function getImageErrorMessage(error: any): string {
         const modelName = errorMsg.split('OPENAI_MODEL_UNAVAILABLE:')[1]?.trim() || '선택한 모델';
         return `🚫 "${modelName}" 모델에 접근할 수 없습니다. 환경설정 → 이미지 모델에서 다른 모델로 변경하거나 OpenAI 계정 권한을 확인해주세요.`;
     }
+    if (errorMsg.includes('IMAGEFX_FORBIDDEN')) {
+        return '⛔ Google ImageFX가 현재 계정/IP/지역에서 생성 API 접근을 거부했습니다. 앱 오류가 아니라 Google Labs 접근 정책 문제입니다. 다른 Google 계정, 다른 네트워크/IP, 또는 Flow/리더스 나노바나나프로/OpenAI Image/DeepInfra를 사용해주세요.';
+    }
 
     // 1. HTTP 상태 코드로 매핑
     if (statusCode && HTTP_ERROR_MESSAGES[statusCode]) {

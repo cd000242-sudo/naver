@@ -24,6 +24,61 @@ import { buildDropshotPrompt } from './dropshotCore.js';
 import { makeDropshotImage } from './dropshotCapture.js';
 
 const MAX_DEDUP_ATTEMPTS = 3;
+const HTTP_URL_RE = /^https?:\/\//i;
+
+function normalizeDropshotReferenceUrl(value: unknown): string {
+  if (!value) return '';
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    return HTTP_URL_RE.test(trimmed) ? trimmed : '';
+  }
+  if (typeof value !== 'object') return '';
+
+  const image = value as {
+    referenceImageUrl?: string;
+    url?: string;
+    filePath?: string;
+    thumbnailUrl?: string;
+    savedToLocal?: string;
+    referenceImagePath?: string;
+    src?: string;
+  };
+  const candidates = [
+    image.referenceImageUrl,
+    image.url,
+    image.filePath,
+    image.thumbnailUrl,
+    image.savedToLocal,
+    image.referenceImagePath,
+    image.src,
+  ];
+
+  for (const candidate of candidates) {
+    const normalized = normalizeDropshotReferenceUrl(candidate);
+    if (normalized) return normalized;
+  }
+  return '';
+}
+
+function collectDropshotReferenceUrls(...sources: unknown[]): string[] {
+  const urls: string[] = [];
+  const seen = new Set<string>();
+
+  const add = (value: unknown): void => {
+    if (Array.isArray(value)) {
+      for (const item of value) add(item);
+      return;
+    }
+    const url = normalizeDropshotReferenceUrl(value);
+    if (url && !seen.has(url)) {
+      seen.add(url);
+      urls.push(url);
+    }
+  };
+
+  for (const source of sources) add(source);
+  return urls;
+}
 
 /**
  * generateWithDropshot — dispatcher adapter.
@@ -59,10 +114,13 @@ export async function generateWithDropshot(
     // §12.3 Korean enhance + variation hint
     const enhancedPrompt = buildDropshotPrompt(item.prompt);
 
-    // i2i: collect reference URLs
-    const refUrls: string[] = [];
-    if (item.referenceImageUrl) refUrls.push(item.referenceImageUrl);
-    // Note: referenceImagePath (local path) is skipped — URL-based only for dropshot UI upload
+    // i2i: collect URL references. Shopping crawlers sometimes place the
+    // official representative image into referenceImagePath even when it is a URL.
+    const refUrls = collectDropshotReferenceUrls(
+      item.referenceImageList,
+      item.referenceImageUrl,
+      item.referenceImagePath,
+    ).slice(0, 4);
     const hasRef = refUrls.length > 0;
 
     const onLog = (m: string) => console.log(m);

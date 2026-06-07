@@ -182,12 +182,20 @@ async function callGeminiProvider(
     : null;
 
   try {
-    const result = await model.generateContent({
+    const request = model.generateContent({
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
       // 2048 → 8192: 한국어 풀 포스트(제목+도입+소제목 5개+결론) JSON이 2048 토큰에서 잘려
       // "Failed to parse AI response as JSON" 발생. 8192로 상향해 truncation 방지.
       generationConfig: { temperature: 0.6, maxOutputTokens: 8192 },
     });
+    const result = await Promise.race([
+      request,
+      new Promise<never>((_, reject) => {
+        effectiveSignal?.addEventListener('abort', () => {
+          reject(effectiveSignal.reason ?? new Error('Gemini content generation timeout (60s)'));
+        }, { once: true });
+      }),
+    ]);
     if (effectiveSignal?.aborted) throw new Error('Aborted');
     return result.response.text();
   } finally {
@@ -269,11 +277,52 @@ function parseNarrativeJson(raw: string): NarrativeJsonResponse {
   try {
     return JSON.parse(cleaned) as NarrativeJsonResponse;
   } catch (err) {
+    const embeddedJson = extractFirstJsonObject(cleaned);
+    if (embeddedJson) {
+      try {
+        return JSON.parse(embeddedJson) as NarrativeJsonResponse;
+      } catch {
+        // Fall through to the diagnostic error below.
+      }
+    }
     throw new Error(
       `[NarrativeBuilder] Failed to parse AI response as JSON. ` +
       `Raw (first 200 chars): ${cleaned.substring(0, 200)}`,
     );
   }
+}
+
+function extractFirstJsonObject(text: string): string | null {
+  const start = text.indexOf('{');
+  if (start < 0) return null;
+
+  let depth = 0;
+  let inString = false;
+  let escaping = false;
+
+  for (let i = start; i < text.length; i++) {
+    const char = text[i]!;
+    if (escaping) {
+      escaping = false;
+      continue;
+    }
+    if (char === '\\') {
+      escaping = true;
+      continue;
+    }
+    if (char === '"') {
+      inString = !inString;
+      continue;
+    }
+    if (inString) continue;
+    if (char === '{') depth++;
+    if (char === '}') {
+      depth--;
+      if (depth === 0) return text.slice(start, i + 1);
+    }
+  }
+
+  return null;
 }
 
 // ---------------------------------------------------------------------------
@@ -284,23 +333,19 @@ function toStructuredContent(
   parsed: NarrativeJsonResponse,
   plan: NarrativePlan,
 ): StructuredContent {
-  const sections = parsed.sections ?? [];
+  const sections = normalizeSections(parsed, plan);
+  const tags = sanitizeStringArray(parsed.tags);
   const bodyParts = sections.map((s) => {
-    const heading = s.heading ? `<h3>${s.heading}</h3>` : '';
-    const content = s.content
-      ? s.content
-          .split('\n\n')
-          .map((p) => `<p>${p.trim()}</p>`)
-          .join('\n')
-      : '';
-    return `${heading}\n${content}`;
+    const heading = s.heading ? `<h3>${escapeHtml(s.heading)}</h3>` : '';
+    const content = paragraphsToHtml(s.content);
+    return `${heading}\n${content}`.trim();
   });
 
   const introHtml = parsed.introduction
-    ? `<p>${parsed.introduction}</p>`
+    ? paragraphsToHtml(parsed.introduction)
     : '';
   const conclusionHtml = parsed.conclusion
-    ? `<p>${parsed.conclusion}</p>`
+    ? paragraphsToHtml(parsed.conclusion)
     : '';
 
   const bodyHtml = [introHtml, ...bodyParts, conclusionHtml]
@@ -308,22 +353,23 @@ function toStructuredContent(
     .join('\n\n');
 
   const bodyPlain = bodyHtml.replace(/<[^>]+>/g, '');
+  const selectedTitle = sanitizePlainText(parsed.title) || '블로그 글';
 
   return {
     status: 'success',
     generationTime: new Date().toISOString(),
-    selectedTitle: parsed.title ?? '블로그 글',
+    selectedTitle,
     titleAlternatives: [],
     titleCandidates: [],
     bodyHtml,
     bodyPlain,
     headings: sections.map((s, i) => ({
-      title: s.heading ?? `섹션 ${i + 1}`,
+      title: s.heading || `Section ${i + 1}`,
       summary: '',
-      keywords: parsed.tags ?? [],
+      keywords: tags,
       imagePrompt: plan.sections[i]?.imageRefs[0] ?? '',
     })),
-    hashtags: parsed.tags ?? [],
+    hashtags: tags,
     images: plan.orderedResults.map((r) => ({
       heading: r.result.location_hint || r.result.scene_type,
       prompt: r.result.description_ko,
@@ -340,7 +386,7 @@ function toStructuredContent(
       aiDetectionRisk: 'low' as const,
       legalRisk: 'safe' as const,
       seoScore: 0,
-      keywordStrategy: parsed.seoKeyword ?? '',
+      keywordStrategy: sanitizePlainText(parsed.seoKeyword),
       publishTimeRecommend: '',
     },
     quality: {
@@ -351,9 +397,87 @@ function toStructuredContent(
       readabilityScore: 0,
       warnings: [...plan.warnings],
     },
-    introduction: parsed.introduction,
-    conclusion: parsed.conclusion,
+    introduction: sanitizePlainText(parsed.introduction),
+    conclusion: sanitizePlainText(parsed.conclusion),
   };
+}
+
+function normalizeSections(
+  parsed: NarrativeJsonResponse,
+  plan: NarrativePlan,
+): Array<{ heading: string; content: string; imageRef?: string }> {
+  const parsedSections = (parsed.sections ?? [])
+    .map((section) => ({
+      heading: sanitizePlainText(section.heading),
+      content: sanitizePlainText(section.content),
+      imageRef: sanitizePlainText(section.imageRef),
+    }))
+    .filter((section) => section.heading || section.content);
+
+  if (parsedSections.length > 0) return parsedSections;
+
+  return plan.sections.map((section, index) => ({
+    heading: sanitizePlainText(section.heading) || `Section ${index + 1}`,
+    content: buildFallbackSectionContent(section.imageRefs, section.beats, plan),
+    imageRef: section.imageRefs[0],
+  }));
+}
+
+function buildFallbackSectionContent(
+  imageRefs: readonly string[],
+  beats: readonly string[],
+  plan: NarrativePlan,
+): string {
+  const fromBeats = beats.map(sanitizePlainText).filter(Boolean);
+  if (fromBeats.length > 0) return fromBeats.join('\n\n');
+
+  const refSet = new Set(imageRefs);
+  const fromResults = plan.orderedResults
+    .filter((result) => refSet.has(result.imageId))
+    .map((result) => sanitizePlainText(result.result.description_ko))
+    .filter(Boolean);
+
+  return fromResults.join('\n\n') || '사진 순서에 맞춰 장면을 정리했습니다.';
+}
+
+function paragraphsToHtml(text: string | undefined): string {
+  const cleaned = sanitizePlainText(text);
+  if (!cleaned) return '';
+
+  return cleaned
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .map((paragraph) => `<p>${escapeHtml(paragraph).replace(/\n/g, '<br>')}</p>`)
+    .join('\n');
+}
+
+function sanitizePlainText(value: unknown): string {
+  return String(value ?? '')
+    .replace(/\u0000/g, '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<[^>]*>/g, '')
+    .trim();
+}
+
+function sanitizeStringArray(values: unknown): string[] {
+  return Array.isArray(values)
+    ? values.map(sanitizePlainText).filter(Boolean).slice(0, 20)
+    : [];
+}
+
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>"']/g, (ch) => {
+    switch (ch) {
+      case '&': return '&amp;';
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '"': return '&quot;';
+      case "'": return '&#039;';
+      default: return ch;
+    }
+  });
 }
 
 // ---------------------------------------------------------------------------

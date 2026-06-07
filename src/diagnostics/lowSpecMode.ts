@@ -21,7 +21,7 @@ interface LowSpecRecommendation {
 const HIGH_SPEC: LowSpecRecommendation['recommendations'] = {
   publishConcurrency: 3,
   imageParallelLimit: 4,
-  geminiRpmCeiling: 30,
+  geminiRpmCeiling: 8,
   backgroundPollMs: 5000,
   disableHardwareAcceleration: false,
 };
@@ -29,7 +29,7 @@ const HIGH_SPEC: LowSpecRecommendation['recommendations'] = {
 const LOW_SPEC: LowSpecRecommendation['recommendations'] = {
   publishConcurrency: 1,
   imageParallelLimit: 1,
-  geminiRpmCeiling: 10,
+  geminiRpmCeiling: 6,
   backgroundPollMs: 30000,
   disableHardwareAcceleration: true,
 };

@@ -145,7 +145,7 @@ export async function runGeminiVision(
       },
     };
 
-    const result = await model.generateContent({
+    const request = model.generateContent({
       contents: [
         {
           role: 'user',
@@ -153,6 +153,14 @@ export async function runGeminiVision(
         },
       ],
     });
+    const result = await Promise.race([
+      request,
+      new Promise<never>((_, reject) => {
+        internal.signal.addEventListener('abort', () => {
+          reject(internal.signal.reason ?? new Error('Gemini Vision timeout (30s)'));
+        }, { once: true });
+      }),
+    ]);
 
     const text = result.response.text();
     if (!text || text.trim() === '') {

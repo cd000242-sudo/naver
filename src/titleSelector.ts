@@ -86,13 +86,14 @@ export function parseTitles(content: string): ParsedTitle[] {
 //   7. AI 못 대체 4영역 키워드 가점 (+20, 홈판/어필)
 //   8. 광고법 위반 정규식 (-100, Business)
 
-export type TitleMode = 'seo' | 'homefeed' | 'affiliate' | 'business';
+export type TitleMode = 'seo' | 'homefeed' | 'affiliate' | 'business' | 'mate';
 
 const LENGTH_RULES: Record<TitleMode, { optimal: [number, number]; ok: [number, number] }> = {
   seo: { optimal: [25, 40], ok: [22, 45] },
   homefeed: { optimal: [28, 42], ok: [25, 45] },
   affiliate: { optimal: [28, 42], ok: [25, 45] },
   business: { optimal: [28, 42], ok: [25, 45] },
+  mate: { optimal: [28, 45], ok: [25, 48] },
 };
 
 // v8/v9 빈 수식어 블랙리스트 (홈판 L122~129, 어필 L60~64) — 즉시 0점
@@ -456,6 +457,7 @@ export async function judgeBestTitleByLLM(
     homefeed: '키워드가 아닌 "소재 후킹" + AI 못 대체 4영역(체험/현장/공감서사/소비후기) 우선',
     affiliate: '구매 결정에 영향 줄 디테일 + 추상→구체 숫자',
     business: '광고법 0 위반 + 지역+업종+업체명 + 검증 가능 숫자',
+    mate: 'AI 브리핑 인용과 주제 전문성에 맞는 답변형 제목 (근거/기준/최신성 우선, 보장형 과장 금지)',
   };
 
   const prompt = `너는 네이버 블로그 제목 평가 심사관이다. 사용자 입력 키워드와 모드 가이드에 가장 잘 맞는 1개를 골라라.

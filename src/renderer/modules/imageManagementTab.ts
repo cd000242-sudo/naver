@@ -384,7 +384,7 @@ export async function initImageManagementTab(): Promise<void> {
       } else if (selectedSource === 'leonardoai') {
         appendLog('✅ Leonardo AI가 선택되었습니다. API 키가 필요합니다.');
       } else if (selectedSource === 'imagefx') {
-        appendLog('✅ ImageFX (Google 무료)가 선택되었습니다. 첫 사용 시 Google 로그인이 필요합니다.');
+        appendLog('⚠️ ImageFX (Google Labs)가 선택되었습니다. Google 로그인 후에도 계정/IP/지역에 따라 403 접근 거부가 날 수 있습니다. 대량 발행은 Flow, 리더스 나노바나나프로, OpenAI Image, DeepInfra를 권장합니다.');
       } else if (selectedSource === 'local-folder') {
         // ✅ [2026-03-22] 내 폴더 선택 시 폴더 선택 다이얼로그
         try {

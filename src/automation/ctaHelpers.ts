@@ -176,7 +176,10 @@ export async function insertEnhancedCta(
 
         // ✅ 4. [신규] 링크 카드 로딩 대기 (polling 방식)
         self.log(`   ⏳ 링크 카드 로딩 대기 중...`);
-        await self.waitForLinkCard(15000, 500);
+        const ctaCardReady = await self.waitForLinkCard(15000, 500);
+        if (ctaCardReady && typeof self.removeBareUrlTextAfterLinkCard === 'function') {
+            await self.removeBareUrlTextAfterLinkCard();
+        }
 
         // ✅ [2026-03-20] 이전글 삽입은 editorHelpers.ts에서 일원화 처리 (이중 삽입 방지)
         // insertEnhancedCta에서는 CTA 배너+텍스트만 담당, 이전글은 editorHelpers에서 삽입
@@ -283,6 +286,15 @@ export async function insertCtaLink(
             await page.keyboard.press('Enter');
             await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
             await page.keyboard.press('Enter');
+        }
+
+        if (finalUrl && finalUrl !== '#') {
+            const cardReady = typeof self.waitForLinkCard === 'function'
+                ? await self.waitForLinkCard(12000, 500)
+                : false;
+            if (cardReady && typeof self.removeBareUrlTextAfterLinkCard === 'function') {
+                await self.removeBareUrlTextAfterLinkCard();
+            }
         }
 
         await self.delay(300);

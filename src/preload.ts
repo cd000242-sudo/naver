@@ -39,7 +39,7 @@ type AutomationPayload = {
   keepBrowserOpen?: boolean; // ✅ 추가
   includeThumbnailText?: boolean; // ✅ 추가: 썸네일 텍스트 포함 여부
   affiliateLink?: string; // ✅ 추가: 제휴 링크 (쇼핑커넥트 모드)
-  contentMode?: 'affiliate' | 'seo'; // ✅ 추가: 콘텐츠 모드 (쇼핑커넥트/일반)
+  contentMode?: 'affiliate' | 'seo' | 'homefeed' | 'custom' | 'business' | 'mate'; // ✅ 추가: 콘텐츠 모드 (쇼핑커넥트/일반/네이버 메이트)
   isFullAuto?: boolean; // ✅ 추가: 풀오토 모드 여부 (인덱스 기반 이미지 매칭용)
 };
 
@@ -75,6 +75,8 @@ contextBridge.exposeInMainWorld('api', {
   // ✅ [2026-02-23 FIX] 이미지 생성 전체 상태 초기화
   resetImageState: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('automation:resetImageState'),
+  abortImageGeneration: (): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('automation:abortImageGeneration'),
   closeBrowser: () => ipcRenderer.invoke('automation:closeBrowser'), // ✅ 추가
   launchLeword: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('leword:launch'), // ✅ LEWORD 황금키워드 앱 실행
@@ -1132,6 +1134,8 @@ contextBridge.exposeInMainWorld('api', {
     mode?: string;
     targetChars?: number;
     toneStyle?: string;
+    plan?: unknown;
+    reviewEdits?: unknown;
   }): Promise<{ success: boolean; plan?: any; content?: any; imageMap?: Record<string, any[]>; message?: string }> =>
     ipcRenderer.invoke('vision:infer-and-write', payload),
 

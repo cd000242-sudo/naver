@@ -470,7 +470,7 @@ export interface PostCyclePayload {
     ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
     skipCta?: boolean;
     affiliateLink?: string;
-    contentMode?: 'seo' | 'affiliate';
+    contentMode?: 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business' | 'mate';
 
     // 기타 옵션
     toneStyle?: string;

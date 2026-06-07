@@ -84,6 +84,23 @@ describe('visionRouter — inferImage', () => {
     expect(response.result.description_ko).toBe(VALID_RESULT.description_ko);
   });
 
+  it('falls back to Gemini when OpenAI fails', async () => {
+    vi.doMock('../imageNarrative/visionInference/geminiVisionAdapter', () => ({
+      runGeminiVision: vi.fn().mockResolvedValue(VALID_RESULT),
+    }));
+    vi.doMock('../imageNarrative/visionInference/openaiVisionAdapter', () => ({
+      runOpenAIVision: vi.fn().mockRejectedValue(new Error('OpenAI unavailable')),
+    }));
+
+    vi.spyOn(console, 'warn').mockImplementation(() => { /* suppress */ });
+
+    const { inferImage } = await import('../imageNarrative/visionInference/visionRouter');
+    const response = await inferImage(MOCK_CONTEXT, { provider: 'openai', mode: 'food' });
+
+    expect(response.provider).toBe('gemini');
+    expect(response.result.description_ko).toBe(VALID_RESULT.description_ko);
+  });
+
   it('emits console.warn on fallback (feedback_no_fallback rule)', async () => {
     vi.doMock('../imageNarrative/visionInference/geminiVisionAdapter', () => ({
       runGeminiVision: vi.fn().mockRejectedValue(new Error('Gemini down')),

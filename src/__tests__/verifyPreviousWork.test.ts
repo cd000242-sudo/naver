@@ -121,7 +121,8 @@ describe('v1.4.13 — 발행 타임아웃 25분', () => {
   it('fullAutoFlow.ts의 runAutomation timeout이 1500000(25분)으로 설정됨', () => {
     const filePath = path.join(__dirname, '..', 'renderer', 'modules', 'fullAutoFlow.ts');
     const content = fs.readFileSync(filePath, 'utf-8');
-    expect(content).toContain('timeout: 1500000');
+    expect(content).toMatch(/const\s+PUBLISH_AUTOMATION_TIMEOUT_MS\s*=\s*1500000/);
+    expect(content).toMatch(/timeout:\s*PUBLISH_AUTOMATION_TIMEOUT_MS/);
     expect(content).not.toContain('timeout: 300000    // ✅ [2026-04-01 FIX] 5분');
   });
 
@@ -173,9 +174,9 @@ describe('Gemini 모델 체인 (자동 폴백 제거, v1.4.42+)', () => {
     expect(uniqueModels[0]).toBe('gemini-2.5-flash-lite');
   });
 
-  it('v1.4.49 — paid 플랜 기본 모델은 gemini-2.5-flash-lite', () => {
+  it('paid 플랜 기본 모델은 안정 우선 gemini-2.5-flash', () => {
     const { primaryModel, isPro } = buildGeminiModelChain({ geminiPlanType: 'paid' });
-    expect(primaryModel).toBe('gemini-2.5-flash-lite');
+    expect(primaryModel).toBe('gemini-2.5-flash');
     expect(isPro).toBe(false);
   });
 });

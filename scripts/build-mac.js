@@ -39,7 +39,8 @@ function printHelp() {
     'Options:',
     '  --arch arm64|x64|universal|both   macOS architecture to build',
     '  --unsigned                   build without Developer ID signing for local tests',
-    '  --publish                    upload dmg/zip/latest-mac.yml to configured GitHub Release',
+    '  --publish                    upload signed dmg/zip/latest-mac.yml to configured GitHub Release',
+    '  --allow-unsigned-publish     emergency/manual-only upload; auto-update will not work',
     '',
     'Output:',
     `  ${outputDir}/${artifactPrefix}-<version>-universal.dmg`,
@@ -229,6 +230,20 @@ if (process.platform !== 'darwin') {
 const arch = getOption('--arch', 'both');
 if (!['arm64', 'x64', 'universal', 'both'].includes(arch)) {
   console.error('Invalid --arch value: ' + arch);
+  process.exit(1);
+}
+
+if (has('--unsigned') && has('--publish') && !has('--allow-unsigned-publish')) {
+  console.error([
+    'Refusing to publish unsigned macOS artifacts.',
+    '',
+    'macOS auto-update uses Squirrel/ShipIt and requires a Developer ID signed app.',
+    'Unsigned zip/dmg files can be installed manually, but automatic update install will fail',
+    'with a code signature validation error.',
+    '',
+    'Use npm run release:mac with Apple Developer ID signing configured.',
+    'For a manual-only emergency upload, pass --allow-unsigned-publish explicitly.'
+  ].join('\n'));
   process.exit(1);
 }
 

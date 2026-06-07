@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'fs';
 import { isFatalApiError, isRetryableImageError, friendlyErrorMessage } from '../renderer/modules/fullAutoFlow';
 
 describe('isFatalApiError', () => {
@@ -110,5 +111,40 @@ describe('friendlyErrorMessage', () => {
   it('handles string input', () => {
     const msg = friendlyErrorMessage('timeout occurred');
     expect(msg).toContain('시간이 초과');
+  });
+});
+
+describe('detached Naver login frame publish retry guard', () => {
+  const source = readFileSync(new URL('../renderer/modules/fullAutoFlow.ts', import.meta.url), 'utf8');
+
+  it('detects detached Naver login frame errors before treating publish as failed', () => {
+    expect(source).toContain('function isDetachedLoginFrameError');
+    expect(source).toContain('execution context is not available in detached frame');
+    expect(source).toContain('nidlogin.login');
+    expect(source).toContain('retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg)');
+  });
+
+  it('resets stale browser automation once and keeps the long publish timeout on retry', () => {
+    expect(source).toContain('MAX_DETACHED_LOGIN_FRAME_RETRIES = 1');
+    expect(source).toContain('cancelAutomation');
+    expect(source).toContain('closeBrowser');
+    expect(source).toContain('timeout: PUBLISH_AUTOMATION_TIMEOUT_MS');
+  });
+});
+
+describe('full-auto image failure policy', () => {
+  const source = readFileSync(new URL('../renderer/modules/fullAutoFlow.ts', import.meta.url), 'utf8');
+
+  it('retries image generation on the selected engine only', () => {
+    expect(source).toMatch(/const originalProvider = formData\.imageSource/);
+    expect(source).toMatch(/return originalProvider/);
+    expect(source).not.toMatch(/const FALLBACK_CHAIN/);
+  });
+
+  it('does not publish text-only output after image generation failure', () => {
+    expect(source).toMatch(/이미지 없이 발행하지 않고 중단/);
+    expect(source).toMatch(/throw new Error\('이미지 생성 결과가 비어있습니다\.'\)/);
+    expect(source).toMatch(/이미지 관리 탭에 사용할 이미지가 없습니다/);
+    expect(source).not.toMatch(/텍스트 위주로 발행합니다/);
   });
 });

@@ -30,6 +30,18 @@ export interface ProductInfo {
     stock?: string;
     rating?: string;
     reviewCount?: number;
+    brand?: string;
+    availability?: string;
+    canonicalUrl?: string;
+}
+
+export interface ShoppingCollectionDiagnostics {
+    imageCount: number;
+    galleryCount?: number;
+    detailCount?: number;
+    reviewCount?: number;
+    quality: 'ok' | 'weak' | 'failed';
+    warnings: string[];
 }
 
 /**
@@ -39,6 +51,7 @@ export interface CollectionResult {
     success: boolean;
     images: ProductImage[];
     productInfo?: ProductInfo;
+    diagnostics?: ShoppingCollectionDiagnostics;
     usedStrategy: string;      // 성공한 전략 이름
     timing: number;            // 소요 시간 (ms)
     error?: string;            // 실패 시 에러 메시지
@@ -61,7 +74,7 @@ export interface CollectionStrategy {
 export interface CollectionOptions {
     timeout?: number;          // 타임아웃 (기본 30초)
     maxImages?: number;        // 최대 이미지 수 (기본 30)
-    includeDetails?: boolean;  // 상세 이미지 포함 (기본 true)
+    includeDetails?: boolean;  // 상세 이미지 포함 (기본 false)
     includeReviews?: boolean;  // 리뷰 이미지 포함 (기본 false)
     validateWithAI?: boolean;  // AI 품질 검증 (기본 true)
     useCache?: boolean;        // 캐시 사용 (기본 true)
@@ -87,10 +100,13 @@ export const ERROR_PAGE_INDICATORS = [
     '판매 종료',
     '품절',
     'Page not found',
-    '404',
+    '[에러] 에러페이지',
+    '시스템오류',
+    '현재 서비스 접속이 불가합니다',
+    '동시에 접속하는 이용자 수가 많거나',
     '접근할 수 없는 페이지',
-    '브랜드커넥트',  // 브랜드커넥트 에러 페이지
-    'brandconnect',
+    '404',
+    '브랜드커넥트 에러',
 ];
 
 /**

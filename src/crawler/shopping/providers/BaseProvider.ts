@@ -15,6 +15,7 @@ import {
     ProductImage,
     ShoppingPlatform,
     AD_BANNER_PATTERNS,
+    ERROR_PAGE_INDICATORS,
     MIN_IMAGE_SIZE,
 } from '../types.js';
 import { resolveUrl, ResolvedUrl } from '../utils/UrlResolver.js';
@@ -60,16 +61,22 @@ export abstract class BaseProvider {
 
         // 2. 폴백 체인 실행
         const sortedStrategies = [...this.strategies].sort((a, b) => a.priority - b.priority);
+        let bestFailure: CollectionResult | null = null;
 
         for (const strategy of sortedStrategies) {
             console.log(`[${this.name}] 🔄 전략 시도: ${strategy.name} (우선순위: ${strategy.priority})`);
 
             try {
-                const result = await strategy.execute(resolved.finalUrl, opts);
+                const result = await this.executeStrategyWithTimeout(strategy, resolved.finalUrl, opts);
 
                 if (result.success && result.images.length > 0) {
-                    // 이미지 필터링
-                    const filteredImages = this.filterImages(result.images);
+                    const policyImages = result.images.filter(img => {
+                        if (opts.includeReviews !== true && img.type === 'review') return false;
+                        if (opts.includeReviews !== true && this.isReviewImageUrl(img.url)) return false;
+                        if (opts.includeDetails !== true && img.type === 'detail') return false;
+                        return true;
+                    });
+                    const filteredImages = this.filterImages(policyImages);
 
                     console.log(`[${this.name}] ✅ 전략 "${strategy.name}" 성공: ${result.images.length}개 → ${filteredImages.length}개 (필터 후)`);
 
@@ -82,7 +89,26 @@ export abstract class BaseProvider {
                     };
                 }
 
+                if (result.isErrorPage) {
+                    bestFailure = {
+                        ...result,
+                        usedStrategy: strategy.name,
+                        timing: Date.now() - startTime,
+                        resolvedUrl: resolved.finalUrl,
+                    };
+                    console.warn(`[${this.name}] recoverable error page in "${strategy.name}", trying next strategy...`);
+                    continue;
+                }
+
                 console.warn(`[${this.name}] ⚠️ 전략 "${strategy.name}" 결과 없음, 다음 전략 시도...`);
+                if (!bestFailure && result.error) {
+                    bestFailure = {
+                        ...result,
+                        usedStrategy: strategy.name,
+                        timing: Date.now() - startTime,
+                        resolvedUrl: resolved.finalUrl,
+                    };
+                }
             } catch (error) {
                 console.warn(`[${this.name}] ⚠️ 전략 "${strategy.name}" 실패:`, (error as Error).message);
             }
@@ -90,6 +116,9 @@ export abstract class BaseProvider {
 
         // 3. 모든 전략 실패
         console.error(`[${this.name}] ❌ 모든 전략 실패`);
+        if (bestFailure) {
+            return bestFailure;
+        }
         return {
             success: false,
             images: [],
@@ -103,6 +132,34 @@ export abstract class BaseProvider {
     /**
      * 광고/배너/저품질 이미지 필터링
      */
+    private async executeStrategyWithTimeout(
+        strategy: CollectionStrategy,
+        url: string,
+        options: CollectionOptions,
+    ): Promise<CollectionResult> {
+        const timeoutMs = Math.min(Math.max(options.timeout ?? 30000, 5000), 60000);
+        let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+        try {
+            return await Promise.race([
+                strategy.execute(url, options),
+                new Promise<CollectionResult>((resolve) => {
+                    timeoutId = setTimeout(() => {
+                        resolve({
+                            success: false,
+                            images: [],
+                            usedStrategy: strategy.name,
+                            timing: timeoutMs,
+                            error: `Strategy timed out after ${timeoutMs}ms`,
+                        });
+                    }, timeoutMs);
+                }),
+            ]);
+        } finally {
+            if (timeoutId) clearTimeout(timeoutId);
+        }
+    }
+
     protected filterImages(images: ProductImage[]): ProductImage[] {
         return images.filter(img => {
             // 1. 광고/배너 패턴 체크
@@ -129,6 +186,44 @@ export abstract class BaseProvider {
         });
     }
 
+    private isReviewImageUrl(url: string): boolean {
+        return /checkout\.phinf|image\.nmv|shopnbuyer|review_image|photo_review/i.test(String(url || ''));
+    }
+
+    protected detectErrorPage(input: { html?: string; title?: string; bodyText?: string }): string | undefined {
+        const visibleText = [
+            input.title || '',
+            input.bodyText || '',
+            input.html ? this.htmlToVisibleText(input.html) : '',
+        ]
+            .join('\n')
+            .replace(/\s+/g, ' ')
+            .trim();
+
+        if (!visibleText) return undefined;
+
+        return ERROR_PAGE_INDICATORS.find(indicator => {
+            if (!indicator) return false;
+            if (indicator === '404') {
+                return /\b404\b/i.test(visibleText) && /(not\s*found|page\s*not\s*found|error|에러|찾을 수|존재하지)/i.test(visibleText);
+            }
+            return visibleText.includes(indicator);
+        });
+    }
+
+    private htmlToVisibleText(html: string): string {
+        return String(html || '')
+            .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+            .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+            .replace(/<noscript[\s\S]*?<\/noscript>/gi, ' ')
+            .replace(/<[^>]+>/g, ' ')
+            .replace(/&nbsp;/g, ' ')
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"');
+    }
+
     /**
      * 기본 옵션과 사용자 옵션 병합
      */
@@ -136,7 +231,7 @@ export abstract class BaseProvider {
         return {
             timeout: 30000,
             maxImages: 30,
-            includeDetails: true,
+            includeDetails: false,
             includeReviews: false,
             validateWithAI: true,
             useCache: true,

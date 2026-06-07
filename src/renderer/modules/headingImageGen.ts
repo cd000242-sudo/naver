@@ -557,7 +557,7 @@ export function initHeadingImageGeneration(): void {
     'pollinations': 'Pollinations',
     'naver': '네이버 이미지 검색',
     'naver-search': '네이버 이미지 검색',
-    'imagefx': 'ImageFX (Google 무료)',
+    'imagefx': 'ImageFX (Google Labs, 제한 가능)',
     'flow': 'Flow (Nano Banana Pro)', // ✅ [v1.4.80]
     'openai-image': 'OpenAI DALL-E',
     'leonardoai': 'Leonardo AI',
@@ -978,17 +978,17 @@ export function initHeadingImageGeneration(): void {
         // ✅ [2026-03-09 FIX] aiProgressModal.show() 제거 — liveImagePreview가 이미지 미리보기+로그 통합 제공
         liveImagePreview.show(filteredHeadings, sourceLabel);
         liveImagePreview.addLog(`🎨 ${sourceLabel}로 이미지 생성 시작...`);
-        liveImagePreview.addLog('⚡ 병렬 처리로 속도 2-3배 향상!');
+        liveImagePreview.addLog('🧵 안정성을 위해 이미지는 1개씩 순차 생성합니다.');
 
-        showImagesProgress(0, '이미지 생성 준비 중...', '소제목 분석 완료, 이미지 병렬 생성 시작');
+        showImagesProgress(0, '이미지 생성 준비 중...', '소제목 분석 완료, 이미지 순차 생성 시작');
         appendLog(`🎨 선택된 이미지 소스: ${sourceLabel}`, 'images-log-output');
-        appendLog('🎨 이미지를 병렬로 생성하는 중입니다... ⚡', 'images-log-output');
-        appendLog('⚡ 병렬 처리로 속도 2-3배 향상!', 'images-log-output');
+        appendLog('🎨 이미지를 1개씩 순차 생성하는 중입니다...', 'images-log-output');
+        appendLog('🧵 안정성을 위해 순차 처리로 생성합니다.', 'images-log-output');
 
         appendLog(`📋 ${headings.length}개 섹션 중 ${filteredHeadings.length}개 이미지 생성 (마무리 제외)`, 'images-log-output');
         liveImagePreview.addLog(`📋 ${filteredHeadings.length}개 대상 (마무리 제외)`);
 
-        // ✅ 병렬 처리: 각 소제목별로 이미지 동시 생성
+        // ✅ 안정 처리: 각 소제목별로 이미지 1개씩 순차 생성
         const totalHeadings = filteredHeadings.length;
         let completedCount = 0;
 
@@ -1102,11 +1102,12 @@ export function initHeadingImageGeneration(): void {
           }
         }
 
-        // ✅ [2026-01-18] nano-banana-pro/pollinations: 배치 요청으로 내부 병렬 처리 활성화 (속도 2-3배 향상)
+        // ✅ [2026-06-06] 배치 요청 비활성화: 외부 엔진 에러/락 충돌 방지를 위해 항상 순차 처리
         // [2026-05-27 BUGFIX] cost-risk provider 전체로 확장 — provider별 lock(runUiActionLocked) 충돌 회피.
         //   기존: nano-banana-pro만 batch. nano-banana-2 등은 else로 빠져 개별 호출 → 첫 1개만 lock 획득, 나머지 4개 "이미 진행 중" reject.
         //   현재: nano-banana(3종)/leonardoai/openai-image/dall-e-3 모두 batch single IPC → lock 1번만 사용.
-        if (isCostRiskImageProvider(imageSource) || imageSource === 'pollinations') {
+        const useBatchImageGeneration = false;
+        if (useBatchImageGeneration && (isCostRiskImageProvider(imageSource) || imageSource === 'pollinations')) {
           appendLog(`⚡ ${imageSource} 배치 병렬 처리 시작! (cost-risk lock 회피)`, 'images-log-output');
           liveImagePreview.addLog(`⚡ 배치 병렬 처리로 빠른 생성!`);
 
@@ -1291,7 +1292,8 @@ export function initHeadingImageGeneration(): void {
                       : imageSource === 'openai-image'
                         ? 'openai-image'
                         : '';
-        const shouldRunSequentially = providerForLock ? isCostRiskImageProvider(providerForLock) : false;
+        void providerForLock;
+        const shouldRunSequentially = true;
 
         const generateOne = async (heading: any, i: number): Promise<any | null> => {
           try {
@@ -1518,8 +1520,8 @@ export function initHeadingImageGeneration(): void {
                 throw new Error(imageResult.message || 'DALL-E 이미지 생성 실패');
               }
             } else if (imageSource === 'imagefx') {
-              // ✅ [2026-03-16] ImageFX 전용 분기 (Google 무료, Gemini API 키 불필요)
-              console.log(`[ImageGen] ✨ ImageFX (Google 무료) 이미지 생성 시작`);
+              // ✅ [2026-03-16] ImageFX 전용 분기 (Google Labs, Gemini API 키 불필요)
+              console.log(`[ImageGen] ✨ ImageFX (Google Labs, 제한 가능) 이미지 생성 시작`);
               const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
               const imageResult = await generateImagesWithCostSafety({
                 provider: 'imagefx',
@@ -1623,12 +1625,6 @@ export function initHeadingImageGeneration(): void {
           for (let i = 0; i < filteredHeadings.length; i++) {
             results.push(await generateOne(filteredHeadings[i], i));
           }
-        } else {
-          // [v2.10.110] Promise.all → allSettled — 1개 실패 시 나머지 fail-fast로 결과 버리는 누수 차단.
-          //   결과 null 처리는 line 1551에서 이미 처리됨. (Agent N LEAK-5)
-          const imagePromises = filteredHeadings.map(async (heading: any, i: number) => generateOne(heading, i));
-          const settled = await Promise.allSettled(imagePromises);
-          results.push(...settled.map(r => r.status === 'fulfilled' ? r.value : null));
         }
 
         // ✅ IMPORTANT: 결과 null(실패) 때문에 인덱스가 당겨지면 소제목 매칭이 깨짐.
@@ -4905,8 +4901,8 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
         throw new Error(imageResult.message || 'DALL-E 이미지 생성 실패');
       }
     } else if (imageSource === 'imagefx') {
-      // ✅ [2026-03-16] ImageFX 전용 분기 (Google 무료, Gemini API 키 불필요)
-      console.log(`[ImageGen] ✨ ImageFX (Google 무료) 개별 재생성`);
+      // ✅ [2026-03-16] ImageFX 전용 분기 (Google Labs, Gemini API 키 불필요)
+      console.log(`[ImageGen] ✨ ImageFX (Google Labs, 제한 가능) 개별 재생성`);
       const imageResult = await generateImagesWithCostSafety({
         provider: 'imagefx',
         items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen }],

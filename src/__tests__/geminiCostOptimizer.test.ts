@@ -66,16 +66,34 @@ describe('Gemini cost optimizer policy', () => {
     expect(resolveContentGenerationCostPolicy({ costSaverMode: false }).maxAttempts).toBe(2);
   });
 
-  it('disables expensive LLM patch calls unless cost saver is explicitly off', () => {
+  it('disables hidden extra LLM patch calls unless explicitly opted in', () => {
     const defaultPolicy = resolveContentGenerationCostPolicy({});
     expect(defaultPolicy.allowLlmTitlePatch).toBe(false);
     expect(defaultPolicy.allowLlmIntroPatch).toBe(false);
     expect(defaultPolicy.allowQualityGateSelfCritique).toBe(false);
 
     const premiumPolicy = resolveContentGenerationCostPolicy({ costSaverMode: false });
-    expect(premiumPolicy.allowLlmTitlePatch).toBe(true);
-    expect(premiumPolicy.allowLlmIntroPatch).toBe(true);
-    expect(premiumPolicy.allowQualityGateSelfCritique).toBe(true);
+    expect(premiumPolicy.allowLlmTitlePatch).toBe(false);
+    expect(premiumPolicy.allowLlmIntroPatch).toBe(false);
+    expect(premiumPolicy.allowQualityGateSelfCritique).toBe(false);
+
+    const explicitExtraWorkPolicy = resolveContentGenerationCostPolicy(
+      { costSaverMode: false },
+      { CONTENT_ALLOW_EXTRA_LLM_PATCHES: '1' },
+    );
+    expect(explicitExtraWorkPolicy.allowLlmTitlePatch).toBe(true);
+    expect(explicitExtraWorkPolicy.allowLlmIntroPatch).toBe(true);
+    expect(explicitExtraWorkPolicy.allowQualityGateSelfCritique).toBe(true);
+  });
+
+  it('keeps expensive patch opt-in off when cost saver is on even if env is set', () => {
+    const costSaverPolicy = resolveContentGenerationCostPolicy(
+      { costSaverMode: true },
+      { CONTENT_ALLOW_EXTRA_LLM_PATCHES: '1' },
+    );
+    expect(costSaverPolicy.allowLlmTitlePatch).toBe(false);
+    expect(costSaverPolicy.allowLlmIntroPatch).toBe(false);
+    expect(costSaverPolicy.allowQualityGateSelfCritique).toBe(false);
   });
 
   it('lets an environment override raise the attempt budget deliberately', () => {

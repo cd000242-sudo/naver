@@ -12,10 +12,48 @@
 
 // ✅ [v2.10.16] DALL-E 3 옵션 제거 — D-Day 상수/함수 미사용
 const OPENAI_IMAGE_VERIFY_ACK_KEY = 'openai_image_verification_acknowledged_v1';
+const IMAGEFX_PROBE_OK_KEY = 'imagefx_generation_probe_ok_v1';
+const IMAGEFX_PROBE_TTL_MS = 2 * 60 * 60 * 1000;
 
 export interface GuardResult {
     block: boolean;
     reason?: string;
+}
+
+function escapeGuardHtml(value: string): string {
+    return String(value || '').replace(/[<>&"']/g, (ch) => {
+        switch (ch) {
+            case '<': return '&lt;';
+            case '>': return '&gt;';
+            case '&': return '&amp;';
+            case '"': return '&quot;';
+            case "'": return '&#39;';
+            default: return ch;
+        }
+    });
+}
+
+function hasFreshImageFxProbe(): boolean {
+    try {
+        const raw = localStorage.getItem(IMAGEFX_PROBE_OK_KEY);
+        if (!raw) return false;
+        const parsed = JSON.parse(raw);
+        return parsed?.ok === true && Date.now() - Number(parsed.checkedAt || 0) < IMAGEFX_PROBE_TTL_MS;
+    } catch {
+        return false;
+    }
+}
+
+function saveFreshImageFxProbe(message: string): void {
+    try {
+        localStorage.setItem(IMAGEFX_PROBE_OK_KEY, JSON.stringify({
+            ok: true,
+            checkedAt: Date.now(),
+            message,
+        }));
+    } catch {
+        // ignore storage errors
+    }
 }
 
 function showModal(opts: {
@@ -88,9 +126,9 @@ export async function checkDallE3Deadline(imageSource: string): Promise<GuardRes
     //   saved settings에 dall-e-3이 남아있는 사용자 환경 보호 — 차단 모달 + 대안 안내.
     await showModal({
         icon: '🛑',
-        title: 'DALL-E 3 옵션 제거됨',
+        title: '기존 OpenAI 이미지 옵션 전환 필요',
         bodyHtml: `
-            <p style="margin: 0 0 0.75rem;">DALL-E 3는 <strong>2026년 5월 12일</strong> OpenAI API 폐기 예정으로 미리 제거되었습니다.</p>
+            <p style="margin: 0 0 0.75rem;">기존 OpenAI 이미지 설정은 현재 <strong>GPT 이미지 시리즈</strong>로 전환해서 사용해야 합니다.</p>
             <p style="margin: 0 0 0.75rem; color: #f8b400;">⚠️ 다른 이미지 엔진을 선택해주세요.</p>
             <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: #b8b8d4; font-size: 0.88rem;">
                 <li><strong>덕트테이프(gpt-image-2)</strong> — OpenAI Org 인증 필요, 한글 최강</li>
@@ -98,13 +136,13 @@ export async function checkDallE3Deadline(imageSource: string): Promise<GuardRes
                 <li><strong>Flow</strong> — Google AI Pro 무료 쿼터</li>
                 <li><strong>DeepInfra FLUX-2</strong> — 가성비 ($0.01/장)</li>
                 <li><strong>Leonardo AI</strong> — 일러스트 강</li>
-                <li><strong>ImageFX</strong> — Google 무료 (1000장/일)</li>
+                <li><strong>ImageFX</strong> — Google Labs 실험적 무료, 계정/IP 접근 제한 가능</li>
             </ul>
             <p style="margin: 0.75rem 0 0; color: #b8b8d4; font-size: 0.8rem;">참고: 5/12 이후 OpenAI 이미지 라인은 덕트테이프(gpt-image-2)만 남습니다.</p>
         `,
         primary: { label: '확인 (다른 엔진 선택)', danger: true },
     });
-    return { block: true, reason: 'dall-e-3 옵션 제거됨 (v2.10.16)' };
+    return { block: true, reason: '레거시 OpenAI 이미지 옵션 전환 필요' };
 }
 
 /**
@@ -143,6 +181,51 @@ export async function checkOpenAIVerification(imageSource: string): Promise<Guar
     return { block: true, reason: 'OpenAI Org Verification 미완료 — 사용자가 발행 중단 선택' };
 }
 
+export async function checkImageFxGenerationReady(imageSource: string): Promise<GuardResult> {
+    if (imageSource !== 'imagefx') return { block: false };
+    if (hasFreshImageFxProbe()) return { block: false };
+
+    try {
+        (window as any).toastManager?.info?.('ImageFX 실제 생성 테스트 중입니다. 테스트 이미지 1장을 생성해 접근 권한을 확인합니다.');
+    } catch {
+        // ignore toast errors
+    }
+
+    try {
+        const result = await (window as any).api?.testImageFxConnection?.();
+        if (result?.ok) {
+            saveFreshImageFxProbe(result.message || 'ImageFX probe ok');
+            try { (window as any).toastManager?.success?.('ImageFX 실제 생성 테스트 통과'); } catch { /* ignore */ }
+            return { block: false };
+        }
+
+        const message = String(result?.message || 'ImageFX 실제 생성 테스트가 실패했습니다.');
+        await showModal({
+            icon: '⛔',
+            title: 'ImageFX 실제 생성 테스트 실패',
+            bodyHtml: `
+                <p style="margin: 0 0 0.75rem;">로그인 확인만으로는 부족해서, 발행 전에 ImageFX 테스트 이미지 1장을 실제 생성해봤습니다.</p>
+                <p style="margin: 0 0 0.75rem; color: #ffb4b4; font-weight: 700;">${escapeGuardHtml(message)}</p>
+                <p style="margin: 0; color: #b8b8d4; font-size: 0.88rem;">현재 계정/IP/지역 조합에서는 대량 발행 중 실패할 가능성이 높습니다. Flow, 리더스 나노바나나프로, OpenAI Image, DeepInfra처럼 실제 테스트가 통과한 엔진으로 바꾼 뒤 다시 시작해주세요.</p>
+            `,
+            primary: { label: '다른 엔진 선택 후 다시 시작', danger: true },
+        });
+        return { block: true, reason: 'ImageFX 실제 생성 테스트 실패' };
+    } catch (error) {
+        const message = (error as Error)?.message || '알 수 없는 ImageFX 테스트 오류';
+        await showModal({
+            icon: '⛔',
+            title: 'ImageFX 실제 생성 테스트 오류',
+            bodyHtml: `
+                <p style="margin: 0 0 0.75rem;">발행 전에 ImageFX 생성 접근성을 확인하는 중 오류가 발생했습니다.</p>
+                <p style="margin: 0; color: #ffb4b4; font-weight: 700;">${escapeGuardHtml(message)}</p>
+            `,
+            primary: { label: '발행 중단', danger: true },
+        });
+        return { block: true, reason: 'ImageFX 실제 생성 테스트 오류' };
+    }
+}
+
 /**
  * 풀오토/연속/다계정 발행 직전 통합 가드.
  * 차단 시 toastManager로 알리고 false 반환 → 호출자가 발행 중단.
@@ -156,6 +239,11 @@ export async function runOpenAIImageGuard(imageSource: string): Promise<boolean>
     const verify = await checkOpenAIVerification(imageSource);
     if (verify.block) {
         try { (window as any).toastManager?.error?.(`발행 중단: ${verify.reason}`); } catch { /* ignore */ }
+        return false;
+    }
+    const imageFx = await checkImageFxGenerationReady(imageSource);
+    if (imageFx.block) {
+        try { (window as any).toastManager?.error?.(`발행 중단: ${imageFx.reason}`); } catch { /* ignore */ }
         return false;
     }
     return true;

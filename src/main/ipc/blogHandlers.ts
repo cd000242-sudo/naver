@@ -56,7 +56,7 @@ export interface AutomationRequest {
     createProductThumbnail?: boolean;
     includeThumbnailText?: boolean;
     affiliateLink?: string;
-    contentMode?: 'seo' | 'affiliate';
+    contentMode?: 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business' | 'mate';
     isFullAuto?: boolean;
     previousPostTitle?: string;
     previousPostUrl?: string;

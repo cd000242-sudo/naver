@@ -161,14 +161,14 @@ describe('mapInferencesToImageMap', () => {
     expect(imgs[0]!.heading).toBe('맛집 방문');
   });
 
-  it('assigns filePath equal to imageId', () => {
+  it('assigns blobId equal to imageId', () => {
     const sections = [makeSection('H1', ['uniqueId-42'])];
     const plan = makePlan(sections, ['uniqueId-42']);
 
     const result = mapInferencesToImageMap(plan, ['uniqueId-42']);
 
     const imgs = result.get('H1') ?? [];
-    expect(imgs[0]!.filePath).toBe('uniqueId-42');
+    expect(imgs[0]!.blobId).toBe('uniqueId-42');
   });
 
   it('handles single section with multiple images', () => {
@@ -199,7 +199,7 @@ describe('mapInferencesToImageMap', () => {
 
     // img2 should end up in First (orderedResults[0])
     const firstImgs = result.get('First') ?? [];
-    expect(firstImgs[0]!.filePath).toBe('img2');
+    expect(firstImgs[0]!.blobId).toBe('img2');
   });
 
   it('includes extra imageIds not present in orderedResults', () => {
@@ -216,7 +216,7 @@ describe('mapInferencesToImageMap', () => {
     const result = mapInferencesToImageMap(plan, imageIds);
 
     const imgs = result.get('S') ?? [];
-    expect(imgs[0]!.filePath).toBe('extraImg');
+    expect(imgs[0]!.blobId).toBe('extraImg');
   });
 });
 

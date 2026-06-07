@@ -13,7 +13,6 @@ import {
     CollectionOptions,
     ProductImage,
     ProductInfo,
-    ERROR_PAGE_INDICATORS,
 } from '../types.js';
 import { upscaleUrl, isJunkUrl, normalizeUrl } from '../utils/imageUrlUtils.js';
 import { collectReviewImageUrls, clickReviewTab, extractBrandProductInfo } from './brandStore/brandStoreDom.js';
@@ -72,11 +71,12 @@ export class BrandStoreProvider extends BaseProvider {
                 console.warn('[BrandStore:Playwright] ⚠️ viewport 적용 실패:', (zoomErr as Error).message);
             }
 
-            // 모바일 URL로 변환
-            const mobileUrl = url.replace('brand.naver.com', 'm.brand.naver.com');
-            console.log(`[BrandStore:Playwright] 🌐 상품 페이지 이동: ${mobileUrl.substring(0, 60)}...`);
+            // Use the desktop brand-store URL first. Some product pages render an
+            // error page on m.brand.naver.com while the desktop gallery is valid.
+            const pageUrl = url.replace('m.brand.naver.com', 'brand.naver.com');
+            console.log(`[BrandStore:Playwright] 🌐 상품 페이지 이동: ${pageUrl.substring(0, 60)}...`);
 
-            const navSuccess = await navigateWithRetry(page, mobileUrl);
+            const navSuccess = await navigateWithRetry(page, pageUrl);
             if (!navSuccess) {
                 await releasePage(page);
                 return {
@@ -101,11 +101,12 @@ export class BrandStoreProvider extends BaseProvider {
             }).catch(() => undefined);
             await page.waitForTimeout(1000);
 
-            // 에러 페이지 감지
-            const pageContent = await page.content();
-            const errorIndicator = ERROR_PAGE_INDICATORS.find(indicator =>
-                pageContent.includes(indicator)
-            );
+            // 에러 페이지 감지는 HTML 원문이 아니라 실제 보이는 제목/본문 기준으로만 판단한다.
+            const pageProbe = await page.evaluate(() => ({
+                title: document.title || '',
+                bodyText: document.body?.innerText?.slice(0, 5000) || '',
+            })).catch(() => ({ title: '', bodyText: '' }));
+            const errorIndicator = this.detectErrorPage(pageProbe);
 
             if (errorIndicator) {
                 await releasePage(page);
@@ -123,6 +124,7 @@ export class BrandStoreProvider extends BaseProvider {
             const seenNorms = new Set<string>();
 
             const addImg = (rawUrl: string, type: string) => {
+                if (/[?&]type=blur/i.test(rawUrl)) return;
                 if (isJunkUrl(rawUrl)) return;
                 const url = upscaleUrl(rawUrl);
                 const norm = normalizeUrl(url);
@@ -156,6 +158,27 @@ export class BrandStoreProvider extends BaseProvider {
                         );
                         if (mainSrc) addImg(mainSrc, 'main');
                     }
+
+                    const directThumbUrls: string[] = [];
+                    for (const thumb of thumbImgs) {
+                        try {
+                            const thumbSrc = await thumb.evaluate((img: HTMLImageElement) =>
+                                img.getAttribute('data-src') || img.src || ''
+                            );
+                            if (thumbSrc) {
+                                directThumbUrls.push(thumbSrc);
+                                const hasMain = allImages.some(img => img.type === 'main');
+                                addImg(thumbSrc, hasMain ? 'gallery-thumb-fallback' : 'main');
+                            }
+                        } catch { /* skip */ }
+                    }
+                    if (directThumbUrls.length > 0) {
+                        console.log(`[BrandStore:Playwright] ⚡ 공식 갤러리 썸네일 ${directThumbUrls.length}개 즉시 수집 (upscale)`);
+                    }
+                    const shouldClickThumbnails = directThumbUrls.length < Math.min(3, thumbImgs.length);
+                    if (!shouldClickThumbnails) {
+                        console.log('[BrandStore:Playwright] ⚡ 공식 갤러리 URL 확보 완료 → 느린 클릭 polling 생략');
+                    } else {
 
                     // ✅ [v2.10.319] isBlur 함수를 루프 외부로 추출 (매 iteration 재선언 제거 — 10팀 팀4)
                     //   blur placeholder URL 검출. ?type=blur0_8 등 네이버 CDN 패턴.
@@ -233,6 +256,7 @@ export class BrandStoreProvider extends BaseProvider {
                             console.warn(`[BrandStore:Playwright] ⚠️ 추가이미지 ${i + 1} 클릭 처리 실패:`, (clickErr as Error).message);
                         }
                     }
+                    }
                     console.log(`[BrandStore:Playwright] ✅ PHASE 0 완료: ${allImages.length}개 갤러리 이미지`);
                 } else {
                     console.log('[BrandStore:Playwright] ℹ️ 추가이미지 없음 → PHASE 1 진행');
@@ -255,9 +279,9 @@ export class BrandStoreProvider extends BaseProvider {
             // ═══════════════════════════════════════════════════
             // ✅ PHASE 2: 리뷰 이미지 수집
             // ═══════════════════════════════════════════════════
-            console.log('[BrandStore:Playwright] 📝 PHASE 2: 리뷰 이미지 수집...');
-
-            try {
+            if (options?.includeReviews === true) {
+                console.log('[BrandStore:Playwright] 📝 PHASE 2: 리뷰 이미지 수집...');
+                try {
                 // ✅ [v2.10.310] 리뷰 탭 회귀 패치 — "리뷰이벤트" 별도 페이지 링크 클릭 시 navigation
                 //   일어나 context 파괴되는 회귀 차단. MCP 실측: "리뷰이벤트" /review-event/list 페이지로 이동.
                 //   조치: navigation 일으키는 <a href="...review-event..."> 제외, 진짜 리뷰 탭만 클릭.
@@ -290,8 +314,11 @@ export class BrandStoreProvider extends BaseProvider {
                     addImg(rawUrl, 'review');
                 }
                 console.log(`[BrandStore:Playwright] ✅ PHASE 2 완료: 리뷰 이미지 ${reviewUrls.length}개`);
-            } catch (phase2Err) {
-                console.warn('[BrandStore:Playwright] ⚠️ PHASE 2 실패:', (phase2Err as Error).message);
+                } catch (phase2Err) {
+                    console.warn('[BrandStore:Playwright] ⚠️ PHASE 2 실패:', (phase2Err as Error).message);
+                }
+            } else {
+                console.log('[BrandStore:Playwright] 🛡️ 리뷰 이미지는 저작권 안전 기본값으로 수집하지 않습니다.');
             }
 
             // ✅ [v2.10.314] 사용자 명시 요구: "추가이미지 먼저 배치, 그다음 리뷰이미지"
@@ -300,7 +327,9 @@ export class BrandStoreProvider extends BaseProvider {
             const mainImages = allImages.filter(i => i.type === 'main');
             const galleryImages = allImages.filter(i => i.type === 'gallery');
             const galleryFallbackImages = allImages.filter(i => i.type === 'gallery-thumb-fallback');
-            const reviewImages = allImages.filter(i => i.type === 'review');
+            const reviewImages = options?.includeReviews === true
+                ? allImages.filter(i => i.type === 'review')
+                : [];
 
             const sortedImages = [
                 ...mainImages,
@@ -364,9 +393,7 @@ export class BrandStoreProvider extends BaseProvider {
             const html = await response.text();
 
             // 에러 페이지 감지
-            const errorIndicator = ERROR_PAGE_INDICATORS.find(indicator =>
-                html.includes(indicator)
-            );
+            const errorIndicator = this.detectErrorPage({ html });
 
             if (errorIndicator) {
                 return {

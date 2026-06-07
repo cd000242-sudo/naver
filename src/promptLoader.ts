@@ -35,7 +35,7 @@ function getPromptsDir(): string {
 }
 
 // 프롬프트 모드 타입
-export type PromptMode = 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'custom' | 'business';
+export type PromptMode = 'seo' | 'homefeed' | 'traffic-hunter' | 'affiliate' | 'custom' | 'business' | 'mate';
 
 // 프롬프트 카테고리 타입
 export type PromptCategory =
@@ -169,7 +169,9 @@ export function buildSystemPrompt(
   options?: { geoOverlay?: boolean }
 ): string {
   // 1. 노출 목적 base 프롬프트 로드
-  const basePrompt = loadPromptFile(`${mode}/base.prompt`);
+  const basePrompt = mode === 'mate'
+    ? [loadPromptFile('seo/base.prompt'), loadPromptFile('mate/base.prompt')].filter(Boolean).join('\n\n')
+    : loadPromptFile(`${mode}/base.prompt`);
 
   if (!basePrompt) {
     console.error(`[PromptLoader] base 프롬프트 로드 실패: ${mode}/base.prompt`);
@@ -179,16 +181,17 @@ export function buildSystemPrompt(
   // 2. 카테고리 보정 프롬프트
   let composed = basePrompt;
   if (category !== 'general') {
-    const categoryPrompt = loadPromptFile(`${mode}/${category}.prompt`);
+    const categoryPromptMode = mode === 'mate' ? 'seo' : mode;
+    const categoryPrompt = loadPromptFile(`${categoryPromptMode}/${category}.prompt`);
     if (categoryPrompt) {
       composed = `${composed}\n\n${categoryPrompt}`;
     } else {
-      console.warn(`[PromptLoader] 카테고리 프롬프트 없음: ${mode}/${category}.prompt - base만 사용`);
+      console.warn(`[PromptLoader] 카테고리 프롬프트 없음: ${categoryPromptMode}/${category}.prompt - base만 사용`);
     }
   }
 
-  // 3. GEO/AEO 오버레이 — v2.10.62 사용자 명시 ON 시에만 (seo 모드 한정)
-  if (options?.geoOverlay && mode === 'seo') {
+  // 3. GEO/AEO 오버레이 — v2.10.62 사용자 명시 ON 시에만 (seo/mate 모드 한정)
+  if (options?.geoOverlay && (mode === 'seo' || mode === 'mate')) {
     const geoOverlay = loadPromptFile('seo/geo-overlay.prompt');
     if (geoOverlay) {
       composed = `${composed}\n\n${geoOverlay}`;
@@ -303,7 +306,7 @@ export function getAvailableCategories(): PromptCategory[] {
  * 사용 가능한 모든 모드 목록 반환
  */
 export function getAvailableModes(): PromptMode[] {
-  return ['seo', 'homefeed', 'traffic-hunter'];
+  return ['seo', 'homefeed', 'traffic-hunter', 'mate'];
 }
 
 /**
@@ -535,6 +538,37 @@ export const MODE_VOICE_GUIDES: Record<PromptMode, string> = {
   - 문말 반복 ("~이에요. ~이에요. ~이에요.")
 
 ■ 이모지·감탄사: 최소화 (글 전체 3개 이하)
+`,
+
+  mate: `[MODE VOICE: 네이버 메이트 울트라 / AI 브리핑 인용]
+독자 타깃: 검색 결과와 AI 브리핑에서 신뢰할 답을 빠르게 확인하려는 사람
+독자 심리: 이 글이 정확한지, 최신인지, 근거가 있는지 먼저 확인함
+
+■ 글 구조 (필수 준수):
+  1. 도입: 첫 300자 안에 직접 답변 + 판단 기준 2~3개 + 적용 범위 제시
+  2. 중반: 정의, 기준, 절차, 비교, 주의점 중 최소 4개를 소제목으로 분리
+  3. 후반: 실제 마크다운 기준표/체크리스트/단계형 정리 1개 이상 + FAQ 4~6개 + 확인 기준 + 다음 행동
+
+■ 어미 로테이션:
+  기본: ~입니다 / ~합니다 / ~볼 수 있습니다 / ~라고 보면 됩니다
+  완화: ~예요 / ~거든요는 글 전체 10% 이하, 전문성 흐름을 깨지 않을 때만 사용
+  금지: 과한 감탄, 수익 보장, 선정 보장, AI 브리핑 인용 보장, 무조건 단정
+
+■ 필수 요소:
+  - 각 소제목은 하나의 검색 질문에 답하고 첫 2문장 안에 답을 줘야 함
+  - 정의/기준/절차/비교/주의/최신성 중 하나의 인용 원자 포함
+  - 기준표/비교표/체크리스트/단계형 정리 중 최소 1개를 실제 본문 블록으로 포함
+  - 표는 모바일에서 깨지지 않게 최대 2열 마크다운 표로 작성
+  - 원본 자료에 없는 수치·날짜·제도·경험 생성 금지
+  - "확인 기준" 또는 "최신 확인 포인트" 문장 포함
+  - 출처 없는 "공식 가이드", "최신 가이드에서는", "2026년 공식 가이드" 표현 금지
+  - 광고성/어뷰징/허위 후기처럼 보일 표현 제거
+  - 부족한 사실은 추측하지 말고 "자료 기준으로는 확인되지 않습니다"라고 처리
+
+■ 금지:
+  - "돈쓸어담는", "100% 선정", "무조건 된다" 등 보장형 표현
+  - 출처 없는 의학·법률·금융 단정
+  - 직접 경험 데이터 없이 "제가 해봤는데", "직접 써보니" 사용
 `,
 
   homefeed: `[MODE VOICE: 홈판 이웃 피드 노출]
@@ -913,75 +947,80 @@ function getContentLengthVariation(): { sentenceJitter: string; paragraphNote: s
  * 같은 업체로 반복 발행 시 매번 다른 강조 각도 선택 → 글 패턴 반복 방지
  */
 export function buildBusinessAngleDirective(): string {
-  const angles = [
+  const safeAngles = [
     {
       name: '가격 투명성',
-      focus: '평수별/단계별 가격 가이드를 본문 핵심으로 삼아라. "20평 ○○만원~", "○일 공정" 같은 구체 수치가 본문 30% 이상.',
-      hook: '비용 부담형 후킹 ("견적 받아보고 깜짝 놀라셨나요?")',
-      pastor: '문제 단계에서 "잘못된 견적의 함정" 강조',
+      focus: '입력값에 가격·범위가 있을 때만 그대로 사용하고, 없으면 견적이 달라지는 기준과 문의 전 확인사항을 설명한다.',
+      hook: '비용 불안 해소형 후킹',
+      pastor: '문제 단계에서 견적이 달라지는 이유를 설명하고, 해결 단계에서 확인 체크리스트를 제시한다.',
     },
     {
-      name: '시공 사례 (포트폴리오)',
-      focus: '실제 시공 사례 3건 이상을 본문 중심에 배치. Before/After 묘사 + 평수/지역/기간 포함.',
-      hook: '경험 공유형 후킹 ("○○동 30평 시공 후기, 사진과 함께")',
-      pastor: '사례·차별점 단계를 두 개로 분할 (사례 1+2)',
+      name: '사례 근거',
+      focus: '원본/업체 정보에 실제 사례가 있을 때만 사례로 쓰고, 없으면 작업 절차·상담 흐름·주의사항 중심으로 구성한다.',
+      hook: '실패 방지형 후킹',
+      pastor: '문제와 해결 단계 사이에 실제 입력된 특징/경력만 근거로 배치한다.',
     },
     {
-      name: 'A/S 보장 (사후 관리)',
-      focus: '시공 후 사후 관리, A/S 정책, 하자 보수 조항을 본문 핵심. "1년 무상", "재방문 시" 등.',
-      hook: '안심형 후킹 ("시공 후 문제 생기면 누가 책임지나요?")',
-      pastor: '구체 제안 단계에서 A/S 약속 명시',
+      name: 'A/S 안내',
+      focus: 'A/S 기간·보증·사후관리 조건은 입력된 경우에만 사용하고, 없으면 문의 시 확인해야 할 항목으로 안내한다.',
+      hook: '사후관리 불안 해소형 후킹',
+      pastor: '해결 단계에서 상담 전 확인 질문과 연락 CTA를 자연스럽게 연결한다.',
     },
     {
-      name: '빠른 견적 + 24시간 응답',
-      focus: '응답 속도와 견적 절차의 신속성을 강조. "카톡 24시간", "방문 견적 당일" 등.',
-      hook: '즉시성 후킹 ("기다리기 싫으신가요? 1시간 안에 답변 드립니다")',
-      pastor: '구체 제안 단계에서 응답 시간 명시 + CTA 강화',
+      name: '상담 응답',
+      focus: '영업시간·상담 채널·응답 가능 시간은 입력된 정보만 사용하고, 빠른 응답을 단정하지 않는다.',
+      hook: '기다림 부담 해소형 후킹',
+      pastor: '상담 흐름과 준비할 정보를 안내해 전환을 만든다.',
     },
     {
-      name: '무료 상담 + 비교 견적',
-      focus: '무료 견적, 비교용 부담 없는 상담을 핵심. "타사와 비교해보세요", "조건 맞으면 진행" 등.',
-      hook: '부담 제거형 후킹 ("처음이라 비교만 하실 분도 환영")',
-      pastor: '구체 제안 단계에서 무료 강조 + 진행 의무 없음 명시',
+      name: '상담 장벽 낮추기',
+      focus: '무료 상담·비교 견적·방문 견적은 입력된 경우에만 표현하고, 없으면 문의 전 준비사항으로 대체한다.',
+      hook: '첫 문의 부담 해소형 후킹',
+      pastor: '마지막 소제목에서 연락처와 함께 문의할 내용을 정리한다.',
     },
     {
-      name: '전문성 + 경력',
-      focus: '대표/시공자의 경력, 자격증, 전문성을 본문 핵심. "○년차", "○○ 자격증" 등.',
-      hook: '권위형 후킹 ("○년차 전문가가 알려드리는 ○○ 핵심")',
-      pastor: '사례·차별점 단계에서 자격/경력을 사례 위에 배치',
+      name: '전문성 근거',
+      focus: '경력·자격증·장비·전문 분야는 입력된 정보만 근거로 쓰고, 입력이 없으면 작업 기준과 점검 포인트를 설명한다.',
+      hook: '전문가 선택 기준형 후킹',
+      pastor: '업체 선택 기준을 제시한 뒤 입력된 차별점을 연결한다.',
     },
     {
-      name: '친절한 상담 + 고객 후기',
-      focus: '실제 고객 응대 사례, 상담 만족도를 본문 핵심. ⚠️ 의료 분야는 사용 금지 (광고법).',
-      hook: '공감형 후킹 ("처음 문의하시는 분도 편하게 물어보세요")',
-      pastor: '사례·차별점 단계에서 응대 후기 강조',
+      name: '문의 전 체크',
+      focus: '고객 후기처럼 꾸미지 말고, 독자가 문의 전에 확인할 상황·사진·면적·희망 일정 등을 정리한다.',
+      hook: '실전 준비형 후킹',
+      pastor: '체크리스트 또는 표를 포함해 문의 행동으로 이어지게 한다.',
     },
     {
-      name: '최신 트렌드 + 디자인',
-      focus: '최신 시공 트렌드, 디자인 사례, 신소재를 본문 핵심. "2026년 인기 ○○", "○○ 트렌드".',
-      hook: '트렌드형 후킹 ("올해 가장 인기 있는 ○○ 디자인 5가지")',
-      pastor: '해결책 단계에서 트렌드 정보를 우선 배치',
+      name: '트렌드 해석',
+      focus: '최신/2026/인기 표현은 원본 근거가 있을 때만 쓰고, 없으면 요즘 문의에서 자주 확인하는 선택 기준으로 완화한다.',
+      hook: '선택 기준 업데이트형 후킹',
+      pastor: '근거 없는 유행 단정 대신 비교표와 확인 포인트로 설득한다.',
     },
   ];
-  const idx = Math.floor(Math.random() * angles.length);
-  const angle = angles[idx];
-  console.log(`[BusinessAngle] 🎲 이번 글 강조 각도: ${angle.name}`);
+  const safeAngle = safeAngles[Math.floor(Math.random() * safeAngles.length)];
+  console.log(`[BusinessAngle] 이번 글 강조 각도: ${safeAngle.name}`);
   return `
 ══════════════════════════════════════════
-🎲 [BUSINESS ANGLE OVERRIDE — 이번 글의 강조 각도]
+🏢 [BUSINESS ANGLE OVERRIDE — 입력 근거 기반 업체홍보]
 ══════════════════════════════════════════
 
-⚠️ 같은 업체라도 매번 다른 각도로 작성되어야 한다. 이번 글의 강조 각도:
+같은 업체라도 매번 다른 각도로 작성하되, 허위 수치·허위 후기·과도한 업체명 반복은 금지한다.
+이번 글의 강조 각도:
 
-■ 강조 포인트: ${angle.name}
-■ 본문 초점: ${angle.focus}
-■ 도입부 후킹 스타일: ${angle.hook}
-■ PASTOR 변형: ${angle.pastor}
+■ 강조 사인: ${safeAngle.name}
+■ 본문 초점: ${safeAngle.focus}
+■ 도입부 후킹 스타일: ${safeAngle.hook}
+■ PASTOR 변주: ${safeAngle.pastor}
 
-⛔ 위 각도를 무시하고 매번 같은 톤으로 작성하면 0점.
-⛔ 도입부 첫 3줄에 위 후킹 스타일을 반영할 것.
+필수 안전 규칙:
+- 입력/원본에 없는 시공 건수, 평점, 가격, A/S 기간, 당일 방문 가능 여부를 만들지 말 것
+- 업체명은 제목 1회 + 도입/본문/문의 안내에 총 3~6회만 자연 노출할 것
+- 전환은 업체명 반복이 아니라 고객 상황, 선택 기준, 표/체크리스트, 문의 CTA로 만들 것
+- 후기 데이터가 없으면 실제 고객 후기처럼 쓰지 말고 문의 전 확인사항으로 대체할 것
+- 마지막 소제목은 문의/상담/견적/연락 안내 역할을 반드시 할 것
 ══════════════════════════════════════════
 `;
+
 }
 
 /**

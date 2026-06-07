@@ -37,6 +37,7 @@ export async function generateWithOpenAIImage(
     onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void,  // ✅ [2026-02-27] 실시간 콜백
     collectedImages?: string[],  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
     overrideModel?: string,       // v2.7.15: 호출자가 모델 강제 지정 (예: 'dall-e-3')
+    fallbackOpenAIApiKey?: string,
 ): Promise<GeneratedImage[]> {
     const config = await loadConfig();
     // ✅ [v2.7.33] 키 source 명시 — 사용자 진단 시 어느 입력란을 채워야 하는지 즉시 보임
@@ -61,6 +62,13 @@ export async function generateWithOpenAIImage(
     }
 
     // ✅ 사용자 선택 모델 해석 — overrideModel(호출자 명시) > config > 저비용 기본
+    const fallbackTextKey =
+        fallbackOpenAIApiKey?.trim()
+        || (config as any).openaiApiKey?.trim()
+        || process.env.OPENAI_API_KEY?.trim()
+        || '';
+    let triedFallbackTextKey = false;
+
     const resolvedModel = overrideModel || config.openaiImageModel || DEFAULT_OPENAI_IMAGE_MODEL;
     console.log(`[OpenAI-Image] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${resolvedModel}, 키 source: ${keySource}, 키 길이: ${apiKey.length})`);
 
@@ -347,6 +355,14 @@ export async function generateWithOpenAIImage(
                     const isAuthError = status === 401 || status === 403
                         || errCode === 'invalid_api_key'
                         || /invalid api key|incorrect api key|unauthenticated/i.test(errMsg);
+                    if (isAuthError && !triedFallbackTextKey && fallbackTextKey && fallbackTextKey !== apiKey) {
+                        triedFallbackTextKey = true;
+                        apiKey = fallbackTextKey;
+                        keySource = 'fallback config.openaiApiKey (OpenAI text key)';
+                        console.warn('[OpenAI-Image] 이미지 전용 키 인증 실패 → OpenAI 기본 키로 1회 재시도합니다.');
+                        lastError = null;
+                        continue;
+                    }
                     if (isAuthError) {
                         console.error(`[OpenAI-Image] 🚫 인증 에러 (${status} ${errCode}) — 재시도 무의미.`);
                         firstFatalError = apiError;

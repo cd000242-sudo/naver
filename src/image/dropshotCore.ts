@@ -20,6 +20,7 @@ import {
   BOARD_URL,
   launchBrowser,
   isLoggedIn,
+  openDropshotImageWorkspace,
   getProfileDir,
 } from './dropshotBrowser.js';
 import { getCachedPage, getCachedContext, setCached, clearCached } from './dropshotSession.js';
@@ -29,6 +30,8 @@ export {
   ensureDropshotControls,
   downloadAsFileBuffer,
   buildDropshotPrompt,
+  openDropshotImageWorkspace,
+  PROMPT_SELECTOR,
   type DropshotResult,
   type DropshotLoginStatus,
 } from './dropshotBrowser.js';
@@ -36,6 +39,7 @@ export {
   getGenerationChain,
   setGenerationChain,
   invalidateBrowserCache,
+  closeBrowserCache,
 } from './dropshotSession.js';
 export { checkDropshotLogin, dropshotLogin } from './dropshotLogin.js';
 
@@ -78,14 +82,7 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await (cachedPage as any).evaluate(() => document.readyState);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (!(cachedPage as any).url().includes('dropshot.io')) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        await (cachedPage as any).goto(BOARD_URL, {
-          waitUntil: 'domcontentloaded',
-          timeout: 30000,
-        });
-        await new Promise((r) => setTimeout(r, 3000));
-      }
+      await openDropshotImageWorkspace(cachedPage, onLog);
       return cachedPage;
     } catch {
       clearCached();
@@ -101,6 +98,7 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
   let page = context.pages()[0] || (await context.newPage());
   await page.goto(BOARD_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
   await new Promise((r) => setTimeout(r, 5000));
+  await openDropshotImageWorkspace(page, onLog);
 
   if (await isLoggedIn(page)) {
     onLog?.('[리더스 나노바나나] 로그인 세션 확인');
@@ -113,10 +111,10 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
   await context.close();
   context = await launchBrowser(profileDir, false);
   page = context.pages()[0] || (await context.newPage());
-  await page.goto('https://aistudio.dropshot.io', {
-    waitUntil: 'domcontentloaded',
-    timeout: 45000,
-  });
+    await page.goto(BOARD_URL, {
+      waitUntil: 'domcontentloaded',
+      timeout: 45000,
+    });
 
   let loggedIn = false;
   for (let i = 0; i < 60; i++) {
@@ -134,6 +132,7 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
         }) || pages[pages.length - 1];
       if (await isLoggedIn(page)) {
         loggedIn = true;
+        await openDropshotImageWorkspace(page, onLog);
         break;
       }
     } catch {
@@ -158,6 +157,7 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
   const hpage = hctx.pages()[0] || (await hctx.newPage());
   await hpage.goto(BOARD_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
   await new Promise((r) => setTimeout(r, 4000));
+  await openDropshotImageWorkspace(hpage, onLog);
 
   setCached(hctx, hpage);
   onLog?.('[리더스 나노바나나] 준비 완료');

@@ -55,6 +55,23 @@ describe('Stage 4 — 카탈로그 무결성', () => {
   });
 });
 
+describe('Gemini image billing failures', () => {
+  const genCode = read('image/nanoBananaProGenerator.ts');
+
+  it('stops retry loops immediately when Gemini prepaid image credits are depleted', () => {
+    expect(genCode).toContain('GEMINI_IMAGE_BILLING_REQUIRED');
+    expect(genCode).toMatch(/prepayment credits are depleted/);
+    expect(genCode).toMatch(/isGeminiImageBillingRequiredMessage/);
+    expect(genCode).toMatch(/throw createGeminiImageBillingRequiredError/);
+  });
+
+  it('prevents prepaid billing failures from entering the failed-image retry rounds', () => {
+    expect(genCode).toMatch(/new Promise<GeneratedImage \| null>\(\(resolve, reject\)/);
+    expect(genCode).toMatch(/isGeminiImageBillingRequiredError\(error\)[\s\S]{0,120}?reject\(error\)/);
+    expect(genCode).toMatch(/billingFailure[\s\S]{0,160}?throw \(billingFailure as PromiseRejectedResult\)\.reason/);
+  });
+});
+
 describe('Stage 4 — provider → 모델 키 → API 모델 ID 연동 체인', () => {
   it('나노바나나 3종 provider가 NANO_PROVIDER_TO_MODEL_KEY에 모두 매핑된다', () => {
     for (const v of NANO_VALUES) {

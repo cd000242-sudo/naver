@@ -15,7 +15,8 @@ export const BOARD_URL =
   'https://aistudio.dropshot.io/ko/workspace/board?panel=image&imageModelName=google/nano-banana-pro';
 const PROFILE_NAME = 'dropshot-profile';
 const PROFILE_ROOT = '.better-life-naver';
-export const PROMPT_SELECTOR = 'textarea[placeholder="어떤 장면을 만들고 싶나요?"]';
+export const PROMPT_SELECTOR =
+  'textarea, [contenteditable="true"], div[role="textbox"]';
 
 export interface DropshotLoginStatus {
   loggedIn: boolean;
@@ -28,13 +29,33 @@ export interface DropshotResult {
   error?: string;
 }
 
+export interface DropshotControlState {
+  unlimitedModeOn: boolean | null;
+  zeroCost: boolean;
+  generateButtonText: string;
+  hasUnlimitedCopy: boolean;
+  switchCount: number;
+}
+
+export interface DropshotLaunchOptions {
+  /**
+   * Debug-only escape hatch. App flows intentionally leave this off so a
+   * completed login cannot make later generation windows visible again.
+   */
+  allowForceVisible?: boolean;
+}
+
 export function getProfileDir(): string {
   const dir = path.join(os.homedir(), PROFILE_ROOT, PROFILE_NAME);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   return dir;
 }
 
-export async function launchBrowser(profileDir: string, headless: boolean): Promise<unknown> {
+export async function launchBrowser(
+  profileDir: string,
+  headless: boolean,
+  options: DropshotLaunchOptions = {},
+): Promise<unknown> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let chromium: any;
   try {
@@ -45,6 +66,7 @@ export async function launchBrowser(profileDir: string, headless: boolean): Prom
   }
 
   const forceVisible =
+    options.allowForceVisible === true &&
     String(process.env['VISIBLE_BROWSER'] || '').toLowerCase() === 'true';
   const effectiveHeadless = forceVisible ? false : headless;
 
@@ -109,8 +131,8 @@ export async function isLoggedIn(page: any): Promise<boolean> {
         for (let i = 0; i < localStorage.length; i++) {
           const k = localStorage.key(i) || '';
           if (
-            /CognitoIdentityServiceProvider/i.test(k) &&
-            /\.(idToken|accessToken)$/i.test(k)
+            /(CognitoIdentityServiceProvider|amplify|auth|token|user)/i.test(k) &&
+            /(idToken|accessToken|refreshToken|LastAuthUser|session|user)$/i.test(k)
           ) {
             const v = localStorage.getItem(k);
             if (v && v.length > 20) return true;
@@ -118,6 +140,28 @@ export async function isLoggedIn(page: any): Promise<boolean> {
         }
       } catch {
         // localStorage 접근 불가 시 미로그인 취급
+      }
+      try {
+        if (/(cognito|amplify|idtoken|accesstoken|refreshtoken|session)/i.test(document.cookie || '')) {
+          return true;
+        }
+      } catch {
+        // cookie access can fail in rare browser states.
+      }
+      try {
+        const bodyText = document.body?.innerText || '';
+        const hasLoginPrompt = /로그인|sign\s*in|log\s*in/i.test(bodyText);
+        const hasAccountChrome =
+          /플랜\s*업그레이드|plan\s*upgrade/i.test(bodyText) &&
+          /[\d,]{2,}/.test(bodyText) &&
+          !hasLoginPrompt;
+        const hasWorkspaceNav =
+          /이미지\s*생성|AI\s*이미지|image\s*generation/i.test(bodyText) &&
+          /플랜\s*업그레이드|plan\s*upgrade|크레딧|credits/i.test(bodyText) &&
+          !hasLoginPrompt;
+        if (hasAccountChrome || hasWorkspaceNav) return true;
+      } catch {
+        // Text-based logged-in signal is best-effort.
       }
       return false;
     });
@@ -127,6 +171,186 @@ export async function isLoggedIn(page: any): Promise<boolean> {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function isImageWorkspaceReady(page: any): Promise<boolean> {
+  try {
+    return await page.evaluate(() => {
+      const isVisible = (el: Element): boolean => {
+        const rect = (el as HTMLElement).getBoundingClientRect();
+        const style = window.getComputedStyle(el as HTMLElement);
+        return rect.width > 80 && rect.height > 20 && style.visibility !== 'hidden' && style.display !== 'none';
+      };
+      const inputs = Array.from(
+        document.querySelectorAll('textarea, [contenteditable="true"], div[role="textbox"]'),
+      );
+      return inputs.some(isVisible);
+    });
+  } catch {
+    return false;
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function clickImageEntry(page: any): Promise<boolean> {
+  return await page.evaluate(() => {
+    const candidates = Array.from(
+      document.querySelectorAll('a, button, [role="button"]'),
+    ) as HTMLElement[];
+    const target = candidates.find((el) => {
+      const text = `${el.innerText || ''} ${el.getAttribute('aria-label') || ''} ${el.getAttribute('title') || ''}`;
+      return /이미지\s*생성|AI\s*이미지|image\s*generation|create\s*image/i.test(text);
+    });
+    if (!target) return false;
+    target.click();
+    return true;
+  });
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function openDropshotImageWorkspace(
+  page: any,
+  onLog?: (m: string) => void,
+): Promise<boolean> {
+  try {
+    if (!page.url().includes('workspace/board') || !page.url().includes('panel=image')) {
+      await page.goto(BOARD_URL, {
+        waitUntil: 'domcontentloaded',
+        timeout: 45000,
+      });
+      await new Promise((r) => setTimeout(r, 4000));
+    }
+
+    if (await isImageWorkspaceReady(page)) return true;
+
+    const clicked = await clickImageEntry(page);
+    if (clicked) {
+      onLog?.('[dropshot] image workspace entry clicked');
+      await new Promise((r) => setTimeout(r, 5000));
+      if (await isImageWorkspaceReady(page)) return true;
+    }
+
+    await page.goto(BOARD_URL, {
+      waitUntil: 'domcontentloaded',
+      timeout: 45000,
+    });
+    await new Promise((r) => setTimeout(r, 5000));
+    return await isImageWorkspaceReady(page);
+  } catch (e) {
+    onLog?.(`[dropshot] workspace open failed: ${(e as Error).message?.slice(0, 120)}`);
+    return false;
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function readDropshotControlState(page: any): Promise<DropshotControlState> {
+  return await page.evaluate(() => {
+    const unlimitedTerms = ['\uBB34\uC81C\uD55C', '\uD55C\uACC4\uC5C6', 'unlimited'];
+    const generateTerms = [
+      '\uC774\uBBF8\uC9C0 \uC0DD\uC131\uD558\uAE30',
+      '\uC0DD\uC131\uD558\uAE30',
+      'generate',
+      'create image',
+      'submit',
+      'send',
+    ];
+    const compact = (value: string): string => String(value || '').replace(/\s+/g, ' ').trim();
+    const isVisible = (el: Element): boolean => {
+      const rect = (el as HTMLElement).getBoundingClientRect();
+      const style = window.getComputedStyle(el as HTMLElement);
+      return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden' && style.display !== 'none';
+    };
+    const textAround = (el: Element): string => {
+      const parts: string[] = [];
+      let current: Element | null = el;
+      for (let depth = 0; current && depth < 5; depth++) {
+        parts.push((current as HTMLElement).innerText || current.textContent || '');
+        current = current.parentElement;
+      }
+      const prev = (el as HTMLElement).previousElementSibling;
+      const next = (el as HTMLElement).nextElementSibling;
+      if (prev) parts.push((prev as HTMLElement).innerText || prev.textContent || '');
+      if (next) parts.push((next as HTMLElement).innerText || next.textContent || '');
+      return compact(parts.join(' '));
+    };
+    const bodyText = compact(document.body?.innerText || '');
+    const switchCandidates = Array.from(
+      document.querySelectorAll('input[role="switch"], [role="switch"], input[type="checkbox"]'),
+    )
+      .filter((el) => el instanceof HTMLElement)
+      .map((el) => {
+        const input =
+          el instanceof HTMLInputElement
+            ? el
+            : el.querySelector('input[role="switch"], input[type="checkbox"]');
+        const ariaChecked =
+          el.getAttribute('aria-checked') ||
+          input?.getAttribute('aria-checked') ||
+          '';
+        const dataState = el.getAttribute('data-state') || input?.getAttribute('data-state') || '';
+        const on =
+          (input instanceof HTMLInputElement && input.checked) ||
+          ariaChecked === 'true' ||
+          dataState === 'checked' ||
+          dataState === 'on';
+        const text = textAround(el);
+        const lower = text.toLowerCase();
+        const unlimitedScore = unlimitedTerms.reduce(
+          (score, term) => score + (lower.includes(term.toLowerCase()) ? 1 : 0),
+          0,
+        );
+        return { on: !!on, text, unlimitedScore };
+      });
+    const unlimitedSwitch =
+      switchCandidates.find((candidate) => candidate.unlimitedScore > 0) ||
+      (switchCandidates.length === 1 ? switchCandidates[0] : undefined);
+
+    const promptEl = Array.from(
+      document.querySelectorAll('textarea, [contenteditable="true"], div[role="textbox"]'),
+    ).find(isVisible) as HTMLElement | undefined;
+    const promptRect = promptEl?.getBoundingClientRect();
+    const buttons = Array.from(document.querySelectorAll('button')) as HTMLButtonElement[];
+    const generateButton = buttons
+      .filter((button) => !button.disabled && isVisible(button))
+      .map((button) => {
+        const text = compact(
+          `${button.innerText || ''} ${button.getAttribute('aria-label') || ''} ${button.getAttribute('title') || ''}`,
+        );
+        const lower = text.toLowerCase();
+        const isGenerate = generateTerms.some((term) => lower.includes(term.toLowerCase()));
+        if (!isGenerate) return null;
+        const rect = button.getBoundingClientRect();
+        const distance = promptRect
+          ? Math.abs(rect.left - promptRect.left) + Math.abs(rect.top - promptRect.bottom)
+          : 0;
+        let score = 0;
+        if (text.includes('\uC0DD\uC131\uD558\uAE30')) score += 1000;
+        if (text.includes('\uC774\uBBF8\uC9C0')) score += 200;
+        if (promptRect && rect.top >= promptRect.bottom - 30) score += 300;
+        if (promptRect && rect.right >= promptRect.left - 40 && rect.left <= promptRect.right + 40) score += 300;
+        score -= distance / 10;
+        return { text, score };
+      })
+      .filter((candidate): candidate is { text: string; score: number } => !!candidate)
+      .sort((a, b) => b.score - a.score)[0];
+
+    const generateButtonText = generateButton?.text || '';
+    const costNumbers = generateButtonText.match(/\d+/g) || [];
+    const zeroCost =
+      costNumbers.some((value) => Number(value) === 0) ||
+      /free/i.test(generateButtonText) ||
+      generateButtonText.includes('\uBB34\uB8CC') ||
+      generateButtonText.includes('\uBB34\uC81C\uD55C');
+
+    return {
+      unlimitedModeOn: unlimitedSwitch ? unlimitedSwitch.on : null,
+      zeroCost,
+      generateButtonText,
+      hasUnlimitedCopy: unlimitedTerms.some((term) => bodyText.toLowerCase().includes(term.toLowerCase())),
+      switchCount: switchCandidates.length,
+    };
+  });
+}
+
 /** Ensure unlimited mode toggle ON + counter set to 1 (idempotent). */
 export async function ensureDropshotControls(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -134,30 +358,71 @@ export async function ensureDropshotControls(
   onLog?: (m: string) => void,
 ): Promise<void> {
   try {
-    // 1. Enable unlimited mode toggle
-    const switches = await page.$$('input[role="switch"]');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    for (const sw of switches) {
-      const isOn: boolean = await sw.evaluate(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (el: any) =>
-          el.checked || el.getAttribute('aria-checked') === 'true',
-      );
-      if (!isOn) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const parent = await sw.evaluateHandle(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (el: any) =>
+    // 1. Enable unlimited mode toggle. Dropshot changes its switch markup often,
+    // so identify the target by nearby "unlimited" copy when possible and fall
+    // back to the single visible switch only when there is no ambiguity.
+    const toggleResult = await page.evaluate(() => {
+      const unlimitedTerms = ['\uBB34\uC81C\uD55C', '\uD55C\uACC4\uC5C6', 'unlimited'];
+      const compact = (value: string): string => String(value || '').replace(/\s+/g, ' ').trim();
+      const textAround = (el: Element): string => {
+        const parts: string[] = [];
+        let current: Element | null = el;
+        for (let depth = 0; current && depth < 5; depth++) {
+          parts.push((current as HTMLElement).innerText || current.textContent || '');
+          current = current.parentElement;
+        }
+        const prev = (el as HTMLElement).previousElementSibling;
+        const next = (el as HTMLElement).nextElementSibling;
+        if (prev) parts.push((prev as HTMLElement).innerText || prev.textContent || '');
+        if (next) parts.push((next as HTMLElement).innerText || next.textContent || '');
+        return compact(parts.join(' '));
+      };
+      const switchCandidates = Array.from(
+        document.querySelectorAll('input[role="switch"], [role="switch"], input[type="checkbox"]'),
+      )
+        .filter((el) => el instanceof HTMLElement)
+        .map((el) => {
+          const input =
+            el instanceof HTMLInputElement
+              ? el
+              : el.querySelector('input[role="switch"], input[type="checkbox"]');
+          const ariaChecked =
+            el.getAttribute('aria-checked') ||
+            input?.getAttribute('aria-checked') ||
+            '';
+          const dataState = el.getAttribute('data-state') || input?.getAttribute('data-state') || '';
+          const on =
+            (input instanceof HTMLInputElement && input.checked) ||
+            ariaChecked === 'true' ||
+            dataState === 'checked' ||
+            dataState === 'on';
+          const text = textAround(el);
+          const lower = text.toLowerCase();
+          const unlimitedScore = unlimitedTerms.reduce(
+            (score, term) => score + (lower.includes(term.toLowerCase()) ? 1 : 0),
+            0,
+          );
+          const clickTarget =
             el.closest('label') ||
             el.closest('button') ||
-            el.parentElement,
-        );
-        if (parent) {
-          await parent.click({ timeout: 2000 }).catch(() => {
-            // best-effort
-          });
-        }
+            el.closest('[role="switch"]') ||
+            el.parentElement ||
+            el;
+          return { el, on: !!on, text, unlimitedScore, clickTarget };
+        });
+      const target =
+        switchCandidates.find((candidate) => candidate.unlimitedScore > 0) ||
+        (switchCandidates.length === 1 ? switchCandidates[0] : undefined);
+      if (!target) return { found: false, toggled: false, on: null, switchCount: switchCandidates.length };
+      if (!target.on) {
+        (target.clickTarget as HTMLElement).click();
+        return { found: true, toggled: true, on: false, switchCount: switchCandidates.length };
       }
+      return { found: true, toggled: false, on: true, switchCount: switchCandidates.length };
+    });
+    if (toggleResult.toggled) {
+      onLog?.('[dropshot] unlimited mode switch enabled');
+      await new Promise((r) => setTimeout(r, 1200));
     }
 
     // 2. Set counter to 1 (React-controlled input requires native setter)
@@ -179,7 +444,23 @@ export async function ensureDropshotControls(
         }
       }
     });
+    await new Promise((r) => setTimeout(r, 500));
+    const state = await readDropshotControlState(page);
+    const switchConfirmed = state.unlimitedModeOn !== false;
+    if (!switchConfirmed || !state.zeroCost) {
+      throw new Error(
+        `Dropshot unlimited/zero-cost mode was not confirmed; refusing to generate to avoid coin spend. ` +
+          `switch=${state.unlimitedModeOn}, zeroCost=${state.zeroCost}, button="${state.generateButtonText || '(none)'}"`,
+      );
+    }
+    onLog?.(
+      `[dropshot] unlimited/zero-cost confirmed: ${state.generateButtonText || 'generate button found'}`,
+    );
   } catch (e) {
+    const message = (e as Error).message || String(e);
+    if (message.includes('refusing to generate to avoid coin spend')) {
+      throw e;
+    }
     onLog?.(
       `[리더스 나노바나나] controls 설정 오류 (무시): ${(e as Error).message?.slice(0, 80)}`,
     );
