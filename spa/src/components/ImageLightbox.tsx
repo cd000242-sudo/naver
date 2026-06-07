@@ -62,11 +62,32 @@ function ImageLightbox({ image, onClose }: ImageLightboxProps) {
                     background: linear-gradient(180deg, rgba(15,23,42,0.96), rgba(4,8,18,0.98));
                     box-shadow: 0 28px 100px rgba(0,0,0,0.55);
                 }
+                .image-lightbox-scroll {
+                    max-height: calc(100vh - 146px);
+                    overflow: auto;
+                    overscroll-behavior: contain;
+                    border-radius: 10px;
+                    background: #020617;
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(244, 201, 93, 0.78) rgba(15, 23, 42, 0.92);
+                }
+                .image-lightbox-scroll::-webkit-scrollbar {
+                    width: 12px;
+                    height: 12px;
+                }
+                .image-lightbox-scroll::-webkit-scrollbar-track {
+                    background: rgba(15, 23, 42, 0.92);
+                    border-radius: 999px;
+                }
+                .image-lightbox-scroll::-webkit-scrollbar-thumb {
+                    background: linear-gradient(180deg, rgba(244, 201, 93, 0.95), rgba(68, 215, 182, 0.85));
+                    border: 3px solid rgba(15, 23, 42, 0.92);
+                    border-radius: 999px;
+                }
                 .image-lightbox-panel img {
                     display: block;
                     width: 100%;
-                    max-height: calc(100vh - 148px);
-                    object-fit: contain;
+                    height: auto;
                     border-radius: 10px;
                     background: #020617;
                 }
@@ -103,8 +124,8 @@ function ImageLightbox({ image, onClose }: ImageLightboxProps) {
                         padding: 10px;
                         border-radius: 12px;
                     }
-                    .image-lightbox-panel img {
-                        max-height: calc(100vh - 112px);
+                    .image-lightbox-scroll {
+                        max-height: calc(100vh - 116px);
                     }
                     .image-lightbox-title {
                         margin-right: 42px;
@@ -120,7 +141,9 @@ function ImageLightbox({ image, onClose }: ImageLightboxProps) {
             `}</style>
             <div className="image-lightbox-panel" onClick={(event) => event.stopPropagation()}>
                 <button type="button" className="image-lightbox-close" onClick={onClose} aria-label="이미지 닫기">×</button>
-                <img src={image.src} alt={image.alt} />
+                <div className="image-lightbox-scroll">
+                    <img src={image.src} alt={image.alt} />
+                </div>
                 {image.title ? <div className="image-lightbox-title">{image.title}</div> : null}
             </div>
         </div>,
