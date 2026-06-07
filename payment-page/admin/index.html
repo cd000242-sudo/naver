@@ -770,6 +770,10 @@
                     <span class="nav-icon">🔑</span>
                     <span>코드 관리</span>
                 </div>
+                <div class="nav-item" data-tab="all-in-one" onclick="switchTab('all-in-one')">
+                    <span class="nav-icon">🧩</span>
+                    <span>올인원 발급</span>
+                </div>
                 <div class="nav-item" data-tab="orders" onclick="switchTab('orders')">
                     <span class="nav-icon">💳</span>
                     <span>주문 내역</span>
@@ -904,6 +908,84 @@
                     </div>
                     <div id="codes-table-body">
                         <div class="loading-spinner"><div class="spinner-ring"></div> 코드 목록 로딩 중...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: All-in-one Code Issue -->
+            <div class="tab-panel" id="tab-all-in-one">
+                <div class="page-header">
+                    <h1>올인원 라이선스 발급</h1>
+                    <p>네이버 자동화툴, Leaders Orbit, LEWORD를 함께 여는 ALL 코드를 발급합니다.</p>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+                    <div class="stat-card card-green">
+                        <div class="stat-top">
+                            <div class="stat-label">Better Life Naver</div>
+                            <div class="stat-icon icon-green">N</div>
+                        </div>
+                        <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.7;">네이버 자동화툴 이용 가능</div>
+                    </div>
+                    <div class="stat-card card-blue">
+                        <div class="stat-top">
+                            <div class="stat-label">Leaders Orbit</div>
+                            <div class="stat-icon icon-blue">O</div>
+                        </div>
+                        <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.7;">블로그스팟·워드프레스 자동화 이용 가능</div>
+                    </div>
+                    <div class="stat-card card-purple">
+                        <div class="stat-top">
+                            <div class="stat-label">LEWORD</div>
+                            <div class="stat-icon icon-purple">L</div>
+                        </div>
+                        <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.7;">키워드 마스터 이용 가능</div>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>ALL 코드 즉시 발급</h3>
+                        <div class="table-actions">
+                            <button class="btn" onclick="switchTab('codes')">코드 목록 보기</button>
+                        </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
+                        <div class="editor-card">
+                            <h4>기간 선택</h4>
+                            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;">
+                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="CUSTOM1" checked> 1일</label>
+                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="PAID30"> 30일</label>
+                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="CUSTOM90"> 90일</label>
+                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="CUSTOM365"> 365일</label>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h4>발급 옵션</h4>
+                            <div style="display:grid;gap:12px;">
+                                <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:700;">직접 일수</label>
+                                <input id="allinone-days" type="number" min="1" max="3650" value="1" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                                <label style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);font-size:0.86rem;"><input type="checkbox" id="allinone-unlimited"> 무제한 코드로 발급</label>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h4>수량 및 프리픽스</h4>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                                <div>
+                                    <label style="display:block;font-size:0.78rem;color:var(--text-secondary);font-weight:700;margin-bottom:8px;">발급 수량</label>
+                                    <input id="allinone-count" type="number" min="1" max="500" value="10" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                                </div>
+                                <div>
+                                    <label style="display:block;font-size:0.78rem;color:var(--text-secondary);font-weight:700;margin-bottom:8px;">프리픽스</label>
+                                    <input id="allinone-prefix" type="text" value="ALL" placeholder="ALL" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:18px;padding:14px 16px;border:1px solid rgba(201,168,76,0.22);background:rgba(201,168,76,0.08);border-radius:12px;color:var(--text-secondary);font-size:0.86rem;line-height:1.7;">
+                        올인원 구매자는 이 탭에서 발급한 <strong style="color:var(--gold);">ALL 플랫폼 코드</strong>를 받아야 합니다. 개별 제품 영구제 코드는 별도 문의 건에서만 발급하세요.
+                    </div>
+                    <div class="editor-save-bar" style="margin-top:18px;">
+                        <button class="btn" onclick="resetAllInOneForm()">↩️ 초기화</button>
+                        <button class="btn btn-gold" onclick="issueAllInOneCode(this)">🧩 올인원 코드 발급</button>
                     </div>
                 </div>
             </div>
@@ -1293,6 +1375,7 @@
             const headers = {
                 overview: { title: '대시보드', desc: '오늘의 트래픽과 주문 현황을 한눈에 확인하세요.' },
                 codes: { title: '코드 관리', desc: '라이선스 코드를 발급, 조회, 무효화합니다.' },
+                'all-in-one': { title: '올인원 발급', desc: '구매자에게 지급할 ALL 라이선스 코드를 발급합니다.' },
                 orders: { title: '주문 내역', desc: '결제 완료된 주문과 활성화된 라이선스 내역입니다.' },
                 editor: { title: '사이트 편집', desc: '메인 결제 페이지의 핵심 콘텐츠를 수정합니다.' },
                 bank: { title: '계좌이체 관리', desc: '계좌이체 주문을 확인하고 승인/거절합니다.' },
@@ -1307,6 +1390,7 @@
             // Load data for the tab
             if (tabId === 'trial') loadTrialUsers();
             if (tabId === 'bank') loadBankOrders();
+            if (tabId === 'codes') loadCodes();
             if (tabId === 'notices') loadNotices();
             if (tabId === 'income') loadIncomeAdmin(currentIncomeFilter);
             if (tabId === 'reviews') loadReviewsAdmin(currentReviewFilter);
@@ -1817,11 +1901,20 @@
                 'ALL': 'platform-all',
                 'NAVER': 'platform-naver',
                 'BLOGGER': 'platform-blogger',
+                'LEADERNAM': 'platform-blogger',
                 'TISTORY': 'platform-tistory',
                 'LEWORD': 'platform-leword'
             };
             const cls = map[p] || 'platform-default';
-            return `<span class="platform-badge ${cls}">${platform}</span>`;
+            const labels = {
+                'ALL': '올인원',
+                'NAVER': 'NAVER',
+                'BLOGGER': 'Orbit',
+                'LEADERNAM': 'Orbit',
+                'TISTORY': 'Tistory',
+                'LEWORD': 'LEWORD'
+            };
+            return `<span class="platform-badge ${cls}">${labels[p] || platform}</span>`;
         }
 
         // ===== GAS API CALLS =====
@@ -1841,12 +1934,12 @@
             }
         }
 
-        async function issueCodeAPI(platform, type, count) {
+        async function issueCodeAPI(platform, type, count, extra = {}) {
             try {
                 const res = await fetch(GAS_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify({ action: 'issue', adminToken: ADMIN_TOKEN, platform, type, count })
+                    body: JSON.stringify({ action: 'issue', adminToken: ADMIN_TOKEN, platform, type, count, ...extra })
                 });
                 return await res.json();
             } catch (err) {
@@ -2073,6 +2166,87 @@
         // ===== ISSUE CODE =====
         function openIssueModal() { document.getElementById('issue-modal').classList.add('active'); }
         function closeIssueModal() { document.getElementById('issue-modal').classList.remove('active'); }
+
+        function getAllInOnePresetDays(type) {
+            if (type === 'CUSTOM1') return 1;
+            if (type === 'PAID30') return 30;
+            if (type === 'CUSTOM90') return 90;
+            if (type === 'CUSTOM365') return 365;
+            return 0;
+        }
+
+        function syncAllInOneDays(type) {
+            const input = document.getElementById('allinone-days');
+            if (!input) return;
+            const presetDays = getAllInOnePresetDays(type);
+            if (presetDays > 0) input.value = String(presetDays);
+        }
+
+        function buildAllInOneIssuePayload() {
+            const checked = document.querySelector('input[name="allinone-duration"]:checked');
+            const type = checked ? checked.value : 'CUSTOM1';
+            const unlimited = document.getElementById('allinone-unlimited')?.checked;
+            if (unlimited) {
+                return { actualType: 'LIFE', customData: { isUnlimitedDays: true }, finalLabel: '무제한' };
+            }
+
+            const presetDays = getAllInOnePresetDays(type);
+            const inputDays = parseInt(document.getElementById('allinone-days')?.value || '0', 10);
+            const finalDays = inputDays > 0 ? inputDays : presetDays;
+            if (!finalDays || finalDays <= 0 || finalDays > 3650) {
+                throw new Error('일수를 1~3650 사이로 입력해주세요.');
+            }
+            return { actualType: 'CUSTOM', customData: { customDays: finalDays }, finalLabel: `${finalDays}일` };
+        }
+
+        function resetAllInOneForm() {
+            const first = document.querySelector('input[name="allinone-duration"][value="CUSTOM1"]');
+            if (first) first.checked = true;
+            document.getElementById('allinone-days').value = '1';
+            document.getElementById('allinone-unlimited').checked = false;
+            document.getElementById('allinone-count').value = '10';
+            document.getElementById('allinone-prefix').value = 'ALL';
+            showToast('↩️ 올인원 발급 옵션을 초기화했습니다.');
+        }
+
+        document.querySelectorAll('input[name="allinone-duration"]').forEach(input => {
+            input.addEventListener('change', () => {
+                document.getElementById('allinone-unlimited').checked = false;
+                syncAllInOneDays(input.value);
+            });
+        });
+
+        async function issueAllInOneCode(btn) {
+            let payload;
+            try {
+                payload = buildAllInOneIssuePayload();
+            } catch (err) {
+                showToast('❌ ' + err.message);
+                return;
+            }
+
+            const count = Math.max(1, Math.min(500, parseInt(document.getElementById('allinone-count').value || '1', 10)));
+            const prefix = (document.getElementById('allinone-prefix').value || 'ALL').trim();
+            const originalText = btn.textContent;
+            btn.textContent = '발급 중...';
+            btn.disabled = true;
+
+            const result = await issueCodeAPI('ALL', payload.actualType, count, {
+                prefix,
+                ...payload.customData
+            });
+
+            if (result.ok) {
+                showToast(`✅ 올인원 ${payload.finalLabel} 코드 ${result.created?.length || count}개 발급 완료!`);
+                await loadCodes();
+                switchTab('codes');
+            } else {
+                showToast('❌ 올인원 발급 실패: ' + (result.error || '알 수 없는 오류'));
+            }
+
+            btn.textContent = originalText;
+            btn.disabled = false;
+        }
 
         async function issueCode() {
             const platform = document.getElementById('issue-platform').value;

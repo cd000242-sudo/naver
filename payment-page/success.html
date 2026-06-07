@@ -207,7 +207,7 @@
                     `&authKey=${encodeURIComponent(params.authKey)}` +
                     `&customerKey=${encodeURIComponent(params.customerKey)}` +
                     `&amount=${encodeURIComponent(params.amount || '')}` +
-                    `&product=${encodeURIComponent(params.orderName || params.productId || '')}` +
+                    `&product=${encodeURIComponent(params.productId || params.orderName || '')}` +
                     (params.email ? `&email=${encodeURIComponent(params.email)}` : '') +
                     `&callback=${callbackName}`;
                 script.onerror = function () { clearTimeout(timeoutId); cleanup(); reject(new Error('NETWORK_ERROR')); };
@@ -243,6 +243,7 @@
                     `&paymentKey=${encodeURIComponent(params.paymentKey)}` +
                     `&orderId=${encodeURIComponent(params.orderId)}` +
                     `&amount=${encodeURIComponent(params.amount)}` +
+                    `&product=${encodeURIComponent(params.productId || params.orderName || '')}` +
                     (params.email ? `&email=${encodeURIComponent(params.email)}` : '') +
                     `&callback=${callbackName}`;
 

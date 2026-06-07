@@ -28,9 +28,9 @@ interface Plan {
 const PLANS: Record<string, Plan[]> = {
     naver: [
         { id: 'free-naver', name: 'Better Life Naver 무료 체험', desc: '네이버 자동화 먼저 체험', amount: 0, period: '무료', free: true, badge: { text: '🎁 FREE', type: 'trial' }, features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', 'LEWORD·Orbit은 올인원 구매 후 이용'] },
-        { id: 'naver-monthly', name: '올인원 1개월', desc: '세 제품을 한 번에 가볍게 시작', amount: 50000, amountCard: 55000, period: '/ 월 (공급가)', features: ['네이버 자동화툴 이용', 'LEWORD 키워드 분석 이용', 'Leaders Orbit 이용', '이메일 고객 지원'] },
-        { id: 'naver-quarterly', name: '올인원 3개월', desc: '블로그 자동화 흐름을 안정적으로 운영', amount: 120000, period: '/ 3개월', monthly: '월 40,000원', features: ['네이버 자동화툴 이용', 'LEWORD 전체 기능 이용', 'Leaders Orbit 이용', '우선 고객 지원'] },
-        { id: 'naver-yearly', name: '올인원 1년', desc: '가장 합리적인 전체 제품 기간권', amount: 400000, period: '/ 년', monthly: '월 33,333원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['모든 자동화툴 기간 내 이용', '라이선스 기간 내 업데이트', '전용 커뮤니티 안내', '1:1 우선 지원'] },
+        { id: 'all-in-one-monthly', name: '올인원 1개월', desc: '세 제품을 한 번에 가볍게 시작', amount: 50000, amountCard: 55000, period: '/ 월 (공급가)', features: ['네이버 자동화툴 이용', 'LEWORD 키워드 분석 이용', 'Leaders Orbit 이용', '이메일 고객 지원'] },
+        { id: 'all-in-one-quarterly', name: '올인원 3개월', desc: '블로그 자동화 흐름을 안정적으로 운영', amount: 120000, period: '/ 3개월', monthly: '월 40,000원', features: ['네이버 자동화툴 이용', 'LEWORD 전체 기능 이용', 'Leaders Orbit 이용', '우선 고객 지원'] },
+        { id: 'all-in-one-yearly', name: '올인원 1년', desc: '가장 합리적인 전체 제품 기간권', amount: 400000, period: '/ 년', monthly: '월 33,333원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['모든 자동화툴 기간 내 이용', '라이선스 기간 내 업데이트', '전용 커뮤니티 안내', '1:1 우선 지원'] },
     ],
 };
 

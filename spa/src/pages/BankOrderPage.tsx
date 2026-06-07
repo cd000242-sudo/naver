@@ -13,9 +13,9 @@ interface ProductOption { id: string; name: string; price: number; period: strin
 
 const ALL_PRODUCTS: Record<string, ProductOption[]> = {
     naver: [
-        { id: 'naver-monthly', name: '올인원 1개월', price: 50000, period: '/ 월' },
-        { id: 'naver-quarterly', name: '올인원 3개월', price: 120000, period: '월 40,000원' },
-        { id: 'naver-yearly', name: '올인원 1년', price: 400000, period: '월 33,333원' },
+        { id: 'all-in-one-monthly', name: '올인원 1개월', price: 50000, period: '/ 월' },
+        { id: 'all-in-one-quarterly', name: '올인원 3개월', price: 120000, period: '월 40,000원' },
+        { id: 'all-in-one-yearly', name: '올인원 1년', price: 400000, period: '월 33,333원' },
     ],
 };
 
