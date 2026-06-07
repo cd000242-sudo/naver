@@ -2153,6 +2153,72 @@ function normalizeErrorMessage(error: unknown): string {
   return String(error || '');
 }
 
+function safeStringifyError(error: unknown): string {
+  try {
+    return JSON.stringify(error, null, 2);
+  } catch {
+    return '';
+  }
+}
+
+function getErrorDiagnosticText(error: unknown, message = ''): string {
+  const err = error as any;
+  return [
+    message,
+    normalizeErrorMessage(error),
+    err?.name,
+    err?.code,
+    err?.type,
+    err?.status,
+    err?.cause?.name,
+    err?.cause?.code,
+    err?.cause?.message,
+    safeStringifyError(error),
+  ]
+    .filter(Boolean)
+    .join('\n')
+    .toLowerCase();
+}
+
+function formatWaitDurationKo(ms: number): string {
+  const safeMs = Number.isFinite(ms) ? Math.max(0, Math.floor(ms)) : 0;
+  if (safeMs < 60_000) return '1분 미만';
+  return `${Math.ceil(safeMs / 60_000)}분`;
+}
+
+function formatWaitBudgetKo(ms: number): string {
+  const safeMs = Number.isFinite(ms) ? Math.max(60_000, Math.floor(ms)) : 60_000;
+  return `${Math.ceil(safeMs / 60_000)}분`;
+}
+
+function isMaskedSecretValue(value: string | undefined): boolean {
+  if (!value) return false;
+  return /[•●*]/.test(value);
+}
+
+function isOpenAiConnectionIssue(error: unknown, message = ''): boolean {
+  const diagnostic = getErrorDiagnosticText(error, message);
+  if (diagnostic.includes('apiuseraborterror') || diagnostic.includes('사용자가 콘텐츠 생성을 취소')) {
+    return false;
+  }
+
+  return diagnostic.includes('apiconnectionerror') ||
+    diagnostic.includes('apiconnectiontimeouterror') ||
+    diagnostic.includes('connection error') ||
+    diagnostic.includes('api connection') ||
+    diagnostic.includes('failed to connect') ||
+    diagnostic.includes('fetch failed') ||
+    diagnostic.includes('network') ||
+    diagnostic.includes('socket') ||
+    diagnostic.includes('tls') ||
+    diagnostic.includes('econnreset') ||
+    diagnostic.includes('econnrefused') ||
+    diagnostic.includes('etimedout') ||
+    diagnostic.includes('enotfound') ||
+    diagnostic.includes('eai_again') ||
+    diagnostic.includes('ecanceled');
+}
+
 function isTerminalContentGenerationError(error: unknown): boolean {
   const msg = normalizeErrorMessage(error).toLowerCase();
   if (!msg) return false;
@@ -5511,7 +5577,7 @@ function recordGeminiRateLimitBackoff(modelName: string, config: any, waitMs: nu
 }
 
 function getGeminiRateLimitWaitMs(error: unknown, fallbackMs: number): number {
-  const raw = `${normalizeErrorMessage(error)}\n${JSON.stringify(error, null, 2)}`;
+  const raw = `${normalizeErrorMessage(error)}\n${safeStringifyError(error)}`;
   const patterns = [
     /retry\s+in\s+([\d.]+)\s*(ms|s|m)?/i,
     /retryDelay["'\s:]+([\d.]+)\s*(ms|s|m)?/i,
@@ -5612,7 +5678,7 @@ function getProviderRateLimitWaitMs(error: unknown, fallbackMs: number, headerNa
     .map(parseProviderDelayMs)
     .filter((value): value is number => typeof value === 'number' && value > 0);
 
-  const raw = `${normalizeErrorMessage(error)}\n${JSON.stringify(error, null, 2)}`;
+  const raw = `${normalizeErrorMessage(error)}\n${safeStringifyError(error)}`;
   const retryHint = raw.match(/retry(?:\s|-)?after["'\s:]+([\d.]+)\s*(ms|s|m|h)?/i)
     || raw.match(/retryDelay["'\s:]+([\d.]+)\s*(ms|s|m|h)?/i);
   if (retryHint) {
@@ -6325,7 +6391,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             recordGeminiRateLimitBackoff(modelName, config, waitMs);
             const logMsg =
               `⏳ Gemini 분당/토큰 요청 한도 대기 — ${waitSec}초 후 같은 모델로 자동 재시도합니다. ` +
-              `(누적 ${Math.round(geminiRateLimitWaitedMs / 60_000)}분/${Math.round(geminiRateLimitPatienceMs / 60_000)}분, 자동 엔진 전환 없음)`;
+              `(누적 ${formatWaitDurationKo(geminiRateLimitWaitedMs)}/${formatWaitBudgetKo(geminiRateLimitPatienceMs)}, 자동 엔진 전환 없음)`;
             console.warn(`[Gemini] ${logMsg}`);
             if (typeof window !== 'undefined' && typeof (window as any).appendLog === 'function') {
               (window as any).appendLog(logMsg);
@@ -6338,7 +6404,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
 
           // patient wait 예산을 다 쓴 경우에만 구체적 안내
           throw new Error(
-            `⚡ [${modelName}] 분당/토큰 요청 한도(RPM/TPM)가 ${Math.round(geminiRateLimitWaitedMs / 60_000)}분 동안 풀리지 않았습니다.\n\n` +
+            `⚡ [${modelName}] 분당/토큰 요청 한도(RPM/TPM)가 ${formatWaitDurationKo(geminiRateLimitWaitedMs)} 동안 풀리지 않았습니다.\n\n` +
             `📌 원인: ${config?.geminiPlanType === 'auto' ? '자동 모드에서 현재 프로젝트의 분당/토큰 한도 초과' : isPaidPlan ? '후불 계정이어도 프로젝트·모델별 RPM/TPM 제한 초과' : '무료 플랜의 낮은 분당 요청 한도 초과'}입니다.\n\n` +
             `💡 해결 방법:\n` +
             `  1) 앱은 같은 Gemini 모델로 자동 대기했지만 아직 Google 제한이 풀리지 않았습니다.\n` +
@@ -6664,7 +6730,7 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
     } catch (error) {
       lastError = error as Error;
       const errorMessage = lastError.message?.toLowerCase() || '';
-      const errorStr = JSON.stringify(error).toLowerCase();
+      const errorStr = safeStringifyError(error).toLowerCase();
       const status = (error as any)?.status || (error as any)?.response?.status;
 
       console.error(`[Perplexity] ⚠️ 시도 ${retry + 1} 실패: ${lastError.message}`);
@@ -6702,7 +6768,7 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
           recordProviderRateLimitBackoff('Perplexity', modelName, waitMs);
           const logMsg =
             `⏳ [Perplexity ${modelName}] 요청 한도 대기 — ${Math.round(waitMs / 1000)}초 후 같은 모델로 자동 재시도 ` +
-            `(누적 ${Math.round(rateLimitWaitedMs / 60_000)}분/${Math.round(rateLimitPatienceMs / 60_000)}분, 자동 폴백 없음)`;
+            `(누적 ${formatWaitDurationKo(rateLimitWaitedMs)}/${formatWaitBudgetKo(rateLimitPatienceMs)}, 자동 폴백 없음)`;
           console.warn(logMsg);
           if (typeof (globalThis as any).window !== 'undefined' && typeof (globalThis as any).window.appendLog === 'function') {
             (globalThis as any).window.appendLog(logMsg);
@@ -6712,7 +6778,7 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
         }
 
         throw new Error(
-          `Perplexity API 요청 한도(RPM)를 초과했습니다. 앱이 같은 모델로 ${Math.round(rateLimitWaitedMs / 60_000)}분 대기했지만 아직 제한이 풀리지 않았습니다.\n` +
+          `Perplexity API 요청 한도(RPM)를 초과했습니다. 앱이 같은 모델로 ${formatWaitDurationKo(rateLimitWaitedMs)} 대기했지만 아직 제한이 풀리지 않았습니다.\n` +
           `원본 오류: ${lastError.message}`
         );
       }
@@ -6768,7 +6834,13 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   // ✅ [2026-03-23 FIX] config에서 직접 API 키를 가져와 전달 (process.env 폴백)
   // applyConfigToEnv가 빈 문자열일 때 delete process.env.OPENAI_API_KEY 하므로
   // config.openaiApiKey가 있으면 직접 전달해야 확실히 로드됨
-  const configApiKey = config?.openaiApiKey?.trim() || undefined;
+  const rawConfigApiKey = config?.openaiApiKey?.trim() || undefined;
+  if (isMaskedSecretValue(rawConfigApiKey)) {
+    throw new Error(
+      'OpenAI API 키가 실제 키가 아니라 마스킹된 표시값으로 저장되어 있습니다. 환경설정에서 OpenAI 실제 API 키를 다시 입력해주세요.'
+    );
+  }
+  const configApiKey = rawConfigApiKey;
   if (configApiKey) {
     console.log(`[OpenAI] ✅ config에서 직접 API 키 로드됨 (길이: ${configApiKey.length})`);
   } else {
@@ -6808,7 +6880,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   const timeoutMs = getTimeoutMs(minChars);
   const maxCompletionTokens = getOpenAiMaxCompletionTokens(minChars);
   const maxAttemptsPerModel = 99;
-  const maxTransientRetriesPerModel = 2;
+  const maxTransientRetriesPerModel = 3;
   const openAiRateLimitPatienceMs = getOpenAiRateLimitPatienceMs();
 
   for (const modelName of modelsToTry) {
@@ -6880,7 +6952,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
       } catch (error) {
         lastError = error as Error;
         const errorMessage = (error as Error).message?.toLowerCase() || '';
-        const errorStr = JSON.stringify(error).toLowerCase();
+        const errorStr = safeStringifyError(error).toLowerCase();
 
         // ✅ [2026-02-24 FIX] 에러 분류: 즉시 실패 vs 재시도 가능 vs 다음 모델
 
@@ -6937,7 +7009,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
               rateLimitRetryCount++;
               const logMsg =
                 `⏳ [OpenAI ${modelName}] 요청/토큰 한도 대기 — ${Math.round(backoffMs / 1000)}초 후 같은 모델로 자동 재시도 ` +
-                `(누적 ${Math.round(nextWaitedMs / 60_000)}분/${Math.round(openAiRateLimitPatienceMs / 60_000)}분 허용, 자동 폴백 없음)`;
+                `(누적 ${formatWaitDurationKo(nextWaitedMs)}/${formatWaitBudgetKo(openAiRateLimitPatienceMs)} 허용, 자동 폴백 없음)`;
               console.warn(logMsg);
               if (typeof (globalThis as any).window !== 'undefined' && typeof (globalThis as any).window.appendLog === 'function') {
                 (globalThis as any).window.appendLog(logMsg);
@@ -6951,7 +7023,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           console.error(`[OpenAI] ❌ ${modelName} 할당량/속도 제한 — patient wait exhausted or hard quota`);
           throw new Error(
             `🚫 [OpenAI ${modelName}] API 한도를 초과했습니다.\n\n` +
-            `📌 원인: ${isHardQuota ? '월간 결제/크레딧 한도 소진' : `요청/토큰 한도(RPM/TPM) 초과 — 앱이 약 ${Math.round(rateLimitWaitedMs / 60_000)}분 대기했지만 아직 풀리지 않음`}\n\n` +
+            `📌 원인: ${isHardQuota ? '월간 결제/크레딧 한도 소진' : `요청/토큰 한도(RPM/TPM) 초과 — 앱이 약 ${formatWaitDurationKo(rateLimitWaitedMs)} 대기했지만 아직 풀리지 않음`}\n\n` +
             `💡 해결 방법:\n` +
             `  1) 그대로 다시 누르면 앱이 같은 모델로 천천히 대기하며 재시도합니다.\n` +
             `  2) 한도가 자주 걸리면 환경변수 OPENAI_MIN_INTERVAL_MS를 더 크게 설정하거나 잠시 후 실행하세요.\n` +
@@ -6961,26 +7033,39 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         }
 
         // 5) 서버/네트워크 에러 → 대기 후 재시도
+        const isConnectionIssue = isOpenAiConnectionIssue(error, errorMessage);
         const isRetryable =
           errorMessage.includes('500') || errorMessage.includes('502') || errorMessage.includes('503') ||
           errorMessage.includes('server error') || errorMessage.includes('internal error') ||
           errorMessage.includes('시간 초과') || errorMessage.includes('timeout') ||
           errorMessage.includes('빈 응답') || errorMessage.includes('empty') ||
           errorMessage.includes('network') || errorMessage.includes('fetch') ||
-          errorMessage.includes('econnreset') || errorMessage.includes('econnrefused');
+          errorMessage.includes('econnreset') || errorMessage.includes('econnrefused') ||
+          isConnectionIssue;
 
         if (isRetryable) {
-          console.log(`[OpenAI] ⚠️ ${modelName} 재시도 가능 에러 (${transientRetryCount + 1}/${maxTransientRetriesPerModel + 1}): ${(error as Error).message}`);
+          const retryKind = isConnectionIssue ? '연결 오류' : '일시 오류';
+          console.log(`[OpenAI] ⚠️ ${modelName} ${retryKind} (${transientRetryCount + 1}/${maxTransientRetriesPerModel + 1}): ${(error as Error).message}`);
           if (transientRetryCount < maxTransientRetriesPerModel) {
-            const delay = Math.min(1000 * Math.pow(2, transientRetryCount), 5000);
+            const delay = Math.min(5000 * Math.pow(2, transientRetryCount), 30000) + Math.floor(Math.random() * 1000);
             transientRetryCount++;
-            console.log(`[OpenAI] 🔄 ${delay}ms 후 재시도...`);
+            const retryMsg = `🔌 [OpenAI ${modelName}] ${retryKind} 감지 - ${Math.round(delay / 1000)}초 후 같은 모델로 재시도합니다.`;
+            console.log(`[OpenAI] ${retryMsg}`);
+            if (typeof (globalThis as any).window !== 'undefined' && typeof (globalThis as any).window.appendLog === 'function') {
+              (globalThis as any).window.appendLog(retryMsg);
+            }
             await sleepWithAbort(delay, signal);
             continue; // 같은 모델 재시도
           }
-          // 재시도 소진 → 다음 모델로
-          console.log(`[OpenAI] ⚠️ ${modelName} 재시도 소진, 다음 모델 시도`);
-          break;
+          throw new Error(
+            `OpenAI API 연결 실패로 같은 모델(${modelName})을 ${maxTransientRetriesPerModel + 1}회 재시도했지만 응답을 받지 못했습니다.\n\n` +
+            `📌 원인: 모델 문제가 아니라 PC/네트워크/방화벽/VPN/프록시/OpenAI 접속 경로의 일시적 연결 실패입니다.\n\n` +
+            `💡 해결 방법:\n` +
+            `  1) 인터넷 연결과 VPN/프록시/방화벽을 확인한 뒤 다시 실행하세요.\n` +
+            `  2) 같은 네트워크에서 https://api.openai.com 접속이 막히지 않는지 확인하세요.\n` +
+            `  3) 잠시 후 다시 실행하면 앱이 같은 OpenAI 모델로 재시도합니다.\n\n` +
+            `원본 오류: ${(error as Error).message}`
+          );
         }
 
         // 5) 알 수 없는 에러 → 다음 모델로 이동 (이전: 즉시 throw)
@@ -6988,6 +7073,14 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         break;
       }
     }
+  }
+
+  if (lastError && isOpenAiConnectionIssue(lastError, lastError.message)) {
+    throw new Error(
+      `OpenAI API 연결 실패. 시도한 모델: ${modelsToTry.join(', ')}\n` +
+      `마지막 오류: ${lastError.message}\n\n` +
+      `모델(${modelsToTry.join(', ')})이 없어져서가 아니라 네트워크 연결이 실패한 상태입니다.`
+    );
   }
 
   throw new Error(`OpenAI 모델 사용 불가. 시도한 모델: ${modelsToTry.join(', ')}\n마지막 오류: ${lastError?.message}`);
@@ -7206,7 +7299,7 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
       } catch (error) {
         lastError = error as Error;
         const errorMessage = (error as Error).message?.toLowerCase() || '';
-        const errorStr = JSON.stringify(error).toLowerCase();
+        const errorStr = safeStringifyError(error).toLowerCase();
         const statusText = String((error as any)?.status ?? (error as any)?.response?.status ?? '');
 
         // ✅ [2026-02-24 FIX] 에러 분류: 즉시 실패 vs 재시도 가능 vs 다음 모델
@@ -7271,7 +7364,7 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
             recordProviderRateLimitBackoff('Claude', modelName, waitMs);
             const logMsg =
               `⏳ [Claude ${modelName}] 요청/토큰 한도 대기 — ${Math.round(waitMs / 1000)}초 후 같은 모델로 자동 재시도 ` +
-              `(누적 ${Math.round(rateLimitWaitedMs / 60_000)}분/${Math.round(claudeRateLimitPatienceMs / 60_000)}분, 자동 폴백 없음)`;
+              `(누적 ${formatWaitDurationKo(rateLimitWaitedMs)}/${formatWaitBudgetKo(claudeRateLimitPatienceMs)}, 자동 폴백 없음)`;
             console.warn(logMsg);
             if (typeof (globalThis as any).window !== 'undefined' && typeof (globalThis as any).window.appendLog === 'function') {
               (globalThis as any).window.appendLog(logMsg);
@@ -7281,7 +7374,7 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
           }
 
           throw new Error(
-            `Claude API 요청/토큰 한도(RPM/TPM)를 초과했습니다. 앱이 같은 모델로 ${Math.round(rateLimitWaitedMs / 60_000)}분 대기했지만 아직 제한이 풀리지 않았습니다.\n` +
+            `Claude API 요청/토큰 한도(RPM/TPM)를 초과했습니다. 앱이 같은 모델로 ${formatWaitDurationKo(rateLimitWaitedMs)} 대기했지만 아직 제한이 풀리지 않았습니다.\n` +
             `원본 오류: ${(error as Error).message}`
           );
         }

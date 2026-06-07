@@ -47,6 +47,10 @@ function readConfigValue(settings, field) {
   return null;
 }
 
+function isMaskedSecretValue(value) {
+  return /[\u2022\u25CF*]/.test(String(value || ''));
+}
+
 function resolveOpenAiKeyCandidates(settings) {
   const candidates = [];
   let encryptedInSettings = false;
@@ -61,6 +65,10 @@ function resolveOpenAiKeyCandidates(settings) {
     if (typeof value !== 'string' || !value.trim()) continue;
     const trimmed = value.trim();
     if (trimmed.startsWith('enc:v1:')) {
+      encryptedInSettings = true;
+      continue;
+    }
+    if (isMaskedSecretValue(trimmed)) {
       encryptedInSettings = true;
       continue;
     }

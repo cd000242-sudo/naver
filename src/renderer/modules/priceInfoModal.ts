@@ -16,6 +16,24 @@ declare const apiClient: { call: (method: string, args: any[], opts?: any) => Pr
 // appendLog는 rendererUtils.ts에서 전역 스코프로 제공됨
 declare function appendLog(message: string, logOutputId?: string): void;
 
+function isMaskedSecretValue(value: string | undefined): boolean {
+  if (!value) return false;
+  return /[\u2022\u25CF*]/.test(value);
+}
+
+function readSecretInputValue(inputId: string, currentValue?: string): string | undefined {
+  const input = document.getElementById(inputId) as HTMLInputElement | null;
+  const current = currentValue?.trim();
+  const safeCurrent = current && !isMaskedSecretValue(current) ? current : undefined;
+  const realValue = input?.dataset?.realValue?.trim();
+  if (realValue && !isMaskedSecretValue(realValue)) return realValue;
+
+  const raw = input?.value?.trim();
+  if (!raw) return undefined;
+  if (isMaskedSecretValue(raw)) return safeCurrent;
+  return raw;
+}
+
 export async function initPriceInfoModal(): Promise<void> {
   // ✅ 가격 정보 모달 열기/닫기 로직 추가
   const openPriceInfoBtn = document.getElementById('open-price-info-btn');
@@ -942,6 +960,7 @@ export async function initPriceInfoModal(): Promise<void> {
     try {
 
         const isPackaged = await window.api.isPackaged();
+        const currentConfig = await window.api.getConfig().catch(() => ({}));
 
         // 사용자 프로필 필드
         const userDisplayName = document.getElementById('user-display-name') as HTMLInputElement;
@@ -978,29 +997,41 @@ export async function initPriceInfoModal(): Promise<void> {
           .map((key) => key.trim())
           .filter(Boolean);
 
+        const geminiApiKeyValue = readSecretInputValue('gemini-api-key', currentConfig?.geminiApiKey);
+        const openaiApiKeyValue = readSecretInputValue('openai-api-key', currentConfig?.openaiApiKey || currentConfig?.openaiImageApiKey);
+        const claudeApiKeyValue = readSecretInputValue('claude-api-key', currentConfig?.claudeApiKey);
+        const perplexityApiKeyValue = readSecretInputValue('perplexity-api-key', currentConfig?.perplexityApiKey);
+        const unsplashApiKeyValue = readSecretInputValue('unsplash-api-key', currentConfig?.unsplashApiKey);
+        const pixabayApiKeyValue = readSecretInputValue('pixabay-api-key', currentConfig?.pixabayApiKey);
+        const naverClientSecretValue = readSecretInputValue('naver-client-secret', currentConfig?.naverClientSecret || currentConfig?.naverDatalabClientSecret);
+        const naverAdApiKeyValue = readSecretInputValue('naver-ad-api-key', currentConfig?.naverAdApiKey);
+        const naverAdSecretKeyValue = readSecretInputValue('naver-ad-secret-key', currentConfig?.naverAdSecretKey);
+        const leonardoaiApiKeyValue = readSecretInputValue('leonardoai-api-key', currentConfig?.leonardoaiApiKey);
+        const deepinfraApiKeyValue = readSecretInputValue('deepinfra-api-key', currentConfig?.deepinfraApiKey);
+
         let config: any = {
           dailyPostLimit: parseInt(dailyPostLimit?.value || '3'),
           freeQuotaPublish: parseInt(freeQuotaPublish?.value || '2'),
           freeQuotaContent: parseInt(freeQuotaContent?.value || '5'),
           freeQuotaMedia: parseInt(freeQuotaMedia?.value || '30'),
-          geminiApiKey: geminiApiKey?.value.trim() || undefined,
+          geminiApiKey: geminiApiKeyValue,
           geminiApiKeys: parsedGeminiExtraKeys,
           geminiUseFreeQuotaBeforePaid: geminiFreeQuotaFirst?.checked !== false,
-          unsplashApiKey: unsplashApiKey?.value.trim() || undefined,
-          pixabayApiKey: pixabayApiKey?.value.trim() || undefined,
+          unsplashApiKey: unsplashApiKeyValue,
+          pixabayApiKey: pixabayApiKeyValue,
           naverClientId: naverClientIdInput?.value.trim() || undefined, // ✅ 네이버 검색 API 호환용
-          naverClientSecret: naverClientSecretInput?.value.trim() || undefined, // ✅ 네이버 검색 API 호환용
+          naverClientSecret: naverClientSecretValue, // ✅ 네이버 검색 API 호환용
           naverDatalabClientId: naverClientIdInput?.value.trim() || undefined, // ✅ 네이버 검색 API
-          naverDatalabClientSecret: naverClientSecretInput?.value.trim() || undefined, // ✅ 네이버 검색 API
-          naverAdApiKey: naverAdApiKeyInput?.value.trim() || undefined, // ✅ 네이버 광고 API
-          naverAdSecretKey: naverAdSecretKeyInput?.value.trim() || undefined, // ✅ 네이버 광고 API
+          naverDatalabClientSecret: naverClientSecretValue, // ✅ 네이버 검색 API
+          naverAdApiKey: naverAdApiKeyValue, // ✅ 네이버 광고 API
+          naverAdSecretKey: naverAdSecretKeyValue, // ✅ 네이버 광고 API
           naverAdCustomerId: naverAdCustomerIdInput?.value.trim() || undefined, // ✅ 네이버 광고 API
           // ✅ [2026-02-22] 새 이미지 프로바이더 API 키
-          openaiImageApiKey: (document.getElementById('openai-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-02-23] OpenAI API 키와 통합
-          leonardoaiApiKey: (document.getElementById('leonardoai-api-key') as HTMLInputElement)?.value.trim() || undefined,
+          openaiImageApiKey: openaiApiKeyValue, // ✅ [2026-02-23] OpenAI API 키와 통합
+          leonardoaiApiKey: leonardoaiApiKeyValue,
 
           leonardoaiModel: (document.getElementById('leonardoai-model-select') as HTMLSelectElement)?.value || 'seedream-4.5',
-          deepinfraApiKey: (document.getElementById('deepinfra-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-01-26] DeepInfra API
+          deepinfraApiKey: deepinfraApiKeyValue, // ✅ [2026-01-26] DeepInfra API
           customImageSavePath: customImageSavePathInput?.value.trim() || undefined,
           // ✅ [v2.10.58] 비용 절감 토글 4종 저장 (silent 폴백 0, 사용자 명시)
           costSaverMode: (document.getElementById('cost-saver-mode') as HTMLInputElement | null)?.checked || false,
@@ -1043,9 +1074,9 @@ export async function initPriceInfoModal(): Promise<void> {
           })(),
           imagePreset: (document.getElementById('image-preset-input') as HTMLInputElement)?.value as 'budget' | 'premium' | 'custom' || 'custom',
           // ✅ [2026-02-22 FIX] primaryGeminiTextModel에서 defaultAiProvider 자동 파생
-          openaiApiKey: (document.getElementById('openai-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-02-22] OpenAI API
-          claudeApiKey: (document.getElementById('claude-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-02-22] Claude API
-          perplexityApiKey: (document.getElementById('perplexity-api-key') as HTMLInputElement)?.value.trim() || undefined, // ✅ [2026-03-30] Perplexity API 키 저장 누락 수정
+          openaiApiKey: openaiApiKeyValue, // ✅ [2026-02-22] OpenAI API
+          claudeApiKey: claudeApiKeyValue, // ✅ [2026-02-22] Claude API
+          perplexityApiKey: perplexityApiKeyValue, // ✅ [2026-03-30] Perplexity API 키 저장 누락 수정
           defaultAiProvider: (() => { const m = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value; return m === 'perplexity-sonar' ? 'perplexity' : (m === 'openai-gpt4o' || m === 'openai-gpt4o-mini' || m === 'openai-gpt41' || m === 'openai-gpt4o-search') ? 'openai' : (m === 'claude-haiku' || m === 'claude-sonnet' || m === 'claude-opus') ? 'claude' : 'gemini'; })(),
         };
 

@@ -160,6 +160,19 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
       expect(content).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*Math\.max\(baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts\)/);
       expect(content).toMatch(/SAME_ENGINE_RECOVERY/);
     });
+
+    it('OpenAI connection errors are retried and not mislabeled as unavailable model', () => {
+      expect(content).toMatch(/function\s+isOpenAiConnectionIssue/);
+      expect(content).toMatch(/connection error/);
+      expect(content).toMatch(/maxTransientRetriesPerModel\s*=\s*3/);
+      expect(content).toMatch(/OpenAI API 연결 실패/);
+    });
+
+    it('provider wait messages never round sub-minute waits down to 0 minutes', () => {
+      expect(content).toMatch(/function\s+formatWaitDurationKo/);
+      expect(content).toMatch(/1분 미만/);
+      expect(content).not.toMatch(/RPM\/TPM.*Math\.round\([^)]*\/ 60_000\).*분 동안 풀리지/);
+    });
   });
 
   describe('UI 기본값 — Claude Haiku가 디폴트 선택', () => {
