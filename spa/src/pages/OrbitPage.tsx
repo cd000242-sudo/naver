@@ -24,7 +24,7 @@ const SCREENSHOTS = [
     ['플랫폼 연동', '/images/orbit/orbit-platform-settings.png', 'Blogger와 WordPress 연결 정보를 한 화면에서 확인'],
     ['외부유입 생성', '/images/orbit/orbit-external-traffic.png', '공개 글을 기준으로 채널별 보조 문안 생성'],
     ['내부링크', '/images/orbit/orbit-spider-links.png', '종합글과 하위글을 연결하는 거미줄 구조'],
-    ['이미지 도구', '/images/orbit/orbit-naver-image-tools.png', '썸네일, 배너, 발행용 이미지 흐름 보조'],
+    ['이미지 도구', '/images/orbit/leadernam-orbit-download.png', '썸네일, 배너, 발행용 이미지 흐름 보조'],
 ];
 
 const TRAFFIC_SHOTS = [
@@ -59,8 +59,14 @@ type ShotProps = {
 };
 
 function Shot({ title, src, alt, desc, wide = false }: ShotProps) {
+    const shotClassName = [
+        'orbit-shot',
+        wide ? 'orbit-shot-wide' : '',
+        src.includes('leadernam-orbit-download') ? 'orbit-shot-contain' : '',
+    ].filter(Boolean).join(' ');
+
     return (
-        <figure className={wide ? 'orbit-shot orbit-shot-wide' : 'orbit-shot'}>
+        <figure className={shotClassName}>
             <div className="orbit-shot-bar">
                 <span className="dot red" />
                 <span className="dot yellow" />
@@ -99,8 +105,8 @@ function OrbitPage() {
                     </div>
                     <Shot
                         title="Leaders Orbit - Global Publisher"
-                        src="/images/orbit/orbit-smart-keyword.png"
-                        alt="Leaders Orbit 키워드 입력과 발행 설정 화면"
+                        src="/images/orbit/leadernam-orbit-download.png"
+                        alt="Leaders Orbit 글로벌 퍼블리셔 대표 이미지"
                         wide
                     />
                 </div>
@@ -501,6 +507,15 @@ function OrbitPage() {
                 }
                 .orbit-shot-wide img {
                     aspect-ratio: 16 / 7;
+                }
+                .orbit-shot-contain .orbit-zoom-trigger {
+                    background: #020617;
+                }
+                .orbit-shot-contain img,
+                .orbit-shot-wide.orbit-shot-contain img {
+                    aspect-ratio: 4 / 3;
+                    object-fit: contain;
+                    object-position: center;
                 }
                 .orbit-shot figcaption {
                     padding: 14px 16px;

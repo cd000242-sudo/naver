@@ -55,7 +55,7 @@ const PRODUCTS = {
     orbit: {
         name: 'LEADERNAM Orbit',
         version: '블로그스팟·워드프레스 자동화 · v3.8.112',
-        image: '/images/orbit/orbit-platform-settings.png',
+        image: '/images/orbit/leadernam-orbit-download.png',
         accent: '#44d7b6',
         borderColor: 'rgba(68,215,182,0.28)',
         downloads: [
