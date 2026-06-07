@@ -15,6 +15,39 @@ interface Notice { badge: string; date: string; title: string; preview: string; 
 interface Income { emoji: string; amount: string; author: string; date: string; desc: string; tags: string[]; }
 interface Tip { author?: string; title: string; detail: string; icon?: string; timestamp?: string; }
 
+const communityFieldStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '13px 15px',
+    background: '#111827',
+    border: '1px solid rgba(255,255,255,0.22)',
+    borderRadius: 10,
+    color: '#f8fafc',
+    fontSize: 14,
+    outline: 'none',
+    boxSizing: 'border-box',
+    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.04), 0 10px 24px rgba(0,0,0,0.18)',
+};
+
+const communityIncomeCardStyle: React.CSSProperties = {
+    maxWidth: 720,
+    margin: '0 auto 36px',
+    background: 'linear-gradient(180deg, rgba(34,28,12,0.96), rgba(15,18,28,0.97))',
+    border: '1px solid rgba(255,215,0,0.42)',
+    borderRadius: 16,
+    padding: 28,
+    boxShadow: '0 22px 60px rgba(0,0,0,0.36)',
+};
+
+const communityTipCardStyle: React.CSSProperties = {
+    maxWidth: 720,
+    margin: '0 auto 36px',
+    background: 'linear-gradient(180deg, rgba(16,28,54,0.96), rgba(14,18,32,0.97))',
+    border: '1px solid rgba(100,149,237,0.45)',
+    borderRadius: 16,
+    padding: 28,
+    boxShadow: '0 22px 60px rgba(0,0,0,0.36)',
+};
+
 const NOTICE_BADGE_LABEL: Record<string, string> = { important: '중요', update: '업데이트', event: '이벤트', tip: '안내' };
 
 const FALLBACK_NOTICES: Notice[] = [
@@ -98,6 +131,20 @@ function CommunityPage() {
 
     return (
         <div style={{ position: 'relative', zIndex: 1 }}>
+            <style>{`
+                .community-form-field::placeholder {
+                    color: rgba(226,232,240,0.68);
+                    opacity: 1;
+                }
+                .community-form-field:focus {
+                    border-color: rgba(255,215,0,0.72) !important;
+                    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 3px rgba(255,215,0,0.16), 0 14px 28px rgba(0,0,0,0.22) !important;
+                }
+                .community-form-field.tip-focus:focus {
+                    border-color: rgba(100,149,237,0.8) !important;
+                    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 3px rgba(100,149,237,0.18), 0 14px 28px rgba(0,0,0,0.22) !important;
+                }
+            `}</style>
             <section style={{ padding: '140px 20px 100px', maxWidth: 1200, margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 40 }}>
                     <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>COMMUNITY</span>
@@ -209,25 +256,25 @@ function IncomePanel({ items }: { items: Income[] }) {
         setSubmitting(false);
     };
 
-    const inputStyle: React.CSSProperties = { width: '100%', padding: '10px 12px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, color: '#fff', fontSize: 13, outline: 'none', boxSizing: 'border-box' };
+    const inputStyle = communityFieldStyle;
 
     return (
         <div>
             {/* Submit form */}
-            <div style={{ maxWidth: 720, margin: '0 auto 36px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 16, padding: 28 }}>
+            <div style={communityIncomeCardStyle}>
                 <h3 style={{ fontSize: 16, color: '#FFD700', marginBottom: 6 }}>💰 내 수익 인증 올리기</h3>
-                <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13, marginBottom: 18 }}>검토 후 1~2일 내 공개됩니다. 누구나 가능합니다.</p>
+                <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: 13, marginBottom: 18 }}>검토 후 1~2일 내 공개됩니다. 누구나 가능합니다.</p>
                 <div style={{ display: 'grid', gridTemplateColumns: '70px 1fr 1fr', gap: 12, marginBottom: 12 }}>
-                    <input value={form.emoji} maxLength={4} onChange={(e) => update('emoji', e.target.value)} placeholder="💰" style={{ ...inputStyle, textAlign: 'center', fontSize: 20 }} />
-                    <input value={form.amount} maxLength={50} onChange={(e) => update('amount', e.target.value)} placeholder="금액 (예: 월 127만원)" style={inputStyle} />
-                    <input value={form.author} maxLength={20} onChange={(e) => update('author', e.target.value)} placeholder="닉네임" style={inputStyle} />
+                    <input className="community-form-field" value={form.emoji} maxLength={4} onChange={(e) => update('emoji', e.target.value)} placeholder="💰" style={{ ...inputStyle, textAlign: 'center', fontSize: 20 }} />
+                    <input className="community-form-field" value={form.amount} maxLength={50} onChange={(e) => update('amount', e.target.value)} placeholder="금액 (예: 월 127만원)" style={inputStyle} />
+                    <input className="community-form-field" value={form.author} maxLength={20} onChange={(e) => update('author', e.target.value)} placeholder="닉네임" style={inputStyle} />
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
-                    <input type="email" value={form.email} onChange={(e) => update('email', e.target.value)} placeholder="이메일 (선택 — 공개 안 됨)" style={inputStyle} />
-                    <input value={form.date} maxLength={20} onChange={(e) => update('date', e.target.value)} placeholder="시점 (예: 2026.05)" style={inputStyle} />
+                    <input className="community-form-field" type="email" value={form.email} onChange={(e) => update('email', e.target.value)} placeholder="이메일 (선택 — 공개 안 됨)" style={inputStyle} />
+                    <input className="community-form-field" value={form.date} maxLength={20} onChange={(e) => update('date', e.target.value)} placeholder="시점 (예: 2026.05)" style={inputStyle} />
                 </div>
-                <textarea value={form.desc} maxLength={500} rows={3} onChange={(e) => update('desc', e.target.value)} placeholder="어떤 제품으로 어떻게 수익화했는지 1-2줄" style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.6, marginBottom: 12 }} />
-                <input value={form.tags} maxLength={200} onChange={(e) => update('tags', e.target.value)} placeholder="태그 (콤마 구분: Better Life Naver, 쿠팡파트너스, 7개 블로그)" style={inputStyle} />
+                <textarea className="community-form-field" value={form.desc} maxLength={500} rows={3} onChange={(e) => update('desc', e.target.value)} placeholder="어떤 제품으로 어떻게 수익화했는지 1-2줄" style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.6, marginBottom: 12 }} />
+                <input className="community-form-field" value={form.tags} maxLength={200} onChange={(e) => update('tags', e.target.value)} placeholder="태그 (콤마 구분: Better Life Naver, 쿠팡파트너스, 7개 블로그)" style={inputStyle} />
                 <button onClick={submit} disabled={submitting} style={{ marginTop: 14, width: '100%', padding: 14, background: submitting ? 'rgba(255,255,255,0.08)' : 'linear-gradient(135deg, #c9a84c, #d4a012)', color: submitting ? 'rgba(255,255,255,0.4)' : '#1a1a2e', border: 'none', borderRadius: 10, fontWeight: 700, cursor: submitting ? 'not-allowed' : 'pointer', fontSize: 14 }}>{submitting ? '등록 중...' : '수익 인증 등록하기'}</button>
                 {msg && <div style={{ marginTop: 12, fontSize: 13, textAlign: 'center', color: msg.color }}>{msg.text}</div>}
             </div>
@@ -295,20 +342,20 @@ function TipsPanel({ items, onSubmitted }: { items: Tip[]; onSubmitted: () => vo
         setSubmitting(false);
     };
 
-    const inputStyle: React.CSSProperties = { width: '100%', padding: '10px 12px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, color: '#fff', fontSize: 13, outline: 'none', boxSizing: 'border-box' };
+    const inputStyle = communityFieldStyle;
 
     return (
         <div>
             {/* Submit form */}
-            <div style={{ maxWidth: 720, margin: '0 auto 36px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(100,149,237,0.25)', borderRadius: 16, padding: 28 }}>
+            <div style={communityTipCardStyle}>
                 <h3 style={{ fontSize: 16, color: '#6495ed', marginBottom: 6 }}>💡 내 활용 팁 공유하기</h3>
-                <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13, marginBottom: 18 }}>자유롭게 작성하세요. 누구나 가능합니다.</p>
+                <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: 13, marginBottom: 18 }}>자유롭게 작성하세요. 누구나 가능합니다.</p>
                 <div style={{ display: 'flex', gap: 12, marginBottom: 12, flexWrap: 'wrap' }}>
-                    <input value={form.author} maxLength={20} onChange={(e) => update('author', e.target.value)} placeholder="닉네임" style={{ ...inputStyle, flex: 1, minWidth: 180 }} />
-                    <input type="email" value={form.email} onChange={(e) => update('email', e.target.value)} placeholder="이메일 (선택 — 공개 안 됨)" style={{ ...inputStyle, flex: 1.3, minWidth: 200 }} />
+                    <input className="community-form-field tip-focus" value={form.author} maxLength={20} onChange={(e) => update('author', e.target.value)} placeholder="닉네임" style={{ ...inputStyle, flex: 1, minWidth: 180 }} />
+                    <input className="community-form-field tip-focus" type="email" value={form.email} onChange={(e) => update('email', e.target.value)} placeholder="이메일 (선택 — 공개 안 됨)" style={{ ...inputStyle, flex: 1.3, minWidth: 200 }} />
                 </div>
-                <input value={form.title} maxLength={100} onChange={(e) => update('title', e.target.value)} placeholder="제목 (예: 키워드 분석 꿀팁)" style={{ ...inputStyle, marginBottom: 12 }} />
-                <textarea value={form.detail} maxLength={1500} rows={5} onChange={(e) => update('detail', e.target.value)} placeholder="활용 팁을 자세히 작성해주세요..." style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.6 }} />
+                <input className="community-form-field tip-focus" value={form.title} maxLength={100} onChange={(e) => update('title', e.target.value)} placeholder="제목 (예: 키워드 분석 꿀팁)" style={{ ...inputStyle, marginBottom: 12 }} />
+                <textarea className="community-form-field tip-focus" value={form.detail} maxLength={1500} rows={5} onChange={(e) => update('detail', e.target.value)} placeholder="활용 팁을 자세히 작성해주세요..." style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.6 }} />
                 <button onClick={submit} disabled={submitting} style={{ marginTop: 14, width: '100%', padding: 14, background: submitting ? 'rgba(255,255,255,0.08)' : 'linear-gradient(135deg, #6495ed, #4169e1)', color: '#fff', border: 'none', borderRadius: 10, fontWeight: 700, cursor: submitting ? 'not-allowed' : 'pointer', fontSize: 14 }}>{submitting ? '등록 중...' : '팁 등록하기'}</button>
                 {msg && <div style={{ marginTop: 12, fontSize: 13, textAlign: 'center', color: msg.color }}>{msg.text}</div>}
             </div>
