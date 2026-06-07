@@ -240,7 +240,7 @@ function LewordPage() {
                     <SectionLabel color={C.gold}>🏆 MEGA FEATURE 03</SectionLabel>
                     <SectionTitle>SSS는 <span style={{ color: C.gold }}>4단 게이트</span>를<br />모두 통과한 키워드뿐입니다</SectionTitle>
                     <p style={{ fontSize: 18, color: C.textSecondary, maxWidth: 700, margin: '0 auto 60px' }}>점수만 높다고 SSS가 아닙니다. 검색량·문서수·비율을 모두 통과해야만 최상위 등급입니다.</p>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 16, maxWidth: 1100, margin: '60px auto 0' }}>
+                    <div className="leword-grade-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 16, maxWidth: 1100, margin: '60px auto 0' }}>
                         {GRADES.map((g) => (
                             <div key={g.tier} style={{
                                 background: g.highlight ? 'linear-gradient(180deg, rgba(255,215,0,0.10), rgba(18,18,26,0.95))' : C.bgCard,
@@ -325,8 +325,8 @@ function LewordPage() {
                         <SectionLabel color={C.neonBlue}>📊 비교</SectionLabel>
                         <SectionTitle>왜 <span style={{ color: C.purpleLight }}>LEWORD</span>인가?</SectionTitle>
                     </div>
-                    <div style={{ overflowX: 'auto' }}>
-                        <table style={{ width: '100%', minWidth: 600, borderCollapse: 'collapse', maxWidth: 900, margin: '0 auto' }}>
+                    <div className="leword-table-wrap" style={{ overflowX: 'auto' }}>
+                        <table className="leword-compare-table" style={{ width: '100%', minWidth: 600, borderCollapse: 'collapse', maxWidth: 900, margin: '0 auto' }}>
                             <thead>
                                 <tr style={{ background: 'rgba(124,58,237,0.12)' }}>
                                     <th style={{ padding: '18px 24px', textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.06)', fontSize: 16, fontWeight: 700 }}>기능</th>
@@ -392,8 +392,8 @@ function LewordPage() {
                     <SectionLabel color={C.purpleLight}>💎 PRICING</SectionLabel>
                     <SectionTitle>Leword도 이제<br /><span style={{ background: C.gradPremium, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>올인원 이용권에 포함</span></SectionTitle>
                     <p style={{ color: C.textSecondary, fontSize: 16, maxWidth: 680, margin: '0 auto 28px', lineHeight: 1.8 }}>
-                        네이버 자동화툴, 블로그스팟·워드프레스툴, Leword를 따로 구매하지 않아도 됩니다.
-                        기간제 올인원 이용권 하나로 키워드 분석까지 함께 사용하세요.
+                        올인원 코드를 하나로 공유하는 방식이 아닙니다.
+                        LEWORD는 구매 기간에 맞는 LEWORD 전용 라이선스 코드가 별도로 발급됩니다.
                     </p>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', maxWidth: 900, margin: '0 auto', gap: 16, alignItems: 'stretch' }}>
                         {[
@@ -488,6 +488,25 @@ function LewordPage() {
                     ))}
                 </div>
             </section>
+
+            <style>{`
+                @media (max-width: 640px) {
+                    .leword-grade-grid {
+                        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                    }
+
+                    .leword-table-wrap {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        overflow-x: auto !important;
+                        overscroll-behavior-x: contain;
+                    }
+
+                    .leword-compare-table {
+                        min-width: 520px !important;
+                    }
+                }
+            `}</style>
 
             {/* FINAL CTA */}
             <section style={{ padding: '120px 20px', background: C.bgDark, textAlign: 'center', position: 'relative', zIndex: 1 }}>

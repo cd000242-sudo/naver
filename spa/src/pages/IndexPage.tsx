@@ -106,7 +106,7 @@ function IndexPage() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, maxWidth: 1000, margin: '0 auto' }}>
                         {[
                             { to: '/products', emoji: '🚀', title: '제품 소개', desc: 'Leaders Pro의 강력한 블로그 자동화 기능을\n자세히 확인하세요', cta: '자세히 보기 →' },
-                            { to: '/pricing', emoji: '💰', title: '구매', desc: '올인원 기간권 선택 및\n토스페이먼츠 안전 결제', cta: '가격표 보기 →', highlight: true, badge: '💳 결제' },
+                            { to: '/pricing', emoji: '💰', title: '구매', desc: '제품별 기간권 선택 및\n토스페이먼츠 안전 결제', cta: '가격표 보기 →', highlight: true, badge: '💳 결제' },
                             { to: '/reviews', emoji: '⭐', title: '후기 & FAQ', desc: '실제 사용자들의 생생한 후기와\n자주 묻는 질문 모음', cta: '후기 보기 →' },
                             { to: '/community', emoji: '👥', title: '커뮤니티', desc: '공지사항, 수익 인증,\n활용 팁 확인', cta: '커뮤니티 →' },
                             { to: '/download', emoji: '📥', title: '다운로드', desc: '구매 후 비밀번호 입력으로\n최신 버전 다운로드', cta: '다운로드 →' },

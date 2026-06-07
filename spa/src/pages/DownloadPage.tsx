@@ -22,7 +22,7 @@ const PRODUCTS = {
     },
     leword: {
         name: 'Leword',
-        version: 'AI 키워드 인텔리전스 · 올인원 구매자용 · 최신 자동 반영',
+        version: 'AI 키워드 인텔리전스 · LEWORD 라이선스 보유자용 · 최신 자동 반영',
         image: '/images/leword/hero-banner.png',
         defaultUrl: 'https://github.com/cd000242-sudo/leword-app/releases/latest',
         githubRepo: 'cd000242-sudo/leword-app',
@@ -89,7 +89,7 @@ function DownloadPage() {
                     <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>DOWNLOAD</span>
                     <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>프로그램 다운로드</h2>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>비밀번호를 입력하면 최신 버전을 다운로드할 수 있습니다.</p>
-                    <p style={{ color: 'rgba(255,255,255,0.52)', fontSize: 13, marginTop: 8 }}>무료 체험은 Better Life Naver만 제공됩니다. LEWORD는 올인원 라이선스 보유자용입니다.</p>
+                    <p style={{ color: 'rgba(255,255,255,0.52)', fontSize: 13, marginTop: 8 }}>무료 체험은 Better Life Naver만 제공됩니다. LEWORD는 별도 LEWORD 라이선스 보유자용입니다.</p>
                 </div>
 
                 <LeadCapture />

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 /**
- * 요금제 — 기간제 올인원 이용권.
+ * 요금제 — 제품별 기간제 이용권.
  * Toss Payments SDK (v1) 동적 로드 후 requestBillingAuth (정기구독).
  * 카드 결제는 amountCard(VAT 10% 포함)가 있으면 그 금액을 청구.
  * success/fail URL은 origin 직접 경로(leaderspro.kr root) 사용.
@@ -27,14 +27,14 @@ interface Plan {
 
 const PLANS: Record<string, Plan[]> = {
     naver: [
-        { id: 'free-naver', name: 'Better Life Naver 무료 체험', desc: '네이버 자동화 먼저 체험', amount: 0, period: '무료', free: true, badge: { text: '🎁 FREE', type: 'trial' }, features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', 'LEWORD·Orbit은 올인원 결제 후 이용'] },
-        { id: 'naver-monthly', name: '올인원 1개월', desc: '모든 툴을 가볍게 시작', amount: 50000, amountCard: 55000, period: '/ 월 (공급가)', features: ['네이버 자동화툴 이용', '블로그스팟·워드프레스툴 이용', 'Leword 키워드 분석 이용', '이메일 고객 지원'] },
-        { id: 'naver-quarterly', name: '올인원 3개월', desc: '여러 채널을 안정적으로 운영', amount: 120000, period: '/ 3개월', monthly: '월 40,000원', features: ['네이버 자동화툴 이용', '블로그스팟·워드프레스툴 이용', 'Leword 키워드 분석 이용', '우선 고객 지원'] },
-        { id: 'naver-yearly', name: '올인원 1년', desc: '가장 합리적인 통합 이용권', amount: 400000, period: '/ 년', monthly: '월 33,333원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['네이버 자동화툴 이용', '블로그스팟·워드프레스툴 이용', 'Leword + 전용 커뮤니티', '1:1 우선 지원'] },
+        { id: 'free-naver', name: 'Better Life Naver 무료 체험', desc: '네이버 자동화 먼저 체험', amount: 0, period: '무료', free: true, badge: { text: '🎁 FREE', type: 'trial' }, features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', 'LEWORD·Orbit은 각 제품 라이선스 필요'] },
+        { id: 'naver-monthly', name: 'Better Life Naver 1개월', desc: '네이버 자동화툴을 가볍게 시작', amount: 50000, amountCard: 55000, period: '/ 월 (공급가)', features: ['네이버 자동화툴 이용', 'AI 콘텐츠 생성', '자동 발행 기능', '이메일 고객 지원'] },
+        { id: 'naver-quarterly', name: 'Better Life Naver 3개월', desc: '네이버 채널을 안정적으로 운영', amount: 120000, period: '/ 3개월', monthly: '월 40,000원', features: ['네이버 자동화툴 이용', '다계정 운영 보조', '자동 발행 기능', '우선 고객 지원'] },
+        { id: 'naver-yearly', name: 'Better Life Naver 1년', desc: '가장 합리적인 네이버 기간권', amount: 400000, period: '/ 년', monthly: '월 33,333원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['네이버 자동화툴 이용', '라이선스 기간 내 업데이트', '전용 커뮤니티 안내', '1:1 우선 지원'] },
     ],
 };
 
-const TAB_LABELS: Record<string, string> = { naver: 'A · Leaders Pro All Access' };
+const TAB_LABELS: Record<string, string> = { naver: 'A · Better Life Naver' };
 const TAB_KEYS = ['naver'] as const;
 type TabKey = typeof TAB_KEYS[number];
 
@@ -85,7 +85,7 @@ function PricingPage() {
 
     useEffect(() => {
         const prev = document.title;
-        document.title = '기간제 올인원 이용권 — Leaders Pro';
+        document.title = '제품별 기간제 이용권 — Leaders Pro';
         return () => { document.title = prev; };
     }, []);
 
@@ -152,7 +152,7 @@ function PricingPage() {
         if (!selected) return '플랜을 선택해주세요';
         const charge = selected.amountCard || selected.amount;
         const vatNote = selected.amountCard ? ' (VAT 포함)' : '';
-        return `올인원 라이선스 시작 — 7일 후 ${charge.toLocaleString()}원${vatNote}`;
+        return `${selected.name} 시작 — 7일 후 ${charge.toLocaleString()}원${vatNote}`;
     })();
 
     return (
@@ -160,8 +160,8 @@ function PricingPage() {
             <section style={{ padding: '140px 20px 80px', maxWidth: 1200, margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 40 }}>
                     <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>PRICING</span>
-                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>기간제 올인원 이용권</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>하나의 올인원 라이선스 코드로 네이버 자동화툴, 블로그스팟·워드프레스툴, Leword를 모두 사용할 수 있습니다.</p>
+                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>제품별 기간제 이용권</h2>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>라이선스 코드는 제품별로 따로 발급됩니다. 네이버, Orbit, LEWORD는 각 앱에 맞는 코드로 이용해주세요.</p>
                 </div>
 
                 {/* Product tabs */}
@@ -284,7 +284,7 @@ function PricingPage() {
                             animation: emailShake ? 'shakePay 0.4s' : 'none',
                         }}
                     />
-                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 6, marginBottom: 14 }}>결제 완료 후 이 이메일로 올인원 라이선스 코드 1개가 발송됩니다.</p>
+                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 6, marginBottom: 14 }}>결제 완료 후 이 이메일로 선택한 제품의 라이선스 코드가 발송됩니다.</p>
 
                     <button
                         onClick={requestPayment}
@@ -302,8 +302,8 @@ function PricingPage() {
                         <span>{paying ? '결제 중...' : chargeLabel}</span>
                     </button>
                     <p style={{ textAlign: 'center', color: '#c9a84c', fontSize: 13, marginTop: 10, lineHeight: 1.7 }}>
-                        카드 등록 후 올인원 라이선스 코드 1개가 발급됩니다. 제품별 코드를 따로 3개 발급하는 방식이 아닙니다.<br />
-                        무료 다운로드 체험은 Better Life Naver 기준이며, LEWORD·Orbit은 올인원 라이선스에서 함께 이용합니다.
+                        라이선스 코드는 제품별로 따로 관리됩니다. 다른 앱을 이용하려면 해당 제품의 코드가 별도로 필요합니다.<br />
+                        무료 다운로드 체험은 Better Life Naver 기준이며, LEWORD·Orbit은 각 제품 라이선스로 이용합니다.
                     </p>
                     <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: 12, marginTop: 8 }}>
                         결제 진행 시 <Link to="/terms" style={{ color: '#FFD700' }}>이용약관</Link> 및 <Link to="/privacy" style={{ color: '#FFD700' }}>개인정보처리방침</Link>에 동의하는 것으로 간주됩니다.
