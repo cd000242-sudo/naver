@@ -7,6 +7,7 @@ import LewordPage from './pages/LewordPage';
 import OrbitPage from './pages/OrbitPage';
 import PricingPage from './pages/PricingPage';
 import DownloadPage from './pages/DownloadPage';
+import ChatbotsPage from './pages/ChatbotsPage';
 import ReviewsPage from './pages/ReviewsPage';
 import CommunityPage from './pages/CommunityPage';
 import LookupPage from './pages/LookupPage';
@@ -34,6 +35,8 @@ function App() {
                 <Route path="/pricing.html" element={<PricingPage />} />
                 <Route path="/download" element={<DownloadPage />} />
                 <Route path="/download.html" element={<DownloadPage />} />
+                <Route path="/chatbots" element={<ChatbotsPage />} />
+                <Route path="/chatbots.html" element={<ChatbotsPage />} />
                 <Route path="/reviews" element={<ReviewsPage />} />
                 <Route path="/reviews.html" element={<ReviewsPage />} />
                 <Route path="/community" element={<CommunityPage />} />

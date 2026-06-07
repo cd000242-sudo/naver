@@ -12,6 +12,7 @@ function Footer() {
                     <Link to="/terms" style={{ color: '#a0a0b0', fontSize: 14, textDecoration: 'none' }}>이용약관</Link>
                     <Link to="/refund" style={{ color: '#a0a0b0', fontSize: 14, textDecoration: 'none' }}>환불정책</Link>
                     <Link to="/privacy" style={{ color: '#a0a0b0', fontSize: 14, textDecoration: 'none' }}>개인정보처리방침</Link>
+                    <Link to="/chatbots" style={{ color: '#a0a0b0', fontSize: 14, textDecoration: 'none' }}>무료 챗봇</Link>
                     <Link to="/lookup" style={{ color: '#a0a0b0', fontSize: 14, textDecoration: 'none' }}>주문 조회</Link>
                     <a href="mailto:cd000242@gmail.com" style={{ color: '#a0a0b0', fontSize: 14, textDecoration: 'none' }}>고객 문의</a>
                 </div>
