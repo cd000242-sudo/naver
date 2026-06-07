@@ -511,6 +511,7 @@ function ProductsPage() {
                     gap: 12px;
                     padding: 16px;
                     background: rgba(255,255,255,0.04);
+                    align-items: stretch;
                 }
 
                 .suite-preview img,
@@ -520,6 +521,16 @@ function ProductsPage() {
                     border-radius: 8px;
                     border: 1px solid rgba(255,255,255,0.12);
                     background: #071018;
+                }
+
+                .suite-preview img {
+                    height: 312px;
+                    object-fit: cover;
+                    object-position: left top;
+                }
+
+                .suite-preview img:nth-child(2) {
+                    object-position: center top;
                 }
 
                 .products-section {
@@ -960,6 +971,10 @@ function ProductsPage() {
 
                     .products-media {
                         min-height: 220px;
+                    }
+
+                    .suite-preview img {
+                        height: 220px;
                     }
                 }
             `}</style>
