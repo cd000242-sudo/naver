@@ -1,6 +1,177 @@
 import { getChromiumExecutablePath } from './browserUtils.js';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 
+const NAVER_BLOG_MOBILE_FIRST_TIMEOUT_MS = 12000;
+const NAVER_BLOG_MOBILE_FALLBACK_TIMEOUT_MS = 8000;
+const NAVER_BLOG_PLAYWRIGHT_GOTO_TIMEOUT_MS = 18000;
+const NAVER_BLOG_FAST_PATH_MIN_CHARS = 500;
+const NAVER_BLOG_FAST_PATH_MIN_PARAGRAPHS = 3;
+
+function cleanNaverBlogText(text: string): string {
+  return String(text || '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\u00a0/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function shouldSkipNaverBlogSnippet(text: string): boolean {
+  if (!text || text.length < 2) return true;
+  if (/^(공감|댓글|공유|이웃추가|본문 기타 기능|블로그 검색|카테고리|태그|URL 복사)$/i.test(text)) return true;
+  if (/^(좋아요|구독|팔로우|전체보기|목록열기|닫기|신고하기)$/i.test(text)) return true;
+  return false;
+}
+
+function isNaverBlogShellContent(content: string): boolean {
+  const normalized = cleanNaverBlogText(content);
+  if (!normalized || normalized.length >= 900) return false;
+
+  const compact = normalized.replace(/\s+/g, '');
+  const shellPatterns = [
+    /블로그소개/,
+    /이웃추가/,
+    /전체글보기/,
+    /카테고리/,
+    /프로필/,
+    /구독/,
+    /방문자/,
+    /팔로워/,
+  ];
+  const matchCount = shellPatterns.filter(pattern => pattern.test(compact)).length;
+  return matchCount >= 2;
+}
+
+function normalizeNaverImageUrl(url: string): string {
+  return String(url || '')
+    .replace(/&amp;/g, '&')
+    .replace(/^\/\//, 'https://')
+    .trim();
+}
+
+function isUsefulNaverBlogImage(url: string): boolean {
+  const normalized = normalizeNaverImageUrl(url);
+  if (!/^https?:\/\//i.test(normalized)) return false;
+  if (/\/(?:nblog|static|imgs)\//i.test(normalized)) return false;
+  if (/(?:btn_|ico_|spc\.gif|banner|widget|personacon|blogpfthumb|profile|favicon)/i.test(normalized)) return false;
+  return /(?:postfiles|blogfiles|phinf|pstatic|naver\.net)/i.test(normalized)
+    || /\.(?:jpe?g|png|gif|webp)(?:\?|$)/i.test(normalized);
+}
+
+function assessNaverBlogCrawlQuality(content: string): { passed: boolean; reason: string; paragraphCount: number; charCount: number } {
+  const paragraphs = String(content || '')
+    .split(/\n{2,}/)
+    .map(cleanNaverBlogText)
+    .filter(text => text.length >= 20);
+  const charCount = cleanNaverBlogText(content).length;
+
+  if (isNaverBlogShellContent(content)) {
+    return { passed: false, reason: 'profile-like blog shell content', paragraphCount: paragraphs.length, charCount };
+  }
+  if (charCount >= NAVER_BLOG_FAST_PATH_MIN_CHARS && paragraphs.length >= NAVER_BLOG_FAST_PATH_MIN_PARAGRAPHS) {
+    return { passed: true, reason: 'rich mobile PostView content', paragraphCount: paragraphs.length, charCount };
+  }
+  if (charCount >= 800 && paragraphs.length >= 2) {
+    return { passed: true, reason: 'long mobile PostView content', paragraphCount: paragraphs.length, charCount };
+  }
+  return {
+    passed: false,
+    reason: `too shallow (${charCount} chars, ${paragraphs.length} paragraphs)`,
+    paragraphCount: paragraphs.length,
+    charCount,
+  };
+}
+
+async function parseNaverBlogMobileHtml(html: string): Promise<{ title?: string; content: string; images: string[] }> {
+  const cheerio = await import('cheerio');
+  const $ = cheerio.load(html);
+
+  $('script, style, noscript, iframe, nav, header, footer, .ad, .advertisement, .u_likeit, .post_btns, .comment_area').remove();
+
+  const title = cleanNaverBlogText(
+    $('meta[property="og:title"]').attr('content')
+    || $('meta[name="twitter:title"]').attr('content')
+    || $('.se-title-text').first().text()
+    || $('.pcol1, .htitle, ._title').first().text()
+    || $('title').first().text()
+    || ''
+  ).replace(/\s*:\s*네이버\s*블로그\s*$/i, '') || undefined;
+
+  const seen = new Set<string>();
+  const paragraphs: string[] = [];
+  const addParagraph = (value: string) => {
+    const text = cleanNaverBlogText(value);
+    if (shouldSkipNaverBlogSnippet(text)) return;
+    const key = text.replace(/\s+/g, '').slice(0, 120);
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    paragraphs.push(text);
+  };
+
+  const atomicSelectors = [
+    '.se-main-container .se-text-paragraph',
+    '.se-main-container .se-module-text',
+    '.se-main-container .se-component-content',
+    '.se-main-container .se-section-text',
+    '#postViewArea .se-text-paragraph',
+    '#postViewArea .se-module-text',
+    '#postViewArea p',
+    '#postViewArea li',
+    '#postViewArea blockquote',
+    '.post-view p',
+    '.post-view li',
+  ];
+
+  for (const selector of atomicSelectors) {
+    $(selector).each((_, element) => addParagraph($(element).text()));
+  }
+
+  if (paragraphs.join('').length < 300) {
+    const containerSelectors = ['.se-main-container', '#postViewArea', '#post-view', '.post-view', 'article'];
+    for (const selector of containerSelectors) {
+      const text = cleanNaverBlogText($(selector).first().text());
+      if (text.length <= paragraphs.join('').length) continue;
+
+      paragraphs.length = 0;
+      seen.clear();
+      text
+        .split(/(?<=[.!?。！？]|다\.|요\.|니다\.)\s+/)
+        .map(cleanNaverBlogText)
+        .forEach(addParagraph);
+
+      if (paragraphs.join('').length >= 300) break;
+    }
+  }
+
+  const images: string[] = [];
+  const addImage = (value?: string | null) => {
+    const src = normalizeNaverImageUrl(value || '');
+    if (src && isUsefulNaverBlogImage(src) && !images.includes(src)) {
+      images.push(src);
+    }
+  };
+
+  addImage($('meta[property="og:image"]').attr('content'));
+  $('img, .se-image-resource, [data-linktype="img"], [style*="background-image"]').each((_, element) => {
+    const el = $(element);
+    addImage(
+      el.attr('src')
+      || el.attr('data-src')
+      || el.attr('data-lazy-src')
+      || el.attr('data-original')
+      || el.attr('data-image-src')
+      || el.attr('data-url')
+    );
+    const styleUrl = (el.attr('style') || '').match(/url\(['"]?([^'")\s]+)['"]?\)/i)?.[1];
+    addImage(styleUrl);
+  });
+
+  return {
+    title,
+    content: paragraphs.join('\n\n'),
+    images,
+  };
+}
+
 /**
  * ✅ [2026-01-30] 네이버 블로그 모바일 API 폴백
  * PostView.naver API는 iframe 없이 직접 본문을 반환
@@ -8,7 +179,8 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 export async function fetchNaverBlogMobileApi(
   blogId: string,
   logNo: string,
-  logger?: (message: string) => void
+  logger?: (message: string) => void,
+  timeoutMs: number = NAVER_BLOG_MOBILE_FIRST_TIMEOUT_MS
 ): Promise<{ title?: string; content?: string; images?: string[] }> {
   const log = logger || console.log;
 
@@ -16,14 +188,22 @@ export async function fetchNaverBlogMobileApi(
     const mobileUrl = `https://m.blog.naver.com/PostView.naver?blogId=${blogId}&logNo=${logNo}&proxyReferer=`;
     log(`[모바일 API] 시도: ${mobileUrl}`);
 
-    const response = await fetch(mobileUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Language': 'ko-KR,ko;q=0.9',
-        'Referer': 'https://m.blog.naver.com/',
-      },
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    let response: Response;
+    try {
+      response = await fetch(mobileUrl, {
+        signal: controller.signal,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language': 'ko-KR,ko;q=0.9',
+          'Referer': 'https://m.blog.naver.com/',
+        },
+      });
+    } finally {
+      clearTimeout(timeoutId);
+    }
 
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
@@ -31,52 +211,13 @@ export async function fetchNaverBlogMobileApi(
 
     const html = await response.text();
 
-    // 제목 추출
-    const titleMatch = html.match(/<meta property="og:title" content="([^"]+)"/);
-    const title = titleMatch ? titleMatch[1].replace(/ : 네이버 블로그$/, '').trim() : undefined;
-
-    // 본문 추출 (se-main-container, postViewArea 등)
-    let content = '';
-
-    // 방법 1: se-main-container 찾기
-    const seMainMatch = html.match(/<div class="se-main-container[^"]*"[^>]*>([\s\S]*?)<\/div>\s*<div class="se-(?:viewer|footer)/);
-    if (seMainMatch) {
-      content = seMainMatch[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    const parsed = await parseNaverBlogMobileHtml(html);
+    const quality = assessNaverBlogCrawlQuality(parsed.content);
+    if (quality.passed) {
+      log(`[NaverBlog] mobile PostView rich crawl success: ${quality.charCount} chars, ${quality.paragraphCount} paragraphs, images=${parsed.images.length}`);
+      return parsed;
     }
-
-    // 방법 2: postViewArea 찾기
-    if (!content || content.length < 100) {
-      const postViewMatch = html.match(/id="postViewArea"[^>]*>([\s\S]*?)<\/div>/);
-      if (postViewMatch) {
-        content = postViewMatch[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-      }
-    }
-
-    // 방법 3: se-component-text 클래스들 찾기
-    if (!content || content.length < 100) {
-      const textMatches = html.matchAll(/<span class="se-fs-[^"]*"[^>]*>([^<]+)<\/span>/g);
-      const texts: string[] = [];
-      for (const match of textMatches) {
-        texts.push(match[1]);
-      }
-      content = texts.join(' ').replace(/\s+/g, ' ').trim();
-    }
-
-    // 이미지 추출
-    const images: string[] = [];
-    const imgMatches = html.matchAll(/src="(https?:\/\/[^"]*(?:postfiles|blogfiles|phinf)[^"]*\.(?:jpg|jpeg|png|gif|webp)[^"]*)"/gi);
-    for (const match of imgMatches) {
-      if (!images.includes(match[1])) {
-        images.push(match[1]);
-      }
-    }
-
-    if (content && content.length >= 100) {
-      log(`[모바일 API] ✅ 성공: ${content.length}자, 이미지 ${images.length}개`);
-      return { title, content, images };
-    }
-
-    throw new Error(`본문 부족 (${content?.length || 0}자)`);
+    throw new Error(`모바일 PostView 본문 품질 부족: ${quality.reason}`);
   } catch (error) {
     log(`[모바일 API] ❌ 실패: ${(error as Error).message}`);
     throw error;
@@ -119,6 +260,20 @@ export async function crawlNaverBlogWithPuppeteer(
   const { blogId, logNo } = extractBlogParams(url);
 
   // ✅ 1순위: Playwright + Stealth (크롬 띄워서 크롤링 - 가장 확실한 방법!)
+  if (blogId && logNo) {
+    log(`[NaverBlog] mobile PostView fast path start: blogId=${blogId}, logNo=${logNo}`);
+    try {
+      const mobileResult = await fetchNaverBlogMobileApi(blogId, logNo, log, NAVER_BLOG_MOBILE_FIRST_TIMEOUT_MS);
+      if (mobileResult.content && mobileResult.content.trim().length >= 200) {
+        log(`[NaverBlog] mobile PostView fast path success (${mobileResult.content.length} chars)`);
+        return mobileResult;
+      }
+      log(`[NaverBlog] mobile PostView content too short (${mobileResult.content?.length || 0} chars); falling back to Playwright`);
+    } catch (mobileError) {
+      log(`[NaverBlog] mobile PostView fast path failed: ${(mobileError as Error).message}; falling back to Playwright`);
+    }
+  }
+
   let browser: any = null;
 
 
@@ -130,7 +285,7 @@ export async function crawlNaverBlogWithPuppeteer(
     log(`[Playwright 크롤링 시작] ${url} (execPath: ${execPath || 'default'})`);
 
     browser = await chromium.launch({
-      headless: false,  // ⭐ 쇼핑커넥트와 동일: 실제 브라우저 사용
+      headless: true,
       ...(execPath ? { executablePath: execPath } : {}),
       args: [
         '--disable-blink-features=AutomationControlled',
@@ -162,7 +317,7 @@ export async function crawlNaverBlogWithPuppeteer(
     log(`[Playwright] 페이지 로드 중...`);
     const response = await page.goto(url, {
       waitUntil: 'domcontentloaded',
-      timeout: 30000,
+      timeout: NAVER_BLOG_PLAYWRIGHT_GOTO_TIMEOUT_MS,
     });
 
     // HTTP 상태 코드 확인
@@ -178,7 +333,7 @@ export async function crawlNaverBlogWithPuppeteer(
     }
 
     // ✅ 페이지 로딩 대기 (iframe 렌더링 대기)
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(1200);
 
     // iframe이 있는지 확인하고 로드 대기
     const hasIframe = await page.evaluate(() => {
@@ -188,7 +343,7 @@ export async function crawlNaverBlogWithPuppeteer(
 
     if (hasIframe) {
       log('[iframe 감지] iframe 콘텐츠 로드 대기 중...');
-      await page.waitForTimeout(4000);
+      await page.waitForTimeout(1800);
 
       // ✅ 스크롤하여 lazy-load 이미지 로드
       try {
@@ -196,9 +351,10 @@ export async function crawlNaverBlogWithPuppeteer(
         if (scrollFrame) {
           await scrollFrame.evaluate(async () => {
             const scrollHeight = document.body.scrollHeight || 5000;
-            for (let i = 0; i < scrollHeight; i += 500) {
+            const maxScroll = Math.min(scrollHeight, 6000);
+            for (let i = 0; i < maxScroll; i += 700) {
               window.scrollTo(0, i);
-              await new Promise(r => setTimeout(r, 100));
+              await new Promise(r => setTimeout(r, 60));
             }
             window.scrollTo(0, 0);
           });
@@ -492,7 +648,7 @@ export async function crawlNaverBlogWithPuppeteer(
     if (blogId && logNo) {
       log(`[폴백] 모바일 API로 최종 재시도...`);
       try {
-        const mobileResult = await fetchNaverBlogMobileApi(blogId, logNo, log);
+        const mobileResult = await fetchNaverBlogMobileApi(blogId, logNo, log, NAVER_BLOG_MOBILE_FALLBACK_TIMEOUT_MS);
         if (mobileResult.content && mobileResult.content.length >= 100) {
           log(`[폴백] ✅ 모바일 API 성공!`);
           return mobileResult;

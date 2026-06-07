@@ -22,6 +22,11 @@ puppeteerExtra.use(StealthPlugin());
 // ✅ [2026-01-31] 최신 크롬 User-Agent (고정값 대신 최신 버전 사용)
 const LATEST_CHROME_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 
+function createTimeoutSignal(timeoutMs: number): AbortSignal | undefined {
+  const timeoutFactory = (AbortSignal as typeof AbortSignal & { timeout?: (ms: number) => AbortSignal }).timeout;
+  return typeof timeoutFactory === 'function' ? timeoutFactory(timeoutMs) : undefined;
+}
+
 // ✅ 한국 사이트 인코딩 자동 감지 및 변환 (EUC-KR, CP949 등 지원)
 // ✅ [FIX] URL 파라미터 추가 - 네이버 도메인은 강제 UTF-8
 async function decodeResponseWithCharset(response: Response, url?: string): Promise<string> {
@@ -5009,6 +5014,34 @@ function isNaverBlogProfileContent(content: string): boolean {
   return false;
 }
 
+const MIN_URL_SOURCE_CHARS = 500;
+const MIN_URL_SOURCE_PARAGRAPHS = 3;
+const MIN_GENERIC_URL_SOURCE_CHARS = 350;
+const MIN_GENERIC_URL_SOURCE_PARAGRAPHS = 2;
+
+function getSourceDepth(content?: string): { chars: number; paragraphs: number } {
+  const normalized = String(content || '').replace(/\s+/g, ' ').trim();
+  const paragraphs = String(content || '')
+    .split(/\n{2,}|(?<=[.!?。！？]|다\.|요\.|니다\.)\s+/)
+    .map(part => part.replace(/\s+/g, ' ').trim())
+    .filter(part => part.length >= 24);
+
+  return {
+    chars: normalized.length,
+    paragraphs: paragraphs.length,
+  };
+}
+
+function hasUsableSourceDepth(
+  content?: string,
+  options: { minChars?: number; minParagraphs?: number } = {}
+): boolean {
+  const depth = getSourceDepth(content);
+  const minChars = options.minChars ?? MIN_URL_SOURCE_CHARS;
+  const minParagraphs = options.minParagraphs ?? MIN_URL_SOURCE_PARAGRAPHS;
+  return depth.chars >= minChars && depth.paragraphs >= minParagraphs;
+}
+
 export async function fetchArticleContent(url: string, options?: { naverClientId?: string; naverClientSecret?: string }): Promise<{ title?: string; content?: string; publishedAt?: string; images?: string[] }> {
   if (!url) return {};
 
@@ -5074,8 +5107,8 @@ ${product.title}에 대한 상세 정보입니다. 이 제품은 ${product.categ
             });
 
             // ✅ [2026-01-30] 크롤링 결과 검증 강화 (최소 200자)
-            const MIN_CONTENT_LENGTH = 200;
-            if (blogResult.content && blogResult.content.trim().length >= MIN_CONTENT_LENGTH) {
+            const MIN_CONTENT_LENGTH = MIN_URL_SOURCE_CHARS;
+            if (blogResult.content && hasUsableSourceDepth(blogResult.content)) {
               console.log(`[네이버 블로그 전용 크롤러] ✅ 크롤링 성공 (${blogResult.content.length}자, 이미지: ${blogResult.images?.length || 0}개)`);
               return {
                 title: blogResult.title,
@@ -5102,7 +5135,7 @@ ${product.title}에 대한 상세 정보입니다. 이 제품은 ${product.categ
                   console.log(`[모바일 API 폴백] ${msg}`);
                 });
 
-                if (mobileResult.content && mobileResult.content.trim().length >= 200 && !isNaverBlogProfileContent(mobileResult.content)) {
+                if (mobileResult.content && hasUsableSourceDepth(mobileResult.content) && !isNaverBlogProfileContent(mobileResult.content)) {
                   console.log(`[fetchArticleContent] ✅ 모바일 API 폴백 성공 (${mobileResult.content.length}자, 이미지: ${mobileResult.images?.length || 0}개)`);
                   return {
                     title: mobileResult.title,
@@ -5173,6 +5206,7 @@ ${product.title}에 대한 상세 정보입니다. 이 제품은 ${product.categ
 
     const response = await fetchImpl(url, {
       redirect: 'follow', // 리디렉션 자동 따라가기
+      signal: createTimeoutSignal(15000),
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -5371,6 +5405,7 @@ ${product.title}에 대한 상세 정보입니다. 이 제품은 ${product.categ
 
           const iframeResponse = await fetchImpl(iframeUrl, {
             redirect: 'follow',
+            signal: createTimeoutSignal(10000),
             headers: {
               'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
             },
@@ -5802,6 +5837,8 @@ async function fetchSingleSource(url: string, options?: { naverClientId?: string
     const isNaverStore = resolvedUrl.includes('smartstore.naver.com') || resolvedUrl.includes('brand.naver.com')
       || resolvedUrl.includes('brandconnect.naver.com')
       || (resolvedUrl.includes('naver.me/') && !resolvedUrl.includes('blog'));
+    const isCommerceUrl = isNaverStore
+      || /coupa\.ng|link\.coupang\.com|coupang\.com|gmarket\.co\.kr|11st\.co\.kr|auction\.co\.kr|shopping\.naver\.com|aliexpress\.com|amazon\.com|amazon\.co\.kr|wemakeprice\.com|tmon\.co\.kr/i.test(resolvedUrl);
     const isNaverBlogFromShortUrl = isShortUrl && (resolvedUrl.includes('blog.naver.com') || resolvedUrl.includes('m.blog.naver.com'));
 
     // 단축 URL이 블로그로 리다이렉트되면 스마트스토어 로직 건너뛰고 블로그 로직으로 진행
@@ -5972,7 +6009,7 @@ ${ogDesc || `${ogTitle} 상품입니다.`}
         }
 
         // ✅ [2026-03-07 FIX] 임계값 200자로 상향 (프로필 텍스트 통과 방지)
-        if (content && content.length > 200) {
+        if (content && hasUsableSourceDepth(content)) {
           console.log(`[fetchSingleSource] ✅ 네이버 블로그 크롤링 성공: ${content.length}자, 이미지 ${images?.length || 0}개`);
         } else {
           console.log(`[fetchSingleSource] ⚠️ 네이버 블로그 본문이 짧음 (${content?.length || 0}자) → 모바일 API 폴백 시도`);
@@ -5987,7 +6024,7 @@ ${ogDesc || `${ogTitle} 상품입니다.`}
                 console.log(`[fetchSingleSource 모바일 API] ${msg}`);
               });
 
-              if (mobileResult.content && mobileResult.content.length > (content?.length || 0) && !isNaverBlogProfileContent(mobileResult.content)) {
+              if (mobileResult.content && hasUsableSourceDepth(mobileResult.content) && mobileResult.content.length > (content?.length || 0) && !isNaverBlogProfileContent(mobileResult.content)) {
                 title = mobileResult.title || title;
                 content = mobileResult.content;
                 images = mobileResult.images || images;
@@ -6011,7 +6048,7 @@ ${ogDesc || `${ogTitle} 상품입니다.`}
               console.log(`[fetchSingleSource 최후 모바일 API] ${msg}`);
             });
 
-            if (mobileResult.content && mobileResult.content.length > 200 && !isNaverBlogProfileContent(mobileResult.content)) {
+            if (mobileResult.content && hasUsableSourceDepth(mobileResult.content) && !isNaverBlogProfileContent(mobileResult.content)) {
               title = mobileResult.title;
               content = mobileResult.content;
               images = mobileResult.images;
@@ -6030,10 +6067,10 @@ ${ogDesc || `${ogTitle} 상품입니다.`}
           mode: 'auto',
           maxLength: 15000,
           extractImages: true,
-          timeout: 30000,
+          timeout: 20000,
         });
 
-        if (crawlResult.content && (crawlResult.content.length > 50 || (crawlResult.images && crawlResult.images.length > 0))) {
+        if (crawlResult.content && hasUsableSourceDepth(crawlResult.content, { minChars: MIN_GENERIC_URL_SOURCE_CHARS, minParagraphs: MIN_GENERIC_URL_SOURCE_PARAGRAPHS })) {
           title = crawlResult.title;
           content = crawlResult.content;
           images = crawlResult.images;
@@ -6053,6 +6090,17 @@ ${ogDesc || `${ogTitle} 상품입니다.`}
     }
 
     // 키워드 추출
+    const requiresArticleDepth = !isCommerceUrl && !/\.xml$|\/rss/i.test(resolvedUrl);
+    if (requiresArticleDepth) {
+      const isNaverBlogSource = /blog\.naver\.com|m\.blog\.naver\.com/i.test(resolvedUrl);
+      const minChars = isNaverBlogSource ? MIN_URL_SOURCE_CHARS : MIN_GENERIC_URL_SOURCE_CHARS;
+      const minParagraphs = isNaverBlogSource ? MIN_URL_SOURCE_PARAGRAPHS : MIN_GENERIC_URL_SOURCE_PARAGRAPHS;
+      if (!hasUsableSourceDepth(content, { minChars, minParagraphs })) {
+        const depth = getSourceDepth(content);
+        throw new Error(`URL 본문 수집이 너무 얕습니다 (${depth.chars}자, ${depth.paragraphs}문단). 다른 수집 경로가 필요합니다.`);
+      }
+    }
+
     const fullText = `${title || ''} ${content || ''}`;
     const keywords = extractKeywordsFromText(fullText);
 

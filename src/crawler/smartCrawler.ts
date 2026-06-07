@@ -793,7 +793,7 @@ export class SmartCrawler {
       });
 
       await page.goto(crawlUrl, {
-        waitUntil: 'networkidle2',
+        waitUntil: 'domcontentloaded',
         timeout: timeout,
       });
 
@@ -1542,13 +1542,13 @@ export class SmartCrawler {
       });
 
       console.log('[네이버] 🎯 상품 페이지 로딩...');
-      await page.goto(url, { waitUntil: 'networkidle', timeout: timeout });
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: timeout });
 
       // ⭐ SPA 동적 렌더링 대기: 상품명이 나타날 때까지 기다림
       console.log('[네이버] ⏳ 상품 정보 렌더링 대기...');
       try {
         await page.waitForSelector('._1eddO7u4UC, ._3zzFY_wgQ6, .product-title, [class*="ProductName"], h1._2F0p2I6kQb', {
-          timeout: 10000,
+          timeout: 6000,
         });
       } catch (e) {
         console.log('[네이버] ⚠️ 상품명 셀렉터 타임아웃, 추가 대기...');
@@ -1566,7 +1566,7 @@ export class SmartCrawler {
       if (htmlContent.includes('에러페이지') || htmlContent.includes('시스템오류')) {
         console.log('[네이버] ⚠️ 에러 페이지 감지, 대기 후 재시도...');
         await page.waitForTimeout(3000);
-        await page.reload({ waitUntil: 'networkidle' });
+        await page.reload({ waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(3000);
       }
 

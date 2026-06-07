@@ -2,70 +2,100 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 
+function getSystemChromiumCandidates(): string[] {
+  const home = os.homedir();
+
+  if (process.platform === 'darwin') {
+    return [
+      '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+      path.join(home, 'Applications', 'Google Chrome.app', 'Contents', 'MacOS', 'Google Chrome'),
+      '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary',
+      '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
+      '/Applications/Chromium.app/Contents/MacOS/Chromium',
+    ];
+  }
+
+  if (process.platform === 'linux') {
+    return [
+      '/usr/bin/google-chrome',
+      '/usr/bin/google-chrome-stable',
+      '/usr/bin/chromium',
+      '/usr/bin/chromium-browser',
+      '/snap/bin/chromium',
+    ];
+  }
+
+  return [
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+    path.join(home, 'AppData', 'Local', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+    'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
+  ];
+}
+
+function getPuppeteerCacheRoots(): string[] {
+  const home = os.homedir();
+  return [
+    path.join(home, '.cache', 'puppeteer', 'chrome'),
+    path.join(home, 'Library', 'Caches', 'puppeteer', 'chrome'),
+    path.join(home, 'AppData', 'Local', 'puppeteer', 'chrome'),
+  ];
+}
+
+function getPuppeteerChromeCandidates(cacheRoot: string, version: string): string[] {
+  return [
+    path.join(cacheRoot, version, 'chrome-win64', 'chrome.exe'),
+    path.join(cacheRoot, version, 'chrome-win', 'chrome.exe'),
+    path.join(cacheRoot, version, 'chrome-mac-arm64', 'Google Chrome for Testing.app', 'Contents', 'MacOS', 'Google Chrome for Testing'),
+    path.join(cacheRoot, version, 'chrome-mac-x64', 'Google Chrome for Testing.app', 'Contents', 'MacOS', 'Google Chrome for Testing'),
+    path.join(cacheRoot, version, 'chrome-linux64', 'chrome'),
+  ];
+}
+
 /**
- * ✅ Puppeteer Chromium 경로 찾기 (배포 환경 지원 - 시스템 Chrome/Edge 우선 사용)
- * 여러 파일에 흩어져 있던 로직을 통합하여 관리합니다.
+ * Resolve a usable Chromium/Chrome executable for Puppeteer and Playwright.
+ * Packaged macOS builds cannot rely on Windows-only paths, so system Chrome
+ * and Puppeteer cache locations are checked per platform before the library
+ * default is used.
  */
 export async function getChromiumExecutablePath(): Promise<string | undefined> {
-    // 1. 시스템에 설치된 Chrome 경로들 (Windows)
-    const systemChromePaths = [
-        // Windows 기본 설치 경로들
-        'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-        'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-        path.join(os.homedir(), 'AppData', 'Local', 'Google', 'Chrome', 'Application', 'chrome.exe'),
-        // Edge도 Chromium 기반이므로 사용 가능
-        'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
-        'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
-    ];
-
-    // 시스템 Chrome 먼저 확인 (가장 안정적)
-    for (const chromePath of systemChromePaths) {
-        if (fs.existsSync(chromePath)) {
-            console.log(`[BrowserUtils] ✅ 시스템 브라우저 발견: ${chromePath}`);
-            return chromePath;
-        }
+  for (const chromePath of getSystemChromiumCandidates()) {
+    if (fs.existsSync(chromePath)) {
+      console.log(`[BrowserUtils] system browser found: ${chromePath}`);
+      return chromePath;
     }
+  }
 
-    // 2. Puppeteer 캐시 경로 확인 (~/.cache/puppeteer/)
-    const puppeteerCachePaths = [
-        path.join(os.homedir(), '.cache', 'puppeteer', 'chrome'),
-        path.join(os.homedir(), 'AppData', 'Local', 'puppeteer', 'chrome'),
-    ];
+  for (const cacheRoot of getPuppeteerCacheRoots()) {
+    if (!fs.existsSync(cacheRoot)) continue;
 
-    for (const cachePath of puppeteerCachePaths) {
-        if (fs.existsSync(cachePath)) {
-            try {
-                const versions = fs.readdirSync(cachePath);
-                for (const version of versions) {
-                    const chromePath = path.join(cachePath, version, 'chrome-win64', 'chrome.exe');
-                    if (fs.existsSync(chromePath)) {
-                        console.log(`[BrowserUtils] ✅ Puppeteer 캐시 브라우저 발견: ${chromePath}`);
-                        return chromePath;
-                    }
-                    const chromePath2 = path.join(cachePath, version, 'chrome-win', 'chrome.exe');
-                    if (fs.existsSync(chromePath2)) {
-                        console.log(`[BrowserUtils] ✅ Puppeteer 캐시 브라우저 발견: ${chromePath2}`);
-                        return chromePath2;
-                    }
-                }
-            } catch (e) {
-                // 무시
-            }
-        }
-    }
-
-    // 3. Puppeteer 기본 경로 시도
     try {
-        const puppeteer = await import('puppeteer');
-        const defaultPath = (puppeteer as any).executablePath?.();
-        if (defaultPath && fs.existsSync(defaultPath)) {
-            console.log(`[BrowserUtils] ✅ Puppeteer 기본 경로: ${defaultPath}`);
-            return defaultPath;
+      const versions = fs.readdirSync(cacheRoot);
+      for (const version of versions) {
+        for (const chromePath of getPuppeteerChromeCandidates(cacheRoot, version)) {
+          if (fs.existsSync(chromePath)) {
+            console.log(`[BrowserUtils] puppeteer cache browser found: ${chromePath}`);
+            return chromePath;
+          }
         }
-    } catch (e) {
-        // 무시
+      }
+    } catch {
+      // Ignore unreadable cache directories and continue to the next strategy.
     }
+  }
 
-    console.log(`[BrowserUtils] ⚠️ 브라우저를 찾을 수 없음. Puppeteer 기본값에 의존...`);
-    return undefined;
+  try {
+    const puppeteer = await import('puppeteer');
+    const defaultPath = (puppeteer as any).executablePath?.();
+    if (defaultPath && fs.existsSync(defaultPath)) {
+      console.log(`[BrowserUtils] puppeteer default browser found: ${defaultPath}`);
+      return defaultPath;
+    }
+  } catch {
+    // Ignore and let the caller fall back to the automation library default.
+  }
+
+  console.log('[BrowserUtils] browser executable not found; using library default.');
+  return undefined;
 }
