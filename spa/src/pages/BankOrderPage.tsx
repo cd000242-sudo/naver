@@ -13,14 +13,14 @@ interface ProductOption { id: string; name: string; price: number; period: strin
 
 const ALL_PRODUCTS: Record<string, ProductOption[]> = {
     naver: [
-        { id: 'naver-monthly', name: 'Better Life Naver 1개월', price: 50000, period: '/ 월' },
-        { id: 'naver-quarterly', name: 'Better Life Naver 3개월', price: 120000, period: '월 40,000원' },
-        { id: 'naver-yearly', name: 'Better Life Naver 1년', price: 400000, period: '월 33,333원' },
+        { id: 'naver-monthly', name: '올인원 1개월', price: 50000, period: '/ 월' },
+        { id: 'naver-quarterly', name: '올인원 3개월', price: 120000, period: '월 40,000원' },
+        { id: 'naver-yearly', name: '올인원 1년', price: 400000, period: '월 33,333원' },
     ],
 };
 
 const PRODUCT_LABELS: Record<string, string> = {
-    naver: 'Better Life Naver',
+    naver: 'Leaders Pro 올인원',
 };
 
 type Status = 'pending' | 'approved' | 'rejected';
@@ -129,7 +129,9 @@ function BankOrderPage() {
         if (!e || !e.includes('@')) { setShake('email'); window.setTimeout(() => setShake(null), 500); return; }
 
         setSubmitting(true);
-        const productLabel = PRODUCT_LABELS[tab] + ' ' + selected.name;
+        const productLabel = selected.name.startsWith('올인원')
+            ? `Leaders Pro ${selected.name}`
+            : `${PRODUCT_LABELS[tab]} ${selected.name}`;
         try {
             const res = await fetch(GAS_URL, {
                 method: 'POST',
@@ -163,11 +165,11 @@ function BankOrderPage() {
             <div style={{ background: 'rgba(18,18,26,0.7)', backdropFilter: 'blur(20px)', border: '1px solid rgba(201,168,76,0.18)', borderRadius: 24, padding: 'clamp(24px, 4vw, 40px)' }}>
                 <div style={{ textAlign: 'center', marginBottom: 32 }}>
                     <h1 style={{ fontSize: 'clamp(24px, 4vw, 32px)', fontWeight: 900, marginBottom: 8, background: 'linear-gradient(135deg, #FFD700, #FFA500)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>💰 계좌이체 결제</h1>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>제품별 기간권 선택 → 정보 입력 → 입금 → 라이선스 발급</p>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>올인원 기간권 선택 → 정보 입력 → 입금 → 올인원 라이선스 발급</p>
                 </div>
 
                 {/* Step 1 */}
-                <Step n={1} label="기간권 선택">
+                <Step n={1} label="올인원 기간권 선택">
                     <div style={{ display: 'flex', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
                         {Object.keys(PRODUCT_LABELS).filter((k) => k === 'naver').map((k) => (
                             <button
@@ -260,7 +262,7 @@ function BankOrderPage() {
                 </button>
 
                 <div style={{ marginTop: 18, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7 }}>
-                    주문 접수 후 입금이 확인되면 라이선스 코드가 이메일로 발송됩니다.<br />
+                    주문 접수 후 입금이 확인되면 올인원 라이선스 코드가 이메일로 발송됩니다.<br />
                     결제 진행 시 <a href="/terms" style={{ color: '#FFD700' }}>이용약관</a> 및 <a href="/privacy" style={{ color: '#FFD700' }}>개인정보처리방침</a>에 동의하는 것으로 간주됩니다.
                 </div>
             </div>
@@ -302,9 +304,9 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                     {status === 'pending' && '주문이 접수되었습니다!'}
                 </div>
                 <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, lineHeight: 1.8 }}>
-                    {status === 'approved' && <>아래 라이선스 코드를 사용해주세요.<br />이메일로도 발송되었습니다.</>}
+                    {status === 'approved' && <>아래 올인원 라이선스 코드를 사용해주세요.<br />이메일로도 발송되었습니다.</>}
                     {status === 'rejected' && '문의 사항이 있으시면 아래 연락처로 연락주세요.'}
-                    {status === 'pending' && <>아래 계좌로 입금해주세요.<br />입금 확인 후 <strong>라이선스 코드</strong>가 이메일로 발송됩니다.<br /><span style={{ display: 'inline-block', marginTop: 8, color: '#c9a84c', fontSize: 13 }}>📡 이 페이지는 자동으로 상태가 갱신됩니다.</span></>}
+                    {status === 'pending' && <>아래 계좌로 입금해주세요.<br />입금 확인 후 <strong>올인원 라이선스 코드</strong>가 이메일로 발송됩니다.<br /><span style={{ display: 'inline-block', marginTop: 8, color: '#c9a84c', fontSize: 13 }}>📡 이 페이지는 자동으로 상태가 갱신됩니다.</span></>}
                 </div>
                 <div style={{ marginTop: 18, color: 'rgba(255,255,255,0.55)', fontSize: 13 }}>주문번호: <strong style={{ color: '#FFD700' }}>{orderId}</strong></div>
 
@@ -325,15 +327,15 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                 {status === 'approved' && code && (
                     <div style={{ background: 'linear-gradient(135deg, rgba(68,215,182,0.08), rgba(201,168,76,0.08))', border: '1px solid rgba(68,215,182,0.4)', borderRadius: 14, padding: 24, marginTop: 18, textAlign: 'left' }}>
                         <div style={{ fontSize: 36, textAlign: 'center', marginBottom: 8 }}>🎉</div>
-                        <div style={{ textAlign: 'center', color: '#44d7b6', fontSize: 18, fontWeight: 800, marginBottom: 16 }}>라이선스 발급 완료</div>
-                        <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, marginBottom: 6 }}>라이선스 코드</div>
+                        <div style={{ textAlign: 'center', color: '#44d7b6', fontSize: 18, fontWeight: 800, marginBottom: 16 }}>올인원 라이선스 발급 완료</div>
+                        <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, marginBottom: 6 }}>올인원 라이선스 코드</div>
                         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                             <input readOnly value={code} style={{ flex: 1, background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 10, padding: '14px 16px', color: '#c9a84c', fontFamily: 'monospace', fontSize: 16, fontWeight: 800, letterSpacing: 0.5 }} />
                             <button onClick={() => copyLicense(code)} style={{ background: 'linear-gradient(135deg, #c9a84c, #e8d48b)', color: '#0a0a0f', border: 'none', borderRadius: 10, padding: '14px 18px', fontWeight: 800, cursor: 'pointer', fontSize: 14, whiteSpace: 'nowrap' }}>{licCopyLabel}</button>
                         </div>
                         <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginTop: 14, lineHeight: 1.6 }}>
                             이 코드는 입력하신 이메일로도 발송되었습니다.<br />
-                            이 코드는 구매하신 제품 전용 코드입니다. 다른 앱은 해당 제품의 라이선스 코드가 별도로 필요합니다.
+                            올인원 코드 1개로 이용 기간 안에서 Better Life Naver, Leaders Orbit, LEWORD를 함께 사용할 수 있습니다.
                         </div>
                     </div>
                 )}

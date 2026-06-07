@@ -61,7 +61,7 @@ const PRODUCTS: Product[] = [
         name: 'Leaders Orbit',
         subtitle: '블로그스팟 · 워드프레스 자동화',
         headline: '외부유입용 글과 링크 구조를 한 번에 만드는 글로벌 발행 엔진',
-        desc: <>블로그스팟과 워드프레스 발행, 내부링크, 외부유입 문안, 공개 글 확인까지 이어지는 보조 채널 자동화입니다. Orbit 전용 라이선스로 사용합니다.</>,
+        desc: <>블로그스팟과 워드프레스 발행, 내부링크, 외부유입 문안, 공개 글 확인까지 이어지는 보조 채널 자동화입니다. 올인원 이용권 안에서 함께 씁니다.</>,
         href: '/orbit',
         cta: 'Orbit 자세히 보기',
         media: { type: 'image', src: '/images/orbit/orbit-smart-keyword.png', alt: 'Leaders Orbit 키워드 입력과 발행 설정 화면' },
@@ -270,9 +270,9 @@ function ProductsPage() {
                 <section className="products-section dark compact">
                     <div className="products-wrap">
                         <div className="products-section-head fade-in">
-                            <span className="products-kicker">PRODUCT LICENSE</span>
-                            <h2>제품별 코드로 안전하게 나눠 씁니다</h2>
-                            <p>LEWORD에서 키워드를 고르고, Naver와 Orbit으로 발행 채널을 나누되 라이선스 코드는 제품별로 따로 관리됩니다.</p>
+                            <span className="products-kicker">ONE SUITE</span>
+                            <h2>올인원 코드로 운영 흐름이 더 깔끔해집니다</h2>
+                            <p>LEWORD에서 키워드를 고르고, Naver와 Orbit으로 발행 채널을 나눠도 기간제 구매자는 올인원 라이선스 코드 하나로 함께 이용합니다.</p>
                         </div>
                         <div className="flow-line fade-in">
                             {SUITE_FLOW.map(([step, name, desc]) => (
@@ -325,9 +325,9 @@ function ProductsPage() {
                 <section className="products-final">
                     <div className="products-wrap">
                         <span className="products-kicker">START</span>
-                        <h2>필요한 제품부터 시작하면 됩니다</h2>
-                        <p>네이버 자동화, LEWORD, Orbit은 함께 쓰면 흐름이 좋아지지만 앱별 라이선스 코드는 각각 발급됩니다.</p>
-                        <p className="products-note">무료 체험은 Better Life Naver 기준입니다. LEWORD와 Orbit은 각 제품별 라이선스 코드가 필요합니다.</p>
+                        <h2>고민되면 올인원으로 시작하면 됩니다</h2>
+                        <p>네이버 자동화, LEWORD, Orbit은 함께 쓸 때 키워드 발굴부터 발행, 외부유입까지 흐름이 가장 좋아집니다.</p>
+                        <p className="products-note">무료 체험은 Better Life Naver 기준입니다. LEWORD와 Orbit은 올인원 라이선스에서 함께 이용합니다. 개별 구매는 영구제만 별도 문의로 가능하며 각 100만원입니다.</p>
                         <div className="products-actions center">
                             <Link className="products-btn primary" to="/pricing">요금제 확인하기</Link>
                             <Link className="products-btn secondary" to="/download">네이버 무료 체험 다운로드</Link>

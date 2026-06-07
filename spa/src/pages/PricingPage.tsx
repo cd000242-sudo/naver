@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 /**
- * 요금제 — 제품별 기간제 이용권.
+ * 요금제 — 올인원 기간제 이용권.
  * Toss Payments SDK (v1) 동적 로드 후 requestBillingAuth (정기구독).
  * 카드 결제는 amountCard(VAT 10% 포함)가 있으면 그 금액을 청구.
  * success/fail URL은 origin 직접 경로(leaderspro.kr root) 사용.
@@ -27,14 +27,14 @@ interface Plan {
 
 const PLANS: Record<string, Plan[]> = {
     naver: [
-        { id: 'free-naver', name: 'Better Life Naver 무료 체험', desc: '네이버 자동화 먼저 체험', amount: 0, period: '무료', free: true, badge: { text: '🎁 FREE', type: 'trial' }, features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', 'LEWORD·Orbit은 각 제품 라이선스 필요'] },
-        { id: 'naver-monthly', name: 'Better Life Naver 1개월', desc: '네이버 자동화툴을 가볍게 시작', amount: 50000, amountCard: 55000, period: '/ 월 (공급가)', features: ['네이버 자동화툴 이용', 'AI 콘텐츠 생성', '자동 발행 기능', '이메일 고객 지원'] },
-        { id: 'naver-quarterly', name: 'Better Life Naver 3개월', desc: '네이버 채널을 안정적으로 운영', amount: 120000, period: '/ 3개월', monthly: '월 40,000원', features: ['네이버 자동화툴 이용', '다계정 운영 보조', '자동 발행 기능', '우선 고객 지원'] },
-        { id: 'naver-yearly', name: 'Better Life Naver 1년', desc: '가장 합리적인 네이버 기간권', amount: 400000, period: '/ 년', monthly: '월 33,333원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['네이버 자동화툴 이용', '라이선스 기간 내 업데이트', '전용 커뮤니티 안내', '1:1 우선 지원'] },
+        { id: 'free-naver', name: 'Better Life Naver 무료 체험', desc: '네이버 자동화 먼저 체험', amount: 0, period: '무료', free: true, badge: { text: '🎁 FREE', type: 'trial' }, features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', 'LEWORD·Orbit은 올인원 구매 후 이용'] },
+        { id: 'naver-monthly', name: '올인원 1개월', desc: '세 제품을 한 번에 가볍게 시작', amount: 50000, amountCard: 55000, period: '/ 월 (공급가)', features: ['네이버 자동화툴 이용', 'LEWORD 키워드 분석 이용', 'Leaders Orbit 이용', '이메일 고객 지원'] },
+        { id: 'naver-quarterly', name: '올인원 3개월', desc: '블로그 자동화 흐름을 안정적으로 운영', amount: 120000, period: '/ 3개월', monthly: '월 40,000원', features: ['네이버 자동화툴 이용', 'LEWORD 전체 기능 이용', 'Leaders Orbit 이용', '우선 고객 지원'] },
+        { id: 'naver-yearly', name: '올인원 1년', desc: '가장 합리적인 전체 제품 기간권', amount: 400000, period: '/ 년', monthly: '월 33,333원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['모든 자동화툴 기간 내 이용', '라이선스 기간 내 업데이트', '전용 커뮤니티 안내', '1:1 우선 지원'] },
     ],
 };
 
-const TAB_LABELS: Record<string, string> = { naver: 'A · Better Life Naver' };
+const TAB_LABELS: Record<string, string> = { naver: 'ALL · Leaders Pro 올인원' };
 const TAB_KEYS = ['naver'] as const;
 type TabKey = typeof TAB_KEYS[number];
 
@@ -85,7 +85,7 @@ function PricingPage() {
 
     useEffect(() => {
         const prev = document.title;
-        document.title = '제품별 기간제 이용권 — Leaders Pro';
+        document.title = '올인원 기간제 이용권 — Leaders Pro';
         return () => { document.title = prev; };
     }, []);
 
@@ -160,8 +160,8 @@ function PricingPage() {
             <section style={{ padding: '140px 20px 80px', maxWidth: 1200, margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 40 }}>
                     <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>PRICING</span>
-                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>제품별 기간제 이용권</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>라이선스 코드는 제품별로 따로 발급됩니다. 네이버, Orbit, LEWORD는 각 앱에 맞는 코드로 이용해주세요.</p>
+                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>올인원 기간제 이용권</h2>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>구매하면 패널에서 올인원 라이선스 코드가 발급됩니다. Better Life Naver, Leaders Orbit, LEWORD를 이용 기간 안에서 함께 사용할 수 있습니다.</p>
                 </div>
 
                 {/* Product tabs */}
@@ -284,7 +284,7 @@ function PricingPage() {
                             animation: emailShake ? 'shakePay 0.4s' : 'none',
                         }}
                     />
-                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 6, marginBottom: 14 }}>결제 완료 후 이 이메일로 선택한 제품의 라이선스 코드가 발송됩니다.</p>
+                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 6, marginBottom: 14 }}>결제 완료 후 이 이메일로 올인원 라이선스 코드가 발송됩니다.</p>
 
                     <button
                         onClick={requestPayment}
@@ -302,8 +302,8 @@ function PricingPage() {
                         <span>{paying ? '결제 중...' : chargeLabel}</span>
                     </button>
                     <p style={{ textAlign: 'center', color: '#c9a84c', fontSize: 13, marginTop: 10, lineHeight: 1.7 }}>
-                        라이선스 코드는 제품별로 따로 관리됩니다. 다른 앱을 이용하려면 해당 제품의 코드가 별도로 필요합니다.<br />
-                        무료 다운로드 체험은 Better Life Naver 기준이며, LEWORD·Orbit은 각 제품 라이선스로 이용합니다.
+                        구매 시 올인원 코드 1개가 발급되며, 이용 기간 안에서 네이버 자동화툴·LEWORD·Leaders Orbit을 함께 사용할 수 있습니다.<br />
+                        무료 다운로드 체험은 Better Life Naver 기준이며, LEWORD·Orbit은 올인원 구매 후 함께 이용합니다.
                     </p>
                     <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: 12, marginTop: 8 }}>
                         결제 진행 시 <Link to="/terms" style={{ color: '#FFD700' }}>이용약관</Link> 및 <Link to="/privacy" style={{ color: '#FFD700' }}>개인정보처리방침</Link>에 동의하는 것으로 간주됩니다.
@@ -317,6 +317,31 @@ function PricingPage() {
                             <p style={{ margin: 0 }}><strong>Q. 사용법이 어렵지 않나요?</strong><br />설치 후 키워드만 입력하면 AI가 자동으로 글·이미지·발행까지 처리합니다. 처음 5분 안내 영상 제공 + 카카오톡 무료 지원 포함.</p>
                         </div>
                     </details>
+                </div>
+
+                {/* Individual lifetime inquiry */}
+                <div style={{ maxWidth: 920, margin: '28px auto 0', padding: '26px 24px', background: 'linear-gradient(135deg, rgba(124,58,237,0.10), rgba(18,18,26,0.78))', border: '1px solid rgba(167,139,250,0.28)', borderRadius: 18 }}>
+                    <div style={{ textAlign: 'center', marginBottom: 20 }}>
+                        <span style={{ display: 'inline-flex', padding: '5px 12px', borderRadius: 8, border: '1px solid rgba(167,139,250,0.42)', color: '#A78BFA', fontSize: 12, fontWeight: 900, marginBottom: 12 }}>LIFETIME ONLY</span>
+                        <h3 style={{ fontSize: 24, fontWeight: 900, marginBottom: 8 }}>개별 제품은 영구제만 별도 문의로 구매 가능합니다</h3>
+                        <p style={{ color: 'rgba(255,255,255,0.62)', fontSize: 14, lineHeight: 1.7, margin: 0 }}>기간제는 올인원 코드로 구매하고, 특정 제품만 영구제로 쓰고 싶을 때는 1:1 문의로 발급합니다.</p>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 12 }}>
+                        {[
+                            ['네이버 자동화툴', '영구제', '₩1,000,000'],
+                            ['LEADER Orbit', '영구제', '₩1,000,000'],
+                            ['LEWORD', '영구제', '₩1,000,000'],
+                        ].map(([name, type, price]) => (
+                            <article key={name} style={{ padding: 18, borderRadius: 12, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)' }}>
+                                <strong style={{ display: 'block', color: '#fff', fontSize: 16, marginBottom: 6 }}>{name}</strong>
+                                <span style={{ display: 'block', color: '#A78BFA', fontSize: 13, fontWeight: 800, marginBottom: 8 }}>{type}</span>
+                                <b style={{ color: '#FFD700', fontSize: 22 }}>{price}</b>
+                            </article>
+                        ))}
+                    </div>
+                    <div style={{ textAlign: 'center', marginTop: 18 }}>
+                        <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minHeight: 46, padding: '12px 22px', borderRadius: 10, background: 'linear-gradient(135deg, #FEE500, #F5D100)', color: '#3C1E1E', fontSize: 14, fontWeight: 900, textDecoration: 'none' }}>개별 영구제 문의하기</a>
+                    </div>
                 </div>
 
                 {/* Refund banners */}

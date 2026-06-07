@@ -392,8 +392,8 @@ function LewordPage() {
                     <SectionLabel color={C.purpleLight}>💎 PRICING</SectionLabel>
                     <SectionTitle>Leword도 이제<br /><span style={{ background: C.gradPremium, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>올인원 이용권에 포함</span></SectionTitle>
                     <p style={{ color: C.textSecondary, fontSize: 16, maxWidth: 680, margin: '0 auto 28px', lineHeight: 1.8 }}>
-                        올인원 코드를 하나로 공유하는 방식이 아닙니다.
-                        LEWORD는 구매 기간에 맞는 LEWORD 전용 라이선스 코드가 별도로 발급됩니다.
+                        기간제 올인원 이용권을 구매하면 올인원 라이선스 코드가 발급됩니다.
+                        LEWORD, 네이버 자동화툴, Leaders Orbit을 이용 기간 안에서 함께 사용할 수 있습니다.
                     </p>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', maxWidth: 900, margin: '0 auto', gap: 16, alignItems: 'stretch' }}>
                         {[

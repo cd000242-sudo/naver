@@ -177,11 +177,11 @@ function handleConfirmPayment(e) {
     return jsonpResponse(callback, { ok: false, error: '결제 정보가 올바르지 않습니다.' });
   }
 
-  // ── 금액 → 상품 매핑 (Leaders Pro 4단계) ──
+  // ── 금액 → 상품 매핑 (공개 기간권은 Leaders Pro 올인원) ──
   var PRODUCT_MAP = {
-    50000:   { type: '1개월',  name: 'Leaders Pro 1개월',  poolType: null },
-    120000:  { type: '3개월',  name: 'Leaders Pro 3개월',  poolType: null },
-    400000:  { type: '1년',   name: 'Leaders Pro 1년',   poolType: 'yearly' },
+    50000:   { type: '올인원 1개월',  name: 'Leaders Pro 올인원 1개월',  poolType: null },
+    120000:  { type: '올인원 3개월',  name: 'Leaders Pro 올인원 3개월',  poolType: null },
+    400000:  { type: '올인원 1년',   name: 'Leaders Pro 올인원 1년',   poolType: 'yearly' },
     2000000: { type: '영구제',  name: 'Leaders Pro 영구제',  poolType: 'lifetime' }
   };
 

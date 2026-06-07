@@ -52,15 +52,15 @@
 
                 <!-- Trial 안내 박스 (start-trial 흐름에서만 노출) -->
                 <div id="trial-notice" class="hidden" style="background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.25); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
-                    <p style="font-size: 0.9rem; color: #c9a84c; font-weight: 700; margin-bottom: 8px;">선택한 제품의 라이선스가 발급되었습니다</p>
+                    <p style="font-size: 0.9rem; color: #c9a84c; font-weight: 700; margin-bottom: 8px;">올인원 라이선스가 발급되었습니다</p>
                     <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7;">
                         <strong style="color: #fff;">첫 자동결제일: <span id="trial-charge-date">—</span></strong><br>
-                        해당 일자에 카드로 자동결제되며, 결제 성공 시 새 라이선스 코드가 이메일로 다시 발송됩니다.<br>
+                        해당 일자에 카드로 자동결제되며, 결제 성공 시 새 올인원 라이선스 코드가 이메일로 다시 발송됩니다.<br>
                         무료 기간 내 해지는 <a href="/lookup" style="color: #c9a84c;">주문 조회</a>에서 가능합니다.
                     </p>
                 </div>
 
-                <div class="code-label">라이선스 코드</div>
+                <div class="code-label">올인원 라이선스 코드</div>
                 <div class="code-display" id="license-code"></div>
 
                 <button class="btn-copy" id="btn-copy" onclick="copyCode()">
@@ -72,9 +72,9 @@
                     <p style="font-size: 0.85rem; color: var(--success); font-weight: 600; margin-bottom: 6px;">💡
                         사용 방법</p>
                     <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
-                        구매한 제품의 앱을 실행하고 라이선스 등록 화면에서<br>
-                        위 코드를 입력하면 사용할 수 있습니다.<br>
-                        네이버, Orbit, LEWORD는 제품별 코드가 다르며 다른 앱에는 별도 코드가 필요합니다.
+                        Leaders Pro 제품군 앱에서 라이선스 등록 화면을 열고<br>
+                        위 올인원 코드를 입력하면 사용할 수 있습니다.<br>
+                        Better Life Naver, Leaders Orbit, LEWORD를 이용 기간 안에서 함께 사용할 수 있습니다.
                     </p>
                 </div>
 
@@ -83,7 +83,7 @@
                     style="background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
                     <p style="font-size: 0.85rem; color: var(--gold-primary); font-weight: 600; margin-bottom: 4px;">📧 이메일 발송 완료</p>
                     <p id="email-sent-address" style="font-size: 0.8rem; color: var(--text-secondary);">
-                        입력하신 이메일로 라이선스 코드가 발송되었습니다.
+                        입력하신 이메일로 올인원 라이선스 코드가 발송되었습니다.
                     </p>
                 </div>
 
@@ -186,6 +186,7 @@
                 customerKey: params.get('customerKey'),
                 authKey: params.get('authKey'),
                 productId: params.get('productId'),
+                orderName: params.get('orderName'),
             };
         }
 
@@ -206,7 +207,7 @@
                     `&authKey=${encodeURIComponent(params.authKey)}` +
                     `&customerKey=${encodeURIComponent(params.customerKey)}` +
                     `&amount=${encodeURIComponent(params.amount || '')}` +
-                    `&product=${encodeURIComponent(params.productId || '')}` +
+                    `&product=${encodeURIComponent(params.orderName || params.productId || '')}` +
                     (params.email ? `&email=${encodeURIComponent(params.email)}` : '') +
                     `&callback=${callbackName}`;
                 script.onerror = function () { clearTimeout(timeoutId); cleanup(); reject(new Error('NETWORK_ERROR')); };
@@ -349,7 +350,7 @@
                 // 이메일 발송 성공: UI 업데이트
                 document.getElementById('email-sent-notice').classList.remove('hidden');
                 document.getElementById('email-sent-address').textContent =
-                    `${email}로 라이선스 코드가 발송되었습니다.`;
+                    `${email}로 올인원 라이선스 코드가 발송되었습니다.`;
                 document.getElementById('email-backup-section').classList.add('hidden');
             } catch (err) {
                 // 자동 발송 실패: 수동 백업 섹션 유지
@@ -528,9 +529,9 @@
                     if (result.ok && result.code) {
                         // 페이지 문구를 trial 시작 형태로 교체
                         const headline = document.getElementById('success-headline');
-                        if (headline) headline.textContent = '라이선스 발급 완료!';
+                        if (headline) headline.textContent = '올인원 라이선스 발급 완료!';
                         const sub = document.getElementById('success-subtitle');
-                        if (sub) sub.textContent = '아래 코드는 결제한 상품의 라이선스 코드입니다.';
+                        if (sub) sub.textContent = '아래 코드 1개로 Leaders Pro 제품군 권한이 연결됩니다.';
                         // Trial 안내 박스 노출
                         const trialNotice = document.getElementById('trial-notice');
                         const chargeDateEl = document.getElementById('trial-charge-date');

@@ -249,9 +249,9 @@ function OrbitPage() {
             <section className="orbit-section light">
                 <div className="orbit-wrap">
                     <p className="orbit-kicker">LEADERS PRO ECOSYSTEM</p>
-                    <h2>Leaders Orbit은 제품별 라이선스 흐름 안에서 더 강해집니다</h2>
+                    <h2>Leaders Orbit은 리더스 프로 올인원 흐름 안에서 더 강해집니다</h2>
                     <p className="section-lead">
-                        LEWORD로 키워드를 찾고, 네이버 자동화로 핵심 채널을 운영하고, Leaders Orbit으로 블로그스팟·워드프레스 보조 동선을 만듭니다. 단, 라이선스 코드는 앱별로 각각 발급됩니다.
+                        LEWORD로 키워드를 찾고, 네이버 자동화로 핵심 채널을 운영하고, Leaders Orbit으로 블로그스팟·워드프레스 보조 동선을 만듭니다. 기간제 구매자는 올인원 코드 1개로 세 제품을 함께 이용합니다.
                     </p>
                     <div className="logo-wall">
                         <article><img src="/images/orbit/leword-logo.svg" alt="LEWORD 로고" /><b>LEWORD</b><p>검색량, 문서수, 경쟁비율을 보고 키워드 후보를 발굴합니다.</p></article>
@@ -325,9 +325,9 @@ function OrbitPage() {
                     <h2>블로그스팟·워드프레스를 보조 채널이 아니라 운영 동선으로 쓰고 싶다면</h2>
                     <p>
                         운영 중인 블로그 플랫폼, 연결하려는 계정 수, 필요한 자동화 범위를 보내주세요.
-                        Leaders Pro 제품군 안에서 어떤 방식으로 쓰는 것이 맞는지 안내할 수 있습니다. Orbit은 Orbit 전용 라이선스 코드가 필요합니다.
+                        Leaders Pro 올인원 흐름 안에서 어떤 방식으로 쓰는 것이 맞는지 안내할 수 있습니다. 개별 구매가 필요하면 영구제만 별도 문의로 가능합니다.
                     </p>
-                    <Link className="orbit-btn primary" to="/pricing">제품별 요금제 보기</Link>
+                    <Link className="orbit-btn primary" to="/pricing">올인원 가격표 보기</Link>
                     <p className="safe-note">
                         Leaders Orbit은 플랫폼 정책을 준수하는 범위에서 콘텐츠 운영 흐름을 체계화하는 제품입니다.
                         검색 노출, 방문자 수, 수익, 애드센스 승인은 보장하지 않습니다.
