@@ -5,6 +5,11 @@ import {
   decryptConfigOnLoad,
   migrateConfigToEncrypted,
 } from './security/encryptionMigrator.js';
+import {
+  isMaskedSecretValue,
+  normalizeSecretConfig,
+  stripSecretSchemaArtifacts,
+} from './security/secretValueUtils.js';
 
 export interface AppConfig {
   geminiApiKey?: string;
@@ -329,6 +334,27 @@ async function ensureConfigPath(userId?: string): Promise<string> {
   return configPath;
 }
 
+function getRuntimeSecretFallbacks(): Record<string, unknown> {
+  return {
+    geminiApiKey: process.env.GEMINI_API_KEY,
+    geminiApiKeys: process.env.GEMINI_API_KEY ? [process.env.GEMINI_API_KEY] : undefined,
+    openaiApiKey: process.env.OPENAI_API_KEY,
+    openaiImageApiKey: process.env.OPENAI_IMAGE_API_KEY || process.env.OPENAI_API_KEY,
+    claudeApiKey: process.env.CLAUDE_API_KEY,
+    perplexityApiKey: process.env.PERPLEXITY_API_KEY,
+    leonardoaiApiKey: process.env.LEONARDOAI_API_KEY,
+    deepinfraApiKey: process.env.DEEPINFRA_API_KEY,
+    pexelsApiKey: process.env.PEXELS_API_KEY,
+    unsplashApiKey: process.env.UNSPLASH_API_KEY,
+    pixabayApiKey: process.env.PIXABAY_API_KEY,
+    naverClientSecret: process.env.NAVER_CLIENT_SECRET || process.env.NAVER_CLIENT_SECRET_SEARCH,
+    naverDatalabClientSecret: process.env.NAVER_DATALAB_CLIENT_SECRET,
+    naverAdApiKey: process.env.NAVER_AD_API_KEY || process.env.NAVER_SEARCHAD_API_KEY,
+    naverAdSecretKey: process.env.NAVER_AD_SECRET_KEY || process.env.NAVER_SEARCHAD_SECRET_KEY,
+    naverAdCustomerId: process.env.NAVER_AD_CUSTOMER_ID || process.env.NAVER_SEARCHAD_CUSTOMER_ID,
+  };
+}
+
 export async function loadConfig(): Promise<AppConfig> {
   const filePath = await ensureConfigPath();
   const isPackaged = app.isPackaged;
@@ -353,6 +379,14 @@ export async function loadConfig(): Promise<AppConfig> {
       }
     }
 
+    {
+      const normalizedSecrets = normalizeSecretConfig(parsed, getRuntimeSecretFallbacks());
+      if (normalizedSecrets.changed) {
+        parsed = normalizedSecrets.config as any;
+        console.log('[Config] API 키 표시/스키마 오염값 자동 정리 완료');
+      }
+    }
+
     // ✅ [v2.10.8] 계정별 파일을 로드할 때 마스터 settings.json의 PRESERVE_FIELDS를 메모리에 머지
     //   문제: settings_xxx.json에 키 누락된 채 saveConfig 호출되면 메모리의 빈 cachedConfig가
     //         디스크에 다시 저장되어 머지 데이터 무효화. 메모리에 항상 머지본을 두면 saveConfig
@@ -363,7 +397,14 @@ export async function loadConfig(): Promise<AppConfig> {
         const masterRaw = await fs.readFile(masterPath, 'utf-8');
         const masterParsed = JSON.parse(masterRaw);
         // SPEC-MIGRATION-2026 M1 P3: 마스터 파일에서 머지할 때도 복호화 후 평문 비교/주입.
-        const { config: master } = decryptConfigOnLoad(masterParsed);
+        const { config: decryptedMaster } = decryptConfigOnLoad(masterParsed);
+        const { config: master } = normalizeSecretConfig(decryptedMaster, getRuntimeSecretFallbacks());
+        {
+          const normalizedAccountSecrets = normalizeSecretConfig(parsed, master);
+          if (normalizedAccountSecrets.changed) {
+            parsed = normalizedAccountSecrets.config as any;
+          }
+        }
         const PRESERVE = [
           'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey',
           'perplexityApiKey', 'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey',
@@ -450,7 +491,7 @@ export async function loadConfig(): Promise<AppConfig> {
     }
 
     // 하이픈 형식 키를 카멜케이스로 변환 (하위 호환성)
-    const normalizedConfig: AppConfig = {
+    let normalizedConfig: AppConfig = {
       ...parsed,
       geminiModel: geminiModel as any, // ✅ 변환된 모델 적용
       primaryGeminiTextModel: primaryGeminiTextModel as any, // ✅ 변환된 모델 적용
@@ -494,6 +535,16 @@ export async function loadConfig(): Promise<AppConfig> {
         ? parsed.usdToKrwRate
         : 1400,
     };
+
+    {
+      const normalizedSecrets = normalizeSecretConfig(
+        normalizedConfig as unknown as Record<string, unknown>,
+        getRuntimeSecretFallbacks(),
+      );
+      if (normalizedSecrets.changed) {
+        normalizedConfig = normalizedSecrets.config as unknown as AppConfig;
+      }
+    }
 
     // 빈 문자열 제거 및 undefined 제거
     Object.keys(normalizedConfig).forEach((key) => {
@@ -655,6 +706,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
   // ✅ [v2.10.277] Destructure to avoid mutating the caller's object.
   // __userId should already be stripped by saveConfig(), but handle here as a safety net.
   const { __userId, ...restUpdate } = update as any;
+  const previousConfig = cachedConfig ? { ...cachedConfig } : {};
   if (__userId && typeof __userId === 'string') {
     // Safety net: __userId normally processed synchronously in saveConfig()
     _activeUserId = __userId;
@@ -669,6 +721,17 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
       ...cachedConfig,
       ...restUpdate,
     };
+  }
+
+  {
+    const normalizedSecrets = normalizeSecretConfig(
+      (cachedConfig ?? {}) as unknown as Record<string, unknown>,
+      { ...getRuntimeSecretFallbacks(), ...previousConfig },
+    );
+    if (normalizedSecrets.changed) {
+      cachedConfig = normalizedSecrets.config as unknown as AppConfig;
+      console.log('[Config] 저장 전 API 키 표시/스키마 오염값 정리 완료');
+    }
   }
 
   const filePath = await ensureConfigPath();
@@ -746,6 +809,12 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
       }
     }
     if (diskConfig !== null) {
+      const { config: decryptedDiskConfig } = decryptConfigOnLoad(diskConfig);
+      diskConfig = normalizeSecretConfig(
+        decryptedDiskConfig,
+        { ...getRuntimeSecretFallbacks(), ...(cachedConfig ?? {}) },
+      ).config;
+
       // ✅ [v2.10.53] customImageSavePath + 기타 사용자 환경설정 보존 필드 추가
       //   사용자 보고: '환경설정에 있는 이미지 저장 경로에 저장되는게 아니냐고 원래 그 경로로 저장됐었자나'
       //   원인: 다른 IPC가 saveConfig({...partial}) 호출 시 customImageSavePath 누락 → 디스크 빈 값 덮어씀
@@ -792,7 +861,11 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           (typeof cv === 'string' && cv.trim().length > 0) ||
           typeof cv === 'boolean' ||
           (typeof cv !== 'string' && cv !== undefined && cv !== null);
-        if (dHas && !cHas) {
+        const cMasked = typeof cv === 'string' && isMaskedSecretValue(stripSecretSchemaArtifacts(cv));
+        const dRealSecret = typeof dv === 'string'
+          && stripSecretSchemaArtifacts(dv).length > 0
+          && !isMaskedSecretValue(stripSecretSchemaArtifacts(dv));
+        if (dHas && (!cHas || (cMasked && dRealSecret))) {
           (cachedConfig as any)[k] = dv;
           preserved++;
         }
@@ -840,8 +913,23 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         let defaultConfig: any = {};
         try {
           const raw = await fs.readFile(defaultPath, 'utf-8');
-          defaultConfig = JSON.parse(raw);
+          const parsedDefault = JSON.parse(raw);
+          const { config: decryptedDefault } = decryptConfigOnLoad(parsedDefault);
+          defaultConfig = normalizeSecretConfig(
+            decryptedDefault,
+            { ...getRuntimeSecretFallbacks(), ...(cachedConfig ?? {}) },
+          ).config;
         } catch { /* 파일 없으면 빈 객체 */ }
+
+        if (cachedConfig) {
+          const normalizedCachedSecrets = normalizeSecretConfig(
+            cachedConfig as unknown as Record<string, unknown>,
+            defaultConfig,
+          );
+          if (normalizedCachedSecrets.changed) {
+            cachedConfig = normalizedCachedSecrets.config as unknown as AppConfig;
+          }
+        }
 
         // API 키와 모델 설정만 백싱크 (민감한 계정 정보는 제외)
         const API_KEY_FIELDS = [
@@ -893,11 +981,23 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
   return cachedConfig;
 }
 
+function applySecretEnv(envName: string, value: string | undefined, label: string): boolean {
+  const trimmed = stripSecretSchemaArtifacts(value);
+  if (!trimmed) return false;
+  if (isMaskedSecretValue(trimmed)) {
+    console.warn(`[Config] ${label} API key looks masked; keeping existing environment value instead.`);
+    return false;
+  }
+  process.env[envName] = trimmed;
+  return true;
+}
+
 export function applyConfigToEnv(config: AppConfig): void {
   // API 키 설정 (빈 문자열이 아닌 경우만 주입, 기존 .env 값 보존을 위해 삭제는 하지 않음)
   if (config.geminiApiKey && config.geminiApiKey.trim()) {
-    process.env.GEMINI_API_KEY = config.geminiApiKey.trim();
-    console.log('[Config] GEMINI_API_KEY 설정됨: ✅');
+    if (applySecretEnv('GEMINI_API_KEY', config.geminiApiKey, 'Gemini')) {
+      console.log('[Config] GEMINI_API_KEY 설정됨: ✅');
+    }
   }
 
   // (removed prodiaToken env injection - deprecated)
@@ -918,7 +1018,7 @@ export function applyConfigToEnv(config: AppConfig): void {
   // ✅ [2026-03-23 FIX] delete 패턴 제거 — GEMINI_API_KEY와 동일한 안전 패턴
   // 빈 값이어도 기존 process.env 값을 보존 (다른 경로에서 설정된 값 유지)
   if (config.openaiApiKey && config.openaiApiKey.trim()) {
-    process.env.OPENAI_API_KEY = config.openaiApiKey.trim();
+    applySecretEnv('OPENAI_API_KEY', config.openaiApiKey, 'OpenAI');
   }
 
   if (config.pexelsApiKey && config.pexelsApiKey.trim()) {
@@ -926,15 +1026,16 @@ export function applyConfigToEnv(config: AppConfig): void {
   }
 
   if (config.claudeApiKey && config.claudeApiKey.trim()) {
-    process.env.CLAUDE_API_KEY = config.claudeApiKey.trim();
+    applySecretEnv('CLAUDE_API_KEY', config.claudeApiKey, 'Claude');
   }
 
   // (removed stabilityApiKey env injection - deprecated)
 
   // ✅ [2026-01-25] Perplexity API 키 설정
   if (config.perplexityApiKey && config.perplexityApiKey.trim()) {
-    process.env.PERPLEXITY_API_KEY = config.perplexityApiKey.trim();
-    console.log('[Config] PERPLEXITY_API_KEY 설정됨: ✅');
+    if (applySecretEnv('PERPLEXITY_API_KEY', config.perplexityApiKey, 'Perplexity')) {
+      console.log('[Config] PERPLEXITY_API_KEY 설정됨: ✅');
+    }
   }
 
   // ✅ [2026-03-20 FIX] Perplexity 모델 설정 (sonar / sonar-pro)

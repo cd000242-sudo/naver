@@ -51,6 +51,7 @@ import { isFeatureEnabled } from './services/featureFlagConfig.js';
 import { processAutoPublishContent, getRecentPeriods, recordSelectedTitle, type TitleSelectionResult } from './titleSelector.js';
 import { trendAnalyzer } from './agents/trendAnalyzer.js';
 import { loadConfig, getConfigSync } from './configManager.js';
+import { isMaskedSecretValue } from './security/secretValueUtils.js';
 // [Phase 3-1/v2.10.139] god file 분해 1단계 — pure string helper 추출
 import {
   removeEmojis,
@@ -2189,11 +2190,6 @@ function formatWaitDurationKo(ms: number): string {
 function formatWaitBudgetKo(ms: number): string {
   const safeMs = Number.isFinite(ms) ? Math.max(60_000, Math.floor(ms)) : 60_000;
   return `${Math.ceil(safeMs / 60_000)}분`;
-}
-
-function isMaskedSecretValue(value: string | undefined): boolean {
-  if (!value) return false;
-  return /[•●*]/.test(value);
 }
 
 function isOpenAiConnectionIssue(error: unknown, message = ''): boolean {
@@ -5934,8 +5930,23 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   const MAX_PROMPT_AUGMENTATIONS = 2;
 
   // 1. API 키 로드 — 다중 키 로테이션 지원
-  const primaryApiKey = (config?.geminiApiKey?.trim() || process.env.GEMINI_API_KEY || '').trim();
-  const extraKeys: string[] = (config?.geminiApiKeys || []).map((k: string) => k.trim()).filter(Boolean);
+  const configGeminiKey = config?.geminiApiKey?.trim() || '';
+  const envGeminiKey = process.env.GEMINI_API_KEY?.trim() || '';
+  if (isMaskedSecretValue(configGeminiKey) && !envGeminiKey) {
+    throw new Error('Gemini API 키가 실제 키가 아니라 마스킹된 표시값으로 저장되어 있습니다. 환경설정에서 Gemini 실제 API 키를 다시 입력해주세요.');
+  }
+  const primaryApiKey = (!isMaskedSecretValue(configGeminiKey) ? configGeminiKey : '') || (!isMaskedSecretValue(envGeminiKey) ? envGeminiKey : '');
+  if (!primaryApiKey && (isMaskedSecretValue(configGeminiKey) || isMaskedSecretValue(envGeminiKey))) {
+    throw new Error('Gemini API 키가 실제 키가 아니라 마스킹된 표시값으로 저장되어 있습니다. 환경설정에서 Gemini 실제 API 키를 다시 입력해주세요.');
+  }
+  const rawExtraKeys = Array.isArray(config?.geminiApiKeys) ? config.geminiApiKeys : [];
+  const maskedExtraKeyCount = rawExtraKeys.filter((k: string) => isMaskedSecretValue(k)).length;
+  if (maskedExtraKeyCount > 0) {
+    console.warn(`[Gemini] 마스킹된 보조 API 키 ${maskedExtraKeyCount}개는 호출에서 제외합니다.`);
+  }
+  const extraKeys: string[] = rawExtraKeys
+    .map((k: string) => k.trim())
+    .filter((k: string) => k && !isMaskedSecretValue(k));
   const keyPlan = buildGeminiKeyExecutionPlan({
     primaryApiKey,
     extraApiKeys: extraKeys,
@@ -6606,7 +6617,15 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
       perplexityApiKey: config?.perplexityApiKey ? `${config.perplexityApiKey.substring(0, 8)}...` : '(없음)',
       envKey: process.env.PERPLEXITY_API_KEY ? `${process.env.PERPLEXITY_API_KEY.substring(0, 8)}...` : '(없음)',
     });
-    apiKey = config?.perplexityApiKey?.trim() || process.env.PERPLEXITY_API_KEY;
+    const configKey = config?.perplexityApiKey?.trim() || '';
+    const envKey = process.env.PERPLEXITY_API_KEY?.trim() || '';
+    if (isMaskedSecretValue(configKey) && !envKey) {
+      throw new Error('Perplexity API 키가 실제 키가 아니라 마스킹된 표시값으로 저장되어 있습니다. 환경설정에서 Perplexity 실제 API 키를 다시 입력해주세요.');
+    }
+    apiKey = (!isMaskedSecretValue(configKey) ? configKey : '') || (!isMaskedSecretValue(envKey) ? envKey : undefined);
+    if (!apiKey && (isMaskedSecretValue(configKey) || isMaskedSecretValue(envKey))) {
+      throw new Error('Perplexity API 키가 실제 키가 아니라 마스킹된 표시값으로 저장되어 있습니다. 환경설정에서 Perplexity 실제 API 키를 다시 입력해주세요.');
+    }
   } catch (e) {
     console.warn('[Perplexity] Config 로드 실패 (env 폴백 사용):', e);
     apiKey = process.env.PERPLEXITY_API_KEY;
@@ -6825,6 +6844,9 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
     if (!key) {
       throw new Error('OpenAI API 키가 설정되어 있지 않습니다. 환경설정 → API 키에서 OpenAI 키를 입력해주세요.');
     }
+    if (isMaskedSecretValue(key)) {
+      throw new Error('OpenAI API 키가 실제 키가 아니라 마스킹된 표시값으로 저장되어 있습니다. 환경설정에서 OpenAI 실제 API 키를 다시 입력해주세요.');
+    }
     if (!openAIClients.has(key)) {
       openAIClients.set(key, new OpenAI({ apiKey: key }));
     }
@@ -6835,12 +6857,13 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   // applyConfigToEnv가 빈 문자열일 때 delete process.env.OPENAI_API_KEY 하므로
   // config.openaiApiKey가 있으면 직접 전달해야 확실히 로드됨
   const rawConfigApiKey = config?.openaiApiKey?.trim() || undefined;
-  if (isMaskedSecretValue(rawConfigApiKey)) {
+  const envOpenAiKey = process.env.OPENAI_API_KEY?.trim() || undefined;
+  if (isMaskedSecretValue(rawConfigApiKey) && !envOpenAiKey) {
     throw new Error(
       'OpenAI API 키가 실제 키가 아니라 마스킹된 표시값으로 저장되어 있습니다. 환경설정에서 OpenAI 실제 API 키를 다시 입력해주세요.'
     );
   }
-  const configApiKey = rawConfigApiKey;
+  const configApiKey = !isMaskedSecretValue(rawConfigApiKey) ? rawConfigApiKey : undefined;
   if (configApiKey) {
     console.log(`[OpenAI] ✅ config에서 직접 API 키 로드됨 (길이: ${configApiKey.length})`);
   } else {
@@ -7094,6 +7117,9 @@ function getAnthropicClient(apiKey?: string): Anthropic {
   if (!key) {
     throw new Error('Claude API 키가 설정되어 있지 않습니다. 환경설정 → API 키에서 Claude 키를 입력해주세요.');
   }
+  if (isMaskedSecretValue(key)) {
+    throw new Error('Claude API 키가 실제 키가 아니라 마스킹된 표시값으로 저장되어 있습니다. 환경설정에서 Claude 실제 API 키를 다시 입력해주세요.');
+  }
   if (!anthropicClients.has(key)) {
     anthropicClients.set(key, new Anthropic({ apiKey: key }));
   }
@@ -7119,7 +7145,12 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
 
   // ✅ [2026-03-23 FIX] config에서 직접 API 키를 가져와 전달 (process.env 폴백)
   // callOpenAI와 동일한 패턴: applyConfigToEnv가 빈 문자열일 때 delete하므로 직접 전달 필요
-  const configClaudeKey = config?.claudeApiKey?.trim() || undefined;
+  const rawConfigClaudeKey = config?.claudeApiKey?.trim() || undefined;
+  const envClaudeKey = process.env.CLAUDE_API_KEY?.trim() || undefined;
+  if (isMaskedSecretValue(rawConfigClaudeKey) && !envClaudeKey) {
+    throw new Error('Claude API 키가 실제 키가 아니라 마스킹된 표시값으로 저장되어 있습니다. 환경설정에서 Claude 실제 API 키를 다시 입력해주세요.');
+  }
+  const configClaudeKey = !isMaskedSecretValue(rawConfigClaudeKey) ? rawConfigClaudeKey : undefined;
   if (configClaudeKey) {
     console.log(`[Claude] ✅ config에서 직접 API 키 로드됨 (길이: ${configClaudeKey.length})`);
   } else {

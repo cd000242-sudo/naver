@@ -5,6 +5,10 @@
  */
 
 // Note: AppConfig 타입은 main 프로세스용이므로 여기서는 any 사용
+import {
+    isMaskedSecretValue,
+    stripSecretSchemaArtifacts,
+} from '../../security/secretValueUtils.js';
 
 // ==================== 타입 정의 ====================
 
@@ -49,22 +53,30 @@ function getSelectByIds(...ids: string[]): HTMLSelectElement | null {
 
 function isMaskedApiValue(value: string | undefined): boolean {
     if (!value) return false;
-    return value.includes('•') || value.includes('*') || value.includes('…');
+    return isMaskedSecretValue(value);
 }
 
-function setMaskedApiInput(input: HTMLInputElement | null, value: string | undefined): void {
-    if (!input || !value) return;
-    input.value = maskApiKey(value);
-    input.dataset.realValue = value;
+function setApiInputValue(input: HTMLInputElement | null, value: string | undefined): void {
+    if (!input) return;
+    const cleanValue = stripSecretSchemaArtifacts(value);
+    input.value = cleanValue;
+    if (cleanValue) {
+        input.dataset.realValue = cleanValue;
+    } else {
+        delete input.dataset.realValue;
+    }
 }
 
 function readApiInput(input: HTMLInputElement | null, currentValue: string | undefined): string {
-    if (!input) return (currentValue || '').trim();
-    const realValue = input.dataset.realValue?.trim();
-    if (realValue) return realValue;
-    const value = input.value.trim();
+    if (!input) return stripSecretSchemaArtifacts(currentValue);
+    const value = stripSecretSchemaArtifacts(input.value);
     if (!value) return '';
-    if (isMaskedApiValue(value)) return (currentValue || '').trim();
+    if (isMaskedApiValue(value)) {
+        const realValue = stripSecretSchemaArtifacts(input.dataset.realValue);
+        if (realValue && !isMaskedApiValue(realValue)) return realValue;
+        return stripSecretSchemaArtifacts(currentValue);
+    }
+    input.dataset.realValue = value;
     return value;
 }
 
@@ -200,20 +212,17 @@ async function loadCurrentSettings(): Promise<void> {
         const els = getElements();
 
         // API 키 로드
-        setMaskedApiInput(els.geminiApiKeyInput, config.geminiApiKey);
-        setMaskedApiInput(els.openaiApiKeyInput, config.openaiImageApiKey || config.openaiApiKey);
-        setMaskedApiInput(els.claudeApiKeyInput, config.claudeApiKey);
-        setMaskedApiInput(els.perplexityApiKeyInput, config.perplexityApiKey);
-        setMaskedApiInput(els.leonardoaiApiKeyInput, config.leonardoaiApiKey);
+        setApiInputValue(els.geminiApiKeyInput, config.geminiApiKey);
+        setApiInputValue(els.openaiApiKeyInput, config.openaiImageApiKey || config.openaiApiKey);
+        setApiInputValue(els.claudeApiKeyInput, config.claudeApiKey);
+        setApiInputValue(els.perplexityApiKeyInput, config.perplexityApiKey);
+        setApiInputValue(els.leonardoaiApiKeyInput, config.leonardoaiApiKey);
         if (els.naverClientIdInput && config.naverClientId) {
             els.naverClientIdInput.value = config.naverClientId;
         }
-        if (els.naverClientSecretInput && config.naverClientSecret) {
-            els.naverClientSecretInput.value = maskApiKey(config.naverClientSecret);
-            els.naverClientSecretInput.dataset.realValue = config.naverClientSecret;
-        }
+        setApiInputValue(els.naverClientSecretInput, config.naverClientSecret);
         // ✅ [2026-01-26] DeepInfra API 키 로드
-        setMaskedApiInput(els.deepinfraApiKeyInput, config.deepinfraApiKey);
+        setApiInputValue(els.deepinfraApiKeyInput, config.deepinfraApiKey);
 
         // AI 설정 로드
         if (els.defaultAiProviderSelect && config.defaultAiProvider) {
@@ -339,13 +348,6 @@ async function saveSettings(): Promise<void> {
     }
 }
 
-// ==================== 유틸리티 ====================
-
-function maskApiKey(key: string): string {
-    if (!key || key.length < 8) return key;
-    return key.substring(0, 4) + '••••••••' + key.substring(key.length - 4);
-}
-
 // ==================== 초기화 ====================
 
 let _settingsModalInitialized = false; // ✅ [2026-02-08] 이중 초기화 방지 가드
@@ -393,7 +395,8 @@ export function initSettingsModal(): void {
             });
         }
 
-        // API 키 입력 필드에 포커스 시 마스킹 해제
+        // API 키 입력 필드는 실제 값을 유지한다.
+        // 눈 아이콘은 input type만 바꾸며, 값 자체를 마스킹 문자열로 바꾸지 않는다.
         const apiKeyInputs = [
             els.geminiApiKeyInput,
             els.openaiApiKeyInput,
@@ -405,15 +408,11 @@ export function initSettingsModal(): void {
         ];
         apiKeyInputs.forEach(input => {
             if (input) {
-                input.addEventListener('focus', () => {
-                    if (input.dataset.realValue) {
-                        input.value = input.dataset.realValue;
-                    }
-                });
-                input.addEventListener('blur', () => {
+                input.addEventListener('input', () => {
                     if (input.value && !isMaskedApiValue(input.value)) {
                         input.dataset.realValue = input.value;
-                        input.value = maskApiKey(input.value);
+                    } else if (!input.value) {
+                        delete input.dataset.realValue;
                     }
                 });
             }
