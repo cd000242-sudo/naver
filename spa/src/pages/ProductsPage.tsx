@@ -1,6 +1,7 @@
 import { useEffect, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
+import ZoomableImage from '../components/ZoomableImage';
 
 type ProductId = 'naver' | 'leword' | 'orbit';
 type Product = {
@@ -111,7 +112,15 @@ function ProductMedia({ product }: { product: Product }) {
         );
     }
 
-    return <img className="products-media" src={product.media.src} alt={product.media.alt} loading="lazy" />;
+    return (
+        <ZoomableImage
+            className="products-zoom-trigger"
+            imgClassName="products-media"
+            src={product.media.src}
+            alt={product.media.alt}
+            title={product.name}
+        />
+    );
 }
 
 function MetricList({ items }: { items: Array<[string, string]> }) {
@@ -182,8 +191,8 @@ function ProductsPage() {
                                 ))}
                             </div>
                             <div className="suite-preview">
-                                <img src="/images/leword/screen-golden-keywords.png" alt="LEWORD 황금키워드 화면" />
-                                <img src="/images/orbit/orbit-sequential-queue.png" alt="Orbit 연속 발행 대기열 화면" />
+                                <ZoomableImage className="products-zoom-trigger" src="/images/leword/screen-golden-keywords.png" alt="LEWORD 황금키워드 화면" title="LEWORD 황금키워드 화면" />
+                                <ZoomableImage className="products-zoom-trigger" src="/images/orbit/orbit-sequential-queue.png" alt="Orbit 연속 발행 대기열 화면" title="Orbit 연속 발행 대기열 화면" />
                             </div>
                         </div>
                     </div>
@@ -284,8 +293,8 @@ function ProductsPage() {
                             ))}
                         </div>
                         <div className="workflow-shots fade-in">
-                            <img src="/images/leword/17-sources-orbit.png" alt="LEWORD 17개 데이터 소스 화면" loading="lazy" />
-                            <img src="/images/orbit/orbit-external-traffic.png" alt="Orbit 외부유입 글 생성 화면" loading="lazy" />
+                            <ZoomableImage className="products-zoom-trigger" src="/images/leword/17-sources-orbit.png" alt="LEWORD 17개 데이터 소스 화면" title="LEWORD 17개 데이터 소스 화면" />
+                            <ZoomableImage className="products-zoom-trigger" src="/images/orbit/orbit-external-traffic.png" alt="Orbit 외부유입 글 생성 화면" title="Orbit 외부유입 글 생성 화면" />
                         </div>
                     </div>
                 </section>
@@ -521,6 +530,22 @@ function ProductsPage() {
                     border-radius: 8px;
                     border: 1px solid rgba(255,255,255,0.12);
                     background: #071018;
+                }
+
+                .products-zoom-trigger {
+                    position: relative;
+                    overflow: hidden;
+                    border-radius: 8px;
+                }
+
+                .products-zoom-trigger img {
+                    transition: transform .24s ease, filter .24s ease;
+                }
+
+                .products-zoom-trigger:hover img,
+                .products-zoom-trigger:focus-visible img {
+                    transform: scale(1.025);
+                    filter: brightness(1.07);
                 }
 
                 .suite-preview img {

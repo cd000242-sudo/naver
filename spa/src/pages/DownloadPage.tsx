@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ZoomableImage from '../components/ZoomableImage';
 
 /**
  * 다운로드 — payment-page/download.html 마이그.
@@ -90,6 +91,14 @@ function DownloadPage() {
                         margin-left: 0 !important;
                         margin-right: auto !important;
                     }
+                }
+                .download-card-zoom img {
+                    transition: transform .24s ease, filter .24s ease;
+                }
+                .download-card-zoom:hover img,
+                .download-card-zoom:focus-visible img {
+                    transform: scale(1.025);
+                    filter: brightness(1.08);
                 }
             `}</style>
             <section style={{ padding: '140px 20px 100px', maxWidth: 1200, margin: '0 auto' }}>
@@ -207,11 +216,13 @@ function DownloadCard({ productKey }: { productKey: ProductKey }) {
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
-                <img
+                <ZoomableImage
+                    className="download-card-zoom"
                     src={product.image}
                     alt={product.name}
+                    title={product.name}
                     loading="lazy"
-                    style={{
+                    imgStyle={{
                         width: '100%',
                         height: '100%',
                         display: 'block',

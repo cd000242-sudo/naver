@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ZoomableImage from '../components/ZoomableImage';
 
 const FEATURE_CARDS = [
     { title: '두 플랫폼을 한 화면에서', desc: 'Blogger API와 WordPress REST API 기반 발행 흐름을 같은 제품 안에서 관리합니다.' },
@@ -66,7 +67,7 @@ function Shot({ title, src, alt, desc, wide = false }: ShotProps) {
                 <span className="dot green" />
                 <b>{title}</b>
             </div>
-            <img src={src} alt={alt} loading="lazy" />
+            <ZoomableImage className="orbit-zoom-trigger" src={src} alt={alt} title={title} />
             {desc ? <figcaption>{desc}</figcaption> : null}
         </figure>
     );
@@ -488,6 +489,15 @@ function OrbitPage() {
                     object-fit: cover;
                     object-position: top center;
                     aspect-ratio: 16 / 10;
+                    transition: transform .24s ease, filter .24s ease;
+                }
+                .orbit-zoom-trigger {
+                    overflow: hidden;
+                }
+                .orbit-zoom-trigger:hover img,
+                .orbit-zoom-trigger:focus-visible img {
+                    transform: scale(1.025);
+                    filter: brightness(1.08);
                 }
                 .orbit-shot-wide img {
                     aspect-ratio: 16 / 7;
