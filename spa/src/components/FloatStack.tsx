@@ -21,9 +21,29 @@ function FloatStack() {
 
     return (
         <>
+            <style>{`
+                @media (max-width: 768px) {
+                    .lp-float-link {
+                        right: 12px !important;
+                        width: 46px !important;
+                        min-width: 46px !important;
+                        height: 46px !important;
+                        padding: 0 !important;
+                        border-radius: 50% !important;
+                        justify-content: center !important;
+                        gap: 0 !important;
+                    }
+                    .lp-float-link span { display: none !important; }
+                    .lp-float-link > div { width: 28px !important; height: 28px !important; }
+                    .lp-float-chat { bottom: 18px !important; }
+                    .lp-float-room { bottom: 74px !important; }
+                    .lp-float-youtube { bottom: 130px !important; }
+                }
+            `}</style>
             {/* 위→아래 순서: 음악(MusicPlayer bottom:200) / 유튜브(140) / 단톡방(80) / 1:1(20)
                 음악이 유튜브보다 위. 전체 stack을 살짝 하단으로 내림. */}
             <a
+                className="lp-float-link lp-float-chat"
                 href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener"
                 title="1:1 카카오톡 문의"
                 style={{
@@ -38,6 +58,7 @@ function FloatStack() {
             </a>
 
             <a
+                className="lp-float-link lp-float-room"
                 href="https://open.kakao.com/o/gQ1jRBwh" target="_blank" rel="noopener"
                 title="단톡방 바로가기"
                 style={{
@@ -52,6 +73,7 @@ function FloatStack() {
             </a>
 
             <a
+                className="lp-float-link lp-float-youtube"
                 href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener"
                 title="공식 유튜브 채널"
                 style={{

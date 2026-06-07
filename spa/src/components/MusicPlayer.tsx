@@ -160,11 +160,27 @@ function MusicPlayer() {
 
     return (
         <>
+            <style>{`
+                @media (max-width: 768px) {
+                    .lp-music-player { right: 12px !important; bottom: 186px !important; }
+                    .lp-music-button {
+                        width: 46px !important;
+                        min-width: 46px !important;
+                        height: 46px !important;
+                        padding: 0 !important;
+                        border-radius: 50% !important;
+                        justify-content: center !important;
+                        gap: 0 !important;
+                    }
+                    .lp-music-button span:last-child { display: none !important; }
+                }
+            `}</style>
             {/* 숨김 YT 플레이어 */}
             <div id="lpm-yt-player" style={{ position: 'fixed', top: -9999, left: -9999, width: 1, height: 1, opacity: 0, pointerEvents: 'none' }} />
 
             {/* 미니 플레이어 FAB — 4개 stack 중 가장 위 (유튜브 위로) */}
             <div
+                className="lp-music-player"
                 style={{
                     position: 'fixed', bottom: 200, right: 24, zIndex: 10000,
                     display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8,
@@ -197,6 +213,7 @@ function MusicPlayer() {
                     </div>
                 )}
                 <button
+                    className="lp-music-button"
                     onClick={() => setExpanded(e => !e)}
                     title="🌸 음악 플레이어"
                     style={{

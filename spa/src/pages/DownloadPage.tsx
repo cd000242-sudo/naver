@@ -10,69 +10,68 @@ import { useEffect, useState } from 'react';
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
 const DOWNLOAD_PW = '1645';
 
+type DownloadChoice = {
+    key: 'windows' | 'mac-arm' | 'mac-intel';
+    label: string;
+    detail: string;
+    url: string;
+};
+
+type ProductConfig = {
+    name: string;
+    version: string;
+    image: string;
+    accent: string;
+    borderColor: string;
+    downloads: DownloadChoice[];
+};
+
 const PRODUCTS = {
     naver: {
         name: 'Better Life Naver',
-        version: '네이버 블로그 자동화 · Windows 64-bit',
+        version: '네이버 블로그 자동화 · v2.11.14',
         image: '/images/feature-auto-publish.png',
-        defaultUrl: 'https://github.com/cd000242-sudo/naver/releases/download/v2.10.334/Better-Life-Naver-Setup-2.10.334.exe',
-        githubRepo: undefined as string | undefined,
         accent: '#FFD700',
         borderColor: 'rgba(255,215,0,0.25)',
+        downloads: [
+            { key: 'windows', label: 'Windows', detail: '2.11.14 · exe', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.14/Better-Life-Naver-Setup-2.11.14.exe' },
+            { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.11.14 · arm64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.14/Better-Life-Naver-2.11.14-arm64.dmg' },
+            { key: 'mac-intel', label: 'Mac Intel', detail: '2.11.14 · x64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.14/Better-Life-Naver-2.11.14-x64.dmg' },
+        ],
     },
     leword: {
-        name: 'Leword',
-        version: 'AI 키워드 인텔리전스 · 올인원 구매자용 · 최신 자동 반영',
+        name: 'LEWORD',
+        version: 'AI 키워드 인텔리전스 · v2.49.83',
         image: '/images/leword/hero-banner.png',
-        defaultUrl: 'https://github.com/cd000242-sudo/leword-app/releases/latest',
-        githubRepo: 'cd000242-sudo/leword-app',
         accent: '#A78BFA',
         borderColor: 'rgba(124,58,237,0.25)',
+        downloads: [
+            { key: 'windows', label: 'Windows', detail: '2.49.83 · exe', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83.exe' },
+            { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.49.83 · arm64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83-arm64.dmg' },
+            { key: 'mac-intel', label: 'Mac Intel', detail: '2.49.83 · x64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83-x64.dmg' },
+        ],
     },
-};
+    orbit: {
+        name: 'LEADERNAM Orbit',
+        version: '블로그스팟·워드프레스 자동화 · v3.8.112',
+        image: '/images/orbit/orbit-platform-settings.png',
+        accent: '#44d7b6',
+        borderColor: 'rgba(68,215,182,0.28)',
+        downloads: [
+            { key: 'windows', label: 'Windows', detail: '3.8.112 · exe', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.112/LEADERNAM-Orbit-3.8.112.exe' },
+            { key: 'mac-arm', label: 'Mac M1-M4', detail: '3.8.112 · arm64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.112/LEADERNAM-Orbit-3.8.112-arm64.dmg' },
+            { key: 'mac-intel', label: 'Mac Intel', detail: '3.8.112 · x64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.112/LEADERNAM-Orbit-3.8.112-x64.dmg' },
+        ],
+    },
+} satisfies Record<string, ProductConfig>;
 
 type ProductKey = keyof typeof PRODUCTS;
-type ClientPlatform = 'mac' | 'windows';
 
-function getClientPlatform(): ClientPlatform {
+function getPreferredDownload(downloads: DownloadChoice[]): DownloadChoice {
     if (typeof navigator !== 'undefined' && /mac/i.test(`${navigator.platform} ${navigator.userAgent}`)) {
-        return 'mac';
+        return downloads.find((item) => item.key === 'mac-arm') || downloads[0];
     }
-    return 'windows';
-}
-
-function scoreReleaseAsset(asset: any, platform: ClientPlatform): number {
-    const name = String(asset?.name || '').toLowerCase();
-    if (!asset?.browser_download_url || !name.includes('leword') || name.endsWith('.blockmap')) return 0;
-    if (platform === 'mac') {
-        if (/\.dmg$/i.test(name) && name.includes('universal')) return 110;
-        if (/\.dmg$/i.test(name)) return 100;
-        if (/\.zip$/i.test(name) && /(mac|darwin|universal|arm64|x64)/.test(name)) return name.includes('universal') ? 95 : 90;
-        return 0;
-    }
-    if (/\.exe$/i.test(name) && /setup/.test(name)) return 100;
-    if (/\.exe$/i.test(name) && /portable/.test(name)) return 90;
-    if (/\.exe$/i.test(name)) return 80;
-    if (/\.zip$/i.test(name) && /(setup|portable|win|windows)/.test(name)) return 70;
-    return 0;
-}
-
-function selectReleaseAsset(assets: any[], platform: ClientPlatform): any | null {
-    return (assets || []).reduce((best: { asset: any | null; score: number }, asset: any) => {
-        const score = scoreReleaseAsset(asset, platform);
-        return score > best.score ? { asset, score } : best;
-    }, { asset: null, score: 0 }).asset;
-}
-
-async function fetchLatestDownload(repo: string): Promise<{ url: string; version: string; filename: string }> {
-    const res = await fetch(`https://api.github.com/repos/${repo}/releases/latest`, {
-        headers: { 'Accept': 'application/vnd.github+json' },
-    });
-    if (!res.ok) throw new Error(`GitHub API ${res.status}`);
-    const data = await res.json();
-    const asset = selectReleaseAsset(data.assets || [], getClientPlatform());
-    if (!asset) throw new Error('No compatible LEWORD asset found');
-    return { url: asset.browser_download_url, version: data.tag_name, filename: asset.name };
+    return downloads.find((item) => item.key === 'windows') || downloads[0];
 }
 
 function DownloadPage() {
@@ -84,6 +83,15 @@ function DownloadPage() {
 
     return (
         <div style={{ position: 'relative', zIndex: 1 }}>
+            <style>{`
+                @media (min-width: 1180px) and (max-width: 1520px) {
+                    .download-product-grid {
+                        max-width: 1040px;
+                        margin-left: 0 !important;
+                        margin-right: auto !important;
+                    }
+                }
+            `}</style>
             <section style={{ padding: '140px 20px 100px', maxWidth: 1200, margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 40 }}>
                     <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>DOWNLOAD</span>
@@ -94,9 +102,10 @@ function DownloadPage() {
 
                 <LeadCapture />
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24, marginTop: 32 }}>
+                <div className="download-product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24, margin: '32px auto 0' }}>
                     <DownloadCard productKey="naver" />
                     <DownloadCard productKey="leword" />
+                    <DownloadCard productKey="orbit" />
                 </div>
             </section>
         </div>
@@ -167,18 +176,8 @@ function DownloadCard({ productKey }: { productKey: ProductKey }) {
     const [error, setError] = useState(false);
     const [shake, setShake] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [version, setVersion] = useState<string | null>(null);
-
-    // GitHub repo가 있으면 최신 버전 라벨 로드
-    useEffect(() => {
-        if (!product.githubRepo) return;
-        (async () => {
-            try {
-                const { version: v } = await fetchLatestDownload(product.githubRepo!);
-                setVersion(v);
-            } catch { /* ignore */ }
-        })();
-    }, [product.githubRepo]);
+    const [downloadKey, setDownloadKey] = useState(() => getPreferredDownload(product.downloads).key);
+    const selectedDownload = product.downloads.find((item) => item.key === downloadKey) || product.downloads[0];
 
     const tryDownload = async () => {
         if (pw.trim() !== DOWNLOAD_PW) {
@@ -188,31 +187,10 @@ function DownloadCard({ productKey }: { productKey: ProductKey }) {
             return;
         }
         setError(false);
-
-        // GitHub repo 매핑 제품 → latest API
-        if (product.githubRepo) {
-            setLoading(true);
-            try {
-                const { url, version: v, filename } = await fetchLatestDownload(product.githubRepo);
-                console.log(`[DOWNLOAD] ${product.name} ${v} → ${filename}`);
-                window.location.href = url;
-                setPw('');
-            } catch (e) {
-                console.error('[DOWNLOAD] latest API 실패:', e);
-                window.open(product.defaultUrl, '_blank', 'noopener');
-                setPw('');
-            } finally {
-                setLoading(false);
-            }
-            return;
-        }
-
-        if (!product.defaultUrl) {
-            alert(`${product.name} 다운로드 파일이 아직 준비되지 않았습니다.\n관리자에게 문의해주세요.`);
-            return;
-        }
-        window.open(product.defaultUrl, '_blank', 'noopener');
+        setLoading(true);
+        window.open(selectedDownload.url, '_blank', 'noopener');
         setPw('');
+        window.setTimeout(() => setLoading(false), 700);
     };
 
     return (
@@ -244,9 +222,35 @@ function DownloadCard({ productKey }: { productKey: ProductKey }) {
             </div>
             <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 4 }}>
                 {product.name}
-                {version && <span style={{ marginLeft: 8, fontSize: '0.7em', color: product.accent, fontWeight: 600 }}>{version}</span>}
             </h3>
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13, marginBottom: 18 }}>{product.version}</p>
+            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13, marginBottom: 14 }}>{product.version}</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(108px, 1fr))', gap: 8, marginBottom: 14 }}>
+                {product.downloads.map((item) => {
+                    const active = item.key === selectedDownload.key;
+                    return (
+                        <button
+                            key={item.key}
+                            type="button"
+                            onClick={() => setDownloadKey(item.key)}
+                            style={{
+                                minHeight: 58,
+                                padding: '9px 10px',
+                                borderRadius: 10,
+                                border: active ? '1px solid ' + product.accent : '1px solid rgba(255,255,255,0.12)',
+                                background: active ? product.accent : 'rgba(255,255,255,0.06)',
+                                color: active ? '#050816' : 'rgba(255,255,255,0.78)',
+                                cursor: 'pointer',
+                                fontWeight: 800,
+                                textAlign: 'left',
+                                boxShadow: active ? '0 10px 24px rgba(0,0,0,0.22)' : 'none',
+                            }}
+                        >
+                            <span style={{ display: 'block', fontSize: 13, lineHeight: 1.2 }}>{item.label}</span>
+                            <span style={{ display: 'block', marginTop: 4, fontSize: 10, lineHeight: 1.2, opacity: 0.78 }}>{item.detail}</span>
+                        </button>
+                    );
+                })}
+            </div>
             <div>
                 <div style={{ display: 'flex', gap: 8 }}>
                     <input
@@ -267,7 +271,7 @@ function DownloadCard({ productKey }: { productKey: ProductKey }) {
                         onClick={tryDownload}
                         disabled={loading}
                         style={{ padding: '12px 18px', background: `linear-gradient(135deg, ${product.accent}, ${product.accent}cc)`, color: '#000', border: 'none', borderRadius: 10, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                        title="다운로드"
+                        title={selectedDownload.label + ' 다운로드'}
                     >
                         {loading ? (
                             <span style={{ fontSize: 16 }}>⏳</span>
