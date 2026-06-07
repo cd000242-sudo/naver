@@ -567,11 +567,10 @@ export class ProgressModal {
                     break;
                 case 'SERVER_BUSY':
                 case 'SERVER_ERROR':
-                    detail.errorType = '🔧 Google 서버 일시 장애';
+                    detail.errorType = '🔧 Google 응답 오류';
                     detail.errorCode = tag === 'SERVER_BUSY' ? 'HTTP_503' : 'HTTP_5xx';
                     detail.suggestion =
-                        'Google 측 일시적 과부하/장애입니다. 5~30분 후 다시 시도하거나, 다른 시간대에 ' +
-                        '재시도해주세요. 본인 환경 문제가 아닙니다.';
+                        '잠시 후 다시 시도하거나, 같은 문제가 반복되면 로그인 상태와 사용량 한도를 확인하세요.';
                     break;
                 case 'UNKNOWN_FAILURE':
                 case 'OTHER':

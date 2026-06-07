@@ -16,7 +16,7 @@ export function translateGeminiError(error: Error): string {
     if (msg.includes('safety') || msg.includes('blocked')) return '🛡️ [안전 필터] 생성된 콘텐츠가 Gemini 안전 기준(선정성/폭력성 등)에 의해 차단되었습니다. 주제를 변경해보세요.';
     if (msg.includes('location') || msg.includes('unsupported country')) return '🌍 [접속 위치] 현재 국가에서 Gemini API를 사용할 수 없습니다. VPN을 확인해주세요.';
     if (msg.includes('valid json')) return '📝 [형식 오류] AI 응답 형식이 깨졌습니다. 일시적인 현상이니 다시 시도해주세요.';
-    if (msg.includes('500') || msg.includes('internal')) return '🔥 [서버 오류] Google Gemini 서버에 일시적인 문제가 발생했습니다.';
+    if (msg.includes('500') || msg.includes('internal')) return '🔥 [응답 오류] Gemini 응답을 받지 못했습니다. 잠시 후 다시 시도해주세요.';
     if (msg.includes('fetch failed')) return '📡 [연결 실패] 인터넷 연결 상태를 확인해주세요.';
 
     return `⚠️ [알 수 없는 오류] ${error.message}`;

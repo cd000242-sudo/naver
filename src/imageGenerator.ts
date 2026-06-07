@@ -591,7 +591,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       }
 
       // 분류 안 된 에러 → 일반 메시지
-      throw new Error(`[ImageFX] 이미지 생성 실패: ${rawMsg}\n\n💡 가능한 원인:\n1. 시간당 한도 초과 (1시간 후 재시도)\n2. Google 세션 만료 (재로그인 필요)\n3. 안전 필터 차단 (키워드 변경)\n4. Google 서버 일시 장애`);
+      throw new Error(`[ImageFX] 이미지 생성 실패: ${rawMsg}\n\n💡 가능한 원인:\n1. 시간당 한도 초과 (1시간 후 재시도)\n2. Google 세션 만료 (재로그인 필요)\n3. 안전 필터 차단 (키워드 변경)\n4. 일시적인 응답 오류`);
     }
   }
 

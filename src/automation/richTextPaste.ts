@@ -68,6 +68,9 @@ export interface RichArticleThemes {
 const DEFAULT_MAX_CHUNK_CHARS = 38;
 const DEFAULT_MAX_HIGHLIGHTS = 7;
 const SECTION_HIGHLIGHT_MIN_SCORE = 3;
+const INLINE_FORMAT_COMMANDS = ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript'];
+const TEXT_DECORATION_RESET = 'text-decoration:none';
+const FONT_STYLE_RESET = 'font-style:normal';
 
 export const SOFT_TABLE_THEMES: SoftTableTheme[] = [
   {
@@ -484,6 +487,8 @@ function tableStyle(theme: SoftTableTheme): string {
     'margin:10px 0 16px',
     'font-size:15px',
     'line-height:1.65',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
     `border:1px solid ${theme.border}`,
     `border-top:3px solid ${theme.accent}`,
   ].join(';');
@@ -498,6 +503,8 @@ function tableCellStyle(theme: SoftTableTheme, rowIndex: number, header = false)
       'padding:9px 10px',
       'font-weight:700',
       'text-align:center',
+      TEXT_DECORATION_RESET,
+      FONT_STYLE_RESET,
     ].join(';');
   }
 
@@ -506,6 +513,8 @@ function tableCellStyle(theme: SoftTableTheme, rowIndex: number, header = false)
     `border:1px solid ${theme.border}`,
     'padding:9px 10px',
     'vertical-align:top',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -516,6 +525,8 @@ function highlightStyle(theme: SoftHighlightTheme, strong = false): string {
     strong ? 'font-weight:700' : 'font-weight:600',
     'border-radius:4px',
     'padding:0 2px',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -530,6 +541,8 @@ function paragraphStyle(fontSizePx: number, centerAlign: boolean): string {
     'background-color:#ffffff',
     'word-break:keep-all',
     'overflow-wrap:break-word',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -545,6 +558,8 @@ function qaQuestionStyle(): string {
     'font-weight:500',
     'word-break:keep-all',
     'overflow-wrap:break-word',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -558,6 +573,8 @@ function headingMarkerStyle(theme: SoftHeadingTheme): string {
     `color:${theme.text}`,
     'font-weight:800',
     'box-sizing:border-box',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -571,6 +588,8 @@ function headingParagraphStyle(theme: SoftHeadingTheme, index: number): string {
     'word-break:keep-all',
     'overflow-wrap:break-word',
     `color:${theme.text}`,
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -582,6 +601,8 @@ function headingNumberStyle(theme: SoftHeadingTheme): string {
     'line-height:1.4',
     'font-weight:700',
     'margin:0 0 4px',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -592,6 +613,8 @@ function tocStyle(): string {
     'padding:0',
     'box-sizing:border-box',
     'text-align:center',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -603,6 +626,8 @@ function tocTitleStyle(theme: SoftHeadingTheme): string {
     'line-height:1.45',
     'font-weight:800',
     'text-align:center',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -613,6 +638,8 @@ function tocItemStyle(): string {
     'line-height:1.65',
     'text-align:center',
     'word-break:keep-all',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -622,6 +649,8 @@ function tocNumberStyle(theme: SoftHeadingTheme): string {
     `color:${theme.accent}`,
     'font-weight:800',
     'margin-right:7px',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -629,7 +658,8 @@ function tocLinkStyle(theme: SoftHeadingTheme): string {
   return [
     `color:${theme.text}`,
     'background-color:#ffffff',
-    'text-decoration:none',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
   ].join(';');
 }
 
@@ -811,7 +841,7 @@ function formatInline(text: string, _terms: string[], highlightWhole: boolean, t
     })
     .join('');
 
-  if (!highlightWhole) return `<span style="background-color:#ffffff;color:inherit;">${inner}</span>`;
+  if (!highlightWhole) return `<span style="background-color:#ffffff;color:inherit;${TEXT_DECORATION_RESET};${FONT_STYLE_RESET};">${inner}</span>`;
   return `<span style="${highlightStyle(theme, true)}">${inner}</span>`;
 }
 
@@ -1172,6 +1202,62 @@ async function grantClipboardPermission(page: Page, frame: Frame): Promise<void>
   }
 }
 
+async function resetInlineFormattingState(page: Page, frame: Frame): Promise<void> {
+  const resetCommands = async (target: Page | Frame): Promise<void> => {
+    await target.evaluate((commands: string[]) => {
+      try {
+        const editable =
+          (document.querySelector('.se-main-container .se-text-paragraph, .se-section-text, [contenteditable="true"]') as HTMLElement | null) ||
+          (document.activeElement as HTMLElement | null);
+        editable?.focus?.();
+
+        for (const command of commands) {
+          if (typeof document.queryCommandState !== 'function' || typeof document.execCommand !== 'function') continue;
+          if (document.queryCommandState(command)) {
+            document.execCommand(command, false);
+          }
+        }
+      } catch {
+        // Toolbar reset is a best-effort guard. Rich HTML styles still prevent inheritance.
+      }
+    }, INLINE_FORMAT_COMMANDS).catch(() => undefined);
+  };
+
+  const resetToolbarButtons = async (target: Page | Frame): Promise<void> => {
+    await target.evaluate(() => {
+      const selectors = [
+        'button[data-name="bold"]',
+        'button[data-name="italic"]',
+        'button[data-name="underline"]',
+        'button[data-name="strikethrough"]',
+        'button[data-name="strikeThrough"]',
+        'button[data-command="bold"]',
+        'button[data-command="italic"]',
+        'button[data-command="underline"]',
+        'button[data-command="strikethrough"]',
+        'button[data-command="strikeThrough"]',
+      ];
+
+      for (const selector of selectors) {
+        const button = document.querySelector(selector);
+        if (!(button instanceof HTMLElement)) continue;
+        const active =
+          button.classList.contains('active') ||
+          button.classList.contains('selected') ||
+          button.classList.contains('on') ||
+          button.classList.contains('se-toolbar-button-active') ||
+          button.getAttribute('aria-pressed') === 'true';
+        if (active) button.click();
+      }
+    }).catch(() => undefined);
+  };
+
+  await resetCommands(frame);
+  await resetCommands(page);
+  await resetToolbarButtons(frame);
+  await resetToolbarButtons(page);
+}
+
 async function focusLastEditableLine(page: Page, frame: Frame): Promise<void> {
   const focusedBySelection = await frame.evaluate(() => {
     const candidates = Array.from(document.querySelectorAll('.se-main-container .se-text-paragraph, .se-section-text, [contenteditable="true"]')) as HTMLElement[];
@@ -1236,6 +1322,7 @@ export async function pasteRichHtmlAtCursor(
     await page.bringToFront().catch(() => undefined);
     await page.evaluate(() => window.focus()).catch(() => undefined);
     await focusLastEditableLine(page, frame).catch(() => undefined);
+    await resetInlineFormattingState(page, frame).catch(() => undefined);
     await new Promise(resolve => setTimeout(resolve, 120));
     await grantClipboardPermission(page, frame).catch(() => undefined);
 

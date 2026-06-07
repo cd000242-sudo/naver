@@ -6360,21 +6360,20 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             const expMs = Math.min(baseMs * Math.pow(2, modelRetryCount - 1), 30000);
             const jitterMs = Math.floor(Math.random() * 1000);
             const waitMs = expMs + jitterMs;
-            // [2026-05-28 사용자 요청] Gemini 서버 일시 장애 UI 안내 비표시.
+            // [2026-06-07 사용자 요청] Gemini 서버 상태 공지 UI 안내 비표시.
             //   재시도는 그대로 진행하되 사용자 UI 로그에는 노출하지 않음 (서버 안정화로 안내 빈도 감소).
             //   디버그용 console.warn은 유지 — 로그 분석 시 추적 가능.
-            const logMsg = `🔧 구글 서버 일시 장애 — ${Math.round(waitMs/1000)}초 후 재시도합니다. (${modelRetryCount}/${perModelMaxRetries})`;
+            const logMsg = `🔧 Gemini 응답 오류 — ${Math.round(waitMs/1000)}초 후 재시도합니다. (${modelRetryCount}/${perModelMaxRetries})`;
             console.warn(`[Gemini] ${logMsg}`);
             await sleepWithAbort(waitMs, options.signal);
             continue;
           }
           throw new Error(
-            `🔧 [${modelName}] 구글 서버가 응답하지 않습니다. (503/500 에러)\n\n` +
-            `📌 원인: Google Gemini 서버의 일시적 장애입니다. 내 설정 문제가 아닙니다.\n\n` +
+            `🔧 [${modelName}] Gemini 응답을 받지 못했습니다. (503/500)\n\n` +
             `💡 해결 방법:\n` +
-            `  1) 2~3분 후 다시 시도하세요.\n` +
-            `  2) 계속 발생하면 Google AI Studio 상태 페이지를 확인하세요.\n` +
-            `  3) 급하면 설정에서 다른 AI 엔진(Claude/OpenAI)으로 변경하세요.`
+            `  1) 잠시 후 다시 시도하세요.\n` +
+            `  2) 계속 발생하면 API 키와 사용량 한도를 확인하세요.\n` +
+            `  3) 급한 작업은 설정에서 다른 AI 엔진(Claude/OpenAI)으로 변경하세요.`
           );
         }
 
@@ -6443,8 +6442,8 @@ function translateGeminiError(rawMessage: string): string {
 
   // 서버 오류 (500/503)
   if (msg.includes('500') || msg.includes('503') || msg.includes('internal') || msg.includes('unavailable') || msg.includes('overloaded')) {
-    return '🔧 구글 서버 일시 장애입니다. (내 설정 문제가 아닙니다)\n' +
-      '💡 2~3분 후 다시 시도하세요. 급하면 설정에서 다른 AI 엔진으로 변경하세요.' + detail;
+    return '🔧 Gemini 응답 오류가 발생했습니다.\n' +
+      '💡 잠시 후 다시 시도하거나 API 키와 사용량 한도를 확인하세요.' + detail;
   }
 
   // 타임아웃

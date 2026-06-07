@@ -275,7 +275,7 @@ export async function generateEnglishPromptMain(
 
   // ✅ [v2.10.57] 사용자 지적 '모델 자동 폴백 금지' — 멀티모델 자동 전환 회귀
   //   기존: Gemini → OpenAI → Claude → Perplexity 순차 시도 (사용자 모델 무시)
-  //   문제: 사용자가 GPT-4.1 선택했는데 Gemini가 우선 호출되거나, Gemini가 서버 불안정 시 자동 OpenAI 폴백
+  //   문제: 사용자가 GPT-4.1 선택했는데 Gemini가 우선 호출되거나, Gemini 실패 시 자동 OpenAI 폴백
   //   수정: 사용자가 환경설정에서 명시 선택한 provider만 사용. 실패 시 같은 모델로 N회 재시도 후 명확한 에러
   const userProvider = (config?.defaultAiProvider || 'gemini') as 'gemini' | 'openai' | 'claude' | 'perplexity';
 
@@ -295,7 +295,7 @@ export async function generateEnglishPromptMain(
     attemptName = 'Gemini';
   }
 
-  // 같은 모델로 최대 3회 재시도 (서버 불안정 대응 — 다른 모델 폴백 없음)
+  // 같은 모델로 최대 3회 재시도 (일시 오류 대응 — 다른 모델 폴백 없음)
   const MAX_RETRIES = 3;
   let lastErr: any = null;
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
