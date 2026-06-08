@@ -96,6 +96,8 @@ import {
   ensureContentParagraphBreaks,
   limitRegexOccurrences,
   truncateHeadingTitles,
+  removeInternalStructureMarkersFromContent,
+  removeInternalStructureMarkersFromText,
 } from './contentBodyTransforms';
 // [Phase 3-17/v2.10.163] 제목 안전성 검증 (내부 사용은 detectPromptLeakageInTitle만)
 import { detectPromptLeakageInTitle } from './contentTitleSafetyChecks';
@@ -522,9 +524,7 @@ export function removeOrdinalHeadingLabelsFromBody(bodyText: string): string {
 
   // 과도한 줄바꿈 정리 (3개 이상의 연속 줄바꿈을 2개로)
   cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
-
-
-
+  cleaned = removeInternalStructureMarkersFromText(cleaned);
 
   return cleaned.trim();
 }
@@ -1037,6 +1037,7 @@ JSON:
 
 export function finalizeStructuredContent(content: StructuredContent, source: ContentSource): StructuredContent {
   let finalContent = removeEmojisFromContent(content);
+  finalContent = removeInternalStructureMarkersFromContent(finalContent);
 
   // ✅ [Phase 7] Source Fidelity 측정 — URL 입력 시 LLM 압축·정보 누락 감지
   // 사용자 진단: "url 넣어서 발행하면 내용들이 많이 압축되고 중요한 내용도 빠짐"
@@ -1215,6 +1216,7 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   }
 
   // ✅ [2026-03-14] 연속 줄바꿈 정리 (AI가 생성한 \n\n\n → \n\n, 본문 내 이중 빈 줄 방지)
+  finalContent = removeInternalStructureMarkersFromContent(finalContent);
   finalContent = normalizeContentLineBreaks(finalContent);
 
   // [v2.10.393] 사후 문단 분할 재활성화 — 한국어 종결어미만 split하는 안전 정규식 적용.
@@ -1265,6 +1267,7 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
 
     applyHomefeedNarrativeHookBlock(finalContent, source);
     try { applyOrdinalHeadingMarkerFix(finalContent); } catch { /* ignore */ }
+    finalContent = removeInternalStructureMarkersFromContent(finalContent);
 
     runPostGenValidator(finalContent, source);
     return finalContent;
@@ -1323,7 +1326,7 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
       const pnN = n(pn);
       const pkN = n(primaryKeyword);
       if (pnN && pkN && (pnN.includes(pkN) || pkN.includes(pnN))) {
-        return finalContent;
+        return removeInternalStructureMarkersFromContent(finalContent);
       }
     } catch (e) {
       console.warn('[contentGenerator] catch ignored:', e);
@@ -1338,6 +1341,7 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
     console.warn('[contentGenerator] catch ignored:', e);
   }
   sanitizeStructuredContentClaims(finalContent);
+  finalContent = removeInternalStructureMarkersFromContent(finalContent);
 
   // ✅ [2026-01-19 수정] affiliate 모드 수익 배분 고지는 최상단에 삽입됨
   // 마무리글에 중복 삽입하지 않음 (사용자 요청)

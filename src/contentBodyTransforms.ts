@@ -8,6 +8,61 @@
 import type { StructuredContent } from './contentGenerator';
 import { removeEmojis } from './contentTextHelpers';
 
+const INTERNAL_STRUCTURE_SEQUENCE_PREFIX = /^\s*[FIRO](?:\s*(?:\u2192|->|=>|>|\/|-)\s*[FIRO]){1,5}\s*[:：]?\s*/i;
+const INTERNAL_STRUCTURE_PAREN_PREFIX = /^\s*\(\s*[FIRO]\s*\)\s*[:：]?\s*/i;
+
+export function removeInternalStructureMarkersFromText(text: string): string {
+  if (!text) return text;
+
+  const cleaned = String(text)
+    .split(/\r?\n/)
+    .map((line) => line
+      .replace(INTERNAL_STRUCTURE_SEQUENCE_PREFIX, '')
+      .replace(INTERNAL_STRUCTURE_PAREN_PREFIX, '')
+      .trimEnd())
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  return cleaned;
+}
+
+export function removeInternalStructureMarkersFromContent(content: StructuredContent): StructuredContent {
+  if (!content) return content;
+
+  const clean = (value: unknown): string => removeInternalStructureMarkersFromText(String(value || ''));
+
+  if ((content as any).title) (content as any).title = clean((content as any).title);
+  if (content.selectedTitle) content.selectedTitle = clean(content.selectedTitle);
+  if (content.bodyPlain) content.bodyPlain = clean(content.bodyPlain);
+  if (content.bodyHtml) content.bodyHtml = clean(content.bodyHtml);
+  if ((content as any).content) (content as any).content = clean((content as any).content);
+  if ((content as any).introduction) (content as any).introduction = clean((content as any).introduction);
+  if ((content as any).conclusion) (content as any).conclusion = clean((content as any).conclusion);
+
+  if (Array.isArray(content.titleAlternatives)) {
+    content.titleAlternatives = content.titleAlternatives.map((title) => clean(title)).filter(Boolean);
+  }
+  if (Array.isArray(content.titleCandidates)) {
+    content.titleCandidates = content.titleCandidates.map((candidate: any) => ({
+      ...candidate,
+      ...(typeof candidate?.text === 'string' ? { text: clean(candidate.text) } : {}),
+      ...(typeof candidate?.reasoning === 'string' ? { reasoning: clean(candidate.reasoning) } : {}),
+    }));
+  }
+  if (Array.isArray(content.headings)) {
+    content.headings = content.headings.map((heading: any) => ({
+      ...heading,
+      ...(typeof heading?.title === 'string' ? { title: clean(heading.title) } : {}),
+      ...(typeof heading?.content === 'string' ? { content: clean(heading.content) } : {}),
+      ...(typeof heading?.body === 'string' ? { body: clean(heading.body) } : {}),
+      ...(typeof heading?.summary === 'string' ? { summary: clean(heading.summary) } : {}),
+    }));
+  }
+
+  return content;
+}
+
 export function applyOrdinalHeadingMarkerFix(content: StructuredContent): void {
   const headings = Array.isArray(content?.headings) ? content.headings : [];
   if (headings.length === 0) return;
