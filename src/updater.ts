@@ -46,6 +46,37 @@ export function isUpdating(): boolean {
 
 // ✅ [2026-03-11] 업데이트 체크 결과를 외부에 전달하기 위한 resolve 함수
 const MANUAL_DOWNLOAD_URL = 'https://github.com/cd000242-sudo/naver/releases/latest';
+let transientUpdateRetryTimer: NodeJS.Timeout | null = null;
+let transientUpdateRetryCount = 0;
+
+function getUpdateErrorMessage(error: unknown): string {
+    if (error instanceof Error) return error.message;
+    if (typeof error === 'string') return error;
+    try {
+        return JSON.stringify(error);
+    } catch {
+        return String(error ?? '');
+    }
+}
+
+function isTransientGitHubUpdateError(error: unknown): boolean {
+    const message = getUpdateErrorMessage(error);
+    return /GitHub|github\.com|releases\/latest|releases\/tag/i.test(message) &&
+        /(Gateway Time-out|504|502|503|ETIMEDOUT|ECONNRESET|ENOTFOUND|EAI_AGAIN|timeout|timed out|rate limit)/i.test(message);
+}
+
+function scheduleTransientUpdateRetry(): void {
+    if (transientUpdateRetryTimer) return;
+    const delayMs = Math.min(300000, 30000 * Math.max(1, transientUpdateRetryCount + 1));
+    transientUpdateRetryCount += 1;
+    sendLogToRenderer(`[Updater] GitHub transient error. Retrying update check in ${Math.round(delayMs / 1000)}s.`);
+    transientUpdateRetryTimer = setTimeout(() => {
+        transientUpdateRetryTimer = null;
+        checkForUpdates().catch((retryError) => {
+            sendLogToRenderer(`[Updater] retry failed: ${getUpdateErrorMessage(retryError)}`);
+        });
+    }, delayMs);
+}
 
 function isMacCodeSignatureValidationError(error: unknown): boolean {
     const message = error instanceof Error ? error.message : String(error ?? '');
@@ -407,6 +438,7 @@ export function initAutoUpdaterEarly(): void {
 
     // ✅ 업데이트 발견 (자동 다운로드 중이므로 알림만 표시)
     updater.on('update-available', (info: UpdateInfo) => {
+        transientUpdateRetryCount = 0;
         sendLogToRenderer(`[Updater] 새 업데이트 발견: ${info.version}`);
         sendStatusToWindow('update-available', {
             version: info.version,
@@ -435,6 +467,7 @@ export function initAutoUpdaterEarly(): void {
 
     // ✅ 업데이트 없음
     updater.on('update-not-available', () => {
+        transientUpdateRetryCount = 0;
         sendLogToRenderer('[Updater] 최신 버전입니다.');
         sendStatusToWindow('update-not-available');
         // ✅ [2026-03-11] Promise resolve: 업데이트 없음 → main.ts에서 인증창 생성
@@ -462,6 +495,7 @@ export function initAutoUpdaterEarly(): void {
 
     // ✅ 다운로드 완료 - 강제 재시작
     updater.on('update-downloaded', (info: UpdateInfo) => {
+        transientUpdateRetryCount = 0;
         sendLogToRenderer(`[Updater] 다운로드 완료: ${info.version}`);
 
         // ✅ [v2.10.98] mainWindow 누락 케이스 fallback — 어떤 윈도우든 잡아서 dialog 표시.
@@ -574,6 +608,21 @@ export function initAutoUpdaterEarly(): void {
 
     // ✅ 에러 처리 - [2026-02-05 FIX] 진행률 창을 바로 닫지 않고 에러 표시 후 사용자 확인 대기
     updater.on('error', (error: any) => {
+        if (isTransientGitHubUpdateError(error)) {
+            isUpdateInProgress = false;
+            if (updateCheckResolve) {
+                updateCheckResolve(false);
+                updateCheckResolve = null;
+            }
+            closeProgressWindow();
+            sendStatusToWindow('update-not-available', {
+                reason: 'github-transient',
+                retrying: true,
+                message: 'GitHub 응답 지연으로 자동 업데이트 확인을 잠시 후 다시 시도합니다.'
+            });
+            scheduleTransientUpdateRetry();
+            return;
+        }
         sendLogToRenderer(`[Updater] ❌ 오류: ${error.message}`);
 
         // ✅ [2026-03-11] 업데이트 실패 시 플래그 해제

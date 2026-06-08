@@ -207,6 +207,37 @@ function verifyReleaseAssets(version) {
   });
 }
 
+function verifyLatestReleasePointer(version) {
+  return new Promise((resolve, reject) => {
+    const req = https.request({
+      hostname: 'api.github.com',
+      path: '/repos/cd000242-sudo/naver/releases/latest',
+      method: 'GET',
+      headers: {
+        'Accept': 'application/vnd.github+json',
+        'User-Agent': 'BetterLifeNaver-ReleaseVerifier',
+      },
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        if (res.statusCode !== 200) {
+          return reject(new Error(`GitHub latest API ${res.statusCode}: ${data.substring(0, 200)}`));
+        }
+        try {
+          const release = JSON.parse(data);
+          resolve({ ok: release.tag_name === `v${version}`, tagName: release.tag_name });
+        } catch (e) {
+          reject(new Error(`latest 응답 파싱 실패: ${e.message}`));
+        }
+      });
+    });
+    req.on('error', reject);
+    req.setTimeout(15000, () => req.destroy(new Error('timeout (15s)')));
+    req.end();
+  });
+}
+
 // ─── 메인 오케스트레이션 ────────────────────────────────────
 
 async function main() {
@@ -283,6 +314,14 @@ async function main() {
       } else {
         fail(`자산 누락 — auto-update 동작 불가: ${verifyResult.missing.join(', ')}`);
         info('수동 복구: gh release upload v' + VERSION + ' release_final/latest.yml --repo cd000242-sudo/naver');
+        allSuccess = false;
+      }
+
+      const latestResult = await verifyLatestReleasePointer(VERSION);
+      if (latestResult.ok) {
+        success(`Latest 포인터 검증 통과: ${latestResult.tagName}`);
+      } else {
+        fail(`Latest 포인터 불일치: expected v${VERSION}, actual ${latestResult.tagName}`);
         allSuccess = false;
       }
     } catch (e) {

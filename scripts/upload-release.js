@@ -193,7 +193,8 @@ async function createRelease() {
         name: `v${VERSION}`,
         body: `## v${VERSION}\n\n릴리즈 자동 생성`,
         draft: false,
-        prerelease: false
+        prerelease: false,
+        make_latest: 'true'
     });
 
     const result = await apiRequest({
@@ -215,6 +216,15 @@ async function createRelease() {
             method: 'GET'
         });
         console.log(`   ✅ 릴리즈 ID: ${existing.id}`);
+        await apiRequest({
+            hostname: 'api.github.com',
+            path: `/repos/${OWNER}/${REPO}/releases/${existing.id}`,
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }, JSON.stringify({ make_latest: 'true' }));
+        console.log(`   ✅ Latest 포인터 갱신: ${TAG}`);
         return existing;
     }
 

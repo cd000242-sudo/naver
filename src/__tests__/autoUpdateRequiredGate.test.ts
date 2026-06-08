@@ -39,4 +39,30 @@ describe('required-version auto update gate', () => {
     expect(main).toMatch(/Periodic sync paused while auto-update is in progress/);
     expect(main).toMatch(/Background sync paused while auto-update is in progress/);
   });
+
+  it('marks uploaded GitHub releases as latest and verifies the latest pointer', () => {
+    const uploadRelease = readSource('scripts/upload-release.js');
+    const releaseAll = readSource('scripts/release-all.js');
+
+    expect(uploadRelease).toMatch(/make_latest:\s*['"]true['"]/);
+    expect(uploadRelease).toMatch(/method:\s*['"]PATCH['"][\s\S]{0,240}make_latest/);
+    expect(releaseAll).toMatch(/verifyLatestReleasePointer/);
+    expect(releaseAll).toMatch(/\/repos\/cd000242-sudo\/naver\/releases\/latest/);
+    expect(releaseAll).toMatch(/release\.tag_name === `v\$\{version\}`/);
+  });
+
+  it('treats GitHub 5xx update errors as transient retries instead of fatal dialogs', () => {
+    const updater = readSource('src/updater.ts');
+    const errorHandler = updater.slice(
+      updater.indexOf("updater.on('error'"),
+      updater.indexOf('// ??IPC', updater.indexOf("updater.on('error'"))
+    );
+
+    expect(updater).toMatch(/isTransientGitHubUpdateError/);
+    expect(updater).toMatch(/Gateway Time-out\|504\|502\|503/);
+    expect(errorHandler).toMatch(/isTransientGitHubUpdateError\(error\)/);
+    expect(errorHandler).toMatch(/reason:\s*['"]github-transient['"]/);
+    expect(errorHandler).toMatch(/scheduleTransientUpdateRetry\(\)/);
+    expect(errorHandler.indexOf('isTransientGitHubUpdateError')).toBeLessThan(errorHandler.indexOf('dialog.showMessageBox'));
+  });
 });
