@@ -23,6 +23,68 @@ import { NAVER_TIMEOUTS } from './timeouts.js';
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes } from './richTextPaste.js';
 
+const PREVIOUS_POST_SEPARATOR = '--------------------------------------------------------------';
+
+type TailCtaLike = { link?: string; text?: string };
+
+async function insertPreviousPostTailBlock(
+  self: any,
+  page: Page,
+  resolved: ResolvedRunOptions,
+  effectiveCtas: TailCtaLike[] = [],
+  context = 'tail'
+): Promise<{ inserted: boolean; cardReady: boolean }> {
+  const previousPostUrl = String(resolved.previousPostUrl || '').trim();
+  if (!previousPostUrl) {
+    return { inserted: false, cardReady: false };
+  }
+
+  const prevUrlUsedAsCta =
+    (resolved.affiliateLink && resolved.affiliateLink === previousPostUrl) ||
+    effectiveCtas.some((cta) => cta.link && cta.link === previousPostUrl);
+
+  if (prevUrlUsedAsCta) {
+    self.log(`   ⚠️ [이전글] CTA 링크와 동일 URL → 중복 삽입 건너뜀`);
+    return { inserted: false, cardReady: false };
+  }
+
+  const randomPrevHook = PREV_POST_HOOKS[Math.floor(Math.random() * PREV_POST_HOOKS.length)];
+  const previousPostTitle = String(resolved.previousPostTitle || '이전 글 보기').trim();
+
+  self.log(`   📖 [이전글] 리치 본문 뒤 이전글 연결 (${context})`);
+  await page.keyboard.press('Enter');
+  await safeKeyboardType(page, PREVIOUS_POST_SEPARATOR, { delay: 5 });
+  await page.keyboard.press('Enter');
+  await safeKeyboardType(page, randomPrevHook || previousPostTitle, { delay: 10 });
+  await page.keyboard.press('Enter');
+  await safeKeyboardType(page, previousPostTitle, { delay: 10 });
+  await page.keyboard.press('Enter');
+  await safeKeyboardType(page, previousPostUrl, { delay: 10 });
+  await page.keyboard.press('Enter');
+
+  const cardReady = typeof self.waitForLinkCard === 'function'
+    ? await self.waitForLinkCard(15000, 500)
+    : false;
+
+  if (cardReady && typeof self.removeBareUrlTextAfterLinkCard === 'function') {
+    await self.removeBareUrlTextAfterLinkCard();
+  }
+
+  await page.keyboard.press('End').catch(() => undefined);
+  try {
+    await page.keyboard.down('Control');
+    await page.keyboard.press('End');
+  } catch {
+    // 커서 이동 실패는 발행 자체를 막지 않도록 아래 해시태그 단계에서 재시도한다.
+  } finally {
+    await page.keyboard.up('Control').catch(() => undefined);
+  }
+  await self.delay(200);
+  self.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook}, 카드: ${cardReady ? '감지' : '대기 초과'})`);
+
+  return { inserted: true, cardReady };
+}
+
 // ── Local utility: smartTypeWithAutoHighlight ──
 async function smartTypeWithAutoHighlight(
   page: Page,
@@ -2020,6 +2082,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     // 4. CTA 버튼 삽입 (해시태그 전에 배치, skipCta가 false인 경우만)
     // ✅ 쇼핑커넥트 모드: CTA가 없어도 자동으로 후킹 CTA 생성
     let effectiveCtas = resolved.ctas || [];
+    let previousPostTailInserted = false;
+    let previousPostCardReady = false;
     if (!resolved.skipCta && resolved.affiliateLink && effectiveCtas.length === 0) {
       // 🛒 쇼핑커넥트 자동 CTA 생성 (구매 결심 유도 후킹 문구)
       const hookTexts = [
@@ -2103,36 +2167,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
           // ✅ 마지막 CTA 후: 이전글 삽입
           if (isLastCta && resolved.previousPostUrl) {
-            // ✅ [2026-04-23 FIX] 중복 삽입 방지 — 이전글 URL이 이미 CTA(제휴/일반) 어디에든 쓰였으면 스킵
-            // 기존: affiliateLink 중복만 차단 → ctaType='previous-post' 연속발행 시 CTA 버튼과 이전글 블록에 같은 URL이 2번 노출되는 버그
-            const prevUrlUsedAsCta =
-              (resolved.affiliateLink && resolved.affiliateLink === resolved.previousPostUrl) ||
-              effectiveCtas.some((cc: { link?: string; text?: string }) => cc.link && cc.link === resolved.previousPostUrl);
-            if (prevUrlUsedAsCta) {
-              self.log(`   ⚠️ [이전글] CTA 링크와 동일 URL → 중복 삽입 건너뜀`);
-            } else {
-              self.log(`   📖 [이전글] 같은 카테고리 이전글 삽입`);
-              const page = self.ensurePage();
-
-              // 구분선
-              const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-              await page.keyboard.press('Enter');
-              await safeKeyboardType(page, divider, { delay: 5 });
-              await page.keyboard.press('Enter');
-
-              // ✅ [2026-03-20] 후킹 문구: 공유 상수 사용 (DRY 원칙)
-              const randomPrevHook = PREV_POST_HOOKS[Math.floor(Math.random() * PREV_POST_HOOKS.length)];
-              await safeKeyboardType(page, randomPrevHook, { delay: 10 });
-              await page.keyboard.press('Enter');
-              await safeKeyboardType(page, `📖 ${resolved.previousPostTitle || '이전 글 보기'}`, { delay: 10 });
-              await page.keyboard.press('Enter');
-              await safeKeyboardType(page, `👉 ${resolved.previousPostUrl}`, { delay: 10 });
-              await page.keyboard.press('Enter');
-
-              // 링크 카드 로딩 대기 (polling 방식)
-              await self.waitForLinkCard(15000, 500);
-              self.log(`   ✅ 이전글 삽입 완료 (후킹: ${randomPrevHook})`);
-            }
+            const previousResult = await insertPreviousPostTailBlock(
+              self,
+              page,
+              resolved,
+              effectiveCtas,
+              '쇼핑커넥트 마지막 CTA 후'
+            );
+            previousPostTailInserted = previousPostTailInserted || previousResult.inserted;
+            previousPostCardReady = previousPostCardReady || previousResult.cardReady;
           }
         } else {
           // ✅ [2026-01-26 FIX] 일반 모드 (SEO): 이전글 엮기만 삽입 (CTA는 수동 추가 시에만)
@@ -2230,34 +2273,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
             // ✅ 이전글 삽입
             if (resolved.previousPostUrl) {
-              // ✅ [2026-04-23 FIX] 중복 삽입 방지 — 이전글 URL이 이미 CTA(제휴/일반) 어디에든 쓰였으면 스킵
-              const prevUrlUsedAsCta =
-                (resolved.affiliateLink && resolved.affiliateLink === resolved.previousPostUrl) ||
-                effectiveCtas.some((cc: { link?: string; text?: string }) => cc.link && cc.link === resolved.previousPostUrl);
-              if (prevUrlUsedAsCta) {
-                self.log(`   ⚠️ [이전글] CTA 링크와 동일 URL → 중복 삽입 건너뜀`);
-              } else {
-                self.log(`   📖 [이전글] 같은 카테고리 이전글 연결`);
-
-                // 구분선
-                const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-                await page.keyboard.press('Enter');
-                await safeKeyboardType(page, divider, { delay: 5 });
-                await page.keyboard.press('Enter');
-
-                // ✅ [2026-03-20] 후킹 문구: 공유 상수 사용 (DRY 원칙)
-                const randomPrevHook = PREV_POST_HOOKS[Math.floor(Math.random() * PREV_POST_HOOKS.length)];
-                await safeKeyboardType(page, randomPrevHook, { delay: 10 });
-                await page.keyboard.press('Enter');
-                await safeKeyboardType(page, `📖 ${resolved.previousPostTitle || '이전 글 보기'}`, { delay: 10 });
-                await page.keyboard.press('Enter');
-                await safeKeyboardType(page, `👉 ${resolved.previousPostUrl}`, { delay: 10 });
-                await page.keyboard.press('Enter');
-
-                // 링크 카드 로딩 대기 (polling 방식)
-                await self.waitForLinkCard(15000, 500);
-                self.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook})`);
-              }
+              const previousResult = await insertPreviousPostTailBlock(
+                self,
+                page,
+                resolved,
+                effectiveCtas,
+                '일반 CTA 후'
+              );
+              previousPostTailInserted = previousPostTailInserted || previousResult.inserted;
+              previousPostCardReady = previousPostCardReady || previousResult.cardReady;
             }
           }
         }
@@ -2336,24 +2360,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
       // 이전글 삽입
       if (resolved.previousPostUrl) {
-        self.log(`   📖 [이전글] 같은 카테고리 이전글 연결 (CTA 없는 모드)`);
-
-        const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, divider, { delay: 5 });
-        await page.keyboard.press('Enter');
-
-        // ✅ [2026-03-20] 후킹 문구: 공유 상수 사용 (DRY 원칙)
-        const randomPrevHook = PREV_POST_HOOKS[Math.floor(Math.random() * PREV_POST_HOOKS.length)];
-        await safeKeyboardType(page, randomPrevHook, { delay: 10 });
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, `📖 ${resolved.previousPostTitle || '이전 글 보기'}`, { delay: 10 });
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, `👉 ${resolved.previousPostUrl}`, { delay: 10 });
-        await page.keyboard.press('Enter');
-
-        await self.waitForLinkCard(15000, 500);
-        self.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook})`);
+        const previousResult = await insertPreviousPostTailBlock(
+          self,
+          page,
+          resolved,
+          [],
+          'CTA 없는 모드'
+        );
+        previousPostTailInserted = previousPostTailInserted || previousResult.inserted;
+        previousPostCardReady = previousPostCardReady || previousResult.cardReady;
       }
     }
 
@@ -2369,18 +2384,20 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     await page.keyboard.up('Control');
     await self.delay(200);
 
-    // 6. Enter 3회 (CTA와 해시태그 사이 간격)
-    self.log('   → Enter 3회 입력 (해시태그 영역 준비)');
-    for (let i = 0; i < 3; i++) {
+    // 6. 이전글 카드 뒤에는 반드시 Enter 5회 후 해시태그를 타이핑한다.
+    const hashtagGapEnterCount = previousPostTailInserted ? 5 : 3;
+    self.log(`   → Enter ${hashtagGapEnterCount}회 입력 (해시태그 영역 준비)`);
+    for (let i = 0; i < hashtagGapEnterCount; i++) {
       await page.keyboard.press('Enter');
       await self.delay(self.DELAYS.SHORT); // 150ms
     }
-    self.log(`   ✅ Enter 3회 완료`);
+    self.log(`   ✅ Enter ${hashtagGapEnterCount}회 완료`);
 
-    // ✅ CTA 카드 로딩 대기 (5초) - 카드가 3초 뒤에 뜨므로 여유있게 대기
-    self.log('   → CTA 카드 로딩 대기 (5초)...');
-    await self.delay(5000);
-    self.log('   ✅ CTA 카드 로딩 대기 완료');
+    // ✅ 카드가 이미 감지된 경우 긴 고정 대기 대신 짧게 안정화한다.
+    const cardStabilizeDelay = previousPostTailInserted && previousPostCardReady ? 1000 : 3000;
+    self.log(`   → 링크 카드 안정화 대기 (${Math.round(cardStabilizeDelay / 1000)}초)...`);
+    await self.delay(cardStabilizeDelay);
+    self.log('   ✅ 링크 카드 안정화 완료');
 
     // 7. 해시태그 입력 (최대 5개) - 본문에 직접 입력
     const hashtagsToApply = resolved.hashtags.slice(0, 5);

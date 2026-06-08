@@ -31,6 +31,44 @@ function toFileUrlSafe(p: string): string {
     return `file:///${trimmed.replace(/#/g, '%23').replace(/\?/g, '%3F')}`;
 }
 
+type ProgressPreviewImage = {
+    url?: string;
+    filePath?: string;
+    previewDataUrl?: string;
+    heading?: string;
+    isPlaceholder?: boolean;
+    isThumbnail?: boolean;
+    [key: string]: any;
+};
+
+function getProgressImageSource(image?: ProgressPreviewImage | null): string {
+    return String(image?.filePath || image?.url || image?.previewDataUrl || '').trim();
+}
+
+function getProgressImageKey(image?: ProgressPreviewImage | null): string {
+    const raw = getProgressImageSource(image);
+    if (!raw) return '';
+    if (/^data:/i.test(raw)) return raw;
+    return raw
+        .replace(/^file:\/+/i, '')
+        .replace(/\\/g, '/')
+        .replace(/[?#].*$/, '')
+        .trim()
+        .toLowerCase();
+}
+
+function dedupeProgressImages(images: ProgressPreviewImage[]): ProgressPreviewImage[] {
+    const seen = new Set<string>();
+    return (images || []).filter((image) => {
+        if (!image || image.isPlaceholder) return true;
+        const key = getProgressImageKey(image);
+        if (!key) return true;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+    });
+}
+
 export class ProgressModal {
     private modal: HTMLElement | null = null;
     private progressBar: HTMLElement | null = null;
@@ -55,7 +93,7 @@ export class ProgressModal {
 
     // ✅ [2026-02-13] 캐러셀 네비게이션 상태
     private currentImageIndex: number = 0;
-    private currentImages: Array<{ url?: string; filePath?: string; heading?: string }> = [];
+    private currentImages: ProgressPreviewImage[] = [];
 
     private steps = [
         { id: 1, name: '글 생성', icon: '📝' },
@@ -802,7 +840,7 @@ export class ProgressModal {
     }
 
     // ✅ [2026-02-13 RENEWAL] 이미지 그리드 표시 + 메인 미리보기 업데이트 (전폭 200px 레이아웃)
-    showImages(images: Array<{ url?: string; filePath?: string; heading?: string }>, title: string = '수집된 이미지') {
+    showImages(images: ProgressPreviewImage[], title: string = '수집된 이미지') {
         this.ensureImagePreviewContainer();
         const grid = document.getElementById('progress-image-grid');
         const countEl = document.getElementById('progress-image-count');
@@ -811,16 +849,20 @@ export class ProgressModal {
         const imageInfo = document.getElementById('progress-image-info');
 
         if (!grid) return;
+        const previewImages = dedupeProgressImages(Array.isArray(images) ? images : []);
+        if (previewImages.length !== (Array.isArray(images) ? images.length : 0)) {
+            console.warn(`[ProgressModal] duplicate preview images hidden: ${images.length} -> ${previewImages.length}`);
+        }
 
         // 제목 업데이트
         if (titleEl) titleEl.textContent = title;
-        if (countEl) countEl.textContent = `${images.length}개`;
+        if (countEl) countEl.textContent = `${previewImages.length}개`;
 
         // ✅ 이미지 카운트 영역 표시
-        if (imageInfo) imageInfo.style.display = images.length > 0 ? 'flex' : 'none';
+        if (imageInfo) imageInfo.style.display = previewImages.length > 0 ? 'flex' : 'none';
 
         // ✅ [2026-02-13] 캐러셀용 이미지 배열 저장
-        this.currentImages = images;
+        this.currentImages = previewImages;
         this.currentImageIndex = 0;
 
         // ✅ 메인 미리보기 헬퍼 함수 (200px 전폭 + 화살표 네비게이션)
@@ -884,15 +926,15 @@ export class ProgressModal {
         grid.innerHTML = '';
 
         // 첫 번째 이미지/플레이스홀더로 메인 미리보기 설정
-        if (images.length > 0) {
-            const firstImg = images[0];
-            const firstSrc = firstImg.url || firstImg.filePath || '';
+        if (previewImages.length > 0) {
+            const firstImg = previewImages[0];
+            const firstSrc = getProgressImageSource(firstImg);
             const isFirstPlaceholder = !firstSrc || (firstImg as any).isPlaceholder;
             updateMainPreview(toFileUrlSafe(firstSrc), firstImg.heading || '썸네일', isFirstPlaceholder, 0);
         }
 
-        images.forEach((img, idx) => {
-            const src = img.url || img.filePath || '';
+        previewImages.forEach((img, idx) => {
+            const src = getProgressImageSource(img);
             const isPlaceholder = !src || (img as any).isPlaceholder;
 
             const wrapper = document.createElement('div');
@@ -982,11 +1024,11 @@ export class ProgressModal {
         });
 
         // ✅ 서브 이미지 그리드 표시 (이미지 2개 이상일 때만)
-        grid.style.display = images.length > 1 ? 'grid' : 'none';
+        grid.style.display = previewImages.length > 1 ? 'grid' : 'none';
 
         // ✅ 첫 번째 그리드 아이템 선택 하이라이트
         const firstGridItem = grid.querySelector('div') as HTMLElement;
-        if (firstGridItem && images.length > 1) {
+        if (firstGridItem && previewImages.length > 1) {
             firstGridItem.style.borderColor = '#3b82f6';
         }
     }
@@ -1005,7 +1047,7 @@ export class ProgressModal {
         if (newIndex >= this.currentImages.length) newIndex = 0;
 
         const img = this.currentImages[newIndex];
-        const src = img.url || img.filePath || '';
+        const src = getProgressImageSource(img);
         const isPlaceholder = !src || (img as any).isPlaceholder;
 
         // 플레이스홀더가 아닌 이미지만 이동
@@ -1014,7 +1056,7 @@ export class ProgressModal {
             for (let i = 1; i < this.currentImages.length; i++) {
                 const tryIdx = (newIndex + direction * i + this.currentImages.length) % this.currentImages.length;
                 const tryImg = this.currentImages[tryIdx];
-                const trySrc = tryImg.url || tryImg.filePath || '';
+                const trySrc = getProgressImageSource(tryImg);
                 if (trySrc && !(tryImg as any).isPlaceholder) {
                     newIndex = tryIdx;
                     updateMainPreview(toFileUrlSafe(trySrc), tryImg.heading || `이미지 ${tryIdx + 1}`, false, tryIdx);
@@ -1035,7 +1077,7 @@ export class ProgressModal {
     }
 
     // ✅ [2026-02-27 NEW] 실시간 단일 이미지 업데이트 — 플레이스홀더를 실제 이미지로 교체
-    updateSingleImage(index: number, image: { url?: string; filePath?: string; heading?: string }, total?: number) {
+    updateSingleImage(index: number, image: ProgressPreviewImage, total?: number) {
         this.ensureImagePreviewContainer();
         const grid = document.getElementById('progress-image-grid');
         const countEl = document.getElementById('progress-image-count');
@@ -1045,7 +1087,7 @@ export class ProgressModal {
 
         if (!grid) return;
 
-        const src = image.url || image.filePath || '';
+        const src = getProgressImageSource(image);
         if (!src) return;
 
         // ✅ 첫 호출 시 자동 플레이스홀더 초기화
@@ -1098,6 +1140,30 @@ export class ProgressModal {
 
         const gridItems = grid.querySelectorAll(':scope > div');
         const targetItem = gridItems[index] as HTMLElement | undefined;
+        const incomingKey = getProgressImageKey(image);
+        if (incomingKey) {
+            const duplicateIndex = this.currentImages.findIndex((existing, existingIndex) =>
+                existingIndex !== index &&
+                !(existing as any)?.isPlaceholder &&
+                getProgressImageKey(existing) === incomingKey
+            );
+            if (duplicateIndex !== -1) {
+                if (targetItem) {
+                    targetItem.innerHTML = `
+                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; text-align:center; color:var(--text-muted); font-size:0.7rem; padding:6px;">
+                            중복 이미지 제외
+                        </div>
+                    `;
+                    targetItem.style.border = '1px dashed var(--border-light)';
+                    targetItem.style.background = 'var(--bg-tertiary)';
+                }
+                if (index < this.currentImages.length) {
+                    this.currentImages[index] = { url: '', heading: '중복 이미지 제외', isPlaceholder: true };
+                }
+                console.warn(`[ProgressModal] duplicate live image ignored: target=${index + 1}, existing=${duplicateIndex + 1}`);
+                return;
+            }
+        }
 
         // ✅ 그리드 아이템 교체
         if (targetItem) {
@@ -1184,7 +1250,7 @@ export class ProgressModal {
 
         // ✅ 완료 카운트 업데이트
         const completedCount = this.currentImages.filter(img => {
-            const s = img.url || img.filePath || '';
+            const s = getProgressImageSource(img);
             return !!s && !(img as any).isPlaceholder;
         }).length;
 

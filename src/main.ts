@@ -644,7 +644,7 @@ async function performServerSync(isBackground: boolean = false): Promise<{ allow
         debugLog(`[Main] performServerSync: 버전 낮음 (현재: ${currentVersion}, 최소: ${syncResult.minVersion})`);
 
         if (app.isPackaged) {
-          const updateStarted = isUpdating() || await waitForUpdateCheck(30000).catch(() => false);
+          const updateStarted = isUpdating() || await waitForUpdateCheck(120000).catch(() => false);
           if (updateStarted || isUpdating()) {
             debugLog('[Main] performServerSync: required update is being handled by auto-updater');
             if (!isBackground) {
@@ -659,32 +659,29 @@ async function performServerSync(isBackground: boolean = false): Promise<{ allow
             }
             return { allowed: false, error: 'VERSION_TOO_OLD_UPDATING' };
           }
+
+          if (!isBackground) {
+            await dialog.showMessageBox({
+              type: 'info',
+              title: '자동 업데이트 준비 중',
+              message: '최신 버전을 자동으로 확인하고 있습니다.',
+              detail: `현재 버전: v${currentVersion}\n필요 버전: v${syncResult.minVersion}\n\n잠시 후 업데이트가 감지되면 다운로드 진행률 창이 뜨고, 다운로드 완료 후 설치 안내가 표시됩니다.`,
+              buttons: ['확인'],
+              noLink: true,
+            });
+          }
+          return { allowed: false, error: 'VERSION_TOO_OLD_UPDATING' };
         }
 
         if (!isBackground) {
-          // ✅ [2026-02-04] 개선된 업데이트 다이얼로그 - 다운로드 링크 포함
-          const result = await dialog.showMessageBox({
+          await dialog.showMessageBox({
             type: 'warning',
-            title: '⬆️ 업데이트 필요',
+            title: '업데이트 필요',
             message: '최신 버전으로 업데이트해 주세요.',
-            detail: `현재 버전: v${currentVersion}\n최소 요구 버전: v${syncResult.minVersion}\n\n아래 버튼을 눌러 최신 버전을 다운로드하세요.`,
-            buttons: ['다운로드 페이지 열기', '나중에'],
-            defaultId: 0,
-            cancelId: 1,
+            detail: `현재 버전: v${currentVersion}\n최소 요구 버전: v${syncResult.minVersion}`,
+            buttons: ['확인'],
             noLink: true,
           });
-
-          // '다운로드 페이지 열기' 버튼 클릭 시 GitHub 릴리스 페이지 열기
-          if (result.response === 0) {
-            const retried = app.isPackaged && await waitForUpdateCheck(45000).catch(() => false);
-            if (retried || isUpdating()) {
-              return { allowed: false, error: 'VERSION_TOO_OLD_UPDATING' };
-            }
-          }
-
-          if (result.response === 1) {
-            await shell.openExternal('https://github.com/cd000242-sudo/naver/releases/latest');
-          }
         }
         return { allowed: false, error: 'VERSION_TOO_OLD' };
       }

@@ -1334,8 +1334,11 @@ function updateUnifiedImagePreview(headings, generatedImages) {
     ensureUnifiedPreviewVideoDelegation();
     const structuredContent = window.currentStructuredContent;
     const bodyPlain = structuredContent?.bodyPlain || '';
+    const bodyImages = Array.isArray(generatedImages)
+        ? generatedImages.filter((img) => img?.isThumbnail !== true)
+        : [];
     const integratedHtml = headings.map((heading, index) => {
-        const generatedImage = generatedImages?.[index];
+        const generatedImage = bodyImages[index] || generatedImages?.[index];
         const imageStatus = generatedImage ? '✅ 생성됨' : '⏳ 준비중';
         const statusColor = generatedImage ? 'var(--success)' : 'var(--accent)';
         const headingTitle = typeof heading === 'string' ? heading : (heading.title || heading);

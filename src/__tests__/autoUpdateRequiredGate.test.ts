@@ -18,17 +18,18 @@ describe('required-version auto update gate', () => {
     expect(updater).toMatch(/isUpdateInProgress[\s\S]{0,120}Promise\.resolve\(true\)/);
   });
 
-  it('tries electron auto-update before falling back to the manual release page', () => {
+  it('keeps required-version users inside the automatic updater flow', () => {
     const main = readSource('src/main.ts');
     const versionGate = main.slice(
       main.indexOf('if (versionCompare < 0)'),
       main.indexOf("return { allowed: false, error: 'VERSION_TOO_OLD' };")
     );
 
-    expect(versionGate).toMatch(/waitForUpdateCheck\(30000\)/);
+    expect(versionGate).toMatch(/waitForUpdateCheck\(120000\)/);
     expect(versionGate).toMatch(/VERSION_TOO_OLD_UPDATING/);
-    expect(versionGate).toMatch(/waitForUpdateCheck\(45000\)/);
-    expect(versionGate).toMatch(/if \(result\.response === 1\)[\s\S]{0,160}shell\.openExternal/);
+    expect(versionGate).toMatch(/다운로드 진행률 창이 뜨고/);
+    expect(versionGate).not.toContain('다운로드 페이지 열기');
+    expect(versionGate).not.toMatch(/shell\.openExternal\('https:\/\/github\.com\/cd000242-sudo\/naver\/releases\/latest'\)/);
   });
 
   it('does not quit while the updater is already handling a required update', () => {

@@ -44,4 +44,25 @@ describe('publish metadata propagation', () => {
     expect(code).toMatch(/hashtags:\s*normalizePublishHashtags\(options\?\.hashtags, structuredContent\?\.hashtags, preGenerated\?\.hashtags\)/);
     expect(code).toMatch(/previousPostUrl:\s*options\?\.previousPostUrl \|\| \(options\?\.ctaType === 'previous-post' \? \(options\?\.ctaUrl \|\| options\?\.ctaLink\) : undefined\)/);
   });
+
+  it('appends previous-post cards before typed hashtags in the editor tail', () => {
+    const code = read('automation/editorHelpers.ts');
+    const tailHelper = code.slice(
+      code.indexOf('async function insertPreviousPostTailBlock'),
+      code.indexOf('// ── Local utility')
+    );
+    const hashtagTail = code.slice(
+      code.indexOf('const hashtagGapEnterCount'),
+      code.indexOf('// 7. CTA 버튼 최종 확인')
+    );
+
+    expect(code).toContain("const PREVIOUS_POST_SEPARATOR = '--------------------------------------------------------------'");
+    expect(tailHelper).toMatch(/safeKeyboardType\(page,\s*PREVIOUS_POST_SEPARATOR/);
+    expect(tailHelper).toMatch(/safeKeyboardType\(page,\s*previousPostUrl/);
+    expect(tailHelper).toMatch(/waitForLinkCard\(15000,\s*500\)/);
+    expect(tailHelper).toMatch(/removeBareUrlTextAfterLinkCard/);
+    expect(code).toMatch(/previousPostTailInserted = previousPostTailInserted \|\| previousResult\.inserted/);
+    expect(hashtagTail).toMatch(/const hashtagGapEnterCount = previousPostTailInserted \? 5 : 3/);
+    expect(hashtagTail.indexOf('page.keyboard.press')).toBeLessThan(hashtagTail.indexOf('applyHashtagsInBody'));
+  });
 });
