@@ -412,6 +412,13 @@ function normalizeDanglingClosingBrackets(value: string): string {
     .replace(/(^|\n)\s*\]\s*(?=\n|$)/g, '$1');
 }
 
+function normalizeKoreanVerdictLabels(value: string): string {
+  const verdictLabel = '(?:한\\s*줄\\s*(?:판정|결론|정리)|한줄\\s*(?:판정|결론|정리))';
+  return value
+    .replace(new RegExp(`^\\s*\\[\\s*${verdictLabel}\\s*[:：]\\s*([^\\]\\n]{4,220})\\s*\\]\\s*$`, 'gim'), '$1')
+    .replace(new RegExp(`^\\s*${verdictLabel}\\s*[:：]\\s*`, 'gim'), '');
+}
+
 function normalizeInlineNumberedLists(value: string): string {
   return value
     .split('\n')
@@ -444,7 +451,7 @@ function normalizeMateReadableText(value: string): string {
   return normalizeInlineQaMarkers(
     normalizeInlineDashLists(
       normalizeInlineNumberedLists(
-        normalizeDanglingClosingBrackets(value)
+        normalizeKoreanVerdictLabels(normalizeDanglingClosingBrackets(value))
       )
     )
   )

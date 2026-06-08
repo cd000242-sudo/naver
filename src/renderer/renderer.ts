@@ -225,6 +225,7 @@ const MODAL_BACKDROP_CONTENT_SELECTOR = [
   '.modal-content',
   '.modal-dialog',
   '.modal-card',
+  '.ma-modal-content',
   '.modal-panel',
   '.modal-container',
   '.modal-box',
@@ -239,23 +240,36 @@ const MODAL_BACKDROP_CONTENT_SELECTOR = [
   '[data-modal-content="true"]',
 ].join(',');
 
+const MODAL_INTERACTIVE_SELECTOR = [
+  'button',
+  'a',
+  'input',
+  'select',
+  'textarea',
+  '[role="button"]',
+  '[contenteditable="true"]',
+  '[data-modal-action="true"]',
+].join(',');
+
 function isModalBackdropClick(event: MouseEvent): boolean {
   const target = event.target;
   if (!(target instanceof HTMLElement)) return false;
   if (target.dataset.allowBackdropClose === 'true') return false;
+  if (target.closest(MODAL_INTERACTIVE_SELECTOR)) return false;
   if (target.closest(MODAL_BACKDROP_CONTENT_SELECTOR)) return false;
 
   const id = String(target.id || '').toLowerCase();
-  const className = Array.from(target.classList || []).join(' ').toLowerCase();
   const role = String(target.getAttribute('role') || '').toLowerCase();
   const ariaModal = target.getAttribute('aria-modal') === 'true';
   const looksLikeBackdrop =
-    id.includes('modal') ||
+    target.classList.contains('modal-backdrop') ||
+    target.classList.contains('modal-overlay') ||
+    target.classList.contains('progress-full-image-preview-overlay') ||
+    target.dataset.modalBackdrop === 'true' ||
+    id === 'global-paywall-modal-backdrop' ||
+    /(^|[-_])(modal|backdrop|overlay)$/.test(id) ||
     id.includes('backdrop') ||
     id.includes('overlay') ||
-    className.includes('modal') ||
-    className.includes('backdrop') ||
-    className.includes('overlay') ||
     role === 'dialog' ||
     ariaModal;
 

@@ -88,7 +88,57 @@ function parsePublishHashtags(...sources: any[]): string[] {
   return result;
 }
 
-function readSelectedPreviousPostForPublish(): { title?: string; url?: string } {
+function normalizePreviousPostCategoryForPublish(value: any): string {
+  return String(value || '').replace(/\s+/g, '').toLowerCase();
+}
+
+function shouldAutoLinkPreviousPostForMode(contentMode?: string): boolean {
+  return ['seo', 'homefeed', 'custom', 'business', 'affiliate', 'mate'].includes(String(contentMode || 'seo'));
+}
+
+function findPreviousPostForPublish(contentMode?: string, categoryName?: string): { title?: string; url?: string } {
+  if (!shouldAutoLinkPreviousPostForMode(contentMode)) return {};
+
+  const categoryKey = normalizePreviousPostCategoryForPublish(
+    categoryName ||
+    UnifiedDOMCache.getRealCategoryName?.() ||
+    UnifiedDOMCache.getRealCategory?.() ||
+    ''
+  );
+  if (!categoryKey) return {};
+
+  let posts: any[] = [];
+  try {
+    posts = loadGeneratedPosts() || [];
+  } catch (error) {
+    console.warn('[PreviousPost] failed to load generated posts:', error);
+    return {};
+  }
+
+  const mode = String(contentMode || '').trim();
+  const published = posts
+    .filter((post: any) => String(post?.publishedUrl || '').trim().startsWith('http'))
+    .filter((post: any) => normalizePreviousPostCategoryForPublish(post?.category || post?.categoryName) === categoryKey);
+
+  const preferred = mode === 'affiliate'
+    ? published.filter((post: any) => post?.affiliateLink || post?.contentMode === 'affiliate' || post?.contentMode === 'shopping-connect')
+    : published;
+  const candidates = preferred.length > 0 ? preferred : published;
+
+  const chosen = candidates
+    .slice()
+    .sort((a: any, b: any) => {
+      const at = new Date(a?.publishedAt || a?.updatedAt || a?.createdAt || 0).getTime() || 0;
+      const bt = new Date(b?.publishedAt || b?.updatedAt || b?.createdAt || 0).getTime() || 0;
+      return bt - at;
+    })[0];
+
+  const url = String(chosen?.publishedUrl || '').trim();
+  if (!url) return {};
+  return { title: String(chosen?.title || '이전 글 보기').trim(), url };
+}
+
+function readSelectedPreviousPostForPublish(contentMode?: string, categoryName?: string): { title?: string; url?: string } {
   const selected = (window as any).selectedPreviousPost || {};
   const manualTitle = String((window as any).previousPostTitle || '').trim();
   const manualUrl = String((window as any).previousPostUrl || '').trim();
@@ -96,7 +146,8 @@ function readSelectedPreviousPostForPublish(): { title?: string; url?: string } 
   const ctaLink = String((document.getElementById('unified-cta-link') as HTMLInputElement | null)?.value || '').trim();
   const url = String(selected.publishedUrl || selected.url || manualUrl || (/^https?:\/\//i.test(ctaLink) ? ctaLink : '')).trim();
   const title = String(selected.title || manualTitle || ctaText.replace(/^[\s📖👉:\-]+/, '').trim() || '이전 글 보기').trim();
-  return url ? { title, url } : {};
+  if (url) return { title, url };
+  return findPreviousPostForPublish(contentMode, categoryName);
 }
 
 function clonePublishRetryContent(content: any): any {
@@ -257,13 +308,15 @@ export async function handleFullAutoPublish(): Promise<void> {
       (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || (document.getElementById('batch-link-input') as HTMLInputElement)?.value?.trim() || undefined,
       (document.querySelector('.unified-url-input') as HTMLInputElement)?.value?.trim()
     );
+    const selectedContentModeForPublish = String((document.getElementById('unified-content-mode') as HTMLInputElement)?.value || 'seo').trim() || 'seo';
+    const resolvedContentModeForPublish = (earlyAffiliateLink || isShoppingConnectModeActive()) ? 'affiliate' : selectedContentModeForPublish;
     const contentReuseSeed = {
       urls,
       title,
       keywords,
       generator: UnifiedDOMCache.getGenerator(),
       toneStyle,
-      contentMode: (earlyAffiliateLink || isShoppingConnectModeActive()) ? 'affiliate' : 'seo',
+      contentMode: resolvedContentModeForPublish,
       categoryName: UnifiedDOMCache.getRealCategoryName?.(),
       keywordAsTitle: faKeywordAsTitle,
       keywordTitlePrefix: faKeywordTitlePrefix,
@@ -474,7 +527,10 @@ export async function handleFullAutoPublish(): Promise<void> {
 
     // ✅ CTA 위치 고정
     const ctaPosition = (document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value || 'bottom';
-    const selectedPreviousPost = readSelectedPreviousPostForPublish();
+    const selectedPreviousPost = readSelectedPreviousPostForPublish(
+      resolvedContentModeForPublish,
+      UnifiedDOMCache.getRealCategoryName?.() || UnifiedDOMCache.getRealCategory?.()
+    );
     const linkPreviousPostChecked = (document.getElementById('unified-link-previous-post') as HTMLInputElement | null)?.checked === true;
     const publishHashtags = parsePublishHashtags(
       structuredContent?.hashtags,
@@ -524,19 +580,10 @@ export async function handleFullAutoPublish(): Promise<void> {
       includeThumbnailText, // ✅ 옵션 추가
       createProductThumbnail: (document.getElementById('unified-create-product-thumbnail') as HTMLInputElement)?.checked ?? false,
       // ✅ [2026-02-19] 제휴링크 자동 감지 (URL 필드에서 자동 감지)
-      affiliateLink: resolveAffiliateLink(
-        (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || (document.getElementById('batch-link-input') as HTMLInputElement)?.value?.trim() || undefined,
-        (document.querySelector('.unified-url-input') as HTMLInputElement)?.value?.trim()
-      ),
+      affiliateLink: earlyAffiliateLink,
       customBannerPath: (window as any).customBannerPath || undefined, // ✅ [2026-01-18] 커스텀 배너 경로 전달
       // ✅ [2026-02-19] 쇼핑커넥트 모드 자동 감지: affiliateLink가 있거나 URL이 제휴 URL이면 affiliate 모드
-      contentMode: (
-        resolveAffiliateLink(
-          (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || (document.getElementById('batch-link-input') as HTMLInputElement)?.value?.trim() || undefined,
-          (document.querySelector('.unified-url-input') as HTMLInputElement)?.value?.trim()
-        ) ||
-        isShoppingConnectModeActive()
-      ) ? 'affiliate' : 'seo',
+      contentMode: resolvedContentModeForPublish,
       // ✅ [2026-03-23 FIX] 이미지 설정 명시적 전달 (localStorage 폴백 의존 제거)
       imageStyle: localStorage.getItem('imageStyle') || 'realistic',
       headingImageMode: localStorage.getItem('headingImageMode') || 'all',
@@ -1513,7 +1560,10 @@ export async function handleMultiAccountPublish(): Promise<void> {
           filePath: img?.filePath || img?.url || img?.previewDataUrl,
         }))
         .filter((img: any) => Boolean(img?.filePath));
-      const selectedPreviousPost = readSelectedPreviousPostForPublish();
+      const selectedPreviousPost = readSelectedPreviousPostForPublish(
+        mainSettings.contentMode,
+        mainSettings.category || UnifiedDOMCache.getRealCategoryName?.() || UnifiedDOMCache.getRealCategory?.()
+      );
       const multiPublishHashtags = parsePublishHashtags(
         mainSettings.generatedHashtags,
         (window as any).currentStructuredContent?.hashtags,
@@ -1942,7 +1992,17 @@ export async function handleSemiAutoPublish(): Promise<any> {
 
   // ✅ CTA 위치 고정
   const ctaPosition = (document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value || 'bottom';
-  const selectedPreviousPost = readSelectedPreviousPostForPublish();
+  const semiAutoAffiliateLink = resolveAffiliateLink(
+    (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || undefined,
+    (document.querySelector('.unified-url-input') as HTMLInputElement)?.value?.trim()
+  );
+  const semiAutoContentMode = semiAutoAffiliateLink
+    ? 'affiliate'
+    : String((document.getElementById('unified-content-mode') as HTMLInputElement)?.value || 'seo').trim() || 'seo';
+  const selectedPreviousPost = readSelectedPreviousPostForPublish(
+    semiAutoContentMode,
+    UnifiedDOMCache.getRealCategoryName?.() || UnifiedDOMCache.getRealCategory?.()
+  );
   const linkPreviousPostChecked = (document.getElementById('unified-link-previous-post') as HTMLInputElement | null)?.checked === true;
 
   // ✅ 이미지 객체 정규화: main 프로세스에서 filePath가 없으면 드랍될 수 있어서 여기서 보강
@@ -1988,14 +2048,8 @@ export async function handleSemiAutoPublish(): Promise<any> {
     skipCta: skipCta, // ✅ 체크박스 값 반영
     categoryName: UnifiedDOMCache.getRealCategoryName(), // ✅ [2026-02-11 FIX] 카테고리 이름(text) 전달
     // ✅ [2026-02-19] 반자동: 제휴링크 자동 감지 (URL 필드에서 자동 감지)
-    affiliateLink: resolveAffiliateLink(
-      (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || undefined,
-      (document.querySelector('.unified-url-input') as HTMLInputElement)?.value?.trim()
-    ) || '',
-    contentMode: resolveAffiliateLink(
-      (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || undefined,
-      (document.querySelector('.unified-url-input') as HTMLInputElement)?.value?.trim()
-    ) ? 'affiliate' : ((document.getElementById('unified-content-mode') as HTMLInputElement)?.value || 'seo')
+    affiliateLink: semiAutoAffiliateLink || '',
+    contentMode: semiAutoContentMode
   };
 
   console.log('[handleSemiAutoPublish] formData.imageManagementImages:', formData.imageManagementImages);

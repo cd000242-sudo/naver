@@ -19,6 +19,8 @@ describe('publish metadata propagation', () => {
 
     expect(code).toMatch(/function parsePublishHashtags/);
     expect(code).toMatch(/function readSelectedPreviousPostForPublish/);
+    expect(code).toMatch(/function findPreviousPostForPublish/);
+    expect(code).toMatch(/shouldAutoLinkPreviousPostForMode/);
     expect(code).toMatch(/hashtags:\s*publishHashtags/);
     expect(code).toMatch(/generatedHashtags:\s*publishHashtags\.join\(' '\)/);
     expect(code).toMatch(/previousPostUrl:\s*selectedPreviousPost\.url \|\| undefined/);
@@ -29,9 +31,15 @@ describe('publish metadata propagation', () => {
   it('syncs previous-post CTA URL into the editor previousPostUrl field', () => {
     const fullAutoCode = read('renderer/modules/fullAutoFlow.ts');
     const multiAccountCode = read('renderer/modules/multiAccountManager.ts');
+    const publishingHandlersCode = read('renderer/modules/publishingHandlers.ts');
 
     expect(fullAutoCode).toMatch(/formData\.previousPostUrl = validUrl/);
     expect(fullAutoCode).toMatch(/const isStandardContentMode = \['seo', 'homefeed', 'custom', 'business', 'affiliate'\]/);
+    expect(publishingHandlersCode).toMatch(/const resolvedContentModeForPublish = \(earlyAffiliateLink \|\| isShoppingConnectModeActive\(\)\) \? 'affiliate' : selectedContentModeForPublish/);
+    expect(publishingHandlersCode).toMatch(/contentMode:\s*resolvedContentModeForPublish/);
+    expect(publishingHandlersCode).toMatch(/readSelectedPreviousPostForPublish\(\s*resolvedContentModeForPublish/);
+    expect(publishingHandlersCode).toMatch(/contentMode:\s*semiAutoContentMode/);
+    expect(publishingHandlersCode).toMatch(/readSelectedPreviousPostForPublish\(\s*semiAutoContentMode/);
     expect(multiAccountCode).toMatch(/queueItem\.previousPostUrl = queueItem\.ctaUrl/);
     expect(multiAccountCode).toMatch(/previousPostUrl:\s*queueItem\?\.previousPostUrl \|\| \(queueItem\.ctaType === 'previous-post' \? queueItem\?\.ctaUrl : undefined\)/);
   });

@@ -81,6 +81,31 @@ function findArtifact(suffix /* "" | ".blockmap" */) {
 const setupFile = findArtifact('');
 const blockmapFile = findArtifact('.blockmap');
 
+function readReleaseBody() {
+    const root = path.join(__dirname, '..');
+    const candidates = [
+        path.join(root, 'tmp', `release-notes-v${VERSION}.md`),
+        path.join(root, `RELEASE_NOTES_v${VERSION}.md`),
+        path.join(root, 'RELEASE_NOTES.md')
+    ];
+
+    for (const filePath of candidates) {
+        try {
+            if (fs.existsSync(filePath)) {
+                const body = fs.readFileSync(filePath, 'utf-8').trim();
+                if (body) {
+                    console.log(`   릴리스 노트 사용: ${path.relative(root, filePath)}`);
+                    return body;
+                }
+            }
+        } catch (e) {
+            console.log(`   릴리스 노트 읽기 실패: ${filePath} (${e.message})`);
+        }
+    }
+
+    return `## v${VERSION}\n\n릴리즈 자동 생성`;
+}
+
 // ─── GitHub API Helper ──────────────────────────────────────
 
 function apiRequest(options, body = null) {
@@ -129,6 +154,7 @@ function gitPush() {
             'src/',
             'public/',
             'scripts/',
+            `tmp/release-notes-v${VERSION}.md`,
             '.agent/workflows/'
         ];
 
@@ -191,7 +217,7 @@ async function createRelease() {
     const releaseData = JSON.stringify({
         tag_name: TAG,
         name: `v${VERSION}`,
-        body: `## v${VERSION}\n\n릴리즈 자동 생성`,
+        body: readReleaseBody(),
         draft: false,
         prerelease: false,
         make_latest: 'true'

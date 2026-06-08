@@ -17,6 +17,10 @@ describe('modal backdrop guard and empty heading image actions', () => {
     expect(renderer).toMatch(/document\.addEventListener\(\s*'click'[\s\S]+?true\s*\)/);
     expect(renderer).toMatch(/stopImmediatePropagation\(\)/);
     expect(renderer).toMatch(/isModalBackdropClick/);
+    expect(renderer).toMatch(/MODAL_INTERACTIVE_SELECTOR/);
+    expect(renderer).toMatch(/target\.closest\(MODAL_INTERACTIVE_SELECTOR\)/);
+    expect(renderer).toMatch(/target\.classList\.contains\('modal-backdrop'\)/);
+    expect(renderer).not.toMatch(/className\.includes\('modal'\)/);
   });
 
   it('marks both manual image generation buttons as explicit image generation requests', () => {

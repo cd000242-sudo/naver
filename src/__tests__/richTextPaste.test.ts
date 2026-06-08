@@ -201,6 +201,16 @@ describe('buildMobileRichHtml', () => {
     expect(result.plainText).not.toMatch(/\n\]\s*$/);
   });
 
+  it('removes Korean one-line verdict labels from Mate rich body text', () => {
+    const result = buildMobileRichHtml('[ 한 줄 판정: 자동건조만으로 냄새를 모두 막기는 어렵습니다. ]', {
+      highlight: false,
+    });
+
+    expect(result.plainText).toContain('자동건조만으로 냄새를 모두 막기는 어렵습니다.');
+    expect(result.plainText).not.toContain('한 줄 판정');
+    expect(result.html).not.toContain('한 줄 판정');
+  });
+
   it('uses wider paragraph spacing for two-enter mobile readability', () => {
     const result = buildMobileRichHtml('First sentence.\n\nSecond sentence.', { highlight: false });
 
