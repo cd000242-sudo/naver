@@ -3354,6 +3354,8 @@ async function initMultiAccountPublishModal() {
                                     });
                                     const chosen = candidates[0];
                                     queueItem.ctaUrl = String(chosen?.publishedUrl || '').trim();
+                                    queueItem.previousPostUrl = queueItem.ctaUrl;
+                                    queueItem.previousPostTitle = String(chosen?.title || '이전 글 보기').trim();
                                     queueItem.ctaText = `📖 ${chosen.title}`;
                                     addMALog(`🔗 CTA 자동 연동: "${chosen.title}"`, 'info');
                                     console.log(`[FullAuto] CTA 연동 완료: ${queueItem.ctaUrl}`);
@@ -3418,6 +3420,7 @@ async function initMultiAccountPublishModal() {
                                     }
                                     else {
                                         queueItem.ctaUrl = String(chosen?.publishedUrl || '').trim();
+                                        queueItem.previousPostUrl = queueItem.ctaUrl;
                                         queueItem.ctaText = `📖 추천 글: ${String(chosen?.title || '이전 글 보기').trim()}`;
                                         queueItem.previousPostTitle = String(chosen?.title || '이전 글 보기').trim();
                                     }
@@ -3510,6 +3513,9 @@ async function initMultiAccountPublishModal() {
                         })(),
                         ctaText: String((queueItem?.formData?.ctaText ?? queueItem.ctaText) || '').trim() || undefined,
                         ctaLink: String((queueItem?.formData?.ctaLink ?? queueItem?.formData?.ctaUrl ?? queueItem.ctaUrl) || '').trim() || undefined,
+                        hashtags: Array.isArray(structuredContent?.hashtags)
+                            ? structuredContent.hashtags
+                            : String(structuredContent?.hashtags || '').split(/[,\s#]+/).map((tag) => tag.trim().replace(/^#+/, '')).filter(Boolean),
                         preGeneratedContent: structuredContent ? {
                             title: String(structuredContent.selectedTitle || '').trim(),
                             content: structuredContent.bodyPlain || structuredContent.content,
@@ -3527,8 +3533,8 @@ async function initMultiAccountPublishModal() {
                         createProductThumbnail: queueItem.createProductThumbnail ?? false,
                         scSubImageSource: getSubImageMode(),
                         collectedImages: structuredContent?.collectedImages || [],
-                        previousPostUrl: queueItem?.previousPostUrl || undefined,
-                        previousPostTitle: queueItem?.previousPostTitle || undefined,
+                        previousPostUrl: queueItem?.previousPostUrl || (queueItem.ctaType === 'previous-post' ? queueItem?.ctaUrl : undefined) || undefined,
+                        previousPostTitle: queueItem?.previousPostTitle || (queueItem.ctaType === 'previous-post' && queueItem?.ctaText ? String(queueItem.ctaText).replace(/^[\s📖👉:\-]+/, '').trim() : undefined) || undefined,
                         thumbnailPath: extractedThumbnailPath || undefined,
                     };
                     console.log('[FullAuto] 발행 옵션:', publishOptions);

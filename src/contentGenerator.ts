@@ -28,7 +28,7 @@ import { getGeminiModel } from './gemini.js';
 import { trackApiUsage } from './apiUsageTracker.js';
 import { calculateSEOScore } from './seoCalculator';
 // ✅ [2026-02-11] getRelatedKeywords import 제거 — 인라인 템플릿 전용이었음
-import { app } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import fs from 'fs/promises';
 import fsSync from 'fs';
 import path from 'path';
@@ -2196,6 +2196,67 @@ function formatWaitBudgetKo(ms: number): string {
   return `${Math.ceil(safeMs / 60_000)}분`;
 }
 
+type OpenAiDiagnosticLevel = 'info' | 'warn' | 'error';
+
+function emitOpenAiDiagnosticLog(message: string, level: OpenAiDiagnosticLevel = 'info'): void {
+  const line = `[OpenAIDiag] ${message}`;
+  const logger = level === 'error' ? console.error : level === 'warn' ? console.warn : console.log;
+  logger(line);
+
+  try {
+    for (const win of BrowserWindow.getAllWindows()) {
+      if (!win.isDestroyed()) {
+        win.webContents.send('automation:log', line);
+      }
+    }
+  } catch {
+    // Renderer log forwarding is best-effort only.
+  }
+}
+
+function isOpenAiDiagnosticsEnabled(): boolean {
+  const env = process.env.OPENAI_DIAGNOSTICS;
+  if (env === '0' || env?.toLowerCase() === 'false') return false;
+  if (env === '1' || env?.toLowerCase() === 'true') return true;
+  return process.platform === 'darwin';
+}
+
+function classifyOpenAiDiagnosticError(error: unknown): string {
+  const status = (error as any)?.status || (error as any)?.response?.status;
+  const code = String((error as any)?.code || (error as any)?.error?.code || '').toLowerCase();
+  const type = String((error as any)?.type || (error as any)?.error?.type || '').toLowerCase();
+  const message = normalizeErrorMessage(error).toLowerCase();
+  const diagnostic = getErrorDiagnosticText(error, message);
+
+  if (status === 401 || message.includes('invalid api key') || message.includes('incorrect api key')) return 'AUTH_INVALID_KEY';
+  if (status === 403) return 'PROJECT_OR_PERMISSION_FORBIDDEN';
+  if (status === 404 || code === 'model_not_found' || message.includes('model') && message.includes('not found')) return 'MODEL_NOT_FOUND_OR_NO_ACCESS';
+  if (status === 429 || code.includes('rate') || type.includes('rate') || message.includes('rate limit') || message.includes('too many requests')) return 'RATE_LIMIT';
+  if (code.includes('insufficient_quota') || message.includes('billing') || message.includes('credit') || message.includes('payment')) return 'BILLING_OR_CREDIT';
+  if (status >= 500) return 'OPENAI_SERVER_ERROR';
+  if (diagnostic.includes('timeout') || diagnostic.includes('시간 초과')) return 'REQUEST_TIMEOUT';
+  if (diagnostic.includes('enotfound') || diagnostic.includes('eai_again') || diagnostic.includes('dns')) return 'DNS_LOOKUP_FAILED';
+  if (diagnostic.includes('tls') || diagnostic.includes('certificate') || diagnostic.includes('cert')) return 'TLS_OR_CERTIFICATE_FAILED';
+  if (diagnostic.includes('socket') || diagnostic.includes('econnreset') || diagnostic.includes('econnrefused') || diagnostic.includes('etimedout')) return 'SOCKET_CONNECTION_FAILED';
+  if (diagnostic.includes('fetch failed') || diagnostic.includes('network') || diagnostic.includes('connection error')) return 'NETWORK_FETCH_FAILED';
+  if (diagnostic.includes('abort') || diagnostic.includes('ecanceled')) return 'REQUEST_ABORTED';
+  return 'UNKNOWN';
+}
+
+function readHeaderValue(headers: any, name: string): string {
+  try {
+    if (!headers) return '';
+    if (typeof headers.get === 'function') return headers.get(name) || headers.get(name.toLowerCase()) || '';
+    const lower = name.toLowerCase();
+    for (const [key, value] of Object.entries(headers)) {
+      if (key.toLowerCase() === lower) return String(value);
+    }
+  } catch {
+    // Ignore malformed headers.
+  }
+  return '';
+}
+
 function isOpenAiConnectionIssue(error: unknown, message = ''): boolean {
   const diagnostic = getErrorDiagnosticText(error, message);
   if (diagnostic.includes('apiuseraborterror') || diagnostic.includes('사용자가 콘텐츠 생성을 취소')) {
@@ -2217,6 +2278,181 @@ function isOpenAiConnectionIssue(error: unknown, message = ''): boolean {
     diagnostic.includes('enotfound') ||
     diagnostic.includes('eai_again') ||
     diagnostic.includes('ecanceled');
+}
+
+async function callOpenAIChatCompletionsRest(
+  apiKey: string,
+  params: Record<string, unknown>,
+  timeoutMs: number,
+  externalSignal?: AbortSignal,
+  diagnosticsEnabled = false,
+): Promise<any> {
+  const timeoutLabel = `OpenAI API 호출 시간 초과 (${timeoutMs / 1000}초)`;
+  const requestAbort = createProviderTimeoutSignal(timeoutMs, timeoutLabel, externalSignal);
+  const baseUrl = (process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1').replace(/\/+$/, '');
+  const modelName = String(params.model || '(unknown)');
+  const requestStart = Date.now();
+
+  try {
+    if (typeof fetch !== 'function') {
+      throw new Error('현재 실행 환경에서 fetch API를 사용할 수 없습니다.');
+    }
+
+    if (diagnosticsEnabled) {
+      const messages = Array.isArray((params as any).messages) ? (params as any).messages : [];
+      const userChars = messages
+        .filter((msg: any) => msg?.role === 'user')
+        .map((msg: any) => String(msg?.content || '').length)
+        .reduce((a: number, b: number) => a + b, 0);
+      const systemChars = messages
+        .filter((msg: any) => msg?.role === 'system')
+        .map((msg: any) => String(msg?.content || '').length)
+        .reduce((a: number, b: number) => a + b, 0);
+      emitOpenAiDiagnosticLog(
+        `CHAT_REQUEST_START model=${modelName} maxTokens=${String((params as any).max_completion_tokens || '')} ` +
+        `timeoutMs=${timeoutMs} systemChars=${systemChars} userChars=${userChars} baseUrl=${baseUrl}`,
+      );
+    }
+
+    const response = await fetch(`${baseUrl}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+      signal: requestAbort.signal,
+    });
+    const responseText = await response.text();
+    let payload: any = null;
+    try {
+      payload = responseText ? JSON.parse(responseText) : null;
+    } catch {
+      payload = { raw: responseText };
+    }
+
+    if (!response.ok) {
+      const apiError: any = new Error(
+        payload?.error?.message ||
+        payload?.raw ||
+        `OpenAI API HTTP ${response.status}`,
+      );
+      apiError.status = response.status;
+      apiError.code = payload?.error?.code;
+      apiError.type = payload?.error?.type;
+      apiError.param = payload?.error?.param;
+      apiError.headers = response.headers;
+      apiError.response = { status: response.status, headers: response.headers };
+      apiError.error = payload?.error;
+      throw apiError;
+    }
+
+    if (diagnosticsEnabled) {
+      const requestId = readHeaderValue(response.headers, 'x-request-id') || readHeaderValue(response.headers, 'openai-request-id') || '(none)';
+      const promptTokens = payload?.usage?.prompt_tokens ?? '(n/a)';
+      const completionTokens = payload?.usage?.completion_tokens ?? '(n/a)';
+      const textLength = String(payload?.choices?.[0]?.message?.content || '').length;
+      emitOpenAiDiagnosticLog(
+        `CHAT_RESPONSE_OK status=${response.status} model=${modelName} elapsedMs=${Date.now() - requestStart} ` +
+        `requestId=${requestId} promptTokens=${promptTokens} completionTokens=${completionTokens} textLength=${textLength}`,
+      );
+    }
+
+    return payload;
+  } catch (error) {
+    if (diagnosticsEnabled) {
+      emitOpenAiDiagnosticLog(
+        `CHAT_REQUEST_ERROR kind=${classifyOpenAiDiagnosticError(error)} model=${modelName} ` +
+        `elapsedMs=${Date.now() - requestStart} message="${normalizeErrorMessage(error).slice(0, 220)}"`,
+        'error',
+      );
+    }
+    throw requestAbort.normalizeError(error);
+  } finally {
+    requestAbort.dispose();
+  }
+}
+
+async function runOpenAiDiagnosticPreflight(
+  apiKey: string,
+  modelName: string,
+  timeoutMs: number,
+  externalSignal?: AbortSignal,
+): Promise<void> {
+  if (!isOpenAiDiagnosticsEnabled()) return;
+  const baseUrl = (process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1').replace(/\/+$/, '');
+  const preflightTimeoutMs = Math.min(20_000, Math.max(8_000, timeoutMs));
+  const startedAt = Date.now();
+  const requestAbort = createProviderTimeoutSignal(
+    preflightTimeoutMs,
+    `OpenAI 사전 진단 시간 초과 (${preflightTimeoutMs / 1000}초)`,
+    externalSignal,
+  );
+
+  emitOpenAiDiagnosticLog(
+    `PREFLIGHT_START baseUrl=${baseUrl} model=${modelName} platform=${process.platform}/${process.arch} ` +
+    `node=${process.versions.node || 'n/a'} electron=${process.versions.electron || 'n/a'} ` +
+    `fetch=${typeof fetch} keyLength=${apiKey.length}`,
+  );
+
+  try {
+    if (typeof fetch !== 'function') {
+      throw new Error('현재 실행 환경에서 fetch API를 사용할 수 없습니다.');
+    }
+
+    const response = await fetch(`${baseUrl}/models`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+      signal: requestAbort.signal,
+    });
+    const responseText = await response.text();
+    let payload: any = null;
+    try {
+      payload = responseText ? JSON.parse(responseText) : null;
+    } catch {
+      payload = { raw: responseText };
+    }
+
+    const requestId = readHeaderValue(response.headers, 'x-request-id') || readHeaderValue(response.headers, 'openai-request-id') || '(none)';
+    if (!response.ok) {
+      const apiError: any = new Error(payload?.error?.message || payload?.raw || `OpenAI /models HTTP ${response.status}`);
+      apiError.status = response.status;
+      apiError.code = payload?.error?.code;
+      apiError.type = payload?.error?.type;
+      apiError.headers = response.headers;
+      apiError.response = { status: response.status, headers: response.headers };
+      apiError.error = payload?.error;
+      apiError.__openAiPreflightLogged = true;
+      emitOpenAiDiagnosticLog(
+        `PREFLIGHT_FAIL status=${response.status} kind=${classifyOpenAiDiagnosticError(apiError)} ` +
+        `elapsedMs=${Date.now() - startedAt} requestId=${requestId} message="${normalizeErrorMessage(apiError).slice(0, 220)}"`,
+        'error',
+      );
+      throw apiError;
+    }
+
+    const modelIds = Array.isArray(payload?.data) ? payload.data.map((model: any) => String(model?.id || '')).filter(Boolean) : [];
+    const modelListed = modelIds.includes(modelName);
+    emitOpenAiDiagnosticLog(
+      `PREFLIGHT_OK status=${response.status} elapsedMs=${Date.now() - startedAt} requestId=${requestId} ` +
+      `modelCount=${modelIds.length} selectedModelListed=${modelListed}`,
+      modelListed ? 'info' : 'warn',
+    );
+  } catch (error) {
+    const normalized = requestAbort.normalizeError(error);
+    if (!(error as any)?.__openAiPreflightLogged) {
+      emitOpenAiDiagnosticLog(
+        `PREFLIGHT_ERROR kind=${classifyOpenAiDiagnosticError(normalized)} elapsedMs=${Date.now() - startedAt} ` +
+        `message="${normalizeErrorMessage(normalized).slice(0, 220)}"`,
+        'error',
+      );
+    }
+    throw normalized;
+  } finally {
+    requestAbort.dispose();
+  }
 }
 
 function isTerminalContentGenerationError(error: unknown): boolean {
@@ -5538,6 +5774,69 @@ function withGeminiTimeout<T>(promise: Promise<T>, timeoutMs: number, label: str
   return withProviderTimeout(promise, timeoutMs, label);
 }
 
+function createProviderTimeoutSignal(
+  timeoutMs: number,
+  label: string,
+  externalSignal?: AbortSignal,
+): {
+  signal: AbortSignal;
+  didTimeout: () => boolean;
+  dispose: () => void;
+  normalizeError: (error: unknown) => Error;
+} {
+  const controller = new AbortController();
+  let timedOut = false;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  let onExternalAbort: (() => void) | undefined;
+
+  const abortOnce = (reason: Error): void => {
+    if (!controller.signal.aborted) {
+      controller.abort(reason);
+    }
+  };
+
+  timer = setTimeout(() => {
+    timedOut = true;
+    abortOnce(new Error(label));
+  }, timeoutMs);
+
+  if (externalSignal) {
+    onExternalAbort = () => abortOnce(createContentGenerationAbortError());
+    if (externalSignal.aborted) {
+      onExternalAbort();
+    } else {
+      externalSignal.addEventListener('abort', onExternalAbort, { once: true });
+    }
+  }
+
+  return {
+    signal: controller.signal,
+    didTimeout: () => timedOut,
+    dispose: () => {
+      if (timer) clearTimeout(timer);
+      if (externalSignal && onExternalAbort) {
+        externalSignal.removeEventListener('abort', onExternalAbort);
+      }
+    },
+    normalizeError: (error: unknown) => {
+      if (timedOut) return new Error(label);
+      if (externalSignal?.aborted) return createContentGenerationAbortError();
+
+      const message = normalizeErrorMessage(error).toLowerCase();
+      if (controller.signal.aborted && (
+        message.includes('apiuseraborterror') ||
+        message.includes('abort') ||
+        message.includes('aborted') ||
+        message.includes('ecanceled')
+      )) {
+        return createContentGenerationAbortError();
+      }
+
+      return error instanceof Error ? error : new Error(String(error));
+    },
+  };
+}
+
 const geminiRequestGate = new Map<string, { nextAllowedAt: number }>();
 export const GEMINI_RATE_LIMIT_MIN_WAIT_MS = 75_000;
 export const GEMINI_RATE_LIMIT_MAX_SINGLE_WAIT_MS = 180_000;
@@ -6966,7 +7265,11 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
       throw new Error('OpenAI API 키가 실제 키가 아니라 마스킹된 표시값으로 저장되어 있습니다. 환경설정에서 OpenAI 실제 API 키를 다시 입력해주세요.');
     }
     if (!openAIClients.has(key)) {
-      openAIClients.set(key, new OpenAI({ apiKey: key }));
+      openAIClients.set(key, new OpenAI({
+        apiKey: key,
+        maxRetries: 0,
+        timeout: 120_000,
+      }));
     }
     return openAIClients.get(key)!;
   }
@@ -6987,7 +7290,22 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   } else {
     console.log(`[OpenAI] config.openaiApiKey 없음, process.env.OPENAI_API_KEY 폴백 (${process.env.OPENAI_API_KEY ? '있음' : '없음'})`);
   }
+  const directOpenAiApiKey = configApiKey || envOpenAiKey;
+  if (!directOpenAiApiKey) {
+    throw new Error('OpenAI API 키가 설정되어 있지 않습니다. 환경설정 → API 키에서 OpenAI 키를 입력해주세요.');
+  }
+  if (isMaskedSecretValue(directOpenAiApiKey)) {
+    throw new Error('OpenAI API 키가 실제 키가 아니라 마스킹된 표시값으로 저장되어 있습니다. 환경설정에서 OpenAI 실제 API 키를 다시 입력해주세요.');
+  }
   const client = getOpenAIClient(configApiKey);
+  const diagnosticsEnabled = isOpenAiDiagnosticsEnabled();
+  if (diagnosticsEnabled) {
+    emitOpenAiDiagnosticLog(
+      `CONFIG keySource=${configApiKey ? 'config.openaiApiKey' : 'OPENAI_API_KEY'} keyLength=${directOpenAiApiKey.length} ` +
+      `baseUrl=${(process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1').replace(/\/+$/, '')} ` +
+      `platform=${process.platform}/${process.arch}`,
+    );
+  }
 
   // ✅ [v1.4.77] UI 선택 모델 = 실제 호출 모델 1:1. 크로스 모델 폴백 없음.
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
@@ -7021,17 +7339,23 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   const timeoutMs = getTimeoutMs(minChars);
   const maxCompletionTokens = getOpenAiMaxCompletionTokens(minChars);
   const maxAttemptsPerModel = 99;
-  const maxTransientRetriesPerModel = 3;
+  const maxTransientRetriesPerModel = 0;
   const openAiRateLimitPatienceMs = getOpenAiRateLimitPatienceMs();
 
   for (const modelName of modelsToTry) {
     let rateLimitWaitedMs = 0;
     let rateLimitRetryCount = 0;
     let transientRetryCount = 0;
+    let preflightDone = false;
 
     for (let retry = 0; retry < maxAttemptsPerModel; retry++) {
       try {
         console.log(`[OpenAI] 시도: ${modelName} (${retry + 1}), 타임아웃: ${timeoutMs / 1000}초, 한도 대기 누적: ${Math.round(rateLimitWaitedMs / 1000)}초`);
+
+        if (diagnosticsEnabled && !preflightDone) {
+          await runOpenAiDiagnosticPreflight(directOpenAiApiKey, modelName, timeoutMs, signal);
+          preflightDone = true;
+        }
 
         // ✅ [2026-05-25 v2.10.356] preemptive throttling — RPM 한도 도달 직전이면 호출자 측에서 대기
         //   사용자 보고 "OpenAI 60s backoff 후에도 RPM 초과 자꾸 뜸" 근본 차단
@@ -7061,17 +7385,40 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           baseParams.top_p = 0.9;
           baseParams.response_format = { type: 'json_object' };
         }
-        const createPromise = client.chat.completions.create(
-          baseParams,
-          signal ? { signal } as any : undefined,
-        );
+        let response: any;
+        try {
+          response = await callOpenAIChatCompletionsRest(directOpenAiApiKey, baseParams, timeoutMs, signal, diagnosticsEnabled);
+        } catch (restError) {
+          const restMessage = normalizeErrorMessage(restError).toLowerCase();
+          if (!restMessage.includes('fetch api를 사용할 수 없습니다') && !restMessage.includes('fetch api')) {
+            throw restError;
+          }
 
-        const response = await withProviderTimeout(
-          createPromise,
-          timeoutMs,
-          `OpenAI API 호출 시간 초과 (${timeoutMs / 1000}초)`,
-          signal,
-        );
+          console.warn('[OpenAI] native fetch 사용 불가 → SDK 보조 경로로 동일 모델 1회 호출');
+          const timeoutLabel = `OpenAI API 호출 시간 초과 (${timeoutMs / 1000}초)`;
+          const requestAbort = createProviderTimeoutSignal(timeoutMs, timeoutLabel, signal);
+          try {
+            const createPromise = client.chat.completions.create(
+              baseParams,
+              {
+                signal: requestAbort.signal,
+                timeout: timeoutMs,
+                maxRetries: 0,
+              } as any,
+            );
+
+            response = await withProviderTimeout(
+              createPromise,
+              timeoutMs,
+              timeoutLabel,
+              signal,
+            );
+          } catch (requestError) {
+            throw requestAbort.normalizeError(requestError);
+          } finally {
+            requestAbort.dispose();
+          }
+        }
         // ✅ [2026-05-25 v2.10.356] 호출 성공 기록 — RPM 적응형 가속에 활용
         openaiRpmThrottler.recordCall();
         const text = response.choices[0]?.message?.content?.trim() || '';

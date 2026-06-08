@@ -206,6 +206,8 @@ function autoLinkPreviousPost(formData, modal) {
             if (validUrl)
                 formData.ctaLink = validUrl;
             formData.previousPostTitle = prevPost.title || '이전 글 보기';
+            if (validUrl)
+                formData.previousPostUrl = validUrl;
             if (!formData.ctaText || formData.ctaText.startsWith('📖')) {
                 formData.ctaText = `📖 추천 글: ${prevPost.title}`;
             }
@@ -227,11 +229,12 @@ function autoLinkPreviousPost(formData, modal) {
     const needsPreviousPostLookup = !formData.previousPostUrl || formData.previousPostUrl.trim() === '';
     const isShoppingConnectMode = formData.affiliateLink && formData.affiliateLink.trim();
     const isMateMode = formData.contentMode === 'mate';
+    const isStandardContentMode = ['seo', 'homefeed', 'custom', 'business', 'affiliate'].includes(String(formData.contentMode || 'seo'));
     const skipBecauseCtaIsPrevPost = formData.ctaType === 'previous-post' && !isShoppingConnectMode && !isMateMode;
     const ctaLinkAlreadyHasPreviousPost = formData.ctaLink && formData.ctaLink.trim() &&
         formData.ctaLink.startsWith('http') && formData.ctaLink.includes('blog.naver.com');
     const skipBecauseCtaLinkAlreadySet = ctaLinkAlreadyHasPreviousPost && !isShoppingConnectMode;
-    if (needsPreviousPostLookup && (formData.ctaType !== 'none' || isMateMode) && !skipBecauseCtaIsPrevPost && !skipBecauseCtaLinkAlreadySet) {
+    if (needsPreviousPostLookup && (formData.ctaType !== 'none' || isMateMode || isStandardContentMode) && !skipBecauseCtaIsPrevPost && !skipBecauseCtaLinkAlreadySet) {
         let prevPosts = [];
         if (isShoppingConnectMode) {
             prevPosts = publishedPosts

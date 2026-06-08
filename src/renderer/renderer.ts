@@ -5812,6 +5812,8 @@ URL: ${firstUrl}
         if (selectedPost) {
           // 선택된 글 정보 저장
           (window as any).selectedPreviousPost = selectedPost;
+          (window as any).previousPostTitle = selectedPost.title || '';
+          (window as any).previousPostUrl = selectedPost.publishedUrl || '';
           if (linkPreviousPostCheckbox) {
             linkPreviousPostCheckbox.checked = true;
           }
@@ -5884,6 +5886,8 @@ URL: ${firstUrl}
     clearPreviousPostBtn.addEventListener('click', () => {
       // 선택 해제
       (window as any).selectedPreviousPost = null;
+      (window as any).previousPostTitle = null;
+      (window as any).previousPostUrl = null;
       if (linkPreviousPostCheckbox) {
         linkPreviousPostCheckbox.checked = false;
       }
@@ -5940,6 +5944,8 @@ URL: ${firstUrl}
           linkPreviousPostCheckbox.checked = false;
         }
         (window as any).selectedPreviousPost = null;
+        (window as any).previousPostTitle = null;
+        (window as any).previousPostUrl = null;
 
         appendLog(`🚫 CTA 없이 발행 모드 활성화`);
       } else {
@@ -8433,7 +8439,7 @@ function collectUnifiedFormDataForPublish(mode: 'full-auto' | 'semi-auto'): any 
       selectedTitle: title,
       bodyPlain: content,
       content: content,
-      hashtags: hashtags ? hashtags.split(' ').filter(tag => tag.length > 0) : [],
+      hashtags: hashtags ? hashtags.split(/[,\s#]+/).map(tag => tag.trim().replace(/^#+/, '')).filter(tag => tag.length > 0) : [],
       headings: [] // 반자동 모드에서는 소제목 없이 진행
     };
 

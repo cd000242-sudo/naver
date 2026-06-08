@@ -1546,12 +1546,32 @@ export class NaverBlogAutomation {
       }
     }
 
-    const hashtags = Array.from(
-      new Set(
-        (runOptions.hashtags ??
-          structured?.hashtags ??
-          []).map((tag) => tag.replace(/^#/, '').trim()).filter(Boolean),
-      ),
+    const normalizeHashtags = (...sources: any[]): string[] => {
+      const seen = new Set<string>();
+      const result: string[] = [];
+      const visit = (value: any) => {
+        if (Array.isArray(value)) {
+          value.forEach(visit);
+          return;
+        }
+        String(value ?? '')
+          .split(/[,\s#]+/)
+          .map((tag) => tag.trim().replace(/^#+/, '').replace(/[^\p{L}\p{N}_-]/gu, ''))
+          .filter(Boolean)
+          .forEach((tag) => {
+            const key = tag.toLowerCase();
+            if (seen.has(key)) return;
+            seen.add(key);
+            result.push(tag);
+          });
+      };
+      sources.forEach(visit);
+      return result;
+    };
+
+    const hashtags = normalizeHashtags(
+      runOptions.hashtags,
+      structured?.hashtags,
     );
 
     if (hashtags.length > 5) {

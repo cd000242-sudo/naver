@@ -4333,6 +4333,28 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
         // ✅ [2026-01-19 BUG FIX v2] preGeneratedContent도 확인 (renderer에서 이 이름으로 전달함)
         const preGenerated = options?.preGeneratedContent || options?.structuredContent;
+        const normalizePublishHashtags = (...sources: any[]): string[] => {
+          const seen = new Set<string>();
+          const tags: string[] = [];
+          const visit = (value: any) => {
+            if (Array.isArray(value)) {
+              value.forEach(visit);
+              return;
+            }
+            String(value ?? '')
+              .split(/[,\s#]+/)
+              .map((tag) => tag.trim().replace(/^#+/, '').replace(/[^\p{L}\p{N}_-]/gu, ''))
+              .filter(Boolean)
+              .forEach((tag) => {
+                const key = tag.toLowerCase();
+                if (seen.has(key)) return;
+                seen.add(key);
+                tags.push(tag);
+              });
+          };
+          sources.forEach(visit);
+          return tags;
+        };
 
         // options에 이미 콘텐츠가 있으면 그대로 사용 (renderer에서 미리 생성된 경우)
         if (preGenerated) {
@@ -4343,6 +4365,10 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           title = options?.title || preGenTitle || title;
           content = preGenerated.content || structuredContent?.bodyPlain || content;
           generatedImages = preGenerated.generatedImages || generatedImages;
+          const mergedHashtags = normalizePublishHashtags(options?.hashtags, preGenerated.hashtags, structuredContent?.hashtags);
+          if (structuredContent && mergedHashtags.length > 0) {
+            structuredContent = { ...structuredContent, hashtags: mergedHashtags };
+          }
           // ✅ [2026-03-10 FIX] title이 URL 패턴이면 selectedTitle로 대체 (쇼핑커넥트 URL 혼입 방지)
           if (title && /^https?:\/\//i.test(title.trim())) {
             const safeFallback = structuredContent?.selectedTitle || '';
@@ -4677,6 +4703,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           content,      // ✅ 생성된 콘텐츠
           // ✅ [2026-02-21 FIX] structuredContent.selectedTitle도 최종 제목으로 동기화
           structuredContent: structuredContent ? { ...structuredContent, selectedTitle: title } : undefined,
+          hashtags: normalizePublishHashtags(options?.hashtags, structuredContent?.hashtags, preGenerated?.hashtags),
           generatedImages: generatedImages.length > 0 ? generatedImages : undefined, // ✅ 이미지
           // ✅ [2026-01-24 FIX] CTA 관련 설정 명시적 전달
           skipCta: options?.skipCta === true ? true : false,  // 명시적으로 true일 때만 CTA 건너뛰기
@@ -4690,6 +4717,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           scAutoThumbnailSetting: options?.scAutoThumbnailSetting || false,  // 자동 썸네일
           // ✅ [2026-03-18 FIX] 전용 썸네일 생성 경로 → thumbnailPath 자동 매핑
           thumbnailPath: options?.thumbnailPath || options?.presetThumbnailPath || generatedThumbnailPath || undefined,
+          previousPostTitle: options?.previousPostTitle || (options?.ctaType === 'previous-post' && options?.ctaText ? String(options.ctaText).replace(/^[\s📖👉:\-]+/, '').trim() : undefined),
+          previousPostUrl: options?.previousPostUrl || (options?.ctaType === 'previous-post' ? (options?.ctaUrl || options?.ctaLink) : undefined),
           // ✅ [v2.10.301] 다중계정 봇감지 회피 — 첫 계정은 즉시(0ms), 2~N 계정은 3~10분 시차 누적
           //   10팀 검증 발견: computeLoginStaggerDelayMs가 botBackoff.ts에 정의됐는데 dead code였음.
           //   여러 계정이 같은 PC에서 같은 시각에 연속 로그인 시 네이버가 "자동화 의심"으로 추가 인증 요구.

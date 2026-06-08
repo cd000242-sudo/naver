@@ -53,6 +53,7 @@ describe('content generation timeout policy', () => {
   it('uses abort-aware provider waits instead of blind sleeps during content generation', () => {
     expect(generatorSrc).toMatch(/function\s+sleepWithAbort/);
     expect(generatorSrc).toMatch(/function\s+withProviderTimeout/);
+    expect(generatorSrc).toMatch(/function\s+createProviderTimeoutSignal/);
     expect(generatorSrc).toMatch(/openaiRpmThrottler\.throttle\(\s*getOpenAiMinIntervalMs\(modelName,\s*maxCompletionTokens\),\s*signal\s*\)/);
     expect(generatorSrc).toMatch(/await\s+sleepWithAbort\(backoffMs,\s*signal\)/);
     expect(generatorSrc).toMatch(/await\s+sleepWithAbort\(delay,\s*signal\)/);
@@ -65,10 +66,32 @@ describe('content generation timeout policy', () => {
   });
 
   it('reduces transient provider retry loops so stalled generations fail fast', () => {
-    expect(generatorSrc).toMatch(/maxTransientRetriesPerModel\s*=\s*2/);
+    expect(generatorSrc).toMatch(/function\s+callOpenAIChatCompletionsRest/);
+    expect(generatorSrc).toMatch(/\/chat\/completions/);
+    expect(generatorSrc).toMatch(/callOpenAIChatCompletionsRest\(directOpenAiApiKey,\s*baseParams,\s*timeoutMs,\s*signal,\s*diagnosticsEnabled\)/);
+    expect(generatorSrc).toMatch(/maxRetries:\s*0/);
+    expect(generatorSrc).toMatch(/timeout:\s*timeoutMs/);
+    expect(generatorSrc).toMatch(/signal:\s*requestAbort\.signal/);
+    expect(generatorSrc).toMatch(/requestAbort\.normalizeError\(requestError\)/);
+    expect(generatorSrc).toMatch(/maxTransientRetriesPerModel\s*=\s*0/);
     expect(generatorSrc).toMatch(/maxTransientRetriesPerModel\s*=\s*5/);
     expect(generatorSrc).toMatch(/maxTransientRetries\s*=\s*5/);
     expect(generatorSrc).not.toMatch(/maxRetriesPerModel\s*=\s*4/);
+  });
+
+  it('prints actionable OpenAI diagnostics on macOS before users report another black-box timeout', () => {
+    expect(generatorSrc).toMatch(/function\s+emitOpenAiDiagnosticLog/);
+    expect(generatorSrc).toMatch(/BrowserWindow\.getAllWindows\(\)/);
+    expect(generatorSrc).toMatch(/\[OpenAIDiag\]/);
+    expect(generatorSrc).toMatch(/function\s+runOpenAiDiagnosticPreflight/);
+    expect(generatorSrc).toMatch(/PREFLIGHT_START/);
+    expect(generatorSrc).toMatch(/PREFLIGHT_OK/);
+    expect(generatorSrc).toMatch(/PREFLIGHT_FAIL/);
+    expect(generatorSrc).toMatch(/CHAT_REQUEST_START/);
+    expect(generatorSrc).toMatch(/CHAT_RESPONSE_OK/);
+    expect(generatorSrc).toMatch(/CHAT_REQUEST_ERROR/);
+    expect(generatorSrc).toMatch(/classifyOpenAiDiagnosticError/);
+    expect(generatorSrc).toMatch(/process\.platform\s*===\s*'darwin'/);
   });
 
   it('aborts the main content generation request after a renderer timeout', () => {
@@ -90,8 +113,8 @@ describe('content generation timeout policy', () => {
 
     expect(fullAutoSrc).toMatch(/FULL_AUTO_IMAGE_MAX_ATTEMPTS\s*=\s*3/);
     expect(fullAutoSrc).toMatch(/FULL_AUTO_IMAGE_TOTAL_BUDGET_MS\s*=\s*35 \* 60 \* 1000/);
-    expect(fullAutoSrc).toMatch(/imageGenerationTimeoutMs:\s*getBoundedImageTimeoutMs\(FULL_AUTO_THUMBNAIL_IMAGE_TIMEOUT_MS\)/);
-    expect(fullAutoSrc).toMatch(/imageGenerationTimeoutMs:\s*getBoundedImageTimeoutMs\(FULL_AUTO_BODY_IMAGE_TIMEOUT_MS\)/);
+    expect(fullAutoSrc).toMatch(/imageGenerationTimeoutMs:\s*getBoundedImageTimeoutMs\(getFullAutoThumbnailImageTimeoutMs\(currentProvider\)\)/);
+    expect(fullAutoSrc).toMatch(/imageGenerationTimeoutMs:\s*getBoundedImageTimeoutMs\(getFullAutoBodyImageTimeoutMs\(currentProvider,\s*headings\.length\)\)/);
   });
 
   it('uses the first regeneration budget to repair custom prompt drift instead of passing weak output', () => {

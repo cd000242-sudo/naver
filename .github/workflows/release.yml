@@ -27,15 +27,16 @@ jobs:
 
         env:
           REF_NAME: ${{ github.ref_name }}
-      - name: Verify plugin.json version matches tag
+
+      - name: Verify package.json version matches tag
         env:
           TAG_NAME: ${{ github.ref_name }}
         run: |
           TAG_VERSION="${TAG_NAME#v}"
-          PLUGIN_VERSION=$(grep -oE '"version": *"[^"]*"' .claude-plugin/plugin.json | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-          if [ "$TAG_VERSION" != "$PLUGIN_VERSION" ]; then
-            echo "::error::Tag version ($TAG_VERSION) does not match plugin.json version ($PLUGIN_VERSION)"
-            echo "Run: ./scripts/release.sh $TAG_VERSION"
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if [ "$TAG_VERSION" != "$PACKAGE_VERSION" ]; then
+            echo "::error::Tag version ($TAG_VERSION) does not match package.json version ($PACKAGE_VERSION)"
+            echo "Run: npm version $TAG_VERSION --no-git-tag-version"
             exit 1
           fi
 
@@ -46,20 +47,20 @@ jobs:
         run: |
           TAG_VERSION="${TAG_NAME#v}"
           cat > release_body.md <<EOF
-          ## ECC ${TAG_VERSION}
+          ## Better Life Naver ${TAG_VERSION}
 
-          ### What This Release Focuses On
-          - Harness reliability and hook stability across Claude Code, Cursor, OpenCode, and Codex
-          - Stronger eval-driven workflows and quality gates
-          - Better operator UX for autonomous loop execution
+          ### 이번 업데이트 핵심
+          - Mac 환경에서 URL 글생성이 멈출 때 원인을 콘솔 로그로 바로 확인할 수 있게 개선
+          - OpenAI 글생성 요청을 더 빠르게 중단·진단하도록 안정화
+          - SEO, 홈판, 반자동, 풀오토, 다중계정 발행에서 해시태그와 이전글 엮기 전달 보강
 
-          ### Notable Changes
-          - Session persistence and hook lifecycle fixes
-          - Expanded skills and command coverage for harness performance work
-          - Improved release-note generation and changelog hygiene
+          ### 사용자에게 보이는 변화
+          - 글생성이 실패했을 때 “막연한 시간 초과” 대신 네트워크, 인증, 모델 접근, 서버 응답 단계가 로그에 남습니다.
+          - 이전글 엮기와 해시태그가 발행 단계에서 빠지는 문제를 줄였습니다.
+          - Windows와 macOS 릴리스 파일을 같은 버전으로 배포합니다.
 
           ### Notes
-          - For migration tips and compatibility notes, see README and CHANGELOG.
+          - macOS 파일은 GitHub Actions의 macOS 러너에서 별도로 빌드되어 같은 릴리스에 업로드됩니다.
           EOF
 
       - name: Create GitHub Release
