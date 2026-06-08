@@ -61,6 +61,57 @@ const SLOW_IMAGE_PROVIDERS = new Set([
 let imageGenerationQueue: Promise<void> = Promise.resolve();
 let lastImageGenerationFinishedAt = 0;
 
+function isExplicitUserImageGenerationRequest(options: any): boolean {
+  try {
+    if ((window as any).__manualImageGenerationInProgress === true) return true;
+  } catch {
+    // window is unavailable only in isolated static-test/import contexts.
+  }
+  return options?.forceImageGeneration === true
+    || options?.manualImageGeneration === true
+    || options?.regenerate === true;
+}
+
+function disableTextOnlyPublishForExplicitImageGeneration(): void {
+  try {
+    localStorage.setItem('textOnlyPublish', 'false');
+  } catch {
+    // localStorage can be unavailable in isolated tests.
+  }
+
+  try {
+    const unifiedSkipImages = document.getElementById('unified-skip-images') as HTMLInputElement | null;
+    if (unifiedSkipImages) unifiedSkipImages.checked = false;
+  } catch {
+    // document can be unavailable in isolated tests.
+  }
+
+  try {
+    const syncImageSkipUI = (window as any).syncImageSkipUI;
+    if (typeof syncImageSkipUI === 'function') {
+      syncImageSkipUI(false);
+    }
+  } catch {
+    // Best-effort UI sync only.
+  }
+}
+
+function getLocalStorageFlag(key: string): boolean {
+  try {
+    return localStorage.getItem(key) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+function getDomSkipImagesChecked(): boolean {
+  try {
+    return (document.getElementById('unified-skip-images') as HTMLInputElement | null)?.checked === true;
+  } catch {
+    return false;
+  }
+}
+
 function normalizeImageFallbackPolicy(value: any): ImageFallbackPolicy {
   return IMAGE_FALLBACK_POLICIES.includes(value as ImageFallbackPolicy)
     ? value as ImageFallbackPolicy
@@ -487,9 +538,16 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
   //    모든 유료/과금 가능 이미지 생성이 이 함수를 경유하므로 여기서 skipImages 차단하면
   //    어느 호출 경로에서 skipImages 체크가 누락돼도 API 호출/과금 방지 가능.
   //    사용자 제보: "이미지 없음" 설정에도 나노바나나2 실행 → 글 1개당 650원 과금 발생.
+  const _forceImageGeneration = isExplicitUserImageGenerationRequest(options);
+  if (_forceImageGeneration && options?.skipImages !== true) {
+    disableTextOnlyPublishForExplicitImageGeneration();
+  }
+
+  const _textOnlyPublishFlag = !_forceImageGeneration && getLocalStorageFlag('textOnlyPublish');
+  const _domSkipImagesFlag = !_forceImageGeneration && getDomSkipImagesChecked();
   const _skipImagesFlag = options?.skipImages === true
-    || localStorage.getItem('textOnlyPublish') === 'true'
-    || (document.getElementById('unified-skip-images') as HTMLInputElement | null)?.checked === true;
+    || _textOnlyPublishFlag
+    || _domSkipImagesFlag;
   if (_skipImagesFlag) {
     console.warn('[generateImagesWithCostSafety] 🚫 skipImages/textOnlyPublish=true → 유료 이미지 API 호출 전면 차단');
     return { success: true, images: [], message: '이미지 없이 발행 설정으로 차단됨' };

@@ -220,6 +220,73 @@ import { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImages
 (window as any).ImageManager = ImageManager;
 (window as any).syncGlobalImagesFromImageManager = syncGlobalImagesFromImageManager;
 import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApiCostConsent, reserveExternalApiImageQuota, generateImagesWithCostSafety, ensurePromptCardRemoveHandler } from './modules/costAndAutoGen.js';
+
+const MODAL_BACKDROP_CONTENT_SELECTOR = [
+  '.modal-content',
+  '.modal-dialog',
+  '.modal-card',
+  '.modal-panel',
+  '.modal-container',
+  '.modal-box',
+  '.dialog-content',
+  '.settings-modal-content',
+  '.progress-modal-content',
+  '.price-modal-content',
+  '.api-guide-content',
+  '.license-modal-content',
+  '.category-modal-content',
+  '.glass-panel',
+  '[data-modal-content="true"]',
+].join(',');
+
+function isModalBackdropClick(event: MouseEvent): boolean {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) return false;
+  if (target.dataset.allowBackdropClose === 'true') return false;
+  if (target.closest(MODAL_BACKDROP_CONTENT_SELECTOR)) return false;
+
+  const id = String(target.id || '').toLowerCase();
+  const className = Array.from(target.classList || []).join(' ').toLowerCase();
+  const role = String(target.getAttribute('role') || '').toLowerCase();
+  const ariaModal = target.getAttribute('aria-modal') === 'true';
+  const looksLikeBackdrop =
+    id.includes('modal') ||
+    id.includes('backdrop') ||
+    id.includes('overlay') ||
+    className.includes('modal') ||
+    className.includes('backdrop') ||
+    className.includes('overlay') ||
+    role === 'dialog' ||
+    ariaModal;
+
+  if (!looksLikeBackdrop) return false;
+
+  try {
+    const style = window.getComputedStyle(target);
+    if (style.display === 'none' || style.visibility === 'hidden' || style.pointerEvents === 'none') {
+      return false;
+    }
+  } catch {
+    // If style lookup fails, still protect modal state.
+  }
+
+  return true;
+}
+
+function initModalBackdropClickGuard(): void {
+  const w = window as any;
+  if (w.__modalBackdropClickGuardInstalled === true) return;
+  w.__modalBackdropClickGuardInstalled = true;
+
+  document.addEventListener('click', (event) => {
+    if (!isModalBackdropClick(event as MouseEvent)) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, true);
+}
+
+initModalBackdropClickGuard();
+
 // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode modules
 import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 // ✅ [SPEC-DROPSHOT-2026] 이미지 관리 → 🎨 이미지 생성 서브탭 (멀티엔진 대량 생성 스튜디오)
@@ -2875,6 +2942,7 @@ function initContentHeadingImageGeneration(): void {
             };
           }),
           postTitle: currentStructuredContent?.selectedTitle,
+          forceImageGeneration: true,
           postId: currentPostId || undefined, // ✅ 글 ID 전달
           // ✅ 쇼핑커넥트 모드: 수집된 이미지 전달
           isShoppingConnect: true, // ✅ 쇼핑커넥트 강제 활성화

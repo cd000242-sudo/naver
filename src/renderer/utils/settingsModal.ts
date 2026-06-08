@@ -7,7 +7,6 @@
 // Note: AppConfig 타입은 main 프로세스용이므로 여기서는 any 사용
 import {
     isMaskedSecretValue,
-    stripSecretSchemaArtifacts,
 } from '../../security/secretValueUtils.js';
 
 // ==================== 타입 정의 ====================
@@ -34,6 +33,48 @@ interface SettingsModalElements {
 // ==================== DOM 요소 캐싱 ====================
 
 let elements: SettingsModalElements | null = null;
+
+const ZERO_WIDTH_RE = /[\u200B-\u200D\uFEFF]/g;
+const BRACKETED_SECRET_SCHEMA_RE = /\s*[\[({<]\s*(?:schema|masked|masking|스키마|마스킹)[^)\]}>]*[\])}>]\s*/gi;
+const INLINE_SECRET_SCHEMA_RE = /\s*(?:schema|스키마)\s*[:=]\s*/gi;
+
+function tryExtractJsonSecret(raw: string): string {
+    const trimmed = raw.trim();
+    if (!trimmed.startsWith('{') && !trimmed.startsWith('[')) return raw;
+
+    try {
+        const parsed = JSON.parse(trimmed);
+        if (typeof parsed === 'string') return parsed;
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+            const record = parsed as Record<string, unknown>;
+            const candidates = [
+                record.value,
+                record.realValue,
+                record.apiKey,
+                record.key,
+                record.secret,
+                record.clientSecret,
+            ];
+            const found = candidates.find((value) => typeof value === 'string' && value.trim().length > 0);
+            if (typeof found === 'string') return found;
+        }
+    } catch {
+        // Not JSON. Treat it as a raw secret value.
+    }
+
+    return raw;
+}
+
+function stripSecretSchemaArtifacts(value: string | undefined): string {
+    if (!value) return '';
+    return tryExtractJsonSecret(value)
+        .replace(ZERO_WIDTH_RE, '')
+        .replace(BRACKETED_SECRET_SCHEMA_RE, '')
+        .replace(INLINE_SECRET_SCHEMA_RE, '')
+        .replace(/\s+/g, '')
+        .replace(/-{2,}/g, '-')
+        .trim();
+}
 
 function getInputByIds(...ids: string[]): HTMLInputElement | null {
     for (const id of ids) {

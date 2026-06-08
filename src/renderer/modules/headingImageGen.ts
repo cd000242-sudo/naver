@@ -873,6 +873,7 @@ export function initHeadingImageGeneration(): void {
       console.log(`[ImageGeneration] 이미지 소스: ${imageSource} (드롭다운: ${dropdownSource || '없음'}, 버튼: ${selectedSource?.dataset.source || '없음'})`);
 
       try {
+        (window as any).__manualImageGenerationInProgress = true;
         generateImagesBtnMain.disabled = true;
         generateImagesBtnMain.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>생성 중...</span>';
 
@@ -1704,6 +1705,7 @@ export function initHeadingImageGeneration(): void {
         liveImagePreview.addLog(`❌ 이미지 생성 실패: ${(error as Error).message}`);
 
       } finally {
+        delete (window as any).__manualImageGenerationInProgress;
         if (generateImagesBtnMain) {
           generateImagesBtnMain.disabled = false;
           generateImagesBtnMain.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>프롬프트대로 이미지 생성하기</span>';
@@ -1756,6 +1758,7 @@ export function initHeadingImageGeneration(): void {
       console.log(`[ImageGeneration] 남은 이미지 소스: ${imageSource}`);
 
       try {
+        (window as any).__manualImageGenerationInProgress = true;
         generateRemainingImagesBtn.disabled = true;
         generateRemainingImagesBtn.innerHTML = '<span>🔄</span><span>생성 중...</span>';
 
@@ -1829,6 +1832,7 @@ export function initHeadingImageGeneration(): void {
           failureLog: `❌ 이미지 생성 실패: ${(error as Error).message}`,
         });
       } finally {
+        delete (window as any).__manualImageGenerationInProgress;
         generateRemainingImagesBtn.disabled = false;
         generateRemainingImagesBtn.innerHTML = '<span style="font-size: 1.25rem;">✨</span><span>비어있는 소제목만 이미지 생성</span>';
       }
@@ -1906,7 +1910,32 @@ export function initHeadingImageGeneration(): void {
 
         if (result.success && result.images && result.images.length > 0) {
           // 비어있는 소제목에 이미지 배치
-          const imagesToUse = result.images.slice(0, emptyHeadings.length);
+          const imagesToUse = result.images
+            .map((image: any) => {
+              const resolvedUrl = String(
+                image?.url ||
+                image?.link ||
+                image?.filePath ||
+                image?.previewDataUrl ||
+                image?.thumbnail ||
+                ''
+              ).trim();
+              const previewUrl = String(
+                image?.thumbnail ||
+                image?.previewDataUrl ||
+                image?.filePath ||
+                image?.url ||
+                image?.link ||
+                ''
+              ).trim() || resolvedUrl;
+              return resolvedUrl ? { ...image, resolvedUrl, previewUrl } : null;
+            })
+            .filter((image: any) => image !== null)
+            .slice(0, emptyHeadings.length);
+
+          if (imagesToUse.length === 0) {
+            throw new Error('검색 결과에 사용할 수 있는 이미지 URL이 없습니다.');
+          }
 
           for (let i = 0; i < Math.min(imagesToUse.length, emptyHeadings.length); i++) {
             const heading = emptyHeadings[i];
@@ -1921,7 +1950,7 @@ export function initHeadingImageGeneration(): void {
             // ✅ 안전한 HTML 이스케이프
             const safeTitle = escapeHtml(heading.title || '');
             const safePrompt = escapeHtml(heading.prompt || '');
-            const imageUrl = image.thumbnail || image.url || '';
+            const imageUrl = image.previewUrl || image.resolvedUrl;
 
             // 이미지 미리보기 업데이트
             const promptItem = document.querySelector(`.prompt-item[data-index="${originalIndex + 1}"]`);
@@ -1948,10 +1977,10 @@ export function initHeadingImageGeneration(): void {
             // ImageManager에 등록
             ImageManager.setImage(heading.title, {
               heading: heading.title,
-              filePath: image.url || image.thumbnail,
-              previewDataUrl: image.thumbnail || image.url,
+              filePath: image.resolvedUrl,
+              previewDataUrl: image.previewUrl,
               provider: 'naver',
-              url: image.url
+              url: image.resolvedUrl
             });
           }
 
