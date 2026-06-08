@@ -643,6 +643,24 @@ async function performServerSync(isBackground: boolean = false): Promise<{ allow
       if (versionCompare < 0) {
         debugLog(`[Main] performServerSync: 버전 낮음 (현재: ${currentVersion}, 최소: ${syncResult.minVersion})`);
 
+        if (app.isPackaged) {
+          const updateStarted = isUpdating() || await waitForUpdateCheck(30000).catch(() => false);
+          if (updateStarted || isUpdating()) {
+            debugLog('[Main] performServerSync: required update is being handled by auto-updater');
+            if (!isBackground) {
+              await dialog.showMessageBox({
+                type: 'info',
+                title: '자동 업데이트 진행 중',
+                message: '새 버전을 자동으로 다운로드하고 있습니다.',
+                detail: `현재 버전: v${currentVersion}\n필요 버전: v${syncResult.minVersion}\n\n다운로드가 끝나면 재시작 안내가 뜹니다.`,
+                buttons: ['확인'],
+                noLink: true,
+              });
+            }
+            return { allowed: false, error: 'VERSION_TOO_OLD_UPDATING' };
+          }
+        }
+
         if (!isBackground) {
           // ✅ [2026-02-04] 개선된 업데이트 다이얼로그 - 다운로드 링크 포함
           const result = await dialog.showMessageBox({
@@ -658,6 +676,13 @@ async function performServerSync(isBackground: boolean = false): Promise<{ allow
 
           // '다운로드 페이지 열기' 버튼 클릭 시 GitHub 릴리스 페이지 열기
           if (result.response === 0) {
+            const retried = app.isPackaged && await waitForUpdateCheck(45000).catch(() => false);
+            if (retried || isUpdating()) {
+              return { allowed: false, error: 'VERSION_TOO_OLD_UPDATING' };
+            }
+          }
+
+          if (result.response === 1) {
             await shell.openExternal('https://github.com/cd000242-sudo/naver/releases/latest');
           }
         }
@@ -7628,6 +7653,10 @@ app.whenReady().then(async () => {
     if (!isE2ETestMode()) {
       performServerSync(false).then((res) => {
       if (!res.allowed) {
+        if (res.error === 'VERSION_TOO_OLD_UPDATING') {
+          debugLog('[Main] Pre-launch sync paused while auto-update is in progress');
+          return;
+        }
         debugLog(`[Main] ⛔ Pre-launch sync denied (background): ${res.error}`);
         setTimeout(() => {
           app.quit();
@@ -8099,6 +8128,10 @@ app.whenReady().then(async () => {
 
       // 3. 차단 사유 발생 시 강제 종료 절차 시작
       if (!syncResult.allowed) {
+        if (syncResult.error === 'VERSION_TOO_OLD_UPDATING') {
+          debugLog('[Main] Periodic sync paused while auto-update is in progress');
+          return;
+        }
         debugLog(`[Main] ⛔ 차단 사유 감지: ${syncResult.error}`);
         const reason = syncResult.error || 'SERVICE_DISABLED';
         await handleGracefulShutdown(reason);
@@ -8134,6 +8167,10 @@ app.whenReady().then(async () => {
         const syncResult = await performServerSync(true);
 
         if (!syncResult.allowed) {
+          if (syncResult.error === 'VERSION_TOO_OLD_UPDATING') {
+            debugLog('[Main] Background sync paused while auto-update is in progress');
+            return;
+          }
           debugLog(`[Main] Server sync denied access (background): ${syncResult.error}`);
           app.quit();
           return;

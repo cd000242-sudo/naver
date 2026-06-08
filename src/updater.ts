@@ -100,9 +100,14 @@ let updateCheckResolve: ((hasUpdate: boolean) => void) | null = null;
  * main.ts에서 await하여 업데이트 여부 확인 후 인증창 표시 결정
  * @returns true = 업데이트 있음 (다운로드 시작됨), false = 업데이트 없음 또는 에러
  */
-export function waitForUpdateCheck(): Promise<boolean> {
+export function waitForUpdateCheck(timeoutMs: number = 3000): Promise<boolean> {
+    if (isUpdateInProgress) {
+        return Promise.resolve(true);
+    }
+
     return new Promise<boolean>((resolve) => {
         updateCheckResolve = resolve;
+        const safeTimeoutMs = Number.isFinite(timeoutMs) && timeoutMs > 0 ? timeoutMs : 3000;
         // ✅ [v2.10.12] 타임아웃 15초 → 3초로 단축 — 사용자 보고 '초반에 응답없음 자꾸 뜸'
         //   업데이트 없거나 네트워크 느릴 때 3초 안에 빠르게 진행. autoDownload=true이므로
         //   업데이트 응답이 늦게 도착해도 백그라운드에서 자동 다운로드 진행됨.
@@ -112,7 +117,7 @@ export function waitForUpdateCheck(): Promise<boolean> {
                 updateCheckResolve = null;
                 resolve(false);
             }
-        }, 3000);
+        }, safeTimeoutMs);
         checkForUpdates();
     });
 }
