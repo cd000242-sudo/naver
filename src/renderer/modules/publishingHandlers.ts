@@ -65,6 +65,40 @@ function normalizePublishReuseStringList(value: any): string[] {
     .sort();
 }
 
+function parsePublishHashtags(...sources: any[]): string[] {
+  const seen = new Set<string>();
+  const result: string[] = [];
+  const visit = (value: any): void => {
+    if (Array.isArray(value)) {
+      value.forEach(visit);
+      return;
+    }
+    String(value ?? '')
+      .split(/[,\s#]+/)
+      .map((tag) => tag.trim().replace(/^#+/, '').replace(/[^\p{L}\p{N}_-]/gu, ''))
+      .filter(Boolean)
+      .forEach((tag) => {
+        const key = tag.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+        result.push(tag);
+      });
+  };
+  sources.forEach(visit);
+  return result;
+}
+
+function readSelectedPreviousPostForPublish(): { title?: string; url?: string } {
+  const selected = (window as any).selectedPreviousPost || {};
+  const manualTitle = String((window as any).previousPostTitle || '').trim();
+  const manualUrl = String((window as any).previousPostUrl || '').trim();
+  const ctaText = String((document.getElementById('unified-cta-text') as HTMLInputElement | null)?.value || '').trim();
+  const ctaLink = String((document.getElementById('unified-cta-link') as HTMLInputElement | null)?.value || '').trim();
+  const url = String(selected.publishedUrl || selected.url || manualUrl || (/^https?:\/\//i.test(ctaLink) ? ctaLink : '')).trim();
+  const title = String(selected.title || manualTitle || ctaText.replace(/^[\s📖👉:\-]+/, '').trim() || '이전 글 보기').trim();
+  return url ? { title, url } : {};
+}
+
 function clonePublishRetryContent(content: any): any {
   try {
     return JSON.parse(JSON.stringify(content));
@@ -440,6 +474,17 @@ export async function handleFullAutoPublish(): Promise<void> {
 
     // ✅ CTA 위치 고정
     const ctaPosition = (document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value || 'bottom';
+    const selectedPreviousPost = readSelectedPreviousPostForPublish();
+    const linkPreviousPostChecked = (document.getElementById('unified-link-previous-post') as HTMLInputElement | null)?.checked === true;
+    const publishHashtags = parsePublishHashtags(
+      structuredContent?.hashtags,
+      (document.getElementById('unified-generated-hashtags') as HTMLInputElement | null)?.value,
+      keywords,
+      title,
+    );
+    if (publishHashtags.length > 0) {
+      structuredContent.hashtags = publishHashtags;
+    }
 
     // ✅ [2026-03-10 CLEANUP] full-auto-thumbnail-text 유령 참조 제거 → localStorage 단일 소스
     const includeThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true' ||
@@ -467,6 +512,12 @@ export async function handleFullAutoPublish(): Promise<void> {
       ctaLink: finalCtaLink,
       ctas: skipCta ? [] : (ctasUi.length > 0 ? ctasUi : (finalCtaText ? [{ text: finalCtaText, link: finalCtaLink || undefined }] : [])),
       ctaPosition: ctaPosition, // ✅ CTA 위치 추가
+      ctaType: linkPreviousPostChecked || selectedPreviousPost.url ? 'previous-post' : (ctasUi.length > 0 || finalCtaLink ? 'custom' : undefined),
+      ctaUrl: selectedPreviousPost.url || finalCtaLink || undefined,
+      previousPostTitle: selectedPreviousPost.title || undefined,
+      previousPostUrl: selectedPreviousPost.url || undefined,
+      hashtags: publishHashtags,
+      generatedHashtags: publishHashtags.join(' '),
       skipCta: skipCta, // ✅ 체크박스 값 반영
       categoryName: UnifiedDOMCache.getRealCategoryName(), // ✅ [2026-02-11 FIX] 카테고리 이름(text) 전달
       useAiImage: (document.getElementById('unified-use-ai-image') as HTMLInputElement)?.checked ?? true,
@@ -1462,6 +1513,13 @@ export async function handleMultiAccountPublish(): Promise<void> {
           filePath: img?.filePath || img?.url || img?.previewDataUrl,
         }))
         .filter((img: any) => Boolean(img?.filePath));
+      const selectedPreviousPost = readSelectedPreviousPostForPublish();
+      const multiPublishHashtags = parsePublishHashtags(
+        mainSettings.generatedHashtags,
+        (window as any).currentStructuredContent?.hashtags,
+        mainSettings.keywords,
+        preferredTitle,
+      );
 
       const publishOptions = {
         naverId: credResult.credentials.naverId,
@@ -1489,12 +1547,19 @@ export async function handleMultiAccountPublish(): Promise<void> {
         ctas: skipCta ? [] : ctasUi,
         ctaText: skipCta ? '' : (ctasUi[0]?.text || ''),
         ctaLink: skipCta ? '' : (ctasUi[0]?.link || ''),
+        ctaType: selectedPreviousPost.url ? 'previous-post' : (skipCta ? 'none' : (ctasUi.length > 0 ? 'custom' : undefined)),
+        ctaUrl: selectedPreviousPost.url || (skipCta ? '' : (ctasUi[0]?.link || '')),
+        previousPostTitle: selectedPreviousPost.title || undefined,
+        previousPostUrl: selectedPreviousPost.url || undefined,
+        hashtags: multiPublishHashtags,
         preGeneratedContent: mainSettings.generatedContent ? {
           title: preferredTitle,
           content: mainSettings.generatedContent,
-          hashtags: mainSettings.generatedHashtags,
+          hashtags: multiPublishHashtags.join(' ') || mainSettings.generatedHashtags,
           // ✅ [2026-02-21 FIX] structuredContent 포함하여 main.ts에서 selectedTitle 참조 가능
-          structuredContent: (window as any).currentStructuredContent || undefined,
+          structuredContent: (window as any).currentStructuredContent
+            ? { ...(window as any).currentStructuredContent, hashtags: multiPublishHashtags }
+            : undefined,
           // ✅ [2026-03-18 FIX] generatedImages를 preGeneratedContent 내부에도 포함
           // main.ts L5972: generatedImages = preGenerated.generatedImages || generatedImages
           generatedImages: normalizedImagesForMultiAccount.length > 0 ? normalizedImagesForMultiAccount : undefined,
@@ -1649,7 +1714,7 @@ export async function handleSemiAutoPublish(): Promise<any> {
       selectedTitle: title,
       bodyPlain: content,
       content: content,
-      hashtags: hashtagsStr ? hashtagsStr.split(' ').filter(tag => tag.length > 0) : [],
+      hashtags: parsePublishHashtags(hashtagsStr),
       headings: [],
       toneStyle: (document.getElementById('unified-tone-style') as HTMLInputElement)?.value || 'friendly'
     };
@@ -1698,12 +1763,18 @@ export async function handleSemiAutoPublish(): Promise<any> {
   // ✅ [2026-02-27 FIX] 수정된 콘텐츠로 structuredContent 업데이트
   // Smoking Gun: resolveRunOptions에서 structured?.bodyPlain이 payload.content보다 우선
   // 따라서 여기서 bodyPlain을 반드시 최신 편집 내용으로 업데이트해야 함
+  const publishHashtags = parsePublishHashtags(
+    hashtagsStr,
+    structuredContent?.hashtags,
+    (document.getElementById('unified-generated-hashtags') as HTMLInputElement | null)?.value,
+  );
+
   const updatedStructuredContent = {
     ...structuredContent,
     selectedTitle: title,
     bodyPlain: content,
     content: content,
-    hashtags: hashtagsStr ? hashtagsStr.split(' ').filter(tag => tag.length > 0) : [],
+    hashtags: publishHashtags,
     // ✅ [2026-02-27 FIX] 소제목 content를 편집된 본문에서 재파싱 (이미지-소제목 매칭 정확도)
     headings: reSyncHeadingsContent(structuredContent.headings || [], content),
     // ✅ [2026-03-26 FIX] 사용자 수정 플래그 명시적 설정 — spread에만 의존 금지
@@ -1871,6 +1942,8 @@ export async function handleSemiAutoPublish(): Promise<any> {
 
   // ✅ CTA 위치 고정
   const ctaPosition = (document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value || 'bottom';
+  const selectedPreviousPost = readSelectedPreviousPostForPublish();
+  const linkPreviousPostChecked = (document.getElementById('unified-link-previous-post') as HTMLInputElement | null)?.checked === true;
 
   // ✅ 이미지 객체 정규화: main 프로세스에서 filePath가 없으면 드랍될 수 있어서 여기서 보강
   const normalizedImagesForPublish = (Array.isArray(imageManagementImages) ? imageManagementImages : [])
@@ -1906,6 +1979,12 @@ export async function handleSemiAutoPublish(): Promise<any> {
     ctaLink: finalCtaLink,
     ctas: skipCta ? [] : (ctasUi.length > 0 ? ctasUi : (finalCtaText ? [{ text: finalCtaText, link: finalCtaLink || undefined }] : [])),
     ctaPosition: ctaPosition, // ✅ CTA 위치 추가
+    ctaType: linkPreviousPostChecked || selectedPreviousPost.url ? 'previous-post' : (ctasUi.length > 0 || finalCtaLink ? 'custom' : undefined),
+    ctaUrl: selectedPreviousPost.url || finalCtaLink || undefined,
+    previousPostTitle: selectedPreviousPost.title || undefined,
+    previousPostUrl: selectedPreviousPost.url || undefined,
+    hashtags: publishHashtags,
+    generatedHashtags: publishHashtags.join(' '),
     skipCta: skipCta, // ✅ 체크박스 값 반영
     categoryName: UnifiedDOMCache.getRealCategoryName(), // ✅ [2026-02-11 FIX] 카테고리 이름(text) 전달
     // ✅ [2026-02-19] 반자동: 제휴링크 자동 감지 (URL 필드에서 자동 감지)
