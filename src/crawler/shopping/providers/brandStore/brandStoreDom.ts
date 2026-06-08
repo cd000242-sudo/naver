@@ -8,6 +8,80 @@
  * safe to define here and verifiable with a DOM test environment.
  */
 
+export interface AdditionalImageCandidate {
+    url: string;
+    alt: string;
+    index: number;
+    order: number;
+}
+
+/**
+ * PHASE 0 공식 상품 갤러리 URL 수집.
+ * 네이버 상품 갤러리는 작은 썸네일이 `alt="추가이미지N"` 형태로 렌더되는 경우가 많다.
+ * 클릭이 실패해도 이 URL들을 고해상도로 업스케일하면 공식 추가이미지 전체를 확보할 수 있다.
+ */
+export function collectAdditionalImageUrls(): AdditionalImageCandidate[] {
+    const seen = new Set<string>();
+    const results: AdditionalImageCandidate[] = [];
+
+    const readSrcset = (srcset: string | null | undefined): string => {
+        if (!srcset) return '';
+        const parts = srcset
+            .split(',')
+            .map(part => part.trim().split(/\s+/)[0])
+            .filter(Boolean);
+        return parts[parts.length - 1] || '';
+    };
+
+    const readUrl = (img: HTMLImageElement): string => {
+        return (
+            img.getAttribute('data-src') ||
+            img.getAttribute('data-original') ||
+            img.getAttribute('data-lazy-src') ||
+            img.currentSrc ||
+            img.src ||
+            readSrcset(img.getAttribute('srcset')) ||
+            ''
+        ).replace(/&amp;/g, '&');
+    };
+
+    const selectors = [
+        'img[alt^="추가이미지"]',
+        'img[alt*="추가이미지"]',
+        'img[aria-label*="추가이미지"]',
+        'img[title*="추가이미지"]',
+    ];
+
+    let order = 0;
+    for (const sel of selectors) {
+        try {
+            document.querySelectorAll(sel).forEach(node => {
+                const img = node as HTMLImageElement;
+                const url = readUrl(img);
+                if (!url || !/^https?:\/\//i.test(url) || url.startsWith('data:')) return;
+
+                const alt = (
+                    img.getAttribute('alt') ||
+                    img.getAttribute('aria-label') ||
+                    img.getAttribute('title') ||
+                    ''
+                ).trim();
+                if (!/추가이미지\s*\d*/.test(alt)) return;
+
+                const base = url.split('?')[0];
+                if (seen.has(base)) return;
+                seen.add(base);
+
+                const indexMatch = alt.match(/추가이미지\s*(\d+)/);
+                const index = indexMatch ? Number(indexMatch[1]) : Number.MAX_SAFE_INTEGER;
+                results.push({ url, alt, index, order: order++ });
+            });
+        } catch { /* keep collecting from the next selector */ }
+    }
+
+    return results.sort((a, b) => (a.index - b.index) || (a.order - b.order));
+}
+
 /**
  * PHASE 2 리뷰 이미지 URL 수집.
  * ✅ [v2.10.312] 사용자 케이스(homelia/12059215662) MCP 실측에서 발견:

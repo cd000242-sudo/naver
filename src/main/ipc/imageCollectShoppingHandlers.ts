@@ -10,6 +10,7 @@ import { loadConfig } from '../../configManager.js';
 import { validateLicenseAndQuota, isFreeTierUser } from '../utils/authUtils.js';
 import { consume as consumeQuota } from '../../quotaManager.js';
 import { filterDuplicateAndLowQualityImages } from '../utils/imageFilters.js';
+import { upscaleUrl } from '../../crawler/shopping/utils/imageUrlUtils.js';
 
 export function registerImageCollectShoppingHandlers(): void {
     ipcMain.handle('image:collectFromShopping', async (_event, url: string) => {
@@ -58,6 +59,12 @@ export function registerImageCollectShoppingHandlers(): void {
             let productInfo: any = {};
             let collectionDiagnostics: any = undefined;
             let resolvedUrl = url;
+            let officialGalleryImageCount = 0;
+            const countOfficialGalleryImages = (items: any[] = []): number =>
+                items.filter((img: any) => {
+                    if (!img || typeof img === 'string') return false;
+                    return img.type === 'main' || img.type === 'gallery' || img.type === 'gallery-thumb-fallback';
+                }).length;
 
             if (isBrandStore) {
                 // ✅ [v2.10.308] 브랜드스토어 회귀 fix: fetchShoppingImages → BrandStoreProvider 전환
@@ -74,7 +81,8 @@ export function registerImageCollectShoppingHandlers(): void {
                     timeout: 30000,
                     maxImages: 100,
                     includeDetails: false,   // ✅ 상세페이지 이미지 제외 (사용자 요청)
-                    includeReviews: false,   // 저작권 안전 기본값: 구매자 리뷰 이미지는 발행용 수집에서 제외
+                    includeReviews: true,    // 공식 추가이미지가 1장 이하일 때만 리뷰 이미지로 보완
+                    reviewFallbackWhenGalleryWeak: true,
                     useCache: true,
                 });
 
@@ -91,6 +99,7 @@ export function registerImageCollectShoppingHandlers(): void {
                     // images는 빈 배열로 두고 아래 MIN_BRAND_IMAGES 폴백(crawlBrandStoreProduct)이 처리
                 }
 
+                officialGalleryImageCount = countOfficialGalleryImages(result.images || []);
                 images = (result.images || []).map((img: any) => typeof img === 'string' ? img : img.url);
                 title = result.productInfo?.name || '';
                 productInfo = result.productInfo || { name: title };
@@ -136,6 +145,7 @@ export function registerImageCollectShoppingHandlers(): void {
                                     const existingGallery = images.filter(u => !isReviewUrl(u));
                                     const existingReview = images.filter(u => isReviewUrl(u));
                                     images = [...existingGallery, ...fallbackImages, ...existingReview];
+                                    officialGalleryImageCount += fallbackImages.length;
                                     console.log(`[Main] ✅ 폴백 크롤러 ${fallbackImages.length}개 → 갤러리 뒤·리뷰 앞 삽입 → 총 ${images.length}개`);
                                 }
 
@@ -166,7 +176,8 @@ export function registerImageCollectShoppingHandlers(): void {
                     timeout: 30000,
                     maxImages: 100,
                     includeDetails: false,   // ✅ 상세페이지 이미지 제외 (사용자 요청)
-                    includeReviews: false,
+                    includeReviews: true,
+                    reviewFallbackWhenGalleryWeak: true,
                     useCache: true,
                 });
 
@@ -198,6 +209,7 @@ export function registerImageCollectShoppingHandlers(): void {
                 }
 
                 // ✅ [v2.10.318] result.images undefined 방어 (10팀 검증 팀9 지적)
+                officialGalleryImageCount = countOfficialGalleryImages(result.images || []);
                 images = (result.images || []).map((img: any) => typeof img === 'string' ? img : img.url);
                 title = result.productInfo?.name || '';
                 productInfo = result.productInfo || {};
@@ -233,12 +245,15 @@ export function registerImageCollectShoppingHandlers(): void {
             console.log(`[Main] ✅ 쇼핑몰 이미지 수집 완료: ${images.length}개`);
 
             // ✅ [2026-02-01 FIX] 1단계: 배너/배찌/마크 등 비제품 이미지 URL 필터링
-            const filteredImages = filterDuplicateAndLowQualityImages(images);
+            const filteredImages = filterDuplicateAndLowQualityImages(images.map(upscaleUrl));
             console.log(`[Main] 🎯 1단계 URL 필터 후: ${filteredImages.length}개 (제외: ${images.length - filteredImages.length}개)`);
 
             // ✅ [2026-02-27] 2~4단계: 이미지 콘텐츠 분석 + 유사도 필터 + AI Vision 분류
             let analyzedImages = filteredImages;
-            if (filteredImages.length > 1) {
+            const preserveOfficialGallery = officialGalleryImageCount >= 2 && (isBrandStore || isSmartStore || isBrandConnect);
+            if (preserveOfficialGallery) {
+                console.log(`[Main] 🛡️ 공식 추가이미지 ${officialGalleryImageCount}개 확보 → AI 유사도 분석 생략, 갤러리 전부 보존`);
+            } else if (filteredImages.length > 1) {
                 try {
                     const config = await loadConfig();
                     const { analyzeAndFilterShoppingImages } = await import('../../image/shoppingImageAnalyzer.js');

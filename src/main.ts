@@ -2900,7 +2900,7 @@ ipcMain.handle('automation:resetImageState', async () => {
 
 ipcMain.handle('automation:abortImageGeneration', async () => {
   try {
-    abortImageGeneration();
+    await abortImageGeneration();
     return { success: true };
   } catch (error) {
     console.error('[Main] 이미지 생성 중단 실패:', error);
@@ -3160,6 +3160,7 @@ ipcMain.handle(
       const images = await generateImages(imageOptions, apiKeys, onImageGenerated);
       const generatedImageCount = Array.isArray(images) ? images.length : 0;
       const providerForEmptyCheck = String(options.provider || imageOptions.provider || '');
+      const requiredGeneratedImageCount = Array.isArray(options.items) ? options.items.length : 0;
       const shouldRequireImages =
         originalRequestedImageCount > 0 &&
         headingImageMode !== 'none' &&
@@ -3170,6 +3171,12 @@ ipcMain.handle(
         const message = `[${providerLabel}] 이미지 생성 결과가 비어있습니다. 화면 결과 감지, 로그인 세션, 구독/쿼터, 또는 엔진 UI 변경을 확인해야 합니다.`;
         console.warn(`[Main] ${message}`);
         return { success: false, images: [], message };
+      }
+      if (shouldRequireImages && requiredGeneratedImageCount > 0 && generatedImageCount < requiredGeneratedImageCount) {
+        const providerLabel = String(options.provider || imageOptions.provider || 'unknown');
+        const message = `[${providerLabel}] 이미지가 일부만 생성되었습니다 (${generatedImageCount}/${requiredGeneratedImageCount}). 누락 이미지가 있어 발행을 중단하고 이미지 단계부터 다시 시도합니다.`;
+        console.warn(`[Main] ${message}`);
+        return { success: false, images, message };
       }
 
       if (await isFreeTierUser()) {

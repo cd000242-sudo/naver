@@ -546,6 +546,40 @@ function paragraphStyle(fontSizePx: number, centerAlign: boolean): string {
   ].join(';');
 }
 
+function paragraphSpacerHtml(fontSizePx: number, centerAlign: boolean): string {
+  return `<p data-rich-spacer="true" style="${[
+    `font-size:${fontSizePx}px`,
+    'line-height:1.4',
+    'margin:0 auto 18px',
+    'max-width:520px',
+    centerAlign ? 'text-align:center' : 'text-align:left',
+    'color:#5f4b45',
+    'background-color:#ffffff',
+    'word-break:keep-all',
+    'overflow-wrap:break-word',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
+  ].join(';')}"><br></p>`;
+}
+
+function shouldInsertParagraphSpacer(html: string): boolean {
+  return /^<p\b/.test(html)
+    && !html.includes('data-rich-heading="true"')
+    && !html.includes('data-rich-toc="true"')
+    && !html.includes('data-rich-spacer="true"');
+}
+
+function joinHtmlPartsWithParagraphSpacers(parts: string[], spacerHtml: string): string {
+  const joined: string[] = [];
+  parts.forEach((part, index) => {
+    joined.push(part);
+    if (index < parts.length - 1 && shouldInsertParagraphSpacer(part)) {
+      joined.push(spacerHtml);
+    }
+  });
+  return joined.join('\n\n');
+}
+
 function qaQuestionStyle(): string {
   return [
     'font-size:24px',
@@ -1161,7 +1195,7 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
   });
 
   return {
-    html: htmlParts.join('\n'),
+    html: joinHtmlPartsWithParagraphSpacers(htmlParts, paragraphSpacerHtml(fontSizePx, centerAlign)),
     plainText: plainParts.join('\n\n'),
     highlightCount: selectedHighlights.size,
     tableCount,

@@ -16,6 +16,7 @@ import {
     ProductInfo,
 } from '../types.js';
 import { upscaleUrl, isJunkUrl, normalizeUrl } from '../utils/imageUrlUtils.js';
+import { collectAdditionalImageUrls } from './brandStore/brandStoreDom.js';
 
 const MOBILE_API_BASE = 'https://m.smartstore.naver.com/i/v1/products';
 const MOBILE_UA = 'Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36';
@@ -555,10 +556,12 @@ export class SmartStoreProvider extends BaseProvider {
 
             try {
                 // 1. 추가이미지 썸네일 찾기
-                const thumbImgs = await page.$$('img[alt^="추가이미지"]');
+                const thumbSelector = 'img[alt^="추가이미지"], img[alt*="추가이미지"], img[aria-label*="추가이미지"], img[title*="추가이미지"]';
+                const thumbImgs = await page.$$(thumbSelector);
+                const thumbCandidates = await page.evaluate(collectAdditionalImageUrls).catch(() => []);
 
-                if (thumbImgs.length > 0) {
-                    console.log(`[SmartStore:Playwright] ✅ 추가이미지 ${thumbImgs.length}개 발견`);
+                if (thumbImgs.length > 0 || thumbCandidates.length > 0) {
+                    console.log(`[SmartStore:Playwright] ✅ 추가이미지 ${Math.max(thumbImgs.length, thumbCandidates.length)}개 발견`);
 
                     // 2. 대표이미지 먼저 수집
                     const mainImgEl = await page.$('img[alt="대표이미지"]');
@@ -567,6 +570,16 @@ export class SmartStoreProvider extends BaseProvider {
                             img.getAttribute('data-src') || img.src || ''
                         );
                         if (mainSrc) addImg(mainSrc, 'main');
+                    }
+
+                    for (const candidate of thumbCandidates) {
+                        if (candidate?.url) {
+                            const hasMain = allImages.some(img => img.type === 'main');
+                            addImg(candidate.url, hasMain ? 'gallery-thumb-fallback' : 'main');
+                        }
+                    }
+                    if (thumbCandidates.length > 0) {
+                        console.log(`[SmartStore:Playwright] ⚡ 공식 갤러리 썸네일 ${thumbCandidates.length}개 즉시 수집 (upscale)`);
                     }
 
                     // ✅ [v2.10.319] BrandStoreProvider와 동기화 — blur 거부 + 썸네일 fallback (10팀 팀6)
@@ -629,7 +642,11 @@ export class SmartStoreProvider extends BaseProvider {
             // ───────────────────────────────────────────────
             // ✅ [2026-03-14] PHASE 2: 리뷰 이미지 수집
             // ───────────────────────────────────────────────
-            if (options?.includeReviews === true) {
+            const productImageCountBeforeReviews = allImages.filter(i => i.type !== 'review' && i.type !== 'detail').length;
+            const shouldCollectReviews = options?.includeReviews === true
+                && (options.reviewFallbackWhenGalleryWeak !== true || productImageCountBeforeReviews <= 1);
+
+            if (shouldCollectReviews) {
                 console.log('[SmartStore:Playwright] 📝 PHASE 2: 리뷰 이미지 수집...');
                 try {
                 // ✅ 리뷰 탭 클릭 (탭 없이는 리뷰 DOM이 로드되지 않음!)
@@ -707,8 +724,10 @@ export class SmartStoreProvider extends BaseProvider {
                 } catch (phase2Err) {
                     console.warn('[SmartStore:Playwright] ⚠️ PHASE 2 실패:', (phase2Err as Error).message);
                 }
+            } else if (options?.includeReviews === true && options.reviewFallbackWhenGalleryWeak === true) {
+                console.log(`[SmartStore:Playwright] ✅ 공식 추가이미지 ${productImageCountBeforeReviews}개 확보 → 리뷰 이미지 보완 생략`);
             } else {
-                console.log('[SmartStore:Playwright] 🛡️ 리뷰 이미지는 저작권 안전 기본값으로 수집하지 않습니다.');
+                console.log('[SmartStore:Playwright] 🛡️ 리뷰 이미지는 기본 정책으로 수집하지 않습니다.');
             }
 
             // ✅ [v2.10.319] BrandStoreProvider와 동일한 우선순위 정렬 — 메인 → 갤러리 → 갤러리폴백 → 리뷰

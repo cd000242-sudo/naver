@@ -21,37 +21,24 @@ const packagedAppUserDataPath = path.join(userDataPath, 'Better Life Naver', 'se
 const packagedAppUserDataDir = path.join(userDataPath, 'Better Life Naver');
 
 const envPath = path.join(__dirname, '..', '.env');
-const envBackupPath = envPath + '.pre-pack-backup';
-const envCreatedMarkerPath = envPath + '.pre-pack-created';
 
 console.log('📂 초기화 대상 경로:');
 console.log('  - dist:', distConfigPath);
 console.log('  - ⚠️ dev userData (초기화 안함):', appUserDataPath);
 console.log('  - packaged userData:', packagedAppUserDataPath);
 console.log('  - packaged userData dir (wipe):', packagedAppUserDataDir);
-console.log('  - packaged .env (sanitize):', envPath);
+console.log('  - local .env (skip):', envPath);
 
 try {
   // ✅ [v2.8.0] 사용자 userData 폴더 전체 삭제 로직 제거 — 빌드 머신에서도 위험.
   //   기존 동작: 빌드 시 packagedAppUserDataDir 통째로 rmSync.
-  //   문제: 개발 머신에서 실제 사용자 데이터를 삭제. dist/settings.json + .env만
+  //   문제: 개발 머신에서 실제 사용자 데이터를 삭제. dist/settings.json만
   //         초기화하면 충분 (실제 사용자 데이터는 그대로 보존).
   console.log(`\n⏭️ packagedAppUserDataDir 삭제 단계 스킵 (v2.8.0 안전화): ${packagedAppUserDataDir}`);
 
-  // ✅ .env 민감 정보 제거 (배포본에 키가 포함되지 않도록)
-  try {
-    if (fs.existsSync(envPath)) {
-      fs.copyFileSync(envPath, envBackupPath);
-      fs.writeFileSync(envPath, '', 'utf8');
-      console.log(`\n✅ .env 백업 후 초기화 완료: ${envBackupPath}`);
-    } else {
-      fs.writeFileSync(envPath, '', 'utf8');
-      fs.writeFileSync(envCreatedMarkerPath, '1', 'utf8');
-      console.log(`\n✅ .env 파일이 없어 빈 파일로 생성했습니다: ${envPath}`);
-    }
-  } catch (envError) {
-    console.log('  ⚠️ .env 초기화 실패(계속 진행):', envError.message);
-  }
+  // ✅ [v2.11.18] .env는 로컬 빌드 사용자 전용이며 package.json build.files에 포함되지 않는다.
+  //   따라서 패키징 중 백업/빈 파일 생성/복원 같은 조작을 하지 않는다.
+  console.log(`\n⏭️ .env 초기화 스킵: 로컬 전용 파일은 패키징 중 건드리지 않습니다 (${envPath})`);
 
   // ✅ 개발 환경(better-life-naver)은 초기화하지 않음!
   // dist 폴더와 패키지된 앱 폴더만 초기화

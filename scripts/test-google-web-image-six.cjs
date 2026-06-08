@@ -17,7 +17,7 @@ const SUPPORTED_PROVIDERS = new Set([
 
 const PROVIDER_TIMEOUT_MS = {
   imagefx: 25 * 60 * 1000,
-  flow: 25 * 60 * 1000,
+  flow: 35 * 60 * 1000,
   dropshot: 35 * 60 * 1000,
   'nano-banana-2': 12 * 60 * 1000,
   'gpt-image-2': 12 * 60 * 1000,
@@ -30,8 +30,12 @@ function parseArgs(argv) {
   const args = argv.slice(2);
   const providerArg = args.find((arg) => !arg.startsWith('--')) || 'imagefx,flow';
   const countArg = args.find((arg) => arg.startsWith('--count='));
+  const stabilizeMsArg = args.find((arg) => arg.startsWith('--stabilize-ms='));
+  const timeoutMinutesArg = args.find((arg) => arg.startsWith('--timeout-min='));
   const sequential = args.includes('--sequential');
   const count = countArg ? Math.max(1, Number(countArg.split('=')[1]) || 6) : 6;
+  const stabilizeMs = stabilizeMsArg ? Math.max(0, Number(stabilizeMsArg.split('=')[1]) || 0) : undefined;
+  const timeoutMinutes = timeoutMinutesArg ? Math.max(1, Number(timeoutMinutesArg.split('=')[1]) || 0) : undefined;
   const providers = providerArg
     .split(',')
     .map((provider) => provider.trim())
@@ -43,7 +47,7 @@ function parseArgs(argv) {
     throw new Error(`Unknown provider(s): ${unknown.join(', ')}`);
   }
 
-  return { providers, count, sequential };
+  return { providers, count, sequential, stabilizeMs, timeoutMinutes };
 }
 
 function getUserDataDir() {
@@ -137,8 +141,19 @@ function summarizeImage(image, index) {
   };
 }
 
-async function runWithHardTimeout(provider, task) {
-  const timeoutMs = PROVIDER_TIMEOUT_MS[provider] || 20 * 60 * 1000;
+function getProviderTimeoutMs(provider, count, timeoutMinutes) {
+  if (Number.isFinite(timeoutMinutes) && timeoutMinutes > 0) {
+    return timeoutMinutes * 60 * 1000;
+  }
+  const base = PROVIDER_TIMEOUT_MS[provider] || 20 * 60 * 1000;
+  if (provider === 'flow') {
+    return Math.min(60 * 60 * 1000, Math.max(base, 120_000 + (count * 210_000)));
+  }
+  return base;
+}
+
+async function runWithHardTimeout(provider, count, timeoutMinutes, task) {
+  const timeoutMs = getProviderTimeoutMs(provider, count, timeoutMinutes);
   let timer;
   try {
     return await Promise.race([
@@ -154,7 +169,7 @@ async function runWithHardTimeout(provider, task) {
   }
 }
 
-async function testProvider(provider, count, config) {
+async function testProvider(provider, count, config, timeoutMinutes) {
   const normalizedProvider = provider === 'gpt-image-2' ? 'openai-image' : provider;
   const { generateImages } = require('../dist/imageGenerator.js');
   const startedAt = Date.now();
@@ -163,7 +178,7 @@ async function testProvider(provider, count, config) {
 
   log(`${normalizedProvider}: start ${count} images`);
 
-  const images = await runWithHardTimeout(normalizedProvider, () =>
+  const images = await runWithHardTimeout(normalizedProvider, count, timeoutMinutes, () =>
     generateImages(
       {
         provider: normalizedProvider,
@@ -210,7 +225,7 @@ async function testProvider(provider, count, config) {
 }
 
 async function main() {
-  const { providers, count, sequential } = parseArgs(process.argv);
+  const { providers, count, sequential, stabilizeMs, timeoutMinutes } = parseArgs(process.argv);
   const outDir = makeOutputDir();
   const userDataDir = getUserDataDir();
   const tempDir = path.join(outDir, 'electron-temp');
@@ -226,6 +241,9 @@ async function main() {
   if (sequential) {
     process.env.FLOW_SEQUENTIAL = '1';
   }
+  if (Number.isFinite(stabilizeMs) && stabilizeMs >= 0) {
+    process.env.FLOW_SEQUENTIAL_IMAGE_STABILIZE_MS = String(stabilizeMs);
+  }
 
   await app.whenReady();
 
@@ -233,12 +251,12 @@ async function main() {
   const config = await loadConfig();
   const results = [];
 
-  log(`providers=${providers.join(', ')} count=${count} sequential=${sequential}`);
+  log(`providers=${providers.join(', ')} count=${count} sequential=${sequential} stabilizeMs=${process.env.FLOW_SEQUENTIAL_IMAGE_STABILIZE_MS || '(default)'} timeoutMin=${timeoutMinutes || '(auto)'}`);
   log(`output=${outDir}`);
 
   for (const provider of providers) {
     try {
-      const result = await testProvider(provider, count, config);
+      const result = await testProvider(provider, count, config, timeoutMinutes);
       results.push(result);
       log(`${result.provider}: ${result.status} ${result.usableCount}/${result.requestedCount} in ${result.elapsedSeconds}s`);
     } catch (error) {

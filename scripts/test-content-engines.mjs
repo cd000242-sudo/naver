@@ -8,6 +8,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const DEFAULT_TIMEOUT_MS = Number(process.env.CONTENT_ENGINE_TEST_TIMEOUT_MS || 90_000);
+const PROVIDER_DELAY_MS = Number(process.env.CONTENT_ENGINE_TEST_PROVIDER_DELAY_MS || 3000);
 const PROVIDER_FILTER = new Set(
   String(process.env.CONTENT_ENGINE_TEST_PROVIDERS || 'gemini,openai,claude,perplexity')
     .split(',')
@@ -52,15 +53,26 @@ function firstSettingValue(...fields) {
     for (const field of fields) {
       const value = setting?.[field];
       if (Array.isArray(value)) {
-        const first = value.find((item) => typeof item === 'string' && item.trim() && !item.startsWith('enc:v1:'));
+        const first = value.find((item) => isUsablePlainSecret(item));
         if (first) return first.trim();
       }
-      if (typeof value === 'string' && value.trim() && !value.startsWith('enc:v1:')) {
+      if (isUsablePlainSecret(value)) {
         return value.trim();
       }
     }
   }
   return '';
+}
+
+function isMaskedSecretValue(value) {
+  return /[\u2022\u25CF*]/.test(String(value || ''));
+}
+
+function isUsablePlainSecret(value) {
+  return typeof value === 'string'
+    && value.trim()
+    && !value.trim().startsWith('enc:v1:')
+    && !isMaskedSecretValue(value);
 }
 
 function getKey(envNames, settingFields) {
@@ -69,7 +81,7 @@ function getKey(envNames, settingFields) {
 
   for (const name of envNames) {
     const value = process.env[name]?.trim();
-    if (value) return value;
+    if (value && !isMaskedSecretValue(value)) return value;
   }
   return '';
 }
@@ -118,7 +130,7 @@ function assertContentShape(provider, json) {
 }
 
 function classifyExternal(error) {
-  const message = `${error?.message || error || ''} ${JSON.stringify(error || {})}`.toLowerCase();
+  const message = `${error?.message || error || ''} ${safeStringify(error || {})}`.toLowerCase();
   const status = error?.status || error?.response?.status;
   if (status === 401 || status === 403 || /unauthorized|forbidden|invalid api key|api key not valid|authentication/.test(message)) {
     return 'auth';
@@ -130,6 +142,18 @@ function classifyExternal(error) {
     return 'quota';
   }
   return '';
+}
+
+function safeStringify(value) {
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return String(value);
+  }
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function runGemini() {
@@ -162,7 +186,9 @@ async function runOpenAI() {
       ? 'gpt-4o'
       : selected === 'openai-gpt4o-search'
         ? 'gpt-4o-search-preview'
-        : 'gpt-4.1-mini';
+        : selected === 'openai-gpt4o-mini'
+          ? 'gpt-4.1-mini'
+          : 'gpt-4.1';
   const model = process.env.OPENAI_STRUCTURED_MODEL || process.env.OPENAI_MODEL || mapped;
   const client = new OpenAI({ apiKey });
   const request = (signal) => client.chat.completions.create(
@@ -280,14 +306,23 @@ const runners = [
 console.log('[content-engines] starting live engine smoke test');
 console.log(`[content-engines] providers=${[...PROVIDER_FILTER].join(',')} timeout=${Math.round(DEFAULT_TIMEOUT_MS / 1000)}s`);
 
-const results = (await Promise.all(runners.map(([provider, fn]) => runProvider(provider, fn)))).filter(Boolean);
-for (const result of results) {
+const results = [];
+const enabledRunners = runners.filter(([provider]) => PROVIDER_FILTER.has(provider));
+for (const [index, [provider, fn]] of enabledRunners.entries()) {
+  console.log(`[content-engines] RUN ${index + 1}/${enabledRunners.length} ${provider}`);
+  const result = await runProvider(provider, fn);
+  if (!result) continue;
+  results.push(result);
   if (result.status === 'pass') {
     console.log(`PASS ${result.provider} model=${result.model} chars=${result.chars} time=${Math.round(result.ms / 1000)}s`);
   } else if (result.status === 'external') {
     console.log(`EXTERNAL ${result.provider} reason=${result.reason || 'not configured'} time=${Math.round((result.ms || 0) / 1000)}s`);
   } else {
     console.error(`FAIL ${result.provider} time=${Math.round(result.ms / 1000)}s message=${result.message}`);
+  }
+  if (index < enabledRunners.length - 1 && PROVIDER_DELAY_MS > 0) {
+    console.log(`[content-engines] waiting ${Math.round(PROVIDER_DELAY_MS / 1000)}s before next engine`);
+    await sleep(PROVIDER_DELAY_MS);
   }
 }
 

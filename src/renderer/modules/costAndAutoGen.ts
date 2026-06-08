@@ -42,10 +42,12 @@ const FALLBACK_CONFIRM_MARKER = 'FALLBACK_REQUIRES_CONFIRMATION';
 const IMAGE_FALLBACK_POLICIES: ImageFallbackPolicy[] = ['engine-only', 'ask', 'guarantee'];
 const DEFAULT_IMAGE_GENERATION_TIMEOUT_MS = 6 * 60 * 1000;
 const LONG_RUN_IMAGE_MAX_TIMEOUT_MS = 45 * 60 * 1000;
+const FLOW_IMAGE_GENERATION_MAX_TIMEOUT_MS = 18 * 60 * 1000;
 const MIN_IMAGE_GENERATION_TIMEOUT_MS = 30_000;
 const DEFAULT_IMAGE_STABILIZE_MS = 3_000;
 const LONG_RUN_IMAGE_STABILIZE_MS = 8_000;
 const UI_AUTOMATION_IMAGE_STABILIZE_MS = 15_000;
+const FLOW_IMAGE_STABILIZE_MS = 45_000;
 const UI_AUTOMATION_IMAGE_PROVIDERS = new Set(['dropshot', 'flow', 'imagefx']);
 const SLOW_IMAGE_PROVIDERS = new Set([
   'dropshot',
@@ -85,6 +87,9 @@ function isLongRunImageGeneration(options: any): boolean {
 function estimateImageGenerationTimeoutMs(options: any): number {
   const provider = normalizeImageProvider(options?.provider);
   const count = getImageItemCount(options);
+  if (provider === 'flow') {
+    return Math.min(FLOW_IMAGE_GENERATION_MAX_TIMEOUT_MS, 120_000 + (count * 210_000));
+  }
   const startupMs = UI_AUTOMATION_IMAGE_PROVIDERS.has(provider) ? 180_000 : 90_000;
   const perItemMs = provider === 'dropshot'
     ? 150_000
@@ -98,6 +103,7 @@ function estimateImageGenerationTimeoutMs(options: any): number {
 
 function getImageStabilizeDelayMs(options: any): number {
   const provider = normalizeImageProvider(options?.provider);
+  if (provider === 'flow') return FLOW_IMAGE_STABILIZE_MS;
   if (UI_AUTOMATION_IMAGE_PROVIDERS.has(provider)) return UI_AUTOMATION_IMAGE_STABILIZE_MS;
   if (isLongRunImageGeneration(options) || SLOW_IMAGE_PROVIDERS.has(provider)) return LONG_RUN_IMAGE_STABILIZE_MS;
   return DEFAULT_IMAGE_STABILIZE_MS;
@@ -112,6 +118,7 @@ function logImageQueueMessage(message: string): void {
 }
 
 function resolveImageGenerationTimeoutMs(options: any): number {
+  const provider = normalizeImageProvider(options?.provider);
   const rawTimeoutValue = options?.imageGenerationTimeoutMs
     ?? options?.timeoutMs
     ?? options?.timeout;
@@ -126,15 +133,20 @@ function resolveImageGenerationTimeoutMs(options: any): number {
   );
 
   if (!Number.isFinite(rawTimeout) || rawTimeout <= 0) {
+    if (provider === 'flow') {
+      return Math.min(Math.max(estimatedTimeout, MIN_IMAGE_GENERATION_TIMEOUT_MS), FLOW_IMAGE_GENERATION_MAX_TIMEOUT_MS);
+    }
     return isLongRun
       ? Math.min(Math.max(estimatedTimeout, DEFAULT_IMAGE_GENERATION_TIMEOUT_MS), LONG_RUN_IMAGE_MAX_TIMEOUT_MS)
       : DEFAULT_IMAGE_GENERATION_TIMEOUT_MS;
   }
 
+  const maximum = provider === 'flow'
+    ? FLOW_IMAGE_GENERATION_MAX_TIMEOUT_MS
+    : isLongRun ? LONG_RUN_IMAGE_MAX_TIMEOUT_MS : DEFAULT_IMAGE_GENERATION_TIMEOUT_MS;
   const minimum = isLongRun
-    ? Math.max(MIN_IMAGE_GENERATION_TIMEOUT_MS, estimatedTimeout)
+    ? Math.min(maximum, Math.max(MIN_IMAGE_GENERATION_TIMEOUT_MS, estimatedTimeout))
     : MIN_IMAGE_GENERATION_TIMEOUT_MS;
-  const maximum = isLongRun ? LONG_RUN_IMAGE_MAX_TIMEOUT_MS : DEFAULT_IMAGE_GENERATION_TIMEOUT_MS;
   const requested = Number.isFinite(explicitTimeout) && explicitTimeout > 0 && isLongRun
     ? Math.max(rawTimeout, estimatedTimeout)
     : rawTimeout;
@@ -291,13 +303,16 @@ function isEmptyImageSuccessAllowed(options: any, result: any): boolean {
 function normalizeEmptyImageSuccess(options: any, result: any): any {
   const requestedCount = Array.isArray(options?.items) ? options.items.length : 0;
   const imageCount = Array.isArray(result?.images) ? result.images.length : 0;
-  if (result?.success !== false && requestedCount > 0 && imageCount === 0 && !isEmptyImageSuccessAllowed(options, result)) {
+  if (result?.success !== false && requestedCount > 0 && imageCount < requestedCount && !isEmptyImageSuccessAllowed(options, result)) {
     const provider = String(options?.provider || 'unknown').trim() || 'unknown';
+    const message = imageCount === 0
+      ? `[${provider}] 이미지 생성 결과가 비어있습니다. 화면 결과 감지, 로그인 세션, 구독/쿼터, 또는 엔진 UI 변경을 확인해야 합니다.`
+      : `[${provider}] 이미지가 일부만 생성되었습니다 (${imageCount}/${requestedCount}). 누락 이미지가 있어 발행을 중단하고 이미지 단계부터 다시 시도합니다.`;
     return {
       ...result,
       success: false,
-      images: [],
-      message: result?.message || `[${provider}] 이미지 생성 결과가 비어있습니다. 화면 결과 감지, 로그인 세션, 구독/쿼터, 또는 엔진 UI 변경을 확인해야 합니다.`,
+      images: Array.isArray(result?.images) ? result.images : [],
+      message: result?.message || message,
     };
   }
   return result;
@@ -805,10 +820,8 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
         // ✅ [2026-02-13 FIX] 타임아웃 시 main process에 abort 신호 전달 (orphan 작업 방지)
         if ((e as Error).message?.includes('타임아웃')) {
           try {
-            if (window.api && typeof (window.api as any).abortImageGeneration === 'function') {
-              (window.api as any).abortImageGeneration();
-              console.log('[Renderer] 🛑 타임아웃 → main process에 이미지 생성 중단 신호 전달');
-            }
+            await abortImageGenerationIfAvailable();
+            console.log('[Renderer] 🛑 타임아웃 → main process에 이미지 생성 중단 신호 전달');
           } catch (abortErr) {
             console.warn('[Renderer] ⚠️ abort 신호 전달 실패:', abortErr);
           }

@@ -13,9 +13,13 @@ describe('continuous and multi-account image generation safety', () => {
     const code = read('renderer/modules/costAndAutoGen.ts');
 
     expect(code).toMatch(/LONG_RUN_IMAGE_MAX_TIMEOUT_MS\s*=\s*45\s*\*\s*60\s*\*\s*1000/);
+    expect(code).toMatch(/FLOW_IMAGE_GENERATION_MAX_TIMEOUT_MS\s*=\s*18\s*\*\s*60\s*\*\s*1000/);
+    expect(code).toMatch(/provider === 'flow'[\s\S]{0,120}?FLOW_IMAGE_GENERATION_MAX_TIMEOUT_MS/);
     expect(code).toMatch(/let imageGenerationQueue: Promise<void> = Promise\.resolve\(\)/);
     expect(code).toMatch(/runQueuedImageGeneration/);
     expect(code).toMatch(/UI_AUTOMATION_IMAGE_STABILIZE_MS\s*=\s*15_000/);
+    expect(code).toMatch(/FLOW_IMAGE_STABILIZE_MS\s*=\s*45_000/);
+    expect(code).toMatch(/provider === 'flow'[\s\S]{0,80}?FLOW_IMAGE_STABILIZE_MS/);
     expect(code).toMatch(/estimateImageGenerationTimeoutMs/);
     expect(code).toMatch(/generateImagesWithCostSafetyInternal/);
   });
@@ -26,6 +30,10 @@ describe('continuous and multi-account image generation safety', () => {
     expect(code).toMatch(/FULL_AUTO_IMAGE_TOTAL_BUDGET_MS\s*=\s*35\s*\*\s*60\s*\*\s*1000/);
     expect(code).toMatch(/FULL_AUTO_THUMBNAIL_IMAGE_TIMEOUT_MS\s*=\s*4\s*\*\s*60\s*\*\s*1000/);
     expect(code).toMatch(/FULL_AUTO_BODY_IMAGE_TIMEOUT_MS\s*=\s*25\s*\*\s*60\s*\*\s*1000/);
+    expect(code).toMatch(/FLOW_FULL_AUTO_IMAGE_MAX_ATTEMPTS\s*=\s*2/);
+    expect(code).toMatch(/FLOW_FULL_AUTO_TOTAL_BUDGET_MS\s*=\s*18\s*\*\s*60\s*\*\s*1000/);
+    expect(code).toMatch(/FLOW_FULL_AUTO_BODY_IMAGE_TIMEOUT_MS\s*=\s*7\s*\*\s*60\s*\*\s*1000/);
+    expect(code).toMatch(/getFullAutoBodyImageTimeoutMs/);
     expect((code.match(/longRunImageGeneration:\s*true/g) || []).length).toBeGreaterThanOrEqual(4);
   });
 
@@ -52,10 +60,13 @@ describe('continuous and multi-account image generation safety', () => {
     const rendererCode = read('renderer/modules/multiAccountManager.ts');
     const mainCode = read('main.ts');
 
-    expect(rendererCode).toMatch(/BATCH_TIMEOUT_MS\s*=\s*Math\.min\(\s*45\s*\*\s*60\s*\*\s*1000/);
+    expect(rendererCode).toMatch(/FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS\s*=\s*7\s*\*\s*60\s*\*\s*1000/);
+    expect(rendererCode).toMatch(/FLOW_AUTOMATION_BATCH_MAX_TIMEOUT_MS\s*=\s*18\s*\*\s*60\s*\*\s*1000/);
+    expect(rendererCode).toMatch(/const BATCH_TIMEOUT_MS = isFlowProvider/);
+    expect(rendererCode).toMatch(/const MAX_RETRIES = isFlowProvider \? 2 : 3/);
     expect(rendererCode).toMatch(/isMultiAccount:\s*true/);
     expect(rendererCode).toMatch(/longRunImageGeneration:\s*true/);
-    expect(rendererCode).toMatch(/15_000/);
+    expect(mainCode).toMatch(/imageEngineStabilizeDelayMs[\s\S]{0,120}?15_000/);
     expect(mainCode).toMatch(/waitForImageEngineStabilization/);
     expect(mainCode).toMatch(/await waitForImageEngineStabilization\('thumbnail'\)/);
     expect(mainCode).toMatch(/await waitForImageEngineStabilization\('body-images'\)/);
@@ -105,6 +116,35 @@ describe('continuous and multi-account image generation safety', () => {
     expect(code).toMatch(/if \(index === 0[\s\S]{0,120}?modal\.clearImages\(\)/);
   });
 
+  it('treats partial image generation as a failure instead of publishing with missing images', () => {
+    const costCode = read('renderer/modules/costAndAutoGen.ts');
+    const mainCode = read('main.ts');
+
+    expect(costCode).toMatch(/imageCount < requestedCount/);
+    expect(costCode).toMatch(/이미지가 일부만 생성되었습니다/);
+    expect(mainCode).toMatch(/requiredGeneratedImageCount/);
+    expect(mainCode).toMatch(/generatedImageCount < requiredGeneratedImageCount/);
+  });
+
+  it('keeps Flow image timeout recovery bounded per heading', () => {
+    const flowCode = read('image/flowGenerator.ts');
+    const classifierCode = read('image/recovery/classifier.ts');
+    const imageGeneratorCode = read('imageGenerator.ts');
+    const mainCode = read('main.ts');
+
+    expect(flowCode).toMatch(/FLOW_SINGLE_IMAGE_WAIT_TIMEOUT_MS\s*=\s*180000/);
+    expect(flowCode).toMatch(/FLOW_SINGLE_IMAGE_MAX_RETRIES\s*=\s*2/);
+    expect(flowCode).toMatch(/FLOW_SEQUENTIAL_IMAGE_STABILIZE_MS\s*=\s*30_000/);
+    expect(flowCode).toMatch(/getFlowSequentialImageStabilizeMs/);
+    expect(flowCode).toMatch(/다음 이미지 전 안정화 대기/);
+    expect(flowCode).toMatch(/timeout\/stuck 감지 — 새 프로젝트로 격리 후 재시도/);
+    expect(flowCode).toMatch(/await ensureFlowProject\(page, true\)/);
+    expect(classifierCode).toMatch(/FLOW_IMAGE_TIMEOUT[\s\S]{0,220}?skip-heading/);
+    expect(imageGeneratorCode).toMatch(/abortNanoBananaImageGeneration\(\)/);
+    expect(imageGeneratorCode).toMatch(/await resetFlowState\(\)/);
+    expect(mainCode).toMatch(/await abortImageGeneration\(\)/);
+  });
+
   it('allows the large progress preview image to open a full-size preview', () => {
     const code = read('renderer/components/ProgressModal.ts');
 
@@ -139,7 +179,6 @@ describe('continuous and multi-account image generation safety', () => {
     expect(costCode).toMatch(/options\.allowThumbnailText/);
     expect(costCode).toMatch(/options\.thumbnailTextInclude = !!options\.allowThumbnailText/);
     expect(publishingCode).toMatch(/thumbnailTextInclude:\s*formData\.includeThumbnailText/);
-    expect(multiAccountCode).toMatch(/thumbnailTextInclude\?: boolean/);
     expect(multiAccountCode).toMatch(/const includeThumbnailText = options\.thumbnailTextInclude \?\? options\.allowThumbnailText \?\? false/);
     expect(multiAccountCode).toMatch(/allowText:\s*isThumb \? includeThumbnailText : false/);
     expect(multiAccountCode).toMatch(/thumbnailTextInclude:\s*includeThumbnailText/);

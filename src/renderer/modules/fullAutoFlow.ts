@@ -28,8 +28,34 @@ const FULL_AUTO_IMAGE_MAX_ATTEMPTS = 3;
 const FULL_AUTO_IMAGE_TOTAL_BUDGET_MS = 35 * 60 * 1000;
 const FULL_AUTO_THUMBNAIL_IMAGE_TIMEOUT_MS = 4 * 60 * 1000;
 const FULL_AUTO_BODY_IMAGE_TIMEOUT_MS = 25 * 60 * 1000;
+const FLOW_FULL_AUTO_IMAGE_MAX_ATTEMPTS = 2;
+const FLOW_FULL_AUTO_TOTAL_BUDGET_MS = 18 * 60 * 1000;
+const FLOW_FULL_AUTO_THUMBNAIL_IMAGE_TIMEOUT_MS = 4 * 60 * 1000;
+const FLOW_FULL_AUTO_BODY_IMAGE_TIMEOUT_MS = 7 * 60 * 1000;
 const FULL_AUTO_CONTENT_RETRY_CACHE_KEY = '__leaderFullAutoContentRetryCache';
 const FULL_AUTO_CONTENT_RETRY_MAX_AGE_MS = 6 * 60 * 60 * 1000;
+function isFlowImageSource(provider) {
+    return String(provider || '').trim() === 'flow';
+}
+function getFullAutoImageMaxAttempts(provider) {
+    return isFlowImageSource(provider) ? FLOW_FULL_AUTO_IMAGE_MAX_ATTEMPTS : FULL_AUTO_IMAGE_MAX_ATTEMPTS;
+}
+function getFullAutoTotalImageBudgetMs(provider) {
+    return isFlowImageSource(provider) ? FLOW_FULL_AUTO_TOTAL_BUDGET_MS : FULL_AUTO_IMAGE_TOTAL_BUDGET_MS;
+}
+function getFullAutoThumbnailImageTimeoutMs(provider) {
+    return isFlowImageSource(provider) ? FLOW_FULL_AUTO_THUMBNAIL_IMAGE_TIMEOUT_MS : FULL_AUTO_THUMBNAIL_IMAGE_TIMEOUT_MS;
+}
+function getFullAutoBodyImageTimeoutMs(provider, itemCount = 1) {
+    if (!isFlowImageSource(provider)) {
+        return FULL_AUTO_BODY_IMAGE_TIMEOUT_MS;
+    }
+    const count = Math.max(1, Number(itemCount) || 1);
+    if (count === 1) {
+        return FLOW_FULL_AUTO_BODY_IMAGE_TIMEOUT_MS;
+    }
+    return Math.min(FLOW_FULL_AUTO_TOTAL_BUDGET_MS, 120000 + count * FLOW_FULL_AUTO_BODY_IMAGE_TIMEOUT_MS);
+}
 function normalizeReuseString(value) {
     return String(value ?? '').trim();
 }
@@ -593,10 +619,11 @@ async function executeFullAutoFlow(formData) {
                 }));
                 modal?.showImages(placeholderImages, `🎨 이미지 생성 중... (${_friendlySource})`);
             }
-            const IMAGE_GEN_MAX_RETRIES = FULL_AUTO_IMAGE_MAX_ATTEMPTS;
+            const originalProvider = formData.imageSource;
+            const IMAGE_GEN_MAX_RETRIES = getFullAutoImageMaxAttempts(originalProvider);
             let imageGenSuccess = false;
             const imageGenerationStartedAt = Date.now();
-            const getRemainingImageBudgetMs = () => Math.max(0, FULL_AUTO_IMAGE_TOTAL_BUDGET_MS - (Date.now() - imageGenerationStartedAt));
+            const getRemainingImageBudgetMs = () => Math.max(0, getFullAutoTotalImageBudgetMs(originalProvider) - (Date.now() - imageGenerationStartedAt));
             const getBoundedImageTimeoutMs = (maxMs) => {
                 const remainingMs = getRemainingImageBudgetMs();
                 if (remainingMs <= 30000) {
@@ -605,7 +632,6 @@ async function executeFullAutoFlow(formData) {
                 return Math.min(maxMs, remainingMs);
             };
             const isImageBudgetError = (error) => String(error?.message || '').includes('이미지 생성 전체 제한 시간 초과');
-            const originalProvider = formData.imageSource;
             const getProviderForAttempt = (attempt) => {
                 void attempt;
                 return originalProvider;
@@ -676,7 +702,7 @@ async function executeFullAutoFlow(formData) {
                                 referenceImagePath,
                                 imageRatio: globalImgSettings.thumbnailRatio || globalImgSettings.imageRatio || '1:1',
                                 thumbnailTextInclude: thumbnailAllowText,
-                                imageGenerationTimeoutMs: getBoundedImageTimeoutMs(FULL_AUTO_THUMBNAIL_IMAGE_TIMEOUT_MS),
+                                imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoThumbnailImageTimeoutMs(currentProvider)),
                             });
                             if (thumbResult?.success && thumbResult.images && thumbResult.images.length > 0) {
                                 dedicatedThumbnailImage = {
@@ -722,7 +748,7 @@ async function executeFullAutoFlow(formData) {
                         thumbnailTextInclude: !!formData.includeThumbnailText,
                         longRunImageGeneration: true,
                         isContinuousMode: !!isContinuousMode,
-                        imageGenerationTimeoutMs: getBoundedImageTimeoutMs(FULL_AUTO_BODY_IMAGE_TIMEOUT_MS),
+                        imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoBodyImageTimeoutMs(currentProvider, headings.length)),
                     });
                     if (imageResult?.success && imageResult.images && imageResult.images.length > 0) {
                         finalImages = [
@@ -2298,7 +2324,7 @@ async function generateAIImagesForHeadings(headings, formData) {
                 imageRatio: globalSettings.thumbnailRatio || globalSettings.imageRatio || '1:1',
                 thumbnailTextInclude: includeThumbnailText,
                 imageFallbackPolicy,
-                imageGenerationTimeoutMs: FULL_AUTO_THUMBNAIL_IMAGE_TIMEOUT_MS,
+                imageGenerationTimeoutMs: getFullAutoThumbnailImageTimeoutMs(imageSource),
             });
             if (thumbResult?.success && thumbResult.images && thumbResult.images.length > 0) {
                 dedicatedShopThumbnail = {
@@ -2383,7 +2409,7 @@ async function generateAIImagesForHeadings(headings, formData) {
                 collectedImages: collectedImages,
                 thumbnailTextInclude: includeThumbnailText,
                 imageFallbackPolicy,
-                imageGenerationTimeoutMs: FULL_AUTO_BODY_IMAGE_TIMEOUT_MS,
+                imageGenerationTimeoutMs: getFullAutoBodyImageTimeoutMs(imageSource, 1),
             });
             completedCount++;
             const currentProgress = progressStart + ((progressEnd - progressStart) * (completedCount / headings.length));

@@ -188,3 +188,40 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     });
   });
 });
+
+describe('Live content engine diagnostics and secret safety', () => {
+  const content = read('contentGenerator.ts');
+  const configManager = read('configManager.ts');
+  const promptLoader = read('promptLoader.ts');
+  const engineScript = fs.readFileSync(path.resolve(ROOT, '../scripts/test-content-engines.mjs'), 'utf-8');
+  const engineAppScript = fs.readFileSync(path.resolve(ROOT, '../scripts/test-content-engine-smoke.cjs'), 'utf-8');
+
+  it('text engines reject masked API key placeholders before provider calls', () => {
+    expect(content).toMatch(/Gemini API 키가 실제 키가 아니라 마스킹된 표시값/);
+    expect(content).toMatch(/OpenAI API 키가 실제 키가 아니라 마스킹된 표시값/);
+    expect(content).toMatch(/Claude API 키가 실제 키가 아니라 마스킹된 표시값/);
+    expect(content).toMatch(/Perplexity API 키가 실제 키가 아니라 마스킹된 표시값/);
+    expect(configManager).toMatch(/function\s+applySecretEnv/);
+    expect(configManager).toMatch(/looks masked; keeping existing environment value instead/);
+  });
+
+  it('content engine live smoke test runs providers sequentially with app-equivalent OpenAI mapping', () => {
+    expect(engineScript).not.toMatch(/Promise\.all\(runners/);
+    expect(engineScript).toMatch(/for \(const \[index, \[provider, fn\]\] of enabledRunners\.entries\(\)\)/);
+    expect(engineScript).toMatch(/selected === 'openai-gpt4o-mini'[\s\S]{0,80}\? 'gpt-4\.1-mini'[\s\S]{0,80}: 'gpt-4\.1'/);
+    expect(engineScript).toMatch(/function\s+isMaskedSecretValue/);
+  });
+
+  it('app-based content engine smoke test uses Electron config decryption path', () => {
+    expect(engineAppScript).toMatch(/require\('electron'\)/);
+    expect(engineAppScript).toMatch(/loadConfig/);
+    expect(engineAppScript).toMatch(/applyConfigToEnv/);
+    expect(engineAppScript).toMatch(/generateStructuredContent/);
+    expect(engineAppScript).toMatch(/for \(const \[index, provider\] of providers\.entries\(\)\)/);
+  });
+
+  it('prompt loader falls back to workspace prompts when Electron appPath points at scripts', () => {
+    expect(promptLoader).toMatch(/process\.cwd\(\), 'src', 'prompts'/);
+    expect(promptLoader).toMatch(/fs\.existsSync\(candidate\)/);
+  });
+});

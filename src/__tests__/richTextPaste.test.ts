@@ -18,7 +18,7 @@ describe('buildMobileRichHtml', () => {
     );
 
     expect(result.paragraphCount).toBeGreaterThan(1);
-    expect(result.html.match(/<p /g)?.length).toBe(result.paragraphCount);
+    expect(result.html.match(/<p style=/g)?.length).toBe(result.paragraphCount);
     expect(result.html).toContain('text-align:center');
     expect(result.html).toContain('max-width:520px');
   });
@@ -206,6 +206,22 @@ describe('buildMobileRichHtml', () => {
 
     expect(result.html).toContain('margin:0 auto 30px');
     expect(result.plainText).toContain('First sentence.\n\nSecond sentence.');
+  });
+
+  it('keeps sentence-ending paragraphs separated by a real blank line in rich paste payloads', () => {
+    const result = buildMobileRichHtml(
+      [
+        '광고에서는 벤딕트 휴대용 선풍기가 조용하게 작동한다고 하지만, 실제로는 소음이 상당하다.',
+        '특히, 높은 풍속으로 설정하면 소음이 더욱 커져서 조용한 환경에서는 사용하기 어렵다.',
+        '이 부분은 광고에서 전혀 언급되지 않았다.',
+      ].join(' '),
+      { maxChunkChars: 38, highlight: false }
+    );
+
+    expect(result.plainText).toContain('소음이 상당하다.\n\n특히,');
+    expect(result.plainText).toContain('사용하기 어렵다.\n\n이 부분은');
+    expect(result.html).toContain('data-rich-spacer="true"');
+    expect(result.html).toContain('<br></p>');
   });
 
   it('splits long Korean sentences near a semantic midpoint for mobile reading', () => {

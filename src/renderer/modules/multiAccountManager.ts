@@ -14,6 +14,11 @@ const MULTI_ACCOUNT_UI_IMAGE_MIN_INTERVAL_SEC = 480;
 const MULTI_ACCOUNT_SLOW_IMAGE_MIN_INTERVAL_SEC = 420;
 const MULTI_ACCOUNT_UI_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx']);
 const MULTI_ACCOUNT_SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai']);
+const FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS = 7 * 60 * 1000;
+const FLOW_AUTOMATION_BATCH_MAX_TIMEOUT_MS = 18 * 60 * 1000;
+function isFlowAutomationProvider(provider) {
+    return String(provider || '').trim() === 'flow';
+}
 function applyIntervalJitter(intervalSeconds, floorSeconds = 1) {
     if (!Number.isFinite(intervalSeconds) || intervalSeconds <= 0)
         return intervalSeconds;
@@ -459,8 +464,13 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
         return [];
     }
     const isUiAutomationImageProvider = MULTI_ACCOUNT_UI_IMAGE_SOURCES.has(provider);
+    const isFlowProvider = isFlowAutomationProvider(provider);
     const perItemBudgetMs = isUiAutomationImageProvider ? 150000 : 90000;
-    const BATCH_TIMEOUT_MS = Math.min(45 * 60 * 1000, Math.max(15 * 60 * 1000, 180000 + (_displayCount * perItemBudgetMs)));
+    const BATCH_TIMEOUT_MS = isFlowProvider
+        ? (_displayCount <= 1
+            ? FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS
+            : Math.min(FLOW_AUTOMATION_BATCH_MAX_TIMEOUT_MS, Math.max(FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS, 120000 + (_displayCount * FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS))))
+        : Math.min(45 * 60 * 1000, Math.max(15 * 60 * 1000, 180000 + (_displayCount * perItemBudgetMs)));
     const batchStartTime = Date.now();
     const checkBatchTimeout = () => {
         const elapsed = Date.now() - batchStartTime;
@@ -471,7 +481,7 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
         }
         return false;
     };
-    const MAX_RETRIES = 3;
+    const MAX_RETRIES = isFlowProvider ? 2 : 3;
     let lastError = null;
     const sequentialImages = [];
     for (let itemIndex = 0; itemIndex < itemsForGeneration.length; itemIndex++) {
@@ -504,7 +514,9 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
                     imageFallbackPolicy: 'engine-only',
                     isMultiAccount: true,
                     longRunImageGeneration: true,
-                    imageGenerationTimeoutMs: Math.min(45 * 60 * 1000, 180000 + perItemBudgetMs),
+                    imageGenerationTimeoutMs: isFlowProvider
+                        ? FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS
+                        : Math.min(45 * 60 * 1000, 180000 + perItemBudgetMs),
                 });
                 if (stopCheck && stopCheck())
                     return sequentialImages;

@@ -56,6 +56,11 @@ describe('shopping-connect policy and crawler hardening', () => {
     expect(handler).toContain('finalImageCount');
     expect(handler).toContain('resolvedUrl');
     expect(handler).toContain('requiresCoupangApi');
+    expect(handler).toContain('reviewFallbackWhenGalleryWeak: true');
+    expect(handler).toContain('officialGalleryImageCount');
+    expect(handler).toContain('AI 유사도 분석 생략');
+    expect(readSource('src/crawler/shopping/providers/BrandStoreProvider.ts')).toContain('공식 추가이미지');
+    expect(readSource('src/crawler/shopping/providers/SmartStoreProvider.ts')).toContain('공식 추가이미지');
     expect(handler).toContain('쿠팡은 현재 공개 상품 페이지가 Access Denied');
   });
 

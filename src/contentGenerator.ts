@@ -5535,16 +5535,26 @@ function withGeminiTimeout<T>(promise: Promise<T>, timeoutMs: number, label: str
 }
 
 const geminiRequestGate = new Map<string, { nextAllowedAt: number }>();
+export const GEMINI_RATE_LIMIT_MIN_WAIT_MS = 75_000;
+export const GEMINI_RATE_LIMIT_MAX_SINGLE_WAIT_MS = 180_000;
+
+function readOptionalNonNegativeMsEnv(name: string, minMs = 0): number | undefined {
+  const raw = process.env[name];
+  if (raw === undefined || raw.trim() === '') return undefined;
+  const value = Number(raw);
+  if (Number.isFinite(value) && value >= minMs) return Math.floor(value);
+  return undefined;
+}
 
 function getGeminiMinIntervalMs(config: any): number {
-  const envValue = Number(process.env.GEMINI_MIN_INTERVAL_MS ?? '');
-  if (Number.isFinite(envValue) && envValue >= 0) return Math.floor(envValue);
+  const envValue = readOptionalNonNegativeMsEnv('GEMINI_MIN_INTERVAL_MS');
+  if (envValue !== undefined) return envValue;
   return config?.geminiPlanType === 'paid' ? 8000 : 10_000;
 }
 
-function getGeminiRateLimitPatienceMs(config: any): number {
-  const envValue = Number(process.env.GEMINI_RATE_LIMIT_PATIENCE_MS ?? '');
-  if (Number.isFinite(envValue) && envValue >= 0) return Math.floor(envValue);
+export function getGeminiRateLimitPatienceMs(config: any): number {
+  const envValue = readOptionalNonNegativeMsEnv('GEMINI_RATE_LIMIT_PATIENCE_MS');
+  if (envValue !== undefined) return envValue;
   return config?.geminiPlanType === 'paid' ? 12 * 60 * 1000 : 5 * 60 * 1000;
 }
 
@@ -5572,13 +5582,14 @@ function recordGeminiRateLimitBackoff(modelName: string, config: any, waitMs: nu
   });
 }
 
-function getGeminiRateLimitWaitMs(error: unknown, fallbackMs: number): number {
+export function getGeminiRateLimitWaitMs(error: unknown, fallbackMs: number): number {
   const raw = `${normalizeErrorMessage(error)}\n${safeStringifyError(error)}`;
   const patterns = [
     /retry\s+in\s+([\d.]+)\s*(ms|s|m)?/i,
     /retryDelay["'\s:]+([\d.]+)\s*(ms|s|m)?/i,
     /"retryDelay"\s*:\s*"([\d.]+)\s*(ms|s|m)?"/i,
   ];
+  const waits: number[] = [];
 
   for (const pattern of patterns) {
     const match = raw.match(pattern);
@@ -5587,10 +5598,98 @@ function getGeminiRateLimitWaitMs(error: unknown, fallbackMs: number): number {
     if (!Number.isFinite(value) || value < 0) continue;
     const unit = (match[2] || 's').toLowerCase();
     const ms = unit === 'm' ? value * 60_000 : unit === 'ms' ? value : value * 1000;
-    return Math.min(Math.max(Math.round(ms + 1000), 1000), 180_000);
+    waits.push(Math.round(ms + 1000));
   }
 
-  return Math.min(Math.max(fallbackMs, 1000), 180_000);
+  const retrySeconds = raw.match(/retryDelay[\s\S]{0,120}?seconds["'\s:]+([\d.]+)/i)
+    || raw.match(/RetryInfo[\s\S]{0,160}?seconds["'\s:]+([\d.]+)/i);
+  if (retrySeconds) {
+    const seconds = Number(retrySeconds[1]);
+    if (Number.isFinite(seconds) && seconds >= 0) waits.push(Math.round(seconds * 1000 + 1000));
+  }
+
+  const headerWait = getProviderRateLimitWaitMs(error, fallbackMs, ['retry-after']);
+  waits.push(headerWait);
+
+  const waitMs = Math.max(
+    GEMINI_RATE_LIMIT_MIN_WAIT_MS,
+    fallbackMs,
+    ...waits.filter((value) => Number.isFinite(value) && value > 0),
+  );
+  return Math.min(waitMs, GEMINI_RATE_LIMIT_MAX_SINGLE_WAIT_MS);
+}
+
+export function isGeminiPrepaidCreditsDepletedError(error: unknown): boolean {
+  const raw = `${normalizeErrorMessage(error)}\n${safeStringifyError(error)}`.toLowerCase();
+  return raw.includes('prepayment credits are depleted') ||
+    (raw.includes('prepayment') && raw.includes('depleted')) ||
+    raw.includes('billing#prepay') ||
+    (raw.includes('ai studio') && raw.includes('manage your project and billing'));
+}
+
+export type GeminiBillingBlockKind = 'none' | 'prepay_depleted' | 'postpay_spend_cap' | 'billing_required';
+
+export function classifyGeminiBillingBlock(error: unknown): GeminiBillingBlockKind {
+  const raw = `${normalizeErrorMessage(error)}\n${safeStringifyError(error)}`.toLowerCase();
+  if (isGeminiPrepaidCreditsDepletedError(error)) return 'prepay_depleted';
+
+  if (
+    raw.includes('spend cap') ||
+    raw.includes('monthly usage cap') ||
+    raw.includes('monthly spend') ||
+    raw.includes('tier spend cap') ||
+    raw.includes('billing account tier') ||
+    (raw.includes('service') && raw.includes('paused') && raw.includes('billing'))
+  ) {
+    return 'postpay_spend_cap';
+  }
+
+  if (
+    raw.includes('set up billing') ||
+    raw.includes('billing account') ||
+    raw.includes('no available credits') ||
+    raw.includes('payment required') ||
+    raw.includes('paid plan') ||
+    raw.includes('billing details')
+  ) {
+    return 'billing_required';
+  }
+
+  return 'none';
+}
+
+function buildGeminiBillingBlockMessage(kind: GeminiBillingBlockKind, modelName: string): string {
+  if (kind === 'prepay_depleted') {
+    return (
+      `💳 [${modelName}] Gemini 결제 상태 때문에 호출이 차단되었습니다.\n\n` +
+      `📌 판별 결과: Google이 이 키/프로젝트를 선불 크레딧 소진 상태로 응답했습니다.\n` +
+      `후불이라고 알고 있는 키라면, 실제로 이 API 키가 후불 결제 프로젝트에서 발급된 키인지 확인해야 합니다.\n\n` +
+      `💡 해결 방법:\n` +
+      `  1) Google AI Studio → Projects에서 이 API 키가 연결된 프로젝트를 확인하세요.\n` +
+      `  2) 선불 프로젝트라면 크레딧 충전 또는 자동 충전을 켜세요.\n` +
+      `  3) 후불 프로젝트를 쓰려면 후불 결제 계정에 연결된 프로젝트에서 새 API 키를 발급해 앱에 넣으세요.`
+    );
+  }
+
+  if (kind === 'postpay_spend_cap') {
+    return (
+      `💳 [${modelName}] Gemini 후불 결제 한도 때문에 호출이 차단되었습니다.\n\n` +
+      `📌 판별 결과: Google이 월간 사용 한도, 프로젝트 spend cap, 또는 billing account tier cap에 걸린 상태로 응답했습니다.\n` +
+      `이 경우 RPM/TPM 대기 문제가 아니므로 1분을 기다려도 자동으로 풀리지 않습니다.\n\n` +
+      `💡 해결 방법:\n` +
+      `  1) AI Studio Billing/Spend 화면에서 프로젝트 월간 한도와 billing account tier cap을 확인하세요.\n` +
+      `  2) 한도를 올리거나 다음 결제 주기 시작 후 다시 실행하세요.\n` +
+      `  3) 급한 작업은 한도가 남아 있는 다른 결제 프로젝트의 키를 사용하세요.`
+    );
+  }
+
+  return (
+    `💳 [${modelName}] Gemini 결제 연결 상태 때문에 호출이 차단되었습니다.\n\n` +
+    `📌 판별 결과: Google이 이 API 키/프로젝트를 사용 가능한 유료 결제 상태로 보지 않습니다.\n\n` +
+    `💡 해결 방법:\n` +
+    `  1) AI Studio Projects에서 이 키가 연결된 프로젝트의 Billing Tier/Status를 확인하세요.\n` +
+    `  2) 결제 계정 연결, 선불 충전, 후불 프로젝트 키 여부를 확인한 뒤 다시 실행하세요.`
+  );
 }
 
 const providerRequestGates = new Map<string, { nextAllowedAt: number }>();
@@ -5642,8 +5741,8 @@ function parseProviderDelayMs(raw: unknown): number | null {
 }
 
 function readNonNegativeMsEnv(name: string, fallbackMs: number, minMs = 0): number {
-  const value = Number(process.env[name] ?? '');
-  if (Number.isFinite(value) && value >= minMs) return Math.floor(value);
+  const value = readOptionalNonNegativeMsEnv(name, minMs);
+  if (value !== undefined) return value;
   return fallbackMs;
 }
 
@@ -5986,6 +6085,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   for (let i = 0; i < modelsToTry.length; i++) {
     const modelName = modelsToTry[i];
     let modelRetryCount = 0;
+    let geminiRateLimitRetryCount = 0;
     // 사용자가 선택한 모델만 사용 (폴백 전환 없음)
 
     while (modelRetryCount < perModelMaxRetries) {
@@ -6318,6 +6418,17 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         const isLimitZero = errMsgLower.includes('limit: 0') || errMsgLower.includes('free_tier');
         const isServerError = errMsgLower.includes('503') || errMsgLower.includes('500') || errMsgLower.includes('internal') || errMsgLower.includes('unavailable') || errMsgLower.includes('overloaded');
 
+        const billingBlockKind = classifyGeminiBillingBlock(error);
+        if (billingBlockKind !== 'none') {
+          const nextKey = getNextKey();
+          if (nextKey) {
+            console.warn(`💳 [Gemini] 현재 키 결제 상태 사용 불가(${billingBlockKind}) → 다음 Gemini 키로 즉시 전환`);
+            trimmedKey = nextKey;
+            continue;
+          }
+          throw new Error(buildGeminiBillingBlockMessage(billingBlockKind, modelName));
+        }
+
         // ✅ [v1.4.64] limit:0 = 이 모델의 무료 사용이 Google에 의해 차단됨
         //   다른 모델로 몰래 전환하지 않고, 사용자에게 명확히 안내
         if (isQuota && isLimitZero) {
@@ -6380,7 +6491,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           );
         }
 
-        // ✅ [v1.4.44] 429 RPM 제한 → 키 로테이션 시도 → 지수 백오프 재시도
+        // ✅ [v1.4.44] 429 RPM 제한 → 키 로테이션 시도 → patient wait 재시도
         if (isQuota) {
           // 다른 키가 있으면 먼저 키 교체 시도 (대기 없이 즉시)
           const nextKey = getNextKey();
@@ -6390,14 +6501,17 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             continue; // 대기 없이 즉시 재시도
           }
 
-          modelRetryCount++;
           // RPM/TPM은 결제 부족이 아니라 시간창 제한이다. Google retry hint를 존중해
           // 같은 Gemini 모델로 patient wait 한다. 다른 엔진/모델로 전환하지 않는다.
-          const fallbackWaitMs = Math.min(15_000 * Math.pow(1.5, Math.max(0, modelRetryCount - 1)), 180_000);
+          const fallbackWaitMs = Math.min(
+            GEMINI_RATE_LIMIT_MIN_WAIT_MS + (geminiRateLimitRetryCount * 30_000),
+            GEMINI_RATE_LIMIT_MAX_SINGLE_WAIT_MS,
+          );
           const waitMs = getGeminiRateLimitWaitMs(error, fallbackWaitMs);
           const waitSec = Math.round(waitMs / 1000);
 
           if (geminiRateLimitWaitedMs + waitMs <= geminiRateLimitPatienceMs) {
+            geminiRateLimitRetryCount++;
             geminiRateLimitWaitedMs += waitMs;
             recordGeminiRateLimitBackoff(modelName, config, waitMs);
             const logMsg =

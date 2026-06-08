@@ -1100,6 +1100,15 @@ async function saveDebugScreenshot(page: Page, label: string): Promise<string> {
 }
 
 const FLOW_PROJECT_IMAGE_LIMIT = 9;
+const FLOW_SINGLE_IMAGE_WAIT_TIMEOUT_MS = 180000;
+const FLOW_SINGLE_IMAGE_MAX_RETRIES = 2;
+const FLOW_SEQUENTIAL_IMAGE_STABILIZE_MS = 30_000;
+
+function getFlowSequentialImageStabilizeMs(): number {
+    const raw = Number(process.env.FLOW_SEQUENTIAL_IMAGE_STABILIZE_MS);
+    if (!Number.isFinite(raw) || raw < 0) return FLOW_SEQUENTIAL_IMAGE_STABILIZE_MS;
+    return Math.min(120_000, Math.floor(raw));
+}
 
 // ─── Flow 프로젝트 확보 ───────────────────────────────────
 async function ensureFlowProject(page: Page, forceNew: boolean = false): Promise<void> {
@@ -1595,7 +1604,7 @@ export async function generateSingleImageWithFlow(
     signal?: AbortSignal,
     opts?: { forceNewProjectOnLimit?: boolean },
 ): Promise<{ buffer: Buffer; mimeType: string } | null> {
-    const MAX_RETRIES = 3;
+    const MAX_RETRIES = FLOW_SINGLE_IMAGE_MAX_RETRIES;
     let lastError: Error | null = null;
     // Flow가 같은 prompt에 같은 이미지 반환하는 회귀 차단 — 호출마다 unique salt 주입
     const prompt = injectUniqueSalt(rawPrompt);
@@ -1626,7 +1635,7 @@ export async function generateSingleImageWithFlow(
             await submitPromptOnly(page, prompt);
 
             sendImageLog('⏳ [Flow] 이미지 생성 대기 중...');
-            const newImageUrl = await waitForNewImage(page, prevCount, 180000);
+            const newImageUrl = await waitForNewImage(page, prevCount, FLOW_SINGLE_IMAGE_WAIT_TIMEOUT_MS);
             flowLog(`[Flow] ✅ 이미지 URL 획득: ${newImageUrl.substring(0, 120)}`);
 
             sendImageLog('📥 [Flow] 이미지 다운로드 중...');
@@ -1643,19 +1652,17 @@ export async function generateSingleImageWithFlow(
             sendImageLog(`⚠️ [Flow] 시도 ${attempt} 실패: ${msg.substring(0, 150)}`);
             lastError = err as Error;
 
-            // 최후 보루 — 시도 2 실패 시 page.reload()로 stuck DOM/iframe overlay 강제 청소.
-            // FLOW_BROWSER_LAUNCH_FAILED · FLOW_LOGIN_TIMEOUT 같은 구조적 오류는 reload로 회복 불가 → skip.
+            // Flow timeout은 같은 프로젝트에 pending 작업이 남는 경우가 많으므로 다음 시도 전 새 프로젝트로 격리한다.
+            // FLOW_BROWSER_LAUNCH_FAILED · FLOW_LOGIN_TIMEOUT 같은 구조적 오류는 reload/new project로 회복 불가 → skip.
             const isClickOrInputTimeout = /Timeout.*exceeded|FLOW_PROMPT_INPUT|FLOW_SUBMIT_BUTTON|FLOW_IMAGE_TIMEOUT|intercepts pointer/i.test(msg);
-            if (attempt === 2 && isClickOrInputTimeout) {
+            if (attempt < MAX_RETRIES && isClickOrInputTimeout) {
                 try {
-                    flowLog('[Flow] 🔄 2차 실패 — page.reload()로 DOM 청소 후 마지막 재시도');
-                    sendImageLog('🔄 [Flow] 페이지 새로고침으로 강제 청소 중...');
+                    flowLog('[Flow] 🔄 timeout/stuck 감지 — 새 프로젝트로 격리 후 재시도');
+                    sendImageLog('🔄 [Flow] 응답 지연 감지 — 새 프로젝트로 정리 후 재시도합니다.');
                     const page = await ensureFlowBrowserPage();
-                    await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 }).catch(() => {});
-                    await page.waitForTimeout(2000);
-                    // reload 후 anti-modal observer는 addInitScript로 자동 재주입됨
+                    await ensureFlowProject(page, true);
                 } catch (reloadErr) {
-                    flowWarn(`[Flow] page.reload 실패 (다음 시도로 진행): ${(reloadErr as Error).message.substring(0, 80)}`);
+                    flowWarn(`[Flow] 새 프로젝트 격리 실패 (다음 시도로 진행): ${(reloadErr as Error).message.substring(0, 80)}`);
                 }
             }
 
@@ -2133,9 +2140,14 @@ export async function generateWithFlow(
                 }
             }
 
-            // [v1.6.1] 이미지간 대기 500→200ms
+            // Flow is a web UI engine. Give the project enough breathing room after
+            // each successful image so long batches do not trip stale pending jobs.
             if (i < items.length - 1) {
-                await new Promise(r => setTimeout(r, 200));
+                const stabilizeMs = getFlowSequentialImageStabilizeMs();
+                if (stabilizeMs > 0) {
+                    sendImageLog(`⏳ [Flow] 다음 이미지 전 안정화 대기 ${Math.ceil(stabilizeMs / 1000)}초`);
+                    await new Promise(r => setTimeout(r, stabilizeMs));
+                }
             }
         } catch (err) {
             const msg = (err as Error).message || '';

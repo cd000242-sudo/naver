@@ -15,7 +15,7 @@ import {
     ProductInfo,
 } from '../types.js';
 import { upscaleUrl, isJunkUrl, normalizeUrl } from '../utils/imageUrlUtils.js';
-import { collectReviewImageUrls, clickReviewTab, extractBrandProductInfo } from './brandStore/brandStoreDom.js';
+import { collectAdditionalImageUrls, collectReviewImageUrls, clickReviewTab, extractBrandProductInfo } from './brandStore/brandStoreDom.js';
 
 // Puppeteer는 동적 import로 가져옴 (Electron 환경 호환)
 let puppeteer: typeof import('puppeteer');
@@ -141,10 +141,12 @@ export class BrandStoreProvider extends BaseProvider {
             try {
                 // ✅ [v2.10.313] viewport 2560x1440 + 워밍업 스크롤로 lazy-load 이미 트리거됨.
                 //   PHASE 0 진입 시점엔 갤러리 DOM 안정적으로 렌더된 상태.
-                const thumbImgs = await page.$$('img[alt^="추가이미지"]');
+                const thumbSelector = 'img[alt^="추가이미지"], img[alt*="추가이미지"], img[aria-label*="추가이미지"], img[title*="추가이미지"]';
+                const thumbImgs = await page.$$(thumbSelector);
+                const thumbCandidates = await page.evaluate(collectAdditionalImageUrls).catch(() => []);
 
-                if (thumbImgs.length > 0) {
-                    console.log(`[BrandStore:Playwright] ✅ 추가이미지 ${thumbImgs.length}개 발견 (viewport 2560x1440)`);
+                if (thumbImgs.length > 0 || thumbCandidates.length > 0) {
+                    console.log(`[BrandStore:Playwright] ✅ 추가이미지 ${Math.max(thumbImgs.length, thumbCandidates.length)}개 발견 (viewport 2560x1440)`);
 
                     // 대표이미지 먼저 수집 (alt="대표이미지" 모바일/데스크톱 둘 다 시도)
                     let mainImgEl = await page.$('img[alt="대표이미지"]');
@@ -160,17 +162,12 @@ export class BrandStoreProvider extends BaseProvider {
                     }
 
                     const directThumbUrls: string[] = [];
-                    for (const thumb of thumbImgs) {
-                        try {
-                            const thumbSrc = await thumb.evaluate((img: HTMLImageElement) =>
-                                img.getAttribute('data-src') || img.src || ''
-                            );
-                            if (thumbSrc) {
-                                directThumbUrls.push(thumbSrc);
-                                const hasMain = allImages.some(img => img.type === 'main');
-                                addImg(thumbSrc, hasMain ? 'gallery-thumb-fallback' : 'main');
-                            }
-                        } catch { /* skip */ }
+                    for (const candidate of thumbCandidates) {
+                        if (candidate?.url) {
+                            directThumbUrls.push(candidate.url);
+                            const hasMain = allImages.some(img => img.type === 'main');
+                            addImg(candidate.url, hasMain ? 'gallery-thumb-fallback' : 'main');
+                        }
                     }
                     if (directThumbUrls.length > 0) {
                         console.log(`[BrandStore:Playwright] ⚡ 공식 갤러리 썸네일 ${directThumbUrls.length}개 즉시 수집 (upscale)`);
@@ -279,7 +276,11 @@ export class BrandStoreProvider extends BaseProvider {
             // ═══════════════════════════════════════════════════
             // ✅ PHASE 2: 리뷰 이미지 수집
             // ═══════════════════════════════════════════════════
-            if (options?.includeReviews === true) {
+            const productImageCountBeforeReviews = allImages.filter(i => i.type !== 'review' && i.type !== 'detail').length;
+            const shouldCollectReviews = options?.includeReviews === true
+                && (options.reviewFallbackWhenGalleryWeak !== true || productImageCountBeforeReviews <= 1);
+
+            if (shouldCollectReviews) {
                 console.log('[BrandStore:Playwright] 📝 PHASE 2: 리뷰 이미지 수집...');
                 try {
                 // ✅ [v2.10.310] 리뷰 탭 회귀 패치 — "리뷰이벤트" 별도 페이지 링크 클릭 시 navigation
@@ -317,8 +318,10 @@ export class BrandStoreProvider extends BaseProvider {
                 } catch (phase2Err) {
                     console.warn('[BrandStore:Playwright] ⚠️ PHASE 2 실패:', (phase2Err as Error).message);
                 }
+            } else if (options?.includeReviews === true && options.reviewFallbackWhenGalleryWeak === true) {
+                console.log(`[BrandStore:Playwright] ✅ 공식 추가이미지 ${productImageCountBeforeReviews}개 확보 → 리뷰 이미지 보완 생략`);
             } else {
-                console.log('[BrandStore:Playwright] 🛡️ 리뷰 이미지는 저작권 안전 기본값으로 수집하지 않습니다.');
+                console.log('[BrandStore:Playwright] 🛡️ 리뷰 이미지는 기본 정책으로 수집하지 않습니다.');
             }
 
             // ✅ [v2.10.314] 사용자 명시 요구: "추가이미지 먼저 배치, 그다음 리뷰이미지"

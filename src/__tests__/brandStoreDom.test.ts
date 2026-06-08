@@ -1,6 +1,52 @@
 // @vitest-environment happy-dom
 import { describe, it, expect, beforeEach } from 'vitest';
-import { collectReviewImageUrls, clickReviewTab, extractBrandProductInfo } from '../crawler/shopping/providers/brandStore/brandStoreDom.js';
+import { collectAdditionalImageUrls, collectReviewImageUrls, clickReviewTab, extractBrandProductInfo } from '../crawler/shopping/providers/brandStore/brandStoreDom.js';
+import { upscaleUrl } from '../crawler/shopping/utils/imageUrlUtils.js';
+
+describe('collectAdditionalImageUrls', () => {
+    beforeEach(() => {
+        document.body.innerHTML = '';
+    });
+
+    it('collects every official 추가이미지 thumbnail, not only 추가이미지0', () => {
+        document.body.innerHTML =
+            '<img src="https://shop-phinf.pstatic.net/20260427_15/1777258336570XvoI8_JPEG/111391189679216738_2003441908.jpg?type=f40" data-src="https://shop-phinf.pstatic.net/20260427_15/1777258336570XvoI8_JPEG/111391189679216738_2003441908.jpg?type=f40" width="40" height="40" alt="추가이미지2">' +
+            '<img src="https://shop-phinf.pstatic.net/20260422_162/1776850206104z9Vxf_JPEG/110983039567595404_353179709.jpg?type=f40" data-src="https://shop-phinf.pstatic.net/20260422_162/1776850206104z9Vxf_JPEG/110983039567595404_353179709.jpg?type=f40" width="40" height="40" alt="추가이미지3">';
+
+        const candidates = collectAdditionalImageUrls();
+
+        expect(candidates.map(item => item.alt)).toEqual(['추가이미지2', '추가이미지3']);
+        expect(candidates.map(item => upscaleUrl(item.url))).toEqual([
+            'https://shop-phinf.pstatic.net/20260427_15/1777258336570XvoI8_JPEG/111391189679216738_2003441908.jpg?type=o1000',
+            'https://shop-phinf.pstatic.net/20260422_162/1776850206104z9Vxf_JPEG/110983039567595404_353179709.jpg?type=o1000',
+        ]);
+    });
+
+    it('sorts 추가이미지 by numeric suffix even when the DOM order is mixed', () => {
+        document.body.innerHTML =
+            '<img alt="추가이미지3" data-src="https://shop-phinf.pstatic.net/three.jpg?type=f40">' +
+            '<img alt="추가이미지0" data-src="https://shop-phinf.pstatic.net/zero.jpg?type=f40">' +
+            '<img alt="추가이미지1" data-src="https://shop-phinf.pstatic.net/one.jpg?type=f40">';
+
+        expect(collectAdditionalImageUrls().map(item => item.alt)).toEqual([
+            '추가이미지0',
+            '추가이미지1',
+            '추가이미지3',
+        ]);
+    });
+
+    it('deduplicates by base URL while preserving separate gallery images', () => {
+        document.body.innerHTML =
+            '<img alt="추가이미지0" src="https://shop-phinf.pstatic.net/a.jpg?type=f40">' +
+            '<img alt="추가이미지1" data-src="https://shop-phinf.pstatic.net/a.jpg?type=f80">' +
+            '<img alt="추가이미지2" data-src="https://shop-phinf.pstatic.net/b.jpg?type=f40">';
+
+        expect(collectAdditionalImageUrls().map(item => item.url)).toEqual([
+            'https://shop-phinf.pstatic.net/a.jpg?type=f40',
+            'https://shop-phinf.pstatic.net/b.jpg?type=f40',
+        ]);
+    });
+});
 
 describe('collectReviewImageUrls', () => {
     beforeEach(() => {

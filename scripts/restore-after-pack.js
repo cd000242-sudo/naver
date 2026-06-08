@@ -33,28 +33,10 @@ if (fs.existsSync(backupPath)) {
 }
 
 // 2. .env 복원
-console.log('\n📝 .env 복원 중...');
-try {
-  if (fs.existsSync(envBackupPath)) {
-    fs.copyFileSync(envBackupPath, envPath);
-    fs.unlinkSync(envBackupPath);
-    console.log('✅ .env가 백업에서 복원되었습니다.');
-  } else if (fs.existsSync(envCreatedMarkerPath)) {
-    // pack 과정에서 빈 .env를 새로 만들었던 경우 → 개발 환경에 남기지 않음
-    try {
-      if (fs.existsSync(envPath)) {
-        fs.unlinkSync(envPath);
-      }
-    } catch {
-      // ignore
-    }
-    fs.unlinkSync(envCreatedMarkerPath);
-    console.log('✅ pack 과정에서 생성된 빈 .env를 정리했습니다.');
-  } else {
-    console.log('ℹ️ 복원할 .env 백업이 없습니다.');
-  }
-} catch (error) {
-  console.log('⚠️ .env 복원 실패(계속 진행):', error.message);
+console.log('\n📝 .env 복원 스킵...');
+console.log('ℹ️ v2.11.18부터 패키징 과정은 로컬 .env를 백업/초기화/복원하지 않습니다.');
+if (fs.existsSync(envBackupPath) || fs.existsSync(envCreatedMarkerPath)) {
+  console.log('⚠️ 이전 빌드에서 만든 .env 백업/마커 파일이 남아 있습니다. 현재 .env는 덮어쓰지 않습니다.');
 }
 
 console.log('\n' + '='.repeat(60));

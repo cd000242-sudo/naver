@@ -76,6 +76,7 @@ export interface CollectionOptions {
     maxImages?: number;        // 최대 이미지 수 (기본 30)
     includeDetails?: boolean;  // 상세 이미지 포함 (기본 false)
     includeReviews?: boolean;  // 리뷰 이미지 포함 (기본 false)
+    reviewFallbackWhenGalleryWeak?: boolean; // 제품 갤러리가 대표 1장 수준일 때만 리뷰 이미지 보완
     validateWithAI?: boolean;  // AI 품질 검증 (기본 true)
     useCache?: boolean;        // 캐시 사용 (기본 true)
 }

@@ -2,13 +2,17 @@ import type { GenerateImagesOptions, GeneratedImage, ImageFallbackPolicy, ImageP
 import { assertProvider as assertProviderFn, normalizeImageFallbackPolicy } from './image/types.js';
 // ✅ [v2.10.335] 나노바나나 3종 → 모델 키 SSOT
 import { NANO_PROVIDER_TO_MODEL_KEY } from './runtime/imageEngineCatalog.js';
-import { generateWithNanoBananaPro, abortImageGeneration, resetAllImageState } from './image/nanoBananaProGenerator.js';
+import {
+  generateWithNanoBananaPro,
+  abortImageGeneration as abortNanoBananaImageGeneration,
+  resetAllImageState,
+} from './image/nanoBananaProGenerator.js';
 import { generateWithDeepInfra } from './image/deepinfraGenerator.js';
 import { generateWithNaver } from './image/naverImageGenerator.js';
 import { generateWithOpenAIImage } from './image/openaiImageGenerator.js';
 import { generateWithLeonardoAI } from './image/leonardoAIGenerator.js';
 import { generateWithImageFx } from './image/imageFxGenerator.js';
-import { generateWithFlow } from './image/flowGenerator.js';
+import { generateWithFlow, resetFlowState } from './image/flowGenerator.js';
 // ✅ [v2.11.7] 리더스 나노바나나 무제한 (dropshot)
 import { generateWithDropshot } from './image/dropshotGenerator.js';
 
@@ -27,7 +31,14 @@ export type { GenerateImagesOptions, GeneratedImage } from './image/types.js';
 export { downloadAndSaveImage };
 
 // ✅ [100점 수정] 이미지 생성 중지 함수 export
-export { abortImageGeneration };
+export async function abortImageGeneration(): Promise<void> {
+  abortNanoBananaImageGeneration();
+  try {
+    await resetFlowState();
+  } catch (error) {
+    console.warn('[ImageGenerator] Flow 상태 초기화 실패 (abort 계속 진행):', (error as Error).message);
+  }
+}
 
 // ✅ [2026-02-23 FIX] 이미지 생성 전체 상태 초기화 함수 export
 export { resetAllImageState };

@@ -125,6 +125,12 @@ export function classifyError(input: ClassifyInput): RecoveryDecision {
     return blockDecision('B3', `503 storm 감지 (${attempts.c4Server503Count + 1}회) — 시간당 한도 임박 가능`, 'C4_STORM');
   }
 
+  // Flow 이미지 생성 timeout은 generateSingleImageWithFlow 내부에서 이미 새 프로젝트 격리 후 2회 시도한다.
+  // 여기서 R2 재시도까지 추가하면 한 소제목이 10~30분을 잡아먹을 수 있어 즉시 격리한다.
+  if (errorCode === 'FLOW_IMAGE_TIMEOUT' || errorCode === 'FLOW_IMAGE_TIMEOUT_NET') {
+    return { action: 'skip-heading', reason: 'Flow 이미지 timeout — 내부 재시도 완료 후 다음 이미지로 격리' };
+  }
+
   // --- R2: transient timeout/network/server-5xx — backoff retry ---
   if (
     httpStatus === 503 ||

@@ -65,6 +65,16 @@ function attachDiagnostics(result: CollectionResult): CollectionResult {
     return { ...result, diagnostics };
 }
 
+function buildCacheKey(url: string, opts: CollectionOptions): string {
+    const policy = [
+        `details=${opts.includeDetails === true ? 1 : 0}`,
+        `reviews=${opts.includeReviews === true ? 1 : 0}`,
+        `reviewFallback=${opts.reviewFallbackWhenGalleryWeak === true ? 1 : 0}`,
+        `max=${opts.maxImages || 30}`,
+    ].join(';');
+    return `${url}${url.includes('?') ? '&' : '?'}__imagePolicy=${encodeURIComponent(policy)}`;
+}
+
 /**
  * 메인 이미지 수집 함수
  * 
@@ -99,9 +109,11 @@ export async function collectShoppingImages(
     console.log(`[ShoppingCrawlerHub] 🚀 이미지 수집 시작: ${url.substring(0, 60)}...`);
 
     try {
+        const cacheKey = buildCacheKey(url, opts);
+
         // 1. 캐시 확인
         if (opts.useCache) {
-            const cached = imageCache.get(url);
+            const cached = imageCache.get(cacheKey);
             if (cached) {
                 console.log('[ShoppingCrawlerHub] 📦 캐시에서 반환');
                 return attachDiagnostics({
@@ -161,9 +173,9 @@ export async function collectShoppingImages(
 
         // 6. 캐시 저장
         if (opts.useCache && result.success) {
-            imageCache.set(url, result);
+            imageCache.set(cacheKey, result);
             if (resolved.finalUrl && resolved.finalUrl !== url) {
-                imageCache.set(resolved.finalUrl, result);
+                imageCache.set(buildCacheKey(resolved.finalUrl, opts), result);
             }
         }
 
