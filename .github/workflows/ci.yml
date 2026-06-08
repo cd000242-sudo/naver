@@ -49,6 +49,16 @@ jobs:
       - name: TypeScript check (tsc --noEmit)
         run: npx tsc --noEmit
 
+      - name: Install Electron binary for tests
+        env:
+          ELECTRON_SKIP_BINARY_DOWNLOAD: ''
+        run: node node_modules/electron/install.js
+
+      - name: Prepare test userData mock
+        run: |
+          sudo mkdir -p /mock
+          sudo chmod 777 /mock
+
       - name: Unit tests (vitest)
         run: npm test
 
