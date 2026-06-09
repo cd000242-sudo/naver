@@ -79,6 +79,8 @@ export function cacheTranslation(key: string, value: string): void {
 //   원인: 8초는 정상 응답 시간(평균 5~12초)도 못 받는 짧은 한계. 간헐적 네트워크 지연에서 fail.
 //   영향 범위: 이미지 프롬프트 영문 변환 보조 (메인 콘텐츠 생성과 무관 — 메인은 별도 무한 대기)
 const PROMPT_TRANSLATION_TIMEOUT_MS = 15000;
+const GEMINI_PROMPT_RATE_LIMIT_COOLDOWN_MS = 90_000;
+let geminiPromptCooldownUntil = 0;
 
 async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs: number = PROMPT_TRANSLATION_TIMEOUT_MS): Promise<Response> {
     const controller = new AbortController();
@@ -97,6 +99,12 @@ type AppConfig = Record<string, any>;
 // ═══════ 1순위: Gemini ═══════
 async function generateEnglishPromptWithGemini(headingText: string, imageStyle?: string, contentContext?: string, sharedConfig?: AppConfig): Promise<string | null> {
     try {
+        if (Date.now() < geminiPromptCooldownUntil) {
+            const remainSec = Math.ceil((geminiPromptCooldownUntil - Date.now()) / 1000);
+            console.warn(`[GeminiPrompt] 429 cooldown active (${remainSec}s left) -> skip Gemini prompt translation`);
+            return null;
+        }
+
         const config = sharedConfig || await window.api.getConfig();
         const apiKey = (config as any).geminiApiKey;
         if (!apiKey) {
@@ -120,6 +128,14 @@ async function generateEnglishPromptWithGemini(headingText: string, imageStyle?:
 
         if (!response.ok) {
             console.warn(`[GeminiPrompt] API 오류: ${response.status}`);
+            if (response.status === 429) {
+                const retryAfterSec = Number.parseInt(String(response.headers.get('retry-after') || ''), 10);
+                const cooldownMs = Number.isFinite(retryAfterSec) && retryAfterSec > 0
+                    ? Math.min(Math.max(retryAfterSec * 1000, 30_000), 180_000)
+                    : GEMINI_PROMPT_RATE_LIMIT_COOLDOWN_MS;
+                geminiPromptCooldownUntil = Date.now() + cooldownMs;
+                console.warn(`[GeminiPrompt] Gemini rate limited -> cooldown ${Math.round(cooldownMs / 1000)}s, falling back to next prompt engine`);
+            }
             return null;
         }
 

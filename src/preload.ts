@@ -726,6 +726,8 @@ contextBridge.exposeInMainWorld('api', {
   // ✅ [2026-02-01] Gemini 3 기반 소제목-이미지 의미적 매칭
   matchImagesToHeadings: (images: string[], headings: string[]): Promise<{ success: boolean; matches?: number[]; message?: string }> =>
     ipcRenderer.invoke('image:matchToHeadings', images, headings),
+  matchImages: (payload: { headings: any[]; collectedImages: any[]; scSubImageSource?: 'ai' | 'collected' }): Promise<{ success: boolean; assignments?: any[]; message?: string }> =>
+    ipcRenderer.invoke('automation:matchImages', payload),
   // ✅ 네이버 이미지 검색 API
   searchNaverImages: (keyword: string): Promise<{ success: boolean; images?: any[]; message?: string }> =>
     ipcRenderer.invoke('image:searchNaver', keyword),

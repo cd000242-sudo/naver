@@ -602,6 +602,7 @@ interface AutomationAPI {
   collectImagesFromShopping: (url: string) => Promise<{ success: boolean; images?: string[]; title?: string; message?: string; productInfo?: any; diagnostics?: any; resolvedUrl?: string }>;
   // ✅ [2026-02-01] Gemini 3 기반 소제목-이미지 의미적 매칭
   matchImagesToHeadings: (images: string[], headings: string[]) => Promise<{ success: boolean; matches?: number[]; message?: string }>;
+  matchImages: (payload: { headings: any[]; collectedImages: any[]; scSubImageSource?: 'ai' | 'collected' }) => Promise<{ success: boolean; assignments?: any[]; message?: string }>;
   searchNaverImages: (keyword: string) => Promise<{ success: boolean; images?: any[]; message?: string }>; // ✅ 네이버 이미지 검색 API
   // ✅ [100점 개선] AI 이미지 검색어 최적화 API
   optimizeImageSearchQuery: (title: string, heading: string) => Promise<{

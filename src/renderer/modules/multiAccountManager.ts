@@ -3134,7 +3134,7 @@ async function initMultiAccountPublishModal() {
                                     addMALog('🤖 수집 이미지를 소제목에 매칭 중...', 'info');
                                     const matchResult = await window.api.matchImages({
                                         headings: structuredContent.headings || [],
-                                        collectedImages: generatedImages.map((img) => img.url || img.filePath),
+                                        collectedImages: generatedImages,
                                         scSubImageSource: scSubImageModePre
                                     });
                                     if (matchResult?.success && matchResult.assignments) {

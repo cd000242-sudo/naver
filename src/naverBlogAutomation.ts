@@ -1049,6 +1049,23 @@ export class NaverBlogAutomation {
 
       // 로그인 페이지가 아니고, 블로그 페이지에 도착했으면 성공
       if (currentUrl.includes('blog.naver.com') && !currentUrl.includes('login')) {
+        const isEditorLike = currentUrl.includes('GoBlogWrite') ||
+          currentUrl.includes('blogPostWrite') ||
+          currentUrl.includes('NaverWriteEditor') ||
+          currentUrl.includes('PostWriteForm') ||
+          /[?&]Redirect=Write\b/i.test(currentUrl);
+        if (!isEditorLike) {
+          this.log('[LoginFlow] manual login detected on blog domain; moving to write editor...');
+          try {
+            await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
+              waitUntil: 'domcontentloaded',
+              timeout: NAVER_TIMEOUTS.PAGE_LOAD
+            });
+            await this.delay(2000);
+          } catch (e) {
+            this.log(`[LoginFlow] write editor navigation after manual login failed: ${(e as Error).message}`);
+          }
+        }
         this.log('');
         this.log('✅✅✅ 블로그 페이지 도착! 로그인 성공! ✅✅✅');
         this.log('🎉 이제 자동화를 계속 진행합니다.');
@@ -4110,7 +4127,9 @@ export class NaverBlogAutomation {
             const retryUrl = page.url();
             const retryIsEditor = retryUrl.includes('blogPostWrite') ||
                                   retryUrl.includes('GoBlogWrite') ||
-                                  retryUrl.includes('NaverWriteEditor');
+                                  retryUrl.includes('NaverWriteEditor') ||
+                                  retryUrl.includes('PostWriteForm') ||
+                                  /[?&]Redirect=Write\b/i.test(retryUrl);
             const retryHasEditorFrame = !retryIsEditor ? await page.evaluate(() => {
               return !!document.querySelector('#mainFrame, iframe[name="mainFrame"]');
             }).catch(() => false) : true;
@@ -4254,7 +4273,9 @@ export class NaverBlogAutomation {
     // ✅ [2026-03-24 FIX] 블로그 글쓰기 페이지 검증 강화 — URL 패턴 + DOM 기반
     const isOnEditorByUrl = currentUrl.includes('GoBlogWrite') ||
                             currentUrl.includes('blogPostWrite') ||
-                            currentUrl.includes('NaverWriteEditor');
+                            currentUrl.includes('NaverWriteEditor') ||
+                            currentUrl.includes('PostWriteForm') ||
+                            /[?&]Redirect=Write\b/i.test(currentUrl);
     const isOnBlogDomain = currentUrl.includes('blog.naver.com');
 
     if (!isOnEditorByUrl && !isOnBlogDomain) {
@@ -4277,7 +4298,10 @@ export class NaverBlogAutomation {
       // 재이동 후에도 에디터가 아니면 에러
       const stillNotEditor = !currentUrl.includes('blog.naver.com') &&
                              !currentUrl.includes('GoBlogWrite') &&
-                             !currentUrl.includes('blogPostWrite');
+                             !currentUrl.includes('blogPostWrite') &&
+                             !currentUrl.includes('NaverWriteEditor') &&
+                             !currentUrl.includes('PostWriteForm') &&
+                             !/[?&]Redirect=Write\b/i.test(currentUrl);
       if (stillNotEditor) {
         throw new Error(
           `메인 프레임을 찾을 수 없습니다.\n` +
@@ -9579,9 +9603,17 @@ export class NaverBlogAutomation {
     this.ensureDialogHandler();
 
     try {
+      this.log('[Pipeline] login step start');
       await this.loginToNaver();
+      this.log(`[Pipeline] login step done url=${this.page?.url() || '(unknown)'}`);
+
+      this.log('[Pipeline] opening Naver write editor');
       await this.navigateToBlogWrite();
+      this.log(`[Pipeline] write editor navigation done url=${this.page?.url() || '(unknown)'}`);
+
+      this.log('[Pipeline] switching to main editor frame');
       await this.switchToMainFrame();
+      this.log('[Pipeline] editor frame ready');
 
       // 팝업이 완전히 렌더링될 때까지 대기 (최적화)
       await this.delay(1000); // 2000ms → 1000ms

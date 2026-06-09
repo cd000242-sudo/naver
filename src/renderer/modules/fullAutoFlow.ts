@@ -1032,7 +1032,7 @@ async function executeSemiAutoFlow(formData) {
             showUnifiedProgress(60, '이미지 준비 완료', '이미지가 준비되었습니다.');
             appendLog('✅ 이미지 준비 완료!');
         }
-        else if (hasImageManagementData && formData.imageManagementImages.length === 0) {
+        else if (hasImageManagementData && formData.imageManagementImages.length === 0 && (formData.imageSource === 'image-management' || formData.imageSource === 'saved' || formData.imageSource === 'local-folder')) {
             showUnifiedProgress(50, '이미지 없음', '이미지 관리 탭에 이미지가 없어 발행을 중단합니다.');
             appendLog('⛔ 이미지 관리 탭에 이미지가 없어 발행을 중단합니다.');
             throw new Error('이미지 관리 탭에 사용할 이미지가 없습니다.');
