@@ -170,21 +170,31 @@ describe('continuous and multi-account image generation safety', () => {
     expect(code).toMatch(/this\.currentImageIndex = 0/);
   });
 
-  it('keeps thumbnail text enabled across full-auto and multi-account image paths', () => {
+  it('keeps thumbnail text limited to representative thumbnail image paths', () => {
     const costCode = read('renderer/modules/costAndAutoGen.ts');
     const publishingCode = read('renderer/modules/publishingHandlers.ts');
+    const fullAutoCode = read('renderer/modules/fullAutoFlow.ts');
     const multiAccountCode = read('renderer/modules/multiAccountManager.ts');
     const imageGeneratorCode = read('imageGenerator.ts');
 
     expect(costCode).toMatch(/options\.allowThumbnailText/);
-    expect(costCode).toMatch(/options\.thumbnailTextInclude = !!options\.allowThumbnailText/);
+    expect(costCode).toMatch(/const hasThumbnailTextTarget = !hasImageItems/);
+    expect(costCode).toMatch(/options\.thumbnailTextInclude = hasThumbnailTextTarget && !!options\.allowThumbnailText/);
     expect(publishingCode).toMatch(/thumbnailTextInclude:\s*formData\.includeThumbnailText/);
+    expect(fullAutoCode).toContain('allowText: thumbnailAllowText');
+    expect(fullAutoCode).toContain('thumbnailTextInclude: thumbnailAllowText');
+    expect(fullAutoCode).toContain('thumbnailTextInclude: includeThumbnailText');
+    expect(fullAutoCode).toContain('allowText: false');
+    expect(fullAutoCode).toContain('thumbnailTextInclude: false');
     expect(multiAccountCode).toMatch(/const includeThumbnailText = options\.thumbnailTextInclude \?\? options\.allowThumbnailText \?\? false/);
     expect(multiAccountCode).toMatch(/allowText:\s*isThumb \? includeThumbnailText : false/);
-    expect(multiAccountCode).toMatch(/thumbnailTextInclude:\s*includeThumbnailText/);
+    expect(multiAccountCode).toMatch(/thumbnailTextInclude:\s*item\.isThumbnail === true \? includeThumbnailText : false/);
     expect(imageGeneratorCode).toMatch(/function shouldAllowTextForImageItem/);
+    expect(imageGeneratorCode).toMatch(/function shouldApplyThumbnailTextOverlay/);
     expect(imageGeneratorCode).toMatch(/thumbnailOnlyContext[\s\S]{0,260}?options\.thumbnailTextInclude === true/);
     expect(imageGeneratorCode).toMatch(/return item\?\.isThumbnail === true/);
+    expect(imageGeneratorCode).toMatch(/item\?\.isThumbnail === true && item\?\.allowText !== false/);
+    expect(imageGeneratorCode).toMatch(/shouldApplyThumbnailTextOverlay\(img,\s*i,\s*items\)/);
     expect(imageGeneratorCode).toMatch(/allowText:\s*shouldAllowTextForImageItem\(item, options\)/);
   });
 

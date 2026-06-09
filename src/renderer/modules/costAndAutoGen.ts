@@ -633,16 +633,19 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
     console.log(`[Renderer] 📐 소제목 비율 자동 주입: "${savedSubheadingRatio}"`);
   }
 
-  // ✅ [2026-03-16] thumbnailTextInclude 자동 주입 — 풀오토 등 모든 발행 모드에서 텍스트 오버레이 적용
-  // ✅ [2026-06-06] 이전 호출부의 allowThumbnailText 별칭도 동일 옵션으로 정규화
+  // ✅ [2026-06-09] 썸네일 텍스트는 실제 썸네일 항목에만 자동 주입
+  const hasImageItems = Array.isArray(options.items) && options.items.length > 0;
+  const hasThumbnailTextTarget = !hasImageItems || options.items.some((item: any) =>
+    item?.isThumbnail === true && item?.allowText !== false
+  );
   if (options.thumbnailTextInclude === undefined && options.allowThumbnailText !== undefined) {
-    options.thumbnailTextInclude = !!options.allowThumbnailText;
+    options.thumbnailTextInclude = hasThumbnailTextTarget && !!options.allowThumbnailText;
     console.log(`[Renderer] 🔤 thumbnailTextInclude 별칭 정규화: ${options.thumbnailTextInclude}`);
   }
   if (options.thumbnailTextInclude === undefined) {
     const savedThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true';
-    options.thumbnailTextInclude = savedThumbnailText;
-    console.log(`[Renderer] 🔤 thumbnailTextInclude 자동 주입: ${savedThumbnailText}`);
+    options.thumbnailTextInclude = hasThumbnailTextTarget && savedThumbnailText;
+    console.log(`[Renderer] 🔤 thumbnailTextInclude 자동 주입: ${options.thumbnailTextInclude}`);
   }
 
   if (!options.imageFallbackPolicy) {

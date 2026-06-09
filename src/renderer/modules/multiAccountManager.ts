@@ -509,7 +509,7 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
                     regenerate: false,
                     referenceImagePath: item.referenceImagePath || options.referenceImagePath,
                     collectedImages: options.collectedImages,
-                    thumbnailTextInclude: includeThumbnailText,
+                    thumbnailTextInclude: item.isThumbnail === true ? includeThumbnailText : false,
                     headingImageMode: 'all',
                     imageFallbackPolicy: 'engine-only',
                     isMultiAccount: true,

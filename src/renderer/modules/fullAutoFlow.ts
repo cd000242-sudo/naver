@@ -748,7 +748,7 @@ async function executeFullAutoFlow(formData) {
                         category: formData.category || formData.categoryName || '',
                         referenceImagePath,
                         imageRatio: (getGlobalImageSettings().subheadingRatio || getGlobalImageSettings().imageRatio || '1:1'),
-                        thumbnailTextInclude: !!formData.includeThumbnailText,
+                        thumbnailTextInclude: false,
                         longRunImageGeneration: true,
                         isContinuousMode: !!isContinuousMode,
                         imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoBodyImageTimeoutMs(currentProvider, headings.length)),
@@ -2413,7 +2413,7 @@ async function generateAIImagesForHeadings(headings, formData) {
                 isContinuousMode: !!isContinuousMode,
                 isShoppingConnect: isShoppingConnect,
                 collectedImages: collectedImages,
-                thumbnailTextInclude: includeThumbnailText,
+                thumbnailTextInclude: false,
                 imageFallbackPolicy,
                 imageGenerationTimeoutMs: getFullAutoBodyImageTimeoutMs(imageSource, 1),
             });

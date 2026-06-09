@@ -5790,13 +5790,16 @@ URL: ${firstUrl}
     }
   }
 
-  // ✅ CTA 위치/미리보기/AI 생성 UI 숨김 (요청사항)
+  // CTA 위치 선택은 유지하고, 미리보기/AI 생성 보조 UI만 숨김
   try {
     const ctaPositionSelect = document.getElementById('unified-cta-position') as HTMLSelectElement | null;
     if (ctaPositionSelect) {
       const wrapper = ctaPositionSelect.closest('.form-group') as HTMLElement | null;
       if (wrapper) wrapper.style.display = '';
       else ctaPositionSelect.style.display = '';
+      ctaPositionSelect.style.display = '';
+      ctaPositionSelect.disabled = false;
+      ctaPositionSelect.style.opacity = '1';
     }
   } catch (e) {
     console.warn('[renderer] catch ignored:', e);

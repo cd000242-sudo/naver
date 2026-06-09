@@ -1365,7 +1365,7 @@ export function initHeadingImageGeneration(): void {
                 isFullAuto: true,
                 isShoppingConnect: true,
                 collectedImages: scPool,
-                thumbnailTextInclude,
+                thumbnailTextInclude: isThumbnailSection ? thumbnailTextInclude : false,
               });
               if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
                 imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
@@ -4855,7 +4855,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
         isFullAuto: true,
         isShoppingConnect: true,
         collectedImages: scPool,
-        thumbnailTextInclude,
+        thumbnailTextInclude: allowTextForRegen ? thumbnailTextInclude : false,
       });
       if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
         imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;

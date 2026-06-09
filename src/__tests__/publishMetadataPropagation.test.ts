@@ -69,8 +69,22 @@ describe('publish metadata propagation', () => {
     expect(tailHelper).toMatch(/safeKeyboardType\(page,\s*previousPostUrl/);
     expect(tailHelper).toMatch(/waitForLinkCard\(15000,\s*500\)/);
     expect(tailHelper).toMatch(/removeBareUrlTextAfterLinkCard/);
+    expect(tailHelper).not.toMatch(/effectiveCtas\.some\(\(cta\) => cta\.link && cta\.link === previousPostUrl\)/);
     expect(code).toMatch(/previousPostTailInserted = previousPostTailInserted \|\| previousResult\.inserted/);
     expect(hashtagTail).toMatch(/const hashtagGapEnterCount = previousPostTailInserted \? 5 : 3/);
     expect(hashtagTail.indexOf('page.keyboard.press')).toBeLessThan(hashtagTail.indexOf('applyHashtagsInBody'));
+  });
+
+  it('keeps CTA placement selection available in the unified publish panel', () => {
+    const code = read('renderer/renderer.ts');
+    const block = code.slice(
+      code.indexOf("document.getElementById('unified-cta-position')"),
+      code.indexOf('// AI로 CTA 생성 버튼')
+    );
+
+    expect(block).toMatch(/wrapper\.style\.display = ''/);
+    expect(block).toMatch(/ctaPositionSelect\.disabled = false/);
+    expect(block).toMatch(/ctaPositionSelect\.style\.opacity = '1'/);
+    expect(block).not.toMatch(/wrapper\.style\.display = 'none'/);
   });
 });

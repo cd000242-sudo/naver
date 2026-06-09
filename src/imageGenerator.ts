@@ -180,6 +180,18 @@ function shouldAllowTextForImageItem(item: any, options: GenerateImagesOptions):
   return item?.isThumbnail === true;
 }
 
+function shouldApplyThumbnailTextOverlay(
+  img: GeneratedImage,
+  index: number,
+  items?: Array<{ heading?: string; isThumbnail?: boolean; allowText?: boolean }>
+): boolean {
+  const item = Array.isArray(items) ? items[index] : undefined;
+  if (item) {
+    return item?.isThumbnail === true && item?.allowText !== false;
+  }
+  return img?.isThumbnail === true;
+}
+
 function isKoreanTextSupportedEngine(engine: string): boolean {
   // ✅ [v1.4.80] 'flow' 추가 — Flow는 Nano Banana Pro 기반이라 한글 텍스트 네이티브 지원
   // ✅ [v2.10.335] 나노바나나2(3.1)/프로(3-pro)는 한글 네이티브 지원. 구버전 'nano-banana'(2.5)는
@@ -231,7 +243,7 @@ async function applyKoreanTextOverlayIfNeeded(
     // ✅ [2026-01-30] 썸네일(0번)만 텍스트 오버레이 적용
     // - 일반 모드: 1번 소제목 = 썸네일 역할 (인덱스 0)
     // - 쇼핑커넥트: 별도 썸네일 (인덱스 0)
-    if (i === 0 && img.filePath) {
+    if (shouldApplyThumbnailTextOverlay(img, i, items) && img.filePath) {
       try {
         console.log(`[ImageGenerator] 🖼️ 썸네일에 텍스트 오버레이: "${postTitle.substring(0, 30)}..."`);
 

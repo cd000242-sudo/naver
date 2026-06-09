@@ -31,7 +31,7 @@ async function insertPreviousPostTailBlock(
   self: any,
   page: Page,
   resolved: ResolvedRunOptions,
-  effectiveCtas: TailCtaLike[] = [],
+  _effectiveCtas: TailCtaLike[] = [],
   context = 'tail'
 ): Promise<{ inserted: boolean; cardReady: boolean }> {
   const previousPostUrl = String(resolved.previousPostUrl || '').trim();
@@ -40,8 +40,7 @@ async function insertPreviousPostTailBlock(
   }
 
   const prevUrlUsedAsCta =
-    (resolved.affiliateLink && resolved.affiliateLink === previousPostUrl) ||
-    effectiveCtas.some((cta) => cta.link && cta.link === previousPostUrl);
+    Boolean(resolved.affiliateLink && resolved.affiliateLink === previousPostUrl);
 
   if (prevUrlUsedAsCta) {
     self.log(`   ⚠️ [이전글] CTA 링크와 동일 URL → 중복 삽입 건너뜀`);
