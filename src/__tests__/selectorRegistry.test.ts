@@ -100,6 +100,20 @@ describe('getSelectorStrings', () => {
   });
 });
 
+describe('editor title selector fallbacks', () => {
+  it('keeps resilient title container and editable fallbacks', () => {
+    const titleContainers = getAllSelectors(EDITOR_SELECTORS.documentTitle);
+    const titleInputs = getAllSelectors(EDITOR_SELECTORS.titleText);
+
+    expect(titleContainers).toContain('[data-name="documentTitle"]');
+    expect(titleContainers).toContain('[class*="documentTitle"]');
+    expect(titleContainers).toContain('[class*="title"][contenteditable="true"]');
+    expect(titleInputs).toContain('.se-section-documentTitle [contenteditable="true"]');
+    expect(titleInputs).toContain('[data-name="documentTitle"] [contenteditable="true"]');
+    expect(titleInputs).toContain('[class*="documentTitle"] [contenteditable="true"]');
+  });
+});
+
 describe('핵심 셀렉터 존재 확인', () => {
   it('로그인에 필요한 셀렉터가 존재한다', () => {
     expect(LOGIN_SELECTORS.idInput).toBeDefined();

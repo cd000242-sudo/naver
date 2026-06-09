@@ -4591,6 +4591,150 @@ export class NaverBlogAutomation {
     this.log('ℹ️ 닫을 팝업이 없거나 이미 닫혀있습니다.');
   }
 
+  private async findTitleInputElement(frame: Frame, page: Page, timeoutMs = 20000): Promise<ElementHandle<Element> | null> {
+    const titleTextElement = await waitForElement(frame, SELECTORS.editor.titleText, 'editor.titleText', {
+      visible: true,
+      timeout: Math.max(5000, Math.floor(timeoutMs / 2)),
+    });
+    if (titleTextElement) return titleTextElement as ElementHandle<Element>;
+
+    const titleSectionElement = await waitForElement(frame, SELECTORS.editor.documentTitle, 'editor.documentTitle', {
+      visible: true,
+      timeout: Math.max(5000, Math.floor(timeoutMs / 2)),
+    });
+    if (titleSectionElement) return titleSectionElement as ElementHandle<Element>;
+
+    const heuristicHandle = await frame.evaluateHandle(() => {
+      const isVisible = (el: Element): boolean => {
+        const html = el as HTMLElement;
+        const rect = html.getBoundingClientRect();
+        const style = window.getComputedStyle(html);
+        return rect.width > 80
+          && rect.height > 16
+          && style.visibility !== 'hidden'
+          && style.display !== 'none'
+          && html.offsetParent !== null;
+      };
+
+      const scoreCandidate = (el: Element): number => {
+        const html = el as HTMLElement;
+        const text = `${html.className || ''} ${html.id || ''} ${html.getAttribute('data-name') || ''} ${html.getAttribute('aria-label') || ''} ${html.getAttribute('placeholder') || ''} ${html.getAttribute('data-placeholder') || ''}`;
+        const lower = text.toLowerCase();
+        let score = 0;
+        if (lower.includes('documenttitle')) score += 90;
+        if (lower.includes('title')) score += 50;
+        if (text.includes('제목')) score += 70;
+        if (html.getAttribute('contenteditable') === 'true') score += 30;
+        if (html.tagName === 'INPUT' || html.tagName === 'TEXTAREA') score += 25;
+        const rect = html.getBoundingClientRect();
+        if (rect.top < Math.max(window.innerHeight * 0.45, 360)) score += 15;
+        if (rect.height > 24 && rect.height < 180) score += 10;
+        if (lower.includes('section-text') || lower.includes('module-text') || lower.includes('paragraph')) score -= 80;
+        return score;
+      };
+
+      const selectors = [
+        '.se-section-documentTitle',
+        '.se-documentTitle',
+        '[data-name="documentTitle"]',
+        '[class*="documentTitle"]',
+        '[class*="DocumentTitle"]',
+        '[contenteditable="true"][aria-label*="제목"]',
+        '[contenteditable="true"][data-placeholder*="제목"]',
+        '[placeholder*="제목"]',
+        'input[aria-label*="제목"]',
+        'textarea[aria-label*="제목"]',
+        '[contenteditable="true"]',
+      ];
+
+      const candidates = selectors
+        .flatMap((selector) => Array.from(document.querySelectorAll(selector)))
+        .filter((el, index, list) => list.indexOf(el) === index)
+        .filter(isVisible)
+        .map((el) => ({ el, score: scoreCandidate(el) }))
+        .filter((item) => item.score > 0)
+        .sort((a, b) => b.score - a.score);
+
+      return candidates[0]?.el || null;
+    }).catch(() => null);
+
+    const heuristicElement = heuristicHandle?.asElement() as ElementHandle<Element> | null;
+    if (heuristicElement) {
+      this.log('   ✅ 제목 입력 영역을 휴리스틱 fallback으로 찾았습니다.');
+      return heuristicElement;
+    }
+    await heuristicHandle?.dispose().catch(() => undefined);
+
+    const pageFallback = await waitForElement(page, SELECTORS.editor.documentTitle, 'page.editor.documentTitle', {
+      visible: true,
+      timeout: 3000,
+    });
+    return pageFallback as ElementHandle<Element> | null;
+  }
+
+  private async readEditorTitleText(frame: Frame): Promise<string> {
+    const selectors = [
+      ...getSelectorStrings(SELECTORS.editor.titleText),
+      ...getSelectorStrings(SELECTORS.editor.documentTitle),
+    ];
+
+    return await frame.evaluate((candidateSelectors) => {
+      for (const selector of candidateSelectors) {
+        const el = document.querySelector(selector) as HTMLInputElement | HTMLTextAreaElement | HTMLElement | null;
+        if (!el) continue;
+        const value = 'value' in el ? String(el.value || '') : String(el.innerText || el.textContent || '');
+        if (value.trim()) return value.trim();
+      }
+      return '';
+    }, selectors).catch(() => '');
+  }
+
+  private async setTitleByDomEvent(titleElement: ElementHandle<Element>, titleText: string): Promise<string> {
+    return await titleElement.evaluate((element, value) => {
+      const root = element as HTMLElement;
+      const target = (
+        root.matches('input, textarea, [contenteditable="true"]')
+          ? root
+          : root.querySelector('input, textarea, [contenteditable="true"], .se-title-text')
+      ) as HTMLInputElement | HTMLTextAreaElement | HTMLElement | null;
+      if (!target) return '';
+
+      target.focus();
+      if ('value' in target) {
+        target.value = value;
+      } else {
+        target.textContent = value;
+      }
+
+      target.dispatchEvent(new InputEvent('beforeinput', { bubbles: true, cancelable: true, data: value, inputType: 'insertText' }));
+      target.dispatchEvent(new InputEvent('input', { bubbles: true, data: value, inputType: 'insertText' }));
+      target.dispatchEvent(new Event('change', { bubbles: true }));
+      return 'value' in target ? String(target.value || '') : String(target.innerText || target.textContent || '');
+    }, titleText).catch(() => '');
+  }
+
+  private async collectEditorTitleDiagnostics(frame: Frame, page: Page): Promise<string> {
+    const frameUrl = frame.url?.() || '(frame url unavailable)';
+    const pageUrl = page.url();
+    const pageTitle = await page.title().catch(() => '');
+    const diag = await frame.evaluate(() => {
+      const selectors = [
+        '.se-section-documentTitle',
+        '.se-documentTitle',
+        '[data-name="documentTitle"]',
+        '[class*="documentTitle"]',
+        '[contenteditable="true"]',
+        '.se-section-text',
+        '.se-main-container',
+      ];
+      return selectors.map((selector) => {
+        const count = document.querySelectorAll(selector).length;
+        return `${selector}=${count}`;
+      }).join(', ');
+    }).catch((error) => `diagnostics failed: ${(error as Error).message}`);
+    return `pageUrl=${pageUrl}, pageTitle=${pageTitle}, frameUrl=${frameUrl}, selectors=[${diag}]`;
+  }
+
   async inputTitle(title: string): Promise<void> {
     const frame = (await this.getAttachedFrame());
     const page = this.ensurePage();
@@ -4605,12 +4749,10 @@ export class NaverBlogAutomation {
     }
 
     // ✅ 타임아웃 설정 (60초)
-    const titleElement = await frame.waitForSelector('.se-section-documentTitle', {
-      visible: true,
-      timeout: 60000
-    });
+    const titleElement = await this.findTitleInputElement(frame, page, 60000);
     if (!titleElement) {
-      throw new Error('제목 입력 필드를 찾을 수 없습니다.');
+      const diagnostics = await this.collectEditorTitleDiagnostics(frame, page);
+      throw new Error(`제목 입력 필드를 찾을 수 없습니다. ${diagnostics}`);
     }
 
     // ✅ 제목 입력 필드 클릭 및 타이핑 (재시도 로직)
@@ -4633,7 +4775,13 @@ export class NaverBlogAutomation {
         await this.delay(100);
 
         // 입력 확인
-        const currentTitle = await frame.$eval('.se-section-documentTitle', el => (el as HTMLElement).innerText).catch(() => '');
+        let currentTitle = await this.readEditorTitleText(frame);
+        if (!currentTitle.includes(titleText.substring(0, 10))) {
+          this.log('   ⚠️ 키보드 입력 확인 실패 → DOM input 이벤트 fallback 시도');
+          const domTitle = await this.setTitleByDomEvent(titleElement, titleText);
+          await this.delay(180);
+          currentTitle = await this.readEditorTitleText(frame) || domTitle;
+        }
         if (currentTitle.includes(titleText.substring(0, 10))) {
           this.log(`   ✅ 제목 입력 확인됨`);
           titleInputSuccess = true;
@@ -4650,7 +4798,8 @@ export class NaverBlogAutomation {
     }
 
     if (!titleInputSuccess) {
-      throw new Error('제목 입력에 실패했습니다 (3회 시도)');
+      const diagnostics = await this.collectEditorTitleDiagnostics(frame, page);
+      throw new Error(`제목 입력에 실패했습니다 (3회 시도). ${diagnostics}`);
     }
 
     // Enter 키 2번으로 본문 영역으로 자동 이동 (제목과 소제목 사이 간격)
@@ -6408,7 +6557,8 @@ export class NaverBlogAutomation {
     frame: Frame,
     expectedLocation: 'title' | 'subtitle' | 'body' | 'image-after'
   ): Promise<{ isValid: boolean; details: string }> {
-    const result = await frame.evaluate((location) => {
+    const titleSelectors = getSelectorStrings(SELECTORS.editor.documentTitle);
+    const result = await frame.evaluate((location, documentTitleSelectors: readonly string[]) => {
       // 더 정확한 포커스 확인: Selection API 사용
       const selection = window.getSelection();
       const range = selection && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
@@ -6466,8 +6616,12 @@ export class NaverBlogAutomation {
         };
       }
 
+      const isWithinTitle = (element: HTMLElement) => documentTitleSelectors.some((selector) => (
+        element.matches(selector) || element.closest(selector) !== null
+      ));
+
       // 제목 영역인지 확인 (focusElement 사용)
-      const isInTitle = focusElement.closest('.se-section-documentTitle') !== null ||
+      const isInTitle = isWithinTitle(focusElement) ||
         focusElement.closest('[class*="title"]') !== null ||
         focusElement.getAttribute('placeholder')?.includes('제목') ||
         focusElement.classList.contains('se-section-documentTitle') ||
@@ -6550,7 +6704,7 @@ export class NaverBlogAutomation {
         activeElementTag: focusElement.tagName,
         fontSize: window.getComputedStyle(focusElement).fontSize,
       };
-    }, expectedLocation);
+    }, expectedLocation, titleSelectors);
 
     return {
       isValid: result.isValid,
@@ -6564,7 +6718,8 @@ export class NaverBlogAutomation {
     expectedText: string,
     contentType: 'subtitle' | 'body'
   ): Promise<boolean> {
-    return await frame.evaluate((text, type) => {
+    const titleSelectors = getSelectorStrings(SELECTORS.editor.documentTitle);
+    return await frame.evaluate((text, type, documentTitleSelectors: readonly string[]) => {
       // 정규화 함수
       const normalize = (str: string) => str.replace(/\s+/g, ' ').trim().toLowerCase();
       const normalizedText = normalize(text);
@@ -6596,7 +6751,9 @@ export class NaverBlogAutomation {
 
       // 소제목 검증 시 제목 필드 제외
       if (type === 'subtitle') {
-        const titleElement = document.querySelector('.se-section-documentTitle');
+        const titleElement = documentTitleSelectors
+          .map((selector) => document.querySelector(selector))
+          .find((element): element is Element => Boolean(element));
         if (titleElement) {
           const titleText = (titleElement as HTMLElement).innerText || titleElement.textContent || '';
           // 제목 텍스트를 본문에서 제거
@@ -6622,7 +6779,7 @@ export class NaverBlogAutomation {
       }
 
       return found;
-    }, expectedText, contentType);
+    }, expectedText, contentType, titleSelectors);
   }
 
   // 이미지 DOM 검증
@@ -6830,9 +6987,12 @@ export class NaverBlogAutomation {
     const frame = (await this.getAttachedFrame());
 
     try {
-      const editorContent = await frame.evaluate(() => {
+      const titleSelectors = [...getSelectorStrings(SELECTORS.editor.titleText)];
+      const editorContent = await frame.evaluate((candidateTitleSelectors) => {
         // 제목 읽기
-        const titleElement = document.querySelector('.se-section-documentTitle .se-title-text') as HTMLElement;
+        const titleElement = (candidateTitleSelectors as string[])
+          .map((selector) => document.querySelector(selector))
+          .find((element): element is Element => Boolean(element)) as HTMLElement | undefined;
         const title = titleElement?.textContent?.trim() || '';
 
         // 해시태그 읽기
@@ -6870,7 +7030,7 @@ export class NaverBlogAutomation {
         }
 
         return null;
-      }).catch(() => null);
+      }, titleSelectors).catch(() => null) as { title: string; content: string; hashtags: string[] } | null;
 
       return editorContent;
     } catch (error) {

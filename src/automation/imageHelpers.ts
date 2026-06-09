@@ -1170,8 +1170,9 @@ export async function insertSingleImage(self: any, image: any): Promise<void> {
     }
   }
 
+  const titleSelectors = getSelectorStrings(SELECTORS.editor.documentTitle);
   const inserted = await self.retry(async () => {
-    return await frame.evaluate((imgUrl: any) => {
+    return await frame.evaluate((imgUrl: any, documentTitleSelectors: readonly string[]) => {
       const selection = window.getSelection();
       if (!selection || selection.rangeCount === 0) {
         return false;
@@ -1180,7 +1181,9 @@ export async function insertSingleImage(self: any, image: any): Promise<void> {
       const range = selection.getRangeAt(0);
       const container = range.commonAncestorContainer;
 
-      const titleElement = document.querySelector('.se-section-documentTitle');
+      const titleElement = documentTitleSelectors
+        .map((selector) => document.querySelector(selector))
+        .find((element): element is Element => Boolean(element));
       const currentNode = container.nodeType === Node.TEXT_NODE
         ? container.parentElement
         : container as HTMLElement;
@@ -1252,7 +1255,7 @@ export async function insertSingleImage(self: any, image: any): Promise<void> {
       } catch (e) {
         return false;
       }
-    }, imageDataUrl);
+    }, imageDataUrl, titleSelectors);
   }, 3, `"${image.heading}" 이미지 삽입`).catch(() => false);
 
   if (inserted) {
@@ -2144,6 +2147,7 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
 
   const frame = (await self.getAttachedFrame());
   const page = self.ensurePage();
+  const titleSelectors = getSelectorStrings(SELECTORS.editor.documentTitle);
 
   for (const image of images) {
     self.ensureNotCancelled();
@@ -2455,9 +2459,11 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
         // 여러 방법으로 시도
         for (let attempt = 0; attempt < 5; attempt++) {
           try {
-            const inserted = await frame.evaluate((imgUrl: any) => {
+            const inserted = await frame.evaluate((imgUrl: any, documentTitleSelectors: readonly string[]) => {
               // ⚠️ 중요: 제목 필드가 아닌 본문 영역에만 삽입
-              const titleElement = document.querySelector('.se-section-documentTitle');
+              const titleElement = documentTitleSelectors
+                .map((selector) => document.querySelector(selector))
+                .find((element): element is Element => Boolean(element));
               const bodyElement = document.querySelector('.se-section-text, .se-main-container, .se-component, .se-module-text');
 
               if (!bodyElement) {
@@ -2541,7 +2547,9 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
                   // range가 collapse된 상태인지 확인
                   if (range.collapsed) {
                     // ⚠️ 중요: 제목 필드가 아닌 본문 영역 찾기
-                    const titleElement = document.querySelector('.se-section-documentTitle');
+                    const titleElement = documentTitleSelectors
+                      .map((selector) => document.querySelector(selector))
+                      .find((element): element is Element => Boolean(element));
                     const bodyElement = document.querySelector('.se-section-text, .se-main-container, .se-component');
 
                     // 현재 커서가 있는 위치 확인
@@ -2744,7 +2752,7 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
               }
 
               return false;
-            }, imageDataUrl);
+            }, imageDataUrl, titleSelectors);
 
             if (inserted) {
               await self.delay(1500);

@@ -1149,8 +1149,11 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           // ⚠️ 중요: 이미지 삽입 전 본문 영역으로 커서 이동 (제목 영역에 있으면 안 됨)
           self.log(`   🔄 본문 영역으로 커서 이동 확인 중...`);
 
-          const cursorInfo = await frame.evaluate(() => {
-            const titleElement = document.querySelector('.se-section-documentTitle');
+          const titleSelectors = getSelectorStrings(SELECTORS.editor.documentTitle);
+          const cursorInfo = await frame.evaluate((documentTitleSelectors: readonly string[]) => {
+            const titleElement = documentTitleSelectors
+              .map((selector) => document.querySelector(selector))
+              .find((element): element is Element => Boolean(element));
             const bodyElement = document.querySelector('.se-section-text, .se-main-container');
 
             if (!bodyElement) return { inTitle: false, inBody: false };
@@ -1168,15 +1171,17 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             const inBody = bodyElement.contains(node);
 
             return { inTitle, inBody, needsMove: inTitle || !inBody };
-          });
+          }, titleSelectors);
 
           if (cursorInfo.needsMove) {
             if (cursorInfo.inTitle) {
               self.log(`   ⚠️ 제목 영역에 커서가 있어 본문 영역으로 이동합니다.`);
             }
 
-            await frame.evaluate(() => {
-              const titleElement = document.querySelector('.se-section-documentTitle');
+            await frame.evaluate((documentTitleSelectors: readonly string[]) => {
+              const titleElement = documentTitleSelectors
+                .map((selector) => document.querySelector(selector))
+                .find((element): element is Element => Boolean(element));
               const bodyElement = document.querySelector('.se-section-text, .se-main-container');
 
               if (!bodyElement) return;
@@ -1214,7 +1219,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
               selection.removeAllRanges();
               selection.addRange(newRange);
-            });
+            }, titleSelectors);
 
             await self.delay(300); // 커서 이동 대기
             self.log(`   ✅ 본문 영역으로 커서 이동 완료`);

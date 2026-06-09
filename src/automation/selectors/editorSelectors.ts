@@ -39,12 +39,31 @@ export const EDITOR_SELECTORS: SelectorMap<EditorSelectorKey> = {
   // --- 제목 ---
   documentTitle: entry(
     '.se-section-documentTitle',
-    ['.se-documentTitle', '[data-name="documentTitle"]'],
+    [
+      '.se-documentTitle',
+      '[data-name="documentTitle"]',
+      '[class*="documentTitle"]',
+      '[class*="DocumentTitle"]',
+      '[class*="title"][contenteditable="true"]',
+      '[contenteditable="true"][aria-label*="제목"]',
+      '[contenteditable="true"][data-placeholder*="제목"]',
+      '[placeholder*="제목"]',
+    ],
     '제목 입력 영역 (섹션)',
   ),
   titleText: entry(
     '.se-section-documentTitle .se-title-text',
-    ['.se-title-text', '.se-documentTitle-text'],
+    [
+      '.se-title-text',
+      '.se-documentTitle-text',
+      '.se-section-documentTitle [contenteditable="true"]',
+      '.se-documentTitle [contenteditable="true"]',
+      '[data-name="documentTitle"] [contenteditable="true"]',
+      '[class*="documentTitle"] [contenteditable="true"]',
+      '[contenteditable="true"][aria-label*="제목"]',
+      '[contenteditable="true"][data-placeholder*="제목"]',
+      '[placeholder*="제목"]',
+    ],
     '제목 텍스트 요소',
   ),
 
