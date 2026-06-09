@@ -197,7 +197,7 @@ function gitPush() {
         // Push (토큰 포함 URL)
         const pushUrl = `https://${GITHUB_TOKEN}@github.com/${OWNER}/${REPO}.git`;
         try {
-            execSync(`git push "${pushUrl}" main "${TAG}" 2>&1`, opts);
+            execSync(`git push "${pushUrl}" HEAD:main "${TAG}" 2>&1`, opts);
             console.log('   ✅ Push 완료');
         } catch (e) {
             // push 실패해도 릴리즈 업로드는 계속 진행

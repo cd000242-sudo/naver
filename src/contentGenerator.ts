@@ -1310,10 +1310,25 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   }
 
   // ✅ 제품/쇼핑/IT 리뷰: 상품명 prefix 우선 적용 (제목이 상품명으로 반드시 시작)
-  if (isReviewArticleType(source?.articleType)) {
+  // 쇼핑커넥트 풀오토는 articleType이 누락되어도 contentMode=affiliate 기준으로 제목 오염을 정리한다.
+  if (isReviewArticleType(source?.articleType) || source?.contentMode === 'affiliate') {
     const productName = getReviewProductName(source);
     if (productName) {
       applyKeywordPrefixToStructuredContent(finalContent, productName);
+      if (finalContent.selectedTitle) {
+        finalContent.selectedTitle = sanitizeReviewTitle(finalContent.selectedTitle, productName);
+      }
+      if (Array.isArray(finalContent.titleAlternatives)) {
+        finalContent.titleAlternatives = finalContent.titleAlternatives
+          .map((t) => sanitizeReviewTitle(String(t || ''), productName))
+          .filter(Boolean);
+      }
+      if (Array.isArray(finalContent.titleCandidates)) {
+        finalContent.titleCandidates = finalContent.titleCandidates.map((c: any) => ({
+          ...c,
+          text: sanitizeReviewTitle(String(c?.text || ''), productName),
+        }));
+      }
     }
   }
   const primaryKeyword = (source.metadata as any)?.keywords?.[0]
@@ -1321,7 +1336,7 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
     : '';
   if (primaryKeyword) {
     try {
-      const pn = isReviewArticleType(source?.articleType) ? String(getReviewProductName(source) || '').trim() : '';
+      const pn = (isReviewArticleType(source?.articleType) || source?.contentMode === 'affiliate') ? String(getReviewProductName(source) || '').trim() : '';
       const n = (s: string) => String(s || '').replace(/[\s\-–—:|·•.,!?()\[\]{}"']/g, '').toLowerCase();
       const pnN = n(pn);
       const pkN = n(primaryKeyword);
@@ -4349,7 +4364,8 @@ function validateStructuredContent(content: StructuredContent, source?: ContentS
   }
 
   // ✅ 제품/쇼핑/IT 리뷰: 과한 훅/감정 트리거 반복 방지 + 제목 상품명 prefix 강제
-  if (isReviewArticleType(source?.articleType)) {
+  // 쇼핑커넥트는 articleType이 비어도 contentMode=affiliate만으로 동일 방어선을 적용한다.
+  if (isReviewArticleType(source?.articleType) || source?.contentMode === 'affiliate') {
     const productName = getReviewProductName(source);
     if (productName) {
       content.selectedTitle = sanitizeReviewTitle(content.selectedTitle || '', productName);

@@ -673,12 +673,15 @@ async function applyImageToHeading(image: any, headingTitle: string, headingInde
 
     const candidate = {
       heading: headingTitle,
+      headingTitle,
       filePath: image.filePath || imageUrl,
       previewDataUrl: image.previewDataUrl || imageUrl,
       provider: image.provider || 'local',
       url: imageUrl,
       savedToLocal: Boolean(image.savedToLocal),
       headingIndex: headingIndex,
+      targetHeadingIndex: headingIndex,
+      manualHeadingLocked: true,
     } as any;
 
     try {

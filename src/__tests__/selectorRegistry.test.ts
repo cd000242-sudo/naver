@@ -108,9 +108,13 @@ describe('editor title selector fallbacks', () => {
     expect(titleContainers).toContain('[data-name="documentTitle"]');
     expect(titleContainers).toContain('[class*="documentTitle"]');
     expect(titleContainers).toContain('[class*="title"][contenteditable="true"]');
+    expect(titleContainers).toContain('.se-module-documentTitle');
+    expect(titleContainers).toContain('[role="textbox"][contenteditable="true"][aria-label*="제목"]');
     expect(titleInputs).toContain('.se-section-documentTitle [contenteditable="true"]');
     expect(titleInputs).toContain('[data-name="documentTitle"] [contenteditable="true"]');
     expect(titleInputs).toContain('[class*="documentTitle"] [contenteditable="true"]');
+    expect(titleInputs).toContain('.se-module-documentTitle [contenteditable="true"]');
+    expect(titleInputs).toContain('[role="textbox"][contenteditable="true"][aria-label*="제목"]');
   });
 });
 

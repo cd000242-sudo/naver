@@ -4615,18 +4615,20 @@ export class NaverBlogAutomation {
     this.log('ℹ️ 닫을 팝업이 없거나 이미 닫혀있습니다.');
   }
 
-  private async findTitleInputElement(frame: Frame, page: Page, timeoutMs = 20000): Promise<ElementHandle<Element> | null> {
+  private async findTitleInputElement(frame: Frame, page: Page, timeoutMs = 20000): Promise<{ frame: Frame; element: ElementHandle<Element> } | null> {
+    const deadline = Date.now() + timeoutMs;
+
     const titleTextElement = await waitForElement(frame, SELECTORS.editor.titleText, 'editor.titleText', {
       visible: true,
-      timeout: Math.max(5000, Math.floor(timeoutMs / 2)),
+      timeout: Math.min(6000, Math.max(1500, Math.floor(timeoutMs / 4))),
     });
-    if (titleTextElement) return titleTextElement as ElementHandle<Element>;
+    if (titleTextElement) return { frame, element: titleTextElement as ElementHandle<Element> };
 
     const titleSectionElement = await waitForElement(frame, SELECTORS.editor.documentTitle, 'editor.documentTitle', {
       visible: true,
-      timeout: Math.max(5000, Math.floor(timeoutMs / 2)),
+      timeout: Math.min(6000, Math.max(1500, Math.floor(timeoutMs / 4))),
     });
-    if (titleSectionElement) return titleSectionElement as ElementHandle<Element>;
+    if (titleSectionElement) return { frame, element: titleSectionElement as ElementHandle<Element> };
 
     const heuristicHandle = await frame.evaluateHandle(() => {
       const isVisible = (el: Element): boolean => {
@@ -4685,15 +4687,39 @@ export class NaverBlogAutomation {
     const heuristicElement = heuristicHandle?.asElement() as ElementHandle<Element> | null;
     if (heuristicElement) {
       this.log('   ✅ 제목 입력 영역을 휴리스틱 fallback으로 찾았습니다.');
-      return heuristicElement;
+      return { frame, element: heuristicElement };
     }
     await heuristicHandle?.dispose().catch(() => undefined);
+
+    while (Date.now() < deadline) {
+      const candidateFrames = page.frames().filter((candidateFrame) => candidateFrame !== frame);
+      for (const candidateFrame of candidateFrames) {
+        const foundTitleText = await waitForElement(candidateFrame, SELECTORS.editor.titleText, 'editor.titleText.frameScan', {
+          visible: true,
+          timeout: 1000,
+        }).catch(() => null);
+        if (foundTitleText) {
+          this.log(`   제목 입력 프레임 재탐색 성공: ${candidateFrame.url?.() || ''}`);
+          return { frame: candidateFrame, element: foundTitleText as ElementHandle<Element> };
+        }
+
+        const foundTitleSection = await waitForElement(candidateFrame, SELECTORS.editor.documentTitle, 'editor.documentTitle.frameScan', {
+          visible: true,
+          timeout: 800,
+        }).catch(() => null);
+        if (foundTitleSection) {
+          this.log(`   제목 섹션 프레임 재탐색 성공: ${candidateFrame.url?.() || ''}`);
+          return { frame: candidateFrame, element: foundTitleSection as ElementHandle<Element> };
+        }
+      }
+      await this.delay(500);
+    }
 
     const pageFallback = await waitForElement(page, SELECTORS.editor.documentTitle, 'page.editor.documentTitle', {
       visible: true,
       timeout: 3000,
     });
-    return pageFallback as ElementHandle<Element> | null;
+    return pageFallback ? { frame: page.mainFrame(), element: pageFallback as ElementHandle<Element> } : null;
   }
 
   private async readEditorTitleText(frame: Frame): Promise<string> {
@@ -4756,7 +4782,22 @@ export class NaverBlogAutomation {
         return `${selector}=${count}`;
       }).join(', ');
     }).catch((error) => `diagnostics failed: ${(error as Error).message}`);
-    return `pageUrl=${pageUrl}, pageTitle=${pageTitle}, frameUrl=${frameUrl}, selectors=[${diag}]`;
+    const frameDiagnostics = await Promise.all(page.frames().map(async (candidateFrame, idx) => {
+      const counts = await candidateFrame.evaluate(() => {
+        const selectors = [
+          '.se-section-documentTitle',
+          '.se-documentTitle',
+          '[data-name="documentTitle"]',
+          '[class*="documentTitle"]',
+          '[contenteditable="true"]',
+          '.se-section-text',
+          '.se-main-container',
+        ];
+        return selectors.map((selector) => `${selector}=${document.querySelectorAll(selector).length}`).join(',');
+      }).catch((error) => `failed:${(error as Error).message}`);
+      return `#${idx}:${candidateFrame.url?.() || ''}{${counts}}`;
+    }));
+    return `pageUrl=${pageUrl}, pageTitle=${pageTitle}, frameUrl=${frameUrl}, selectors=[${diag}], allFrames=[${frameDiagnostics.join(' | ')}]`;
   }
 
   async inputTitle(title: string): Promise<void> {
@@ -4773,13 +4814,15 @@ export class NaverBlogAutomation {
     }
 
     // ✅ 타임아웃 설정 (60초)
-    const titleElement = await this.findTitleInputElement(frame, page, 60000);
-    if (!titleElement) {
+    const titleTarget = await this.findTitleInputElement(frame, page, 60000);
+    if (!titleTarget) {
       const diagnostics = await this.collectEditorTitleDiagnostics(frame, page);
       throw new Error(`제목 입력 필드를 찾을 수 없습니다. ${diagnostics}`);
     }
 
     // ✅ 제목 입력 필드 클릭 및 타이핑 (재시도 로직)
+    const titleElement = titleTarget.element;
+    const titleFrame = titleTarget.frame;
     let titleInputSuccess = false;
     for (let attempt = 1; attempt <= 3; attempt++) {
       try {
@@ -4799,12 +4842,12 @@ export class NaverBlogAutomation {
         await this.delay(100);
 
         // 입력 확인
-        let currentTitle = await this.readEditorTitleText(frame);
+        let currentTitle = await this.readEditorTitleText(titleFrame);
         if (!currentTitle.includes(titleText.substring(0, 10))) {
           this.log('   ⚠️ 키보드 입력 확인 실패 → DOM input 이벤트 fallback 시도');
           const domTitle = await this.setTitleByDomEvent(titleElement, titleText);
           await this.delay(180);
-          currentTitle = await this.readEditorTitleText(frame) || domTitle;
+          currentTitle = await this.readEditorTitleText(titleFrame) || domTitle;
         }
         if (currentTitle.includes(titleText.substring(0, 10))) {
           this.log(`   ✅ 제목 입력 확인됨`);
@@ -4822,7 +4865,7 @@ export class NaverBlogAutomation {
     }
 
     if (!titleInputSuccess) {
-      const diagnostics = await this.collectEditorTitleDiagnostics(frame, page);
+      const diagnostics = await this.collectEditorTitleDiagnostics(titleFrame, page);
       throw new Error(`제목 입력에 실패했습니다 (3회 시도). ${diagnostics}`);
     }
 

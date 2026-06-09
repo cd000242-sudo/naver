@@ -1914,8 +1914,20 @@ export async function handleSemiAutoPublish(): Promise<any> {
     //    수정: heading별로 그룹핑 후 list 전체를 atomic하게 교체
     {
       const byHeading = new Map<string, any[]>();
+      const resolveLockedHeadingTitle = (img: any): string => {
+        if (img?.manualHeadingLocked === true) {
+          const idx = Number(img?.headingIndex ?? img?.targetHeadingIndex);
+          const headings = Array.isArray(updatedStructuredContent?.headings) ? updatedStructuredContent.headings : [];
+          if (Number.isInteger(idx) && idx >= 0 && idx < headings.length) {
+            const h = headings[idx];
+            const title = typeof h === 'string' ? String(h || '').trim() : String(h?.title || h || '').trim();
+            if (title) return title;
+          }
+        }
+        return String(img?.heading || img?.title || '').trim();
+      };
       imageManagementImages.forEach((img: any) => {
-        const heading = img.heading || img.title || '';
+        const heading = resolveLockedHeadingTitle(img);
         if (!heading) return;
         const list = byHeading.get(heading) || [];
         list.push(img);

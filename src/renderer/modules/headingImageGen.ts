@@ -4348,10 +4348,14 @@ async function selectLocalImageForHeading(headingIndex: number, headingTitle: st
       // ImageManager에 등록
       ImageManager.setImage(headingTitle, {
         heading: headingTitle,
+        headingTitle,
         filePath: result.filePath,
         previewDataUrl: result.previewDataUrl || result.filePath,
         provider: 'local',
-        url: result.filePath
+        url: result.filePath,
+        headingIndex,
+        targetHeadingIndex: headingIndex,
+        manualHeadingLocked: true
       });
 
       try {
@@ -4788,12 +4792,15 @@ function applyImageToHeadingFromFolder(headingIndex: number, headingTitle: strin
   // ImageManager에 추가
   ImageManager.addImage(headingTitle, {
     heading: headingTitle,
+    headingTitle,
     filePath: filePath,
     url: `file:///${filePath.replace(/\\/g, '/')}`,
     previewDataUrl: previewUrl,
     provider: 'local',
     savedToLocal: true,
-    headingIndex: headingIndex
+    headingIndex: headingIndex,
+    targetHeadingIndex: headingIndex,
+    manualHeadingLocked: true
   });
 
   // ✅ [2026-02-12 P1 FIX #3] 직접 할당 → syncGlobalImagesFromImageManager
@@ -5303,12 +5310,15 @@ function addImagesToHeadingGrid(headingIndex: number, headingTitle: string, imag
     // ✅ ImageManager에 추가 (setImage 대신 addImage 사용 - 여러 이미지 지원)
     ImageManager.addImage(headingTitle, {
       heading: headingTitle,
+      headingTitle,
       filePath: imgPath,
       url: `file:///${imgPath.replace(/\\/g, '/')}`,
       previewDataUrl: `file:///${imgPath.replace(/\\/g, '/')}`,
       provider: 'local',
       savedToLocal: true,
       headingIndex: headingIndex,
+      targetHeadingIndex: headingIndex,
+      manualHeadingLocked: true,
       imageIndex: imgIndex
     });
   });

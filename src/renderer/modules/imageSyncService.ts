@@ -85,6 +85,11 @@ function hydrateImageManagerFromImages(structuredContent: any, images: any[]): v
     }
 
     // ✅ heading이 없으면 인덱스 기반으로 소제목 매핑 (썸네일 등)
+    const lockedHeadingIndex = Number(img?.headingIndex ?? img?.targetHeadingIndex);
+    if (!isThumbnailImage && img?.manualHeadingLocked === true && Number.isInteger(lockedHeadingIndex) && lockedHeadingIndex >= 0 && lockedHeadingIndex < headingTitles.length) {
+      heading = headingTitles[lockedHeadingIndex];
+    }
+
     if (!heading && idx < headingTitles.length) {
       heading = headingTitles[idx];
       console.log(`[hydrateImageManager] 이미지 ${idx}에 소제목 자동 매핑: "${heading}"`);
@@ -196,6 +201,13 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
   const headings = Array.isArray(structuredContent?.headings) ? structuredContent.headings : [];
   const byNorm = new Map<string, { title: string; index: number }>();
   const byTitle = new Map<string, { title: string; index: number }>();
+  const resolveHeadingByIndex = (value: any): { title: string; index: number } | undefined => {
+    const index = Number(value);
+    if (!Number.isInteger(index) || index < 0 || index >= headings.length) return undefined;
+    const h = headings[index];
+    const title = typeof h === 'string' ? String(h || '').trim() : String(h?.title || h || '').trim();
+    return title ? { title, index } : undefined;
+  };
 
   headings.forEach((h: any, idx: number) => {
     const title = typeof h === 'string' ? String(h || '').trim() : String(h?.title || h || '').trim();
@@ -240,9 +252,13 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
     if (h.includes('썸네일') || h.includes('thumbnail')) return;
 
     const rawHeading = String(img?.heading || '').trim();
-    if (!rawHeading) return;
+    if (!rawHeading && img?.manualHeadingLocked !== true) return;
 
-    let resolved: { title: string; index: number } | undefined = byTitle.get(rawHeading);
+    let resolved: { title: string; index: number } | undefined;
+    if (img?.manualHeadingLocked === true) {
+      resolved = resolveHeadingByIndex(img?.headingIndex ?? img?.targetHeadingIndex);
+    }
+    if (!resolved) resolved = byTitle.get(rawHeading);
     if (!resolved) {
       try {
         const n = normalizeHeadingKeyForVideoCache(rawHeading);
@@ -316,6 +332,10 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
     // ✅ [2026-03-03 FIX] ImageManager 반환 이미지에서 thumbnail 중복 제거
     // thumbnail이 소제목 heading에도 등록되어 있으면 result와 thumbnailImages 양쪽에 중복 포함되는 버그 방지
     const dedupedHeadingImages = (Array.isArray(headingImages) ? headingImages : []).filter((img: any) => {
+      if (img?.manualHeadingLocked === true) {
+        const lockedIndex = Number(img?.headingIndex ?? img?.targetHeadingIndex);
+        if (Number.isInteger(lockedIndex) && lockedIndex >= 0 && lockedIndex !== idx) return false;
+      }
       if (img?.isThumbnail === true) return false;
       const h = String(img?.heading || '').trim().toLowerCase();
       if (h.includes('썸네일') || h.includes('thumbnail')) return false;

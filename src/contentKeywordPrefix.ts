@@ -198,13 +198,67 @@ export function applyKeywordPrefixToStructuredContent(content: StructuredContent
 
 export function sanitizeReviewTitle(title: string, productName: string): string {
   const base = String(title || '').trim();
-  const prod = String(productName || '').trim();
+  const pricePattern = /(?:₩\s*)?\d{1,3}(?:,\d{3})+(?:\s*원)?(?:대|짜리)?(?:에|으로|부터)?|(?:₩\s*)?\d+(?:\.\d+)?\s*(?:만\s*)?원(?:대|짜리)?(?:에|으로|부터)?/g;
+  const storePattern = /(?:스마트\s*스토어|브랜드\s*스토어|공식\s*스토어|네이버\s*스토어|네이버\s*쇼핑|쇼핑\s*몰|판매처|구매처|최저가|스토어)/gi;
+  const awkwardRecipientPattern = /(?:어떤|어느|이런|그런)\s*분(?:들)?(?:께|에게|한테)?(?:\s*(?:맞는|추천하는|좋은))?/g;
+
+  const normalizeShoppingTitlePunctuation = (value: string): string => normalizeTitleWhitespace(value)
+    .replace(/\s*[:：]\s*/g, ', ')
+    .replace(/\s*,\s*,+/g, ', ')
+    .replace(/,\s+/g, ', ')
+    .replace(/,\s*(?=$)/g, '')
+    .replace(/^[\s,.:;|·•\-–—]+|[\s,.:;|·•\-–—]+$/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+
+  const cleanProductNameForReviewTitle = (value: string): string => normalizeShoppingTitlePunctuation(
+    String(value || '')
+      .replace(pricePattern, ' ')
+      .replace(storePattern, ' ')
+      .replace(awkwardRecipientPattern, ' ')
+  );
+  const prod = cleanProductNameForReviewTitle(productName);
 
   if (!base) {
     return prod ? `${prod} 실사용 후기` : '실사용 후기';
   }
 
   let t = base;
+
+  const fallbackReviewTitle = (): string => prod ? `${prod}, 실사용 장단점 정리` : '실사용 장단점 정리';
+
+  const removeShoppingConnectTitleArtifacts = (value: string): string => {
+    let cleaned = normalizeTitleWhitespace(value);
+
+    cleaned = cleaned
+      .replace(pricePattern, ' ')
+      .replace(storePattern, ' ')
+      .replace(awkwardRecipientPattern, ' ')
+      .replace(/후기\s*리뷰/g, '후기')
+      .replace(/리뷰\s*후기/g, '후기')
+      .replace(/(후기|리뷰|총정리|정리|장단점)(?:\s+\1)+/g, '$1');
+
+    return normalizeShoppingTitlePunctuation(cleaned);
+  };
+
+  const hasShoppingConnectTitleArtifacts = (value: string): boolean => (
+    /(?:₩\s*)?\d{1,3}(?:,\d{3})+(?:\s*원)?|(?:₩\s*)?\d+(?:\.\d+)?\s*(?:만\s*)?원/.test(value)
+    || /(?:스마트\s*스토어|브랜드\s*스토어|공식\s*스토어|네이버\s*스토어|네이버\s*쇼핑|쇼핑\s*몰|판매처|구매처|최저가|스토어)/i.test(value)
+    || /(?:어떤|어느|이런|그런)\s*분(?:들)?(?:께|에게|한테)?/.test(value)
+    || /후기\s*리뷰|리뷰\s*후기/.test(value)
+  );
+
+  const isWeakReviewTitle = (value: string): boolean => {
+    if (!prod) return false;
+    const normalized = normalizeTitleWhitespace(value);
+    let suffix = normalized;
+    if (suffix.startsWith(prod)) {
+      suffix = suffix.slice(prod.length);
+    }
+    suffix = suffix.replace(/^[\s,.:;|·•\-–—]+/, '').trim();
+    if (!suffix) return true;
+    return /^(후기|리뷰|총정리|정리)$/.test(suffix);
+  };
 
   // ✅ [2026-02-08 완전 재작성] 제목 의미를 파괴하지 않는 최소한의 정제만 수행
   // 기존: 훅 키워드(써보고, 소름, 충격 등)를 무조건 제거 → 제목이 제품명만 남는 문제 발생
@@ -223,10 +277,11 @@ export function sanitizeReviewTitle(title: string, productName: string): string 
 
   // 2. 기본 정규화
   t = normalizeTitleWhitespace(t);
+  t = removeShoppingConnectTitleArtifacts(t);
 
   // 3. 제목이 너무 짧아졌으면 원본 유지
   if (t.length < 15 && base.length >= 15) {
-    t = normalizeTitleWhitespace(base);
+    t = removeShoppingConnectTitleArtifacts(base);
   }
 
   // 4. 제품명 prefix 보장 (1회만)
@@ -234,9 +289,13 @@ export function sanitizeReviewTitle(title: string, productName: string): string 
     t = applyKeywordPrefixToTitle(t, prod);
   }
 
+  if (hasShoppingConnectTitleArtifacts(t) || isWeakReviewTitle(t)) {
+    t = fallbackReviewTitle();
+  }
+
   // 5. 완전히 비었을 때만 폴백
   if (!t || t.length < 5) {
-    t = prod ? `${prod} 실사용 후기` : (base || '실사용 후기');
+    t = fallbackReviewTitle() || base || '실사용 후기';
   }
 
   return t;

@@ -949,11 +949,15 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
 
           const newImage = {
             heading: headingTitle,
+            headingTitle,
             filePath: imagePath,
             previewDataUrl: `file:///${imagePath}`,
             provider: 'local' as any,
             savedToLocal: true,
-            url: `file:///${imagePath}`
+            url: `file:///${imagePath}`,
+            headingIndex: nextHeadingIndex,
+            targetHeadingIndex: nextHeadingIndex,
+            manualHeadingLocked: true
           };
 
           try {
@@ -1058,11 +1062,15 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
               try {
                 const newImage = {
                   heading: headingTitle,
+                  headingTitle,
                   filePath: imagePath,
                   previewDataUrl: `file:///${imagePath}`,
                   provider: 'local' as any,
                   savedToLocal: true,
-                  url: `file:///${imagePath}`
+                  url: `file:///${imagePath}`,
+                  headingIndex,
+                  targetHeadingIndex: headingIndex,
+                  manualHeadingLocked: true
                 };
 
                 // ✅ [2026-03-22 FIX] 기존 대표 이미지 보존: addImage로 추가
@@ -1100,11 +1108,15 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
         // 새 이미지 객체 생성
         const newImage = {
           heading: headingTitle,
+          headingTitle,
           filePath: selectedImagePath,
           previewDataUrl: `file:///${selectedImagePath}`,
           provider: 'local' as any,
           savedToLocal: true,
-          url: `file:///${selectedImagePath}`
+          url: `file:///${selectedImagePath}`,
+          headingIndex,
+          targetHeadingIndex: headingIndex,
+          manualHeadingLocked: true
         };
 
         // ✅ ImageManager를 통해 이미지 추가 또는 설정
@@ -1664,10 +1676,14 @@ export async function showImagePlacementModal(folderImages: any[]): Promise<void
           if (!headingTitle) return;
           const newImg = {
             heading: headingTitle,
+            headingTitle,
             filePath: img.filePath || img.url,
             previewDataUrl: img.previewDataUrl || img.filePath || img.url,
             provider: 'local',
             savedToLocal: !!img.filePath,
+            headingIndex: headingIdx,
+            targetHeadingIndex: headingIdx,
+            manualHeadingLocked: true,
           };
           // ✅ [2026-03-22 FIX] public API 사용 (undo 히스토리 보존 + 캡슐화 유지)
           if (ImageManager.hasImage(headingTitle)) {

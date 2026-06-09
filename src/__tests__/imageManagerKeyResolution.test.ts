@@ -132,6 +132,23 @@ describe('resolveImageManagerKeys — odd-only duplicate bug regression', () => 
     expect(resolved[0].headingKey).toBe('이미지 1');
   });
 
+  it('GREEN: manual heading lock uses headingIndex before stale heading text', () => {
+    const imageResults = [
+      {
+        heading: 'stale heading from old render',
+        headingIndex: 3,
+        targetHeadingIndex: 3,
+        manualHeadingLocked: true,
+        filePath: '/tmp/manual-H3.jpg',
+        provider: 'local',
+      },
+    ];
+
+    const resolved = resolveImageManagerKeys(imageResults, headings);
+
+    expect(resolved[0].headingKey).toBe('H3');
+  });
+
   it('GREEN: all-mode (no filtering) — sequential images map correctly', () => {
     // When headingImageMode=all, all 4 headings get images
     const imageResults = [

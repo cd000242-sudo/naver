@@ -138,6 +138,43 @@ const ImageManager = {
     return rawTitle;
   },
 
+  resolveHeadingIndex(headingTitle: string): number {
+    const titleKey = this.resolveHeadingKey(headingTitle);
+    if (!Array.isArray(this.headings)) return -1;
+    return this.headings.findIndex((h: any) => {
+      const title = typeof h === 'string' ? String(h || '').trim() : String(h?.title || h || '').trim();
+      if (!title) return false;
+      if (title === titleKey) return true;
+      try {
+        return normalizeHeadingKeyForVideoCache(title) === normalizeHeadingKeyForVideoCache(titleKey);
+      } catch {
+        return false;
+      }
+    });
+  },
+
+  normalizeImageForHeading(headingTitle: string, image: any): any {
+    const titleKey = this.resolveHeadingKey(headingTitle);
+    const explicitIndex = Number(image?.headingIndex);
+    const resolvedIndex = Number.isFinite(explicitIndex) && explicitIndex >= 0
+      ? explicitIndex
+      : this.resolveHeadingIndex(titleKey);
+    const normalized: any = {
+      ...image,
+      heading: titleKey,
+      headingTitle: String(image?.headingTitle || titleKey),
+      timestamp: typeof image?.timestamp === 'number' ? image.timestamp : Date.now(),
+    };
+    if (resolvedIndex >= 0) {
+      normalized.headingIndex = resolvedIndex;
+      normalized.targetHeadingIndex = resolvedIndex;
+    }
+    if (image?.manualHeadingLocked === true) {
+      normalized.manualHeadingLocked = true;
+    }
+    return normalized;
+  },
+
   /**
    * 소제목 목록 설정
    */
@@ -258,11 +295,7 @@ const ImageManager = {
       const titleKey = this.resolveHeadingKey(entry.headingTitle);
       this.unsetHeadings.delete(titleKey);
       const images = this.imageMap.get(titleKey) || [];
-      images.push({
-        ...entry.image,
-        heading: titleKey,
-        timestamp: Date.now(),
-      });
+      images.push(this.normalizeImageForHeading(titleKey, entry.image));
       this.imageMap.set(titleKey, images);
     }
     console.log(`[ImageManager] 🎯 배치 추가 완료: ${entries.length}개 (sync 1회)`);
@@ -283,11 +316,7 @@ const ImageManager = {
     const titleKey = this.resolveHeadingKey(headingTitle);
     this.unsetHeadings.delete(titleKey);
     const images = this.imageMap.get(titleKey) || [];
-    images.push({
-      ...image,
-      heading: titleKey,
-      timestamp: Date.now()
-    });
+    images.push(this.normalizeImageForHeading(titleKey, image));
     this.imageMap.set(titleKey, images);
 
     this.syncGeneratedImagesArray();
@@ -340,11 +369,7 @@ const ImageManager = {
     const titleKey = this.resolveHeadingKey(headingTitle);
     this.unsetHeadings.delete(titleKey);
     const existingImages = this.imageMap.get(titleKey) || [];
-    const newImage = {
-      ...image,
-      heading: titleKey,
-      timestamp: Date.now()
-    };
+    const newImage = this.normalizeImageForHeading(titleKey, image);
 
     // 첫 번째 이미지 교체, 나머지 유지
     if (existingImages.length > 0) {

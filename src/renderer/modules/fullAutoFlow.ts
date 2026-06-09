@@ -281,6 +281,13 @@ function emitLog(message, modal, type = 'info') {
 }
 function resolveImageManagerKeys(imageResults, headings) {
     return imageResults.map((img, idx) => {
+        const lockedIndex = Number(img?.headingIndex ?? img?.targetHeadingIndex);
+        if (img?.manualHeadingLocked === true && Number.isInteger(lockedIndex) && lockedIndex >= 0 && lockedIndex < headings.length) {
+            const h = headings[lockedIndex];
+            const title = typeof h === 'string' ? h : (h?.title || h?.text || '');
+            if (String(title || '').trim())
+                return { img, headingKey: String(title).trim() };
+        }
         if (img.heading && String(img.heading).trim()) {
             return { img, headingKey: String(img.heading).trim() };
         }
