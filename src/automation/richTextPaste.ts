@@ -1299,7 +1299,7 @@ async function resetInlineFormattingState(page: Page, frame: Frame): Promise<voi
   await resetToolbarButtons(page);
 }
 
-async function focusLastEditableLine(page: Page, frame: Frame): Promise<void> {
+export async function focusLastEditableLine(page: Page, frame: Frame): Promise<void> {
   const focusedBySelection = await frame.evaluate(() => {
     const candidates = Array.from(document.querySelectorAll('.se-main-container .se-text-paragraph, .se-section-text, [contenteditable="true"]')) as HTMLElement[];
     for (let i = candidates.length - 1; i >= 0; i -= 1) {

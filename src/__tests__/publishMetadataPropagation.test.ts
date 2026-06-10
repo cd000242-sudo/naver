@@ -64,7 +64,7 @@ describe('publish metadata propagation', () => {
       code.indexOf('// 7. CTA 버튼 최종 확인')
     );
 
-    expect(code).toContain("const PREVIOUS_POST_SEPARATOR = '--------------------------------------------------------------'");
+    expect(code).toContain("const PREVIOUS_POST_SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'");
     expect(tailHelper).toMatch(/safeKeyboardType\(page,\s*PREVIOUS_POST_SEPARATOR/);
     expect(tailHelper).toMatch(/safeKeyboardType\(page,\s*previousPostUrl/);
     expect(tailHelper).toMatch(/waitForLinkCard\(15000,\s*500\)/);

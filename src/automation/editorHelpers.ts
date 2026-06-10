@@ -21,9 +21,10 @@ import { pickBannerHook } from './bannerPhrasePool.js';
 import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
-import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes } from './richTextPaste.js';
+import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, focusLastEditableLine } from './richTextPaste.js';
+import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 
-const PREVIOUS_POST_SEPARATOR = '--------------------------------------------------------------';
+const PREVIOUS_POST_SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
 
 type TailCtaLike = { link?: string; text?: string };
 
@@ -51,6 +52,14 @@ async function insertPreviousPostTailBlock(
   const previousPostTitle = String(resolved.previousPostTitle || '이전 글 보기').trim();
 
   self.log(`   📖 [이전글] 리치 본문 뒤 이전글 연결 (${context})`);
+  // Rich-paste flows can leave keyboard focus outside the editable area; the
+  // tail block below types blindly at the cursor, so re-anchor focus first.
+  try {
+    const frame = typeof self.getAttachedFrame === 'function' ? await self.getAttachedFrame() : null;
+    if (frame) await focusLastEditableLine(page, frame);
+  } catch {
+    // best-effort — Enter below still lands at the last known cursor
+  }
   await page.keyboard.press('Enter');
   await safeKeyboardType(page, PREVIOUS_POST_SEPARATOR, { delay: 5 });
   await page.keyboard.press('Enter');
@@ -636,12 +645,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
     // ✅ 본문에서 중복된 CTA 텍스트 제거 (🔗 더 알아보기 등)
     if (structured.bodyPlain) {
-      const cleanedBody = structured.bodyPlain
-        .replace(/🔗\s*더\s*알아보기[^\n]*\n?/g, '') // "🔗 더 알아보기" 제거
-        .replace(/더\s*알아보기[^\n]*\n?/g, '') // "더 알아보기" 제거
-        .replace(/━━━━━━━━━━━━━━━━━━━━━━[^\n]*\n?/g, '') // 구분선 제거
-        .replace(/👉\s*https?:\/\/[^\n]*\n?/g, '') // CTA 링크 제거
-        .trim();
+      // Strip AI-echoed CTA artifacts only — standalone section dividers must
+      // survive so the published post keeps its layout lines.
+      const cleanedBody = stripCtaArtifactsFromBody(structured.bodyPlain);
 
       if (cleanedBody !== structured.bodyPlain) {
         self.log('🧹 본문에서 중복된 CTA 텍스트 제거 완료');
@@ -670,12 +676,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         }
 
         // ✅ 수정된 본문에서도 중복된 CTA 텍스트 제거
-        let cleanedContent = currentContent.content
-          .replace(/🔗\s*더\s*알아보기[^\n]*\n?/g, '')
-          .replace(/더\s*알아보기[^\n]*\n?/g, '')
-          .replace(/━━━━━━━━━━━━━━━━━━━━━━[^\n]*\n?/g, '')
-          .replace(/👉\s*https?:\/\/[^\n]*\n?/g, '')
-          .trim();
+        let cleanedContent = stripCtaArtifactsFromBody(currentContent.content);
 
         cleanedContent = self.stripRepeatedHookBlocks(cleanedContent);
         cleanedContent = self.enforceOrdinalLineBreaks(cleanedContent);
@@ -2076,6 +2077,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
     // 3. 마지막 본문 끝에서 Enter 2회 (CTA와 본문 사이 간격)
     self.log('📝 [마지막 단계] CTA 및 해시태그 영역 준비 중...');
+    // Re-anchor editor focus before the tail phase — rich paste and image
+    // steps can steal focus, and every insert below types blindly at the
+    // cursor (divider / CTA / previous-post / hashtags).
+    try {
+      const tailFrame = await self.getAttachedFrame();
+      if (tailFrame) await focusLastEditableLine(page, tailFrame);
+    } catch {
+      // best-effort
+    }
     self.log('   → Enter 2회 입력 (CTA 삽입 준비)');
     for (let i = 0; i < 2; i++) {
       await page.keyboard.press('Enter');
