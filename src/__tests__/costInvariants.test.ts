@@ -164,7 +164,9 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     it('OpenAI connection errors are retried and not mislabeled as unavailable model', () => {
       expect(content).toMatch(/function\s+isOpenAiConnectionIssue/);
       expect(content).toMatch(/connection error/);
-      expect(content).toMatch(/maxTransientRetriesPerModel\s*=\s*3/);
+      // v2.11.9 cost policy: OpenAI transient retries tightened 3 → 0 — the
+      // 10s call gap + progressive backoff scheduler handles transient errors.
+      expect(content).toMatch(/maxTransientRetriesPerModel\s*=\s*0/);
       expect(content).toMatch(/OpenAI API 연결 실패/);
     });
 
