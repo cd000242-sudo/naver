@@ -21,6 +21,8 @@
 | N4 | 네이버 에디터 개편 (se-main-container 제거) | 하네스 프레임 탐색 수정 — 앱 셀렉터 전수 정비는 R6 전후 | 하네스가 조기경보 역할 | 하네스 1분 실행 PASS | 부분 대응 |
 | N5 | 기준선 테스트 상시 1 fail | f6bcb1d2(costInvariants 정상화) | suite 0 fail 자체가 가드 | — | 완료 |
 | 기존 | 발행 직전 검증 부재 (반쪽 발행) | 6c2a0b77(Pre-publish Assertion 관찰 모드) → R6 차단 전환 | prePublishAssertion.test(10) | `[PrePublish] N/5` 로그 표시 → 오탐 데이터 수집 | 관찰 모드 가동 |
+| S8 | 연속발행 상세설정 글톤 구버전 (2026 신규 5종 누락) | 톤 카탈로그 동기화 — continuous-modal 12종+레거시 호환 3종, 표시 맵 2곳 | toneCatalogParity.test(5) — 통합 목록과 어긋나면 RED | 상세설정 모달에 신뢰/교육 그룹 표시 | 코드 완료 · 라이브 대기 |
+| N6 | 다중계정 계정 편집 모달(ma-edit-*) HTML 부재 — JS 배선만 존재(죽은 UI) | 후속 R 배정 필요 (모달 복원 or 배선 제거 결정) | — | — | 발견 · 대기 |
 
 ## 2. 릴리즈 공통 게이트 (모든 출고 전)
 

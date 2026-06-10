@@ -3086,7 +3086,12 @@ const toneStyleNames: Record<string, string> = {
   'mom_cafe': '👩‍👧 맘카페',
   'storyteller': '📖 스토리텔러',
   'expert_review': '🔬 전문 리뷰',
-  'calm_info': '🍃 차분한 정보체'
+  'calm_info': '🍃 차분한 정보체',
+  'text_hip': '🖤 텍스트힙',
+  'sincere_exposure': '🔍 솔직 폭로형',
+  'data_verified': '📊 데이터 검증형',
+  'mentor': '🧑‍🏫 멘토',
+  'self_interview': '💬 셀프 인터뷰'
 };
 
 const contentModeNames: Record<string, string> = {

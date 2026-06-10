@@ -7547,16 +7547,33 @@
                             글 톤/스타일</label>
                         <select id="continuous-modal-tone-style"
                             style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: 8px; color: var(--text-strong); padding: 0.6rem; font-size: 0.9rem;">
-                            <option value="friendly">😊 친근한 (일상 블로거)</option>
-                            <option value="professional" selected>💼 전문적 (정보 전달)</option>
-                            <option value="casual">🎒 캐주얼 (가벼운 대화체)</option>
-                            <option value="formal">🎩 격식체 (공식적)</option>
-                            <option value="humorous">😄 유머 (재치있는)</option>
-                            <option value="community_fan">🔥 찐팬 (열정 커뮤니티)</option>
-                            <option value="mom_cafe">👩‍👧 맘카페 (생활 밀착형)</option>
-                            <option value="storyteller">📖 스토리텔러 (경험담 서사)</option>
-                            <option value="expert_review">🔬 전문 리뷰 (분석형)</option>
-                            <option value="calm_info">🍃 차분한 정보체 (담백 전달)</option>
+                            <optgroup label="📝 친근 그룹">
+                                <option value="friendly">😊 친근한 — 맛집·카페·펫·일상</option>
+                                <option value="mom_cafe">👩‍👧 맘카페 — 육아·교육·살림</option>
+                            </optgroup>
+                            <optgroup label="💼 전문 그룹">
+                                <option value="professional" selected>💼 전문적 — 비즈니스·창업·시사</option>
+                                <option value="expert_review">🔬 전문 리뷰 — 리빙·인테리어·테크 🏆</option>
+                                <option value="calm_info">🍃 차분한 정보체 — 법률·정책·복지</option>
+                            </optgroup>
+                            <optgroup label="🎭 개성 그룹">
+                                <option value="community_fan">🔥 찐팬 — 스포츠·엔터·연예</option>
+                                <option value="storyteller">📖 스토리텔러 — 여행·후기·경험담</option>
+                                <option value="text_hip">🖤 텍스트힙 — Z세대·MZ·짧은 글</option>
+                            </optgroup>
+                            <optgroup label="💎 신뢰 그룹 (2026 신규)">
+                                <option value="sincere_exposure">🔍 솔직 폭로형 — 패션·뷰티·구매전환 🏆</option>
+                                <option value="data_verified">📊 데이터 검증형 — 경제·재테크·테크 🏆</option>
+                            </optgroup>
+                            <optgroup label="🎓 교육 그룹 (2026 신규)">
+                                <option value="mentor">🧑‍🏫 멘토 — 건강·다이어트·요리·교양 🏆</option>
+                                <option value="self_interview">💬 셀프 인터뷰 — 지식·AEO 인용 친화</option>
+                            </optgroup>
+                            <optgroup label="🗂 레거시 (이전 항목 호환)">
+                                <option value="casual">🎒 캐주얼 (가벼운 대화체)</option>
+                                <option value="formal">🎩 격식체 (공식적)</option>
+                                <option value="humorous">😄 유머 (재치있는)</option>
+                            </optgroup>
                         </select>
                     </div>
 
