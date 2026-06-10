@@ -3862,6 +3862,17 @@ registerSerpProbeHandlers();
 // ✅ miscHandlers: content:collectFromPlatforms 등 — 연속발행에서 크롤링 시 필요
 import { registerMiscHandlers } from './main/ipc/miscHandlers.js';
 registerMiscHandlers();
+// ✅ [v2.11.34] blob/migration/recovery IPC wiring — same dead-router pattern as
+// the v2.10.203 SERP fix above: these were registered only inside
+// registerAllHandlers(), which main.ts never calls. With blob IPC dead
+// ("No handler registered for 'blob:hasMany'") images fall back to base64 in
+// localStorage → quota blowup → post-list save failures.
+import { registerBlobHandlers } from './main/ipc/blobHandlers.js';
+registerBlobHandlers();
+import { registerMigrationHandlers } from './main/ipc/migrationHandlers.js';
+registerMigrationHandlers();
+import { registerRecoveryHandlers } from './main/ipc/recoveryHandlers.js';
+registerRecoveryHandlers();
 import { registerFlowMarathonHandlers } from './main/ipc/flowMarathonHandlers.js';
 registerFlowMarathonHandlers();
 import { registerTitleQualityHandlers } from './main/ipc/titleQualityHandlers.js';
