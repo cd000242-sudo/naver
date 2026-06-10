@@ -70,6 +70,10 @@ async function insertPreviousPostTailBlock(
   // User-confirmed format (2026-06-10 live test): hook line → URL line.
   // The separate title line was removed from the tail block.
   await safeKeyboardType(page, previousPostUrl, { delay: 10 });
+  // Give Naver a beat to recognize the bare URL as a complete link before the
+  // Enter that triggers oglink-card conversion — typing Enter too fast leaves
+  // a plain URL line (live-observed intermittent card miss).
+  await self.delay(600);
   await page.keyboard.press('Enter');
 
   const cardReady = typeof self.waitForLinkCard === 'function'

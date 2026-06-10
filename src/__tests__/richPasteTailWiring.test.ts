@@ -76,6 +76,19 @@ describe('rich paste tail wiring', () => {
     expect(code).not.toMatch(/clickLastEditableLine/);
   });
 
+  it('uses a structure-agnostic sentinel probe that requires true document end', () => {
+    const code = read('automation/richTextPaste.ts');
+    // root-end is the fast path; the text-block click is the reliable revive
+    // for the post-paste dead-keyboard state.
+    expect(code.indexOf("name: 'root-end'")).toBeGreaterThan(-1);
+    expect(code.indexOf("name: 'root-end'")).toBeLessThan(code.indexOf("name: 'caret-end-click'"));
+    // Sentinel-char probe: confirms input registered AND ended at doc end,
+    // independent of editor DOM classes (paragraph counting broke on redesign).
+    expect(code).toMatch(/const SENTINEL =/);
+    expect(code).toMatch(/endsWith\(SENTINEL\)/);
+    expect(code).toMatch(/Backspace/);
+  });
+
   it('verifies the server session before reusing an open browser in runPostOnly', () => {
     const code = read('naverBlogAutomation.ts');
     const start = code.indexOf('async runPostOnly(');

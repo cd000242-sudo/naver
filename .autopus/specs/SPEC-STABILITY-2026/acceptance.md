@@ -18,6 +18,8 @@
 | N1 | blob/migration/recovery IPC 전멸 → localStorage 폭발·글 목록 저장 실패 | 13b29f9a(main.ts 직접 배선) | ipcWiringGuards.test(2) | 콘솔에서 blob:hasMany 에러 소멸 + NUCLEAR CLEANUP 미발생 | 코드 완료 · 라이브 대기 |
 | N2 | 붙여넣기 직후 키보드 입력 사망 (간헐) | bb0f0850(ensureTailTypingReady — 라이브 사다리 복구 실측) | richPasteTailWiring.test | `⌨️ 키보드 입력 확인` 로그 + 꼬리 정상 | 라이브 1회 검증됨 |
 | N3 | 좌표 클릭이 본문 중간에 꼬리 삽입 | bb0f0850(클릭 제거, 끝캐럿 정밀클릭 최후수단화) | richPasteTailWiring(클릭 부재 가드) + 하네스 꼬리위치 검사 | 하네스 "꼬리 위치(본문 뒤)" PASS | 라이브 검증됨 |
+| N7 | 꼬리가 마지막 문단 "앞"에 삽입 (마무리 별도 붙여넣기 시) | (다음 커밋)(root-end 우선 + 센티넬 probe로 문서끝 검증 + 텍스트블록 클릭) | richPasteTailWiring(root-end/sentinel/endsWith 가드) | 하네스 마무리-별도-붙여넣기 시나리오 "꼬리 위치 PASS" 2회 재현 | 라이브 검증됨 |
+| N8 | 이전글 URL→링크카드 변환 간헐 실패 | (다음 커밋)(URL 입력 후 600ms 인식 대기 후 트리거 Enter) | — (네이버 서버 의존, 100% 보장 불가) | 새 URL 1회 발행 시 카드 생성 — 앱엔 waitForLinkCard 15초 polling, 실패해도 URL 텍스트 잔존 | 부분 — 동일 URL 반복 테스트로 억제 의심, 실발행 재확인 |
 | N4 | 네이버 에디터 개편 (se-main-container 제거) | 하네스 프레임 탐색 수정 — 앱 셀렉터 전수 정비는 R6 전후 | 하네스가 조기경보 역할 | 하네스 1분 실행 PASS | 부분 대응 |
 | N5 | 기준선 테스트 상시 1 fail | f6bcb1d2(costInvariants 정상화) | suite 0 fail 자체가 가드 | — | 완료 |
 | 기존 | 발행 직전 검증 부재 (반쪽 발행) | 6c2a0b77(Pre-publish Assertion 관찰 모드) → R6 차단 전환 | prePublishAssertion.test(10) | `[PrePublish] N/5` 로그 표시 → 오탐 데이터 수집 | 관찰 모드 가동 |

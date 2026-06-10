@@ -1337,10 +1337,13 @@ export async function focusLastEditableLine(page: Page, frame: Frame): Promise<v
   await frame.click('body').catch(() => undefined);
 }
 
-async function countEditableParagraphs(frame: Frame): Promise<number> {
+function editableRootText(frame: Frame): Promise<string> {
   return frame
-    .evaluate(() => document.querySelectorAll('.se-text-paragraph, [contenteditable="true"] p').length)
-    .catch(() => -1);
+    .evaluate(() => {
+      const root = document.querySelector('[contenteditable="true"]') as HTMLElement | null;
+      return (root?.innerText || root?.textContent || '').replace(/\s+$/g, '');
+    })
+    .catch(() => '');
 }
 
 /**
@@ -1373,28 +1376,34 @@ export async function ensureTailTypingReady(
     // sit below the fold misses or hits the wrong paragraph (the cause of
     // tail-inserted-mid-body incidents). Rect is computed after the scroll.
     const rect = await frame.evaluate(() => {
-      const blocks = Array.from(
-        document.querySelectorAll('.se-text-paragraph, .se-section-text')
-      ) as HTMLElement[];
-      for (let i = blocks.length - 1; i >= 0; i -= 1) {
-        const el = blocks[i];
+      // Target the editable ROOT's last visible child — by definition the
+      // final block, immune to editor-internal class changes (class-based
+      // "last paragraph" lookups landed one block short on the redesign).
+      const root = document.querySelector('[contenteditable="true"]') as HTMLElement | null;
+      if (!root) return null;
+      let el = root.lastElementChild as HTMLElement | null;
+      while (el) {
         const probe = el.getBoundingClientRect();
-        if (probe.width <= 0 || probe.height <= 0) continue;
-        el.scrollIntoView({ block: 'center', inline: 'nearest' });
-        const box = el.getBoundingClientRect();
-        const range = document.createRange();
-        range.selectNodeContents(el);
-        range.collapse(false);
-        const caret = range.getBoundingClientRect();
-        const usable = caret && caret.width + caret.height > 0;
-        return {
-          x: usable ? caret.x : box.x + Math.min(12, box.width / 2),
-          y: usable ? caret.y + caret.height / 2 : box.y + box.height / 2,
-          viewportWidth: window.innerWidth,
-          viewportHeight: window.innerHeight,
-        };
+        // Must carry TEXT: clicking an empty trailing block does not restore
+        // keyboard focus (live-observed) — only a text-bearing block does.
+        const hasText = (el.innerText || el.textContent || '').trim().length > 0;
+        if (hasText && probe.width > 0 && probe.height > 0) break;
+        el = el.previousElementSibling as HTMLElement | null;
       }
-      return null;
+      if (!el) return null;
+      el.scrollIntoView({ block: 'center', inline: 'nearest' });
+      const box = el.getBoundingClientRect();
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      const caret = range.getBoundingClientRect();
+      const usable = caret && caret.width + caret.height > 0;
+      return {
+        x: usable ? caret.x : box.x + Math.min(12, box.width / 2),
+        y: usable ? caret.y + caret.height / 2 : box.y + Math.max(4, box.height - 8),
+        viewportWidth: window.innerWidth,
+        viewportHeight: window.innerHeight,
+      };
     }).catch(() => null);
     if (!rect) return;
 
@@ -1413,31 +1422,68 @@ export async function ensureTailTypingReady(
     await page.keyboard.up('Control').catch(() => undefined);
   };
 
+  const focusRootEnd = async (): Promise<void> => {
+    await frame.evaluate(() => {
+      const root = document.querySelector('[contenteditable="true"]') as HTMLElement | null;
+      if (!root) return;
+      root.focus();
+      const range = document.createRange();
+      range.selectNodeContents(root);
+      range.collapse(false);
+      const selection = window.getSelection();
+      if (!selection) return;
+      selection.removeAllRanges();
+      selection.addRange(range);
+      (root.lastElementChild as HTMLElement | null)?.scrollIntoView({ block: 'center', inline: 'nearest' });
+    }).catch(() => undefined);
+  };
+
   const strategies: Array<{ name: string; run: () => Promise<void> }> = [
-    { name: 'programmatic-focus', run: async () => focusLastEditableLine(page, frame) },
+    // Structure-agnostic FIRST: collapse selection to the END of the editable
+    // root — fast path when the editor state is healthy.
+    { name: 'root-end', run: focusRootEnd },
+    // Click is SECOND: in the post-paste dead-keyboard state only a real
+    // mouse click on a text-bearing block revives input (live-observed —
+    // programmatic/CDP focus consistently failed there).
+    { name: 'caret-end-click', run: caretEndClick },
     {
       name: 'cdp-focus',
       run: async () => {
         const editable = await frame.$('[contenteditable="true"]').catch(() => null);
         if (editable) await editable.focus().catch(() => undefined);
-        await focusLastEditableLine(page, frame);
+        await focusRootEnd();
       },
     },
-    { name: 'caret-end-click', run: caretEndClick },
+    { name: 'programmatic-focus', run: async () => focusLastEditableLine(page, frame) },
   ];
+
+  // Structure-agnostic probe: type a sentinel char and confirm it (a)
+  // actually registered and (b) landed at the very END of the document.
+  // Counting paragraph nodes broke on the redesigned editor (real input was
+  // misread as "no response"); reading text is class-independent.
+  const SENTINEL = '￬'; // halfwidth won sign — never appears in content
+  const probeTypingReady = async (): Promise<boolean> => {
+    const before = await editableRootText(frame);
+    await page.keyboard.type(SENTINEL).catch(() => undefined);
+    await new Promise((resolve) => setTimeout(resolve, 220));
+    const after = await editableRootText(frame);
+    const registered = after.includes(SENTINEL) && after.length > before.length;
+    const atEnd = after.endsWith(SENTINEL);
+    if (after.includes(SENTINEL)) {
+      await page.keyboard.press('Backspace').catch(() => undefined);
+      await new Promise((resolve) => setTimeout(resolve, 150));
+    }
+    return registered && atEnd;
+  };
 
   for (const strategy of strategies) {
     await strategy.run();
     await new Promise((resolve) => setTimeout(resolve, 250));
-    const before = await countEditableParagraphs(frame);
-    await page.keyboard.press('Enter').catch(() => undefined);
-    await new Promise((resolve) => setTimeout(resolve, 350));
-    const after = await countEditableParagraphs(frame);
-    if (before >= 0 && after > before) {
-      log?.(`   ⌨️ 키보드 입력 확인 (${strategy.name})`);
+    if (await probeTypingReady()) {
+      log?.(`   ⌨️ 키보드 입력 확인 — 문서 끝 (${strategy.name})`);
       return true;
     }
-    log?.(`   ⚠️ 키보드 미반응 — 다음 단계 (${strategy.name})`);
+    log?.(`   ⚠️ 키보드 미반응/위치오류 — 다음 단계 (${strategy.name})`);
   }
   return false;
 }
