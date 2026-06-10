@@ -1703,6 +1703,10 @@ export class NaverBlogAutomation {
       this.browser = session.browser;
       this.page = session.page;
 
+      // [R7] 발행 진행 마킹 — 이 세션의 page를 지금부터 발행에 쓰므로 keep-alive
+      // ping이 건드리지 않게 한다. run()/runPostOnly() finally에서 반드시 해제.
+      browserSessionManager.markPublishing(this.options.naverId, true);
+
       // 연결 상태 확인
       if (this.browser.connected) {
         // 페이지가 유효한지 확인
@@ -9315,6 +9319,8 @@ export class NaverBlogAutomation {
       }
       throw error;
     } finally {
+      // [R7] 발행 종료 — keep-alive ping 재개로 세션 유지(캡차 방지).
+      try { browserSessionManager.markPublishing(this.options.naverId, false); } catch { /* best-effort */ }
       // keepBrowserOpen이 false이거나 오류 발생 시에만 브라우저 종료
       if (!keepBrowserOpen && this.browser) {
         this.log('⏳ 브라우저 종료 중...');
@@ -9689,6 +9695,8 @@ export class NaverBlogAutomation {
       }
       throw error;
     } finally {
+      // [R7] 발행 종료 — keep-alive가 이 세션을 다시 ping해 살려두도록 해제.
+      try { browserSessionManager.markPublishing(this.options.naverId, false); } catch { /* best-effort */ }
       const keepOpen = resolvedOptions.keepBrowserOpen ?? true; // ✅ 기본값 true로 변경
       if (!keepOpen && this.browser) {
         this.log('⏳ 브라우저 종료 중...');

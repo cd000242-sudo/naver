@@ -56,6 +56,11 @@ export interface SessionInfo {
     // [v1.6.0] keep-alive 연속 실패 카운터 (locked 세션 단일 실패 로그아웃 차단용)
     // 3회 연속 리다이렉트/실패 시에만 isLoggedIn=false로 전이
     consecutiveKeepaliveFails?: number;
+    // [R7] 실제 발행이 진행 중인 동안만 true — keep-alive ping이 이 세션의 page를
+    // 건드리지 않게 skip 판정에 사용한다. activeAccountId(세션 재사용 시 설정되고
+    // closeSession 전까지 안 풀림)로 skip하던 기존 방식은 발행이 끝나도 영구 skip →
+    // 세션이 서서히 만료 → 재로그인 → 캡차를 유발했다.
+    publishInProgress?: boolean;
 }
 
 /**
@@ -597,6 +602,7 @@ class BrowserSessionManager {
             proxyUrl: currentProxyUrl,
             locked: false,       // ✅ [v1.4.78] 초기엔 unlocked, 로그인 성공 시 auto-lock
             lockedAt: 0,
+            publishInProgress: false,
         };
 
         this.sessions.set(accountId, sessionInfo);
@@ -707,6 +713,19 @@ class BrowserSessionManager {
             session.locked = true;
             session.lockedAt = Date.now();
             console.log(`[BrowserSessionManager] 🔒 ${accountId.substring(0, 3)}*** 세션 잠금`);
+        }
+    }
+
+    /**
+     * [R7] 발행 진행 상태 마킹 — 발행 시작 시 true, 종료(성공/실패/취소) 시 false.
+     * keep-alive ping은 publishInProgress=true인 세션만 skip한다. 반드시 finally에서
+     * false로 풀어야 keep-alive가 재개되어 세션이 살아있고 캡차가 안 뜬다.
+     */
+    markPublishing(accountId: string, inProgress: boolean): void {
+        const session = this.sessions.get(accountId);
+        if (session) {
+            session.publishInProgress = inProgress;
+            if (inProgress) session.lastActivity = Date.now();
         }
     }
 
@@ -1022,14 +1041,18 @@ class BrowserSessionManager {
             const maxGapMs = minGapMs + 10000;
 
             for (const accountId of accountIds) {
-                // ✅ [v1.4.79] Bug 10 — 현재 발행 중인 계정은 ping skip (page 동시 사용 방지)
-                if (accountId === this.activeAccountId) {
+                const session = this.sessions.get(accountId);
+                if (!session || !session.browser.connected) continue;
+
+                // [R7] Skip ONLY while a publish is actually running on this
+                // session (page is in use). The old `accountId === activeAccountId`
+                // check stuck after publishing finished, so keep-alive never
+                // pinged the single account again → server session expired →
+                // re-login → CAPTCHA. Now idle sessions get pinged and stay alive.
+                if (session.publishInProgress) {
                     console.log(`[BrowserSessionManager] ⏭️ ${accountId.substring(0, 3)}*** 발행 중 — ping skip`);
                     continue;
                 }
-
-                const session = this.sessions.get(accountId);
-                if (!session || !session.browser.connected) continue;
 
                 await this.pingSingleSession(session);
 

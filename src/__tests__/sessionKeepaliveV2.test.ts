@@ -142,9 +142,12 @@ describe('v1.4.79 — 18건 결함 봉쇄 (Opus+9 Sonnet 합의)', () => {
     });
   });
 
-  describe('Bug 10: 발행 중 ping 경쟁 방지', () => {
-    it("activeAccountId 일치 계정은 ping skip", () => {
-      expect(code).toMatch(/accountId === this\.activeAccountId[\s\S]{0,200}?ping skip/);
+  describe('Bug 10 → R7: 발행 중에만 ping skip (세션 유지/캡차 방지)', () => {
+    it("publishInProgress 세션만 ping skip (activeAccountId 영구 skip 제거)", () => {
+      // R7: activeAccountId는 발행이 끝나도 안 풀려 keep-alive를 영구 정지시켰음.
+      // 이제 실제 발행 중(publishInProgress)에만 skip → 유휴 세션은 ping 유지.
+      expect(code).toMatch(/session\.publishInProgress[\s\S]{0,200}?ping skip/);
+      expect(code).not.toMatch(/accountId === this\.activeAccountId[\s\S]{0,200}?ping skip/);
     });
   });
 

@@ -9,7 +9,7 @@
 |----|----------|------|------------|------------|------|
 | S1 | 구분선/이전글/CTA/해시태그 꼬리 누락 | 3f271f46(구분선 보존·━복원·정제) + bb0f0850(키 입력 검증 사다리 4지점, 후킹→링크 형식) | bodyArtifactCleanup.test(7) + richPasteTailWiring.test(7) | 풀오토 1건: 꼬리 4종 표시 + `[TailOptions]` 값 정상 + `[PrePublish]` 5/5 | 코드 완료 · 라이브 대기 |
 | S2 | 로그인 세션 안 유지 | d6dbe940(runPostOnly ensureServerSession 게이트) | richPasteTailWiring.test 게이트 배선 가드 | 연속 2건째 "서버 세션 유효 확인" 로그 / 쿠키 삭제 시 자동 재로그인 | 코드 완료 · 라이브 대기 |
-| S2' | keepalive 활성계정 영구 skip (근본) | R7 예정 (publishInProgress 플래그) | sessionKeepaliveV3 예정 | 유휴 15분 후 keep-alive OK 로그 | 대기 |
+| S2' | keepalive 활성계정 영구 skip (근본) → 세션 만료 → 재로그인 → 캡차 | (R7 완료) publishInProgress 플래그 — 발행 중에만 skip, 유휴 세션은 ping 유지 | sessionKeepalivePublishGate.test(3) + sessionKeepaliveV2 갱신 | 발행 후 유휴 15~30분, 다음 발행 시 재로그인/캡차 없이 세션 재사용 | 코드 완료 · 라이브 대기 |
 | S3 | 소제목 이미지 빈 결과 (원인 불명 중단) | R3 예정 (null 삼킴 → 구조화 에러) — 사용자 측 dropshot 로그인 원인 1건은 해소 | R3 가드 예정 | 실패 시 로그에 원인 코드(쿼터/세션/429) 표시 | 대기 |
 | S4 | 반자동 이미지 뒤섞임 + 이중 생성 | 48cde1ed(run#+호출자 계측) → R4 예정(single-flight+키 매핑) | continuousImageFailFast.test 일부 + R4 가드 예정 | run # 중복 0 / 반자동 10건 뒤섞임 0 | 계측 완료 · 본수정 대기 |
 | S5 | 풀오토 썸네일 이미지관리 공란 | R5 예정 (로컬 저장 등록 + 키 폴백) | R5 가드 예정 | 발행 후 이미지관리 첫 슬롯 표시 | 대기 |
