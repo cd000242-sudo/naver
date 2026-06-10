@@ -4,6 +4,18 @@
 
 표기: `R#` = 릴리즈 단위. 예상시간은 코드+테스트+검증 포함.
 
+## R 공통 표준 절차 (모든 릴리즈 단위에 동일 적용 — 아래 각 R에서는 차이점만 기술)
+
+1. **진단 고정**: 수정 전 원인을 file:line으로 문서화 (research.md 추가)
+2. **RED**: 가드 테스트 먼저 작성 → 실패 확인 (기능 테스트 불가 영역은 정적 wiring 가드)
+3. **수정**: 최소 변경 — 변경 라인이 전부 해당 R의 목적으로 소급되는지 self-check
+4. **게이트**: vitest 전체 0 fail → lint 0 errors → build+번들 검증 → (자동화 영역) 라이브 하네스
+5. **커밋**: Lore 형식, Tested/Not-tested 정직 기재, 1커밋 = 1목적
+6. **라이브 체크**: acceptance.md 해당 항목 실측 → 통과 시에만 다음 R 착수
+7. **롤백 준비**: 각 R은 독립 커밋이므로 `git revert <커밋>` 1회로 철회 가능해야 함 — 다른 R과 파일 충돌하는 변경은 분리
+
+위반 시 처리: 게이트 실패 → 출고 중단·원인 수정. 라이브 체크 실패 → revert 후 재진단 (수정 위에 수정 쌓기 금지).
+
 ---
 
 ## Phase 0 — 릴리즈 규율 (코드 변경 없음, 즉시 발효)
@@ -58,24 +70,45 @@
 
 ## Phase 3 — 이미지 파이프라인 3건 (사용자 보고 S3·S4·S5)
 
-### R3: 소제목 이미지 빈 결과 (S3) — 예상 1일
-- `src/image/nanoBananaProGenerator.ts` L726/738/1700: 실패를 null로 삼키고 빈 배열 반환 → **구조화 에러(원인 코드+provider+사유) 전파**. 사용자 로그에 "비어있습니다" 대신 실제 원인(쿼터 소진/429/세션 만료) 표시
-- 재시도 2회가 같은 키·같은 파라미터 반복으로 무의미 → 재시도 1회차에 **API 키 로테이션/세션 갱신** 강제
-- provider 자동 전환은 **자동 폴백 금지 정책 준수**: 무인(풀오토) 모드용 "이미지 엔진 대체 허용" 옵트인 설정(기본 OFF) 신설, ON일 때만 2차 실패 시 전환 + 로그 명시
-- 가드: 빈 결과 경로 단위 테스트(에러 전파), 재시도 시 키 로테이션 호출 검증
+### R3: 소제목 이미지 빈 결과 (S3) — 예상 1일 · 의존: 없음 · 위험도: 중
 
-### R4: 반자동 이미지 뒤섞임 (S4) — 예상 1~2일
+| 단계 | 내용 |
+|------|------|
+| 3.1 | `src/image/nanoBananaProGenerator.ts` 빈 결과 3경로(L726 응답없음 / L738 catch null / L1700 쿼터0) 각각에 **구조화 실패 객체** `{code: 'QUOTA'\|'RATE_LIMIT'\|'SESSION'\|'EMPTY_RESPONSE', provider, detail}` 도입 — null 반환 전면 제거 |
+| 3.2 | 호출 체인(imageGenerator.ts → main.ts:4587 → fullAutoFlow)에 code/detail 전파 — 사용자 로그가 "비어있습니다" 대신 "Gemini 쿼터 소진(키 3/3 소진)" 식으로 표시 |
+| 3.3 | 재시도 1회차에 키 로테이션/세션 갱신 강제 (같은 키 재호출 금지) — 재시도 진입 로그에 사용 키 인덱스 표기 |
+| 3.4 | provider 자동 전환은 옵트인 설정 "이미지 엔진 자동 대체 허용"(기본 OFF) 신설 후에만 — **자동 폴백 금지 정책 준수** |
 
-> **2026-06-10 라이브 증거 확보**: 같은 글(소제목 7개)에 dropshot 런과 openai-image 런이 ~53초 간격으로 **동시 진행**되는 로그 실측 (각자 [N/7] 카운터로 14장 생성 — 비용 2배 + 매핑 오염 후보). `generateImagesForAutomation`(multiAccountManager.ts:361)에 중복 실행 가드 없음 + 호출 경로 다수(연속발행 직접 / aiFallbackFn 주입 / 풀오토) + provider 해석 소스 2개(fullAutoImageSource vs globalImageSource). 진단 계측(run #태그 + 호출자 스택 기록) 적용 — 다음 재현 로그로 이중 트리거 경로 확정 후 단일 비행(single-flight) 가드 설계.
-- 원인: heading 문자열 키 변이(이모지 배지/넘버링 strip 불일치) 시 위치 인덱스 리매핑 폴백이 엉뚱한 소제목에 배정
-  - `imageManagerCore.ts:224` (인덱스 리매핑) · `publishingHandlers.ts:1916-1935` (발행 직전 sync) · `naverBlogAutomation.ts:8022-8100` (insertImagesAtHeadings)
-- 수정: ① 이미지 메타에 `headingIndex` + 정규화 키 **동시 저장·동시 검증** ② 발행 직전 sync에서 매칭 실패 항목은 **폴백 금지 — 스킵 + 경고 로그** ③ 삽입 직전 textContent 일치 재확인
-- 가드: heading 추가/삭제/배지 변형 시나리오 단위 테스트 (imageManagerCore는 renderer 모듈이라 jsdom 테스트 가능)
+- 가드: 빈 결과 → 구조화 에러 전파 단위 테스트, 재시도 키 로테이션 호출 검증, null 반환 부재 정적 가드
+- 라이브 판정: 의도적 실패 유발(잘못된 키) 시 로그에 원인 코드 표시 + 연속발행 차단기(c9fcebda)와 연동 동작
+- 롤백: revert 1회 (단일 모듈)
 
-### R5: 풀오토 썸네일 이미지관리 공란 (S5) — 예상 1일
-- 원인 1순위: 합성 썸네일이 웹 URL/임시 경로 그대로 등록 → 그리드 로드 실패 (`naverBlogAutomation.ts:9586`, `fullAutoFlow.ts:542-554`, `imageManagerCore.ts:854`)
-- 수정: ① 썸네일 **로컬 저장 후 로컬 경로로 등록** (웹 URL이면 다운로드 강제) ② `syncGeneratedImagesArray`(515-547) 썸네일 키 폴백(`'🖼️ 썸네일'`/`'썸네일'`/isThumbnail) ③ 그리드 `onerror` 시 1회 재해석
-- 가드: 등록 경로 단위 테스트 + 라이브에서 이미지관리 탭 첫 슬롯 표시 확인
+### R4: 이미지 이중 생성 single-flight + 뒤섞임 (S4) — 예상 1~2일 · 의존: run# 재현 로그 · 위험도: 중상
+
+| 단계 | 내용 |
+|------|------|
+| 4.1 | **트리거 확정**: run #태그+호출자 스택 로그(48cde1ed)로 이중 발사 경로 2개 특정 — 확정 전 가드 설계 금지 |
+| 4.2 | single-flight 가드: 같은 postTitle 생성이 진행 중이면 **두 번째 호출을 명시 거부**(로그+사유) — 조용한 dedup 금지(provider 다른 호출을 합치면 사용자 의도 위반) |
+| 4.3 | 뒤섞임 매핑: 이미지 메타에 `headingIndex`+정규화 키 동시 저장·동시 검증 (imageManagerCore.ts:224 인덱스 폴백 제거) |
+| 4.4 | 발행 직전 sync(publishingHandlers.ts:1916-1935)에서 매칭 실패 항목 **폴백 금지 — 스킵+경고**, 삽입 직전 textContent 재확인 |
+
+- 가드: 호출자 매트릭스 테스트(누가 generateImagesForAutomation을 부르는가), heading 변형 시나리오 단위 테스트(jsdom)
+- 라이브 판정: 같은 글에 run # 2개가 더 이상 안 찍힘 / 반자동 10건 연속 발행에서 뒤섞임 0
+- 롤백: 4.2와 4.3/4.4는 커밋 분리 (독립 revert)
+
+### R5: 풀오토 썸네일 이미지관리 공란 (S5) — 예상 1일 · 의존: blob IPC(13b29f9a) · 위험도: 하
+
+| 단계 | 내용 |
+|------|------|
+| 5.1 | 합성 썸네일 **로컬 저장 후 로컬 경로로 등록** (웹 URL이면 다운로드 강제) — naverBlogAutomation.ts:9586, fullAutoFlow.ts:542-554 |
+| 5.2 | `syncGeneratedImagesArray`(imageManagerCore.ts:515-547) 썸네일 키 폴백('🖼️ 썸네일'/'썸네일'/isThumbnail) + 그리드 onerror 1회 재해석 |
+| 5.3 | (Phase 8 연계 선행) migration:imageModelV1 dry-run으로 기존 base64 잔재 규모 측정 — 이관은 별도 결정 |
+
+- 가드: 등록 경로 단위 테스트 (웹 URL 입력 → 로컬 경로 출력)
+- 라이브 판정: 풀오토 발행 후 이미지관리 첫 슬롯에 썸네일 표시
+- 롤백: revert 1회
+
+> **R4 라이브 증거(2026-06-10)**: 같은 글(소제목 7개)에 dropshot 런과 openai-image 런이 ~53초 간격으로 동시 진행 실측 — 각자 [N/7] 카운터로 14장 생성(비용 2배 + 매핑 오염). `generateImagesForAutomation`에 중복 실행 가드 없음 + 호출 경로 다수 + provider 해석 소스 2개. 진단 계측(run #태그+호출자 스택) 적용 완료 — 4.1의 입력 데이터.
 
 ## Phase 4 — R7: 세션 keepalive 구조 (S2 잔여) — 예상 1일
 
@@ -87,11 +120,22 @@
 
 ## Phase 5 — 에러 삼킴 + 중복 경로 정리 (R8~R12, 릴리즈 5회 분할) — 예상 1.5주
 
-- automation 폴더 `catch(() => null/false/{})` **87건 전수 분류**:
-  - SPOF(발행 무결성 훼손) → throw + Pre-publish Assertion 연동
-  - 복구 가능 → 1회 재시도 + 실패 시 명시 로그
-  - 무시 가능(장식적) → 경고 로그 + 운영 대시보드 카운터
-- 분할 기준: R8 publishHelpers → R9 editorHelpers → R10 imageHelpers → R11 naverBlogAutomation 발행부 → R12 잔여
+**선행 작업 (R8 착수 전, 0.5일)**: 87건 전수 스캔 → research.md에 분류표 고정.
+각 건마다 `파일:라인 / 삼키는 에러 / 침묵의 결과(어떤 누락·반쪽이 생기나) / 분류` 기록.
+분류 3종:
+- **A급 SPOF** (발행 무결성 훼손 — 누락 발행 직결) → throw + Pre-publish Assertion 항목 연동
+- **B급 복구 가능** → 1회 재시도 + 실패 시 사용자 로그 (조용한 재시도 금지)
+- **C급 장식적** (진행에 무해) → 경고 로그 + 운영 대시보드 카운터 (삭제 아님 — 빈도 계측)
+
+| R | 대상 파일 | 작업 | 라이브 판정 |
+|---|----------|------|------------|
+| R8 | publishHelpers.ts (카테고리/예약/발행확정 — 최다 밀집) | A급 우선 처리: 카테고리 실패→기본값 진행, 예약 실패→즉시발행 진행 등 "맘대로 진행" 전면 차단 | 의도적 카테고리 오설정 시 발행이 사유와 함께 중단 |
+| R9 | editorHelpers.ts (본문/꼬리/CTA) | 꼬리 단계 실패의 침묵 제거 — ensureTailTypingReady 실패 시 Pre-publish와 연동해 차단 경로 확보 | [TailRecovery] 실패 로그 시 발행물에 꼬리 누락 0 |
+| R10 | imageHelpers.ts + 이미지 삽입부 | 이미지 개별 실패 침묵 제거 — 계획 대비 삽입 수 불일치 시 명시 처리 | [PrePublish] image-count ❌ 발생 시 원인 로그 존재 |
+| R11 | naverBlogAutomation.ts 발행부 + `insertHorizontalLine`(9097) 버튼 미발견 silent skip → ━ 텍스트 구분선 폴백 | 발행 확정 경로의 catch 전수 + 구분선 폴백 | 발행물 구분선 누락 0 |
+| R12 | 잔여 (utils/publishOutcomeResolver 등) + 분류표 잔여 C급 카운터 배선 | 마무리 + 대시보드 카운터 확인 | 운영 대시보드에 침묵 실패 카운터 표시 |
+
+각 R: 처리 건수와 분류 근거를 커밋 본문에 기재 (예: "A급 6건 throw 전환, B급 3건 재시도화, C급 9건 계측") — 추적 가능성 확보.
 - `insertHorizontalLine()`(naverBlogAutomation.ts:9097) 버튼 미발견 시 silent skip → **━ 텍스트 구분선 폴백** (선 누락 0%)
 - 중복 구현 통합: `smartTypeWithAutoHighlight` (naverBlogAutomation vs editorHelpers 사본) → typingUtils 단일화. 이전글 삽입도 editorHelpers 단일 경로 확인
 - **공유 함수 명시적 입력화 (R13 핵심 — "하나 고치면 다른 곳이 터지는" 구조의 근본 처방)**
@@ -103,10 +147,15 @@
 
 ## Phase 6 — 릴리즈 게이트 자동화 (앱 코드 아님 — Phase 2~5와 병행 가능) — 예상 2~3일
 
-1. **번들 식별자 충돌 스캔** 강화 (`scripts/copy-static.mjs`): top-level 식별자 중복 + undefined 참조 스캔 → 빌드 FAIL (런타임 전용 회귀의 주범)
-2. **IPC 계약 검증** `npm run lint:ipc`: main.ts `ipcMain.handle/on` 채널 ↔ renderer `invoke/send` 채널 대조 → 불일치 시 FAIL
-3. **self-test 확장**: 번들 헬스(모듈 초기화) + 핵심 IPC 핸드셰이크
-4. pre-commit 훅: 변경 파일 10개 초과 시 경고 (번들 커밋 방지)
+| # | 게이트 | 구현 | 수락 기준 (실증 케이스로 검증) |
+|---|--------|------|-------------------------------|
+| 6.1 | 번들 식별자 충돌 스캔 (`scripts/copy-static.mjs` 강화) | concat 후 top-level `const/function` 식별자 중복 스캔 + undefined 참조 정규식 → 중복 시 **빌드 FAIL** | 과거 사고(v2.10.85 RecoveryBlockingModal) 재현 픽스처가 FAIL로 잡힘 |
+| 6.2 | IPC 계약 검증 (`npm run lint:ipc` 신설) | preload `invoke/send` 채널 전수 추출 ↔ main 프로세스 `ipcMain.handle/on` 등록 대조 → 미등록 채널 시 FAIL | blob:hasMany 사고(13b29f9a 이전 상태) 재현 시 FAIL로 잡힘 — ipcWiringGuards.test의 일반화 |
+| 6.3 | self-test 확장 | 기존 로그인 smoke에 번들 헬스(렌더러 모듈 초기화 0 에러) + 핵심 IPC 핸드셰이크 5종 추가 | `npm run self-test` 1회로 "앱이 켜지고 말이 통하는가" 판정 |
+| 6.4 | pre-commit 훅 | 변경 파일 10개 초과 시 경고(차단 아님 — 번들 커밋 습관 방지) + Lore 형식 검사 연동 | 11파일 커밋 시도 시 경고 출력 |
+| 6.5 | 라이브 하네스 게이트화 | tail-typing 하네스를 릴리즈 전 수동 1클릭 절차로 문서화 (로그인 프로필 재사용, ~1분) — Phase 7.5에서 플로우별 3종으로 확장 | 릴리즈 체크리스트에 하네스 PASS 항목 포함 |
+
+각 게이트는 도입 시 **과거 실제 사고의 재현 픽스처**로 검증한다 — "잡았어야 할 것을 잡는지"가 수락 기준.
 
 ## Phase 7 — 플로우별 파이프라인 분리 (사용자 핵심 의도: "풀오토는 풀오토, 연속은 연속, 다중계정은 다중계정")
 
