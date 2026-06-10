@@ -635,6 +635,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
   // retry 재실행 시 이미 삽입된 공정문구를 다시 타이핑하지 않도록 함
   let ftcAlreadyInserted = false;
   self.__richPasteThemes = pickRichArticleThemes();
+  // [SPEC-STABILITY-2026 R2] Reset stale expectations from a previous post so
+  // the pre-publish assertion never judges this run against old plans.
+  self.__prePublishExpectations = null;
 
   await self.retry(async () => {
     const structured = resolved.structuredContent;
@@ -2425,6 +2428,22 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       await self.applyHashtagsInBody(hashtagsToApply);
       await self.delay(self.DELAYS.MEDIUM); // 200ms
       self.log(`   ✅ 해시태그 입력 완료`);
+    }
+
+    // [SPEC-STABILITY-2026 R2] Stash tail expectations for the pre-publish
+    // assertion in publishBlogPost (observation mode — log only).
+    try {
+      const plannedBodyLen = String(resolved.structuredContent?.bodyPlain || resolved.content || '')
+        .replace(/\s+/g, ' ')
+        .trim().length;
+      self.__prePublishExpectations = {
+        minBodyChars: Math.max(200, Math.floor(plannedBodyLen * 0.5)),
+        expectedImageMin: (resolved.images?.length ?? 0) > 0 ? 1 : 0,
+        expectedLinkCardMin: previousPostTailInserted ? 1 : 0,
+        expectedDividerMin: previousPostTailInserted ? 1 : 0,
+      };
+    } catch {
+      // expectations are best-effort observation data
     }
 
     // 7. CTA 버튼 최종 확인 (발행 전)

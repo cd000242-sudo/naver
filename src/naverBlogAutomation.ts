@@ -44,6 +44,7 @@ import {
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, humanKeyboardType } from './automation/typingUtils.js';
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes } from './automation/richTextPaste.js';
+import { collectPrePublishStats, evaluatePrePublishReport, formatPrePublishReport } from './automation/prePublishAssertion.js';
 import { resolveImmediatePublishOutcome } from './automation/publishOutcomeResolver';
 
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
@@ -4979,6 +4980,20 @@ export class NaverBlogAutomation {
     await this.retry(async () => {
       const frame = (await this.getAttachedFrame());
       this.ensureNotCancelled();
+
+      // [SPEC-STABILITY-2026 R2] Pre-publish assertion — observation mode.
+      // Compares what the editor actually contains with what the flow planned;
+      // logs only, never blocks. R6 upgrades failures to a hard block.
+      try {
+        const expectations = (this as any).__prePublishExpectations;
+        if (expectations) {
+          const stats = await collectPrePublishStats(frame);
+          const report = evaluatePrePublishReport(stats, expectations);
+          this.log(formatPrePublishReport(report));
+        }
+      } catch (assertErr) {
+        this.log(`[PrePublish] 검사 자체 실패 (발행 진행): ${(assertErr as Error).message}`);
+      }
 
       // ✅ [2026-01-22 FIX] 발행 직전 모든 이미지에 '문서 너비' 적용 (버튼 클릭 방식)
       try {

@@ -1,0 +1,158 @@
+/**
+ * prePublishAssertion.ts - last-gate inspection right before the publish click.
+ *
+ * R2 of SPEC-STABILITY-2026: OBSERVATION MODE — it logs what the editor
+ * actually contains versus what the flow planned, and never blocks a publish.
+ * R6 flips failing checks to a hard block once field false-positive data is in.
+ */
+import type { Frame } from 'puppeteer';
+
+export interface PrePublishExpectations {
+  minBodyChars: number;
+  expectedImageMin: number;
+  expectedLinkCardMin: number;
+  expectedDividerMin: number;
+  forbiddenMarkers?: string[];
+}
+
+export interface PrePublishStats {
+  bodyChars: number;
+  imageCount: number;
+  linkCardCount: number;
+  dividerCount: number;
+  leakedMarkers: string[];
+}
+
+export interface PrePublishCheck {
+  name: string;
+  pass: boolean;
+  expected: string;
+  actual: string;
+}
+
+export interface PrePublishReport {
+  pass: boolean;
+  checks: PrePublishCheck[];
+}
+
+export const DEFAULT_FORBIDDEN_MARKERS = [
+  '[원본 텍스트]',
+  '[Article Content]',
+  '[구분선]',
+  '[제목]',
+  '[본문]',
+  '[해시태그]',
+];
+
+export function findLeakedMarkers(
+  text: string,
+  markers: string[] = DEFAULT_FORBIDDEN_MARKERS
+): string[] {
+  const leaked = markers.filter((marker) => text.includes(marker));
+  if (/\[자료\s*\d+\]/.test(text)) leaked.push('[자료N]');
+  return leaked;
+}
+
+export function evaluatePrePublishReport(
+  stats: PrePublishStats,
+  expectations: PrePublishExpectations
+): PrePublishReport {
+  const checks: PrePublishCheck[] = [
+    {
+      name: 'body-min-chars',
+      pass: stats.bodyChars >= expectations.minBodyChars,
+      expected: `>= ${expectations.minBodyChars}`,
+      actual: String(stats.bodyChars),
+    },
+    {
+      name: 'image-count',
+      pass: stats.imageCount >= expectations.expectedImageMin,
+      expected: `>= ${expectations.expectedImageMin}`,
+      actual: String(stats.imageCount),
+    },
+    {
+      name: 'link-card-count',
+      pass: stats.linkCardCount >= expectations.expectedLinkCardMin,
+      expected: `>= ${expectations.expectedLinkCardMin}`,
+      actual: String(stats.linkCardCount),
+    },
+    {
+      name: 'divider-count',
+      pass: stats.dividerCount >= expectations.expectedDividerMin,
+      expected: `>= ${expectations.expectedDividerMin}`,
+      actual: String(stats.dividerCount),
+    },
+    {
+      name: 'marker-leak',
+      pass: stats.leakedMarkers.length === 0,
+      expected: 'none',
+      actual: stats.leakedMarkers.join(', ') || 'none',
+    },
+  ];
+
+  return { pass: checks.every((check) => check.pass), checks };
+}
+
+export function formatPrePublishReport(report: PrePublishReport): string {
+  const passCount = report.checks.filter((check) => check.pass).length;
+  const header =
+    `[PrePublish] 발행 전 검사 ${passCount}/${report.checks.length} 통과` +
+    (report.pass ? '' : ' — 누락 의심! (관찰 모드: 발행은 진행)');
+  const lines = report.checks.map(
+    (check) => `${check.pass ? '✅' : '❌'} ${check.name}: 기대 ${check.expected} / 실제 ${check.actual}`
+  );
+  return [header, ...lines].join('\n   ');
+}
+
+export async function collectPrePublishStats(
+  frame: Frame,
+  markers: string[] = DEFAULT_FORBIDDEN_MARKERS
+): Promise<PrePublishStats> {
+  const raw = await frame.evaluate(() => {
+    const root =
+      (document.querySelector('.se-main-container') as HTMLElement | null) || document.body;
+    const text = root?.innerText || root?.textContent || '';
+
+    const imageCount = document.querySelectorAll(
+      'img.se-image-resource, .se-module-image img, .se-component-image img'
+    ).length;
+
+    // Same selector pool as waitForLinkCard; dedup nested matches by their
+    // component root so one card never counts twice.
+    const linkSelectors = [
+      '.se-oglink',
+      '.se-module-oglink',
+      '.se-oembed',
+      '.se-module-oembed',
+      '.se-link-preview',
+      '[data-module="oglink"]',
+      '.se-section-oglink',
+    ];
+    const cardRoots = new Set<Element>();
+    for (const selector of linkSelectors) {
+      document.querySelectorAll(selector).forEach((el) => {
+        cardRoots.add(el.closest('.se-component') || el);
+      });
+    }
+
+    const dividerTextRuns = (text.match(/━{10,}/g) || []).length;
+    const dividerComponents = document.querySelectorAll(
+      '[class*="horizontalLine"], [class*="horizontal-line"], hr'
+    ).length;
+
+    return {
+      text,
+      imageCount,
+      linkCardCount: cardRoots.size,
+      dividerCount: dividerTextRuns + dividerComponents,
+    };
+  });
+
+  return {
+    bodyChars: raw.text.replace(/\s+/g, ' ').trim().length,
+    imageCount: raw.imageCount,
+    linkCardCount: raw.linkCardCount,
+    dividerCount: raw.dividerCount,
+    leakedMarkers: findLeakedMarkers(raw.text, markers),
+  };
+}
