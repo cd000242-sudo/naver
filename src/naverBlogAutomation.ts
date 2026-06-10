@@ -9249,6 +9249,19 @@ export class NaverBlogAutomation {
         this.log('🚀 브라우저 초기화 중...');
         await this.setupBrowser();
         await this.loginToNaver();
+      } else {
+        // [v1.6.0 design — finally wired] A reused browser can hold an expired
+        // server session; cookie presence alone is a false positive. Verify
+        // against the server before entering the editor, re-login if dead.
+        const serverSessionOk = await browserSessionManager
+          .ensureServerSession(this.options.naverId)
+          .catch(() => false);
+        if (serverSessionOk) {
+          this.log('✅ 발행 전 서버 세션 유효 확인 — 로그인 단계 건너뜀');
+        } else {
+          this.log('⚠️ 발행 전 서버 세션 만료 감지 — 재로그인을 진행합니다.');
+          await this.loginToNaver();
+        }
       }
 
       // 글쓰기 페이지로 이동
