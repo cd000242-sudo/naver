@@ -28,39 +28,52 @@ describe('rich paste tail wiring', () => {
     expect(code).not.toContain("replace(/━━━━━━━━━━━━━━━━━━━━━━[^\\n]*\\n?/g, '')");
   });
 
-  it('re-anchors editor focus by real mouse click before typing the previous-post tail block', () => {
+  it('verifies keyboard input registers before typing the previous-post tail block', () => {
     const code = read('automation/editorHelpers.ts');
     const tailHelper = code.slice(
       code.indexOf('async function insertPreviousPostTailBlock'),
       code.indexOf('// ── Local utility')
     );
-    expect(tailHelper).toMatch(/clickLastEditableLine\(/);
+    expect(tailHelper).toMatch(/ensureTailTypingReady\(/);
+    // User-confirmed tail format (2026-06-10): hook line → URL line, no
+    // separate title line.
+    expect(tailHelper).not.toMatch(/safeKeyboardType\(page,\s*previousPostTitle,/);
   });
 
-  it('releases stuck modifiers and click-focuses before the CTA/hashtag tail phase', () => {
+  it('releases stuck modifiers and runs the keyboard recovery ladder before the tail phase', () => {
     const code = read('automation/editorHelpers.ts');
     const tailPhase = code.slice(
       code.indexOf("self.log('📝 [마지막 단계] CTA 및 해시태그 영역 준비 중...')"),
       code.indexOf('let effectiveCtas = resolved.ctas')
     );
-    expect(tailPhase).toMatch(/clickLastEditableLine\(/);
+    expect(tailPhase).toMatch(/ensureTailTypingReady\(/);
     expect(tailPhase).toMatch(/\['Control', 'Shift', 'Alt'\]/);
     expect(tailPhase).toMatch(/keyboard\.up\(modifier\)/);
   });
 
-  it('click-focuses again right before the hashtag tail', () => {
+  it('re-verifies keyboard input right before the hashtag tail', () => {
     const code = read('automation/editorHelpers.ts');
     const beforeHashtags = code.slice(
       code.indexOf('이전글 카드 뒤에는 반드시 Enter'),
       code.indexOf('const hashtagGapEnterCount')
     );
-    expect(beforeHashtags).toMatch(/clickLastEditableLine\(/);
+    expect(beforeHashtags).toMatch(/ensureTailTypingReady\(/);
   });
 
-  it('exports click-based and programmatic focus helpers from richTextPaste', () => {
+  it('verifies keyboard input before heading-position CTA typing', () => {
+    const code = read('automation/editorHelpers.ts');
+    const headingCta = code.slice(
+      code.indexOf('d) CTA 특정 소제목 아래 삽입'),
+      code.indexOf('insertCtaLink')
+    );
+    expect(headingCta).toMatch(/ensureTailTypingReady\(/);
+  });
+
+  it('exports the keyboard recovery ladder from richTextPaste', () => {
     const code = read('automation/richTextPaste.ts');
     expect(code).toMatch(/export async function focusLastEditableLine\(/);
-    expect(code).toMatch(/export async function clickLastEditableLine\(/);
+    expect(code).toMatch(/export async function ensureTailTypingReady\(/);
+    expect(code).not.toMatch(/clickLastEditableLine/);
   });
 
   it('verifies the server session before reusing an open browser in runPostOnly', () => {

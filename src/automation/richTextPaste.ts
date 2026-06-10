@@ -1337,34 +1337,108 @@ export async function focusLastEditableLine(page: Page, frame: Frame): Promise<v
   await frame.click('body').catch(() => undefined);
 }
 
-export async function clickLastEditableLine(page: Page, frame: Frame): Promise<boolean> {
-  // Click-based focus re-anchor. Programmatic focus()/selection inside the
-  // editor iframe can report success while the iframe itself never gains
-  // keyboard focus at the top document — page.keyboard input then silently
-  // goes nowhere. A real mouse click restores the full focus chain, which is
-  // what the legacy typing flow implicitly relied on.
-  const handles = await frame
-    .$$('.se-main-container .se-text-paragraph, .se-section-text, [contenteditable="true"]')
-    .catch(() => []);
+async function countEditableParagraphs(frame: Frame): Promise<number> {
+  return frame
+    .evaluate(() => document.querySelectorAll('.se-text-paragraph, [contenteditable="true"] p').length)
+    .catch(() => -1);
+}
 
-  for (let i = handles.length - 1; i >= 0; i -= 1) {
-    const handle = handles[i];
-    await handle
-      .evaluate((el: Element) => el.scrollIntoView({ block: 'center', inline: 'nearest' }))
-      .catch(() => undefined);
-    const box = await handle.boundingBox().catch(() => null);
-    if (!box || box.width <= 0 || box.height <= 0 || box.x < -1000) continue;
+/**
+ * Post-paste keyboard recovery ladder. Right after a clipboard paste the
+ * editor may still be digesting the pasted DOM — keystrokes silently die.
+ * This waits for the paste to settle, then verifies with a probe Enter that
+ * keyboard input actually registers, escalating focus methods until it does.
+ * The probe Enter is real tail spacing — callers should type one Enter less.
+ * Mouse is used only as the last resort, and only at the computed END-caret
+ * position of the last text block (never mid-paragraph).
+ */
+export async function ensureTailTypingReady(
+  page: Page,
+  frame: Frame,
+  log?: (message: string) => void
+): Promise<boolean> {
+  // 1) Wait until the editor stops mutating (paste digestion complete).
+  let previousLength = -1;
+  for (let i = 0; i < 12; i += 1) {
+    const length = await frame
+      .evaluate(() => (document.body?.innerText || '').length)
+      .catch(() => -1);
+    if (length >= 0 && length === previousLength) break;
+    previousLength = length;
+    await new Promise((resolve) => setTimeout(resolve, 350));
+  }
 
-    const clickX = box.x + Math.min(Math.max(8, box.width / 2), Math.max(8, box.width - 4));
-    const clickY = box.y + Math.min(Math.max(6, box.height / 2), Math.max(6, box.height - 4));
+  const caretEndClick = async (): Promise<void> => {
+    // Scroll the true last block into view FIRST — clicking coordinates that
+    // sit below the fold misses or hits the wrong paragraph (the cause of
+    // tail-inserted-mid-body incidents). Rect is computed after the scroll.
+    const rect = await frame.evaluate(() => {
+      const blocks = Array.from(
+        document.querySelectorAll('.se-text-paragraph, .se-section-text')
+      ) as HTMLElement[];
+      for (let i = blocks.length - 1; i >= 0; i -= 1) {
+        const el = blocks[i];
+        const probe = el.getBoundingClientRect();
+        if (probe.width <= 0 || probe.height <= 0) continue;
+        el.scrollIntoView({ block: 'center', inline: 'nearest' });
+        const box = el.getBoundingClientRect();
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        const caret = range.getBoundingClientRect();
+        const usable = caret && caret.width + caret.height > 0;
+        return {
+          x: usable ? caret.x : box.x + Math.min(12, box.width / 2),
+          y: usable ? caret.y + caret.height / 2 : box.y + box.height / 2,
+          viewportWidth: window.innerWidth,
+          viewportHeight: window.innerHeight,
+        };
+      }
+      return null;
+    }).catch(() => null);
+    if (!rect) return;
+
+    const frameEl = await page.$('#mainFrame, iframe[name="mainFrame"]').catch(() => null);
+    const frameBox = frameEl ? await frameEl.boundingBox().catch(() => null) : null;
+    const baseX = frameBox?.x ?? 0;
+    const baseY = frameBox?.y ?? 0;
+    // Clamp inside the frame's visible area — never click outside it.
+    const maxX = baseX + Math.min(rect.viewportWidth, frameBox?.width ?? rect.viewportWidth) - 2;
+    const maxY = baseY + Math.min(rect.viewportHeight, frameBox?.height ?? rect.viewportHeight) - 2;
+    const clickX = Math.min(Math.max(baseX + 2, baseX + rect.x), maxX);
+    const clickY = Math.min(Math.max(baseY + 2, baseY + rect.y), maxY);
     await page.mouse.click(clickX, clickY).catch(() => undefined);
     await page.keyboard.down('Control').catch(() => undefined);
     await page.keyboard.press('End').catch(() => undefined);
     await page.keyboard.up('Control').catch(() => undefined);
-    return true;
-  }
+  };
 
-  await focusLastEditableLine(page, frame).catch(() => undefined);
+  const strategies: Array<{ name: string; run: () => Promise<void> }> = [
+    { name: 'programmatic-focus', run: async () => focusLastEditableLine(page, frame) },
+    {
+      name: 'cdp-focus',
+      run: async () => {
+        const editable = await frame.$('[contenteditable="true"]').catch(() => null);
+        if (editable) await editable.focus().catch(() => undefined);
+        await focusLastEditableLine(page, frame);
+      },
+    },
+    { name: 'caret-end-click', run: caretEndClick },
+  ];
+
+  for (const strategy of strategies) {
+    await strategy.run();
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    const before = await countEditableParagraphs(frame);
+    await page.keyboard.press('Enter').catch(() => undefined);
+    await new Promise((resolve) => setTimeout(resolve, 350));
+    const after = await countEditableParagraphs(frame);
+    if (before >= 0 && after > before) {
+      log?.(`   ⌨️ 키보드 입력 확인 (${strategy.name})`);
+      return true;
+    }
+    log?.(`   ⚠️ 키보드 미반응 — 다음 단계 (${strategy.name})`);
+  }
   return false;
 }
 

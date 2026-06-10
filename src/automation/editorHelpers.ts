@@ -21,7 +21,7 @@ import { pickBannerHook } from './bannerPhrasePool.js';
 import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
-import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, clickLastEditableLine } from './richTextPaste.js';
+import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, ensureTailTypingReady } from './richTextPaste.js';
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 
 const PREVIOUS_POST_SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
@@ -52,13 +52,13 @@ async function insertPreviousPostTailBlock(
   const previousPostTitle = String(resolved.previousPostTitle || '이전 글 보기').trim();
 
   self.log(`   📖 [이전글] 리치 본문 뒤 이전글 연결 (${context})`);
-  // Rich-paste flows can leave keyboard focus outside the editable area; the
-  // tail block below types blindly at the cursor. Programmatic focus is not
-  // enough (in-iframe selection can succeed without the iframe holding
-  // keyboard focus), so re-anchor with a real mouse click.
+  // CTA/link-card insertions above can mutate the DOM and silently kill
+  // keyboard input — verify a probe Enter registers before typing the block.
+  // (Live-validated 2026-06-10: programmatic/CDP focus alone can fail; the
+  // ladder's caret-end click recovers without mid-paragraph displacement.)
   try {
     const frame = typeof self.getAttachedFrame === 'function' ? await self.getAttachedFrame() : null;
-    if (frame) await clickLastEditableLine(page, frame);
+    if (frame) await ensureTailTypingReady(page, frame, (m: string) => self.log(m));
   } catch {
     // best-effort — Enter below still lands at the last known cursor
   }
@@ -67,8 +67,8 @@ async function insertPreviousPostTailBlock(
   await page.keyboard.press('Enter');
   await safeKeyboardType(page, randomPrevHook || previousPostTitle, { delay: 10 });
   await page.keyboard.press('Enter');
-  await safeKeyboardType(page, previousPostTitle, { delay: 10 });
-  await page.keyboard.press('Enter');
+  // User-confirmed format (2026-06-10 live test): hook line → URL line.
+  // The separate title line was removed from the tail block.
   await safeKeyboardType(page, previousPostUrl, { delay: 10 });
   await page.keyboard.press('Enter');
 
@@ -1984,6 +1984,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           const targetHeadingIndex = parseInt(headingMatch[1], 10) - 1; // 1-based → 0-based
           if (i === targetHeadingIndex) {
             self.log(`   → CTA ${i + 1}번 소제목 본문 아래 삽입 중...`);
+            // Heading CTAs type right after this section's rich paste — verify
+            // keyboard input registers before typing (same recovery ladder as
+            // the tail phase).
+            try {
+              const headingCtaFrame = (await self.getAttachedFrame());
+              if (headingCtaFrame) await ensureTailTypingReady(page, headingCtaFrame, (m: string) => self.log(m));
+            } catch {
+              // best-effort
+            }
             for (let k = 0; k < 2; k++) {
               await page.keyboard.press('Enter');
               await self.delay(self.DELAYS.MEDIUM);
@@ -2085,18 +2094,22 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     // [SPEC-STABILITY-2026 diagnostics] Surface what the tail phase actually
     // received — distinguishes "options arrived empty" from "typing failed".
     self.log(`🔎 [TailOptions] 이전글=${resolved.previousPostUrl ? 'O' : 'X'} / CTA ${(resolved.ctas || []).length}개(skip=${resolved.skipCta === true}) / 해시태그 ${(resolved.hashtags || []).length}개`);
-    // Re-anchor editor focus before the tail phase — rich paste and image
-    // steps can steal focus, and every insert below types blindly at the
-    // cursor (divider / CTA / previous-post / hashtags). Release any modifier
-    // stuck from clipboard shortcuts first, then re-anchor with a real mouse
-    // click (programmatic focus alone can succeed in-iframe while keyboard
-    // focus stays on the top document).
+    // Right after rich paste the editor may still be digesting the pasted DOM
+    // and keystrokes silently die (live-reproduced 2026-06-10). Release any
+    // modifier stuck from clipboard shortcuts, then run the keyboard recovery
+    // ladder: settle-wait → probe Enter must register → escalate focus
+    // methods, ending with a caret-END precision click (never mid-paragraph).
     for (const modifier of ['Control', 'Shift', 'Alt']) {
       await page.keyboard.up(modifier).catch(() => undefined);
     }
     try {
       const tailFrame = await self.getAttachedFrame();
-      if (tailFrame) await clickLastEditableLine(page, tailFrame);
+      const tailReady = tailFrame
+        ? await ensureTailTypingReady(page, tailFrame, (m: string) => self.log(m))
+        : false;
+      if (!tailReady) {
+        self.log('   ⚠️ [TailRecovery] 키보드 복구 실패 — 꼬리 입력 누락 가능성, 그대로 진행');
+      }
     } catch {
       // best-effort
     }
@@ -2414,10 +2427,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
     // 6. 이전글 카드 뒤에는 반드시 Enter 5회 후 해시태그를 타이핑한다.
     // Link-card insertion mutates the DOM and can drop keyboard focus —
-    // click-anchor once more so the Enters and hashtag typing land in the body.
+    // verify input registers once more before the Enters and hashtag typing.
     try {
       const hashtagFrame = await self.getAttachedFrame();
-      if (hashtagFrame) await clickLastEditableLine(page, hashtagFrame);
+      if (hashtagFrame) await ensureTailTypingReady(page, hashtagFrame, (m: string) => self.log(m));
     } catch {
       // best-effort
     }
