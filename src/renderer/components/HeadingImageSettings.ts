@@ -283,6 +283,11 @@ export function getHeadingImageMode(): HeadingImageMode {
 export function setHeadingImageMode(mode: HeadingImageMode): void {
   currentHeadingImageMode = mode;
   safeLocalStorageSet('headingImageMode', mode);
+  // Keep the legacy full-auto checkbox key consistent so a stale 'true' can
+  // never override an explicit non-thumbnail mode in shared flows.
+  if (mode !== 'thumbnail-only') {
+    safeLocalStorageSet('thumbnailOnly', 'false');
+  }
   console.log(`[HeadingImageSettings] 이미지 모드 설정: ${mode}`);
 }
 

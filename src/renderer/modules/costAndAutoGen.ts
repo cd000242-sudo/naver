@@ -559,8 +559,10 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
   //    사용자 제보: "썸네일만" 설정인데도 본문 소제목 이미지까지 전량 생성됨.
   //    단일 규칙: thumbnailOnly=true 면 items[] 중 isThumbnail===true 인 항목만 통과시키고
   //    나머지(본문 소제목)는 전량 차단. 통과할 아이템이 없으면 빈 성공 반환.
+  // Explicit option or headingImageMode only — the legacy 'thumbnailOnly'
+  // checkbox key is full-auto-scoped and arrives here via options; reading it
+  // globally let stale values force thumbnail-only in every flow.
   const _thumbnailOnlyFlag = options?.thumbnailOnly === true
-    || localStorage.getItem('thumbnailOnly') === 'true'
     || localStorage.getItem('headingImageMode') === 'thumbnail-only';
   if (_thumbnailOnlyFlag && Array.isArray(options?.items)) {
     const beforeCount = options.items.length;

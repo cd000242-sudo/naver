@@ -398,7 +398,11 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
     if (stopCheck && stopCheck())
         return [];
     const _headingImageMode = typeof localStorage !== 'undefined' ? (localStorage.getItem('headingImageMode') || 'all') : 'all';
-    const _thumbnailOnly = ((typeof localStorage !== 'undefined' && localStorage.getItem('thumbnailOnly') === 'true') ||
+    // headingImageMode is the single source of truth here. The legacy
+    // 'thumbnailOnly' checkbox key is full-auto-only (carried via options) —
+    // reading it globally let a stale 'true' force thumbnail-only publishes
+    // in continuous/multi-account flows the user never configured.
+    const _thumbnailOnly = (options.thumbnailOnly === true ||
         _headingImageMode === 'thumbnail-only');
     if (_headingImageMode === 'none') {
         console.log('[generateImagesForAutomation] 🚫 headingImageMode=none → 이미지 생성 전체 스킵');

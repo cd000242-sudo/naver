@@ -738,7 +738,9 @@ async function executeFullAutoFlow(formData) {
                                     allowText: false
                                 };
                             }).filter(Boolean);
-                            const isThumbnailOnly = formData.thumbnailOnly || localStorage.getItem('thumbnailOnly') === 'true';
+                            // formData carries the live checkbox state for single
+                            // full-auto; headingImageMode covers every other flow.
+                            const isThumbnailOnly = formData.thumbnailOnly === true || localStorage.getItem('headingImageMode') === 'thumbnail-only';
                             if (isThumbnailOnly) {
                                 console.log('[FullAuto] 📷 썸네일만 생성 모드: 소제목 이미지 없이 전용 썸네일만 사용');
                                 return [];
@@ -2154,7 +2156,7 @@ async function generateAIImagesForHeadings(headings, formData) {
         appendLog('🚫 이미지 없이 발행: generateAIImagesForHeadings 호출 차단 (유료 API 비용 방지)');
         return [];
     }
-    const _thumbnailOnly = formData.thumbnailOnly === true || localStorage.getItem('thumbnailOnly') === 'true';
+    const _thumbnailOnly = formData.thumbnailOnly === true || localStorage.getItem('headingImageMode') === 'thumbnail-only';
     const _headingImageMode = localStorage.getItem('headingImageMode') || 'all';
     if (_headingImageMode === 'none') {
         console.log('[AI Images] 🚫 headingImageMode=none → 이미지 생성 전체 스킵');

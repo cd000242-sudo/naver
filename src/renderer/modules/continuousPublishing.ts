@@ -4533,8 +4533,11 @@ async function startContinuousPublishingV2(): Promise<void> {
               // ✅ [2026-03-12 FIX] thumbnailOnly / headingImageMode=none 체크
               // 이 모드들에서는 generateImagesForAutomation을 건너뛰고
               // fullAutoFlow의 전용 썸네일/thumbnailOnly 로직에 위임
-              const _thumbnailOnly = localStorage.getItem('thumbnailOnly') === 'true';
               const _headingImageMode = localStorage.getItem('headingImageMode') || 'all';
+              // Continuous publishing follows headingImageMode only — the
+              // legacy 'thumbnailOnly' checkbox key is full-auto-scoped, and a
+              // stale 'true' here forced thumbnail-only publishes.
+              const _thumbnailOnly = _headingImageMode === 'thumbnail-only';
               
               if (_thumbnailOnly) {
                 appendLog('📷 썸네일만 생성 모드 — 소제목 이미지 생성을 건너뜁니다.');
@@ -4706,8 +4709,9 @@ async function startContinuousPublishingV2(): Promise<void> {
           // ✅ previousPostUrl: 네이버 에디터 "이전글 엮기" UI에 사용
           previousPostUrl: item.previousPostUrl || undefined,
           previousPostTitle: item.previousPostTitle || undefined,
-          // ✅ [2026-03-12 FIX] thumbnailOnly 설정 전달 (localStorage에서 읽어 fullAutoFlow에 전달)
-          thumbnailOnly: localStorage.getItem('thumbnailOnly') === 'true',
+          // Continuous publishing derives thumbnail-only from headingImageMode
+          // (the legacy checkbox key is full-auto-scoped).
+          thumbnailOnly: (localStorage.getItem('headingImageMode') || 'all') === 'thumbnail-only',
         };
 
         // ✅ [2026-03-11 FIX] 발행 실행 직전 최종 중지 체크 — 어떤 발행 모드든 반드시 적용
