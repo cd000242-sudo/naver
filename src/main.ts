@@ -5150,13 +5150,18 @@ ipcMain.handle(
       }
 
       // ✅ [v2.10.228 → v2.10.229] 자동 관련글 링크 삽입 — 발행 직전 본문 끝에 관련글 추가 (체류시간 ↑)
-      //   조건: autoInsertInternalLinks !== false (기본 ON, 사용자가 명시 OFF만 false)
+      //   조건: autoInsertInternalLinks === true (기본 OFF, opt-in — 이전글 엮기와 중복 방지)
       //   동작: published-posts-links.json에 등록된 글 중 키워드 유사도 상위 3개를 conclusion에 plain-text 형식으로 추가
       //   Naver 에디터는 임의 HTML을 받지 않으므로 plain text + naked URL 형식 사용
       //   ⚠️ 관련글 매니저에 등록 글이 0개면 아무 동작 안 함 (silent skip)
       try {
         const _linkConfig = await loadConfig();
-        const autoInsertOn = (_linkConfig as any).autoInsertInternalLinks !== false;
+        // opt-in (default OFF): the previous-post link block already adds one
+        // related-post link as a clean oglink card. Auto-related plain-text
+        // links produced a SECOND link to the same/duplicate post ("추천글"과
+        // "다음글" 같은 링크 — user report 2026-06-11). Users who explicitly
+        // enabled the toggle keep it (=== true passes; undefined is now OFF).
+        const autoInsertOn = (_linkConfig as any).autoInsertInternalLinks === true;
         if (autoInsertOn) {
           const linkTitle = String(content.selectedTitle || (content as any).title || '').trim();
           const linkBody = [content.introduction || '', ...(content.headings || []).map((h: any) => h.content || h.body || ''), content.conclusion || ''].join('\n');

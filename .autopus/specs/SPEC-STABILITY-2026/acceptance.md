@@ -16,6 +16,9 @@
 | S6 | "세팅 안 했는데 썸네일만" (연속/다중계정) | e4a42bbe(레거시 키 격리 + 모드 동기화) | thumbnailOnlyScope.test(2) | 연속발행에서 소제목 이미지 정상 생성 | 코드 완료 · 라이브 대기 |
 | S7 | 수집만 무한, 발행 0 | c9fcebda(대기 상한 + 연속 실패 차단기 + 수집 이미지 존중) | continuousImageFailFast.test(5) | 이미지 2글 연속 실패 시 "⛔ 연속발행 중단" 표출 | 코드 완료 · 라이브 대기 |
 | N1 | blob/migration/recovery IPC 전멸 → localStorage 폭발·글 목록 저장 실패 | 13b29f9a(main.ts 직접 배선) | ipcWiringGuards.test(2) | 콘솔에서 blob:hasMany 에러 소멸 + NUCLEAR CLEANUP 미발생 | 코드 완료 · 라이브 대기 |
+| N9 | 발행 후 글 백업 저장 시 quota 초과 → NUCLEAR CLEANUP 반복 | (근본=R5) normalizeImageForStorage가 previewDataUrl에 base64(data:) 인라인 저장 — 글당 수MB. blob 이관(R5/Phase8)으로 처리 | — | NUCLEAR CLEANUP 빈도 측정 → migration:imageModelV1 dry-run 규모 확인 | 진단 완료 · R5 대기 (NUCLEAR CLEANUP이 글 목록 보존하므로 데이터 손실 없음) |
+| S9 | 추천글/다음글 같은 링크 2개 (CTA 미추가인데) | e(다음 커밋)(자동 관련글 opt-in 전환 — 기본 OFF) | autoRelatedLinkOptIn.test(2) | 풀오토 발행 시 이전글 엮기 링크 1개만 | 코드 완료 · 라이브 대기 |
+| S10 | progress 모달에 이전 발행 이미지 잔존 | (다음 커밋)(reset()에서 clearImages() 호출) | — (DOM 부수효과) | 새 발행 시작 시 이미지 그리드 빈 상태 | 코드 완료 · 라이브 대기 |
 | N2 | 붙여넣기 직후 키보드 입력 사망 (간헐) | bb0f0850(ensureTailTypingReady — 라이브 사다리 복구 실측) | richPasteTailWiring.test | `⌨️ 키보드 입력 확인` 로그 + 꼬리 정상 | 라이브 1회 검증됨 |
 | N3 | 좌표 클릭이 본문 중간에 꼬리 삽입 | bb0f0850(클릭 제거, 끝캐럿 정밀클릭 최후수단화) | richPasteTailWiring(클릭 부재 가드) + 하네스 꼬리위치 검사 | 하네스 "꼬리 위치(본문 뒤)" PASS | 라이브 검증됨 |
 | N7 | 꼬리가 마지막 문단 "앞"에 삽입 (마무리 별도 붙여넣기 시) | (다음 커밋)(root-end 우선 + 센티넬 probe로 문서끝 검증 + 텍스트블록 클릭) | richPasteTailWiring(root-end/sentinel/endsWith 가드) | 하네스 마무리-별도-붙여넣기 시나리오 "꼬리 위치 PASS" 2회 재현 | 라이브 검증됨 |

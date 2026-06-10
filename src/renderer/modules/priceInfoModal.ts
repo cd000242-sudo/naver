@@ -801,10 +801,13 @@ export async function initPriceInfoModal(): Promise<void> {
       console.warn('[priceInfoModal] 네이버 fact-check 토글 로드 실패:', e);
     }
 
-    // ✅ [v2.10.229] 자동 관련글 링크 토글 로드 — 기본 ON (사용자 요청, undefined도 true 취급)
+    // 자동 관련글 링크 토글 로드 — 기본 OFF (opt-in). 이전글 엮기가 이미 관련
+    // 글 링크 1개를 깔끔한 oglink 카드로 달기 때문에, 자동 관련글까지 켜면 같은
+    // 글로 가는 링크가 둘 나온다(추천글/다음글 중복, 2026-06-11 제보). 명시적으로
+    // 켠 사용자만 ON 유지(=== true).
     try {
       const autoLinkEl = document.getElementById('auto-insert-internal-links') as HTMLInputElement | null;
-      if (autoLinkEl) autoLinkEl.checked = (config as any).autoInsertInternalLinks !== false;
+      if (autoLinkEl) autoLinkEl.checked = (config as any).autoInsertInternalLinks === true;
     } catch (e) {
       console.warn('[priceInfoModal] 자동 관련글 링크 토글 로드 실패:', e);
     }

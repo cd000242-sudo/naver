@@ -336,6 +336,11 @@ export class ProgressModal {
 
         // ✅ [2026-02-13] 에러 상세 패널 숨기기
         this.hideErrorDetails();
+
+        // Clear the previous run's generated-image grid — otherwise the last
+        // post's thumbnails linger in the progress modal of the next run
+        // (user report 2026-06-11).
+        this.clearImages();
     }
 
     setProgress(percent: number, stepText?: string) {
