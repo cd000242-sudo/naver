@@ -94,6 +94,11 @@
 - 분할 기준: R8 publishHelpers → R9 editorHelpers → R10 imageHelpers → R11 naverBlogAutomation 발행부 → R12 잔여
 - `insertHorizontalLine()`(naverBlogAutomation.ts:9097) 버튼 미발견 시 silent skip → **━ 텍스트 구분선 폴백** (선 누락 0%)
 - 중복 구현 통합: `smartTypeWithAutoHighlight` (naverBlogAutomation vs editorHelpers 사본) → typingUtils 단일화. 이전글 삽입도 editorHelpers 단일 경로 확인
+- **공유 함수 명시적 입력화 (R13 핵심 — "하나 고치면 다른 곳이 터지는" 구조의 근본 처방)**
+  - 원칙: 2곳 이상에서 호출되는 함수는 localStorage/전역 상태를 내부에서 직접 읽지 않는다. 동작을 바꾸는 입력(모드·provider·플래그)은 **호출자가 명시적으로 전달**하고, 해석은 각 플로우 진입점에서 1회만 수행한다
+  - 실증(6/10): `generateImagesForAutomation`의 숨은 입력(thumbnailOnly/headingImageMode/provider 폴백 localStorage 직독)이 썸네일 오진·이미지 이중 생성·provider 불일치 3건의 공통 뿌리였음
+  - 잔여 감사 대상: generateImagesForAutomation의 provider/headingImageMode 내부 해석, `fullAutoImageSource` vs `globalImageSource` 이원 해석, getSubImageMode 소비처 전수
+  - 가드: **호출자 매트릭스 테스트** — 공유 함수마다 "어떤 플로우가 어떤 입력으로 호출하는가"를 정적으로 잠금 (thumbnailOnlyScope.test에서 시작한 패턴의 일반화)
 - 각 릴리즈: 해당 파일 가드 테스트 + 라이브 스모크
 
 ## Phase 6 — 릴리즈 게이트 자동화 (앱 코드 아님 — Phase 2~5와 병행 가능) — 예상 2~3일
