@@ -2891,7 +2891,10 @@ export function openHeadingImageModal(): void {
     }
 
     // ✅ [2026-03-27] Google 계정 연동 상태 자동 체크 (30초 캐싱)
-    (async () => {
+    // Run ONLY when ImageFX/Flow is the selected engine — this check IPC can
+    // spawn a Chrome window, which must never happen while the user has a
+    // different engine selected (the status row is hidden then anyway).
+    if (currentSource === 'imagefx' || currentSource === 'flow') (async () => {
       const statusEl = document.getElementById('google-account-status');
       const dotEl = document.getElementById('google-account-dot');
       const textEl = document.getElementById('google-account-text');

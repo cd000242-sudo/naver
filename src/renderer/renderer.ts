@@ -8247,6 +8247,14 @@ function addThumbnailTextOptionUI(): void {
     // ✅ [2026-03-10 FIX] thumbnailOnly 체크 상태 localStorage 저장/복원
     const thumbnailOnlyCheckbox = document.getElementById('full-auto-thumbnail-only') as HTMLInputElement;
     if (thumbnailOnlyCheckbox) {
+      // One-time reset: stale 'true' values made the box appear "set by
+      // itself" (user never enabled it). Clear once; afterwards the checkbox
+      // persists normally via the change listener below.
+      if (!localStorage.getItem('thumbnailOnlyResetV2')) {
+        localStorage.setItem('thumbnailOnly', 'false');
+        localStorage.setItem('thumbnailOnlyResetV2', '1');
+        console.log('[Unified] 📷 thumbnailOnly 레거시 값 1회 초기화 (phantom 체크 방지)');
+      }
       // 초기값 복원
       const savedThumbnailOnly = localStorage.getItem('thumbnailOnly') === 'true';
       thumbnailOnlyCheckbox.checked = savedThumbnailOnly;
