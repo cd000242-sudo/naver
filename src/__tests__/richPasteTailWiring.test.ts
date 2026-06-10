@@ -28,27 +28,39 @@ describe('rich paste tail wiring', () => {
     expect(code).not.toContain("replace(/━━━━━━━━━━━━━━━━━━━━━━[^\\n]*\\n?/g, '')");
   });
 
-  it('re-anchors editor focus before typing the previous-post tail block', () => {
+  it('re-anchors editor focus by real mouse click before typing the previous-post tail block', () => {
     const code = read('automation/editorHelpers.ts');
     const tailHelper = code.slice(
       code.indexOf('async function insertPreviousPostTailBlock'),
       code.indexOf('// ── Local utility')
     );
-    expect(tailHelper).toMatch(/focusLastEditableLine\(/);
+    expect(tailHelper).toMatch(/clickLastEditableLine\(/);
   });
 
-  it('re-anchors editor focus before the CTA/hashtag tail phase', () => {
+  it('releases stuck modifiers and click-focuses before the CTA/hashtag tail phase', () => {
     const code = read('automation/editorHelpers.ts');
     const tailPhase = code.slice(
       code.indexOf("self.log('📝 [마지막 단계] CTA 및 해시태그 영역 준비 중...')"),
       code.indexOf('let effectiveCtas = resolved.ctas')
     );
-    expect(tailPhase).toMatch(/focusLastEditableLine\(/);
+    expect(tailPhase).toMatch(/clickLastEditableLine\(/);
+    expect(tailPhase).toMatch(/\['Control', 'Shift', 'Alt'\]/);
+    expect(tailPhase).toMatch(/keyboard\.up\(modifier\)/);
   });
 
-  it('exports focusLastEditableLine from richTextPaste for tail re-anchoring', () => {
+  it('click-focuses again right before the hashtag tail', () => {
+    const code = read('automation/editorHelpers.ts');
+    const beforeHashtags = code.slice(
+      code.indexOf('이전글 카드 뒤에는 반드시 Enter'),
+      code.indexOf('const hashtagGapEnterCount')
+    );
+    expect(beforeHashtags).toMatch(/clickLastEditableLine\(/);
+  });
+
+  it('exports click-based and programmatic focus helpers from richTextPaste', () => {
     const code = read('automation/richTextPaste.ts');
     expect(code).toMatch(/export async function focusLastEditableLine\(/);
+    expect(code).toMatch(/export async function clickLastEditableLine\(/);
   });
 
   it('verifies the server session before reusing an open browser in runPostOnly', () => {

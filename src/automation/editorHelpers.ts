@@ -21,7 +21,7 @@ import { pickBannerHook } from './bannerPhrasePool.js';
 import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
-import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, focusLastEditableLine } from './richTextPaste.js';
+import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, clickLastEditableLine } from './richTextPaste.js';
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 
 const PREVIOUS_POST_SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
@@ -53,10 +53,12 @@ async function insertPreviousPostTailBlock(
 
   self.log(`   📖 [이전글] 리치 본문 뒤 이전글 연결 (${context})`);
   // Rich-paste flows can leave keyboard focus outside the editable area; the
-  // tail block below types blindly at the cursor, so re-anchor focus first.
+  // tail block below types blindly at the cursor. Programmatic focus is not
+  // enough (in-iframe selection can succeed without the iframe holding
+  // keyboard focus), so re-anchor with a real mouse click.
   try {
     const frame = typeof self.getAttachedFrame === 'function' ? await self.getAttachedFrame() : null;
-    if (frame) await focusLastEditableLine(page, frame);
+    if (frame) await clickLastEditableLine(page, frame);
   } catch {
     // best-effort — Enter below still lands at the last known cursor
   }
@@ -2085,10 +2087,16 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     self.log(`🔎 [TailOptions] 이전글=${resolved.previousPostUrl ? 'O' : 'X'} / CTA ${(resolved.ctas || []).length}개(skip=${resolved.skipCta === true}) / 해시태그 ${(resolved.hashtags || []).length}개`);
     // Re-anchor editor focus before the tail phase — rich paste and image
     // steps can steal focus, and every insert below types blindly at the
-    // cursor (divider / CTA / previous-post / hashtags).
+    // cursor (divider / CTA / previous-post / hashtags). Release any modifier
+    // stuck from clipboard shortcuts first, then re-anchor with a real mouse
+    // click (programmatic focus alone can succeed in-iframe while keyboard
+    // focus stays on the top document).
+    for (const modifier of ['Control', 'Shift', 'Alt']) {
+      await page.keyboard.up(modifier).catch(() => undefined);
+    }
     try {
       const tailFrame = await self.getAttachedFrame();
-      if (tailFrame) await focusLastEditableLine(page, tailFrame);
+      if (tailFrame) await clickLastEditableLine(page, tailFrame);
     } catch {
       // best-effort
     }
@@ -2405,6 +2413,14 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     await self.delay(200);
 
     // 6. 이전글 카드 뒤에는 반드시 Enter 5회 후 해시태그를 타이핑한다.
+    // Link-card insertion mutates the DOM and can drop keyboard focus —
+    // click-anchor once more so the Enters and hashtag typing land in the body.
+    try {
+      const hashtagFrame = await self.getAttachedFrame();
+      if (hashtagFrame) await clickLastEditableLine(page, hashtagFrame);
+    } catch {
+      // best-effort
+    }
     const hashtagGapEnterCount = previousPostTailInserted ? 5 : 3;
     self.log(`   → Enter ${hashtagGapEnterCount}회 입력 (해시태그 영역 준비)`);
     for (let i = 0; i < hashtagGapEnterCount; i++) {

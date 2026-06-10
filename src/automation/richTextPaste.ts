@@ -1337,6 +1337,37 @@ export async function focusLastEditableLine(page: Page, frame: Frame): Promise<v
   await frame.click('body').catch(() => undefined);
 }
 
+export async function clickLastEditableLine(page: Page, frame: Frame): Promise<boolean> {
+  // Click-based focus re-anchor. Programmatic focus()/selection inside the
+  // editor iframe can report success while the iframe itself never gains
+  // keyboard focus at the top document — page.keyboard input then silently
+  // goes nowhere. A real mouse click restores the full focus chain, which is
+  // what the legacy typing flow implicitly relied on.
+  const handles = await frame
+    .$$('.se-main-container .se-text-paragraph, .se-section-text, [contenteditable="true"]')
+    .catch(() => []);
+
+  for (let i = handles.length - 1; i >= 0; i -= 1) {
+    const handle = handles[i];
+    await handle
+      .evaluate((el: Element) => el.scrollIntoView({ block: 'center', inline: 'nearest' }))
+      .catch(() => undefined);
+    const box = await handle.boundingBox().catch(() => null);
+    if (!box || box.width <= 0 || box.height <= 0 || box.x < -1000) continue;
+
+    const clickX = box.x + Math.min(Math.max(8, box.width / 2), Math.max(8, box.width - 4));
+    const clickY = box.y + Math.min(Math.max(6, box.height / 2), Math.max(6, box.height - 4));
+    await page.mouse.click(clickX, clickY).catch(() => undefined);
+    await page.keyboard.down('Control').catch(() => undefined);
+    await page.keyboard.press('End').catch(() => undefined);
+    await page.keyboard.up('Control').catch(() => undefined);
+    return true;
+  }
+
+  await focusLastEditableLine(page, frame).catch(() => undefined);
+  return false;
+}
+
 export async function pasteRichHtmlAtCursor(
   page: Page,
   frame: Frame,
