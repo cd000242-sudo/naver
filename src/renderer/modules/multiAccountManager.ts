@@ -489,7 +489,9 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
         ? (_displayCount <= 1
             ? FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS
             : Math.min(FLOW_AUTOMATION_BATCH_MAX_TIMEOUT_MS, Math.max(FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS, 120000 + (_displayCount * FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS))))
-        : Math.min(45 * 60 * 1000, Math.max(15 * 60 * 1000, 180000 + (_displayCount * perItemBudgetMs)));
+        // Hard 15-minute batch ceiling — the old 45-minute ceiling let a dead
+        // provider hold the whole continuous run hostage.
+        : Math.min(15 * 60 * 1000, Math.max(5 * 60 * 1000, 60000 + (_displayCount * perItemBudgetMs)));
     const batchStartTime = Date.now();
     const checkBatchTimeout = () => {
         const elapsed = Date.now() - batchStartTime;
@@ -572,7 +574,10 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
                     throw lastError;
                 }
                 if (attempt < MAX_RETRIES) {
-                    const waitTime = Math.min(isUiAutomationImageProvider ? 45000 : 20000, (isUiAutomationImageProvider ? 15000 : 5000) * attempt);
+                    // Retry waits capped low — the previous 15-45s escalations,
+                    // multiplied by headings × attempts, made continuous runs
+                    // look stuck on "이미지 수집" for tens of minutes.
+                    const waitTime = Math.min(isUiAutomationImageProvider ? 15000 : 10000, (isUiAutomationImageProvider ? 5000 : 3000) * attempt);
                     onProgress?.(`⚠️ [${itemIndex + 1}/${_displayCount}] 이미지 생성 실패 (${attempt}/${MAX_RETRIES}), ${waitTime / 1000}초 후 재시도...`);
                     await new Promise(resolve => setTimeout(resolve, waitTime));
                 }
@@ -580,8 +585,11 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
         }
         if (!itemSucceeded) {
             const headingName = String(item?.heading || `image-${itemIndex + 1}`).substring(0, 30);
-            throw new Error(`[${itemIndex + 1}/${_displayCount}] "${headingName}" image generation failed: ${lastError?.message || 'empty image generation result'}`);
-            onProgress?.(`⚠️ [${itemIndex + 1}/${_displayCount}] 이미지 생성 실패 - 다음 항목으로 진행`);
+            const failCause = lastError?.message || 'empty image generation result';
+            // Fail fast WITH a visible reason (the old unreachable onProgress
+            // after throw meant users never saw why the run stalled).
+            onProgress?.(`❌ [${itemIndex + 1}/${_displayCount}] "${headingName}" 이미지 생성 최종 실패 — 이미지 단계 중단: ${String(failCause).substring(0, 160)}`);
+            throw new Error(`[${itemIndex + 1}/${_displayCount}] "${headingName}" image generation failed: ${failCause}`);
         }
     }
     if (sequentialImages.length > 0) {

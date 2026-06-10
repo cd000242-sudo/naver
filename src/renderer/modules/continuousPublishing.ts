@@ -4517,7 +4517,12 @@ async function startContinuousPublishingV2(): Promise<void> {
             // ✅ [2026-01-28] 이미지 설정 전역 적용 (localStorage에서 읽음)
             // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화 — 키 충돌 mismatch 해결
             const scSubImageMode = getSubImageMode();
-            const isCollectedMode = item.contentMode === 'affiliate' && scSubImageMode === 'collected';
+            // If the post already carries collected product images, honor them
+            // even when the mode key normalized away from 'collected' — falling
+            // through to AI generation here caused slow retry grinds instead of
+            // using the images we already have.
+            const hasPreCollectedImages = ((finalStructuredContent as any)?.collectedImages?.length ?? 0) > 0;
+            const isCollectedMode = item.contentMode === 'affiliate' && (scSubImageMode === 'collected' || hasPreCollectedImages);
 
             // ✅ [2026-03-07 FIX] 쇼핑커넥트 수집 이미지 모드일 때 AI 이미지 생성 완전 스킵
             // executeFullAutoFlow의 isCollectedMode 로직(L332-440)이 수집 이미지를 직접 처리함
@@ -4608,9 +4613,24 @@ async function startContinuousPublishingV2(): Promise<void> {
             } catch (e) {
               console.warn('[Continuous] ImageManager 동기화 실패:', e);
             }
+            // Image stage succeeded — reset the consecutive-failure breaker.
+            (window as any).__continuousImgFailStreak = 0;
 
           } catch (imgErr) {
             console.error('[Continuous] 이미지 생성 실패:', imgErr);
+            // Circuit breaker: two posts failing image generation in a row
+            // means a persistent cause (provider/session/quota) — stop the run
+            // loudly instead of silently grinding every queued post.
+            const imgFailStreak = (((window as any).__continuousImgFailStreak || 0) + 1);
+            (window as any).__continuousImgFailStreak = imgFailStreak;
+            if (imgFailStreak >= 2) {
+              (window as any).stopFullAutoPublish = true;
+              (window as any).__continuousImgFailStreak = 0;
+              appendLog(`⛔ 이미지 생성이 ${imgFailStreak}개 글 연속 실패 — 같은 원인 반복으로 판단해 연속발행을 중단합니다. 원인: ${(imgErr as Error).message?.substring(0, 160)}`);
+              updateContinuousProgressModal({
+                log: '⛔ 이미지 생성 연속 실패 — 연속발행 중단 (원인 해결 후 다시 시작하세요)'
+              });
+            }
             // v2.7.5: OPENAI_ORG_VERIFY_REQUIRED 태그 감지 → 친절 안내 모달
             const errMsgRaw = (imgErr as Error).message || '';
             if (errMsgRaw.includes('OPENAI_ORG_VERIFY_REQUIRED')) {
