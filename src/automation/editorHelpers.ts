@@ -2080,6 +2080,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
     // 3. 마지막 본문 끝에서 Enter 2회 (CTA와 본문 사이 간격)
     self.log('📝 [마지막 단계] CTA 및 해시태그 영역 준비 중...');
+    // [SPEC-STABILITY-2026 diagnostics] Surface what the tail phase actually
+    // received — distinguishes "options arrived empty" from "typing failed".
+    self.log(`🔎 [TailOptions] 이전글=${resolved.previousPostUrl ? 'O' : 'X'} / CTA ${(resolved.ctas || []).length}개(skip=${resolved.skipCta === true}) / 해시태그 ${(resolved.hashtags || []).length}개`);
     // Re-anchor editor focus before the tail phase — rich paste and image
     // steps can steal focus, and every insert below types blindly at the
     // cursor (divider / CTA / previous-post / hashtags).
