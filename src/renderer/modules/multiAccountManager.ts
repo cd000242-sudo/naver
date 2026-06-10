@@ -379,6 +379,21 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
     }
     const includeThumbnailText = options.thumbnailTextInclude ?? options.allowThumbnailText ?? false;
     console.log(`[generateImagesForAutomation] 🖼️ allowThumbnailText = ${includeThumbnailText}, provider = ${provider}`);
+    // [SPEC-STABILITY-2026 R4 diagnostics] Tag every generation run so
+    // overlapping runs for the same post are visible in user logs, and record
+    // the caller so a duplicate trigger can be pinned from one reproduction.
+    const runId = Math.random().toString(36).slice(2, 6);
+    try {
+        const callerLine = (new Error().stack || '')
+            .split('\n')
+            .slice(2, 5)
+            .map((line) => line.trim())
+            .join(' <- ');
+        console.log(`[generateImagesForAutomation] ▶ run #${runId} provider=${provider} post="${String(postTitle || '').substring(0, 30)}" caller: ${callerLine}`);
+    }
+    catch {
+        // stack capture is diagnostic only
+    }
     const { stopCheck, onProgress } = options;
     if (stopCheck && stopCheck())
         return [];
@@ -457,7 +472,7 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
     }
     const itemsForGeneration = getSequentialImageItemsForMode(items, _headingImageMode);
     const _displayCount = itemsForGeneration.length;
-    onProgress?.(`🚀 이미지 생성 시작: ${_displayCount}개 (Provider: ${provider})`);
+    onProgress?.(`🚀 이미지 생성 시작: ${_displayCount}개 (Provider: ${provider}, run #${runId})`);
     onProgress?.('🧵 안정성을 위해 이미지를 1개씩 순차 생성합니다.');
     if (_displayCount === 0) {
         console.log(`[generateImagesForAutomation] headingImageMode="${_headingImageMode}" → 생성 대상 없음`);
@@ -501,7 +516,7 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
                 }
                 const elapsedSec = Math.round((Date.now() - batchStartTime) / 1000);
                 const headingName = String(item?.heading || `${itemIndex + 1}번`).substring(0, 30);
-                onProgress?.(`🎨 [${itemIndex + 1}/${_displayCount}] ${provider} 엔진으로 순차 생성 중... (${elapsedSec}초 경과)`);
+                onProgress?.(`🎨 [${itemIndex + 1}/${_displayCount}][run #${runId}] ${provider} 엔진으로 순차 생성 중... (${elapsedSec}초 경과)`);
                 const result = await generateImagesWithCostSafety({
                     provider: provider,
                     items: [item],
@@ -529,7 +544,7 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
                     }));
                     sequentialImages.push(...normalizedImages);
                     itemSucceeded = true;
-                    onProgress?.(`✅ [${itemIndex + 1}/${_displayCount}] 이미지 생성 완료: ${headingName}...`);
+                    onProgress?.(`✅ [${itemIndex + 1}/${_displayCount}][run #${runId}] 이미지 생성 완료: ${headingName}...`);
                     continue;
                 }
                 const detailMsg = result?.message ||

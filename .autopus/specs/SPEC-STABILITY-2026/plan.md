@@ -65,6 +65,8 @@
 - 가드: 빈 결과 경로 단위 테스트(에러 전파), 재시도 시 키 로테이션 호출 검증
 
 ### R4: 반자동 이미지 뒤섞임 (S4) — 예상 1~2일
+
+> **2026-06-10 라이브 증거 확보**: 같은 글(소제목 7개)에 dropshot 런과 openai-image 런이 ~53초 간격으로 **동시 진행**되는 로그 실측 (각자 [N/7] 카운터로 14장 생성 — 비용 2배 + 매핑 오염 후보). `generateImagesForAutomation`(multiAccountManager.ts:361)에 중복 실행 가드 없음 + 호출 경로 다수(연속발행 직접 / aiFallbackFn 주입 / 풀오토) + provider 해석 소스 2개(fullAutoImageSource vs globalImageSource). 진단 계측(run #태그 + 호출자 스택 기록) 적용 — 다음 재현 로그로 이중 트리거 경로 확정 후 단일 비행(single-flight) 가드 설계.
 - 원인: heading 문자열 키 변이(이모지 배지/넘버링 strip 불일치) 시 위치 인덱스 리매핑 폴백이 엉뚱한 소제목에 배정
   - `imageManagerCore.ts:224` (인덱스 리매핑) · `publishingHandlers.ts:1916-1935` (발행 직전 sync) · `naverBlogAutomation.ts:8022-8100` (insertImagesAtHeadings)
 - 수정: ① 이미지 메타에 `headingIndex` + 정규화 키 **동시 저장·동시 검증** ② 발행 직전 sync에서 매칭 실패 항목은 **폴백 금지 — 스킵 + 경고 로그** ③ 삽입 직전 textContent 일치 재확인
