@@ -279,12 +279,26 @@ function updateGeneratedImagePreview(data: { image: any; index: number; total: n
       modal.clearImages();
     }
 
+    // [2026-06-11 FIX] Raw Windows paths (C:\...) are not valid <img> srcs —
+    // the management grid converts via toFileUrlMaybe but the modal previews
+    // didn't, so live previews stayed blank while the grid worked. Prefer the
+    // always-renderable data URL, else convert the local path.
+    const resolvePreviewSrc = (img: any): string => {
+      const preview = String(img?.previewDataUrl || '');
+      if (preview.startsWith('data:')) return preview;
+      const raw = String(img?.filePath || img?.url || preview || '').trim();
+      if (!raw) return '';
+      try { return toFileUrlMaybe(raw); } catch { return raw; }
+    };
+    const displaySrc = resolvePreviewSrc(image);
+
     if (modal && typeof modal.updateSingleImage === 'function') {
-      const imgSrc = image.filePath || image.url || image.previewDataUrl || '';
-      if (imgSrc) {
+      if (displaySrc) {
+        // filePath stays empty on purpose: ProgressModal's source resolution
+        // prefers filePath and would pick the raw Windows path again.
         modal.updateSingleImage(index, {
-          url: imgSrc,
-          filePath: image.filePath || '',
+          url: displaySrc,
+          filePath: '',
           heading: image.heading || `이미지 ${index + 1}`,
         }, total);
       }
@@ -300,7 +314,7 @@ function updateGeneratedImagePreview(data: { image: any; index: number; total: n
     const cpMain = document.getElementById('cp-image-main') as HTMLImageElement | null;
     if (cpWrap && cpGrid && cpMain) {
       if (index === 0 && total > 1) cpGrid.innerHTML = '';
-      const cpSrc = image.filePath || image.url || image.previewDataUrl || '';
+      const cpSrc = displaySrc;
       if (cpSrc) {
         const thumb = document.createElement('img');
         thumb.src = cpSrc;
