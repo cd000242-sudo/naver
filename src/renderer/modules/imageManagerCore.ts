@@ -540,9 +540,22 @@ const ImageManager = {
       });
     }
     // ✅ [2026-02-27 FIX] 썸네일 이미지도 generatedImages에 포함 (UI 표시용)
-    const thumbImg = this.getImage('🖼️ 썸네일');
-    if (thumbImg && !generatedImages.some((g: any) => g.heading === '🖼️ 썸네일')) {
-      generatedImages.unshift({ ...thumbImg });
+    // [SPEC-STABILITY-2026 R5] Key fallback: full-auto paths register the
+    // thumbnail under '썸네일' or only with an isThumbnail flag — a single
+    // missed key left the grid's first slot empty (S5).
+    let thumbImg = this.getImage('🖼️ 썸네일') || this.getImage('썸네일');
+    if (!thumbImg) {
+      let flagged: any = null;
+      this.imageMap.forEach((images: any[]) => {
+        if (!flagged) flagged = (images || []).find((img: any) => img?.isThumbnail === true) || null;
+      });
+      thumbImg = flagged;
+    }
+    const hasThumbAlready = generatedImages.some(
+      (g: any) => g.heading === '🖼️ 썸네일' || g.isThumbnail === true
+    );
+    if (thumbImg && !hasThumbAlready) {
+      generatedImages.unshift({ ...thumbImg, heading: '🖼️ 썸네일', isThumbnail: true });
     }
     console.log('[ImageManager] generatedImages 동기화:', generatedImages.length, '개');
   },
@@ -853,13 +866,19 @@ const ImageManager = {
       const imageKey = escapeHtml(String(getStableImageKey(image) || ''));
       const imageRaw = image.url || image.filePath || image.previewDataUrl || '';
       const imageUrl = toFileUrlMaybe(String(imageRaw || '').trim());
+      // [R5] One alternate source before the failure placeholder — web URLs
+      // can 403/CORS while the local filePath (or vice versa) still loads.
+      const altRaw = (image.filePath && image.url && image.filePath !== image.url)
+        ? (imageRaw === image.url ? image.filePath : image.url)
+        : '';
+      const altUrl = altRaw ? escapeHtml(toFileUrlMaybe(String(altRaw).trim())) : '';
       return `
         <div class="generated-image-item" data-image-index="${index}" data-heading-title="${heading}" data-image-key="${imageKey}" style="position: relative; background: var(--bg-secondary); border-radius: 12px; overflow: hidden; border: 2px solid var(--border-light); cursor: pointer; transition: all 0.3s ease; max-width: 220px; box-shadow: none;">
           <div style="position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden;">
-            <img src="${imageUrl}" alt="${heading}" 
-                 class="ken-burns-media"
+            <img src="${imageUrl}" alt="${heading}"
+                 class="ken-burns-media" data-alt-src="${altUrl}"
                  style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
-                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%232d2d2d%22/%3E%3Ctext x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23666%22 font-size=%228%22%3E이미지 로드 실패%3C/text%3E%3C/svg%3E';">
+                 onerror="if(this.dataset.altSrc&&!this.dataset.altTried){this.dataset.altTried='1';this.src=this.dataset.altSrc;}else{this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%232d2d2d%22/%3E%3Ctext x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23666%22 font-size=%228%22%3E이미지 로드 실패%3C/text%3E%3C/svg%3E';}">
             <!-- 호버 오버레이 (6개 버튼) -->
             <div class="image-item-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.75)); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 8px; box-sizing: border-box;">
               <button type="button" class="view-image-btn" data-image-url="${imageUrl}" data-image-index="${index}" style="width: 100%; padding: 5px 8px; background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; font-weight: 600;">🔍 크게 보기</button>

@@ -588,8 +588,37 @@ async function executeFullAutoFlow(formData) {
                         });
                     }
                 });
+                // [SPEC-STABILITY-2026 R5] The thumbnail was explicitly skipped
+                // above, so the image-management grid's first slot stayed empty
+                // in full-auto (S5). Register it under the dedicated key, and
+                // persist web URLs locally first — remote srcs 403/CORS in the
+                // grid.
+                const thumbEntry = finalImages.find((img) => img.isThumbnail);
+                if (thumbEntry) {
+                    let thumbPath = String(thumbEntry.filePath || thumbEntry.url || '');
+                    if (/^https?:\/\//i.test(thumbPath)) {
+                        try {
+                            const saved = await (window as any).api?.downloadAndSaveImage?.(
+                                thumbPath, '🖼️ 썸네일', structuredContent.selectedTitle || ''
+                            );
+                            if (saved?.success && saved.filePath) {
+                                thumbPath = saved.filePath;
+                                console.log(`[FullAuto] 🖼️ 썸네일 로컬 저장 완료: ${thumbPath}`);
+                            }
+                        } catch (thumbSaveErr) {
+                            console.warn('[FullAuto] 썸네일 로컬 저장 실패 (웹 URL 유지):', (thumbSaveErr as Error)?.message);
+                        }
+                    }
+                    ImageManager.setImage('🖼️ 썸네일', {
+                        filePath: thumbPath,
+                        url: thumbEntry.url || thumbPath,
+                        provider: thumbEntry.provider || 'collected',
+                        heading: '🖼️ 썸네일',
+                        isThumbnail: true
+                    });
+                }
                 ImageManager.syncGeneratedImagesArray();
-                console.log(`[FullAuto] ImageManager에 수집 이미지 ${finalImages.length}개 등록 완료`);
+                console.log(`[FullAuto] ImageManager에 수집 이미지 ${finalImages.length}개 등록 완료 (썸네일 ${thumbEntry ? '포함' : '없음'})`);
             }
         }
         if (isCollectedMode && finalImages.length === 0) {
