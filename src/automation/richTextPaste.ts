@@ -1491,34 +1491,80 @@ export async function ensureTailTypingReady(
     const after = await editableRootText(frame);
     const registered = after.includes(SENTINEL) && after.length > before.length;
     const atEnd = after.endsWith(SENTINEL);
-    // (c) the sentinel must sit INSIDE the component model. Text typed at the
-    // editable-root level passes the DOM checks above but the publish
-    // serializer drops it (2026-06-11 live: whole tail lost). Depth >= 3
-    // keeps the check working even if the editor renames its classes.
+    // (c) the sentinel must sit INSIDE the document model — root-level text
+    // renders in the editor but the publish serializer drops it (2026-06-11
+    // live: whole tail lost). SELF-CALIBRATING: compare the sentinel's DOM
+    // depth against real BODY text depth. A fixed `.se-component`/depth>=3
+    // rule false-negatived the redesigned editor (live 2026-06-11 round 2:
+    // every strategy "위치오류", typing fell back to an orphan caret, tail
+    // dropped AGAIN while the probe's own sentinels survived publish).
     let inModel = false;
     if (registered) {
       inModel = await frame.evaluate((sentinel) => {
         const root = document.querySelector('[contenteditable="true"]');
         if (!root) return false;
+        const depthOf = (el: HTMLElement | null): number => {
+          let depth = 0;
+          let cur: HTMLElement | null = el;
+          while (cur && cur !== root) { depth += 1; cur = cur.parentElement; }
+          return depth;
+        };
         const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        let sentinelEl: HTMLElement | null = null;
+        let bodyDepthMax = 0;
         let node: Node | null;
         while ((node = walker.nextNode())) {
-          if ((node.textContent || '').includes(sentinel)) {
-            const el = node.parentElement;
-            if (!el) return false;
-            if (el.closest('.se-component')) return true;
-            let depth = 0;
-            let cur: HTMLElement | null = el;
-            while (cur && cur !== root) { depth += 1; cur = cur.parentElement; }
-            return depth >= 3;
+          const txt = node.textContent || '';
+          if (txt.includes(sentinel)) {
+            sentinelEl = node.parentElement;
+            continue;
+          }
+          if (txt.trim().length >= 4 && node.parentElement) {
+            const d = depthOf(node.parentElement);
+            if (d > bodyDepthMax) bodyDepthMax = d;
           }
         }
-        return false;
+        if (!sentinelEl) return false;
+        if (sentinelEl.closest('.se-component')) return true;
+        const sentinelDepth = depthOf(sentinelEl);
+        // As deep as the real body text (−1 tolerance for span nesting) =
+        // same structural layer the serializer keeps.
+        return bodyDepthMax > 0
+          ? sentinelDepth >= Math.max(1, bodyDepthMax - 1)
+          : sentinelDepth >= 3;
       }, SENTINEL).catch(() => false);
     }
     if (after.includes(SENTINEL)) {
       await page.keyboard.press('Backspace').catch(() => undefined);
       await new Promise((resolve) => setTimeout(resolve, 150));
+      // Cleanup verification — live 2026-06-11: two probe sentinels survived
+      // into the PUBLISHED post. If Backspace missed, select the sentinel
+      // itself and delete through a real key event (model-safe).
+      for (let cleanupTry = 0; cleanupTry < 2; cleanupTry += 1) {
+        const residue = await editableRootText(frame);
+        if (!residue.includes(SENTINEL)) break;
+        await frame.evaluate((sentinel) => {
+          const root = document.querySelector('[contenteditable="true"]');
+          if (!root) return;
+          const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+          let node: Node | null;
+          while ((node = walker.nextNode())) {
+            const idx = (node.textContent || '').lastIndexOf(sentinel);
+            if (idx >= 0) {
+              const selection = window.getSelection();
+              if (!selection) return;
+              const range = document.createRange();
+              range.setStart(node, idx);
+              range.setEnd(node, idx + sentinel.length);
+              selection.removeAllRanges();
+              selection.addRange(range);
+              return;
+            }
+          }
+        }, SENTINEL).catch(() => undefined);
+        await page.keyboard.press('Backspace').catch(() => undefined);
+        await new Promise((resolve) => setTimeout(resolve, 150));
+      }
     }
     return registered && atEnd && inModel;
   };
@@ -1532,6 +1578,10 @@ export async function ensureTailTypingReady(
     }
     log?.(`   ⚠️ 키보드 미반응/위치오류 — 다음 단계 (${strategy.name})`);
   }
+  // Ladder exhausted (callers proceed best-effort): leave the caret at the
+  // structurally BEST position, not wherever the last fallback dropped it —
+  // live 2026-06-11: the final fallback's orphan caret ate the whole tail.
+  await focusRootEnd();
   return false;
 }
 

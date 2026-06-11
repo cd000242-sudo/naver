@@ -106,6 +106,27 @@ describe('rich paste tail wiring', () => {
     expect(code).toMatch(/registered && atEnd && inModel/);
   });
 
+  it('calibrates the in-model depth against real body text (no fixed depth threshold)', () => {
+    // 2026-06-11 round 2: a fixed depth>=3 rule false-negatived the redesigned
+    // editor — every strategy failed, typing fell to an orphan caret, and the
+    // tail dropped while the probe's own sentinels survived publish.
+    const code = read('automation/richTextPaste.ts');
+    expect(code).toMatch(/bodyDepthMax/);
+    expect(code).toMatch(/sentinelDepth >= Math\.max\(1, bodyDepthMax - 1\)/);
+  });
+
+  it('re-anchors to the best caret when the ladder is exhausted', () => {
+    const code = read('automation/richTextPaste.ts');
+    const tail = code.slice(code.indexOf('// Ladder exhausted'));
+    expect(tail).toMatch(/await focusRootEnd\(\);\s*\n\s*return false;/);
+  });
+
+  it('verifies sentinel cleanup and force-deletes residue (published ￬￬ incident)', () => {
+    const code = read('automation/richTextPaste.ts');
+    expect(code).toMatch(/cleanupTry/);
+    expect(code).toMatch(/lastIndexOf\(sentinel\)/);
+  });
+
   it('counts general CTAs in the pre-publish link-card expectation', () => {
     const code = read('automation/editorHelpers.ts');
     const stash = code.slice(
