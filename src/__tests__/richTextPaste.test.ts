@@ -377,3 +377,32 @@ describe('mobile line-break readability (2026-06-11)', () => {
     expect(result.html).not.toContain('---');
   });
 });
+
+// 2026-06-12 라이브 발행물: 표 본체는 정상 렌더링됐지만 표 뒤에 LLM이 붙인
+// 단독 콜아웃 행("| 판단 | ... |", 헤더/구분자 없음)이 원문 파이프 그대로
+// 노출. 파이프 문자는 어떤 경우에도 발행물에 노출되면 안 된다.
+describe('orphan pipe-row handling (2026-06-12)', () => {
+  it('renders a standalone pipe row as a readable sentence (no raw pipes)', () => {
+    const result = buildMobileRichHtml(
+      '| 판단 | 재질과 오염 정도가 맞을 때만 사용 |',
+      { highlight: false }
+    );
+    expect(result.plainText).not.toContain('|');
+    expect(result.plainText.replace(/\s+/g, ' ')).toContain('판단 — 재질과 오염 정도가 맞을 때만 사용');
+  });
+
+  it('drops a stray divider-only row silently', () => {
+    const result = buildMobileRichHtml('본문 문장입니다.\n\n| --- | --- |\n\n다음 문장입니다.', { highlight: false });
+    expect(result.plainText).not.toContain('---');
+    expect(result.plainText).not.toContain('|');
+  });
+
+  it('does not affect real tables (header + divider)', () => {
+    const result = buildMobileRichHtml(
+      ['| 항목 | 정리 |', '| --- | --- |', '| 대상 | 세탁기 |'].join('\n'),
+      { highlight: false }
+    );
+    expect(result.tableCount).toBe(1);
+    expect(result.html).toContain('<table');
+  });
+});

@@ -1129,6 +1129,33 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
       }
     }
 
+    // [2026-06-12] Orphan pipe rows: LLMs sometimes append a standalone
+    // callout row ("| 판단 | ... |", no header/divider) after a table. The
+    // table detector rightly rejects it, but raw pipe characters must never
+    // reach the published post (live screenshot) — strip the cells into a
+    // readable sentence, and silently drop stray divider-only rows.
+    const isPipeOnlyBlock = lines.every((line) => /^\s*\|.*\|\s*$/.test(line));
+    if (isPipeOnlyBlock) {
+      const contentRows = lines.filter((line) => !isTableDivider(line));
+      for (const row of contentRows) {
+        const cells = splitTableCells(row).filter(Boolean);
+        if (cells.length === 0) continue;
+        const sentence = cells.length >= 2
+          ? `${cells[0]} — ${cells.slice(1).join(' · ')}`
+          : cells[0];
+        for (const chunk of buildReadableParagraphs(sentence, maxChunkChars)) {
+          nodes.push({
+            type: 'paragraph',
+            text: chunk,
+            plain: stripInlineMarkdown(chunk),
+            score: scoreImportantSentence(chunk),
+            sectionIndex: currentSectionIndex,
+          });
+        }
+      }
+      continue;
+    }
+
     if (isReadableListBlock(lines)) {
       const list = readableListBlockToHtml(lines, terms, highlightTheme);
       nodes.push({ type: 'list', html: list.html, plain: list.plain, count: lines.length });
