@@ -490,6 +490,19 @@ export function abortImageGenerationSession(sessionId: string): void {
  * ✅ [2026-02-03 FIX] 세션 기반 AbortController + global503Count
  * ✅ [2026-02-13 SPEED] onImageGenerated 콜백 + 참조 이미지 캐싱 + 병렬 3개
  */
+// [SPEC-STABILITY-2026 R3] Structured failure cause (S3).
+// Terminal failure paths used to return null per item and the batch returned
+// a bare empty array — the renderer could only say "이미지가 비어있습니다".
+// Every terminal failure now records WHY, and a total failure throws it up.
+export interface NanoFailureInfo { code: string; detail: string; }
+let lastNanoFailure: NanoFailureInfo | null = null;
+function recordNanoFailure(code: string, detail: string): void {
+  lastNanoFailure = { code, detail: String(detail || '').slice(0, 300) };
+}
+export function getLastNanoBananaFailure(): NanoFailureInfo | null {
+  return lastNanoFailure;
+}
+
 export async function generateWithNanoBananaPro(
   items: ImageRequestItem[],
   postTitle?: string,
@@ -535,6 +548,7 @@ export async function generateWithNanoBananaPro(
   abortControllerMap.set(sessionId, sessionAbortController);
   currentSessionId = sessionId;
   console.log(`[NanoBananaPro] 🆔 새 세션 시작: ${sessionId}`);
+  lastNanoFailure = null; // [R3] cause is per-batch — stale reasons must not leak
 
 
 
@@ -844,6 +858,16 @@ export async function generateWithNanoBananaPro(
     // 최종 성공률 로깅
     const finalSuccessRate = Math.round((results.length / items.length) * 100);
     console.log(`[NanoBananaPro] 🎯 최종 성공률: ${finalSuccessRate}% (${results.length}/${items.length})`);
+
+    // [SPEC-STABILITY-2026 R3] Total failure must carry its cause upward —
+    // a bare empty array left the renderer saying "이미지가 비어있습니다" with
+    // no reason (S3). The IPC layer turns this throw into the user log, and
+    // for shopping-connect the caller's catch enables the collected-image
+    // fallback as designed.
+    const batchFailure = getLastNanoBananaFailure();
+    if (results.length === 0 && items.length > 0 && batchFailure) {
+      throw new Error(`NANO_${batchFailure.code}:이미지 생성 0/${items.length} — 원인: ${batchFailure.code} (${batchFailure.detail})`);
+    }
 
     if (results.length > 0) {
       config.geminiImageDailyCount = (config.geminiImageDailyCount || 0) + results.length;
@@ -1691,12 +1715,14 @@ async function generateSingleImageWithGemini(
       if (isGeminiImageBillingRequiredMessage(`${errorMessage}\n${responseBody}`)) {
         console.error('[NanoBananaPro] Gemini prepaid image credits are depleted; stopping retries.');
         sendImageLog('Gemini image prepaid credits are depleted. Please add credits in Google AI Studio or choose another image engine.');
+        recordNanoFailure('BILLING_REQUIRED', errorMessage);
         throw createGeminiImageBillingRequiredError(errorMessage);
       }
 
       if (isLimitZero || isPaidOnly) {
         console.error(`[NanoBananaPro] 🚫 무료 할당량 0 또는 유료 전용 — 재시도 불가`);
-        sendImageLog(`🚫 나노바나나/Imagen은 Google이 무료 사용을 차단했습니다. 이미지 엔진을 ImageFX로 변경하세요 (무료). 참고: 유료 전환(Pay-as-you-go) 시 Flash/Flash-Lite 텍스트 무료 할당량도 사라지므로 주의!`);
+        sendImageLog(`🚫 나노바나나/Imagen은 Google이 무료 사용을 차단했습니다. 다른 이미지 엔진(Flow/DeepInfra 등)으로 변경하세요. 참고: 유료 전환(Pay-as-you-go) 시 Flash/Flash-Lite 텍스트 무료 할당량도 사라지므로 주의!`);
+        recordNanoFailure('QUOTA_ZERO', errorMessage);
         return null; // 즉시 종료 — 재시도/폴백 모두 무의미
       }
 
@@ -1721,6 +1747,15 @@ async function generateSingleImageWithGemini(
           console.error(`[NanoBananaPro] ❌ 이미지 생성 실패: ${errorMessage} → Imagen 4 안전망 시도`);
           sendImageLog(userFriendlyMsg);
         }
+        // [R3] Record the classified cause — if the whole batch ends with 0
+        // images, generateWithNanoBananaPro throws this code upward.
+        const failureCode = errorMessage.includes('응답에서 이미지를 찾을 수 없습니다') ? 'EMPTY_RESPONSE'
+          : isQuotaError ? 'QUOTA'
+          : isServerError ? 'SERVER'
+          : isAuthError ? 'AUTH'
+          : isTimeoutError ? 'TIMEOUT'
+          : 'UNKNOWN';
+        recordNanoFailure(failureCode, errorMessage);
         break; // ✅ throw 대신 break → for 루프 탈출 → Imagen 4 최종 안전망으로
       }
 
