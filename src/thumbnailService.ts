@@ -44,7 +44,12 @@ export class ThumbnailService {
             } = options;
 
             // ✅ [핵심 수정] 1. 먼저 리사이즈를 실행하고 버퍼로 변환
-            const resizedBuffer = await sharp(imagePath)
+            // [2026-06-11 FIX] Read through a buffer, not the path — sharp/libvips
+            // keeps a handle/cache on path inputs, and writing back to the SAME
+            // file failed with "unable to open for write: Invalid argument"
+            // (live: dropshot thumbnail overlay 항상 실패).
+            const inputBuffer = fs.readFileSync(imagePath);
+            const resizedBuffer = await sharp(inputBuffer)
                 .resize(width, height, {
                     fit: 'cover',
                     position: 'center'
@@ -69,6 +74,13 @@ export class ThumbnailService {
             });
 
             // 4. 합성 (같은 크기의 이미지와 SVG)
+            // [2026-06-11 FIX] In-place overlay (output === input) writes to a
+            // temp file first, then replaces — direct same-path toFile fails on
+            // Windows while any handle/cache still references the input.
+            const sameFile = path.resolve(imagePath) === path.resolve(outputPath);
+            const writeTarget = sameFile
+                ? `${outputPath}.overlay-tmp${path.extname(outputPath) || '.jpg'}`
+                : outputPath;
             await sharp(resizedBuffer)
                 .composite([
                     {
@@ -76,7 +88,11 @@ export class ThumbnailService {
                         blend: 'over'
                     }
                 ])
-                .toFile(outputPath);
+                .toFile(writeTarget);
+            if (sameFile) {
+                fs.copyFileSync(writeTarget, outputPath);
+                fs.unlinkSync(writeTarget);
+            }
 
             return outputPath;
         } catch (error) {
