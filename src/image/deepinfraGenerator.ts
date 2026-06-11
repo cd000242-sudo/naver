@@ -6,6 +6,8 @@ import { loadConfig } from '../configManager.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 import { ImageRequestItem, GeneratedImage } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
+// [2026-06-11 FIX] Empty-prompt guard — Korean-only prompts stripped to "," generated random people
+import { stripKoreanResidue, isPromptContentEmpty, hasUsableEnglishPrompt } from './promptSafety.js';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 import { STYLE_PROMPT_MAP, getWebtoonStylePrompt, WebtoonGender, WebtoonSubStyle, getImageDiversityHints } from './imageStyles.js';
 import { addThumbnailTextOverlay } from './textOverlay.js'; // ✅ [2026-01-30] 썸네일 텍스트 오버레이
@@ -428,14 +430,19 @@ export async function generateWithDeepInfra(
             const hasKoreanHeading = /[가-힣]/.test(item.heading || item.prompt || '');
             const hasKorean = /[가-힣]/.test(basePrompt);
 
+            // [2026-06-11 FIX] englishPrompt sometimes arrives in Korean (upstream AI prompt
+            // generation falls back to the original Korean text). Treating it as English
+            // bypassed translation, then the final Korean-strip left an empty prompt.
+            const usableEnglishPrompt = hasUsableEnglishPrompt(item.englishPrompt);
+
             // 캐릭터/아트 스타일: englishPrompt가 있으면 그걸로 사용, 없으면 사전 번역
             // 비 캐릭터 스타일: 기존 로직 유지 (한글이 있고 englishPrompt 없으면 사전 번역)
             const shouldUseKoreanFallback = isCharacterOrArtStyle
-                ? (hasKoreanHeading && !item.englishPrompt) // englishPrompt 있으면 강제 진입 안 함
-                : (hasKorean && !item.englishPrompt);
+                ? (hasKoreanHeading && !usableEnglishPrompt) // englishPrompt 있으면 강제 진입 안 함
+                : (hasKorean && !usableEnglishPrompt);
 
             // ✅ [2026-02-19 FIX v2] 캐릭터/아트 스타일에서 englishPrompt 활용 경로
-            if (isCharacterOrArtStyle && item.englishPrompt && hasKoreanHeading) {
+            if (isCharacterOrArtStyle && usableEnglishPrompt && item.englishPrompt && hasKoreanHeading) {
                 // AI가 생성한 englishPrompt 사용 (사전 번역보다 정확)
                 let englishContext = item.englishPrompt;
                 // 혹시 남은 한국어 제거
@@ -460,10 +467,22 @@ export async function generateWithDeepInfra(
 
             // ✅ [2026-02-19 FIX] 최종 안전장치: 프롬프트에 한국어가 남아있으면 제거
             // FLUX 모델은 프롬프트의 한국어를 이미지에 텍스트로 렌더링하므로 반드시 제거
+            // [2026-06-11 FIX] If stripping leaves no real content (Korean-only prompt),
+            // recover via AI translation — an empty prompt makes FLUX generate arbitrary
+            // images (random people), observed live with "거울 물때 청소법".
             if (/[가-힣]/.test(basePrompt)) {
                 const beforeKorean = basePrompt;
-                basePrompt = basePrompt.replace(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g, '').replace(/\s+/g, ' ').trim();
-                console.log(`[DeepInfra] 🚫 프롬프트 한국어 잔여 제거: "${beforeKorean.substring(0, 30)}..." → "${basePrompt.substring(0, 30)}..."`);
+                const stripped = stripKoreanResidue(basePrompt);
+                if (!isPromptContentEmpty(stripped)) {
+                    basePrompt = stripped;
+                    console.log(`[DeepInfra] 🚫 프롬프트 한국어 잔여 제거: "${beforeKorean.substring(0, 30)}..." → "${basePrompt.substring(0, 30)}..."`);
+                } else {
+                    const recovered = await translateKoreanToEnglishWithAI(
+                        sanitizeImagePrompt(beforeKorean), item.category, imageStyle
+                    );
+                    basePrompt = stripKoreanResidue(recovered);
+                    console.log(`[DeepInfra] 🔤 한국어 전용 프롬프트 → AI 번역 복구: "${beforeKorean.substring(0, 30)}..." → "${basePrompt.substring(0, 50)}..."`);
+                }
             }
 
             // ✅ [2026-01-26] FLUX-2-dev용 8개 스타일별 프롬프트 조합
