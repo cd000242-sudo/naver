@@ -1359,16 +1359,48 @@ async function waitForInputReady(page: Page, timeoutMs: number = 8000): Promise<
     }
 }
 
+// Extracts the media UUID from either the DOM redirect src
+// (…getMediaUrlRedirect?name=<uuid>) or the CDN URL
+// (flow-content.google/image/<uuid>) — the only stable identity across the
+// 2026-06 Flow UI redesign. Counting <img> nodes misfires: previous
+// generations leave duplicate nodes and late CDN responses.
+function extractFlowImageId(url: string): string | null {
+    const m = String(url || '').match(/(?:getMediaUrlRedirect\?name=|flow-content\.google\/image\/)([0-9a-fA-F-]{16,})/);
+    return m ? m[1] : null;
+}
+
 // ─── [v1.6.1] 이미지 감지 (in-browser waitForFunction + 네트워크 race) ────
 //   기존 evaluate 500ms 폴링 → waitForFunction 200ms in-browser 폴링
 //   + 네트워크 리스너가 먼저 감지하면 즉시 반환
 async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number = 120000): Promise<string> {
     const queueStartSize = _networkImageQueue.length;
-    flowLog(`[Flow][3/3] 이미지 생성 대기 시작 (기존 DOM ${prevCount}장, queue baseline=${queueStartSize}, 타임아웃 ${timeoutMs / 1000}초)`);
+
+    // [2026-06-11] Identity baseline: snapshot every media UUID already
+    // visible (DOM + full network queue). Live incident: a straggler CDN
+    // response from the PREVIOUS generation resolved the race in 2s and the
+    // previous heading's image was returned for the next heading.
+    const knownIds: string[] = await page.evaluate(() => {
+        const ids: string[] = [];
+        for (const img of Array.from(document.querySelectorAll('img'))) {
+            const m = ((img as HTMLImageElement).src || '').match(/(?:getMediaUrlRedirect\?name=|flow-content\.google\/image\/)([0-9a-fA-F-]{16,})/);
+            if (m && !ids.includes(m[1])) ids.push(m[1]);
+        }
+        return ids;
+    }).catch(() => [] as string[]);
+    for (const queuedUrl of _networkImageQueue) {
+        const id = extractFlowImageId(queuedUrl);
+        if (id && !knownIds.includes(id)) knownIds.push(id);
+    }
+    flowLog(`[Flow][3/3] 이미지 생성 대기 시작 (기존 DOM ${prevCount}장, 기존 ID ${knownIds.length}개, queue baseline=${queueStartSize}, 타임아웃 ${timeoutMs / 1000}초)`);
 
     // DOM waitForFunction 기반 감지 (Promise A)
     const domPromise = page.waitForFunction(
-        (prev: number) => {
+        (args: { prev: number; known: string[] }) => {
+            const knownSet = new Set(args.known);
+            const extractId = (src: string): string | null => {
+                const m = src.match(/(?:getMediaUrlRedirect\?name=|flow-content\.google\/image\/)([0-9a-fA-F-]{16,})/);
+                return m ? m[1] : null;
+            };
             const imgs = Array.from(document.querySelectorAll('img')) as HTMLImageElement[];
             const matches = imgs.filter(img => {
                 const alt = img.alt || '';
@@ -1386,29 +1418,43 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
                 if (img.naturalWidth >= 512 && !/=s\d+-c$/.test(src) && src.startsWith('http')) return true;
                 return false;
             });
-            if (matches.length > prev) {
-                // Flow가 한 prompt → 4 variants 동시 생성 케이스 대응:
-                // 마지막만 반환하면 매번 같은 variant 선택될 위험 → prev~last 사이 랜덤.
-                // 단일 이미지(matches.length === prev+1)면 그것을 반환, 다중이면 랜덤.
-                const newCount = matches.length - prev;
+            // 1순위: 식별자 기반 — 대기 시작 시점에 없던 UUID만 신규로 인정
+            const fresh = matches.filter(img => {
+                const id = extractId(img.src || '');
+                return id !== null && !knownSet.has(id);
+            });
+            if (fresh.length > 0) {
+                // Flow가 한 prompt → 4 variants 동시 생성 — 매번 같은 variant
+                // 선택을 피하려고 랜덤 픽 유지
+                return fresh[Math.floor(Math.random() * fresh.length)].src;
+            }
+            // 2순위(식별자 없는 레이아웃 폴백): 기존 개수 비교 — UUID가 전혀
+            // 안 잡히는 미래 개편 대비로만 유지
+            const anon = matches.filter(img => extractId(img.src || '') === null);
+            if (anon.length > args.prev) {
+                const newCount = anon.length - args.prev;
                 const idx = newCount === 1
-                    ? prev
-                    : prev + Math.floor(Math.random() * newCount);
-                return matches[idx].src;
+                    ? args.prev
+                    : args.prev + Math.floor(Math.random() * newCount);
+                return anon[idx].src;
             }
             return null;
         },
-        prevCount,
+        { prev: prevCount, known: knownIds },
         { timeout: timeoutMs, polling: 200 }
     ).then(handle => handle.jsonValue() as Promise<string>);
 
     // 네트워크 큐 폴링 기반 감지 (Promise B) — 100ms 간격으로 큐 확인
+    // 신규 UUID만 인정 — 이전 생성분의 늦은 CDN 응답(가짜 성공) 차단
     const netPromise = new Promise<string>((resolve, reject) => {
         const start = Date.now();
         const tick = () => {
-            if (_networkImageQueue.length > queueStartSize) {
-                const newUrls = _networkImageQueue.slice(queueStartSize);
-                const url = newUrls[newUrls.length - 1];
+            const candidates = _networkImageQueue.slice(queueStartSize).filter((u) => {
+                const id = extractFlowImageId(u);
+                return id === null || !knownIds.includes(id);
+            });
+            if (candidates.length > 0) {
+                const url = candidates[candidates.length - 1];
                 flowLog(`[Flow][Net] ⚡ 네트워크 리스너가 먼저 감지: ${url.substring(0, 80)}...`);
                 resolve(url);
                 return;
@@ -1420,6 +1466,47 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
             setTimeout(tick, 100);
         };
         tick();
+    });
+
+    // [2026-06-11] 생성 오류 감시 (Promise C) — Flow가 서버측 실패 시
+    // "문제가 발생했습니다. 다시 시도해 주세요." 카드 + [다시 시도] 버튼을
+    // 띄운다 (라이브 스크린샷 실측). 자동으로 재시도를 눌러주고(최대 2회),
+    // 그래도 실패하면 180초 blind 타임아웃 대신 즉시 명확한 에러로 종료.
+    let watchdogStopped = false;
+    let retryClicks = 0;
+    const errorPromise = new Promise<string>((_resolve, reject) => {
+        const check = async () => {
+            if (watchdogStopped) return;
+            try {
+                const state = await page.evaluate(() => {
+                    const bodyText = document.body?.innerText || '';
+                    const hasError = /문제가 발생했습니다|다시 시도해 주세요|Something went wrong|An error occurred/i.test(bodyText);
+                    if (!hasError) return { hasError: false, clicked: false };
+                    let clicked = false;
+                    for (const btn of Array.from(document.querySelectorAll('button'))) {
+                        const label = (btn.textContent || '').trim();
+                        if (/^다시 시도$|^Retry$|^Try again$/i.test(label)) {
+                            (btn as HTMLButtonElement).click();
+                            clicked = true;
+                            break;
+                        }
+                    }
+                    return { hasError: true, clicked };
+                });
+                if (state.hasError && !watchdogStopped) {
+                    if (state.clicked && retryClicks < 2) {
+                        retryClicks += 1;
+                        flowLog(`[Flow][3/3] ⚠️ 생성 오류 카드 감지 → "다시 시도" 자동 클릭 (${retryClicks}/2)`);
+                        sendImageLog(`🔁 [Flow] 생성 오류 감지 — 다시 시도 자동 클릭 (${retryClicks}/2)`);
+                    } else {
+                        reject(new Error('FLOW_GENERATION_ERROR:Flow가 생성 오류를 반환했습니다 (다시 시도 자동 클릭 후에도 실패). 잠시 후 재시도하거나 프롬프트를 단순화하세요.'));
+                        return;
+                    }
+                }
+            } catch { /* 페이지 전환 중 — 계속 감시 */ }
+            if (!watchdogStopped) setTimeout(check, 3000);
+        };
+        setTimeout(check, 8000);
     });
 
     // 주기적 진행 로그 (15초 간격)
@@ -1436,9 +1523,13 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
                 domPromise.then(resolve, reject);
             }, 2500);
         });
-        const racedUrl = await Promise.race([netPromise, delayedDomPromise]);
-        const queuedUrls = _networkImageQueue.slice(queueStartSize);
-        const imageUrl = queuedUrls.length > 0 ? queuedUrls[queuedUrls.length - 1] : racedUrl;
+        const racedUrl = await Promise.race([netPromise, delayedDomPromise, errorPromise]);
+        // 네트워크 최신값 우선 적용도 신규 UUID만 — 이전 생성분 오염 차단
+        const queuedFresh = _networkImageQueue.slice(queueStartSize).filter((u) => {
+            const id = extractFlowImageId(u);
+            return id === null || !knownIds.includes(id);
+        });
+        const imageUrl = queuedFresh.length > 0 ? queuedFresh[queuedFresh.length - 1] : racedUrl;
         if (imageUrl !== racedUrl) {
             flowLog(`[Flow][3/3] 네트워크 최신 URL 우선 적용: ${imageUrl.substring(0, 120)}`);
         }
@@ -1458,8 +1549,11 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
         }).catch(() => []);
         flowError('[Flow][3/3] ❌ 타임아웃 — 현재 DOM img 목록 ↓', allImgsDump);
         sendImageLog(`❌ [Flow] 이미지 감지 타임아웃 — DOM img ${allImgsDump.length}개 덤프`);
+        // FLOW_GENERATION_ERROR(오류 카드)는 원인 코드 보존 — blind 타임아웃으로 덮지 않는다
+        if (err instanceof Error && err.message.startsWith('FLOW_GENERATION_ERROR')) throw err;
         throw new Error(`FLOW_IMAGE_TIMEOUT:Flow 이미지 생성이 ${timeoutMs / 1000}초 안에 끝나지 않았습니다. 프롬프트를 단순화하거나 5분 후 다시 시도해주세요.`);
     } finally {
+        watchdogStopped = true;
         clearInterval(logInterval);
     }
 }

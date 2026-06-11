@@ -90,12 +90,14 @@ describe('continuous and multi-account image generation safety', () => {
     expect(imageGeneratorCode).toMatch(/forceModelKey[\s\S]{0,160}?shouldForceSequentialImages/);
     expect(flowCode).toMatch(/options\?: \{ forceFreshContext\?: boolean; sequential\?: boolean \}/);
     expect(flowCode).toMatch(/&& !options\?\.sequential/);
-    expect(flowCode).toMatch(/const newUrls = _networkImageQueue\.slice\(queueStartSize\)/);
+    // 2026-06-11: net-queue detection is UUID-filtered now — the raw
+    // slice-only pattern returned the PREVIOUS generation's image (mix-up).
+    expect(flowCode).toMatch(/_networkImageQueue\.slice\(queueStartSize\)\.filter/);
     expect(flowCode).toMatch(/flow-content\\\.google\\\/image/);
     expect(flowCode).toMatch(/perlin\\\.png/);
     expect(flowCode).toMatch(/const delayedDomPromise = new Promise<string>/);
-    expect(flowCode).toMatch(/Promise\.race\(\[netPromise, delayedDomPromise\]\)/);
-    expect(flowCode).toMatch(/queuedUrls\.length > 0 \? queuedUrls\[queuedUrls\.length - 1\] : racedUrl/);
+    expect(flowCode).toMatch(/Promise\.race\(\[netPromise, delayedDomPromise, errorPromise\]\)/);
+    expect(flowCode).toMatch(/queuedFresh\.length > 0 \? queuedFresh\[queuedFresh\.length - 1\] : racedUrl/);
     expect(nanoCode).toMatch(/forceSequential\?: boolean/);
     expect(nanoCode).toMatch(/if \(forceSequential \|\| isFullAuto\)[\s\S]{0,60}?return 1/);
     expect(imageFxCode).toMatch(/for \(let i = 0; i < items\.length; i\+\+\)/);
