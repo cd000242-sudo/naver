@@ -129,6 +129,15 @@ describe('rich paste tail wiring', () => {
     expect(code).toMatch(/lastIndexOf\(sentinel\)/);
   });
 
+  it('skips general CTAs that duplicate the previous-post URL (S16 — link inserted twice)', () => {
+    const code = read('automation/editorHelpers.ts');
+    // 2026-06-11 live (224312838588): the continuous flow ships the same URL
+    // as a CTA AND previousPostUrl — with typing fixed, both landed and the
+    // post showed the link twice. The dedup must keep the previous-post block.
+    expect(code).toMatch(/이전글과 동일 URL CTA/);
+    expect(code).toMatch(/normalizeUrl\(resolved\.previousPostUrl\)/);
+  });
+
   it('counts general CTAs in the pre-publish link-card expectation', () => {
     const code = read('automation/editorHelpers.ts');
     const stash = code.slice(
@@ -137,7 +146,9 @@ describe('rich paste tail wiring', () => {
     );
     // 2026-06-11 live: CTA 1개 inserted but expectation stayed 0 because only
     // previousPostTailInserted was counted — the lost link card passed 5/5.
-    expect(stash).toMatch(/expectedLinkCardMin:[\s\S]*?ctas/);
+    // effectiveCtas = post-S16-dedup list, so a skipped duplicate CTA is not
+    // re-counted into the expectation.
+    expect(stash).toMatch(/expectedLinkCardMin:[\s\S]*?effectiveCtas/);
     expect(stash).toMatch(/expectedHashtags/);
   });
 

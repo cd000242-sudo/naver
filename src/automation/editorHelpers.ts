@@ -2143,6 +2143,24 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       self.log(`   🛒 [쇼핑커넥트] 자동 CTA 생성: "${randomHook}"`);
     }
 
+    // [2026-06-11 S16] The continuous flow ships the SAME previous-post URL in
+    // BOTH the CTA fields and previousPostUrl ("3개 필드 통일" 설계). Until
+    // today one copy silently died outside the editor model; with typing fixed
+    // (S13), BOTH landed and the published post showed the link twice. Keep
+    // the previous-post block (hook + link card) and skip general CTAs that
+    // point at the same URL. Flows that pass only a CTA (no previousPostUrl)
+    // are untouched — no link is ever lost, only the duplicate.
+    if (resolved.previousPostUrl && effectiveCtas.length > 0) {
+      const normalizeUrl = (u: string): string =>
+        String(u || '').trim().replace(/[?#].*$/, '').replace(/\/+$/, '');
+      const prevUrl = normalizeUrl(resolved.previousPostUrl);
+      const beforeCount = effectiveCtas.length;
+      effectiveCtas = effectiveCtas.filter((c: { link?: string }) => normalizeUrl(c?.link || '') !== prevUrl);
+      if (effectiveCtas.length < beforeCount) {
+        self.log(`   ⏭️ 이전글과 동일 URL CTA ${beforeCount - effectiveCtas.length}개 스킵 — 이전글 블록 하나만 삽입 (중복 방지)`);
+      }
+    }
+
     const isHeadingPosition = /^heading-\d+$/.test(resolved.ctaPosition || '');
     if (!resolved.skipCta && effectiveCtas.length > 0 && !isHeadingPosition) {
       // ✅ heading-N인 경우 이미 해당 소제목 아래에 삽입 완료 → 하단 CTA 건너뜀
@@ -2479,8 +2497,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         // card — counting only the previous-post tail let a lost CTA card
         // pass 5/5. (Observation mode: conversion is Naver-server dependent,
         // so misses log a ❌ for calibration, they do not block.)
+        // effectiveCtas (post-dedup) — resolved.ctas would re-count the CTA
+        // that S16 skipped as a previous-post duplicate.
         expectedLinkCardMin: (previousPostTailInserted ? 1 : 0)
-          + (resolved.ctas || []).filter((c: { link?: string }) => !!c?.link).length,
+          + (effectiveCtas || []).filter((c: { link?: string }) => !!c?.link).length,
         expectedDividerMin: previousPostTailInserted ? 1 : 0,
         expectedHashtags: hashtagsToApply,
       };
