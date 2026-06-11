@@ -78,3 +78,9 @@
 - 원인: focusRootEnd(7488c0e2)가 캐럿을 마지막 컴포넌트 "뒤" 루트 레벨에 — 컴포넌트 모델 밖 텍스트는 발행 직렬화에서 탈락. 에디터 측 하네스/probe/PrePublish 모두 DOM만 봐서 못 잡았음.
 - 교훈: **에디터 DOM 가시성 ≠ 발행 직렬화 보증.** 발행물 실측(모바일 페이지 fetch)을 라이브 판정에 포함할 것.
 - 동반 그물: PrePublish link-card 기대치에 일반 CTA 합산 + hashtag-presence 검사 신설 — 동류 소실이 최소한 ❌로 표출.
+
+## G. R8 선행 — 에러 삼킴 전수 스캔 (2026-06-11, explorer agent)
+
+- 대상 5파일(~15,000줄) catch 56건: **A급 SPOF 10 / B급 9 / C급 37** — 상세 분류표는 `r8-error-swallow-scan.md`
+- A급 Top 3 (R8 착수 시 우선): ① 카테고리 3회 실패 → 기본 카테고리 암묵 발행 (publishHelpers.ts:440-447) ② 발행 모달 타임아웃 → 카테고리 단계 통째 스킵 (publishHelpers.ts:137-139) ③ 발행 버튼 미발견 → 임시저장 silent 전환 (naverBlogAutomation.ts:5773-5806)
+- 원래 추정 87건 대비 실측 56건 (이번 세션까지의 픽스들이 일부 해소)
