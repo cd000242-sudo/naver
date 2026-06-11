@@ -4175,8 +4175,12 @@ async function startContinuousPublishingV2(): Promise<void> {
   //   사용자 제보: 20개 중 첫 번째 실패 후 재시작하면 19개부터 시작됨
   //   원인: filter(status='pending')만 처리 → status='failed'/'processing'은 제외
   //   수정: 재시작 시 실패/중단 항목을 'pending'으로 리셋해 재시도 대상에 포함
+  // [2026-06-11 FIX] 'cancelled' included too: stop paths mark the in-flight item
+  // as 'cancelled', so restart skipped the stopped keyword and resumed from the
+  // NEXT one. ("skip next 5" removes items via splice, so this cannot resurrect
+  // intentionally skipped items.)
   const recoverableItems = continuousQueueV2.filter(
-    i => i.status === 'failed' || i.status === 'processing'
+    i => i.status === 'failed' || i.status === 'processing' || i.status === 'cancelled'
   );
   if (recoverableItems.length > 0) {
     recoverableItems.forEach(i => { i.status = 'pending'; });
