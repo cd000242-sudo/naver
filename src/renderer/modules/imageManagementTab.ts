@@ -106,18 +106,20 @@ function ensureImageFxSwitchButton(imageSourceSelect: HTMLSelectElement, show: b
 }
 
 export async function initImageManagementTab(): Promise<void> {
-  // 2026-06-11: ImageFX removed from selectable engines (user request) —
-  // migrate stale saved selections to Flow once, with a visible log line.
-  // Backend imagefx modules stay for legacy data/recovery paths.
+  // 2026-06-11: ImageFX AND Flow removed from selectable engines (user
+  // request — both too unstable for distributed users). Stale selections
+  // migrate to dropshot (리더스 나노바나나 무제한) once, with a visible log.
+  // Backend modules stay (incl. the S14 Flow fixes) for a possible return.
   try {
     for (const key of ['fullAutoImageSource', 'globalImageSource', 'scAIImageEngine']) {
-      if (localStorage.getItem(key) === 'imagefx') {
-        localStorage.setItem(key, 'flow');
-        console.log(`[ImageEngine] 🔁 ${key}: imagefx → flow (ImageFX 제거 — Flow로 이관)`);
+      const saved = localStorage.getItem(key);
+      if (saved === 'imagefx' || saved === 'flow') {
+        localStorage.setItem(key, 'dropshot');
+        console.log(`[ImageEngine] 🔁 ${key}: ${saved} → dropshot (불안정 엔진 제거 — 리더스 나노바나나로 이관)`);
       }
     }
-    if ((window as any).globalImageSource === 'imagefx') {
-      (window as any).globalImageSource = 'flow';
+    if ((window as any).globalImageSource === 'imagefx' || (window as any).globalImageSource === 'flow') {
+      (window as any).globalImageSource = 'dropshot';
     }
   } catch { /* localStorage unavailable — nothing to migrate */ }
 
@@ -410,12 +412,12 @@ export async function initImageManagementTab(): Promise<void> {
             appendLog(`✅ 📂 내 폴더가 선택되었습니다: ${folderPath}`);
           } else {
             appendLog('⚠️ 폴더 선택이 취소되었습니다. AI 이미지가 사용됩니다.');
-            imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'flow';
+            imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'dropshot';
             return;
           }
         } catch (e: any) {
           appendLog(`❌ 폴더 선택 오류: ${e.message}`);
-          imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'flow';
+          imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'dropshot';
           return;
         }
       }
@@ -446,7 +448,7 @@ export async function initImageManagementTab(): Promise<void> {
         }
       } else {
         // ✅ [2026-03-10 CLEANUP] imageSourceMode dead write 제거 — getItem 없음
-        console.log(`[Renderer] 📁 저장된 이미지 모드 활성화 (AI 엔진 설정 유지: "${localStorage.getItem('globalImageSource') || 'flow'}")`);
+        console.log(`[Renderer] 📁 저장된 이미지 모드 활성화 (AI 엔진 설정 유지: "${localStorage.getItem('globalImageSource') || 'dropshot'}")`);
       }
 
       // Stability AI 모델 선택 UI 표시/숨김

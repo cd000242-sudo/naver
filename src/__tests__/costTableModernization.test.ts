@@ -53,13 +53,10 @@ describe('v1.4.81 — 비용표·환경설정 현대화', () => {
   });
 
   describe('이미지 소스 드롭다운 (image-source-select)', () => {
-    it("Flow 옵션 존재", () => {
-      expect(html).toMatch(/<option value="flow"[^>]*>[\s\S]{0,200}?Flow/);
-    });
-
-    it('ImageFX 옵션 제거 + Flow가 기본값 승계 (2026-06-11 사용자 요청)', () => {
+    it('ImageFX·Flow 옵션 제거 + 리더스 나노바나나(dropshot)가 기본값 승계 (2026-06-11 사용자 요청)', () => {
       expect(html).not.toMatch(/<option value="imagefx"/);
-      expect(html).toMatch(/<option value="flow"[^>]*selected/);
+      expect(html).not.toMatch(/<option value="flow"/);
+      expect(html).toMatch(/<option value="dropshot"[^>]*selected/);
     });
 
     it('Nano Banana Pro 옵션 존재', () => {

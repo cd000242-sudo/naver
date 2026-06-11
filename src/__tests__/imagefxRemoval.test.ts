@@ -14,27 +14,35 @@ function readRoot(rel: string): string {
  * keep Flow. Backend modules stay (legacy data, recovery paths) — only the
  * selection surface is removed, and stale saved selections migrate to Flow.
  */
-describe('ImageFX removal from selection UI', () => {
-  it('removes the imagefx option from the main image-source dropdown and defaults to flow', () => {
+// 2026-06-11 round 2: Flow removed as well — live success rate was 1/4
+// attempts; an unstable engine in a distributed app is worse than none.
+// dropshot (리더스 나노바나나 무제한) inherits the default.
+describe('unstable engine removal from selection UI (imagefx + flow)', () => {
+  it('removes imagefx and flow from the main image-source dropdown; dropshot is the default', () => {
     const html = readRoot('public/index.html');
     expect(html).not.toMatch(/<option value="imagefx"/);
-    expect(html).toMatch(/<option value="flow"[^>]*selected/);
+    expect(html).not.toMatch(/<option value="flow"/);
+    expect(html).toMatch(/<option value="dropshot"[^>]*selected/);
   });
 
-  it('removes imagefx options and the source card from HeadingImageSettings', () => {
+  it('removes imagefx/flow options and source cards from HeadingImageSettings', () => {
     const code = read('renderer/components/HeadingImageSettings.ts');
     expect(code).not.toMatch(/<option value="imagefx"/);
     expect(code).not.toMatch(/data-value="imagefx"/);
+    expect(code).not.toMatch(/<option value="flow"/);
+    expect(code).not.toMatch(/data-value="flow"/);
   });
 
-  it('migrates stale imagefx selections to flow at startup (visible, one-time)', () => {
+  it('migrates stale imagefx/flow selections to dropshot at startup (visible, one-time)', () => {
     const code = read('renderer/modules/imageManagementTab.ts');
-    expect(code).toMatch(/imagefx → flow/);
+    expect(code).toMatch(/saved === 'imagefx' \|\| saved === 'flow'/);
+    expect(code).toMatch(/→ dropshot/);
     expect(code).toMatch(/fullAutoImageSource[\s\S]{0,200}globalImageSource/);
   });
 
-  it('no renderer default falls back to imagefx', () => {
+  it('no renderer default falls back to a removed engine', () => {
     const code = read('renderer/modules/imageManagementTab.ts');
     expect(code).not.toMatch(/\|\| 'imagefx'/);
+    expect(code).not.toMatch(/\|\| 'flow'/);
   });
 });

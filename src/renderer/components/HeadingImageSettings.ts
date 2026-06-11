@@ -875,7 +875,6 @@ export function createHeadingImageModal(): void {
                 <option value="deepinfra">FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">OpenAI Image (gpt-image-1 / 1.5 / 2)</option>
                 <option value="leonardoai">Leonardo AI</option>
-                <option value="flow">🍌 Flow (Nano Banana 2)</option>
               </select>
             </div>
           </div>
@@ -1034,14 +1033,7 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #9a3412;">Leonardo AI</div>
             <div style="font-size: 10px; color: #ea580c;">API 키 필요</div>
           </label>
-          <!-- 2026-06-11: ImageFX 카드 제거 (사용자 요청) — Flow만 유지 -->
-          <!-- ✅ [v1.4.64] Flow (Nano Banana Pro) UI 노출 — labs.google 세션 공유, 한글 텍스트 네이티브 -->
-          <label class="source-option" data-value="flow" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #f59e0b; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25); position: relative;">
-            <div style="position: absolute; top: -6px; right: -6px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 8px;">NEW</div>
-            <div style="font-size: 1.5rem;">🍌</div>
-            <div style="font-size: 12px; font-weight: 600; color: #92400e;">Flow</div>
-            <div style="font-size: 10px; color: #a16207;">Nano Banana 2 | AI Pro</div>
-          </label>
+          <!-- 2026-06-11: ImageFX·Flow 카드 제거 (사용자 요청 — 불안정 엔진 비노출) -->
           <!-- ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 (UI 자동화 · 로그인 필요) -->
           <label class="source-option" data-value="dropshot" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #f59e0b; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25); position: relative;">
             <div style="position: absolute; top: -6px; right: -6px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 8px;">무제한</div>
@@ -1372,7 +1364,6 @@ export function createHeadingImageModal(): void {
                 <option value="nano-banana-2">🍌 나노바나나2 (Gemini 3.1 Flash, ₩97/장, 한글 가능) ★추천</option>
                 <option value="nano-banana-pro">🍌 나노바나나 프로 (Gemini 3 Pro, ₩185/장, 한글 최강)</option>
                 <option value="nano-banana">🍌 나노바나나 (Gemini 2.5 Flash, ₩54/장, 한글 텍스트 깨짐)</option>
-                <option value="flow">🍌 Flow (Nano Banana 2, AI Pro 무료)</option>
                 <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">🦆 OpenAI Image (gpt-image-1 / 1.5 / 2)</option>
                 <option value="leonardoai">🦁 Leonardo AI</option>
