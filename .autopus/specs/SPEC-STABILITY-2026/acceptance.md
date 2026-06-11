@@ -30,6 +30,7 @@
 | N6 | 다중계정 계정 편집 모달(ma-edit-*) HTML 부재 — JS 배선만 존재(죽은 UI) | 후속 R 배정 필요 (모달 복원 or 배선 제거 결정) | — | — | 발견 · 대기 |
 | S11 | DeepInfra 이미지가 키워드와 무관한 인물 사진 (한국어 전용 프롬프트 → strip 후 빈 프롬프트) | 83691ad9(englishPrompt 한국어 검증 + 빈손 시 AI 번역 복구, promptSafety.ts 신설) | promptSafetyGuard.test(6) | 동일 키워드 재발행 시 "🔤 AI 번역 복구" 로그 + 주제 연관 이미지 (빈 프롬프트 API 호출 0) | 코드 완료 · 라이브 대기 |
 | S12 | 연속발행 중지한 키워드, 재시작 시 건너뜀 | c6c77452(재시작 복구 필터에 cancelled 추가) | continuousCancelledResume.test(2) | 중지→재시작 시 중지했던 키워드부터 재개 ("다시 시도합니다" 토스트) | 코드 완료 · 라이브 대기 |
+| S13 | 꼬리(구분선/CTA/해시태그) 에디터엔 존재·발행물에서 통째 소실 — root-end 캐럿이 컴포넌트 모델 밖(7488c0e2 회귀, 발행물 224312474175 실측) | 96fbcf2b(컴포넌트 내부 캐럿 + probe inModel 검증 + PrePublish CTA/해시태그 그물) | richPasteTailWiring.test(+4) | 연속발행 1건 발행물(모바일 페이지)에서 꼬리 4종 실물 확인 + hashtag-presence 체크 가동 | 코드 완료 · 라이브 대기 |
 
 ## 2. 릴리즈 공통 게이트 (모든 출고 전)
 
