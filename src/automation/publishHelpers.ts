@@ -11,6 +11,7 @@ import {
   getSelectorStrings,
 } from './selectors';
 import { NAVER_TIMEOUTS, NAVER_WAIT_UNTIL } from './timeouts';
+import { recordSilentFailure } from './silentFailureCounter.js';
 
 // PublishMode type from naverBlogAutomation
 type PublishMode = 'draft' | 'publish' | 'schedule';
@@ -1564,6 +1565,7 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
 
       self.log(`📸 에러 스크린샷 저장됨: ${screenshotPath}`);
     } catch (screenshotError) {
+      recordSilentFailure('publish:error-screenshot');
       self.log('⚠️ 스크린샷 저장 실패 (무시됨)');
     }
 

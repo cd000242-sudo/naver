@@ -17,6 +17,7 @@ type ResolvedRunOptions = any;
 import type { StructuredContent, ImagePlan } from '../contentGenerator.js';
 import type { GhostCursor } from '../ghostCursorHelper.js';
 import { PREV_POST_HOOKS } from './ctaHelpers.js';
+import { recordSilentFailure } from './silentFailureCounter.js';
 import { pickBannerHook } from './bannerPhrasePool.js';
 import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
@@ -334,6 +335,7 @@ export async function insertQuotation(self: any, frame: Frame, page: Page, style
   }
 
   if (!styleClicked) {
+    recordSilentFailure('editor:quotation-style');
     self.log('   ⚠️ 인용구 스타일 버튼을 찾지 못했습니다. (기본 스타일로 진행 가능성 있음)');
   } else {
     self.log(`   ✅ 인용구 스타일 선택 성공: ${style}`);

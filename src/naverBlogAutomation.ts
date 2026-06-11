@@ -45,6 +45,7 @@ import {
 import { extractCoreKeywords, humanKeyboardType } from './automation/typingUtils.js';
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes } from './automation/richTextPaste.js';
 import { collectPrePublishStats, evaluatePrePublishReport, formatPrePublishReport, getBlockingFailures } from './automation/prePublishAssertion.js';
+import { formatSilentFailureSummary, resetSilentFailureCounts } from './automation/silentFailureCounter.js';
 import { resolveImmediatePublishOutcome } from './automation/publishOutcomeResolver';
 
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
@@ -4989,6 +4990,13 @@ export class NaverBlogAutomation {
     // ✅ [2026-02-16 DEBUG] 카테고리 이름 확인
     console.log(`[publishBlogPost] 📂 this.options.categoryName: "${this.options.categoryName || '(없음)'}"`);
     this.log(`📂 현재 카테고리: "${this.options.categoryName || '(미설정)'}"`);
+    // [SPEC-STABILITY-2026 R12] 직전 글에서 허용됐던 침묵 실패 빈도 표출 —
+    // 매 글 반복되는 허용 실패는 셀렉터 부패/에디터 개편의 조기 신호다.
+    {
+      const silentSummary = formatSilentFailureSummary();
+      if (silentSummary) this.log(silentSummary);
+      resetSilentFailureCounts();
+    }
     await this.retry(async () => {
       const frame = (await this.getAttachedFrame());
       this.ensureNotCancelled();

@@ -5,6 +5,7 @@
  */
 
 import { safeKeyboardType } from './typingUtils.js';
+import { recordSilentFailure } from './silentFailureCounter.js';
 import * as fsPromises from 'fs/promises';
 import * as path from 'path';
 import {
@@ -250,10 +251,12 @@ export async function setImageSizeToDocumentWidth(self: any): Promise<void> {
       });
       await self.delay(100);
     } catch (focusError) {
+      recordSilentFailure('image:resize-focus');
       // 포커스 이동 실패해도 계속 진행
     }
 
   } catch (error) {
+    recordSilentFailure('image:resize');
     self.log(`   ⚠️ 이미지 크기 조정 중 오류 발생 (계속 진행): ${(error as Error).message}`);
   }
 }
