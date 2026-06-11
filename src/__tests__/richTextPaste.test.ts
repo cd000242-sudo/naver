@@ -206,7 +206,8 @@ describe('buildMobileRichHtml', () => {
       highlight: false,
     });
 
-    expect(result.plainText).toContain('자동건조만으로 냄새를 모두 막기는 어렵습니다.');
+    // 줄바꿈 정책(22자 모바일 폭)과 무관하게 라벨 제거만 검증 — 공백 무시 비교
+    expect(result.plainText.replace(/\s+/g, ' ')).toContain('자동건조만으로 냄새를 모두 막기는 어렵습니다.');
     expect(result.plainText).not.toContain('한 줄 판정');
     expect(result.html).not.toContain('한 줄 판정');
   });
@@ -311,5 +312,68 @@ describe('buildMobileRichHtml', () => {
     expect(result.html).not.toContain('<script>');
     expect(result.html).toContain('&lt;');
     expect(result.html).toContain('&gt;');
+  });
+});
+
+// SPEC-STABILITY-2026 / 2026-06-11 사용자 가독성 보고:
+// 발행물에서 ① 줄이 ", "로 시작 ② 단어 중간 절단("범/위에") ③ 빈 줄 낀
+// 마크다운 표가 원문 그대로 노출. 사용자 수정본(라인 ~20-22자, 구절 경계
+// 줄바꿈)을 기준 계약으로 잠근다.
+describe('mobile line-break readability (2026-06-11)', () => {
+  const SAMPLE =
+    '이 글은 집 안 정리, 주방, 욕실처럼 자주 하는 청소 기준으로, 빠뜨리기 쉬운 항목까지 함께 확인하는 범위에 맞췄습니다.';
+
+  it('never starts a line with punctuation (", 빠뜨리기" class)', () => {
+    const result = buildMobileRichHtml(SAMPLE, { highlight: false });
+    const lines = result.plainText.split('\n').map((l) => l.trim()).filter(Boolean);
+    for (const line of lines) {
+      expect(line).not.toMatch(/^[,，、.!?…:;)\]]/);
+    }
+  });
+
+  it('breaks at spaces instead of slicing inside a word when spaces exist', () => {
+    const result = buildMobileRichHtml(SAMPLE, { highlight: false });
+    const lines = result.plainText.split('\n').map((l) => l.trim()).filter(Boolean);
+    // 원문을 공백 없이 이어붙인 뒤, 각 줄 경계가 원문의 공백/구두점 위치와
+    // 일치하는지 검사: 줄 끝+다음 줄 시작을 붙였을 때 원문에 그대로 존재하면
+    // 단어 중간 절단이다.
+    for (let i = 0; i < lines.length - 1; i += 1) {
+      const boundary = lines[i].slice(-1) + lines[i + 1].slice(0, 1);
+      const midWordCut = SAMPLE.replace(/\s+/g, '').includes(boundary)
+        && !/[\s,，、.!?…]/.test(lines[i].slice(-1))
+        && SAMPLE.includes(lines[i].slice(-2) + lines[i + 1].slice(0, 2));
+      expect(midWordCut, `단어 중간 절단: "${lines[i].slice(-4)}|${lines[i + 1].slice(0, 4)}"`).toBe(false);
+    }
+  });
+
+  it('merges tiny orphan tails into the previous line', () => {
+    const result = buildMobileRichHtml(SAMPLE, { highlight: false });
+    const lines = result.plainText.split('\n').map((l) => l.trim()).filter(Boolean);
+    for (const line of lines) {
+      expect(line.length, `외톨이 줄: "${line}"`).toBeGreaterThan(4);
+    }
+  });
+
+  it('defaults to the ~22-char line width measured from the user reference', () => {
+    const result = buildMobileRichHtml(SAMPLE, { highlight: false });
+    const lines = result.plainText.split('\n').map((l) => l.trim()).filter(Boolean);
+    expect(Math.max(...lines.map((l) => l.length))).toBeLessThanOrEqual(22 + 13);
+    expect(lines.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('detects markdown tables even when rows are separated by blank lines', () => {
+    const brokenTable = [
+      '| 항목 | 정리 |',
+      '',
+      '| --- | --- |',
+      '',
+      '| 기본 도구 | 걸레, 수세미, 장갑, 세제 |',
+      '',
+      '| 소모품 | 봉투, 휴지, 여분 행주 |',
+    ].join('\n');
+    const result = buildMobileRichHtml(brokenTable, { highlight: false });
+    expect(result.tableCount).toBe(1);
+    expect(result.html).toContain('<table');
+    expect(result.html).not.toContain('---');
   });
 });

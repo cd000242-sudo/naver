@@ -65,7 +65,10 @@ export interface RichArticleThemes {
   headingTheme: SoftHeadingTheme;
 }
 
-const DEFAULT_MAX_CHUNK_CHARS = 38;
+// 22자: 2026-06-11 사용자 레퍼런스(직접 수정한 발행물) 라인 폭 실측값.
+// 38자는 모바일 폭(19px 기준 ~20자)에서 재줄바꿈을 일으켜 단어 중간 꺾임을
+// 만들었다 — 청크가 화면 폭보다 좁아야 이중 꺾임이 사라진다.
+const DEFAULT_MAX_CHUNK_CHARS = 22;
 const DEFAULT_MAX_HIGHLIGHTS = 7;
 const SECTION_HIGHLIGHT_MIN_SCORE = 3;
 const INLINE_FORMAT_COMMANDS = ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript'];
@@ -776,11 +779,28 @@ function splitLongSentenceForMobile(sentence: string, maxChars: number): string[
     const minCut = Math.max(10, Math.floor(maxChars * 0.55));
     const target = Math.min(maxChars, Math.max(minCut, Math.floor(rest.length / 2)));
     const candidates = getMobileBreakCandidates(windowText).filter(cut => cut >= minCut);
-    const cut = candidates.length > 0
+    let cut = candidates.length > 0
       ? candidates.sort((a, b) => Math.abs(a - target) - Math.abs(b - target))[0]
-      : maxChars;
-    chunks.push(rest.slice(0, cut).trim());
+      : -1;
+    if (cut < 0) {
+      // [2026-06-11] No clause boundary in the window — back off to the
+      // nearest SPACE instead of slicing inside a word ("범/위에" breaks).
+      const lastSpace = windowText.lastIndexOf(' ', maxChars);
+      cut = lastSpace >= minCut ? lastSpace + 1 : maxChars;
+    }
+    // [2026-06-11] Never strand punctuation at the start of the next line
+    // (", 빠뜨리기" class) — semantic patterns like 기준(으로) cut before a
+    // trailing comma, so consume it into the current line.
+    while (cut < rest.length && /[,，、.!?…:;)\]]/.test(rest[cut])) cut += 1;
+    const piece = rest.slice(0, cut).trim();
     rest = rest.slice(cut).trim();
+    // [2026-06-11] A tiny tail reads as an orphan line — glue it back.
+    if (piece && rest.length > 0 && rest.length <= 4) {
+      chunks.push(`${piece} ${rest}`.trim());
+      rest = '';
+      break;
+    }
+    if (piece) chunks.push(piece);
   }
   if (rest) chunks.push(rest);
   return chunks;
@@ -1061,7 +1081,34 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
     return { html: '', plainText: '', highlightCount: 0, tableCount: 0, paragraphCount: 0 };
   }
 
-  const blocks = normalized.split(/\n{2,}/).map(block => block.trim()).filter(Boolean);
+  // [2026-06-11] LLMs sometimes emit markdown tables with BLANK lines between
+  // rows; the block splitter then shreds the table into per-row paragraphs
+  // and the raw "| --- |" source gets published as text (live screenshot).
+  // Stitch such rows back together — but keep a blank line that separates two
+  // COMPLETE tables (next pipe-line followed by its own |---| separator).
+  const stitched = (() => {
+    const srcLines = normalized.split('\n');
+    const isRow = (s: string) => /^[ \t]*\|.*\|[ \t]*$/.test(s);
+    const isSep = (s: string) => /^[ \t]*\|[ \t:|-]+\|[ \t]*$/.test(s) && s.includes('-');
+    const out: string[] = [];
+    for (let i = 0; i < srcLines.length; i += 1) {
+      out.push(srcLines[i]);
+      if (!isRow(srcLines[i])) continue;
+      let j = i + 1;
+      while (j < srcLines.length && srcLines[j].trim() === '') j += 1;
+      if (j > i + 1 && j < srcLines.length && isRow(srcLines[j])) {
+        let k = j + 1;
+        while (k < srcLines.length && srcLines[k].trim() === '') k += 1;
+        const nextStartsNewTable = !isSep(srcLines[j]) && k < srcLines.length && isSep(srcLines[k]);
+        if (!nextStartsNewTable) {
+          i = j - 1; // drop the blank gap — the next row continues this table
+        }
+      }
+    }
+    return out.join('\n');
+  })();
+
+  const blocks = stitched.split(/\n{2,}/).map(block => block.trim()).filter(Boolean);
   const nodes: RenderNode[] = [];
   const headings: HeadingEntry[] = [];
   let currentSectionIndex = 0;
