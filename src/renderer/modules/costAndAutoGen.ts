@@ -289,6 +289,25 @@ function updateGeneratedImagePreview(data: { image: any; index: number; total: n
         }, total);
       }
     }
+
+    // Mirror into the continuous-publishing modal grid (it has no image UI of
+    // its own). Multi-image batches (full-auto style) reset at index 0;
+    // single-image calls (continuous types one heading per IPC, index always
+    // 0) accumulate — the item loop clears the grid at each post boundary.
+    const cpGrid = document.getElementById('cp-image-grid');
+    if (cpGrid) {
+      if (index === 0 && total > 1) cpGrid.innerHTML = '';
+      const cpSrc = image.filePath || image.url || image.previewDataUrl || '';
+      if (cpSrc) {
+        const thumb = document.createElement('img');
+        thumb.src = cpSrc;
+        thumb.title = `${image.heading || `이미지 ${index + 1}`} (${index + 1}/${total})`;
+        thumb.style.cssText = 'width: 64px; height: 64px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);';
+        thumb.onerror = () => { thumb.remove(); };
+        cpGrid.appendChild(thumb);
+        cpGrid.style.display = 'flex';
+      }
+    }
   } catch (previewErr) {
     console.warn('[Renderer] image preview update failed:', previewErr);
   }

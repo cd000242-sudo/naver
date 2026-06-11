@@ -4244,6 +4244,14 @@ async function startContinuousPublishingV2(): Promise<void> {
   const progressModal = document.getElementById('continuous-progress-modal');
   if (progressModal) progressModal.style.display = 'flex';
 
+  // Image preview grid starts empty each batch (stale previews from the
+  // previous run would be misread as this run's images).
+  const cpImageGrid = document.getElementById('cp-image-grid');
+  if (cpImageGrid) {
+    cpImageGrid.innerHTML = '';
+    cpImageGrid.style.display = 'none';
+  }
+
   // ✅ [v2.7.37] 발행 모달이 닫혀도 다시 띄울 수 있도록 floating 버튼 추가
   //   사용자 보고: "닫기하면 다시 띄울 수 없음". 발행은 백그라운드 진행되지만 진행 보기 불가.
   //   해결: 메인 우상단에 항상 보이는 floating 버튼. 발행 종료 시 자동 제거.
@@ -4317,6 +4325,17 @@ async function startContinuousPublishingV2(): Promise<void> {
       log: `[${currentIdx}/${totalCount}] AI가 콘텐츠를 생성하고 있습니다.`,
       percentage: progress
     });
+
+    // Per-post image preview reset. Continuous generates one image per IPC
+    // call (index always 0), so the bridge cannot tell posts apart — the item
+    // loop is the only reliable post boundary.
+    {
+      const cpImageGrid = document.getElementById('cp-image-grid');
+      if (cpImageGrid) {
+        cpImageGrid.innerHTML = '';
+        cpImageGrid.style.display = 'none';
+      }
+    }
 
     // ✅ [2026-03-07 FIX] 전역 상태 완전 초기화 — resetAfterPublish()와 동일 수준
     // 이전 발행 데이터 잔존으로 인한 상품 불일치/이미지 오염/콘텐츠 타입 오류 방지
