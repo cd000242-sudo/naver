@@ -1,6 +1,6 @@
 {
   "name": "better-life-naver",
-  "version": "2.11.32",
+  "version": "2.11.34",
   "description": "Better Life Naver - 네이버 블로그 자동화 앱으로 더 나은 삶을 만들어가세요. Electron, Node.js, TypeScript, and Puppeteer.",
   "author": "Better Life Team",
   "main": "dist/main.js",
@@ -14,6 +14,7 @@
     "dev": "node scripts/run-electron-dev.mjs",
     "cli": "ts-node src/index.ts",
     "lint": "eslint \"src/**/*.ts\"",
+    "lint:ipc": "node scripts/lint-ipc.mjs",
     "prepack": "npm run build && node scripts/reset-config-for-pack.js",
     "pack": "npm run build && node scripts/reset-config-for-pack.js && electron-builder --dir && node scripts/restore-after-pack.js",
     "dist": "npm run build && node scripts/reset-config-for-pack.js && electron-builder && node scripts/restore-after-pack.js && node scripts/create-archives.js",

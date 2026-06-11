@@ -1,0 +1,33 @@
+{
+  "_comment": "SPEC-STABILITY-2026 6.1 — 레거시 번들 함수 중복 동결 명단 (2026-06-11 실측 28건). renderer.ts 모듈 분할 과정에서 원본 사본이 renderer.ts에 남은 잔재로, 마지막 선언이 silent 승리 중. 신규 중복은 이 명단에 추가하지 말고 원인을 제거할 것 — 명단 축소만 허용 (래칫). 정리는 Phase 7/R13 데드코드 제거에서.",
+  "legacyDuplicateFunctions": [
+    "_showToast",
+    "addRecentActivity",
+    "applyIntervalJitter",
+    "autoGenerateImagesAndPublish",
+    "clearImageGenerationLocks",
+    "escapeHtml",
+    "extractSearchKeywords",
+    "getSubImageMode",
+    "initCharCountDisplay",
+    "initCredentialsSave",
+    "initDashboard",
+    "initDashboardCalendar",
+    "initRecentActivity",
+    "initTabSwitching",
+    "initThumbnailTextSync",
+    "initTitleGeneration",
+    "setState",
+    "setSubImageMode",
+    "setTitleInAllTabs",
+    "switchToImageTab",
+    "switchToScheduleTab",
+    "switchToUnifiedTab",
+    "toggleFullAutoPreview",
+    "updateClock",
+    "updateDashboardStats",
+    "updateFullAutoFinalImagePreview",
+    "updateFullAutoHeadingsPreview",
+    "updateFullAutoPreview"
+  ]
+}

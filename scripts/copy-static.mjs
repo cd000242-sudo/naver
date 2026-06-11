@@ -681,6 +681,29 @@ try {
 const APP_VERSION = '${appVersion}';
 ${sanitized}`;
 
+  // ✅ [SPEC-STABILITY-2026 6.1] 단일 스코프 식별자 충돌 스캔 — 중복 시 빌드 FAIL
+  //   v2.10.85 RecoveryBlockingModal 사고 부류: tsc/eslint/esbuild 전부 미검출,
+  //   런타임 SyntaxError로만 드러남. concat 직후 원본에서만 잡을 수 있다.
+  //   우회: ECC_SKIP_IDENTIFIER_SCAN=1
+  if (process.env.ECC_SKIP_IDENTIFIER_SCAN !== '1') {
+    const { findDuplicateTopLevelIdentifiers, filterAgainstBaseline } = await import('./bundleIdentifierScan.mjs');
+    const baselineRaw = await readFile(path.join(projectRoot, 'scripts', 'bundle-identifier-baseline.json'), 'utf-8');
+    const baseline = JSON.parse(baselineRaw).legacyDuplicateFunctions || [];
+    const allDuplicates = findDuplicateTopLevelIdentifiers(finalRenderer);
+    const duplicates = filterAgainstBaseline(allDuplicates, baseline);
+    const legacyCount = allDuplicates.length - duplicates.length;
+    if (duplicates.length > 0) {
+      console.error('\n❌ [6.1 IDENTIFIER] 번들 top-level 식별자 신규 중복 — 빌드 중단:');
+      for (const dup of duplicates) {
+        console.error(`   - ${dup.name} (${dup.kinds.join('/')}) @ lines ${dup.lines.join(', ')}`);
+      }
+      console.error('   단일 스코프 concat에서 중복 선언은 런타임 SyntaxError/silent override입니다.');
+      console.error('   임시 우회 (위험): ECC_SKIP_IDENTIFIER_SCAN=1 npm run build\n');
+      process.exit(1);
+    }
+    console.log(`✅ [6.1 IDENTIFIER] 번들 식별자 신규 충돌 0건 (레거시 동결 ${legacyCount}건 — Phase 7 정리 대상)`);
+  }
+
   // ✅ [v2.10.80] esbuild minify — 저사양 노트북 첫 로드 가속
   //   목적: 3MB+ renderer.js 파싱/컴파일 시간 단축 (V8 lazy parse 효과 ↑, GC 부담 ↓).
   //   옵션: minifyWhitespace + minifySyntax만. minifyIdentifiers는 *제거* —
