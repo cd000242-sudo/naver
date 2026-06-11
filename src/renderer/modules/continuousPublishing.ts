@@ -4704,6 +4704,14 @@ async function startContinuousPublishingV2(): Promise<void> {
           mode: 'full-auto',
           generator: UnifiedDOMCache.getGenerator(),
           structuredContent: finalStructuredContent,
+          // [SPEC-STABILITY-2026 R4] Hand the images generated above to
+          // fullAutoFlow explicitly (window.generatedImages is filled right
+          // after generation in this iteration). Without this field its entry
+          // wipes ImageManager/globals and REGENERATES every heading — the
+          // double-generation that burned 237 paid images in a day (S4).
+          imageManagementImages: (Array.isArray((window as any).generatedImages) && (window as any).generatedImages.length > 0)
+            ? (window as any).generatedImages
+            : undefined,
           imageSource: skipImages ? 'skip' : item.imageSource,
           skipImages,
           publishMode: item.publishMode || 'publish', // ✅ [2026-04-11 FIX] undefined 방지

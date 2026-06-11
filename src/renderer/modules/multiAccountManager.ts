@@ -358,7 +358,34 @@ function getSequentialImageItemsForMode(items, mode) {
         return mode === 'odd-only' ? originalIndex % 2 === 1 : originalIndex % 2 === 0;
     });
 }
+// [SPEC-STABILITY-2026 R4] Single-flight: the same post must never run two
+// image generations at once. Live evidence (6/10, 6/11): per-heading [1/1]
+// runs and a full [1/N] batch ran concurrently for one post — 2x cost
+// (237 images in one day) and cross-run heading-mapping pollution. The
+// duplicate is REJECTED loudly: silent dedup could merge runs from different
+// providers and violate the user's explicit engine choice.
+const _giaInFlight = new Map();
+const _GIA_STALE_MS = 15 * 60 * 1000; // a run older than this is presumed dead
 async function generateImagesForAutomation(provider, headings, postTitle, options = {}) {
+    const flightKey = String(postTitle || '').trim();
+    const startedAt = flightKey ? _giaInFlight.get(flightKey) : undefined;
+    if (flightKey && startedAt !== undefined) {
+        const elapsedMs = Date.now() - startedAt;
+        if (elapsedMs < _GIA_STALE_MS) {
+            const msg = `IMAGE_DUPLICATE_RUN:같은 글("${flightKey.substring(0, 30)}")의 이미지 생성이 이미 진행 중입니다 (${Math.round(elapsedMs / 1000)}초 경과) — 이중 생성 차단 (S4)`;
+            console.warn(`[generateImagesForAutomation] ⛔ ${msg}`);
+            throw new Error(msg);
+        }
+        console.warn(`[generateImagesForAutomation] ⚠️ ${Math.round(elapsedMs / 60000)}분 경과한 stale 진행 기록 무시하고 새 생성 진행`);
+    }
+    if (flightKey) _giaInFlight.set(flightKey, Date.now());
+    try {
+        return await generateImagesForAutomationInner(provider, headings, postTitle, options);
+    } finally {
+        if (flightKey) _giaInFlight.delete(flightKey);
+    }
+}
+async function generateImagesForAutomationInner(provider, headings, postTitle, options = {}) {
     if (provider === 'skip') {
         console.log('[generateImagesForAutomation] ⏭️ provider="skip" → 이미지 생성 건너뜀');
         return [];
