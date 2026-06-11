@@ -11,7 +11,7 @@
 | S2 | 로그인 세션 안 유지 | d6dbe940(runPostOnly ensureServerSession 게이트) | richPasteTailWiring.test 게이트 배선 가드 | 연속 2건째 "서버 세션 유효 확인" 로그 / 쿠키 삭제 시 자동 재로그인 | 코드 완료 · 라이브 대기 |
 | S2' | keepalive 활성계정 영구 skip (근본) → 세션 만료 → 재로그인 → 캡차 | (R7 완료) publishInProgress 플래그 — 발행 중에만 skip, 유휴 세션은 ping 유지 | sessionKeepalivePublishGate.test(3) + sessionKeepaliveV2 갱신 | 발행 후 유휴 15~30분, 다음 발행 시 재로그인/캡차 없이 세션 재사용 | 코드 완료 · 라이브 대기 |
 | S3 | 소제목 이미지 빈 결과 (원인 불명 중단) | 787d99e6(R3 — 종단 실패 3경로 원인 기록 + 전부 실패 시 NANO_<code> throw. 429 키 로테이션은 기구현 확인) | nanoEmptyResultCause.test(4) | 의도적 실패 유발 시 로그에 NANO_<code> 원인 표시 | 코드 완료 · 라이브 대기 |
-| S4 | 반자동 이미지 뒤섞임 + 이중 생성 — 6/11 연속발행(deepinfra)에서 2차 실측: 같은 글 [1/1]×8 개별 생성 직후 [1/7] 배치 재생성(글당 2배) | 48cde1ed(run#+호출자 계측) → R4 예정(single-flight+키 매핑) | continuousImageFailFast.test 일부 + R4 가드 예정 | run # 중복 0 / 반자동 10건 뒤섞임 0 | 계측 완료 · 본수정 대기 (research.md §F) |
+| S4 | 반자동 이미지 뒤섞임 + 이중 생성 (트리거 확정: 연속발행 생성본을 formData로 인계 안 함 → fullAutoFlow 진입부가 전역 초기화 후 전량 재생성) | fa28b451(R4-1 — imageManagementImages 정식 인계 + single-flight 명시 거부) + a37a7bf2(R4-2 — 이중 신호 리매핑 + 매칭 실패 폴백 금지) | imageDoubleGenerationGuard.test(5) | run # 중복 0 / 반자동 10건 뒤섞임 0 / 글당 이미지 생성 1회(비용 절반) | 코드 완료 · 라이브 대기 |
 | S5 | 풀오토 썸네일 이미지관리 공란 | 819cf634(R5 — 썸네일 정본 키 등록 + 웹 URL 로컬 저장 + sync 키 폴백 + 그리드 대체소스 1회) | thumbnailSlotRegistration.test(4) | 풀오토 발행 후 이미지관리 첫 슬롯 썸네일 표시 | 코드 완료 · 라이브 대기 |
 | S6 | "세팅 안 했는데 썸네일만" (연속/다중계정) | e4a42bbe(레거시 키 격리 + 모드 동기화) | thumbnailOnlyScope.test(2) | 연속발행에서 소제목 이미지 정상 생성 | 코드 완료 · 라이브 대기 |
 | S7 | 수집만 무한, 발행 0 | c9fcebda(대기 상한 + 연속 실패 차단기 + 수집 이미지 존중) | continuousImageFailFast.test(5) | 이미지 2글 연속 실패 시 "⛔ 연속발행 중단" 표출 | 코드 완료 · 라이브 대기 |
