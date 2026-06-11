@@ -32,6 +32,9 @@
 | S12 | 연속발행 중지한 키워드, 재시작 시 건너뜀 | c6c77452(재시작 복구 필터에 cancelled 추가) | continuousCancelledResume.test(2) | 중지→재시작 시 중지했던 키워드부터 재개 ("다시 시도합니다" 토스트) | 코드 완료 · 라이브 대기 |
 | S13 | 꼬리(구분선/CTA/해시태그) 에디터엔 존재·발행물에서 통째 소실 — root-end 캐럿이 컴포넌트 모델 밖(7488c0e2 회귀, 발행물 224312474175 실측) | 96fbcf2b(컴포넌트 내부 캐럿 + probe inModel 검증 + PrePublish CTA/해시태그 그물) | richPasteTailWiring.test(+4) | 연속발행 1건 발행물(모바일 페이지)에서 꼬리 4종 실물 확인 + hashtag-presence 체크 가동 | 코드 완료 · 라이브 대기 |
 | S14 | Flow 연속 타임아웃 — 생성은 성공했는데 감지 실패 + 오류 카드(다시 시도) 미대응 + 이전 생성분 오인(2초 가짜 감지=뒤섞임) | (커밋)(에러 카드 자동 재시도 2회+FLOW_GENERATION_ERROR 즉시 표출 + UUID 기반 신규 판별) | flowDetectionGuards.test(2) + continuousImageGenerationSafety 갱신 | Flow 연속발행에서 타임아웃율 급감 + "다시 시도 자동 클릭" 로그 동작 + 글당 이미지가 해당 글 생성분 | 코드 완료 · 라이브 대기 |
+| S18 | 모바일 가독성 — 쉼표 시작 줄/단어 중간 절단/빈 줄 낀 표 원문 노출 | 35bc3c67(줄나눔 재설계: 구두점 소비+공백 후퇴+외톨이 병합+22자 폭, 표 행 스티칭) | richTextPaste.test 가독성 계약(5) | 발행물 모바일 실측을 사용자 레퍼런스와 비교 | 코드 완료 · 라이브 대기 |
+| R8 | 에러 삼킴 A-1/A-2 — 카테고리 실패 시 암묵 기본값 발행 | 550f177d(침묵 5경로 → CATEGORY_* 명시 중단, allowCategoryFallback 옵트인) | categoryFailureGate.test(3) | 의도적 오설정 카테고리 발행 시 사유와 함께 중단 | 코드 완료 · 라이브 대기 |
+| R11 | 에러 삼킴 A-3/A-4 — 발행→임시저장 silent 전환(3경로) + 발행 미확인 성공 통과 | 16f37e75(PUBLISH_BUTTON_NOT_FOUND 중단 + PUBLISH_UNCONFIRMED 명시 실패 + 이중발행 재시도 금지) | publishConfirmIntegrity.test(3) | 정상 발행 무회귀 + 미확인 시 자동 재발행 0 | 코드 완료 · 라이브 대기 |
 
 ## 2. 릴리즈 공통 게이트 (모든 출고 전)
 
