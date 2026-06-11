@@ -290,27 +290,58 @@ function updateGeneratedImagePreview(data: { image: any; index: number; total: n
       }
     }
 
-    // Mirror into the continuous-publishing modal grid (it has no image UI of
-    // its own). Multi-image batches (full-auto style) reset at index 0;
+    // Mirror into the continuous-publishing modal preview (it has no image UI
+    // of its own): the latest image fills the large preview, every image adds
+    // a thumb. Multi-image batches (full-auto style) reset at index 0;
     // single-image calls (continuous types one heading per IPC, index always
-    // 0) accumulate — the item loop clears the grid at each post boundary.
+    // 0) accumulate — the item loop clears the preview at each post boundary.
+    const cpWrap = document.getElementById('cp-image-preview-wrap');
     const cpGrid = document.getElementById('cp-image-grid');
-    if (cpGrid) {
+    const cpMain = document.getElementById('cp-image-main') as HTMLImageElement | null;
+    if (cpWrap && cpGrid && cpMain) {
       if (index === 0 && total > 1) cpGrid.innerHTML = '';
       const cpSrc = image.filePath || image.url || image.previewDataUrl || '';
       if (cpSrc) {
         const thumb = document.createElement('img');
         thumb.src = cpSrc;
-        thumb.title = `${image.heading || `이미지 ${index + 1}`} (${index + 1}/${total})`;
-        thumb.style.cssText = 'width: 64px; height: 64px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);';
+        thumb.title = `${image.heading || `이미지 ${index + 1}`} (${index + 1}/${total}) — 클릭하면 크게 보기`;
+        thumb.style.cssText = 'width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); cursor: pointer;';
+        thumb.addEventListener('click', () => { cpMain.src = cpSrc; });
         thumb.onerror = () => { thumb.remove(); };
         cpGrid.appendChild(thumb);
-        cpGrid.style.display = 'flex';
+        cpMain.src = cpSrc;
+        if (!cpMain.dataset.lightboxWired) {
+          cpMain.dataset.lightboxWired = '1';
+          cpMain.addEventListener('click', () => {
+            if (cpMain.src) openCpImageLightbox(cpMain.src);
+          });
+        }
+        cpWrap.style.display = 'block';
       }
     }
   } catch (previewErr) {
     console.warn('[Renderer] image preview update failed:', previewErr);
   }
+}
+
+// Full-screen lightbox for the continuous modal preview — created lazily so
+// the markup stays out of index.html. Click anywhere to close.
+function openCpImageLightbox(src: string): void {
+  let box = document.getElementById('cp-image-lightbox');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'cp-image-lightbox';
+    box.style.cssText = 'position: fixed; inset: 0; z-index: 40000; background: rgba(0, 0, 0, 0.88); display: none; align-items: center; justify-content: center; cursor: zoom-out;';
+    box.addEventListener('click', () => { (box as HTMLElement).style.display = 'none'; });
+    const img = document.createElement('img');
+    img.id = 'cp-image-lightbox-img';
+    img.style.cssText = 'max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 12px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);';
+    box.appendChild(img);
+    document.body.appendChild(box);
+  }
+  const img = document.getElementById('cp-image-lightbox-img') as HTMLImageElement | null;
+  if (img) img.src = src;
+  box.style.display = 'flex';
 }
 
 function registerImageGeneratedPreviewBridge(): (() => void) | null {

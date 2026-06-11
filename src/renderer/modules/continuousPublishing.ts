@@ -4070,6 +4070,18 @@ function showEditQueueItemModal(item: ContinuousQueueItem, options?: { fromFullV
 }
 
 // ✅ 진행 모달 업데이트 헬퍼
+// Clears the modal's image preview (large image + thumb grid) — called at
+// batch start and at every item boundary so one post's images never bleed
+// into the next post's preview (cp-image-preview-wrap).
+function resetContinuousImagePreview(): void {
+  const wrap = document.getElementById('cp-image-preview-wrap');
+  const grid = document.getElementById('cp-image-grid');
+  const main = document.getElementById('cp-image-main') as HTMLImageElement | null;
+  if (grid) grid.innerHTML = '';
+  if (main) main.removeAttribute('src');
+  if (wrap) wrap.style.display = 'none';
+}
+
 export function updateContinuousProgressModal(data: {
   title?: string;
   step?: string;
@@ -4244,13 +4256,9 @@ async function startContinuousPublishingV2(): Promise<void> {
   const progressModal = document.getElementById('continuous-progress-modal');
   if (progressModal) progressModal.style.display = 'flex';
 
-  // Image preview grid starts empty each batch (stale previews from the
-  // previous run would be misread as this run's images).
-  const cpImageGrid = document.getElementById('cp-image-grid');
-  if (cpImageGrid) {
-    cpImageGrid.innerHTML = '';
-    cpImageGrid.style.display = 'none';
-  }
+  // Image preview starts empty each batch (stale previews from the previous
+  // run would be misread as this run's images).
+  resetContinuousImagePreview();
 
   // ✅ [v2.7.37] 발행 모달이 닫혀도 다시 띄울 수 있도록 floating 버튼 추가
   //   사용자 보고: "닫기하면 다시 띄울 수 없음". 발행은 백그라운드 진행되지만 진행 보기 불가.
@@ -4329,13 +4337,7 @@ async function startContinuousPublishingV2(): Promise<void> {
     // Per-post image preview reset. Continuous generates one image per IPC
     // call (index always 0), so the bridge cannot tell posts apart — the item
     // loop is the only reliable post boundary.
-    {
-      const cpImageGrid = document.getElementById('cp-image-grid');
-      if (cpImageGrid) {
-        cpImageGrid.innerHTML = '';
-        cpImageGrid.style.display = 'none';
-      }
-    }
+    resetContinuousImagePreview();
 
     // ✅ [2026-03-07 FIX] 전역 상태 완전 초기화 — resetAfterPublish()와 동일 수준
     // 이전 발행 데이터 잔존으로 인한 상품 불일치/이미지 오염/콘텐츠 타입 오류 방지
