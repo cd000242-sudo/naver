@@ -82,8 +82,13 @@ describe('rich paste tail wiring', () => {
     // contenteditable — the model caret only moves on REAL paragraph clicks,
     // so the click strategy must run FIRST; Selection anchors are last resorts.
     expect(code.indexOf("name: 'paragraph-end-click'")).toBeGreaterThan(-1);
-    expect(code.indexOf("name: 'paragraph-end-click'")).toBeLessThan(code.indexOf("name: 'caret-end-click'"));
+    // The literal-last-paragraph click (empty ones included — the only caret
+    // position BELOW a freshly converted link card) must outrank the
+    // text-bearing-only click, which must outrank coordinate/Selection paths.
+    expect(code.indexOf("name: 'paragraph-end-click'")).toBeLessThan(code.indexOf("name: 'text-paragraph-end-click'"));
+    expect(code.indexOf("name: 'text-paragraph-end-click'")).toBeLessThan(code.indexOf("name: 'caret-end-click'"));
     expect(code.indexOf("name: 'caret-end-click'")).toBeLessThan(code.indexOf("name: 'root-end'"));
+    expect(code).toMatch(/clickParagraphEnd\(false\)/);
     // Sentinel-char probe: confirms input registered AND ended at doc end,
     // independent of editor DOM classes (paragraph counting broke on redesign).
     expect(code).toMatch(/const SENTINEL =/);

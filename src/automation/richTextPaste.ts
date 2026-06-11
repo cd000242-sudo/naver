@@ -1385,19 +1385,20 @@ export async function ensureTailTypingReady(
   // programmatic Selection on the hidden input proxy never does. Puppeteer's
   // element click handles the iframe offset math that broke the manual
   // coordinate path historically (N3).
-  const clickLastParagraphEnd = async (): Promise<void> => {
-    const handle = await frame.evaluateHandle(() => {
+  const clickParagraphEnd = async (textBearingOnly: boolean): Promise<void> => {
+    const handle = await frame.evaluateHandle((onlyText) => {
       const wrap = (document.querySelector('.se-components-wrap, .se-canvas, .se-content') as HTMLElement | null)
         || document.body;
       const paras = Array.from(wrap.querySelectorAll('p.se-text-paragraph')) as HTMLElement[];
       for (let i = paras.length - 1; i >= 0; i -= 1) {
-        if ((paras[i].innerText || '').trim().length > 0) {
-          paras[i].scrollIntoView({ block: 'center', inline: 'nearest' });
-          return paras[i];
-        }
+        if (onlyText && (paras[i].innerText || '').trim().length === 0) continue;
+        const rect = paras[i].getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) continue;
+        paras[i].scrollIntoView({ block: 'center', inline: 'nearest' });
+        return paras[i];
       }
       return null;
-    }).catch(() => null);
+    }, textBearingOnly).catch(() => null);
     const el = handle ? handle.asElement() : null;
     if (!el) return;
     const box = await (el as import('puppeteer').ElementHandle<Element>).boundingBox().catch(() => null);
@@ -1407,6 +1408,16 @@ export async function ensureTailTypingReady(
       .catch(() => undefined);
     await page.keyboard.press('End').catch(() => undefined);
   };
+
+  // The literal LAST paragraph — empty ones included. After a link-card (or
+  // image) converts, the editor leaves an EMPTY trailing paragraph below the
+  // component and that is the ONLY caret position below the card. Skipping
+  // empty paragraphs anchored typing ABOVE the card (2026-06-11 live: the
+  // next block's divider landed between the URL text and its card).
+  const clickLastParagraphEnd = async (): Promise<void> => clickParagraphEnd(false);
+  // Text-bearing fallback — the old dead-keyboard observation said clicking
+  // an empty block sometimes fails to revive input; the probe decides.
+  const clickLastTextParagraphEnd = async (): Promise<void> => clickParagraphEnd(true);
 
   const caretEndClick = async (): Promise<void> => {
     // Scroll the true last block into view FIRST — clicking coordinates that
@@ -1514,6 +1525,9 @@ export async function ensureTailTypingReady(
     // model caret on clicks; Selection tricks land in the hidden input proxy
     // (2026-06-11 structure dump: document tree has no contenteditable).
     { name: 'paragraph-end-click', run: clickLastParagraphEnd },
+    // Same click but restricted to text-bearing paragraphs — covers the case
+    // where clicking the trailing empty paragraph fails to revive input.
+    { name: 'text-paragraph-end-click', run: clickLastTextParagraphEnd },
     // Manual-coordinate click as backup (legacy path, frame-offset math).
     { name: 'caret-end-click', run: caretEndClick },
     // Selection-based anchors only as last resorts — they cannot move the
