@@ -89,6 +89,40 @@ describe('rich paste tail wiring', () => {
     expect(code).toMatch(/Backspace/);
   });
 
+  it('anchors the root-end caret INSIDE the last text block (publish-serialization safety)', () => {
+    const code = read('automation/richTextPaste.ts');
+    // 2026-06-11 live incident: collapsing the caret at the editable ROOT
+    // level (after the last component) types text that renders in the editor
+    // but lives outside the SmartEditor component model — the publish
+    // serializer dropped the entire tail (divider/CTA/hashtags).
+    const fn = code.slice(code.indexOf('const focusRootEnd'), code.indexOf("name: 'root-end'"));
+    expect(fn).toMatch(/previousElementSibling/); // walks to last text-bearing block
+    expect(fn).toMatch(/while \(leaf\.lastChild\)/); // descends inside the block
+  });
+
+  it('rejects sentinel probes that landed outside the component model', () => {
+    const code = read('automation/richTextPaste.ts');
+    expect(code).toMatch(/closest\('\.se-component'\)/);
+    expect(code).toMatch(/registered && atEnd && inModel/);
+  });
+
+  it('counts general CTAs in the pre-publish link-card expectation', () => {
+    const code = read('automation/editorHelpers.ts');
+    const stash = code.slice(
+      code.indexOf('__prePublishExpectations = {'),
+      code.indexOf('// 7. CTA 버튼 최종 확인')
+    );
+    // 2026-06-11 live: CTA 1개 inserted but expectation stayed 0 because only
+    // previousPostTailInserted was counted — the lost link card passed 5/5.
+    expect(stash).toMatch(/expectedLinkCardMin:[\s\S]*?ctas/);
+    expect(stash).toMatch(/expectedHashtags/);
+  });
+
+  it('asserts expected hashtags are present in the editor body before publish', () => {
+    const code = read('automation/prePublishAssertion.ts');
+    expect(code).toMatch(/hashtag/i);
+  });
+
   it('verifies the server session before reusing an open browser in runPostOnly', () => {
     const code = read('naverBlogAutomation.ts');
     const start = code.indexOf('async runPostOnly(');

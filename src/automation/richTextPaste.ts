@@ -1427,14 +1427,36 @@ export async function ensureTailTypingReady(
       const root = document.querySelector('[contenteditable="true"]') as HTMLElement | null;
       if (!root) return;
       root.focus();
+      // The caret must land INSIDE the last text-bearing block. Collapsing at
+      // the root level (after the last component) renders fine in the editor,
+      // but that text lives outside the SmartEditor component model and the
+      // publish serializer drops it wholesale — 2026-06-11 live incident:
+      // divider/CTA/hashtags all typed, all missing from the published post.
+      let block = root.lastElementChild as HTMLElement | null;
+      while (block) {
+        if ((block.innerText || block.textContent || '').trim().length > 0) break;
+        block = block.previousElementSibling as HTMLElement | null;
+      }
       const range = document.createRange();
-      range.selectNodeContents(root);
-      range.collapse(false);
+      if (block) {
+        let leaf: Node = block;
+        while (leaf.lastChild) leaf = leaf.lastChild;
+        if (leaf.nodeType === Node.TEXT_NODE) {
+          range.setStart(leaf, (leaf.textContent || '').length);
+          range.collapse(true);
+        } else {
+          range.selectNodeContents(leaf as HTMLElement);
+          range.collapse(false);
+        }
+      } else {
+        range.selectNodeContents(root);
+        range.collapse(false);
+      }
       const selection = window.getSelection();
       if (!selection) return;
       selection.removeAllRanges();
       selection.addRange(range);
-      (root.lastElementChild as HTMLElement | null)?.scrollIntoView({ block: 'center', inline: 'nearest' });
+      (block || (root.lastElementChild as HTMLElement | null))?.scrollIntoView({ block: 'center', inline: 'nearest' });
     }).catch(() => undefined);
   };
 
@@ -1469,11 +1491,36 @@ export async function ensureTailTypingReady(
     const after = await editableRootText(frame);
     const registered = after.includes(SENTINEL) && after.length > before.length;
     const atEnd = after.endsWith(SENTINEL);
+    // (c) the sentinel must sit INSIDE the component model. Text typed at the
+    // editable-root level passes the DOM checks above but the publish
+    // serializer drops it (2026-06-11 live: whole tail lost). Depth >= 3
+    // keeps the check working even if the editor renames its classes.
+    let inModel = false;
+    if (registered) {
+      inModel = await frame.evaluate((sentinel) => {
+        const root = document.querySelector('[contenteditable="true"]');
+        if (!root) return false;
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        let node: Node | null;
+        while ((node = walker.nextNode())) {
+          if ((node.textContent || '').includes(sentinel)) {
+            const el = node.parentElement;
+            if (!el) return false;
+            if (el.closest('.se-component')) return true;
+            let depth = 0;
+            let cur: HTMLElement | null = el;
+            while (cur && cur !== root) { depth += 1; cur = cur.parentElement; }
+            return depth >= 3;
+          }
+        }
+        return false;
+      }, SENTINEL).catch(() => false);
+    }
     if (after.includes(SENTINEL)) {
       await page.keyboard.press('Backspace').catch(() => undefined);
       await new Promise((resolve) => setTimeout(resolve, 150));
     }
-    return registered && atEnd;
+    return registered && atEnd && inModel;
   };
 
   for (const strategy of strategies) {

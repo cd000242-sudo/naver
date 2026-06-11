@@ -13,6 +13,8 @@ export interface PrePublishExpectations {
   expectedLinkCardMin: number;
   expectedDividerMin: number;
   forbiddenMarkers?: string[];
+  /** Hashtags the tail stage typed — each must appear in the editor body. */
+  expectedHashtags?: string[];
 }
 
 export interface PrePublishStats {
@@ -21,6 +23,8 @@ export interface PrePublishStats {
   linkCardCount: number;
   dividerCount: number;
   leakedMarkers: string[];
+  /** Raw editor text — used for hashtag presence (optional for old callers). */
+  bodyText?: string;
 }
 
 export interface PrePublishCheck {
@@ -90,6 +94,24 @@ export function evaluatePrePublishReport(
     },
   ];
 
+  // 2026-06-11 live incident: hashtags were typed (log confirmed) but the
+  // published post had none — the tail landed outside the component model.
+  // Presence in the editor body is the closest pre-publish signal we have.
+  const expectedHashtags = expectations.expectedHashtags || [];
+  if (expectedHashtags.length > 0) {
+    const bodyText = stats.bodyText || '';
+    const missing = expectedHashtags.filter((tag) => {
+      const name = String(tag).replace(/^#/, '').trim();
+      return name.length > 0 && !bodyText.includes(`#${name}`);
+    });
+    checks.push({
+      name: 'hashtag-presence',
+      pass: missing.length === 0,
+      expected: `${expectedHashtags.length}개 본문 포함`,
+      actual: missing.length === 0 ? 'all present' : `누락: ${missing.join(', ')}`,
+    });
+  }
+
   return { pass: checks.every((check) => check.pass), checks };
 }
 
@@ -154,5 +176,6 @@ export async function collectPrePublishStats(
     linkCardCount: raw.linkCardCount,
     dividerCount: raw.dividerCount,
     leakedMarkers: findLeakedMarkers(raw.text, markers),
+    bodyText: raw.text,
   };
 }

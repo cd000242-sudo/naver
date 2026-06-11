@@ -2475,8 +2475,14 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       self.__prePublishExpectations = {
         minBodyChars: Math.max(200, Math.floor(plannedBodyLen * 0.5)),
         expectedImageMin: (resolved.images?.length ?? 0) > 0 ? 1 : 0,
-        expectedLinkCardMin: previousPostTailInserted ? 1 : 0,
+        // 2026-06-11: general CTAs each type a URL that must become a link
+        // card — counting only the previous-post tail let a lost CTA card
+        // pass 5/5. (Observation mode: conversion is Naver-server dependent,
+        // so misses log a ❌ for calibration, they do not block.)
+        expectedLinkCardMin: (previousPostTailInserted ? 1 : 0)
+          + (resolved.ctas || []).filter((c: { link?: string }) => !!c?.link).length,
         expectedDividerMin: previousPostTailInserted ? 1 : 0,
+        expectedHashtags: hashtagsToApply,
       };
     } catch {
       // expectations are best-effort observation data
