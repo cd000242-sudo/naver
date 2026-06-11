@@ -59,6 +59,22 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
   }
 
   const targetName = self.options.categoryName!;
+
+  // [SPEC-STABILITY-2026 R8-1] A user-REQUESTED category that cannot be
+  // applied must stop the publish with a reason. Publishing under the default
+  // category instead silently violated the user's intent (A-1/A-2 — the most
+  // dangerous error-swallow in the publish pipeline). The thrown error rides
+  // the publish retry loop; content is already saved, nothing is lost.
+  // options.allowCategoryFallback === true restores the old proceed behavior.
+  const failCategory = (code: string, detail: string): void => {
+    if (self.options.allowCategoryFallback === true) {
+      self.log(`   ⚠️ ${code}: ${detail} — allowCategoryFallback=true 설정에 따라 폴백 발행을 계속합니다.`);
+      return;
+    }
+    const msg = `${code}:요청한 카테고리("${targetName}") 적용 실패 — ${detail}. 잘못된 카테고리 발행을 막기 위해 중단합니다.`;
+    self.log(`   ⛔ ${msg}`);
+    throw new Error(msg);
+  };
   const stripCategoryDecorations = (s: string) =>
     s.replace(/[└├│─]+/g, '')
       .replace(/하위\s*카테고리/g, '')
@@ -135,17 +151,17 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
       if (modalReady) break;
     }
     if (!modalReady) {
-      self.log('📂 [카테고리] ⚠️ 발행 모달 대기 타임아웃 (5초) → 기본 카테고리로 진행');
+      failCategory('CATEGORY_MODAL_TIMEOUT', '발행 모달이 5초 내에 열리지 않음');
       return;
     }
   }
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      // ✅ [2026-02-19] 전체 타임아웃 가드 — 15초 초과 시 즉시 리턴
+      // ✅ [2026-02-19] 전체 타임아웃 가드 — 15초 초과 시 즉시 중단
       if (Date.now() - totalStart > TOTAL_TIMEOUT) {
-        self.log('📂 [카테고리] 전체 타임아웃 (15초) → 기본 카테고리로 진행');
         await closeCategoryDropdown();
+        failCategory('CATEGORY_SELECT_TIMEOUT', '카테고리 선택이 15초를 초과');
         return;
       }
 
@@ -241,8 +257,8 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
       if (!categorySelector) {
         self.log(`   ⚠️ [시도 ${attempt}/${MAX_RETRIES}] 카테고리 드롭다운 버튼 미발견`);
         if (attempt === MAX_RETRIES) {
-          self.log('   💡 기본 카테고리로 진행합니다.');
           await self.debugCategoryElements(frame, page);
+          failCategory('CATEGORY_UI_NOT_FOUND', `${MAX_RETRIES}회 시도에도 카테고리 드롭다운 미발견 (에디터 개편 가능성)`);
         }
         continue;
       }
@@ -307,8 +323,8 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
       while (Date.now() - pollStart < POLL_TIMEOUT) {
         // ✅ [2026-02-19] 전체 타임아웃 가드 (polling 루프 내)
         if (Date.now() - totalStart > TOTAL_TIMEOUT) {
-          self.log('📂 [카테고리] polling 중 전체 타임아웃 → 기본 카테고리로 진행');
           await closeCategoryDropdown();
+          failCategory('CATEGORY_SELECT_TIMEOUT', '카테고리 목록 polling 중 15초 초과');
           return;
         }
 
@@ -434,15 +450,17 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
       await self.delay(300);
 
       if (attempt === MAX_RETRIES) {
-        self.log(`   💡 ${MAX_RETRIES}회 시도 모두 실패. 기본 카테고리로 발행합니다.`);
         self.log(`   💡 블로그에 "${targetName}" 카테고리가 있는지 확인해주세요.`);
+        failCategory('CATEGORY_NOT_FOUND', `카테고리 목록에 "${targetName}" 없음 (발견된 목록: ${allCandidates.slice(0, 8).join(', ')})`);
       }
     } catch (catError) {
+      // [R8-1] failCategory의 의도된 중단은 그대로 위로 — 재시도로 삼키지 않는다
+      if ((catError as Error)?.message?.startsWith('CATEGORY_')) throw catError;
       self.log(`   ⚠️ [시도 ${attempt}/${MAX_RETRIES}] 카테고리 선택 중 오류: ${(catError as Error).message}`);
       // ✅ [2026-03-05 FIX] 예외 시에도 모달 내부 클릭으로 정리 (ESC 사용 금지)
       await closeCategoryDropdown();
       if (attempt === MAX_RETRIES) {
-        self.log('   💡 기본 카테고리로 진행합니다.');
+        failCategory('CATEGORY_SELECT_FAILED', `${MAX_RETRIES}회 시도 모두 예외 (마지막: ${(catError as Error).message?.substring(0, 80)})`);
       }
     }
   }
