@@ -5710,7 +5710,20 @@ export class NaverBlogAutomation {
                     this.log(`POST_URL: ${finalUrl}`);
                     this.publishedUrl = finalUrl; // ✅ URL 저장
                   } else {
-                    this.log(`⚠️ URL이 여전히 변경되지 않았습니다. 발행이 완료되었는지 수동으로 확인해주세요.`);
+                    // [SPEC-STABILITY-2026 R11/A-4] 성공 메시지 + URL 미변경을
+                    // "수동 확인" 로그만 남기고 성공처럼 통과시키면 빈
+                    // publishedUrl로 체이닝/추적이 돌아간다. 5초 추가 재검증
+                    // 후에도 미변경이면 명시 실패 — 단 이중 발행 방지를 위해
+                    // 재시도 루프가 자동 재발행하지 않는 코드로 던진다.
+                    await this.delay(5000);
+                    const reVerifyUrl = this.ensurePage().url();
+                    if (reVerifyUrl !== beforeUrl && /blog\.naver\.com/i.test(reVerifyUrl)) {
+                      this.log(`✅ 재검증 후 URL 변경 확인: ${reVerifyUrl}`);
+                      this.log(`POST_URL: ${reVerifyUrl}`);
+                      this.publishedUrl = reVerifyUrl;
+                    } else {
+                      throw new Error('PUBLISH_UNCONFIRMED:발행 성공 메시지는 떴지만 URL이 변경되지 않아 완료를 확인할 수 없습니다. 이중 발행 방지를 위해 자동 재시도하지 않습니다 — 블로그에서 글 존재 여부를 확인해주세요.');
+                    }
                   }
                 } else if (publishStatus.error) {
                   throw new Error(`발행 실패: ${publishStatus.errorText}`);
@@ -5769,40 +5782,14 @@ export class NaverBlogAutomation {
               }
             }
           } else {
-            // ✅ 즉시 발행 실패 시 임시저장으로 폴백
-            this.log('⚠️ 즉시 발행 확인 버튼을 찾지 못했습니다. 임시저장으로 폴백합니다...');
-
-            // 모달 닫기
+            // [SPEC-STABILITY-2026 R11/A-3] 발행 버튼 미발견 시 임시저장으로
+            // silent 전환하던 폴백 제거 — 사용자는 "발행"을 명령했는데 결과가
+            // 임시저장이면 발행 누락으로 인지된다(분류표 A-3). 명확한 사유로
+            // 중단하고 발행 재시도 루프가 처리한다. 글은 앱에 저장돼 있어
+            // 콘텐츠 손실은 없다.
             const page = this.ensurePage();
             await page.keyboard.press('Escape').catch(() => { });
-            await this.delay(500);
-
-            // 임시저장 시도
-            try {
-              const saveButtonSelectors = [
-                'button.save_btn__bzc5B[data-click-area="tpb.save"]',
-                'button.save_btn__bzc5B',
-                'button[data-click-area="tpb.save"]',
-              ];
-
-              let saveButton: ElementHandle<Element> | null = null;
-              for (const selector of saveButtonSelectors) {
-                saveButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
-                if (saveButton) break;
-              }
-
-              if (saveButton) {
-                await saveButton.click();
-                await this.delay(this.DELAYS.MEDIUM);
-                await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
-                this.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
-              } else {
-                throw new Error('임시저장 버튼도 찾을 수 없습니다.');
-              }
-            } catch (fallbackError) {
-              this.log(`❌ 임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
-              throw new Error(`즉시 발행 실패: 발행 확인 버튼을 찾을 수 없습니다. 임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
-            }
+            throw new Error('PUBLISH_BUTTON_NOT_FOUND:즉시 발행 확인 버튼을 찾지 못했습니다 — 임시저장 전환 없이 중단합니다 (네이버 UI 변경 가능성, 셀렉터 점검 필요).');
           }
         } else {
           // ✅ 발행 버튼을 찾지 못하면 저장 버튼 클릭 후 발행 모달 처리 (사용자가 제공한 정확한 셀렉터 사용)
@@ -5934,70 +5921,15 @@ export class NaverBlogAutomation {
                 }
               }
             } else {
-              // ✅ 즉시 발행 실패 시 임시저장으로 폴백
-              this.log('⚠️ 즉시 발행 확인 버튼을 찾지 못했습니다. 임시저장으로 폴백합니다...');
-
-              // 모달 닫기
+              // [SPEC-STABILITY-2026 R11/A-3] 임시저장 silent 전환 제거 —
+              // 사용자의 "발행" 명령을 임시저장으로 바꾸지 않는다 (중복 경로 2).
               const page = this.ensurePage();
               await page.keyboard.press('Escape').catch(() => { });
-              await this.delay(500);
-
-              // 임시저장 시도
-              try {
-                const saveButtonSelectors = [
-                  'button.save_btn__bzc5B[data-click-area="tpb.save"]',
-                  'button.save_btn__bzc5B',
-                  'button[data-click-area="tpb.save"]',
-                ];
-
-                let saveButton: ElementHandle<Element> | null = null;
-                for (const selector of saveButtonSelectors) {
-                  saveButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
-                  if (saveButton) break;
-                }
-
-                if (saveButton) {
-                  await saveButton.click();
-                  await this.delay(this.DELAYS.MEDIUM);
-                  await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
-                  this.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
-                } else {
-                  throw new Error('임시저장 버튼도 찾을 수 없습니다.');
-                }
-              } catch (fallbackError) {
-                this.log(`❌ 임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
-                throw new Error(`즉시 발행 실패: 발행 확인 버튼을 찾을 수 없습니다. 임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
-              }
+              throw new Error('PUBLISH_BUTTON_NOT_FOUND:즉시 발행 확인 버튼을 찾지 못했습니다 — 임시저장 전환 없이 중단합니다 (네이버 UI 변경 가능성, 셀렉터 점검 필요).');
             }
           } else {
-            // ✅ 발행 옵션을 찾지 못한 경우 임시저장으로 폴백
-            this.log('⚠️ 발행 옵션을 찾지 못했습니다. 임시저장으로 폴백합니다...');
-
-            try {
-              const saveButtonSelectors = [
-                'button.save_btn__bzc5B[data-click-area="tpb.save"]',
-                'button.save_btn__bzc5B',
-                'button[data-click-area="tpb.save"]',
-              ];
-
-              let saveButton: ElementHandle<Element> | null = null;
-              for (const selector of saveButtonSelectors) {
-                saveButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
-                if (saveButton) break;
-              }
-
-              if (saveButton) {
-                await saveButton.click();
-                await this.delay(this.DELAYS.MEDIUM);
-                await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
-                this.log('✅ 즉시 발행 실패 → 임시저장 성공! 글을 나중에 수동으로 발행할 수 있습니다.');
-              } else {
-                throw new Error('임시저장 버튼도 찾을 수 없습니다.');
-              }
-            } catch (fallbackError) {
-              this.log(`❌ 임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
-              throw new Error(`즉시 발행 실패: 발행 옵션을 찾을 수 없습니다. 임시저장 폴백도 실패: ${(fallbackError as Error).message}`);
-            }
+            // [SPEC-STABILITY-2026 R11/A-3] 임시저장 silent 전환 제거 (중복 경로 3).
+            throw new Error('PUBLISH_BUTTON_NOT_FOUND:발행 옵션을 찾지 못했습니다 — 임시저장 전환 없이 중단합니다 (네이버 UI 변경 가능성, 셀렉터 점검 필요).');
           }
         }
       } else if (mode === 'schedule') {
@@ -6550,6 +6482,10 @@ export class NaverBlogAutomation {
           'Page is closed',
           'Browser is closed',
           // 'detached Frame' 제외 - 프레임 재연결로 복구 가능
+          // [R11/A-4] 발행 미확인은 블라인드 재시도 시 이중 발행 위험 — 즉시 중단
+          'PUBLISH_UNCONFIRMED',
+          // [R8-1] 카테고리가 목록에 없음은 결정적 실패 — 재시도 무의미
+          'CATEGORY_NOT_FOUND',
         ];
 
         const isFatalError = fatalErrors.some(fe => errorMsg.includes(fe));
