@@ -103,6 +103,22 @@ const ImageManager = {
     this.syncAllPreviews();
   },
 
+  // [SPEC-STABILITY-2026 R4-2] Position of a key within the CURRENT headings
+  // (normalized comparison) — stamped onto images at write time so the
+  // index/key dual-signal check below has reliable inputs.
+  _inferHeadingIndex(titleKey: string): number | undefined {
+    try {
+      const norm = normalizeHeadingKeyForVideoCache(String(titleKey || '').trim());
+      if (!norm) return undefined;
+      const list = Array.isArray(this.headings) ? this.headings : [];
+      for (let i = 0; i < list.length; i += 1) {
+        const t = typeof list[i] === 'string' ? list[i] : (list[i]?.title || '');
+        if (normalizeHeadingKeyForVideoCache(String(t).trim()) === norm) return i;
+      }
+    } catch { /* diagnostic meta only */ }
+    return undefined;
+  },
+
   resolveHeadingKey(headingTitle: string): string {
     const rawTitle = String(headingTitle || '').trim();
     if (!rawTitle) return rawTitle;
@@ -219,14 +235,27 @@ const ImageManager = {
         const n = normalizeHeadingKeyForVideoCache(String(key || '').trim());
         if (n && !normalizedHeadings.has(n)) {
           // 인덱스 기반 리매핑: 같은 위치의 새 소제목이 있으면 이전
+          // [SPEC-STABILITY-2026 R4-2] Dual-signal requirement: the blind
+          // index fallback assigned images to WHATEVER heading sat at the
+          // same position — the intermittent mix-up (S4). Index AND key must
+          // now agree (normalized containment = same heading, lightly edited).
           const images = this.imageMap.get(key);
           if (images && images.length > 0 && headingTitleList.length > 0) {
             const idx = images[0]?.headingIndex;
             if (typeof idx === 'number' && idx >= 0 && idx < headingTitleList.length) {
-              const newKey = this.resolveHeadingKey(headingTitleList[idx]);
-              if (!this.imageMap.has(newKey)) {
-                this.imageMap.set(newKey, images);
-                console.log(`[ImageManager] 이미지 리매핑: "${key}" → "${newKey}"`);
+              const targetTitle = headingTitleList[idx];
+              const targetNorm = normalizeHeadingKeyForVideoCache(String(targetTitle || '').trim());
+              const storedNorm = String(images[0]?.normKey || n || '');
+              const agrees = !!targetNorm && !!storedNorm
+                && (targetNorm.includes(storedNorm) || storedNorm.includes(targetNorm));
+              if (agrees) {
+                const newKey = this.resolveHeadingKey(targetTitle);
+                if (!this.imageMap.has(newKey)) {
+                  this.imageMap.set(newKey, images);
+                  console.log(`[ImageManager] 이미지 리매핑: "${key}" → "${newKey}" (index+key 일치)`);
+                }
+              } else {
+                console.warn(`[ImageManager] ⚠️ 리매핑 거부: "${key}" → idx ${idx} "${String(targetTitle).substring(0, 30)}" 키 불일치 — 오배정 대신 미배정 처리 (R4)`);
               }
             }
           }
@@ -261,6 +290,11 @@ const ImageManager = {
       images.push({
         ...entry.image,
         heading: titleKey,
+        // [R4-2] Dual identity at write time — the remap check needs both.
+        normKey: entry.image?.normKey || normalizeHeadingKeyForVideoCache(titleKey),
+        headingIndex: typeof entry.image?.headingIndex === 'number'
+          ? entry.image.headingIndex
+          : this._inferHeadingIndex(titleKey),
         timestamp: Date.now(),
       });
       this.imageMap.set(titleKey, images);
@@ -286,6 +320,11 @@ const ImageManager = {
     images.push({
       ...image,
       heading: titleKey,
+      // [R4-2] Dual identity at write time — the remap check needs both.
+      normKey: image?.normKey || normalizeHeadingKeyForVideoCache(titleKey),
+      headingIndex: typeof image?.headingIndex === 'number'
+        ? image.headingIndex
+        : this._inferHeadingIndex(titleKey),
       timestamp: Date.now()
     });
     this.imageMap.set(titleKey, images);

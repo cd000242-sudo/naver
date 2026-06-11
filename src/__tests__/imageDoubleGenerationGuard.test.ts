@@ -36,4 +36,18 @@ describe('image double-generation guard (R4)', () => {
     // The in-flight key must always be released, success or failure.
     expect(code).toMatch(/finally[\s\S]{0,120}?_giaInFlight\.delete/);
   });
+
+  it('4.3: images carry normKey+headingIndex at write time, and index remap needs BOTH signals to agree', () => {
+    const code = read('renderer/modules/imageManagerCore.ts');
+    expect(code).toMatch(/_inferHeadingIndex/);
+    expect(code).toMatch(/normKey/);
+    // The blind index fallback assigned images to WHATEVER heading sat at the
+    // same position (the mix-up). Remap must refuse on key disagreement.
+    expect(code).toMatch(/리매핑 거부/);
+  });
+
+  it('4.4: pre-publish sync skips unmatched headings with a warning instead of guessing', () => {
+    const code = read('renderer/modules/publishingHandlers.ts');
+    expect(code).toMatch(/매칭 실패.*제외|매칭 실패.*스킵/);
+  });
 });

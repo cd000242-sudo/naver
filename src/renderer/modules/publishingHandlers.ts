@@ -11,6 +11,7 @@ declare const ImageManager: any;
 declare const toastManager: any;
 declare const UnifiedDOMCache: any;
 declare function appendLog(msg: string, ...args: any[]): void;
+declare function normalizeHeadingKeyForVideoCache(title: string): string;
 declare function escapeHtml(str: string): string;
 declare function collectFormData(): any;
 declare function collectUnifiedFormDataForPublish(): any;
@@ -1921,8 +1922,27 @@ export async function handleSemiAutoPublish(): Promise<any> {
         list.push(img);
         byHeading.set(heading, list);
       });
+      // [SPEC-STABILITY-2026 R4-2] 4.4: a heading that matches nothing in the
+      // current document must NOT be force-set under a guessed key — that is
+      // how a stale image lands on the wrong heading. Skip it loudly.
+      const currentHeadingNorms = new Set<string>(
+        (Array.isArray(ImageManager.headings) ? ImageManager.headings : []).map((h: any) => {
+          const t = typeof h === 'string' ? h : (h?.title || '');
+          return normalizeHeadingKeyForVideoCache(String(t).trim());
+        }).filter(Boolean)
+      );
       byHeading.forEach((imgs, heading) => {
         const titleKey = ImageManager.resolveHeadingKey(heading);
+        const isThumb = titleKey === '🖼️ 썸네일' || titleKey === '썸네일'
+          || imgs.some((img: any) => img?.isThumbnail === true);
+        const titleNorm = normalizeHeadingKeyForVideoCache(String(titleKey).trim());
+        const matched = isThumb
+          || ImageManager.imageMap.has(titleKey)
+          || (titleNorm && currentHeadingNorms.has(titleNorm));
+        if (!matched) {
+          appendLog(`⚠️ [R4] "${String(heading).substring(0, 30)}" — 현재 소제목과 매칭 실패, 발행 동기화에서 제외 (오배정 방지)`);
+          return;
+        }
         const normalized = imgs.map((img: any) => ({
           ...img,
           heading: titleKey,
