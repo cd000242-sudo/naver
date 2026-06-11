@@ -9869,7 +9869,9 @@ export async function generateStructuredContent(
         let _gateResult: any = null;
         try {
           const { evaluate: evaluateQuality } = require('./content/qualityEvaluator');
-          const _modeForGate = (source.contentMode === 'homefeed' || source.contentMode === 'affiliate' || source.contentMode === 'business' || source.contentMode === 'custom')
+          // 2026-06-11: 'mate' was missing here, so mate posts were gated with
+          // SEO weights/criteria — user-visible as "SEO-only scoring".
+          const _modeForGate = (source.contentMode === 'homefeed' || source.contentMode === 'affiliate' || source.contentMode === 'business' || source.contentMode === 'custom' || source.contentMode === 'mate')
             ? source.contentMode
             : 'seo';
           _gateResult = evaluateQuality({
@@ -9884,7 +9886,9 @@ export async function generateStructuredContent(
             toneStyle: source.toneStyle,
             categoryHint: source.categoryHint,
           });
-          console.log(`[QualityGate] 🎯 finalScore=${_gateResult.finalScore} | mode=${_gateResult.modeScore.score} safety=${_gateResult.safetyScore.score} human=${_gateResult.humanlikeScore.score} | decision=${_gateResult.decision}`);
+          const _modeLabelMap: Record<string, string> = { seo: 'SEO', homefeed: '홈판', affiliate: '제휴', business: '비즈니스', custom: '커스텀', mate: '메이트' };
+          const _modeLabel = _modeLabelMap[_modeForGate] || _modeForGate;
+          console.log(`[QualityGate] 🎯 ${_modeLabel} 모드 점수 ${_gateResult.modeScore.score}/100 · 종합 ${_gateResult.finalScore}/100 (안전 ${_gateResult.safetyScore.score} · 사람다움 ${_gateResult.humanlikeScore.score}) | decision=${_gateResult.decision}`);
           if (_gateResult.modeScore.issues.length > 0) {
             console.log(`[QualityGate] mode issues: ${_gateResult.modeScore.issues.slice(0, 2).join(' / ')}`);
           }
