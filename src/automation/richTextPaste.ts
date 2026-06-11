@@ -1337,11 +1337,20 @@ export async function focusLastEditableLine(page: Page, frame: Frame): Promise<v
   await frame.click('body').catch(() => undefined);
 }
 
+// 2026-06-11 structure dump: the redesigned editor renders the DOCUMENT in a
+// read-only component tree (.se-container > .se-content > SECTION.se-canvas >
+// ARTICLE.se-components-wrap > .se-component...) with NO contenteditable on
+// it. The single [contenteditable] in the page is a hidden INPUT PROXY —
+// keystrokes only reach the document when SmartEditor's model caret is set,
+// which happens through real clicks on the rendered paragraphs. Text stuck in
+// the proxy renders nowhere and never publishes. Therefore: read/verify
+// against the component tree, and anchor the caret by clicking paragraphs.
 function editableRootText(frame: Frame): Promise<string> {
   return frame
     .evaluate(() => {
-      const root = document.querySelector('[contenteditable="true"]') as HTMLElement | null;
-      return (root?.innerText || root?.textContent || '').replace(/\s+$/g, '');
+      const scope = (document.querySelector('.se-components-wrap, .se-canvas, .se-content') as HTMLElement | null)
+        || document.body;
+      return (scope?.innerText || scope?.textContent || '').replace(/\s+$/g, '');
     })
     .catch(() => '');
 }
@@ -1371,6 +1380,34 @@ export async function ensureTailTypingReady(
     await new Promise((resolve) => setTimeout(resolve, 350));
   }
 
+  // Primary anchor: a REAL click at the end of the last rendered paragraph.
+  // SmartEditor sets its model caret from clicks on the component tree —
+  // programmatic Selection on the hidden input proxy never does. Puppeteer's
+  // element click handles the iframe offset math that broke the manual
+  // coordinate path historically (N3).
+  const clickLastParagraphEnd = async (): Promise<void> => {
+    const handle = await frame.evaluateHandle(() => {
+      const wrap = (document.querySelector('.se-components-wrap, .se-canvas, .se-content') as HTMLElement | null)
+        || document.body;
+      const paras = Array.from(wrap.querySelectorAll('p.se-text-paragraph')) as HTMLElement[];
+      for (let i = paras.length - 1; i >= 0; i -= 1) {
+        if ((paras[i].innerText || '').trim().length > 0) {
+          paras[i].scrollIntoView({ block: 'center', inline: 'nearest' });
+          return paras[i];
+        }
+      }
+      return null;
+    }).catch(() => null);
+    const el = handle ? handle.asElement() : null;
+    if (!el) return;
+    const box = await (el as import('puppeteer').ElementHandle<Element>).boundingBox().catch(() => null);
+    if (!box) return;
+    await (el as import('puppeteer').ElementHandle<Element>)
+      .click({ offset: { x: Math.max(4, box.width - 6), y: Math.max(4, box.height - 6) } })
+      .catch(() => undefined);
+    await page.keyboard.press('End').catch(() => undefined);
+  };
+
   const caretEndClick = async (): Promise<void> => {
     // Scroll the true last block into view FIRST — clicking coordinates that
     // sit below the fold misses or hits the wrong paragraph (the cause of
@@ -1379,9 +1416,14 @@ export async function ensureTailTypingReady(
       // Target the editable ROOT's last visible child — by definition the
       // final block, immune to editor-internal class changes (class-based
       // "last paragraph" lookups landed one block short on the redesign).
-      const root = document.querySelector('[contenteditable="true"]') as HTMLElement | null;
+      let root: HTMLElement | null = null; let bestScore = -1;
+      document.querySelectorAll('[contenteditable="true"]').forEach((el) => {
+        const score = el.querySelectorAll('.se-component').length * 100000 + ((el as HTMLElement).innerText || '').length;
+        if (score > bestScore) { bestScore = score; root = el as HTMLElement; }
+      });
       if (!root) return null;
-      let el = root.lastElementChild as HTMLElement | null;
+      const rootEl = root as HTMLElement;
+      let el = rootEl.lastElementChild as HTMLElement | null;
       while (el) {
         const probe = el.getBoundingClientRect();
         // Must carry TEXT: clicking an empty trailing block does not restore
@@ -1417,22 +1459,29 @@ export async function ensureTailTypingReady(
     const clickX = Math.min(Math.max(baseX + 2, baseX + rect.x), maxX);
     const clickY = Math.min(Math.max(baseY + 2, baseY + rect.y), maxY);
     await page.mouse.click(clickX, clickY).catch(() => undefined);
-    await page.keyboard.down('Control').catch(() => undefined);
+    // End only — Ctrl+End jumps the caret past the last managed paragraph
+    // into trailing orphan blocks at the editable root, and everything typed
+    // there is dropped by the publish serializer (2026-06-11 forensics:
+    // divider/hook/hashtags all at depth 1 bare DIVs).
     await page.keyboard.press('End').catch(() => undefined);
-    await page.keyboard.up('Control').catch(() => undefined);
   };
 
   const focusRootEnd = async (): Promise<void> => {
     await frame.evaluate(() => {
-      const root = document.querySelector('[contenteditable="true"]') as HTMLElement | null;
+      let root: HTMLElement | null = null; let bestScore = -1;
+      document.querySelectorAll('[contenteditable="true"]').forEach((el) => {
+        const score = el.querySelectorAll('.se-component').length * 100000 + ((el as HTMLElement).innerText || '').length;
+        if (score > bestScore) { bestScore = score; root = el as HTMLElement; }
+      });
       if (!root) return;
-      root.focus();
+      const rootEl = root as HTMLElement;
+      rootEl.focus();
       // The caret must land INSIDE the last text-bearing block. Collapsing at
       // the root level (after the last component) renders fine in the editor,
       // but that text lives outside the SmartEditor component model and the
       // publish serializer drops it wholesale — 2026-06-11 live incident:
       // divider/CTA/hashtags all typed, all missing from the published post.
-      let block = root.lastElementChild as HTMLElement | null;
+      let block = rootEl.lastElementChild as HTMLElement | null;
       while (block) {
         if ((block.innerText || block.textContent || '').trim().length > 0) break;
         block = block.previousElementSibling as HTMLElement | null;
@@ -1449,30 +1498,40 @@ export async function ensureTailTypingReady(
           range.collapse(false);
         }
       } else {
-        range.selectNodeContents(root);
+        range.selectNodeContents(rootEl);
         range.collapse(false);
       }
       const selection = window.getSelection();
       if (!selection) return;
       selection.removeAllRanges();
       selection.addRange(range);
-      (block || (root.lastElementChild as HTMLElement | null))?.scrollIntoView({ block: 'center', inline: 'nearest' });
+      (block || (rootEl.lastElementChild as HTMLElement | null))?.scrollIntoView({ block: 'center', inline: 'nearest' });
     }).catch(() => undefined);
   };
 
   const strategies: Array<{ name: string; run: () => Promise<void> }> = [
-    // Structure-agnostic FIRST: collapse selection to the END of the editable
-    // root — fast path when the editor state is healthy.
-    { name: 'root-end', run: focusRootEnd },
-    // Click is SECOND: in the post-paste dead-keyboard state only a real
-    // mouse click on a text-bearing block revives input (live-observed —
-    // programmatic/CDP focus consistently failed there).
+    // A REAL paragraph click FIRST — the redesigned editor only moves its
+    // model caret on clicks; Selection tricks land in the hidden input proxy
+    // (2026-06-11 structure dump: document tree has no contenteditable).
+    { name: 'paragraph-end-click', run: clickLastParagraphEnd },
+    // Manual-coordinate click as backup (legacy path, frame-offset math).
     { name: 'caret-end-click', run: caretEndClick },
+    // Selection-based anchors only as last resorts — they cannot move the
+    // model caret on the redesigned editor but are harmless.
+    { name: 'root-end', run: focusRootEnd },
     {
       name: 'cdp-focus',
       run: async () => {
-        const editable = await frame.$('[contenteditable="true"]').catch(() => null);
-        if (editable) await editable.focus().catch(() => undefined);
+        const editableHandle = await frame.evaluateHandle(() => {
+          let root: HTMLElement | null = null; let bestScore = -1;
+          document.querySelectorAll('[contenteditable="true"]').forEach((el) => {
+            const score = el.querySelectorAll('.se-component').length * 100000 + ((el as HTMLElement).innerText || '').length;
+            if (score > bestScore) { bestScore = score; root = el as HTMLElement; }
+          });
+          return root;
+        }).catch(() => null);
+        const editable = editableHandle ? editableHandle.asElement() : null;
+        if (editable) await (editable as import('puppeteer').ElementHandle<Element>).focus().catch(() => undefined);
         await focusRootEnd();
       },
     },
@@ -1501,15 +1560,17 @@ export async function ensureTailTypingReady(
     let inModel = false;
     if (registered) {
       inModel = await frame.evaluate((sentinel) => {
-        const root = document.querySelector('[contenteditable="true"]');
+        const root = (document.querySelector('.se-components-wrap, .se-canvas, .se-content') as HTMLElement | null)
+          || document.body;
         if (!root) return false;
+        const rootEl = root as HTMLElement;
         const depthOf = (el: HTMLElement | null): number => {
           let depth = 0;
           let cur: HTMLElement | null = el;
-          while (cur && cur !== root) { depth += 1; cur = cur.parentElement; }
+          while (cur && cur !== rootEl) { depth += 1; cur = cur.parentElement; }
           return depth;
         };
-        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        const walker = document.createTreeWalker(rootEl, NodeFilter.SHOW_TEXT);
         let sentinelEl: HTMLElement | null = null;
         let bodyDepthMax = 0;
         let node: Node | null;
@@ -1544,7 +1605,8 @@ export async function ensureTailTypingReady(
         const residue = await editableRootText(frame);
         if (!residue.includes(SENTINEL)) break;
         await frame.evaluate((sentinel) => {
-          const root = document.querySelector('[contenteditable="true"]');
+          const root = (document.querySelector('.se-components-wrap, .se-canvas, .se-content') as HTMLElement | null)
+            || document.body;
           if (!root) return;
           const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
           let node: Node | null;
@@ -1581,7 +1643,7 @@ export async function ensureTailTypingReady(
   // Ladder exhausted (callers proceed best-effort): leave the caret at the
   // structurally BEST position, not wherever the last fallback dropped it —
   // live 2026-06-11: the final fallback's orphan caret ate the whole tail.
-  await focusRootEnd();
+  await clickLastParagraphEnd();
   return false;
 }
 

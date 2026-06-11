@@ -78,10 +78,12 @@ describe('rich paste tail wiring', () => {
 
   it('uses a structure-agnostic sentinel probe that requires true document end', () => {
     const code = read('automation/richTextPaste.ts');
-    // root-end is the fast path; the text-block click is the reliable revive
-    // for the post-paste dead-keyboard state.
-    expect(code.indexOf("name: 'root-end'")).toBeGreaterThan(-1);
-    expect(code.indexOf("name: 'root-end'")).toBeLessThan(code.indexOf("name: 'caret-end-click'"));
+    // 2026-06-11 structure dump: the redesigned editor's document tree has NO
+    // contenteditable — the model caret only moves on REAL paragraph clicks,
+    // so the click strategy must run FIRST; Selection anchors are last resorts.
+    expect(code.indexOf("name: 'paragraph-end-click'")).toBeGreaterThan(-1);
+    expect(code.indexOf("name: 'paragraph-end-click'")).toBeLessThan(code.indexOf("name: 'caret-end-click'"));
+    expect(code.indexOf("name: 'caret-end-click'")).toBeLessThan(code.indexOf("name: 'root-end'"));
     // Sentinel-char probe: confirms input registered AND ended at doc end,
     // independent of editor DOM classes (paragraph counting broke on redesign).
     expect(code).toMatch(/const SENTINEL =/);
@@ -118,7 +120,7 @@ describe('rich paste tail wiring', () => {
   it('re-anchors to the best caret when the ladder is exhausted', () => {
     const code = read('automation/richTextPaste.ts');
     const tail = code.slice(code.indexOf('// Ladder exhausted'));
-    expect(tail).toMatch(/await focusRootEnd\(\);\s*\n\s*return false;/);
+    expect(tail).toMatch(/await clickLastParagraphEnd\(\);\s*\n\s*return false;/);
   });
 
   it('verifies sentinel cleanup and force-deletes residue (published ￬￬ incident)', () => {
