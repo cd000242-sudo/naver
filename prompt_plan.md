@@ -8,13 +8,17 @@
 - ImageFX·Flow 라인업 제거 → dropshot 기본
 - 게이트 상태: vitest 2,979/2,979 GREEN · tsc 0 · lint 0 errors · build PASS
 
+## 이번 추가분 (06-12)
+- R6 단계적 차단(0cbe0042) / R12 침묵 실패 카운터(da5a2735) / Phase 7.3 플로우별 하네스(tmp/flow-tail-harness.cjs — fullauto|continuous|multi)
+- 매트릭스 일괄 "완료" 마감은 라이브 증거 없이는 불가 — 3점 잠금 원칙 유지 (전 행 "라이브 대기")
+
 ## 다음 세션 순서
 1. **라이브 검증 1세션** (사용자): 연속발행 2건(카테고리 지정·이전글·CTA·해시태그) + 풀오토 1건
    → 매트릭스 "라이브 대기" 일괄 마감 + R6 진입 조건(오탐 데이터) 확보
-2. R6: PrePublish 차단 전환 (라이브 오탐 데이터 후)
-3. R12: C급 37건 침묵 실패 카운터 배선 (운영 대시보드) — 별도 세션 권장
+2. R6 잔여: link-card/divider 검사의 차단 승격 — 라이브 오탐 0 확인 후
+3. R12 잔여: 나머지 C급 배선(같은 패턴) + 운영 대시보드 getSilentFailureCounts() 표시
 4. Phase 6.3(self-test 확장)/6.4(pre-commit 경고) — 소형
-5. Phase 7: 파이프라인 분리 — characterization 테스트 선행 필수 (baseline 28건 정리 포함)
+5. Phase 7: 7.3 하네스 완료 → 7.1 PipelineConfig / 7.2 코어 순수화 / 7.4 god file 분해는 라이브 검증된 베이스라인 + characterization 테스트 선행 필수
 6. Phase 8: 성능 (migration:imageModelV1 등)
 
 ## 주의

@@ -35,6 +35,8 @@
 | S18 | 모바일 가독성 — 쉼표 시작 줄/단어 중간 절단/빈 줄 낀 표 원문 노출 | 35bc3c67(줄나눔 재설계: 구두점 소비+공백 후퇴+외톨이 병합+22자 폭, 표 행 스티칭) | richTextPaste.test 가독성 계약(5) | 발행물 모바일 실측을 사용자 레퍼런스와 비교 | 코드 완료 · 라이브 대기 |
 | R8 | 에러 삼킴 A-1/A-2 — 카테고리 실패 시 암묵 기본값 발행 | 550f177d(침묵 5경로 → CATEGORY_* 명시 중단, allowCategoryFallback 옵트인) | categoryFailureGate.test(3) | 의도적 오설정 카테고리 발행 시 사유와 함께 중단 | 코드 완료 · 라이브 대기 |
 | R11 | 에러 삼킴 A-3/A-4 — 발행→임시저장 silent 전환(3경로) + 발행 미확인 성공 통과 | 16f37e75(PUBLISH_BUTTON_NOT_FOUND 중단 + PUBLISH_UNCONFIRMED 명시 실패 + 이중발행 재시도 금지) | publishConfirmIntegrity.test(3) | 정상 발행 무회귀 + 미확인 시 자동 재발행 0 | 코드 완료 · 라이브 대기 |
+| R6 | 반쪽 발행 구조 차단 (관찰→차단 전환) | 0cbe0042(결정적 4검사 차단: body/image/marker/hashtag — PRE_PUBLISH_BLOCKED, 서버 의존 2검사는 관찰 유지, prePublishObserveOnly 비상해제) | prePublishAssertion.test R6(2) | 정상 발행 무차단 + 의도적 누락 시 차단 / 오탐 발생 시 즉시 관찰 강등 | 코드 완료 · 라이브 대기 |
+| R12 | 허용된 침묵 실패의 빈도 비가시 | da5a2735(silentFailureCounter + 대표 지점 배선 + 발행 진입 요약 로그) | silentFailureCounter.test(3) | [SilentFailures] 요약 라인 출력 — 같은 site 반복 시 셀렉터 점검 신호 | 코드 완료 · 라이브 대기 |
 
 ## 2. 릴리즈 공통 게이트 (모든 출고 전)
 
