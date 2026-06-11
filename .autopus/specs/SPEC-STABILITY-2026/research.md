@@ -53,3 +53,22 @@
 - RED 확인: 신규 가드 6건 실패(수정 전) → 구현 → 대상 6파일 99 GREEN
 - 전체 게이트: vitest **226파일 2,885개 0 fail** (기준선: 223파일 2,871 pass + 1 fail) · lint **0 errors**(1,018 warnings) · build 성공 + 번들 검증 통과
 - 변경 파일: bodyArtifactCleanup.ts(신설) · editorHelpers.ts · richTextPaste.ts(export 1줄) · naverBlogAutomation.ts(runPostOnly 게이트) · 테스트 4파일(신설 2 + 갱신 2)
+
+## F. 라이브 진단 라운드 2 (2026-06-11, 연속발행 deepinfra 실측)
+
+### S11 — DeepInfra 키워드 무관 인물 이미지 (신규, 수정 완료 83691ad9)
+- 증상: 키워드 "거울 물때 청소법"에 한국인 인물/군중 사진 다수 + 중복.
+- 메커니즘 (메인 로그 실측): ① AI 장면 프롬프트가 한국어로 도착 — 때로는 `englishPrompt` 필드 안에 한국어가 들어와 번역 면제 조건(`!item.englishPrompt`)을 통과 ② NO PEOPLE 재생성 폴백도 한국어 heading 삽입(deepinfraGenerator.ts 구 419행) ③ 최종 한국어 제거(구 463행)가 전부 삭제 → `"visual scene depicting: ,"` / `", , ,"` 빈 프롬프트로 FLUX 호출 → 임의 인물 생성. 소제목 7개 중 5개 재현.
+- 수정: promptSafety.ts 신설(stripKoreanResidue/isPromptContentEmpty/hasUsableEnglishPrompt) + 빈손 시 AI 번역 복구. 가드 promptSafetyGuard.test(6).
+- 후속 점검 대상: nanoBanana/Leonardo 등 타 제너레이터의 동일 한국어 strip 패턴 (R3 착수 시 전수).
+
+### S12 — 중지한 키워드 재시작 시 건너뜀 (신규, 수정 완료 c6c77452)
+- 원인: 중지 경로가 진행 항목을 `status='cancelled'`로 마킹, 재시작 복구 필터(v2.7.20)는 failed/processing만 pending 복원 → cancelled 영구 제외.
+- 수정: 복구 필터에 cancelled 추가. "다음 5개 건너뛰기"는 splice 제거라 부활 부작용 없음. 가드 continuousCancelledResume.test(2).
+
+### R4 입력 — 이중 생성 2차 실측 (연속발행 + deepinfra)
+- 같은 글(소제목 7종)에서 **개별 [1/1] 생성 8회**(썸네일 포함, 로그 2976~3646행) 직후 **동일 7종 [1/7] 배치 재생성**(3731행~) — 글당 2배 생성. 6/10 dropshot+openai 동시 런에 이은 두 번째 실측, provider 무관 구조 문제 확정.
+- 사용자 체감 "썸네일/이미지 중복"의 직접 원인. caller 특정은 renderer run# 로그 필요 (R4 4.1).
+
+### SEO 점수 실측 (사용자 질문 대응)
+- 네이버 최적화 점수 66~69/100 (deterministic). QualityGate 사유: "키워드 본문 거의 미사용(8~12회 필요)", "첫 문단 250자 내 키워드 없음" — 측정기 문제가 아니라 본문 키워드 배치가 실제로 약함. 콘텐츠 파이프라인 측 개선 항목으로 분류 (뻔한 문장 problem과 함께 별도 R 후보).

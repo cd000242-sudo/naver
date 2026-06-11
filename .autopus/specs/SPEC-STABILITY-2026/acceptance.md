@@ -11,7 +11,7 @@
 | S2 | 로그인 세션 안 유지 | d6dbe940(runPostOnly ensureServerSession 게이트) | richPasteTailWiring.test 게이트 배선 가드 | 연속 2건째 "서버 세션 유효 확인" 로그 / 쿠키 삭제 시 자동 재로그인 | 코드 완료 · 라이브 대기 |
 | S2' | keepalive 활성계정 영구 skip (근본) → 세션 만료 → 재로그인 → 캡차 | (R7 완료) publishInProgress 플래그 — 발행 중에만 skip, 유휴 세션은 ping 유지 | sessionKeepalivePublishGate.test(3) + sessionKeepaliveV2 갱신 | 발행 후 유휴 15~30분, 다음 발행 시 재로그인/캡차 없이 세션 재사용 | 코드 완료 · 라이브 대기 |
 | S3 | 소제목 이미지 빈 결과 (원인 불명 중단) | R3 예정 (null 삼킴 → 구조화 에러) — 사용자 측 dropshot 로그인 원인 1건은 해소 | R3 가드 예정 | 실패 시 로그에 원인 코드(쿼터/세션/429) 표시 | 대기 |
-| S4 | 반자동 이미지 뒤섞임 + 이중 생성 | 48cde1ed(run#+호출자 계측) → R4 예정(single-flight+키 매핑) | continuousImageFailFast.test 일부 + R4 가드 예정 | run # 중복 0 / 반자동 10건 뒤섞임 0 | 계측 완료 · 본수정 대기 |
+| S4 | 반자동 이미지 뒤섞임 + 이중 생성 — 6/11 연속발행(deepinfra)에서 2차 실측: 같은 글 [1/1]×8 개별 생성 직후 [1/7] 배치 재생성(글당 2배) | 48cde1ed(run#+호출자 계측) → R4 예정(single-flight+키 매핑) | continuousImageFailFast.test 일부 + R4 가드 예정 | run # 중복 0 / 반자동 10건 뒤섞임 0 | 계측 완료 · 본수정 대기 (research.md §F) |
 | S5 | 풀오토 썸네일 이미지관리 공란 | R5 예정 (로컬 저장 등록 + 키 폴백) | R5 가드 예정 | 발행 후 이미지관리 첫 슬롯 표시 | 대기 |
 | S6 | "세팅 안 했는데 썸네일만" (연속/다중계정) | e4a42bbe(레거시 키 격리 + 모드 동기화) | thumbnailOnlyScope.test(2) | 연속발행에서 소제목 이미지 정상 생성 | 코드 완료 · 라이브 대기 |
 | S7 | 수집만 무한, 발행 0 | c9fcebda(대기 상한 + 연속 실패 차단기 + 수집 이미지 존중) | continuousImageFailFast.test(5) | 이미지 2글 연속 실패 시 "⛔ 연속발행 중단" 표출 | 코드 완료 · 라이브 대기 |
@@ -28,6 +28,8 @@
 | 기존 | 발행 직전 검증 부재 (반쪽 발행) | 6c2a0b77(Pre-publish Assertion 관찰 모드) → R6 차단 전환 | prePublishAssertion.test(10) | `[PrePublish] N/5` 로그 표시 → 오탐 데이터 수집 | 관찰 모드 가동 |
 | S8 | 연속발행 상세설정 글톤 구버전 (2026 신규 5종 누락) | 톤 카탈로그 동기화 — continuous-modal 12종+레거시 호환 3종, 표시 맵 2곳 | toneCatalogParity.test(5) — 통합 목록과 어긋나면 RED | 상세설정 모달에 신뢰/교육 그룹 표시 | 코드 완료 · 라이브 대기 |
 | N6 | 다중계정 계정 편집 모달(ma-edit-*) HTML 부재 — JS 배선만 존재(죽은 UI) | 후속 R 배정 필요 (모달 복원 or 배선 제거 결정) | — | — | 발견 · 대기 |
+| S11 | DeepInfra 이미지가 키워드와 무관한 인물 사진 (한국어 전용 프롬프트 → strip 후 빈 프롬프트) | 83691ad9(englishPrompt 한국어 검증 + 빈손 시 AI 번역 복구, promptSafety.ts 신설) | promptSafetyGuard.test(6) | 동일 키워드 재발행 시 "🔤 AI 번역 복구" 로그 + 주제 연관 이미지 (빈 프롬프트 API 호출 0) | 코드 완료 · 라이브 대기 |
+| S12 | 연속발행 중지한 키워드, 재시작 시 건너뜀 | c6c77452(재시작 복구 필터에 cancelled 추가) | continuousCancelledResume.test(2) | 중지→재시작 시 중지했던 키워드부터 재개 ("다시 시도합니다" 토스트) | 코드 완료 · 라이브 대기 |
 
 ## 2. 릴리즈 공통 게이트 (모든 출고 전)
 
