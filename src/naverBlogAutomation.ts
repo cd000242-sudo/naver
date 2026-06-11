@@ -44,7 +44,7 @@ import {
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, humanKeyboardType } from './automation/typingUtils.js';
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes } from './automation/richTextPaste.js';
-import { collectPrePublishStats, evaluatePrePublishReport, formatPrePublishReport } from './automation/prePublishAssertion.js';
+import { collectPrePublishStats, evaluatePrePublishReport, formatPrePublishReport, getBlockingFailures } from './automation/prePublishAssertion.js';
 import { resolveImmediatePublishOutcome } from './automation/publishOutcomeResolver';
 
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
@@ -181,6 +181,10 @@ export interface AutomationOptions {
   defaultLines?: number;
   categoryName?: string; // ✅ 추가: 발행할 카테고리(폴더)명
   accountProxyUrl?: string; // ✅ 계정별 프록시 URL (미설정 시 프록시 없이 직접 연결)
+  // [R8-1] 카테고리 적용 실패 시 기본 카테고리로 폴백 발행 허용 (기본: 중단)
+  allowCategoryFallback?: boolean;
+  // [R6] PrePublish 차단을 끄고 관찰만 수행 (비상 해제용, 기본: 차단)
+  prePublishObserveOnly?: boolean;
 }
 
 export type PublishMode = 'draft' | 'publish' | 'schedule';
@@ -223,6 +227,10 @@ export interface RunOptions {
   isFullAuto?: boolean; // ✅ 추가: 풀오토 모드 여부 (이미지 인덱스 폴백용)
   previousPostTitle?: string; // ✅ 추가: 같은 카테고리 이전글 제목
   previousPostUrl?: string; // ✅ 추가: 같은 카테고리 이전글 URL
+  // [R8-1] 카테고리 적용 실패 시 기본 카테고리로 폴백 발행 허용 (기본: 중단)
+  allowCategoryFallback?: boolean;
+  // [R6] PrePublish 차단을 끄고 관찰만 수행 (비상 해제용, 기본: 차단)
+  prePublishObserveOnly?: boolean;
 }
 
 export interface AutomationImage {
@@ -4994,8 +5002,22 @@ export class NaverBlogAutomation {
           const stats = await collectPrePublishStats(frame);
           const report = evaluatePrePublishReport(stats, expectations);
           this.log(formatPrePublishReport(report));
+          // [SPEC-STABILITY-2026 R6] 단계적 차단: 결정적 검사 실패 시 발행
+          // 중단 (반쪽 발행 구조적 차단). 서버 의존 검사는 관찰 유지.
+          // 비상 해제: options.prePublishObserveOnly === true
+          if (this.options.prePublishObserveOnly !== true) {
+            const blockingFailures = getBlockingFailures(report);
+            if (blockingFailures.length > 0) {
+              const detail = blockingFailures
+                .map((c) => `${c.name}(기대 ${c.expected}/실제 ${c.actual})`)
+                .join(', ');
+              throw new Error(`PRE_PUBLISH_BLOCKED:발행 직전 검사 실패 — ${detail}. 누락된 글이 발행되지 않도록 중단합니다.`);
+            }
+          }
         }
       } catch (assertErr) {
+        // [R6] 의도된 차단은 그대로 위로 — 검사 인프라 오류만 fail-open
+        if ((assertErr as Error)?.message?.startsWith('PRE_PUBLISH_BLOCKED')) throw assertErr;
         this.log(`[PrePublish] 검사 자체 실패 (발행 진행): ${(assertErr as Error).message}`);
       }
 
@@ -6486,6 +6508,8 @@ export class NaverBlogAutomation {
           'PUBLISH_UNCONFIRMED',
           // [R8-1] 카테고리가 목록에 없음은 결정적 실패 — 재시도 무의미
           'CATEGORY_NOT_FOUND',
+          // [R6] 발행 직전 검사 차단은 콘텐츠 결함 — 재발행 반복은 무의미
+          'PRE_PUBLISH_BLOCKED',
         ];
 
         const isFatalError = fatalErrors.some(fe => errorMsg.includes(fe));

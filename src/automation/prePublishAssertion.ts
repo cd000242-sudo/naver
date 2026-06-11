@@ -115,11 +115,26 @@ export function evaluatePrePublishReport(
   return { pass: checks.every((check) => check.pass), checks };
 }
 
+// [SPEC-STABILITY-2026 R6] 단계적 차단: 의미가 에디터 안에서 결정되는 검사만
+// 차단 대상. 링크카드/구분선은 네이버 서버 변환에 의존해 오탐 여지가 있어
+// 라이브 오탐 데이터가 쌓일 때까지 관찰 유지.
+export const BLOCKING_CHECKS: ReadonlySet<string> = new Set([
+  'body-min-chars',
+  'image-count',
+  'marker-leak',
+  'hashtag-presence',
+]);
+
+export function getBlockingFailures(report: PrePublishReport): PrePublishCheck[] {
+  return report.checks.filter((check) => !check.pass && BLOCKING_CHECKS.has(check.name));
+}
+
 export function formatPrePublishReport(report: PrePublishReport): string {
   const passCount = report.checks.filter((check) => check.pass).length;
+  const blocking = getBlockingFailures(report).length;
   const header =
     `[PrePublish] 발행 전 검사 ${passCount}/${report.checks.length} 통과` +
-    (report.pass ? '' : ' — 누락 의심! (관찰 모드: 발행은 진행)');
+    (report.pass ? '' : blocking > 0 ? ' — 누락 감지! (차단 검사 실패)' : ' — 누락 의심! (관찰 항목: 발행은 진행)');
   const lines = report.checks.map(
     (check) => `${check.pass ? '✅' : '❌'} ${check.name}: 기대 ${check.expected} / 실제 ${check.actual}`
   );

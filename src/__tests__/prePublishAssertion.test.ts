@@ -112,3 +112,31 @@ describe('pre-publish assertion wiring (observation mode)', () => {
     );
   });
 });
+
+// SPEC-STABILITY-2026 R6 — 단계적 차단 전환 (2026-06-12)
+// 결정적 검사(본문/이미지/마커/해시태그)는 차단, 네이버 서버 의존 검사
+// (링크카드/구분선)는 오탐 데이터 확보 전까지 관찰 유지.
+describe('R6 staged blocking', () => {
+  it('blocks only on deterministic checks', async () => {
+    const { BLOCKING_CHECKS, getBlockingFailures, evaluatePrePublishReport } = await import('../automation/prePublishAssertion.js');
+    expect([...BLOCKING_CHECKS].sort()).toEqual(['body-min-chars', 'hashtag-presence', 'image-count', 'marker-leak']);
+    const report = evaluatePrePublishReport(
+      { bodyChars: 10, imageCount: 0, linkCardCount: 0, dividerCount: 0, leakedMarkers: [], bodyText: '' },
+      { minBodyChars: 500, expectedImageMin: 1, expectedLinkCardMin: 2, expectedDividerMin: 1 }
+    );
+    const blocking = getBlockingFailures(report);
+    const names = blocking.map((c: any) => c.name).sort();
+    // link-card/divider 실패는 차단 목록에 없어야 한다 (서버 의존 — 관찰 유지)
+    expect(names).toEqual(['body-min-chars', 'image-count']);
+  });
+
+  it('wires blocking into publishBlogPost with rethrow + no-blind-retry', () => {
+    const { readFileSync } = require('fs');
+    const code = readFileSync(new URL('../naverBlogAutomation.ts', import.meta.url), 'utf8');
+    expect(code).toMatch(/PRE_PUBLISH_BLOCKED/);
+    // 검사 자체 실패 catch가 차단 throw를 삼키면 안 된다
+    expect(code).toMatch(/PRE_PUBLISH_BLOCKED'\)\)\s*throw assertErr|startsWith\('PRE_PUBLISH_BLOCKED'\)/);
+    const fatalBlock = code.slice(code.indexOf('const fatalErrors'), code.indexOf('isFatalError'));
+    expect(fatalBlock).toMatch(/PRE_PUBLISH_BLOCKED/);
+  });
+});
