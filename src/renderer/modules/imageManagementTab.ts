@@ -106,6 +106,21 @@ function ensureImageFxSwitchButton(imageSourceSelect: HTMLSelectElement, show: b
 }
 
 export async function initImageManagementTab(): Promise<void> {
+  // 2026-06-11: ImageFX removed from selectable engines (user request) —
+  // migrate stale saved selections to Flow once, with a visible log line.
+  // Backend imagefx modules stay for legacy data/recovery paths.
+  try {
+    for (const key of ['fullAutoImageSource', 'globalImageSource', 'scAIImageEngine']) {
+      if (localStorage.getItem(key) === 'imagefx') {
+        localStorage.setItem(key, 'flow');
+        console.log(`[ImageEngine] 🔁 ${key}: imagefx → flow (ImageFX 제거 — Flow로 이관)`);
+      }
+    }
+    if ((window as any).globalImageSource === 'imagefx') {
+      (window as any).globalImageSource = 'flow';
+    }
+  } catch { /* localStorage unavailable — nothing to migrate */ }
+
   // ✅ AI 영상 목록 토글 기능
   const toggleHeader = document.getElementById('toggle-mp4-list-header');
   const mp4ListContainer = document.getElementById('mp4-files-list');
@@ -395,12 +410,12 @@ export async function initImageManagementTab(): Promise<void> {
             appendLog(`✅ 📂 내 폴더가 선택되었습니다: ${folderPath}`);
           } else {
             appendLog('⚠️ 폴더 선택이 취소되었습니다. AI 이미지가 사용됩니다.');
-            imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'imagefx';
+            imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'flow';
             return;
           }
         } catch (e: any) {
           appendLog(`❌ 폴더 선택 오류: ${e.message}`);
-          imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'imagefx';
+          imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'flow';
           return;
         }
       }
@@ -431,7 +446,7 @@ export async function initImageManagementTab(): Promise<void> {
         }
       } else {
         // ✅ [2026-03-10 CLEANUP] imageSourceMode dead write 제거 — getItem 없음
-        console.log(`[Renderer] 📁 저장된 이미지 모드 활성화 (AI 엔진 설정 유지: "${localStorage.getItem('globalImageSource') || 'imagefx'}")`);
+        console.log(`[Renderer] 📁 저장된 이미지 모드 활성화 (AI 엔진 설정 유지: "${localStorage.getItem('globalImageSource') || 'flow'}")`);
       }
 
       // Stability AI 모델 선택 UI 표시/숨김
