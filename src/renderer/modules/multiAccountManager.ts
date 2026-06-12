@@ -424,7 +424,16 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
     const { stopCheck, onProgress } = options;
     if (stopCheck && stopCheck())
         return [];
-    const _headingImageMode = typeof localStorage !== 'undefined' ? (localStorage.getItem('headingImageMode') || 'all') : 'all';
+    // [Phase 7.2 / R13] Behavior inputs must come from the caller — flow entry
+    // resolves localStorage ONCE and passes it down. The fallback read below
+    // exists only for un-migrated callers and warns so they get fixed.
+    let _headingImageMode = typeof options.headingImageMode === 'string' && options.headingImageMode
+        ? options.headingImageMode
+        : '';
+    if (!_headingImageMode) {
+        _headingImageMode = typeof localStorage !== 'undefined' ? (localStorage.getItem('headingImageMode') || 'all') : 'all';
+        console.warn('[generateImagesForAutomation] ⚠️ headingImageMode 미전달 — localStorage 폴백 (R13: 호출자가 명시 전달)');
+    }
     // headingImageMode is the single source of truth here. The legacy
     // 'thumbnailOnly' checkbox key is full-auto-only (carried via options) —
     // reading it globally let a stale 'true' force thumbnail-only publishes
@@ -3264,6 +3273,7 @@ async function initMultiAccountPublishModal() {
                         else if (imageSource === 'naver') {
                             addMALog(`🔍 네이버 이미지 검색 시작 (키워드: ${structuredContent.keywords?.[0] || structuredContent.selectedTitle})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
+                                headingImageMode: localStorage.getItem('headingImageMode') || 'all',
                                 allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
                                 thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
                                 stopCheck: () => stopRequested || window.stopFullAutoPublish,
@@ -3281,6 +3291,7 @@ async function initMultiAccountPublishModal() {
                             };
                             addMALog(`🎨 AI 이미지 생성 시작 (엔진: ${_maSourceNames[imageSource] || imageSource})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
+                                headingImageMode: localStorage.getItem('headingImageMode') || 'all',
                                 allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
                                 thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
                                 stopCheck: () => stopRequested || window.stopFullAutoPublish,

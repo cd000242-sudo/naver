@@ -225,7 +225,11 @@ async function generateImagesForAutomationSafely(
   options?: any,
 ): Promise<any[]> {
   try {
-    const images = await generateImagesForAutomation(imageSource, headings, title, options);
+    const resolvedOptions = {
+      headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+      ...(options || {}),
+    };
+    const images = await generateImagesForAutomation(imageSource, headings, title, resolvedOptions);
     return Array.isArray(images) ? images : [];
   } catch (error) {
     const message = (error as Error)?.message || '알 수 없는 이미지 생성 오류';

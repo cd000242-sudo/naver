@@ -4591,6 +4591,7 @@ async function startContinuousPublishingV2(): Promise<void> {
                   onLog: (msg: string) => appendLog(msg),
                   aiFallbackFn: generateImagesForAutomation,
                   aiOptions: {
+                    headingImageMode: localStorage.getItem('headingImageMode') || 'all',
                     stopCheck: () => !isContinuousMode,
                     allowThumbnailText: includeThumbnailText,
                   },
