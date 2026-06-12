@@ -413,11 +413,11 @@ describe('orphan pipe-row handling (2026-06-12)', () => {
 describe('orphan pipe-line normalization (2026-06-12 live round 2)', () => {
   it('converts a pipe row that shares a block with prose lines', () => {
     const result = buildMobileRichHtml(
-      '하나라도 비면 결과가 달라질 수 있습니다.\n| 항목 | 정리 |',
+      '하나라도 비면 결과가 달라질 수 있습니다.\n| 판정 | 서류 확인이 먼저입니다 |',
       { highlight: false }
     );
     expect(result.plainText).not.toContain('|');
-    expect(result.plainText.replace(/\s+/g, ' ')).toContain('항목 — 정리');
+    expect(result.plainText.replace(/\s+/g, ' ')).toContain('판정 — 서류 확인이 먼저입니다');
     expect(result.plainText).toContain('하나라도 비면');
   });
 
@@ -438,10 +438,10 @@ describe('orphan pipe-line normalization (2026-06-12 live round 2)', () => {
     expect(result.plainText).toContain('보기 편하게');
   });
 
-  it('still renders a valid table next to an orphan header row', () => {
+  it('still renders a valid table next to an orphan content row', () => {
     const result = buildMobileRichHtml(
       [
-        '| 항목 | 정리 |',
+        '| 신청 시기 | 상반기 공고를 먼저 봅니다 |',
         '',
         '| 인증 상태 | 정부24 로그인이 먼저입니다 |',
         '| --- | --- |',
@@ -451,6 +451,38 @@ describe('orphan pipe-line normalization (2026-06-12 live round 2)', () => {
     );
     expect(result.tableCount).toBe(1);
     expect(result.plainText).not.toContain('|');
-    expect(result.plainText.replace(/\s+/g, ' ')).toContain('항목 — 정리');
+    expect(result.plainText.replace(/\s+/g, ' ')).toContain('신청 시기 — 상반기 공고를 먼저 봅니다');
+  });
+});
+
+// 2026-06-12 라이브 3차: LLM이 프롬프트의 형식 예시 "| 항목 | 정리 |"를
+// 보일러플레이트로 복사해 표 밖에 단독 출력 → 정규화가 "· 항목 · 정리"
+// 텍스트로 살림. 예시 헤더 잔재는 렌더링하지 말고 제거한다.
+describe('boilerplate example-header drop (2026-06-12 live round 3)', () => {
+  it('drops an orphan "| 항목 | 정리 |" example header outside a table', () => {
+    const result = buildMobileRichHtml(
+      [
+        '계좌 명의와 심사 상태를 보는 순서가 맞습니다.',
+        '',
+        '| 항목 | 정리 |',
+        '',
+        '| 정기 신청 기간 | ARS에서 바로 변경 가능 |',
+        '| --- | --- |',
+        '| 반영 시점 | 다음 달 3~7일 이후 안내 |',
+      ].join('\n'),
+      { highlight: false }
+    );
+    expect(result.tableCount).toBe(1);
+    expect(result.plainText).not.toMatch(/항목\s*[·—-]\s*정리/);
+    expect(result.plainText).toContain('계좌 명의와 심사 상태');
+  });
+
+  it('keeps a real table whose header IS 항목/정리 (valid table path untouched)', () => {
+    const result = buildMobileRichHtml(
+      ['| 항목 | 정리 |', '| --- | --- |', '| 기준 | 본인 명의 계좌 |'].join('\n'),
+      { highlight: false }
+    );
+    expect(result.tableCount).toBe(1);
+    expect(result.html).toContain('항목');
   });
 });

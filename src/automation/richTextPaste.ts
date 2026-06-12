@@ -498,6 +498,9 @@ function isTableDivider(line: string): boolean {
 function normalizeOrphanPipeLine(line: string): string | null {
   if (!line.includes('|')) return line;
   if (isTableDivider(line)) return null;
+  // The prompt's format example "| 항목 | 정리 |" gets copied verbatim by the
+  // LLM as a stray header outside the real table — boilerplate, not content.
+  if (/^[\s|·—–-]*항목[\s|·—–-]+정리[\s|·—–-]*$/.test(line)) return null;
   const rowMatch = line.match(/^\s*(\|.+\|)(.*)$/);
   if (rowMatch) {
     const cells = splitTableCells(rowMatch[1]).filter(
