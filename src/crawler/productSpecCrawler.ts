@@ -2587,6 +2587,9 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
                   const src = img.src || img.dataset?.src || '';
                   if (!src || src.length < 20) return;
                   if (src.includes('banner') || src.includes('icon') || src.includes('logo')) return;
+                  // image.nmv = review VIDEO thumbnail — 404s on re-fetch
+                  // (다운로드 실측) and the policy wants review PHOTOS only.
+                  if (src.includes('image.nmv')) return;
                   const base = src.split('?')[0];
                   if (!seen.has(base) && src.includes('pstatic.net')) {
                     imgs.push(src.includes('checkout.phinf') ? base : src.replace(/\?type=.*$/, '?type=f640_640'));
@@ -2637,9 +2640,11 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
             for (const url of [...altImages, ...jsonLdInfo.images]) {
               const base = url.split('?')[0];
               // dthumb proxy urls carry their source in the query string —
-              // stripping it 404s (live 실측: 발행물 빈 이미지 슬롯). Only
-              // direct image files survive the ?type= re-append.
-              if (!/\.(jpe?g|png|webp)$/i.test(base)) continue;
+              // stripping it 404s (live 실측: 발행물 빈 이미지 슬롯), and
+              // non shop-phinf hosts (g-selected 등) reject ?type=m1000_pd
+              // (다운로드 실측 404). Only direct shop-phinf image files
+              // survive the ?type= re-append.
+              if (!/^https?:\/\/shop-phinf\.pstatic\.net\/.+\.(jpe?g|png|webp)$/i.test(base)) continue;
               if (seenBases.has(base)) continue;
               seenBases.add(base);
               galleryImages.push(base + '?type=m1000_pd');
