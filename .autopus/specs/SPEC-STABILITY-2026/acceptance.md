@@ -33,17 +33,18 @@
 | S13 | 꼬리(구분선/CTA/해시태그) 에디터엔 존재·발행물에서 통째 소실 — root-end 캐럿이 컴포넌트 모델 밖(7488c0e2 회귀, 발행물 224312474175 실측) | 96fbcf2b(컴포넌트 내부 캐럿 + probe inModel 검증 + PrePublish CTA/해시태그 그물) | richPasteTailWiring.test(+4) | 연속발행 1건 발행물(모바일 페이지)에서 꼬리 4종 실물 확인 + hashtag-presence 체크 가동 | 코드 완료 · 라이브 대기 |
 | S14 | Flow 연속 타임아웃 — 생성은 성공했는데 감지 실패 + 오류 카드(다시 시도) 미대응 + 이전 생성분 오인(2초 가짜 감지=뒤섞임) | (커밋)(에러 카드 자동 재시도 2회+FLOW_GENERATION_ERROR 즉시 표출 + UUID 기반 신규 판별) | flowDetectionGuards.test(2) + continuousImageGenerationSafety 갱신 | Flow 연속발행에서 타임아웃율 급감 + "다시 시도 자동 클릭" 로그 동작 + 글당 이미지가 해당 글 생성분 | 코드 완료 · 라이브 대기 |
 | S18 | 모바일 가독성 — 쉼표 시작 줄/단어 중간 절단/빈 줄 낀 표 원문 노출 | 35bc3c67(줄나눔 재설계: 구두점 소비+공백 후퇴+외톨이 병합+22자 폭, 표 행 스티칭) | richTextPaste.test 가독성 계약(5) | 발행물 모바일 실측을 사용자 레퍼런스와 비교 | 코드 완료 · 라이브 대기 |
+| S18-2 | 표 뒤 외톨이 파이프 행(헤더/구분자 없는 단독 콜아웃) 원문 노출 — 6/12 발행물 실측 | 3abe6b04(파이프 전용 블록 → "첫셀 — 나머지" 문장 변환 + 떠돌이 구분자 제거) | richTextPaste orphan(3) | 동일 패턴 글 재발행 시 파이프 0 + "판단 — ..." 문장 렌더 | 코드 완료 · 라이브 대기 |
 | R8 | 에러 삼킴 A-1/A-2 — 카테고리 실패 시 암묵 기본값 발행 | 550f177d(침묵 5경로 → CATEGORY_* 명시 중단, allowCategoryFallback 옵트인) | categoryFailureGate.test(3) | 의도적 오설정 카테고리 발행 시 사유와 함께 중단 | 코드 완료 · 라이브 대기 |
 | R11 | 에러 삼킴 A-3/A-4 — 발행→임시저장 silent 전환(3경로) + 발행 미확인 성공 통과 | 16f37e75(PUBLISH_BUTTON_NOT_FOUND 중단 + PUBLISH_UNCONFIRMED 명시 실패 + 이중발행 재시도 금지) | publishConfirmIntegrity.test(3) | 정상 발행 무회귀 + 미확인 시 자동 재발행 0 | 코드 완료 · 라이브 대기 |
 | R6 | 반쪽 발행 구조 차단 (관찰→차단 전환) | 0cbe0042(결정적 4검사 차단: body/image/marker/hashtag — PRE_PUBLISH_BLOCKED, 서버 의존 2검사는 관찰 유지, prePublishObserveOnly 비상해제) | prePublishAssertion.test R6(2) | 정상 발행 무차단 + 의도적 누락 시 차단 / 오탐 발생 시 즉시 관찰 강등 | 코드 완료 · 라이브 대기 |
-| R12 | 허용된 침묵 실패의 빈도 비가시 | da5a2735(silentFailureCounter + 대표 지점 배선 + 발행 진입 요약 로그) | silentFailureCounter.test(3) | [SilentFailures] 요약 라인 출력 — 같은 site 반복 시 셀렉터 점검 신호 | 코드 완료 · 라이브 대기 |
+| R12 | 허용된 침묵 실패의 빈도 비가시 | da5a2735(silentFailureCounter + 대표 지점 배선 + 발행 진입 요약 로그) + 28f0baec(운영 대시보드 silentFailures 스냅샷/요약 배선) | silentFailureCounter.test(3) + operationsDashboard.test R12(3) | [SilentFailures] 요약 라인 출력 + 대시보드 요약에 "침묵실패: key×n" 표시 | 코드 완료 · 라이브 대기 |
 
 ## 2. 릴리즈 공통 게이트 (모든 출고 전)
 
 1. vitest 전체 0 fail (현재 2,906개) — 1 fail도 출고 불가
 2. lint 0 errors / build + 번들 검증 통과
-3. `npm run self-test` 통과
-4. 라이브 하네스 PASS (~1분, 로그인 프로필 재사용)
+3. `npm run self-test` 통과 (6.3 확장: 모의 smoke + 실부팅 + 번들 헬스 + IPC 핸드셰이크 5종 — 6/12 PASS 실측)
+4. 라이브 하네스 PASS (`npm run harness:tail [fullauto|continuous|multi]`, ~1분, 로그인 프로필 재사용 — 6.5 게이트화 + 런북 문서화 완료)
 5. 패키징 후 실발행 스모크: 풀오토 1건 → 발행물 7항목 검수(제목/본문/구분선/이전글카드/CTA/이미지 순서/썸네일)
 6. 본인 계정 1일 운용 → 공개 / 이전 버전 롤백 링크 상시 유지
 7. 커밋 단위 = 1목적 (bisect 가능), Lore 형식
