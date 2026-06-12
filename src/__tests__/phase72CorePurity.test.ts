@@ -27,3 +27,25 @@ describe('Phase 7.2 코어 순수화 — generateImagesForAutomation headingImag
     expect((ph.match(passPattern) || []).length).toBeGreaterThanOrEqual(1);
   });
 });
+
+describe('Phase 7.2 코어 순수화 — invalid-provider fallbackProvider (R13 2차)', () => {
+  it('코어는 options.fallbackProvider를 우선하고, 폴백 직독은 경고를 남긴다', () => {
+    const src = read('src', 'renderer', 'modules', 'multiAccountManager.ts');
+    expect(src).toContain('options.fallbackProvider');
+    expect(src).toContain('fallbackProvider 미전달 — localStorage 폴백');
+    // The chain itself lives in ONE function — the inline duplicate inside
+    // the core's invalid-provider branch must stay removed.
+    expect(src).toContain('function resolveImageProviderFallback()');
+    expect((src.match(/localStorage\.getItem\('fullAutoImageSource'\)/g) || []).length).toBe(1);
+  });
+
+  it('6개 진입점이 fallbackProvider를 명시 전달한다', () => {
+    const mam = read('src', 'renderer', 'modules', 'multiAccountManager.ts');
+    const cp = read('src', 'renderer', 'modules', 'continuousPublishing.ts');
+    const ph = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
+    const passPattern = /fallbackProvider: resolveImageProviderFallback\(\)/g;
+    expect((mam.match(passPattern) || []).length).toBeGreaterThanOrEqual(3);
+    expect((cp.match(passPattern) || []).length).toBeGreaterThanOrEqual(2);
+    expect((ph.match(passPattern) || []).length).toBeGreaterThanOrEqual(1);
+  });
+});

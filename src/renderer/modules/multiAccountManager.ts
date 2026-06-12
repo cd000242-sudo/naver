@@ -366,6 +366,18 @@ function getSequentialImageItemsForMode(items, mode) {
 // providers and violate the user's explicit engine choice.
 const _giaInFlight = new Map();
 const _GIA_STALE_MS = 15 * 60 * 1000; // a run older than this is presumed dead
+// [Phase 7.2 / R13] Single definition of the provider fallback chain
+// (full-auto setting > global setting > default). Flow entries call this ONCE
+// and pass the result via options.fallbackProvider — the core must not pick
+// a provider out of localStorage on its own.
+function resolveImageProviderFallback() {
+    const INVALID_PROVIDERS = ['saved', '', 'null', 'undefined'];
+    const rawFullAuto = typeof localStorage !== 'undefined' ? localStorage.getItem('fullAutoImageSource') : null;
+    const rawGlobal = typeof localStorage !== 'undefined' ? localStorage.getItem('globalImageSource') : null;
+    return (rawFullAuto && !INVALID_PROVIDERS.includes(rawFullAuto) ? rawFullAuto : null) ||
+        (rawGlobal && !INVALID_PROVIDERS.includes(rawGlobal) ? rawGlobal : null) ||
+        'nano-banana-pro';
+}
 async function generateImagesForAutomation(provider, headings, postTitle, options = {}) {
     const flightKey = String(postTitle || '').trim();
     const startedAt = flightKey ? _giaInFlight.get(flightKey) : undefined;
@@ -396,11 +408,15 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
     }
     const INVALID_PROVIDERS = ['saved', '', 'null', 'undefined'];
     if (!provider || INVALID_PROVIDERS.includes(provider.trim())) {
-        const rawFullAuto = localStorage.getItem('fullAutoImageSource');
-        const rawGlobal = localStorage.getItem('globalImageSource');
-        const fallbackProvider = (rawFullAuto && !INVALID_PROVIDERS.includes(rawFullAuto) ? rawFullAuto : null) ||
-            (rawGlobal && !INVALID_PROVIDERS.includes(rawGlobal) ? rawGlobal : null) ||
-            'nano-banana-pro';
+        // [Phase 7.2 / R13] Caller-resolved fallback first; the localStorage
+        // read below is a warned transition net for un-migrated callers.
+        let fallbackProvider = typeof options.fallbackProvider === 'string' && options.fallbackProvider.trim() && !INVALID_PROVIDERS.includes(options.fallbackProvider.trim())
+            ? options.fallbackProvider.trim()
+            : '';
+        if (!fallbackProvider) {
+            fallbackProvider = resolveImageProviderFallback();
+            console.warn('[generateImagesForAutomation] ⚠️ fallbackProvider 미전달 — localStorage 폴백 (R13: 호출자가 명시 전달)');
+        }
         console.warn(`[generateImagesForAutomation] ⚠️ provider가 유효하지 않음("${provider}")! fallback 적용: "${fallbackProvider}"`);
         provider = fallbackProvider;
     }
@@ -3261,6 +3277,7 @@ async function initMultiAccountPublishModal() {
                                 aiFallbackFn: generateImagesForAutomation,
                                 aiOptions: {
                                     headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+                                    fallbackProvider: resolveImageProviderFallback(),
                                     stopCheck: () => stopRequested || window.stopFullAutoPublish,
                                     allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true',
                                     thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true',
@@ -3275,6 +3292,7 @@ async function initMultiAccountPublishModal() {
                             addMALog(`🔍 네이버 이미지 검색 시작 (키워드: ${structuredContent.keywords?.[0] || structuredContent.selectedTitle})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
                                 headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+                                fallbackProvider: resolveImageProviderFallback(),
                                 allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
                                 thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
                                 stopCheck: () => stopRequested || window.stopFullAutoPublish,
@@ -3293,6 +3311,7 @@ async function initMultiAccountPublishModal() {
                             addMALog(`🎨 AI 이미지 생성 시작 (엔진: ${_maSourceNames[imageSource] || imageSource})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
                                 headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+                                fallbackProvider: resolveImageProviderFallback(),
                                 allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
                                 thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
                                 stopCheck: () => stopRequested || window.stopFullAutoPublish,

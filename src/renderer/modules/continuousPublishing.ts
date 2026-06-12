@@ -80,6 +80,7 @@ declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function generateContentFromUrl(url: string, title?: string, tone?: string, suppressModal?: boolean, contentMode?: string, category?: string): Promise<void>;
 declare function generateContentFromKeywords(title: string, keywords?: string, tone?: string, suppressModal?: boolean, contentMode?: string, category?: string): Promise<void>;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
+declare function resolveImageProviderFallback(): string;
 declare function executeUnifiedAutomation(formData: any): Promise<any>;
 declare function updateUnifiedPreview(content: any): void;
 declare function syncGlobalImagesFromImageManager(): void;
@@ -4592,6 +4593,7 @@ async function startContinuousPublishingV2(): Promise<void> {
                   aiFallbackFn: generateImagesForAutomation,
                   aiOptions: {
                     headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+                    fallbackProvider: resolveImageProviderFallback(),
                     stopCheck: () => !isContinuousMode,
                     allowThumbnailText: includeThumbnailText,
                   },
@@ -4610,6 +4612,7 @@ async function startContinuousPublishingV2(): Promise<void> {
                   finalStructuredContent.selectedTitle,
                   {
                     headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+                    fallbackProvider: resolveImageProviderFallback(),
                     stopCheck: () => !isContinuousMode,
                     onProgress: (msg: string) => {
                       appendLog(msg);

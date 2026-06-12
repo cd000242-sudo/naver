@@ -40,6 +40,7 @@ declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function generateAutoCTA(title: string, keywords?: string): any;
 declare function resolveAffiliateLink(link1?: string, link2?: string): string | undefined;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
+declare function resolveImageProviderFallback(): string;
 declare function parseLocalFolderImages(folderPath: string, headings: any[]): Promise<any[]>;
 declare function isFullAutoStopRequested(modal: any): boolean;
 declare function getProgressModal(): any;
@@ -227,6 +228,7 @@ async function generateImagesForAutomationSafely(
   try {
     const resolvedOptions = {
       headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+      fallbackProvider: resolveImageProviderFallback(),
       ...(options || {}),
     };
     const images = await generateImagesForAutomation(imageSource, headings, title, resolvedOptions);
