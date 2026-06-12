@@ -16,7 +16,7 @@
 - Phase 6.4 경고형 git 훅(28f0baec): 10파일 초과 경고 + Lore 형식 검사, npm run hooks:install (설치됨)
 - Phase 6.5 하네스 게이트화(02d5305e): scripts/harness/ 승격 + npm run harness:tail + 런북 절차 문서화 — **Phase 6 전체 완료**
 - 매트릭스 일괄 "완료" 마감은 라이브 증거 없이는 불가 — 3점 잠금 원칙 유지 (전 행 "라이브 대기")
-- 게이트 상태: vitest 3,061/3,061 GREEN · tsc 0 · lint 0 errors · build PASS · self-test PASS
+- 게이트 상태: vitest 3,066/3,066 GREEN · tsc 0 · lint 0 errors · build PASS · self-test PASS
 
 ## Phase 7 진행 상태 (6/12 시작)
 - ✅ 7.2 R13 1차: generateImagesForAutomation headingImageMode 명시 입력화 (c2a9b845)
@@ -25,7 +25,11 @@
   연속발행 직접 호출(AI 메인 경로) + 다중계정 local-folder aiOptions. 직접 호출 6경로 전수 잠금
 - ✅ 7.2 R13 2차(d5b0a003): invalid-provider 폴백 체인 → options.fallbackProvider 명시 입력화
   — resolveImageProviderFallback() 단일 정의 + 진입점 6곳 전달 + purity 가드 2건(직독 1회 잠금)
-- 다음 7.2 후보: ① richTextPaste pick* 테마의 전역 의존 점검 ② editorHelpers 내 localStorage 직독 전수 감사
+- ✅ 7.2 R13 3차(6cc11363): buildMobileRichHtml 테마 eager 랜덤 제거 + lazy 폴백 경고화
+  — 프로덕션 호출자 2곳은 이미 이행 상태였음. editorHelpers localStorage 감사 0건 종결
+- (별건 6/13) 퍼플렉시티 환각 처방(b8637c4d): 톤 가이드 경험 위장 지시 제거 +
+  분량 확장의 통계/인용/경험담 발명 지시 차단 + 가드 3건 — 라이브 재발행 검증 대기
+- 7.2 명시 입력화 잔여 후보 소진 → 다음은 7.1 PipelineConfig 설계 검토
 - 7.1 PipelineConfig: 7.2가 충분히 진행된 뒤 (입력이 명시화되어야 Config로 묶을 수 있음)
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
