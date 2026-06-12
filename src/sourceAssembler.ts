@@ -3663,18 +3663,12 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
               }
             }
 
-            // ✅ 우선순위별로 이미지 합치기 (브랜드 스토어: 제품 이미지 우선, 일반: 리뷰 포토 우선)
-            // 브랜드 스토어는 제품 이미지가 많고 리뷰가 적으므로 제품 이미지를 더 많이 포함
-            const finalImages = isBrandStore ? [
-              ...productImages,              // 📦 제품 이미지 전체 (브랜드 스토어는 제품 이미지 우선)
-              ...detailImages,               // 📝 상세 정보 이미지
-              ...reviewImages,               // 🔥 리뷰 포토
-              ...images                      // 기타 이미지
-            ] : [
-              ...productImages.slice(0, 1),  // 🎯 대표 사진: 공식 제품 사진 1장 (첫 번째)
-              ...reviewImages,               // 🔥 리뷰 포토 (일반인 실제 사용 사진)
-              ...detailImages,               // 📝 상세 정보 이미지
-              ...productImages.slice(1),     // 📦 나머지 제품 이미지
+            // [2026-06-12 정책 확정] 배치 우선순위: 추가이미지(제품 사진) 전체
+            // → 리뷰 포토(부족분 채움, 저작권 감수 정책). 상세페이지 이미지는
+            // 본문 내용과 무관해 배치 금지 — finalImages에서 제외.
+            const finalImages = [
+              ...productImages,              // 📦 제품 이미지 전체 (추가이미지 우선)
+              ...reviewImages,               // 🔥 리뷰 포토 (제품 이미지 부족 시 채움)
               ...images                      // 기타 이미지
             ];
 
@@ -6251,7 +6245,7 @@ ${salesLine}
             targetTraffic: 'viral',
             targetAge: input.targetAge ?? 'all',
             isReviewType: true,
-            images: productInfo.mainImage ? [productInfo.mainImage, ...(productInfo.galleryImages || []), ...(productInfo.detailImages || [])] : [],
+            images: productInfo.mainImage ? [productInfo.mainImage, ...(productInfo.galleryImages || [])] : [],
             // ✅ [2026-02-01 FIX] collectedImages에도 저장하여 renderer에서 중복 크롤링 방지
             collectedImages: productInfo.mainImage ? [productInfo.mainImage, ...(productInfo.galleryImages || [])] : [],
           };
@@ -6294,7 +6288,7 @@ ${salesLine}
                 targetTraffic: 'viral',
                 targetAge: input.targetAge ?? 'all',
                 isReviewType: true,
-                images: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || []), ...(retryInfo.detailImages || [])] : [],
+                images: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || [])] : [],
                 collectedImages: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || [])] : [],
               };
               return { source: retrySource, warnings: [`✅ 재시도로 "${retryName}" 정보 수집 완료!`] };
@@ -6330,7 +6324,7 @@ ${salesLine}
               targetTraffic: 'viral',
               targetAge: input.targetAge ?? 'all',
               isReviewType: true,
-              images: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || []), ...(retryInfo.detailImages || [])] : [],
+              images: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || [])] : [],
               collectedImages: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || [])] : [],
             };
             return { source: retrySource, warnings: [`✅ 재시도로 "${retryName}" 정보 수집 완료!`] };

@@ -23,3 +23,25 @@ describe('쇼핑커넥트 갤러리 전량 배치 (2026-06-12)', () => {
     expect(src).toMatch(/\\.\(jpe\?g\|png\|webp\)\$\/i\.test\(base\)/);
   });
 });
+
+// [2026-06-12 정책 확정] 사용자 지시: 소제목 배치는 추가이미지(제품 사진)만,
+// 상세페이지 이미지는 본문과 무관하므로 배치 금지, 추가이미지 부족분만
+// 리뷰이미지로 채움 (저작권 감수는 사용자 정책 결정).
+describe('이미지 배치 정책 — 상세페이지 금지 + 추가이미지 우선 (2026-06-12)', () => {
+  it('쇼핑 분기 source.images에 detailImages가 들어가지 않는다', () => {
+    const src = read('src', 'sourceAssembler.ts');
+    expect(src).not.toContain('...(productInfo.detailImages || [])');
+    expect(src).not.toContain('...(retryInfo.detailImages || [])');
+  });
+
+  it('퍼피티어 수집 병합도 제품 이미지 → 리뷰 순서이고 상세 이미지는 제외된다', () => {
+    const src = read('src', 'sourceAssembler.ts');
+    const merged = src.match(/const finalImages = \[[\s\S]*?\];/);
+    expect(merged).not.toBeNull();
+    expect(merged![0]).not.toContain('detailImages');
+    const productIdx = merged![0].indexOf('productImages');
+    const reviewIdx = merged![0].indexOf('reviewImages');
+    expect(productIdx).toBeGreaterThan(-1);
+    expect(reviewIdx).toBeGreaterThan(productIdx);
+  });
+});
