@@ -8292,6 +8292,9 @@ function addThumbnailTextOptionUI(): void {
   // ✅ [2026-01-19] 쇼핑커넥트 전용 AI 이미지 생성 체크박스 추가
   addShoppingConnectAiImageOptions();
 
+  // ✅ [2026-06-12] 소제목 이미지 방식(수집/AI) 선택을 쇼핑커넥트 설정에 노출
+  addShoppingConnectSubImageModeOption();
+
   // ✅ [2026-02-10] 쇼핑몰 이미지 수집 섹션 조건부 표시 (쇼핑커넥트 모드일 때만)
   const shoppingUrlContainer = document.getElementById('image-shopping-url-container');
   if (shoppingUrlContainer) {
@@ -8381,6 +8384,97 @@ function addShoppingConnectAiImageOptions(): void {
 
   // 쇼핑커넥트 설정 영역 표시 변경 감지 — v2.10.82 통합 event 구독
   document.addEventListener('sc-visibility-change', updateVisibility as EventListener);
+}
+
+// ✅ [2026-06-12] 쇼핑커넥트 소제목 이미지 방식(수집/AI) 인라인 선택 UI
+// 메인 풀오토 이미지 설정 깊숙이 있던 선택지를 쇼핑커넥트 설정(장단점 표/
+// CTA 배너 체크박스) 바로 아래에 노출 — 초보자가 바로 보고 설정 가능.
+// 저장소는 기존 scSubImageMode(window.get/setSubImageMode)를 공유하므로
+// 발행 플로우(IPC scSubImageSource)와 자동 연동된다.
+function addShoppingConnectSubImageModeOption(): void {
+  if (document.getElementById('sc-subimage-mode-inline')) return;
+
+  const anchor = document.getElementById('shopping-connect-ai-image-options');
+  const fallbackHost = document.getElementById('shopping-connect-settings');
+  if (!anchor && !fallbackHost) return;
+
+  const container = document.createElement('div');
+  container.id = 'sc-subimage-mode-inline';
+  container.style.cssText = `
+    display: none;
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(16, 185, 129, 0.05));
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 8px;
+  `;
+  container.innerHTML = `
+    <div style="font-weight: 700; color: var(--text-strong); font-size: 0.8rem; margin-bottom: 0.6rem;">🖼️ 소제목 이미지 방식</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+      <label style="display: flex; flex-direction: column; gap: 0.3rem; padding: 0.6rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; cursor: pointer;">
+        <span style="display: flex; align-items: center; gap: 0.5rem;">
+          <input type="radio" name="sc-subimage-mode-inline-radio" value="collected" style="width: 16px; height: 16px; accent-color: #10b981;">
+          <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">📷 수집된 제품 이미지 (추천)</span>
+        </span>
+        <span style="font-size: 0.68rem; color: var(--text-muted); padding-left: 1.6rem;">상품 페이지의 추가이미지를 그대로 사용 — 비용 0원</span>
+      </label>
+      <label style="display: flex; flex-direction: column; gap: 0.3rem; padding: 0.6rem; background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.25); border-radius: 8px; cursor: pointer;">
+        <span style="display: flex; align-items: center; gap: 0.5rem;">
+          <input type="radio" name="sc-subimage-mode-inline-radio" value="ai" style="width: 16px; height: 16px; accent-color: #8b5cf6;">
+          <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🎨 AI 이미지 생성</span>
+        </span>
+        <span style="font-size: 0.68rem; color: var(--text-muted); padding-left: 1.6rem;">제품 사진을 참조해 AI가 새로 생성 — 장당 비용 발생</span>
+      </label>
+    </div>
+  `;
+  if (anchor) {
+    anchor.insertAdjacentElement('afterend', container);
+  } else {
+    fallbackHost!.appendChild(container);
+  }
+  console.log('[ShoppingConnect] 소제목 이미지 방식 인라인 선택 UI 추가됨');
+
+  const radios = Array.from(container.querySelectorAll<HTMLInputElement>('input[name="sc-subimage-mode-inline-radio"]'));
+  const readMode = (): 'ai' | 'collected' => {
+    try {
+      const w = window as any;
+      const v = typeof w.getSubImageMode === 'function' ? w.getSubImageMode() : localStorage.getItem('scSubImageMode');
+      return v === 'ai' ? 'ai' : 'collected';
+    } catch { return 'collected'; }
+  };
+  const syncFromStore = () => {
+    const mode = readMode();
+    radios.forEach(r => { r.checked = r.value === mode; });
+  };
+  radios.forEach(r => r.addEventListener('change', () => {
+    if (!r.checked) return;
+    const mode = r.value === 'ai' ? 'ai' : 'collected';
+    try {
+      const w = window as any;
+      if (typeof w.setSubImageMode === 'function') {
+        w.setSubImageMode(mode);
+      } else {
+        localStorage.setItem('scSubImageMode', mode);
+        localStorage.setItem('scSubImageSource', mode);
+      }
+    } catch { /* storage unavailable — radios still reflect selection */ }
+    console.log(`[ShoppingConnect] 소제목 이미지 방식 변경: ${mode}`);
+  }));
+
+  // 쇼핑커넥트 모드일 때만 표시 + 표시될 때 저장소 값으로 동기화
+  // (메인 이미지 설정에서 바꾼 값도 다시 열면 반영)
+  const updateInlineVisibility = () => {
+    const isShoppingConnect = isShoppingConnectModeActive();
+    container.style.display = isShoppingConnect ? 'block' : 'none';
+    if (isShoppingConnect) syncFromStore();
+  };
+  syncFromStore();
+  updateInlineVisibility();
+  const contentModeSelectForInline = document.getElementById('unified-content-mode');
+  if (contentModeSelectForInline) {
+    contentModeSelectForInline.addEventListener('change', updateInlineVisibility);
+  }
+  document.addEventListener('sc-visibility-change', updateInlineVisibility as EventListener);
 }
 
 // 통합 폼 데이터 수집
