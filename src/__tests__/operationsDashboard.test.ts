@@ -131,3 +131,36 @@ describe('resetAllMetrics', () => {
     expect(snap.session.totalLogins).toBe(0);
   });
 });
+
+// SPEC-STABILITY-2026 R12 — dashboard exposes the silent-failure counter so
+// tolerated-failure frequency (selector rot early warning) is visible in ops.
+describe('침묵 실패 카운터 배선 (R12)', () => {
+  it('스냅샷에 silentFailures 카운트가 포함된다', async () => {
+    const { recordSilentFailure, resetSilentFailureCounts } = await import('../automation/silentFailureCounter');
+    resetSilentFailureCounts();
+    recordSilentFailure('editor:quotation-style');
+    recordSilentFailure('editor:quotation-style');
+    recordSilentFailure('image:resize');
+
+    const snap = getDashboardSnapshot();
+    expect(snap.silentFailures['editor:quotation-style']).toBe(2);
+    expect(snap.silentFailures['image:resize']).toBe(1);
+    resetSilentFailureCounts();
+  });
+
+  it('침묵 실패가 있으면 요약 문자열에 표시된다', async () => {
+    const { recordSilentFailure, resetSilentFailureCounts } = await import('../automation/silentFailureCounter');
+    resetSilentFailureCounts();
+    recordSilentFailure('publish:error-screenshot');
+
+    const summary = getDashboardSummary();
+    expect(summary).toContain('침묵실패');
+    expect(summary).toContain('publish:error-screenshot×1');
+    resetSilentFailureCounts();
+  });
+
+  it('침묵 실패가 없으면 요약에 표시하지 않는다', () => {
+    const summary = getDashboardSummary();
+    expect(summary).not.toContain('침묵실패');
+  });
+});

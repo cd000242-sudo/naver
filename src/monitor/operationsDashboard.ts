@@ -3,6 +3,7 @@
  * SPEC-CONVERSION-001 L2-1.10: chained 메트릭은 chainedGenMetrics에서 수집 후 합산.
  */
 import { getChainedGenSnapshot, getChainedGenSummary, type ChainedGenSnapshot } from './chainedGenMetrics';
+import { getSilentFailureCounts } from '../automation/silentFailureCounter';
 
 // ── 타입 정의 ──
 
@@ -64,6 +65,9 @@ export interface DashboardSnapshot {
   readonly publish: PublishMetrics;
   readonly session: SessionMetrics;
   readonly chainedGen: ChainedGenSnapshot;
+  // SPEC-STABILITY-2026 R12: tolerated-failure frequency by site key —
+  // a C-grade catch firing on every post is an early warning of selector rot.
+  readonly silentFailures: Record<string, number>;
   readonly uptime: number;               // ms since app start
 }
 
@@ -254,6 +258,7 @@ export function getDashboardSnapshot(): DashboardSnapshot {
       cookieRestoreFailures,
     },
     chainedGen: getChainedGenSnapshot(),
+    silentFailures: getSilentFailureCounts(),
     uptime: Date.now() - appStartTime,
   };
 }
@@ -288,6 +293,9 @@ export function resetAllMetrics(): void {
 /** 대시보드 요약 문자열 (로그용) */
 export function getDashboardSummary(): string {
   const snap = getDashboardSnapshot();
+  const silentEntries = Object.entries(snap.silentFailures)
+    .sort((a, b) => b[1] - a[1])
+    .map(([key, count]) => `${key}×${count}`);
   return [
     `[Dashboard] uptime: ${Math.round(snap.uptime / 60000)}분`,
     `셀렉터: ${snap.selector.failures}/${snap.selector.totalAttempts} 실패 (${snap.selector.failureRate}%)`,
@@ -295,5 +303,6 @@ export function getDashboardSummary(): string {
     `발행: ${snap.publish.successes}/${snap.publish.totalAttempts} 성공 (${snap.publish.successRate}%), 오늘 ${snap.publish.todayCount}건`,
     `세션: 로그인 ${snap.session.totalLogins}회, 재로그인 ${snap.session.reloginCount}회`,
     getChainedGenSummary(),
+    ...(silentEntries.length > 0 ? [`침묵실패: ${silentEntries.join(' · ')}`] : []),
   ].join(' | ');
 }
