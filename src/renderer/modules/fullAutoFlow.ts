@@ -1914,6 +1914,21 @@ async function generateFullAutoContent(formData) {
         }
         return info;
     })() : undefined;
+    // [2026-06-12] 업체홍보 각도 로테이션 — 같은 업체 반복 발행 시 매번 다른
+    // 강조 프레임을 강제한다 (이력은 업체명 기준 localStorage).
+    if (businessInfo && window.rotateBusinessAngle) {
+        try {
+            const promoAngle = window.rotateBusinessAngle(businessInfo.name || '');
+            if (promoAngle) {
+                businessInfo.promoAngle = promoAngle.label;
+                businessInfo.promoAngleDirective = promoAngle.directive;
+                appendLog(`🎯 이번 글 강조 각도: ${promoAngle.label}`);
+            }
+        }
+        catch (angleErr) {
+            console.warn('[FullAuto] 각도 로테이션 실패(기본 진행):', angleErr);
+        }
+    }
     if (formData.keywordAsTitle) {
         window._keywordTitleOptions = {
             useKeywordAsTitle: true,

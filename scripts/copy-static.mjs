@@ -326,6 +326,7 @@ try {
     'localImageModals.js',
     'postListUI.js',
     'videoManager.js',
+    'businessAngleRotation.js',  // [2026-06-12] 업체홍보 각도 로테이션 (fullAutoFlow보다 먼저 로드 — window 전역 등록)
     'publishingHandlers.js',
     'fullAutoFlow.js',
     'contentGeneration.js',

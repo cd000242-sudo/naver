@@ -1622,6 +1622,8 @@ export interface ContentSource {
     // [2026-06-12] 홍보 대상 — 업체 자체 vs 취급 상품 판매
     promoTarget?: 'business' | 'product';
     researchUrl?: string; // 심층 리서치 URL (홈페이지/상품 페이지)
+    promoAngle?: string;          // 이번 글 강조 각도 라벨 (로테이션)
+    promoAngleDirective?: string; // 각도별 작성 지시
   };
   images?: string[]; // ✅ 크롤링된 이미지 URL 목록 (Shopping Connect)
   collectedImages?: string[]; // ✅ [2026-02-01 FIX] 수집된 이미지 (중복 크롤링 방지용)
@@ -3311,6 +3313,10 @@ ${source.businessInfo.promoTarget === 'product' ? `
 - 이 글의 주인공은 업체다. 전문성·신뢰·서비스 품질을 중심으로 작성하라.
 - 취급 상품/서비스는 업체의 강점을 보여주는 근거로 활용하라.
 - 글의 목표는 문의 전환 — 마무리에 위 연락처로 상담 문의를 자연스럽게 유도하라.`}
+${source.businessInfo.promoAngle ? `
+🎯 [이번 글 강조 각도: ${source.businessInfo.promoAngle}]
+- ${source.businessInfo.promoAngleDirective || '이 각도를 글의 중심 프레임으로 사용하라.'}
+- 같은 업체로 발행된 직전 글들과 프레임이 겹치지 않도록, 제목과 소제목 구성을 이 각도 중심으로 잡아라. 마무리는 항상 문의 전환으로 수렴하라.` : ''}
 
 ⛔ 위 연락처 정보는 한 글자도 변경하지 말고 그대로 사용하라.
 ⛔ 절대 가짜 전화번호, 가짜 카카오톡 ID, 가짜 주소, 가짜 지역을 만들지 마라.
